@@ -18,7 +18,8 @@ xfdir_local_c::xfdir_local_c(data_c *data0, const gchar *data, void *dataV):
     data_p = data0;
     view_v = dataV;
     create_menu();
-    shows_hidden = ((view_c *)view_v)->shows_hidden();
+    view_c *view_p = (view_c *)view_v;
+    shows_hidden = (view_p->shows_hidden();
     NOOP( "data2=%d\n", data2);
     treemodel = mk_tree_model();
     user_string_mutex=PTHREAD_MUTEX_INITIALIZER;
