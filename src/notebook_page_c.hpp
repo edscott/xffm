@@ -1,13 +1,12 @@
 #ifndef NOTEBOOK_PAGE_C_HPP
 #define NOTEBOOK_PAGE_C_HPP
-#include <gtk/gtk.h>
 #include "widgets_c.hpp"
 
 class notebook_page_c:public widgets_c {
     public:
         notebook_page_c(GtkWidget *);
     protected:
-        void set_treemodel(GtkTreeModel *)
+        void set_treemodel(GtkTreeModel *);
     private:
         GtkListStore *list_store;
 

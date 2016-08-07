@@ -1,6 +1,8 @@
 #ifndef WIDGETS_C_HPP
 #define WIDGETS_C_HPP
 #include <gtk/gtk.h>
+#include <iostream>
+using namespace std;
 
 class widgets_c {
     public:

@@ -1,6 +1,6 @@
 #include "view_c.hpp"
 // Public:
-view_c::view_c(void){
+view_c::view_c(GtkWidget *notebook) : notebook_page_c(notebook){
     init();
     
 }

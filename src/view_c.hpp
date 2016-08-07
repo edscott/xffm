@@ -1,6 +1,5 @@
 #ifndef VIEW_C_HPP
 #define VIEW_C_HPP
-#include <gtk/gtk.h>
 #include <pthread.h>
 
 #include "notebook_page_c.hpp"
@@ -8,8 +7,8 @@
 
 class view_c:public notebook_page_c {
     public:
-        view_c::view_c(void);
-        view_c::~view_c(void);
+        view_c(GtkWidget *);
+        ~view_c(void);
 
     protected:
 
