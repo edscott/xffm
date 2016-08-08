@@ -1,7 +1,6 @@
 #ifndef VIEW_C_HPP
 #define VIEW_C_HPP
-#include <pthread.h>
-
+#include <string.h>
 #include "notebook_page_c.hpp"
 
 
@@ -16,10 +15,10 @@ class view_c:public notebook_page_c {
         void init(void);
 
         gchar *workdir;		
-        pthread_mutex_t *population_mutex;
-        pthread_cond_t *population_cond;
+        pthread_mutex_t population_mutex;
+        pthread_cond_t population_cond;
         gint population_condition;
-        pthread_rwlock_t *population_lock;
+        pthread_rwlock_t population_lock;
 
 };
 

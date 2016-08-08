@@ -1,15 +1,17 @@
+
 #include "notebook_page_c.hpp"
 
 
-notebook_page_c::notebook_page_c(GtkWidget *notebook){
-    if (!notebook){
+
+notebook_page_c::notebook_page_c(GtkWidget *notebook_p){
+    if (!notebook_p){
         g_warning("notebook_page_c::notebook_page_c(): notebook cannot be NULL\n");
         throw 1;
     }
+    notebook = notebook_p;
+    icon_view = gtk_icon_view_new();
 
-    create();
-    setup();
-    show();
+    pack();
     signals();
 #if 0
     /* drag and drop events */
@@ -30,88 +32,26 @@ notebook_page_c::notebook_page_c(GtkWidget *notebook){
 #endif
 }
 
-notebook_page_c::~notebook_page_c(GtkWidget *notebook){
+notebook_page_c::~notebook_page_c(void){
 }
 
 ///////////////////////////// Private:
 
-void
-notebook_page_c::create(void){
-    page_child_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-    page_label_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-    page_label_icon_box = gtk_box_new (FALSE, 0);
-    page_label = gtk_label_new (_("Loading folder..."));
-    page_label_button = gtk_button_new ();
-    menu_label_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-    menu_label = gtk_label_new ("menu_label");
-    menu_image = gtk_image_new ();
-    // pathbar = rodent_new_pathbar();
-    vpane = gtk_paned_new(GTK_ORIENTATION_VERTICAL);
-    top_scrolled_window = gtk_scrolled_window_new (NULL, NULL);
-    bottom_scrolled_window = gtk_scrolled_window_new (NULL, NULL);
-    diagnostics = gtk_text_view_new ();
-    status = gtk_text_view_new ();
-    rename = NULL; // create on demand...
-    button_space = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-    clear_button = mk_little_button ("edit-clear-all", 
-	    (void *) clear_text_window, 
-	    (void *) this, _("Clear"));
-
-    size_scale = gtk_scale_new_with_range(GTK_ORIENTATION_HORIZONTAL, 0.0, 96.0, 12.0);
-
-    
+static void
+clear_text_callback(GtkWidget *widget, gpointer data){
+    fprintf(stderr, "hello clear_text_callback\n");
+    notebook_page_c *notebook_page_p = 
+        (notebook_page_c *) g_object_get_data(G_OBJECT(widget), "object");
+    if (!notebook_page_p) return;
+    fprintf(stderr, "bye clear_text_callback\n");
+    notebook_page_p->clear_diagnostics();
 }
-
 void
-notebook_page_c::setup(void){
-    // Add image to close tab button: page_label_button
-    // XXX : 
-    //      1.we need pixbuf class
-    //      2.we need callback procedure
-    /*
-    GdkPixbuf *pb = rfm_get_pixbuf ("xffm/stock_close", 8);
-    GtkWidget *image = gtk_image_new_from_pixbuf (pb);
-    g_object_unref(pb);
-    gtk_widget_show (image);
-    gtk_container_add (GTK_CONTAINER (page_label_button), image);
-    g_object_set (page_label_button, "image", image, "relief", GTK_RELIEF_NONE, NULL);
-    g_signal_connect (page_label_button, "clicked", G_CALLBACK (rmpage), view_p);
-    */
-    // XXX: with iconview, top_scrolled window may not be needed...
-    gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (top_scrolled_window), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-    gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (bottom_scrolled_window), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-
-    gtk_widget_set_can_focus(diagnostics, FALSE);
-    gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (diagnostics), GTK_WRAP_WORD);
-    gtk_text_view_set_cursor_visible (GTK_TEXT_VIEW (diagnostics), FALSE);
-    gtk_container_set_border_width (GTK_CONTAINER (diagnostics), 2);
-    gint size = 10;
-    GtkStyleContext *style_context = gtk_widget_get_style_context (diagnostics);
-    gtk_style_context_add_class(style_context, GTK_STYLE_CLASS_VIEW );
-    GtkCssProvider *css_provider = gtk_css_provider_new();
-    GError *error=NULL;
-    gchar *data = g_strdup_printf("* {\
-font-family: %s;\
-font-size: %dpx;\
-}", "monospace", size);
-    gtk_css_provider_load_from_data (css_provider, data, -1, &error);
-    g_free(data);
-    if (error){
-        fprintf(stderr, "gerror: %s\n", error->message);
-        g_error_free(error);
-    }
-    gtk_style_context_add_provider (style_context, GTK_STYLE_PROVIDER(css_provider),
-                                GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-
-    gtk_scale_set_draw_value (GTK_SCALE(size_scale), FALSE);
-    gtk_widget_set_can_focus (size_scale, FALSE);
-    gtk_widget_set_size_request (size_scale, 75, 30);
-
-    
+notebook_page_c::clear_diagnostics(void){
+    clear_text(diagnostics);
 }
-
 void
-notebook_page_c::show(void){
+notebook_page_c::pack(void){
     // Add widgets to page_label_box:
     gtk_box_pack_start (GTK_BOX (page_label_box), page_label_icon_box, TRUE, TRUE, 0);
     gtk_box_pack_start (GTK_BOX (page_label_box), page_label, TRUE, TRUE, 0);
@@ -132,34 +72,39 @@ notebook_page_c::show(void){
 
     gtk_paned_pack1 (GTK_PANED (vpane), top_scrolled_window, FALSE, TRUE);
     gtk_paned_pack2 (GTK_PANED (vpane), bottom_scrolled_window, TRUE, TRUE);
-    gtk_widget_show (top_scrolled_window);
+    
+    gtk_container_add (GTK_CONTAINER (top_scrolled_window), icon_view);
     gtk_container_add (GTK_CONTAINER (bottom_scrolled_window), diagnostics);
+    gtk_widget_show (icon_view);
+    gtk_widget_show (top_scrolled_window);
     gtk_widget_show (bottom_scrolled_window);
+
     gtk_widget_show (diagnostics);
 
 
-    gtk_box_pack_start (GTK_BOX (page_child_box), button_space, FALSE, FALSE, 0);
     gtk_box_pack_end (GTK_BOX (button_space), size_scale, FALSE, FALSE, 0);
     gtk_widget_show (size_scale);
+    gtk_box_pack_end (GTK_BOX (button_space), clear_button, FALSE, FALSE, 0);
+    gtk_widget_show (clear_button);
+
+    gtk_box_pack_start (GTK_BOX (page_child_box), button_space, FALSE, FALSE, 0);
     gtk_widget_show (button_space);
 
-    // Insert page into notebook:
     gtk_widget_show (page_child_box);
+
+    // Insert page into notebook:
     gint position=gtk_notebook_get_current_page(GTK_NOTEBOOK(notebook))+1;
     gtk_notebook_insert_page_menu (GTK_NOTEBOOK(notebook), page_child_box, page_label_box, menu_label_box, position);
     gtk_notebook_set_tab_reorderable (GTK_NOTEBOOK(notebook), page_child_box, TRUE);
     gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), position);
-
-    gtk_box_pack_end (GTK_BOX (button_space), clear_button, FALSE, FALSE, 0);
-    gtk_widget_show (clear_button);
-
-    gtk_widget_show (iconview);
-    
-
 }
 
 void
 notebook_page_c::signals(void){
+    fprintf(stderr, "clear button=%p\n", clear_button);
+    setup_callback((void *) this, clear_button, "clicked", (void *)clear_text_callback, diagnostics);
+    //setup_callback((void *) this, clear_button, "button-press-event", callback, callback_data);
+
     /*
     g_signal_connect (G_OBJECT (size_scale), 
 	    "value-changed", G_CALLBACK (size_scale_callback), &(view_p->widgets));
