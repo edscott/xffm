@@ -99,3 +99,50 @@ utility_c::context_function(void * (*function)(gpointer), void * function_data){
     return result;
 }
 
+gchar *
+utility_c::utf_string (const gchar * t) {
+    if(!t) { return g_strdup (""); }
+    if(g_utf8_validate (t, -1, NULL)) { return g_strdup (t); }
+    /* so we got a non-UTF-8 */
+    /* but is it a valid locale string? */
+    gchar *actual_tag;
+    actual_tag = g_locale_to_utf8 (t, -1, NULL, NULL, NULL);
+    if(actual_tag)
+        return actual_tag;
+    /* So it is not even a valid locale string... 
+     * Let us get valid utf-8 caracters then: */
+    const gchar *p;
+    actual_tag = g_strdup ("");
+    for(p = t; *p; p++) {
+        // short circuit end of string:
+        gchar *r = g_locale_to_utf8 (p, -1, NULL, NULL, NULL);
+        if(g_utf8_validate (p, -1, NULL)) {
+            gchar *qq = g_strconcat (actual_tag, p, NULL);
+            g_free (actual_tag);
+            actual_tag = qq;
+            break;
+        } else if(r) {
+            gchar *qq = g_strconcat (actual_tag, r, NULL);
+            g_free (r);
+            g_free (actual_tag);
+            actual_tag = qq;
+            break;
+        }
+        // convert caracter to utf-8 valid.
+        gunichar gu = g_utf8_get_char_validated (p, 2);
+        if(gu == (gunichar) - 1) {
+            gu = g_utf8_get_char_validated ("?", -1);
+        }
+        gchar outbuf[8];
+        memset (outbuf, 0, 8);
+        gint outbuf_len = g_unichar_to_utf8 (gu, outbuf);
+        if(outbuf_len < 0) {
+            //DBG ("utility_c::utf_string: unichar=%d char =%c outbuf_len=%d\n", gu, p[0], outbuf_len);
+        }
+        gchar *qq = g_strconcat (actual_tag, outbuf, NULL);
+        g_free (actual_tag);
+        actual_tag = qq;
+    }
+    return actual_tag;
+}
+

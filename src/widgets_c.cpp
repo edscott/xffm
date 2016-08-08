@@ -7,25 +7,22 @@ widgets_c::widgets_c(void){
     setup_diagnostics();
     setup_scolled_windows();
     setup_size_scale();
-    setup_clear_button();
-
-}
-void 
-widgets_c::add_custom_tooltip(GtkWidget *widget, GtkWidget *image, const gchar *tooltip_text){
-    //FIXME
+    setup_image_button(clear_button, "edit-clear-all",  _("Clear"));
+    setup_image_button(page_label_button, "window-close", _("Close Tab"));
 }
 
 void
-widgets_c::setup_clear_button (void){
-    gtk_widget_set_can_focus (clear_button, FALSE);
-    gtk_button_set_relief (GTK_BUTTON (clear_button), GTK_RELIEF_NONE);
-    GtkWidget *image = gtk_image_new_from_icon_name ("edit-clear-all", 
-            GTK_ICON_SIZE_SMALL_TOOLBAR);
+widgets_c::setup_image_button (GtkWidget *button, const gchar *icon_name, const gchar *icon_tip){
+    gtk_widget_set_can_focus (button, FALSE);
+    gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
+    GtkWidget *image = gtk_image_new_from_icon_name (icon_name, GTK_ICON_SIZE_SMALL_TOOLBAR);
     if (image) {
-        gtk_container_add (GTK_CONTAINER (clear_button), image);
+        gtk_container_add (GTK_CONTAINER (button), image);
         gtk_widget_show (image);
     }
-    add_custom_tooltip(clear_button, image, _("Clear"));
+    //GdkPixbuf *pixbuf = FIXME
+    //custom_tooltip(button, pixbuf, icon_tip);
+    gtk_widget_set_tooltip_text (button, icon_tip);
 }  
 
 void

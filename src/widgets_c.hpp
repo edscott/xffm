@@ -11,19 +11,10 @@ using namespace std;
 // This class creates all necessary widgets for class view_c 
 // and defines their characteristics.
 
-class widgets_c: public utility_c {
+class widgets_c: public utility_c, protected tooltip_c {
     public:
         widgets_c(void);
     protected:
-	GtkWidget * 
-	    mk_little_button (const gchar *, 
-		    void *, 
-		    void *, 
-		    const gchar *);
-	void 
-	    add_custom_tooltip(GtkWidget *widget, 
-		    GtkWidget *image,
-		    const gchar *tooltip_text);
 
         GtkWidget *page_child_box;
         GtkWidget *page_label_box;
@@ -49,7 +40,7 @@ class widgets_c: public utility_c {
         void setup_diagnostics(void);
         void setup_scolled_windows(void);
         void setup_size_scale(void);
-        void setup_clear_button(void);
+        void setup_image_button(GtkWidget *, const gchar *, const gchar *);
 
 };
 

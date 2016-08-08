@@ -2,6 +2,7 @@
 #define UTILITY_C_HPP
 #include <gtk/gtk.h>
 #include <pthread.h>
+#include <string.h>
 
 class utility_c{
     public:
@@ -11,6 +12,7 @@ class utility_c{
         void hide_text (GtkWidget *);
     protected:
         void *context_function(void * (*function)(gpointer), void * function_data);
+        gchar *utf_string (const gchar *);
     private:
 
 

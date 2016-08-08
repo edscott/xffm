@@ -57,7 +57,7 @@ notebook_page_c::pack(void){
     gtk_box_pack_start (GTK_BOX (page_label_box), page_label, TRUE, TRUE, 0);
     gtk_box_pack_end (GTK_BOX (page_label_box), page_label_button, TRUE, TRUE, 0);
     gtk_widget_show_all (page_label_box);
-    gtk_widget_hide (page_label_button);
+    //gtk_widget_hide (page_label_button);
     // Add widgets to menu_label_box:
     gtk_box_pack_start (GTK_BOX (menu_label_box), menu_image, FALSE, FALSE, 0);
     gtk_box_pack_start (GTK_BOX (menu_label_box), menu_label, FALSE, FALSE, 0);
@@ -106,6 +106,8 @@ notebook_page_c::signals(void){
     //setup_callback((void *) this, clear_button, "button-press-event", callback, callback_data);
 
     /*
+    g_signal_connect (page_label_button, "clicked", G_CALLBACK (rmpage), view_p);
+
     g_signal_connect (G_OBJECT (size_scale), 
 	    "value-changed", G_CALLBACK (size_scale_callback), &(view_p->widgets));
     g_signal_connect (G_OBJECT (size_scale), "scroll-event", 
