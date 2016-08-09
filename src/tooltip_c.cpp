@@ -1,5 +1,6 @@
 #include "tooltip_c.hpp"
 
+
 tooltip_c::tooltip_c(void){
     tooltip_text_hash = g_hash_table_new_full(g_direct_hash, g_direct_equal, NULL, g_free);
     tt_window = NULL;
@@ -18,7 +19,7 @@ tooltip_c::get_tt_window(void){return tt_window;}
 // Returns a new shadowed pixbuf...
 GdkPixbuf *
 tooltip_c::shadow_it(const GdkPixbuf *src_pixbuf){
-
+    if (!src_pixbuf) return NULL;
     gint width = gdk_pixbuf_get_width (src_pixbuf);
     gint height = gdk_pixbuf_get_height (src_pixbuf);  
 
@@ -101,49 +102,53 @@ tooltip_c::tooltip_placement_bug_workaround(GtkWidget *tooltip_window){
         return;
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#if 0
-gboolean rfm_tooltip_is_mapped(void){
-    return tooltip_is_mapped;
+void
+tooltip_c::reset_tooltip(void){
+    //NOOP(stderr, "rfm_reset_tooltip\n"); 
+    if (tt_window) {
+	g_object_set_data(G_OBJECT(tt_window), "tooltip_target", NULL);
+	//NOOP(stderr, "rfm_reset_tooltip OK\n"); 
+    }
 }
+
+void
+tooltip_c::set_tooltip_map(gboolean state){ tooltip_is_mapped = state;}
+
+gboolean
+tooltip_c::get_tooltip_map(void){ return tooltip_is_mapped;}
 
 static void
 tooltip_unmap (GtkWidget *window, gpointer data){
-    tooltip_is_mapped = FALSE;
-
+    tooltip_c *tooltip_p =(tooltip_c *)data;
+    tooltip_p->set_tooltip_map(FALSE);
 }
 
-// This is a gtk placement bug workaround: this is a long standing bug...
+// This is a gtk placement bug workaround. Should probably fix gtk code and
+// submit the patch: this is a long standing bug...
 static void
 tooltip_map (GtkWidget *window, gpointer data){
-    tooltip_is_mapped = TRUE;
+    tooltip_c *tooltip_p =(tooltip_c *)data;
+    tooltip_p->set_tooltip_map(TRUE);
 }
 
 
-
-void
-reset_tooltip(GtkWidget * widget){
-    NOOP(stderr, "rfm_reset_tooltip\n"); 
-    if (tt_window) {
-	g_object_set_data(G_OBJECT(tt_window), "tooltip_target", NULL);
-	NOOP(stderr, "rfm_reset_tooltip OK\n"); 
-    }
-}
-#endif
+// FIXME: this dual behaviour is too hacky...
+//
 // If you just want the frame (as if to put in the properties dialog)
 // call this function with widget set to NULL. Frame is what this function
 // returns.
 // If widget is not NULL, then the gtk tooltip  for the widget is set to the
 // window created by this function.
+//
 GtkWidget *
-rfm_create_tooltip_window(GtkWidget *widget, GtkWidget *tooltip_window, const GdkPixbuf *pixbuf, const gchar *markup, const gchar *label_text){
+tooltip_c::create_tooltip_window(GtkWidget *widget, GtkWidget *tooltip_window, const GdkPixbuf *pixbuf, const gchar *markup, const gchar *label_text){
     if (widget) {
       gtk_widget_set_has_tooltip (widget, TRUE);
       if (!tooltip_window) {
         tooltip_window = gtk_window_new(GTK_WINDOW_POPUP);
-        NOOP(stderr, "New tooltip window now...\n");
-        g_signal_connect (G_OBJECT (tooltip_window), "map", G_CALLBACK (tooltip_map), NULL);
-        g_signal_connect (G_OBJECT (tooltip_window), "unmap", G_CALLBACK (tooltip_unmap), NULL);
+        //NOOP(stderr, "New tooltip window now...\n");
+        g_signal_connect (G_OBJECT (tooltip_window), "map", G_CALLBACK (tooltip_map), (void *)this);
+        g_signal_connect (G_OBJECT (tooltip_window), "unmap", G_CALLBACK (tooltip_unmap), (void *)this);
         gtk_window_set_type_hint (GTK_WINDOW (tooltip_window), GDK_WINDOW_TYPE_HINT_TOOLTIP);
         gtk_widget_set_app_paintable (tooltip_window, TRUE);
         gtk_window_set_resizable (GTK_WINDOW (tooltip_window), FALSE);
@@ -346,3 +351,5 @@ void tooltip_c::custom_tooltip(GtkWidget *widget, GdkPixbuf *pixbuf, const gchar
     context_function(custom_tooltip_f, arg);
 }
 
+GHashTable *
+tooltip_c::get_tooltip_text_hash(void){ return tooltip_text_hash;}

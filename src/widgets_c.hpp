@@ -2,8 +2,7 @@
 #define WIDGETS_C_HPP
 #include <iostream>
 #include "intl.h"
-#include "utility_c.hpp"
-#include "utility_c.hpp"
+#include "window_c.hpp"
 
 
 using namespace std;
@@ -11,9 +10,9 @@ using namespace std;
 // This class creates all necessary widgets for class view_c 
 // and defines their characteristics.
 
-class widgets_c: public utility_c, protected tooltip_c {
+class widgets_c {
     public:
-        widgets_c(void);
+        widgets_c(window_c *);
     protected:
 
         GtkWidget *page_child_box;
@@ -41,6 +40,7 @@ class widgets_c: public utility_c, protected tooltip_c {
         void setup_scolled_windows(void);
         void setup_size_scale(void);
         void setup_image_button(GtkWidget *, const gchar *, const gchar *);
+        window_c *window_p;
 
 };
 

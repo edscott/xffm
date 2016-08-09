@@ -2,7 +2,8 @@
 
 #include "widgets_c.hpp"
 
-widgets_c::widgets_c(void){
+widgets_c::widgets_c(window_c *data){
+    window_p = data;
     create();
     setup_diagnostics();
     setup_scolled_windows();
@@ -20,9 +21,13 @@ widgets_c::setup_image_button (GtkWidget *button, const gchar *icon_name, const 
         gtk_container_add (GTK_CONTAINER (button), image);
         gtk_widget_show (image);
     }
-    //GdkPixbuf *pixbuf = FIXME
-    //custom_tooltip(button, pixbuf, icon_tip);
+#ifndef SIMPLE_TOOLTIP
+    GdkPixbuf *pixbuf = NULL; // FIXME pixbuf from image...
+    window_p->custom_tooltip(button, pixbuf, icon_tip);
+#else
     gtk_widget_set_tooltip_text (button, icon_tip);
+#endif
+    
 }  
 
 void

@@ -3,12 +3,13 @@
 
 
 
-notebook_page_c::notebook_page_c(GtkWidget *notebook_p){
-    if (!notebook_p){
+notebook_page_c::notebook_page_c(window_c *data): widgets_c(data){
+    window_p = data;
+    if (!window_p->get_notebook()){
         g_warning("notebook_page_c::notebook_page_c(): notebook cannot be NULL\n");
         throw 1;
     }
-    notebook = notebook_p;
+    notebook = window_p->get_notebook();
     icon_view = gtk_icon_view_new();
 
     pack();
@@ -39,16 +40,14 @@ notebook_page_c::~notebook_page_c(void){
 
 static void
 clear_text_callback(GtkWidget *widget, gpointer data){
-    fprintf(stderr, "hello clear_text_callback\n");
     notebook_page_c *notebook_page_p = 
         (notebook_page_c *) g_object_get_data(G_OBJECT(widget), "object");
     if (!notebook_page_p) return;
-    fprintf(stderr, "bye clear_text_callback\n");
     notebook_page_p->clear_diagnostics();
 }
 void
 notebook_page_c::clear_diagnostics(void){
-    clear_text(diagnostics);
+    window_p->clear_text(diagnostics);
 }
 void
 notebook_page_c::pack(void){
@@ -101,7 +100,6 @@ notebook_page_c::pack(void){
 
 void
 notebook_page_c::signals(void){
-    fprintf(stderr, "clear button=%p\n", clear_button);
     setup_callback((void *) this, clear_button, "clicked", (void *)clear_text_callback, diagnostics);
     //setup_callback((void *) this, clear_button, "button-press-event", callback, callback_data);
 

@@ -1,8 +1,9 @@
 #ifndef WINDOW_C_HPP
 #define WINDOW_C_HPP
-#include "view_c.hpp"
+#include <gtk/gtk.h>
+#include "tooltip_c.hpp"
 
-class window_c {
+class window_c: public tooltip_c {
     public:
         window_c(void);
         GtkWidget *get_notebook(void);

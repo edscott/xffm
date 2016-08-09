@@ -9,7 +9,7 @@
 
 class notebook_page_c:public widgets_c, protected signals_c {
     public:
-        notebook_page_c(GtkWidget *);
+        notebook_page_c(window_c *);
         ~notebook_page_c(void);
         void clear_diagnostics(void);
     protected:
@@ -22,6 +22,7 @@ class notebook_page_c:public widgets_c, protected signals_c {
 
         void pack();
         void signals();
+        window_c *window_p;
 
 };
 #endif
