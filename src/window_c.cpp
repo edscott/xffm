@@ -1,8 +1,10 @@
+#include "intl.h"
 
 #include "window_c.hpp"
 
 window_c::window_c(void) {
   utility_p = new utility_c();
+  gtk_p = new gtk_c();
   window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   g_signal_connect (window, "destroy", G_CALLBACK (gtk_main_quit), NULL);
   gtk_window_set_title (GTK_WINDOW (window), "Xffm+");
@@ -10,13 +12,23 @@ window_c::window_c(void) {
   gtk_widget_set_size_request (window, 800, 600);
   
   notebook = gtk_notebook_new();
+  gtk_notebook_set_scrollable (GTK_NOTEBOOK(notebook), TRUE);
   gtk_container_add (GTK_CONTAINER (window), notebook);
+  add_child = gtk_p->new_add_page_tab(notebook, &new_button);
+ 
   gtk_widget_show (notebook);
   gtk_widget_show (window);
 }
 window_c::~window_c(void) {
     delete utility_p;
+    delete gtk_p;
 }
 
 GtkWidget *
 window_c::get_notebook(void) {return notebook;}
+
+GtkWidget *
+window_c::get_add_child(void) {return add_child;}
+
+GtkWidget *
+window_c::get_new_button(void) {return new_button;}

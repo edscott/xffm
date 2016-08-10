@@ -2,7 +2,7 @@
 #define SIGNALS_C_HPP
 
 class signals_c {
-    protected:
+    public:
  	void 
             setup_callback(void *object, GtkWidget *widget, 
 	        const gchar *signal, void *callback, void *data);

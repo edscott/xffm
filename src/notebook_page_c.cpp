@@ -92,8 +92,15 @@ notebook_page_c::pack(void){
     gtk_widget_show (page_child_box);
 
     // Insert page into notebook:
-    gint position=gtk_notebook_get_current_page(GTK_NOTEBOOK(notebook))+1;
-    gtk_notebook_insert_page_menu (GTK_NOTEBOOK(notebook), page_child_box, page_label_box, menu_label_box, position);
+    gint next_position = gtk_notebook_get_current_page(GTK_NOTEBOOK(notebook))+1;
+    gint new_page_position = 
+        gtk_notebook_page_num (GTK_NOTEBOOK(notebook), window_p->get_add_child());
+    gint position = (next_position <= new_page_position)? next_position:
+                                                  new_page_position;
+    gtk_notebook_insert_page (GTK_NOTEBOOK(notebook),
+            page_child_box, 
+            page_label_box, 
+            position);
     gtk_notebook_set_tab_reorderable (GTK_NOTEBOOK(notebook), page_child_box, TRUE);
     gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), position);
 }

@@ -13,6 +13,7 @@ using namespace std;
 class widgets_c {
     public:
         widgets_c(window_c *);
+        ~widgets_c(void);
     protected:
 
         GtkWidget *page_child_box;
@@ -39,9 +40,8 @@ class widgets_c {
         void setup_diagnostics(void);
         void setup_scolled_windows(void);
         void setup_size_scale(void);
-        void setup_image_button(GtkWidget *, const gchar *, const gchar *);
         window_c *window_p;
-
+        gtk_c *gtk_p;
 };
 
 #endif

@@ -1,34 +1,21 @@
 #include <string.h>
 
 #include "widgets_c.hpp"
+#include "gtk_c.hpp"
 
 widgets_c::widgets_c(window_c *data){
+    gtk_p = new gtk_c();
     window_p = data;
     create();
     setup_diagnostics();
     setup_scolled_windows();
     setup_size_scale();
-    setup_image_button(clear_button, "edit-clear-all",  _("Clear"));
-    setup_image_button(page_label_button, "window-close", _("Close Tab"));
+    gtk_p->setup_image_button(clear_button, "edit-clear-all",  _("Clear"));
+    gtk_p->setup_image_button(page_label_button, "window-close", _("Close Tab"));
 }
-
-void
-widgets_c::setup_image_button (GtkWidget *button, const gchar *icon_name, const gchar *icon_tip){
-    gtk_widget_set_can_focus (button, FALSE);
-    gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
-    GtkWidget *image = gtk_image_new_from_icon_name (icon_name, GTK_ICON_SIZE_SMALL_TOOLBAR);
-    GdkPixbuf *pixbuf = 
-            window_p->get_pixbuf(icon_name, GTK_ICON_SIZE_SMALL_TOOLBAR);
-    if (image) {
-        gtk_container_add (GTK_CONTAINER (button), image);
-        gtk_widget_show (image);
-    }
-    // Elaborate tooltip
-    window_p->custom_tooltip(button, pixbuf, icon_tip);
-    // Simple tooltip:
-    // gtk_widget_set_tooltip_text (button, icon_tip);
-    
-}  
+widgets_c::~widgets_c(void){
+    delete gtk_p;
+}
 
 void
 widgets_c::setup_diagnostics(void){
