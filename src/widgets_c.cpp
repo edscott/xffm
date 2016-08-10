@@ -20,13 +20,13 @@ widgets_c::setup_image_button (GtkWidget *button, const gchar *icon_name, const 
     if (image) {
         gtk_container_add (GTK_CONTAINER (button), image);
         gtk_widget_show (image);
+	//gtk_widget_set_tooltip_text (button, icon_tip);
+        GdkPixbuf *pixbuf = gtk_image_get_pixbuf (GTK_IMAGE(image));
+	g_object_ref(pixbuf);
+        window_p->custom_tooltip(button, pixbuf, icon_tip);
+    } else {
+	gtk_widget_set_tooltip_text (button, icon_tip);
     }
-#ifndef SIMPLE_TOOLTIP
-    GdkPixbuf *pixbuf = NULL; // FIXME pixbuf from image...
-    window_p->custom_tooltip(button, pixbuf, icon_tip);
-#else
-    gtk_widget_set_tooltip_text (button, icon_tip);
-#endif
     
 }  
 
@@ -69,26 +69,9 @@ widgets_c::setup_scolled_windows(void){
 
 void
 widgets_c::setup_size_scale(void){
-    // Add image to close tab button: page_label_button
-    // XXX : 
-    //      1.we need pixbuf class
-    //      2.we need callback procedure
-    /*
-    GdkPixbuf *pb = rfm_get_pixbuf ("xffm/stock_close", 8);
-    GtkWidget *image = gtk_image_new_from_pixbuf (pb);
-    g_object_unref(pb);
-    gtk_widget_show (image);
-    gtk_container_add (GTK_CONTAINER (page_label_button), image);
-    g_object_set (page_label_button, "image", image, "relief", GTK_RELIEF_NONE, NULL);
-    g_signal_connect (page_label_button, "clicked", G_CALLBACK (rmpage), view_p);
-    */
-
-
     gtk_scale_set_draw_value (GTK_SCALE(size_scale), FALSE);
     gtk_widget_set_can_focus (size_scale, FALSE);
     gtk_widget_set_size_request (size_scale, 75, 30);
-
-    
 }
 
 

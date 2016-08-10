@@ -1,15 +1,6 @@
 
-#include "gplv3.h"
-#endif
-static GHashTable *pixbuf_hash = NULL;
-
-
-// hmmmm.... serialized....
-//  only the main thread will access the pixbuf hash,
-
-
-/////    exported /////
-//
+#include "pixbuf_hash_c.hpp"
+#include <iostream>
 
 typedef struct pixbuf_t {
     time_t mtime; // stat mtime info for thumbnails
@@ -23,8 +14,47 @@ typedef struct pixbuf_t {
     };
 } pixbuf_t;
 
-static void
-zap_thumbnail_file(const gchar *file, gint size){
+static void free_pixbuf_t(void *);
+
+pixbuf_hash_c::pixbuf_hash_c(window_c *data){
+    window_p = data;
+    pixbuf_hash = 
+	g_hash_table_new_full (g_str_hash, g_str_equal,g_free, free_pixbuf_t);
+
+}
+
+pixbuf_hash_c::~pixbuf_hash_c(void){
+    g_hash_table_destroy (pixbuf_hash);
+
+}
+
+
+static void 
+free_pixbuf_t(void *data){
+    pixbuf_t *pixbuf_p = data;
+    if (!pixbuf_p) return ;
+    //NOOP(stderr, "destroying pixbuf_t for %s size %d\n", pixbuf_p->path, pixbuf_p->size);
+    if (pixbuf_p->pixbuf && !G_IS_OBJECT (pixbuf_p->pixbuf)) {
+	cerr << "This should not happen: pixbuf_p->mime_id, not a pixbuf:"
+	    << pixbuf_p->mime_id << "\n";
+    } else {
+	g_object_unref (pixbuf_p->pixbuf);
+    }
+    g_free(pixbuf_p->path);
+    g_free(pixbuf_p);
+    return;
+}
+
+// hmmmm.... serialized....
+//  only the main thread will access the pixbuf hash,
+
+
+/////    exported /////
+//
+
+
+void
+pixbuf_hash_c::zap_thumbnail_file(const gchar *file, gint size){
     //Eliminate from thumbnail cache:
     gchar *thumbnail_path = rfm_get_thumbnail_path (file, size);
     if (g_file_test(thumbnail_path, G_FILE_TEST_EXISTS)) {
@@ -34,45 +64,6 @@ zap_thumbnail_file(const gchar *file, gint size){
 	}
     }
     g_free (thumbnail_path);
-}
-
-
-static void 
-free_pixbuf_t(void *data){
-    pixbuf_t *pixbuf_p = data;
-    if (!pixbuf_p) return ;
-    NOOP(stderr, "destroying pixbuf_t for %s size %d\n", pixbuf_p->path, pixbuf_p->size);
-    if (pixbuf_p->pixbuf && !G_IS_OBJECT (pixbuf_p->pixbuf)) {
-	DBG("This should not happen: pixbuf_p->mime_id: %s is not a pixbuf\n", pixbuf_p->mime_id);
-    } else {
-	g_object_unref (pixbuf_p->pixbuf);
-    }
-    
-    g_free(pixbuf_p->path);
-    g_free(pixbuf_p);
-    return;
-}
-
-static GHashTable *
-init_pixbuf_hash (void) {
-    GHashTable *hash = g_hash_table_new_full (g_str_hash, g_str_equal,g_free, free_pixbuf_t);
-    return hash;
-}
-
-static void *
-replace_pixbuf_hash_f(void *data){
-    //GHashTable *old_hash = pixbuf_hash;
-    pixbuf_hash = data;
-    // XXX leak. Pointers may be in use by other threads.
-    //if (old_hash) g_hash_table_destroy(old_hash);
-    return NULL;
-}
-
-void
-rfm_replace_pixbuf_hash (void) {
-    GHashTable *hash = init_pixbuf_hash();
-    rfm_context_function(replace_pixbuf_hash_f, hash);
-    return;
 }
 
 
@@ -94,7 +85,8 @@ put_in_pixbuf_hash_f(void *data){
     return GINT_TO_POINTER(1);
 }
 
-void rfm_put_in_pixbuf_hash(const gchar *path, gint size, const GdkPixbuf *pixbuf){
+void 
+pixbuf_hash_c::put_in_pixbuf_hash(const gchar *path, gint size, const GdkPixbuf *pixbuf){
     if (!path || !pixbuf || !GDK_IS_PIXBUF(pixbuf)) {
 	DBG("rfm_put_in_pixbuf_hash() %s is not a pixbuf\n", path);
 	return;
@@ -118,7 +110,7 @@ void rfm_put_in_pixbuf_hash(const gchar *path, gint size, const GdkPixbuf *pixbu
     // Replace or insert item in pixbuf hash
     gchar *hash_key = rfm_get_hash_key (pixbuf_p->path, pixbuf_p->size);
     void *arg[]={hash_key, pixbuf_p};
-    void *result = rfm_context_function(put_in_pixbuf_hash_f, arg);
+    void *result = window_p->context_function(put_in_pixbuf_hash_f, arg);
     if (!result){
         g_free(hash_key);
 	free_pixbuf_t(pixbuf_p);
@@ -147,7 +139,7 @@ rm_from_pixbuf_hash_f(void *data){
 }
 
 void
-rfm_rm_from_pixbuf_hash (const gchar *fullpath, gint size) {
+pixbuf_hash_c::rm_from_pixbuf_hash (const gchar *fullpath, gint size) {
     TRACE("rfm_rm_from_pixbuf_hash()\n");
     if (!fullpath) return ;
     if (!pixbuf_hash) return;
@@ -158,7 +150,7 @@ rfm_rm_from_pixbuf_hash (const gchar *fullpath, gint size) {
     }
     gchar *hash_key = rfm_get_hash_key (fullpath, size);
 
-    rfm_context_function(rm_from_pixbuf_hash_f, hash_key);
+    window_p->context_function(rm_from_pixbuf_hash_f, hash_key);
     g_free(hash_key);
     TRACE("rfm_rm_from_pixbuf_hash() done\n");
     return;
@@ -201,7 +193,8 @@ find_in_pixbuf_hash_f(void *data){
     return pixbuf_p->pixbuf;
 }
 
-GdkPixbuf *rfm_find_in_pixbuf_hash(const gchar *key, gint size){
+GdkPixbuf *
+pixbuf_hash_c::find_in_pixbuf_hash(const gchar *key, gint size){
     if (!key) return NULL;
     // This will report out of date thumbnails/previews as not present
     // On successful call, returned pixbuf_p->pixbuf will have
@@ -242,9 +235,27 @@ GdkPixbuf *rfm_find_in_pixbuf_hash(const gchar *key, gint size){
     // If no source file is associated, we are dealing with a ad hoc icon
     gchar *hash_key = rfm_get_hash_key (key, size);
     void *arg[]={hash_key, (gpointer)key, GINT_TO_POINTER(size)};
-    pixbuf = rfm_context_function(find_in_pixbuf_hash_f, arg);
+    pixbuf = window_p->context_function(find_in_pixbuf_hash_f, arg);
     g_free(hash_key);
     return pixbuf;
 }
 
+
+#if 0
+static void *
+replace_pixbuf_hash_f(void *data){
+    //GHashTable *old_hash = pixbuf_hash;
+    pixbuf_hash = data;
+    // XXX leak. Pointers may be in use by other threads.
+    //if (old_hash) g_hash_table_destroy(old_hash);
+    return NULL;
+}
+
+void
+rfm_replace_pixbuf_hash (void) {
+    GHashTable *hash = init_pixbuf_hash();
+    rfm_context_function(replace_pixbuf_hash_f, hash);
+    return;
+}
+#endif
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2012 Edscott Wilson Garcia
+ * Copyright (C) 2002-2016 Edscott Wilson Garcia
  * EMail: edscott@users.sf.net
  *
  *
@@ -21,6 +21,29 @@
 # include <config.h>
 #endif
 
+#ifndef OLD_STUFF
+#include "pixbuf_c.hpp"
+
+// reference to the returned pixbuf (if any) belongs to the
+// pixbuf hashtable.
+GdkPixbuf *
+pixbuf_c::pixbuf_new_from_icon_name(const gchar *icon_name, gint size){
+    // Look for pixbuf in hashtable
+    // Not found? Create pixbuf.
+    GtkWidget *image = 
+	gtk_image_new_from_icon_name (icon_name, size);
+    if (!image) return NULL;
+    GdkPixbuf *pixbuf = 
+	gtk_image_get_pixbuf (image); 
+    // Reference pixbuf
+    g_object_ref(pixbuf);
+    gtk_widget_destroy(image);
+    // Insert into hashtable
+    // return pixbuf pointer.
+    return pixbuf;
+///////////////////////////////////////////////////////////////////////
+
+#else
 #include "rfm.h"
 #include "rfm_modules.h"
 
@@ -1260,3 +1283,4 @@ rfm_get_pixbuf (const gchar * key, gint size) {
 // get: refs
 // create: refs
 
+#endif

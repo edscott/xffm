@@ -184,10 +184,10 @@ tooltip_c::create_tooltip_window(GtkWidget *widget, GtkWidget *tooltip_window, c
 	gchar *utf_text =  utf_string (label_text);
 	gchar *label_markup;
 	if (widget) {
-	    label_markup = g_strdup_printf("<span font_family=\"monospace\" weight=\"bold\">%s</span>",utf_text); 
+	    label_markup = g_strdup_printf("<span color=\"yellow\" font_family=\"monospace\" weight=\"bold\"> %s </span>",utf_text); 
 	    //label_markup = g_strdup_printf("<span color=\"black\" font_family=\"monospace\" weight=\"bold\">%s</span>",utf_text); 
 	} else {
-	    label_markup = g_strdup_printf("<span font_family=\"monospace\" size=\"larger\" weight=\"bold\">%s</span>\n",utf_text); 
+	    label_markup = g_strdup_printf("<span color=\"yellow\" font_family=\"monospace\" size=\"larger\" weight=\"bold\"> %s </span>\n",utf_text); 
 	    //label_markup = g_strdup_printf("<span color=\"black\" font_family=\"monospace\" size=\"larger\" weight=\"bold\">%s</span>\n",utf_text); 
 	}
 	gtk_label_set_markup(GTK_LABEL(label), label_markup);
@@ -225,7 +225,7 @@ tooltip_c::create_tooltip_window(GtkWidget *widget, GtkWidget *tooltip_window, c
 	if (widget) {
 //	    gchar *small = g_strdup_printf("<span color=\"white\" size=\"smaller\">%s</span>", markup);
 //	    gchar *small = g_strdup_printf("<span background=\"white\" color=\"black\" size=\"smaller\">%s</span>", markup);
-	    gchar *small = g_strdup_printf("<span size=\"smaller\">%s</span>", markup);
+	    gchar *small = g_strdup_printf("<span  color=\"white\" size=\"smaller\"> %s </span>", markup);
 	    gtk_label_set_markup(GTK_LABEL(label), small);
 	    g_free(small);
 
@@ -244,8 +244,8 @@ tooltip_c::create_tooltip_window(GtkWidget *widget, GtkWidget *tooltip_window, c
 	gint width = 0;
 	gint height = 0;
 	if (pixbuf) {
-	    width = gdk_pixbuf_get_width(pixbuf);
-	    height = gdk_pixbuf_get_height(pixbuf);
+	    width = gdk_pixbuf_get_width(pixbuf)+5;
+	    height = gdk_pixbuf_get_height(pixbuf)+5;
 	}
 	g_object_set_data(G_OBJECT(tooltip_window), "width", GINT_TO_POINTER(width)); 
 	g_object_set_data(G_OBJECT(tooltip_window), "height", GINT_TO_POINTER(height)); 
