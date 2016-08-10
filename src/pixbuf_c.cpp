@@ -24,23 +24,30 @@
 #ifndef OLD_STUFF
 #include "pixbuf_c.hpp"
 
-// reference to the returned pixbuf (if any) belongs to the
+// last reference to the returned pixbuf (if any) belongs to the
 // pixbuf hashtable.
 GdkPixbuf *
-pixbuf_c::pixbuf_new_from_icon_name(const gchar *icon_name, gint size){
-    // Look for pixbuf in hashtable
-    // Not found? Create pixbuf.
-    GtkWidget *image = 
-	gtk_image_new_from_icon_name (icon_name, size);
-    if (!image) return NULL;
-    GdkPixbuf *pixbuf = 
-	gtk_image_get_pixbuf (image); 
-    // Reference pixbuf
-    g_object_ref(pixbuf);
-    gtk_widget_destroy(image);
-    // Insert into hashtable
-    // return pixbuf pointer.
-    return pixbuf;
+pixbuf_c::get_pixbuf(const gchar *icon_name, gint size){
+    gint pixels = 24;;
+    switch (size){
+        case GTK_ICON_SIZE_MENU:          // Size appropriate for menus (16px).
+        case GTK_ICON_SIZE_SMALL_TOOLBAR: // Size appropriate for small toolbars (16px).
+        case GTK_ICON_SIZE_BUTTON:        // Size appropriate for buttons (16px)
+            pixels = 16; break;
+        case GTK_ICON_SIZE_LARGE_TOOLBAR: // Size appropriate for large toolbars (24px)
+            pixels = 24; break;
+        case GTK_ICON_SIZE_DND:           // Size appropriate for drag and drop (32px)
+            pixels = 32; break;
+        case GTK_ICON_SIZE_DIALOG:        // Size appropriate for dialogs (48px)
+            pixels = 48; break;
+        default: break;
+    }
+    // if item is not found in hash, it will be created and inserted into hash 
+    // (whenever possible)
+    // Pixbuf reference count increases each time a pixbuf is requested from 
+    // hash table. Caller is responsible for unreferencing when no longer used.
+    return find_in_pixbuf_hash(icon_name, pixels);
+ }
 ///////////////////////////////////////////////////////////////////////
 
 #else

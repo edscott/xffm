@@ -7,7 +7,7 @@
 // This class arranges and shows all necessary widgets for class view_c
 // and binds gtk callbacks.
 
-class notebook_page_c:public widgets_c, protected signals_c {
+class notebook_page_c: public widgets_c, protected signals_c {
     public:
         notebook_page_c(window_c *);
         ~notebook_page_c(void);
@@ -15,6 +15,8 @@ class notebook_page_c:public widgets_c, protected signals_c {
     protected:
         void set_treemodel(GtkTreeModel *);
     private:
+        void clear_text (GtkWidget *);
+        void hide_text (GtkWidget *);
         GtkListStore *list_store;
 
         GtkWidget *notebook;
@@ -23,6 +25,6 @@ class notebook_page_c:public widgets_c, protected signals_c {
         void pack();
         void signals();
         window_c *window_p;
-
+        utility_c *utility_p;
 };
 #endif

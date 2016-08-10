@@ -3,10 +3,12 @@
 #include <gtk/gtk.h>
 #include "pixbuf_hash_c.hpp"
 
-class pixbuf_c: protected pixbuf_hash_c {
+class pixbuf_c : protected pixbuf_hash_c {
     public:
-	GdkPixbuf *pixbuf_from_icon_name(const gchar *, gint);
-
+	GdkPixbuf *get_pixbuf(const gchar *, gint);
+//	GdkPixbuf *pixbuf_new_from_icon_name(const gchar *, gint);
+    protected:
+    private:
 
 };
 

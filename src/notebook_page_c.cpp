@@ -47,7 +47,7 @@ clear_text_callback(GtkWidget *widget, gpointer data){
 }
 void
 notebook_page_c::clear_diagnostics(void){
-    window_p->clear_text(diagnostics);
+    clear_text(diagnostics);
 }
 void
 notebook_page_c::pack(void){
@@ -150,6 +150,53 @@ notebook_page_c::signals(void){
 
 */
 
+}
+
+
+static void *
+hide_text_f (void * data) {
+    // to be executed by gtk thread
+    GtkWidget * widget = (GtkWidget *)data;
+    if(widget == NULL) return NULL;
+    
+    GtkWidget *vpane = (GtkWidget *)g_object_get_data(G_OBJECT(widget), "vpane");
+    if(!vpane) return FALSE;
+    gtk_paned_set_position (GTK_PANED (vpane), 10000);
+        
+    return NULL;
+}
+
+void
+notebook_page_c::hide_text (GtkWidget * widget) {
+    if(widget == NULL) return;
+    utility_p->context_function(hide_text_f, (void *)widget);
+}
+
+static void *
+clear_text_f (void *data) {
+    // to be executed by gtk thread
+    GtkWidget * widget = (GtkWidget *)data;
+    GtkTextIter start,
+      end;
+    GtkTextBuffer *buffer;
+    buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW ((widget)));
+    gtk_text_buffer_get_bounds (buffer, &start, &end);
+    gtk_text_buffer_delete (buffer, &start, &end);
+    if (widget==NULL) {
+	// This is not applicable to diagnostics_window:
+	hide_text_f (widget);
+    }
+    g_object_ref (G_OBJECT(buffer)); 
+    gtk_text_view_set_buffer(GTK_TEXT_VIEW ((widget)), gtk_text_buffer_new(NULL));
+    g_object_ref_sink (G_OBJECT(buffer));
+    g_object_unref (G_OBJECT(buffer)); 
+    return NULL;
+}
+
+void
+notebook_page_c::clear_text (GtkWidget * widget) {
+    if(widget == NULL) return;
+    utility_p->context_function(clear_text_f, (void *)widget);
 }
 
 

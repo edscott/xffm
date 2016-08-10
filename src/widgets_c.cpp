@@ -17,16 +17,16 @@ widgets_c::setup_image_button (GtkWidget *button, const gchar *icon_name, const 
     gtk_widget_set_can_focus (button, FALSE);
     gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
     GtkWidget *image = gtk_image_new_from_icon_name (icon_name, GTK_ICON_SIZE_SMALL_TOOLBAR);
+    GdkPixbuf *pixbuf = 
+            window_p->get_pixbuf(icon_name, GTK_ICON_SIZE_SMALL_TOOLBAR);
     if (image) {
         gtk_container_add (GTK_CONTAINER (button), image);
         gtk_widget_show (image);
-	//gtk_widget_set_tooltip_text (button, icon_tip);
-        GdkPixbuf *pixbuf = gtk_image_get_pixbuf (GTK_IMAGE(image));
-	g_object_ref(pixbuf);
-        window_p->custom_tooltip(button, pixbuf, icon_tip);
-    } else {
-	gtk_widget_set_tooltip_text (button, icon_tip);
     }
+    // Elaborate tooltip
+    window_p->custom_tooltip(button, pixbuf, icon_tip);
+    // Simple tooltip:
+    // gtk_widget_set_tooltip_text (button, icon_tip);
     
 }  
 

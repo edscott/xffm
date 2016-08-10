@@ -3,7 +3,7 @@
 #include "utility_c.hpp"
 
 
-class tooltip_c: public utility_c {
+class tooltip_c {
     public:
         tooltip_c(void);
         ~tooltip_c(void);
@@ -32,6 +32,7 @@ class tooltip_c: public utility_c {
         void tooltip_placement_bug_workaround(GtkWidget *);
 
         gboolean tooltip_is_mapped;
+        utility_c *utility_p;
 };
 
 #endif

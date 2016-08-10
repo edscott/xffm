@@ -5,10 +5,12 @@ tooltip_c::tooltip_c(void){
     tooltip_text_hash = g_hash_table_new_full(g_direct_hash, g_direct_equal, NULL, g_free);
     tt_window = NULL;
     tooltip_is_mapped = FALSE;
+    utility_p = new utility_c();
 }
 
 tooltip_c::~tooltip_c(void){
     if (tooltip_text_hash) g_hash_table_destroy(tooltip_text_hash);
+    delete utility_p;
 }
 void 
 tooltip_c::set_tt_window(GtkWidget *data){tt_window = data;}
@@ -181,7 +183,7 @@ tooltip_c::create_tooltip_window(GtkWidget *widget, GtkWidget *tooltip_window, c
     if (label_text) {
 	GtkWidget *label = gtk_label_new("");
 	gtk_widget_show(label);
-	gchar *utf_text =  utf_string (label_text);
+	gchar *utf_text =  utility_p->utf_string (label_text);
 	gchar *label_markup;
 	if (widget) {
 	    label_markup = g_strdup_printf("<span color=\"yellow\" font_family=\"monospace\" weight=\"bold\"> %s </span>",utf_text); 
@@ -244,8 +246,8 @@ tooltip_c::create_tooltip_window(GtkWidget *widget, GtkWidget *tooltip_window, c
 	gint width = 0;
 	gint height = 0;
 	if (pixbuf) {
-	    width = gdk_pixbuf_get_width(pixbuf)+5;
-	    height = gdk_pixbuf_get_height(pixbuf)+5;
+	    width = gdk_pixbuf_get_width(pixbuf);
+	    height = gdk_pixbuf_get_height(pixbuf);
 	}
 	g_object_set_data(G_OBJECT(tooltip_window), "width", GINT_TO_POINTER(width)); 
 	g_object_set_data(G_OBJECT(tooltip_window), "height", GINT_TO_POINTER(height)); 
@@ -348,7 +350,7 @@ custom_tooltip_f(void * data){
 void tooltip_c::custom_tooltip(GtkWidget *widget, GdkPixbuf *pixbuf, const gchar *text){
     //rfm_global_t *rfm_global_p = rfm_global();
     void *arg[]={widget, pixbuf, (void *)text, (void *)this};
-    context_function(custom_tooltip_f, arg);
+    utility_p->context_function(custom_tooltip_f, arg);
 }
 
 GHashTable *
