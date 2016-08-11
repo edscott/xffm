@@ -76,6 +76,7 @@ widgets_c::create(void){
     page_label_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
     page_label_icon_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
     page_label = gtk_label_new (_("Loading folder..."));
+    //page_label_button_eventbox = gtk_event_box_new ();
     page_label_button = gtk_button_new ();
     menu_label_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
     menu_label = gtk_label_new ("menu_label");

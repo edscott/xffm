@@ -1,6 +1,7 @@
 #include "view_c.hpp"
 // callbacks
 static void clear_text_callback(GtkWidget *, gpointer);
+static void enter_page_label_button(GtkWidget *, GdkEvent  *, gpointer);
 // thread functions
 static void *hide_text_f(void *);
 static void *clear_text_f(void *);
@@ -14,7 +15,7 @@ view_c::view_c(GtkWidget *notebook, GtkWidget *data) : widgets_c(notebook){
     signals_p = new signals_c();
     init();
     icon_view = gtk_icon_view_new();
-
+    signals();
     pack();
 #if 0
     /* drag and drop events */
@@ -44,7 +45,13 @@ view_c::~view_c(void){
     delete signals_p;
 }
 
-
+void
+view_c::set_treemodel(GtkTreeModel *data){
+    GtkTreeModel *old_model=tree_model;
+    tree_model = (GtkTreeModel *)data;
+    gtk_icon_view_set_model(GTK_ICON_VIEW(icon_view), tree_model);
+    // FIXME: clean up old model now (in thread)
+}
 ///////////////////////////// Private:
 void
 view_c::init(void){
@@ -65,14 +72,17 @@ view_c::init(void){
 
 void
 view_c::clear_diagnostics(void){
-    clear_text(diagnostics);
-    hide_text(diagnostics);
+    fprintf(stderr, "DBG: clear diagnostics()\n");
+    clear_text();
+    hide_text();
 }
 void
 view_c::pack(void){
     // Add widgets to page_label_box:
     gtk_box_pack_start (GTK_BOX (page_label_box), page_label_icon_box, TRUE, TRUE, 0);
     gtk_box_pack_start (GTK_BOX (page_label_box), page_label, TRUE, TRUE, 0);
+//    gtk_box_pack_end (GTK_BOX (page_label_box), page_label_button_eventbox, TRUE, TRUE, 0);
+//    gtk_container_add (GTK_CONTAINER (page_label_button_eventbox), page_label_button);
     gtk_box_pack_end (GTK_BOX (page_label_box), page_label_button, TRUE, TRUE, 0);
     gtk_widget_show_all (page_label_box);
     //gtk_widget_hide (page_label_button);
@@ -125,20 +135,19 @@ view_c::pack(void){
 }
 
 void
-view_c::hide_text (GtkWidget * widget) {
-    utility_p->context_function(hide_text_f, (void *)widget);
+view_c::hide_text (void) {
+    utility_p->context_function(hide_text_f, (void *)this);
 }
 
 void
-view_c::clear_text (GtkWidget * widget) {
-    utility_p->context_function(clear_text_f, (void *)widget);
+view_c::clear_text (void) {
+    utility_p->context_function(clear_text_f, (void *)this);
 }
 
 void
 view_c::signals(void){
     signals_p->setup_callback((void *) this, clear_button, "clicked", 
             (void *)clear_text_callback, diagnostics);
-    //setup_callback((void *) this, clear_button, "button-press-event", callback, callback_data);
 
     /*
     g_signal_connect (page_label_button, "clicked", G_CALLBACK (rmpage), view_p);
@@ -209,6 +218,13 @@ hide_text_f (void * data) {
     GtkWidget *vpane = view_p->get_vpane();
     gtk_paned_set_position (GTK_PANED (vpane), 10000);
     return NULL;
+}
+static void enter_page_label_button(GtkWidget *button, GdkEvent  *event, gpointer data){
+    if (data){
+        fprintf(stderr, "enter...\n");
+    } else {
+        fprintf(stderr, "leave...\n");
+    }
 }
 
 static void *

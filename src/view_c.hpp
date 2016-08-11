@@ -15,12 +15,13 @@ class view_c:public widgets_c {
         void clear_diagnostics(void);
 
     protected:
-        void clear_text (GtkWidget *);
-        void hide_text (GtkWidget *);
-        GtkWidget *icon_view;           // drawing area
+        void clear_text (void);
+        void hide_text (void);
 
     private:
         GtkWidget *new_tab_child;
+        GtkWidget *icon_view;          
+        GtkTreeModel *tree_model;
         
         void init(void);
         void pack();

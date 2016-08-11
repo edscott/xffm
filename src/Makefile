@@ -9,6 +9,7 @@ OBJECTS = xffm_c.o \
 		widgets_c.o   \
 	  signals_c.o \
 	  utility_c.o \
+	  xfdir_c.o \
 	  gtk_c.o \
 	  test.o
 

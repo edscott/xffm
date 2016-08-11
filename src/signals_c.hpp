@@ -6,6 +6,9 @@ class signals_c {
  	void 
             setup_callback(void *object, GtkWidget *widget, 
 	        const gchar *signal, void *callback, void *data);
+ 	void 
+            setup_event_callback(void *object, GtkWidget *widget, 
+	        const gchar *signal, void *callback, void *data);
        
 };
 

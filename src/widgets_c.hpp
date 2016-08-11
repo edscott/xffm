@@ -25,6 +25,7 @@ class widgets_c {
         GtkWidget *page_label_box;
         GtkWidget *page_label_icon_box;
         GtkWidget *page_label;
+        //GtkWidget *page_label_button_eventbox;
         GtkWidget *page_label_button;
         GtkWidget *menu_label_box;
         GtkWidget *menu_label;
