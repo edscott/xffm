@@ -1,19 +1,34 @@
 #ifndef VIEW_C_HPP
 #define VIEW_C_HPP
 #include <string.h>
-#include "window_c.hpp"
-#include "notebook_page_c.hpp"
+#include "utility_c.hpp"
+#include "signals_c.hpp"
+#include "widgets_c.hpp"
 
 
-class view_c:public notebook_page_c {
+
+class view_c:public widgets_c {
     public:
-        view_c(window_c *);
+        view_c(GtkWidget *, GtkWidget *);
         ~view_c(void);
+        void set_treemodel(GtkTreeModel *);
+        void clear_diagnostics(void);
 
     protected:
+        void clear_text (GtkWidget *);
+        void hide_text (GtkWidget *);
+        GtkWidget *icon_view;           // drawing area
 
     private:
+        GtkWidget *new_tab_child;
+        
         void init(void);
+        void pack();
+        void signals();
+        GtkListStore *list_store;
+
+        signals_c *signals_p;
+        utility_c *utility_p;
 
         gchar *workdir;		
         pthread_mutex_t population_mutex;

@@ -2,7 +2,7 @@
 #define WIDGETS_C_HPP
 #include <iostream>
 #include "intl.h"
-#include "window_c.hpp"
+#include "gtk_c.hpp"
 
 
 using namespace std;
@@ -12,10 +12,15 @@ using namespace std;
 
 class widgets_c {
     public:
-        widgets_c(window_c *);
+        widgets_c(GtkWidget *);
         ~widgets_c(void);
+        GtkWidget *get_page_label_button(void);
+        GtkWidget *get_page_child_box(void);
+        GtkWidget *get_vpane(void);
+        GtkWidget *get_diagnostics(void);
     protected:
 
+        GtkWidget *notebook;
         GtkWidget *page_child_box;
         GtkWidget *page_label_box;
         GtkWidget *page_label_icon_box;
@@ -40,7 +45,6 @@ class widgets_c {
         void setup_diagnostics(void);
         void setup_scolled_windows(void);
         void setup_size_scale(void);
-        window_c *window_p;
         gtk_c *gtk_p;
 };
 

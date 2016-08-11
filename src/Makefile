@@ -6,9 +6,8 @@ OBJECTS = xffm_c.o \
 	    pixbuf_c.o \
 		pixbuf_hash_c.o \
 	   view_c.o  \
-	    notebook_page_c.o  \
-		signals_c.o  \
 		widgets_c.o   \
+	  signals_c.o \
 	  utility_c.o \
 	  gtk_c.o \
 	  test.o

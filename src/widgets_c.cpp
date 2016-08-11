@@ -1,11 +1,14 @@
 #include <string.h>
 
 #include "widgets_c.hpp"
-#include "gtk_c.hpp"
 
-widgets_c::widgets_c(window_c *data){
+widgets_c::widgets_c(GtkWidget *data){
+    notebook = data;
+    if (!notebook){
+        g_warning("widgets_c::widgets_c(): notebook cannot be NULL\n");
+        throw 1;
+    }
     gtk_p = new gtk_c();
-    window_p = data;
     create();
     setup_diagnostics();
     setup_scolled_windows();
@@ -16,6 +19,11 @@ widgets_c::widgets_c(window_c *data){
 widgets_c::~widgets_c(void){
     delete gtk_p;
 }
+
+GtkWidget *widgets_c::get_page_label_button(void){ return page_label_button;}
+GtkWidget *widgets_c::get_page_child_box(void){ return page_child_box;}
+GtkWidget *widgets_c::get_vpane(void){ return vpane;}
+GtkWidget *widgets_c::get_diagnostics(void){ return diagnostics;}
 
 void
 widgets_c::setup_diagnostics(void){
