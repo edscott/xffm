@@ -1,24 +1,11 @@
+#include <dirent.h>
 #include "debug.h"
 
 #include "xfdir_c.hpp"
 
 
-enum
-{
-  COL_DISPLAY_NAME,
-  COL_PIXBUF,
-  NUM_COLS
-};
 
 
-
-
-typedef struct xd_t{
-    gchar *d_name;
-#ifdef HAVE_STRUCT_DIRENT_D_TYPE
-    unsigned char d_type;
-#endif
-}xd_t;
 
 GSList *
 xfdir_c::read_items (const gchar *path, gint *heartbeat) {
@@ -86,30 +73,80 @@ xfdir_c::read_items (const gchar *path, gint *heartbeat) {
     return (directory_list);
 }
 
-
+// FIXME: iconview cell area is too large.
+// FIXME: composite icons for links to directories or files
+GdkPixbuf *
+xfdir_c::get_type_pixbuf(xd_t *xd_p){
+    if (strcmp(xd_p->d_name, "..")==0)
+	return get_pixbuf ("go-up", GTK_ICON_SIZE_DIALOG);
+#ifdef HAVE_STRUCT_DIRENT_D_TYPE
+    if (xd_p->d_type == DT_DIR) 
+	return get_pixbuf ("folder", GTK_ICON_SIZE_DIALOG);
+    if (xd_p->d_type == DT_LNK) 
+	return get_pixbuf ("emblem-symbolic-link", GTK_ICON_SIZE_DIALOG);
+    if (xd_p->d_type == DT_UNKNOWN) 
+	return get_pixbuf ("dialog-question", GTK_ICON_SIZE_DIALOG);
+#else
+    // FIXME: do a stat here...
+#endif
+    return get_pixbuf ("text-x-generic", GTK_ICON_SIZE_DIALOG);
+}
+#if 10
 GtkTreeModel *
 xfdir_c::get_tree_model (const gchar *path)
 {
     if (!g_file_test(path, G_FILE_TEST_EXISTS)) return NULL;
     GtkListStore *list_store;
-    GdkPixbuf *p1, *p2;
+    GdkPixbuf *p_file, *p_image, *p_dir;
     GtkTreeIter iter;
 
-    p1 = get_pixbuf ("text-x-generic", GTK_ICON_SIZE_DIALOG);
-    p2 = get_pixbuf ("image-x-generic", GTK_ICON_SIZE_DIALOG);
-
-
+ 
     list_store = gtk_list_store_new (NUM_COLS, G_TYPE_STRING, GDK_TYPE_PIXBUF);
 
     heartbeat = 0;
     GSList *directory_list = read_items (path, &heartbeat);
     GSList *l = directory_list;
     for (; l && l->data; l= l->next){
-    xd_t *xd_p = (xd_t *)l->data;
+	xd_t *xd_p = (xd_t *)l->data;
         gtk_list_store_append (list_store, &iter);
+	GdkPixbuf *p=p_file;
+#ifdef HAVE_STRUCT_DIRENT_D_TYPE
+	if (xd_p->d_type == DT_DIR) p=p_dir;
+#endif
         gtk_list_store_set (list_store, &iter, COL_DISPLAY_NAME, xd_p->d_name,
-                        COL_PIXBUF, p1, -1);
+                        COL_PIXBUF, get_type_pixbuf(xd_p), -1);
     }
+    // FIXME: free directory_list
     return GTK_TREE_MODEL (list_store);
 }
+#else
+
+GtkTreeModel *
+xfdir_c::get_tree_model (const gchar *path)
+
+{
+  GtkListStore *list_store;
+  GdkPixbuf *p1, *p2;
+  GtkTreeIter iter;
+  GError *err = NULL;
+  int i = 0;
+
+  p1 = gdk_pixbuf_new_from_file ("image1.png", &err);
+                            /* No error checking is done here */
+  p2 = gdk_pixbuf_new_from_file ("image2.png", &err);
+   
+  list_store = gtk_list_store_new (NUM_COLS, G_TYPE_STRING, GDK_TYPE_PIXBUF);
+
+  do {
+    gtk_list_store_append (list_store, &iter);
+    gtk_list_store_set (list_store, &iter, COL_DISPLAY_NAME, "Image1",
+                        COL_PIXBUF, p1, -1);
+    gtk_list_store_append (list_store, &iter);
+    gtk_list_store_set (list_store, &iter, COL_DISPLAY_NAME, "Image2",
+                        COL_PIXBUF, p2, -1);
+  } while (i++ < 100);
+
+  return GTK_TREE_MODEL (list_store);
+}
+#endif
 

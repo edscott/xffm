@@ -44,12 +44,26 @@ view_c::~view_c(void){
     pthread_rwlock_destroy(&population_lock);
     delete signals_p;
 }
-
+// FIXME: enum is repeated in xfdir_c.cpp
+enum
+{
+  COL_DISPLAY_NAME,
+  COL_PIXBUF,
+  NUM_COLS
+};
 void
 view_c::set_treemodel(GtkTreeModel *data){
+    if (tree_model) gtk_widget_hide(GTK_WIDGET(icon_view));
     GtkTreeModel *old_model=tree_model;
     tree_model = (GtkTreeModel *)data;
     gtk_icon_view_set_model(GTK_ICON_VIEW(icon_view), tree_model);
+    gtk_icon_view_set_text_column (GTK_ICON_VIEW (icon_view),
+                                 COL_DISPLAY_NAME);
+    gtk_icon_view_set_pixbuf_column (GTK_ICON_VIEW (icon_view), COL_PIXBUF);
+    gtk_icon_view_set_selection_mode (GTK_ICON_VIEW (icon_view),
+                                    GTK_SELECTION_MULTIPLE);
+   
+    gtk_widget_show(GTK_WIDGET(icon_view));
     // FIXME: clean up old model now (in thread)
 }
 ///////////////////////////// Private:
