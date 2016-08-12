@@ -9,14 +9,14 @@
 
 class view_c:public widgets_c {
     public:
-        view_c(GtkWidget *, GtkWidget *);
+        view_c(void *, GtkWidget *, GtkWidget *);
         ~view_c(void);
         void set_treemodel(GtkTreeModel *);
         void clear_diagnostics(void);
+        void *get_window_p(void);
+        GtkWidget *get_page_child_box(void);
 
     protected:
-        void clear_text (void);
-        void hide_text (void);
 
     private:
         GtkWidget *new_tab_child;
@@ -30,6 +30,8 @@ class view_c:public widgets_c {
 
         signals_c *signals_p;
         utility_c *utility_p;
+
+        void *window_p;
 
         gchar *workdir;		
         pthread_mutex_t population_mutex;

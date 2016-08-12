@@ -41,6 +41,9 @@ window_c::~window_c(void) {
     delete signals_p;
 }
 
+gtk_c *
+window_c::get_gtk_p(void){return gtk_p;}
+
 void
 window_c::add_view_to_list(void *view_p) {
     set_up_view_signals(view_p);
@@ -56,6 +59,8 @@ window_c::remove_view_from_list(void *view_p){
     pthread_mutex_lock(&view_list_mutex);
     view_list = g_list_remove(view_list, view_p);
     pthread_mutex_unlock(&view_list_mutex);
+    // FIXME: crashes...
+    // delete ((view_c *)view_p);
     if (g_list_length(view_list) == 0) gtk_main_quit();
 }
 
@@ -83,7 +88,8 @@ GtkWidget *window_c::get_new_tab_button(void) {return new_tab_button;}
 static void
 on_new_page(GtkWidget *widget, gpointer data){
     window_c *window_p = (window_c *)g_object_get_data(G_OBJECT(widget), "object");
-    view_c *view_p = new view_c(window_p->get_notebook(), window_p->get_new_tab_child());
+    view_c *view_p = new view_c((void *)window_p,
+            window_p->get_notebook(), window_p->get_new_tab_child());
     window_p->add_view_to_list((void *)view_p);
 }
 

@@ -1,20 +1,22 @@
 #include "view_c.hpp"
-// callbacks
-static void clear_text_callback(GtkWidget *, gpointer);
-static void enter_page_label_button(GtkWidget *, GdkEvent  *, gpointer);
-// thread functions
-static void *hide_text_f(void *);
-static void *clear_text_f(void *);
+#include "window_c.hpp"
 
+// simple callbacks and thread functions:
+#include "view_callbacks.i"
+#include "view_threads.i"
 
 
 // Public:
-view_c::view_c(GtkWidget *notebook, GtkWidget *data) : widgets_c(notebook){
+view_c::view_c(void *window_v, GtkWidget *notebook, GtkWidget *data) : widgets_c(window_v, notebook){
     new_tab_child = data;
+    window_p = window_v; 
+    g_object_set_data(G_OBJECT(notebook), "window_p", window_p);
+    g_object_set_data(G_OBJECT(notebook), "view_p", (void *)this);
     g_object_set_data(G_OBJECT(page_label_button), "view_p", (void *)this);
     signals_p = new signals_c();
     init();
     icon_view = gtk_icon_view_new();
+    gtk_icon_view_set_item_width (GTK_ICON_VIEW (icon_view), 60);
     signals();
     pack();
 #if 0
@@ -44,6 +46,11 @@ view_c::~view_c(void){
     pthread_rwlock_destroy(&population_lock);
     delete signals_p;
 }
+
+
+void *
+view_c::get_window_p(void){return window_p;}
+
 // FIXME: enum is repeated in xfdir_c.cpp
 enum
 {
@@ -87,8 +94,8 @@ view_c::init(void){
 void
 view_c::clear_diagnostics(void){
     fprintf(stderr, "DBG: clear diagnostics()\n");
-    clear_text();
-    hide_text();
+    clear_text(NULL, (void *)diagnostics);
+    hide_text(NULL, (void *)vpane);
 }
 void
 view_c::pack(void){
@@ -148,20 +155,42 @@ view_c::pack(void){
     gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), position);
 }
 
-void
-view_c::hide_text (void) {
-    utility_p->context_function(hide_text_f, (void *)this);
-}
-
-void
-view_c::clear_text (void) {
-    utility_p->context_function(clear_text_f, (void *)this);
-}
+GtkWidget *
+view_c::get_page_child_box(void){return page_child_box;}
 
 void
 view_c::signals(void){
-    signals_p->setup_callback((void *) this, clear_button, "clicked", 
-            (void *)clear_text_callback, diagnostics);
+    // complex connections:
+    //signals_p->setup_callback((void *) this, clear_button, "clicked", 
+      //      (void *)clear_text_callback, diagnostics);
+    // Simple connections:
+    // clear button:
+    g_signal_connect (clear_button, "clicked", 
+            G_CALLBACK (clear_text), (void *)diagnostics);
+    g_signal_connect (clear_button, "clicked", 
+            G_CALLBACK (hide_text), (void *)vpane);
+    // notebook specific:
+    g_signal_connect (notebook, "change-current-page", 
+            G_CALLBACK (change_current_page), (void *)NULL);
+    g_signal_connect (notebook, "create-window", 
+            G_CALLBACK (create_window), (void *)NULL);
+    g_signal_connect (notebook, "focus-tab", 
+            G_CALLBACK (focus_tab), (void *)NULL);
+    g_signal_connect (notebook, "move-focus-out", 
+            G_CALLBACK (move_focus_out), (void *)NULL);
+    g_signal_connect (notebook, "page-added", 
+            G_CALLBACK (page_added), (void *)NULL);
+    g_signal_connect (notebook, "page-removed", 
+            G_CALLBACK (page_removed), (void *)this);
+    g_signal_connect (notebook, "page-reordered", 
+            G_CALLBACK (page_reordered), (void *)NULL);
+    g_signal_connect (notebook, "reorder-tab", 
+            G_CALLBACK (reorder_tab), (void *)NULL);
+    g_signal_connect (notebook, "select-page", 
+            G_CALLBACK (select_page), (void *)NULL);
+    g_signal_connect (notebook, "switch-page", 
+            G_CALLBACK (switch_page), (void *)NULL);
+
 
     /*
     g_signal_connect (page_label_button, "clicked", G_CALLBACK (rmpage), view_p);
@@ -210,56 +239,5 @@ view_c::signals(void){
 
 */
 
-}
-
-///////////////////////////////////////////////////////////////////
-//    callbacks...
-///////////////////////////////////////////////////////////////////
-
-
-static void
-clear_text_callback(GtkWidget *widget, gpointer data){
-    view_c *view_p = (view_c *) g_object_get_data(G_OBJECT(widget), "object");
-    if (!view_p) return;
-    view_p->clear_diagnostics();
-}
-
-static void *
-hide_text_f (void * data) {
-    // to be executed by gtk thread
-    if(data == NULL) return NULL;
-    view_c *view_p = (view_c *)data;
-    GtkWidget *vpane = view_p->get_vpane();
-    gtk_paned_set_position (GTK_PANED (vpane), 10000);
-    return NULL;
-}
-static void enter_page_label_button(GtkWidget *button, GdkEvent  *event, gpointer data){
-    if (data){
-        fprintf(stderr, "enter...\n");
-    } else {
-        fprintf(stderr, "leave...\n");
-    }
-}
-
-static void *
-clear_text_f (void *data) {
-    // to be executed by gtk thread
-    if(data == NULL) return NULL;
-    view_c *view_p = (view_c *)data;
-    GtkWidget *diagnostics = view_p->get_diagnostics();
-    GtkTextBuffer *buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW ((diagnostics)));
-
-#if 0
-    g_object_ref (G_OBJECT(buffer)); 
-    gtk_text_view_set_buffer(GTK_TEXT_VIEW ((diagnostics)), gtk_text_buffer_new(NULL));
-    // XXX or gtk_widget_destroy?
-    g_object_ref_sink (G_OBJECT(buffer));
-    g_object_unref (G_OBJECT(buffer)); 
-#else
-    GtkTextIter start, end;
-    gtk_text_buffer_get_bounds (buffer, &start, &end);
-    gtk_text_buffer_delete (buffer, &start, &end);
-#endif
-    return NULL;
 }
 

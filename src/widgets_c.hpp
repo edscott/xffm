@@ -12,7 +12,7 @@ using namespace std;
 
 class widgets_c {
     public:
-        widgets_c(GtkWidget *);
+        widgets_c(void *, GtkWidget *);
         ~widgets_c(void);
         GtkWidget *get_page_label_button(void);
         GtkWidget *get_page_child_box(void);

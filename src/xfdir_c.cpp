@@ -7,9 +7,9 @@
 
 
 
-GSList *
+GList *
 xfdir_c::read_items (const gchar *path, gint *heartbeat) {
-    GSList *directory_list = NULL;
+    GList *directory_list = NULL;
 
     DIR *directory = opendir(path);
     if (!directory) {
@@ -49,7 +49,7 @@ xfdir_c::read_items (const gchar *path, gint *heartbeat) {
 #ifdef HAVE_STRUCT_DIRENT_D_TYPE
 	xd_p->d_type = d->d_type;
 #endif
-	directory_list = g_slist_prepend(directory_list, xd_p);
+	directory_list = g_list_prepend(directory_list, xd_p);
 	if (heartbeat) {
 	    (*heartbeat)++;
 	    NOOP("incrementing heartbeat records to %d\n", *heartbeat);
@@ -62,7 +62,7 @@ xfdir_c::read_items (const gchar *path, gint *heartbeat) {
     closedir (directory);
 
     g_free(buffer);
-    if (directory_list) directory_list = g_slist_reverse(directory_list);
+    //if (directory_list) directory_list = g_list_reverse(directory_list);
 
     // At least the ../ record should have been read. If this
     // is not so, then a read error occurred.
@@ -104,8 +104,8 @@ xfdir_c::get_tree_model (const gchar *path)
     list_store = gtk_list_store_new (NUM_COLS, G_TYPE_STRING, GDK_TYPE_PIXBUF);
 
     heartbeat = 0;
-    GSList *directory_list = read_items (path, &heartbeat);
-    GSList *l = directory_list;
+    GList *directory_list = read_items (path, &heartbeat);
+    GList *l = directory_list;
     for (; l && l->data; l= l->next){
 	xd_t *xd_p = (xd_t *)l->data;
         gtk_list_store_append (list_store, &iter);

@@ -26,7 +26,7 @@ class xfdir_c: gtk_c {
     public:
         GtkTreeModel *get_tree_model(const gchar *path);
     private:
-        GSList *read_items (const gchar *path, gint *heartbeat); 
+        GList *read_items (const gchar *path, gint *heartbeat); 
         gint heartbeat;
 	GdkPixbuf *get_type_pixbuf(xd_t *xd_p);
 };

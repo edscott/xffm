@@ -12,6 +12,7 @@ class window_c {
         GtkWidget *get_notebook(void);
         GtkWidget *get_new_tab_child(void);
         GtkWidget *get_new_tab_button(void);
+        gtk_c *get_gtk_p(void);
         
         void add_view_to_list(void *);
         void remove_view_from_list(void *);

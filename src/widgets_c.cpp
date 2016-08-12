@@ -1,14 +1,16 @@
 #include <string.h>
 
+#include "window_c.hpp"
 #include "widgets_c.hpp"
 
-widgets_c::widgets_c(GtkWidget *data){
+widgets_c::widgets_c(void *window_v, GtkWidget *data){
     notebook = data;
     if (!notebook){
         g_warning("widgets_c::widgets_c(): notebook cannot be NULL\n");
         throw 1;
     }
-    gtk_p = new gtk_c();
+    window_c *window_p = (window_c *)window_v;
+    gtk_p = window_p->get_gtk_p();
     create();
     setup_diagnostics();
     setup_scolled_windows();
@@ -17,7 +19,6 @@ widgets_c::widgets_c(GtkWidget *data){
     gtk_p->setup_image_button(page_label_button, "window-close", _("Close Tab"));
 }
 widgets_c::~widgets_c(void){
-    delete gtk_p;
 }
 
 GtkWidget *widgets_c::get_page_label_button(void){ return page_label_button;}

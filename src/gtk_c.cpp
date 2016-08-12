@@ -1,6 +1,7 @@
 #include "gtk_c.hpp"
 #include "intl.h"
 
+
 void
 gtk_c::setup_image_button (GtkWidget *button, const gchar *icon_name, const gchar *icon_tip){
     gtk_widget_set_can_focus (button, FALSE);
