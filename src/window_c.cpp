@@ -1,8 +1,9 @@
 #include "intl.h"
 #include "window_c.hpp"
 #include "view_c.hpp"
+#include "xfdir_c.hpp"
+
 static void on_new_page(GtkWidget *, gpointer);
-static void on_remove_page(GtkWidget *, gpointer);
 
 
 window_c::window_c(void) {
@@ -16,15 +17,29 @@ window_c::window_c(void) {
     gtk_container_set_border_width (GTK_CONTAINER (window), 0);
     gtk_widget_set_size_request (window, 800, 600);
 
-    notebook = gtk_notebook_new();
-    gtk_notebook_set_scrollable (GTK_NOTEBOOK(notebook), TRUE);
-    gtk_container_add (GTK_CONTAINER (window), notebook);
+    notebook = GTK_NOTEBOOK(gtk_notebook_new());
+    gtk_notebook_set_scrollable (notebook, TRUE);
+    gtk_container_add (GTK_CONTAINER (window), GTK_WIDGET(notebook));
 
-    new_tab_child = gtk_p->new_add_page_tab(notebook, &new_tab_button);
-    signals_p->setup_callback((void *)this, new_tab_button, 
-          "clicked", (void *)on_new_page,NULL); 
+    new_tab_button = gtk_button_new ();
+    gtk_p->setup_image_button(new_tab_button, "list-add", _("Open a new tab (Ctrl+T)"));
+    gtk_widget_show(new_tab_button);
 
-    gtk_widget_show (notebook);
+    GtkWidget *button = gtk_button_new ();
+    gtk_p->setup_image_button(button, "go-home", _("Home"));
+    gtk_widget_show(button);
+
+
+
+    gtk_notebook_set_action_widget (notebook, new_tab_button, GTK_PACK_END);
+    gtk_notebook_set_action_widget (notebook, button, GTK_PACK_START);
+
+    
+
+    g_signal_connect(G_OBJECT(new_tab_button), "clicked", 
+            G_CALLBACK(on_new_page), (void *)this); 
+
+    gtk_widget_show (GTK_WIDGET(notebook));
     gtk_widget_show (window);
 }
 
@@ -59,48 +74,38 @@ window_c::remove_view_from_list(void *view_p){
     pthread_mutex_lock(&view_list_mutex);
     view_list = g_list_remove(view_list, view_p);
     pthread_mutex_unlock(&view_list_mutex);
-    // FIXME: crashes...
-    // delete ((view_c *)view_p);
+    // XXX crash:
+    delete ((view_c *)view_p);
     if (g_list_length(view_list) == 0) gtk_main_quit();
 }
 
 void 
 window_c::set_up_view_signals(void *view){
-    view_c *view_p = (view_c *)view;
-    GtkWidget *widget = view_p->get_page_label_button();
-    void *data = (void *)view_p->get_page_child_box();
-    signals_p->setup_callback((void *)this, widget, "clicked", (void *)on_remove_page, data); 
+//    view_c *view_p = (view_c *)view;
+//    signals_p->setup_callback((void *)this, widget, "clicked", (void *)xxx, data); 
     
     // Delete button...
 
 }
 
 
-GtkWidget *window_c::get_notebook(void) {return notebook;}
-
-GtkWidget *window_c::get_new_tab_child(void) {return new_tab_child;}
-
-GtkWidget *window_c::get_new_tab_button(void) {return new_tab_button;}
-
+GtkNotebook *window_c::get_notebook(void) {return GTK_NOTEBOOK(notebook);}
 
 ////////////////////////////////////////////////////////////////////////////
 
 static void
 on_new_page(GtkWidget *widget, gpointer data){
-    window_c *window_p = (window_c *)g_object_get_data(G_OBJECT(widget), "object");
-    view_c *view_p = new view_c((void *)window_p,
-            window_p->get_notebook(), window_p->get_new_tab_child());
-    window_p->add_view_to_list((void *)view_p);
-}
+    // get current page
+    // get path
 
-static void 
-on_remove_page(GtkWidget *page_label_button, gpointer data){
-    window_c *window_p = (window_c *)g_object_get_data(G_OBJECT(page_label_button), "object");
-    view_c *view_p = (view_c *)g_object_get_data(G_OBJECT(page_label_button), "view_p");
-    GtkWidget *page_child_box = (GtkWidget *)data;
-    GtkWidget *notebook = window_p->get_notebook();
-    gint page_num = gtk_notebook_page_num (GTK_NOTEBOOK(notebook), page_child_box);
-    gtk_notebook_remove_page (GTK_NOTEBOOK(notebook), page_num);
-    window_p->remove_view_from_list((void *)view_p);
+    window_c *window_p = (window_c *)data;
+    view_c *view_p = new view_c((void *)window_p, window_p->get_notebook());
+    xfdir_c *xfdir_p = new xfdir_c(g_get_home_dir());
+    view_p->set_treemodel(xfdir_p);
+    
+ //   xfdir_c *xfdir_p = new xfdir_c();
+ //   view_p->set_treemodel(xfdir_p->get_tree_model("/"));
+
+    window_p->add_view_to_list((void *)view_p);
 }
 

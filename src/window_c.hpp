@@ -9,18 +9,15 @@ class window_c {
     public:
         window_c(void);
         ~window_c(void);
-        GtkWidget *get_notebook(void);
-        GtkWidget *get_new_tab_child(void);
-        GtkWidget *get_new_tab_button(void);
+        GtkNotebook *get_notebook(void);
         gtk_c *get_gtk_p(void);
         
         void add_view_to_list(void *);
         void remove_view_from_list(void *);
     private:
         void set_up_view_signals(void *);
-        GtkWidget *notebook;
+        GtkNotebook *notebook;
         GtkWidget *window;
-        GtkWidget *new_tab_child;
         GtkWidget *new_tab_button;
 
         utility_c *utility_p;

@@ -3,7 +3,7 @@
 #include "window_c.hpp"
 #include "widgets_c.hpp"
 
-widgets_c::widgets_c(void *window_v, GtkWidget *data){
+widgets_c::widgets_c(void *window_v, GtkNotebook *data){
     notebook = data;
     if (!notebook){
         g_warning("widgets_c::widgets_c(): notebook cannot be NULL\n");
@@ -18,7 +18,9 @@ widgets_c::widgets_c(void *window_v, GtkWidget *data){
     gtk_p->setup_image_button(clear_button, "edit-clear-all",  _("Clear"));
     gtk_p->setup_image_button(page_label_button, "window-close", _("Close Tab"));
 }
+
 widgets_c::~widgets_c(void){
+    
 }
 
 GtkWidget *widgets_c::get_page_label_button(void){ return page_label_button;}

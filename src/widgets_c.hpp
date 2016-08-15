@@ -12,7 +12,7 @@ using namespace std;
 
 class widgets_c {
     public:
-        widgets_c(void *, GtkWidget *);
+        widgets_c(void *, GtkNotebook *);
         ~widgets_c(void);
         GtkWidget *get_page_label_button(void);
         GtkWidget *get_page_child_box(void);
@@ -20,7 +20,7 @@ class widgets_c {
         GtkWidget *get_diagnostics(void);
     protected:
 
-        GtkWidget *notebook;
+        GtkNotebook *notebook;
         GtkWidget *page_child_box;
         GtkWidget *page_label_box;
         GtkWidget *page_label_icon_box;

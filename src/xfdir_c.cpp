@@ -2,15 +2,42 @@
 #include "debug.h"
 
 #include "xfdir_c.hpp"
+#include <unistd.h>
+#include <strings.h>
 
 
 
+xfdir_c::xfdir_c(const gchar *data){
+    path = g_strdup(data);
+    treemodel = mk_tree_model();
+}
+
+xfdir_c::~xfdir_c(void){
+    g_free(path);
+    g_object_unref(treemodel);
+}
+
+static gint
+compare_type (const void *a, const void *b) {
+    const xd_t *xd_a = (const xd_t *)a;
+    const xd_t *xd_b = (const xd_t *)b;
+
+    if (strcmp(xd_a->d_name, "..")==0) return -1;
+    if (strcmp(xd_b->d_name, "..")==0) return 1;
+
+    gboolean a_cond = (xd_a->d_type == DT_DIR);
+    gboolean b_cond = (xd_b->d_type == DT_DIR);
+    if (a_cond && !b_cond) return -1; 
+    if (!a_cond && b_cond) return 1;
+    return strcasecmp(xd_a->d_name, xd_b->d_name);
+    //return strcmp(xd_a->d_name, xd_b->d_name);
+}
 
 
 GList *
-xfdir_c::read_items (const gchar *path, gint *heartbeat) {
+xfdir_c::read_items (gint *heartbeat) {
     GList *directory_list = NULL;
-
+fprintf(stderr, "readfiles: %s\n", path);
     DIR *directory = opendir(path);
     if (!directory) {
 	fprintf(stderr, "read_files_local(): Cannot open %s\n", path);
@@ -48,6 +75,8 @@ xfdir_c::read_items (const gchar *path, gint *heartbeat) {
 	xd_p->d_name = g_strdup(d->d_name);
 #ifdef HAVE_STRUCT_DIRENT_D_TYPE
 	xd_p->d_type = d->d_type;
+#else
+FIXME set d_type from a stat or other method
 #endif
 	directory_list = g_list_prepend(directory_list, xd_p);
 	if (heartbeat) {
@@ -70,6 +99,7 @@ xfdir_c::read_items (const gchar *path, gint *heartbeat) {
     if (!directory_list) {
 	NOOP("read_files_local(): Count failed! Directory not read!\n");
     }
+    directory_list = g_list_sort (directory_list,compare_type);
     return (directory_list);
 }
 
@@ -93,18 +123,28 @@ xfdir_c::get_type_pixbuf(xd_t *xd_p){
 }
 #if 10
 GtkTreeModel *
-xfdir_c::get_tree_model (const gchar *path)
+xfdir_c::get_tree_model (void){return treemodel;}
+
+GtkTreeModel *
+xfdir_c::mk_tree_model (void)
 {
-    if (!g_file_test(path, G_FILE_TEST_EXISTS)) return NULL;
+    if (!path || !g_file_test(path, G_FILE_TEST_EXISTS)) {
+        fprintf(stderr, "%s does not exist\n", path);
+        return NULL;
+    }
+    chdir(path);
+    path = g_get_current_dir();
+
+    
     GtkListStore *list_store;
     GdkPixbuf *p_file, *p_image, *p_dir;
     GtkTreeIter iter;
 
  
-    list_store = gtk_list_store_new (NUM_COLS, G_TYPE_STRING, GDK_TYPE_PIXBUF);
+    list_store = gtk_list_store_new (NUM_COLS, G_TYPE_STRING, G_TYPE_STRING, GDK_TYPE_PIXBUF);
 
     heartbeat = 0;
-    GList *directory_list = read_items (path, &heartbeat);
+    GList *directory_list = read_items (&heartbeat);
     GList *l = directory_list;
     for (; l && l->data; l= l->next){
 	xd_t *xd_p = (xd_t *)l->data;
@@ -113,10 +153,16 @@ xfdir_c::get_tree_model (const gchar *path)
 #ifdef HAVE_STRUCT_DIRENT_D_TYPE
 	if (xd_p->d_type == DT_DIR) p=p_dir;
 #endif
-        gtk_list_store_set (list_store, &iter, COL_DISPLAY_NAME, xd_p->d_name,
+        gtk_list_store_set (list_store, &iter, COL_ACTUAL_NAME, xd_p->d_name,
                         COL_PIXBUF, get_type_pixbuf(xd_p), -1);
+        gtk_list_store_set (list_store, &iter, COL_DISPLAY_NAME, utf_string(xd_p->d_name),
+                         -1);
     }
-    // FIXME: free directory_list
+    GList *p = directory_list;
+    for (;p && p->data; p=p->next){
+        g_free(p->data);
+    }
+    g_list_free(directory_list);
     return GTK_TREE_MODEL (list_store);
 }
 #else

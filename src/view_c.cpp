@@ -1,8 +1,30 @@
 #include "view_c.hpp"
 #include "window_c.hpp"
+
 /////////////////////////////////////////
 // simple callbacks and thread functions:
 /////////////////////////////////////////
+
+
+static void 
+on_remove_page_button(GtkWidget *page_label_button, gpointer data){
+    view_c *view_p = (view_c *)data;
+    window_c *window_p = (window_c *)view_p->get_window_p();
+    GtkNotebook *notebook = window_p->get_notebook();
+    GtkWidget *page_child_box = view_p->get_page_child_box();
+    gint page_num = gtk_notebook_page_num (notebook, page_child_box);
+    gint current_page = gtk_notebook_get_current_page (notebook);
+
+    gtk_notebook_remove_page (notebook, page_num);
+    if (current_page == page_num) {
+        gtk_notebook_set_current_page (notebook, page_num-1);
+    }
+        
+    // delete object:
+    window_p->remove_view_from_list((void *)view_p);
+    
+}
+
 
 static void
 clear_text(GtkWidget *widget, gpointer data){
@@ -30,12 +52,56 @@ hide_text(GtkWidget *widget, gpointer data){
     return;
 }
 
-/////////////  notebook specific: /////////////////////////
+////////////// iconview specific signal bindings: /////////////////////////
+
+static void
+item_activated (GtkIconView *iconview,
+                GtkTreePath *path,
+                gpointer     data)
+{
+    view_c *view_p = (view_c *)data;
+    GtkTreeModel *tree_model = gtk_icon_view_get_model (iconview);
+    GtkTreeIter iter;
+    if (!gtk_tree_model_get_iter (tree_model, &iter, path)) return;
+
+    GValue value = G_VALUE_INIT;
+    gtk_tree_model_get_value (tree_model, &iter,
+                          COL_ACTUAL_NAME,
+                          &value);
+    gchar *dname = g_strdup_value_contents (&value);
+    // hack to unquote...
+    gchar *p;
+    for (p=dname; p && *p; p++){
+        if (*p == '"') *p = ' ';
+    } g_strstrip(dname);    
+
+    gchar *dir = g_get_current_dir();
+
+    gchar *full_path = g_strconcat(dir, G_DIR_SEPARATOR_S, dname, NULL);
+    fprintf(stderr, "dname = %s, path = %s\n", dname, full_path);
+
+    g_value_unset(&value);
+
+    if (g_file_test(full_path, G_FILE_TEST_IS_DIR)){
+        xfdir_c *new_xfdir_p = new xfdir_c(full_path);
+        view_p->set_treemodel(new_xfdir_p);
+    }
+        g_free(dname);
+        g_free(full_path);
+
+
+
+}
+
+
+/////////////  notebook specific signal bindings: /////////////////////////
+    
 static gboolean
 change_current_page (GtkNotebook *notebook,
                gint         arg1,
-               gpointer     user_data)
+               gpointer     data)
 {
+    fprintf(stderr, "change_current_page\n");
     return FALSE;
 }
 
@@ -44,32 +110,36 @@ create_window (GtkNotebook *notebook,
                GtkWidget   *page,
                gint         x,
                gint         y,
-               gpointer     user_data)
+               gpointer     data)
 {
+    fprintf(stderr, "create_window\n");
     return NULL;
 }
 
 static gboolean
 focus_tab (GtkNotebook   *notebook,
                GtkNotebookTab arg1,
-               gpointer       user_data)
+               gpointer       data)
 {
+    fprintf(stderr, "focus_tab\n");
     return FALSE;
 }
 
 static void
 move_focus_out (GtkNotebook     *notebook,
                GtkDirectionType arg1,
-               gpointer         user_data)
+               gpointer         data)
 {
+    fprintf(stderr, "move_focus_out\n");
 }
 
 static void
 page_added (GtkNotebook *notebook,
                GtkWidget   *child,
                guint        page_num,
-               gpointer     user_data)
+               gpointer     data)
 {
+    fprintf(stderr, "page_added\n");
 }
 
 static void
@@ -78,50 +148,34 @@ page_removed (GtkNotebook *notebook,
                guint        page_num,
                gpointer     data)
 {
-    view_c *view_p = (view_c *)data;
-    gint add_page = gtk_notebook_page_num (notebook, view_p->get_page_child_box());
-    gint current_page= gtk_notebook_get_current_page (notebook);
-    fprintf(stderr, "removed=%d, current=%d, addpage=%d\n", page_num, current_page, add_page);
-    if (current_page == add_page && current_page) {
-  //      gtk_notebook_set_current_page (notebook, current_page-1);
-    }
-    // Must we destroy widget???
-    // gtk_widget_destroy(child);
-    //
-    // Clean up class object, this is done by removing from view list.
-    window_c *window_p = (window_c *)view_p->get_window_p();
-    if (window_p){
-        window_p->remove_view_from_list((void *)window_p);
-    } else {
-        fprintf(stderr, 
-            "*** memory leak: window_p was not added to view_p list in window_c object\n");
-    }
-    // view_p = associated view_p
-    // delete view_p 
+    fprintf(stderr, "page_removed\n");
 }
 
 static void
 page_reordered (GtkNotebook *notebook,
                GtkWidget   *child,
                guint        page_num,
-               gpointer     user_data)
+               gpointer     data)
 {
+    fprintf(stderr, "page_reordered\n");
 }
 
 static gboolean
 reorder_tab (GtkNotebook     *notebook,
                GtkDirectionType arg1,
                gboolean         arg2,
-               gpointer         user_data)
+               gpointer         data)
 {
+    fprintf(stderr, "reorder_tab\n");
     return FALSE;
 }
 
 static gboolean
 select_page (GtkNotebook *notebook,
                gboolean     arg1,
-               gpointer     user_data)
+               gpointer     data)
 {
+    fprintf(stderr, "select_page\n");
     return FALSE;
 }
 
@@ -129,18 +183,16 @@ static void
 switch_page (GtkNotebook *notebook,
                GtkWidget   *page,
                guint        page_num,
-               gpointer     user_data)
+               gpointer     data)
 {
-    fprintf(stderr, "switch_page\n");
-    gint current_page = gtk_notebook_get_current_page (notebook) + 1;
-    gint n_pages = gtk_notebook_get_n_pages (notebook);
-    if (n_pages < 2) return;
-    if (current_page == n_pages){
-        fprintf(stderr, "moving down\n");
-        // runaway loop with this...
-        //gtk_notebook_set_current_page (notebook, n_pages-2);
+    fprintf(stderr, "switch_page, page_num=%d\n" ,page_num);
+    //page_status(data);
+    view_c *view_p = (view_c *)data;
+    window_c *window_p = (window_c *)view_p->get_window_p();
+    gint current_page = gtk_notebook_get_current_page (notebook);
+    fprintf(stderr, "   current=%d,  pagecount=%d\n",
+            current_page, gtk_notebook_get_n_pages(notebook));
 
-    }
 }
 
 ////////////////////////////////////////
@@ -149,16 +201,17 @@ switch_page (GtkNotebook *notebook,
 
 
 // Public:
-view_c::view_c(void *window_v, GtkWidget *notebook, GtkWidget *data) : widgets_c(window_v, notebook){
-    new_tab_child = data;
+view_c::view_c(void *window_v, GtkNotebook *notebook) : widgets_c(window_v, notebook){
     window_p = window_v; 
+    xfdir_p = NULL;
     g_object_set_data(G_OBJECT(notebook), "window_p", window_p);
     g_object_set_data(G_OBJECT(notebook), "view_p", (void *)this);
     g_object_set_data(G_OBJECT(page_label_button), "view_p", (void *)this);
-    signals_p = new signals_c();
+    //signals_p = new signals_c();
     init();
     icon_view = gtk_icon_view_new();
     gtk_icon_view_set_item_width (GTK_ICON_VIEW (icon_view), 60);
+    gtk_icon_view_set_activate_on_single_click(GTK_ICON_VIEW(icon_view), TRUE);
     signals();
     pack();
 #if 0
@@ -183,28 +236,23 @@ view_c::view_c(void *window_v, GtkWidget *notebook, GtkWidget *data) : widgets_c
 
 
 view_c::~view_c(void){
+    if (xfdir_p) delete xfdir_p;
     pthread_mutex_destroy(&population_mutex);
     pthread_cond_destroy(&population_cond);
     pthread_rwlock_destroy(&population_lock);
-    delete signals_p;
 }
 
 
 void *
 view_c::get_window_p(void){return window_p;}
 
-// FIXME: enum is repeated in xfdir_c.cpp
-enum
-{
-  COL_DISPLAY_NAME,
-  COL_PIXBUF,
-  NUM_COLS
-};
+
 void
-view_c::set_treemodel(GtkTreeModel *data){
+view_c::set_treemodel(xfdir_c *data){
+    xfdir_c *old_xfdir_p = xfdir_p;
+    xfdir_p = data;
+    GtkTreeModel *tree_model = xfdir_p->get_tree_model();
     if (tree_model) gtk_widget_hide(GTK_WIDGET(icon_view));
-    GtkTreeModel *old_model=tree_model;
-    tree_model = (GtkTreeModel *)data;
     gtk_icon_view_set_model(GTK_ICON_VIEW(icon_view), tree_model);
     gtk_icon_view_set_text_column (GTK_ICON_VIEW (icon_view),
                                  COL_DISPLAY_NAME);
@@ -213,7 +261,7 @@ view_c::set_treemodel(GtkTreeModel *data){
                                     GTK_SELECTION_MULTIPLE);
    
     gtk_widget_show(GTK_WIDGET(icon_view));
-    // FIXME: clean up old model now (in thread)
+    if (old_xfdir_p) delete old_xfdir_p;
 }
 ///////////////////////////// Private:
 void
@@ -285,16 +333,12 @@ view_c::pack(void){
 
     // Insert page into notebook:
     gint next_position = gtk_notebook_get_current_page(GTK_NOTEBOOK(notebook))+1;
-    gint new_page_position = 
-        gtk_notebook_page_num (GTK_NOTEBOOK(notebook), new_tab_child);
-    gint position = (next_position <= new_page_position)? next_position:
-                                                  new_page_position;
     gtk_notebook_insert_page (GTK_NOTEBOOK(notebook),
             page_child_box, 
             page_label_box, 
-            position);
+            next_position);
     gtk_notebook_set_tab_reorderable (GTK_NOTEBOOK(notebook), page_child_box, TRUE);
-    gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), position);
+    gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), next_position);
 }
 
 GtkWidget *
@@ -311,27 +355,33 @@ view_c::signals(void){
             G_CALLBACK (clear_text), (void *)diagnostics);
     g_signal_connect (clear_button, "clicked", 
             G_CALLBACK (hide_text), (void *)vpane);
-    // notebook specific:
+    g_signal_connect (page_label_button, "clicked", 
+            G_CALLBACK (on_remove_page_button), (void *)this);
+    // iconview specific signal bindings:
+    g_signal_connect (icon_view, "item-activated", 
+            G_CALLBACK (item_activated), (void *)this);
+
+    // notebook specific signal bindings:
     g_signal_connect (notebook, "change-current-page", 
-            G_CALLBACK (change_current_page), (void *)NULL);
+            G_CALLBACK (change_current_page), (void *)this);
     g_signal_connect (notebook, "create-window", 
-            G_CALLBACK (create_window), (void *)NULL);
+            G_CALLBACK (create_window), (void *)this);
     g_signal_connect (notebook, "focus-tab", 
-            G_CALLBACK (focus_tab), (void *)NULL);
+            G_CALLBACK (focus_tab), (void *)this);
     g_signal_connect (notebook, "move-focus-out", 
-            G_CALLBACK (move_focus_out), (void *)NULL);
+            G_CALLBACK (move_focus_out), (void *)this);
     g_signal_connect (notebook, "page-added", 
-            G_CALLBACK (page_added), (void *)NULL);
+            G_CALLBACK (page_added), (void *)this);
     g_signal_connect (notebook, "page-removed", 
             G_CALLBACK (page_removed), (void *)this);
     g_signal_connect (notebook, "page-reordered", 
-            G_CALLBACK (page_reordered), (void *)NULL);
+            G_CALLBACK (page_reordered), (void *)this);
     g_signal_connect (notebook, "reorder-tab", 
-            G_CALLBACK (reorder_tab), (void *)NULL);
+            G_CALLBACK (reorder_tab), (void *)this);
     g_signal_connect (notebook, "select-page", 
-            G_CALLBACK (select_page), (void *)NULL);
+            G_CALLBACK (select_page), (void *)this);
     g_signal_connect (notebook, "switch-page", 
-            G_CALLBACK (switch_page), (void *)NULL);
+            G_CALLBACK (switch_page), (void *)this);
 
 
     /*
