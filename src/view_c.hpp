@@ -37,6 +37,8 @@ class view_c:public widgets_c {
         gint population_condition;
         pthread_rwlock_t population_lock;
 
+        gchar *last_motion_name;
+
         xfdir_c *xfdir_p;
 
 };

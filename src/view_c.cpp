@@ -4,7 +4,34 @@
 /////////////////////////////////////////
 // simple callbacks and thread functions:
 /////////////////////////////////////////
-
+gboolean
+motion_notify_event (GtkWidget *widget,
+               GdkEvent  *event,
+               gpointer   data){
+    gchar **lastname = (gchar **)data;
+    if (!data) g_error("motion_notify_event: data cannot be NULL\n");
+    GdkEventMotion *e = (GdkEventMotion *)event;
+//    fprintf(stderr, "x=%lf y=%lf\n", e->x, e->y);
+    gint x = e->x + 0.5;
+    gint y = e->y + 0.5;
+    GtkTreePath *tpath;
+    GtkCellRenderer *cell;
+    if (gtk_icon_view_get_item_at_pos (GTK_ICON_VIEW(widget),
+                                x, y, &tpath, &cell)){
+        GtkTreeIter iter;
+        GtkTreeModel *model = gtk_icon_view_get_model(GTK_ICON_VIEW(widget));
+        gtk_tree_model_get_iter (model, &iter, tpath);
+        gchar *name;
+        gtk_tree_model_get (model, &iter, COL_DISPLAY_NAME, &name, -1);
+        if (!(*lastname) || strcmp(*lastname, name)){
+            g_free(*lastname);
+            *lastname = name;
+            fprintf(stderr, "yes: %s\n", name);
+        }
+    } else {
+        //fprintf(stderr, "no\n");
+    }
+}
 
 static void 
 on_remove_page_button(GtkWidget *page_label_button, gpointer data){
@@ -240,6 +267,7 @@ view_c::~view_c(void){
     pthread_mutex_destroy(&population_mutex);
     pthread_cond_destroy(&population_cond);
     pthread_rwlock_destroy(&population_lock);
+    g_free(last_motion_name);
 }
 
 
@@ -360,6 +388,10 @@ view_c::signals(void){
     // iconview specific signal bindings:
     g_signal_connect (icon_view, "item-activated", 
             G_CALLBACK (item_activated), (void *)this);
+    last_motion_name = NULL;
+    g_signal_connect (icon_view, "motion-notify-event", 
+            G_CALLBACK (motion_notify_event), (void *)(&last_motion_name));
+
 
     // notebook specific signal bindings:
     g_signal_connect (notebook, "change-current-page", 
