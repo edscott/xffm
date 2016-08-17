@@ -12,19 +12,26 @@ class view_c:public widgets_c {
     public:
         view_c(void *, GtkNotebook *);
         ~view_c(void);
+        void *get_window_p(void);
+
         GtkTreeModel *get_treemodel(void);
         void set_treemodel(xfdir_c *);
         void clear_diagnostics(void);
-        void *get_window_p(void);
-        GtkWidget *get_page_child_box(void);
-	const gchar *get_lastname(void);
-	void set_lastname(const gchar *);
-	xfdir_c *get_xfdir_p(void);
+        void set_highlight(gdouble, gdouble);
+        void highlight(void);
+        void clear_highlights(const gchar *);
+        void reload(const gchar *);
+        void remove_page(void);
 
     protected:
 
     private:
-        GtkWidget *icon_view;          
+	xfdir_c *get_xfdir_p(void);
+        
+        GtkIconView *icon_view;          
+        GHashTable *highlight_hash;
+        gboolean dirty_hash = FALSE;
+
         
         void init(void);
         void pack();
@@ -40,7 +47,8 @@ class view_c:public widgets_c {
         gint population_condition;
         pthread_rwlock_t population_lock;
 
-        gchar *last_motion_name;
+        gint highlight_x;
+        gint highlight_y;
 
         xfdir_c *xfdir_p;
 

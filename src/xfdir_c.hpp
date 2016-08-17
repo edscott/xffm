@@ -34,7 +34,11 @@ class xfdir_c: public gtk_c, public utility_c {
         xfdir_c(const gchar *);
         ~xfdir_c(void);
         GtkTreeModel *get_tree_model(void);
+        void reload(const gchar *);
+        gint get_icon_size(const gchar *);
+        gint get_icon_highlight_size(const gchar *);
     private:
+        void insert_list_into_model(GList *, GtkListStore *);
         GList *read_items (gint *heartbeat); 
         gint heartbeat;
 	const gchar *get_type_pixbuf(xd_t *xd_p);

@@ -33,11 +33,29 @@ compare_type (const void *a, const void *b) {
     //return strcmp(xd_a->d_name, xd_b->d_name);
 }
 
+void 
+xfdir_c::reload(const gchar *data){
+    if (!data || !g_file_test(data, G_FILE_TEST_EXISTS)) {
+        fprintf(stderr, "%s does not exist\n", data);
+        return;
+    }
+    chdir(data);
+    g_free(path);
+    path = g_get_current_dir();
+    gtk_list_store_clear (GTK_LIST_STORE(treemodel));
+
+    
+    heartbeat = 0;
+    GList *directory_list = read_items (&heartbeat);
+    insert_list_into_model(directory_list, GTK_LIST_STORE(treemodel));
+
+    
+}
 
 GList *
 xfdir_c::read_items (gint *heartbeat) {
     GList *directory_list = NULL;
-fprintf(stderr, "readfiles: %s\n", path);
+    //fprintf(stderr, "readfiles: %s\n", path);
     DIR *directory = opendir(path);
     if (!directory) {
 	fprintf(stderr, "read_files_local(): Cannot open %s\n", path);
@@ -71,6 +89,7 @@ fprintf(stderr, "readfiles: %s\n", path);
     struct dirent *d;
     while ((error = readdir_r(directory, buffer, &d)) == 0 && d != NULL){
         if(strcmp (d->d_name, ".") == 0) continue;
+        // if(strcmp (d->d_name, "..") == 0 && strcmp (path, "/") == 0) continue;
 	xd_t *xd_p = (xd_t *)calloc(1,sizeof(xd_t));
 	xd_p->d_name = g_strdup(d->d_name);
 #ifdef HAVE_STRUCT_DIRENT_D_TYPE
@@ -135,12 +154,7 @@ xfdir_c::mk_tree_model (void)
     path = g_get_current_dir();
 
     
-    GtkListStore *list_store;
-    GdkPixbuf *p_file, *p_image, *p_dir;
-    GtkTreeIter iter;
-
- 
-    list_store = gtk_list_store_new (NUM_COLS, 
+    GtkListStore *list_store = gtk_list_store_new (NUM_COLS, 
 	    GDK_TYPE_PIXBUF,
 	    G_TYPE_STRING, 
 	    G_TYPE_STRING,
@@ -148,6 +162,28 @@ xfdir_c::mk_tree_model (void)
 
     heartbeat = 0;
     GList *directory_list = read_items (&heartbeat);
+    insert_list_into_model(directory_list, list_store);
+
+    return GTK_TREE_MODEL (list_store);
+}
+
+gint 
+xfdir_c::get_icon_size(const gchar *name){
+    if (strcmp(name, "..")==0) return GTK_ICON_SIZE_DND;
+    return GTK_ICON_SIZE_DIALOG;
+}
+
+gint 
+xfdir_c::get_icon_highlight_size(const gchar *name){
+    return GTK_ICON_SIZE_DIALOG;
+}
+
+void
+xfdir_c::insert_list_into_model(GList *data, GtkListStore *list_store){
+    GdkPixbuf *p_file, *p_image, *p_dir;
+    GtkTreeIter iter;
+
+    GList *directory_list = (GList *)data;
     GList *l = directory_list;
     for (; l && l->data; l= l->next){
 	xd_t *xd_p = (xd_t *)l->data;
@@ -162,7 +198,7 @@ xfdir_c::mk_tree_model (void)
 		COL_DISPLAY_NAME, utf_name,
 		COL_ACTUAL_NAME, g_strdup(xd_p->d_name),
 		COL_ICON_NAME, icon_name,
-                COL_PIXBUF, get_pixbuf(icon_name, GTK_ICON_SIZE_DIALOG ), 
+                COL_PIXBUF, get_pixbuf(icon_name,  get_icon_size(xd_p->d_name)), 
 		-1);
 	g_free(utf_name);
     }
@@ -173,8 +209,9 @@ xfdir_c::mk_tree_model (void)
         g_free(xd_p);
     }
     g_list_free(directory_list);
-    return GTK_TREE_MODEL (list_store);
 }
+
+
 #else
 
 GtkTreeModel *
