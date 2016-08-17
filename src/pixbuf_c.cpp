@@ -20,7 +20,7 @@
 #ifdef HAVE_CONFIG_H
 # include <config.h>
 #endif
-
+#include <stdlib.h>
 #ifndef OLD_STUFF
 #include "pixbuf_c.hpp"
 
@@ -40,7 +40,9 @@ pixbuf_c::get_pixbuf(const gchar *icon_name, gint size){
             pixels = 32; break;
         case GTK_ICON_SIZE_DIALOG:        // Size appropriate for dialogs (48px)
             pixels = 48; break;
-        default: break;
+        default: 
+	    if (size < 0) pixels = abs(size);
+	    break;
     }
     // if item is not found in hash, it will be created and inserted into hash 
     // (whenever possible)

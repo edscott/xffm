@@ -8,26 +8,47 @@ gboolean
 motion_notify_event (GtkWidget *widget,
                GdkEvent  *event,
                gpointer   data){
-    gchar **lastname = (gchar **)data;
+    view_c * view_p = (view_c *)data;
+    const gchar *lastname = view_p->get_lastname();
     if (!data) g_error("motion_notify_event: data cannot be NULL\n");
     GdkEventMotion *e = (GdkEventMotion *)event;
 //    fprintf(stderr, "x=%lf y=%lf\n", e->x, e->y);
     gint x = e->x + 0.5;
     gint y = e->y + 0.5;
-    GtkTreePath *tpath;
+    static GtkTreePath *tpath = NULL;
     GtkCellRenderer *cell;
+    GtkTreeIter iter;
+    GtkTreeModel *model;
+
     if (gtk_icon_view_get_item_at_pos (GTK_ICON_VIEW(widget),
                                 x, y, &tpath, &cell)){
-        GtkTreeIter iter;
-        GtkTreeModel *model = gtk_icon_view_get_model(GTK_ICON_VIEW(widget));
+        model = gtk_icon_view_get_model(GTK_ICON_VIEW(widget));
         gtk_tree_model_get_iter (model, &iter, tpath);
         gchar *name;
         gtk_tree_model_get (model, &iter, COL_DISPLAY_NAME, &name, -1);
-        if (!(*lastname) || strcmp(*lastname, name)){
-            g_free(*lastname);
-            *lastname = name;
+        if (!lastname || strcmp(lastname, name)){
+            view_p->set_lastname(name);
+	    gchar *icon_name;
+	    gtk_tree_model_get (model, &iter, COL_ICON_NAME, &icon_name, -1);
+	    gtk_list_store_set (GTK_LIST_STORE(model), &iter,
+                COL_PIXBUF, view_p->get_xfdir_p()->get_pixbuf(icon_name, -60 ), 
+		-1);
+	    g_free(icon_name);
+		    
             fprintf(stderr, "yes: %s\n", name);
-        }
+        } /*else if (tpath) {
+	    gchar *icon_name;
+	    model = gtk_icon_view_get_model(GTK_ICON_VIEW(widget));
+	    gtk_tree_model_get_iter (model, &iter, tpath);
+	    gtk_tree_model_get (model, &iter, COL_ICON_NAME, &icon_name, -1);
+	    gtk_list_store_set (GTK_LIST_STORE(model), &iter,
+                COL_PIXBUF, view_p->get_xfdir_p()->get_pixbuf(icon_name, 
+		    GTK_ICON_SIZE_DIALOG ), 
+		-1);
+	    g_free(icon_name);
+	    tpath = NULL;
+	}*/
+	g_free(name);
     } else {
         //fprintf(stderr, "no\n");
     }
@@ -231,6 +252,7 @@ switch_page (GtkNotebook *notebook,
 view_c::view_c(void *window_v, GtkNotebook *notebook) : widgets_c(window_v, notebook){
     window_p = window_v; 
     xfdir_p = NULL;
+    last_motion_name = NULL;
     g_object_set_data(G_OBJECT(notebook), "window_p", window_p);
     g_object_set_data(G_OBJECT(notebook), "view_p", (void *)this);
     g_object_set_data(G_OBJECT(page_label_button), "view_p", (void *)this);
@@ -270,6 +292,20 @@ view_c::~view_c(void){
     g_free(last_motion_name);
 }
 
+xfdir_c *
+view_c::get_xfdir_p(void) {return xfdir_p;}
+
+const gchar *
+view_c::get_lastname(void) {return (const gchar *)last_motion_name;}
+
+void
+view_c::set_lastname(const gchar *data){
+    if (data) last_motion_name = g_strdup(data);
+    else {
+	g_free(last_motion_name); 
+	last_motion_name = NULL;
+    }
+}
 
 void *
 view_c::get_window_p(void){return window_p;}
@@ -388,9 +424,8 @@ view_c::signals(void){
     // iconview specific signal bindings:
     g_signal_connect (icon_view, "item-activated", 
             G_CALLBACK (item_activated), (void *)this);
-    last_motion_name = NULL;
     g_signal_connect (icon_view, "motion-notify-event", 
-            G_CALLBACK (motion_notify_event), (void *)(&last_motion_name));
+            G_CALLBACK (motion_notify_event), (void *)this);
 
 
     // notebook specific signal bindings:

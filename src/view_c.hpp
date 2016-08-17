@@ -17,6 +17,9 @@ class view_c:public widgets_c {
         void clear_diagnostics(void);
         void *get_window_p(void);
         GtkWidget *get_page_child_box(void);
+	const gchar *get_lastname(void);
+	void set_lastname(const gchar *);
+	xfdir_c *get_xfdir_p(void);
 
     protected:
 

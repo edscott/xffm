@@ -103,23 +103,22 @@ FIXME set d_type from a stat or other method
     return (directory_list);
 }
 
-// FIXME: iconview cell area is too large.
 // FIXME: composite icons for links to directories or files
-GdkPixbuf *
+const gchar *
 xfdir_c::get_type_pixbuf(xd_t *xd_p){
     if (strcmp(xd_p->d_name, "..")==0)
-	return get_pixbuf ("go-up", GTK_ICON_SIZE_DIALOG);
+	return  "go-up";
 #ifdef HAVE_STRUCT_DIRENT_D_TYPE
     if (xd_p->d_type == DT_DIR) 
-	return get_pixbuf ("folder", GTK_ICON_SIZE_DIALOG);
+	return  "folder";
     if (xd_p->d_type == DT_LNK) 
-	return get_pixbuf ("emblem-symbolic-link", GTK_ICON_SIZE_DIALOG);
+	return  "emblem-symbolic-link";
     if (xd_p->d_type == DT_UNKNOWN) 
-	return get_pixbuf ("dialog-question", GTK_ICON_SIZE_DIALOG);
+	return  "dialog-question";
 #else
     // FIXME: do a stat here...
 #endif
-    return get_pixbuf ("text-x-generic", GTK_ICON_SIZE_DIALOG);
+    return "text-x-generic";
 }
 #if 10
 GtkTreeModel *
@@ -141,7 +140,11 @@ xfdir_c::mk_tree_model (void)
     GtkTreeIter iter;
 
  
-    list_store = gtk_list_store_new (NUM_COLS, G_TYPE_STRING, G_TYPE_STRING, GDK_TYPE_PIXBUF);
+    list_store = gtk_list_store_new (NUM_COLS, 
+	    GDK_TYPE_PIXBUF,
+	    G_TYPE_STRING, 
+	    G_TYPE_STRING,
+	    G_TYPE_STRING);
 
     heartbeat = 0;
     GList *directory_list = read_items (&heartbeat);
@@ -153,14 +156,21 @@ xfdir_c::mk_tree_model (void)
 #ifdef HAVE_STRUCT_DIRENT_D_TYPE
 	if (xd_p->d_type == DT_DIR) p=p_dir;
 #endif
-        gtk_list_store_set (list_store, &iter, COL_ACTUAL_NAME, xd_p->d_name,
-                        COL_PIXBUF, get_type_pixbuf(xd_p), -1);
-        gtk_list_store_set (list_store, &iter, COL_DISPLAY_NAME, utf_string(xd_p->d_name),
-                         -1);
+	gchar *utf_name = utf_string(xd_p->d_name);
+	const gchar *icon_name = get_type_pixbuf(xd_p);
+        gtk_list_store_set (list_store, &iter, 
+		COL_DISPLAY_NAME, utf_name,
+		COL_ACTUAL_NAME, g_strdup(xd_p->d_name),
+		COL_ICON_NAME, icon_name,
+                COL_PIXBUF, get_pixbuf(icon_name, GTK_ICON_SIZE_DIALOG ), 
+		-1);
+	g_free(utf_name);
     }
     GList *p = directory_list;
     for (;p && p->data; p=p->next){
-        g_free(p->data);
+	xd_t *xd_p = (xd_t *)p->data;
+        g_free(xd_p->d_name);
+        g_free(xd_p);
     }
     g_list_free(directory_list);
     return GTK_TREE_MODEL (list_store);

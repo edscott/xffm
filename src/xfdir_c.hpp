@@ -14,9 +14,10 @@
 #define HAVE_STRUCT_DIRENT_D_TYPE
 enum
 {
+  COL_PIXBUF,
   COL_DISPLAY_NAME,
   COL_ACTUAL_NAME,
-  COL_PIXBUF,
+  COL_ICON_NAME,
   NUM_COLS
 };
 
@@ -36,7 +37,7 @@ class xfdir_c: public gtk_c, public utility_c {
     private:
         GList *read_items (gint *heartbeat); 
         gint heartbeat;
-	GdkPixbuf *get_type_pixbuf(xd_t *xd_p);
+	const gchar *get_type_pixbuf(xd_t *xd_p);
         gchar *path;
         GtkTreeModel *mk_tree_model(void);
         GtkTreeModel *treemodel;
