@@ -4,6 +4,10 @@
 #include <errno.h>
 #include "pixbuf_icons_c.hpp"
 
+#ifndef PREFIX
+# define PREFIX "/usr"
+#endif
+
 pixbuf_icons_c::pixbuf_icons_c(void){
     utility_p = new utility_c();
     pixbuf_mutex = PTHREAD_MUTEX_INITIALIZER;
@@ -13,9 +17,6 @@ pixbuf_icons_c::pixbuf_icons_c(void){
         throw 1;
     }
     self = g_thread_self();
-#ifndef PREFIX
-# define PREFIX "/usr"
-#endif
     gchar *resource_path = g_build_filename(PREFIX, "share", "icons", "rfm", NULL);
 //    gchar *resource_path = g_build_filename(PREFIX, "share", "icons", "xffm+", NULL);
     gtk_icon_theme_add_resource_path (gtk_icon_theme_get_default (),resource_path);
@@ -29,7 +30,11 @@ pixbuf_icons_c::pixbuf_icons_c(void){
     g_free(path);
 
     // XXX xffm+ svg icons are at
-    // g_build_filename(PREFIX, "share", "icons", "xffm+", "scalable", "emblems", NULL);
+//    path = g_build_filename(PREFIX, "share", "icons", "xffm+", "scalable", "emblems", NULL);
+    path = g_build_filename(PREFIX, "share", "icons", "rfm", "scalable", "emblems", NULL);
+    gtk_icon_theme_prepend_search_path (gtk_icon_theme_get_default (), path);
+//    gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (), path);
+    g_free(path);
 
     g_free(resource_path);
 }
@@ -45,6 +50,12 @@ pixbuf_icons_c::threadwait (void) {
     };
     nanosleep (&thread_wait, NULL);
 }
+
+/*GdkPixbuf *
+pixbuf_icons_c::xffm_icon(const gchar *icon_name, gint size){
+
+}*/
+
 
 gboolean
 pixbuf_icons_c::is_composite_icon_name(const gchar *icon_name){

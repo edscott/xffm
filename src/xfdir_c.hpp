@@ -1,10 +1,10 @@
 #ifndef XFDIR_C_HPP
 #define XFDIR_C_HPP
 
-#include <string.h>
-#include <stdlib.h>
-#include <errno.h>
 #include <gtk/gtk.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 #include "gtk_c.hpp"
 #include "utility_c.hpp"
 
@@ -27,6 +27,7 @@ enum
 typedef struct xd_t{
     gchar *d_name;
     unsigned char d_type;
+    struct stat st;
 }xd_t;
 
 class xfdir_c: public gtk_c, public utility_c {
@@ -42,6 +43,7 @@ class xfdir_c: public gtk_c, public utility_c {
         GList *read_items (gint *heartbeat); 
         gint heartbeat;
 	const gchar *get_type_pixbuf(xd_t *xd_p);
+        const gchar *get_stat_pixbuf(xd_t *, gboolean);
         gchar *path;
         GtkTreeModel *mk_tree_model(void);
         GtkTreeModel *treemodel;
