@@ -27,16 +27,12 @@ typedef struct pixbuf_t {
 static void free_pixbuf_t(void *);
 
 pixbuf_hash_c::pixbuf_hash_c(void){
-    utility_p = new utility_c();
     pixbuf_hash = 
 	g_hash_table_new_full (g_str_hash, g_str_equal,g_free, free_pixbuf_t);
-    pixbuf_mutex = PTHREAD_MUTEX_INITIALIZER;
-    self = g_thread_self();
 }
 
 pixbuf_hash_c::~pixbuf_hash_c(void){
     g_hash_table_destroy (pixbuf_hash);
-    delete utility_p;
 
 }
 
@@ -251,88 +247,53 @@ find_in_pixbuf_hash_f(void *data){
 	    return NULL;
 	}
     }
-    g_object_ref(pixbuf_p->pixbuf);
     return pixbuf_p->pixbuf;
 }
 
 GdkPixbuf *
-pixbuf_hash_c::find_in_pixbuf_hash(const gchar *icon_name, gint size){
-    if (!icon_name) return NULL;
-    // This will report out of date thumbnails/previews as not present
-    // On successful call, returned pixbuf_p->pixbuf will have
-    // an additional reference which must be freed after use...
+pixbuf_hash_c::lookup_icon(const gchar *icon_name, gint size){
     GdkPixbuf *pixbuf = NULL;
     TRACE("find in pixbuf hash: %s(%d)\n", icon_name, size);
     gchar *hash_key = get_hash_key (icon_name, size);
     void *arg[]={(void *)hash_key, (void *) icon_name, GINT_TO_POINTER(size), (void *)pixbuf_hash, (void *)this};
     pixbuf = (GdkPixbuf *)utility_p->context_function(find_in_pixbuf_hash_f, (void *)arg);
     g_free(hash_key);
+   return pixbuf;
+}
+
+// pixbuf_hash_c::find_in_pixbuf_hash()
+// On successful call, NO additional reference to g_object is added
+// Reference to object belongs to hash table and is released
+// on hash table destruction, only (each view has its own
+// hash table).
+GdkPixbuf *
+pixbuf_hash_c::find_in_pixbuf_hash(const gchar *icon_name, gint size){
+    if (!icon_name) return NULL;
+
+    // XXX: FIXME This will report out of date thumbnails/previews as not present 
+    // XXX if no filename found, search in xffm+ svg icons
+    // XXX also add path for application icons
+    //
+    
+    GdkPixbuf *pixbuf = lookup_icon(icon_name, size);
     if (pixbuf) return pixbuf;
 
     // Not found, huh?
-    if(g_path_is_absolute (icon_name)){
-        if (! g_file_test (icon_name, G_FILE_TEST_EXISTS)) {
-            return find_in_pixbuf_hash( "image-missing", size);
-        }
-        // FIXME: (width, height) would be better than (size, size)
-        pixbuf = pixbuf_new_from_file(icon_name, size, size); // width,height.
-        if (pixbuf) {
-            put_in_pixbuf_hash(icon_name, size, pixbuf);
-            return pixbuf;
-        }
-        return find_in_pixbuf_hash( "image-missing", size);
-    }
-    
     // no pixbuf found. Create one and put in hashtable.
-    GtkIconTheme *icon_theme = gtk_icon_theme_get_default ();
-    // if no filename found, search in xffm+ icons
-    // also add path for application icons
-    /* void gtk_icon_theme_add_resource_path (GtkIconTheme *icon_theme,
-                                  const gchar *path);
-                                  */
-    if (icon_theme) {
-        GError *error = NULL;
-        GdkPixbuf *theme_pixbuf = gtk_icon_theme_load_icon (icon_theme,
-                      icon_name,
-                      size, 
-                      GTK_ICON_LOOKUP_FORCE_SIZE,  // GtkIconLookupFlags flags,
-                      &error);
-        if (error) {
-            fprintf(stderr, "pixbuf_hash_c::find_in_pixbuf_hash: error->message\n");
-            g_error_free(error);
-        } else if (theme_pixbuf) {
-            // Release any reference to the icon theme.
-            pixbuf = gdk_pixbuf_copy(theme_pixbuf);
-            g_object_unref(theme_pixbuf);
-        }
+    pixbuf = absolute_path_icon(icon_name, size);
+
+    if (!pixbuf){
+        // check for composite icon definition or plain icon.
+        if (is_composite_icon_name(icon_name)) pixbuf = composite_icon(icon_name, size);
+        else pixbuf = get_theme_pixbuf(icon_name, size);
     }
+   
     if (pixbuf){
         // put in iconhash...
         put_in_pixbuf_hash(icon_name, size, pixbuf);
-    }
-    return pixbuf;
-#if 0
-    if (file) {
-	if (!g_path_is_absolute (file)){
-	    DBG("incorrect type:file association (%s:%s)\n", key,file); 
-	    g_free(file); 
-	    return NULL;
-	}
-        gchar *hash_key = get_hash_key (file, size);
-        void *arg[]={(void *)hash_key, (void *)file, GINT_TO_POINTER(size), (void *)pixbuf_hash};
-	pixbuf = (GdkPixbuf *)utility_p->context_function(find_in_pixbuf_hash_f, (void *)arg);
-        g_free(hash_key);
-	g_free(file);
-	return pixbuf;
-    }
-    // If no source file is associated, we are dealing with a ad hoc icon
-    gchar *hash_key = get_hash_key (key, size);
-    void *arg[]={(void *)hash_key, (void *)key, GINT_TO_POINTER(size), (void *)pixbuf_hash};
-    pixbuf = (GdkPixbuf *)utility_p->context_function(find_in_pixbuf_hash_f, (void *)arg);
-    g_free(hash_key);
-    return pixbuf;
-#endif
-
+        return pixbuf;
+    } 
+    return find_in_pixbuf_hash( "image-missing", size);
 }
 
 
@@ -353,6 +314,42 @@ pixbuf_hash_c::get_hash_key (const gchar * key, gint size) {
 }
 
 
+GdkPixbuf *
+pixbuf_hash_c::composite_icon(const gchar *icon_name, gint size){
+    gchar **tokens = g_strsplit(icon_name, "/", -1);
+    if (!tokens) return NULL;
+    gchar **p = tokens;
+    // format: [icon_name/position/scale/alpha]
+    GdkPixbuf *base_pixbuf =  get_theme_pixbuf(*p, size);
+
+    gint i;
+    for (p=tokens+1; p && *p; p += 4){
+        for (i=1; i<4; i++) if (*(p+i) == NULL) {
+            fprintf(stderr,
+                    "*** pixbuf_icons_c::composite_icon(): incorrect composite specification: %s\n %s\n",
+                    icon_name,
+                    "*** (format: [icon_name/position/emblem_name/scale/alpha])");
+            g_strfreev(tokens);
+            return base_pixbuf;
+        }
+        gchar *position = p[0];
+        gchar *emblem = p[1];
+        gchar *scale = p[2];
+        gchar *alpha = p[3];
+        
+	GdkPixbuf *tag = find_in_pixbuf_hash (emblem, size); 
+	if (!tag) {
+            fprintf(stderr, "pixbuf_hash_c::composite_icon(): Cannot get pixbuf for %s\n", emblem);
+            g_strfreev(tokens);
+            return base_pixbuf;
+        }
+        insert_pixbuf_tag (tag, base_pixbuf, position, scale, alpha);
+    }
+    g_strfreev(tokens);
+
+    return base_pixbuf;
+}
+
 #if 0
 static void *
 replace_pixbuf_hash_f(void *data){
@@ -370,86 +367,4 @@ rfm_replace_pixbuf_hash (void) {
     return;
 }
 #endif
-
-static void *
-pixbuf_new_from_file_f(void *data){
-    void **arg = (void **)data;
-    gchar *path = (gchar *)arg[0];
-    gint width = GPOINTER_TO_INT(arg[1]);
-    gint height = GPOINTER_TO_INT(arg[2]);
-    GError *error = NULL;
-    GdkPixbuf *pixbuf = NULL;
-    if (width < 0) {
-	pixbuf = gdk_pixbuf_new_from_file (path, &error);
-    } else {
-	pixbuf = gdk_pixbuf_new_from_file_at_size (path, width, height, &error);
-    }
-    // hmmm... from the scale_simple line below, it seems that the above two
-    //         functions will do a g_object_ref on the returned pixbuf...
-
-
-    // Gdkpixbuf Bug workaround 
-    // (necessary for GTK-2, still necessary in GTK-3.8)
-    // xpm icons not resized. Need the extra scale_simple. 
-
-
-    //if (pixbuf && width > 0 && gdk_pixbuf_get_width(pixbuf) != width){
-    //if (pixbuf && strstr(path, ".xpm")){
-    if (pixbuf && width > 0 && strstr(path, ".xpm")) {
-	NOOP(stderr, "** resizing %s\n", path);
-	GdkPixbuf *pix = gdk_pixbuf_scale_simple (pixbuf, width, height, GDK_INTERP_HYPER);
-	g_object_unref(pixbuf);
-	pixbuf = pix;
-
-    }  
-    
-/*    if(error && !strstr(path, ".cache/rfm/thumbnails")) {
-	    DBG ("pixbuf_from_file() %s:%s\n", error->message, path);
-	    g_error_free (error);
-    }*/
-    return pixbuf;
-}
-
-GdkPixbuf *
-pixbuf_hash_c::pixbuf_new_from_file (const gchar *path, gint width, gint height){
-    if (!path) return NULL;
-    if (!g_file_test(path, G_FILE_TEST_EXISTS)) return NULL;
-    GdkPixbuf *pixbuf;
-    void *arg[3];
-    arg[0] = (void *)path;
-    arg[1] = GINT_TO_POINTER(width);
-    arg[2] = GINT_TO_POINTER(height);
-#if 1
-    // This gives priority to gtk thread...
-    static gboolean gtk_thread_wants_lock = FALSE;
-    if (self == g_thread_self()) {
-        gtk_thread_wants_lock = TRUE;
-    } else {
-        // hold your horses...
-        while (gtk_thread_wants_lock) threadwait();
-    }
-    pthread_mutex_lock(&pixbuf_mutex);
-
-    //  g_warning("pthread_mutex_trylock(&pixbuf_mutex) on gtk thread failed for %s\n",
-    
-    pixbuf = (GdkPixbuf *)pixbuf_new_from_file_f((void *)arg);
-    pthread_mutex_unlock(&pixbuf_mutex);
-    if (self == g_thread_self()) gtk_thread_wants_lock = FALSE;
-
-#else
-    // This sends everything to the gtk thread... (slow)
-	pixbuf = (GdkPixbuf *)utility_p->context_function(pixbuf_new_from_file_f, (void *)arg);
-#endif
-
-    return pixbuf;
-}
-
-
-void
-pixbuf_hash_c::threadwait (void) {
-    struct timespec thread_wait = {
-        0, 100000000
-    };
-    nanosleep (&thread_wait, NULL);
-}
 

@@ -1,12 +1,12 @@
 #ifndef PIXBUF_HASH_C_HPP
 #define PIXBUF_HASH_C_HPP
 #include <gtk/gtk.h>
-#include "utility_c.hpp"
+#include "pixbuf_icons_c.hpp"
 
 #define USER_XFFM_CACHE_DIR      g_get_user_cache_dir(),"xffm+"
 #define XFFM_THUMBNAIL_DIR 	USER_XFFM_CACHE_DIR,"thumbnails"
 
-class pixbuf_hash_c {
+class pixbuf_hash_c: public pixbuf_icons_c {
     public:
 	pixbuf_hash_c(void);
 	~pixbuf_hash_c(void);
@@ -20,11 +20,8 @@ class pixbuf_hash_c {
         gchar *get_thumbnail_path (const gchar * file, gint size);
         GHashTable *pixbuf_hash;
         gchar *get_hash_key (const gchar *, gint);
-        pthread_mutex_t pixbuf_mutex;
-        GThread *self;
-        GdkPixbuf *pixbuf_new_from_file (const gchar *, gint, gint);
-        void threadwait (void);
-        utility_c *utility_p;
+        GdkPixbuf *lookup_icon(const gchar *, gint);
+        GdkPixbuf *composite_icon(const gchar *, gint);
 };
 
 #endif

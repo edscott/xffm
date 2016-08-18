@@ -1,16 +1,18 @@
 FLAGS = -ggdb -O0 -std=c++11 `pkg-config --cflags gtk+-3.0`
 LIBS = `pkg-config --libs gtk+-3.0` -lpthread
 OBJECTS = xffm_c.o \
-           window_c.o \
-	    tooltip_c.o \
-	    pixbuf_c.o \
-		pixbuf_hash_c.o \
-	   view_c.o  \
+	    window_c.o \
+	    view_c.o  \
 		widgets_c.o   \
 	  signals_c.o \
 	  utility_c.o \
 	  xfdir_c.o \
 	  gtk_c.o \
+	    tooltip_c.o \
+	    pixbuf_c.o \
+		pixbuf_hash_c.o \
+		    pixbuf_icons_c.o \
+			pixbuf_cairo_c.o \
 	  test.o
 
 all: test

@@ -1,3 +1,5 @@
+#include "pixbuf_cairo_c.hpp"
+#include <string.h>
 
 /////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -33,7 +35,7 @@ struct _Data
 * pixbuf_cairo_destroy() to update your pixbuf and free memory.
 */
 cairo_t *
-pixbuf_cairo_create( GdkPixbuf *pixbuf)
+pixbuf_cairo_c::pixbuf_cairo_create( GdkPixbuf *pixbuf)
 {
     if (!pixbuf || !GDK_IS_PIXBUF(pixbuf)) return NULL;
    gint         width,        /* Width of both pixbuf and surface */
@@ -154,7 +156,7 @@ pixbuf_cairo_create( GdkPixbuf *pixbuf)
 * need it anymore.
 */
 GdkPixbuf *
-pixbuf_cairo_destroy( cairo_t  *cr, GdkPixbuf *pixbuf)
+pixbuf_cairo_c::pixbuf_cairo_destroy( cairo_t  *cr, GdkPixbuf *pixbuf)
 {
    gint             width,        /* Width of both pixbuf and surface */
                 height,       /* Height of both pixbuf and surface */
@@ -242,8 +244,8 @@ pixbuf_cairo_destroy( cairo_t  *cr, GdkPixbuf *pixbuf)
 
 /* Edscott Wilson Garcia: create a colored pixbuf mask. */
 
-static GdkPixbuf *
-create_pixbuf_mask(GdkPixbuf *in_pixbuf, guchar red, guchar green, guchar blue){
+GdkPixbuf *
+pixbuf_cairo_c::create_pixbuf_mask(GdkPixbuf *in_pixbuf, guchar red, guchar green, guchar blue){
     g_object_ref(in_pixbuf);
     
     gint        width;        /* Width of both pixbufs */
