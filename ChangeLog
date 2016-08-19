@@ -1,0 +1,224 @@
+* commit 8de79ef9aa183194cfe4c58bc3a8053a219777ce--------------------------
+Date:   Fri Aug 19 12:18:12 2016 -0500
+
+    Installation now finishes correctly defined.
+
+* commit e478b3ad528c7d83f81642cd7b2a54bd2c66e184--------------------------
+Date:   Fri Aug 19 11:17:27 2016 -0500
+
+    Add more installation files
+
+* commit 6797d5b8835b15ef80a231bf07e622acad6eeaab--------------------------
+Date:   Fri Aug 19 10:03:08 2016 -0500
+
+    Added files for configure script
+
+* commit 38bd03d24f270588672aef2cefce9ae09c1cf549--------------------------
+Date:   Thu Aug 18 21:34:58 2016 -0500
+
+    Avoid highlight in large directories
+    
+     highlight hogs cpu in large directories. Just as no stat nor composite icons
+     in directories with more than 500 elements, no highlighting is done either.
+
+* commit a395848981ceee96f3cddc8ce214485f1050d02e--------------------------
+Date:   Thu Aug 18 21:19:56 2016 -0500
+
+    Finished details for icon emblems
+    
+    * Bug detected: cpu hog on large directories (/usr/bin)
+
+* commit 95adf7e46e10a99988d8cd74a882625f029ebb14--------------------------
+Date:   Thu Aug 18 16:57:08 2016 -0500
+
+    Tweaks on emblems for icons with stat
+    
+    final checks pending
+
+* commit a11149ddf4d7f6042ade8d82493ab85d846dd3f7--------------------------
+Date:   Thu Aug 18 12:15:46 2016 -0500
+
+    Added composite icon code with cairo class
+    
+    * not yet tested. Still need to generate emblem svg icons.
+
+* commit e8017f870c7ea4611e670f2a67764a1fcd398588--------------------------
+Date:   Wed Aug 17 16:55:48 2016 -0500
+
+    icon highlighting
+    
+    next in highlighting will be to use dt_type to determine icon type for
+    highlighting . Document new for documents and execute for executables.
+
+* commit 8ab73be2765662c19dd3fcf2b388e8ced91420e2--------------------------
+Date:   Tue Aug 16 21:14:15 2016 -0500
+
+    Icon highlighting
+    
+    Icon magnifies, but does not shrink. Does not look too good without
+    svg icons. Maybe just do a composite pixbuf instead...
+
+* commit 7233201a5f57e981c73be07d52bdbef8fbab10c8--------------------------
+Date:   Tue Aug 16 17:14:11 2016 -0500
+
+    Mouse motion now identifies icon
+    
+    now we need dual pixbuf to replace on motion. Probably just the
+    same pixbuf but scaled up (magnified)
+
+* commit af619e25d231dbeb34d29b16622e7adb35587cb2--------------------------
+Date:   Mon Aug 15 17:22:35 2016 -0500
+
+    Iconview now navigating
+    
+    * single click navigation in iconview
+    * lost a lot of time trying to format add page button as a tab page and
+      finally opted for alternate format.
+    * treemodel belongs to xfdir_c class.
+
+* commit 0281b301df0aac17a0e6e7cb7bc9474af7ed59dc--------------------------
+Date:   Sat Aug 13 21:58:26 2016 -0500
+
+    Move include file into source .cpp
+    
+    Easier for Makefile.
+
+* commit 3e16b57e8132ff08e1f79f931d092fb686e293b3--------------------------
+Date:   Sat Aug 13 16:24:20 2016 -0500
+
+    view callbacks
+
+* commit 97b7eb8f235fbf5d446a33d5c18ea474ca16d3c4--------------------------
+Date:   Fri Aug 12 21:00:08 2016 -0500
+
+    callback file
+
+* commit be3226af5da022df0f35e746468b65de767cf7f9--------------------------
+Date:   Fri Aug 12 14:55:20 2016 -0500
+
+    Cleanups and optimizations
+    
+    * trying to get the no switch to add-page tab to work. Not yet figured
+      out
+    * added all callback templates for notebook. Weird thing, remove page
+      switch page are called multiple times! ???
+
+* commit 9b7bd36c0ea721268252fabe23ccc6d5902784d6--------------------------
+Date:   Thu Aug 11 21:11:11 2016 -0500
+
+    Iconview directory now shown in first tab
+    
+    * need to fix cell size
+    * need to fix window resize to smaller
+    * need to add icon click callback
+    * need to add icon enter/leave callbacks
+
+* commit 4595ef0f5d57cf2f7625132cd15683756b8fe29a--------------------------
+Date:   Thu Aug 11 16:52:56 2016 -0500
+
+    Started with xfdir_c class to populate iconview
+    
+    not yet working. Crash.
+
+* commit b347753260172d0635fd9e70b90dfb3b144cfcb9--------------------------
+Date:   Thu Aug 11 12:42:34 2016 -0500
+
+    Enable tab close button
+    
+    * classes simplified: view_p absorbs notebook_c and xffm_c gets very
+    * basic.
+
+* commit 7dc4a96b22fdd7654e78046b11c8d1a3cd28655d--------------------------
+Date:   Wed Aug 10 17:22:47 2016 -0500
+
+    Added the tab page to create new view_c objects
+    
+    This coding is darn addictive. I gotta quit today and do some other work
+    tomorrow!
+
+* commit c785d6a92a4b506b59cb1bf39071b76b22ba04e7--------------------------
+Date:   Wed Aug 10 13:31:41 2016 -0500
+
+    Reflect utility_c class promotion in Makefile
+
+* commit a8bd93574b49611ae1009ef48b582f5c55853c2f--------------------------
+Date:   Wed Aug 10 13:23:23 2016 -0500
+
+    Enabled pixbuf_hash_c class and now using it.
+    
+    pixbuf_c class is entry point
+
+* commit 9d681acd91fd44bec70dd585c8519a683f9ef83a--------------------------
+Date:   Tue Aug 9 21:09:37 2016 -0500
+
+    Work on pixbuf classes
+    
+    Problem with 3.20, set_box_gradient not working as in 3.16
+    Text color in tip has been set to white, but this won't work with
+    box gradiant active.
+
+* commit d42655b846380f9feafec38d9a14ff85492b282c--------------------------
+Date:   Tue Aug 9 16:56:09 2016 -0500
+
+    Old C code to be optimized and ported.
+
+* commit 266ec90e302f139bdf1264559c1ad4493af86c23--------------------------
+Date:   Tue Aug 9 16:30:36 2016 -0500
+
+    Start with pixbuf_c class
+    
+    This will be more elaborate. For starters will get pixbuf
+    from image and handle pixbuf hashtable...
+
+* commit ded702b9671fa4a00a904aeee1b47e9a4ad1cf5e--------------------------
+Date:   Tue Aug 9 10:25:50 2016 -0500
+
+    Tooltip class now compiles
+    
+    Now we are missing the pixbuf_c class to enable the pixbuf hash table
+    to keep speed up to specs...
+
+* commit 68105fcfc0b277e63139f6fb9f4ef63dd5ab219a--------------------------
+Date:   Mon Aug 8 17:45:24 2016 -0500
+
+    Beginning with tooltip_c class
+    
+    Does not compile yet.
+
+* commit c8445e0f1eb6b78fd046b7892fae3f5f25962c63--------------------------
+Date:   Mon Aug 8 14:02:56 2016 -0500
+
+    Basic view_c now compiles and displays
+    
+    next... lpterm activation. This requieres capturing keyboard input...
+    --> split status from icon.
+    next... tooltip activation, signal activation,
+    then... iconview activation
+    then... Dnd
+    then... popup menu
+    then... toolbar buttons and pathbar
+    then... process buttons
+
+* commit 95949ab84283316176a1657d4811aa94409a9e41--------------------------
+Date:   Sat Aug 6 21:51:02 2016 -0500
+
+    Starting to create a running gtk program
+    
+    Not yet compiling in full...
+
+* commit 766d99a09466e5e39e806431c7fab793cce9cadd--------------------------
+Date:   Sat Aug 6 12:59:47 2016 -0500
+
+    More development of initial classes
+
+* commit e327c4c148c9c9376b10acdecde44c973dc30bd7--------------------------
+Date:   Fri Aug 5 14:58:13 2016 -0500
+
+    Initial code
+    
+    In progress... building up from scratch.
+
+* commit 70badb1bb00d0aab61c79a71f94d344415ec0050--------------------------
+Date:   Fri Aug 5 10:20:14 2016 -0500
+
+    Initial commit

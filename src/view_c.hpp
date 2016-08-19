@@ -23,6 +23,7 @@ class view_c:public widgets_c {
         void clear_highlights(const gchar *);
         void reload(const gchar *);
         void remove_page(void);
+        void set_page_label(void) ;
 
     protected:
 
@@ -33,7 +34,6 @@ class view_c:public widgets_c {
         GHashTable *highlight_hash;
         gboolean dirty_hash = FALSE;
 
-        
         void init(void);
         void pack();
         void signals();

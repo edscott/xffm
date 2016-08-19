@@ -262,11 +262,19 @@ view_c::~view_c(void){
     pthread_rwlock_destroy(&population_lock);
 }
 
+void
+view_c::set_page_label(void){
+    gchar *tab_label = g_path_get_basename(xfdir_p->get_label());
+    gtk_label_set_markup(GTK_LABEL(page_label), tab_label);
+    g_free(tab_label);
+}
+
 gint 
 view_c::get_dir_count(void){ return xfdir_p->get_dir_count();}
 void
 view_c::reload(const gchar *data){
     xfdir_p->reload(data);
+    set_page_label();
 }
 
 void

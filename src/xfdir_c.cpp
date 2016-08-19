@@ -19,6 +19,9 @@ xfdir_c::~xfdir_c(void){
     g_object_unref(treemodel);
 }
 
+const gchar *
+xfdir_c::get_label(void){return (const gchar *)path;}
+
 static gint
 compare_type (const void *a, const void *b) {
     const xd_t *xd_a = (const xd_t *)a;

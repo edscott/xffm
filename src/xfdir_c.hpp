@@ -36,6 +36,7 @@ class xfdir_c: public gtk_c, public utility_c {
         gint get_icon_size(const gchar *);
         gint get_icon_highlight_size(const gchar *);
 	gint get_dir_count(void);
+        const gchar *get_label();
     private:
         void insert_list_into_model(GList *, GtkListStore *);
         GList *read_items (gint *heartbeat); 

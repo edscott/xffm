@@ -1,0 +1,15 @@
+#!/usr/bin/perl
+
+$_ = `git log  | grep -v Author `;
+@_ = split /\n/;
+open CHANGELOG, ">ChangeLog" or die "Cannot write to ChangeLog\n";
+foreach $_ (@_) {
+    if (/^\n/) {next}
+    if (/^commit/){
+        $_ = "* $_--------------------------\n";
+    } else {
+        $_ .= "\n";
+    }
+    print CHANGELOG $_;
+}
+close CHANGELOG;
