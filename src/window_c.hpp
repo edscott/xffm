@@ -1,6 +1,7 @@
 #ifndef WINDOW_C_HPP
 #define WINDOW_C_HPP
-#include <gtk/gtk.h>
+#include "xffm+.h"
+
 #include "gtk_c.hpp"
 #include "signals_c.hpp"
 #include "utility_c.hpp"

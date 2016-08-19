@@ -1,8 +1,8 @@
 #ifndef WIDGETS_C_HPP
 #define WIDGETS_C_HPP
 #include <iostream>
-#include "intl.h"
-#include "gtk_c.hpp"
+#include "xffm+.h"
+
 
 
 using namespace std;

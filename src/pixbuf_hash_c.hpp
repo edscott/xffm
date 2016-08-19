@@ -1,6 +1,7 @@
 #ifndef PIXBUF_HASH_C_HPP
 #define PIXBUF_HASH_C_HPP
-#include <gtk/gtk.h>
+#include "xffm+.h"
+
 #include "pixbuf_icons_c.hpp"
 
 #define USER_XFFM_CACHE_DIR      g_get_user_cache_dir(),"xffm+"

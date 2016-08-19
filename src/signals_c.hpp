@@ -1,5 +1,6 @@
 #ifndef SIGNALS_C_HPP
 #define SIGNALS_C_HPP
+#include "xffm+.h"
 
 class signals_c {
     public:

@@ -1,8 +1,8 @@
 #ifndef VIEW_C_HPP
 #define VIEW_C_HPP
+#include "xffm+.h"
 #include <string.h>
 #include "utility_c.hpp"
-//#include "signals_c.hpp"
 #include "widgets_c.hpp"
 #include "xfdir_c.hpp"
 

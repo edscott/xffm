@@ -1,5 +1,6 @@
 #ifndef TOOLTIP_C_HPP
 #define TOOLTIP_C_HPP
+#include "xffm+.h"
 #include "utility_c.hpp"
 
 

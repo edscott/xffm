@@ -1,0 +1,68 @@
+ 
+            ===============================
+            SUMMARY OF  XFFM+ CONFIGURATION
+	    ===============================
+--------------------
+General Information:
+--------------------
+                        Package: @PACKAGE@
+	                Version: @VERSION@
+                       uname -s: @UNAME_S@
+                libtool current: @LT_CURRENT@
+		    Host system: @host_cpu@-@host_vendor@-@host_os@
+	     Installation point: @prefix@
+       Pkgconf target directory: @PKG_CONF_DIR@
+	           Gtk+ version: @GTK_VERSION@
+		   GLib version: @GLIB_VERSION@
+		  Cairo version: @CAIRO_VERSION@
+		Gthread version: @GTHREAD_VERSION@
+		Librsvg version: @LIBRSVG_VERSION@
+		 Libxml version: @LIBXML_VERSION@
+		Libtubo version: @TUBO_VERSION@
+		    DBH version: @DBH_VERSION@
+
+------------------
+Compiling Options:
+------------------
+                         CFLAGS: @CFLAGS@
+                        LDFLAGS: @LDFLAGS@
+ 	 	Extra libraries: @LIBS@
+ 		       Archiver: @AR@
+ 		 	 Ranlib: @RANLIB@
+ 	              Debugging: @WITH_DEBUG@
+		        Tracing: @WITH_TRACE@
+		     Core dumps: @WITH_CORE@
+       Large File Support (LFS): @LARGEFILE@
+ Maximum threads for thumbnails: @WITH_MPT@
+         Install desktop images: @INSTALL_IMAGES@
+
+--------
+Modules:
+--------
+            Blowfish encryption: @WITH_BCRYPT@
+           Bash auto completion: @WITH_COMPLETION@
+           Enhanced combo boxes: @WITH_COMBOBOX@
+              Properties dialog: @WITH_PROPERTIES@
+                Mime resolution: @WITH_MIME@
+                  Mime previews: @WITH_MMAGIC@
+             Zip image previews: @WITH_ZMAGIC@
+          Icon theme management: @WITH_ICON@
+
+-------------------------------------
+GNU software (will enhance rfm libs):
+-------------------------------------
+		         GNU ls: @WITH_GNU_LS@
+		         GNU cp: @WITH_GNU_CP@
+		         GNU mv: @WITH_GNU_MV@
+		         GNU ln: @WITH_GNU_LN@
+		         GNU rm: @WITH_GNU_RM@
+		      GNU shred: @WITH_GNU_SHRED@
+		GNU ghostscript: @WITH_GNU_GS@
+
+
+
+
+
+
+
+      

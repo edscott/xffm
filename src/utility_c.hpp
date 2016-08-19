@@ -1,6 +1,7 @@
 #ifndef UTILITY_C_HPP
 #define UTILITY_C_HPP
-#include <gtk/gtk.h>
+#include "xffm+.h"
+
 #include <pthread.h>
 #include <string.h>
 

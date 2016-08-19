@@ -1,6 +1,6 @@
 #ifndef GTK_C_HPP
 #define GTK_C_HPP
-#include <gtk/gtk.h>
+#include "xffm+.h"
 #include "tooltip_c.hpp"
 #include "pixbuf_c.hpp"
 

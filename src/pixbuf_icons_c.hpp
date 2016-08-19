@@ -1,6 +1,7 @@
 #ifndef PIXBUF_ICONS_C_HPP
 #define PIXBUF_ICONS_C_HPP
-#include <gtk/gtk.h>
+#include "xffm+.h"
+
 #include "pixbuf_cairo_c.hpp"
 #include "utility_c.hpp"
 

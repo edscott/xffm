@@ -1,0 +1,14 @@
+src/gtk_c.cpp
+src/pixbuf_cairo_c.cpp
+src/pixbuf_c.cpp
+src/pixbuf_hash_c.cpp
+src/pixbuf_icons_c.cpp
+src/signals_c.cpp
+src/test.cpp
+src/tooltip_c.cpp
+src/utility_c.cpp
+src/view_c.cpp
+src/widgets_c.cpp
+src/window_c.cpp
+src/xfdir_c.cpp
+src/xffm_c.cpp

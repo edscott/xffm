@@ -1,7 +1,6 @@
 #ifndef PIXBUF_CAIRO_C_HPP
 #define PIXBUF_CAIRO_C_HPP
-#include <gtk/gtk.h>
-
+#include "xffm+.h"
 #include <cairo.h>
 
 

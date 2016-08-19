@@ -1,6 +1,7 @@
 #ifndef PIXBUF_C_HPP
 #define PIXBUF_C_HPP
-#include <gtk/gtk.h>
+#include "xffm+.h"
+
 #include "pixbuf_hash_c.hpp"
 
 class pixbuf_c : protected pixbuf_hash_c {

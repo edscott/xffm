@@ -1,0 +1,3929 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- jue may  2 20:11:18 CDT 2013 ---
+#
+# Copyright (C) 2004 Alexander Reinholdt <dustpuppy@mail.berlios.de>.
+# Miguel Angel Quesada <kesadalive@gmail.com>, 2009.
+# Ramón Rey Vicente <ramon.rey@hispalinux.es>, 2003-2004.
+# Jorge González <jorgegonz@svn.gnome.org>, 2004-2012.
+# Albert Abril <albert.abril@gmail.com>, 2006.
+# Juan Percy Rojas Cruz <juanperojas@gmail.com>, 2008-2009.
+# Copyright (C) 2003 Dario Abatianni <eisfuchs@tigress.com>.
+# Adolfo González Blázquez <code@infinicode.org>, 2007.
+# Miguel Rodríguez Núñez <bokerones.fritos@gmail.com>, 2012-2013.
+# Jean Pierre Mazuelos Saavedra <apuyaya@gmail.com>, 2010.
+# Mario Teijeiro Otero <mteijeiro@escomposlinux.org>, 2001-2002.
+# José Antonio Salgueiro <joseantsa@eresmas.net>, 2001.
+# Bryan Alberto Baron Chinchilla <bachinchi@gmail.com>, 2010.
+# Santiago FernÃ¡ndez Sancho <santi@kde-es.org>, 2007-2008.
+# Copyright (C) 2009 Daniel Campos <dcamposf@gmail.com>.
+# Carlos Mayo <carlos.mayo@hispalinux.es>, 2003.
+# Ulrik Sverdrup <ulrik.sverdrup@gmail.com>, 2009.
+# Copyright (C) 2005 Joris Guisson <joris.guisson@gmail.com>.
+# Carlos Mayo HernÃ¡ndez <carlos.mayo@hispalinux.es>, 2003-2005.
+# Nacho Hermoso de Mendoza <gnacho@gmail.com>, 2008.
+# Eneko Lacunza <enlar@iname.com>, 2001-2003.
+# Rafael Munoz Rodriguez <rafaluco@netscape.net>, 2003-2004.
+# Mario Izquierdo <mariodebian@gmail.com>, 2005.
+# Copyright (C) Renchi Raju <renchi@pooh.tam.uiuc.edu>.
+# Traducido por Jose Antonio Salgueiro <developer@telefonica.net.  Agradecimientos: zert, softcatala>.
+# Miguel Angel Ruiz Manzano <mruiz@openminds.cl>, 2009.
+# Juanjo Marin <juanj.marin@juntadeandalucia.es>, 2007.
+# Santiago Erquicia <erqu0001@d.umn.edu>, 2004-2005.
+# Christian Neumair <chris@gnome-de.org>, 2002-2009.
+# Diego Sevilla Ruiz <dsevilla@um.es>, 2000.
+# QA por Carlos Perelló Marín <carlos@gnome-db.org>, 2002.
+# Salvador Gimeno Zanón <salgiza@jazzfree.com>, 2002-2005.
+# Carlos Perelló Marín <carlos@gnome-db.org>, 2000-2003.
+# José Sánchez Moreno <jose@oxigenow.com>, 2007.
+# Juan Manuel Garcia Molina <juanma@superiodico.net>, 2001-2007.
+# Pablo de Vicente <pablo.devicente@gmail.com>, 2000-2008.
+# Lucas Vieites Fariña <lucas@asixinformatica.com>, 2001-2007.
+# Rocio Gallego <traducciones@rociogallego.com>, 2010-2013.
+# Juan Luis Montore Parera <jlm@NOSPAMmontore.net>, 2003-2005.
+# Gustavo Jasso Ahuja <gjasso@gmail.com>, 2012.
+# miguel angel quesada fernandez <kesadalive@gmail.com>, 2008.
+# Kira J. Fernández <kirajfdez@gmail.com>, 2011-2012.
+# Francisco Javier F. Serrador <serrador@cvs.gnome.org>, 2002-2010.
+# Juan Pablo Puerta <ews@madridwireless.net>, 1999.
+# Cherny D. C. Berbesi I. <cberbesi@onuva.com>, 2009.
+# Edited by Krzysztof Luks <kluks@iq.pl>.
+# Héctor García Álvarez <hector@scouts-es.org>, 1999-2002.
+# Sylvia Sánchez <LailahFSF@gmail.com>, 2010-2011.
+# David Paul Peña <eodos0@gmail.com>, 2009-2010.
+# Raúl Miró <cotin@geocities.com>, 2001.
+# Copyright (C) 2004 Jernej Kos <kostko@jweb-network.net>.
+# Mario Young <mayeco@kdemail.net>, 2008.
+# Lucas Garcia <tanke@escomposlinux.org>, 2003.
+# Ernesto Manríquez Mendoza <alejandronova@gmail.com>, 2011.
+# Anthony Vital <anthony.vital@gmail.com>, 2010.
+# Carlos Davila <carluti@users.sourceforge.net>, 2007-2008.
+# Raul Jover Baison <cain@akrata.org>, 2003.
+# Raúl Alexis Betancort Santana <a2363@correo.dis.ulpgc.es>, 1999.
+# Ana María García Molina <ana_gm@eresmas.com>, 2001.
+# Miguel Revilla <yo@miguelrevilla.com>, 2001.
+# Javier Gomez sierras <jgomsi@apolo.umh.es>, 2000.
+# Javier Moreno <javier.moreno@alufis35.uv.es>, 2000.
+# Leandro Machacón <leandroman@gemail.com>, 2010.
+# Copyright (C) 2008 Alejandro Valdes Jimenez <avaldes@gnome.org>.
+# Danilo Vasquez Simonetti <danilo.vasquez@gmail.com>, 2008.
+# Jose Antonio Salgueiro Aquino <developer@telefonica.net>, 2003.
+# Carlos Higuera <higuera.carlos@gmail.com>, 2006.
+# Ignacio Bezanilla Diaz <coder@telefonica.net>, 2004.
+# Ãlvaro PeÃ±a <alvaropg@mac.com>, 2001.
+# Alberto Garcia <info@trebol-a.com>, 2007-2008.
+# Miguel de Icaza,computo,622-4680 <miguel@metropolis.nuclecu.unam.mx>, 1998.
+# Miguel A. Arevalo <marevalo@marevalo.net>, 2002.
+# Copyright (C) 2009 Ulrik Sverdrup <ulrik.sverdrup@gmail.com>.
+# Tomas Moreno <tomas@info.ne.udo.edu.ve>, 2001.
+# Mario Carrion <mario@carrion.mx>, 2010.
+# Q&A, Germán Poo-Caamaño <gpoo@ubiobio.cl>, 2003.
+# Mauricio Araya Polo <mauricio@eazel.com>, 2001.
+# Ignacio A. Poggi <ignaciop.3@gmail.com>, 2008-2009.
+# Claudio Saavedra <csaavedra@alumnos.utalca.cl>, 2004-2009.
+# Federico Mena-Quintero <federico@gimp.org>, 1999.
+# Arturo Espinosa <arturo@ximian.com>, 2001.
+# QA by <asan@euskalnet.net>, 2001.
+# David Prieto <frandavid100@gmail.com>, 2008.
+# Alberto Caso <alberto.caso@adaptia.es>, 2007-2008.
+# Jacinto Capote Robles <fastangel@gmail.com>, 2007-2009.
+# Eduardo García Cebollero <kiwnix@yahoo.es>, 2002.
+# Alberto Pintado <apintado@lycos.es>, 2003.
+# Juan Alfredo Salas Santillana <jsantillana@aqpglug.org.pe>, 2009.
+# David Paul <eodos0@gmail.com>, 2011.
+# Jordi Mallach <jordi@sindominio.net>, 2000-2012.
+# Yonathan Moreno <yonathan@yonathanmoreno.com>, 2012.
+# Miguel Menéndez <mimecar@innerzaurus.com>, 2007.
+# Rafael Rodríguez <apt-drink@gulic.org>, 2005.
+# Rafael Belmonte <eaglescreen@gmail.com>, 2013.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2002-2012.
+# Hector Wilvert Ivan Valdez Reza <ranmaru.hibikiya@gmail.com>, 2013.
+# Santiago Fernandez Sancho <santi@kde-es.org>, 2004-2008.
+# Copyright (C) 2003, 2004 Unai Garro <ugarro@users.sourceforge.net>.
+# Milagros Alessandra Infante Montero <maim92@gmail.com>, 2012.
+# Leticia Martin <leticia.martin@gmail.com>, 2009.
+# Saúl Ortega <sortega4444@gmail.com>, 2010-2011.
+# Markus Slopianka <kamikazow@fishmouth.net>, 2009-2013.
+# eodos <eodos0@gmail.com>, 2010.
+# Unai Garro <ugarro@users.sourceforge.net>, 2003.
+# Miguel Rodríguez Pérez <miguelrp@gmail.com>, 2002.
+# Copyright (C) 2005 Antonio Ognio <gnrfan@gnrfan.org>, 2005.
+# Sun G11n <gnome_int_l10n@ireland.sun.com>, 2002-2003.
+# Carlos Albornoz <carlos@debianchile.cl>, 2009.
+# QA: Carlos Perelló Marín <carlos@gnome-db.org>.
+# javier Vinal <fjvinal@gmail.com>, 2009-2012.
+# Francisco Javier Fernandez Serrador <fserrador@gmail.com>, 2009.
+# Nestor Diaz <nestordiaz@equusdigital.com>, 2006.
+# José Carlos García Sogo <jsogo@arrakis.es>, 2001-2003.
+# Roby Sottini <rsottini@yahoo.com>, 2009.
+# Leticia Martin Hernandez <leticia.martin@gmail.com>, 2009.
+# Lucas Vieites <lucas@codexion.com>, 2002-2008.
+# Germán Poó Caamaño <gpoo@ubiobio.cl>, 2004.
+# Alejandro Valdes Jimenez <avaldes@gnome.org>, 2007-2011.
+# Rafael Muñoz Cárdenas <bymenda@gmail.com>, 2008.
+# Eloy Cuadra <ecuadra@eloihr.net>, 2003-2013.
+# Javier Viñal <fjvinal@gmail.com>, 2009-2013.
+# cyphra <cyphra@hal9000.eui.upm.es>, 2004.
+# Javier Mazorra Rodríguez <mazi.debian@gmail.com>, 2007-2013.
+# Rafael Beccar <rafael.beccar@kdemail.net>, 2004-2006.
+# Felipe Barros S. <felipeb@gnome.cl>, 2007.
+# Chihau Chau <chihau@gmail.com>, 2008-2009.
+# Cesar Garcia Tapia <tapia@eitig.com>, 2004-2005.
+# Ale Hamann <amadeus@bbs.frc.utn.edu.ar>, 2006-2008.
+# Edgardo Rossetto <eros@speedy.com.ar>, 2004.
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2007-2013.
+# Antonio Pijuan <deinde@ono.com>, 2003-2005.
+# Xavier <xavier.corredor.llano@gmail.com>, 2011.
+# Isaac Clerencia <isaac@warp.es>, 2005.
+# Francisco Vila <francisco.vila@hispalinux.es>, 2003-2013.
+# jeffrey steve borbon sanabria <jeffto@aclibre.org>, 2008.
+# Alex Fiestas <alex@eyeos.org>, 2009.
+# santi <santi@kde-es.org>, 2005-2009.
+# Andrés Gómez <agomez@igalia.com>, 2009.
+# Enrique Rodriguez <krm@futurnet.es>, 2003.
+# Alejandro Sáchez Acosta <asanchez@gnu.org>, 2002.
+# Kramer Garay <kramergaray@hotmail.com>, 2010.
+# Copyright (C) 2003 Eric Bischoff <e.bischoff@noos.fr>.
+# sito <soler.sito@gmail.com>, 2008.
+# Adrián Martínez <sfxgt3@gmail.com>, 2009-2010.
+# Miguel de Icaza <miguel@metropolis.nuclecu.unam.mx>, 1998.
+# Antonio Ognio <gnrfan@gnrfan.org>, 2003-2006.
+# Héctor Enríquez Díaz <henrique@alumnos.ubiobio.cl>, 2005.
+# Gary Castillo <elhumano@hotmail.com>, 2001.
+# Miguel Angel Nieto <correo@miguelangelnieto.net>, 2005.
+# Marcos Fouces Lago <mfouces@yahoo.es>, 2004.
+# Francisco Vila Doncel <fravd@wanadoo.es>, 2003.
+# Xavier Corredor Llano <xavier.corredor.llano@gmail.com>, 2010-2012.
+# Gabriel Felipe Cornejo Salas <gnomeusr@gmail.com>, 2008.
+# David Martínez Moreno <ender@debian.org>, 2005.
+# Jesse Avilés <jesseaviles@gmail.com>, 2008-2011.
+# Rafael Bermúdez <rafaelbermudez@gmail.com>, 2006.
+# Benjamín Valero Espinosa <benjavalero@gmail.com>, 2008-2012.
+# Aitor Moreno <aitormoreno@gmail.com>, 2008.
+# Ignacio Casal Quinteiro <icq@cvs.gnome.org>, 2004-2010.
+# Santiago Vila Doncel <sanvila@unex.es>, 2001-2011.
+# Rafael Rodríguez Martín <apt-drink@gulic.org>, 2005.
+# Daniel Calviño Sánchez <danxuliu@gmail.com>, 2008-2012.
+# Alvaro Soliverez <asoliverez@gmail.com>, 2008-2010.
+# Carlos Mayo Hernandez <carlos.mayo@hispalinux.es>, 2007.
+# Nicolás Satragno <nsatragno@gmail.com>, 2011-2013.
+# Jean Pierre MAZUELOS SAAVEDRA <apuyaya@gmail.com>, 2010.
+# Carlos Garnacho <carlosg@gnome.org>, 2007.
+# Vicente Herrera Cobo <vicente.herrera@hispalinux.es>, 2003-2004.
+# Fabian Mandelbaum <fmandelbaum@hotmail.com>, 2003.
+# Enrique Matias Sanchez (Quique) <cronopios@gmail.com>, 2004-2010.
+# JulioBorjaBarra <juboba@gmail.com>, 2010.
+# Israel Garcia Garcia <israelgarcia86@gmail.com>, 2007-2011.
+# María Majadas <alixis82@gmail.com>, 2008-2013.
+# Javier Fernández-Sanguino Peña <jfs@computer.org>, 2002.
+# Germán Poo-Caamaño <gpoo@ubiobio.cl>, 2002-2003.
+# Pablo Pita Leira <pablo.pita@kdemail.net>, 2004-2011.
+# Gabriel Leonardo Ruiz Manzano <debianmaster@gmail.com>, 2008-2009.
+# Juan-Pablo Scaletti <juanpablo@jpscaletti.com>, 2009.
+# Gonzalo L. Campos Medina <gcamposm@gmail.com>.
+# Miguel Angel Quesada Fernandez <kesadalive@gmail.com>, 2008-2011.
+# Chris Leonard <cjl@laptop.org>, 2012.
+# Copyright (C) 2003 Quique <quique@sindominio.net>.
+# Eduardo Sanchez <kde@sombragris.org>, 2003-2010.
+# Lucas Di Pentima <lucas@lunix.com.ar>, 2001-2002.
+# Ismael Rubio Rojas <ismael_rubio_rojas@hotmail.com>, 2003.
+# Francisco Javier Fernández <serrador@arrakis.es>, 2003.
+# Antonio J. Soler Sánchez <redtony@telefonica.net>, 2004.
+# Maria Majadas <maria.majadas@hispalinux.es>, 2005-2011.
+# Raul Moratalla <raul.moratalla@ono.com>, 2004.
+# Antonio Crevillen <antonio.crevillen@hispalinux.es>, 2003.
+# Miguel Revilla RodrÃ­guez <yo@miguelrevilla.com>, 2002-2004.
+# Ignacio Poggi <ignaciop.3@gmail.com>, 2008-2012.
+# Copyright (C) 2007 daniel g. siegel <dgsiegel@gnome.org>.
+# By Nicols Lichtmaier <nick@technisys.com.ar>.
+# Mauricio Araya P. <mauricio@eazel.com>, 2001.
+# Francisco Javier Fernandez <serrador@arrakis.es>, 2003.
+# Juan Jesus Ojeda Croissier <juanjesus.ojeda@hispalinux.es>, 2002.
+# José Antonio Salgueiro A. <joseantsa@eresmas.net>, 2001.
+# Cristina Yenyxe Gonzalez Garcia <the.blue.valkyrie@gmail.com>, 2009-2012.
+# Pedro Jurado Maqueda <pjmelenas@biwemail.com>, 2003-2005.
+# Dominik Neumeister <neudob06@edvhtl.at>, 2009.
+# Luis F. Lopez M. <luis.lopez@ubuntu.com>, 2010.
+# Adolfo Jayme Barrientos <fitoschido@gmail.com>, 2012.
+# Havoc Pennington <hp@pobox.com>, 1999.
+# Tatiana Gutiérrez Bunster <tgutierr@ubiobio.cl>, 2003.
+# Jorge Gonzalez <jorgegonz@svn.gnome.org>, 2005-2007.
+# Andres Herrera <andres@usr.cl>, 2008.
+# sergio rivadero <sergiorivadero@argentina.com>, 2005.
+# Jacobo Tarrío Barreiro <jtarrio@trasno.net>, 2000-2002.
+# Ferro01 <ferro01@wanadoo.es>, 2011.
+# Alejandro Araiza Alvarado <mebrelith@gmail.com>, 2005-2006.
+# Daniel Garcia <dani@danigm.net>, 2010.
+# Copyright (C) 2004 Waldo Bastian <bastian@kde.org>.
+# Danilo Vasquez <danilo.vasquez@gmail.com>, 2007-2008.
+# Jaime Robles <jaime@kde.org>, 2003-2009.
+# Rafael Osuna <rosuna@wol.es>, 2003-2004.
+# Ricardo Fernández Pascual <ric@users.sourceforge.net>, 2000-2001.
+# Carlos Ernesto López Natarén <natorro@themis.fciencias.unam.mx>, 2000.
+# Miguel <migueldeblas@gmail.com>, 2010.
+# Miguel Mingo <miguelmingo@terra.es>, 2002.
+# maria <maria.majadas@hispalinux.es>, 2006-2007.
+# Miguel Cabrera <mfcabrera@gmail.com>, 2005.
+# Juan Emilio Drault <juan@drault.com>, 2004.
+# Jorge Carrasquilla Soares <jorge@conectiva.com.br>, 2000.
+# Gerardo Jose Bueno Jimenez <gerardo@abser-t.com>, 2010.
+# Germán Poo Caamaño, <gpoo@ubiobio.cl>, 2002.
+# Rodrigo Marcos Fombellida <rmarcos@cvs.gnome.org>, 2005-2008.
+# Andrea Mara Pimenta Alonso <pimenta@conectiva.com.br>, 2000.
+# Mikel Olasagasti <hey_neken@mundurat.net>, 2003-2005.
+# Matías Costa <mcc3@alu.um.es>, 2004-2007.
+# Jaime Iniesta Alemán <capitanplaneta@gmail.com>, 2005-2006.
+# Miguel Revilla Rodríguez <yo@miguelrevilla.com>, 2002-2004.
+# Lorenzo nunez <lorenzo.nunez@gmail.com>, 2007.
+# J. Félix Ontañón <fontanon@emergya.es>, 2009.
+# Adrian Soto <adrianmatematico@yahoo.com.mx>, 2003-2004.
+# Paulino Padial <devnull.tst@gmail.com>, 2007.
+# Manue Tortosa <manutortosa@chakra-project.org>, 2011.
+# Gladys Guerrero <gguerrer@redhat.com>, 2010.
+# Copyright (C) 2003 Robby Stephenson <robby@periapsis.org>.
+# miguel <bokerones.fritos@gmail.com>, 2012.
+# Boris Wesslowski <Boris@Wesslowski.com>, 1999-2001.
+# Alonso Lara <keko@khor-ha.net>, 1998-2005.
+# Copyright (C) 2004-2005 Johan Svedberg <johan@svedberg.com>.
+# Pablo Gonzalo del Campo <pablodc@bigfoot.com>, 2000-2004.
+# Itxaka Serrano <itxakaserrano@gmail.com>, 2010.
+# Adrián Chaves Fernández (Gallaecio) <adriyetichaves@gmail.com>, 2010-2013.
+# Jesse Aviles <jesseaviles@gmail.com>, 2008-2010.
+# Lucas 'Basurero' Vieites <lucas@asixinformatica.com>, 2001-2007.
+# Martín Carr <tincarr@gmail.com>, 2005-2008.
+# Mauricio Jose Adonis Carrasco <mike.alfa.2007@gmail.com>, 2008.
+# QA - Germán Poo Caamaño <gpoo@ubiobio.cl>, 2002.
+# Marco César Gloria <mgloria@campus.gda.itesm.mx>, 2000.
+# Germán Poo Caamaño <gpoo@ubiobio.cl>, 2001-2003.
+# Raul Gonzalez <raulgf83@gmail.com>, 2010-2013.
+# Javier Jardón <jjardon@gnome.org>, 2002-2010.
+# Gabriel Ruiz <debianmaster@gmail.com>, 2008.
+# Pablo Iranzo Gómez <Pablo.Iranzo@uv.es>, 2000.
+# Pablo G. del Campo <pablodc@bigfoot.com>, 2003-2004.
+# Andreu Correa Casablanca <castarco@gmail.com>, 2009.
+# Miguel Perez Ibars <mpi79470@alu.um.es>, 2006.
+# Carlos Mayo Hernández <carlos.mayo@hispalinux.es>, 2003-2005.
+# Juan Manuel García Molina <juanma_gm@wanadoo.es>, 2000-2007.
+# Manuel de Vega Barreiro <barreiro@arrakis.es>, 2000-2002.
+# Luis Lopez <luis@loxi.ca>, 2010-2011.
+# Jordi Jaen Pallares <jordi@suse.de>, 1999-2001.
+# Novell Language <language@novell.com>, 2006-2009.
+# Sito Soler <soler.sito@gmail.com>, 2008.
+# Daniel Fernandez <dfdez@ya.com>, 2005.
+# Neumeister Dominik <neudob06@edvhtl.at>, 2009.
+# Vicente Aguilar <vaguilar@retemail.es>, 1999.
+# Hector Garcia Alvarez <hector@scouts-es.org>, 2001-2002.
+# Zohra Coudoin <zohra.coudoin@free.fr>, 2000.
+# Antonio de la Torre <adltorre@terra.es>, 2001.
+# First author: Enrique Matias Sanchez (aka Quique) <cronopios@gmail.com>, 2003.
+# Alejandro Pinheiro <apinheiro@igalia.com>, 2009.
+# Enrique Matias Sanchez <cronopios@gmail.com>, 2004-2011.
+# edscott@users.sourceforge.net, 2001-2, 2001-4, 2001-5, 2001-7, 2002-1, 2002-3 <>.
+# Copyright (C) 2003 Martin Grimme <martin@pycage.de>.
+# Quique <quique@sindominio.net>, 2003-2011.
+# Manuel Tortosa <manutortosa@chakra-project.org>, 2009-2012.
+# Daniel Baeyens <danibens@terra.es>, 2002-2007.
+# Juan Carlos Vallejo <urizev@gmail.com>, 2007.
+# Jorge Bustos <jorge@gnome.cl>, 2003.
+# Urizev <urizev@gmail.com>, 2007.
+# Federico Mena Quintero,Pregonero <federico@casiopea.quartic.org>, 1998.
+# Ricardo González Castro <rick@jinlabs.com>, 2007.
+# MIguel Angel Quesada Fernandez <kesadalive@gmail.com>, 2008.
+# Andrés Herrera <andres@usr.cl>, 2008.
+# Nicolás Alvarez <nicolas.alvarez@gmail.com>, 2010.
+# Javier Vinal <fjvinal@gmail.com>, 2009-2013.
+# miguel rodriguez nuñez <bokerones.fritos@gmail.com>, 2012-2013.
+# Ayoze Hernández Díaz <ayoze12@gmail.com>, 2013.
+# Jesús Bravo Álvarez <suso@trasno.net>, 1999-2004.
+# Ibán josé García Castillo <Iban.Garcia@alufis35.uv.es>, 2000.
+# Sergio Rivadero <sergiorivadero@argentina.com>, 2006.
+# Rodrigo Sancho Senosiain <ruy_ikari@bigfoot.com>.
+# Susana González <sgonzalez@igalia.com>, 2007.
+# Javier Gómez <jgomsi@apolo.umh.es>, 2000.
+# Cristina Yenyxe González García <the.blue.valkyrie@gmail.com>, 2009-2013.
+# Rolando Espinoza La Fuente <darkrho@gmail.com>, 2007.
+# Javier Conde Rueda <f3285740@est.fib.upc.es>, 2003.
+# Franco Mariluis <fmariluis@gmail.com>, 2008-2009.
+# Xavier de Blas <xaviblas@gmail.com>, 2005-2010.
+# Copyright (C) 2004  Rodney Dawes <dobey@novell.com>.
+# Ismael Olea <ismael@olea.org>, 2000-2003.
+# Guillermo Largaespada <heresul@gmail.com>, 2008-2010.
+# Sergio Rubio <sergio.rubio@hispalinux.es>, 2004.
+# Kira J. Fernandez <kirajfdez@gmail.com>, 2009-2013.
+# Fco. Javier Fernandez <serrador@arrakis.es>, 2003.
+# Copyright (C) 2004 Percy Leonhardt <percy@eris23.de>.
+# Santi <santi@kde-es.org>, 2008-2010.
+# Marlon Cisternas Milla <marlitoo@gmail.com>, 2008.
+# Ricardo Varas Santana <ricardoivaras@gmail.com>, 2009-2013.
+# Israel Campoy <churritzu@yahoo.com>, 2012.
+# Baltasar Perez Diaz <baltasar.perez@hispalinux.es>, 2002.
+# Xan López <xan@dimensis.com>, 2002.
+# Tambet Ingo <tambet@novell.com>, 2009.
+# Iñaky Pérez González <inaky@peloncho.fis.ucm.es>, 1996.
+# Rodrigo Moya <rmoya@chez.com>, 1999.
+# Salvador Gimeno <salgiza@jazzfree.com>, 2001.
+# Enrique Matias Sanchez (aka Quique) <cronopios@gmail.com>, 2003-2012.
+# Eduardo Retamales <eretamales@gnome.cl>, 2007-2008.
+# Copyright (C) 2003 Jeroen S. Wijnhout <Jeroen.Wijnhout@kdemail.net>.
+# Copyright (C) 2003 Petter E. Stokke <gibreel@project23.no>.
+# Spanish message file for YaST2 (@memory@). <>.
+# Pablo Saratxaga <pablo@walon.org>, 1998-2007.
+# Gustavo D. Vranjes <gvranjes@abaconet.com.ar>, 2002.
+# Aitor Morant <fromhell091@gmail.com>, 2013.
+# Joaquín Ignacio Aramendía <samsagax@gmail.com>, 2011.
+# Sebi Kul <sebikul@gmail.com>, 2011.
+# Pedro Villavicencio Garrido <pvillavi@gnome.org>, 2005.
+# José María Pongilioni <ponghy@ono.com>, 2001.
+# Edgardo García Hoeffler <edybsd@yahoo.com.ar>, 2002.
+# Edscott Wilson Garcia <edscott@users.sf.net>, 2002-2011.
+# Pablo del Campo <pablodc@bigfoot.com>, 2003.
+# Ricardo Mones Lastra <mones@users.sourceforge.net>, 2002.
+# Copyright (C) Wouter Bolsterlee <wbolster@gnome.org>.
+# Ariel Rios <jarios@usa.net>, 1999.
+# Alex Araiza <mebrelith@gmail.com>, 2005.
+# Ulises Genis <ulises.genis@gmail.com>, 2008-2009.
+# Emmanuel Milou <emmanuel.milou@savoirfairelinux.com>, 2008.
+# Gabriel Gazzan <gabcorreo@gmail.com>, 2011.
+# Thomas Niederreiter <tn@xcdroast.org>, 2002-2003.
+# philippe Rouquier <brasero-app@wanadoo.fr>, 2005.
+# <srtxg@chanae.alphanet.ch>, 2001-2011.
+# Dario Andres Rodriguez <andresbajotierra@gmail.com>, 2008-2009.
+# Juan Matías Olmos <colonizare@yahoo.com.ar>, 2012.
+# Jorge Bernal <koke@amedias.org>, 2004-2006.
+# Juanje Ojeda <jojeda@emergya.es>, 2008.
+# Enrique Matías Sánchez (Quique) <cronopios@gmail.com>, 2009.
+# Chema Celorio <chema@celorio.com>, 2000.
+# Ernesto Manríquez <alejandronova@gmail.com>, 2011.
+# Gilberto Miralla <xyhthyx@gmail.com>, 2007-2008.
+# Daniel Campos <dcamposf@gmail.com>, 2009.
+# Ezequiel Pérez <eazel7@yahoo.com.ar>, 2003.
+# Oscar Cebellán Ramos <cebaman@bigfoot.com>, 2001.
+# Yelitza Louze <ylouze@redhat.com>, 2003.
+# Mvillarino <mvillarino@dubmail.net>, 2005-2008.
+# Stephen Denham <stephen.denham@gmail.com>, 2007.
+# Miguel Navarrete Hernandez <recados.akka@gmail.com>, 2013.
+# Juanje Ojeda Croissier <jojeda@emergya.es>, 2008-2010.
+# Santiago Fernández Sancho <santi@kde-es.org>, 2007-2010.
+# Jesús Espino García <jespino@imap.cc>, 2004.
+# Alberto Serrano <apserrano@bbvnet.com>, 2001.
+# Israel Garcia <israelgarcia86@gmail.com>, 2007-2008.
+# Omar Campagne <ocampagne@gmail.com>, 2009.
+# Francisco Javier Dorado Martínez <javier@tiflolinux.org>, 2007-2011.
+# First author: Quique <quique@sindominio.net>, 2003.
+# Matias Costa <mcc3@alu.um.es>, 2005.
+# Pablo Saratxga <srtxg@chanae.alphanet.ch>, 1999.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-01-15 09:16-0600\n"
+"PO-Revision-Date: 2011-10-18 15:26+0200\n"
+"Last-Translator: Santiago Vila Doncel <sanvila@unex.es>\n"
+"Language-Team: Spanish <es@li.org>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8-bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .././primary/primary-icons.i:83
+msgid "image"
+msgstr "imagen"
+
+#: .././primary/primary-icons.i:84
+msgid "Audio"
+msgstr "Sonido"
+
+#: .././primary/primary-icons.i:85
+msgid "Video"
+msgstr "Vídeo"
+
+#: .././primary/primary-icons.i:86
+msgid "office"
+msgstr "Oficina"
+
+#: .././primary/primary-icons.i:87
+msgid "chemical"
+msgstr "Químico"
+
+#: .././primary/primary-icons.i:88
+#, fuzzy
+msgid "lyx"
+msgstr ""
+
+#: .././primary/primary-icons.i:89
+#, fuzzy
+msgid "tex"
+msgstr "texto"
+
+#: .././primary/primary-icons.i:90
+msgid "text"
+msgstr "texto"
+
+#: .././primary/primary-icons.i:91
+msgid "log"
+msgstr "log"
+
+#: .././primary/primary-icons.i:92
+msgid "readme"
+msgstr "léeme"
+
+#: .././primary/primary-icons.i:93
+msgid "credits"
+msgstr "Créditos"
+
+#: .././primary/primary-icons.i:94
+msgid "authors"
+msgstr "autores"
+
+#: .././primary/primary-icons.i:95
+msgid "install"
+msgstr "instalar"
+
+#: .././primary/primary-icons.i:96
+msgid "info"
+msgstr "información"
+
+#: .././primary/primary-icons.i:97
+msgid "html"
+msgstr "html"
+
+#: .././primary/primary-icons.i:98
+msgid "chdr"
+msgstr ""
+
+#: .././primary/primary-icons.i:99
+msgid "c++hdr"
+msgstr ""
+
+#: .././primary/primary-icons.i:100
+msgid "csrc"
+msgstr ""
+
+#: .././primary/primary-icons.i:101
+msgid "c++"
+msgstr "C++"
+
+#: .././primary/primary-icons.i:102
+msgid "App"
+msgstr "Apl"
+
+#: .././primary/primary-icons.i:103
+msgid "graphics"
+msgstr "gráficos"
+
+#: .././primary/primary-icons.i:104
+#, fuzzy
+msgid "pgp"
+msgstr "pg"
+
+#: .././primary/primary-icons.i:105
+msgid "trash"
+msgstr "papelera"
+
+#: .././primary/primary-icons.i:106
+msgid "pdf"
+msgstr "pdf"
+
+#: .././primary/primary-icons.i:107
+msgid "ps"
+msgstr "ps"
+
+#: .././primary/primary-icons.i:108
+#, fuzzy
+msgid "msoffice"
+msgstr "soffice.bin"
+
+#: .././primary/primary-icons.i:109
+msgid "package"
+msgstr "paquete"
+
+#: .././primary/primary-icons.i:110
+msgid "executable"
+msgstr "Ejecutable"
+
+#: .././primary/primary-icons.i:111
+msgid "script"
+msgstr "guión"
+
+#: .././primary/primary-icons.i:112
+msgid "core"
+msgstr "core"
+
+#. Only in the event that a valid mime type is not found,
+#. and magic option is set, do magic.
+#. Resolve icon id from mimetype or mimemagic.
+#. Override of particular mimetypes
+#. (except for directories)
+#: .././primary/primary-icons.i:410 .././primary/primary-icons.i:971
+#: .././primary/primary-icons.c:1081 .././primary/primary-icons.c:1086
+#: .././primary/primary-icons.c:1094 .././primary/primary-icons.c:1101
+#: .././primary/primary-icons.c:1108 .././primary/primary-preview.c:424
+#: .././primary/primary-preview.c:431 .././modules/properties-module.i:541
+#: .././modules/properties-module.i:543 .././modules/properties-module.i:827
+#: .././modules/properties-module.i:867 .././modules/mime-module.c:250
+#: .././modules/callbacks.i:212 .././modules/callbacks.i:214
+#: .././modules/callbacks.i:220 .././modules/callbacks.i:222
+#: .././modules/callbacks.i:523 .././modules/callbacks.i:526
+#: .././modules/callbacks.i:530 .././modules/callbacks.i:1781
+#: .././modules/callbacks.i:1784 .././modules/callbacks.i:1786
+#: .././modules/callbacks.i:1789 .././modules/callbacks.i:2232
+#: .././modules/callbacks.i:2236 .././modules/callbacks.i:2238
+#: .././modules/callbacks.i:2241 .././modules/mime-mouse_magic.i:104
+#: .././modules/mime-mouse_magic.i:114 .././modules/mime-mouse_magic.i:406
+#: .././modules/dialogs.i:612 .././rodent/xfdir.i:719 .././rodent/xfdir.i:721
+#: .././rodent/xfdir.i:737 .././rodent/xfdir.i:813 .././rodent/xfdir.i:816
+#: .././rodent/xfdir.i:827 .././rodent/xfdir.i:830
+#: .././rodent/rodent_tip.c:381 .././rodent/rodent_tip.c:387
+#: .././rodent/rodent_tip.c:389 .././rodent/rodent_tip.c:394
+#: .././rodent/rodent_tip.c:396 .././rodent/rodent_tip.c:401
+#: .././rodent/rodent_tip.c:416 .././rodent/rodent_tip.c:631
+#: .././rodent/rodent_tip.c:632 .././rodent/rodent_tip.c:1020
+#: .././rodent/rodent_tip.c:1030 .././rodent/rodent_popup.i:172
+#: .././rodent/rodent_popup.i:174 .././rodent/rodent_popup.c:529
+#: .././rodent/rodent_popup.c:532 .././rodent/rodent_popup.c:533
+#: .././rodent/rodent_popup.c:545 .././rodent/rodent_popup.c:547
+msgid "unknown"
+msgstr "desconocido"
+
+#: .././primary/primary-icons.c:464
+msgid "Icon theme:"
+msgstr "Tema de iconos:"
+
+#: .././primary/primary-icons.c:464 .././rodent/rodent_mouse.i:767
+#: .././rodent/rodent_mouse.i:886
+msgid "None"
+msgstr "Ninguno"
+
+#: .././primary/primary-icons.c:465
+msgid "Note: Some changes will not take effect until restart"
+msgstr "Nota: Algunos cambios no tendrán efecto hasta que reinicie"
+
+#: .././primary/primary-icons.c:1096 .././primary/primary-icons.c:1111
+#: .././modules/mimemagic.c:97 .././modules/mimemagic.c:118
+msgid "No Read Permission"
+msgstr "Sin permiso de lectura"
+
+#: .././primary/primary-entry.c:269 .././modules/mime-mouse_magic.i:415
+msgid "Directory"
+msgstr "Directorio"
+
+#: .././primary/primary-entry.c:270
+msgid "binary"
+msgstr "binary"
+
+#: .././primary/primary-entry.c:276 .././modules/mime-mouse_magic.i:412
+msgid "Character device"
+msgstr "Dispositivo caracteres"
+
+#: .././primary/primary-entry.c:277 .././primary/primary-entry.c:284
+#: .././primary/primary-entry.c:291 .././primary/primary-entry.c:298
+msgid "C"
+msgstr "C"
+
+#: .././primary/primary-entry.c:283 .././modules/mime-mouse_magic.i:409
+msgid "Block device"
+msgstr "Dispositivo de bloques"
+
+#: .././primary/primary-entry.c:290 .././modules/mime-mouse_magic.i:418
+msgid "FIFO"
+msgstr "FIFO"
+
+#: .././primary/primary-entry.c:297 .././modules/mime-mouse_magic.i:427
+msgid "Socket"
+msgstr "Socket"
+
+#. strftime format for non-recent files (older than 6 months), in
+#. -l output when --time-style=locale is specified.  This should
+#. contain the year, month and day (at least), in an order that is
+#. understood by people in your locale's territory.
+#. Please try to keep the number of used screen columns small,
+#. because many people work in windows with only 80 columns.  But
+#. make this as wide as the other string below, for recent files.
+#. strftime format for non-recent files (older than 6 months)
+#: .././primary/primary-ls.i:182 .././primary/primary.c:827
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+#. strftime format for recent files (younger than 6 months), in
+#. -l output when --time-style=locale is specified.  This should
+#. contain the month, day and time (at least), in an order that is
+#. understood by people in your locale's territory.
+#. Please try to keep the number of used screen columns small,
+#. because many people work in windows with only 80 columns.  But
+#. make this as wide as the other string above, for non-recent files.
+#. strftime format for recent files
+#: .././primary/primary-ls.i:190 .././primary/primary.c:829
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
+
+#: .././primary/primary-misc.c:853 .././primary/primary-environment.c:52
+msgid "Console Message Viewer"
+msgstr "Visor de mensajes de consola"
+
+#: .././primary/primary-misc.c:897 .././modules/touch.i:396
+#: .././include/rodent_actions.h:379
+msgid "Close"
+msgstr "Cerrar"
+
+#: .././primary/primary-misc.c:901 .././modules/settings-module.i:2556
+#: .././modules/xmltree.i:525
+msgid "Clear"
+msgstr "Limpiar"
+
+#: .././primary/primary-misc.c:906
+msgid "Iconify"
+msgstr "Iconizar"
+
+#: .././primary/primary-misc.c:962 .././modules/touch.i:234
+#: .././rodent/rodent_mouse.i:884
+#, c-format
+msgid "%'d item selected"
+msgid_plural "%'d items selected"
+msgstr[0] "%'d elemento seleccionado"
+msgstr[1] "%'d elementos seleccionados"
+
+#: .././primary/primary-misc.c:985 .././rodent/rodent_tip.c:526
+#, c-format
+msgid " (containing %'d item)"
+msgid_plural " (containing %'d items)"
+msgstr[0] " (contiene %'d elemento)"
+msgstr[1] " (contiene %'d elementos)"
+
+#: .././primary/primary-misc.c:2296 .././modules/dialogs.i:1031
+msgid "sudo"
+msgstr "sudo"
+
+#. no selection
+#: .././primary/primary-misc.c:2298 .././modules/callbacks.i:473
+#: .././modules/dialogs.i:1033
+msgid "Command:"
+msgstr "Comando:"
+
+#: .././primary/primary-misc.c:2301 .././modules/dialogs.i:1036
+msgid "Permission denied"
+msgstr "Permiso denegado"
+
+#: .././primary/primary-misc.c:2302 .././modules/dialogs.i:1037
+msgid "Try to approach a problem from different angles."
+msgstr "Intenta enfocar los problemas desde ángulos diferentes."
+
+#: .././primary/primary-misc.c:2303 .././modules/dialogs.i:1038
+msgid "Do you want to retry?"
+msgstr "¿Desea volver a intentarlo?"
+
+#: .././primary/primary-misc.c:2304 .././modules/dialogs.i:1039
+msgid "Alternate:"
+msgstr "Alternativo:"
+
+#: .././primary/primary-misc.c:2309 .././modules/run.i:199
+#: .././modules/dialogs.i:1044
+msgid "No"
+msgstr "No"
+
+#: .././primary/primary-layout.c:714
+#, c-format
+msgid "Huge (%sx%s)"
+msgstr "Muy grande (%sx%s)"
+
+#: .././primary/primary-layout.c:718
+#, c-format
+msgid "Large (%sx%s)"
+msgstr "Grande (%sx%s)"
+
+#: .././primary/primary-layout.c:722
+#, c-format
+msgid "Medium (%sx%s)"
+msgstr "Mediano (%sx%s)"
+
+#: .././primary/primary-layout.c:726
+#, c-format
+msgid "Small (%sx%s)"
+msgstr "Pequeño (%sx%s)"
+
+#: .././primary/primary-layout.c:730
+msgid "List View"
+msgstr "Vista de lista"
+
+#: .././primary/primary-layout.c:734 .././include/rodent_popup_threads.h:93
+msgid "Icon size:"
+msgstr "Tamaño de los iconos:"
+
+#: .././primary/primary-layout.c:741
+#, c-format
+msgid "Icon size: %s pixels (standard size)"
+msgstr "Tamaño del icono: %s píxeles (tamaño estándar)"
+
+#: .././primary/primary-layout.c:743
+#, c-format
+msgid "Icon size: %s pixels"
+msgstr "Tamaño del icono: %s píxeles"
+
+#: .././primary/primary-misc.i:25 .././primary/primary-misc.i:209
+msgid "User Input"
+msgstr "Entrada de usuario"
+
+#: .././primary/primary-misc.i:42
+msgid "Please enter a passphrase to use."
+msgstr "Introduzca la frase de paso que usará."
+
+#: .././primary/primary-misc.i:43
+msgid "Password associated to the user"
+msgstr "Contraseña asociada al usuario"
+
+#: .././primary/primary-misc.i:45
+msgid "Username for authentication"
+msgstr "Nombre de usuario para la autenticación"
+
+#: .././primary/primary-misc.i:78
+msgid "Enter passphrase:"
+msgstr "Introduzca la frase de paso:"
+
+#: .././primary/primary-misc.i:80
+msgid "User Password:"
+msgstr "Contraseña de usuario:"
+
+#: .././primary/primary-misc.i:84
+msgid "Username:"
+msgstr "Nombre de usuario:"
+
+#: .././primary/primary-misc.i:99 .././primary/primary-misc.i:188
+#: .././primary/primary-misc.i:265 .././modules/settings-module.i:2145
+#: .././modules/settings-module.i:2888 .././modules/bcrypt.c:136
+#: .././modules/touch.i:401 .././modules/dialogs.i:273
+#: .././modules/dialogs.i:408 .././modules/dialogs.i:653
+#: .././modules/dialogs.i:953
+msgid "Ok"
+msgstr "Aceptar"
+
+#. XXX create ok and cancel buttons
+#: .././primary/primary-misc.i:104 .././primary/primary-misc.i:270
+#: .././modules/settings-module.i:2883 .././modules/properties-module.i:512
+#: .././modules/cp.i:78 .././modules/cp.i:146 .././modules/rm.i:420
+#: .././modules/callbacks.i:661 .././modules/bcrypt.c:135
+#: .././modules/xmltree.i:530 .././modules/xmltree.c:166
+#: .././modules/dialogs.i:268 .././modules/dialogs.i:404
+#: .././modules/dialogs.i:649
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: .././primary/primary-misc.i:225
+msgid "response:"
+msgstr "Respuesta:"
+
+#: .././primary/primary.c:972
+msgid "bytes"
+msgstr "bytes"
+
+#: .././primary/primary.c:980
+msgid "Gigabytes"
+msgstr "Gigabytes"
+
+#: .././primary/primary.c:983
+msgid "Megabytes"
+msgstr "Megabytes"
+
+#: .././primary/primary.c:986
+msgid "Kilobytes"
+msgstr "Kilobytes"
+
+#: .././primary/primary.c:993 .././primary/primary.c:1010
+#: .././modules/properties-module.i:482 .././modules/properties-module.i:739
+#: .././modules/properties-module.i:778 .././modules/properties-module.i:952
+#: .././modules/callbacks.i:839 .././modules/callbacks.i:1980
+#: .././rodent/rodent_mouse.i:535 .././rodent/xfdir.i:82
+#: .././rodent/rodent_tip.c:529
+#, c-format
+msgid "%'u item"
+msgid_plural "%'u items"
+msgstr[0] "%u elemento"
+msgstr[1] "%u elementos"
+
+#: .././primary/primary.c:1007 .././rodent/rodent_tip.c:542
+#, c-format
+msgid "The location is empty."
+msgstr "La ubicación está vacía."
+
+#. 0x01
+#: .././primary/primary-options.i:37 .././primary/primary-options.i:234
+#: .././primary/primary-options.i:329 .././primary/primary-options.i:371
+#: .././primary/primary-options.i:428 .././primary/primary-options.i:477
+#: .././modules/settings-module.i:2857
+msgid "Ask the user to get additional parameters"
+msgstr "Preguntar al usuario para obtener parámetros adicionales"
+
+#. 0x02
+#: .././primary/primary-options.i:39
+msgid "-A, --almost-all           do not list implied . and .."
+msgstr "-A, --almost-all           no muestra las entradas . y .. implícitas"
+
+#. 0x04
+#: .././primary/primary-options.i:42
+msgid "-C                         list entries by columns"
+msgstr "-C                         muestra las entradas por columnas"
+
+#. 0x08
+#: .././primary/primary-options.i:44
+msgid ""
+"-D, --dired                generate output designed for Emacs' dired mode"
+msgstr ""
+"-D, --dired                genera el resultado para el modo `dired' de Emacs"
+
+#. 0x010
+#: .././primary/primary-options.i:46
+msgid "-F, --classify             append indicator (one of */=>@|) to entries"
+msgstr ""
+"-F, --classify             añade un indicador (uno de */=@|) a las entradas"
+
+#. 0x020
+#: .././primary/primary-options.i:48
+msgid "-G, --no-group             in a long listing, don't print group names"
+msgstr ""
+"-G, --no-group             en un listado largo, no muestra nombres de grupo"
+
+#. 0x040
+#. 0x02
+#: .././primary/primary-options.i:50 .././primary/primary-options.i:237
+msgid ""
+"-H, --dereference-command-line\n"
+"follow symbolic links listed on the command line"
+msgstr ""
+"-H, --dereference-command-line\n"
+"sigue los enlaces simbólicos en la línea de\n"
+"órdenes"
+
+#. 0x080
+#: .././primary/primary-options.i:52
+msgid ""
+"-I, --ignore=PATTERN       do not list implied entries matching shell PATTERN"
+msgstr ""
+"-I, --ignore=PATRÓN        no lista las entradas que coincidan (encajen)\n"
+"con PATRÓN de shell"
+
+#. 0x0100
+#: .././primary/primary-options.i:54
+msgid ""
+"-L, --dereference          when showing file information for a symbolic\n"
+"link, show information for the file the link\n"
+"references rather than for the link itself"
+msgstr ""
+"-L, --dereference          al mostrar la información de un fichero para un\n"
+"enlace simbólico, muestra la información del\n"
+"fichero al que apunta el enlace en lugar de la\n"
+"del propio enlace"
+
+#. 0x0200
+#: .././primary/primary-options.i:56
+msgid ""
+"-N, --literal              print raw entry names (don't treat e.g. control\n"
+"characters specially)"
+msgstr ""
+"-N, --literal              muestra los nombres literalmente (no trata p. "
+"ej.\n"
+"los caracteres de control de forma especial)"
+
+#. 0x0400
+#: .././primary/primary-options.i:58
+msgid "-Q, --quote-name           enclose entry names in double quotes"
+msgstr ""
+"-Q, --quote-name           encierra los nombres de las entradas entre\n"
+"comillas"
+
+#. 0x0800
+#: .././primary/primary-options.i:60
+msgid "-R, --recursive            list subdirectories recursively"
+msgstr "-R, --recursive            muestra los subdirectorios recursivamente"
+
+#. 0x01000
+#: .././primary/primary-options.i:62
+msgid "-S                         sort by file size"
+msgstr "-S                         ordena los ficheros por tamaño"
+
+#. 0x02000
+#: .././primary/primary-options.i:64
+msgid "-T, --tabsize=COLS         assume tab stops at each COLS instead of 8"
+msgstr ""
+"-T, --tabsize=COLS         establece los topes de tabulación a cada COLS\n"
+"en lugar de 8"
+
+#. 0x04000
+#: .././primary/primary-options.i:66
+msgid "-U                         do not sort; list entries in directory order"
+msgstr ""
+"-U                         no ordena; muestra las entradas en el orden del\n"
+"directorio"
+
+#. 0x08000
+#: .././primary/primary-options.i:68
+msgid "-X                         sort alphabetically by entry extension"
+msgstr ""
+"-X                         ordena alfabéticamente por la extensión de la\n"
+"entrada"
+
+#. 0x010000
+#: .././primary/primary-options.i:70
+msgid ""
+"-Z, --context              print any SELinux security context of each file"
+msgstr ""
+"-Z, --context              muestra el contexto de seguridad SELinux de cada\n"
+"fichero"
+
+#. 0x020000
+#: .././primary/primary-options.i:72
+msgid "-a, --all                  do not ignore entries starting with ."
+msgstr "-a, --all                  no oculta las entradas que comienzan con ."
+
+#. 0x040000
+#: .././primary/primary-options.i:74
+msgid "--author               with -l, print the author of each file"
+msgstr "--author               con -l, imprime el autor de cada fichero"
+
+#. 0x080000
+#: .././primary/primary-options.i:76
+msgid ""
+"-b, --escape               print C-style escapes for nongraphic characters"
+msgstr ""
+"-b, --escape               imprime escapes en estilo C para los caracteres "
+"no\n"
+"gráficos"
+
+#. 0x0100000
+#: .././primary/primary-options.i:80
+msgid ""
+"-c                         with -lt: sort by, and show, ctime (time of last\n"
+"modification of file status information)\n"
+"with -l: show ctime and sort by name\n"
+"otherwise: sort by ctime, newest first"
+msgstr ""
+"-c                         con -lt: ordena por ctime y muestra ctime (fecha\n"
+"de última modificación del fichero)\n"
+"con -l: muestra ctime y ordena por nombre\n"
+"en cualquier otro caso: ordena por ctime, el\n"
+"más reciente primero"
+
+#. 0x0200000
+#: .././primary/primary-options.i:82
+msgid ""
+"--color[=WHEN]         colorize the output.  WHEN defaults to 'always'\n"
+"or can be 'never' or 'auto'.  More info below"
+msgstr ""
+"--color[=CUÁNDO]       colorea la salida. Por omisión CUÁNDO es `always'\n"
+"y puede ser también `never' o `auto'.\n"
+"Más información abajo."
+
+#. 0x0400000
+#: .././primary/primary-options.i:84
+msgid ""
+"-d, --directory            list directory entries instead of contents,\n"
+"and do not dereference symbolic links"
+msgstr ""
+"-d, --directory            muestra las entradas de los directorios en lugar\n"
+"de sus contenidos, y no sigue los enlaces\n"
+"simbólicos"
+
+#. 0x0800000
+#: .././primary/primary-options.i:86
+msgid "-f                         do not sort, enable -aU, disable -ls --color"
+msgstr ""
+"-f                         no ordena, utiliza -aU, no utiliza -ls --color"
+
+#. 0x01000000
+#: .././primary/primary-options.i:88
+msgid "--file-type            likewise, except do not append '*'"
+msgstr "--file-type            similar, pero no añade `*'"
+
+#. 0x02000000
+#: .././primary/primary-options.i:90
+msgid ""
+"--format=WORD          across -x, commas -m, horizontal -x, long -l,\n"
+"single-column -1, verbose -l, vertical -C"
+msgstr ""
+"--format=PALABRA       across -x, commas -m, horizontal -x, long -l,\n"
+"single-column -1, verbose -l, vertical -C"
+
+#. 0x04000000
+#: .././primary/primary-options.i:92
+msgid "--full-time            like -l --time-style=full-iso"
+msgstr "--full-time            como -l --time-style=full-iso"
+
+#. 0x08000000
+#: .././primary/primary-options.i:94
+msgid "-g     like -l, but do not list owner"
+msgstr "  -g     como -l, pero no lista el propietario"
+
+#. 0x010000000
+#: .././primary/primary-options.i:96
+msgid "group directories before files."
+msgstr "agrupa carpetas antes de los archivos."
+
+#. 0x020000000
+#: .././primary/primary-options.i:98
+msgid ""
+"-h, --human-readable       with -l, print sizes in human readable format\n"
+"(e.g., 1K 234M 2G)"
+msgstr ""
+"-h, --human-readable       con -l, imprime los tamaños en formato legible\n"
+"(p. ej. 1K 234M 2G)"
+
+#. 0x040000000
+#: .././primary/primary-options.i:100
+msgid "--si                   likewise, but use powers of 1000 not 1024"
+msgstr ""
+"-H, --si                   análogo, pero utiliza potencias de 1000 y no de "
+"1024"
+
+#. 0x080000000
+#: .././primary/primary-options.i:102
+msgid ""
+"--dereference-command-line-symlink-to-dir\n"
+"follow each command line symbolic link\n"
+"that points to a directory"
+msgstr ""
+"--dereference-command-line-symlink-to-dir\n"
+"sigue cada enlace simbólico en la línea de\n"
+"órdenes que apunte a un directorio"
+
+#. 0x0100000000
+#: .././primary/primary-options.i:104
+msgid ""
+"--hide=PATTERN         do not list implied entries matching shell PATTERN\n"
+"(overridden by -a or -A)"
+msgstr ""
+"--hide=PATRÓN          no lista las entradas implícitas que coinciden\n"
+"con el patrón de shell PATRÓN\n"
+"(las opciones -a o -A tienen prioridad)"
+
+#. 0x0200000000
+#: .././primary/primary-options.i:106
+msgid ""
+"--indicator-style=WORD  append indicator with style WORD to entry names:\n"
+"none (default), slash (-p),\n"
+"file-type (--file-type), classify (-F)"
+msgstr ""
+"--indicator-style=PALABRA  añade un indicador con estilo PALABRA a los\n"
+"nombres de las entradas: none (predeterminado),\n"
+"slash (-p), file-type (--file-type), classify (-F)"
+
+#. 0x0400000000
+#: .././primary/primary-options.i:108
+msgid "-i, --inode                print the index number of each file"
+msgstr "-i, --inode                muestra el número de índice de cada fichero"
+
+#. 0x0800000000
+#: .././primary/primary-options.i:110
+msgid "-k, --kibibytes            use 1024-byte blocks"
+msgstr "-k                         como --block-size=1K"
+
+#. 0x01000000000
+#: .././primary/primary-options.i:112
+msgid "-l                         use a long listing format"
+msgstr "-l                         utiliza un formato de listado largo"
+
+#. 0x02000000000
+#: .././primary/primary-options.i:114
+msgid ""
+"-m                         fill width with a comma separated list of entries"
+msgstr ""
+"-m                         rellena el ancho con una lista de entradas\n"
+"separadas por comas"
+
+#. 0x04000000000
+#: .././primary/primary-options.i:116
+msgid "-n, --numeric-uid-gid      like -l, but list numeric user and group IDs"
+msgstr ""
+"-n, --numeric-uid-gid      como -l, pero muestra los IDs de usuario y grupo\n"
+"numéricos"
+
+#. 0x08000000000
+#: .././primary/primary-options.i:118
+msgid "-o                         like -l, but do not list group information"
+msgstr "-o                         como -l, pero no muestra el grupo"
+
+#. 0x010000000000
+#: .././primary/primary-options.i:120
+msgid ""
+"-p, --indicator-style=slash\n"
+"append / indicator to directories"
+msgstr "-p  --indicator-style=slash añade el indicador / a los directorios"
+
+#. 0x020000000000
+#: .././primary/primary-options.i:122
+msgid "-q, --hide-control-chars   print ? instead of non graphic characters"
+msgstr ""
+"-q, --hide-control-chars   imprime ? en lugar de los caracteres no gráficos"
+
+#. 0x040000000000
+#: .././primary/primary-options.i:124
+msgid ""
+"--show-control-chars   show non graphic characters as-is (default\n"
+"unless program is 'ls' and output is a terminal)"
+msgstr ""
+"--show-control-chars   muestra los caracteres no gráficos tal y como\n"
+"son (predeterminado a menos que el programa sea\n"
+"`ls' y la salida sea un terminal)"
+
+#. 0x080000000000
+#: .././primary/primary-options.i:126
+msgid ""
+"--quoting-style=WORD   use quoting style WORD for entry names:\n"
+"literal, locale, shell, shell-always, c, escape"
+msgstr ""
+"--quoting-style=PALABRA  utiliza el estilo de cita PALABRA para los\n"
+"nombres de las entradas:\n"
+"literal, locale, shell, shell-always, c, escape"
+
+#. 0x0100000000000
+#: .././primary/primary-options.i:128
+msgid "-r, --reverse              reverse order while sorting"
+msgstr "-r, --reverse              invierte el orden, en su caso"
+
+#. 0x0200000000000
+#: .././primary/primary-options.i:130
+msgid ""
+"-s, --size                 print the allocated size of each file, in blocks"
+msgstr ""
+"-s, --size                 muestra el tamaño de cada fichero, en bloques"
+
+#. 0x0400000000000
+#: .././primary/primary-options.i:132
+msgid ""
+"--sort=WORD            sort by WORD instead of name: none -U,\n"
+"extension -X, size -S, time -t, version -v"
+msgstr ""
+"--sort=PALABRA         ordena por PALABRA en vez de por nombre: none -U,\n"
+"extension -X, size -S, time -t, version -v"
+
+#. 0x0800000000000
+#: .././primary/primary-options.i:134
+#, fuzzy
+msgid ""
+"--time=WORD            with -l, show time as WORD instead of modification\n"
+"time: atime -u, access -u, use -u, ctime -c,\n"
+"or status -c; use specified time as sort key\n"
+"if --sort=time--time=WORD            with -l, show time as WORD instead of "
+"modification\n"
+"time: atime -u, access -u, use -u, ctime -c,\n"
+"or status -c; use specified time as sort key\n"
+"if --sort=time--time=WORD            with -l, show time as WORD instead of "
+"modification\n"
+"time: atime -u, access -u, use -u, ctime -c,\n"
+"or status -c; use specified time as sort key\n"
+"if --sort=time"
+msgstr ""
+"  -S                         ordena los ficheros por tamaño\n"
+"      --sort=PALABRA         ordena por PALABRA en vez de por nombre: none -"
+"U,\n"
+"                             extension -X, size -S, time -t, version -v\n"
+"      --time=PALABRA         con -l, muestra la fecha según PALABRA, en "
+"lugar\n"
+"                               de la fecha de modificación:\n"
+"                               atime -u, access -u, use -u, ctime -c, ó "
+"status -c;\n"
+"                               utiliza la fecha especificada como clave de\n"
+"                               ordenación si --sort=time\n"
+
+#. 0x01000000000000
+#: .././primary/primary-options.i:136
+msgid ""
+"--time-style=STYLE  show times using style STYLE:\n"
+"full-iso, long-iso, iso, +FORMAT\n"
+"FORMAT is interpreted like 'date'"
+msgstr ""
+"--time-style=ESTILO muestra las fechas/horas usando el estilo ESTILO:\n"
+"full-iso, long-iso, iso, +FORMATO\n"
+"FORMATO se intepreta como `date'"
+
+#. 0x02000000000000
+#: .././primary/primary-options.i:138
+msgid "-t                         sort by modification time, newest first"
+msgstr ""
+"-t                         ordena por la fecha de modificación, el más\n"
+"reciente primero"
+
+#. 0x04000000000000
+#: .././primary/primary-options.i:140
+msgid ""
+"-u                         with -lt: sort by, and show, access time\n"
+"with -l: show access time and sort by name\n"
+"otherwise: sort by access time"
+msgstr ""
+"-u                         con -lt: ordena por atime y muestra atime (fecha\n"
+"de último acceso al fichero)\n"
+"con -l: muestra atime y ordena por nombre\n"
+"en cualquier otro caso: ordena por atime"
+
+#. 0x08000000000000
+#: .././primary/primary-options.i:142
+msgid ""
+"-v                         natural sort of (version) numbers within text"
+msgstr ""
+"-v                         orden natural de números (de versión) dentro\n"
+"del texto"
+
+#. 0x010000000000000
+#: .././primary/primary-options.i:144
+msgid "-w, --width=COLS           assume screen width instead of current value"
+msgstr ""
+"-w, --width=COLS           establece el ancho de la pantalla en lugar del\n"
+"valor actual"
+
+#. 0x020000000000000
+#: .././primary/primary-options.i:146
+msgid "-x                         list entries by lines instead of by columns"
+msgstr ""
+"-x                         muestra las entradas por líneas en vez de por\n"
+"columnas"
+
+#. 0x040000000000000
+#: .././primary/primary-options.i:148
+msgid "-1                         list one file per line"
+msgstr "-1                         muestra un fichero por cada línea"
+
+#. 0x02
+#: .././primary/primary-options.i:155
+#, fuzzy
+msgid "Force printing of non-printable characters"
+msgstr "-i, --ignore-nonprinting    considera solamente caracteres imprimibles"
+
+#. 0x04
+#: .././primary/primary-options.i:157
+msgid "Columns"
+msgstr "Columnas"
+
+#. 0x010
+#: .././primary/primary-options.i:161
+msgid "append one of */=>@|"
+msgstr ""
+
+#. 0x020
+#: .././primary/primary-options.i:163
+msgid "Colorize"
+msgstr "Colorear"
+
+#. 0x040
+#. 0x02
+#: .././primary/primary-options.i:165 .././primary/primary-options.i:299
+msgid "Follow links"
+msgstr "Seguir enlaces"
+
+#. 0x080
+#: .././primary/primary-options.i:167
+#, fuzzy
+msgid "prevent -A"
+msgstr "Prevenir"
+
+#. 0x0100
+#. 0x04
+#: .././primary/primary-options.i:169 .././primary/primary-options.i:301
+msgid "Always follow links"
+msgstr "Seguir siempre enlaces"
+
+#. 0x0200
+#. 0x08
+#. 0x020
+#. 0x080
+#: .././primary/primary-options.i:171 .././primary/primary-options.i:303
+#: .././primary/primary-options.i:411 .././primary/primary-options.i:415
+msgid "Don't follow symbolic links"
+msgstr "No seguir enlaces simbólicos"
+
+#. 0x0400
+#. 0x010
+#. 0x040
+#. 0x080
+#: .././primary/primary-options.i:173 .././primary/primary-options.i:305
+#: .././primary/primary-options.i:464 .././primary/primary-options.i:466
+msgid "recursive"
+msgstr "recursivo"
+
+#. 0x0800
+#: .././primary/primary-options.i:175
+msgid "Sort by Size"
+msgstr "Ordenar por tamaño"
+
+#. 0x01000
+#: .././primary/primary-options.i:177
+#, fuzzy
+msgid "With -l, display complete time"
+msgstr "Mostrar/ocultar imágenes de planetas"
+
+#. 0x02000
+#. 0x0200000000
+#: .././primary/primary-options.i:179 .././primary/primary-options.i:219
+msgid "Sort by Date"
+msgstr "Ordenar por fecha"
+
+#. 0x04000
+#: .././primary/primary-options.i:181
+#, fuzzy
+msgid "Display whiteouts"
+msgstr "Mostrar texto"
+
+#. 0x08000
+#: .././primary/primary-options.i:183
+#, fuzzy
+msgid "Display maclabel"
+msgstr "Modelo de la pantalla"
+
+#. 0x040000
+#: .././primary/primary-options.i:189
+#, fuzzy
+msgid "Sort by ctime"
+msgstr "Ordenar por tiempo de fin"
+
+#. 0x080000
+#: .././primary/primary-options.i:191
+#, fuzzy
+msgid "list directory entries"
+msgstr "Todas las carpetas"
+
+#. 0x0100000
+#: .././primary/primary-options.i:193
+msgid "Do Not Sort"
+msgstr "No ordenar"
+
+#. 0x0200000
+#: .././primary/primary-options.i:195
+#, fuzzy
+msgid "like -l, but do not list owner"
+msgstr "  -g                         como -l, pero no lista el propietario\n"
+
+#. 0x0400000
+#: .././primary/primary-options.i:197
+#, fuzzy
+msgid "human-readable"
+msgstr "ilegible"
+
+#. 0x0800000
+#: .././primary/primary-options.i:199 .././rodent/rodent_tip.c:477
+msgid "Inode"
+msgstr "Nodo-i"
+
+#. 0x01000000
+#: .././primary/primary-options.i:201
+#, fuzzy
+msgid "block-size=1K"
+msgstr "Tamaño de bloque"
+
+#. 0x02000000
+#: .././primary/primary-options.i:203 .././modules/settings-module.i:962
+msgid "Details"
+msgstr "Detalles"
+
+#. 0x04000000
+#: .././primary/primary-options.i:205
+msgid "Comma separated values (CSV)"
+msgstr "Valores separados por comas (CSV)"
+
+#. 0x08000000
+#: .././primary/primary-options.i:207
+#, fuzzy
+msgid "numeric-uid-gid"
+msgstr "Gnumeric"
+
+#. 0x010000000
+#: .././primary/primary-options.i:209
+#, fuzzy
+msgid "include file flags"
+msgstr "Incluir archivos:"
+
+#. 0x020000000
+#: .././primary/primary-options.i:211
+#, fuzzy
+msgid "indicator-style=slash"
+msgstr "estilo de indicación"
+
+#. 0x040000000
+#: .././primary/primary-options.i:213
+#, fuzzy
+msgid "hide control characters"
+msgstr "Insertar un carácter de control Unicode"
+
+#. 0x080000000
+#: .././primary/primary-options.i:215
+#, fuzzy
+msgid "reverse"
+msgstr "Invertido"
+
+#. 0x0100000000
+#: .././primary/primary-options.i:217
+#, fuzzy
+msgid "show size"
+msgstr "Mostrar tamaño"
+
+#. 0x0400000000
+#: .././primary/primary-options.i:221
+#, fuzzy
+msgid "Sort by atime"
+msgstr "Ordenar por nombre"
+
+#. 0x0800000000
+#: .././primary/primary-options.i:223
+#, fuzzy
+msgid "Force raw printing"
+msgstr "Imprimiendo pie de página"
+
+#. 0x01000000000
+#: .././primary/primary-options.i:225
+#, fuzzy
+msgid "Sort across"
+msgstr "Ordenar iconos"
+
+#. 0x02000000000
+#: .././primary/primary-options.i:227
+#, fuzzy
+msgid "1 file per line"
+msgstr "1 archivo en el índice"
+
+#. 0x04
+#: .././primary/primary-options.i:239
+msgid "-L, --dereference            always follow symbolic links in SOURCE"
+msgstr ""
+"-L, --dereference            siempre sigue los enlaces simbólicos en ORIGEN"
+
+#. 0x08
+#: .././primary/primary-options.i:241
+msgid "-P, --no-dereference         never follow symbolic links in SOURCE"
+msgstr ""
+"-P, --no-dereference         nunca sigue los enlaces simbólicos en ORIGEN"
+
+#. 0x010
+#: .././primary/primary-options.i:243
+#, fuzzy
+msgid "-R, -r, --recursive          copy directories recursively"
+msgstr "-R, --recursive            muestra los subdirectorios recursivamente"
+
+#. 0x020
+#: .././primary/primary-options.i:245
+msgid "-a, --archive                same as -dR --preserve=all"
+msgstr "-a, --archive                lo mismo que -dR --preserve=all"
+
+#. 0x040
+#: .././primary/primary-options.i:247
+msgid "--attributes-only        don't copy the file data, just the attributes"
+msgstr ""
+"--attributes-only        no copia los datos del fichero, solamente los\n"
+"atributos"
+
+#. 0x080
+#. 0x02
+#: .././primary/primary-options.i:249 .././primary/primary-options.i:332
+#: .././primary/primary-options.i:374
+msgid "-b                  like --backup but does not accept an argument"
+msgstr "-b                      como --backup pero no acepta ningún argumento"
+
+#. 0x0100
+#. 0x04
+#: .././primary/primary-options.i:251 .././primary/primary-options.i:334
+#: .././primary/primary-options.i:376
+msgid "--backup[=CONTROL]  make a backup of each existing destination file"
+msgstr ""
+"--backup[=CONTROL]  crea una copia de seguridad de cada fichero de\n"
+"destino que exista"
+
+#. 0x0200
+#: .././primary/primary-options.i:253
+msgid "--copy-contents          copy contents of special files when recursive"
+msgstr ""
+"--copy-contents          copia el contenido de los ficheros especiales\n"
+"cuando opera recursivamente"
+
+#. 0x0400
+#: .././primary/primary-options.i:255
+msgid "-d                           same as --no-dereference --preserve=links"
+msgstr ""
+"-d                           lo mismo que --no-dereference --preserve=link"
+
+#. 0x0800
+#. 0x08
+#. 0x010
+#: .././primary/primary-options.i:257 .././primary/primary-options.i:336
+#: .././primary/primary-options.i:380
+msgid "-f, --force                 remove existing destination files"
+msgstr "-f, --force                 borra los ficheros destino que ya existan"
+
+#. 0x01000
+#. 0x04
+#. 0x040
+#. 0x08
+#. 0x010
+#: .././primary/primary-options.i:259 .././primary/primary-options.i:359
+#: .././primary/primary-options.i:413 .././primary/primary-options.i:458
+#: .././primary/primary-options.i:460
+msgid "Interactive"
+msgstr "Interactivo"
+
+#. 0x02000
+#: .././primary/primary-options.i:261
+msgid "-l, --link                   hard link files instead of copying"
+msgstr ""
+"-l, --link                   crea enlaces duros de los ficheros en vez de "
+"copiarlos"
+
+#. 0x04000
+#: .././primary/primary-options.i:263
+#, fuzzy
+msgid ""
+"n, --no-clobber             do not overwrite an existing file (overrides\n"
+"a previous -i option)"
+msgstr ""
+"-n, --no-clobber             no sobreescribe un fichero que exista\n"
+"(tiene prioridad sobre una opción -i anterior)"
+
+#. 0x08000
+#: .././primary/primary-options.i:266
+msgid ""
+"-p                           same as --preserve=mode,ownership,timestamps"
+msgstr ""
+"-p                            igual que --preserve=mode,ownership,timestamps"
+
+#. 0x010000
+#: .././primary/primary-options.i:268
+#, fuzzy
+msgid ""
+"--preserve[=ATTR_LIST]   preserve the specified attributes (default:\n"
+"mode,ownership,timestamps), if possible\n"
+"additional attributes: context, links, xattr,\n"
+"all"
+msgstr ""
+"--preserve[=LISTAATTR]   conserva si puede los atributos especificados,\n"
+"(por omisión: mode,ownership,timestamps)\n"
+"atributos adicionales: context, links, xattr,\n"
+"all"
+
+#. 0x020000
+#: .././primary/primary-options.i:270
+#, fuzzy
+msgid "--no-preserve=ATTR_LIST  don't preserve the specified attributes"
+msgstr "--no-preserve=LISTAATTR  no conserva los atributos especificados"
+
+#. 0x040000
+#: .././primary/primary-options.i:272
+msgid "--parents                use full source file name under DIRECTORY"
+msgstr ""
+"--parents                 utiliza el nombre de fichero de origen completo\n"
+"bajo DIRECTORIO"
+
+#. 0x080000
+#: .././primary/primary-options.i:274
+msgid "--reflink[=WHEN]         control clone/CoW copies. See below"
+msgstr "--reflink[=CUÁNDO]       controla copias clonadas/CoW. Ver más abajo."
+
+#. 0x0100000
+#: .././primary/primary-options.i:276
+msgid ""
+"--remove-destination     remove each existing destination file before\n"
+"attempting to open it (contrast with --force)"
+msgstr ""
+"--remove-destination     borra cada fichero de destino que exista antes\n"
+"de intentar abrirlo (compárese con --force)."
+
+#. 0x0200000
+#: .././primary/primary-options.i:278
+msgid "--sparse=WHEN            control creation of sparse files. See below"
+msgstr ""
+"--sparse=CUÁNDO           controla la creación de ficheros dispersos.\n"
+"Véase más abajo."
+
+#. 0x0400000
+#. 0x020
+#: .././primary/primary-options.i:280 .././primary/primary-options.i:340
+msgid ""
+"--strip-trailing-slashes  remove any trailing slashes from each SOURCE\n"
+"argument"
+msgstr ""
+"--strip-trailing-slashes  elimina todas las barras finales de cada\n"
+"argumento ORIGEN"
+
+#. 0x0800000
+#: .././primary/primary-options.i:282
+msgid "-s, --symbolic-link          make symbolic links instead of copying"
+msgstr ""
+"-s, --symbolic-link           crea enlaces simbólicos en lugar de copiarlos"
+
+#. 0x01000000
+#. 0x040
+#: .././primary/primary-options.i:284 .././primary/primary-options.i:342
+msgid "-S, --suffix=SUFFIX          override the usual backup suffix"
+msgstr "-S, --suffix=SUFIJO           reemplaza el sufijo de respaldo habitual"
+
+#. 0x02000000
+#: .././primary/primary-options.i:286
+msgid ""
+"-t, --target-directory=DIRECTORY  copy all SOURCE arguments into DIRECTORY"
+msgstr ""
+"--target-directory=DIRECTORIO  mueve todos los argumentos ORIGEN al\n"
+"directorio DIRECTORIO"
+
+#. 0x04000000
+#: .././primary/primary-options.i:288
+msgid ""
+"-u, --update                 copy only when the SOURCE file is newer\n"
+"than the destination file or when the\n"
+"destination file is missing"
+msgstr ""
+"-u, --update                 copia solamente cuando el fichero ORIGEN es\n"
+"más moderno que el fichero de destino,\n"
+"o cuando falta el fichero de destino"
+
+#. 0x08000000
+#. 0x0400
+#. 0x01000
+#: .././primary/primary-options.i:290 .././primary/primary-options.i:350
+#: .././primary/primary-options.i:396
+msgid "-v, --verbose                explain what is being done"
+msgstr "-v, --verbose                da detalles sobre lo que se va haciendo"
+
+#. 0x010000000
+#: .././primary/primary-options.i:292
+msgid "-x, --one-file-system        stay on this file system"
+msgstr "-x, --one-file-system        permanece en este sistema de ficheros"
+
+#. 0x020000000
+#. 0x0800
+#. 0x02000
+#. 0x0400
+#. 0x0200
+#: .././primary/primary-options.i:294 .././primary/primary-options.i:352
+#: .././primary/primary-options.i:398 .././primary/primary-options.i:449
+#: .././primary/primary-options.i:497 .././modules/touch.i:389
+#: .././include/rodent_actions.h:383 .././include/rodent_popup_threads.h:162
+msgid "Help"
+msgstr "Ayuda"
+
+#. 0x040000000
+#. 0x01000
+#. 0x04000
+#. 0x0800
+#. 0x0400
+#: .././primary/primary-options.i:296 .././primary/primary-options.i:354
+#: .././primary/primary-options.i:400 .././primary/primary-options.i:451
+#: .././primary/primary-options.i:499
+msgid "Version"
+msgstr "Versión"
+
+#. 0x020
+#: .././primary/primary-options.i:307
+msgid "archive"
+msgstr "archivo"
+
+#. 0x040
+#. 0x02
+#. 0x010
+#. 0x04
+#. 0x02
+#: .././primary/primary-options.i:309 .././primary/primary-options.i:357
+#: .././primary/primary-options.i:403 .././primary/primary-options.i:409
+#: .././primary/primary-options.i:456 .././primary/primary-options.i:479
+msgid "force"
+msgstr "forzar"
+
+#. 0x080
+#. 0x010
+#. 0x04
+#: .././primary/primary-options.i:311 .././primary/primary-options.i:338
+#: .././primary/primary-options.i:433
+msgid "-i                    prompt before every removal"
+msgstr "-i                    pregunta antes de cada borrado"
+
+#. 0x0100
+#: .././primary/primary-options.i:313
+#, fuzzy
+msgid "hard link files instead of copying"
+msgstr ""
+"-l, --link                   crea enlaces duros de los ficheros en vez de "
+"copiarlos"
+
+#. 0x0200
+#. 0x08
+#: .././primary/primary-options.i:315 .././primary/primary-options.i:361
+msgid "Do not overwrite any file"
+msgstr "No sobreescribir ningún archivo"
+
+#. 0x0400
+#: .././primary/primary-options.i:317
+msgid "Preserve all attributes"
+msgstr "Conservar todos los atributos"
+
+#. 0x0800
+#. 0x010
+#. 0x0200
+#. 0x0100
+#: .././primary/primary-options.i:319 .././primary/primary-options.i:363
+#: .././primary/primary-options.i:419 .././primary/primary-options.i:468
+msgid "Verbose"
+msgstr "Extendida"
+
+#. 0x01000
+#. 0x020
+#: .././primary/primary-options.i:321 .././primary/primary-options.i:439
+msgid "Stay on single filesystem"
+msgstr "Permanecer en este sistema de archivos"
+
+#. 0x080
+#: .././primary/primary-options.i:344
+msgid ""
+"-t, --target-directory=DIRECTORY  move all SOURCE arguments into DIRECTORY"
+msgstr ""
+"--target-directory=DIRECTORIO  mueve todos los argumentos ORIGEN al\n"
+"directorio DIRECTORIO"
+
+#. 0x0100
+#: .././primary/primary-options.i:346
+msgid "-T, --no-target-directory    treat DEST as a normal file"
+msgstr "-T, --no-target-directory     considera DEST como un fichero normal"
+
+#. 0x0200
+#: .././primary/primary-options.i:348
+msgid ""
+"-u, --update                 move only when the SOURCE file is newer\n"
+"than the destination file or when the\n"
+"destination file is missing"
+msgstr ""
+"-u, --update                       mueve solamente cuando el fichero ORIGEN\n"
+"es más moderno que el fichero de destino,\n"
+"o cuando falta el fichero de destino"
+
+#. 0x020
+#: .././primary/primary-options.i:382
+#, fuzzy
+msgid "-L, --logical               dereference TARGETs that are symbolic links"
+msgstr "-L, --dereference     desreferencia todos los enlaces simbólicos"
+
+#. 0x040
+#: .././primary/primary-options.i:384
+#, fuzzy
+msgid ""
+"-n, --no-dereference        treat LINK_NAME as a normal file if\n"
+"it is a symbolic link to a directory"
+msgstr ""
+"-T, --no-target-directory   trata NOMBREDELENLACE como un fichero normal"
+
+#. 0x080
+#: .././primary/primary-options.i:386
+#, fuzzy
+msgid "-P, --physical              make hard links directly to symbolic links"
+msgstr "no se puede crear un enlace que sea duro y simbólico al mismo tiempo"
+
+#. 0x0100
+#: .././primary/primary-options.i:388
+#, fuzzy
+msgid "-s, --symbolic              make symbolic links instead of hard links"
+msgstr ""
+"-s, --symbolic-link           crea enlaces simbólicos en lugar de copiarlos"
+
+#. 0x0200
+#: .././primary/primary-options.i:390
+msgid "-S, --suffix=SUFFIX         override the usual backup suffix"
+msgstr "-S, --suffix=SUFIJO         reemplaza el sufijo de respaldo habitual"
+
+#. 0x0400
+#: .././primary/primary-options.i:392
+msgid ""
+"-t, --target-directory=DIRECTORY  specify the DIRECTORY in which to create\n"
+"the links"
+msgstr ""
+"-t, --target-directory=DIRECTORIO  especifica el DIRECTORIO en el que se\n"
+"crearán los enlaces"
+
+#. 0x0800
+#: .././primary/primary-options.i:394
+#, fuzzy
+msgid "-T, --no-target-directory   treat LINK_NAME as a normal file always"
+msgstr ""
+"-T, --no-target-directory   trata NOMBREDELENLACE como un fichero normal"
+
+#. 0x04
+#: .././primary/primary-options.i:405
+#, fuzzy
+msgid "make hard links to symbolic link references"
+msgstr "referencia simbólica de longitud cero"
+
+#. 0x08
+#: .././primary/primary-options.i:407
+#, fuzzy
+msgid "make hard links directly to symbolic links"
+msgstr "no se puede crear un enlace que sea duro y simbólico al mismo tiempo"
+
+#. 0x0100
+#: .././primary/primary-options.i:417 .././modules/rename_entry.i:405
+msgid "Create Symbolic Link"
+msgstr "Crear un enlace simbólico"
+
+#. 0x0400
+#: .././primary/primary-options.i:421
+#, fuzzy
+msgid "Warn if error in documents"
+msgstr "Advertir si el macro intenta firmar el documento"
+
+#. 0x02
+#: .././primary/primary-options.i:431
+msgid ""
+"-f, --force           ignore nonexistent files and arguments, never prompt"
+msgstr ""
+"-f, --force           descarta los ficheros que no existan, sin preguntar"
+
+#. 0x08
+#: .././primary/primary-options.i:435
+msgid ""
+"-I                    prompt once before removing more than three files, or\n"
+"when removing recursively.  Less intrusive than -i,\n"
+"while still giving protection against most mistakes"
+msgstr ""
+"-I                     pregunta una vez antes de borrar más de tres "
+"ficheros,\n"
+"o cuando se borra recursivamente. Menos intrusivo\n"
+"que -i, pero todavía protege contra la mayoría de\n"
+"las equivocaciones"
+
+#. 0x010
+#: .././primary/primary-options.i:437
+msgid ""
+"--interactive[=WHEN]  prompt according to WHEN: never, once (-I), or\n"
+"always (-i).  Without WHEN, prompt always"
+msgstr ""
+"--interactive[=CUÁNDO]  pregunta de acuerdo con CUÁNDO: never (nunca),\n"
+"once (una vez, -I), o always (siempre, -i).\n"
+"Sin CUÁNDO, pregunta siempre"
+
+#. 0x040
+#: .././primary/primary-options.i:441
+#, fuzzy
+msgid "--no-preserve-root  do not treat '/' specially"
+msgstr "--no-preserve-root  no trata `/' de forma especial (predeterminado)"
+
+#. 0x080
+#: .././primary/primary-options.i:443
+#, fuzzy
+msgid "--preserve-root   do not remove '/' (default)"
+msgstr "--no-preserve-root  no trata `/' de forma especial (predeterminado)"
+
+#. 0x0100
+#: .././primary/primary-options.i:445
+#, fuzzy
+msgid "-r, -R, --recursive   remove directories and their contents recursively"
+msgstr "-R, -r, --recursive          copia directorios recursivamente"
+
+#. 0x0200
+#: .././primary/primary-options.i:447
+#, fuzzy
+msgid "-v, --verbose         explain what is being done"
+msgstr "-v, --verbose                da detalles sobre lo que se va haciendo"
+
+#. 0x02
+#: .././primary/primary-options.i:454
+msgid "Remove directory"
+msgstr "Eliminar directorio"
+
+#. 0x020
+#: .././primary/primary-options.i:462
+msgid "Overwrite all files"
+msgstr "Sobreescribir todos los archivos"
+
+#. 0x0200
+#: .././primary/primary-options.i:470
+msgid "Undelete"
+msgstr "Recuperar"
+
+#. this could use a spin button
+#. 0x04
+#: .././primary/primary-options.i:482
+#, c-format
+msgid "-n, --iterations=N  overwrite N times instead of the default (%d)"
+msgstr ""
+"-n, --iterations=N  sobreescribe N veces en vez de lo predeterminado (%d)"
+
+#. 0x08
+#: .././primary/primary-options.i:484
+msgid "--random-source=FILE  get random bytes from FILE"
+msgstr "--random-source=FICHERO obtiene bytes aleatorios de FICHERO"
+
+#. this needs a fileselector button.
+#. 0x010
+#: .././primary/primary-options.i:486
+msgid "-s, --size=N   shred this many bytes (suffixes like K, M, G accepted)"
+msgstr ""
+"-s, --size=N   efectúa el `shred' sobre este número de bytes\n"
+"(se permiten los sufijos K, M y G)"
+
+#. this could use a spinbutton
+#. 0x020
+#: .././primary/primary-options.i:489
+msgid "-u, --remove   truncate and remove file after overwriting"
+msgstr "-u, --remove   trunca y borra el fichero después de sobreescribirlo"
+
+#. 0x040
+#: .././primary/primary-options.i:491
+msgid "-v, --verbose  show progress"
+msgstr "-v, --verbose  muestra el progreso"
+
+#. 0x080
+#: .././primary/primary-options.i:493
+msgid ""
+"-x, --exact    do not round file sizes up to the next full block;\n"
+"this is the default for non-regular files"
+msgstr ""
+"-x, --exact    no redondea hacia arriba los tamaños de los ficheros hasta "
+"el\n"
+"siguiente bloque completo; este es el comportamiento\n"
+"predeterminado para los ficheros no regulares"
+
+#. 0x0100
+#: .././primary/primary-options.i:495
+msgid "-z, --zero     add a final overwrite with zeros to hide shredding"
+msgstr ""
+"-z, --zero     añade una sobreescritura final con ceros para ocultar la\n"
+"acción de esta orden"
+
+#: .././primary/primary-modules.c:32
+msgid "Mount local disks and devices"
+msgstr "Monta dispositivos y discos locales"
+
+#: .././primary/primary-modules.c:33
+msgid "View current processes and monitor system state"
+msgstr "Vea los procesos actuales y monitorizar el estado del sistema"
+
+#: .././primary/primary-modules.c:34
+msgid "Next-generation application launcher."
+msgstr "Lanzador de aplicaciones de nueva generación."
+
+#: .././primary/primary-modules.c:36
+msgid "Windows networks (SMB)"
+msgstr "Redes Windows (SMB)"
+
+#: .././primary/primary-modules.c:37
+msgid "SMB Browser"
+msgstr "Navegador SMB"
+
+#: .././primary/primary-modules.c:39
+msgid "Windows workgroup"
+msgstr "Grupo de trabajo de Windows"
+
+#: .././primary/primary-modules.c:40
+msgid "Windows Shares"
+msgstr "Comparticiones Windows"
+
+#: .././primary/primary-modules.c:43
+msgid "FUSE Volume"
+msgstr "Volumen FUSE"
+
+#: .././primary/primary-modules.c:44
+msgid "Mount user-space filesystems (FUSE)"
+msgstr "Montar sistemas de archivo de espacio de usuario (FUSE)"
+
+#: .././primary/primary-modules.c:46
+msgid "NFS Network Volume"
+msgstr "Volumen de red NFS"
+
+#: .././primary/primary-modules.c:47
+#, fuzzy
+msgid "Secure FTP (SSH)"
+msgstr "FTP seguro (SFTP)"
+
+#: .././primary/primary-modules.c:48
+#, fuzzy
+msgid "Encrypted filesystem"
+msgstr "Cifrar archivos"
+
+#: .././primary/primary-modules.c:49
+msgid "Bluetooth Transfer"
+msgstr "Transferencia Bluetooth"
+
+#: .././primary/primary-modules.c:50
+msgid "FTP Client"
+msgstr "Cliente FTP"
+
+#: .././primary/primary-modules.c:51
+msgid "CIFS Volume"
+msgstr "Volumen CIFS"
+
+#: .././primary/primary-modules.c:57
+#, fuzzy
+msgid "Callbacks"
+msgstr "Retorno de llamada"
+
+#: .././primary/primary-modules.c:58 .././modules/bcrypt.c:50
+msgid "Blowfish"
+msgstr "Blowfish"
+
+#: .././primary/primary-modules.c:59
+msgid "Settings"
+msgstr "Configuración"
+
+#: .././primary/primary-modules.c:60
+msgid "Run program and return its output"
+msgstr "Ejecutar un programa y obtener su salida"
+
+#: .././primary/primary-modules.c:61 .././modules/properties-module.i:478
+#: .././modules/properties-module.i:485 .././include/rodent_actions.h:275
+msgid "Properties"
+msgstr "Propiedades"
+
+#: .././primary/primary-modules.c:62
+#, fuzzy
+msgid "Text completion"
+msgstr "Terminación de texto"
+
+#: .././primary/primary-modules.c:63
+msgid "History of combo url."
+msgstr "Historial de la lista de URL."
+
+#: .././primary/primary-modules.c:64
+msgid "Mime Type"
+msgstr "Tipo MIME"
+
+#: .././primary/primary-modules.c:65
+msgid "Use MIME type magic"
+msgstr "Usar tipo MIME magic"
+
+#: .././primary/primary-modules.c:66
+msgid "ZIP archive plugin"
+msgstr "Complemento de archivo comprimido ZIP"
+
+#: .././primary/primary-modules.c:67 .././modules/settings-module.i:479
+msgid "Icon Themes"
+msgstr "Seleccionar un tema de iconos"
+
+#. +1 because zero does not count in enum...
+#. general::
+#: .././primary/primary-environment.c:34
+msgid "Activate items with a double click"
+msgstr "Activar elementos con una pulsación doble"
+
+#: .././primary/primary-environment.c:35
+msgid "Icon Theme Specification"
+msgstr "Especificación del tema de iconos"
+
+#: .././primary/primary-environment.c:36
+msgid "Drag: move"
+msgstr "Arrastrar: mover"
+
+#: .././primary/primary-environment.c:37 .././primary/primary-environment.c:38
+#: .././primary/primary-environment.c:39 .././primary/primary-environment.c:52
+#: .././modules/run.i:199
+msgid "Yes"
+msgstr "Sí"
+
+#: .././primary/primary-environment.c:37
+msgid "Emblems"
+msgstr "Emblemas"
+
+#: .././primary/primary-environment.c:38 .././primary/primary-environment.c:39
+msgid "Enable tooltips"
+msgstr "Activar sugerencias"
+
+#: .././primary/primary-environment.c:40 .././primary/primary-environment.c:41
+msgid "The font size"
+msgstr "El tamaño de tipografía"
+
+#: .././primary/primary-environment.c:42 .././primary/primary-environment.c:43
+msgid "The font family"
+msgstr "La familia tipográfica"
+
+#: .././primary/primary-environment.c:44
+msgid "Icon size"
+msgstr "Tamaño del icono"
+
+#: .././primary/primary-environment.c:45
+msgid "Terminal Emulator"
+msgstr "Emulador de terminal"
+
+#: .././primary/primary-environment.c:46 .././modules/callbacks.i:265
+msgid "Text Editor"
+msgstr "Editor de textos"
+
+#: .././primary/primary-environment.c:47
+#, fuzzy
+msgid "Maximum completion options displayed"
+msgstr "Máximo de líneas a mostrar:"
+
+#: .././primary/primary-environment.c:48
+#, fuzzy
+msgid "Maximum time (seconds) to wait for a load directory"
+msgstr "No se puede mover un sharepoint a una carpeta compartida"
+
+#: .././primary/primary-environment.c:49
+#, fuzzy
+msgid "Maximum lines in lp terminal buffer"
+msgstr "Búfer máximo para el jitter"
+
+#. desktop::
+#: .././primary/primary-environment.c:51
+msgid "Show Desktop Grid"
+msgstr "Mostrar la rejilla del escritorio"
+
+#: .././primary/primary-environment.c:53
+msgid "Navigation Window"
+msgstr "Ventana de navegación"
+
+#: .././primary/primary-environment.c:55
+msgid "Top Margin"
+msgstr "Margen superior"
+
+#: .././primary/primary-environment.c:56
+msgid "Bottom Margin"
+msgstr "Margen inferior"
+
+#: .././primary/primary-environment.c:57
+msgid "Right margin"
+msgstr "Margen derecho"
+
+#: .././primary/primary-environment.c:58
+msgid "Left Margin"
+msgstr "Margen izquierdo"
+
+#: .././primary/primary-environment.c:60
+msgid "Desktop path:"
+msgstr "Ruta del escritorio:"
+
+#: .././primary/primary-environment.c:61 .././modules/settings-module.i:2556
+msgid "Background image"
+msgstr "Imagen de fondo"
+
+#: .././primary/primary-environment.c:62 .././primary/primary-environment.c:63
+msgid "Background color"
+msgstr "Color de fondo"
+
+#: .././primary/primary-environment.c:64
+msgid "Background transparency:"
+msgstr "Transparencia del fondo:"
+
+#: .././primary/primary-environment.c:69
+#, fuzzy
+msgid "Toolbar configuration"
+msgstr "Barra de herramientas de configuración."
+
+#: .././primary/primary-environment.c:70
+#, fuzzy
+msgid "Pasteboard serial control"
+msgstr "Controlador serie multipuerto"
+
+#: .././primary/primary-environment.c:71
+#, fuzzy
+msgid "Bookmark serial control"
+msgstr "Serializador de marcadores"
+
+#: .././primary/primary-environment.c:132
+#, fuzzy
+msgid "Samba default remote user"
+msgstr "Establecer ruta predeterminada"
+
+#: .././primary/primary-environment.c:133
+#, fuzzy
+msgid "Sudo ask password program"
+msgstr "Establecer una contraseña ahora"
+
+#: .././primary/primary-environment.c:134
+#, fuzzy
+msgid "Ssh ask passphrase program"
+msgstr "Mostrar contraseña"
+
+#: .././modules/settings-module.i:479
+msgid "List of disabled plugins"
+msgstr "Lista de complementos desactivados"
+
+#: .././modules/settings-module.i:479
+msgid "Disabled"
+msgstr "Desactivado"
+
+#: .././modules/settings-module.i:956 .././rodent/rodent_actions.c:74
+msgid "Normal"
+msgstr "Normal"
+
+#: .././modules/settings-module.i:959
+msgid "Compact"
+msgstr "Compactar"
+
+#: .././modules/settings-module.i:965 .././rodent/rodent_actions.c:75
+msgid "Big"
+msgstr "Grande"
+
+#: .././modules/settings-module.i:968 .././rodent/rodent_actions.c:76
+msgid "Huge"
+msgstr "Enorme"
+
+#: .././modules/settings-module.i:984
+msgid "Please be patient"
+msgstr "Por favor, sea paciente"
+
+#: .././modules/settings-module.i:985
+msgid "Reload All Tabs in All Windows"
+msgstr "Recargar todas las pestañas en todas las ventanas"
+
+#: .././modules/settings-module.i:986
+msgid "Default Size"
+msgstr "Tamaño por defecto"
+
+#: .././modules/settings-module.i:1147 .././modules/settings-module.i:2577
+#: .././modules/dialogs.i:123
+msgid "Select Folder"
+msgstr "Seleccione la carpeta"
+
+#: .././modules/settings-module.i:1302 .././modules/settings-module.i:2279
+msgid "Toolbar Settings"
+msgstr "Preferencias de la barra de herramientas"
+
+#: .././modules/settings-module.i:1317
+msgid "Configure which items should appear in the toolbar(s)."
+msgstr ""
+"Configurar los elementos que deben aparecer en las barras de herramientas."
+
+#: .././modules/settings-module.i:1743
+msgid "default"
+msgstr "predeterminado"
+
+#: .././modules/settings-module.i:1902
+msgid "Select a folder"
+msgstr "Selecciona una carpeta"
+
+#: .././modules/settings-module.i:1905
+msgid "Select Files..."
+msgstr "Seleccionar archivos..."
+
+#: .././modules/settings-module.i:1936
+#, c-format
+msgid "Creating a new file (%s)"
+msgstr "Crear un archivo nuevo (%s)"
+
+#: .././modules/settings-module.i:1969
+msgid "example"
+msgstr "ejemplo"
+
+#: .././modules/settings-module.i:2138
+msgid "Rebuild Thumbnails"
+msgstr "Reconstruir las miniaturas"
+
+#: .././modules/settings-module.i:2142 .././modules/settings-module.i:2347
+msgid "Icons"
+msgstr "Iconos"
+
+#. //////////////// General
+#.
+#: .././modules/settings-module.i:2262
+msgid "General"
+msgstr "General"
+
+#: .././modules/settings-module.i:2262
+msgid "General Options"
+msgstr "Opciones generales"
+
+#: .././modules/settings-module.i:2265 .././modules/xmltree.c:130
+msgid "Configuration of keybindings"
+msgstr "Configuración de las asociaciones de las teclas"
+
+#: .././modules/settings-module.i:2344
+msgid "Content Type"
+msgstr "Tipo de contenido"
+
+#: .././modules/settings-module.i:2350
+msgid "Labels"
+msgstr "Etiquetas"
+
+#: .././modules/settings-module.i:2403
+msgid "Fixed width font"
+msgstr "Tipo de letra de anchura fija"
+
+#: .././modules/settings-module.i:2432
+msgid "Variable width font"
+msgstr "Tipografía de anchura variable"
+
+#. /////////////////////// Desktop options
+#. ////////////////////// Ls options
+#. ////////////////////// Copy options
+#. ////////////////////// Move options
+#. ////////////////////// link options
+#. ////////////////////// remove options
+#. ////////////////////// shred options
+#: .././modules/settings-module.i:2523 .././modules/settings-module.i:2641
+#: .././modules/settings-module.i:2651 .././modules/settings-module.i:2661
+#: .././modules/settings-module.i:2673 .././modules/settings-module.i:2684
+#: .././modules/settings-module.i:2696 .././modules/touch.i:265
+msgid "Options"
+msgstr "Opciones"
+
+#. Mimetype files
+#. not used anymore:
+#. #define FREEDESKTOP_MIME_FILE 	PACKAGE_DATA_DIR,RC_DIR,"freedesktop.org.xml"
+#. not used anymore:
+#. #define MAGIC_MIME_FILE 	PACKAGE_DATA_DIR,RC_DIR,"types.xml"
+#.
+#. //////////////////////////   General files   ///////////////////////////////////////
+#. Default desktop directory
+#: .././modules/settings-module.i:2524 .././include/files.h:161
+msgid "Desktop"
+msgstr "Escritorio"
+
+#: .././modules/settings-module.i:2531
+msgid "Allow"
+msgstr "Permitir"
+
+#: .././modules/settings-module.i:2534
+msgid "localhost"
+msgstr "localhost"
+
+#: .././modules/settings-module.i:2644 .././include/rodent_actions.h:272
+msgid "File Information..."
+msgstr "Información sobre el archivo..."
+
+#: .././modules/settings-module.i:2654 .././modules/callbacks.i:1079
+#: .././modules/callbacks.i:1115 .././include/rodent_actions.h:335
+msgid "Copy"
+msgstr "Copiar"
+
+#: .././modules/settings-module.i:2666
+msgid "Move"
+msgstr "Mover"
+
+#. file is a symlink
+#: .././modules/settings-module.i:2678 .././modules/rm.i:124
+#: .././modules/mime-mouse_magic.i:421
+msgid "Symbolic Link"
+msgstr "Enlace simbólico"
+
+#. **************
+#: .././modules/settings-module.i:2691 .././modules/rm.i:438
+#: .././modules/callbacks.i:2206 .././modules/xmltree.i:111
+#: .././include/rodent_actions.h:343
+msgid "Delete"
+msgstr "Borrar"
+
+#: .././modules/settings-module.i:2700 .././modules/rm.i:175
+#: .././modules/rm.i:177 .././modules/rm.i:429
+msgid "Shred"
+msgstr "Triturar"
+
+#. ////////////////////// rodent plugins
+#: .././modules/settings-module.i:2713 .././modules/settings-module.i:2714
+#: .././modules/callbacks.i:1350
+msgid "Plugins"
+msgstr "Complementos"
+
+#: .././modules/settings-module.i:2717 .././modules/settings-module.i:2728
+#, fuzzy
+msgid "Rodent"
+msgstr "Identificación"
+
+#. ////////////////////// rodent modules
+#: .././modules/settings-module.i:2724 .././modules/settings-module.i:2725
+msgid "Modules"
+msgstr "Módulos"
+
+#. /////////////////////////
+#. advanced options (environment variables)
+#. /////////////////////////
+#: .././modules/settings-module.i:2738
+msgid "Environment Variables"
+msgstr "Variables de entorno"
+
+#: .././modules/settings-module.i:2739
+msgid "Edit the list of environment variables and associated values"
+msgstr "Editar la lista de variables de entorno y valores asociados"
+
+#: .././modules/settings-module.i:2768 .././modules/completion.i:65
+msgid "Variable"
+msgstr "Variable"
+
+#: .././modules/settings-module.i:2776 .././modules/xmltree.i:565
+#: .././modules/xmltree.i:645 .././modules/xmltree.i:720
+#: .././modules/xmltree.i:790 .././modules/xmltree.i:917
+msgid "Value"
+msgstr "Valor"
+
+#: .././modules/settings-module.i:2793 .././modules/settings-module.c:190
+#: .././include/rodent_actions.h:387
+msgid "Personal settings"
+msgstr "Preferencias personales"
+
+#: .././modules/settings-module.i:2851
+#, c-format
+msgid "Options: %s"
+msgstr "Opciones: %s"
+
+#. ok and cancel buttons
+#: .././modules/properties-module.i:509 .././modules/properties-module.i:819
+#: .././modules/properties-module.i:820 .././modules/xmltree.i:520
+msgid "Apply"
+msgstr "Aplicar"
+
+#. gchar *filename=g_path_get_basename(en->path);
+#: .././modules/properties-module.i:529
+msgid "Information"
+msgstr "Información"
+
+#: .././modules/properties-module.i:566 .././rodent/rodent_tip.c:435
+msgid "Permissions"
+msgstr "Permisos"
+
+#: .././modules/properties-module.i:577 .././modules/properties-module.i:578
+#: .././modules/properties-module.i:579
+msgid "Apply changes"
+msgstr "Aplicar cambios"
+
+#. } else if (en && IS_SDIR(en->type)){
+#. perm[15] = gtk_check_button_new_with_label(_("Recursive"));
+#. }else perm[15]=NULL;
+#: .././modules/properties-module.i:586 .././modules/properties-module.i:848
+msgid "Owner:"
+msgstr "Propietario:"
+
+#: .././modules/properties-module.i:587 .././modules/properties-module.i:616
+#: .././modules/properties-module.i:646
+msgid "Read"
+msgstr "Leído"
+
+#: .././modules/properties-module.i:591 .././modules/properties-module.i:620
+#: .././modules/properties-module.i:650
+msgid "Write"
+msgstr "Escribir"
+
+#: .././modules/properties-module.i:595 .././modules/properties-module.i:624
+#: .././modules/properties-module.i:654
+msgid "Execute"
+msgstr "Ejecutar"
+
+#: .././modules/properties-module.i:599
+msgid "Set UID"
+msgstr "Establecer el UID"
+
+#. gtk_table_attach (GTK_TABLE (table), perm[0], 0 + o, 1 + o, 0, 1, 0, 0, X_PAD, 0);
+#. gtk_table_attach (GTK_TABLE (table), perm[1], 1 + o, 2 + o, 0, 1, 0, 0, X_PAD, 0);
+#. gtk_table_attach (GTK_TABLE (table), perm[2], 2 + o, 3 + o, 0, 1, 0, 0, X_PAD, 0);
+#. gtk_table_attach (GTK_TABLE (table), perm[3], 3 + o, 4 + o, 0, 1, 0, 0, X_PAD, 0);
+#. gtk_table_attach (GTK_TABLE (table), perm[4], 4 + o, 5 + o, 0, 1, 0, 0, X_PAD, 0);
+#: .././modules/properties-module.i:615 .././modules/properties-module.i:884
+msgid "Group:"
+msgstr "Grupo:"
+
+#: .././modules/properties-module.i:628
+msgid "Set GID"
+msgstr "Establecer el GID"
+
+#. gtk_table_attach (GTK_TABLE (table), perm[5], 0 + o, 1 + o, 1, 2, 0, 0, X_PAD, 0);
+#. gtk_table_attach (GTK_TABLE (table), perm[6], 1 + o, 2 + o, 1, 2, 0, 0, X_PAD, 0);
+#. gtk_table_attach (GTK_TABLE (table), perm[7], 2 + o, 3 + o, 1, 2, 0, 0, X_PAD, 0);
+#. gtk_table_attach (GTK_TABLE (table), perm[8], 3 + o, 4 + o, 1, 2, 0, 0, X_PAD, 0);
+#. gtk_table_attach (GTK_TABLE (table), perm[9], 4 + o, 5 + o, 1, 2, 0, 0, X_PAD, 0);
+#: .././modules/properties-module.i:643
+msgid "Others:"
+msgstr "Otros:"
+
+#: .././modules/properties-module.i:658
+msgid "Sticky"
+msgstr "Persistente"
+
+#: .././modules/properties-module.i:701 .././modules/properties-module.i:755
+#: .././modules/properties-module.i:915
+msgid "Paths"
+msgstr "Rutas"
+
+#: .././modules/properties-module.i:701 .././modules/properties-module.i:755
+#: .././modules/properties-module.i:915 .././modules/callbacks.i:321
+#: .././modules/callbacks.i:638
+msgid "Path"
+msgstr "Ruta"
+
+#: .././modules/properties-module.i:725 .././modules/properties-module.i:781
+#: .././modules/properties-module.i:939 .././modules/touch.i:251
+msgid "More..."
+msgstr "Más…"
+
+#: .././modules/properties-module.i:808 .././rodent/rodent_actions.c:66
+#: .././rodent/rodent_tip.c:434
+msgid "Owner"
+msgstr "Propietario"
+
+#: .././modules/properties-module.i:992
+msgid "Preview"
+msgstr "Previsualizar"
+
+#: .././modules/run.i:196 .././modules/run.i:204
+msgid "Kill (KILL)"
+msgstr "Matar (KILL)"
+
+#: .././modules/run.i:198
+msgid "Kill"
+msgstr "Matar"
+
+#: .././modules/run.i:221
+msgid ""
+"Left click once to follow this link.\n"
+"Middle click once to select this cell"
+msgstr ""
+"Pulsar una vez con el botón izquierdo para seguir este enlace.\n"
+"Pulsar una vez con el botón central para seleccionar esta celda"
+
+#: .././modules/run.i:231
+msgid "PID"
+msgstr "PID"
+
+#: .././modules/run.i:232
+msgid "Right clicking pops context menu immediately"
+msgstr "Clic derecho muestra el menú contextual inmediatamente"
+
+#: .././modules/cp.i:55
+#, c-format
+msgid "%s: overwrite %s? "
+msgstr "%s: ¿sobreescribir %s? (s/n) "
+
+#: .././modules/cp.i:58
+msgid "Target location: "
+msgstr "Dirección de destino:"
+
+#: .././modules/cp.i:59
+msgid "Source Location:"
+msgstr "Ubicación del código fuente:"
+
+#: .././modules/cp.i:443
+msgid "Failed to copy file"
+msgstr "Falló al copiar el archivo"
+
+#: .././modules/cp.i:449
+msgid "Error: Rename failed."
+msgstr "Error: Fallo al renombrar."
+
+#: .././modules/cp.i:451
+msgid "Move files"
+msgstr "Mover archivos"
+
+#: .././modules/cp.i:462 .././modules/rename_entry.i:108
+#, c-format
+msgid "Failed to link %s to %s"
+msgstr "Falló al enlazar %s con %s"
+
+#: .././modules/cp.i:463 .././modules/rename_entry.i:109
+#: .././modules/completion.i:56 .././include/rodent_popup_threads.h:157
+msgid "File"
+msgstr "Archivo"
+
+#: .././modules/cp.i:463 .././modules/rename_entry.i:109
+msgid "Destination"
+msgstr "Destino"
+
+#: .././modules/combobox-module.i:227
+msgid "History:"
+msgstr "Historial:"
+
+#: .././modules/mime-module.c:31
+msgid "List files only"
+msgstr "Sólo listar archivos"
+
+#: .././modules/mime-module.c:32
+msgid "Extract files from the archive"
+msgstr "Extraer archivos del archivador"
+
+#: .././modules/mime-module.c:33 .././include/rodent_actions.h:279
+#: .././rodent/rodent_popup.i:67
+msgid "Open in New Window"
+msgstr "Abrir en una ventana nueva"
+
+#. Different button icon for the toolbar
+#: .././modules/mime-module.c:34 .././include/rodent_actions.h:283
+#: .././include/rodent_actions.h:287
+msgid "Open in New Tab"
+msgstr "Abrir en solapa nueva"
+
+#: .././modules/mime-module.c:35
+msgid "Create a compressed archive with the selected objects"
+msgstr "Crear un archivador comprimido con los objetos seleccionados"
+
+#: .././modules/mime-module.c:36
+msgid "Create a new archive"
+msgstr "Crea un archivador nuevo"
+
+#: .././modules/mime-module.c:37
+msgid "Install"
+msgstr "Instalar"
+
+#: .././modules/mime-module.c:38
+msgid "Uninstall"
+msgstr "Desinstalar"
+
+#: .././modules/mime-module.c:39
+msgid "Information about the program"
+msgstr "Información sobre el programa"
+
+#: .././modules/mime-module.c:40
+msgid "Simulation of data CD burning"
+msgstr "Simulación de grabación de CD de datos"
+
+#: .././modules/mime-module.c:41
+msgid "Burn CD/DVD"
+msgstr "Grabar CD/DVD"
+
+#: .././modules/rm.i:127
+msgid "Don't follow symlinks"
+msgstr "No seguir enlaces simbólicos"
+
+#: .././modules/rm.i:127
+msgid "Follow symlinks"
+msgstr "Seguir los enlaces simbólicos"
+
+#: .././modules/rm.i:173
+msgid "Delete failed"
+msgstr "Fallo al borrar"
+
+#: .././modules/rm.i:175
+#, c-format
+msgid "Unexpected error: %s"
+msgstr "Error inesperado: %s"
+
+#: .././modules/rm.i:178
+msgid "Are you sure you want to continue?"
+msgstr "¿Está seguro de que quiere continuar?"
+
+#. title
+#: .././modules/rm.i:353
+msgid "Remove"
+msgstr "Quitar"
+
+#: .././modules/rm.i:405
+msgid "Apply to all"
+msgstr "Aplicar a todos"
+
+#: .././modules/rm.i:498
+msgid "Delete Files/Directories"
+msgstr "Borrar archivos/directorios"
+
+#: .././modules/rm.i:504
+#, c-format
+msgid "Delete %s"
+msgstr "Eliminar %s"
+
+#. Broken symlink
+#: .././modules/rm.i:510
+msgid "Broken symbolic link"
+msgstr "Enlace simbólico roto"
+
+#: .././modules/rm.i:523
+#, c-format
+msgid "%d more item"
+msgid_plural "%d more items"
+msgstr[0] "%d elemento más"
+msgstr[1] "%d elementos más"
+
+#: .././modules/rm.i:524
+msgid "Selection:"
+msgstr "Selección:"
+
+#: .././modules/callbacks.i:129
+msgid "Could not validate the transaction"
+msgstr "No se pudo validar la transacción"
+
+#: .././modules/callbacks.i:145
+msgid "No selection available"
+msgstr "No hay ninguna selección disponible"
+
+#: .././modules/callbacks.i:162
+msgid "No group selected"
+msgstr "No se seleccionó ningún grupo"
+
+#: .././modules/callbacks.i:262
+msgid ""
+"The program exists, but is not executable.\n"
+"Please check your installation and/or install the binary properly."
+msgstr ""
+"El programa existe, pero no es un ejecutable.\n"
+"Por favor compruebe su instalación y/o instale el binario adecuadamente."
+
+#: .././modules/callbacks.i:265 .././modules/callbacks.i:445
+#: .././modules/callbacks.i:486
+#, c-format
+msgid "Open with %s"
+msgstr "Abrir con %s"
+
+#: .././modules/callbacks.i:321
+msgid "Go To"
+msgstr "Ir"
+
+#: .././modules/callbacks.i:362
+#, c-format
+msgid "%s does not exist."
+msgstr "%s no existe."
+
+#: .././modules/callbacks.i:488 .././include/rodent_actions.h:404
+msgid "Execute Shell Command"
+msgstr "Ejecutar orden del intérprete de órdenes"
+
+#: .././modules/callbacks.i:492
+msgid ""
+"Console: quickly run single commands -- write a command here and press enter."
+msgstr ""
+"Consola: ejecutar con rapidez órdenes sencillas (escriba aquí una orden y "
+"pulse «Intro»)."
+
+#: .././modules/callbacks.i:497
+msgid "Run in Terminal"
+msgstr "Ejecutar en un terminal"
+
+#: .././modules/callbacks.i:638
+msgid "Select directory"
+msgstr "Seleccionar carpeta"
+
+#: .././modules/callbacks.i:660 .././modules/callbacks.i:1501
+msgid "Create New Folder"
+msgstr "Crear una carpeta"
+
+#: .././modules/callbacks.i:841 .././modules/callbacks.i:1982
+#: .././rodent/rodent_mouse.i:537 .././rodent/rodent_mouse.i:767
+#: .././rodent/rodent_mouse.i:886
+msgid "Selection"
+msgstr "Selección"
+
+#: .././modules/callbacks.i:877
+#, c-format
+msgid "Unmounting %s"
+msgstr "Desmontando %s"
+
+#: .././modules/callbacks.i:880
+#, c-format
+msgid "Mounting %s"
+msgstr "Montando %s"
+
+#: .././modules/callbacks.i:997 .././rodent/rodent_mouse.i:467
+#, c-format
+msgid "Uploading file %s"
+msgstr "Enviando el archivo %s"
+
+#: .././modules/callbacks.i:1008 .././rodent/rodent_mouse.i:477
+#, c-format
+msgid "Downloading file %s..."
+msgstr "Descargando el archivo %s..."
+
+#: .././modules/callbacks.i:1077 .././modules/callbacks.i:1113
+#: .././include/rodent_actions.h:331
+msgid "Cut"
+msgstr "Cortar"
+
+#: .././modules/callbacks.i:1326
+msgid "Empty history"
+msgstr "Histórico vacío"
+
+#: .././modules/callbacks.i:1349
+msgid "Initial Point"
+msgstr "Punto inicial"
+
+#: .././modules/callbacks.i:1502 .././modules/callbacks.i:1556
+#: .././rodent/rodent_actions.c:63
+msgid "Name"
+msgstr "Nombre"
+
+#: .././modules/callbacks.i:1530 .././modules/callbacks.i:1576
+#: .././modules/touch.i:125
+msgid "write failed"
+msgstr "error al escribir"
+
+#: .././modules/callbacks.i:1535 .././modules/callbacks.i:1581
+#, fuzzy
+msgid "Don't forget"
+msgstr "No informar"
+
+#: .././modules/callbacks.i:1556
+msgid "New file"
+msgstr "Archivo nuevo"
+
+#: .././modules/callbacks.i:1977 .././include/rodent_actions.h:438
+msgid "Select All"
+msgstr "Seleccionar todo"
+
+#: .././modules/callbacks.i:1994 .././include/rodent_actions.h:451
+msgid "Select Items Matching..."
+msgstr "Seleccionar elementos que coincidan con…"
+
+#: .././modules/callbacks.i:1995 .././include/rodent_actions.h:456
+msgid "Unselect Items Matching..."
+msgstr "Deseleccionar elementos que cumplan..."
+
+#: .././modules/callbacks.i:2109
+#, fuzzy
+msgid "Bookmark added"
+msgstr "Añadido a marcadores"
+
+#: .././modules/callbacks.i:2112 .././modules/callbacks.i:2134
+msgid "The operation was cancelled."
+msgstr "La operación fue cancelada."
+
+#: .././modules/callbacks.i:2172 .././modules/rename_entry.i:268
+#: .././modules/rename_entry.i:285 .././modules/rename_entry.i:292
+#: .././modules/xmltree.i:69
+msgid "Shift"
+msgstr "Mayús"
+
+#: .././modules/callbacks.i:2177 .././modules/rename_entry.i:263
+#: .././modules/rename_entry.i:268 .././modules/rename_entry.i:275
+#: .././modules/rename_entry.i:285 .././modules/rename_entry.i:292
+#: .././modules/rename_entry.i:302 .././modules/xmltree.i:74
+msgid "Control"
+msgstr "Control"
+
+#: .././modules/callbacks.i:2182 .././modules/xmltree.i:79
+msgid "Alt"
+msgstr "Alt"
+
+#: .././modules/callbacks.i:2197 .././modules/xmltree.i:102
+#: .././include/rodent_actions.h:315
+msgid "Home"
+msgstr "Casa"
+
+#: .././modules/callbacks.i:2198 .././modules/xmltree.i:103
+msgid "Left"
+msgstr "Izquierda"
+
+#: .././modules/callbacks.i:2199 .././modules/xmltree.i:104
+msgid "Up"
+msgstr "Subir"
+
+#: .././modules/callbacks.i:2200 .././modules/xmltree.i:105
+msgid "Right"
+msgstr "Derecha"
+
+#: .././modules/callbacks.i:2201 .././modules/xmltree.i:106
+msgid "Down"
+msgstr "Bajar"
+
+#: .././modules/callbacks.i:2202 .././modules/xmltree.i:107
+msgid "Page up"
+msgstr "Página arriba"
+
+#: .././modules/callbacks.i:2203 .././modules/xmltree.i:108
+msgid "Page down"
+msgstr "Página abajo"
+
+#: .././modules/callbacks.i:2204 .././modules/xmltree.i:109
+msgid "End"
+msgstr "Final"
+
+#: .././modules/callbacks.i:2205 .././modules/xmltree.i:110
+msgid "Begin"
+msgstr "Inicio"
+
+#: .././modules/callbacks.i:2207 .././modules/xmltree.i:112
+msgid "Insert"
+msgstr "Insertar"
+
+#: .././modules/callbacks.i:2208 .././modules/xmltree.i:113
+msgid "Equal"
+msgstr "Iguales"
+
+#: .././modules/callbacks.i:2209 .././modules/xmltree.i:114
+msgid "Plus"
+msgstr "Más"
+
+#: .././modules/callbacks.i:2210 .././modules/xmltree.i:115
+msgid "Minus"
+msgstr "Menos"
+
+#: .././modules/callbacks.i:2211 .././modules/xmltree.i:116
+msgid "Add"
+msgstr "Añadir"
+
+#: .././modules/callbacks.i:2212 .././modules/xmltree.i:117
+msgid "Subtract"
+msgstr "Restar"
+
+#: .././modules/callbacks.i:2329
+msgid "The location does not exist."
+msgstr "La ubicación no existe."
+
+#: .././modules/callbacks.i:2329
+msgid "Accept"
+msgstr "Aceptar"
+
+#: .././modules/rename_entry.i:256 .././modules/rename_entry.i:278
+#: .././modules/rename_entry.i:295
+msgid "Rename the selected file"
+msgstr "Renombrar el archivo seleccionado"
+
+#: .././modules/rename_entry.i:258 .././modules/rename_entry.i:263
+#: .././modules/rename_entry.i:268 .././modules/rename_entry.i:275
+#: .././modules/rename_entry.i:280 .././modules/rename_entry.i:285
+#: .././modules/rename_entry.i:292 .././modules/rename_entry.i:297
+#: .././modules/rename_entry.i:302
+msgid "Click"
+msgstr "Click"
+
+#: .././modules/rename_entry.i:261 .././modules/rename_entry.i:273
+#: .././modules/rename_entry.i:300
+msgid "Duplicate this path"
+msgstr "Duplicar esta ruta"
+
+#: .././modules/rename_entry.i:266 .././modules/rename_entry.i:283
+#: .././modules/rename_entry.i:290
+msgid "Create Symlink"
+msgstr "Crear enlace simbólico"
+
+#: .././modules/rename_entry.i:393 .././include/rodent_actions.h:257
+msgid "Rename"
+msgstr "Renombrar"
+
+#: .././modules/rename_entry.i:398
+#, c-format
+msgid "Copy of %s"
+msgstr "copia de %s"
+
+#: .././modules/rename_entry.i:400 .././include/rodent_actions.h:261
+msgid "Duplicate"
+msgstr "Duplicar"
+
+#: .././modules/rename_entry.i:404 .././rodent/rodent_tip.c:342
+#, c-format
+msgid "Link to %s"
+msgstr "Enlace hacia %s"
+
+#: .././modules/mime-mouse_magic.i:424
+msgid "Regular file"
+msgstr "Archivo regular"
+
+#: .././modules/mime-mouse_magic.i:729
+msgid "File format not recognized"
+msgstr "No se reconoció el formato de archivo"
+
+#: .././modules/mime-mouse_magic.i:732
+#, c-format
+msgid "Contents of %s"
+msgstr "Contenido de %s"
+
+#: .././modules/mime-mouse_magic.i:875
+msgid "Empty file"
+msgstr "Archivo vacío"
+
+#: .././modules/bcrypt.c:51
+msgid "Encryption Key Approval"
+msgstr "Aprobación de la clave de cifrado"
+
+#: .././modules/bcrypt.c:79
+msgid "-o     print output to standard out. Implies -r."
+msgstr ""
+
+#: .././modules/bcrypt.c:83
+msgid "-c     DO NOT compress files before encryption."
+msgstr ""
+
+#: .././modules/bcrypt.c:87
+msgid "-r     DO NOT remove input files after processing"
+msgstr ""
+
+#: .././modules/bcrypt.c:94
+msgid "Encryption key: "
+msgstr "Clave de cifrado: "
+
+#: .././modules/bcrypt.c:106
+msgid "Confirm:"
+msgstr "Confirmar:"
+
+#: .././modules/bcrypt.c:119
+msgid "Sorry, passwords do not match"
+msgstr "Las contraseñas no coinciden"
+
+#: .././modules/bcrypt.c:127
+msgid "Minimum length:"
+msgstr "Longitud mínima:"
+
+#: .././modules/completion.i:40
+#, fuzzy
+msgid "Too many matches"
+msgstr "demasiadas plantillas"
+
+#: .././modules/completion.i:41
+msgid "Options:"
+msgstr "Opciones:"
+
+#: .././modules/completion.i:43
+msgid "Text Completion"
+msgstr "Terminación de texto"
+
+#: .././modules/completion.i:53
+msgid "Command"
+msgstr "Comando"
+
+#: .././modules/completion.i:59 .././modules/completion.i:102
+msgid "Command history"
+msgstr "Historial de órdenes"
+
+#: .././modules/completion.i:62 .././include/rodent_actions.h:478
+msgid "User"
+msgstr "Usuario"
+
+#: .././modules/completion.i:68
+msgid "Host"
+msgstr "Host"
+
+#: .././modules/completion.i:80
+msgid "Found no match"
+msgstr "No se ha encontrado ninguna coincidencia"
+
+#: .././modules/completion.i:95 .././modules/completion.i:102
+msgid "Completion mode:"
+msgstr "Modo de terminación:"
+
+#: .././modules/completion.i:96
+msgid "command"
+msgstr "comando"
+
+#: .././modules/completion.i:96
+msgid "file"
+msgstr "fichero"
+
+#: .././modules/completion.i:113
+msgid "Options >>"
+msgstr "Opciones >>"
+
+#: .././modules/xmltree.i:172 .././modules/xmltree.i:196
+#: .././modules/xmltree.i:437 .././modules/xmltree.i:608
+#: .././modules/xmltree.i:640 .././modules/xmltree.i:771
+msgid "Keybinding"
+msgstr "Combinación de teclas"
+
+#: .././modules/xmltree.i:320
+msgid "You may not specify duplicate patterns"
+msgstr "No puede especificar patrones duplicados"
+
+#: .././modules/xmltree.i:617
+msgid "Modify"
+msgstr "Modificar"
+
+#. window = new_dialog(whatever_box("Attribute"), key);
+#. gchar *attribute_title = g_strdup_printf("%s %s", text, _("<choose a key>"));
+#: .././modules/xmltree.i:621
+msgid "<choose a key>"
+msgstr "<elija una tecla>"
+
+#: .././modules/xmltree.i:867
+#, fuzzy
+msgid "XML tag"
+msgstr "Catálogo XML"
+
+#: .././modules/xmltree.i:883
+#, fuzzy
+msgid "prefix"
+msgstr "[prefijo]"
+
+#: .././modules/xmltree.i:900
+msgid "Attribute"
+msgstr "Atributo"
+
+#: .././modules/touch.i:346
+msgid "Select A File"
+msgstr "Seleccione un archivo"
+
+#: .././modules/xmltree.c:48
+msgid "Validate document"
+msgstr "Validar el documento"
+
+#: .././modules/xmltree.c:49
+#, fuzzy
+msgid "The Document is not valid!"
+msgstr "La consulta no es válida."
+
+#: .././modules/xmltree.c:158
+msgid "Save"
+msgstr "Guardar"
+
+#: .././modules/dialogs.i:121
+msgid "Select File"
+msgstr "Seleccionar archivo"
+
+#: .././modules/dialogs.i:246 .././modules/dialogs.i:531
+msgid "Preparing"
+msgstr "Preparando"
+
+#: .././modules/dialogs.i:846
+#, c-format
+msgid "Edit mount point for %s"
+msgstr "Editar el punto de montaje de %s"
+
+#: .././modules/dialogs.i:847 .././modules/dialogs.i:848
+msgid "Select mount point"
+msgstr "Seleccionar punto de montaje"
+
+#: .././modules/dialogs.i:849
+msgid "Mount Point"
+msgstr "Punto de montaje"
+
+#: .././modules/dialogs.i:875
+msgid "Unable to mount location"
+msgstr "No se pudo montar el lugar"
+
+#: .././modules/dialogs.i:875
+msgid "address already in use"
+msgstr "la dirección ya está en uso"
+
+#: .././modules/dialogs.i:1061
+msgid "Tests"
+msgstr "Pruebas"
+
+#: .././modules/dialogs.i:1061
+msgid "development version"
+msgstr "versión de desarrollo"
+
+#: .././modules/dialogs.i:1074
+msgid "Initial idea, basic architecture, much initial source code"
+msgstr ""
+"Idea inicial, arquitectura básica, gran parte del código fuente inicial"
+
+#: .././modules/dialogs.i:1083
+msgid "Contributors"
+msgstr "Colaboradores"
+
+#: .././modules/dialogs.i:1121
+#, fuzzy
+msgid "Open Source:"
+msgstr "Código abierto"
+
+#: .././modules/dialogs.i:1128
+msgid "Contributors to older versions:"
+msgstr "Colaboradores de versiones anteriores:"
+
+#: .././modules/dialogs.i:1147
+msgid "This is free software with ABSOLUTELY NO WARRANTY."
+msgstr "Esto es software libre sin NINGÚN TIPO DE GARANTÍA."
+
+#: .././modules/dialogs.i:1157
+msgid "Hello World"
+msgstr "Hola mundo"
+
+#: .././modules/dialogs.i:1158
+msgid "Suggestions, bug reports"
+msgstr "Sugerencias, informes de fallos"
+
+#: .././modules/dialogs.i:1159
+msgid ""
+"Rodent is fast, small and powerful file manager for the\n"
+"GNU operating system (but it also works in BSD).\n"
+"That's one way to look at it. Another way is to call\n"
+"it a graphic shell (that's probably more accurate).\n"
+"\n"
+"Rodent is *not* a filemanager written for dummies.\n"
+"Emphasis is on ease of use for the advanced user,\n"
+"not the computer illiterate.\n"
+"\n"
+"Rodent is a cross between a command line terminal and an\n"
+"iconview: a centaur filemanager.\n"
+msgstr ""
+
+#: .././modules/dialogs.i:1184 .././include/rodent_actions.h:303
+msgid "About"
+msgstr "Acerca de"
+
+#: .././include/rodent_actions.h:245
+msgid "Create new file in the given directory"
+msgstr "Crea un archivo nuevo en la carpeta dada"
+
+#: .././include/rodent_actions.h:249
+msgid "Create a new empty folder inside this folder"
+msgstr "Crear una carpeta nueva vacía dentro de esta carpeta"
+
+#: .././include/rodent_actions.h:253
+#, fuzzy
+msgid "bcrypt"
+msgstr "Cifrar"
+
+#: .././include/rodent_actions.h:265
+msgid "Link"
+msgstr "Enlace"
+
+#: .././include/rodent_actions.h:269
+msgid "Touch"
+msgstr "Tocar"
+
+#: .././include/rodent_actions.h:291
+msgid "Show hidden files"
+msgstr "Mostrar archivos ocultos"
+
+#: .././include/rodent_actions.h:295
+msgid "Show Backup Files"
+msgstr "Mostrar archivos de respaldo"
+
+#: .././include/rodent_actions.h:299
+msgid "Show previews of files and directories."
+msgstr "Mostrar previsualización de archivos y carpetas."
+
+#: .././include/rodent_actions.h:307
+msgid "Choose Location"
+msgstr "Elegir ubicación"
+
+#: .././include/rodent_actions.h:311
+msgid "System"
+msgstr "Sistema"
+
+#: .././include/rodent_actions.h:319
+msgid "Go up"
+msgstr "Subir"
+
+#: .././include/rodent_actions.h:323
+msgid "Go back"
+msgstr "Atrás"
+
+#: .././include/rodent_actions.h:327
+msgid "Go forward"
+msgstr "Adelante"
+
+#: .././include/rodent_actions.h:339
+msgid "Paste"
+msgstr "Pegar"
+
+#: .././include/rodent_actions.h:355
+msgid "Open with"
+msgstr "Abrir con"
+
+#: .././include/rodent_actions.h:359 .././rodent/rodent_popup.i:285
+msgid "Add bookmark"
+msgstr "Añadir marcador"
+
+#: .././include/rodent_actions.h:363 .././rodent/rodent_popup.i:285
+msgid "Remove bookmark"
+msgstr "Quitar marcador"
+
+#: .././include/rodent_actions.h:367
+msgid "Toggle Bookmark"
+msgstr "Cambiar marcador"
+
+#: .././include/rodent_actions.h:371
+msgid "Mount the volume associated with this folder"
+msgstr "Montar el volumen asociado con esta carpeta"
+
+#: .././include/rodent_actions.h:375
+msgid "Unmount the volume associated with this folder"
+msgstr "Desmontar el volumen asociado con esta carpeta"
+
+#: .././include/rodent_actions.h:391
+msgid "Open terminal"
+msgstr "Abrir terminal"
+
+#. This is the same as REFRESH_CALLBACK, except that this one gets displayed in menu:
+#: .././include/rodent_actions.h:396 .././include/rodent_actions.h:400
+msgid "Reload"
+msgstr "Recargar"
+
+#. This is the same as FIND_CALLBACK, except that this one gets displayed in menu:
+#: .././include/rodent_actions.h:409 .././include/rodent_actions.h:413
+msgid "Search"
+msgstr "Buscar"
+
+#: .././include/rodent_actions.h:417
+msgid "Compare Files or Folders"
+msgstr "Comparar archivos o directorios"
+
+#: .././include/rodent_actions.h:421
+msgid "Sort case insensitive"
+msgstr "Ordenar sin diferenciar entre mayúsculas y minúsculas"
+
+#: .././include/rodent_actions.h:425
+msgid "Sort data in ascending order"
+msgstr "Ordenar los datos ascendentemente"
+
+#: .././include/rodent_actions.h:429
+msgid "Sort data in descending order"
+msgstr "Ordenar los datos descendentemente"
+
+#: .././include/rodent_actions.h:434
+msgid "Global keybindings support"
+msgstr "Implementación de accesos rápidos globales"
+
+#: .././include/rodent_actions.h:442
+msgid "Invert Selection"
+msgstr "Invertir selección"
+
+#: .././include/rodent_actions.h:447
+msgid "Unselect"
+msgstr "Deseleccionar"
+
+#: .././include/rodent_actions.h:462
+msgid "Sort by name"
+msgstr "Ordenar por nombre"
+
+#: .././include/rodent_actions.h:466
+msgid "Default sort order"
+msgstr "Orden de colocación predeterminado"
+
+#: .././include/rodent_actions.h:470
+msgid "Sort by date"
+msgstr "Ordenar por fecha"
+
+#: .././include/rodent_actions.h:474
+msgid "Sort by size"
+msgstr "Ordenar por tamaño"
+
+#: .././include/rodent_actions.h:482 .././rodent/rodent_actions.c:67
+#: .././rodent/rodent_tip.c:434
+msgid "Group"
+msgstr "Grupo"
+
+#: .././include/rodent_actions.h:486
+msgid "By Permissions"
+msgstr "Por permisos"
+
+#: .././include/rodent_actions.h:491
+msgid "Opens the main menu."
+msgstr "Abre el menú principal"
+
+#. //////////////////////////////////////////////////////////////////////////////////
+#: .././include/rodent_actions.h:500
+#, fuzzy
+msgid "Enlarge Icons"
+msgstr "Iconos grandes"
+
+#: .././include/rodent_actions.h:504
+#, fuzzy
+msgid "Shrink Icons"
+msgstr "Reducir tipo de letra"
+
+#: .././include/rodent_actions.h:508
+msgid "Default icon zoom level"
+msgstr "Nivel de ampliación predeterminado del icono"
+
+#: .././include/rodent_actions.h:516
+msgid "View as list"
+msgstr "Ver como lista"
+
+#: .././include/rodent_actions.h:520
+msgid "Small Icons"
+msgstr "Iconos pequeños"
+
+#: .././include/rodent_actions.h:524
+msgid "Normal Icons"
+msgstr "Iconos normales"
+
+#: .././include/rodent_actions.h:528
+msgid "Large Icons"
+msgstr "Iconos grandes"
+
+#: .././include/rodent_actions.h:532
+msgid "Very large"
+msgstr "Muy grande"
+
+#: .././include/rodent_popup_threads.h:74
+msgid "Sort options"
+msgstr "Opciones de ordenación"
+
+#: .././include/rodent_popup_threads.h:145
+msgid "There was a network error."
+msgstr "Ha ocurrido un error de red."
+
+#. {SUBMENU_TYPE,"main_popup_menu","module1","Module1",NULL,},
+#: .././include/rodent_popup_threads.h:151
+msgid "Go"
+msgstr "Ir"
+
+#: .././include/rodent_popup_threads.h:158
+msgid "Applications"
+msgstr "Aplicaciones"
+
+#: .././include/rodent_popup_threads.h:159
+msgid "Sort"
+msgstr "Ordenar"
+
+#: .././include/rodent_popup_threads.h:160
+msgid "View"
+msgstr "Ver"
+
+#: .././include/rodent_popup_threads.h:161
+msgid "Select"
+msgstr "Seleccionar"
+
+#: .././rodent/rodent_population_threads.i:88
+msgid "This is the root of the filesystem"
+msgstr "Esta es la raíz del sistema de archivos"
+
+#: .././rodent/rodent_population_threads.i:89
+msgid "Root Directory"
+msgstr "Directorio raíz"
+
+#: .././rodent/rodent_population_threads.i:94
+msgid "Home Directory"
+msgstr "Directorio personal"
+
+#. ETIMEDOUT       Connection timed out (POSIX.1)
+#. EDEADLK         Resource deadlock avoided (POSIX.1)
+#: .././rodent/rodent_population_threads.i:263
+#, fuzzy
+msgid "Unable to load: %s..."
+msgstr "Incapaz de descargar: %s"
+
+#: .././rodent/rodent_population_threads.i:393
+msgid "Could not initialize monitoring"
+msgstr "No se pudo inicializar la monitorización"
+
+#: .././rodent/rodent_population_threads.i:395
+msgid "Remote Connection..."
+msgstr "Conexión remota..."
+
+#: .././rodent/rodent_population_threads.i:438 .././rodent/rodent_tip.c:358
+msgid "Installed Plugins"
+msgstr "Complementos instalados"
+
+#: .././rodent/rodent_popup_threads.i:124
+msgid "click"
+msgstr "pulsar"
+
+#: .././rodent/rodent_popup_threads.i:124
+msgid "Assign"
+msgstr "Asignar"
+
+#: .././rodent/rodent_popup_threads.i:124
+msgid "Associated command"
+msgstr "Orden asociada"
+
+#: .././rodent/xfdir.i:83 .././rodent/rodent_tip.c:531
+msgid "Hidden"
+msgstr "Oculto"
+
+#: .././rodent/rodent_actions.c:62
+msgid "Type"
+msgstr "Tipo"
+
+#: .././rodent/rodent_actions.c:64
+msgid "Date"
+msgstr "Fecha"
+
+#: .././rodent/rodent_actions.c:65 .././rodent/rodent_tip.c:437
+msgid "Size"
+msgstr "Tamaño"
+
+#: .././rodent/rodent_actions.c:68
+msgid "Mode"
+msgstr "Modo"
+
+#: .././rodent/rodent_actions.c:72
+msgid "List"
+msgstr "Lista"
+
+#: .././rodent/rodent_actions.c:73
+msgid "Tiny"
+msgstr "Diminuto"
+
+#: .././rodent/rodent_tip.c:412
+msgid "Backup file"
+msgstr "Archivo de respaldo"
+
+#: .././rodent/rodent_tip.c:415
+msgid "File Type"
+msgstr "Tipo de archivo"
+
+#: .././rodent/rodent_tip.c:416 .././rodent/rodent_tip.c:417
+msgid "MIME Type"
+msgstr "Tipo MIME"
+
+#: .././rodent/rodent_tip.c:418
+msgid "Encoding"
+msgstr "Codificación"
+
+#: .././rodent/rodent_tip.c:436
+msgid "Folder"
+msgstr "Carpeta"
+
+#: .././rodent/rodent_tip.c:450
+msgid "Status Change"
+msgstr "Cambio de estado"
+
+#: .././rodent/rodent_tip.c:458
+msgid "Modification Time :"
+msgstr "Hora de modificación :"
+
+#: .././rodent/rodent_tip.c:467
+msgid "Access Time :"
+msgstr "Último acceso :"
+
+#: .././rodent/rodent_tip.c:474
+msgid "Links"
+msgstr "Enlaces"
+
+#: .././rodent/rodent_tip.c:474
+msgid "hard"
+msgstr "duro"
+
+#: .././rodent/rodent_tip.c:507
+msgid "Local File"
+msgstr "Archivo local"
+
+#: .././rodent/rodent_tip.c:509
+msgid "Remote File"
+msgstr "Archivo remoto"
+
+#: .././rodent/rodent_tip.c:512
+msgid "Plugin services"
+msgstr "Servicios del complemento"
+
+#: .././rodent/rodent_tip.c:525 .././rodent/rodent_tip.c:541
+#: .././rodent/rodent_tip.c:547
+#, fuzzy
+msgid "Local Directory"
+msgstr "Directorio Local:"
+
+#: .././rodent/rodent_popup.i:122
+msgid "Run in terminal window"
+msgstr "Ejecutar en ventana de terminal"
+
+#: .././rodent/rodent_popup.i:122 .././rodent/rodent_popup.i:145
+msgid "Is executable"
+msgstr "es ejecutable"
+
+#: .././rodent/rodent_popup.i:145
+msgid "Run"
+msgstr "Ejecutar"
+
+#: .././rodent/rodent_popup.i:661
+msgid "Specify Output Directory..."
+msgstr "Especificar directorio de salida..."
+
+#: .././rodent/rodent_popup.c:201 .././rodent/rodent_popup.c:206
+msgid "Reset default state"
+msgstr "Reiniciar al estado por omisión"
+
+#: .././rodent/rodent_popup.c:201
+msgid "Single Instance"
+msgstr "Única instancia"
+
+#: .././rodent/rodent_popup.c:206
+msgid "All Instances"
+msgstr "Todas las instancias"
+
+#: .././rodent/rodent_mouse.c:226
+msgid "No file selected"
+msgstr "No hay ningún archivo seleccionado"
+
+#: .././rodent/rodent_population.i:81
+msgid "Loading folder..."
+msgstr "Cargando la carpeta..."
+
+#: .././rodent/rodent_population.i:86
+#, c-format
+msgid "Loading %s..."
+msgstr "Cargando %s…"
+
+msgid "rodent-translation-team"
+msgstr ""
+"***  Spanish <es@li.org>\n"
+"\n"
+"-  2004 Alexander Reinholdt <dustpuppy@mail.berlios.de>.\n"
+"-  Miguel Angel Quesada <kesadalive@gmail.com>, 2009.\n"
+"-  Ramón Rey Vicente <ramon.rey@hispalinux.es>, 2003-2004.\n"
+"-  Jorge González <jorgegonz@svn.gnome.org>, 2004-2012.\n"
+"-  Albert Abril <albert.abril@gmail.com>, 2006.\n"
+"-  Juan Percy Rojas Cruz <juanperojas@gmail.com>, 2008-2009.\n"
+"-  2003 Dario Abatianni <eisfuchs@tigress.com>.\n"
+"-  Adolfo González Blázquez <code@infinicode.org>, 2007.\n"
+"-  Miguel Rodríguez Núñez <bokerones.fritos@gmail.com>, 2012-2013.\n"
+"-  Jean Pierre Mazuelos Saavedra <apuyaya@gmail.com>, 2010.\n"
+"-  Mario Teijeiro Otero <mteijeiro@escomposlinux.org>, 2001-2002.\n"
+"-  José Antonio Salgueiro <joseantsa@eresmas.net>, 2001.\n"
+"-  Bryan Alberto Baron Chinchilla <bachinchi@gmail.com>, 2010.\n"
+"-  Santiago FernÃ¡ndez Sancho <santi@kde-es.org>, 2007-2008.\n"
+"-  2009 Daniel Campos <dcamposf@gmail.com>.\n"
+"-  Carlos Mayo <carlos.mayo@hispalinux.es>, 2003.\n"
+"-  Ulrik Sverdrup <ulrik.sverdrup@gmail.com>, 2009.\n"
+"-  2005 Joris Guisson <joris.guisson@gmail.com>.\n"
+"-  Carlos Mayo HernÃ¡ndez <carlos.mayo@hispalinux.es>, 2003-2005.\n"
+"-  Nacho Hermoso de Mendoza <gnacho@gmail.com>, 2008.\n"
+"-  Eneko Lacunza <enlar@iname.com>, 2001-2003.\n"
+"-  Rafael Munoz Rodriguez <rafaluco@netscape.net>, 2003-2004.\n"
+"-  Mario Izquierdo <mariodebian@gmail.com>, 2005.\n"
+"-  Renchi Raju <renchi@pooh.tam.uiuc.edu>.\n"
+"-  Traducido por Jose Antonio Salgueiro <developer@telefonica.net.  Agradecimientos: zert, softcatala>.\n"
+"-  Miguel Angel Ruiz Manzano <mruiz@openminds.cl>, 2009.\n"
+"-  Juanjo Marin <juanj.marin@juntadeandalucia.es>, 2007.\n"
+"-  Santiago Erquicia <erqu0001@d.umn.edu>, 2004-2005.\n"
+"-  Christian Neumair <chris@gnome-de.org>, 2002-2009.\n"
+"-  Diego Sevilla Ruiz <dsevilla@um.es>, 2000.\n"
+"-  QA por Carlos Perelló Marín <carlos@gnome-db.org>, 2002.\n"
+"-  Salvador Gimeno Zanón <salgiza@jazzfree.com>, 2002-2005.\n"
+"-  Carlos Perelló Marín <carlos@gnome-db.org>, 2000-2003.\n"
+"-  José Sánchez Moreno <jose@oxigenow.com>, 2007.\n"
+"-  Juan Manuel Garcia Molina <juanma@superiodico.net>, 2001-2007.\n"
+"-  Pablo de Vicente <pablo.devicente@gmail.com>, 2000-2008.\n"
+"-  Lucas Vieites Fariña <lucas@asixinformatica.com>, 2001-2007.\n"
+"-  Rocio Gallego <traducciones@rociogallego.com>, 2010-2013.\n"
+"-  Juan Luis Montore Parera <jlm@NOSPAMmontore.net>, 2003-2005.\n"
+"-  Gustavo Jasso Ahuja <gjasso@gmail.com>, 2012.\n"
+"-  miguel angel quesada fernandez <kesadalive@gmail.com>, 2008.\n"
+"-  Kira J. Fernández <kirajfdez@gmail.com>, 2011-2012.\n"
+"-  Francisco Javier F. Serrador <serrador@cvs.gnome.org>, 2002-2010.\n"
+"-  Juan Pablo Puerta <ews@madridwireless.net>, 1999.\n"
+"-  Cherny D. C. Berbesi I. <cberbesi@onuva.com>, 2009.\n"
+"-  Edited by Krzysztof Luks <kluks@iq.pl>.\n"
+"-  Héctor García Álvarez <hector@scouts-es.org>, 1999-2002.\n"
+"-  Sylvia Sánchez <LailahFSF@gmail.com>, 2010-2011.\n"
+"-  David Paul Peña <eodos0@gmail.com>, 2009-2010.\n"
+"-  Raúl Miró <cotin@geocities.com>, 2001.\n"
+"-  2004 Jernej Kos <kostko@jweb-network.net>.\n"
+"-  Mario Young <mayeco@kdemail.net>, 2008.\n"
+"-  Lucas Garcia <tanke@escomposlinux.org>, 2003.\n"
+"-  Ernesto Manríquez Mendoza <alejandronova@gmail.com>, 2011.\n"
+"-  Anthony Vital <anthony.vital@gmail.com>, 2010.\n"
+"-  Carlos Davila <carluti@users.sourceforge.net>, 2007-2008.\n"
+"-  Raul Jover Baison <cain@akrata.org>, 2003.\n"
+"-  Raúl Alexis Betancort Santana <a2363@correo.dis.ulpgc.es>, 1999.\n"
+"-  Ana María García Molina <ana_gm@eresmas.com>, 2001.\n"
+"-  Miguel Revilla <yo@miguelrevilla.com>, 2001.\n"
+"-  Javier Gomez sierras <jgomsi@apolo.umh.es>, 2000.\n"
+"-  Javier Moreno <javier.moreno@alufis35.uv.es>, 2000.\n"
+"-  Leandro Machacón <leandroman@gemail.com>, 2010.\n"
+"-  2008 Alejandro Valdes Jimenez <avaldes@gnome.org>.\n"
+"-  Danilo Vasquez Simonetti <danilo.vasquez@gmail.com>, 2008.\n"
+"-  Jose Antonio Salgueiro Aquino <developer@telefonica.net>, 2003.\n"
+"-  Carlos Higuera <higuera.carlos@gmail.com>, 2006.\n"
+"-  Ignacio Bezanilla Diaz <coder@telefonica.net>, 2004.\n"
+"-  Ãlvaro PeÃ±a <alvaropg@mac.com>, 2001.\n"
+"-  Alberto Garcia <info@trebol-a.com>, 2007-2008.\n"
+"-  Miguel de Icaza,computo,622-4680 <miguel@metropolis.nuclecu.unam.mx>, 1998.\n"
+"-  Miguel A. Arevalo <marevalo@marevalo.net>, 2002.\n"
+"-  2009 Ulrik Sverdrup <ulrik.sverdrup@gmail.com>.\n"
+"-  Tomas Moreno <tomas@info.ne.udo.edu.ve>, 2001.\n"
+"-  Mario Carrion <mario@carrion.mx>, 2010.\n"
+"-  Q&A, Germán Poo-Caamaño <gpoo@ubiobio.cl>, 2003.\n"
+"-  Mauricio Araya Polo <mauricio@eazel.com>, 2001.\n"
+"-  Ignacio A. Poggi <ignaciop.3@gmail.com>, 2008-2009.\n"
+"-  Claudio Saavedra <csaavedra@alumnos.utalca.cl>, 2004-2009.\n"
+"-  Federico Mena-Quintero <federico@gimp.org>, 1999.\n"
+"-  Arturo Espinosa <arturo@ximian.com>, 2001.\n"
+"-  QA by <asan@euskalnet.net>, 2001.\n"
+"-  David Prieto <frandavid100@gmail.com>, 2008.\n"
+"-  Alberto Caso <alberto.caso@adaptia.es>, 2007-2008.\n"
+"-  Jacinto Capote Robles <fastangel@gmail.com>, 2007-2009.\n"
+"-  Eduardo García Cebollero <kiwnix@yahoo.es>, 2002.\n"
+"-  Alberto Pintado <apintado@lycos.es>, 2003.\n"
+"-  Juan Alfredo Salas Santillana <jsantillana@aqpglug.org.pe>, 2009.\n"
+"-  David Paul <eodos0@gmail.com>, 2011.\n"
+"-  Jordi Mallach <jordi@sindominio.net>, 2000-2012.\n"
+"-  Yonathan Moreno <yonathan@yonathanmoreno.com>, 2012.\n"
+"-  Miguel Menéndez <mimecar@innerzaurus.com>, 2007.\n"
+"-  Rafael Rodríguez <apt-drink@gulic.org>, 2005.\n"
+"-  Rafael Belmonte <eaglescreen@gmail.com>, 2013.\n"
+"-  Hector Wilvert Ivan Valdez Reza <ranmaru.hibikiya@gmail.com>, 2013.\n"
+"-  Santiago Fernandez Sancho <santi@kde-es.org>, 2004-2008.\n"
+"-  2003, 2004 Unai Garro <ugarro@users.sourceforge.net>.\n"
+"-  Milagros Alessandra Infante Montero <maim92@gmail.com>, 2012.\n"
+"-  Leticia Martin <leticia.martin@gmail.com>, 2009.\n"
+"-  Saúl Ortega <sortega4444@gmail.com>, 2010-2011.\n"
+"-  Markus Slopianka <kamikazow@fishmouth.net>, 2009-2013.\n"
+"-  eodos <eodos0@gmail.com>, 2010.\n"
+"-  Unai Garro <ugarro@users.sourceforge.net>, 2003.\n"
+"-  Miguel Rodríguez Pérez <miguelrp@gmail.com>, 2002.\n"
+"-  2005 Antonio Ognio <gnrfan@gnrfan.org>, 2005.\n"
+"-  Sun G11n <gnome_int_l10n@ireland.sun.com>, 2002-2003.\n"
+"-  Carlos Albornoz <carlos@debianchile.cl>, 2009.\n"
+"-  QA: Carlos Perelló Marín <carlos@gnome-db.org>.\n"
+"-  javier Vinal <fjvinal@gmail.com>, 2009-2012.\n"
+"-  Francisco Javier Fernandez Serrador <fserrador@gmail.com>, 2009.\n"
+"-  Nestor Diaz <nestordiaz@equusdigital.com>, 2006.\n"
+"-  José Carlos García Sogo <jsogo@arrakis.es>, 2001-2003.\n"
+"-  Roby Sottini <rsottini@yahoo.com>, 2009.\n"
+"-  Leticia Martin Hernandez <leticia.martin@gmail.com>, 2009.\n"
+"-  Lucas Vieites <lucas@codexion.com>, 2002-2008.\n"
+"-  Germán Poó Caamaño <gpoo@ubiobio.cl>, 2004.\n"
+"-  Alejandro Valdes Jimenez <avaldes@gnome.org>, 2007-2011.\n"
+"-  Rafael Muñoz Cárdenas <bymenda@gmail.com>, 2008.\n"
+"-  Eloy Cuadra <ecuadra@eloihr.net>, 2003-2013.\n"
+"-  Javier Viñal <fjvinal@gmail.com>, 2009-2013.\n"
+"-  cyphra <cyphra@hal9000.eui.upm.es>, 2004.\n"
+"-  Javier Mazorra Rodríguez <mazi.debian@gmail.com>, 2007-2013.\n"
+"-  Rafael Beccar <rafael.beccar@kdemail.net>, 2004-2006.\n"
+"-  Felipe Barros S. <felipeb@gnome.cl>, 2007.\n"
+"-  Chihau Chau <chihau@gmail.com>, 2008-2009.\n"
+"-  Cesar Garcia Tapia <tapia@eitig.com>, 2004-2005.\n"
+"-  Ale Hamann <amadeus@bbs.frc.utn.edu.ar>, 2006-2008.\n"
+"-  Edgardo Rossetto <eros@speedy.com.ar>, 2004.\n"
+"-  Daniel Mustieles <daniel.mustieles@gmail.com>, 2007-2013.\n"
+"-  Antonio Pijuan <deinde@ono.com>, 2003-2005.\n"
+"-  Xavier <xavier.corredor.llano@gmail.com>, 2011.\n"
+"-  Isaac Clerencia <isaac@warp.es>, 2005.\n"
+"-  Francisco Vila <francisco.vila@hispalinux.es>, 2003-2013.\n"
+"-  jeffrey steve borbon sanabria <jeffto@aclibre.org>, 2008.\n"
+"-  Alex Fiestas <alex@eyeos.org>, 2009.\n"
+"-  santi <santi@kde-es.org>, 2005-2009.\n"
+"-  Andrés Gómez <agomez@igalia.com>, 2009.\n"
+"-  Enrique Rodriguez <krm@futurnet.es>, 2003.\n"
+"-  Alejandro Sáchez Acosta <asanchez@gnu.org>, 2002.\n"
+"-  Kramer Garay <kramergaray@hotmail.com>, 2010.\n"
+"-  2003 Eric Bischoff <e.bischoff@noos.fr>.\n"
+"-  sito <soler.sito@gmail.com>, 2008.\n"
+"-  Adrián Martínez <sfxgt3@gmail.com>, 2009-2010.\n"
+"-  Miguel de Icaza <miguel@metropolis.nuclecu.unam.mx>, 1998.\n"
+"-  Antonio Ognio <gnrfan@gnrfan.org>, 2003-2006.\n"
+"-  Héctor Enríquez Díaz <henrique@alumnos.ubiobio.cl>, 2005.\n"
+"-  Gary Castillo <elhumano@hotmail.com>, 2001.\n"
+"-  Miguel Angel Nieto <correo@miguelangelnieto.net>, 2005.\n"
+"-  Marcos Fouces Lago <mfouces@yahoo.es>, 2004.\n"
+"-  Francisco Vila Doncel <fravd@wanadoo.es>, 2003.\n"
+"-  Xavier Corredor Llano <xavier.corredor.llano@gmail.com>, 2010-2012.\n"
+"-  Gabriel Felipe Cornejo Salas <gnomeusr@gmail.com>, 2008.\n"
+"-  David Martínez Moreno <ender@debian.org>, 2005.\n"
+"-  Jesse Avilés <jesseaviles@gmail.com>, 2008-2011.\n"
+"-  Rafael Bermúdez <rafaelbermudez@gmail.com>, 2006.\n"
+"-  Benjamín Valero Espinosa <benjavalero@gmail.com>, 2008-2012.\n"
+"-  Aitor Moreno <aitormoreno@gmail.com>, 2008.\n"
+"-  Ignacio Casal Quinteiro <icq@cvs.gnome.org>, 2004-2010.\n"
+"-  Santiago Vila Doncel <sanvila@unex.es>, 2001-2011.\n"
+"-  Rafael Rodríguez Martín <apt-drink@gulic.org>, 2005.\n"
+"-  Daniel Calviño Sánchez <danxuliu@gmail.com>, 2008-2012.\n"
+"-  Alvaro Soliverez <asoliverez@gmail.com>, 2008-2010.\n"
+"-  Carlos Mayo Hernandez <carlos.mayo@hispalinux.es>, 2007.\n"
+"-  Nicolás Satragno <nsatragno@gmail.com>, 2011-2013.\n"
+"-  Jean Pierre MAZUELOS SAAVEDRA <apuyaya@gmail.com>, 2010.\n"
+"-  Carlos Garnacho <carlosg@gnome.org>, 2007.\n"
+"-  Vicente Herrera Cobo <vicente.herrera@hispalinux.es>, 2003-2004.\n"
+"-  Fabian Mandelbaum <fmandelbaum@hotmail.com>, 2003.\n"
+"-  Enrique Matias Sanchez (Quique) <cronopios@gmail.com>, 2004-2010.\n"
+"-  JulioBorjaBarra <juboba@gmail.com>, 2010.\n"
+"-  Israel Garcia Garcia <israelgarcia86@gmail.com>, 2007-2011.\n"
+"-  María Majadas <alixis82@gmail.com>, 2008-2013.\n"
+"-  Javier Fernández-Sanguino Peña <jfs@computer.org>, 2002.\n"
+"-  Germán Poo-Caamaño <gpoo@ubiobio.cl>, 2002-2003.\n"
+"-  Pablo Pita Leira <pablo.pita@kdemail.net>, 2004-2011.\n"
+"-  Gabriel Leonardo Ruiz Manzano <debianmaster@gmail.com>, 2008-2009.\n"
+"-  Juan-Pablo Scaletti <juanpablo@jpscaletti.com>, 2009.\n"
+"-  Gonzalo L. Campos Medina <gcamposm@gmail.com>.\n"
+"-  Miguel Angel Quesada Fernandez <kesadalive@gmail.com>, 2008-2011.\n"
+"-  Chris Leonard <cjl@laptop.org>, 2012.\n"
+"-  2003 Quique <quique@sindominio.net>.\n"
+"-  Eduardo Sanchez <kde@sombragris.org>, 2003-2010.\n"
+"-  Lucas Di Pentima <lucas@lunix.com.ar>, 2001-2002.\n"
+"-  Ismael Rubio Rojas <ismael_rubio_rojas@hotmail.com>, 2003.\n"
+"-  Francisco Javier Fernández <serrador@arrakis.es>, 2003.\n"
+"-  Antonio J. Soler Sánchez <redtony@telefonica.net>, 2004.\n"
+"-  Maria Majadas <maria.majadas@hispalinux.es>, 2005-2011.\n"
+"-  Raul Moratalla <raul.moratalla@ono.com>, 2004.\n"
+"-  Antonio Crevillen <antonio.crevillen@hispalinux.es>, 2003.\n"
+"-  Miguel Revilla RodrÃ­guez <yo@miguelrevilla.com>, 2002-2004.\n"
+"-  Ignacio Poggi <ignaciop.3@gmail.com>, 2008-2012.\n"
+"-  2007 daniel g. siegel <dgsiegel@gnome.org>.\n"
+"-  By Nicols Lichtmaier <nick@technisys.com.ar>.\n"
+"-  Mauricio Araya P. <mauricio@eazel.com>, 2001.\n"
+"-  Francisco Javier Fernandez <serrador@arrakis.es>, 2003.\n"
+"-  Juan Jesus Ojeda Croissier <juanjesus.ojeda@hispalinux.es>, 2002.\n"
+"-  José Antonio Salgueiro A. <joseantsa@eresmas.net>, 2001.\n"
+"-  Cristina Yenyxe Gonzalez Garcia <the.blue.valkyrie@gmail.com>, 2009-2012.\n"
+"-  Pedro Jurado Maqueda <pjmelenas@biwemail.com>, 2003-2005.\n"
+"-  Dominik Neumeister <neudob06@edvhtl.at>, 2009.\n"
+"-  Luis F. Lopez M. <luis.lopez@ubuntu.com>, 2010.\n"
+"-  Adolfo Jayme Barrientos <fitoschido@gmail.com>, 2012.\n"
+"-  Havoc Pennington <hp@pobox.com>, 1999.\n"
+"-  Tatiana Gutiérrez Bunster <tgutierr@ubiobio.cl>, 2003.\n"
+"-  Jorge Gonzalez <jorgegonz@svn.gnome.org>, 2005-2007.\n"
+"-  Andres Herrera <andres@usr.cl>, 2008.\n"
+"-  sergio rivadero <sergiorivadero@argentina.com>, 2005.\n"
+"-  Jacobo Tarrío Barreiro <jtarrio@trasno.net>, 2000-2002.\n"
+"-  Ferro01 <ferro01@wanadoo.es>, 2011.\n"
+"-  Alejandro Araiza Alvarado <mebrelith@gmail.com>, 2005-2006.\n"
+"-  Daniel Garcia <dani@danigm.net>, 2010.\n"
+"-  2004 Waldo Bastian <bastian@kde.org>.\n"
+"-  Danilo Vasquez <danilo.vasquez@gmail.com>, 2007-2008.\n"
+"-  Jaime Robles <jaime@kde.org>, 2003-2009.\n"
+"-  Rafael Osuna <rosuna@wol.es>, 2003-2004.\n"
+"-  Ricardo Fernández Pascual <ric@users.sourceforge.net>, 2000-2001.\n"
+"-  Carlos Ernesto López Natarén <natorro@themis.fciencias.unam.mx>, 2000.\n"
+"-  Miguel <migueldeblas@gmail.com>, 2010.\n"
+"-  Miguel Mingo <miguelmingo@terra.es>, 2002.\n"
+"-  maria <maria.majadas@hispalinux.es>, 2006-2007.\n"
+"-  Miguel Cabrera <mfcabrera@gmail.com>, 2005.\n"
+"-  Juan Emilio Drault <juan@drault.com>, 2004.\n"
+"-  Jorge Carrasquilla Soares <jorge@conectiva.com.br>, 2000.\n"
+"-  Gerardo Jose Bueno Jimenez <gerardo@abser-t.com>, 2010.\n"
+"-  Germán Poo Caamaño, <gpoo@ubiobio.cl>, 2002.\n"
+"-  Rodrigo Marcos Fombellida <rmarcos@cvs.gnome.org>, 2005-2008.\n"
+"-  Andrea Mara Pimenta Alonso <pimenta@conectiva.com.br>, 2000.\n"
+"-  Mikel Olasagasti <hey_neken@mundurat.net>, 2003-2005.\n"
+"-  Matías Costa <mcc3@alu.um.es>, 2004-2007.\n"
+"-  Jaime Iniesta Alemán <capitanplaneta@gmail.com>, 2005-2006.\n"
+"-  Miguel Revilla Rodríguez <yo@miguelrevilla.com>, 2002-2004.\n"
+"-  Lorenzo nunez <lorenzo.nunez@gmail.com>, 2007.\n"
+"-  J. Félix Ontañón <fontanon@emergya.es>, 2009.\n"
+"-  Adrian Soto <adrianmatematico@yahoo.com.mx>, 2003-2004.\n"
+"-  Paulino Padial <devnull.tst@gmail.com>, 2007.\n"
+"-  Manue Tortosa <manutortosa@chakra-project.org>, 2011.\n"
+"-  Gladys Guerrero <gguerrer@redhat.com>, 2010.\n"
+"-  2003 Robby Stephenson <robby@periapsis.org>.\n"
+"-  miguel <bokerones.fritos@gmail.com>, 2012.\n"
+"-  Boris Wesslowski <Boris@Wesslowski.com>, 1999-2001.\n"
+"-  Alonso Lara <keko@khor-ha.net>, 1998-2005.\n"
+"-  2004-2005 Johan Svedberg <johan@svedberg.com>.\n"
+"-  Pablo Gonzalo del Campo <pablodc@bigfoot.com>, 2000-2004.\n"
+"-  Itxaka Serrano <itxakaserrano@gmail.com>, 2010.\n"
+"-  Adrián Chaves Fernández (Gallaecio) <adriyetichaves@gmail.com>, 2010-2013.\n"
+"-  Jesse Aviles <jesseaviles@gmail.com>, 2008-2010.\n"
+"-  Lucas Basurero Vieites <lucas@asixinformatica.com>, 2001-2007.\n"
+"-  Martín Carr <tincarr@gmail.com>, 2005-2008.\n"
+"-  Mauricio Jose Adonis Carrasco <mike.alfa.2007@gmail.com>, 2008.\n"
+"-  QA - Germán Poo Caamaño <gpoo@ubiobio.cl>, 2002.\n"
+"-  Marco César Gloria <mgloria@campus.gda.itesm.mx>, 2000.\n"
+"-  Germán Poo Caamaño <gpoo@ubiobio.cl>, 2001-2003.\n"
+"-  Raul Gonzalez <raulgf83@gmail.com>, 2010-2013.\n"
+"-  Javier Jardón <jjardon@gnome.org>, 2002-2010.\n"
+"-  Gabriel Ruiz <debianmaster@gmail.com>, 2008.\n"
+"-  Pablo Iranzo Gómez <Pablo.Iranzo@uv.es>, 2000.\n"
+"-  Pablo G. del Campo <pablodc@bigfoot.com>, 2003-2004.\n"
+"-  Andreu Correa Casablanca <castarco@gmail.com>, 2009.\n"
+"-  Miguel Perez Ibars <mpi79470@alu.um.es>, 2006.\n"
+"-  Carlos Mayo Hernández <carlos.mayo@hispalinux.es>, 2003-2005.\n"
+"-  Juan Manuel García Molina <juanma_gm@wanadoo.es>, 2000-2007.\n"
+"-  Manuel de Vega Barreiro <barreiro@arrakis.es>, 2000-2002.\n"
+"-  Luis Lopez <luis@loxi.ca>, 2010-2011.\n"
+"-  Jordi Jaen Pallares <jordi@suse.de>, 1999-2001.\n"
+"-  Novell Language <language@novell.com>, 2006-2009.\n"
+"-  Sito Soler <soler.sito@gmail.com>, 2008.\n"
+"-  Daniel Fernandez <dfdez@ya.com>, 2005.\n"
+"-  Neumeister Dominik <neudob06@edvhtl.at>, 2009.\n"
+"-  Vicente Aguilar <vaguilar@retemail.es>, 1999.\n"
+"-  Hector Garcia Alvarez <hector@scouts-es.org>, 2001-2002.\n"
+"-  Zohra Coudoin <zohra.coudoin@free.fr>, 2000.\n"
+"-  Antonio de la Torre <adltorre@terra.es>, 2001.\n"
+"-  First author: Enrique Matias Sanchez (aka Quique) <cronopios@gmail.com>, 2003.\n"
+"-  Alejandro Pinheiro <apinheiro@igalia.com>, 2009.\n"
+"-  Enrique Matias Sanchez <cronopios@gmail.com>, 2004-2011.\n"
+"-  edscott@users.sourceforge.net, 2001-2, 2001-4, 2001-5, 2001-7, 2002-1, 2002-3 <>.\n"
+"-  2003 Martin Grimme <martin@pycage.de>.\n"
+"-  Quique <quique@sindominio.net>, 2003-2011.\n"
+"-  Manuel Tortosa <manutortosa@chakra-project.org>, 2009-2012.\n"
+"-  Daniel Baeyens <danibens@terra.es>, 2002-2007.\n"
+"-  Juan Carlos Vallejo <urizev@gmail.com>, 2007.\n"
+"-  Jorge Bustos <jorge@gnome.cl>, 2003.\n"
+"-  Urizev <urizev@gmail.com>, 2007.\n"
+"-  Federico Mena Quintero,Pregonero <federico@casiopea.quartic.org>, 1998.\n"
+"-  Ricardo González Castro <rick@jinlabs.com>, 2007.\n"
+"-  MIguel Angel Quesada Fernandez <kesadalive@gmail.com>, 2008.\n"
+"-  Andrés Herrera <andres@usr.cl>, 2008.\n"
+"-  Nicolás Alvarez <nicolas.alvarez@gmail.com>, 2010.\n"
+"-  Javier Vinal <fjvinal@gmail.com>, 2009-2013.\n"
+"-  miguel rodriguez nuñez <bokerones.fritos@gmail.com>, 2012-2013.\n"
+"-  Ayoze Hernández Díaz <ayoze12@gmail.com>, 2013.\n"
+"-  Jesús Bravo Álvarez <suso@trasno.net>, 1999-2004.\n"
+"-  Ibán josé García Castillo <Iban.Garcia@alufis35.uv.es>, 2000.\n"
+"-  Sergio Rivadero <sergiorivadero@argentina.com>, 2006.\n"
+"-  Rodrigo Sancho Senosiain <ruy_ikari@bigfoot.com>.\n"
+"-  Susana González <sgonzalez@igalia.com>, 2007.\n"
+"-  Javier Gómez <jgomsi@apolo.umh.es>, 2000.\n"
+"-  Cristina Yenyxe González García <the.blue.valkyrie@gmail.com>, 2009-2013.\n"
+"-  Rolando Espinoza La Fuente <darkrho@gmail.com>, 2007.\n"
+"-  Javier Conde Rueda <f3285740@est.fib.upc.es>, 2003.\n"
+"-  Franco Mariluis <fmariluis@gmail.com>, 2008-2009.\n"
+"-  Xavier de Blas <xaviblas@gmail.com>, 2005-2010.\n"
+"-  2004  Rodney Dawes <dobey@novell.com>.\n"
+"-  Ismael Olea <ismael@olea.org>, 2000-2003.\n"
+"-  Guillermo Largaespada <heresul@gmail.com>, 2008-2010.\n"
+"-  Sergio Rubio <sergio.rubio@hispalinux.es>, 2004.\n"
+"-  Kira J. Fernandez <kirajfdez@gmail.com>, 2009-2013.\n"
+"-  Fco. Javier Fernandez <serrador@arrakis.es>, 2003.\n"
+"-  2004 Percy Leonhardt <percy@eris23.de>.\n"
+"-  Santi <santi@kde-es.org>, 2008-2010.\n"
+"-  Marlon Cisternas Milla <marlitoo@gmail.com>, 2008.\n"
+"-  Ricardo Varas Santana <ricardoivaras@gmail.com>, 2009-2013.\n"
+"-  Israel Campoy <churritzu@yahoo.com>, 2012.\n"
+"-  Baltasar Perez Diaz <baltasar.perez@hispalinux.es>, 2002.\n"
+"-  Xan López <xan@dimensis.com>, 2002.\n"
+"-  Tambet Ingo <tambet@novell.com>, 2009.\n"
+"-  Iñaky Pérez González <inaky@peloncho.fis.ucm.es>, 1996.\n"
+"-  Rodrigo Moya <rmoya@chez.com>, 1999.\n"
+"-  Salvador Gimeno <salgiza@jazzfree.com>, 2001.\n"
+"-  Enrique Matias Sanchez (aka Quique) <cronopios@gmail.com>, 2003-2012.\n"
+"-  Eduardo Retamales <eretamales@gnome.cl>, 2007-2008.\n"
+"-  2003 Jeroen S. Wijnhout <Jeroen.Wijnhout@kdemail.net>.\n"
+"-  2003 Petter E. Stokke <gibreel@project23.no>.\n"
+"-  Spanish message file for YaST2 (@memory@). <>.\n"
+"-  Pablo Saratxaga <pablo@walon.org>, 1998-2007.\n"
+"-  Gustavo D. Vranjes <gvranjes@abaconet.com.ar>, 2002.\n"
+"-  Aitor Morant <fromhell091@gmail.com>, 2013.\n"
+"-  Joaquín Ignacio Aramendía <samsagax@gmail.com>, 2011.\n"
+"-  Sebi Kul <sebikul@gmail.com>, 2011.\n"
+"-  Pedro Villavicencio Garrido <pvillavi@gnome.org>, 2005.\n"
+"-  José María Pongilioni <ponghy@ono.com>, 2001.\n"
+"-  Edgardo García Hoeffler <edybsd@yahoo.com.ar>, 2002.\n"
+"-  Edscott Wilson Garcia <edscott@users.sf.net>, 2002-2011.\n"
+"-  Pablo del Campo <pablodc@bigfoot.com>, 2003.\n"
+"-  Ricardo Mones Lastra <mones@users.sourceforge.net>, 2002.\n"
+"-  Wouter Bolsterlee <wbolster@gnome.org>.\n"
+"-  Ariel Rios <jarios@usa.net>, 1999.\n"
+"-  Alex Araiza <mebrelith@gmail.com>, 2005.\n"
+"-  Ulises Genis <ulises.genis@gmail.com>, 2008-2009.\n"
+"-  Emmanuel Milou <emmanuel.milou@savoirfairelinux.com>, 2008.\n"
+"-  Gabriel Gazzan <gabcorreo@gmail.com>, 2011.\n"
+"-  Thomas Niederreiter <tn@xcdroast.org>, 2002-2003.\n"
+"-  philippe Rouquier <brasero-app@wanadoo.fr>, 2005.\n"
+"-  <srtxg@chanae.alphanet.ch>, 2001-2011.\n"
+"-  Dario Andres Rodriguez <andresbajotierra@gmail.com>, 2008-2009.\n"
+"-  Juan Matías Olmos <colonizare@yahoo.com.ar>, 2012.\n"
+"-  Jorge Bernal <koke@amedias.org>, 2004-2006.\n"
+"-  Juanje Ojeda <jojeda@emergya.es>, 2008.\n"
+"-  Enrique Matías Sánchez (Quique) <cronopios@gmail.com>, 2009.\n"
+"-  Chema Celorio <chema@celorio.com>, 2000.\n"
+"-  Ernesto Manríquez <alejandronova@gmail.com>, 2011.\n"
+"-  Gilberto Miralla <xyhthyx@gmail.com>, 2007-2008.\n"
+"-  Daniel Campos <dcamposf@gmail.com>, 2009.\n"
+"-  Ezequiel Pérez <eazel7@yahoo.com.ar>, 2003.\n"
+"-  Oscar Cebellán Ramos <cebaman@bigfoot.com>, 2001.\n"
+"-  Yelitza Louze <ylouze@redhat.com>, 2003.\n"
+"-  Mvillarino <mvillarino@dubmail.net>, 2005-2008.\n"
+"-  Stephen Denham <stephen.denham@gmail.com>, 2007.\n"
+"-  Miguel Navarrete Hernandez <recados.akka@gmail.com>, 2013.\n"
+"-  Juanje Ojeda Croissier <jojeda@emergya.es>, 2008-2010.\n"
+"-  Santiago Fernández Sancho <santi@kde-es.org>, 2007-2010.\n"
+"-  Jesús Espino García <jespino@imap.cc>, 2004.\n"
+"-  Alberto Serrano <apserrano@bbvnet.com>, 2001.\n"
+"-  Israel Garcia <israelgarcia86@gmail.com>, 2007-2008.\n"
+"-  Omar Campagne <ocampagne@gmail.com>, 2009.\n"
+"-  Francisco Javier Dorado Martínez <javier@tiflolinux.org>, 2007-2011.\n"
+"-  First author: Quique <quique@sindominio.net>, 2003.\n"
+"-  Matias Costa <mcc3@alu.um.es>, 2005.\n"
+"-  Pablo Saratxga <srtxg@chanae.alphanet.ch>, 1999.\n"
+"-------------------------------------"
+

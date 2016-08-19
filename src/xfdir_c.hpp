@@ -1,7 +1,8 @@
 #ifndef XFDIR_C_HPP
 #define XFDIR_C_HPP
 
-#include <gtk/gtk.h>
+#include "xffm+.h"
+
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
