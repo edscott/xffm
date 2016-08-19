@@ -8,7 +8,6 @@ General Information:
                         Package: @PACKAGE@
 	                Version: @VERSION@
                        uname -s: @UNAME_S@
-                libtool current: @LT_CURRENT@
 		    Host system: @host_cpu@-@host_vendor@-@host_os@
 	     Installation point: @prefix@
        Pkgconf target directory: @PKG_CONF_DIR@
@@ -19,7 +18,6 @@ General Information:
 		Librsvg version: @LIBRSVG_VERSION@
 		 Libxml version: @LIBXML_VERSION@
 		Libtubo version: @TUBO_VERSION@
-		    DBH version: @DBH_VERSION@
 
 ------------------
 Compiling Options:
@@ -34,7 +32,6 @@ Compiling Options:
 		     Core dumps: @WITH_CORE@
        Large File Support (LFS): @LARGEFILE@
  Maximum threads for thumbnails: @WITH_MPT@
-         Install desktop images: @INSTALL_IMAGES@
 
 --------
 Modules:
@@ -46,10 +43,9 @@ Modules:
                 Mime resolution: @WITH_MIME@
                   Mime previews: @WITH_MMAGIC@
              Zip image previews: @WITH_ZMAGIC@
-          Icon theme management: @WITH_ICON@
 
 -------------------------------------
-GNU software (will enhance rfm libs):
+Additional  GNU  support  software:
 -------------------------------------
 		         GNU ls: @WITH_GNU_LS@
 		         GNU cp: @WITH_GNU_CP@

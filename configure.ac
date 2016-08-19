@@ -264,7 +264,7 @@ XDT_I18N([es])
 dnl final checks
 AC_CHECK_FILES([/usr/share/pixmaps /usr/local/share/pixmaps /usr/share/icons /usr/local/share/icons],[],[])
 
-AC_PROG_PS
+#AC_PROG_PS
 
 AC_CHECK_PROG(cv_dpkg, dpkg, yes, no)
 AM_CONDITIONAL(WANT_DEBIAN, [test "$cv_dpkg" = yes])
@@ -277,10 +277,10 @@ po/Makefile.in
 src/Makefile
 share/Makefile
 share/mime/Makefile
-share/xffm/Makefile
-share/xffm/scalable/Makefile
-share/xffm/scalable/emblems/Makefile
-share/xffm/scalable/stock/Makefile
+share/icons/Makefile
+share/icons/scalable/Makefile
+share/icons/scalable/emblems/Makefile
+share/icons/scalable/stock/Makefile
 ])
 
 cat xffm+.settings

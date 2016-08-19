@@ -1,3 +1,14 @@
+AM_CPPFLAGS = \
+	@LIBXML_CFLAGS@	\
+	@TUBO_CFLAGS@	\
+	@GTK_CFLAGS@	\
+	-DXFFM_MODULE_DIR=\"@XFFM_MODULE_DIR@\"	\
+	-DPACKAGE_DATA_DIR=\""$(datadir)"\" \
+	-DPACKAGE_LOCALE_DIR=\""$(localedir)"\"	\
+	-DPACKAGE_ICON_DIR=\""$(icondir)"\"
+
+common_ldflags = @TUBO_LIBS@ @GMODULE_LIBS@ @GTK_LIBS@ @LIBXML_LIBS@ @LIBZIP_LIBS@
+
 FLAGS = -ggdb -O0 -std=c++11 `pkg-config --cflags gtk+-3.0`
 LIBS = `pkg-config --libs gtk+-3.0` -lpthread
 OBJECTS = xffm_c.o \
@@ -16,16 +27,19 @@ OBJECTS = xffm_c.o \
 	  test.o
 
 all: test
-.SUFFIXES: .cpp .hpp .o
+#.SUFFIXES: .cpp .hpp .o
+SUFFIXES=.cpp .hpp .o
 
-%.o: %.cpp %.hpp Makefile
-	g++ -c $(FLAGS) $(CPPFLAGS) -o $@ $< 
-test.o: test.cpp Makefile
-	g++ -c $(FLAGS) $(CPPFLAGS) -o test.o test.cpp
+#GNU make extension:
+#%.o: %.cpp %.hpp Makefile.am
+.cpp.o: Makefile.am
+	c++ -c $(FLAGS) $(CPPFLAGS) -o $@ $< 
+test.o: test.cpp Makefile.am
+	c++ -c $(FLAGS) $(CPPFLAGS) -o test.o test.cpp
 	
-test: $(OBJECTS) Makefile
-	g++ $(LIBS) $(OBJECTS) -o test
+test: $(OBJECTS) Makefile.am
+	c++ $(LIBS) $(OBJECTS) -o test
 	
-clean:
+clean-local:
 	rm *.o test
 

@@ -9,10 +9,6 @@
 #include "gtk_c.hpp"
 #include "utility_c.hpp"
 
-
-
-//FIXME: by configure script
-#define HAVE_STRUCT_DIRENT_D_TYPE
 enum
 {
   COL_PIXBUF,

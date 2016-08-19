@@ -1,5 +1,5 @@
 #!/bin/sh
-package="librfm"
+package="xffm+"
 
 echo "Creating system specific build files for $package..."
 
