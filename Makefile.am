@@ -1,6 +1,6 @@
 noinst_DATA = autogen.sh 
-SUBDIRS = po src
-DIST_SUBDIRS = po src  
+SUBDIRS = po src share
+DIST_SUBDIRS = po src share 
 
 ACLOCAL_AMFLAGS=-I m4
 
@@ -12,6 +12,8 @@ pkgconfigdir = @PKG_CONF_DIR@
 ##################################################################
 
 distclean-local:
+	rm -rf `find -name Makefile`
+	rm -rf `find -name Makefile.in`
 	rm -rf *.cache 
 	rm -rf .deps 
 	rm -rf .libs 

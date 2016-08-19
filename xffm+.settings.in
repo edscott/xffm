@@ -22,7 +22,7 @@ General Information:
 ------------------
 Compiling Options:
 ------------------
-                         CFLAGS: @CFLAGS@
+                       CXXFLAGS: @CXXFLAGS@
                         LDFLAGS: @LDFLAGS@
  	 	Extra libraries: @LIBS@
  		       Archiver: @AR@

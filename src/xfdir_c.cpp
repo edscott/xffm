@@ -41,7 +41,10 @@ xfdir_c::reload(const gchar *data){
         fprintf(stderr, "%s does not exist\n", data);
         return;
     }
-    chdir(data);
+    if (chdir(data)<0){
+        fprintf(stderr, "chdir(%s): %s\n", data, strerror(errno));
+        return;
+    }
     g_free(path);
     path = g_get_current_dir();
     gtk_list_store_clear (GTK_LIST_STORE(treemodel));
@@ -293,7 +296,10 @@ xfdir_c::mk_tree_model (void)
         fprintf(stderr, "%s does not exist\n", path);
         return NULL;
     }
-    chdir(path);
+    if (chdir(path)<0){
+        fprintf(stderr, "chdir(%s): %s\n", path, strerror(errno));
+        return NULL;
+    }
     path = g_get_current_dir();
 
     

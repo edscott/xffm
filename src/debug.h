@@ -1,3 +1,5 @@
+#ifndef DEBUG_H
+#define DEBUG_H
 #include <stdio.h>
 #define COMMENT(...) G_STMT_START{ (void)0; }G_STMT_END
 #define NOOP(...) G_STMT_START{ (void)0; }G_STMT_END
@@ -44,4 +46,5 @@
 # define TRACE(...)   G_STMT_START{ (void)0; }G_STMT_END
 #endif
 
+#endif
 

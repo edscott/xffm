@@ -130,6 +130,7 @@ then
 	AC_SUBST(CORE)
 	AC_DEFINE_UNQUOTED([CORE],[$with_core],[enable CORE])
 	AC_MSG_NOTICE([You enabled core dumps. Good for you.])
+	CXXFLAGS="-O0 -ggdb"
 	CFLAGS="-O0 -ggdb"
 elif test "$with_core" != ""
 then
@@ -138,6 +139,7 @@ then
 	AC_SUBST(CORE)
 	AC_DEFINE_UNQUOTED([CORE],[$with_core],[enable CORE])
 	CFLAGS="-O0 -ggdb"
+	CXXFLAGS="-O0 -ggdb"
 
 else
 	AC_SUBST(WITH_CORE) WITH_CORE=no

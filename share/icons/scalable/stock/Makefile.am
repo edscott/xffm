@@ -1,6 +1,6 @@
 
 
-icondir = $(datadir)/icons/rfm/scalable/stock
+icondir = $(datadir)/icons/xffm+/scalable/stock
 
 EXTRA_DIST =  $(icon_DATA)
 

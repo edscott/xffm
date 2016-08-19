@@ -7,10 +7,11 @@ AM_CPPFLAGS = \
 	-DPACKAGE_LOCALE_DIR=\""$(localedir)"\"	\
 	-DPACKAGE_ICON_DIR=\""$(icondir)"\"
 
-common_ldflags = @TUBO_LIBS@ @GMODULE_LIBS@ @GTK_LIBS@ @LIBXML_LIBS@ @LIBZIP_LIBS@
+LDADD = @TUBO_LIBS@ @GMODULE_LIBS@ @GTK_LIBS@ @LIBXML_LIBS@ @LIBZIP_LIBS@ -lpthread
 
-FLAGS = -ggdb -O0 -std=c++11 `pkg-config --cflags gtk+-3.0`
-LIBS = `pkg-config --libs gtk+-3.0` -lpthread
+FLAGS = -ggdb -O0 
+#FLAGS = -ggdb -O0 -std=c++11 `pkg-config --cflags gtk+-3.0`
+#LIBS = `pkg-config --libs gtk+-3.0` -lpthread
 OBJECTS = xffm_c.o \
 	    window_c.o \
 	    view_c.o  \
@@ -26,20 +27,29 @@ OBJECTS = xffm_c.o \
 			pixbuf_cairo_c.o \
 	  test.o
 
-all: test
-#.SUFFIXES: .cpp .hpp .o
-SUFFIXES=.cpp .hpp .o
+bin_PROGRAMS = xffm
 
-#GNU make extension:
-#%.o: %.cpp %.hpp Makefile.am
-.cpp.o: Makefile.am
-	c++ -c $(FLAGS) $(CPPFLAGS) -o $@ $< 
-test.o: test.cpp Makefile.am
-	c++ -c $(FLAGS) $(CPPFLAGS) -o test.o test.cpp
-	
-test: $(OBJECTS) Makefile.am
-	c++ $(LIBS) $(OBJECTS) -o test
-	
+xffm_SOURCES = \
+	  xffm_c.cpp \
+	    window_c.cpp \
+	    view_c.cpp  \
+		widgets_c.cpp   \
+	  signals_c.cpp \
+	  utility_c.cpp \
+	  xfdir_c.cpp \
+	  gtk_c.cpp \
+	    tooltip_c.cpp \
+	    pixbuf_c.cpp \
+		pixbuf_hash_c.cpp \
+		    pixbuf_icons_c.cpp \
+			pixbuf_cairo_c.cpp \
+	  main.cpp
+
+xffm_CPPFLAGS = -std=c++11 $(FLAGS) $(AM_CPPFLAGS)
+xffm_LDADD = $(LDADD) 
+
+########################################################################
+
 clean-local:
-	rm *.o test
+	rm *.o 
 

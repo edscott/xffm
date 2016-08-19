@@ -5,7 +5,7 @@
 #include "pixbuf_icons_c.hpp"
 
 #ifndef PREFIX
-# define PREFIX "/usr"
+# warning "PREFIX not defined!"
 #endif
 
 pixbuf_icons_c::pixbuf_icons_c(void){
@@ -17,8 +17,7 @@ pixbuf_icons_c::pixbuf_icons_c(void){
         throw 1;
     }
     self = g_thread_self();
-    gchar *resource_path = g_build_filename(PREFIX, "share", "icons", "rfm", NULL);
-//    gchar *resource_path = g_build_filename(PREFIX, "share", "icons", "xffm+", NULL);
+    gchar *resource_path = g_build_filename(PREFIX, "share", "icons", "xffm+", NULL);
     gtk_icon_theme_add_resource_path (gtk_icon_theme_get_default (),resource_path);
 
     // This works, but icons should be fixed size. 
@@ -29,11 +28,12 @@ pixbuf_icons_c::pixbuf_icons_c(void){
     gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (), path);
     g_free(path);
 
-    // XXX xffm+ svg icons are at
-//    path = g_build_filename(PREFIX, "share", "icons", "xffm+", "scalable", "emblems", NULL);
-    path = g_build_filename(PREFIX, "share", "icons", "rfm", "scalable", "emblems", NULL);
+    // xffm+ svg icons are at:
+    path = g_build_filename(PREFIX, "share", "icons", "xffm+", "scalable", "stock", NULL);
     gtk_icon_theme_prepend_search_path (gtk_icon_theme_get_default (), path);
-//    gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (), path);
+    g_free(path);
+    path = g_build_filename(PREFIX, "share", "icons", "xffm+", "scalable", "emblems", NULL);
+    gtk_icon_theme_prepend_search_path (gtk_icon_theme_get_default (), path);
     g_free(path);
 
     g_free(resource_path);
