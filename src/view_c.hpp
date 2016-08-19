@@ -13,7 +13,8 @@ class view_c:public widgets_c {
         view_c(void *, GtkNotebook *);
         ~view_c(void);
         void *get_window_p(void);
-
+	gint get_dir_count(void);
+	
         GtkTreeModel *get_treemodel(void);
         void set_treemodel(xfdir_c *);
         void clear_diagnostics(void);

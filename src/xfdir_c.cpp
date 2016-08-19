@@ -321,13 +321,16 @@ xfdir_c::get_icon_highlight_size(const gchar *name){
     return GTK_ICON_SIZE_DIALOG;
 }
 
+gint
+xfdir_c::get_dir_count(void){ return dir_count;}
+
 void
 xfdir_c::insert_list_into_model(GList *data, GtkListStore *list_store){
     GdkPixbuf *p_file, *p_image, *p_dir;
     GtkTreeIter iter;
 
     GList *directory_list = (GList *)data;
-    gint dir_count = g_list_length(directory_list);
+    dir_count = g_list_length(directory_list);
     GList *l = directory_list;
     for (; l && l->data; l= l->next){
 	xd_t *xd_p = (xd_t *)l->data;

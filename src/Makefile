@@ -18,12 +18,12 @@ OBJECTS = xffm_c.o \
 all: test
 .SUFFIXES: .cpp .hpp .o
 
-%.o: %.cpp %.hpp
+%.o: %.cpp %.hpp Makefile
 	g++ -c $(FLAGS) $(CPPFLAGS) -o $@ $< 
-test.o: test.cpp 
+test.o: test.cpp Makefile
 	g++ -c $(FLAGS) $(CPPFLAGS) -o test.o test.cpp
 	
-test: $(OBJECTS)
+test: $(OBJECTS) Makefile
 	g++ $(LIBS) $(OBJECTS) -o test
 	
 clean:

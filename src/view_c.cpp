@@ -12,11 +12,12 @@ motion_notify_event (GtkWidget *widget,
                GdkEvent  *event,
                gpointer   data){
     view_c * view_p = (view_c *)data;
+    if (view_p->get_dir_count() > 500) return FALSE;
     if (!data) g_error("motion_notify_event: data cannot be NULL\n");
     GdkEventMotion *e = (GdkEventMotion *)event;
     view_p->set_highlight(e->x, e->y);
     view_p->highlight();
-
+    return FALSE;
 }
 gboolean
 leave_notify_event (GtkWidget *widget,
@@ -100,7 +101,7 @@ item_activated (GtkIconView *iconview,
         view_p->clear_highlights(NULL);
         view_p->reload(full_path);
         while (gtk_events_pending()) gtk_main_iteration();
-        view_p->highlight();
+        if (view_p->get_dir_count() <= 500) view_p->highlight();
         
     }
     g_free(dname);
@@ -261,6 +262,8 @@ view_c::~view_c(void){
     pthread_rwlock_destroy(&population_lock);
 }
 
+gint 
+view_c::get_dir_count(void){ return xfdir_p->get_dir_count();}
 void
 view_c::reload(const gchar *data){
     xfdir_p->reload(data);
