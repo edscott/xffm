@@ -141,6 +141,9 @@ xfdir_c::get_stat_pixbuf(xd_t *xd_p, gboolean restat){
 #define O_RW(x) ((S_IROTH & x) && (S_IWOTH & x))
 #define G_RW(x) ((S_IRGRP & x) && (S_IWGRP & x))
 #define U_RW(x) ((S_IRUSR & x) && (S_IWUSR & x))
+#define O_RX(x) ((S_IROTH & x) && (S_IXOTH & x))
+#define G_RX(x) ((S_IRGRP & x) && (S_IXGRP & x))
+#define U_RX(x) ((S_IRUSR & x) && (S_IXUSR & x))
 #define O_R(x) (S_IROTH & x)
 #define G_R(x) (S_IRGRP & x)
 #define U_R(x) (S_IRUSR & x)
@@ -150,30 +153,72 @@ xfdir_c::get_stat_pixbuf(xd_t *xd_p, gboolean restat){
 
 
     if (S_ISDIR(xd_p->st.st_mode)){
-        gboolean my_file = (xd_p->st.st_uid == geteuid());
-        gboolean my_group = (xd_p->st.st_gid == getgid());
         // all access:
         if (O_ALL(xd_p->st.st_mode))
-                return "folder/C/face-surprise/2.0/180/SE/emblem-write-ok/2.0/180";
+                return "folder/C/face-surprise/2.0/180";
         if ((MY_GROUP(xd_p->st.st_gid) && G_ALL(xd_p->st.st_mode)) 
                 || (MY_FILE(xd_p->st.st_uid) && U_ALL(xd_p->st.st_mode)))
-                return "folder/SE/emblem-write-ok/2.0/180";
+                return "folder";
         // read only:
         if (O_RX(xd_p->st.st_mode) 
                 || (MY_GROUP(xd_p->st.st_gid) && G_RX(xd_p->st.st_mode)) 
                 || (MY_FILE(xd_p->st.st_uid) && U_RX(xd_p->st.st_mode)))
-                return "folder/SE/emblem-write-ok/2.0/250/SE/emblem-readonly/2.0/130";
+                return "folder/SW/emblem-readonly/3.0/180";
         // no access:
-        return "folder/SE/emblem-unreadable/2.5/180";
+        return "folder/SW/emblem-unreadable/3.0/180/C/face-angry/2.0/180";
     }
     if (S_ISLNK(xd_p->st.st_mode)){
         struct stat st;
         stat(xd_p->d_name, &st);
         if (S_ISDIR(st.st_mode)){
+	    // all access:
+	    if (O_ALL(st.st_mode))
+		    return "folder/C/face-surprise/2.0/180/NE/emblem-symbolic-link/2.5/180";
+	    if ((MY_GROUP(st.st_gid) && G_ALL(st.st_mode)) 
+		    || (MY_FILE(st.st_uid) && U_ALL(st.st_mode)))
+		    return "folder";
+	    // read only:
+	    if (O_RX(st.st_mode) 
+		    || (MY_GROUP(st.st_gid) && G_RX(st.st_mode)) 
+		    || (MY_FILE(st.st_uid) && U_RX(st.st_mode)))
+		    return "folder/SW/emblem-readonly/3.0/180/NE/emblem-symbolic-link/2.5/180";
+	    // no access:
+	    return "folder/SW/emblem-unreadable/3.0/180/C/face-angry/2.0/180/NE/emblem-symbolic-link/2.5/180";
+	}
+        if (S_ISREG(st.st_mode)){
+	   // all access:
+	    if (O_ALL(st.st_mode) || O_RW(st.st_mode))
+		    return "text-x-generic/C/face-surprise/2.0/180/SW/emblem-exec/3.0/180/NE/emblem-symbolic-link/2.5/180";
+	    // read/write/exec
+	    if ((MY_GROUP(st.st_gid) && G_ALL(st.st_mode)) 
+		    || (MY_FILE(st.st_uid) && U_ALL(st.st_mode)))
+		    return "text-x-generic/SW/emblem-exec/3.0/180/NE/emblem-symbolic-link/2.5/180";
+	    // read/exec
+	    if (O_RX(st.st_mode)
+		    ||(MY_GROUP(st.st_gid) && G_RX(st.st_mode)) 
+		    || (MY_FILE(st.st_uid) && U_RX(st.st_mode)))
+		    return "text-x-generic/SW/emblem-exec/3.0/180/NE/emblem-symbolic-link/2.5/180";
+
+	    // read/write
+	    if ((MY_GROUP(st.st_gid) && G_RW(st.st_mode))
+		    || (MY_FILE(st.st_uid) && U_RW(st.st_mode)))
+		    return "text-x-generic/NE/emblem-symbolic-link/2.5/180";
+
+	    // read only:
+	    if (O_R(st.st_mode) 
+		    || (MY_GROUP(st.st_gid) && G_R(st.st_mode)) 
+		    || (MY_FILE(st.st_uid) && U_R(st.st_mode)))
+		    return "text-x-generic/SW/emblem-readonly/3.0/130/NE/emblem-symbolic-link/2.5/180";
+	    // no access:
+	    return "text-x-generic/SW/emblem-unreadable/3.0/180/C/face-angry/2.0/180/NE/emblem-symbolic-link/2.5/180";
+	}
+    }
+#if 0
+        if (S_ISDIR(st.st_mode)){
             if (!(O_RX(st.st_mode))
                     && !(MY_GROUP(st.st_gid) && G_RX(st.st_mode)) 
                     && !(MY_FILE(st.st_gid) && U_RX(st.st_mode)))
-                return "folder/NE/emblem-symbolic-link/2.5/180/SE/emblem-unreadable/2.5/180";
+                return "folder/NE/emblem-symbolic-link/2.5/180/SW/emblem-unreadable/2.5/180";
             return "folder/NE/emblem-symbolic-link/2.5/180";
         }
         if (S_ISREG(st.st_mode)){
@@ -181,17 +226,40 @@ xfdir_c::get_stat_pixbuf(xd_t *xd_p, gboolean restat){
                 return "text-x-generic/C/face-surprise/2.0/180/NE/emblem-symbolic-link/2.5/180";
             if (!(MY_GROUP(st.st_gid) && G_RW(st.st_mode)) 
                     && !(MY_FILE(st.st_gid) && U_RW(st.st_mode)))
-                return "text-x-generic/SE/emblem-readonly/2.0/130/NE/emblem-symbolic-link/2.5/180";
+                return "text-x-generic/SW/emblem-readonly/2.0/130/NE/emblem-symbolic-link/2.5/180";
 
             return "text-x-generic/NE/emblem-symbolic-link/2.5/180";
         }
 	return  "emblem-symbolic-link";
     }
+#endif
 
     if (S_ISREG(xd_p->st.st_mode)){
+        // all access:
+        if (O_ALL(xd_p->st.st_mode) || O_RW(xd_p->st.st_mode))
+                return "text-x-generic/C/face-surprise/2.0/180/SW/emblem-exec/3.0/180";
+	// read/write/exec
+        if ((MY_GROUP(xd_p->st.st_gid) && G_ALL(xd_p->st.st_mode)) 
+                || (MY_FILE(xd_p->st.st_uid) && U_ALL(xd_p->st.st_mode)))
+                return "text-x-generic/SW/emblem-exec/3.0/180";
+	// read/exec
+        if (O_RX(xd_p->st.st_mode)
+		||(MY_GROUP(xd_p->st.st_gid) && G_RX(xd_p->st.st_mode)) 
+                || (MY_FILE(xd_p->st.st_uid) && U_RX(xd_p->st.st_mode)))
+                return "text-x-generic/SW/emblem-exec/3.0/180";
 
-        // XXX do the read/write emblem here
-        return "text-x-generic";
+	// read/write
+        if ((MY_GROUP(xd_p->st.st_gid) && G_RW(xd_p->st.st_mode))
+                || (MY_FILE(xd_p->st.st_uid) && U_RW(xd_p->st.st_mode)))
+                return "text-x-generic";
+
+        // read only:
+        if (O_R(xd_p->st.st_mode) 
+                || (MY_GROUP(xd_p->st.st_gid) && G_R(xd_p->st.st_mode)) 
+                || (MY_FILE(xd_p->st.st_uid) && U_R(xd_p->st.st_mode)))
+                return "text-x-generic/SW/emblem-readonly/3.0/130";
+        // no access:
+        return "text-x-generic/SW/emblem-unreadable/3.0/180/C/face-angry/2.0/180";
     }
     return "emblem-application";
 
@@ -204,8 +272,7 @@ xfdir_c::get_type_pixbuf(xd_t *xd_p){
 	return  "go-up";
 #ifdef HAVE_STRUCT_DIRENT_D_TYPE
     if (xd_p->d_type == DT_DIR) 
-	return  "folder/E/emblem-bsd/2.5/180/W/emblem-gentoo/2.5/180";
-	//return  "folder";
+	return  "folder";
     if (xd_p->d_type == DT_LNK) 
 	return  "emblem-symbolic-link";
     if (xd_p->d_type == DT_UNKNOWN) 
