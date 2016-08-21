@@ -12,6 +12,7 @@ class utility_c{
 
         void *context_function(void * (*function)(gpointer), void * function_data);
         gchar *utf_string (const gchar *);
+	const gchar *chop_excess (gchar *);
     protected:
     private:
 

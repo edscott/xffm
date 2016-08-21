@@ -99,3 +99,37 @@ utility_c::utf_string (const gchar * t) {
     return actual_tag;
 }
 
+#define MAX_PATH_LABEL 40
+#define MAX_PATH_START_LABEL 18
+const gchar *
+utility_c::chop_excess (gchar * b) {
+    // chop excess length...
+
+    const gchar *home = g_get_home_dir();
+    gchar *bb;
+    if (strncmp(home, b, strlen(home))==0){
+        if (strlen(home) == strlen(b)) return b;
+        bb = g_strconcat("~/", b + strlen(home)+1, NULL);
+    } else {
+        bb = g_strdup(b);
+    }
+    
+    int len = strlen (bb);
+
+    if(len < MAX_PATH_LABEL) {
+        strcpy(b, bb);
+        g_free(bb);
+        return (b);
+    }
+        
+    bb[MAX_PATH_START_LABEL - 3] = 0;
+
+    gchar *g = g_strconcat(bb, "...", b + (len - MAX_PATH_LABEL + MAX_PATH_START_LABEL), NULL);
+    strcpy (b, g);
+    g_free(bb);
+    g_free(g);
+
+    return b;
+}
+
+

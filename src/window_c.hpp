@@ -12,7 +12,9 @@ class window_c {
         ~window_c(void);
         GtkNotebook *get_notebook(void);
         gtk_c *get_gtk_p(void);
-        
+	void create_new_page(const gchar *);
+       
+        GtkWindow *get_window(void);	
         void add_view_to_list(void *);
         void remove_view_from_list(void *);
     private:

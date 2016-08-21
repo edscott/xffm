@@ -88,6 +88,16 @@ window_c::set_up_view_signals(void *view){
 
 }
 
+void 
+window_c::create_new_page(const gchar *path){
+    view_c *view_p = new view_c((void *)this, get_notebook());
+    xfdir_c *xfdir_p = new xfdir_c(path);
+    view_p->set_treemodel(xfdir_p);
+    add_view_to_list((void *)view_p);
+}
+
+GtkWindow *
+window_c::get_window(void){return GTK_WINDOW(window);}
 
 GtkNotebook *window_c::get_notebook(void) {return GTK_NOTEBOOK(notebook);}
 
@@ -97,15 +107,7 @@ static void
 on_new_page(GtkWidget *widget, gpointer data){
     // get current page
     // get path
-
     window_c *window_p = (window_c *)data;
-    view_c *view_p = new view_c((void *)window_p, window_p->get_notebook());
-    xfdir_c *xfdir_p = new xfdir_c(g_get_home_dir());
-    view_p->set_treemodel(xfdir_p);
-    
- //   xfdir_c *xfdir_p = new xfdir_c();
- //   view_p->set_treemodel(xfdir_p->get_tree_model("/"));
-
-    window_p->add_view_to_list((void *)view_p);
+    window_p->create_new_page(g_get_home_dir());
 }
 

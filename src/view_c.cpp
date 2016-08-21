@@ -97,12 +97,7 @@ item_activated (GtkIconView *iconview,
     g_value_unset(&value);
 
     if (g_file_test(full_path, G_FILE_TEST_IS_DIR)){
-        // clear highlight hash
-        view_p->clear_highlights(NULL);
         view_p->reload(full_path);
-        while (gtk_events_pending()) gtk_main_iteration();
-        if (view_p->get_dir_count() <= 500) view_p->highlight();
-        
     }
     g_free(dname);
     g_free(full_path);
@@ -273,8 +268,12 @@ gint
 view_c::get_dir_count(void){ return xfdir_p->get_dir_count();}
 void
 view_c::reload(const gchar *data){
+    // clear highlight hash
+    clear_highlights(NULL);
     xfdir_p->reload(data);
-    set_page_label();
+    set_view_details();
+    while (gtk_events_pending()) gtk_main_iteration();
+    if (get_dir_count() <= 500) highlight();
 }
 
 void
@@ -305,11 +304,19 @@ view_c::set_treemodel(xfdir_c *data){
     gtk_icon_view_set_text_column (icon_view, COL_DISPLAY_NAME);
     gtk_icon_view_set_pixbuf_column (icon_view, COL_PIXBUF);
     gtk_icon_view_set_selection_mode (icon_view, GTK_SELECTION_MULTIPLE);
-   
+    set_view_details();
     gtk_widget_show(GTK_WIDGET(icon_view));
     if (old_xfdir_p) delete old_xfdir_p;
 }
 ///////////////////////////// Private:
+void
+view_c::set_view_details(void){
+    set_page_label();
+    set_window_title();
+    set_application_icon();
+
+}
+
 void
 view_c::init(void){
     gint result;
@@ -574,4 +581,26 @@ view_c::signals(void){
 */
 
 }
+
+// FIXME: should call this function when page changes
+void
+view_c::set_application_icon (void) {
+    const gchar *iconname = xfdir_p->get_xfdir_iconname();
+    GdkPixbuf *icon_pixbuf = xfdir_p->get_pixbuf (iconname, GTK_ICON_SIZE_DIALOG);
+    if(icon_pixbuf) {
+	GtkWindow *window = ((window_c *)window_p)->get_window();
+        gtk_window_set_icon (window, icon_pixbuf);
+    }
+    // FIXME add to tab label (not here...)
+}
+
+void
+view_c::set_window_title(void){
+    gchar *window_title = xfdir_p->get_window_name();
+    GtkWindow *window = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET(notebook)));
+    gtk_window_set_title (window, window_title);
+    g_free (window_title);
+
+}
+
 

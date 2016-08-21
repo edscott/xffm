@@ -163,8 +163,10 @@ xfdir_c::get_stat_pixbuf(xd_t *xd_p, gboolean restat){
         if (O_ALL(xd_p->st.st_mode))
                 return "folder/C/face-surprise/2.0/180";
         if ((MY_GROUP(xd_p->st.st_gid) && G_ALL(xd_p->st.st_mode)) 
-                || (MY_FILE(xd_p->st.st_uid) && U_ALL(xd_p->st.st_mode)))
+                || (MY_FILE(xd_p->st.st_uid) && U_ALL(xd_p->st.st_mode))){
+	    if (strcmp(path, g_get_home_dir())==0) return get_home_iconname(xd_p->d_name);
                 return "folder";
+	}
         // read only:
         if (O_RX(xd_p->st.st_mode) 
                 || (MY_GROUP(xd_p->st.st_gid) && G_RX(xd_p->st.st_mode)) 
@@ -277,8 +279,12 @@ xfdir_c::get_type_pixbuf(xd_t *xd_p){
     if (strcmp(xd_p->d_name, "..")==0)
 	return  "go-up";
 #ifdef HAVE_STRUCT_DIRENT_D_TYPE
-    if (xd_p->d_type == DT_DIR) 
+    if (xd_p->d_type == DT_DIR){ 
+	if (strcmp(path, g_get_home_dir())==0) {
+	    return get_home_iconname(xd_p->d_name);
+	}
 	return  "folder";
+    }
     if (xd_p->d_type == DT_LNK) 
 	return  "emblem-symbolic-link";
     if (xd_p->d_type == DT_UNKNOWN) 
@@ -288,6 +294,42 @@ xfdir_c::get_type_pixbuf(xd_t *xd_p){
 #endif
     return "text-x-generic";
 }
+
+const gchar *
+xfdir_c::get_xfdir_iconname(void){
+    if (strcmp(path, g_get_home_dir())==0) {
+	return "user-home";
+    }
+    gchar *d = g_path_get_dirname(path);
+    if (strcmp(d, g_get_home_dir())==0) {
+	g_free(d);
+	gchar *b = g_path_get_basename(path);
+	const gchar *iconname = get_home_iconname(b);
+	g_free(b);
+	return iconname;
+    }
+    g_free(d);
+    return "folder";
+}
+
+const gchar *
+xfdir_c::get_home_iconname(const gchar *data){
+    if (!data) return "user-home";
+    const gchar *dir[]={N_("Documents"), N_("Downloads"),N_("Music"),N_("Pictures"),
+	        N_("Templates"),N_("Videos"),N_("Desktop"),N_("Bookmarks"),
+		N_(".Trash"),NULL};
+    const gchar *icon[]={"folder-documents", "folder-download","folder-music","folder-pictures",
+	          "folder-templates","folder-videos","user-desktop","user-bookmarks",
+		  "user-trash",NULL};
+    const gchar **p, **i;
+    for (p=dir, i=icon; p && *p ; p++, i++){
+	if (strcasecmp(*p, data) == 0) {
+	    return *i;
+	}
+    }
+    return "folder";
+}
+
 #if 10
 GtkTreeModel *
 xfdir_c::get_tree_model (void){return treemodel;}
@@ -368,6 +410,45 @@ xfdir_c::insert_list_into_model(GList *data, GtkListStore *list_store){
     }
     g_list_free(directory_list);
 }
+
+gchar *
+xfdir_c::get_window_name (void) {
+    gchar *iconname;
+    if(!path) {
+        iconname = utf_string (g_get_host_name());
+    } else if(g_path_is_absolute(path) &&
+	    g_file_test (path, G_FILE_TEST_EXISTS)) {
+        gchar *basename = g_path_get_basename (path);
+        gchar *pathname = g_strdup (path);
+        gchar *b = utf_string (basename);   // non chopped
+        chop_excess (pathname);
+        gchar *q = utf_string (pathname);   // non chopped
+
+        g_free (basename);
+        g_free (pathname);
+	//iconname = g_strconcat (display_host, ":  ", b, " (", q, ")", NULL);
+	iconname = g_strconcat (b, " (", q, ")", NULL);
+        g_free (q);
+        g_free (b);
+    } else {
+        iconname = utf_string (path);
+        chop_excess (iconname);
+    }
+
+#ifdef DEBUG
+    gchar *gg = g_strdup_printf("%s-%d-D", iconname, getpid());
+    g_free(iconname);
+    iconname = gg;
+#else
+#ifdef CORE
+    gchar *gg = g_strdup_printf("%s-%d-C", iconname, getpid());
+    g_free(iconname);
+    iconname = gg;
+#endif
+#endif
+    return (iconname);
+}
+
 
 
 #else
