@@ -38,3 +38,55 @@ gtk_c::new_add_page_tab(GtkWidget *notebook, GtkWidget **new_button_p){
     return page_child_box;
 }
 
+void
+gtk_c::set_bin_image(GtkWidget *bin, const gchar *icon_id, gint size){
+    if (!bin || !GTK_IS_WIDGET(bin)) {
+        g_warning("rfm_set_bin_image(): incorrect function call\n");
+        return;
+    }
+    GtkWidget *box = gtk_bin_get_child(GTK_BIN(bin));
+    GtkWidget *icon = (GtkWidget *)g_object_get_data(G_OBJECT(bin),"icon");
+
+    if (icon){
+        gtk_container_remove(GTK_CONTAINER(box), icon);
+    }
+    if(icon_id) {
+        GdkPixbuf *pb = get_pixbuf (icon_id, size);
+        GtkWidget *image = gtk_image_new_from_pixbuf (pb);
+	gtk_box_pack_start(GTK_BOX(box), image, FALSE, FALSE,0);
+        g_object_set_data(G_OBJECT(bin), "icon", image);
+	gtk_widget_show(image);
+	g_object_unref(pb);
+    } else {
+        g_object_set_data(G_OBJECT(bin), "icon", NULL);
+    }
+}
+
+void 
+gtk_c::set_bin_markup(GtkWidget *bin, const char *text){
+    if (!bin || !GTK_IS_WIDGET(bin)) {
+        g_warning("rfm_set_bin_markup(): incorrect function call\n");
+        return;
+    }
+    GtkLabel *label = (GtkLabel *)g_object_get_data(G_OBJECT(bin), "label");
+    gtk_label_set_markup(label, (text)?text:"");
+}
+
+void
+gtk_c::set_bin_contents(GtkWidget *bin, const char *icon_id, const char *text, gint size){
+    GtkWidget *child = gtk_bin_get_child(GTK_BIN(bin));
+    if (child) gtk_container_remove(GTK_CONTAINER(bin), child);
+    child = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+    gtk_widget_set_size_request (child, -1, 12);
+    gtk_container_add(GTK_CONTAINER(bin), child);
+                            
+    GtkWidget *label = gtk_label_new("");
+    g_object_set_data(G_OBJECT(bin), "label", label);
+    gtk_box_pack_end(GTK_BOX(child), label, TRUE, FALSE,0);
+    
+    set_bin_markup(bin, text);
+    set_bin_image(bin, icon_id, size);
+    gtk_widget_show_all (bin);
+}
+
+

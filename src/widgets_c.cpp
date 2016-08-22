@@ -83,7 +83,11 @@ widgets_c::create(void){
     page_label = gtk_label_new (_("Loading folder..."));
     //page_label_button_eventbox = gtk_event_box_new ();
     page_label_button = gtk_button_new ();
-    // pathbar = rodent_new_pathbar();
+    //pathbar = new_pathbar();
+    //g_object_set_data(G_OBJECT(view_p->widgets.paper), "pathbar", pathbar);
+    gtk_widget_show(pathbar);
+    gtk_box_pack_start (GTK_BOX (page_child_box), pathbar, FALSE, FALSE, 0);
+    
     vpane = gtk_paned_new(GTK_ORIENTATION_VERTICAL);
     top_scrolled_window = gtk_scrolled_window_new (NULL, NULL);
      

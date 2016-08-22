@@ -1,3 +1,36 @@
+* commit aaafef0b3184a506d35e7fdd8f2ab078df70181d--------------------------
+Date:   Sun Aug 21 20:23:58 2016 -0500
+
+    Added callback for the go-home button
+    
+    * compiled and tested fine.
+
+* commit bc0aa606743a979d98278811624f2acd81c72178--------------------------
+Date:   Sun Aug 21 19:00:06 2016 -0500
+
+    More iconview improvements
+    
+    * icon now updates to tab label
+    * non directory highlight with a composite NW-folder-open icon
+    * gtk_c object shared from window_c object to all others (to share
+      pixbuf hash)
+
+* commit 924f653e5b97d91ddc214c4a1aa1cb9836cb5dba--------------------------
+Date:   Sat Aug 20 21:19:08 2016 -0500
+
+    Class optimizations and increased icon resolution
+    
+    * Application icon now set
+    * Conventional icons in homedir now set (Bookmarks, Downloads, Music, etc)
+    * view_c creation method simplified.
+
+* commit 33dfa7332852a4628526f1d779e24fb7f55006e8--------------------------
+Date:   Fri Aug 19 14:57:56 2016 -0500
+
+    Added initial code for mime-module
+    
+    * should simplify this into a class.
+
 * commit 8de79ef9aa183194cfe4c58bc3a8053a219777ce--------------------------
 Date:   Fri Aug 19 12:18:12 2016 -0500
 
