@@ -38,7 +38,10 @@ xfdir_c::~xfdir_c(void){
 }
 
 const gchar *
-xfdir_c::get_label(void){return (const gchar *)path;}
+xfdir_c::get_label(void){return get_path();}
+
+const gchar *
+xfdir_c::get_path(void){return (const gchar *)path;}
 
 static gint
 compare_type (const void *a, const void *b) {

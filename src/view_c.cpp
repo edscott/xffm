@@ -1,5 +1,6 @@
 #include "view_c.hpp"
 #include "window_c.hpp"
+#include "pathbar_c.hpp"
 
 
 static gboolean unhighlight (gpointer key, gpointer value, gpointer data);
@@ -214,8 +215,8 @@ switch_page (GtkNotebook *notebook,
 
 
 // Public:
-view_c::view_c(void *window_v, GtkNotebook *notebook) : widgets_c(window_v, notebook){
-    window_p = window_v; 
+view_c::view_c(void *window_data, GtkNotebook *notebook) : widgets_c(window_data, notebook) {
+    window_c *window_p = (window_c *)window_data;
     xfdir_p = NULL;
     dirty_hash = FALSE;
     g_object_set_data(G_OBJECT(page_child_box), "view_p", (void *)this);
@@ -289,6 +290,9 @@ view_c::remove_page(void){
 xfdir_c *
 view_c::get_xfdir_p(void) {return xfdir_p;}
 
+const gchar *
+view_c::get_path(void) {return xfdir_p->get_path();}
+
 void *
 view_c::get_window_p(void){return window_p;}
 
@@ -314,7 +318,7 @@ view_c::set_view_details(void){
     set_window_title();
     set_application_icon();
     update_tab_label_icon();
-
+    pathbar_p->update_pathbar(xfdir_p->get_path());
 }
 
 void

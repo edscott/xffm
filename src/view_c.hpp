@@ -2,7 +2,6 @@
 #define VIEW_C_HPP
 #include "xffm+.h"
 #include <string.h>
-#include "utility_c.hpp"
 #include "widgets_c.hpp"
 #include "xfdir_c.hpp"
 
@@ -14,6 +13,8 @@ class view_c:public widgets_c {
         ~view_c(void);
         void *get_window_p(void);
 	gint get_dir_count(void);
+
+        const gchar *get_path(void);
 	
         void clear_diagnostics(void);
         void set_highlight(gdouble, gdouble);
@@ -39,8 +40,6 @@ class view_c:public widgets_c {
         gboolean dirty_hash = FALSE;
         void init(void);
         void signals();
-
-        utility_c *utility_p;
 
         void *window_p;
 

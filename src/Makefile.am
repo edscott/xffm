@@ -16,6 +16,7 @@ OBJECTS = xffm_c.o \
 	    window_c.o \
 	    view_c.o  \
 		widgets_c.o   \
+		    pathbar_c.o   \
 	  signals_c.o \
 	  utility_c.o \
 	  xfdir_c.o \
@@ -34,6 +35,7 @@ xffm_SOURCES = \
 	    window_c.cpp \
 	    view_c.cpp  \
 		widgets_c.cpp   \
+		    pathbar_c.cpp   \
 	  signals_c.cpp \
 	  utility_c.cpp \
 	  xfdir_c.cpp \

@@ -1,7 +1,14 @@
 #include "pathbar_c.hpp"
+#include "window_c.hpp"
+#include "view_c.hpp"
 
 static void pathbar_go(GtkButton *, gpointer);
-pathbar_c::pathbar_c(void){
+static void *update_pathbar_f(void *);
+
+pathbar_c::pathbar_c(void *window_data, GtkNotebook *data){
+    notebook = data;
+    window_c *window_p = (window_c *)window_data;
+    gtk_p = window_p->get_gtk_p();
     pathbar = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
     g_object_set_data(G_OBJECT(pathbar), "callback", (void *)pathbar_go);
     GtkWidget *pb_button = pathbar_button( NULL, ".");
@@ -41,29 +48,31 @@ pathbar_c::pathbar_button (const char *icon_id, const char *text) {
 }
 
 
-static void
-pathbar_go(GtkButton * button, gpointer pathbar){
+void 
+pathbar_c::update_pathbar(const gchar *path){
+    void *arg[]={(void *)this, (void *)(path?g_strdup(path):NULL)};
+    context_function(update_pathbar_f, arg);
+}
+
+void 
+pathbar_c::pathbar_ok(GtkButton * button){
     GList *children_list = gtk_container_get_children(GTK_CONTAINER(pathbar));
     GList *children = children_list;
     for (;children && children->data; children=children->next){
         if (button == children->data){
-            gchar *path = g_object_get_data(G_OBJECT(button), "path");
-	    // XXX here's the rub...
-            widgets_t *widgets_p = rfm_get_widget("widgets_p");        
+            gchar *path = (gchar *)g_object_get_data(G_OBJECT(button), "path");
+            view_c *view_p = (view_c *)g_object_get_data(G_OBJECT(notebook), "view_p");
             if (g_file_test(path, G_FILE_TEST_IS_DIR)){
-                NOOP("PATHBAR_GO: %s\n", path);
-                record_entry_t *target_en=NULL;
-                if (strcmp("RFM_ROOT", path)) target_en = rfm_stat_entry(path, 0);
-                if (!rodent_refresh (widgets_p, target_en)) rfm_destroy_entry(target_en);
+                view_p->reload(path);
             } else {
-                if (!rodent_refresh (widgets_p, NULL)) continue;
+                // XXX Go to module or top xffm level
             }
         } 
     }
 }
 
-
-static void toggle_pathbar(GtkWidget *pathbar, const gchar *path){
+void 
+pathbar_c::toggle_pathbar(const gchar *path){
     GList *children_list = gtk_container_get_children(GTK_CONTAINER(pathbar));
     GList *children;
         
@@ -76,7 +85,7 @@ static void toggle_pathbar(GtkWidget *pathbar, const gchar *path){
     // First we hide all buttons, except "RFM_ROOT"
     children = g_list_last(children_list);
     for (;children && children->data; children=children->prev){
-        gchar *name = g_object_get_data(G_OBJECT(children->data), "name");
+        gchar *name = (gchar *)g_object_get_data(G_OBJECT(children->data), "name");
         if (strcmp(name, "RFM_ROOT")==0) {
             gtk_widget_get_preferred_size(GTK_WIDGET(children->data), 
                     &minimum, NULL);
@@ -95,7 +104,7 @@ static void toggle_pathbar(GtkWidget *pathbar, const gchar *path){
     // will be the last path visited.
     if (path) for (;children && children->data; children=children->prev){
         const gchar *pb_path = 
-            g_object_get_data(G_OBJECT(children->data), "path");
+            (const gchar *)g_object_get_data(G_OBJECT(children->data), "path");
         if (!pb_path) continue;
         if (strcmp(path, pb_path)==0) {
             active = children;
@@ -111,7 +120,7 @@ static void toggle_pathbar(GtkWidget *pathbar, const gchar *path){
     // Work backwards from active button we show buttons that will fit.
     children = active->prev;
     for (;children && children->data; children=children->prev){
-        gchar *name = g_object_get_data(G_OBJECT(children->data), "name");
+        gchar *name = (gchar *)g_object_get_data(G_OBJECT(children->data), "name");
         if (strcmp(name, "RFM_ROOT")==0) continue;
         gtk_widget_get_allocation(GTK_WIDGET(children->data), &allocation);
         width -= allocation.width;
@@ -122,7 +131,7 @@ static void toggle_pathbar(GtkWidget *pathbar, const gchar *path){
     // Now we work forwards, showing buttons that fit.
     children = active->next;
     for (;children && children->data; children=children->next){
-       gchar *name = g_object_get_data(G_OBJECT(children->data), "name");
+       gchar *name = (gchar *)g_object_get_data(G_OBJECT(children->data), "name");
         if (strcmp(name, "RFM_ROOT")==0) continue;
         gtk_widget_get_allocation(GTK_WIDGET(children->data), &allocation);
         width -= allocation.width;
@@ -133,32 +142,32 @@ static void toggle_pathbar(GtkWidget *pathbar, const gchar *path){
     // Finally, we differentiate active button.
     children = g_list_first(children_list);
     for (;children && children->data; children=children->next){
-        gchar *name = g_object_get_data(G_OBJECT(children->data), "name");
+        gchar *name = (gchar *)g_object_get_data(G_OBJECT(children->data), "name");
         if (strcmp(name, "RFM_ROOT")==0) continue;
         if (!path) {
             // no path means none is differentiated.
-            gchar *v = rfm_utf_string(name);
+            gchar *v = utf_string(name);
             gchar *g = g_markup_escape_text(v, -1);
             g_free(v);
             gchar *markup = g_strdup_printf("<span size=\"x-small\" color=\"blue\" bgcolor=\"#dcdad5\">%s</span>", g);
-            rfm_set_bin_markup(GTK_WIDGET(children->data), markup);
+            gtk_p->set_bin_markup(GTK_WIDGET(children->data), markup);
             g_free(g);
             g_free(markup);
             continue;
         } 
         const gchar *pb_path = 
-            g_object_get_data(G_OBJECT(children->data), "path");
+            (const gchar *)g_object_get_data(G_OBJECT(children->data), "path");
         if (!pb_path){
             g_warning("rfm_update_pathbar(): pb_path is null\n");
             continue;
         }
         if (!strlen(pb_path)) pb_path=G_DIR_SEPARATOR_S;//?
         if (strcmp(pb_path, path)==0) {
-            gchar *v = rfm_utf_string(name);
+            gchar *v = utf_string(name);
             gchar *g = g_markup_escape_text(v, -1);
             g_free(v);
             gchar *markup = g_strdup_printf("<span size=\"x-small\" color=\"red\"bgcolor=\"#dcdad5\">%s</span>", g);
-            rfm_set_bin_markup(GTK_WIDGET(children->data), markup);
+            gtk_p->set_bin_markup(GTK_WIDGET(children->data), markup);
             g_free(g);
             g_free(markup);
         }
@@ -175,16 +184,26 @@ static void toggle_pathbar(GtkWidget *pathbar, const gchar *path){
     g_list_free(children_list);
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-static void *update_pathbar_f(void *data){
-    void **arg = data;
-    GtkWidget *pathbar = arg[0];
-    gchar *path =arg[1];
+static void
+pathbar_go(GtkButton * button, gpointer data){
+    pathbar_c *pathbar_p = (pathbar_c *)data;
+    pathbar_p->pathbar_ok(button);
+
+}
+
+static void *
+update_pathbar_f(void *data){
+    void **arg = (void **)data;
+    pathbar_c *pathbar_p = (pathbar_c *)arg[0];
+    gchar *path = (gchar *)arg[1];
+    GtkWidget *pathbar = pathbar_p->get_pathbar();
 
     if (!pathbar) return NULL;
     if (!path){
         NOOP("##### toggle_pathbar(pathbar, NULL)\n");
-        toggle_pathbar(pathbar, NULL);
+        pathbar_p->toggle_pathbar(NULL);
         return NULL;
     }
 
@@ -208,13 +227,13 @@ static void *update_pathbar_f(void *data){
     gint i=0;
     gchar *pb_path = NULL;
     for (;children && children->data; children=children->next){
-        gchar *name = g_object_get_data(G_OBJECT(children->data), "name");
+        gchar *name = (gchar *)g_object_get_data(G_OBJECT(children->data), "name");
         if (strcmp(name, "RFM_ROOT")==0 || strcmp(name, "<")==0) continue;
         //gchar *p = g_strdup_printf("%s%c", paths[i], G_DIR_SEPARATOR);
         NOOP("(%d) comparing %s <--> %s\n", i, name, paths[i]);
         if (paths[i] && strcmp(name, paths[i]) == 0){
             g_free(pb_path);
-            const gchar *p = g_object_get_data(G_OBJECT(children->data), "path");
+            const gchar *p = (const gchar *)g_object_get_data(G_OBJECT(children->data), "path");
             pb_path = g_strdup(p);
             i++; 
             continue;
@@ -224,7 +243,7 @@ static void *update_pathbar_f(void *data){
         NOOP("Zapping tail: \"%s\"\n", paths[i]);
         GList *tail = children;
         for (;tail && tail->data; tail = tail->next){
-            gchar *name  = g_object_get_data(G_OBJECT(tail->data), "name");
+            gchar *name  = (gchar *)g_object_get_data(G_OBJECT(tail->data), "name");
             g_free(name);
             gtk_container_remove(GTK_CONTAINER(pathbar), GTK_WIDGET(tail->data));
         }
@@ -233,9 +252,9 @@ static void *update_pathbar_f(void *data){
     g_list_free(children_list);
 
     // Add new tail
-    gpointer callback =g_object_get_data(G_OBJECT(pathbar), "callback");
+    gpointer callback = (gpointer)g_object_get_data(G_OBJECT(pathbar), "callback");
     if (strcmp(path, "RFM_MODULE")) for (;paths[i]; i++){
-        GtkWidget *pb_button = rfm_pathbar_button(NULL, 
+        GtkWidget *pb_button = pathbar_p->pathbar_button(NULL, 
                 strlen(paths[i])?paths[i]:G_DIR_SEPARATOR_S);
         gtk_container_add(GTK_CONTAINER(pathbar), pb_button);
 
@@ -255,15 +274,9 @@ static void *update_pathbar_f(void *data){
     g_strfreev(paths);
     
     // show what fits
-    toggle_pathbar(pathbar, path);
+    pathbar_p->toggle_pathbar(path);
     g_free(path);
     return NULL;
-}
-
-void 
-pathbar_c::update_pathbar(GtkWidget *pathbar, const gchar *path){
-    void *arg[]={pathbar, path?g_strdup(path):NULL};
-    context_function(update_pathbar_f, arg);
 }
 
 

@@ -3,13 +3,15 @@
 #include "window_c.hpp"
 #include "widgets_c.hpp"
 
-widgets_c::widgets_c(void *window_v, GtkNotebook *data){
+widgets_c::widgets_c(void *window_data, GtkNotebook *data)
+{
     notebook = data;
     if (!notebook){
         g_warning("widgets_c::widgets_c(): notebook cannot be NULL\n");
         throw 1;
     }
-    window_c *window_p = (window_c *)window_v;
+    pathbar_p = new pathbar_c(window_data, data);
+    window_c *window_p = (window_c *)window_data;
     gtk_p = window_p->get_gtk_p();
     create();
     setup_diagnostics();
@@ -83,10 +85,10 @@ widgets_c::create(void){
     page_label = gtk_label_new (_("Loading folder..."));
     //page_label_button_eventbox = gtk_event_box_new ();
     page_label_button = gtk_button_new ();
-    //pathbar = new_pathbar();
+    // pathbar is already created with pathbar_c object.
     //g_object_set_data(G_OBJECT(view_p->widgets.paper), "pathbar", pathbar);
-    gtk_widget_show(pathbar);
-    gtk_box_pack_start (GTK_BOX (page_child_box), pathbar, FALSE, FALSE, 0);
+    gtk_widget_show(pathbar_p->get_pathbar());
+    gtk_box_pack_start (GTK_BOX (page_child_box), pathbar_p->get_pathbar(), FALSE, FALSE, 0);
     
     vpane = gtk_paned_new(GTK_ORIENTATION_VERTICAL);
     top_scrolled_window = gtk_scrolled_window_new (NULL, NULL);

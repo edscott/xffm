@@ -3,6 +3,7 @@
 #include <iostream>
 #include "xffm+.h"
 #include "gtk_c.hpp"
+#include "pathbar_c.hpp"
 
 
 
@@ -40,8 +41,9 @@ class widgets_c {
         GtkWidget *button_space;	// little button space
         GtkWidget *clear_button;	// clear text area button
         GtkWidget *size_scale;
-        gtk_c *gtk_p;
         void pack();
+        gtk_c *gtk_p;
+        pathbar_c *pathbar_p;
     private:
         void create();
         void setup_diagnostics(void);

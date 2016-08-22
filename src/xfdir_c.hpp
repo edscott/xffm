@@ -40,6 +40,7 @@ class xfdir_c: public utility_c {
         const gchar *get_label();
 	gchar *get_window_name (void);
 	const gchar *get_xfdir_iconname(void);
+        const gchar *get_path(void);
     private:
         pthread_mutex_t population_mutex;
         pthread_cond_t population_cond;
