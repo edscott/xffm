@@ -3,11 +3,12 @@
 #include "xffm+.h"
 #include <string.h>
 #include "widgets_c.hpp"
+#include "lpterm_c.hpp"
 #include "xfdir_c.hpp"
 
 
 
-class view_c:public widgets_c {
+class view_c:public widgets_c, public lpterm_c {
     public:
         view_c(void *, GtkNotebook *);
         ~view_c(void);

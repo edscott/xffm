@@ -15,6 +15,7 @@ FLAGS = -ggdb -O0
 OBJECTS = xffm_c.o \
 	    window_c.o \
 	    view_c.o  \
+		lpterm_c.o   \
 		widgets_c.o   \
 		    pathbar_c.o   \
 	  signals_c.o \
@@ -34,6 +35,7 @@ xffm_SOURCES = \
 	  xffm_c.cpp \
 	    window_c.cpp \
 	    view_c.cpp  \
+		lpterm_c.cpp   \
 		widgets_c.cpp   \
 		    pathbar_c.cpp   \
 	  signals_c.cpp \

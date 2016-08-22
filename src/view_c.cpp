@@ -8,6 +8,10 @@ static gboolean unhighlight (gpointer key, gpointer value, gpointer data);
 /////////////////////////////////////////
 // simple callbacks and thread functions:
 /////////////////////////////////////////
+
+
+
+
 gboolean
 motion_notify_event (GtkWidget *widget,
                GdkEvent  *event,

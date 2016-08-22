@@ -178,6 +178,7 @@ AC_TYPE_SIGNAL
 dnl check for standard header files
 AC_HEADER_MAJOR
 AC_HEADER_STDC
+AC_CHECK_HEADERS([readline/history.h])
 
 AC_CHECK_HEADERS([features.h time.h utime.h unistd.h stdarg.h signal.h errno.h stdlib.h stdio.h string.h fcntl.h grp.h limits.h paths.h pwd.h regex.h varargs.h ctype.h ])
  

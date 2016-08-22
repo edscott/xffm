@@ -14,7 +14,7 @@ class window_c {
         gtk_c *get_gtk_p(void);
 	void create_new_page(const gchar *);
 	void go_home(void);
-       
+        void *get_active_view_p(void);
         GtkWindow *get_window(void);	
         void add_view_to_list(void *);
         void remove_view_from_list(void *);

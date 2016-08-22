@@ -9,7 +9,7 @@
 #include <sys/resource.h>
 # define DBG(...)   \
     G_STMT_START{ \
-	fprintf(stderr, "<rfm>(%p):", g_thread_self());\
+	fprintf(stderr, "db>(%p):", g_thread_self());\
 	fprintf(stderr, __VA_ARGS__); \
 	fflush(stderr);\
     }G_STMT_END
@@ -37,7 +37,7 @@
 	    rfm_thread_create(Z, X, Y, FALSE))
 # define TRACE(...)   \
     G_STMT_START{ \
-	fprintf(stderr, "<rfm*>(%p):", g_thread_self());\
+	fprintf(stderr, "tr>(%p):", g_thread_self());\
 	fprintf(stderr, __VA_ARGS__); \
 	fflush(stderr);\
     }G_STMT_END
