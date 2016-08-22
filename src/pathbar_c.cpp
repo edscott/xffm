@@ -16,7 +16,7 @@ pathbar_c::pathbar_c(void *window_data, GtkNotebook *data){
     //g_object_set (pb_button, "can-focus", FALSE, "relief", GTK_RELIEF_NONE, NULL);
     gtk_box_pack_start (GTK_BOX (pathbar), pb_button, FALSE, FALSE, 0);
     g_object_set_data(G_OBJECT(pb_button), "name", g_strdup("RFM_ROOT"));
-    g_signal_connect (G_OBJECT(pb_button) , "clicked", G_CALLBACK (pathbar_go), pathbar);
+    g_signal_connect (G_OBJECT(pb_button) , "clicked", G_CALLBACK (pathbar_go), (void *)this);
     gtk_widget_show(pb_button);
 }
 
@@ -267,7 +267,7 @@ update_pathbar_f(void *data){
         pb_path = g;
         NOOP("+++***** setting pbpath --> %s\n", pb_path);
         g_object_set_data(G_OBJECT(pb_button), "path", g_strdup(pb_path));
-        g_signal_connect (G_OBJECT(pb_button) , "clicked", G_CALLBACK (callback), pathbar);
+        g_signal_connect (G_OBJECT(pb_button) , "clicked", G_CALLBACK (callback), (void *)pathbar_p);
         
     }
     g_free(pb_path);

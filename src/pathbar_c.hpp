@@ -11,8 +11,8 @@ class pathbar_c: utility_c {
 	void update_pathbar(const gchar *);
         GtkWidget *pathbar_button (const char *, const char *);
     protected:
-	GtkWidget *pathbar;
     private:
+	GtkWidget *pathbar;
         GtkNotebook *notebook;
         void *window_p;
         gtk_c *gtk_p;

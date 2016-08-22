@@ -1,3 +1,17 @@
+* commit fdeeb6b32874693c63c917f0d6e7346a29c47433--------------------------
+Date:   Mon Aug 22 11:09:08 2016 -0500
+
+    Taskbar now enabled
+    
+    * compiles ok, but will lead to crash. Need to debug it.
+
+* commit b0166d4dd64d8bab663f6a179eeb5454492503bb--------------------------
+Date:   Sun Aug 21 21:14:54 2016 -0500
+
+    Added pathbar_c class code
+    
+    * not yet finished nor compiled.
+
 * commit aaafef0b3184a506d35e7fdd8f2ab078df70181d--------------------------
 Date:   Sun Aug 21 20:23:58 2016 -0500
 

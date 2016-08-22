@@ -199,13 +199,15 @@ switch_page (GtkNotebook *notebook,
                guint        page_num,
                gpointer     data)
 {
+#if 0
     fprintf(stderr, "switch_page, page_num=%d\n" ,page_num);
     //page_status(data);
     view_c *view_p = (view_c *)data;
-    window_c *window_p = (window_c *)view_p->get_window_p();
+    window_c *window_p = (window_c *)g_object_get_data(G_OBJECT(notebook), "window_p");
     gint current_page = gtk_notebook_get_current_page (notebook);
     fprintf(stderr, "   current=%d,  pagecount=%d\n",
             current_page, gtk_notebook_get_n_pages(notebook));
+#endif
 
 }
 
@@ -216,12 +218,12 @@ switch_page (GtkNotebook *notebook,
 
 // Public:
 view_c::view_c(void *window_data, GtkNotebook *notebook) : widgets_c(window_data, notebook) {
-    window_c *window_p = (window_c *)window_data;
+    window_v = window_data;
     xfdir_p = NULL;
     dirty_hash = FALSE;
     g_object_set_data(G_OBJECT(page_child_box), "view_p", (void *)this);
     highlight_hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
-    g_object_set_data(G_OBJECT(notebook), "window_p", window_p);
+    g_object_set_data(G_OBJECT(notebook), "window_p", window_v);
     g_object_set_data(G_OBJECT(notebook), "view_p", (void *)this);
     g_object_set_data(G_OBJECT(page_label_button), "view_p", (void *)this);
     //signals_p = new signals_c();
@@ -294,7 +296,7 @@ const gchar *
 view_c::get_path(void) {return xfdir_p->get_path();}
 
 void *
-view_c::get_window_p(void){return window_p;}
+view_c::get_window_p(void){return window_v;}
 
 
 void
@@ -560,7 +562,7 @@ view_c::set_application_icon (void) {
     const gchar *iconname = xfdir_p->get_xfdir_iconname();
     GdkPixbuf *icon_pixbuf = gtk_p->get_pixbuf (iconname, GTK_ICON_SIZE_DIALOG);
     if(icon_pixbuf) {
-	GtkWindow *window = ((window_c *)window_p)->get_window();
+	GtkWindow *window = ((window_c *)window_v)->get_window();
         gtk_window_set_icon (window, icon_pixbuf);
     }
     // FIXME add to tab label (not here...)

@@ -41,7 +41,7 @@ class view_c:public widgets_c {
         void init(void);
         void signals();
 
-        void *window_p;
+        void *window_v;
 
         gint highlight_x;
         gint highlight_y;

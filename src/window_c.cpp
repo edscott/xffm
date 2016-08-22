@@ -45,6 +45,7 @@ window_c::window_c(void) {
 
     gtk_widget_show (GTK_WIDGET(notebook));
     gtk_widget_show (window);
+    while (gtk_events_pending()) gtk_main_iteration();
 }
 
 window_c::~window_c(void) {

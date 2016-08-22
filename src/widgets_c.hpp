@@ -31,7 +31,6 @@ class widgets_c {
         GtkWidget *page_label;
         //GtkWidget *page_label_button_eventbox;
         GtkWidget *page_label_button;
-        GtkWidget *pathbar;
         GtkWidget *vpane;
         GtkWidget *top_scrolled_window;
         GtkWidget *bottom_scrolled_window;
