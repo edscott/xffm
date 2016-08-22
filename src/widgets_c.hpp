@@ -19,8 +19,10 @@ class widgets_c {
         GtkWidget *get_page_child_box(void);
         GtkWidget *get_vpane(void);
         GtkWidget *get_diagnostics(void);
+	gtk_c *get_gtk_p();
     protected:
 
+        GtkIconView *icon_view;          
         GtkNotebook *notebook;
         GtkWidget *page_child_box;
         GtkWidget *page_label_box;
@@ -28,9 +30,6 @@ class widgets_c {
         GtkWidget *page_label;
         //GtkWidget *page_label_button_eventbox;
         GtkWidget *page_label_button;
-        GtkWidget *menu_label_box;
-        GtkWidget *menu_label;
-        GtkWidget *menu_image;
         GtkWidget *pathbar;
         GtkWidget *vpane;
         GtkWidget *top_scrolled_window;
@@ -41,13 +40,13 @@ class widgets_c {
         GtkWidget *button_space;	// little button space
         GtkWidget *clear_button;	// clear text area button
         GtkWidget *size_scale;
-
+        gtk_c *gtk_p;
+        void pack();
     private:
         void create();
         void setup_diagnostics(void);
         void setup_scolled_windows(void);
         void setup_size_scale(void);
-        gtk_c *gtk_p;
 };
 
 #endif

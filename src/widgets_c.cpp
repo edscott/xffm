@@ -23,6 +23,9 @@ widgets_c::~widgets_c(void){
     
 }
 
+gtk_c *
+widgets_c::get_gtk_p(void){ return gtk_p;}
+
 GtkWidget *widgets_c::get_page_label_button(void){ return page_label_button;}
 GtkWidget *widgets_c::get_page_child_box(void){ return page_child_box;}
 GtkWidget *widgets_c::get_vpane(void){ return vpane;}
@@ -72,7 +75,6 @@ widgets_c::setup_size_scale(void){
     gtk_widget_set_size_request (size_scale, 75, 30);
 }
 
-
 void
 widgets_c::create(void){
     page_child_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
@@ -81,9 +83,6 @@ widgets_c::create(void){
     page_label = gtk_label_new (_("Loading folder..."));
     //page_label_button_eventbox = gtk_event_box_new ();
     page_label_button = gtk_button_new ();
-    menu_label_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-    menu_label = gtk_label_new ("menu_label");
-    menu_image = gtk_image_new ();
     // pathbar = rodent_new_pathbar();
     vpane = gtk_paned_new(GTK_ORIENTATION_VERTICAL);
     top_scrolled_window = gtk_scrolled_window_new (NULL, NULL);
@@ -99,4 +98,56 @@ widgets_c::create(void){
     size_scale = gtk_scale_new_with_range(GTK_ORIENTATION_HORIZONTAL, 0.0, 96.0, 12.0);
     
 }
+
+
+void
+widgets_c::pack(void){
+    // Add widgets to page_label_box:
+    gtk_box_pack_start (GTK_BOX (page_label_box), page_label_icon_box, TRUE, TRUE, 0);
+    gtk_box_pack_start (GTK_BOX (page_label_box), page_label, TRUE, TRUE, 2);
+//    gtk_box_pack_end (GTK_BOX (page_label_box), page_label_button_eventbox, TRUE, TRUE, 0);
+//    gtk_container_add (GTK_CONTAINER (page_label_button_eventbox), page_label_button);
+    gtk_box_pack_end (GTK_BOX (page_label_box), page_label_button, TRUE, TRUE, 0);
+    gtk_widget_show_all (page_label_box);
+    //gtk_widget_hide (page_label_button);
+    // path bar... 
+    // gtk_box_pack_start (GTK_BOX (page_child_box), pathbar, FALSE, FALSE, 0);
+    // gtk_widget_show(pathbar);
+
+    gtk_box_pack_start (GTK_BOX (page_child_box), vpane, TRUE, TRUE, 0);
+    gtk_paned_set_position (GTK_PANED (vpane), 1000);
+    gtk_widget_show (vpane);
+
+    gtk_paned_pack1 (GTK_PANED (vpane), top_scrolled_window, FALSE, TRUE);
+    gtk_paned_pack2 (GTK_PANED (vpane), bottom_scrolled_window, TRUE, TRUE);
+    
+    gtk_container_add (GTK_CONTAINER (top_scrolled_window), GTK_WIDGET(icon_view));
+    gtk_container_add (GTK_CONTAINER (bottom_scrolled_window), diagnostics);
+    gtk_widget_show (GTK_WIDGET(icon_view));
+    gtk_widget_show (top_scrolled_window);
+    gtk_widget_show (bottom_scrolled_window);
+
+    gtk_widget_show (diagnostics);
+
+
+    gtk_box_pack_end (GTK_BOX (button_space), size_scale, FALSE, FALSE, 0);
+    gtk_widget_show (size_scale);
+    gtk_box_pack_end (GTK_BOX (button_space), clear_button, FALSE, FALSE, 0);
+    gtk_widget_show (clear_button);
+
+    gtk_box_pack_start (GTK_BOX (page_child_box), button_space, FALSE, FALSE, 0);
+    gtk_widget_show (button_space);
+
+    gtk_widget_show (page_child_box);
+
+    // Insert page into notebook:
+    gint next_position = gtk_notebook_get_current_page(GTK_NOTEBOOK(notebook))+1;
+    gtk_notebook_insert_page (GTK_NOTEBOOK(notebook),
+            page_child_box, 
+            page_label_box, 
+            next_position);
+    gtk_notebook_set_tab_reorderable (GTK_NOTEBOOK(notebook), page_child_box, TRUE);
+    gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), next_position);
+}
+
 

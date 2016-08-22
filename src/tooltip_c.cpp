@@ -337,7 +337,7 @@ custom_tooltip_f(void * data){
     g_object_set_data(G_OBJECT(widget), "tooltip_text", t);
     g_hash_table_replace(tooltip_p->get_tooltip_text_hash(), widget, t);
     g_object_set_data(G_OBJECT(widget), "tooltip_pixbuf", pixbuf);
-    if (pixbuf) g_object_ref(pixbuf);
+   // if (pixbuf) g_object_ref(pixbuf);
 
     gtk_widget_set_has_tooltip(widget, TRUE);
     g_signal_connect (G_OBJECT (widget), "destroy",

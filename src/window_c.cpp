@@ -74,7 +74,6 @@ window_c::remove_view_from_list(void *view_p){
     pthread_mutex_lock(&view_list_mutex);
     view_list = g_list_remove(view_list, view_p);
     pthread_mutex_unlock(&view_list_mutex);
-    // XXX crash:
     delete ((view_c *)view_p);
     if (g_list_length(view_list) == 0) gtk_main_quit();
 }
@@ -91,7 +90,7 @@ window_c::set_up_view_signals(void *view){
 void 
 window_c::create_new_page(const gchar *path){
     view_c *view_p = new view_c((void *)this, get_notebook());
-    xfdir_c *xfdir_p = new xfdir_c(path);
+    xfdir_c *xfdir_p = new xfdir_c(path, gtk_p);
     view_p->set_treemodel(xfdir_p);
     add_view_to_list((void *)view_p);
 }

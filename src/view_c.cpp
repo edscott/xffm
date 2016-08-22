@@ -252,9 +252,6 @@ view_c::view_c(void *window_v, GtkNotebook *notebook) : widgets_c(window_v, note
 
 view_c::~view_c(void){
     if (xfdir_p) delete xfdir_p;
-    pthread_mutex_destroy(&population_mutex);
-    pthread_cond_destroy(&population_cond);
-    pthread_rwlock_destroy(&population_lock);
 }
 
 void
@@ -266,6 +263,7 @@ view_c::set_page_label(void){
 
 gint 
 view_c::get_dir_count(void){ return xfdir_p->get_dir_count();}
+
 void
 view_c::reload(const gchar *data){
     // clear highlight hash
@@ -314,23 +312,12 @@ view_c::set_view_details(void){
     set_page_label();
     set_window_title();
     set_application_icon();
+    update_tab_label_icon();
 
 }
 
 void
 view_c::init(void){
-    gint result;
-    population_mutex = PTHREAD_MUTEX_INITIALIZER;
-    population_cond = PTHREAD_COND_INITIALIZER;
-    result = pthread_rwlock_init(&population_lock, NULL);
-
-    if (result){
-        cerr << "view_c::init(): " << strerror(result) << "\n";
-        throw 1;
-    }
-    population_condition = 0;
-
-
 
 }
 
@@ -344,11 +331,11 @@ view_c::clear_diagnostics(void){
 static gboolean
 unhighlight (gpointer key, gpointer value, gpointer data){
     void **arg = (void **)data;
-    xfdir_c *xfdir_p = (xfdir_c *)arg[0];
+    view_c *view_p = (view_c *)arg[0];
     gchar *tree_path_string = (gchar *)arg[1];
     if (tree_path_string && strcmp(tree_path_string, (gchar *)key)==0) return FALSE;
     fprintf(stderr, "unhighlight %s\n", (gchar *)key);
-    GtkTreeModel *model = xfdir_p->get_tree_model();
+    GtkTreeModel *model = view_p->get_tree_model();
     GtkTreeIter iter;
     gchar *icon_name;
             
@@ -358,10 +345,10 @@ unhighlight (gpointer key, gpointer value, gpointer data){
         gtk_tree_model_get (model, &iter, COL_ICON_NAME, &icon_name, -1);
         gchar *name;
         gtk_tree_model_get (model, &iter, COL_ACTUAL_NAME, &name, -1);
-        gint icon_size = xfdir_p->get_icon_size(name);
+        gint icon_size = view_p->get_icon_size(name);
         g_free(name);
         gtk_list_store_set (GTK_LIST_STORE(model), &iter,
-            COL_PIXBUF, xfdir_p->get_pixbuf(icon_name, icon_size ), 
+            COL_PIXBUF, view_p->get_gtk_p()->get_pixbuf(icon_name, icon_size ), 
             -1);
         g_free(icon_name);
         gtk_tree_path_free (tpath);
@@ -372,7 +359,7 @@ unhighlight (gpointer key, gpointer value, gpointer data){
 
 void 
 view_c::clear_highlights(const gchar *tree_path_string){
-    void *arg[]={(void *)xfdir_p, (void *)tree_path_string};
+    void *arg[]={(void *)this, (void *)tree_path_string};
     g_hash_table_foreach_remove (highlight_hash, unhighlight, (void *)arg);
     dirty_hash = (tree_path_string != NULL)? TRUE: FALSE;
 }
@@ -411,12 +398,27 @@ view_c::highlight(void){
         gtk_tree_model_get_iter (model, &iter, tpath);
         gchar *name;
         gtk_tree_model_get (model, &iter, COL_ACTUAL_NAME, &name, -1);
-        const gchar *icon_name = (strcmp(name, ".."))?"document-open":"go-up";
+        gchar *icon_name=NULL;
+        if (strcmp(name, "..")==0) icon_name = g_strdup("go-up");
+	else {
+	    gint mode;
+	    gtk_tree_model_get (model, &iter, COL_MODE, &mode, -1);
+	    if (S_ISDIR(mode)){
+		icon_name = g_strdup("document-open");
+	    } else {
+		gchar *iname;
+		gtk_tree_model_get (model, &iter, COL_ICON_NAME, &iname, -1);
+		icon_name = g_strdup_printf("%s/NE/document-open/2.0/220", iname);
+		g_free(iname);
+	    }
+	}
 	g_free(name);
 
 	gtk_list_store_set (GTK_LIST_STORE(model), &iter,
-                COL_PIXBUF, xfdir_p->get_pixbuf(icon_name, GTK_ICON_SIZE_DIALOG ), 
+                COL_PIXBUF, gtk_p->get_pixbuf(icon_name, GTK_ICON_SIZE_DIALOG ), 
 		-1);
+	g_free(icon_name);
+
         gtk_tree_path_free (tpath);
         clear_highlights(tree_path_string);
     } else {
@@ -427,64 +429,6 @@ view_c::highlight(void){
             clear_highlights(NULL);
         }
     }
-}
-
-
-
-
-
-void
-view_c::pack(void){
-    // Add widgets to page_label_box:
-    gtk_box_pack_start (GTK_BOX (page_label_box), page_label_icon_box, TRUE, TRUE, 0);
-    gtk_box_pack_start (GTK_BOX (page_label_box), page_label, TRUE, TRUE, 0);
-//    gtk_box_pack_end (GTK_BOX (page_label_box), page_label_button_eventbox, TRUE, TRUE, 0);
-//    gtk_container_add (GTK_CONTAINER (page_label_button_eventbox), page_label_button);
-    gtk_box_pack_end (GTK_BOX (page_label_box), page_label_button, TRUE, TRUE, 0);
-    gtk_widget_show_all (page_label_box);
-    //gtk_widget_hide (page_label_button);
-    // Add widgets to menu_label_box:
-    gtk_box_pack_start (GTK_BOX (menu_label_box), menu_image, FALSE, FALSE, 0);
-    gtk_box_pack_start (GTK_BOX (menu_label_box), menu_label, FALSE, FALSE, 0);
-    gtk_widget_show_all (menu_label_box);
-    // path bar... 
-    // gtk_box_pack_start (GTK_BOX (page_child_box), pathbar, FALSE, FALSE, 0);
-    // gtk_widget_show(pathbar);
-
-    gtk_box_pack_start (GTK_BOX (page_child_box), vpane, TRUE, TRUE, 0);
-    gtk_paned_set_position (GTK_PANED (vpane), 1000);
-    gtk_widget_show (vpane);
-
-    gtk_paned_pack1 (GTK_PANED (vpane), top_scrolled_window, FALSE, TRUE);
-    gtk_paned_pack2 (GTK_PANED (vpane), bottom_scrolled_window, TRUE, TRUE);
-    
-    gtk_container_add (GTK_CONTAINER (top_scrolled_window), GTK_WIDGET(icon_view));
-    gtk_container_add (GTK_CONTAINER (bottom_scrolled_window), diagnostics);
-    gtk_widget_show (GTK_WIDGET(icon_view));
-    gtk_widget_show (top_scrolled_window);
-    gtk_widget_show (bottom_scrolled_window);
-
-    gtk_widget_show (diagnostics);
-
-
-    gtk_box_pack_end (GTK_BOX (button_space), size_scale, FALSE, FALSE, 0);
-    gtk_widget_show (size_scale);
-    gtk_box_pack_end (GTK_BOX (button_space), clear_button, FALSE, FALSE, 0);
-    gtk_widget_show (clear_button);
-
-    gtk_box_pack_start (GTK_BOX (page_child_box), button_space, FALSE, FALSE, 0);
-    gtk_widget_show (button_space);
-
-    gtk_widget_show (page_child_box);
-
-    // Insert page into notebook:
-    gint next_position = gtk_notebook_get_current_page(GTK_NOTEBOOK(notebook))+1;
-    gtk_notebook_insert_page (GTK_NOTEBOOK(notebook),
-            page_child_box, 
-            page_label_box, 
-            next_position);
-    gtk_notebook_set_tab_reorderable (GTK_NOTEBOOK(notebook), page_child_box, TRUE);
-    gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), next_position);
 }
 
 void
@@ -582,11 +526,34 @@ view_c::signals(void){
 
 }
 
+void
+view_c::update_tab_label_icon(void){
+    GList *children = gtk_container_get_children (GTK_CONTAINER(page_label_icon_box));
+    GList *l = children;
+    for (;l && l->data; l=l->next){
+	 gtk_widget_destroy(GTK_WIDGET(l->data));
+    }
+    g_list_free(children);
+    const gchar *icon_name = xfdir_p->get_xfdir_iconname();
+    GdkPixbuf *pixbuf = 
+            gtk_p->get_pixbuf(icon_name, GTK_ICON_SIZE_BUTTON);
+    if (pixbuf){
+	GtkWidget *image = gtk_image_new_from_pixbuf (pixbuf);
+	gtk_container_add (GTK_CONTAINER (page_label_icon_box), image);
+	gtk_widget_show(image);
+    }
+}
+
+GtkTreeModel *
+view_c::get_tree_model(void){return xfdir_p->get_tree_model();}
+gint
+view_c::get_icon_size(const gchar *name){ return xfdir_p->get_icon_size(name);}
+
 // FIXME: should call this function when page changes
 void
 view_c::set_application_icon (void) {
     const gchar *iconname = xfdir_p->get_xfdir_iconname();
-    GdkPixbuf *icon_pixbuf = xfdir_p->get_pixbuf (iconname, GTK_ICON_SIZE_DIALOG);
+    GdkPixbuf *icon_pixbuf = gtk_p->get_pixbuf (iconname, GTK_ICON_SIZE_DIALOG);
     if(icon_pixbuf) {
 	GtkWindow *window = ((window_c *)window_p)->get_window();
         gtk_window_set_icon (window, icon_pixbuf);

@@ -15,7 +15,6 @@ class view_c:public widgets_c {
         void *get_window_p(void);
 	gint get_dir_count(void);
 	
-        //GtkTreeModel *get_treemodel(void);
         void clear_diagnostics(void);
         void set_highlight(gdouble, gdouble);
         void highlight(void);
@@ -23,32 +22,27 @@ class view_c:public widgets_c {
         void remove_page(void);
         void reload(const gchar *);
         void set_treemodel(xfdir_c *);
+        GtkTreeModel *get_tree_model(void);
         void set_page_label(void) ;
+	gint get_icon_size(const gchar *);
 	void set_window_title(void);
 	void set_application_icon(void);
+	xfdir_c *get_xfdir_p(void);
 
     protected:
 
     private:
-	xfdir_c *get_xfdir_p(void);
+	void update_tab_label_icon(void);
 	void set_view_details(void);
         
-        GtkIconView *icon_view;          
         GHashTable *highlight_hash;
         gboolean dirty_hash = FALSE;
         void init(void);
-        void pack();
         void signals();
 
         utility_c *utility_p;
 
         void *window_p;
-
-        gchar *workdir;		
-        pthread_mutex_t population_mutex;
-        pthread_cond_t population_cond;
-        gint population_condition;
-        pthread_rwlock_t population_lock;
 
         gint highlight_x;
         gint highlight_y;

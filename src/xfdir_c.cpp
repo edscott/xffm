@@ -6,17 +6,35 @@
 #include <strings.h>
 #include <errno.h>
 #include <stdlib.h>
+#include <iostream>
+using namespace std;
 
 
 
-xfdir_c::xfdir_c(const gchar *data){
+xfdir_c::xfdir_c(const gchar *data, gtk_c *data_gtk_c){
+    gtk_p = data_gtk_c;
     path = g_strdup(data);
+
+    gint result;
+    population_mutex = PTHREAD_MUTEX_INITIALIZER;
+    population_cond = PTHREAD_COND_INITIALIZER;
+    result = pthread_rwlock_init(&population_lock, NULL);
+
+    if (result){
+        cerr << "view_c::init(): " << strerror(result) << "\n";
+        throw 1;
+    }
+    population_condition = 0;
+
     treemodel = mk_tree_model();
 }
 
 xfdir_c::~xfdir_c(void){
     g_free(path);
     g_object_unref(treemodel);
+    pthread_mutex_destroy(&population_mutex);
+    pthread_cond_destroy(&population_cond);
+    pthread_rwlock_destroy(&population_lock);
 }
 
 const gchar *
@@ -349,10 +367,11 @@ xfdir_c::mk_tree_model (void)
 
     
     GtkListStore *list_store = gtk_list_store_new (NUM_COLS, 
-	    GDK_TYPE_PIXBUF,
-	    G_TYPE_STRING, 
-	    G_TYPE_STRING,
-	    G_TYPE_STRING);
+	    GDK_TYPE_PIXBUF, // icon
+	    G_TYPE_INT,      // mode
+	    G_TYPE_STRING,   // name (UTF-8)
+	    G_TYPE_STRING,   // name (verbatim)
+	    G_TYPE_STRING);   // icon_name
 
     heartbeat = 0;
     GList *directory_list = read_items (&heartbeat);
@@ -398,7 +417,8 @@ xfdir_c::insert_list_into_model(GList *data, GtkListStore *list_store){
 		COL_DISPLAY_NAME, utf_name,
 		COL_ACTUAL_NAME, g_strdup(xd_p->d_name),
 		COL_ICON_NAME, icon_name,
-                COL_PIXBUF, get_pixbuf(icon_name,  get_icon_size(xd_p->d_name)), 
+		COL_MODE,xd_p->st.st_mode, 
+                COL_PIXBUF, gtk_p->get_pixbuf(icon_name,  get_icon_size(xd_p->d_name)), 
 		-1);
 	g_free(utf_name);
     }

@@ -12,6 +12,7 @@
 enum
 {
   COL_PIXBUF,
+  COL_MODE,
   COL_DISPLAY_NAME,
   COL_ACTUAL_NAME,
   COL_ICON_NAME,
@@ -27,9 +28,9 @@ typedef struct xd_t{
     struct stat st;
 }xd_t;
 
-class xfdir_c: public gtk_c, public utility_c {
+class xfdir_c: public utility_c {
     public:
-        xfdir_c(const gchar *);
+        xfdir_c(const gchar *, gtk_c *);
         ~xfdir_c(void);
         GtkTreeModel *get_tree_model(void);
         void reload(const gchar *);
@@ -40,6 +41,11 @@ class xfdir_c: public gtk_c, public utility_c {
 	gchar *get_window_name (void);
 	const gchar *get_xfdir_iconname(void);
     private:
+        pthread_mutex_t population_mutex;
+        pthread_cond_t population_cond;
+        gint population_condition;
+        pthread_rwlock_t population_lock;
+
 	const gchar *get_home_iconname(const gchar *data);
         void insert_list_into_model(GList *, GtkListStore *);
         GList *read_items (gint *heartbeat); 
@@ -50,6 +56,7 @@ class xfdir_c: public gtk_c, public utility_c {
         GtkTreeModel *mk_tree_model(void);
         GtkTreeModel *treemodel;
 	gint dir_count;
+	gtk_c *gtk_p;
 };
 
 #endif
