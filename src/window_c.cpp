@@ -4,6 +4,7 @@
 #include "xfdir_c.hpp"
 
 static void on_new_page(GtkWidget *, gpointer);
+static void on_go_home(GtkWidget *, gpointer);
 
 
 window_c::window_c(void) {
@@ -38,6 +39,9 @@ window_c::window_c(void) {
 
     g_signal_connect(G_OBJECT(new_tab_button), "clicked", 
             G_CALLBACK(on_new_page), (void *)this); 
+    g_signal_connect(G_OBJECT(button), "clicked", 
+            G_CALLBACK(on_go_home), (void *)this); 
+
 
     gtk_widget_show (GTK_WIDGET(notebook));
     gtk_widget_show (window);
@@ -88,6 +92,18 @@ window_c::set_up_view_signals(void *view){
 }
 
 void 
+window_c::go_home(void){
+    //XXX this would need tweaking when xfdir_p is not a directory xfdir_p
+    // get current page
+    gint current_page = gtk_notebook_get_current_page (notebook);
+    GtkWidget *child = gtk_notebook_get_nth_page (notebook, current_page);
+    // get view_p
+    view_c *view_p = (view_c *)g_object_get_data(G_OBJECT(child), "view_p");
+    // reload
+    view_p->reload(g_get_home_dir());
+}
+
+void 
 window_c::create_new_page(const gchar *path){
     view_c *view_p = new view_c((void *)this, get_notebook());
     xfdir_c *xfdir_p = new xfdir_c(path, gtk_p);
@@ -108,5 +124,11 @@ on_new_page(GtkWidget *widget, gpointer data){
     // get path
     window_c *window_p = (window_c *)data;
     window_p->create_new_page(g_get_home_dir());
+}
+
+static void
+on_go_home(GtkWidget *widget, gpointer data){
+    window_c *window_p = (window_c *)data;
+    window_p->go_home();
 }
 

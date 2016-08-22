@@ -218,6 +218,7 @@ view_c::view_c(void *window_v, GtkNotebook *notebook) : widgets_c(window_v, note
     window_p = window_v; 
     xfdir_p = NULL;
     dirty_hash = FALSE;
+    g_object_set_data(G_OBJECT(page_child_box), "view_p", (void *)this);
     highlight_hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
     g_object_set_data(G_OBJECT(notebook), "window_p", window_p);
     g_object_set_data(G_OBJECT(notebook), "view_p", (void *)this);
