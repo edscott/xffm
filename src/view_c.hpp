@@ -8,7 +8,7 @@
 
 
 
-class view_c:public widgets_c, public lpterm_c {
+class view_c:public widgets_c {
     public:
         view_c(void *, GtkNotebook *);
         ~view_c(void);
@@ -31,6 +31,8 @@ class view_c:public widgets_c, public lpterm_c {
 	void set_application_icon(void);
 	xfdir_c *get_xfdir_p(void);
 
+	gboolean window_keyboard_event(GdkEventKey *, void *);
+
     protected:
 
     private:
@@ -41,6 +43,8 @@ class view_c:public widgets_c, public lpterm_c {
         gboolean dirty_hash = FALSE;
         void init(void);
         void signals();
+
+        lpterm_c *lpterm_p;
 
         void *window_v;
 

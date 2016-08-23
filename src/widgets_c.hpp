@@ -19,7 +19,10 @@ class widgets_c {
         GtkWidget *get_page_label_button(void);
         GtkWidget *get_page_child_box(void);
         GtkWidget *get_vpane(void);
+        GtkWidget *get_status(void);
         GtkWidget *get_diagnostics(void);
+        GtkWidget *get_status_icon(void);
+        GtkWidget *get_iconview_icon(void);
 	gtk_c *get_gtk_p();
     protected:
 
@@ -35,6 +38,8 @@ class widgets_c {
         GtkWidget *top_scrolled_window;
         GtkWidget *bottom_scrolled_window;
         GtkWidget *diagnostics;	        // diagnostics text area
+        GtkWidget *iconview_icon;
+        GtkWidget *status_icon;
         GtkWidget *status;	        // status text area
         GtkWidget *rename;		// rename entry box
         GtkWidget *button_space;	// little button space

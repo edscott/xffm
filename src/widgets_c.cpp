@@ -14,7 +14,7 @@ widgets_c::widgets_c(void *window_data, GtkNotebook *data)
     window_c *window_p = (window_c *)window_data;
     gtk_p = window_p->get_gtk_p();
     create();
-    setup_diagnostics();
+    // deprecated : setup_diagnostics();
     setup_scolled_windows();
     setup_size_scale();
     gtk_p->setup_image_button(clear_button, "edit-clear-all",  _("Clear"));
@@ -31,14 +31,15 @@ widgets_c::get_gtk_p(void){ return gtk_p;}
 GtkWidget *widgets_c::get_page_label_button(void){ return page_label_button;}
 GtkWidget *widgets_c::get_page_child_box(void){ return page_child_box;}
 GtkWidget *widgets_c::get_vpane(void){ return vpane;}
+GtkWidget *widgets_c::get_status(void){ return status;}
 GtkWidget *widgets_c::get_diagnostics(void){ return diagnostics;}
+GtkWidget *widgets_c::get_status_icon(void){ return status_icon;}
+GtkWidget *widgets_c::get_iconview_icon(void){ return iconview_icon;}
 
 void
 widgets_c::setup_diagnostics(void){
-    gtk_widget_set_can_focus(diagnostics, FALSE);
-    gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (diagnostics), GTK_WRAP_WORD);
-    gtk_text_view_set_cursor_visible (GTK_TEXT_VIEW (diagnostics), FALSE);
-    gtk_container_set_border_width (GTK_CONTAINER (diagnostics), 2);
+    fprintf(stderr,"setup_diagnostics() is deprecated. now using gtk_text_view_set_monospace() >= gtk+-3.16\n");
+    return;
     gint size = 10;
     GtkStyleContext *style_context = gtk_widget_get_style_context (diagnostics);
     gtk_style_context_add_class(style_context, GTK_STYLE_CLASS_VIEW );
@@ -87,7 +88,6 @@ widgets_c::create(void){
     page_label_button = gtk_button_new ();
     // pathbar is already created with pathbar_c object.
     //g_object_set_data(G_OBJECT(view_p->widgets.paper), "pathbar", pathbar);
-    gtk_widget_show(pathbar_p->get_pathbar());
     gtk_box_pack_start (GTK_BOX (page_child_box), pathbar_p->get_pathbar(), FALSE, FALSE, 0);
     
     vpane = gtk_paned_new(GTK_ORIENTATION_VERTICAL);
@@ -95,8 +95,23 @@ widgets_c::create(void){
      
     bottom_scrolled_window = gtk_scrolled_window_new (NULL, NULL);
     diagnostics = gtk_text_view_new ();
+    gtk_text_view_set_monospace (GTK_TEXT_VIEW (diagnostics), TRUE);
+    gtk_widget_set_can_focus(diagnostics, FALSE);
+    gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (diagnostics), GTK_WRAP_WORD);
+    gtk_text_view_set_cursor_visible (GTK_TEXT_VIEW (diagnostics), FALSE);
+    gtk_container_set_border_width (GTK_CONTAINER (diagnostics), 2);
+
+
+
     g_object_set_data(G_OBJECT(diagnostics), "vpane", vpane);
+    iconview_icon = gtk_image_new_from_icon_name ("system-file-manager", GTK_ICON_SIZE_SMALL_TOOLBAR); 
+    status_icon = gtk_image_new_from_icon_name ("utilities-terminal", GTK_ICON_SIZE_SMALL_TOOLBAR); 
     status = gtk_text_view_new ();
+    gtk_text_view_set_monospace (GTK_TEXT_VIEW (status), TRUE);
+    gtk_text_view_set_editable (GTK_TEXT_VIEW(status), TRUE);
+    gtk_text_view_set_cursor_visible (GTK_TEXT_VIEW(status), TRUE);
+    gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW(status), GTK_WRAP_CHAR);
+    gtk_widget_set_can_focus(diagnostics, TRUE);
     rename = NULL; // create on demand...
 
     button_space = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
@@ -115,6 +130,8 @@ widgets_c::pack(void){
 //    gtk_container_add (GTK_CONTAINER (page_label_button_eventbox), page_label_button);
     gtk_box_pack_end (GTK_BOX (page_label_box), page_label_button, TRUE, TRUE, 0);
     gtk_widget_show_all (page_label_box);
+    gtk_widget_show(pathbar_p->get_pathbar());
+
     //gtk_widget_hide (page_label_button);
     // path bar... 
     // gtk_box_pack_start (GTK_BOX (page_child_box), pathbar, FALSE, FALSE, 0);
@@ -130,12 +147,16 @@ widgets_c::pack(void){
     gtk_container_add (GTK_CONTAINER (top_scrolled_window), GTK_WIDGET(icon_view));
     gtk_container_add (GTK_CONTAINER (bottom_scrolled_window), diagnostics);
     gtk_widget_show (GTK_WIDGET(icon_view));
+    gtk_widget_show (diagnostics);
     gtk_widget_show (top_scrolled_window);
     gtk_widget_show (bottom_scrolled_window);
 
-    gtk_widget_show (diagnostics);
 
-
+    gtk_box_pack_start (GTK_BOX (button_space), status_icon, FALSE, FALSE, 5);
+    gtk_box_pack_start (GTK_BOX (button_space), iconview_icon, FALSE, FALSE, 5);
+    gtk_box_pack_start (GTK_BOX (button_space), status, TRUE, TRUE, 0);
+    gtk_widget_show (iconview_icon);
+    gtk_widget_show (status);
     gtk_box_pack_end (GTK_BOX (button_space), size_scale, FALSE, FALSE, 0);
     gtk_widget_show (size_scale);
     gtk_box_pack_end (GTK_BOX (button_space), clear_button, FALSE, FALSE, 0);

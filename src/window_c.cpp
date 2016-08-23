@@ -156,7 +156,7 @@ window_keyboard_event (GtkWidget * window, GdkEventKey * event, gpointer data)
     TRACE("window_keyboard_event\n");
     window_c *window_p = (window_c *)data;
     view_c *view_p = (view_c *)(window_p->get_active_view_p());
-    return view_p->window_keyboard_event(event);
+    return view_p->window_keyboard_event(event, (void *)view_p);
 }
 
 

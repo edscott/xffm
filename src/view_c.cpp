@@ -30,7 +30,7 @@ leave_notify_event (GtkWidget *widget,
                gpointer   data){
     view_c * view_p = (view_c *)data;
     if (!data) g_error("leave_notify_event: data cannot be NULL\n");
-    //fprintf(stderr, "leave_notify_event\n");
+    //fprintf(TRACE("leave_notify_event\n");
     view_p->clear_highlights(NULL);
 }
 
@@ -97,7 +97,7 @@ item_activated (GtkIconView *iconview,
     gchar *dir = g_get_current_dir();
 
     gchar *full_path = g_strconcat(dir, G_DIR_SEPARATOR_S, dname, NULL);
-    fprintf(stderr, "dname = %s, path = %s\n", dname, full_path);
+    TRACE("dname = %s, path = %s\n", dname, full_path);
 
     g_value_unset(&value);
 
@@ -119,7 +119,7 @@ change_current_page (GtkNotebook *notebook,
                gint         arg1,
                gpointer     data)
 {
-    fprintf(stderr, "change_current_page\n");
+    TRACE("change_current_page\n");
     return FALSE;
 }
 
@@ -130,7 +130,7 @@ create_window (GtkNotebook *notebook,
                gint         y,
                gpointer     data)
 {
-    fprintf(stderr, "create_window\n");
+    TRACE("create_window\n");
     return NULL;
 }
 
@@ -139,7 +139,7 @@ focus_tab (GtkNotebook   *notebook,
                GtkNotebookTab arg1,
                gpointer       data)
 {
-    fprintf(stderr, "focus_tab\n");
+    TRACE("focus_tab\n");
     return FALSE;
 }
 
@@ -148,7 +148,7 @@ move_focus_out (GtkNotebook     *notebook,
                GtkDirectionType arg1,
                gpointer         data)
 {
-    fprintf(stderr, "move_focus_out\n");
+    TRACE("move_focus_out\n");
 }
 
 static void
@@ -157,7 +157,7 @@ page_added (GtkNotebook *notebook,
                guint        page_num,
                gpointer     data)
 {
-    fprintf(stderr, "page_added\n");
+    TRACE("page_added\n");
 }
 
 static void
@@ -166,7 +166,7 @@ page_removed (GtkNotebook *notebook,
                guint        page_num,
                gpointer     data)
 {
-    fprintf(stderr, "page_removed\n");
+    TRACE("page_removed\n");
 }
 
 static void
@@ -175,7 +175,7 @@ page_reordered (GtkNotebook *notebook,
                guint        page_num,
                gpointer     data)
 {
-    fprintf(stderr, "page_reordered\n");
+    TRACE("page_reordered\n");
 }
 
 static gboolean
@@ -184,7 +184,7 @@ reorder_tab (GtkNotebook     *notebook,
                gboolean         arg2,
                gpointer         data)
 {
-    fprintf(stderr, "reorder_tab\n");
+    TRACE("reorder_tab\n");
     return FALSE;
 }
 
@@ -193,7 +193,7 @@ select_page (GtkNotebook *notebook,
                gboolean     arg1,
                gpointer     data)
 {
-    fprintf(stderr, "select_page\n");
+    TRACE("select_page\n");
     return FALSE;
 }
 
@@ -204,12 +204,12 @@ switch_page (GtkNotebook *notebook,
                gpointer     data)
 {
 #if 0
-    fprintf(stderr, "switch_page, page_num=%d\n" ,page_num);
+    TRACE("switch_page, page_num=%d\n" ,page_num);
     //page_status(data);
     view_c *view_p = (view_c *)data;
     window_c *window_p = (window_c *)g_object_get_data(G_OBJECT(notebook), "window_p");
     gint current_page = gtk_notebook_get_current_page (notebook);
-    fprintf(stderr, "   current=%d,  pagecount=%d\n",
+    TRACE("   current=%d,  pagecount=%d\n",
             current_page, gtk_notebook_get_n_pages(notebook));
 #endif
 
@@ -225,6 +225,8 @@ view_c::view_c(void *window_data, GtkNotebook *notebook) : widgets_c(window_data
     window_v = window_data;
     xfdir_p = NULL;
     dirty_hash = FALSE;
+    lpterm_p = new lpterm_c(status, diagnostics);
+
     g_object_set_data(G_OBJECT(page_child_box), "view_p", (void *)this);
     highlight_hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
     g_object_set_data(G_OBJECT(notebook), "window_p", window_v);
@@ -260,8 +262,13 @@ view_c::view_c(void *window_data, GtkNotebook *notebook) : widgets_c(window_data
 
 view_c::~view_c(void){
     if (xfdir_p) delete xfdir_p;
+    if (lpterm_p) delete lpterm_p;
 }
 
+gboolean
+view_c::window_keyboard_event(GdkEventKey *event, void *data){
+    return lpterm_p->window_keyboard_event(event, data);
+}
 void
 view_c::set_page_label(void){
     gchar *tab_label = g_path_get_basename(xfdir_p->get_label());
@@ -334,7 +341,7 @@ view_c::init(void){
 
 void
 view_c::clear_diagnostics(void){
-    fprintf(stderr, "DBG: clear diagnostics()\n");
+    TRACE("DBG: clear diagnostics()\n");
     clear_text(NULL, (void *)diagnostics);
     hide_text(NULL, (void *)vpane);
 }
@@ -345,7 +352,7 @@ unhighlight (gpointer key, gpointer value, gpointer data){
     view_c *view_p = (view_c *)arg[0];
     gchar *tree_path_string = (gchar *)arg[1];
     if (tree_path_string && strcmp(tree_path_string, (gchar *)key)==0) return FALSE;
-    fprintf(stderr, "unhighlight %s\n", (gchar *)key);
+    TRACE("unhighlight %s\n", (gchar *)key);
     GtkTreeModel *model = view_p->get_tree_model();
     GtkTreeIter iter;
     gchar *icon_name;
@@ -377,14 +384,14 @@ view_c::clear_highlights(const gchar *tree_path_string){
 
 void 
 view_c::set_highlight(gdouble X, gdouble Y){
-    //    fprintf(stderr, "x=%lf y=%lf\n", X, Y);
+    //    TRACE("x=%lf y=%lf\n", X, Y);
     highlight_x = X + 0.5;
     highlight_y = Y + 0.5;
 }
 
 void 
 view_c::highlight(void){
-    //fprintf(stderr, "highlight %d, %d\n", highlight_x, highlight_y);
+    //TRACE("highlight %d, %d\n", highlight_x, highlight_y);
     gchar *tree_path_string = NULL;
     
     GtkCellRenderer *cell;
@@ -396,13 +403,13 @@ view_c::highlight(void){
     if (tpath){
         tree_path_string = gtk_tree_path_to_string (tpath);
         if (g_hash_table_lookup(highlight_hash, tree_path_string)) {
-            //fprintf(stderr, "%s already in hash\n", tree_path_string);
+            //TRACE("%s already in hash\n", tree_path_string);
             g_free (tree_path_string);
             gtk_tree_path_free (tpath);
             return;
         }
         // Not highlighted?
-        fprintf(stderr, "yes: %s\n", tree_path_string);
+        TRACE("yes: %s\n", tree_path_string);
         
         g_hash_table_insert(highlight_hash, tree_path_string, GINT_TO_POINTER(1));
         // Do highlight.
@@ -436,7 +443,7 @@ view_c::highlight(void){
         // No item at position?
         // Do we need to clear hash table?
         if (dirty_hash){
-            fprintf(stderr, "no (%d, %d)\n", highlight_x,highlight_y);
+            TRACE("no (%d, %d)\n", highlight_x,highlight_y);
             clear_highlights(NULL);
         }
     }
