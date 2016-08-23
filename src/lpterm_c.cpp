@@ -12,6 +12,8 @@ status_keyboard_event (GtkWidget * window, GdkEventKey * event, gpointer data)
 {
     
     TRACE("status_keyboard_event\n");
+    // FIXME: cursor is not visible!
+    //gtk_text_view_set_cursor_visible (GTK_TEXT_VIEW(data), TRUE);
     return FALSE;
 /*    window_c *window_p = (window_c *)data;
     view_c *view_p = (view_c *)(window_p->get_active_view_p());
@@ -22,7 +24,7 @@ lpterm_c::lpterm_c(GtkWidget *data1, GtkWidget *data2){
     active = FALSE;
     status = data1;
     diagnostics = data2;
-    g_signal_connect (status, "key-press-event", G_CALLBACK (status_keyboard_event), (void *)this);
+    g_signal_connect (status, "key-press-event", G_CALLBACK (status_keyboard_event), data1);
 }
 
 gboolean 
@@ -163,13 +165,14 @@ lpterm_c::lp_set_active(gboolean state, void *data){
     active = state;
     view_c *view_p = (view_c *)data;
     if (state){
+        gtk_widget_show(view_p->get_status());
         gtk_widget_show(view_p->get_status_icon());
         gtk_widget_hide(view_p->get_iconview_icon());
-        gtk_widget_set_sensitive(view_p->get_status(), TRUE);
     } else {
         gtk_widget_show(view_p->get_iconview_icon());
         gtk_widget_hide(view_p->get_status_icon());
-        gtk_widget_set_sensitive(view_p->get_status(), FALSE);
+        gtk_widget_hide(view_p->get_status());
+        //gtk_widget_set_sensitive(view_p->get_status(), FALSE);
     }
 }
 
