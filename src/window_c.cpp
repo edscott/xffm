@@ -6,7 +6,7 @@
 
 static void on_new_page(GtkWidget *, gpointer);
 static void on_go_home(GtkWidget *, gpointer);
-static gboolean signal_keyboard_event (GtkWidget *, GdkEventKey *, gpointer);
+static gboolean window_keyboard_event (GtkWidget *, GdkEventKey *, gpointer);
 
 window_c::window_c(void) {
     view_list_mutex = PTHREAD_MUTEX_INITIALIZER;
@@ -15,7 +15,7 @@ window_c::window_c(void) {
     gtk_p = new gtk_c();
     window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
     g_signal_connect (window, "destroy", G_CALLBACK (gtk_main_quit), NULL);
-    g_signal_connect (window, "key-press-event", G_CALLBACK (signal_keyboard_event), (void *)this);
+    g_signal_connect (window, "key-press-event", G_CALLBACK (window_keyboard_event), (void *)this);
     gtk_window_set_title (GTK_WINDOW (window), "Xffm+");
     gtk_container_set_border_width (GTK_CONTAINER (window), 0);
     gtk_widget_set_size_request (window, 800, 600);
@@ -151,107 +151,12 @@ static gboolean iconview_key(GdkEventKey * event){
 }
 
 static gboolean
-signal_keyboard_event (
-    GtkWidget * window,
-    GdkEventKey * event,
-    gpointer data
-) {
+window_keyboard_event (GtkWidget * window, GdkEventKey * event, gpointer data)
+{
+    TRACE("window_keyboard_event\n");
     window_c *window_p = (window_c *)data;
-
-    /* asian Input methods */
-    if(event->keyval == GDK_KEY_space && (event->state & (GDK_MOD1_MASK | GDK_SHIFT_MASK))) {
-        return FALSE;
-    }
-
-
-    gint ignore[]={
-        GDK_KEY_Control_L,
-        GDK_KEY_Control_R,
-        GDK_KEY_Shift_L,
-        GDK_KEY_Shift_R,
-        GDK_KEY_Shift_Lock,
-        GDK_KEY_Caps_Lock,
-        GDK_KEY_Meta_L,
-        GDK_KEY_Meta_R,
-        GDK_KEY_Alt_L,
-        GDK_KEY_Alt_R,
-        GDK_KEY_Super_L,
-        GDK_KEY_Super_R,
-        GDK_KEY_Hyper_L,
-        GDK_KEY_Hyper_R,
-	GDK_KEY_ISO_Lock,
-	GDK_KEY_ISO_Level2_Latch,
-	GDK_KEY_ISO_Level3_Shift,
-	GDK_KEY_ISO_Level3_Latch,
-	GDK_KEY_ISO_Level3_Lock,
-	GDK_KEY_ISO_Level5_Shift,
-	GDK_KEY_ISO_Level5_Latch,
-	GDK_KEY_ISO_Level5_Lock,
-        0
-    };
-
-    gint i;
-    for (i=0; ignore[i]; i++) {
-        if(event->keyval ==  ignore[i]) {
-	    TRACE("key ignored\n");
-            return TRUE;
-        }
-    }
-
-
     view_c *view_p = (view_c *)(window_p->get_active_view_p());
-    gboolean active = view_p->lp_get_active();
-    TRACE("signal_keyboard_event(0x%x): view_p->get_active_lp = %d\n", event->keyval, active);
-
-    if (!active && view_p->is_iconview_key(event)) return FALSE;
-
-
-    if (!active) {
-	if (event->keyval == GDK_KEY_Tab){
-	    event->keyval = GDK_KEY_Escape;
-	}
-	if (event->keyval == GDK_KEY_Escape){
-            view_p->lp_set_active(TRUE); 
-
-        } 
-        return TRUE;
-    }
-    else if (event->keyval == GDK_KEY_Escape){
-        view_p->lp_set_active(FALSE);
-        return TRUE;
-    }
-    // By now we have a lp key
-    if (!active) view_p->lp_set_active(TRUE); 
-    TRACE("send key to status dialog for lpterm command\n");
-    return TRUE;
-
-
-
-    /* FIXME: callbacks...
-    if (rodent_do_callback(event->keyval, event->state)) {
-        TRACE("signal_keyboard_event(): Tried callback with keyval!\n");
-        return TRUE;
-    } */
-    
-    /*
-    if (!active){
-	if (iconview_key(event)) {
-            TRACE("signal_keyboard_event(): This may be a callback key!\n");
-            return TRUE;
-        }
-    }
-
-    if ((event->state & GDK_CONTROL_MASK) && !view_p->is_lpterm_key(event)) return TRUE;
-*/
-    /* FIXME
-    if (view_p->selection_list) {
-	// selection list must be redefined...
-	update_reselect_list(widgets_p);
-	TRACE( "Selection---> %p\n", view_p->selection_list);	
-    } */
-    
-    //False defaults to status line keybinding signal callback
-    return FALSE;
+    return view_p->window_keyboard_event(event);
 }
-    
+
 

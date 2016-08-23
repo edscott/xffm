@@ -9,7 +9,7 @@ class lpterm_c {
         gboolean is_lpterm_key(GdkEventKey *);
         gboolean lp_get_active(void);
         void lp_set_active(gboolean);
-
+	gboolean window_keyboard_event(GdkEventKey *);
     private:
         gboolean active;
 

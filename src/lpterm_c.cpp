@@ -1,3 +1,4 @@
+#define DEBUG_TRACE 1
 
 #include "lpterm_c.hpp"
 
@@ -8,6 +9,110 @@
 lpterm_c::lpterm_c(void){
     active = FALSE;
 }
+
+gboolean 
+lpterm_c::window_keyboard_event(GdkEventKey * event)
+{
+    TRACE("lpterm_c::window_keyboard_event\n");
+    /* asian Input methods */
+    if(event->keyval == GDK_KEY_space && (event->state & (GDK_MOD1_MASK | GDK_SHIFT_MASK))) {
+        return FALSE;
+    }
+
+
+    gint ignore[]={
+        GDK_KEY_Control_L,
+        GDK_KEY_Control_R,
+        GDK_KEY_Shift_L,
+        GDK_KEY_Shift_R,
+        GDK_KEY_Shift_Lock,
+        GDK_KEY_Caps_Lock,
+        GDK_KEY_Meta_L,
+        GDK_KEY_Meta_R,
+        GDK_KEY_Alt_L,
+        GDK_KEY_Alt_R,
+        GDK_KEY_Super_L,
+        GDK_KEY_Super_R,
+        GDK_KEY_Hyper_L,
+        GDK_KEY_Hyper_R,
+	GDK_KEY_ISO_Lock,
+	GDK_KEY_ISO_Level2_Latch,
+	GDK_KEY_ISO_Level3_Shift,
+	GDK_KEY_ISO_Level3_Latch,
+	GDK_KEY_ISO_Level3_Lock,
+	GDK_KEY_ISO_Level5_Shift,
+	GDK_KEY_ISO_Level5_Latch,
+	GDK_KEY_ISO_Level5_Lock,
+        0
+    };
+
+    gint i;
+    for (i=0; ignore[i]; i++) {
+        if(event->keyval ==  ignore[i]) {
+	    TRACE("key ignored\n");
+            return TRUE;
+        }
+    }
+
+
+    gboolean active = lp_get_active();
+    TRACE("window_keyboard_event(0x%x): get_active_lp = %d\n", event->keyval, active);
+
+    if (!active && is_iconview_key(event)) {
+	TRACE("Sending key to iconview default handler.\n");
+	return FALSE;
+    }
+
+    if (active && (event->keyval = GDK_KEY_Escape)) {
+	TRACE("set_active_lp = %d\n", FALSE);
+        lp_set_active(FALSE); 
+	return TRUE;
+    }
+
+    if (!active) {
+	TRACE("set_active_lp = %d\n", TRUE);
+        lp_set_active(TRUE); 
+	if (event->keyval == GDK_KEY_Tab){
+	    event->keyval = GDK_KEY_Escape;
+	}
+	if (event->keyval == GDK_KEY_Escape){
+	    return TRUE;
+
+        } 
+    }
+    // By now we have a lp key to process
+    TRACE("send key to status dialog for lpterm command\n");
+    return TRUE;
+
+
+
+    /* FIXME: callbacks...
+    if (rodent_do_callback(event->keyval, event->state)) {
+        TRACE("window_keyboard_event(): Tried callback with keyval!\n");
+        return TRUE;
+    } */
+    
+    /*
+    if (!active){
+	if (iconview_key(event)) {
+            TRACE("window_keyboard_event(): This may be a callback key!\n");
+            return TRUE;
+        }
+    }
+
+    if ((event->state & GDK_CONTROL_MASK) && !view_p->is_lpterm_key(event)) return TRUE;
+*/
+    /* FIXME
+    if (view_p->selection_list) {
+	// selection list must be redefined...
+	update_reselect_list(widgets_p);
+	TRACE( "Selection---> %p\n", view_p->selection_list);	
+    } */
+    
+    //False defaults to status line keybinding signal callback
+    return FALSE;
+}
+    
     
 gboolean
 lpterm_c::is_iconview_key(GdkEventKey *event){
@@ -99,6 +204,211 @@ lpterm_c::is_lpterm_key(GdkEventKey * event){
     }
     return FALSE;
 }
+
+gint
+lpterm_c::on_status_key_press (
+    GtkWidget * textview,
+    GdkEventKey * event,
+    gpointer data
+) {
+    widgets_t *widgets_p = (widgets_t *) data;
+    view_t *view_p = widgets_p->view_p;
+    if(!event) {
+        DBG ("on_status_key_press(): returning on event==0\n");
+        //status_grab_focus (widgets_p->view_p, 0);
+        return TRUE;
+    }
+
+    // backspace must not erase icon. Place_cursor is offset by 2 for this purpose.
+    TRACE ("on_status_key_press(): * on_status_key_press: got key= 0x%x\n", event->keyval);
+    if(event->keyval == GDK_KEY_Home) {
+        place_cursor(GTK_TEXT_VIEW(widgets_p->status), 0);
+        return TRUE;
+    }
+    if(event->keyval == GDK_KEY_BackSpace || event->keyval == GDK_KEY_Left) {
+        gint intval;
+        GtkTextBuffer *buffer = gtk_text_view_get_buffer ((GtkTextView *) widgets_p->status);
+        g_object_get (G_OBJECT (buffer), "cursor-position", &intval, NULL);
+        NOOP ("on_status_key_press(): cursor-position =%d\n", intval);
+        if(intval > 2) {
+            // offset==1 is the icon and offset==2 is the space after icon
+            return FALSE;
+        }
+        return TRUE;
+    }
+
+    // CTRL-TAB for command history completion
+    if(event->keyval == GDK_KEY_Tab && event->state & GDK_CONTROL_MASK) {
+        // do history completion ...
+        gchar *complete = get_current_text ((GtkTextView *) widgets_p->status);
+	if (strncmp(complete, "sudo", strlen("sudo"))==0 &&
+	    strncmp(complete, "sudo -A", strlen("sudo -A"))){
+	    gchar *o = complete;
+	    gchar *oo = o+strlen("sudo");
+	    while (*oo == ' ') oo++;
+	    complete = g_strconcat("sudo -A ", oo, NULL);
+	    g_free(o);
+	}
+#if 0
+	// too nerdy?
+	// "&&" --> " && "
+	// "||" --> " || "
+	// ";" --> "; "
+	// "|" --> " | "
+	if (command && strlen(command)){
+	    command = subst(complete, "&&", " && ");
+	    command = subst(complete, "||", " || ");
+	    command = subst(complete, ">>", " >> ");
+	    command = subst(complete, ";", "; ");	
+	    while (strchr(complete, "  ")) command = subst(complete, "  ", " ");
+	}
+#endif
+        gchar *suggest = rfm_rational(RFM_MODULE_DIR,
+		"completion", widgets_p, complete,
+		"rfm_history_completion");
+        g_free (complete);
+        if(suggest) {
+            rfm_status (widgets_p, "xffm/emblem_terminal", suggest, NULL);
+            g_free (suggest);
+        }
+        g_object_set_data (G_OBJECT (widgets_p->status), "clean", NULL);
+	gtk_text_view_set_cursor_visible(GTK_TEXT_VIEW  (widgets_p->status), TRUE);
+        return TRUE;
+    }
+    // tab for bash completion
+    if(event->keyval == GDK_KEY_Tab) {
+	gchar *head=get_text_to_cursor(GTK_TEXT_VIEW(widgets_p->status));
+	gint head_len = strlen(head);
+        gchar *token = get_current_text (GTK_TEXT_VIEW(widgets_p->status));
+	gint token_len = strlen(token);
+
+	//gchar *tail=get_text_from_cursor(GTK_TEXT_VIEW(widgets_p->status));
+        g_free (head);
+	//gchar *suggest = rfm_bash_complete(widgets_p, token, head_len);
+	gchar *suggest = rfm_complex(RFM_MODULE_DIR, "completion",
+		widgets_p, token, GINT_TO_POINTER(head_len),
+		"rfm_bash_complete");
+        g_free (token);
+
+	if (suggest) {
+	    gint suggest_len = strlen(suggest);
+	    GtkTextIter end;
+	    GtkTextBuffer *buffer = 
+		gtk_text_view_get_buffer (GTK_TEXT_VIEW(widgets_p->status));
+	    gint offset = -1;
+	    // +2 is icon and space...
+	    offset = head_len + (suggest_len - token_len) + 2;
+            rfm_status (widgets_p, "xffm/emblem_terminal", suggest, NULL);
+	    gtk_text_buffer_get_iter_at_offset (buffer, &end, offset);
+	    gtk_text_buffer_place_cursor(buffer, &end);	
+	}
+	g_free(suggest);
+
+        g_object_set_data (G_OBJECT (widgets_p->status), "clean", NULL);
+	gtk_text_view_set_cursor_visible(GTK_TEXT_VIEW  (widgets_p->status), TRUE);
+        return TRUE;
+    }
+    if ((event->state & GDK_SHIFT_MASK)
+	    &&
+	    ((event->keyval == GDK_KEY_Page_Up) || 
+	    (event->keyval == GDK_KEY_Page_Down) ||
+	    (event->keyval == GDK_KEY_Up) || 
+	    (event->keyval == GDK_KEY_Down)) ) 
+    {
+	// Show text.
+        rfm_show_text (widgets_p);
+	// Get diagnostics area height.
+	// Scroll up or down.
+	gboolean page = (event->keyval == GDK_KEY_Page_Up || event->keyval == GDK_KEY_Page_Down); 
+	gboolean up = (event->keyval == GDK_KEY_Page_Up || event->keyval == GDK_KEY_Up); 
+	NOOP(stderr, "scroll \n");
+	rfm_scroll(widgets_p, up, page);
+
+        return TRUE;
+    }
+    if(event->keyval == GDK_KEY_Up) {
+        // csh command completion
+        if (csh_completion(textview, widgets_p, 1)) return TRUE;
+	// push/pop history
+	offset_history(textview, widgets_p, -1);
+	return TRUE;
+    }
+
+
+    if(event->keyval == GDK_KEY_Down) {
+        // csh command completion
+        if (csh_completion(textview, widgets_p, -1)) return TRUE;
+	// push/pop history
+	offset_history(textview, widgets_p, 1);
+        return TRUE;
+    }
+    if(event->keyval == GDK_KEY_Return || event->keyval == GDK_KEY_KP_Enter) {
+        if(g_object_get_data (G_OBJECT (textview), "clean") == NULL) {
+            g_object_set_data(G_OBJECT(widgets_p->status), "csh_cmd_len", NULL);
+            g_object_set_data(G_OBJECT(widgets_p->status), "csh_nth", NULL);
+            // get the command
+            gchar *command = get_current_text ((GtkTextView *) widgets_p->status);
+            if(command && strlen (command)) {
+                // show the lp output area        
+                rfm_show_text (widgets_p);
+
+                // first process internal commands for cd and history
+		// Internal commands will return focus to paper
+		// (cd is a threaded reload which will overwrite
+		//  the status line when done)
+                if(process_internal_commands (widgets_p, &command)){
+		    // probably not the best choice to send focus to paper...
+                    // lp_set_active(widgets_p, FALSE);
+		    // rfm_update_status_line (widgets_p->view_p);
+                    return TRUE;
+		}
+
+                // command is now external for /bin/sh
+                // printstatus with the run icon run.png
+                // this is already done in run.c
+                // rfm_diagnostics(widgets_p, "run.png",command,"\n",NULL);
+
+                // run the command (in a shell)
+		// XXX This will block if located at a remote directory with
+		// a broken network connection.
+                if(widgets_p->workdir) {
+                    g_free (widgets_p->workdir);
+                }
+                view_t *view_p = widgets_p->view_p;
+                if (!view_p->en || !view_p->en->path || ! rfm_g_file_test(view_p->en->path, G_FILE_TEST_IS_DIR)){
+                    widgets_p->workdir = g_strdup (g_get_home_dir());
+;
+                } else {
+                    widgets_p->workdir = g_strdup (view_p->en->path);
+                }
+		// Fix any sudo commands to use the -A option
+		command = sudo_fix(command);
+                RFM_THREAD_RUN (widgets_p, command, FALSE);
+                g_free (command);
+            }
+        }
+        rfm_status (widgets_p, "xffm/emblem_terminal", NULL);
+	gtk_text_view_set_cursor_visible(GTK_TEXT_VIEW  (widgets_p->status), TRUE);
+        g_object_set_data (G_OBJECT (textview), "clean", NULL);
+        return TRUE;
+    }
+
+    if(g_object_get_data (G_OBJECT (textview), "clean")) {
+        rfm_status (widgets_p, "xffm/emblem_terminal", NULL);
+    }
+    // set unclean status...
+    g_object_set_data (G_OBJECT (textview), "clean", NULL);
+    gtk_text_view_set_cursor_visible(GTK_TEXT_VIEW  (widgets_p->status), TRUE);
+    // Allow default handler for text buffer
+    if (event->keyval >= GDK_KEY_space && event->keyval <= GDK_KEY_asciitilde){
+        gchar *command = get_current_text ((GtkTextView *) widgets_p->status);
+        gint csh_cmd_len = strlen(command)+1;
+        g_object_set_data(G_OBJECT(widgets_p->status), "csh_cmd_len", GINT_TO_POINTER(csh_cmd_len));
+    }
+
+    return FALSE;
+}
+
 
 
 #ifdef OLDCODE
@@ -592,210 +902,6 @@ offset_history(GtkWidget *textview, widgets_t *widgets_p, gint offset){
 	    place_command(textview, widgets_p, p);
     }
     return TRUE;
-}
-
-static gint
-on_status_key_press (
-    GtkWidget * textview,
-    GdkEventKey * event,
-    gpointer data
-) {
-    widgets_t *widgets_p = (widgets_t *) data;
-    view_t *view_p = widgets_p->view_p;
-    if(!event) {
-        DBG ("on_status_key_press(): returning on event==0\n");
-        //status_grab_focus (widgets_p->view_p, 0);
-        return TRUE;
-    }
-
-    // backspace must not erase icon. Place_cursor is offset by 2 for this purpose.
-    TRACE ("on_status_key_press(): * on_status_key_press: got key= 0x%x\n", event->keyval);
-    if(event->keyval == GDK_KEY_Home) {
-        place_cursor(GTK_TEXT_VIEW(widgets_p->status), 0);
-        return TRUE;
-    }
-    if(event->keyval == GDK_KEY_BackSpace || event->keyval == GDK_KEY_Left) {
-        gint intval;
-        GtkTextBuffer *buffer = gtk_text_view_get_buffer ((GtkTextView *) widgets_p->status);
-        g_object_get (G_OBJECT (buffer), "cursor-position", &intval, NULL);
-        NOOP ("on_status_key_press(): cursor-position =%d\n", intval);
-        if(intval > 2) {
-            // offset==1 is the icon and offset==2 is the space after icon
-            return FALSE;
-        }
-        return TRUE;
-    }
-
-    // CTRL-TAB for command history completion
-    if(event->keyval == GDK_KEY_Tab && event->state & GDK_CONTROL_MASK) {
-        // do history completion ...
-        gchar *complete = get_current_text ((GtkTextView *) widgets_p->status);
-	if (strncmp(complete, "sudo", strlen("sudo"))==0 &&
-	    strncmp(complete, "sudo -A", strlen("sudo -A"))){
-	    gchar *o = complete;
-	    gchar *oo = o+strlen("sudo");
-	    while (*oo == ' ') oo++;
-	    complete = g_strconcat("sudo -A ", oo, NULL);
-	    g_free(o);
-	}
-#if 0
-	// too nerdy?
-	// "&&" --> " && "
-	// "||" --> " || "
-	// ";" --> "; "
-	// "|" --> " | "
-	if (command && strlen(command)){
-	    command = subst(complete, "&&", " && ");
-	    command = subst(complete, "||", " || ");
-	    command = subst(complete, ">>", " >> ");
-	    command = subst(complete, ";", "; ");	
-	    while (strchr(complete, "  ")) command = subst(complete, "  ", " ");
-	}
-#endif
-        gchar *suggest = rfm_rational(RFM_MODULE_DIR,
-		"completion", widgets_p, complete,
-		"rfm_history_completion");
-        g_free (complete);
-        if(suggest) {
-            rfm_status (widgets_p, "xffm/emblem_terminal", suggest, NULL);
-            g_free (suggest);
-        }
-        g_object_set_data (G_OBJECT (widgets_p->status), "clean", NULL);
-	gtk_text_view_set_cursor_visible(GTK_TEXT_VIEW  (widgets_p->status), TRUE);
-        return TRUE;
-    }
-    // tab for bash completion
-    if(event->keyval == GDK_KEY_Tab) {
-	gchar *head=get_text_to_cursor(GTK_TEXT_VIEW(widgets_p->status));
-	gint head_len = strlen(head);
-        gchar *token = get_current_text (GTK_TEXT_VIEW(widgets_p->status));
-	gint token_len = strlen(token);
-
-	//gchar *tail=get_text_from_cursor(GTK_TEXT_VIEW(widgets_p->status));
-        g_free (head);
-	//gchar *suggest = rfm_bash_complete(widgets_p, token, head_len);
-	gchar *suggest = rfm_complex(RFM_MODULE_DIR, "completion",
-		widgets_p, token, GINT_TO_POINTER(head_len),
-		"rfm_bash_complete");
-        g_free (token);
-
-	if (suggest) {
-	    gint suggest_len = strlen(suggest);
-	    GtkTextIter end;
-	    GtkTextBuffer *buffer = 
-		gtk_text_view_get_buffer (GTK_TEXT_VIEW(widgets_p->status));
-	    gint offset = -1;
-	    // +2 is icon and space...
-	    offset = head_len + (suggest_len - token_len) + 2;
-            rfm_status (widgets_p, "xffm/emblem_terminal", suggest, NULL);
-	    gtk_text_buffer_get_iter_at_offset (buffer, &end, offset);
-	    gtk_text_buffer_place_cursor(buffer, &end);	
-	}
-	g_free(suggest);
-
-        g_object_set_data (G_OBJECT (widgets_p->status), "clean", NULL);
-	gtk_text_view_set_cursor_visible(GTK_TEXT_VIEW  (widgets_p->status), TRUE);
-        return TRUE;
-    }
-    if ((event->state & GDK_SHIFT_MASK)
-	    &&
-	    ((event->keyval == GDK_KEY_Page_Up) || 
-	    (event->keyval == GDK_KEY_Page_Down) ||
-	    (event->keyval == GDK_KEY_Up) || 
-	    (event->keyval == GDK_KEY_Down)) ) 
-    {
-	// Show text.
-        rfm_show_text (widgets_p);
-	// Get diagnostics area height.
-	// Scroll up or down.
-	gboolean page = (event->keyval == GDK_KEY_Page_Up || event->keyval == GDK_KEY_Page_Down); 
-	gboolean up = (event->keyval == GDK_KEY_Page_Up || event->keyval == GDK_KEY_Up); 
-	NOOP(stderr, "scroll \n");
-	rfm_scroll(widgets_p, up, page);
-
-        return TRUE;
-    }
-    if(event->keyval == GDK_KEY_Up) {
-        // csh command completion
-        if (csh_completion(textview, widgets_p, 1)) return TRUE;
-	// push/pop history
-	offset_history(textview, widgets_p, -1);
-	return TRUE;
-    }
-
-
-    if(event->keyval == GDK_KEY_Down) {
-        // csh command completion
-        if (csh_completion(textview, widgets_p, -1)) return TRUE;
-	// push/pop history
-	offset_history(textview, widgets_p, 1);
-        return TRUE;
-    }
-    if(event->keyval == GDK_KEY_Return || event->keyval == GDK_KEY_KP_Enter) {
-        if(g_object_get_data (G_OBJECT (textview), "clean") == NULL) {
-            g_object_set_data(G_OBJECT(widgets_p->status), "csh_cmd_len", NULL);
-            g_object_set_data(G_OBJECT(widgets_p->status), "csh_nth", NULL);
-            // get the command
-            gchar *command = get_current_text ((GtkTextView *) widgets_p->status);
-            if(command && strlen (command)) {
-                // show the lp output area        
-                rfm_show_text (widgets_p);
-
-                // first process internal commands for cd and history
-		// Internal commands will return focus to paper
-		// (cd is a threaded reload which will overwrite
-		//  the status line when done)
-                if(process_internal_commands (widgets_p, &command)){
-		    // probably not the best choice to send focus to paper...
-                    // lp_set_active(widgets_p, FALSE);
-		    // rfm_update_status_line (widgets_p->view_p);
-                    return TRUE;
-		}
-
-                // command is now external for /bin/sh
-                // printstatus with the run icon run.png
-                // this is already done in run.c
-                // rfm_diagnostics(widgets_p, "run.png",command,"\n",NULL);
-
-                // run the command (in a shell)
-		// XXX This will block if located at a remote directory with
-		// a broken network connection.
-                if(widgets_p->workdir) {
-                    g_free (widgets_p->workdir);
-                }
-                view_t *view_p = widgets_p->view_p;
-                if (!view_p->en || !view_p->en->path || ! rfm_g_file_test(view_p->en->path, G_FILE_TEST_IS_DIR)){
-                    widgets_p->workdir = g_strdup (g_get_home_dir());
-;
-                } else {
-                    widgets_p->workdir = g_strdup (view_p->en->path);
-                }
-		// Fix any sudo commands to use the -A option
-		command = sudo_fix(command);
-                RFM_THREAD_RUN (widgets_p, command, FALSE);
-                g_free (command);
-            }
-        }
-        rfm_status (widgets_p, "xffm/emblem_terminal", NULL);
-	gtk_text_view_set_cursor_visible(GTK_TEXT_VIEW  (widgets_p->status), TRUE);
-        g_object_set_data (G_OBJECT (textview), "clean", NULL);
-        return TRUE;
-    }
-
-    if(g_object_get_data (G_OBJECT (textview), "clean")) {
-        rfm_status (widgets_p, "xffm/emblem_terminal", NULL);
-    }
-    // set unclean status...
-    g_object_set_data (G_OBJECT (textview), "clean", NULL);
-    gtk_text_view_set_cursor_visible(GTK_TEXT_VIEW  (widgets_p->status), TRUE);
-    // Allow default handler for text buffer
-    if (event->keyval >= GDK_KEY_space && event->keyval <= GDK_KEY_asciitilde){
-        gchar *command = get_current_text ((GtkTextView *) widgets_p->status);
-        gint csh_cmd_len = strlen(command)+1;
-        g_object_set_data(G_OBJECT(widgets_p->status), "csh_cmd_len", GINT_TO_POINTER(csh_cmd_len));
-    }
-
-    return FALSE;
 }
 
 
