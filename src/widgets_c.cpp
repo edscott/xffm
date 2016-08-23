@@ -107,11 +107,13 @@ widgets_c::create(void){
     iconview_icon = gtk_image_new_from_icon_name ("system-file-manager", GTK_ICON_SIZE_SMALL_TOOLBAR); 
     status_icon = gtk_image_new_from_icon_name ("utilities-terminal", GTK_ICON_SIZE_SMALL_TOOLBAR); 
     status = gtk_text_view_new ();
+    gtk_text_view_set_pixels_above_lines (GTK_TEXT_VIEW (status), 10);
     gtk_text_view_set_monospace (GTK_TEXT_VIEW (status), TRUE);
     gtk_text_view_set_editable (GTK_TEXT_VIEW(status), TRUE);
     gtk_text_view_set_cursor_visible (GTK_TEXT_VIEW(status), TRUE);
+    gtk_text_view_place_cursor_onscreen(GTK_TEXT_VIEW(status));
     gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW(status), GTK_WRAP_CHAR);
-    gtk_widget_set_can_focus(diagnostics, TRUE);
+    gtk_widget_set_can_focus(status, TRUE);
     rename = NULL; // create on demand...
 
     button_space = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);

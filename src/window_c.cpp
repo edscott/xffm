@@ -9,6 +9,7 @@ static void on_go_home(GtkWidget *, gpointer);
 static gboolean window_keyboard_event (GtkWidget *, GdkEventKey *, gpointer);
 
 window_c::window_c(void) {
+    view_list=NULL;
     view_list_mutex = PTHREAD_MUTEX_INITIALIZER;
     signals_p = new signals_c();
     utility_p = new utility_c();

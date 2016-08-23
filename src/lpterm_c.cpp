@@ -247,6 +247,13 @@ lpterm_c::lpterm_keyboard_event( GdkEventKey * event, gpointer data) {
     GtkWidget *diagnostics = view_p->get_diagnostics();
     gtk_c *gtk_p = view_p->get_gtk_p();
 
+  /*  GtkTextBuffer *buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (status));
+    GtkTextIter start, end;
+    gtk_text_buffer_get_bounds (buffer, &start, &end);
+    gtk_text_buffer_place_cursor (buffer, &end);*/
+    
+    //3.20 only. 
+    //gtk_text_view_reset_cursor_blink (GTK_TEXT_VIEW (status));
     gboolean retval;
     g_signal_emit_by_name ((gpointer)status, "key-press-event", event, &retval);
 
