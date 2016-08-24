@@ -4,6 +4,7 @@
 #include <string.h>
 #include "widgets_c.hpp"
 #include "lpterm_c.hpp"
+#include "print_c.hpp"
 #include "xfdir_c.hpp"
 
 
@@ -32,6 +33,7 @@ class view_c:public widgets_c {
 	xfdir_c *get_xfdir_p(void);
 
 	gboolean window_keyboard_event(GdkEventKey *, void *);
+        print_c *get_print_p(void);
 
     protected:
 
@@ -45,6 +47,7 @@ class view_c:public widgets_c {
         void signals();
 
         lpterm_c *lpterm_p;
+        print_c *print_p;
 
         void *window_v;
 

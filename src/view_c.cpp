@@ -225,7 +225,6 @@ view_c::view_c(void *window_data, GtkNotebook *notebook) : widgets_c(window_data
     window_v = window_data;
     xfdir_p = NULL;
     dirty_hash = FALSE;
-    lpterm_p = new lpterm_c(status, diagnostics);
 
     g_object_set_data(G_OBJECT(page_child_box), "view_p", (void *)this);
     highlight_hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
@@ -239,6 +238,11 @@ view_c::view_c(void *window_data, GtkNotebook *notebook) : widgets_c(window_data
     gtk_icon_view_set_activate_on_single_click(icon_view, TRUE);
     signals();
     pack();
+    // lp_term object creation
+    lpterm_p = new lpterm_c((void *)this);
+    print_p = new print_c((void *)this);
+
+    print_p->print(NULL, "%s\n", "Hello world.");
 #if 0
     /* drag and drop events */
     rodent_create_target_list (view_p);
@@ -308,6 +312,9 @@ view_c::get_path(void) {return xfdir_p->get_path();}
 
 void *
 view_c::get_window_p(void){return window_v;}
+
+print_c *
+view_c::get_print_p(void){return print_p;}
 
 
 void

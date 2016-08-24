@@ -32,6 +32,7 @@ GtkWidget *widgets_c::get_page_label_button(void){ return page_label_button;}
 GtkWidget *widgets_c::get_page_child_box(void){ return page_child_box;}
 GtkWidget *widgets_c::get_vpane(void){ return vpane;}
 GtkWidget *widgets_c::get_status(void){ return status;}
+GtkWidget *widgets_c::get_status_label(void){ return status_label;}
 GtkWidget *widgets_c::get_diagnostics(void){ return diagnostics;}
 GtkWidget *widgets_c::get_status_icon(void){ return status_icon;}
 GtkWidget *widgets_c::get_iconview_icon(void){ return iconview_icon;}
@@ -107,6 +108,11 @@ widgets_c::create(void){
     g_object_set_data(G_OBJECT(diagnostics), "vpane", vpane);
     iconview_icon = gtk_image_new_from_icon_name ("system-file-manager", GTK_ICON_SIZE_SMALL_TOOLBAR); 
     status_icon = gtk_image_new_from_icon_name ("utilities-terminal", GTK_ICON_SIZE_SMALL_TOOLBAR); 
+    status_label = gtk_label_new ("");
+    gchar *g = g_strdup_printf("<span color=\"blue\"><b>%s</b></span> <b>%s</b>",
+            PACKAGE_STRING, PACKAGE_BUGREPORT);
+    set_status_label(g);
+    g_free(g);
     status = gtk_text_view_new ();
     gtk_text_view_set_pixels_above_lines (GTK_TEXT_VIEW (status), 10);
     gtk_text_view_set_monospace (GTK_TEXT_VIEW (status), TRUE);
@@ -123,6 +129,10 @@ widgets_c::create(void){
     
 }
 
+void 
+widgets_c::set_status_label(const gchar *text){
+    gtk_label_set_markup(GTK_LABEL(status_label),text); 
+}
 
 void
 widgets_c::pack(void){
@@ -158,8 +168,10 @@ widgets_c::pack(void){
     gtk_box_pack_start (GTK_BOX (button_space), status_icon, FALSE, FALSE, 5);
     gtk_box_pack_start (GTK_BOX (button_space), iconview_icon, FALSE, FALSE, 5);
     gtk_box_pack_start (GTK_BOX (button_space), status, TRUE, TRUE, 0);
+    gtk_box_pack_start (GTK_BOX (button_space), status_label, FALSE, FALSE, 0);
     gtk_widget_show (iconview_icon);
-    gtk_widget_show (status);
+    gtk_widget_show (status_label);
+    //gtk_widget_show (status);
     gtk_box_pack_end (GTK_BOX (button_space), size_scale, FALSE, FALSE, 0);
     gtk_widget_show (size_scale);
     gtk_box_pack_end (GTK_BOX (button_space), clear_button, FALSE, FALSE, 0);

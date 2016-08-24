@@ -20,11 +20,17 @@ status_keyboard_event (GtkWidget * window, GdkEventKey * event, gpointer data)
     return view_p->window_keyboard_event(event, (void *)view_p);*/
 }
 
-lpterm_c::lpterm_c(GtkWidget *data1, GtkWidget *data2){
+lpterm_c::lpterm_c(void *data){
     active = FALSE;
-    status = data1;
-    diagnostics = data2;
-    g_signal_connect (status, "key-press-event", G_CALLBACK (status_keyboard_event), data1);
+    view_c *view_p = (view_c *)data;
+    status = view_p->get_status();
+    status_label = view_p->get_status_label();
+    iconview = view_p->get_iconview();
+    diagnostics = view_p->get_diagnostics();
+    status_icon = view_p->get_status_icon();
+    iconview_icon = view_p->get_iconview_icon();
+
+    g_signal_connect (status, "key-press-event", G_CALLBACK (status_keyboard_event), data);
 }
 
 gboolean 
@@ -161,18 +167,20 @@ lpterm_c::lp_get_active(void){return active;}
 
 void
 lpterm_c::lp_set_active(gboolean state, void *data){
-    // FIXME: actrivate status cursor
     active = state;
     view_c *view_p = (view_c *)data;
     if (state){
-        //gtk_widget_show(view_p->get_status());
-        gtk_widget_show(view_p->get_status_icon());
-        gtk_widget_hide(view_p->get_iconview_icon());
-	gtk_widget_grab_focus (view_p->get_status());
+        gtk_widget_hide(status_label);
+        gtk_widget_show(status);
+        gtk_widget_show(status_icon);
+        gtk_widget_hide(iconview_icon);
+	gtk_widget_grab_focus (status);
     } else {
-        gtk_widget_show(view_p->get_iconview_icon());
-        gtk_widget_hide(view_p->get_status_icon());
-	gtk_widget_grab_focus (view_p->get_iconview());
+        gtk_widget_hide(status);
+        gtk_widget_show(status_label);
+        gtk_widget_show(iconview_icon);
+        gtk_widget_hide(status_icon);
+	gtk_widget_grab_focus (iconview);
         //gtk_widget_hide(view_p->get_status());
     }
 }
@@ -235,6 +243,98 @@ lpterm_c::is_lpterm_key(GdkEventKey * event){
     }
     return FALSE;
 }
+void 
+lpterm_c::run_lp_command(void){
+#if 0
+        if(g_object_get_data (G_OBJECT (textview), "clean") == NULL) {
+            g_object_set_data(G_OBJECT(widgets_p->status), "csh_cmd_len", NULL);
+            g_object_set_data(G_OBJECT(widgets_p->status), "csh_nth", NULL);
+            // get the command
+            gchar *command = get_current_text ((GtkTextView *) widgets_p->status);
+            if(command && strlen (command)) {
+                // show the lp output area        
+                rfm_show_text (widgets_p);
+
+                // first process internal commands for cd and history
+		// Internal commands will return focus to paper
+		// (cd is a threaded reload which will overwrite
+		//  the status line when done)
+                if(process_internal_commands (widgets_p, &command)){
+		    // probably not the best choice to send focus to paper...
+                    // lp_set_active(widgets_p, FALSE);
+		    // rfm_update_status_line (widgets_p->view_p);
+                    return;
+		}
+
+                // command is now external for /bin/sh
+                // printstatus with the run icon run.png
+                // this is already done in run.c
+                // rfm_diagnostics(widgets_p, "run.png",command,"\n",NULL);
+
+                // run the command (in a shell)
+		// XXX This will block if located at a remote directory with
+		// a broken network connection.
+                if(widgets_p->workdir) {
+                    g_free (widgets_p->workdir);
+                }
+                view_t *view_p = widgets_p->view_p;
+                if (!view_p->en || !view_p->en->path || ! rfm_g_file_test(view_p->en->path, G_FILE_TEST_IS_DIR)){
+                    widgets_p->workdir = g_strdup (g_get_home_dir());
+;
+                } else {
+                    widgets_p->workdir = g_strdup (view_p->en->path);
+                }
+		// Fix any sudo commands to use the -A option
+		command = sudo_fix(command);
+                RFM_THREAD_RUN (widgets_p, command, FALSE);
+                g_free (command);
+            }
+        }
+        rfm_status (widgets_p, "xffm/emblem_terminal", NULL);
+	gtk_text_view_set_cursor_visible(GTK_TEXT_VIEW(status), TRUE);
+        g_object_set_data (G_OBJECT (textview), "clean", NULL);
+        return;
+    }
+#endif
+}
+
+void
+lpterm_c::bash_completion(){
+    gchar *head=get_text_to_cursor(GTK_TEXT_VIEW(status));
+    gint head_len = strlen(head);
+    gchar *token = get_current_text (GTK_TEXT_VIEW(status));
+    gint token_len = strlen(token);
+
+    //gchar *tail=get_text_from_cursor(GTK_TEXT_VIEW(status));
+    g_free (head);
+    //gchar *suggest = rfm_bash_complete(widgets_p, token, head_len);
+    // FIXME: completion
+    gchar *suggest = NULL;
+    /*rfm_complex(RFM_MODULE_DIR, "completion",
+            widgets_p, token, GINT_TO_POINTER(head_len),
+            "rfm_bash_complete");*/
+    g_free (token);
+
+    if (suggest) {
+        gint suggest_len = strlen(suggest);
+        GtkTextIter end;
+        GtkTextBuffer *buffer = 
+            gtk_text_view_get_buffer (GTK_TEXT_VIEW(status));
+        gint offset = -1;
+        // +2 is icon and space...
+        offset = head_len + (suggest_len - token_len) + 2;
+        // FIXME
+        // rfm_status (widgets_p, "xffm/emblem_terminal", suggest, NULL);
+        gtk_text_buffer_get_iter_at_offset (buffer, &end, offset);
+        gtk_text_buffer_place_cursor(buffer, &end);	
+    }
+    g_free(suggest);
+
+    g_object_set_data (G_OBJECT(status), "clean", NULL);
+    gtk_text_view_set_cursor_visible(GTK_TEXT_VIEW(status), TRUE);
+    return ;
+
+}
 
 gint
 lpterm_c::lpterm_keyboard_event( GdkEventKey * event, gpointer data) {
@@ -248,43 +348,29 @@ lpterm_c::lpterm_keyboard_event( GdkEventKey * event, gpointer data) {
     GtkWidget *diagnostics = view_p->get_diagnostics();
     gtk_c *gtk_p = view_p->get_gtk_p();
 
-  /*  GtkTextBuffer *buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (status));
-    GtkTextIter start, end;
-    gtk_text_buffer_get_bounds (buffer, &start, &end);
-    gtk_text_buffer_place_cursor (buffer, &end);*/
-    
+
+    // On activate, run the lpcommand
+    if(event->keyval == GDK_KEY_Return || event->keyval == GDK_KEY_KP_Enter) {
+        run_lp_command();
+        return TRUE;
+    }
+    // tab for bash completion
+    if(event->keyval == GDK_KEY_Tab) {
+        bash_completion();
+        return TRUE;
+    }
+
+    // up-down-right-left-home-end for csh completion (home end right left will return false 
+
+
+
     gboolean retval;
     g_signal_emit_by_name ((gpointer)status, "key-press-event", event, &retval);
 
     return TRUE;
 
 
-
-
-
-
-
-
-    // backspace must not erase icon. Place_cursor is offset by 2 for this purpose.
-    TRACE ("on_status_key_press(): * on_status_key_press: got key= 0x%x\n", event->keyval);
-    if(event->keyval == GDK_KEY_Home) {
-        place_cursor(GTK_TEXT_VIEW(status), 0);
-        return TRUE;
-    }
-    if(event->keyval == GDK_KEY_BackSpace || event->keyval == GDK_KEY_Left) {
-        gint intval;
-        GtkTextBuffer *buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW(status));
-        g_object_get (G_OBJECT (buffer), "cursor-position", &intval, NULL);
-        NOOP ("on_status_key_press(): cursor-position =%d\n", intval);
-        if(intval > 2) {
-            // FIXME: here we depend on default handler
-            // offset==1 is the icon and offset==2 is the space after icon
-            return FALSE;
-        }
-        return TRUE;
-    }
-
-    // CTRL-TAB for command history completion
+    // CTRL-TAB for command history completion WTF
     if(event->keyval == GDK_KEY_Tab && event->state & GDK_CONTROL_MASK) {
         // do history completion ...
         gchar *complete = get_current_text (GTK_TEXT_VIEW(status));
@@ -313,63 +399,8 @@ lpterm_c::lpterm_keyboard_event( GdkEventKey * event, gpointer data) {
         return TRUE;
     }
     // tab for bash completion
-    if(event->keyval == GDK_KEY_Tab) {
-	gchar *head=get_text_to_cursor(GTK_TEXT_VIEW(status));
-	gint head_len = strlen(head);
-        gchar *token = get_current_text (GTK_TEXT_VIEW(status));
-	gint token_len = strlen(token);
 
-	//gchar *tail=get_text_from_cursor(GTK_TEXT_VIEW(status));
-        g_free (head);
-	//gchar *suggest = rfm_bash_complete(widgets_p, token, head_len);
-	// FIXME: completion
-        gchar *suggest = NULL;
-        /*rfm_complex(RFM_MODULE_DIR, "completion",
-		widgets_p, token, GINT_TO_POINTER(head_len),
-		"rfm_bash_complete");*/
-        g_free (token);
 
-	if (suggest) {
-	    gint suggest_len = strlen(suggest);
-	    GtkTextIter end;
-	    GtkTextBuffer *buffer = 
-		gtk_text_view_get_buffer (GTK_TEXT_VIEW(status));
-	    gint offset = -1;
-	    // +2 is icon and space...
-	    offset = head_len + (suggest_len - token_len) + 2;
-            // FIXME
-            // rfm_status (widgets_p, "xffm/emblem_terminal", suggest, NULL);
-	    gtk_text_buffer_get_iter_at_offset (buffer, &end, offset);
-	    gtk_text_buffer_place_cursor(buffer, &end);	
-	}
-	g_free(suggest);
-
-        g_object_set_data (G_OBJECT(status), "clean", NULL);
-	gtk_text_view_set_cursor_visible(GTK_TEXT_VIEW(status), TRUE);
-        return TRUE;
-    }
-    if ((event->state & GDK_SHIFT_MASK)
-	    &&
-	    ((event->keyval == GDK_KEY_Page_Up) || 
-	    (event->keyval == GDK_KEY_Page_Down) ||
-	    (event->keyval == GDK_KEY_Up) || 
-	    (event->keyval == GDK_KEY_Down)) ) 
-    {
-	// Show text.
-        // FIXME
-        // rfm_show_text (widgets_p);
-        //
-	// Get diagnostics area height.
-	// Scroll up or down.
-	gboolean page = (event->keyval == GDK_KEY_Page_Up || event->keyval == GDK_KEY_Page_Down); 
-	gboolean up = (event->keyval == GDK_KEY_Page_Up || event->keyval == GDK_KEY_Up); 
-	NOOP(stderr, "scroll \n");
-
-        // FIXME
-	//rfm_scroll(widgets_p, up, page);
-
-        return TRUE;
-    }
 
 #if 0
     // FIXME

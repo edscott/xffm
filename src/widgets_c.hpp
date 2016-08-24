@@ -20,10 +20,12 @@ class widgets_c {
         GtkWidget *get_page_child_box(void);
         GtkWidget *get_vpane(void);
         GtkWidget *get_status(void);
+        GtkWidget *get_status_label(void);
         GtkWidget *get_diagnostics(void);
         GtkWidget *get_status_icon(void);
         GtkWidget *get_iconview(void);
         GtkWidget *get_iconview_icon(void);
+        void set_status_label(const gchar *);
 	gtk_c *get_gtk_p();
     protected:
 
@@ -41,7 +43,8 @@ class widgets_c {
         GtkWidget *diagnostics;	        // diagnostics text area
         GtkWidget *iconview_icon;
         GtkWidget *status_icon;
-        GtkWidget *status;	        // status text area
+        GtkWidget *status;	        // lpterm input area
+        GtkWidget *status_label;	// status text area
         GtkWidget *rename;		// rename entry box
         GtkWidget *button_space;	// little button space
         GtkWidget *clear_button;	// clear text area button
