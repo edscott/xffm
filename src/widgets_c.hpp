@@ -22,6 +22,7 @@ class widgets_c {
         GtkWidget *get_status(void);
         GtkWidget *get_diagnostics(void);
         GtkWidget *get_status_icon(void);
+        GtkWidget *get_iconview(void);
         GtkWidget *get_iconview_icon(void);
 	gtk_c *get_gtk_p();
     protected:

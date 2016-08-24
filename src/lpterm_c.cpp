@@ -165,14 +165,15 @@ lpterm_c::lp_set_active(gboolean state, void *data){
     active = state;
     view_c *view_p = (view_c *)data;
     if (state){
-        gtk_widget_show(view_p->get_status());
+        //gtk_widget_show(view_p->get_status());
         gtk_widget_show(view_p->get_status_icon());
         gtk_widget_hide(view_p->get_iconview_icon());
+	gtk_widget_grab_focus (view_p->get_status());
     } else {
         gtk_widget_show(view_p->get_iconview_icon());
         gtk_widget_hide(view_p->get_status_icon());
-        gtk_widget_hide(view_p->get_status());
-        //gtk_widget_set_sensitive(view_p->get_status(), FALSE);
+	gtk_widget_grab_focus (view_p->get_iconview());
+        //gtk_widget_hide(view_p->get_status());
     }
 }
 
@@ -252,8 +253,6 @@ lpterm_c::lpterm_keyboard_event( GdkEventKey * event, gpointer data) {
     gtk_text_buffer_get_bounds (buffer, &start, &end);
     gtk_text_buffer_place_cursor (buffer, &end);*/
     
-    //3.20 only. 
-    //gtk_text_view_reset_cursor_blink (GTK_TEXT_VIEW (status));
     gboolean retval;
     g_signal_emit_by_name ((gpointer)status, "key-press-event", event, &retval);
 

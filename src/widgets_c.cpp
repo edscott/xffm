@@ -35,6 +35,7 @@ GtkWidget *widgets_c::get_status(void){ return status;}
 GtkWidget *widgets_c::get_diagnostics(void){ return diagnostics;}
 GtkWidget *widgets_c::get_status_icon(void){ return status_icon;}
 GtkWidget *widgets_c::get_iconview_icon(void){ return iconview_icon;}
+GtkWidget *widgets_c::get_iconview(void){ return GTK_WIDGET(icon_view);}
 
 void
 widgets_c::setup_diagnostics(void){
