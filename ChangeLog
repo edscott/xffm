@@ -1,3 +1,50 @@
+* commit 089c7465aac47f490043f3d4f080db7b7c8e8ed9--------------------------
+Date:   Tue Aug 23 20:47:27 2016 -0500
+
+    Switch focus from iconview to status on demand
+    
+    This solves the issue of the nonvisible cursor.
+
+* commit a67839df99840c5204129e7ebd04a26bff77f420--------------------------
+Date:   Tue Aug 23 17:01:26 2016 -0500
+
+    Tweaks on the keyboard input and associated widgets
+    
+    - cursor only appears in status if clicked. Need to try 3.20
+      instruction or generate the click effect (focus?)
+
+* commit 70e211e8a123b366dd2c78dc80776570a0b6f6ea--------------------------
+Date:   Tue Aug 23 13:30:49 2016 -0500
+
+    Small tweaks
+
+* commit 9e9205a3bfe6a62e2e253ec78bae88bff871d03f--------------------------
+Date:   Tue Aug 23 12:01:07 2016 -0500
+
+    key processing now in working order for lpterm
+    
+    * Nothing done with keys pressed, as of this commit.
+
+* commit 75a1dc8ec15f6a41101bff47b34a96e8db63844f--------------------------
+Date:   Mon Aug 22 20:50:13 2016 -0500
+
+    Add more lpterm_c class code
+    
+    * this commit does not compile. Code yet to be cleansed and optimized
+      for class structure.
+
+* commit df2fafaf7b1348bd135a70b3367d260cc200c2e6--------------------------
+Date:   Mon Aug 22 16:52:54 2016 -0500
+
+    Start introduction of lpterm code
+    
+    Now testing new keypress callback route
+
+* commit 91a7ed62781d5eae5e47e340b7a298b2cebe0655--------------------------
+Date:   Mon Aug 22 13:28:51 2016 -0500
+
+    Update ChangeLog
+
 * commit bd889cd2f228e495e7ef2e942634354f2745fb43--------------------------
 Date:   Mon Aug 22 13:28:06 2016 -0500
 
