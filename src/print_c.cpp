@@ -13,13 +13,141 @@
 #include "view_c.hpp"
 
 
-#define DEFAULT_DEBUG TRUE;
-//#define DEFAULT_DEBUG FALSE;
+/////////////////////////////////////////////////////////////////////////////
+//              static thread functions                                    //
+////////////////////////////////////////////////////////////////////////////
+static void *print_f(void *);
+static void *print_i(void *);
+static void *print_d(void *);
+static void *print_e(void *);
+static void *print_s(void *);
+static void *clear_text_buffer_f(void *);
+
+////////////////////////////////////////////////////////////////////////////
+//                       print_c class methods                            //
+///////////////////////////////////////////////////////////////////////////
+
+print_c::print_c(void *data){
+    view_v = data;
+    view_c *view_p = (view_c *)data;
+    gtk_p = view_p->get_gtk_p();
+    diagnostics = GTK_TEXT_VIEW(view_p->get_diagnostics());
+    status_label = GTK_LABEL(view_p->get_status_label());
+}
+
+GtkTextView *
+print_c::get_diagnostics(void){ return diagnostics;}
+GtkLabel *
+print_c::get_status_label(void){ return status_label;} 
 
 
-////////////////////////////////////////////////////////////////////////////////////
-//              static internal functions (context_function and print)            //
-////////////////////////////////////////////////////////////////////////////////////
+void print_c::print_error( const gchar *format, ...){
+    if (!diagnostics) return;
+    va_list var_args;
+    va_start (var_args, format);
+    gchar *string = g_strdup_vprintf(format, var_args);
+    va_end (var_args);
+
+    void *arg[]={(void *)this, (void *)"tag/bold", (void *)string};
+    context_function(print_e, arg);
+    g_free(string);
+
+}
+
+void print_c::print_debug(const gchar *format, ...){
+    if (!diagnostics) return;
+    va_list var_args;
+    va_start (var_args, format);
+    gchar *string = g_strdup_vprintf(format, var_args);
+    va_end (var_args);
+
+    void *arg[]={(void *)this, (void *)"tag/italic", (void *)string};
+    context_function(print_d, arg);
+    g_free(string);
+
+}
+
+
+void print_c::print(const gchar *format, ...){
+    if (!diagnostics) return;
+    va_list var_args;
+    va_start (var_args, format);
+    gchar *string = g_strdup_vprintf(format, var_args);
+    va_end (var_args);
+
+    void *arg[]={(void *)this, NULL, (void *)string};
+    context_function(print_f, arg);
+    g_free(string);
+}
+
+void print_c::print_tag(const gchar *tag, const gchar *format, ...){
+    if (!diagnostics) return;
+    va_list var_args;
+    va_start (var_args, format);
+    gchar *string = g_strdup_vprintf(format, var_args);
+    va_end (var_args);
+
+    void *arg[]={(void *)this, (void *)tag, (void *)string};
+    context_function(print_f, arg);
+    g_free(string);
+}
+
+void print_c::print_icon(const gchar *iconname, 
+			     const gchar *format, ...)
+{
+    if (!diagnostics) return;
+    va_list var_args;
+    va_start (var_args, format);
+    gchar *string = g_strdup_vprintf(format, var_args);
+    va_end (var_args);
+
+    GdkPixbuf *pixbuf = gtk_p->get_pixbuf(iconname, -16);
+    void *arg[]={(void *)pixbuf, (void *)this, NULL, (void *)string};
+    context_function(print_i, arg);
+    g_free(string);
+}
+
+
+void print_c::print_icon_tag(const gchar *iconname, 
+	                     const gchar *tag, 
+			     const gchar *format, ...)
+{
+    if (!diagnostics) return;
+    va_list var_args;
+    va_start (var_args, format);
+    gchar *string = g_strdup_vprintf(format, var_args);
+    va_end (var_args);
+
+    GdkPixbuf *pixbuf = gtk_p->get_pixbuf(iconname, -16);
+    void *arg[]={(void *)pixbuf, (void *)this, (void *)tag, (void *)string};
+    context_function(print_i, arg);
+    g_free(string);
+}
+
+void print_c::print_status(const gchar *format, ...){
+    if (!status_label) return;
+    va_list var_args;
+    va_start (var_args, format);
+    gchar *string = g_strdup_vprintf(format, var_args);
+    va_end (var_args);
+    if (strstr(string, "\n")) *(strstr(string, "\n")) = 0;
+
+    void *arg[]={(void *)status_label, (void *)string};
+    context_function(print_s, arg);
+    g_free(string);
+}
+
+
+
+void print_c::show_text(void){
+    view_c *view_p = (view_c *)view_v;
+    view_p->show_diagnostics();
+}
+
+void print_c::clear_text(void){
+    view_c *view_p = (view_c *)view_v;
+    view_p->clear_diagnostics();
+}
 
 
 //////////////////////////////////////////////////////////////////////
@@ -77,15 +205,6 @@ get_ansi_tag(const gchar *code){
     }
     return NULL;
 
-}
-
-static void *
-clear_text_buffer_f(void *data){
-    GtkTextBuffer *buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (data));
-    GtkTextIter start, end;
-    gtk_text_buffer_get_bounds (buffer, &start, &end);
-    gtk_text_buffer_delete (buffer, &start, &end);
-    return NULL;
 }
 
 
@@ -350,11 +469,11 @@ static void *
 print_f(void *data){
     if (!data) return GINT_TO_POINTER(-1);
     void **arg = (void **)data;
-    GtkTextView *textview = (GtkTextView *)arg[0];
+    print_c *print_p = (print_c *) arg[0];
+    GtkTextView *textview = print_p->get_diagnostics();
     if (!GTK_IS_TEXT_VIEW(textview)) return GINT_TO_POINTER(-1);
     const gchar *tag = (const gchar *)arg[1];
     const gchar *string = (const gchar *)arg[2];
-    print_c *print_p = (print_c *) arg[3];
 
     GtkTextBuffer *buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (textview));
     GtkTextTag **tags = resolve_tags(buffer, tag);
@@ -368,16 +487,6 @@ print_f(void *data){
 
 #if 0   
 static void *
-print_d(void *data){
-    if (!data) return GINT_TO_POINTER(-1);
-    void **arg=(void **)data;
-    print_c *print_p = (print_c *)arg[3];
-    void *out_arg[]={arg[0],(void *)"tag/italic", (void *)"DBG> "};
-    print_f((void *)out_arg);
-    return print_f(data);
-}
-    
-static void *
 print_op(void *data){
     if (!data) return GINT_TO_POINTER(-1);
     void **arg=(void **)data;
@@ -386,17 +495,43 @@ print_op(void *data){
     void *arg2[]={arg[0], (void *)"tag/bold", arg[2]};
     return print_f((void *)arg2);
 }
+#endif
+
+static void *
+print_i(void *data){
+    if (!data) return GINT_TO_POINTER(-1);
+    void **arg=(void **)data;
+    GdkPixbuf *pixbuf = (GdkPixbuf *)arg[0];
+    print_c *print_p = (print_c *) arg[1];
+    GtkTextView *textview = print_p->get_diagnostics();
+    if (!GTK_IS_TEXT_VIEW(textview)) return GINT_TO_POINTER(-1);
+    GtkTextBuffer *buffer = gtk_text_view_get_buffer (textview);
+    GtkTextIter start, end;
+    gtk_text_buffer_get_bounds (buffer, &start, &end);
+    gtk_text_buffer_insert_pixbuf (buffer, &end, pixbuf);
+    return print_f(arg+1);
+}
+    
+
+static void *
+print_d(void *data){
+    if (!data) return GINT_TO_POINTER(-1);
+    void **arg=(void **)data;
+    void *d_arg[]={arg[0],(void *)"tag/italic", (void *)"DBG> "};
+    print_f((void *)d_arg);
+    return print_f(data);
+}
+    
     
 static void *
 print_e(void *data){
     if (!data) return GINT_TO_POINTER(-1);
     void **arg=(void **)data;
-    void *arg1[]={arg[0],(void *)"tag/red", (void *)"*** "};
-    print_f((void *)arg1);
-    void *arg2[]={arg[0], arg[1], arg[2]};
-    return print_f((void *)arg2);
+    void *e_arg1[]={arg[0],(void *)"tag/red", (void *)"*** "};
+    print_f((void *)e_arg1);
+    return print_f(data);
 }
-#endif
+
 
 static void *
 print_s(void *data){
@@ -409,94 +544,13 @@ print_s(void *data){
     return NULL;
 }
 
-
-////////////////////////////////////////////////////////////////////////////////////
-//                             print_c class methods                                //
-////////////////////////////////////////////////////////////////////////////////////
-
-print_c::print_c(void *data){
-    view_v = data;
-    view_c *view_p = (view_c *)data;
-    diagnostics = GTK_TEXT_VIEW(view_p->get_diagnostics());
-    status_label = GTK_LABEL(view_p->get_status_label());
-}
-
-/*
-void print_c::print_full(const gchar *iconname, const gchar *tag, const gchar *string){
-    if (!textview) return;
-    void *arg[]={(void *)iconname, (void *)tag, (void *)string};
-    context_function(print_f, arg);
-}*/
-/*
-void print_c::print(const gchar *iconname, const gchar *tag, const gchar *format, ...){
-    if (!diagnostics) return;
-    va_list var_args;
-    va_start (var_args, format);
-    gchar *string = g_strdup_vprintf(format, var_args);
-    va_end (var_args);
-
-    // FIXME: enable icon printing
-    //void *arg[]={(void *)diagnostics, (void *)iconname, (void *)tag, (void *)string};
-    //context_function(print_if, arg);
-    g_free(string);
-}*/
-
-/*
-void print_c::print_error( const gchar *format, ...){
-    if (!diagnostics) return;
-    va_list var_args;
-    va_start (var_args, format);
-    gchar *string = g_strdup_vprintf(format, var_args);
-    va_end (var_args);
-
-    void *arg[]={(void *)diagnostics, (void *)"tag/bold", (void *)string};
-    context_function(print_e, arg);
-    g_free(string);
-
-}
-
-void print_c::print_debug(const gchar *format, ...){
-    if (!diagnostics) return;
-    va_list var_args;
-    va_start (var_args, format);
-    gchar *string = g_strdup_vprintf(format, var_args);
-    va_end (var_args);
-
-    void *arg[]={(void *)diagnostics, (void *)"tag/italic", (void *)string};
-    context_function(print_d, arg);
-    g_free(string);
-
-}
-
-*/
-
-void print_c::print(const gchar *tag, const gchar *format, ...){
-    if (!diagnostics) return;
-    va_list var_args;
-    va_start (var_args, format);
-    gchar *string = g_strdup_vprintf(format, var_args);
-    va_end (var_args);
-
-    void *arg[]={(void *)diagnostics, (void *)tag, (void *)string, (void *)this};
-    context_function(print_f, arg);
-    g_free(string);
-}
-
-void print_c::print_status(const gchar *tag, const gchar *format, ...){
-    if (!status_label) return;
-    va_list var_args;
-    va_start (var_args, format);
-    gchar *string = g_strdup_vprintf(format, var_args);
-    va_end (var_args);
-    if (strstr(string, "\n")) *(strstr(string, "\n")) = 0;
-
-    void *arg[]={(void *)status_label, (void *)string};
-    context_function(print_s, arg);
-    g_free(string);
-}
-
-void print_c::clear_text_buffer(GtkWidget *data){
-    context_function(clear_text_buffer_f, (void *)data);
+static void *
+clear_text_buffer_f(void *data){
+    GtkTextBuffer *buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (data));
+    GtkTextIter start, end;
+    gtk_text_buffer_get_bounds (buffer, &start, &end);
+    gtk_text_buffer_delete (buffer, &start, &end);
+    return NULL;
 }
 
 

@@ -45,9 +45,25 @@ on_remove_page_button(GtkWidget *page_label_button, gpointer data){
     
 }
 
+void *
+show_text_f (GtkWidget *w, gpointer data) {
+    GtkWidget *vpane = (GtkWidget *)data;
+    if(!vpane) return NULL;
+    GtkAllocation allocation;
+    gtk_widget_get_allocation (vpane, &allocation);
+    if (allocation.height > 50) {
+	gdouble position = 
+	    gtk_paned_get_position (GTK_PANED(vpane));
+	if(position > allocation.height * 0.90) {
+	    gtk_paned_set_position (GTK_PANED (vpane), allocation.height * 0.75);
+	}
+    }
+    return NULL;
+}
+
 
 static void
-clear_text(GtkWidget *widget, gpointer data){
+clear_text_f	(GtkWidget *w, gpointer data){
     GtkWidget *diagnostics = GTK_WIDGET(data);
 
     GtkTextBuffer *buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW ((diagnostics)));
@@ -66,7 +82,7 @@ clear_text(GtkWidget *widget, gpointer data){
 }
 
 static void
-hide_text(GtkWidget *widget, gpointer data){
+hide_text_f(GtkWidget *w, gpointer data){
     GtkWidget *vpane = GTK_WIDGET(data);
     gtk_paned_set_position (GTK_PANED (vpane), 10000);
     return;
@@ -242,7 +258,16 @@ view_c::view_c(void *window_data, GtkNotebook *notebook) : widgets_c(window_data
     lpterm_p = new lpterm_c((void *)this);
     print_p = new print_c((void *)this);
 
-    print_p->print(NULL, "%s\n", "Hello world.");
+    print_p->show_text();
+    print_p->print("%s\n", "Hello world.");
+    print_p->print_tag(NULL, "%s\n", "No tag.");
+    print_p->print_tag("tag/green", "%s", "Green tag.");
+    print_p->print_tag("tag/bold", "%s\n", "bold tag.");
+    print_p->print_error("%s\n", "This is an error.");
+    print_p->print_debug("%s\n", "This is a debug message.");
+    print_p->print_icon("face-monkey","%s\n", "This is face-monkey.");
+    print_p->print_icon_tag("face-angry","tag/red","%s\n", "This is face-angry in red.");
+    show_diagnostics();
 #if 0
     /* drag and drop events */
     rodent_create_target_list (view_p);
@@ -348,9 +373,13 @@ view_c::init(void){
 
 void
 view_c::clear_diagnostics(void){
-    TRACE("DBG: clear diagnostics()\n");
-    clear_text(NULL, (void *)diagnostics);
-    hide_text(NULL, (void *)vpane);
+    clear_text_f(NULL, (void *)diagnostics);
+    hide_text_f(NULL, (void *)vpane);
+}
+
+void
+view_c::show_diagnostics(void){
+    show_text_f(NULL, (void *)vpane);
 }
 
 static gboolean
@@ -464,9 +493,9 @@ view_c::signals(void){
     // Simple connections:
     // clear button:
     g_signal_connect (clear_button, "clicked", 
-            G_CALLBACK (clear_text), (void *)diagnostics);
+            G_CALLBACK (clear_text_f), (void *)diagnostics);
     g_signal_connect (clear_button, "clicked", 
-            G_CALLBACK (hide_text), (void *)vpane);
+            G_CALLBACK (hide_text_f), (void *)vpane);
     g_signal_connect (page_label_button, "clicked", 
             G_CALLBACK (on_remove_page_button), (void *)this);
     // iconview specific signal bindings:
