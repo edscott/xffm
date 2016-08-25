@@ -7,6 +7,7 @@
 # include <gtk/gtk.h>
 # include "intl.h"
 # include "debug.h"
+#define USER_RFM_CACHE_DIR      g_get_user_cache_dir(),"rfm"
 
 #endif
 

@@ -13,7 +13,8 @@ class utility_c{
         void *context_function(void * (*function)(gpointer), void * function_data);
         gchar *utf_string (const gchar *);
 	const gchar *chop_excess (gchar *);
-
+        gchar *compact_line(const gchar *);
+        GList *find_in_string_list(GList *, const gchar *);
         
     protected:
     private:

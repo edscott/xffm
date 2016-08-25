@@ -132,4 +132,28 @@ utility_c::chop_excess (gchar * b) {
     return b;
 }
 
+gchar *
+utility_c::compact_line(const gchar *line){
+    //1. Remove leading and trailing whitespace
+    //2. Compact intermediate whitespace
+
+    gchar *newline= g_strdup(line); 
+    g_strstrip(newline);
+    gchar *p = newline;
+    for(;p && *p; p++){
+        if (*p ==' ') g_strchug(p+1);
+    }
+    return newline;
+}
+
+GList *
+utility_c::find_in_string_list(GList *list, const gchar *string){
+    GList *tmp=g_list_first(list);
+    for (;tmp && tmp->data; tmp=tmp->next){
+	if (strcmp((gchar *)tmp->data, string)==0) {
+	    return tmp;
+	}
+    }
+    return NULL;
+}
 

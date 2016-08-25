@@ -9,8 +9,14 @@ class lpterm_c: public print_c {
         gboolean is_iconview_key(GdkEventKey *);
         gboolean is_lpterm_key(GdkEventKey *);
         gboolean lp_get_active(void);
-        void lp_set_active(gboolean, void *data);
+        void lp_set_active(gboolean);
 	gboolean window_keyboard_event(GdkEventKey *, void *);
+/*
+        void recover_flags (gchar * in_cmd, gboolean * interm, gboolean * hold);
+        const gchar *what_term (void);
+        const gchar *term_exec_option(const gchar *terminal);
+*/
+
     private:
         gboolean active;
         void place_cursor(GtkTextView *, gint);
@@ -21,13 +27,21 @@ class lpterm_c: public print_c {
         void bash_completion(void);
 
         GtkWidget *iconview;
+        GtkWidget *status_button;
         GtkWidget *status_icon;
         GtkWidget *iconview_icon;
 
-   //     print_c *print_p;
-        
+        gboolean csh_completion(gint);
+        void place_command(const gchar *);
+        void *load_sh_command_history (void);
+        void save_sh_command_history (const gchar *);
+        gboolean is_valid_command (const gchar *);
+        gboolean offset_history(gint);
 
-};
+        pthread_mutex_t command_history_mutex;
+        GList *sh_command;
+        gint sh_command_counter;
 
+}; 
 
 #endif
