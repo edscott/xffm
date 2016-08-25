@@ -1,8 +1,9 @@
 #ifndef LPTERM_C_HPP
 #define LPTERM_C_HPP
 #include "xffm+.h"
+#include "print_c.hpp"
 
-class lpterm_c {
+class lpterm_c: public print_c {
     public:
         lpterm_c(void *);
         gboolean is_iconview_key(GdkEventKey *);
@@ -20,11 +21,10 @@ class lpterm_c {
         void bash_completion(void);
 
         GtkWidget *iconview;
-        GtkWidget *status;
-        GtkWidget *status_label;
         GtkWidget *status_icon;
         GtkWidget *iconview_icon;
-        GtkWidget *diagnostics;
+
+   //     print_c *print_p;
         
 
 };

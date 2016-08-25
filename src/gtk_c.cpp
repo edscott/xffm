@@ -11,6 +11,9 @@ gtk_c::setup_image_button (GtkWidget *button, const gchar *icon_name, const gcha
             get_pixbuf(icon_name, GTK_ICON_SIZE_SMALL_TOOLBAR);
     if (image) {
         gtk_container_add (GTK_CONTAINER (button), image);
+        // On page remove, reference count will be decreased
+        // Last reference belongs to the pixbuf hash
+        g_object_ref(G_OBJECT(pixbuf));
         gtk_widget_show (image);
     }
     // Elaborate tooltip

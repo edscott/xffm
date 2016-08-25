@@ -1,4 +1,4 @@
-#define DEBUG_TRACE 1
+//#define DEBUG_TRACE 1
 
 #include "view_c.hpp"
 #include "lpterm_c.hpp"
@@ -20,13 +20,11 @@ status_keyboard_event (GtkWidget * window, GdkEventKey * event, gpointer data)
     return view_p->window_keyboard_event(event, (void *)view_p);*/
 }
 
-lpterm_c::lpterm_c(void *data){
+lpterm_c::lpterm_c(void *data): print_c(data){
     active = FALSE;
     view_c *view_p = (view_c *)data;
-    status = view_p->get_status();
-    status_label = view_p->get_status_label();
+   // print_p = view_p->get_print_p();
     iconview = view_p->get_iconview();
-    diagnostics = view_p->get_diagnostics();
     status_icon = view_p->get_status_icon();
     iconview_icon = view_p->get_iconview_icon();
 
@@ -170,14 +168,14 @@ lpterm_c::lp_set_active(gboolean state, void *data){
     active = state;
     view_c *view_p = (view_c *)data;
     if (state){
-        gtk_widget_hide(status_label);
-        gtk_widget_show(status);
+        gtk_widget_hide(GTK_WIDGET(status_label));
+        gtk_widget_show(GTK_WIDGET(status));
         gtk_widget_show(status_icon);
         gtk_widget_hide(iconview_icon);
-	gtk_widget_grab_focus (status);
+	gtk_widget_grab_focus (GTK_WIDGET(status));
     } else {
-        gtk_widget_hide(status);
-        gtk_widget_show(status_label);
+        gtk_widget_hide(GTK_WIDGET(status));
+        gtk_widget_show(GTK_WIDGET(status_label));
         gtk_widget_show(iconview_icon);
         gtk_widget_hide(status_icon);
 	gtk_widget_grab_focus (iconview);
@@ -302,17 +300,10 @@ void
 lpterm_c::bash_completion(){
     gchar *head=get_text_to_cursor(GTK_TEXT_VIEW(status));
     gint head_len = strlen(head);
+    g_free (head);
     gchar *token = get_current_text (GTK_TEXT_VIEW(status));
     gint token_len = strlen(token);
-
-    //gchar *tail=get_text_from_cursor(GTK_TEXT_VIEW(status));
-    g_free (head);
-    //gchar *suggest = rfm_bash_complete(widgets_p, token, head_len);
-    // FIXME: completion
-    gchar *suggest = NULL;
-    /*rfm_complex(RFM_MODULE_DIR, "completion",
-            widgets_p, token, GINT_TO_POINTER(head_len),
-            "rfm_bash_complete");*/
+    gchar *suggest = suggest_bash_complete(token, head_len);
     g_free (token);
 
     if (suggest) {
@@ -323,6 +314,7 @@ lpterm_c::bash_completion(){
         gint offset = -1;
         // +2 is icon and space...
         offset = head_len + (suggest_len - token_len) + 2;
+        print_status(suggest);
         // FIXME
         // rfm_status (widgets_p, "xffm/emblem_terminal", suggest, NULL);
         gtk_text_buffer_get_iter_at_offset (buffer, &end, offset);
@@ -359,8 +351,14 @@ lpterm_c::lpterm_keyboard_event( GdkEventKey * event, gpointer data) {
         bash_completion();
         return TRUE;
     }
+    if(event->keyval == GDK_KEY_Page_Up || event->keyval == GDK_KEY_Page_Down) {
+        gboolean retval;
+        g_signal_emit_by_name ((gpointer)diagnostics, "key-press-event", event, &retval);
+        
+        return TRUE;
+    }
 
-    // up-down-right-left-home-end for csh completion (home end right left will return false 
+    // right-left-home-end for csh completion (home end right left will return false 
 
 
 

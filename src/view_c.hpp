@@ -13,7 +13,9 @@ class view_c:public widgets_c {
     public:
         view_c(void *, GtkNotebook *);
         ~view_c(void);
-        void *get_window_p(void);
+
+        void harakiri(void);
+
 	gint get_dir_count(void);
 
         const gchar *get_path(void);
@@ -32,6 +34,7 @@ class view_c:public widgets_c {
 	void set_window_title(void);
 	void set_application_icon(void);
 	xfdir_c *get_xfdir_p(void);
+        GtkWindow *get_window(void);
 
 	gboolean window_keyboard_event(GdkEventKey *, void *);
         print_c *get_print_p(void);
@@ -47,14 +50,12 @@ class view_c:public widgets_c {
         void init(void);
         void signals();
 
-        lpterm_c *lpterm_p;
-        print_c *print_p;
-
-        void *window_v;
-
         gint highlight_x;
         gint highlight_y;
 
+        void *window_v;
+        lpterm_c *lpterm_p;
+        print_c *print_p;
         xfdir_c *xfdir_p;
 
 };
