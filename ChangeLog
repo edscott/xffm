@@ -1,3 +1,38 @@
+* commit fca2ccc01f90b2589d3d1cf2776b7fb16a6fbb70--------------------------
+Date:   Thu Aug 25 16:57:30 2016 -0500
+
+    Csh completion almost done
+    
+    Debug pending. Completion suggestion does not emerge yet.
+
+* commit a9ba157801182ecb32e60807b1879fe3fd2ab4ea--------------------------
+Date:   Thu Aug 25 14:00:07 2016 -0500
+
+    bash completion fully functional now
+
+* commit 8b3e43a07f8f7fc0297da24a8a86d4b8fd374af7--------------------------
+Date:   Wed Aug 24 20:34:47 2016 -0500
+
+    print_c class nearly complete
+    
+    only show_text method not passed test.
+
+* commit 7a54df23b6a65e7a90073cf9849f196542230cdb--------------------------
+Date:   Wed Aug 24 17:08:46 2016 -0500
+
+    Enabled initial print command
+    
+    pending:
+      print_error
+      print_debug
+      print_icon
+      tag testing
+
+* commit fa9ef5de9808610752815d53018df227c762e627--------------------------
+Date:   Tue Aug 23 20:48:48 2016 -0500
+
+    update ChangeLog
+
 * commit 089c7465aac47f490043f3d4f080db7b7c8e8ed9--------------------------
 Date:   Tue Aug 23 20:47:27 2016 -0500
 
