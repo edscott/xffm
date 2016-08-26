@@ -19,9 +19,9 @@ class lpterm_c: public print_c {
 
     private:
         gboolean active;
-        void place_cursor(GtkTextView *, gint);
-        gchar *get_current_text (GtkTextView *);
-        gchar *get_text_to_cursor ( GtkTextView *);
+        void place_cursor(void);
+        gchar *get_current_text (void);
+        gchar *get_text_to_cursor (void);
 	gboolean lpterm_keyboard_event(GdkEventKey *, void *);
         void run_lp_command(void);
         void bash_completion(void);

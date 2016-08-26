@@ -316,10 +316,21 @@ lpterm_c::run_lp_command(void){
 
 void
 lpterm_c::bash_completion(){
-    gchar *head=get_text_to_cursor(GTK_TEXT_VIEW(status));
+    gchar *head=get_text_to_cursor();
     gint head_len = strlen(head);
     g_free (head);
-    gchar *token = get_current_text (GTK_TEXT_VIEW(status));
+    gchar *token = get_current_text ();
+
+    if (strncmp(token, "sudo", strlen("sudo"))==0 &&
+	strncmp(token, "sudo -A", strlen("sudo -A"))){
+	gchar *o = token;
+	gchar *oo = o+strlen("sudo");
+	while (*oo == ' ') oo++;
+	token = g_strconcat("sudo -A ", oo, NULL);
+	g_free(o);
+	head_len += strlen(" -A");
+    }
+
     gint token_len = strlen(token);
     gchar *suggest = suggest_bash_complete(token, head_len);
     g_free (token);
@@ -384,11 +395,20 @@ lpterm_c::lpterm_keyboard_event( GdkEventKey * event, gpointer data) {
 	offset_history(offset);
 	return TRUE;
     }
+    if((event->keyval >= GDK_KEY_space && event->keyval <= GDK_KEY_asciitilde)
+	    || (event->keyval == GDK_KEY_Right) 
+	    || (event->keyval == GDK_KEY_Left)
+	    || (event->keyval == GDK_KEY_End)
+	    || (event->keyval == GDK_KEY_Home)  ) {
+        //gchar *command = get_current_text (GTK_TEXT_VIEW(status));
+	gchar *command = get_text_to_cursor();
+        gint csh_cmd_len = strlen(command);
+        g_object_set_data(G_OBJECT(status), "csh_cmd_len", GINT_TO_POINTER(csh_cmd_len));
+	fprintf(stderr,"csh_cmd_len = %d\n", csh_cmd_len);
+    }
 
 
     // right-left-home-end for csh completion (home end right left will return false 
-
-
 
     gboolean retval;
     g_signal_emit_by_name ((gpointer)status, "key-press-event", event, &retval);
@@ -396,36 +416,7 @@ lpterm_c::lpterm_keyboard_event( GdkEventKey * event, gpointer data) {
     return TRUE;
 
 
-    // CTRL-TAB for command history completion WTF
-    if(event->keyval == GDK_KEY_Tab && event->state & GDK_CONTROL_MASK) {
-        // do history completion ...
-        gchar *complete = get_current_text (GTK_TEXT_VIEW(status));
-	if (strncmp(complete, "sudo", strlen("sudo"))==0 &&
-	    strncmp(complete, "sudo -A", strlen("sudo -A"))){
-	    gchar *o = complete;
-	    gchar *oo = o+strlen("sudo");
-	    while (*oo == ' ') oo++;
-	    complete = g_strconcat("sudo -A ", oo, NULL);
-	    g_free(o);
-	}
-        
-        gchar *suggest = NULL;
-        // FIXME: completion class
-        /*rfm_rational(RFM_MODULE_DIR,
-		"completion", widgets_p, complete,
-		"rfm_history_completion");*/
-
-        g_free (complete);
-        if(suggest) {
-            // FIXME rfm_status (widgets_p, "xffm/emblem_terminal", suggest, NULL);
-            g_free (suggest);
-        }
-        g_object_set_data (G_OBJECT(status), "clean", NULL);
-	gtk_text_view_set_cursor_visible(GTK_TEXT_VIEW(status), TRUE);
-        return TRUE;
-    }
-    // tab for bash completion
-
+ 
 
 
 #if 0
@@ -481,39 +472,25 @@ lpterm_c::lpterm_keyboard_event( GdkEventKey * event, gpointer data) {
         return TRUE;
     }
 #endif
-    if(g_object_get_data (G_OBJECT(status), "clean")) {
-        // FIXME rfm_status (widgets_p, "xffm/emblem_terminal", NULL);
-    }
-    // set unclean status...
-    g_object_set_data (G_OBJECT (status), "clean", NULL);
-    gtk_text_view_set_cursor_visible(GTK_TEXT_VIEW(status), TRUE);
-    // Allow default handler for text buffer
-    if (event->keyval >= GDK_KEY_space && event->keyval <= GDK_KEY_asciitilde){
-        gchar *command = get_current_text (GTK_TEXT_VIEW(status));
-        gint csh_cmd_len = strlen(command)+1;
-        g_object_set_data(G_OBJECT(status), "csh_cmd_len", GINT_TO_POINTER(csh_cmd_len));
-    }
-
-    // Send the rest to default textview callback.
-    g_signal_emit_by_name ((gpointer)status, "key-press-event", event, &retval);
-
     return TRUE;
 }
 
 void 
-lpterm_c::place_cursor(GtkTextView *status, gint pos){
+lpterm_c::place_cursor(void){
+    gint position =
+	GPOINTER_TO_INT(g_object_get_data(G_OBJECT(status), "csh_cmd_len"));
     GtkTextIter iter;
-    GtkTextBuffer *buffer = gtk_text_view_get_buffer (status);
-    gtk_text_buffer_get_iter_at_offset (buffer, &iter, 2+pos);
+    GtkTextBuffer *buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW(status));
+    gtk_text_buffer_get_iter_at_offset (buffer, &iter, position+1);
     gtk_text_buffer_place_cursor (buffer, &iter);
 }
 
 
 gchar *
-lpterm_c::get_current_text ( GtkTextView * textview) {
+lpterm_c::get_current_text (void) {
     // get current text
     GtkTextIter start, end;
-    GtkTextBuffer *buffer = gtk_text_view_get_buffer (textview);
+    GtkTextBuffer *buffer = gtk_text_view_get_buffer ((GtkTextView *) status);
 
     gtk_text_buffer_get_bounds (buffer, &start, &end);
     gchar *t = gtk_text_buffer_get_text (buffer, &start, &end, TRUE);
@@ -522,10 +499,10 @@ lpterm_c::get_current_text ( GtkTextView * textview) {
 }
 
 gchar *
-lpterm_c::get_text_to_cursor ( GtkTextView * textview) {
+lpterm_c::get_text_to_cursor (void) {
     // get current text
     GtkTextIter start, end;
-    GtkTextBuffer *buffer = gtk_text_view_get_buffer (textview);
+    GtkTextBuffer *buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW(status));
     gint cursor_position;
     g_object_get (G_OBJECT (buffer), "cursor-position", &cursor_position, NULL);
     
@@ -539,16 +516,22 @@ lpterm_c::get_text_to_cursor ( GtkTextView * textview) {
 
 gboolean
 lpterm_c::csh_completion(gint direction){
-    gchar *command = get_current_text ((GtkTextView *) status);
+    gchar *command = get_current_text ();
     if (!command || !strlen(command)) {
+	fprintf(stderr, "return on !command\n");
         g_object_set_data(G_OBJECT(status), "csh_cmd_len", NULL);
         g_object_set_data(G_OBJECT(status), "csh_nth", NULL);
+	g_free(command);
         return FALSE;
     }
+    g_free(command);
+    command = get_text_to_cursor ();
     gint csh_cmd_len = 
         GPOINTER_TO_INT(g_object_get_data(G_OBJECT(status), "csh_cmd_len"));
     if (!csh_cmd_len) {
+	fprintf(stderr, "return on !csh_cmd_len\n");
         g_object_set_data(G_OBJECT(status), "csh_nth", NULL);
+	g_free(command);
         return FALSE;
     }
     gint nth = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(status), "csh_nth"));
@@ -580,8 +563,9 @@ lpterm_c::csh_completion(gint direction){
             TRACE("gotcha (%d): %s\n", nth, p);
             g_object_set_data(G_OBJECT(status), "csh_nth", GINT_TO_POINTER(nth));
 	    place_command(p);
-            place_cursor(GTK_TEXT_VIEW(status), csh_cmd_len);
+            place_cursor();
     }
+    g_free(command);
     return TRUE;    
 }
 void 
@@ -1041,7 +1025,7 @@ gchar *readline_history(gchar *cmd){
     }
     if (result > 0){
         place_command(widgets_p->status, widgets_p, expansion);
-        place_cursor(GTK_TEXT_VIEW(widgets_p->status), strlen(expansion));
+        place_cursor();
     }
     if (!expansion || !strlen(expansion) || result <= 0){
        g_free(expansion);
