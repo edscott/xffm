@@ -32,15 +32,20 @@ class lpterm_c: public print_c {
         GtkWidget *iconview_icon;
 
         gboolean csh_completion(gint);
-        void place_command(const gchar *);
-        void *load_sh_command_history (void);
-        void save_sh_command_history (const gchar *);
+        void csh_place_command(const gchar *);
+        void *csh_load_history (void);
+        void csh_save_history (const gchar *);
         gboolean is_valid_command (const gchar *);
         gboolean offset_history(gint);
 
-        pthread_mutex_t command_history_mutex;
-        GList *sh_command;
-        gint sh_command_counter;
+        pthread_mutex_t csh_command_mutex;
+        GList *csh_command_list;
+        gint csh_command_counter;
+
+	gint csh_cmd_len;
+	gchar *csh_cmd_save;
+	gint csh_nth;
+	gint csh_nth_save;
 
 }; 
 

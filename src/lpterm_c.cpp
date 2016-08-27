@@ -1,4 +1,4 @@
-//#define DEBUG_TRACE 1
+#define DEBUG_TRACE 1
 
 #include "view_c.hpp"
 #include "lpterm_c.hpp"
@@ -8,7 +8,6 @@
 #endif
 #define LP_TERMINAL_HISTORY 	USER_RFM_CACHE_DIR,"lp_terminal_history"
 
-// FIXME: csh completion not working. Arrows just go up and down history.
 
 static gboolean
 on_status_button_press ( GtkWidget *w , GdkEventButton * event, gpointer data) {
@@ -21,20 +20,16 @@ static gboolean
 status_keyboard_event (GtkWidget * window, GdkEventKey * event, gpointer data)
 {
     
-    TRACE("status_keyboard_event\n");
-    // FIXME: cursor is not visible!
-    //gtk_text_view_set_cursor_visible (GTK_TEXT_VIEW(data), TRUE);
+    //TRACE("status_keyboard_event\n");
     return FALSE;
-/*    window_c *window_p = (window_c *)data;
-    view_c *view_p = (view_c *)(window_p->get_active_view_p());
-    return view_p->window_keyboard_event(event, (void *)view_p);*/
 }
 
 lpterm_c::lpterm_c(void *data): print_c(data){
     active = FALSE;
-    sh_command = NULL;
-    command_history_mutex = PTHREAD_MUTEX_INITIALIZER;
-    load_sh_command_history();
+    csh_command_list = NULL;
+    csh_cmd_save = NULL;
+    csh_command_mutex = PTHREAD_MUTEX_INITIALIZER;
+    csh_load_history();
     
     view_c *view_p = (view_c *)data;
    // print_p = view_p->get_print_p();
@@ -51,7 +46,7 @@ gboolean
 lpterm_c::window_keyboard_event(GdkEventKey * event, void *data)
 {
     view_c *view_p = (view_c *)data;
-    TRACE("lpterm_c::window_keyboard_event\n");
+    //TRACE("lpterm_c::window_keyboard_event\n");
     /* asian Input methods */
     if(event->keyval == GDK_KEY_space && (event->state & (GDK_MOD1_MASK | GDK_SHIFT_MASK))) {
         return FALSE;
@@ -87,28 +82,27 @@ lpterm_c::window_keyboard_event(GdkEventKey * event, void *data)
     gint i;
     for (i=0; ignore[i]; i++) {
         if(event->keyval ==  ignore[i]) {
-	    TRACE("key ignored\n");
+	    TRACE("lpterm_c::window_keyboard_event: key ignored\n");
             return TRUE;
         }
     }
 
 
-    gboolean active = lp_get_active();
-    TRACE("window_keyboard_event(0x%x): get_active_lp = %d\n", event->keyval, active);
+    //TRACE("lpterm_c::window_keyboard_event: lpterm is active = %d\n", event->keyval, active);
 
     if (!active && is_iconview_key(event)) {
-	TRACE("Sending key to iconview default handler.\n");
+	TRACE("lpterm_c::window_keyboard_event: Sending key to iconview default handler.\n");
 	return FALSE;
     }
 
     if (active && (event->keyval == GDK_KEY_Escape)) {
-	TRACE("set_active_lp = %d\n", FALSE);
+	TRACE("lpterm_c::window_keyboard_event: set_active_lp = %d\n", FALSE);
         lp_set_active(FALSE); 
 	return TRUE;
     }
 
     if (!active) {
-	TRACE("set_active_lp = %d\n", TRUE);
+	TRACE("lpterm_c::window_keyboard_event: set_active_lp = %d\n", TRUE);
         lp_set_active(TRUE); 
 	if (event->keyval == GDK_KEY_Tab){
 	    event->keyval = GDK_KEY_Escape;
@@ -119,33 +113,23 @@ lpterm_c::window_keyboard_event(GdkEventKey * event, void *data)
         } 
     }
     // By now we have a lp key to process
-    TRACE("send key to status dialog for lpterm command\n");
+    // TRACE("lpterm_c::window_keyboard_event: send key to status dialog for lpterm command\n");
     lpterm_keyboard_event(event, data);
     return TRUE;
 
 
-
+// deprecated code
     /* FIXME: callbacks...
     if (rodent_do_callback(event->keyval, event->state)) {
-        TRACE("window_keyboard_event(): Tried callback with keyval!\n");
+        TRACE("lpterm_c::window_keyboard_event: Tried callback with keyval!\n");
         return TRUE;
     } */
     
-    /*
-    if (!active){
-	if (iconview_key(event)) {
-            TRACE("window_keyboard_event(): This may be a callback key!\n");
-            return TRUE;
-        }
-    }
-
-    if ((event->state & GDK_CONTROL_MASK) && !view_p->is_lpterm_key(event)) return TRUE;
-*/
     /* FIXME
     if (view_p->selection_list) {
 	// selection list must be redefined...
 	update_reselect_list(widgets_p);
-	TRACE( "Selection---> %p\n", view_p->selection_list);	
+	TRACE( "lpterm_c::window_keyboard_event: Selection---> %p\n", view_p->selection_list);	
     } */
     
     //False defaults to status line keybinding signal callback
@@ -194,9 +178,7 @@ lpterm_c::lp_set_active(gboolean state){
         gtk_widget_show(iconview_icon);
         gtk_widget_hide(status_icon);
 	gtk_widget_grab_focus (iconview);
-        //gtk_widget_hide(view_p->get_status());
     }
-    g_object_set_data (G_OBJECT (status), "active", GINT_TO_POINTER(state));
     return;
 }
 
@@ -228,6 +210,7 @@ lpterm_c::is_lpterm_key(GdkEventKey * event){
        ){
 	return TRUE;
     }
+
     // Control mask exceptions
     gint keys[] = {
 	GDK_KEY_Tab,
@@ -341,17 +324,14 @@ lpterm_c::bash_completion(){
         GtkTextBuffer *buffer = 
             gtk_text_view_get_buffer (GTK_TEXT_VIEW(status));
         gint offset = -1;
-        // +2 is icon and space...
-        offset = head_len + (suggest_len - token_len) + 2;
+        // +1 is icon...
+        offset = head_len + (suggest_len - token_len) + 1;
         print_status(suggest);
-        // FIXME
-        // rfm_status (widgets_p, "xffm/emblem_terminal", suggest, NULL);
         gtk_text_buffer_get_iter_at_offset (buffer, &end, offset);
         gtk_text_buffer_place_cursor(buffer, &end);	
     }
     g_free(suggest);
 
-    g_object_set_data (G_OBJECT(status), "clean", NULL);
     gtk_text_view_set_cursor_visible(GTK_TEXT_VIEW(status), TRUE);
     return ;
 
@@ -359,7 +339,7 @@ lpterm_c::bash_completion(){
 
 gint
 lpterm_c::lpterm_keyboard_event( GdkEventKey * event, gpointer data) {
-    TRACE("lpterm_keyboard_event...\n");
+    //TRACE("lpterm_c::lpterm_keyboard_event...\n");
     if(!event) {
         g_warning ("on_status_key_press(): returning on event==0\n");
         return TRUE;
@@ -372,6 +352,8 @@ lpterm_c::lpterm_keyboard_event( GdkEventKey * event, gpointer data) {
 
     // On activate, run the lpcommand
     if(event->keyval == GDK_KEY_Return || event->keyval == GDK_KEY_KP_Enter) {
+	g_free(csh_cmd_save);
+	csh_cmd_save = NULL;
         run_lp_command();
         return TRUE;
     }
@@ -395,30 +377,33 @@ lpterm_c::lpterm_keyboard_event( GdkEventKey * event, gpointer data) {
 	offset_history(offset);
 	return TRUE;
     }
+#if 0
+    // hack
+    if(event->keyval >= GDK_KEY_BackSpace){
+	if (csh_cmd_len) csh_cmd_len--;
+    }
     if((event->keyval >= GDK_KEY_space && event->keyval <= GDK_KEY_asciitilde)
 	    || (event->keyval == GDK_KEY_Right) 
 	    || (event->keyval == GDK_KEY_Left)
 	    || (event->keyval == GDK_KEY_End)
 	    || (event->keyval == GDK_KEY_Home)  ) {
-        //gchar *command = get_current_text (GTK_TEXT_VIEW(status));
-	gchar *command = get_text_to_cursor();
-        gint csh_cmd_len = strlen(command);
-        g_object_set_data(G_OBJECT(status), "csh_cmd_len", GINT_TO_POINTER(csh_cmd_len));
-	fprintf(stderr,"csh_cmd_len = %d\n", csh_cmd_len);
+
+	gchar *command = get_current_text();
+	// at this point key has not been appended to the text, so 
+	// we add it on (not valid for motion)
+	if (event->keyval == GDK_KEY_End) csh_cmd_len = strlen(command);
+	else if (event->keyval == GDK_KEY_Home) csh_cmd_len = 0;
+	else if (event->keyval == GDK_KEY_Left) csh_cmd_len--;
+	else if (event->keyval == GDK_KEY_Right){
+	    if (csh_cmd_len < strlen(command))csh_cmd_len++;
+	} else csh_cmd_len++;
+	g_free(command);
+	TRACE("lpterm_c::lpterm_keyboard_event: csh_cmd_len = %d\n", csh_cmd_len);
     }
-
-
-    // right-left-home-end for csh completion (home end right left will return false 
-
+#endif
     gboolean retval;
     g_signal_emit_by_name ((gpointer)status, "key-press-event", event, &retval);
-
-    return TRUE;
-
-
- 
-
-
+    return retval;
 #if 0
     // FIXME
     if(event->keyval == GDK_KEY_Return || event->keyval == GDK_KEY_KP_Enter) {
@@ -477,11 +462,9 @@ lpterm_c::lpterm_keyboard_event( GdkEventKey * event, gpointer data) {
 
 void 
 lpterm_c::place_cursor(void){
-    gint position =
-	GPOINTER_TO_INT(g_object_get_data(G_OBJECT(status), "csh_cmd_len"));
     GtkTextIter iter;
     GtkTextBuffer *buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW(status));
-    gtk_text_buffer_get_iter_at_offset (buffer, &iter, position+1);
+    gtk_text_buffer_get_iter_at_offset (buffer, &iter, csh_cmd_len);
     gtk_text_buffer_place_cursor (buffer, &iter);
 }
 
@@ -504,201 +487,209 @@ lpterm_c::get_text_to_cursor (void) {
     GtkTextIter start, end;
     GtkTextBuffer *buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW(status));
     gint cursor_position;
+    // cursor_position is a GtkTextBuffer internal property (read only)
     g_object_get (G_OBJECT (buffer), "cursor-position", &cursor_position, NULL);
     
     gtk_text_buffer_get_iter_at_offset (buffer, &start, 0);
     gtk_text_buffer_get_iter_at_offset (buffer, &end, cursor_position);
     gchar *t = gtk_text_buffer_get_text (buffer, &start, &end, TRUE);
     g_strchug(t);
-    NOOP ("TO cursor position=%d %s\n", cursor_position, t);
+    TRACE ("lpterm_c::get_text_to_cursor: to cursor position=%d %s\n", cursor_position, t);
     return t;
 }
-
+/// XXX: on moving csh_cmd_len, reinit csh_nth
 gboolean
 lpterm_c::csh_completion(gint direction){
-    gchar *command = get_current_text ();
-    if (!command || !strlen(command)) {
-	fprintf(stderr, "return on !command\n");
-        g_object_set_data(G_OBJECT(status), "csh_cmd_len", NULL);
-        g_object_set_data(G_OBJECT(status), "csh_nth", NULL);
-	g_free(command);
-        return FALSE;
-    }
-    g_free(command);
-    command = get_text_to_cursor ();
-    gint csh_cmd_len = 
-        GPOINTER_TO_INT(g_object_get_data(G_OBJECT(status), "csh_cmd_len"));
-    if (!csh_cmd_len) {
-	fprintf(stderr, "return on !csh_cmd_len\n");
-        g_object_set_data(G_OBJECT(status), "csh_nth", NULL);
-	g_free(command);
-        return FALSE;
-    }
-    gint nth = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(status), "csh_nth"));
-
-    if (!nth) nth = g_list_length(sh_command);
-    gchar *p=NULL;
-    if (direction > 0){
-        if (nth > 1){ 
-            nth--;
-	    GList *list = g_list_nth(sh_command, nth);
-	    for (;list && list->data;list=list->prev, nth--){
-		p = (gchar *)list->data;
-		if (p && strncmp(command, p, csh_cmd_len)==0) break;
-		p=NULL;
-	    } 
+    if (!csh_cmd_save) {
+	// initialize csh completion.
+	csh_cmd_save = get_current_text ();
+	if (!csh_cmd_save || !strlen(csh_cmd_save)) {
+	    // empty line: no completion attempted.
+	    TRACE("lpterm_c::csh_completion: empty line: no completion attempted.\n");
+	    g_free(csh_cmd_save);
+	    csh_cmd_save = NULL;
+	    return FALSE;
 	}
-    } else {
-	nth++;
-	if (nth <= g_list_length(sh_command)){
-            GList *list = g_list_nth(sh_command, nth);
-            for (;list && list->data;list=list->next, nth++){
-                p = (gchar *)list->data;
-                if (p && strncmp(command, p, csh_cmd_len)==0) break;
-                p=NULL;
-            } 
-        }
+	csh_nth_save = csh_nth = 0;
     }
-    if (p){
-            TRACE("gotcha (%d): %s\n", nth, p);
-            g_object_set_data(G_OBJECT(status), "csh_nth", GINT_TO_POINTER(nth));
-	    place_command(p);
-            place_cursor();
+    // cursor_position is a GtkTextBuffer internal property (read only)
+    GtkTextBuffer *buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW(status));
+    g_object_get (G_OBJECT (buffer), "cursor-position", &csh_cmd_len, NULL);
+    TRACE ("lpterm_c::csh_completion: to cursor position=%d \n", csh_cmd_len);
+    if (!csh_cmd_len) {
+	// no text before cursor: no completion attempted.
+	TRACE ("lpterm_c::csh_completion: return on !csh_cmd_len\n");
+        return FALSE;
+    }
+    gchar *command = get_text_to_cursor ();
+
+    const gchar *csh_cmd_found = NULL;
+    if (direction > 0){ 
+	// up arrow.
+	if (!csh_nth) csh_nth++;
+	fprintf(stderr,"FIXME: starting from %d\n", csh_nth);
+	//FIXME: must csh_nth must be indexed starting on 0
+	GList *list = g_list_nth(csh_command_list, csh_nth);
+	for (;list && list->data;list=list->next, csh_nth++){
+	    if (list->data && strncmp(command, (gchar *)list->data, csh_cmd_len)==0) {
+		csh_cmd_found = (const gchar *)list->data;
+		break;
+	    }
+	} 
+    } else {
+	// down arrow.
+	if (!csh_nth) csh_nth--;
+	GList *list = g_list_nth(csh_command_list, csh_nth);
+	for (;list && list->data;list=list->prev, csh_nth--){
+	    csh_cmd_found = (gchar *)list->data;
+	    if (csh_cmd_found && strncmp(command, csh_cmd_found, csh_cmd_len)==0) {
+		csh_cmd_found = (const gchar *)list->data;
+		break;
+	    }
+	} 
     }
     g_free(command);
-    return TRUE;    
+
+    if (csh_cmd_found){
+	TRACE("lpterm_c::csh_completion: csh_nth=%d/%d\n", 
+	    csh_nth, g_list_length(csh_command_list));
+	csh_place_command(csh_cmd_found);
+	return TRUE;    
+    } 
+    if (!csh_nth){
+	    TRACE("lpterm_c::csh_completion: back to original command.\n"); 
+	    csh_place_command(csh_cmd_save);
+	    g_free(csh_cmd_save);
+	    csh_cmd_save = NULL;
+    }
+    return FALSE;
 }
 void 
-lpterm_c::place_command(const gchar *p){
+lpterm_c::csh_place_command(const gchar *data){
     lp_set_active(TRUE);
-    print_status ("%s", p);
-    g_object_set_data (G_OBJECT (status), "clean", NULL);
-    gtk_text_view_set_cursor_visible(GTK_TEXT_VIEW  (status), TRUE);
-    gtk_widget_grab_focus (GTK_WIDGET(status));
+    print_status ("%s", data);
+    place_cursor();
 }
 
 gpointer
-lpterm_c::load_sh_command_history (void) {
+lpterm_c::csh_load_history (void) {
     gchar *history = g_build_filename (LP_TERMINAL_HISTORY, NULL);
-    pthread_mutex_lock(&command_history_mutex);
-    g_list_free (sh_command);
+    pthread_mutex_lock(&csh_command_mutex);
     GList *p;
-    for(p = sh_command; p; p = p->next) {
+    // clean out history list before loading a new one.
+    for(p = csh_command_list; p; p = p->next) {
         g_free (p->data);
     }
-    sh_command = NULL;
-    sh_command = g_list_append (sh_command, g_strdup (""));
-    sh_command_counter = 0;
+    g_list_free (csh_command_list);
+    csh_command_list = NULL;
+    csh_command_counter = 0; // XXX ??
 
     FILE *sh_history = fopen (history, "r");
     if(sh_history) {
         gchar line[2048];
         memset (line, 0, 2048);
         while(fgets (line, 2047, sh_history) && !feof (sh_history)) {
-            NOOP ("HISTORY: line %s\n", line);
             if(strchr (line, '\n')) *strchr (line, '\n') = 0;
             if(strlen (line) == 0) continue;
             // skip invalid commands (except cd):
             if(!is_valid_command (line)) {
                 if(strcmp (line, "cd") != 0 && strncmp (line, "cd ", strlen ("cd ")) != 0) {
-                    NOOP ("HISTORY: invalid history command in %s: %s\n", history, line);
+                    TRACE ("lpterm_c::csh_load_history: HISTORY: invalid history command in %s: %s\n", history, line);
                     continue;
                 }
             }
-	    gchar *newline=compact_line(line);
-	    GList *element=find_in_string_list(sh_command, newline);
+	    gchar *newline = compact_line(line);
+	    GList *element = find_in_string_list(csh_command_list, newline);
 
 	    if (element) { 
 		// remove old element
 		gchar *data=(gchar *)element->data;
-		sh_command = g_list_remove(sh_command, data);
+		csh_command_list = g_list_remove(csh_command_list, data);
 		g_free(data);
 	    }
-	    // put at top of the pile
-	    sh_command =
-		    g_list_insert_before (sh_command, g_list_last (sh_command), newline);
+	    // put element at top of the pile
+	    csh_command_list = g_list_prepend(csh_command_list, newline);
         }
-
-        NOOP ("rfm_load_sh_command_history(): readunlock for %s\n", history);
         fclose (sh_history);
-        sh_command_counter = g_list_length (sh_command) - 1;
     }
     g_free (history);
+    // reverse list
+    csh_command_list = g_list_reverse(csh_command_list);
 	
-    pthread_mutex_unlock(&command_history_mutex);
+    pthread_mutex_unlock(&csh_command_mutex);
     return NULL;
 }
 
 void
-lpterm_c::save_sh_command_history (const gchar * command) {
+lpterm_c::csh_save_history (const gchar * data) {
     GList *p;
-	    
-    pthread_mutex_lock(&command_history_mutex);
-    p = g_list_previous (g_list_last (sh_command));
-    if(!command || !strlen (command)){
-	pthread_mutex_unlock(&command_history_mutex);
-        return;
-    }
-    gchar *command_p = g_strdup (command);
+    gchar *command_p = g_strdup(data);
     g_strstrip (command_p);
-    // if repeat of last command, skip it.
-    if(!p || strcmp (command, (gchar *)p->data)) {
-        sh_command = g_list_insert_before (sh_command, g_list_last (sh_command), command_p);
-        // don't save to file if invalid command 
-        if(!is_valid_command (command_p)) {
-            if(strcmp (command_p, "cd") != 0 && strncmp (command_p, "cd ", strlen ("cd ")) != 0) {
-                DBG ("not saving %s\n", command_p);
-                sh_command_counter = g_list_length (sh_command) - 1;
-		pthread_mutex_unlock(&command_history_mutex);
-                return;
-            }
-        }
-        // here we will rewrite the history, removing any item
-        // which duplicate the command about to be saved.
-        // This effectively moves the command to the bottom
-        // of the list.
-        // 
-
-        gchar *history = g_build_filename (LP_TERMINAL_HISTORY, NULL);
-
-        // read it first to synchronize with other rodent instances
-        GList *disk_history = NULL;
-        
-        FILE *sh_history = fopen (history, "r");
-
-        if(sh_history) {
- 
-            char line[2048];
-            memset (line, 0, 2048);
-            while(fgets (line, 2047, sh_history) && !feof (sh_history)) {
-                if(strchr (line, '\n')) {
-                    *strchr (line, '\n') = 0;
-                }
-                if(strcmp (line, command_p) != 0) {
-                    disk_history = g_list_append (disk_history, g_strdup (line));
-                }
-            }
-
-            fclose (sh_history);
-        }
-        disk_history = g_list_append (disk_history, g_strdup (command_p));
-
-        sh_history = fopen (history, "w");
-        if(sh_history) {
-            GList *p;
-            for(p = g_list_first (disk_history); p && p->data; p = p->next) {
-                fprintf (sh_history, "%s\n", (gchar *)p->data);
-                g_free (p->data);
-            }
-            fclose (sh_history);
-        }
-        g_list_free (disk_history);
-        g_free (history);
+    pthread_mutex_lock(&csh_command_mutex);
+    // Get last registered command
+    void *last = g_list_nth_data (csh_command_list, 1);
+    if (last && strcmp((gchar *)last, command_p) == 0) {
+	g_free(command_p);
+	// repeat of last command. nothing to do here.
+	return;
     }
-    sh_command_counter = g_list_length (sh_command) - 1;
-    NOOP ("rfm_save_sh_command_history(); command_counter=%d\n", sh_command_counter);
-	
-    pthread_mutex_unlock(&command_history_mutex);
+    // don't save to file if invalid command (cd counts as invalid).
+    if(!is_valid_command (command_p)) {
+	if(strcmp (command_p, "cd") != 0 && strncmp (command_p, "cd ", strlen ("cd ")) != 0) {
+	    DBG ("not saving %s\n", command_p);
+	    pthread_mutex_unlock(&csh_command_mutex);
+	    g_free(command_p);
+	    return;
+	}
+    }
+
+    // if command is already in history, bring it to the front
+    GList *item = find_in_string_list(csh_command_list, command_p);
+    if (item){
+	void *data = item->data;
+	// remove old position
+	csh_command_list=g_list_remove(csh_command_list, data);
+	// insert at top of list (item 0 is empty string)
+	csh_command_list = g_list_insert(csh_command_list, data, 1);
+	goto save_to_disk;
+    }
+
+    // so the item was not found. proceed to insert
+    csh_command_list = g_list_insert(csh_command_list, command_p, 1);
+
+save_to_disk:
+    // rewrite history file
+    gchar *history = g_build_filename (LP_TERMINAL_HISTORY, NULL);
+    // read it first to synchronize with other xffm+ instances
+    GList *disk_history = NULL;       
+    FILE *sh_history = fopen (history, "r");
+    if(sh_history) {
+
+	char line[2048];
+	memset (line, 0, 2048);
+	while(fgets (line, 2047, sh_history) && !feof (sh_history)) {
+	    if(strchr (line, '\n')) *strchr (line, '\n') = 0;
+	    if(strcmp (line, command_p) != 0) {
+		disk_history = g_list_prepend (disk_history, g_strdup (line));
+	    }
+	}
+	fclose (sh_history);
+    }
+    disk_history = g_list_reverse(disk_history);
+    disk_history = g_list_prepend (disk_history, g_strdup (command_p));
+
+    sh_history = fopen (history, "w");
+    if(sh_history) {
+	GList *p;
+	for(p = g_list_first (disk_history); p && p->data; p = p->next) {
+	    fprintf (sh_history, "%s\n", (gchar *)p->data);
+	    g_free (p->data);
+	}
+	fclose (sh_history);
+    }
+    g_list_free (disk_history);
+    g_free (history);
+    pthread_mutex_unlock(&csh_command_mutex);
     return;
 }
 
@@ -761,11 +752,11 @@ lpterm_c::is_valid_command (const gchar *cmd_fmt) {
 
 gboolean
 lpterm_c::offset_history(gint offset){
-    void *p = g_list_nth_data (sh_command, sh_command_counter + offset);
-    NOOP ("get nth sh_command_counter=%d\n", sh_command_counter + offset);
+    void *p = g_list_nth_data (csh_command_list, csh_command_counter + offset);
+    NOOP ("get csh_nth csh_command_counter=%d\n", csh_command_counter + offset);
     if(p) {
-            sh_command_counter += offset;
-	    place_command((const gchar *)p);
+	csh_command_counter += offset;
+	csh_place_command((const gchar *)p);
     }
     return TRUE;
 }
@@ -877,7 +868,7 @@ print_history ( widgets_t * widgets_p) {
     GList *p;
     rfm_diagnostics (widgets_p, "xffm_tag/command", "history:", "\n", NULL);
 
-    for(i = 1, p = g_list_first (view_p->sh_command); p && p->data; p = p->next, i++) {
+    for(i = 1, p = g_list_first (view_p->csh_command_list); p && p->data; p = p->next, i++) {
         print_suggestion (widgets_p, (char *) p->data, i, TRUE);
     }
 
@@ -957,7 +948,7 @@ suggest_command (const char *complete, gboolean anywhere) {
     view_t *view_p = widgets_p->view_p;
     GList *p;
     char *suggest = NULL;
-    for(p = g_list_last (view_p->sh_command); p && p->data; p = p->prev) {
+    for(p = g_list_last (view_p->csh_command_list); p && p->data; p = p->prev) {
         char *data = (char *) p->data;
         if((anywhere && strstr (data, complete)) || (!anywhere && strncmp (complete, data, strlen (complete)) == 0)) {
             suggest = g_strdup (data);
@@ -967,7 +958,6 @@ suggest_command (const char *complete, gboolean anywhere) {
     }
     if(suggest) {
         rfm_status (widgets_p, "xffm/emblem_terminal", suggest, NULL);
-        g_object_set_data (G_OBJECT (widgets_p->status), "clean", NULL);
         g_free (suggest);
     }
 }
@@ -989,11 +979,10 @@ internal_history (gchar *cmd) {
 				 strerror (errno), NULL);
 	      return TRUE;
     }*/
-    if(n > 1 && n <= g_list_length (view_p->sh_command)) {
-        GList *p = g_list_nth (view_p->sh_command, n - 1);
+    if(n > 1 && n <= g_list_length (view_p->csh_command_list)) {
+        GList *p = g_list_nth (view_p->csh_command_list, n - 1);
         if(p && p->data) {
             rfm_status (widgets_p, "xffm/emblem_terminal", (char *) p->data, NULL);
-            g_object_set_data (G_OBJECT (widgets_p->status), "clean", NULL);
         }
     } else {
         if(*b != '?') {
@@ -1024,8 +1013,7 @@ gchar *readline_history(gchar *cmd){
         rfm_diagnostics(widgets_p, "xffm/stock_dialog-warning", expansion, "\n", NULL);
     }
     if (result > 0){
-        place_command(widgets_p->status, widgets_p, expansion);
-        place_cursor();
+        csh_place_command(widgets_p->status, widgets_p, expansion);
     }
     if (!expansion || !strlen(expansion) || result <= 0){
        g_free(expansion);
@@ -1090,12 +1078,10 @@ process_internal_commands (gchar ** command) {
             rfm_show_text(widgets_p);
             print_history (widgets_p);
             rfm_status (widgets_p, "xffm/emblem_terminal", "", NULL);
-            g_object_set_data (G_OBJECT (widgets_p->status), "clean", NULL);
             is_internal = TRUE;
         } else if(strncmp (argvp[0], "?", strlen ("?")) == 0) {
             print_history_help (widgets_p);
             rfm_status (widgets_p, "xffm/emblem_terminal", "", NULL);
-            g_object_set_data (G_OBJECT (widgets_p->status), "clean", NULL);
             is_internal = TRUE;
         }
 
@@ -1129,13 +1115,6 @@ sudo_fix(gchar *command){
 	g_free(original_head);
     }
     return command;
-}
-
-
-gboolean
-lp_get_active(widgets_t *widgets_p){
-    if(g_object_get_data (G_OBJECT (widgets_p->status), "active")) return TRUE;
-    return FALSE;
 }
 
 
