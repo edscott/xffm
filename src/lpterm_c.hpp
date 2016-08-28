@@ -1,9 +1,9 @@
 #ifndef LPTERM_C_HPP
 #define LPTERM_C_HPP
 #include "xffm+.h"
-#include "print_c.hpp"
+#include "completion_c.hpp"
 
-class lpterm_c: public print_c {
+class lpterm_c: public completion_c {
     public:
         lpterm_c(void *);
         gboolean is_iconview_key(GdkEventKey *);
@@ -19,9 +19,6 @@ class lpterm_c: public print_c {
 
     private:
         gboolean active;
-        void place_cursor(void);
-        gchar *get_current_text (void);
-        gchar *get_text_to_cursor (void);
 	gboolean lpterm_keyboard_event(GdkEventKey *, void *);
         void run_lp_command(void);
         void bash_completion(void);
@@ -31,21 +28,6 @@ class lpterm_c: public print_c {
         GtkWidget *status_icon;
         GtkWidget *iconview_icon;
 
-        gboolean csh_completion(gint);
-        void csh_place_command(const gchar *);
-        void *csh_load_history (void);
-        void csh_save_history (const gchar *);
-        gboolean is_valid_command (const gchar *);
-        gboolean offset_history(gint);
-
-        pthread_mutex_t csh_command_mutex;
-        GList *csh_command_list;
-        gint csh_command_counter;
-
-	gint csh_cmd_len;
-	gchar *csh_cmd_save;
-	gint csh_nth;
-	gint csh_nth_save;
 
 }; 
 

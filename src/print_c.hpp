@@ -30,8 +30,8 @@ class print_c: public utility_c {
         void *scroll_to_top(void);
         void *scroll_to_bottom(void);
     protected:
-        GtkTextView *diagnostics;
         GtkTextView *status;
+        GtkTextView *diagnostics;
         GtkLabel *status_label;
         void *view_v;
 	gtk_c *gtk_p;

@@ -36,8 +36,9 @@ xffm_SOURCES = \
 	  xffm_c.cpp \
 	    window_c.cpp \
 	    view_c.cpp  \
-		print_c.cpp   \
 		lpterm_c.cpp   \
+		    print_c.cpp   \
+			completion_c.cpp   \
 		widgets_c.cpp   \
 		    pathbar_c.cpp   \
 	  signals_c.cpp \
