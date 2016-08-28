@@ -497,7 +497,7 @@ lpterm_c::get_text_to_cursor (void) {
     TRACE ("lpterm_c::get_text_to_cursor: to cursor position=%d %s\n", cursor_position, t);
     return t;
 }
-/// XXX: on moving csh_cmd_len, reinit csh_nth
+
 gboolean
 lpterm_c::csh_completion(gint direction){
     if (!csh_cmd_save) {
@@ -526,7 +526,8 @@ lpterm_c::csh_completion(gint direction){
     const gchar *csh_cmd_found = NULL;
     if (direction > 0){ 
 	// up arrow.
-	if (!csh_nth) csh_nth++;
+	fprintf(stderr,"FIXME: csh_nth %d\n", csh_nth);
+	if (csh_nth && csh_nth < g_list_length(csh_command_list)) csh_nth++;
 	fprintf(stderr,"FIXME: starting from %d\n", csh_nth);
 	//FIXME: must csh_nth must be indexed starting on 0
 	GList *list = g_list_nth(csh_command_list, csh_nth);
@@ -535,18 +536,21 @@ lpterm_c::csh_completion(gint direction){
 		csh_cmd_found = (const gchar *)list->data;
 		break;
 	    }
+	    csh_cmd_found = NULL;
 	} 
     } else {
 	// down arrow.
-	if (!csh_nth) csh_nth--;
+	if (csh_nth > 0) csh_nth--;
 	GList *list = g_list_nth(csh_command_list, csh_nth);
-	for (;list && list->data;list=list->prev, csh_nth--){
+	for (;list && list->data && csh_nth>0;list=list->prev, csh_nth--){
 	    csh_cmd_found = (gchar *)list->data;
 	    if (csh_cmd_found && strncmp(command, csh_cmd_found, csh_cmd_len)==0) {
 		csh_cmd_found = (const gchar *)list->data;
 		break;
 	    }
+	    csh_cmd_found = NULL;
 	} 
+	if (csh_nth < 0) csh_nth = 0;
     }
     g_free(command);
 
@@ -557,10 +561,11 @@ lpterm_c::csh_completion(gint direction){
 	return TRUE;    
     } 
     if (!csh_nth){
-	    TRACE("lpterm_c::csh_completion: back to original command.\n"); 
+	    TRACE("lpterm_c::csh_completion: back to original command: %s.\n", csh_cmd_save); 
 	    csh_place_command(csh_cmd_save);
 	    g_free(csh_cmd_save);
 	    csh_cmd_save = NULL;
+	    return TRUE;
     }
     return FALSE;
 }
