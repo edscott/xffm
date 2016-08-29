@@ -170,6 +170,11 @@ void print_c::clear_text(void){
     view_p->clear_diagnostics();
 }
 
+void print_c::clear_status(void){
+    view_c *view_p = (view_c *)view_v;
+    view_p->clear_status();
+}
+
 
 void *
 print_c::scroll_to_top(void){
@@ -232,6 +237,12 @@ print_c::get_text_to_cursor (void) {
     return t;
 }
 
+
+const gchar *
+print_c::get_workdir(void){
+    view_c *view_p = (view_c *)view_v;
+    return view_p->get_path();
+}
 
 gchar *
 print_c::get_tilde_dir(const gchar *token){

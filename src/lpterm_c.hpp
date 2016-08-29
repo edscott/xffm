@@ -21,7 +21,8 @@ class lpterm_c: public csh_completion_c {
         gboolean active;
 	gboolean lpterm_keyboard_event(GdkEventKey *, void *);
         void run_lp_command(void);
-
+        gboolean process_internal_command (const gchar *);
+        gboolean internal_cd(gchar **);
         GtkWidget *iconview;
         GtkWidget *status_button;
         GtkWidget *status_icon;

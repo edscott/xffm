@@ -237,8 +237,112 @@ lpterm_c::is_lpterm_key(GdkEventKey * event){
     }
     return FALSE;
 }
+
+gboolean
+lpterm_c::internal_cd (gchar ** argvp) {   
+    gchar *gg=NULL;
+
+    if(argvp[1]) {
+	if (*argvp[1] == '~'){
+	    if (strcmp(argvp[1], "~")==0 || 
+		    strncmp(argvp[1], "~/", strlen("~/"))==0){
+		gg = g_strdup_printf("%s%s", g_get_home_dir (), argvp[1]+1);
+	    } else {
+		//gchar *tilde_dir = rfm_get_tilde_dir(argvp[1]);
+		gchar *tilde_dir = get_tilde_dir(argvp[1]);
+		if (tilde_dir) gg = g_strconcat(tilde_dir, strchr(argvp[1], '/')+1, NULL);
+		else gg = g_strdup(argvp[1]);
+		g_free(tilde_dir);	
+	    }
+	} else {
+	    gg = g_strdup(argvp[1]);
+	}
+
+    } else {
+        gg = g_strdup(g_get_home_dir ());
+    }
+    show_text();
+
+    // must allow relative paths too.
+    if (!g_path_is_absolute(gg)){
+	if(!g_file_test (get_workdir(), G_FILE_TEST_IS_DIR)) 
+	{
+	    print_error("%s: %s\n", gg, strerror (ENOENT));
+	    g_free (gg);
+	    return TRUE;
+        } 
+	gchar *fullpath = g_strconcat(get_workdir(), G_DIR_SEPARATOR_S, gg, NULL);
+	g_free(gg);
+	gg = fullpath;
+    }
+
+    gchar *rpath = realpath(gg, NULL);
+    if (!rpath){
+	print_error("%s: %s\n", gg, strerror (ENOENT));
+	g_free (gg);
+	return TRUE;
+    }
+
+    if (gg[strlen(gg)-1]==G_DIR_SEPARATOR || strstr(gg, "/..")){
+	g_free(gg);
+	gg=rpath;
+    } else {
+        g_free (rpath);
+    }
+
+    print_tag("tag/green", "cd %s\n", gg);
+    clear_status();
+
+    view_c *view_p =(view_c *)view_v;
+    view_p->reload(gg);
+
+ 
+    // XXX Do we want to change focus to iconview? Not sure...
+    // lp_set_active(FALSE);
+
+    // Reload new directory
+
+    g_free (gg);
+    return TRUE;
+}
+
+
+gboolean
+lpterm_c::process_internal_command (const gchar *command) {
+    gint argcp;
+    gchar **argvp;
+    GError *error = NULL;
+    if(!g_shell_parse_argv (command, &argcp, &argvp, &error)) {
+        print_error("%s\n", error->message);
+        return TRUE;
+    } else if(strcmp (argvp[0], "cd")==0) {
+        // shortcircuit chdir
+        internal_cd (argvp);
+        g_strfreev (argvp);
+        return TRUE;
+    }
+    g_strfreev (argvp);
+    return FALSE;
+}
+
+
 void 
 lpterm_c::run_lp_command(void){
+    gchar *command = get_current_text();
+    gchar ** commands = NULL;
+    if (strchr(command, ';')) commands = g_strsplit(command, ";", -1);
+    if (!commands) {
+        commands = (gchar **) calloc(2, sizeof(gchar *));
+        commands[0]=command; // no duplicate necessary
+    }
+    gchar **c;
+    for (c=commands; c && *c; c++){
+        if(process_internal_command (*c)) continue;
+        // shell to command
+    }
+    g_strfreev(commands); // this will free "command"
+
+
 #if 0
         if(g_object_get_data (G_OBJECT (textview), "clean") == NULL) {
             g_object_set_data(G_OBJECT(widgets_p->status), "csh_cmd_len", NULL);
@@ -430,85 +534,6 @@ print_suggestion (
     g_free (element);
 }
 
-gboolean
-internal_cd ( widgets_t * widgets_p, gchar ** argvp) {   
-    view_t *view_p = widgets_p->view_p;
-    gchar *gg=NULL;
-
-    if(argvp[1]) {
-	if (*argvp[1] == '~'){
-	    if (strcmp(argvp[1], "~")==0 || 
-		    strncmp(argvp[1], "~/", strlen("~/"))==0){
-		gg = g_strdup_printf("%s%s", g_get_home_dir (), argvp[1]+1);
-	    } else {
-		//gchar *tilde_dir = rfm_get_tilde_dir(argvp[1]);
-		gchar *tilde_dir = 
-		    rfm_natural(RFM_MODULE_DIR, "completion", 
-			    argvp[1], "rfm_get_tilde_dir");
-		if (tilde_dir) gg = g_strconcat(tilde_dir, 
-			strchr(argvp[1], '/')+1, NULL);
-		else gg = g_strdup(argvp[1]);
-		g_free(tilde_dir);	
-	    }
-	} else {
-	    gg = g_strdup(argvp[1]);
-	}
-
-    } else {
-        gg = g_strdup(g_get_home_dir ());
-    }
-    rfm_show_text (widgets_p);
-    NOOP ("CD: gg=%s argv[1]=%s\n", gg, argvp[1]);
-
-    // must allow relative paths too.
-    if (!g_path_is_absolute(gg)){
-	if(!view_p->en || ! view_p->en->path ||  
-	    !rfm_g_file_test_with_wait (view_p->en->path, G_FILE_TEST_IS_DIR)) 
-	{
-	    rfm_diagnostics (widgets_p, "xffm/stock_dialog-error", NULL);
-	    rfm_diagnostics (widgets_p, "xffm_tag/stderr", "* ", gg, ": ", strerror (ENOENT), "\n", NULL);
-	    g_free (gg);
-	    return TRUE;
-        } 
-	gchar *fullpath = g_strconcat(view_p->en->path, "/", gg, NULL);
-	g_free(gg);
-	gg = fullpath;
-	NOOP("CD: fullpath=%s\n", fullpath);
-    }
-
-    if (gg[strlen(gg)-1]=='/' || strstr(gg, "/..")){
-	gchar *rpath = realpath(gg, NULL);
-	g_free(gg);
-	gg=rpath;
-    }
-    rfm_diagnostics (widgets_p, "xffm_tag/command", "cd", " ", NULL);
-    rfm_diagnostics (widgets_p, "xffm_tag/green", gg, "\n", NULL);
-
-    gchar *rpath = realpath(gg, NULL);
-    if (!rpath){
-	rfm_diagnostics (widgets_p, "xffm/stock_dialog-error", NULL);
-	rfm_diagnostics (widgets_p, "xffm_tag/stderr", gg, ": ", strerror (ENOENT), "\n", NULL);
-	g_free (gg);
-	return TRUE;
-    }
-    g_free (rpath);
-
-    gtk_widget_grab_focus (widgets_p->paper);
-
-    rodent_push_view_go_history ();
-    record_entry_t *new_en = rfm_stat_entry (gg, 0);
-    view_p->module = NULL;
-    if (!rodent_refresh (widgets_p, new_en)){
-	rfm_destroy_entry(new_en); 
-    } else {
-	rfm_save_to_go_history ((gchar *) gg);
-	gchar *command = g_strdup_printf ("cd %s", gg);
-	rfm_save_sh_command_history (view_p, command);
-    }
-    g_free (gg);
-    return TRUE;
-}
-
 void
 print_history ( widgets_t * widgets_p) {
     int i;
@@ -671,77 +696,6 @@ gchar *readline_history(gchar *cmd){
     return expansion;
 }
 #endif
-
-gboolean
-process_internal_commands (gchar ** command) {
-    TRACE("process_internal: %s\n", *command);
-
-    if (*command == NULL) return TRUE;
-    gchar *cmd = *command;
-#ifdef HAVE_READLINE_HISTORY_H
-    // readline history?
-    if ((*cmd == '!' && cmd[1] != ' ' && cmd[1] != '=') ||
-            (*cmd =='^' && strchr(cmd+1, '^'))){
-        gchar *expansion;
-        if ((expansion = readline_history(widgets_p, *command)) != NULL){
-            TRACE("readline expansion=%s\n", expansion);
-            g_free(expansion);
-            return TRUE;
-        }
-    }
-#else
-    if (*cmd == '!' && cmd[1] != ' ' && cmd[1] != '='){
-            internal_history(widgets_p, cmd);
-            return TRUE;
-    }
-
-
-#endif
-    gchar *command2=NULL;
-    if (strchr(*command, ';')){
-	// split command in two.
-	command2 = g_strdup(strchr(*command, ';') + 1);
-	*strchr(*command, ';')=0;
-    }
-    gint argcp;
-    gchar **argvp;
-    GError *error = NULL;
-    if(!g_shell_parse_argv (*command, &argcp, &argvp, &error)) {
-        rfm_diagnostics (widgets_p, "xffm/stock_dialog-error", error->message, "\n", NULL);
-        g_error_free (error);
-	if (command2){
-	    g_free(*command);
-	    *command=command2;
-	    return FALSE;
-	}
-        return TRUE;
-    } else {
-        // shortcircuit chdir and history commands 
-        gboolean is_internal = FALSE;
-        if(strcmp (argvp[0], "cd") == 0) {
-            internal_cd (widgets_p, argvp);
-            NOOP ("CD: command=%s argv[1]=%s\n", *command, argvp[1]);
-            is_internal = TRUE;
-        } else if(strncmp (argvp[0], "history", strlen ("history")) == 0) {
-            rfm_show_text(widgets_p);
-            print_history (widgets_p);
-            rfm_status (widgets_p, "xffm/emblem_terminal", "", NULL);
-            is_internal = TRUE;
-        } else if(strncmp (argvp[0], "?", strlen ("?")) == 0) {
-            print_history_help (widgets_p);
-            rfm_status (widgets_p, "xffm/emblem_terminal", "", NULL);
-            is_internal = TRUE;
-        }
-
-	if (command2){
-	    g_free(*command);
-	    *command=command2;
-	    return FALSE;
-	}
-        g_strfreev (argvp);
-        return is_internal;
-    }
-}
 
  
 gchar *

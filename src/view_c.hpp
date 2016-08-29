@@ -21,6 +21,7 @@ class view_c:public widgets_c {
         const gchar *get_path(void);
 	
         void clear_diagnostics(void);
+        void clear_status(void);
         void show_diagnostics(void);
         void set_highlight(gdouble, gdouble);
         void highlight(void);

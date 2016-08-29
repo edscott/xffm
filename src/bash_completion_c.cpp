@@ -210,12 +210,6 @@ bash_completion_c::msg_result_text(gint match_type){
     scroll_to_bottom();
 }
 
-const gchar *
-bash_completion_c::get_workdir(void){
-    view_c *view_p = (view_c *)view_v;
-    return view_p->get_path();
-}
-
 gchar *
 bash_completion_c::list_matches (GSList **matches_p, gint match_type){
     *matches_p = g_slist_sort (*matches_p, ya_strcmp);

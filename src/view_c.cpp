@@ -12,6 +12,7 @@ static gboolean leave_notify_event(GtkWidget *, GdkEvent *, void *);
 static void on_remove_page_button(GtkWidget *, void *);
 static void *show_text_f(GtkWidget *, void *);
 static void clear_text_f(GtkWidget *, void *);
+static void clear_status_f(GtkWidget *, void *);
 static void hide_text_f(GtkWidget *, void *);
 static void item_activated (GtkIconView *, GtkTreePath *, void *);
 static gboolean change_current_page (GtkNotebook *notebook, gint, void *);
@@ -173,6 +174,11 @@ void
 view_c::clear_diagnostics(void){
     clear_text_f(NULL, (void *)this);
     hide_text_f(NULL, (void *)this);
+}
+
+void
+view_c::clear_status(void){
+    clear_status_f(NULL, (void *)this);
 }
 
 void
@@ -486,6 +492,16 @@ show_text_f (GtkWidget *w, gpointer data) {
 	}
     }
     return NULL;
+}
+
+static void
+clear_status_f	(GtkWidget *w, gpointer data){
+    view_c *view_p =(view_c *)data;
+    GtkTextView *status = GTK_TEXT_VIEW(view_p->get_status());
+    GtkTextBuffer *buffer = gtk_text_view_get_buffer (status);
+    GtkTextIter start, end;
+    gtk_text_buffer_get_bounds (buffer, &start, &end);
+    gtk_text_buffer_delete (buffer, &start, &end);
 }
 
 

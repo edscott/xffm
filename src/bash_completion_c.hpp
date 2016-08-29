@@ -20,7 +20,6 @@ class bash_completion_c: public print_c {
         void msg_show_match(gint match_type, const gchar *match);
         void msg_help_text(void);
         void msg_result_text(gint match_type);
-        const gchar *get_workdir(void);
         gchar *list_matches (GSList **matches_p, gint match_type);
         gchar *complete_it(GSList **matches_p, gint match_type);
 

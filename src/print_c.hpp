@@ -31,6 +31,8 @@ class print_c: public utility_c {
         gchar *get_tilde_dir(const gchar *);
         gchar *get_current_text (void);
 	gchar *get_text_to_cursor (void);
+        const gchar *get_workdir(void);
+        void clear_status(void);
 
         GtkTextView *status;
         GtkTextView *diagnostics;
