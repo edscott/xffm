@@ -440,7 +440,6 @@ bash_completion_c::bash_exec_completion(const char *in_token, gint *match_count_
 	msg_too_many_matches();
     }
 
-    if (chdir(g_get_home_dir()) < 0){ DBG("chdir %s\n",g_get_home_dir());}
 
     globfree(&stack_glob_v);
 

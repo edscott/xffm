@@ -16,6 +16,7 @@ class window_c {
 	void go_home(void);
         void *get_active_view_p(void);
         GtkWindow *get_window(void);	
+        gboolean is_view_in_list(void *);
         void add_view_to_list(void *);
         void remove_view_from_list(void *);
     private:

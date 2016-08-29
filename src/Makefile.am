@@ -20,9 +20,10 @@ xffm_SOURCES = \
 	    window_c.cpp \
 	    view_c.cpp  \
 		lpterm_c.cpp   \
-		    csh_completion_c.cpp   \
-			bash_completion_c.cpp  \
-			    print_c.cpp   \
+		    run_c.cpp   \
+			csh_completion_c.cpp   \
+			    bash_completion_c.cpp  \
+				print_c.cpp   \
 		widgets_c.cpp   \
 		    pathbar_c.cpp   \
 	  signals_c.cpp \

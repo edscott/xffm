@@ -51,17 +51,16 @@ view_c::view_c(void *window_data, GtkNotebook *notebook) : widgets_c(window_data
     pack();
     // lp_term object creation
     lpterm_p = new lpterm_c((void *)this);
-    print_p = new print_c((void *)this);
 
-    print_p->show_text();
-    print_p->print("%s\n", "Hello world.");
-    print_p->print_tag(NULL, "%s\n", "No tag.");
-    print_p->print_tag("tag/green", "%s", "Green tag.");
-    print_p->print_tag("tag/bold", "%s\n", "bold tag.");
-    print_p->print_error("%s\n", "This is an error.");
-    print_p->print_debug("%s\n", "This is a debug message.");
-    print_p->print_icon("face-monkey","%s\n", "This is face-monkey.");
-    print_p->print_icon_tag("face-angry","tag/red","%s\n", "This is face-angry in red.");
+    lpterm_p->show_text();
+    lpterm_p->print("%s\n", "Hello world.");
+    lpterm_p->print_tag(NULL, "%s\n", "No tag.");
+    lpterm_p->print_tag("tag/green", "%s", "Green tag.");
+    lpterm_p->print_tag("tag/bold", "%s\n", "bold tag.");
+    lpterm_p->print_error("%s\n", "This is an error.");
+    lpterm_p->print_debug("%s\n", "This is a debug message.");
+    lpterm_p->print_icon("face-monkey","%s\n", "This is face-monkey.");
+    lpterm_p->print_icon_tag("face-angry","tag/red","%s\n", "This is face-angry in red.");
 #if 0
     // FIXME
     /* drag and drop events */
@@ -131,8 +130,8 @@ const gchar *
 view_c::get_path(void) {return xfdir_p->get_path();}
 
 
-print_c *
-view_c::get_print_p(void){return print_p;}
+lpterm_c *
+view_c::get_lpterm_p(void){return lpterm_p;}
 
 GtkWindow *
 view_c::get_window(void){

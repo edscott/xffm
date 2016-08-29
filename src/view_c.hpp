@@ -38,7 +38,8 @@ class view_c:public widgets_c {
         GtkWindow *get_window(void);
 
 	gboolean window_keyboard_event(GdkEventKey *, void *);
-        print_c *get_print_p(void);
+        lpterm_c *get_lpterm_p(void);
+        void *window_v;
 
     protected:
 
@@ -54,9 +55,7 @@ class view_c:public widgets_c {
         gint highlight_x;
         gint highlight_y;
 
-        void *window_v;
         lpterm_c *lpterm_p;
-        print_c *print_p;
         xfdir_c *xfdir_p;
 
 };

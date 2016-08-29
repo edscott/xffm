@@ -76,6 +76,14 @@ window_c::add_view_to_list(void *view_p) {
 }
 
 
+gboolean
+window_c::is_view_in_list(void *view_p) {
+    pthread_mutex_lock(&view_list_mutex);
+    gboolean result = GPOINTER_TO_INT(g_list_find(view_list, view_p));
+    pthread_mutex_unlock(&view_list_mutex);
+    return result;
+}
+
 void 
 window_c::remove_view_from_list(void *view_p){
     // unset signals?
@@ -83,7 +91,9 @@ window_c::remove_view_from_list(void *view_p){
     view_list = g_list_remove(view_list, view_p);
     pthread_mutex_unlock(&view_list_mutex);
     delete ((view_c *)view_p);
-    if (g_list_length(view_list) == 0) gtk_main_quit();
+    if (g_list_length(view_list) == 0) {
+        gtk_main_quit();
+    }
 }
 
 void 

@@ -12,12 +12,14 @@ csh_completion_c::csh_completion_c(void *data): bash_completion_c(data){
 
 gboolean
 csh_completion_c::csh_completion(gint direction, gint offset){
+	    fprintf(stderr, "lpterm_c::csh_completion:.\n");
+
     if (!csh_cmd_save) {
 	// initialize csh completion.
 	csh_cmd_save = get_current_text ();
 	if (!csh_cmd_save || !strlen(csh_cmd_save)) {
 	    // empty line: no completion attempted.
-	    TRACE("lpterm_c::csh_completion: empty line: no completion attempted.\n");
+	    fprintf(stderr,"lpterm_c::csh_completion: empty line: no completion attempted.\n");
 	    g_free(csh_cmd_save);
 	    csh_cmd_save = NULL;
 	    csh_offset_history(offset);
@@ -28,10 +30,10 @@ csh_completion_c::csh_completion(gint direction, gint offset){
     // cursor_position is a GtkTextBuffer internal property (read only)
     GtkTextBuffer *buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW(status));
     g_object_get (G_OBJECT (buffer), "cursor-position", &csh_cmd_len, NULL);
-    TRACE ("lpterm_c::csh_completion: to cursor position=%d \n", csh_cmd_len);
+    fprintf (stderr, "lpterm_c::csh_completion: to cursor position=%d \n", csh_cmd_len);
     if (!csh_cmd_len) {
 	// no text before cursor: no completion attempted.
-	TRACE ("lpterm_c::csh_completion: return on !csh_cmd_len\n");
+	fprintf (stderr,"lpterm_c::csh_completion: return on !csh_cmd_len\n");
 	csh_offset_history(offset);
         return FALSE;
     }
@@ -139,7 +141,7 @@ csh_completion_c::csh_load_history (void) {
     }
     g_free (history);
     // reverse list
-    csh_command_list = g_list_reverse(csh_command_list);
+    //csh_command_list = g_list_reverse(csh_command_list);
 	
     pthread_mutex_unlock(&csh_command_mutex);
     return NULL;
@@ -277,8 +279,10 @@ csh_completion_c::csh_is_valid_command (const gchar *cmd_fmt) {
 
 gboolean
 csh_completion_c::csh_offset_history(gint offset){
-    void *p = g_list_nth_data (csh_command_list, csh_command_counter + offset);
-    NOOP ("get csh_nth csh_command_counter=%d\n", csh_command_counter + offset);
+    gint item = csh_command_counter + offset;
+    if (item < 0) item = 0;
+    void *p = g_list_nth_data (csh_command_list, item);
+    fprintf (stderr, "get csh_nth csh_command_counter=%d offset=%d item=%d\n", csh_command_counter, offset, item);
     if(p) {
 	csh_command_counter += offset;
 	csh_place_command((const gchar *)p);

@@ -12,12 +12,12 @@ class csh_completion_c: public bash_completion_c {
     protected:
 	void csh_completion_init(void);
         gboolean csh_completion(gint, gint);
+        void csh_save_history (const gchar *);
 
 	
     private:
         void csh_place_command(const gchar *);
         void *csh_load_history (void);
-        void csh_save_history (const gchar *);
         gboolean csh_is_valid_command (const gchar *);
         gboolean csh_offset_history(gint);
 	

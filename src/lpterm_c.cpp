@@ -23,7 +23,7 @@ status_keyboard_event (GtkWidget * window, GdkEventKey * event, gpointer data)
     return FALSE;
 }
 
-lpterm_c::lpterm_c(void *data): csh_completion_c(data){
+lpterm_c::lpterm_c(void *data): run_c(data){
     active = FALSE;
     
     view_c *view_p = (view_c *)data;
@@ -83,7 +83,7 @@ lpterm_c::window_keyboard_event(GdkEventKey * event, void *data)
     }
 
 
-    //TRACE("lpterm_c::window_keyboard_event: lpterm is active = %d\n", event->keyval, active);
+    fprintf(stderr, "lpterm_c::window_keyboard_event: lpterm is active = %d\n", event->keyval, active);
 
     if (!active && is_iconview_key(event)) {
 	TRACE("lpterm_c::window_keyboard_event: Sending key to iconview default handler.\n");
@@ -108,7 +108,7 @@ lpterm_c::window_keyboard_event(GdkEventKey * event, void *data)
         } 
     }
     // By now we have a lp key to process
-    // TRACE("lpterm_c::window_keyboard_event: send key to status dialog for lpterm command\n");
+    fprintf(stderr, "lpterm_c::window_keyboard_event: send key to status dialog for lpterm command\n");
     lpterm_keyboard_event(event, data);
     return TRUE;
 
@@ -324,7 +324,37 @@ lpterm_c::process_internal_command (const gchar *command) {
     g_strfreev (argvp);
     return FALSE;
 }
+ 
+gchar *
+lpterm_c::sudo_fix(const gchar *command){
+    if (!strstr(command, "sudo ")) return NULL; 
+    gchar *new_command = NULL;
+    if (strncmp(strstr(command, "sudo "), "sudo -A ", strlen("sudo -A "))!=0)
+    {
+        gchar *original_head=g_strdup(command);
+        gchar *pos = strstr(original_head, "sudo ");
+        if (pos){
+	    *pos = 0;
+	    gchar *tail=g_strdup(strstr(command, "sudo ")+strlen("sudo "));
+	    new_command = g_strconcat(original_head, "sudo -A ", tail, NULL);
+	    g_free(tail);
+        }
+	g_free(original_head);
+    }
+    return new_command;
+}
 
+void
+lpterm_c::shell_command(const gchar *c){
+    // Fix any sudo commands to use the -A option
+    gchar *command = sudo_fix(c);
+    // FIXME: run through selected shell
+
+    thread_run(command?command:c);
+    
+    g_free (command);
+
+}
 
 void 
 lpterm_c::run_lp_command(void){
@@ -339,6 +369,8 @@ lpterm_c::run_lp_command(void){
     for (c=commands; c && *c; c++){
         if(process_internal_command (*c)) continue;
         // shell to command
+        shell_command(*c);
+        clear_status();
     }
     g_strfreev(commands); // this will free "command"
 
@@ -398,7 +430,7 @@ lpterm_c::run_lp_command(void){
 
 gint
 lpterm_c::lpterm_keyboard_event( GdkEventKey * event, gpointer data) {
-    //TRACE("lpterm_c::lpterm_keyboard_event...\n");
+    fprintf(stderr, "lpterm_c::lpterm_keyboard_event...\n");
     if(!event) {
         g_warning ("on_status_key_press(): returning on event==0\n");
         return TRUE;
@@ -429,7 +461,7 @@ lpterm_c::lpterm_keyboard_event( GdkEventKey * event, gpointer data) {
     if((event->keyval == GDK_KEY_Up) || (event->keyval == GDK_KEY_Down)) {
         // csh command completion
         gint completion = (event->keyval == GDK_KEY_Up)?1:0-1;
-        gint offset = (event->keyval == GDK_KEY_Up)?0-1:1; 
+        gint offset = (event->keyval == GDK_KEY_Up)?1:0-1; 
         if (csh_completion(completion, offset)) return TRUE;
 	return TRUE;
     }
@@ -516,36 +548,6 @@ lpterm_c::lpterm_keyboard_event( GdkEventKey * event, gpointer data) {
     return TRUE;
 }
 #if 0
-void
-print_suggestion (
-    widgets_t * widgets_p,
-    const char *data,
-    int i,
-    gboolean cr
-) {
-    gchar *element = g_strdup_printf ("%d", i);
-    rfm_diagnostics (widgets_p, NULL, "[", NULL);
-    rfm_diagnostics (widgets_p, "xffm_tag/green", element, NULL);
-    rfm_diagnostics (widgets_p, NULL, "] ", NULL);
-    rfm_diagnostics (widgets_p, "xffm_tag/blue", data, NULL);
-    if(cr)
-        rfm_diagnostics (widgets_p, NULL, "\n", NULL);
-
-    g_free (element);
-}
-
-void
-print_history ( widgets_t * widgets_p) {
-    int i;
-    view_t *view_p = widgets_p->view_p;
-    GList *p;
-    rfm_diagnostics (widgets_p, "xffm_tag/command", "history:", "\n", NULL);
-
-    for(i = 1, p = g_list_first (view_p->csh_command_list); p && p->data; p = p->next, i++) {
-        print_suggestion (widgets_p, (char *) p->data, i, TRUE);
-    }
-
-}
 
 void
 print_tab ( widgets_t * widgets_p, gchar * text, gchar *text2) {
@@ -555,170 +557,6 @@ print_tab ( widgets_t * widgets_p, gchar * text, gchar *text2) {
     for(tab_len = tab_len - string_length; tab_len > 0; tab_len--)
         rfm_diagnostics (widgets_p, NULL, " ", NULL);
 }
-
-void
-print_history_help ( widgets_t * widgets_p) {
-    rfm_diagnostics (widgets_p, "xffm_tag/command", 
-	    _("History"), " (", _("Get help..."), "):\n", NULL);
-    print_tab (widgets_p, "?",NULL);
-    rfm_diagnostics (widgets_p, "xffm_tag/green",
-	    _("Show help about options"), "\n", NULL);
-
-    print_tab (widgets_p, "history",NULL);
-    rfm_diagnostics (widgets_p, "xffm_tag/green",
-	    _("Show History"), "\n", NULL);
-
-    print_tab (widgets_p, "!","n");
-    rfm_diagnostics (widgets_p, "xffm_tag/green",
-	    _("Line Number"),  " (", _("Command Line"), ") ", NULL);
-    rfm_diagnostics (widgets_p, "xffm_tag/red", 
-	    "n", NULL);
-    rfm_diagnostics (widgets_p, "xffm_tag/green",
-	    ".", "\n", NULL);
-
-    print_tab (widgets_p, "!",_("STRING"));
-    rfm_diagnostics (widgets_p, "xffm_tag/green",
-	    _("Complete Match"), NULL);
-    rfm_diagnostics (widgets_p, "xffm_tag/red", 
-	    " ", _("STRING"), NULL);
-    rfm_diagnostics (widgets_p, "xffm_tag/green", ".", "\n", NULL);
-
-    print_tab (widgets_p, "!?",_("STRING"));
-    rfm_diagnostics (widgets_p, "xffm_tag/green", 
-	    _("Anywhere"),  NULL);
-    rfm_diagnostics (widgets_p, "xffm_tag/red", " ",
-	    _("STRING"), NULL);
-    rfm_diagnostics (widgets_p, "xffm_tag/green", ".", "\n", NULL);
-
-    print_tab (widgets_p, _("STRING"),"<CTRL+TAB>");
-    rfm_diagnostics (widgets_p, "xffm_tag/green", 
-	    _("Completion mode:")," ", _("Command Line"), NULL);
-    //rfm_diagnostics (widgets_p, "xffm_tag/red",  _("STRING"), NULL);
-    rfm_diagnostics (widgets_p, "xffm_tag/green", ".", "\n", NULL);
-
-    print_tab (widgets_p, _("STRING"),"<TAB>");
-    rfm_diagnostics (widgets_p, "xffm_tag/green", 
-	    _("Completion mode:")," ", "bash", NULL);
-    //rfm_diagnostics (widgets_p, "xffm_tag/red",  _("STRING"), NULL);
-    rfm_diagnostics (widgets_p, "xffm_tag/green", ".", "\n", NULL);
-    rfm_diagnostics (widgets_p, "xffm/stock_dialog-info",NULL);
-    rfm_diagnostics (widgets_p, "xffm_tag/blue", _("Full readline library history commands available"), "\n", NULL);
-
-#if 0
-    I have not used these nonconventional options, ever...
-    print_tab (widgets_p, "!!", NULL);
-    rfm_diagnostics (widgets_p, "xffm_tag/green", 
-	    _("Clear History"), " (", _("Current"), ")", "\n", NULL);
-
-    print_tab (widgets_p, "!!!", NULL);
-    rfm_diagnostics (widgets_p, "xffm_tag/green", 
-	    _("Clear History"), " (", _("Disk"), ")", "\n", NULL);
-#endif
-}
-
-void
-suggest_command (const char *complete, gboolean anywhere) {
-    view_t *view_p = widgets_p->view_p;
-    GList *p;
-    char *suggest = NULL;
-    for(p = g_list_last (view_p->csh_command_list); p && p->data; p = p->prev) {
-        char *data = (char *) p->data;
-        if((anywhere && strstr (data, complete)) || (!anywhere && strncmp (complete, data, strlen (complete)) == 0)) {
-            suggest = g_strdup (data);
-            break;
-        }
-        NOOP ("COMPLETE: ?? %s\n", data);
-    }
-    if(suggest) {
-        rfm_status (widgets_p, "xffm/emblem_terminal", suggest, NULL);
-        g_free (suggest);
-    }
-}
-
-#ifndef HAVE_READLINE_HISTORY_H
-
-gboolean
-internal_history (gchar *cmd) {
-    view_t *view_p = widgets_p->view_p;
-    // internal fall back for when compiled without history library.
-    
-    // 
-    const char *b = cmd + 1;
-    //   errno = 0;
-    long n = strtol (b, NULL, 10);
-    NOOP ("COMPLETE: n=%ld\n", n);
-/*    if (errno)  {
-	      rfm_diagnostics (widgets_p, "xffm/stock_dialog-warning", b, ": ",
-				 strerror (errno), NULL);
-	      return TRUE;
-    }*/
-    if(n > 1 && n <= g_list_length (view_p->csh_command_list)) {
-        GList *p = g_list_nth (view_p->csh_command_list, n - 1);
-        if(p && p->data) {
-            rfm_status (widgets_p, "xffm/emblem_terminal", (char *) p->data, NULL);
-        }
-    } else {
-        if(*b != '?') {
-            suggest_command (widgets_p, b, FALSE);
-        } else {
-            suggest_command (widgets_p, b + 1, TRUE);
-        }
-    }
-    return TRUE;
-
-}
-#endif
-
-#ifdef HAVE_READLINE_HISTORY_H
-gchar *readline_history(gchar *cmd){
-    TRACE("readline_history: \"%s\"\n", cmd);
-    char *expansion;
-    static gchar *history = NULL;
-    if (!history) history = g_build_filename (LP_TERMINAL_HISTORY, NULL);
-    
-    read_history(history);
-    using_history();
-
-
-    int result = history_expand (cmd, &expansion);
-    TRACE ("result=%d expansion=%s\n", result, expansion);
-    if (result < 0){
-        rfm_diagnostics(widgets_p, "xffm/stock_dialog-warning", expansion, "\n", NULL);
-    }
-    if (result > 0){
-        csh_place_command(widgets_p->status, widgets_p, expansion);
-    }
-    if (!expansion || !strlen(expansion) || result <= 0){
-       g_free(expansion);
-       expansion = NULL;
-    }
-    clear_history();
-    return expansion;
-}
-#endif
-
- 
-gchar *
-sudo_fix(gchar *command){
-    if (! command || !strstr(command, "sudo ")) return command; 
-    if (strncmp(strstr(command, "sudo "), "sudo -A ", strlen("sudo -A "))!=0)
-    {
-        gchar *original_head=g_strdup(command);
-        gchar *pos = strstr(original_head, "sudo ");
-        if (pos){
-	    *pos = 0;
-	    gchar *tail=g_strdup(strstr(command, "sudo ")+strlen("sudo "));
-	    tail=sudo_fix(tail);
-	    gchar *new_command = g_strconcat(original_head, "sudo -A ", tail, NULL);
-	    g_free(tail);
-	    g_free(command);
-	    command = new_command;
-        }
-	g_free(original_head);
-    }
-    return command;
-}
-
 
 // Shared keybindings with either iconview or callback
 typedef struct lpkey_t{
