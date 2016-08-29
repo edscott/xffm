@@ -1,7 +1,7 @@
-#include "completion_c.hpp"
+#include "csh_completion_c.hpp"
 #include "view_c.hpp"
 
-completion_c::completion_c(void *data): print_c(data){
+csh_completion_c::csh_completion_c(void *data): bash_completion_c(data){
     csh_command_list = NULL;
     csh_cmd_save = NULL;
     csh_command_mutex = PTHREAD_MUTEX_INITIALIZER;
@@ -11,7 +11,7 @@ completion_c::completion_c(void *data): print_c(data){
 
 
 gboolean
-completion_c::csh_completion(gint direction, gint offset){
+csh_completion_c::csh_completion(gint direction, gint offset){
     if (!csh_cmd_save) {
 	// initialize csh completion.
 	csh_cmd_save = get_current_text ();
@@ -52,6 +52,7 @@ completion_c::csh_completion(gint direction, gint offset){
     } else {
 	// down arrow.
 	if (csh_nth > 0) csh_nth--;
+        fprintf(stderr, "cshnth=%d\n",csh_nth); 
 	GList *list = g_list_nth(csh_command_list, csh_nth);
 	for (;list && list->data && csh_nth>0;list=list->prev, csh_nth--){
 	    csh_cmd_found = (gchar *)list->data;
@@ -74,7 +75,7 @@ completion_c::csh_completion(gint direction, gint offset){
     if (!csh_nth){
 	    TRACE("lpterm_c::csh_completion: back to original command: %s.\n", csh_cmd_save); 
 	    csh_place_command(csh_cmd_save);
-	    completion_init();
+	    csh_completion_init();
 	    return TRUE;
     }
     // push/pop history
@@ -83,20 +84,20 @@ completion_c::csh_completion(gint direction, gint offset){
 }
 
 void
-completion_c::completion_init(void){
+csh_completion_c::csh_completion_init(void){
     g_free(csh_cmd_save);
     csh_cmd_save = NULL;
 
 }
 
 void 
-completion_c::csh_place_command(const gchar *data){
+csh_completion_c::csh_place_command(const gchar *data){
     print_status ("%s", data);
     place_cursor();
 }
 
 gpointer
-completion_c::csh_load_history (void) {
+csh_completion_c::csh_load_history (void) {
     gchar *history = g_build_filename (CSH_HISTORY, NULL);
     pthread_mutex_lock(&csh_command_mutex);
     GList *p;
@@ -145,7 +146,7 @@ completion_c::csh_load_history (void) {
 }
 
 void
-completion_c::csh_save_history (const gchar * data) {
+csh_completion_c::csh_save_history (const gchar * data) {
     GList *p;
     gchar *command_p = g_strdup(data);
     g_strstrip (command_p);
@@ -218,7 +219,7 @@ save_to_disk:
 }
 
 gboolean
-completion_c::csh_is_valid_command (const gchar *cmd_fmt) {
+csh_completion_c::csh_is_valid_command (const gchar *cmd_fmt) {
     //return GINT_TO_POINTER(TRUE);
     NOOP ("csh_is_valid_command(%s)\n", cmd_fmt);
     GError *error = NULL;
@@ -275,7 +276,7 @@ completion_c::csh_is_valid_command (const gchar *cmd_fmt) {
 }
 
 gboolean
-completion_c::csh_offset_history(gint offset){
+csh_completion_c::csh_offset_history(gint offset){
     void *p = g_list_nth_data (csh_command_list, csh_command_counter + offset);
     NOOP ("get csh_nth csh_command_counter=%d\n", csh_command_counter + offset);
     if(p) {
@@ -287,41 +288,11 @@ completion_c::csh_offset_history(gint offset){
 
 
 void 
-completion_c::place_cursor(void){
+csh_completion_c::place_cursor(void){
     GtkTextIter iter;
     GtkTextBuffer *buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW(status));
     gtk_text_buffer_get_iter_at_offset (buffer, &iter, csh_cmd_len);
     gtk_text_buffer_place_cursor (buffer, &iter);
 }
-
-gchar *
-completion_c::get_current_text (void) {
-    // get current text
-    GtkTextIter start, end;
-    GtkTextBuffer *buffer = gtk_text_view_get_buffer ((GtkTextView *) status);
-
-    gtk_text_buffer_get_bounds (buffer, &start, &end);
-    gchar *t = gtk_text_buffer_get_text (buffer, &start, &end, TRUE);
-    g_strchug(t);
-    return t;
-}
-
-gchar *
-completion_c::get_text_to_cursor (void) {
-    // get current text
-    GtkTextIter start, end;
-    GtkTextBuffer *buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW(status));
-    gint cursor_position;
-    // cursor_position is a GtkTextBuffer internal property (read only)
-    g_object_get (G_OBJECT (buffer), "cursor-position", &cursor_position, NULL);
-    
-    gtk_text_buffer_get_iter_at_offset (buffer, &start, 0);
-    gtk_text_buffer_get_iter_at_offset (buffer, &end, cursor_position);
-    gchar *t = gtk_text_buffer_get_text (buffer, &start, &end, TRUE);
-    g_strchug(t);
-    TRACE ("lpterm_c::get_text_to_cursor: to cursor position=%d %s\n", cursor_position, t);
-    return t;
-}
-
 
 

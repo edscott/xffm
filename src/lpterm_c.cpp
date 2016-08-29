@@ -23,7 +23,7 @@ status_keyboard_event (GtkWidget * window, GdkEventKey * event, gpointer data)
     return FALSE;
 }
 
-lpterm_c::lpterm_c(void *data): completion_c(data){
+lpterm_c::lpterm_c(void *data): csh_completion_c(data){
     active = FALSE;
     
     view_c *view_p = (view_c *)data;
@@ -310,7 +310,7 @@ lpterm_c::bash_completion(){
     }
 
     gint token_len = strlen(token);
-    gchar *suggest = suggest_bash_complete(token, head_len);
+    gchar *suggest = bash_suggetion(token, head_len);
     g_free (token);
 
     if (suggest) {
@@ -347,7 +347,7 @@ lpterm_c::lpterm_keyboard_event( GdkEventKey * event, gpointer data) {
 
     // On activate, run the lpcommand
     if(event->keyval == GDK_KEY_Return || event->keyval == GDK_KEY_KP_Enter) {
-	completion_init();
+	csh_completion_init();
         run_lp_command();
         return TRUE;
     }

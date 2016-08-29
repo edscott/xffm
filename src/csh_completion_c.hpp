@@ -1,19 +1,18 @@
 #ifndef COMPLETION_C_HPP
 #define COMPLETION_C_HPP
 #include "xffm+.h"
-#include "print_c.hpp"
+#include "bash_completion_c.hpp"
 #define CSH_HISTORY 	USER_RFM_CACHE_DIR,"lp_terminal_history"
 
 
-class completion_c: public print_c {
+class csh_completion_c: public bash_completion_c {
     public:
-	completion_c(void *);
+	csh_completion_c(void *);
+
     protected:
-	void completion_init(void);
+	void csh_completion_init(void);
         gboolean csh_completion(gint, gint);
-	void *view_v;
-	gchar *get_current_text (void);
-	gchar *get_text_to_cursor (void);
+
 	
     private:
         void csh_place_command(const gchar *);

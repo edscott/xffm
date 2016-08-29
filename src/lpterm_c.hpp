@@ -1,9 +1,9 @@
 #ifndef LPTERM_C_HPP
 #define LPTERM_C_HPP
 #include "xffm+.h"
-#include "completion_c.hpp"
+#include "csh_completion_c.hpp"
 
-class lpterm_c: public completion_c {
+class lpterm_c: public csh_completion_c {
     public:
         lpterm_c(void *);
         gboolean is_iconview_key(GdkEventKey *);

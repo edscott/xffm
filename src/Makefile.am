@@ -12,23 +12,6 @@ LDADD = @TUBO_LIBS@ @GMODULE_LIBS@ @GTK_LIBS@ @LIBXML_LIBS@ @LIBZIP_LIBS@ -lpthr
 FLAGS = -ggdb -O0 
 #FLAGS = -ggdb -O0 -std=c++11 `pkg-config --cflags gtk+-3.0`
 #LIBS = `pkg-config --libs gtk+-3.0` -lpthread
-OBJECTS = xffm_c.o \
-	    window_c.o \
-	    view_c.o  \
-		print_c.o   \
-		lpterm_c.o   \
-		widgets_c.o   \
-		    pathbar_c.o   \
-	  signals_c.o \
-	  utility_c.o \
-	  xfdir_c.o \
-	  gtk_c.o \
-	    tooltip_c.o \
-	    pixbuf_c.o \
-		pixbuf_hash_c.o \
-		    pixbuf_icons_c.o \
-			pixbuf_cairo_c.o \
-	  test.o
 
 bin_PROGRAMS = xffm
 
@@ -37,8 +20,9 @@ xffm_SOURCES = \
 	    window_c.cpp \
 	    view_c.cpp  \
 		lpterm_c.cpp   \
-		    print_c.cpp   \
-			completion_c.cpp   \
+		    csh_completion_c.cpp   \
+			bash_completion_c.cpp  \
+			    print_c.cpp   \
 		widgets_c.cpp   \
 		    pathbar_c.cpp   \
 	  signals_c.cpp \
