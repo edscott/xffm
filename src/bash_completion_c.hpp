@@ -9,6 +9,7 @@ class bash_completion_c: public print_c {
 	bash_completion_c(void *);
 
     protected:
+        void bash_completion(void);
         gchar *bash_suggetion(const gchar *, gint);
 
 	

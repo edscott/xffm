@@ -292,46 +292,6 @@ lpterm_c::run_lp_command(void){
 #endif
 }
 
-void
-lpterm_c::bash_completion(){
-    gchar *head=get_text_to_cursor();
-    gint head_len = strlen(head);
-    g_free (head);
-    gchar *token = get_current_text ();
-
-    if (strncmp(token, "sudo", strlen("sudo"))==0 &&
-	strncmp(token, "sudo -A", strlen("sudo -A"))){
-	gchar *o = token;
-	gchar *oo = o+strlen("sudo");
-	while (*oo == ' ') oo++;
-	token = g_strconcat("sudo -A ", oo, NULL);
-	g_free(o);
-	head_len += strlen(" -A");
-    }
-
-    gint token_len = strlen(token);
-    gchar *suggest = bash_suggetion(token, head_len);
-    g_free (token);
-
-    if (suggest) {
-        gint suggest_len = strlen(suggest);
-        GtkTextIter end;
-        GtkTextBuffer *buffer = 
-            gtk_text_view_get_buffer (GTK_TEXT_VIEW(status));
-        gint offset = -1;
-        // +1 is icon...
-        offset = head_len + (suggest_len - token_len) + 1;
-        print_status(suggest);
-        gtk_text_buffer_get_iter_at_offset (buffer, &end, offset);
-        gtk_text_buffer_place_cursor(buffer, &end);	
-    }
-    g_free(suggest);
-
-    gtk_text_view_set_cursor_visible(GTK_TEXT_VIEW(status), TRUE);
-    return ;
-
-}
-
 gint
 lpterm_c::lpterm_keyboard_event( GdkEventKey * event, gpointer data) {
     //TRACE("lpterm_c::lpterm_keyboard_event...\n");
