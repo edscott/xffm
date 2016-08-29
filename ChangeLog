@@ -1,3 +1,56 @@
+* commit 3ec44c820a24b9096e1cff98a2fb0fdb9c60e6d5--------------------------
+Date:   Mon Aug 29 11:21:00 2016 -0500
+
+    chdir (cd) instruction now working from lpterm
+
+* commit b1611034d7a9933e60c0b214ff3a6a37572c590c--------------------------
+Date:   Mon Aug 29 10:24:12 2016 -0500
+
+    Move last bash completion method to bash_completion_c
+
+* commit 18842e3933b8ec218b592642713106107a83b647--------------------------
+Date:   Mon Aug 29 10:18:20 2016 -0500
+
+    Cleanups with creation of bash_completion_c class
+    
+    Inheritance order now set up thus:
+    
+      print_c-->bash_completion_c-->csh_completion_c-->lpterm_c
+
+* commit 6d1d56416c2cc4ac48a162f00e2d5d53d76e0e8e--------------------------
+Date:   Sun Aug 28 17:45:40 2016 -0500
+
+    Created completion_c class
+    
+    * csh completion now lives in completion_c class
+      pending: move bash completion to completion_c class.
+
+* commit 19957d3c8b357b6309c73570131af0c54a2d0cbe--------------------------
+Date:   Sat Aug 27 21:16:48 2016 -0500
+
+    Csh now working correctly
+    
+    final cleanup and reorganization into separate class pending.
+
+* commit 35662adb8772f773d37207adfbb61b4fce1dfc29--------------------------
+Date:   Sat Aug 27 10:22:45 2016 -0500
+
+    new Csh completion code
+    
+    * final debugging pending. Value for csh_nth is not quite right.
+
+* commit a50b638a593121a744989a0a49171cfa47fded82--------------------------
+Date:   Thu Aug 25 21:00:33 2016 -0500
+
+    fixes on the csh completion
+    
+    csh completion almost done. Just a few bugs left to iron out.
+
+* commit 38ac3522eebe35b9de3f7fb0d2b3ee2b2125b90a--------------------------
+Date:   Thu Aug 25 16:59:13 2016 -0500
+
+    update ChangeLog
+
 * commit fca2ccc01f90b2589d3d1cf2776b7fb16a6fbb70--------------------------
 Date:   Thu Aug 25 16:57:30 2016 -0500
 
