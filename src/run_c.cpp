@@ -287,16 +287,14 @@ rfm_operate_stdout (void *data, void *stream, int childFD) {
     g_free(outline);
 
 
-    //XXX Hmmm.. I believe this is not applicable as execution
-    //           is done by main thread...
-    // This is a bit hacky, to keep runaway output from hogging
-    // up the gtk event loop.
- /*   static gint count = 1;
+    // With this, this thread will not do a DOS attack
+    // on the gtk event loop.
+    static gint count = 1;
     if (count % 20 == 0){
         usleep(100000);
     } else {
         usleep(1000);
-    }*/
+    }
 
     if (recur) {
         rfm_operate_stdout (data, recur, childFD);
@@ -325,16 +323,14 @@ rfm_operate_stderr (void *data, void *stream, int childFD) {
 	lpterm_p->print_tag("tag/red", line);
     }
 
-    //XXX Hmmm.. I believe this is not applicable as execution
-    //           is done by main thread...
-    // This is a bit hacky, to keep runaway output from hogging
-    // up the gtk event loop.
- /*   static gint count = 1;
+    // With this, this thread will not do a DOS attack
+    // on the gtk event loop.
+    static gint count = 1;
     if (count % 20 == 0){
         usleep(100000);
     } else {
         usleep(1000);
-    }*/
+    }
 
    return;
 }
