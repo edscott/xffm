@@ -22,7 +22,7 @@ csh_completion_c::csh_completion(gint direction, gint offset){
 	    fprintf(stderr,"lpterm_c::csh_completion: empty line: no completion attempted.\n");
 	    g_free(csh_cmd_save);
 	    csh_cmd_save = NULL;
-	    csh_offset_history(offset);
+	    csh_offset_history(0);
 	    return FALSE;
 	}
 	csh_nth = 0;
@@ -35,6 +35,7 @@ csh_completion_c::csh_completion(gint direction, gint offset){
 	// no text before cursor: no completion attempted.
 	fprintf (stderr,"lpterm_c::csh_completion: return on !csh_cmd_len\n");
 	csh_offset_history(offset);
+
         return FALSE;
     }
     gchar *command = get_text_to_cursor ();
@@ -75,7 +76,7 @@ csh_completion_c::csh_completion(gint direction, gint offset){
 	return TRUE;    
     } 
     if (!csh_nth){
-	    TRACE("lpterm_c::csh_completion: back to original command: %s.\n", csh_cmd_save); 
+	    fprintf(stderr, "lpterm_c::csh_completion: back to original command: %s.\n", csh_cmd_save);
 	    csh_place_command(csh_cmd_save);
 	    csh_completion_init();
 	    return TRUE;
@@ -140,8 +141,6 @@ csh_completion_c::csh_load_history (void) {
         fclose (sh_history);
     }
     g_free (history);
-    // reverse list
-    //csh_command_list = g_list_reverse(csh_command_list);
 	
     pthread_mutex_unlock(&csh_command_mutex);
     return NULL;
@@ -281,11 +280,15 @@ gboolean
 csh_completion_c::csh_offset_history(gint offset){
     gint item = csh_command_counter + offset;
     if (item < 0) item = 0;
-    void *p = g_list_nth_data (csh_command_list, item);
+    if (item >= g_list_length(csh_command_list)) item = g_list_length(csh_command_list) - 1;
+    const gchar *p = (const gchar *)g_list_nth_data (csh_command_list, item<0?0:item);
     fprintf (stderr, "get csh_nth csh_command_counter=%d offset=%d item=%d\n", csh_command_counter, offset, item);
+    if (csh_command_counter + offset < 0) p = "";
     if(p) {
-	csh_command_counter += offset;
-	csh_place_command((const gchar *)p);
+	csh_command_counter = item;
+	csh_place_command(p);
+	csh_completion_init();
+	
     }
     return TRUE;
 }
