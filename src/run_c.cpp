@@ -227,8 +227,9 @@ gchar *rfm_diagnostics_exit_string(gchar *tubo_string){
         }
     }
     gchar *g = g_strdup_printf("%c[31m<%d>", 27, pid);
-    gchar *c_string = pop_hash((pid_t)id);
-    string = g_strconcat(g, " ", c_string, "\n", NULL);
+    //gchar *c_string = pop_hash((pid_t)id);
+    gchar *c_string = pop_hash((pid_t)pid);
+    string = g_strconcat(g, c_string, "\n", NULL);
     g_free(c_string);
     g_free(g);
     return string;
@@ -250,6 +251,7 @@ rfm_operate_stdout (void *data, void *stream, int childFD) {
     char *line;
     line = (char *)stream;
     if(line[0] == '\n') return;
+    //TRACE("* %s", line);
     const gchar *exit_token = "Tubo-id exit:";
     gchar *recur = NULL;
     if (strstr(line, exit_token) && strstr(line, exit_token) != line){
@@ -375,8 +377,7 @@ operate_stderr (void *data, void *stream, gint childFD) {
 
 gboolean done_f(void *data) {
     view_c *view_p = (view_c *)data;
-    view_p->get_lpterm_p()->print_tag("tag/bold", "%s\n", "run complete.");
-    // readp child here.
+    //view_p->get_lpterm_p()->print_tag("tag/bold", "%s\n", "run complete.");
     return FALSE;
 }
 
@@ -384,6 +385,89 @@ static
 void
 fork_finished_function (void *data) {
     g_timeout_add(1, done_f, data);                                                
+}
+
+static void
+threadwait (void) {
+    struct timespec thread_wait = {
+        0, 100000000
+    };
+    nanosleep (&thread_wait, NULL);
+}
+
+#define MAX_COMMAND_ARGS 2048
+
+// FIXME: this mutex must live across objects
+static pthread_mutex_t fork_mutex=PTHREAD_MUTEX_INITIALIZER;
+static void
+fork_function (void *data) {
+    gchar **argv = (char **)data;
+
+    gint i = 0;
+    static gchar *sudo_cmd=NULL;
+    pthread_mutex_lock(&fork_mutex);
+    g_free(sudo_cmd);
+    sudo_cmd=NULL;
+    for(i=0; argv && argv[i] && i < 5; i++) {
+	if(!sudo_cmd && 
+		(strstr (argv[i], "sudo") ||
+		 strstr (argv[i], "ssh")  ||
+		 strstr (argv[i], "rsync")  ||
+		 strstr (argv[i], "scp"))) {
+	    sudo_cmd=g_strdup_printf("<b>%s</b> ", argv[i]);
+	    continue;
+	} 	
+	if (sudo_cmd){
+	    if (strchr(argv[i], '&')){
+	        gchar **a = g_strsplit(argv[i], "&", -1);
+		gchar **p=a;
+		for (;p && *p; p++){
+		    const gchar *space = (strlen(*p))?" ":"";
+		    const gchar *amp = (*(p+1))?"&amp;":"";
+		    gchar *g = g_strconcat(sudo_cmd,  space, "<i>",*p, amp, "</i>", NULL);
+		    g_free(sudo_cmd);
+		    sudo_cmd=g;
+		}
+		g_strfreev(a);
+	    } else {
+		gchar *a = g_strdup(argv[i]);
+		if (strlen(a) >13) {
+		    a[12] = 0;
+		    a[11] = '.';
+		    a[10] = '.';
+		    a[9] = '.';
+		}
+		gchar *g = g_strconcat(sudo_cmd,  " <i>",a, "</i>", NULL);
+		g_free(a);
+		g_free(sudo_cmd);
+		sudo_cmd=g;
+	    }
+	}
+    }
+
+
+    if (i>=MAX_COMMAND_ARGS - 1) {
+    	NOOP("%s: (> %d)\n", strerror(E2BIG), MAX_COMMAND_ARGS);
+	argv[MAX_COMMAND_ARGS - 1]=NULL;
+    }
+
+    if (sudo_cmd) {
+	gchar *g = g_strconcat(sudo_cmd,  "\n", NULL);
+	g_free(sudo_cmd);
+	sudo_cmd = g;
+	// This  function makes copies of the strings pointed to by name and value
+        // (by contrast with putenv(3))
+	setenv("RFM_ASKPASS_COMMAND", sudo_cmd, 1);
+	g_free(sudo_cmd);
+    } else {
+	setenv("RFM_ASKPASS_COMMAND", "", 1);
+    }
+    pthread_mutex_unlock(&fork_mutex);
+    execvp (argv[0], argv);
+    g_warning ("CHILD could not execvp: this should not happen\n");
+    g_warning ("Do you have %s in your path?\n", argv[0]);
+    threadwait ();
+    _exit (123);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -399,19 +483,22 @@ GPid run_c::thread_run(const gchar **arguments){
         g_free(command);
         command = g;
     }
-    print_tag(NULL, "%s\n", command);
-    g_free(command);
                   
     int flags = TUBO_EXIT_TEXT|TUBO_VALID_ANSI|TUBO_CONTROLLER_PID;
 
-    pid_t pid = Tubo_exec ((gchar **)arguments,
+    pid_t pid = Tubo_fork (fork_function,(gchar **)arguments,
                                 NULL, // stdin
                                 rfm_operate_stdout, //stdout_f,
                                 rfm_operate_stderr, //stderr_f
                                 fork_finished_function,
                                 view_v,
                                 flags);
-    print_tag("tag/bold", "Started process with pid:%d\n", pid);
+    //print_tag("tag/bold", "Started process with pid:%d\n", pid);
+    pid_t grandchild=Tubo_child (pid);
+    print_icon_tag("emblem-greenball", "tag/blue", "<%d>", grandchild);
+    print_tag("tag/bold", "%s\n", command);
+    push_hash(grandchild, g_strdup(command));
+    g_free(command);
 }
 
 
@@ -901,7 +988,7 @@ private_rfm_thread_run_argv (
 	}
 	const gchar *exec_option = rfm_term_exec_option(term);
         v_argv[i++] = (gchar *)exec_option;
-	//fprintf(stderr, "At private_rfm_thread_run_argv(): term= %s\n",term);
+	//TRACE( "At private_rfm_thread_run_argv(): term= %s\n",term);
     }
 
  

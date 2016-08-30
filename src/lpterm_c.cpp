@@ -1,4 +1,4 @@
-#define DEBUG_TRACE 1
+//#define DEBUG_TRACE 1
 
 #include "view_c.hpp"
 #include "lpterm_c.hpp"
@@ -83,7 +83,7 @@ lpterm_c::window_keyboard_event(GdkEventKey * event, void *data)
     }
 
 
-    fprintf(stderr, "lpterm_c::window_keyboard_event: lpterm is active = %d\n", event->keyval, active);
+    TRACE( "lpterm_c::window_keyboard_event: lpterm is active = %d\n", event->keyval, active);
 
     if (!active && is_iconview_key(event)) {
 	TRACE("lpterm_c::window_keyboard_event: Sending key to iconview default handler.\n");
@@ -108,7 +108,7 @@ lpterm_c::window_keyboard_event(GdkEventKey * event, void *data)
         } 
     }
     // By now we have a lp key to process
-    fprintf(stderr, "lpterm_c::window_keyboard_event: send key to status dialog for lpterm command\n");
+    TRACE( "lpterm_c::window_keyboard_event: send key to status dialog for lpterm command\n");
     lpterm_keyboard_event(event, data);
     return TRUE;
 
@@ -430,7 +430,7 @@ lpterm_c::run_lp_command(void){
 
 gint
 lpterm_c::lpterm_keyboard_event( GdkEventKey * event, gpointer data) {
-    fprintf(stderr, "lpterm_c::lpterm_keyboard_event...\n");
+    TRACE( "lpterm_c::lpterm_keyboard_event...\n");
     if(!event) {
         g_warning ("on_status_key_press(): returning on event==0\n");
         return TRUE;
