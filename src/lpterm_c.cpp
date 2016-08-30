@@ -437,8 +437,7 @@ lpterm_c::lpterm_keyboard_event( GdkEventKey * event, gpointer data) {
         return TRUE;
     }
     view_c *view_p =(view_c *)data; 
-    GtkWidget *status = view_p->get_status();
-    GtkWidget *diagnostics = view_p->get_diagnostics();
+    gtk_widget_grab_focus (GTK_WIDGET(status));
     gtk_c *gtk_p = view_p->get_gtk_p();
 
 
