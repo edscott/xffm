@@ -129,7 +129,6 @@ widgets_c::create(void){
     button_space = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
     clear_button =  gtk_button_new ();
     size_scale = gtk_scale_new_with_range(GTK_ORIENTATION_HORIZONTAL, 0.0, 96.0, 12.0);
-    
 }
 
 void 

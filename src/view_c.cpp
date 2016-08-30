@@ -161,6 +161,7 @@ view_c::set_view_details(void){
     set_window_title();
     set_application_icon();
     update_tab_label_icon();
+    while (gtk_events_pending()) gtk_main_iteration();
     pathbar_p->update_pathbar(xfdir_p->get_path());
 }
 

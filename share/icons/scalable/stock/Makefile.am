@@ -13,7 +13,7 @@ delete.svg dialog-authentication.svg dialog-info.svg dialog-question.svg dialog-
 #	  rm -f *.svg
 
 install-data-hook:
-	  cd $(DESTDIR)$(datadir)/icons/rfm/scalable/stock; \
+	  cd $(DESTDIR)$(datadir)/icons/xffm+/scalable/stock; \
 	  ln -s -f ok.svg apply.svg; \
 	  ln -s -f format-text-bold.svg bold.svg; \
 	  ln -s -f delete.svg edit-delete.svg; \

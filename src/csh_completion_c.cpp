@@ -93,6 +93,7 @@ csh_completion_c::csh_completion_init(void){
     g_free(csh_cmd_save);
     csh_cmd_save = NULL;
     csh_completing = FALSE;
+    csh_nth = 0;
 }
 
 void 

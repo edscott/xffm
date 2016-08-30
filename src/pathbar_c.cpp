@@ -50,6 +50,7 @@ pathbar_c::pathbar_button (const char *icon_id, const char *text) {
 
 void 
 pathbar_c::update_pathbar(const gchar *path){
+    TRACE( "pathbar_c::update pathbar to %s\n", path);
     void *arg[]={(void *)this, (void *)(path?g_strdup(path):NULL)};
     context_function(update_pathbar_f, arg);
 }
@@ -199,6 +200,7 @@ update_pathbar_f(void *data){
     pathbar_c *pathbar_p = (pathbar_c *)arg[0];
     gchar *path = (gchar *)arg[1];
     GtkWidget *pathbar = pathbar_p->get_pathbar();
+    TRACE( "update_pathbar_f:: %s\n", path);
 
     if (!pathbar) return NULL;
     if (!path){
@@ -230,7 +232,7 @@ update_pathbar_f(void *data){
         gchar *name = (gchar *)g_object_get_data(G_OBJECT(children->data), "name");
         if (strcmp(name, "RFM_ROOT")==0 || strcmp(name, "<")==0) continue;
         //gchar *p = g_strdup_printf("%s%c", paths[i], G_DIR_SEPARATOR);
-        NOOP("(%d) comparing %s <--> %s\n", i, name, paths[i]);
+        TRACE( "(%d) comparing %s <--> %s\n", i, name, paths[i]);
         if (paths[i] && strcmp(name, paths[i]) == 0){
             g_free(pb_path);
             const gchar *p = (const gchar *)g_object_get_data(G_OBJECT(children->data), "path");
@@ -240,7 +242,7 @@ update_pathbar_f(void *data){
         }
         // Eliminate tail (only if tail will differ)
         if (paths[i] == NULL) break;
-        NOOP("Zapping tail: \"%s\"\n", paths[i]);
+        TRACE( "Zapping tail: \"%s\"\n", paths[i]);
         GList *tail = children;
         for (;tail && tail->data; tail = tail->next){
             gchar *name  = (gchar *)g_object_get_data(G_OBJECT(tail->data), "name");
@@ -265,7 +267,7 @@ update_pathbar_f(void *data){
             g_strdup(paths[i]);
         g_free(pb_path);
         pb_path = g;
-        NOOP("+++***** setting pbpath --> %s\n", pb_path);
+        TRACE( "+++***** setting pbpath --> %s\n", pb_path);
         g_object_set_data(G_OBJECT(pb_button), "path", g_strdup(pb_path));
         g_signal_connect (G_OBJECT(pb_button) , "clicked", G_CALLBACK (callback), (void *)pathbar_p);
         
