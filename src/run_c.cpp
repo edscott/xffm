@@ -506,13 +506,28 @@ GPid run_c::thread_run(const gchar *command){
     GError *error = NULL;
     gint argc;
     gchar **argv;
-    if(!g_shell_parse_argv (command, &argc, &argv, &error)) {
+    gboolean with_shell = FALSE;
+    const gchar *special = "\'*?<>|&";
+    if (strchr(command, '?')) with_shell = TRUE;
+    if (strchr(command, '*')) with_shell = TRUE;
+    if (strchr(command, '<')) with_shell = TRUE; 
+    if (strchr(command, '>')) with_shell = TRUE; 
+    if (strchr(command, '|')) with_shell = TRUE; 
+    if (strchr(command, '&')) with_shell = TRUE; 
+    if (strchr(command, '\'')) with_shell = TRUE;
+
+    gchar *ncommand;
+    if (with_shell) ncommand = g_strdup_printf("%s -c %s", rfm_shell(), command);
+    else ncommand = g_strdup(command);
+    if(!g_shell_parse_argv (ncommand, &argc, &argv, &error)) {
         gchar *msg = g_strcompress (error->message);
-        print_error("%s: %s\n", msg, command);
+        print_error("%s: %s\n", msg, ncommand);
+        g_free(ncommand);
         g_error_free (error);
         g_free (msg);
         return 0;
     }
+    g_free(ncommand);
     gchar *full_path = g_find_program_in_path(argv[0]);
     if (full_path){
         g_free(argv[0]);
