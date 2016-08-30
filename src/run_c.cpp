@@ -534,8 +534,6 @@ GPid run_c::thread_run(const gchar *command){
         argv[0] = full_path;
     }
     pid_t pid = thread_run((const gchar **)argv);
-    //if (pid)
-        csh_save_history(command);
     
     g_strfreev(argv);
     return pid;

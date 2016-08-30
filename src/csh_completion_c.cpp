@@ -6,7 +6,6 @@ csh_completion_c::csh_completion_c(void *data): bash_completion_c(data){
     csh_command_list = NULL;
     csh_cmd_save = NULL;
     csh_completing = FALSE;
-    csh_command_mutex = PTHREAD_MUTEX_INITIALIZER;
     csh_load_history();
 }
 
@@ -105,7 +104,6 @@ csh_completion_c::csh_place_command(const gchar *data){
 gpointer
 csh_completion_c::csh_load_history (void) {
     gchar *history = g_build_filename (CSH_HISTORY, NULL);
-    pthread_mutex_lock(&csh_command_mutex);
     GList *p;
     // clean out history list before loading a new one.
     for(p = csh_command_list; p; p = p->next) {
@@ -145,7 +143,6 @@ csh_completion_c::csh_load_history (void) {
     }
     g_free (history);
 	
-    pthread_mutex_unlock(&csh_command_mutex);
     return NULL;
 }
 
@@ -154,7 +151,6 @@ csh_completion_c::csh_save_history (const gchar * data) {
     GList *p;
     gchar *command_p = g_strdup(data);
     g_strstrip (command_p);
-    pthread_mutex_lock(&csh_command_mutex);
     // Get last registered command
     void *last = g_list_nth_data (csh_command_list, 1);
     if (last && strcmp((gchar *)last, command_p) == 0) {
@@ -166,7 +162,6 @@ csh_completion_c::csh_save_history (const gchar * data) {
     if(!csh_is_valid_command (command_p)) {
 	if(strcmp (command_p, "cd") != 0 && strncmp (command_p, "cd ", strlen ("cd ")) != 0) {
 	    DBG ("not saving %s\n", command_p);
-	    pthread_mutex_unlock(&csh_command_mutex);
 	    g_free(command_p);
 	    return;
 	}
@@ -179,12 +174,12 @@ csh_completion_c::csh_save_history (const gchar * data) {
 	// remove old position
 	csh_command_list=g_list_remove(csh_command_list, data);
 	// insert at top of list (item 0 is empty string)
-	csh_command_list = g_list_insert(csh_command_list, data, 1);
+	csh_command_list = g_list_insert(csh_command_list, data, 0);
 	goto save_to_disk;
     }
 
     // so the item was not found. proceed to insert
-    csh_command_list = g_list_insert(csh_command_list, command_p, 1);
+    csh_command_list = g_list_insert(csh_command_list, command_p, 0);
 
 save_to_disk:
     // rewrite history file
@@ -218,7 +213,6 @@ save_to_disk:
     }
     g_list_free (disk_history);
     g_free (history);
-    pthread_mutex_unlock(&csh_command_mutex);
     return;
 }
 

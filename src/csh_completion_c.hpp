@@ -24,7 +24,6 @@ class csh_completion_c: public bash_completion_c {
 	
 	void place_cursor(void);
 	
-        pthread_mutex_t csh_command_mutex;
         GList *csh_command_list;
         gint csh_command_counter;
 

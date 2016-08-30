@@ -351,6 +351,7 @@ lpterm_c::shell_command(const gchar *c){
     // FIXME: run through selected shell
 
     thread_run(command?command:c);
+    csh_save_history(command?command:c);
     
     g_free (command);
 

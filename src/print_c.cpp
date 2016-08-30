@@ -576,6 +576,23 @@ scroll_to_mark(GtkTextView *textview){
     return;
 }
 
+static gboolean trim_diagnostics(GtkTextBuffer *buffer){
+    gint line_count = gtk_text_buffer_get_line_count (buffer);
+    glong max_lines_in_buffer = 1000;
+    if (getenv("RFM_MAXIMUM_DIAGNOSTIC_LINES") && 
+	    strlen(getenv("RFM_MAXIMUM_DIAGNOSTIC_LINES"))){
+	errno = 0;
+	max_lines_in_buffer = 
+	    strtol(getenv("RFM_MAXIMUM_DIAGNOSTIC_LINES"), NULL, 10);
+	if (errno){
+	    max_lines_in_buffer = 1000;
+	}
+
+    }
+    if (line_count > max_lines_in_buffer) return TRUE;
+    return FALSE;
+}
+
 
 static void *
 print_f(void *data){
@@ -588,6 +605,10 @@ print_f(void *data){
     const gchar *string = (const gchar *)arg[2];
 
     GtkTextBuffer *buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (textview));
+    if (trim_diagnostics(buffer)){
+        print_p->clear_text();
+    }
+
     GtkTextTag **tags = resolve_tags(buffer, tag);
     if(string && strlen (string)) {
         insert_string (print_p, buffer, string, tags);
