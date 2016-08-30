@@ -517,7 +517,7 @@ GPid run_c::thread_run(const gchar *command){
     if (strchr(command, '\'')) with_shell = TRUE;
 
     gchar *ncommand;
-    if (with_shell) ncommand = g_strdup_printf("%s -c %s", rfm_shell(), command);
+    if (with_shell) ncommand = g_strdup_printf("%s -c \"%s\"", rfm_shell(), command);
     else ncommand = g_strdup(command);
     if(!g_shell_parse_argv (ncommand, &argc, &argv, &error)) {
         gchar *msg = g_strcompress (error->message);

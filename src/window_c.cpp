@@ -139,10 +139,11 @@ GtkNotebook *window_c::get_notebook(void) {return GTK_NOTEBOOK(notebook);}
 
 static void
 on_new_page(GtkWidget *widget, gpointer data){
-    // get current page
-    // get path
     window_c *window_p = (window_c *)data;
-    window_p->create_new_page(g_get_home_dir());
+    // get current page
+    view_c *view_p =(view_c *)window_p->get_active_view_p();
+    // get and set path
+    window_p->create_new_page(view_p->get_path());
 }
 
 static void
