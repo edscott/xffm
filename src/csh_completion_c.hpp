@@ -13,6 +13,7 @@ class csh_completion_c: public bash_completion_c {
 	void csh_completion_init(void);
         gboolean csh_completion(gint, gint);
         void csh_save_history (const gchar *);
+        void csh_set_completing(gboolean);
 
 	
     private:
@@ -30,6 +31,7 @@ class csh_completion_c: public bash_completion_c {
 	gint csh_cmd_len;
 	gchar *csh_cmd_save;
 	gint csh_nth;
+        gboolean csh_completing;
 
 };
 

@@ -1,25 +1,27 @@
+#define DEBUG_TRACE 1
 #include "csh_completion_c.hpp"
 #include "view_c.hpp"
 
 csh_completion_c::csh_completion_c(void *data): bash_completion_c(data){
     csh_command_list = NULL;
     csh_cmd_save = NULL;
+    csh_completing = FALSE;
     csh_command_mutex = PTHREAD_MUTEX_INITIALIZER;
     csh_load_history();
 }
 
-
+void 
+csh_completion_c::csh_set_completing(gboolean state){ csh_completing = state;}
 
 gboolean
 csh_completion_c::csh_completion(gint direction, gint offset){
-	    fprintf(stderr, "lpterm_c::csh_completion:.\n");
 
     if (!csh_cmd_save) {
 	// initialize csh completion.
 	csh_cmd_save = get_current_text ();
 	if (!csh_cmd_save || !strlen(csh_cmd_save)) {
 	    // empty line: no completion attempted.
-	    fprintf(stderr,"lpterm_c::csh_completion: empty line: no completion attempted.\n");
+	    TRACE("lpterm_c::csh_completion: empty line: no completion attempted.\n");
 	    g_free(csh_cmd_save);
 	    csh_cmd_save = NULL;
 	    csh_offset_history(0);
@@ -30,10 +32,10 @@ csh_completion_c::csh_completion(gint direction, gint offset){
     // cursor_position is a GtkTextBuffer internal property (read only)
     GtkTextBuffer *buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW(status));
     g_object_get (G_OBJECT (buffer), "cursor-position", &csh_cmd_len, NULL);
-    fprintf (stderr, "lpterm_c::csh_completion: to cursor position=%d \n", csh_cmd_len);
-    if (!csh_cmd_len) {
+    TRACE( "lpterm_c::csh_completion: to cursor position=%d \n", csh_cmd_len);
+    if (!csh_cmd_len || !csh_completing) {
 	// no text before cursor: no completion attempted.
-	fprintf (stderr,"lpterm_c::csh_completion: return on !csh_cmd_len\n");
+	TRACE("lpterm_c::csh_completion: return on !csh_cmd_len\n");
 	csh_offset_history(offset);
 
         return FALSE;
@@ -55,7 +57,7 @@ csh_completion_c::csh_completion(gint direction, gint offset){
     } else {
 	// down arrow.
 	if (csh_nth > 0) csh_nth--;
-        fprintf(stderr, "cshnth=%d\n",csh_nth); 
+        TRACE( "cshnth=%d\n",csh_nth); 
 	GList *list = g_list_nth(csh_command_list, csh_nth);
 	for (;list && list->data && csh_nth>0;list=list->prev, csh_nth--){
 	    csh_cmd_found = (gchar *)list->data;
@@ -76,7 +78,7 @@ csh_completion_c::csh_completion(gint direction, gint offset){
 	return TRUE;    
     } 
     if (!csh_nth){
-	    fprintf(stderr, "lpterm_c::csh_completion: back to original command: %s.\n", csh_cmd_save);
+	    TRACE( "lpterm_c::csh_completion: back to original command: %s.\n", csh_cmd_save);
 	    csh_place_command(csh_cmd_save);
 	    csh_completion_init();
 	    return TRUE;
@@ -90,7 +92,7 @@ void
 csh_completion_c::csh_completion_init(void){
     g_free(csh_cmd_save);
     csh_cmd_save = NULL;
-
+    csh_completing = FALSE;
 }
 
 void 
@@ -255,7 +257,6 @@ csh_completion_c::csh_is_valid_command (const gchar *cmd_fmt) {
             path = g_strdup (argv[0]);
         }
     }
-    NOOP ("mime_is_valid_command(): g_find_program_in_path(%s)=%s\n", argv[0], path);
 
     if(!path) {
         g_strfreev (argv);
@@ -282,7 +283,7 @@ csh_completion_c::csh_offset_history(gint offset){
     if (item < 0) item = 0;
     if (item >= g_list_length(csh_command_list)) item = g_list_length(csh_command_list) - 1;
     const gchar *p = (const gchar *)g_list_nth_data (csh_command_list, item<0?0:item);
-    fprintf (stderr, "get csh_nth csh_command_counter=%d offset=%d item=%d\n", csh_command_counter, offset, item);
+    TRACE( "csh_completion_c::csh_offset_history: get csh_nth csh_command_counter=%d offset=%d item=%d\n", csh_command_counter, offset, item);
     if (csh_command_counter + offset < 0) p = "";
     if(p) {
 	csh_command_counter = item;
@@ -298,7 +299,13 @@ void
 csh_completion_c::place_cursor(void){
     GtkTextIter iter;
     GtkTextBuffer *buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW(status));
-    gtk_text_buffer_get_iter_at_offset (buffer, &iter, csh_cmd_len);
+    if (csh_completing) {
+        gtk_text_buffer_get_iter_at_offset (buffer, &iter, csh_cmd_len);
+    } else {
+        gchar *text = get_current_text ();
+        gtk_text_buffer_get_iter_at_offset (buffer, &iter, strlen(text));
+        g_free(text);
+    }
     gtk_text_buffer_place_cursor (buffer, &iter);
 }
 

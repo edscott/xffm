@@ -464,31 +464,9 @@ lpterm_c::lpterm_keyboard_event( GdkEventKey * event, gpointer data) {
         gint offset = (event->keyval == GDK_KEY_Up)?1:0-1; 
         if (csh_completion(completion, offset)) return TRUE;
 	return TRUE;
+    } else if (event->keyval >= GDK_KEY_space && event->keyval <= GDK_KEY_asciitilde){
+        csh_set_completing(TRUE);
     }
-#if 0
-    // hack
-    if(event->keyval >= GDK_KEY_BackSpace){
-	if (csh_cmd_len) csh_cmd_len--;
-    }
-    if((event->keyval >= GDK_KEY_space && event->keyval <= GDK_KEY_asciitilde)
-	    || (event->keyval == GDK_KEY_Right) 
-	    || (event->keyval == GDK_KEY_Left)
-	    || (event->keyval == GDK_KEY_End)
-	    || (event->keyval == GDK_KEY_Home)  ) {
-
-	gchar *command = get_current_text();
-	// at this point key has not been appended to the text, so 
-	// we add it on (not valid for motion)
-	if (event->keyval == GDK_KEY_End) csh_cmd_len = strlen(command);
-	else if (event->keyval == GDK_KEY_Home) csh_cmd_len = 0;
-	else if (event->keyval == GDK_KEY_Left) csh_cmd_len--;
-	else if (event->keyval == GDK_KEY_Right){
-	    if (csh_cmd_len < strlen(command))csh_cmd_len++;
-	} else csh_cmd_len++;
-	g_free(command);
-	TRACE("lpterm_c::lpterm_keyboard_event: csh_cmd_len = %d\n", csh_cmd_len);
-    }
-#endif
     gboolean retval;
     g_signal_emit_by_name ((gpointer)status, "key-press-event", event, &retval);
     return retval;
