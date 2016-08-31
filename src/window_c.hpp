@@ -19,6 +19,7 @@ class window_c {
         gboolean is_view_in_list(void *);
         void add_view_to_list(void *);
         void remove_view_from_list(void *);
+        const gchar *xffm_shell(void);
     private:
         void set_up_view_signals(void *);
         GtkNotebook *notebook;
@@ -31,6 +32,10 @@ class window_c {
                 
         GList *view_list;
         pthread_mutex_t view_list_mutex;
+
+        const gchar *default_shell(void);
+        gchar *shell;
+
 
 };
 

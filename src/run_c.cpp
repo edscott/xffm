@@ -271,7 +271,7 @@ fork_function (void *data) {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-run_c::run_c(void *data): csh_completion_c(data) {}
+run_c::run_c(void *data): run_output_c(data) {}
 
 GPid run_c::thread_run(const gchar **arguments){
 
@@ -340,345 +340,11 @@ GPid run_c::thread_run(const gchar *command){
 
 #if 0
 
-typedef struct thread_run_t {
-    char *wd;
-    char **argv;
-} thread_run_t;
-
-typedef struct run_data_t {
-    widgets_t *widgets_p;
-    union {
-        pid_t controller;
-        pid_t pid;
-    };
-    pid_t grandchild;
-    gchar *command;
-    gchar *workdir;
-    gchar *icon;
-    GtkWidget *button;
-} run_data_t;
 
 /***************  threaded ****************/
 
 
-static
-  gboolean
-check_sudo (void) {
-    return TRUE;
-}
-
-
-// This is a thread function, must have GDK mutex set for gtk commands...
-static
-void
-run_fork_finished_function (void *user_data) {
-    //widgets_t *widgets_p = user_data;
-    // decrement thread count here
-
-#if 0
-    gchar *g = g_strdup_printf ("Cleanup: %d> pid=%d", Tubo_id () - 1, getpid());
-    if(rfm_threaded_diagnostics_is_visible (widgets_p)) {
-        rfm_threaded_diagnostics (widgets_p, "xffm_tag/command_id", g);
-        rfm_threaded_diagnostics (widgets_p, "xffm/stock_no", g_strdup("\n"));
-    }
-#endif
-
-}
-
-static pthread_mutex_t fork_mutex=PTHREAD_MUTEX_INITIALIZER;
-static void
-fork_function (void *data) {
-    gchar **argv = (char **)data;
-
-    gint i = 0;
-    static gchar *sudo_cmd=NULL;
-    pthread_mutex_lock(&fork_mutex);
-    g_free(sudo_cmd);
-    sudo_cmd=NULL;
-    for(i=0; argv && argv[i] && i < 5; i++) {
-	if(!sudo_cmd && 
-		(strstr (argv[i], "sudo") ||
-		 strstr (argv[i], "ssh")  ||
-		 strstr (argv[i], "rsync")  ||
-		 strstr (argv[i], "scp"))) {
-	    sudo_cmd=g_strdup_printf("<b>%s</b> ", argv[i]);
-	    continue;
-	} 	
-	if (sudo_cmd){
-	    if (strchr(argv[i], '&')){
-	        gchar **a = g_strsplit(argv[i], "&", -1);
-		gchar **p=a;
-		for (;p && *p; p++){
-		    gchar *space = (strlen(*p))?" ":"";
-		    gchar *amp = (*(p+1))?"&amp;":"";
-		    gchar *g = g_strconcat(sudo_cmd,  space, "<i>",*p, amp, "</i>", NULL);
-		    g_free(sudo_cmd);
-		    sudo_cmd=g;
-		}
-		g_strfreev(a);
-	    } else {
-		gchar *a = g_strdup(argv[i]);
-		if (strlen(a) >13) {
-		    a[12] = 0;
-		    a[11] = '.';
-		    a[10] = '.';
-		    a[9] = '.';
-		}
-		gchar *g = g_strconcat(sudo_cmd,  " <i>",a, "</i>", NULL);
-		g_free(a);
-		g_free(sudo_cmd);
-		sudo_cmd=g;
-	    }
-	}
-    }
-
-
-    if (i>=MAX_COMMAND_ARGS - 1) {
-    	NOOP("%s: (> %d)\n", strerror(E2BIG), MAX_COMMAND_ARGS);
-	argv[MAX_COMMAND_ARGS - 1]=NULL;
-    }
-
-    if (sudo_cmd) {
-	gchar *g = g_strconcat(sudo_cmd,  "\n", NULL);
-	g_free(sudo_cmd);
-	sudo_cmd = g;
-	// This  function makes copies of the strings pointed to by name and value
-        // (by contrast with putenv(3))
-	setenv("RFM_ASKPASS_COMMAND", sudo_cmd, 1);
-	g_free(sudo_cmd);
-    } else {
-	setenv("RFM_ASKPASS_COMMAND", "", 1);
-    }
-    pthread_mutex_unlock(&fork_mutex);
-    execvp (argv[0], argv);
-    g_warning ("CHILD could not execvp: this should not happen\n");
-    g_warning ("Do you have %s in your path?\n", argv[0]);
-    rfm_threadwait ();
-    _exit (123);
-}
-
-// This is main thread callback
-static void
-show_run_info (GtkButton * button, gpointer data) {
-    if (g_thread_self() != rfm_get_gtk_thread()){
-	g_error("show_run_info() is a main thread function\n");
-    }
-    run_data_t *run_data_p = data;
-    guint button_id = GPOINTER_TO_UINT(g_object_get_data(G_OBJECT(button), "button_id"));
-    if (rfm_void(PLUGIN_DIR, "ps", "module_active")){
-	if (button_id == 3){
-	    NOOP(stderr, "ps popup now... \n");
-	    record_entry_t *en = rfm_mk_entry(0);
-	    en->type=0; /* remove local-type attributes */
-	    en->st = (struct stat *)malloc(sizeof(struct stat));
-	    if (!en->st) g_error("malloc: %s\n", strerror(errno));
-	    memset(en->st,0,sizeof(struct stat));
-
-	    pid_t child = Tubo_child(run_data_p->pid);
-	    en->path = g_strdup_printf("%d:%s", child, run_data_p->command);
-	    en->st->st_uid = child;
-	    
-	    rfm_rational(PLUGIN_DIR, "ps", NULL, en, "private_popup");
-	    NOOP(stderr, "popup mapped...\n");
-	    return;
-	}
-	gchar *ps_module = g_find_program_in_path("rodent-plug");
-	if (ps_module) {
-	    gchar *command=g_strdup_printf("%s ps %d",
-		    ps_module, (gint) run_data_p->pid);
-	    GError *error=NULL;
-	    if (!g_spawn_command_line_async (command, &error)){
-		g_warning("%s: %s\n", ps_module, error->message);
-		g_error_free(error);
-		g_free(command);
-		// here we default to the terminate dialog...
-	    } else {
-		g_free(command);
-		return;
-	    }
-	}
-    } else { // no rodent-ps
-	if (button_id == 3) return;
-	
-	gchar *text2 =g_strdup_printf ("%s %s: %s\n\n%s %s (%d)?",
-		_("Kill (KILL)"), run_data_p->command, 
-		strerror(ETIMEDOUT), 
-		_("Kill"), run_data_p->command, run_data_p->pid);
-	if(rfm_confirm (run_data_p->widgets_p, GTK_MESSAGE_QUESTION, text2, _("No"), _("Yes"))) {
-	    // SIGUSR2 will pass on a SIGKILL signal
-	    gchar *gg = g_strdup_printf ("%d", (int)(run_data_p->pid));
-	    rfm_diagnostics (run_data_p->widgets_p, "xffm/stock_dialog-warning", NULL);
-	    rfm_diagnostics (run_data_p->widgets_p, "xffm_tag/command_id",
-		    _("Kill (KILL)"), " ", gg, "\n", NULL);
-	    g_free (gg);
-	    kill (run_data_p->pid, SIGUSR2);
-	}
-	g_free (text2);
-    }
-}
-
-static void *
-make_run_data_button (gpointer data) {
-    run_data_t * run_data_p = data;
-    if(run_data_p->widgets_p->button_space) {
-	pid_t pid = Tubo_child(run_data_p->pid);
-	if (pid < 0) {
-	    TRACE("Tubo_child  < 0\n");
-	    return NULL;
-	}
-	gchar *text = g_strdup(_("Left click once to follow this link.\nMiddle click once to select this cell"));
-	if (strstr(text, "\n")) *strstr(text, "\n") = 0;
-	gchar *short_command = g_strdup(run_data_p->command);
-	if (strlen(short_command) > 80){
-	    short_command[76] = ' ';
-	    short_command[77] = '.';
-	    short_command[78] = '.';
-	    short_command[79] = '.';
-	}
-	gchar *tip=g_strdup_printf("%s\n(%s=%d)\n%s\n%s",  
-		short_command, _("PID"), pid,
-	      _("Right clicking pops context menu immediately"),
-	      text);
-	g_free(short_command);
-	g_free(text);
-	const gchar *icon_id = run_data_p->icon;
-	if (!icon_id || !rfm_get_pixbuf(icon_id, SIZE_BUTTON)){
-	    icon_id=(rfm_void(PLUGIN_DIR, "ps", "module_active"))?
-		"xffm/stock_execute": "xffm/stock_stop";
-	}
-	
-        run_data_p->button =
-            rfm_mk_little_button (icon_id,
-                                  (gpointer) show_run_info, run_data_p,
-				  tip);
-	g_free(tip);
-        gtk_box_pack_end (GTK_BOX (run_data_p->widgets_p->button_space), run_data_p->button, FALSE, FALSE, 0);
-        gtk_widget_show (run_data_p->button);
-        // flush gtk
-        while (gtk_events_pending()) gtk_main_iteration();
-        NOOP ("DIAGNOSTICS:srun_button made for grandchildPID=%d\n", (int)run_data_p->pid);
-    }
-    return NULL;
-}
-
-static void *
-zap_run_button(gpointer data){
-	    NOOP(stderr, "zap_run_button...\n");
-    run_data_t *run_data_p = data;
-    if(run_data_p->button && GTK_IS_WIDGET(run_data_p->button)){
-        gtk_widget_hide(GTK_WIDGET (run_data_p->button));
-        gtk_widget_destroy (GTK_WIDGET (run_data_p->button));
-    }
-    g_free (run_data_p->command);
-    g_free (run_data_p->icon);
-    g_free (run_data_p->workdir);
-    g_free (run_data_p);
-    return NULL;
-}
-
 // This is a thread function...
-static gpointer
-thread_run_f (gpointer data) {
-    run_data_t *run_data_p = (run_data_t *) data;
-
-    /* create little button (note: thread protected within subroutine) */
-    // The following function will not return until button is created and duly
-    // processed by the gtk loop. This to avoid a race with the command completing
-    // before gtk has fully created the little run button.
-    rfm_context_function(make_run_data_button, run_data_p);
-    NOOP ("grand---thread waitpid for %d on (%s/%s)\n", run_data_p->pid, run_data_p->command, run_data_p->workdir);
-
-    gint status;
-    waitpid (run_data_p->pid, &status, 0);
-
-    NOOP (stderr, "grand---thread waitpid for %d complete!\n", run_data_p->pid);
-    /* remove little button (thread protect gtk here) */
-    
-#ifdef DEBUG_TRACE    
-    // This is out of sync here (grayball), so only in debug mode.
-    gchar *t = run_start_string(run_data_p->command, run_data_p->controller, FALSE);
-    rfm_threaded_diagnostics (run_data_p->widgets_p, "xffm/emblem_grayball", t);
-#endif
-    
-    rfm_global_t *rfm_global_p = rfm_global();
-    if (rfm_global_p) {
-        TRACE("thread_run_f(): trigger reload...\n");
-        // Trigger reload to all tabbed views.
-        GSList **list_p = rfm_view_list_lock(NULL, "thread_run_f");
-        if (!list_p) return NULL;
-        g_mutex_lock(rfm_global_p->status_mutex);
-        gint status = rfm_global_p->status;
-        g_mutex_unlock(rfm_global_p->status_mutex);
-        if (status == STATUS_EXIT) {
-            rfm_view_list_unlock("thread_run_f");
-            return NULL;
-        }
-    
-        GSList *list = *list_p;
-        for (; list && list->data; list = list->next){
-              view_t *view_p = list-> data;
-              // Skip modules...
-              // (otherwise smb module goes berserk)
-              if (view_p->module && !strstr(view_p->module, "fstab") ) continue;
-              if (!xfdir_monitor_control_greenlight(&(view_p->widgets))) {
-                  TRACE("++ run.i triggered reload...\n");
-                  // XXX: disabling automatic refresh to test if
-                  // it is responsible for iconview_key/update_f deadlock...
-                    //rodent_trigger_reload(view_p);
-              }
-        }
-        rfm_view_list_unlock("2 thread_run_f");
-    }
-
-
-    // Run has completed.  
-    // no use for controller process anymore....
-    NOOP(stderr, "run has completed: %d\n", run_data_p->pid);
-    rfm_remove_child(run_data_p->pid);
-    // Flush pipes.
-    fflush(NULL);  
-    // Destroy little button (if exists) and free run_data_p 
-    // associated memory. Done in main thread for gtk instruction set.
-    rfm_context_function(zap_run_button, run_data_p);
-    return NULL;
-}
-
-
-static void
-setup_run_button_thread (widgets_t * widgets_p, const gchar * exec_command, pid_t child) {
-    NOOP ("setup_run_button_thread(), grandchildPID=%d\n", (int)child);
-    run_data_t *run_data_p = (run_data_t *) malloc (sizeof (run_data_t));
-    if (!run_data_p) g_error("malloc: %s", strerror(errno));
-    memset (run_data_p, 0, sizeof (run_data_t));
-
-
-    run_data_p->pid = child;
-    run_data_p->grandchild = Tubo_child(child);
-    run_data_p->command = g_strdup (exec_command);
-    // Little icon assignment
-    // Shell commands come from lpterminal.
-    gchar **args = g_strsplit(exec_command, " ", -1);
-    if (args && args[0]) {
-	gchar *shell = rfm_shell();
-	if (strcmp(shell, args[0])==0) run_data_p->icon = g_strdup("xffm/emblem_terminal");
-	else {
-	    run_data_p->icon = g_path_get_basename(args[0]);
-	    NOOP(stderr, ".... %s : %s\n", run_data_p->icon, exec_command);
-	}
-	g_free(shell);
-    }
-    g_strfreev(args);
-
-    if (widgets_p->workdir) {
-	run_data_p->workdir = g_strdup (widgets_p->workdir);
-    } else {
-	run_data_p->workdir = g_strdup (g_get_home_dir());
-    }
-    run_data_p->widgets_p = widgets_p;
-
-    view_t *view_p = widgets_p->view_p;
-    rfm_view_thread_create(view_p, thread_run_f, (gpointer) run_data_p, "thread_run_f");
-}
 
 static pid_t
 thread_run (
@@ -851,7 +517,554 @@ private_rfm_thread_run_argv (
     return controller;
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+static const gchar *terminals_v[] = {
+	"roxterm", 
+	"sakura",
+	"gnome-terminal", 
+	"Eterm", 
+	"konsole", 
+	"Terminal", 
+	"aterm", 
+	"xterm", 
+	"kterm", 
+	"wterm", 
+	"multi-aterm", 
+	"evilvte",
+	"mlterm",
+	"xvt",
+	"rxvt",
+	"urxvt",
+	"mrxvt",
+	"tilda",
+	NULL
+};
+
+static const gchar *editors_v[] = {
+	"gvim -f",  
+	"mousepad", 
+	"gedit", 
+	"kate", 
+	"xemacs", 
+	"nano",
+	"vi",
+	NULL
+};
+
+const gchar **rfm_get_terminals(void) {return terminals_v;}
+const gchar **rfm_get_editors(void) {return editors_v;}
+
+static GSList *children_list=NULL;
+
+static pthread_mutex_t children_list_mutex = PTHREAD_MUTEX_INITIALIZER;
+
+void rfm_remove_child(pid_t child){
+    if (!children_list) return;
+    pthread_mutex_lock(&(children_list_mutex));
+    children_list = g_slist_remove(children_list, GINT_TO_POINTER(child));
+    pthread_mutex_unlock(&(children_list_mutex));
+    return;
+}
+
+void rfm_killall_children(void){
+    TRACE("rfm_killall_children(): signalling controller children...\n");
+    pthread_mutex_lock(&(children_list_mutex));
+
+    GSList *list = children_list;
+    for (;list && list->data; list = list->next){
+	pid_t child = GPOINTER_TO_INT(list->data);
+	TRACE( "ZZZZZZZ--- killing %d\n", child);
+	kill(child, SIGTERM);
+
+    }
+    g_slist_free(children_list);
+    children_list = NULL;
+    pthread_mutex_unlock(&(children_list_mutex));
+
+}
+
+void rfm_add_child(pid_t child){ 
+    pthread_mutex_lock(&(children_list_mutex));
+    NOOP(stderr, "adding %d to children_list\n", child);
+    children_list = g_slist_prepend(children_list, GINT_TO_POINTER(child));
+    pthread_mutex_unlock(&(children_list_mutex));
+
+    return;
+}
+
+gchar * 
+rfm_get_text_editor_envar(const gchar *value){
+    if(!value) return NULL;
+    
+    gchar *editor=g_path_get_basename(value);
+    // if nano or vi, then use terminal emulator
+    if (editor && 
+	    (strncmp(editor, "vi",strlen("vi"))==0 
+	     || 
+	     strncmp(editor, "nano",strlen("nano"))==0)){
+	const gchar *t=getenv("TERMINAL_CMD");
+	gchar *term = g_find_program_in_path(t);
+	if (term) g_free(term);
+	else {
+	    t=NULL;
+	    gint i;
+	    for (i=0; terminals_v[i]; i++){
+		// sakura is broken... 
+		if (strstr(terminals_v[i], "sakura")) continue;
+		term = g_find_program_in_path(terminals_v[i]);
+		if (term){
+		    t=terminals_v[i];
+		    g_free(term);
+		    break;
+		}
+	    }
+	}
+	if (t && strlen(t)) {
+	    gchar *b=g_strdup_printf("%s %s %s",
+		    t, rfm_term_exec_option(t), editor);
+	    g_free(editor);
+	    editor = b;
+	}
+    } else {
+	g_free(editor);
+	editor = g_strdup(value);
+    }
+    return (editor);
+}
+
+///////
+static pthread_mutex_t *
+get_command_history_mutex(void){
+    static pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+    return &mutex;
+}
+//////////////// Module wraparounds ////////////////////////////
+//
+// Use rfm_thread_run_argv or rfm_thread_run?
+// rfm_thread_run_argv will execute directly, not via a shell, and will
+// not be saved in the lpterm history
+
+// rfm_thread_run_argv:
+// This modality will execute the command without shell
+
+
+// rfm_thread_run:
+// This modality will execute the command via "sh -c" and allow pipes and 
+// redirection. and will be saved in the lpterm history file
+    
+pid_t
+rfm_thread_run_argv (
+	widgets_t * widgets_p, 
+	gchar ** argv, 
+	gboolean interm
+	){
+    const void *vector[]={widgets_p, argv, GINT_TO_POINTER(interm), NULL,  NULL, NULL, NULL, NULL};
+    return GPOINTER_TO_INT(rfm_vector_run(RFM_MODULE_DIR, "run", GINT_TO_POINTER(7),
+		    vector, "m_thread_run_argv"));
+}
+
+pid_t
+rfm_thread_run_argv_full (
+	widgets_t * widgets_p, 
+	gchar ** argv, 
+	gboolean interm,
+	gint *stdin_fd,
+	void (*stdout_f) (void *stdout_data,
+                      void *stream,
+                      int childFD),
+	void (*stderr_f) (void *stdout_data,
+                      void *stream,
+                      int childFD),
+	void (*tubo_done_f) (void *data)
+	){
+    if (!argv || !argv[0]) return 0;
+    const void *vector[]={widgets_p, argv, GINT_TO_POINTER(interm), stdin_fd,  stdout_f, stderr_f, tubo_done_f};
+    return GPOINTER_TO_INT(rfm_vector_run(RFM_MODULE_DIR, "run", GINT_TO_POINTER(7),
+		    vector, "m_thread_run_argv"));
+
+ }
+
+pid_t
+rfm_thread_run_argv_with_stdin (
+	widgets_t * widgets_p, 
+	gchar ** argv, 
+	gboolean interm, 
+	gint *stdin_fd
+    	){
+    const void *vector[]={widgets_p, argv, GINT_TO_POINTER(interm), stdin_fd,  NULL, NULL, NULL};
+    return GPOINTER_TO_INT(rfm_vector_run(RFM_MODULE_DIR, "run", GINT_TO_POINTER(7),
+		    vector, "m_thread_run_argv"));
+
+ 
+}
+
+pid_t
+rfm_thread_run_argv_with_stdout (
+	widgets_t * widgets_p, 
+	gchar ** argv, 
+	gboolean interm, 
+	void (*stdout_f) (void *stdout_data,
+                      void *stream,
+                      int childFD)
+	){
+    const void *vector[]={widgets_p, argv, GINT_TO_POINTER(interm), NULL,  stdout_f, NULL, NULL};
+    return GPOINTER_TO_INT(rfm_vector_run(RFM_MODULE_DIR, "run", GINT_TO_POINTER(7),
+		    vector, "m_thread_run_argv"));
+
+    
+}
+
+pid_t
+rfm_thread_run_argv_with_stderr (
+	widgets_t * widgets_p, 
+	gchar ** argv, 
+	gboolean interm, 
+	void (*stderr_f) (void *stderr_data,
+                      void *stream,
+                      int childFD)
+	){
+    const void *vector[]={widgets_p, argv, GINT_TO_POINTER(interm), NULL,  NULL, stderr_f, NULL};
+    return GPOINTER_TO_INT(rfm_vector_run(RFM_MODULE_DIR, "run", GINT_TO_POINTER(7),
+		    vector, "m_thread_run_argv"));
+
+}
+////////////////////////////////////////////////////////////////////////////
+
+void
+rfm_recover_flags (gchar * in_cmd, gboolean * interm, gboolean * hold) {
+    DBHashTable *runflags;
+    GString *gs;
+    int *flags;
+    gchar *g = g_build_filename ( RUN_FLAG_FILE, NULL);
+    TRACE("opening %s...\n",g); 
+    if((runflags = dbh_new (g, NULL, DBH_READ_ONLY|DBH_PARALLEL_SAFE)) == NULL) {
+        TRACE ("Cannot open %s\n", g);
+        *interm = 0;
+        *hold = 0;
+        return;
+    }
+    TRACE("opened %s.\n",g); 
+    dbh_set_parallel_lock_timeout(runflags, 3);
+    gs = g_string_new (in_cmd);
+    sprintf ((char *)DBH_KEY (runflags), "%10u", g_string_hash (gs));
+    g_string_free (gs, TRUE);
+    flags = (int *)runflags->data;
+    dbh_load (runflags);
+    *interm = flags[0];
+    *hold = flags[1];
+    dbh_close (runflags);
+
+    NOOP ("flags recovered from dbh file for %s, interm=%d hold=%d\n", in_cmd, *interm, *hold);
+}
+
+ 
+const gchar * 
+rfm_term_exec_option(const gchar *terminal) {
+    const gchar *exec_option = "-e";
+    gchar *t = g_path_get_basename (terminal);
+    if(strcmp (t, "gnome-terminal") == 0 || strcmp (t, "Terminal") == 0)
+            exec_option = "-x";
+    g_free(t);
+    return exec_option;
+}
+
+const gchar *
+rfm_what_term (void) {
+    const gchar *term=getenv ("TERMINAL_CMD");
+    gchar *t=NULL;
+    if(term && strlen (term)) {
+	if (strchr(term, ' ')){
+	    gchar **g = g_strsplit(term, " ", -1);
+	    t = g_find_program_in_path (g[0]);
+	    g_strfreev(g);
+	} else {
+	    t = g_find_program_in_path (term);
+	}
+    }
+    if(!t) {
+	    const gchar **p=terminals_v;
+	    for (;p && *p; p++){
+		t = g_find_program_in_path (*p);
+		if (t) {
+		    term=*p;
+		    break;  
+		}  
+	    }
+    }
+    if (t) {
+	g_free(t);
+	return term;
+    }
+    DBG ("TERMINAL_CMD=%s: %s\n", getenv ("TERMINAL_CMD"), strerror (ENOENT));
+
+    return NULL;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+G_MODULE_EXPORT
+void *
+rfm_thread_run (widgets_t * widgets_p, const gchar * command, void *interm) {
+
+    pid_t controller;
+    gchar *exec_command;
+    if(interm) {
+        const gchar *term = rfm_what_term ();
+        const char *exec_option = rfm_term_exec_option(term);
+        exec_command = g_strconcat (term, " ", exec_option, " ", command, NULL);
+	//fprintf(stderr, "exec command= %s\n", exec_command);
+    } else
+        exec_command = g_strdup (command);
+    gchar *save_command = g_strdup (exec_command);
+    g_strstrip (exec_command);
+    if(strncmp (exec_command, "sudo", strlen ("sudo")) == 0 && strncmp (exec_command, "sudo -A", strlen ("sudo -A")) != 0) {
+        check_sudo ();
+        gchar *nc = g_strdup_printf ("sudo -A %s", exec_command + strlen ("sudo"));
+        g_free (exec_command);
+        exec_command = nc;
+    }
+
+    gchar *argv[5];
+    gint i=0;
+
+    gchar *shell = rfm_shell();
+    if (!shell){
+	DBG("No valid shell found\n");
+    }
+    argv[i++] = shell;
+    argv[i++] = "-c";
+    argv[i++] = exec_command;
+    argv[i++] = NULL;
+
+    controller = thread_run (widgets_p, argv, NULL, NULL, NULL, NULL);
+    gboolean visible;
+    rfm_global_t *rfm_global_p = rfm_global();
+    if (rfm_global_p ) {
+	visible = rfm_threaded_diagnostics_is_visible (widgets_p);
+    } else {
+	visible = rfm_diagnostics_is_visible (widgets_p);
+    }
+    if(visible) {
+        gchar *g = rfm_diagnostics_start_string(exec_command, controller, TRUE);
+        if (rfm_global_p ) {
+            rfm_diagnostics (widgets_p, "xffm/emblem_greenball", g, NULL);
+            g_free(g);
+        } else {
+            rfm_threaded_diagnostics (widgets_p, "xffm/emblem_greenball", g);
+        }
+    }
+     if(controller > 0) {
+	gchar *run_button_text = g_strdup_printf("%s -c \"%s\"", shell, exec_command);
+        setup_run_button_thread (widgets_p, run_button_text, controller);
+	g_free(run_button_text);
+    }
+    // instead of disposing of exec_command, we will save command 
+    // in the sh_command history 
+    rfm_save_sh_command_history (widgets_p->view_p, save_command);
+    // do not do this: g_free(save_command); 
+    // because save_command gets put into the history GList.
+    g_free(shell);
+    g_free (exec_command);
+    return  GINT_TO_POINTER(controller);
+}
+
+
+// Use rfm_thread_run_argv or rfm_thread_run?
+// rfm_thread_run_argv will execute directly, not via a shell, and will
+// not be saved in the lpterm history
+
+// rfm_thread_run_argv:
+// This modality will execute the command without shell
+G_MODULE_EXPORT
+void *
+rfm_thread_run2argv (widgets_t * widgets_p, const gchar * in_command, void *interm) {
+    // do the call with argv so that command not saved in lpterm history
+    gint argcp;
+    gchar **argvp;
+    pid_t child;
+    gchar *command = g_strdup(in_command);
+    g_strstrip (command);
+    if(strncmp (command, "sudo", strlen ("sudo")) == 0 && strncmp (command, "sudo -A", strlen ("sudo -A")) != 0) {
+	gchar *nc = NULL;
+        check_sudo ();
+        nc = g_strdup_printf ("sudo -A %s", command + strlen ("sudo"));
+	g_free(command);
+	command = nc;
+    }
+    if(g_shell_parse_argv (command, &argcp, &argvp, NULL)) {
+        NOOP ("OPEN: rfm_thread_run_argv\n");
+        // this should always work
+        child = rfm_thread_run_argv (widgets_p, argvp, GPOINTER_TO_INT(interm));
+        g_strfreev (argvp);
+    } else {
+        DBG ("failed to parse command with g_shell_parse_argv() at run.c\n");
+        child = GPOINTER_TO_INT(rfm_thread_run (widgets_p, command, interm));
+    }
+    g_free(command);
+    return GINT_TO_POINTER(child);
+}
+
+
+G_MODULE_EXPORT
+void *
+rfm_try_sudo (widgets_t * widgets_p, gchar ** argv, void *interm) {
+    
+    gint i;
+    gint j=0;
+    gchar *exec_argv[MAX_COMMAND_ARGS];
+
+    check_sudo ();
+    exec_argv[j++] = "sudo";
+    exec_argv[j++] = "-A";
+    for(i = 0; argv[i] != NULL && j < MAX_COMMAND_ARGS - 2; i++) {
+        NOOP (" %s", argv[i]);
+        exec_argv[j++] = argv[i];
+    }
+
+
+
+    rfm_threaded_show_text(widgets_p);
+    if (j==MAX_COMMAND_ARGS - 1) {
+    	rfm_threaded_diagnostics(widgets_p,"xffm/stock_dialog-warning",NULL);
+        gchar *max=g_strdup_printf("%d",MAX_COMMAND_ARGS);
+        rfm_threaded_diagnostics (widgets_p, "xffm_tag/stderr", g_strconcat(strerror(E2BIG)," (> ",max,")","\n", NULL));
+        g_free(max);
+    }
+    
+
+    exec_argv[j++] = NULL;
+    NOOP (" \n");
+
+    pid_t child =
+	private_rfm_thread_run_argv(widgets_p, exec_argv, 
+		GPOINTER_TO_INT(interm), 
+		NULL, NULL, NULL, NULL);
+    return GINT_TO_POINTER(child);
+}
+
+///   vector function... 
+G_MODULE_EXPORT
+void *
+m_thread_run_argv (void *p) {
+    void **arg = p;
+    widgets_t * widgets_p = arg[0]; 
+    //view_t *view_p = widgets_p->view_p;
+    gchar ** argv = arg[1];
+    gboolean interm = GPOINTER_TO_INT(arg[2]);
+    gint *stdin_fd = arg[3];
+    void (*stdout_f) (void *stdout_data,
+		  void *stream,
+		  int childFD) = arg[4];
+    void (*stderr_f) (void *stdout_data,
+		  void *stream,
+		  int childFD) = arg[5];
+    void (*tubo_done_f) (void *data) = arg[6];
+
+    NOOP( "At m_thread_run_argv()\n");
+    if (widgets_p->workdir
+	    &&
+	!rfm_g_file_test_with_wait(widgets_p->workdir, G_FILE_TEST_IS_DIR)){
+	 gchar *workdir = g_strconcat("workdir = ", 
+		 (widgets_p->workdir)?widgets_p->workdir: "NULL", NULL); 
+	 rfm_time_out(widgets_p, workdir);
+	 g_free(workdir);
+	 return NULL; 
+     }
+
+    if (widgets_p->workdir && access(widgets_p->workdir, R_OK|X_OK) != 0){
+	rfm_threaded_show_text(widgets_p);
+	rfm_threaded_diagnostics(widgets_p, "xffm/stock_dialog-error", NULL);
+	rfm_threaded_diagnostics(widgets_p, "xffm_tag/stderr",
+		g_strconcat(strerror(EACCES), ": '", widgets_p->workdir, "'\n", NULL));
+	 return NULL; 
+    }
+
+	
+
+    pid_t child =
+	private_rfm_thread_run_argv(widgets_p, argv, interm, stdin_fd, stdout_f, stderr_f, tubo_done_f);
+
+    g_free(widgets_p->workdir);
+    widgets_p->workdir = g_strdup(g_get_home_dir());
+
+    g_free(p);
+    return GINT_TO_POINTER(child);
+}
+
+
+
+static pthread_mutex_t fork_mutex=PTHREAD_MUTEX_INITIALIZER;
+static void
+fork_function (void *data) {
+    gchar **argv = (char **)data;
+
+    gint i = 0;
+    static gchar *sudo_cmd=NULL;
+    pthread_mutex_lock(&fork_mutex);
+    g_free(sudo_cmd);
+    sudo_cmd=NULL;
+    for(i=0; argv && argv[i] && i < 5; i++) {
+	if(!sudo_cmd && 
+		(strstr (argv[i], "sudo") ||
+		 strstr (argv[i], "ssh")  ||
+		 strstr (argv[i], "rsync")  ||
+		 strstr (argv[i], "scp"))) {
+	    sudo_cmd=g_strdup_printf("<b>%s</b> ", argv[i]);
+	    continue;
+	} 	
+	if (sudo_cmd){
+	    if (strchr(argv[i], '&')){
+	        gchar **a = g_strsplit(argv[i], "&", -1);
+		gchar **p=a;
+		for (;p && *p; p++){
+		    gchar *space = (strlen(*p))?" ":"";
+		    gchar *amp = (*(p+1))?"&amp;":"";
+		    gchar *g = g_strconcat(sudo_cmd,  space, "<i>",*p, amp, "</i>", NULL);
+		    g_free(sudo_cmd);
+		    sudo_cmd=g;
+		}
+		g_strfreev(a);
+	    } else {
+		gchar *a = g_strdup(argv[i]);
+		if (strlen(a) >13) {
+		    a[12] = 0;
+		    a[11] = '.';
+		    a[10] = '.';
+		    a[9] = '.';
+		}
+		gchar *g = g_strconcat(sudo_cmd,  " <i>",a, "</i>", NULL);
+		g_free(a);
+		g_free(sudo_cmd);
+		sudo_cmd=g;
+	    }
+	}
+    }
+
+
+    if (i>=MAX_COMMAND_ARGS - 1) {
+    	NOOP("%s: (> %d)\n", strerror(E2BIG), MAX_COMMAND_ARGS);
+	argv[MAX_COMMAND_ARGS - 1]=NULL;
+    }
+
+    if (sudo_cmd) {
+	gchar *g = g_strconcat(sudo_cmd,  "\n", NULL);
+	g_free(sudo_cmd);
+	sudo_cmd = g;
+	// This  function makes copies of the strings pointed to by name and value
+        // (by contrast with putenv(3))
+	setenv("RFM_ASKPASS_COMMAND", sudo_cmd, 1);
+	g_free(sudo_cmd);
+    } else {
+	setenv("RFM_ASKPASS_COMMAND", "", 1);
+    }
+    pthread_mutex_unlock(&fork_mutex);
+    execvp (argv[0], argv);
+    g_warning ("CHILD could not execvp: this should not happen\n");
+    g_warning ("Do you have %s in your path?\n", argv[0]);
+    rfm_threadwait ();
+    _exit (123);
+}
 /*******************************************/
 #endif

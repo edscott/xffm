@@ -11,6 +11,7 @@ class lpterm_c: public run_c {
         gboolean lp_get_active(void);
         void lp_set_active(gboolean);
 	gboolean window_keyboard_event(GdkEventKey *, void *);
+
 /*
         void recover_flags (gchar * in_cmd, gboolean * interm, gboolean * hold);
         const gchar *what_term (void);

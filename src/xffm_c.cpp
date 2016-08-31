@@ -1,7 +1,5 @@
 #include "xffm_c.hpp"
-#include "view_c.hpp"
-
-#include "xfdir_c.hpp"
+#include "window_c.hpp"
 
 
 xffm_c::xffm_c(void){
@@ -23,6 +21,5 @@ xffm_c::xffm_c(void){
 xffm_c::~xffm_c(void){
     delete window_p;
 }  
-
 
 

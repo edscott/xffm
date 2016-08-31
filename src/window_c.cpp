@@ -174,3 +174,45 @@ window_keyboard_event (GtkWidget * window, GdkEventKey * event, gpointer data)
 }
 
 
+const gchar *
+window_c::default_shell(void){
+    g_free(shell); shell = NULL;
+    if(!shell) shell = g_find_program_in_path ("bash");
+    if(!shell) shell = g_find_program_in_path ("zsh");
+    if(!shell) shell = g_find_program_in_path ("sh");
+    if(!shell) shell = g_find_program_in_path ("tcsh");
+    if(!shell) shell = g_find_program_in_path ("csh");
+    if(!shell) shell = g_find_program_in_path ("ksh");
+    if(!shell) shell = g_find_program_in_path ("sash");
+    if(!shell) shell = g_find_program_in_path ("ash");
+    if(!shell){ g_warning("unable to find a valid shell\n");
+    }
+    return (const gchar *)shell;
+}
+
+// dash is OK now.
+// Only csh/tcsh is broken, since it will not
+// pass on SIGTERM when controler gets SIGUSR1
+// This is only a problem if rodent_ps is not 
+// loadable.
+// gchar *
+
+
+const gchar *
+window_c::xffm_shell(void){
+    g_free(shell); shell=NULL;
+    if(getenv ("SHELL") && strlen (getenv ("SHELL"))) {
+        shell = g_find_program_in_path (getenv ("SHELL"));
+    }
+
+    if(!shell && getenv ("XTERM_SHELL") && strlen (getenv ("XTERM_SHELL"))) {
+        shell = g_find_program_in_path (getenv ("XTERM_SHELL"));
+    }
+
+    if (!shell){
+	shell = (gchar *)default_shell();
+    }
+    return (const gchar *)shell;
+}
+
+
