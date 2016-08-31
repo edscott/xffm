@@ -31,216 +31,14 @@ static void *wait_f(void *data){
 
 
 
-// This will hash commands to know what has just finished
-static GHashTable *c_string_hash=NULL;
-pthread_mutex_t string_hash_mutex = PTHREAD_MUTEX_INITIALIZER;
-
-static 
-gchar *pop_hash(pid_t controller){
-    if (!c_string_hash) {
-        return g_strdup("");
-    }
-    pthread_mutex_lock(&string_hash_mutex);
-    gchar *string = (gchar *)g_hash_table_lookup (c_string_hash, GINT_TO_POINTER(controller));
-    if (!string){
-        pthread_mutex_unlock(&string_hash_mutex);
-        DBG("controller %d not found in hashtable\n", controller);
-        return g_strdup("");
-    }
-    g_hash_table_steal(c_string_hash, GINT_TO_POINTER(controller));
-    pthread_mutex_unlock(&string_hash_mutex);
-    gchar bold[]={27, '[', '1', 'm',0};
-    gchar *dbg_string = g_strconcat(bold, string, NULL);
-    g_free(string);
-    return dbg_string;
-}
 
 static void
-push_hash(pid_t controller, gchar *string){
-    pthread_mutex_lock(&string_hash_mutex);
-    if (!c_string_hash){
-        c_string_hash = 
-            g_hash_table_new_full (g_direct_hash, g_direct_equal, NULL, g_free);
-    }
-    g_hash_table_replace(c_string_hash, GINT_TO_POINTER(controller), string);
-    pthread_mutex_unlock(&string_hash_mutex);
-}
-
-static
-gchar *
-default_shell(void){
-    gchar *shell=NULL;
-    if(!shell)
-        shell = g_find_program_in_path ("bash");
-    if(!shell)
-        shell = g_find_program_in_path ("zsh");
-    if(!shell)
-        shell = g_find_program_in_path ("sh");
-    /*if (!shell && rfm_void(PLUGIN_DIR, "ps", "module_active")) {
-	shell = g_find_program_in_path ("tcsh");
-	if(!shell)
-	    shell = g_find_program_in_path ("csh");
-    }*/
-    if(!shell)
-        shell = g_find_program_in_path ("ksh");
-    if(!shell)
-        shell = g_find_program_in_path ("sash");
-    if(!shell)
-        shell = g_find_program_in_path ("ash");
-    if(!shell){
-	g_warning("unable to find a valid shell\n");
-    }
-
-    return shell;
-}
-
-    // dash is OK now.
-    // Only csh/tcsh is broken, since it will not
-    // pass on SIGTERM when controler gets SIGUSR1
-    // This is only a problem if rodent_ps is not 
-    // loadable.
-    // gchar *
-static gchar *
-check_shell(gchar *shell){
-    if (!shell) return NULL;
-    // FIXME (when ps module is incorporated)
-    // This is because the stop process button will not work with csh.
-    /*if (!rfm_void(PLUGIN_DIR, "ps", "module_active") && strstr(shell, "csh")) {
-	g_free(shell);
-	shell = NULL;
-    }*/
-    return shell;
-}
-
-gchar *
-rfm_shell(void){
-    gchar *shell=NULL;
-    if(getenv ("SHELL") && strlen (getenv ("SHELL"))) {
-        shell = g_find_program_in_path (getenv ("SHELL"));
-    }
-
-    if(!shell && getenv ("XTERM_SHELL") && strlen (getenv ("XTERM_SHELL"))) {
-        shell = g_find_program_in_path (getenv ("XTERM_SHELL"));
-    }
-    shell = check_shell(shell);
-
-    if (!shell){
-	shell = default_shell();
-    }
-    return shell;
-}
-
-static gchar *
-arg_string(char **arg){
-    const gchar quote[]={'"', 0};
-    gchar *g = g_strdup("");
-    gchar **a = arg;
-    for (;a && *a; a++){
-        const gchar *q;
-        if (strchr(*a, '*') || strchr(*a, '?') || strchr(*a, ' ')) q = quote;
-        else q = "";
-        gchar *gg = g_strconcat(g, " ", q, *a, q, NULL);
-        g_free(g); g=gg;
-    }
-    return g;
-}
-
-
-static gchar *
-arg_string_format(char **arg){
-    const gchar quote[]={27, '[', '3', '1', 'm', '"', 0};
-    const gchar bold[]={27, '[', '1', 'm', 0};
-    gchar *g = g_strdup("");
-    gchar **a = arg;
-    for (;a && *a; a++){
-        const gchar *q;
-        if (strchr(*a, '*') || strchr(*a, '?') || strchr(*a, ' ')) q = quote;
-        else q = "";
-        gchar *gg = g_strconcat(g, " ", q, bold, *a, q, NULL);
-        g_free(g); g=gg;
-    }
-    return g;
-}
-
-gchar *rfm_diagnostics_start_string(gchar *command, pid_t controller, gboolean with_shell){
-    pid_t grandchild=Tubo_child (controller);
-    push_hash(controller, g_strdup(command));
-    gchar *g = g_strdup_printf ("%c[34m<%d>", 27, grandchild);
-    gchar *gg;
-
-    
-    const gchar bold[]={27, '[', '1', 'm', 0};
-    if (with_shell) {
-        gchar *shell = rfm_shell();
-        gg = g_strconcat (g, " ", shell, " ", bold, command, "\n", NULL);
-        g_free (g);
-        g_free(shell);
-        return gg;
-    }
-    if (!strchr(command, '*') && !strchr(command,'?')){
-        gg = g_strconcat (g, " ", bold, command, "\n", NULL);
-        g_free (g);
-        return gg;
-    }
-
-    gchar **ap;
-    gint ac;
-    if (g_shell_parse_argv (command, &ac, &ap, NULL)){
-        gg = arg_string_format(ap);
-        g_strfreev(ap);
-        gchar *ggg = g_strconcat(g, " ", gg, "\n", NULL);
-        g_free(g);
-        g_free(gg);
-        return ggg;
-    }
-    return g_strdup(g);
-}
-
-gchar *rfm_diagnostics_start_string_argv(gchar **argv, pid_t controller){
-    pid_t grandchild=Tubo_child (controller);
-    
-
-    gchar *g = g_strdup_printf ("%c[34m<%d>", 27, grandchild);
-    gchar *gg = arg_string(argv);
-    push_hash(controller, g_strdup(gg));
-    gg = arg_string_format(argv);
-
-    gchar *ggg = g_strconcat(g, " ", gg, "\n", NULL);
-    g_free(g);
-    g_free(gg);
-    return (ggg);
-}
-
-gchar *rfm_diagnostics_exit_string(gchar *tubo_string){
-    gchar *string = NULL;
-    if(strchr (tubo_string, '\n')) *strchr (tubo_string, '\n') = 0;
-    gchar *s = strchr (tubo_string, '(');
-    int pid = -1;
-    long id = 0;
-    if (s) {
-        s++;
-        if(strchr (s, ')')) *strchr (s, ')') = 0;
-        errno = 0;
-        id = strtol(s, NULL, 10);
-        if (!errno){
-            pid = Tubo_child((pid_t) id);
-        }
-    }
-    gchar *g = g_strdup_printf("%c[31m<%d>", 27, pid);
-    //gchar *c_string = pop_hash((pid_t)id);
-    gchar *c_string = pop_hash((pid_t)pid);
-    string = g_strconcat(g, c_string, "\n", NULL);
-    g_free(c_string);
-    g_free(g);
-    return string;
-}
-
-
-void
 rfm_operate_stdout (void *data, void *stream, int childFD) {
     view_c *view_p = (view_c *)data;
+    // FIXME: this will croak!
     window_c *window_p = (window_c *)(view_p->window_v);
     if (!window_p->is_view_in_list(data)) return;
+    
     lpterm_c *lpterm_p = view_p->get_lpterm_p();
 
     // FIXME exit status... necessary XXX test if so.
@@ -281,8 +79,9 @@ rfm_operate_stdout (void *data, void *stream, int childFD) {
     outline[j] = 0;
 
     if(strncmp (line, exit_token, strlen (exit_token)) == 0) {
-        gchar *string = rfm_diagnostics_exit_string(line);
+        gchar *string = lpterm_p->exit_string(line);
         lpterm_p->print_icon("emblem-redball", string);
+        g_free(string);
     } else {
 	lpterm_p->print(outline);
     }
@@ -797,7 +596,7 @@ thread_run_f (gpointer data) {
     
 #ifdef DEBUG_TRACE    
     // This is out of sync here (grayball), so only in debug mode.
-    gchar *t = rfm_diagnostics_start_string(run_data_p->command, run_data_p->controller, FALSE);
+    gchar *t = run_start_string(run_data_p->command, run_data_p->controller, FALSE);
     rfm_threaded_diagnostics (run_data_p->widgets_p, "xffm/emblem_grayball", t);
 #endif
     
@@ -1040,7 +839,7 @@ private_rfm_thread_run_argv (
     NOOP (stderr, "private_rfm_thread_run_argv(): thread_run\n");
     pid_t controller = thread_run (widgets_p, v_argv, stdin_fd, stdout_f, stderr_f, tubo_done_f);
     if(visible) {
-        gchar *g = rfm_diagnostics_start_string_argv(v_argv, controller);
+        gchar *g = lpterm_p->start_string_argv(v_argv, controller);
         rfm_threaded_diagnostics (widgets_p, "xffm/emblem_greenball", g);   
     }
     if(widgets_p && controller > 0) {

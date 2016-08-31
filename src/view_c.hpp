@@ -39,7 +39,6 @@ class view_c:public widgets_c {
 
 	gboolean window_keyboard_event(GdkEventKey *, void *);
         lpterm_c *get_lpterm_p(void);
-        void *window_v;
 
     protected:
 

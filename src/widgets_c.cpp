@@ -5,6 +5,7 @@
 
 widgets_c::widgets_c(void *window_data, GtkNotebook *data)
 {
+    window_v = window_data;
     notebook = data;
     if (!notebook){
         g_warning("widgets_c::widgets_c(): notebook cannot be NULL\n");

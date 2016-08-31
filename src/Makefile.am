@@ -21,6 +21,7 @@ xffm_SOURCES = \
 	    view_c.cpp  \
 		lpterm_c.cpp   \
 		    run_c.cpp   \
+			run_output_c.cpp   \
 			csh_completion_c.cpp   \
 			    bash_completion_c.cpp  \
 				print_c.cpp   \

@@ -28,6 +28,7 @@ class widgets_c {
         GtkWidget *get_iconview_icon(void);
         void set_status_label(const gchar *);
 	gtk_c *get_gtk_p();
+        void *window_v;
     protected:
 
         GtkIconView *icon_view;          
