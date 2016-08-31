@@ -22,6 +22,8 @@ window_c::window_c(void) {
     gtk_widget_set_size_request (window, 800, 600);
 
     notebook = GTK_NOTEBOOK(gtk_notebook_new());
+    g_object_set_data(G_OBJECT(notebook), "window_p", (void *)this);
+    
     gtk_notebook_set_scrollable (notebook, TRUE);
     gtk_container_add (GTK_CONTAINER (window), GTK_WIDGET(notebook));
 

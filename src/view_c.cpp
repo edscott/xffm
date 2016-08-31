@@ -36,11 +36,12 @@ view_c::view_c(void *window_data, GtkNotebook *notebook) : widgets_c(window_data
     xfdir_p = NULL;
     dirty_hash = FALSE;
 
+    // Set objects in parent widget_c class with data pointing to child class
+    g_object_set_data(G_OBJECT(pathbar_p->pathbar), "view_p", (void *)this);
     g_object_set_data(G_OBJECT(page_child_box), "view_p", (void *)this);
-    highlight_hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
-    g_object_set_data(G_OBJECT(notebook), "window_p", window_v);
-    g_object_set_data(G_OBJECT(notebook), "view_p", (void *)this);
     g_object_set_data(G_OBJECT(page_label_button), "view_p", (void *)this);
+
+    highlight_hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
     //signals_p = new signals_c();
     init();
     icon_view = GTK_ICON_VIEW(gtk_icon_view_new());
@@ -544,7 +545,7 @@ item_activated (GtkIconView *iconview,
         if (*p == '"') *p = ' ';
     } g_strstrip(dname);    
 
-    gchar *dir = g_get_current_dir();
+    const gchar *dir = view_p->get_path();
 
     gchar *full_path = g_strconcat(dir, G_DIR_SEPARATOR_S, dname, NULL);
     TRACE("dname = %s, path = %s\n", dname, full_path);
@@ -553,12 +554,11 @@ item_activated (GtkIconView *iconview,
 
     if (g_file_test(full_path, G_FILE_TEST_IS_DIR)){
         view_p->reload(full_path);
+    } else {
+        view_p->get_lpterm_p()->print_error("%s: %s\n", full_path, strerror(ENOENT));
     }
     g_free(dname);
     g_free(full_path);
-
-
-
 }
 
 

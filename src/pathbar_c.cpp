@@ -62,7 +62,8 @@ pathbar_c::pathbar_ok(GtkButton * button){
     for (;children && children->data; children=children->next){
         if (button == children->data){
             gchar *path = (gchar *)g_object_get_data(G_OBJECT(button), "path");
-            view_c *view_p = (view_c *)g_object_get_data(G_OBJECT(notebook), "view_p");
+            view_c *view_p = (view_c *)g_object_get_data(G_OBJECT(pathbar), "view_p");
+            if (!view_p) g_error("view_p data not set for g_object pathbar!\n");
             if (g_file_test(path, G_FILE_TEST_IS_DIR)){
                 view_p->reload(path);
             } else {

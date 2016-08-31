@@ -12,8 +12,13 @@ run_output_c::run_output_c(void){
     // This will hash commands to know what has just finished
     c_string_hash = 
             g_hash_table_new_full (g_direct_hash, g_direct_equal, NULL, g_free);
-    pthread_mutex_t string_hash_mutex = PTHREAD_MUTEX_INITIALIZER;
+    string_hash_mutex = PTHREAD_MUTEX_INITIALIZER;
     shell=NULL;
+}
+
+run_output_c::~run_output_c(void){
+    pthread_mutex_destroy(&string_hash_mutex);
+    g_hash_table_destroy(c_string_hash);
 }
 
 gchar *

@@ -5,6 +5,7 @@
 class run_output_c {
     public:
         run_output_c(void);
+        ~run_output_c(void);
         gchar *exit_string(gchar *);
     protected:
         gchar *start_string_argv(gchar **, pid_t);
