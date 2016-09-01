@@ -26,6 +26,10 @@ class print_c: public utility_c {
 
         void *scroll_to_top(void);
         void *scroll_to_bottom(void);
+        
+        gboolean trim_diagnostics(GtkTextBuffer *);
+        GtkTextTag **resolve_tags(GtkTextBuffer *, const gchar *);       
+        void insert_string (GtkTextBuffer *, const gchar *, GtkTextTag **);
     protected:
 
         gchar *get_tilde_dir(const gchar *);
@@ -41,9 +45,6 @@ class print_c: public utility_c {
 	gtk_c *gtk_p;
         
     private:
-        
-        
-
 
 
 

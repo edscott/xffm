@@ -10,6 +10,7 @@
 
 #include "print_c.hpp"
 #include "view_c.hpp"
+#define MAX_LINES_IN_BUFFER 1000    
 
 /////////////////////////////////////////////////////////////////////////////
 //              static thread functions                                    //
@@ -375,8 +376,8 @@ resolve_tag (GtkTextBuffer * buffer, const gchar * id) {
 
 
 
-static GtkTextTag **
-resolve_tags(GtkTextBuffer * buffer, const gchar *tag){
+GtkTextTag **
+print_c::resolve_tags(GtkTextBuffer * buffer, const gchar *tag){
     GtkTextTag **tags = NULL;
     if(tag) {
         if(strncmp (tag, "tag/", strlen ("tag/")) == 0) {
@@ -391,8 +392,8 @@ resolve_tags(GtkTextBuffer * buffer, const gchar *tag){
     return tags;
 }
 
-static void
-insert_string (print_c *print_p, GtkTextBuffer * buffer, const gchar * s, GtkTextTag **tags) {
+void
+print_c::insert_string (GtkTextBuffer * buffer, const gchar * s, GtkTextTag **tags) {
     if(!s) return;
     GtkTextIter start, end, real_end;
     gint line = gtk_text_buffer_get_line_count (buffer);
@@ -417,12 +418,12 @@ insert_string (print_c *print_p, GtkTextBuffer * buffer, const gchar * s, GtkTex
 	    if (strlen(*pp) == 0) continue;
 	    NOOP(stderr, "split %d: %s\n", count, *pp);
 	    if (count==0 && head_section){
-		insert_string (print_p, buffer, *pp, NULL);
+		insert_string (buffer, *pp, NULL);
 		continue;
 	    }
 	    gchar *code = *pp;
 	    if (*code == 'K'){
-		insert_string (print_p, buffer, "\n", NULL);
+		insert_string (buffer, "\n", NULL);
 		continue;
 	    }
 	    NOOP(stderr, "1.splitting %s\n", *pp);
@@ -467,7 +468,7 @@ insert_string (print_c *print_p, GtkTextBuffer * buffer, const gchar * s, GtkTex
 
 
 	    // Insert string
-	    insert_string (print_p, buffer, ss[1], gtags);
+	    insert_string (buffer, ss[1], gtags);
 	    g_free(gtags);
 
 	    g_strfreev(ss);
@@ -482,20 +483,20 @@ insert_string (print_c *print_p, GtkTextBuffer * buffer, const gchar * s, GtkTex
     if(strchr (s, 0x0D)) {      //CR
         gchar *aa = g_strdup (s);
         *strchr (aa, 0x0D) = 0;
-        insert_string (print_p, buffer, aa, tags);
+        insert_string (buffer, aa, tags);
         g_free (aa);
         const char *caa = strchr (s, 0x0D) + 1;
         if(mark) {
             gtk_text_buffer_get_iter_at_line (buffer, &start, line);
             gtk_text_buffer_move_mark (buffer, mark, &start);
         }
-        insert_string (print_p, buffer, caa, tags);
+        insert_string (buffer, caa, tags);
         g_free (a);
         // we're done
         return;
     }
 
-    gchar *q = print_p->utf_string (s);
+    gchar *q = utf_string (s);
     /// this should be mutex protected since this function is being called
     //  from threads all over the place.
     static pthread_mutex_t insert_mutex =  PTHREAD_MUTEX_INITIALIZER;
@@ -553,43 +554,27 @@ insert_string (print_c *print_p, GtkTextBuffer * buffer, const gchar * s, GtkTex
     return;
 }
 
-#define MAX_LINES_IN_BUFFER 1000    
-static void
-scroll_to_mark(GtkTextView *textview){
-    GtkTextIter start, end;
-    GtkTextBuffer *buffer = gtk_text_view_get_buffer (textview);
-    
-    gtk_text_buffer_get_bounds (buffer, &start, &end);
-    GtkTextMark *mark = gtk_text_buffer_get_mark (buffer, "scrollmark");
-    if (mark == NULL){
-	mark = gtk_text_buffer_create_mark (buffer, "scrollmark", &end, FALSE);
-    } else {
-	gtk_text_buffer_move_mark   (buffer,  mark  ,&end);
-    }
-    gtk_text_view_scroll_mark_onscreen (textview, mark);
+gboolean 
+print_c::trim_diagnostics(GtkTextBuffer *buffer){
     gint line_count = gtk_text_buffer_get_line_count (buffer);
-    if (line_count > MAX_LINES_IN_BUFFER) {
-	gtk_text_buffer_get_iter_at_line (buffer, &start, 0);
-	gtk_text_buffer_get_iter_at_line (buffer, &end, line_count - MAX_LINES_IN_BUFFER);
-	gtk_text_buffer_delete (buffer, &start, &end);
-    }
-    return;
-}
-
-static gboolean trim_diagnostics(GtkTextBuffer *buffer){
-    gint line_count = gtk_text_buffer_get_line_count (buffer);
-    glong max_lines_in_buffer = 1000;
+    glong max_lines_in_buffer = MAX_LINES_IN_BUFFER;
     if (getenv("RFM_MAXIMUM_DIAGNOSTIC_LINES") && 
 	    strlen(getenv("RFM_MAXIMUM_DIAGNOSTIC_LINES"))){
 	errno = 0;
 	max_lines_in_buffer = 
 	    strtol(getenv("RFM_MAXIMUM_DIAGNOSTIC_LINES"), NULL, 10);
 	if (errno){
-	    max_lines_in_buffer = 1000;
+	    max_lines_in_buffer = MAX_LINES_IN_BUFFER;
 	}
 
     }
-    if (line_count > max_lines_in_buffer) return TRUE;
+    if (line_count > max_lines_in_buffer) {
+        GtkTextIter start, end;
+	gtk_text_buffer_get_iter_at_line (buffer, &start, 0);
+	gtk_text_buffer_get_iter_at_line (buffer, &end, line_count - MAX_LINES_IN_BUFFER);
+	gtk_text_buffer_delete (buffer, &start, &end);
+        return TRUE;
+    }
     return FALSE;
 }
 
@@ -605,30 +590,18 @@ print_f(void *data){
     const gchar *string = (const gchar *)arg[2];
 
     GtkTextBuffer *buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (textview));
-    if (trim_diagnostics(buffer)){
-        print_p->clear_text();
+    if (print_p->trim_diagnostics(buffer)){
+        // textview is at line limit.
     }
 
-    GtkTextTag **tags = resolve_tags(buffer, tag);
+    GtkTextTag **tags = print_p->resolve_tags(buffer, tag);
     if(string && strlen (string)) {
-        insert_string (print_p, buffer, string, tags);
+        print_p->insert_string (buffer, string, tags);
     }
     g_free(tags);
-    scroll_to_mark(textview);
+    print_p->scroll_to_bottom();
     return NULL;
 }
-
-#if 0   
-static void *
-print_op(void *data){
-    if (!data) return GINT_TO_POINTER(-1);
-    void **arg=(void **)data;
-    void *arg1[]={arg[0],(void *)"tag/green", arg[1]};
-    print_f((void *)arg1);
-    void *arg2[]={arg[0], (void *)"tag/bold", arg[2]};
-    return print_f((void *)arg2);
-}
-#endif
 
 static void *
 print_i(void *data){
@@ -680,7 +653,7 @@ print_s(void *data){
     gtk_text_buffer_get_bounds (buffer, &start, &end);
     gtk_text_buffer_delete (buffer, &start, &end);
     if(string && strlen (string)) {
-        insert_string (print_p, buffer, string, NULL);
+        print_p->insert_string (buffer, string, NULL);
     }
     return NULL;
 }

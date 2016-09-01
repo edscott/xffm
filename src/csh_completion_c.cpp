@@ -152,7 +152,7 @@ csh_completion_c::csh_save_history (const gchar * data) {
     gchar *command_p = g_strdup(data);
     g_strstrip (command_p);
     // Get last registered command
-    void *last = g_list_nth_data (csh_command_list, 1);
+    void *last = g_list_nth_data (csh_command_list, 0);
     if (last && strcmp((gchar *)last, command_p) == 0) {
 	g_free(command_p);
 	// repeat of last command. nothing to do here.
@@ -188,7 +188,6 @@ save_to_disk:
     GList *disk_history = NULL;       
     FILE *sh_history = fopen (history, "r");
     if(sh_history) {
-
 	char line[2048];
 	memset (line, 0, 2048);
 	while(fgets (line, 2047, sh_history) && !feof (sh_history)) {
@@ -199,8 +198,8 @@ save_to_disk:
 	}
 	fclose (sh_history);
     }
-    disk_history = g_list_reverse(disk_history);
     disk_history = g_list_prepend (disk_history, g_strdup (command_p));
+    disk_history = g_list_reverse(disk_history);
 
     sh_history = fopen (history, "w");
     if(sh_history) {
