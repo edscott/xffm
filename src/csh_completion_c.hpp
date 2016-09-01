@@ -10,13 +10,12 @@ class csh_completion_c: public bash_completion_c {
 	csh_completion_c(void *);
 
     protected:
-	void csh_completion_init(void);
-        gboolean csh_completion(gint, gint);
+        gboolean csh_completion(gint);
         void csh_save_history (const gchar *);
-        void csh_set_completing(gboolean);
-
-	
+        void csh_clean_start(void);
+        void csh_dirty_start(void);
     private:
+        const gchar *csh_find(const gchar *, gint);
         void csh_place_command(const gchar *);
         void *csh_load_history (void);
         gboolean csh_is_valid_command (const gchar *);
@@ -25,11 +24,10 @@ class csh_completion_c: public bash_completion_c {
 	void place_cursor(void);
 	
         GList *csh_command_list;
-        gint csh_command_counter;
 
-	gint csh_cmd_len;
 	gchar *csh_cmd_save;
 	gint csh_nth;
+	gint csh_command_counter;
         gboolean csh_completing;
 
 };

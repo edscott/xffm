@@ -346,12 +346,14 @@ lpterm_c::sudo_fix(const gchar *command){
 
 void
 lpterm_c::shell_command(const gchar *c){
+
     // Fix any sudo commands to use the -A option
     gchar *command = sudo_fix(c);
     // FIXME: run through selected shell
 
     thread_run(command?command:c);
-    csh_save_history(command?command:c);
+    //csh_save_history(command?command:c);
+    csh_save_history(c);
     
     g_free (command);
 
@@ -440,21 +442,39 @@ lpterm_c::lpterm_keyboard_event( GdkEventKey * event, gpointer data) {
     gtk_widget_grab_focus (GTK_WIDGET(status));
     gtk_c *gtk_p = view_p->get_gtk_p();
 
+    // Let the internal callback do it's business first.
+    gboolean retval;
+    g_signal_emit_by_name ((gpointer)status, "key-press-event", event, &retval);
+    while (gtk_events_pending())gtk_main_iteration();
 
-    // On activate, run the lpcommand
-    if(event->keyval == GDK_KEY_Return || event->keyval == GDK_KEY_KP_Enter) {
-	csh_completion_init();
-        csh_set_completing(FALSE);
+    // Now do our stuff.
+    //
+    // On activate, run the lpcommand.
+    if((event->keyval == GDK_KEY_Return) || (event->keyval == GDK_KEY_KP_Enter)) {
+        csh_clean_start();
         run_lp_command();
         return TRUE;
     }
-    // On right or left, change the csh completion token
-    if(event->keyval == GDK_KEY_Right || event->keyval == GDK_KEY_KP_Left) {
-	csh_completion_init();        
-        csh_set_completing(TRUE);
+
+    if(event->keyval == GDK_KEY_Up) {
+        csh_completion(1);
+        return TRUE;
+    }
+    if(event->keyval == GDK_KEY_Down) {
+        csh_completion(-1);
+        return TRUE;
     }
 
-    // tab for bash completion
+    // On right or left, change the csh completion token.
+    if((event->keyval == GDK_KEY_Right) || (event->keyval == GDK_KEY_KP_Right)) {
+        csh_dirty_start();
+    }
+    // On right or left, change the csh completion token.
+    if((event->keyval == GDK_KEY_Left) || (event->keyval == GDK_KEY_KP_Left)) {
+        csh_dirty_start();
+    }
+
+    // tab for bash completion.
     if(event->keyval == GDK_KEY_Tab) {
         bash_completion();
         return TRUE;
@@ -465,17 +485,10 @@ lpterm_c::lpterm_keyboard_event( GdkEventKey * event, gpointer data) {
         
         return TRUE;
     }
-    if((event->keyval == GDK_KEY_Up) || (event->keyval == GDK_KEY_Down)) {
-        // csh command completion
-        gint completion = (event->keyval == GDK_KEY_Up)?1:0-1;
-        gint offset = (event->keyval == GDK_KEY_Up)?1:0-1; 
-        if (csh_completion(completion, offset)) return TRUE;
-	return TRUE;
-    } else if (event->keyval >= GDK_KEY_space && event->keyval <= GDK_KEY_asciitilde){
-        csh_set_completing(TRUE);
+
+    if (event->keyval >= GDK_KEY_space && event->keyval <= GDK_KEY_asciitilde){
+        csh_dirty_start();
     }
-    gboolean retval;
-    g_signal_emit_by_name ((gpointer)status, "key-press-event", event, &retval);
     return retval;
 #if 0
     // FIXME

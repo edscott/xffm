@@ -10,95 +10,79 @@ csh_completion_c::csh_completion_c(void *data): bash_completion_c(data){
 }
 
 void 
-csh_completion_c::csh_set_completing(gboolean state){ csh_completing = state;}
-
-gboolean
-csh_completion_c::csh_completion(gint direction, gint offset){
-
-    if (!csh_cmd_save) {
-	// initialize csh completion.
-	csh_cmd_save = get_current_text ();
-	if (!csh_cmd_save || !strlen(csh_cmd_save)) {
-	    // empty line: no completion attempted.
-	    TRACE("csh_completion_c::csh_completion: empty line: no completion attempted.\n");
-	    g_free(csh_cmd_save);
-	    csh_cmd_save = NULL;
-	    csh_offset_history(0);
-	    return FALSE;
-	}
-	csh_nth = 0;
-    }
-    // cursor_position is a GtkTextBuffer internal property (read only)
-    GtkTextBuffer *buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW(status));
-    g_object_get (G_OBJECT (buffer), "cursor-position", &csh_cmd_len, NULL);
-    TRACE( "csh_completion_c::csh_completion: to cursor position=%d (%s)\n", csh_cmd_len, csh_cmd_save);
-    if (!csh_cmd_len || !csh_completing) {
-	// no text before cursor: no completion attempted.
-        // plain up and down arrow processing here.
-	TRACE("csh_completion_c::csh_completion: return on !csh_cmd_len or !csh_completing\n");
-	csh_offset_history(offset);
-
-        return FALSE;
-    }
-    gchar *command = get_text_to_cursor ();
-    gint initial_nth = csh_nth;
-    const gchar *csh_cmd_found = NULL;
-    if (direction > 0){ 
-	// up arrow.
-	if (csh_nth < g_list_length(csh_command_list)) csh_nth++;
-        TRACE( "csh_completion_c::csh_completion cshnth=%d\n",csh_nth); 
-	GList *list = g_list_nth(csh_command_list, csh_nth);
-	csh_cmd_found = NULL;
-	for (;list && list->data;list=list->next, csh_nth++){
-	    if (list->data && strncmp(command, (gchar *)list->data, csh_cmd_len)==0) {
-		csh_cmd_found = (const gchar *)list->data;
-		break;
-	    }
-	}
+csh_completion_c::csh_dirty_start(void){ 
+    TRACE( "csh_completion_c::csh_dirty_start\n");
+    //start from current position.
+    g_free(csh_cmd_save);
+    while (gtk_events_pending()) gtk_main_iteration();
+    csh_cmd_save = get_text_to_cursor();
+    TRACE( "csh_completion_c::csh_dirty_start: %s\n", csh_cmd_save);
+    if (csh_cmd_save && strlen(csh_cmd_save)){
+        csh_nth = 0;
+        csh_completing = TRUE;
     } else {
-	// down arrow.
-	if (csh_nth > 0) csh_nth--;
-        TRACE( "csh_completion_c::csh_completion cshnth=%d\n",csh_nth); 
-	GList *list = g_list_nth(csh_command_list, csh_nth);
-        csh_cmd_found = NULL;
-	for (;list && list->data && csh_nth>0;list=list->prev, csh_nth--){
-	    csh_cmd_found = (gchar *)list->data;
-	    if (csh_cmd_found && strncmp(command, csh_cmd_found, csh_cmd_len)==0) {
-		csh_cmd_found = (const gchar *)list->data;
-		break;
-	    }
-	} 
-	if (csh_nth < 0) csh_nth = 0;
+        csh_clean_start();
     }
-    g_free(command);
 
-    if (csh_cmd_found){
-	TRACE("csh_completion_c::csh_completion: csh_nth=%d/%d\n", 
-	    csh_nth, g_list_length(csh_command_list));
-	csh_place_command(csh_cmd_found);
-	return TRUE;    
-    } else {
-	TRACE("csh_completion_c::csh_completion: initial_nth=%d csh_nth=%d\n",
-               initial_nth,csh_nth);
-        if (!initial_nth) csh_nth = initial_nth;
-
-    }
-    if (!csh_nth){
-	    TRACE( "csh_completion_c::csh_completion: back to original command: %s.\n", csh_cmd_save);
-	    csh_place_command(csh_cmd_save);
-	    csh_completion_init();
-	    return TRUE;
-    }
-    // push/pop history
-    csh_offset_history(offset);
-    return FALSE;
 }
 
-void
-csh_completion_c::csh_completion_init(void){
+
+void 
+csh_completion_c::csh_clean_start(void){
+    TRACE( "csh_completion_c::csh_clean_start\n");
+    //start from bottom.
     g_free(csh_cmd_save);
     csh_cmd_save = NULL;
     csh_nth = 0;
+    csh_completing = FALSE;
+    csh_command_counter = -1; // non completion counter.
+    
+}
+
+const gchar *
+csh_completion_c::csh_find(const gchar *token, gint direction){
+    if (csh_nth) csh_nth += direction;
+    if (csh_nth >= g_list_length(csh_command_list)){
+        csh_nth = g_list_length(csh_command_list)-1;
+        return NULL;
+    }
+    GList *list = g_list_nth(csh_command_list, csh_nth);
+    for (;list && list->data; (direction>0)?list=list->next:list=list->prev, csh_nth+=direction){
+        if (list->data && strncmp(token, (gchar *)list->data, strlen(token))==0) {
+            return (const gchar *)list->data;
+        }
+    }
+    // When you reach the bottom, put command back.
+    if (direction < 0) {
+        csh_nth = 0;
+        csh_place_command(token);
+    }
+    return NULL;
+}
+
+
+
+gboolean
+csh_completion_c::csh_completion(gint direction){
+    // Not completing?
+    if (!csh_completing){
+        // plain up and down arrow processing here.
+	TRACE("csh_completion_c::csh_completion: return on !csh_completing\n");
+	csh_offset_history(direction);
+        return FALSE;
+    }
+
+    // Completing?
+    const gchar *suggest = csh_find(csh_cmd_save, direction);
+    if (suggest){
+	TRACE("csh_completion_c::csh_completion: suggest=%s at %d\n", suggest, csh_nth); 
+	csh_place_command(suggest);
+        return TRUE;
+    }
+    TRACE("csh_completion_c::csh_completion: no match to %s\n", csh_cmd_save);
+    csh_place_command(csh_cmd_save);
+    
+    return FALSE;
 }
 
 void 
@@ -117,7 +101,6 @@ csh_completion_c::csh_load_history (void) {
     }
     g_list_free (csh_command_list);
     csh_command_list = NULL;
-    csh_command_counter = 0; // XXX ??
 
     FILE *sh_history = fopen (history, "r");
     if(sh_history) {
@@ -279,17 +262,21 @@ csh_completion_c::csh_is_valid_command (const gchar *cmd_fmt) {
 
 gboolean
 csh_completion_c::csh_offset_history(gint offset){
-    gint item = csh_command_counter + offset;
-    if (item < 0) item = 0;
-    if (item >= g_list_length(csh_command_list)) item = g_list_length(csh_command_list) - 1;
-    const gchar *p = (const gchar *)g_list_nth_data (csh_command_list, item<0?0:item);
-    TRACE( "csh_completion_c::csh_offset_history: get csh_nth csh_command_counter=%d offset=%d item=%d\n", csh_command_counter, offset, item);
-    if (csh_command_counter + offset < 0) p = "";
+    csh_command_counter += offset;
+    if (csh_command_counter < -1)  {
+        csh_command_counter = -1;
+	csh_place_command("");
+        return TRUE;
+    }
+    if (csh_command_counter > g_list_length(csh_command_list)-2) 
+        csh_command_counter = g_list_length(csh_command_list) - 2;
+
+    const gchar *p = (const gchar *)g_list_nth_data (csh_command_list, csh_command_counter+1);
+    
+    TRACE( "csh_completion_c::csh_offset_history: get csh_nth csh_command_counter=%d offset=%d \n", csh_command_counter, offset);
+    
     if(p) {
-	csh_command_counter = item;
 	csh_place_command(p);
-	csh_completion_init();
-	
     }
     return TRUE;
 }
@@ -299,8 +286,8 @@ void
 csh_completion_c::place_cursor(void){
     GtkTextIter iter;
     GtkTextBuffer *buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW(status));
-    if (csh_completing) {
-        gtk_text_buffer_get_iter_at_offset (buffer, &iter, csh_cmd_len);
+    if (csh_completing && csh_cmd_save) {
+        gtk_text_buffer_get_iter_at_offset (buffer, &iter, strlen(csh_cmd_save));
     } else {
         gchar *text = get_current_text ();
         gtk_text_buffer_get_iter_at_offset (buffer, &iter, strlen(text));
