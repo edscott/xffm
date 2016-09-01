@@ -2,6 +2,16 @@
 #include "window_c.hpp"
 
 
+xffm_c::xffm_c(const gchar *data){
+    window_p = new window_c();
+    // initial view...
+    if (!data || !g_file_test(data,G_FILE_TEST_IS_DIR))
+        window_p->create_new_page(g_get_home_dir());
+    else 
+        window_p->create_new_page(data);
+}
+
+
 xffm_c::xffm_c(void){
     window_p = new window_c();
     // initial view...
