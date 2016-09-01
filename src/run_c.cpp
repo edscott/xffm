@@ -92,11 +92,8 @@ rfm_operate_stdout (void *data, void *stream, int childFD) {
     // on the gtk event loop.
     static gint count = 1;
     if (count % 20 == 0){
-        usleep(100000);
-    } else {
-        usleep(1000);
-    }
-
+        usleep(10000);
+    } 
     if (recur) {
         rfm_operate_stdout (data, recur, childFD);
         g_free(recur);
@@ -128,11 +125,8 @@ rfm_operate_stderr (void *data, void *stream, int childFD) {
     // on the gtk event loop.
     static gint count = 1;
     if (count % 20 == 0){
-        usleep(100000);
-    } else {
-        usleep(1000);
-    }
-
+        usleep(10000);
+    } 
    return;
 }
 
