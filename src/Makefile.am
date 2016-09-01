@@ -1,3 +1,4 @@
+# Edscott Wilson Garcia
 AM_CPPFLAGS = \
 	@LIBXML_CFLAGS@	\
 	@TUBO_CFLAGS@	\
