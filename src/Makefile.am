@@ -20,6 +20,7 @@ xffm_SOURCES = \
 	  xffm_c.cpp \
 	    window_c.cpp \
 	    view_c.cpp  \
+		thread_control_c.cpp   \
 		lpterm_c.cpp   \
 		    run_c.cpp   \
                         run_button_c.cpp \
