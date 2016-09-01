@@ -480,6 +480,8 @@ print_c::insert_string (GtkTextBuffer * buffer, const gchar * s, GtkTextTag **ta
     }
 
     GtkTextMark *mark = gtk_text_buffer_get_mark (buffer, "rfm-ow");
+    gchar *cr = (gchar *)strchr (s, 0x0D);
+    if(cr && cr[1] == 0x0A) *cr = ' ';       //CR-LF
     if(strchr (s, 0x0D)) {      //CR
         gchar *aa = g_strdup (s);
         *strchr (aa, 0x0D) = 0;
