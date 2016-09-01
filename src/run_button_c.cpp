@@ -24,9 +24,7 @@ run_button_c::run_button_c(void *data, const gchar * exec_command, pid_t child){
     // Shell commands come from lpterminal.
     gchar **args = g_strsplit(exec_command, " ", -1);
     if (args && args[0]) {
-    // FIXME: rfm_shell should be an xffm method
-	const gchar *shell = rfm_shell(); 
-	if (strcmp(shell, args[0])==0) icon = g_strdup("utilities-terminal");
+	if (strcmp(u_shell(), args[0])==0) icon = g_strdup("utilities-terminal");
 	else {
 	    icon = g_path_get_basename(args[0]);
 	    TRACE("run_button_c::setup_run_button_thread: %s : %s\n", icon, exec_command);
@@ -36,13 +34,6 @@ run_button_c::run_button_c(void *data, const gchar * exec_command, pid_t child){
     g_strfreev(args);
     // FIXME: this should be a view method
     //rfm_view_thread_create(view_p, run_wait_f, (void *) this, "run_wait_f");
-}
-
-const gchar *
-run_button_c::rfm_shell(void){
-    view_c *view_p = (view_c *)view_v;
-    window_c *window_p = (window_c *)(view_p->window_v);
-    return window_p->xffm_shell();
 }
 
 #if 0

@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <gtk/gtk.h>
 #include "utility_c.hpp"
 
@@ -156,4 +157,44 @@ utility_c::find_in_string_list(GList *list, const gchar *string){
     }
     return NULL;
 }
+
+gboolean
+utility_c::program_in_path(const gchar *program){
+    gchar *s = g_find_program_in_path (program);
+    if (!s) return FALSE;
+    g_free(s);
+    return TRUE;
+}
+
+const gchar *
+utility_c::default_shell(void){
+    const gchar *shells[]={"bash","tcsh","csh","dash","zsh","ksh","sash","ash","sh",NULL};
+    const gchar **shell;
+    for (shell = shells; shell && *shell; shell++){
+        if (program_in_path(*shell)) return *shell;
+    }
+    g_warning("unable to find a valid shell\n");
+    return "/bin/sh";
+}
+
+// dash is OK now.
+// Only csh/tcsh is broken, since it will not
+// pass on SIGTERM when controler gets SIGUSR1
+// This is only a problem if rodent_ps is not 
+// loadable.
+// gchar *
+
+
+const gchar *
+utility_c::u_shell(void){
+    if(getenv ("SHELL") && strlen (getenv ("SHELL"))) {
+        if (program_in_path(getenv ("SHELL"))) return getenv ("SHELL");
+    }
+
+    if(getenv ("XTERM_SHELL") && strlen (getenv ("XTERM_SHELL"))) {
+        if (program_in_path(getenv ("XTERM_SHELL"))) return getenv ("XTERM_SHELL");
+    }
+    return default_shell();
+}
+
 

@@ -72,8 +72,7 @@ run_output_c::start_string(gchar *command, pid_t controller, gboolean with_shell
     
     const gchar bold[]={27, '[', '1', 'm', 0};
     if (with_shell) {
-        const gchar *shell = rfm_shell();
-        gg = g_strconcat (g, " ", shell, " ", bold, command, "\n", NULL);
+        gg = g_strconcat (g, " ", u_shell(), " ", bold, command, "\n", NULL);
         g_free (g);
         return gg;
     }
@@ -149,13 +148,6 @@ run_output_c::arg_string(char **arg){
         g_free(g); g=gg;
     }
     return g;
-}
-
-const gchar *
-run_output_c::rfm_shell(void){
-    view_c *view_p = (view_c *)view_v;
-    window_c *window_p = (window_c *)(view_p->window_v);
-    return window_p->xffm_shell();
 }
 
 

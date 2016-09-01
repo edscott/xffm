@@ -316,7 +316,7 @@ GPid run_c::thread_run(const gchar *command){
     if (strchr(command, '\'')) with_shell = TRUE;
 
     gchar *ncommand;
-    if (with_shell) ncommand = g_strdup_printf("%s -c \"%s\"", rfm_shell(), command);
+    if (with_shell) ncommand = g_strdup_printf("%s -c \"%s\"", u_shell(), command);
     else ncommand = g_strdup(command);
     if(!g_shell_parse_argv (ncommand, &argc, &argv, &error)) {
         gchar *msg = g_strcompress (error->message);
@@ -829,11 +829,7 @@ rfm_thread_run (widgets_t * widgets_p, const gchar * command, void *interm) {
     gchar *argv[5];
     gint i=0;
 
-    gchar *shell = rfm_shell();
-    if (!shell){
-	DBG("No valid shell found\n");
-    }
-    argv[i++] = shell;
+    argv[i++] = u_shell();
     argv[i++] = "-c";
     argv[i++] = exec_command;
     argv[i++] = NULL;
@@ -865,7 +861,6 @@ rfm_thread_run (widgets_t * widgets_p, const gchar * command, void *interm) {
     rfm_save_sh_command_history (widgets_p->view_p, save_command);
     // do not do this: g_free(save_command); 
     // because save_command gets put into the history GList.
-    g_free(shell);
     g_free (exec_command);
     return  GINT_TO_POINTER(controller);
 }

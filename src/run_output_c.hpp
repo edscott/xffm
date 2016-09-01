@@ -12,7 +12,6 @@ class run_output_c: public csh_completion_c {
         gchar *start_string_argv(gchar **, pid_t);
 
         void push_hash(pid_t, gchar *);
-        const gchar *rfm_shell(void);//FIXME
 
 
     private:
