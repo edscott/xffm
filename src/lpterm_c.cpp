@@ -444,9 +444,16 @@ lpterm_c::lpterm_keyboard_event( GdkEventKey * event, gpointer data) {
     // On activate, run the lpcommand
     if(event->keyval == GDK_KEY_Return || event->keyval == GDK_KEY_KP_Enter) {
 	csh_completion_init();
+        csh_set_completing(FALSE);
         run_lp_command();
         return TRUE;
     }
+    // On right or left, change the csh completion token
+    if(event->keyval == GDK_KEY_Right || event->keyval == GDK_KEY_KP_Left) {
+	csh_completion_init();        
+        csh_set_completing(TRUE);
+    }
+
     // tab for bash completion
     if(event->keyval == GDK_KEY_Tab) {
         bash_completion();
