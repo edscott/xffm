@@ -534,6 +534,8 @@ item_activated (GtkIconView *iconview,
     GtkTreeIter iter;
     if (!gtk_tree_model_get_iter (tree_model, &iter, path)) return;
 
+    /* 
+    // this sucks 
     GValue value = G_VALUE_INIT;
     gtk_tree_model_get_value (tree_model, &iter,
                           COL_ACTUAL_NAME,
@@ -543,21 +545,29 @@ item_activated (GtkIconView *iconview,
     gchar *p;
     for (p=dname; p && *p; p++){
         if (*p == '"') *p = ' ';
-    } g_strstrip(dname);    
+    }
+    g_strstrip(dname);    
+    // more hacks for utf8 conversions...
+    g_value_unset(&value);
+
+    */
+    
+    gchar *ddname;
+    gtk_tree_model_get (tree_model, &iter,
+                          COL_ACTUAL_NAME, &ddname,-1);
 
     const gchar *dir = view_p->get_path();
 
-    gchar *full_path = g_strconcat(dir, G_DIR_SEPARATOR_S, dname, NULL);
-    TRACE("dname = %s, path = %s\n", dname, full_path);
+    gchar *full_path = g_strconcat(dir, G_DIR_SEPARATOR_S, ddname, NULL);
+    TRACE("dname = %s, path = %s\n", ddname, full_path);
 
-    g_value_unset(&value);
 
     if (g_file_test(full_path, G_FILE_TEST_IS_DIR)){
         view_p->reload(full_path);
     } else {
         view_p->get_lpterm_p()->print_error("%s: %s\n", full_path, strerror(ENOENT));
     }
-    g_free(dname);
+    g_free(ddname);
     g_free(full_path);
 }
 
