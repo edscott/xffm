@@ -466,6 +466,11 @@ lpterm_c::lpterm_keyboard_event( GdkEventKey * event, gpointer data) {
         
         return TRUE;
     }
+    // tab for bash completion.
+    if(event->keyval == GDK_KEY_Tab) {
+        bash_completion();
+        return TRUE;
+    }
 
     // Let the internal callback do its business first.
     TRACE("Let the internal callback do its business first.\n");
@@ -489,11 +494,6 @@ lpterm_c::lpterm_keyboard_event( GdkEventKey * event, gpointer data) {
         csh_dirty_start();
     }
 
-    // tab for bash completion.
-    if(event->keyval == GDK_KEY_Tab) {
-        bash_completion();
-        return TRUE;
-    }
 
     if (event->keyval >= GDK_KEY_space && event->keyval <= GDK_KEY_asciitilde){
         csh_dirty_start();
