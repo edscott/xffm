@@ -3,10 +3,10 @@
 #include "view_c.hpp"
 
 csh_completion_c::csh_completion_c(void *data): bash_completion_c(data){
-    csh_command_list = NULL;
     csh_cmd_save = NULL;
-    csh_completing = FALSE;
+    csh_history_list = NULL;
     csh_load_history();
+    csh_clean_start();
 }
 
 void 
@@ -35,18 +35,18 @@ csh_completion_c::csh_clean_start(void){
     csh_cmd_save = NULL;
     csh_nth = 0;
     csh_completing = FALSE;
-    csh_command_counter = -1; // non completion counter.
+    csh_history_counter = -1; // non completion counter.
     
 }
 
 const gchar *
 csh_completion_c::csh_find(const gchar *token, gint direction){
     if (csh_nth) csh_nth += direction;
-    if (csh_nth >= g_list_length(csh_command_list)){
-        csh_nth = g_list_length(csh_command_list)-1;
+    if (csh_nth >= g_list_length(csh_history_list)){
+        csh_nth = g_list_length(csh_history_list)-1;
         return NULL;
     }
-    GList *list = g_list_nth(csh_command_list, csh_nth);
+    GList *list = g_list_nth(csh_history_list, csh_nth);
     for (;list && list->data; (direction>0)?list=list->next:list=list->prev, csh_nth+=direction){
         if (list->data && strncmp(token, (gchar *)list->data, strlen(token))==0) {
             return (const gchar *)list->data;
@@ -60,22 +60,27 @@ csh_completion_c::csh_find(const gchar *token, gint direction){
     return NULL;
 }
 
+gboolean
+csh_completion_c::is_completing(void){
+    return csh_completing;
+}
 
+gboolean
+csh_completion_c::query_cursor_position(void){
+    GtkTextBuffer *buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW(status));
+    gint position = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(buffer), "cursor-position"));
+    TRACE("cursor position=%d\n", position);
+    if (!position) csh_completing = FALSE;
+    return csh_completing;
+}
 
 gboolean
 csh_completion_c::csh_completion(gint direction){
-    // Not completing?
-    if (!csh_completing){
-        // plain up and down arrow processing here.
-	TRACE("csh_completion_c::csh_completion: return on !csh_completing\n");
-	csh_offset_history(direction);
-        return FALSE;
-    }
 
     // Completing?
     const gchar *suggest = csh_find(csh_cmd_save, direction);
     if (suggest){
-	TRACE("csh_completion_c::csh_completion: suggest=%s at %d\n", suggest, csh_nth); 
+	TRACE("csh_completion_c::csh_completion: suggest=%s at csh_nth=%d\n", suggest, csh_nth); 
 	csh_place_command(suggest);
         return TRUE;
     }
@@ -96,11 +101,11 @@ csh_completion_c::csh_load_history (void) {
     gchar *history = g_build_filename (CSH_HISTORY, NULL);
     GList *p;
     // clean out history list before loading a new one.
-    for(p = csh_command_list; p; p = p->next) {
+    for(p = csh_history_list; p; p = p->next) {
         g_free (p->data);
     }
-    g_list_free (csh_command_list);
-    csh_command_list = NULL;
+    g_list_free (csh_history_list);
+    csh_history_list = NULL;
 
     FILE *sh_history = fopen (history, "r");
     if(sh_history) {
@@ -117,16 +122,16 @@ csh_completion_c::csh_load_history (void) {
                 }
             }
 	    gchar *newline = compact_line(line);
-	    GList *element = find_in_string_list(csh_command_list, newline);
+	    GList *element = find_in_string_list(csh_history_list, newline);
 
 	    if (element) { 
 		// remove old element
 		gchar *data=(gchar *)element->data;
-		csh_command_list = g_list_remove(csh_command_list, data);
+		csh_history_list = g_list_remove(csh_history_list, data);
 		g_free(data);
 	    }
 	    // put element at top of the pile
-	    csh_command_list = g_list_prepend(csh_command_list, newline);
+	    csh_history_list = g_list_prepend(csh_history_list, newline);
         }
         fclose (sh_history);
     }
@@ -141,7 +146,7 @@ csh_completion_c::csh_save_history (const gchar * data) {
     gchar *command_p = g_strdup(data);
     g_strstrip (command_p);
     // Get last registered command
-    void *last = g_list_nth_data (csh_command_list, 0);
+    void *last = g_list_nth_data (csh_history_list, 0);
     if (last && strcmp((gchar *)last, command_p) == 0) {
 	g_free(command_p);
 	// repeat of last command. nothing to do here.
@@ -157,18 +162,18 @@ csh_completion_c::csh_save_history (const gchar * data) {
     }
 
     // if command is already in history, bring it to the front
-    GList *item = find_in_string_list(csh_command_list, command_p);
+    GList *item = find_in_string_list(csh_history_list, command_p);
     if (item){
 	void *data = item->data;
 	// remove old position
-	csh_command_list=g_list_remove(csh_command_list, data);
+	csh_history_list=g_list_remove(csh_history_list, data);
 	// insert at top of list (item 0 is empty string)
-	csh_command_list = g_list_insert(csh_command_list, data, 0);
+	csh_history_list = g_list_insert(csh_history_list, data, 0);
 	goto save_to_disk;
     }
 
     // so the item was not found. proceed to insert
-    csh_command_list = g_list_insert(csh_command_list, command_p, 0);
+    csh_history_list = g_list_insert(csh_history_list, command_p, 0);
 
 save_to_disk:
     // rewrite history file
@@ -261,19 +266,19 @@ csh_completion_c::csh_is_valid_command (const gchar *cmd_fmt) {
 }
 
 gboolean
-csh_completion_c::csh_offset_history(gint offset){
-    csh_command_counter += offset;
-    if (csh_command_counter < -1)  {
-        csh_command_counter = -1;
+csh_completion_c::csh_history(gint offset){
+    csh_history_counter += offset;
+    if (csh_history_counter < 0)  {
+        csh_history_counter = -1;
 	csh_place_command("");
         return TRUE;
     }
-    if (csh_command_counter > g_list_length(csh_command_list)-2) 
-        csh_command_counter = g_list_length(csh_command_list) - 2;
+    if (csh_history_counter > g_list_length(csh_history_list)-2) 
+        csh_history_counter = g_list_length(csh_history_list) - 2;
 
-    const gchar *p = (const gchar *)g_list_nth_data (csh_command_list, csh_command_counter+1);
+    const gchar *p = (const gchar *)g_list_nth_data (csh_history_list, csh_history_counter);
     
-    TRACE( "csh_completion_c::csh_offset_history: get csh_nth csh_command_counter=%d offset=%d \n", csh_command_counter, offset);
+    TRACE( "csh_completion_c::csh_history: get csh_history_counter=%d offset=%d \n", csh_history_counter, offset);
     
     if(p) {
 	csh_place_command(p);

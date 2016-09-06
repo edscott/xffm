@@ -442,28 +442,43 @@ lpterm_c::lpterm_keyboard_event( GdkEventKey * event, gpointer data) {
     gtk_widget_grab_focus (GTK_WIDGET(status));
     gtk_c *gtk_p = view_p->get_gtk_p();
 
-    // Let the internal callback do its business first.
-    gboolean retval;
-    g_signal_emit_by_name ((gpointer)status, "key-press-event", event, &retval);
-    while (gtk_events_pending())gtk_main_iteration();
+    
+    if(event->keyval == GDK_KEY_Up || event->keyval == GDK_KEY_KP_Up) {
+        if (is_completing()) csh_completion(1);
+        else csh_history(1);
+        return TRUE;
+    }
+    if(event->keyval == GDK_KEY_Down || event->keyval == GDK_KEY_KP_Down) {
+        if (is_completing()) csh_completion(-1);
+        else csh_history(-1);
 
-    // Now do our stuff.
-    //
+        return TRUE;
+    }
     // On activate, run the lpcommand.
     if((event->keyval == GDK_KEY_Return) || (event->keyval == GDK_KEY_KP_Enter)) {
         csh_clean_start();
         run_lp_command();
         return TRUE;
     }
+    if((event->keyval == GDK_KEY_Page_Up) || (event->keyval == GDK_KEY_Page_Down)) {
+        gboolean retval;
+        g_signal_emit_by_name ((gpointer)diagnostics, "key-press-event", event, &retval);
+        
+        return TRUE;
+    }
 
-    if(event->keyval == GDK_KEY_Up) {
-        csh_completion(1);
-        return TRUE;
-    }
-    if(event->keyval == GDK_KEY_Down) {
-        csh_completion(-1);
-        return TRUE;
-    }
+    // Let the internal callback do its business first.
+    TRACE("Let the internal callback do its business first.\n");
+    gboolean retval;
+    g_signal_emit_by_name ((gpointer)status, "key-press-event", event, &retval);
+    while (gtk_events_pending())gtk_main_iteration();
+    TRACE("Now do our stuff.\n");
+
+    // Now do our stuff.
+    //
+    
+    // If cursor is back at position 0, then reset.
+    query_cursor_position();
 
     // On right or left, change the csh completion token.
     if((event->keyval == GDK_KEY_Right) || (event->keyval == GDK_KEY_KP_Right)) {
@@ -477,12 +492,6 @@ lpterm_c::lpterm_keyboard_event( GdkEventKey * event, gpointer data) {
     // tab for bash completion.
     if(event->keyval == GDK_KEY_Tab) {
         bash_completion();
-        return TRUE;
-    }
-    if((event->keyval == GDK_KEY_Page_Up) || (event->keyval == GDK_KEY_Page_Down)) {
-        gboolean retval;
-        g_signal_emit_by_name ((gpointer)diagnostics, "key-press-event", event, &retval);
-        
         return TRUE;
     }
 
