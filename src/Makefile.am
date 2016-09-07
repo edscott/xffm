@@ -1,5 +1,5 @@
 # Edscott Wilson Garcia
-AM_CPPFLAGS = \
+AM_CPPFLAGS = -std=c++11 \
 	@LIBXML_CFLAGS@	\
 	@TUBO_CFLAGS@	\
 	@GTK_CFLAGS@	\
@@ -41,7 +41,7 @@ xffm_SOURCES = \
 			pixbuf_cairo_c.cpp \
 	  main.cpp
 
-xffm_CPPFLAGS = -std=c++11 $(FLAGS) $(AM_CPPFLAGS)
+xffm_CPPFLAGS = $(FLAGS) $(AM_CPPFLAGS)
 xffm_LDADD = $(LDADD) 
 
 ########################################################################

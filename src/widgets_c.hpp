@@ -24,6 +24,7 @@ class widgets_c {
         GtkWidget *get_status_button(void);
         GtkWidget *get_diagnostics(void);
         GtkWidget *get_status_icon(void);
+        GtkWidget *get_button_space(void);
         GtkWidget *get_iconview(void);
         GtkWidget *get_iconview_icon(void);
         void set_status_label(const gchar *);

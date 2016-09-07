@@ -1,8 +1,16 @@
+#include <string.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 #include <tubo.h>
+#define DEBUG_TRACE 1
 #include "view_c.hpp"
 #include "window_c.hpp"
 #include "run_button_c.hpp"
 
+static void *run_wait_f (void *);
+static void *make_run_data_button (void *);
+static void *zap_run_button(void *);
+static void show_run_info (GtkButton *, gpointer);
 
 typedef struct thread_run_t {
     char *wd;
@@ -10,102 +18,131 @@ typedef struct thread_run_t {
 } thread_run_t;
 
 run_button_c::~run_button_c(void){
-   g_free(command);
-   g_free(icon);
+    TRACE("run_button_c::~run_button_c...\n");
+    if(button && GTK_IS_WIDGET(button)){
+        gtk_widget_hide(GTK_WIDGET (button));
+        gtk_widget_destroy (GTK_WIDGET (button));
+    }
+    g_free (tip);
+    g_free (command);
+    g_free (icon_id);
+    g_free (workdir);
 }
 
-run_button_c::run_button_c(void *data, const gchar * exec_command, pid_t child){
+run_button_c::run_button_c(void *data, const gchar * exec_command, pid_t child, gboolean shell_wrap){
     view_v = data;
-    TRACE ("run_button_c::setup_run_button_thread: grandchildPID=%d\n", (int)child);
+    in_shell = shell_wrap;
+
     pid = child;
     grandchild = Tubo_child(child);
     command = g_strdup (exec_command);
+    icon_id = NULL;
+    workdir = NULL; // FIXME
+    tip = NULL;
+    TRACE ("run_button_c::setup_run_button_thread: grandchildPID=%d\n", (int)child);
+
+    view_c *view_p =(view_c *)view_v;
+    pthread_t *thread = view_p->thread_create("run_button_c::run_button_c: run_wait_f", 
+            run_wait_f, (void *) this, FALSE);
+}
+
+void
+run_button_c::set_icon_id(const gchar *data){
+    g_free(icon_id); 
+    icon_id = data?g_strdup(data):NULL;
+}
+
+const gchar *
+run_button_c::get_icon_id(void){ return (const gchar *)icon_id;}
+
+const gchar *
+run_button_c::get_command(void){ return (const gchar *)command;}
+
+const gchar *
+run_button_c::get_workdir(void){ return (const gchar *)workdir;}
+
+const gchar *
+run_button_c::get_tip(void){ return (const gchar *)tip;}
+
+gint
+run_button_c::get_pid(void){ return (gint)pid;}
+
+gint
+run_button_c::get_grandchild(void){ return (gint)grandchild;}
+
+void *
+run_button_c::get_view_v(void){ return view_v;}
+
+void
+run_button_c::run_button_setup (void){
+    view_c *view_p =(view_c *)view_v;
+
     // Little icon assignment
-    // Shell commands come from lpterminal.
-    gchar **args = g_strsplit(exec_command, " ", -1);
-    if (args && args[0]) {
-	if (strcmp(u_shell(), args[0])==0) icon = g_strdup("utilities-terminal");
-	else {
-	    icon = g_path_get_basename(args[0]);
-	    TRACE("run_button_c::setup_run_button_thread: %s : %s\n", icon, exec_command);
-            // FIXME: if icon cannot be created from name, then use "emblem-run"
-	}
+    // Shell commands come from lpterminal (with specific shell characters).
+    
+    if (in_shell) icon_id = g_strdup("utilities-terminal");
+    else {
+        gchar **args = g_strsplit(command, " ", -1);
+        if (args && args[0]) {
+            icon_id = g_path_get_basename(args[0]);
+        }
+        else icon_id = g_strdup("emblem-run");
+        g_strfreev(args);
     }
-    g_strfreev(args);
-    // FIXME: this should be a view method
-    //rfm_view_thread_create(view_p, run_wait_f, (void *) this, "run_wait_f");
-}
 
-#if 0
+    TRACE("run_button_c::new_run_button: icon_id=%s  command=%s\n", icon_id, command);
 
+    pid_t pid = Tubo_child(pid);
+    if (pid < 0) {
+        TRACE("Tubo_child  < 0\n");
+        return ;
+    }
 
-static void
-setup_run_button_thread (widgets_t * widgets_p, const gchar * exec_command, pid_t child) {
-    view_t *view_p = widgets_p->view_p;
-    rfm_view_thread_create(view_p, run_wait_f, (gpointer) run_data_p, "run_wait_f");
+    gchar *tip = g_strdup_printf(" %s=%d\n", _("PID"), pid); 
+    gint i;
+    for (i=0; i<strlen(command); i+=40) {
+        gssize len = strlen(command+i);
+        if (len > 40) len = 40;
+        GString *string = g_string_new_len (command+i, len);
+        gchar *g = g_string_free (string, FALSE);
+        gchar *gg = g_strconcat(tip, "\n", g, NULL);
+        g_free(g);
+        g_free(tip);
+        tip = gg;
+    }
+    
+    
+    return ;
 }
 
 
 static void *
-make_run_data_button (gpointer data) {
-    run_data_t * run_data_p = data;
-    if(run_data_p->widgets_p->button_space) {
-	pid_t pid = Tubo_child(run_data_p->pid);
-	if (pid < 0) {
-	    TRACE("Tubo_child  < 0\n");
-	    return NULL;
-	}
-	gchar *text = g_strdup(_("Left click once to follow this link.\nMiddle click once to select this cell"));
-	if (strstr(text, "\n")) *strstr(text, "\n") = 0;
-	gchar *short_command = g_strdup(run_data_p->command);
-	if (strlen(short_command) > 80){
-	    short_command[76] = ' ';
-	    short_command[77] = '.';
-	    short_command[78] = '.';
-	    short_command[79] = '.';
-	}
-	gchar *tip=g_strdup_printf("%s\n(%s=%d)\n%s\n%s",  
-		short_command, _("PID"), pid,
-	      _("Right clicking pops context menu immediately"),
-	      text);
-	g_free(short_command);
-	g_free(text);
-	const gchar *icon_id = run_data_p->icon;
-	if (!icon_id || !rfm_get_pixbuf(icon_id, SIZE_BUTTON)){
-	    icon_id=(rfm_void(PLUGIN_DIR, "ps", "module_active"))?
-		"xffm/stock_execute": "xffm/stock_stop";
-	}
-	
-        run_data_p->button =
-            rfm_mk_little_button (icon_id,
-                                  (gpointer) show_run_info, run_data_p,
-				  tip);
-	g_free(tip);
-        gtk_box_pack_end (GTK_BOX (run_data_p->widgets_p->button_space), run_data_p->button, FALSE, FALSE, 0);
-        gtk_widget_show (run_data_p->button);
-        // flush gtk
-        while (gtk_events_pending()) gtk_main_iteration();
-        NOOP ("DIAGNOSTICS:srun_button made for grandchildPID=%d\n", (int)run_data_p->pid);
+make_run_data_button (void *data) {
+    run_button_c *run_button_p = (run_button_c *)data;
+    run_button_p->run_button_setup();
+
+
+    view_c *view_p = (view_c *)run_button_p->get_view_v();
+    const gchar *icon = run_button_p->get_icon_id();
+    if (!icon || !view_p->get_gtk_p()->get_pixbuf(icon, -16)){
+        run_button_p->set_icon_id("emblem-run");
     }
+
+    GtkWidget *button = gtk_button_new ();
+    view_p->get_gtk_p()->setup_image_button(button, run_button_p->get_icon_id(), run_button_p->get_tip());
+    g_signal_connect(button, "clicked", G_CALLBACK (show_run_info), data);
+    gtk_box_pack_end (GTK_BOX (view_p->get_button_space()), button, FALSE, FALSE, 0);
+    gtk_widget_show (button);
+    // flush gtk
+    while (gtk_events_pending()) gtk_main_iteration();
+    TRACE ("DIAGNOSTICS:srun_button made for grandchildPID=%d\n", (int)run_button_p->get_pid());
+
+
     return NULL;
 }
+
 
 static void *
-zap_run_button(gpointer data){
-	    NOOP(stderr, "zap_run_button...\n");
-    run_data_t *run_data_p = data;
-    if(run_data_p->button && GTK_IS_WIDGET(run_data_p->button)){
-        gtk_widget_hide(GTK_WIDGET (run_data_p->button));
-        gtk_widget_destroy (GTK_WIDGET (run_data_p->button));
-    }
-    g_free (run_data_p->command);
-    g_free (run_data_p->icon);
-    g_free (run_data_p->workdir);
-    g_free (run_data_p);
-    return NULL;
-}
-
-static void
 run_wait_f (void *data) {
     run_button_c *run_button_p = (run_button_c *) data;
 
@@ -113,22 +150,32 @@ run_wait_f (void *data) {
     // The following function will not return until button is created and duly
     // processed by the gtk loop. This to avoid a race with the command completing
     // before gtk has fully created the little run button.
-    rfm_context_function(make_run_data_button, run_data_p);
-    NOOP ("grand---thread waitpid for %d on (%s/%s)\n", run_data_p->pid, run_data_p->command, run_data_p->workdir);
+
+    
+    
+    run_button_p->context_function(make_run_data_button, data);
+    TRACE("run_wait_f: thread waitpid for %d on (%s/%s)\n", 
+            run_button_p->get_pid(), 
+            run_button_p->get_command(), 
+            run_button_p->get_workdir());
 
     gint status;
-    waitpid (run_data_p->pid, &status, 0);
+    waitpid (run_button_p->get_pid(), &status, 0);
 
-    NOOP (stderr, "grand---thread waitpid for %d complete!\n", run_data_p->pid);
-    /* remove little button (thread protect gtk here) */
+    TRACE("run_wait_f: thread waitpid for %d complete!\n", run_button_p->get_pid());
+    /* remove little button */
+    view_c *view_p = (view_c *)run_button_p->get_view_v();
     
 #ifdef DEBUG_TRACE    
     // This is out of sync here (grayball), so only in debug mode.
-    gchar *t = run_start_string(run_data_p->command, run_data_p->controller, FALSE);
-    print_icon("emblem-grayball", t);
+    view_p->get_lpterm_p()->print_icon("emblem-grayball", "%s %d/%d\n", run_button_p->get_command(),
+            run_button_p->get_pid(), run_button_p->get_grandchild());
 #endif
     
-    rfm_global_t *rfm_global_p = rfm_global();
+    /// FIXME: the following code is to signal the background monitor
+    //         currently no monitor is enabled.
+#if 0
+    /// FIXME
     if (rfm_global_p) {
         TRACE("run_wait_f(): trigger reload...\n");
         // Trigger reload to all tabbed views.
@@ -158,65 +205,42 @@ run_wait_f (void *data) {
         rfm_view_list_unlock("2 run_wait_f");
     }
 
-
+#endif
     // Run has completed.  
     // no use for controller process anymore....
-    NOOP(stderr, "run has completed: %d\n", run_data_p->pid);
-    rfm_remove_child(run_data_p->pid);
+    TRACE("run has completed: %d\n", run_button_p->get_pid());
+    // FIXME: what does rfm_remove_child do??
+    //        remove controller!
+    // FIXME: enable
+    // rfm_remove_child(run_data_p->pid);
     // Flush pipes.
     fflush(NULL);  
     // Destroy little button (if exists) and free run_data_p 
     // associated memory. Done in main thread for gtk instruction set.
-    rfm_context_function(zap_run_button, run_data_p);
+    run_button_p->context_function(zap_run_button, data);
     return NULL;
 }
 
-static pthread_mutex_t fork_mutex=PTHREAD_MUTEX_INITIALIZER;
 
-// This is main thread callback
+static void *
+zap_run_button(void * data){
+    TRACE("zap_run_button...\n");
+    run_button_c *run_button_p = (run_button_c *)data;
+    delete run_button_p;
+    return NULL;
+}
+
 static void
 show_run_info (GtkButton * button, gpointer data) {
-    if (g_thread_self() != rfm_get_gtk_thread()){
-	g_error("show_run_info() is a main thread function\n");
-    }
-    run_data_t *run_data_p = data;
-    guint button_id = GPOINTER_TO_UINT(g_object_get_data(G_OBJECT(button), "button_id"));
-    if (rfm_void(PLUGIN_DIR, "ps", "module_active")){
-	if (button_id == 3){
-	    NOOP(stderr, "ps popup now... \n");
-	    record_entry_t *en = rfm_mk_entry(0);
-	    en->type=0; /* remove local-type attributes */
-	    en->st = (struct stat *)malloc(sizeof(struct stat));
-	    if (!en->st) g_error("malloc: %s\n", strerror(errno));
-	    memset(en->st,0,sizeof(struct stat));
-
-	    pid_t child = Tubo_child(run_data_p->pid);
-	    en->path = g_strdup_printf("%d:%s", child, run_data_p->command);
-	    en->st->st_uid = child;
-	    
-	    rfm_rational(PLUGIN_DIR, "ps", NULL, en, "private_popup");
-	    NOOP(stderr, "popup mapped...\n");
-	    return;
-	}
-	gchar *ps_module = g_find_program_in_path("rodent-plug");
-	if (ps_module) {
-	    gchar *command=g_strdup_printf("%s ps %d",
-		    ps_module, (gint) run_data_p->pid);
-	    GError *error=NULL;
-	    if (!g_spawn_command_line_async (command, &error)){
-		g_warning("%s: %s\n", ps_module, error->message);
-		g_error_free(error);
-		g_free(command);
-		// here we default to the terminate dialog...
-	    } else {
-		g_free(command);
-		return;
-	    }
-	}
-    } else { // no rodent-ps
-	if (button_id == 3) return;
+    run_button_c *run_button_p = (run_button_c *)data;
+    //guint button_id = GPOINTER_TO_UINT(g_object_get_data(G_OBJECT(button), "button_id"));
+    //
+    //FIXME: popup signal menu or dialog here.
+    //FIXME: we also need to be able to signal to child of shell, if launched from shell
+    TRACE("FIXME: popup signal menu or dialog here.\n");
+//	if (button_id == 3) return;
 	
-	gchar *text2 =g_strdup_printf ("%s %s: %s\n\n%s %s (%d)?",
+/*	gchar *text2 =g_strdup_printf ("%s %s: %s\n\n%s %s (%d)?",
 		_("Kill (KILL)"), run_data_p->command, 
 		strerror(ETIMEDOUT), 
 		_("Kill"), run_data_p->command, run_data_p->pid);
@@ -229,8 +253,22 @@ show_run_info (GtkButton * button, gpointer data) {
 	    g_free (gg);
 	    kill (run_data_p->pid, SIGUSR2);
 	}
-	g_free (text2);
-    }
+	g_free (text2);*/
+    
 }
+
+#if 0
+
+
+static void
+setup_run_button_thread (widgets_t * widgets_p, const gchar * exec_command, pid_t child) {
+    view_t *view_p = widgets_p->view_p;
+    rfm_view_thread_create(view_p, run_wait_f, (gpointer) run_data_p, "run_wait_f");
+}
+
+
+static pthread_mutex_t fork_mutex=PTHREAD_MUTEX_INITIALIZER;
+
+// This is main thread callback
 
 #endif

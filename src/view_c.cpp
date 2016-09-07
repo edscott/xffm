@@ -32,7 +32,7 @@ static void switch_page (GtkNotebook *, GtkWidget *, guint, void *);
 ////////////////////////////////////////
 
 
-view_c::view_c(void *window_data, GtkNotebook *notebook) : widgets_c(window_data, notebook) {
+view_c::view_c(void *window_data, GtkNotebook *notebook) : widgets_c(window_data, notebook), thread_control_c((void *)this) {
     xfdir_p = NULL;
     dirty_hash = FALSE;
 

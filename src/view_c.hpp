@@ -6,10 +6,11 @@
 #include "lpterm_c.hpp"
 #include "print_c.hpp"
 #include "xfdir_c.hpp"
+#include "thread_control_c.hpp"
 
 
 
-class view_c:public widgets_c {
+class view_c:public widgets_c, public thread_control_c {
     public:
         view_c(void *, GtkNotebook *);
         ~view_c(void);
