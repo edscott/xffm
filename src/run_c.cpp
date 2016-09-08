@@ -267,7 +267,7 @@ fork_function (void *data) {
 
 run_c::run_c(void *data): run_output_c(data) {}
 
-GPid run_c::thread_run(const gchar **arguments){
+pid_t run_c::thread_run(const gchar **arguments){
 
     gchar *command = g_strdup("");
     const gchar **p = arguments;
@@ -292,26 +292,31 @@ GPid run_c::thread_run(const gchar **arguments){
     print_tag("tag/bold", "%s\n", command);
     push_hash(grandchild, g_strdup(command));
     g_free(command);
+    return pid;
 }
 
+gboolean
+run_c::run_in_shell(const gchar *command){
+    const gchar *special = "\'*?<>|&";
+    if (strchr(command, '?')) return TRUE;
+    if (strchr(command, '*')) return TRUE;
+    if (strchr(command, '<')) return TRUE; 
+    if (strchr(command, '>')) return TRUE; 
+    if (strchr(command, '|')) return TRUE; 
+    if (strchr(command, '&')) return TRUE; 
+    if (strchr(command, '\'')) return TRUE;
+    return FALSE;
+}
 
-GPid run_c::thread_run(const gchar *command){
+pid_t run_c::thread_run(const gchar *command){
     GError *error = NULL;
     gint argc;
     gchar **argv;
-    gboolean with_shell = FALSE;
-    const gchar *special = "\'*?<>|&";
-    if (strchr(command, '?')) with_shell = TRUE;
-    if (strchr(command, '*')) with_shell = TRUE;
-    if (strchr(command, '<')) with_shell = TRUE; 
-    if (strchr(command, '>')) with_shell = TRUE; 
-    if (strchr(command, '|')) with_shell = TRUE; 
-    if (strchr(command, '&')) with_shell = TRUE; 
-    if (strchr(command, '\'')) with_shell = TRUE;
 
     gchar *ncommand;
-    if (with_shell) ncommand = g_strdup_printf("%s -c \"%s\"", u_shell(), command);
-    else ncommand = g_strdup(command);
+    if (run_in_shell(command)){
+       	ncommand = g_strdup_printf("%s -c \"%s\"", u_shell(), command);
+    } else ncommand = g_strdup(command);
     if(!g_shell_parse_argv (ncommand, &argc, &argv, &error)) {
         gchar *msg = g_strcompress (error->message);
         print_error("%s: %s\n", msg, ncommand);

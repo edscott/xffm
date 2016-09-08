@@ -1,4 +1,4 @@
-#define DEBUG_TRACE 1
+//#define DEBUG_TRACE 1
 #include "csh_completion_c.hpp"
 #include "view_c.hpp"
 

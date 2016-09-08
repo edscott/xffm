@@ -2,6 +2,7 @@
 
 #include "view_c.hpp"
 #include "lpterm_c.hpp"
+#include "run_button_c.hpp"
 
 #ifdef HAVE_READLINE_HISTORY_H
 # include <readline/history.h>
@@ -344,19 +345,22 @@ lpterm_c::sudo_fix(const gchar *command){
     return new_command;
 }
 
-void
+void *
 lpterm_c::shell_command(const gchar *c){
 
     // Fix any sudo commands to use the -A option
     gchar *command = sudo_fix(c);
     // FIXME: run through selected shell
 
-    thread_run(command?command:c);
+    pid_t pid = thread_run(command?command:c);
+    run_button_c *run_button_p = NULL;
+    // FIXME: run button crashes...
+    //run_button_p = new run_button_c(view_v, c, pid, run_in_shell(c));
     //csh_save_history(command?command:c);
     csh_save_history(c);
     
     g_free (command);
-
+    return (void *)run_button_p;
 }
 
 void 

@@ -7,8 +7,9 @@ class run_c: public run_output_c {
     public:
         run_c(void *);
     protected:
-        GPid thread_run(const gchar *command);
-        GPid thread_run(const gchar **arguments);
+        pid_t thread_run(const gchar *command);
+        pid_t thread_run(const gchar **arguments);
+	gboolean run_in_shell(const gchar *command);
     private:
  
 };
