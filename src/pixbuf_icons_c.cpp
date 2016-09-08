@@ -311,7 +311,8 @@ pixbuf_icons_c::insert_pixbuf_tag (GdkPixbuf *tag, GdkPixbuf *composite_pixbuf,
 
 ////////////////////////////////////////////////////////////////////////////////////////
 
-#ifdef OLDCODE
+#if 0
+// def OLDCODE
 
 #ifdef COPYRIGHT_INFORMATION
 #include "gplv3.h"

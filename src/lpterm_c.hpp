@@ -2,15 +2,19 @@
 #define LPTERM_C_HPP
 #include "xffm+.h"
 #include "run_c.hpp"
+#include "run_button_c.hpp"
 
 class lpterm_c: public run_c {
     public:
         lpterm_c(void *);
+        ~lpterm_c(void);
         gboolean is_iconview_key(GdkEventKey *);
         gboolean is_lpterm_key(GdkEventKey *);
         gboolean lp_get_active(void);
         void lp_set_active(gboolean);
 	gboolean window_keyboard_event(GdkEventKey *, void *);
+        void reference_run_button(run_button_c *);
+        void unreference_run_button(run_button_c *);
 
 /*
         void recover_flags (gchar * in_cmd, gboolean * interm, gboolean * hold);
@@ -30,6 +34,9 @@ class lpterm_c: public run_c {
         GtkWidget *status_button;
         GtkWidget *status_icon;
         GtkWidget *iconview_icon;
+
+        GList *run_button_list;
+        pthread_mutex_t *rbl_mutex;
 
 
 }; 

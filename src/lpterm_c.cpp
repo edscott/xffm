@@ -33,9 +33,50 @@ lpterm_c::lpterm_c(void *data): run_c(data){
     status_icon = view_p->get_status_icon();
     iconview_icon = view_p->get_iconview_icon();
     status_button = view_p->get_status_button();
+    pthread_mutexattr_t r_attr;
+    pthread_mutexattr_init(&r_attr);
+    pthread_mutexattr_settype(&r_attr, PTHREAD_MUTEX_RECURSIVE);
+    rbl_mutex = (pthread_mutex_t *)calloc(1, sizeof(pthread_mutex_t));
+    pthread_mutex_init(rbl_mutex, &r_attr);
 
+
+    run_button_list = NULL;
     g_signal_connect (status, "key-press-event", G_CALLBACK (status_keyboard_event), data);
     g_signal_connect (status_button, "button-press-event", G_CALLBACK (on_status_button_press), (void *)this);
+}
+
+lpterm_c::~lpterm_c(void){
+    GList *l = run_button_list;
+    pthread_mutex_lock(rbl_mutex);
+    for (; l && l->data; l=l->next){
+        run_button_c *rb_p = (run_button_c *)l->data;
+        unreference_run_button(rb_p);
+    }
+    g_list_free(run_button_list);
+    run_button_list=NULL;
+    pthread_mutex_unlock(rbl_mutex);
+    pthread_mutex_destroy(rbl_mutex);
+    g_free(rbl_mutex);
+}
+
+void
+lpterm_c::reference_run_button(run_button_c *rb_p){
+    DBG("lpterm_c::reference_run_button(%p)\n", (void *)rb_p);
+    pthread_mutex_lock(rbl_mutex);
+    run_button_list = g_list_prepend(run_button_list, (void *)rb_p);
+    pthread_mutex_unlock(rbl_mutex);
+}
+
+void
+lpterm_c::unreference_run_button(run_button_c *rb_p){
+    DBG("lpterm_c::unreference_run_button(%p)\n", (void *)rb_p);
+    pthread_mutex_lock(rbl_mutex);
+    void *p = g_list_find(run_button_list, (void *)rb_p);
+    if (p){
+        run_button_list = g_list_remove(run_button_list, (void *)rb_p);
+        delete (rb_p);
+    }
+    pthread_mutex_unlock(rbl_mutex);
 }
 
 gboolean 
@@ -355,7 +396,7 @@ lpterm_c::shell_command(const gchar *c){
     pid_t pid = thread_run(command?command:c);
     run_button_c *run_button_p = NULL;
     // FIXME: run button crashes...
-    //run_button_p = new run_button_c(view_v, c, pid, run_in_shell(c));
+    run_button_p = new run_button_c(view_v, c, pid, run_in_shell(c));
     //csh_save_history(command?command:c);
     csh_save_history(c);
     

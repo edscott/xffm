@@ -293,7 +293,8 @@ pixbuf_hash_c::find_in_pixbuf_hash(const gchar *icon_name, gint size){
         put_in_pixbuf_hash(icon_name, size, pixbuf);
         return pixbuf;
     } 
-    return find_in_pixbuf_hash( "image-missing", size);
+    return NULL;
+    //return find_in_pixbuf_hash( "image-missing", size);
 }
 
 

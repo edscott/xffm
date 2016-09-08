@@ -18,7 +18,7 @@ typedef struct thread_run_t {
 } thread_run_t;
 
 run_button_c::~run_button_c(void){
-    TRACE("run_button_c::~run_button_c...\n");
+    TRACE("run_button_c::~run_button_c... button %p\n", (void *)button);
     if(button && GTK_IS_WIDGET(button)){
         gtk_widget_hide(GTK_WIDGET (button));
         gtk_widget_destroy (GTK_WIDGET (button));
@@ -74,8 +74,9 @@ void *
 run_button_c::get_view_v(void){ return view_v;}
 
 void
-run_button_c::run_button_setup (void){
+run_button_c::run_button_setup (GtkWidget *data){
     view_c *view_p =(view_c *)view_v;
+    button = data;
 
     // Little icon assignment
     // Shell commands come from lpterminal (with specific shell characters).
@@ -90,28 +91,21 @@ run_button_c::run_button_setup (void){
         g_strfreev(args);
     }
 
-    TRACE("run_button_c::new_run_button: icon_id=%s  command=%s\n", icon_id, command);
 
-    pid_t pid = Tubo_child(pid);
-    if (pid < 0) {
-        TRACE("Tubo_child  < 0\n");
-        return ;
-    }
-
-    gchar *tip = g_strdup_printf(" %s=%d\n", _("PID"), pid); 
-    gint i;
-    for (i=0; i<strlen(command); i+=40) {
-        gssize len = strlen(command+i);
-        if (len > 40) len = 40;
-        GString *string = g_string_new_len (command+i, len);
-        gchar *g = g_string_free (string, FALSE);
-        gchar *gg = g_strconcat(tip, "\n", g, NULL);
-        g_free(g);
-        g_free(tip);
-        tip = gg;
-    }
-    
-    
+    tip = g_strdup_printf(" %s=%d\n", _("PID"), pid); 
+    gint i=40;
+    gint j=0;
+    gchar buffer[2048]; memset(buffer, 0, 2048);
+    do {
+        if (i>strlen(command)) i=strlen(command);
+        strncat(buffer, command+j, i);
+        j += i;
+        if (j<strlen(command))strcat(buffer, "\n");
+    } while (j<strlen(command));
+    gchar *g = g_strconcat(tip, buffer, NULL);
+    g_free(tip);
+    tip = g;
+    TRACE("run_button_c::new_run_button: icon_id=%s  command=%s pid=%d tip=%s\n", icon_id, command, pid, tip);
     return ;
 }
 
@@ -119,16 +113,21 @@ run_button_c::run_button_setup (void){
 static void *
 make_run_data_button (void *data) {
     run_button_c *run_button_p = (run_button_c *)data;
-    run_button_p->run_button_setup();
+    GtkWidget *button = gtk_button_new ();
+
+    run_button_p->run_button_setup(button);
 
 
     view_c *view_p = (view_c *)run_button_p->get_view_v();
     const gchar *icon = run_button_p->get_icon_id();
-    if (!icon || !view_p->get_gtk_p()->get_pixbuf(icon, -16)){
-        run_button_p->set_icon_id("emblem-run");
-    }
 
-    GtkWidget *button = gtk_button_new ();
+    // Test for validity of icon
+    if (!icon || !view_p->get_gtk_p()->find_pixbuf(icon, -16)){
+        run_button_p->set_icon_id("emblem-run");
+    } 
+    
+    DBG("*** icon_id=%s tip=%s\n", run_button_p->get_icon_id(), run_button_p->get_tip());
+
     view_p->get_gtk_p()->setup_image_button(button, run_button_p->get_icon_id(), run_button_p->get_tip());
     g_signal_connect(button, "clicked", G_CALLBACK (show_run_info), data);
     gtk_box_pack_end (GTK_BOX (view_p->get_button_space()), button, FALSE, FALSE, 0);
@@ -159,12 +158,14 @@ run_wait_f (void *data) {
             run_button_p->get_command(), 
             run_button_p->get_workdir());
 
+    view_c *view_p = (view_c *)run_button_p->get_view_v();
+    view_p->get_lpterm_p()->reference_run_button(run_button_p);
+    
     gint status;
     waitpid (run_button_p->get_pid(), &status, 0);
 
     TRACE("run_wait_f: thread waitpid for %d complete!\n", run_button_p->get_pid());
     /* remove little button */
-    view_c *view_p = (view_c *)run_button_p->get_view_v();
     
 #ifdef DEBUG_TRACE    
     // This is out of sync here (grayball), so only in debug mode.
@@ -226,7 +227,8 @@ static void *
 zap_run_button(void * data){
     TRACE("zap_run_button...\n");
     run_button_c *run_button_p = (run_button_c *)data;
-    delete run_button_p;
+    view_c *view_p = (view_c *)run_button_p->get_view_v();
+    view_p->get_lpterm_p()->unreference_run_button(run_button_p);
     return NULL;
 }
 

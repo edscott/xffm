@@ -6,7 +6,7 @@ class run_button_c: public utility_c {
     public:
         run_button_c(void *, const gchar *, pid_t, gboolean);
         ~run_button_c(void);
-        void run_button_setup (void);
+        void run_button_setup (GtkWidget *);
         gboolean in_shell;
         
         const gchar *get_icon_id(void);
