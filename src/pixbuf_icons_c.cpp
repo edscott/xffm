@@ -66,7 +66,7 @@ pixbuf_icons_c::is_composite_icon_name(const gchar *icon_name){
     const gchar **p = placements;
     for (;p && *p; p++){
         if (strstr(icon_name, *p)){
-            fprintf(stderr, "composite icon: %s\n", icon_name);
+            DBG("composite icon: %s\n", icon_name);
             return TRUE;
         }
     }
@@ -77,7 +77,7 @@ GdkPixbuf *
 pixbuf_icons_c::absolute_path_icon(const gchar *icon_name, gint size){
     if (!g_path_is_absolute (icon_name)) return NULL;
     if (!g_file_test (icon_name, G_FILE_TEST_EXISTS)) {
-        fprintf(stderr, "*** %s does not exist.\n", icon_name);
+        g_warning("*** %s does not exist.\n", icon_name);
         return NULL;
     }
     GdkPixbuf *pixbuf = pixbuf_new_from_file(icon_name, size, size); // width,height.
@@ -96,7 +96,7 @@ pixbuf_icons_c::get_theme_pixbuf(const gchar *icon_name, gint size){
                   GTK_ICON_LOOKUP_FORCE_SIZE,  // GtkIconLookupFlags flags,
                   &error);
     if (error) {
-        fprintf(stderr, "pixbuf_hash_c::find_in_pixbuf_hash: error->message\n");
+        TRACE("pixbuf_icons_c::get_theme_pixbuf: %s\n", error->message);
         g_error_free(error);
     } else if (theme_pixbuf) {
         // Release any reference to the icon theme.
@@ -198,7 +198,7 @@ insert_pixbuf_tag_f (void *data){
     errno = 0;
     gint overall_alpha = strtol(alpha, NULL, 10);
     if (errno){
-        fprintf(stderr, "insert_pixbuf_tag_f(): strtol(%s) -> %s\n", alpha, strerror(errno));
+        g_warning("insert_pixbuf_tag_f(): strtol(%s) -> %s\n", alpha, strerror(errno));
         return NULL;
     }
     

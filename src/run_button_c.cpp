@@ -39,7 +39,7 @@ run_button_c::run_button_c(void *data, const gchar * exec_command, pid_t child, 
     icon_id = NULL;
     workdir = NULL; // FIXME
     tip = NULL;
-    TRACE ("run_button_c::setup_run_button_thread: grandchildPID=%d\n", (int)child);
+    TRACE ("run_button_c::setup_run_button_thread: controller/process=%d/%d\n", (int)child, (gint)grandchild);
 
     view_c *view_p =(view_c *)view_v;
     pthread_t *thread = view_p->thread_create("run_button_c::run_button_c: run_wait_f", 
@@ -83,16 +83,18 @@ run_button_c::run_button_setup (GtkWidget *data){
     
     if (in_shell) icon_id = g_strdup("utilities-terminal");
     else {
+        command = g_strstrip(command);
         gchar **args = g_strsplit(command, " ", -1);
         if (args && args[0]) {
             icon_id = g_path_get_basename(args[0]);
+            TRACE("run_button_c::run_button_setup: attempting icon for \"%s\"\n", icon_id);
         }
         else icon_id = g_strdup("emblem-run");
         g_strfreev(args);
     }
 
 
-    tip = g_strdup_printf(" %s=%d\n", _("PID"), pid); 
+    tip = g_strdup_printf(" %s=%d\n", _("PID"), grandchild); 
     gint i=40;
     gint j=0;
     gchar buffer[2048]; memset(buffer, 0, 2048);
@@ -105,7 +107,7 @@ run_button_c::run_button_setup (GtkWidget *data){
     gchar *g = g_strconcat(tip, buffer, NULL);
     g_free(tip);
     tip = g;
-    TRACE("run_button_c::new_run_button: icon_id=%s  command=%s pid=%d tip=%s\n", icon_id, command, pid, tip);
+    TRACE("run_button_c::new_run_button: icon_id=%s  command=%s pid=%d grandchild=%d tip=%s\n", icon_id, command, pid, grandchild, tip);
     return ;
 }
 
