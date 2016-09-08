@@ -83,9 +83,28 @@ void print_c::print_debug(const gchar *format, ...){
 void print_c::print(const gchar *format, ...){
     if (!diagnostics) return;
     va_list var_args;
+
+    // Avoid vprintf when format has no extra arguments.
+    // This is to get around the glib problem with "%n" in arguments 
+    // (glib segfaults, this is a glib bug.)
+    //
+    // The "%n" may come in program output, such as "man ps"
+    // 
+    gint count=0;
     va_start (var_args, format);
-    gchar *string = g_strdup_vprintf(format, var_args);
+    while (1) {
+        void *s = va_arg(var_args, void *);
+        if (!s) break;
+        count++;
+    }
     va_end (var_args);
+    gchar *string;
+    if (count) {
+        va_start (var_args, format);
+        string = g_strdup_vprintf(format, var_args);
+        va_end (var_args);
+    } else string =g_strdup(format);
+
 
     void *arg[]={(void *)this, NULL, (void *)string};
     context_function(print_f, arg);

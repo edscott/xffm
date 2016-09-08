@@ -26,6 +26,7 @@ class run_button_c: public utility_c {
         gchar *tip;
         gchar *icon_id;
         gchar *workdir;
+        GtkWidget *popup_widget;
         GtkWidget *button;
         void *view_v;
 
