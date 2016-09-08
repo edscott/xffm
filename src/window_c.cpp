@@ -7,6 +7,7 @@
 static void on_new_page(GtkWidget *, gpointer);
 static void on_go_home(GtkWidget *, gpointer);
 static gboolean window_keyboard_event (GtkWidget *, GdkEventKey *, gpointer);
+static void on_destroy(GtkWidget *, gpointer);
 
 window_c::window_c(void) {
     view_list=NULL;
@@ -64,6 +65,7 @@ window_c::~window_c(void) {
     delete utility_p;
     delete gtk_p;
     delete signals_p;
+    //gtk_application_remove_window (GtkApplication *app, window);
 }
 
 gtk_c *

@@ -71,7 +71,7 @@ xfdir_c::reload(const gchar *data){
     }
     g_free(path);
     path = g_get_current_dir();
-    fprintf(stderr, "current dir is %s\n", path);
+    DBG("current dir is %s\n", path);
     gtk_list_store_clear (GTK_LIST_STORE(treemodel));
 
     
