@@ -5,12 +5,12 @@ static void startup(GtkApplication *, void *);
 static void shutdown(GtkApplication *, void *);
 static void open (GtkApplication *, gpointer, gint, gchar *, gpointer);
 
-
 xffm_c::xffm_c(gint in_argc, gchar **in_argv){
     gtk_p = NULL;
     argc = in_argc;
     argv = in_argv;
-    app = gtk_application_new ("org.xffm", G_APPLICATION_HANDLES_OPEN);
+    app = gtk_application_new (NULL, G_APPLICATION_HANDLES_OPEN);
+
     window_p_list = NULL;
     g_signal_connect (app, "activate", G_CALLBACK (activate), (void *)this);
     g_signal_connect (app, "open", G_CALLBACK (open), (void *)this);

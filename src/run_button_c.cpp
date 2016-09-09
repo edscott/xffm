@@ -111,11 +111,43 @@ run_button_c::run_button_setup (GtkWidget *data){
     return ;
 }
 
+static gchar *
+get_menu_xml(void){
+    const gchar *items[]={N_("Renice Process"),N_("Suspend (STOP)"),N_("Continue (CONT)"),
+        N_("Interrupt (INT)"),N_("Hangup (HUP)"),N_("User 1 (USR1)"),
+        N_("User 2 (USR2)"),N_("Terminate (TERM)"),N_("Kill (KILL)"),
+        N_("Segmentation fault"),NULL};
+    gchar *menu_string = g_strdup_printf("<interface><menu id=\"signals_menu\"><section>");
+    const gchar **p;
+    gchar *g;
+    for (p=items; p&& *p; p++){
+        g = g_strdup_printf("%s\n<item>\n<attribute name=\"label\" translatable=\"yes\">%s</attribute>", 
+                menu_string, *p);
+        g_free(menu_string);
+        menu_string = g;
+        g = g_strdup_printf("%s\n<attribute name=\"action\">app.FIXME</attribute>\n</item>", menu_string);
+        g_free(menu_string);
+        menu_string = g;
+    }
+    g = g_strdup_printf("%s\n</section></menu></interface>", menu_string); 
+    g_free(menu_string);
+    menu_string = g;
+    return menu_string;
+}
+
 
 static void *
 make_run_data_button (void *data) {
     run_button_c *run_button_p = (run_button_c *)data;
-    GtkWidget *button = gtk_button_new ();
+    GtkWidget *button = gtk_menu_button_new ();
+    //GtkWidget *button = gtk_button_new ();
+    gchar *signals_xml = get_menu_xml();
+    GtkBuilder *builder = gtk_builder_new_from_string (signals_xml,-1);
+    g_free(signals_xml);
+    GMenuModel *menu = G_MENU_MODEL (gtk_builder_get_object (builder, "signals_menu"));
+
+    gtk_menu_button_set_menu_model (GTK_MENU_BUTTON (button), menu);
+    g_object_unref(builder);
 
     run_button_p->run_button_setup(button);
 
