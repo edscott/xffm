@@ -98,6 +98,7 @@ run_output_c::start_string(gchar *command, pid_t controller, gboolean with_shell
 void
 run_output_c::push_hash(pid_t controller, gchar *string){
     pthread_mutex_lock(&string_hash_mutex);
+    if (!c_string_hash) DBG("run_output_c::push_hash: hash is null!\n");
     g_hash_table_replace(c_string_hash, GINT_TO_POINTER(controller), string);
     pthread_mutex_unlock(&string_hash_mutex);
 }
@@ -105,6 +106,7 @@ run_output_c::push_hash(pid_t controller, gchar *string){
 gchar *
 run_output_c::pop_hash(pid_t controller){
     pthread_mutex_lock(&string_hash_mutex);
+    if (!c_string_hash) DBG("run_output_c::pop_hash: hash is null!\n");
     gchar *string = (gchar *)g_hash_table_lookup (c_string_hash, GINT_TO_POINTER(controller));
     if (!string){
         pthread_mutex_unlock(&string_hash_mutex);

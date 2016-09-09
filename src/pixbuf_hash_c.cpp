@@ -143,6 +143,7 @@ put_in_pixbuf_hash_f(void *data){
     g_object_ref(pixbuf_p->pixbuf);
 
     TRACE("replacing in hashtable: %s (%s)\n", pixbuf_p->path, hash_key);
+    if (!pixbuf_hash) DBG("put_in_pixbuf_hash_f: hash is null!\n");
     g_hash_table_replace (pixbuf_hash, hash_key, pixbuf_p);
     return GINT_TO_POINTER(1);
 }
@@ -189,6 +190,7 @@ rm_from_pixbuf_hash_f(void *data){
     gchar *hash_key = (gchar *)arg[0];
     GHashTable *pixbuf_hash = (GHashTable *)arg[1];
     if (!hash_key) return  NULL;
+    if (!pixbuf_hash) DBG("rm_from_pixbuf_hash_f: hash is null!\n");
     void *d = g_hash_table_lookup(pixbuf_hash, hash_key);
     
     if (d) {
@@ -225,6 +227,7 @@ find_in_pixbuf_hash_f(void *data){
     pixbuf_hash_c *pixbuf_hash_p= (pixbuf_hash_c *)arg[4];
 
 
+    if (!pixbuf_hash) DBG("find_in_pixbuf_hash_f: hash is null!\n");
     pixbuf_t *pixbuf_p = (pixbuf_t *)g_hash_table_lookup (pixbuf_hash, hash_key);
 
     if(!pixbuf_p || !GDK_IS_PIXBUF(pixbuf_p->pixbuf)) {
@@ -351,21 +354,4 @@ pixbuf_hash_c::composite_icon(const gchar *icon_name, gint size){
     return base_pixbuf;
 }
 
-#if 0
-static void *
-replace_pixbuf_hash_f(void *data){
-    //GHashTable *old_hash = pixbuf_hash;
-    pixbuf_hash = data;
-    // XXX leak. Pointers may be in use by other threads.
-    //if (old_hash) g_hash_table_destroy(old_hash);
-    return NULL;
-}
-
-void
-rfm_replace_pixbuf_hash (void) {
-    GHashTable *hash = init_pixbuf_hash();
-    rfm_context_function(replace_pixbuf_hash_f, hash);
-    return;
-}
-#endif
 

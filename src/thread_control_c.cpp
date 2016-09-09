@@ -61,6 +61,7 @@ thread_control_c::thread_unreference(pthread_t *thread){
     if (thread) inc_dec_view_ref(FALSE);
 #ifdef DEBUG_THREADS
     pthread_mutex_lock(&reference_mutex);
+    if (!thread_hash) DBG("thread_control_c::thread_unreference: hash is null!\n");
     const gchar *removed_text = (const gchar *)g_hash_table_lookup(thread_hash, (void *)thread);
 
     TRACE( "- view decrement: 0x%x (%s) view ref = %d\n", 
@@ -99,6 +100,7 @@ thread_control_c::thread_reference(pthread_t *thread, const gchar *dbg_text){
     if (thread) inc_dec_view_ref(TRUE);
 
 #ifdef DEBUG_THREADS
+    if (!thread_hash) DBG("thread_control_c::thread_reference: hash is null!\n");
     TRACE( "- view increment: 0x%x:0x%x (%s) view ref = %d\n",
             GPOINTER_TO_INT(this), GPOINTER_TO_INT(thread), 
             dbg_text, g_list_length(thread_list)+1);

@@ -7,6 +7,7 @@
 
 class gtk_c: public utility_c, public tooltip_c, public pixbuf_c {
     public:
+        ~gtk_c(void);
         void setup_image_button (GtkWidget *, const gchar *, const gchar *);    
         GtkWidget *new_add_page_tab(GtkWidget *, GtkWidget **);
 	void set_bin_contents(GtkWidget *, const char *, const char *, gint);

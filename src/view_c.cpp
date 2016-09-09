@@ -84,6 +84,7 @@ view_c::view_c(void *window_data, GtkNotebook *notebook) : widgets_c(window_data
 
 
 view_c::~view_c(void){
+    DBG("view_c::~view_c\n");
     if (xfdir_p) delete xfdir_p;
     if (lpterm_p) delete lpterm_p;
 }
@@ -218,6 +219,7 @@ unhighlight (gpointer key, gpointer value, gpointer data){
 void 
 view_c::clear_highlights(const gchar *tree_path_string){
     void *arg[]={(void *)this, (void *)tree_path_string};
+    if (!highlight_hash) DBG("view_c::clear_highlights: hash is null!\n");
     g_hash_table_foreach_remove (highlight_hash, unhighlight, (void *)arg);
     dirty_hash = (tree_path_string != NULL)? TRUE: FALSE;
 }
@@ -242,6 +244,7 @@ view_c::highlight(void){
 
     if (tpath){
         tree_path_string = gtk_tree_path_to_string (tpath);
+        if (!highlight_hash) DBG("view_c::highlight: hash is null!\n");
         if (g_hash_table_lookup(highlight_hash, tree_path_string)) {
             //TRACE("%s already in hash\n", tree_path_string);
             g_free (tree_path_string);

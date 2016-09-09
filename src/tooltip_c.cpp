@@ -10,6 +10,7 @@ tooltip_c::tooltip_c(void){
 
 tooltip_c::~tooltip_c(void){
     if (tooltip_text_hash) g_hash_table_destroy(tooltip_text_hash);
+    tooltip_text_hash = NULL;
     delete utility_p;
 }
 void 
@@ -310,6 +311,7 @@ destroy_widget(GtkWidget *button, void *data){
     tooltip_c *tooltip_p = (tooltip_c *)data;
     GdkPixbuf *tooltip_pixbuf = (GdkPixbuf *)
         g_object_get_data(G_OBJECT(button), "tooltip_pixbuf");
+    if (!tooltip_p->get_tooltip_text_hash()) DBG("destroy_widget: hash is null!\n");
     gchar *tooltip_text =
         (gchar *)g_hash_table_lookup(tooltip_p->get_tooltip_text_hash(), button);
     if (tooltip_text) {
@@ -335,6 +337,7 @@ custom_tooltip_f(void * data){
 
     gchar *t = g_strdup(text);
     g_object_set_data(G_OBJECT(widget), "tooltip_text", t);
+    if (!tooltip_p->get_tooltip_text_hash()) DBG("custom_tooltip_f: hash is null!\n");
     g_hash_table_replace(tooltip_p->get_tooltip_text_hash(), widget, t);
     g_object_set_data(G_OBJECT(widget), "tooltip_pixbuf", pixbuf);
    // if (pixbuf) g_object_ref(pixbuf);

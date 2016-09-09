@@ -12,8 +12,9 @@ class xffm_c{
 	void remove_window_p_from_list(void *);
 	
 	gint run(void);
-        GtkApplication *app;
     private:
+        gtk_c *gtk_p;
+        GtkApplication *app;
 	GList *window_p_list;
 	gint argc;
 	gchar **argv;

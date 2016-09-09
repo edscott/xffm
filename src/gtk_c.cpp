@@ -1,6 +1,9 @@
 #include "gtk_c.hpp"
 #include "intl.h"
 
+gtk_c::~gtk_c(void){
+    DBG("gtk_c::~gtk_c\n");
+}
 
 void
 gtk_c::setup_image_button (GtkWidget *button, const gchar *icon_name, const gchar *icon_tip){
