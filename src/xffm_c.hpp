@@ -5,14 +5,16 @@
 
 class xffm_c{
     public:
-        xffm_c(GtkApplication *);
-        xffm_c(GtkApplication *, const gchar *);
-        ~xffm_c(void);
-        GtkWindow *get_window(void);
-        void create_new_page(const gchar *);
+        xffm_c(gint, gchar **);
+	~xffm_c(void);
+	window_c *add_window_p(void);
+	window_c *add_window_p(const gchar *);
+	gint run(void);
     private:
-        window_c *window_p;
+	GList *window_p_list;
         GtkApplication *app;
+	gint argc;
+	gchar **argv;
 
 };
 
