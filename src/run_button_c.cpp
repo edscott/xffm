@@ -46,6 +46,13 @@ run_button_c::run_button_c(void *data, const gchar * exec_command, pid_t child, 
             run_wait_f, (void *) this, FALSE);
 }
 
+gtk_c *
+run_button_c::get_gtk_p(void){
+    view_c *view_p =(view_c *)view_v;
+    return (view_p->get_gtk_p());
+}
+
+
 void
 run_button_c::set_icon_id(const gchar *data){
     g_free(icon_id); 
@@ -111,6 +118,8 @@ run_button_c::run_button_setup (GtkWidget *data){
     return ;
 }
 
+/*
+ // for popover...
 static gchar *
 get_menu_xml(void){
     const gchar *items[]={N_("Renice Process"),N_("Suspend (STOP)"),N_("Continue (CONT)"),
@@ -125,7 +134,7 @@ get_menu_xml(void){
                 menu_string, *p);
         g_free(menu_string);
         menu_string = g;
-        g = g_strdup_printf("%s\n<attribute name=\"action\">app.FIXME</attribute>\n</item>", menu_string);
+        g = g_strdup_printf("%s\n<attribute name=\"action\">app.send_signal</attribute>\n</item>", menu_string);
         g_free(menu_string);
         menu_string = g;
     }
@@ -134,20 +143,159 @@ get_menu_xml(void){
     menu_string = g;
     return menu_string;
 }
+*/
 
+void send_signal(GtkWidget *w, void *data){
+    
+    run_button_c *run_button_p = (run_button_c *)data;
+    DBG("send_signal %d to %d\n", 
+            GPOINTER_TO_INT(g_object_get_data(G_OBJECT(w),"signal_id")), 
+            run_button_p->get_grandchild());
+
+#if 0
+
+static 
+void
+ps_signal(GtkMenuItem *m, gpointer data){
+    pid_t pid =  GPOINTER_TO_INT(rfm_get_widget("ps_uid"));
+    if (!pid) return;
+    // Is the effective runtime uid the same as that for the process to signal?
+    
+    // 1. Are we executing the command in a shell chain?
+    gchar *pcommand = g_strdup_printf("ps ax -o ppid,pid");
+    FILE *p = popen(pcommand, "r");
+    if (!p){
+        g_warning("pipe creation failed for %s\n", pcommand);
+        g_free(pcommand);
+        return;
+    } 
+    g_free(pcommand);
+    gint cpid = -1;
+    gchar *spid = g_strdup_printf("%0d", pid);
+    gchar buffer[64];
+    memset(buffer, 0, 64);
+    while (fgets(buffer, 63, p) && !feof(p)){
+        if (strncmp(buffer, spid, strlen(spid))==0){
+            DBG("gotcha: %s", buffer);
+            gchar **gg=g_strsplit(buffer, " ", -1);
+            errno = 0;
+            long l = strtol(gg[1], NULL, 10);
+            if (errno) {
+                g_warning("cannot parse to long: %s\n", gg[1]);
+                pclose(p);
+                g_free(spid);
+                g_strfreev(gg);
+                return;
+            }
+            cpid = l;
+            g_strfreev(gg);
+            break;
+        }
+    }
+    pclose(p);
+    // If cpid turns out > 0, then we are in a chained command and pid must change
+    if (cpid > 0) {
+        pid = cpid;
+        g_free(spid);
+        spid = g_strdup_printf("%0d", pid);
+    }
+
+    // 2. Does pid (either direct or from chained command) belong to us?
+    pcommand = g_strdup_printf("ps -p %d -o uid", (int)pid);
+    gboolean sudoize = FALSE;
+    uid_t uid = geteuid();
+    p = popen(pcommand, "r");
+    long luid = geteuid();
+    if (!p){
+        g_warning("pipe creation failed for %s\n", pcommand);
+    } else {
+        gchar buffer[64];
+        memset(buffer, 0, 64);
+        while (fgets(buffer, 63, p) && !feof(p)){
+	    if (strstr(buffer, "UID")) continue;
+            errno=0;
+            luid = strtol(buffer, NULL, 10);
+            if (!errno){
+		DBG("line: %s gotcha: %ld\n", buffer, luid);
+                if (luid != uid) sudoize = TRUE;
+                break;
+            }
+        }
+        pclose(p);
+    }
+    g_free(pcommand);
+    gchar *sudo = g_find_program_in_path("sudo");
+    DBG("signal to pid: %s (owned by %d, sudo=%d)\n", spid, (int)luid, sudoize);
+    gint sig=GPOINTER_TO_INT(data);
+    if (sudoize && sudo) {
+        DBG("ps_signal by means of sudo...\n");
+        widgets_t *widgets_p = rfm_get_widget ("widgets_p");
+        gchar *signal_number = g_strdup_printf("-%0d", sig);
+        gchar *argv[]={sudo, "-A", "kill", signal_number, spid, NULL};
+        rfm_thread_run_argv (widgets_p, argv, FALSE);
+        g_free(signal_number);
+    } else {
+        if (!sudo) g_warning("sudo command not found to signal non-owned process\n");
+        DBG("normal ps_signal to %d...\n", (int)pid);
+        kill(pid, sig);
+    }
+    rfm_rational(RFM_MODULE_DIR, "callbacks", GINT_TO_POINTER(REFRESH_ACTIVATE), NULL, "callback");
+    g_free(sudo);
+    g_free(spid);
+    return;
+}
+
+
+
+#endif
+
+}
+
+GtkWidget *
+run_button_c::make_menu(void){
+    const gchar *items[]={N_("Renice Process"),N_("Suspend (STOP)"),N_("Continue (CONT)"),
+        N_("Interrupt (INT)"),N_("Hangup (HUP)"),N_("User 1 (USR1)"),
+        N_("User 2 (USR2)"),N_("Terminate (TERM)"),N_("Kill (KILL)"),
+        N_("Segmentation fault"),NULL};
+    const gchar *icons[]={"emblem-wait", "emblem-grayball","emblem-greenball",
+        "emblem-exit","view-refresh","emblem-user",
+        "emblem-user","emblem-cancel","emblem-redball",
+        "emblem-core",NULL};
+
+    GtkWidget *menu = gtk_menu_new();
+    const gchar **i;
+    const gchar **p;
+    gint j;
+    for (j=0,p=items, i=icons; p&& *p; p++,i++,j++){
+        GtkWidget *menuitem = get_gtk_p()->menu_item_new(*i, *p);
+        g_object_set_data(G_OBJECT(menuitem), "signal_id", GINT_TO_POINTER(j));
+        g_signal_connect(menuitem, "activate", G_CALLBACK(send_signal), (void *)this);
+        gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
+        gtk_widget_show(menuitem);
+    }
+
+    gtk_widget_show(menu);
+    return menu;
+}
 
 static void *
 make_run_data_button (void *data) {
     run_button_c *run_button_p = (run_button_c *)data;
     GtkWidget *button = gtk_menu_button_new ();
     //GtkWidget *button = gtk_button_new ();
+    
+    GtkWidget *menu = run_button_p->make_menu();
+    gtk_menu_button_set_popup (GTK_MENU_BUTTON(button),menu);
+    
+   /*
+    // popover is nice. but freaking problem to associate actions and parameters.
     gchar *signals_xml = get_menu_xml();
     GtkBuilder *builder = gtk_builder_new_from_string (signals_xml,-1);
     g_free(signals_xml);
     GMenuModel *menu = G_MENU_MODEL (gtk_builder_get_object (builder, "signals_menu"));
 
     gtk_menu_button_set_menu_model (GTK_MENU_BUTTON (button), menu);
-    g_object_unref(builder);
+    g_object_unref(builder);*/
 
     run_button_p->run_button_setup(button);
 
@@ -163,7 +311,7 @@ make_run_data_button (void *data) {
     DBG("*** icon_id=%s tip=%s\n", run_button_p->get_icon_id(), run_button_p->get_tip());
 
     view_p->get_gtk_p()->setup_image_button(button, run_button_p->get_icon_id(), run_button_p->get_tip());
-    g_signal_connect(button, "clicked", G_CALLBACK (show_run_info), data);
+    //g_signal_connect(button, "clicked", G_CALLBACK (show_run_info), data);
     gtk_box_pack_end (GTK_BOX (view_p->get_button_space()), button, FALSE, FALSE, 0);
     gtk_widget_show (button);
     // flush gtk

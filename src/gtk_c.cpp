@@ -96,3 +96,35 @@ gtk_c::set_bin_contents(GtkWidget *bin, const char *icon_id, const char *text, g
 }
 
 
+GtkWidget * 
+gtk_c::menu_item_new(const gchar *icon_id, const gchar *text)
+{
+    GdkPixbuf *pb = (icon_id)? get_pixbuf (icon_id, GTK_ICON_SIZE_SMALL_TOOLBAR): NULL;    
+                // no replacement for gtk_image_menu_item
+    GtkWidget *w = gtk_menu_item_new_with_label ("");
+    GtkWidget *replacement = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0);
+    GtkWidget *label = gtk_bin_get_child(GTK_BIN(w));
+    if (label && GTK_IS_WIDGET(label)) {
+        g_object_ref(label);
+        gtk_container_remove(GTK_CONTAINER(w), label);
+    }
+
+    if (pb){
+        GtkWidget *image = gtk_image_new_from_pixbuf (pb);
+        gtk_widget_show (image);
+        gtk_box_pack_start(GTK_BOX(replacement), image, FALSE,FALSE,0);
+        g_object_set_data(G_OBJECT(w), "image", image);
+    }
+    if (label && GTK_IS_WIDGET(label)) {
+        gtk_label_set_markup(GTK_LABEL(label), text);
+        gtk_box_pack_start(GTK_BOX(replacement), label, FALSE,FALSE,3);
+        g_object_set_data(G_OBJECT(w), "label", label);
+        gtk_widget_show(label);
+        g_object_unref(label);
+    }
+    gtk_widget_show(replacement);
+    gtk_container_add(GTK_CONTAINER(w), replacement);
+    return w;
+}
+
+

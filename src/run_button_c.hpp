@@ -17,6 +17,8 @@ class run_button_c: public utility_c {
         gint get_pid(void);
         gint get_grandchild(void);
         void *get_view_v(void);
+        gtk_c *get_gtk_p(void);
+        GtkWidget *make_menu(void);
 
     protected:
     private:

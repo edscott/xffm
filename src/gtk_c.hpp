@@ -12,6 +12,7 @@ class gtk_c: public utility_c, public tooltip_c, public pixbuf_c {
         GtkWidget *new_add_page_tab(GtkWidget *, GtkWidget **);
 	void set_bin_contents(GtkWidget *, const char *, const char *, gint);
 	void set_bin_markup(GtkWidget *, const char *);
+        GtkWidget *menu_item_new(const gchar *, const gchar *);
     protected:
     private:
 	void set_bin_image(GtkWidget *, const gchar *, gint);

@@ -63,10 +63,41 @@ activate(GtkApplication *app, void *data){
     xffm_c *xffm_p = (xffm_c *)data;
     xffm_p->add_window_p();
 }
+
+
+/*
+static void
+send_signal (GSimpleAction *action,
+                       GVariant      *parameter,
+                       gpointer       app)
+{
+    DBG("send_signal\n");
+}
+
+static void
+process_info (GSimpleAction *action,
+                       GVariant      *parameter,
+                       gpointer       app)
+{
+    DBG("process_info\n");
+}
+
+static GActionEntry app_entries[] =
+{
+  { "send_signal", send_signal, NULL, NULL, NULL },
+  { "process_info", process_info, NULL, NULL, NULL }
+};
+*/
 static void
 startup(GtkApplication *app, void *data){
   DBG("startup(GtkApplication *app, void *data)\n");
+
+ /* g_action_map_add_action_entries (G_ACTION_MAP (app),
+                                   app_entries, G_N_ELEMENTS (app_entries),
+                                   app);*/
 }
+
+
 static void
 shutdown(GtkApplication *app, void *data){
   DBG("shutdown(GtkApplication *app, void *data)\n");
