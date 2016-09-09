@@ -9,6 +9,7 @@ static void on_go_home(GtkWidget *, gpointer);
 static gboolean window_keyboard_event (GtkWidget *, GdkEventKey *, gpointer);
 static void on_destroy(GtkWidget *, gpointer);
 
+
 window_c::window_c(void) {
     view_list=NULL;
     view_list_mutex = PTHREAD_MUTEX_INITIALIZER;
@@ -16,7 +17,6 @@ window_c::window_c(void) {
     utility_p = new utility_c();
     gtk_p = new gtk_c();
     window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-    g_signal_connect (window, "destroy", G_CALLBACK (gtk_main_quit), NULL);
     g_signal_connect (window, "key-press-event", G_CALLBACK (window_keyboard_event), (void *)this);
     gtk_window_set_title (GTK_WINDOW (window), "Xffm+");
     gtk_container_set_border_width (GTK_CONTAINER (window), 0);
@@ -65,7 +65,6 @@ window_c::~window_c(void) {
     delete utility_p;
     delete gtk_p;
     delete signals_p;
-    //gtk_application_remove_window (GtkApplication *app, window);
 }
 
 gtk_c *
@@ -140,7 +139,6 @@ window_c::get_window(void){return GTK_WINDOW(window);}
 GtkNotebook *window_c::get_notebook(void) {return GTK_NOTEBOOK(notebook);}
 
 ////////////////////////////////////////////////////////////////////////////
-
 static void
 on_new_page(GtkWidget *widget, gpointer data){
     window_c *window_p = (window_c *)data;

@@ -9,10 +9,12 @@ class xffm_c{
 	~xffm_c(void);
 	window_c *add_window_p(void);
 	window_c *add_window_p(const gchar *);
+	void remove_window_p_from_list(void *);
+	
 	gint run(void);
+        GtkApplication *app;
     private:
 	GList *window_p_list;
-        GtkApplication *app;
 	gint argc;
 	gchar **argv;
 

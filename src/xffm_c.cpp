@@ -5,6 +5,15 @@ static void startup(GtkApplication *, void *);
 static void shutdown(GtkApplication *, void *);
 static void open (GtkApplication *, gpointer, gint, gchar *, gpointer);
 
+static void 
+destroy(GtkWidget *window, void *data){
+    xffm_c *xffm_p = (xffm_c *)data;
+    window_c *window_p = (window_c *)g_object_get_data(G_OBJECT(window), "window_p");
+    gtk_application_remove_window (xffm_p->app, GTK_WINDOW(window));
+    delete window_p;
+}
+
+
 xffm_c::xffm_c(gint in_argc, gchar **in_argv){
     argc = in_argc;
     argv = in_argv;
@@ -33,6 +42,9 @@ xffm_c::~xffm_c(void){
 window_c * 
 xffm_c::add_window_p(void){
     window_c *window_p = new window_c();
+    g_object_set_data(G_OBJECT(window_p->get_window()), "window_p", (void *)window_p);
+    g_signal_connect (window_p->get_window(), "destroy", G_CALLBACK (destroy), (void *)this);
+    
     // initial view...
     window_p->create_new_page(g_get_home_dir());
     gtk_application_add_window (app, window_p->get_window());
@@ -43,6 +55,8 @@ xffm_c::add_window_p(void){
 window_c * 
 xffm_c::add_window_p(const gchar *data){
     window_c *window_p = new window_c();
+    g_object_set_data(G_OBJECT(window_p->get_window()), "window_p", (void *)window_p);
+    g_signal_connect (window_p->get_window(), "destroy", G_CALLBACK (destroy), (void *)this);
     // initial view...
     window_p->create_new_page(data);
     gtk_application_add_window (app, window_p->get_window());
@@ -100,6 +114,11 @@ open (GtkApplication *app,
         window_p->create_new_page(path);
         g_free(path);
     }
+}
+
+void
+xffm_c::remove_window_p_from_list(void *data){
+    window_p_list = g_list_remove(window_p_list, data);
 }
 
 
