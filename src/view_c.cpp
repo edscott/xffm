@@ -1,3 +1,4 @@
+#include "xffm_c.hpp"
 #include "view_c.hpp"
 #include "window_c.hpp"
 #include "pathbar_c.hpp"
@@ -88,6 +89,14 @@ view_c::~view_c(void){
     if (xfdir_p) delete xfdir_p;
     if (lpterm_p) delete lpterm_p;
 }
+
+GMenuModel *
+view_c::get_signal_menu_model(void){
+    GtkWidget *window = GTK_WIDGET(get_window());
+    GMenuModel *model = (GMenuModel *)g_object_get_data(G_OBJECT(window), "signal_menu_model");
+    return model;
+}
+
 
 gboolean
 view_c::window_keyboard_event(GdkEventKey *event, void *data){

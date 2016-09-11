@@ -18,6 +18,14 @@ xffm_c::xffm_c(gint in_argc, gchar **in_argv){
     g_signal_connect (app, "startup", G_CALLBACK (startup), (void *)this);
 }
 
+void
+xffm_c::set_signal_menu_model(GMenuModel *data){
+    signal_menu_model = data;
+}
+
+GMenuModel *
+xffm_c::get_signal_menu_model(void){ return signal_menu_model;}
+
 gint 
 xffm_c::run(void){
     return g_application_run (G_APPLICATION (app), argc, argv);
@@ -43,6 +51,7 @@ xffm_c::add_window_p(void){
     window_p->create_new_page(g_get_home_dir());
     gtk_application_add_window (app, window_p->get_window());
     window_p_list = g_list_append(window_p_list, (void *)window_p);
+    g_object_set_data(G_OBJECT(window_p->get_window()), "signal_menu_model", (void *)signal_menu_model);
     return window_p;
 }
 
@@ -54,6 +63,7 @@ xffm_c::add_window_p(const gchar *data){
     window_p->create_new_page(data);
     gtk_application_add_window (app, window_p->get_window());
     window_p_list = g_list_append(window_p_list, (void *)window_p);
+    g_object_set_data(G_OBJECT(window_p->get_window()), "signal_menu_model", (void *)signal_menu_model);
     return window_p;
 }
 
@@ -65,7 +75,7 @@ activate(GtkApplication *app, void *data){
 }
 
 
-/*
+
 static void
 send_signal (GSimpleAction *action,
                        GVariant      *parameter,
@@ -87,14 +97,38 @@ static GActionEntry app_entries[] =
   { "send_signal", send_signal, NULL, NULL, NULL },
   { "process_info", process_info, NULL, NULL, NULL }
 };
-*/
+
 static void
 startup(GtkApplication *app, void *data){
+  xffm_c *xffm_p = (xffm_c *)data;  
   DBG("startup(GtkApplication *app, void *data)\n");
+  GtkBuilder *builder;
 
- /* g_action_map_add_action_entries (G_ACTION_MAP (app),
-                                   app_entries, G_N_ELEMENTS (app_entries),
-                                   app);*/
+  //G_APPLICATION_CLASS (menu_button_parent_class)->startup (application);
+
+  g_action_map_add_action_entries (G_ACTION_MAP (app), app_entries, G_N_ELEMENTS (app_entries), app);
+ 
+  builder = gtk_builder_new ();
+  gtk_builder_add_from_string (builder,
+"<interface>"
+"  <menu id='signal-menu'>"
+"    <section>"
+"      <item>"
+"        <attribute name='label' translatable='yes'>Signal</attribute>"
+"        <attribute name='action'>app.send_signal</attribute>"
+"      </item>"
+"      <item>"
+"        <attribute name='label' translatable='yes'>Information</attribute>"
+"        <attribute name='action'>app.process_info</attribute>"
+"      </item>"
+"    </section>"
+"  </menu>"
+"</interface>", -1, NULL);
+  GMenuModel *signal_menu_model = G_MENU_MODEL (gtk_builder_get_object (builder, "signal-menu"));
+    xffm_p->set_signal_menu_model(signal_menu_model);
+
+  gtk_application_set_app_menu (GTK_APPLICATION (app), G_MENU_MODEL (gtk_builder_get_object (builder, "signal-menu")));
+  g_object_unref (builder);
 }
 
 

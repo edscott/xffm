@@ -269,13 +269,17 @@ make_run_data_button (void *data) {
     
 #ifdef DO_POPOVER
     // popover is nice. but freaking problem to associate actions and parameters.
-    gchar *signals_xml = get_menu_xml();
+/*    gchar *signals_xml = get_menu_xml();
     GtkBuilder *builder = gtk_builder_new_from_string (signals_xml,-1);
     g_free(signals_xml);
     GMenuModel *menu = G_MENU_MODEL (gtk_builder_get_object (builder, "signals_menu"));
-
-    gtk_menu_button_set_menu_model (GTK_MENU_BUTTON (button), menu);
     g_object_unref(builder);
+    gtk_menu_button_set_menu_model (GTK_MENU_BUTTON (button), menu);
+ 
+ */
+    view_c *view_p = (view_c *)run_button_p->get_view_v();
+    GMenuModel *menu = view_p->get_signal_menu_model();
+    gtk_menu_button_set_menu_model (GTK_MENU_BUTTON (button), menu);
 #else
    
     GtkWidget *menu = run_button_p->make_menu();
@@ -285,7 +289,6 @@ make_run_data_button (void *data) {
     run_button_p->run_button_setup(button);
 
 
-    view_c *view_p = (view_c *)run_button_p->get_view_v();
     const gchar *icon = run_button_p->get_icon_id();
 
     // Test for validity of icon
