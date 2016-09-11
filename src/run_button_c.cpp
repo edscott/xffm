@@ -118,7 +118,9 @@ run_button_c::run_button_setup (GtkWidget *data){
     return ;
 }
 
-/*
+#define DO_POPOVER
+#ifdef DO_POPOVER
+
  // for popover...
 static gchar *
 get_menu_xml(void){
@@ -143,7 +145,7 @@ get_menu_xml(void){
     menu_string = g;
     return menu_string;
 }
-*/
+#endif
 
 void send_signal(GtkWidget *w, void *data){
     
@@ -250,32 +252,13 @@ ps_signal(GtkMenuItem *m, gpointer data){
 #endif
 
 }
-
-GtkWidget *
-run_button_c::make_menu(void){
-    const gchar *items[]={N_("Renice Process"),N_("Suspend (STOP)"),N_("Continue (CONT)"),
-        N_("Interrupt (INT)"),N_("Hangup (HUP)"),N_("User 1 (USR1)"),
-        N_("User 2 (USR2)"),N_("Terminate (TERM)"),N_("Kill (KILL)"),
-        N_("Segmentation fault"),NULL};
-    const gchar *icons[]={"emblem-wait", "emblem-grayball","emblem-greenball",
-        "emblem-exit","view-refresh","emblem-user",
-        "emblem-user","emblem-cancel","emblem-redball",
-        "emblem-core",NULL};
-
-    GtkWidget *menu = gtk_menu_new();
-    const gchar **i;
-    const gchar **p;
-    gint j;
-    for (j=0,p=items, i=icons; p&& *p; p++,i++,j++){
-        GtkWidget *menuitem = get_gtk_p()->menu_item_new(*i, *p);
-        g_object_set_data(G_OBJECT(menuitem), "signal_id", GINT_TO_POINTER(j));
-        g_signal_connect(menuitem, "activate", G_CALLBACK(send_signal), (void *)this);
-        gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
-        gtk_widget_show(menuitem);
+static void
+run_button_toggled(GtkWidget *button, void *data){
+    run_button_c *run_button_p = (run_button_c *)data;
+    if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(button))){
+	// here we set the parameter for the signal actions.
+	TRACE("run button toggled: pid=%d\n", run_button_p->get_grandchild());
     }
-
-    gtk_widget_show(menu);
-    return menu;
 }
 
 static void *
@@ -284,10 +267,7 @@ make_run_data_button (void *data) {
     GtkWidget *button = gtk_menu_button_new ();
     //GtkWidget *button = gtk_button_new ();
     
-    GtkWidget *menu = run_button_p->make_menu();
-    gtk_menu_button_set_popup (GTK_MENU_BUTTON(button),menu);
-    
-   /*
+#ifdef DO_POPOVER
     // popover is nice. but freaking problem to associate actions and parameters.
     gchar *signals_xml = get_menu_xml();
     GtkBuilder *builder = gtk_builder_new_from_string (signals_xml,-1);
@@ -295,7 +275,12 @@ make_run_data_button (void *data) {
     GMenuModel *menu = G_MENU_MODEL (gtk_builder_get_object (builder, "signals_menu"));
 
     gtk_menu_button_set_menu_model (GTK_MENU_BUTTON (button), menu);
-    g_object_unref(builder);*/
+    g_object_unref(builder);
+#else
+   
+    GtkWidget *menu = run_button_p->make_menu();
+    gtk_menu_button_set_popup (GTK_MENU_BUTTON(button),menu);
+#endif
 
     run_button_p->run_button_setup(button);
 
@@ -311,7 +296,7 @@ make_run_data_button (void *data) {
     DBG("*** icon_id=%s tip=%s\n", run_button_p->get_icon_id(), run_button_p->get_tip());
 
     view_p->get_gtk_p()->setup_image_button(button, run_button_p->get_icon_id(), run_button_p->get_tip());
-    //g_signal_connect(button, "clicked", G_CALLBACK (show_run_info), data);
+    g_signal_connect(button, "toggled", G_CALLBACK (run_button_toggled), data);
     gtk_box_pack_end (GTK_BOX (view_p->get_button_space()), button, FALSE, FALSE, 0);
     gtk_widget_show (button);
     // flush gtk
@@ -443,6 +428,34 @@ show_run_info (GtkButton * button, gpointer data) {
 
 #if 0
 
+GtkWidget *
+run_button_c::make_menu(void){
+    const gchar *items[]={N_("Renice Process"),N_("Suspend (STOP)"),N_("Continue (CONT)"),
+        N_("Interrupt (INT)"),N_("Hangup (HUP)"),N_("User 1 (USR1)"),
+        N_("User 2 (USR2)"),N_("Terminate (TERM)"),N_("Kill (KILL)"),
+        N_("Segmentation fault"),NULL};
+    const gchar *icons[]={"emblem-wait", "emblem-grayball","emblem-greenball",
+        "emblem-exit","view-refresh","emblem-user",
+        "emblem-user","emblem-cancel","emblem-redball",
+        "emblem-core",NULL};
+
+    GtkWidget *menu = gtk_menu_new();
+    const gchar **i;
+    const gchar **p;
+    gint j;
+    for (j=0,p=items, i=icons; p&& *p; p++,i++,j++){
+        GtkWidget *menuitem = get_gtk_p()->menu_item_new(*i, *p);
+        g_object_set_data(G_OBJECT(menuitem), "signal_id", GINT_TO_POINTER(j));
+        g_signal_connect(menuitem, "activate", G_CALLBACK(send_signal), (void *)this);
+        gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
+        gtk_widget_show(menuitem);
+    }
+
+    gtk_widget_show(menu);
+    return menu;
+}
+
+
 
 static void
 setup_run_button_thread (widgets_t * widgets_p, const gchar * exec_command, pid_t child) {
@@ -454,5 +467,10 @@ setup_run_button_thread (widgets_t * widgets_p, const gchar * exec_command, pid_
 static pthread_mutex_t fork_mutex=PTHREAD_MUTEX_INITIALIZER;
 
 // This is main thread callback
+
+#endif
+
+#if 0
+
 
 #endif
