@@ -19,6 +19,7 @@ class run_button_c: public utility_c {
         void *get_view_v(void);
         gtk_c *get_gtk_p(void);
         GtkWidget *make_menu(void);
+        GtkApplication *get_app(void);
 
     protected:
     private:

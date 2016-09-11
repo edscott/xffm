@@ -90,6 +90,11 @@ view_c::~view_c(void){
     if (lpterm_p) delete lpterm_p;
 }
 
+GtkApplication *
+view_c::get_app(void){
+    window_c *window_p = (window_c *)window_v;
+    return window_p->get_app();}
+
 GMenuModel *
 view_c::get_signal_menu_model(void){
     GtkWidget *window = GTK_WIDGET(get_window());

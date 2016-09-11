@@ -80,6 +80,11 @@ run_button_c::get_grandchild(void){ return (gint)grandchild;}
 void *
 run_button_c::get_view_v(void){ return view_v;}
 
+GtkApplication *
+run_button_c::get_app(void){
+    view_c *view_p =(view_c *)view_v;
+    return view_p->get_app();}
+
 void
 run_button_c::run_button_setup (GtkWidget *data){
     view_c *view_p =(view_c *)view_v;
@@ -258,6 +263,10 @@ run_button_toggled(GtkWidget *button, void *data){
     if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(button))){
 	// here we set the parameter for the signal actions.
 	TRACE("run button toggled: pid=%d\n", run_button_p->get_grandchild());
+	g_object_set_data(G_OBJECT(run_button_p->get_app()), 
+		"signal_pid", 
+		GINT_TO_POINTER(run_button_p->get_grandchild())
+		);
     }
 }
 

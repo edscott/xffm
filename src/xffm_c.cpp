@@ -81,7 +81,8 @@ send_signal (GSimpleAction *action,
                        GVariant      *parameter,
                        gpointer       app)
 {
-    DBG("send_signal\n");
+    gint pid = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(app), "signal_pid"));
+    DBG("send_signal to %d\n", pid);
 }
 
 static void
