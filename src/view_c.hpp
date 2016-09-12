@@ -37,8 +37,6 @@ class view_c:public widgets_c, public thread_control_c {
 	void set_application_icon(void);
 	xfdir_c *get_xfdir_p(void);
         GtkWindow *get_window(void);
-	GMenuModel *get_signal_menu_model(void);
-        GtkApplication *get_app(void);
 
 	gboolean window_keyboard_event(GdkEventKey *, void *);
         lpterm_c *get_lpterm_p(void);

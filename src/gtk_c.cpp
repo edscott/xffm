@@ -1,6 +1,9 @@
 #include "gtk_c.hpp"
 #include "intl.h"
 
+gtk_c::gtk_c(GtkApplication *data): signal_action_c(data){
+}
+
 gtk_c::~gtk_c(void){
     DBG("gtk_c::~gtk_c\n");
 }

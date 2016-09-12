@@ -10,11 +10,10 @@ static gboolean window_keyboard_event (GtkWidget *, GdkEventKey *, gpointer);
 static void destroy(GtkWidget *, gpointer);
 
 
-window_c::window_c(GtkApplication *data, gtk_c *data0) {
-    app = data;
+window_c::window_c(gtk_c *data) {
     view_list=NULL;
-    if (data0) {gtk_p = data0;}
-    else {gtk_p = new gtk_c();}
+    if (data) {gtk_p = data;}
+    else {throw 1;}
 
     view_list_mutex = PTHREAD_MUTEX_INITIALIZER;
     utility_p = new utility_c();
@@ -100,7 +99,7 @@ window_c::remove_view_from_list(void *view_p){
     pthread_mutex_unlock(&view_list_mutex);
     delete ((view_c *)view_p);
     if (g_list_length(view_list) == 0) {
-        gtk_application_remove_window (app, GTK_WINDOW(window));
+        gtk_application_remove_window (gtk_p->get_app(), GTK_WINDOW(window));
     }
 }
 
@@ -141,8 +140,6 @@ window_c::create_new_page(const gchar *path){
 GtkWindow *
 window_c::get_window(void){return GTK_WINDOW(window);}
 
-GtkApplication *
-window_c::get_app(void){return app;}
 
 GtkNotebook *window_c::get_notebook(void) {return GTK_NOTEBOOK(notebook);}
 
@@ -185,6 +182,6 @@ window_keyboard_event (GtkWidget * window, GdkEventKey * event, gpointer data)
 static void 
 destroy(GtkWidget *window, void *data){
     window_c *window_p = (window_c *)data;
-    gtk_application_remove_window (window_p->get_app(), GTK_WINDOW(window_p->get_window()));
+    gtk_application_remove_window (window_p->get_gtk_p()->get_app(), GTK_WINDOW(window_p->get_window()));
 }
 

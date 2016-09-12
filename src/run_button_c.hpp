@@ -1,6 +1,7 @@
 #ifndef RUN_BUTTON_C_HPP
 #define RUN_BUTTON_C_HPP
 #include "utility_c.hpp"
+#include "gtk_c.hpp"
 
 class run_button_c: public utility_c {
     public:

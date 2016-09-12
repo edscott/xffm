@@ -83,7 +83,8 @@ run_button_c::get_view_v(void){ return view_v;}
 GtkApplication *
 run_button_c::get_app(void){
     view_c *view_p =(view_c *)view_v;
-    return view_p->get_app();}
+    return view_p->get_gtk_p()->get_app();
+}
 
 void
 run_button_c::run_button_setup (GtkWidget *data){
@@ -123,34 +124,6 @@ run_button_c::run_button_setup (GtkWidget *data){
     return ;
 }
 
-#define DO_POPOVER
-#ifdef DO_POPOVER
-
- // for popover...
-static gchar *
-get_menu_xml(void){
-    const gchar *items[]={N_("Renice Process"),N_("Suspend (STOP)"),N_("Continue (CONT)"),
-        N_("Interrupt (INT)"),N_("Hangup (HUP)"),N_("User 1 (USR1)"),
-        N_("User 2 (USR2)"),N_("Terminate (TERM)"),N_("Kill (KILL)"),
-        N_("Segmentation fault"),NULL};
-    gchar *menu_string = g_strdup_printf("<interface><menu id=\"signals_menu\"><section>");
-    const gchar **p;
-    gchar *g;
-    for (p=items; p&& *p; p++){
-        g = g_strdup_printf("%s\n<item>\n<attribute name=\"label\" translatable=\"yes\">%s</attribute>", 
-                menu_string, *p);
-        g_free(menu_string);
-        menu_string = g;
-        g = g_strdup_printf("%s\n<attribute name=\"action\">app.send_signal</attribute>\n</item>", menu_string);
-        g_free(menu_string);
-        menu_string = g;
-    }
-    g = g_strdup_printf("%s\n</section></menu></interface>", menu_string); 
-    g_free(menu_string);
-    menu_string = g;
-    return menu_string;
-}
-#endif
 
 void send_signal(GtkWidget *w, void *data){
     
@@ -159,11 +132,6 @@ void send_signal(GtkWidget *w, void *data){
             GPOINTER_TO_INT(g_object_get_data(G_OBJECT(w),"signal_id")), 
             run_button_p->get_grandchild());
 
-#if 0
-
-
-
-#endif
 
 }
 static void
@@ -173,9 +141,7 @@ run_button_toggled(GtkWidget *button, void *data){
 	// here we set the parameter for the signal actions.
 	TRACE("run button toggled: pid=%d\n", run_button_p->get_grandchild());
 	g_object_set_data(G_OBJECT(run_button_p->get_app()), 
-		"signal_pid", 
-		GINT_TO_POINTER(run_button_p->get_grandchild())
-		);
+		"run_button_p", data);
     }
 }
 
@@ -183,26 +149,11 @@ static void *
 make_run_data_button (void *data) {
     run_button_c *run_button_p = (run_button_c *)data;
     GtkWidget *button = gtk_menu_button_new ();
-    //GtkWidget *button = gtk_button_new ();
-    
-#ifdef DO_POPOVER
-    // popover is nice. but freaking problem to associate actions and parameters.
-/*    gchar *signals_xml = get_menu_xml();
-    GtkBuilder *builder = gtk_builder_new_from_string (signals_xml,-1);
-    g_free(signals_xml);
-    GMenuModel *menu = G_MENU_MODEL (gtk_builder_get_object (builder, "signals_menu"));
-    g_object_unref(builder);
-    gtk_menu_button_set_menu_model (GTK_MENU_BUTTON (button), menu);
- 
- */
+
     view_c *view_p = (view_c *)run_button_p->get_view_v();
-    GMenuModel *menu = view_p->get_signal_menu_model();
+    GMenuModel *menu = view_p->get_gtk_p()->get_signal_menu_model();
+    TRACE("make_run_data_button: menu model is %p\n", menu);
     gtk_menu_button_set_menu_model (GTK_MENU_BUTTON (button), menu);
-#else
-   
-    GtkWidget *menu = run_button_p->make_menu();
-    gtk_menu_button_set_popup (GTK_MENU_BUTTON(button),menu);
-#endif
 
     run_button_p->run_button_setup(button);
 
@@ -214,7 +165,7 @@ make_run_data_button (void *data) {
         run_button_p->set_icon_id("emblem-run");
     } 
     
-    DBG("*** icon_id=%s tip=%s\n", run_button_p->get_icon_id(), run_button_p->get_tip());
+    TRACE("make_run_data_button: icon_id=\"%s\" tip=\"%s\"\n", run_button_p->get_icon_id(), run_button_p->get_tip());
 
     view_p->get_gtk_p()->setup_image_button(button, run_button_p->get_icon_id(), run_button_p->get_tip());
     g_signal_connect(button, "toggled", G_CALLBACK (run_button_toggled), data);
@@ -222,7 +173,7 @@ make_run_data_button (void *data) {
     gtk_widget_show (button);
     // flush gtk
     while (gtk_events_pending()) gtk_main_iteration();
-    TRACE ("DIAGNOSTICS:srun_button made for grandchildPID=%d\n", (int)run_button_p->get_pid());
+    TRACE ("make_run_data_button: button made for grandchildPID=%d\n", (int)run_button_p->get_pid());
 
 
     return NULL;

@@ -15,6 +15,7 @@ class lpterm_c: public run_c {
 	gboolean window_keyboard_event(GdkEventKey *, void *);
         void reference_run_button(run_button_c *);
         void unreference_run_button(run_button_c *);
+        void *shell_command(const gchar *);
 
 /*
         void recover_flags (gchar * in_cmd, gboolean * interm, gboolean * hold);
@@ -26,7 +27,6 @@ class lpterm_c: public run_c {
         gboolean active;
 	gboolean lpterm_keyboard_event(GdkEventKey *, void *);
         void run_lp_command(void);
-        void *shell_command(const gchar *);
         gchar *sudo_fix(const gchar *);
         gboolean process_internal_command (const gchar *);
         gboolean internal_cd(gchar **);

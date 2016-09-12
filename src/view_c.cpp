@@ -90,19 +90,6 @@ view_c::~view_c(void){
     if (lpterm_p) delete lpterm_p;
 }
 
-GtkApplication *
-view_c::get_app(void){
-    window_c *window_p = (window_c *)window_v;
-    return window_p->get_app();}
-
-GMenuModel *
-view_c::get_signal_menu_model(void){
-    GtkWidget *window = GTK_WIDGET(get_window());
-    GMenuModel *model = (GMenuModel *)g_object_get_data(G_OBJECT(window), "signal_menu_model");
-    return model;
-}
-
-
 gboolean
 view_c::window_keyboard_event(GdkEventKey *event, void *data){
     return lpterm_p->window_keyboard_event(event, data);

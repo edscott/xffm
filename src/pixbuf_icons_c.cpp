@@ -13,8 +13,9 @@ pixbuf_icons_c::pixbuf_icons_c(void){
     pixbuf_mutex = PTHREAD_MUTEX_INITIALIZER;
     icon_theme = gtk_icon_theme_get_default ();
     if (!icon_theme){
-        fprintf(stderr, "cannot get default icon theme!\n");
-        throw 1;
+        DBG("cannot get default icon theme!\n");
+        icon_theme = gtk_icon_theme_new();
+        //throw 1;
     }
     self = g_thread_self();
     gchar *resource_path = g_build_filename(PREFIX, "share", "icons", "xffm+", NULL);

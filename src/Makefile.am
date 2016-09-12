@@ -34,6 +34,7 @@ xffm_SOURCES = \
 	  utility_c.cpp \
 	  xfdir_c.cpp \
 	  gtk_c.cpp \
+	    signal_action_c.cpp \
 	    tooltip_c.cpp \
 	    pixbuf_c.cpp \
 		pixbuf_hash_c.cpp \

@@ -395,7 +395,6 @@ lpterm_c::shell_command(const gchar *c){
 
     pid_t pid = thread_run(command?command:c);
     run_button_c *run_button_p = NULL;
-    // FIXME: run button crashes...
     run_button_p = new run_button_c(view_v, c, pid, run_in_shell(c));
     //csh_save_history(command?command:c);
     csh_save_history(c);

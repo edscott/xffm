@@ -7,7 +7,7 @@
 
 class window_c {
     public:
-        window_c(GtkApplication *, gtk_c *);
+        window_c(gtk_c *);
         ~window_c(void);
         GtkNotebook *get_notebook(void);
         gtk_c *get_gtk_p(void);
@@ -18,9 +18,7 @@ class window_c {
         gboolean is_view_in_list(void *);
         void add_view_to_list(void *);
         void remove_view_from_list(void *);
-        GtkApplication *get_app(void);
     private:
-        GtkApplication *app;
         void set_up_view_signals(void *);
         GtkNotebook *notebook;
         GtkWidget *window;

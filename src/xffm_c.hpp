@@ -10,8 +10,6 @@ class xffm_c{
 	window_c *add_window_p(void);
 	window_c *add_window_p(const gchar *);
 	void remove_window_p_from_list(void *);
-	GMenuModel *get_signal_menu_model(void);// not needed?
-	void set_signal_menu_model(GMenuModel *);// not needed?
 	
 	gint run(void);
     private:
@@ -21,7 +19,6 @@ class xffm_c{
 	gint argc;
 	gchar **argv;
 
-	GMenuModel *signal_menu_model;
 
 };
 
