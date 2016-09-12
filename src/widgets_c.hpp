@@ -59,7 +59,6 @@ class widgets_c {
         pathbar_c *pathbar_p;
     private:
         void create();
-        void setup_diagnostics(void);
         void setup_scolled_windows(void);
         void setup_size_scale(void);
 };

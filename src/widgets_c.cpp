@@ -41,29 +41,6 @@ GtkWidget *widgets_c::get_iconview_icon(void){ return iconview_icon;}
 GtkWidget *widgets_c::get_iconview(void){ return GTK_WIDGET(icon_view);}
 GtkWidget *widgets_c::get_button_space(void){ return GTK_WIDGET(button_space);}
 
-void
-widgets_c::setup_diagnostics(void){
-    fprintf(stderr,"setup_diagnostics() is deprecated. now using gtk_text_view_set_monospace() >= gtk+-3.16\n");
-    return;
-    gint size = 10;
-    GtkStyleContext *style_context = gtk_widget_get_style_context (diagnostics);
-    gtk_style_context_add_class(style_context, GTK_STYLE_CLASS_VIEW );
-    GtkCssProvider *css_provider = gtk_css_provider_new();
-    GError *error=NULL;
-    gchar *data = g_strdup_printf("* {\
-font-family: %s;\
-font-size: %dpx;\
-}", "monospace", size);
-    gtk_css_provider_load_from_data (css_provider, data, -1, &error);
-    g_free(data);
-    if (error){
-        fprintf(stderr, "gerror: %s\n", error->message);
-        g_error_free(error);
-    }
-    gtk_style_context_add_provider (style_context, GTK_STYLE_PROVIDER(css_provider),
-                                GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-}
-
 void 
 widgets_c::setup_scolled_windows(void){
     gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (top_scrolled_window),
