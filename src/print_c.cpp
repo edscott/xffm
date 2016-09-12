@@ -600,16 +600,12 @@ print_c::trim_diagnostics(GtkTextBuffer *buffer){
 }
 
 static void
-set_font_family (GtkWidget * widget, const gchar *in_family, gboolean fixed) {
-    if (!in_family) g_error("in_family cannot be NULL\n");
+set_font_size (GtkWidget * widget) {
     if (!GTK_IS_WIDGET(widget)) return;
-    gchar *family = (gchar *)g_object_get_data(G_OBJECT(widget), "font-family");
     gint fontsize = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(widget),	"fontsize"));
 
     gint newsize=8; // default font size.
-    const gchar *p;
-    if (fixed) p = getenv ("RFM_FIXED_FONT_SIZE");
-    else p = getenv ("RFM_VARIABLE_FONT_SIZE");
+    const gchar *p = getenv ("RFM_FIXED_FONT_SIZE");
     if(p && strlen (p)) {
 	errno=0;
 	long value = strtol(p, NULL, 0);
@@ -618,13 +614,7 @@ set_font_family (GtkWidget * widget, const gchar *in_family, gboolean fixed) {
 	}
     }
 
-    if(newsize != fontsize || !family || strcmp(family, in_family)) {
-	NOOP(stderr, "XXX setting %s fontsize  %d -> %d \n", in_family, fontsize, newsize);
-	if (!family || strcmp(family, in_family)) {
-	    g_free(family);
-	    family = g_strdup(in_family);
-	    g_object_set_data(G_OBJECT(widget), "font-family", family);
-	}
+    if(newsize != fontsize) {
 	fontsize = newsize;
 	g_object_set_data(G_OBJECT(widget), 
 		"fontsize", GINT_TO_POINTER(fontsize));
@@ -634,20 +624,19 @@ set_font_family (GtkWidget * widget, const gchar *in_family, gboolean fixed) {
         GtkCssProvider *css_provider = gtk_css_provider_new();
         GError *error=NULL;
         gchar *data = g_strdup_printf("* {\
-font-family: %s;\
 font-size: %dpx;\
-}", family, fontsize);
+}", fontsize);
         gtk_css_provider_load_from_data (css_provider, data, -1, &error);
         g_free(data);
         if (error){
-            fprintf(stderr, "gerror: %s\n", error->message);
+            fprintf(stderr, "gtk_css_provider_load_from_data: %s\n", error->message);
             g_error_free(error);
+            return;
         }
-        gtk_style_context_add_provider (style_context, GTK_STYLE_PROVIDER(css_provider),
-                                GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-         
-
-
+        gtk_style_context_add_provider (style_context, 
+                GTK_STYLE_PROVIDER(css_provider),
+                GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+        
     }
 }
 
@@ -668,7 +657,7 @@ print_f(void *data){
         // textview is at line limit.
     }
 
-    set_font_family (GTK_WIDGET(textview), "monospace", TRUE);
+    set_font_size (GTK_WIDGET(textview));
     GtkTextTag **tags = print_p->resolve_tags(buffer, tag);
     if(string && strlen (string)) {
         print_p->insert_string (buffer, string, tags);
@@ -723,7 +712,7 @@ print_s(void *data){
     if (!GTK_IS_TEXT_VIEW(textview)) return GINT_TO_POINTER(-1);
     const gchar *string = (const gchar *)arg[1];
 
-    set_font_family (GTK_WIDGET(textview), "monospace", TRUE);
+    set_font_size (GTK_WIDGET(textview));
     GtkTextBuffer *buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (textview));
     GtkTextIter start, end;
     gtk_text_buffer_get_bounds (buffer, &start, &end);
