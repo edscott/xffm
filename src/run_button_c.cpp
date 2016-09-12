@@ -140,8 +140,7 @@ run_button_toggled(GtkWidget *button, void *data){
     if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(button))){
 	// here we set the parameter for the signal actions.
 	TRACE("run button toggled: pid=%d\n", run_button_p->get_grandchild());
-	g_object_set_data(G_OBJECT(run_button_p->get_app()), 
-		"run_button_p", data);
+        run_button_p->get_gtk_p()->set_signal_action_parameter(data);
     }
 }
 

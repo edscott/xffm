@@ -7,6 +7,7 @@ class signal_action_c {
         signal_action_c(GtkApplication *);
         GtkApplication *get_app(void);
         GMenuModel *get_signal_menu_model(void);
+        void set_signal_action_parameter(void *);
     private:
         GtkApplication *app;
         void add_actions(GtkApplication *);

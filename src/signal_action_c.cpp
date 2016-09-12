@@ -93,6 +93,11 @@ signal_action_c::create_menu_model(GtkApplication *app){
     g_object_unref (builder);
 }
 
+void 
+signal_action_c::set_signal_action_parameter(void *data){
+    g_object_set_data(G_OBJECT(app), "run_button_p", data);
+}    
+
 void
 signal_action_c::add_actions(GtkApplication *app){
     GActionEntry app_entries[] =
