@@ -70,6 +70,7 @@ widgets_c::create(void){
     gtk_box_pack_start (GTK_BOX (page_child_box), pathbar_p->get_pathbar(), FALSE, FALSE, 0);
     
     vpane = gtk_paned_new(GTK_ORIENTATION_VERTICAL);
+    gtk_paned_set_wide_handle (GTK_PANED(vpane), TRUE);
     top_scrolled_window = gtk_scrolled_window_new (NULL, NULL);
      
     bottom_scrolled_window = gtk_scrolled_window_new (NULL, NULL);
