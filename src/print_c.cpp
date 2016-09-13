@@ -52,27 +52,14 @@ print_c::get_status_label(void){
     return GTK_LABEL(view_p->get_status_label());
 } 
 
-
-void print_c::print_error( const gchar *format, ...){
-    if (!diagnostics) return;
-    va_list var_args;
-    va_start (var_args, format);
-    gchar *string = g_strdup_vprintf(format, var_args);
-    va_end (var_args);
-
+void print_c::print_error(gchar *string){
     void *arg[]={(void *)this, (void *)"tag/bold", (void *)string};
     context_function(print_e, arg);
     g_free(string);
 
 }
 
-void print_c::print_debug(const gchar *format, ...){
-    if (!diagnostics) return;
-    va_list var_args;
-    va_start (var_args, format);
-    gchar *string = g_strdup_vprintf(format, var_args);
-    va_end (var_args);
-
+void print_c::print_debug(gchar *string){
     void *arg[]={(void *)this, (void *)"tag/italic", (void *)string};
     context_function(print_d, arg);
     g_free(string);
@@ -80,58 +67,20 @@ void print_c::print_debug(const gchar *format, ...){
 }
 
 
-void print_c::print(const gchar *format, ...){
-    if (!diagnostics) return;
-    va_list var_args;
-
-    // Avoid vprintf when format has no extra arguments.
-    // This is to get around the glib problem with "%n" in arguments 
-    // (glib segfaults, this is a glib bug.)
-    //
-    // The "%n" may come in program output, such as "man ps"
-    // 
-    gint count=0;
-    va_start (var_args, format);
-    while (1) {
-        void *s = va_arg(var_args, void *);
-        if (!s) break;
-        count++;
-    }
-    va_end (var_args);
-    gchar *string;
-    if (count) {
-        va_start (var_args, format);
-        string = g_strdup_vprintf(format, var_args);
-        va_end (var_args);
-    } else string =g_strdup(format);
-
-
+void print_c::print(gchar *string){
     void *arg[]={(void *)this, NULL, (void *)string};
     context_function(print_f, arg);
     g_free(string);
 }
 
-void print_c::print_tag(const gchar *tag, const gchar *format, ...){
-    if (!diagnostics) return;
-    va_list var_args;
-    va_start (var_args, format);
-    gchar *string = g_strdup_vprintf(format, var_args);
-    va_end (var_args);
-
+void print_c::print_tag(const gchar *tag, gchar *string){
     void *arg[]={(void *)this, (void *)tag, (void *)string};
     context_function(print_f, arg);
     g_free(string);
 }
 
-void print_c::print_icon(const gchar *iconname, 
-			     const gchar *format, ...)
+void print_c::print_icon(const gchar *iconname, gchar *string)
 {
-    if (!diagnostics) return;
-    va_list var_args;
-    va_start (var_args, format);
-    gchar *string = g_strdup_vprintf(format, var_args);
-    va_end (var_args);
-
     GdkPixbuf *pixbuf = gtk_p->get_pixbuf(iconname, -16);
     void *arg[]={(void *)pixbuf, (void *)this, NULL, (void *)string};
     context_function(print_i, arg);
@@ -141,39 +90,22 @@ void print_c::print_icon(const gchar *iconname,
 
 void print_c::print_icon_tag(const gchar *iconname, 
 	                     const gchar *tag, 
-			     const gchar *format, ...)
+			     gchar *string)
 {
-    if (!diagnostics) return;
-    va_list var_args;
-    va_start (var_args, format);
-    gchar *string = g_strdup_vprintf(format, var_args);
-    va_end (var_args);
-
     GdkPixbuf *pixbuf = gtk_p->get_pixbuf(iconname, -16);
     void *arg[]={(void *)pixbuf, (void *)this, (void *)tag, (void *)string};
     context_function(print_i, arg);
     g_free(string);
 }
 
-void print_c::print_status(const gchar *format, ...){
-    va_list var_args;
-    va_start (var_args, format);
-    gchar *string = g_strdup_vprintf(format, var_args);
-    va_end (var_args);
-
+void print_c::print_status(gchar *string){
     void *arg[]={(void *)this, (void *)string};
     context_function(print_s, arg);
     g_free(string);
 }
 
 
-void print_c::print_status_label(const gchar *format, ...){
-    va_list var_args;
-    va_start (var_args, format);
-    gchar *string = g_strdup_vprintf(format, var_args);
-    va_end (var_args);
-    if (strstr(string, "\n")) *(strstr(string, "\n")) = 0;
-
+void print_c::print_status_label(gchar *string){
     void *arg[]={(void *)status_label, (void *)string};
     context_function(print_sl, arg);
     g_free(string);

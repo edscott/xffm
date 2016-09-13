@@ -79,10 +79,10 @@ rfm_operate_stdout (void *data, void *stream, int childFD) {
 
     if(strncmp (line, exit_token, strlen (exit_token)) == 0) {
         gchar *string = lpterm_p->exit_string(line);
-        lpterm_p->print_icon("emblem-redball", string);
+        lpterm_p->print_icon("emblem-redball", g_strdup(string));
         g_free(string);
     } else {
-	lpterm_p->print(outline);
+	lpterm_p->print(g_strdup(outline));
     }
     g_free(outline);
 
@@ -117,7 +117,7 @@ rfm_operate_stderr (void *data, void *stream, int childFD) {
 
 
     if(line[0] != '\n') {
-	lpterm_p->print_tag("tag/red", line);
+	lpterm_p->print_tag("tag/red", g_strdup(line));
     }
 
     // With this, this thread will not do a DOS attack
@@ -138,7 +138,7 @@ operate_stdout (void *data, void *stream, gint childFD) {
     run_c *run_p = (run_c *)data;
     gchar *line = (gchar *)stream;
 
-    run_p->print_tag("tag/green", "%s", line);
+    run_p->print_tag("tag/green",  g_strdup(line));
     // This is a bit hacky, to keep runaway output from hogging
     // up the gtk event loop.
     static gint count = 1;
@@ -155,7 +155,7 @@ operate_stderr (void *data, void *stream, gint childFD) {
     run_c *run_p = (run_c *)data;
     gchar *line = (gchar *)stream;
 
-    run_p->print_tag("tag/red", "%s", line);
+    run_p->print_tag("tag/red",  g_strdup(line));
     // This is a bit hacky, to keep runaway output from hogging
     // up the gtk event loop.
     static gint count = 1;
@@ -169,7 +169,7 @@ operate_stderr (void *data, void *stream, gint childFD) {
 
 gboolean done_f(void *data) {
     view_c *view_p = (view_c *)data;
-    //view_p->get_lpterm_p()->print_tag("tag/bold", "%s\n", "run complete.");
+    //view_p->get_lpterm_p()->print_tag("tag/bold", g_strdup_printf("%s\n", "run complete."));
     return FALSE;
 }
 
@@ -286,8 +286,9 @@ pid_t run_c::thread_run(const gchar **arguments){
                                 view_v,
                                 flags);
     pid_t grandchild=Tubo_child (pid);
-    print_icon_tag("emblem-greenball", "tag/blue", "<%d>", grandchild);
-    print_tag("tag/bold", "%s\n", command);
+        
+    print_icon_tag("emblem-greenball", "tag/green", g_strdup_printf("<%d>", grandchild));
+    print_tag("tag/bold", g_strdup_printf("%s\n", command));
     push_hash(grandchild, g_strdup(command));
     g_free(command);
     return pid;
@@ -317,7 +318,7 @@ pid_t run_c::thread_run(const gchar *command){
     } else ncommand = g_strdup(command);
     if(!g_shell_parse_argv (ncommand, &argc, &argv, &error)) {
         gchar *msg = g_strcompress (error->message);
-        print_error("%s: %s\n", msg, ncommand);
+        print_error(g_strdup_printf("%s: %s\n", msg, ncommand));
         g_free(ncommand);
         g_error_free (error);
         g_free (msg);

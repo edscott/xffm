@@ -1,3 +1,9 @@
+Bug:
+ * once diagnostics has reached line limit, further output appears broken, 
+   and sortof fixes with scrollup/down. Apparently further output is being 
+   output to incorrect part of the text buffer, instead of the end. Clean
+   diagnostics fixes the problem.
+
 lpterm_c.cpp:
  * CTL callbacks...
  * icon selection by keyboard

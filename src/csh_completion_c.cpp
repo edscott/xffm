@@ -92,7 +92,7 @@ csh_completion_c::csh_completion(gint direction){
 
 void 
 csh_completion_c::csh_place_command(const gchar *data){
-    print_status ("%s", data);
+    print_status (g_strdup(data));
     place_cursor();
 }
 

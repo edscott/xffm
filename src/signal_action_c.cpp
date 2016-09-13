@@ -304,8 +304,8 @@ ps_signal(gpointer app, gint signal_id){
         g_free(sudo);
     } else {
         DBG("normal ps_signal to %d...\n", (int)pid);
-        view_p->get_lpterm_p()->print_icon_tag("emblem-important", "tag/blue", "kill -%d %d\n",
-                signal_id, pid);
+        view_p->get_lpterm_p()->print_icon_tag("emblem-important", "tag/blue", g_strdup_printf("kill -%d %d\n",
+                signal_id, pid));
         kill(pid, signal_id);
     }
     // FIXME: is this necessary?

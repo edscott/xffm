@@ -206,8 +206,8 @@ run_wait_f (void *data) {
     
 #ifdef DEBUG_TRACE    
     // This is out of sync here (grayball), so only in debug mode.
-    view_p->get_lpterm_p()->print_icon("emblem-grayball", "%s %d/%d\n", run_button_p->get_command(),
-            run_button_p->get_pid(), run_button_p->get_grandchild());
+    view_p->get_lpterm_p()->print_icon("emblem-grayball", g_strdup_printf("%s %d/%d\n", run_button_p->get_command(),
+            run_button_p->get_pid(), run_button_p->get_grandchild()));
 #endif
     
     /// FIXME: the following code is to signal the background monitor

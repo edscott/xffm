@@ -72,7 +72,7 @@ bash_completion_c::bash_completion(void){
         gint offset = -1;
         // +1 is icon...
         offset = head_len + (suggest_len - token_len) + 1;
-        print_status(suggest);
+        print_status(g_strdup(suggest));
         gtk_text_buffer_get_iter_at_offset (buffer, &end, offset);
         gtk_text_buffer_place_cursor(buffer, &end);	
     }
@@ -146,8 +146,8 @@ bash_completion_c::msg_too_many_matches(void){
     gchar *message1=g_strdup_printf("%s (> %ld)",
 	    _("Too many matches"), BASH_COMPLETION_OPTIONS);
     gchar *message2=g_strdup_printf("%s %s", _("Options:"), message1);
-    print_icon_tag("dialog-info", "tag/blue", "[%s]", _("Text Completion"));
-    print_tag("tag/red", "%s\n", message2);
+    print_icon_tag("dialog-info", "tag/blue",  g_strdup_printf("[%s]", _("Text Completion")));
+    print_tag("tag/red", g_strdup_printf("%s\n", message2));
     g_free(message1);
     g_free(message2);
     scroll_to_bottom();
@@ -182,10 +182,10 @@ void
 bash_completion_c::msg_show_match(gint match_type, const gchar *match){
     if (!match) {
 	const gchar *option_type = get_match_type_text(match_type);
-	print_icon_tag ("dialog-warning", "xffm_tag/red", "(%s)", option_type);
+	print_icon_tag ("dialog-warning", "xffm_tag/red", g_strdup_printf("(%s)", option_type));
 	match = _("Found no match");
     } 
-    print_tag("tag/blue", " %s\n", match);
+    print_tag("tag/blue", g_strdup_printf(" %s\n", match));
     scroll_to_bottom();
 }
 
@@ -193,20 +193,20 @@ void
 bash_completion_c::msg_help_text(void){
     show_text();
 
-    print_icon_tag ("dialog-info", "tag/green", "%s bash %s/%s--> ",
+    print_icon_tag ("dialog-info", "tag/green", g_strdup_printf("%s bash %s/%s--> ",
 	    _("Completion mode:"), 
 	    _("command"),
-            _("file"));
-    print_tag ("tag/red", "TAB.");
+            _("file")));
+    print_tag ("tag/red", g_strdup("TAB."));
     scroll_to_bottom();
 }
 
 void
 bash_completion_c::msg_result_text(gint match_type){
     show_text();
-    print_icon_tag ("dialog-info", "tag/green", _("Options >>"));
+    print_icon_tag ("dialog-info", "tag/green", g_strdup(_("Options >>")));
     const gchar *option_type = get_match_type_text(match_type);
-    print_tag ("tag/red", "(%s)\n", option_type);
+    print_tag ("tag/red", g_strdup_printf("(%s)\n", option_type));
     scroll_to_bottom();
 }
 

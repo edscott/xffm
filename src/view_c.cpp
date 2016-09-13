@@ -54,14 +54,14 @@ view_c::view_c(void *window_data, GtkNotebook *notebook) : widgets_c(window_data
     lpterm_p = new lpterm_c((void *)this);
 
     lpterm_p->show_text();
-    lpterm_p->print("%s\n", "Hello world.");
-    lpterm_p->print_tag(NULL, "%s\n", "No tag.");
-    lpterm_p->print_tag("tag/green", "%s", "Green tag.");
-    lpterm_p->print_tag("tag/bold", "%s\n", "bold tag.");
-    lpterm_p->print_error("%s\n", "This is an error.");
-    lpterm_p->print_debug("%s\n", "This is a debug message.");
-    lpterm_p->print_icon("face-monkey","%s\n", "This is face-monkey.");
-    lpterm_p->print_icon_tag("face-angry","tag/red","%s\n", "This is face-angry in red.");
+    lpterm_p->print(g_strdup_printf("%s\n", "Hello world."));
+    lpterm_p->print_tag(NULL, g_strdup_printf("%s\n", "No tag."));
+    lpterm_p->print_tag("tag/green",g_strdup_printf( "%s", "Green tag."));
+    lpterm_p->print_tag("tag/bold",g_strdup_printf( "%s\n", "bold tag."));
+    lpterm_p->print_error(g_strdup_printf("%s\n", "This is an error."));
+    lpterm_p->print_debug(g_strdup_printf("%s\n", "This is a debug message."));
+    lpterm_p->print_icon("face-monkey",g_strdup_printf("%s\n", "This is face-monkey."));
+    lpterm_p->print_icon_tag("face-angry","tag/red",g_strdup_printf("%s\n", "This is face-angry in red."));
 #if 0
     // FIXME
     /* drag and drop events */
@@ -535,7 +535,7 @@ item_activated (GtkIconView *iconview,
     if (g_file_test(full_path, G_FILE_TEST_IS_DIR)){
         view_p->reload(full_path);
     } else {
-        view_p->get_lpterm_p()->print_error("%s: %s\n", full_path, strerror(ENOENT));
+        view_p->get_lpterm_p()->print_error(g_strdup_printf("%s: %s\n", full_path, strerror(ENOENT)));
     }
     g_free(ddname);
     g_free(full_path);

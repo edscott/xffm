@@ -8,15 +8,15 @@
 class print_c: public utility_c {
     public:
         print_c(void *);
-        void print_error(const gchar *format, ...);
-        void print_debug(const gchar *format, ...);
-        void print(const gchar *format, ...);
-        void print_tag(const gchar *tag, const gchar *format, ...);
-	void print_icon(const gchar *iconname, const gchar *format, ...);
-        void print_icon_tag(const gchar *iconname, const gchar *tag, const gchar *format, ...);
+        void print_error(gchar *);
+        void print_debug(gchar *);
+        void print(gchar *);
+        void print_tag(const gchar *tag, gchar *);
+	void print_icon(const gchar *iconname, gchar *);
+        void print_icon_tag(const gchar *iconname, const gchar *tag, gchar *);
 
-        void print_status(const gchar *format, ...);
-        void print_status_label(const gchar *format, ...);
+        void print_status(gchar *);
+        void print_status_label(gchar *);
 	GtkTextView *get_diagnostics(void);
 	GtkTextView *get_status(void); 
 	GtkLabel *get_status_label(void); 

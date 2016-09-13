@@ -303,7 +303,7 @@ lpterm_c::internal_cd (gchar ** argvp) {
     if (!g_path_is_absolute(gg)){
 	if(!g_file_test (get_workdir(), G_FILE_TEST_IS_DIR)) 
 	{
-	    print_error("%s: %s\n", gg, strerror (ENOENT));
+	    print_error(g_strdup_printf("%s: %s\n", gg, strerror (ENOENT)));
 	    g_free (gg);
 	    return TRUE;
         } 
@@ -314,7 +314,7 @@ lpterm_c::internal_cd (gchar ** argvp) {
 
     gchar *rpath = realpath(gg, NULL);
     if (!rpath){
-	print_error("%s: %s\n", gg, strerror (ENOENT));
+	print_error(g_strdup_printf("%s: %s\n", gg, strerror (ENOENT)));
 	g_free (gg);
 	return TRUE;
     }
@@ -326,7 +326,7 @@ lpterm_c::internal_cd (gchar ** argvp) {
         g_free (rpath);
     }
 
-    print_tag("tag/green", "cd %s\n", gg);
+    print_tag("tag/green", g_strdup_printf("cd %s\n", gg));
     clear_status();
 
     view_c *view_p =(view_c *)view_v;
@@ -343,7 +343,7 @@ lpterm_c::process_internal_command (const gchar *command) {
     gchar **argvp;
     GError *error = NULL;
     if(!g_shell_parse_argv (command, &argcp, &argvp, &error)) {
-        print_error("%s\n", error->message);
+        print_error(g_strdup_printf("%s\n", error->message));
         return TRUE;
     } else if(strcmp (argvp[0], "cd")==0) {
         // shortcircuit chdir
