@@ -143,6 +143,7 @@ bash_completion_c::maximum_completion_options(void){
 void
 bash_completion_c::msg_too_many_matches(void){
     show_text();
+#ifdef DEBUG_TRACE
     gchar *message1=g_strdup_printf("%s (> %ld)",
 	    _("Too many matches"), BASH_COMPLETION_OPTIONS);
     gchar *message2=g_strdup_printf("%s %s", _("Options:"), message1);
@@ -150,6 +151,8 @@ bash_completion_c::msg_too_many_matches(void){
     print_tag("tag/red", g_strdup_printf("%s\n", message2));
     g_free(message1);
     g_free(message2);
+#else
+#endif
     scroll_to_bottom();
 }
 
@@ -180,9 +183,8 @@ bash_completion_c::get_match_type_text(gint match_type){
     
 void
 bash_completion_c::msg_show_match(gint match_type, const gchar *match){
-#ifdef DEBUG
     if (!match) {
-#ifdef DEBUG
+#ifdef DEBUG_TRACE
 	const gchar *option_type = get_match_type_text(match_type);
 	print_icon_tag ("dialog-warning", "xffm_tag/red", g_strdup_printf("(%s)", option_type));
 	match = _("Found no match");
@@ -208,9 +210,13 @@ bash_completion_c::msg_help_text(void){
 void
 bash_completion_c::msg_result_text(gint match_type){
     show_text();
+#ifdef DEBUG_TRACE
     print_icon_tag ("dialog-info", "tag/green", g_strdup(_("Options >>")));
     const gchar *option_type = get_match_type_text(match_type);
     print_tag ("tag/red", g_strdup_printf("(%s)\n", option_type));
+#else
+    print_tag ("tag/green", g_strdup_printf("%s\n", _("Options >>")));
+#endif
     scroll_to_bottom();
 }
 

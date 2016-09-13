@@ -52,7 +52,8 @@ view_c::view_c(void *window_data, GtkNotebook *notebook) : widgets_c(window_data
     pack();
     // lp_term object creation
     lpterm_p = new lpterm_c((void *)this);
-
+    
+    lpterm_p->print_status(g_strdup(""));
     lpterm_p->show_text();
     lpterm_p->print(g_strdup_printf("%s\n", "Hello world."));
     lpterm_p->print_tag(NULL, g_strdup_printf("%s\n", "No tag."));

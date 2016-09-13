@@ -52,7 +52,11 @@ run_output_c::exit_string(gchar *tubo_string){
             pid = Tubo_child((pid_t) id);
         }
     }
+#ifdef DEBUG_TRACE
     gchar *g = g_strdup_printf("%c[31m<%d>", 27, pid);
+#else
+    gchar *g = g_strdup("");
+#endif
     //gchar *c_string = pop_hash((pid_t)id);
     gchar *c_string = pop_hash((pid_t)pid);
     string = g_strconcat(g, c_string, "\n", NULL);

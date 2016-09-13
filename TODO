@@ -12,7 +12,7 @@ pathbar_c.cpp:
  pixbuf_hash_c.cpp
  * check, remake out of date thumbnails/previews as needed
  run_button_c.cpp
- * workdir not set nor used
+ * workdir not set nor used (probably not needed...)
  * show info callback is not functional
  * reload icons when command has completed (rather signal monitor
    to check and perform a reload if necessary)

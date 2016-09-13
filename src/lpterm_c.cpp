@@ -379,6 +379,7 @@ lpterm_c::shell_command(const gchar *c){
     // Make sure any sudo command has the "-A" option
     gchar *command = sudo_fix(c);
     pid_t pid = thread_run(command?command:c);
+    if (!pid) return NULL; 
     run_button_c *run_button_p = NULL;
     run_button_p = new run_button_c(view_v, c, pid, run_in_shell(c));
     // We save the original sudo command, not the one modified with "-A"

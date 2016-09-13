@@ -278,6 +278,10 @@ pid_t run_c::thread_run(const gchar **arguments){
                   
     int flags = TUBO_EXIT_TEXT|TUBO_VALID_ANSI|TUBO_CONTROLLER_PID;
 
+    if (chdir(get_workdir())<0){
+        print_error(g_strdup_printf("chdir(%s): %s\n", get_workdir(), strerror(errno)));
+        return 0;
+    }
     pid_t pid = Tubo_fork (fork_function,(gchar **)arguments,
                                 NULL, // stdin
                                 rfm_operate_stdout, //stdout_f,
@@ -286,9 +290,11 @@ pid_t run_c::thread_run(const gchar **arguments){
                                 view_v,
                                 flags);
     pid_t grandchild=Tubo_child (pid);
-        
-    print_icon_tag("emblem-greenball", "tag/green", g_strdup_printf("<%d>", grandchild));
-    print_tag("tag/bold", g_strdup_printf("%s\n", command));
+#ifdef DEBUG_TRACE        
+    print_icon_tag("emblem-greenball", "tag/green", g_strdup_printf("<%d> %s\n", grandchild, command));
+#else
+    print_icon_tag("emblem-greenball", "tag/bold", g_strdup_printf("%s\n", command));
+#endif
     push_hash(grandchild, g_strdup(command));
     g_free(command);
     return pid;
