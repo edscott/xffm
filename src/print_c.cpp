@@ -10,7 +10,7 @@
 
 #include "print_c.hpp"
 #include "view_c.hpp"
-#define MAX_LINES_IN_BUFFER 1000    
+#define MAX_LINES_IN_BUFFER 10000    
 
 /////////////////////////////////////////////////////////////////////////////
 //              static thread functions                                    //
@@ -509,23 +509,11 @@ print_c::insert_string (GtkTextBuffer * buffer, const gchar * s, GtkTextTag **ta
 
 gboolean 
 print_c::trim_diagnostics(GtkTextBuffer *buffer){
+//  This is just to prevent a memory overrun (intentional or unintentional).
     gint line_count = gtk_text_buffer_get_line_count (buffer);
     glong max_lines_in_buffer = MAX_LINES_IN_BUFFER;
-    if (getenv("RFM_MAXIMUM_DIAGNOSTIC_LINES") && 
-	    strlen(getenv("RFM_MAXIMUM_DIAGNOSTIC_LINES"))){
-	errno = 0;
-	max_lines_in_buffer = 
-	    strtol(getenv("RFM_MAXIMUM_DIAGNOSTIC_LINES"), NULL, 10);
-	if (errno){
-	    max_lines_in_buffer = MAX_LINES_IN_BUFFER;
-	}
-
-    }
     if (line_count > max_lines_in_buffer) {
-        GtkTextIter start, end;
-	gtk_text_buffer_get_iter_at_line (buffer, &start, 0);
-	gtk_text_buffer_get_iter_at_line (buffer, &end, line_count - MAX_LINES_IN_BUFFER);
-	gtk_text_buffer_delete (buffer, &start, &end);
+        gtk_text_buffer_set_text(buffer, "", -1);
         return TRUE;
     }
     return FALSE;
@@ -583,13 +571,13 @@ print_f(void *data){
     if (!GTK_IS_TEXT_VIEW(textview)) return GINT_TO_POINTER(-1);
     const gchar *tag = (const gchar *)arg[1];
     const gchar *string = (const gchar *)arg[2];
+    set_font_size (GTK_WIDGET(textview));
 
     GtkTextBuffer *buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (textview));
     if (print_p->trim_diagnostics(buffer)){
         // textview is at line limit.
     }
 
-    set_font_size (GTK_WIDGET(textview));
     GtkTextTag **tags = print_p->resolve_tags(buffer, tag);
     if(string && strlen (string)) {
         print_p->insert_string (buffer, string, tags);
