@@ -43,7 +43,6 @@ gtk_c::new_add_page_tab(GtkWidget *notebook, GtkWidget **new_button_p){
     gtk_notebook_set_tab_reorderable (GTK_NOTEBOOK(notebook), page_child_box, FALSE);
     setup_image_button(page_label_button, "list-add", _("Open a new tab (Ctrl+T)"));
     if (new_button_p) *new_button_p = page_label_button;
-    //g_signal_connect (G_OBJECT (page_label_button), "clicked", G_CALLBACK (callback), data);
     return page_child_box;
 }
 
@@ -103,7 +102,6 @@ GtkWidget *
 gtk_c::menu_item_new(const gchar *icon_id, const gchar *text)
 {
     GdkPixbuf *pb = (icon_id)? get_pixbuf (icon_id, GTK_ICON_SIZE_SMALL_TOOLBAR): NULL;    
-                // no replacement for gtk_image_menu_item
     GtkWidget *w = gtk_menu_item_new_with_label ("");
     GtkWidget *replacement = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0);
     GtkWidget *label = gtk_bin_get_child(GTK_BIN(w));

@@ -52,11 +52,6 @@ pixbuf_icons_c::threadwait (void) {
     nanosleep (&thread_wait, NULL);
 }
 
-/*GdkPixbuf *
-pixbuf_icons_c::xffm_icon(const gchar *icon_name, gint size){
-
-}*/
-
 
 gboolean
 pixbuf_icons_c::is_composite_icon_name(const gchar *icon_name){
@@ -82,7 +77,6 @@ pixbuf_icons_c::absolute_path_icon(const gchar *icon_name, gint size){
         return NULL;
     }
     GdkPixbuf *pixbuf = pixbuf_new_from_file(icon_name, size, size); // width,height.
-    // FIXME: (width, height) would be better than (size, size)
     if (pixbuf) return pixbuf;
     return NULL;
 }
@@ -122,29 +116,19 @@ pixbuf_new_from_file_f(void *data){
     } else {
 	pixbuf = gdk_pixbuf_new_from_file_at_size (path, width, height, &error);
     }
+
     // hmmm... from the scale_simple line below, it seems that the above two
     //         functions will do a g_object_ref on the returned pixbuf...
 
-
     // Gdkpixbuf Bug workaround 
-    // (necessary for GTK-2, still necessary in GTK-3.8)
+    // (still necessary in GTK-3.8, not checked further down the road)
     // xpm icons not resized. Need the extra scale_simple. 
-
-
-    //if (pixbuf && width > 0 && gdk_pixbuf_get_width(pixbuf) != width){
-    //if (pixbuf && strstr(path, ".xpm")){
     if (pixbuf && width > 0 && strstr(path, ".xpm")) {
-// 	NOOP(stderr, "** resizing %s\n", path);
 	GdkPixbuf *pix = gdk_pixbuf_scale_simple (pixbuf, width, height, GDK_INTERP_HYPER);
 	g_object_unref(pixbuf);
 	pixbuf = pix;
 
-    }  
-    
-/*    if(error && !strstr(path, ".cache/rfm/thumbnails")) {
-	    DBG ("pixbuf_from_file() %s:%s\n", error->message, path);
-	    g_error_free (error);
-    }*/
+    }      
     return pixbuf;
 }
 

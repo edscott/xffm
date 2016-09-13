@@ -19,7 +19,6 @@ class window_c {
         void add_view_to_list(void *);
         void remove_view_from_list(void *);
     private:
-        void set_up_view_signals(void *);
         GtkNotebook *notebook;
         GtkWidget *window;
         GtkWidget *new_tab_button;

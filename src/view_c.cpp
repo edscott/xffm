@@ -66,19 +66,6 @@ view_c::view_c(void *window_data, GtkNotebook *notebook) : widgets_c(window_data
     // FIXME
     /* drag and drop events */
     rodent_create_target_list (view_p);
-
-    // FIXME: need to set proper treemodel...
-    gtk_widget_show (iconview);
-    
-    // FIXME:
-    rfm_hide_text(&(view_p->widgets));
-
-    // set vpane allocation.
-    // FIXME:
-    rfm_layout_set_vpane_allocation(view_p);
-
-    // FIXME:
-    // rfm_view_thread_create(view_p, rfm_load_sh_command_history, (gpointer) view_p, "rfm_load_sh_command_history");
 #endif
     
 }
@@ -295,10 +282,6 @@ view_c::highlight(void){
 
 void
 view_c::signals(void){
-    // complex connections:
-    //signals_p->setup_callback((void *) this, clear_button, "clicked", 
-      //      (void *)clear_text_callback, diagnostics);
-    // Simple connections:
     // clear button:
     g_signal_connect (clear_button, "clicked", 
             G_CALLBACK (clear_text_f), (void *)this);
@@ -339,7 +322,8 @@ view_c::signals(void){
             G_CALLBACK (switch_page), (void *)this);
 
 
-    /*
+    /*  FIXME: Check which callbacks are necessary and which are not.
+
     g_signal_connect (page_label_button, "clicked", G_CALLBACK (rmpage), view_p);
 
     g_signal_connect (G_OBJECT (size_scale), 
@@ -537,24 +521,6 @@ item_activated (GtkIconView *iconview,
     GtkTreeModel *tree_model = gtk_icon_view_get_model (iconview);
     GtkTreeIter iter;
     if (!gtk_tree_model_get_iter (tree_model, &iter, path)) return;
-
-    /* 
-    // this sucks 
-    GValue value = G_VALUE_INIT;
-    gtk_tree_model_get_value (tree_model, &iter,
-                          COL_ACTUAL_NAME,
-                          &value);
-    gchar *dname = g_strdup_value_contents (&value);
-    // hack to unquote...
-    gchar *p;
-    for (p=dname; p && *p; p++){
-        if (*p == '"') *p = ' ';
-    }
-    g_strstrip(dname);    
-    // more hacks for utf8 conversions...
-    g_value_unset(&value);
-
-    */
     
     gchar *ddname;
     gtk_tree_model_get (tree_model, &iter,

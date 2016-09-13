@@ -1,8 +1,8 @@
+//#define DEBUG_TRACE 1
 #include <string.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <tubo.h>
-#define DEBUG_TRACE 1
 #include "view_c.hpp"
 #include "window_c.hpp"
 #include "run_button_c.hpp"
@@ -187,8 +187,7 @@ run_wait_f (void *data) {
     // The following function will not return until button is created and duly
     // processed by the gtk loop. This to avoid a race with the command completing
     // before gtk has fully created the little run button.
-
-    
+    //
     
     run_button_p->context_function(make_run_data_button, data);
     TRACE("run_wait_f: thread waitpid for %d on (%s/%s)\n", 
@@ -273,9 +272,6 @@ zap_run_button(void * data){
 static void
 show_run_info (GtkButton * button, gpointer data) {
     run_button_c *run_button_p = (run_button_c *)data;
-    //guint button_id = GPOINTER_TO_UINT(g_object_get_data(G_OBJECT(button), "button_id"));
-    //
-    //FIXME: popup signal menu or dialog here.
     //FIXME: we also need to be able to signal to child of shell, if launched from shell
     TRACE("FIXME: popup signal menu or dialog here.\n");
 //	if (button_id == 3) return;
@@ -297,51 +293,3 @@ show_run_info (GtkButton * button, gpointer data) {
     
 }
 
-#if 0
-
-GtkWidget *
-run_button_c::make_menu(void){
-    const gchar *items[]={N_("Renice Process"),N_("Suspend (STOP)"),N_("Continue (CONT)"),
-        N_("Interrupt (INT)"),N_("Hangup (HUP)"),N_("User 1 (USR1)"),
-        N_("User 2 (USR2)"),N_("Terminate (TERM)"),N_("Kill (KILL)"),
-        N_("Segmentation fault"),NULL};
-    const gchar *icons[]={"emblem-wait", "emblem-grayball","emblem-greenball",
-        "emblem-exit","view-refresh","emblem-user",
-        "emblem-user","emblem-cancel","emblem-redball",
-        "emblem-core",NULL};
-
-    GtkWidget *menu = gtk_menu_new();
-    const gchar **i;
-    const gchar **p;
-    gint j;
-    for (j=0,p=items, i=icons; p&& *p; p++,i++,j++){
-        GtkWidget *menuitem = get_gtk_p()->menu_item_new(*i, *p);
-        g_object_set_data(G_OBJECT(menuitem), "signal_id", GINT_TO_POINTER(j));
-        g_signal_connect(menuitem, "activate", G_CALLBACK(send_signal), (void *)this);
-        gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
-        gtk_widget_show(menuitem);
-    }
-
-    gtk_widget_show(menu);
-    return menu;
-}
-
-
-
-static void
-setup_run_button_thread (widgets_t * widgets_p, const gchar * exec_command, pid_t child) {
-    view_t *view_p = widgets_p->view_p;
-    rfm_view_thread_create(view_p, run_wait_f, (gpointer) run_data_p, "run_wait_f");
-}
-
-
-static pthread_mutex_t fork_mutex=PTHREAD_MUTEX_INITIALIZER;
-
-// This is main thread callback
-
-#endif
-
-#if 0
-
-
-#endif

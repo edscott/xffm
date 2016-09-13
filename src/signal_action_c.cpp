@@ -1,4 +1,4 @@
-#define DEBUG_TRACE 1
+//#define DEBUG_TRACE 1
 #include <sys/types.h>
 #include <signal.h>
 #include <errno.h>
@@ -308,7 +308,8 @@ ps_signal(gpointer app, gint signal_id){
                 signal_id, pid);
         kill(pid, signal_id);
     }
-    //rfm_rational(RFM_MODULE_DIR, "callbacks", GINT_TO_POINTER(REFRESH_ACTIVATE), NULL, "callback");
+    // FIXME: is this necessary?
+    // rfm_rational(RFM_MODULE_DIR, "callbacks", GINT_TO_POINTER(REFRESH_ACTIVATE), NULL, "callback");
 }
 
 static void

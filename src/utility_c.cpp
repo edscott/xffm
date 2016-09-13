@@ -177,14 +177,6 @@ utility_c::default_shell(void){
     return "/bin/sh";
 }
 
-// dash is OK now.
-// Only csh/tcsh is broken, since it will not
-// pass on SIGTERM when controler gets SIGUSR1
-// This is only a problem if rodent_ps is not 
-// loadable.
-// gchar *
-
-
 const gchar *
 utility_c::u_shell(void){
     if(getenv ("SHELL") && strlen (getenv ("SHELL"))) {

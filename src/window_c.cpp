@@ -67,7 +67,6 @@ window_c::~window_c(void) {
     }
     pthread_mutex_unlock(&view_list_mutex);
     delete utility_p;
-    //delete gtk_p;
 }
 
 gtk_c *
@@ -75,7 +74,6 @@ window_c::get_gtk_p(void){return gtk_p;}
 
 void
 window_c::add_view_to_list(void *view_p) {
-    set_up_view_signals(view_p);
     pthread_mutex_lock(&view_list_mutex);
     view_list = g_list_prepend(view_list, view_p);
     pthread_mutex_unlock(&view_list_mutex);
@@ -103,15 +101,6 @@ window_c::remove_view_from_list(void *view_p){
     }
 }
 
-void 
-window_c::set_up_view_signals(void *view){
-//    view_c *view_p = (view_c *)view;
-//    signals_p->setup_callback((void *)this, widget, "clicked", (void *)xxx, data); 
-    
-    // Delete button...
-
-}
-
 void *
 window_c::get_active_view_p(void){
     gint current_page = gtk_notebook_get_current_page (notebook);
@@ -122,9 +111,7 @@ window_c::get_active_view_p(void){
 
 void 
 window_c::go_home(void){
-    //XXX this would need tweaking when xfdir_p is not a directory xfdir_p
-    // get current page
-    // reload
+    // get current page and reload homedir
     view_c *view_p =(view_c *)get_active_view_p();
     view_p->reload(g_get_home_dir());
 }
@@ -162,7 +149,7 @@ on_go_home(GtkWidget *widget, gpointer data){
 
 // mod2 is numlock
 // mod5 is alt-gr
-//
+
 
 static gboolean iconview_key(GdkEventKey * event){
     TRACE("iconview_key\n");

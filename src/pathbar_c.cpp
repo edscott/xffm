@@ -13,7 +13,6 @@ pathbar_c::pathbar_c(void *window_data, GtkNotebook *data){
     g_object_set_data(G_OBJECT(pathbar), "callback", (void *)pathbar_go);
     GtkWidget *pb_button = pathbar_button( NULL, ".");
 
-    //g_object_set (pb_button, "can-focus", FALSE, "relief", GTK_RELIEF_NONE, NULL);
     gtk_box_pack_start (GTK_BOX (pathbar), pb_button, FALSE, FALSE, 0);
     g_object_set_data(G_OBJECT(pb_button), "name", g_strdup("RFM_ROOT"));
     g_signal_connect (G_OBJECT(pb_button) , "clicked", G_CALLBACK (pathbar_go), (void *)this);
@@ -26,7 +25,6 @@ pathbar_c::get_pathbar(void){ return pathbar;}
 
 GtkWidget *
 pathbar_c::pathbar_button (const char *icon_id, const char *text) {
-    //GtkWidget *pb_button = gtk_toggle_button_new ();
     GtkWidget *pb_button = gtk_button_new ();
 
     g_object_set (pb_button, 
@@ -67,7 +65,7 @@ pathbar_c::pathbar_ok(GtkButton * button){
             if (g_file_test(path, G_FILE_TEST_IS_DIR)){
                 view_p->reload(path);
             } else {
-                // XXX Go to module or top xffm level
+                // FIXME Go to module or top xffm level
             }
         } 
     }

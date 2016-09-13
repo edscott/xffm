@@ -15,7 +15,6 @@ widgets_c::widgets_c(void *window_data, GtkNotebook *data)
     window_c *window_p = (window_c *)window_data;
     gtk_p = window_p->get_gtk_p();
     create();
-    // deprecated : setup_diagnostics();
     setup_scolled_windows();
     setup_size_scale();
     gtk_p->setup_image_button(clear_button, "edit-clear-all",  _("Clear"));
@@ -66,10 +65,8 @@ widgets_c::create(void){
     page_label_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
     page_label_icon_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
     page_label = gtk_label_new (_("Loading folder..."));
-    //page_label_button_eventbox = gtk_event_box_new ();
     page_label_button = gtk_button_new ();
     // pathbar is already created with pathbar_c object.
-    //g_object_set_data(G_OBJECT(view_p->widgets.paper), "pathbar", pathbar);
     gtk_box_pack_start (GTK_BOX (page_child_box), pathbar_p->get_pathbar(), FALSE, FALSE, 0);
     
     vpane = gtk_paned_new(GTK_ORIENTATION_VERTICAL);
@@ -120,16 +117,9 @@ widgets_c::pack(void){
     // Add widgets to page_label_box:
     gtk_box_pack_start (GTK_BOX (page_label_box), page_label_icon_box, TRUE, TRUE, 0);
     gtk_box_pack_start (GTK_BOX (page_label_box), page_label, TRUE, TRUE, 2);
-//    gtk_box_pack_end (GTK_BOX (page_label_box), page_label_button_eventbox, TRUE, TRUE, 0);
-//    gtk_container_add (GTK_CONTAINER (page_label_button_eventbox), page_label_button);
     gtk_box_pack_end (GTK_BOX (page_label_box), page_label_button, TRUE, TRUE, 0);
     gtk_widget_show_all (page_label_box);
     gtk_widget_show(pathbar_p->get_pathbar());
-
-    //gtk_widget_hide (page_label_button);
-    // path bar... 
-    // gtk_box_pack_start (GTK_BOX (page_child_box), pathbar, FALSE, FALSE, 0);
-    // gtk_widget_show(pathbar);
 
     gtk_box_pack_start (GTK_BOX (page_child_box), vpane, TRUE, TRUE, 0);
     gtk_paned_set_position (GTK_PANED (vpane), 1000);

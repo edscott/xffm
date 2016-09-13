@@ -19,16 +19,13 @@ on_status_button_press ( GtkWidget *w , GdkEventButton * event, gpointer data) {
 static gboolean
 status_keyboard_event (GtkWidget * window, GdkEventKey * event, gpointer data)
 {
-    
-    //TRACE("status_keyboard_event\n");
+    TRACE("status_keyboard_event\n");
     return FALSE;
 }
 
 lpterm_c::lpterm_c(void *data): run_c(data){
     active = FALSE;
-    
     view_c *view_p = (view_c *)data;
-   // print_p = view_p->get_print_p();
     iconview = view_p->get_iconview();
     status_icon = view_p->get_status_icon();
     iconview_icon = view_p->get_iconview_icon();
@@ -38,8 +35,6 @@ lpterm_c::lpterm_c(void *data): run_c(data){
     pthread_mutexattr_settype(&r_attr, PTHREAD_MUTEX_RECURSIVE);
     rbl_mutex = (pthread_mutex_t *)calloc(1, sizeof(pthread_mutex_t));
     pthread_mutex_init(rbl_mutex, &r_attr);
-
-
     run_button_list = NULL;
     g_signal_connect (status, "key-press-event", G_CALLBACK (status_keyboard_event), data);
     g_signal_connect (status_button, "button-press-event", G_CALLBACK (on_status_button_press), (void *)this);
@@ -83,7 +78,7 @@ gboolean
 lpterm_c::window_keyboard_event(GdkEventKey * event, void *data)
 {
     view_c *view_p = (view_c *)data;
-    //TRACE("lpterm_c::window_keyboard_event\n");
+    TRACE("lpterm_c::window_keyboard_event\n");
     /* asian Input methods */
     if(event->keyval == GDK_KEY_space && (event->state & (GDK_MOD1_MASK | GDK_SHIFT_MASK))) {
         return FALSE;
@@ -155,14 +150,13 @@ lpterm_c::window_keyboard_event(GdkEventKey * event, void *data)
     return TRUE;
 
 
-// deprecated code
-    /* FIXME: callbacks...
+    /* FIXME: CTL callbacks...
     if (rodent_do_callback(event->keyval, event->state)) {
         TRACE("lpterm_c::window_keyboard_event: Tried callback with keyval!\n");
         return TRUE;
     } */
     
-    /* FIXME
+    /* FIXME: icon selection by keyboard
     if (view_p->selection_list) {
 	// selection list must be redefined...
 	update_reselect_list(widgets_p);
@@ -338,12 +332,6 @@ lpterm_c::internal_cd (gchar ** argvp) {
     view_c *view_p =(view_c *)view_v;
     view_p->reload(gg);
 
- 
-    // XXX Do we want to change focus to iconview? Not sure...
-    // lp_set_active(FALSE);
-
-    // Reload new directory
-
     g_free (gg);
     return TRUE;
 }
@@ -388,17 +376,13 @@ lpterm_c::sudo_fix(const gchar *command){
 
 void *
 lpterm_c::shell_command(const gchar *c){
-
-    // Fix any sudo commands to use the -A option
+    // Make sure any sudo command has the "-A" option
     gchar *command = sudo_fix(c);
-    // FIXME: run through selected shell
-
     pid_t pid = thread_run(command?command:c);
     run_button_c *run_button_p = NULL;
     run_button_p = new run_button_c(view_v, c, pid, run_in_shell(c));
-    //csh_save_history(command?command:c);
+    // We save the original sudo command, not the one modified with "-A"
     csh_save_history(c);
-    
     g_free (command);
     return (void *)run_button_p;
 }
@@ -410,7 +394,7 @@ lpterm_c::run_lp_command(void){
     if (strchr(command, ';')) commands = g_strsplit(command, ";", -1);
     if (!commands) {
         commands = (gchar **) calloc(2, sizeof(gchar *));
-        commands[0]=command; // no duplicate necessary
+        commands[0] = g_strdup(command); 
     }
     gchar **c;
     for (c=commands; c && *c; c++){
@@ -419,60 +403,8 @@ lpterm_c::run_lp_command(void){
         shell_command(*c);
         clear_status();
     }
-    g_strfreev(commands); // this will free "command"
-
-
-#if 0
-        if(g_object_get_data (G_OBJECT (textview), "clean") == NULL) {
-            g_object_set_data(G_OBJECT(widgets_p->status), "csh_cmd_len", NULL);
-            g_object_set_data(G_OBJECT(widgets_p->status), "csh_nth", NULL);
-            // get the command
-            gchar *command = get_current_text ((GtkTextView *) widgets_p->status);
-            if(command && strlen (command)) {
-                // show the lp output area        
-                rfm_show_text (widgets_p);
-
-                // first process internal commands for cd and history
-		// Internal commands will return focus to paper
-		// (cd is a threaded reload which will overwrite
-		//  the status line when done)
-                if(process_internal_commands (widgets_p, &command)){
-		    // probably not the best choice to send focus to paper...
-                    // lp_set_active(widgets_p, FALSE);
-		    // rfm_update_status_line (widgets_p->view_p);
-                    return;
-		}
-
-                // command is now external for /bin/sh
-                // printstatus with the run icon run.png
-                // this is already done in run.c
-                // rfm_diagnostics(widgets_p, "run.png",command,"\n",NULL);
-
-                // run the command (in a shell)
-		// XXX This will block if located at a remote directory with
-		// a broken network connection.
-                if(widgets_p->workdir) {
-                    g_free (widgets_p->workdir);
-                }
-                view_t *view_p = widgets_p->view_p;
-                if (!view_p->en || !view_p->en->path || ! rfm_g_file_test(view_p->en->path, G_FILE_TEST_IS_DIR)){
-                    widgets_p->workdir = g_strdup (g_get_home_dir());
-;
-                } else {
-                    widgets_p->workdir = g_strdup (view_p->en->path);
-                }
-		// Fix any sudo commands to use the -A option
-		command = sudo_fix(command);
-                RFM_THREAD_RUN (widgets_p, command, FALSE);
-                g_free (command);
-            }
-        }
-        rfm_status (widgets_p, "xffm/emblem_terminal", NULL);
-	gtk_text_view_set_cursor_visible(GTK_TEXT_VIEW(status), TRUE);
-        g_object_set_data (G_OBJECT (textview), "clean", NULL);
-        return;
-    }
-#endif
+    g_strfreev(commands); 
+    g_free(command);
 }
 
 gint
@@ -524,7 +456,6 @@ lpterm_c::lpterm_keyboard_event( GdkEventKey * event, gpointer data) {
     TRACE("Now do our stuff.\n");
 
     // Now do our stuff.
-    //
     
     // If cursor is back at position 0, then reset.
     query_cursor_position();
@@ -543,417 +474,6 @@ lpterm_c::lpterm_keyboard_event( GdkEventKey * event, gpointer data) {
         csh_dirty_start();
     }
     return retval;
-#if 0
-    // FIXME
-    if(event->keyval == GDK_KEY_Return || event->keyval == GDK_KEY_KP_Enter) {
-        if(g_object_get_data (G_OBJECT (textview), "clean") == NULL) {
-            g_object_set_data(G_OBJECT(widgets_p->status), "csh_cmd_len", NULL);
-            g_object_set_data(G_OBJECT(widgets_p->status), "csh_nth", NULL);
-            // get the command
-            gchar *command = get_current_text ((GtkTextView *) widgets_p->status);
-            if(command && strlen (command)) {
-                // show the lp output area        
-                rfm_show_text (widgets_p);
-
-                // first process internal commands for cd and history
-		// Internal commands will return focus to paper
-		// (cd is a threaded reload which will overwrite
-		//  the status line when done)
-                if(process_internal_commands (widgets_p, &command)){
-		    // probably not the best choice to send focus to paper...
-                    // lp_set_active(widgets_p, FALSE);
-		    // rfm_update_status_line (widgets_p->view_p);
-                    return TRUE;
-		}
-
-                // command is now external for /bin/sh
-                // printstatus with the run icon run.png
-                // this is already done in run.c
-                // rfm_diagnostics(widgets_p, "run.png",command,"\n",NULL);
-
-                // run the command (in a shell)
-		// XXX This will block if located at a remote directory with
-		// a broken network connection.
-                if(widgets_p->workdir) {
-                    g_free (widgets_p->workdir);
-                }
-                view_t *view_p = widgets_p->view_p;
-                if (!view_p->en || !view_p->en->path || ! rfm_g_file_test(view_p->en->path, G_FILE_TEST_IS_DIR)){
-                    widgets_p->workdir = g_strdup (g_get_home_dir());
-;
-                } else {
-                    widgets_p->workdir = g_strdup (view_p->en->path);
-                }
-		// Fix any sudo commands to use the -A option
-		command = sudo_fix(command);
-                RFM_THREAD_RUN (widgets_p, command, FALSE);
-                g_free (command);
-            }
-        }
-        rfm_status (widgets_p, "xffm/emblem_terminal", NULL);
-	gtk_text_view_set_cursor_visible(GTK_TEXT_VIEW(status), TRUE);
-        g_object_set_data (G_OBJECT (textview), "clean", NULL);
-        return TRUE;
-    }
-#endif
-    return TRUE;
 }
-#if 0
-
-void
-print_tab ( widgets_t * widgets_p, gchar * text, gchar *text2) {
-    int tab_len = 18;
-    rfm_diagnostics (widgets_p, "xffm_tag/red", text, text2, NULL);
-    gint string_length = (text)?strlen(text):0 + (text2)?strlen(text2):0;
-    for(tab_len = tab_len - string_length; tab_len > 0; tab_len--)
-        rfm_diagnostics (widgets_p, NULL, " ", NULL);
-}
-
-// Shared keybindings with either iconview or callback
-typedef struct lpkey_t{
-    guint key;
-    guint mask;
-} lpkey_t;
-
-///////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////
-static const gchar *terminals_v[] = {
-	"roxterm", 
-	"sakura",
-	"gnome-terminal", 
-	"Eterm", 
-	"konsole", 
-	"Terminal", 
-	"aterm", 
-	"xterm", 
-	"kterm", 
-	"wterm", 
-	"multi-aterm", 
-	"evilvte",
-	"mlterm",
-	"xvt",
-	"rxvt",
-	"urxvt",
-	"mrxvt",
-	"tilda",
-	NULL
-};
-
-static const gchar *editors_v[] = {
-	"gvim -f",  
-	"mousepad", 
-	"gedit", 
-	"kate", 
-	"xemacs", 
-	"nano",
-	"vi",
-	NULL
-};
-
-const gchar **rfm_get_terminals(void) {return terminals_v;}
-const gchar **rfm_get_editors(void) {return editors_v;}
-
-static GSList *children_list=NULL;
-
-static pthread_mutex_t children_list_mutex = PTHREAD_MUTEX_INITIALIZER;
-
-void rfm_remove_child(pid_t child){
-    if (!children_list) return;
-    pthread_mutex_lock(&(children_list_mutex));
-    children_list = g_slist_remove(children_list, GINT_TO_POINTER(child));
-    pthread_mutex_unlock(&(children_list_mutex));
-    return;
-}
-
-void rfm_killall_children(void){
-    TRACE("rfm_killall_children(): signalling controller children...\n");
-    pthread_mutex_lock(&(children_list_mutex));
-
-    GSList *list = children_list;
-    for (;list && list->data; list = list->next){
-	pid_t child = GPOINTER_TO_INT(list->data);
-	TRACE( "ZZZZZZZ--- killing %d\n", child);
-	kill(child, SIGTERM);
-
-    }
-    g_slist_free(children_list);
-    children_list = NULL;
-    pthread_mutex_unlock(&(children_list_mutex));
-
-}
-
-void rfm_add_child(pid_t child){ 
-    pthread_mutex_lock(&(children_list_mutex));
-    NOOP(stderr, "adding %d to children_list\n", child);
-    children_list = g_slist_prepend(children_list, GINT_TO_POINTER(child));
-    pthread_mutex_unlock(&(children_list_mutex));
-
-    return;
-}
-
-gchar * 
-rfm_get_text_editor_envar(const gchar *value){
-    if(!value) return NULL;
-    
-    gchar *editor=g_path_get_basename(value);
-    // if nano or vi, then use terminal emulator
-    if (editor && 
-	    (strncmp(editor, "vi",strlen("vi"))==0 
-	     || 
-	     strncmp(editor, "nano",strlen("nano"))==0)){
-	const gchar *t=getenv("TERMINAL_CMD");
-	gchar *term = g_find_program_in_path(t);
-	if (term) g_free(term);
-	else {
-	    t=NULL;
-	    gint i;
-	    for (i=0; terminals_v[i]; i++){
-		// sakura is broken... 
-		if (strstr(terminals_v[i], "sakura")) continue;
-		term = g_find_program_in_path(terminals_v[i]);
-		if (term){
-		    t=terminals_v[i];
-		    g_free(term);
-		    break;
-		}
-	    }
-	}
-	if (t && strlen(t)) {
-	    gchar *b=g_strdup_printf("%s %s %s",
-		    t, rfm_term_exec_option(t), editor);
-	    g_free(editor);
-	    editor = b;
-	}
-    } else {
-	g_free(editor);
-	editor = g_strdup(value);
-    }
-    return (editor);
-}
-
-//////////////// Module wraparounds ////////////////////////////
-//
-// Use rfm_thread_run_argv or rfm_thread_run?
-// rfm_thread_run_argv will execute directly, not via a shell, and will
-// not be saved in the lpterm history
-
-// rfm_thread_run_argv:
-// This modality will execute the command without shell
-
-
-// rfm_thread_run:
-// This modality will execute the command via "sh -c" and allow pipes and 
-// redirection. and will be saved in the lpterm history file
-    
-pid_t
-rfm_thread_run_argv (
-	widgets_t * widgets_p, 
-	gchar ** argv, 
-	gboolean interm
-	){
-    const void *vector[]={widgets_p, argv, GINT_TO_POINTER(interm), NULL,  NULL, NULL, NULL, NULL};
-    return GPOINTER_TO_INT(rfm_vector_run(RFM_MODULE_DIR, "run", GINT_TO_POINTER(7),
-		    vector, "m_thread_run_argv"));
-}
-
-pid_t
-rfm_thread_run_argv_full (
-	widgets_t * widgets_p, 
-	gchar ** argv, 
-	gboolean interm,
-	gint *stdin_fd,
-	void (*stdout_f) (void *stdout_data,
-                      void *stream,
-                      int childFD),
-	void (*stderr_f) (void *stdout_data,
-                      void *stream,
-                      int childFD),
-	void (*tubo_done_f) (void *data)
-	){
-    if (!argv || !argv[0]) return 0;
-    const void *vector[]={widgets_p, argv, GINT_TO_POINTER(interm), stdin_fd,  stdout_f, stderr_f, tubo_done_f};
-    return GPOINTER_TO_INT(rfm_vector_run(RFM_MODULE_DIR, "run", GINT_TO_POINTER(7),
-		    vector, "m_thread_run_argv"));
-
- }
-
-pid_t
-rfm_thread_run_argv_with_stdin (
-	widgets_t * widgets_p, 
-	gchar ** argv, 
-	gboolean interm, 
-	gint *stdin_fd
-    	){
-    const void *vector[]={widgets_p, argv, GINT_TO_POINTER(interm), stdin_fd,  NULL, NULL, NULL};
-    return GPOINTER_TO_INT(rfm_vector_run(RFM_MODULE_DIR, "run", GINT_TO_POINTER(7),
-		    vector, "m_thread_run_argv"));
-
- 
-}
-
-pid_t
-rfm_thread_run_argv_with_stdout (
-	widgets_t * widgets_p, 
-	gchar ** argv, 
-	gboolean interm, 
-	void (*stdout_f) (void *stdout_data,
-                      void *stream,
-                      int childFD)
-	){
-    const void *vector[]={widgets_p, argv, GINT_TO_POINTER(interm), NULL,  stdout_f, NULL, NULL};
-    return GPOINTER_TO_INT(rfm_vector_run(RFM_MODULE_DIR, "run", GINT_TO_POINTER(7),
-		    vector, "m_thread_run_argv"));
-
-    
-}
-
-pid_t
-rfm_thread_run_argv_with_stderr (
-	widgets_t * widgets_p, 
-	gchar ** argv, 
-	gboolean interm, 
-	void (*stderr_f) (void *stderr_data,
-                      void *stream,
-                      int childFD)
-	){
-    const void *vector[]={widgets_p, argv, GINT_TO_POINTER(interm), NULL,  NULL, stderr_f, NULL};
-    return GPOINTER_TO_INT(rfm_vector_run(RFM_MODULE_DIR, "run", GINT_TO_POINTER(7),
-		    vector, "m_thread_run_argv"));
-
-}
-////////////////////////////////////////////////////////////////////////////
-
-void
-rfm_recover_flags (gchar * in_cmd, gboolean * interm, gboolean * hold) {
-    DBHashTable *runflags;
-    GString *gs;
-    int *flags;
-    gchar *g = g_build_filename ( RUN_FLAG_FILE, NULL);
-    TRACE("opening %s...\n",g); 
-    if((runflags = dbh_new (g, NULL, DBH_READ_ONLY|DBH_PARALLEL_SAFE)) == NULL) {
-        TRACE ("Cannot open %s\n", g);
-        *interm = 0;
-        *hold = 0;
-        return;
-    }
-    TRACE("opened %s.\n",g); 
-    dbh_set_parallel_lock_timeout(runflags, 3);
-    gs = g_string_new (in_cmd);
-    sprintf ((char *)DBH_KEY (runflags), "%10u", g_string_hash (gs));
-    g_string_free (gs, TRUE);
-    flags = (int *)runflags->data;
-    dbh_load (runflags);
-    *interm = flags[0];
-    *hold = flags[1];
-    dbh_close (runflags);
-
-    NOOP ("flags recovered from dbh file for %s, interm=%d hold=%d\n", in_cmd, *interm, *hold);
-}
-
-
- 
-const gchar * 
-rfm_term_exec_option(const gchar *terminal) {
-    const gchar *exec_option = "-e";
-    gchar *t = g_path_get_basename (terminal);
-    if(strcmp (t, "gnome-terminal") == 0 || strcmp (t, "Terminal") == 0)
-            exec_option = "-x";
-    g_free(t);
-    return exec_option;
-}
-
-const gchar *
-rfm_what_term (void) {
-    const gchar *term=getenv ("TERMINAL_CMD");
-    gchar *t=NULL;
-    if(term && strlen (term)) {
-	if (strchr(term, ' ')){
-	    gchar **g = g_strsplit(term, " ", -1);
-	    t = g_find_program_in_path (g[0]);
-	    g_strfreev(g);
-	} else {
-	    t = g_find_program_in_path (term);
-	}
-    }
-    if(!t) {
-	    const gchar **p=terminals_v;
-	    for (;p && *p; p++){
-		t = g_find_program_in_path (*p);
-		if (t) {
-		    term=*p;
-		    break;  
-		}  
-	    }
-    }
-    if (t) {
-	g_free(t);
-	return term;
-    }
-    DBG ("TERMINAL_CMD=%s: %s\n", getenv ("TERMINAL_CMD"), strerror (ENOENT));
-
-    return NULL;
-}
-
-#endif
-
-#if 0
-gint
-on_button_press (
-    GtkWidget * textview,
-     GdkEventButton * event,
-    gpointer data
-) {
-    widgets_t *widgets_p = (widgets_t *) data;
-    //view_t *view_p = widgets_p->view_p;
-    NOOP(stderr,"on_button_press...%lf\n", event->x);
-    if (lp_get_active(widgets_p)){
-	if (event->x < TINY_ICON_SIZE)event->x = TINY_ICON_SIZE;
-    }
-    return FALSE;
-}
-static gint
-on_button_release (
-    GtkWidget * textview,
-     GdkEventButton * event,
-    gpointer data
-) {
-    widgets_t *widgets_p = (widgets_t *) data;
-    view_t *view_p = widgets_p->view_p;
-    NOOP("on_button_release...%lf\n", event->x);
-    if (lp_get_active(widgets_p)){
-	if (event->x < TINY_ICON_SIZE)event->x = TINY_ICON_SIZE;
-	return FALSE;
-    }
-
-
-    if(!rfm_population_try_read_lock (view_p, "on_button_release")) return FALSE;
-    rodent_unselect_all_pixbuf (view_p);
-    rodent_unsaturate_icon (view_p);
-    status_grab_focus (widgets_p->view_p, 0);
-    if (!view_p->lp_command) view_p->lp_command = g_strdup("");
-    rfm_status (widgets_p, "xffm/emblem_terminal", view_p->lp_command, NULL);
-    g_object_set_data (G_OBJECT (widgets_p->status), "clean", NULL);
-    gtk_text_view_set_cursor_visible(GTK_TEXT_VIEW  (widgets_p->status), TRUE);
-    lp_set_active(widgets_p, TRUE);
-    
-    rfm_population_read_unlock (view_p, "on_button_release");
-
-    return FALSE;
-}
-
-gint
-on_motion_event (
-    GtkWidget * textview,
-    GdkEventMotion* event,
-    gpointer data
-) {
-    //widgets_t *widgets_p = (widgets_t *) data;
-    //view_t *view_p = widgets_p->view_p;
-    NOOP(stderr,"GdkEventMotion...\n");
-    if (event->x < TINY_ICON_SIZE) return TRUE;
-    return FALSE;
-}
-
-#endif
 
 

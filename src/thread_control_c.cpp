@@ -1,4 +1,4 @@
-#define DEBUG_TRACE
+//#define DEBUG_TRACE
 #include "xffm+.h"
 #include "thread_control_c.hpp"
 

@@ -100,7 +100,6 @@ open (GtkApplication *app,
                gint          n_files,
                gchar        *hint,
                gpointer      data){
-//    open(GtkApplication *app, void *data){
     DBG("open(GtkApplication *app, void *data)\n");
     xffm_c *xffm_p = (xffm_c *)data;
     if (!n_files){

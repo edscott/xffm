@@ -188,10 +188,8 @@ tooltip_c::create_tooltip_window(GtkWidget *widget, GtkWidget *tooltip_window, c
 	gchar *label_markup;
 	if (widget) {
 	    label_markup = g_strdup_printf("<span color=\"yellow\" font_family=\"monospace\" weight=\"bold\"> %s </span>",utf_text); 
-	    //label_markup = g_strdup_printf("<span color=\"black\" font_family=\"monospace\" weight=\"bold\">%s</span>",utf_text); 
 	} else {
 	    label_markup = g_strdup_printf("<span color=\"yellow\" font_family=\"monospace\" size=\"larger\" weight=\"bold\"> %s </span>\n",utf_text); 
-	    //label_markup = g_strdup_printf("<span color=\"black\" font_family=\"monospace\" size=\"larger\" weight=\"bold\">%s</span>\n",utf_text); 
 	}
 	gtk_label_set_markup(GTK_LABEL(label), label_markup);
 	g_free(utf_text);
@@ -223,11 +221,8 @@ tooltip_c::create_tooltip_window(GtkWidget *widget, GtkWidget *tooltip_window, c
     }
     if (markup) {
 	GtkWidget *label = gtk_label_new("");	
-	//gtk_widget_set_size_request (label, 60, -1);
 	gtk_label_set_line_wrap(GTK_LABEL(label), TRUE);
 	if (widget) {
-//	    gchar *small = g_strdup_printf("<span color=\"white\" size=\"smaller\">%s</span>", markup);
-//	    gchar *small = g_strdup_printf("<span background=\"white\" color=\"black\" size=\"smaller\">%s</span>", markup);
 	    gchar *small = g_strdup_printf("<span  color=\"white\" size=\"smaller\"> %s </span>", markup);
 	    gtk_label_set_markup(GTK_LABEL(label), small);
 	    g_free(small);
@@ -287,7 +282,7 @@ widget_tooltip_function(
     gchar *tooltip_text = (gchar *)g_object_get_data(G_OBJECT(widget), "tooltip_text");
     gchar *label_text = NULL;
 
-    //NOOP(stderr, "New tooltip \"%s\"\n", tooltip_text); 
+    TRACE("New tooltip \"%s\"\n", tooltip_text); 
     if (tooltip_text){
 	if (strchr(tooltip_text, '\n')) {
 	    label_text = g_strdup(tooltip_text);
@@ -340,7 +335,6 @@ custom_tooltip_f(void * data){
     if (!tooltip_p->get_tooltip_text_hash()) DBG("custom_tooltip_f: hash is null!\n");
     g_hash_table_replace(tooltip_p->get_tooltip_text_hash(), widget, t);
     g_object_set_data(G_OBJECT(widget), "tooltip_pixbuf", pixbuf);
-   // if (pixbuf) g_object_ref(pixbuf);
 
     gtk_widget_set_has_tooltip(widget, TRUE);
     g_signal_connect (G_OBJECT (widget), "destroy",
@@ -351,7 +345,6 @@ custom_tooltip_f(void * data){
 }
 
 void tooltip_c::custom_tooltip(GtkWidget *widget, GdkPixbuf *pixbuf, const gchar *text){
-    //rfm_global_t *rfm_global_p = rfm_global();
     void *arg[]={widget, pixbuf, (void *)text, (void *)this};
     utility_p->context_function(custom_tooltip_f, arg);
 }

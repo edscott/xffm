@@ -56,7 +56,6 @@ compare_type (const void *a, const void *b) {
     if (a_cond && !b_cond) return -1; 
     if (!a_cond && b_cond) return 1;
     return strcasecmp(xd_a->d_name, xd_b->d_name);
-    //return strcmp(xd_a->d_name, xd_b->d_name);
 }
 
 void 
@@ -119,7 +118,6 @@ xfdir_c::read_items (gint *heartbeat) {
     struct dirent *d;
     while ((error = readdir_r(directory, buffer, &d)) == 0 && d != NULL){
         if(strcmp (d->d_name, ".") == 0) continue;
-        // if(strcmp (d->d_name, "..") == 0 && strcmp (path, "/") == 0) continue;
 	xd_t *xd_p = (xd_t *)calloc(1,sizeof(xd_t));
 	xd_p->d_name = g_strdup(d->d_name);
         memset (&(xd_p->st), 0, sizeof(struct stat));
@@ -141,7 +139,6 @@ FIXME set d_type from a stat or other method
     closedir (directory);
 
     g_free(buffer);
-    //if (directory_list) directory_list = g_list_reverse(directory_list);
 
     // At least the ../ record should have been read. If this
     // is not so, then a read error occurred.
@@ -352,7 +349,6 @@ xfdir_c::get_home_iconname(const gchar *data){
     return "folder";
 }
 
-#if 10
 GtkTreeModel *
 xfdir_c::get_tree_model (void){return treemodel;}
 
@@ -473,36 +469,4 @@ xfdir_c::get_window_name (void) {
     return (iconname);
 }
 
-
-
-#else
-
-GtkTreeModel *
-xfdir_c::get_tree_model (const gchar *path)
-
-{
-  GtkListStore *list_store;
-  GdkPixbuf *p1, *p2;
-  GtkTreeIter iter;
-  GError *err = NULL;
-  int i = 0;
-
-  p1 = gdk_pixbuf_new_from_file ("image1.png", &err);
-                            /* No error checking is done here */
-  p2 = gdk_pixbuf_new_from_file ("image2.png", &err);
-   
-  list_store = gtk_list_store_new (NUM_COLS, G_TYPE_STRING, GDK_TYPE_PIXBUF);
-
-  do {
-    gtk_list_store_append (list_store, &iter);
-    gtk_list_store_set (list_store, &iter, COL_DISPLAY_NAME, "Image1",
-                        COL_PIXBUF, p1, -1);
-    gtk_list_store_append (list_store, &iter);
-    gtk_list_store_set (list_store, &iter, COL_DISPLAY_NAME, "Image2",
-                        COL_PIXBUF, p2, -1);
-  } while (i++ < 100);
-
-  return GTK_TREE_MODEL (list_store);
-}
-#endif
 

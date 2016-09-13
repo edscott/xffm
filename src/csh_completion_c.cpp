@@ -252,7 +252,8 @@ csh_completion_c::csh_is_valid_command (const gchar *cmd_fmt) {
         return (FALSE);
     }
     // here we test for execution within sudo
-    // XXX we could also check for commands executed in a terminal, but not today...
+    // this is to add the -A option, which is necesary for
+    // password dialog to pop up, when password is required.
     gboolean retval = TRUE;
     if (strcmp(argv[0],"sudo")==0) {
         gint i=1;

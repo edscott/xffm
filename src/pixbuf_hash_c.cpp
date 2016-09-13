@@ -53,14 +53,6 @@ free_pixbuf_t(void *data){
     return;
 }
 
-// hmmmm.... serialized....
-//  only the main thread will access the pixbuf hash,
-
-
-/////    exported /////
-//
-
-
 gchar *
 pixbuf_hash_c::get_thumbnail_path (const gchar * file, gint size) {
     gchar *cache_dir;
@@ -273,10 +265,7 @@ GdkPixbuf *
 pixbuf_hash_c::find_in_pixbuf_hash(const gchar *icon_name, gint size){
     if (!icon_name) return NULL;
 
-    // XXX: FIXME This will report out of date thumbnails/previews as not present 
-    // XXX if no filename found, search in xffm+ svg icons
-    // XXX also add path for application icons
-    //
+    // FIXME: check, remake out of date thumbnails/previews as needed 
     
     GdkPixbuf *pixbuf = lookup_icon(icon_name, size);
     if (pixbuf) return pixbuf;
