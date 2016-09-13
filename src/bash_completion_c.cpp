@@ -180,10 +180,14 @@ bash_completion_c::get_match_type_text(gint match_type){
     
 void
 bash_completion_c::msg_show_match(gint match_type, const gchar *match){
+#ifdef DEBUG
     if (!match) {
+#ifdef DEBUG
 	const gchar *option_type = get_match_type_text(match_type);
 	print_icon_tag ("dialog-warning", "xffm_tag/red", g_strdup_printf("(%s)", option_type));
 	match = _("Found no match");
+#endif
+        return;
     } 
     print_tag("tag/blue", g_strdup_printf(" %s\n", match));
     scroll_to_bottom();
