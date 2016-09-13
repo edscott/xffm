@@ -1,0 +1,35 @@
+lpterm_c.cpp:
+ * CTL callbacks...
+ * icon selection by keyboard
+pathbar_c.cpp:
+ * Go to module or top xffm level when dot button pressed
+ pixbuf_hash_c.cpp
+ * check, remake out of date thumbnails/previews as needed
+ run_button_c.cpp
+ * workdir not set nor used
+ * show info callback is not functional
+ * reload icons when command has completed (rather signal monitor
+   to check and perform a reload if necessary)
+ * enable functionality of rfm_remove_child()
+ run_c.cpp
+ * fork_mutex must live across objects (why? check validity)
+ * fix exit status test for view or window to stop output
+   to nonexistent textview
+ signal_action_c.cpp
+ * check whether reload is necessary after process is signaled.
+ thread_control_c.cpp
+ * check usage of thread_control object
+ tooltip_c.cpp
+ * fix dual behavior of create_tooltip_window() (split into two functions)
+ * check why composite shading no longer works in gtk-3.20
+ view_c.cpp
+ * Drag and drop setup for iconview
+ * Check which callbacks are necessary and which are not.
+ * enable title and icon changes on switch page (not needed until
+   modules can be loaded)
+ xfdir_c.cpp
+ * need to tag links to directories appropriately so that the icon
+   is correct. 
+ * Icons which are links to directories must be placed next to directory icons
+ * Activate a symlink to directory should not set realpath in pathbar
+   nor in view_p->path
