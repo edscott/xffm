@@ -1,9 +1,3 @@
-Bug:
- * once diagnostics has reached line limit, further output appears broken, 
-   and sortof fixes with scrollup/down. Apparently further output is being 
-   output to incorrect part of the text buffer, instead of the end. Clean
-   diagnostics fixes the problem.
-
 lpterm_c.cpp:
  * CTL callbacks...
  * icon selection by keyboard
@@ -31,8 +25,6 @@ pathbar_c.cpp:
  view_c.cpp
  * Drag and drop setup for iconview
  * Check which callbacks are necessary and which are not.
- * enable title and icon changes on switch page (not needed until
-   modules can be loaded)
  xfdir_c.cpp
  * need to tag links to directories appropriately so that the icon
    is correct. 

@@ -35,6 +35,8 @@ class view_c:public widgets_c, public thread_control_c {
 	gint get_icon_size(const gchar *);
 	void set_window_title(void);
 	void set_application_icon(void);
+	void set_window_title(gint);
+	void set_application_icon(gint);
 	xfdir_c *get_xfdir_p(void);
         GtkWindow *get_window(void);
 

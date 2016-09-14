@@ -396,7 +396,6 @@ view_c::get_tree_model(void){return xfdir_p->get_tree_model();}
 gint
 view_c::get_icon_size(const gchar *name){ return xfdir_p->get_icon_size(name);}
 
-// FIXME: should call this function when page changes
 void
 view_c::set_application_icon (void) {
     const gchar *iconname = xfdir_p->get_xfdir_iconname();
@@ -409,8 +408,36 @@ view_c::set_application_icon (void) {
 }
 
 void
+view_c::set_application_icon (gint page_num) {
+    GtkWidget *child_box = gtk_notebook_get_nth_page(notebook, page_num);
+    view_c *view_p = (view_c *)g_object_get_data(G_OBJECT(child_box), "view_p");
+    if (!view_p->get_xfdir_p()) return;
+    
+    const gchar *iconname = view_p->get_xfdir_p()->get_xfdir_iconname();
+    GdkPixbuf *icon_pixbuf = gtk_p->get_pixbuf (iconname, GTK_ICON_SIZE_DIALOG);
+    if(icon_pixbuf) {
+	GtkWindow *window = ((window_c *)window_v)->get_window();
+        gtk_window_set_icon (window, icon_pixbuf);
+    }
+    // FIXME add to tab label (not here...)
+}
+
+void
 view_c::set_window_title(void){
     gchar *window_title = xfdir_p->get_window_name();
+    GtkWindow *window = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET(notebook)));
+    gtk_window_set_title (window, window_title);
+    g_free (window_title);
+
+}
+
+void
+view_c::set_window_title(gint page_num){
+    GtkWidget *child_box = gtk_notebook_get_nth_page(notebook, page_num);
+    view_c *view_p = (view_c *)g_object_get_data(G_OBJECT(child_box), "view_p");
+    if (!view_p->get_xfdir_p()) return;
+
+    gchar *window_title = view_p->get_xfdir_p()->get_window_name();
     GtkWindow *window = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET(notebook)));
     gtk_window_set_title (window, window_title);
     g_free (window_title);
@@ -631,19 +658,15 @@ select_page (GtkNotebook *notebook,
 static void
 switch_page (GtkNotebook *notebook,
                GtkWidget   *page,
-               guint        page_num,
+               guint        new_page,
                gpointer     data)
 {
-#if 0
-    TRACE("switch_page, page_num=%d\n" ,page_num);
-    //page_status(data);
-    view_c *view_p = (view_c *)data;
-    window_c *window_p = (window_c *)g_object_get_data(G_OBJECT(notebook), "window_p");
     gint current_page = gtk_notebook_get_current_page (notebook);
-    TRACE("   current=%d,  pagecount=%d\n",
-            current_page, gtk_notebook_get_n_pages(notebook));
-#endif
-
+    view_c *view_p = (view_c *)data;
+    TRACE("switch_page, page_num=%d current_page=%d xfdir_p=%p\n" ,new_page, current_page, view_p->get_xfdir_p());
+    if (!view_p->get_xfdir_p()) return;
+    view_p->set_window_title(new_page);
+    view_p->set_application_icon(new_page);
 }
 
 
