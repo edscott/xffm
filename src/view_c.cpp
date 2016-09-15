@@ -78,6 +78,12 @@ view_c::~view_c(void){
     if (lpterm_p) delete lpterm_p;
 }
 
+void 
+view_c::root(void){
+    DBG("root treemodel\n");
+    
+}
+
 gboolean
 view_c::window_keyboard_event(GdkEventKey *event, void *data){
     return lpterm_p->window_keyboard_event(event, data);

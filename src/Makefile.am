@@ -33,6 +33,7 @@ xffm_SOURCES = \
 	  signals_c.cpp \
 	  utility_c.cpp \
 	  xfdir_c.cpp \
+	    xfdir_base_c.cpp \
 	  gtk_c.cpp \
 	    signal_action_c.cpp \
 	    tooltip_c.cpp \

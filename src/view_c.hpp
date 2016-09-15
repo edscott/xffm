@@ -40,6 +40,8 @@ class view_c:public widgets_c, public thread_control_c {
 	xfdir_c *get_xfdir_p(void);
         GtkWindow *get_window(void);
 
+        void root(void);
+
 	gboolean window_keyboard_event(GdkEventKey *, void *);
         lpterm_c *get_lpterm_p(void);
 
