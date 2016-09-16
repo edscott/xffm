@@ -3,6 +3,7 @@
 #include "window_c.hpp"
 #include "view_c.hpp"
 #include "xfdir_c.hpp"
+#include "xfdir_local_c.hpp"
 
 static void on_new_page(GtkWidget *, gpointer);
 static void on_go_home(GtkWidget *, gpointer);
@@ -113,13 +114,29 @@ void
 window_c::go_home(void){
     // get current page and reload homedir
     view_c *view_p =(view_c *)get_active_view_p();
-    view_p->reload(g_get_home_dir());
+    if (g_file_test(view_p->get_path(), G_FILE_TEST_IS_DIR)){
+	view_p->reload(g_get_home_dir());
+    } else {
+	// here we switch from module to local xfdir_c objects
+	xfdir_c *xfdir_p;
+	xfdir_p = (xfdir_c *)new xfdir_local_c(view_p->get_path(), gtk_p);
+	view_p->set_treemodel(xfdir_p);
+    }
 }
 
 void 
 window_c::create_new_page(const gchar *path){
+    if (!path){
+	g_warning("window_c::create_new_page path is NULL\n");
+	return;
+    }
     view_c *view_p = new view_c((void *)this, get_notebook());
-    xfdir_c *xfdir_p = new xfdir_c(path, gtk_p);
+    xfdir_c *xfdir_p;
+    if (g_file_test(path, G_FILE_TEST_IS_DIR) ){
+	   xfdir_p = (xfdir_c *)new xfdir_local_c(path, gtk_p);
+    } else {
+	// load specific class xfdir here
+    }
     view_p->set_treemodel(xfdir_p);
     add_view_to_list((void *)view_p);
 }
