@@ -28,7 +28,7 @@ typedef struct xd_t{
     struct stat st;
 }xd_t;
 
-class xfdir_base_c: public utility_c {
+class xfdir_base_c: virtual utility_c {
     public:
         xfdir_base_c(const gchar *, gtk_c *);
         ~xfdir_base_c(void);

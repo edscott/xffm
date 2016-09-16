@@ -30,7 +30,6 @@ xffm_SOURCES = \
                                     print_c.cpp   \
 		widgets_c.cpp   \
 		    pathbar_c.cpp   \
-	  signals_c.cpp \
 	  utility_c.cpp \
 	  xfdir_c.cpp \
 	    xfdir_base_c.cpp \

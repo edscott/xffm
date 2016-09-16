@@ -1,9 +1,10 @@
 #ifndef RUN_OUTPUT_C_HPP
 #define RUN_OUTPUT_C_HPP
 #include "xffm+.h"
+#include "utility_c.hpp"
 #include "csh_completion_c.hpp"
 
-class run_output_c: public csh_completion_c {
+class run_output_c: public csh_completion_c, virtual utility_c {
     public:
         run_output_c(void *);
         ~run_output_c(void);

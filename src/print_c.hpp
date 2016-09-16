@@ -5,7 +5,7 @@
 #include "utility_c.hpp"
 
 
-class print_c: public utility_c {
+class print_c: virtual utility_c {
     public:
         print_c(void *);
         void print_error(gchar *);
