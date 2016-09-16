@@ -12,7 +12,7 @@ using namespace std;
 // This class creates all necessary widgets for class view_c 
 // and defines their characteristics.
 
-class widgets_c {
+class widgets_c: virtual utility_c{
     public:
         widgets_c(void *, GtkNotebook *);
         ~widgets_c(void);
