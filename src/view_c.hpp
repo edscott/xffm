@@ -14,38 +14,35 @@ class view_c:public widgets_c, public thread_control_c {
     public:
         view_c(void *, GtkNotebook *);
         ~view_c(void);
-
-	gint get_dir_count(void);
-
-        const gchar *get_path(void);
-	
-        void clear_diagnostics(void);
-        void clear_status(void);
-        void show_diagnostics(void);
-        void set_highlight(gdouble, gdouble);
-        void highlight(void);
-        void clear_highlights(const gchar *);
-        void remove_page(void);
         void reload(const gchar *);
         void set_treemodel(xfdir_c *);
         GtkTreeModel *get_tree_model(void);
-        void set_page_label(void) ;
+        const gchar *get_path(void);
+	gboolean window_keyboard_event(GdkEventKey *, void *);
 	gint get_icon_size(const gchar *);
-	void set_window_title(void);
-	void set_application_icon(void);
-	void set_window_title(gint);
-	void set_application_icon(gint);
-	xfdir_c *get_xfdir_p(void);
+        void highlight(void);
+        void set_highlight(gdouble, gdouble);
+        void clear_highlights(const gchar *);
+        void remove_page(void);
         GtkWindow *get_window(void);
-
+        lpterm_c *get_lpterm_p(void);
+	xfdir_c *get_xfdir_p(void);
+	void set_window_title(void);
+	void set_window_title(gint);
+	gint get_dir_count(void);
+	void set_application_icon(gint);
+        void show_diagnostics(void);
+        void clear_diagnostics(void);
+        void clear_status(void);
         void root(void);
 
-	gboolean window_keyboard_event(GdkEventKey *, void *);
-        lpterm_c *get_lpterm_p(void);
-
     protected:
+	// This class is base for none
 
     private:
+        void set_page_label(void) ;
+	void set_application_icon(void);
+
 	void update_tab_label_icon(void);
 	void set_view_details(void);
         
