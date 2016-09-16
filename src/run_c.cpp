@@ -35,7 +35,7 @@ static void *wait_f(void *data){
 static void
 rfm_operate_stdout (void *data, void *stream, int childFD) {
     view_c *view_p = (view_c *)data;
-    window_c *window_p = (window_c *)(view_p->window_v);
+    window_c *window_p = (window_c *)(view_p->get_window_v());
     if (!window_p->is_view_in_list(data)) return;
     
     lpterm_c *lpterm_p = view_p->get_lpterm_p();
@@ -103,7 +103,7 @@ rfm_operate_stdout (void *data, void *stream, int childFD) {
 void
 rfm_operate_stderr (void *data, void *stream, int childFD) {
     view_c *view_p = (view_c *)data;
-    window_c *window_p = (window_c *)(view_p->window_v);
+    window_c *window_p = (window_c *)(view_p->get_window_v());
     if (!window_p->is_view_in_list(data)) return;
     lpterm_c *lpterm_p = view_p->get_lpterm_p();
 

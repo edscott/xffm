@@ -32,8 +32,16 @@ widgets_c::get_notebook(void){ return notebook;}
 gtk_c *
 widgets_c::get_gtk_p(void){ return gtk_p;}
 
-GtkWidget *widgets_c::get_page_label_button(void){ return page_label_button;}
-GtkWidget *widgets_c::get_page_child_box(void){ return page_child_box;}
+GtkWidget *widgets_c::get_page_child(void){ return page_child;}
+GtkWidget *widgets_c::get_page_button(void){ return page_label_button;}
+GtkWidget *widgets_c::get_pathbar(void){ return pathbar_p->get_pathbar();}
+GtkWidget *widgets_c::get_page_label(void){ return page_label;}
+GtkWidget *widgets_c::get_page_label_icon_box(void){ return page_label_icon_box;}
+GtkWidget *widgets_c::get_clear_button(void){ return clear_button;}
+
+void widgets_c::update_pathbar(const gchar *data){pathbar_p->update_pathbar(data);}
+
+
 GtkWidget *widgets_c::get_vpane(void){ return vpane;}
 GtkWidget *widgets_c::get_status(void){ return status;}
 GtkWidget *widgets_c::get_status_label(void){ return status_label;}
@@ -43,6 +51,7 @@ GtkWidget *widgets_c::get_status_icon(void){ return status_icon;}
 GtkWidget *widgets_c::get_iconview_icon(void){ return iconview_icon;}
 GtkWidget *widgets_c::get_iconview(void){ return GTK_WIDGET(icon_view);}
 GtkWidget *widgets_c::get_button_space(void){ return GTK_WIDGET(button_space);}
+void *widgets_c::get_window_v(void){ return window_v;}
 
 void 
 widgets_c::setup_scolled_windows(void){
@@ -65,13 +74,13 @@ widgets_c::setup_size_scale(void){
 
 void
 widgets_c::create(void){
-    page_child_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+    page_child = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
     page_label_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
     page_label_icon_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
     page_label = gtk_label_new (_("Loading folder..."));
     page_label_button = gtk_button_new ();
     // pathbar is already created with pathbar_c object.
-    gtk_box_pack_start (GTK_BOX (page_child_box), pathbar_p->get_pathbar(), FALSE, FALSE, 0);
+    gtk_box_pack_start (GTK_BOX (page_child), pathbar_p->get_pathbar(), FALSE, FALSE, 0);
     
     vpane = gtk_paned_new(GTK_ORIENTATION_VERTICAL);
     gtk_paned_set_wide_handle (GTK_PANED(vpane), TRUE);
@@ -88,6 +97,11 @@ widgets_c::create(void){
 
 
     g_object_set_data(G_OBJECT(diagnostics), "vpane", vpane);
+
+    icon_view = GTK_ICON_VIEW(gtk_icon_view_new());
+    gtk_icon_view_set_item_width (icon_view, 60);
+    gtk_icon_view_set_activate_on_single_click(icon_view, TRUE);
+   
     iconview_icon = gtk_image_new_from_icon_name ("system-file-manager", GTK_ICON_SIZE_SMALL_TOOLBAR); 
     status_icon = gtk_image_new_from_icon_name ("utilities-terminal", GTK_ICON_SIZE_SMALL_TOOLBAR); 
     status_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
@@ -126,7 +140,7 @@ widgets_c::pack(void){
     gtk_widget_show_all (page_label_box);
     gtk_widget_show(pathbar_p->get_pathbar());
 
-    gtk_box_pack_start (GTK_BOX (page_child_box), vpane, TRUE, TRUE, 0);
+    gtk_box_pack_start (GTK_BOX (page_child), vpane, TRUE, TRUE, 0);
     gtk_paned_set_position (GTK_PANED (vpane), 1000);
     gtk_widget_show (vpane);
 
@@ -157,18 +171,18 @@ widgets_c::pack(void){
     gtk_box_pack_end (GTK_BOX (button_space), clear_button, FALSE, FALSE, 0);
     gtk_widget_show (clear_button);
 
-    gtk_box_pack_start (GTK_BOX (page_child_box), button_space, FALSE, FALSE, 0);
+    gtk_box_pack_start (GTK_BOX (page_child), button_space, FALSE, FALSE, 0);
     gtk_widget_show (button_space);
 
-    gtk_widget_show (page_child_box);
+    gtk_widget_show (page_child);
 
     // Insert page into notebook:
     gint next_position = gtk_notebook_get_current_page(GTK_NOTEBOOK(notebook))+1;
     gtk_notebook_insert_page (GTK_NOTEBOOK(notebook),
-            page_child_box, 
+            page_child, 
             page_label_box, 
             next_position);
-    gtk_notebook_set_tab_reorderable (GTK_NOTEBOOK(notebook), page_child_box, TRUE);
+    gtk_notebook_set_tab_reorderable (GTK_NOTEBOOK(notebook), page_child, TRUE);
     gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), next_position);
 }
 

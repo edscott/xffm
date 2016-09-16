@@ -38,16 +38,13 @@ view_c::view_c(void *window_data, GtkNotebook *notebook) : widgets_c(window_data
     dirty_hash = FALSE;
 
     // Set objects in parent widget_c class with data pointing to child class
-    g_object_set_data(G_OBJECT(pathbar_p->pathbar), "view_p", (void *)this);
-    g_object_set_data(G_OBJECT(page_child_box), "view_p", (void *)this);
-    g_object_set_data(G_OBJECT(page_label_button), "view_p", (void *)this);
+    g_object_set_data(G_OBJECT(get_pathbar()), "view_p", (void *)this);
+    g_object_set_data(G_OBJECT(get_page_child()), "view_p", (void *)this);
+    g_object_set_data(G_OBJECT(get_page_button()), "view_p", (void *)this);
 
     highlight_hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
     //signals_p = new signals_c();
     init();
-    icon_view = GTK_ICON_VIEW(gtk_icon_view_new());
-    gtk_icon_view_set_item_width (icon_view, 60);
-    gtk_icon_view_set_activate_on_single_click(icon_view, TRUE);
     signals();
     pack();
     // lp_term object creation
@@ -91,7 +88,7 @@ view_c::window_keyboard_event(GdkEventKey *event, void *data){
 void
 view_c::set_page_label(void){
     gchar *tab_label = g_path_get_basename(xfdir_p->get_label());
-    gtk_label_set_markup(GTK_LABEL(page_label), tab_label);
+    gtk_label_set_markup(GTK_LABEL(get_page_label()), tab_label);
     g_free(tab_label);
 }
 
@@ -113,7 +110,7 @@ view_c::reload(const gchar *data){
 
 void
 view_c::remove_page(void){
-    gint page_num = gtk_notebook_page_num (get_notebook(), page_child_box);
+    gint page_num = gtk_notebook_page_num (get_notebook(), get_page_child());
     gint current_page = gtk_notebook_get_current_page (get_notebook());
 
     gtk_notebook_remove_page (get_notebook(), page_num);
@@ -134,7 +131,7 @@ view_c::get_lpterm_p(void){return lpterm_p;}
 
 GtkWindow *
 view_c::get_window(void){
-    window_c *window_p = (window_c *)window_v;
+    window_c *window_p = (window_c *)get_window_v();
     return window_p->get_window();
 }
 
@@ -144,13 +141,13 @@ view_c::set_treemodel(xfdir_c *data){
     xfdir_c *old_xfdir_p = xfdir_p;
     xfdir_p = data;
     GtkTreeModel *tree_model = xfdir_p->get_tree_model();
-    if (tree_model) gtk_widget_hide(GTK_WIDGET(icon_view));
-    gtk_icon_view_set_model(icon_view, tree_model);
-    gtk_icon_view_set_text_column (icon_view, COL_DISPLAY_NAME);
-    gtk_icon_view_set_pixbuf_column (icon_view, COL_PIXBUF);
-    gtk_icon_view_set_selection_mode (icon_view, GTK_SELECTION_MULTIPLE);
+    if (tree_model) gtk_widget_hide(GTK_WIDGET(get_iconview()));
+    gtk_icon_view_set_model(GTK_ICON_VIEW(get_iconview()), tree_model);
+    gtk_icon_view_set_text_column (GTK_ICON_VIEW(get_iconview()), COL_DISPLAY_NAME);
+    gtk_icon_view_set_pixbuf_column (GTK_ICON_VIEW(get_iconview()), COL_PIXBUF);
+    gtk_icon_view_set_selection_mode (GTK_ICON_VIEW(get_iconview()), GTK_SELECTION_MULTIPLE);
     set_view_details();
-    gtk_widget_show(GTK_WIDGET(icon_view));
+    gtk_widget_show(GTK_WIDGET(get_iconview()));
     if (old_xfdir_p) delete old_xfdir_p;
 }
 ///////////////////////////// Private:
@@ -161,7 +158,7 @@ view_c::set_view_details(void){
     set_application_icon();
     update_tab_label_icon();
     while (gtk_events_pending()) gtk_main_iteration();
-    pathbar_p->update_pathbar(xfdir_p->get_path());
+    update_pathbar(xfdir_p->get_path());
 }
 
 void
@@ -236,9 +233,9 @@ view_c::highlight(void){
     
     GtkCellRenderer *cell;
     GtkTreeIter iter;
-    GtkTreeModel *model = gtk_icon_view_get_model(icon_view);
+    GtkTreeModel *model = gtk_icon_view_get_model(GTK_ICON_VIEW(get_iconview()));
     
-    GtkTreePath *tpath = gtk_icon_view_get_path_at_pos (icon_view, highlight_x, highlight_y); 
+    GtkTreePath *tpath = gtk_icon_view_get_path_at_pos (GTK_ICON_VIEW(get_iconview()), highlight_x, highlight_y); 
 
     if (tpath){
         tree_path_string = gtk_tree_path_to_string (tpath);
@@ -274,7 +271,7 @@ view_c::highlight(void){
 	g_free(name);
 
 	gtk_list_store_set (GTK_LIST_STORE(model), &iter,
-                COL_PIXBUF, gtk_p->get_pixbuf(icon_name, GTK_ICON_SIZE_DIALOG ), 
+                COL_PIXBUF, get_gtk_p()->get_pixbuf(icon_name, GTK_ICON_SIZE_DIALOG ), 
 		-1);
 	g_free(icon_name);
 
@@ -293,18 +290,18 @@ view_c::highlight(void){
 void
 view_c::signals(void){
     // clear button:
-    g_signal_connect (clear_button, "clicked", 
+    g_signal_connect (get_clear_button(), "clicked", 
             G_CALLBACK (clear_text_f), (void *)this);
-    g_signal_connect (clear_button, "clicked", 
+    g_signal_connect (get_clear_button(), "clicked", 
             G_CALLBACK (hide_text_f), (void *)this);
-    g_signal_connect (page_label_button, "clicked", 
+    g_signal_connect (get_page_button(), "clicked", 
             G_CALLBACK (on_remove_page_button), (void *)this);
     // iconview specific signal bindings:
-    g_signal_connect (icon_view, "item-activated", 
+    g_signal_connect (get_iconview(), "item-activated", 
             G_CALLBACK (item_activated), (void *)this);
-    g_signal_connect (icon_view, "motion-notify-event", 
+    g_signal_connect (get_iconview(), "motion-notify-event", 
             G_CALLBACK (motion_notify_event), (void *)this);
-    g_signal_connect (icon_view, "leave-notify-event", 
+    g_signal_connect (get_iconview(), "leave-notify-event", 
             G_CALLBACK (leave_notify_event), (void *)this);
 
 
@@ -384,7 +381,8 @@ view_c::signals(void){
 
 void
 view_c::update_tab_label_icon(void){
-    GList *children = gtk_container_get_children (GTK_CONTAINER(page_label_icon_box));
+    GList *children = 
+	gtk_container_get_children (GTK_CONTAINER(get_page_label_icon_box()));
     GList *l = children;
     for (;l && l->data; l=l->next){
 	 gtk_widget_destroy(GTK_WIDGET(l->data));
@@ -392,10 +390,10 @@ view_c::update_tab_label_icon(void){
     g_list_free(children);
     const gchar *icon_name = xfdir_p->get_xfdir_iconname();
     GdkPixbuf *pixbuf = 
-            gtk_p->get_pixbuf(icon_name, GTK_ICON_SIZE_BUTTON);
+            get_gtk_p()->get_pixbuf(icon_name, GTK_ICON_SIZE_BUTTON);
     if (pixbuf){
 	GtkWidget *image = gtk_image_new_from_pixbuf (pixbuf);
-	gtk_container_add (GTK_CONTAINER (page_label_icon_box), image);
+	gtk_container_add (GTK_CONTAINER (get_page_label_icon_box()), image);
 	gtk_widget_show(image);
     }
 }
@@ -408,9 +406,9 @@ view_c::get_icon_size(const gchar *name){ return xfdir_p->get_icon_size(name);}
 void
 view_c::set_application_icon (void) {
     const gchar *iconname = xfdir_p->get_xfdir_iconname();
-    GdkPixbuf *icon_pixbuf = gtk_p->get_pixbuf (iconname, GTK_ICON_SIZE_DIALOG);
+    GdkPixbuf *icon_pixbuf = get_gtk_p()->get_pixbuf (iconname, GTK_ICON_SIZE_DIALOG);
     if(icon_pixbuf) {
-	GtkWindow *window = ((window_c *)window_v)->get_window();
+	GtkWindow *window = ((window_c *)get_window_v())->get_window();
         gtk_window_set_icon (window, icon_pixbuf);
     }
     // FIXME add to tab label (not here...)
@@ -423,9 +421,9 @@ view_c::set_application_icon (gint page_num) {
     if (!view_p->get_xfdir_p()) return;
     
     const gchar *iconname = view_p->get_xfdir_p()->get_xfdir_iconname();
-    GdkPixbuf *icon_pixbuf = gtk_p->get_pixbuf (iconname, GTK_ICON_SIZE_DIALOG);
+    GdkPixbuf *icon_pixbuf = get_gtk_p()->get_pixbuf (iconname, GTK_ICON_SIZE_DIALOG);
     if(icon_pixbuf) {
-	GtkWindow *window = ((window_c *)window_v)->get_window();
+	GtkWindow *window = ((window_c *)get_window_v())->get_window();
         gtk_window_set_icon (window, icon_pixbuf);
     }
     // FIXME add to tab label (not here...)
@@ -484,11 +482,11 @@ leave_notify_event (GtkWidget *widget,
 
 
 static void 
-on_remove_page_button(GtkWidget *page_label_button, gpointer data){
+on_remove_page_button(GtkWidget *b, gpointer data){
     view_c *view_p = (view_c *)data;
     view_p->remove_page();       
     // delete object: (remove from view_list)
-    window_c *window_p = (window_c *)view_p->window_v;
+    window_c *window_p = (window_c *)view_p->get_window_v();
     window_p->remove_view_from_list(data); // this calls view_c destructor
 }
 

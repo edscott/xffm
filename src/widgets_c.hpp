@@ -16,30 +16,46 @@ class widgets_c {
     public:
         widgets_c(void *, GtkNotebook *);
         ~widgets_c(void);
-        GtkWidget *get_page_label_button(void);
-        GtkWidget *get_page_child_box(void);
+
+        GtkWidget *get_iconview(void);
         GtkWidget *get_vpane(void);
         GtkWidget *get_status(void);
-        GtkWidget *get_status_label(void);
-        GtkWidget *get_status_button(void);
         GtkWidget *get_diagnostics(void);
-        GtkWidget *get_status_icon(void);
         GtkWidget *get_button_space(void);
-        GtkWidget *get_iconview(void);
+        GtkWidget *get_status_icon(void);
         GtkWidget *get_iconview_icon(void);
-        void set_status_label(const gchar *);
+        GtkWidget *get_status_button(void);
+        GtkWidget *get_status_label(void);
+	
+	void *get_window_v(void);
 	gtk_c *get_gtk_p();
-        void *window_v;
-	GtkNotebook *get_notebook(void);
     protected:
+        void pack();
 
+        GtkWidget *get_page_child(void);
+        GtkWidget *get_page_button(void);
+        GtkWidget *get_pathbar(void);
+        GtkWidget *get_page_label(void);
+        GtkWidget *get_page_label_icon_box(void);
+        GtkWidget *get_clear_button(void);
+	GtkNotebook *get_notebook(void);
+	
+	void update_pathbar(const gchar *);
+        void set_status_label(const gchar *);
+
+    private:
+        void create();
+        void setup_scolled_windows(void);
+        void setup_size_scale(void);
+        pathbar_c *pathbar_p;
+        gtk_c *gtk_p;
+	
         GtkIconView *icon_view;          
         GtkNotebook *notebook;
-        GtkWidget *page_child_box;
+        GtkWidget *page_child;
         GtkWidget *page_label_box;
         GtkWidget *page_label_icon_box;
         GtkWidget *page_label;
-        //GtkWidget *page_label_button_eventbox;
         GtkWidget *page_label_button;
         GtkWidget *vpane;
         GtkWidget *top_scrolled_window;
@@ -55,13 +71,9 @@ class widgets_c {
         GtkWidget *button_space;	// little button space
         GtkWidget *clear_button;	// clear text area button
         GtkWidget *size_scale;
-        void pack();
-        gtk_c *gtk_p;
-        pathbar_c *pathbar_p;
-    private:
-        void create();
-        void setup_scolled_windows(void);
-        void setup_size_scale(void);
+
+        void *window_v;
+
 };
 
 #endif
