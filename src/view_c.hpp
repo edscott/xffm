@@ -15,8 +15,6 @@ class view_c:public widgets_c, public thread_control_c {
         view_c(void *, GtkNotebook *);
         ~view_c(void);
 
-        void harakiri(void);
-
 	gint get_dir_count(void);
 
         const gchar *get_path(void);

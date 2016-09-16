@@ -30,6 +30,7 @@ class widgets_c {
         void set_status_label(const gchar *);
 	gtk_c *get_gtk_p();
         void *window_v;
+	GtkNotebook *get_notebook(void);
     protected:
 
         GtkIconView *icon_view;          

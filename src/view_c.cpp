@@ -96,7 +96,10 @@ view_c::set_page_label(void){
 }
 
 gint 
-view_c::get_dir_count(void){ return xfdir_p->get_dir_count();}
+view_c::get_dir_count(void){ 
+    if (!xfdir_p) return 0;
+    return xfdir_p->get_dir_count();
+}
 
 void
 view_c::reload(const gchar *data){
@@ -110,12 +113,12 @@ view_c::reload(const gchar *data){
 
 void
 view_c::remove_page(void){
-    gint page_num = gtk_notebook_page_num (notebook, page_child_box);
-    gint current_page = gtk_notebook_get_current_page (notebook);
+    gint page_num = gtk_notebook_page_num (get_notebook(), page_child_box);
+    gint current_page = gtk_notebook_get_current_page (get_notebook());
 
-    gtk_notebook_remove_page (notebook, page_num);
+    gtk_notebook_remove_page (get_notebook(), page_num);
     if (current_page == page_num) {
-        gtk_notebook_set_current_page (notebook, page_num-1);
+        gtk_notebook_set_current_page (get_notebook(), page_num-1);
     }    
 }
 
@@ -307,25 +310,25 @@ view_c::signals(void){
 
 
     // notebook specific signal bindings:
-    g_signal_connect (notebook, "change-current-page", 
+    g_signal_connect (get_notebook(), "change-current-page", 
             G_CALLBACK (change_current_page), (void *)this);
-    g_signal_connect (notebook, "create-window", 
+    g_signal_connect (get_notebook(), "create-window", 
             G_CALLBACK (create_window), (void *)this);
-    g_signal_connect (notebook, "focus-tab", 
+    g_signal_connect (get_notebook(), "focus-tab", 
             G_CALLBACK (focus_tab), (void *)this);
-    g_signal_connect (notebook, "move-focus-out", 
+    g_signal_connect (get_notebook(), "move-focus-out", 
             G_CALLBACK (move_focus_out), (void *)this);
-    g_signal_connect (notebook, "page-added", 
+    g_signal_connect (get_notebook(), "page-added", 
             G_CALLBACK (page_added), (void *)this);
-    g_signal_connect (notebook, "page-removed", 
+    g_signal_connect (get_notebook(), "page-removed", 
             G_CALLBACK (page_removed), (void *)this);
-    g_signal_connect (notebook, "page-reordered", 
+    g_signal_connect (get_notebook(), "page-reordered", 
             G_CALLBACK (page_reordered), (void *)this);
-    g_signal_connect (notebook, "reorder-tab", 
+    g_signal_connect (get_notebook(), "reorder-tab", 
             G_CALLBACK (reorder_tab), (void *)this);
-    g_signal_connect (notebook, "select-page", 
+    g_signal_connect (get_notebook(), "select-page", 
             G_CALLBACK (select_page), (void *)this);
-    g_signal_connect (notebook, "switch-page", 
+    g_signal_connect (get_notebook(), "switch-page", 
             G_CALLBACK (switch_page), (void *)this);
 
 
@@ -415,7 +418,7 @@ view_c::set_application_icon (void) {
 
 void
 view_c::set_application_icon (gint page_num) {
-    GtkWidget *child_box = gtk_notebook_get_nth_page(notebook, page_num);
+    GtkWidget *child_box = gtk_notebook_get_nth_page(get_notebook(), page_num);
     view_c *view_p = (view_c *)g_object_get_data(G_OBJECT(child_box), "view_p");
     if (!view_p->get_xfdir_p()) return;
     
@@ -431,7 +434,7 @@ view_c::set_application_icon (gint page_num) {
 void
 view_c::set_window_title(void){
     gchar *window_title = xfdir_p->get_window_name();
-    GtkWindow *window = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET(notebook)));
+    GtkWindow *window = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET(get_notebook())));
     gtk_window_set_title (window, window_title);
     g_free (window_title);
 
@@ -439,21 +442,15 @@ view_c::set_window_title(void){
 
 void
 view_c::set_window_title(gint page_num){
-    GtkWidget *child_box = gtk_notebook_get_nth_page(notebook, page_num);
+    GtkWidget *child_box = gtk_notebook_get_nth_page(get_notebook(), page_num);
     view_c *view_p = (view_c *)g_object_get_data(G_OBJECT(child_box), "view_p");
     if (!view_p->get_xfdir_p()) return;
 
     gchar *window_title = view_p->get_xfdir_p()->get_window_name();
-    GtkWindow *window = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET(notebook)));
+    GtkWindow *window = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET(get_notebook())));
     gtk_window_set_title (window, window_title);
     g_free (window_title);
 
-}
-
-void
-view_c::harakiri(void){
-    window_c *window_p = (window_c *)window_v;
-    window_p->remove_view_from_list((void *)this);
 }
 
 /////////////////////////////////////////
@@ -491,7 +488,8 @@ on_remove_page_button(GtkWidget *page_label_button, gpointer data){
     view_c *view_p = (view_c *)data;
     view_p->remove_page();       
     // delete object: (remove from view_list)
-    view_p->harakiri();
+    window_c *window_p = (window_c *)view_p->window_v;
+    window_p->remove_view_from_list(data); // this calls view_c destructor
 }
 
 static void *
@@ -667,8 +665,15 @@ switch_page (GtkNotebook *notebook,
                guint        new_page,
                gpointer     data)
 {
-    gint current_page = gtk_notebook_get_current_page (notebook);
+    // This callback may occur after view has been destroyed.
+    window_c *window_p = (window_c *)g_object_get_data(G_OBJECT(notebook), "window_p");
+    if (!window_p->is_view_in_list(data)) {
+	DBG("switch_page:: view_p %p no longer exists.\n");
+	return;
+    }
+
     view_c *view_p = (view_c *)data;
+    gint current_page = gtk_notebook_get_current_page (notebook);
     TRACE("switch_page, page_num=%d current_page=%d xfdir_p=%p\n" ,new_page, current_page, view_p->get_xfdir_p());
     if (!view_p->get_xfdir_p()) return;
     view_p->set_window_title(new_page);

@@ -4,6 +4,7 @@
 
 class xfdir_c: public xfdir_base_c {
     public:
+	xfdir_c(const gchar *, gtk_c *);
         
 
 };

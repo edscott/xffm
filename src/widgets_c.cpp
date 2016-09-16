@@ -25,6 +25,10 @@ widgets_c::~widgets_c(void){
     
 }
 
+GtkNotebook *
+widgets_c::get_notebook(void){ return notebook;}
+
+
 gtk_c *
 widgets_c::get_gtk_p(void){ return gtk_p;}
 
