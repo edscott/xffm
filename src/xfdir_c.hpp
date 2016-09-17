@@ -32,10 +32,10 @@ class xfdir_c: virtual utility_c {
     public:
         xfdir_c(const gchar *, gtk_c *);
         ~xfdir_c(void);
-	virtual gint get_dir_count(void)=0;
         virtual void reload(const gchar *)=0;
 	virtual const gchar *get_xfdir_iconname(void)=0;
 	
+	gint get_dir_count(void);
         GtkTreeModel *get_tree_model(void);
         gint get_icon_size(const gchar *);
         gint get_icon_highlight_size(const gchar *);
@@ -47,6 +47,7 @@ class xfdir_c: virtual utility_c {
         GtkTreeModel *treemodel;
         gchar *path;
 	gtk_c *gtk_p;
+	gint dir_count;        
     private:
         pthread_mutex_t population_mutex;
         pthread_cond_t population_cond;

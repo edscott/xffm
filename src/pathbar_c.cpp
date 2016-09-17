@@ -64,12 +64,12 @@ pathbar_c::pathbar_ok(GtkButton * button){
             if (!view_p) g_error("view_p data not set for g_object pathbar!\n");
             DBG("pathbar_c::pathbar_ok: path=%s\n", path);
             if (!path){
-                // FIXME Go to module or top xffm level
+                DBG("// FIXME Go to top xffm level\n");
                 view_p->root();
             } else if (g_file_test(path, G_FILE_TEST_IS_DIR)){
                 view_p->reload(path);
             } else {
-                // FIXME Go to module 
+                DBG("// FIXME Go to module\n");
             }
 
         } 

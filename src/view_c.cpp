@@ -2,6 +2,7 @@
 #include "view_c.hpp"
 #include "window_c.hpp"
 #include "pathbar_c.hpp"
+#include "xfdir_root_c.hpp"
 
 ///////////////////////////////////////////////////
 //         static thread functions  (used)       //
@@ -78,6 +79,8 @@ view_c::~view_c(void){
 void 
 view_c::root(void){
     DBG("root treemodel\n");
+    xfdir_c *data = (xfdir_c *)new xfdir_root_c("xffm:root", get_gtk_p());
+    set_treemodel(data);
     
 }
 

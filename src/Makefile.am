@@ -31,6 +31,7 @@ xffm_SOURCES = \
 		widgets_c.cpp   \
 		    pathbar_c.cpp   \
 	  utility_c.cpp \
+	  xfdir_root_c.cpp \
 	  xfdir_local_c.cpp \
 	    xfdir_c.cpp \
 	  gtk_c.cpp \

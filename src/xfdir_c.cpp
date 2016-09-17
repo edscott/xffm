@@ -40,6 +40,10 @@ xfdir_c::get_path(void){return (const gchar *)path;}
 GtkTreeModel *
 xfdir_c::get_tree_model (void){return treemodel;}
 
+gint
+xfdir_c::get_dir_count(void){ return dir_count;}
+
+
 gint 
 xfdir_c::get_icon_size(const gchar *name){
     if (strcmp(name, "..")==0) return GTK_ICON_SIZE_DND;

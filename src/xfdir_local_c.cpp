@@ -157,7 +157,7 @@ xfdir_local_c::insert_list_into_model(GList *data, GtkListStore *list_store){
         else icon_name = get_stat_pixbuf(xd_p, TRUE);
         gtk_list_store_set (list_store, &iter, 
 		COL_DISPLAY_NAME, utf_name,
-		COL_ACTUAL_NAME, g_strdup(xd_p->d_name),
+		COL_ACTUAL_NAME, xd_p->d_name,
 		COL_ICON_NAME, icon_name,
 		COL_MODE,xd_p->st.st_mode, 
                 COL_PIXBUF, gtk_p->get_pixbuf(icon_name,  get_icon_size(xd_p->d_name)), 
@@ -172,10 +172,6 @@ xfdir_local_c::insert_list_into_model(GList *data, GtkListStore *list_store){
     }
     g_list_free(directory_list);
 }
-
-gint
-xfdir_local_c::get_dir_count(void){ return dir_count;}
-
 const gchar *
 xfdir_local_c::get_stat_pixbuf(xd_t *xd_p, gboolean restat){
     if (strcmp(xd_p->d_name, "..")==0) return  "go-up";
