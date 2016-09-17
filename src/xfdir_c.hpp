@@ -32,32 +32,27 @@ class xfdir_c: virtual utility_c {
     public:
         xfdir_c(const gchar *, gtk_c *);
         ~xfdir_c(void);
+	virtual gint get_dir_count(void)=0;
+        virtual void reload(const gchar *)=0;
+	virtual const gchar *get_xfdir_iconname(void)=0;
+	
         GtkTreeModel *get_tree_model(void);
-        void reload(const gchar *);
         gint get_icon_size(const gchar *);
         gint get_icon_highlight_size(const gchar *);
-	gint get_dir_count(void);
         const gchar *get_label();
 	gchar *get_window_name (void);
-	const gchar *get_xfdir_iconname(void);
         const gchar *get_path(void);
+    protected:
+        virtual GtkTreeModel *mk_tree_model(void) = 0;
+        GtkTreeModel *treemodel;
+        gchar *path;
+	gtk_c *gtk_p;
     private:
         pthread_mutex_t population_mutex;
         pthread_cond_t population_cond;
         gint population_condition;
         pthread_rwlock_t population_lock;
 
-	const gchar *get_home_iconname(const gchar *data);
-        void insert_list_into_model(GList *, GtkListStore *);
-        GList *read_items (gint *heartbeat); 
-        gint heartbeat;
-	const gchar *get_type_pixbuf(xd_t *xd_p);
-        const gchar *get_stat_pixbuf(xd_t *, gboolean);
-        gchar *path;
-        GtkTreeModel *mk_tree_model(void);
-        GtkTreeModel *treemodel;
-	gint dir_count;
-	gtk_c *gtk_p;
 };
 
 #endif
