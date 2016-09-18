@@ -3,6 +3,7 @@
 #include "window_c.hpp"
 #include "pathbar_c.hpp"
 #include "xfdir_root_c.hpp"
+#include "xfdir_local_c.hpp"
 
 ///////////////////////////////////////////////////
 //         static thread functions  (used)       //
@@ -105,6 +106,13 @@ void
 view_c::reload(const gchar *data){
     // clear highlight hash
     clear_highlights(NULL);
+    if (g_file_test(data, G_FILE_TEST_IS_DIR) &&
+	    !g_file_test(get_path(), G_FILE_TEST_IS_DIR)){
+	// switch back to local mode
+	xfdir_c *xfdir_local_p = (xfdir_c *)new xfdir_local_c(data, get_gtk_p());
+	set_treemodel(xfdir_local_p);
+	return;
+    }
     xfdir_p->reload(data);
     set_view_details();
     while (gtk_events_pending()) gtk_main_iteration();
@@ -144,13 +152,15 @@ view_c::set_treemodel(xfdir_c *data){
     xfdir_c *old_xfdir_p = xfdir_p;
     xfdir_p = data;
     GtkTreeModel *tree_model = xfdir_p->get_tree_model();
-    if (tree_model) gtk_widget_hide(GTK_WIDGET(get_iconview()));
+    DBG("new treemodel= %p\n", tree_model);
+    //if (tree_model) gtk_widget_hide(GTK_WIDGET(get_iconview()));
     gtk_icon_view_set_model(GTK_ICON_VIEW(get_iconview()), tree_model);
     gtk_icon_view_set_text_column (GTK_ICON_VIEW(get_iconview()), COL_DISPLAY_NAME);
     gtk_icon_view_set_pixbuf_column (GTK_ICON_VIEW(get_iconview()), COL_PIXBUF);
     gtk_icon_view_set_selection_mode (GTK_ICON_VIEW(get_iconview()), GTK_SELECTION_MULTIPLE);
     set_view_details();
-    gtk_widget_show(GTK_WIDGET(get_iconview()));
+    //gtk_widget_show(GTK_WIDGET(get_iconview()));
+    DBG("set_treemodel done\n");
     if (old_xfdir_p) delete old_xfdir_p;
 }
 ///////////////////////////// Private:
