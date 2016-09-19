@@ -93,6 +93,9 @@ AC_MSG_NOTICE([---- You may download libtubo from http://sf.net/projects/xffm/fi
 XDT_CHECK_PACKAGE([TUBO], [tubo], [5.0.13])
  
 # XXX FIXME: check for gdbm
+AC_MSG_NOTICE([---- You may download dbh from http://sf.net/projects/dbh ----])
+XDT_CHECK_PACKAGE([DBH], [dbh2], [5.0.13])
+  
 
 
 dnl check if gtk3 is available
@@ -283,7 +286,6 @@ share/icons/Makefile
 share/icons/scalable/Makefile
 share/icons/scalable/emblems/Makefile
 share/icons/scalable/stock/Makefile
-modules/Makefile
 ])
 
 cat xffm+.settings
