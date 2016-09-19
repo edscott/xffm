@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema">
+  <element name="keys">
+    <complexType>
+      <sequence>
+        <element name="keybind" maxOccurs="unbounded">
+	  <complexType>
+	  <simpleContent>
+        <extension base="string">
+           <attribute name="icon_id" type="string" use="optional" />
+           <attribute name="text" type="string" use="optional" />
+           <attribute name="Keybinding" type="string" use="optional"/>
+	   <attribute name="mask" type="integer" use="required" />
+           <attribute name="key" type="integer" use="required" />
+           <attribute name="function_id" type="integer" use="required" />
+        </extension>
+	  </simpleContent>
+	 </complexType>
+        </element>
+       </sequence>
+    </complexType>
+  </element>
+</schema>
+

@@ -268,7 +268,9 @@ view_c::highlight(void){
         gchar *name;
         gtk_tree_model_get (model, &iter, COL_ACTUAL_NAME, &name, -1);
         gchar *icon_name=NULL;
-        if (strcmp(name, "..")==0) icon_name = g_strdup("go-up");
+        if (strcmp(name, "..")==0) {
+            icon_name = g_strdup("go-up");
+        }
 	else {
 	    gint mode;
 	    gtk_tree_model_get (model, &iter, COL_MODE, &mode, -1);
@@ -277,7 +279,13 @@ view_c::highlight(void){
 	    } else {
 		gchar *iname;
 		gtk_tree_model_get (model, &iter, COL_ICON_NAME, &iname, -1);
-		icon_name = g_strdup_printf("%s/NE/document-open/2.0/220", iname);
+                if (strncmp(name, "xffm:", strlen("xffm:"))==0) {
+		    icon_name = 
+                        g_strdup_printf("%s", iname);               
+                } else {
+		    icon_name = 
+                        g_strdup_printf("%s/NE/document-open/2.0/220", iname);
+                }
 		g_free(iname);
 	    }
 	}
@@ -557,33 +565,12 @@ hide_text_f(GtkWidget *w, gpointer data){
 ////////////// iconview specific signal bindings: /////////////////////////
 static void
 item_activated (GtkIconView *iconview,
-                GtkTreePath *path,
+                GtkTreePath *tpath,
                 gpointer     data)
 {
     view_c *view_p = (view_c *)data;
-    GtkTreeModel *tree_model = gtk_icon_view_get_model (iconview);
-    GtkTreeIter iter;
-    if (!gtk_tree_model_get_iter (tree_model, &iter, path)) return;
-    
-    gchar *ddname;
-    gtk_tree_model_get (tree_model, &iter,
-                          COL_ACTUAL_NAME, &ddname,-1);
-
-    const gchar *dir = view_p->get_path();
-
-    gchar *full_path;
-    if (g_file_test(dir, G_FILE_TEST_IS_DIR)) full_path = g_strconcat(dir, G_DIR_SEPARATOR_S, ddname, NULL);
-    else full_path = g_strdup(ddname);
-    TRACE("dname = %s, path = %s\n", ddname, full_path);
-
-
-    if (g_file_test(full_path, G_FILE_TEST_IS_DIR)){
-        view_p->reload(full_path);
-    } else {
-        view_p->get_lpterm_p()->print_error(g_strdup_printf("%s: %s\n", full_path, strerror(ENOENT)));
-    }
-    g_free(ddname);
-    g_free(full_path);
+    xfdir_c *xfdir_p = view_p->get_xfdir_p();
+    xfdir_p->item_activated(iconview, tpath, data);
 }
 
 
@@ -681,7 +668,7 @@ switch_page (GtkNotebook *notebook,
     // This callback may occur after view has been destroyed.
     window_c *window_p = (window_c *)g_object_get_data(G_OBJECT(notebook), "window_p");
     if (!window_p->is_view_in_list(data)) {
-	DBG("switch_page:: view_p %p no longer exists.\n");
+	DBG("switch_page:: view_p %p no longer exists.\n", data);
 	return;
     }
 

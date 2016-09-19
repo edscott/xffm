@@ -2,6 +2,7 @@
 #ifndef __MIME_H__
 # define __MIME_H__
 
+# include "rfm.h"
 # define MIME_hashtype(x) ((gchar *)rfm_natural(RFM_MODULE_DIR, "mime", (void *)(x), "find_mimetype_in_hash"))
 
 # define MIME_file(x) ((gchar *)rfm_natural(RFM_MODULE_DIR, "mime", (void *)(x), "mime_file"))

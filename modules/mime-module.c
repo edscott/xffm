@@ -22,66 +22,7 @@
 # include <config.h>
 #endif
 
-///////////////////////////////////////////////////////////////
-// These defines are set by configuration script when librfm is installed.
-#define RFM_MODULE_DIR "/usr/lib/rfm/rmodules"
-#ifdef HAVE_FEATURES_H
-# include <features.h>
-#endif
-
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <sys/wait.h>
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <errno.h>
-#include <limits.h>
-#include <pwd.h>
-#include <grp.h>
-#include <math.h>
-#include <locale.h>
-
-#ifdef HAVE_STDARG_H
-# include <stdarg.h>
-#elif HAVE_VARARGS_H
-# include <varargs.h>
-#endif
-
-#include <ctype.h>
-#include <glob.h>
-#include <memory.h>
-#include <signal.h>
-#include <dirent.h>
-#include <regex.h>
-#include <X11/Xlib.h>
-#include <X11/Xmd.h>
-#include <X11/Xproto.h>
-#include <X11/Xatom.h>
-
-#include <cairo-xlib.h>
-#include <gtk/gtk.h>
-#include <gdk/gdkx.h>
-#include <gdk/gdkkeysyms.h>
-#include <gmodule.h>
-#include <time.h>
-#include <sys/mman.h>
-
-#include <pthread.h>
-
-#include <libxml/parser.h>
-#include <libxml/tree.h>
-#include <magic.h>
-
-
-
-//////////////////////////////////////////////////////////////////
-
-
-#include <glib.h>
+#include "rodent.h"
 
 
 #if JUST_TRANSLATE 
@@ -111,6 +52,7 @@ G_MODULE_EXPORT LIBRFM_MODULE
 // Disable mimetype hash:
 // Speed up is only marginal, probably not worth the memory cost...
 #define NO_MIMETYPE_HASH
+
 #include "mime-module.h"
 #include "mime-module.i"
 #include "mime-mouse_magic.i"

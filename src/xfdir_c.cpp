@@ -1,6 +1,8 @@
 #include <iostream>
 
 #include "xfdir_c.hpp"
+#include "view_c.hpp"
+
 using namespace std;
 
 
@@ -29,6 +31,55 @@ xfdir_c::~xfdir_c(void){
     pthread_cond_destroy(&population_cond);
     pthread_rwlock_destroy(&population_lock);
 }
+
+void
+xfdir_c::item_activated (GtkIconView *iconview, GtkTreePath *tpath, void *data)
+{
+    view_c *view_p = (view_c *)data;
+    GtkTreeModel *tree_model = gtk_icon_view_get_model (iconview);
+    GtkTreeIter iter;
+    if (!gtk_tree_model_get_iter (tree_model, &iter, tpath)) return;
+    
+    gchar *full_path;
+    gchar *ddname;
+    gtk_tree_model_get (tree_model, &iter,
+                          COL_ACTUAL_NAME, &ddname,-1);
+    if (strcmp(ddname, "..")==0 && strcmp(path, "/")==0){
+        full_path = g_strdup("xffm:root");
+    } else {
+        if (g_file_test(path, G_FILE_TEST_IS_DIR)) 
+            full_path = g_strconcat(path, G_DIR_SEPARATOR_S, ddname, NULL);
+        else 
+            full_path = g_strdup(ddname);
+    }
+    TRACE("dname = %s, path = %s\n", ddname, full_path);
+
+
+    if (g_file_test(full_path, G_FILE_TEST_IS_DIR)){
+        view_p->reload(full_path);
+    } else {
+        view_p->get_lpterm_p()->print_error(g_strdup_printf("%s: %s\n", full_path, strerror(ENOENT)));
+        if (strncmp(full_path,"xffm:", strlen("xffm:"))==0){
+            gchar *module = full_path + strlen("xffm:");
+            DBG("module = \"%s\"\n", module);
+            if (strcmp(module, "root")==0){
+                view_p->root();
+            } else if (strcmp(module, "fstab")==0){
+                // load fstab root
+            } 
+            // other modules:
+            // cifs
+            // nfs
+            // ecryptfs
+            // sshfs
+            // pacman
+        }
+    }
+    g_free(ddname);
+    g_free(full_path);
+}
+
+
 
 const gchar *
 xfdir_c::get_label(void){

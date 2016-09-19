@@ -283,6 +283,7 @@ share/icons/Makefile
 share/icons/scalable/Makefile
 share/icons/scalable/emblems/Makefile
 share/icons/scalable/stock/Makefile
+modules/Makefile
 ])
 
 cat xffm+.settings
