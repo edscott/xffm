@@ -571,7 +571,9 @@ item_activated (GtkIconView *iconview,
 
     const gchar *dir = view_p->get_path();
 
-    gchar *full_path = g_strconcat(dir, G_DIR_SEPARATOR_S, ddname, NULL);
+    gchar *full_path;
+    if (g_file_test(dir, G_FILE_TEST_IS_DIR)) full_path = g_strconcat(dir, G_DIR_SEPARATOR_S, ddname, NULL);
+    else full_path = g_strdup(ddname);
     TRACE("dname = %s, path = %s\n", ddname, full_path);
 
 
