@@ -1,6 +1,7 @@
 # Edscott Wilson Garcia
 AM_CPPFLAGS = -std=c++11 \
 	@LIBXML_CFLAGS@	\
+	@DBH_CFLAGS@	\
 	@TUBO_CFLAGS@	\
 	@GTK_CFLAGS@	\
 	-DXFFM_MODULE_DIR=\"@XFFM_MODULE_DIR@\"	\
@@ -8,7 +9,7 @@ AM_CPPFLAGS = -std=c++11 \
 	-DPACKAGE_LOCALE_DIR=\""$(localedir)"\"	\
 	-DPACKAGE_ICON_DIR=\""$(icondir)"\"
 
-LDADD = @TUBO_LIBS@ @GMODULE_LIBS@ @GTK_LIBS@ @LIBXML_LIBS@ @LIBZIP_LIBS@ -lpthread
+LDADD = @TUBO_LIBS@ @DBH_LIBS@ @GMODULE_LIBS@ @GTK_LIBS@ @LIBXML_LIBS@ @LIBZIP_LIBS@ -lpthread
 
 FLAGS = -ggdb -O0 
 #FLAGS = -ggdb -O0 -std=c++11 `pkg-config --cflags gtk+-3.0`
@@ -34,6 +35,7 @@ xffm_SOURCES = \
 	  xfdir_root_c.cpp \
 	  xfdir_local_c.cpp \
 	    xfdir_c.cpp \
+	  mime_c.cpp \
 	  gtk_c.cpp \
 	    signal_action_c.cpp \
 	    tooltip_c.cpp \

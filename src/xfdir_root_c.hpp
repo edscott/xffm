@@ -7,6 +7,7 @@ class xfdir_root_c: public xfdir_c, virtual utility_c  {
 	xfdir_root_c(const gchar *, gtk_c *);
         void reload(const gchar *);
 	const gchar *get_xfdir_iconname(void);
+
     private:
         GtkTreeModel *mk_tree_model(void);
 };

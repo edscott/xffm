@@ -5,6 +5,11 @@
 #include <string.h>
 #include <dbh.h>
 
+#ifndef PACKAGE_DATA_DIR
+#warning "PACKAGE_DATA_DIR not defined"
+#define PACKAGE_DATA_DIR ""
+#endif
+
 typedef struct mime_t {
     char *key;
     char *mimetype;
@@ -32,15 +37,18 @@ static const gchar *inode[]={
 
 
 static void free_apps(void *);
-static void add2type_hash (DBHashTable *);
-static void add2sfx_hash (DBHashTable *);
+static void add2type_hash (DBHashTable *, void *);
+static void add2sfx_hash (DBHashTable *, void *);
 static void add2cache_text (gpointer, gpointer, gpointer);
 static void add2cache_type (gpointer, gpointer, gpointer);
 static void add2cache_sfx (gpointer, gpointer, gpointer);
-
+static void *gencache (void *);
+static void write_cache_sum (long long);
+static long long get_cache_sum (void);
+static gchar *get_cache_path (const gchar *);
+static gint check_dir (char *);
 
 mime_c::mime_c (void) {
-    NOOP(stderr, "***************g_module_check_init\n");
     cache_mutex = PTHREAD_MUTEX_INITIALIZER;
     mimetype_hash_mutex = PTHREAD_MUTEX_INITIALIZER;
     alias_hash_mutex = PTHREAD_MUTEX_INITIALIZER;
@@ -59,8 +67,12 @@ mime_c::mime_c (void) {
     application_hash_output_ext = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
 
     if(!load_hashes_from_cache()) {
+        DBG("mime_c:: now building hashes from scratch\n");
         mime_build_hashes ();
-        mime_generate_cache();
+        generate_caches();
+        write_cache_sum (get_cache_sum ());
+    } else {
+        DBG("mime_c:: hashes loaded from disk cache\n");
     }
     return;
 }
@@ -107,7 +119,7 @@ mime_c::find_mimetype_in_hash(const gchar *file){
 // This function will return a basic mimetype, never an alias.
  
 gchar *
-mime_c::mime_type_plain (const gchar *file){
+mime_c::mime_type (const gchar *file){
     if (!file) return NULL;
 #ifndef NO_MIMETYPE_HASH
     const gchar *old_mimetype = find_mimetype_in_hash(file);
@@ -119,7 +131,7 @@ mime_c::mime_type_plain (const gchar *file){
     if(file[strlen (file) - 1] == '~' || file[strlen (file) - 1] == '%') {
 	gchar *r_file = g_strdup(file);
 	r_file[strlen (r_file) - 1] = 0;
-	gchar *retval = mime_type_plain(r_file);
+	gchar *retval = mime_type(r_file);
 	g_free(r_file);
 	return retval;
     }
@@ -427,7 +439,9 @@ mime_c::mime_add (gchar *type, gchar *q) {
     // thread will dispose of config_command:
     gchar *config_command=g_strdup_printf("%s:%s", type, command);
     g_free(command);
-    rfm_view_thread_create(NULL, gencache, config_command, "gencache"); 
+    pthread_t thread;
+    pthread_create(&thread, NULL, gencache, (void *)config_command); 
+    pthread_detach(thread);
     return NULL;
 }
 
@@ -476,7 +490,7 @@ mime_c::mime_mk_command_line (const gchar *command_fmt, const gchar *path) {
     NOOP ("MIME: command_fmt fmt=%s\n", fmt);
 
     NOOP ("MIME: path=%s\n", path);
-    gchar *esc_path = rfm_esc_string (path);
+    gchar *esc_path = esc_string (path);
     command_line = g_strdup_printf (fmt, esc_path);
     g_free (esc_path);
     NOOP ("MIME2: command_line=%s\n", command_line);
@@ -495,8 +509,8 @@ mime_c::mime_mk_terminal_line (const gchar *command) {
     if(!command)
         return NULL;
 
-    const gchar *term = rfm_what_term ();
-    const gchar *exec_flag = rfm_term_exec_option(term);
+    const gchar *term = what_term ();
+    const gchar *exec_flag = term_exec_option(term);
     /*
     // Validation is already done by rfm_what_term
     if(!mime_is_valid_command ((void *)term)) {
@@ -506,13 +520,6 @@ mime_c::mime_mk_terminal_line (const gchar *command) {
     command_line = g_strdup_printf ("%s %s %s", term, exec_flag, command);
 
     return command_line;
-}
-
-
-void 
-mime_c::mime_generate_cache(void){
-    gencache(NULL);     
-    return ;
 }
 
 
@@ -550,39 +557,40 @@ mime_c::load_hashes_from_cache (void) {
     gboolean cache_ok = TRUE;
 //#define NO_MIME_CACHE
 #ifdef NO_MIME_CACHE
-    NOOP ("mime-module,NO_MIME_CACHE\n");
+    DBG ("mime-module,NO_MIME_CACHE\n");
     return FALSE;
 #endif
     if(actual_sum != sum) {
-        NOOP ("mime-module,OPEN-CACHE: regenerating mime-module caches %lld != %lld\n", sum, actual_sum);
+        DBG ("mime-module,OPEN-CACHE: regenerating mime-module caches %lld != %lld\n", sum, actual_sum);
         return FALSE;
     } else {
         NOOP ("mime-module,OPEN-CACHE: mime-module caches are up to date\n");
     }
 
 
-    const gchar *cache_path = get_cache_path ("sfx");
+    gchar *cache_path = get_cache_path ("sfx");
     DBHashTable *cache;
-    TRACE("opening %s...\n",cache_path); 
     cache = dbh_new (cache_path, NULL, DBH_PARALLEL_SAFE);
-    TRACE("opened %s.\n",cache_path); 
+    DBG("mime_c::load_hashes_from_cache: opened %s-->%p\n",cache_path, cache); 
     g_free (cache_path);
-    if(!cache)
+    if(!cache) {
         goto failed;
+    }
     dbh_set_parallel_lock_timeout(cache, 3);
 
-    dbh_foreach_sweep (cache, add2sfx_hash);
+    dbh_foreach (cache, add2sfx_hash, (void *)application_hash_sfx);
     dbh_close (cache);
 
     cache_path = get_cache_path ("type");
-    TRACE("opening %s...\n",cache_path); 
     cache = dbh_new (cache_path, NULL, DBH_PARALLEL_SAFE);
-    TRACE("opened %s.\n",cache_path); 
+    DBG("mime_c::load_hashes_from_cache: opened %s-->%p\n",cache_path, cache); 
     g_free (cache_path);
-    if(!cache) goto failed;
+    if(!cache) {
+        goto failed;
+    }
     dbh_set_parallel_lock_timeout(cache, 3);
 
-    dbh_foreach_sweep (cache, add2type_hash);
+    dbh_foreach (cache, add2type_hash, (void *)application_hash_type);
     dbh_close (cache);
 
     load_text_hash(application_hash_icon, "application_hash_icon");
@@ -605,7 +613,7 @@ long long
 mime_c::read_cache_sum (void) {
     FILE *file;
     long long sum = 0;
-    const gchar *infofile = get_cache_path ("info");
+    gchar *infofile = get_cache_path ("info");
     file = fopen (infofile, "r");
     if(!file) {
         NOOP("mime-module, cannot open file %s\n", infofile);
@@ -621,74 +629,6 @@ mime_c::read_cache_sum (void) {
     return sum;
 }
 
-long long
-mime_c::get_cache_sum (void) {
-    long long sum = 0;
-    gchar *mimefile;
-    mimefile = g_build_filename (APPLICATION_MIME_FILE, NULL);
-    struct stat st;
-    if (stat (mimefile, &st)==0){
-        sum += (st.st_dev + st.st_ino + st.st_mode + st.st_nlink
-                + st.st_uid + st.st_gid + st.st_rdev + st.st_size + st.st_blksize + st.st_blocks + st.st_mtime + st.st_ctime);
-    }
-    g_free(mimefile);
-
-    return sum;
-}
-
-void
-mime_c::write_cache_sum (long long sum) {
-    FILE *file;
-    gchar *infofile = get_cache_path ("info");
-    file = fopen (infofile, "w");
-    if(!file) {
-        NOOP("mime-module, cannot open file %s\n", infofile);
-        g_free (infofile);
-        return;
-    }
-
-    if(fwrite (&sum, sizeof (long long), 1, file) != 1) {
-        DBG ("cannot write to file %s\n", infofile);
-    }
-    fclose (file);
-    NOOP("mime-module, wrote %lld to %s\n", sum, infofile);
-    g_free (infofile);
-    return;
-}
-
-gchar *
-mime_c::get_cache_path (const gchar *which) {
-    gchar *cache_path = NULL;
-    gchar *cache_dir;
-
-    cache_dir = g_build_filename (USER_DBH_CACHE_DIR, NULL);
-
-    if(!check_dir (cache_dir)) {
-        g_free (cache_dir);
-        return NULL;
-    }
-    cache_path = g_strdup_printf ("%s%cmime.%s.cache64.dbh", cache_dir, G_DIR_SEPARATOR, which);
-    g_free (cache_dir);
-    NOOP("mime-module, using cache: %s\n", cache_path);
-    return cache_path;
-}
-
-
-int
-mime_c::check_dir (char *path) {
-    struct stat st;
-    if(stat (path, &st) < 0) {
-        if(mkdir (path, 0770) < 0)
-            return FALSE;
-        return TRUE;
-    }
-    if(S_ISDIR (st.st_mode)) {
-        if(access (path, W_OK) < 0)
-            return FALSE;
-        return TRUE;
-    }
-    return FALSE;
-}
 
 
 void 
@@ -770,7 +710,7 @@ mime_c::mime_build_hashes (void) {
             //  type has to be defined. 
             type = (gchar *)xmlGetProp (node, (const xmlChar *)"type");
             if(!type) {
-		NOOP("mime-module, return on type==NULL\n");
+		DBG("mime-module, return on type==NULL\n");
                  return;
             }
 
@@ -1022,6 +962,7 @@ mime_c::save_text_cache(GHashTable *hash_table, const gchar *filename) {
     g_hash_table_foreach (hash_table, add2cache_text, (gpointer) cache);
     fclose(cache);
 }
+
 gboolean
 mime_c::generate_caches (void) {
     DBHashTable *cache;
@@ -1037,7 +978,7 @@ mime_c::generate_caches (void) {
     save_text_cache(application_hash_output_ext,"application_hash_output_ext");
     save_text_cache(alias_hash,"alias_hash");
 
-    const gchar *cache_path = get_cache_path ("sfx");
+    gchar *cache_path = get_cache_path ("sfx");
     if(!cache_path) {
         DBG ("!cache_path sfx\n");
         return FALSE;
@@ -1045,19 +986,18 @@ mime_c::generate_caches (void) {
     gchar *tmp_cache_path = g_strdup_printf("%s-%d", 
 	    cache_path, (gint)getpid());
 
-    NOOP("mime-module, creating cache file: %s", cache_path);
+    DBG("mime-module, creating cache file: %s\n", cache_path);
     unsigned char keylength=11;
     gchar *directory = g_path_get_dirname(tmp_cache_path);
     if (!g_file_test(directory, G_FILE_TEST_IS_DIR)){
         g_mkdir_with_parents(directory, 0700);
     }
     g_free(directory);
-    TRACE("opening %s...\n",tmp_cache_path); 
     cache = dbh_new (tmp_cache_path, &keylength, DBH_CREATE|DBH_PARALLEL_SAFE);
-    TRACE("opened %s.\n",tmp_cache_path); 
+    TRACE("opened %s->%p\n",tmp_cache_path, cache); 
 
     if(cache == NULL) {
-	DBG ("Could not create cache table: %s\n", tmp_cache_path);
+	DBG ("Could not create cache\n", tmp_cache_path);
 	g_free (tmp_cache_path);
 	g_free (cache_path);
 	return FALSE;
@@ -1083,7 +1023,7 @@ mime_c::generate_caches (void) {
     tmp_cache_path = g_strdup_printf("%s-%d", 
 	    cache_path, (gint)getpid());
 
-    NOOP("mime-module, Creating cache file: %s", cache_path);
+    NOOP("mime-module, Creating cache file: %s\n", cache_path);
     directory = g_path_get_dirname(tmp_cache_path);
     if (!g_file_test(directory, G_FILE_TEST_IS_DIR)){
         g_mkdir_with_parents(directory, 0700);
@@ -1104,7 +1044,7 @@ mime_c::generate_caches (void) {
     g_hash_table_foreach (application_hash_type, add2cache_type, (gpointer) cache);
     pthread_mutex_unlock(&application_hash_mutex);
 
-    NOOP("mime-module, generated cache %s with %d records\n", cache_path, g_hash_table_size (application_hash_type));
+    DBG("mime-module, generated cache %s with %d records\n", cache_path, g_hash_table_size (application_hash_type));
     dbh_regen_sweep (&cache);
     dbh_close (cache);
     if (rename(tmp_cache_path, cache_path) < 0){
@@ -1115,57 +1055,6 @@ mime_c::generate_caches (void) {
     g_free (cache_path);
 
     return TRUE;
-}
-
-gpointer
-mime_c::gencache (gpointer data) {
-    NOOP("mime-module, gencache (%s)\n", (char *)data);
-    pthread_mutex_lock (&cache_mutex);
-    if (data && strchr((char *)data,':')) {
-	gchar *file=g_build_filename(USER_APPLICATIONS, NULL);
-	gchar *newfile=g_build_filename(USER_APPLICATIONS".new", NULL);
-        gchar *location = g_path_get_dirname(newfile);
-        if (!g_file_test(location, G_FILE_TEST_IS_DIR) ){
-            if (!g_mkdir_with_parents(location, 0600)){
-                g_warning("Cannot create config directory: %s\n", location);
-                g_free(location);
-                return NULL;
-            }
-        }
-        g_free(location);
-	gchar b[4096];
-	FILE *config=fopen(file, "r");
-        if (!config)
-            DBG("mimemodule.i: gencache(). Cannot open %s for read\n", file);
-	FILE *newconfig=fopen(newfile, "w");
-        if (!newconfig)
-            DBG("mimemodule.i: gencache(). Cannot open %s for write\n", newfile);
-	if (config) {
-	    while (fgets(b, 4096, config) && !feof(config)) {
-	      if (strchr(b,'\n')) *strchr(b,'\n')=0;
-	      g_strstrip(b);
-	      if (strcmp(b, (char *)data)) {
-		if (newconfig) fprintf(newconfig,"%s\n", b);
-	      }
-	    }
-	    fclose(config);
-	}
-	if(newconfig) {
-            fprintf(newconfig,"%s\n", (char *)data);
-	    fclose(newconfig);
-	    if (rename(newfile, file)<0){
-                fprintf(stderr, "gencache(): rename %s->%s (%s)\n",newfile, file,strerror(errno));
-            }
-        }
-
-	g_free(file);
-	g_free(newfile);
-	g_free(data); //disposible data
-    }
-    generate_caches ();
-    write_cache_sum (get_cache_sum ());
-    pthread_mutex_unlock (&cache_mutex);
-    return NULL;
 }
 
 const gchar *
@@ -1317,6 +1206,129 @@ mime_c::get_hash_key_strstrip (void *p){
 }
 
 
+void *
+mime_c::mime_gencache (gchar *data) {
+    TRACE("gencache (%s)\n", data);
+    pthread_mutex_lock (&cache_mutex);
+    if (data && strchr(data,':')) {
+	gchar *file=g_build_filename(USER_APPLICATIONS, NULL);
+	gchar *newfile=g_build_filename(USER_APPLICATIONS".new", NULL);
+        gchar *location = g_path_get_dirname(newfile);
+        if (!g_file_test(location, G_FILE_TEST_IS_DIR) ){
+            if (!g_mkdir_with_parents(location, 0600)){
+                g_warning("Cannot create config directory: %s\n", location);
+                g_free(location);
+                return NULL;
+            }
+        }
+        g_free(location);
+	gchar b[4096];
+	FILE *config=fopen(file, "r");
+        if (!config)
+            DBG("mimemodule.i: gencache(). Cannot open %s for read\n", file);
+	FILE *newconfig=fopen(newfile, "w");
+        if (!newconfig)
+            DBG("mimemodule.i: gencache(). Cannot open %s for write\n", newfile);
+	if (config) {
+	    while (fgets(b, 4096, config) && !feof(config)) {
+	      if (strchr(b,'\n')) *strchr(b,'\n')=0;
+	      g_strstrip(b);
+	      if (strcmp(b, (char *)data)) {
+		if (newconfig) fprintf(newconfig,"%s\n", b);
+	      }
+	    }
+	    fclose(config);
+	}
+	if(newconfig) {
+            fprintf(newconfig,"%s\n", (char *)data);
+	    fclose(newconfig);
+	    if (rename(newfile, file)<0){
+                fprintf(stderr, "gencache(): rename %s->%s (%s)\n",newfile, file,strerror(errno));
+            }
+        }
+
+	g_free(file);
+	g_free(newfile);
+	g_free(data); //disposible data
+    }
+    generate_caches ();
+    write_cache_sum (get_cache_sum ());
+    pthread_mutex_unlock (&cache_mutex);
+    return NULL;
+}
+
+long long
+mime_c::get_cache_sum (void) {
+    long long sum = 0;
+    gchar *mimefile;
+    mimefile = g_build_filename (APPLICATION_MIME_FILE, NULL);
+    struct stat st;
+    DBG("mime_c::get_cache_sum for %s\n", mimefile);
+    if (stat (mimefile, &st)==0){
+        sum += (st.st_dev + st.st_ino + st.st_mode + st.st_nlink
+                + st.st_uid + st.st_gid + st.st_rdev + st.st_size + st.st_blksize + st.st_blocks + st.st_mtime + st.st_ctime);
+    }
+    g_free(mimefile);
+
+    return sum;
+}
+
+void
+mime_c::write_cache_sum (long long sum) {
+    FILE *file;
+    gchar *infofile = get_cache_path ("info");
+    file = fopen (infofile, "w");
+    if(!file) {
+        NOOP("mime-module, cannot open file %s\n", infofile);
+        g_free (infofile);
+        return;
+    }
+
+    if(fwrite (&sum, sizeof (long long), 1, file) != 1) {
+        DBG ("cannot write to file %s\n", infofile);
+    }
+    fclose (file);
+    DBG("mime-module, wrote %lld to %s\n", sum, infofile);
+    g_free (infofile);
+    return;
+}
+
+
+gchar *
+mime_c::get_cache_path (const gchar *which) {
+    gchar *cache_path = NULL;
+    gchar *cache_dir;
+
+    cache_dir = g_build_filename (USER_DBH_CACHE_DIR, NULL);
+
+    if(!check_dir (cache_dir)) {
+        g_free (cache_dir);
+        return NULL;
+    }
+    cache_path = g_strdup_printf ("%s%cmime.%s.cache64.dbh", cache_dir, G_DIR_SEPARATOR, which);
+    g_free (cache_dir);
+    NOOP("mime-module, using cache: %s\n", cache_path);
+    return cache_path;
+}
+
+
+gint
+mime_c::check_dir (char *path) {
+    struct stat st;
+    if(stat (path, &st) < 0) {
+        if(mkdir (path, 0770) < 0)
+            return FALSE;
+        return TRUE;
+    }
+    if(S_ISDIR (st.st_mode)) {
+        if(access (path, W_OK) < 0)
+            return FALSE;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+
 //**************************************************************
 
 static void
@@ -1328,7 +1340,8 @@ free_apps(void *data){
 
 
 static void
-add2sfx_hash (DBHashTable * cache) {
+add2sfx_hash (DBHashTable * cache, void *data) {
+    GHashTable *application_hash_sfx = (GHashTable *)data;
     gchar *sfx_key = (gchar *) malloc (DBH_KEYLENGTH (cache));
     if (!sfx_key) g_error("malloc: %s", strerror(errno));
     memset(sfx_key, 0, DBH_KEYLENGTH (cache));
@@ -1341,7 +1354,8 @@ add2sfx_hash (DBHashTable * cache) {
 }
 
 static void
-add2type_hash (DBHashTable * cache) {
+add2type_hash (DBHashTable * cache, void *data) {
+    GHashTable *application_hash_type = (GHashTable *)data;
     gchar *type_key = (gchar *) malloc (DBH_KEYLENGTH (cache));
     if (!type_key) g_error("malloc: %s", strerror(errno));
     memset(type_key, 0, DBH_KEYLENGTH (cache));
@@ -1451,5 +1465,12 @@ add2cache_text (gpointer key, gpointer value, gpointer user_data) {
 }
 
 
+
+static void *
+gencache (void *data) {
+    void **arg = (void **)data;
+    mime_c *mime_p = (mime_c *)arg[0];
+    return mime_p->mime_gencache((gchar *)arg[1]);
+}
 
 

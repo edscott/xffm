@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <gtk/gtk.h>
+#include <errno.h>
 #include "utility_c.hpp"
 
 
@@ -189,4 +190,114 @@ utility_c::u_shell(void){
     return default_shell();
 }
 
+
+gchar *
+utility_c::esc_string (const gchar * string) {
+    gint i, j, k;
+    const gchar *charset = "\\\"\' ()|<>";
+
+    for(j = 0, i = 0; i < strlen (string); i++) {
+        for(k = 0; k < strlen (charset); k++) {
+            if(string[i] == charset[k])
+                j++;
+        }
+    }
+    gchar *estring = (gchar *) calloc (1, strlen (string) + j + 1);
+    for(j = 0, i = 0; i < strlen (string); i++, j++) {
+        for(k = 0; k < strlen (charset); k++) {
+            if(string[i] == charset[k])
+                estring[j++] = '\\';
+        }
+        estring[j] = string[i];
+    }
+    NOOP ("ESC:estring=%s\n", estring);
+    return estring;
+}
+
+
+const gchar *
+utility_c::what_term (void) {
+    const gchar *term=getenv ("TERMINAL_CMD");
+    gchar *t=NULL;
+    if(term && strlen (term)) {
+	if (strchr(term, ' ')){
+	    gchar **g = g_strsplit(term, " ", -1);
+	    t = g_find_program_in_path (g[0]);
+	    g_strfreev(g);
+	} else {
+	    t = g_find_program_in_path (term);
+	}
+    }
+    if(!t) {
+	    const gchar **p=get_terminals();
+	    for (;p && *p; p++){
+		t = g_find_program_in_path (*p);
+		if (t) {
+		    term=*p;
+		    break;  
+		}  
+	    }
+    }
+    if (t) {
+	g_free(t);
+	return term;
+    }
+    DBG ("TERMINAL_CMD=%s: %s\n", getenv ("TERMINAL_CMD"), strerror (ENOENT));
+
+    return NULL;
+}
+ 
+const gchar * 
+utility_c::term_exec_option(const gchar *terminal) {
+    const gchar *exec_option = "-e";
+    gchar *t = g_path_get_basename (terminal);
+    if(strcmp (t, "gnome-terminal") == 0 || strcmp (t, "Terminal") == 0)
+            exec_option = "-x";
+    g_free(t);
+    return exec_option;
+}
+
+
+
+
+const gchar **
+utility_c::get_terminals(void) {
+    static const gchar *terminals_v[] = {
+	"roxterm", 
+	"sakura",
+	"gnome-terminal", 
+	"Eterm", 
+	"konsole", 
+	"Terminal", 
+	"aterm", 
+	"xterm", 
+	"kterm", 
+	"wterm", 
+	"multi-aterm", 
+	"evilvte",
+	"mlterm",
+	"xvt",
+	"rxvt",
+	"urxvt",
+	"mrxvt",
+	"tilda",
+	NULL
+    };
+    return terminals_v;
+}
+
+const gchar **
+utility_c::get_editors(void) {
+static const gchar *editors_v[] = {
+	"gvim -f",  
+	"mousepad", 
+	"gedit", 
+	"kate", 
+	"xemacs", 
+	"nano",
+	"vi",
+	NULL
+};
+    return editors_v;
+}
 

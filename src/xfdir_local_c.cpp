@@ -33,7 +33,8 @@ xfdir_local_c::mk_tree_model (void)
 	    G_TYPE_INT,      // mode
 	    G_TYPE_STRING,   // name (UTF-8)
 	    G_TYPE_STRING,   // name (verbatim)
-	    G_TYPE_STRING);   // icon_name
+	    G_TYPE_STRING,   // icon_name
+	    G_TYPE_STRING);   // mimetype
 
     heartbeat = 0;
     GList *directory_list = read_items (&heartbeat);
@@ -153,16 +154,31 @@ xfdir_local_c::insert_list_into_model(GList *data, GtkListStore *list_store){
 #endif
 	gchar *utf_name = utf_string(xd_p->d_name);
 	const gchar *icon_name;
-        if (dir_count > 500) icon_name = get_type_pixbuf(xd_p);
-        else icon_name = get_stat_pixbuf(xd_p, TRUE);
+	gchar *mimetype=NULL;
+        if (dir_count > 500) {
+            icon_name = get_type_pixbuf(xd_p); // this will not stat 
+            gchar *n = g_build_path(path, xd_p->d_name, NULL);
+            mimetype = mime_type(n); // plain extension mimetype
+            //DBG("%s --> %s\n", n, mimetype);
+            g_free(n);
+        }
+        else {
+            icon_name = get_stat_pixbuf(xd_p, TRUE); // this will stat
+            gchar *n = g_build_path(path, xd_p->d_name, NULL);
+            mimetype = mime_type(n, &(xd_p->st)); // using stat obtained above
+            //DBG("%s --> %s\n", n, mimetype);
+            g_free(n);
+       }
         gtk_list_store_set (list_store, &iter, 
 		COL_DISPLAY_NAME, utf_name,
 		COL_ACTUAL_NAME, xd_p->d_name,
 		COL_ICON_NAME, icon_name,
 		COL_MODE,xd_p->st.st_mode, 
                 COL_PIXBUF, gtk_p->get_pixbuf(icon_name,  get_icon_size(xd_p->d_name)), 
+                COL_MIMETYPE, mimetype,
 		-1);
 	g_free(utf_name);
+        g_free(mimetype);
     }
     GList *p = directory_list;
     for (;p && p->data; p=p->next){

@@ -8,6 +8,8 @@
 #include <unistd.h>
 #include "gtk_c.hpp"
 #include "utility_c.hpp"
+#define SET_DIR(x) x|=0x01
+#define IS_DIR (x&0x01)
 
 enum
 {
@@ -16,11 +18,10 @@ enum
   COL_DISPLAY_NAME,
   COL_ACTUAL_NAME,
   COL_ICON_NAME,
+  COL_MIMETYPE, // XXX this is only in xfdir_local_c...
   NUM_COLS
 };
 
-#define SET_DIR(x) x|=0x01
-#define IS_DIR (x&0x01)
 
 typedef struct xd_t{
     gchar *d_name;
@@ -35,7 +36,6 @@ class xfdir_c: virtual utility_c {
         virtual void reload(const gchar *)=0;
 	virtual const gchar *get_xfdir_iconname(void)=0;
         virtual void item_activated (GtkIconView *, GtkTreePath *, void *);
-
 	
 	gint get_dir_count(void);
         GtkTreeModel *get_tree_model(void);

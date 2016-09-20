@@ -1,8 +1,9 @@
 #ifndef XFDIR_LOCAL_C_HPP
 #define XFDIR_LOCAL_C_HPP
 #include "xfdir_c.hpp"
+#include "mime_c.hpp"
 
-class xfdir_local_c: public xfdir_c, virtual utility_c  {
+class xfdir_local_c: public xfdir_c, virtual utility_c, protected mime_c  {
     public:
 	xfdir_local_c(const gchar *, gtk_c *);
         void reload(const gchar *);

@@ -64,7 +64,7 @@ fi
 AC_DEFINE_UNQUOTED([PREFIX],["$ac_default_prefix"],[Installation prefix])
 AC_SUBST([PREFIX])
 
-MODULE_DIR="xffm+/rmodules"
+MODULE_DIR="rfm/rmodules"
 AC_SUBST(MODULE_DIR)
 AC_MSG_NOTICE([Module directory: $MODULE_DIR])
 
