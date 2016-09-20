@@ -13,9 +13,9 @@ class xfdir_local_c: public xfdir_c, virtual utility_c, protected mime_c  {
         gint heartbeat;
         GList *read_items (gint *heartbeat); 
         void insert_list_into_model(GList *, GtkListStore *);
-	const gchar *get_home_iconname(const gchar *data);
-	const gchar *get_type_pixbuf(xd_t *xd_p);
-        const gchar *get_stat_pixbuf(xd_t *, gboolean);
+	gchar *get_home_iconname(const gchar *data);
+	gchar *get_type_iconname(xd_t *xd_p);
+        gchar *get_stat_iconname(xd_t *, gboolean);
         
 
 };

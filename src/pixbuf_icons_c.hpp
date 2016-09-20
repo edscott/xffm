@@ -6,7 +6,7 @@
 #include "utility_c.hpp"
 
 
-class pixbuf_icons_c: public pixbuf_cairo_c {
+class pixbuf_icons_c: public pixbuf_cairo_c, virtual utility_c {
     public:
         pixbuf_icons_c(void);
         ~pixbuf_icons_c(void);
@@ -19,8 +19,8 @@ class pixbuf_icons_c: public pixbuf_cairo_c {
         GThread *self;
         void threadwait (void);
 	gboolean insert_pixbuf_tag (GdkPixbuf *, GdkPixbuf *, const gchar *, const gchar *, const gchar *);
-        utility_c *utility_p;
     private:
+        void init_lite_hash (void);
         GtkIconTheme *icon_theme;
         GdkPixbuf *pixbuf_new_from_file (const gchar *, gint, gint);
         pthread_mutex_t pixbuf_mutex;

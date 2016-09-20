@@ -153,19 +153,31 @@ xfdir_local_c::insert_list_into_model(GList *data, GtkListStore *list_store){
 	if (xd_p->d_type == DT_DIR) p=p_dir;
 #endif
 	gchar *utf_name = utf_string(xd_p->d_name);
-	const gchar *icon_name;
+        
+	gchar *icon_name;
 	gchar *mimetype=NULL;
         if (dir_count > 500) {
-            icon_name = get_type_pixbuf(xd_p); // this will not stat 
+            icon_name = get_type_iconname(xd_p); // this will not stat 
             gchar *n = g_build_path(path, xd_p->d_name, NULL);
             mimetype = mime_type(n); // plain extension mimetype
             //DBG("%s --> %s\n", n, mimetype);
             g_free(n);
         }
         else {
-            icon_name = get_stat_pixbuf(xd_p, TRUE); // this will stat
+            icon_name = get_stat_iconname(xd_p, TRUE); // this will stat
+            //DBG("get_stat_iconname: %s\n", icon_name);
             gchar *n = g_build_path(path, xd_p->d_name, NULL);
             mimetype = mime_type(n, &(xd_p->st)); // using stat obtained above
+            // file extension will now appear on the icon. (XXX only for big icons)
+            if (S_ISREG(xd_p->st.st_mode) && !S_ISLNK(xd_p->st.st_mode)) {
+                gchar *t = g_strdup(xd_p->d_name);
+                if (strchr(t, '.') && strrchr(t, '.') != t){
+                    *strrchr(t, '.') = 0;
+                    g_free(utf_name);
+                    utf_name = utf_string(t);
+                    g_free(t);
+                }
+            }
             //DBG("%s --> %s\n", n, mimetype);
             g_free(n);
        }
@@ -177,6 +189,7 @@ xfdir_local_c::insert_list_into_model(GList *data, GtkListStore *list_store){
                 COL_PIXBUF, gtk_p->get_pixbuf(icon_name,  get_icon_size(xd_p->d_name)), 
                 COL_MIMETYPE, mimetype,
 		-1);
+	g_free(icon_name);
 	g_free(utf_name);
         g_free(mimetype);
     }
@@ -188,9 +201,9 @@ xfdir_local_c::insert_list_into_model(GList *data, GtkListStore *list_store){
     }
     g_list_free(directory_list);
 }
-const gchar *
-xfdir_local_c::get_stat_pixbuf(xd_t *xd_p, gboolean restat){
-    if (strcmp(xd_p->d_name, "..")==0) return  "go-up";
+gchar *
+xfdir_local_c::get_stat_iconname(xd_t *xd_p, gboolean restat){
+    if (strcmp(xd_p->d_name, "..")==0) return  g_strdup("go-up");
 
     if (restat){
         lstat(xd_p->d_name, &(xd_p->st));
@@ -218,19 +231,19 @@ xfdir_local_c::get_stat_pixbuf(xd_t *xd_p, gboolean restat){
     if (S_ISDIR(xd_p->st.st_mode)){
         // all access:
         if (O_ALL(xd_p->st.st_mode))
-                return "folder/C/face-surprise/2.0/180";
+                return g_strdup("folder/C/face-surprise/2.0/180");
         if ((MY_GROUP(xd_p->st.st_gid) && G_ALL(xd_p->st.st_mode)) 
                 || (MY_FILE(xd_p->st.st_uid) && U_ALL(xd_p->st.st_mode))){
 	    if (strcmp(path, g_get_home_dir())==0) return get_home_iconname(xd_p->d_name);
-                return "folder";
+                return g_strdup("folder");
 	}
         // read only:
         if (O_RX(xd_p->st.st_mode) 
                 || (MY_GROUP(xd_p->st.st_gid) && G_RX(xd_p->st.st_mode)) 
                 || (MY_FILE(xd_p->st.st_uid) && U_RX(xd_p->st.st_mode)))
-                return "folder/SW/emblem-readonly/3.0/180";
+                return g_strdup("folder/SW/emblem-readonly/3.0/180");
         // no access:
-        return "folder/SW/emblem-unreadable/3.0/180/C/face-angry/2.0/180";
+        return g_strdup("folder/SW/emblem-unreadable/3.0/180/C/face-angry/2.0/180");
     }
     if (S_ISLNK(xd_p->st.st_mode)){
         struct stat st;
@@ -238,44 +251,44 @@ xfdir_local_c::get_stat_pixbuf(xd_t *xd_p, gboolean restat){
         if (S_ISDIR(st.st_mode)){
 	    // all access:
 	    if (O_ALL(st.st_mode))
-		    return "folder/C/face-surprise/2.0/180/NE/emblem-symbolic-link/2.5/180";
+		    return g_strdup("folder/C/face-surprise/2.0/180/NE/emblem-symbolic-link/2.5/180");
 	    if ((MY_GROUP(st.st_gid) && G_ALL(st.st_mode)) 
 		    || (MY_FILE(st.st_uid) && U_ALL(st.st_mode)))
-		    return "folder";
+		    return g_strdup("folder");
 	    // read only:
 	    if (O_RX(st.st_mode) 
 		    || (MY_GROUP(st.st_gid) && G_RX(st.st_mode)) 
 		    || (MY_FILE(st.st_uid) && U_RX(st.st_mode)))
-		    return "folder/SW/emblem-readonly/3.0/180/NE/emblem-symbolic-link/2.5/180";
+		    return g_strdup("folder/SW/emblem-readonly/3.0/180/NE/emblem-symbolic-link/2.5/180");
 	    // no access:
-	    return "folder/SW/emblem-unreadable/3.0/180/C/face-angry/2.0/180/NE/emblem-symbolic-link/2.5/180";
+	    return g_strdup("folder/SW/emblem-unreadable/3.0/180/C/face-angry/2.0/180/NE/emblem-symbolic-link/2.5/180");
 	}
         if (S_ISREG(st.st_mode)){
 	   // all access:
 	    if (O_ALL(st.st_mode) || O_RW(st.st_mode))
-		    return "text-x-generic/C/face-surprise/2.0/180/SW/emblem-exec/3.0/180/NE/emblem-symbolic-link/2.5/180";
+		    return g_strdup("text-x-generic/C/face-surprise/2.0/180/SW/emblem-exec/3.0/180/NE/emblem-symbolic-link/2.5/180");
 	    // read/write/exec
 	    if ((MY_GROUP(st.st_gid) && G_ALL(st.st_mode)) 
 		    || (MY_FILE(st.st_uid) && U_ALL(st.st_mode)))
-		    return "text-x-generic/SW/emblem-exec/3.0/180/NE/emblem-symbolic-link/2.5/180";
+		    return g_strdup("text-x-generic/SW/emblem-exec/3.0/180/NE/emblem-symbolic-link/2.5/180");
 	    // read/exec
 	    if (O_RX(st.st_mode)
 		    ||(MY_GROUP(st.st_gid) && G_RX(st.st_mode)) 
 		    || (MY_FILE(st.st_uid) && U_RX(st.st_mode)))
-		    return "text-x-generic/SW/emblem-exec/3.0/180/NE/emblem-symbolic-link/2.5/180";
+		    return g_strdup("text-x-generic/SW/emblem-exec/3.0/180/NE/emblem-symbolic-link/2.5/180");
 
 	    // read/write
 	    if ((MY_GROUP(st.st_gid) && G_RW(st.st_mode))
 		    || (MY_FILE(st.st_uid) && U_RW(st.st_mode)))
-		    return "text-x-generic/NE/emblem-symbolic-link/2.5/180";
+		    return g_strdup("text-x-generic/NE/emblem-symbolic-link/2.5/180");
 
 	    // read only:
 	    if (O_R(st.st_mode) 
 		    || (MY_GROUP(st.st_gid) && G_R(st.st_mode)) 
 		    || (MY_FILE(st.st_uid) && U_R(st.st_mode)))
-		    return "text-x-generic/SW/emblem-readonly/3.0/130/NE/emblem-symbolic-link/2.5/180";
+		    return g_strdup("text-x-generic/SW/emblem-readonly/3.0/130/NE/emblem-symbolic-link/2.5/180");
 	    // no access:
-	    return "text-x-generic/SW/emblem-unreadable/3.0/180/C/face-angry/2.0/180/NE/emblem-symbolic-link/2.5/180";
+	    return g_strdup("text-x-generic/SW/emblem-unreadable/3.0/180/C/face-angry/2.0/180/NE/emblem-symbolic-link/2.5/180");
 	}
     }
 #if 0
@@ -300,62 +313,67 @@ xfdir_local_c::get_stat_pixbuf(xd_t *xd_p, gboolean restat){
 #endif
 
     if (S_ISREG(xd_p->st.st_mode)){
+        gchar *extension = g_strdup("");
+        if (strchr(xd_p->d_name, '.') && strchr(xd_p->d_name, '.') != xd_p->d_name) {
+            extension = g_strconcat("*", strrchr(xd_p->d_name, '.')+1, NULL) ;
+        }
         // all access:
         if (O_ALL(xd_p->st.st_mode) || O_RW(xd_p->st.st_mode))
-                return "text-x-generic/C/face-surprise/2.0/180/SW/emblem-exec/3.0/180";
+                return g_strdup_printf("text-x-generic%s/C/face-surprise/2.0/180/SW/emblem-exec/3.0/180", extension);
 	// read/write/exec
         if ((MY_GROUP(xd_p->st.st_gid) && G_ALL(xd_p->st.st_mode)) 
                 || (MY_FILE(xd_p->st.st_uid) && U_ALL(xd_p->st.st_mode)))
-                return "text-x-generic/SW/emblem-exec/3.0/180";
+                return g_strdup_printf("text-x-generic%s/SW/emblem-exec/3.0/180", extension);
 	// read/exec
         if (O_RX(xd_p->st.st_mode)
 		||(MY_GROUP(xd_p->st.st_gid) && G_RX(xd_p->st.st_mode)) 
                 || (MY_FILE(xd_p->st.st_uid) && U_RX(xd_p->st.st_mode)))
-                return "text-x-generic/SW/emblem-exec/3.0/180";
+                return g_strdup_printf("text-x-generic%s/SW/emblem-exec/3.0/180", extension);
 
 	// read/write
         if ((MY_GROUP(xd_p->st.st_gid) && G_RW(xd_p->st.st_mode))
                 || (MY_FILE(xd_p->st.st_uid) && U_RW(xd_p->st.st_mode)))
-                return "text-x-generic";
+                return g_strdup_printf("text-x-generic%s", extension);
 
         // read only:
         if (O_R(xd_p->st.st_mode) 
                 || (MY_GROUP(xd_p->st.st_gid) && G_R(xd_p->st.st_mode)) 
                 || (MY_FILE(xd_p->st.st_uid) && U_R(xd_p->st.st_mode)))
-                return "text-x-generic/SW/emblem-readonly/3.0/130";
+                return g_strdup_printf("text-x-generic%s/SW/emblem-readonly/3.0/130", extension);
         // no access:
-        return "text-x-generic/SW/emblem-unreadable/3.0/180/C/face-angry/2.0/180";
+        return g_strdup_printf("text-x-generic%s/SW/emblem-unreadable/3.0/180/C/face-angry/2.0/180", extension);
+        g_free(extension);
     }
-    return "emblem-application";
+    return g_strdup("emblem-application");
 
 }
 
 
-const gchar *
-xfdir_local_c::get_type_pixbuf(xd_t *xd_p){
+gchar *
+xfdir_local_c::get_type_iconname(xd_t *xd_p){
     if (strcmp(xd_p->d_name, "..")==0)
-	return  "go-up";
+	return  g_strdup("go-up");
 #ifdef HAVE_STRUCT_DIRENT_D_TYPE
     if (xd_p->d_type == DT_DIR){ 
 	if (strcmp(path, g_get_home_dir())==0) {
 	    return get_home_iconname(xd_p->d_name);
 	}
-	return  "folder";
+	return  g_strdup("folder");
     }
     if (xd_p->d_type == DT_LNK) 
-	return  "emblem-symbolic-link";
+	return  g_strdup("emblem-symbolic-link");
     if (xd_p->d_type == DT_UNKNOWN) 
-	return  "dialog-question";
+	return  g_strdup("dialog-question");
 #else
-    return get_stat_pixbuf(xd_p, TRUE);
+    return get_stat_iconname(xd_p, TRUE);
 #endif
-    return "text-x-generic";
+    return g_strdup("text-x-generic");
 }
 
 
-const gchar *
+gchar *
 xfdir_local_c::get_home_iconname(const gchar *data){
-    if (!data) return "user-home";
+    if (!data) return g_strdup("user-home");
     const gchar *dir[]={N_("Documents"), N_("Downloads"),N_("Music"),N_("Pictures"),
 	        N_("Templates"),N_("Videos"),N_("Desktop"),N_("Bookmarks"),
 		N_(".Trash"),NULL};
@@ -365,10 +383,10 @@ xfdir_local_c::get_home_iconname(const gchar *data){
     const gchar **p, **i;
     for (p=dir, i=icon; p && *p ; p++, i++){
 	if (strcasecmp(*p, data) == 0) {
-	    return *i;
+	    return g_strdup(*i);
 	}
     }
-    return "folder";
+    return g_strdup("folder");
 }
 
 const gchar *

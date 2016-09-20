@@ -164,7 +164,7 @@ pixbuf_hash_c::put_in_pixbuf_hash(const gchar *path, gint size, const GdkPixbuf 
     // Replace or insert item in pixbuf hash
     gchar *hash_key = get_hash_key (pixbuf_p->path, pixbuf_p->size);
     void *arg[]={(void *)hash_key, (void *)pixbuf_p, (void *)pixbuf_hash};
-    void *result = utility_p->context_function(put_in_pixbuf_hash_f, (void *)arg);
+    void *result = context_function(put_in_pixbuf_hash_f, (void *)arg);
     if (!result){
         g_free(hash_key);
 	free_pixbuf_t(pixbuf_p);
@@ -201,7 +201,7 @@ pixbuf_hash_c::rm_from_pixbuf_hash (const gchar *icon_name, gint size) {
     gchar *hash_key = get_hash_key (icon_name, size);
     void *arg[]={(void *)hash_key, (void *)pixbuf_hash};
 
-    utility_p->context_function(rm_from_pixbuf_hash_f, (void *)arg);
+    context_function(rm_from_pixbuf_hash_f, (void *)arg);
     g_free(hash_key);
     TRACE("rfm_rm_from_pixbuf_hash() done\n");
     return;
@@ -251,7 +251,7 @@ pixbuf_hash_c::lookup_icon(const gchar *icon_name, gint size){
     TRACE("find in pixbuf hash: %s(%d)\n", icon_name, size);
     gchar *hash_key = get_hash_key (icon_name, size);
     void *arg[]={(void *)hash_key, (void *) icon_name, GINT_TO_POINTER(size), (void *)pixbuf_hash, (void *)this};
-    pixbuf = (GdkPixbuf *)utility_p->context_function(find_in_pixbuf_hash_f, (void *)arg);
+    pixbuf = (GdkPixbuf *)context_function(find_in_pixbuf_hash_f, (void *)arg);
     g_free(hash_key);
    return pixbuf;
 }

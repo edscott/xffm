@@ -7,7 +7,7 @@
 #define USER_XFFM_CACHE_DIR      g_get_user_cache_dir(),"xffm+"
 #define XFFM_THUMBNAIL_DIR 	USER_XFFM_CACHE_DIR,"thumbnails"
 
-class pixbuf_hash_c: public pixbuf_icons_c {
+class pixbuf_hash_c: public pixbuf_icons_c, virtual utility_c {
     public:
 	pixbuf_hash_c(void);
 	~pixbuf_hash_c(void);

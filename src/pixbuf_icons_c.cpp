@@ -7,9 +7,11 @@
 #ifndef PREFIX
 # warning "PREFIX not defined!"
 #endif
+static void *insert_label_f (void *);
+static void *insert_pixbuf_tag_f (void *);
 
+    
 pixbuf_icons_c::pixbuf_icons_c(void){
-    utility_p = new utility_c();
     pixbuf_mutex = PTHREAD_MUTEX_INITIALIZER;
     icon_theme = gtk_icon_theme_get_default ();
     if (!icon_theme){
@@ -39,10 +41,12 @@ pixbuf_icons_c::pixbuf_icons_c(void){
 
     g_free(resource_path);
 }
+
 pixbuf_icons_c::~pixbuf_icons_c(void){
     pthread_mutex_destroy(&pixbuf_mutex);
-    delete utility_p;
 }
+
+
 
 void
 pixbuf_icons_c::threadwait (void) {
@@ -85,11 +89,14 @@ GdkPixbuf *
 pixbuf_icons_c::get_theme_pixbuf(const gchar *icon_name, gint size){
     GdkPixbuf *pixbuf = NULL;
     GError *error = NULL;
+    gchar *name = g_strdup(icon_name);
+    if (strchr(name, '*')) *strrchr(name, '*') = 0;
     GdkPixbuf *theme_pixbuf = gtk_icon_theme_load_icon (icon_theme,
-                  icon_name,
+                  name,
                   size, 
                   GTK_ICON_LOOKUP_FORCE_SIZE,  // GtkIconLookupFlags flags,
                   &error);
+    g_free(name);
     if (error) {
         TRACE("pixbuf_icons_c::get_theme_pixbuf: %s\n", error->message);
         g_error_free(error);
@@ -98,6 +105,12 @@ pixbuf_icons_c::get_theme_pixbuf(const gchar *icon_name, gint size){
         pixbuf = gdk_pixbuf_copy(theme_pixbuf);
         g_object_unref(theme_pixbuf);
     }
+    if (strchr(icon_name, '*')) {
+        void *arg[] = {(void *)this, (void *)pixbuf, (void *)(strrchr(icon_name, '*')+1)};
+        // Done by main gtk thread:
+        context_function(insert_label_f, arg);
+    }
+
     return pixbuf;
 }
 
@@ -164,6 +177,113 @@ pixbuf_icons_c::pixbuf_new_from_file (const gchar *path, gint width, gint height
 #endif
 
     return pixbuf;
+}
+
+
+
+gboolean
+pixbuf_icons_c::insert_pixbuf_tag (GdkPixbuf *tag, GdkPixbuf *composite_pixbuf,
+	const gchar *where, const gchar *scale, const gchar *alpha){
+    gdouble scale_factor;
+    gint overall_alpha;
+    
+    if (!tag || !composite_pixbuf || !GDK_IS_PIXBUF(composite_pixbuf) || !where
+            || !scale || !alpha) {
+	return FALSE;
+    }
+
+    void *arg[] = {
+        (void *)tag,
+        (void *)composite_pixbuf,
+        (void *)where,
+        (void *)scale,
+        (void *)alpha,
+        (void *)this
+    };
+    
+    // Done by main gtk thread:
+    context_function(insert_pixbuf_tag_f, arg);
+    return TRUE;
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+
+static void
+add_label_pixbuf(pixbuf_icons_c *pixbuf_icons_p, cairo_t   *pixbuf_context, GdkPixbuf *pixbuf, const gchar *icon_text){
+    // Insert text into pixbuf
+    gint x = 0;
+    gint y = 0;
+    const gchar *text_size = "small";
+    /*switch(size) {
+	case SMALL_ICON_SIZE: text_size="xx-small"; break;
+	case MEDIUM_ICON_SIZE: text_size="x-small"; break;
+	case BIG_ICON_SIZE: text_size="medium"; break;
+    }	
+    if (!text_size) return ;*/
+
+    GdkPixbuf   *t_pixbuf = NULL;
+    //const gchar *color = "white";
+    // FIXME: USE different colors for C, H files.
+    const gchar *color = "yellow";
+    gchar *layout_text = g_strdup_printf("<span foreground=\"black\" background=\"%s\" size=\"%s\">%s </span>", color, text_size, _(icon_text));
+
+    PangoContext *context = gdk_pango_context_get_for_screen (gdk_screen_get_default());
+
+    PangoLayout *layout = pango_layout_new (context);
+
+    //PangoLayout *layout = 
+//	gtk_widget_create_pango_layout (rfm_global_p->window, NULL);
+
+
+    pango_layout_set_markup(layout, layout_text, -1);
+    g_free(layout_text);
+    PangoRectangle logical_rect;
+    pango_layout_get_pixel_extents (layout, NULL, &logical_rect);
+    x = gdk_pixbuf_get_width(pixbuf) - logical_rect.width-2;
+    y = gdk_pixbuf_get_height(pixbuf) - logical_rect.height-2;
+    if (x < 0) x = 0;
+    if (y < 0) y = 0;
+    if (logical_rect.width > gdk_pixbuf_get_width(pixbuf)-1) 
+	logical_rect.width = gdk_pixbuf_get_width(pixbuf)-1;
+    if (logical_rect.height > gdk_pixbuf_get_height(pixbuf)-1) 
+	logical_rect.height = gdk_pixbuf_get_height(pixbuf)-1;
+
+    t_pixbuf =  
+	gdk_pixbuf_new(GDK_COLORSPACE_RGB, TRUE, 8, logical_rect.width+2, logical_rect.height+2);
+    cairo_t   *t_pixbuf_context = pixbuf_icons_p->pixbuf_cairo_create(t_pixbuf);
+
+    cairo_rectangle(t_pixbuf_context, 0, 0, logical_rect.width+2, logical_rect.height+2);
+    cairo_clip(t_pixbuf_context);
+
+
+    cairo_move_to (t_pixbuf_context, 1, 1);
+	
+    cairo_set_source_rgba(t_pixbuf_context, 0, 0, 0, 1.0);
+    if (PANGO_IS_LAYOUT (layout)) {
+        pango_cairo_show_layout (t_pixbuf_context, layout);
+        g_object_unref(layout);
+        g_object_unref(context);
+    }
+    pixbuf_icons_p->pixbuf_cairo_destroy(t_pixbuf_context, t_pixbuf);
+
+    if (t_pixbuf) {
+	gdk_cairo_set_source_pixbuf(pixbuf_context, t_pixbuf,x,y);
+	cairo_paint_with_alpha(pixbuf_context, 0.650);
+	g_object_unref(t_pixbuf);
+    }
+
+    return ;
+}
+
+static void
+add_color_pixbuf(pixbuf_icons_c *pixbuf_icons_p, cairo_t *pixbuf_context, GdkPixbuf *pixbuf, 
+	guchar red, guchar green, guchar blue){
+    GdkPixbuf *pixbuf_mask = pixbuf_icons_p->create_pixbuf_mask(pixbuf, red, green, blue);  
+    gdk_cairo_set_source_pixbuf(pixbuf_context, pixbuf_mask, 0,0);
+    cairo_paint_with_alpha(pixbuf_context, 0.450);
+    g_object_unref(pixbuf_mask);
 }
 
 
@@ -254,40 +374,35 @@ insert_pixbuf_tag_f (void *data){
 	
     gdk_cairo_set_source_pixbuf(pixbuf_context, tag_s, offset_x,offset_y);
     cairo_paint_with_alpha(pixbuf_context, (double)overall_alpha/255.0);
+
+    add_color_pixbuf(pixbuf_icons_p, pixbuf_context, composite_pixbuf, 0x88, 0x7f, 0xa3);
+    add_label_pixbuf(pixbuf_icons_p, pixbuf_context, composite_pixbuf, "FIXME");
+
+
     pixbuf_icons_p->pixbuf_cairo_destroy(pixbuf_context, composite_pixbuf);
     g_object_unref(tag_s);
     return NULL;
 }
 
 
+static void *
+insert_label_f (void *data){
+    void **arg = (void **)data;
+    pixbuf_icons_c *pixbuf_icons_p =(pixbuf_icons_c *)arg[0];
+    GdkPixbuf *composite_pixbuf = (GdkPixbuf *)arg[1];
+    const gchar *text = (const gchar *)arg[2];
 
-gboolean
-pixbuf_icons_c::insert_pixbuf_tag (GdkPixbuf *tag, GdkPixbuf *composite_pixbuf,
-	const gchar *where, const gchar *scale, const gchar *alpha){
-    gdouble scale_factor;
-    gint overall_alpha;
+    cairo_t   *pixbuf_context = pixbuf_icons_p->pixbuf_cairo_create(composite_pixbuf);
     
-    if (!tag || !composite_pixbuf || !GDK_IS_PIXBUF(composite_pixbuf) || !where
-            || !scale || !alpha) {
-	return FALSE;
-    }
+    gdk_cairo_set_source_pixbuf(pixbuf_context, composite_pixbuf,0,0);
+    cairo_paint_with_alpha(pixbuf_context, 1.0);
 
-    void *arg[] = {
-        (void *)tag,
-        (void *)composite_pixbuf,
-        (void *)where,
-        (void *)scale,
-        (void *)alpha,
-        (void *)this
-    };
-    
-    // Done by main gtk thread:
-    utility_p->context_function(insert_pixbuf_tag_f, arg);
-    return TRUE;
+//    add_color_pixbuf(pixbuf_icons_p, pixbuf_context, composite_pixbuf, 0x88, 0x7f, 0xa3);
+    add_label_pixbuf(pixbuf_icons_p, pixbuf_context, composite_pixbuf, text);
+
+    pixbuf_icons_p->pixbuf_cairo_destroy(pixbuf_context, composite_pixbuf);
+    return NULL;
 }
-
-
-
 
 
 
