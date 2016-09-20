@@ -2,7 +2,6 @@
 #define XFFM_C_HPP
 #include "xffm+.h"
 #include "window_c.hpp"
-#include "mime_c.hpp"
 
 class xffm_c{
     public:
@@ -15,7 +14,6 @@ class xffm_c{
 	gint run(void);
     private:
         gtk_c *gtk_p;
-        mime_c *mime_p;
         GtkApplication *app;
 	GList *window_p_list;
 	gint argc;

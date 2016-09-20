@@ -17,7 +17,6 @@ xffm_c::xffm_c(gint in_argc, gchar **in_argv){
         throw 1;
     }
     gtk_p = new gtk_c(app);
-    mime_p = new mime_c();
     argc = in_argc;
     argv = in_argv;
 
