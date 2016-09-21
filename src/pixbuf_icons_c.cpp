@@ -226,8 +226,10 @@ add_label_pixbuf(pixbuf_icons_c *pixbuf_icons_p, cairo_t   *pixbuf_context, GdkP
     GdkPixbuf   *t_pixbuf = NULL;
     //const gchar *color = "white";
     // FIXME: USE different colors for C, H files.
-    const gchar *color = "yellow";
-    gchar *layout_text = g_strdup_printf("<span foreground=\"black\" background=\"%s\" size=\"%s\">%s </span>", color, text_size, _(icon_text));
+    //const gchar *color = "yellow";
+    //gchar *layout_text = g_strdup_printf("<span foreground=\"black\" background=\"%s\" size=\"%s\">%s </span>", color, text_size, _(icon_text));
+    gchar *layout_text;
+        layout_text = g_strdup_printf("<span foreground=\"white\" background=\"black\" size=\"%s\">%s </span>", text_size, _(icon_text));
 
     PangoContext *context = gdk_pango_context_get_for_screen (gdk_screen_get_default());
 
@@ -397,7 +399,12 @@ insert_label_f (void *data){
     gdk_cairo_set_source_pixbuf(pixbuf_context, composite_pixbuf,0,0);
     cairo_paint_with_alpha(pixbuf_context, 1.0);
 
-//    add_color_pixbuf(pixbuf_icons_p, pixbuf_context, composite_pixbuf, 0x88, 0x7f, 0xa3);
+    // FIXME: use a generalized mimetype approach instead, from lite stuff (primary_icons.i)
+    if (strcmp(text, "h")==0 || strcmp(text, "hpp")==0){
+        add_color_pixbuf(pixbuf_icons_p, pixbuf_context, composite_pixbuf, 0xee, 0xd6, 0x80);
+    } else if (strcmp(text, "c")==0 || strcmp(text, "cpp")==0) {
+        add_color_pixbuf(pixbuf_icons_p, pixbuf_context, composite_pixbuf, 0x88, 0x7f, 0xa3);
+    }
     add_label_pixbuf(pixbuf_icons_p, pixbuf_context, composite_pixbuf, text);
 
     pixbuf_icons_p->pixbuf_cairo_destroy(pixbuf_context, composite_pixbuf);

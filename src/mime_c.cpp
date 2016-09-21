@@ -3,6 +3,7 @@
 #include <libxml/parser.h>
 #include <libxml/tree.h>
 #include <string.h>
+#include <errno.h>
 #include <dbh.h>
 
 #ifndef PACKAGE_DATA_DIR
