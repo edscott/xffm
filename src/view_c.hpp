@@ -19,10 +19,8 @@ class view_c:public widgets_c, public thread_control_c {
         GtkTreeModel *get_tree_model(void);
         const gchar *get_path(void);
 	gboolean window_keyboard_event(GdkEventKey *, void *);
-	gint get_icon_size(const gchar *);
         void highlight(void);
-        void set_highlight(gdouble, gdouble);
-        void clear_highlights(const gchar *);
+        void highlight(gdouble, gdouble);
         void remove_page(void);
         GtkWindow *get_window(void);
         lpterm_c *get_lpterm_p(void);
@@ -46,8 +44,6 @@ class view_c:public widgets_c, public thread_control_c {
 	void update_tab_label_icon(void);
 	void set_view_details(void);
         
-        GHashTable *highlight_hash;
-        gboolean dirty_hash = FALSE;
         void init(void);
         void signals();
 

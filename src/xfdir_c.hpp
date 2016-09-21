@@ -11,17 +11,17 @@
 #define SET_DIR(x) x|=0x01
 #define IS_DIR (x&0x01)
 
+
 enum
 {
-  COL_PIXBUF,
-  COL_MODE,
-  COL_DISPLAY_NAME,
-  COL_ACTUAL_NAME,
-  COL_ICON_NAME,
-  COL_MIMETYPE, // XXX this is only in xfdir_local_c...
-  NUM_COLS
+  DISPLAY_PIXBUF,
+  NORMAL_PIXBUF,
+  HIGHLIGHT_PIXBUF,
+  DISPLAY_NAME,
+  ACTUAL_NAME,
+  ICON_NAME,
+  BASIC_COLS
 };
-
 
 typedef struct xd_t{
     gchar *d_name;
@@ -44,6 +44,10 @@ class xfdir_c: virtual utility_c {
         const gchar *get_label();
 	gchar *get_window_name (void);
         const gchar *get_path(void);
+        gint get_icon_column(void);
+        gint get_text_column(void);
+        void clear_highlights(void);
+        void highlight(GtkTreePath *);
     protected:
         virtual GtkTreeModel *mk_tree_model(void) = 0;
         GtkTreeModel *treemodel;
@@ -55,6 +59,7 @@ class xfdir_c: virtual utility_c {
         pthread_cond_t population_cond;
         gint population_condition;
         pthread_rwlock_t population_lock;
+        GHashTable *highlight_hash;
 
 };
 

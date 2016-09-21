@@ -37,14 +37,12 @@ static void switch_page (GtkNotebook *, GtkWidget *, guint, void *);
 
 view_c::view_c(void *window_data, GtkNotebook *notebook) : widgets_c(window_data, notebook), thread_control_c((void *)this) {
     xfdir_p = NULL;
-    dirty_hash = FALSE;
 
     // Set objects in parent widget_c class with data pointing to child class
     g_object_set_data(G_OBJECT(get_pathbar()), "view_p", (void *)this);
     g_object_set_data(G_OBJECT(get_page_child()), "view_p", (void *)this);
     g_object_set_data(G_OBJECT(get_page_button()), "view_p", (void *)this);
 
-    highlight_hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
     //signals_p = new signals_c();
     init();
     signals();
@@ -105,7 +103,7 @@ view_c::get_dir_count(void){
 void
 view_c::reload(const gchar *data){
     // clear highlight hash
-    clear_highlights(NULL);
+    xfdir_p->clear_highlights();
     if (g_file_test(data, G_FILE_TEST_IS_DIR) &&
 	    !g_file_test(get_path(), G_FILE_TEST_IS_DIR)){
 	// switch back to local mode
@@ -155,8 +153,8 @@ view_c::set_treemodel(xfdir_c *data){
     DBG("new treemodel= %p\n", tree_model);
     //if (tree_model) gtk_widget_hide(GTK_WIDGET(get_iconview()));
     gtk_icon_view_set_model(GTK_ICON_VIEW(get_iconview()), tree_model);
-    gtk_icon_view_set_text_column (GTK_ICON_VIEW(get_iconview()), COL_DISPLAY_NAME);
-    gtk_icon_view_set_pixbuf_column (GTK_ICON_VIEW(get_iconview()), COL_PIXBUF);
+    gtk_icon_view_set_text_column (GTK_ICON_VIEW(get_iconview()), xfdir_p->get_text_column());
+    gtk_icon_view_set_pixbuf_column (GTK_ICON_VIEW(get_iconview()),  xfdir_p->get_icon_column());
     gtk_icon_view_set_selection_mode (GTK_ICON_VIEW(get_iconview()), GTK_SELECTION_MULTIPLE);
     set_view_details();
     //gtk_widget_show(GTK_WIDGET(get_iconview()));
@@ -195,117 +193,22 @@ view_c::show_diagnostics(void){
     show_text_f(NULL, (void *)this);
 }
 
-static gboolean
-unhighlight (gpointer key, gpointer value, gpointer data){
-    void **arg = (void **)data;
-    view_c *view_p = (view_c *)arg[0];
-    gchar *tree_path_string = (gchar *)arg[1];
-    if (tree_path_string && strcmp(tree_path_string, (gchar *)key)==0) return FALSE;
-    TRACE("unhighlight %s\n", (gchar *)key);
-    GtkTreeModel *model = view_p->get_tree_model();
-    GtkTreeIter iter;
-    gchar *icon_name;
-            
-    GtkTreePath *tpath = gtk_tree_path_new_from_string ((gchar *)key);
-    if (tpath) {
-        gtk_tree_model_get_iter (model, &iter, tpath);
-        gtk_tree_model_get (model, &iter, COL_ICON_NAME, &icon_name, -1);
-        gchar *name;
-        gtk_tree_model_get (model, &iter, COL_ACTUAL_NAME, &name, -1);
-        gint icon_size = view_p->get_icon_size(name);
-        g_free(name);
-        gtk_list_store_set (GTK_LIST_STORE(model), &iter,
-            COL_PIXBUF, view_p->get_gtk_p()->get_pixbuf(icon_name, icon_size ), 
-            -1);
-        g_free(icon_name);
-        gtk_tree_path_free (tpath);
-    }
-
-    return TRUE;
-}
-
-void 
-view_c::clear_highlights(const gchar *tree_path_string){
-    void *arg[]={(void *)this, (void *)tree_path_string};
-    if (!highlight_hash) DBG("view_c::clear_highlights: hash is null!\n");
-    g_hash_table_foreach_remove (highlight_hash, unhighlight, (void *)arg);
-    dirty_hash = (tree_path_string != NULL)? TRUE: FALSE;
-}
-
-void 
-view_c::set_highlight(gdouble X, gdouble Y){
-    //    TRACE("x=%lf y=%lf\n", X, Y);
-    highlight_x = X + 0.5;
-    highlight_y = Y + 0.5;
-}
-
 void 
 view_c::highlight(void){
-    //TRACE("highlight %d, %d\n", highlight_x, highlight_y);
-    gchar *tree_path_string = NULL;
-    
-    GtkCellRenderer *cell;
+    highlight(highlight_x, highlight_y);
+}
+
+void 
+view_c::highlight(gdouble X, gdouble Y){
+    highlight_x = X;
+    highlight_y = Y;
     GtkTreeIter iter;
-    GtkTreeModel *model = gtk_icon_view_get_model(GTK_ICON_VIEW(get_iconview()));
+    GtkIconView *iconview = GTK_ICON_VIEW(get_iconview());
+    GtkTreeModel *model = gtk_icon_view_get_model(iconview);
     
-    GtkTreePath *tpath = gtk_icon_view_get_path_at_pos (GTK_ICON_VIEW(get_iconview()), highlight_x, highlight_y); 
-
-    if (tpath){
-        tree_path_string = gtk_tree_path_to_string (tpath);
-        if (!highlight_hash) DBG("view_c::highlight: hash is null!\n");
-        if (g_hash_table_lookup(highlight_hash, tree_path_string)) {
-            //TRACE("%s already in hash\n", tree_path_string);
-            g_free (tree_path_string);
-            gtk_tree_path_free (tpath);
-            return;
-        }
-        // Not highlighted?
-        TRACE("yes: %s\n", tree_path_string);
-        
-        g_hash_table_insert(highlight_hash, tree_path_string, GINT_TO_POINTER(1));
-        // Do highlight.
-        gtk_tree_model_get_iter (model, &iter, tpath);
-        gchar *name;
-        gtk_tree_model_get (model, &iter, COL_ACTUAL_NAME, &name, -1);
-        gchar *icon_name=NULL;
-        if (strcmp(name, "..")==0) {
-            icon_name = g_strdup("go-up");
-        }
-	else {
-	    gint mode;
-	    gtk_tree_model_get (model, &iter, COL_MODE, &mode, -1);
-	    if (S_ISDIR(mode)){
-		icon_name = g_strdup("document-open");
-	    } else {
-		gchar *iname;
-		gtk_tree_model_get (model, &iter, COL_ICON_NAME, &iname, -1);
-                if (strncmp(name, "xffm:", strlen("xffm:"))==0) {
-		    icon_name = 
-                        g_strdup_printf("%s", iname);               
-                } else {
-		    icon_name = 
-                        g_strdup_printf("%s/NE/document-open/2.0/220", iname);
-                }
-		g_free(iname);
-	    }
-	}
-	g_free(name);
-
-	gtk_list_store_set (GTK_LIST_STORE(model), &iter,
-                COL_PIXBUF, get_gtk_p()->get_pixbuf(icon_name, GTK_ICON_SIZE_DIALOG ), 
-		-1);
-	g_free(icon_name);
-
-        gtk_tree_path_free (tpath);
-        clear_highlights(tree_path_string);
-    } else {
-        // No item at position?
-        // Do we need to clear hash table?
-        if (dirty_hash){
-            TRACE("no (%d, %d)\n", highlight_x,highlight_y);
-            clear_highlights(NULL);
-        }
-    }
+    GtkTreePath *tpath = gtk_icon_view_get_path_at_pos (iconview, X, Y); 
+    if (tpath) xfdir_p->highlight(tpath);
+    else xfdir_p->clear_highlights();
 }
 
 void
@@ -421,8 +324,6 @@ view_c::update_tab_label_icon(void){
 
 GtkTreeModel *
 view_c::get_tree_model(void){return xfdir_p->get_tree_model();}
-gint
-view_c::get_icon_size(const gchar *name){ return xfdir_p->get_icon_size(name);}
 
 void
 view_c::set_application_icon (void) {
@@ -487,8 +388,7 @@ motion_notify_event (GtkWidget *widget,
     if (view_p->get_dir_count() > 500) return FALSE;
     if (!data) g_error("motion_notify_event: data cannot be NULL\n");
     GdkEventMotion *e = (GdkEventMotion *)event;
-    view_p->set_highlight(e->x, e->y);
-    view_p->highlight();
+    view_p->highlight(e->x, e->y);
     return FALSE;
 }
 static gboolean
@@ -498,7 +398,7 @@ leave_notify_event (GtkWidget *widget,
     view_c * view_p = (view_c *)data;
     if (!data) g_error("leave_notify_event: data cannot be NULL\n");
     //fprintf(TRACE("leave_notify_event\n");
-    view_p->clear_highlights(NULL);
+    view_p->get_xfdir_p()->clear_highlights();
 }
 
 

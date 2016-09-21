@@ -4,8 +4,7 @@
 #include "view_c.hpp"
 
 using namespace std;
-
-
+static gboolean unhighlight (gpointer, gpointer, gpointer);
 
 xfdir_c::xfdir_c(const gchar *data, gtk_c *data_gtk_c){
     gtk_p = data_gtk_c;
@@ -21,6 +20,7 @@ xfdir_c::xfdir_c(const gchar *data, gtk_c *data_gtk_c){
         throw 1;
     }
     population_condition = 0;
+    highlight_hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
 
 }
 
@@ -33,6 +33,56 @@ xfdir_c::~xfdir_c(void){
 }
 
 void
+xfdir_c::highlight(GtkTreePath *tpath){
+        //TRACE("highlight %d, %d\n", highlight_x, highlight_y);
+    gchar *tree_path_string = NULL;
+    
+    if (tpath == NULL){
+        // No item at position?
+        // Do we need to clear hash table?
+        clear_highlights();
+        return;
+    }
+
+    // Already highlighted?
+    tree_path_string = gtk_tree_path_to_string (tpath);
+    if (g_hash_table_lookup(highlight_hash, tree_path_string)) {
+        //TRACE("%s already in hash\n", tree_path_string);
+        g_free (tree_path_string);
+        gtk_tree_path_free (tpath);
+        return;
+    }
+
+    // Not highlighted. First clear any other item which highlight remains.
+    clear_highlights();
+    // Now do highlight dance. 
+    g_hash_table_insert(highlight_hash, tree_path_string, GINT_TO_POINTER(1));
+    GtkTreeIter iter;
+    gtk_tree_model_get_iter (treemodel, &iter, tpath);
+    
+    GdkPixbuf *highlight_pixbuf;
+    gtk_tree_model_get (treemodel, &iter, 
+            HIGHLIGHT_PIXBUF, &highlight_pixbuf, -1);
+    gtk_list_store_set (GTK_LIST_STORE(treemodel), &iter,
+            DISPLAY_PIXBUF, highlight_pixbuf, 
+            -1);
+    return;
+}
+
+
+void
+xfdir_c::clear_highlights(void){
+    if (g_hash_table_size(highlight_hash) == 0) return;
+    g_hash_table_foreach_remove (highlight_hash, unhighlight, (void *)this);
+}
+
+gint 
+xfdir_c::get_icon_column(void){ return DISPLAY_PIXBUF;}
+
+gint 
+xfdir_c::get_text_column(void){ return DISPLAY_NAME;}
+
+void
 xfdir_c::item_activated (GtkIconView *iconview, GtkTreePath *tpath, void *data)
 {
     view_c *view_p = (view_c *)data;
@@ -43,7 +93,7 @@ xfdir_c::item_activated (GtkIconView *iconview, GtkTreePath *tpath, void *data)
     gchar *full_path;
     gchar *ddname;
     gtk_tree_model_get (tree_model, &iter,
-                          COL_ACTUAL_NAME, &ddname,-1);
+                          ACTUAL_NAME, &ddname,-1);
     if (strcmp(ddname, "..")==0 && strcmp(path, "/")==0){
         full_path = g_strdup("xffm:root");
     } else {
@@ -141,6 +191,31 @@ xfdir_c::get_window_name (void) {
 #endif
 #endif
     return (iconname);
+}
+
+/////////////////////////////////////////////////////////////////////////////////
+
+
+static gboolean
+unhighlight (gpointer key, gpointer value, gpointer data){
+    xfdir_c *xfdir_p = (xfdir_c *)data;
+    TRACE("unhighlight %s\n", (gchar *)key);
+    GtkTreeModel *model = xfdir_p->get_tree_model();
+            
+    GtkTreePath *tpath = gtk_tree_path_new_from_string ((gchar *)key);
+    if (!tpath) return FALSE;
+
+    GtkTreeIter iter;
+    gtk_tree_model_get_iter (model, &iter, tpath);
+    gtk_tree_path_free (tpath);
+    GdkPixbuf *normal_pixbuf;
+    gtk_tree_model_get (model, &iter, 
+            NORMAL_PIXBUF, &normal_pixbuf, -1);
+    gtk_list_store_set (GTK_LIST_STORE(model), &iter,
+            DISPLAY_PIXBUF, normal_pixbuf, 
+        -1);
+
+    return TRUE;
 }
 
 

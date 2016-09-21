@@ -375,8 +375,8 @@ insert_pixbuf_tag_f (void *data){
     gdk_cairo_set_source_pixbuf(pixbuf_context, tag_s, offset_x,offset_y);
     cairo_paint_with_alpha(pixbuf_context, (double)overall_alpha/255.0);
 
-    add_color_pixbuf(pixbuf_icons_p, pixbuf_context, composite_pixbuf, 0x88, 0x7f, 0xa3);
-    add_label_pixbuf(pixbuf_icons_p, pixbuf_context, composite_pixbuf, "FIXME");
+    //add_color_pixbuf(pixbuf_icons_p, pixbuf_context, composite_pixbuf, 0x88, 0x7f, 0xa3);
+    //add_label_pixbuf(pixbuf_icons_p, pixbuf_context, composite_pixbuf, "FIXME");
 
 
     pixbuf_icons_p->pixbuf_cairo_destroy(pixbuf_context, composite_pixbuf);

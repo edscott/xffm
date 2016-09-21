@@ -5,6 +5,21 @@
 #include <stdlib.h>
 #include "xfdir_local_c.hpp"
 
+
+enum
+{
+  COL_DISPLAY_PIXBUF,
+  COL_NORMAL_PIXBUF,
+  COL_HIGHLIGHT_PIXBUF,
+  COL_DISPLAY_NAME,
+  COL_ACTUAL_NAME,
+  COL_ICON_NAME,
+  COL_MODE,
+  COL_MIMETYPE, // XXX this is only in xfdir_local_c...
+  NUM_COLS
+};
+
+
 static gint compare_type (const void *, const void *);
 
 xfdir_local_c::xfdir_local_c(const gchar *data, gtk_c *data_gtk_c): 
@@ -29,12 +44,14 @@ xfdir_local_c::mk_tree_model (void)
 
     
     GtkListStore *list_store = gtk_list_store_new (NUM_COLS, 
-	    GDK_TYPE_PIXBUF, // icon
-	    G_TYPE_INT,      // mode
-	    G_TYPE_STRING,   // name (UTF-8)
-	    G_TYPE_STRING,   // name (verbatim)
-	    G_TYPE_STRING,   // icon_name
-	    G_TYPE_STRING);   // mimetype
+	    GDK_TYPE_PIXBUF, // icon in display
+	    GDK_TYPE_PIXBUF, // normal icon reference
+	    GDK_TYPE_PIXBUF, // highlight icon reference
+	    G_TYPE_STRING,   // name in display (UTF-8)
+	    G_TYPE_STRING,   // name from filesystem (verbatim)
+	    G_TYPE_STRING,   // icon identifier (name or composite key)
+	    G_TYPE_INT,      // mode (to identify directories)
+	    G_TYPE_STRING);   // mimetype (further identification of files)
 
     heartbeat = 0;
     GList *directory_list = read_items (&heartbeat);
@@ -156,6 +173,7 @@ xfdir_local_c::insert_list_into_model(GList *data, GtkListStore *list_store){
         
 	gchar *icon_name;
 	gchar *mimetype=NULL;
+        
         if (dir_count > 500) {
             icon_name = get_type_iconname(xd_p); // this will not stat 
             gchar *n = g_build_path(path, xd_p->d_name, NULL);
@@ -180,16 +198,34 @@ xfdir_local_c::insert_list_into_model(GList *data, GtkListStore *list_store){
             }
             //DBG("%s --> %s\n", n, mimetype);
             g_free(n);
-       }
+
+        }
+	gchar *highlight_name;
+        if (S_ISDIR(xd_p->st.st_mode)){
+            highlight_name = g_strdup("document-open");
+        } else {
+            if (strcmp(xd_p->d_name, "..")==0) {
+                highlight_name = g_strdup("go-up");
+            } else {
+                highlight_name = 
+                    g_strdup_printf("%s/NE/document-open/2.0/220", icon_name);
+            }
+        }
+       
+        GdkPixbuf *normal_pixbuf = gtk_p->get_pixbuf(icon_name,  get_icon_size(xd_p->d_name));
+        GdkPixbuf *highlight_pixbuf = gtk_p->get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);
         gtk_list_store_set (list_store, &iter, 
-		COL_DISPLAY_NAME, utf_name,
-		COL_ACTUAL_NAME, xd_p->d_name,
-		COL_ICON_NAME, icon_name,
+		DISPLAY_NAME, utf_name,
+		ACTUAL_NAME, xd_p->d_name,
+		ICON_NAME, icon_name,
+                DISPLAY_PIXBUF, normal_pixbuf, 
+                NORMAL_PIXBUF, normal_pixbuf, 
+                HIGHLIGHT_PIXBUF, highlight_pixbuf, 
 		COL_MODE,xd_p->st.st_mode, 
-                COL_PIXBUF, gtk_p->get_pixbuf(icon_name,  get_icon_size(xd_p->d_name)), 
                 COL_MIMETYPE, mimetype,
 		-1);
 	g_free(icon_name);
+	g_free(highlight_name);
 	g_free(utf_name);
         g_free(mimetype);
     }
