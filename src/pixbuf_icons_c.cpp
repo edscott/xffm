@@ -399,11 +399,16 @@ insert_label_f (void *data){
     gdk_cairo_set_source_pixbuf(pixbuf_context, composite_pixbuf,0,0);
     cairo_paint_with_alpha(pixbuf_context, 1.0);
 
-    // FIXME: use a generalized mimetype approach instead, from lite stuff (primary_icons.i)
-    if (strcmp(text, "h")==0 || strcmp(text, "hpp")==0){
+    // : use a generalized mimetype approach instead, from lite stuff (primary_icons.i)
+    // "text/x-c" "text/x-c++"
+    // "text/x-chdr" "text/x-c++hdr"
+    // "application/x-trash" 
+    if (strcasecmp(text, "h")==0 || strcasecmp(text, "hpp")==0){
         add_color_pixbuf(pixbuf_icons_p, pixbuf_context, composite_pixbuf, 0xee, 0xd6, 0x80);
-    } else if (strcmp(text, "c")==0 || strcmp(text, "cpp")==0) {
+    } else if (strcasecmp(text, "c")==0 || strcasecmp(text, "cpp")==0) {
         add_color_pixbuf(pixbuf_icons_p, pixbuf_context, composite_pixbuf, 0x88, 0x7f, 0xa3);
+    }else if (strcasecmp(text, "bak")==0 || strcasecmp(text, "old")==0) {
+        add_color_pixbuf(pixbuf_icons_p, pixbuf_context, composite_pixbuf, 0x22, 0x22, 0x22);
     }
     add_label_pixbuf(pixbuf_icons_p, pixbuf_context, composite_pixbuf, text);
 
