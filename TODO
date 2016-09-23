@@ -1,8 +1,21 @@
+NEXT:
+     1-Label colors according to file MIMETYPE (C header and src colors)
+     2-Use a treemodel column for file extension for optimization
+     3-Use # for setting add_color_pixbuf() and use gray for hidden files
+     4-Use emblemized icon for trash/backup files
+     5-Use binary emblem for binary files or binary icon...
+
+    *6-Add filter to xfdir_local_c read, to filter out hidden/trash/backup or regex files.
+       This would require view_trash, view_hidden toggles and set_filter button.
+       When filter is applied, should be shown in status line
+     7-Add command dialog with activate 
+        (command from mime-command or user history)
+
+
+
 lpterm_c.cpp:
  * CTL callbacks...
  * icon selection by keyboard
-pathbar_c.cpp:
- * Go to module or top xffm level when dot button pressed
  pixbuf_hash_c.cpp
  * check, remake out of date thumbnails/previews as needed
  run_button_c.cpp
@@ -26,8 +39,5 @@ pathbar_c.cpp:
  * Drag and drop setup for iconview
  * Check which callbacks are necessary and which are not.
  xfdir_c.cpp
- * need to tag links to directories appropriately so that the icon
-   is correct. 
- * Icons which are links to directories must be placed next to directory icons
  * Activate a symlink to directory should not set realpath in pathbar
    nor in view_p->path
