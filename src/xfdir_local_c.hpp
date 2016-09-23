@@ -3,6 +3,13 @@
 #include "xfdir_c.hpp"
 #include "mime_c.hpp"
 
+typedef struct xd_t{
+    gchar *d_name;
+    unsigned char d_type;
+    struct stat st;
+    gchar *mimetype;
+}xd_t;
+
 class xfdir_local_c: public xfdir_c, virtual utility_c, protected mime_c  {
     public:
 	xfdir_local_c(const gchar *, gtk_c *);
@@ -11,11 +18,16 @@ class xfdir_local_c: public xfdir_c, virtual utility_c, protected mime_c  {
     private:
         GtkTreeModel *mk_tree_model(void);
         gint heartbeat;
-        GList *read_items (gint *heartbeat); 
+        GList *read_items (gint *); 
         void insert_list_into_model(GList *, GtkListStore *);
-	gchar *get_home_iconname(const gchar *data);
-	gchar *get_type_iconname(xd_t *xd_p);
-        gchar *get_stat_iconname(xd_t *, gboolean);
+
+        gchar *get_iconname(xd_t *);
+        gchar *get_basic_iconname(xd_t *);
+        const gchar *get_mime_iconname(xd_t *);
+	gchar *get_emblem_string(xd_t *);
+
+	gchar *get_home_iconname(const gchar *);
+        GList *sort_directory_list(GList *);
         
 
 };

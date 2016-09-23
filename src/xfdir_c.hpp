@@ -23,12 +23,6 @@ enum
   BASIC_COLS
 };
 
-typedef struct xd_t{
-    gchar *d_name;
-    unsigned char d_type;
-    struct stat st;
-}xd_t;
-
 class xfdir_c: virtual utility_c {
     public:
         xfdir_c(const gchar *, gtk_c *);
