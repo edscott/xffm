@@ -1,4 +1,6 @@
 NEXT:
+mime object must be global to share hashtables!
+
      1-Label colors according to file MIMETYPE (C header and src colors)
      2-Use a treemodel column for file extension for optimization
      3-Use # for setting add_color_pixbuf() and use gray for hidden files

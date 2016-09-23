@@ -176,7 +176,7 @@ xfdir_local_c::sort_directory_list(GList *list){
                         xd_p->d_name, strerror(errno));
                 continue;
             } 
-            xd_p->mimetype = mime_type(xd_p->d_name, &(xd_p->st)); // using stat obtained above
+            xd_p->mimetype = gtk_p->mime_type(xd_p->d_name, &(xd_p->st)); // using stat obtained above
         }
     }
     // Default sort order:
@@ -226,7 +226,7 @@ xfdir_local_c::insert_list_into_model(GList *data, GtkListStore *list_store){
 	gchar *icon_name = get_iconname(xd_p);
         gchar *mimetype = (xd_p->mimetype)?
             g_strdup(xd_p->mimetype):
-            mime_type(xd_p->d_name); // plain extension mimetype
+            gtk_p->mime_type(xd_p->d_name); // plain extension mimetype
         
         // chop file extension (will now appear on the icon). (XXX only for big icons)
         if (S_ISREG(xd_p->st.st_mode) && !S_ISLNK(xd_p->st.st_mode)) {
@@ -421,13 +421,18 @@ xfdir_local_c::get_mime_iconname(xd_t *xd_p){
 
     if (xd_p->mimetype) {
         // here we should get generic-icon from mime-module.xml!
-        const gchar *basic = get_mimetype_iconname(xd_p->mimetype);
+        const gchar *basic = gtk_p->get_mimetype_iconname(xd_p->mimetype);
         //DBG("xfdir_local_c::get_mime_iconname(%s) -> %s\n", xd_p->mimetype, basic);
         if (basic) {
             // check if the pixbuf is actually available
             GdkPixbuf *pixbuf = gtk_p->get_pixbuf(basic,  GTK_ICON_SIZE_DIALOG);
             if (pixbuf) return basic;
-        }
+        } else {
+	    if (strstr(xd_p->mimetype, "text/html")){
+		return "text-html";
+	    }
+	}
+
 /*
          "image-x-generic";
          "audio-x-generic";

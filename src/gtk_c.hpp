@@ -4,9 +4,10 @@
 #include "utility_c.hpp"
 #include "tooltip_c.hpp"
 #include "pixbuf_c.hpp"
+#include "mime_c.hpp"
 #include "signal_action_c.hpp"
 
-class gtk_c: virtual utility_c, public tooltip_c, public pixbuf_c, public signal_action_c {
+class gtk_c: virtual utility_c, public tooltip_c, public pixbuf_c, public signal_action_c , public mime_c{
     public:
         gtk_c(GtkApplication *);
         ~gtk_c(void);
