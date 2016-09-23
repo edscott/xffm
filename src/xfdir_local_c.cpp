@@ -24,6 +24,24 @@ enum
   NUM_COLS
 };
 
+#define O_ALL(x) ((S_IROTH & x) && (S_IWOTH & x) &&  (S_IXOTH & x))
+#define G_ALL(x) ((S_IRGRP & x) && (S_IWGRP & x) &&  (S_IXGRP & x))
+#define U_ALL(x) ((S_IRUSR & x) && (S_IWUSR & x) &&  (S_IXUSR & x))
+#define O_RX(x) ((S_IROTH & x) &&  (S_IXOTH & x))
+#define G_RX(x) ((S_IRGRP & x) &&  (S_IXGRP & x))
+#define U_RX(x) ((S_IRUSR & x) &&  (S_IXUSR & x))
+#define O_RW(x) ((S_IROTH & x) && (S_IWOTH & x))
+#define G_RW(x) ((S_IRGRP & x) && (S_IWGRP & x))
+#define U_RW(x) ((S_IRUSR & x) && (S_IWUSR & x))
+#define O_RX(x) ((S_IROTH & x) && (S_IXOTH & x))
+#define G_RX(x) ((S_IRGRP & x) && (S_IXGRP & x))
+#define U_RX(x) ((S_IRUSR & x) && (S_IXUSR & x))
+#define O_R(x) (S_IROTH & x)
+#define G_R(x) (S_IRGRP & x)
+#define U_R(x) (S_IRUSR & x)
+#define MY_FILE(x) (x == geteuid())
+#define MY_GROUP(x) (x == getegid())
+
 
 static gint compare_by_name (const void *, const void *);
 
@@ -222,10 +240,13 @@ xfdir_local_c::insert_list_into_model(GList *data, GtkListStore *list_store){
         }
 	gchar *highlight_name;
         if (S_ISDIR(xd_p->st.st_mode)){
-            highlight_name = g_strdup("document-open");
-        } else {
             if (strcmp(xd_p->d_name, "..")==0) {
                 highlight_name = g_strdup("go-up");
+            } else highlight_name = g_strdup("document-open");
+        } else {
+            if (U_RX(xd_p->st.st_mode)) {
+                highlight_name = 
+                    g_strdup_printf("%s/NE/emblem-run/2.0/220", icon_name);
             } else {
                 highlight_name = 
                     g_strdup_printf("%s/NE/document-open/2.0/220", icon_name);
@@ -260,28 +281,13 @@ xfdir_local_c::insert_list_into_model(GList *data, GtkListStore *list_store){
 
 gchar *
 xfdir_local_c::get_emblem_string(xd_t *xd_p){
-#define O_ALL(x) ((S_IROTH & x) && (S_IWOTH & x) &&  (S_IXOTH & x))
-#define G_ALL(x) ((S_IRGRP & x) && (S_IWGRP & x) &&  (S_IXGRP & x))
-#define U_ALL(x) ((S_IRUSR & x) && (S_IWUSR & x) &&  (S_IXUSR & x))
-#define O_RX(x) ((S_IROTH & x) &&  (S_IXOTH & x))
-#define G_RX(x) ((S_IRGRP & x) &&  (S_IXGRP & x))
-#define U_RX(x) ((S_IRUSR & x) &&  (S_IXUSR & x))
-#define O_RW(x) ((S_IROTH & x) && (S_IWOTH & x))
-#define G_RW(x) ((S_IRGRP & x) && (S_IWGRP & x))
-#define U_RW(x) ((S_IRUSR & x) && (S_IWUSR & x))
-#define O_RX(x) ((S_IROTH & x) && (S_IXOTH & x))
-#define G_RX(x) ((S_IRGRP & x) && (S_IXGRP & x))
-#define U_RX(x) ((S_IRUSR & x) && (S_IXUSR & x))
-#define O_R(x) (S_IROTH & x)
-#define G_R(x) (S_IRGRP & x)
-#define U_R(x) (S_IRUSR & x)
-#define MY_FILE(x) (x == geteuid())
-#define MY_GROUP(x) (x == getegid())
     gchar *emblem = g_strdup("");
+    // No emblem for go up
+    if (strcmp(xd_p->d_name, "..")==0) return emblem;
     gchar *g;
     // Symlinks:
     if (S_ISLNK(xd_p->st.st_mode) || xd_p->d_type == DT_LNK) {
-        g = g_strconcat(g, "/SW/emblem-symbolic-link/2.0/220", NULL);
+        g = g_strconcat(emblem, "/SW/emblem-symbolic-link/2.0/220", NULL);
         g_free(emblem);
         emblem = g;
     }
@@ -338,9 +344,11 @@ xfdir_local_c::get_emblem_string(xd_t *xd_p){
                 || (MY_GROUP(xd_p->st.st_gid) && G_R(xd_p->st.st_mode)) 
                 || (MY_FILE(xd_p->st.st_uid) && U_R(xd_p->st.st_mode))){
                 g = g_strdup_printf("%s%s/SW/emblem-readonly/3.0/130", extension, emblem);
-        } else {
-            // no access:
+        } else if (S_ISREG(xd_p->st.st_mode)) {
+            // no access: (must be have stat info to get this emblem)
             g = g_strdup_printf("%s%s/SW/emblem-unreadable/3.0/180/C/face-angry/2.0/180", extension, emblem);
+        } else {
+            g = g_strdup_printf("%s", extension);
         }
         g_free(extension);
         g_free(emblem); 
@@ -355,11 +363,11 @@ xfdir_local_c::get_basic_iconname(xd_t *xd_p){
 
     // Directories:
     if (strcmp(xd_p->d_name, "..")==0) return  g_strdup("go-up");
-    if (S_ISDIR(xd_p->st.st_mode)) {
+    if (S_ISDIR(xd_p->st.st_mode) || xd_p->d_type == DT_DIR) {
 	if (strcmp(path, g_get_home_dir())==0) {
             return get_home_iconname(xd_p->d_name);
 	}
-        if (xd_p->d_type == DT_LNK) {
+    /*    if (xd_p->d_type == DT_LNK) {
 	    return  g_strdup("folder/SW/emblem-symbolic-link/2.0/220");
         } else {
             struct stat lst;
@@ -368,7 +376,7 @@ xfdir_local_c::get_basic_iconname(xd_t *xd_p){
 	            return  g_strdup("folder/SW/emblem-symbolic-link/2.0/220");
                 }
             }
-        }
+        }*/
 	return  g_strdup("folder");
     }
 
@@ -412,35 +420,41 @@ xfdir_local_c::get_mime_iconname(xd_t *xd_p){
     const gchar *basic = "text-x-generic";
 
     if (xd_p->mimetype) {
-        // FIXME:
         // here we should get generic-icon from mime-module.xml!
+        const gchar *basic = get_mimetype_iconname(xd_p->mimetype);
+        //DBG("xfdir_local_c::get_mime_iconname(%s) -> %s\n", xd_p->mimetype, basic);
+        if (basic) {
+            // check if the pixbuf is actually available
+            GdkPixbuf *pixbuf = gtk_p->get_pixbuf(basic,  GTK_ICON_SIZE_DIALOG);
+            if (pixbuf) return basic;
+        }
 /*
-        if (strstr(xd_p->st.mimetype, "") basic = "image-x-generic";
-        if (strstr(xd_p->st.mimetype, "") basic = "audio-x-generic";
-        if (strstr(xd_p->st.mimetype, "") basic = "font-x-generic";
-        if (strstr(xd_p->st.mimetype, "") basic = "package-x-generic";
-        if (strstr(xd_p->st.mimetype, "") basic = "video-x-generic";
-        if (strstr(xd_p->st.mimetype, "") basic = "x-office-address-book";
-        if (strstr(xd_p->st.mimetype, "") basic = "x-office-calendar";
-        if (strstr(xd_p->st.mimetype, "") basic = "x-office-document";
-        if (strstr(xd_p->st.mimetype, "") basic = "x-office-document-template";
-        if (strstr(xd_p->st.mimetype, "") basic = "x-office-drawing";
-        if (strstr(xd_p->st.mimetype, "") basic = "x-office-drawing-template";
-        if (strstr(xd_p->st.mimetype, "") basic = "x-office-presentation";
-        if (strstr(xd_p->st.mimetype, "") basic = "x-office-presentation-template";
-        if (strstr(xd_p->st.mimetype, "") basic = "x-office-spreadsheet";
-        if (strstr(xd_p->st.mimetype, "") basic = "x-office-spreadsheet-template";
-        if (strstr(xd_p->st.mimetype, "") basic = "text-html";
-        if (strstr(xd_p->st.mimetype, "") basic = "text-x-preview";
-        if (strstr(xd_p->st.mimetype, "") basic = "text-x-script";
-        if (strstr(xd_p->st.mimetype, "") basic = "application-x-executable";
-        if (strstr(xd_p->st.mimetype, "") basic = "application-certificate";
-        if (strstr(xd_p->st.mimetype, "") basic = "application-x-addon";
-        if (strstr(xd_p->st.mimetype, "") basic = "application-x-firmware";
-        if (strstr(xd_p->st.mimetype, "") basic = "x-package-repository";
+         "image-x-generic";
+         "audio-x-generic";
+         "font-x-generic";
+         "package-x-generic";
+         "video-x-generic";
+         "x-office-address-book";
+         "x-office-calendar";
+         "x-office-document";
+         "x-office-document-template";
+         "x-office-drawing";
+         "x-office-drawing-template";
+         "x-office-presentation";
+         "x-office-presentation-template";
+         "x-office-spreadsheet";
+         "x-office-spreadsheet-template";
+         "text-html";
+         "text-x-preview";
+         "text-x-script";
+         "application-x-executable";
+         "application-certificate";
+         "application-x-addon";
+         "application-x-firmware";
+         "x-package-repository";
 */
     }
-    return basic;
+    return  "text-x-generic";
 }
 
 

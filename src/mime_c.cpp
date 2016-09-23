@@ -66,6 +66,7 @@ mime_c::mime_c (void) {
     application_hash_text2 = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
     application_hash_output = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
     application_hash_output_ext = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
+    generic_icon_hash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
 
     if(!load_hashes_from_cache()) {
         DBG("mime_c:: now building hashes from scratch\n");
@@ -92,6 +93,7 @@ mime_c::~mime_c (void){
     g_hash_table_destroy(application_hash_text2);
     g_hash_table_destroy(application_hash_output);
     g_hash_table_destroy(application_hash_output_ext);
+    g_hash_table_destroy(generic_icon_hash);
     
     pthread_mutex_destroy(&cache_mutex);
     pthread_mutex_destroy(&mimetype_hash_mutex);
@@ -746,6 +748,16 @@ mime_c::mime_build_hashes (void) {
 		    g_free (alias_key);
 		    continue;
 		}
+                if(xmlStrEqual (subnode->name, (const xmlChar *)"generic-icon")) {
+                    value = xmlGetProp (subnode, (const xmlChar *)"name");
+		    if(value && strlen((const gchar *)value)) {
+			g_hash_table_replace (generic_icon_hash, 
+                                g_strdup(type), g_strdup((const gchar *)value));
+                        //DBG("hashing %s --> %s\n", type, (const gchar *)value);
+		    }
+		    g_free (value);
+		    continue;
+		}
                 if(xmlStrEqual (subnode->name, (const xmlChar *)"application")) {
                     int i;
                     value = xmlGetProp (subnode, (const xmlChar *)"command");
@@ -977,6 +989,7 @@ mime_c::generate_caches (void) {
     save_text_cache(application_hash_text2,"application_hash_text2");
     save_text_cache(application_hash_output,"application_hash_output");
     save_text_cache(application_hash_output_ext,"application_hash_output_ext");
+    save_text_cache(generic_icon_hash,"generic_icon_hash");
     save_text_cache(alias_hash,"alias_hash");
 
     gchar *cache_path = get_cache_path ("sfx");
@@ -1195,6 +1208,11 @@ mime_c::mimetype2(const gchar *file){
     return NULL;
 }
 
+const gchar *
+mime_c::get_mimetype_iconname(const gchar *mimetype){
+    return (const gchar *)
+        g_hash_table_lookup(generic_icon_hash, mimetype);
+}
 
 
 gchar *

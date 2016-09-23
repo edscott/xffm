@@ -36,6 +36,8 @@ class mime_c: virtual utility_c {
         const gchar *mime_command_icon (gchar *p);
         const gchar *mime_command_output (gchar *p);
         const gchar *mime_command_output_ext (gchar *p);
+        const gchar *get_mimetype_iconname(const gchar *);
+        
         gchar *mime_command (const char *p);
         gchar **mime_apps (const char *p);
         void *mime_add (gchar *, gchar *);
@@ -61,6 +63,7 @@ class mime_c: virtual utility_c {
         GHashTable *application_hash_text2;
         GHashTable *application_hash_output;
         GHashTable *application_hash_output_ext;
+        GHashTable *generic_icon_hash;
 
         gboolean load_hashes_from_cache(void);
         long long read_cache_sum (void);
