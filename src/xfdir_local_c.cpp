@@ -244,16 +244,19 @@ xfdir_local_c::insert_list_into_model(GList *data, GtkListStore *list_store){
                 highlight_name = g_strdup("go-up");
             } else highlight_name = g_strdup("document-open");
         } else {
+            gchar *h_name = get_iconname(xd_p, FALSE);
             if (U_RX(xd_p->st.st_mode)) {
                 highlight_name = 
-                    g_strdup_printf("%s/NE/emblem-run/2.0/220", icon_name);
+                    g_strdup_printf("%s/NE/emblem-run/2.0/220", h_name);
             } else {
                 highlight_name = 
-                    g_strdup_printf("%s/NE/document-open/2.0/220", icon_name);
+                    g_strdup_printf("%s/NE/document-open/2.0/220", h_name);
             }
+            g_free(h_name);
         }
        
         GdkPixbuf *normal_pixbuf = gtk_p->get_pixbuf(icon_name,  get_icon_size(xd_p->d_name));
+        //GdkPixbuf *highlight_pixbuf = gtk_p->get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);
         GdkPixbuf *highlight_pixbuf = gtk_p->get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);
         gtk_list_store_set (list_store, &iter, 
 		DISPLAY_NAME, utf_name,
@@ -281,18 +284,33 @@ xfdir_local_c::insert_list_into_model(GList *data, GtkListStore *list_store){
 
 gchar *
 xfdir_local_c::get_emblem_string(xd_t *xd_p){
+    return get_emblem_string(xd_p, TRUE);
+}
+
+gchar *
+xfdir_local_c::get_emblem_string(xd_t *xd_p, gboolean use_lite){
     gchar *emblem = g_strdup("");
     // No emblem for go up
     if (strcmp(xd_p->d_name, "..")==0) return emblem;
     gchar *g;
     // Symlinks:
     if (S_ISLNK(xd_p->st.st_mode) || xd_p->d_type == DT_LNK) {
+        if (xd_p->d_name[0] == '.') {
+            g = g_strconcat(emblem, "#888888", NULL); 
+            g_free(emblem); 
+            emblem = g;
+        }
         g = g_strconcat(emblem, "/SW/emblem-symbolic-link/2.0/220", NULL);
         g_free(emblem);
         emblem = g;
     }
 
     if (S_ISDIR(xd_p->st.st_mode) || xd_p->d_type == DT_DIR){
+        if (xd_p->d_name[0] == '.') {
+            g = g_strconcat(emblem, "#888888", NULL); 
+            g_free(emblem); 
+            emblem = g;
+        }
         // all access:
         if (O_ALL(xd_p->st.st_mode)){
             g = g_strconcat(emblem, "/C/face-surprise/2.0/180", NULL);
@@ -317,48 +335,69 @@ xfdir_local_c::get_emblem_string(xd_t *xd_p){
     
 
     else if (S_ISREG(xd_p->st.st_mode) || xd_p->d_type == DT_REG){
+        guchar red;
+        guchar green;
+        guchar blue;
+        gchar *colors = g_strdup("");
+        if (xd_p->d_name[0] == '.') {
+            g = g_strconcat(emblem, "#888888", NULL); 
+            g_free(emblem); 
+            emblem = g;
+        } else if (gtk_p->get_lite_colors(xd_p->mimetype, &red, &green, &blue)){
+            g_free(colors);
+            colors = g_strdup_printf("#%02x%02x%02x", red, green, blue);
+        }
         gchar *extension = g_strdup("");
         if (strchr(xd_p->d_name, '.') && strchr(xd_p->d_name, '.') != xd_p->d_name) {
             extension = g_strconcat("*", strrchr(xd_p->d_name, '.')+1, NULL) ;
         }
         // all access:
         if (O_ALL(xd_p->st.st_mode) || O_RW(xd_p->st.st_mode)){
-                g = g_strdup_printf("%s%s/C/face-surprise/2.0/180/SW/emblem-exec/3.0/180", extension, emblem);
+                g = g_strdup_printf("%s%s%s/C/face-surprise/2.0/180/NW/emblem-exec/3.0/180",
+                        extension, colors, emblem);
 	// read/write/exec
         } else if((MY_GROUP(xd_p->st.st_gid) && G_ALL(xd_p->st.st_mode)) 
                 || (MY_FILE(xd_p->st.st_uid) && U_ALL(xd_p->st.st_mode))){
-                g = g_strdup_printf("%s%s/SW/emblem-exec/3.0/180", extension, emblem);
+                g = g_strdup_printf("%s%s%s/NW/emblem-exec/3.0/180", 
+                        extension, colors, emblem);
 	// read/exec
         } else if (O_RX(xd_p->st.st_mode)
 		||(MY_GROUP(xd_p->st.st_gid) && G_RX(xd_p->st.st_mode)) 
                 || (MY_FILE(xd_p->st.st_uid) && U_RX(xd_p->st.st_mode))){
-                g = g_strdup_printf("%s%s/SW/emblem-exec/3.0/180", extension, emblem);
+                g = g_strdup_printf("%s%s%s/NW/emblem-exec/3.0/180", 
+                        extension, colors, emblem);
 
 	// read/write
         } else if ((MY_GROUP(xd_p->st.st_gid) && G_RW(xd_p->st.st_mode))
                 || (MY_FILE(xd_p->st.st_uid) && U_RW(xd_p->st.st_mode))) {
-                g = g_strdup_printf("%s%s", extension, emblem);
+                g = g_strdup_printf("%s%s%s", 
+                        extension, colors, emblem);
 
         // read only:
         } else if (O_R(xd_p->st.st_mode) 
                 || (MY_GROUP(xd_p->st.st_gid) && G_R(xd_p->st.st_mode)) 
                 || (MY_FILE(xd_p->st.st_uid) && U_R(xd_p->st.st_mode))){
-                g = g_strdup_printf("%s%s/SW/emblem-readonly/3.0/130", extension, emblem);
+                g = g_strdup_printf("%s%s%s/NW/emblem-readonly/3.0/130", 
+                        extension, colors, emblem);
         } else if (S_ISREG(xd_p->st.st_mode)) {
             // no access: (must be have stat info to get this emblem)
-            g = g_strdup_printf("%s%s/SW/emblem-unreadable/3.0/180/C/face-angry/2.0/180", extension, emblem);
+            g = g_strdup_printf("%s%s%s/NW/emblem-unreadable/3.0/180/C/face-angry/2.0/180", 
+                    extension, colors, emblem);
         } else {
-            g = g_strdup_printf("%s", extension);
+            g = g_strdup_printf("%s%s", 
+                    extension, colors);
         }
         g_free(extension);
         g_free(emblem); 
         emblem = g;
-        const gchar *lite_emblem = gtk_p->get_lite_emblem(xd_p->mimetype);
-        if (lite_emblem){
-            g = g_strconcat(emblem, "/NE/", lite_emblem, "/1.8/200", NULL); 
-            g_free(emblem); 
-            emblem = g;
-        }
+        if (use_lite) {
+            const gchar *lite_emblem = gtk_p->get_lite_emblem(xd_p->mimetype);
+            if (lite_emblem){
+                g = g_strconcat(emblem, "/NE/", lite_emblem, "/1.8/200", NULL); 
+                g_free(emblem); 
+                emblem = g;
+            }
+        } 
     }
     return emblem;
 }
@@ -468,11 +507,15 @@ xfdir_local_c::get_mime_iconname(xd_t *xd_p){
     return  "text-x-generic";
 }
 
-
 gchar *
 xfdir_local_c::get_iconname(xd_t *xd_p){
+    return get_iconname(xd_p, TRUE);
+}
+
+gchar *
+xfdir_local_c::get_iconname(xd_t *xd_p, gboolean use_lite){
     gchar *name = get_basic_iconname(xd_p);
-    gchar *emblem = get_emblem_string(xd_p);
+    gchar *emblem = get_emblem_string(xd_p, use_lite);
     gchar *iconname = g_strconcat(name, emblem, NULL);
     g_free(name);
     g_free(emblem);

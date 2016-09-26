@@ -21,9 +21,11 @@ class xfdir_local_c: public xfdir_c, virtual utility_c  {
         void insert_list_into_model(GList *, GtkListStore *);
 
         gchar *get_iconname(xd_t *);
+        gchar *get_iconname(xd_t *, gboolean);
         gchar *get_basic_iconname(xd_t *);
         const gchar *get_mime_iconname(xd_t *);
 	gchar *get_emblem_string(xd_t *);
+	gchar *get_emblem_string(xd_t *, gboolean);
 
 	gchar *get_home_iconname(const gchar *);
         GList *sort_directory_list(GList *);

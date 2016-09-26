@@ -18,11 +18,10 @@ class pixbuf_icons_c: public pixbuf_cairo_c, virtual utility_c {
     protected:
         GThread *self;
         void threadwait (void);
-	gboolean insert_pixbuf_tag (GdkPixbuf *, GdkPixbuf *, const gchar *, const gchar *, const gchar *);
     private:
         void init_lite_hash (void);
-        GtkIconTheme *icon_theme;
         GdkPixbuf *pixbuf_new_from_file (const gchar *, gint, gint);
+        GtkIconTheme *icon_theme;
         pthread_mutex_t pixbuf_mutex;
 
 };

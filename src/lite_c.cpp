@@ -51,11 +51,12 @@ lite_t lite_v[]={
     {"lite/trash", N_("trash"), "emblem-bak", 0x22, 0x22, 0x22},
     {"lite/pdf", N_("pdf"), "emblem-pdf", 0xaa, 0xdd, 0xcc},
     {"lite/ps", N_("ps"), "emblem-print", 0xaa, 0xdd, 0xcc},
-    {"lite/msoffice", N_("msoffice"), "emblem-msoffice", 0x44, 0x44, 0x44},
-    {"lite/package", N_("package"), "emblem-package", 0xaa, 0, 0},
-    {"lite/executable", N_("executable"), "emblem-exec", 0xaa, 0xff, 0xaa},
-    {"lite/script", N_("script"), "emblem-script", 0xaa, 0xff, 0xaa},
-    {"lite/core", N_("core"), "emblem-core", 0xaa, 0xaa, 0xaa},
+    {"lite/msoffice", N_("msoffice"), "emblem-msoffice",  0xaa, 0xdd, 0xcc},
+    {"lite/package", N_("package"), NULL, 0x88, 0x44, 0x44},
+//    {"lite/package", N_("package"), "emblem-package", 0xaa, 0, 0},
+//    {"lite/executable", N_("executable"), "emblem-exec", 0xaa, 0xff, 0xaa},
+//    {"lite/script", N_("script"), "emblem-script", 0xaa, 0xff, 0xaa},
+    {"lite/core", N_("core"), "emblem-core", 0xaa, 0, 0},
     {NULL,NULL,NULL, 0,0,0}
 };
 

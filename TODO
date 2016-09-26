@@ -1,8 +1,5 @@
 NEXT:
      1-Load mime hashes from disk currently broken and disabled.
-     3-Use # for setting add_color_pixbuf() and use gray for hidden files
-     4-Use emblemized icon for trash/backup files
-     5-Use binary emblem for binary files or binary icon...
 
     *6-Add filter to xfdir_local_c read, to filter out hidden/trash/backup or regex files.
        This would require view_trash, view_hidden toggles and set_filter button.
@@ -11,9 +8,6 @@ NEXT:
         (command from mime-command or user history)
 
 Pending:
-     1-Label colors according to file MIMETYPE (C header and src colors)
-       this is in pixbuf_icons_c, but mimetype is in xfdir_local_c
-       This will be solved on solving 3 above.
      2-Use a treemodel column for file extension for optimization
        (probably not necessary)
 
