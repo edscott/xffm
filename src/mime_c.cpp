@@ -101,6 +101,8 @@ mime_c::~mime_c (void){
     pthread_mutex_destroy(&application_hash_mutex);
 }
 
+
+
 gchar *
 mime_c::mime_magic(const gchar *file){
     gchar *unalias = mime_magic_unalias(file);
@@ -524,6 +526,9 @@ mime_c::mime_get_alias_type(const gchar *type){
 
 gboolean
 mime_c::load_hashes_from_cache (void) {
+    // FIXME: currently broken.
+    return FALSE;
+
     // test for cache regeneration
     // on regeneration we must:
     // 1- read cache

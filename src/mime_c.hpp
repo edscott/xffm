@@ -8,6 +8,7 @@
 
 #include "utility_c.hpp"
 #include "mime_magic_c.hpp"
+#include "lite_c.hpp"
 
 #define USER_RFM_DIR            g_get_user_config_dir(),"rfm"
 #define USER_RFM_CACHE_DIR      g_get_user_cache_dir(),"rfm"
@@ -17,7 +18,7 @@
 #define USER_APPLICATIONS 	USER_RFM_DIR,"user-applications.2"
 #define APPLICATION_MIME_FILE 	SYSTEM_MODULE_DIR,"mime-module.xml"
 
-class mime_c: virtual utility_c, public mime_magic_c {
+class mime_c: virtual utility_c, public mime_magic_c, public lite_c {
     public:
         mime_c(void);
         ~mime_c(void);

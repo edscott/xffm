@@ -353,6 +353,12 @@ xfdir_local_c::get_emblem_string(xd_t *xd_p){
         g_free(extension);
         g_free(emblem); 
         emblem = g;
+        const gchar *lite_emblem = gtk_p->get_lite_emblem(xd_p->mimetype);
+        if (lite_emblem){
+            g = g_strconcat(emblem, "/NE/", lite_emblem, "/1.8/200", NULL); 
+            g_free(emblem); 
+            emblem = g;
+        }
     }
     return emblem;
 }

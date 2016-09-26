@@ -1,6 +1,5 @@
 NEXT:
-     1-Use magic in mime-module (not currently enabled) This should fix more
-       icons.
+     1-Load mime hashes from disk currently broken and disabled.
      3-Use # for setting add_color_pixbuf() and use gray for hidden files
      4-Use emblemized icon for trash/backup files
      5-Use binary emblem for binary files or binary icon...
