@@ -1,11 +1,15 @@
 NEXT:
-     1-Load mime hashes from disk currently broken and disabled.
-
-    *6-Add filter to xfdir_local_c read, to filter out hidden/trash/backup or regex files.
-       This would require view_trash, view_hidden toggles and set_filter button.
-       When filter is applied, should be shown in status line
-     7-Add command dialog with activate 
+     1- Load mime hashes from disk currently broken and disabled.
+     2- tips with file information on mouse over
+     3- file previews on mouse over (need to enable preview_c class)
+     4- file filters for hidden/trash/backup or regex files.
+       (This would require view_trash, view_hidden toggles and set_filter
+       button. When filter is applied, should be shown in status line)
+     5-Add command dialog with activate 
         (command from mime-command or user history)
+     6- enable cp, mv DnD and cut-paste
+     7- Enable rm with del
+     8- put in popup menu
 
 Pending:
      2-Use a treemodel column for file extension for optimization
