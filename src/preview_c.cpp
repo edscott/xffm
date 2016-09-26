@@ -2,6 +2,7 @@
 #include "preview_c.hpp"
 
 
+
 static
 GdkPixbuf *
 fix_pixbuf_scale(GdkPixbuf *in_pixbuf){
