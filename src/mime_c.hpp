@@ -7,6 +7,7 @@
 #include "xffm+.h"
 
 #include "utility_c.hpp"
+#include "mime_magic_c.hpp"
 
 #define USER_RFM_DIR            g_get_user_config_dir(),"rfm"
 #define USER_RFM_CACHE_DIR      g_get_user_cache_dir(),"rfm"
@@ -16,12 +17,13 @@
 #define USER_APPLICATIONS 	USER_RFM_DIR,"user-applications.2"
 #define APPLICATION_MIME_FILE 	SYSTEM_MODULE_DIR,"mime-module.xml"
 
-class mime_c: virtual utility_c {
+class mime_c: virtual utility_c, public mime_magic_c {
     public:
         mime_c(void);
         ~mime_c(void);
         gchar *mime_type (const gchar *);
         gchar *mime_type (const gchar *, struct stat *);
+        gchar *mime_function(const gchar *, const gchar *);
 
 
 
@@ -53,6 +55,8 @@ class mime_c: virtual utility_c {
         pthread_mutex_t mimetype_hash_mutex;
         pthread_mutex_t alias_hash_mutex;
         pthread_mutex_t application_hash_mutex;
+        
+        gchar *mime_magic (const gchar *);
 
         GHashTable *mimetype_hash;
         GHashTable *alias_hash;

@@ -101,6 +101,13 @@ mime_c::~mime_c (void){
     pthread_mutex_destroy(&application_hash_mutex);
 }
 
+gchar *
+mime_c::mime_magic(const gchar *file){
+    gchar *unalias = mime_magic_unalias(file);
+    gchar *alias = mime_get_alias_type(unalias);
+    g_free(unalias);
+    return alias;
+}
 
 
 
@@ -202,47 +209,17 @@ mime_c::mime_type (const gchar *file, struct stat *st_p) {
 	return g_strdup("text/plain");
     }
 
-    TRACE ("mime_type(): Could not locate mimetype for %s\n", file);
+    return mime_magic(file);
 
-    return NULL;
-}
-
-//FIXME: inherit from this class
-/*
-void *
-mime_c::mime_magic (void *p) {
-    if (!p) return NULL;
-    return rfm_natural(RFM_MODULE_DIR, "mimemagic", p, "mime_magic");
-}
-
- 
-void *
-mime_c::mime_encoding (void *p) {
-    if (!p) return NULL;
-    return rfm_natural(RFM_MODULE_DIR, "mimemagic", p, "mime_encoding");
-}
- 
-void *
-mime_c::mime_file (void *p) {
-    if (!p) return NULL;
-    gchar *info = rfm_natural(RFM_MODULE_DIR, "mimemagic", p, "mime_file");
-    // Sun virtual disk mime type text has <> which screws up markup:
-    gchar *f=info; for(;f && *f; f++){
-        if (*f == '<' || *f == '>') *f =' ';
-    }
-
-    return info;
 }
 
 
-void *
+gchar *
 mime_c::mime_function(const gchar *path, const gchar *function) {
     if (!path || !function) return NULL;
-    //if (!IS_LOCAL_TYPE(en->type)) return g_strdup(_("unknown"));
-
 
     if (strcmp(function, "mime_file")==0) {
-	return mime_file(path);
+	return g_strdup(mime_file(path));
     }
     if (strcmp(function, "mime_encoding")==0) {
 	return mime_encoding(path);
@@ -252,7 +229,7 @@ mime_c::mime_function(const gchar *path, const gchar *function) {
     }
     return NULL;
 }
-*/
+
 
 
 

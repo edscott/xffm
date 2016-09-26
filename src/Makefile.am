@@ -36,6 +36,7 @@ xffm_SOURCES = \
 	    xfdir_root_c.cpp \
 	    xfdir_local_c.cpp \
 	      mime_c.cpp \
+		mime_magic_c.cpp \
 	  gtk_c.cpp \
 	    signal_action_c.cpp \
 	    tooltip_c.cpp \
