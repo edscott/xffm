@@ -3,10 +3,9 @@
 #include <unistd.h>
 #include <pthread.h>
 #include <time.h>
-#include <math.h>
+#include <iostream>
 
 #include "pixbuf_hash_c.hpp"
-#include <iostream>
 using namespace std;
 
 
@@ -26,7 +25,6 @@ typedef struct pixbuf_t {
 } pixbuf_t;
 
 static void free_pixbuf_t(void *);
-static void *insert_decoration_f (void *);
 
 pixbuf_hash_c::pixbuf_hash_c(void){
     pixbuf_hash = 
@@ -267,29 +265,11 @@ GdkPixbuf *
 pixbuf_hash_c::find_in_pixbuf_hash(const gchar *icon_name, gint size){
     if (!icon_name) return NULL;
 
-    // FIXME: check, remake out of date thumbnails/previews as needed 
    
     GdkPixbuf *pixbuf = lookup_icon(icon_name, size);
     if (pixbuf) return pixbuf;
 
-    // Not found, huh?
-    // no pixbuf found. Create one and put in hashtable.
-    pixbuf = absolute_path_icon(icon_name, size);
-
-    if (!pixbuf){
-        // check for composite icon definition or plain icon.
-        if (is_composite_icon_name(icon_name)) pixbuf = composite_icon(icon_name, size);
-        else pixbuf = get_theme_pixbuf(icon_name, size);
-        put_in_pixbuf_hash(icon_name, size, pixbuf);
-    }
-   
-    if (pixbuf){
-        // put in iconhash...
-        put_in_pixbuf_hash(icon_name, size, pixbuf);
-        return pixbuf;
-    } 
     return NULL;
-    //return find_in_pixbuf_hash( "image-missing", size);
 }
 
 
@@ -310,286 +290,6 @@ pixbuf_hash_c::get_hash_key (const gchar * key, gint size) {
 }
 
 
-GdkPixbuf *
-pixbuf_hash_c::composite_icon(const gchar *icon_name, gint size){
-    // Preload and composite elements into pixbuf hash.
-    
-    if (!strchr(icon_name, '*') && !strchr(icon_name, '#') && !strchr(icon_name, '/')){
-        return NULL;
-    }
-
-    gchar *name = g_strdup(icon_name);
-    gchar *label = strchr(name, '*');
-    gchar *color = strchr(name, '#');
-    gchar *emblems = strchr(name, '/');
-    if (label){
-        *label=0;
-        label++;
-    }
-    if (color) {
-        *color = 0;
-        color++;
-    }
-    if (emblems) {
-        *emblems = 0;
-        emblems++;
-    }
-
-
-    TRACE("***getting pixbuf for %s at size %d (%s, %s, %s)\n", name, size, label, color, emblems);
-    GdkPixbuf *pixbuf = get_theme_pixbuf(name, size);
-
-
-    // Now decorate the pixbuf with label, color and emblems, if any.
-    if (label || color || emblems) {
-        void *arg[] = {(void *)this, (void *)pixbuf, (void *)label, (void *)color, (void *)emblems };
-        // Done by main gtk thread:
-        context_function(insert_decoration_f, arg);
-    }
-    
-
-    return pixbuf;
-}
-
-void
-pixbuf_hash_c::add_label_pixbuf(cairo_t *pixbuf_context, GdkPixbuf *pixbuf, const gchar *icon_text){
-    if (!icon_text || !pixbuf || !pixbuf_context) return;
-    // Insert text into pixbuf
-    gint x = 0;
-    gint y = 0;
-    const gchar *text_size = "small";
-    /*switch(size) {
-	case SMALL_ICON_SIZE: text_size="xx-small"; break;
-	case MEDIUM_ICON_SIZE: text_size="x-small"; break;
-	case BIG_ICON_SIZE: text_size="medium"; break;
-    }	
-    if (!text_size) return ;*/
-
-    GdkPixbuf   *t_pixbuf = NULL;
-    gchar *layout_text;
-        layout_text = g_strdup_printf("<span foreground=\"white\" background=\"black\" size=\"%s\">%s </span>", text_size, _(icon_text));
-
-    PangoContext *context = gdk_pango_context_get_for_screen (gdk_screen_get_default());
-
-    PangoLayout *layout = pango_layout_new (context);
-
-    //PangoLayout *layout = 
-//	gtk_widget_create_pango_layout (rfm_global_p->window, NULL);
-
-
-    pango_layout_set_markup(layout, layout_text, -1);
-    g_free(layout_text);
-    PangoRectangle logical_rect;
-    pango_layout_get_pixel_extents (layout, NULL, &logical_rect);
-    x = gdk_pixbuf_get_width(pixbuf) - logical_rect.width-2;
-    y = gdk_pixbuf_get_height(pixbuf) - logical_rect.height-2;
-    if (x < 0) x = 0;
-    if (y < 0) y = 0;
-    if (logical_rect.width > gdk_pixbuf_get_width(pixbuf)-1) 
-	logical_rect.width = gdk_pixbuf_get_width(pixbuf)-1;
-    if (logical_rect.height > gdk_pixbuf_get_height(pixbuf)-1) 
-	logical_rect.height = gdk_pixbuf_get_height(pixbuf)-1;
-
-    t_pixbuf =  
-	gdk_pixbuf_new(GDK_COLORSPACE_RGB, TRUE, 8, logical_rect.width+2, logical_rect.height+2);
-    cairo_t   *t_pixbuf_context = pixbuf_cairo_create(t_pixbuf);
-
-    cairo_rectangle(t_pixbuf_context, 0, 0, logical_rect.width+2, logical_rect.height+2);
-    cairo_clip(t_pixbuf_context);
-
-
-    cairo_move_to (t_pixbuf_context, 1, 1);
-	
-    cairo_set_source_rgba(t_pixbuf_context, 0, 0, 0, 1.0);
-    if (PANGO_IS_LAYOUT (layout)) {
-        pango_cairo_show_layout (t_pixbuf_context, layout);
-        g_object_unref(layout);
-        g_object_unref(context);
-    }
-    pixbuf_cairo_destroy(t_pixbuf_context, t_pixbuf);
-
-    if (t_pixbuf) {
-	gdk_cairo_set_source_pixbuf(pixbuf_context, t_pixbuf,x,y);
-	cairo_paint_with_alpha(pixbuf_context, 0.650);
-	g_object_unref(t_pixbuf);
-    }
-
-    return ;
-}
-
-void
-pixbuf_hash_c::add_color_pixbuf(cairo_t *pixbuf_context, GdkPixbuf *pixbuf, 
-	const gchar *color){
-    if (!pixbuf || !pixbuf_context) return;
-    gchar buf[3];
-    buf[2]=0;
-    buf[0]=color[0];
-    buf[1]=color[1];
-    glong r = strtol(buf, NULL, 16);  
-    buf[0]=color[2];
-    buf[1]=color[3];
-    glong g = strtol(buf, NULL, 16);  
-    buf[0]=color[4];
-    buf[1]=color[5];
-    glong b = strtol(buf, NULL, 16);  
-
-    guchar red = r;
-    guchar green = g;
-    guchar blue = b;
-    TRACE("pixbuf_hash_c::add_color_pixbuf: color %x,%x,%x\n", red, green, blue);  
-//    GdkPixbuf *pixbuf_mask = create_pixbuf_mask(pixbuf, 0x11, 0x11, 0x11);  
-    GdkPixbuf *pixbuf_mask = create_pixbuf_mask(pixbuf, red, green, blue);  
-    gdk_cairo_set_source_pixbuf(pixbuf_context, pixbuf_mask, 0,0);
-    cairo_paint_with_alpha(pixbuf_context, 0.450);
-    g_object_unref(pixbuf_mask);
-}
-
-
-void 
-pixbuf_hash_c::insert_pixbuf_tag (cairo_t *pixbuf_context, const gchar *emblem,
-        GdkPixbuf *composite_pixbuf,
-	const gchar *where, const gchar *scale, const gchar *alpha)
-{
-
-    GdkPixbuf *tag = find_in_pixbuf_hash (emblem, 48); 
-    if (!tag) {
-        fprintf(stderr, "pixbuf_hash_c::composite_icon(): Cannot get pixbuf for %s\n", emblem);
-        return ;
-    }
-
-   double scale_factor = strtod(scale, NULL);
-    if (isnan(scale_factor)) return ;
-    if (scale_factor < 1 || scale_factor > 5) return ;
-    errno = 0;
-    gint overall_alpha = strtol(alpha, NULL, 10);
-    if (errno){
-        g_warning("insert_pixbuf_tag_f(): strtol(%s) -> %s\n", alpha, strerror(errno));
-        return ;
-    }
-    
-    gdouble scale_x = 1.0 / (scale_factor);
-    gdouble scale_y = 1.0 / (scale_factor);
-    gint width = gdk_pixbuf_get_width(tag);
-    gint height = gdk_pixbuf_get_height(tag);
-
-    GdkPixbuf *tag_s = gdk_pixbuf_scale_simple(tag, 
-	    floor(scale_x*width), floor(scale_y*height),
-	    GDK_INTERP_BILINEAR);   
-
-
-    gint dest_width = gdk_pixbuf_get_width (composite_pixbuf);
-    gint dest_height = gdk_pixbuf_get_height (composite_pixbuf);
-    gint s_width = gdk_pixbuf_get_width (tag);
-    gint s_height = gdk_pixbuf_get_height (tag);
-
-    s_width = ((gdouble) s_width) * scale_x;
-    s_height = ((gdouble) s_height) * scale_y;
-
-    // default SW
-    gdouble offset_x = 0.0;
-    gdouble offset_y = dest_height - s_height;
-
-    if(strcmp (where, "SW") == 0) {
-        offset_x = 0.0;
-        offset_y = dest_height - s_height;
-    } 
-    else if(strcmp (where, "SE") == 0) {
-        offset_x = dest_width - s_width;
-        offset_y = dest_height - s_height;
-    } 
-    else if(strcmp (where, "S") == 0) {
-        offset_x = (dest_width - s_width) / 2;
-        offset_y = dest_height - s_height;
-    }
-    else if(strcmp (where, "NW") == 0) {
-        offset_x = 0.0;
-        offset_y = 0.0;
-    } 
-    else if(strcmp (where, "NE") == 0) {
-        offset_x = dest_width - s_width;
-        offset_y = 0.0;
-
-    } 
-    else if (strcmp (where, "N") == 0) {
-        offset_x = (dest_width - s_width) / 2;
-        offset_y = 0.0;
-    } 
-    else if(strcmp (where, "C") == 0) {
-        offset_x = (dest_width - s_width) / 2;
-        offset_y = (dest_height - s_height) / 2;
-    } 
-    else if (strcmp (where, "E") == 0) {
-        offset_x = dest_width - s_width;
-        offset_y = (dest_height - s_height) / 2;
-    } else if (strcmp (where, "W") == 0) {
-        offset_x = 0.0;
-        offset_y = (dest_height - s_height) / 2;
-    }
-    
-    // This proved necessary in opensuse-12.3,
-    // but not in gentoo nor ubuntu. Go figure...
-    //gdk_cairo_set_source_pixbuf(pixbuf_context, composite_pixbuf,0,0);
-    // cairo_paint_with_alpha(pixbuf_context, 1.0);
-	
-    gdk_cairo_set_source_pixbuf(pixbuf_context, tag_s, offset_x,offset_y);
-    cairo_paint_with_alpha(pixbuf_context, (double)overall_alpha/255.0);
-
-    g_object_unref(tag_s);
-    return ;
-}
-
-
 ///////////////////////////////////////////////////////////////////////////////
-
-
-
-static void *
-insert_decoration_f (void *data){
-    void **arg = (void **)data;
-    pixbuf_hash_c *pixbuf_hash_p =(pixbuf_hash_c *)arg[0];
-    GdkPixbuf *base_pixbuf = (GdkPixbuf *)arg[1];
-    const gchar *label = (const gchar *)arg[2];
-    const gchar *color = (const gchar *)arg[3];
-    const gchar *emblems = (const gchar *)arg[4];
-
-    cairo_t   *pixbuf_context = pixbuf_hash_p->pixbuf_cairo_create(base_pixbuf);
-    
-    gdk_cairo_set_source_pixbuf(pixbuf_context, base_pixbuf,0,0);
-    cairo_paint_with_alpha(pixbuf_context, 1.0);
-    if (color){
-        pixbuf_hash_p->add_color_pixbuf(pixbuf_context, base_pixbuf, color);
-    }
-
-    if (emblems){
-        gchar **tokens = g_strsplit(emblems, "/", -1);
-        if (!tokens) return NULL;
-        gchar **p = tokens;
-        // format: [icon_name/position/scale/alpha]
-        gint i;
-        for (p=tokens; p && *p; p += 4){
-            for (i=1; i<4; i++) if (*(p+i) == NULL) {
-                fprintf(stderr,
-                        "*** pixbuf_icons_c::composite_icon(): incorrect composite specification: %s\n %s\n",
-                        emblems,
-                        "*** (format: [[base_icon_name]/position/emblem_name/scale/alpha])");
-                g_strfreev(tokens);
-                return base_pixbuf;
-            }
-            gchar *position = p[0];
-            gchar *emblem = p[1];
-            gchar *scale = p[2];
-            gchar *alpha = p[3];
-            
-            pixbuf_hash_p->insert_pixbuf_tag (pixbuf_context, emblem, base_pixbuf, position, scale, alpha);
-        }
-        g_strfreev(tokens);
-    }
-    if (label){
-        pixbuf_hash_p->add_label_pixbuf(pixbuf_context, base_pixbuf, label);
-    }
-
-    pixbuf_hash_p->pixbuf_cairo_destroy(pixbuf_context, base_pixbuf);
-    return NULL;
-}
 
 

@@ -6,6 +6,7 @@
 #ifndef PREFIX
 # warning "PREFIX not defined!"
 #endif
+static void *insert_decoration_f (void *);
 
     
 pixbuf_icons_c::pixbuf_icons_c(void){
@@ -173,8 +174,106 @@ pixbuf_icons_c::pixbuf_new_from_file (const gchar *path, gint width, gint height
 }
 
 
+GdkPixbuf *
+pixbuf_icons_c::composite_icon(const gchar *icon_name, gint size){
+    // Preload and composite elements into pixbuf hash.
+    
+    if (!strchr(icon_name, '*') && !strchr(icon_name, '#') && !strchr(icon_name, '/')){
+        return NULL;
+    }
+
+    gchar *name = g_strdup(icon_name);
+    gchar *label = strchr(name, '*');
+    gchar *color = strchr(name, '#');
+    gchar *emblems = strchr(name, '/');
+    if (label){
+        *label=0;
+        label++;
+    }
+    if (color) {
+        *color = 0;
+        color++;
+    }
+    if (emblems) {
+        *emblems = 0;
+        emblems++;
+    }
+
+
+    TRACE("***getting pixbuf for %s at size %d (%s, %s, %s)\n", name, size, label, color, emblems);
+    GdkPixbuf *pixbuf = get_theme_pixbuf(name, size);
+
+
+    // Now decorate the pixbuf with label, color and emblems, if any.
+    if (label || color || emblems) {
+        void *arg[] = {(void *)this, (void *)pixbuf, (void *)label, (void *)color, (void *)emblems };
+        // Done by main gtk thread:
+        context_function(insert_decoration_f, arg);
+    }
+    
+
+    return pixbuf;
+}
+
+
 
 
 ////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+static void *
+insert_decoration_f (void *data){
+    void **arg = (void **)data;
+    pixbuf_icons_c *pixbuf_icons_p =(pixbuf_icons_c *)arg[0];
+    GdkPixbuf *base_pixbuf = (GdkPixbuf *)arg[1];
+    const gchar *label = (const gchar *)arg[2];
+    const gchar *color = (const gchar *)arg[3];
+    const gchar *emblems = (const gchar *)arg[4];
+
+    cairo_t   *pixbuf_context = pixbuf_icons_p->pixbuf_cairo_create(base_pixbuf);
+    
+    gdk_cairo_set_source_pixbuf(pixbuf_context, base_pixbuf,0,0);
+    cairo_paint_with_alpha(pixbuf_context, 1.0);
+    if (color){
+        pixbuf_icons_p->add_color_pixbuf(pixbuf_context, base_pixbuf, color);
+    }
+
+    if (emblems){
+        gchar **tokens = g_strsplit(emblems, "/", -1);
+        if (!tokens) return NULL;
+        gchar **p = tokens;
+        // format: [icon_name/position/scale/alpha]
+        gint i;
+        for (p=tokens; p && *p; p += 4){
+            for (i=1; i<4; i++) if (*(p+i) == NULL) {
+                fprintf(stderr,
+                        "*** pixbuf_icons_c::composite_icon(): incorrect composite specification: %s\n %s\n",
+                        emblems,
+                        "*** (format: [[base_icon_name]/position/emblem_name/scale/alpha])");
+                g_strfreev(tokens);
+                return base_pixbuf;
+            }
+            gchar *position = p[0];
+            gchar *emblem = p[1];
+            gchar *scale = p[2];
+            gchar *alpha = p[3];
+            GdkPixbuf *tag = pixbuf_icons_p->find_in_pixbuf_hash (emblem, 48);
+            if (!tag) tag = pixbuf_icons_p->get_theme_pixbuf(emblem, 48);
+            if (tag) {
+                pixbuf_icons_p->insert_pixbuf_tag (pixbuf_context, tag, base_pixbuf, position, scale, alpha);
+            } else {
+                DBG("insert_decoration_f(): Cannot get pixbuf for %s\n", emblem);
+            }
+        }
+        g_strfreev(tokens);
+    }
+    if (label){
+        pixbuf_icons_p->add_label_pixbuf(pixbuf_context, base_pixbuf, label);
+    }
+
+    pixbuf_icons_p->pixbuf_cairo_destroy(pixbuf_context, base_pixbuf);
+    return NULL;
+}
 
 

@@ -42,9 +42,9 @@ xffm_SOURCES = \
 	    signal_action_c.cpp \
 	    tooltip_c.cpp \
 	    pixbuf_c.cpp \
-		pixbuf_hash_c.cpp \
-		    pixbuf_icons_c.cpp \
-			pixbuf_cairo_c.cpp \
+		pixbuf_icons_c.cpp \
+		    pixbuf_hash_c.cpp \
+		    pixbuf_cairo_c.cpp \
 	  main.cpp
 
 xffm_CPPFLAGS = $(FLAGS) $(AM_CPPFLAGS)

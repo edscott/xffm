@@ -24,6 +24,9 @@ pixbuf_c::get_pixel_size(gint size){
     }
     return pixels;
 }
+
+    // FIXME: check, remake out of date thumbnails/previews as needed 
+
 // last reference to the returned pixbuf (if any) belongs to the
 // pixbuf hashtable.
 GdkPixbuf *
@@ -35,8 +38,29 @@ pixbuf_c::get_pixbuf(const gchar *icon_name, gint size){
     gint pixels = get_pixel_size(size);
     GdkPixbuf *pixbuf = find_in_pixbuf_hash(icon_name, pixels);
     if (pixbuf) return pixbuf;
-    return find_in_pixbuf_hash("image-missing", pixels);
+    // Not found, huh?
+    // Create one and put in hashtable.
+    pixbuf = absolute_path_icon(icon_name, pixels);
+
+    if (!pixbuf){
+        // check for composite icon definition or plain icon.
+        if (is_composite_icon_name(icon_name)) pixbuf = composite_icon(icon_name, pixels);
+        else pixbuf = get_theme_pixbuf(icon_name, pixels);
+    }
+   
+    if (pixbuf){
+        // put in iconhash...
+        put_in_pixbuf_hash(icon_name, pixels, pixbuf);
+        return pixbuf;
+    } 
+    pixbuf = find_in_pixbuf_hash("image-missing", pixels);
+    if (pixbuf) return pixbuf;
+    pixbuf = get_theme_pixbuf("image-missing", pixels);
+    if (pixbuf) put_in_pixbuf_hash(icon_name, pixels, pixbuf);
+
+    return pixbuf;
  }
+
 GdkPixbuf *
 pixbuf_c::find_pixbuf(const gchar *icon_name, gint size){
     gint pixels = get_pixel_size(size);

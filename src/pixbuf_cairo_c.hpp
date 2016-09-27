@@ -6,9 +6,14 @@
 
 class pixbuf_cairo_c {
     public:
-        cairo_t *pixbuf_cairo_create( GdkPixbuf *pixbuf); 
-        GdkPixbuf *pixbuf_cairo_destroy( cairo_t  *cr, GdkPixbuf *pixbuf);
-        GdkPixbuf *create_pixbuf_mask(GdkPixbuf *in_pixbuf, guchar red, guchar green, guchar blue);
+        cairo_t *pixbuf_cairo_create( GdkPixbuf *); 
+        GdkPixbuf *pixbuf_cairo_destroy( cairo_t  *, GdkPixbuf *);
+        GdkPixbuf *create_pixbuf_mask(GdkPixbuf *, guchar , guchar , guchar );
+        void add_color_pixbuf(cairo_t *, GdkPixbuf *, const gchar *);
+        void insert_pixbuf_tag (cairo_t *, GdkPixbuf *, GdkPixbuf *, 
+                const gchar *, const gchar *, const gchar *);
+        void add_label_pixbuf(cairo_t *, GdkPixbuf *, const gchar *);
+        
 };
 
 #endif

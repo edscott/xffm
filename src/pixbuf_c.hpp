@@ -2,9 +2,9 @@
 #define PIXBUF_C_HPP
 #include "xffm+.h"
 
-#include "pixbuf_hash_c.hpp"
+#include "pixbuf_icons_c.hpp"
 
-class pixbuf_c : protected pixbuf_hash_c {
+class pixbuf_c : protected pixbuf_icons_c {
     public:
 	GdkPixbuf *get_pixbuf(const gchar *, gint); // This will not return NULL
 	GdkPixbuf *find_pixbuf(const gchar *, gint);// This will return NULL on failure
