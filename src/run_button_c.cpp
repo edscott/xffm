@@ -42,7 +42,7 @@ run_button_c::run_button_c(void *data, const gchar * exec_command, pid_t child, 
     TRACE ("run_button_c::setup_run_button_thread: controller/process=%d/%d\n", (int)child, (gint)grandchild);
 
     view_c *view_p =(view_c *)view_v;
-    pthread_t *thread = view_p->thread_create("run_button_c::run_button_c: run_wait_f", 
+    view_p->thread_create("run_button_c::run_button_c: run_wait_f", 
             run_wait_f, (void *) this, FALSE);
 }
 
