@@ -47,7 +47,8 @@ class xfdir_c: virtual utility_c {
         GtkTreeModel *treemodel;
         gchar *path;
 	gtk_c *gtk_p;
-	gint dir_count;        
+	gint dir_count;   
+        //void tooltip(GtkIconView *, GtkTreePath *);   
     private:
         pthread_mutex_t population_mutex;
         pthread_cond_t population_cond;

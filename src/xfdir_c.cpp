@@ -32,6 +32,16 @@ xfdir_c::~xfdir_c(void){
     pthread_rwlock_destroy(&population_lock);
 }
 
+#if 0
+void
+xfdir_c::tooltip(GtkIconView *icon_view, GtkTreePath *tpath){
+    fprintf(stderr, "fallback tooltip callback in xfdir_c class\n");
+   /* gtk_icon_view_set_tooltip_item (icon_view,
+                                GtkTooltip *tooltip,
+                                tpath);*/
+    gtk_tree_path_free(tpath);
+#endif
+
 void
 xfdir_c::highlight(GtkTreePath *tpath){
         //TRACE("highlight %d, %d\n", highlight_x, highlight_y);

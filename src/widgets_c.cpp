@@ -99,6 +99,7 @@ widgets_c::create(void){
     g_object_set_data(G_OBJECT(diagnostics), "vpane", vpane);
 
     icon_view = GTK_ICON_VIEW(gtk_icon_view_new());
+    g_object_set_data(G_OBJECT(icon_view), "has-tooltip", GINT_TO_POINTER(TRUE));
     gtk_icon_view_set_item_width (icon_view, 60);
     gtk_icon_view_set_activate_on_single_click(icon_view, TRUE);
    

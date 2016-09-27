@@ -28,6 +28,13 @@ static void page_reordered (GtkNotebook *, GtkWidget *, guint, void *);
 static gboolean reorder_tab (GtkNotebook *, GtkDirectionType, gboolean , void *);
 static gboolean select_page (GtkNotebook *, gboolean , void *);
 static void switch_page (GtkNotebook *, GtkWidget *, guint, void *);
+static gboolean
+query_tooltip_f (GtkWidget  *widget,
+               gint        x,
+               gint        y,
+               gboolean    keyboard_mode,
+               GtkTooltip *tooltip,
+               gpointer    data);
 
 
 ////////////////////////////////////////
@@ -200,6 +207,7 @@ view_c::highlight(void){
 
 void 
 view_c::highlight(gdouble X, gdouble Y){
+    if (!xfdir_p) return; // avoid race condition here.
     highlight_x = X;
     highlight_y = Y;
     GtkTreeIter iter;
@@ -207,12 +215,20 @@ view_c::highlight(gdouble X, gdouble Y){
     GtkTreeModel *model = gtk_icon_view_get_model(iconview);
     
     GtkTreePath *tpath = gtk_icon_view_get_path_at_pos (iconview, X, Y); 
-    if (tpath) xfdir_p->highlight(tpath);
+    if (tpath) {
+        xfdir_p->highlight(tpath);
+        //xfdir_p->tooltip(iconview, gtk_tree_path_copy(tpath));
+    }
     else xfdir_p->clear_highlights();
 }
 
 void
 view_c::signals(void){
+    // iconview tooltips
+    g_signal_connect (get_clear_button(), "query-tooltip", 
+            G_CALLBACK (query_tooltip_f), (void *)this);
+
+
     // clear button:
     g_signal_connect (get_clear_button(), "clicked", 
             G_CALLBACK (clear_text_f), (void *)this);
@@ -580,4 +596,38 @@ switch_page (GtkNotebook *notebook,
     view_p->set_application_icon(new_page);
 }
 
+static gboolean
+query_tooltip_f (GtkWidget  *widget,
+               gint        x,
+               gint        y,
+               gboolean    keyboard_mode,
+               GtkTooltip *tooltip,
+               gpointer    data){
+    view_c *view_p = (view_c *)data;
+    return view_p->query_tooltip(tooltip, x, y);
+}
+
+// FIXME: not working as expected...
+gboolean
+view_c::query_tooltip(GtkTooltip *tooltip, gint x, gint y){
+    DBG("view_c::query_tooltip\n");
+    // return TRUE shows, FALSE does not
+ 
+    // get tooltip window here
+    // gtk_widget_set_tooltip_window (GtkWidget *widget, GtkWindow *custom_window);
+    GtkTreePath *tpath = gtk_icon_view_get_path_at_pos (GTK_ICON_VIEW(get_iconview()), x, y); 
+    if (!tpath) return FALSE;
+
+    gtk_icon_view_set_tooltip_item (GTK_ICON_VIEW(get_iconview()), tooltip, tpath);
+    GtkWidget *tt_window = get_gtk_p()->create_tooltip_window(get_iconview(), 
+                tt_window, 
+                get_gtk_p()->get_pixbuf("broken", GTK_ICON_SIZE_DIALOG),    //const GdkPixbuf *, 
+                "<b>markup</b>", 
+                "label_text");
+    get_gtk_p()->set_tt_window(tt_window);
+    
+    gtk_widget_set_tooltip_window (get_iconview(), GTK_WINDOW(tt_window));
+    gtk_tree_path_free(tpath);
+    return TRUE;
+}   
 
