@@ -43,18 +43,6 @@ thread_control_c::inc_dec_view_ref(gboolean increment){
     pthread_mutex_unlock(&inc_dec_mutex);
 }
 
-static void *
-wait_f(void *data){
-    void **argv = (void **)data;
-    thread_control_c *thread_control_p = (thread_control_c *)argv[0];
-    pthread_t *thread = (pthread_t *)argv[1];
-    g_free(argv);
-    void *retval;
-    pthread_join(*thread, &retval);
-    thread_control_p->thread_unreference(thread);
-    return NULL;
-}
-
 
 void
 thread_control_c::thread_unreference(pthread_t *thread){
@@ -93,6 +81,7 @@ thread_control_c::thread_unreference(pthread_t *thread){
     pthread_mutex_unlock(&reference_mutex);
 
 #endif
+    g_free(thread);
 }
 
 void
@@ -112,6 +101,22 @@ thread_control_c::thread_reference(pthread_t *thread, const gchar *dbg_text){
 #endif
 }
 
+typedef struct wait_t{
+    thread_control_c *thread_control_p;
+    pthread_t *thread;
+}wait_t;
+
+static void *
+wait_f(void *data){
+    wait_t *wait_p =(wait_t *)data;
+    void *retval;
+    pthread_join(*(wait_p->thread), &retval);
+    wait_p->thread_control_p->thread_unreference(wait_p->thread);
+    g_slice_free(wait_t, wait_p);
+    return NULL;
+}
+
+
 // If view is NULL, the lock is on the window, not any particular view.
 pthread_t *
 thread_control_c::thread_create(const gchar *dbg_text, void *(*thread_f)(void *), void *data, gboolean joinable)
@@ -121,23 +126,28 @@ thread_control_c::thread_create(const gchar *dbg_text, void *(*thread_f)(void *)
 
     pthread_t *thread = (pthread_t *)calloc(1, sizeof(pthread_t));
     if (!thread) return NULL;
+
+// FIXME: memleak of thread and wait_thread???
     gint retval = pthread_create(thread, NULL, thread_f, data);
+    thread_reference(thread, dbg_text);
     if (retval){
         g_warning("thread_control_c::thread_create(): %s\n", strerror(retval));
         g_free(thread);
         return NULL;
     }
     if (joinable){
-	thread_reference(thread, dbg_text);
-        pthread_t *wait_thread = (pthread_t *)calloc(1, sizeof(pthread_t));
-	void **arg = (void **)calloc(2, sizeof(void *));
-	arg[0] = (void *)this;
-	arg[1] = (void *)thread;
-	pthread_create (wait_thread, NULL, wait_f, arg);
-	thread_reference(wait_thread, "wait_thread");
-        pthread_detach(*wait_thread);
+//        pthread_t *wait_thread = (pthread_t *)calloc(1, sizeof(pthread_t));  // leak?
+        pthread_t wait_thread; 
+        wait_t *wait_p = g_slice_new(wait_t);
+        wait_p->thread_control_p = this;
+        wait_p->thread = thread;
+        
+	pthread_create (&wait_thread, NULL, wait_f, (void *)wait_p);
+	//thread_reference(wait_thread, "wait_thread");
+        pthread_detach(wait_thread);
     } else {
         pthread_detach(*thread);
+	thread_unreference(thread); // this frees
     }
 
     return thread;
