@@ -32,6 +32,11 @@ xfdir_c::~xfdir_c(void){
     pthread_rwlock_destroy(&population_lock);
 }
 
+gchar *
+xfdir_c::get_tip_text (const gchar *file_path, GtkTreePath *tpath ) {
+    return g_strdup("xfdir_c::get_tip_text not overridden!\n");
+}
+
 #if 0
 void
 xfdir_c::tooltip(GtkIconView *icon_view, GtkTreePath *tpath){

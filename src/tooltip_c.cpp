@@ -47,7 +47,7 @@ tooltip_c::shadow_it(const GdkPixbuf *src_pixbuf){
     return shadowed;
 }
 
-// sets cool tooltip gradient...
+// sets cool tooltip gradient... 3.20 at least. for 3.16, method in librfm
 void 
 tooltip_c::set_box_gradient(GtkWidget *wbox){
     
@@ -59,17 +59,12 @@ tooltip_c::set_box_gradient(GtkWidget *wbox){
     GError *error=NULL;
     gtk_css_provider_load_from_data (css_provider, 
 "\
-GtkEntry  {\
-    background-image: -gtk-gradient (linear, left top, right top, from (#888), to (#666));\
-    color: rgb(250,250,250);\
-    text-shadow: 0px 1px 0 black;\
-}\
-GtkBox,GtkEventBox,GtkFrame {\
-background-image: -gtk-gradient (linear, left top, right top, from (#aaa), to (#000));\
-color: rgb(255, 255, 255);\
-border-width: 0px;\
-border-radius: 0px;\
-border-color: transparent;\
+box * {\
+  background-image: -gtk-gradient (linear, left top, right top, from (#aaa), to (#000));\
+  color: rgb(255, 255, 255);\
+  border-width: 0px;\
+  border-radius: 0px;\
+  border-color: transparent;\
 }\
 ", 
         -1, &error);

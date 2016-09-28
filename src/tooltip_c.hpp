@@ -22,6 +22,7 @@ class tooltip_c {
         void custom_tooltip(GtkWidget *,
                 GdkPixbuf *, 
                 const gchar *);
+        void set_box_gradient(GtkWidget *wbox);
 
     protected:
         
@@ -29,7 +30,6 @@ class tooltip_c {
         GHashTable *tooltip_text_hash;
         GtkWidget *tt_window = NULL;
         GdkPixbuf *shadow_it(const GdkPixbuf *);
-        void set_box_gradient(GtkWidget *wbox);
         void tooltip_placement_bug_workaround(GtkWidget *);
 
         gboolean tooltip_is_mapped;

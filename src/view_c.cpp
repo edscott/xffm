@@ -610,7 +610,6 @@ query_tooltip_f (GtkWidget  *widget,
 
 gboolean
 view_c::query_tooltip(GtkTooltip *tooltip, gint x, gint y){
-    DBG("view_c::query_tooltip: %d,%d\n", x,y);
     // return TRUE shows, FALSE does not
  
     // get tooltip window here

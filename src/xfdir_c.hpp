@@ -30,6 +30,8 @@ class xfdir_c: virtual utility_c {
         virtual void reload(const gchar *)=0;
 	virtual const gchar *get_xfdir_iconname(void)=0;
         virtual void item_activated (GtkIconView *, GtkTreePath *, void *);
+
+        virtual gchar *get_tip_text (const gchar *, GtkTreePath *);
 	
 	gint get_dir_count(void);
         GtkTreeModel *get_tree_model(void);
