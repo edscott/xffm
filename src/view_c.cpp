@@ -163,6 +163,7 @@ view_c::set_treemodel(xfdir_c *data){
     gtk_icon_view_set_text_column (GTK_ICON_VIEW(get_iconview()), xfdir_p->get_text_column());
     gtk_icon_view_set_pixbuf_column (GTK_ICON_VIEW(get_iconview()),  xfdir_p->get_icon_column());
     gtk_icon_view_set_selection_mode (GTK_ICON_VIEW(get_iconview()), GTK_SELECTION_MULTIPLE);
+    //gtk_icon_view_set_tooltip_column (GTK_ICON_VIEW(get_iconview()),3);
     set_view_details();
     //gtk_widget_show(GTK_WIDGET(get_iconview()));
     DBG("set_treemodel done\n");
@@ -225,7 +226,7 @@ view_c::highlight(gdouble X, gdouble Y){
 void
 view_c::signals(void){
     // iconview tooltips
-    g_signal_connect (get_clear_button(), "query-tooltip", 
+    g_signal_connect (get_iconview(), "query-tooltip", 
             G_CALLBACK (query_tooltip_f), (void *)this);
 
 
@@ -607,10 +608,9 @@ query_tooltip_f (GtkWidget  *widget,
     return view_p->query_tooltip(tooltip, x, y);
 }
 
-// FIXME: not working as expected...
 gboolean
 view_c::query_tooltip(GtkTooltip *tooltip, gint x, gint y){
-    DBG("view_c::query_tooltip\n");
+    DBG("view_c::query_tooltip: %d,%d\n", x,y);
     // return TRUE shows, FALSE does not
  
     // get tooltip window here
