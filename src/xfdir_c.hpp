@@ -17,8 +17,10 @@ enum
   DISPLAY_PIXBUF,
   NORMAL_PIXBUF,
   HIGHLIGHT_PIXBUF,
+  TOOLTIP_PIXBUF,
   DISPLAY_NAME,
   ACTUAL_NAME,
+  TOOLTIP_TEXT,
   ICON_NAME,
   BASIC_COLS
 };
@@ -31,7 +33,13 @@ class xfdir_c: virtual utility_c {
 	virtual const gchar *get_xfdir_iconname(void)=0;
         virtual void item_activated (GtkIconView *, GtkTreePath *, void *);
 
-        virtual gchar *get_tip_text (const gchar *, GtkTreePath *);
+        virtual gchar *get_tip_text (GtkTreePath *);
+        virtual gchar *get_verbatim_name (GtkTreePath *);
+        GdkPixbuf *get_normal_pixbuf(GtkTreePath *);
+        GdkPixbuf *get_tooltip_pixbuf(GtkTreePath *);
+        void set_tooltip_pixbuf(GtkTreePath *, GdkPixbuf *);
+        gchar *get_tooltip_text(GtkTreePath *);
+        void set_tooltip_text(GtkTreePath *,const  gchar *);
 	
 	gint get_dir_count(void);
         GtkTreeModel *get_tree_model(void);

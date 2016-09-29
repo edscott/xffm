@@ -7,10 +7,11 @@
 #include "print_c.hpp"
 #include "xfdir_c.hpp"
 #include "thread_control_c.hpp"
+#include "utility_c.hpp"
 
 
 
-class view_c:public widgets_c, public thread_control_c {
+class view_c:public widgets_c, public thread_control_c, virtual utility_c {
     public:
         view_c(void *, GtkNotebook *);
         ~view_c(void);

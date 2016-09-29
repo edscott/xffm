@@ -618,11 +618,24 @@ view_c::query_tooltip(GtkTooltip *tooltip, gint x, gint y){
     if (!tpath) return FALSE;
 
     gtk_icon_view_set_tooltip_item (GTK_ICON_VIEW(get_iconview()), tooltip, tpath);
+
+    gchar *text = xfdir_p->get_tip_text(tpath);
+    gchar *vname = xfdir_p->get_verbatim_name(tpath);
+    gchar *u = utf_string(vname);
+    g_free(vname);
+    gchar *markup = g_strdup_printf("<b>%s</b>", u);
+    g_free(u);
+
+    GdkPixbuf *pixbuf = xfdir_p->get_tooltip_pixbuf(tpath);
+    if (!pixbuf) pixbuf = xfdir_p->get_normal_pixbuf(tpath); 
+    
     GtkWidget *tt_window = get_gtk_p()->create_tooltip_window(get_iconview(), 
                 tt_window, 
-                get_gtk_p()->get_pixbuf("broken", GTK_ICON_SIZE_DIALOG),    //const GdkPixbuf *, 
-                "<b>markup</b>", 
-                "label_text");
+                pixbuf,    //const GdkPixbuf *, 
+                text,
+                markup);
+    g_free(text);
+    g_free(markup);
     get_gtk_p()->set_tt_window(tt_window);
     
     gtk_widget_set_tooltip_window (get_iconview(), GTK_WINDOW(tt_window));

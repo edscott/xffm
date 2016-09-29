@@ -33,8 +33,74 @@ xfdir_c::~xfdir_c(void){
 }
 
 gchar *
-xfdir_c::get_tip_text (const gchar *file_path, GtkTreePath *tpath ) {
+xfdir_c::get_tip_text (GtkTreePath *tpath ) {
     return g_strdup("xfdir_c::get_tip_text not overridden!\n");
+}
+
+gchar *
+xfdir_c::get_verbatim_name (GtkTreePath *tpath ) {
+    GtkTreeIter iter;
+    gchar *verbatim_name=NULL;
+    gtk_tree_model_get_iter (treemodel, &iter, tpath);
+    gtk_tree_model_get (treemodel, &iter, 
+            DISPLAY_NAME, &verbatim_name, -1);
+    return verbatim_name;
+}
+
+
+GdkPixbuf *
+xfdir_c::get_normal_pixbuf (GtkTreePath *tpath ) {
+    GtkTreeIter iter;
+    GdkPixbuf *pixbuf=NULL;
+    gtk_tree_model_get_iter (treemodel, &iter, tpath);
+    gtk_tree_model_get (treemodel, &iter, 
+            NORMAL_PIXBUF, &pixbuf, -1);
+    return pixbuf;
+}
+
+GdkPixbuf *
+xfdir_c::get_tooltip_pixbuf (GtkTreePath *tpath ) {
+    GtkTreeIter iter;
+    GdkPixbuf *pixbuf=NULL;
+    gtk_tree_model_get_iter (treemodel, &iter, tpath);
+    gtk_tree_model_get (treemodel, &iter, 
+            TOOLTIP_PIXBUF, &pixbuf, -1);
+    return pixbuf;
+}
+
+gchar *
+xfdir_c::get_tooltip_text (GtkTreePath *tpath ) {
+    GtkTreeIter iter;
+    gchar *text=NULL;
+    gtk_tree_model_get_iter (treemodel, &iter, tpath);
+    gtk_tree_model_get (treemodel, &iter, 
+            TOOLTIP_TEXT, &text, -1);
+    return text;
+}
+
+
+
+void
+xfdir_c::set_tooltip_pixbuf (GtkTreePath *tpath, GdkPixbuf *pixbuf ) {
+    GtkTreeIter iter;
+    gtk_tree_model_get_iter (treemodel, &iter, tpath);
+    gtk_list_store_set (GTK_LIST_STORE(treemodel), &iter,
+            TOOLTIP_PIXBUF, pixbuf, 
+        -1);
+
+    return ;
+}
+
+
+void
+xfdir_c::set_tooltip_text (GtkTreePath *tpath, const gchar *text ) {
+    GtkTreeIter iter;
+    gtk_tree_model_get_iter (treemodel, &iter, tpath);
+    gtk_list_store_set (GTK_LIST_STORE(treemodel), &iter,
+            TOOLTIP_TEXT, text, 
+        -1);
+
+    return ;
 }
 
 #if 0

@@ -35,9 +35,7 @@ xffm_SOURCES = \
 	  xfdir_c.cpp \
 	    xfdir_root_c.cpp \
 	    xfdir_local_c.cpp \
-	      mime_c.cpp \
-		mime_magic_c.cpp \
-		lite_c.cpp \
+                local_file_info_c.cpp \
 	  gtk_c.cpp \
 	    signal_action_c.cpp \
 	    tooltip_c.cpp \
@@ -45,6 +43,9 @@ xffm_SOURCES = \
 		pixbuf_icons_c.cpp \
 		    pixbuf_hash_c.cpp \
 		    pixbuf_cairo_c.cpp \
+	    mime_c.cpp \
+		mime_magic_c.cpp \
+		lite_c.cpp \
 	  main.cpp
 
 xffm_CPPFLAGS = $(FLAGS) $(AM_CPPFLAGS)
