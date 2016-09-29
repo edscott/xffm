@@ -9,6 +9,7 @@ static void on_new_page(GtkWidget *, gpointer);
 static void on_go_home(GtkWidget *, gpointer);
 static gboolean window_keyboard_event (GtkWidget *, GdkEventKey *, gpointer);
 static void destroy(GtkWidget *, gpointer);
+static gboolean window_tooltip_f(GtkWidget  *, gint, gint, gboolean, GtkTooltip *, gpointer);
 
 
 window_c::window_c(gtk_c *data) {
@@ -19,6 +20,9 @@ window_c::window_c(gtk_c *data) {
     view_list_mutex = PTHREAD_MUTEX_INITIALIZER;
     utility_p = new utility_c();
     window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+    gtk_widget_set_has_tooltip (window, TRUE);
+    g_signal_connect (G_OBJECT (window), "query-tooltip", G_CALLBACK (window_tooltip_f), NULL);
+    
     g_signal_connect (window, "key-press-event", G_CALLBACK (window_keyboard_event), (void *)this);
     gtk_window_set_title (GTK_WINDOW (window), "Xffm+");
     gtk_container_set_border_width (GTK_CONTAINER (window), 0);
@@ -189,3 +193,14 @@ destroy(GtkWidget *window, void *data){
     gtk_application_remove_window (window_p->get_gtk_p()->get_app(), GTK_WINDOW(window_p->get_window()));
 }
 
+static gboolean
+window_tooltip_f (GtkWidget  *widget,
+               gint        x,
+               gint        y,
+               gboolean    keyboard_mode,
+               GtkTooltip *tooltip,
+               gpointer    data){
+    DBG("window_tooltip_f now...\n");
+    gtk_tooltip_set_text (tooltip, "hello world");
+    return TRUE;
+}
