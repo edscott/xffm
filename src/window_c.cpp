@@ -14,6 +14,7 @@ static gboolean window_tooltip_f(GtkWidget  *, gint, gint, gboolean, GtkTooltip 
 
 window_c::window_c(gtk_c *data) {
     view_list=NULL;
+    tpath_string=NULL;
     if (data) {gtk_p = data;}
     else {throw 1;}
 
@@ -74,8 +75,18 @@ window_c::~window_c(void) {
     delete utility_p;
 }
 
+void 
+window_c::reset_tpath_string(const gchar *data){
+    g_free(tpath_string);
+    tpath_string = g_strdup(data);
+    return;
+}
+    
 gtk_c *
 window_c::get_gtk_p(void){return gtk_p;}
+
+const gchar *
+window_c::get_tpath_string(void){return tpath_string;}
 
 void
 window_c::add_view_to_list(void *view_p) {
@@ -202,5 +213,5 @@ window_tooltip_f (GtkWidget  *widget,
                gpointer    data){
     DBG("window_tooltip_f now...\n");
     gtk_tooltip_set_text (tooltip, "hello world");
-    return TRUE;
+    return FALSE;
 }

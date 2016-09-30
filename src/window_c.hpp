@@ -18,10 +18,16 @@ class window_c {
         gboolean is_view_in_list(void *);
         void add_view_to_list(void *);
         void remove_view_from_list(void *);
+
+	void reset_tpath_string(const gchar *);
+	const gchar * get_tpath_string(void);
+	
     private:
         GtkNotebook *notebook;
         GtkWidget *window;
         GtkWidget *new_tab_button;
+	
+	gchar *tpath_string;
 
         utility_c *utility_p;
         gtk_c *gtk_p;
