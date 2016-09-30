@@ -34,7 +34,7 @@ class view_c:public widgets_c, public thread_control_c, virtual utility_c {
         void clear_diagnostics(void);
         void clear_status(void);
         void root(void);
-        gboolean query_tooltip(GtkTooltip *, gint, gint);
+        void setup_tooltip(gint, gint);
 
     protected:
 	// This class is base for none

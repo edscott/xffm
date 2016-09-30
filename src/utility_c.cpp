@@ -12,6 +12,29 @@ utility_c::utility_c(void){
 utility_c::~utility_c(void){
 }
 
+gchar *
+utility_c::wrap_utf_string(const gchar *data, gint length){
+    gchar *u;
+    if (!g_utf8_validate (data, -1, NULL)){
+        u = utf_string(data);
+    } else {
+        u = g_strdup(data);
+    }
+    gchar *uu = NULL;
+    gint i;for (i=0; i<g_utf8_strlen(u, -1); i += length){
+        gchar *xu = g_utf8_substring (u, i, i+length);
+        if (!uu) uu = g_strdup(xu);
+        else { 
+            gchar *g = g_strconcat(uu,"\n",xu,NULL);
+            g_free(xu);
+            g_free(uu);
+            uu = g;
+        }
+    }
+    g_free(u);
+    return uu;
+}
+
 static gboolean
 context_function_f(gpointer data){
     void **arg = (void **)data;

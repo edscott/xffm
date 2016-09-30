@@ -33,8 +33,14 @@ xfdir_c::~xfdir_c(void){
 }
 
 gchar *
-xfdir_c::get_tip_text (GtkTreePath *tpath ) {
-    return g_strdup("xfdir_c::get_tip_text not overridden!\n");
+xfdir_c::make_tooltip_text (GtkTreePath *tpath ) {
+    gchar *tt_text;
+    GtkTreeIter iter;
+    gtk_tree_model_get_iter (treemodel, &iter, tpath);
+    gtk_tree_model_get (treemodel, &iter, 
+            COL_TOOLTIP_TEXT, &tt_text, -1);
+    
+    return g_strdup("xfdir_c::tooltip_text not defined in treemodel!\n");
 }
 
 gchar *
@@ -43,7 +49,7 @@ xfdir_c::get_verbatim_name (GtkTreePath *tpath ) {
     gchar *verbatim_name=NULL;
     gtk_tree_model_get_iter (treemodel, &iter, tpath);
     gtk_tree_model_get (treemodel, &iter, 
-            DISPLAY_NAME, &verbatim_name, -1);
+            ACTUAL_NAME, &verbatim_name, -1);
     return verbatim_name;
 }
 

@@ -25,6 +25,25 @@ enum
   BASIC_COLS
 };
 
+enum
+{
+  COL_DISPLAY_PIXBUF,
+  COL_NORMAL_PIXBUF,
+  COL_HIGHLIGHT_PIXBUF,
+  COL_TOOLTIP_PIXBUF,
+  COL_DISPLAY_NAME,
+  COL_ACTUAL_NAME,
+  COL_TOOLTIP_TEXT,
+  COL_ICON_NAME,
+  COL_MODE,
+  COL_MIMETYPE, 
+  COL_STAT,
+  COL_PREVIEW_PATH,
+  COL_PREVIEW_TIME,
+  COL_PREVIEW_PIXBUF,
+  NUM_COLS
+};
+
 class xfdir_c: virtual utility_c {
     public:
         xfdir_c(const gchar *, gtk_c *);
@@ -33,7 +52,7 @@ class xfdir_c: virtual utility_c {
 	virtual const gchar *get_xfdir_iconname(void)=0;
         virtual void item_activated (GtkIconView *, GtkTreePath *, void *);
 
-        virtual gchar *get_tip_text (GtkTreePath *);
+        virtual gchar *make_tooltip_text (GtkTreePath *);
         virtual gchar *get_verbatim_name (GtkTreePath *);
         GdkPixbuf *get_normal_pixbuf(GtkTreePath *);
         GdkPixbuf *get_tooltip_pixbuf(GtkTreePath *);

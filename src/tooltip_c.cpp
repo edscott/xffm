@@ -13,8 +13,6 @@ tooltip_c::~tooltip_c(void){
     tooltip_text_hash = NULL;
     delete utility_p;
 }
-void 
-tooltip_c::set_tt_window(GtkWidget *data){tt_window = data;}
 
 GtkWidget * 
 tooltip_c::get_tt_window(void){return tt_window;}
@@ -130,45 +128,31 @@ tooltip_map (GtkWidget *window, gpointer data){
 }
 
 
-// FIXME: this dual behaviour is too hacky...
-//
-// If you just want the frame (as if to put in the properties dialog)
-// call this function with widget set to NULL. Frame is what this function
-// returns.
-// If widget is not NULL, then the gtk tooltip  for the widget is set to the
-// window created by this function.
-//
+
 GtkWidget *
-tooltip_c::create_tooltip_window(GtkWidget *widget, GtkWidget *tooltip_window, const GdkPixbuf *pixbuf, const gchar *markup, const gchar *label_text){
-    if (widget) {
-      gtk_widget_set_has_tooltip (widget, TRUE);
-      if (!tooltip_window) {
-        tooltip_window = gtk_window_new(GTK_WINDOW_POPUP);
+tooltip_c::get_tt_window(const GdkPixbuf *pixbuf, const gchar *markup, const gchar *label_text){
+    if (!tt_window) {
+        tt_window = gtk_window_new(GTK_WINDOW_POPUP);
         //NOOP(stderr, "New tooltip window now...\n");
-        g_signal_connect (G_OBJECT (tooltip_window), "map", G_CALLBACK (tooltip_map), (void *)this);
-        g_signal_connect (G_OBJECT (tooltip_window), "unmap", G_CALLBACK (tooltip_unmap), (void *)this);
-        gtk_window_set_type_hint (GTK_WINDOW (tooltip_window), GDK_WINDOW_TYPE_HINT_TOOLTIP);
-        gtk_widget_set_app_paintable (tooltip_window, TRUE);
-        gtk_window_set_resizable (GTK_WINDOW (tooltip_window), FALSE);
-        gtk_widget_set_name (tooltip_window, "gtk-tooltip");  
-
-
-      } else {
+        g_signal_connect (G_OBJECT (tt_window), "map", G_CALLBACK (tooltip_map), (void *)this);
+        g_signal_connect (G_OBJECT (tt_window), "unmap", G_CALLBACK (tooltip_unmap), (void *)this);
+        gtk_window_set_type_hint (GTK_WINDOW (tt_window), GDK_WINDOW_TYPE_HINT_TOOLTIP);
+        gtk_widget_set_app_paintable (tt_window, TRUE);
+        gtk_window_set_resizable (GTK_WINDOW (tt_window), FALSE);
+        gtk_widget_set_name (tt_window, "gtk-tooltip");  
+    } else {
         GtkWidget *old_content = 
-            gtk_bin_get_child(GTK_BIN(tooltip_window));
-        gtk_container_remove(GTK_CONTAINER(tooltip_window), old_content);
-      }
+            gtk_bin_get_child(GTK_BIN(tt_window));
+        gtk_container_remove(GTK_CONTAINER(tt_window), old_content);
     }
 
     GtkWidget *vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 2);
     gtk_widget_show(vbox);
 
-    if (widget){
-        GtkWidget *top_frame = gtk_frame_new(NULL);
-        gtk_widget_show(top_frame);
-	gtk_container_add (GTK_CONTAINER (tooltip_window), top_frame);
-        gtk_container_add (GTK_CONTAINER (top_frame), vbox);
-    }
+    GtkWidget *top_frame = gtk_frame_new(NULL);
+    gtk_widget_show(top_frame);
+    gtk_container_add (GTK_CONTAINER (tt_window), top_frame);
+    gtk_container_add (GTK_CONTAINER (top_frame), vbox);
 
     GtkWidget *wbox  = gtk_event_box_new();
     gtk_container_add (GTK_CONTAINER (vbox), wbox);
@@ -181,11 +165,8 @@ tooltip_c::create_tooltip_window(GtkWidget *widget, GtkWidget *tooltip_window, c
 	gtk_widget_show(label);
 	gchar *utf_text =  utility_p->utf_string (label_text);
 	gchar *label_markup;
-	if (widget) {
-	    label_markup = g_strdup_printf("<span color=\"yellow\" font_family=\"monospace\" weight=\"bold\"> %s </span>",utf_text); 
-	} else {
-	    label_markup = g_strdup_printf("<span color=\"yellow\" font_family=\"monospace\" size=\"larger\" weight=\"bold\"> %s </span>\n",utf_text); 
-	}
+        label_markup = 
+            g_strdup_printf("<span color=\"yellow\" font_family=\"monospace\" weight=\"bold\"> %s </span>",utf_text); 
 	gtk_label_set_markup(GTK_LABEL(label), label_markup);
 	g_free(utf_text);
 	g_free(label_markup);
@@ -217,40 +198,32 @@ tooltip_c::create_tooltip_window(GtkWidget *widget, GtkWidget *tooltip_window, c
     if (markup) {
 	GtkWidget *label = gtk_label_new("");	
 	gtk_label_set_line_wrap(GTK_LABEL(label), TRUE);
-	if (widget) {
-	    gchar *small = g_strdup_printf("<span  color=\"white\" size=\"smaller\"> %s </span>", markup);
-	    gtk_label_set_markup(GTK_LABEL(label), small);
-	    g_free(small);
+        gchar *small = g_strdup_printf("<span  color=\"white\" size=\"smaller\"> %s </span>", markup);
+        gtk_label_set_markup(GTK_LABEL(label), small);
+        g_free(small);
 
-	} else {
-	    gtk_label_set_markup(GTK_LABEL(label), markup);
-	}
 	gtk_box_pack_start(GTK_BOX(box),label,TRUE,TRUE,0);
 	gtk_widget_show(label);
     }
                                                       
     gtk_widget_show(box);
-    if (widget) {
-	g_object_set_data(G_OBJECT(tooltip_window), "box", box); 
-	g_object_set_data(G_OBJECT(tooltip_window), "image", tip_image); 
-	g_object_set_data(G_OBJECT(tooltip_window), "pixbuf", (void *)pixbuf); 
-	gint width = 0;
-	gint height = 0;
-	if (pixbuf) {
-	    width = gdk_pixbuf_get_width(pixbuf);
-	    height = gdk_pixbuf_get_height(pixbuf);
-	}
-	g_object_set_data(G_OBJECT(tooltip_window), "width", GINT_TO_POINTER(width)); 
-	g_object_set_data(G_OBJECT(tooltip_window), "height", GINT_TO_POINTER(height)); 
-
-	gtk_widget_set_tooltip_window (widget, GTK_WINDOW(tooltip_window));
-	gtk_widget_realize(tooltip_window);
-        set_box_gradient(wbox);
-        tooltip_placement_bug_workaround(tooltip_window);
-	return tooltip_window;
+    g_object_set_data(G_OBJECT(tt_window), "box", box); 
+    g_object_set_data(G_OBJECT(tt_window), "image", tip_image); 
+    g_object_set_data(G_OBJECT(tt_window), "pixbuf", (void *)pixbuf); 
+    gint width = 0;
+    gint height = 0;
+    if (pixbuf) {
+        width = gdk_pixbuf_get_width(pixbuf);
+        height = gdk_pixbuf_get_height(pixbuf);
     }
+    g_object_set_data(G_OBJECT(tt_window), "width", GINT_TO_POINTER(width)); 
+    g_object_set_data(G_OBJECT(tt_window), "height", GINT_TO_POINTER(height)); 
+
+    //gtk_widget_set_tt_window (widget, GTK_WINDOW(tt_window));
+    gtk_widget_realize(tt_window);
     set_box_gradient(wbox);
-    return vbox;
+    tooltip_placement_bug_workaround(tt_window);
+    return tt_window;
 }
 
 
@@ -285,8 +258,9 @@ widget_tooltip_function(
 	    tooltip_text = strchr(tooltip_text, '\n') + 1;
 	}
     }
-    tt_window = tooltip_p->create_tooltip_window(widget, tt_window, tooltip_pixbuf, tooltip_text, label_text);
-    tooltip_p->set_tt_window(tt_window);
+    tt_window = tooltip_p->get_tt_window(tooltip_pixbuf, tooltip_text, label_text);
+
+    gtk_widget_set_tooltip_window (widget, GTK_WINDOW(tt_window));
 
     g_object_set_data(G_OBJECT(tt_window), "tooltip_target", widget);
 

@@ -14,7 +14,8 @@ static gboolean window_tooltip_f(GtkWidget  *, gint, gint, gboolean, GtkTooltip 
 
 window_c::window_c(gtk_c *data) {
     view_list=NULL;
-    tpath_string=NULL;
+    tt_window=NULL;
+    tooltip_path_string = NULL;
     if (data) {gtk_p = data;}
     else {throw 1;}
 
@@ -22,7 +23,7 @@ window_c::window_c(gtk_c *data) {
     utility_p = new utility_c();
     window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
     gtk_widget_set_has_tooltip (window, TRUE);
-    g_signal_connect (G_OBJECT (window), "query-tooltip", G_CALLBACK (window_tooltip_f), NULL);
+    g_signal_connect (G_OBJECT (window), "query-tooltip", G_CALLBACK (window_tooltip_f), (void *)this);
     
     g_signal_connect (window, "key-press-event", G_CALLBACK (window_keyboard_event), (void *)this);
     gtk_window_set_title (GTK_WINDOW (window), "Xffm+");
@@ -75,18 +76,39 @@ window_c::~window_c(void) {
     delete utility_p;
 }
 
-void 
-window_c::reset_tpath_string(const gchar *data){
-    g_free(tpath_string);
-    tpath_string = g_strdup(data);
+const gchar *
+window_c::get_tooltip_path_string(void){
+    return (const gchar *)tooltip_path_string;
+}
+
+void
+window_c::set_tooltip_path_string(const gchar *data){
+    g_free(tooltip_path_string);
+    if (data){
+        tooltip_path_string = g_strdup(data);
+    } else {
+        tooltip_path_string = NULL;
+    }
+}
+
+void
+window_c::set_tt_window(GtkWidget *data, const gchar *data2){
+    if (data2) tooltip_path_string = g_strdup(data2);
+    set_tooltip_path_string(data2);
+    tt_window = data;
+    gtk_widget_set_tooltip_window (window, GTK_WINDOW(tt_window));
     return;
 }
+
+GtkWidget * 
+window_c::get_tt_window(void){
+    return tt_window;
+}
+
     
 gtk_c *
 window_c::get_gtk_p(void){return gtk_p;}
 
-const gchar *
-window_c::get_tpath_string(void){return tpath_string;}
 
 void
 window_c::add_view_to_list(void *view_p) {
@@ -211,7 +233,10 @@ window_tooltip_f (GtkWidget  *widget,
                gboolean    keyboard_mode,
                GtkTooltip *tooltip,
                gpointer    data){
-    DBG("window_tooltip_f now...\n");
-    gtk_tooltip_set_text (tooltip, "hello world");
-    return FALSE;
+    window_c *window_p = (window_c *)data;
+    GtkWidget *tt_window = window_p->get_tt_window();
+
+    gtk_widget_set_tooltip_window (GTK_WIDGET(window_p->get_window()), GTK_WINDOW(tt_window));
+    if (!tt_window) return FALSE;
+    return TRUE;
 }

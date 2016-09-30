@@ -8,25 +8,6 @@
 
 #define MAX_AUTO_STAT 500
 
-enum
-{
-  COL_DISPLAY_PIXBUF,
-  COL_NORMAL_PIXBUF,
-  COL_HIGHLIGHT_PIXBUF,
-  COL_TOOLTIP_PIXBUF,
-  COL_DISPLAY_NAME,
-  COL_ACTUAL_NAME,
-  COL_TOOLTIP_TEXT,
-  COL_ICON_NAME,
-  COL_MODE,
-  COL_MIMETYPE, 
-  COL_STAT,
-  COL_PREVIEW_PATH,
-  COL_PREVIEW_TIME,
-  COL_PREVIEW_PIXBUF,
-  NUM_COLS
-};
-
 #define O_ALL(x) ((S_IROTH & x) && (S_IWOTH & x) &&  (S_IXOTH & x))
 #define G_ALL(x) ((S_IRGRP & x) && (S_IWGRP & x) &&  (S_IXGRP & x))
 #define U_ALL(x) ((S_IRUSR & x) && (S_IWUSR & x) &&  (S_IXUSR & x))
@@ -49,13 +30,13 @@ enum
 static gint compare_by_name (const void *, const void *);
 
 xfdir_local_c::xfdir_local_c(const gchar *data, gtk_c *data_gtk_c): 
-    xfdir_c(data, data_gtk_c)
+    xfdir_c(data, data_gtk_c), local_file_info_c(data_gtk_c)
 {
     treemodel = mk_tree_model();
 }
 
 gchar *
-xfdir_local_c::get_tip_text (GtkTreePath *tpath) {
+xfdir_local_c::make_tooltip_text (GtkTreePath *tpath) {
     if (!tpath) return g_strdup("tpath is NULL\n");
 
     gchar *text = get_tooltip_text(tpath);

@@ -21,9 +21,12 @@ xfdir_root_c::mk_tree_model (void)
 	    GDK_TYPE_PIXBUF, // icon in display
 	    GDK_TYPE_PIXBUF, // normal icon reference
 	    GDK_TYPE_PIXBUF, // highlight icon reference
+	    GDK_TYPE_PIXBUF, // preview, tooltip image (cache)
 	    G_TYPE_STRING,   // name in display (UTF-8)
 	    G_TYPE_STRING,   // name from filesystem (verbatim)
-	    G_TYPE_STRING);   // icon identifier (name or composite key)
+	    G_TYPE_STRING,   // tooltip text (cache)
+	    G_TYPE_STRING   // icon identifier (name or composite key)
+	    ); // Preview pixbuf
             
     DBG("mk_tree_model:: model = %p\n", list_store);
     // Root
@@ -43,6 +46,8 @@ xfdir_root_c::mk_tree_model (void)
 	    DISPLAY_PIXBUF, normal_pixbuf,
 	    NORMAL_PIXBUF, normal_pixbuf,
             HIGHLIGHT_PIXBUF, highlight_pixbuf,
+            TOOLTIP_TEXT,_("This is the root of the filesystem"),
+
 	    -1);
     g_free(utf_name);
 
@@ -62,6 +67,7 @@ xfdir_root_c::mk_tree_model (void)
 	    DISPLAY_PIXBUF, normal_pixbuf,
 	    NORMAL_PIXBUF, normal_pixbuf,
             HIGHLIGHT_PIXBUF, highlight_pixbuf,
+            TOOLTIP_TEXT,_("This is the user's home directory"),
 	    -1);
     g_free(utf_name);
 

@@ -9,7 +9,8 @@
 
 #include "local_file_info_c.hpp"
 
-local_file_info_c::local_file_info_c(void){
+local_file_info_c::local_file_info_c(gtk_c *data){
+    local_gtk_p = data;
     user_string_mutex=PTHREAD_MUTEX_INITIALIZER;
     group_string_mutex=PTHREAD_MUTEX_INITIALIZER;
     date_string_mutex=PTHREAD_MUTEX_INITIALIZER;
@@ -26,7 +27,7 @@ local_file_info_c::get_path_info (const gchar *file_path, GtkTreePath *tpath) {
     gchar *g=NULL;
     if (lstat(file_path, &st) != 0) {
         gchar *u = utf_string(file_path);
-        g = g_strdup_printf(_("Cannot stat \"%s\":\n%s\n"), u, strerror(errno));
+        g = g_strdup_printf(_("Cannot lstat \"%s\":\n%s\n"), u, strerror(errno));
         g_free(u);
         return g;
     }
@@ -114,7 +115,7 @@ local_file_info_c::count_hidden_files (const gchar * file_path) {
 
 gchar *
 local_file_info_c::path_info (const gchar *file_path, struct stat *st, const gchar *pretext) {
-    gchar *s1 = NULL, *s2 = NULL;
+    gchar *pretext_stuff = NULL, *stat_stuff = NULL;
     gchar *info = NULL;
     if(!file_path) return NULL;
     if(S_ISLNK (st->st_mode)) {
@@ -128,65 +129,39 @@ local_file_info_c::path_info (const gchar *file_path, struct stat *st, const gch
             gchar *q = utf_string (escaped_markup);
             g_free(escaped_markup);
             gchar *linkto=g_strdup_printf (_("Link to %s"), q);
-            s1 = g_strdup_printf ("%s\n<i>%s</i>\n\n", linkto, pretext);
+            pretext_stuff = g_strdup_printf ("%s\n<i>%s</i>\n\n", linkto, pretext);
             g_free(linkto);
             g_free (q);
         }
     } 
-    gchar *p = g_strdup_printf ("<i>%s</i>\n\n", pretext);
-    s1 = p;
-    gchar *s12 = NULL;
+    gchar *p = g_strdup_printf ("<i>%s</i>\n", pretext);
+    pretext_stuff = p;
+    gchar *mime_stuff = NULL;
 	
-#if 0
-    // overkill    
-    rfm_set_mime_dtype(en);
-    if (!en->mimetype) {
-	NOOP(stderr, "getting mimetype: %s\n", en->path);
-	en->mimetype = MIME_type(en->path, st); 
+    // mime overkill    
+    gchar *mimetype = local_gtk_p->mime_type(file_path, st);
+    gchar *mimefile = local_gtk_p->mime_function(file_path, "mime_file");
+    gchar *mimeencoding = local_gtk_p->mime_function(file_path, "mime_encoding");
+    gchar *mimemagic = local_gtk_p->mime_function(file_path, "mime_magic");
+
+    if (!mimetype)mimetype = g_strdup(_("unknown"));    
+    if (!mimefile)mimefile = g_strdup(_("unknown"));    
+    if (!mimeencoding)mimeencoding = g_strdup(_("unknown"));    
+    if (!mimemagic)mimemagic = g_strdup(_("unknown"));    
+
+    if (strstr(mimetype, "x-trash") || 
+	file_path[strlen(file_path)-1] =='~' ||
+	file_path[strlen(file_path)-1] =='%' ) {
+	g_free(mimefile);
+	mimefile = g_strdup(_("Backup file"));
     }
+    mime_stuff = g_strdup_printf("<b>%s</b>: %s\n<b>%s</b>: %s\n<b>%s</b>: %s\n<b>%s</b>: %s\n\n",
+	    _("File Type"), mimefile,
+	    _("MIME Type"), mimetype,
+	    _("MIME Magic"), mimemagic,
+	    _("Encoding"), mimeencoding);
+
     
-    if (IS_LOCAL_TYPE(en->type)){
-	if (!en->mimemagic || strcmp(en->mimemagic, _("unknown"))==0) {
-	    gchar *old = en->mimemagic;
-	    NOOP(stderr, "getting magic type: %s\n", en->path);
-	    en->mimemagic = rfm_rational(RFM_MODULE_DIR, "mime", en, "mime_magic", "mime_function"); 
-	    g_free(old);
-	    
-	    if (!en->mimemagic) en->mimemagic = g_strdup(_("unknown"));
-	}
-	if (!en->filetype || strcmp(en->filetype, _("unknown"))==0) {
-	    NOOP(stderr, "getting file type: %s\n", en->path);
-	    gchar *old = en->filetype;
-	    en->filetype = rfm_rational(RFM_MODULE_DIR, "mime", en, "mime_file", "mime_function"); 
-	    g_free(old);
-	    if (!en->filetype) en->filetype = g_strdup(_("unknown"));
-	}
-	if (!en->encoding || strcmp(en->encoding, _("unknown"))==0) {
-	    gchar *old = en->encoding;
-	    NOOP(stderr, "getting file encoding: %s\n", en->path);
-	    en->encoding = rfm_rational(RFM_MODULE_DIR, "mime", en, "mime_encoding", "mime_function"); 
-	    g_free(old);
-	    if (!en->encoding) en->encoding = g_strdup(_("unknown"));
-	}
-
-    } 
-    else {
-	NOOP(stderr, "Not a local type: %s\n", en->path);
-    }
-
-    if ((en->mimetype && strstr(en->mimetype, "x-trash")) || 
-	en->path[strlen(en->path)-1] =='~' ||
-	en->path[strlen(en->path)-1] =='%' ) {
-	g_free(en->filetype);
-	en->filetype = g_strdup(_("Backup file"));
-    }
-    s12 = g_strdup_printf("<b>%s</b>: %s\n<b>%s</b> (freedesktop): %s\n<b>%s</b> (libmagic): %s\n<b>%s</b>: %s\n\n",
-	    _("File Type"), en->filetype,
-	    _("MIME Type"), (en->mimetype)?en->mimetype:_("unknown"),
-	    _("MIME Type"), en->mimemagic,
-	    _("Encoding"), en->encoding);
-
-#endif
     gchar *grupo=group_string(st);
     gchar *owner=user_string(st);
     gchar *tag = sizetag ((off_t) st->st_size, -1);
@@ -201,11 +176,10 @@ local_file_info_c::path_info (const gchar *file_path, struct stat *st, const gch
     g_free(t);
     g_free(escaped_markup);
     gchar *mode_string_s=mode_string (st->st_mode);
-    s2 = g_strdup_printf (
-            "<b>%s/%s</b>: %s/%s\n<b>%s</b>: %s\n<b>%s</b>: %s\n\n<b>%s</b>: %s",
+    stat_stuff = g_strdup_printf (
+            "<b>%s/%s</b>: %s/%s\n<b>%s</b>: %s\n<b>%s</b>: %s",
              _("Owner"),_("Group"), owner, grupo,
             _("Permissions"), mode_string_s,
-            _("Folder"), dirname, 
             _("Size"),  tag);
 
     g_free (owner);
@@ -221,44 +195,43 @@ local_file_info_c::path_info (const gchar *file_path, struct stat *st, const gch
     sprintf (buf, "<b>%s :</b> %s", _("Status Change"), date_string_s);
     g_free(date_string_s);
 
-    gchar *s3 = g_strconcat (s2, "\n", buf, NULL);
-    g_free (s2);
-    s2 = s3;
+    gchar *s3 = g_strconcat (stat_stuff, "\n", buf, NULL);
+    g_free (stat_stuff);
+    stat_stuff = s3;
 
     date_string_s=date_string(st->st_mtime);
     sprintf (buf, "<b>%s</b> %s", _("Modification Time :"), date_string_s);
     g_free(date_string_s);
 
 
-    s3 = g_strconcat (s2, "\n", buf, NULL);
-    g_free (s2);
-    s2 = s3;
+    s3 = g_strconcat (stat_stuff, "\n", buf, NULL);
+    g_free (stat_stuff);
+    stat_stuff = s3;
 
     date_string_s=date_string(st->st_atime);
     sprintf (buf, "<b>%s</b> %s", _("Access Time :"), date_string_s);
     g_free(date_string_s);
 
-    s3 = g_strconcat (s2, "\n", buf, NULL);
-    g_free (s2);
-    s2 = s3;
+    s3 = g_strconcat (stat_stuff, "\n", buf, NULL);
+    g_free (stat_stuff);
+    stat_stuff = s3;
 
     gchar *hard_links = g_strconcat(_("Links")," (", _("hard"), ")", NULL);
     s3 = g_strdup_printf ("%s\n\n<b>%s</b>: %ld\n<b>%s</b>: %ld",
-            s2, hard_links,
+            stat_stuff, hard_links,
             (long)st->st_nlink, _("Inode"), (long)st->st_ino);
     g_free(hard_links);
             
-    g_free (s2);
-    s2 = s3;
+    g_free (stat_stuff);
+    stat_stuff = s3;
 
-    if(!s1) s1 = g_strdup ("");
-    if(!s12) s12 = g_strdup ("");
-    if(!s2) s2 = g_strdup ("");
-    fprintf(stderr, "%s\n" , s2);
-    info = g_strconcat (s1, s12, s2, NULL);
-    g_free (s1);
-    g_free (s2);
-    g_free (s12);
+    if(!pretext_stuff) pretext_stuff = g_strdup ("");
+    if(!mime_stuff) mime_stuff = g_strdup ("");
+    if(!stat_stuff) stat_stuff = g_strdup ("");
+    info = g_strconcat (pretext_stuff, mime_stuff, stat_stuff, NULL);
+    g_free (pretext_stuff);
+    g_free (stat_stuff);
+    g_free (mime_stuff);
    return info;
 }
 

@@ -19,22 +19,25 @@ class window_c {
         void add_view_to_list(void *);
         void remove_view_from_list(void *);
 
-	void reset_tpath_string(const gchar *);
-	const gchar * get_tpath_string(void);
+        void set_tt_window(GtkWidget *, const gchar *);
+        const gchar *get_tooltip_path_string(void);
+        void set_tooltip_path_string(const gchar *);
+        GtkWidget *get_tt_window(void);
 	
     private:
         GtkNotebook *notebook;
         GtkWidget *window;
         GtkWidget *new_tab_button;
 	
-	gchar *tpath_string;
-
         utility_c *utility_p;
         gtk_c *gtk_p;
                 
         GList *view_list;
         pthread_mutex_t view_list_mutex;
 
+
+        gchar *tooltip_path_string;
+        GtkWidget *tt_window;
 
 
 };

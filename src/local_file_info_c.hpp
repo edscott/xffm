@@ -2,10 +2,11 @@
 #define LOCAL_FILE_INFO_C_HPP
 #include "xffm+.h"
 #include "utility_c.hpp"
+#include "gtk_c.hpp"
 
 class local_file_info_c: virtual utility_c {
     public:
-        local_file_info_c(void);
+        local_file_info_c(gtk_c *);
         ~local_file_info_c(void);
         gchar *get_path_info (const gchar *, GtkTreePath *);
 
@@ -24,6 +25,8 @@ class local_file_info_c: virtual utility_c {
         pthread_mutex_t user_string_mutex;
         pthread_mutex_t group_string_mutex;
         pthread_mutex_t date_string_mutex;
+
+        gtk_c *local_gtk_p;
         
         
 

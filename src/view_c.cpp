@@ -605,67 +605,68 @@ query_tooltip_f (GtkWidget  *widget,
                GtkTooltip *tooltip,
                gpointer    data){
     view_c *view_p = (view_c *)data;
-    return view_p->query_tooltip(tooltip, x, y);
+    GtkIconView *icon_view = GTK_ICON_VIEW(view_p->get_iconview());
+
+    if (!gtk_icon_view_get_tooltip_context(icon_view, &x, &y, FALSE, 
+                NULL, NULL, NULL)) {
+        view_p->setup_tooltip(-1, -1);
+    } else {
+        view_p->setup_tooltip(x, y);
+    }
+    return FALSE;
 }
 
-gboolean
-view_c::query_tooltip(GtkTooltip *tooltip, gint x, gint y){
-    GtkTreePath *tpath = gtk_icon_view_get_path_at_pos (GTK_ICON_VIEW(get_iconview()), x, y); 
-    if (!tpath) {
-        //view_c::query_tooltipDBG("view_c::query_tooltip: no tpath at position\n");
-        return FALSE;
-    }
+void
+view_c::setup_tooltip(gint x, gint y){
     window_c *window_p = (window_c *)get_window_v();
-    gchar *tpath_string = gtk_tree_path_to_string(tpath);
-    const gchar *tpath_active_string = window_p->get_tpath_string();
-    if (!tpath_active_string || strcmp(tpath_active_string, tpath_string)){
-	window_p->reset_tpath_string(tpath_string);
-	// recalc tooltip window
-	// signal query-tooltip (maybe not necessary...
+    if (x < 0 || y < 0) {
+        window_p->set_tt_window(NULL, NULL);
+        return;
     }
-    g_free(tpath_string);
-    gtk_tree_path_free(tpath);
-    return FALSE;
+
+    GtkTreePath *tpath = 
+        gtk_icon_view_get_path_at_pos (GTK_ICON_VIEW(get_iconview()), x, y); 
+    if (!tpath) {
+        window_p->set_tt_window(NULL, NULL);
+        return;
+    }
+
+    gchar *path_string = gtk_tree_path_to_string(tpath);
+    // do we need to remake tt_window?
+    const gchar *last_path_string = window_p->get_tooltip_path_string();
+    if (last_path_string && strcmp(last_path_string, path_string)==0){
+        g_free(path_string);
+        return;
+    }
+    window_p->set_tooltip_path_string(path_string);
 
 
+    gchar *text = xfdir_p->get_tooltip_text(tpath);
+    if (!text) text = xfdir_p->make_tooltip_text(tpath);
 
-    // return TRUE shows, FALSE does not
- 
-    // get tooltip window here
-    // gtk_widget_set_tooltip_window (GtkWidget *widget, GtkWindow *custom_window);
-
-    gtk_widget_trigger_tooltip_query(GTK_WIDGET(get_window()));
-    static gint count = 0;
-    DBG("tooltip triggered: %d\n", count++);
-    return FALSE;
-
-
-    gtk_icon_view_set_tooltip_item (GTK_ICON_VIEW(get_iconview()), tooltip, tpath);
-
-    gchar *text = xfdir_p->get_tip_text(tpath);
+    
     gchar *vname = xfdir_p->get_verbatim_name(tpath);
-    gchar *u = utf_string(vname);
+    gchar *u = wrap_utf_string(vname, 30);
     g_free(vname);
+
     gchar *markup = g_strdup_printf("<b>%s</b>", u);
     g_free(u);
 
     GdkPixbuf *pixbuf = xfdir_p->get_tooltip_pixbuf(tpath);
     if (!pixbuf) pixbuf = xfdir_p->get_normal_pixbuf(tpath); 
+    gtk_tree_path_free(tpath);
     
-    GtkWidget *tt_window = get_gtk_p()->create_tooltip_window(get_iconview(), 
-                tt_window, 
-                pixbuf,    //const GdkPixbuf *, 
+    GtkWidget *tt_window = get_gtk_p()->get_tt_window(
+                pixbuf,     
                 text,
                 markup);
     g_free(text);
     g_free(markup);
-    get_gtk_p()->set_tt_window(tt_window);
+    window_p->set_tt_window(tt_window, path_string);
+    g_free(path_string);
     
-    gtk_widget_set_tooltip_window (get_iconview(), GTK_WINDOW(tt_window));
-    static gint d = 0;
-    //DBG("showing tooltip, serial %d\n", d++);
-    //
-    //quer
-    return TRUE;
-}   
+
+
+    return;
+}
 

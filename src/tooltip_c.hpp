@@ -8,20 +8,14 @@ class tooltip_c {
     public:
         tooltip_c(void);
         ~tooltip_c(void);
-        void set_tt_window(GtkWidget *);
         GtkWidget * get_tt_window(void);
+        GtkWidget *get_tt_window(const GdkPixbuf *, const gchar *, const gchar *);
+        
         GHashTable *get_tooltip_text_hash(void);
         void set_tooltip_map(gboolean);
         gboolean get_tooltip_map(void);
         void reset_tooltip(void);
-        GtkWidget *create_tooltip_window(GtkWidget *, 
-                GtkWidget *, 
-                const GdkPixbuf *, 
-                const gchar *, 
-                const gchar *);
-        void custom_tooltip(GtkWidget *,
-                GdkPixbuf *, 
-                const gchar *);
+        void custom_tooltip(GtkWidget *, GdkPixbuf *, const gchar *);
         void set_box_gradient(GtkWidget *wbox);
 
     protected:

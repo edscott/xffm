@@ -15,7 +15,7 @@ class xfdir_local_c: public xfdir_c, virtual utility_c, protected local_file_inf
 	xfdir_local_c(const gchar *, gtk_c *);
         void reload(const gchar *);
 	const gchar *get_xfdir_iconname(void);
-        gchar *get_tip_text (GtkTreePath *);
+        gchar *make_tooltip_text (GtkTreePath *);
 
     private:
         GtkTreeModel *mk_tree_model(void);

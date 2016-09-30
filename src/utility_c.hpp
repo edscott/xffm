@@ -11,7 +11,7 @@ class utility_c{
         ~utility_c(void);
         void *context_function(void * (*function)(gpointer), void * function_data);
         gchar *utf_string (const gchar *);
-
+        gchar *wrap_utf_string(const gchar *, gint);
     protected:
 	const gchar *chop_excess (gchar *);
         gchar *compact_line(const gchar *);
