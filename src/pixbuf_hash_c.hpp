@@ -12,12 +12,13 @@ class pixbuf_hash_c: virtual utility_c {
 	pixbuf_hash_c(void);
 	~pixbuf_hash_c(void);
         void zap_thumbnail_file(const gchar *, gint);
+	
 	GdkPixbuf *find_in_pixbuf_hash(const gchar *, gint);
+	void put_in_pixbuf_hash(const gchar *, gint, const GdkPixbuf *);
 
         
 
     protected:
-	void put_in_pixbuf_hash(const gchar *, gint, const GdkPixbuf *);
     private:
 	void rm_from_pixbuf_hash (const gchar *, gint);
         gchar *get_thumbnail_path (const gchar * file, gint size);

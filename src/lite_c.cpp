@@ -178,6 +178,7 @@ lite_c::~lite_c(void){
 
 const gchar *
 lite_c::get_lite_emblem(const gchar *mimetype){
+    if (!mimetype) return NULL;
     const gchar *lite_key = (const gchar *)g_hash_table_lookup(lite_key_hash, mimetype);
     if (!lite_key) return NULL;
     lite_t *lite_p = (lite_t *)g_hash_table_lookup(lite_type_hash, lite_key);
@@ -187,6 +188,7 @@ lite_c::get_lite_emblem(const gchar *mimetype){
 
 gboolean 
 lite_c::get_lite_colors(const gchar *mimetype, guchar *r, guchar *g, guchar *b){
+    if (!mimetype) return FALSE;
     const gchar *lite_key = (const gchar *)g_hash_table_lookup(lite_key_hash, mimetype);
     if (!lite_key) return FALSE;
     lite_t *lite_p = (lite_t *)g_hash_table_lookup(lite_type_hash, lite_key);

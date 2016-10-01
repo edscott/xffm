@@ -21,7 +21,7 @@ local_file_info_c::~local_file_info_c(void){
 }
 
 gchar *
-local_file_info_c::get_path_info (const gchar *file_path, GtkTreePath *tpath) {
+local_file_info_c::get_path_info (const gchar *file_path, const gchar *mimetype) {
     struct stat st;
     if (!file_path) return g_strdup("file_path is NULL\n");
     gchar *g=NULL;
@@ -50,9 +50,8 @@ local_file_info_c::get_path_info (const gchar *file_path, GtkTreePath *tpath) {
         } else {
             g = g_strdup_printf ("%s", _("The location is empty."));
         }
-    }
-    
-    gchar *info = path_info (file_path, &st, g);
+    } 
+    gchar *info = path_info (file_path, &st, g, mimetype);
     g_free(g);
     g = info;
     
@@ -114,7 +113,7 @@ local_file_info_c::count_hidden_files (const gchar * file_path) {
 
 
 gchar *
-local_file_info_c::path_info (const gchar *file_path, struct stat *st, const gchar *pretext) {
+local_file_info_c::path_info (const gchar *file_path, struct stat *st, const gchar *pretext, const gchar *mimedata) {
     gchar *pretext_stuff = NULL, *stat_stuff = NULL;
     gchar *info = NULL;
     if(!file_path) return NULL;
@@ -139,15 +138,21 @@ local_file_info_c::path_info (const gchar *file_path, struct stat *st, const gch
     gchar *mime_stuff = NULL;
 	
     // mime overkill    
-    gchar *mimetype = local_gtk_p->mime_type(file_path, st);
-    gchar *mimefile = local_gtk_p->mime_function(file_path, "mime_file");
+    gchar *mimetype;
+    if (!mimedata) {
+	mimetype = local_gtk_p->mime_type(file_path, st);
+	if (!mimetype) mimetype = local_gtk_p->mime_function(file_path, "mime_magic");
+	if (!mimetype)mimetype = g_strdup(_("unknown"));
+    } else {
+	mimetype = g_strdup(mimedata);
+    }	
+    gchar *u = local_gtk_p->mime_function(file_path, "mime_file");
+    gchar *mimefile = wrap_utf_string(u, 40);
+    g_free(u);
     gchar *mimeencoding = local_gtk_p->mime_function(file_path, "mime_encoding");
-    gchar *mimemagic = local_gtk_p->mime_function(file_path, "mime_magic");
 
-    if (!mimetype)mimetype = g_strdup(_("unknown"));    
     if (!mimefile)mimefile = g_strdup(_("unknown"));    
     if (!mimeencoding)mimeencoding = g_strdup(_("unknown"));    
-    if (!mimemagic)mimemagic = g_strdup(_("unknown"));    
 
     if (strstr(mimetype, "x-trash") || 
 	file_path[strlen(file_path)-1] =='~' ||
@@ -155,13 +160,11 @@ local_file_info_c::path_info (const gchar *file_path, struct stat *st, const gch
 	g_free(mimefile);
 	mimefile = g_strdup(_("Backup file"));
     }
-    mime_stuff = g_strdup_printf("<b>%s</b>: %s\n<b>%s</b>: %s\n<b>%s</b>: %s\n<b>%s</b>: %s\n\n",
+    mime_stuff = g_strdup_printf("<b>%s</b>:\n%s\n<b>%s</b>: %s\n<b>%s</b>: %s\n\n",
 	    _("File Type"), mimefile,
 	    _("MIME Type"), mimetype,
-	    _("MIME Magic"), mimemagic,
 	    _("Encoding"), mimeencoding);
-
-    
+        
     gchar *grupo=group_string(st);
     gchar *owner=user_string(st);
     gchar *tag = sizetag ((off_t) st->st_size, -1);
