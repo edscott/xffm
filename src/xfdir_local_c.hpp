@@ -6,8 +6,9 @@
 typedef struct xd_t{
     gchar *d_name;
     unsigned char d_type;
-    struct stat st;
+    struct stat *st;
     gchar *mimetype;
+    gchar *mimefile;
 }xd_t;
 
 class xfdir_local_c: public xfdir_c, virtual utility_c, protected local_file_info_c {

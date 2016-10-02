@@ -10,6 +10,7 @@ xfdir_c::xfdir_c(const gchar *data, gtk_c *data_gtk_c){
     gtk_p = data_gtk_c;
     path = g_strdup(data);
 
+    large = FALSE;
     gint result;
     population_mutex = PTHREAD_MUTEX_INITIALIZER;
     population_cond = PTHREAD_COND_INITIALIZER;
@@ -31,6 +32,9 @@ xfdir_c::~xfdir_c(void){
     pthread_cond_destroy(&population_cond);
     pthread_rwlock_destroy(&population_lock);
 }
+
+gboolean
+xfdir_c::is_large(void){return large;}
 
 gchar *
 xfdir_c::make_tooltip_text (GtkTreePath *tpath ) {

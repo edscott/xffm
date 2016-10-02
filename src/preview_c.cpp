@@ -24,9 +24,89 @@
 
 #include "preview_c.hpp"
 
-preview_c::preview_c(gtk_c *data){
-    gtk_p = data;
+preview_c::preview_c(xfdir_c *data){
+    xfdir_p = data;
 }
+
+
+
+GdkPixbuf *
+preview_c::mime_preview (const population_t * population_p) {
+    GdkPixbuf *pixbuf = mime_preview_at_size(population_p);
+    return pixbuf;
+}
+
+
+const gchar *
+preview_c::want_imagemagick_preview (record_entry_t * en) {
+    NOOP (stderr, "want_imagemagick_preview\n");
+    if(!en) return NULL;
+
+
+    if(!en->filetype) {
+	//en->filetype = mime_file ((void *)(en->path));
+	en->filetype = mime_function (en, "mime_file");
+    }
+    if(!en->mimemagic){
+	//en->mimemagic = mime_magic ((void *)(en->path));
+	en->mimemagic = mime_function (en, "mime_magic");
+	if(!en->mimemagic) en->mimemagic =g_strdup(_("unknown"));
+    }
+    gchar *mimetype = g_strconcat ( en->mimetype, "/",en->mimemagic, 
+	    (en->mimemagic)?"/":NULL, en->filetype, NULL);
+    const gchar *convert_type = NULL;
+
+    if(mimetype && strstr (mimetype, "text") && !(strstr (mimetype, "opendocument"))) {     // decode delegate is ghostscript
+	if(!en->encoding) {
+	    //en->encoding = mime_encoding ((void *)(en->path));
+	    en->encoding = mime_function (en, "mime_encoding");
+	    if(!en->encoding) en->encoding=g_strdup(_("unknown"));
+	}
+        NOOP ("mime_encoding= %s\n", en->encoding);
+        if (strcmp(en->encoding,"binary")==0) {
+            return NULL;
+        } 
+        convert_type = "TXT";
+    } else if(mimetype && strstr (mimetype, "pdf")) {       // decode delegate is ghostscript
+        convert_type = "PDF";
+    } else if(mimetype && (strstr (mimetype, "postscript") || strstr (mimetype, "eps")) ){
+        // decode delegate is ghostscript
+        convert_type = "PS";
+    }
+
+    g_free (mimetype);
+
+    if(!convert_type)
+        return NULL;
+    NOOP ("converttype=%s\n", convert_type);
+
+    static gboolean warned = FALSE;
+
+    gboolean gs_warn = strcmp (convert_type, "PS") == 0 || strcmp (convert_type, "PDF") == 0;
+    if(gs_warn) {
+        gchar *ghostscript = g_find_program_in_path ("gs");
+        if(!ghostscript) {
+            if(!warned) {
+                g_warning
+                    ("\n*** Please install ghostscript for ps and pdf previews\n*** Make sure ghostscript fonts are installed too!\n*** You have been warned.\n");
+                fflush (NULL);
+                warned = TRUE;
+            }
+            return NULL;
+        }
+        g_free (ghostscript);
+    }
+    return convert_type;
+}
+
+//////////////////////////////////////////////////
+
+
+
+
+
+
+
 
 
 static
@@ -835,8 +915,6 @@ text_preview (const population_t * population_p, gchar * thumbnail, view_t * vie
 static
 void *
 mime_preview_at_size(const population_t * population_p) {
-    gint preview_size = rfm_get_preview_image_size();
-    TRACE( "oooooo   mime_preview\n");
     if(!population_p->en || !population_p->en->st) {
         NOOP ("SHOW_TIPx: !population_p->en || !population_p->en->st\n");
         return NULL;
@@ -845,13 +923,13 @@ mime_preview_at_size(const population_t * population_p) {
     // Check if in pixbuf hash. If so, return with the hashed pixbuf.
     // Note that if the thumbnail is out of date, Null will be returned 
     // from the pixbuf hash.
-    GdkPixbuf *pixbuf = (GdkPixbuf *) rfm_find_in_pixbuf_hash(population_p->en->path, preview_size); // refs
+    GdkPixbuf *pixbuf = (GdkPixbuf *) rfm_find_in_pixbuf_hash(population_p->en->path, PREVIEW_IMAGE_SIZE); // refs
     if(pixbuf) {
         TRACE( "oooooo   pixbuf located in hash table.\n");
         return pixbuf;
     }
 
-    gchar *thumbnail = rfm_get_thumbnail_path (population_p->en->path, preview_size);
+    gchar *thumbnail = rfm_get_thumbnail_path (population_p->en->path, PREVIEW_IMAGE_SIZE);
         TRACE( "oooooo   thumbnail path=%s\n", thumbnail);
     // Empty files hack
     if(population_p->en->st->st_size == 0) {
@@ -861,7 +939,7 @@ mime_preview_at_size(const population_t * population_p) {
 #if 0
 	g_object_unref(pixbuf);
 #else
-	rfm_put_in_pixbuf_hash(population_p->en->path, preview_size, pixbuf);
+	rfm_put_in_pixbuf_hash(population_p->en->path, PREVIEW_IMAGE_SIZE, pixbuf);
 #endif
 	g_free(thumbnail);
         return pixbuf;
@@ -893,7 +971,7 @@ mime_preview_at_size(const population_t * population_p) {
 #if 0
 	g_object_unref(pixbuf);
 #else
-		rfm_put_in_pixbuf_hash(population_p->en->path, preview_size, pixbuf);
+		rfm_put_in_pixbuf_hash(population_p->en->path, PREVIEW_IMAGE_SIZE, pixbuf);
 #endif
                 NOOP ("SHOW_TIPx: preview loaded from thumbnail file\n");
                 return pixbuf;
@@ -1004,76 +1082,3 @@ mime_preview_at_size(const population_t * population_p) {
     return pixbuf;
 }
 
-
-G_MODULE_EXPORT
-GdkPixbuf *
-mime_preview (const population_t * population_p) {
-    GdkPixbuf *pixbuf = mime_preview_at_size(population_p);
-    return pixbuf;
-}
-
-
-G_MODULE_EXPORT
-const gchar *
-want_imagemagick_preview (record_entry_t * en) {
-    NOOP (stderr, "want_imagemagick_preview\n");
-    if(!en) return NULL;
-
-
-    if(!en->filetype) {
-	//en->filetype = mime_file ((void *)(en->path));
-	en->filetype = mime_function (en, "mime_file");
-    }
-    if(!en->mimemagic){
-	//en->mimemagic = mime_magic ((void *)(en->path));
-	en->mimemagic = mime_function (en, "mime_magic");
-	if(!en->mimemagic) en->mimemagic =g_strdup(_("unknown"));
-    }
-    gchar *mimetype = g_strconcat ( en->mimetype, "/",en->mimemagic, 
-	    (en->mimemagic)?"/":NULL, en->filetype, NULL);
-    const gchar *convert_type = NULL;
-
-    if(mimetype && strstr (mimetype, "text") && !(strstr (mimetype, "opendocument"))) {     // decode delegate is ghostscript
-	if(!en->encoding) {
-	    //en->encoding = mime_encoding ((void *)(en->path));
-	    en->encoding = mime_function (en, "mime_encoding");
-	    if(!en->encoding) en->encoding=g_strdup(_("unknown"));
-	}
-        NOOP ("mime_encoding= %s\n", en->encoding);
-        if (strcmp(en->encoding,"binary")==0) {
-            return NULL;
-        } 
-        convert_type = "TXT";
-    } else if(mimetype && strstr (mimetype, "pdf")) {       // decode delegate is ghostscript
-        convert_type = "PDF";
-    } else if(mimetype && (strstr (mimetype, "postscript") || strstr (mimetype, "eps")) ){
-        // decode delegate is ghostscript
-        convert_type = "PS";
-    }
-
-    g_free (mimetype);
-
-    if(!convert_type)
-        return NULL;
-    NOOP ("converttype=%s\n", convert_type);
-
-    static gboolean warned = FALSE;
-
-    gboolean gs_warn = strcmp (convert_type, "PS") == 0 || strcmp (convert_type, "PDF") == 0;
-    if(gs_warn) {
-        gchar *ghostscript = g_find_program_in_path ("gs");
-        if(!ghostscript) {
-            if(!warned) {
-                g_warning
-                    ("\n*** Please install ghostscript for ps and pdf previews\n*** Make sure ghostscript fonts are installed too!\n*** You have been warned.\n");
-                fflush (NULL);
-                warned = TRUE;
-            }
-            return NULL;
-        }
-        g_free (ghostscript);
-    }
-    return convert_type;
-}
-
-//////////////////////////////////////////////////
