@@ -15,13 +15,13 @@ class pixbuf_hash_c: virtual utility_c {
 	
 	GdkPixbuf *find_in_pixbuf_hash(const gchar *, gint);
 	void put_in_pixbuf_hash(const gchar *, gint, const GdkPixbuf *);
+        gchar *get_thumbnail_path (const gchar * file, gint size);
 
         
 
     protected:
     private:
 	void rm_from_pixbuf_hash (const gchar *, gint);
-        gchar *get_thumbnail_path (const gchar * file, gint size);
         GHashTable *pixbuf_hash;
         gchar *get_hash_key (const gchar *, gint);
         GdkPixbuf *lookup_icon(const gchar *, gint);

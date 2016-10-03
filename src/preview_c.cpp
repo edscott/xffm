@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2012 Edscott Wilson Garcia
+ * Copyright (C) 2002-2016 Edscott Wilson Garcia
  * EMail: edscott@users.sf.net
  *
  * This file include modifications of GPL code provided by
@@ -31,10 +31,23 @@ preview_c::preview_c(xfdir_c *data){
 
 
 GdkPixbuf *
-preview_c::mime_preview (const population_t * population_p) {
-    GdkPixbuf *pixbuf = mime_preview_at_size(population_p);
+preview_c::mime_preview (GtkTreePath *tpath) {
+    gchar mimefile;
+    gchar file_path;
+    struct stat *st;
+    GtkTreeIter iter;
+    gtk_tree_model_get (xfdir_p->get_treemodel(), &iter, 
+	    COL_STAT, &st, 
+	    COL_MIMEFILE, &mimefile, 
+	    COL_ACTUAL_NAME, &file_path, -1);
+    if (!st)DBG("preview_c::mime_preview() st is NULL. Should be already set!\n");
+
+    GdkPixbuf *pixbuf = mime_preview_at_size(file_path, mimefile, st);
+    g_free(file_path);
+    g_free(mimefile);
     return pixbuf;
 }
+
 
 
 const gchar *
@@ -98,6 +111,174 @@ preview_c::want_imagemagick_preview (record_entry_t * en) {
     }
     return convert_type;
 }
+
+
+void *
+preview_c::mime_preview_at_size(const gchar *file_path, const gchar *mimefile, struct stat *st_p) {
+    if(!file_path || !st_p) {
+        DBG ("mime_preview_at_size: !file_path || !st_p\n");
+        return NULL;
+    }
+
+    gtk_c *gtk_p = xfdir_p->get_gtk_p();
+    // Check if in pixbuf hash. If so, return with the hashed pixbuf.
+    // Note that if the thumbnail is out of date, Null will be returned 
+    // from the pixbuf hash.
+    GdkPixbuf *pixbuf = (GdkPixbuf *) gtk_p->find_in_pixbuf_hash(file_path, PREVIEW_IMAGE_SIZE);
+    if(pixbuf) {
+        TRACE( "preview_c::mime_preview_at_size(): pixbuf %s located in hash table.\n",
+		file_path);
+        return pixbuf;
+    }
+
+    gchar *thumbnail = gtk_p->get_thumbnail_path (file_path, PREVIEW_IMAGE_SIZE);
+    TRACE( "preview_c::mime_preview_at_size(): thumbnail path=%s\n", thumbnail);
+    // Empty files hack
+    if(st_p->st_size == 0) {
+	pixbuf = text_preview (population_p, thumbnail, population_p->view_p); //refs
+	// Replace newly created pixbuf in pixbuf hash.
+	// Reference will now belong to the hash table.
+	gtk_p->put_in_pixbuf_hash(file_path, PREVIEW_IMAGE_SIZE, pixbuf);
+	g_free(thumbnail);
+        return pixbuf;
+    }
+    // So it is not already loaded.
+    // Is the pixbuf in the thumbnail cache?
+
+    // Thumbnail should always resolve to a local and absolute path.
+    if(thumbnail && g_file_test (thumbnail, G_FILE_TEST_EXISTS)) {
+        TRACE( "preview_c::mime_preview_at_size(): thumbnail %s exists!\n", thumbnail);
+        struct stat st;
+        if(stat (thumbnail, &st) < 0){
+            DBG("stat(%s): %s", thumbnail, strerror (errno));
+            return NULL;
+        }
+        if(st.st_mtime >= st_p->st_mtime) {
+            TRACE( "preview_c::mime_preview_at_size(): %s: thumbnail %s is up to date\n",
+                    file_path, thumbnail);
+            // pixbuf generated and reffed in routine:
+            pixbuf = load_preview_pixbuf_from_disk (thumbnail); // refs
+            if(pixbuf) {
+                g_free (thumbnail);
+		if (!GDK_IS_PIXBUF(pixbuf)) return NULL;
+		
+		// pixbuf has ref==1 
+		// Replace newly created pixbuf in pixbuf hash.
+		// Reference will now belong to the hash table.
+#if 0
+	g_object_unref(pixbuf);
+#else
+		rfm_put_in_pixbuf_hash(population_p->en->path, PREVIEW_IMAGE_SIZE, pixbuf);
+#endif
+                NOOP ("SHOW_TIPx: preview loaded from thumbnail file\n");
+                return pixbuf;
+            }
+        }
+    }
+
+
+    // So it is not in thumbnail cache. So it will have to be regenerated
+    // from scratch.
+    
+    TRACE( "oooooo: %s: thumbnail %s must be generated\n",
+                    file_path, thumbnail);
+    
+
+    // First we shall try internal gtk image manipulation:
+    if(rfm_entry_is_image (population_p->en)) {
+	// This function will automatically put the pixbuf into the pixbuf hash:
+        pixbuf = rfm_get_pixbuf (file_path, preview_size); //refs
+        NOOP ("SHOW_TIPx: preview created by gtk\n");
+        g_free (thumbnail);
+        if(pixbuf)  return pixbuf;
+        else return NULL;
+    }
+
+    // So it is not an image type
+    // Do we have zip previews plugin?
+    if (rfm_void(RFM_MODULE_DIR, "mimezip", "module_active")){
+	NOOP(stderr, "zip test\n");
+
+	if(!population_p->en->filetype) {
+	    population_p->en->filetype = mime_function ((void *)(population_p->en), 
+		    "mime_file");
+	    //population_p->en->filetype = mime_file ((void *)(population_p->en->path));
+	}
+	gboolean OpenDocument = (population_p->en->filetype && strstr (population_p->en->filetype, "OpenDocument") != NULL);
+	gboolean plainzip = (population_p->en->filetype && strstr (population_p->en->filetype, "Zip archive") != NULL);
+	gboolean plainrar = (population_p->en->filetype && strstr (population_p->en->filetype, "RAR archive") != NULL);
+	if(OpenDocument || plainzip || plainrar) {
+	    const gchar *function=NULL;
+	    if (OpenDocument) function = "get_zip_preview";
+	    else if (plainzip) function = "get_zip_image";
+	    else if (plainrar) function = "get_rar_image";
+	    else g_error("bummer at mime_preview()\n");
+	    
+	    pixbuf = rfm_natural(RFM_MODULE_DIR, "mimezip", file_path,	function); //refs
+	    if (pixbuf && GDK_IS_PIXBUF(pixbuf)) {
+		// Mimezip function will ref to keep things standarized.
+		// fix_pixbuf_scale unrefs and refs as needed.
+		GdkPixbuf *old_pixbuf = pixbuf;
+		pixbuf = fix_pixbuf_scale(old_pixbuf);
+	       	// This may or may not be the same pixbuf.
+		if (pixbuf != old_pixbuf) {
+		    rfm_pixbuf_save(pixbuf, thumbnail);
+		}
+		// Replace newly created pixbuf in pixbuf hash.
+		// Reference will now belong to the hash table.
+		rfm_put_in_pixbuf_hash(population_p->en->path, preview_size, pixbuf);
+	    } else {
+		DBG ("Could not retrieve thumbnail from zipped %s\n", 
+			population_p->en->path);
+	    }
+	    g_free (thumbnail);
+	    if (!GDK_IS_PIXBUF(pixbuf)) return NULL;
+	    
+	    return pixbuf;
+	}
+    
+    } else {
+	NOOP(stderr, "mimezip not active\n");
+    }
+
+
+    // Ok, that didn't work either. Is it ghostscript (ps or pdf) or text?
+    // this will construct the thumbnail in disk to load on next mousemove.
+    const gchar *convert_type = want_imagemagick_preview (population_p->en);
+
+    if(!convert_type) {
+        NOOP ("SHOW_TIPx: convert type=%s\n",convert_type);
+	convert_type = "TXT";
+        //g_free (thumbnail);
+        //return NULL;
+    }
+
+    // pdf forks to ghostscript to create thumbnail file
+    pixbuf = NULL;
+    if(strcmp (convert_type, "PDF") == 0 || strcmp (convert_type, "PDF") == 0) {
+            // pixbuf generated and reffed in routine:
+        pixbuf = image_magic_preview_forked (population_p, thumbnail, convert_type);// refs
+    }
+    // text uses pango cairo to create thumbnail file
+    // default to text preview (even of binaries...)
+    else // if(strcmp (convert_type, "TXT") == 0) 
+    {
+        view_t *view_p = population_p->view_p;
+            // pixbuf generated and reffed in routine:
+        pixbuf = text_preview (population_p, thumbnail, view_p); // refs
+    }
+    g_free (thumbnail);
+    if (!pixbuf || !GDK_IS_PIXBUF(pixbuf)) return NULL;
+    // Replace newly created pixbuf in pixbuf hash.
+    // Reference will now belong to the hash table.
+#if 0
+	g_object_unref(pixbuf);
+#else
+    rfm_put_in_pixbuf_hash(file_path, preview_size, pixbuf);
+#endif
+    return pixbuf;
+}
+
 
 //////////////////////////////////////////////////
 
@@ -912,173 +1093,4 @@ text_preview (const population_t * population_p, gchar * thumbnail, view_t * vie
     return pixbuf;
 }
 
-static
-void *
-mime_preview_at_size(const population_t * population_p) {
-    if(!population_p->en || !population_p->en->st) {
-        NOOP ("SHOW_TIPx: !population_p->en || !population_p->en->st\n");
-        return NULL;
-    }
-
-    // Check if in pixbuf hash. If so, return with the hashed pixbuf.
-    // Note that if the thumbnail is out of date, Null will be returned 
-    // from the pixbuf hash.
-    GdkPixbuf *pixbuf = (GdkPixbuf *) rfm_find_in_pixbuf_hash(population_p->en->path, PREVIEW_IMAGE_SIZE); // refs
-    if(pixbuf) {
-        TRACE( "oooooo   pixbuf located in hash table.\n");
-        return pixbuf;
-    }
-
-    gchar *thumbnail = rfm_get_thumbnail_path (population_p->en->path, PREVIEW_IMAGE_SIZE);
-        TRACE( "oooooo   thumbnail path=%s\n", thumbnail);
-    // Empty files hack
-    if(population_p->en->st->st_size == 0) {
-	pixbuf = text_preview (population_p, thumbnail, population_p->view_p); //refs
-	// Replace newly created pixbuf in pixbuf hash.
-	// Reference will now belong to the hash table.
-#if 0
-	g_object_unref(pixbuf);
-#else
-	rfm_put_in_pixbuf_hash(population_p->en->path, PREVIEW_IMAGE_SIZE, pixbuf);
-#endif
-	g_free(thumbnail);
-        return pixbuf;
-    }
-    // So it is not already loaded (rodent_preview_if_loaded()
-    // should be called beforehand.
-    // Is the pixbuf in the thumbnail cache?
-
-    // Thumbnail should always resolve to a local and absolute path.
-    if(thumbnail && g_file_test (thumbnail, G_FILE_TEST_EXISTS)) {
-        TRACE( "oooooo   thumbnail %s exists!\n", thumbnail);
-        struct stat st;
-        if(stat (thumbnail, &st) < 0){
-            DBG("stat(%s): %s", thumbnail, strerror (errno));
-            return NULL;
-        }
-        if(st.st_mtime >= population_p->en->st->st_mtime) {
-            TRACE( "oooooo: %s: thumbnail %s is up to date\n",
-                    population_p->en->path, thumbnail);
-            // pixbuf generated and reffed in routine:
-            pixbuf = load_preview_pixbuf_from_disk (thumbnail); // refs
-            if(pixbuf) {
-                g_free (thumbnail);
-		if (!GDK_IS_PIXBUF(pixbuf)) return NULL;
-		
-		// pixbuf has ref==1 
-		// Replace newly created pixbuf in pixbuf hash.
-		// Reference will now belong to the hash table.
-#if 0
-	g_object_unref(pixbuf);
-#else
-		rfm_put_in_pixbuf_hash(population_p->en->path, PREVIEW_IMAGE_SIZE, pixbuf);
-#endif
-                NOOP ("SHOW_TIPx: preview loaded from thumbnail file\n");
-                return pixbuf;
-            }
-        }
-    }
-
-
-    // So it is not in thumbnail cache. So it will have to be regenerated
-    // from scratch.
-    
-    TRACE( "oooooo: %s: thumbnail %s must be generated\n",
-                    population_p->en->path, thumbnail);
-    
-
-    // First we shall try internal gtk image manipulation:
-    if(rfm_entry_is_image (population_p->en)) {
-	// This function will automatically put the pixbuf into the pixbuf hash:
-        pixbuf = rfm_get_pixbuf (population_p->en->path, preview_size); //refs
-        NOOP ("SHOW_TIPx: preview created by gtk\n");
-        g_free (thumbnail);
-        if(pixbuf)  return pixbuf;
-        else return NULL;
-    }
-
-    // So it is not an image type
-    // Do we have zip previews plugin?
-    if (rfm_void(RFM_MODULE_DIR, "mimezip", "module_active")){
-	NOOP(stderr, "zip test\n");
-
-	if(!population_p->en->filetype) {
-	    population_p->en->filetype = mime_function ((void *)(population_p->en), 
-		    "mime_file");
-	    //population_p->en->filetype = mime_file ((void *)(population_p->en->path));
-	}
-	gboolean OpenDocument = (population_p->en->filetype && strstr (population_p->en->filetype, "OpenDocument") != NULL);
-	gboolean plainzip = (population_p->en->filetype && strstr (population_p->en->filetype, "Zip archive") != NULL);
-	gboolean plainrar = (population_p->en->filetype && strstr (population_p->en->filetype, "RAR archive") != NULL);
-	if(OpenDocument || plainzip || plainrar) {
-	    const gchar *function=NULL;
-	    if (OpenDocument) function = "get_zip_preview";
-	    else if (plainzip) function = "get_zip_image";
-	    else if (plainrar) function = "get_rar_image";
-	    else g_error("bummer at mime_preview()\n");
-	    
-	    pixbuf = rfm_natural(RFM_MODULE_DIR, "mimezip", population_p->en->path,	function); //refs
-	    if (pixbuf && GDK_IS_PIXBUF(pixbuf)) {
-		// Mimezip function will ref to keep things standarized.
-		// fix_pixbuf_scale unrefs and refs as needed.
-		GdkPixbuf *old_pixbuf = pixbuf;
-		pixbuf = fix_pixbuf_scale(old_pixbuf);
-	       	// This may or may not be the same pixbuf.
-		if (pixbuf != old_pixbuf) {
-		    rfm_pixbuf_save(pixbuf, thumbnail);
-		}
-		// Replace newly created pixbuf in pixbuf hash.
-		// Reference will now belong to the hash table.
-		rfm_put_in_pixbuf_hash(population_p->en->path, preview_size, pixbuf);
-	    } else {
-		DBG ("Could not retrieve thumbnail from zipped %s\n", 
-			population_p->en->path);
-	    }
-	    g_free (thumbnail);
-	    if (!GDK_IS_PIXBUF(pixbuf)) return NULL;
-	    
-	    return pixbuf;
-	}
-    
-    } else {
-	NOOP(stderr, "mimezip not active\n");
-    }
-
-
-    // Ok, that didn't work either. Is it ghostscript (ps or pdf) or text?
-    // this will construct the thumbnail in disk to load on next mousemove.
-    const gchar *convert_type = want_imagemagick_preview (population_p->en);
-
-    if(!convert_type) {
-        NOOP ("SHOW_TIPx: convert type=%s\n",convert_type);
-	convert_type = "TXT";
-        //g_free (thumbnail);
-        //return NULL;
-    }
-
-    // pdf forks to ghostscript to create thumbnail file
-    pixbuf = NULL;
-    if(strcmp (convert_type, "PDF") == 0 || strcmp (convert_type, "PDF") == 0) {
-            // pixbuf generated and reffed in routine:
-        pixbuf = image_magic_preview_forked (population_p, thumbnail, convert_type);// refs
-    }
-    // text uses pango cairo to create thumbnail file
-    // default to text preview (even of binaries...)
-    else // if(strcmp (convert_type, "TXT") == 0) 
-    {
-        view_t *view_p = population_p->view_p;
-            // pixbuf generated and reffed in routine:
-        pixbuf = text_preview (population_p, thumbnail, view_p); // refs
-    }
-    g_free (thumbnail);
-    if (!pixbuf || !GDK_IS_PIXBUF(pixbuf)) return NULL;
-    // Replace newly created pixbuf in pixbuf hash.
-    // Reference will now belong to the hash table.
-#if 0
-	g_object_unref(pixbuf);
-#else
-    rfm_put_in_pixbuf_hash(population_p->en->path, preview_size, pixbuf);
-#endif
-    return pixbuf;
-}
 
