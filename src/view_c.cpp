@@ -416,6 +416,8 @@ leave_notify_event (GtkWidget *widget,
     if (!data) g_error("leave_notify_event: data cannot be NULL\n");
     //fprintf(TRACE("leave_notify_event\n");
     view_p->get_xfdir_p()->clear_highlights();
+    window_c *window_p = (window_c *)view_p->get_window_v();
+    window_p->set_tt_window(NULL, NULL);
 }
 
 
