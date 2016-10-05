@@ -428,7 +428,7 @@ pixbuf_cairo_c::add_label_pixbuf(cairo_t *pixbuf_context, GdkPixbuf *pixbuf, con
 
     GdkPixbuf   *t_pixbuf = NULL;
     gchar *layout_text;
-        layout_text = g_strdup_printf("<span foreground=\"white\" background=\"black\" size=\"%s\">%s </span>", text_size, _(icon_text));
+        layout_text = g_strdup_printf("<span foreground=\"yellow\" background=\"black\" size=\"%s\">%s </span>", text_size, _(icon_text));
 
     PangoContext *context = gdk_pango_context_get_for_screen (gdk_screen_get_default());
 
