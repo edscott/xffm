@@ -418,7 +418,7 @@ pixbuf_cairo_c::add_label_pixbuf(cairo_t *pixbuf_context, GdkPixbuf *pixbuf, con
     // Insert text into pixbuf
     gint x = 0;
     gint y = 0;
-    const gchar *text_size = "small";
+    const gchar *text_size = "x-small";
     /*switch(size) {
 	case SMALL_ICON_SIZE: text_size="xx-small"; break;
 	case MEDIUM_ICON_SIZE: text_size="x-small"; break;
@@ -428,7 +428,7 @@ pixbuf_cairo_c::add_label_pixbuf(cairo_t *pixbuf_context, GdkPixbuf *pixbuf, con
 
     GdkPixbuf   *t_pixbuf = NULL;
     gchar *layout_text;
-        layout_text = g_strdup_printf("<span foreground=\"yellow\" background=\"black\" size=\"%s\">%s </span>", text_size, _(icon_text));
+        layout_text = g_strdup_printf("<span foreground=\"yellow\" background=\"blue\" size=\"%s\">%s </span>", text_size, _(icon_text));
 
     PangoContext *context = gdk_pango_context_get_for_screen (gdk_screen_get_default());
 
