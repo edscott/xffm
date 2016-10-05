@@ -8,10 +8,10 @@ class local_file_info_c: virtual utility_c {
     public:
         local_file_info_c(gtk_c *);
         ~local_file_info_c(void);
-        gchar *get_path_info (const gchar *, GtkTreePath *);
+        gchar *get_path_info (const gchar *, const gchar *);
 
     private:
-        gchar *path_info(const gchar *, struct stat *, const gchar *);
+        gchar *path_info(const gchar *, struct stat *, const gchar *, const gchar *);
         gint count_files (const gchar *);
         gint count_hidden_files (const gchar *);
         gchar ftypelet (mode_t);

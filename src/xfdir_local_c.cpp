@@ -44,10 +44,17 @@ xfdir_local_c::make_tooltip_text (GtkTreePath *tpath) {
 
     gchar *file_path = get_verbatim_name(tpath);
     if (!file_path) return g_strdup("file_path is NULL\n");
-    text = get_path_info(file_path, tpath);
-    g_free(file_path);
     
+    gchar *mimetype;
+    GtkTreeIter iter;
+    gtk_tree_model_get_iter (treemodel, &iter, tpath);
+    gtk_tree_model_get (treemodel, &iter, 
+            COL_MIMETYPE, &mimetype, -1);
+
+    text = get_path_info(file_path, mimetype);  
     set_tooltip_text(tpath, text);
+    g_free(mimetype);
+    g_free(file_path);
     return text;
 }
     

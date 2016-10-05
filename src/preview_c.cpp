@@ -1,6 +1,32 @@
+/*
+ * Copyright (C) 2002-2012 Edscott Wilson Garcia
+ * EMail: edscott@users.sf.net
+ *
+ * This file include modifications of GPL code provided by
+ *  Dov Grobgeld <dov.grobgeld@gmail.com>
+ *  Tadej Borovsak tadeboro@gmail.com
+ * see below for details.
+ *
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; 
+ */
 
 #include "preview_c.hpp"
 
+preview_c::preview_c(gtk_c *data){
+    gtk_p = data;
+}
 
 
 static
@@ -59,69 +85,6 @@ void * mime_function (void *p, void *q);
 void * mime_file (void *p);
 void * mime_encoding (void *p);
 void * mime_magic (void *p);
-
-G_MODULE_EXPORT
-const gchar *
-want_imagemagick_preview (record_entry_t * en) {
-    NOOP (stderr, "want_imagemagick_preview\n");
-    if(!en) return NULL;
-
-
-    if(!en->filetype) {
-	//en->filetype = mime_file ((void *)(en->path));
-	en->filetype = mime_function (en, "mime_file");
-    }
-    if(!en->mimemagic){
-	//en->mimemagic = mime_magic ((void *)(en->path));
-	en->mimemagic = mime_function (en, "mime_magic");
-	if(!en->mimemagic) en->mimemagic =g_strdup(_("unknown"));
-    }
-    gchar *mimetype = g_strconcat ( en->mimetype, "/",en->mimemagic, 
-	    (en->mimemagic)?"/":NULL, en->filetype, NULL);
-    const gchar *convert_type = NULL;
-
-    if(mimetype && strstr (mimetype, "text") && !(strstr (mimetype, "opendocument"))) {     // decode delegate is ghostscript
-	if(!en->encoding) {
-	    //en->encoding = mime_encoding ((void *)(en->path));
-	    en->encoding = mime_function (en, "mime_encoding");
-	    if(!en->encoding) en->encoding=g_strdup(_("unknown"));
-	}
-        NOOP ("mime_encoding= %s\n", en->encoding);
-        if (strcmp(en->encoding,"binary")==0) {
-            return NULL;
-        } 
-        convert_type = "TXT";
-    } else if(mimetype && strstr (mimetype, "pdf")) {       // decode delegate is ghostscript
-        convert_type = "PDF";
-    } else if(mimetype && (strstr (mimetype, "postscript") || strstr (mimetype, "eps")) ){
-        // decode delegate is ghostscript
-        convert_type = "PS";
-    }
-
-    g_free (mimetype);
-
-    if(!convert_type)
-        return NULL;
-    NOOP ("converttype=%s\n", convert_type);
-
-    static gboolean warned = FALSE;
-
-    gboolean gs_warn = strcmp (convert_type, "PS") == 0 || strcmp (convert_type, "PDF") == 0;
-    if(gs_warn) {
-        gchar *ghostscript = g_find_program_in_path ("gs");
-        if(!ghostscript) {
-            if(!warned) {
-                g_warning
-                    ("\n*** Please install ghostscript for ps and pdf previews\n*** Make sure ghostscript fonts are installed too!\n*** You have been warned.\n");
-                fflush (NULL);
-                warned = TRUE;
-            }
-            return NULL;
-        }
-        g_free (ghostscript);
-    }
-    return convert_type;
-}
 
 static void *
 gs_wait_f(void *data){
@@ -1049,5 +1012,68 @@ mime_preview (const population_t * population_p) {
     return pixbuf;
 }
 
+
+G_MODULE_EXPORT
+const gchar *
+want_imagemagick_preview (record_entry_t * en) {
+    NOOP (stderr, "want_imagemagick_preview\n");
+    if(!en) return NULL;
+
+
+    if(!en->filetype) {
+	//en->filetype = mime_file ((void *)(en->path));
+	en->filetype = mime_function (en, "mime_file");
+    }
+    if(!en->mimemagic){
+	//en->mimemagic = mime_magic ((void *)(en->path));
+	en->mimemagic = mime_function (en, "mime_magic");
+	if(!en->mimemagic) en->mimemagic =g_strdup(_("unknown"));
+    }
+    gchar *mimetype = g_strconcat ( en->mimetype, "/",en->mimemagic, 
+	    (en->mimemagic)?"/":NULL, en->filetype, NULL);
+    const gchar *convert_type = NULL;
+
+    if(mimetype && strstr (mimetype, "text") && !(strstr (mimetype, "opendocument"))) {     // decode delegate is ghostscript
+	if(!en->encoding) {
+	    //en->encoding = mime_encoding ((void *)(en->path));
+	    en->encoding = mime_function (en, "mime_encoding");
+	    if(!en->encoding) en->encoding=g_strdup(_("unknown"));
+	}
+        NOOP ("mime_encoding= %s\n", en->encoding);
+        if (strcmp(en->encoding,"binary")==0) {
+            return NULL;
+        } 
+        convert_type = "TXT";
+    } else if(mimetype && strstr (mimetype, "pdf")) {       // decode delegate is ghostscript
+        convert_type = "PDF";
+    } else if(mimetype && (strstr (mimetype, "postscript") || strstr (mimetype, "eps")) ){
+        // decode delegate is ghostscript
+        convert_type = "PS";
+    }
+
+    g_free (mimetype);
+
+    if(!convert_type)
+        return NULL;
+    NOOP ("converttype=%s\n", convert_type);
+
+    static gboolean warned = FALSE;
+
+    gboolean gs_warn = strcmp (convert_type, "PS") == 0 || strcmp (convert_type, "PDF") == 0;
+    if(gs_warn) {
+        gchar *ghostscript = g_find_program_in_path ("gs");
+        if(!ghostscript) {
+            if(!warned) {
+                g_warning
+                    ("\n*** Please install ghostscript for ps and pdf previews\n*** Make sure ghostscript fonts are installed too!\n*** You have been warned.\n");
+                fflush (NULL);
+                warned = TRUE;
+            }
+            return NULL;
+        }
+        g_free (ghostscript);
+    }
+    return convert_type;
+}
 
 //////////////////////////////////////////////////
