@@ -1,4 +1,8 @@
 NEXT:
+
+    Pending: 
+     0- Open with dialog when no mime command can be resolved.
+
      1- Load mime hashes from disk currently broken and disabled.
      2- tips with file information on mouse over
      3- file previews on mouse over (need to enable preview_c class)
@@ -9,7 +13,11 @@ NEXT:
         (command from mime-command or user history)
      6- enable cp, mv DnD and cut-paste
      7- Enable rm with del
-     8- put in popup menu
+     8- put in popup menu:
+          popup menu with "open with" dialog, plus any associated mimeapps
+          if no associated mimeapps, directly to open with dialog.
+          Popup will show with button 3 or with button 1 long press.
+
 
 Pending:
      2-Use a treemodel column for file extension for optimization
