@@ -16,6 +16,7 @@ class lpterm_c: public run_c {
         void reference_run_button(run_button_c *);
         void unreference_run_button(run_button_c *);
         void *shell_command(const gchar *);
+        void *shell_command(const gchar *, gboolean);
 
 /*
         void recover_flags (gchar * in_cmd, gboolean * interm, gboolean * hold);

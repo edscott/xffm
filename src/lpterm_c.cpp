@@ -375,7 +375,7 @@ lpterm_c::sudo_fix(const gchar *command){
 }
 
 void *
-lpterm_c::shell_command(const gchar *c){
+lpterm_c::shell_command(const gchar *c, gboolean save){
     // Make sure any sudo command has the "-A" option
     gchar *command = sudo_fix(c);
     pid_t pid = thread_run(command?command:c);
@@ -383,9 +383,14 @@ lpterm_c::shell_command(const gchar *c){
     run_button_c *run_button_p = NULL;
     run_button_p = new run_button_c(view_v, c, pid, run_in_shell(c));
     // We save the original sudo command, not the one modified with "-A"
-    csh_save_history(c);
+    if (save) csh_save_history(c);
     g_free (command);
     return (void *)run_button_p;
+}
+
+void *
+lpterm_c::shell_command(const gchar *c){
+    return shell_command(c, TRUE);
 }
 
 void 

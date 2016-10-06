@@ -12,6 +12,31 @@ utility_c::utility_c(void){
 utility_c::~utility_c(void){
 }
 
+gchar * 
+utility_c::get_text_editor(void){
+    const gchar *value = getenv("EDITOR");
+    if(!value) return NULL;
+    
+    gchar *editor=g_path_get_basename(value);
+    // if nano or vi, then use terminal emulator
+    if (editor && 
+	    (strncmp(editor, "vi",strlen("vi"))==0 
+	     || 
+	     strncmp(editor, "nano",strlen("nano"))==0)){
+	const gchar *term = what_term();
+	if (term && strlen(term)) {
+	    gchar *b=g_strdup_printf("%s %s %s",
+		    term, term_exec_option(term), editor);
+	    g_free(editor);
+	    editor = b;
+	}
+    } else {
+	g_free(editor);
+	editor = g_strdup(value);
+    }
+    return (editor);
+}
+
 gchar *
 utility_c::wrap_utf_string(const gchar *data, gint length){
     gchar *u;
@@ -311,7 +336,7 @@ utility_c::get_terminals(void) {
 
 const gchar **
 utility_c::get_editors(void) {
-static const gchar *editors_v[] = {
+    static const gchar *editors_v[] = {
 	"gvim -f",  
 	"mousepad", 
 	"gedit", 
@@ -320,7 +345,7 @@ static const gchar *editors_v[] = {
 	"nano",
 	"vi",
 	NULL
-};
+    }; 
     return editors_v;
 }
 

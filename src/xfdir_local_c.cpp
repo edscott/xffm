@@ -4,6 +4,7 @@
 #include <errno.h>
 #include <stdlib.h>
 
+#include "view_c.hpp"
 #include "xfdir_local_c.hpp"
 
 #define MAX_AUTO_STAT 500
@@ -34,6 +35,79 @@ xfdir_local_c::xfdir_local_c(const gchar *data, gtk_c *data_gtk_c):
 {
     treemodel = mk_tree_model();
 }
+ 
+void
+xfdir_local_c::item_activated (GtkIconView *iconview, GtkTreePath *tpath, void *data)
+{
+    view_c *view_p = (view_c *)data;
+    GtkTreeModel *tree_model = gtk_icon_view_get_model (iconview);
+    GtkTreeIter iter;
+    if (!gtk_tree_model_get_iter (tree_model, &iter, tpath)) return;
+    
+    gchar *ddname;
+    gchar *mimetype = NULL;
+    gtk_tree_model_get (tree_model, &iter,
+                          ACTUAL_NAME, &ddname,
+                          COL_MIMETYPE, &mimetype,
+                          -1);
+    if (!mimetype){
+        mimetype = gtk_p->mime_type(ddname, NULL);
+    }
+
+    if (!mimetype){
+        view_p->get_lpterm_p()->print_error(g_strdup_printf("%s = NULL)\n",
+                    _("Mime Type"), mimetype));
+        return;
+    }
+
+    if (strcmp(mimetype, "inode/directory")==0){
+        view_p->reload(ddname);
+    } else {
+        gchar *command = gtk_p->mime_command(mimetype);
+        view_p->get_lpterm_p()->print_error(g_strdup_printf("mimetype = %s (%s)\n", mimetype, command));
+        if (!command){
+            // try pure mime magic
+            g_free(mimetype);
+            mimetype = gtk_p->mime_function(ddname, "mime_magic");
+            command = gtk_p->mime_command(mimetype);
+        }
+        if (!command && strncmp(mimetype, "text/", strlen("text/"))==0){
+                command = get_text_editor();
+            view_p->get_lpterm_p()->print_error(g_strdup_printf("text mimetype = %s (%s)\n", mimetype, command));
+        }
+       /* gchar **a = gtk_p->mime_apps(mimetype);
+        gchar **p = a;
+        for (;p && *p; p++) fprintf(stderr, "mimeapp = %s\n", *p);
+        g_strfreev(a);*/
+        
+
+        if (command){
+          // ddname should be quoted and 
+          // command not saved in csh history
+            //gchar *m = g_strdup_printf("%s(%s) = %s)\n",_("Command"), mimetype, command);
+            //view_p->get_lpterm_p()->print_error(m);
+
+            gchar *c = NULL;
+            gchar *q = g_strdup_printf("\"%s\"", ddname);
+            if (strstr(command, "%s")){
+                //format
+                c = g_strdup_printf(command, q);
+            } else if (command) {
+                c = g_strdup_printf("%s \"%s\"", command, q);
+            }
+            view_p->get_lpterm_p()->shell_command(c, FALSE);
+            fprintf(stderr, "%s\n", c);
+            g_free(c);
+            g_free(command);
+        } else {
+            gchar *m = g_strdup_printf("FIXME openwith dialog here: %s(%s) = NULL)\n",_("Command"), mimetype);
+            view_p->get_lpterm_p()->print_error(m);
+        }
+    }
+    g_free(mimetype);
+    g_free(ddname);
+} 
+
 
 gchar *
 xfdir_local_c::make_tooltip_text (GtkTreePath *tpath) {
@@ -356,7 +430,7 @@ xfdir_local_c::get_emblem_string(xd_t *xd_p, gboolean use_lite){
             colors = g_strdup_printf("#%02x%02x%02x", red, green, blue);
         }
         gchar *extension = g_strdup("");
-        if (strchr(xd_p->d_name, '.') && strchr(xd_p->d_name, '.') != xd_p->d_name) {
+        if (strrchr(xd_p->d_name, '.') && strrchr(xd_p->d_name, '.') != xd_p->d_name) {
             extension = g_strconcat("*", strrchr(xd_p->d_name, '.')+1, NULL) ;
         }
         // all access:

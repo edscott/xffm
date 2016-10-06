@@ -195,7 +195,15 @@ xfdir_c::item_activated (GtkIconView *iconview, GtkTreePath *tpath, void *data)
     if (g_file_test(full_path, G_FILE_TEST_IS_DIR)){
         view_p->reload(full_path);
     } else {
-        view_p->get_lpterm_p()->print_error(g_strdup_printf("%s: %s\n", full_path, strerror(ENOENT)));
+        // uses mimetype, should be delegated to xfdir_local_c...
+        gchar *mimetype = gtk_p->mime_type(full_path);
+        const gchar *command = gtk_p->mime_command(mimetype);
+        const gchar *command1 = gtk_p->mime_command_text(mimetype);
+        const gchar *command2 = gtk_p->mime_command_text2(mimetype);
+        view_p->get_lpterm_p()->print_error(g_strdup_printf("%s: %s\n", mimetype, command));
+        view_p->get_lpterm_p()->print_error(g_strdup_printf("%s: %s\n", mimetype, command1));
+        view_p->get_lpterm_p()->print_error(g_strdup_printf("%s: %s\n", mimetype, command2));
+        g_free(mimetype);
         if (strncmp(full_path,"xffm:", strlen("xffm:"))==0){
             gchar *module = full_path + strlen("xffm:");
             DBG("module = \"%s\"\n", module);

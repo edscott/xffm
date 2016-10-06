@@ -22,6 +22,7 @@ class utility_c{
         const gchar *term_exec_option(const gchar *);
         const gchar **get_terminals(void);
         const gchar **get_editors(void);
+        gchar *get_text_editor(void);
     private:
         const gchar *default_shell(void);
         gboolean program_in_path(const gchar *);
