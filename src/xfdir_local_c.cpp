@@ -50,6 +50,10 @@ xfdir_local_c::item_activated (GtkIconView *iconview, GtkTreePath *tpath, void *
                           ACTUAL_NAME, &ddname,
                           COL_MIMETYPE, &mimetype,
                           -1);
+    gchar *g = g_build_filename(path, ddname, NULL);
+    g_free(ddname);
+    ddname = g;
+
     if (!mimetype){
         mimetype = gtk_p->mime_type(ddname, NULL);
     }
@@ -115,20 +119,9 @@ xfdir_local_c::make_tooltip_text (GtkTreePath *tpath) {
 
     gchar *text = get_tooltip_text(tpath);
     if (text) return text;
-/*
-    gchar *file_path = get_verbatim_name(tpath);
-    if (!file_path) return g_strdup("file_path is NULL\n");
-    
-    gchar *mimetype;
-    GtkTreeIter iter;
-    gtk_tree_model_get_iter (treemodel, &iter, tpath);
-    gtk_tree_model_get (treemodel, &iter, 
-            COL_MIMETYPE, &mimetype, -1);
-*/
-    text = get_path_info(treemodel, tpath);  
+
+    text = get_path_info(treemodel, tpath, path);  
     set_tooltip_text(tpath, text);
-   // g_free(mimetype);
-   // g_free(file_path);
     return text;
 }
     
