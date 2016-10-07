@@ -351,6 +351,11 @@ utility_c::get_editors(void) {
 }
 
 #if 0
+
+// See dialog.i
+//
+// we need history dbh, in term flag dbh, completion on bash match command, and
+// should work from a selection list from the iconview.
 void 
 open_x(widgets_t *widgets_p){
     view_t *view_p = widgets_p->view_p;
@@ -374,15 +379,18 @@ time_out_message(widgets_t *widgets_p, const gchar *path){
     return;
 }
 
+
+// This here is the test for non mimetype associated open command:
+
 void
-open_with (widgets_t *widgets_p, record_entry_t * en) {
+//open_with (widgets_t *widgets_p, record_entry_t * en) {
+open_with (const gchar *path) {
     /* open with */
     gchar *command=NULL;
     gchar *command_fmt=NULL;
     NOOP ("open_with()... \n");
 
-    if(!en || !en->path) {
-        NOOP ("OPEN: open_with !en || !en->path\n");
+    if(!path) {
         return;
     }
 
@@ -483,6 +491,36 @@ open_with (widgets_t *widgets_p, record_entry_t * en) {
     }
     return;
 }
+  
+
+
+{
+    gchar *f = g_build_filename (RUN_DBH_FILE, NULL);
+    gchar *ff = g_build_filename (RUN_FLAG_FILE, NULL);
+    NOOP (stderr, "RUN_DBH_FILE=%s RUN_FLAG_FILE=%s\n", f, ff);
+    
+    gchar *title;
+    if (selection_list) {
+        title=g_strdup_printf(_("Open with %s"),"");
+    } else {
+        title=g_strdup(_("Execute Shell Command"));
+    }
+    g = get_response_history (title, 
+            files_txt,
+            _("Console: quickly run single commands -- write a command here and press enter."),
+            f, 
+            first_path,
+            command_fmt, //NULL, // entry text
+            ff,
+            _("Run in Terminal"),
+            GTK_FILE_CHOOSER_ACTION_OPEN,
+            "/usr/bin",
+            MATCH_COMMAND); 
+   g_free (f);
+        g_free (ff);
+	NOOP(stderr, "got: \"%s\"\n", g);
+    }
+
 
 #endif
 
