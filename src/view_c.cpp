@@ -626,6 +626,7 @@ view_c::setup_tooltip(gint x, gint y){
         return;
     }
 
+    if (xfdir_p->is_large()) return;
     GtkTreePath *tpath = 
         gtk_icon_view_get_path_at_pos (GTK_ICON_VIEW(get_iconview()), x, y); 
     if (!tpath) {

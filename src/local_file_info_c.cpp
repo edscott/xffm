@@ -7,6 +7,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
+#include "xfdir_c.hpp"
 #include "local_file_info_c.hpp"
 
 local_file_info_c::local_file_info_c(gtk_c *data){
@@ -21,16 +22,47 @@ local_file_info_c::~local_file_info_c(void){
 }
 
 gchar *
-local_file_info_c::get_path_info (const gchar *file_path, const gchar *mimetype) {
+local_file_info_c::get_path_info (GtkTreeModel *treemodel, GtkTreePath *tpath) {
+    // retrieve cache st info, if available.    
+    GtkTreeIter iter;
     struct stat st;
-    if (!file_path) return g_strdup("file_path is NULL\n");
-    gchar *g=NULL;
-    if (lstat(file_path, &st) != 0) {
-        gchar *u = utf_string(file_path);
-        g = g_strdup_printf(_("Cannot lstat \"%s\":\n%s\n"), u, strerror(errno));
-        g_free(u);
-        return g;
+    struct stat *st_p;
+    gtk_tree_model_get_iter (treemodel, &iter, tpath);
+    gchar *file_path;
+    gchar *mimetype;
+    gchar *mimefile;
+    gchar *g;
+    gtk_tree_model_get (treemodel, &iter, 
+	    COL_STAT, &st, 
+	    COL_MIMETYPE, &mimetype, 
+	    COL_MIMEFILE, &mimefile, 
+	    COL_ACTUAL_NAME, &file_path, -1);
+    if (st_p) memcpy(&st, st_p, sizeof(struct stat)); 
+    else {
+	if (lstat(file_path, &st) != 0) {
+	    gchar *u = utf_string(file_path);
+	    g_free(file_path);
+	    g_free(mimetype);
+	    g = g_strdup_printf(_("Cannot lstat \"%s\":\n%s\n"), u, strerror(errno));
+	    g_free(u);
+	    return g;
+	} else {
+	    st_p = (struct stat *)calloc(1, sizeof(struct stat));
+	    if (st_p) {
+		memcpy(st_p, &st, sizeof(struct stat));
+		gtk_list_store_set (GTK_LIST_STORE(treemodel), &iter,
+		    COL_STAT, st_p, 
+		    -1);
+	    }
+	}
     }
+    if (!mimefile){
+	mimefile = local_gtk_p->mime_function(file_path, "mime_file");
+	gtk_list_store_set (GTK_LIST_STORE(treemodel), &iter,
+		COL_MIMEFILE, mimefile, 
+	    -1);
+    }
+    
     g = g_strdup("");
     if(S_ISDIR (st.st_mode)) {
         gint files = count_files (file_path);
@@ -51,7 +83,10 @@ local_file_info_c::get_path_info (const gchar *file_path, const gchar *mimetype)
             g = g_strdup_printf ("%s", _("The location is empty."));
         }
     } 
-    gchar *info = path_info (file_path, &st, g, mimetype);
+    gchar *info = path_info (file_path, &st, g, mimetype, mimefile);
+    g_free(file_path);
+    g_free(mimetype);
+    g_free(mimefile);
     g_free(g);
     g = info;
     
@@ -113,7 +148,7 @@ local_file_info_c::count_hidden_files (const gchar * file_path) {
 
 
 gchar *
-local_file_info_c::path_info (const gchar *file_path, struct stat *st, const gchar *pretext, const gchar *mimedata) {
+local_file_info_c::path_info (const gchar *file_path, struct stat *st, const gchar *pretext, const gchar *mimedata, const gchar *mimefiledata) {
     gchar *pretext_stuff = NULL, *stat_stuff = NULL;
     gchar *info = NULL;
     if(!file_path) return NULL;
@@ -145,8 +180,9 @@ local_file_info_c::path_info (const gchar *file_path, struct stat *st, const gch
 	if (!mimetype)mimetype = g_strdup(_("unknown"));
     } else {
 	mimetype = g_strdup(mimedata);
-    }	
-    gchar *u = local_gtk_p->mime_function(file_path, "mime_file");
+    }
+        
+    gchar *u = g_strdup(mimefiledata);
     gchar *mimefile = wrap_utf_string(u, 40);
     g_free(u);
     gchar *mimeencoding = local_gtk_p->mime_function(file_path, "mime_encoding");
@@ -164,6 +200,9 @@ local_file_info_c::path_info (const gchar *file_path, struct stat *st, const gch
 	    _("File Type"), mimefile,
 	    _("MIME Type"), mimetype,
 	    _("Encoding"), mimeencoding);
+    g_free (mimetype);
+    g_free (mimefile);
+    g_free (mimeencoding);
         
     gchar *grupo=group_string(st);
     gchar *owner=user_string(st);
