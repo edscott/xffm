@@ -303,6 +303,7 @@ pid_t run_c::thread_run(const gchar **arguments){
 gboolean
 run_c::run_in_shell(const gchar *command){
     const gchar *special = "\'*?<>|&";
+    if (strchr(command, '`')) return TRUE;
     if (strchr(command, '?')) return TRUE;
     if (strchr(command, '*')) return TRUE;
     if (strchr(command, '<')) return TRUE; 
@@ -310,6 +311,7 @@ run_c::run_in_shell(const gchar *command){
     if (strchr(command, '|')) return TRUE; 
     if (strchr(command, '&')) return TRUE; 
     if (strchr(command, '\'')) return TRUE;
+    if (strchr(command, '"')) return TRUE;
     return FALSE;
 }
 

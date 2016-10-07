@@ -53,6 +53,12 @@ xfdir_local_c::item_activated (GtkIconView *iconview, GtkTreePath *tpath, void *
     gchar *g = g_build_filename(path, ddname, NULL);
     g_free(ddname);
     ddname = g;
+    if (!view_p->file_test_with_wait(path, G_FILE_TEST_EXISTS)){
+        view_p->get_lpterm_p()->print_error(g_strdup_printf("Error: timeout for %s\n", ddname));
+        g_free(ddname);
+        g_free(mimetype);
+        return;
+    }
 
     if (!mimetype){
         mimetype = gtk_p->mime_type(ddname, NULL);

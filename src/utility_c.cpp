@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <gtk/gtk.h>
+#include <sys/stat.h>
 #include <errno.h>
 #include "utility_c.hpp"
 
@@ -348,4 +349,141 @@ utility_c::get_editors(void) {
     }; 
     return editors_v;
 }
+
+#if 0
+void 
+open_x(widgets_t *widgets_p){
+    view_t *view_p = widgets_p->view_p;
+    GSList *list=NULL;
+    GSList *s_list = view_p->selection_list;
+    for (; s_list && s_list->data; s_list = s_list->next){
+	record_entry_t *in_en = s_list->data;
+	record_entry_t *out_en = rfm_copy_entry(in_en);
+	list = g_slist_append(list, out_en); 
+    }
+    execute(widgets_p, list);
+}
+
+static void
+time_out_message(widgets_t *widgets_p, const gchar *path){
+    rfm_threaded_show_text(widgets_p);
+    rfm_threaded_diagnostics(widgets_p, "xffm/stock_dialog-error",  g_strconcat(path, ": ", NULL));
+    rfm_threaded_diagnostics(widgets_p, "xffm_tag/stderr", g_strconcat(_(strerror(ETIMEDOUT)), "\n", NULL));
+    rfm_global_t *rfm_global_p = rfm_global();
+    rfm_threaded_cursor_reset(rfm_global_p->window);
+    return;
+}
+
+void
+open_with (widgets_t *widgets_p, record_entry_t * en) {
+    /* open with */
+    gchar *command=NULL;
+    gchar *command_fmt=NULL;
+    NOOP ("open_with()... \n");
+
+    if(!en || !en->path) {
+        NOOP ("OPEN: open_with !en || !en->path\n");
+        return;
+    }
+
+    gchar *wd = g_path_get_dirname (en->path);
+    if (!g_file_test_with_wait (wd, G_FILE_TEST_EXISTS)){
+	 time_out_message(widgets_p, wd);
+	 g_free(wd);
+	 wd = g_strdup(g_get_home_dir());
+     }
+	
+    g_free (widgets_p->workdir);
+    widgets_p->workdir = wd;
+
+    // Here we take special consideration for shell scripts.
+    // Shell scripts will be editable files, therefore will
+    // have an associated mime_command to open the editor.
+    // tests 
+
+    if (!en->mimetype) en->mimetype=MIME_type (en->path, en->st);
+    if(!en->mimemagic){
+	if (IS_LOCAL_TYPE(en->type) && !en->mimemagic) {
+	    en->mimemagic = rfm_rational(RFM_MODULE_DIR, "mime", en, "mime_magic", "mime_function");
+	    if (!en->mimemagic) en->mimemagic = g_strdup(_("unknown"));
+	}
+	else en->mimemagic = g_strdup(_("unknown"));
+    }
+
+    if(!en->filetype) {
+	if (IS_LOCAL_TYPE(en->type)) {
+	    en->filetype = rfm_rational(RFM_MODULE_DIR, "mime", en, "mime_file", "mime_function"); 
+	    if (!en->filetype) en->filetype = g_strdup(_("unknown"));
+	}
+	else en->filetype = g_strdup(_("unknown"));
+    }
+
+    command_fmt = MIME_command (en->mimetype);
+    NOOP ("OPEN: command_fmt(%s) = %s\n", en->mimetype, command_fmt);
+    if(!command_fmt) {
+        command_fmt = MIME_command (en->mimemagic);
+    }
+
+    gboolean is_script= ((en->mimetype && strstr (en->mimetype, "/x-sh")) ||
+			 (en->mimemagic && strstr (en->mimemagic, "/x-sh")) ||
+		 (en->mimetype && strstr (en->mimetype, "/x-shellscript")) ||   
+		 (en->mimemagic && strstr (en->mimemagic, "/x-shellscript")) ||
+			 (en->mimetype && strstr (en->mimetype, "/x-csh")) ||   
+			 (en->mimemagic && strstr (en->mimemagic, "/x-csh")) ||
+			 (en->mimetype && strstr (en->mimetype, "/x-perl")) ||   
+			 (en->mimemagic && strstr (en->mimemagic, "/x-perl")) 			 );
+    if (is_script && !IS_EXE_TYPE(en->type)){
+	g_free(command_fmt);
+	command_fmt = NULL;
+    }
+
+    // for default editor...
+    gchar *text_editor = NULL;
+    if(!command_fmt) {
+	text_editor = rodent_get_text_editor(en);
+	NOOP ("OPEN: text_editor = %s\n", text_editor);
+	if(text_editor) {
+	    /* OK to apply an editor */
+	    command_fmt = g_strconcat(text_editor, " ", NULL);
+	}
+    }
+
+    //command_fmt=get_command_fmt(en);
+    if (is_script) {
+	rfm_threaded_show_text(widgets_p);
+	if (!IS_EXE_TYPE(en->type)){
+	    rfm_threaded_diagnostics(widgets_p, "xffm/stock_dialog-warning", 
+		    g_strconcat(en->path, "\n", NULL));
+	    rfm_threaded_diagnostics(widgets_p, "xffm_tag/stderr",
+		    g_strconcat(_("The program exists, but is not executable.\nPlease check your installation and/or install the binary properly."), 
+		    "\n", NULL));
+	    rfm_threaded_diagnostics(widgets_p, "xffm/stock_dialog-info", NULL);
+	    gchar *text=g_strdup_printf (_("Open with %s"), _("Text Editor"));
+	    gchar *base=g_path_get_basename(en->path);
+	    rfm_threaded_diagnostics(widgets_p, "xffm_tag/green", g_strconcat(text, ": ", base, "\n", NULL));
+	    g_free(base);
+	    g_free(text);
+	}
+    }
+
+    NOOP ("open_with(): magic=%s, mime=%s, command_fmt=%s, editor=%s\n",
+	    en->mimemagic, en->mimetype, command_fmt, text_editor);
+    g_free(text_editor);
+
+    if(command_fmt) {
+        command = MIME_mk_command_line (command_fmt, en->path);
+        TRACE( "OPEN: command = %s\n", command);
+
+        RFM_THREAD_RUN2ARGV (widgets_p, command, FALSE);
+        g_free (command);
+        g_free (command_fmt);
+    } else {
+	open_x(widgets_p);
+        //rodent_open_with_activate (NULL, (gpointer) widgets_p);
+    }
+    return;
+}
+
+#endif
+
 

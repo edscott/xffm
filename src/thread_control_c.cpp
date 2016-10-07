@@ -81,7 +81,7 @@ thread_control_c::thread_unreference(pthread_t *thread){
     pthread_mutex_unlock(&reference_mutex);
 
 #endif
-    g_free(thread);
+    //no more... g_free(thread);
 }
 
 void
@@ -103,53 +103,190 @@ thread_control_c::thread_reference(pthread_t *thread, const gchar *dbg_text){
 
 typedef struct wait_t{
     thread_control_c *thread_control_p;
-    pthread_t *thread;
+    pthread_t thread;
 }wait_t;
 
 static void *
 wait_f(void *data){
     wait_t *wait_p =(wait_t *)data;
     void *retval;
-    pthread_join(*(wait_p->thread), &retval);
-    wait_p->thread_control_p->thread_unreference(wait_p->thread);
-    g_slice_free(wait_t, wait_p);
+    pthread_join(wait_p->thread, &retval);
+    wait_p->thread_control_p->thread_unreference(&(wait_p->thread));
+    g_free(wait_p);
     return NULL;
 }
 
 
 // If view is NULL, the lock is on the window, not any particular view.
-pthread_t *
+gint
 thread_control_c::thread_create(const gchar *dbg_text, void *(*thread_f)(void *), void *data, gboolean joinable)
 {
 
     TRACE("thread_control_c::thread_create: %s\n", dbg_text);
 
-    pthread_t *thread = (pthread_t *)calloc(1, sizeof(pthread_t));
-    if (!thread) return NULL;
-
-// FIXME: memleak of thread and wait_thread???
-    gint retval = pthread_create(thread, NULL, thread_f, data);
-    thread_reference(thread, dbg_text);
+    pthread_t thread;
+    
+    gint retval = pthread_create(&thread, NULL, thread_f, data);
     if (retval){
         g_warning("thread_control_c::thread_create(): %s\n", strerror(retval));
-        g_free(thread);
-        return NULL;
+        return retval;
     }
     if (joinable){
-//        pthread_t *wait_thread = (pthread_t *)calloc(1, sizeof(pthread_t));  // leak?
         pthread_t wait_thread; 
-        wait_t *wait_p = g_slice_new(wait_t);
+        wait_t *wait_p = (wait_t *)calloc(1, sizeof(wait_t));
         wait_p->thread_control_p = this;
         wait_p->thread = thread;
+        thread_reference(&(wait_p->thread), dbg_text);
         
 	pthread_create (&wait_thread, NULL, wait_f, (void *)wait_p);
-	//thread_reference(wait_thread, "wait_thread");
         pthread_detach(wait_thread);
-    } else {
-        pthread_detach(*thread);
-	thread_unreference(thread); // this frees
+        return 0;
+    } 
+    pthread_detach(thread);
+    return 0;
+}
+/////////////////   timeout functinality  ////////////////////////////////7
+//#define DISABLE_FILE_TEST_WITH_TIMEOUT 1
+#ifdef DISABLE_FILE_TEST_WITH_TIMEOUT
+gboolean
+thread_control_c::file_test_with_wait(const gchar *path, GFileTest test){
+    return g_file_test(path, test);
+}
+
+#else
+typedef struct heartbeat_t{
+    gboolean condition;
+    pthread_mutex_t *mutex;
+    pthread_cond_t *signal;
+    pthread_t thread;
+    gchar *path;
+    GFileTest test;
+} heartbeat_t;
+
+static void *
+heartbeat_g_file_test(gpointer data){
+    heartbeat_t *heartbeat_p = (heartbeat_t *)data;
+
+    // This function call may block
+    NOOP("heartbeat doing stat %s\n", heartbeat_p->path);
+    struct stat st;
+    if (lstat(heartbeat_p->path, &st) < 0) {
+        DBG("heartbeat_g_file_test(): cannot lstat %s\n", heartbeat_p->path);
+        return NULL;
+    }
+    
+    // If test is not for symlink, and item is a symlink,
+    // then follow the symlink for the test.
+    if (S_ISLNK(st.st_mode)){
+	if (heartbeat_p->test == G_FILE_TEST_IS_SYMLINK){
+	    return GINT_TO_POINTER(TRUE);
+	}
+	if (stat(heartbeat_p->path, &st) < 0) {
+            DBG("heartbeat_g_file_test(): cannot stat %s\n", heartbeat_p->path);
+            return NULL;
+        }
     }
 
-    return thread;
+    gboolean retval = FALSE;
+    switch (heartbeat_p->test){
+	case G_FILE_TEST_EXISTS: retval = TRUE; break;
+	case G_FILE_TEST_IS_REGULAR: retval = S_ISREG(st.st_mode); break;
+	case G_FILE_TEST_IS_EXECUTABLE:  
+	    retval = ((st.st_mode & (S_IXUSR|S_IXGRP|S_IXOTH)) && S_ISREG(st.st_mode));
+	    break;
+	case G_FILE_TEST_IS_SYMLINK: retval = S_ISLNK(st.st_mode); break;
+	case G_FILE_TEST_IS_DIR: retval = S_ISDIR (st.st_mode); break;
+
+    }
+    
+    pthread_mutex_lock(heartbeat_p->mutex);
+    heartbeat_p->condition = TRUE;
+    pthread_mutex_unlock(heartbeat_p->mutex);
+    NOOP("heartbeat signal %d\n", retval);
+    pthread_cond_signal(heartbeat_p->signal);
+    return GINT_TO_POINTER(retval);
+
 }
+
+static 
+void *wait_on_thread(gpointer data){
+    heartbeat_t *heartbeat_p = (heartbeat_t *)data;
+    void *value;
+    pthread_join(heartbeat_p->thread, &value);
+
+    pthread_mutex_destroy(heartbeat_p->mutex);
+    g_free(heartbeat_p->mutex);
+    pthread_cond_destroy(heartbeat_p->signal);
+    g_free(heartbeat_p->signal);
+
+    g_free (heartbeat_p->path);
+    g_free (heartbeat_p);
+    return value;
+}
+
+gboolean 
+thread_control_c::cond_timed_wait(const gchar *path, pthread_cond_t *signal, pthread_mutex_t *mutex, gint seconds){
+    struct timespec tv;
+    memset(&tv, 0, sizeof (struct timespec));
+    tv.tv_sec = time(NULL) + seconds;
+
+    gint r = pthread_cond_timedwait(signal, mutex, &tv);
+    
+    gboolean retval = TRUE;
+    if (r){
+        retval = FALSE;
+        g_warning("%s: %s\n", path, strerror(errno));
+    }
+    return retval;
+}
+
+// g_file_test_with_timeout
+gboolean
+thread_control_c::file_test_with_wait(const gchar *path, GFileTest test){
+    if (!path) return FALSE;
+    if (!g_path_is_absolute(path)) return FALSE;
+    NOOP(stderr, "rfm_g_file_test_with_wait: %s\n", path);
+
+    heartbeat_t *heartbeat_p = (heartbeat_t *)malloc(sizeof(heartbeat_t));
+    if (!heartbeat_p) g_error("malloc heartbeat_p: %s\n",strerror(errno));
+    memset(heartbeat_p, 0, sizeof(heartbeat_t));
+
+
+    heartbeat_p->mutex=(pthread_mutex_t *)calloc(1, sizeof(pthread_mutex_t));
+    pthread_mutex_init(heartbeat_p->mutex, NULL);
+    
+    heartbeat_p->signal=(pthread_cond_t *)malloc(sizeof(pthread_cond_t));
+    pthread_cond_init(heartbeat_p->signal,NULL);
+
+    heartbeat_p->condition = 0;
+    heartbeat_p->path = g_strdup(path);
+    heartbeat_p->test = test;
+
+    pthread_mutex_lock(heartbeat_p->mutex);
+    NOOP("Creating wait thread for heartbeat_g_file_test_with_timeout\n");
+    // This thread does not affect view nor window.
+    gint r =
+	pthread_create (&heartbeat_p->thread, NULL, heartbeat_g_file_test, (void *)heartbeat_p);
+    
+    if (r==0 && !heartbeat_p->condition) {
+	if (!cond_timed_wait(path, heartbeat_p->signal, heartbeat_p->mutex, 2)) {
+	    pthread_mutex_unlock(heartbeat_p->mutex);
+	    DBG("thread_control_c::file_test_with_wait(): dead heartbeat, aborting\n");
+	    // Dead heartbeat:
+	    // Fire off a wait and cleanup thread.
+            // nonjoinable just to pick up zombie
+            pthread_t wait_thread;
+	    pthread_create (&wait_thread, NULL, wait_on_thread, (void *)heartbeat_p);
+            pthread_detach(wait_thread);
+	    return FALSE;
+	}
+	DBG("thread_control_c::file_test_with_wait(): wait complete within time.\n");
+    }
+    pthread_mutex_unlock(heartbeat_p->mutex);
+    return (TRUE);
+
+}
+
+
+#endif
 
