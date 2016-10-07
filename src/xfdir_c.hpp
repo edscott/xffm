@@ -35,8 +35,9 @@ enum
   COL_ACTUAL_NAME,
   COL_TOOLTIP_TEXT,
   COL_ICON_NAME,
-  COL_MODE,
+  COL_TYPE,
   COL_MIMETYPE, 
+  COL_MIMEFILE, 
   COL_STAT,
   COL_PREVIEW_PATH,
   COL_PREVIEW_TIME,
@@ -71,12 +72,14 @@ class xfdir_c: virtual utility_c {
         gint get_text_column(void);
         void clear_highlights(void);
         void highlight(GtkTreePath *);
+	virtual gboolean is_large(void);
     protected:
         virtual GtkTreeModel *mk_tree_model(void) = 0;
         GtkTreeModel *treemodel;
         gchar *path;
 	gtk_c *gtk_p;
 	gint dir_count;   
+	gboolean large;
         //void tooltip(GtkIconView *, GtkTreePath *);   
     private:
         pthread_mutex_t population_mutex;
