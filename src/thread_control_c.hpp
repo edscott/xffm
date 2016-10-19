@@ -19,10 +19,12 @@ class thread_control_c{
     public:
         thread_control_c(void *);
         ~thread_control_c(void);
-        pthread_t *thread_create(const gchar *, void *(*)(void *), void *, gboolean); 
+        gint thread_create(const gchar *, void *(*)(void *), void *, gboolean); 
         void thread_unreference(pthread_t *);
+        gboolean file_test_with_wait(const gchar *, GFileTest);
     protected:
     private:
+        gboolean cond_timed_wait(const gchar *, pthread_cond_t *, pthread_mutex_t *, gint);
         void *view_v;
         gint thread_count;
         void thread_reference(pthread_t *, const gchar *);

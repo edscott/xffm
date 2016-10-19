@@ -22,7 +22,7 @@ local_file_info_c::~local_file_info_c(void){
 }
 
 gchar *
-local_file_info_c::get_path_info (GtkTreeModel *treemodel, GtkTreePath *tpath) {
+local_file_info_c::get_path_info (GtkTreeModel *treemodel, GtkTreePath *tpath, const gchar *dir) {
     // retrieve cache st info, if available.    
     GtkTreeIter iter;
     struct stat st;
@@ -37,11 +37,14 @@ local_file_info_c::get_path_info (GtkTreeModel *treemodel, GtkTreePath *tpath) {
 	    COL_MIMETYPE, &mimetype, 
 	    COL_MIMEFILE, &mimefile, 
 	    COL_ACTUAL_NAME, &file_path, -1);
+    gchar *full_path = g_build_filename(dir,file_path,NULL);
+    g_free(file_path);
+    
     if (st_p) memcpy(&st, st_p, sizeof(struct stat)); 
     else {
-	if (lstat(file_path, &st) != 0) {
-	    gchar *u = utf_string(file_path);
-	    g_free(file_path);
+	if (lstat(full_path, &st) != 0) {
+	    gchar *u = utf_string(full_path);
+	    g_free(full_path);
 	    g_free(mimetype);
 	    g = g_strdup_printf(_("Cannot lstat \"%s\":\n%s\n"), u, strerror(errno));
 	    g_free(u);
@@ -57,7 +60,7 @@ local_file_info_c::get_path_info (GtkTreeModel *treemodel, GtkTreePath *tpath) {
 	}
     }
     if (!mimefile){
-	mimefile = local_gtk_p->mime_function(file_path, "mime_file");
+	mimefile = local_gtk_p->mime_function(full_path, "mime_file");
 	gtk_list_store_set (GTK_LIST_STORE(treemodel), &iter,
 		COL_MIMEFILE, mimefile, 
 	    -1);
@@ -65,8 +68,8 @@ local_file_info_c::get_path_info (GtkTreeModel *treemodel, GtkTreePath *tpath) {
     
     g = g_strdup("");
     if(S_ISDIR (st.st_mode)) {
-        gint files = count_files (file_path);
-        gint hidden = count_hidden_files (file_path);
+        gint files = count_files (full_path);
+        gint hidden = count_hidden_files (full_path);
         if(files) {
             gchar *files_string = g_strdup_printf (ngettext (" (containing %'d item)", " (containing %'d items)", files),files);
     
@@ -83,8 +86,8 @@ local_file_info_c::get_path_info (GtkTreeModel *treemodel, GtkTreePath *tpath) {
             g = g_strdup_printf ("%s", _("The location is empty."));
         }
     } 
-    gchar *info = path_info (file_path, &st, g, mimetype, mimefile);
-    g_free(file_path);
+    gchar *info = path_info (full_path, &st, g, mimetype, mimefile);
+    g_free(full_path);
     g_free(mimetype);
     g_free(mimefile);
     g_free(g);
@@ -210,13 +213,14 @@ local_file_info_c::path_info (const gchar *file_path, struct stat *st, const gch
 
     //    gchar *ss= rfm_time_to_string(st->st_mtime);   
 
-    gchar *t = g_path_get_dirname (file_path);
-    gchar *v = utf_string(t);
-    gchar *escaped_markup = g_markup_escape_text(v, -1);
-    g_free(v);
-    gchar *dirname = utf_string (escaped_markup);
-    g_free(t);
-    g_free(escaped_markup);
+    //gchar *t = g_path_get_dirname (file_path);
+    //gchar *v = utf_string(t);
+    //gchar *escaped_markup = g_markup_escape_text(v, -1);
+    //g_free(v);
+    //gchar *dirname = utf_string (escaped_markup);
+    //g_free(t);
+    //g_free(escaped_markup);
+    
     gchar *mode_string_s=mode_string (st->st_mode);
     stat_stuff = g_strdup_printf (
             "<b>%s/%s</b>: %s/%s\n<b>%s</b>: %s\n<b>%s</b>: %s",
@@ -227,7 +231,7 @@ local_file_info_c::path_info (const gchar *file_path, struct stat *st, const gch
     g_free (owner);
     g_free (grupo);
     g_free (tag);
-    g_free (dirname);
+    //g_free (dirname);
     g_free (mode_string_s);
 
     gchar buf[1024];
