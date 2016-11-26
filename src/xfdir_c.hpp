@@ -52,6 +52,7 @@ class xfdir_c: virtual utility_c {
         virtual void reload(const gchar *)=0;
 	virtual const gchar *get_xfdir_iconname(void)=0;
         virtual void item_activated (GtkIconView *, GtkTreePath *, void *);
+	virtual gboolean popup(GtkTreePath *);
 
         virtual gchar *make_tooltip_text (GtkTreePath *);
         virtual gchar *get_verbatim_name (GtkTreePath *);

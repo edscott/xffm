@@ -35,7 +35,10 @@ query_tooltip_f (GtkWidget  *widget,
                gboolean    keyboard_mode,
                GtkTooltip *tooltip,
                gpointer    data);
-
+static gboolean
+button_press_f (GtkWidget *widget,
+               GdkEvent  *event,
+               gpointer   data);
 
 ////////////////////////////////////////
 // class methods
@@ -229,6 +232,8 @@ view_c::signals(void){
     g_signal_connect (get_iconview(), "query-tooltip", 
             G_CALLBACK (query_tooltip_f), (void *)this);
 
+    g_signal_connect (get_iconview(), "button-press-event",
+	    G_CALLBACK(button_press_f), (void *)this);
 
     // clear button:
     g_signal_connect (get_clear_button(), "clicked", 
@@ -599,6 +604,7 @@ switch_page (GtkNotebook *notebook,
     view_p->set_application_icon(new_page);
 }
 
+
 static gboolean
 query_tooltip_f (GtkWidget  *widget,
                gint        x,
@@ -672,4 +678,27 @@ view_c::setup_tooltip(gint x, gint y){
 
     return;
 }
+
+
+static gboolean
+button_press_f (GtkWidget *widget,
+               GdkEvent  *event,
+               gpointer   data){
+    GdkEventButton *event_button = (GdkEventButton *)event;
+    // long press or button 3 should do popup menu...
+    if (event_button->button != 3) return FALSE;
+    GtkTreePath *path;
+
+    if (!gtk_icon_view_get_item_at_pos (GTK_ICON_VIEW(widget),
+                               event_button->x,
+                               event_button->y,
+                               &path, NULL)) return FALSE;
+
+    fprintf(stderr, "view_p: button_press_event...\n");
+    
+    gboolean retval = ((view_c *)data)->get_xfdir_p()->popup(path);
+    gtk_tree_path_free(path);
+    return retval;
+}
+
 

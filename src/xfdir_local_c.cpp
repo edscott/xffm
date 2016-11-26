@@ -697,6 +697,28 @@ xfdir_local_c::get_xfdir_iconname(void){
     g_free(d);
     return "folder";
 }
+
+gboolean
+xfdir_local_c::popup(GtkTreePath *tpath){
+    GtkTreeIter iter;
+    gtk_tree_model_get_iter (treemodel, &iter, tpath);
+    
+    gchar *name;
+    gchar *actual_name;
+    gtk_tree_model_get (treemodel, &iter, 
+            DISPLAY_NAME, &name, 
+            ACTUAL_NAME, &actual_name, 
+	    -1);
+    // here we do the local xfdir popup menu method (overloaded)
+    gchar *fullpath = g_build_filename(get_path(), actual_name, NULL);
+    fprintf(stderr, "xfdir_local_c::popup: popup for %s (%s)\n", name, fullpath);
+    g_free(name);
+    g_free(actual_name);
+    g_free(fullpath);
+    return TRUE;
+}
+
+
 /////////////////////////////////////////////////////////////////////
 
 static gint
