@@ -312,7 +312,21 @@ run_c::run_in_shell(const gchar *command){
     if (strchr(command, '&')) return TRUE; 
     if (strchr(command, '\'')) return TRUE;
     if (strchr(command, '"')) return TRUE;
-    return FALSE;
+    // Are we defining an environment variable or something else?
+    gint count;
+    gchar **g;
+    gboolean retval = FALSE;
+    if (!g_shell_parse_argv (command, &count, &g, NULL)) return TRUE;
+    if (!g || !g[0]) {
+        retval = TRUE;
+    }
+    else {
+        gchar *p = g_find_program_in_path(g[0]);
+        if (!p) retval = TRUE;
+        g_free(p);
+    }
+    g_strfreev(g);
+    return retval;
 }
 
 pid_t run_c::thread_run(const gchar *command){
