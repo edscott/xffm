@@ -29,7 +29,6 @@ class window_c {
         GtkWidget *window;
         GtkWidget *new_tab_button;
 	
-        utility_c *utility_p;
         gtk_c *gtk_p;
                 
         GList *view_list;

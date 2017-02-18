@@ -20,7 +20,6 @@ window_c::window_c(gtk_c *data) {
     else {throw 1;}
 
     view_list_mutex = PTHREAD_MUTEX_INITIALIZER;
-    utility_p = new utility_c();
     window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
     gtk_widget_set_has_tooltip (window, TRUE);
     g_signal_connect (G_OBJECT (window), "query-tooltip", G_CALLBACK (window_tooltip_f), (void *)this);
@@ -73,7 +72,6 @@ window_c::~window_c(void) {
         delete view_p;
     }
     pthread_mutex_unlock(&view_list_mutex);
-    delete utility_p;
 }
 
 const gchar *
