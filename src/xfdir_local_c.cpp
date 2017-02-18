@@ -183,10 +183,46 @@ xfdir_local_c::read_items (gint *heartbeat) {
 	return NULL;
     }
 
+// readdir way
+//  mutex protect...
+    fprintf(stderr, "** requesting readdir mutex for %s...\n", path);
+    pthread_mutex_t *mutex = get_readdir_mutex();
+    pthread_mutex_lock(mutex);
+    fprintf(stderr, "++ mutex for %s obtained.\n", path);
+    struct dirent *d; // static pointer
+    errno=0;
+    while ((d = readdir(directory))  != NULL){
+        //fprintf(stderr, "%p  %s\n", d, d->d_name);
+        if(strcmp (d->d_name, ".") == 0) continue;
+	xd_t *xd_p = (xd_t *)calloc(1,sizeof(xd_t));
+	xd_p->d_name = g_strdup(d->d_name);
+        xd_p->mimetype = NULL;
+        xd_p->mimefile = NULL;
+	xd_p->st = NULL;
+#ifdef HAVE_STRUCT_DIRENT_D_TYPE
+	xd_p->d_type = d->d_type;
+#else
+	xd_p->d_type = 0;
+#endif
+	directory_list = g_list_prepend(directory_list, xd_p);
+	if (heartbeat) {
+	    (*heartbeat)++;
+	    NOOP(stderr,"incrementing heartbeat records to %d\n", *heartbeat);
+	}
+    }
+    if (errno) {
+        fprintf(stderr, "read_files_local: %s\n", strerror(errno));
+    }
+// unlock mutex
+    pthread_mutex_unlock(mutex);
+    fprintf(stderr, "-- mutex for %s released.\n", path);
+
+#if 0
 // http://womble.decadent.org.uk/readdir_r-advisory.html
 
 #if 0
 // this crashes on gvfs mount points....
+// I guess this is one of the reasons why readdir_r is deprecated
 //        bug reported by Liviu
 #if defined(HAVE_FPATHCONF) && defined(HAVE_DIRFD)
     size_t size = offsetof(struct dirent, d_name) + 
@@ -230,9 +266,10 @@ xfdir_local_c::read_items (gint *heartbeat) {
         fprintf(stderr, "read_files_local: %s\n", strerror(errno));
     }
 
-    closedir (directory);
 
     g_free(buffer);
+#endif
+    closedir (directory);
 
     // At least the ../ record should have been read. If this
     // is not so, then a read error occurred.

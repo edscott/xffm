@@ -35,6 +35,7 @@ class xfdir_local_c: public xfdir_c, virtual utility_c, protected local_file_inf
 
 	gchar *get_home_iconname(const gchar *);
         GList *sort_directory_list(GList *);
+
 };
 
 
