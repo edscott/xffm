@@ -98,6 +98,10 @@ window_c::set_tt_window(GtkWidget *data, const gchar *data2){
     set_tooltip_path_string(data2);
     tt_window = data;
     gtk_widget_set_tooltip_window (window, GTK_WINDOW(tt_window));
+    if (tt_window && G_IS_OBJECT (tt_window)) {
+        g_object_set_data(G_OBJECT(tt_window), "tooltip_target", (void *)window);
+    }
+    
     return;
 }
 

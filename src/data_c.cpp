@@ -55,6 +55,7 @@ data_c::data_c(void){
 	g_hash_table_new_full (g_str_hash, g_str_equal,g_free, free_pixbuf_t);
 
     
+    highlight_hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
 
 }
 
@@ -78,6 +79,8 @@ data_c::~data_c(void){
     pthread_mutex_destroy(&application_hash_mutex);
     
     g_hash_table_destroy (pixbuf_hash);
+   
+    g_hash_table_destroy(highlight_hash);
 
 }
 

@@ -30,6 +30,9 @@ class data_c {
         GHashTable *application_hash_output;
         GHashTable *application_hash_output_ext;
         GHashTable *generic_icon_hash;
+
+        
+        GHashTable *highlight_hash;
 	
     private:
 	GtkApplication *app; 

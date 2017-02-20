@@ -627,8 +627,10 @@ query_tooltip_f (GtkWidget  *widget,
 
     if (!gtk_icon_view_get_tooltip_context(icon_view, &x, &y, FALSE, 
                 NULL, NULL, NULL)) {
+        //fprintf(stderr, "tooltip context %d,%d\n", -1,-1);
         view_p->setup_tooltip(-1, -1);
     } else {
+        //fprintf(stderr, "tooltip context %d,%d\n", x,y);
         view_p->setup_tooltip(x, y);
     }
     return FALSE;
@@ -636,6 +638,7 @@ query_tooltip_f (GtkWidget  *widget,
 
 void
 view_c::setup_tooltip(gint x, gint y){
+    
     window_c *window_p = (window_c *)get_window_v();
     if (x < 0 || y < 0) {
         window_p->set_tt_window(NULL, NULL);

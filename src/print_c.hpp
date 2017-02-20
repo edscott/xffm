@@ -6,7 +6,7 @@
 #include "data_c.hpp"
 
 
-class print_c: virtual utility_c, public gtk_c {
+class print_c: virtual utility_c, protected pixbuf_c {
     public:
         print_c(data_c *, void *);
         void print_error(gchar *);

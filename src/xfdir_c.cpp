@@ -8,6 +8,7 @@ static gboolean unhighlight (gpointer, gpointer, gpointer);
 
 xfdir_c::xfdir_c(data_c *data0, const gchar *data): gtk_c(data0){
     path = g_strdup(data);
+    data_p = data0;
     large = FALSE;
     gint result;
     population_mutex = PTHREAD_MUTEX_INITIALIZER;
@@ -19,7 +20,6 @@ xfdir_c::xfdir_c(data_c *data0, const gchar *data): gtk_c(data0){
         throw 1;
     }
     population_condition = 0;
-    highlight_hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
 
 }
 
@@ -29,7 +29,6 @@ xfdir_c::~xfdir_c(void){
     pthread_mutex_destroy(&population_mutex);
     pthread_cond_destroy(&population_cond);
     pthread_rwlock_destroy(&population_lock);
-    g_hash_table_destroy(highlight_hash);
 }
 
 gboolean
@@ -136,7 +135,7 @@ xfdir_c::highlight(GtkTreePath *tpath){
 
     // Already highlighted?
     tree_path_string = gtk_tree_path_to_string (tpath);
-    if (g_hash_table_lookup(highlight_hash, tree_path_string)) {
+    if (g_hash_table_lookup(data_p->highlight_hash, tree_path_string)) {
         //TRACE("%s already in hash\n", tree_path_string);
         g_free (tree_path_string);
         gtk_tree_path_free (tpath);
@@ -146,7 +145,7 @@ xfdir_c::highlight(GtkTreePath *tpath){
     // Not highlighted. First clear any other item which highlight remains.
     clear_highlights();
     // Now do highlight dance. 
-    g_hash_table_insert(highlight_hash, tree_path_string, GINT_TO_POINTER(1));
+    g_hash_table_insert(data_p->highlight_hash, tree_path_string, GINT_TO_POINTER(1));
     GtkTreeIter iter;
     gtk_tree_model_get_iter (treemodel, &iter, tpath);
     
@@ -162,8 +161,8 @@ xfdir_c::highlight(GtkTreePath *tpath){
 
 void
 xfdir_c::clear_highlights(void){
-    if (!highlight_hash || g_hash_table_size(highlight_hash) == 0) return;
-    g_hash_table_foreach_remove (highlight_hash, unhighlight, (void *)this);
+    if (!data_p->highlight_hash || g_hash_table_size(data_p->highlight_hash) == 0) return;
+    g_hash_table_foreach_remove (data_p->highlight_hash, unhighlight, (void *)this);
 }
 
 gint 

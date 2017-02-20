@@ -86,7 +86,8 @@ class xfdir_c: virtual utility_c, public gtk_c {
         pthread_cond_t population_cond;
         gint population_condition;
         pthread_rwlock_t population_lock;
-        GHashTable *highlight_hash;
+
+        data_c *data_p;
 
 };
 

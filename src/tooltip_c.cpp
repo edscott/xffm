@@ -238,17 +238,21 @@ widget_tooltip_function(
 ) {
     tooltip_c *tooltip_p = (tooltip_c *)user_data;
     GtkWidget *tt_window = tooltip_p->get_tt_window();
+    gchar *tooltip_text = (gchar *)g_object_get_data(G_OBJECT(widget), "tooltip_text");
     if (tt_window) {
 	GtkWidget *tooltip_target = (GtkWidget *)
 	    g_object_get_data(G_OBJECT(tt_window), "tooltip_target");
-	if (tooltip_target == widget) return TRUE;
+
+        //fprintf(stderr, "tooltip target,widget %p,%p\"\n", tooltip_target, widget); 
+
+        if (tooltip_target == widget) return TRUE;
+    } else {
+        fprintf(stderr, "New tooltip window\"%s\"\n", tooltip_text); 
     }
 
     GdkPixbuf *tooltip_pixbuf = (GdkPixbuf *)g_object_get_data(G_OBJECT(widget), "tooltip_pixbuf");
-    gchar *tooltip_text = (gchar *)g_object_get_data(G_OBJECT(widget), "tooltip_text");
     gchar *label_text = NULL;
 
-    TRACE("New tooltip \"%s\"\n", tooltip_text); 
     if (tooltip_text){
 	if (strchr(tooltip_text, '\n')) {
 	    label_text = g_strdup(tooltip_text);
@@ -296,6 +300,8 @@ custom_tooltip_f(void * data){
     const gchar *text = (const gchar *)arg[2];
     void *object = arg[3];
     tooltip_c *tooltip_p = (tooltip_c *)object;
+
+    fprintf(stderr, "custom_tooltip_f for %s\n", text);
 
     gchar *t = g_strdup(text);
     g_object_set_data(G_OBJECT(widget), "tooltip_text", t);
