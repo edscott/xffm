@@ -12,7 +12,7 @@ typedef struct xd_t{
 
 class xfdir_local_c: public xfdir_c, virtual utility_c{
     public:
-	xfdir_local_c(data_c *, const gchar *);
+	xfdir_local_c(data_c *, const gchar *, gboolean);
         void reload(const gchar *);
 	const gchar *get_xfdir_iconname(void);
         gchar *make_tooltip_text (GtkTreePath *);

@@ -39,6 +39,8 @@ class view_c: public widgets_c, public thread_control_c, virtual utility_c {
         void clear_status(void);
         void root(void);
         void setup_tooltip(gint, gint);
+        gboolean shows_hidden(void);
+        void toggle_show_hidden(void);
 
     protected:
 	// This class is base for none

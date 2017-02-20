@@ -158,7 +158,7 @@ window_c::go_home(void){
     } else {
 	// here we switch from module to local xfdir_c objects
 	xfdir_c *xfdir_p;
-	xfdir_p = (xfdir_c *)new xfdir_local_c(data_p, view_p->get_path());
+	xfdir_p = (xfdir_c *)new xfdir_local_c(data_p, view_p->get_path(), view_p->shows_hidden());
 	view_p->set_treemodel(xfdir_p);
     }
 }

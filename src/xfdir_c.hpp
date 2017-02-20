@@ -74,12 +74,14 @@ class xfdir_c: virtual utility_c, public gtk_c {
         void clear_highlights(void);
         void highlight(GtkTreePath *);
 	virtual gboolean is_large(void);
+        void set_show_hidden(gboolean);
     protected:
         virtual GtkTreeModel *mk_tree_model(void) = 0;
         GtkTreeModel *treemodel;
         gchar *path;
 	gint dir_count;   
 	gboolean large;
+        gboolean shows_hidden;
         //void tooltip(GtkIconView *, GtkTreePath *);   
     private:
         pthread_mutex_t population_mutex;

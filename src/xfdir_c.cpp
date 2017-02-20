@@ -122,6 +122,9 @@ xfdir_c::tooltip(GtkIconView *icon_view, GtkTreePath *tpath){
 #endif
 
 void
+xfdir_c::set_show_hidden(gboolean state){shows_hidden = state;}
+
+void
 xfdir_c::highlight(GtkTreePath *tpath){
         //TRACE("highlight %d, %d\n", highlight_x, highlight_y);
     gchar *tree_path_string = NULL;

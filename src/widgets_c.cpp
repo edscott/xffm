@@ -16,6 +16,8 @@ widgets_c::widgets_c(data_c *data0, void *window_data, GtkNotebook *data): gtk_c
     create();
     setup_scolled_windows();
     setup_size_scale();
+    setup_image_button(hidden_button, "emblem-show-hidden",  _("Show hidden files"));
+    fprintf(stderr, "toggle hidden_button=%p\n", hidden_button);
     setup_image_button(clear_button, "edit-clear-all",  _("Clear"));
     setup_image_button(page_label_button, "window-close", _("Close Tab"));
 }
@@ -34,6 +36,7 @@ GtkWidget *widgets_c::get_pathbar(void){ return pathbar_p->get_pathbar();}
 GtkWidget *widgets_c::get_page_label(void){ return page_label;}
 GtkWidget *widgets_c::get_page_label_icon_box(void){ return page_label_icon_box;}
 GtkWidget *widgets_c::get_clear_button(void){ return clear_button;}
+GtkToggleButton *widgets_c::get_hidden_button(void){ return GTK_TOGGLE_BUTTON(hidden_button);}
 
 void widgets_c::update_pathbar(const gchar *data){pathbar_p->update_pathbar(data);}
 
@@ -120,6 +123,7 @@ widgets_c::create(void){
 
     button_space = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
     clear_button =  gtk_button_new ();
+    hidden_button =  gtk_toggle_button_new ();
     size_scale = gtk_scale_new_with_range(GTK_ORIENTATION_HORIZONTAL, 0.0, 96.0, 12.0);
 }
 
@@ -167,6 +171,8 @@ widgets_c::pack(void){
     gtk_widget_show (size_scale);
     gtk_box_pack_end (GTK_BOX (button_space), clear_button, FALSE, FALSE, 0);
     gtk_widget_show (clear_button);
+    gtk_box_pack_end (GTK_BOX (button_space), hidden_button, FALSE, FALSE, 0);
+    gtk_widget_show (hidden_button);
 
     gtk_box_pack_start (GTK_BOX (page_child), button_space, FALSE, FALSE, 0);
     gtk_widget_show (button_space);

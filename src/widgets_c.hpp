@@ -37,6 +37,7 @@ class widgets_c: virtual utility_c, public gtk_c{
         GtkWidget *get_page_label(void);
         GtkWidget *get_page_label_icon_box(void);
         GtkWidget *get_clear_button(void);
+        GtkToggleButton *get_hidden_button(void);
 	GtkNotebook *get_notebook(void);
 	
 	void update_pathbar(const gchar *);
@@ -68,6 +69,7 @@ class widgets_c: virtual utility_c, public gtk_c{
         GtkWidget *rename;		// rename entry box
         GtkWidget *button_space;	// little button space
         GtkWidget *clear_button;	// clear text area button
+        GtkWidget *hidden_button;	// show hidden toggle
         GtkWidget *size_scale;
 
         void *window_v;

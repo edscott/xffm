@@ -12,6 +12,7 @@ static gboolean motion_notify_event(GtkWidget *, GdkEvent *, void *);
 static gboolean leave_notify_event(GtkWidget *, GdkEvent *, void *);
 static void on_remove_page_button(GtkWidget *, void *);
 static void *show_text_f(GtkWidget *, void *);
+static void toggle_hidden_f(GtkWidget *, void *);
 static void clear_text_f(GtkWidget *, void *);
 static void clear_status_f(GtkWidget *, void *);
 static void hide_text_f(GtkWidget *, void *);
@@ -55,7 +56,7 @@ view_c::view_c(data_c *data0, void *window_data, GtkNotebook *notebook, const gc
     data_p = data0;
     init();
     if (g_file_test(path, G_FILE_TEST_IS_DIR) ){
-	   new_xfdir_p = (xfdir_c *)new xfdir_local_c(data_p, path);
+	new_xfdir_p = (xfdir_c *)new xfdir_local_c(data_p, path, shows_hidden());
     } else {
 	// load specific class xfdir here
     }
@@ -67,6 +68,19 @@ view_c::~view_c(void){
     DBG("view_c::~view_c\n");
     if (xfdir_p) delete xfdir_p;
     if (lpterm_p) delete lpterm_p;
+}
+
+gboolean
+view_c::shows_hidden(void){
+    gboolean state = gtk_toggle_button_get_active(get_hidden_button());
+    return state;
+}
+
+void
+view_c::toggle_show_hidden(void){
+    if (!xfdir_p) return;
+    xfdir_p->set_show_hidden(shows_hidden());
+    reload(xfdir_p->get_path());
 }
 
 void 
@@ -101,7 +115,8 @@ view_c::reload(const gchar *data){
     if (g_file_test(data, G_FILE_TEST_IS_DIR) &&
 	    !g_file_test(get_path(), G_FILE_TEST_IS_DIR)){
 	// switch back to local mode
-	xfdir_c *xfdir_local_p = (xfdir_c *)new xfdir_local_c(data_p, data);
+        fprintf(stderr, "hidden toggle=%d\n", shows_hidden());
+	xfdir_c *xfdir_local_p = (xfdir_c *)new xfdir_local_c(data_p, data, shows_hidden());
 	set_treemodel(xfdir_local_p);
 	return;
     }
@@ -244,7 +259,8 @@ view_c::signals(void){
 
     g_signal_connect (get_iconview(), "button-press-event",
 	    G_CALLBACK(button_press_f), (void *)this);
-
+    g_signal_connect (get_hidden_button(), "clicked", 
+            G_CALLBACK (toggle_hidden_f), (void *)this);
     // clear button:
     g_signal_connect (get_clear_button(), "clicked", 
             G_CALLBACK (clear_text_f), (void *)this);
@@ -475,6 +491,12 @@ clear_status_f	(GtkWidget *w, gpointer data){
     GtkTextIter start, end;
     gtk_text_buffer_get_bounds (buffer, &start, &end);
     gtk_text_buffer_delete (buffer, &start, &end);
+}
+
+static void
+toggle_hidden_f	(GtkWidget *w, gpointer data){
+    view_c *view_p =(view_c *)data;
+    view_p->toggle_show_hidden();
 }
 
 

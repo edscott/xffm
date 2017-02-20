@@ -33,10 +33,12 @@
 
 static gint compare_by_name (const void *, const void *);
 
-xfdir_local_c::xfdir_local_c(data_c *data0, const gchar *data): 
+xfdir_local_c::xfdir_local_c(data_c *data0, const gchar *data, gboolean data2): 
     xfdir_c(data0, data)
 {
     data_p = data0;
+    shows_hidden = data2;
+    fprintf(stderr, "data2=%d\n", data2);
     treemodel = mk_tree_model();
     user_string_mutex=PTHREAD_MUTEX_INITIALIZER;
     group_string_mutex=PTHREAD_MUTEX_INITIALIZER;
@@ -198,9 +200,11 @@ xfdir_local_c::read_items (gint *heartbeat) {
     fprintf(stderr, "++ mutex for %s obtained.\n", path);
     struct dirent *d; // static pointer
     errno=0;
+    fprintf(stderr, "shows hidden=%d\n", shows_hidden);
     while ((d = readdir(directory))  != NULL){
         //fprintf(stderr, "%p  %s\n", d, d->d_name);
         if(strcmp (d->d_name, ".") == 0) continue;
+        if(!shows_hidden && d->d_name[0] == '.' && strcmp (d->d_name, "..")) continue;
 	xd_t *xd_p = (xd_t *)calloc(1,sizeof(xd_t));
 	xd_p->d_name = g_strdup(d->d_name);
         xd_p->mimetype = NULL;
