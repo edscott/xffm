@@ -6,7 +6,7 @@
 
 class run_output_c: public csh_completion_c, virtual utility_c {
     public:
-        run_output_c(void *);
+        run_output_c(data_c *, void *);
         ~run_output_c(void);
         gchar *exit_string(gchar *);
     protected:

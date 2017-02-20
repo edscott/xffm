@@ -3,10 +3,11 @@
 #include "xffm+.h"
 #include "run_c.hpp"
 #include "run_button_c.hpp"
+#include "data_c.hpp"
 
 class lpterm_c: public run_c {
     public:
-        lpterm_c(void *);
+        lpterm_c(data_c *, void *);
         ~lpterm_c(void);
         gboolean is_iconview_key(GdkEventKey *);
         gboolean is_lpterm_key(GdkEventKey *);
@@ -38,6 +39,7 @@ class lpterm_c: public run_c {
 
         GList *run_button_list;
         pthread_mutex_t *rbl_mutex;
+	data_c *data_p;
 
 
 }; 

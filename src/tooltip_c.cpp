@@ -1,17 +1,15 @@
 #include "tooltip_c.hpp"
 
 
-tooltip_c::tooltip_c(void){
+tooltip_c::tooltip_c(data_c *data0){
     tooltip_text_hash = g_hash_table_new_full(g_direct_hash, g_direct_equal, NULL, g_free);
     tt_window = NULL;
     tooltip_is_mapped = FALSE;
-    utility_p = new utility_c();
 }
 
 tooltip_c::~tooltip_c(void){
     if (tooltip_text_hash) g_hash_table_destroy(tooltip_text_hash);
     tooltip_text_hash = NULL;
-    delete utility_p;
 }
 
 GtkWidget * 
@@ -163,7 +161,7 @@ tooltip_c::get_tt_window(const GdkPixbuf *pixbuf, const gchar *markup, const gch
     if (label_text) {
 	GtkWidget *label = gtk_label_new("");
 	gtk_widget_show(label);
-	gchar *utf_text =  utility_p->utf_string (label_text);
+	gchar *utf_text =  utf_string (label_text);
 	gchar *label_markup;
         label_markup = 
             g_strdup_printf("<span color=\"yellow\" font_family=\"monospace\" weight=\"bold\"> %s </span>",utf_text); 
@@ -315,7 +313,7 @@ custom_tooltip_f(void * data){
 
 void tooltip_c::custom_tooltip(GtkWidget *widget, GdkPixbuf *pixbuf, const gchar *text){
     void *arg[]={widget, pixbuf, (void *)text, (void *)this};
-    utility_p->context_function(custom_tooltip_f, arg);
+    context_function(custom_tooltip_f, arg);
 }
 
 GHashTable *

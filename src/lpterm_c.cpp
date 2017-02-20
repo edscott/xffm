@@ -8,22 +8,13 @@
 # include <readline/history.h>
 #endif
 
+static gboolean on_status_button_press ( GtkWidget * , GdkEventButton *, gpointer);
+static gboolean status_keyboard_event (GtkWidget *, GdkEventKey *, gpointer);
 
-static gboolean
-on_status_button_press ( GtkWidget *w , GdkEventButton * event, gpointer data) {
-    lpterm_c *lpterm_p = (lpterm_c *)data;
-    lpterm_p->lp_set_active(TRUE);
-    return TRUE;
-}
+//////////////////////////////////////////////////////////////////
 
-static gboolean
-status_keyboard_event (GtkWidget * window, GdkEventKey * event, gpointer data)
-{
-    TRACE("status_keyboard_event\n");
-    return FALSE;
-}
-
-lpterm_c::lpterm_c(void *data): run_c(data){
+lpterm_c::lpterm_c(data_c *data0, void *data): run_c(data0, data){
+    data_p = data0;
     active = FALSE;
     view_c *view_p = (view_c *)data;
     iconview = view_p->get_iconview();
@@ -381,7 +372,7 @@ lpterm_c::shell_command(const gchar *c, gboolean save){
     pid_t pid = thread_run(command?command:c);
     if (!pid) return NULL; 
     run_button_c *run_button_p = NULL;
-    run_button_p = new run_button_c(view_v, c, pid, run_in_shell(c));
+    run_button_p = new run_button_c(data_p, view_v, c, pid, run_in_shell(c));
     // We save the original sudo command, not the one modified with "-A"
     if (save) csh_save_history(c);
     g_free (command);
@@ -422,7 +413,6 @@ lpterm_c::lpterm_keyboard_event( GdkEventKey * event, gpointer data) {
     }
     view_c *view_p =(view_c *)data; 
     gtk_widget_grab_focus (GTK_WIDGET(status));
-    gtk_c *gtk_p = view_p->get_gtk_p();
 
     
     if(event->keyval == GDK_KEY_Up || event->keyval == GDK_KEY_KP_Up) {
@@ -482,4 +472,20 @@ lpterm_c::lpterm_keyboard_event( GdkEventKey * event, gpointer data) {
     return retval;
 }
 
+///////////////////////////////////////////////////////////////
+
+
+static gboolean
+on_status_button_press ( GtkWidget *w , GdkEventButton * event, gpointer data) {
+    lpterm_c *lpterm_p = (lpterm_c *)data;
+    lpterm_p->lp_set_active(TRUE);
+    return TRUE;
+}
+
+static gboolean
+status_keyboard_event (GtkWidget * window, GdkEventKey * event, gpointer data)
+{
+    TRACE("status_keyboard_event\n");
+    return FALSE;
+}
 

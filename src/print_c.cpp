@@ -27,10 +27,9 @@ static void *clear_text_buffer_f(void *);
 //                       print_c class methods                            //
 ///////////////////////////////////////////////////////////////////////////
 
-print_c::print_c(void *data){
+print_c::print_c(data_c *data0, void *data):gtk_c(data0){
     view_v = data;
     view_c *view_p = (view_c *)data;
-    gtk_p = view_p->get_gtk_p();
     status = GTK_TEXT_VIEW(view_p->get_status());
     diagnostics = GTK_TEXT_VIEW(view_p->get_diagnostics());
     status_label = GTK_LABEL(view_p->get_status_label());
@@ -81,7 +80,7 @@ void print_c::print_tag(const gchar *tag, gchar *string){
 
 void print_c::print_icon(const gchar *iconname, gchar *string)
 {
-    GdkPixbuf *pixbuf = gtk_p->get_pixbuf(iconname, -16);
+    GdkPixbuf *pixbuf = get_pixbuf(iconname, -16);
     void *arg[]={(void *)pixbuf, (void *)this, NULL, (void *)string};
     context_function(print_i, arg);
     g_free(string);
@@ -92,7 +91,7 @@ void print_c::print_icon_tag(const gchar *iconname,
 	                     const gchar *tag, 
 			     gchar *string)
 {
-    GdkPixbuf *pixbuf = gtk_p->get_pixbuf(iconname, -16);
+    GdkPixbuf *pixbuf = get_pixbuf(iconname, -16);
     void *arg[]={(void *)pixbuf, (void *)this, (void *)tag, (void *)string};
     context_function(print_i, arg);
     g_free(string);

@@ -12,9 +12,9 @@ using namespace std;
 // This class creates all necessary widgets for class view_c 
 // and defines their characteristics.
 
-class widgets_c: virtual utility_c{
+class widgets_c: virtual utility_c, public gtk_c{
     public:
-        widgets_c(void *, GtkNotebook *);
+        widgets_c(data_c *, void *, GtkNotebook *);
         ~widgets_c(void);
 
         GtkWidget *get_iconview(void);
@@ -28,7 +28,6 @@ class widgets_c: virtual utility_c{
         GtkWidget *get_status_label(void);
 	
 	void *get_window_v(void);
-	gtk_c *get_gtk_p();
     protected:
         void pack();
 
@@ -48,7 +47,6 @@ class widgets_c: virtual utility_c{
         void setup_scolled_windows(void);
         void setup_size_scale(void);
         pathbar_c *pathbar_p;
-        gtk_c *gtk_p;
 	
         GtkIconView *icon_view;          
         GtkNotebook *notebook;

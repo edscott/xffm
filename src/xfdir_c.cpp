@@ -6,10 +6,8 @@
 using namespace std;
 static gboolean unhighlight (gpointer, gpointer, gpointer);
 
-xfdir_c::xfdir_c(const gchar *data, gtk_c *data_gtk_c){
-    gtk_p = data_gtk_c;
+xfdir_c::xfdir_c(data_c *data0, const gchar *data): gtk_c(data0){
     path = g_strdup(data);
-
     large = FALSE;
     gint result;
     population_mutex = PTHREAD_MUTEX_INITIALIZER;
@@ -31,6 +29,7 @@ xfdir_c::~xfdir_c(void){
     pthread_mutex_destroy(&population_mutex);
     pthread_cond_destroy(&population_cond);
     pthread_rwlock_destroy(&population_lock);
+    g_hash_table_destroy(highlight_hash);
 }
 
 gboolean
@@ -163,7 +162,7 @@ xfdir_c::highlight(GtkTreePath *tpath){
 
 void
 xfdir_c::clear_highlights(void){
-    if (g_hash_table_size(highlight_hash) == 0) return;
+    if (!highlight_hash || g_hash_table_size(highlight_hash) == 0) return;
     g_hash_table_foreach_remove (highlight_hash, unhighlight, (void *)this);
 }
 
@@ -200,10 +199,10 @@ xfdir_c::item_activated (GtkIconView *iconview, GtkTreePath *tpath, void *data)
         view_p->reload(full_path);
     } else {
         // uses mimetype, should be delegated to xfdir_local_c...
-        gchar *mimetype = gtk_p->mime_type(full_path);
-        const gchar *command = gtk_p->mime_command(mimetype);
-        const gchar *command1 = gtk_p->mime_command_text(mimetype);
-        const gchar *command2 = gtk_p->mime_command_text2(mimetype);
+        gchar *mimetype = mime_type(full_path);
+        const gchar *command = mime_command(mimetype);
+        const gchar *command1 = mime_command_text(mimetype);
+        const gchar *command2 = mime_command_text2(mimetype);
         view_p->get_lpterm_p()->print_error(g_strdup_printf("%s: %s\n", mimetype, command));
         view_p->get_lpterm_p()->print_error(g_strdup_printf("%s: %s\n", mimetype, command1));
         view_p->get_lpterm_p()->print_error(g_strdup_printf("%s: %s\n", mimetype, command2));

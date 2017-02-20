@@ -5,15 +5,19 @@
 #include "widgets_c.hpp"
 #include "lpterm_c.hpp"
 #include "print_c.hpp"
-#include "xfdir_c.hpp"
+#include "xfdir_root_c.hpp"
+#include "xfdir_local_c.hpp"
+
 #include "thread_control_c.hpp"
+#include "data_c.hpp"
 #include "utility_c.hpp"
 
 
 
-class view_c:public widgets_c, public thread_control_c, virtual utility_c {
+class view_c: public widgets_c, public thread_control_c, virtual utility_c {
     public:
-        view_c(void *, GtkNotebook *);
+        view_c(data_c *, void *, GtkNotebook *, const gchar *);
+        view_c(data_c *, void *, GtkNotebook *);
         ~view_c(void);
         void reload(const gchar *);
         void set_treemodel(xfdir_c *);
@@ -54,6 +58,7 @@ class view_c:public widgets_c, public thread_control_c, virtual utility_c {
 
         lpterm_c *lpterm_p;
         xfdir_c *xfdir_p;
+	data_c *data_p;
 
 };
 

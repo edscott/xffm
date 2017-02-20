@@ -2,12 +2,14 @@
 #define RUN_BUTTON_C_HPP
 #include "utility_c.hpp"
 #include "gtk_c.hpp"
+#include "signal_action_c.hpp"
 
-class run_button_c: public utility_c {
+class run_button_c: virtual utility_c, public gtk_c, public signal_action_c {
     public:
-        run_button_c(void *, const gchar *, pid_t, gboolean);
+        run_button_c(data_c *, void *, const gchar *, pid_t, gboolean);
         ~run_button_c(void);
         void run_button_setup (GtkWidget *);
+
         gboolean in_shell;
         
         const gchar *get_icon_id(void);
@@ -18,10 +20,12 @@ class run_button_c: public utility_c {
         gint get_pid(void);
         gint get_grandchild(void);
         void *get_view_v(void);
-        gtk_c *get_gtk_p(void);
         GtkWidget *make_menu(void);
-        GtkApplication *get_app(void);
 
+	GdkPixbuf *_find_pixbuf(const gchar *, gint);// This will return NULL on failure
+        void _setup_image_button (GtkWidget *, const gchar *, const gchar *);    
+        void *_context_function(void * (*function)(gpointer), void * function_data);
+	
     protected:
     private:
         pid_t pid;
@@ -33,6 +37,7 @@ class run_button_c: public utility_c {
         GtkWidget *popup_widget;
         GtkWidget *button;
         void *view_v;
+    private:
 
 };
 

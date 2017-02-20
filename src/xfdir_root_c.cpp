@@ -3,8 +3,8 @@
 
 
 
-xfdir_root_c::xfdir_root_c(const gchar *data, gtk_c *data_gtk_c): 
-    xfdir_c(data, data_gtk_c)
+xfdir_root_c::xfdir_root_c(data_c *data0, const gchar *data): 
+    xfdir_c(data0, data)
 {
     treemodel = mk_tree_model();
 }
@@ -36,8 +36,8 @@ xfdir_root_c::mk_tree_model (void)
     const gchar *highlight_name = "document-open/SE/emblem-root/3.0/180";
     GdkPixbuf *normal_pixbuf;
     GdkPixbuf *highlight_pixbuf;
-    normal_pixbuf = gtk_p->get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
-    highlight_pixbuf = gtk_p->get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);   
+    normal_pixbuf = get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
+    highlight_pixbuf = get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);   
     gtk_list_store_append (list_store, &iter);
     gtk_list_store_set (list_store, &iter, 
 	    DISPLAY_NAME, utf_name,
@@ -56,8 +56,8 @@ xfdir_root_c::mk_tree_model (void)
     utf_name = utf_string(_("Home Directory"));
     icon_name = "folder/SE/emblem-home/3.0/180";
     highlight_name = "document-open/SE/emblem-home/3.0/180";
-    normal_pixbuf = gtk_p->get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
-    highlight_pixbuf = gtk_p->get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);   
+    normal_pixbuf = get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
+    highlight_pixbuf = get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);   
 
     gtk_list_store_append (list_store, &iter);
     gtk_list_store_set (list_store, &iter, 

@@ -7,8 +7,6 @@
 
 class utility_c{
     public:
-        utility_c(void);
-        ~utility_c(void);
         void *context_function(void * (*function)(gpointer), void * function_data);
         gchar *utf_string (const gchar *);
         gchar *wrap_utf_string(const gchar *, gint);
@@ -23,12 +21,10 @@ class utility_c{
         const gchar **get_terminals(void);
         const gchar **get_editors(void);
         gchar *get_text_editor(void);
-	pthread_mutex_t *get_readdir_mutex(void);
 	
     private:
         const gchar *default_shell(void);
         gboolean program_in_path(const gchar *);
-	pthread_mutex_t readdir_mutex;
 
 
 };

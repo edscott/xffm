@@ -5,10 +5,9 @@
 static void pathbar_go(GtkButton *, gpointer);
 static void *update_pathbar_f(void *);
 
-pathbar_c::pathbar_c(void *window_data, GtkNotebook *data){
+pathbar_c::pathbar_c(data_c *data0, void *window_data, GtkNotebook *data): gtk_c(data0) {
     notebook = data;
     window_c *window_p = (window_c *)window_data;
-    gtk_p = window_p->get_gtk_p();
     pathbar = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
     g_object_set_data(G_OBJECT(pathbar), "callback", (void *)pathbar_go);
     GtkWidget *pb_button = pathbar_button( NULL, ".");
@@ -40,7 +39,7 @@ pathbar_c::pathbar_button (const char *icon_id, const char *text) {
         markup = g_strdup_printf("<span size=\"x-small\">%s</span>", g);
         g_free(g);
     }
-    gtk_p->set_bin_contents(pb_button, icon_id, markup, 12);
+    set_bin_contents(pb_button, icon_id, markup, 12);
     g_free(markup);
     return pb_button;
 }
@@ -155,7 +154,7 @@ pathbar_c::toggle_pathbar(const gchar *path){
             gchar *g = g_markup_escape_text(v, -1);
             g_free(v);
             gchar *markup = g_strdup_printf("<span size=\"x-small\" color=\"blue\" bgcolor=\"#dcdad5\">%s</span>", g);
-            gtk_p->set_bin_markup(GTK_WIDGET(children->data), markup);
+            set_bin_markup(GTK_WIDGET(children->data), markup);
             g_free(g);
             g_free(markup);
             continue;
@@ -172,7 +171,7 @@ pathbar_c::toggle_pathbar(const gchar *path){
             gchar *g = g_markup_escape_text(v, -1);
             g_free(v);
             gchar *markup = g_strdup_printf("<span size=\"x-small\" color=\"red\"bgcolor=\"#dcdad5\">%s</span>", g);
-            gtk_p->set_bin_markup(GTK_WIDGET(children->data), markup);
+            set_bin_markup(GTK_WIDGET(children->data), markup);
             g_free(g);
             g_free(markup);
         }
@@ -181,7 +180,7 @@ pathbar_c::toggle_pathbar(const gchar *path){
             gchar *g = g_markup_escape_text(v, -1);
             g_free(v);
             gchar *markup = g_strdup_printf("<span size=\"x-small\" color=\"blue\"bgcolor=\"#dcdad5\">%s</span>", g);
-            gtk_p->set_bin_markup(GTK_WIDGET(children->data), markup);
+            set_bin_markup(GTK_WIDGET(children->data), markup);
             g_free(g);
             g_free(markup);
         }

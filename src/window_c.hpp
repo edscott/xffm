@@ -2,15 +2,16 @@
 #define WINDOW_C_HPP
 #include "xffm+.h"
 
+#include "data_c.hpp"
 #include "gtk_c.hpp"
 #include "utility_c.hpp"
 
-class window_c {
+class window_c: public gtk_c {
     public:
-        window_c(gtk_c *);
+        window_c(data_c *);
         ~window_c(void);
+	data_c *get_data_p(void);
         GtkNotebook *get_notebook(void);
-        gtk_c *get_gtk_p(void);
 	void create_new_page(const gchar *);
 	void go_home(void);
         void *get_active_view_p(void);
@@ -29,7 +30,6 @@ class window_c {
         GtkWidget *window;
         GtkWidget *new_tab_button;
 	
-        gtk_c *gtk_p;
                 
         GList *view_list;
         pthread_mutex_t view_list_mutex;
@@ -37,6 +37,8 @@ class window_c {
 
         gchar *tooltip_path_string;
         GtkWidget *tt_window;
+
+	data_c *data_p;
 
 
 };

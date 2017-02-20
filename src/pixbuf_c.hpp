@@ -6,9 +6,10 @@
 
 class pixbuf_c : protected pixbuf_icons_c {
     public:
+	pixbuf_c(data_c *);
+//	GdkPixbuf *pixbuf_new_from_icon_name(const gchar *, gint);
 	GdkPixbuf *get_pixbuf(const gchar *, gint); // This will not return NULL
 	GdkPixbuf *find_pixbuf(const gchar *, gint);// This will return NULL on failure
-//	GdkPixbuf *pixbuf_new_from_icon_name(const gchar *, gint);
     protected:
     private:
         gint get_pixel_size(gint);

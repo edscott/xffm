@@ -2,7 +2,7 @@
 #include "csh_completion_c.hpp"
 #include "view_c.hpp"
 
-csh_completion_c::csh_completion_c(void *data): bash_completion_c(data){
+csh_completion_c::csh_completion_c(data_c *data0, void *data): bash_completion_c(data0, data){
     csh_cmd_save = NULL;
     csh_history_list = NULL;
     csh_load_history();
@@ -224,19 +224,19 @@ csh_completion_c::csh_is_valid_command (const gchar *cmd_fmt) {
         g_free (msg);
         return (FALSE);
     }
-    gchar **app = argv;
-    if (*app==NULL) {
+    gchar **ap = argv;
+    if (*ap==NULL) {
         errno = ENOENT;
         return (FALSE);
     }
 
     // assume command is correct if environment is being set
-    if (strchr(*app, '=')){
+    if (strchr(*ap, '=')){
         g_strfreev (argv);
         return (TRUE);
     }
 
-    gchar *path = g_find_program_in_path (*app);
+    gchar *path = g_find_program_in_path (*ap);
     if(!path) {
         gboolean direct_path = g_file_test (argv[0], G_FILE_TEST_EXISTS) ||
             strncmp (argv[0], "./", strlen ("./")) == 0 || strncmp (argv[0], "../", strlen ("../")) == 0;

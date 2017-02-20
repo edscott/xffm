@@ -2,7 +2,6 @@
 #include "intl.h"
 #include "window_c.hpp"
 #include "view_c.hpp"
-#include "xfdir_c.hpp"
 #include "xfdir_local_c.hpp"
 
 static void on_new_page(GtkWidget *, gpointer);
@@ -12,12 +11,11 @@ static void destroy(GtkWidget *, gpointer);
 static gboolean window_tooltip_f(GtkWidget  *, gint, gint, gboolean, GtkTooltip *, gpointer);
 
 
-window_c::window_c(gtk_c *data) {
+window_c::window_c(data_c *data0):gtk_c(data0) {
+    data_p = data0;
     view_list=NULL;
     tt_window=NULL;
     tooltip_path_string = NULL;
-    if (data) {gtk_p = data;}
-    else {throw 1;}
 
     view_list_mutex = PTHREAD_MUTEX_INITIALIZER;
     window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
@@ -36,11 +34,11 @@ window_c::window_c(gtk_c *data) {
     gtk_container_add (GTK_CONTAINER (window), GTK_WIDGET(notebook));
 
     new_tab_button = gtk_button_new ();
-    gtk_p->setup_image_button(new_tab_button, "list-add", _("Open a new tab (Ctrl+T)"));
+    setup_image_button(new_tab_button, "list-add", _("Open a new tab (Ctrl+T)"));
     gtk_widget_show(new_tab_button);
 
     GtkWidget *button = gtk_button_new ();
-    gtk_p->setup_image_button(button, "go-home", _("Home"));
+    setup_image_button(button, "go-home", _("Home"));
     gtk_widget_show(button);
 
 
@@ -74,6 +72,11 @@ window_c::~window_c(void) {
     pthread_mutex_unlock(&view_list_mutex);
 }
 
+data_c *
+window_c::get_data_p(void){
+    return data_p;
+}
+
 const gchar *
 window_c::get_tooltip_path_string(void){
     return (const gchar *)tooltip_path_string;
@@ -104,9 +107,6 @@ window_c::get_tt_window(void){
 }
 
     
-gtk_c *
-window_c::get_gtk_p(void){return gtk_p;}
-
 
 void
 window_c::add_view_to_list(void *view_p) {
@@ -133,7 +133,7 @@ window_c::remove_view_from_list(void *view_p){
     pthread_mutex_unlock(&view_list_mutex);
     delete ((view_c *)view_p);
     if (g_list_length(view_list) == 0) {
-        gtk_application_remove_window (gtk_p->get_app(), GTK_WINDOW(window));
+        gtk_application_remove_window (data_p->get_app(), GTK_WINDOW(window));
     }
 }
 
@@ -154,7 +154,7 @@ window_c::go_home(void){
     } else {
 	// here we switch from module to local xfdir_c objects
 	xfdir_c *xfdir_p;
-	xfdir_p = (xfdir_c *)new xfdir_local_c(view_p->get_path(), gtk_p);
+	xfdir_p = (xfdir_c *)new xfdir_local_c(data_p, view_p->get_path());
 	view_p->set_treemodel(xfdir_p);
     }
 }
@@ -165,14 +165,7 @@ window_c::create_new_page(const gchar *path){
 	g_warning("window_c::create_new_page path is NULL\n");
 	return;
     }
-    view_c *view_p = new view_c((void *)this, get_notebook());
-    xfdir_c *xfdir_p;
-    if (g_file_test(path, G_FILE_TEST_IS_DIR) ){
-	   xfdir_p = (xfdir_c *)new xfdir_local_c(path, gtk_p);
-    } else {
-	// load specific class xfdir here
-    }
-    view_p->set_treemodel(xfdir_p);
+    view_c *view_p = new view_c(data_p, (void *)this, get_notebook(), path);
     add_view_to_list((void *)view_p);
 }
 
@@ -221,7 +214,8 @@ window_keyboard_event (GtkWidget * window, GdkEventKey * event, gpointer data)
 static void 
 destroy(GtkWidget *window, void *data){
     window_c *window_p = (window_c *)data;
-    gtk_application_remove_window (window_p->get_gtk_p()->get_app(), GTK_WINDOW(window_p->get_window()));
+    data_c *data_p = window_p->get_data_p();
+    gtk_application_remove_window (data_p->get_app(), GTK_WINDOW(window_p->get_window()));
 }
 
 static gboolean

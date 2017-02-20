@@ -17,19 +17,7 @@ typedef struct thread_run_t {
     char **argv;
 } thread_run_t;
 
-run_button_c::~run_button_c(void){
-    TRACE("run_button_c::~run_button_c... button %p\n", (void *)button);
-    if(button && GTK_IS_WIDGET(button)){
-        gtk_widget_hide(GTK_WIDGET (button));
-        gtk_widget_destroy (GTK_WIDGET (button));
-    }
-    g_free (tip);
-    g_free (command);
-    g_free (icon_id);
-    g_free (workdir);
-}
-
-run_button_c::run_button_c(void *data, const gchar * exec_command, pid_t child, gboolean shell_wrap){
+run_button_c::run_button_c(data_c *data0, void *data, const gchar * exec_command, pid_t child, gboolean shell_wrap):gtk_c(data0), signal_action_c(data0){
     view_v = data;
     in_shell = shell_wrap;
 
@@ -46,10 +34,32 @@ run_button_c::run_button_c(void *data, const gchar * exec_command, pid_t child, 
             run_wait_f, (void *) this, FALSE);
 }
 
-gtk_c *
-run_button_c::get_gtk_p(void){
-    view_c *view_p =(view_c *)view_v;
-    return (view_p->get_gtk_p());
+
+run_button_c::~run_button_c(void){
+    TRACE("run_button_c::~run_button_c... button %p\n", (void *)button);
+    if(button && GTK_IS_WIDGET(button)){
+        gtk_widget_hide(GTK_WIDGET (button));
+        gtk_widget_destroy (GTK_WIDGET (button));
+    }
+    g_free (tip);
+    g_free (command);
+    g_free (icon_id);
+    g_free (workdir);
+}
+	
+GdkPixbuf *
+run_button_c::_find_pixbuf(const gchar *a, gint b){
+    return find_pixbuf(a,b);
+}
+
+void 
+run_button_c::_setup_image_button (GtkWidget *a, const gchar *b, const gchar *c){
+    setup_image_button (a, b, c);
+}    
+
+void *
+run_button_c::_context_function(void * (*function)(gpointer), void * function_data){
+    return _context_function(function,function_data);
 }
 
 
@@ -79,12 +89,6 @@ run_button_c::get_grandchild(void){ return (gint)grandchild;}
 
 void *
 run_button_c::get_view_v(void){ return view_v;}
-
-GtkApplication *
-run_button_c::get_app(void){
-    view_c *view_p =(view_c *)view_v;
-    return view_p->get_gtk_p()->get_app();
-}
 
 void
 run_button_c::run_button_setup (GtkWidget *data){
@@ -140,17 +144,17 @@ run_button_toggled(GtkWidget *button, void *data){
     if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(button))){
 	// here we set the parameter for the signal actions.
 	TRACE("run button toggled: pid=%d\n", run_button_p->get_grandchild());
-        run_button_p->get_gtk_p()->set_signal_action_parameter(data);
+        run_button_p->set_signal_action_parameter(data);
     }
 }
 
 static void *
 make_run_data_button (void *data) {
     run_button_c *run_button_p = (run_button_c *)data;
+    view_c *view_p = (view_c *)run_button_p->get_view_v();
     GtkWidget *button = gtk_menu_button_new ();
 
-    view_c *view_p = (view_c *)run_button_p->get_view_v();
-    GMenuModel *menu = view_p->get_gtk_p()->get_signal_menu_model();
+    GMenuModel *menu = run_button_p->get_signal_menu_model();
     TRACE("make_run_data_button: menu model is %p\n", menu);
     gtk_menu_button_set_menu_model (GTK_MENU_BUTTON (button), menu);
 
@@ -160,13 +164,13 @@ make_run_data_button (void *data) {
     const gchar *icon = run_button_p->get_icon_id();
 
     // Test for validity of icon
-    if (!icon || !view_p->get_gtk_p()->find_pixbuf(icon, -16)){
+    if (!icon || !run_button_p->_find_pixbuf(icon, -16)){
         run_button_p->set_icon_id("emblem-run");
     } 
     
     TRACE("make_run_data_button: icon_id=\"%s\" tip=\"%s\"\n", run_button_p->get_icon_id(), run_button_p->get_tip());
 
-    view_p->get_gtk_p()->setup_image_button(button, run_button_p->get_icon_id(), run_button_p->get_tip());
+    run_button_p->_setup_image_button(button, run_button_p->get_icon_id(), run_button_p->get_tip());
     g_signal_connect(button, "toggled", G_CALLBACK (run_button_toggled), data);
     gtk_box_pack_end (GTK_BOX (view_p->get_button_space()), button, FALSE, FALSE, 0);
     gtk_widget_show (button);
@@ -189,7 +193,7 @@ run_wait_f (void *data) {
     // before gtk has fully created the little run button.
     //
     
-    run_button_p->context_function(make_run_data_button, data);
+    run_button_p->_context_function(make_run_data_button, data);
     TRACE("run_wait_f: thread waitpid for %d on (%s/%s)\n", 
             run_button_p->get_pid(), 
             run_button_p->get_command(), 
@@ -255,7 +259,7 @@ run_wait_f (void *data) {
     fflush(NULL);  
     // Destroy little button (if exists) and free run_data_p 
     // associated memory. Done in main thread for gtk instruction set.
-    run_button_p->context_function(zap_run_button, data);
+    run_button_p->_context_function(zap_run_button, data);
     return NULL;
 }
 

@@ -3,11 +3,12 @@
 #include "xffm+.h"
 #include "gtk_c.hpp"
 #include "utility_c.hpp"
+#include "data_c.hpp"
 
 
-class print_c: virtual utility_c {
+class print_c: virtual utility_c, public gtk_c {
     public:
-        print_c(void *);
+        print_c(data_c *, void *);
         void print_error(gchar *);
         void print_debug(gchar *);
         void print(gchar *);
@@ -42,7 +43,6 @@ class print_c: virtual utility_c {
         GtkTextView *diagnostics;
         GtkLabel *status_label;
         void *view_v;
-	gtk_c *gtk_p;
         
     private:
 

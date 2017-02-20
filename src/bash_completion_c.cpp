@@ -40,7 +40,7 @@ length_equal_string(const gchar *a, const gchar *b){
    return length;
 }
 
-bash_completion_c::bash_completion_c(void *data): print_c(data){
+bash_completion_c::bash_completion_c(data_c *data0, void *data): print_c(data0, data){
 }
 
 void

@@ -2,8 +2,6 @@
 #include "view_c.hpp"
 #include "window_c.hpp"
 #include "pathbar_c.hpp"
-#include "xfdir_root_c.hpp"
-#include "xfdir_local_c.hpp"
 
 ///////////////////////////////////////////////////
 //         static thread functions  (used)       //
@@ -44,38 +42,24 @@ button_press_f (GtkWidget *widget,
 // class methods
 ////////////////////////////////////////
 
-
-view_c::view_c(void *window_data, GtkNotebook *notebook) : widgets_c(window_data, notebook), thread_control_c((void *)this) {
+view_c::view_c(data_c *data0, void *window_data, GtkNotebook *notebook) :  widgets_c(data0, window_data, notebook), thread_control_c((void *)this) {
     xfdir_p = NULL;
-
-    // Set objects in parent widget_c class with data pointing to child class
-    g_object_set_data(G_OBJECT(get_pathbar()), "view_p", (void *)this);
-    g_object_set_data(G_OBJECT(get_page_child()), "view_p", (void *)this);
-    g_object_set_data(G_OBJECT(get_page_button()), "view_p", (void *)this);
-
-    //signals_p = new signals_c();
+    data_p = data0;
     init();
-    signals();
-    pack();
-    // lp_term object creation
-    lpterm_p = new lpterm_c((void *)this);
-    
-    lpterm_p->print_status(g_strdup(""));
-    lpterm_p->show_text();
-    lpterm_p->print(g_strdup_printf("%s\n", "Hello world."));
-    lpterm_p->print_tag(NULL, g_strdup_printf("%s\n", "No tag."));
-    lpterm_p->print_tag("tag/green",g_strdup_printf( "%s", "Green tag."));
-    lpterm_p->print_tag("tag/bold",g_strdup_printf( "%s\n", "bold tag."));
-    lpterm_p->print_error(g_strdup_printf("%s\n", "This is an error."));
-    lpterm_p->print_debug(g_strdup_printf("%s\n", "This is a debug message."));
-    lpterm_p->print_icon("face-monkey",g_strdup_printf("%s\n", "This is face-monkey."));
-    lpterm_p->print_icon_tag("face-angry","tag/red",g_strdup_printf("%s\n", "This is face-angry in red."));
-#if 0
-    // FIXME
-    /* drag and drop events */
-    rodent_create_target_list (view_p);
-#endif
-    
+}
+
+
+view_c::view_c(data_c *data0, void *window_data, GtkNotebook *notebook, const gchar *path) : widgets_c(data0, window_data, notebook), thread_control_c((void *)this) {
+    xfdir_p = NULL;
+    xfdir_c *new_xfdir_p;
+    data_p = data0;
+    init();
+    if (g_file_test(path, G_FILE_TEST_IS_DIR) ){
+	   new_xfdir_p = (xfdir_c *)new xfdir_local_c(data_p, path);
+    } else {
+	// load specific class xfdir here
+    }
+    set_treemodel(new_xfdir_p);
 }
 
 
@@ -88,7 +72,7 @@ view_c::~view_c(void){
 void 
 view_c::root(void){
     DBG("root treemodel\n");
-    xfdir_c *data = (xfdir_c *)new xfdir_root_c("xffm:root", get_gtk_p());
+    xfdir_c *data = (xfdir_c *)new xfdir_root_c(data_p, "xffm:root");
     set_treemodel(data);
     
 }
@@ -117,7 +101,7 @@ view_c::reload(const gchar *data){
     if (g_file_test(data, G_FILE_TEST_IS_DIR) &&
 	    !g_file_test(get_path(), G_FILE_TEST_IS_DIR)){
 	// switch back to local mode
-	xfdir_c *xfdir_local_p = (xfdir_c *)new xfdir_local_c(data, get_gtk_p());
+	xfdir_c *xfdir_local_p = (xfdir_c *)new xfdir_local_c(data_p, data);
 	set_treemodel(xfdir_local_p);
 	return;
     }
@@ -160,7 +144,7 @@ view_c::set_treemodel(xfdir_c *data){
     xfdir_c *old_xfdir_p = xfdir_p;
     xfdir_p = data;
     GtkTreeModel *tree_model = xfdir_p->get_tree_model();
-    DBG("new treemodel= %p\n", tree_model);
+    fprintf(stderr, "new treemodel= %p (old_xfdir=%p new_xfdir=%p)\n", tree_model, old_xfdir_p, xfdir_p);
     //if (tree_model) gtk_widget_hide(GTK_WIDGET(get_iconview()));
     gtk_icon_view_set_model(GTK_ICON_VIEW(get_iconview()), tree_model);
     gtk_icon_view_set_text_column (GTK_ICON_VIEW(get_iconview()), xfdir_p->get_text_column());
@@ -169,7 +153,7 @@ view_c::set_treemodel(xfdir_c *data){
     //gtk_icon_view_set_tooltip_column (GTK_ICON_VIEW(get_iconview()),3);
     set_view_details();
     //gtk_widget_show(GTK_WIDGET(get_iconview()));
-    DBG("set_treemodel done\n");
+    fprintf(stderr, "set_treemodel done, now deleting %p\n", old_xfdir_p);
     if (old_xfdir_p) delete old_xfdir_p;
 }
 ///////////////////////////// Private:
@@ -185,6 +169,32 @@ view_c::set_view_details(void){
 
 void
 view_c::init(void){
+    // Set objects in parent widget_c class with data pointing to child class
+    g_object_set_data(G_OBJECT(get_pathbar()), "view_p", (void *)this);
+    g_object_set_data(G_OBJECT(get_page_child()), "view_p", (void *)this);
+    g_object_set_data(G_OBJECT(get_page_button()), "view_p", (void *)this);
+
+    //signals_p = new signals_c();
+    signals();
+    pack();
+    // lp_term object creation
+    lpterm_p = new lpterm_c(data_p, (void *)this);
+    
+    lpterm_p->print_status(g_strdup(""));
+    lpterm_p->show_text();
+    lpterm_p->print(g_strdup_printf("%s\n", "Hello world."));
+    lpterm_p->print_tag(NULL, g_strdup_printf("%s\n", "No tag."));
+    lpterm_p->print_tag("tag/green",g_strdup_printf( "%s", "Green tag."));
+    lpterm_p->print_tag("tag/bold",g_strdup_printf( "%s\n", "bold tag."));
+    lpterm_p->print_error(g_strdup_printf("%s\n", "This is an error."));
+    lpterm_p->print_debug(g_strdup_printf("%s\n", "This is a debug message."));
+    lpterm_p->print_icon("face-monkey",g_strdup_printf("%s\n", "This is face-monkey."));
+    lpterm_p->print_icon_tag("face-angry","tag/red",g_strdup_printf("%s\n", "This is face-angry in red."));
+#if 0
+    // FIXME
+    /* drag and drop events */
+    rodent_create_target_list (view_p);
+#endif
 
 }
 
@@ -336,7 +346,7 @@ view_c::update_tab_label_icon(void){
     g_list_free(children);
     const gchar *icon_name = xfdir_p->get_xfdir_iconname();
     GdkPixbuf *pixbuf = 
-            get_gtk_p()->get_pixbuf(icon_name, GTK_ICON_SIZE_BUTTON);
+            get_pixbuf(icon_name, GTK_ICON_SIZE_BUTTON);
     if (pixbuf){
 	GtkWidget *image = gtk_image_new_from_pixbuf (pixbuf);
 	gtk_container_add (GTK_CONTAINER (get_page_label_icon_box()), image);
@@ -350,7 +360,7 @@ view_c::get_tree_model(void){return xfdir_p->get_tree_model();}
 void
 view_c::set_application_icon (void) {
     const gchar *iconname = xfdir_p->get_xfdir_iconname();
-    GdkPixbuf *icon_pixbuf = get_gtk_p()->get_pixbuf (iconname, GTK_ICON_SIZE_DIALOG);
+    GdkPixbuf *icon_pixbuf = get_pixbuf (iconname, GTK_ICON_SIZE_DIALOG);
     if(icon_pixbuf) {
 	GtkWindow *window = ((window_c *)get_window_v())->get_window();
         gtk_window_set_icon (window, icon_pixbuf);
@@ -365,7 +375,7 @@ view_c::set_application_icon (gint page_num) {
     if (!view_p->get_xfdir_p()) return;
     
     const gchar *iconname = view_p->get_xfdir_p()->get_xfdir_iconname();
-    GdkPixbuf *icon_pixbuf = get_gtk_p()->get_pixbuf (iconname, GTK_ICON_SIZE_DIALOG);
+    GdkPixbuf *icon_pixbuf = get_pixbuf (iconname, GTK_ICON_SIZE_DIALOG);
     if(icon_pixbuf) {
 	GtkWindow *window = ((window_c *)get_window_v())->get_window();
         gtk_window_set_icon (window, icon_pixbuf);
@@ -665,7 +675,7 @@ view_c::setup_tooltip(gint x, gint y){
     if (!pixbuf) pixbuf = xfdir_p->get_normal_pixbuf(tpath); 
     gtk_tree_path_free(tpath);
     
-    GtkWidget *tt_window = get_gtk_p()->get_tt_window(
+    GtkWidget *tt_window = get_tt_window(
                 pixbuf,     
                 text,
                 markup);

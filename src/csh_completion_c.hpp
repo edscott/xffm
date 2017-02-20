@@ -7,7 +7,7 @@
 
 class csh_completion_c: public bash_completion_c, virtual utility_c {
     public:
-	csh_completion_c(void *);
+	csh_completion_c(data_c *, void *);
 
     protected:
         gboolean is_completing(void);

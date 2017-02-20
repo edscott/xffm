@@ -1,8 +1,11 @@
 #include "gtk_c.hpp"
 #include "intl.h"
 
-gtk_c::gtk_c(GtkApplication *data): signal_action_c(data){
+gtk_c::gtk_c(data_c *data0): tooltip_c(data0), pixbuf_c(data0), mime_c(data0){
+    data_p = data0;
+    fprintf(stderr, "gtk_c constructor OK\n");
 }
+
 
 gtk_c::~gtk_c(void){
     DBG("gtk_c::~gtk_c\n");

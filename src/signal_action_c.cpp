@@ -18,15 +18,12 @@ static void  kill_signal(GSimpleAction *, GVariant *, gpointer);
 static void  segv_signal(GSimpleAction *, GVariant *, gpointer);
 static void process_info(GSimpleAction *, GVariant *, gpointer);
 
-signal_action_c::signal_action_c(GtkApplication *data){
-    app = data;
-    add_actions(app);
-    create_menu_model(app);
-    TRACE("signal_action_c::signal_action_c: menu model is %p\n", get_signal_menu_model());
+signal_action_c::signal_action_c(data_c *data){
+    data_p = data;
+    add_actions(data_p->get_app());
+    create_menu_model(data_p->get_app());
+    TRACE("signal_action_c::signal_action_c: menu model is %p\n", _get_signal_menu_model());
 }
-
-GtkApplication *
-signal_action_c::get_app(void){return app;}
 
 void
 signal_action_c::create_menu_model(GtkApplication *app){
@@ -95,7 +92,7 @@ signal_action_c::create_menu_model(GtkApplication *app){
 
 void 
 signal_action_c::set_signal_action_parameter(void *data){
-    g_object_set_data(G_OBJECT(app), "run_button_p", data);
+    g_object_set_data(G_OBJECT(data_p->get_app()), "run_button_p", data);
 }    
 
 void

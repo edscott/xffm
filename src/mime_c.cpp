@@ -49,24 +49,8 @@ static long long get_cache_sum (void);
 static gchar *get_cache_path (const gchar *);
 static gint check_dir (char *);
 
-mime_c::mime_c (void) {
-    cache_mutex = PTHREAD_MUTEX_INITIALIZER;
-    mimetype_hash_mutex = PTHREAD_MUTEX_INITIALIZER;
-    alias_hash_mutex = PTHREAD_MUTEX_INITIALIZER;
-    application_hash_mutex = PTHREAD_MUTEX_INITIALIZER;
-
-    mimetype_hash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
-    alias_hash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
-    application_hash_type = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, free_apps);
-
-    // Read only hashes:
-    application_hash_sfx = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
-    application_hash_icon = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
-    application_hash_text = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
-    application_hash_text2 = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
-    application_hash_output = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
-    application_hash_output_ext = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
-    generic_icon_hash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
+mime_c::mime_c (data_c *data0) {
+    data_p = data0;
 
     if(!load_hashes_from_cache()) {
         DBG("mime_c:: now building hashes from scratch\n");
@@ -83,22 +67,6 @@ mime_c::mime_c (void) {
 
 
 mime_c::~mime_c (void){
-    g_hash_table_destroy(mimetype_hash);
-    g_hash_table_destroy(alias_hash);
-    g_hash_table_destroy(application_hash_type);
-
-    g_hash_table_destroy(application_hash_sfx);
-    g_hash_table_destroy(application_hash_icon);
-    g_hash_table_destroy(application_hash_text);
-    g_hash_table_destroy(application_hash_text2);
-    g_hash_table_destroy(application_hash_output);
-    g_hash_table_destroy(application_hash_output_ext);
-    g_hash_table_destroy(generic_icon_hash);
-    
-    pthread_mutex_destroy(&cache_mutex);
-    pthread_mutex_destroy(&mimetype_hash_mutex);
-    pthread_mutex_destroy(&alias_hash_mutex);
-    pthread_mutex_destroy(&application_hash_mutex);
 }
 
 
@@ -118,11 +86,11 @@ const gchar *
 mime_c::find_mimetype_in_hash(const gchar *file){
     const gchar *type=NULL; 
 #ifndef NO_MIMETYPE_HASH
-    if (!mimetype_hash) return type;
+    if (!data_p->mimetype_hash) return type;
     gchar *key = get_hash_key (file);
-    pthread_mutex_lock(&mimetype_hash_mutex);
-    type = (const gchar *)g_hash_table_lookup (mimetype_hash, key);
-    pthread_mutex_unlock(&mimetype_hash_mutex);
+    pthread_mutex_lock(&data_p->mimetype_hash_mutex);
+    type = (const gchar *)g_hash_table_lookup (data_p->mimetype_hash, key);
+    pthread_mutex_unlock(&data_p->mimetype_hash_mutex);
     g_free (key);
 #endif
     return type;
@@ -253,19 +221,19 @@ gboolean mime_c::mime_is_valid_command (const char *cmd_fmt) {
         g_free (msg);
         return  (FALSE);
     }
-    gchar **app = argv;
-    if (*app==NULL) {
+    gchar **ap = argv;
+    if (*ap==NULL) {
         errno = ENOENT;
         return  (FALSE);
     }
 
     // assume command is correct if environment is being set
-    if (strchr(*app, '=')){
+    if (strchr(*ap, '=')){
         g_strfreev (argv);
         return  (TRUE);
     }
 
-    path = g_find_program_in_path (*app);
+    path = g_find_program_in_path (*ap);
     if(!path) {
         gboolean direct_path = g_file_test (argv[0], G_FILE_TEST_EXISTS) ||
             strncmp (argv[0], "./", strlen ("./")) == 0 || strncmp (argv[0], "../", strlen ("../")) == 0;
@@ -302,7 +270,7 @@ mime_c::mime_command_text (gchar *p) {
     NOOP("mime_command_text()...\n");
     if (!p) return NULL;
     gchar *key=get_hash_key_strstrip (p);
-    const gchar *value=(const gchar *)g_hash_table_lookup (application_hash_text, key);
+    const gchar *value=(const gchar *)g_hash_table_lookup (data_p->application_hash_text, key);
     g_free(key);
     return value;
 }
@@ -313,7 +281,7 @@ mime_c::mime_command_text2 (gchar *p) {
     NOOP("mime_command_text2()...\n");
     if (!p) return NULL;
     gchar *key=get_hash_key_strstrip (p);
-    const gchar *value=(const gchar *)g_hash_table_lookup (application_hash_text2, key);
+    const gchar *value=(const gchar *)g_hash_table_lookup (data_p->application_hash_text2, key);
     g_free(key);
     return value;
 }
@@ -324,7 +292,7 @@ mime_c::mime_command_icon (gchar *p) {
     NOOP("mime_command_icon()...\n");
     if (!p) return NULL;
     gchar *key=get_hash_key_strstrip (p);
-    const gchar *value=(const gchar *)g_hash_table_lookup (application_hash_icon, key);
+    const gchar *value=(const gchar *)g_hash_table_lookup (data_p->application_hash_icon, key);
     g_free(key);
     return value;
 }
@@ -335,7 +303,7 @@ mime_c::mime_command_output (gchar *p) {
     NOOP("mime_command_output()...\n");
     if (!p) return NULL;
     gchar *key=get_hash_key_strstrip (p);
-    const gchar *value=(const gchar *)g_hash_table_lookup (application_hash_output, key);
+    const gchar *value=(const gchar *)g_hash_table_lookup (data_p->application_hash_output, key);
     g_free(key);
     return value;
 }
@@ -345,7 +313,7 @@ mime_c::mime_command_output_ext (gchar *p) {
     NOOP("mime_command_output_ext()...\n");
     if (!p) return NULL;
     gchar *key=get_hash_key_strstrip (p);
-    const gchar *value=(const gchar *)g_hash_table_lookup (application_hash_output_ext, key);
+    const gchar *value=(const gchar *)g_hash_table_lookup (data_p->application_hash_output_ext, key);
     g_free(key);
     return value;
 }
@@ -439,9 +407,9 @@ mime_c::mime_append (gchar *type, gchar *q) {
         return NULL;
     }
     NOOP ("OPEN APPS: appending type %s->%s\n", type, command);
-    pthread_mutex_lock (&cache_mutex);
+    pthread_mutex_lock (&data_p->cache_mutex);
     add_type_to_hashtable(type, command, FALSE);
-    pthread_mutex_unlock (&cache_mutex);
+    pthread_mutex_unlock (&data_p->cache_mutex);
     g_free(command);
     return NULL;
 }
@@ -509,9 +477,9 @@ gchar *
 mime_c::mime_get_alias_type(const gchar *type){
     if(type) {
 	gchar *hash_key=get_hash_key(type);
-	pthread_mutex_lock (&alias_hash_mutex);
-	const gchar *basic_type = (const gchar *)g_hash_table_lookup(alias_hash, hash_key);
-	pthread_mutex_unlock (&alias_hash_mutex);
+	pthread_mutex_lock (&data_p->alias_hash_mutex);
+	const gchar *basic_type = (const gchar *)g_hash_table_lookup(data_p->alias_hash, hash_key);
+	pthread_mutex_unlock (&data_p->alias_hash_mutex);
 	g_free(hash_key);
 	if (basic_type) return g_strdup(basic_type);
 	return g_strdup(type);
@@ -563,7 +531,7 @@ mime_c::load_hashes_from_cache (void) {
     }
     dbh_set_parallel_lock_timeout(cache, 3);
 
-    dbh_foreach (cache, add2sfx_hash, (void *)application_hash_sfx);
+    dbh_foreach (cache, add2sfx_hash, (void *)data_p->application_hash_sfx);
     dbh_close (cache);
 
     cache_path = get_cache_path ("type");
@@ -575,22 +543,22 @@ mime_c::load_hashes_from_cache (void) {
     }
     dbh_set_parallel_lock_timeout(cache, 3);
 
-    dbh_foreach (cache, add2type_hash, (void *)application_hash_type);
+    dbh_foreach (cache, add2type_hash, (void *)data_p->application_hash_type);
     dbh_close (cache);
 
-    load_text_hash(application_hash_icon, "application_hash_icon");
-    load_text_hash(application_hash_text, "application_hash_text");
-    load_text_hash(application_hash_text2, "application_hash_text2");
-    load_text_hash(application_hash_output, "application_hash_output");
-    load_text_hash(application_hash_output_ext, "application_hash_output_ext");
-    load_text_hash(alias_hash, "alias_hash");
+    load_text_hash(data_p->application_hash_icon, "application_hash_icon");
+    load_text_hash(data_p->application_hash_text, "application_hash_text");
+    load_text_hash(data_p->application_hash_text2, "application_hash_text2");
+    load_text_hash(data_p->application_hash_output, "application_hash_output");
+    load_text_hash(data_p->application_hash_output_ext, "application_hash_output_ext");
+    load_text_hash(data_p->alias_hash, "alias_hash");
     return cache_ok;
 
   failed:
     destroy_application_hash_sfx ();
     destroy_application_hash_type ();
-    application_hash_sfx = NULL;
-    application_hash_type = NULL;
+    data_p->application_hash_sfx = NULL;
+    data_p->application_hash_type = NULL;
     return FALSE;
 }
 
@@ -710,7 +678,7 @@ mime_c::mime_build_hashes (void) {
 		    if(sfx_key) {
 			NOOP("mime-module,replacing hash element \"%s\" with key %s --> %s\n", 
 				sfx, sfx_key, type);
-			g_hash_table_replace (application_hash_sfx, g_strdup(sfx_key), g_strdup(type));
+			g_hash_table_replace (data_p->application_hash_sfx, g_strdup(sfx_key), g_strdup(type));
 		    }
 		    g_free (sfx);
 		    g_free (sfx_key);
@@ -724,7 +692,7 @@ mime_c::mime_build_hashes (void) {
 		    if(alias_key) {
 			NOOP("mime-module, inserting alias hash element %s with key %s --> %s\n", 
 				alias_type, alias_key, type);
-			g_hash_table_replace (alias_hash, g_strdup(alias_key), g_strdup(type));
+			g_hash_table_replace (data_p->alias_hash, g_strdup(alias_key), g_strdup(type));
 		    }
 		    g_free (alias_type);
 		    g_free (alias_key);
@@ -733,7 +701,7 @@ mime_c::mime_build_hashes (void) {
                 if(xmlStrEqual (subnode->name, (const xmlChar *)"generic-icon")) {
                     value = xmlGetProp (subnode, (const xmlChar *)"name");
 		    if(value && strlen((const gchar *)value)) {
-			g_hash_table_replace (generic_icon_hash, 
+			g_hash_table_replace (data_p->generic_icon_hash, 
                                 g_strdup(type), g_strdup((const gchar *)value));
                         //DBG("hashing %s --> %s\n", type, (const gchar *)value);
 		    }
@@ -766,28 +734,28 @@ mime_c::mime_build_hashes (void) {
                         if(extra_value) {
                             gchar *k=get_hash_key ((gchar *)value);
                             NOOP("mime-module, adding- %s : %s\n", value, extra_value);
-                            g_hash_table_replace (application_hash_icon, k, extra_value);
+                            g_hash_table_replace (data_p->application_hash_icon, k, extra_value);
                         }
                         extra_value = 
                             xmlGetProp (subnode, (const xmlChar *)"text");
                         if(extra_value) {
                             gchar *k=get_hash_key ((gchar *)value);
                             NOOP("mime-module a, adding- %s : %s\n", value, extra_value);
-			    g_hash_table_replace (application_hash_text, k, extra_value);
+			    g_hash_table_replace (data_p->application_hash_text, k, extra_value);
                         }
                         extra_value = 
                             xmlGetProp (subnode, (const xmlChar *)"text2");
                         if(extra_value) {
                             gchar *k=get_hash_key ((gchar *)value);
                             NOOP("mime-module b, adding- %s : %s\n", value, extra_value);
-                            g_hash_table_replace (application_hash_text2, k, extra_value);
+                            g_hash_table_replace (data_p->application_hash_text2, k, extra_value);
                         }
                         extra_value = 
                             xmlGetProp (subnode, (const xmlChar *)"output");
                         if(extra_value) {
                             gchar *k=get_hash_key ((gchar *)value);
                             NOOP("mime-module c, adding- %s : %s\n", value, extra_value);
-                            g_hash_table_replace (application_hash_output, k, extra_value);
+                            g_hash_table_replace (data_p->application_hash_output, k, extra_value);
                   
                         }
                         extra_value = 
@@ -795,7 +763,7 @@ mime_c::mime_build_hashes (void) {
                         if(extra_value) {
                             gchar *k=get_hash_key ((gchar *)value);
                             NOOP("mime-module d, adding- %s : %s\n", value, extra_value);
-                            g_hash_table_replace (application_hash_output_ext, k, extra_value);
+                            g_hash_table_replace (data_p->application_hash_output_ext, k, extra_value);
                         }
                     }
                 }
@@ -803,7 +771,7 @@ mime_c::mime_build_hashes (void) {
             if(apps) {
 		type_key = get_hash_key (type);
                 NOOP("mime-module, adding-%d : %s for %s (%s)\n", i, value, type, type_key);
-                g_hash_table_replace (application_hash_type, type_key, apps);
+                g_hash_table_replace (data_p->application_hash_type, type_key, apps);
             } 
 	    g_free(type);
         }
@@ -836,14 +804,14 @@ mime_c::mime_build_hashes (void) {
 
 void
 mime_c::destroy_application_hash_sfx (void) {
-    if(!application_hash_sfx) return;
-    g_hash_table_destroy (application_hash_sfx);
+    if(!data_p->application_hash_sfx) return;
+    g_hash_table_destroy (data_p->application_hash_sfx);
 }
 
 void
 mime_c::destroy_application_hash_type (void) {
-    if(!application_hash_type) return;
-    g_hash_table_destroy (application_hash_type);
+    if(!data_p->application_hash_type) return;
+    g_hash_table_destroy (data_p->application_hash_type);
 }
 
 gchar *
@@ -859,22 +827,22 @@ void
 mime_c::add_type_to_hashtable(const gchar *type, const gchar *command, gboolean prepend){
     // Always use basic mimetype: avoid hashing alias mimetypes...
     gchar *hash_key=get_hash_key(type);
-    pthread_mutex_lock(&alias_hash_mutex);
-    const gchar *basic_type = (const gchar *)g_hash_table_lookup(alias_hash, hash_key);
-    pthread_mutex_unlock(&alias_hash_mutex);
+    pthread_mutex_lock(&data_p->alias_hash_mutex);
+    const gchar *basic_type = (const gchar *)g_hash_table_lookup(data_p->alias_hash, hash_key);
+    pthread_mutex_unlock(&data_p->alias_hash_mutex);
     if (basic_type) type = basic_type;
     g_free(hash_key);
 
     gchar *key = get_hash_key (type);
-    pthread_mutex_lock(&application_hash_mutex);
-    gchar **apps = (gchar **)g_hash_table_lookup (application_hash_type, key);
+    pthread_mutex_lock(&data_p->application_hash_mutex);
+    gchar **apps = (gchar **)g_hash_table_lookup (data_p->application_hash_type, key);
 
     if(!apps) {
         apps = (gchar **) malloc (2 * sizeof (gchar *));
 	if (!apps) g_error("malloc: %s", strerror(errno));
 	memset(apps, 0, 2 * sizeof (gchar *));
         *apps = g_strdup(command);
-	g_hash_table_insert (application_hash_type, g_strdup(key), apps);
+	g_hash_table_insert (data_p->application_hash_type, g_strdup(key), apps);
     } else {
         gint old_apps_count;
         gchar **old_apps = apps;
@@ -902,10 +870,10 @@ mime_c::add_type_to_hashtable(const gchar *type, const gchar *command, gboolean 
 	    apps[k++] = g_strdup(command);
 	}   
 	*(apps + k) = NULL;
-	g_hash_table_replace (application_hash_type, g_strdup(key), apps);
+	g_hash_table_replace (data_p->application_hash_type, g_strdup(key), apps);
     }
     g_free(key);
-    pthread_mutex_unlock(&application_hash_mutex);
+    pthread_mutex_unlock(&data_p->application_hash_mutex);
     /*
     gint i;
     NOOP("(%d) %s: %s\n", prepend, type, command); fflush(NULL);
@@ -961,18 +929,18 @@ mime_c::save_text_cache(GHashTable *hash_table, const gchar *filename) {
 gboolean
 mime_c::generate_caches (void) {
     DBHashTable *cache;
-    if(!application_hash_sfx || !application_hash_type) {
+    if(!data_p->application_hash_sfx || !data_p->application_hash_type) {
         DBG ("cannot build cache without application_hashes\n");
         return FALSE;
     }
 
-    save_text_cache(application_hash_icon,"application_hash_icon");
-    save_text_cache(application_hash_text,"application_hash_text");
-    save_text_cache(application_hash_text2,"application_hash_text2");
-    save_text_cache(application_hash_output,"application_hash_output");
-    save_text_cache(application_hash_output_ext,"application_hash_output_ext");
-    save_text_cache(generic_icon_hash,"generic_icon_hash");
-    save_text_cache(alias_hash,"alias_hash");
+    save_text_cache(data_p->application_hash_icon,"application_hash_icon");
+    save_text_cache(data_p->application_hash_text,"application_hash_text");
+    save_text_cache(data_p->application_hash_text2,"application_hash_text2");
+    save_text_cache(data_p->application_hash_output,"application_hash_output");
+    save_text_cache(data_p->application_hash_output_ext,"application_hash_output_ext");
+    save_text_cache(data_p->generic_icon_hash,"generic_icon_hash");
+    save_text_cache(data_p->alias_hash,"alias_hash");
 
     gchar *cache_path = get_cache_path ("sfx");
     if(!cache_path) {
@@ -1000,8 +968,8 @@ mime_c::generate_caches (void) {
     }
     dbh_set_parallel_lock_timeout(cache, 3);
  
-    g_hash_table_foreach (application_hash_sfx, add2cache_sfx, (gpointer) cache);
-    NOOP("mime-module, generated cache %s with %d records\n", cache_path, g_hash_table_size (application_hash_sfx));
+    g_hash_table_foreach (data_p->application_hash_sfx, add2cache_sfx, (gpointer) cache);
+    NOOP("mime-module, generated cache %s with %d records\n", cache_path, g_hash_table_size (data_p->application_hash_sfx));
     dbh_regen_sweep (&cache);
     dbh_close (cache);
     if (rename(tmp_cache_path, cache_path) < 0){
@@ -1036,11 +1004,11 @@ mime_c::generate_caches (void) {
     }
     dbh_set_parallel_lock_timeout(cache, 3);
 
-    pthread_mutex_lock(&application_hash_mutex);
-    g_hash_table_foreach (application_hash_type, add2cache_type, (gpointer) cache);
-    pthread_mutex_unlock(&application_hash_mutex);
+    pthread_mutex_lock(&data_p->application_hash_mutex);
+    g_hash_table_foreach (data_p->application_hash_type, add2cache_type, (gpointer) cache);
+    pthread_mutex_unlock(&data_p->application_hash_mutex);
 
-    DBG("mime-module, generated cache %s with %d records\n", cache_path, g_hash_table_size (application_hash_type));
+    DBG("mime-module, generated cache %s with %d records\n", cache_path, g_hash_table_size (data_p->application_hash_type));
     dbh_regen_sweep (&cache);
     dbh_close (cache);
     if (rename(tmp_cache_path, cache_path) < 0){
@@ -1077,7 +1045,7 @@ mime_c::locate_mime_t (const gchar * file) {
         gchar *key = get_hash_key (sfx);
         TRACE("mime-module, lOOking for \"%s\" with key=%s\n", sfx, key);
 
-        type = (const gchar *)g_hash_table_lookup (application_hash_sfx, key);
+        type = (const gchar *)g_hash_table_lookup (data_p->application_hash_sfx, key);
         g_free (key);
         if(type) {
             NOOP(stderr,"mime-module, FOUND %s: %s\n", sfx, type);
@@ -1096,7 +1064,7 @@ mime_c::locate_mime_t (const gchar * file) {
 	/* try all lower case (hash table keys are set this way) */
 	sfx = g_utf8_strdown (*q_p, -1);
 	gchar *key = get_hash_key (sfx);
-	type = (const gchar *)g_hash_table_lookup (application_hash_sfx, key);
+	type = (const gchar *)g_hash_table_lookup (data_p->application_hash_sfx, key);
 	g_free (key);
 	if(type) {
 	    NOOP(stderr,"mime-module(2), FOUND %s: %s\n", sfx, type);
@@ -1120,9 +1088,9 @@ mime_c::locate_apps (const gchar * type) {
     ///  now look in hash...
 
     gchar *key = get_hash_key (type);
-    pthread_mutex_lock(&application_hash_mutex);
-    apps = (gchar **)g_hash_table_lookup (application_hash_type, key);
-    pthread_mutex_unlock(&application_hash_mutex);
+    pthread_mutex_lock(&data_p->application_hash_mutex);
+    apps = (gchar **)g_hash_table_lookup (data_p->application_hash_type, key);
+    pthread_mutex_unlock(&data_p->application_hash_mutex);
     g_free (key);
     if(apps) {
         gint i;
@@ -1143,11 +1111,11 @@ mime_c::locate_apps (const gchar * type) {
 void *
 mime_c::put_mimetype_in_hash(const gchar *file, const gchar *mimetype){
 #ifndef NO_MIMETYPE_HASH
-    if (!mimetype_hash) return NULL;
+    if (!data_p->mimetype_hash) return NULL;
     gchar *key = get_hash_key (file);
-    pthread_mutex_lock(&mimetype_hash_mutex);
-    g_hash_table_replace (mimetype_hash, g_strdup(key), g_strdup(mimetype));
-    pthread_mutex_unlock(&mimetype_hash_mutex);
+    pthread_mutex_lock(&data_p->mimetype_hash_mutex);
+    g_hash_table_replace (data_p->mimetype_hash, g_strdup(key), g_strdup(mimetype));
+    pthread_mutex_unlock(&data_p->mimetype_hash_mutex);
     g_free (key);
 #endif
     return NULL;
@@ -1193,7 +1161,7 @@ mime_c::mimetype2(const gchar *file){
 const gchar *
 mime_c::get_mimetype_iconname(const gchar *mimetype){
     return (const gchar *)
-        g_hash_table_lookup(generic_icon_hash, mimetype);
+        g_hash_table_lookup(data_p->generic_icon_hash, mimetype);
 }
 
 
@@ -1210,7 +1178,7 @@ mime_c::get_hash_key_strstrip (void *p){
 void *
 mime_c::mime_gencache (gchar *data) {
     TRACE("gencache (%s)\n", data);
-    pthread_mutex_lock (&cache_mutex);
+    pthread_mutex_lock (&data_p->cache_mutex);
     if (data && strchr(data,':')) {
 	gchar *file=g_build_filename(USER_APPLICATIONS, NULL);
 	gchar *newfile=g_build_filename(USER_APPLICATIONS".new", NULL);
@@ -1254,7 +1222,7 @@ mime_c::mime_gencache (gchar *data) {
     }
     generate_caches ();
     write_cache_sum (get_cache_sum ());
-    pthread_mutex_unlock (&cache_mutex);
+    pthread_mutex_unlock (&data_p->cache_mutex);
     return NULL;
 }
 
@@ -1331,13 +1299,6 @@ mime_c::check_dir (char *path) {
 
 
 //**************************************************************
-
-static void
-free_apps(void *data){
-    if (!data) return;
-    gchar **apps = (gchar **)data;
-    g_strfreev(apps);
-}
 
 
 static void

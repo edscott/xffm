@@ -1,12 +1,13 @@
 #ifndef TOOLTIP_C_HPP
 #define TOOLTIP_C_HPP
 #include "xffm+.h"
+#include "data_c.hpp"
 #include "utility_c.hpp"
 
 
-class tooltip_c {
+class tooltip_c: virtual utility_c {
     public:
-        tooltip_c(void);
+        tooltip_c(data_c *);
         ~tooltip_c(void);
         GtkWidget * get_tt_window(void);
         GtkWidget *get_tt_window(const GdkPixbuf *, const gchar *, const gchar *);
@@ -27,7 +28,6 @@ class tooltip_c {
         void tooltip_placement_bug_workaround(GtkWidget *);
 
         gboolean tooltip_is_mapped;
-        utility_c *utility_p;
 };
 
 #endif

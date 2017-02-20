@@ -1,7 +1,6 @@
 #ifndef XFDIR_LOCAL_C_HPP
 #define XFDIR_LOCAL_C_HPP
 #include "xfdir_c.hpp"
-#include "local_file_info_c.hpp"
 
 typedef struct xd_t{
     gchar *d_name;
@@ -11,9 +10,9 @@ typedef struct xd_t{
     gchar *mimefile;
 }xd_t;
 
-class xfdir_local_c: public xfdir_c, virtual utility_c, protected local_file_info_c {
+class xfdir_local_c: public xfdir_c, virtual utility_c{
     public:
-	xfdir_local_c(const gchar *, gtk_c *);
+	xfdir_local_c(data_c *, const gchar *);
         void reload(const gchar *);
 	const gchar *get_xfdir_iconname(void);
         gchar *make_tooltip_text (GtkTreePath *);
@@ -35,6 +34,26 @@ class xfdir_local_c: public xfdir_c, virtual utility_c, protected local_file_inf
 
 	gchar *get_home_iconname(const gchar *);
         GList *sort_directory_list(GList *);
+    private:
+        gchar *get_path_info (GtkTreeModel *, GtkTreePath *, const gchar *);
+
+        gchar *path_info(const gchar *, struct stat *, const gchar *, 
+                const gchar *, const gchar *);
+        gint count_files (const gchar *);
+        gint count_hidden_files (const gchar *);
+        gchar ftypelet (mode_t);
+        
+        gchar *user_string (struct stat *);
+        gchar *group_string (struct stat *);
+        gchar *mode_string (mode_t mode);
+        gchar *date_string (time_t);
+        gchar *sizetag (off_t, gint);
+
+        pthread_mutex_t user_string_mutex;
+        pthread_mutex_t group_string_mutex;
+        pthread_mutex_t date_string_mutex;
+
+	data_c *data_p;
 
 };
 

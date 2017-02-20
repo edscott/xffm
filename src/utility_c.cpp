@@ -4,24 +4,6 @@
 #include <errno.h>
 #include "utility_c.hpp"
 
-
-////////////////////////////////////////////////////////////////////////////////////////////
-
-utility_c::utility_c(void){
-    pthread_mutex_init(&readdir_mutex, NULL);
-
-}
-
-utility_c::~utility_c(void){
-    pthread_mutex_destroy(&readdir_mutex);
-
-}
-
-pthread_mutex_t *
-utility_c::get_readdir_mutex(void){ 
-    return &readdir_mutex;
-}
-
 gchar * 
 utility_c::get_text_editor(void){
     const gchar *value = getenv("EDITOR");

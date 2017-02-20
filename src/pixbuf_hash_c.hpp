@@ -2,14 +2,14 @@
 #define PIXBUF_HASH_C_HPP
 #include "xffm+.h"
 #include "utility_c.hpp"
-
+#include "data_c.hpp"
 
 #define USER_XFFM_CACHE_DIR      g_get_user_cache_dir(),"xffm+"
 #define XFFM_THUMBNAIL_DIR 	USER_XFFM_CACHE_DIR,"thumbnails"
 
 class pixbuf_hash_c: virtual utility_c {
     public:
-	pixbuf_hash_c(void);
+	pixbuf_hash_c(data_c *);
 	~pixbuf_hash_c(void);
         void zap_thumbnail_file(const gchar *, gint);
 	
@@ -22,9 +22,9 @@ class pixbuf_hash_c: virtual utility_c {
     protected:
     private:
 	void rm_from_pixbuf_hash (const gchar *, gint);
-        GHashTable *pixbuf_hash;
         gchar *get_hash_key (const gchar *, gint);
         GdkPixbuf *lookup_icon(const gchar *, gint);
+	data_c *data_p;
 };
 
 #endif

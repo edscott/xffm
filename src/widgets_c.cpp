@@ -3,7 +3,7 @@
 #include "window_c.hpp"
 #include "widgets_c.hpp"
 
-widgets_c::widgets_c(void *window_data, GtkNotebook *data)
+widgets_c::widgets_c(data_c *data0, void *window_data, GtkNotebook *data): gtk_c(data0)
 {
     window_v = window_data;
     notebook = data;
@@ -11,26 +11,22 @@ widgets_c::widgets_c(void *window_data, GtkNotebook *data)
         g_warning("widgets_c::widgets_c(): notebook cannot be NULL\n");
         throw 1;
     }
-    pathbar_p = new pathbar_c(window_data, data);
+    pathbar_p = new pathbar_c(data0, window_data, data);
     window_c *window_p = (window_c *)window_data;
-    gtk_p = window_p->get_gtk_p();
     create();
     setup_scolled_windows();
     setup_size_scale();
-    gtk_p->setup_image_button(clear_button, "edit-clear-all",  _("Clear"));
-    gtk_p->setup_image_button(page_label_button, "window-close", _("Close Tab"));
+    setup_image_button(clear_button, "edit-clear-all",  _("Clear"));
+    setup_image_button(page_label_button, "window-close", _("Close Tab"));
 }
 
 widgets_c::~widgets_c(void){
-    
 }
+
 
 GtkNotebook *
 widgets_c::get_notebook(void){ return notebook;}
 
-
-gtk_c *
-widgets_c::get_gtk_p(void){ return gtk_p;}
 
 GtkWidget *widgets_c::get_page_child(void){ return page_child;}
 GtkWidget *widgets_c::get_page_button(void){ return page_label_button;}

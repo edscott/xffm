@@ -19,6 +19,7 @@ bin_PROGRAMS = xffm
 
 xffm_SOURCES = \
 	  xffm_c.cpp \
+	    data_c.cpp \
 	    window_c.cpp \
 	    view_c.cpp  \
 		thread_control_c.cpp   \
@@ -35,7 +36,6 @@ xffm_SOURCES = \
 	  xfdir_c.cpp \
 	    xfdir_root_c.cpp \
 	    xfdir_local_c.cpp \
-                local_file_info_c.cpp \
 	  gtk_c.cpp \
 	    signal_action_c.cpp \
 	    tooltip_c.cpp \

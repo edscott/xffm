@@ -45,9 +45,9 @@ enum
   NUM_COLS
 };
 
-class xfdir_c: virtual utility_c {
+class xfdir_c: virtual utility_c, public gtk_c {
     public:
-        xfdir_c(const gchar *, gtk_c *);
+        xfdir_c(data_c *, const gchar *);
         ~xfdir_c(void);
         virtual void reload(const gchar *)=0;
 	virtual const gchar *get_xfdir_iconname(void)=0;
@@ -78,7 +78,6 @@ class xfdir_c: virtual utility_c {
         virtual GtkTreeModel *mk_tree_model(void) = 0;
         GtkTreeModel *treemodel;
         gchar *path;
-	gtk_c *gtk_p;
 	gint dir_count;   
 	gboolean large;
         //void tooltip(GtkIconView *, GtkTreePath *);   

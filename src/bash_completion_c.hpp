@@ -2,11 +2,12 @@
 #define BASH_COMPLETION_C_HPP
 #include "xffm+.h"
 #include "print_c.hpp"
+#include "data_c.hpp"
 
 
 class bash_completion_c: public print_c {
     public:
-	bash_completion_c(void *);
+	bash_completion_c(data_c *, void *);
 
     protected:
         void bash_completion(void);
