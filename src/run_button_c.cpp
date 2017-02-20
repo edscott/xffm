@@ -7,51 +7,6 @@
 #include "window_c.hpp"
 #include "run_button_c.hpp"
 
-// FIXME: context function is inaccesible from virtual class utility_c :-/
-static gboolean
-context_function_f(gpointer data){
-    void **arg = (void **)data;
-    void * (*function)(gpointer) = (void* (*)(void*))arg[0];
-    gpointer function_data = arg[1];
-    pthread_mutex_t *mutex = (pthread_mutex_t *)arg[2];
-    pthread_cond_t *signal = (pthread_cond_t *)arg[3];
-    void **result_p = (void **)arg[4];
-    void *result = (*function)(function_data);
-    pthread_mutex_lock(mutex);
-    *result_p = result;
-    pthread_cond_signal(signal);
-    pthread_mutex_unlock(mutex);
-    return FALSE;
-}
-
-void *
-context_function(void * (*function)(gpointer), void * function_data){
-    pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
-    pthread_cond_t signal = PTHREAD_COND_INITIALIZER; 
-    void *result=GINT_TO_POINTER(-1);
-    void *arg[] = {
-        (void *)function,
-        (void *)function_data,
-        (void *)&mutex,
-        (void *)&signal,
-        (void *)&result
-    };
-    gboolean owner = g_main_context_is_owner(g_main_context_default());
-    if (owner){
-	context_function_f(arg);
-    } else {
-	g_main_context_invoke(NULL, context_function_f, arg);
-	pthread_mutex_lock(&mutex);
-	if (result == GINT_TO_POINTER(-1)) pthread_cond_wait(&signal, &mutex);
-	pthread_mutex_unlock(&mutex);
-    }
-    pthread_mutex_destroy(&mutex);
-    pthread_cond_destroy(&signal);
-    return result;
-}
-
-
-
 static void *run_wait_f (void *);
 static void *make_run_data_button (void *);
 static void *zap_run_button(void *);
@@ -91,7 +46,12 @@ run_button_c::~run_button_c(void){
     g_free (icon_id);
     g_free (workdir);
 }
-	
+
+void *
+run_button_c::_context_function(void * (*function)(gpointer), void * function_data){
+    return context_function(function, function_data);
+}
+
 void
 run_button_c::set_icon_id(const gchar *data){
     g_free(icon_id); 
@@ -222,7 +182,7 @@ run_wait_f (void *data) {
     // before gtk has fully created the little run button.
     //
     
-    context_function(make_run_data_button, data);
+    run_button_p->_context_function(make_run_data_button, data);
     TRACE("run_wait_f: thread waitpid for %d on (%s/%s)\n", 
             run_button_p->get_pid(), 
             run_button_p->get_command(), 
@@ -288,7 +248,7 @@ run_wait_f (void *data) {
     fflush(NULL);  
     // Destroy little button (if exists) and free run_data_p 
     // associated memory. Done in main thread for gtk instruction set.
-    context_function(zap_run_button, data);
+    run_button_p->_context_function(zap_run_button, data);
     return NULL;
 }
 
