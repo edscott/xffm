@@ -94,7 +94,7 @@ bash_completion_c::bash_suggetion(const gchar *in_token, gint token_len){
     }
     gint matches;
     gchar *suggest = bash_complete_with_head(token, &matches);
-    fprintf(stderr, "completion count = %d\n", matches);
+    //fprintf(stderr, "completion count = %d\n", matches);
     if (suggest){
 	if (matches == 1 && suggest[strlen(suggest)-1] != '/') {
 	    gchar *g = g_strconcat(suggest, " ", NULL);

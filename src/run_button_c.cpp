@@ -144,7 +144,7 @@ make_run_data_button (void *data) {
     GtkWidget *button = gtk_menu_button_new ();
 
     GMenuModel *menu = run_button_p->get_signal_menu_model();
-    fprintf(stderr, "make_run_data_button: menu model is %p\n", menu);
+    //fprintf(stderr, "make_run_data_button: menu model is %p\n", menu);
     gtk_menu_button_set_menu_model (GTK_MENU_BUTTON (button), menu);
 
     run_button_p->run_button_setup(button);

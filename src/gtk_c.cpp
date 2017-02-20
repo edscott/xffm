@@ -3,7 +3,7 @@
 
 gtk_c::gtk_c(data_c *data0): tooltip_c(data0), pixbuf_c(data0), mime_c(data0){
     data_p = data0;
-    fprintf(stderr, "gtk_c constructor OK\n");
+    //fprintf(stderr, "gtk_c constructor OK\n");
 }
 
 

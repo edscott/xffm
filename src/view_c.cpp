@@ -144,7 +144,7 @@ view_c::set_treemodel(xfdir_c *data){
     xfdir_c *old_xfdir_p = xfdir_p;
     xfdir_p = data;
     GtkTreeModel *tree_model = xfdir_p->get_tree_model();
-    fprintf(stderr, "new treemodel= %p (old_xfdir=%p new_xfdir=%p)\n", tree_model, old_xfdir_p, xfdir_p);
+    //fprintf(stderr, "new treemodel= %p (old_xfdir=%p new_xfdir=%p)\n", tree_model, old_xfdir_p, xfdir_p);
     //if (tree_model) gtk_widget_hide(GTK_WIDGET(get_iconview()));
     gtk_icon_view_set_model(GTK_ICON_VIEW(get_iconview()), tree_model);
     gtk_icon_view_set_text_column (GTK_ICON_VIEW(get_iconview()), xfdir_p->get_text_column());
@@ -153,7 +153,7 @@ view_c::set_treemodel(xfdir_c *data){
     //gtk_icon_view_set_tooltip_column (GTK_ICON_VIEW(get_iconview()),3);
     set_view_details();
     //gtk_widget_show(GTK_WIDGET(get_iconview()));
-    fprintf(stderr, "set_treemodel done, now deleting %p\n", old_xfdir_p);
+    //fprintf(stderr, "set_treemodel done, now deleting %p\n", old_xfdir_p);
     if (old_xfdir_p) delete old_xfdir_p;
 }
 ///////////////////////////// Private:
@@ -707,7 +707,7 @@ button_press_f (GtkWidget *widget,
                                event_button->y,
                                &path, NULL)) return FALSE;
 
-    fprintf(stderr, "view_p: button_press_event...\n");
+    //fprintf(stderr, "view_p: button_press_event...\n");
     
     gboolean retval = ((view_c *)data)->get_xfdir_p()->popup(path);
     gtk_tree_path_free(path);
