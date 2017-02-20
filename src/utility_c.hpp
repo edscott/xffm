@@ -7,9 +7,9 @@
 
 class utility_c{
     public:
-        void *context_function(void * (*function)(gpointer), void * function_data);
         gchar *utf_string (const gchar *);
         gchar *wrap_utf_string(const gchar *, gint);
+        void *context_function(void * (*function)(gpointer), void * function_data);
     protected:
 	const gchar *chop_excess (gchar *);
         gchar *compact_line(const gchar *);

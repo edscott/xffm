@@ -22,8 +22,6 @@ class run_button_c: virtual utility_c, public gtk_c, public signal_action_c {
         void *get_view_v(void);
         GtkWidget *make_menu(void);
 
-	GdkPixbuf *_find_pixbuf(const gchar *, gint);// This will return NULL on failure
-        void *_context_function(void * (*function)(gpointer), void * function_data);
 	
     protected:
     private:

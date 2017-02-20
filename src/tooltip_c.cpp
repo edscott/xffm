@@ -247,7 +247,7 @@ widget_tooltip_function(
 
         if (tooltip_target == widget) return TRUE;
     } else {
-        fprintf(stderr, "New tooltip window\"%s\"\n", tooltip_text); 
+        //fprintf(stderr, "New tooltip window\"%s\"\n", tooltip_text); 
     }
 
     GdkPixbuf *tooltip_pixbuf = (GdkPixbuf *)g_object_get_data(G_OBJECT(widget), "tooltip_pixbuf");
@@ -301,7 +301,7 @@ custom_tooltip_f(void * data){
     void *object = arg[3];
     tooltip_c *tooltip_p = (tooltip_c *)object;
 
-    fprintf(stderr, "custom_tooltip_f for %s\n", text);
+    //fprintf(stderr, "custom_tooltip_f for %s\n", text);
 
     gchar *t = g_strdup(text);
     g_object_set_data(G_OBJECT(widget), "tooltip_text", t);
