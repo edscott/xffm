@@ -51,6 +51,7 @@ view_c::view_c(data_c *data0, void *window_data, GtkNotebook *notebook) :  widge
 
 
 view_c::view_c(data_c *data0, void *window_data, GtkNotebook *notebook, const gchar *path) : widgets_c(data0, window_data, notebook), thread_control_c((void *)this) {
+    fprintf(stderr, "view_c::view_c.....\n");
     xfdir_p = NULL;
     xfdir_c *new_xfdir_p;
     data_p = data0;
@@ -111,16 +112,19 @@ view_c::get_dir_count(void){
 
 void
 view_c::reload(const gchar *data){
+    fprintf(stderr, "view_c::reload.....\n");
+    set_spinner(TRUE);
     // clear highlight hash
     xfdir_p->clear_highlights();
     if (g_file_test(data, G_FILE_TEST_IS_DIR) &&
 	    !g_file_test(get_path(), G_FILE_TEST_IS_DIR)){
-	set_spinner(TRUE);
+        // This is to switch from a module to a local xfdir
 	while (gtk_events_pending()) gtk_main_iteration();
 	// switch back to local mode
         fprintf(stderr, "hidden toggle=%d\n", shows_hidden());
 	xfdir_c *xfdir_local_p = (xfdir_c *)new xfdir_local_c(data_p, data, shows_hidden());
 	set_treemodel(xfdir_local_p);
+        delete xfdir_p;
 	set_spinner(FALSE);
 	return;
     }
@@ -128,6 +132,7 @@ view_c::reload(const gchar *data){
     set_view_details();
     while (gtk_events_pending()) gtk_main_iteration();
     if (get_dir_count() <= 500) highlight();
+    set_spinner(FALSE);
 }
 
 void

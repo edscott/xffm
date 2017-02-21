@@ -3,7 +3,6 @@
 #include <strings.h>
 #include <errno.h>
 #include <stdlib.h>
-#include <gio/gio.h>
 #include "view_c.hpp"
 #include <sys/types.h>
 #include <pwd.h>
@@ -36,7 +35,6 @@ static gint compare_by_name (const void *, const void *);
 xfdir_local_c::xfdir_local_c(data_c *data0, const gchar *data, gboolean data2): 
     xfdir_c(data0, data)
 {
-    GFile *gfile = g_file_new_for_path (path);
     data_p = data0;
     shows_hidden = data2;
     //fprintf(stderr, "data2=%d\n", data2);
@@ -44,11 +42,11 @@ xfdir_local_c::xfdir_local_c(data_c *data0, const gchar *data, gboolean data2):
     user_string_mutex=PTHREAD_MUTEX_INITIALIZER;
     group_string_mutex=PTHREAD_MUTEX_INITIALIZER;
     date_string_mutex=PTHREAD_MUTEX_INITIALIZER;
-    GCancellable *cancellable = g_cancellable_new ();
-    GError *error=NULL;
-    GFileMonitor *monitor =
-	g_file_monitor_directory (gfile,G_FILE_MONITOR_WATCH_MOVES,                          cancellable,&error);
-     //g_object_unref(gfile);
+    start_monitor(data);
+}
+
+xfdir_local_c::~xfdir_local_c(void){
+    stop_monitor();
 }
  
 void
@@ -149,6 +147,7 @@ xfdir_local_c::make_tooltip_text (GtkTreePath *tpath) {
 GtkTreeModel *
 xfdir_local_c::mk_tree_model (void)
 {
+    fprintf(stderr, "xfdir_local_c::mk_tree_model for %s\n", path);
     if (!path || !g_file_test(path, G_FILE_TEST_EXISTS)) {
         fprintf(stderr, "%s does not exist\n", path);
         return NULL;
@@ -332,6 +331,7 @@ xfdir_local_c::reload(const gchar *data){
         fprintf(stderr, "chdir(%s): %s\n", data, strerror(errno));
         return;
     }
+    stop_monitor();
     g_free(path);
     path = g_get_current_dir();
     DBG("current dir is %s\n", path);
@@ -340,7 +340,9 @@ xfdir_local_c::reload(const gchar *data){
     
     heartbeat = 0;
     GList *directory_list = read_items (&heartbeat);
+    while (gtk_events_pending()) gtk_main_iteration();
     insert_list_into_model(directory_list, GTK_LIST_STORE(treemodel));
+    start_monitor(path);
 
     
 }
@@ -356,6 +358,7 @@ xfdir_local_c::insert_list_into_model(GList *data, GtkListStore *list_store){
     else large = FALSE;
     GList *l = directory_list;
     for (; l && l->data; l= l->next){
+        while (gtk_events_pending()) gtk_main_iteration();
 	xd_t *xd_p = (xd_t *)l->data;
         gtk_list_store_append (list_store, &iter);
 	gchar *utf_name = utf_string(xd_p->d_name);

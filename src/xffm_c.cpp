@@ -8,8 +8,9 @@ static void startup(GtkApplication *, void *);
 static void shutdown(GtkApplication *, void *);
 static void open (GtkApplication *, gpointer, gint, gchar *, gpointer);
 //////////////////////////////////////////////////////////////////
-xffm_c::xffm_c(data_c *data0, gint in_argc, gchar **in_argv){
-    data_p=data0, 
+xffm_c::xffm_c(gint in_argc, gchar **in_argv){
+    data_p = new data_c();
+
     argc = in_argc;
     argv = in_argv;
     GtkApplication *app = gtk_application_new (NULL, G_APPLICATION_HANDLES_OPEN);
@@ -19,6 +20,7 @@ xffm_c::xffm_c(data_c *data0, gint in_argc, gchar **in_argv){
         fprintf(stderr, "g_application_register: %s\n", error->message);
         throw 1;
     }
+
     data_p->set_app(app);
 
     window_p_list = NULL;

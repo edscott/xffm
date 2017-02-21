@@ -6,7 +6,7 @@
 
 class xffm_c{
     public:
-        xffm_c(data_c *, gint, gchar **);
+        xffm_c(gint, gchar **);
 	~xffm_c(void);
 	window_c *add_window_p(void);
 	window_c *add_window_p(const gchar *);

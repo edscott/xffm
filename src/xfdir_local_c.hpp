@@ -1,6 +1,7 @@
 #ifndef XFDIR_LOCAL_C_HPP
 #define XFDIR_LOCAL_C_HPP
 #include "xfdir_c.hpp"
+#include "local_monitor_c.hpp"
 
 typedef struct xd_t{
     gchar *d_name;
@@ -10,9 +11,10 @@ typedef struct xd_t{
     gchar *mimefile;
 }xd_t;
 
-class xfdir_local_c: public xfdir_c, virtual utility_c{
+class xfdir_local_c: public xfdir_c, virtual utility_c, protected local_monitor_c{
     public:
 	xfdir_local_c(data_c *, const gchar *, gboolean);
+        ~xfdir_local_c(void);
         void reload(const gchar *);
 	const gchar *get_xfdir_iconname(void);
         gchar *make_tooltip_text (GtkTreePath *);
