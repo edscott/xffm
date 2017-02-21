@@ -61,6 +61,7 @@ view_c::view_c(data_c *data0, void *window_data, GtkNotebook *notebook, const gc
 	// load specific class xfdir here
     }
     set_treemodel(new_xfdir_p);
+    set_spinner(FALSE);
 }
 
 
@@ -110,6 +111,8 @@ view_c::get_dir_count(void){
 
 void
 view_c::reload(const gchar *data){
+    set_spinner(TRUE);
+    while (gtk_events_pending()) gtk_main_iteration();
     // clear highlight hash
     xfdir_p->clear_highlights();
     if (g_file_test(data, G_FILE_TEST_IS_DIR) &&
@@ -118,12 +121,14 @@ view_c::reload(const gchar *data){
         fprintf(stderr, "hidden toggle=%d\n", shows_hidden());
 	xfdir_c *xfdir_local_p = (xfdir_c *)new xfdir_local_c(data_p, data, shows_hidden());
 	set_treemodel(xfdir_local_p);
+	set_spinner(FALSE);
 	return;
     }
     xfdir_p->reload(data);
     set_view_details();
     while (gtk_events_pending()) gtk_main_iteration();
     if (get_dir_count() <= 500) highlight();
+    set_spinner(FALSE);
 }
 
 void

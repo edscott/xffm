@@ -34,6 +34,7 @@ GtkWidget *widgets_c::get_page_child(void){ return page_child;}
 GtkWidget *widgets_c::get_page_button(void){ return page_label_button;}
 GtkWidget *widgets_c::get_pathbar(void){ return pathbar_p->get_pathbar();}
 GtkWidget *widgets_c::get_page_label(void){ return page_label;}
+GtkWidget *widgets_c::get_page_label_spinner_box(void){ return page_label_spinner_box;}
 GtkWidget *widgets_c::get_page_label_icon_box(void){ return page_label_icon_box;}
 GtkWidget *widgets_c::get_clear_button(void){ return clear_button;}
 GtkToggleButton *widgets_c::get_hidden_button(void){ return GTK_TOGGLE_BUTTON(hidden_button);}
@@ -75,6 +76,9 @@ void
 widgets_c::create(void){
     page_child = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
     page_label_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+    
+    page_label_spinner_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+    page_spinner = gtk_spinner_new();
     page_label_icon_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
     page_label = gtk_label_new (_("Loading folder..."));
     page_label_button = gtk_button_new ();
@@ -131,14 +135,28 @@ void
 widgets_c::set_status_label(const gchar *text){
     gtk_label_set_markup(GTK_LABEL(status_label),text); 
 }
+	
+void 
+widgets_c::set_spinner(gboolean state){
+    if (!state){
+	gtk_spinner_stop (GTK_SPINNER(page_spinner));
+	gtk_widget_show(page_label_icon_box);
+	return;
+    }
+    gtk_widget_hide(page_label_icon_box);  
+    gtk_spinner_start (GTK_SPINNER(page_spinner));
+}
 
 void
 widgets_c::pack(void){
     // Add widgets to page_label_box:
+    gtk_box_pack_start (GTK_BOX (page_label_box), page_label_spinner_box, TRUE, TRUE, 0);
+    gtk_box_pack_start (GTK_BOX (page_label_spinner_box), page_spinner, TRUE, TRUE, 0);
     gtk_box_pack_start (GTK_BOX (page_label_box), page_label_icon_box, TRUE, TRUE, 0);
     gtk_box_pack_start (GTK_BOX (page_label_box), page_label, TRUE, TRUE, 2);
     gtk_box_pack_end (GTK_BOX (page_label_box), page_label_button, TRUE, TRUE, 0);
     gtk_widget_show_all (page_label_box);
+    set_spinner(TRUE);
     gtk_widget_show(pathbar_p->get_pathbar());
 
     gtk_box_pack_start (GTK_BOX (page_child), vpane, TRUE, TRUE, 0);

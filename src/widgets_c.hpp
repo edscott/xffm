@@ -30,12 +30,14 @@ class widgets_c: virtual utility_c, public gtk_c{
 	void *get_window_v(void);
     protected:
         void pack();
+	void set_spinner(gboolean);
 
         GtkWidget *get_page_child(void);
         GtkWidget *get_page_button(void);
         GtkWidget *get_pathbar(void);
         GtkWidget *get_page_label(void);
         GtkWidget *get_page_label_icon_box(void);
+        GtkWidget *get_page_label_spinner_box(void);
         GtkWidget *get_clear_button(void);
         GtkToggleButton *get_hidden_button(void);
 	GtkNotebook *get_notebook(void);
@@ -51,8 +53,10 @@ class widgets_c: virtual utility_c, public gtk_c{
 	
         GtkIconView *icon_view;          
         GtkNotebook *notebook;
+        GtkWidget *page_spinner;
         GtkWidget *page_child;
         GtkWidget *page_label_box;
+        GtkWidget *page_label_spinner_box;
         GtkWidget *page_label_icon_box;
         GtkWidget *page_label;
         GtkWidget *page_label_button;
