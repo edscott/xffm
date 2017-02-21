@@ -3,7 +3,7 @@
 #include <strings.h>
 #include <errno.h>
 #include <stdlib.h>
-
+#include <gio/gio.h>
 #include "view_c.hpp"
 #include <sys/types.h>
 #include <pwd.h>
@@ -36,13 +36,19 @@ static gint compare_by_name (const void *, const void *);
 xfdir_local_c::xfdir_local_c(data_c *data0, const gchar *data, gboolean data2): 
     xfdir_c(data0, data)
 {
+    GFile *gfile = g_file_new_for_path (path);
     data_p = data0;
     shows_hidden = data2;
-    fprintf(stderr, "data2=%d\n", data2);
+    //fprintf(stderr, "data2=%d\n", data2);
     treemodel = mk_tree_model();
     user_string_mutex=PTHREAD_MUTEX_INITIALIZER;
     group_string_mutex=PTHREAD_MUTEX_INITIALIZER;
     date_string_mutex=PTHREAD_MUTEX_INITIALIZER;
+    GCancellable *cancellable = g_cancellable_new ();
+    GError *error=NULL;
+    GFileMonitor *monitor =
+	g_file_monitor_directory (gfile,G_FILE_MONITOR_WATCH_MOVES,                          cancellable,&error);
+     //g_object_unref(gfile);
 }
  
 void

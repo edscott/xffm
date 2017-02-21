@@ -111,12 +111,12 @@ view_c::get_dir_count(void){
 
 void
 view_c::reload(const gchar *data){
-    set_spinner(TRUE);
-    while (gtk_events_pending()) gtk_main_iteration();
     // clear highlight hash
     xfdir_p->clear_highlights();
     if (g_file_test(data, G_FILE_TEST_IS_DIR) &&
 	    !g_file_test(get_path(), G_FILE_TEST_IS_DIR)){
+	set_spinner(TRUE);
+	while (gtk_events_pending()) gtk_main_iteration();
 	// switch back to local mode
         fprintf(stderr, "hidden toggle=%d\n", shows_hidden());
 	xfdir_c *xfdir_local_p = (xfdir_c *)new xfdir_local_c(data_p, data, shows_hidden());
@@ -128,7 +128,6 @@ view_c::reload(const gchar *data){
     set_view_details();
     while (gtk_events_pending()) gtk_main_iteration();
     if (get_dir_count() <= 500) highlight();
-    set_spinner(FALSE);
 }
 
 void
