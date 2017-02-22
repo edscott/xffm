@@ -64,7 +64,6 @@ class xfdir_c: virtual utility_c, public gtk_c {
 	
 	gint get_dir_count(void);
         GtkTreeModel *get_tree_model(void);
-        gint get_icon_size(const gchar *);
         gint get_icon_highlight_size(const gchar *);
         const gchar *get_label();
 	gchar *get_window_name (void);

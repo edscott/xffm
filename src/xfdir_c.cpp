@@ -36,11 +36,11 @@ xfdir_c::is_large(void){return large;}
 
 gchar *
 xfdir_c::make_tooltip_text (GtkTreePath *tpath ) {
-    gchar *tt_text;
+/*    gchar *tt_text;
     GtkTreeIter iter;
     gtk_tree_model_get_iter (treemodel, &iter, tpath);
     gtk_tree_model_get (treemodel, &iter, 
-            COL_TOOLTIP_TEXT, &tt_text, -1);
+            COL_TOOLTIP_TEXT, &tt_text, -1);*/
     
     return g_strdup("xfdir_c::tooltip_text not defined in treemodel!\n");
 }
@@ -244,12 +244,6 @@ xfdir_c::get_tree_model (void){return treemodel;}
 gint
 xfdir_c::get_dir_count(void){ return dir_count;}
 
-
-gint 
-xfdir_c::get_icon_size(const gchar *name){
-    if (strcmp(name, "..")==0) return GTK_ICON_SIZE_DND;
-    return GTK_ICON_SIZE_DIALOG;
-}
 
 gint 
 xfdir_c::get_icon_highlight_size(const gchar *name){

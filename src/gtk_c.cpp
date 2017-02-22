@@ -1,6 +1,12 @@
 #include "gtk_c.hpp"
 #include "intl.h"
 
+gint 
+gtk_c::get_icon_size(const gchar *name){
+    if (strcmp(name, "..")==0) return GTK_ICON_SIZE_DND;
+    return GTK_ICON_SIZE_DIALOG;
+}
+
 gtk_c::gtk_c(data_c *data0): tooltip_c(data0), pixbuf_c(data0), mime_c(data0){
     data_p = data0;
     //fprintf(stderr, "gtk_c constructor OK\n");

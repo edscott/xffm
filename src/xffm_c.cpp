@@ -8,8 +8,8 @@ static void startup(GtkApplication *, void *);
 static void shutdown(GtkApplication *, void *);
 static void open (GtkApplication *, gpointer, gint, gchar *, gpointer);
 //////////////////////////////////////////////////////////////////
-xffm_c::xffm_c(gint in_argc, gchar **in_argv){
-    data_p = new data_c();
+xffm_c::xffm_c(data_c *data0, gint in_argc, gchar **in_argv){
+    data_p = data0;
 
     argc = in_argc;
     argv = in_argv;
@@ -74,7 +74,7 @@ xffm_c::remove_window_p_from_list(void *data){
 
 static void
 activate(GtkApplication *app, void *data){
-    fprintf(stderr, "activate(GtkApplication *app, void *data)\n");
+    NOOP ("activate(GtkApplication *app, void *data)\n");
     xffm_c *xffm_p = (xffm_c *)data;
     xffm_p->add_window_p();
 }
@@ -109,7 +109,7 @@ open (GtkApplication *app,
                gint          n_files,
                gchar        *hint,
                gpointer      data){
-    fprintf(stderr, "open(GtkApplication *app, void *data)\n");
+    NOOP ("open(GtkApplication *app, void *data)\n");
     xffm_c *xffm_p = (xffm_c *)data;
     if (!n_files){
 	xffm_p->add_window_p();	

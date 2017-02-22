@@ -51,7 +51,7 @@ view_c::view_c(data_c *data0, void *window_data, GtkNotebook *notebook) :  widge
 
 
 view_c::view_c(data_c *data0, void *window_data, GtkNotebook *notebook, const gchar *path) : widgets_c(data0, window_data, notebook), thread_control_c((void *)this) {
-    fprintf(stderr, "view_c::view_c.....\n");
+    NOOP( "view_c::view_c.....\n");
     xfdir_p = NULL;
     xfdir_c *new_xfdir_p;
     data_p = data0;
@@ -112,7 +112,7 @@ view_c::get_dir_count(void){
 
 void
 view_c::reload(const gchar *data){
-    fprintf(stderr, "view_c::reload.....\n");
+    NOOP( "view_c::reload.....\n");
     set_spinner(TRUE);
     // clear highlight hash
     xfdir_p->clear_highlights();
@@ -121,7 +121,7 @@ view_c::reload(const gchar *data){
         // This is to switch from a module to a local xfdir
 	while (gtk_events_pending()) gtk_main_iteration();
 	// switch back to local mode
-        fprintf(stderr, "hidden toggle=%d\n", shows_hidden());
+        NOOP( "hidden toggle=%d\n", shows_hidden());
 	xfdir_c *xfdir_local_p = (xfdir_c *)new xfdir_local_c(data_p, data, shows_hidden());
 	set_treemodel(xfdir_local_p);
         delete xfdir_p;
@@ -168,7 +168,7 @@ view_c::set_treemodel(xfdir_c *data){
     xfdir_c *old_xfdir_p = xfdir_p;
     xfdir_p = data;
     GtkTreeModel *tree_model = xfdir_p->get_tree_model();
-    //fprintf(stderr, "new treemodel= %p (old_xfdir=%p new_xfdir=%p)\n", tree_model, old_xfdir_p, xfdir_p);
+    NOOP( "new treemodel= %p (old_xfdir=%p new_xfdir=%p)\n", tree_model, old_xfdir_p, xfdir_p);
     //if (tree_model) gtk_widget_hide(GTK_WIDGET(get_iconview()));
     gtk_icon_view_set_model(GTK_ICON_VIEW(get_iconview()), tree_model);
     gtk_icon_view_set_text_column (GTK_ICON_VIEW(get_iconview()), xfdir_p->get_text_column());
@@ -177,7 +177,7 @@ view_c::set_treemodel(xfdir_c *data){
     //gtk_icon_view_set_tooltip_column (GTK_ICON_VIEW(get_iconview()),3);
     set_view_details();
     //gtk_widget_show(GTK_WIDGET(get_iconview()));
-    //fprintf(stderr, "set_treemodel done, now deleting %p\n", old_xfdir_p);
+    NOOP( "set_treemodel done, now deleting %p\n", old_xfdir_p);
     if (old_xfdir_p) delete old_xfdir_p;
 }
 ///////////////////////////// Private:
@@ -658,10 +658,10 @@ query_tooltip_f (GtkWidget  *widget,
 
     if (!gtk_icon_view_get_tooltip_context(icon_view, &x, &y, FALSE, 
                 NULL, NULL, NULL)) {
-        //fprintf(stderr, "tooltip context %d,%d\n", -1,-1);
+        NOOP( "tooltip context %d,%d\n", -1,-1);
         view_p->setup_tooltip(-1, -1);
     } else {
-        //fprintf(stderr, "tooltip context %d,%d\n", x,y);
+        NOOP( "tooltip context %d,%d\n", x,y);
         view_p->setup_tooltip(x, y);
     }
     return FALSE;
@@ -738,7 +738,7 @@ button_press_f (GtkWidget *widget,
                                event_button->y,
                                &path, NULL)) return FALSE;
 
-    //fprintf(stderr, "view_p: button_press_event...\n");
+    NOOP( "view_p: button_press_event...\n");
     
     gboolean retval = ((view_c *)data)->get_xfdir_p()->popup(path);
     gtk_tree_path_free(path);

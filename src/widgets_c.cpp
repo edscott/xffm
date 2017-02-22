@@ -17,7 +17,7 @@ widgets_c::widgets_c(data_c *data0, void *window_data, GtkNotebook *data): gtk_c
     setup_scolled_windows();
     setup_size_scale();
     setup_image_button(hidden_button, "emblem-show-hidden",  _("Show hidden files"));
-    fprintf(stderr, "toggle hidden_button=%p\n", hidden_button);
+    NOOP( "toggle hidden_button=%p\n", hidden_button);
     setup_image_button(clear_button, "edit-clear-all",  _("Clear"));
     setup_image_button(page_label_button, "window-close", _("Close Tab"));
 }
