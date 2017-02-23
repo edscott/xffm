@@ -23,7 +23,6 @@ xffm_c::xffm_c(data_c *data0, gint in_argc, gchar **in_argv){
 
     data_p->set_app(app);
 
-    window_p_list = NULL;
     
     g_signal_connect (app, "activate", G_CALLBACK (activate), (void *)this);
     g_signal_connect (app, "open", G_CALLBACK (open), (void *)this);
@@ -33,9 +32,11 @@ xffm_c::xffm_c(data_c *data0, gint in_argc, gchar **in_argv){
     
 xffm_c::~xffm_c(void){
     DBG("xffm_c::~xffm_c\n");
-    GList *l = window_p_list;
+    GList *l = gtk_application_get_windows(data_p->get_app());
     for (;l && l->data; l=l->next){
-	window_c *window_p = (window_c *)l->data;
+        GtkWindow *w = (GtkWindow *)l->data;
+	window_c *window_p = (window_c *)g_object_get_data(G_OBJECT(l->data), "window_p");
+        gtk_application_remove_window(data_p->get_app(), w);
 	delete window_p;
     }
 }  
@@ -47,27 +48,21 @@ xffm_c::run(void){
 
 window_c * 
 xffm_c::add_window_p(void){
-    window_c *window_p = new window_c(data_p);
-    // initial view...
-    window_p->create_new_page(g_get_home_dir());
-    gtk_application_add_window (data_p->get_app(), window_p->get_window());
-    window_p_list = g_list_append(window_p_list, (void *)window_p);
-    return window_p;
+    return xffm_init(g_get_home_dir());
 }
 
 window_c * 
 xffm_c::add_window_p(const gchar *data){
+    return xffm_init(data);
+}
+
+window_c * 
+xffm_c::xffm_init(const gchar *data){
     window_c *window_p = new window_c(data_p);
     // initial view...
     window_p->create_new_page(data);
     gtk_application_add_window (data_p->get_app(), window_p->get_window());
-    window_p_list = g_list_append(window_p_list, (void *)window_p);
     return window_p;
-}
-
-void
-xffm_c::remove_window_p_from_list(void *data){
-    window_p_list = g_list_remove(window_p_list, data);
 }
 
 /////////////////////////////////////////////////////////////

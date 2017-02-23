@@ -19,6 +19,9 @@ window_c::window_c(data_c *data0):gtk_c(data0) {
 
     view_list_mutex = PTHREAD_MUTEX_INITIALIZER;
     window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+    // keep tabs on the window_p from gtk_application...
+    g_object_set_data(G_OBJECT(window), "window_p", (void *) this);
+    
     gtk_widget_set_has_tooltip (window, TRUE);
     g_signal_connect (G_OBJECT (window), "query-tooltip", G_CALLBACK (window_tooltip_f), (void *)this);
     

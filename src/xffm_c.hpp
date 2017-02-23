@@ -10,14 +10,13 @@ class xffm_c{
 	~xffm_c(void);
 	window_c *add_window_p(void);
 	window_c *add_window_p(const gchar *);
-	void remove_window_p_from_list(void *);
 	gint run(void);
     protected:
 
     private:
-	GList *window_p_list;
 	gint argc;
 	gchar **argv;
+        window_c *xffm_init(const gchar *);
 	data_c *data_p;
 
 
