@@ -60,7 +60,8 @@ window_c::window_c(data_c *data0):gtk_c(data0) {
 
 
     gtk_widget_show (GTK_WIDGET(notebook));
-    gtk_widget_show (window);
+    gtk_window_present (GTK_WINDOW (window));
+    //gtk_widget_show (window);
     while (gtk_events_pending()) gtk_main_iteration();
 }
 

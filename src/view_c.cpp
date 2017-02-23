@@ -39,6 +39,52 @@ button_press_f (GtkWidget *widget,
                GdkEvent  *event,
                gpointer   data);
 
+void
+signal_drag_data (GtkWidget * widget,
+                  GdkDragContext * context,
+                  gint x, gint y, 
+		  GtkSelectionData * selection_data, 
+		  guint info, 
+		  guint time, 
+		  gpointer data) {
+    fprintf(stderr, "signal_drag_data\n");
+}
+void
+signal_drag_leave (GtkWidget * widget, GdkDragContext * drag_context, guint time, gpointer data) {
+    fprintf(stderr, "signal_drag_leave\n");
+    NOOP ("rodent_mouse: DND>> rodent_signal_drag_leave\n");
+
+}
+
+void
+signal_drag_delete (GtkWidget * widget, GdkDragContext * context, gpointer data) {
+    fprintf(stderr, "signal_drag_delete\n");
+    NOOP ("rodent_mouse: DND>> rodent_signal_drag_delete\n");
+}
+gboolean
+signal_drag_motion (GtkWidget * widget, 
+	GdkDragContext * dc, gint x, gint y, guint t, gpointer data) {
+    fprintf(stderr, "signal_drag_motion\n");
+}
+
+void
+signal_drag_data_get (GtkWidget * widget,
+                      GdkDragContext * context, GtkSelectionData * selection_data, guint info, guint time, gpointer data) {
+    fprintf(stderr, "signal_drag_data_get\n");
+}
+
+void
+signal_drag_begin (GtkWidget * widget, GdkDragContext * drag_context, gpointer data) {
+    fprintf(stderr, "signal_drag_begin\n");
+}
+
+void
+signal_drag_end (GtkWidget * widget, GdkDragContext * context, gpointer data) {
+    fprintf(stderr, "signal_drag_end\n");
+}
+
+
+
 ////////////////////////////////////////
 // class methods
 ////////////////////////////////////////
@@ -198,6 +244,7 @@ view_c::init(void){
     g_object_set_data(G_OBJECT(get_page_child()), "view_p", (void *)this);
     g_object_set_data(G_OBJECT(get_page_button()), "view_p", (void *)this);
 
+    create_target_list();
     //signals_p = new signals_c();
     signals();
     pack();
@@ -214,10 +261,10 @@ view_c::init(void){
     lpterm_p->print_debug(g_strdup_printf("%s\n", "This is a debug message."));
     lpterm_p->print_icon("face-monkey",g_strdup_printf("%s\n", "This is face-monkey."));
     lpterm_p->print_icon_tag("face-angry","tag/red",g_strdup_printf("%s\n", "This is face-angry in red."));
-#if 0
+#if 10
     // FIXME
     /* drag and drop events */
-    rodent_create_target_list (view_p);
+    create_target_list ();
 #endif
 
 }
@@ -309,6 +356,21 @@ view_c::signals(void){
     g_signal_connect (get_notebook(), "switch-page", 
             G_CALLBACK (switch_page), (void *)this);
 
+// DnD ... testing
+    g_signal_connect (G_OBJECT (get_iconview()), 
+	    "drag-data-received", G_CALLBACK (signal_drag_data), (void *)this);
+    g_signal_connect (G_OBJECT (get_iconview()), 
+	    "drag-data-get", G_CALLBACK (signal_drag_data_get), (void *)this);
+    g_signal_connect (G_OBJECT (get_iconview()), 
+	    "drag-motion", G_CALLBACK (signal_drag_motion), (void *)this);
+    g_signal_connect (G_OBJECT (get_iconview()), 
+	    "drag-end", G_CALLBACK (signal_drag_end), (void *)this);
+    g_signal_connect (G_OBJECT (get_iconview()), 
+	    "drag-begin", G_CALLBACK (signal_drag_begin), (void *)this);
+    g_signal_connect (G_OBJECT (get_iconview()), 
+	    "drag-leave", G_CALLBACK (signal_drag_leave), (void *)this);
+    g_signal_connect (G_OBJECT (get_iconview()), 
+	    "drag-data-delete", G_CALLBACK (signal_drag_delete), (void *)this);
 
     /*  FIXME: Check which callbacks are necessary and which are not.
 
@@ -745,4 +807,284 @@ button_press_f (GtkWidget *widget,
     return retval;
 }
 
+///////////////////////////////////////////////////////////////////////
+enum {
+    TARGET_URI_LIST,
+    TARGET_PLAIN,
+    TARGET_UTF8,
+    TARGET_STRING,
+    TARGET_ROOTWIN,
+    TARGET_MOZ_URL,
+    TARGET_XDS,
+    TARGET_RAW,
+    TARGETS
+};
+
+static GtkTargetEntry target_table[] = {
+    {(gchar *)"text/uri-list", 0, TARGET_URI_LIST},
+    {(gchar *)"text/x-moz-url", 0, TARGET_MOZ_URL},
+    {(gchar *)"text/plain", 0, TARGET_PLAIN},
+    {(gchar *)"UTF8_STRING", 0, TARGET_UTF8},
+    {(gchar *)"STRING", 0, TARGET_STRING}
+};
+
+#define NUM_TARGETS (sizeof(target_table)/sizeof(GtkTargetEntry))
+void
+view_c::create_target_list (void) {
+    //if(target_list) return;
+    target_list = gtk_target_list_new (target_table, NUM_TARGETS);
+/*    this does not seem to be necessary */
+    gtk_drag_source_set ((GtkWidget *) get_iconview(),
+                         (GdkModifierType)(GDK_BUTTON1_MASK | GDK_BUTTON2_MASK), target_table,
+                         NUM_TARGETS, GDK_ACTION_COPY);
+                      //   NUM_TARGETS, (GdkModifierType)(GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK));
+    gtk_drag_dest_set ((GtkWidget *) get_iconview(),
+                       (GTK_DEST_DEFAULT_DROP), target_table, NUM_TARGETS,
+                        GDK_ACTION_COPY);
+//                       (GdkModifierType)(GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK));
+    return;
+}
+
+#if 0
+/**  drag events **********************************************/
+// This signal is received by the receiving end of the drag/drop action
+void
+signal_drag_data (GtkWidget * widget,
+                  GdkDragContext * context,
+                  gint x, gint y, 
+		  GtkSelectionData * selection_data, 
+		  guint info, 
+		  guint time, 
+		  gpointer data) {
+    NOOP ("rodent_mouse: DND>> rodent_signal_drag_data\n");
+
+    const population_t *population_p;
+    view_t *view_p = (view_t *) data;
+
+    record_entry_t *target_en;
+    NOOP ("rodent_mouse: drag_data: drag_data...\n");
+    /*view_p = (view_t *)g_object_get_data(G_OBJECT(widget),"view_p"); */
+    if(!view_p) {
+        DBG ("rodent_signal_drag_data() view_p==NULL\n");
+        gtk_drag_finish (context, FALSE, FALSE, time);
+        return;
+    }
+    target_en = view_p->en;
+
+    if(!target_en || !target_en->path) {
+        NOOP ("rodent_mouse: drag_data: !target_en || !target_en->path\n");
+        NOOP ("rodent_mouse: --DND>>rodent_signal_drag_data !target_en || !target_en->path\n");
+        gtk_drag_finish (context, FALSE, FALSE, time);
+        return;
+    }
+
+    // drop will proceed...
+    if (!rfm_population_try_read_lock (view_p, "rodent_signal_drag_data")){
+        gtk_drag_finish (context, FALSE, FALSE, time);
+    }
+    rfm_global_t *rfm_global_p = rfm_global();
+    rfm_cursor_wait (rfm_global_p->window);
+
+    NOOP ("rodent_mouse: population_sem: rodent_signal_drag_data() obtained...\n");
+    population_p = rodent_find_in_population (view_p, x, y);
+    if(!population_p) {
+        population_p = rodent_find_in_labels (view_p, x, y);
+    }
+
+    if(population_p && population_p->en && population_p->en->path) {
+        if(IS_SDIR(population_p->en->type)){
+            target_en = population_p->en;
+	} else if (population_p->en->mimetype &&
+		strcmp(population_p->en->mimetype, "application/x-desktop")==0){
+            target_en = population_p->en;
+	}
+    }
+
+    gchar *source_path = NULL;
+    read_drag_info(&source_path, NULL);
+    
+    NOOP ("rodent_mouse: DND>>rodent_signal_drag_data: target entry is %s, source is %s\n", (target_en)?target_en->path:NULL, source_path);
+    // Here we check if source and target are the same, in which case dnd should 
+    // be ignored.
+    if(!target_en || !source_path || !target_en->path ||
+	    strcmp (target_en->path, source_path) == 0){
+	NOOP("rodent_mouse: ignoring drop command! source_path=%s target=%s\n", source_path ,(target_en)?target_en->path:NULL);
+        rfm_cursor_reset (rfm_global_p->window);
+        drag_view_p = NULL;
+        gtk_drag_finish (context, FALSE, FALSE, time);
+        rfm_population_read_unlock (view_p, "rodent_signal_drag_data");
+        return;
+    }
+    g_free(source_path);
+
+    NOOP ("rodent_mouse: drag_data...gui_drag_data\n");
+    if(gui_drag_data (&(view_p->widgets), target_en, context, x, y, selection_data, info, time)) {
+        NOOP ("rodent_mouse: drag_data...reload 0x%lx->0x%lx\n", (unsigned long)view_p, (unsigned long)view_p->en);
+    }
+
+    NOOP ("rodent_mouse: drag_data...all done\n");
+    rfm_cursor_reset (rfm_global_p->window);
+    rfm_population_read_unlock (view_p, "rodent_signal_drag_data");
+    NOOP ("population_sem: rodent_signal_drag_data() released!\n");
+    return;
+}
+//#define NOOP NOOP
+
+void
+signal_drag_leave (GtkWidget * widget, GdkDragContext * drag_context, guint time, gpointer data) {
+    NOOP ("rodent_mouse: DND>> rodent_signal_drag_leave\n");
+
+}
+
+void
+signal_drag_delete (GtkWidget * widget, GdkDragContext * context, gpointer data) {
+    NOOP ("rodent_mouse: DND>> rodent_signal_drag_delete\n");
+}
+
+
+gboolean
+signal_drag_motion (GtkWidget * widget, 
+	GdkDragContext * dc, gint x, gint y, guint t, gpointer data) {
+    NOOP ("rodent_mouse: DND>> rodent_signal_drag_motion\n");
+
+    gboolean target_ok = FALSE;
+    view_t *view_p = (view_t *) data;
+    if (!rfm_population_try_read_lock (view_p, "rodent_signal_drag_motion")) return TRUE;
+        
+    
+    NOOP ("rodent_mouse: population_sem: rodent_signal_drag_motion() obtained...\n");
+
+    population_t *population_p = (population_t *) rodent_find_in_population (view_p, x, y);
+
+    NOOP ("rodent_mouse: on_drag_motion...x=%d, y= %d, population_p=0x%lx\n", x, y, (unsigned long)population_p);
+    rodent_hide_tip ();
+
+    gboolean local_target = TRUE;
+    gboolean local_source = TRUE;
+    gint type=0;
+    read_drag_info(NULL, &type);
+    if (!IS_LOCAL_TYPE(type))local_source = FALSE;
+    if (view_p->en && !IS_LOCAL_TYPE(view_p->en->type))local_target = FALSE;
+    if(population_p) {
+        /* if not valid drop target, return */
+
+        if(POPULATION_MODULE(population_p)) {
+            if(rfm_natural (PLUGIN_DIR, POPULATION_MODULE(population_p),
+			population_p->en, "valid_drop_site"))
+                target_ok = TRUE;
+        } else {                /* local */
+	    if (population_p->en && 
+		population_p->en->path) {
+		if (IS_SDIR(population_p->en->type)) {
+		    target_ok = TRUE;
+		    if (!IS_LOCAL_TYPE(population_p->en->type))local_target = FALSE;
+		}
+
+		if (population_p->en->mimetype && 
+			strcmp(population_p->en->mimetype,
+			    "application/x-desktop")==0) {
+		    target_ok = TRUE;
+		}
+	    }
+	}
+    }
+    
+    if(view_p->mouse_event.saturated_p != population_p) {
+        NOOP( "condition 3, unsaturate icon\n");
+	unsaturate_icon (view_p);
+    }
+    if (target_ok) {
+	saturate_icon (view_p, population_p);
+    }
+
+    if(view_p->mouse_event.doing_drag_p) {
+        NOOP ("rodent_mouse: widget ok\n");
+    }
+    NOOP ("rodent_mouse: DND>> rodent_signal_drag_motion source=%s target=%s\n",
+	    (local_source)?"local":"remote",
+	    (local_target)?"local":"remote");
+    
+
+    if(getenv ("RFM_DRAG_DOES_MOVE") && strlen (getenv ("RFM_DRAG_DOES_MOVE")))
+        view_p->mouse_event.drag_action = GDK_ACTION_MOVE;
+    else
+        view_p->mouse_event.drag_action = GDK_ACTION_COPY;
+
+    // Override remote dnd with copy
+    // when target or source is remote.
+    if (!local_target || !local_source) {
+        view_p->mouse_event.drag_action = GDK_ACTION_COPY;
+    } 
+
+#if GTK_MAJOR_VERSION==2
+    gint actions = dc->actions;
+#else
+    gint actions = gdk_drag_context_get_actions(dc);
+#endif
+    if(actions == GDK_ACTION_MOVE)
+        gdk_drag_status (dc, GDK_ACTION_MOVE, t);
+    else if(actions == GDK_ACTION_COPY)
+        gdk_drag_status (dc, GDK_ACTION_COPY, t);
+    else if(actions == GDK_ACTION_LINK)
+        gdk_drag_status (dc, GDK_ACTION_LINK, t);
+    else if(actions & view_p->mouse_event.drag_action)
+        gdk_drag_status (dc, view_p->mouse_event.drag_action, t);
+    else
+        gdk_drag_status (dc, 0, t);
+    rfm_population_read_unlock (view_p, "rodent_signal_drag_motion");
+    NOOP ("rodent_mouse: population_sem: rodent_signal_drag_motion() released!\n");
+    return (TRUE);
+}
+
+// This signal is received by the sending end of the drag/drop event
+void
+signal_drag_data_get (GtkWidget * widget,
+                      GdkDragContext * context, GtkSelectionData * selection_data, guint info, guint time, gpointer data) {
+    NOOP ("rodent_mouse: DND>> rodent_signal_drag_data_get\n");
+    view_t *view_p = (view_t *) data;
+    rodent_hide_tip ();
+    gui_drag_data_get (&(view_p->widgets), view_p->selection_list, context, selection_data, info, time);
+    NOOP ("rodent_mouse: drag_data_get: all done\n");
+}
+
+void
+signal_drag_begin (GtkWidget * widget, GdkDragContext * drag_context, gpointer data) {
+    view_t *view_p = (view_t *) data;
+    drag_view_p = view_p;
+    rodent_hide_tip ();
+    if (!view_p->en || !view_p->en->path) return; 
+    write_drag_info(view_p->en->path, view_p->en->type);
+    view_p->mouse_event.drag_event.context = drag_context;
+}
+
+void
+signal_drag_end (GtkWidget * widget, GdkDragContext * context, gpointer data) {
+    view_t *view_p = (view_t *) data;
+    widgets_t *widgets_p = &(view_p->widgets);
+    //rfm_diagnostics(widgets_p, "xffm_tag/red","rodent_mouse: DND>> rodent_signal_drag_end\n", NULL); 
+    NOOP ("rodent_mouse: DND>> rodent_signal_drag_end\n" );
+    view_p->mouse_event.doing_drag_p = NULL;
+    rfm_global_t *rfm_global_p = rfm_global();
+    rfm_cursor_reset(rfm_global_p->window);
+    
+    // Immediate test for a reload condition by the thread monitor.
+    if (!xfdir_monitor_control_greenlight(widgets_p)){
+	rodent_trigger_reload(view_p);
+    }
+
+
+
+    if(dnd_data) {
+        g_free (dnd_data);
+        dnd_data = NULL;
+    }
+    drag_view_p = NULL;
+    NOOP ("rodent_mouse: drag_end... alldone\n");
+    // Remove old MIT-shm  dnd info.
+    shm_unlink (DND_SHM_NAME);
+}
+
+/* end of drag signals ********************************/
+
+#endif
 

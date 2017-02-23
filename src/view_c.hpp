@@ -61,6 +61,9 @@ class view_c: public widgets_c, public thread_control_c, virtual utility_c {
         lpterm_c *lpterm_p;
         xfdir_c *xfdir_p;
 	data_c *data_p;
+    
+        void create_target_list (void);
+        GtkTargetList	*target_list;
 
 };
 

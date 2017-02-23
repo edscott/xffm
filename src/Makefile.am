@@ -1,5 +1,5 @@
 # Edscott Wilson Garcia
-AM_CPPFLAGS = -std=c++11 \
+AM_CPPFLAGS =  \
 	@LIBXML_CFLAGS@	\
 	@DBH_CFLAGS@	\
 	@TUBO_CFLAGS@	\
@@ -12,6 +12,7 @@ AM_CPPFLAGS = -std=c++11 \
 LDADD = @TUBO_LIBS@ @DBH_LIBS@ @GMODULE_LIBS@ @GTK_LIBS@ @LIBXML_LIBS@ @LIBZIP_LIBS@ -lpthread
 
 FLAGS = -ggdb -O0 
+AM_CXXFLAGS = -ggdb -O0 -std=c++11
 #FLAGS = -ggdb -O0 -std=c++11 `pkg-config --cflags gtk+-3.0`
 #LIBS = `pkg-config --libs gtk+-3.0` -lpthread
 
