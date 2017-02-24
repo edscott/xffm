@@ -49,7 +49,7 @@ GtkWidget *widgets_c::get_status_button(void){ return status_button;}
 GtkWidget *widgets_c::get_diagnostics(void){ return diagnostics;}
 GtkWidget *widgets_c::get_status_icon(void){ return status_icon;}
 GtkWidget *widgets_c::get_iconview_icon(void){ return iconview_icon;}
-GtkWidget *widgets_c::get_iconview(void){ return GTK_WIDGET(icon_view);}
+GtkIconView *widgets_c::get_iconview(void){ return icon_view;}
 GtkWidget *widgets_c::get_button_space(void){ return GTK_WIDGET(button_space);}
 void *widgets_c::get_window_v(void){ return window_v;}
 

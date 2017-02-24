@@ -17,7 +17,7 @@ class widgets_c: virtual utility_c, public gtk_c{
         widgets_c(data_c *, void *, GtkNotebook *);
         ~widgets_c(void);
 
-        GtkWidget *get_iconview(void);
+        GtkIconView *get_iconview(void);
         GtkWidget *get_vpane(void);
         GtkWidget *get_status(void);
         GtkWidget *get_diagnostics(void);

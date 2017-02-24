@@ -32,7 +32,7 @@ class lpterm_c: public run_c {
         gchar *sudo_fix(const gchar *);
         gboolean process_internal_command (const gchar *);
         gboolean internal_cd(gchar **);
-        GtkWidget *iconview;
+        GtkIconView *iconview;
         GtkWidget *status_button;
         GtkWidget *status_icon;
         GtkWidget *iconview_icon;

@@ -199,7 +199,7 @@ lpterm_c::lp_set_active(gboolean state){
         gtk_widget_show(GTK_WIDGET(status_button));
         gtk_widget_show(iconview_icon);
         gtk_widget_hide(status_icon);
-	gtk_widget_grab_focus (iconview);
+	gtk_widget_grab_focus (GTK_WIDGET(iconview));
     }
     return;
 }

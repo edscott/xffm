@@ -6,6 +6,29 @@
 ///////////////////////////////////////////////////
 //         static thread functions  (used)       //
 ///////////////////////////////////////////////////
+#define CONTROL_MODE (event->state & GDK_CONTROL_MASK)
+#define SHIFT_MODE (event->state & GDK_SHIFT_MASK)
+enum {
+    TARGET_URI_LIST,
+    TARGET_PLAIN,
+    TARGET_UTF8,
+    TARGET_STRING,
+    TARGET_ROOTWIN,
+    TARGET_MOZ_URL,
+    TARGET_XDS,
+    TARGET_RAW,
+    TARGETS
+};
+
+static GtkTargetEntry target_table[] = {
+    {(gchar *)"text/uri-list", 0, TARGET_URI_LIST},
+    {(gchar *)"text/x-moz-url", 0, TARGET_MOZ_URL},
+    {(gchar *)"text/plain", 0, TARGET_PLAIN},
+    {(gchar *)"UTF8_STRING", 0, TARGET_UTF8},
+    {(gchar *)"STRING", 0, TARGET_STRING}
+};
+
+#define NUM_TARGETS (sizeof(target_table)/sizeof(GtkTargetEntry))
 
 static gboolean unhighlight(void *, void *, void *);
 static gboolean motion_notify_event(GtkWidget *, GdkEvent *, void *);
@@ -36,10 +59,40 @@ query_tooltip_f (GtkWidget  *widget,
                gpointer    data);
 static gboolean
 button_press_f (GtkWidget *widget,
-               GdkEvent  *event,
+               GdkEventButton  *event,
+               gpointer   data);
+static gboolean
+button_release_f (GtkWidget *widget,
+               GdkEventButton  *event,
+               gpointer   data);
+static gboolean
+button_click_f (GtkWidget *widget,
+               GdkEventButton  *event,
                gpointer   data);
 
 void
+signal_drag_begin (GtkWidget * widget, GdkDragContext * drag_context, gpointer data); 
+
+
+static gboolean
+signal_drag_motion (GtkWidget * widget, 
+	GdkDragContext * dc, gint x, gint y, guint t, gpointer data);
+
+
+static void
+signal_drag_data_get (GtkWidget * widget,
+                      GdkDragContext * context, 
+                      GtkSelectionData * selection_data, 
+                      guint info, 
+                      guint time, 
+                      gpointer data) ;
+
+static void
+signal_drag_end (GtkWidget * widget, GdkDragContext * context, gpointer data);
+
+
+/////
+static void
 signal_drag_data (GtkWidget * widget,
                   GdkDragContext * context,
                   gint x, gint y, 
@@ -49,39 +102,20 @@ signal_drag_data (GtkWidget * widget,
 		  gpointer data) {
     fprintf(stderr, "signal_drag_data\n");
 }
-void
+
+static void
 signal_drag_leave (GtkWidget * widget, GdkDragContext * drag_context, guint time, gpointer data) {
     fprintf(stderr, "signal_drag_leave\n");
     NOOP ("rodent_mouse: DND>> rodent_signal_drag_leave\n");
 
 }
 
-void
+static void
 signal_drag_delete (GtkWidget * widget, GdkDragContext * context, gpointer data) {
     fprintf(stderr, "signal_drag_delete\n");
     NOOP ("rodent_mouse: DND>> rodent_signal_drag_delete\n");
 }
-gboolean
-signal_drag_motion (GtkWidget * widget, 
-	GdkDragContext * dc, gint x, gint y, guint t, gpointer data) {
-    fprintf(stderr, "signal_drag_motion\n");
-}
 
-void
-signal_drag_data_get (GtkWidget * widget,
-                      GdkDragContext * context, GtkSelectionData * selection_data, guint info, guint time, gpointer data) {
-    fprintf(stderr, "signal_drag_data_get\n");
-}
-
-void
-signal_drag_begin (GtkWidget * widget, GdkDragContext * drag_context, gpointer data) {
-    fprintf(stderr, "signal_drag_begin\n");
-}
-
-void
-signal_drag_end (GtkWidget * widget, GdkDragContext * context, gpointer data) {
-    fprintf(stderr, "signal_drag_end\n");
-}
 
 
 
@@ -117,6 +151,40 @@ view_c::~view_c(void){
     if (xfdir_p) delete xfdir_p;
     if (lpterm_p) delete lpterm_p;
 }
+
+void
+view_c::init(void){
+    // Set objects in parent widget_c class with data pointing to child class
+    g_object_set_data(G_OBJECT(get_pathbar()), "view_p", (void *)this);
+    g_object_set_data(G_OBJECT(get_page_child()), "view_p", (void *)this);
+    g_object_set_data(G_OBJECT(get_page_button()), "view_p", (void *)this);
+    drag_mode = 0;
+    selection_list = NULL;
+    create_target_list();
+    //signals_p = new signals_c();
+    signals();
+    pack();
+    // lp_term object creation
+    lpterm_p = new lpterm_c(data_p, (void *)this);
+    
+    lpterm_p->print_status(g_strdup(""));
+    lpterm_p->show_text();
+    lpterm_p->print(g_strdup_printf("%s\n", "Hello world."));
+    lpterm_p->print_tag(NULL, g_strdup_printf("%s\n", "No tag."));
+    lpterm_p->print_tag("tag/green",g_strdup_printf( "%s", "Green tag."));
+    lpterm_p->print_tag("tag/bold",g_strdup_printf( "%s\n", "bold tag."));
+    lpterm_p->print_error(g_strdup_printf("%s\n", "This is an error."));
+    lpterm_p->print_debug(g_strdup_printf("%s\n", "This is a debug message."));
+    lpterm_p->print_icon("face-monkey",g_strdup_printf("%s\n", "This is face-monkey."));
+    lpterm_p->print_icon_tag("face-angry","tag/red",g_strdup_printf("%s\n", "This is face-angry in red."));
+#if 10
+    // FIXME
+    /* drag and drop events */
+    create_target_list ();
+#endif
+
+}
+
 
 gboolean
 view_c::shows_hidden(void){
@@ -216,11 +284,11 @@ view_c::set_treemodel(xfdir_c *data){
     GtkTreeModel *tree_model = xfdir_p->get_tree_model();
     NOOP( "new treemodel= %p (old_xfdir=%p new_xfdir=%p)\n", tree_model, old_xfdir_p, xfdir_p);
     //if (tree_model) gtk_widget_hide(GTK_WIDGET(get_iconview()));
-    gtk_icon_view_set_model(GTK_ICON_VIEW(get_iconview()), tree_model);
-    gtk_icon_view_set_text_column (GTK_ICON_VIEW(get_iconview()), xfdir_p->get_text_column());
-    gtk_icon_view_set_pixbuf_column (GTK_ICON_VIEW(get_iconview()),  xfdir_p->get_icon_column());
-    gtk_icon_view_set_selection_mode (GTK_ICON_VIEW(get_iconview()), GTK_SELECTION_MULTIPLE);
-    //gtk_icon_view_set_tooltip_column (GTK_ICON_VIEW(get_iconview()),3);
+    gtk_icon_view_set_model(get_iconview(), tree_model);
+    gtk_icon_view_set_text_column (get_iconview(), xfdir_p->get_text_column());
+    gtk_icon_view_set_pixbuf_column (get_iconview(),  xfdir_p->get_icon_column());
+    gtk_icon_view_set_selection_mode (get_iconview(), GTK_SELECTION_MULTIPLE);
+    //gtk_icon_view_set_tooltip_column (get_iconview(),3);
     set_view_details();
     //gtk_widget_show(GTK_WIDGET(get_iconview()));
     NOOP( "set_treemodel done, now deleting %p\n", old_xfdir_p);
@@ -236,38 +304,16 @@ view_c::set_view_details(void){
     while (gtk_events_pending()) gtk_main_iteration();
     update_pathbar(xfdir_p->get_path());
 }
-
-void
-view_c::init(void){
-    // Set objects in parent widget_c class with data pointing to child class
-    g_object_set_data(G_OBJECT(get_pathbar()), "view_p", (void *)this);
-    g_object_set_data(G_OBJECT(get_page_child()), "view_p", (void *)this);
-    g_object_set_data(G_OBJECT(get_page_button()), "view_p", (void *)this);
-
-    create_target_list();
-    //signals_p = new signals_c();
-    signals();
-    pack();
-    // lp_term object creation
-    lpterm_p = new lpterm_c(data_p, (void *)this);
-    
-    lpterm_p->print_status(g_strdup(""));
-    lpterm_p->show_text();
-    lpterm_p->print(g_strdup_printf("%s\n", "Hello world."));
-    lpterm_p->print_tag(NULL, g_strdup_printf("%s\n", "No tag."));
-    lpterm_p->print_tag("tag/green",g_strdup_printf( "%s", "Green tag."));
-    lpterm_p->print_tag("tag/bold",g_strdup_printf( "%s\n", "bold tag."));
-    lpterm_p->print_error(g_strdup_printf("%s\n", "This is an error."));
-    lpterm_p->print_debug(g_strdup_printf("%s\n", "This is a debug message."));
-    lpterm_p->print_icon("face-monkey",g_strdup_printf("%s\n", "This is face-monkey."));
-    lpterm_p->print_icon_tag("face-angry","tag/red",g_strdup_printf("%s\n", "This is face-angry in red."));
-#if 10
-    // FIXME
-    /* drag and drop events */
-    create_target_list ();
-#endif
-
+void 
+view_c::set_drag_mode(gint state){
+    drag_mode = state;
 }
+
+gint
+view_c::get_drag_mode(void){
+    return drag_mode;
+}
+
 
 void
 view_c::clear_diagnostics(void){
@@ -296,7 +342,7 @@ view_c::highlight(gdouble X, gdouble Y){
     highlight_x = X;
     highlight_y = Y;
     GtkTreeIter iter;
-    GtkIconView *iconview = GTK_ICON_VIEW(get_iconview());
+    GtkIconView *iconview = get_iconview();
     GtkTreeModel *model = gtk_icon_view_get_model(iconview);
     
     GtkTreePath *tpath = gtk_icon_view_get_path_at_pos (iconview, X, Y); 
@@ -313,7 +359,11 @@ view_c::signals(void){
     g_signal_connect (get_iconview(), "query-tooltip", 
             G_CALLBACK (query_tooltip_f), (void *)this);
 
-    g_signal_connect (get_iconview(), "button-press-event",
+     g_signal_connect (get_iconview(), "button-release-event",
+	    G_CALLBACK(button_click_f), (void *)this);
+     g_signal_connect (get_iconview(), "button-release-event",
+	    G_CALLBACK(button_release_f), (void *)this);
+     g_signal_connect (get_iconview(), "button-press-event",
 	    G_CALLBACK(button_press_f), (void *)this);
     g_signal_connect (get_hidden_button(), "clicked", 
             G_CALLBACK (toggle_hidden_f), (void *)this);
@@ -501,15 +551,84 @@ view_c::set_window_title(gint page_num){
 
 static gboolean
 motion_notify_event (GtkWidget *widget,
-               GdkEvent  *event,
-               gpointer   data){
+               GdkEvent  *ev,
+               gpointer   data)
+{
+    GdkEventMotion *e = (GdkEventMotion *)ev;
+    GdkEventButton  *event = (GdkEventButton  *)ev;
     view_c * view_p = (view_c *)data;
+    NOOP("motion_notify, drag mode = %d\n", view_p->get_drag_mode());
+    // Are we intending to set up a DnD?
+    gint mode = view_p->get_drag_mode();
+    // But is there a selection for the mode?
+    if (mode){
+        NOOP("// Are we intending to set up a DnD? Maybe...mode = %d\n",  view_p->get_drag_mode());
+        NOOP("// Are we already in drag mode? answer: %d\n", view_p->get_drag_mode()>0);
+
+        if (mode>0) {
+            return FALSE;
+        }
+        // Valid selection?
+        GList *selection_list = gtk_icon_view_get_selected_items (view_p->get_iconview());
+        if (!selection_list) {
+            view_p->set_drag_mode(0);
+            return FALSE;
+        }
+
+        view_p->set_selection_list(selection_list);
+        NOOP("// Have we dragged outside the icon area?\n");
+        if (!gtk_icon_view_get_item_at_pos (view_p->get_iconview(), e->x, e->y, NULL,NULL)) 
+        {
+            fprintf(stderr, "// Yeah. Let us start drag action now\n");
+            // First de allow this to work as a click cancellation.
+            // (if not rubberbanding)
+            view_p->set_click_cancel(1);
+            
+            // Set up for for move||copy||link drag now
+            gtk_drag_source_set (GTK_WIDGET(view_p->get_iconview()),
+                         (GdkModifierType)(GDK_BUTTON1_MASK), target_table,
+                         NUM_TARGETS, GDK_ACTION_MOVE);  
+            gtk_drag_source_set_target_list (GTK_WIDGET(view_p->get_iconview()),
+                    view_p->get_target_list());
+
+            GdkDragContext *context = 
+                gtk_drag_begin_with_coordinates (GTK_WIDGET(view_p->get_iconview()),
+                   view_p->get_target_list(),
+                   (GdkDragAction)(((gint)GDK_ACTION_MOVE)|
+                   ((gint)GDK_ACTION_COPY)|
+                   ((gint)GDK_ACTION_LINK)),
+	           1, //drag button
+		   ev,
+                   e->x, e->y);
+ 
+            if (g_list_length(selection_list) >1){
+                gtk_drag_set_icon_name (context, "edit-copy", 0, 0);
+            } else {
+	        xfdir_c *x = view_p->get_xfdir_p();
+                
+                GtkTreeModel *treemodel = x->get_tree_model();
+                GtkTreePath *tpath = (GtkTreePath *)selection_list->data;
+                GtkTreeIter iter;
+                gtk_tree_model_get_iter (treemodel, &iter, tpath);
+                GdkPixbuf *pixbuf;
+                // XXX  will this add a ref to pixbuf? nah!
+                gtk_tree_model_get (treemodel, &iter, 
+                    NORMAL_PIXBUF, &pixbuf, -1);       
+                gtk_drag_set_icon_pixbuf (context, pixbuf, 0, 0);
+            }
+            view_p->set_drag_mode(1);
+        }
+    }
+                                 
+
+
+
     if (view_p->get_dir_count() > 500) return FALSE;
     if (!data) g_error("motion_notify_event: data cannot be NULL\n");
-    GdkEventMotion *e = (GdkEventMotion *)event;
     view_p->highlight(e->x, e->y);
     return FALSE;
 }
+
 static gboolean
 leave_notify_event (GtkWidget *widget,
                GdkEvent  *event,
@@ -716,7 +835,7 @@ query_tooltip_f (GtkWidget  *widget,
                GtkTooltip *tooltip,
                gpointer    data){
     view_c *view_p = (view_c *)data;
-    GtkIconView *icon_view = GTK_ICON_VIEW(view_p->get_iconview());
+    GtkIconView *icon_view = view_p->get_iconview();
 
     if (!gtk_icon_view_get_tooltip_context(icon_view, &x, &y, FALSE, 
                 NULL, NULL, NULL)) {
@@ -740,7 +859,7 @@ view_c::setup_tooltip(gint x, gint y){
 
     if (xfdir_p->is_large()) return;
     GtkTreePath *tpath = 
-        gtk_icon_view_get_path_at_pos (GTK_ICON_VIEW(get_iconview()), x, y); 
+        gtk_icon_view_get_path_at_pos (get_iconview(), x, y); 
     if (!tpath) {
         window_p->set_tt_window(NULL, NULL);
         return;
@@ -784,21 +903,78 @@ view_c::setup_tooltip(gint x, gint y){
 
     return;
 }
+static gboolean
+button_release_f (GtkWidget *widget,
+               GdkEventButton  *event,
+               gpointer   data)
+{
+    //GdkEventButton *event_button = (GdkEventButton *)event;
+    view_c *view_p = (view_c *)data;
+    view_p->set_drag_mode(0);
+    if (!gtk_icon_view_get_item_at_pos (view_p->get_iconview(),
+                               event->x, event->y,
+                               NULL,NULL)){
+    }
+    return FALSE;
+}
+static gboolean
+button_click_f (GtkWidget *widget,
+               GdkEventButton  *event,
+               gpointer   data)
+{
+   view_c *view_p = (view_c *)data;
+   if (view_p->get_click_cancel()) return TRUE;
+   return FALSE;
+}
+
 
 
 static gboolean
 button_press_f (GtkWidget *widget,
-               GdkEvent  *event,
-               gpointer   data){
-    GdkEventButton *event_button = (GdkEventButton *)event;
+               GdkEventButton  *event,
+               gpointer   data)
+{
+    view_c *view_p = (view_c *)data;
+    if (event->button == 1) {
+        gboolean retval = FALSE;
+        //GList *selection_list = gtk_icon_view_get_selected_items (view_p->get_iconview());
+        gint mode = 0;
+        GtkTreePath *tpath;
+        if (gtk_icon_view_get_item_at_pos (view_p->get_iconview(),
+                               event->x, event->y,
+                               &tpath,NULL)) {
+            
+            if (CONTROL_MODE && SHIFT_MODE) mode = -3; // link
+            else if (CONTROL_MODE) mode = -2; // copy
+            else if (SHIFT_MODE) mode = -1; // move
+            else mode = -1; // default (move)
+            view_p->set_click_cancel(0);
+        } else { 
+            view_p->set_click_cancel(-1);
+        }
+        fprintf(stderr, "button press %d mode %d\n", event->button, mode);
+        view_p->set_drag_mode(mode);
+        if (CONTROL_MODE){
+            // select item
+            gtk_icon_view_select_path (view_p->get_iconview(), tpath);
+            retval = TRUE; 
+        }
+        gtk_tree_path_free(tpath);
+        return retval;
+    }
+
     // long press or button 3 should do popup menu...
-    if (event_button->button != 3) return FALSE;
+    if (event->button != 3) return FALSE;
     GtkTreePath *path;
 
+    fprintf(stderr, "button press event\n");
     if (!gtk_icon_view_get_item_at_pos (GTK_ICON_VIEW(widget),
-                               event_button->x,
-                               event_button->y,
-                               &path, NULL)) return FALSE;
+                               event->x,
+                               event->y,
+                               &path, NULL)) {
+
+        return FALSE;
+    }
 
     NOOP( "view_p: button_press_event...\n");
     
@@ -808,42 +984,289 @@ button_press_f (GtkWidget *widget,
 }
 
 ///////////////////////////////////////////////////////////////////////
-enum {
-    TARGET_URI_LIST,
-    TARGET_PLAIN,
-    TARGET_UTF8,
-    TARGET_STRING,
-    TARGET_ROOTWIN,
-    TARGET_MOZ_URL,
-    TARGET_XDS,
-    TARGET_RAW,
-    TARGETS
-};
+void
+view_c::set_click_cancel(gint state){ 
+    if (state <= 0) {
+        click_cancel = state;
+        return;
+    }
+    if (click_cancel == 0) click_cancel = state;
+}
 
-static GtkTargetEntry target_table[] = {
-    {(gchar *)"text/uri-list", 0, TARGET_URI_LIST},
-    {(gchar *)"text/x-moz-url", 0, TARGET_MOZ_URL},
-    {(gchar *)"text/plain", 0, TARGET_PLAIN},
-    {(gchar *)"UTF8_STRING", 0, TARGET_UTF8},
-    {(gchar *)"STRING", 0, TARGET_STRING}
-};
+gboolean 
+view_c::get_click_cancel(void){
+    if (click_cancel <= 0) return FALSE;
+    return TRUE;
+}
 
-#define NUM_TARGETS (sizeof(target_table)/sizeof(GtkTargetEntry))
+GtkTargetList	*
+view_c::get_target_list(void){return target_list;}
+
 void
 view_c::create_target_list (void) {
     //if(target_list) return;
     target_list = gtk_target_list_new (target_table, NUM_TARGETS);
-/*    this does not seem to be necessary */
-    gtk_drag_source_set ((GtkWidget *) get_iconview(),
-                         (GdkModifierType)(GDK_BUTTON1_MASK | GDK_BUTTON2_MASK), target_table,
-                         NUM_TARGETS, GDK_ACTION_COPY);
-                      //   NUM_TARGETS, (GdkModifierType)(GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK));
-    gtk_drag_dest_set ((GtkWidget *) get_iconview(),
+    // The default dnd action: move.
+/*    gtk_drag_source_set (GTK_WIDGET(get_iconview()),
+                         (GdkModifierType)(GDK_BUTTON1_MASK ), target_table,
+                         NUM_TARGETS, GDK_ACTION_MOVE);*/
+                      //  GDK_ACTION_MOVE  GDK_ACTION_COPY  GDK_ACTION_LINK
+
+      gtk_drag_dest_set (GTK_WIDGET(get_iconview()),
+                       (GTK_DEST_DEFAULT_DROP), target_table, NUM_TARGETS,
+                        GDK_ACTION_MOVE);
+  /*    gtk_drag_dest_set (GTK_WIDGET(get_iconview()),
                        (GTK_DEST_DEFAULT_DROP), target_table, NUM_TARGETS,
                         GDK_ACTION_COPY);
+      gtk_drag_dest_set (GTK_WIDGET(get_iconview()),
+                       (GTK_DEST_DEFAULT_DROP), target_table, NUM_TARGETS,
+                        GDK_ACTION_LINK);*/
 //                       (GdkModifierType)(GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK));
     return;
 }
+
+void
+view_c::set_selection_list(GList *list){
+    if (selection_list) free_selection_list();
+    selection_list = list;
+}
+
+GList *
+view_c::get_selection_list(void){return selection_list;}
+
+void
+view_c::free_selection_list(void){
+    if (selection_list) 
+        g_list_free_full (selection_list, (GDestroyNotify) gtk_tree_path_free);
+    selection_list = NULL;
+}
+
+
+
+/////////////////////////////////  DnD   ///////////////////////////
+void
+signal_drag_end (GtkWidget * widget, GdkDragContext * context, gpointer data) {
+    fprintf(stderr, "signal_drag_end\n");
+    
+    view_c * view_p = (view_c *)data;
+    view_p->set_drag_mode(0);
+    gtk_drag_source_unset(GTK_WIDGET(view_p->get_iconview()));
+    view_p->free_selection_list();
+    
+}
+
+
+void
+signal_drag_begin (GtkWidget * widget, GdkDragContext * drag_context, gpointer data) {
+    fprintf(stderr, "signal_drag_begin\n");
+    view_c *view_p = (view_c *) data;
+//  single or multiple item selected?
+    GList *selection_list = gtk_icon_view_get_selected_items (view_p->get_iconview());
+    if (g_list_length(selection_list)==1){
+        fprintf(stderr, "Single selection\n");
+    } else if (g_list_length(selection_list)>1){
+        fprintf(stderr, "Multiple selection\n");
+    } else return;
+//  set drag icon
+/*
+    drag_view_p = view_p;
+    rodent_hide_tip ();
+    if (!view_p->en || !view_p->en->path) return; 
+    write_drag_info(view_p->en->path, view_p->en->type);
+    view_p->mouse_event.drag_event.context = drag_context;*/
+}
+
+static void
+signal_drag_data_get (GtkWidget * widget,
+		   GdkDragContext * context, 
+		   GtkSelectionData * selection_data, 
+		   guint info, 
+		   guint time,
+                   gpointer data) {
+    // FIXME: this should be in xfdir_c, in particular, xfdir_local_c class
+    fprintf(stderr, "signal_drag_data_get\n");
+    gchar *files=NULL;
+    //g_free(files);
+    gint selection_len;
+    GList *tmp;
+    
+    //int drag_type;
+    const gchar *format = "file://";
+
+    view_c *view_p = (view_c *) data;
+    xfdir_c *x = view_p->get_xfdir_p();
+    GtkTreeModel *treemodel = x->get_tree_model();
+
+    /* prepare data for the receiver */
+    switch (info) {
+#if 10
+      case TARGET_RAW:
+        fprintf(stderr, ">>> DND send, TARGET_RAW\n"); return;;
+      case TARGET_UTF8:
+        fprintf(stderr, ">>> DND send, TARGET_UTF8\n"); return;
+      case TARGET_URI_LIST:
+        fprintf(stderr, ">>> DND send, TARGET_URI_LIST\n"); 
+#endif
+      default:
+        selection_len = 0;
+        /* count length of bytes to be allocated */
+        for(tmp = view_p->get_selection_list(); tmp; tmp = tmp->next) {
+            GtkTreePath *tpath = (GtkTreePath *)tmp->data;
+            gchar *g;
+            GtkTreeIter iter;
+            gtk_tree_model_get_iter (treemodel, &iter, tpath);
+            gtk_tree_model_get (treemodel, &iter, 
+                ACTUAL_NAME, &g, -1); 
+            gchar *dndpath = g_build_filename(x->get_path(), g, NULL);
+            g_free(g);
+            /* 2 is added for the \r\n */
+            selection_len += (strlen (dndpath) + strlen (format) + 2);
+            g_free(dndpath);
+        }
+        /* 1 is added for terminating null character */
+        fprintf(stderr, "allocating %d bytes for dnd data\n",selection_len + 1);
+        //files = (gchar *)calloc (selection_len + 1,1);
+	/*if (!files) {
+            g_error("signal_drag_data_get(): malloc %s", strerror(errno));
+            return;
+        }*/
+        files = g_strdup("");
+        for(tmp = view_p->get_selection_list(); tmp; tmp = tmp->next) {
+            GtkTreePath *tpath = (GtkTreePath *)tmp->data;
+            gchar *g;
+            GtkTreeIter iter;
+            gtk_tree_model_get_iter (treemodel, &iter, tpath);
+            gtk_tree_model_get (treemodel, &iter, 
+                ACTUAL_NAME, &g, -1); 
+            gchar *dndpath = g_build_filename(x->get_path(), g, NULL);
+            g_free(g);
+            g=g_strconcat(files,format,dndpath,"\n", NULL);
+            g_free(files);
+            files=g;
+
+            /*sprintf (files, "%s%s\r\n", format, dndpath);
+            files += (strlen (format) + strlen (dndpath) + 2);
+            g_free(dndpath);*/
+        }
+        break;
+    }
+    fprintf(stderr, ">>> DND send, drag data is:\n%s\n", files);
+    gtk_selection_data_set (selection_data, 
+	    gtk_selection_data_get_selection(selection_data),
+	    8, (const guchar *)files, selection_len);
+    g_free(files);
+}
+
+
+static gboolean
+signal_drag_motion (GtkWidget * widget, 
+	GdkDragContext * dc, gint x, gint y, guint t, gpointer data) {
+    view_c *view_p = (view_c *) data;
+ 
+    // Called by the receiving end of the DnD
+    //
+ //   GdkDragAction action = gdk_drag_context_get_actions(dc);
+        
+  //  gdk_drag_status (dc, action, t);
+
+    
+    fprintf (stderr, "DND>> drag_motion\n");
+    // Set drag source to move copy or link here.
+   
+    return FALSE;
+#if 0
+    // This is the action the remote has to say:
+    //        action = gdk_drag_context_get_selected_action(dc);
+    gboolean target_ok = FALSE;
+    view_t *view_p = (view_t *) data;
+//    if (!rfm_population_try_read_lock (view_p, "rodent_signal_drag_motion")) return TRUE;
+        
+    
+    NOOP ("signal_drag_motion() obtained read_lock.\n");
+
+    population_t *population_p = (population_t *) rodent_find_in_population (view_p, x, y);
+
+    NOOP ("rodent_mouse: on_drag_motion...x=%d, y= %d, population_p=0x%lx\n", x, y, (unsigned long)population_p);
+    rodent_hide_tip ();
+
+    gboolean local_target = TRUE;
+    gboolean local_source = TRUE;
+    gint type=0;
+    read_drag_info(NULL, &type);
+    if (!IS_LOCAL_TYPE(type))local_source = FALSE;
+    if (view_p->en && !IS_LOCAL_TYPE(view_p->en->type))local_target = FALSE;
+    if(population_p) {
+        /* if not valid drop target, return */
+
+        if(POPULATION_MODULE(population_p)) {
+            if(rfm_natural (PLUGIN_DIR, POPULATION_MODULE(population_p),
+			population_p->en, "valid_drop_site"))
+                target_ok = TRUE;
+        } else {                /* local */
+	    if (population_p->en && 
+		population_p->en->path) {
+		if (IS_SDIR(population_p->en->type)) {
+		    target_ok = TRUE;
+		    if (!IS_LOCAL_TYPE(population_p->en->type))local_target = FALSE;
+		}
+
+		if (population_p->en->mimetype && 
+			strcmp(population_p->en->mimetype,
+			    "application/x-desktop")==0) {
+		    target_ok = TRUE;
+		}
+	    }
+	}
+    }
+    
+    if(view_p->mouse_event.saturated_p != population_p) {
+        NOOP( "condition 3, unsaturate icon\n");
+	unsaturate_icon (view_p);
+    }
+    if (target_ok) {
+	saturate_icon (view_p, population_p);
+    }
+
+    if(view_p->mouse_event.doing_drag_p) {
+        NOOP ("rodent_mouse: widget ok\n");
+    }
+    NOOP ("rodent_mouse: DND>> rodent_signal_drag_motion source=%s target=%s\n",
+	    (local_source)?"local":"remote",
+	    (local_target)?"local":"remote");
+    
+
+    if(getenv ("RFM_DRAG_DOES_MOVE") && strlen (getenv ("RFM_DRAG_DOES_MOVE")))
+        view_p->mouse_event.drag_action = GDK_ACTION_MOVE;
+    else
+        view_p->mouse_event.drag_action = GDK_ACTION_COPY;
+
+    // Override remote dnd with copy
+    // when target or source is remote.
+    if (!local_target || !local_source) {
+        view_p->mouse_event.drag_action = GDK_ACTION_COPY;
+    } 
+
+#if GTK_MAJOR_VERSION==2
+    gint actions = dc->actions;
+#else
+    gint actions = gdk_drag_context_get_actions(dc);
+#endif
+    if(actions == GDK_ACTION_MOVE)
+        gdk_drag_status (dc, GDK_ACTION_MOVE, t);
+    else if(actions == GDK_ACTION_COPY)
+        gdk_drag_status (dc, GDK_ACTION_COPY, t);
+    else if(actions == GDK_ACTION_LINK)
+        gdk_drag_status (dc, GDK_ACTION_LINK, t);
+    else if(actions & view_p->mouse_event.drag_action)
+        gdk_drag_status (dc, view_p->mouse_event.drag_action, t);
+    else
+        gdk_drag_status (dc, 0, t);
+    rfm_population_read_unlock (view_p, "rodent_signal_drag_motion");
+    NOOP ("rodent_mouse: population_sem: rodent_signal_drag_motion() released!\n");
+    return (TRUE);
+#endif
+}
+
 
 #if 0
 /**  drag events **********************************************/
@@ -941,101 +1364,6 @@ signal_drag_delete (GtkWidget * widget, GdkDragContext * context, gpointer data)
     NOOP ("rodent_mouse: DND>> rodent_signal_drag_delete\n");
 }
 
-
-gboolean
-signal_drag_motion (GtkWidget * widget, 
-	GdkDragContext * dc, gint x, gint y, guint t, gpointer data) {
-    NOOP ("rodent_mouse: DND>> rodent_signal_drag_motion\n");
-
-    gboolean target_ok = FALSE;
-    view_t *view_p = (view_t *) data;
-    if (!rfm_population_try_read_lock (view_p, "rodent_signal_drag_motion")) return TRUE;
-        
-    
-    NOOP ("rodent_mouse: population_sem: rodent_signal_drag_motion() obtained...\n");
-
-    population_t *population_p = (population_t *) rodent_find_in_population (view_p, x, y);
-
-    NOOP ("rodent_mouse: on_drag_motion...x=%d, y= %d, population_p=0x%lx\n", x, y, (unsigned long)population_p);
-    rodent_hide_tip ();
-
-    gboolean local_target = TRUE;
-    gboolean local_source = TRUE;
-    gint type=0;
-    read_drag_info(NULL, &type);
-    if (!IS_LOCAL_TYPE(type))local_source = FALSE;
-    if (view_p->en && !IS_LOCAL_TYPE(view_p->en->type))local_target = FALSE;
-    if(population_p) {
-        /* if not valid drop target, return */
-
-        if(POPULATION_MODULE(population_p)) {
-            if(rfm_natural (PLUGIN_DIR, POPULATION_MODULE(population_p),
-			population_p->en, "valid_drop_site"))
-                target_ok = TRUE;
-        } else {                /* local */
-	    if (population_p->en && 
-		population_p->en->path) {
-		if (IS_SDIR(population_p->en->type)) {
-		    target_ok = TRUE;
-		    if (!IS_LOCAL_TYPE(population_p->en->type))local_target = FALSE;
-		}
-
-		if (population_p->en->mimetype && 
-			strcmp(population_p->en->mimetype,
-			    "application/x-desktop")==0) {
-		    target_ok = TRUE;
-		}
-	    }
-	}
-    }
-    
-    if(view_p->mouse_event.saturated_p != population_p) {
-        NOOP( "condition 3, unsaturate icon\n");
-	unsaturate_icon (view_p);
-    }
-    if (target_ok) {
-	saturate_icon (view_p, population_p);
-    }
-
-    if(view_p->mouse_event.doing_drag_p) {
-        NOOP ("rodent_mouse: widget ok\n");
-    }
-    NOOP ("rodent_mouse: DND>> rodent_signal_drag_motion source=%s target=%s\n",
-	    (local_source)?"local":"remote",
-	    (local_target)?"local":"remote");
-    
-
-    if(getenv ("RFM_DRAG_DOES_MOVE") && strlen (getenv ("RFM_DRAG_DOES_MOVE")))
-        view_p->mouse_event.drag_action = GDK_ACTION_MOVE;
-    else
-        view_p->mouse_event.drag_action = GDK_ACTION_COPY;
-
-    // Override remote dnd with copy
-    // when target or source is remote.
-    if (!local_target || !local_source) {
-        view_p->mouse_event.drag_action = GDK_ACTION_COPY;
-    } 
-
-#if GTK_MAJOR_VERSION==2
-    gint actions = dc->actions;
-#else
-    gint actions = gdk_drag_context_get_actions(dc);
-#endif
-    if(actions == GDK_ACTION_MOVE)
-        gdk_drag_status (dc, GDK_ACTION_MOVE, t);
-    else if(actions == GDK_ACTION_COPY)
-        gdk_drag_status (dc, GDK_ACTION_COPY, t);
-    else if(actions == GDK_ACTION_LINK)
-        gdk_drag_status (dc, GDK_ACTION_LINK, t);
-    else if(actions & view_p->mouse_event.drag_action)
-        gdk_drag_status (dc, view_p->mouse_event.drag_action, t);
-    else
-        gdk_drag_status (dc, 0, t);
-    rfm_population_read_unlock (view_p, "rodent_signal_drag_motion");
-    NOOP ("rodent_mouse: population_sem: rodent_signal_drag_motion() released!\n");
-    return (TRUE);
-}
-
 // This signal is received by the sending end of the drag/drop event
 void
 signal_drag_data_get (GtkWidget * widget,
@@ -1045,16 +1373,6 @@ signal_drag_data_get (GtkWidget * widget,
     rodent_hide_tip ();
     gui_drag_data_get (&(view_p->widgets), view_p->selection_list, context, selection_data, info, time);
     NOOP ("rodent_mouse: drag_data_get: all done\n");
-}
-
-void
-signal_drag_begin (GtkWidget * widget, GdkDragContext * drag_context, gpointer data) {
-    view_t *view_p = (view_t *) data;
-    drag_view_p = view_p;
-    rodent_hide_tip ();
-    if (!view_p->en || !view_p->en->path) return; 
-    write_drag_info(view_p->en->path, view_p->en->type);
-    view_p->mouse_event.drag_event.context = drag_context;
 }
 
 void

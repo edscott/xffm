@@ -164,6 +164,7 @@ xfdir_c::highlight(GtkTreePath *tpath){
 
 void
 xfdir_c::clear_highlights(void){
+    if (!this) return;
     if (!data_p->highlight_hash || g_hash_table_size(data_p->highlight_hash) == 0) return;
     g_hash_table_foreach_remove (data_p->highlight_hash, unhighlight, (void *)this);
 }

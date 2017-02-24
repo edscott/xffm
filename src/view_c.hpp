@@ -41,8 +41,15 @@ class view_c: public widgets_c, public thread_control_c, virtual utility_c {
         void setup_tooltip(gint, gint);
         gboolean shows_hidden(void);
         void toggle_show_hidden(void);
-
-    protected:
+        void set_drag_mode(gint);
+        gint get_drag_mode(void);
+        GtkTargetList *get_target_list(void);
+        void free_selection_list(void);
+        void set_selection_list(GList *);
+        GList *get_selection_list(void);
+        void set_click_cancel(gint);
+        gboolean get_click_cancel(void);
+   protected:
 	// This class is base for none
 
     private:
@@ -58,12 +65,19 @@ class view_c: public widgets_c, public thread_control_c, virtual utility_c {
         gint highlight_x;
         gint highlight_y;
 
+        gint button_x;
+        gint button_y;
+
         lpterm_c *lpterm_p;
         xfdir_c *xfdir_p;
 	data_c *data_p;
     
         void create_target_list (void);
         GtkTargetList	*target_list;
+        GList *selection_list;
+
+        gint drag_mode;
+        gint click_cancel;
 
 };
 
