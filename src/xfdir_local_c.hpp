@@ -12,6 +12,8 @@ class xfdir_local_c: public local_monitor_c, virtual utility_c{
         void item_activated (GtkIconView *, GtkTreePath *, void *);
 	gboolean popup(GtkTreePath *);
 	const gchar *get_xfdir_iconname(void);
+	
+	gboolean set_dnd_data(GtkSelectionData *, GList *);
 
     private:
         GtkTreeModel *mk_tree_model(void);

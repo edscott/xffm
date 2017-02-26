@@ -74,6 +74,9 @@ class xfdir_c: virtual utility_c, public gtk_c {
         void highlight(GtkTreePath *);
 	virtual gboolean is_large(void);
         void set_show_hidden(gboolean);
+
+	virtual gboolean set_dnd_data(GtkSelectionData *, GList *);
+
     protected:
         virtual GtkTreeModel *mk_tree_model(void) = 0;
         GtkTreeModel *treemodel;

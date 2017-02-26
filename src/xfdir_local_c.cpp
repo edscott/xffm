@@ -27,6 +27,58 @@ xfdir_local_c::~xfdir_local_c(void){
     stop_monitor();
 }
  
+gboolean
+xfdir_local_c::set_dnd_data(GtkSelectionData * selection_data, GList *selection_list){
+    GList *tmp;
+    const gchar *format = "file://";
+    gint selection_len = 0;
+    /* count length of bytes to be allocated */
+    for(tmp = selection_list; tmp; tmp = tmp->next) {
+	GtkTreePath *tpath = (GtkTreePath *)tmp->data;
+	gchar *g;
+	GtkTreeIter iter;
+	gtk_tree_model_get_iter (treemodel, &iter, tpath);
+	gtk_tree_model_get (treemodel, &iter, 
+	    ACTUAL_NAME, &g, -1); 
+	gchar *dndpath = g_build_filename(get_path(), g, NULL);
+	g_free(g);
+	/* 2 is added for the \r\n */
+	selection_len += (strlen (dndpath) + strlen (format) + 2);
+	g_free(dndpath);
+    }
+    /* 1 is added for terminating null character */
+    fprintf(stderr, "allocating %d bytes for dnd data\n",selection_len + 1);
+    //files = (gchar *)calloc (selection_len + 1,1);
+    /*if (!files) {
+	g_error("signal_drag_data_get(): malloc %s", strerror(errno));
+	return;
+    }*/
+    gchar *files = g_strdup("");
+    for(tmp = selection_list; tmp; tmp = tmp->next) {
+	GtkTreePath *tpath = (GtkTreePath *)tmp->data;
+	gchar *g;
+	GtkTreeIter iter;
+	gtk_tree_model_get_iter (treemodel, &iter, tpath);
+	gtk_tree_model_get (treemodel, &iter, 
+	    ACTUAL_NAME, &g, -1); 
+	gchar *dndpath = g_build_filename(get_path(), g, NULL);
+	g_free(g);
+	g=g_strconcat(files,format,dndpath,"\n", NULL);
+	g_free(files);
+	files=g;
+
+	/*sprintf (files, "%s%s\r\n", format, dndpath);
+	files += (strlen (format) + strlen (dndpath) + 2);
+	g_free(dndpath);*/
+    }
+    gtk_selection_data_set (selection_data, 
+	gtk_selection_data_get_selection(selection_data),
+	8, (const guchar *)files, selection_len);
+    fprintf(stderr, ">>> DND send, drag data is:\n%s\n", files);
+    g_free(files);
+    return TRUE;
+}
+
 void
 xfdir_local_c::item_activated (GtkIconView *iconview, GtkTreePath *tpath, void *data)
 {

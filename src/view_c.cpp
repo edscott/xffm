@@ -57,6 +57,7 @@ query_tooltip_f (GtkWidget  *widget,
                gboolean    keyboard_mode,
                GtkTooltip *tooltip,
                gpointer    data);
+
 static gboolean
 button_press_f (GtkWidget *widget,
                GdkEventButton  *event,
@@ -138,6 +139,7 @@ view_c::view_c(data_c *data0, void *window_data, GtkNotebook *notebook, const gc
     init();
     if (g_file_test(path, G_FILE_TEST_IS_DIR) ){
 	new_xfdir_p = (xfdir_c *)new xfdir_local_c(data_p, path, shows_hidden());
+	
     } else {
 	// load specific class xfdir here
     }
@@ -237,8 +239,9 @@ view_c::reload(const gchar *data){
 	// switch back to local mode
         NOOP( "hidden toggle=%d\n", shows_hidden());
 	xfdir_c *xfdir_local_p = (xfdir_c *)new xfdir_local_c(data_p, data, shows_hidden());
-	set_treemodel(xfdir_local_p);
         delete xfdir_p;
+	// this will set xfdir_p to xfdir_local_p:
+	set_treemodel(xfdir_local_p); 
 	set_spinner(FALSE);
 	return;
     }
@@ -365,6 +368,7 @@ view_c::signals(void){
 	    G_CALLBACK(button_release_f), (void *)this);
      g_signal_connect (get_iconview(), "button-press-event",
 	    G_CALLBACK(button_press_f), (void *)this);
+
     g_signal_connect (get_hidden_button(), "clicked", 
             G_CALLBACK (toggle_hidden_f), (void *)this);
     // clear button:
@@ -1083,19 +1087,12 @@ signal_drag_data_get (GtkWidget * widget,
 		   guint info, 
 		   guint time,
                    gpointer data) {
-    // FIXME: this should be in xfdir_c, in particular, xfdir_local_c class
     fprintf(stderr, "signal_drag_data_get\n");
-    gchar *files=NULL;
     //g_free(files);
-    gint selection_len;
-    GList *tmp;
     
     //int drag_type;
-    const gchar *format = "file://";
 
     view_c *view_p = (view_c *) data;
-    xfdir_c *x = view_p->get_xfdir_p();
-    GtkTreeModel *treemodel = x->get_tree_model();
 
     /* prepare data for the receiver */
     switch (info) {
@@ -1104,57 +1101,16 @@ signal_drag_data_get (GtkWidget * widget,
         fprintf(stderr, ">>> DND send, TARGET_RAW\n"); return;;
       case TARGET_UTF8:
         fprintf(stderr, ">>> DND send, TARGET_UTF8\n"); return;
+#endif
       case TARGET_URI_LIST:
         fprintf(stderr, ">>> DND send, TARGET_URI_LIST\n"); 
-#endif
       default:
-        selection_len = 0;
-        /* count length of bytes to be allocated */
-        for(tmp = view_p->get_selection_list(); tmp; tmp = tmp->next) {
-            GtkTreePath *tpath = (GtkTreePath *)tmp->data;
-            gchar *g;
-            GtkTreeIter iter;
-            gtk_tree_model_get_iter (treemodel, &iter, tpath);
-            gtk_tree_model_get (treemodel, &iter, 
-                ACTUAL_NAME, &g, -1); 
-            gchar *dndpath = g_build_filename(x->get_path(), g, NULL);
-            g_free(g);
-            /* 2 is added for the \r\n */
-            selection_len += (strlen (dndpath) + strlen (format) + 2);
-            g_free(dndpath);
-        }
-        /* 1 is added for terminating null character */
-        fprintf(stderr, "allocating %d bytes for dnd data\n",selection_len + 1);
-        //files = (gchar *)calloc (selection_len + 1,1);
-	/*if (!files) {
-            g_error("signal_drag_data_get(): malloc %s", strerror(errno));
-            return;
-        }*/
-        files = g_strdup("");
-        for(tmp = view_p->get_selection_list(); tmp; tmp = tmp->next) {
-            GtkTreePath *tpath = (GtkTreePath *)tmp->data;
-            gchar *g;
-            GtkTreeIter iter;
-            gtk_tree_model_get_iter (treemodel, &iter, tpath);
-            gtk_tree_model_get (treemodel, &iter, 
-                ACTUAL_NAME, &g, -1); 
-            gchar *dndpath = g_build_filename(x->get_path(), g, NULL);
-            g_free(g);
-            g=g_strconcat(files,format,dndpath,"\n", NULL);
-            g_free(files);
-            files=g;
-
-            /*sprintf (files, "%s%s\r\n", format, dndpath);
-            files += (strlen (format) + strlen (dndpath) + 2);
-            g_free(dndpath);*/
-        }
+	xfdir_c *xfdir_p = view_p->get_xfdir_p();
+	GList *selection_list = view_p->get_selection_list();
+	gboolean result = xfdir_p->set_dnd_data(selection_data, selection_list);
+	
         break;
     }
-    fprintf(stderr, ">>> DND send, drag data is:\n%s\n", files);
-    gtk_selection_data_set (selection_data, 
-	    gtk_selection_data_get_selection(selection_data),
-	    8, (const guchar *)files, selection_len);
-    g_free(files);
 }
 
 
