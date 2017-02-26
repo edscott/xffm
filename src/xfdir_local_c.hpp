@@ -14,13 +14,16 @@ class xfdir_local_c: public local_monitor_c, virtual utility_c{
 	const gchar *get_xfdir_iconname(void);
 	
 	gboolean set_dnd_data(GtkSelectionData *, GList *);
-
+	gboolean receive_dnd(const gchar *, GtkSelectionData *, GdkDragAction);
     private:
         GtkTreeModel *mk_tree_model(void);
         gint heartbeat;
         GList *read_items (gint *); 
         void insert_list_into_model(GList *, GtkListStore *);
 
+	gboolean remove_url_file_prefix (gchar *);
+	gboolean remove_file_prefix_from_uri_list (GList *);
+	gint parse_url_list(const gchar *, GList **);
 
         GList *sort_directory_list(GList *);
     private:

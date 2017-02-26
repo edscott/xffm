@@ -26,7 +26,120 @@ xfdir_local_c::xfdir_local_c(data_c *data0, const gchar *data, gboolean data2):
 xfdir_local_c::~xfdir_local_c(void){
     stop_monitor();
 }
- 
+
+gboolean
+xfdir_local_c::receive_dnd(const gchar *target, GtkSelectionData *data, GdkDragAction action)
+{
+    GList *list = NULL;
+    gboolean retval = FALSE;
+    gint nitems = parse_url_list ((const char *)gtk_selection_data_get_data (data), &list);
+
+    fprintf(stderr, "rodent_mouse: DND receive, nitems=%d\n", nitems);
+    if(!nitems) return FALSE;
+    remove_file_prefix_from_uri_list (list);
+    /* nonsense check first */
+    const gchar *file = (const gchar *)list->data;
+    gchar *src_dir = g_path_get_dirname(file);
+    struct stat st;
+    struct stat target_st;
+    if (lstat ((const gchar *)src_dir, &st)==0 && lstat (target, &target_st)==0){
+	// Here we check if the file source and destination is actually 
+	// the same thing, this time by stat information instead of
+	// path string.
+	// This is a more robust test. We must test *both* st_ino and
+	// st_dev, because stuff on different devices may (and do) have
+	// equal st_ino.
+        if(st.st_ino == target_st.st_ino &&
+		st.st_dev != target_st.st_dev)
+	{
+            //rfm_diagnostics(&(view_p->widgets),"xffm/stock_dialog-warning",NULL);
+            //rfm_diagnostics (widgets_p, "xffm_tag/stderr", " ", strerror (EEXIST), ": ", target_en->path, "\n", NULL);
+	    goto done;
+        }
+    } else {
+	fprintf(stderr, "unable to stat target or source...\n");
+	goto done;
+    }
+
+    
+    fprintf(stderr, "gnu_coreutils(target, list, action) now...\n");
+    // XXX gnu_coreutils(target, list, action);
+    //rfm_complex(RFM_MODULE_DIR, "callbacks", GINT_TO_POINTER(mode), list, target_en->path, "cp"); 
+    retval = TRUE;
+done:
+    g_free(src_dir);
+    // free uri list now
+    GList *tmp = list;
+    for (;tmp && tmp->data;tmp=tmp->next) g_free(tmp->data);
+    g_list_free(list);
+
+    return retval;
+}
+
+gboolean
+xfdir_local_c::remove_url_file_prefix (gchar * path) {
+    static gchar *url_he = NULL;
+    if(strncmp (path, "file:/", strlen ("file:/")) == 0 ){
+	const gchar *f = "file:";
+	if(strncmp (path, "file:///", strlen ("file:///")) == 0) {
+	    f = "file://";
+	} else 	if(strncmp (path, "file://", strlen ("file://")) == 0) {
+	    f = "file:/";
+	} 
+	if (g_file_test(path + strlen (f), G_FILE_TEST_EXISTS)) {
+	    memmove (path, path + strlen (f), strlen (path + strlen (f)) + 1);
+	    fprintf(stderr, "DnD source: %s\n", path);
+	    return TRUE;
+	}
+
+    }
+    fprintf(stderr, "%s is not a local file\n", path);
+    return FALSE;
+}
+
+
+gboolean
+xfdir_local_c::remove_file_prefix_from_uri_list (GList * list) {
+    while(list) {
+        gchar *url = (gchar *) list->data;
+	if (!remove_url_file_prefix (url)){
+	    fprintf(stderr, "xfdir_local_c: unable to parse url list\n");
+	    return FALSE;
+	}
+	list = list->next;
+    }
+    return TRUE;
+}
+
+
+gint
+xfdir_local_c::parse_url_list(const gchar * DnDtext, GList ** list){
+    gchar *q, *p;
+    const gchar *linesep;
+
+    NOOP ("DnD text: %s\n", DnDtext);
+
+    q = p = g_strdup (DnDtext);
+
+    if(strstr (p, "\r\n")) linesep = "\r\n";
+    else if(strstr (p, "\n")) linesep = "\n";
+    else if(strstr (p, "\r")) linesep = "\r";
+    else if(strlen (p)) {
+	// only one item...
+        *list = g_list_append (*list, g_strdup (p));
+        NOOP ("add list: %s\n", p);
+        return 1;
+    } else return 0;
+
+    for(p = strtok (p, linesep); p; p = strtok (NULL, linesep)) {
+        gchar *t = g_strdup (p);
+        NOOP ("add list: %s\n", t);
+        *list = g_list_append (*list, t);
+    }
+    g_free (q);
+    return g_list_length(*list);
+}
+
 gboolean
 xfdir_local_c::set_dnd_data(GtkSelectionData * selection_data, GList *selection_list){
     GList *tmp;

@@ -76,6 +76,8 @@ class xfdir_c: virtual utility_c, public gtk_c {
         void set_show_hidden(gboolean);
 
 	virtual gboolean set_dnd_data(GtkSelectionData *, GList *);
+	virtual gboolean receive_dnd(const gchar *, GtkSelectionData *, GdkDragAction);
+
 
     protected:
         virtual GtkTreeModel *mk_tree_model(void) = 0;

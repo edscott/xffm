@@ -31,9 +31,16 @@ xfdir_c::~xfdir_c(void){
     pthread_rwlock_destroy(&population_lock);
 }
 
+
 gboolean
 xfdir_c::set_dnd_data(GtkSelectionData * selection_data, GList *selection_list){
     fprintf(stderr, "set_dnd_data() not define for this class.\n");
+    return FALSE;
+}
+
+gboolean
+xfdir_c::receive_dnd(const gchar *target, GtkSelectionData *data, GdkDragAction action){
+    fprintf(stderr, "receive_dnd() not define for this class.\n");
     return FALSE;
 }
 

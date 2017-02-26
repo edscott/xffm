@@ -70,16 +70,12 @@ static gboolean
 button_click_f (GtkWidget *widget,
                GdkEventButton  *event,
                gpointer   data);
-
+// DnD
 void
 signal_drag_begin (GtkWidget * widget, GdkDragContext * drag_context, gpointer data); 
-
-
 static gboolean
 signal_drag_motion (GtkWidget * widget, 
 	GdkDragContext * dc, gint x, gint y, guint t, gpointer data);
-
-
 static void
 signal_drag_data_get (GtkWidget * widget,
                       GdkDragContext * context, 
@@ -87,7 +83,6 @@ signal_drag_data_get (GtkWidget * widget,
                       guint info, 
                       guint time, 
                       gpointer data) ;
-
 static void
 signal_drag_end (GtkWidget * widget, GdkDragContext * context, gpointer data);
 
@@ -100,10 +95,7 @@ signal_drag_data (GtkWidget * widget,
 		  GtkSelectionData * selection_data, 
 		  guint info, 
 		  guint time, 
-		  gpointer data) {
-    fprintf(stderr, "signal_drag_data\n");
-}
-
+		  gpointer data); 
 static void
 signal_drag_leave (GtkWidget * widget, GdkDragContext * drag_context, guint time, gpointer data) {
     fprintf(stderr, "signal_drag_leave\n");
@@ -162,6 +154,7 @@ view_c::init(void){
     g_object_set_data(G_OBJECT(get_page_button()), "view_p", (void *)this);
     drag_mode = 0;
     selection_list = NULL;
+
     create_target_list();
     //signals_p = new signals_c();
     signals();
@@ -179,11 +172,6 @@ view_c::init(void){
     lpterm_p->print_debug(g_strdup_printf("%s\n", "This is a debug message."));
     lpterm_p->print_icon("face-monkey",g_strdup_printf("%s\n", "This is face-monkey."));
     lpterm_p->print_icon_tag("face-angry","tag/red",g_strdup_printf("%s\n", "This is face-angry in red."));
-#if 10
-    // FIXME
-    /* drag and drop events */
-    create_target_list ();
-#endif
 
 }
 
@@ -589,11 +577,11 @@ motion_notify_event (GtkWidget *widget,
             view_p->set_click_cancel(1);
             
             // Set up for for move||copy||link drag now
-            gtk_drag_source_set (GTK_WIDGET(view_p->get_iconview()),
+      /*      gtk_drag_source_set (GTK_WIDGET(view_p->get_iconview()),
                          (GdkModifierType)(GDK_BUTTON1_MASK), target_table,
                          NUM_TARGETS, GDK_ACTION_MOVE);  
             gtk_drag_source_set_target_list (GTK_WIDGET(view_p->get_iconview()),
-                    view_p->get_target_list());
+                    view_p->get_target_list());*/
 
             GdkDragContext *context = 
                 gtk_drag_begin_with_coordinates (GTK_WIDGET(view_p->get_iconview()),
@@ -1008,24 +996,29 @@ view_c::get_target_list(void){return target_list;}
 
 void
 view_c::create_target_list (void) {
+    fprintf(stderr, "create_target_list..\n");
     //if(target_list) return;
     target_list = gtk_target_list_new (target_table, NUM_TARGETS);
     // The default dnd action: move.
-/*    gtk_drag_source_set (GTK_WIDGET(get_iconview()),
-                         (GdkModifierType)(GDK_BUTTON1_MASK ), target_table,
-                         NUM_TARGETS, GDK_ACTION_MOVE);*/
-                      //  GDK_ACTION_MOVE  GDK_ACTION_COPY  GDK_ACTION_LINK
-
-      gtk_drag_dest_set (GTK_WIDGET(get_iconview()),
-                       (GTK_DEST_DEFAULT_DROP), target_table, NUM_TARGETS,
-                        GDK_ACTION_MOVE);
-  /*    gtk_drag_dest_set (GTK_WIDGET(get_iconview()),
-                       (GTK_DEST_DEFAULT_DROP), target_table, NUM_TARGETS,
-                        GDK_ACTION_COPY);
-      gtk_drag_dest_set (GTK_WIDGET(get_iconview()),
-                       (GTK_DEST_DEFAULT_DROP), target_table, NUM_TARGETS,
-                        GDK_ACTION_LINK);*/
-//                       (GdkModifierType)(GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK));
+    gtk_icon_view_enable_model_drag_dest (get_iconview(),
+                                      target_table, 
+                                      NUM_TARGETS,
+                                      (GdkDragAction)
+                                ((gint)GDK_ACTION_MOVE|
+				 (gint)GDK_ACTION_COPY|
+				 (gint)GDK_ACTION_LINK));
+    gtk_icon_view_enable_model_drag_source
+                               (get_iconview(),
+                                (GdkModifierType)
+				0,
+			//	((gint)GDK_SHIFT_MASK|(gint)GDK_CONTROL_MASK),
+				//GdkModifierType start_button_mask,
+                                target_table,
+                                NUM_TARGETS,
+				(GdkDragAction)
+                                ((gint)GDK_ACTION_MOVE|
+				 (gint)GDK_ACTION_COPY|
+				 (gint)GDK_ACTION_LINK));
     return;
 }
 
@@ -1048,70 +1041,50 @@ view_c::free_selection_list(void){
 
 
 /////////////////////////////////  DnD   ///////////////////////////
-void
-signal_drag_end (GtkWidget * widget, GdkDragContext * context, gpointer data) {
-    fprintf(stderr, "signal_drag_end\n");
-    
-    view_c * view_p = (view_c *)data;
-    view_p->set_drag_mode(0);
-    gtk_drag_source_unset(GTK_WIDGET(view_p->get_iconview()));
-    view_p->free_selection_list();
-    
-}
-
-
-void
-signal_drag_begin (GtkWidget * widget, GdkDragContext * drag_context, gpointer data) {
-    fprintf(stderr, "signal_drag_begin\n");
-    view_c *view_p = (view_c *) data;
-//  single or multiple item selected?
-    GList *selection_list = gtk_icon_view_get_selected_items (view_p->get_iconview());
-    if (g_list_length(selection_list)==1){
-        fprintf(stderr, "Single selection\n");
-    } else if (g_list_length(selection_list)>1){
-        fprintf(stderr, "Multiple selection\n");
-    } else return;
-//  set drag icon
-/*
-    drag_view_p = view_p;
-    rodent_hide_tip ();
-    if (!view_p->en || !view_p->en->path) return; 
-    write_drag_info(view_p->en->path, view_p->en->type);
-    view_p->mouse_event.drag_event.context = drag_context;*/
-}
+//receiver:
 
 static void
-signal_drag_data_get (GtkWidget * widget,
-		   GdkDragContext * context, 
-		   GtkSelectionData * selection_data, 
-		   guint info, 
-		   guint time,
-                   gpointer data) {
-    fprintf(stderr, "signal_drag_data_get\n");
-    //g_free(files);
-    
-    //int drag_type;
-
+signal_drag_data (GtkWidget * widget,
+                  GdkDragContext * context,
+                  gint x, gint y, 
+		  GtkSelectionData * selection_data, 
+		  guint info, 
+		  guint time, 
+		  gpointer data){
+    fprintf (stderr, "DND>> signal_drag_data\n");
     view_c *view_p = (view_c *) data;
+    gboolean result = FALSE;
 
-    /* prepare data for the receiver */
-    switch (info) {
-#if 10
-      case TARGET_RAW:
-        fprintf(stderr, ">>> DND send, TARGET_RAW\n"); return;;
-      case TARGET_UTF8:
-        fprintf(stderr, ">>> DND send, TARGET_UTF8\n"); return;
-#endif
-      case TARGET_URI_LIST:
-        fprintf(stderr, ">>> DND send, TARGET_URI_LIST\n"); 
-      default:
-	xfdir_c *xfdir_p = view_p->get_xfdir_p();
-	GList *selection_list = view_p->get_selection_list();
-	gboolean result = xfdir_p->set_dnd_data(selection_data, selection_list);
-	
-        break;
+    gchar *target = (gchar *)"FIXME-target";
+
+    GdkDragAction action = gdk_drag_context_get_selected_action(context);
+    
+    NOOP("rodent_mouse: DND receive, info=%d (%d,%d)\n", info, TARGET_STRING, TARGET_URI_LIST);
+    if(info != TARGET_URI_LIST) {
+        goto drag_over;         /* of course */
     }
-}
+
+    NOOP("rodent_mouse: DND receive, action=%d\n", action);
+    if(action != GDK_ACTION_MOVE && 
+       action != GDK_ACTION_COPY &&
+       action != GDK_ACTION_LINK) {
+	fprintf(stderr, "Drag drop mode is not GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK\n");
+        goto drag_over;         /* of course */
+    }
+
+
+
+    // this stuff will be immersed in specific class
+    result = view_p->get_xfdir_p()->receive_dnd(target, selection_data, action);
+
+  drag_over:
+    gtk_drag_finish (context, TRUE, 
+	    (action == GDK_ACTION_MOVE) ? TRUE : FALSE, 
+	    time);
+    NOOP("rodent_mouse: DND receive, drag_over\n");
+    return;
+
+} 
 
 
 static gboolean
@@ -1126,7 +1099,7 @@ signal_drag_motion (GtkWidget * widget,
   //  gdk_drag_status (dc, action, t);
 
     
-    fprintf (stderr, "DND>> drag_motion\n");
+  //  fprintf (stderr, "DND>> drag_motion\n");
     // Set drag source to move copy or link here.
    
     return FALSE;
@@ -1222,6 +1195,73 @@ signal_drag_motion (GtkWidget * widget,
     return (TRUE);
 #endif
 }
+
+// sender:
+void
+signal_drag_end (GtkWidget * widget, GdkDragContext * context, gpointer data) {
+    fprintf(stderr, "signal_drag_end\n");
+    
+    view_c * view_p = (view_c *)data;
+    view_p->set_drag_mode(0);
+    gtk_drag_source_unset(GTK_WIDGET(view_p->get_iconview()));
+    view_p->free_selection_list();
+    
+}
+
+
+void
+signal_drag_begin (GtkWidget * widget, GdkDragContext * drag_context, gpointer data) {
+    fprintf(stderr, "signal_drag_begin\n");
+    view_c *view_p = (view_c *) data;
+//  single or multiple item selected?
+    GList *selection_list = gtk_icon_view_get_selected_items (view_p->get_iconview());
+    if (g_list_length(selection_list)==1){
+        fprintf(stderr, "Single selection\n");
+    } else if (g_list_length(selection_list)>1){
+        fprintf(stderr, "Multiple selection\n");
+    } else return;
+//  set drag icon
+/*
+    drag_view_p = view_p;
+    rodent_hide_tip ();
+    if (!view_p->en || !view_p->en->path) return; 
+    write_drag_info(view_p->en->path, view_p->en->type);
+    view_p->mouse_event.drag_event.context = drag_context;*/
+}
+
+static void
+signal_drag_data_get (GtkWidget * widget,
+		   GdkDragContext * context, 
+		   GtkSelectionData * selection_data, 
+		   guint info, 
+		   guint time,
+                   gpointer data) {
+    fprintf(stderr, "signal_drag_data_get\n");
+    //g_free(files);
+    
+    //int drag_type;
+
+    view_c *view_p = (view_c *) data;
+
+    /* prepare data for the receiver */
+    switch (info) {
+#if 10
+      case TARGET_RAW:
+        fprintf(stderr, ">>> DND send, TARGET_RAW\n"); return;;
+      case TARGET_UTF8:
+        fprintf(stderr, ">>> DND send, TARGET_UTF8\n"); return;
+#endif
+      case TARGET_URI_LIST:
+        fprintf(stderr, ">>> DND send, TARGET_URI_LIST\n"); 
+      default:
+	xfdir_c *xfdir_p = view_p->get_xfdir_p();
+	GList *selection_list = view_p->get_selection_list();
+	gboolean result = xfdir_p->set_dnd_data(selection_data, selection_list);
+	
+        break;
+    }
+}
+
 
 
 #if 0
