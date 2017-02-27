@@ -25,9 +25,7 @@ typedef struct attribute_t {
 class tag_c {
     public:
         ~tag_c(void);
-        tag_c(const gchar *);
-        tag_c(const gchar *, gboolean);
-        tag_c(const gchar *filename, GError **in_error, gboolean); // TRUE for schema
+        tag_c(const gchar *, gboolean); // TRUE for schema
     protected:
         gboolean tag_item_set_string(tag_item_t *, const gchar *);
         const gchar * tag_item_get_string(tag_item_t *);
@@ -63,11 +61,11 @@ class tag_c {
         gboolean set_attribute_value(attribute_t *, const gchar *);
         gchar ** get_attribute_value_list(attribute_t *, gsize *);
         gint get_validation_status(void);
+        gchar *xml_path;
 
 
     private:
         void init(const gchar *, GError **);
-        gchar *file;
         xmlDocPtr doc;
         gboolean validated; // Three state: {yes, no, unknown}/{1,0,-1}
         gchar *schema_file;

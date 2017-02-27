@@ -20,194 +20,136 @@
 # include <config.h>
 #endif
 
-#define XMLTREE_C
-#include "rodent.h"
-/* this should be first 2 lines after headers: */
-G_MODULE_EXPORT LIBRFM_MODULE 
+#include "xmltree_c.hpp"
 
 #define XMLTREE_C
 #include "tagfile.h"
 #include "xmltree.h"
 
-#define XMLTREE_key_type 0x01
-#define XMLTREE_string_type 0x02
-#define xmltree_item Tag_item_t
-#define xmltree_attribute Attribute_item_t
 
-typedef struct xmltree_t{
-    gchar *window_title;
-    gchar *xml_path;
-    gchar *schema_path;
-    gchar *namespace;
-    gchar **editable_attributes;
-    gchar *repeat_names;
-    GHashTable *echo_hash;
-    GHashTable *attribute_hash;
-    GHashTable *editable_elements;
-    gint text_activates_top_attribute;
-
-    gboolean validated;
-
-    void (*set_defaults)(struct xmltree_t *xmltree_p);
-    void *set_defaults_data;
-    xmltree_item *parent_tag;
-    Tag_t *Tag_p;
-} xmltree_t;
-
-
-// XXX  XSD specific
-static gboolean choice_callback(Tag_item_t *src_tag, 
-        GtkTreeView *treeview, GtkTreeModel *treemodel, 
-        GtkTreeIter *sibling, gint flag);
-static void update_iconsXSD(GtkTreeModel *model, GtkTreeIter iter);
-static GdkPixbuf *get_attribute_pixbuf(Attribute_item_t *row_attribute);
-static Tag_item_t *set_attribute_colorXSD(GtkTreeModel *treemodel, GtkTreeIter *iter);
-#include "xmltree.i"
-#include "xsdtree.i"
-
-G_MODULE_EXPORT
-void *text_activates_top_attribute(xmltree_t *xmltree_p, void *q){
-    if (!xmltree_p) return NULL;
-    gint state = GPOINTER_TO_INT(q);
-    NOOP("action set to %d\n", state);
-    xmltree_p->text_activates_top_attribute = state;
-    return GINT_TO_POINTER(1);
+xmltree_c::xmltree_c(const gchar *data0, gboolean data1):tag_c(data0, data1){
+    attribute_hash = g_hash_table_new(g_str_hash, g_str_equal);
+    echo_hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_free);
+    editable_elements = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
+    window_title = NULL;
+    xml_path = NULL;
+    schema_path = NULL;
+    ns = NULL;
+    editable_attributes = NULL;
+    repeat_names = NULL;
+   return ; 
 }
 
-
-G_MODULE_EXPORT
-void *xmltree_new(void){
-    xmltree_t *xmltree_p = (xmltree_t *) malloc(sizeof(xmltree_t));
-    if (!xmltree_p) {
-	DBG("xmltree_new(): malloc failed: %s\n", strerror(errno));
-	return NULL;
-    }
-    memset(xmltree_p, 0, sizeof(xmltree_t));
-    xmltree_p->attribute_hash = g_hash_table_new(g_str_hash, g_str_equal);
-    xmltree_p->echo_hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_free);
-    xmltree_p->editable_elements = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
-    return (void *)xmltree_p; 
-}
-
-G_MODULE_EXPORT
-void *xmltree_free(xmltree_t *xmltree_p){
-    if (!xmltree_p) return NULL;
-    g_free(xmltree_p->window_title);
-    g_free(xmltree_p->xml_path);
-    g_free(xmltree_p->schema_path);
-    g_free(xmltree_p->namespace);
-    g_free(xmltree_p->editable_attributes);
-    g_free(xmltree_p->repeat_names);
-    g_hash_table_destroy(xmltree_p->attribute_hash);
-    g_hash_table_destroy(xmltree_p->echo_hash);
-    g_hash_table_destroy(xmltree_p->editable_elements);
-    g_free(xmltree_p);
+xmltree_c::~xmltree_c(void){
+    g_free(window_title);
+    g_free(xml_path);
+    g_free(schema_path);
+    g_free(ns);
+    g_free(editable_attributes);
+    g_free(repeat_names);
+    g_hash_table_destroy(attribute_hash);
+    g_hash_table_destroy(echo_hash);
+    g_hash_table_destroy(editable_elements);
     return NULL;
 }
 
-G_MODULE_EXPORT
-void *xmltree_set_title(xmltree_t *xmltree_p, const gchar *title){
-    if (!xmltree_p) return NULL;
-    g_free(xmltree_p->window_title);
-    xmltree_p->window_title = g_strdup(title);
-    return (void *)(xmltree_p->window_title);
+
+void 
+xmltree_c::text_activates_top_attribute(gint state){
+    text_activates_top_attribute = state;
+    return ;
 }
 
-G_MODULE_EXPORT
-void *xmltree_set_echo(xmltree_t *xmltree_p, const gchar *element, const gchar *attribute){
-    if (!xmltree_p) return NULL;
-    if (!xmltree_p->echo_hash){
-        xmltree_p->echo_hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_free);
+void 
+xmltree_c::xmltree_set_title(const gchar *title){
+    g_free(window_title);
+    window_title = g_strdup(title);
+    return ;
+}
+
+void 
+xmltree_c::xmltree_set_echo(const gchar *element, const gchar *attribute){
+    if (!echo_hash){
+        echo_hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_free);
     }
-    g_hash_table_replace(xmltree_p->echo_hash, g_strdup(element), g_strdup(attribute));
-    return GINT_TO_POINTER(1);
+    g_hash_table_replace(echo_hash, g_strdup(element), g_strdup(attribute));
+    return ;
 }
 
-G_MODULE_EXPORT
-void *xmltree_set_xml(xmltree_t *xmltree_p, const gchar *xml_file){
-    if (!xmltree_p) return NULL;
-    g_free(xmltree_p->xml_path);
-    xmltree_p->xml_path = g_strdup(xml_file);
-    return (void *)(xmltree_p->xml_path);
+void 
+xmltree_c::xmltree_set_xml(xmltree_t *xmltree_p, const gchar *xml_file){
+    g_free(xml_path);
+    xml_path = g_strdup(xml_file);
+    return;
 }
 
-G_MODULE_EXPORT
-void *xmltree_set_schema(xmltree_t *xmltree_p, const gchar *schema_file){
-    if (!xmltree_p) return NULL;
-    g_free(xmltree_p->schema_path);
-    xmltree_p->schema_path = g_strdup(schema_file);
-    return (void *)(xmltree_p->schema_path);
+void 
+xmltree_c::xmltree_set_schema(const gchar *schema_file){
+    g_free(schema_path);
+    schema_path = g_strdup(schema_file);
+    return;
 }
 
-G_MODULE_EXPORT
-void *xmltree_set_editable_attribute(xmltree_t *xmltree_p, const gchar *attribute, void *type){
-    if (!xmltree_p) return NULL;
-    if (!xmltree_p->editable_attributes){
-       xmltree_p->editable_attributes = (gchar **) malloc(2 * sizeof(gchar *));
-       if (!xmltree_p->editable_attributes){
+void 
+xmltree_c::xmltree_set_editable_attribute(const gchar *attribute, void *type){
+    if (!editable_attributes){
+       editable_attributes = (gchar **) malloc(2 * sizeof(gchar *));
+       if (!editable_attributes){
 	  DBG("xmltree_set_editable_attribute(): malloc failed: %s\n", strerror(errno));
 	  return NULL;
        }
-       memset(xmltree_p->editable_attributes, 0, 2 * sizeof(gchar *));
-       xmltree_p->editable_attributes[0] = g_strdup(attribute);
-       g_hash_table_replace(xmltree_p->attribute_hash, xmltree_p->editable_attributes[0], type); 
-       return (void *)(xmltree_p->editable_attributes);
+       memset(editable_attributes, 0, 2 * sizeof(gchar *));
+       editable_attributes[0] = g_strdup(attribute);
+       g_hash_table_replace(attribute_hash, editable_attributes[0], type); 
+       return (void *)(editable_attributes);
     } 
     // count items
-    gchar **q = xmltree_p->editable_attributes;
+    gchar **q = editable_attributes;
     gint count = 0;
     for (;q && *q; q++) count++;
-    q = xmltree_p->editable_attributes;
-    xmltree_p->editable_attributes = (gchar **) malloc((count+1) * sizeof(gchar *));
-    if (!xmltree_p->editable_attributes){
+    q = editable_attributes;
+    editable_attributes = (gchar **) malloc((count+1) * sizeof(gchar *));
+    if (!editable_attributes){
       DBG("xmltree_set_editable_attribute(): malloc failed: %s\n", strerror(errno));
       return NULL;
     }
-    memset(xmltree_p->editable_attributes, 0, (count+1) * sizeof(gchar *));
+    memset(editable_attributes, 0, (count+1) * sizeof(gchar *));
     gint i;
     for (i=0; i<count-1; i++){
-	xmltree_p->editable_attributes[i] = g_strdup(q[i]);
+	editable_attributes[i] = g_strdup(q[i]);
     }
     g_strfreev(q);
-    xmltree_p->editable_attributes[count-1] = g_strdup(attribute);
-    g_hash_table_replace(xmltree_p->attribute_hash, xmltree_p->editable_attributes[count-1], type); 
-    return (void *)(xmltree_p->editable_attributes);
+    editable_attributes[count-1] = g_strdup(attribute);
+    g_hash_table_replace(attribute_hash, editable_attributes[count-1], type); 
+    return;
 }
 
 
-
-G_MODULE_EXPORT
-void *
-xmltree (GtkButton * button, gpointer data) {
-    fprintf(stderr, "xmltree() is deprecated. Use xmltree_run instead.\n");
-    return NULL;
-}
-
-static gboolean
-validate_with_schema(xmltree_t *xmltree_p){
-    if (!xmltree_p->schema_path) {
+gboolean 
+xmltree_c::validate_with_schema(void){
+    if (!schema_path) {
         DBG("!xmltree_p->schema_path\n");
         gchar *text=g_strdup_printf("%s:  \n\n%s\n",
                 _("No XSchema file specified"), 
-                xmltree_p->schema_path);
+                schema_path);
         rfm_confirm(NULL, GTK_MESSAGE_ERROR, text, NULL,NULL);
         g_free(text);
         return FALSE; 
     }
-    if (!g_file_test(xmltree_p->schema_path, G_FILE_TEST_EXISTS)) {
+    if (!g_file_test(schema_path, G_FILE_TEST_EXISTS)) {
         DBG("!G_FILE_TEST_EXISTS\n");
         gchar *text=g_strdup_printf("%s:  \n\n%s\n",
                 _("XSchema file does not exist"), 
-                xmltree_p->schema_path);
+                schema_path);
         rfm_confirm(NULL, GTK_MESSAGE_ERROR, text, NULL,NULL);
         g_free(text);
         return FALSE;
     }
-    if (g_file_test(xmltree_p->schema_path, G_FILE_TEST_IS_DIR)) {
+    if (g_file_test(schema_path, G_FILE_TEST_IS_DIR)) {
         DBG("G_FILE_TEST_IS_DIR\n");
         gchar *text=g_strdup_printf("%s:  \n\n%s\n",
                 _("XSchema file is not a regular file"), 
-                xmltree_p->schema_path);
+                schema_path);
         rfm_confirm(NULL, GTK_MESSAGE_ERROR, text, NULL,NULL);
         g_free(text);
         return FALSE;
@@ -217,13 +159,13 @@ validate_with_schema(xmltree_t *xmltree_p){
     // Clean out old schema, if already loaded, and load new one
     // (if we keep tabs on stat info, this could be skipped if 
     //  not necessary, but WTH).
-    tag_load_schema(xmltree_p->Tag_p, xmltree_p->schema_path, &error);
+    tag_load_schema(Tag_p, xmltree_p->schema_path, &error);
     
-    if (!tag_validate(xmltree_p->Tag_p)){
+    if (!tag_validate(Tag_p)){
         gchar *text=g_strdup_printf("%s: %s\n\n%s\n\n(%s)\n",
-                _("Validate document"), xmltree_p->xml_path,
+                _("Validate document"), xml_path,
                 _("The Document is not valid!"),
-                xmltree_p->schema_path);
+                schema_path);
         rfm_confirm(NULL, GTK_MESSAGE_ERROR, text, NULL,NULL);
         g_free(text);
         return FALSE;
@@ -231,8 +173,8 @@ validate_with_schema(xmltree_t *xmltree_p){
 #ifdef DEBUG
     gchar *text=g_strdup_printf("<b>%s (%s):</b>  \n\n <i>%s</i>\n",
             _("Schema validation passed"), 
-            xmltree_p->schema_path,
-            xmltree_p->xml_path);
+            schema_path,
+            xml_path);
     rfm_confirm(NULL, GTK_MESSAGE_INFO, text, NULL,NULL);
     g_free(text);
 #endif
@@ -241,8 +183,8 @@ validate_with_schema(xmltree_t *xmltree_p){
 
 static void
 validate_callback(GtkButton *b, void *data){
-    xmltree_t *xmltree_p = data;
-    if (validate_with_schema(xmltree_p)){
+    xmltree_c *xmltree_p = (xmltree_c *)data;
+    if (xmltree_p->validate_with_schema()){
         // greenball somewhere
         rfm_set_bin_image(GTK_WIDGET(b), "xffm/emblem_greenball", SIZE_BUTTON);
     } else {
@@ -252,58 +194,50 @@ validate_callback(GtkButton *b, void *data){
 }
 
 
-G_MODULE_EXPORT
-void * xmltree_run(xmltree_t *xmltree_p){
-    if (!xmltree_p) return NULL;
-
-    GError *error=NULL;
-    // FIXME: enter with dialog if null
-
-    gboolean schema_processed = FALSE;
-    //gboolean validated = FALSE;
-    if (g_file_test(xmltree_p->xml_path, G_FILE_TEST_EXISTS)){
-
-	xmltree_p->Tag_p =tag_new_from_file(xmltree_p->xml_path, &error);
-	// validate with schema and dump if not valid
-        if (xmltree_p->schema_path 
-                && g_file_test(xmltree_p->schema_path, G_FILE_TEST_EXISTS) 
-                && !g_file_test(xmltree_p->schema_path, G_FILE_TEST_IS_DIR)) {
-            if (!validate_with_schema(xmltree_p)){
-                tag_free(xmltree_p->Tag_p);
-                xmltree_p->Tag_p = tag_new();  
-            } //else validated = TRUE;
-            schema_processed = TRUE;
-        } 
-    } else {
-	xmltree_p->Tag_p = tag_new();
+void *
+xmltree_c::xmltree_run(void){
+    if (!xml_path || g_file_test(xml_path, G_FILE_TEST_EXISTS)){
+        fprintf(stderr, "xmltree_run:: xml_path not correctly defined (%s)\n", xml_path);
+        return;
     }
 
+    gboolean schema_processed = FALSE;
+
+    // validate with schema and dump if not valid
+    if (schema_path 
+            && g_file_test(schema_path, G_FILE_TEST_EXISTS) 
+            && !g_file_test(schema_path, G_FILE_TEST_IS_DIR)) {
+        if (!validate_with_schema()){
+        } //else validated = TRUE;
+        schema_processed = TRUE;
+    } 
+
     if (!schema_processed) {
-      GSList *list = get_tag_item_list(xmltree_p->Tag_p, NULL, NULL);
+      GSList *list = get_tag_item_list(NULL, NULL);
       GSList *p=list;
       for (; p && p->data; p=p->next){
         Tag_item_t *item = p->data;
-        Attribute_item_t *attribute =
+        attribute_t *attribute =
             get_attribute(item, "noNamespaceSchemaLocation");
         if (attribute) {
             const gchar *schema = get_attribute_value(attribute);
             DBG("noNamespaceSchemaLocation=%s\n", schema);
             if (!g_file_test(schema, G_FILE_TEST_EXISTS)
-                    && xmltree_p->schema_path 
-                    && g_file_test(xmltree_p->schema_path, G_FILE_TEST_IS_DIR)){
+                    && schema_path 
+                    && g_file_test(schema_path, G_FILE_TEST_IS_DIR)){
                 gchar *g = g_path_get_basename(schema);
-                gchar *h = g_build_filename(xmltree_p->schema_path, g, NULL);
+                gchar *h = g_build_filename(schema_path, g, NULL);
                 g_free(g);
-                g_free(xmltree_p->schema_path); 
-                xmltree_p->schema_path = h;
+                g_free(schema_path); 
+                schema_path = h;
             } else {
-                g_free(xmltree_p->schema_path); 
-                xmltree_p->schema_path = g_strdup(schema);
+                g_free(schema_path); 
+                schema_path = g_strdup(schema);
             }
             break;
         }
       }
-      if (validate_with_schema(xmltree_p)){
+      if (validate_with_schema()){
           //validated = TRUE;
       } 
     }
@@ -312,10 +246,11 @@ void * xmltree_run(xmltree_t *xmltree_p){
     // FIXME: this is settings specific
     //        Add anything missing (may be everything)...
     //keybindings (xmltree_p->Tag_p);
-    if (xmltree_p->set_defaults) (*(xmltree_p->set_defaults))(xmltree_p->set_defaults_data);
+    if (set_defaults) (*(set_defaults))(set_defaults_data);
     // FIXME: enter with dialog if null
     //gchar *schema_file = g_build_filename(KEYBINDINGS_SCHEMA, NULL);
-    gchar *schema_file = g_build_filename(xmltree_p->schema_path, NULL);
+    gchar *schema_file = g_build_filename(schema_path, NULL);
+
     Tag_t *schema_Tag_p = tag_new_from_schema_file(schema_file, &error);
     g_free(schema_file);
 
@@ -356,7 +291,7 @@ void * xmltree_run(xmltree_t *xmltree_p){
     }
     g_object_set_data(G_OBJECT(model), "xmltree_p", xmltree_p);
     // Create tag
-    populate_tree_model_from_tag(xmltree_p->Tag_p, model, &error);
+    populate_tree_model_from_tag(model, &error);
     // Build a graphic treeview.
     // Xml to the right
     GtkTreeView *treeview = build_treeview(model);
@@ -457,86 +392,47 @@ void * xmltree_run(xmltree_t *xmltree_p){
 
     // Event loop.
     gtk_main();
-    return NULL;
+    return ;
 } 
 
-#if 0
-// FIXME: this does nothing but test, need not be exported...
-void *load_custom_keybindings(void *p){
-    // FIXME: enter as parameter
-    gchar *keybindings_file = g_build_filename(KEYBINDINGS_FILE, NULL);
-    if (g_file_test(keybindings_file, G_FILE_TEST_EXISTS)){
-	NOOP(stderr, "load_custom_keybindings now\n");
-    }
-    g_free(keybindings_file);
-    return NULL;
-}
-#endif
 
 /////////////////////////////////////////////////////////////////////////
-//  tag wrapper functions.
 /////////////////////////////////////////////////////////////////////////
 
-Tag_item_t *
-xmltree_get_tag_item(xmltree_t *xmltree_p, xmltree_item *parent_tag, const gchar *tag_name){
-    return (get_tag_item(xmltree_p->Tag_p, (Tag_item_t *)parent_tag, tag_name));
-}
-Tag_item_t *
-xmltree_tag_item_add(xmltree_t *xmltree_p, xmltree_item *parent_tag, const gchar *tag_name){
-    return (tag_item_add(xmltree_p->Tag_p, (Tag_item_t *)parent_tag, tag_name));
-}
-GSList *
-xmltree_get_tag_item_list(xmltree_t *xmltree_p, xmltree_item *parent_tag, const gchar *tag_name){
-    return (get_tag_item_list(xmltree_p->Tag_p, (Tag_item_t *)parent_tag, tag_name));
+void 
+xmltree_set_namespace(const gchar *data){
+    g_free(ns);
+    ns = g_strdup(data);
+    return;
 }
 
-Attribute_item_t *
-xmltree_get_attribute(xmltree_item *parent_tag, const gchar *attribute_name){
-    return (get_attribute((Tag_item_t *)parent_tag, attribute_name));
-}
-const gchar *
-xmltree_get_attribute_value(xmltree_attribute *item){
-    return (get_attribute_value((Attribute_item_t *)item));
+void 
+xmltree_set_defaults_function(void (*set_defaults)(xmltree_t *xmltree_p), void *set_defaults_data){
+    set_defaults = set_defaults_function;
+    set_defaults_data = set_defaults_data;
+    return;
 }
 
-void *
-xmltree_set_namespace(xmltree_t *xmltree_p, const gchar *namespace){
-    g_free(xmltree_p->namespace);
-    xmltree_p->namespace = g_strdup(namespace);
-    return (xmltree_p->namespace);
-}
-
-void *
-xmltree_set_defaults_function(xmltree_t *xmltree_p, void (*set_defaults)(xmltree_t *xmltree_p), void *set_defaults_data){
-    xmltree_p->set_defaults = set_defaults;
-    xmltree_p->set_defaults_data = set_defaults_data;
-    return (set_defaults);
-}
-
-void *
-xmltree_set_attribute_parent(xmltree_t *xmltree_p, xmltree_item *parent_tag){
-    xmltree_p->parent_tag = parent_tag;
-    return (parent_tag);
+void 
+xmltree_set_attribute_parent(xmltree_t *xmltree_p, xmltree_item *data){
+    parent_tag = data;
+    return;
 }
 
 // attribute functions, requires parent tag to be set... 
 // (reduced parameter list to fit in complex call)
-Attribute_item_t *
-xmltree_attribute_item_add(
-        xmltree_t *xmltree_p, 
+attribute_t *
+xmltree_c::xmltree_attribute_item_add(
 	const gchar *name,
 	const gchar *value){
-    if (!xmltree_p) return NULL;
-    if (!xmltree_p->parent_tag){
+    if (!parent_tag){
         DBG("*** %s -> %s parent_tag not set. Please call XMLTREE_set_attribute_parent()\n",
                 name, value);
         return NULL;
     }
-    Attribute_item_t *retval;
-    retval = attribute_item_add(xmltree_p->Tag_p, xmltree_p->parent_tag, 
-	name, value, xmltree_p->namespace);
+    attribute_t *retval;
+    retval = attribute_item_add(parent_tag, name, value, ns);
     NOOP("adding item to tag %p\n", retval);
-    //xmltree_p->parent_tag = NULL;
     return retval;
 }
 
@@ -583,14 +479,12 @@ validate_callbackXSD(GtkButton *b, void *data){
 }
 
 
-G_MODULE_EXPORT
-void * xsdtree_run(xmltree_t *xmltree_p){
-    if (!xmltree_p) return NULL;
+void *
+xmltree_c::xsdtree_run(void){
 
     GError *error=NULL;
-    // FIXME: enter with dialog if null
 
-    if (g_file_test(xmltree_p->xml_path, G_FILE_TEST_EXISTS)){
+    if (g_file_test(xml_path, G_FILE_TEST_EXISTS)){
 	xmltree_p->Tag_p =tag_new_from_file(xmltree_p->xml_path, &error);
     } else {
 	xmltree_p->Tag_p = tag_new();
@@ -749,9 +643,8 @@ void * xsdtree_run(xmltree_t *xmltree_p){
     return NULL;
 } 
 
-G_MODULE_EXPORT
 void *
-xsdtree_show_hidden(void *state){
+xmltree_c::xmltree_c::xsdtree_show_hidden(void *state){
     show_hidden = GPOINTER_TO_INT(state);
     return NULL;
 }
@@ -948,40 +841,6 @@ get_editable_attribute(xmltree_t *xmltree_p, const gchar *attribute){
     return retval;
 }
 
-#if 0
-static Tag_item_t *
-set_attribute_color(GtkTreeModel *treemodel, GtkTreeIter *iter){
-	gchar *attribute=NULL;
-	Tag_item_t *tag;
-	Tag_item_t *parent_tag;
-        Attribute_item_t *item = NULL;
-        xmltree_t *xmltree_p = g_object_get_data(G_OBJECT(treemodel), "xmltree_p");
-	gtk_tree_model_get(treemodel, iter, 
-		H_TAG_ITEM_COLUMN, &tag,
-                H_ATTRIBUTE_COLUMN, &attribute, 
-                H_ATTRIBUTE_ITEM_COLUMN, &item, -1);
-        if (!item) parent_tag = get_parent_tag(tag);
-        else parent_tag=get_attribute_parent(item);
-        
-	if (!attribute) {
-	    gtk_tree_store_set((GtkTreeStore *) treemodel, iter, H_COLOR_COLUMN, "black", -1);
-	} else {
-            if (noneditable_hash && g_hash_table_lookup(noneditable_hash, item)){
-	        gtk_tree_store_set((GtkTreeStore *) treemodel, iter, H_COLOR_COLUMN, READONLY_COLOR, -1);
-            } else if (get_editable_attribute(xmltree_p, attribute)){
-	        gtk_tree_store_set((GtkTreeStore *) treemodel, iter, H_COLOR_COLUMN, EDIT_COLOR, -1);
-	    } else if (get_editable_element(xmltree_p, get_tag_name(parent_tag))){
-	        gtk_tree_store_set((GtkTreeStore *) treemodel, iter, H_COLOR_COLUMN, EDIT_COLOR, -1);
-            } else {
-	        gtk_tree_store_set((GtkTreeStore *) treemodel, iter, H_COLOR_COLUMN, READONLY_COLOR, -1);
-            }
-	}
-
-        return tag;
-
-}
-#endif
-
 
 static
 gboolean 
@@ -1055,7 +914,7 @@ find_keybinding(	GtkTreeModel * model,
 			GtkTreeIter * iter, 
 			gpointer data)
 {
-    Attribute_item_t *Attribute_item_p;
+    attribute_t *Attribute_item_p;
 
     gtk_tree_model_get (model, iter,  
 		H_ATTRIBUTE_ITEM_COLUMN, &Attribute_item_p,
@@ -1076,7 +935,7 @@ find_keybinding(	GtkTreeModel * model,
     } else {
 	    // change color to black.
 	    GdkPixbuf *pixbuf = keyboard;
-	    Attribute_item_t *att_p = get_attribute(Tag_item_p, "icon_id");
+	    attribute_t *att_p = get_attribute(Tag_item_p, "icon_id");
 	    if (att_p) {
 		const gchar *icon_id = get_attribute_value(att_p);
 		if (icon_id && strlen(icon_id)){
@@ -1234,7 +1093,7 @@ ak_apply (GtkButton * button, gpointer data) {
 
 	// Get associated attribute_item_p and parent tag_item_p
 	Tag_item_t *Tag_item_p;
-	Attribute_item_t *Attribute_item_p;
+	attribute_t *Attribute_item_p;
         gchar *attribute;
 	gtk_tree_model_get (GTK_TREE_MODEL(store), &iter,  
 		H_TAG_ITEM_COLUMN, &Tag_item_p, 
@@ -1276,7 +1135,7 @@ ak_apply (GtkButton * button, gpointer data) {
 
     // XXX from here down are specifics to keybindings dialog...
     // Must update "mask" and "key" attributes as well.
-	Attribute_item_t *a_p;
+	attribute_t *a_p;
 	a_p = get_attribute(Tag_item_p, "key");
 	if (a_p){
 	    guint key = GPOINTER_TO_UINT(g_object_get_data(G_OBJECT(entry), "key"));
@@ -1300,20 +1159,20 @@ ak_apply (GtkButton * button, gpointer data) {
     GSList *list = get_full_attribute_list(Tag_p, NULL, "Keybinding");
     GSList *tmp = list;
     for (;tmp && tmp->data; tmp = tmp->next){
-	Attribute_item_t *Attribute_item_p = tmp->data;
+	attribute_t *Attribute_item_p = tmp->data;
 	Tag_item_t *parent = get_attribute_parent(Attribute_item_p);
 	set_tag_item_user_data(parent, GINT_TO_POINTER(0x0));
     }
     for (tmp = list;tmp && tmp->data; tmp = tmp->next){
-	Attribute_item_t *Attribute_item_p = tmp->data;
+	attribute_t *Attribute_item_p = tmp->data;
 	Tag_item_t *parent = get_attribute_parent(Attribute_item_p);
 	const gchar *value = get_attribute_value(Attribute_item_p);
 	GSList *tmp2 = tmp->next;
 	//NOOP(stderr, "duptest: %s\n", value); continue;
 	gboolean dupped = FALSE;
 	for (;tmp2 && tmp2->data; tmp2 = tmp2->next){
-	    const gchar *value2 = get_attribute_value((Attribute_item_t *)tmp2->data);
-	    Tag_item_t *parent2 = get_attribute_parent((Attribute_item_t *)(tmp2->data));
+	    const gchar *value2 = get_attribute_value((attribute_t *)tmp2->data);
+	    Tag_item_t *parent2 = get_attribute_parent((attribute_t *)(tmp2->data));
 	    if (!parent || !parent2) g_error("terribly wrong\n");
 	    if (value && value2 && strcmp(value, value2) == 0){
 		dupped = TRUE;
@@ -1375,13 +1234,13 @@ tag_box(const gchar *head, const gchar *tag, const gchar *value, gint flag, Tag_
     GtkWidget *entry = NULL;
 
     gchar *att_name = g_strdup_printf("%s:type", tag);
-    Attribute_item_t *type_item = get_attribute(parent_tag, att_name);
+    attribute_t *type_item = get_attribute(parent_tag, att_name);
     g_free(att_name);
     const gchar *variable_type = NULL;
     const gchar *variable_subtype = NULL;
     if (type_item){
         variable_type = get_attribute_value(type_item);
-        Attribute_item_t *subtype_item = get_attribute(parent_tag, "list:itemType");
+        attribute_t *subtype_item = get_attribute(parent_tag, "list:itemType");
         if (subtype_item) variable_subtype = get_attribute_value(subtype_item);
         if (variable_type && strstr(variable_type, "integer")){
             gint min = 1;
@@ -1394,7 +1253,7 @@ tag_box(const gchar *head, const gchar *tag, const gchar *value, gint flag, Tag_
     // do we have a pattern restriction?    
     
     att_name = g_strdup_printf("%s:pattern", tag);
-    Attribute_item_t *pattern_item = get_attribute(parent_tag, att_name);
+    attribute_t *pattern_item = get_attribute(parent_tag, att_name);
     g_free(att_name);
     if (pattern_item){
         const gchar *pattern = get_attribute_value(pattern_item);
@@ -1618,7 +1477,7 @@ activate_f(GtkTreeView *treeview, GtkTreePath *treepath,  const gchar *column_ti
 	    gchar *attribute;
 	    gchar *value;
 	    Tag_item_t *parent_tag;
-            Attribute_item_t *attribute_item;
+            attribute_t *attribute_item;
             gint flag;
 	    gtk_tree_model_get (model, &iter, 
 		H_TAG_COLUMN, &tag, 
@@ -1681,7 +1540,7 @@ activate_f(GtkTreeView *treeview, GtkTreePath *treepath,  const gchar *column_ti
 			return FALSE;
 		    } else {
                         gint type = GPOINTER_TO_INT(g_hash_table_lookup(xmltree_p->attribute_hash, attribute));
-                        Attribute_item_t *att_text = get_attribute(parent_tag, "text");
+                        attribute_t *att_text = get_attribute(parent_tag, "text");
                         const gchar *text = get_attribute_value(att_text);
                         if (!text) text = _("Modify");
                         gchar *attribute_title = NULL; 
@@ -2132,10 +1991,10 @@ recurse_tree(Tag_t *Tag_p, Tag_item_t *item, GtkTreeModel *tree_model, gint leve
 	    if (strcasecmp(name, "schema")==0){
 		NOOP("schema_tag attribute...\n");
 	    }
-	    Attribute_item_t *at_item = tmp->data;
+	    attribute_t *at_item = tmp->data;
 	    const gchar *value = get_attribute_value(at_item);
 	    if (value) {
-		Attribute_item_t * at_item = tmp->data;
+		attribute_t * at_item = tmp->data;
                 const gchar *at_name=get_attribute_name(at_item);
                 if (!at_name){
                     DBG("recurse_tree(): at_name=NULL\n");
@@ -2181,7 +2040,7 @@ recurse_tree(Tag_t *Tag_p, Tag_item_t *item, GtkTreeModel *tree_model, gint leve
 	    g_slist_free(attribute_list);
 	    pixbuf = keyboard;
 	    if (keyboard) g_object_ref(keyboard);
-	    Attribute_item_t *att = get_attribute(item, "icon_id");
+	    attribute_t *att = get_attribute(item, "icon_id");
 	    if (att){
 		const gchar *icon_id = get_attribute_value(att);
 		if (icon_id){
@@ -2334,7 +2193,7 @@ is_attribute_required(GtkTreeModel *treemodel, GtkTreeIter *iter){
     if (gtk_tree_model_iter_parent(treemodel, &parent, iter)){
         GtkTreeIter child;
         if (gtk_tree_model_iter_children(treemodel, &child, &parent)){
-            Attribute_item_t *at = NULL;
+            attribute_t *at = NULL;
             gchar *t = g_strdup_printf("%s:use", attribute);
             do {
                 gtk_tree_model_get(treemodel, &child, 
@@ -2356,7 +2215,7 @@ is_attribute_required(GtkTreeModel *treemodel, GtkTreeIter *iter){
 }*/
    
 static gboolean
-is_attribute_required(Attribute_item_t *at_item){
+is_attribute_required(attribute_t *at_item){
     // "text" attribute is always required. 
     const gchar *n = get_attribute_name(at_item);
     if (n && strcasecmp(n, "text")==0) return TRUE;
@@ -2365,7 +2224,7 @@ is_attribute_required(Attribute_item_t *at_item){
     GSList *l = list;
 
     for (;l && l->data; l = l->next){
-          Attribute_item_t *at = l->data;
+          attribute_t *at = l->data;
           gchar *t = g_strdup_printf("%s:use", get_attribute_name(at_item));
           const gchar *g = get_attribute_name(at);
           const gchar *v = get_attribute_value(at);
@@ -2385,7 +2244,7 @@ is_attribute_required(Attribute_item_t *at_item){
 static gboolean
 is_attribute_row_clean(GtkTreeModel *treemodel, GtkTreeIter *iter){
     const gchar *attribute;
-    Attribute_item_t *at;
+    attribute_t *at;
     gtk_tree_model_get(treemodel, iter, 
                 H_ATTRIBUTE_COLUMN, &attribute, 
                 H_ATTRIBUTE_ITEM_COLUMN, &at, -1);
@@ -2402,7 +2261,7 @@ is_attribute_row_clean(Tag_t *Tag_p, Tag_item_t *tag){
     GSList *l = list;
     fprintf(stderr, "%s attribute list = %p\n", get_tag_name(tag), l);
     for (;l && l->data; l = l->next){
-        Attribute_item_t *at_item = l->data;
+        attribute_t *at_item = l->data;
         if (attribute_get_hidden(at_item)) continue;
         const gchar *n = get_attribute_name(at_item);
         fprintf(stderr, "   attribute %s\n", n);
@@ -2430,7 +2289,7 @@ set_attribute_colorXSD(GtkTreeModel *treemodel, GtkTreeIter *iter){
 	gchar *attribute=NULL;
 	Tag_item_t *tag;
 	Tag_item_t *parent_tag;
-        Attribute_item_t *item = NULL;
+        attribute_t *item = NULL;
         xmltree_t *xmltree_p = g_object_get_data(G_OBJECT(treemodel), "xmltree_p");
 	gtk_tree_model_get(treemodel, iter, 
 		H_TAG_ITEM_COLUMN, &tag,
@@ -2463,7 +2322,7 @@ set_attribute_colorXSD(GtkTreeModel *treemodel, GtkTreeIter *iter){
 
 
 static GdkPixbuf *
-get_attribute_pixbuf(Attribute_item_t *row_attribute){
+get_attribute_pixbuf(attribute_t *row_attribute){
     const gchar *value = get_attribute_value(row_attribute);
     // hidden? (NULL)
     // optional? (blue)
@@ -2478,7 +2337,7 @@ get_attribute_pixbuf(Attribute_item_t *row_attribute){
     // optional: (if required/fixed not specified, then assume optional)
     Tag_item_t *p_tag = get_attribute_parent(row_attribute);
     gchar *a = g_strdup_printf("%s:use", get_attribute_name(row_attribute));
-    Attribute_item_t *use_at = get_attribute(p_tag, a);
+    attribute_t *use_at = get_attribute(p_tag, a);
     g_free(a);
     if (use_at){
         const gchar *ca = get_attribute_value(use_at);
@@ -2550,7 +2409,7 @@ element_has_unset_attributes(Tag_t *Tag_p, Tag_item_t *tag){
     //if (!list) return FALSE; // should not happen...
     GSList *l = list;
     for (;l && l->data; l = l->next){
-        Attribute_item_t *a = l->data;
+        attribute_t *a = l->data;
         if (unset_hash && g_hash_table_lookup(unset_hash, a)){
             NOOP( "unset attribute: %s --> %s\n", get_tag_name(tag), get_attribute_name(a)); 
             g_slist_free(list);
@@ -2622,7 +2481,7 @@ set_row_iconXSD(	GtkTreeModel * treemodel,
 			Tag_item_t *tag)
 {
 
-    Attribute_item_t *row_attribute = NULL;
+    attribute_t *row_attribute = NULL;
     gtk_tree_model_get(treemodel, iter,
             H_ATTRIBUTE_ITEM_COLUMN, &row_attribute,
             -1);
@@ -2722,7 +2581,7 @@ find_tag_with_name(Tag_t *Tag_p, Tag_item_t *parent_tag,
         Tag_item_t * l_item = l->data;
         const gchar *nn = get_tag_name(l_item);
         if (nn && strcasecmp(nn, tag_name) == 0){ 
-            Attribute_item_t *aa = get_attribute(l_item, "name");
+            attribute_t *aa = get_attribute(l_item, "name");
             const gchar *n = get_attribute_value(aa);
             //if (n) NOOP( "looking at %s attribute (%s?)\n", n, name);
             if (n && strcasecmp(n, name)==0){
@@ -2750,7 +2609,7 @@ find_tag_with_attribute_and_value(Tag_t *Tag_p, Tag_item_t *parent_tag, const gc
     GSList *l=the_list;
     for (;l && l->data; l= l->next){
         Tag_item_t * l_item = l->data;
-        Attribute_item_t *aa = get_attribute(l_item, attribute_name);
+        attribute_t *aa = get_attribute(l_item, attribute_name);
         if (aa) {
             const gchar *l_value = get_attribute_value(aa);
             NOOP( "%s==%s\n", l_value, attribute_value);
@@ -2778,14 +2637,14 @@ get_element_string(Tag_t *Tag_p, const gchar *name){
             NOOP( "tag child %p: \"%s\"\n", q, get_tag_name(q));
             if (strcasecmp(get_tag_name(q), "attribute")==0){
                 NOOP( "gotcha again...\n");
-                Attribute_item_t *b = get_attribute(q, "name");
+                attribute_t *b = get_attribute(q, "name");
                 if (b) {
                     const gchar *c = get_attribute_value(b);
 /*// DBG
 GSList *xl = get_attribute_item_list(q);
 GSList *xll = xl;
 for (;xll && xll->data; xll = xll->next){
-Attribute_item_t *a = xll->data;
+attribute_t *a = xll->data;
 fprintf(stderr, "attributes: \"%s\" --> \"%s\"\n", get_attribute_name(a), get_attribute_value(a));
 }
 g_slist_free(xl);
@@ -2807,7 +2666,7 @@ static void
 assign_default_value(Tag_item_t *src_item, Tag_t *newTag_p, Tag_item_t *tgt_item){
     if (!src_item || strcasecmp("element", get_tag_name(src_item))) return;
     
-    Attribute_item_t *default_at = get_attribute(src_item, "default");
+    attribute_t *default_at = get_attribute(src_item, "default");
     if(default_at){
         const gchar *c = get_attribute_value(default_at); 
         if (c) attribute_item_add(newTag_p, tgt_item, "text", c, NULL);
@@ -2822,7 +2681,7 @@ add_schema_defined_attributes(Tag_item_t *src_item, Tag_t *newTag_p, Tag_item_t 
     GSList *attribute_list = get_attribute_item_list(src_item);
     GSList *tmp = attribute_list;
     for(;tmp && tmp->data; tmp=tmp->next){
-        Attribute_item_t *at_item = tmp->data;
+        attribute_t *at_item = tmp->data;
         const gchar *aname = get_attribute_name(at_item);
         const gchar *value = get_attribute_value(at_item);
         if (strcasecmp(aname, "type")==0){
@@ -2833,7 +2692,7 @@ add_schema_defined_attributes(Tag_item_t *src_item, Tag_t *newTag_p, Tag_item_t 
             if (!defined_type) aname = "text:type"; 
         }
         // This would add to tag structure, which we de not want
-        Attribute_item_t *new_item = attribute_item_add(newTag_p, tgt_item, aname, value, NULL);
+        attribute_t *new_item = attribute_item_add(newTag_p, tgt_item, aname, value, NULL);
         // But we do want to add to the treeview, so mark it hidden:
         attribute_set_hidden(new_item, TRUE);
     }
@@ -2844,12 +2703,12 @@ add_boolean_restriction(Tag_t *Tag_p, Tag_item_t *src_item, Tag_t *newTag_p, Tag
     if (!src_item || strcasecmp("element", get_tag_name(src_item))) return;
 
     // boolean type is a simple restricted text
-    Attribute_item_t *type_item = get_attribute(src_item, "type");
+    attribute_t *type_item = get_attribute(src_item, "type");
     const gchar *pattern = "text:pattern";
     if (type_item){
         const gchar *t = get_attribute_value(type_item);
         if (strstr(t, "boolean")){
-            Attribute_item_t *new_item = 
+            attribute_t *new_item = 
                 attribute_item_add(newTag_p, tgt_item, pattern, "0|1|true|false", NULL);
             // mark it hidden:
             attribute_set_hidden(new_item, TRUE);
@@ -2866,7 +2725,7 @@ add_list_restrictions(Tag_t *Tag_p, Tag_item_t *simple_tag, Tag_t *newTag_p, Tag
     Tag_item_t *list_tag = get_tag_item(Tag_p, simple_tag, "list");
     if (!list_tag) return;
     NOOP( "gotcha: list_tag\n");
-    Attribute_item_t *itemType_at = get_attribute(list_tag, "itemType");
+    attribute_t *itemType_at = get_attribute(list_tag, "itemType");
     if (!itemType_at) {
         fprintf(stderr, "no itemType attribute in list definition\n");
         return;
@@ -2875,7 +2734,7 @@ add_list_restrictions(Tag_t *Tag_p, Tag_item_t *simple_tag, Tag_t *newTag_p, Tag
     const gchar *list_type = get_attribute_value(itemType_at);
     //if (list_type && strchr(list_type, ':')) list_type = strchr(list_type, ':') + 1;
     // This would add to tag structure
-    Attribute_item_t *new_item = 
+    attribute_t *new_item = 
         attribute_item_add(newTag_p, tgt_item, "text:type", "list", NULL);
     attribute_set_hidden(new_item, TRUE);
     new_item = 
@@ -2895,11 +2754,11 @@ add_text_restrictions(Tag_t *Tag_p, Tag_item_t *simple_tag, Tag_t *newTag_p, Tag
     Tag_item_t *pattern_tag = get_tag_item(Tag_p, restriction_tag, "pattern");
     if (!pattern_tag) return;
 
-    Attribute_item_t *value_item = get_attribute(pattern_tag, "value");
+    attribute_t *value_item = get_attribute(pattern_tag, "value");
     if (!value_item) return;
 
     // This would add to tag structure
-    Attribute_item_t *new_item = 
+    attribute_t *new_item = 
         attribute_item_add(newTag_p, tgt_item, "text:pattern", get_attribute_value(value_item), NULL);
     // But we do want to consider it part of the treeview, so mark it hidden
     attribute_set_hidden(new_item, TRUE);
@@ -2927,7 +2786,7 @@ get_simpletype_restrictions(Tag_t *Tag_p, Tag_item_t *attribute_item){
        GSList *l = list;
        for (; l && l->data; l=l->next){
            Tag_item_t *t = l->data;
-           Attribute_item_t *a = get_attribute(t, "value");
+           attribute_t *a = get_attribute(t, "value");
            if (a){
                const gchar *av =  get_attribute_value(a);
                if (av && strlen(av)){
@@ -2948,7 +2807,7 @@ static void
 add_simpletype_restrictions(Tag_t *Tag_p, Tag_t *newTag_p, Tag_item_t *newparent_item, Tag_item_t *attribute_tag)
 { 
     NOOP( "add_simpletype_restrictions...\n");
-    Attribute_item_t *a_item = get_attribute(attribute_tag, "name");
+    attribute_t *a_item = get_attribute(attribute_tag, "name");
     const gchar *name = get_attribute_value(a_item);
 
     //  restrictions... 
@@ -2956,7 +2815,7 @@ add_simpletype_restrictions(Tag_t *Tag_p, Tag_t *newTag_p, Tag_item_t *newparent
     NOOP( "restrictions=%s\n", r);
     if (r){
         gchar *pattern = g_strdup_printf("%s:pattern", name);
-        Attribute_item_t *pattern_item =
+        attribute_t *pattern_item =
             attribute_item_add(newTag_p, newparent_item, pattern, r, NULL);
         attribute_set_hidden(pattern_item, TRUE); 
         g_free(r);
@@ -2968,11 +2827,11 @@ static const gchar *
 add_subattribute(Tag_t *newTag_p, Tag_item_t *newparent_item, 
         Tag_item_t *attribute_tag, const gchar *name, const gchar *sub_name)
 {
-    Attribute_item_t *a_item = get_attribute(attribute_tag, sub_name);
+    attribute_t *a_item = get_attribute(attribute_tag, sub_name);
     if (a_item){
       const gchar *value = get_attribute_value(a_item);
       gchar *g =g_strdup_printf("%s:%s", name, sub_name);
-      Attribute_item_t *new_item = 
+      attribute_t *new_item = 
         attribute_item_add(newTag_p, newparent_item, g, value, NULL);
       g_free(g);
       // But we do want to add to the treeview, so mark it hidden:
@@ -2990,7 +2849,7 @@ add_simple_attributes(Tag_t *Tag_p, Tag_t *newTag_p, Tag_item_t *newparent_item,
    GSList *l = list;
    for (;l && l->data; l=l->next){
         Tag_item_t *attribute_tag = l->data;
-        Attribute_item_t *a_item = get_attribute(attribute_tag, "name");
+        attribute_t *a_item = get_attribute(attribute_tag, "name");
         const gchar *name = get_attribute_value(a_item);
 
         add_subattribute(newTag_p, newparent_item, attribute_tag, name, "use");
@@ -3003,7 +2862,7 @@ add_simple_attributes(Tag_t *Tag_p, Tag_t *newTag_p, Tag_item_t *newparent_item,
         add_simpletype_restrictions(Tag_p, newTag_p, newparent_item, attribute_tag);
 
         if (fixed){
-            Attribute_item_t *a = attribute_item_add(newTag_p, newparent_item, name, fixed, NULL);
+            attribute_t *a = attribute_item_add(newTag_p, newparent_item, name, fixed, NULL);
             if (!noneditable_hash) noneditable_hash = 
                 g_hash_table_new(g_direct_hash, g_direct_equal);
             g_hash_table_replace(noneditable_hash, a, GINT_TO_POINTER(1));
@@ -3032,7 +2891,7 @@ add_simple_content(Tag_t *Tag_p, Tag_t *newTag_p, Tag_item_t *tgt_item, Tag_item
    add_simple_attributes(Tag_p, newTag_p, tgt_item, extension_tag);
 
    // base 
-    Attribute_item_t *a_item = get_attribute(extension_tag, "base");
+    attribute_t *a_item = get_attribute(extension_tag, "base");
     if (a_item) {
       const gchar *base = get_attribute_value(a_item);
       if (base){
@@ -3053,7 +2912,7 @@ add_simple_content(Tag_t *Tag_p, Tag_t *newTag_p, Tag_item_t *tgt_item, Tag_item
 //            const gchar *b = strchr(base,':')? strchr(base,':')+1:base;
             const gchar *b = base;
             // add text restriction
-            Attribute_item_t *at = attribute_item_add(newTag_p, tgt_item, "text:type", b, NULL);
+            attribute_t *at = attribute_item_add(newTag_p, tgt_item, "text:type", b, NULL);
             attribute_set_hidden(at, TRUE);
         }
       }
@@ -3075,7 +2934,7 @@ add_complextype_items(xmltree_t *xmltree_p, Tag_item_t *complexType_item, Tag_t 
     if (add_simple_content(Tag_p, newTag_p, tgt_item, complexType_item)) return;
 
     // Get simpleType tag restrictions
-    Attribute_item_t *a_item = get_attribute(complexType_item, "mixed");
+    attribute_t *a_item = get_attribute(complexType_item, "mixed");
     if (a_item){
         const gchar *v = get_attribute_value(a_item);
         if (v && (strcasecmp(v, "true") || strcasecmp(v, "1"))){
@@ -3096,13 +2955,13 @@ add_complextype_items(xmltree_t *xmltree_p, Tag_item_t *complexType_item, Tag_t 
         if (container_item){
             // Replicate minOccurs/maxOccurs within element for choice container
             // If not set for all or sequence, set to "1"
-            Attribute_item_t *min_at = get_attribute(container_item, "minOccurs");
-            Attribute_item_t *max_at = get_attribute(container_item, "maxOccurs");
+            attribute_t *min_at = get_attribute(container_item, "minOccurs");
+            attribute_t *max_at = get_attribute(container_item, "maxOccurs");
             GSList *list = get_tag_item_list(Tag_p, container_item, "element");
             GSList *l = list;
             for (;l && l->data; l=l->next){
                 // add new element
-                //Attribute_item_t *name_at = get_attribute((Tag_item_t *)l->data, "name");
+                //attribute_t *name_at = get_attribute((Tag_item_t *)l->data, "name");
                 //Tag_item_t *new_element = tag_item_add(newTag_p, tgt_item, get_attribute_value(name_at));
                 // recurse
                 Tag_item_t *new_element = 
@@ -3175,7 +3034,7 @@ static Tag_item_t *
 process_element(xmltree_t *xmltree_p, Tag_t *newTag_p, Tag_item_t *src_item, Tag_item_t *tgt_item){
     if (strcasecmp("element", get_tag_name(src_item))) return NULL;
     // "name" attribute is mandatory
-    Attribute_item_t *name_item = get_attribute(src_item, "name");
+    attribute_t *name_item = get_attribute(src_item, "name");
     if (!name_item) return NULL;
     const gchar *name = get_attribute_value(name_item);
     if (!name || !strlen(name)) return NULL;
@@ -3198,7 +3057,7 @@ process_element(xmltree_t *xmltree_p, Tag_t *newTag_p, Tag_item_t *src_item, Tag
     }
     
     // Test "element" for global defined type
-    Attribute_item_t *type_at = get_attribute(src_item, "type");
+    attribute_t *type_at = get_attribute(src_item, "type");
     Tag_item_t *complexType_item = NULL;
     Tag_item_t *simpleType_item = NULL;
     if (type_at){
@@ -3272,11 +3131,11 @@ static void copy_attributes(Tag_t *Tag_p, Tag_item_t *tgt_tag, Tag_item_t *src_t
     GSList *l = list;
     NOOP( "attribute list = %p\n", l);
     for (;l && l->data; l = l->next){
-        Attribute_item_t *at = l->data;
+        attribute_t *at = l->data;
         const gchar *aname = get_attribute_name(at);
         const gchar *avalue = get_attribute_value(at);
         NOOP( "%s --> %s\n", aname, avalue);
-        Attribute_item_t *new_at = attribute_item_add(Tag_p, tgt_tag, aname, avalue, NULL);
+        attribute_t *new_at = attribute_item_add(Tag_p, tgt_tag, aname, avalue, NULL);
         // XXX fails: (FIXME: is original attribute not hidden?)
         //attribute_set_hidden(new_at, attribute_get_hidden(at));
         // and this does work... 
@@ -3408,7 +3267,7 @@ copy_tag(Tag_t *Tag_p, Tag_item_t *parent_tag, Tag_item_t *src_tag,
                 gtk_tree_model_iter_parent(treemodel, &parent_iter, &sibling_iter);
                 gtk_tree_model_iter_children(treemodel, &first, &parent_iter);
                 do {
-                    Attribute_item_t *at;
+                    attribute_t *at;
                     gtk_tree_model_get(treemodel, &first,
                       H_ATTRIBUTE_ITEM_COLUMN, &at, -1);
                     if (at == NULL) break;
@@ -3516,7 +3375,7 @@ copy_tag(Tag_t *Tag_p, Tag_item_t *parent_tag, Tag_item_t *src_tag,
 static gboolean 
 is_ctl_full(Tag_t *Tag_p, Tag_item_t *src_tag, GHashTable *hash){
     Tag_item_t *parent_tag = get_parent_tag(src_tag);
-    Attribute_item_t *at = get_attribute(src_tag, "maxOccurs");
+    attribute_t *at = get_attribute(src_tag, "maxOccurs");
     const gchar *v = "1";
     if (at) v = get_attribute_value(at);
     gint count = 0;
@@ -3791,7 +3650,7 @@ create_Type_hash(Tag_t *Tag_p, const gchar *type_name){
     GSList *l = list;
     for (;l && l->data; l = l->next){
         Tag_item_t *src_item = l->data;
-        Attribute_item_t *at = get_attribute(src_item, "name");
+        attribute_t *at = get_attribute(src_item, "name");
         if (!at){
             fprintf(stderr, "%s definition without a name (useless)\n", type_name);
             continue;
@@ -3838,7 +3697,7 @@ Tag_t *tag_new_from_schema_tag(xmltree_t *xmltree_p, GError **error){
             first = FALSE;
             if (!noneditable_hash) noneditable_hash = 
                 g_hash_table_new(g_direct_hash, g_direct_equal);
-            Attribute_item_t *a;
+            attribute_t *a;
 
             a = attribute_item_add(newTag_p, tgt_item, 
                     "xmlns:xi", "http://www.w3.org/2001/XInclude", NULL);
@@ -3891,7 +3750,7 @@ show_visible_row(GtkTreeModel *f_model, GtkTreeIter *f_iter, void *data){
     if (show_hidden) return TRUE;
     //GtkTreeIter iter;
     Tag_item_t *tag;
-    Attribute_item_t *item = NULL;
+    attribute_t *item = NULL;
     gtk_tree_model_get(f_model, f_iter, 
             H_ATTRIBUTE_ITEM_COLUMN, &item, 
             H_TAG_ITEM_COLUMN, &tag,

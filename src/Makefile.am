@@ -19,7 +19,6 @@ AM_CXXFLAGS = -ggdb -O0 -std=c++11
 bin_PROGRAMS = xffm
 
 xffm_SOURCES = \
-	  tag_c.cpp \
 	  main.cpp \
 	  utility_c.cpp \
           run_button_c.cpp \

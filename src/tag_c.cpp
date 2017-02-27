@@ -62,32 +62,19 @@ tag_c::~tag_c(void){
 	free_tag(list_tag_p);
     }
     if (tag_list) g_slist_free(tag_list);
-    g_free(file);
+    g_free(xml_path);
     g_free(schema_file);
 }
 
 
 void 
-tag_c::init(const gchar *filename, GError **in_error){
+tag_c::init(const gchar *filename){
     validated = -1; // unknown status.
-    file = filename?g_strdup(filename):NULL;
-    GError *error=NULL;
-    is_schema=FALSE;
+    xml_path = filename?g_strdup(filename):NULL;
     tag_list = NULL;
     schema_file = NULL;
     is_schema=FALSE;
-    if(file) build_tag_struct(&error);
-
-    if (error) {
-	if (in_error) *in_error = error;
-	else g_error_free(error);
-        fprintf(stderr, "tag_c: %s\n", error->message);
-        throw 1;
-    }
-}
-
-tag_c::tag_c(const gchar *filename){
-    init(filename, NULL);
+    if(xml_path) build_tag_struct();
 }
 
 
@@ -96,36 +83,23 @@ tag_c::tag_c(const gchar *filename, gboolean data){
     is_schema = data; // TRUE for schema.
 }
 
-tag_c::tag_c (const gchar *filename, GError **in_error, gboolean data)
-{
-    init(filename, in_error);
-    is_schema = data; // TRUE for schema.
-}
-
 //*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//
 
 void
-tag_c::build_tag_struct (GError **error){
-    if (!file){
+tag_c::build_tag_struct (void){
+    if (!xml_path){
 	g_error("build_tag_p(): data cannot be NULL!");
     }
-    GQuark  quark = g_quark_from_string ("TagT");
-    // Check XML file
-    if(access (file, R_OK) != 0) {
-        fprintf(stderr, "build_tag_struct() access(%s, R_OK)!=0 (%s)\n", file, strerror(errno));
-	if (error) {
-	    *error = g_error_new(quark, 0x01, "access(%s, R_OK)!=0 (%s)\n", file, strerror(errno));
-	}
+    // Check XML xml_path
+    if(access (xml_path, R_OK) != 0) {
+        fprintf(stderr, "build_tag_struct() access(%s, R_OK)!=0 (%s)\n", xml_path, strerror(errno));
         throw 2;
     }
 
     xmlKeepBlanksDefault (0);
-    // Parse XML file
-    if((doc = xmlParseFile (file)) == NULL) {
-        fprintf(stderr, "xmlParseFile(): unable to parse %s \n", file);
-	if (error) {
-	    *error = g_error_new(quark, 0x02,"xmlParseFile(): unable to parse %s \n", file);
-	}
+    // Parse XML xml_path
+    if((doc = xmlParseFile (xml_path)) == NULL) {
+        fprintf(stderr, "xmlParseFile(): unable to parse %s \n", xml_path);
         throw 3;
     } 
 
@@ -133,9 +107,6 @@ tag_c::build_tag_struct (GError **error){
     xmlNodePtr node = xmlDocGetRootElement (doc);
     if (node == NULL) {
         fprintf(stderr, "xmlDocGetRootElement (): empty document\n");
-	if (error) {
-	    *error = g_error_new(quark, 0x03, "xmlDocGetRootElement (): empty document");
-	}
 	throw 4;
     }
 
@@ -710,7 +681,7 @@ gboolean tag_c::validate_xml(void){
 	fprintf(stderr, "schema_doc==NULL\n");
 	return FALSE;
     }
-    NOOP("validating xml %s ...\n", file);
+    NOOP("validating xml %s ...\n", xml_path);
 
     if (!create_doc(NULL)){
 	fprintf(stderr, "cannot create xmldoc\n");
@@ -747,7 +718,7 @@ gboolean tag_c::validate_xml(void){
     xmlSchemaFreeParserCtxt(validationCtxt);
 
     NOOP("XML document (%s) is %s valid according to xsd specification %s\n",
-		file,
+		xml_path,
 		(result)?"":"NOT",
 		(schema_file)?schema_file: "");
 
