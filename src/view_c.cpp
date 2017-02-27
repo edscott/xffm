@@ -880,7 +880,6 @@ view_c::setup_tooltip(gint x, gint y){
 
     GdkPixbuf *pixbuf = xfdir_p->get_tooltip_pixbuf(tpath);
     if (!pixbuf) pixbuf = xfdir_p->get_normal_pixbuf(tpath); 
-    gtk_tree_path_free(tpath);
     
     GtkWidget *tt_window = get_tt_window(
                 pixbuf,     
@@ -942,6 +941,7 @@ button_press_f (GtkWidget *widget,
             else mode = -1; // default (move)
             view_p->set_click_cancel(0);
         } else { 
+	    tpath=NULL;
             view_p->set_click_cancel(-1);
         }
         fprintf(stderr, "button press %d mode %d\n", event->button, mode);
@@ -951,7 +951,7 @@ button_press_f (GtkWidget *widget,
             gtk_icon_view_select_path (view_p->get_iconview(), tpath);
             retval = TRUE; 
         }
-        gtk_tree_path_free(tpath);
+        if (tpath) gtk_tree_path_free(tpath);
         return retval;
     }
 
@@ -1054,8 +1054,10 @@ signal_drag_data (GtkWidget * widget,
     fprintf (stderr, "DND>> signal_drag_data\n");
     view_c *view_p = (view_c *) data;
     gboolean result = FALSE;
+    gchar *target = NULL;
+    GtkTreePath *tpath=NULL;
 
-    gchar *target = (gchar *)"FIXME-target";
+
 
     GdkDragAction action = gdk_drag_context_get_selected_action(context);
     
@@ -1073,10 +1075,22 @@ signal_drag_data (GtkWidget * widget,
     }
 
 
-
+    if (gtk_icon_view_get_item_at_pos (view_p->get_iconview(),
+                               x, y, &tpath, NULL))
+    {
+	GtkTreeIter iter;
+	gtk_tree_model_get_iter (view_p->get_tree_model(), &iter, tpath);
+	gtk_tree_model_get (view_p->get_tree_model(), &iter, 
+		ACTUAL_NAME, &target, -1);	
+    } else tpath=NULL;
+		// nah
+   /* gtk_icon_view_get_drag_dest_item (view_p->get_iconview(),
+                                  &tpath,
+                                  GtkIconViewDropPosition *pos);*/
     // this stuff will be immersed in specific class
     result = view_p->get_xfdir_p()->receive_dnd(target, selection_data, action);
-
+    if (tpath) gtk_tree_path_free(tpath);
+    g_free(target);
   drag_over:
     gtk_drag_finish (context, TRUE, 
 	    (action == GDK_ACTION_MOVE) ? TRUE : FALSE, 
@@ -1103,97 +1117,6 @@ signal_drag_motion (GtkWidget * widget,
     // Set drag source to move copy or link here.
    
     return FALSE;
-#if 0
-    // This is the action the remote has to say:
-    //        action = gdk_drag_context_get_selected_action(dc);
-    gboolean target_ok = FALSE;
-    view_t *view_p = (view_t *) data;
-//    if (!rfm_population_try_read_lock (view_p, "rodent_signal_drag_motion")) return TRUE;
-        
-    
-    NOOP ("signal_drag_motion() obtained read_lock.\n");
-
-    population_t *population_p = (population_t *) rodent_find_in_population (view_p, x, y);
-
-    NOOP ("rodent_mouse: on_drag_motion...x=%d, y= %d, population_p=0x%lx\n", x, y, (unsigned long)population_p);
-    rodent_hide_tip ();
-
-    gboolean local_target = TRUE;
-    gboolean local_source = TRUE;
-    gint type=0;
-    read_drag_info(NULL, &type);
-    if (!IS_LOCAL_TYPE(type))local_source = FALSE;
-    if (view_p->en && !IS_LOCAL_TYPE(view_p->en->type))local_target = FALSE;
-    if(population_p) {
-        /* if not valid drop target, return */
-
-        if(POPULATION_MODULE(population_p)) {
-            if(rfm_natural (PLUGIN_DIR, POPULATION_MODULE(population_p),
-			population_p->en, "valid_drop_site"))
-                target_ok = TRUE;
-        } else {                /* local */
-	    if (population_p->en && 
-		population_p->en->path) {
-		if (IS_SDIR(population_p->en->type)) {
-		    target_ok = TRUE;
-		    if (!IS_LOCAL_TYPE(population_p->en->type))local_target = FALSE;
-		}
-
-		if (population_p->en->mimetype && 
-			strcmp(population_p->en->mimetype,
-			    "application/x-desktop")==0) {
-		    target_ok = TRUE;
-		}
-	    }
-	}
-    }
-    
-    if(view_p->mouse_event.saturated_p != population_p) {
-        NOOP( "condition 3, unsaturate icon\n");
-	unsaturate_icon (view_p);
-    }
-    if (target_ok) {
-	saturate_icon (view_p, population_p);
-    }
-
-    if(view_p->mouse_event.doing_drag_p) {
-        NOOP ("rodent_mouse: widget ok\n");
-    }
-    NOOP ("rodent_mouse: DND>> rodent_signal_drag_motion source=%s target=%s\n",
-	    (local_source)?"local":"remote",
-	    (local_target)?"local":"remote");
-    
-
-    if(getenv ("RFM_DRAG_DOES_MOVE") && strlen (getenv ("RFM_DRAG_DOES_MOVE")))
-        view_p->mouse_event.drag_action = GDK_ACTION_MOVE;
-    else
-        view_p->mouse_event.drag_action = GDK_ACTION_COPY;
-
-    // Override remote dnd with copy
-    // when target or source is remote.
-    if (!local_target || !local_source) {
-        view_p->mouse_event.drag_action = GDK_ACTION_COPY;
-    } 
-
-#if GTK_MAJOR_VERSION==2
-    gint actions = dc->actions;
-#else
-    gint actions = gdk_drag_context_get_actions(dc);
-#endif
-    if(actions == GDK_ACTION_MOVE)
-        gdk_drag_status (dc, GDK_ACTION_MOVE, t);
-    else if(actions == GDK_ACTION_COPY)
-        gdk_drag_status (dc, GDK_ACTION_COPY, t);
-    else if(actions == GDK_ACTION_LINK)
-        gdk_drag_status (dc, GDK_ACTION_LINK, t);
-    else if(actions & view_p->mouse_event.drag_action)
-        gdk_drag_status (dc, view_p->mouse_event.drag_action, t);
-    else
-        gdk_drag_status (dc, 0, t);
-    rfm_population_read_unlock (view_p, "rodent_signal_drag_motion");
-    NOOP ("rodent_mouse: population_sem: rodent_signal_drag_motion() released!\n");
-    return (TRUE);
-#endif
 }
 
 // sender:
@@ -1262,143 +1185,4 @@ signal_drag_data_get (GtkWidget * widget,
     }
 }
 
-
-
-#if 0
-/**  drag events **********************************************/
-// This signal is received by the receiving end of the drag/drop action
-void
-signal_drag_data (GtkWidget * widget,
-                  GdkDragContext * context,
-                  gint x, gint y, 
-		  GtkSelectionData * selection_data, 
-		  guint info, 
-		  guint time, 
-		  gpointer data) {
-    NOOP ("rodent_mouse: DND>> rodent_signal_drag_data\n");
-
-    const population_t *population_p;
-    view_t *view_p = (view_t *) data;
-
-    record_entry_t *target_en;
-    NOOP ("rodent_mouse: drag_data: drag_data...\n");
-    /*view_p = (view_t *)g_object_get_data(G_OBJECT(widget),"view_p"); */
-    if(!view_p) {
-        DBG ("rodent_signal_drag_data() view_p==NULL\n");
-        gtk_drag_finish (context, FALSE, FALSE, time);
-        return;
-    }
-    target_en = view_p->en;
-
-    if(!target_en || !target_en->path) {
-        NOOP ("rodent_mouse: drag_data: !target_en || !target_en->path\n");
-        NOOP ("rodent_mouse: --DND>>rodent_signal_drag_data !target_en || !target_en->path\n");
-        gtk_drag_finish (context, FALSE, FALSE, time);
-        return;
-    }
-
-    // drop will proceed...
-    if (!rfm_population_try_read_lock (view_p, "rodent_signal_drag_data")){
-        gtk_drag_finish (context, FALSE, FALSE, time);
-    }
-    rfm_global_t *rfm_global_p = rfm_global();
-    rfm_cursor_wait (rfm_global_p->window);
-
-    NOOP ("rodent_mouse: population_sem: rodent_signal_drag_data() obtained...\n");
-    population_p = rodent_find_in_population (view_p, x, y);
-    if(!population_p) {
-        population_p = rodent_find_in_labels (view_p, x, y);
-    }
-
-    if(population_p && population_p->en && population_p->en->path) {
-        if(IS_SDIR(population_p->en->type)){
-            target_en = population_p->en;
-	} else if (population_p->en->mimetype &&
-		strcmp(population_p->en->mimetype, "application/x-desktop")==0){
-            target_en = population_p->en;
-	}
-    }
-
-    gchar *source_path = NULL;
-    read_drag_info(&source_path, NULL);
-    
-    NOOP ("rodent_mouse: DND>>rodent_signal_drag_data: target entry is %s, source is %s\n", (target_en)?target_en->path:NULL, source_path);
-    // Here we check if source and target are the same, in which case dnd should 
-    // be ignored.
-    if(!target_en || !source_path || !target_en->path ||
-	    strcmp (target_en->path, source_path) == 0){
-	NOOP("rodent_mouse: ignoring drop command! source_path=%s target=%s\n", source_path ,(target_en)?target_en->path:NULL);
-        rfm_cursor_reset (rfm_global_p->window);
-        drag_view_p = NULL;
-        gtk_drag_finish (context, FALSE, FALSE, time);
-        rfm_population_read_unlock (view_p, "rodent_signal_drag_data");
-        return;
-    }
-    g_free(source_path);
-
-    NOOP ("rodent_mouse: drag_data...gui_drag_data\n");
-    if(gui_drag_data (&(view_p->widgets), target_en, context, x, y, selection_data, info, time)) {
-        NOOP ("rodent_mouse: drag_data...reload 0x%lx->0x%lx\n", (unsigned long)view_p, (unsigned long)view_p->en);
-    }
-
-    NOOP ("rodent_mouse: drag_data...all done\n");
-    rfm_cursor_reset (rfm_global_p->window);
-    rfm_population_read_unlock (view_p, "rodent_signal_drag_data");
-    NOOP ("population_sem: rodent_signal_drag_data() released!\n");
-    return;
-}
-//#define NOOP NOOP
-
-void
-signal_drag_leave (GtkWidget * widget, GdkDragContext * drag_context, guint time, gpointer data) {
-    NOOP ("rodent_mouse: DND>> rodent_signal_drag_leave\n");
-
-}
-
-void
-signal_drag_delete (GtkWidget * widget, GdkDragContext * context, gpointer data) {
-    NOOP ("rodent_mouse: DND>> rodent_signal_drag_delete\n");
-}
-
-// This signal is received by the sending end of the drag/drop event
-void
-signal_drag_data_get (GtkWidget * widget,
-                      GdkDragContext * context, GtkSelectionData * selection_data, guint info, guint time, gpointer data) {
-    NOOP ("rodent_mouse: DND>> rodent_signal_drag_data_get\n");
-    view_t *view_p = (view_t *) data;
-    rodent_hide_tip ();
-    gui_drag_data_get (&(view_p->widgets), view_p->selection_list, context, selection_data, info, time);
-    NOOP ("rodent_mouse: drag_data_get: all done\n");
-}
-
-void
-signal_drag_end (GtkWidget * widget, GdkDragContext * context, gpointer data) {
-    view_t *view_p = (view_t *) data;
-    widgets_t *widgets_p = &(view_p->widgets);
-    //rfm_diagnostics(widgets_p, "xffm_tag/red","rodent_mouse: DND>> rodent_signal_drag_end\n", NULL); 
-    NOOP ("rodent_mouse: DND>> rodent_signal_drag_end\n" );
-    view_p->mouse_event.doing_drag_p = NULL;
-    rfm_global_t *rfm_global_p = rfm_global();
-    rfm_cursor_reset(rfm_global_p->window);
-    
-    // Immediate test for a reload condition by the thread monitor.
-    if (!xfdir_monitor_control_greenlight(widgets_p)){
-	rodent_trigger_reload(view_p);
-    }
-
-
-
-    if(dnd_data) {
-        g_free (dnd_data);
-        dnd_data = NULL;
-    }
-    drag_view_p = NULL;
-    NOOP ("rodent_mouse: drag_end... alldone\n");
-    // Remove old MIT-shm  dnd info.
-    shm_unlink (DND_SHM_NAME);
-}
-
-/* end of drag signals ********************************/
-
-#endif
 

@@ -42,7 +42,9 @@ xfdir_local_c::receive_dnd(const gchar *target, GtkSelectionData *data, GdkDragA
     gchar *src_dir = g_path_get_dirname(file);
     struct stat st;
     struct stat target_st;
-    if (lstat ((const gchar *)src_dir, &st)==0 && lstat (target, &target_st)==0){
+    gchar *fulltarget = g_build_path(get_path(), target, NULL);
+    fprintf(stderr, "DnD target=%s\n", fulltarget);
+    if (lstat ((const gchar *)src_dir, &st)==0 && lstat (fulltarget, &target_st)==0){
 	// Here we check if the file source and destination is actually 
 	// the same thing, this time by stat information instead of
 	// path string.
@@ -62,8 +64,10 @@ xfdir_local_c::receive_dnd(const gchar *target, GtkSelectionData *data, GdkDragA
     }
 
     
-    fprintf(stderr, "gnu_coreutils(target, list, action) now...\n");
-    // XXX gnu_coreutils(target, list, action);
+    fprintf(stderr, "action=%d: ->%s\n", action, fulltarget);
+    fprintf(stderr, "gnu_coreutils(target, list, action) now...%s->%s\n");
+    // XXX gnu_coreutils(fulltarget, list, action);
+    g_free(fulltarget);
     //rfm_complex(RFM_MODULE_DIR, "callbacks", GINT_TO_POINTER(mode), list, target_en->path, "cp"); 
     retval = TRUE;
 done:
