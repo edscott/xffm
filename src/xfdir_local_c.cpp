@@ -42,8 +42,8 @@ xfdir_local_c::receive_dnd(const gchar *target, GtkSelectionData *data, GdkDragA
     gchar *src_dir = g_path_get_dirname(file);
     struct stat st;
     struct stat target_st;
-    gchar *fulltarget = g_build_path(get_path(), target, NULL);
-    fprintf(stderr, "DnD target=%s\n", fulltarget);
+    gchar *fulltarget = (target)?g_build_filename(path, target, NULL):g_strdup(path);
+    fprintf(stderr, "DnD path=\"%s\", fulltarget=\"%s\"\n", path, fulltarget);
     if (lstat ((const gchar *)src_dir, &st)==0 && lstat (fulltarget, &target_st)==0){
 	// Here we check if the file source and destination is actually 
 	// the same thing, this time by stat information instead of
@@ -65,7 +65,8 @@ xfdir_local_c::receive_dnd(const gchar *target, GtkSelectionData *data, GdkDragA
 
     
     fprintf(stderr, "action=%d: ->%s\n", action, fulltarget);
-    fprintf(stderr, "gnu_coreutils(target, list, action) now...%s->%s\n");
+    fprintf(stderr, "gnu_coreutils(target, list, action) now...%s->%s\n",
+            src_dir, fulltarget);
     // XXX gnu_coreutils(fulltarget, list, action);
     g_free(fulltarget);
     //rfm_complex(RFM_MODULE_DIR, "callbacks", GINT_TO_POINTER(mode), list, target_en->path, "cp"); 
@@ -81,23 +82,23 @@ done:
 }
 
 gboolean
-xfdir_local_c::remove_url_file_prefix (gchar * path) {
+xfdir_local_c::remove_url_file_prefix (gchar * data) {
     static gchar *url_he = NULL;
-    if(strncmp (path, "file:/", strlen ("file:/")) == 0 ){
+    if(strncmp (data, "file:/", strlen ("file:/")) == 0 ){
 	const gchar *f = "file:";
-	if(strncmp (path, "file:///", strlen ("file:///")) == 0) {
+	if(strncmp (data, "file:///", strlen ("file:///")) == 0) {
 	    f = "file://";
-	} else 	if(strncmp (path, "file://", strlen ("file://")) == 0) {
+	} else 	if(strncmp (data, "file://", strlen ("file://")) == 0) {
 	    f = "file:/";
 	} 
-	if (g_file_test(path + strlen (f), G_FILE_TEST_EXISTS)) {
-	    memmove (path, path + strlen (f), strlen (path + strlen (f)) + 1);
-	    fprintf(stderr, "DnD source: %s\n", path);
+	if (g_file_test(data + strlen (f), G_FILE_TEST_EXISTS)) {
+	    memmove (data, data + strlen (f), strlen (data + strlen (f)) + 1);
+	    fprintf(stderr, "DnD source: %s\n", data);
 	    return TRUE;
 	}
 
     }
-    fprintf(stderr, "%s is not a local file\n", path);
+    fprintf(stderr, "%s is not a local file\n", data);
     return FALSE;
 }
 
@@ -213,12 +214,6 @@ xfdir_local_c::item_activated (GtkIconView *iconview, GtkTreePath *tpath, void *
     gchar *g = g_build_filename(path, ddname, NULL);
     g_free(ddname);
     ddname = g;
-    if (!view_p->file_test_with_wait(path, G_FILE_TEST_EXISTS)){
-        view_p->get_lpterm_p()->print_error(g_strdup_printf("Error: timeout for %s\n", ddname));
-        g_free(ddname);
-        g_free(mimetype);
-        return;
-    }
 
     if (!mimetype){
         mimetype = mime_type(ddname, NULL);
@@ -303,7 +298,6 @@ xfdir_local_c::mk_tree_model (void)
         fprintf(stderr, "chdir(%s): %s\n", path, strerror(errno));
         return NULL;
     }
-    path = g_get_current_dir();
 
     
     GtkListStore *list_store = gtk_list_store_new (NUM_COLS, 
@@ -418,13 +412,13 @@ xfdir_local_c::reload(const gchar *data){
         fprintf(stderr, "chdir(%s): %s\n", data, strerror(errno));
         return;
     }
-    stop_monitor();
-    g_free(path);
-    path = g_get_current_dir();
-    DBG("current dir is %s\n", path);
-    gtk_list_store_clear (GTK_LIST_STORE(treemodel));
-
-    
+    if (strcmp(path, data)){
+        stop_monitor();
+        g_free(path);
+        path = g_strdup(data);
+        DBG("current dir is %s\n", path);
+    }
+    gtk_list_store_clear (GTK_LIST_STORE(treemodel));   
     heartbeat = 0;
     GList *directory_list = read_items (&heartbeat);
     while (gtk_events_pending()) gtk_main_iteration();
