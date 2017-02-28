@@ -17,6 +17,10 @@ class gtk_c: virtual utility_c, public tooltip_c, public pixbuf_c, public mime_c
 	void set_bin_markup(GtkWidget *, const char *);
         GtkWidget *menu_item_new(const gchar *, const gchar *);
         gint get_icon_size(const gchar *);
+        GtkWidget *hbox_new(gboolean, gint);
+        GtkWidget *vbox_new(gboolean, gint);
+        GtkWidget *dialog_button (const char *, const char *);
+        GtkWidget *toggle_button (const char *, const char *);
 
     protected:
     private:

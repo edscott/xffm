@@ -137,4 +137,34 @@ gtk_c::menu_item_new(const gchar *icon_id, const gchar *text)
     return w;
 }
 
+GtkWidget *
+gtk_c::hbox_new(gboolean homogeneous, gint spacing){
+    GtkWidget *box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, spacing);
+    gtk_box_set_homogeneous (GTK_BOX(box),homogeneous);
+    return box;
+}
+
+GtkWidget *
+gtk_c::vbox_new(gboolean homogeneous, gint spacing){
+    GtkWidget *box = gtk_box_new(GTK_ORIENTATION_VERTICAL, spacing);
+    gtk_box_set_homogeneous (GTK_BOX(box),homogeneous);
+    return box;
+}
+
+
+gtk_c::GtkWidget *
+dialog_button (const char *icon_id, const char *text) {
+    GtkWidget *button = gtk_button_new ();
+    set_bin_contents(button, icon_id, text, SIZE_BUTTON);
+    return button;
+
+}
+
+
+gtk_c::GtkWidget *
+toggle_button (const char *icon_id, const char *text) {
+    GtkWidget *button = gtk_toggle_button_new ();
+    set_bin_contents(button, icon_id, text, SIZE_BUTTON);
+    return button;
+}
 

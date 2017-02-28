@@ -19,6 +19,8 @@ AM_CXXFLAGS = -ggdb -O0 -std=c++11
 bin_PROGRAMS = xffm
 
 xffm_SOURCES = \
+	  data_c.cpp \
+	    environment_c.cpp \
 	  main.cpp \
 	  utility_c.cpp \
           run_button_c.cpp \
@@ -34,7 +36,6 @@ xffm_SOURCES = \
 		mime_magic_c.cpp \
 		lite_c.cpp \
 	  xffm_c.cpp \
-	    data_c.cpp \
 	  window_c.cpp \
 	  view_c.cpp  \
 	    widgets_c.cpp   \

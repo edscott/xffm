@@ -21,15 +21,7 @@
 # include <config.h>
 #endif
 
-#define SETTINGS_MODULE_C
-
-#include "rodent.h"
-
-#include "settings-module.h"
-
-#ifndef RFM_MCS_PLUGIN
-# define RFM_MCS_PLUGIN
-#endif
+#include "settings_c.hpp"
 
 // Change the channel when you change the Module directory...
 #define CHANNEL  RFM_MODULE_DIR
@@ -79,8 +71,15 @@ static GtkWidget *settings_dialog=NULL;
 static gint shm_settings_serial = 0;
 static gint settings_timer = 0;
 
-LIBRFM_MODULE
+/********************************************************/
+/********************************************************/
+settings_c::settings_c(data_c *data): gtk_c(data){
+    ;
+}
 
+
+
+/********************************************************/
 /********************************************************/
 
 
@@ -391,13 +390,6 @@ void *get_shred_options(void);
 #define RM_OPTIONS get_rm_options()
 #define SHRED_OPTIONS get_shred_options()
 
-static GtkWidget *rfm_check_button_new(){
-	return gtk_check_button_new ();
-}
-static void
-rfm_check_button_set_active(GtkWidget *button, gboolean state){
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(button), state);
-}
 static void
 scroll_to_top(void *user_data){
     rfm_threadwait(); //sleep(1);
@@ -1016,7 +1008,7 @@ set_bit_toggles( settings_t *settings_p, const gchar *boxname,  RfmProgramOption
 	GtkWidget *button = g_object_get_data(box, name);
 	if (button){
 	    gint64 k = flag & (ONE64<<i);
-	    rfm_check_button_set_active(button, k?TRUE:FALSE);
+	    gtk_toggle_button_set_active(button, k?TRUE:FALSE);
 	} else {
 	    DBG("No toggle button for %s\n", name);
 	}
@@ -1835,7 +1827,7 @@ t_callback (GtkButton * button, gpointer data) {
     gtk_widget_show(t_label);
     gtk_frame_set_label_widget(GTK_FRAME(frame),t_label);
     gtk_frame_set_shadow_type (GTK_FRAME(frame), GTK_SHADOW_NONE);
-    box = rfm_vbox_new(TRUE, 3);
+    box = vbox_new(TRUE, 3);
     gtk_container_add(GTK_CONTAINER(frame), box);
     gtk_widget_show(box);
 
@@ -1844,7 +1836,7 @@ t_callback (GtkButton * button, gpointer data) {
     gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
     gtk_widget_set_size_request(scrolled_window, -1 , 375);
     gtk_box_pack_start (GTK_BOX (box), scrolled_window, TRUE, TRUE, 0);
-    GtkWidget *content = rfm_vbox_new(TRUE, 3);
+    GtkWidget *content = vbox_new(TRUE, 3);
     gtk_container_add(GTK_CONTAINER(scrolled_window), content);
 
     gtk_widget_show(scrolled_window);
@@ -1859,7 +1851,7 @@ t_callback (GtkButton * button, gpointer data) {
 	const gchar *icon = (button_callback_p+i)->callback.icon;
 	const gchar *text = (button_callback_p+i)->text;
 
-	GtkWidget *hbox = rfm_hbox_new(FALSE, 2);
+	GtkWidget *hbox = hbox_new(FALSE, 2);
 	gtk_box_pack_start (GTK_BOX(content), hbox, FALSE, FALSE, 0);
 	gtk_widget_show(hbox);
 	check_button[i] = gtk_check_button_new();
@@ -1952,7 +1944,7 @@ mk_bit_toggles(settings_t *settings_p, GtkWidget *vbox,
 	    indent = FALSE;
 	    continue;
 	}
-	GtkWidget *button_box = rfm_hbox_new(FALSE, 0);
+	GtkWidget *button_box = hbox_new(FALSE, 0);
 	const gchar *label = (options_p->text)?options_p->text:options_p->option;
 	if (strcmp(options_p->option,"submodule-label")==0){
 	    GtkWidget *w = gtk_label_new("");
@@ -1967,7 +1959,7 @@ mk_bit_toggles(settings_t *settings_p, GtkWidget *vbox,
 	    GtkWidget *w = gtk_label_new("   ");
 	    gtk_box_pack_start (GTK_BOX(button_box), w, FALSE, FALSE, 0);
 	}
-	GtkWidget *t_button = rfm_check_button_new ();
+	GtkWidget *t_button = gtk_check_button_new ();
 	
 	gtk_widget_set_sensitive(t_button, options_p->sensitive);
 	gtk_widget_set_sensitive(button_box, options_p->sensitive);
@@ -1995,7 +1987,7 @@ mk_bit_toggles(settings_t *settings_p, GtkWidget *vbox,
 	gboolean combo_choice = FALSE;
 	if (options_p->choices){
 	    combo_choice = TRUE;
-	    GtkWidget *box = rfm_hbox_new(FALSE,0);
+	    GtkWidget *box = hbox_new(FALSE,0);
 	    GtkWidget *cbox;
 	    if (GPOINTER_TO_INT(options_p->choices) == -1) {
 		NOOP(stderr, "entry for %s\n", rfm_options[options_p->choice_id].name);
@@ -2123,7 +2115,7 @@ mk_bit_toggles(settings_t *settings_p, GtkWidget *vbox,
 static void 
 subtitle(GtkWidget *parent, GtkWidget *dialog, const gchar *text, gchar *button_command){
      
-    GtkWidget *label_box=rfm_hbox_new(FALSE, 0);
+    GtkWidget *label_box=hbox_new(FALSE, 0);
     gtk_box_pack_start ((GtkBox *) parent, label_box, FALSE, FALSE, 0);
     gchar *tab_text = g_strdup_printf ("<b><i>%s</i></b>   ", text);
     GtkWidget *label = gtk_label_new (tab_text);
@@ -2156,7 +2148,7 @@ subtitle(GtkWidget *parent, GtkWidget *dialog, const gchar *text, gchar *button_
         if (strcmp(button_command, "shred")==0) do_help_button=TRUE;
 
         if (do_help_button) {
-            button = rfm_dialog_button ("xffm/stock_dialog-question", NULL);
+            button = dialog_button ("xffm/stock_dialog-question", NULL);
             g_object_set_data(G_OBJECT(button), "dialog", dialog);
             g_signal_connect (G_OBJECT (button), "clicked", G_CALLBACK (command_help), button_command);
             gchar *g=g_strdup_printf("%s --help", button_command);
@@ -2165,7 +2157,7 @@ subtitle(GtkWidget *parent, GtkWidget *dialog, const gchar *text, gchar *button_
             gtk_box_pack_start ((GtkBox *) label_box, button, FALSE, FALSE, 0);
             gtk_widget_show(button);
         } else {
-	    button = rfm_dialog_button ("xffm/stock_dialog-question", NULL);
+	    button = dialog_button ("xffm/stock_dialog-question", NULL);
 	    g_object_set_data(G_OBJECT(button), "dialog", dialog);
 	    g_signal_connect (G_OBJECT (button), "clicked", G_CALLBACK (rtfm), button_command);
 	    gchar *g=g_strdup_printf("man %s", button_command);
@@ -2183,7 +2175,7 @@ static GtkWidget *
 create_tab (GtkNotebook * notebook, char *label, char *frame_label) {
     GtkWidget *tab_label1 = gtk_label_new (label);
     gtk_widget_show (tab_label1);
-    GtkWidget *page_box = rfm_vbox_new (FALSE, 6);
+    GtkWidget *page_box = vbox_new (FALSE, 6);
     GtkWidget *sw = gtk_scrolled_window_new (NULL, NULL);
     gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw), GTK_SHADOW_ETCHED_IN);
     gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), 
@@ -2203,10 +2195,10 @@ create_tab (GtkNotebook * notebook, char *label, char *frame_label) {
     gchar *g = g_strdup_printf("<b>%s</b>", frame_label);
     gtk_label_set_markup (GTK_LABEL(header), g);  
     g_free(g);
-    GtkWidget *hbox = rfm_hbox_new(FALSE, 3);
+    GtkWidget *hbox = hbox_new(FALSE, 3);
     gtk_box_pack_start (GTK_BOX (page_box), hbox, FALSE, FALSE, 0);
     gtk_box_pack_start (GTK_BOX (hbox), header, FALSE, FALSE, 0);
-    GtkWidget *vbox = rfm_vbox_new (FALSE, 2);
+    GtkWidget *vbox = vbox_new (FALSE, 2);
     gtk_box_pack_start (GTK_BOX (page_box), vbox, FALSE, FALSE, 0);
 
     gtk_widget_show (vbox);
@@ -2219,7 +2211,7 @@ static GtkWidget *
 make_gint_combo_box (GtkWidget * vbox, gint id, const gchar **options, void *callback) {
     GtkWidget *box = gtk_combo_box_text_new ();
     int place = 0;
-    GtkWidget *hbox = rfm_hbox_new (FALSE, 6);
+    GtkWidget *hbox = hbox_new (FALSE, 6);
     gchar *text;
     environ_t *environ_v = rfm_get_environ();
     if (id == RFM_DEFAULT_ICON_SIZE) {
@@ -2276,7 +2268,7 @@ make_gint_combo_box (GtkWidget * vbox, gint id, const gchar **options, void *cal
 static GtkWidget *
 make_exec_combo_box (GtkWidget * vbox, gint id, const gchar **options, void *callback) {
     GtkWidget *box = gtk_combo_box_text_new ();
-    GtkWidget *hbox = rfm_hbox_new (FALSE, 6);
+    GtkWidget *hbox = hbox_new (FALSE, 6);
     environ_t *environ_v = rfm_get_environ();
     GtkWidget *label = gtk_label_new (_(environ_v[id].env_text));
     gtk_box_pack_start (GTK_BOX(hbox), label, FALSE, FALSE, 0);
@@ -2531,14 +2523,14 @@ context_run_rfm_settings_dialog (gpointer data) {
     gtk_window_set_title(GTK_WINDOW(settings_dialog), mp->caption);
     
     environ_t *environ_v = rfm_get_environ();
-    GtkWidget *button = rfm_dialog_button ("xffm/stock_refresh", _("Rebuild Thumbnails"));
+    GtkWidget *button = dialog_button ("xffm/stock_refresh", _("Rebuild Thumbnails"));
     gtk_widget_show (button);
     gtk_dialog_add_action_widget (GTK_DIALOG (settings_p->dialog), button, 2);
 
-    button = rfm_dialog_button ("xffm/stock_select-color", _("Icons"));
+    button = dialog_button ("xffm/stock_select-color", _("Icons"));
     gtk_widget_show (button);
     gtk_dialog_add_action_widget (GTK_DIALOG (settings_p->dialog), button, 1);
-    button = rfm_dialog_button ("xffm/stock_ok", _("Ok"));
+    button = dialog_button ("xffm/stock_ok", _("Ok"));
     gtk_widget_show (button);
     gtk_dialog_add_action_widget (GTK_DIALOG (settings_p->dialog), button, 0);
     rfm_global_t *rfm_global_p = rfm_global();
@@ -2569,19 +2561,19 @@ context_run_rfm_settings_dialog (gpointer data) {
     GtkCellRenderer *renderer;
     GtkWidget *treeview;
     GtkWidget *label;
-    GtkWidget *vbox = rfm_vbox_new (FALSE, 6);
+    GtkWidget *vbox = vbox_new (FALSE, 6);
     gtk_box_pack_start (
 	    GTK_BOX (gtk_dialog_get_content_area(GTK_DIALOG (settings_p->dialog))), 
 	    vbox, TRUE, TRUE, 0);
     gtk_widget_show(vbox);
-    GtkWidget *hbox = rfm_hbox_new (FALSE, 6);
+    GtkWidget *hbox = hbox_new (FALSE, 6);
     gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, TRUE, 0);
     gtk_widget_show(hbox);
 
     GtkWidget *header = gtk_label_new ("");
     gtk_label_set_markup (GTK_LABEL(header), mp->caption);       
 
-    GtkWidget *abox = rfm_hbox_new(FALSE,0);
+    GtkWidget *abox = hbox_new(FALSE,0);
     gtk_box_pack_start (GTK_BOX (hbox), abox, FALSE, TRUE, 0);
     gchar *iconpath = g_strdup_printf("%s/icons/rfm/animated/rodent-96.gif", PACKAGE_DATA_DIR);
     if (!g_file_test(iconpath, G_FILE_TEST_EXISTS)){
@@ -2619,7 +2611,7 @@ context_run_rfm_settings_dialog (gpointer data) {
     gtk_widget_show (vpane);
     gtk_box_pack_start (GTK_BOX (vbox),vpane, TRUE, TRUE, 0);
     gtk_paned_set_position (GTK_PANED (vpane), 1000);
-    vbox = rfm_vbox_new (FALSE, 6);
+    vbox = vbox_new (FALSE, 6);
     gtk_paned_pack1 (GTK_PANED (vpane), 
 	    GTK_WIDGET (vbox), FALSE, TRUE);
     gtk_widget_show(vbox);
@@ -2652,7 +2644,7 @@ context_run_rfm_settings_dialog (gpointer data) {
     {
 	gchar *k_text=g_strdup(_("Configuration of keybindings"));
 	gpointer k_data=NULL;
-	GtkWidget *k_box = rfm_hbox_new(FALSE, 0);
+	GtkWidget *k_box = hbox_new(FALSE, 0);
 	GtkWidget *k_button =  
 	    rfm_mk_little_button ("xffm/emblem_keyboard", 
 		      (gpointer)k_callback, k_data, k_text);
@@ -2666,7 +2658,7 @@ context_run_rfm_settings_dialog (gpointer data) {
     {
 	gchar *t_text=g_strdup(_("Toolbar Settings"));
 	gpointer t_data=NULL;
-	GtkWidget *t_box = rfm_hbox_new(FALSE, 0);
+	GtkWidget *t_box = hbox_new(FALSE, 0);
 	GtkWidget *t_button =  
 	    rfm_mk_little_button ("xffm/stock_preferences", 
 		     (gpointer)t_callback, t_data, 
@@ -2707,14 +2699,14 @@ context_run_rfm_settings_dialog (gpointer data) {
 
 	    g_free(themename);
 
-	    GtkWidget *theme_box = rfm_hbox_new(FALSE,3);
+	    GtkWidget *theme_box = hbox_new(FALSE,3);
 	    gtk_box_pack_start (GTK_BOX(vbox), theme_box, FALSE, FALSE, 0);
 	    toggle_button[i] = gtk_check_button_new_with_label (_(environ_v[i].env_text));
 	    gtk_box_pack_start (GTK_BOX(theme_box), toggle_button[i], FALSE, FALSE, 0);
 	    gtk_box_pack_start (GTK_BOX(theme_box), theme_combo, FALSE, FALSE, 0);
 	    g_signal_connect (G_OBJECT (theme_combo), "changed", G_CALLBACK (save_icon_theme), toggle_button[i]);
 
-	    GtkWidget *image_box = rfm_hbox_new(FALSE, 0);
+	    GtkWidget *image_box = hbox_new(FALSE, 0);
 	    gtk_box_pack_start (GTK_BOX(theme_box), image_box, FALSE, FALSE, 0);
 	    g_object_set_data(G_OBJECT(theme_combo), "image_box", image_box);
 	    
@@ -2744,7 +2736,7 @@ context_run_rfm_settings_dialog (gpointer data) {
 		"toggled", G_CALLBACK (option_toggled), GINT_TO_POINTER(i));
     }
     // preview size
-	GtkWidget *preview_size_hbox = rfm_hbox_new (FALSE, 6);
+	GtkWidget *preview_size_hbox = hbox_new (FALSE, 6);
 	gtk_box_pack_start (GTK_BOX(vbox), preview_size_hbox, FALSE, FALSE, 0);
 	label = gtk_label_new (_(environ_v[RFM_PREVIEW_IMAGE_SIZE].env_text));
 	gtk_box_pack_start (GTK_BOX(preview_size_hbox), label, FALSE, FALSE, 0);
@@ -2796,8 +2788,8 @@ context_run_rfm_settings_dialog (gpointer data) {
     }
 
     {
-	GtkWidget *font_vbox=rfm_vbox_new(FALSE, 2);
-	GtkWidget *font_box=rfm_hbox_new(FALSE, 2);
+	GtkWidget *font_vbox=vbox_new(FALSE, 2);
+	GtkWidget *font_box=hbox_new(FALSE, 2);
 	gtk_box_pack_start (GTK_BOX(vbox), font_vbox, FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX(font_vbox), font_box, FALSE, FALSE, 0);
 
@@ -2808,14 +2800,14 @@ context_run_rfm_settings_dialog (gpointer data) {
 	g_free(label_markup);
 	gtk_widget_show(font_label);
 
-	font_box=rfm_hbox_new(FALSE, 2);
+	font_box=hbox_new(FALSE, 2);
 	gtk_box_pack_start (GTK_BOX(font_box), gtk_label_new("   "), FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX(font_vbox), font_box, FALSE, FALSE, 0);
 	settings_p->fontsize_box = 
 	    make_gint_combo_box (font_box, RFM_FIXED_FONT_SIZE, rfm_get_font_sizes(), (void *)fontsize_changed);
 	g_object_set_data(G_OBJECT(settings_p->fontsize_box), "settings_p", settings_p);
 
-	font_box=rfm_hbox_new(FALSE, 2);
+	font_box=hbox_new(FALSE, 2);
 	gtk_box_pack_start (GTK_BOX(font_box), gtk_label_new("   "), FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX(font_vbox), font_box, FALSE, FALSE, 0);
         settings_p->fontfamily_box = 
@@ -2825,8 +2817,8 @@ context_run_rfm_settings_dialog (gpointer data) {
 
 
     {
-	GtkWidget *font_vbox=rfm_vbox_new(FALSE, 2);
-	GtkWidget *font_box=rfm_hbox_new(FALSE, 2);
+	GtkWidget *font_vbox=vbox_new(FALSE, 2);
+	GtkWidget *font_box=hbox_new(FALSE, 2);
 	gtk_box_pack_start (GTK_BOX(vbox), font_vbox, FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX(font_vbox), font_box, FALSE, FALSE, 0);
 
@@ -2838,14 +2830,14 @@ context_run_rfm_settings_dialog (gpointer data) {
 	gtk_widget_show(font_label);
 
 
-	font_box=rfm_hbox_new(FALSE, 2);
+	font_box=hbox_new(FALSE, 2);
 	gtk_box_pack_start (GTK_BOX(font_box), gtk_label_new("   "), FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX(font_vbox), font_box, FALSE, FALSE, 0);
 	settings_p->vfontsize_box = 
 	    make_gint_combo_box (font_box, RFM_VARIABLE_FONT_SIZE, rfm_get_font_sizes(), (void *)vfontsize_changed);
 	g_object_set_data(G_OBJECT(settings_p->vfontsize_box), "settings_p", settings_p);
 
-	font_box=rfm_hbox_new(FALSE, 2);
+	font_box=hbox_new(FALSE, 2);
 	gtk_box_pack_start (GTK_BOX(font_box), gtk_label_new("   "), FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX(font_vbox), font_box, FALSE, FALSE, 0);
 	settings_p->vfontfamily_box = 
@@ -2864,7 +2856,7 @@ context_run_rfm_settings_dialog (gpointer data) {
 	make_exec_combo_box (vbox, EDITOR, rfm_get_editors(), (void *)editor_changed);
     g_object_set_data(G_OBJECT(settings_p->editor_box), "settings_p", settings_p);
     ////
-    hbox = rfm_hbox_new (FALSE, 6);
+    hbox = hbox_new (FALSE, 6);
     label = gtk_label_new (_(environ_v[RFM_ICONVIEW_COLOR].env_text));
     gtk_box_pack_start (GTK_BOX(hbox), label, FALSE, FALSE, 0);
     settings_p->iconviewcolor_button = gtk_color_button_new ();
@@ -2892,7 +2884,7 @@ context_run_rfm_settings_dialog (gpointer data) {
 	    GINT_TO_POINTER(RFM_ICONVIEW_COLOR));
     //g_object_set(G_OBJECT(settings_p->iconviewcolor_button),"show-editor", TRUE, NULL);
     if(gtk_widget_is_composited (settings_p->dialog)) {
-        hbox = rfm_hbox_new (FALSE, 6);
+        hbox = hbox_new (FALSE, 6);
         label = gtk_label_new (_(environ_v[RFM_TRANSPARENCY].env_text));
         gtk_box_pack_start (GTK_BOX(hbox), label, FALSE, FALSE, 0);
         double transparency=0.0;
@@ -2949,7 +2941,7 @@ context_run_rfm_settings_dialog (gpointer data) {
     }
 
    // desktop image selection
-    hbox = rfm_hbox_new (FALSE, 6);
+    hbox = hbox_new (FALSE, 6);
     gtk_box_pack_start (GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
     settings_p->desktopimage_button = make_file_chooser_button (RFM_DESKTOP_IMAGE, FALSE, hbox);
     g_object_set_data(G_OBJECT(settings_p->desktopimage_button), "settings_p", settings_p);
@@ -2965,7 +2957,7 @@ context_run_rfm_settings_dialog (gpointer data) {
 
 
     // desktop directory selection
-    hbox = rfm_hbox_new (FALSE, 6);
+    hbox = hbox_new (FALSE, 6);
     gtk_box_pack_start (GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
     label=gtk_label_new(_(environ_v[RFM_DESKTOP_DIR].env_text));
     settings_p->desktopdir_entry = gtk_entry_new();
@@ -2984,7 +2976,7 @@ context_run_rfm_settings_dialog (gpointer data) {
 
 
      ////
-    hbox = rfm_hbox_new (FALSE, 6);
+    hbox = hbox_new (FALSE, 6);
     label = gtk_label_new (_(environ_v[RFM_DESKTOP_COLOR].env_text));
     gtk_box_pack_start (GTK_BOX(hbox), label, FALSE, FALSE, 0);
     settings_p->desktopcolor_button = gtk_color_button_new ();
@@ -3005,7 +2997,7 @@ context_run_rfm_settings_dialog (gpointer data) {
 
     // spin buttons: margins
     for (i = RFM_DESKTOP_TOP_MARGIN; i <= RFM_DESKTOP_LEFT_MARGIN; i++){
-	hbox = rfm_hbox_new (FALSE, 6);
+	hbox = hbox_new (FALSE, 6);
 	label = gtk_label_new (_(environ_v[i].env_text));
 	gtk_box_pack_start (GTK_BOX(hbox), label, FALSE, FALSE, 0);
 	settings_p->desktop_margin_spinbutton[i-RFM_DESKTOP_TOP_MARGIN] =
@@ -3233,7 +3225,7 @@ options_dialog_f( void *data){
 
     GtkWidget *scrolled_window = gtk_scrolled_window_new(NULL, NULL);
     gtk_box_pack_start (GTK_BOX (box), scrolled_window, TRUE, TRUE, 0);
-    GtkWidget *vbox = rfm_vbox_new(FALSE,0);
+    GtkWidget *vbox = vbox_new(FALSE,0);
     
 	
     gtk_widget_set_size_request (settings_p->dialog, -1, 300);
@@ -3247,12 +3239,12 @@ options_dialog_f( void *data){
 
     // XXX create ok and cancel buttons 
 
-    GtkWidget *button = rfm_dialog_button ("xffm/stock_cancel", _("Cancel"));
+    GtkWidget *button = dialog_button ("xffm/stock_cancel", _("Cancel"));
     gtk_widget_show (button);
     gtk_dialog_add_action_widget (GTK_DIALOG (settings_p->dialog), button, GTK_RESPONSE_NO);
     g_object_set_data (G_OBJECT (settings_p->dialog), "action_false_button", button);
     
-    button = rfm_dialog_button ("xffm/stock_ok", _("Ok"));
+    button = dialog_button ("xffm/stock_ok", _("Ok"));
     gtk_widget_show (button);
     g_object_set_data (G_OBJECT (settings_p->dialog), "action_true_button", button);
     gtk_dialog_add_action_widget (GTK_DIALOG (settings_p->dialog), button, GTK_RESPONSE_YES);

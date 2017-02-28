@@ -2,23 +2,10 @@
  * script, as primary-environment.h.in file is processed on package construction.
  * You have been given fair warning. */
 
-#ifndef ENVIRONMENT_C_HPP
-#define ENVIRONMENT_C_HPP
-
-// These defines are set by configuration script when librfm is installed.
-@GNU_LS@
-@GNU_CP@
-@GNU_MV@
-@GNU_LN@
-@GNU_RM@
-@GNU_SHRED@
-
-typedef struct environ_t {
-    gchar *env_var;
-    gchar *env_string;
-    gchar *env_text;
-    gchar **env_options;
-} environ_t;
+// NOTE: run configure script *after* modifying environment_c.hpp.i file 
+//       for changes to take effect.
+//       environment_c.hpp file will be reconstructed on execution of
+//       configure script!
 
 /* increment version number for MCS_SHM_PLUGIN_FILE on configuration changes
  * (i.e. adding or removing configuration environment variables) */
@@ -29,6 +16,89 @@ typedef struct environ_t {
 // For rodent Core-unstable: build is 6203 (see files.h)
 // For rodent Core-rc1: build is 6214a (see files.h)
 // For rodent Core-rc3: build is 6335i (see files.h)
+
+#ifndef ENVIRONMENT_C_HPP
+#define ENVIRONMENT_C_HPP
+#include "xffm+.h"
+#include <glib.h>
+
+// These defines are set by configuration script when librfm is installed.
+@GNU_LS@
+@GNU_CP@
+@GNU_MV@
+@GNU_LN@
+@GNU_RM@
+@GNU_SHRED@
+
+////////////////////////////   Configuration files   /////////////////////////////////
+//
+
+#define DEFAULT_DESKTOP_DIR	USER_DIR,_("Desktop")
+#define USER_DIR 		g_get_home_dir()
+#define USER_PIXMAPS		g_get_user_config_dir(), "pixmaps"
+#define USER_RFM_DIR            g_get_user_config_dir(),"rfm"
+#define USER_RFM_CACHE_DIR      g_get_user_cache_dir(),"rfm"
+#define USER_DBH_DIR		USER_RFM_DIR,"dbh"
+#define USER_DBH_CACHE_DIR	USER_RFM_CACHE_DIR,"dbh"
+#define SYSTEM_MODULE_DIR	PACKAGE_DATA_DIR,"rfm","rmodules"
+#define RFM_THUMBNAIL_DIR 	USER_RFM_CACHE_DIR,"thumbnails"
+
+//
+// Environment configuration file (shared via MIT-shm)
+#define MCS_FILE_NAME		"rfm-"CONFIG_BUILD
+#define MCS_SHM_PLUGIN_FILE 	USER_RFM_DIR,MCS_FILE_NAME
+
+// Keybind customization file	
+#define KEYBINDINGS_FILE 	USER_RFM_DIR,"keybind-6224.xml"
+#define KEYBINDINGS_SCHEMA 	SYSTEM_MODULE_DIR,"keybind.xsd"
+
+typedef struct RfmProgramOptions{
+    const gchar *option;
+    const gchar *text;
+    gboolean sensitive;
+    const gchar **choices;
+    gint choice_id;
+}RfmProgramOptions;
+
+typedef struct environ_t {
+    const gchar *env_var;
+    gchar *env_string;
+    const gchar *env_text;
+    const gchar **env_options;
+} environ_t;
+
+// FIXME: set default values for environ_t with environ_default_t on initialization
+typedef struct environ_default_t {
+    const gchar *env_var;
+    const gchar *env_default;
+}environ_default_t;
+
+class environment_c {
+    public:
+        environment_c(void);
+        void *get_ls_options(void);
+        void *get_cp_options(void);
+        void *get_mv_options(void);
+        void *get_ln_options(void);
+        void *get_rm_options(void);
+        void *get_shred_options(void);
+
+        environ_t  *get_environ(void);
+        void set_gtk_thread(GThread *);
+        GThread *get_gtk_thread(void);
+        void rfm_init(void);
+        void rfm_init_env (void);
+        void rfm_setenv (const gchar *, gchar *, gboolean);
+        gchar *get_text_editor_envar(const gchar *);
+        
+    private:
+        gboolean is_number (gchar *);
+        gint get_max_threads(void);
+        GThread *gtk_thread;
+        void my_mkdir(gchar *);
+        const gchar *term_exec_option(const gchar *);
+};
+
 //
 //
 enum {
@@ -125,12 +195,5 @@ enum {
     RFM_OPTIONS
 };
 
-environ_t  *rfm_get_environ(void);
-rfm_global_t *rfm_global_new(void);
-rfm_global_t *rfm_global(void);
-
-void rfm_set_gtk_thread(GThread *thread);
-GThread *rfm_get_gtk_thread(void);
-void rfm_init(void);
 #endif
 
