@@ -1,5 +1,5 @@
 noinst_DATA = autogen.sh 
-SUBDIRS = po src  share
+SUBDIRS = po src modules share
 DIST_SUBDIRS = po src  share 
 
 ACLOCAL_AMFLAGS=-I m4

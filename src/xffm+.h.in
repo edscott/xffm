@@ -22,12 +22,12 @@ typedef struct pixbuf_t {
 } pixbuf_t;
 
 // These defines are set by configuration script when librfm is installed.
-#define GNU_LS 1
-#define GNU_CP 1
-#define GNU_MV 1
-#define GNU_LN 1
-#define GNU_RM 1
-#define GNU_SHRED 1
+@GNU_LS@
+@GNU_CP@
+@GNU_MV@
+@GNU_LN@
+@GNU_RM@
+@GNU_SHRED@
 
 typedef struct environ_t {
     gchar *env_var;

@@ -1,6 +1,6 @@
-/*  rfm_settings_dialog.c
+/*  settings_dialog.c
  *
- *  Copyright (C) 2003-2012 edscott wilson garcia <edscott@users.sf.net>
+ *  Copyright (C) 2003-2017 edscott wilson garcia <edscott@users.sf.net>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
 
 #define SETTINGS_MODULE_C
 
-#include "rodent.h"
+#include "xffm+.h"
 
 #include "settings-module.h"
 
@@ -31,7 +31,7 @@
 #endif
 
 // Change the channel when you change the Module directory...
-#define CHANNEL  RFM_MODULE_DIR
+#define CHANNEL  XFFM_MODULE_DIR
 
 #define BORDER 6
 #define SKIP BORDER

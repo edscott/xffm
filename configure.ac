@@ -1,23 +1,23 @@
 echo '************************ xffm.org ************************************'
 
-m4_define([rfm_major_version], [5])
-m4_define([rfm_minor_version], [3])
-m4_define([rfm_micro_version], [16])
-m4_define([rfm_nano_version], [3])
-m4_define([rfm_version],
-          [rfm_major_version.rfm_minor_version.rfm_micro_version.rfm_nano_version])
+m4_define([xffm_major_version], [5])
+m4_define([xffm_minor_version], [3])
+m4_define([xffm_micro_version], [16])
+m4_define([xffm_nano_version], [3])
+m4_define([xffm_version],
+          [xffm_major_version.xffm_minor_version.xffm_micro_version.xffm_nano_version])
           
 m4_define([libdbh_file_compatibility], ["DBH_2.0/64bit"])
-m4_define([rfm_package], [librfm5])
-m4_define([rfm_bugreport], [https://sourceforge.net/p/xffm/_list/tickets])
-m4_define([rfm_package_copyright], ["Copyright (c) 2000-2014 Edscott Wilson Garcia. <edscott@users.sf.net>"])
-m4_define([rfm_description],["Rodent utility primary library"]) 
-m4_define([rfm_homepage],["http://xffm.org/librfm"]) 
-m4_define([rfm_tarball],[rfm_package()-rfm_version().tar.gz]) 
+m4_define([xffm_package], [libxffm])
+m4_define([xffm_bugreport], [https://sourceforge.net/p/xffm/_list/tickets])
+m4_define([xffm_package_copyright], ["Copyright (c) 2000-2014 Edscott Wilson Garcia. <edscott@users.sf.net>"])
+m4_define([xffm_description],["Rodent utility primary library"]) 
+m4_define([xffm_homepage],["http://xffm.org/libxffm"]) 
+m4_define([xffm_tarball],[xffm_package()-xffm_version().tar.gz]) 
 # 
-m4_define([rfm_master_site],["http://sourceforge.net/projects/xffm/files/librfm"]) 
-m4_define([rfm_src_uri],[rfm_master_site()/rfm_version()/rfm_tarball()]) 
-m4_define([rfm_license],["  GNU General Public License version 3  "])
+m4_define([xffm_master_site],["http://sourceforge.net/projects/xffm/"]) 
+m4_define([xffm_src_uri],[xffm_master_site()/xffm_version()/xffm_tarball()]) 
+m4_define([xffm_license],["  GNU General Public License version 3  "])
 
 
 AC_PREREQ([2.63])
@@ -64,7 +64,7 @@ fi
 AC_DEFINE_UNQUOTED([PREFIX],["$ac_default_prefix"],[Installation prefix])
 AC_SUBST([PREFIX])
 
-MODULE_DIR="rfm/rmodules"
+MODULE_DIR="xffm/modules"
 AC_SUBST(MODULE_DIR)
 AC_MSG_NOTICE([Module directory: $MODULE_DIR])
 
@@ -83,11 +83,11 @@ else
     XFFM_MODULE_DIR="$libdir/$MODULE_DIR"
 fi
 fi
-echo "RFM_MODULE_DIR= $RFM_MODULE_DIR"
+echo "XFFM_MODULE_DIR= $XFFM_MODULE_DIR"
 echo "libdir  = $libdir"
 #echo "datadir  = $datadir"
 echo "exec_prefix = $exec_prefix"
-echo "RFM_MODULE_DIR = $RFM_MODULE_DIR"
+echo "XFFM_MODULE_DIR = $XFFM_MODULE_DIR"
 
 AC_MSG_NOTICE([---- You may download libtubo from http://sf.net/projects/xffm/files/libtubo ----])
 XDT_CHECK_PACKAGE([TUBO], [tubo], [5.0.13])
@@ -136,21 +136,21 @@ RFM_ENABLE_PLUGIN([ZMAGIC], [zmagic], [Zip image previews], [module (requires mi
 #RFM_CORE_ON
 RFM_MAX_PREVIEW_THREADS
 
-DESCRIPTION=rfm_description()
+DESCRIPTION=xffm_description()
 AC_SUBST([DESCRIPTION])
 AC_SUBST([HOMEPAGE])HOMEPAGE=http://xffm.org/
 AC_DEFINE_UNQUOTED([HOMEPAGE],[http://xffm.org/],[http://sf.net/projects/xffm])
 
-#SRC_URI=rfm_src_uri()
+#SRC_URI=xffm_src_uri()
 #AC_SUBST([SRC_URI])
-#LICENSE=rfm_license()
+#LICENSE=xffm_license()
 #AC_SUBST([LICENSE])
-#AC_DEFINE_UNQUOTED([LICENSE],[rfm_license],[rfm_license])
+#AC_DEFINE_UNQUOTED([LICENSE],[xffm_license],[xffm_license])
 
-#BUGMAIL=rfm_bugreport
+#BUGMAIL=xffm_bugreport
 #AC_SUBST([BUGMAIL])
-#AC_DEFINE_UNQUOTED([BUGMAIL],[rfm_bugreport],[send bug reports to])
-#MASTER_SITE=rfm_master_site()
+#AC_DEFINE_UNQUOTED([BUGMAIL],[xffm_bugreport],[send bug reports to])
+#MASTER_SITE=xffm_master_site()
 #AC_SUBST([MASTER_SITE])
 
 dnl Basic Checks
@@ -280,6 +280,8 @@ Makefile
 po/POTFILES
 po/Makefile.in
 src/Makefile
+src/xffm+.h
+modules/Makefile
 share/Makefile
 share/mime/Makefile
 share/icons/Makefile
