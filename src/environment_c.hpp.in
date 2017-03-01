@@ -84,15 +84,16 @@ class environment_c {
         void *get_shred_options(void);
 
         environ_t  *get_environ(void);
-        void set_gtk_thread(GThread *);
         GThread *get_gtk_thread(void);
-        void rfm_init(void);
-        void rfm_init_env (void);
+        void init(void);
         void rfm_setenv (const gchar *, gchar *, gboolean);
         gchar *get_text_editor_envar(const gchar *);
         
     private:
-        gboolean is_number (gchar *);
+        void set_gtk_thread(GThread *);
+	void create_directories(void);
+	void set_defaults(void);
+	gboolean is_number (gchar *);
         gint get_max_threads(void);
         GThread *gtk_thread;
         void my_mkdir(gchar *);

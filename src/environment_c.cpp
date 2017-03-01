@@ -6,36 +6,66 @@
 #include <string.h>
 
 environment_c::environment_c(void){
-        gtk_thread=NULL;
-}
-    
-
-void
-environment_c::rfm_init_env (void) {
-    gint i;
-    static gsize initialized = 0;
-    if (g_once_init_enter (&initialized)){
-      environ_t *environ_v = get_environ();
-      // XXX: This initialization may now be obsolete:
-      //      must check.
-      for(i = 0; environ_v[i].env_var; i++) {
-        // copy default values from static memory to heap
-        if(strcmp (environ_v[i].env_var, "SUDO_ASKPASS") == 0 ||
-	    strcmp(environ_v[i].env_var, "SSH_ASKPASS") == 0 ) {
-            environ_v[i].env_string = g_find_program_in_path ("rodent-getpass");
-	} 
-	else if(environ_v[i].env_string) {
-            environ_v[i].env_string = g_strdup (environ_v[i].env_string);
-            NOOP ("ENV: %s %s\n", environ_v[i].env_var, environ_v[i].env_string);
-        }
-      }
-      g_once_init_leave (&initialized, 1);
-    }
+    set_gtk_thread(g_thread_self());
+    create_directories();
+    set_defaults();
     return;
 }
+void
+environment_c::create_directories(void){
+    my_mkdir(g_build_filename (DEFAULT_DESKTOP_DIR, NULL));
+    my_mkdir(g_build_filename (USER_PIXMAPS, NULL));
+    my_mkdir(g_build_filename (USER_RFM_DIR, NULL));
+    my_mkdir(g_build_filename (USER_RFM_CACHE_DIR, NULL));
+    my_mkdir(g_build_filename (USER_DBH_DIR, NULL));
+    my_mkdir(g_build_filename (USER_DBH_CACHE_DIR, NULL));
+    my_mkdir(g_build_filename (RFM_THUMBNAIL_DIR, NULL));
+}
+
+void
+environment_c::set_defaults(void){
+    gint i;
+    environ_default_t *environ_default_v = get_default_environ();
+    GHashTable hash = g_hash_table_new(g_str_hash, g_str_equal);
+    for(i = 0; environ_default_t[i].env_var; i++) {
+	g_hash_table_replace(hash, 
+		(void *)environ_default_t[i].env_var,
+		(void *)environ_default_t[i].env_default);
+    }
+    environ_t *environ_v = get_environ();
+    for(i = 0; environ_v[i].env_var; i++) {
+        // copy default values 
+        gchar *default_value = g_hashtable_lookup(hash,environ_v[i].env_var);
+        if (!default_value){
+	    environ_v[i].env_string = g_strdup ("");
+	    continue;
+	}
+           
+	if(strcmp (environ_v[i].env_var, "SUDO_ASKPASS") == 0 ||
+	    strcmp(environ_v[i].env_var, "SSH_ASKPASS") == 0 ) {
+	    // this dups or returns nil
+            if (g_path_is_absolute(default_value)){
+		if (g_file_test(default_value, G_FILE_TEST_EXISTS)){
+		    environ_v[i].env_string = g_strdup (default_value);
+		} else {
+		    gchar *basename = g_file_get_basename(default_value);
+		    default_value = g_find_program_in_path (basename);
+		    g_free(basename);
+		}
+	    } else {
+		default_value = g_find_program_in_path (default_value);
+		if (default_value) environ_v[i].env_string = default_value;
+	    }
+	} else {
+	    environ_v[i].env_string = g_strdup (default_value);
+            NOOP ("ENV: %s %s\n", environ_v[i].env_var, environ_v[i].env_string);
+        }
+    }
+    g_hash_table_destroy(hash);
+}
 
 
-
+// f
 void
 environment_c::rfm_setenv (const gchar *name, gchar *value, gboolean verbose) {
     rfm_init_env();
@@ -283,25 +313,6 @@ void
 environment_c::my_mkdir(gchar *data){
     g_mkdir_with_parents (data, 0700);
     g_free(data);
-}
-
-void 
-environment_c::rfm_init(void){
-#ifdef ENABLE_NLS
-    /* this binds rfm domain: */
-    bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
-# ifdef HAVE_BIND_TEXTDOMAIN_CODESET
-    bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-# endif
-#endif
-    set_gtk_thread(g_thread_self());
-    my_mkdir(g_build_filename (DEFAULT_DESKTOP_DIR, NULL));
-    my_mkdir(g_build_filename (USER_PIXMAPS, NULL));
-    my_mkdir(g_build_filename (USER_RFM_DIR, NULL));
-    my_mkdir(g_build_filename (USER_RFM_CACHE_DIR, NULL));
-    my_mkdir(g_build_filename (USER_DBH_DIR, NULL));
-    my_mkdir(g_build_filename (USER_DBH_CACHE_DIR, NULL));
-    my_mkdir(g_build_filename (RFM_THUMBNAIL_DIR, NULL));
 }
 
 // FIXME: use vector template down here and below
