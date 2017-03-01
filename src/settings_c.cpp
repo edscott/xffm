@@ -44,7 +44,7 @@ enum {
     NUM_COLUMNS
 };
 
-typedef struct settings_t{
+typedef struct settings_t {
     widgets_t *widgets_p;
     GtkWidget *desktop_margin_spinbutton[4];
     GtkWidget *desktopcolor_button;
@@ -67,14 +67,46 @@ typedef struct settings_t{
     gboolean stable_deskdir; // XXX gtk+ bug workaround: see file_set()
 }settings_t;
     
-static GtkWidget *settings_dialog=NULL;
-static gint shm_settings_serial = 0;
-static gint settings_timer = 0;
 
 /********************************************************/
 /********************************************************/
+settings_c::~settings_c(void){
+    mcs_shm_stop();
+    
+}
+
 settings_c::settings_c(data_c *data): gtk_c(data){
-    ;
+    settings_dialog=NULL;
+    shm_settings_serial = 0;
+    settings_timer = 0;
+
+    mcs_manager = NULL;
+    mp = NULL;
+    running=FALSE;
+
+        NOOP (stderr, "g_module_check_init(settings module): setting environment...\n");
+    int i;
+    environ_t *environ_v = rfm_get_environ();
+    for(i = 0; i < RFM_OPTIONS; i++) {
+	NOOP(stderr, "g_module_check_init():%d/%d  %s <-> %s <-> %s\n", i+1, RFM_OPTIONS, environ_v[i].env_var, environ_v[i].env_string, environ_v[i].env_text);
+
+	rfm_options[i].name = environ_v[i].env_var;
+	if(environ_v[i].env_string){
+	    rfm_options[i].value = g_strdup (environ_v[i].env_string);
+	} else {
+	    if (i==RFM_DESKTOP_DIR) {
+		rfm_options[i].value = NULL;
+		//rfm_options[i].value = g_build_filename (DEFAULT_DESKTOP_DIR, NULL);
+	    } else {	
+		rfm_options[i].value = g_strdup("");
+	    }
+	}
+	COMMENT(stderr, "g_module_check_init:  %s->%s\n", rfm_options[i].name, rfm_options[i].value);
+	// Done elsewhere:
+	// rfm_setenv(rfm_options[i].name, rfm_options[i].value, FALSE);
+    }
+    mcs_shm_start ();
+
 }
 
 
@@ -83,77 +115,39 @@ settings_c::settings_c(data_c *data): gtk_c(data){
 /********************************************************/
 
 
-
-static McsManager *mcs_manager = NULL;
-static McsPlugin *mp = NULL;
-
-void *localhost_check(void);
 void *run_rfm_settings_dialog (void);
 #include "settings-module.i"
 //  
 //
 
- 
-G_MODULE_EXPORT void *
-module_active (void){
-    return GINT_TO_POINTER(1);
-}
 
-
-G_MODULE_EXPORT
-void *
-localhost_check(void){
-    gboolean auto_valid=FALSE;
-    const gchar *display_env = getenv("DISPLAY");
-    if (display_env){
-	if (strncmp(display_env, ":0",strlen(":0"))==0) auto_valid=TRUE;
-	else if (strncmp(display_env, "127.0.0.1:", strlen("127.0.0.1:"))==0)
-	    auto_valid=TRUE;
-	else if (strncmp(display_env, "localhost:", strlen("localhost:"))==0) 
-	    auto_valid=TRUE;
-	else {
-	    gchar *g=g_strconcat(g_get_host_name(), ":", NULL);
-	    if (strncmp(display_env, g, strlen(g))==0) auto_valid=TRUE;
-	    g_free(g);
-	}
-    }
-    NOOP("localhost_check(): %d DISPLAY=%s\n", 
-	    auto_valid, display_env);
-    return GINT_TO_POINTER(auto_valid);
-}
-
-G_MODULE_EXPORT 
-void *
-run_rfm_settings_dialog (void){
+gboolean
+settings_c::run_settings_dialog (void){
     // only one should be allowed at a time (for the time being)
     if (settings_dialog) {
 	gtk_window_deiconify (GTK_WINDOW(settings_dialog));
 	gtk_window_stick (GTK_WINDOW(settings_dialog));     
 	gtk_window_set_keep_above  (GTK_WINDOW(settings_dialog), TRUE);
-	return NULL;
+	return FALSE;
     }
-    settings_t *settings_p=(settings_t *)malloc(sizeof(settings_t));
-    if (!settings_p) g_error("malloc: %s", strerror(errno));
-    memset(settings_p, 0, sizeof(settings_t));
-    rfm_context_function(context_run_rfm_settings_dialog, settings_p);
-    //rfm_view_thread_create(NULL, thread_run_rfm_settings_dialog, settings_p, "thread_run_rfm_settings_dialog");
-    return GINT_TO_POINTER(1);
+    settings_t *settings_p=(settings_t *)calloc(1, sizeof(settings_t));
+    if (!settings_p) g_error("cmalloc: %s", strerror(errno));
+    context_function(context_run_rfm_settings_dialog, settings_p);
+    return TRUE;
 }
 
-G_MODULE_EXPORT 
-void *
-mcs_set_var (const gchar * setting_name, const gchar * setting_value) {
-    if (!running) return NULL;
+gboolean
+settings_c::mcs_set_var (const gchar * setting_name, const gchar * setting_value) {
+    if (!running) return FALSE;
     NOOP ("mcs_set_var(): %s -> %s\n", setting_name, setting_value);
     mcs_manager_set_string (mcs_manager, setting_name, CHANNEL, setting_value);
     mcs_manager_notify (mcs_manager, CHANNEL);
-    return GINT_TO_POINTER (1);
+    return TRUE;
 }
 
-G_MODULE_EXPORT 
-void *
-mcs_shm_stop (void) {
-    if (!running) return NULL;
+gboolean
+settings_c::mcs_shm_stop (void) {
+    if (!running) return FALSE;
     NOOP ("mcs_shm_stop().\n");
     if(mp) {
 	g_free(mp->manager);
@@ -163,36 +157,31 @@ mcs_shm_stop (void) {
         munmap (mp->m, sizeof (mcs_shm_t));
 	g_free(mp);
     }
-    gint i; for(i = 0; i < RFM_OPTIONS; i++) {
+    /*gint i; for(i = 0; i < RFM_OPTIONS; i++) {
 	g_free (rfm_options[i].value);
-    }
+    }*/
+
     shm_settings_serial = -1;
-    return GINT_TO_POINTER (1);
+    return TRUE;
 }
 
-G_MODULE_EXPORT 
-void *
-mcs_shm_start (void) {
+ 
+gboolean
+settings_c::mcs_shm_start (void) {
     TRACE("mcs_shm_start().\n");
     if(!mp) {
         gint i;
         COMMENT(stderr, "starting instance of mcs-shm\n");
-        mp = (McsPlugin *) malloc (sizeof (McsPlugin));
-	if (!mp) g_error("malloc: %s", strerror(errno));
-        memset (mp, 0, sizeof (McsPlugin));
-        mp->manager = (McsManager *) malloc (sizeof (McsManager));
-	if (!mp->manager) g_error("malloc: %s", strerror(errno));
-        memset (mp->manager, 0, sizeof (McsManager));
+        mp = (McsPlugin *) calloc (1,sizeof (McsPlugin));
+	if (!mp) g_error("calloc: %s", strerror(errno));
+        mp->manager = (McsManager *) calloc (1, sizeof (McsManager));
+	if (!mp->manager) g_error("calloc: %s", strerror(errno));
         mcs_manager = mp->manager;
 	mp->shm_settings_file =  g_strdup_printf ("/%d-%s", 
 		(gint)getuid (), MCS_FILE_NAME);
         mp->plugin_name = g_strdup (CHANNEL);
-        mp->caption = g_strdup_printf ("<b><big>%s\nRodent %s</big>\n(<i>librfm-%s</i>)</b>",
+        mp->caption = g_strdup_printf ("<b><big>%s\nXffm+ %s</big>\n(<i>%s</i>)</b>",
 		 _("Personal settings"), TAG, VERSION);
-        //mp->run_dialog = run_rfm_settings_dialog;
-	//
-	// This will start the icon module, if present.
-	//
 
         COMMENT(stderr, "shm_open %s\n", mp->shm_settings_file);
         mp->shm = shm_open (mp->shm_settings_file, O_RDWR, 0700);
@@ -273,45 +262,9 @@ mcs_shm_start (void) {
     return mp;
 }
 
-G_MODULE_EXPORT 
-const gchar *
-g_module_check_init (GModule * module) {
-    NOOP (stderr, "g_module_check_init(settings module): setting environment...\n");
-    int i;
-    environ_t *environ_v = rfm_get_environ();
-    for(i = 0; i < RFM_OPTIONS; i++) {
-	NOOP(stderr, "g_module_check_init():%d/%d  %s <-> %s <-> %s\n", i+1, RFM_OPTIONS, environ_v[i].env_var, environ_v[i].env_string, environ_v[i].env_text);
-
-	rfm_options[i].name = environ_v[i].env_var;
-	if(environ_v[i].env_string){
-	    rfm_options[i].value = g_strdup (environ_v[i].env_string);
-	} else {
-	    if (i==RFM_DESKTOP_DIR) {
-		rfm_options[i].value = NULL;
-		//rfm_options[i].value = g_build_filename (DEFAULT_DESKTOP_DIR, NULL);
-	    } else {	
-		rfm_options[i].value = g_strdup("");
-	    }
-	}
-	COMMENT(stderr, "g_module_check_init:  %s->%s\n", rfm_options[i].name, rfm_options[i].value);
-	// Done elsewhere:
-	// rfm_setenv(rfm_options[i].name, rfm_options[i].value, FALSE);
-    }
-    mcs_shm_start ();
-    return NULL;
-}
-G_MODULE_EXPORT void 
-g_module_unload(GModule * module){
-    mcs_shm_stop();
-}
-G_MODULE_EXPORT void *
-module_load(void){
-    return GINT_TO_POINTER(1);
-}
     
-G_MODULE_EXPORT
-void *
-options_dialog(widgets_t *widgets_p,  const gchar *flag_id){
+gboolean
+settings_c::options_dialog(const gchar *flag_id){
     if (!flag_id) return NULL;
     const gchar *command;
     if (strcmp(flag_id, "RFM_CP_FLAGS")==0) command = "cp";
@@ -322,7 +275,7 @@ options_dialog(widgets_t *widgets_p,  const gchar *flag_id){
     else if (strcmp(flag_id, "RFM_SHRED_FLAGS")==0) command = "shred";
     else {
 	DBG("options_dialog(): flag %s not recognized\n", flag_id);
-	return NULL;
+	return FALSE;
     }
     const gchar *sflag = getenv(flag_id);
     if (sflag && strlen(sflag)){
@@ -331,17 +284,17 @@ options_dialog(widgets_t *widgets_p,  const gchar *flag_id){
 	flag = strtoll(sflag, NULL, 0);
 	if (errno) {
 	    DBG("options_dialog(): %s\n", strerror(errno));
-	    return NULL;
+	    return FALSE;
 	}
-	if (!(0x01 & flag)) return GINT_TO_POINTER(TRUE);
+	if (!(0x01 & flag)) return TRUE;
     } else {
 	DBG("options_dialog(): cannot get %s from the environment\n", flag_id);
-	return NULL;
+	return FALSE;
     }    
 
-    void **arg[]={(void *)widgets_p, (void *)command};
-    void *retval = rfm_context_function(options_dialog_f, (void *)arg);
-    return  retval; 
+    void **arg[]={(void *)command};
+    void *retval = context_function(options_dialog_f, (void *)arg);
+    return  TRUE; 
 }
 
     
@@ -372,12 +325,7 @@ options_dialog(widgets_t *widgets_p,  const gchar *flag_id){
  * License along with this library;  
  */
 
-void *get_ls_options(void);
-void *get_cp_options(void);
-void *get_mv_options(void);
-void *get_ln_options(void);
-void *get_rm_options(void);
-void *get_shred_options(void);
+
  
 
 #include "xmltree.h"
@@ -610,10 +558,6 @@ mcs_shm_init (void) {
 
 static void
 start_desktop (gboolean on) {
-    // Automatic on/off is only applicable for local displays.
-    if (!localhost_check()) {
-	return;
-    }
 
     Window xid;
     GError *error = NULL;
@@ -2916,29 +2860,7 @@ context_run_rfm_settings_dialog (gpointer data) {
     vbox = create_tab (notebook, _("Desktop"),  tab_text);
     g_free(tab_text);
 
-    for(i = RFM_ENABLE_DESKTOP; i <= RFM_NAVIGATE_DESKTOP; i++) {
-	gchar *text;
-	if (i == RFM_NAVIGATE_DESKTOP) {
-	    text = g_strdup_printf("%s (%s)", 
-		_(environ_v[i].env_text), _("Allow"));
-	} else if (i == RFM_ENABLE_DESKTOP) {
-	    text = g_strdup_printf("%s (%s)", 
-		_(environ_v[i].env_text), _("localhost"));
-	} else {
-	    text = g_strdup(_(environ_v[i].env_text));
-	}
-	toggle_button[i] = 
-		gtk_check_button_new_with_label (text);
-	g_free(text);
-	
-	g_object_set_data(G_OBJECT(toggle_button[i]), "settings_p", settings_p);
-        g_signal_connect (toggle_button[i], 
-		"toggled", G_CALLBACK (option_toggled), GINT_TO_POINTER(i));
-        gtk_box_pack_start (GTK_BOX(vbox), toggle_button[i], FALSE, FALSE, 0);
-	if (i==RFM_ENABLE_DESKTOP && !localhost_check()){
-	    gtk_widget_set_sensitive(toggle_button[i], FALSE);
-	}
-    }
+
 
    // desktop image selection
     hbox = hbox_new (FALSE, 6);
@@ -3170,8 +3092,7 @@ static
 void *
 options_dialog_f( void *data){
     void **arg = data;
-    widgets_t *widgets_p = arg[0];
-    const gchar *command = arg[1];
+    const gchar *command = arg[0];
     if (!command) return NULL;
     settings_t *settings_p=(settings_t *)malloc(sizeof(settings_t));
     if (!settings_p) g_error("malloc: %s", strerror(errno));
@@ -3249,19 +3170,8 @@ options_dialog_f( void *data){
     g_object_set_data (G_OBJECT (settings_p->dialog), "action_true_button", button);
     gtk_dialog_add_action_widget (GTK_DIALOG (settings_p->dialog), button, GTK_RESPONSE_YES);
 
-    if(widgets_p) {
-	view_t *view_p=widgets_p->view_p;
-        if(view_p && view_p->flags.type == DESKVIEW_TYPE) {
-	    gtk_window_set_keep_above (GTK_WINDOW(settings_p->dialog), TRUE);
-	    gtk_window_stick (GTK_WINDOW(settings_p->dialog));
-	} else {   
-            rfm_global_t *rfm_global_p = rfm_global();
-            gtk_window_set_modal (GTK_WINDOW (settings_p->dialog), TRUE);
-            if(rfm_global_p) gtk_window_set_transient_for (GTK_WINDOW (settings_p->dialog), GTK_WINDOW (rfm_global_p->window));
-        } 
-    } else {
+
 	gtk_window_set_modal (GTK_WINDOW (settings_p->dialog), TRUE);
-    }
     
     gtk_widget_show_all(settings_p->dialog);
 

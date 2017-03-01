@@ -20,7 +20,6 @@ bin_PROGRAMS = xffm
 
 xffm_SOURCES = \
 	  data_c.cpp \
-	    environment_c.cpp \
 	  main.cpp \
 	  utility_c.cpp \
           run_button_c.cpp \

@@ -280,7 +280,6 @@ Makefile
 po/POTFILES
 po/Makefile.in
 src/Makefile
-src/environment_c.hpp
 share/Makefile
 share/mime/Makefile
 share/icons/Makefile

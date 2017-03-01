@@ -5,6 +5,10 @@
 #include <errno.h>
 #include <string.h>
 
+environment_c::~environment_c(void){
+    g_hash_table_destroy(environ_hash);
+}
+
 environment_c::environment_c(void){
     set_gtk_thread(g_thread_self());
     create_directories();
@@ -21,73 +25,88 @@ environment_c::create_directories(void){
     my_mkdir(g_build_filename (USER_DBH_CACHE_DIR, NULL));
     my_mkdir(g_build_filename (RFM_THUMBNAIL_DIR, NULL));
 }
+       
+const gchar *
+environment_c::get_envar_value(const gchar *data){
+    environ_t *e = (environ_t *)g_hash_table_lookup(environ_hash, data);
+    if (e) return (const gchar *)(e->env_string);
+    return NULL;
+}
+       
+gboolean
+environment_c::set_envar_value(const gchar *data, const gchar *data1){
+    environ_t *e = (environ_t *)g_hash_table_lookup(environ_hash, data);
+    if (e) {
+        if (!check_envar_value(data, data1)){
+            fprintf(stderr, "invalid value for %s (%s)\n", data, data1);
+            return FALSE;
+        }
+        g_free(e->env_string);
+        e->env_string = data1?g_strdup(data1):g_strdup("");
+        return TRUE;
+    }
+    return FALSE;
+}
+
+gboolean
+environment_c::apply_envar_value(const gchar *name){
+    environ_t *e = (environ_t *)g_hash_table_lookup(environ_hash, name);
+    if (e){
+        if (!strlen(e->env_string)){
+            // unset
+#ifdef HAVE_UNSETENV
+            unsetenv (name);
+#else
+            gchar *s = g_strconcat (name, "=", NULL);
+            putenv (s);
+#endif
+        } else {
+#ifdef HAVE_SETENV
+            setenv (name, e->env_string, 1);
+#else
+            gchar *s = g_strconcat (name, "=", value, NULL);
+            putenv (s);
+#endif
+        }
+        return TRUE;
+        
+    }
+    return FALSE;
+}
+
 
 void
 environment_c::set_defaults(void){
     gint i;
-    environ_default_t *environ_default_v = get_default_environ();
-    GHashTable hash = g_hash_table_new(g_str_hash, g_str_equal);
-    for(i = 0; environ_default_t[i].env_var; i++) {
-	g_hash_table_replace(hash, 
-		(void *)environ_default_t[i].env_var,
-		(void *)environ_default_t[i].env_default);
+    // create hash table for environ items
+    environ_hash = g_hash_table_new(g_str_hash, g_str_equal);
+    environ_t *e = get_environ();
+    for(i = 0; e[i].env_var; i++) {
+        g_hash_table_replace(environ_hash, (void *)(e[i].env_var), (void *)(e+i));   
     }
-    environ_t *environ_v = get_environ();
-    for(i = 0; environ_v[i].env_var; i++) {
-        // copy default values 
-        gchar *default_value = g_hashtable_lookup(hash,environ_v[i].env_var);
-        if (!default_value){
-	    environ_v[i].env_string = g_strdup ("");
-	    continue;
-	}
-           
-	if(strcmp (environ_v[i].env_var, "SUDO_ASKPASS") == 0 ||
-	    strcmp(environ_v[i].env_var, "SSH_ASKPASS") == 0 ) {
-	    // this dups or returns nil
-            if (g_path_is_absolute(default_value)){
-		if (g_file_test(default_value, G_FILE_TEST_EXISTS)){
-		    environ_v[i].env_string = g_strdup (default_value);
-		} else {
-		    gchar *basename = g_file_get_basename(default_value);
-		    default_value = g_find_program_in_path (basename);
-		    g_free(basename);
-		}
-	    } else {
-		default_value = g_find_program_in_path (default_value);
-		if (default_value) environ_v[i].env_string = default_value;
-	    }
-	} else {
-	    environ_v[i].env_string = g_strdup (default_value);
-            NOOP ("ENV: %s %s\n", environ_v[i].env_var, environ_v[i].env_string);
+
+    // now that that is done, we place the program default values
+
+    environ_default_t *d = get_environ_default();
+
+    for(i = 0; d[i].env_var; i++) {
+        e = (environ_t *)g_hash_table_lookup(environ_hash, d[i].env_var);
+        if (e){
+            // copy default values 
+            e->env_string = g_strdup(d[i].env_default);
+        }
+        else {
+            e->env_string = g_strdup("");
         }
     }
-    g_hash_table_destroy(hash);
 }
 
-
 // f
-void
-environment_c::rfm_setenv (const gchar *name, gchar *value, gboolean verbose) {
-    rfm_init_env();
-    NOOP(stderr, "setting %s to %s\n", name, value);
-    gint which;
-    gboolean go_ahead = FALSE;
-    environ_t *environ_v = get_environ();
-    for(which = 0; environ_v[which].env_var; which++){
-        if(strcmp (name, environ_v[which].env_var) == 0){
-            break;
-	}
-    }
-    if(!environ_v[which].env_var) return;
-    if(!value || !strlen (value)) {
-        g_free (environ_v[which].env_string);
-#ifdef HAVE_UNSETENV
-        environ_v[which].env_string = NULL;
-        unsetenv (name);
-#else
-        environ_v[which].env_string = g_strconcat (name, "=", NULL);
-        putenv (environ_v[which].env_string);
-#endif
+gboolean
+environment_c::check_envar_value (const gchar *name, const gchar *value) {
+    environ_t *e = (environ_t *)g_hash_table_lookup(environ_hash, name);
+    if (!e) return FALSE;
+    
         /*if(verbose) {
             if(strcmp (name, "SMB_USER") == 0) {
                 TRACE("Mcs manager changed rfm environment: %s\n", name);
@@ -95,63 +114,47 @@ environment_c::rfm_setenv (const gchar *name, gchar *value, gboolean verbose) {
                 TRACE("Mcs manager changed rfm environment: %s=%s\n", name, ((value) ? value : " "));
             }
         }*/
-        return;
-    }
+    
     if(strcmp (name, "RFM_MAX_PREVIEW_SIZE") == 0) {
-        if(is_number (value))
-            go_ahead = TRUE;
-    } else if(strcmp (name, "TERMCMD") == 0) {
+        if(is_number (value)) return TRUE;
+        fprintf(stderr, "RFM_MAX_PREVIEW_SIZE value is not a number (%s)\n", value);
+        return FALSE;
+    } 
+    if(strcmp (name, "TERMCMD") == 0) {
         if(value && strlen (value)) {
             gchar *c;
             gchar *t = g_strdup (value);
             t = g_strstrip (t);
-            if(strchr (t, ' '))
-                t = strtok (t, " ");
+            if(strchr (t, ' '))  t = strtok (t, " ");
             c = g_find_program_in_path (t);
             if(c && access (c, X_OK) == 0) {
-                go_ahead = TRUE;
+                g_free(c);
+                g_free(t);
+                return TRUE;
             }
             g_free (c);
-            c = NULL;
             g_free (t);
-            t = NULL;
+            fprintf(stderr, "TERMCMD (%s) is not executable\n", value);
+            return FALSE;
         }
-    } else
-        go_ahead = TRUE;
-    if(go_ahead) {
-        g_free (environ_v[which].env_string);
-	gchar *getpass = NULL;
-	gchar *editor = NULL;
-	if (strcmp (name, "EDITOR") == 0){
-	    editor = get_text_editor_envar(value);
-	    NOOP(stderr, "Setting text editor to %s\n", editor);
-	}
-	if (editor){
-	    value = editor;
-	} else {
-	    if (strcmp (name, "SUDO_ASKPASS") == 0 ||
-		strcmp(name, "SSH_ASKPASS") == 0 ){
-		if (!g_file_test(value, G_FILE_TEST_EXISTS)){
-		    getpass = g_find_program_in_path ("rodent-getpass");
-		}
-	    }
-	}
-	if (getpass) value = getpass;
-
-
-	NOOP(stderr, "rfm_setenv(): setting %s -> %s \n", name, value);
-#ifdef HAVE_SETENV
-        environ_v[which].env_string = g_strdup (value);
-        setenv (name, environ_v[which].env_string, 1);
-#else
-        environ_v[which].env_string = g_strconcat (name, "=", value, NULL);
-        putenv (environ_v[which].env_string);
-#endif
-	g_free(editor);
-    } else {                    /* not go_ahead */
-        DBG ("failed to change rfm environment: %s\n", name);
+        return TRUE;
+    } 
+    if (strcmp (name, "SUDO_ASKPASS") == 0 ||
+            strcmp(name, "SSH_ASKPASS") == 0 ||
+            strcmp(name, "EDITOR") == 0 )
+    {
+        if (g_file_test(value, G_FILE_TEST_EXISTS)){
+            return TRUE;
+        }
+        gchar *g = g_find_program_in_path (value);
+        if (g) {
+            g_free(g);
+            return TRUE;
+        }
+        return FALSE;
     }
-    return;
+
+    return TRUE;
 }
 
 // This function gets static information. Better would be to get the
@@ -205,8 +208,8 @@ environment_c::get_max_threads(void){
 }
 
 gboolean
-environment_c::is_number (char *p) {
-    char *c = p;
+environment_c::is_number (const gchar *p) {
+    const gchar *c = p;
     if(!c || !strlen (c))
         return FALSE;
     for(; *c; c++) {
@@ -217,7 +220,6 @@ environment_c::is_number (char *p) {
 }
 static const gchar *terminals_v[] = {
 	"roxterm", 
-	"sakura",
 	"gnome-terminal", 
 	"Eterm", 
 	"konsole", 
@@ -258,6 +260,7 @@ environment_c::term_exec_option(const gchar *terminal) {
     return exec_option;
 }
 
+/*
 gchar * 
 environment_c::get_text_editor_envar(const gchar *value){
     if(!value) return NULL;
@@ -297,7 +300,7 @@ environment_c::get_text_editor_envar(const gchar *value){
     }
     return (editor);
 }
-
+*/
 
 void 
 environment_c::set_gtk_thread(GThread *data){
@@ -349,7 +352,7 @@ static RfmProgramOptions ls_options[]={
     // 0x040
     {"-H",N_("-H, --dereference-command-line\nfollow symbolic links listed on the command line"),TRUE,NULL},
     // 0x080
-    {"-I",N_("-I, --ignore=PATTERN       do not list implied entries matching shell PATTERN"),TRUE,GINT_TO_POINTER(-1),RFM_LS_ignore},
+    {"-I",N_("-I, --ignore=PATTERN       do not list implied entries matching shell PATTERN"),TRUE,(const gchar **)GINT_TO_POINTER(-1),RFM_LS_ignore},
     // 0x0100
     {"-L",N_("-L, --dereference          when showing file information for a symbolic\nlink, show information for the file the link\nreferences rather than for the link itself"),TRUE,NULL},
     // 0x0200
@@ -361,7 +364,7 @@ static RfmProgramOptions ls_options[]={
     // 0x01000
     {"-S",N_("-S                         sort by file size"),TRUE,NULL},
     // 0x02000
-    {"-T",N_("-T, --tabsize=COLS         assume tab stops at each COLS instead of 8"),TRUE,GINT_TO_POINTER(-1),RFM_LS_tabsize},
+    {"-T",N_("-T, --tabsize=COLS         assume tab stops at each COLS instead of 8"),TRUE,(const gchar **)GINT_TO_POINTER(-1),RFM_LS_tabsize},
     // 0x04000
     {"-U",N_("-U                         do not sort; list entries in directory order"),TRUE,NULL},
     // 0x08000
@@ -375,7 +378,7 @@ static RfmProgramOptions ls_options[]={
     // 0x080000
     {"-b",N_("-b, --escape               print C-style escapes for nongraphic characters"),TRUE,NULL},
     // 0x0
-    {"--block-size","--block-size=SIZE      scale sizes by SIZE before printing them.  E.g.,\n'--block-size=M' prints sizes in units of\n1,048,576 bytes.  See SIZE format below.",TRUE,GINT_TO_POINTER(-1),RFM_LS_blocksize},
+    {"--block-size","--block-size=SIZE      scale sizes by SIZE before printing them.  E.g.,\n'--block-size=M' prints sizes in units of\n1,048,576 bytes.  See SIZE format below.",TRUE,(const gchar **)GINT_TO_POINTER(-1),RFM_LS_blocksize},
     // 0x0100000
     {"-c",N_("-c                         with -lt: sort by, and show, ctime (time of last\nmodification of file status information)\nwith -l: show ctime and sort by name\notherwise: sort by ctime, newest first"),TRUE,NULL},
     // 0x0200000
@@ -401,7 +404,7 @@ static RfmProgramOptions ls_options[]={
     // 0x080000000
     {"--dereference-command-line-symlink-to-dir",N_("--dereference-command-line-symlink-to-dir\nfollow each command line symbolic link\nthat points to a directory"),TRUE,NULL},
     // 0x0100000000
-    {"--hide",N_("--hide=PATTERN         do not list implied entries matching shell PATTERN\n(overridden by -a or -A)"),TRUE, GINT_TO_POINTER(-1),RFM_LS_hide},
+    {"--hide",N_("--hide=PATTERN         do not list implied entries matching shell PATTERN\n(overridden by -a or -A)"),TRUE, (const gchar **)GINT_TO_POINTER(-1),RFM_LS_hide},
     // 0x0200000000
     {"--indicator-style",N_("--indicator-style=WORD  append indicator with style WORD to entry names:\nnone (default), slash (-p),\nfile-type (--file-type), classify (-F)"),TRUE,ls_istyle,RFM_LS_istyle},
     // 0x0400000000
@@ -441,7 +444,7 @@ static RfmProgramOptions ls_options[]={
     // 0x08000000000000
     {"-v",N_("-v                         natural sort of (version) numbers within text"),TRUE,NULL},
     // 0x010000000000000
-    {"-w",N_("-w, --width=COLS           assume screen width instead of current value"),TRUE,GINT_TO_POINTER(-1),RFM_LS_width},
+    {"-w",N_("-w, --width=COLS           assume screen width instead of current value"),TRUE,(const gchar **)GINT_TO_POINTER(-1),RFM_LS_width},
     // 0x020000000000000
     {"-x",N_("-x                         list entries by lines instead of by columns"),TRUE,NULL},
     // 0x040000000000000
@@ -975,7 +978,11 @@ static environ_t environ_v[RFM_OPTIONS + 1] = {
 
 };
 
-environ_t  *get_environ(void){return environ_v;}
+environ_t  *
+environment_c::get_environ(void){return environ_v;}
+
+environ_default_t  *
+environment_c::get_environ_default(void){return environ_default_v;}
 
 
 void *get_ls_options(void){return (void *)ls_options;}

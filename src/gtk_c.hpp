@@ -6,6 +6,11 @@
 #include "pixbuf_c.hpp"
 #include "mime_c.hpp"
 #include "data_c.hpp"
+#define SIZE_BUTTON	20
+#define SIZE_DIALOG	36
+#define SIZE_ICON	48
+#define SIZE_PREVIEW	96
+#define SIZE_TIP	128
 
 class gtk_c: virtual utility_c, public tooltip_c, public pixbuf_c, public mime_c{
     public:

@@ -152,8 +152,8 @@ gtk_c::vbox_new(gboolean homogeneous, gint spacing){
 }
 
 
-gtk_c::GtkWidget *
-dialog_button (const char *icon_id, const char *text) {
+GtkWidget *
+gtk_c::dialog_button (const char *icon_id, const char *text) {
     GtkWidget *button = gtk_button_new ();
     set_bin_contents(button, icon_id, text, SIZE_BUTTON);
     return button;
@@ -161,8 +161,8 @@ dialog_button (const char *icon_id, const char *text) {
 }
 
 
-gtk_c::GtkWidget *
-toggle_button (const char *icon_id, const char *text) {
+GtkWidget *
+gtk_c::toggle_button (const char *icon_id, const char *text) {
     GtkWidget *button = gtk_toggle_button_new ();
     set_bin_contents(button, icon_id, text, SIZE_BUTTON);
     return button;

@@ -65,9 +65,11 @@ xfdir_local_c::receive_dnd(const gchar *target, GtkSelectionData *data, GdkDragA
 
     
     fprintf(stderr, "action=%d: ->%s\n", action, fulltarget);
+/*
+ * for future, maybe. Too difficult for now to use coreutils.
     fprintf(stderr, "gnu_coreutils(target, list, action) now...%s->%s\n",
             src_dir, fulltarget);
-    // XXX gnu_coreutils(fulltarget, list, action);
+    // XXX gnu_coreutils(fulltarget, list, action);*/
     g_free(fulltarget);
     //rfm_complex(RFM_MODULE_DIR, "callbacks", GINT_TO_POINTER(mode), list, target_en->path, "cp"); 
     retval = TRUE;
@@ -211,9 +213,14 @@ xfdir_local_c::item_activated (GtkIconView *iconview, GtkTreePath *tpath, void *
                           ACTUAL_NAME, &ddname,
                           COL_MIMETYPE, &mimetype,
                           -1);
-    gchar *g = g_build_filename(path, ddname, NULL);
-    g_free(ddname);
-    ddname = g;
+    if (strcmp(ddname, "..")==0){
+        g_free(ddname);
+        ddname = g_path_get_dirname(path);
+    } else {
+        gchar *g = g_build_filename(path, ddname, NULL);
+        g_free(ddname);
+        ddname = g;
+    }
 
     if (!mimetype){
         mimetype = mime_type(ddname, NULL);

@@ -67,7 +67,6 @@ typedef struct environ_t {
     const gchar **env_options;
 } environ_t;
 
-// FIXME: set default values for environ_t with environ_default_t on initialization
 typedef struct environ_default_t {
     const gchar *env_var;
     const gchar *env_default;
@@ -76,6 +75,13 @@ typedef struct environ_default_t {
 class environment_c {
     public:
         environment_c(void);
+        ~environment_c(void);
+
+        const gchar *get_envar_value(const gchar *);
+        gboolean set_envar_value(const gchar *, const gchar *);
+        gboolean apply_envar_value(const gchar *);
+    private:
+    public:
         void *get_ls_options(void);
         void *get_cp_options(void);
         void *get_mv_options(void);
@@ -84,20 +90,24 @@ class environment_c {
         void *get_shred_options(void);
 
         environ_t  *get_environ(void);
+        environ_default_t  *get_environ_default(void);
+        void set_gtk_thread(GThread *);
         GThread *get_gtk_thread(void);
-        void init(void);
+        void rfm_init(void);
+        void rfm_init_env (void);
         void rfm_setenv (const gchar *, gchar *, gboolean);
-        gchar *get_text_editor_envar(const gchar *);
+        //gchar *get_text_editor_envar(const gchar *);
         
     private:
-        void set_gtk_thread(GThread *);
-	void create_directories(void);
-	void set_defaults(void);
-	gboolean is_number (gchar *);
+        gboolean check_envar_value(const gchar *, const gchar *);
+        gboolean is_number (const gchar *);
         gint get_max_threads(void);
         GThread *gtk_thread;
         void my_mkdir(gchar *);
         const gchar *term_exec_option(const gchar *);
+        void set_defaults(void);
+        void create_directories(void);
+        GHashTable *environ_hash;
 };
 
 //
