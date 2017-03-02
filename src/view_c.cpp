@@ -30,7 +30,7 @@ static GtkTargetEntry target_table[] = {
 
 #define NUM_TARGETS (sizeof(target_table)/sizeof(GtkTargetEntry))
 
-static gboolean unhighlight(void *, void *, void *);
+//static gboolean unhighlight(void *, void *, void *);
 static gboolean motion_notify_event(GtkWidget *, GdkEvent *, void *);
 static gboolean leave_notify_event(GtkWidget *, GdkEvent *, void *);
 static void on_remove_page_button(GtkWidget *, void *);
@@ -334,7 +334,6 @@ view_c::highlight(gdouble X, gdouble Y){
     highlight_y = Y;
     GtkTreeIter iter;
     GtkIconView *iconview = get_iconview();
-    GtkTreeModel *model = gtk_icon_view_get_model(iconview);
     
     GtkTreePath *tpath = gtk_icon_view_get_path_at_pos (iconview, X, Y); 
     if (tpath) {
@@ -1103,9 +1102,26 @@ signal_drag_data (GtkWidget * widget,
 
 static gboolean
 signal_drag_motion (GtkWidget * widget, 
-	GdkDragContext * dc, gint x, gint y, guint t, gpointer data) {
+	GdkDragContext * dc, gint drag_x, gint drag_y, 
+        guint t, gpointer data) {
     view_c *view_p = (view_c *) data;
- 
+                                    
+    GtkTreePath *tpath;
+                                    
+    GtkIconViewDropPosition pos;
+        
+fprintf(stderr, "pos %d,%d\n", drag_x, drag_y);
+    if (gtk_icon_view_get_dest_item_at_pos (view_p->get_iconview(),
+                                    drag_x, drag_y,
+                                    &tpath,
+                                    &pos)){
+        // drop into?
+        // must be a directory
+        view_p->get_xfdir_p()->highlight_drop(tpath);
+        //view_p->highlight(drag_x, drag_y);
+    } else {
+        view_p->get_xfdir_p()->clear_highlights();
+    }
     // Called by the receiving end of the DnD
     //
  //   GdkDragAction action = gdk_drag_context_get_actions(dc);

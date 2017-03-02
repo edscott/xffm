@@ -124,6 +124,11 @@ xfdir_c::set_tooltip_text (GtkTreePath *tpath, const gchar *text ) {
     return ;
 }
 
+void 
+xfdir_c::highlight_drop(GtkTreePath *tpath){
+    return;
+}
+
 #if 0
 void
 xfdir_c::tooltip(GtkIconView *icon_view, GtkTreePath *tpath){

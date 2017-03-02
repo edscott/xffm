@@ -75,6 +75,8 @@ class xfdir_c: virtual utility_c, public gtk_c {
 	virtual gboolean is_large(void);
         void set_show_hidden(gboolean);
 
+        virtual void highlight_drop(GtkTreePath *);
+
 	virtual gboolean set_dnd_data(GtkSelectionData *, GList *);
 	virtual gboolean receive_dnd(const gchar *, GtkSelectionData *, GdkDragAction);
 

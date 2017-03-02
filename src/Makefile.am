@@ -48,7 +48,8 @@ xffm_SOURCES = \
 	  xfdir_root_c.cpp \
 	    xfdir_c.cpp \
 	  xfdir_local_c.cpp \
-	    local_monitor_c.cpp 
+	    local_monitor_c.cpp \
+	    gnu_utils_c.cpp
 
 xffm_CPPFLAGS = $(FLAGS) $(AM_CPPFLAGS)
 xffm_LDADD = $(LDADD) 

@@ -1,9 +1,10 @@
 #ifndef XFDIR_LOCAL_C_HPP
 #define XFDIR_LOCAL_C_HPP
 #include "xfdir_c.hpp"
+#include "gnu_utils_c.hpp"
 #include "local_monitor_c.hpp"
 
-class xfdir_local_c: public local_monitor_c, virtual utility_c{
+class xfdir_local_c: public local_monitor_c, protected gnu_utils_c, virtual utility_c{
     public:
 	xfdir_local_c(data_c *, const gchar *, gboolean);
         ~xfdir_local_c(void);
@@ -15,6 +16,7 @@ class xfdir_local_c: public local_monitor_c, virtual utility_c{
 	
 	gboolean set_dnd_data(GtkSelectionData *, GList *);
 	gboolean receive_dnd(const gchar *, GtkSelectionData *, GdkDragAction);
+        virtual void highlight_drop(GtkTreePath *);
     private:
         GtkTreeModel *mk_tree_model(void);
         gint heartbeat;
