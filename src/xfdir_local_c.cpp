@@ -2,6 +2,7 @@
 #include <strings.h>
 #include <errno.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include "view_c.hpp"
 #include <sys/types.h>
 #include <pwd.h>
@@ -27,163 +28,24 @@ xfdir_local_c::~xfdir_local_c(void){
     stop_monitor();
 }
 
-gboolean
-xfdir_local_c::receive_dnd(const gchar *target, GtkSelectionData *data, GdkDragAction action)
-{
-    gchar *options=NULL;
-    GList *list = NULL;
-    gint retval = 0;
-    gint nitems = parse_url_list ((const char *)gtk_selection_data_get_data (data), &list);
-
-    fprintf(stderr, "rodent_mouse: DND receive, nitems=%d\n", nitems);
-    if(!nitems) return FALSE;
-    remove_file_prefix_from_uri_list (list);
+gchar *
+xfdir_local_c::get_target(const gchar *target, GList *list){
     /* nonsense check first */
     const gchar *file = (const gchar *)list->data;
-    gchar *src_dir = g_path_get_dirname(file);
-    struct stat st;
-    struct stat target_st;
     gchar *fulltarget;
     if (target && g_file_test(target, G_FILE_TEST_IS_DIR)){
         fulltarget = g_build_filename(path, target, NULL);
     } else {
         fulltarget = g_strdup(path);
     }
+    return fulltarget;
+}
 
-    
-    GError *error=NULL;
-    // 1. get options from user resource file
-
-    gchar *config_dir = g_build_filename(g_get_home_dir(),".config","xffm",NULL);
-    if (!g_file_test(config_dir, G_FILE_TEST_IS_DIR)){
-        g_mkdir_with_parents(config_dir, 0700);
-    }
-    gchar *kfile = g_build_filename(config_dir, "xffm.rc",NULL);
-    g_free(config_dir);    
-    GKeyFile *key_file = g_key_file_new ();
-    // here we allow user to change options with dialog
-    // set options to environment, also to a simple user config file
-
-    const gchar *vv;
-    const gchar *which = "";
-    switch (action){
-        case GDK_ACTION_COPY:
-                vv="cp";
-           which = "GNU_COPY_OPTIONS";
-            break;
-        case GDK_ACTION_MOVE:
-                vv="mv";
-           which = "GNU_MOVE_OPTIONS";
-            break;
-        case GDK_ACTION_LINK:
-                vv="ln";
-           which = "GNU_LINK_OPTIONS";
-         break;
-    }
-    if (!g_key_file_load_from_file (key_file, kfile,
-		(GKeyFileFlags)((gint)G_KEY_FILE_KEEP_COMMENTS|(gint)G_KEY_FILE_KEEP_TRANSLATIONS), 
-                NULL)){
-        NOOP("New file: %s\n", kfile);
-    } else {
-        error=NULL;
-        options = g_key_file_get_string (key_file, "gnu_utils_c", which, &error);
-        if (error){
-            fprintf(stderr, "g_key_file_get_string(): %s\n", error->message);
-            g_error_free(error);
-        }
-
-
-    if (!options) {
-        // if we still do not have options, set them to defaults
-        switch (action){
-            case GDK_ACTION_COPY:
-                options = g_strdup("-R -v --preserve=mode,timestamps --backup=simple --suffix=.bak");
-                break;
-            case GDK_ACTION_MOVE:
-                options = g_strdup("-v --backup=simple --suffix=.bak");
-                break;
-            case GDK_ACTION_LINK:
-                options = g_strdup("-s -v --backup=simple --suffix=.bak");
-             break;
-        }
-    }
-    gchar *no_c = g_strdup_printf("%s_no_confirm", vv);
-    error=NULL;
-    if (!g_file_test(kfile, G_FILE_TEST_EXISTS) ||
-            !g_key_file_get_boolean (key_file, "gnu_utils_c", no_c, &error)){
-        // confirm dialog here, which has toggle for no_confirm ;
-        GtkDialogFlags flags = (GtkDialogFlags)((gint)GTK_DIALOG_MODAL | (gint)GTK_DIALOG_DESTROY_WITH_PARENT);
-        GtkDialog *dialog = GTK_DIALOG(gtk_dialog_new_with_buttons ("My dialog",
-                                      NULL, //main_app_window,
-                                      flags,
-                                      _("_OK"),
-                                      GTK_RESPONSE_ACCEPT,
-                                      _("_Cancel"),
-                                      GTK_RESPONSE_REJECT,
-                                      NULL));
-        gchar *title = g_strdup_printf(_("GNU %s\n"), vv);  
-        gtk_window_set_title(GTK_WINDOW(dialog), title);
-        GtkEntry *options_entry = GTK_ENTRY(gtk_entry_new());
-        gtk_entry_set_width_chars (options_entry, strlen(options)+3);
-        gtk_entry_set_text(options_entry, options);
-        gchar *v = g_strdup_printf(_("Do not show this %s confirm dialog again"), vv);
-        
-        GtkToggleButton *no_confirm = GTK_TOGGLE_BUTTON(gtk_check_button_new_with_label(v));
-        g_free(v);
-        // make button for each of cp,mv.ln
-        
-        gchar *fullabel = g_strdup_printf(_("%s %d paths to:\n<b>%s</b>\nwith options:"), vv, g_list_length(list), fulltarget);
-        GtkLabel *label = GTK_LABEL(gtk_label_new(""));
-        gtk_label_set_markup(label, fullabel);
-        g_free(fullabel);
-        gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area(dialog)), GTK_WIDGET(label), FALSE, FALSE, 0);
-        gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area(dialog)), GTK_WIDGET(options_entry), TRUE, TRUE, 0);
-        gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area(dialog)), GTK_WIDGET(no_confirm), FALSE, FALSE, 0);
-        label = GTK_LABEL(gtk_label_new(""));
-        gtk_label_set_markup(label,_("<i>~/.config/xffm/xffm.rc</i>"));
-        gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area(dialog)), GTK_WIDGET(label), FALSE, FALSE, 0);
-
-    
-        gtk_widget_show_all(GTK_WIDGET(dialog));
-        gint result = gtk_dialog_run (GTK_DIALOG (dialog));
-        switch (result)
-        {
-            case GTK_RESPONSE_ACCEPT:
-            case GTK_RESPONSE_OK:
-               break;
-            default:
-               // If cancel, goto done elsewise set options
-               fprintf(stderr, "%s operation cancelled\n", vv);
-               gtk_widget_hide(GTK_WIDGET(dialog));
-               gtk_widget_destroy(GTK_WIDGET(dialog));
-               goto done;
-               break;
-        }
-
-        g_key_file_set_boolean(key_file, "gnu_utils_c", no_c, 
-                gtk_toggle_button_get_active(no_confirm));
-        const gchar *op = gtk_entry_get_text(options_entry);
-        g_free(options);
-        if (op) options = (op)?g_strdup(op): g_strdup("");
-        g_key_file_set_string (key_file, "gnu_utils_c", which, options);
-        gtk_widget_hide(GTK_WIDGET(dialog));
-        gtk_widget_destroy(GTK_WIDGET(dialog));
-        g_free(title);
-    }
-    g_free(no_c);
-
-    //
-    // // 5. Save resource file with option value for command
-    }
-    error = NULL;
-    g_key_file_save_to_file (key_file, kfile, &error);
-    if (error){
-        fprintf(stderr, "g_key_file_save_to_file(): %s\n", error->message);
-        g_error_free(error);
-    }
-
-
-    fprintf(stderr, "DnD path=\"%s\", fulltarget=\"%s\"\n", path, fulltarget);
+gboolean
+xfdir_local_c::is_nonsense(const gchar *src, const gchar *fulltarget){
+    struct stat st;
+    struct stat target_st;
+    gchar *src_dir = g_path_get_dirname(src);
     if (lstat ((const gchar *)src_dir, &st)==0 && lstat (fulltarget, &target_st)==0){
 	// Here we check if the file source and destination is actually 
 	// the same thing, this time by stat information instead of
@@ -194,21 +56,223 @@ xfdir_local_c::receive_dnd(const gchar *target, GtkSelectionData *data, GdkDragA
         if(st.st_ino == target_st.st_ino &&
 		st.st_dev != target_st.st_dev)
 	{
-            //rfm_diagnostics(&(view_p->widgets),"xffm/stock_dialog-warning",NULL);
-            //rfm_diagnostics (widgets_p, "xffm_tag/stderr", " ", strerror (EEXIST), ": ", target_en->path, "\n", NULL);
-	    goto done;
+	    g_free(src_dir);
+	    fprintf(stderr, "Source and target directories are the same.\n");
+	    return TRUE;
         }
     } else {
+	g_free(src_dir);
 	fprintf(stderr, "unable to stat target or source...\n");
-	goto done;
+	return TRUE;
+    }
+    g_free(src_dir);
+    return FALSE;
+}
+
+void 
+xfdir_local_c::free_src_list(GList *list){
+    GList *tmp = list;
+    for (;tmp && tmp->data;tmp=tmp->next) g_free(tmp->data);
+    g_list_free(list);
+}
+
+void
+xfdir_local_c::show_message_dialog(GtkDialog *dialog, const gchar *vv)
+{
+    GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT;
+    GtkWidget *message = gtk_message_dialog_new (GTK_WINDOW(dialog),
+			 flags,
+			 GTK_MESSAGE_INFO,
+			 GTK_BUTTONS_CLOSE,
+			 _("If you ever want to enable the confirmation dialog for %s again, edit: %s\n"), 
+			 vv, 
+			 "~/.config/xffm/xffm.rc");
+			 
+
+    // Destroy the dialog when the user responds to it
+    // (e.g. clicks a button)
+
+    g_signal_connect_swapped (message, "response",
+		  G_CALLBACK (gtk_widget_destroy),
+		  message);
+    gtk_window_set_title(GTK_WINDOW(message), _("For your information"));
+    gtk_dialog_run (GTK_DIALOG (message));
+ 
+}
+
+gchar *
+xfdir_local_c::get_options(GdkDragAction action, GList *list, const gchar *fulltarget)
+{   
+    GError *error=NULL;
+    // 1. get options from user resource file
+    gchar *config_dir = g_build_filename(g_get_home_dir(),".config","xffm",NULL);
+    if (!g_file_test(config_dir, G_FILE_TEST_IS_DIR)){
+        g_mkdir_with_parents(config_dir, 0700);
+    }
+    gchar *kfile = g_build_filename(config_dir, "xffm.rc",NULL);
+    g_free(config_dir);    
+    if (!g_file_test(kfile, G_FILE_TEST_EXISTS)){
+	FILE *rcfile = fopen(kfile, "w");
+	if (!rcfile){
+	    fprintf(stderr, "Cannot create rcfile: %s\n", kfile);
+	    g_free(kfile);
+	    return NULL;
+	}
+	fclose(rcfile);
     }
 
-    
-    fprintf(stderr, "action=%d options=%s: ->%s\n", action, options, fulltarget);
+    const gchar *vv="mv";
+    const gchar *which = "GNU_MOVE_OPTIONS";
+    switch (action){
+        case GDK_ACTION_COPY:
+                vv="cp";
+            which = "GNU_COPY_OPTIONS";
+            break;
+        case GDK_ACTION_LINK:
+            vv="ln";
+            which = "GNU_LINK_OPTIONS";
+         break;
+    }
+    gchar *options=NULL;
+    GKeyFile *key_file = g_key_file_new ();
+    if (!g_key_file_load_from_file (key_file, kfile,
+		(GKeyFileFlags)
+		((gint)G_KEY_FILE_KEEP_COMMENTS|
+		 (gint)G_KEY_FILE_KEEP_TRANSLATIONS), NULL))
+    {
+        NOOP("New file: %s\n", kfile);
+    } else {
+        error=NULL;
+        options = g_key_file_get_string (key_file, 
+		"gnu_utils_c", which, &error);
+        if (error){
+            NOOP( "g_key_file_get_string(): %s\n", error->message);
+            g_error_free(error);
+	}
+    }
 
-    
+    if (!options) {
+        // if we do not have options, set them to defaults
+        switch (action){
+            case GDK_ACTION_COPY:
+                options = 
+		    g_strdup("-R -v --preserve=mode,timestamps --backup=simple --suffix=.bak");
+                break;
+            case GDK_ACTION_MOVE:
+                options =
+		    g_strdup("-v --backup=simple --suffix=.bak");
+                break;
+            case GDK_ACTION_LINK:
+                options = 
+		    g_strdup("-s -v --backup=simple --suffix=.bak");
+             break;
+        }
+    }
+    // Here we allow user to change and save options as new defaults
+    gchar *no_c = g_strdup_printf("%s_no_confirm", vv);
+    error=NULL;
+    if (!g_key_file_get_boolean (key_file, "gnu_utils_c", no_c, &error)){
+        // confirm dialog here, which has toggle for no_confirm ;
+        GtkDialogFlags flags = (GtkDialogFlags)((gint)GTK_DIALOG_MODAL | (gint)GTK_DIALOG_DESTROY_WITH_PARENT);
+        GtkDialog *dialog = GTK_DIALOG(gtk_dialog_new_with_buttons (
+		    "GNU utils options",
+                     NULL, //main_app_window,
+                     flags,
+                     _("_OK"),
+                     GTK_RESPONSE_OK,
+                     _("_Cancel"),
+                     GTK_RESPONSE_REJECT,
+                     NULL));
+        gchar *title = g_strdup_printf(_("GNU %s\n"), vv);  
+        gtk_window_set_title(GTK_WINDOW(dialog), title);
+        GtkEntry *options_entry = GTK_ENTRY(gtk_entry_new());
+        gtk_entry_set_width_chars (options_entry, strlen(options)+3);
+        gtk_entry_set_text(options_entry, options);
+        gchar *v = g_strdup_printf(_("Do not show this %s confirm dialog again"), vv);        
+        GtkToggleButton *no_confirm = GTK_TOGGLE_BUTTON(gtk_check_button_new_with_label(v));
+        g_free(v);
+        
+        gchar *fullabel = g_strdup_printf(_("%s %d paths to:\n<b>%s</b>\nwith options:"), vv, g_list_length(list), fulltarget);
+        GtkLabel *label = GTK_LABEL(gtk_label_new(""));
+        gtk_label_set_markup(label, fullabel);
+        g_free(fullabel);
+        gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area(dialog)), GTK_WIDGET(label), FALSE, FALSE, 0);
+        gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area(dialog)), GTK_WIDGET(options_entry), TRUE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area(dialog)), GTK_WIDGET(no_confirm), FALSE, FALSE, 0);
+        gtk_widget_show_all(GTK_WIDGET(dialog));
+        gint result = gtk_dialog_run (GTK_DIALOG (dialog));
+        switch (result)
+        {
+            case GTK_RESPONSE_OK:
+               break;
+            default:
+               // If cancel, goto done elsewise set options
+               fprintf(stderr, "%s operation cancelled\n", vv);
+               gtk_widget_hide(GTK_WIDGET(dialog));
+               gtk_widget_destroy(GTK_WIDGET(dialog));
+	       g_free(kfile);
+	       g_key_file_free(key_file);
+	       g_free(options);
+               return NULL;
+        }
 
-    // 6. Proceed with command
+
+        g_key_file_set_boolean(key_file, "gnu_utils_c", no_c, 
+                gtk_toggle_button_get_active(no_confirm));
+	if (gtk_toggle_button_get_active(no_confirm)){
+	    show_message_dialog(dialog, vv);
+	}
+
+        const gchar *op = gtk_entry_get_text(options_entry);
+        g_free(options);
+        if (op) options = (op)?g_strdup(op): g_strdup("");
+        g_key_file_set_string (key_file, "gnu_utils_c", which, options);
+
+	error = NULL;
+	g_key_file_save_to_file (key_file, kfile, &error);
+	if (error){
+	    fprintf(stderr, "g_key_file_save_to_file(): %s\n",
+		    error->message);
+	    g_error_free(error);
+	}
+
+
+        gtk_widget_hide(GTK_WIDGET(dialog));
+        gtk_widget_destroy(GTK_WIDGET(dialog));
+        g_free(title);
+    }
+    g_free(no_c);
+    g_free(kfile);
+    g_key_file_free(key_file);
+    return options;
+}
+
+gboolean
+xfdir_local_c::receive_dnd(const gchar *target, GtkSelectionData *data, GdkDragAction action)
+{
+    GList *list = NULL;
+    if (!parse_url_list ((const char *)gtk_selection_data_get_data (data), &list)) {
+	fprintf(stderr, "!parse_url_list\n");
+	return FALSE;
+    }
+    remove_file_prefix_from_uri_list (list);
+    gchar *fulltarget = get_target(target, list);
+    if (is_nonsense(fulltarget, (gchar *)list->data)){
+        g_free(fulltarget);
+	free_src_list(list);
+	fprintf(stderr, "is_nonsense\n");
+	return FALSE;
+    }
+	       
+    gchar *options=get_options(action, list, fulltarget);
+    if (!options){
+        g_free(fulltarget);
+	free_src_list(list);
+	fprintf(stderr, "!options\n");
+	return FALSE;
+    }
+
+    // Proceed with command
     switch (action){
         case GDK_ACTION_COPY:
             cp(list, fulltarget, options);
@@ -219,23 +283,16 @@ xfdir_local_c::receive_dnd(const gchar *target, GtkSelectionData *data, GdkDragA
         case GDK_ACTION_LINK:
             ln(list, fulltarget, options);
          break;
-
     }
+    
+    fprintf(stderr, "action=%d options=%s: ->%s\n", action, options, fulltarget);
     
     g_free(options);
     g_free(fulltarget);
-    //rfm_complex(RFM_MODULE_DIR, "callbacks", GINT_TO_POINTER(mode), list, target_en->path, "cp"); 
-    retval = TRUE;
-done:
-    g_free(src_dir);
     // free uri list now
-    GList *tmp = list;
-    for (;tmp && tmp->data;tmp=tmp->next) g_free(tmp->data);
-    g_list_free(list);
-    g_free(kfile);
-    g_key_file_free(key_file);
+    free_src_list(list);
 
-    return retval;
+    return TRUE;
 }
 
 gboolean

@@ -48,6 +48,12 @@ class xfdir_local_c: public local_monitor_c, protected gnu_utils_c, virtual util
         pthread_mutex_t date_string_mutex;
 
 
+	gchar *get_options(GdkDragAction, GList *, const gchar *);
+	void show_message_dialog(GtkDialog *, const gchar *);
+	void free_src_list(GList *list);
+	gboolean is_nonsense(const gchar *, const gchar *);
+	gchar *get_target(const gchar *, GList *);
+
 	data_c *data_p;
 
 };
