@@ -1,9 +1,5 @@
 #ifndef MIME_C_HPP
 #define MIME_C_HPP
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
-
 #include "xffm+.h"
 
 #include "utility_c.hpp"

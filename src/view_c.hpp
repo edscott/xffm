@@ -1,7 +1,6 @@
 #ifndef VIEW_C_HPP
 #define VIEW_C_HPP
 #include "xffm+.h"
-#include <string.h>
 #include "widgets_c.hpp"
 #include "lpterm_c.hpp"
 #include "print_c.hpp"

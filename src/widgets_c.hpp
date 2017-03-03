@@ -1,6 +1,5 @@
 #ifndef WIDGETS_C_HPP
 #define WIDGETS_C_HPP
-#include <iostream>
 #include "xffm+.h"
 #include "gtk_c.hpp"
 #include "pathbar_c.hpp"

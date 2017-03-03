@@ -4,16 +4,17 @@
 
 class gnu_utils_c{
     public:
-        gnu_utils_c(){};
-        ~gnu_utils_c(){};
+        gnu_utils_c(void);
+        ~gnu_utils_c(void){};
     protected:
-        gboolean cp(GList *, const gchar *, const gchar *);
-        gboolean mv(GList *, const gchar *, const gchar *);
-        gboolean ln(GList *, const gchar *, const gchar *);
-        gboolean rm(GList *, const gchar *);
-        gboolean shred(GList *, const gchar *);
+        gboolean cp(void *, GList *, const gchar *, const gchar *);
+        gboolean mv(void *, GList *, const gchar *, const gchar *);
+        gboolean ln(void *, GList *, const gchar *, const gchar *);
+        gboolean rm(void *, GList *, const gchar *);
+        gboolean shred(void *, GList *, const gchar *);
     private:
-        gchar *execute_command(gchar *);
+        gchar *execute_command(void *, gchar *);
+        gchar *execute_command(void *, gchar **);
         gchar *get_command(const gchar *,GList *, const gchar *, const gchar *);
 
 };

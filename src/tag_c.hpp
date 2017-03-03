@@ -1,5 +1,6 @@
-#ifndef tag_c_hpp
-#define tag_c_hpp
+#ifndef TAG_C_HPP
+#define TAG_C_HPP
+#include "xffm+.h"
 typedef struct tag_item_t {
     GtkTreePath *path;
     gchar *name;

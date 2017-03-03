@@ -1,7 +1,6 @@
 #ifndef THREAD_CONTROL_C_HPP
 #define THREAD_CONTROL_C_HPP
 #include "xffm+.h"
-#include <pthread.h>
 
 
 // This class is to avoid crashes when view_c objects are

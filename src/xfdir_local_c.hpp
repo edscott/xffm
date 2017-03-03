@@ -1,12 +1,12 @@
 #ifndef XFDIR_LOCAL_C_HPP
 #define XFDIR_LOCAL_C_HPP
 #include "xfdir_c.hpp"
-#include "gnu_utils_c.hpp"
 #include "local_monitor_c.hpp"
+#include "local_dnd_c.hpp"
 
-class xfdir_local_c: public local_monitor_c, protected gnu_utils_c, virtual utility_c{
+class xfdir_local_c: public local_monitor_c, public local_dnd_c, virtual utility_c{
     public:
-	xfdir_local_c(data_c *, const gchar *, gboolean);
+	xfdir_local_c(data_c *, const gchar *, void *);
         ~xfdir_local_c(void);
         void reload(const gchar *);
         gchar *make_tooltip_text (GtkTreePath *);
@@ -47,12 +47,6 @@ class xfdir_local_c: public local_monitor_c, protected gnu_utils_c, virtual util
         pthread_mutex_t group_string_mutex;
         pthread_mutex_t date_string_mutex;
 
-
-	gchar *get_options(GdkDragAction, GList *, const gchar *);
-	void show_message_dialog(GtkDialog *, const gchar *);
-	void free_src_list(GList *list);
-	gboolean is_nonsense(const gchar *, const gchar *);
-	gchar *get_target(const gchar *, GList *);
 
 	data_c *data_p;
 

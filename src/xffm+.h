@@ -3,8 +3,28 @@
 # ifdef HAVE_CONFIG_H
 #  include "config.h"
 # endif
+#ifdef HAVE_LIBMAGIC
+#include <magic.h>
+#else
+#error "libmagic not found during configure!"
+#endif
 
-# include <gtk/gtk.h>
+#include <string.h>
+#include <strings.h>
+#include <errno.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <pwd.h>
+#include <grp.h>
+#include <dirent.h>
+#include <unistd.h>
+#include <gtk/gtk.h>
+#include <cairo.h>
+#include <pthread.h>
+#include <iostream>
+
 # include "intl.h"
 # include "debug.h"
 #define USER_RFM_CACHE_DIR      g_get_user_cache_dir(),"rfm"

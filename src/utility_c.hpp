@@ -2,9 +2,6 @@
 #define UTILITY_C_HPP
 #include "xffm+.h"
 
-#include <pthread.h>
-#include <string.h>
-
 class utility_c{
     public:
         gchar *utf_string (const gchar *);

@@ -1,6 +1,5 @@
 #ifndef LOCAL_MONITOR_C_HPP
 #define LOCAL_MONITOR_C_HPP
-#include <dirent.h>
 
 typedef struct xd_t{
     gchar *d_name;

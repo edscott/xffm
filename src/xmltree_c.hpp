@@ -1,5 +1,6 @@
 #ifndef XMLTREE_C_HPP
 #define XMLTREE_C_HPP
+#include "xffm+.h"
 #include "tag_c.hpp"
 #define XMLTREE_key_type 0x01
 #define XMLTREE_string_type 0x02

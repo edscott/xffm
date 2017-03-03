@@ -3,9 +3,6 @@
 
 #include "xffm+.h"
 
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
 #include "gtk_c.hpp"
 #include "utility_c.hpp"
 #define SET_DIR(x) x|=0x01

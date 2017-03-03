@@ -130,7 +130,7 @@ view_c::view_c(data_c *data0, void *window_data, GtkNotebook *notebook, const gc
     data_p = data0;
     init();
     if (g_file_test(path, G_FILE_TEST_IS_DIR) ){
-	new_xfdir_p = (xfdir_c *)new xfdir_local_c(data_p, path, shows_hidden());
+	new_xfdir_p = (xfdir_c *)new xfdir_local_c(data_p, path, (void *)this);
 	
     } else {
 	// load specific class xfdir here
@@ -226,7 +226,7 @@ view_c::reload(const gchar *data){
 	while (gtk_events_pending()) gtk_main_iteration();
 	// switch back to local mode
         NOOP( "hidden toggle=%d\n", shows_hidden());
-	xfdir_c *xfdir_local_p = (xfdir_c *)new xfdir_local_c(data_p, data, shows_hidden());
+	xfdir_c *xfdir_local_p = (xfdir_c *)new xfdir_local_c(data_p, data, (void *)this);
         delete xfdir_p;
 	// this will set xfdir_p to xfdir_local_p:
 	set_treemodel(xfdir_local_p); 
