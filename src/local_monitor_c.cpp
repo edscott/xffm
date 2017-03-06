@@ -67,7 +67,9 @@ monitor_f (GFileMonitor      *mon,
     if (strcmp(msg, "DELETED")==0){
         // find the iter and remove item
         gchar *basename = g_file_get_basename(first);
-        gtk_tree_model_foreach (GTK_TREE_MODEL(store), rm_func, (gpointer) basename);  
+        gtk_tree_model_foreach (GTK_TREE_MODEL(store), rm_func, (gpointer) basename); 
+        GHashTable *hash = p->get_items_hash();
+        if (hash) g_hash_table_remove(hash, basename);
         g_free(basename);
     }
     else if (strcmp(msg, "CREATED")==0){
@@ -84,6 +86,7 @@ monitor_f (GFileMonitor      *mon,
               NOOP("%s <---> %s\n", d->d_name, basename);
             if(strcmp (d->d_name, basename)) continue;
             xd_t *xd_p = p->get_xd_p(d);
+            // get mimetype
             p->add_local_item(store, xd_p);
             p->free_xd_p(xd_p);
             break;
@@ -140,6 +143,7 @@ local_monitor_c::local_monitor_c(data_c *data0, const gchar *data): xfdir_c(data
     cancellable = g_cancellable_new ();
     gfile = g_file_new_for_path (data);
     monitor = NULL;
+    items_hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
 }
 
 local_monitor_c::~local_monitor_c(void){
@@ -162,6 +166,7 @@ local_monitor_c::start_monitor(const gchar *data, GtkTreeModel *data2){
     gfile = g_file_new_for_path (data);
     error=NULL;
     if (monitor) g_object_unref(monitor);
+    if (!items_hash) items_hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
     monitor = g_file_monitor_directory (gfile, G_FILE_MONITOR_WATCH_MOVES, cancellable,&error);
     if (error){
         fprintf(stderr, "g_file_monitor_directory(%s) failed: %s\n",
@@ -179,17 +184,26 @@ local_monitor_c::stop_monitor(void){
     gchar *p = g_file_get_path(gfile);
     fprintf(stderr, "* stop_monitor: %s\n", p);
     g_free(p);
+    if (items_hash) g_hash_table_destroy(items_hash);
+    items_hash = NULL;
     g_file_monitor_cancel(monitor);
 }
 
 void
 local_monitor_c::add_local_item(GtkListStore *list_store, xd_t *xd_p){
+    // if it already exists, do nothing
+    if (items_hash && g_hash_table_lookup(items_hash, (void *)xd_p->d_name)){    
+        fprintf(stderr, "not re-adding %s\n", xd_p->d_name);
+        return;
+    }
+
+    
     GtkTreeIter iter;
     gtk_list_store_append (list_store, &iter);
     gchar *utf_name = utf_string(xd_p->d_name);
-    gchar *icon_name = get_iconname(xd_p);
     // plain extension mimetype fallback
     if (!xd_p->mimetype) xd_p->mimetype = mime_type(xd_p->d_name); 
+    gchar *icon_name = get_iconname(xd_p);
     
     // chop file extension (will now appear on the icon). (XXX only for big icons)
     gboolean is_dir;
@@ -245,6 +259,7 @@ local_monitor_c::add_local_item(GtkListStore *list_store, xd_t *xd_p){
     g_free(icon_name);
     g_free(highlight_name);
     g_free(utf_name);
+    g_hash_table_replace(items_hash, g_strdup(xd_p->d_name), GINT_TO_POINTER(1));
 }
 
 

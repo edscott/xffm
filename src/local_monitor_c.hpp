@@ -47,6 +47,7 @@ class local_monitor_c: public xfdir_c, virtual utility_c {
         void free_xd_p(xd_t *);
         xd_t *get_xd_p(struct dirent *);
         GFile *get_gfile(void);
+        GHashTable *get_items_hash(void){ return items_hash;};
     protected:
     private:
         GCancellable *cancellable;
@@ -60,6 +61,8 @@ class local_monitor_c: public xfdir_c, virtual utility_c {
 	gchar *get_emblem_string(xd_t *);
 	gchar *get_emblem_string(xd_t *, gboolean);
         const gchar *get_mime_iconname(xd_t *);
+
+        GHashTable *items_hash;
         
 };
 

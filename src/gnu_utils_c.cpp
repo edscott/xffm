@@ -3,6 +3,28 @@
 
 gnu_utils_c::gnu_utils_c(void ){}
 
+gchar **
+gnu_utils_c::non_empty_strsplit(const gchar *input, const gchar *token){
+    if (!input || !token || !strstr(input, token)) return NULL;        
+    gchar *c = g_strdup(input);
+    if (strchr(c, '\n')) *strchr(c, '\n') = 0;
+    gchar **src = g_strsplit(c, token, -1);
+    g_free(c);
+    if (!src) return NULL;
+    gchar **r= (gchar **)malloc((g_strv_length(src)+1)*sizeof(gchar *)); 
+    if (!r) return NULL;
+    memset (r, 0, (g_strv_length(src)+1)*sizeof(gchar *));
+    gchar **p, **tgt;
+    for (p=src, tgt=r; p && *p; p++) {
+        if (strlen(*p)){
+            *tgt = g_strdup(*p);
+            tgt++;
+        }
+    }
+    g_strfreev(src);
+    return r;   
+}
+
 /**
  * NAME
  *      cp - copy files and directories
@@ -28,20 +50,10 @@ gnu_utils_c::gnu_utils_c(void ){}
 **/
 gboolean 
 gnu_utils_c::cp(void *view_p, GList *src_list, const gchar *tgt, const gchar *options){
-#if 0
-    gchar *command = get_command("cp", src_list, tgt, options);
-    if (!command) return FALSE;
-    execute_command(view_p, command);  
-    g_free(command);
-#else
     gchar **arguments = get_command_argv("cp", src_list, tgt, options);
     if (!arguments) return FALSE;
-    execute_command(view_p, arguments);  
-    // When to g_strfreev ?
-    
-
-#endif
-
+    execute_command(view_p, (const gchar **)arguments);  
+    g_strfreev(arguments);
     return TRUE;
 }
                             /* end cp */
@@ -69,11 +81,11 @@ gnu_utils_c::cp(void *view_p, GList *src_list, const gchar *tgt, const gchar *op
 **/ 
 gboolean 
 gnu_utils_c::mv(void *view_p, GList *src_list, const gchar *tgt, const gchar *options){
-    gchar *command = get_command("mv", src_list, tgt, options);
-    if (!command) return FALSE;
-    execute_command(view_p, command);  
-    g_free(command);
-
+    gchar **arguments = get_command_argv("mv", src_list, tgt, options);
+    if (!arguments) return FALSE;
+    execute_command(view_p, (const gchar **)arguments);  
+    g_strfreev(arguments);
+    return TRUE;
 }
                             /* end mv */
 
@@ -107,11 +119,11 @@ gnu_utils_c::mv(void *view_p, GList *src_list, const gchar *tgt, const gchar *op
  **/
 gboolean 
 gnu_utils_c::ln(void *view_p, GList *src_list, const gchar *tgt, const gchar *options){
-    if (!src_list) return FALSE;
-    gchar *command = get_command("ln", src_list, tgt, options);
-    if (!command) return FALSE;
-    execute_command(view_p, command);  
-    g_free(command);
+    gchar **arguments = get_command_argv("ln", src_list, tgt, options);
+    if (!arguments) return FALSE;
+    execute_command(view_p, (const gchar **)arguments);  
+    g_strfreev(arguments);
+    return TRUE;
 }
                             /* end ln */
 
@@ -125,10 +137,11 @@ gnu_utils_c::ln(void *view_p, GList *src_list, const gchar *tgt, const gchar *op
 **/      
 gboolean 
 gnu_utils_c::rm(void *view_p, GList *src_list, const gchar *options){
-    gchar *command = get_command("rm", src_list, NULL, options);
-    if (!command) return FALSE;
-    execute_command(view_p, command); 
-    g_free(command);
+    gchar **arguments = get_command_argv("rm", src_list, NULL, options);
+    if (!arguments) return FALSE;
+    execute_command(view_p, (const gchar **)arguments);  
+    g_strfreev(arguments);
+    return TRUE;
 }
                             /* end rm */
 /**
@@ -142,83 +155,58 @@ gnu_utils_c::rm(void *view_p, GList *src_list, const gchar *options){
 
 gboolean 
 gnu_utils_c::shred(void *view_p, GList *src_list, const gchar *options){
-    gchar *command = get_command("shred", src_list, NULL, options);
-    if (!command) return FALSE;
-    execute_command(view_p, command); 
-    g_free(command);
-
+    gchar **arguments = get_command_argv("shred", src_list, NULL, options);
+    if (!arguments) return FALSE;
+    execute_command(view_p, (const gchar **)arguments);  
+    g_strfreev(arguments);
+    return TRUE;
 }
                             /*end shred */
 
-gchar * 
-gnu_utils_c::get_command(const gchar *c, GList *src_list, const gchar *tgt, const gchar *options){
-    fprintf(stderr, "%s tgt= %s \n",c, tgt);
-    if (!src_list ) return NULL;
-    gchar *command;
-    if (strstr(options, " -t ")){
-        // We allow user to specify a different target directory.
-        command = g_strconcat(c, " ", options, NULL);
-    } else if (tgt) {
-        command = g_strconcat(c, " ", options, " -t ", tgt, NULL);
-    } else {
-        command = g_strconcat(c, " ", options, NULL);
-    }
-    GList *l = src_list;
-    for (;l && l->data; l=l->next)
-    {
-        fprintf(stderr, "file: %s\n", (gchar *)l->data);
-        gchar *g = g_strconcat(command, " ", (const gchar *)l->data, NULL);
-        g_free(command);
-        command=g;
-    }
-    return command;
-}
 
 
 gchar **
-gnu_utils_c::get_command_argv(const gchar *c, GList *src_list, const gchar *tgt, const gchar *options){
-    // FIXME: we need a non null strsplit here
-    gchar **option_v = g_strsplit(options, " ", -1);
-    // count options
-    // vector size = options_count + 1(cp) + 1(-t) +1(tgt) + g_list_length(src_list) +1;
-    fprintf(stderr, "%s tgt= %s \n",c, tgt);
-    if (!src_list ) return NULL;
-    gchar *command;
-    if (strstr(options, " -t ")){
-        // We allow user to specify a different target directory.
-        command = g_strconcat(c, " ", options, NULL);
-    } else if (tgt) {
-        command = g_strconcat(c, " ", options, " -t ", tgt, NULL);
-    } else {
-        command = g_strconcat(c, " ", options, NULL);
+gnu_utils_c::get_command_argv(const gchar *cmd, GList *src_list, const gchar *tgt, const gchar *options){
+    gint vsize = g_list_length(src_list);
+    gchar **option_v = non_empty_strsplit(options, " ");
+    gchar **p=option_v;
+    while (p && *p) {
+        vsize++;
+        p++;
     }
+    // 4 = cmd -t target NULL
+    vsize += 5; 
+    gchar **argv = (gchar **)calloc(vsize, sizeof(gchar *));
+    gint i = 0;
+    argv[i++] = g_strdup(cmd);
+    if (tgt){
+        argv[i++] = g_strdup("-t");
+        argv[i++] = g_strdup(tgt);
+    }
+    gchar **q = argv+i;
+    p=option_v;
+    while (p && *p) {
+        *q = g_strdup(*p);
+        p++;
+        q++;
+    }
+    g_strfreev(option_v);
     GList *l = src_list;
-    for (;l && l->data; l=l->next)
-    {
-        fprintf(stderr, "file: %s\n", (gchar *)l->data);
-        gchar *g = g_strconcat(command, " ", (const gchar *)l->data, NULL);
-        g_free(command);
-        command=g;
+    while (l && l->data){
+        *q = g_strdup((gchar *)l->data);
+        q++;
+        l = l->next;
     }
-    return command;
+    return argv;
 }
 
-gchar * 
-gnu_utils_c::execute_command(void *data,  gchar *command){
-    fprintf(stderr, "Now is time to execute:\n\'%s\'\n", command);
-    // execute in lpterm associated to view_p
-    view_c *view_p =(view_c *)data;
-    // thread wait function will return with status of command.
-    view_p->get_lpterm_p()->thread_run(command);
-}
 
 // This would be preferred.
 gchar * 
-gnu_utils_c::execute_command(void *data,  gchar **arguments){
-    fprintf(stderr, "Now is time to execute:\n\'%s\'\n", command);
+gnu_utils_c::execute_command(void *data,  const gchar **arguments){
+    fprintf(stderr, "Now is time to execute:\n\'%s\'\n", arguments[0]);
     // execute in lpterm associated to view_p
     view_c *view_p =(view_c *)data;
     // thread wait function will return with status of command.
-    gchar *arguments[]={NULL};
     view_p->get_lpterm_p()->thread_run(arguments);
 }
