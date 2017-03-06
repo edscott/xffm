@@ -33,9 +33,10 @@ static gboolean rm_func (GtkTreeModel *model,
                             GtkTreeIter *iter,
                             gpointer data){
     gchar *text;
-    gtk_tree_model_get (model, iter, COL_DISPLAY_NAME, &text, -1);  
+    gtk_tree_model_get (model, iter, COL_ACTUAL_NAME, &text, -1);  
     
     if (strcmp(text, (gchar *)data)){
+        fprintf(stderr, "%s is not %s\n", text,  (gchar *)data);
         g_free(text);
         return FALSE;
     }
