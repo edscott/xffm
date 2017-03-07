@@ -4,28 +4,31 @@
 #include <gio/gio.h>
 
 #include "local_monitor_c.hpp"
-gchar *
-decode (GFileMonitorEvent ev)
-{
-    gchar *fmt = (gchar *)g_malloc0 (1024);
-    gint caret = 0;
-#define dc(x) \
-    case G_FILE_MONITOR_EVENT_##x: \
-        strcat(fmt, #x);  \
-    break;
 
-    switch (ev) {
-        dc(CHANGED);
-        dc(CHANGES_DONE_HINT);
-        dc(DELETED);
-        dc(CREATED);
-        dc(ATTRIBUTE_CHANGED);
-        dc(PRE_UNMOUNT);
-        dc(UNMOUNTED);
-        dc(MOVED);
+static gboolean stat_func (GtkTreeModel *model,
+                            GtkTreePath *path,
+                            GtkTreeIter *iter,
+                            gpointer data){
+    gchar *text;
+    gtk_tree_model_get (model, iter, COL_ACTUAL_NAME, &text, -1);  
+    
+    if (strcmp(text, (gchar *)data)){
+        g_free(text);
+        return FALSE;
     }
-#undef dc
-    return fmt;
+    DBG("removing %s from treemodel.\n", text);
+    GtkListStore *store = GTK_LIST_STORE(model);
+    
+    struct stat *st = (struct stat *)calloc(1, sizeof(struct stat);
+    stat(XXX, fullpath);
+
+    gtk_list_store_set (list_store, iter, 
+            COL_STAT,xd_p->st, 
+            -1);
+
+    gtk_list_store_remove(store, iter);
+    g_free(text);
+    return TRUE;
 }
 
 static gboolean rm_func (GtkTreeModel *model,
@@ -39,12 +42,15 @@ static gboolean rm_func (GtkTreeModel *model,
         g_free(text);
         return FALSE;
     }
-    fprintf(stderr, "removing %s from treemodel.\n", text);
+    DBG("removing %s from treemodel.\n", text);
     GtkListStore *store = GTK_LIST_STORE(model);
     gtk_list_store_remove(store, iter);
+    // FIXME: what happens to struct stat pointer? does it leak?
     g_free(text);
     return TRUE;
 }
+
+
 void
 monitor_f (GFileMonitor      *mon,
           GFile             *first,
@@ -52,62 +58,47 @@ monitor_f (GFileMonitor      *mon,
           GFileMonitorEvent  event,
           gpointer           data)
 {
-    char *msg = decode (event);
     gchar *f= first? g_file_get_basename (first):g_strdup("--");
     gchar *s= second? g_file_get_basename (second):g_strdup("--");
    
-    fprintf (stderr, "Received event \"%s\" (code %d), first file \"%s\", second file \"%s\"\n",
-              msg, event, f, s);
-    g_free(f);
-    g_free(s);
 
     local_monitor_c *p = (local_monitor_c *)data;
-    GtkListStore *store = p->get_liststore();
 
-    if (strcmp(msg, "DELETED")==0){
-        // find the iter and remove item
-        gchar *basename = g_file_get_basename(first);
-        gtk_tree_model_foreach (GTK_TREE_MODEL(store), rm_func, (gpointer) basename); 
-        GHashTable *hash = p->get_items_hash();
-        if (hash) g_hash_table_remove(hash, basename);
-        g_free(basename);
-    }
-    else if (strcmp(msg, "CREATED")==0){
-        //FIXME: must be mutex protected and threaded
-        gchar *path = g_file_get_path(p->get_gfile());
-        gchar *basename = g_file_get_basename(first);
-        struct dirent *d; // static pointer
-        NOOP("looking for %s info\n", basename);
-        DIR *directory = opendir(path);
-        if (!directory) {
-	  g_warning("monitor_f(): opendir %s: %s\n", path, strerror(errno));
-        } else {
-          while ((d = readdir(directory))  != NULL) {
-              NOOP("%s <---> %s\n", d->d_name, basename);
-            if(strcmp (d->d_name, basename)) continue;
-            xd_t *xd_p = p->get_xd_p(d);
-            // get mimetype
-            p->add_local_item(store, xd_p);
-            p->free_xd_p(xd_p);
+    switch (event){
+        case G_FILE_MONITOR_EVENT_DELETED:
+        case G_FILE_MONITOR_EVENT_MOVED_OUT:
+            DBG("Received DELETED  (%d): \"%s\", \"%s\"\n", event, f, s);
+            p->remove_item(first);
             break;
-          }
-          closedir (directory);
-        }
-        g_free(basename); 
-        g_free(path); 
-       
+        case G_FILE_MONITOR_EVENT_CREATED:
+        case G_FILE_MONITOR_EVENT_MOVED_IN:
+            DBG("Received  CREATED (%d): \"%s\", \"%s\"\n", event, f, s);
+            p->add_new_item(first);
+            break;
+        case G_FILE_MONITOR_EVENT_CHANGES_DONE_HINT:
+            DBG("Received  CHANGES_DONE_HINT (%d): \"%s\", \"%s\"\n", event, f, s);
+            break;
+        case G_FILE_MONITOR_EVENT_CHANGED:
+            DBG("Received  CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
+        case G_FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED:
+            fprintf(stderr,"Received  ATTRIBUTE_CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
+            p->restat_item(first);
+            break;
+        case G_FILE_MONITOR_EVENT_PRE_UNMOUNT:
+            fprintf(stderr,"Received  PRE_UNMOUNT (%d): \"%s\", \"%s\"\n", event, f, s);
+            break;
+        case G_FILE_MONITOR_EVENT_UNMOUNTED:
+            fprintf(stderr,"Received  UNMOUNTED (%d): \"%s\", \"%s\"\n", event, f, s);
+            break;
+        case G_FILE_MONITOR_EVENT_MOVED:
+        case G_FILE_MONITOR_EVENT_RENAMED:
+            fprintf(stderr,"Received  MOVED (%d): \"%s\", \"%s\"\n", event, f, s);
+            p->remove_item(first);
+            p->add_new_item(second);
+            break;
     }
-    else if (strcmp(msg, "CHANGED")==0){
-    }
-    else if (strcmp(msg, "ATTRIBUTE_CHANGED")==0){
-    }
-    else if (strcmp(msg, "UNMOUNTED")==0){
-    }
-    else if (strcmp(msg, "MOVED")==0){
-    }
-
-
-    g_free (msg);
+    g_free(f);
+    g_free(s);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -130,6 +121,73 @@ local_monitor_c::get_xd_p(struct dirent *d){
     return xd_p;
 }
 
+xd_t *
+local_monitor_c::get_xd_p(GFile *first){
+
+    gchar *path = g_file_get_path(gfile);
+    gchar *basename = g_file_get_basename(first);
+    struct dirent *d; // static pointer
+    NOOP("looking for %s info\n", basename);
+    DIR *directory = opendir(path);
+    xd_t *xd_p = NULL;
+    if (directory) {
+      while ((d = readdir(directory))  != NULL) {
+        if(strcmp (d->d_name, basename)) continue;
+        xd_p = get_xd_p(d);
+        break;
+      }
+      closedir (directory);
+    } else {
+      g_warning("monitor_f(): opendir %s: %s\n", path, strerror(errno));
+    }
+    g_free(basename); 
+    g_free(path); 
+    return xd_p;
+}
+
+gboolean
+local_monitor_c::add_new_item(GFile *file){
+   xd_t *xd_p = get_xd_p(file);
+    if (xd_p) {
+        add_local_item(store, xd_p);
+        free_xd_p(xd_p);
+        return TRUE;
+    } 
+    return FALSE;
+}
+
+gboolean 
+local_monitor_c::remove_item(GFile *file){
+    // find the iter and remove item
+    gchar *basename = g_file_get_basename(file);
+    GHashTable *hash = get_items_hash();
+    if (hash) g_hash_table_remove(hash, basename); 
+    gtk_tree_model_foreach (GTK_TREE_MODEL(store), rm_func, (gpointer) basename); 
+    g_free(basename);
+    return TRUE;
+}
+
+gboolean 
+local_monitor_c::restat_item(GFile *src){
+    gchar *basename = g_file_get_basename(file);
+    GHashTable *hash = get_items_hash();
+    if (!hash || !g_hash_table_lookup(basename)) return FALSE; 
+    gtk_tree_model_foreach (GTK_TREE_MODEL(store), stat_func, (gpointer) basename); 
+    g_free(basename);
+    return TRUE;
+}
+
+gboolean 
+local_monitor_c::rename_item(GFile *src, GFile *tgt){
+    
+    gchar *basename = g_file_get_basename(file);
+    GHashTable *hash = get_items_hash();
+    if (hash) g_hash_table_remove(hash, basename); 
+    gtk_tree_model_foreach (GTK_TREE_MODEL(store), rm_func, (gpointer) basename); 
+    g_free(basename);
+    return TRUE;
+}
+
 void
 local_monitor_c::free_xd_p(xd_t *xd_p){
     g_free(xd_p->mimefile);
@@ -143,7 +201,6 @@ local_monitor_c::local_monitor_c(data_c *data0, const gchar *data): xfdir_c(data
     cancellable = g_cancellable_new ();
     gfile = g_file_new_for_path (data);
     monitor = NULL;
-    items_hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
 }
 
 local_monitor_c::~local_monitor_c(void){
@@ -161,15 +218,14 @@ local_monitor_c::get_liststore(void){ return store;}
 void
 local_monitor_c::start_monitor(const gchar *data, GtkTreeModel *data2){
     store = GTK_LIST_STORE(data2);
-    fprintf(stderr, "local_monitor_c::start_monitor: %s\n", data);
+    DBG("*** local_monitor_c::start_monitor: %s\n", data);
     if (gfile) g_object_unref(gfile);
     gfile = g_file_new_for_path (data);
     error=NULL;
     if (monitor) g_object_unref(monitor);
-    if (!items_hash) items_hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
     monitor = g_file_monitor_directory (gfile, G_FILE_MONITOR_WATCH_MOVES, cancellable,&error);
     if (error){
-        fprintf(stderr, "g_file_monitor_directory(%s) failed: %s\n",
+        DBG("g_file_monitor_directory(%s) failed: %s\n",
                 data, error->message);
         g_object_unref(gfile);
         gfile=NULL;
@@ -182,18 +238,16 @@ local_monitor_c::start_monitor(const gchar *data, GtkTreeModel *data2){
 void 
 local_monitor_c::stop_monitor(void){
     gchar *p = g_file_get_path(gfile);
-    fprintf(stderr, "* stop_monitor: %s\n", p);
+    DBG("*** stop_monitor: %s\n", p);
     g_free(p);
-    if (items_hash) g_hash_table_destroy(items_hash);
-    items_hash = NULL;
     g_file_monitor_cancel(monitor);
 }
 
 void
 local_monitor_c::add_local_item(GtkListStore *list_store, xd_t *xd_p){
     // if it already exists, do nothing
-    if (items_hash && g_hash_table_lookup(items_hash, (void *)xd_p->d_name)){    
-        fprintf(stderr, "not re-adding %s\n", xd_p->d_name);
+    if (g_hash_table_lookup(get_items_hash(), (void *)xd_p->d_name)){    
+        DBG("local_monitor_c::not re-adding %s\n", xd_p->d_name);
         return;
     }
 
@@ -259,7 +313,7 @@ local_monitor_c::add_local_item(GtkListStore *list_store, xd_t *xd_p){
     g_free(icon_name);
     g_free(highlight_name);
     g_free(utf_name);
-    g_hash_table_replace(items_hash, g_strdup(xd_p->d_name), GINT_TO_POINTER(1));
+    g_hash_table_replace(get_items_hash(), g_strdup(xd_p->d_name), GINT_TO_POINTER(1));
 }
 
 

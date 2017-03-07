@@ -1110,7 +1110,6 @@ signal_drag_motion (GtkWidget * widget,
                                     
     GtkIconViewDropPosition pos;
         
-fprintf(stderr, "pos %d,%d\n", drag_x, drag_y);
     if (gtk_icon_view_get_dest_item_at_pos (view_p->get_iconview(),
                                     drag_x, drag_y,
                                     &tpath,

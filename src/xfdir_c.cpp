@@ -11,6 +11,8 @@ xfdir_c::xfdir_c(data_c *data0, const gchar *data): gtk_c(data0){
     data_p = data0;
     large = FALSE;
     gint result;
+    items_hash = NULL;
+    new_items_hash();
     population_mutex = PTHREAD_MUTEX_INITIALIZER;
     population_cond = PTHREAD_COND_INITIALIZER;
     result = pthread_rwlock_init(&population_lock, NULL);
@@ -26,11 +28,22 @@ xfdir_c::xfdir_c(data_c *data0, const gchar *data): gtk_c(data0){
 xfdir_c::~xfdir_c(void){
     g_free(path);
     g_object_unref(treemodel);
+    g_hash_table_destroy(items_hash);
     pthread_mutex_destroy(&population_mutex);
     pthread_cond_destroy(&population_cond);
     pthread_rwlock_destroy(&population_lock);
 }
 
+void
+xfdir_c::new_items_hash(void){
+    if (items_hash) {
+        g_hash_table_destroy(items_hash);
+    }
+    items_hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
+}
+        
+GHashTable *
+xfdir_c::get_items_hash(void){ return items_hash;}
 
 gboolean
 xfdir_c::set_dnd_data(GtkSelectionData * selection_data, GList *selection_list){

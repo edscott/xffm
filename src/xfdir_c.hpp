@@ -77,14 +77,18 @@ class xfdir_c: virtual utility_c, public gtk_c {
 	virtual gboolean set_dnd_data(GtkSelectionData *, GList *);
 	virtual gboolean receive_dnd(const gchar *, GtkSelectionData *, GdkDragAction);
 
+        void new_items_hash(void);
+        GHashTable *get_items_hash(void);
 
     protected:
         virtual GtkTreeModel *mk_tree_model(void) = 0;
+        virtual void destroy_tree_model(GtkTreeModel *) = 0;
         GtkTreeModel *treemodel;
         gchar *path;
 	gint dir_count;   
 	gboolean large;
         gboolean shows_hidden;
+        GHashTable *items_hash;
         //void tooltip(GtkIconView *, GtkTreePath *);   
     private:
         pthread_mutex_t population_mutex;

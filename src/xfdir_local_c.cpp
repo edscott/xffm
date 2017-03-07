@@ -276,7 +276,7 @@ xfdir_local_c::reload(const gchar *data){
 
 void
 xfdir_local_c::insert_list_into_model(GList *data, GtkListStore *list_store){
-
+    new_items_hash();
     GList *directory_list = (GList *)data;
     dir_count = g_list_length(directory_list);
     if (dir_count > MAX_AUTO_STAT) large = TRUE;
