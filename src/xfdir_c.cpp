@@ -34,6 +34,9 @@ xfdir_c::~xfdir_c(void){
     pthread_rwlock_destroy(&population_lock);
 }
 
+void 
+xfdir_c::destroy_tree_model(GtkTreeModel *){}
+
 void
 xfdir_c::new_items_hash(void){
     if (items_hash) {

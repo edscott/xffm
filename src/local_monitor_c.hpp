@@ -50,6 +50,7 @@ class local_monitor_c: public xfdir_c, virtual utility_c {
         gboolean add_new_item(GFile *);
         gboolean remove_item(GFile *);
         gboolean restat_item(GFile *);
+        void destroy_tree_model(void);
     protected:
     private:
         xd_t *get_xd_p(GFile *);

@@ -82,7 +82,7 @@ class xfdir_c: virtual utility_c, public gtk_c {
 
     protected:
         virtual GtkTreeModel *mk_tree_model(void) = 0;
-        virtual void destroy_tree_model(GtkTreeModel *) = 0;
+        virtual void destroy_tree_model(GtkTreeModel *);
         GtkTreeModel *treemodel;
         gchar *path;
 	gint dir_count;   

@@ -5,29 +5,51 @@
 
 #include "local_monitor_c.hpp"
 
+
+static gboolean free_stat_func (GtkTreeModel *model,
+                            GtkTreePath *path,
+                            GtkTreeIter *iter,
+                            gpointer data){
+
+    struct stat *st_p;
+    gchar *name;
+    gtk_tree_model_get(model, iter, 
+            COL_STAT, &st_p, 
+	    -1);
+    g_free(st_p);
+    return TRUE;
+}
+
 static gboolean stat_func (GtkTreeModel *model,
                             GtkTreePath *path,
                             GtkTreeIter *iter,
                             gpointer data){
+    struct stat *st;
     gchar *text;
-    gtk_tree_model_get (model, iter, COL_ACTUAL_NAME, &text, -1);  
+    gchar *basename = g_path_get_basename((gchar *)data);
+    gtk_tree_model_get (model, iter, 
+            COL_ACTUAL_NAME, &text, 
+            COL_STAT, &st, 
+            -1);  
     
-    if (strcmp(text, (gchar *)data)){
+    if (strcmp(basename, text)){
         g_free(text);
+        g_free(basename);
         return FALSE;
     }
-    DBG("removing %s from treemodel.\n", text);
-    GtkListStore *store = GTK_LIST_STORE(model);
-    
-    struct stat *st = (struct stat *)calloc(1, sizeof(struct stat);
-    stat(XXX, fullpath);
+    g_free(text);
+    g_free(basename);
+    g_free(st);
+    st = (struct stat *)calloc(1, sizeof(struct stat));
 
-    gtk_list_store_set (list_store, iter, 
-            COL_STAT,xd_p->st, 
+    GtkListStore *store = GTK_LIST_STORE(model);
+    st = (struct stat *)calloc(1, sizeof(struct stat));
+    stat((gchar *)data, st);
+
+    gtk_list_store_set (store, iter, 
+            COL_STAT,st, 
             -1);
 
-    gtk_list_store_remove(store, iter);
-    g_free(text);
     return TRUE;
 }
 
@@ -36,7 +58,11 @@ static gboolean rm_func (GtkTreeModel *model,
                             GtkTreeIter *iter,
                             gpointer data){
     gchar *text;
-    gtk_tree_model_get (model, iter, COL_ACTUAL_NAME, &text, -1);  
+    struct stat *st_p=NULL;
+    gtk_tree_model_get (model, iter, 
+            COL_STAT, &st_p, 
+            COL_ACTUAL_NAME, &text, 
+            -1);  
     
     if (strcmp(text, (gchar *)data)){
         g_free(text);
@@ -44,8 +70,11 @@ static gboolean rm_func (GtkTreeModel *model,
     }
     DBG("removing %s from treemodel.\n", text);
     GtkListStore *store = GTK_LIST_STORE(model);
+
+//  free stat record, if any
+    g_free(st_p);
+
     gtk_list_store_remove(store, iter);
-    // FIXME: what happens to struct stat pointer? does it leak?
     g_free(text);
     return TRUE;
 }
@@ -103,6 +132,12 @@ monitor_f (GFileMonitor      *mon,
 
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
+
+void
+local_monitor_c::destroy_tree_model(void){
+    gtk_tree_model_foreach (treemodel, free_stat_func, NULL); 
+}
+
 GFile *
 local_monitor_c::get_gfile(void){ return gfile;}
 
@@ -169,22 +204,16 @@ local_monitor_c::remove_item(GFile *file){
 
 gboolean 
 local_monitor_c::restat_item(GFile *src){
-    gchar *basename = g_file_get_basename(file);
+    gchar *basename = g_file_get_basename(src);
     GHashTable *hash = get_items_hash();
-    if (!hash || !g_hash_table_lookup(basename)) return FALSE; 
-    gtk_tree_model_foreach (GTK_TREE_MODEL(store), stat_func, (gpointer) basename); 
+    if (!hash || !g_hash_table_lookup(hash, basename)) {
+        g_free(basename);
+        return FALSE; 
+    }
     g_free(basename);
-    return TRUE;
-}
-
-gboolean 
-local_monitor_c::rename_item(GFile *src, GFile *tgt){
-    
-    gchar *basename = g_file_get_basename(file);
-    GHashTable *hash = get_items_hash();
-    if (hash) g_hash_table_remove(hash, basename); 
-    gtk_tree_model_foreach (GTK_TREE_MODEL(store), rm_func, (gpointer) basename); 
-    g_free(basename);
+    gchar *fullpath = g_file_get_path(src);
+    gtk_tree_model_foreach (GTK_TREE_MODEL(store), stat_func, (gpointer) fullpath); 
+    g_free(fullpath);
     return TRUE;
 }
 

@@ -1,7 +1,6 @@
 #include "view_c.hpp"
 #include "local_dnd_c.hpp"
 #include "xfdir_local_c.hpp"
-
 static gint compare_by_name (const void *, const void *);
 
 xfdir_local_c::xfdir_local_c(data_c *data0, const gchar *data, void *dataV): 
@@ -20,8 +19,10 @@ xfdir_local_c::xfdir_local_c(data_c *data0, const gchar *data, void *dataV):
 }
 
 xfdir_local_c::~xfdir_local_c(void){
+    destroy_tree_model();
     stop_monitor();
 }
+
 void
 xfdir_local_c::item_activated (GtkIconView *iconview, GtkTreePath *tpath, void *data)
 {
@@ -263,6 +264,7 @@ xfdir_local_c::reload(const gchar *data){
         path = g_strdup(data);
         DBG("current dir is %s\n", path);
     }
+    destroy_tree_model();
     gtk_list_store_clear (GTK_LIST_STORE(treemodel));   
     heartbeat = 0;
     GList *directory_list = read_items (&heartbeat);
