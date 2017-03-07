@@ -106,11 +106,14 @@ monitor_f (GFileMonitor      *mon,
             break;
         case G_FILE_MONITOR_EVENT_CHANGES_DONE_HINT:
             DBG("Received  CHANGES_DONE_HINT (%d): \"%s\", \"%s\"\n", event, f, s);
+            p->restat_item(first);
+            // if image, then reload the pixbuf
             break;
         case G_FILE_MONITOR_EVENT_CHANGED:
             DBG("Received  CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
+            break;
         case G_FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED:
-            fprintf(stderr,"Received  ATTRIBUTE_CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
+            DBG("Received  ATTRIBUTE_CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
             p->restat_item(first);
             break;
         case G_FILE_MONITOR_EVENT_PRE_UNMOUNT:
