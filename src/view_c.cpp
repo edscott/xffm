@@ -956,21 +956,28 @@ button_press_f (GtkWidget *widget,
 
     // long press or button 3 should do popup menu...
     if (event->button != 3) return FALSE;
-    GtkTreePath *path;
+    GtkTreePath *tpath;
 
     fprintf(stderr, "button press event\n");
     if (!gtk_icon_view_get_item_at_pos (GTK_ICON_VIEW(widget),
                                event->x,
                                event->y,
-                               &path, NULL)) {
+                               &tpath, NULL)) {
 
-        return FALSE;
+        tpath = NULL;
     }
 
     NOOP( "view_p: button_press_event...\n");
     
-    gboolean retval = ((view_c *)data)->get_xfdir_p()->popup(path);
-    gtk_tree_path_free(path);
+    gboolean retval;
+    
+    if (tpath) {
+	retval = ((view_c *)data)->get_xfdir_p()->popup(tpath);
+	gtk_tree_path_free(tpath);
+    } else {
+	retval = ((view_c *)data)->get_xfdir_p()->popup();
+    }
+
     return retval;
 }
 

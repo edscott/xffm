@@ -286,8 +286,21 @@ xfdir_c::get_icon_highlight_size(const gchar *name){
 }
 
 gboolean
+xfdir_c::popup(void){
+    fprintf(stderr, "xfdir_c::popup: general popup\n");
+    return TRUE;
+}
+
+gboolean
 xfdir_c::popup(GtkTreePath *tpath){
+    
+    if (!tpath){
+	fprintf(stderr, "xfdir_c::popup: general popup\n");
+    }
+
+    
     GtkTreeIter iter;
+
     gtk_tree_model_get_iter (treemodel, &iter, tpath);
     
     gchar *name;
