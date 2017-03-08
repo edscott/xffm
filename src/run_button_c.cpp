@@ -130,11 +130,23 @@ void send_signal(GtkWidget *w, void *data){
 static void
 run_button_toggled(GtkWidget *button, void *data){
     run_button_c *run_button_p = (run_button_c *)data;
+#if 0
     if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(button))){
 	// here we set the parameter for the signal actions.
 	TRACE("run button toggled: pid=%d\n", run_button_p->get_grandchild());
         run_button_p->set_signal_action_parameter(data);
+
+        // unstable: requieres GTK+ 3.22
+     /*   gtk_menu_popup_at_widget (GTK_MENU(run_button_p->get_menu()),
+                          button,
+                          GDK_ANCHOR_FLIP_Y,
+                          GDK_ANCHOR_FLIP_Y,
+                          NULL);   //  const GdkEvent *trigger_event);*/
+        //GDK_ANCHOR_FLIP_X | GDK_ANCHOR_FLIP_Y | GDK_ANCHOR_SLIDE_X | GDK_ANCHOR_SLIDE_Y | GDK_ANCHOR_RESIZE_X | GDK_ANCHOR_RESIZE_Y
     }
+#endif
+ /*   gtk_menu_popup (GTK_MENU(run_button_p->get_menu()),
+                NULL, NULL, NULL, NULL, 3, gtk_get_current_event_time());*/
 }
 
 static void *
@@ -143,10 +155,10 @@ make_run_data_button (void *data) {
     view_c *view_p = (view_c *)run_button_p->get_view_v();
     GtkWidget *button = gtk_menu_button_new ();
 
-    GMenuModel *menu = run_button_p->get_signal_menu_model();
+    //GMenuModel *menu = run_button_p->get_signal_menu_model();
     //fprintf(stderr, "make_run_data_button: menu model is %p\n", menu);
-    gtk_menu_button_set_menu_model (GTK_MENU_BUTTON (button), menu);
-
+    //gtk_menu_button_set_menu_model (GTK_MENU_BUTTON (button), menu);
+    gtk_menu_button_set_popup (GTK_MENU_BUTTON (button),  run_button_p->get_menu());
     run_button_p->run_button_setup(button);
 
 

@@ -9,7 +9,6 @@ class signal_action_c {
         signal_action_c(data_c *);
         GMenuModel *get_signal_menu_model(void);
         void set_signal_action_parameter(void *);
-        GtkWidget *get_menu(void);
     protected:
     private:
         void add_actions(GtkApplication *);
@@ -17,7 +16,6 @@ class signal_action_c {
         GMenuModel *signal_menu_model; 
 	data_c *data_p;
 
-        GtkWidget *menu;
 };
 
 #endif

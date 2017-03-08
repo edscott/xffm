@@ -20,10 +20,13 @@ static void process_info(GSimpleAction *, GVariant *, gpointer);
 
 signal_action_c::signal_action_c(data_c *data){
     data_p = data;
-    add_actions(data_p->get_app());
+    //add_actions(data_p->get_app());
     create_menu_model(data_p->get_app());
     TRACE("signal_action_c::signal_action_c: menu model is %p\n", _get_signal_menu_model());
 }
+
+GtkWidget *
+signal_action_c::get_menu(void){ return menu;}
 
 void
 signal_action_c::create_menu_model(GtkApplication *app){
@@ -85,9 +88,13 @@ signal_action_c::create_menu_model(GtkApplication *app){
 "  </menu>"
 "</interface>", -1, NULL);
     signal_menu_model = G_MENU_MODEL (gtk_builder_get_object (builder, "signal-menu"));
-    
-    gtk_application_set_app_menu (GTK_APPLICATION (app), G_MENU_MODEL (gtk_builder_get_object (builder, "signal-menu")));
+    menu =
+        gtk_menu_new_from_model (G_MENU_MODEL (gtk_builder_get_object (builder, "signal-menu")));
+ 
+    //gtk_application_set_app_menu (GTK_APPLICATION (app), G_MENU_MODEL (gtk_builder_get_object (builder, "signal-menu")));
+
     g_object_unref (builder);
+    return ;
 }
 
 void 
