@@ -187,7 +187,9 @@ find_in_pixbuf_hash_f(void *data){
     pixbuf_hash_c *pixbuf_hash_p= (pixbuf_hash_c *)arg[4];
 
 
-    if (!pixbuf_hash) DBG("find_in_pixbuf_hash_f: hash is null!\n");
+    if (!pixbuf_hash) {
+        fprintf(stderr, "find_in_pixbuf_hash_f: hash is null!\n");
+    }
     pixbuf_t *pixbuf_p = (pixbuf_t *)g_hash_table_lookup (pixbuf_hash, hash_key);
 
     if(!pixbuf_p || !GDK_IS_PIXBUF(pixbuf_p->pixbuf)) {

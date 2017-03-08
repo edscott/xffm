@@ -20,8 +20,8 @@ static void process_info(GSimpleAction *, GVariant *, gpointer);
 
 signal_action_c::signal_action_c(data_c *data){
     data_p = data;
-    //add_actions(data_p->get_app());
     create_menu_model(data_p->get_app());
+    add_actions(data_p->get_app());
     TRACE("signal_action_c::signal_action_c: menu model is %p\n", _get_signal_menu_model());
 }
 
@@ -99,7 +99,7 @@ signal_action_c::create_menu_model(GtkApplication *app){
 
 void 
 signal_action_c::set_signal_action_parameter(void *data){
-    g_object_set_data(G_OBJECT(data_p->get_app()), "run_button_p", data);
+    g_object_set_data(G_OBJECT(menu), "run_button_p", data);
 }    
 
 void
@@ -119,7 +119,7 @@ signal_action_c::add_actions(GtkApplication *app){
       { "segv_signal", segv_signal, NULL, NULL, NULL }
     };
     g_action_map_add_action_entries (G_ACTION_MAP (app), app_entries, 
-            G_N_ELEMENTS (app_entries), app);
+            G_N_ELEMENTS (app_entries), menu);
 
 }
 
@@ -136,69 +136,69 @@ static void ps_signal(gpointer, gint);
 static void ps_renice(gpointer);
 
 static void
-renice_signal(GSimpleAction *action, GVariant *parameter, gpointer app)
+renice_signal(GSimpleAction *action, GVariant *parameter, gpointer menu_p)
 {
-    ps_renice(app);
+    ps_renice(menu_p);
 }
 
 static void
-stop_signal(GSimpleAction *action, GVariant *parameter, gpointer app)
+stop_signal(GSimpleAction *action, GVariant *parameter, gpointer menu_p)
 {
-    ps_signal(app, SIGSTOP);
+    ps_signal(menu_p, SIGSTOP);
 }
 
 static void
-cont_signal(GSimpleAction *action, GVariant *parameter, gpointer app)
+cont_signal(GSimpleAction *action, GVariant *parameter, gpointer menu_p)
 {
-    ps_signal(app, SIGCONT);
+    ps_signal(menu_p, SIGCONT);
 }
 
 static void
-int_signal(GSimpleAction *action, GVariant *parameter, gpointer app)
+int_signal(GSimpleAction *action, GVariant *parameter, gpointer menu_p)
 {
-    ps_signal(app, SIGINT);
+    ps_signal(menu_p, SIGINT);
 }
 
 static void
-hup_signal(GSimpleAction *action, GVariant *parameter, gpointer app)
+hup_signal(GSimpleAction *action, GVariant *parameter, gpointer menu_p)
 {
-    ps_signal(app, SIGHUP);
+    ps_signal(menu_p, SIGHUP);
 }
 
 static void
-usr1_signal(GSimpleAction *action, GVariant *parameter, gpointer app)
+usr1_signal(GSimpleAction *action, GVariant *parameter, gpointer menu_p)
 {
-    ps_signal(app, SIGUSR1);
+    ps_signal(menu_p, SIGUSR1);
 }
 
 static void
-usr2_signal(GSimpleAction *action, GVariant *parameter, gpointer app)
+usr2_signal(GSimpleAction *action, GVariant *parameter, gpointer menu_p)
 {
-    ps_signal(app, SIGUSR2);
+    ps_signal(menu_p, SIGUSR2);
 }
 
 static void
-term_signal(GSimpleAction *action, GVariant *parameter, gpointer app)
+term_signal(GSimpleAction *action, GVariant *parameter, gpointer menu_p)
 {
-    ps_signal(app, SIGTERM);
+    ps_signal(menu_p, SIGTERM);
 }
 
 static void
-kill_signal(GSimpleAction *action, GVariant *parameter, gpointer app)
+kill_signal(GSimpleAction *action, GVariant *parameter, gpointer menu_p)
 {
-    ps_signal(app, SIGKILL);
+    ps_signal(menu_p, SIGKILL);
 }
 
 static void
-segv_signal(GSimpleAction *action, GVariant *parameter, gpointer app)
+segv_signal(GSimpleAction *action, GVariant *parameter, gpointer menu_p)
 {
-    ps_signal(app, SIGSEGV);
+    ps_signal(menu_p, SIGSEGV);
 }
 
 static void
 process_info (GSimpleAction *action,
                        GVariant      *parameter,
-                       gpointer       app)
+                       gpointer       menu_p)
 {
     DBG("process_info\n");
 }
@@ -271,8 +271,8 @@ shell_child_pid(gint pid){
 
 
 static void
-ps_signal(gpointer app, gint signal_id){
-    run_button_c *run_button_p = (run_button_c *)g_object_get_data(G_OBJECT(app), "run_button_p");
+ps_signal(gpointer menu_p, gint signal_id){
+    run_button_c *run_button_p = (run_button_c *)g_object_get_data(G_OBJECT(menu_p), "run_button_p");
     gint pid = run_button_p->get_grandchild();
     if (!pid) return;
     // Do we need sudo?
@@ -286,7 +286,7 @@ ps_signal(gpointer app, gint signal_id){
         
     view_c *view_p = (view_c *) run_button_p->get_view_v();
 
-    DBG("signal to pid: %d (in_shell=%d sudo=%d)\n", pid, run_button_p->in_shell, sudoize);
+    fprintf(stderr, "signal to pid: %d (in_shell=%d sudo=%d)\n", pid, run_button_p->in_shell, sudoize);
     if (sudoize) {
         //        1.undetached child will remain as zombie
         //        2.sudo will remain in wait state and button will not disappear
@@ -317,8 +317,8 @@ ps_signal(gpointer app, gint signal_id){
 }
 
 static void
-ps_renice(gpointer app){
-    run_button_c *run_button_p = (run_button_c *)g_object_get_data(G_OBJECT(app), "run_button_p");
+ps_renice(gpointer menu_p){
+    run_button_c *run_button_p = (run_button_c *)g_object_get_data(G_OBJECT(menu_p), "run_button_p");
 
     gint pid = run_button_p->get_grandchild();
     if (run_button_p->in_shell) pid = shell_child_pid(pid);

@@ -20,7 +20,7 @@ typedef struct thread_run_t {
 run_button_c::run_button_c(data_c *data0, void *data, const gchar * exec_command, pid_t child, gboolean shell_wrap):gtk_c(data0), signal_action_c(data0){
     view_v = data;
     in_shell = shell_wrap;
-
+    
     pid = child;
     grandchild = Tubo_child(child);
     command = g_strdup (exec_command);
@@ -130,23 +130,11 @@ void send_signal(GtkWidget *w, void *data){
 static void
 run_button_toggled(GtkWidget *button, void *data){
     run_button_c *run_button_p = (run_button_c *)data;
-#if 0
     if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(button))){
 	// here we set the parameter for the signal actions.
 	TRACE("run button toggled: pid=%d\n", run_button_p->get_grandchild());
         run_button_p->set_signal_action_parameter(data);
-
-        // unstable: requieres GTK+ 3.22
-     /*   gtk_menu_popup_at_widget (GTK_MENU(run_button_p->get_menu()),
-                          button,
-                          GDK_ANCHOR_FLIP_Y,
-                          GDK_ANCHOR_FLIP_Y,
-                          NULL);   //  const GdkEvent *trigger_event);*/
-        //GDK_ANCHOR_FLIP_X | GDK_ANCHOR_FLIP_Y | GDK_ANCHOR_SLIDE_X | GDK_ANCHOR_SLIDE_Y | GDK_ANCHOR_RESIZE_X | GDK_ANCHOR_RESIZE_Y
     }
-#endif
- /*   gtk_menu_popup (GTK_MENU(run_button_p->get_menu()),
-                NULL, NULL, NULL, NULL, 3, gtk_get_current_event_time());*/
 }
 
 static void *
