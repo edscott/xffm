@@ -297,7 +297,7 @@ xfdir_local_c::insert_list_into_model(GList *data, GtkListStore *list_store){
     g_list_free(directory_list);
 }
 
-
+/*
 gboolean
 xfdir_local_c::popup(GtkTreePath *tpath){
     GtkTreeIter iter;
@@ -317,7 +317,7 @@ xfdir_local_c::popup(GtkTreePath *tpath){
     g_free(fullpath);
     return TRUE;
 }
-
+*/
 
 /////////////////////////////////////////////////////////////////////
 

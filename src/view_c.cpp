@@ -276,6 +276,7 @@ view_c::set_treemodel(xfdir_c *data){
     NOOP( "new treemodel= %p (old_xfdir=%p new_xfdir=%p)\n", tree_model, old_xfdir_p, xfdir_p);
     //if (tree_model) gtk_widget_hide(GTK_WIDGET(get_iconview()));
     gtk_icon_view_set_model(get_iconview(), tree_model);
+    g_object_set_data(G_OBJECT(tree_model), "iconview", get_iconview());
     gtk_icon_view_set_text_column (get_iconview(), xfdir_p->get_text_column());
     gtk_icon_view_set_pixbuf_column (get_iconview(),  xfdir_p->get_icon_column());
     gtk_icon_view_set_selection_mode (get_iconview(), GTK_SELECTION_MULTIPLE);

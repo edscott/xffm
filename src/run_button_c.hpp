@@ -3,7 +3,6 @@
 #include "utility_c.hpp"
 #include "gtk_c.hpp"
 
-// FIXME: no use for data_c *
 class run_button_c: virtual utility_c, public gtk_c {
     public:
         run_button_c(data_c *, void *, const gchar *, pid_t, gboolean);

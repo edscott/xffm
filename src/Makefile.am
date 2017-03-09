@@ -47,6 +47,7 @@ xffm_SOURCES = \
                     print_c.cpp   \
 	  xfdir_root_c.cpp \
 	    xfdir_c.cpp \
+	      menu_c.cpp \
 	  xfdir_local_c.cpp \
 	    local_monitor_c.cpp \
 	    local_dnd_c.cpp

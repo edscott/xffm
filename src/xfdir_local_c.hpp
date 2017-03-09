@@ -11,7 +11,7 @@ class xfdir_local_c: public local_monitor_c, public local_dnd_c, virtual utility
         void reload(const gchar *);
         gchar *make_tooltip_text (GtkTreePath *);
         void item_activated (GtkIconView *, GtkTreePath *, void *);
-	gboolean popup(GtkTreePath *);
+	//gboolean popup(GtkTreePath *);
 	const gchar *get_xfdir_iconname(void);
 	
 	gboolean set_dnd_data(GtkSelectionData *, GList *);

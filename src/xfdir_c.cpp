@@ -6,7 +6,7 @@
 using namespace std;
 static gboolean unhighlight (gpointer, gpointer, gpointer);
 
-xfdir_c::xfdir_c(data_c *data0, const gchar *data): gtk_c(data0){
+xfdir_c::xfdir_c(data_c *data0, const gchar *data): menu_c(data0){
     path = g_strdup(data);
     data_p = data0;
     large = FALSE;
@@ -288,19 +288,17 @@ xfdir_c::get_icon_highlight_size(const gchar *name){
 gboolean
 xfdir_c::popup(void){
     fprintf(stderr, "xfdir_c::popup: general popup\n");
+    gtk_menu_popup(get_view_menu(), NULL, NULL, NULL, NULL, 3, gtk_get_current_event_time());
     return TRUE;
 }
 
 gboolean
 xfdir_c::popup(GtkTreePath *tpath){
-    
     if (!tpath){
-	fprintf(stderr, "xfdir_c::popup: general popup\n");
+	popup();
     }
 
-    
     GtkTreeIter iter;
-
     gtk_tree_model_get_iter (treemodel, &iter, tpath);
     
     gchar *name;
@@ -309,10 +307,25 @@ xfdir_c::popup(GtkTreePath *tpath){
             DISPLAY_NAME, &name, 
             ACTUAL_NAME, &actual_name, 
 	    -1);
+    gchar *p = g_build_filename(path, actual_name, NULL);
     // here we do the particular xfdir popup menu method (overloaded)
     fprintf(stderr, "xfdir_c::popup: popup for %s (%s)\n", name, actual_name);
+    GtkIconView *iconview = (GtkIconView *)g_object_get_data(G_OBJECT(treemodel), "iconview");
+    if (gtk_icon_view_path_is_selected (iconview, tpath)){ //selected
+        fprintf(stderr, "%s is selected (may be multiple)\n", p);
+        gtk_menu_popup(get_selected_menu(), NULL, NULL, NULL, NULL, 3, gtk_get_current_event_time());
+    } else
+    if (g_file_test(p, G_FILE_TEST_IS_DIR)){
+        fprintf(stderr, "%s is directory\n", p);
+        gtk_menu_popup(get_directory_menu(), NULL, NULL, NULL, NULL, 3, gtk_get_current_event_time());
+    } else {
+        fprintf(stderr, "%s is ordinary selection\n", p);
+        gtk_menu_popup(get_selected_menu(), NULL, NULL, NULL, NULL, 3, gtk_get_current_event_time());
+
+    }
     g_free(name);
     g_free(actual_name);
+    g_free(p);
     return TRUE;
 }
 
