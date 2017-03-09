@@ -24,7 +24,6 @@ xffm_SOURCES = \
 	  gnu_utils_c.cpp \
 	  utility_c.cpp \
           run_button_c.cpp \
-	    signal_action_c.cpp \
 	  pathbar_c.cpp   \
 	  gtk_c.cpp \
 	    tooltip_c.cpp \

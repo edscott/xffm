@@ -2,9 +2,9 @@
 #define RUN_BUTTON_C_HPP
 #include "utility_c.hpp"
 #include "gtk_c.hpp"
-#include "signal_action_c.hpp"
 
-class run_button_c: virtual utility_c, public gtk_c, public signal_action_c {
+// FIXME: no use for data_c *
+class run_button_c: virtual utility_c, public gtk_c {
     public:
         run_button_c(data_c *, void *, const gchar *, pid_t, gboolean);
         ~run_button_c(void);
@@ -22,6 +22,7 @@ class run_button_c: virtual utility_c, public gtk_c, public signal_action_c {
         void *get_view_v(void);
         GtkWidget *make_menu(void);
         void *_context_function(void * (*function)(gpointer), void * function_data);
+        GtkWidget *get_menu(void){return menu;}
 	
     protected:
     private:
@@ -35,6 +36,8 @@ class run_button_c: virtual utility_c, public gtk_c, public signal_action_c {
         GtkWidget *button;
         void *view_v;
     private:
+        void create_menu(void);
+        GtkWidget *menu;
 
 };
 
