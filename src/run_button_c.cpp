@@ -21,6 +21,7 @@ run_button_c::run_button_c(data_c *data0, void *data, const gchar * exec_command
     view_v = data;
     in_shell = shell_wrap;
     
+    g_object_set_data(G_OBJECT(get_menu()), "run_button_p", (void *)this);
     pid = child;
     grandchild = Tubo_child(child);
     command = g_strdup (exec_command);
@@ -133,7 +134,7 @@ run_button_toggled(GtkWidget *button, void *data){
     if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(button))){
 	// here we set the parameter for the signal actions.
 	TRACE("run button toggled: pid=%d\n", run_button_p->get_grandchild());
-        run_button_p->set_signal_action_parameter(data);
+        //run_button_p->set_signal_action_parameter(data);
     }
 }
 

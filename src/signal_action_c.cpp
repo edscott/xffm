@@ -97,10 +97,10 @@ signal_action_c::create_menu_model(GtkApplication *app){
     return ;
 }
 
-void 
+/*void 
 signal_action_c::set_signal_action_parameter(void *data){
     g_object_set_data(G_OBJECT(menu), "run_button_p", data);
-}    
+} */   
 
 void
 signal_action_c::add_actions(GtkApplication *app){
