@@ -51,6 +51,8 @@ data_c::data_c(void){
     application_hash_output_ext = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
     generic_icon_hash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
     
+    iconname_hash = g_hash_table_new(g_str_hash, g_str_equal);
+    populate_iconname_hash();
     pixbuf_hash = 
 	g_hash_table_new_full (g_str_hash, g_str_equal,g_free, free_pixbuf_t);
 
@@ -61,6 +63,7 @@ data_c::data_c(void){
 
 data_c::~data_c(void){
     pthread_mutex_destroy(&readdir_mutex);
+    g_hash_table_destroy(iconname_hash);
     g_hash_table_destroy(mimetype_hash);
     g_hash_table_destroy(alias_hash);
     g_hash_table_destroy(application_hash_type);
@@ -82,6 +85,25 @@ data_c::~data_c(void){
    
     g_hash_table_destroy(highlight_hash);
 
+}
+
+void
+data_c::populate_iconname_hash(void){
+    g_hash_table_insert(iconname_hash, _("Open terminal"), (void *)"terminal");
+    g_hash_table_insert(iconname_hash, _("Execute Shell Command"), (void *)"execute");
+    g_hash_table_insert(iconname_hash, _("Paste"), (void *)"edit-paste");
+    g_hash_table_insert(iconname_hash, _("Add bookmark"), (void *)"list-add");
+    g_hash_table_insert(iconname_hash, _("Remove bookmark"), (void *)"list-remove");
+    g_hash_table_insert(iconname_hash, _("Search"), (void *)"find");
+    g_hash_table_insert(iconname_hash, _("Close"), (void *)"cancel");
+    g_hash_table_insert(iconname_hash, _("Exit"), (void *)"window-close");
+    g_hash_table_insert(iconname_hash, _("Open with"), (void *)"execute");
+    g_hash_table_insert(iconname_hash, _("Cut"), (void *)"cut");
+    g_hash_table_insert(iconname_hash, _("Copy"), (void *)"copy");
+    g_hash_table_insert(iconname_hash, _("Delete"), (void *)"delete");
+    g_hash_table_insert(iconname_hash, _("Shred"), (void *)"dialog-warning");
+    g_hash_table_insert(iconname_hash, _("bcrypt"), (void *)"emblem-keyhole");
+    g_hash_table_insert(iconname_hash, _("Open in New Tab"), (void *)"open");
 }
 
 pthread_mutex_t *

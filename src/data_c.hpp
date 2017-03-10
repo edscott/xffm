@@ -31,11 +31,13 @@ class data_c {
         GHashTable *application_hash_output_ext;
         GHashTable *generic_icon_hash;
 
+        GHashTable *iconname_hash;
         
         GHashTable *highlight_hash;
 	
     private:
 	GtkApplication *app; 
+        void populate_iconname_hash(void);
 	pthread_mutex_t readdir_mutex;
 };
 

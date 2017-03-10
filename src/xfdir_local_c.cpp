@@ -8,7 +8,7 @@ xfdir_local_c::xfdir_local_c(data_c *data0, const gchar *data, void *dataV):
 {
 
     data_p = data0;
-
+    create_menu();
     shows_hidden = ((view_c *)dataV)->shows_hidden();
     NOOP( "data2=%d\n", data2);
     treemodel = mk_tree_model();
@@ -21,6 +21,8 @@ xfdir_local_c::xfdir_local_c(data_c *data0, const gchar *data, void *dataV):
 xfdir_local_c::~xfdir_local_c(void){
     destroy_tree_model();
     stop_monitor();
+    gtk_widget_destroy(GTK_WIDGET(selection_menu));
+    gtk_widget_destroy(GTK_WIDGET(directory_menu));
 }
 
 void
@@ -278,7 +280,6 @@ xfdir_local_c::reload(const gchar *data){
 
 void
 xfdir_local_c::insert_list_into_model(GList *data, GtkListStore *list_store){
-    new_items_hash();
     GList *directory_list = (GList *)data;
     dir_count = g_list_length(directory_list);
     if (dir_count > MAX_AUTO_STAT) large = TRUE;
@@ -831,4 +832,80 @@ xfdir_local_c::get_xfdir_iconname(void){
     return "folder";
 }
 
+
+static void menu_option(GtkWidget *menu_item, gpointer data){
+    const gchar *what = (const gchar *)data;
+    fprintf(stderr, "menu option: %s\n", what);
+    if (strcmp(what, _("Open in New Tab"))==0){}
+    else if (strcmp(what, _("Open with"))==0){}
+    else if (strcmp(what, _("Search"))==0){}
+    else if (strcmp(what, _("Cut"))==0){}
+    else if (strcmp(what, _("Copy"))==0){}
+    else if (strcmp(what, _("Paste"))==0){}
+    else if (strcmp(what, _("Delete"))==0){}
+    else if (strcmp(what, _("Shred"))==0){}
+    else if (strcmp(what, _("bcrypt"))==0){} 
+}
+
+void
+xfdir_local_c::create_menu(void){
+   const gchar *directory_items[]={
+        N_("Open in New Tab"),
+        N_("Cut"),
+        N_("Copy"),
+        N_("Paste"),
+        N_("Delete"),
+        N_("Shred"),
+        N_("bcrypt"),
+         NULL};
+    const gchar *selection_items[]={
+        N_("Open with"),
+        N_("Cut"),
+        N_("Copy"),
+        N_("Delete"),
+        N_("Shred"),
+        N_("bcrypt"),
+         NULL};
+
+    selection_menu = mk_menu(selection_items, menu_option);
+    directory_menu = mk_menu(directory_items, menu_option);
+}
+
+gboolean
+xfdir_local_c::popup(GtkTreePath *tpath){
+    GtkIconView *iconview = (GtkIconView *)g_object_get_data(G_OBJECT(treemodel), "iconview");
+    GList *selection_list = gtk_icon_view_get_selected_items (iconview);
+    gint selected_items = 0;
+    if (selection_list){
+        selected_items = g_list_length(selection_list);
+        g_list_free_full (selection_list, (GDestroyNotify) gtk_tree_path_free);
+    }
+
+    if (!tpath && !selected_items){
+	view_popup();
+    }
+    GtkTreeIter iter;
+    gtk_tree_model_get_iter (treemodel, &iter, tpath);
+    
+    gchar *name;
+    gchar *actual_name;
+    gtk_tree_model_get (treemodel, &iter, 
+            DISPLAY_NAME, &name, 
+            ACTUAL_NAME, &actual_name, 
+	    -1);
+    gchar *p = g_build_filename(path, actual_name, NULL);
+    // here we do the particular xfdir popup menu method (overloaded)
+    fprintf(stderr, "xfdir_c::popup: popup for %s (%s)\n", name, actual_name);
+    if (selected_items <= 1 && g_file_test(p, G_FILE_TEST_IS_DIR)){
+        gtk_menu_popup(directory_menu, NULL, NULL, NULL, NULL, 3, gtk_get_current_event_time());
+    } else {
+        gtk_menu_popup(selection_menu, NULL, NULL, NULL, NULL, 3, gtk_get_current_event_time());
+    }
+    
+    
+    g_free(name);
+    g_free(actual_name);
+    g_free(p);
+    return TRUE;
+}
 

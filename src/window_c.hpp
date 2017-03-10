@@ -3,10 +3,10 @@
 #include "xffm+.h"
 
 #include "data_c.hpp"
-#include "gtk_c.hpp"
+#include "menu_c.hpp"
 #include "utility_c.hpp"
 
-class window_c: public gtk_c {
+class window_c: public menu_c {
     public:
         window_c(data_c *);
         ~window_c(void);
@@ -38,8 +38,10 @@ class window_c: public gtk_c {
         gchar *tooltip_path_string;
         GtkWidget *tt_window;
 
+        GMenuModel *signal_menu_model;
+        void create_menu_model(GtkApplication *);
+        void add_actions(GtkApplication *);
 	data_c *data_p;
-
 
 };
 

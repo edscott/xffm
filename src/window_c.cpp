@@ -11,11 +11,13 @@ static void destroy(GtkWidget *, gpointer);
 static gboolean window_tooltip_f(GtkWidget  *, gint, gint, gboolean, GtkTooltip *, gpointer);
 
 
-window_c::window_c(data_c *data0):gtk_c(data0) {
+window_c::window_c(data_c *data0):menu_c(data0) {
     data_p = data0;
     view_list=NULL;
     tt_window=NULL;
     tooltip_path_string = NULL;
+    create_menu_model(data_p->get_app());
+    add_actions(data_p->get_app());
 
     view_list_mutex = PTHREAD_MUTEX_INITIALIZER;
     window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
@@ -34,27 +36,50 @@ window_c::window_c(data_c *data0):gtk_c(data0) {
     g_object_set_data(G_OBJECT(notebook), "window_p", (void *)this);
     
     gtk_notebook_set_scrollable (notebook, TRUE);
+
     gtk_container_add (GTK_CONTAINER (window), GTK_WIDGET(notebook));
+    
+ /*
+    GtkWidget *window_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    GtkWidget *view_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    GtkWidget *button_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    gtk_container_add (GTK_CONTAINER (window), GTK_WIDGET(window_box));
+    gtk_box_pack_start(GTK_BOX(window_box), view_box, TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(window_box), button_box, FALSE, FALSE, 0); 
+    gtk_box_pack_end(GTK_BOX(view_box), GTK_WIDGET(notebook), TRUE, TRUE, 0);
+    gtk_widget_show_all(window_box);
+    */
+
+
 
     new_tab_button = gtk_button_new ();
     setup_image_button(new_tab_button, "list-add", _("Open a new tab (Ctrl+T)"));
     gtk_widget_show(new_tab_button);
-
+/*
     GtkWidget *button = gtk_button_new ();
     setup_image_button(button, "go-home", _("Home"));
     gtk_widget_show(button);
+*/
+    GtkWidget *menu_button = gtk_menu_button_new ();
+    GtkWidget *popover = gtk_popover_new_from_model (menu_button, signal_menu_model);
+    gtk_menu_button_set_popover (GTK_MENU_BUTTON(menu_button), popover);
+    gtk_widget_show(menu_button);
 
+    GtkWidget *button_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    gtk_box_pack_start(GTK_BOX(button_box), new_tab_button,  FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(button_box), menu_button,  FALSE, FALSE, 0);
+    gtk_widget_show(button_box);
+    gtk_notebook_set_action_widget (notebook, button_box, GTK_PACK_END);
 
-
+    /*
+    gtk_notebook_set_action_widget (notebook, menu_button, GTK_PACK_END);
     gtk_notebook_set_action_widget (notebook, new_tab_button, GTK_PACK_END);
-    gtk_notebook_set_action_widget (notebook, button, GTK_PACK_START);
-
+    */
     
 
     g_signal_connect(G_OBJECT(new_tab_button), "clicked", 
             G_CALLBACK(on_new_page), (void *)this); 
-    g_signal_connect(G_OBJECT(button), "clicked", 
-            G_CALLBACK(on_go_home), (void *)this); 
+    //g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(on_go_home), (void *)this); 
     g_signal_connect (G_OBJECT(window), "destroy", G_CALLBACK (destroy), 
             (void *)this);
 
@@ -192,13 +217,13 @@ on_new_page(GtkWidget *widget, gpointer data){
     // get and set path
     window_p->create_new_page(view_p->get_path());
 }
-
+/*
 static void
 on_go_home(GtkWidget *widget, gpointer data){
     window_c *window_p = (window_c *)data;
     window_p->go_home();
 }
-
+*/
 
 // mod2 is numlock
 // mod5 is alt-gr
@@ -240,3 +265,110 @@ window_tooltip_f (GtkWidget  *widget,
     if (!tt_window) return FALSE;
     return TRUE;
 }
+
+
+void
+window_c::create_menu_model(GtkApplication *app){
+    GtkBuilder *builder;
+    builder = gtk_builder_new ();
+    const gchar *items[]={        
+        N_("Open terminal"),
+        N_("Execute Shell Command"),
+        N_("Search"),
+        N_("Exit"),
+        NULL};
+    gtk_builder_add_from_string (builder,
+"<interface>"
+"  <menu id='signal-menu'>"
+"    <section>"
+"      <item>"
+"        <attribute name='label' translatable='yes'>Home</attribute>"
+"        <attribute name='action'>app.home</attribute>"
+"      </item>"
+"      <item>"
+"        <attribute name='label' translatable='yes'>Open terminal</attribute>"
+"        <attribute name='action'>app.terminal</attribute>"
+"        <attribute name='verb-icon'>terminal</attribute>"
+"      </item>"
+"      <item>"
+"        <attribute name='label' translatable='yes'>Execute Shell Command</attribute>"
+"        <attribute name='action'>app.shell</attribute>"
+"      </item>"
+"      <item>"
+"        <attribute name='label' translatable='yes'>Search</attribute>"
+"        <attribute name='action'>app.search</attribute>"
+"      </item>"
+"      <item>"
+"        <attribute name='label' translatable='yes'>Exit</attribute>"
+"        <attribute name='action'>app.finish</attribute>"
+"      </item>"
+"    </section>"
+"  </menu>"
+"</interface>", -1, NULL);
+    signal_menu_model = G_MENU_MODEL (gtk_builder_get_object (builder, "signal-menu"));
+    
+    gtk_application_set_app_menu (GTK_APPLICATION (app), G_MENU_MODEL (gtk_builder_get_object (builder, "signal-menu")));
+    g_object_unref (builder);
+}
+
+static void
+ home(GSimpleAction *action,
+                       GVariant      *parameter,
+                       gpointer       data)
+{
+    DBG("home\n");
+    window_c *window_p = (window_c *)data;
+    window_p->go_home();
+
+}
+
+static void
+ terminal(GSimpleAction *action,
+                       GVariant      *parameter,
+                       gpointer       app)
+{
+    DBG("terminal\n");
+}
+
+static void
+ shell(GSimpleAction *action,
+                       GVariant      *parameter,
+                       gpointer       app)
+{
+    DBG("shell\n");
+}
+
+static void
+ search(GSimpleAction *action,
+                       GVariant      *parameter,
+                       gpointer       app)
+{
+    DBG("Search\n");
+}
+
+static void
+ finish(GSimpleAction *action,
+                       GVariant      *parameter,
+                       gpointer       app)
+{
+    DBG("finish\n");
+    _exit(123);
+}
+
+
+
+void
+window_c::add_actions(GtkApplication *app){
+    GActionEntry app_entries[] =
+    {
+      { "home", home, NULL, NULL, NULL },
+      { "terminal", terminal, NULL, NULL, NULL },
+      { "shell", shell, NULL, NULL, NULL },
+      { "search", search, NULL, NULL, NULL },
+      { "finish",  finish, NULL, NULL, NULL }
+    };
+    g_action_map_add_action_entries (G_ACTION_MAP (app), app_entries, 
+            G_N_ELEMENTS (app_entries), (gpointer) this);
+
+}
+

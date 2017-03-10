@@ -49,8 +49,6 @@ class xfdir_c: virtual utility_c, public menu_c {
         virtual void reload(const gchar *)=0;
 	virtual const gchar *get_xfdir_iconname(void)=0;
         virtual void item_activated (GtkIconView *, GtkTreePath *, void *);
-	virtual gboolean popup(GtkTreePath *);
-	gboolean popup(void);
 
         virtual gchar *make_tooltip_text (GtkTreePath *);
         virtual gchar *get_verbatim_name (GtkTreePath *);
@@ -80,6 +78,7 @@ class xfdir_c: virtual utility_c, public menu_c {
 
         void new_items_hash(void);
         GHashTable *get_items_hash(void);
+        virtual void stop_monitor(void){};
 
     protected:
         virtual GtkTreeModel *mk_tree_model(void) = 0;
@@ -92,10 +91,6 @@ class xfdir_c: virtual utility_c, public menu_c {
         GHashTable *items_hash;
         //void tooltip(GtkIconView *, GtkTreePath *);   
     private:
-        pthread_mutex_t population_mutex;
-        pthread_cond_t population_cond;
-        gint population_condition;
-        pthread_rwlock_t population_lock;
 
         data_c *data_p;
 

@@ -4,7 +4,7 @@
 
 class xfdir_root_c: public xfdir_c, virtual utility_c {
     public:
-	xfdir_root_c(data_c *, const gchar *);
+	xfdir_root_c(data_c *);
         void reload(const gchar *);
 	const gchar *get_xfdir_iconname(void);
 

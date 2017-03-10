@@ -11,43 +11,23 @@ xfdir_c::xfdir_c(data_c *data0, const gchar *data): menu_c(data0){
     data_p = data0;
     large = FALSE;
     gint result;
-    items_hash = NULL;
-    new_items_hash();
-    population_mutex = PTHREAD_MUTEX_INITIALIZER;
-    population_cond = PTHREAD_COND_INITIALIZER;
-    result = pthread_rwlock_init(&population_lock, NULL);
 
     if (result){
         cerr << "view_c::init(): " << strerror(result) << "\n";
         throw 1;
     }
-    population_condition = 0;
 
 }
 
 xfdir_c::~xfdir_c(void){
     g_free(path);
     g_object_unref(treemodel);
-    g_hash_table_destroy(items_hash);
-    pthread_mutex_destroy(&population_mutex);
-    pthread_cond_destroy(&population_cond);
-    pthread_rwlock_destroy(&population_lock);
 }
 
 void 
 xfdir_c::destroy_tree_model(GtkTreeModel *){}
 
-void
-xfdir_c::new_items_hash(void){
-    if (items_hash) {
-        g_hash_table_destroy(items_hash);
-    }
-    items_hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
-}
         
-GHashTable *
-xfdir_c::get_items_hash(void){ return items_hash;}
-
 gboolean
 xfdir_c::set_dnd_data(GtkSelectionData * selection_data, GList *selection_list){
     fprintf(stderr, "set_dnd_data() not define for this class.\n");
@@ -285,49 +265,6 @@ xfdir_c::get_icon_highlight_size(const gchar *name){
     return GTK_ICON_SIZE_DIALOG;
 }
 
-gboolean
-xfdir_c::popup(void){
-    fprintf(stderr, "xfdir_c::popup: general popup\n");
-    gtk_menu_popup(get_view_menu(), NULL, NULL, NULL, NULL, 3, gtk_get_current_event_time());
-    return TRUE;
-}
-
-gboolean
-xfdir_c::popup(GtkTreePath *tpath){
-    if (!tpath){
-	popup();
-    }
-
-    GtkTreeIter iter;
-    gtk_tree_model_get_iter (treemodel, &iter, tpath);
-    
-    gchar *name;
-    gchar *actual_name;
-    gtk_tree_model_get (treemodel, &iter, 
-            DISPLAY_NAME, &name, 
-            ACTUAL_NAME, &actual_name, 
-	    -1);
-    gchar *p = g_build_filename(path, actual_name, NULL);
-    // here we do the particular xfdir popup menu method (overloaded)
-    fprintf(stderr, "xfdir_c::popup: popup for %s (%s)\n", name, actual_name);
-    GtkIconView *iconview = (GtkIconView *)g_object_get_data(G_OBJECT(treemodel), "iconview");
-    if (gtk_icon_view_path_is_selected (iconview, tpath)){ //selected
-        fprintf(stderr, "%s is selected (may be multiple)\n", p);
-        gtk_menu_popup(get_selected_menu(), NULL, NULL, NULL, NULL, 3, gtk_get_current_event_time());
-    } else
-    if (g_file_test(p, G_FILE_TEST_IS_DIR)){
-        fprintf(stderr, "%s is directory\n", p);
-        gtk_menu_popup(get_directory_menu(), NULL, NULL, NULL, NULL, 3, gtk_get_current_event_time());
-    } else {
-        fprintf(stderr, "%s is ordinary selection\n", p);
-        gtk_menu_popup(get_selected_menu(), NULL, NULL, NULL, NULL, 3, gtk_get_current_event_time());
-
-    }
-    g_free(name);
-    g_free(actual_name);
-    g_free(p);
-    return TRUE;
-}
 
 gchar *
 xfdir_c::get_window_name (void) {

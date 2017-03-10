@@ -11,13 +11,18 @@ class xfdir_local_c: public local_monitor_c, public local_dnd_c, virtual utility
         void reload(const gchar *);
         gchar *make_tooltip_text (GtkTreePath *);
         void item_activated (GtkIconView *, GtkTreePath *, void *);
-	//gboolean popup(GtkTreePath *);
 	const gchar *get_xfdir_iconname(void);
 	
 	gboolean set_dnd_data(GtkSelectionData *, GList *);
 	gboolean receive_dnd(const gchar *, GtkSelectionData *, GdkDragAction);
         virtual void highlight_drop(GtkTreePath *);
+        
+	gboolean popup(GtkTreePath *);
+       
+    protected:
+
     private:
+        GtkMenu *get_directory_menu(void){return directory_menu;}
         GtkTreeModel *mk_tree_model(void);
         gint heartbeat;
         GList *read_items (gint *); 
@@ -29,6 +34,7 @@ class xfdir_local_c: public local_monitor_c, public local_dnd_c, virtual utility
 
         GList *sort_directory_list(GList *);
     private:
+        void create_menu(void);
         gchar *get_path_info (GtkTreeModel *, GtkTreePath *, const gchar *);
 
         gchar *path_info(const gchar *, struct stat *, const gchar *, 
@@ -47,6 +53,8 @@ class xfdir_local_c: public local_monitor_c, public local_dnd_c, virtual utility
         pthread_mutex_t group_string_mutex;
         pthread_mutex_t date_string_mutex;
 
+        GtkMenu *selection_menu;
+        GtkMenu *directory_menu;
 
 	data_c *data_p;
 

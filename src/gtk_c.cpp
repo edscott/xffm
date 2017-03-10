@@ -168,3 +168,21 @@ gtk_c::toggle_button (const char *icon_id, const char *text) {
     return button;
 }
 
+GtkMenu *
+gtk_c::mk_menu(const gchar **data, void (*menu_callback)(GtkWidget *, gpointer)){
+    
+    GtkMenu *menu = GTK_MENU(gtk_menu_new());
+    const gchar **p = data;
+    gint i;
+    for (i=0;p && *p; p++,i++){
+        const gchar *icon_name = (const gchar *)g_hash_table_lookup(data_p->iconname_hash, _(*p));
+        GtkWidget *v = menu_item_new(icon_name, _(*p));
+        gtk_container_add (GTK_CONTAINER (menu), v);
+        g_signal_connect ((gpointer) v, "activate", G_CALLBACK (*menu_callback), (void *)_(*p));
+        gtk_widget_show (v);
+    }
+    gtk_widget_show (GTK_WIDGET(menu));
+    return menu;
+}
+
+

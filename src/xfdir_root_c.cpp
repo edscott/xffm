@@ -3,8 +3,8 @@
 
 
 
-xfdir_root_c::xfdir_root_c(data_c *data0, const gchar *data): 
-    xfdir_c(data0, data)
+xfdir_root_c::xfdir_root_c(data_c *data0): 
+    xfdir_c(data0, "xffm:root")
 {
     treemodel = mk_tree_model();
 }

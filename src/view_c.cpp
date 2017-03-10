@@ -129,11 +129,14 @@ view_c::view_c(data_c *data0, void *window_data, GtkNotebook *notebook, const gc
     xfdir_c *new_xfdir_p;
     data_p = data0;
     init();
+    if (xfdir_p) xfdir_p->stop_monitor();
     if (g_file_test(path, G_FILE_TEST_IS_DIR) ){
 	new_xfdir_p = (xfdir_c *)new xfdir_local_c(data_p, path, (void *)this);
 	
     } else {
 	// load specific class xfdir here
+        root();
+	//new_xfdir_p = (xfdir_c *)new xfdir_root_c(data_p);
     }
     set_treemodel(new_xfdir_p);
     set_spinner(FALSE);
@@ -192,7 +195,7 @@ view_c::toggle_show_hidden(void){
 void 
 view_c::root(void){
     DBG("root treemodel\n");
-    xfdir_c *data = (xfdir_c *)new xfdir_root_c(data_p, "xffm:root");
+    xfdir_c *data = (xfdir_c *)new xfdir_root_c(data_p);
     set_treemodel(data);
     
 }
@@ -219,17 +222,18 @@ view_c::reload(const gchar *data){
     NOOP( "view_c::reload.....\n");
     set_spinner(TRUE);
     // clear highlight hash
+    xfdir_c *new_xfdir_p;
     xfdir_p->clear_highlights();
     if (g_file_test(data, G_FILE_TEST_IS_DIR) &&
 	    !g_file_test(get_path(), G_FILE_TEST_IS_DIR)){
         // This is to switch from a module to a local xfdir
-	while (gtk_events_pending()) gtk_main_iteration();
+	//while (gtk_events_pending()) gtk_main_iteration();
 	// switch back to local mode
         NOOP( "hidden toggle=%d\n", shows_hidden());
-	xfdir_c *xfdir_local_p = (xfdir_c *)new xfdir_local_c(data_p, data, (void *)this);
-        delete xfdir_p;
-	// this will set xfdir_p to xfdir_local_p:
-	set_treemodel(xfdir_local_p); 
+	new_xfdir_p = (xfdir_c *)new xfdir_local_c(data_p, data, (void *)this);
+	// this will set xfdir_p to xfdir_local_p and delete old xfdir_p:
+        set_treemodel(new_xfdir_p); 
+        set_view_details();
 	set_spinner(FALSE);
 	return;
     }

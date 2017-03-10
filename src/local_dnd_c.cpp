@@ -20,20 +20,11 @@ local_dnd_c::is_nonsense(const gchar *src){
     struct stat st;
     struct stat target_st;
     gchar *src_dir = g_path_get_dirname(src);
-    if (lstat ((const gchar *)src_dir, &st)==0 && lstat (fulltarget, &target_st)==0){
-	// Here we check if the file source and destination is actually 
-	// the same thing, this time by stat information instead of
-	// path string.
-	// This is a more robust test. We must test *both* st_ino and
-	// st_dev, because stuff on different devices may (and do) have
-	// equal st_ino.
-        if(st.st_ino == target_st.st_ino &&
-		st.st_dev != target_st.st_dev)
-	{
-	    g_free(src_dir);
-	    fprintf(stderr, "Source and target directories are the same.\n");
-	    return TRUE;
-        }
+    fprintf(stderr, "----- src_dir=%s fulltarget=%s\n", src_dir, fulltarget);
+    if (strcmp(src_dir, fulltarget) == 0){
+        g_free(src_dir);
+        fprintf(stderr, "Source and target directories are the same.\n");
+        return TRUE;
     } else {
 	g_free(src_dir);
 	fprintf(stderr, "unable to stat target or source...\n");
