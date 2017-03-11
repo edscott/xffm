@@ -58,19 +58,12 @@ pathbar_c::pathbar_ok(GtkButton * button){
     GList *children = children_list;
     for (;children && children->data; children=children->next){
         if (button == children->data){
-            gchar *path = (gchar *)g_object_get_data(G_OBJECT(button), "path");
+            const gchar *path = (gchar *)g_object_get_data(G_OBJECT(button), "path");
             view_c *view_p = (view_c *)g_object_get_data(G_OBJECT(pathbar), "view_p");
             if (!view_p) g_error("view_p data not set for g_object pathbar!\n");
+            if (!path) path = "xffm:root";
             DBG("pathbar_c::pathbar_ok: path=%s\n", path);
-            if (!path){
-                DBG("// FIXME Go to top xffm level\n");
-                view_p->root();
-            } else if (g_file_test(path, G_FILE_TEST_IS_DIR)){
-                view_p->reload(path);
-            } else {
-                DBG("// FIXME Go to module\n");
-            }
-
+            view_p->reload(path);
         } 
     }
 }

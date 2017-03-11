@@ -182,14 +182,7 @@ void
 window_c::go_home(void){
     // get current page and reload homedir
     view_c *view_p =(view_c *)get_active_view_p();
-    if (g_file_test(view_p->get_path(), G_FILE_TEST_IS_DIR)){
-	view_p->reload(g_get_home_dir());
-    } else {
-	// here we switch from module to local xfdir_c objects
-	xfdir_c *xfdir_p;
-	xfdir_p = (xfdir_c *)new xfdir_local_c(data_p, view_p->get_path(), (void *)view_p);
-	view_p->set_treemodel(xfdir_p);
-    }
+    view_p->reload(g_get_home_dir());
 }
 
 void 

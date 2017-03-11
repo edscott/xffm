@@ -42,7 +42,6 @@ class local_monitor_c: public xfdir_c, virtual utility_c {
         GtkListStore *get_liststore(void);
         void add_local_item(GtkListStore *, xd_t *);
         void start_monitor(const gchar *, GtkTreeModel *);
-        void stop_monitor(void);
 	gchar *get_home_iconname(const gchar *);
         void free_xd_p(xd_t *);
         xd_t *get_xd_p(struct dirent *);
@@ -52,6 +51,7 @@ class local_monitor_c: public xfdir_c, virtual utility_c {
         gboolean restat_item(GFile *);
         void destroy_tree_model(void);
     protected:
+        void stop_monitor(void);
     private:
         xd_t *get_xd_p(GFile *);
         GCancellable *cancellable;

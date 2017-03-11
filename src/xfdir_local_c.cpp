@@ -20,7 +20,6 @@ xfdir_local_c::xfdir_local_c(data_c *data0, const gchar *data, void *dataV):
 
 xfdir_local_c::~xfdir_local_c(void){
     destroy_tree_model();
-    stop_monitor();
     gtk_widget_destroy(GTK_WIDGET(selection_menu));
     gtk_widget_destroy(GTK_WIDGET(directory_menu));
 }
@@ -105,8 +104,62 @@ xfdir_local_c::item_activated (GtkIconView *iconview, GtkTreePath *tpath, void *
     g_free(mimetype);
     g_free(ddname);
 } 
+#if 0
+void
+xfdir_c::item_activated (GtkIconView *iconview, GtkTreePath *tpath, void *data)
+{
+    view_c *view_p = (view_c *)data;
+    GtkTreeModel *tree_model = gtk_icon_view_get_model (iconview);
+    GtkTreeIter iter;
+    if (!gtk_tree_model_get_iter (tree_model, &iter, tpath)) return;
+    
+    gchar *full_path;
+    gchar *ddname;
+    gtk_tree_model_get (tree_model, &iter,
+                          ACTUAL_NAME, &ddname,-1);
+    if (strcmp(ddname, "..")==0 && strcmp(path, "/")==0){
+        full_path = g_strdup("xffm:root");
+    } else {
+        if (g_file_test(path, G_FILE_TEST_IS_DIR)) 
+            full_path = g_strconcat(path, G_DIR_SEPARATOR_S, ddname, NULL);
+        else 
+            full_path = g_strdup(ddname);
+    }
+    TRACE("dname = %s, path = %s\n", ddname, full_path);
 
 
+    if (g_file_test(full_path, G_FILE_TEST_IS_DIR)){
+        view_p->reload(full_path);
+    } else {
+        // uses mimetype, should be delegated to xfdir_local_c...
+        gchar *mimetype = mime_type(full_path);
+        const gchar *command = mime_command(mimetype);
+        const gchar *command1 = mime_command_text(mimetype);
+        const gchar *command2 = mime_command_text2(mimetype);
+        view_p->get_lpterm_p()->print_error(g_strdup_printf("%s: %s\n", mimetype, command));
+        view_p->get_lpterm_p()->print_error(g_strdup_printf("%s: %s\n", mimetype, command1));
+        view_p->get_lpterm_p()->print_error(g_strdup_printf("%s: %s\n", mimetype, command2));
+        g_free(mimetype);
+        if (strncmp(full_path,"xffm:", strlen("xffm:"))==0){
+            gchar *module = full_path + strlen("xffm:");
+            DBG("module = \"%s\"\n", module);
+            if (strcmp(module, "root")==0){
+                view_p->root();
+            } else if (strcmp(module, "fstab")==0){
+                // load fstab root
+            } 
+            // other modules:
+            // cifs
+            // nfs
+            // ecryptfs
+            // sshfs
+            // pacman
+        }
+    }
+    g_free(ddname);
+    g_free(full_path);
+}
+#endif
 gchar *
 xfdir_local_c::make_tooltip_text (GtkTreePath *tpath) {
     if (!tpath) return g_strdup("tpath is NULL\n");
@@ -282,8 +335,6 @@ void
 xfdir_local_c::insert_list_into_model(GList *data, GtkListStore *list_store){
     GList *directory_list = (GList *)data;
     dir_count = g_list_length(directory_list);
-    if (dir_count > MAX_AUTO_STAT) large = TRUE;
-    else large = FALSE;
     GList *l = directory_list;
     for (; l && l->data; l= l->next){
         while (gtk_events_pending()) gtk_main_iteration();

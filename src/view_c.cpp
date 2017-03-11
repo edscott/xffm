@@ -116,38 +116,60 @@ signal_drag_delete (GtkWidget * widget, GdkDragContext * context, gpointer data)
 // class methods
 ////////////////////////////////////////
 
-view_c::view_c(data_c *data0, void *window_data, GtkNotebook *notebook) :  widgets_c(data0, window_data, notebook), thread_control_c((void *)this) {
-    xfdir_p = NULL;
-    data_p = data0;
-    init();
-}
-
-
-view_c::view_c(data_c *data0, void *window_data, GtkNotebook *notebook, const gchar *path) : widgets_c(data0, window_data, notebook), thread_control_c((void *)this) {
+view_c::view_c(data_c *data0, void *window_data, GtkNotebook *notebook, const gchar *data) : widgets_c(data0, window_data, notebook), thread_control_c((void *)this) {
     NOOP( "view_c::view_c.....\n");
-    xfdir_p = NULL;
-    xfdir_c *new_xfdir_p;
     data_p = data0;
     init();
-    if (xfdir_p) xfdir_p->stop_monitor();
-    if (g_file_test(path, G_FILE_TEST_IS_DIR) ){
-	new_xfdir_p = (xfdir_c *)new xfdir_local_c(data_p, path, (void *)this);
-	
-    } else {
-	// load specific class xfdir here
-        root();
-	//new_xfdir_p = (xfdir_c *)new xfdir_root_c(data_p);
-    }
-    set_treemodel(new_xfdir_p);
+    xfdir_type = get_xfdir_type(data);
+    xfdir_p = create_xfdir_p(xfdir_type, data);
+    set_treemodel(xfdir_type, xfdir_p);
     set_spinner(FALSE);
 }
 
 
 view_c::~view_c(void){
     DBG("view_c::~view_c\n");
-    if (xfdir_p) delete xfdir_p;
+    delete_xfdir_c(xfdir_type, xfdir_p);
     if (lpterm_p) delete lpterm_p;
 }
+
+gint
+view_c::get_xfdir_type(const gchar *data){
+    if (g_file_test(data, G_FILE_TEST_IS_DIR)){
+	return LOCAL_TYPE;
+    }
+    // not a local type. Maybe a module.
+    if (strcmp(data, "xffm:root")==0) return ROOT_TYPE;
+
+    fprintf(stderr, "unknown xfdir type %s.\n", data);
+    return UNDEFINED_TYPE;
+}
+
+xfdir_c *
+view_c::create_xfdir_p(gint type, const gchar *data){
+    xfdir_c *new_xfdir_p;
+    if (g_file_test(data, G_FILE_TEST_IS_DIR) ){
+	new_xfdir_p = (xfdir_c *)new LOCAL_CLASS(data_p, data, (void *)this);
+    } else {
+	// load specific class xfdir here
+	new_xfdir_p = (xfdir_c *)new ROOT_CLASS(data_p);
+    }
+    return new_xfdir_p;
+}
+
+void 
+view_c::delete_xfdir_c(gint type, xfdir_c *x){
+    if (!x) return;
+    switch (type){
+	case ROOT_TYPE:
+	    delete ((ROOT_CLASS *)x);
+	    break;
+	case LOCAL_TYPE:
+	    delete ((LOCAL_CLASS *)x);
+	    break;
+    }
+}
+
 
 void
 view_c::init(void){
@@ -192,14 +214,6 @@ view_c::toggle_show_hidden(void){
     reload(xfdir_p->get_path());
 }
 
-void 
-view_c::root(void){
-    DBG("root treemodel\n");
-    xfdir_c *data = (xfdir_c *)new xfdir_root_c(data_p);
-    set_treemodel(data);
-    
-}
-
 gboolean
 view_c::window_keyboard_event(GdkEventKey *event, void *data){
     return lpterm_p->window_keyboard_event(event, data);
@@ -217,6 +231,8 @@ view_c::get_dir_count(void){
     return xfdir_p->get_dir_count();
 }
 
+
+
 void
 view_c::reload(const gchar *data){
     NOOP( "view_c::reload.....\n");
@@ -224,20 +240,25 @@ view_c::reload(const gchar *data){
     // clear highlight hash
     xfdir_c *new_xfdir_p;
     xfdir_p->clear_highlights();
-    if (g_file_test(data, G_FILE_TEST_IS_DIR) &&
-	    !g_file_test(get_path(), G_FILE_TEST_IS_DIR)){
-        // This is to switch from a module to a local xfdir
-	//while (gtk_events_pending()) gtk_main_iteration();
-	// switch back to local mode
-        NOOP( "hidden toggle=%d\n", shows_hidden());
-	new_xfdir_p = (xfdir_c *)new xfdir_local_c(data_p, data, (void *)this);
-	// this will set xfdir_p to xfdir_local_p and delete old xfdir_p:
-        set_treemodel(new_xfdir_p); 
-        set_view_details();
+    // figure out xfdir_type
+    gint new_type = get_xfdir_type(data);
+    if (new_type == UNDEFINED_TYPE){
+	fprintf(stderr, "Cannot reload, undefined xfdir type\n");
 	set_spinner(FALSE);
 	return;
     }
-    xfdir_p->reload(data);
+    if (new_type == xfdir_type){
+	// Simple reload. This does an internal treemodel swap.
+	xfdir_p->reload(data);
+    } else {
+	// Complex reload. 
+	// Here we need a new xfdir_p before treemodel swap.	
+	new_xfdir_p = create_xfdir_p(new_type, data);
+	delete_xfdir_c(xfdir_type, xfdir_p);
+	xfdir_type = new_type;
+	xfdir_p = new_xfdir_p;
+	set_treemodel(xfdir_type, xfdir_p);
+    }
     set_view_details();
     while (gtk_events_pending()) gtk_main_iteration();
     if (get_dir_count() <= 500) highlight();
@@ -273,22 +294,19 @@ view_c::get_window(void){
 
 
 void
-view_c::set_treemodel(xfdir_c *data){
-    xfdir_c *old_xfdir_p = xfdir_p;
-    xfdir_p = data;
-    GtkTreeModel *tree_model = xfdir_p->get_tree_model();
-    NOOP( "new treemodel= %p (old_xfdir=%p new_xfdir=%p)\n", tree_model, old_xfdir_p, xfdir_p);
+view_c::set_treemodel(gint type, xfdir_c *data){
+    xfdir_c *new_xfdir_p = data;
+
+    GtkTreeModel *tree_model = new_xfdir_p->get_tree_model();
     //if (tree_model) gtk_widget_hide(GTK_WIDGET(get_iconview()));
     gtk_icon_view_set_model(get_iconview(), tree_model);
     g_object_set_data(G_OBJECT(tree_model), "iconview", get_iconview());
-    gtk_icon_view_set_text_column (get_iconview(), xfdir_p->get_text_column());
-    gtk_icon_view_set_pixbuf_column (get_iconview(),  xfdir_p->get_icon_column());
+    gtk_icon_view_set_text_column (get_iconview(), new_xfdir_p->get_text_column());
+    gtk_icon_view_set_pixbuf_column (get_iconview(),  new_xfdir_p->get_icon_column());
     gtk_icon_view_set_selection_mode (get_iconview(), GTK_SELECTION_MULTIPLE);
     //gtk_icon_view_set_tooltip_column (get_iconview(),3);
     set_view_details();
-    //gtk_widget_show(GTK_WIDGET(get_iconview()));
-    NOOP( "set_treemodel done, now deleting %p\n", old_xfdir_p);
-    if (old_xfdir_p) delete old_xfdir_p;
+
 }
 ///////////////////////////// Private:
 void
@@ -853,7 +871,6 @@ view_c::setup_tooltip(gint x, gint y){
         return;
     }
 
-    if (xfdir_p->is_large()) return;
     GtkTreePath *tpath = 
         gtk_icon_view_get_path_at_pos (get_iconview(), x, y); 
     if (!tpath) {
@@ -869,7 +886,6 @@ view_c::setup_tooltip(gint x, gint y){
         return;
     }
     window_p->set_tooltip_path_string(path_string);
-
 
     gchar *text = xfdir_p->get_tooltip_text(tpath);
     if (!text) text = xfdir_p->make_tooltip_text(tpath);

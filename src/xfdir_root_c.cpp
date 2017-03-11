@@ -1,4 +1,4 @@
-
+#include "view_c.hpp"
 #include "xfdir_root_c.hpp"
 
 
@@ -84,4 +84,16 @@ xfdir_root_c::get_xfdir_iconname(void){
     return "emblem-rodent";
 }
 
+void
+xfdir_root_c::item_activated (GtkIconView *iconview, GtkTreePath *tpath, void *data)
+{
+    view_c *view_p = (view_c *)data;
+    GtkTreeModel *tree_model = gtk_icon_view_get_model (iconview);
+    GtkTreeIter iter;
+    if (!gtk_tree_model_get_iter (tree_model, &iter, tpath)) return;
+    gchar *name;
+    gtk_tree_model_get (tree_model, &iter, ACTUAL_NAME, &name,-1);
+    view_p->reload(name);
+    g_free(name);
+}
 

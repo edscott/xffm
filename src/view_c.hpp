@@ -4,22 +4,27 @@
 #include "widgets_c.hpp"
 #include "lpterm_c.hpp"
 #include "print_c.hpp"
-#include "xfdir_root_c.hpp"
-#include "xfdir_local_c.hpp"
 
 #include "thread_control_c.hpp"
 #include "data_c.hpp"
 #include "utility_c.hpp"
 
+#include "xfdir_root_c.hpp"
+#include "xfdir_local_c.hpp"
+#define  ROOT_CLASS	xfdir_root_c 	
+#define  LOCAL_CLASS	xfdir_local_c 	
 
+enum {
+    ROOT_TYPE,
+    LOCAL_TYPE,
+    UNDEFINED_TYPE
+};
 
 class view_c: public widgets_c, public thread_control_c, virtual utility_c {
     public:
         view_c(data_c *, void *, GtkNotebook *, const gchar *);
-        view_c(data_c *, void *, GtkNotebook *);
         ~view_c(void);
         void reload(const gchar *);
-        void set_treemodel(xfdir_c *);
         GtkTreeModel *get_tree_model(void);
         const gchar *get_path(void);
 	gboolean window_keyboard_event(GdkEventKey *, void *);
@@ -78,6 +83,11 @@ class view_c: public widgets_c, public thread_control_c, virtual utility_c {
         gint drag_mode;
         gint click_cancel;
 
+	gint xfdir_type;
+	gint get_xfdir_type(const gchar *);
+	xfdir_c *create_xfdir_p(gint, const gchar *);
+	void delete_xfdir_c(gint, xfdir_c *);
+        void set_treemodel(gint, xfdir_c *);
 };
 
 #endif
