@@ -165,7 +165,6 @@ local_monitor_c::add_local_item(GtkListStore *list_store, xd_t *xd_p){
     if (!shows_hidden && xd_p->d_name[0] == '.'  && strcmp("..", xd_p->d_name)){
 	return;
     }
-
     
     GtkTreeIter iter;
     gtk_list_store_append (list_store, &iter);

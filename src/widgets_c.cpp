@@ -50,7 +50,10 @@ GtkWidget *widgets_c::get_diagnostics(void){ return diagnostics;}
 GtkWidget *widgets_c::get_status_icon(void){ return status_icon;}
 GtkWidget *widgets_c::get_iconview_icon(void){ return iconview_icon;}
 GtkIconView *widgets_c::get_iconview(void){ return icon_view;}
-GtkWidget *widgets_c::get_button_space(void){ return GTK_WIDGET(button_space);}
+// old horizontal space:
+// GtkWidget *widgets_c::get_button_space(void){ return GTK_WIDGET(button_space);}
+// new vertical space:
+GtkWidget *widgets_c::get_button_space(void){ return GTK_WIDGET(big_button_space);}
 void *widgets_c::get_window_v(void){ return window_v;}
 
 void 

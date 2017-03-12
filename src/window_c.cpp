@@ -357,7 +357,7 @@ static void
 static void
  shell(GSimpleAction *action,
                        GVariant      *parameter,
-                       gpointer       app)
+                       gpointer       data)
 {
     DBG("shell\n");
 }
@@ -365,15 +365,26 @@ static void
 static void
  search(GSimpleAction *action,
                        GVariant      *parameter,
-                       gpointer       app)
+                       gpointer       data)
 {
     DBG("Search\n");
+    // get current view
+
+    window_c *window_p = (window_c *)data;
+    view_c *view_p =(view_c *)window_p->get_active_view_p();
+
+    const gchar *path = view_p->get_xfdir_p()->get_path();
+    if (!g_file_test(path, G_FILE_TEST_IS_DIR)) path = g_get_home_dir();
+    // FIXME: We need to create default gtk3 xffm-fgr
+    gchar *command = g_strdup_printf("rodent-fgr %s", path);
+    view_p->get_lpterm_p()->shell_command(command, FALSE);
+    g_free(command);
 }
 
 static void
  finish(GSimpleAction *action,
                        GVariant      *parameter,
-                       gpointer       app)
+                       gpointer       data)
 {
     DBG("finish\n");
     _exit(123);
