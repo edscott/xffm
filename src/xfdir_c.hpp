@@ -73,7 +73,6 @@ class xfdir_c: virtual utility_c, public menu_c {
         gint get_text_column(void);
         void clear_highlights(void);
         void highlight(GtkTreePath *);
-        void set_show_hidden(gboolean);
 
         void new_items_hash(void);
         GHashTable *get_items_hash(void);
@@ -83,8 +82,8 @@ class xfdir_c: virtual utility_c, public menu_c {
 
         GtkTreeModel *treemodel;
         gchar *path;
-	gint dir_count;   
-        gboolean shows_hidden;
+	gint dir_count; 
+
         GHashTable *items_hash;
     private:
         data_c *data_p;

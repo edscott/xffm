@@ -70,7 +70,7 @@ xfdir_local_c::item_activated (GtkIconView *iconview, GtkTreePath *tpath, void *
     }
 
     if (strcmp(mimetype, "inode/directory")==0){
-        view_p->reload(ddname);
+         view_p->reload(ddname);
     } else {
         gchar *command = mime_command(mimetype);
         view_p->get_lpterm_p()->print_error(g_strdup_printf("mimetype = %s (%s)\n", mimetype, command));
@@ -116,6 +116,8 @@ xfdir_local_c::item_activated (GtkIconView *iconview, GtkTreePath *tpath, void *
     g_free(mimetype);
     g_free(ddname);
 } 
+
+
 #if 0
 void
 xfdir_c::item_activated (GtkIconView *iconview, GtkTreePath *tpath, void *data)
@@ -325,12 +327,14 @@ xfdir_local_c::reload(const gchar *data){
         fprintf(stderr, "chdir(%s): %s\n", data, strerror(errno));
         return;
     }
+        
+    stop_monitor();
     if (strcmp(path, data)){
-        stop_monitor();
-        g_free(path);
-        path = g_strdup(data);
-        DBG("current dir is %s\n", path);
+	g_free(path);
+	path = g_strdup(data);
     }
+    DBG("current dir is %s\n", path);
+    
     destroy_tree_model();
     gtk_list_store_clear (GTK_LIST_STORE(treemodel));   
     heartbeat = 0;
@@ -342,6 +346,7 @@ xfdir_local_c::reload(const gchar *data){
     
 }
    
+
 
 void
 xfdir_local_c::insert_list_into_model(GList *data, GtkListStore *list_store){

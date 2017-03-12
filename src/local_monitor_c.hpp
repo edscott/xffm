@@ -43,6 +43,7 @@ class local_monitor_c: public xfdir_c, virtual utility_c {
         gboolean add_new_item(GFile *);
         gboolean remove_item(GFile *);
         gboolean restat_item(GFile *);
+        void set_show_hidden(gboolean);
     protected:
         void start_monitor(const gchar *, GtkTreeModel *);
         void stop_monitor(void);
@@ -50,6 +51,7 @@ class local_monitor_c: public xfdir_c, virtual utility_c {
 	gchar *get_home_iconname(const gchar *);
         void free_xd_p(xd_t *);
         xd_t *get_xd_p(struct dirent *);
+        gboolean shows_hidden;
 
     private:
         GtkListStore *get_liststore(void);

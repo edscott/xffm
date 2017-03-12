@@ -118,12 +118,15 @@ signal_drag_delete (GtkWidget * widget, GdkDragContext * context, gpointer data)
 
 view_c::view_c(data_c *data0, void *window_data, GtkNotebook *notebook, const gchar *data) : widgets_c(data0, window_data, notebook), thread_control_c((void *)this) {
     NOOP( "view_c::view_c.....\n");
+    all_set_up = FALSE;
     data_p = data0;
     init();
+    xfdir_p = NULL; // to avoid race with gtk loop
     xfdir_type = get_xfdir_type(data);
     xfdir_p = create_xfdir_p(xfdir_type, data);
     set_treemodel(xfdir_type, xfdir_p);
     set_spinner(FALSE);
+    all_set_up = TRUE;
 }
 
 
@@ -150,9 +153,11 @@ view_c::create_xfdir_p(gint type, const gchar *data){
     xfdir_c *new_xfdir_p;
     if (g_file_test(data, G_FILE_TEST_IS_DIR) ){
 	new_xfdir_p = (xfdir_c *)new LOCAL_CLASS(data_p, data, (void *)this);
+	gtk_widget_show(GTK_WIDGET(get_hidden_button()));
     } else {
 	// load specific class xfdir here
 	new_xfdir_p = (xfdir_c *)new ROOT_CLASS(data_p);
+	gtk_widget_hide(GTK_WIDGET(get_hidden_button()));
     }
     return new_xfdir_p;
 }
@@ -210,8 +215,8 @@ view_c::shows_hidden(void){
 void
 view_c::toggle_show_hidden(void){
     if (!xfdir_p) return;
-    xfdir_p->set_show_hidden(shows_hidden());
-    reload(xfdir_p->get_path());
+    ((LOCAL_CLASS *)xfdir_p)->set_show_hidden(shows_hidden());
+    ((LOCAL_CLASS *)xfdir_p)->reload(xfdir_p->get_path());
 }
 
 gboolean
@@ -247,6 +252,7 @@ view_c::reload(const gchar *data){
 	set_spinner(FALSE);
 	return;
     }
+    all_set_up = FALSE;
     if (new_type == xfdir_type){
 	// Simple reload. This does an internal treemodel swap.
 	xfdir_p->reload(data);
@@ -260,6 +266,7 @@ view_c::reload(const gchar *data){
 	set_treemodel(xfdir_type, xfdir_p);
     }
     set_view_details();
+    all_set_up = TRUE;
     while (gtk_events_pending()) gtk_main_iteration();
     if (get_dir_count() <= 500) highlight();
     set_spinner(FALSE);
@@ -571,6 +578,8 @@ motion_notify_event (GtkWidget *widget,
     GdkEventMotion *e = (GdkEventMotion *)ev;
     GdkEventButton  *event = (GdkEventButton  *)ev;
     view_c * view_p = (view_c *)data;
+    if (!view_p->all_set_up) return FALSE;
+//    if (!view_p->get_xfdir_p()) return FALSE;
     NOOP("motion_notify, drag mode = %d\n", view_p->get_drag_mode());
     // Are we intending to set up a DnD?
     gint mode = view_p->get_drag_mode();
@@ -648,11 +657,14 @@ leave_notify_event (GtkWidget *widget,
                GdkEvent  *event,
                gpointer   data){
     view_c * view_p = (view_c *)data;
+    if (!view_p->all_set_up) return FALSE;
+
     if (!data) g_error("leave_notify_event: data cannot be NULL\n");
     //fprintf(TRACE("leave_notify_event\n");
     view_p->get_xfdir_p()->clear_highlights();
     window_c *window_p = (window_c *)view_p->get_window_v();
     window_p->set_tt_window(NULL, NULL);
+    return FALSE;
 }
 
 

@@ -71,6 +71,8 @@ class widgets_c: virtual utility_c, public gtk_c{
         GtkWidget *status_box;
         GtkWidget *rename;		// rename entry box
         GtkWidget *button_space;	// little button space
+	GtkWidget *hview_box;
+        GtkWidget *big_button_space;	// little button space
         GtkWidget *clear_button;	// clear text area button
         GtkWidget *hidden_button;	// show hidden toggle
         GtkWidget *size_scale;

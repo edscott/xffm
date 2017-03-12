@@ -69,7 +69,8 @@ void
 widgets_c::setup_size_scale(void){
     gtk_scale_set_draw_value (GTK_SCALE(size_scale), FALSE);
     gtk_widget_set_can_focus (size_scale, FALSE);
-    gtk_widget_set_size_request (size_scale, 75, 30);
+    gtk_widget_set_size_request (size_scale, 24, 48);
+    //gtk_widget_set_size_request (size_scale, 75, 30);
 }
 
 void
@@ -85,6 +86,8 @@ widgets_c::create(void){
     // pathbar is already created with pathbar_c object.
     gtk_box_pack_start (GTK_BOX (page_child), pathbar_p->get_pathbar(), FALSE, FALSE, 0);
     
+    hview_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+
     vpane = gtk_paned_new(GTK_ORIENTATION_VERTICAL);
     gtk_paned_set_wide_handle (GTK_PANED(vpane), TRUE);
     top_scrolled_window = gtk_scrolled_window_new (NULL, NULL);
@@ -126,9 +129,11 @@ widgets_c::create(void){
     rename = NULL; // create on demand...
 
     button_space = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+    big_button_space = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
     clear_button =  gtk_button_new ();
     hidden_button =  gtk_toggle_button_new ();
-    size_scale = gtk_scale_new_with_range(GTK_ORIENTATION_HORIZONTAL, 0.0, 96.0, 12.0);
+    size_scale = gtk_scale_new_with_range(GTK_ORIENTATION_VERTICAL, 0.0, 96.0, 12.0);
+    //size_scale = gtk_scale_new_with_range(GTK_ORIENTATION_HORIZONTAL, 0.0, 96.0, 12.0);
 }
 
 void 
@@ -159,9 +164,14 @@ widgets_c::pack(void){
     set_spinner(TRUE);
     gtk_widget_show(pathbar_p->get_pathbar());
 
-    gtk_box_pack_start (GTK_BOX (page_child), vpane, TRUE, TRUE, 0);
+    gtk_box_pack_start (GTK_BOX (page_child), hview_box, TRUE, TRUE, 0);
+    gtk_box_pack_start (GTK_BOX (hview_box), vpane, TRUE, TRUE, 0);
     gtk_paned_set_position (GTK_PANED (vpane), 1000);
     gtk_widget_show (vpane);
+    gtk_box_pack_start (GTK_BOX (hview_box), big_button_space, FALSE, FALSE, 0);
+    gtk_widget_show (big_button_space);
+    gtk_widget_show (hview_box);
+
 
     gtk_paned_pack1 (GTK_PANED (vpane), top_scrolled_window, FALSE, TRUE);
     gtk_paned_pack2 (GTK_PANED (vpane), bottom_scrolled_window, TRUE, TRUE);
@@ -185,11 +195,13 @@ widgets_c::pack(void){
     gtk_widget_show (status_button);
     gtk_widget_show (status_label);
     //gtk_widget_show (status);
-    gtk_box_pack_end (GTK_BOX (button_space), size_scale, FALSE, FALSE, 0);
+    //
+    //XXX size scale is pending
+    gtk_box_pack_end (GTK_BOX (big_button_space), size_scale, FALSE, FALSE, 0);
     gtk_widget_show (size_scale);
-    gtk_box_pack_end (GTK_BOX (button_space), clear_button, FALSE, FALSE, 0);
+    gtk_box_pack_end (GTK_BOX (big_button_space), clear_button, FALSE, FALSE, 0);
     gtk_widget_show (clear_button);
-    gtk_box_pack_end (GTK_BOX (button_space), hidden_button, FALSE, FALSE, 0);
+    gtk_box_pack_end (GTK_BOX (big_button_space), hidden_button, FALSE, FALSE, 0);
     gtk_widget_show (hidden_button);
 
     gtk_box_pack_start (GTK_BOX (page_child), button_space, FALSE, FALSE, 0);

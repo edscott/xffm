@@ -118,9 +118,6 @@ xfdir_c::highlight_drop(GtkTreePath *tpath){
 }
 
 void
-xfdir_c::set_show_hidden(gboolean state){shows_hidden = state;}
-
-void
 xfdir_c::highlight(GtkTreePath *tpath){
         //TRACE("highlight %d, %d\n", highlight_x, highlight_y);
     gchar *tree_path_string = NULL;
@@ -235,8 +232,10 @@ xfdir_c::get_window_name (void) {
 static gboolean
 unhighlight (gpointer key, gpointer value, gpointer data){
     xfdir_c *xfdir_p = (xfdir_c *)data;
+    if (!xfdir_p)  return FALSE;
     TRACE("unhighlight %s\n", (gchar *)key);
     GtkTreeModel *model = xfdir_p->get_tree_model();
+    if (!model) return FALSE;
             
     GtkTreePath *tpath = gtk_tree_path_new_from_string ((gchar *)key);
     if (!tpath) return FALSE;

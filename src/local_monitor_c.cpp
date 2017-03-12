@@ -152,11 +152,18 @@ local_monitor_c::stop_monitor(void){
 }
 
 void
+local_monitor_c::set_show_hidden(gboolean state){shows_hidden = state;}
+
+void
 local_monitor_c::add_local_item(GtkListStore *list_store, xd_t *xd_p){
     // if it already exists, do nothing
     if (g_hash_table_lookup(items_hash, (void *)xd_p->d_name)){    
         DBG("local_monitor_c::not re-adding %s\n", xd_p->d_name);
         return;
+    }
+
+    if (!shows_hidden && xd_p->d_name[0] == '.'  && strcmp("..", xd_p->d_name)){
+	return;
     }
 
     

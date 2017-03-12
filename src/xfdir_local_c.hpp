@@ -18,6 +18,7 @@ class xfdir_local_c: public local_monitor_c, public local_dnd_c, virtual utility
         virtual void highlight_drop(GtkTreePath *);
         
 	gboolean popup(GtkTreePath *);
+	
        
     protected:
 

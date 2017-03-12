@@ -53,6 +53,8 @@ class view_c: public widgets_c, public thread_control_c, virtual utility_c {
         GList *get_selection_list(void);
         void set_click_cancel(gint);
         gboolean get_click_cancel(void);
+
+	gboolean all_set_up;
    protected:
 	// This class is base for none
 
