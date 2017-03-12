@@ -2,6 +2,13 @@
 #include "local_dnd_c.hpp"
 #include "xfdir_local_c.hpp"
 static gint compare_by_name (const void *, const void *);
+static gboolean free_stat_func (GtkTreeModel *model,
+                            GtkTreePath *path,
+                            GtkTreeIter *iter,
+                            gpointer data);
+
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
 
 xfdir_local_c::xfdir_local_c(data_c *data0, const gchar *data, void *dataV): 
     local_monitor_c(data0, data), local_dnd_c(dataV)
@@ -22,6 +29,11 @@ xfdir_local_c::~xfdir_local_c(void){
     destroy_tree_model();
     gtk_widget_destroy(GTK_WIDGET(selection_menu));
     gtk_widget_destroy(GTK_WIDGET(directory_menu));
+}
+
+void
+xfdir_local_c::destroy_tree_model(void){
+    gtk_tree_model_foreach (treemodel, free_stat_func, NULL); 
 }
 
 void
@@ -372,6 +384,20 @@ xfdir_local_c::popup(GtkTreePath *tpath){
 */
 
 /////////////////////////////////////////////////////////////////////
+
+static gboolean free_stat_func (GtkTreeModel *model,
+                            GtkTreePath *path,
+                            GtkTreeIter *iter,
+                            gpointer data){
+
+    struct stat *st_p;
+    gchar *name;
+    gtk_tree_model_get(model, iter, 
+            COL_STAT, &st_p, 
+	    -1);
+    g_free(st_p);
+    return TRUE;
+}
 
 static gint
 compare_by_name (const void *a, const void *b) {

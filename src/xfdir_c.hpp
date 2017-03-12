@@ -80,8 +80,6 @@ class xfdir_c: virtual utility_c, public menu_c {
     protected:
 	// Pure
         virtual GtkTreeModel *mk_tree_model(void) = 0;
-	// Overloadable with default
-        virtual void destroy_tree_model(GtkTreeModel *);
 
         GtkTreeModel *treemodel;
         gchar *path;

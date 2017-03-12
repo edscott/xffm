@@ -23,10 +23,6 @@ xfdir_c::~xfdir_c(void){
     g_object_unref(treemodel);
 }
 
-void 
-xfdir_c::destroy_tree_model(GtkTreeModel *){}
-
-        
 gboolean
 xfdir_c::set_dnd_data(GtkSelectionData * selection_data, GList *selection_list){
     fprintf(stderr, "set_dnd_data() not define for this class.\n");

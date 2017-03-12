@@ -39,21 +39,23 @@ class local_monitor_c: public xfdir_c, virtual utility_c {
     public:
         local_monitor_c(data_c *, const gchar *);
         ~local_monitor_c(void);
-        GtkListStore *get_liststore(void);
-        void add_local_item(GtkListStore *, xd_t *);
-        void start_monitor(const gchar *, GtkTreeModel *);
-	gchar *get_home_iconname(const gchar *);
-        void free_xd_p(xd_t *);
-        xd_t *get_xd_p(struct dirent *);
-        GFile *get_gfile(void);
+
         gboolean add_new_item(GFile *);
         gboolean remove_item(GFile *);
         gboolean restat_item(GFile *);
-        void destroy_tree_model(void);
     protected:
+        void start_monitor(const gchar *, GtkTreeModel *);
         void stop_monitor(void);
+        void add_local_item(GtkListStore *, xd_t *);
+	gchar *get_home_iconname(const gchar *);
+        void free_xd_p(xd_t *);
+        xd_t *get_xd_p(struct dirent *);
+
     private:
+        GtkListStore *get_liststore(void);
+
         xd_t *get_xd_p(GFile *);
+        GFile *get_gfile(void);
         GCancellable *cancellable;
         GFile *gfile;
         GFileMonitor *monitor;
@@ -66,7 +68,6 @@ class local_monitor_c: public xfdir_c, virtual utility_c {
 	gchar *get_emblem_string(xd_t *, gboolean);
         const gchar *get_mime_iconname(xd_t *);
         GHashTable *items_hash;
-
         
 };
 

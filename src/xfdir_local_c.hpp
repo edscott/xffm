@@ -35,6 +35,7 @@ class xfdir_local_c: public local_monitor_c, public local_dnd_c, virtual utility
         GList *sort_directory_list(GList *);
     private:
         void create_menu(void);
+        void destroy_tree_model(void);    
         gchar *get_path_info (GtkTreeModel *, GtkTreePath *, const gchar *);
 
         gchar *path_info(const gchar *, struct stat *, const gchar *, 
