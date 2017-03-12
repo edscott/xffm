@@ -5,16 +5,6 @@
 #include <glob.h>
 #include <unistd.h>
 
-enum {
-    MATCH_COMMAND,
-    MATCH_FILE,
-    MATCH_HISTORY,
-    MATCH_USER,
-    MATCH_VARIABLE,
-    MATCH_HOST,
-    MATCH_NONE
-};
-
 static gint
 ya_strcmp (
     gconstpointer a,

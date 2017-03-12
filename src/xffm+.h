@@ -41,5 +41,15 @@ typedef struct pixbuf_t {
     };
 } pixbuf_t;
 
+enum {
+    MATCH_COMMAND,
+    MATCH_FILE,
+    MATCH_HISTORY,
+    MATCH_USER,
+    MATCH_VARIABLE,
+    MATCH_HOST,
+    MATCH_NONE
+};
+
 #endif
 

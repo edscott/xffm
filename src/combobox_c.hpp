@@ -1,9 +1,8 @@
-#ifndef LPTERM_C_HPP
-#define LPTERM_C_HPP
+#ifndef COMBOBOX_C_HPP
+#define COMBOBOX_C_HPP
 #include "xffm+.h"
-#include "run_c.hpp"
-#include "run_button_c.hpp"
-#include "data_c.hpp"
+
+
 #define USER_RFM_CACHE_DIR      g_get_user_cache_dir(),"rfm"
 #define USER_DBH_CACHE_DIR	USER_RFM_CACHE_DIR,"dbh"
 #define RUN_DBH_FILE 		USER_DBH_CACHE_DIR,"run_hash.dbh"
@@ -51,46 +50,40 @@ class combobox_c {
 	
 };
 
-class lpterm_c: public run_c, virtual utility_c {
-    public:
-        lpterm_c(data_c *, void *);
-        ~lpterm_c(void);
-        gboolean is_iconview_key(GdkEventKey *);
-        gboolean is_lpterm_key(GdkEventKey *);
-        gboolean lp_get_active(void);
-        void lp_set_active(gboolean);
-	gboolean window_keyboard_event(GdkEventKey *, void *);
-        void reference_run_button(run_button_c *);
-        void unreference_run_button(run_button_c *);
-        void *shell_command(const gchar *);
-        void *shell_command(const gchar *, gboolean);
-        void open_terminal(void);
-	gboolean execute (const gchar *, GList *);
-
-/*
-        void recover_flags (gchar * in_cmd, gboolean * interm, gboolean * hold);
-        const gchar *what_term (void);
-        const gchar *term_exec_option(const gchar *terminal);
-*/
-
     private:
-        gboolean active;
-	gboolean lpterm_keyboard_event(GdkEventKey *, void *);
-        void run_lp_command(void);
+	GMutex *sweep_mutex;
+	time_t last_hit;
 
-        gchar *sudo_fix(const gchar *);
-        gboolean process_internal_command (const gchar *);
-        gboolean internal_cd(gchar **);
-        GtkIconView *iconview;
-        GtkWidget *status_button;
-        GtkWidget *status_icon;
-        GtkWidget *iconview_icon;
+	GtkComboBox *comboboxentry;
+	GtkEntry *entry;
+	GtkTreeModel *model;
+	gchar *active_dbh_file;
+	gpointer cancel_user_data;
+	gpointer activate_user_data;
+	void (*cancel_func) (GtkEntry * entry, gpointer cancel_user_data);
+	void (*activate_func) (GtkEntry * entry, gpointer activate_user_data);
+	/* 
+	 * This is private (ro): */
+	gint dead_key;
+	gint shift_pos;
+	gint cursor_pos;
+	gint active;
 
-        GList *run_button_list;
-        pthread_mutex_t *rbl_mutex;
-	data_c *data_p;
+	gint completion_type;
 
+	gboolean asian; 
+	gboolean quick_activate; 
 
-}; 
+	GSList *list;
+	GSList *limited_list;
+	GSList *old_list;
+	GHashTable *association_hash;
+	/* imported or null */
+	int (*extra_key_completion) (gpointer extra_key_data);
+	gpointer extra_key_data;
+};
+
+	    
 
 #endif
+

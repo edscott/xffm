@@ -341,6 +341,57 @@ utility_c::get_editors(void) {
     return editors_v;
 }
 
+
+
+#if 0
+// Used by execute()
+static gchar *
+get_command_fmt(record_entry_t *en) {
+    gchar *command_fmt = MIME_command (en->mimetype);
+    if(!command_fmt) {
+        command_fmt = MIME_command (en->mimemagic);
+    }
+    gboolean is_text = ((en->mimetype && strstr (en->mimetype, "text/")) ||
+                        (en->mimemagic && strstr (en->mimemagic, "text/")) || 
+                        (en->filetype && strstr (en->filetype, "text")));
+    if(!command_fmt && is_text && getenv ("EDITOR_CMD") && strlen (getenv ("EDITOR_CMD"))) {
+        command_fmt = g_strdup (getenv ("EDITOR_CMD"));
+    }
+    return command_fmt;
+}
+
+// Used by execute()
+static gchar *
+strip_path(gchar *command_fmt, const gchar *path){
+    if (!path) return command_fmt;
+    NOOP("stipping %s\n", command_fmt);
+    if (strstr(command_fmt, path)){
+        gchar *end = strstr(command_fmt,path) + strlen(path);
+        *strstr(command_fmt, path) = 0;
+        gchar *g = g_strconcat(command_fmt, "%","s",end, NULL);
+        g_free(command_fmt);
+        command_fmt=g;
+        NOOP("stipped %s\n", command_fmt);
+        return command_fmt;
+    }
+    // What if the path is quoted or escaped or both
+    gchar *esc_path = rfm_esc_string (path);
+    if (strstr(command_fmt, esc_path)){
+        command_fmt = strip_path(command_fmt, esc_path);
+    }
+    g_free(esc_path);
+    return command_fmt;
+}
+
+typedef struct execute_t{
+    widgets_t *widgets_p;
+    GSList *list;
+} execute_t;
+
+#endif
+
+
+
 #if 0
 
 // See dialog.i
