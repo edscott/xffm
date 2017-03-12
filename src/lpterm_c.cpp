@@ -404,6 +404,12 @@ lpterm_c::run_lp_command(void){
     g_free(command);
 }
 
+void
+lpterm_c::open_terminal(void){
+    const gchar *terminal = what_term();
+    shell_command(terminal, FALSE);
+}
+
 gint
 lpterm_c::lpterm_keyboard_event( GdkEventKey * event, gpointer data) {
     TRACE( "lpterm_c::lpterm_keyboard_event...\n");

@@ -5,7 +5,7 @@
 #include "run_button_c.hpp"
 #include "data_c.hpp"
 
-class lpterm_c: public run_c {
+class lpterm_c: public run_c, virtual utility_c {
     public:
         lpterm_c(data_c *, void *);
         ~lpterm_c(void);
@@ -18,6 +18,7 @@ class lpterm_c: public run_c {
         void unreference_run_button(run_button_c *);
         void *shell_command(const gchar *);
         void *shell_command(const gchar *, gboolean);
+        void open_terminal(void);
 
 /*
         void recover_flags (gchar * in_cmd, gboolean * interm, gboolean * hold);
@@ -29,6 +30,7 @@ class lpterm_c: public run_c {
         gboolean active;
 	gboolean lpterm_keyboard_event(GdkEventKey *, void *);
         void run_lp_command(void);
+
         gchar *sudo_fix(const gchar *);
         gboolean process_internal_command (const gchar *);
         gboolean internal_cd(gchar **);

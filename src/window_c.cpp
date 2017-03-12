@@ -10,6 +10,13 @@ static gboolean window_keyboard_event (GtkWidget *, GdkEventKey *, gpointer);
 static void destroy(GtkWidget *, gpointer);
 static gboolean window_tooltip_f(GtkWidget  *, gint, gint, gboolean, GtkTooltip *, gpointer);
 
+static void  home(GSimpleAction *, GVariant *, gpointer data);
+static void  terminal(GSimpleAction *, GVariant *, gpointer data);
+static void  shell(GSimpleAction *, GVariant *, gpointer data);
+static void  search(GSimpleAction *, GVariant *, gpointer data);
+static void  finish(GSimpleAction *, GVariant *, gpointer data);
+
+
 
 window_c::window_c(data_c *data0):menu_c(data0) {
     data_p = data0;
@@ -304,6 +311,25 @@ window_c::create_menu_model(GtkApplication *app){
     g_object_unref (builder);
 }
 
+void
+window_c::add_actions(GtkApplication *app){
+    GActionEntry app_entries[] =
+    {
+      { "home", home, NULL, NULL, NULL },
+      { "terminal", terminal, NULL, NULL, NULL },
+      { "shell", shell, NULL, NULL, NULL },
+      { "search", search, NULL, NULL, NULL },
+      { "finish",  finish, NULL, NULL, NULL }
+    };
+    g_action_map_add_action_entries (G_ACTION_MAP (app), app_entries, 
+            G_N_ELEMENTS (app_entries), (gpointer) this);
+
+}
+
+///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+
+
 static void
  home(GSimpleAction *action,
                        GVariant      *parameter,
@@ -318,9 +344,14 @@ static void
 static void
  terminal(GSimpleAction *action,
                        GVariant      *parameter,
-                       gpointer       app)
+                       gpointer       data)
 {
     DBG("terminal\n");
+    // get current view
+
+    window_c *window_p = (window_c *)data;
+    view_c *view_p =(view_c *)window_p->get_active_view_p();
+    view_p->get_lpterm_p()->open_terminal();
 }
 
 static void
@@ -349,19 +380,4 @@ static void
 }
 
 
-
-void
-window_c::add_actions(GtkApplication *app){
-    GActionEntry app_entries[] =
-    {
-      { "home", home, NULL, NULL, NULL },
-      { "terminal", terminal, NULL, NULL, NULL },
-      { "shell", shell, NULL, NULL, NULL },
-      { "search", search, NULL, NULL, NULL },
-      { "finish",  finish, NULL, NULL, NULL }
-    };
-    g_action_map_add_action_entries (G_ACTION_MAP (app), app_entries, 
-            G_N_ELEMENTS (app_entries), (gpointer) this);
-
-}
 
