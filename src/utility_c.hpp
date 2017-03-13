@@ -18,7 +18,12 @@ class utility_c{
         const gchar **get_terminals(void);
         const gchar **get_editors(void);
         gchar *get_text_editor(void);
-	
+        void set_store_data_from_list(GtkListStore *, GSList **);
+        gchar *recursive_utf_string (const gchar *);
+	gint deadkey(gint);
+        gint compose_key(gint, gint);
+        gint translate_key(gint);
+        gchar *valid_utf_pathstring (const gchar *);
     private:
         const gchar *default_shell(void);
         gboolean program_in_path(const gchar *);

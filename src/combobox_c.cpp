@@ -65,6 +65,13 @@
 
 #define HISTORY_ITEMS MAX_COMBO_ELEMENTS
 /*************************************************************************/
+
+static void on_changed (GtkComboBox *, gpointer );
+static gint on_key_press (GtkWidget * , GdkEventKey * , gpointer );
+static gint on_key_press_history (GtkWidget * , GdkEventKey * , gpointer );
+static int history_compare (gconstpointer , gconstpointer );
+static int path_compare (gconstpointer , gconstpointer );
+static void clear_association_hash (gpointer , gpointer , gpointer );
 /*************** public *****************/
  
 // FIXME: Check that all pthread mutexes created in classes
@@ -73,10 +80,6 @@
 // Constructor 
 combobox_c::combobox_c (GtkComboBox *data1, gint data2) {
     sweep_mutex=PTHREAD_MUTEX_INITIALIZER;
-    if (!p) {
-	DBG("init_combo: comboboxentry == NULL!\n");
-	return NULL;
-    }
     completion_type = data2;
     comboboxentry=data1;
 
@@ -117,6 +120,22 @@ combobox_c::combobox_c (GtkComboBox *data1, gint data2) {
 
 combobox_c::~combobox_c(void){
     pthread_mutex_destroy(&sweep_mutex);
+            
+    if (association_hash) {
+	g_hash_table_destroy (association_hash);
+    }
+    g_free (active_dbh_file);
+    // free:
+    //    ->treemodel
+    if (GTK_IS_TREE_STORE (model)) {
+	gtk_tree_store_clear ((GtkTreeStore *)model);
+    }
+    g_object_unref(model);
+    //    ->list
+    clean_history_list (&(list));
+    //    ->limited_list
+    clean_history_list (&(limited_list));
+    //    ->old_list
     return;
 }
 
@@ -158,8 +177,6 @@ combobox_c::set_combo (void) {
 
 gboolean
 combobox_c::set_default (void) {
-
-    combobox_info_t * combo_info = p;
     GSList *list=limited_list;
     if (list) {
 	set_entry (list->data);
@@ -194,11 +211,11 @@ combobox_c::get_entry_text (void) {
     return "";
 }
 
-G_MODULE_EXPORT void *
-save_to_history (const gchar *data1, const gchar *data2) {
+gboolean
+combobox_c::save_to_history (const gchar *data1, const gchar *data2) {
     if (!data1) {
 	DBG("save_to_history: dbh_file==NULL!\n");
-	return NULL;
+	return FALSE;
     }
     const gchar *dbh_file = data1;
     const gchar *path2save = data2;
@@ -207,8 +224,8 @@ save_to_history (const gchar *data1, const gchar *data2) {
     history_dbh_t *history_dbh;
     gint size;
 
-    if(!path2save) return NULL;
-    if(strlen (path2save) > 255) return NULL;
+    if(!path2save) return FALSE;
+    if(strlen (path2save) > 255) return FALSE;
 
     /* directory test */
 
@@ -217,7 +234,7 @@ save_to_history (const gchar *data1, const gchar *data2) {
     if(!g_file_test (g, G_FILE_TEST_IS_DIR)) {
         DBG ("%s is not a directory\n", g);
         g_free (g);
-        return NULL;
+        return FALSE;
     }
     g_free (g);
 
@@ -233,7 +250,7 @@ save_to_history (const gchar *data1, const gchar *data2) {
         }
         g_free(directory);
         d = dbh_new (dbh_file, &keylength, DBH_PARALLEL_SAFE|DBH_CREATE);
-        if(d == NULL)  return NULL;
+        if(d == NULL)  return FALSE;
     }
     dbh_set_parallel_lock_timeout(d, 3);
     gs = g_string_new (path2save);
@@ -254,27 +271,28 @@ save_to_history (const gchar *data1, const gchar *data2) {
     dbh_set_recordsize (d, size);
     dbh_update (d);
     dbh_close (d);
-    return  NULL;
+    return  TRUE;
 }
 
-G_MODULE_EXPORT void *
-remove_from_history (void *p, void *q) {
-    if (!p) {
-	DBG("remove_from_history: dbh_file==NULL!\n");
-	return NULL;
+gboolean
+combobox_c::remove_from_history (const gchar *data1, const gchar *data2) {
+    if (!data1) {
+	DBG("save_to_history: dbh_file==NULL!\n");
+	return FALSE;
     }
-    gchar *dbh_file=p;
-    gchar *path2save=q;
+    const gchar *dbh_file = data1;
+    const gchar *path2save = data2;
     GString *gs;
     DBHashTable *d;
     //history_dbh_t *history_dbh;
 
     if(strlen (path2save) > 255)
-        return NULL;
+        return FALSE;
     
     // Since this is a user driven command, thread collisions
     // are nearly impossible.
-    if((d = dbh_new (dbh_file, NULL, DBH_PARALLEL_SAFE)) == NULL) {
+    d = dbh_new (dbh_file, NULL, DBH_PARALLEL_SAFE);
+    if(d == NULL) {
         NOOP ("Creating history file: %s", dbh_file);
 	unsigned char keylength=11;
         gchar *directory = g_path_get_dirname(dbh_file);
@@ -282,8 +300,9 @@ remove_from_history (void *p, void *q) {
             g_mkdir_with_parents(directory, 0700);
         }
         g_free(directory);
-        if((d = dbh_new (dbh_file, &keylength, DBH_PARALLEL_SAFE|DBH_CREATE)) == NULL) {
-                return NULL;
+        d = dbh_new (dbh_file, &keylength, DBH_PARALLEL_SAFE|DBH_CREATE);
+        if(d == NULL) {
+                return FALSE;
         }
     }
     dbh_set_parallel_lock_timeout(d, 3);
@@ -297,223 +316,108 @@ remove_from_history (void *p, void *q) {
         dbh_erase (d);
     }
     dbh_close (d);
-    return NULL;
+    return TRUE;
 }
 
-G_MODULE_EXPORT void *
-set_quick_activate(void *p, void *q){
-    if (!p) {
-	DBG("set_quick_activate: combo_info == NULL!\n");
-	return NULL;
-    }
-    combobox_info_t * combo_info=p;
-    combo_info->quick_activate = GPOINTER_TO_INT(q);
-	return NULL;
-}
-
-
-G_MODULE_EXPORT void *
-set_extra_key_completion_function(void *p, void *q){
-    if (!p) {
-	DBG("set_extra_key_completion_function: combo_info == NULL!\n");
-	return NULL;
-    }
-    combobox_info_t * combo_info=p;
-    combo_info->extra_key_completion=q;
-	return NULL;
-}
-
-G_MODULE_EXPORT void *
-set_extra_key_completion_data(void *p, void *q){
-    if (!p) {
-	DBG("set_extra_key_completion_data: combo_info == NULL!\n");
-	return NULL;
-    }
-    combobox_info_t * combo_info=p;
-    combo_info->extra_key_data=q;
-	return NULL;
-}
-
-G_MODULE_EXPORT void *
-set_activate_function(void *p, void *q){
-    if (!p) {
-	DBG("set_activate_function: combo_info == NULL!\n");
-	return NULL;
-    }
-    combobox_info_t * combo_info=p;
-    combo_info->activate_func=q;
-	return NULL;
-}
-
-G_MODULE_EXPORT void *
-set_cancel_function(void *p, void *q){
-    if (!p) {
-	DBG("set_cancel_function: combo_info == NULL!\n");
-	return NULL;
-    }
-    combobox_info_t * combo_info=p;
-    combo_info->cancel_func=q;
-	return NULL;
-}
-
-G_MODULE_EXPORT void *
-set_activate_user_data(void *p, void *q){
-    if (!p) {
-	DBG("set_activate_user_data: combo_info == NULL!\n");
-	return NULL;
-    }
-    combobox_info_t * combo_info=p;
-    combo_info->activate_user_data=q;
-	return NULL;
-}
-
-G_MODULE_EXPORT void *
-set_cancel_user_data(void *p, void *q){
-    if (!p) {
-	DBG("set_cancel_user_data: combo_info == NULL!\n");
-	return NULL;
-    }
-    combobox_info_t * combo_info=p;
-    combo_info->cancel_user_data=q;
-	return NULL;
-}
-
-G_MODULE_EXPORT void *
-destroy_combo (void *p) {
-    if (!p) {
-	DBG("destroy_combo: combo_info==NULL!\n");
-	return NULL;
-    }
-    combobox_info_t * combo_info=p;
-            
-    if (combo_info->association_hash) {
-	g_hash_table_destroy (combo_info->association_hash);
-    }
-    g_free (combo_info->active_dbh_file);
-    // free:
-    //    ->treemodel
-    if (GTK_IS_TREE_STORE (combo_info->model)) {
-	gtk_tree_store_clear ((GtkTreeStore *)combo_info->model);
-    }
-    g_object_unref(combo_info->model);
-    //    ->list
-    clean_history_list (&(combo_info->list));
-    //    ->limited_list
-    clean_history_list (&(combo_info->limited_list));
-    //    ->old_list
-    g_free (combo_info);
-    return NULL;
-}
-
-G_MODULE_EXPORT void *
-read_history (void *p, void *q) {
-    if (!p) {
-	DBG("read_history: combo_info==NULL!\n");
-	return NULL;
-    }
-    if (!q) {
-	DBG("dbh_file==NULL!\n");
-	return NULL;
-    }
-    combobox_info_t * combo_info=p;
-    gchar * dbh_file=q;
-/*	NOOP("NOOP:at read_history_list with %s \n",dbh_file);*/
-    g_free (combo_info->active_dbh_file);
-    combo_info->active_dbh_file = g_strdup (dbh_file);
-    if(access (combo_info->active_dbh_file, F_OK) != 0) {
-        clean_history_list (&(combo_info->list));
-        combo_info->list = NULL;
-    }
-    get_history_list (&(combo_info->list), combo_info->active_dbh_file, "");
-    /* turn asian off to start with. If the combo object does not
-     * do a read_history to start, then it has no business being a combo
-     * object */
-    combo_info->asian = FALSE;
-    return NULL;
-}
-
-G_MODULE_EXPORT void *
-clear_history (void *p) {
-    if (!p) {
-	DBG("clear_history: combo_info==NULL!\n");
-	return NULL;
-    }
-    combobox_info_t * combo_info=p;
-/*	NOOP("NOOP:at read_history_list with %s \n",dbh_file);*/
-    clean_history_list (&(combo_info->list));
-    combo_info->list = NULL;
-    return NULL;
-}
-
-
-     /* This is private : */
-
-///////////////////////////////////////////////////////////////////////////////
-
-static void clean_history_list (GSList ** list);
-static gint translate_key (gint x);
-static gint on_key_press (GtkWidget * entry, GdkEventKey * event, gpointer data);
-static gint on_key_press_history (GtkWidget * entry, GdkEventKey * event, gpointer data);
-static int history_compare (gconstpointer a, gconstpointer b);
-static void history_mklist (DBHashTable * d);
-static void get_history_list (GSList ** in_list, char *dbh_file, char *top);
-static gchar * combo_valid_utf_pathstring (const gchar * string);
-////////////////////////////////////////////////////////////////////////////
-
-static int path_compare (gconstpointer a, gconstpointer b){
-    return strcmp((gchar *)a, (gchar *)b);
-}
-
-static void 
-on_changed (GtkComboBox *combo_box, gpointer data) {
-    combobox_info_t * combo_info=data;  
-    gint active = gtk_combo_box_get_active (combo_box);
-    NOOP("active=%d\n", active); 
-    if(combo_info->extra_key_completion){
-        (*(combo_info->extra_key_completion)) (combo_info->extra_key_data);
-    }
-    if(combo_info->quick_activate &&
-	    combo_info->active != active && 
-	    combo_info->activate_func) {
-            (*(combo_info->activate_func)) ((GtkEntry *) combo_info->entry, combo_info->activate_user_data);
-    }
-}
-
-static void
-clear_association_hash (gpointer key, gpointer value, gpointer user_data) {
-    g_free (key);
-    if(!value)
-        return;
-    g_free (value);
+void 
+combobox_c::set_quick_activate(gboolean data){
+    quick_activate = data;
     return;
 }
 
-static void *
-internal_set_combo (void *p, void *q) {
-    if (!p) {
-	DBG("set_combo: combo_info==NULL!\n");
+void 
+combobox_c::set_extra_key_completion_data(gpointer data){
+    extra_key_data = data;
+    return;
+}
+
+void 
+combobox_c::set_extra_key_completion_function(gint (*func)(gpointer)){
+    extra_key_completion = func;
+    return;
+}
+
+void 
+combobox_c::set_activate_user_data(gpointer data){
+    activate_user_data = data;
+    return NULL;
+}
+
+void 
+combobox_c::set_activate_function(void (*func)(GtkEntry *, gpointer)){
+     activate_func = func;
+    return NULL;
+}
+
+void 
+combobox_c::set_cancel_user_data(gpointer data){
+    cancel_user_data = data;
 	return NULL;
+}
+
+void 
+combobox_c::set_cancel_function(void (*func)(GtkEntry *, gpointer)){
+    cancel_func = func;
+    return NULL;
+}
+
+
+gboolean 
+combobox_c::read_history (const gchar *data) {
+    if (!data) {
+	DBG("dbh_file==NULL!\n");
+	return FALSE;
     }
-    combobox_info_t * combo_info=p;
-    gchar *token=q;
+    gchar * dbh_file = data;
+/*	NOOP("NOOP:at read_history_list with %s \n",dbh_file);*/
+    g_free (active_dbh_file);
+    active_dbh_file = g_strdup (dbh_file);
+    if(access (active_dbh_file, F_OK) != 0) {
+        clean_history_list (&(list));
+        list = NULL;
+    }
+    get_history_list (&(list), active_dbh_file, "");
+    /* turn asian off to start with. If the combo object does not
+     * do a read_history to start, then it has no business being a combo
+     * object */
+    asian = FALSE;
+    return NULL;
+}
+
+void 
+combobox_c::clear_history (void) {
+/*	NOOP("NOOP:at read_history_list with %s \n",dbh_file);*/
+    clean_history_list (&(list));
+    list = NULL;
+    return;
+}
+
+
+////////////////////////////////////////////////////////////////////////////
+     /* This is private : */
+////////////////////////////////////////////////////////////////////////////
+
+gboolean 
+combobox_c::set_combo (const gchar *data) {
+    const gchar *token = data;
     int count;
     GSList *tmp;
     GSList **limited_list;
     gboolean match = FALSE;
 
     /*if (!combo_info->list || !combo_info->active_dbh_file) { */
-    if(!combo_info->list)
-        return GINT_TO_POINTER(match);
+    if(!list)
+        return match;
 
-    combo_info->old_list = combo_info->limited_list;
-    combo_info->limited_list = NULL;
-    limited_list = &(combo_info->limited_list);
+    old_list = limited_list;
+    limited_list = NULL;
+    limited_list = &(limited_list);
     NOOP ("token=%s\n", ((token) ? token : "null"));
 
 
     // sort items after the first
     GSList *first=NULL;
-    tmp = combo_info->list;
+    tmp = list;
     for(count = 0; tmp && tmp->data; tmp = tmp->next) {
         gchar *p = (gchar *) tmp->data;
         if(!p)
@@ -542,24 +446,24 @@ internal_set_combo (void *p, void *q) {
         /* make sure we have utf-8 in combo. This may not match
          * character set of actual system, such as euc-jp, so
          * we better keep correct value in an association hash. */
-        if(combo_info->association_hash) {
+        if(association_hash) {
             /* clean old hash */
-            g_hash_table_foreach (combo_info->association_hash, clear_association_hash, NULL);
-            g_hash_table_destroy (combo_info->association_hash);
-            combo_info->association_hash = NULL;
+            g_hash_table_foreach (association_hash, clear_association_hash, NULL);
+            g_hash_table_destroy (association_hash);
+            association_hash = NULL;
         }
 
-        combo_info->association_hash = g_hash_table_new (g_str_hash, g_str_equal);
+        association_hash = g_hash_table_new (g_str_hash, g_str_equal);
 
-        if(combo_info->association_hash) {
+        if(association_hash) {
             GSList *tmp;
             /* create new hash */
             for(tmp = *limited_list; tmp; tmp = tmp->next) {
-                gchar *utf_string = combo_valid_utf_pathstring ((gchar *) (tmp->data));
+                gchar *utf_string = valid_utf_pathstring ((gchar *) (tmp->data));
                 NOOP("utf_string=%s\n",utf_string); 
                 if(strcmp (utf_string, (gchar *) (tmp->data))) {
                     NOOP ("combo hash table %s ---> %s\n", (gchar *) (tmp->data), utf_string);
-                    g_hash_table_insert (combo_info->association_hash, utf_string, tmp->data);
+                    g_hash_table_insert (association_hash, utf_string, tmp->data);
 		    g_free(tmp->data);
                     tmp->data = utf_string;
                 } else {
@@ -568,7 +472,7 @@ internal_set_combo (void *p, void *q) {
             }
         }
 	// Set popdown list:
-	rfm_set_store_data_from_list ((GtkListStore *)combo_info->model, limited_list);
+	set_store_data_from_list ((GtkListStore *)model, limited_list);
 
 	// Set tooltip to reflect values in popdown list:
 	gchar *tooltip_text=NULL;
@@ -580,316 +484,140 @@ internal_set_combo (void *p, void *q) {
 	    else tooltip_text = g_strconcat("<b>", _("History:"),"</b>\n ",(gchar *)(tmp->data), NULL);
 	    g_free(p);
 	}
-	tooltip_icon=rfm_get_pixbuf("xffm/emblem_bookmark", SIZE_DIALOG);
 
-	rfm_add_custom_tooltip(GTK_WIDGET (combo_info->comboboxentry), tooltip_icon, tooltip_text);
-//	gtk_widget_set_tooltip_markup (GTK_WIDGET (combo_info->comboboxentry), tooltip_text);
-//	gtk_widget_set_tooltip_text (GTK_WIDGET (combo_info->comboboxentry), tooltip_text); 
+        // Custom tooltip? Not now, maybe later...
+#if 0
+	tooltip_icon=rfm_get_pixbuf("xffm/emblem_bookmark", SIZE_DIALOG);
+	rfm_add_custom_tooltip(GTK_WIDGET (comboboxentry), tooltip_icon, tooltip_text);
+#else
+	gtk_widget_set_tooltip_markup (GTK_WIDGET (comboboxentry), tooltip_text);
+	gtk_widget_set_tooltip_text (GTK_WIDGET (comboboxentry), tooltip_text); 
+#endif
 	g_free(tooltip_text);
 	
         //gtk_combo_set_popdown_strings (combo_info->combo, *limited_list);
-        clean_history_list (&(combo_info->old_list));
+        clean_history_list (&(old_list));
     } else {
-        combo_info->limited_list = combo_info->old_list;
-	combo_info->old_list = NULL;
+        limited_list = old_list;
+	old_list = NULL;
     }
-    return GINT_TO_POINTER(match);
+    return match;
 }
 
-static void
-set_blank (void *p) {
-    set_entry (p, "");
+void
+combobox_c::set_blank (void) {
+    set_entry ("");
 }
 
-
-static gchar *
-recursive_utf_string (const gchar * path) {
-    gchar *dir,
-     *base,
-     *valid,
-     *utf_base,
-     *utf_dir;
-    if(!path)
-        return NULL;
-    if(g_utf8_validate (path, -1, NULL))
-        return g_strdup (path);
-    dir = g_path_get_dirname (path);
-    NOOP ("dir=%s\n", dir);
-    if(!dir || !strlen (dir) || strcmp (dir, "./") == 0 || strcmp (dir, ".") == 0) {
-        /* short circuit non-paths */
-        g_free (dir);
-        return rfm_utf_string (path);
-    }
-    /* otherwise asume a mixed utf/locale string */
-    base = g_path_get_basename (path);
-    utf_dir = recursive_utf_string (dir);
-    if(!g_utf8_validate (base, -1, NULL)) {
-        utf_base = rfm_utf_string (base);
-        g_free (base);
-    } else {
-        utf_base = base;
-    }
-
-    valid = g_strconcat (utf_dir, G_DIR_SEPARATOR_S, utf_base, NULL);
-
-    NOOP("dir=%s base=%s valide=%s\n",dir, base, valid); 
-    g_free (utf_base);
-    g_free (utf_dir);
-    g_free (dir);
-    return valid;
-}
-
-static gchar *
-combo_valid_utf_pathstring (const gchar * string) {
-    gchar *utf_string = NULL;
-    utf_string = recursive_utf_string (string);
-    NOOP ("string=%s utf_string=%s\n", string, utf_string);
-    return utf_string;
-}
-
-static void
-clean_history_list (GSList ** list) {
+void
+combobox_c::clean_history_list (GSList ** list) {
     GSList *tmp;
     if(!*list)
         return;
     for(tmp = *list; tmp; tmp = tmp->next) {
         /*NOOP("freeing %s\n",(char *)tmp->data); */
         g_free (tmp->data);
-        tmp->data = NULL;
     }
     g_slist_free (*list);
     *list = NULL;
     return;
 }
 
-static gint
-translate_key (gint x) {
-    switch (x) {
-    case GDK_KEY_KP_Divide:
-        return GDK_KEY_slash;
-    case GDK_KEY_KP_Subtract:
-        return GDK_KEY_minus;
-    case GDK_KEY_KP_Multiply:
-        return GDK_KEY_asterisk;
-    case GDK_KEY_KP_Add:
-        return GDK_KEY_plus;
-    case GDK_KEY_KP_Space:
-        return GDK_KEY_space;
-    case GDK_KEY_KP_0:
-        return GDK_KEY_0;
-    case GDK_KEY_KP_1:
-        return GDK_KEY_1;
-    case GDK_KEY_KP_2:
-        return GDK_KEY_2;
-    case GDK_KEY_KP_3:
-        return GDK_KEY_3;
-    case GDK_KEY_KP_4:
-        return GDK_KEY_4;
-    case GDK_KEY_KP_5:
-        return GDK_KEY_5;
-    case GDK_KEY_KP_6:
-        return GDK_KEY_6;
-    case GDK_KEY_KP_7:
-        return GDK_KEY_7;
-    case GDK_KEY_KP_8:
-        return GDK_KEY_8;
-    case GDK_KEY_KP_9:
-        return GDK_KEY_9;
+void
+combobox_c::history_lasthit (DBHashTable * d) {
+    history_dbh_t *history_mem = (history_dbh_t *) DBH_DATA (d);
+    if(!history_mem)
+        g_assert_not_reached ();
+    if(history_mem->last_hit >= last_hit) {
+        last_hit = history_mem->last_hit;
     }
-    return x;
+}
+    
+void
+combobox_c::history_mklist (DBHashTable * d) {
+    GSList **the_list = d->sweep_data;
+    /*if(*the_list==NULL) { //nah!
+        g_warning("history_mklist(): *the_list==NULL\n");
+        return;
+    }*/
+
+    history_dbh_t *history_mem = (history_dbh_t *) malloc (sizeof (history_dbh_t));
+    if(!history_mem){
+        g_warning("malloc(): %s\n", strerror(errno));
+        return;
+    }
+    memcpy (history_mem, DBH_DATA (d), sizeof (history_dbh_t));
+    // false positive. history_mem->path is a string, not an array.
+    // coverity[array_null : FALSE]
+    if(history_mem->path && strlen (history_mem->path)) {
+        *the_list = g_slist_insert_sorted (*the_list, history_mem, history_compare);
+        NOOP("NOOP: inserted %s\n",(char *)history_mem->path); 
+    }
+    else g_free(history_mem);
+    // history_mem does not go out of scope. It is now managed by the glist 
+    // located at the address pointed to by the_list, and is cleaned when
+    // combobox is destroyed.
 }
 
-static int
-compose_key (int key, int dead_key) {
-    switch (dead_key) {
-    case GDK_KEY_dead_grave:
-        switch (key) {
-        case GDK_KEY_A:
-            return GDK_KEY_Agrave;
-        case GDK_KEY_a:
-            return GDK_KEY_agrave;
-        case GDK_KEY_E:
-            return GDK_KEY_Egrave;
-        case GDK_KEY_e:
-            return GDK_KEY_egrave;
-        case GDK_KEY_I:
-            return GDK_KEY_Igrave;
-        case GDK_KEY_i:
-            return GDK_KEY_igrave;
-        case GDK_KEY_O:
-            return GDK_KEY_Ograve;
-        case GDK_KEY_o:
-            return GDK_KEY_ograve;
-        case GDK_KEY_U:
-            return GDK_KEY_Ugrave;
-        case GDK_KEY_u:
-            return GDK_KEY_ugrave;
+/* if top==NULL, the top entry is left blank,
+ * if top=="", the top entry is the one with the greatest access time for last hit
+ * if top=="anything", the entry is set to "anything"
+ *
+ * (only "" is used now)
+ * */
+
+void
+combobox_c::get_history_list (GSList ** in_list, char *dbh_file, char *top) {
+    DBHashTable *d;
+    GSList **the_list;
+    GSList *tmp;
+/*   char *first=NULL;*/
+    the_list = in_list;
+
+    NOOP("NOOP:at get_history_list with %s \n",dbh_file); 
+
+    pthread_mutex_lock(&sweep_mutex);
+    clean_history_list (the_list);
+    last_hit = 0;
+    TRACE("opening %s...\n",dbh_file); 
+    if((d = dbh_new (dbh_file, NULL, DBH_PARALLEL_SAFE)) != NULL) {
+	dbh_set_parallel_lock_timeout(d, 3);
+	// Last hit is the top item
+        dbh_foreach_sweep (d, history_lasthit);
+	d->sweep_data=the_list;
+        dbh_foreach_sweep (d, history_mklist);
+        dbh_close (d);
+    } else {
+        // if dbh_file cannot be opened, create a new one
+        NOOP ("Creating history file: %s", dbh_file);
+	unsigned char keylength=11;
+        if((d = dbh_new (dbh_file, &keylength, 0)) != NULL) {
+            dbh_close (d);
         }
-        break;
-    case GDK_KEY_dead_acute:
-        NOOP ("dead key=0x%x composing %c\n", (unsigned)dead_key, (char)key);
-        switch (key) {
-        case GDK_KEY_A:
-            return GDK_KEY_Aacute;
-        case GDK_KEY_a:
-            return GDK_KEY_aacute;
-        case GDK_KEY_E:
-            return GDK_KEY_Eacute;
-        case GDK_KEY_e:
-            return GDK_KEY_eacute;
-        case GDK_KEY_I:
-            return GDK_KEY_Iacute;
-        case GDK_KEY_i:
-            return GDK_KEY_iacute;
-        case GDK_KEY_O:
-            return GDK_KEY_Oacute;
-        case GDK_KEY_o:
-            return GDK_KEY_oacute;
-        case GDK_KEY_U:
-            return GDK_KEY_Uacute;
-        case GDK_KEY_u:
-            return GDK_KEY_uacute;
-        case GDK_KEY_Y:
-            return GDK_KEY_Yacute;
-        case GDK_KEY_y:
-            return GDK_KEY_yacute;
-        case GDK_KEY_S:
-            return GDK_KEY_Sacute;
-        case GDK_KEY_Z:
-            return GDK_KEY_Zacute;
-        case GDK_KEY_s:
-            return GDK_KEY_sacute;
-        case GDK_KEY_z:
-            return GDK_KEY_zacute;
-        case GDK_KEY_R:
-            return GDK_KEY_Racute;
-        case GDK_KEY_r:
-            return GDK_KEY_racute;
-        case GDK_KEY_L:
-            return GDK_KEY_Lacute;
-        case GDK_KEY_l:
-            return GDK_KEY_lacute;
-        case GDK_KEY_C:
-            return GDK_KEY_Cacute;
-        case GDK_KEY_c:
-            return GDK_KEY_cacute;
-        case GDK_KEY_N:
-            return GDK_KEY_Nacute;
-        case GDK_KEY_n:
-            return GDK_KEY_nacute;
-        }
-        break;
-    case GDK_KEY_dead_diaeresis:
-        switch (key) {
-        case GDK_KEY_A:
-            return GDK_KEY_Adiaeresis;
-        case GDK_KEY_a:
-            return GDK_KEY_adiaeresis;
-        case GDK_KEY_E:
-            return GDK_KEY_Ediaeresis;
-        case GDK_KEY_e:
-            return GDK_KEY_ediaeresis;
-        case GDK_KEY_I:
-            return GDK_KEY_Idiaeresis;
-        case GDK_KEY_i:
-            return GDK_KEY_idiaeresis;
-        case GDK_KEY_O:
-            return GDK_KEY_Odiaeresis;
-        case GDK_KEY_o:
-            return GDK_KEY_odiaeresis;
-        case GDK_KEY_U:
-            return GDK_KEY_Udiaeresis;
-        case GDK_KEY_u:
-            return GDK_KEY_udiaeresis;
-        case GDK_KEY_Y:
-            return GDK_KEY_Ydiaeresis;
-        case GDK_KEY_y:
-            return GDK_KEY_ydiaeresis;
-        }
-        break;
-    case GDK_KEY_dead_cedilla:
-        switch (key) {
-        case GDK_KEY_C:
-            return GDK_KEY_Ccedilla;
-        case GDK_KEY_c:
-            return GDK_KEY_ccedilla;
-        case GDK_KEY_S:
-            return GDK_KEY_Scedilla;
-        case GDK_KEY_s:
-            return GDK_KEY_scedilla;
-        case GDK_KEY_T:
-            return GDK_KEY_Tcedilla;
-        case GDK_KEY_t:
-            return GDK_KEY_tcedilla;
-        case GDK_KEY_R:
-            return GDK_KEY_Rcedilla;
-        case GDK_KEY_r:
-            return GDK_KEY_rcedilla;
-        case GDK_KEY_L:
-            return GDK_KEY_Lcedilla;
-        case GDK_KEY_l:
-            return GDK_KEY_lcedilla;
-        case GDK_KEY_G:
-            return GDK_KEY_Gcedilla;
-        case GDK_KEY_g:
-            return GDK_KEY_gcedilla;
-        case GDK_KEY_N:
-            return GDK_KEY_Ncedilla;
-        case GDK_KEY_n:
-            return GDK_KEY_ncedilla;
-        case GDK_KEY_K:
-            return GDK_KEY_Kcedilla;
-        case GDK_KEY_k:
-            return GDK_KEY_kcedilla;
-        }
-        break;
-    case GDK_KEY_dead_circumflex:
-        switch (key) {
-        case GDK_KEY_A:
-            return GDK_KEY_Acircumflex;
-        case GDK_KEY_a:
-            return GDK_KEY_acircumflex;
-        case GDK_KEY_E:
-            return GDK_KEY_Ecircumflex;
-        case GDK_KEY_e:
-            return GDK_KEY_ecircumflex;
-        case GDK_KEY_I:
-            return GDK_KEY_Icircumflex;
-        case GDK_KEY_i:
-            return GDK_KEY_icircumflex;
-        case GDK_KEY_O:
-            return GDK_KEY_Ocircumflex;
-        case GDK_KEY_o:
-            return GDK_KEY_ocircumflex;
-        case GDK_KEY_U:
-            return GDK_KEY_Ucircumflex;
-        case GDK_KEY_u:
-            return GDK_KEY_ucircumflex;
-        case GDK_KEY_H:
-            return GDK_KEY_Hcircumflex;
-        case GDK_KEY_h:
-            return GDK_KEY_hcircumflex;
-        case GDK_KEY_J:
-            return GDK_KEY_Jcircumflex;
-        case GDK_KEY_j:
-            return GDK_KEY_jcircumflex;
-        case GDK_KEY_C:
-            return GDK_KEY_Ccircumflex;
-        case GDK_KEY_c:
-            return GDK_KEY_ccircumflex;
-        case GDK_KEY_G:
-            return GDK_KEY_Gcircumflex;
-        case GDK_KEY_g:
-            return GDK_KEY_gcircumflex;
-        case GDK_KEY_S:
-            return GDK_KEY_Scircumflex;
-        case GDK_KEY_s:
-            return GDK_KEY_scircumflex;
-        }
-        break;
     }
-    return key;
+    TRACE("open %s.\n",dbh_file); 
+    /* leave only strings in the history list: */
+    for(tmp = *the_list; tmp; tmp = tmp->next) {
+        history_dbh_t *history_mem = (history_dbh_t *) tmp->data;
+        gchar *p = g_strdup (history_mem->path);
+        NOOP ("%s, hits=%d\n", history_mem->path, history_mem->hits);
+        tmp->data = p;
+        g_free (history_mem);
+        history_mem = NULL;
+    }
+
+    if(*the_list == NULL) {
+        *the_list = g_slist_prepend (*the_list, g_strdup (""));
+    }
+    pthread_mutex_unlock(&sweep_mutex);
+    return;
 }
+
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+///  gtk specific callbacks
+//
+
 
 static gint
 on_key_press (GtkWidget * entry, GdkEventKey * event, gpointer data) {
@@ -902,40 +630,6 @@ on_key_press (GtkWidget * entry, GdkEventKey * event, gpointer data) {
     return FALSE;
 }
 
-static int
-deadkey (int key) {
-    /* support for deadkeys */
-    switch (key) {
-        /* spanish */
-    case GDK_KEY_dead_acute:
-    case GDK_KEY_dead_diaeresis:
-        return key;
-        /* french */
-    case GDK_KEY_dead_cedilla:
-    case GDK_KEY_dead_grave:
-    case GDK_KEY_dead_circumflex:
-        return key;
-        /* others (if you want any of these, submit a request) */
-    case GDK_KEY_dead_tilde:
-    case GDK_KEY_dead_macron:
-    case GDK_KEY_dead_breve:
-    case GDK_KEY_dead_abovedot:
-    case GDK_KEY_dead_abovering:
-    case GDK_KEY_dead_doubleacute:
-    case GDK_KEY_dead_caron:
-    case GDK_KEY_dead_ogonek:
-    case GDK_KEY_dead_iota:
-    case GDK_KEY_dead_voiced_sound:
-    case GDK_KEY_dead_semivoiced_sound:
-    case GDK_KEY_dead_belowdot:
-/* these two are > gtk-2.2: */
-/*     case GDK_KEY_dead_hook:*/
-/*     case GDK_KEY_dead_horn:*/
-        return 0;
-    default:
-        return 0;
-    }
-}
 
 static gint
 on_key_press_history (GtkWidget * entry, GdkEventKey * event, gpointer data) {
@@ -1337,6 +1031,26 @@ on_key_press_history (GtkWidget * entry, GdkEventKey * event, gpointer data) {
 }
 
 
+static int path_compare (gconstpointer a, gconstpointer b){
+    return strcmp((gchar *)a, (gchar *)b);
+}
+
+static void 
+on_changed (GtkComboBox *combo_box, gpointer data) {
+    combobox_info_t * combo_info=data;  
+    gint active = gtk_combo_box_get_active (combo_box);
+    NOOP("active=%d\n", active); 
+    if(combo_info->extra_key_completion){
+        (*(combo_info->extra_key_completion)) (combo_info->extra_key_data);
+    }
+    if(combo_info->quick_activate &&
+	    combo_info->active != active && 
+	    combo_info->activate_func) {
+            (*(combo_info->activate_func)) ((GtkEntry *) combo_info->entry, combo_info->activate_user_data);
+    }
+}
+
+
 static int
 history_compare (gconstpointer a, gconstpointer b) {
     history_dbh_t *da = (history_dbh_t *) a;
@@ -1353,98 +1067,13 @@ history_compare (gconstpointer a, gconstpointer b) {
     return (strcmp (da->path, db->path));
 }
 
+
 static void
-history_lasthit (DBHashTable * d) {
-    history_dbh_t *history_mem = (history_dbh_t *) DBH_DATA (d);
-    if(!history_mem)
-        g_assert_not_reached ();
-    if(history_mem->last_hit >= last_hit) {
-        last_hit = history_mem->last_hit;
-    }
-}
-    
-static void
-history_mklist (DBHashTable * d) {
-    GSList **the_list = d->sweep_data;
-    /*if(*the_list==NULL) { //nah!
-        g_warning("history_mklist(): *the_list==NULL\n");
+clear_association_hash (gpointer key, gpointer value, gpointer user_data) {
+    g_free (key);
+    if(!value)
         return;
-    }*/
-
-    history_dbh_t *history_mem = (history_dbh_t *) malloc (sizeof (history_dbh_t));
-    if(!history_mem){
-        g_warning("malloc(): %s\n", strerror(errno));
-        return;
-    }
-    memcpy (history_mem, DBH_DATA (d), sizeof (history_dbh_t));
-    // false positive. history_mem->path is a string, not an array.
-    // coverity[array_null : FALSE]
-    if(history_mem->path && strlen (history_mem->path)) {
-        *the_list = g_slist_insert_sorted (*the_list, history_mem, history_compare);
-        NOOP("NOOP: inserted %s\n",(char *)history_mem->path); 
-    }
-    else g_free(history_mem);
-    // history_mem does not go out of scope. It is now managed by the glist 
-    // located at the address pointed to by the_list, and is cleaned when
-    // combobox is destroyed.
-}
-
-/* if top==NULL, the top entry is left blank,
- * if top=="", the top entry is the one with the greatest access time for last hit
- * if top=="anything", the entry is set to "anything"
- *
- * (only "" is used now)
- * */
-
-static void
-get_history_list (GSList ** in_list, char *dbh_file, char *top) {
-    DBHashTable *d;
-    GSList **the_list;
-    GSList *tmp;
-/*   char *first=NULL;*/
-    the_list = in_list;
-
-    NOOP("NOOP:at get_history_list with %s \n",dbh_file); 
-
-    pthread_mutex_lock(&sweep_mutex);
-    clean_history_list (the_list);
-    last_hit = 0;
-    TRACE("opening %s...\n",dbh_file); 
-    if((d = dbh_new (dbh_file, NULL, DBH_PARALLEL_SAFE)) != NULL) {
-	dbh_set_parallel_lock_timeout(d, 3);
-	// Last hit is the top item
-        dbh_foreach_sweep (d, history_lasthit);
-	d->sweep_data=the_list;
-        dbh_foreach_sweep (d, history_mklist);
-        dbh_close (d);
-    } else {
-        // if dbh_file cannot be opened, create a new one
-        NOOP ("Creating history file: %s", dbh_file);
-	unsigned char keylength=11;
-        if((d = dbh_new (dbh_file, &keylength, 0)) != NULL) {
-            dbh_close (d);
-        }
-    }
-    TRACE("open %s.\n",dbh_file); 
-    /* leave only strings in the history list: */
-    for(tmp = *the_list; tmp; tmp = tmp->next) {
-        history_dbh_t *history_mem = (history_dbh_t *) tmp->data;
-        gchar *p = g_strdup (history_mem->path);
-        NOOP ("%s, hits=%d\n", history_mem->path, history_mem->hits);
-        tmp->data = p;
-        g_free (history_mem);
-        history_mem = NULL;
-    }
-
-    if(*the_list == NULL) {
-        *the_list = g_slist_prepend (*the_list, g_strdup (""));
-    }
-    pthread_mutex_unlock(&sweep_mutex);
+    g_free (value);
     return;
 }
-
-///  combobox public
-//
-
-
 

@@ -4,6 +4,333 @@
 #include <errno.h>
 #include "utility_c.hpp"
 
+gint
+utility_c::translate_key (gint x) {
+    switch (x) {
+    case GDK_KEY_KP_Divide:
+        return GDK_KEY_slash;
+    case GDK_KEY_KP_Subtract:
+        return GDK_KEY_minus;
+    case GDK_KEY_KP_Multiply:
+        return GDK_KEY_asterisk;
+    case GDK_KEY_KP_Add:
+        return GDK_KEY_plus;
+    case GDK_KEY_KP_Space:
+        return GDK_KEY_space;
+    case GDK_KEY_KP_0:
+        return GDK_KEY_0;
+    case GDK_KEY_KP_1:
+        return GDK_KEY_1;
+    case GDK_KEY_KP_2:
+        return GDK_KEY_2;
+    case GDK_KEY_KP_3:
+        return GDK_KEY_3;
+    case GDK_KEY_KP_4:
+        return GDK_KEY_4;
+    case GDK_KEY_KP_5:
+        return GDK_KEY_5;
+    case GDK_KEY_KP_6:
+        return GDK_KEY_6;
+    case GDK_KEY_KP_7:
+        return GDK_KEY_7;
+    case GDK_KEY_KP_8:
+        return GDK_KEY_8;
+    case GDK_KEY_KP_9:
+        return GDK_KEY_9;
+    }
+    return x;
+}
+
+gint
+utility_c::compose_key (gint key, gint dead_key) {
+    switch (dead_key) {
+    case GDK_KEY_dead_grave:
+        switch (key) {
+        case GDK_KEY_A:
+            return GDK_KEY_Agrave;
+        case GDK_KEY_a:
+            return GDK_KEY_agrave;
+        case GDK_KEY_E:
+            return GDK_KEY_Egrave;
+        case GDK_KEY_e:
+            return GDK_KEY_egrave;
+        case GDK_KEY_I:
+            return GDK_KEY_Igrave;
+        case GDK_KEY_i:
+            return GDK_KEY_igrave;
+        case GDK_KEY_O:
+            return GDK_KEY_Ograve;
+        case GDK_KEY_o:
+            return GDK_KEY_ograve;
+        case GDK_KEY_U:
+            return GDK_KEY_Ugrave;
+        case GDK_KEY_u:
+            return GDK_KEY_ugrave;
+        }
+        break;
+    case GDK_KEY_dead_acute:
+        NOOP ("dead key=0x%x composing %c\n", (unsigned)dead_key, (char)key);
+        switch (key) {
+        case GDK_KEY_A:
+            return GDK_KEY_Aacute;
+        case GDK_KEY_a:
+            return GDK_KEY_aacute;
+        case GDK_KEY_E:
+            return GDK_KEY_Eacute;
+        case GDK_KEY_e:
+            return GDK_KEY_eacute;
+        case GDK_KEY_I:
+            return GDK_KEY_Iacute;
+        case GDK_KEY_i:
+            return GDK_KEY_iacute;
+        case GDK_KEY_O:
+            return GDK_KEY_Oacute;
+        case GDK_KEY_o:
+            return GDK_KEY_oacute;
+        case GDK_KEY_U:
+            return GDK_KEY_Uacute;
+        case GDK_KEY_u:
+            return GDK_KEY_uacute;
+        case GDK_KEY_Y:
+            return GDK_KEY_Yacute;
+        case GDK_KEY_y:
+            return GDK_KEY_yacute;
+        case GDK_KEY_S:
+            return GDK_KEY_Sacute;
+        case GDK_KEY_Z:
+            return GDK_KEY_Zacute;
+        case GDK_KEY_s:
+            return GDK_KEY_sacute;
+        case GDK_KEY_z:
+            return GDK_KEY_zacute;
+        case GDK_KEY_R:
+            return GDK_KEY_Racute;
+        case GDK_KEY_r:
+            return GDK_KEY_racute;
+        case GDK_KEY_L:
+            return GDK_KEY_Lacute;
+        case GDK_KEY_l:
+            return GDK_KEY_lacute;
+        case GDK_KEY_C:
+            return GDK_KEY_Cacute;
+        case GDK_KEY_c:
+            return GDK_KEY_cacute;
+        case GDK_KEY_N:
+            return GDK_KEY_Nacute;
+        case GDK_KEY_n:
+            return GDK_KEY_nacute;
+        }
+        break;
+    case GDK_KEY_dead_diaeresis:
+        switch (key) {
+        case GDK_KEY_A:
+            return GDK_KEY_Adiaeresis;
+        case GDK_KEY_a:
+            return GDK_KEY_adiaeresis;
+        case GDK_KEY_E:
+            return GDK_KEY_Ediaeresis;
+        case GDK_KEY_e:
+            return GDK_KEY_ediaeresis;
+        case GDK_KEY_I:
+            return GDK_KEY_Idiaeresis;
+        case GDK_KEY_i:
+            return GDK_KEY_idiaeresis;
+        case GDK_KEY_O:
+            return GDK_KEY_Odiaeresis;
+        case GDK_KEY_o:
+            return GDK_KEY_odiaeresis;
+        case GDK_KEY_U:
+            return GDK_KEY_Udiaeresis;
+        case GDK_KEY_u:
+            return GDK_KEY_udiaeresis;
+        case GDK_KEY_Y:
+            return GDK_KEY_Ydiaeresis;
+        case GDK_KEY_y:
+            return GDK_KEY_ydiaeresis;
+        }
+        break;
+    case GDK_KEY_dead_cedilla:
+        switch (key) {
+        case GDK_KEY_C:
+            return GDK_KEY_Ccedilla;
+        case GDK_KEY_c:
+            return GDK_KEY_ccedilla;
+        case GDK_KEY_S:
+            return GDK_KEY_Scedilla;
+        case GDK_KEY_s:
+            return GDK_KEY_scedilla;
+        case GDK_KEY_T:
+            return GDK_KEY_Tcedilla;
+        case GDK_KEY_t:
+            return GDK_KEY_tcedilla;
+        case GDK_KEY_R:
+            return GDK_KEY_Rcedilla;
+        case GDK_KEY_r:
+            return GDK_KEY_rcedilla;
+        case GDK_KEY_L:
+            return GDK_KEY_Lcedilla;
+        case GDK_KEY_l:
+            return GDK_KEY_lcedilla;
+        case GDK_KEY_G:
+            return GDK_KEY_Gcedilla;
+        case GDK_KEY_g:
+            return GDK_KEY_gcedilla;
+        case GDK_KEY_N:
+            return GDK_KEY_Ncedilla;
+        case GDK_KEY_n:
+            return GDK_KEY_ncedilla;
+        case GDK_KEY_K:
+            return GDK_KEY_Kcedilla;
+        case GDK_KEY_k:
+            return GDK_KEY_kcedilla;
+        }
+        break;
+    case GDK_KEY_dead_circumflex:
+        switch (key) {
+        case GDK_KEY_A:
+            return GDK_KEY_Acircumflex;
+        case GDK_KEY_a:
+            return GDK_KEY_acircumflex;
+        case GDK_KEY_E:
+            return GDK_KEY_Ecircumflex;
+        case GDK_KEY_e:
+            return GDK_KEY_ecircumflex;
+        case GDK_KEY_I:
+            return GDK_KEY_Icircumflex;
+        case GDK_KEY_i:
+            return GDK_KEY_icircumflex;
+        case GDK_KEY_O:
+            return GDK_KEY_Ocircumflex;
+        case GDK_KEY_o:
+            return GDK_KEY_ocircumflex;
+        case GDK_KEY_U:
+            return GDK_KEY_Ucircumflex;
+        case GDK_KEY_u:
+            return GDK_KEY_ucircumflex;
+        case GDK_KEY_H:
+            return GDK_KEY_Hcircumflex;
+        case GDK_KEY_h:
+            return GDK_KEY_hcircumflex;
+        case GDK_KEY_J:
+            return GDK_KEY_Jcircumflex;
+        case GDK_KEY_j:
+            return GDK_KEY_jcircumflex;
+        case GDK_KEY_C:
+            return GDK_KEY_Ccircumflex;
+        case GDK_KEY_c:
+            return GDK_KEY_ccircumflex;
+        case GDK_KEY_G:
+            return GDK_KEY_Gcircumflex;
+        case GDK_KEY_g:
+            return GDK_KEY_gcircumflex;
+        case GDK_KEY_S:
+            return GDK_KEY_Scircumflex;
+        case GDK_KEY_s:
+            return GDK_KEY_scircumflex;
+        }
+        break;
+    }
+    return key;
+}
+
+gint
+utility_c::deadkey (int key) {
+    /* support for deadkeys */
+    switch (key) {
+        /* spanish */
+    case GDK_KEY_dead_acute:
+    case GDK_KEY_dead_diaeresis:
+        return key;
+        /* french */
+    case GDK_KEY_dead_cedilla:
+    case GDK_KEY_dead_grave:
+    case GDK_KEY_dead_circumflex:
+        return key;
+        /* others (if you want any of these, submit a request) */
+    case GDK_KEY_dead_tilde:
+    case GDK_KEY_dead_macron:
+    case GDK_KEY_dead_breve:
+    case GDK_KEY_dead_abovedot:
+    case GDK_KEY_dead_abovering:
+    case GDK_KEY_dead_doubleacute:
+    case GDK_KEY_dead_caron:
+    case GDK_KEY_dead_ogonek:
+    case GDK_KEY_dead_iota:
+    case GDK_KEY_dead_voiced_sound:
+    case GDK_KEY_dead_semivoiced_sound:
+    case GDK_KEY_dead_belowdot:
+/* these two are > gtk-2.2: */
+/*     case GDK_KEY_dead_hook:*/
+/*     case GDK_KEY_dead_horn:*/
+        return 0;
+    default:
+        return 0;
+    }
+}
+
+
+gchar *
+utility_c::valid_utf_pathstring (const gchar * string) {
+    gchar *utf_string = NULL;
+    utf_string = recursive_utf_string (string);
+    NOOP ("valid_utf_pathstring: string=%s utf_string=%s\n", string, utf_string);
+    return utf_string;
+}
+
+
+gchar *
+utility_c::recursive_utf_string (const gchar * path) {
+    gchar *dir,
+     *base,
+     *valid,
+     *utf_base,
+     *utf_dir;
+    if(!path)
+        return NULL;
+    if(g_utf8_validate (path, -1, NULL))
+        return g_strdup (path);
+    dir = g_path_get_dirname (path);
+    NOOP ("dir=%s\n", dir);
+    if(!dir || !strlen (dir) || strcmp (dir, "./") == 0 || strcmp (dir, ".") == 0) {
+        /* short circuit non-paths */
+        g_free (dir);
+        return utf_string (path);
+    }
+    /* otherwise asume a mixed utf/locale string */
+    base = g_path_get_basename (path);
+    utf_dir = recursive_utf_string (dir);
+    if(!g_utf8_validate (base, -1, NULL)) {
+        utf_base = utf_string (base);
+        g_free (base);
+    } else {
+        utf_base = base;
+    }
+
+    valid = g_strconcat (utf_dir, G_DIR_SEPARATOR_S, utf_base, NULL);
+
+    NOOP("dir=%s base=%s valide=%s\n",dir, base, valid); 
+    g_free (utf_base);
+    g_free (utf_dir);
+    g_free (dir);
+    return valid;
+}
+
+
+void
+utility_c::set_store_data_from_list(GtkListStore *list_store, GSList **list){
+    GtkTreeIter iter;
+    gtk_list_store_clear (list_store);
+    GSList *p = *list;
+    for (; p && p->data; p=p->next) {
+	gtk_list_store_append (list_store, &iter);
+	gtk_list_store_set (list_store, &iter,
+                          0, (gchar *)p->data,
+                          -1);
+      /* Note: The store will keep a copy of the string internally, 
+       * so the list may be deallocated */
+    }
+}
+
 gchar * 
 utility_c::get_text_editor(void){
     const gchar *value = getenv("EDITOR");

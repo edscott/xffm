@@ -8,63 +8,52 @@
 #define RUN_DBH_FILE 		USER_DBH_CACHE_DIR,"run_hash.dbh"
 #define RUN_FLAG_FILE 		USER_DBH_CACHE_DIR,"runflag64.dbh"
 
-# define COMBOBOX_set_default(x)  set_default((void *)x)
-# define COMBOBOX_get_entry_text(x)  get_entry_text((void *)x)
-# define COMBOBOX_get_entry_widget(x)  get_entry_widget((void *)x)
-# define COMBOBOX_init_combo(x)  init_combo((void *)x)
-# define COMBOBOX_destroy_combo(x)  destroy_combo((void *)x)
-# define COMBOBOX_clear_history(x)  clear_history((void *)x)
-# define COMBOBOX_is_in_history(x,y)   is_in_history((void *)(x), (void *)(y))
-# define COMBOBOX_set_combo(x)   set_combo((void *)(x))
-# define COMBOBOX_set_entry(x,y)   set_entry((void *)(x), (void *)(y))
-# define COMBOBOX_save_to_history(x,y)    save_to_history((void *)(x), (void *)(y))
-# define COMBOBOX_remove_from_history(x,y)    remove_from_history((void *)(x), (void *)(y))
-# define COMBOBOX_read_history(x,y)    read_history((void *)(x), (void *)(y))
-# define COMBOBOX_set_extra_key_completion_function(x,y)    set_extra_key_completion_function((void *)(x), (void *)(y))
-# define COMBOBOX_set_extra_key_completion_data(x,y)   set_extra_key_completion_data((void *)(x), (void *)(y)) 
-# define COMBOBOX_set_activate_function(x,y)    set_activate_function((void *)(x), (void *)(y))
-# define COMBOBOX_set_cancel_function(x,y)    set_cancel_function((void *)(x), (void *)(y))
-# define COMBOBOX_set_activate_user_data(x,y)   set_activate_user_data((void *)(x), (void *)(y)) 
-# define COMBOBOX_set_cancel_user_data(x,y)   set_cancel_user_data((void *)(x), (void *)(y))
+#include "utility_c.hpp"
 
-class combobox_c {
+class combobox_c: virtual utility_c {
     public:
 	// Constructor/destructor
 	combobox_c();
 	~combobox_c(void);
-	void *set_default (void *p);
-	void *get_entry_text (void *p);
-	void *get_entry_widget (void *p);
-	void *init_combo (void *p);
-	void *destroy_combo (void *p);
-	void *clear_history (void *p);
-	void *is_in_history (void *p, void *q);
-	void *set_combo (void *p);
-	void *set_entry (void *p, void *q);
-	void *save_to_history (void *p, void *q);
-	void *remove_from_history (void *p, void *q);
-	void *set_extra_key_completion_function (void *p, void *q);
-	void *set_extra_key_completion_data (void *p, void *q);
-	void *set_activate_function (void *p, void *q);
-	void *set_cancel_function (void *p, void *q);
-	void *set_activate_user_data (void *p, void *q);
-	void *set_cancel_user_data (void *p, void *q);
-	void *read_history (void *p, void *q);
+	gboolean set_default (void);
+	const gchar *get_entry_text (void);
+	GtkEntry *get_entry_widget (void);
+	void clear_history (void);
+	gboolean is_in_history (const gchar *, const gchar *);
+	gboolean set_combo (void);
+        
+	gboolean set_entry (const gchar *);
+	gboolean save_to_history (const gchar *, const gchar *);
+	gboolean remove_from_history (const gchar *, const gchar *);
+	gboolean read_history (const gchar *);
 	
 };
+	void *set_extra_key_completion_function (gint (*)(gpointer));
+	void *set_extra_key_completion_data (gpointer data);
+
+	void *set_activate_user_data (gpointer data);
+	void *set_activate_function (void (*)(GtkEntry *, gpointer));
+
+        void *set_cancel_user_data (gpointer data);
+	void *set_cancel_function (void (*)(GtkEntry *, gpointer));
+
 
     private:
-	GMutex *sweep_mutex;
+	gboolean set_combo (const gchar *);
+        void set_blank (void);
+        void clean_history_list (GSList **);
+        void history_lasthit (DBHashTable *);
+        void history_mklist (DBHashTable *);
+        void get_history_list (GSList **, char *, char *);
+
+
+	pthread_mutex_t sweep_mutex;
 	time_t last_hit;
 
 	GtkComboBox *comboboxentry;
 	GtkEntry *entry;
 	GtkTreeModel *model;
 	gchar *active_dbh_file;
-	gpointer cancel_user_data;
-	gpointer activate_user_data;
-	void (*cancel_func) (GtkEntry * entry, gpointer cancel_user_data);
-	void (*activate_func) (GtkEntry * entry, gpointer activate_user_data);
 	/* 
 	 * This is private (ro): */
 	gint dead_key;
@@ -82,9 +71,17 @@ class combobox_c {
 	GSList *old_list;
 	GHashTable *association_hash;
 	/* imported or null */
-	int (*extra_key_completion) (gpointer extra_key_data);
 	gpointer extra_key_data;
+	gpointer activate_user_data;
+	gpointer cancel_user_data;
+
+	gint (*extra_key_completion) (gpointer extra_key_data);
+	void (*activate_func) (GtkEntry * entry, gpointer activate_user_data);
+	void (*cancel_func) (GtkEntry * entry, gpointer cancel_user_data);
 };
+
+        
+
 
 	    
 
