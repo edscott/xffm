@@ -26,39 +26,40 @@
  * along with this program; 
  */
 
-#define CURSOR_KEYSTROKE(x) (								\
-				x == GDK_KEY_Right || x == GDK_KEY_KP_Right ||			\
-				x == GDK_KEY_Left || x == GDK_KEY_KP_Left ||			\
-				x == GDK_KEY_Home || x == GDK_KEY_KP_Home ||			\
-				x == GDK_KEY_End || x == GDK_KEY_KP_End ||			\
-				x == GDK_KEY_Begin || x == GDK_KEY_KP_Begin  ||			\
-				x == GDK_KEY_Page_Up || x == GDK_KEY_KP_Page_Up ||		\
-				x == GDK_KEY_Page_Down || x == GDK_KEY_KP_Page_Down ||		\
-				x == GDK_KEY_KP_Prior || x == GDK_KEY_KP_Prior			\
-		)
-#define IGNORE_KEYSTROKE(x) (								\
-				x == GDK_KEY_Up || x == GDK_KEY_KP_Up ||			\
-				x == GDK_KEY_Down || x == GDK_KEY_KP_Down ||			\
-				x == GDK_KEY_Insert || x == GDK_KEY_KP_Insert ||		\
-				x == GDK_KEY_Scroll_Lock || x == GDK_KEY_Pause ||		\
-				x == GDK_KEY_Print || x == GDK_KEY_Cancel 			\
-		)
+#define CURSOR_KEYSTROKE(x) (	\
+	x == GDK_KEY_Right || x == GDK_KEY_KP_Right ||	\
+	x == GDK_KEY_Left || x == GDK_KEY_KP_Left ||	\
+	x == GDK_KEY_Home || x == GDK_KEY_KP_Home ||	\
+	x == GDK_KEY_End || x == GDK_KEY_KP_End ||	\
+	x == GDK_KEY_Begin || x == GDK_KEY_KP_Begin  ||	\
+	x == GDK_KEY_Page_Up || x == GDK_KEY_KP_Page_Up ||\
+	x == GDK_KEY_Page_Down || x == GDK_KEY_KP_Page_Down ||	\
+	x == GDK_KEY_KP_Prior || x == GDK_KEY_KP_Prior		\
+	)
+#define IGNORE_KEYSTROKE(x) (	\
+	x == GDK_KEY_Up || x == GDK_KEY_KP_Up ||	\
+	x == GDK_KEY_Down || x == GDK_KEY_KP_Down ||	\
+	x == GDK_KEY_Insert || x == GDK_KEY_KP_Insert ||\
+	x == GDK_KEY_Scroll_Lock || x == GDK_KEY_Pause ||\
+	x == GDK_KEY_Print || x == GDK_KEY_Cancel 	\
+	)
 
-#define BASIC_KEYSTROKE(x) (	x == GDK_KEY_KP_Divide || x == GDK_KEY_KP_Multiply ||		\
-				x == GDK_KEY_KP_Subtract || x == GDK_KEY_KP_Add	||		\
-				x == GDK_KEY_BackSpace || x == GDK_KEY_Delete ||		\
-				x == GDK_KEY_KP_Delete || x == GDK_KEY_KP_Space ||		\
-				(x >= GDK_KEY_KP_0 && x <= GDK_KEY_KP_9) ||			\
-     				(x >= GDK_KEY_space && x <= GDK_KEY_asciitilde)	||		\
-				(x >= GDK_KEY_Agrave && x <= GDK_KEY_Greek_switch)		\
-		)
+#define BASIC_KEYSTROKE(x) (	\
+	x == GDK_KEY_KP_Divide || x == GDK_KEY_KP_Multiply ||\
+	x == GDK_KEY_KP_Subtract || x == GDK_KEY_KP_Add	||\
+	x == GDK_KEY_BackSpace || x == GDK_KEY_Delete ||\
+	x == GDK_KEY_KP_Delete || x == GDK_KEY_KP_Space ||\
+	(x >= GDK_KEY_KP_0 && x <= GDK_KEY_KP_9) ||	\
+     	(x >= GDK_KEY_space && x <= GDK_KEY_asciitilde)	||\
+	(x >= GDK_KEY_Agrave && x <= GDK_KEY_Greek_switch)\
+	)
 
-#define ENTRY_KEYSTROKE(x) (								\
-				x == GDK_KEY_Escape || x == GDK_KEY_KP_Enter ||			\
-				x == GDK_KEY_Return || x == GDK_KEY_Tab ||			\
-				CURSOR_KEYSTROKE(x) ||					\
-				BASIC_KEYSTROKE(x)					\
-		)
+#define ENTRY_KEYSTROKE(x) (	\
+	x == GDK_KEY_Escape || x == GDK_KEY_KP_Enter ||	\
+	x == GDK_KEY_Return || x == GDK_KEY_Tab ||	\
+	CURSOR_KEYSTROKE(x) ||			\
+	BASIC_KEYSTROKE(x)			\
+	)
 
 #define MAX_COMBO_ELEMENTS 13
 
@@ -66,105 +67,77 @@
 /*************************************************************************/
 /*************** public *****************/
  
-
-G_MODULE_EXPORT void *
-init_combo (void *p, void *q) {
-    sweep_mutex=NULL;
-    rfm_mutex_init(sweep_mutex);
+// FIXME: Check that all pthread mutexes created in classes
+//        are subsequently destroyed by destructor
+//        (some are missing this in other classes)
+// Constructor 
+combobox_c::combobox_c (GtkComboBox *data1, gint data2) {
+    sweep_mutex=PTHREAD_MUTEX_INITIALIZER;
     if (!p) {
 	DBG("init_combo: comboboxentry == NULL!\n");
 	return NULL;
     }
-    gint completion_type = GPOINTER_TO_INT(q);
-#if GTK_MAJOR_VERSION==2 && GTK_MINOR_VERSION<24
-    GtkComboBoxEntry * comboboxentry=p;
-#else
-    GtkComboBox * comboboxentry=p;
+    completion_type = data2;
+    comboboxentry=data1;
+
     if (!gtk_combo_box_get_has_entry(comboboxentry)){
 	g_error("FIXME: gtk_combo_box_get_has_entry(comboboxentry) == NULL (Set \"has-entry\" property as TRUE on creation of combobox)"); 
     }
-#endif
 
-    combobox_info_t *combo_info;
 
-    combo_info = (combobox_info_t *) malloc (sizeof (combobox_info_t));
-    if(!combo_info){
-	g_error("cannot allocate memory for combobox_info_t!");
-    }
-    memset(combo_info, 0, sizeof (combobox_info_t)); 
-
-#if GTK_MAJOR_VERSION==2 && GTK_MINOR_VERSION<24
-    GtkEntry *entry=GTK_ENTRY (GTK_BIN (comboboxentry)->child);
-#else
-    GtkEntry *entry=GTK_ENTRY (gtk_bin_get_child (GTK_BIN (comboboxentry)));
-#endif
-    //gtk_bin_get_child((GtkBin *)comboboxentry);
+    entry=GTK_ENTRY (gtk_bin_get_child (GTK_BIN (comboboxentry)));
     
     g_signal_connect (G_OBJECT (comboboxentry), "changed", G_CALLBACK (on_changed), (gpointer) combo_info);
-
     g_signal_connect (G_OBJECT (entry), "key_press_event", G_CALLBACK (on_key_press), (gpointer) combo_info);
     g_signal_connect (G_OBJECT (entry), "key_press_event", G_CALLBACK (on_key_press_history), (gpointer) combo_info);
-#if 0
-    g_signal_connect (G_OBJECT (combo->list), "select_child", G_CALLBACK (on_select_child), NULL);
-#endif
 
-    combo_info->completion_type = completion_type;
-    combo_info->comboboxentry = comboboxentry;
-    combo_info->entry = (GtkEntry *) entry;
-    combo_info->active_dbh_file = NULL;
-    combo_info->list = NULL;
-    combo_info->cancel_user_data = NULL;
-    combo_info->activate_user_data = NULL;
-    combo_info->cancel_func = NULL;
-    combo_info->activate_func = NULL;
+    active_dbh_file = NULL;
+    list = NULL;
+    cancel_user_data = NULL;
+    activate_user_data = NULL;
+    cancel_func = NULL;
+    activate_func = NULL;
 
-    combo_info->dead_key=0;
-    combo_info->shift_pos = -1;
-    combo_info->cursor_pos = -1;
-    combo_info->active = -1;
+    dead_key=0;
+    shift_pos = -1;
+    cursor_pos = -1;
+    active = -1;
 	
-    combo_info->limited_list = NULL;
-    combo_info->association_hash = NULL;
-    combo_info->model=(GtkTreeModel *)gtk_list_store_new (1, G_TYPE_STRING);
-    gtk_combo_box_set_model((GtkComboBox *)comboboxentry, combo_info->model);
+    limited_list = NULL;
+    association_hash = NULL;
+    model=(GtkTreeModel *)gtk_list_store_new (1, G_TYPE_STRING);
+    gtk_combo_box_set_model((GtkComboBox *)comboboxentry, model);
                                                          
-#if GTK_MAJOR_VERSION==2 && GTK_MINOR_VERSION<24
-    gtk_combo_box_entry_set_text_column(comboboxentry, 0);
-#else
     gtk_combo_box_set_entry_text_column(comboboxentry, 0);
-#endif
 
     NOOP("combo_info 0x%lx initialized\n", (long)combo_info);
     return (void *)combo_info;
 }
 
 
-G_MODULE_EXPORT void
-g_module_unload (GModule * module) {
-    rfm_mutex_free(sweep_mutex);
+combobox_c::~combobox_c(void){
+    pthread_mutex_destroy(&sweep_mutex);
     return;
 }
 
-G_MODULE_EXPORT void *
-is_in_history (void *p, void *q) {
-    if (!p) {
+gboolean
+combobox_c::is_in_history (const gchar *data1, const gchar *data2) {
+    if (!data1) {
 	DBG("is_in_history: dbh_file==NULL!\n");
 	return NULL;
     }
-    gchar *dbh_file=p;
-    gchar *path2save=q;
+    const gchar *dbh_file = data1;
+    const gchar *path2save = data2;
     GString *gs;
     DBHashTable *d;
     //history_dbh_t *history_dbh;
     gboolean found = FALSE;
 
-    if(!path2save)
-        return GINT_TO_POINTER(FALSE);
-    if(strlen (path2save) > 255)
-        return GINT_TO_POINTER(FALSE);
+    if(!path2save) return FALSE;
+    if(strlen (path2save) > 255) return FALSE;
     TRACE("opening %s...\n",dbh_file); 
-    if((d = dbh_new (dbh_file, NULL, DBH_READ_ONLY|DBH_PARALLEL_SAFE)) == NULL)
-        return GINT_TO_POINTER(FALSE);
+    d = dbh_new (dbh_file, NULL, DBH_READ_ONLY|DBH_PARALLEL_SAFE);
+    if(d == NULL) return FALSE;
     dbh_set_parallel_lock_timeout(d, 3);
     TRACE("open %s.\n",dbh_file); 
     gs = g_string_new (path2save);
@@ -174,85 +147,65 @@ is_in_history (void *p, void *q) {
     //history_dbh = (history_dbh_t *) DBH_DATA (d);
     if(dbh_load (d)) found = TRUE;
     dbh_close (d);
-    return GINT_TO_POINTER(found);
+    return found;
 }
 
-G_MODULE_EXPORT void *
-set_combo (void *p) {
-    return internal_set_combo(p, NULL);
+gboolean
+combobox_c::set_combo (void) {
+    return internal_set_combo(NULL);
 }
 
 
-G_MODULE_EXPORT void *
-set_default (void *p) {
-    if (!p) {
-	DBG("set_default: combo_info==NULL!\n");
-	return NULL;
-    }
+gboolean
+combobox_c::set_default (void) {
+
     combobox_info_t * combo_info = p;
-    GSList *list=combo_info->limited_list;
+    GSList *list=limited_list;
     if (list) {
-	set_entry (p, list->data);
+	set_entry (list->data);
+	return TRUE;
     }
+    return FALSE;
+}
+
+
+
+gboolean
+combobox_c::set_entry (const gchar *data) {
+    gtk_entry_set_text(entry, data);
     return NULL;
 }
 
-
-
-G_MODULE_EXPORT void *
-set_entry (void *p, void *q) {
-    if (!p) {
-	DBG("set_entry: combo_info==NULL!\n");
-	return NULL;
-    }
-    combobox_info_t * combo_info=p;
-
-    gtk_entry_set_text(combo_info->entry, (gchar *)q);
-    return NULL;
+GtkEntry *
+combobox_c::get_entry_widget (void) {
+    return entry;
 }
 
-G_MODULE_EXPORT void *
-get_entry_widget (void *p) {
-    if (!p) {
-	DBG("get_entry: combo_info==NULL!\n");
-	return NULL;
-    }
-    combobox_info_t * combo_info=p;
-    return (void *) combo_info->entry;
-}
+const gchar *
+combobox_c::get_entry_text (void) {
+    const gchar *choice = gtk_entry_get_text (entry);
 
-G_MODULE_EXPORT void *
-get_entry (void *p) {
-    if (!p) {
-	DBG("get_entry: combo_info==NULL!\n");
-	return NULL;
-    }
-    combobox_info_t * combo_info=p;
-    const gchar *choice = gtk_entry_get_text (GTK_ENTRY (combo_info->entry));
-
-    if(choice && strlen (choice) && combo_info->association_hash) {
-        gchar *local_choice = g_hash_table_lookup (combo_info->association_hash, choice);
+    if(choice && strlen (choice) && association_hash) {
+        gchar *local_choice = g_hash_table_lookup (association_hash, choice);
         NOOP ("converting back to non utf8 value %s ---> %s\n", choice, local_choice);
-        if(local_choice)
-            choice = local_choice;
+        if(local_choice) choice = local_choice;
     }
-    if(choice)
-        return (void *)choice;
-    return (void *)"";
+    if(choice) return choice;
+    return "";
 }
 
 G_MODULE_EXPORT void *
-save_to_history (void *p, void *q) {
-    if (!p) {
+save_to_history (const gchar *data1, const gchar *data2) {
+    if (!data1) {
 	DBG("save_to_history: dbh_file==NULL!\n");
 	return NULL;
     }
-    gchar *dbh_file=p;
-    const gchar *path2save=q;
+    const gchar *dbh_file = data1;
+    const gchar *path2save = data2;
     GString *gs;
     DBHashTable *d;
     history_dbh_t *history_dbh;
-    int size;
+    gint size;
 
     if(!path2save) return NULL;
     if(strlen (path2save) > 255) return NULL;
@@ -261,7 +214,7 @@ save_to_history (void *p, void *q) {
 
     gchar *g = g_path_get_dirname (dbh_file);
     g_mkdir_with_parents (g, 0700);
-    if(!rfm_g_file_test (g, G_FILE_TEST_IS_DIR)) {
+    if(!g_file_test (g, G_FILE_TEST_IS_DIR)) {
         DBG ("%s is not a directory\n", g);
         g_free (g);
         return NULL;
@@ -270,7 +223,8 @@ save_to_history (void *p, void *q) {
 
     // Since this is a user driven command, thread collisions
     // are nearly impossible.
-    if((d = dbh_new (dbh_file, NULL, DBH_PARALLEL_SAFE)) == NULL) {
+    d = dbh_new (dbh_file, NULL, DBH_PARALLEL_SAFE);
+    if(d == NULL) {
         NOOP ("Creating history file: %s", dbh_file);
 	unsigned char keylength=11;
         gchar *directory = g_path_get_dirname(dbh_file);
@@ -278,9 +232,8 @@ save_to_history (void *p, void *q) {
             g_mkdir_with_parents(directory, 0700);
         }
         g_free(directory);
-        if((d = dbh_new (dbh_file, &keylength, DBH_PARALLEL_SAFE|DBH_CREATE)) == NULL) {
-                return NULL;
-        }
+        d = dbh_new (dbh_file, &keylength, DBH_PARALLEL_SAFE|DBH_CREATE);
+        if(d == NULL)  return NULL;
     }
     dbh_set_parallel_lock_timeout(d, 3);
     gs = g_string_new (path2save);
@@ -1453,7 +1406,7 @@ get_history_list (GSList ** in_list, char *dbh_file, char *top) {
 
     NOOP("NOOP:at get_history_list with %s \n",dbh_file); 
 
-    g_mutex_lock(sweep_mutex);
+    pthread_mutex_lock(&sweep_mutex);
     clean_history_list (the_list);
     last_hit = 0;
     TRACE("opening %s...\n",dbh_file); 
@@ -1486,7 +1439,7 @@ get_history_list (GSList ** in_list, char *dbh_file, char *top) {
     if(*the_list == NULL) {
         *the_list = g_slist_prepend (*the_list, g_strdup (""));
     }
-    g_mutex_unlock(sweep_mutex);
+    pthread_mutex_unlock(&sweep_mutex);
     return;
 }
 

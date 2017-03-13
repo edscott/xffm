@@ -9,7 +9,7 @@
 #define RUN_FLAG_FILE 		USER_DBH_CACHE_DIR,"runflag64.dbh"
 
 # define COMBOBOX_set_default(x)  set_default((void *)x)
-# define COMBOBOX_get_entry(x)  get_entry((void *)x)
+# define COMBOBOX_get_entry_text(x)  get_entry_text((void *)x)
 # define COMBOBOX_get_entry_widget(x)  get_entry_widget((void *)x)
 # define COMBOBOX_init_combo(x)  init_combo((void *)x)
 # define COMBOBOX_destroy_combo(x)  destroy_combo((void *)x)
@@ -29,8 +29,11 @@
 
 class combobox_c {
     public:
+	// Constructor/destructor
+	combobox_c();
+	~combobox_c(void);
 	void *set_default (void *p);
-	void *get_entry (void *p);
+	void *get_entry_text (void *p);
 	void *get_entry_widget (void *p);
 	void *init_combo (void *p);
 	void *destroy_combo (void *p);
