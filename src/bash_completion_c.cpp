@@ -33,7 +33,7 @@ bash_completion_c::bash_completion(void){
     }
 
     gint token_len = strlen(token);
-    gchar *suggest = bash_suggetion(token, head_len);
+    gchar *suggest = bash_suggestion(token, head_len);
     g_free (token);
 
     if (suggest) {
@@ -56,7 +56,7 @@ bash_completion_c::bash_completion(void){
 }
 
 gchar *
-bash_completion_c::bash_suggetion(const gchar *in_token, gint token_len){
+bash_completion_c::bash_suggestion(const gchar *in_token, gint token_len){
     if (!valid_token(in_token)) return NULL;
     gchar *token = g_strdup(in_token);
     gchar *tail = NULL;

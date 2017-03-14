@@ -102,6 +102,7 @@ base_completion_c::base_file_completion(const gchar *workdir, const char *in_fil
     if (*match_count_p <= 0){
         return NULL;
     }  
+    return matches;
 }
 
 

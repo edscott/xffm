@@ -13,7 +13,7 @@ class bash_completion_c: protected base_completion_c, public print_c, virtual ut
 
     protected:
         void bash_completion(void);
-        gchar *bash_suggetion(const gchar *, gint);
+        gchar *bash_suggestion(const gchar *, gint);
 
 	
     private:
