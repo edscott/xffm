@@ -3,9 +3,11 @@
 #include "xffm+.h"
 #include "print_c.hpp"
 #include "data_c.hpp"
+#include "base_completion_c.hpp"
+#include "utility_c.hpp"
 
 
-class bash_completion_c: public print_c {
+class bash_completion_c: protected base_completion_c, public print_c, virtual utility_c {
     public:
 	bash_completion_c(data_c *, void *);
 
@@ -15,7 +17,6 @@ class bash_completion_c: public print_c {
 
 	
     private:
-        glong maximum_completion_options(void);
         void msg_too_many_matches(void);
         const gchar *get_match_type_text(gint match_type);
         void msg_show_match(gint match_type, const gchar *match);

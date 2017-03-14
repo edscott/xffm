@@ -33,7 +33,6 @@ class print_c: virtual utility_c, protected pixbuf_c {
         void insert_string (GtkTextBuffer *, const gchar *, GtkTextTag **);
     protected:
 
-        gchar *get_tilde_dir(const gchar *);
         gchar *get_current_text (void);
 	gchar *get_text_to_cursor (void);
         const gchar *get_workdir(void);

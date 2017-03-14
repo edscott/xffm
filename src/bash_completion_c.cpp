@@ -6,29 +6,11 @@
 #include <unistd.h>
 
 static gint
-ya_strcmp (
-    gconstpointer a,
-    gconstpointer b
-) {
+ya_strcmp ( gconstpointer a, gconstpointer b) {
     return strcmp ((char *) a, (char *) b);
 }
 
 
-static int
-length_equal_string(const gchar *a, const gchar *b){
-    int length=0;
-    int i;
-    for (i = 0; i < strlen(a) && i < strlen(b); i++){
-	if (strncmp(a,b,i+1)) {
-	    length=i;
-	    break;
-	} else {
-	    length=i+1;
-	}
-    }
-     NOOP(stderr, "%s --- %s differ at length =%d\n", a,b,length);
-   return length;
-}
 
 bash_completion_c::bash_completion_c(data_c *data0, void *data): print_c(data0, data){
 }
@@ -117,18 +99,6 @@ bash_completion_c::file_completion(gchar *token){
 }
 
 //   private completion methods
-
-#define BASH_COMPLETION_OPTIONS maximum_completion_options()
-glong 
-bash_completion_c::maximum_completion_options(void){
-    const gchar *env_maximum=getenv("RFM_MAXIMUM_COMPLETION_OPTIONS");
-    if (!env_maximum || !strlen(env_maximum)) return 104;
-    errno=0;
-    glong amount = strtol(env_maximum, (char **) NULL, 10);
-    if (errno) return 104;
-    return amount;
-}
-
 
 void
 bash_completion_c::msg_too_many_matches(void){
@@ -245,21 +215,48 @@ bash_completion_c::list_matches (GSList **matches_p, gint match_type){
 
 gchar *
 bash_completion_c::complete_it(GSList **matches_p, gint match_type){
-        gchar *suggest = NULL;
-        if(*matches_p) {
-            NOOP( "COMPLETE: matches %d\n", g_slist_length (*matches_p));
-            if(g_slist_length (*matches_p) == 1) {
-                gchar *s =(gchar *)(*matches_p)->data;
-                suggest = g_strdup (s);
-            } else {
-		show_text();
-		msg_result_text(match_type);
-		suggest=list_matches(matches_p, match_type);
-            }
+    if (!matches_p || !(*matches_p)) return NULL;
+    gchar *suggest = NULL;
+    NOOP( "COMPLETE: matches %d\n", g_slist_length (*matches_p));
+    if(g_slist_length (*matches_p) == 1) {
+        gchar *s =(gchar *)(*matches_p)->data;
+        suggest = g_strdup (s);
+    } else {
+        show_text();
+        msg_result_text(match_type);
+        suggest=top_match(matches_p);
+        gint i;
+        GSList *p;
+        for(i = 1, p = *matches_p; p && p->data; p = p->next, i++) {
+            msg_show_match(match_type, (const gchar *)p->data);
         }
-	return suggest;
+    }
+    return suggest;
 }
 
+gchar *
+bash_completion_c::bash_file_completion(const char *in_file_token, gint *match_count_p){
+    GSList *matches = base_file_completion(get_workdir(), in_file_token, match_count_p);
+    if (*match_count_p <= 0) {
+        switch (*match_count_p) {
+            case 0:
+	        msg_show_match(MATCH_FILE, NULL); break;
+            case -1: 
+	        msg_too_many_matches(); break;
+            default:
+                ;
+                // invalid token        
+        }
+        return NULL;
+    }
+    gchar *suggest = complete_it(&matches, MATCH_FILE);
+    GSList *p=matches;
+    for (;p && p->data; p=p->next) g_free(p->data);
+    g_slist_free (matches);
+
+    return suggest;
+}
+#if 0
 gchar *
 bash_completion_c::bash_file_completion(const char *in_file_token, gint *match_count_p){
     if (!in_file_token) return NULL;
@@ -358,7 +355,7 @@ bash_completion_c::bash_file_completion(const char *in_file_token, gint *match_c
     g_free(file_token);
     return suggest;
 }
-
+#endif
 
 gchar *
 bash_completion_c::bash_exec_completion(const char *in_token, gint *match_count_p){

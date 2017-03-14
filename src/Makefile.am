@@ -44,6 +44,7 @@ xffm_SOURCES = \
               run_output_c.cpp   \
                 csh_completion_c.cpp   \
                   bash_completion_c.cpp  \
+		    base_completion_c.cpp \
                     print_c.cpp   \
 	  xfdir_root_c.cpp \
 	    xfdir_c.cpp \

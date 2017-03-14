@@ -8,6 +8,8 @@ class utility_c{
         gchar *wrap_utf_string(const gchar *, gint);
         void *context_function(void * (*function)(gpointer), void * function_data);
     protected:
+        gint length_equal_string(const gchar *, const gchar *);
+        gchar *get_tilde_dir(const gchar *);
 	const gchar *chop_excess (gchar *);
         gchar *compact_line(const gchar *);
         GList *find_in_string_list(GList *, const gchar *);

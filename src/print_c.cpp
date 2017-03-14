@@ -195,23 +195,6 @@ print_c::get_workdir(void){
     return view_p->get_path();
 }
 
-gchar *
-print_c::get_tilde_dir(const gchar *token){
-    struct passwd *pw;
-    gchar *tilde_dir = NULL;
-    while((pw = getpwent ()) != NULL) {
-	gchar *id = g_strdup_printf("~%s/", pw->pw_name);
-	if (strncmp(token, id, strlen(id))==0){
-	    tilde_dir = g_strdup_printf("%s/", pw->pw_dir);
-	    g_free(id);
-	    break;
-	}
-	g_free(id);
-    }
-    endpwent ();
-    return tilde_dir;
-}
-
 
 //////////////////////////////////////////////////////////////////////
 //                             print.i                              //

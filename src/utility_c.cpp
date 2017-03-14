@@ -3,6 +3,39 @@
 #include <sys/stat.h>
 #include <errno.h>
 #include "utility_c.hpp"
+gint
+utility_c::length_equal_string(const gchar *a, const gchar *b){
+    int length=0;
+    int i;
+    for (i = 0; i < strlen(a) && i < strlen(b); i++){
+	if (strncmp(a,b,i+1)) {
+	    length=i;
+	    break;
+	} else {
+	    length=i+1;
+	}
+    }
+     NOOP(stderr, "%s --- %s differ at length =%d\n", a,b,length);
+   return length;
+}
+
+gchar *
+utility_c::get_tilde_dir(const gchar *token){
+    struct passwd *pw;
+    gchar *tilde_dir = NULL;
+    while((pw = getpwent ()) != NULL) {
+	gchar *id = g_strdup_printf("~%s/", pw->pw_name);
+	if (strncmp(token, id, strlen(id))==0){
+	    tilde_dir = g_strdup_printf("%s/", pw->pw_dir);
+	    g_free(id);
+	    break;
+	}
+	g_free(id);
+    }
+    endpwent ();
+    return tilde_dir;
+}
+
 
 gint
 utility_c::translate_key (gint x) {
