@@ -973,11 +973,12 @@ on_key_press_history (GtkWidget * entry, GdkEventKey * event, gpointer data) {
 	gchar *remainder = gtk_editable_get_chars (editable, position, -1);
 
 	gchar *suggest=NULL;
+	gint match_count;
 	switch(combo_info->completion_type) {
 	    case MATCH_FILE:
-		//suggest=rfm_file_completion(NULL, token);
-		suggest=rfm_rational(RFM_MODULE_DIR, "completion", 
-			NULL, token, "rfm_file_completion");
+		//suggest=rfm_rational(RFM_MODULE_DIR, "completion", 
+		//	NULL, token, "rfm_file_completion");
+		suggest = base_file_suggestion(NULL, token, &match_count);
 		break;
 	    case MATCH_COMMAND:
 		//suggest=rfm_bash_complete(NULL, token, strlen(token));
