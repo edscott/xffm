@@ -5,34 +5,40 @@
 #include <unistd.h>
 
 
-GSList *
-base_completion_c::base_file_completion(const gchar *workdir, const char *in_file_token, gint *match_count_p){
-    if (!in_file_token) {
+gchar *
+base_completion_c::get_token(const char *in_token, gint *match_count_p){
+    if (!in_token) {
         *match_count_p = -2; // invalid token
         return NULL;
     }
-    if (strlen(in_file_token) == 0) {
+    if (strlen(in_token) == 0) {
         *match_count_p = -2; // invalid token
         return NULL;
     }
 
-    gchar *file_token=NULL;
-    if (*in_file_token == '~' && strchr(in_file_token, '/')){
-	if (strncmp(in_file_token, "~/", strlen("~/"))==0){
-	    file_token = g_strconcat(g_get_home_dir(), in_file_token+1, NULL);
+    gchar *token=NULL;
+    if (*in_token == '~' && strchr(in_token, '/')){
+	if (strncmp(in_token, "~/", strlen("~/"))==0){
+	    token = g_strconcat(g_get_home_dir(), in_token+1, NULL);
 	} else {
-	    gchar *dir = get_tilde_dir(in_file_token);
-	    if (dir) file_token = g_strconcat(dir, strchr(in_file_token, '/')+1, NULL);
+	    gchar *dir = get_tilde_dir(in_token);
+	    if (dir) token = g_strconcat(dir, strchr(in_token, '/')+1, NULL);
 	    g_free(dir);
 	}
     } 
-    if (!file_token) {
-	file_token = g_strdup(in_file_token);
+    if (!token) {
+	token = g_strdup(in_token);
     }
+    return token;
+}
+
+GSList *
+base_completion_c::base_file_completion(const gchar *workdir, const char *in_file_token, gint *match_count_p){
     
+    gchar *file_token = get_token(in_file_token, match_count_p);
+    if (!file_token) return NULL;
   
     GSList *matches=NULL;
-
 
     gchar *directory;
     gchar *relative_directory=NULL;
@@ -105,6 +111,85 @@ base_completion_c::base_file_completion(const gchar *workdir, const char *in_fil
     return matches;
 }
 
+GSList *
+base_completion_c::base_exec_completion(const gchar *workdir, const char *in_token, gint *match_count_p){
+    GSList *matches=NULL;
+
+    gchar *token=get_token(in_token, match_count_p);
+	
+    glob_t stack_glob_v;
+    gboolean straight_path = g_path_is_absolute(token) ||
+	strncmp(token, "./", strlen("./"))==0 ||
+	strncmp(token, "../", strlen("../"))==0;
+
+    if (straight_path) {
+	gchar *d;
+	d = g_strdup(workdir);
+	if (chdir(d) < 0){ 
+	    DBG("chdir %s\n",d);
+	}
+	g_free(d);
+	
+	gchar *directory = g_strdup_printf("%s*", token);
+	glob(directory, 0, NULL, &stack_glob_v);
+	g_free(directory);
+
+    }     
+    else if (getenv("PATH") && strlen(getenv("PATH"))){
+	gchar *path_v = g_strdup(getenv("PATH"));
+	gchar **path_pp = g_strsplit(path_v, ":", -1);
+	gchar **pp = path_pp;
+	    
+	for (; pp && *pp; pp++){
+	    if (strlen(*pp)==0) continue;
+
+	    gint flags;
+	    gchar *directory=g_strdup_printf("%s/%s*", *pp, token);
+	    if (pp==path_pp) flags = 0;
+	    else flags =  GLOB_APPEND;
+	    //gint glob_result = 
+	    glob(directory, flags, NULL, &stack_glob_v);
+	    g_free(directory);
+	    if (stack_glob_v.gl_pathc > BASH_COMPLETION_OPTIONS) break;
+	}
+	g_strfreev(path_pp);
+	g_free(path_v);
+    }
+
+    if (stack_glob_v.gl_pathc > BASH_COMPLETION_OPTIONS){
+	//msg_too_many_matches();
+        *match_count_p = -1;
+    } else if (stack_glob_v.gl_pathc == 0){
+	NOOP(stderr, "NO MATCHES\n");
+	    //msg_show_match(MATCH_FILE, NULL);
+    } else {
+	struct stat st;
+	gint i;
+	for (i=0; i<stack_glob_v.gl_pathc; i++){
+            // stack_glob_v.gl_pathv is initialized in the glob() call.
+            // coverity[uninit_use : FALSE]
+	    if (stat (stack_glob_v.gl_pathv[i], &st)==0 && (S_IXOTH & st.st_mode)){
+		gchar *base;
+		if (straight_path) {
+		    base = g_strdup(stack_glob_v.gl_pathv[i]);
+		} else {
+		    base = g_path_get_basename(stack_glob_v.gl_pathv[i]);
+		}
+		matches = g_slist_append (matches, base);
+	    }
+	}
+    } 
+
+    globfree(&stack_glob_v);
+    g_free(token);
+    // Quick exit:
+    if (*match_count_p <= 0){
+        return NULL;
+    }  
+    return matches;
+}
+
+
 
 gchar *
 base_completion_c::base_file_suggestion(const gchar *workdir, const char *in_file_token, gint *match_count_p){
@@ -118,12 +203,37 @@ base_completion_c::base_file_suggestion(const gchar *workdir, const char *in_fil
     } else {
         suggest=top_match(&list);
     }
+
     GSList *p = list;
     for (;p && p->data; p= p->next) g_free(p->data);
     g_slist_free(list);
     return suggest;
 }
 
+// XXX FIXME: this basically duplicates the above...
+gchar *
+base_completion_c::base_exec_suggestion(const gchar *workdir, const char *in_file_token, gint *match_count_p){
+    GSList *list = base_exec_completion(workdir, in_file_token, match_count_p);
+    if (!list) return NULL;
+    gchar *suggest = NULL;
+    NOOP( "COMPLETE: matches %d\n", g_slist_length (list));
+    if(g_slist_length (list) == 1) {
+        gchar *s =(gchar *)list->data;
+        suggest = g_strdup (s);
+    } else {
+        suggest=top_match(&list);
+    }
+    free_match_list(list);
+}
+
+void
+base_completion::free_match_list(GSList *matches){
+    GSList *p=matches;
+    for (;p && p->data; p=p->next) g_free(p->data);
+    g_slist_free (matches);
+    return suggest;
+
+}
 
 static gint
 ya_strcmp ( gconstpointer a, gconstpointer b) {

@@ -37,5 +37,7 @@ class bash_completion_c: protected base_completion_c, public print_c, virtual ut
         gchar *bash_complete_with_head(const gchar *in_token, gint *matches_p);
         gboolean valid_token(const gchar *token);
 
+        gchar *msg_output(gint *, GSList *, gint);
+
 };
 #endif

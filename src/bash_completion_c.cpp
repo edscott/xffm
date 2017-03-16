@@ -235,12 +235,11 @@ bash_completion_c::complete_it(GSList **matches_p, gint match_type){
 }
 
 gchar *
-bash_completion_c::bash_file_completion(const char *in_file_token, gint *match_count_p){
-    GSList *matches = base_file_completion(get_workdir(), in_file_token, match_count_p);
+bash_completion_c::msg_output(gint *match_count_p, GSList *matches, gint match_type){
     if (*match_count_p <= 0) {
         switch (*match_count_p) {
             case 0:
-	        msg_show_match(MATCH_FILE, NULL); break;
+	        msg_show_match(match_type, NULL); break;
             case -1: 
 	        msg_too_many_matches(); break;
             default:
@@ -249,206 +248,31 @@ bash_completion_c::bash_file_completion(const char *in_file_token, gint *match_c
         }
         return NULL;
     }
-    gchar *suggest = complete_it(&matches, MATCH_FILE);
-    GSList *p=matches;
-    for (;p && p->data; p=p->next) g_free(p->data);
-    g_slist_free (matches);
+    gchar *suggest = complete_it(&matches, match_type);
 
-    return suggest;
+
 }
-#if 0
+
 gchar *
 bash_completion_c::bash_file_completion(const char *in_file_token, gint *match_count_p){
-    if (!in_file_token) return NULL;
-    if (strlen(in_file_token) == 0) return NULL;
-
-    gchar *file_token=NULL;
-    if (*in_file_token == '~' && strchr(in_file_token, '/')){
-	if (strncmp(in_file_token, "~/", strlen("~/"))==0){
-	    file_token = g_strconcat(g_get_home_dir(), in_file_token+1, NULL);
-	} else {
-	    gchar *dir = get_tilde_dir(in_file_token);
-	    if (dir) file_token = g_strconcat(dir, strchr(in_file_token, '/')+1, NULL);
-	    g_free(dir);
-	}
-    } 
-    if (!file_token) {
-	file_token = g_strdup(in_file_token);
-    }
-    
-  
-    GSList *matches=NULL;
-
-
-    gchar *directory;
-    gchar *relative_directory=NULL;
-    if (g_path_is_absolute(file_token)) {
-	directory = g_strdup_printf("%s*", file_token);
-
-    } else {
-	directory = g_strdup_printf("%s/%s*", get_workdir(), file_token);
-	relative_directory = g_path_get_dirname(file_token);
-	if (strcmp(relative_directory, ".")==0 && 
-		strncmp(file_token, "./", strlen("./")) != 0) {
-	    g_free(relative_directory);
-	    relative_directory=NULL;
-	}
-    }
-    
-    NOOP(stderr, "file_token=%s\ndirectory=%s\n", file_token, directory);
-
-    
-    
-    glob_t stack_glob_v;
-    gint flags=GLOB_NOESCAPE;
-
-    glob(directory, flags, NULL, &stack_glob_v);
-    g_free(directory);
-
-    if (stack_glob_v.gl_pathc == 0){
-	NOOP(stderr, "NO MATCHES\n");
-	    msg_show_match(MATCH_FILE, NULL);
-    } else if (stack_glob_v.gl_pathc <= BASH_COMPLETION_OPTIONS){
-	gint i;
-	for (i=0; i<stack_glob_v.gl_pathc; i++){
-	    gboolean isdir=g_file_test(stack_glob_v.gl_pathv[i], G_FILE_TEST_IS_DIR);
-	    gchar *base;
-	    if (g_path_is_absolute(file_token)) {
-		base = g_strdup(stack_glob_v.gl_pathv[i]);
-	    } else {
-		base = g_path_get_basename(stack_glob_v.gl_pathv[i]);
-		if (relative_directory) {
-		    gchar *b=g_build_filename(relative_directory, base, NULL);
-		    g_free(base);
-		    base=b;
-		}
-	    }
-	    if (isdir) {
-		gchar *d=g_strconcat(base, "/", NULL);
-		g_free(base);
-		base = d;
-	    }
-
-	    matches = g_slist_append (matches, base);
-	}
-    } else {
-	msg_too_many_matches();
-    }
-
-	    
-    g_free(relative_directory);
-    globfree(&stack_glob_v);
-    gchar *suggest = complete_it(&matches, MATCH_FILE);
-    NOOP(stderr, "match = \"%s\"\n",suggest? suggest : "no match!");
-
-
-    if (suggest) {
-	*match_count_p = g_slist_length(matches);
-    } else *match_count_p = 0;
-
-    GSList *p=matches;
-    for (;p && p->data; p=p->next){
-	g_free(p->data);
-    }
-    g_slist_free (matches);
-
-    g_free(file_token);
+    GSList *matches = base_file_completion(get_workdir(), in_file_token, match_count_p);
+    gchar *suggest = msg_output(match_count_p, matches, MATCH_FILE);
+    free_match_list(matches);
     return suggest;
 }
-#endif
 
 gchar *
 bash_completion_c::bash_exec_completion(const char *in_token, gint *match_count_p){
-    GSList *matches=NULL;
+    GSList *matches = base_exec_completion(get_workdir(), in_token, match_count_p);
+    gchar *suggest = msg_output(match_count_p, matches, MATCH_COMMAND);
 
-    gchar *token=NULL;
-    if (*in_token == '~' && strchr(in_token, '/')){
-	if (strncmp(in_token, "~/", strlen("~/"))==0){
-	    token = g_strconcat(g_get_home_dir(), in_token+1, NULL);
-	} else {
-	    gchar *dir = get_tilde_dir(in_token);
-	    if (dir) token = g_strconcat(dir, strchr(in_token, '/')+1, NULL);
-	    g_free(dir);
-	}
-    } 
-    if (!token) {
-	token = g_strdup(in_token);
-    }
-	
-    glob_t stack_glob_v;
-    gboolean straight_path = g_path_is_absolute(token) ||
-	strncmp(token, "./", strlen("./"))==0 ||
-	strncmp(token, "../", strlen("../"))==0;
-
-    if (straight_path) {
-	gchar *d;
-	d = g_strdup(get_workdir());
-	if (chdir(d) < 0){ 
-	    DBG("chdir %s\n",d);
-	}
-	g_free(d);
-	
-	gchar *directory = g_strdup_printf("%s*", token);
-	glob(directory, 0, NULL, &stack_glob_v);
-	g_free(directory);
-
-    }     
-    else if (getenv("PATH") && strlen(getenv("PATH"))){
-	gchar *path_v = g_strdup(getenv("PATH"));
-	//gchar **path_pp = rfm_split(path_v,':');
-	gchar **path_pp = g_strsplit(path_v, ":", -1);
-	gchar **pp = path_pp;
-	    
-	for (; pp && *pp; pp++){
-	    if (strlen(*pp)==0) continue;
-
-	    gint flags;
-	    gchar *directory=g_strdup_printf("%s/%s*", *pp, token);
-	    if (pp==path_pp) flags = 0;
-	    else flags =  GLOB_APPEND;
-	    //gint glob_result = 
-	    glob(directory, flags, NULL, &stack_glob_v);
-	    g_free(directory);
-	    if (stack_glob_v.gl_pathc > BASH_COMPLETION_OPTIONS) break;
-	}
-	g_strfreev(path_pp);
-	g_free(path_v);
-    }
-
-    if (stack_glob_v.gl_pathc == 0){
-	    msg_show_match(MATCH_COMMAND, NULL);
-    } else if (stack_glob_v.gl_pathc <= BASH_COMPLETION_OPTIONS){
-	struct stat st;
-	gint i;
-	for (i=0; i<stack_glob_v.gl_pathc; i++){
-            // stack_glob_v.gl_pathv is initialized in the glob() call.
-            // coverity[uninit_use : FALSE]
-	    if (stat (stack_glob_v.gl_pathv[i], &st)==0 && (S_IXOTH & st.st_mode)){
-		gchar *base;
-		if (straight_path) {
-		    base = g_strdup(stack_glob_v.gl_pathv[i]);
-		} else {
-		    base = g_path_get_basename(stack_glob_v.gl_pathv[i]);
-		}
-		matches = g_slist_append (matches, base);
-	    }
-	}
-    } else {
-	msg_too_many_matches();
-    }
-
-
-    globfree(&stack_glob_v);
-
-
-    gchar *suggest = complete_it(&matches, MATCH_COMMAND);
     NOOP( "complete_it: MATCH_COMMAND=%d suggest=%s, matches=%d\n",
 	    MATCH_COMMAND, suggest, g_slist_length(matches));
     if (!suggest) {
-        suggest = bash_file_completion(token, match_count_p);
+        suggest = base_file_suggestion(token, match_count_p);
 	if (suggest) {
 
-	    gchar *d = g_strdup(get_workdir());
+	    gchar *d = g_strdup(workdir);
 	    gchar *absolute_suggest = g_build_filename(d, suggest, NULL);
 	    g_free(d);
 	    g_strchomp (absolute_suggest);
@@ -461,24 +285,17 @@ bash_completion_c::bash_exec_completion(const char *in_token, gint *match_count_
 	    g_free(absolute_suggest);
 	}
     }
+
     NOOP(stderr, "suggest=%s\n", suggest);
-    *match_count_p = g_slist_length(matches);
-   if (g_slist_length(matches)==1 && g_file_test(suggest, G_FILE_TEST_IS_DIR)){
+    if (*match_count_p==1 && g_file_test(suggest, G_FILE_TEST_IS_DIR)){
 	gchar *s=g_strconcat(suggest, "/", NULL);
 	g_free(suggest);
 	suggest = s;
     }
-
-    GSList *p=matches;
-    for (;p && p->data; p=p->next){
-	g_free(p->data);
-    }
-    g_slist_free (matches);
-
-    g_free(token);
+    free_match_list(matches);
     return suggest;
-
 }
+
 
 
 gchar *
@@ -862,4 +679,231 @@ bash_completion_c::valid_token(const gchar *token){
 }
 
 
+#if 0
+gchar *
+bash_completion_c::bash_file_completion(const char *in_file_token, gint *match_count_p){
+    if (!in_file_token) return NULL;
+    if (strlen(in_file_token) == 0) return NULL;
+
+    gchar *file_token=NULL;
+    if (*in_file_token == '~' && strchr(in_file_token, '/')){
+	if (strncmp(in_file_token, "~/", strlen("~/"))==0){
+	    file_token = g_strconcat(g_get_home_dir(), in_file_token+1, NULL);
+	} else {
+	    gchar *dir = get_tilde_dir(in_file_token);
+	    if (dir) file_token = g_strconcat(dir, strchr(in_file_token, '/')+1, NULL);
+	    g_free(dir);
+	}
+    } 
+    if (!file_token) {
+	file_token = g_strdup(in_file_token);
+    }
+    
+  
+    GSList *matches=NULL;
+
+
+    gchar *directory;
+    gchar *relative_directory=NULL;
+    if (g_path_is_absolute(file_token)) {
+	directory = g_strdup_printf("%s*", file_token);
+
+    } else {
+	directory = g_strdup_printf("%s/%s*", get_workdir(), file_token);
+	relative_directory = g_path_get_dirname(file_token);
+	if (strcmp(relative_directory, ".")==0 && 
+		strncmp(file_token, "./", strlen("./")) != 0) {
+	    g_free(relative_directory);
+	    relative_directory=NULL;
+	}
+    }
+    
+    NOOP(stderr, "file_token=%s\ndirectory=%s\n", file_token, directory);
+
+    
+    
+    glob_t stack_glob_v;
+    gint flags=GLOB_NOESCAPE;
+
+    glob(directory, flags, NULL, &stack_glob_v);
+    g_free(directory);
+
+    if (stack_glob_v.gl_pathc == 0){
+	NOOP(stderr, "NO MATCHES\n");
+	    msg_show_match(MATCH_FILE, NULL);
+    } else if (stack_glob_v.gl_pathc <= BASH_COMPLETION_OPTIONS){
+	gint i;
+	for (i=0; i<stack_glob_v.gl_pathc; i++){
+	    gboolean isdir=g_file_test(stack_glob_v.gl_pathv[i], G_FILE_TEST_IS_DIR);
+	    gchar *base;
+	    if (g_path_is_absolute(file_token)) {
+		base = g_strdup(stack_glob_v.gl_pathv[i]);
+	    } else {
+		base = g_path_get_basename(stack_glob_v.gl_pathv[i]);
+		if (relative_directory) {
+		    gchar *b=g_build_filename(relative_directory, base, NULL);
+		    g_free(base);
+		    base=b;
+		}
+	    }
+	    if (isdir) {
+		gchar *d=g_strconcat(base, "/", NULL);
+		g_free(base);
+		base = d;
+	    }
+
+	    matches = g_slist_append (matches, base);
+	}
+    } else {
+	msg_too_many_matches();
+    }
+
+	    
+    g_free(relative_directory);
+    globfree(&stack_glob_v);
+    gchar *suggest = complete_it(&matches, MATCH_FILE);
+    NOOP(stderr, "match = \"%s\"\n",suggest? suggest : "no match!");
+
+
+    if (suggest) {
+	*match_count_p = g_slist_length(matches);
+    } else *match_count_p = 0;
+
+    GSList *p=matches;
+    for (;p && p->data; p=p->next){
+	g_free(p->data);
+    }
+    g_slist_free (matches);
+
+    g_free(file_token);
+    return suggest;
+}
+
+
+
+gchar *
+bash_completion_c::bash_exec_completion(const char *in_token, gint *match_count_p){
+    GSList *matches=NULL;
+
+    gchar *token=NULL;
+    if (*in_token == '~' && strchr(in_token, '/')){
+	if (strncmp(in_token, "~/", strlen("~/"))==0){
+	    token = g_strconcat(g_get_home_dir(), in_token+1, NULL);
+	} else {
+	    gchar *dir = get_tilde_dir(in_token);
+	    if (dir) token = g_strconcat(dir, strchr(in_token, '/')+1, NULL);
+	    g_free(dir);
+	}
+    } 
+    if (!token) {
+	token = g_strdup(in_token);
+    }
+	
+    glob_t stack_glob_v;
+    gboolean straight_path = g_path_is_absolute(token) ||
+	strncmp(token, "./", strlen("./"))==0 ||
+	strncmp(token, "../", strlen("../"))==0;
+
+    if (straight_path) {
+	gchar *d;
+	d = g_strdup(get_workdir());
+	if (chdir(d) < 0){ 
+	    DBG("chdir %s\n",d);
+	}
+	g_free(d);
+	
+	gchar *directory = g_strdup_printf("%s*", token);
+	glob(directory, 0, NULL, &stack_glob_v);
+	g_free(directory);
+
+    }     
+    else if (getenv("PATH") && strlen(getenv("PATH"))){
+	gchar *path_v = g_strdup(getenv("PATH"));
+	//gchar **path_pp = rfm_split(path_v,':');
+	gchar **path_pp = g_strsplit(path_v, ":", -1);
+	gchar **pp = path_pp;
+	    
+	for (; pp && *pp; pp++){
+	    if (strlen(*pp)==0) continue;
+
+	    gint flags;
+	    gchar *directory=g_strdup_printf("%s/%s*", *pp, token);
+	    if (pp==path_pp) flags = 0;
+	    else flags =  GLOB_APPEND;
+	    //gint glob_result = 
+	    glob(directory, flags, NULL, &stack_glob_v);
+	    g_free(directory);
+	    if (stack_glob_v.gl_pathc > BASH_COMPLETION_OPTIONS) break;
+	}
+	g_strfreev(path_pp);
+	g_free(path_v);
+    }
+
+    if (stack_glob_v.gl_pathc == 0){
+	    msg_show_match(MATCH_COMMAND, NULL);
+    } else if (stack_glob_v.gl_pathc <= BASH_COMPLETION_OPTIONS){
+	struct stat st;
+	gint i;
+	for (i=0; i<stack_glob_v.gl_pathc; i++){
+            // stack_glob_v.gl_pathv is initialized in the glob() call.
+            // coverity[uninit_use : FALSE]
+	    if (stat (stack_glob_v.gl_pathv[i], &st)==0 && (S_IXOTH & st.st_mode)){
+		gchar *base;
+		if (straight_path) {
+		    base = g_strdup(stack_glob_v.gl_pathv[i]);
+		} else {
+		    base = g_path_get_basename(stack_glob_v.gl_pathv[i]);
+		}
+		matches = g_slist_append (matches, base);
+	    }
+	}
+    } else {
+	msg_too_many_matches();
+    }
+
+
+    globfree(&stack_glob_v);
+
+
+    gchar *suggest = complete_it(&matches, MATCH_COMMAND);
+    NOOP( "complete_it: MATCH_COMMAND=%d suggest=%s, matches=%d\n",
+	    MATCH_COMMAND, suggest, g_slist_length(matches));
+    if (!suggest) {
+        suggest = bash_file_completion(token, match_count_p);
+	if (suggest) {
+
+	    gchar *d = g_strdup(get_workdir());
+	    gchar *absolute_suggest = g_build_filename(d, suggest, NULL);
+	    g_free(d);
+	    g_strchomp (absolute_suggest);
+	    NOOP(stderr, "file absolute_suggest=%s (%s)\n", absolute_suggest, suggest);
+	    if (access(absolute_suggest, X_OK) != 0){
+		g_free(suggest);
+		suggest=NULL;
+		NOOP(stderr, "access \"%s\": %s\n", absolute_suggest, strerror(errno));
+	    } 
+	    g_free(absolute_suggest);
+	}
+    }
+    NOOP(stderr, "suggest=%s\n", suggest);
+    *match_count_p = g_slist_length(matches);
+   if (g_slist_length(matches)==1 && g_file_test(suggest, G_FILE_TEST_IS_DIR)){
+	gchar *s=g_strconcat(suggest, "/", NULL);
+	g_free(suggest);
+	suggest = s;
+    }
+
+    GSList *p=matches;
+    for (;p && p->data; p=p->next){
+	g_free(p->data);
+    }
+    g_slist_free (matches);
+
+    g_free(token);
+    return suggest;
+
+}
+
+
+#endif
 

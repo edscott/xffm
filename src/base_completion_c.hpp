@@ -11,8 +11,11 @@ class base_completion_c: virtual utility_c {
         gchar *base_file_suggestion(const char *, const char *, gint *);
         gchar *top_match (GSList **);
         glong maximum_completion_options(void);
+        void free_match_list(GSList *);
 	
     private:
+        gchar *get_token(const char *, gint *);
+
 };
 
 #endif
