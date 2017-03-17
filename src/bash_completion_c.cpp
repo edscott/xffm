@@ -269,10 +269,10 @@ bash_completion_c::bash_exec_completion(const char *in_token, gint *match_count_
     NOOP( "complete_it: MATCH_COMMAND=%d suggest=%s, matches=%d\n",
 	    MATCH_COMMAND, suggest, g_slist_length(matches));
     if (!suggest) {
-        suggest = base_file_suggestion(token, match_count_p);
+        suggest = base_file_suggestion(get_workdir(), in_token, match_count_p);
 	if (suggest) {
 
-	    gchar *d = g_strdup(workdir);
+	    gchar *d = g_strdup(get_workdir());
 	    gchar *absolute_suggest = g_build_filename(d, suggest, NULL);
 	    g_free(d);
 	    g_strchomp (absolute_suggest);

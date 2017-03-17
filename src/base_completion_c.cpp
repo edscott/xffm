@@ -227,11 +227,11 @@ base_completion_c::base_exec_suggestion(const gchar *workdir, const char *in_fil
 }
 
 void
-base_completion::free_match_list(GSList *matches){
+base_completion_c::free_match_list(GSList *matches){
     GSList *p=matches;
     for (;p && p->data; p=p->next) g_free(p->data);
     g_slist_free (matches);
-    return suggest;
+    return;
 
 }
 
