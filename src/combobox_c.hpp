@@ -1,6 +1,7 @@
 #ifndef COMBOBOX_C_HPP
 #define COMBOBOX_C_HPP
 #include "xffm+.h"
+#include <dbh.h>
 
 
 #define USER_RFM_CACHE_DIR      g_get_user_cache_dir(),"rfm"
@@ -27,7 +28,6 @@ class combobox_c: virtual utility_c {
 	gboolean remove_from_history (const gchar *, const gchar *);
 	gboolean read_history (const gchar *);
 	
-};
 	void *set_extra_key_completion_function (gint (*)(gpointer));
 	void *set_extra_key_completion_data (gpointer data);
 
@@ -37,7 +37,9 @@ class combobox_c: virtual utility_c {
         void *set_cancel_user_data (gpointer data);
 	void *set_cancel_function (void (*)(GtkEntry *, gpointer));
 
-
+	void on_changed(GtkComboBox *);
+	gboolean on_key_press_history(GtkWidget *, GdkEventKey *);
+	
     private:
 	gboolean set_combo (const gchar *);
         void set_blank (void);

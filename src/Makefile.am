@@ -19,6 +19,7 @@ AM_CXXFLAGS = -ggdb -O0 -std=c++11
 bin_PROGRAMS = xffm
 
 xffm_SOURCES = \
+	  combobox_c.cpp \
 	  data_c.cpp \
 	  main.cpp \
 	  gnu_utils_c.cpp \

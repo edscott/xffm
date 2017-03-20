@@ -1,30 +1,5 @@
 
-///   COMBO STUFF
-/// header
-
-///// combobox static
-
-#ifdef COPYRIGHT_INFORMATION
-#include "gplv3.h"
-#endif
-/*
- * Copyright (C) 2003-2012 Edscott Wilson Garcia
- * EMail: edscott@users.sf.net
- *
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; 
- */
+#include "combobox_c.hpp"
 
 #define CURSOR_KEYSTROKE(x) (	\
 	x == GDK_KEY_Right || x == GDK_KEY_KP_Right ||	\
@@ -90,9 +65,9 @@ combobox_c::combobox_c (GtkComboBox *data1, gint data2) {
 
     entry=GTK_ENTRY (gtk_bin_get_child (GTK_BIN (comboboxentry)));
     
-    g_signal_connect (G_OBJECT (comboboxentry), "changed", G_CALLBACK (on_changed), (gpointer) combo_info);
-    g_signal_connect (G_OBJECT (entry), "key_press_event", G_CALLBACK (on_key_press), (gpointer) combo_info);
-    g_signal_connect (G_OBJECT (entry), "key_press_event", G_CALLBACK (on_key_press_history), (gpointer) combo_info);
+    g_signal_connect (G_OBJECT (comboboxentry), "changed", G_CALLBACK (on_changed), (gpointer) (void *)this);
+    g_signal_connect (G_OBJECT (entry), "key_press_event", G_CALLBACK (on_key_press), (gpointer) (void *)this);
+    g_signal_connect (G_OBJECT (entry), "key_press_event", G_CALLBACK (on_key_press_history), (gpointer) (void *)this);
 
     active_dbh_file = NULL;
     list = NULL;
@@ -105,6 +80,8 @@ combobox_c::combobox_c (GtkComboBox *data1, gint data2) {
     shift_pos = -1;
     cursor_pos = -1;
     active = -1;
+    extra_key_completion = NULL;
+    extra_key_data = NULL;
 	
     limited_list = NULL;
     association_hash = NULL;
@@ -113,8 +90,7 @@ combobox_c::combobox_c (GtkComboBox *data1, gint data2) {
                                                          
     gtk_combo_box_set_entry_text_column(comboboxentry, 0);
 
-    NOOP("combo_info 0x%lx initialized\n", (long)combo_info);
-    return (void *)combo_info;
+    return;
 }
 
 
@@ -168,12 +144,6 @@ combobox_c::is_in_history (const gchar *data1, const gchar *data2) {
     dbh_close (d);
     return found;
 }
-
-gboolean
-combobox_c::set_combo (void) {
-    return internal_set_combo(NULL);
-}
-
 
 gboolean
 combobox_c::set_default (void) {
@@ -402,16 +372,14 @@ combobox_c::set_combo (const gchar *data) {
     const gchar *token = data;
     int count;
     GSList *tmp;
-    GSList **limited_list;
+    GSList **limited_list_p;
     gboolean match = FALSE;
 
-    /*if (!combo_info->list || !combo_info->active_dbh_file) { */
-    if(!list)
-        return match;
+    if(!list) return match;
 
     old_list = limited_list;
     limited_list = NULL;
-    limited_list = &(limited_list);
+    limited_list_p = &(limited_list);
     NOOP ("token=%s\n", ((token) ? token : "null"));
 
 
@@ -428,7 +396,7 @@ combobox_c::set_combo (const gchar *data) {
 	    if (!first) {
 		first = tmp;
 	    } else {
-		*limited_list = g_slist_insert_sorted (*limited_list, g_strdup (p), path_compare);
+		*limited_list_p = g_slist_insert_sorted (*limited_list_p, g_strdup (p), path_compare);
 	    }
             if(++count >= MAX_COMBO_ELEMENTS)
                 break;
@@ -436,13 +404,13 @@ combobox_c::set_combo (const gchar *data) {
     }
     //preprend first item
     if (first) {
-	*limited_list = 
-	    g_slist_prepend (*limited_list, g_strdup ((gchar *) first->data));
+	*limited_list_p = 
+	    g_slist_prepend (*limited_list_p, g_strdup ((gchar *) first->data));
     }
 
 
 
-    if(*limited_list) {
+    if(*limited_list_p) {
         /* make sure we have utf-8 in combo. This may not match
          * character set of actual system, such as euc-jp, so
          * we better keep correct value in an association hash. */
@@ -458,7 +426,7 @@ combobox_c::set_combo (const gchar *data) {
         if(association_hash) {
             GSList *tmp;
             /* create new hash */
-            for(tmp = *limited_list; tmp; tmp = tmp->next) {
+            for(tmp = *limited_list_p; tmp; tmp = tmp->next) {
                 gchar *utf_string = valid_utf_pathstring ((gchar *) (tmp->data));
                 NOOP("utf_string=%s\n",utf_string); 
                 if(strcmp (utf_string, (gchar *) (tmp->data))) {
@@ -472,11 +440,11 @@ combobox_c::set_combo (const gchar *data) {
             }
         }
 	// Set popdown list:
-	set_store_data_from_list ((GtkListStore *)model, limited_list);
+	set_store_data_from_list ((GtkListStore *)model, limited_list_p);
 
 	// Set tooltip to reflect values in popdown list:
 	gchar *tooltip_text=NULL;
-	GSList *tmp=*limited_list;
+	GSList *tmp=*limited_list_p;
 	GdkPixbuf *tooltip_icon=NULL;
 	for (; tmp && tmp->data; tmp=tmp->next){
 	    gchar *p=tooltip_text;
@@ -495,10 +463,10 @@ combobox_c::set_combo (const gchar *data) {
 #endif
 	g_free(tooltip_text);
 	
-        //gtk_combo_set_popdown_strings (combo_info->combo, *limited_list);
+        //gtk_combo_set_popdown_strings (combo_info->combo, *limited_list_p);
         clean_history_list (&(old_list));
     } else {
-        limited_list = old_list;
+        limited_list_p = old_list;
 	old_list = NULL;
     }
     return match;
@@ -613,33 +581,10 @@ combobox_c::get_history_list (GSList ** in_list, char *dbh_file, char *top) {
     return;
 }
 
-///////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////
-///  gtk specific callbacks
-//
 
 
-static gint
-on_key_press (GtkWidget * entry, GdkEventKey * event, gpointer data) {
-    combobox_info_t *combo_info = (combobox_info_t *) data;
-    NOOP ("on_key_press: got key= 0x%x\n", event->keyval);
-    if(event->keyval == GDK_KEY_Escape && combo_info->cancel_func) {
-        (*(combo_info->cancel_func)) ((GtkEntry *) entry, combo_info->cancel_user_data);
-        return TRUE;
-    }
-    return FALSE;
-}
-
-
-static gint
-on_key_press_history (GtkWidget * entry, GdkEventKey * event, gpointer data) {
-    gchar *utf_fulltext = NULL;
-    gboolean find_match = FALSE;
-    int i;
-    gchar *text[2] = { NULL, NULL };
-    gchar c[] = { 0, 0, 0, 0, 0 };
-    gchar *fulltext = NULL;
-    combobox_info_t *combo_info = (combobox_info_t *) data;
+gboolean
+combobox_c::on_key_press_history(GtkWidget * entry, GdkEventKey * event){
     GtkEditable *editable = (GtkEditable *) entry;
     gint pos1, pos2, pos;
     gboolean preselection;
@@ -648,15 +593,15 @@ on_key_press_history (GtkWidget * entry, GdkEventKey * event, gpointer data) {
 
     /* asian input methods: turns off autocompletion */
     if(event->keyval == GDK_KEY_space && (event->state & (GDK_CONTROL_MASK | GDK_SHIFT_MASK))) {
-        combo_info->asian = TRUE;
+        asian = TRUE;
         return FALSE;
     } else if(event->keyval == GDK_KEY_space && (event->state & GDK_MOD1_MASK)) {
         /* turn autocompletion back on */
-        combo_info->asian = FALSE;
+        asian = FALSE;
         return TRUE;
     }
 
-    if(combo_info->asian && !(event->keyval == GDK_KEY_Return)
+    if(asian && !(event->keyval == GDK_KEY_Return)
        && !(event->keyval == GDK_KEY_KP_Enter)){
         return FALSE;
     }
@@ -669,21 +614,20 @@ on_key_press_history (GtkWidget * entry, GdkEventKey * event, gpointer data) {
     
     pos = gtk_editable_get_position (editable);
     if(event->keyval == GDK_KEY_Shift_L || event->keyval == GDK_KEY_Shift_R) {
-        combo_info->cursor_pos = combo_info->shift_pos = pos;
+        cursor_pos = shift_pos = pos;
     }
 
 
-    if(combo_info->dead_key) {
+    if(dead_key) {
         if(event->keyval != GDK_KEY_Shift_L && event->keyval != GDK_KEY_Shift_R) {
-            event->keyval = compose_key (event->keyval, combo_info->dead_key);
+            event->keyval = compose_key (event->keyval, dead_key);
             NOOP ("composing to %c\n", (char)event->keyval);
-            combo_info->dead_key = 0;
+            dead_key = 0;
         }
     } else {
-        combo_info->dead_key = deadkey (event->keyval);
-        NOOP ("deadkey is  0x%x\n", (unsigned)combo_info->dead_key);
-        if(combo_info->dead_key)
-            return TRUE;
+        dead_key = deadkey (event->keyval);
+        NOOP ("deadkey is  0x%x\n", (unsigned)dead_key);
+        if(dead_key) return TRUE;
     }
 
     preselection = gtk_editable_get_selection_bounds (editable, &pos1, &pos2);
@@ -692,7 +636,7 @@ on_key_press_history (GtkWidget * entry, GdkEventKey * event, gpointer data) {
     if(!preselection)
         pos1 = pos2 = -1;
 
-    NOOP ("NOOP(2):pos= %d, combo_info->shift_pos=%d cursor_pos=%d\n", pos, combo_info->shift_pos, combo_info->cursor_pos);
+    NOOP ("NOOP(2):pos= %d, shift_pos=%d cursor_pos=%d\n", pos, shift_pos, cursor_pos);
     NOOP ("NOOP(2):got key= 0x%x\n", event->keyval);
 
     if(event->keyval == GDK_KEY_KP_Down && (event->state & GDK_MOD1_MASK)) {
@@ -711,8 +655,8 @@ on_key_press_history (GtkWidget * entry, GdkEventKey * event, gpointer data) {
     g_signal_handlers_block_by_func (G_OBJECT (entry), (gpointer) on_key_press_history, data);
     if(event->keyval == GDK_KEY_Return || event->keyval == GDK_KEY_KP_Enter) {
         /*NOOP("NOOP: got return;\n"); */
-        if(combo_info->activate_func) {
-            (*(combo_info->activate_func)) ((GtkEntry *) entry, combo_info->activate_user_data);
+        if(activate_func) {
+            (*(activate_func)) ((GtkEntry *) entry, activate_user_data);
         }
         goto end;
     }
@@ -747,28 +691,28 @@ on_key_press_history (GtkWidget * entry, GdkEventKey * event, gpointer data) {
         if(event->keyval == GDK_KEY_Right || event->keyval == GDK_KEY_KP_Right) {
             NOOP("NOOP: right\n"); 
             if(event->state & GDK_SHIFT_MASK) {
-                combo_info->cursor_pos++;
-                if(combo_info->cursor_pos < combo_info->shift_pos)
-                    gtk_editable_select_region (editable, combo_info->cursor_pos, combo_info->shift_pos);
+                cursor_pos++;
+                if(cursor_pos < shift_pos)
+                    gtk_editable_select_region (editable, cursor_pos, shift_pos);
                 else
-                    gtk_editable_select_region (editable, combo_info->shift_pos, combo_info->cursor_pos);
+                    gtk_editable_select_region (editable, shift_pos, cursor_pos);
             } else {
                 gtk_editable_set_position (editable, pos + 1);
-                combo_info->cursor_pos = pos + 1;
+                cursor_pos = pos + 1;
             }
         } else if(event->keyval == GDK_KEY_Left || event->keyval == GDK_KEY_KP_Left){
             NOOP("NOOP: left\n"); 
             /* cranky gtk design, position must be at end of selection... */
-            if(combo_info->cursor_pos)
-                combo_info->cursor_pos--;
+            if(cursor_pos)
+                cursor_pos--;
             if(event->state & GDK_SHIFT_MASK) {
-                if(combo_info->cursor_pos < combo_info->shift_pos)
-                    gtk_editable_select_region (editable, combo_info->cursor_pos, combo_info->shift_pos);
+                if(cursor_pos < shift_pos)
+                    gtk_editable_select_region (editable, cursor_pos, shift_pos);
                 else
-                    gtk_editable_select_region (editable, combo_info->shift_pos, combo_info->cursor_pos);
+                    gtk_editable_select_region (editable, shift_pos, cursor_pos);
             } else if(pos - 1 >= 0) {
                 gtk_editable_set_position (editable, pos - 1);
-                combo_info->cursor_pos = pos - 1;
+                cursor_pos = pos - 1;
             }
         } else if(event->keyval == GDK_KEY_Home || event->keyval == GDK_KEY_KP_Home ||
                   event->keyval == GDK_KEY_Begin || event->keyval == GDK_KEY_KP_Begin ||
@@ -818,20 +762,20 @@ on_key_press_history (GtkWidget * entry, GdkEventKey * event, gpointer data) {
             if(fulltext && strlen (fulltext)) {
                 gtk_editable_insert_text (editable, (const gchar *)fulltext, strlen (fulltext), &pos1);
                 gtk_editable_set_position (editable, pos - 1);
-                combo_info->cursor_pos = pos - 1;
+                cursor_pos = pos - 1;
                 NOOP("NOOP: inserting %s\n",fulltext); 
             } else {
-                set_blank (combo_info);
+                set_blank ();
             }
             g_free (fulltext);
             fulltext = NULL;
             goto end;
         } else if(event->keyval == GDK_KEY_Delete || event->keyval == GDK_KEY_KP_Delete) {
-            if(combo_info->active_dbh_file && event->state & GDK_CONTROL_MASK) {        /* remove stale entries */
+            if(active_dbh_file && event->state & GDK_CONTROL_MASK) {        /* remove stale entries */
                 fulltext = gtk_editable_get_chars (editable, 0, -1);
                 if(fulltext && strlen (fulltext)
-                   && combo_info->association_hash) {
-                    gchar *local_choice = g_hash_table_lookup (combo_info->association_hash,
+                   && association_hash) {
+                    gchar *local_choice = g_hash_table_lookup (association_hash,
                                                                fulltext);
                     NOOP ("converting back to non utf8 value %s ---> %s\n", fulltext, local_choice);
                     if(local_choice) {
@@ -840,13 +784,13 @@ on_key_press_history (GtkWidget * entry, GdkEventKey * event, gpointer data) {
                     }
                 }
 
-                if(fulltext) remove_from_history (combo_info->active_dbh_file, fulltext);
-                set_blank (combo_info);
+                if(fulltext) remove_from_history (active_dbh_file, fulltext);
+                set_blank ();
 
                 g_free (fulltext);
                 fulltext = NULL;
-                if(combo_info->cancel_func)
-                    (*(combo_info->cancel_func)) ((GtkEntry *) entry, combo_info->cancel_user_data);
+                if(cancel_func)
+                    (*(cancel_func)) ((GtkEntry *) entry, cancel_user_data);
                 goto end;
             } else {
                 NOOP("NOOP: pos=%d, pos1=%d\n",pos,pos1); 
@@ -872,10 +816,10 @@ on_key_press_history (GtkWidget * entry, GdkEventKey * event, gpointer data) {
                     pos1 = 0;
                     gtk_editable_insert_text (editable, (const gchar *)fulltext, strlen (fulltext), &pos1);
                     gtk_editable_set_position (editable, pos);
-                    combo_info->cursor_pos = pos;
+                    cursor_pos = pos;
                     NOOP("NOOP: inserting %s\n",fulltext); 
                 } else {
-                    set_blank (combo_info);
+                    set_blank ();
                 }
                 g_free (fulltext);
                 fulltext = NULL;
@@ -918,7 +862,7 @@ on_key_press_history (GtkWidget * entry, GdkEventKey * event, gpointer data) {
                 gtk_editable_delete_text (editable, 0, -1);
                 gtk_editable_insert_text (editable, (const gchar *)utf_fulltext, strlen (utf_fulltext), &pos);
                 gtk_editable_set_position (editable, pos);
-                combo_info->cursor_pos = pos;
+                cursor_pos = pos;
             } else {
                 NOOP("NOOP: pos=%d\n",pos); 
                 /*FIXME convert text[0],text[1] to locale for fulltext (huh?)*/
@@ -933,7 +877,7 @@ on_key_press_history (GtkWidget * entry, GdkEventKey * event, gpointer data) {
                 gtk_editable_delete_text (editable, 0, -1);
                 gtk_editable_insert_text (editable, (const gchar *)utf_fulltext, strlen (utf_fulltext), &pos1);
                 gtk_editable_set_position (editable, pos + 1);
-                combo_info->cursor_pos = pos;
+                cursor_pos = pos;
             }
             g_free (utf_c);
         }
@@ -951,11 +895,11 @@ on_key_press_history (GtkWidget * entry, GdkEventKey * event, gpointer data) {
             find_match = TRUE;
 	}
     }
-    if(find_match && combo_info->comboboxentry) {
+    if(find_match && comboboxentry) {
         NOOP("NOOP: setting limited list and emitting signal...fulltext=%s\n",(fulltext)?fulltext:"null"); 
-        if(internal_set_combo (combo_info, fulltext)) {
-            if(combo_info->limited_list && 
-		    g_slist_length (combo_info->limited_list) > 1) 
+        if(combobox_p->set_combo (fulltext)) {
+            if(limited_list && 
+		    g_slist_length (limited_list) > 1) 
 	    {
                 g_signal_emit_by_name ((gpointer) (entry), "activate", NULL);
             }
@@ -974,23 +918,12 @@ on_key_press_history (GtkWidget * entry, GdkEventKey * event, gpointer data) {
 
 	gchar *suggest=NULL;
 	gint match_count;
-	switch(combo_info->completion_type) {
+	switch(completion_type) {
 	    case MATCH_FILE:
-		//suggest=rfm_rational(RFM_MODULE_DIR, "completion", 
-		//	NULL, token, "rfm_file_completion");
 		suggest = base_file_suggestion(NULL, token, &match_count);
 		break;
 	    case MATCH_COMMAND:
-		//suggest=rfm_bash_complete(NULL, token, strlen(token));
-		suggest=rfm_complex(RFM_MODULE_DIR, "completion", 
-			NULL, token, GINT_TO_POINTER(strlen(token)),
-			"rfm_bash_complete");
-		break;
-	    case MATCH_HISTORY:
-		//suggest=rfm_history_completion(NULL, token);
-		suggest=rfm_rational(RFM_MODULE_DIR, "completion", 
-			NULL, token, 
-			"rfm_history_completion");
+		suggest = base_exec_suggestion(NULL, token, &match_count);
 		break;
 	    default:
 		suggest=NULL;
@@ -1020,17 +953,61 @@ on_key_press_history (GtkWidget * entry, GdkEventKey * event, gpointer data) {
     }
   end:
     g_signal_handlers_unblock_by_func (G_OBJECT (entry), (gpointer) on_key_press_history, data);
- /*   if(combo_info->extra_key_completion){
-        (*(combo_info->extra_key_completion)) (combo_info->extra_key_data);
-    }*/
+    if(extra_key_completion){
+        (*(extra_key_completion)) (extra_key_data);
+    }
     return (TRUE);
-  returnFALSE:
- /*   if(combo_info->extra_key_completion){
-        (*(combo_info->extra_key_completion)) (combo_info->extra_key_data);
-    }*/
+returnFALSE:
+    if(extra_key_completion){
+        (*(extra_key_completion)) (extra_key_data);
+    }
     return (FALSE);
 }
 
+void
+combobox_c::on_changed(GtkComboBox *combo_box){
+    gint active = gtk_combo_box_get_active (combo_box);
+    NOOP("active=%d\n", active); 
+    if(extra_key_completion){
+        (*(extra_key_completion)) (extra_key_data);
+    }
+    if(quick_activate &&
+	    active != active && 
+	    activate_func) {
+            (*(activate_func)) ((GtkEntry *) entry, activate_user_data);
+    }
+}
+
+
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+///  gtk specific callbacks
+//
+
+
+static gint
+on_key_press (GtkWidget * entry, GdkEventKey * event, gpointer data) {
+    combobox_c *combobox_p = (combobox_c *) data;
+    NOOP ("on_key_press: got key= 0x%x\n", event->keyval);
+    if(event->keyval == GDK_KEY_Escape && combobox_p->cancel_func) {
+        (*(combobox_p->cancel_func)) ((GtkEntry *) entry, combobox_p->cancel_user_data);
+        return TRUE;
+    }
+    return FALSE;
+}
+
+
+static gint
+on_key_press_history (GtkWidget * entry, GdkEventKey * event, gpointer data) {
+    gchar *utf_fulltext = NULL;
+    gboolean find_match = FALSE;
+    int i;
+    gchar *text[2] = { NULL, NULL };
+    gchar c[] = { 0, 0, 0, 0, 0 };
+    gchar *fulltext = NULL;
+    combobox_c *combobox_p = (combobox_c *) data;
+    return combobox_p->on_key_press_history(entry, event);
+}
 
 static int path_compare (gconstpointer a, gconstpointer b){
     return strcmp((gchar *)a, (gchar *)b);
@@ -1038,17 +1015,8 @@ static int path_compare (gconstpointer a, gconstpointer b){
 
 static void 
 on_changed (GtkComboBox *combo_box, gpointer data) {
-    combobox_info_t * combo_info=data;  
-    gint active = gtk_combo_box_get_active (combo_box);
-    NOOP("active=%d\n", active); 
-    if(combo_info->extra_key_completion){
-        (*(combo_info->extra_key_completion)) (combo_info->extra_key_data);
-    }
-    if(combo_info->quick_activate &&
-	    combo_info->active != active && 
-	    combo_info->activate_func) {
-            (*(combo_info->activate_func)) ((GtkEntry *) combo_info->entry, combo_info->activate_user_data);
-    }
+    combobox_c * combobox_p = (combobox_c *)data;
+    combobox_p->on_changed(combo_box);
 }
 
 
@@ -1072,8 +1040,7 @@ history_compare (gconstpointer a, gconstpointer b) {
 static void
 clear_association_hash (gpointer key, gpointer value, gpointer user_data) {
     g_free (key);
-    if(!value)
-        return;
+    if(!value) return;
     g_free (value);
     return;
 }

@@ -284,4 +284,3 @@ base_completion_c::maximum_completion_options(void){
     return amount;
 }
 
-
