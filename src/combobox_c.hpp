@@ -9,12 +9,13 @@
 #define RUN_DBH_FILE 		USER_DBH_CACHE_DIR,"run_hash.dbh"
 #define RUN_FLAG_FILE 		USER_DBH_CACHE_DIR,"runflag64.dbh"
 
+#include "base_completion_c.hpp"
 #include "utility_c.hpp"
 
-class combobox_c: virtual utility_c {
+class combobox_c: public base_completion_c, virtual utility_c {
     public:
 	// Constructor/destructor
-	combobox_c();
+	combobox_c(GtkComboBox *, gint);
 	~combobox_c(void);
 	gboolean set_default (void);
 	const gchar *get_entry_text (void);
@@ -28,25 +29,27 @@ class combobox_c: virtual utility_c {
 	gboolean remove_from_history (const gchar *, const gchar *);
 	gboolean read_history (const gchar *);
 	
-	void *set_extra_key_completion_function (gint (*)(gpointer));
-	void *set_extra_key_completion_data (gpointer data);
+	void set_extra_key_completion_function (gint (*func)(gpointer));
+	void set_extra_key_completion_data (gpointer data);
 
-	void *set_activate_user_data (gpointer data);
-	void *set_activate_function (void (*)(GtkEntry *, gpointer));
+	void set_activate_user_data (gpointer data);
+	void set_activate_function (void (*)(GtkEntry *, gpointer));
 
-        void *set_cancel_user_data (gpointer data);
-	void *set_cancel_function (void (*)(GtkEntry *, gpointer));
+	void (*cancel_func) (GtkEntry * entry, gpointer cancel_user_data);
+	gpointer cancel_user_data;
+        void set_cancel_user_data (gpointer data);
+	void set_cancel_function (void (*)(GtkEntry *, gpointer));
 
-	void on_changed(GtkComboBox *);
-	gboolean on_key_press_history(GtkWidget *, GdkEventKey *);
-	
+	void combo_changed(GtkComboBox *);
+	gboolean combo_key_press_history(GtkWidget *, GdkEventKey *, gpointer );
+
+        void set_quick_activate(gboolean);
+
     private:
 	gboolean set_combo (const gchar *);
         void set_blank (void);
         void clean_history_list (GSList **);
-        void history_lasthit (DBHashTable *);
-        void history_mklist (DBHashTable *);
-        void get_history_list (GSList **, char *, char *);
+        void get_history_list (GSList **, const gchar *, const gchar *);
 
 
 	pthread_mutex_t sweep_mutex;
@@ -75,13 +78,16 @@ class combobox_c: virtual utility_c {
 	/* imported or null */
 	gpointer extra_key_data;
 	gpointer activate_user_data;
-	gpointer cancel_user_data;
 
 	gint (*extra_key_completion) (gpointer extra_key_data);
 	void (*activate_func) (GtkEntry * entry, gpointer activate_user_data);
-	void (*cancel_func) (GtkEntry * entry, gpointer cancel_user_data);
 };
 
+typedef struct history_dbh_t {
+    gint64 hits;  // 32/64 issue: gint
+    gint64 last_hit; // time_t last_hit;
+    gchar path[256];
+} history_dbh_t;
         
 
 
