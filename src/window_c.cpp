@@ -3,11 +3,13 @@
 #include "window_c.hpp"
 #include "view_c.hpp"
 #include "xfdir_local_c.hpp"
+#include "combobox_c.hpp"
 
 static void on_new_page(GtkWidget *, gpointer);
 static void on_go_home(GtkWidget *, gpointer);
 static gboolean window_keyboard_event (GtkWidget *, GdkEventKey *, gpointer);
 static void destroy(GtkWidget *, gpointer);
+static void click_button(GtkWidget *, gpointer);
 static gboolean window_tooltip_f(GtkWidget  *, gint, gint, gboolean, GtkTooltip *, gpointer);
 
 static void  home(GSimpleAction *, GVariant *, gpointer data);
@@ -243,6 +245,11 @@ window_keyboard_event (GtkWidget * window, GdkEventKey * event, gpointer data)
     return view_p->window_keyboard_event(event, (void *)view_p);
 }
 
+static void 
+click_button(GtkWidget *w, void *data){
+    if (data) gtk_dialog_response(GTK_DIALOG(g_object_get_data(G_OBJECT(w), "dialog")), 1);
+    else gtk_dialog_response(GTK_DIALOG(g_object_get_data(G_OBJECT(w), "dialog")), 0);
+}
 
 static void 
 destroy(GtkWidget *window, void *data){
@@ -326,6 +333,126 @@ window_c::add_actions(GtkApplication *app){
 
 }
 
+void
+window_c::shell_dialog(void){
+    static GtkWidget *dialog = NULL;
+    static GtkEntry *entry = NULL;
+    if (!dialog) {
+        dialog = gtk_dialog_new ();
+        gtk_window_set_type_hint(GTK_WINDOW(dialog), GDK_WINDOW_TYPE_HINT_DIALOG);
+        gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+        gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (window));
+        gtk_window_set_resizable (GTK_WINDOW (dialog), TRUE);
+        gtk_container_set_border_width (GTK_CONTAINER (dialog), 6);
+
+        GtkWidget *combo =  gtk_combo_box_new_with_entry ();
+        gtk_widget_set_size_request (GTK_WIDGET (combo), 350, -1);
+     //   combobox_c *combobox_p = new combobox_c(GTK_COMBO_BOX(combo), MATCH_COMMAND);
+
+        GtkWidget *label = gtk_label_new (_("Run"));
+        //GtkWidget *vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
+        GtkWidget *vbox = gtk_dialog_get_content_area(GTK_DIALOG (dialog));
+        GtkWidget *hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+        gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+        gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+        gtk_box_pack_start (GTK_BOX (hbox), (GtkWidget *) combo, FALSE, FALSE, 0);
+     //   combobox_p->set_quick_activate(TRUE);
+     //   combobox_p->clear_history();
+        
+     //   GtkEntry *entry = combobox_p->get_entry_widget();
+        entry = GTK_ENTRY(gtk_bin_get_child (GTK_BIN (combo)));
+        g_object_set_data(G_OBJECT(entry), "dialog", dialog);
+        /*
+        combobox_p->set_activate_function(combo_info, activate_entry);
+        combobox_p->set_cancel_function(combo_info, cancel_entry);
+        combobox_p->set_activate_user_data(combo_info, &response);
+        combobox_p->set_cancel_user_data(combo_info, dialog);
+        combobox_p->set_extra_key_completion_function(combo_info, extra_key_completionR);
+        combobox_p->set_extra_key_completion_data(combo_info, &extra_key);
+
+
+        combobox_p->read_history (combo_info, rh_p->history_file);
+
+        */
+        GtkWidget *hbox2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+        gtk_box_pack_start (GTK_BOX (vbox), hbox2, FALSE, FALSE, 0);
+        GtkWidget *check = gtk_check_button_new_with_mnemonic (_("Run in Terminal"));
+        //g_signal_connect (extra_key.check1, "toggled", G_CALLBACK (toggle_activate), (gpointer) & extra_key);
+        gtk_box_pack_start (GTK_BOX (hbox2), check, FALSE, FALSE, 0);
+        
+        
+
+     //   add_cancel_ok(widgets_p, GTK_DIALOG (dialog));
+        // button yes
+        GtkWidget *button = dialog_button ("ok", _("Ok"));
+        gtk_widget_show (button);
+        gtk_box_pack_end (GTK_BOX (hbox2), button, FALSE, FALSE, 0);
+        g_object_set_data(G_OBJECT(button), "dialog", dialog);
+        g_signal_connect (G_OBJECT (button), "clicked", G_CALLBACK (click_button), GINT_TO_POINTER(1));
+        GtkWidget *button2 = dialog_button ("cancel", _("Cancel"));
+        gtk_widget_show (button2);
+        gtk_box_pack_end (GTK_BOX (hbox2), button2, FALSE, FALSE, 0);
+        g_object_set_data(G_OBJECT(button2), "dialog", dialog);
+        g_signal_connect (G_OBJECT (dialog), "destroy", G_CALLBACK (click_button), NULL);
+
+        g_object_set_data(G_OBJECT(dialog), "dialog", dialog);
+        g_signal_connect (G_OBJECT (button2), "clicked", G_CALLBACK (click_button), NULL);
+
+        gtk_widget_realize (dialog);
+        /*
+        if(rh_p->flagfile) {
+            extra_key.flagfile = rh_p->flagfile;
+            extra_key_completionR (&extra_key);
+        } else
+            extra_key.flagfile = NULL;
+    */
+        /*
+        if(rh_p->title_txt)
+            gtk_window_set_title (GTK_WINDOW (dialog), rh_p->title_txt);
+        else
+            gdk_window_set_decorations (gtk_widget_get_window(dialog), GDK_DECOR_BORDER);
+
+        g_signal_connect (G_OBJECT (dialog), "delete-event", G_CALLBACK (response_delete), dialog);
+        */
+        /* show dialog and return */
+        gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
+    }
+    gtk_widget_show_all (dialog);
+    gint response  = gtk_dialog_run(GTK_DIALOG(dialog));
+    fprintf(stderr, "response = %d\n", response);
+
+    gchar *response_txt = NULL;
+    if(response == 1) {
+        const gchar *et = gtk_entry_get_text(entry);
+            fprintf(stderr, "Got: %s\n", et);
+
+            response_txt = g_strdup(et);
+	    if(response_txt) g_strstrip (response_txt);
+            view_c *view_p =(view_c *)get_active_view_p();
+            view_p->get_lpterm_p()->shell_command(response_txt, FALSE);
+
+            
+            /*COMBOBOX_save_to_history (rh_p->history_file, (char *)response_txt);
+            if(rh_p->flagfile) rodent_save_flags (&extra_key);
+        
+	    if(rh_p->flagfile && extra_key.check1 && 
+                    GTK_IS_TOGGLE_BUTTON(extra_key.check1)) {
+		gboolean active = gtk_toggle_button_get_active ((GtkToggleButton *)
+                                                            extra_key.check1);
+		//NOOP("active=%d\n",active);
+		if(active)
+		    response_txt[strlen (response_txt) + 1] = 1;
+	    }*/
+    }
+    gtk_widget_hide (dialog);
+    // cleanup combobox module objects:
+    //delete combobox_p;
+    
+    //gtk_widget_destroy (dialog);
+    return ;
+
+}
+
 ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 
@@ -360,7 +487,10 @@ static void
                        gpointer       data)
 {
     DBG("shell\n");
+    window_c *window_p = (window_c *)data;
+    window_p->shell_dialog();
 }
+
 
 static void
  search(GSimpleAction *action,

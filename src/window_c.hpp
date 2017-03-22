@@ -24,7 +24,8 @@ class window_c: public menu_c {
         const gchar *get_tooltip_path_string(void);
         void set_tooltip_path_string(const gchar *);
         GtkWidget *get_tt_window(void);
-	
+        
+	void shell_dialog(void);
     private:
         GtkNotebook *notebook;
         GtkWidget *window;

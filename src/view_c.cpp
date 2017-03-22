@@ -117,11 +117,11 @@ signal_drag_delete (GtkWidget * widget, GdkDragContext * context, gpointer data)
 ////////////////////////////////////////
 
 view_c::view_c(data_c *data0, void *window_data, GtkNotebook *notebook, const gchar *data) : widgets_c(data0, window_data, notebook), thread_control_c((void *)this) {
+    xfdir_p = NULL; // to avoid race with gtk loop
     NOOP( "view_c::view_c.....\n");
     all_set_up = FALSE;
     data_p = data0;
     init();
-    xfdir_p = NULL; // to avoid race with gtk loop
     xfdir_type = get_xfdir_type(data);
     xfdir_p = create_xfdir_p(xfdir_type, data);
     set_treemodel(xfdir_type, xfdir_p);
@@ -554,7 +554,10 @@ void
 view_c::set_window_title(gint page_num){
     GtkWidget *child_box = gtk_notebook_get_nth_page(get_notebook(), page_num);
     view_c *view_p = (view_c *)g_object_get_data(G_OBJECT(child_box), "view_p");
-    if (!view_p->get_xfdir_p()) return;
+    if (!view_p->get_xfdir_p()) {
+        fprintf(stderr, "view_c::set_window_title(gint page_num): no xfdir_p\n");
+        return;
+    }
 
     gchar *window_title = view_p->get_xfdir_p()->get_window_name();
     GtkWindow *window = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET(get_notebook())));
