@@ -1,66 +1,50 @@
 dnl 5.2.4
 
 AC_DEFUN([RFM_SET_PKG_CONF_DIR],[
-
 if test $prefix = NONE; then
-   pref=$ac_default_prefix
+   PREF=$ac_default_prefix
 else
-   pref=$prefix
+   PREF=$prefix
 fi  
-
-
 AC_ARG_WITH(pkglibdata, [AC_HELP_STRING([--with-pkglibdata], [Place pkgconfig .pc files at libdata/pkgconfig, relative to prefix])])
 AC_ARG_WITH(pkgdatadir, [AC_HELP_STRING([--with-pkgdatadir], [Place pkgconfig .pc files at (datadir)/pkgconfig])])
-# default is (libdir)/pkgconfig
-AC_SUBST([PKG_CONF_DIR]) PKG_CONF_DIR="$libdir/pkgconfig"
-
-# default changes for CentOS/Ubuntu/BSD or explicitly requested
-os=`uname -a | grep CentOS`
-if test x"$os" != x ; then 
-    PKG_CONF_DIR="$datadir/pkgconfig"
-fi
-
-os=`uname -a | grep fc`
-if test x"$os" != x ; then 
-    PKG_CONF_DIR="$datadir/pkgconfig"
-fi
-
-os=`uname -a | grep Ubuntu`
-if test x"$os" != x ; then 
-    PKG_CONF_DIR="$datadir/pkgconfig"
-fi
-
-os=`uname -a | grep Debian`
-if test x"$os" != x ; then 
-    PKG_CONF_DIR="$datadir/pkgconfig"
-fi
-
-os=`uname -a | grep BSD`
-if test x"$os" != x ; then 
-    PKG_CONF_DIR="$pref/libdata/pkgconfig"
-fi
-
-os=`uname -a | grep DragonFly`
-if test x"$os" != x ; then 
-    PKG_CONF_DIR="$pref/libdata/pkgconfig"
-fi
-
-if test  "$with_centos" = yes ; then
-    PKG_CONF_DIR="$datadir/pkgconfig"
-fi
-
+PKG_CONF_DIR=
 if test x"$with_pkglibdata" != x ; then
-    PKG_CONF_DIR="$pref/libdata/pkgconfig"
+    PKG_CONF_DIR="$PREF/libdata/pkgconfig"
+else
+  if test x"$with_pkgshare" != x ; then
+    PKG_CONF_DIR="$PREF/share/pkgconfig"
+  else
+    DIRS="lib libdata share"
+    TOP_COUNT=0
+    for DIR in $DIRS
+    do
+        TARGET=$PREF/$DIR/pkgconfig
+        if test -e $TARGET ; then
+            echo "Searching for pkgconfig directory $TARGET... found."
+            R=`ls $TARGET | grep \.pc\$`
+                echo "score: $TARGET -> ${#R}"
+                if test ${#R} -gt $TOP_COUNT ; then
+                    TOP_COUNT=${#R}
+                    PKG_CONF_DIR=$TARGET
+                fi
+        else
+            echo "Searching for pkgconfig directory $TARGET... not found."
+        fi
+    done
+    if test ${#PKG_CONF_DIR} -eq 0 ; then
+        PKG_CONF_DIR="$libdir/pkgconfig"
+        echo "*** Could not determine pkgconfig target. Using default $PKG_CONF_DIR"
+        echo "    target. If this is not correct, use either --with_pkglibdata or"
+        echo "    --with_pkgshare option and rerun configure"
+    else
+        echo "    Using $PKG_CONF_DIR as target for pkgconfig file."
+        echo "    If this is not correct, use either --with_pkglibdata or"
+        echo "    --with_pkgshare option and rerun configure"
+    fi
+  fi
 fi
-
-if test x"$with_pkgdatadir" != x ; then
-    PKG_CONF_DIR="$datadir/pkgconfig"
-fi
-
-if test x"$with_pkgshare" != x ; then
-    PKG_CONF_DIR="$ac_default_prefix/share/pkgconfig"
-fi
-echo "PKG_CONF_DIR = $PKG_CONF_DIR"
+AC_SUBST([PKG_CONF_DIR]) PKG_CONF_DIR="$libdir/pkgconfig"
 ]
 )
 
@@ -130,7 +114,6 @@ then
 	AC_SUBST(CORE)
 	AC_DEFINE_UNQUOTED([CORE],[$with_core],[enable CORE])
 	AC_MSG_NOTICE([You enabled core dumps. Good for you.])
-	CXXFLAGS="-O0 -ggdb"
 	CFLAGS="-O0 -ggdb"
 elif test "$with_core" != ""
 then
@@ -139,7 +122,6 @@ then
 	AC_SUBST(CORE)
 	AC_DEFINE_UNQUOTED([CORE],[$with_core],[enable CORE])
 	CFLAGS="-O0 -ggdb"
-	CXXFLAGS="-O0 -ggdb"
 
 else
 	AC_SUBST(WITH_CORE) WITH_CORE=no
@@ -354,7 +336,7 @@ AC_DEFUN([RFM_LINUX_OR_BSD],
 AC_MSG_CHECKING(for Linux or BSD)
 #echo "system: $ac_uname_s"
 os=`uname -a | grep BSD`
-if test x"$os" == x ; then
+if test x"$os" != x ; then
     os=`uname -a | grep DragonFly`
 fi
 
