@@ -103,16 +103,10 @@ bash_completion_c::file_completion(gchar *token){
 void
 bash_completion_c::msg_too_many_matches(void){
     show_text();
-#ifdef DEBUG_TRACE
     gchar *message1=g_strdup_printf("%s (> %ld)",
 	    _("Too many matches"), BASH_COMPLETION_OPTIONS);
-    gchar *message2=g_strdup_printf("%s %s", _("Options:"), message1);
-    print_icon_tag("dialog-info", "tag/blue",  g_strdup_printf("[%s]", _("Text Completion")));
-    print_tag("tag/red", g_strdup_printf("%s\n", message2));
+    print_icon_tag("dialog-info", "tag/red", g_strdup_printf("%s\n", message1));
     g_free(message1);
-    g_free(message2);
-#else
-#endif
     scroll_to_bottom();
 }
 
@@ -143,15 +137,14 @@ bash_completion_c::get_match_type_text(gint match_type){
     
 void
 bash_completion_c::msg_show_match(gint match_type, const gchar *match){
+    show_text();
     if (!match) {
-#ifdef DEBUG_TRACE
 	const gchar *option_type = get_match_type_text(match_type);
-	print_icon_tag ("dialog-warning", "xffm_tag/red", g_strdup_printf("(%s)", option_type));
 	match = _("Found no match");
-#endif
-        return;
-    } 
-    print_tag("tag/blue", g_strdup_printf(" %s\n", match));
+	print_icon_tag ("dialog-warning", "tag/red", g_strdup_printf(" %s\n", match));
+    } else {
+	print_tag("tag/blue", g_strdup_printf(" %s\n", match));
+    }
     scroll_to_bottom();
 }
 
@@ -262,8 +255,10 @@ bash_completion_c::bash_file_completion(const char *in_file_token, gint *match_c
 }
 
 gchar *
-bash_completion_c::bash_exec_completion(const char *in_token, gint *match_count_p){
+bash_completion_c::bash_exec_completion(const gchar *in_token, gint *match_count_p){
+    fprintf(stderr, "bash_exec_completion for %s\n", in_token);
     GSList *matches = base_exec_completion(get_workdir(), in_token, match_count_p);
+    fprintf(stderr, "match count = %d\n", *match_count_p);
     gchar *suggest = msg_output(match_count_p, matches, MATCH_COMMAND);
 
     NOOP( "complete_it: MATCH_COMMAND=%d suggest=%s, matches=%d\n",

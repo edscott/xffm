@@ -161,6 +161,8 @@ base_completion_c::base_exec_completion(const gchar *workdir, const char *in_tok
         *match_count_p = -1;
     } else if (stack_glob_v.gl_pathc == 0){
 	NOOP(stderr, "NO MATCHES\n");
+        *match_count_p = 0;
+
 	    //msg_show_match(MATCH_FILE, NULL);
     } else {
 	struct stat st;
@@ -178,6 +180,7 @@ base_completion_c::base_exec_completion(const gchar *workdir, const char *in_tok
 		matches = g_slist_append (matches, base);
 	    }
 	}
+	*match_count_p = g_slist_length(matches);
     } 
 
     globfree(&stack_glob_v);
