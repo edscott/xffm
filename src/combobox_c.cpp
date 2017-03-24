@@ -918,7 +918,7 @@ combobox_c::combo_key_press_history(GtkWidget * entry, GdkEventKey * event, gpoi
   complete_text:
     if(ftext) {
         /* look for in ordered GSList */
-        NOOP ("NOOP:ftext is %s\n", ftext);
+        fprintf (stderr, "ftext is %s\n", ftext);
 
 	gchar *token;
 	gint position=gtk_editable_get_position(editable);
@@ -938,7 +938,7 @@ combobox_c::combo_key_press_history(GtkWidget * entry, GdkEventKey * event, gpoi
 		suggest=NULL;
 	}
 
-	NOOP("token=\"%s\", suggested=\"%s\" remainder=\"%s\"\n", 
+	fprintf (stderr, "token=\"%s\", suggested=\"%s\" remainder=\"%s\"\n", 
 		token, suggest, remainder);
 	// if found, complete with untyped part selected. 
 	if (suggest && token && strlen(suggest) > strlen(token)) {

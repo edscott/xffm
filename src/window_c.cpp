@@ -349,7 +349,7 @@ window_c::shell_dialog(void){
 
         GtkWidget *combo =  gtk_combo_box_new_with_entry ();
         gtk_widget_set_size_request (GTK_WIDGET (combo), 350, -1);
-     //   combobox_c *combobox_p = new combobox_c(GTK_COMBO_BOX(combo), MATCH_COMMAND);
+        combobox_c *combobox_p = new combobox_c(GTK_COMBO_BOX(combo), MATCH_COMMAND);
 
         GtkWidget *label = gtk_label_new (_("Run"));
         //GtkWidget *vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
@@ -358,7 +358,7 @@ window_c::shell_dialog(void){
         gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
         gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
         gtk_box_pack_start (GTK_BOX (hbox), (GtkWidget *) combo, FALSE, FALSE, 0);
-     //   combobox_p->set_quick_activate(TRUE);
+        combobox_p->set_quick_activate(TRUE);
      //   combobox_p->clear_history();
         
      //   GtkEntry *entry = combobox_p->get_entry_widget();
@@ -447,8 +447,6 @@ window_c::shell_dialog(void){
 	    }*/
     }
     gtk_widget_hide (dialog);
-    // cleanup combobox module objects:
-    //delete combobox_p;
     
     //gtk_widget_destroy (dialog);
     return ;

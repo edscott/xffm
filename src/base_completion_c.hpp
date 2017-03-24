@@ -17,6 +17,7 @@ class base_completion_c: virtual utility_c {
 	
     private:
         gchar *get_token(const char *, gint *);
+        gchar *base_suggestion(gint, const char *, const char *, gint *);
 
 };
 

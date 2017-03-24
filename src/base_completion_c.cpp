@@ -193,13 +193,21 @@ base_completion_c::base_exec_completion(const gchar *workdir, const char *in_tok
 }
 
 
-
 gchar *
-base_completion_c::base_file_suggestion(const gchar *workdir, const char *in_file_token, gint *match_count_p){
-    GSList *list = base_file_completion(workdir, in_file_token, match_count_p);
+base_completion_c::base_suggestion(gint which, const gchar *workdir, const char *in_file_token, gint *match_count_p){
+    GSList *list;
+    if (which == MATCH_FILE)
+        list = base_file_completion(workdir, in_file_token, match_count_p);
+    else if (which == MATCH_COMMAND)
+        list = base_exec_completion(workdir, in_file_token, match_count_p);
+    else {
+        fprintf(stderr, "unknown match type: %d\n", which);
+        return NULL;
+    }
+
     if (!list) return NULL;
     gchar *suggest = NULL;
-    NOOP( "COMPLETE: matches %d\n", g_slist_length (list));
+    fprintf(stderr, "COMPLETE: matches %d\n", g_slist_length (list));
     if(g_slist_length (list) == 1) {
         gchar *s =(gchar *)list->data;
         suggest = g_strdup (s);
@@ -213,20 +221,16 @@ base_completion_c::base_file_suggestion(const gchar *workdir, const char *in_fil
     return suggest;
 }
 
+
+gchar *
+base_completion_c::base_file_suggestion(const gchar *workdir, const char *in_file_token, gint *match_count_p){
+    return base_suggestion(MATCH_FILE, workdir, in_file_token, match_count_p);
+}
+
 // XXX FIXME: this basically duplicates the above...
 gchar *
 base_completion_c::base_exec_suggestion(const gchar *workdir, const char *in_file_token, gint *match_count_p){
-    GSList *list = base_exec_completion(workdir, in_file_token, match_count_p);
-    if (!list) return NULL;
-    gchar *suggest = NULL;
-    NOOP( "COMPLETE: matches %d\n", g_slist_length (list));
-    if(g_slist_length (list) == 1) {
-        gchar *s =(gchar *)list->data;
-        suggest = g_strdup (s);
-    } else {
-        suggest=top_match(&list);
-    }
-    free_match_list(list);
+    return base_suggestion(MATCH_COMMAND, workdir, in_file_token, match_count_p);
 }
 
 void
@@ -253,19 +257,19 @@ base_completion_c::top_match (GSList **matches_p){
     char *suggest = g_strdup ((gchar *) (p->data));
     int equal_length=strlen(suggest);
     for(a = *matches_p; a && a->data; a = a->next) {
-	NOOP(stderr, "comparing a %s\n", (gchar *)a->data);
+	fprintf (stderr,  "comparing a %s\n", (gchar *)a->data);
 	for(b = a->next; b && b->data; b = b->next) {
-	    NOOP(stderr, "comparing b %s\n", (gchar *)b->data);
+	    fprintf (stderr,  "comparing b %s\n", (gchar *)b->data);
 	    length=length_equal_string(
 		    (const gchar *)(a->data), (const gchar *)(b->data));
 	    if(length < equal_length) {
 		equal_length = length;
 	    }
-	    NOOP(stderr, "comparing %s to %s: length=%d\n", (gchar *)a->data, (gchar *)b->data, length);
+	    fprintf (stderr, "comparing %s to %s: length=%d\n", (gchar *)a->data, (gchar *)b->data, length);
 	}
     }
     suggest[equal_length]=0;
-    NOOP(stderr, "string=%s, equal_length=%d, suggest=%s\n",
+    fprintf (stderr, "string=%s, equal_length=%d, suggest=%s\n",
 	    (gchar *) (p->data), equal_length, suggest);
 
 
