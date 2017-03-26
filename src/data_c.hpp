@@ -34,6 +34,7 @@ class data_c {
         GHashTable *iconname_hash;
         
         GHashTable *highlight_hash;
+        GHashTable *tooltip_text_hash;
 	
     private:
 	GtkApplication *app; 

@@ -8,6 +8,7 @@
 class csh_completion_c: public bash_completion_c, virtual utility_c {
     public:
 	csh_completion_c(data_c *, void *);
+        gboolean csh_is_valid_command (const gchar *);
 
     protected:
         gboolean is_completing(void);
@@ -21,7 +22,6 @@ class csh_completion_c: public bash_completion_c, virtual utility_c {
         const gchar *csh_find(const gchar *, gint);
         void csh_place_command(const gchar *);
         void *csh_load_history (void);
-        gboolean csh_is_valid_command (const gchar *);
 	
 	void place_cursor(void);
 	

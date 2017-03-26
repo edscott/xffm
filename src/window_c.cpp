@@ -349,9 +349,14 @@ void
 window_c::shell_dialog(void){
     static GtkWidget *dialog = NULL;
     static GtkEntry *entry = NULL;
+    static combobox_c *combobox_p = NULL;
     // On any modal dialog, clear out tooltip:
     set_tt_window(NULL, NULL);
-    if (!dialog) {
+    if (dialog) {
+        combobox_p->clear_history();
+        combobox_p->read_history ();
+	combobox_p->set_combo(NULL);
+    } else {
         dialog = gtk_dialog_new ();
         gtk_window_set_type_hint(GTK_WINDOW(dialog), GDK_WINDOW_TYPE_HINT_DIALOG);
         gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
@@ -361,7 +366,7 @@ window_c::shell_dialog(void){
 
         GtkWidget *combo =  gtk_combo_box_new_with_entry ();
         gtk_widget_set_size_request (GTK_WIDGET (combo), 350, -1);
-        combobox_c *combobox_p = new combobox_c(GTK_COMBO_BOX(combo), MATCH_COMMAND);
+        combobox_p = new combobox_c(GTK_COMBO_BOX(combo), MATCH_COMMAND);
 
         GtkWidget *label = gtk_label_new (_("Run"));
         //GtkWidget *vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
@@ -371,10 +376,21 @@ window_c::shell_dialog(void){
         gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
         gtk_box_pack_start (GTK_BOX (hbox), (GtkWidget *) combo, FALSE, FALSE, 0);
         combobox_p->set_quick_activate(TRUE);
-     //   combobox_p->clear_history();
+
+	gchar *f = g_build_filename (RUN_DBH_FILE, NULL);
+	combobox_p->set_history_file(f);
+	g_free(f);
+	f = g_build_filename (RUN_FLAG_FILE, NULL);
+        combobox_p->set_history_flag_file(f);
+	g_free(f);
+
+        combobox_p->clear_history();
+        combobox_p->read_history ();
+	combobox_p->set_combo(NULL);
         
-     //   GtkEntry *entry = combobox_p->get_entry_widget();
-        entry = GTK_ENTRY(gtk_bin_get_child (GTK_BIN (combo)));
+        entry = combobox_p->get_entry_widget();
+        //same thing:
+	//entry = GTK_ENTRY(gtk_bin_get_child (GTK_BIN (combo)));
         g_object_set_data(G_OBJECT(entry), "dialog", dialog);
         
         combobox_p->set_activate_function(activate_entry);
@@ -383,13 +399,10 @@ window_c::shell_dialog(void){
         combobox_p->set_cancel_user_data(NULL);
        
 /*       
-	combobox_p->set_cancel_function(combo_info, cancel_entry);
-        combobox_p->set_cancel_user_data(combo_info, dialog);
         combobox_p->set_extra_key_completion_function(combo_info, extra_key_completionR);
         combobox_p->set_extra_key_completion_data(combo_info, &extra_key);
 
 
-        combobox_p->read_history (combo_info, rh_p->history_file);
 
         */
         GtkWidget *hbox2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
@@ -448,6 +461,12 @@ window_c::shell_dialog(void){
 	    if(response_txt) g_strstrip (response_txt);
             view_c *view_p =(view_c *)get_active_view_p();
             view_p->get_lpterm_p()->shell_command(response_txt, FALSE);
+	    if (view_p->get_lpterm_p()->csh_is_valid_command(response_txt)){
+		// save csh correct calls calls in history
+		combobox_p->save_to_history(response_txt);
+		fprintf(stderr, "saved \"%s\" to history\n", response_txt);
+	    }
+	    else fprintf(stderr, "NOT saved \"%s\" to history\n", response_txt);
 
             
             /*COMBOBOX_save_to_history (rh_p->history_file, (char *)response_txt);

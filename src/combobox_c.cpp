@@ -47,17 +47,35 @@ static gint on_key_press (GtkWidget * , GdkEventKey * , gpointer );
 static gint on_key_press_history (GtkWidget * , GdkEventKey * , gpointer );
 static int history_compare (gconstpointer , gconstpointer );
 static int path_compare (gconstpointer , gconstpointer );
-static void clear_association_hash (gpointer , gpointer , gpointer );
 /*************** public *****************/
  
 // FIXME: Check that all pthread mutexes created in classes
 //        are subsequently destroyed by destructor
 //        (some are missing this in other classes)
 // Constructor 
-combobox_c::combobox_c (GtkComboBox *data1, gint data2) {
+combobox_c::combobox_c (GtkComboBox *data1, gint data2):
+    history_file(NULL),
+    history_flag_file(NULL),
+    list(NULL),
+    cancel_user_data(NULL),
+    activate_user_data(NULL),
+    cancel_func(NULL),
+    activate_func(NULL),
+
+    dead_key(0),
+    shift_pos(-1),
+    cursor_pos(-1),
+    active(-1),
+    extra_key_completion(NULL),
+    extra_key_data(NULL),
+	
+    limited_list(NULL)
+
+{
     sweep_mutex=PTHREAD_MUTEX_INITIALIZER;
     completion_type = data2;
     comboboxentry=data1;
+    association_hash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
 
     if (!gtk_combo_box_get_has_entry(comboboxentry)){
 	g_error("FIXME: gtk_combo_box_get_has_entry(comboboxentry) == NULL (Set \"has-entry\" property as TRUE on creation of combobox)"); 
@@ -70,22 +88,6 @@ combobox_c::combobox_c (GtkComboBox *data1, gint data2) {
     g_signal_connect (G_OBJECT (entry), "key_press_event", G_CALLBACK (on_key_press), (void *)this);
     g_signal_connect (G_OBJECT (entry), "key_press_event", G_CALLBACK (on_key_press_history), (void *)this);
 
-    active_dbh_file = NULL;
-    list = NULL;
-    cancel_user_data = NULL;
-    activate_user_data = NULL;
-    cancel_func = NULL;
-    activate_func = NULL;
-
-    dead_key=0;
-    shift_pos = -1;
-    cursor_pos = -1;
-    active = -1;
-    extra_key_completion = NULL;
-    extra_key_data = NULL;
-	
-    limited_list = NULL;
-    association_hash = NULL;
     model=(GtkTreeModel *)gtk_list_store_new (1, G_TYPE_STRING);
     gtk_combo_box_set_model((GtkComboBox *)comboboxentry, model);
                                                          
@@ -96,14 +98,11 @@ combobox_c::combobox_c (GtkComboBox *data1, gint data2) {
 
 
 combobox_c::~combobox_c(void){
+    g_free(history_file);
+    g_free(history_flag_file);
+    g_hash_table_destroy (association_hash);
     pthread_mutex_destroy(&sweep_mutex);
             
-    if (association_hash) {
-	g_hash_table_destroy (association_hash);
-    }
-    g_free (active_dbh_file);
-    // free:
-    //    ->treemodel
     if (GTK_IS_TREE_STORE (model)) {
 	gtk_tree_store_clear ((GtkTreeStore *)model);
     }
@@ -116,13 +115,24 @@ combobox_c::~combobox_c(void){
     return;
 }
 
+void 
+combobox_c::set_history_file(const gchar *data){
+    g_free(history_file);
+    history_file = g_strdup(data);
+}
+void 
+combobox_c::set_history_flag_file(const gchar *data){
+    g_free(history_flag_file);
+    history_flag_file = g_strdup(data);
+}
+
 gboolean
-combobox_c::is_in_history (const gchar *data1, const gchar *data2) {
-    if (!data1) {
-	DBG("is_in_history: dbh_file==NULL!\n");
+combobox_c::is_in_history (const gchar *data2) {
+    if (!history_file) {
+	DBG("is_in_history: history_file==NULL!\n");
 	return FALSE;
     }
-    const gchar *dbh_file = data1;
+    const gchar *dbh_file = history_file;
     const gchar *path2save = data2;
     GString *gs;
     DBHashTable *d;
@@ -173,7 +183,7 @@ const gchar *
 combobox_c::get_entry_text (void) {
     const gchar *choice = gtk_entry_get_text (entry);
 
-    if(choice && strlen (choice) && association_hash) {
+    if(choice && strlen (choice)) {
         const gchar *local_choice = (const gchar *)g_hash_table_lookup (association_hash, choice);
         NOOP ("converting back to non utf8 value %s ---> %s\n", choice, local_choice);
         if(local_choice) choice = local_choice;
@@ -183,12 +193,12 @@ combobox_c::get_entry_text (void) {
 }
 
 gboolean
-combobox_c::save_to_history (const gchar *data1, const gchar *data2) {
-    if (!data1) {
-	DBG("save_to_history: dbh_file==NULL!\n");
+combobox_c::save_to_history (const gchar *data2) {
+    if (!history_file) {
+	DBG("save_to_history: history_file==NULL!\n");
 	return FALSE;
     }
-    const gchar *dbh_file = data1;
+    const gchar *dbh_file = history_file;
     const gchar *path2save = data2;
     GString *gs;
     DBHashTable *d;
@@ -246,12 +256,12 @@ combobox_c::save_to_history (const gchar *data1, const gchar *data2) {
 }
 
 gboolean
-combobox_c::remove_from_history (const gchar *data1, const gchar *data2) {
-    if (!data1) {
-	DBG("save_to_history: dbh_file==NULL!\n");
+combobox_c::remove_from_history (const gchar *data2) {
+    if (!history_file) {
+	DBG("save_to_history: history_file==NULL!\n");
 	return FALSE;
     }
-    const gchar *dbh_file = data1;
+    const gchar *dbh_file = history_file;
     const gchar *path2save = data2;
     GString *gs;
     DBHashTable *d;
@@ -334,20 +344,17 @@ combobox_c::set_cancel_function(void (*func)(GtkEntry *, gpointer)){
 
 
 gboolean 
-combobox_c::read_history (const gchar *data) {
-    if (!data) {
-	DBG("dbh_file==NULL!\n");
+combobox_c::read_history (void) {
+    if (!history_file) {
+	DBG("history_file==NULL!\n");
 	return FALSE;
     }
-    const gchar * dbh_file = data;
-/*	NOOP("NOOP:at read_history_list with %s \n",dbh_file);*/
-    g_free (active_dbh_file);
-    active_dbh_file = g_strdup (dbh_file);
-    if(access (active_dbh_file, F_OK) != 0) {
+/*	NOOP("NOOP:at read_history_list with %s \n",history_file);*/
+    if(access (history_file, F_OK) != 0) {
         clean_history_list (&(list));
         list = NULL;
     }
-    get_history_list (&(list), active_dbh_file, "");
+    get_history_list (&(list), history_file, "");
     /* turn asian off to start with. If the combo object does not
      * do a read_history to start, then it has no business being a combo
      * object */
@@ -357,7 +364,7 @@ combobox_c::read_history (const gchar *data) {
 
 void 
 combobox_c::clear_history (void) {
-/*	NOOP("NOOP:at read_history_list with %s \n",dbh_file);*/
+/*	NOOP("NOOP:at read_history_list with %s \n",history_file);*/
     clean_history_list (&(list));
     list = NULL;
     return;
@@ -376,12 +383,15 @@ combobox_c::set_combo (const gchar *data) {
     GSList **limited_list_p;
     gboolean match = FALSE;
 
-    if(!list) return match;
+    if(!list) {
+	fprintf(stderr, "set_combo:: list is null\n");
+	return match;
+    }
 
     old_list = limited_list;
     limited_list = NULL;
     limited_list_p = &(limited_list);
-    NOOP ("token=%s\n", ((token) ? token : "null"));
+    fprintf(stderr, "token=%s\n", ((token) ? token : "null"));
 
 
     // sort items after the first
@@ -415,32 +425,25 @@ combobox_c::set_combo (const gchar *data) {
         /* make sure we have utf-8 in combo. This may not match
          * character set of actual system, such as euc-jp, so
          * we better keep correct value in an association hash. */
-        if(association_hash) {
             /* clean old hash */
-            g_hash_table_foreach (association_hash, clear_association_hash, NULL);
-            g_hash_table_destroy (association_hash);
-            association_hash = NULL;
-        }
+	g_hash_table_remove_all (association_hash);
 
-        association_hash = g_hash_table_new (g_str_hash, g_str_equal);
 
-        if(association_hash) {
-            GSList *tmp;
-            /* create new hash */
-            for(tmp = *limited_list_p; tmp; tmp = tmp->next) {
-                gchar *utf_string = valid_utf_pathstring ((gchar *) (tmp->data));
-                NOOP("utf_string=%s\n",utf_string); 
-                if(strcmp (utf_string, (gchar *) (tmp->data))) {
-                    NOOP ("combo hash table %s ---> %s\n", (gchar *) (tmp->data), utf_string);
-                    g_hash_table_insert (association_hash, utf_string, tmp->data);
-		    g_free(tmp->data);
-                    tmp->data = utf_string;
-                } else {
-		    g_free(utf_string);
-		}
-            }
-        }
+	/* create new hash */
+	for(tmp = *limited_list_p; tmp; tmp = tmp->next) {
+	    gchar *utf_string = valid_utf_pathstring ((gchar *) (tmp->data));
+	    NOOP("utf_string=%s\n",utf_string); 
+	    if(strcmp (utf_string, (gchar *) (tmp->data))) {
+		NOOP ("combo hash table %s ---> %s\n", (gchar *) (tmp->data), utf_string);
+		g_hash_table_insert (association_hash, utf_string, tmp->data);
+		g_free(tmp->data);
+		tmp->data = utf_string;
+	    } else {
+		g_free(utf_string);
+	    }
+	}
 	// Set popdown list:
+	fprintf(stderr, "now setting popdown list...\n");
 	set_store_data_from_list ((GtkListStore *)model, limited_list_p);
 
 	// Set tooltip to reflect values in popdown list:
@@ -450,7 +453,7 @@ combobox_c::set_combo (const gchar *data) {
 	for (; tmp && tmp->data; tmp=tmp->next){
 	    gchar *p=tooltip_text;
 	    if (p) tooltip_text = g_strconcat(p,"\n ", (gchar *)(tmp->data),NULL);
-	    else tooltip_text = g_strconcat("<b>", _("History:"),"</b>\n ",(gchar *)(tmp->data), NULL);
+	    else tooltip_text = g_strconcat(_("History:"),"\n ",(gchar *)(tmp->data), NULL);
 	    g_free(p);
 	}
 
@@ -779,10 +782,9 @@ combobox_c::combo_key_press_history(GtkWidget * entry, GdkEventKey * event, gpoi
             g_free (fulltext);
             goto end;
         } else if(event->keyval == GDK_KEY_Delete || event->keyval == GDK_KEY_KP_Delete) {
-            if(active_dbh_file && event->state & GDK_CONTROL_MASK) {        /* remove stale entries */
+            if(history_file && event->state & GDK_CONTROL_MASK) {        /* remove stale entries */
                 gchar *fulltext = gtk_editable_get_chars (editable, 0, -1);
-                if(fulltext && strlen (fulltext)
-                   && association_hash) {
+                if(fulltext && strlen (fulltext)) {
                     const gchar *local_choice = (const gchar *)g_hash_table_lookup (association_hash,
                                                                fulltext);
                     NOOP ("converting back to non utf8 value %s ---> %s\n", fulltext, local_choice);
@@ -792,7 +794,7 @@ combobox_c::combo_key_press_history(GtkWidget * entry, GdkEventKey * event, gpoi
                     }
                 }
 
-                if(fulltext) remove_from_history (active_dbh_file, fulltext);
+                if(fulltext) remove_from_history (fulltext);
                 set_blank ();
 
                 g_free (fulltext);
@@ -1039,12 +1041,4 @@ history_compare (gconstpointer a, gconstpointer b) {
     return (strcmp (da->path, db->path));
 }
 
-
-static void
-clear_association_hash (gpointer key, gpointer value, gpointer user_data) {
-    g_free (key);
-    if(!value) return;
-    g_free (value);
-    return;
-}
 

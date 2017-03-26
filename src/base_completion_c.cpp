@@ -257,19 +257,19 @@ base_completion_c::top_match (GSList **matches_p){
     char *suggest = g_strdup ((gchar *) (p->data));
     int equal_length=strlen(suggest);
     for(a = *matches_p; a && a->data; a = a->next) {
-	fprintf (stderr,  "comparing a %s\n", (gchar *)a->data);
+	NOOP (stderr,  "comparing a %s\n", (gchar *)a->data);
 	for(b = a->next; b && b->data; b = b->next) {
-	    fprintf (stderr,  "comparing b %s\n", (gchar *)b->data);
+	    NOOP (stderr,  "comparing b %s\n", (gchar *)b->data);
 	    length=length_equal_string(
 		    (const gchar *)(a->data), (const gchar *)(b->data));
 	    if(length < equal_length) {
 		equal_length = length;
 	    }
-	    fprintf (stderr, "comparing %s to %s: length=%d\n", (gchar *)a->data, (gchar *)b->data, length);
+	    NOOP (stderr, "comparing %s to %s: length=%d\n", (gchar *)a->data, (gchar *)b->data, length);
 	}
     }
     suggest[equal_length]=0;
-    fprintf (stderr, "string=%s, equal_length=%d, suggest=%s\n",
+    NOOP (stderr, "string=%s, equal_length=%d, suggest=%s\n",
 	    (gchar *) (p->data), equal_length, suggest);
 
 

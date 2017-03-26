@@ -2,14 +2,12 @@
 
 
 tooltip_c::tooltip_c(data_c *data0){
-    tooltip_text_hash = g_hash_table_new_full(g_direct_hash, g_direct_equal, NULL, g_free);
+    data_p=data0;
     tt_window = NULL;
     tooltip_is_mapped = FALSE;
 }
 
 tooltip_c::~tooltip_c(void){
-    if (tooltip_text_hash) g_hash_table_destroy(tooltip_text_hash);
-    tooltip_text_hash = NULL;
 }
 
 GtkWidget * 
@@ -323,4 +321,4 @@ void tooltip_c::custom_tooltip(GtkWidget *widget, GdkPixbuf *pixbuf, const gchar
 }
 
 GHashTable *
-tooltip_c::get_tooltip_text_hash(void){ return tooltip_text_hash;}
+tooltip_c::get_tooltip_text_hash(void){ return data_p->tooltip_text_hash;}

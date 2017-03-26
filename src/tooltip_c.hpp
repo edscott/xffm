@@ -22,11 +22,10 @@ class tooltip_c: virtual utility_c {
     protected:
         
     private:
-        GHashTable *tooltip_text_hash;
         GtkWidget *tt_window = NULL;
         GdkPixbuf *shadow_it(const GdkPixbuf *);
         void tooltip_placement_bug_workaround(GtkWidget *);
-
+	data_c *data_p;
         gboolean tooltip_is_mapped;
 };
 

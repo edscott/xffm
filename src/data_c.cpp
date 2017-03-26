@@ -58,6 +58,7 @@ data_c::data_c(void){
 
     
     highlight_hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
+    tooltip_text_hash = g_hash_table_new_full(g_direct_hash, g_direct_equal, NULL, g_free);
 
 }
 
@@ -84,6 +85,7 @@ data_c::~data_c(void){
     g_hash_table_destroy (pixbuf_hash);
    
     g_hash_table_destroy(highlight_hash);
+    g_hash_table_destroy(tooltip_text_hash);
 
 }
 

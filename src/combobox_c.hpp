@@ -2,7 +2,11 @@
 #define COMBOBOX_C_HPP
 #include "xffm+.h"
 #include <dbh.h>
-
+/*
+ * 1. quick activate from combo
+ * 2. erase item from history (ctl-del)
+ * 3. run flag
+ * */
 
 #define USER_RFM_CACHE_DIR      g_get_user_cache_dir(),"rfm"
 #define USER_DBH_CACHE_DIR	USER_RFM_CACHE_DIR,"dbh"
@@ -21,13 +25,14 @@ class combobox_c: public base_completion_c, virtual utility_c {
 	const gchar *get_entry_text (void);
 	GtkEntry *get_entry_widget (void);
 	void clear_history (void);
-	gboolean is_in_history (const gchar *, const gchar *);
-	gboolean set_combo (void);
+	gboolean is_in_history (const gchar *);
+	gboolean set_combo (const gchar *);
+
         
 	gboolean set_entry (const gchar *);
-	gboolean save_to_history (const gchar *, const gchar *);
-	gboolean remove_from_history (const gchar *, const gchar *);
-	gboolean read_history (const gchar *);
+	gboolean save_to_history (const gchar *);
+	gboolean remove_from_history (const gchar *);
+	gboolean read_history (void);
 	
 	void set_extra_key_completion_function (gint (*func)(gpointer));
 	void set_extra_key_completion_data (gpointer data);
@@ -45,22 +50,21 @@ class combobox_c: public base_completion_c, virtual utility_c {
 
         void set_quick_activate(gboolean);
 
+	void set_history_file(const gchar *);
+	void set_history_flag_file(const gchar *);
     private:
-	gboolean set_combo (const gchar *);
         void set_blank (void);
         void clean_history_list (GSList **);
         void get_history_list (GSList **, const gchar *, const gchar *);
 
-
+	gchar *history_file;
+	gchar *history_flag_file;
 	pthread_mutex_t sweep_mutex;
 	time_t last_hit;
 
 	GtkComboBox *comboboxentry;
 	GtkEntry *entry;
 	GtkTreeModel *model;
-	gchar *active_dbh_file;
-	/* 
-	 * This is private (ro): */
 	gint dead_key;
 	gint shift_pos;
 	gint cursor_pos;
