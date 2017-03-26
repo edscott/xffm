@@ -333,6 +333,12 @@ window_c::add_actions(GtkApplication *app){
 
 }
 
+static void
+activate_entry (GtkEntry * entry, gpointer data) {
+    GtkWidget *dialog = (GtkWidget *)g_object_get_data(G_OBJECT(entry), "dialog");
+    gtk_dialog_response (GTK_DIALOG(dialog),1);
+}
+
 void
 window_c::shell_dialog(void){
     static GtkWidget *dialog = NULL;
@@ -364,10 +370,13 @@ window_c::shell_dialog(void){
      //   GtkEntry *entry = combobox_p->get_entry_widget();
         entry = GTK_ENTRY(gtk_bin_get_child (GTK_BIN (combo)));
         g_object_set_data(G_OBJECT(entry), "dialog", dialog);
-        /*
-        combobox_p->set_activate_function(combo_info, activate_entry);
-        combobox_p->set_cancel_function(combo_info, cancel_entry);
-        combobox_p->set_activate_user_data(combo_info, &response);
+        
+        combobox_p->set_activate_function(activate_entry);
+        combobox_p->set_activate_user_data(NULL);
+        //combobox_p->set_activate_user_data(&response);
+       
+/*       
+	combobox_p->set_cancel_function(combo_info, cancel_entry);
         combobox_p->set_cancel_user_data(combo_info, dialog);
         combobox_p->set_extra_key_completion_function(combo_info, extra_key_completionR);
         combobox_p->set_extra_key_completion_data(combo_info, &extra_key);
