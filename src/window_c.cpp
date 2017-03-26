@@ -339,6 +339,12 @@ activate_entry (GtkEntry * entry, gpointer data) {
     gtk_dialog_response (GTK_DIALOG(dialog),1);
 }
 
+static void
+cancel_entry (GtkEntry * entry, gpointer data) {
+    GtkWidget *dialog = (GtkWidget *)g_object_get_data(G_OBJECT(entry), "dialog");
+    gtk_dialog_response (GTK_DIALOG(dialog),0);
+}
+
 void
 window_c::shell_dialog(void){
     static GtkWidget *dialog = NULL;
@@ -373,7 +379,8 @@ window_c::shell_dialog(void){
         
         combobox_p->set_activate_function(activate_entry);
         combobox_p->set_activate_user_data(NULL);
-        //combobox_p->set_activate_user_data(&response);
+	combobox_p->set_cancel_function(cancel_entry);
+        combobox_p->set_cancel_user_data(NULL);
        
 /*       
 	combobox_p->set_cancel_function(combo_info, cancel_entry);
