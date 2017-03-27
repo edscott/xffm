@@ -905,13 +905,18 @@ view_c::setup_tooltip(gint x, gint y){
     gchar *text = xfdir_p->get_tooltip_text(tpath);
     if (!text) text = xfdir_p->make_tooltip_text(tpath);
 
-    
+#if 1    
+    gchar *vname = xfdir_p->get_verbatim_name(tpath);
+    gchar *markup = g_strdup_printf("<b>%s</b>", chop_excess(vname));
+    g_free(vname);
+#else
     gchar *vname = xfdir_p->get_verbatim_name(tpath);
     gchar *u = wrap_utf_string(vname, 30);
     g_free(vname);
 
     gchar *markup = g_strdup_printf("<b>%s</b>", u);
     g_free(u);
+#endif
 
     GdkPixbuf *pixbuf = xfdir_p->get_tooltip_pixbuf(tpath);
     if (!pixbuf) pixbuf = xfdir_p->get_normal_pixbuf(tpath); 

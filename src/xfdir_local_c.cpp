@@ -608,9 +608,17 @@ xfdir_local_c::path_info (const gchar *file_path, struct stat *st, const gchar *
 	mimetype = g_strdup(mimedata);
     }
         
+#if 1
+    gchar *u = g_strdup(mimefiledata);
+    const gchar *cu = chop_excess(u);
+    gchar *mimefile = g_strdup(cu);
+    g_free(u);
+#else
     gchar *u = g_strdup(mimefiledata);
     gchar *mimefile = wrap_utf_string(u, 40);
     g_free(u);
+#endif
+
     gchar *mimeencoding = mime_function(file_path, "mime_encoding");
 
     if (!mimefile)mimefile = g_strdup(_("unknown"));    

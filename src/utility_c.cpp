@@ -388,7 +388,10 @@ utility_c::get_text_editor(void){
     }
     return (editor);
 }
-
+   
+// FIXME: valgrind does not like this function. It has something
+//        which is broken.
+/*
 gchar *
 utility_c::wrap_utf_string(const gchar *data, gint length){
     gchar *u;
@@ -411,6 +414,7 @@ utility_c::wrap_utf_string(const gchar *data, gint length){
     g_free(u);
     return uu;
 }
+*/
 
 static gboolean
 context_function_f(gpointer data){

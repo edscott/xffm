@@ -5,7 +5,7 @@
 class utility_c{
     public:
         gchar *utf_string (const gchar *);
-        gchar *wrap_utf_string(const gchar *, gint);
+        //gchar *wrap_utf_string(const gchar *, gint);
         void *context_function(void * (*function)(gpointer), void * function_data);
     protected:
         gint length_equal_string(const gchar *, const gchar *);
