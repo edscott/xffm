@@ -88,26 +88,6 @@ pixbuf_hash_c::zap_thumbnail_file(const gchar *file, gint size){
     g_free (thumbnail_path);
 }
 
-
-static void *
-put_in_pixbuf_hash_f(void *data){
-    void **arg = (void **)data;
-    gchar *hash_key = (gchar *)arg[0];
-    pixbuf_t *pixbuf_p = (pixbuf_t *)arg[1];
-    GHashTable *pixbuf_hash = (GHashTable *)arg[2];
-    if (!pixbuf_p) return  NULL;
-    if (!pixbuf_p->pixbuf || !GDK_IS_PIXBUF(pixbuf_p->pixbuf)){
-	DBG("put_in_pixbuf_hash: refuse to put !G_IS_OBJECT (pixbuf) into hash\n");
-	return NULL;
-    }
-    g_object_ref(pixbuf_p->pixbuf);
-
-    TRACE("replacing in hashtable: %s (%s)\n", pixbuf_p->path, hash_key);
-    if (!pixbuf_hash) DBG("put_in_pixbuf_hash_f: hash is null!\n");
-    g_hash_table_replace (pixbuf_hash, hash_key, pixbuf_p);
-    return GINT_TO_POINTER(1);
-}
-
 void 
 pixbuf_hash_c::put_in_pixbuf_hash(const gchar *path, gint size, const GdkPixbuf *pixbuf){
     if (!path || !pixbuf || !GDK_IS_PIXBUF(pixbuf)) {
@@ -116,10 +96,14 @@ pixbuf_hash_c::put_in_pixbuf_hash(const gchar *path, gint size, const GdkPixbuf 
     }
     TRACE("rfm_put_in_pixbuf_hash(%s, %d)\n", path, size);
     pixbuf_t *pixbuf_p = (pixbuf_t *) calloc (1, sizeof (pixbuf_t));
-    if (!pixbuf_p) g_error("calloc: %s\n", strerror(errno));
+    if (!pixbuf_p) {
+        g_error("calloc: %s\n", strerror(errno));
+        return;
+    }
     pixbuf_p->path = g_strdup (path);
     pixbuf_p->size = size;
     pixbuf_p->pixbuf = (GdkPixbuf *)pixbuf;
+    g_object_ref(pixbuf_p->pixbuf);
 
     if(g_path_is_absolute (path) && g_file_test(path, G_FILE_TEST_EXISTS)) {
         struct stat st;
@@ -131,64 +115,43 @@ pixbuf_hash_c::put_in_pixbuf_hash(const gchar *path, gint size, const GdkPixbuf 
     } 
     // Replace or insert item in pixbuf hash
     gchar *hash_key = get_hash_key (pixbuf_p->path, pixbuf_p->size);
-    void *arg[]={(void *)hash_key, (void *)pixbuf_p, (void *)data_p->pixbuf_hash};
-    void *result = context_function(put_in_pixbuf_hash_f, (void *)arg);
-    if (!result){
-        g_free(hash_key);
-	data_p->free_pixbuf_tt(pixbuf_p);
-    }
-    // hash_key is inserted into hash and should not be freed.
+    
+    g_hash_table_replace (data_p->pixbuf_hash, hash_key, pixbuf_p);
+    // hash_key is now hash property and should not be freed.
     return ;
 }
 
 // This is to remove thumbnails from the hash, basically.
 // Thumbnails are always absolute paths.
 
-static void *
-rm_from_pixbuf_hash_f(void *data){
-    void **arg = (void **)data;
-    gchar *hash_key = (gchar *)arg[0];
-    GHashTable *pixbuf_hash = (GHashTable *)arg[1];
-    if (!hash_key) return  NULL;
-    if (!pixbuf_hash) DBG("rm_from_pixbuf_hash_f: hash is null!\n");
-    void *d = g_hash_table_lookup(pixbuf_hash, hash_key);
-    
-    if (d) {
-        TRACE("removing key %s from hashtable\n", hash_key);
-        g_hash_table_remove(pixbuf_hash, hash_key);
-    } else {
-        TRACE("key %s not in hashtable\n", hash_key);
-    }
-    return NULL;
-}
-
 void
 pixbuf_hash_c::rm_from_pixbuf_hash (const gchar *icon_name, gint size) {
     TRACE("rfm_rm_from_pixbuf_hash()\n");
     if (!icon_name) return ;
     gchar *hash_key = get_hash_key (icon_name, size);
-    void *arg[]={(void *)hash_key, (void *)data_p->pixbuf_hash};
 
-    context_function(rm_from_pixbuf_hash_f, (void *)arg);
+    NOOP(stderr, "rm_from_pixbuf_hash: %s\n", hash_key);
+
+    void *d = g_hash_table_lookup(data_p->pixbuf_hash, hash_key);
+    
+    if (d) {
+        TRACE("removing key %s from hashtable\n", hash_key);
+        g_hash_table_remove(data_p->pixbuf_hash, hash_key);
+    } else {
+        TRACE("key %s not in hashtable\n", hash_key);
+    }
     g_free(hash_key);
     TRACE("rfm_rm_from_pixbuf_hash() done\n");
     return;
 }
 
 
+GdkPixbuf *
+pixbuf_hash_c::lookup_icon(const gchar *icon_name, gint size){
+    NOOP(stderr, "find in pixbuf hash(%p): %s(%d)\n",(void *)data_p->pixbuf_hash, icon_name, size);
+    gchar *hash_key = get_hash_key (icon_name, size);
 
-static void *
-find_in_pixbuf_hash_f(void *data){
-    void **arg = (void **)data;
-    const gchar *hash_key = (const gchar *)arg[0];
-    const gchar *icon_name = (const gchar *)arg[1];
-    gint size = GPOINTER_TO_INT(arg[2]);
-    GHashTable *pixbuf_hash = (GHashTable *)arg[3];
-    pixbuf_hash_c *pixbuf_hash_p= (pixbuf_hash_c *)arg[4];
-
-
-    pixbuf_t *pixbuf_p = (pixbuf_t *)g_hash_table_lookup (pixbuf_hash, hash_key);
-
+    pixbuf_t *pixbuf_p = (pixbuf_t *)g_hash_table_lookup (data_p->pixbuf_hash, hash_key);
     if(!pixbuf_p || !GDK_IS_PIXBUF(pixbuf_p->pixbuf)) {
 	return NULL;
     }
@@ -202,25 +165,15 @@ find_in_pixbuf_hash_f(void *data){
 	{
 	    // Obsolete item must be replaced in pixbuf hash
 	    // and eliminated from thumnail cache.
-	    pixbuf_hash_p->zap_thumbnail_file(icon_name, size);
+	    zap_thumbnail_file(icon_name, size);
 	    // Eliminate from pixbuf hash:
 	    // this will be done when pixbuf is replaced...
 	    //g_mutex_unlock (pixbuf_hash_mutex);
 	    return NULL;
 	}
     }
-    return pixbuf_p->pixbuf;
-}
-
-GdkPixbuf *
-pixbuf_hash_c::lookup_icon(const gchar *icon_name, gint size){
-    GdkPixbuf *pixbuf = NULL;
-    TRACE("find in pixbuf hash: %s(%d)\n", icon_name, size);
-    gchar *hash_key = get_hash_key (icon_name, size);
-    void *arg[]={(void *)hash_key, (void *) icon_name, GINT_TO_POINTER(size), (void *)data_p->pixbuf_hash, (void *)this};
-    pixbuf = (GdkPixbuf *)context_function(find_in_pixbuf_hash_f, (void *)arg);
     g_free(hash_key);
-   return pixbuf;
+    return pixbuf_p->pixbuf;
 }
 
 // pixbuf_hash_c::find_in_pixbuf_hash()
