@@ -10,7 +10,6 @@ class lite_c {
         gboolean get_lite_colors(const gchar *, guchar *, guchar *, guchar *);
 
     private:
-        GHashTable *lite_hash;
         GHashTable *lite_type_hash;
         GHashTable *lite_key_hash;
         pthread_mutex_t lite_hash_mutex;

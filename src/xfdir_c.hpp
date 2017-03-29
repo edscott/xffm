@@ -84,7 +84,6 @@ class xfdir_c: virtual utility_c, public menu_c {
         gchar *path;
 	gint dir_count; 
 
-        GHashTable *items_hash;
     private:
         data_c *data_p;
 

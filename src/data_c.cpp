@@ -31,7 +31,7 @@ data_c::free_pixbuf_tt(void *data){
     free_pixbuf_t(data);
 }
 
-data_c::data_c(void){
+data_c::data_c(void):app(NULL){
     pthread_mutex_init(&readdir_mutex, NULL);
     pthread_mutex_init(&cache_mutex, NULL);
     pthread_mutex_init(&mimetype_hash_mutex, NULL);

@@ -247,15 +247,28 @@ thread_control_c::file_test_with_wait(const gchar *path, GFileTest test){
     if (!g_path_is_absolute(path)) return FALSE;
     NOOP(stderr, "rfm_g_file_test_with_wait: %s\n", path);
 
-    heartbeat_t *heartbeat_p = (heartbeat_t *)malloc(sizeof(heartbeat_t));
-    if (!heartbeat_p) g_error("malloc heartbeat_p: %s\n",strerror(errno));
-    memset(heartbeat_p, 0, sizeof(heartbeat_t));
-
+    heartbeat_t *heartbeat_p = (heartbeat_t *)calloc(1,sizeof(heartbeat_t));
+    if (!heartbeat_p) {
+        g_warning("malloc heartbeat_p: %s\n",strerror(errno));
+        return FALSE;
+    }
 
     heartbeat_p->mutex=(pthread_mutex_t *)calloc(1, sizeof(pthread_mutex_t));
+    if (!heartbeat_p->mutex){
+        g_warning("malloc heartbeat_p->mutex: %s\n",strerror(errno));
+        g_free(heartbeat_p);
+        return FALSE;
+   }
     pthread_mutex_init(heartbeat_p->mutex, NULL);
     
-    heartbeat_p->signal=(pthread_cond_t *)malloc(sizeof(pthread_cond_t));
+    heartbeat_p->signal=(pthread_cond_t *)calloc(1, sizeof(pthread_cond_t));
+    if (!heartbeat_p->signal){
+        g_warning("malloc heartbeat_p->signal: %s\n",strerror(errno));
+        pthread_mutex_destroy(heartbeat_p->mutex);
+        g_free(heartbeat_p->mutex);
+        g_free(heartbeat_p);
+        return FALSE;
+   }
     pthread_cond_init(heartbeat_p->signal,NULL);
 
     heartbeat_p->condition = 0;

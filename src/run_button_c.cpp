@@ -317,8 +317,8 @@ show_run_info (GtkButton * button, gpointer data) {
 ////////////////////////  app action callbacks ///////////////////////////////////
 
 
-static gint
-shell_child_pid(gint pid){
+static glong
+shell_child_pid(glong pid){
     gchar *pcommand = g_strdup_printf("ps ax -o ppid,pid");
     FILE *p = popen(pcommand, "r");
     if (!p){
@@ -328,9 +328,9 @@ shell_child_pid(gint pid){
     } 
     g_free(pcommand);
 
-    DBG("** looking for shell child of %d\n", pid);
-    gint cpid = -1;
-    gchar *spid = g_strdup_printf("%d", pid);
+    DBG("** looking for shell child of %ld\n", pid);
+    glong cpid = -1;
+    gchar *spid = g_strdup_printf("%ld", pid);
     gchar buffer[64];
     memset(buffer, 0, 64);
 
@@ -342,7 +342,7 @@ shell_child_pid(gint pid){
             memset(buffer, ' ', strlen(spid));
             g_strstrip(buffer);
             errno = 0;
-            long l = strtol(buffer, NULL, 10);
+            glong l = strtol(buffer, NULL, 10);
             if (errno) {
                 g_warning("strtol() cannot parse: %s\n", buffer);
                 pclose(p);
@@ -363,10 +363,10 @@ shell_child_pid(gint pid){
 static void
 ps_renice(run_button_c *run_button_p){
 
-    gint pid = run_button_p->get_grandchild();
+    glong pid = run_button_p->get_grandchild();
     if (run_button_p->in_shell) pid = shell_child_pid(pid);
 
-    gchar *command = g_strdup_printf("renice +1 -p %d", pid);
+    gchar *command = g_strdup_printf("renice +1 -p %ld", pid);
     view_c *view_p = (view_c *) run_button_p->get_view_v();
     view_p->get_lpterm_p()->shell_command(command);
     g_free(command);
@@ -389,7 +389,7 @@ ps_signal(GtkWidget *menuitem, gpointer data){
         fprintf(stderr, "apply data: (%p) -> %p\n", (void *)menuitem, (void *)run_button_p);
     
     
-    gint pid = run_button_p->get_grandchild();
+    glong pid = run_button_p->get_grandchild();
     if (!pid) return;
     // Do we need sudo?
     gboolean sudoize = FALSE;
@@ -402,7 +402,7 @@ ps_signal(GtkWidget *menuitem, gpointer data){
         
     view_c *view_p = (view_c *) run_button_p->get_view_v();
 
-    fprintf(stderr, "signal to pid: %d (in_shell=%d sudo=%d)\n", pid, run_button_p->in_shell, sudoize);
+    fprintf(stderr, "signal to pid: %ld (in_shell=%d sudo=%d)\n", pid, run_button_p->in_shell, sudoize);
     if (sudoize) {
         //        1.undetached child will remain as zombie
         //        2.sudo will remain in wait state and button will not disappear
@@ -415,18 +415,18 @@ ps_signal(GtkWidget *menuitem, gpointer data){
         }
         gchar *command;
         if (signal_id == SIGKILL) {
-            command =  g_strdup_printf("%s -A kill -%d %d %d", sudo, signal_id, pid, run_button_p->get_grandchild());
+            command =  g_strdup_printf("%s -A kill -%d %ld %d", sudo, signal_id, pid, run_button_p->get_grandchild());
         } else {
-            command =  g_strdup_printf("%s -A kill -%d %d", sudo, signal_id, pid);
+            command =  g_strdup_printf("%s -A kill -%d %ld", sudo, signal_id, pid);
         }
         view_p->get_lpterm_p()->shell_command(command);
         g_free(command);
         g_free(sudo);
     } else {
         DBG("normal ps_signal to %d...\n", (int)pid);
-        view_p->get_lpterm_p()->print_icon_tag("emblem-important", "tag/blue", g_strdup_printf("kill -%d %d\n",
+        view_p->get_lpterm_p()->print_icon_tag("emblem-important", "tag/blue", g_strdup_printf("kill -%d %ld\n",
                 signal_id, pid));
-        kill(pid, signal_id);
+        kill((pid_t)pid, signal_id);
     }
 }
 

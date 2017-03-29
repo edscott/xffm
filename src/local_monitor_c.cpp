@@ -14,7 +14,7 @@ stat_func (GtkTreeModel *, GtkTreePath *, GtkTreeIter *, gpointer);
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-local_monitor_c::local_monitor_c(data_c *data0, const gchar *data): xfdir_c(data0, data){
+local_monitor_c::local_monitor_c(data_c *data0, const gchar *data): xfdir_c(data0, data), store(NULL){
     items_hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
     cancellable = g_cancellable_new ();
     gfile = g_file_new_for_path (data);
@@ -552,7 +552,7 @@ static gboolean stat_func (GtkTreeModel *model,
                             GtkTreePath *path,
                             GtkTreeIter *iter,
                             gpointer data){
-    struct stat *st;
+    struct stat *st=NULL;
     gchar *text;
     gchar *basename = g_path_get_basename((gchar *)data);
     gtk_tree_model_get (model, iter, 
@@ -568,11 +568,13 @@ static gboolean stat_func (GtkTreeModel *model,
     g_free(text);
     g_free(basename);
     g_free(st);
-    st = (struct stat *)calloc(1, sizeof(struct stat));
 
     GtkListStore *store = GTK_LIST_STORE(model);
     st = (struct stat *)calloc(1, sizeof(struct stat));
-    stat((gchar *)data, st);
+    if (stat((gchar *)data, st) != 0){
+        fprintf(stderr, "stat: %s\n", strerror(errno));
+        return FALSE;
+    }
 
     gtk_list_store_set (store, iter, 
             COL_STAT,st, 

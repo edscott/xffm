@@ -25,8 +25,10 @@
 ////////////////////////////////////////////////////////////////////////////////////
 
 static void *thread_f(void *data){
+    return NULL;
 }
 static void *wait_f(void *data){
+    return NULL;
 }
 
 

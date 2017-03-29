@@ -581,6 +581,10 @@ motion_notify_event (GtkWidget *widget,
     GdkEventMotion *e = (GdkEventMotion *)ev;
     GdkEventButton  *event = (GdkEventButton  *)ev;
     view_c * view_p = (view_c *)data;
+    if (!data) {
+        g_warning("motion_notify_event: data cannot be NULL\n");
+        return FALSE;
+    }
     if (!view_p->all_set_up) return FALSE;
 //    if (!view_p->get_xfdir_p()) return FALSE;
     NOOP("motion_notify, drag mode = %d\n", view_p->get_drag_mode());
@@ -650,7 +654,6 @@ motion_notify_event (GtkWidget *widget,
 
 
     if (view_p->get_dir_count() > 500) return FALSE;
-    if (!data) g_error("motion_notify_event: data cannot be NULL\n");
     view_p->highlight(e->x, e->y);
     return FALSE;
 }
@@ -659,10 +662,13 @@ static gboolean
 leave_notify_event (GtkWidget *widget,
                GdkEvent  *event,
                gpointer   data){
+    if (!data) {
+        g_warning("leave_notify_event: data cannot be NULL\n");
+        return FALSE;
+    }
     view_c * view_p = (view_c *)data;
     if (!view_p->all_set_up) return FALSE;
 
-    if (!data) g_error("leave_notify_event: data cannot be NULL\n");
     //fprintf(TRACE("leave_notify_event\n");
     view_p->get_xfdir_p()->clear_highlights();
     window_c *window_p = (window_c *)view_p->get_window_v();
@@ -902,12 +908,12 @@ view_c::setup_tooltip(gint x, gint y){
     }
     window_p->set_tooltip_path_string(path_string);
 
-    gchar *text = xfdir_p->get_tooltip_text(tpath);
-    if (!text) text = xfdir_p->make_tooltip_text(tpath);
+    gchar *fname = xfdir_p->get_tooltip_text(tpath);
+    if (!fname) fname = xfdir_p->make_tooltip_text(tpath);
 
 #if 1    
     gchar *vname = xfdir_p->get_verbatim_name(tpath);
-    gchar *markup = g_strdup_printf("<b>%s</b>", chop_excess(vname));
+    gchar *fcontent = g_strdup_printf("<b>%s</b>", chop_excess(vname));
     g_free(vname);
 #else
     gchar *vname = xfdir_p->get_verbatim_name(tpath);
@@ -922,11 +928,10 @@ view_c::setup_tooltip(gint x, gint y){
     if (!pixbuf) pixbuf = xfdir_p->get_normal_pixbuf(tpath); 
     
     GtkWidget *tt_window = get_tt_window(
-                pixbuf,     
-                text,
-                markup);
-    g_free(text);
-    g_free(markup);
+                pixbuf, fname,     
+                fcontent);
+    g_free(fname);
+    g_free(fcontent);
     window_p->set_tt_window(tt_window, path_string);
     g_free(path_string);
     
@@ -1238,12 +1243,15 @@ signal_drag_data_get (GtkWidget * widget,
         fprintf(stderr, ">>> DND send, TARGET_UTF8\n"); return;
 #endif
       case TARGET_URI_LIST:
-        fprintf(stderr, ">>> DND send, TARGET_URI_LIST\n"); 
+        {
+            fprintf(stderr, ">>> DND send, TARGET_URI_LIST\n"); 
+            xfdir_c *xfdir_p = view_p->get_xfdir_p();
+            GList *selection_list = view_p->get_selection_list();
+            gboolean result = xfdir_p->set_dnd_data(selection_data, selection_list);
+        }
+        break;
       default:
-	xfdir_c *xfdir_p = view_p->get_xfdir_p();
-	GList *selection_list = view_p->get_selection_list();
-	gboolean result = xfdir_p->set_dnd_data(selection_data, selection_list);
-	
+        fprintf(stderr, ">>> DND send, non listed target\n"); 
         break;
     }
 }

@@ -13,7 +13,7 @@ class gnu_utils_c{
         gboolean rm(void *, GList *, const gchar *);
         gboolean shred(void *, GList *, const gchar *);
     private:
-        gchar *execute_command(void *, const gchar **);
+        pid_t execute_command(void *, const gchar **);
         gchar **get_command_argv(const gchar *,GList *, const gchar *, const gchar *);
         gchar **non_empty_strsplit(const gchar *, const gchar *);
 

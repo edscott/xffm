@@ -202,11 +202,11 @@ gnu_utils_c::get_command_argv(const gchar *cmd, GList *src_list, const gchar *tg
 
 
 // This would be preferred.
-gchar * 
+pid_t 
 gnu_utils_c::execute_command(void *data,  const gchar **arguments){
     fprintf(stderr, "Now is time to execute:\n\'%s\'\n", arguments[0]);
     // execute in lpterm associated to view_p
     view_c *view_p =(view_c *)data;
     // thread wait function will return with status of command.
-    view_p->get_lpterm_p()->thread_run(arguments);
+    return view_p->get_lpterm_p()->thread_run(arguments);
 }

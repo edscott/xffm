@@ -65,7 +65,6 @@ combobox_c::combobox_c (GtkComboBox *data1, gint data2):
     dead_key(0),
     shift_pos(-1),
     cursor_pos(-1),
-    active(-1),
     extra_key_completion(NULL),
     extra_key_data(NULL),
 	
@@ -976,13 +975,13 @@ returnFALSE:
 
 void
 combobox_c::combo_changed(GtkComboBox *combo_box){
-    gint active = gtk_combo_box_get_active (combo_box);
-    NOOP("active=%d\n", active); 
+    gint combobox_active = gtk_combo_box_get_active (combo_box);
+    NOOP("active=%d\n", checkbox_active); 
     if(extra_key_completion){
         (*(extra_key_completion)) (extra_key_data);
     }
     if(quick_activate &&
-	    active != active && 
+	    combobox_active != -1 && 
 	    activate_func) {
             (*(activate_func)) ((GtkEntry *) entry, activate_user_data);
     }

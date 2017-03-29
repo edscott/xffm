@@ -9,13 +9,6 @@ static gboolean unhighlight (gpointer, gpointer, gpointer);
 xfdir_c::xfdir_c(data_c *data0, const gchar *data): menu_c(data0){
     path = g_strdup(data);
     data_p = data0;
-    gint result;
-
-    if (result){
-        cerr << "view_c::init(): " << strerror(result) << "\n";
-        throw 1;
-    }
-
 }
 
 xfdir_c::~xfdir_c(void){

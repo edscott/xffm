@@ -1,6 +1,6 @@
 #include "local_dnd_c.hpp"
 
-local_dnd_c::local_dnd_c(void *data){view_p = data;}
+local_dnd_c::local_dnd_c(void *data):key_file(NULL){view_p = data;}
 
 gchar *
 local_dnd_c::get_fulltarget(const gchar *view_target, const gchar *target, GList *list){
@@ -25,11 +25,7 @@ local_dnd_c::is_nonsense(const gchar *src){
         g_free(src_dir);
         fprintf(stderr, "Source and target directories are the same.\n");
         return TRUE;
-    } else {
-	g_free(src_dir);
-	fprintf(stderr, "unable to stat target or source...\n");
-	return TRUE;
-    }
+    } 
     g_free(src_dir);
     return FALSE;
 }
@@ -170,7 +166,7 @@ local_dnd_c::get_dialog_options(gchar **options_p, GList *list){
             show_message_dialog(dialog);
             const gchar *op = gtk_entry_get_text(options_entry);
             g_free(*options_p);
-            if (op) *options_p = (op)?g_strdup(op): g_strdup("");
+            *options_p = g_strdup(op);
         }
     } else  fprintf(stderr, "%s operation cancelled\n", vv);
 

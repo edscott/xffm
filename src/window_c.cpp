@@ -458,7 +458,7 @@ window_c::shell_dialog(void){
             fprintf(stderr, "Got: %s\n", et);
 
             response_txt = g_strdup(et);
-	    if(response_txt) g_strstrip (response_txt);
+	    g_strstrip (response_txt);
             view_c *view_p =(view_c *)get_active_view_p();
             view_p->get_lpterm_p()->shell_command(response_txt, FALSE);
 	    if (view_p->get_lpterm_p()->csh_is_valid_command(response_txt)){

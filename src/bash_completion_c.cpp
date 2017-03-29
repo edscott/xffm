@@ -242,8 +242,7 @@ bash_completion_c::msg_output(gint *match_count_p, GSList *matches, gint match_t
         return NULL;
     }
     gchar *suggest = complete_it(&matches, match_type);
-
-
+    return suggest;
 }
 
 gchar *

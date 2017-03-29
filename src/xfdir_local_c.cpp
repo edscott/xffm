@@ -64,8 +64,7 @@ xfdir_local_c::item_activated (GtkIconView *iconview, GtkTreePath *tpath, void *
     }
 
     if (!mimetype){
-        view_p->get_lpterm_p()->print_error(g_strdup_printf("%s = NULL)\n",
-                    _("Mime Type"), mimetype));
+        view_p->get_lpterm_p()->print_error(g_strdup_printf("%s = NULL)\n", _("Mime Type")));
         return;
     }
 
@@ -437,11 +436,13 @@ compare_by_name (const void *a, const void *b) {
 gboolean
 xfdir_local_c::set_dnd_data(GtkSelectionData * selection_data, GList *selection_list){
     _set_dnd_data(selection_data, selection_list, treemodel, get_path(),(gint)ACTUAL_NAME);
+    return TRUE;
 }
 
 gboolean
 xfdir_local_c::receive_dnd(const gchar *target, GtkSelectionData *data, GdkDragAction action){
     _receive_dnd(get_path(), target, data, action);
+    return TRUE;
 }
 
 gchar *
@@ -449,7 +450,6 @@ xfdir_local_c::get_path_info (GtkTreeModel *treemodel, GtkTreePath *tpath, const
     // retrieve cache st info, if available.    
     GtkTreeIter iter;
     struct stat st;
-    struct stat *st_p;
     gtk_tree_model_get_iter (treemodel, &iter, tpath);
     gchar *file_path;
     gchar *mimetype;
@@ -463,25 +463,20 @@ xfdir_local_c::get_path_info (GtkTreeModel *treemodel, GtkTreePath *tpath, const
     gchar *full_path = g_build_filename(dir,file_path,NULL);
     g_free(file_path);
     
-    if (st_p) memcpy(&st, st_p, sizeof(struct stat)); 
-    else {
-	if (lstat(full_path, &st) != 0) {
-	    gchar *u = utf_string(full_path);
-	    g_free(full_path);
-	    g_free(mimetype);
-	    g = g_strdup_printf(_("Cannot lstat \"%s\":\n%s\n"), u, strerror(errno));
-	    g_free(u);
-	    return g;
-	} else {
-	    st_p = (struct stat *)calloc(1, sizeof(struct stat));
-	    if (st_p) {
-		memcpy(st_p, &st, sizeof(struct stat));
-		gtk_list_store_set (GTK_LIST_STORE(treemodel), &iter,
-		    COL_STAT, st_p, 
-		    -1);
-	    }
-	}
+    if (lstat(full_path, &st) != 0) {
+        gchar *u = utf_string(full_path);
+        g_free(full_path);
+        g_free(mimetype);
+        g = g_strdup_printf(_("Cannot lstat \"%s\":\n%s\n"), u, strerror(errno));
+        g_free(u);
+        return g;
+    } else {
+        struct stat *st_p = (struct stat *)calloc(1, sizeof(struct stat));
+        if (!st_p) g_error("xfdir_local_c:: cannot allocate struct stat pointer\n");
+        memcpy(st_p, &st, sizeof(struct stat));
+        gtk_list_store_set (GTK_LIST_STORE(treemodel), &iter, COL_STAT, st_p, -1);
     }
+    
     if (!mimefile){
 	mimefile = mime_function(full_path, "mime_file");
 	gtk_list_store_set (GTK_LIST_STORE(treemodel), &iter,
@@ -594,8 +589,7 @@ xfdir_local_c::path_info (const gchar *file_path, struct stat *st, const gchar *
             g_free (q);
         }
     } 
-    gchar *p = g_strdup_printf ("<i>%s</i>\n", pretext);
-    pretext_stuff = p;
+    if (!pretext_stuff) pretext_stuff = g_strdup_printf ("<i>%s</i>\n", pretext);;
     gchar *mime_stuff = NULL;
 	
     // mime overkill    

@@ -68,7 +68,6 @@ class combobox_c: public base_completion_c, virtual utility_c {
 	gint dead_key;
 	gint shift_pos;
 	gint cursor_pos;
-	gint active;
 
 	gint completion_type;
 

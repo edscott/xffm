@@ -1187,6 +1187,7 @@ mime_c::mime_gencache (gchar *data) {
             if (!g_mkdir_with_parents(location, 0600)){
                 g_warning("Cannot create config directory: %s\n", location);
                 g_free(location);
+                pthread_mutex_unlock (&data_p->cache_mutex);
                 return NULL;
             }
         }
