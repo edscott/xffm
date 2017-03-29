@@ -631,24 +631,14 @@ mime_c::mime_build_hashes (void) {
     xmlKeepBlanksDefault (0);
 
     if((doc = xmlParseFile (mimefile)) == NULL) {
-        gchar *g = g_strconcat (mimefile, ".bak", NULL);
-        DBG ("mime-module, invalid xml file %s.bak\n", mimefile);
-        if (rename (mimefile, g)<0){
-            fprintf(stderr, "mime_build_hashes(): rename %s->%s (%s)\n",mimefile, g,strerror(errno));
-        }
-        g_free (g);
+        fprintf(stderr, "mime_build_hashes(): Cannot parse XML file: %s. Replace this file.\n", mimefile);
         g_free (mimefile);
         return;
     }
 
     node = xmlDocGetRootElement (doc);
     if(!xmlStrEqual (node->name, (const xmlChar *)"mime-info")) {
-        gchar *g = g_strconcat (mimefile, ".bak", NULL);
-        DBG ("mime-module, invalid xml file %s.bak\n", mimefile);
-        if (rename (mimefile, g)<0){
-            fprintf(stderr, "rename(): %s --> %s (%s)\n", mimefile, g, strerror(errno));
-        }
-        g_free (g);
+        fprintf(stderr, "Invalid XML file: %s (no mime-info). Replace this file.\n", mimefile);
         g_free (mimefile);
         xmlFreeDoc (doc);
         return;
@@ -1285,14 +1275,12 @@ mime_c::get_cache_path (const gchar *which) {
 gint
 mime_c::check_dir (char *path) {
     struct stat st;
-    if(stat (path, &st) < 0) {
-        if(mkdir (path, 0770) < 0)
-            return FALSE;
+    if(!g_file_test(path, G_FILE_TEST_EXISTS)) {
+        if(mkdir (path, 0770) < 0) return FALSE;
         return TRUE;
     }
-    if(S_ISDIR (st.st_mode)) {
-        if(access (path, W_OK) < 0)
-            return FALSE;
+    if(g_file_test(path, G_FILE_TEST_IS_DIR)) {
+        if(access (path, W_OK) < 0) return FALSE;
         return TRUE;
     }
     return FALSE;

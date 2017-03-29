@@ -32,7 +32,6 @@ class  local_dnd_c: virtual gnu_utils_c{
         gchar *no_c;
         gchar *fulltarget;
         gchar *kfile;
-        gchar *config_dir;
         GKeyFile *key_file;
 
         void *view_p;

@@ -346,7 +346,6 @@ xfdir_local_c::reload(const gchar *data){
 }
    
 
-
 void
 xfdir_local_c::insert_list_into_model(GList *data, GtkListStore *list_store){
     GList *directory_list = (GList *)data;

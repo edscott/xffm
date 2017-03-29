@@ -213,7 +213,7 @@ local_dnd_c::user_selected_options(gchar **options_p, GList *list){
 gchar *
 local_dnd_c::get_options(GdkDragAction action, GList *list)
 {   
-    config_dir = g_build_filename(g_get_home_dir(),".config","xffm",NULL);
+    gchar *config_dir = g_build_filename(g_get_home_dir(),".config","xffm",NULL);
     if (!g_file_test(config_dir, G_FILE_TEST_IS_DIR)){
         g_mkdir_with_parents(config_dir, 0700);
     }

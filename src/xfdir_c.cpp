@@ -6,7 +6,7 @@
 using namespace std;
 static gboolean unhighlight (gpointer, gpointer, gpointer);
 
-xfdir_c::xfdir_c(data_c *data0, const gchar *data): menu_c(data0){
+xfdir_c::xfdir_c(data_c *data0, const gchar *data): menu_c(data0), dir_count(0){
     path = g_strdup(data);
     data_p = data0;
 }
@@ -15,6 +15,10 @@ xfdir_c::~xfdir_c(void){
     g_free(path);
     g_object_unref(treemodel);
 }
+
+gint
+xfdir_c::get_dir_count(void){ return dir_count;}
+
 
 gboolean
 xfdir_c::set_dnd_data(GtkSelectionData * selection_data, GList *selection_list){
@@ -170,9 +174,6 @@ const gchar *
 xfdir_c::get_path(void){return (const gchar *)path;}
 GtkTreeModel *
 xfdir_c::get_tree_model (void){return treemodel;}
-
-gint
-xfdir_c::get_dir_count(void){ return dir_count;}
 
 
 gint 

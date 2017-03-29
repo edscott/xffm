@@ -126,7 +126,7 @@ local_monitor_c::start_monitor(const gchar *data, GtkTreeModel *data2){
     fprintf(stderr, "*** start_monitor: %s\n", data);
     if (gfile) g_object_unref(gfile);
     gfile = g_file_new_for_path (data);
-    error=NULL;
+    GError *error=NULL;
     if (monitor) g_object_unref(monitor);
     monitor = g_file_monitor_directory (gfile, G_FILE_MONITOR_WATCH_MOVES, cancellable,&error);
     if (error){

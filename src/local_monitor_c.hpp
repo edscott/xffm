@@ -61,7 +61,6 @@ class local_monitor_c: public xfdir_c, virtual utility_c {
         GCancellable *cancellable;
         GFile *gfile;
         GFileMonitor *monitor;
-        GError *error;
         GtkListStore *store;
         gchar *get_iconname(xd_t *);
         gchar *get_iconname(xd_t *, gboolean);
