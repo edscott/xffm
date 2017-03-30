@@ -177,6 +177,7 @@ gtk_c::mk_menu(const gchar **data, void (*menu_callback)(GtkWidget *, gpointer))
     for (i=0;p && *p; p++,i++){
         const gchar *icon_name = (const gchar *)g_hash_table_lookup(data_p->iconname_hash, _(*p));
         GtkWidget *v = menu_item_new(icon_name, _(*p));
+        g_object_set_data(G_OBJECT(v), "menu", (void *)menu);
         gtk_container_add (GTK_CONTAINER (menu), v);
         g_signal_connect ((gpointer) v, "activate", G_CALLBACK (*menu_callback), (void *)_(*p));
         gtk_widget_show (v);

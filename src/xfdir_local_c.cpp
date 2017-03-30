@@ -1,3 +1,4 @@
+#include "window_c.hpp"
 #include "view_c.hpp"
 #include "local_dnd_c.hpp"
 #include "xfdir_local_c.hpp"
@@ -15,8 +16,9 @@ xfdir_local_c::xfdir_local_c(data_c *data0, const gchar *data, void *dataV):
 {
 
     data_p = data0;
+    view_v = dataV;
     create_menu();
-    shows_hidden = ((view_c *)dataV)->shows_hidden();
+    shows_hidden = ((view_c *)view_v)->shows_hidden();
     NOOP( "data2=%d\n", data2);
     treemodel = mk_tree_model();
     user_string_mutex=PTHREAD_MUTEX_INITIALIZER;
@@ -34,6 +36,13 @@ xfdir_local_c::~xfdir_local_c(void){
 void
 xfdir_local_c::destroy_tree_model(void){
     gtk_tree_model_foreach (treemodel, free_stat_func, NULL); 
+}
+
+void
+xfdir_local_c::open_new_tab(void){
+    view_c *view_p = (view_c *)view_v;
+    window_c *window_p = (window_c *)view_p->get_window_v();
+    window_p->create_new_page(path);
 }
 
 void
@@ -918,8 +927,10 @@ xfdir_local_c::get_xfdir_iconname(void){
 
 static void menu_option(GtkWidget *menu_item, gpointer data){
     const gchar *what = (const gchar *)data;
+    GtkWidget *menu = (GtkWidget *)g_object_get_data(G_OBJECT(menu_item), "menu");
+    xfdir_local_c *xfdir_local_p = (xfdir_local_c *)g_object_get_data(G_OBJECT(menu), "xfdir_local_p");
     fprintf(stderr, "menu option: %s\n", what);
-    if (strcmp(what, _("Open in New Tab"))==0){}
+    if (strcmp(what, _("Open in New Tab"))==0){xfdir_local_p->open_new_tab();}
     else if (strcmp(what, _("Open with"))==0){}
     else if (strcmp(what, _("Search"))==0){}
     else if (strcmp(what, _("Cut"))==0){}
@@ -952,6 +963,8 @@ xfdir_local_c::create_menu(void){
 
     selection_menu = mk_menu(selection_items, menu_option);
     directory_menu = mk_menu(directory_items, menu_option);
+    g_object_set_data(G_OBJECT(selection_menu),"xfdir_local_p", (void *)this);
+    g_object_set_data(G_OBJECT(directory_menu),"xfdir_local_p", (void *)this);
 }
 
 gboolean

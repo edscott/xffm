@@ -18,6 +18,7 @@ class xfdir_local_c: public local_monitor_c, public local_dnd_c, virtual utility
         virtual void highlight_drop(GtkTreePath *);
         
 	gboolean popup(GtkTreePath *);
+        void open_new_tab(void);
 	
        
     protected:
@@ -58,6 +59,7 @@ class xfdir_local_c: public local_monitor_c, public local_dnd_c, virtual utility
         GtkMenu *selection_menu;
         GtkMenu *directory_menu;
 
+        void *view_v;
 	data_c *data_p;
 
 };
