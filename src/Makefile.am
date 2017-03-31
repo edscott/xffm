@@ -52,6 +52,7 @@ xffm_SOURCES = \
 	      menu_c.cpp \
 	  xfdir_local_c.cpp \
 	    local_monitor_c.cpp \
+	    local_cnp_c.cpp \
 	    local_dnd_c.cpp
 
 xffm_CPPFLAGS = $(FLAGS) $(AM_CPPFLAGS)

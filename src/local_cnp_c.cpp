@@ -1,9 +1,21 @@
 #include "local_cnp_c.hpp"
-#include "view_c.hpp"
+#include <sys/mman.h>
+#include <sys/stat.h>        /* For mode constants */
+#include <fcntl.h>           /* For O_* constants */
 
-
-local_cnp_c::local_cnp_c(void *data):key_file(NULL){
+local_cnp_c::local_cnp_c(void *data){
     view_v = data;
+}
+
+#define PASTE_SHM_NAME paste_shm_name()
+
+static const gchar*
+paste_shm_name(void){
+    static const gchar *name=NULL;
+    if (!name){
+	name = g_strdup_printf("/%d-rfm-pasteboard", (gint)geteuid());
+    }
+    return name;
 }
 
 void
@@ -33,10 +45,10 @@ local_cnp_c::store_paste_buffer(gchar *buffer, gint len){
    // Close file descriptor
     close(fd);
     // Save size as first sizeof(gint) bytes.
-    gint *len_p = p;
-    *len_p=sizeof(gint)+strlen(buffer)+1;
+    gint *len_p = (gint *)p;
+    *len_p = sizeof(gint) + strlen(buffer) + 1;
     // Save text buffer now.
-    gchar *buffer_p = p + sizeof(gint);
+    gchar *buffer_p = (gchar *)p + sizeof(gint);
     strcpy(buffer_p, buffer);
     // Put in shared memory.
     if(msync (p, sizeof(gint)+strlen(buffer)+1, MS_SYNC) < 0){
@@ -80,7 +92,7 @@ local_cnp_c::get_paste_buffer (void ) {
 
 
     void *pp = mmap (NULL, len, PROT_READ, MAP_SHARED, fd, 0);
-    gchar *buffer_p = pp + sizeof(gint);
+    gchar *buffer_p = (gchar *)pp + sizeof(gint);
     gchar *buffer = g_strdup(buffer_p);
     munmap (pp, len);
     close(fd);
@@ -96,9 +108,8 @@ local_cnp_c::pasteboard_status (void) {
     // might mess it up and rodent will still think the pasteboard
     // is valid...
 
-    rfm_update_pasteboard ();
-    view_c *view_p = (view_c *)view_v;
-    gchar *b = view_p->xbuffer;
+    update_pasteboard ();
+    gchar *b = xbuffer;
     if(!b || !strlen (b)) return 0;
     
     const gchar *cut = "#xfvalid_buffer:cut";
@@ -112,10 +123,9 @@ local_cnp_c::pasteboard_status (void) {
 
 gchar **
 local_cnp_c::pasteboard_v(void){
-    if (!rfm_pasteboard_status ()) return NULL;
+    if (!pasteboard_status ()) return NULL;
     // this is to skip the valid buffer line:
-    view_c *view_p = (view_c *)view_v;
-    gchar *search = strchr (view_p->xbuffer, '\n');
+    gchar *search = strchr (xbuffer, '\n');
     if(!search)return NULL;
     search++;
     gchar **v = g_strsplit(search, "\n", -1);
@@ -126,43 +136,43 @@ local_cnp_c::pasteboard_v(void){
 /* returns 0 if not in pasteboard, 1 if in copy pasteboard or 2 if
  * in cut pasteboard */
 int
-local_cnp_c::in_pasteboard (record_entry_t * en) {
-    if(!en || !en->path) return FALSE;
-    if(IS_ROOT_TYPE (en->type) && !IS_SDIR(en->type)) return FALSE;
+local_cnp_c::in_pasteboard (const gchar *item_path) {
+    if(!item_path) return FALSE;
+    //if(IS_ROOT_TYPE (en->type) && !IS_SDIR(en->type)) return FALSE;
 
-    gchar **pasteboard_v = rfm_pasteboard_v(view_p);
-    gchar **p = pasteboard_v;
+    gchar **pasteboard_p = pasteboard_v();
+    gchar **p = pasteboard_p;
     gint retval=0;
-    gint status = rfm_pasteboard_status (view_p);
+    gint status = pasteboard_status ();
     for(; p && *p; p++){
-        if(strcmp (*p, en->path) == 0) {
+        if(strcmp (*p, item_path) == 0) {
             retval = status;
             break;
         }
     }
-    g_strfreev(pasteboard_v);
+    g_strfreev(pasteboard_p);
     return retval;
 }
 
 gboolean
-local_cnp_c::update_pasteboard (view_t * view_p) {
-    if(!view_p->xbuffer) view_p->xbuffer = rfm_get_paste_buffer ();
-    gchar *current_xbuffer = rfm_get_paste_buffer ();
-    if (!current_xbuffer && !view_p->xbuffer) return FALSE;
-    if(!view_p->xbuffer && current_xbuffer){
-        view_p->xbuffer = current_xbuffer;
+local_cnp_c::update_pasteboard (void) {
+    if(!xbuffer) xbuffer = get_paste_buffer ();
+    gchar *current_xbuffer = get_paste_buffer ();
+    if (!current_xbuffer && !xbuffer) return FALSE;
+    if(!xbuffer && current_xbuffer){
+        xbuffer = current_xbuffer;
         return TRUE;
     }
-    if(view_p->xbuffer && !current_xbuffer){
-        g_free (view_p->xbuffer);
-        view_p->xbuffer = NULL;
+    if(xbuffer && !current_xbuffer){
+        g_free (xbuffer);
+        xbuffer = NULL;
         return TRUE;
     }
     // here both pointers are valid
-    if(strcmp (current_xbuffer, view_p->xbuffer)) {
+    if(strcmp (current_xbuffer, xbuffer)) {
         NOOP ("XBUFFER: xbuffer has changed! %s\n", current_xbuffer);
-        g_free (view_p->xbuffer);
-        view_p->xbuffer = current_xbuffer;
+        g_free (xbuffer);
+        xbuffer = current_xbuffer;
         return TRUE;
     } else {
         NOOP ("XBUFFER: xbuffer OK!\n");
@@ -172,7 +182,7 @@ local_cnp_c::update_pasteboard (view_t * view_p) {
 
 }
 
-
+#if 0
 static gint
 gui_pasteboard_list (GList ** list_p) {
 
@@ -450,4 +460,4 @@ paste_callback (widgets_t *widgets_p, gboolean symlink) {
     private_paste (widgets_p, view_p, symlink);
 }
 
-
+#endif

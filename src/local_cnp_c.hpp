@@ -14,11 +14,13 @@ class  local_cnp_c: virtual gnu_utils_c{
         void store_paste_buffer(gchar *, gint);
         gint get_paste_length(void);
         gchar *get_paste_buffer (void);
-        int pasteboard_status (void);
+        gint pasteboard_status (void);
 
         gchar **pasteboard_v(void);
-        int in_pasteboard (void, record_entry_t * en);
+        gint in_pasteboard (const gchar *);
         gboolean update_pasteboard (void);
+
+        gchar *xbuffer;
         
 };
 
