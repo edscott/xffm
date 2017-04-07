@@ -1,5 +1,6 @@
 #include "gtk_c.hpp"
 #include "intl.h"
+GHashTable *gtk_c::iconname_hash=NULL;
 
 gint 
 gtk_c::get_icon_size(const gchar *name){
@@ -7,14 +8,36 @@ gtk_c::get_icon_size(const gchar *name){
     return GTK_ICON_SIZE_DIALOG;
 }
 
-gtk_c::gtk_c(data_c *data0): tooltip_c(data0), pixbuf_c(data0), mime_c(data0){
-    data_p = data0;
+gtk_c::gtk_c(void){
+    if (!iconname_hash){
+        iconname_hash = g_hash_table_new(g_str_hash, g_str_equal);
+        populate_iconname_hash();
+    }
     //fprintf(stderr, "gtk_c constructor OK\n");
 }
 
 
 gtk_c::~gtk_c(void){
     DBG("gtk_c::~gtk_c\n");
+}
+
+void
+gtk_c::populate_iconname_hash(void){
+    g_hash_table_insert(iconname_hash, _("Open terminal"), (void *)"terminal");
+    g_hash_table_insert(iconname_hash, _("Execute Shell Command"), (void *)"execute");
+    g_hash_table_insert(iconname_hash, _("Paste"), (void *)"edit-paste");
+    g_hash_table_insert(iconname_hash, _("Add bookmark"), (void *)"list-add");
+    g_hash_table_insert(iconname_hash, _("Remove bookmark"), (void *)"list-remove");
+    g_hash_table_insert(iconname_hash, _("Search"), (void *)"find");
+    g_hash_table_insert(iconname_hash, _("Close"), (void *)"cancel");
+    g_hash_table_insert(iconname_hash, _("Exit"), (void *)"window-close");
+    g_hash_table_insert(iconname_hash, _("Open with"), (void *)"execute");
+    g_hash_table_insert(iconname_hash, _("Cut"), (void *)"cut");
+    g_hash_table_insert(iconname_hash, _("Copy"), (void *)"copy");
+    g_hash_table_insert(iconname_hash, _("Delete"), (void *)"delete");
+    g_hash_table_insert(iconname_hash, _("Shred"), (void *)"dialog-warning");
+    g_hash_table_insert(iconname_hash, _("bcrypt"), (void *)"emblem-keyhole");
+    g_hash_table_insert(iconname_hash, _("Open in New Tab"), (void *)"open");
 }
 
 void
@@ -175,7 +198,7 @@ gtk_c::mk_menu(const gchar **data, void (*menu_callback)(GtkWidget *, gpointer))
     const gchar **p = data;
     gint i;
     for (i=0;p && *p; p++,i++){
-        const gchar *icon_name = (const gchar *)g_hash_table_lookup(data_p->iconname_hash, _(*p));
+        const gchar *icon_name = (const gchar *)g_hash_table_lookup(iconname_hash, _(*p));
         GtkWidget *v = menu_item_new(icon_name, _(*p));
         g_object_set_data(G_OBJECT(v), "menu", (void *)menu);
         gtk_container_add (GTK_CONTAINER (menu), v);

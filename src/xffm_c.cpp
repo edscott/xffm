@@ -3,17 +3,18 @@
 #include <stdlib.h>
 #include "xffm_c.hpp"
 #include "window_c.hpp"
+GtkApplication *xffm_c::app = NULL;
+
 static void activate(GtkApplication *, void *);
 static void startup(GtkApplication *, void *);  
 static void shutdown(GtkApplication *, void *);
 static void open (GtkApplication *, gpointer, gint, gchar *, gpointer);
 //////////////////////////////////////////////////////////////////
-xffm_c::xffm_c(data_c *data0, gint in_argc, gchar **in_argv){
-    data_p = data0;
+xffm_c::xffm_c(gint in_argc, gchar **in_argv){
 
     argc = in_argc;
     argv = in_argv;
-    GtkApplication *app = gtk_application_new (NULL, G_APPLICATION_HANDLES_OPEN);
+    app = gtk_application_new (NULL, G_APPLICATION_HANDLES_OPEN);
     GError *error=NULL;
     g_application_register (G_APPLICATION(app), NULL, &error);
     if (error){
@@ -21,7 +22,6 @@ xffm_c::xffm_c(data_c *data0, gint in_argc, gchar **in_argv){
         throw 1;
     }
 
-    data_p->set_app(app);
 
     
     g_signal_connect (app, "activate", G_CALLBACK (activate), (void *)this);
@@ -32,18 +32,18 @@ xffm_c::xffm_c(data_c *data0, gint in_argc, gchar **in_argv){
     
 xffm_c::~xffm_c(void){
     DBG("xffm_c::~xffm_c\n");
-    GList *l = gtk_application_get_windows(data_p->get_app());
+    GList *l = gtk_application_get_windows(app);
     for (;l && l->data; l=l->next){
         GtkWindow *w = (GtkWindow *)l->data;
 	window_c *window_p = (window_c *)g_object_get_data(G_OBJECT(l->data), "window_p");
-        gtk_application_remove_window(data_p->get_app(), w);
+        gtk_application_remove_window(app, w);
 	delete window_p;
     }
 }  
 
 gint 
 xffm_c::run(void){
-    return g_application_run (G_APPLICATION (data_p->get_app()), argc, argv);
+    return g_application_run (G_APPLICATION (app), argc, argv);
 };
 
 window_c * 
@@ -58,10 +58,10 @@ xffm_c::add_window_p(const gchar *data){
 
 window_c * 
 xffm_c::xffm_init(const gchar *data){
-    window_c *window_p = new window_c(data_p);
+    window_c *window_p = new window_c(app);
     // initial view...
     window_p->create_new_page(data);
-    gtk_application_add_window (data_p->get_app(), window_p->get_window());
+    gtk_application_add_window (app, window_p->get_window());
     return window_p;
 }
 

@@ -5,6 +5,7 @@
 #include "xfdir_local_c.hpp"
 #include "combobox_c.hpp"
 
+
 static void on_new_page(GtkWidget *, gpointer);
 static void on_go_home(GtkWidget *, gpointer);
 static gboolean window_keyboard_event (GtkWidget *, GdkEventKey *, gpointer);
@@ -20,13 +21,13 @@ static void  finish(GSimpleAction *, GVariant *, gpointer data);
 
 
 
-window_c::window_c(data_c *data0):menu_c(data0) {
-    data_p = data0;
+window_c::window_c(GtkApplication *data) {
+    app = data;
     view_list=NULL;
     tt_window=NULL;
     tooltip_path_string = NULL;
-    create_menu_model(data_p->get_app());
-    add_actions(data_p->get_app());
+    create_menu_model();
+    add_actions();
 
     view_list_mutex = PTHREAD_MUTEX_INITIALIZER;
     window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
@@ -110,11 +111,6 @@ window_c::~window_c(void) {
     pthread_mutex_unlock(&view_list_mutex);
 }
 
-data_c *
-window_c::get_data_p(void){
-    return data_p;
-}
-
 const gchar *
 window_c::get_tooltip_path_string(void){
     return (const gchar *)tooltip_path_string;
@@ -175,7 +171,7 @@ window_c::remove_view_from_list(void *view_p){
     pthread_mutex_unlock(&view_list_mutex);
     delete ((view_c *)view_p);
     if (g_list_length(view_list) == 0) {
-        gtk_application_remove_window (data_p->get_app(), GTK_WINDOW(window));
+        gtk_application_remove_window (app, GTK_WINDOW(window));
     }
 }
 
@@ -200,7 +196,7 @@ window_c::create_new_page(const gchar *path){
 	g_warning("window_c::create_new_page path is NULL\n");
 	return;
     }
-    view_c *view_p = new view_c(data_p, (void *)this, get_notebook(), path);
+    view_c *view_p = new view_c((void *)this, get_notebook(), path);
     add_view_to_list((void *)view_p);
 }
 
@@ -254,8 +250,7 @@ click_button(GtkWidget *w, void *data){
 static void 
 destroy(GtkWidget *window, void *data){
     window_c *window_p = (window_c *)data;
-    data_c *data_p = window_p->get_data_p();
-    gtk_application_remove_window (data_p->get_app(), GTK_WINDOW(window_p->get_window()));
+    gtk_application_remove_window (window_p->app, GTK_WINDOW(window_p->get_window()));
 }
 
 static gboolean
@@ -275,7 +270,7 @@ window_tooltip_f (GtkWidget  *widget,
 
 
 void
-window_c::create_menu_model(GtkApplication *app){
+window_c::create_menu_model(void){
     GtkBuilder *builder;
     builder = gtk_builder_new ();
     const gchar *items[]={        
@@ -319,7 +314,7 @@ window_c::create_menu_model(GtkApplication *app){
 }
 
 void
-window_c::add_actions(GtkApplication *app){
+window_c::add_actions(void){
     GActionEntry app_entries[] =
     {
       { "home", home, NULL, NULL, NULL },

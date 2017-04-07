@@ -3,12 +3,11 @@
 #include "xffm+.h"
 #include "gtk_c.hpp"
 #include "utility_c.hpp"
-#include "data_c.hpp"
 
 
 class print_c: virtual utility_c, protected pixbuf_c {
     public:
-        print_c(data_c *, void *);
+        print_c(void *);
         void print_error(gchar *);
         void print_debug(gchar *);
         void print(gchar *);

@@ -3,7 +3,6 @@
 #include "xffm+.h"
 #include "run_c.hpp"
 #include "run_button_c.hpp"
-#include "data_c.hpp"
 #define USER_RFM_CACHE_DIR      g_get_user_cache_dir(),"rfm"
 #define USER_DBH_CACHE_DIR	USER_RFM_CACHE_DIR,"dbh"
 #define RUN_DBH_FILE 		USER_DBH_CACHE_DIR,"run_hash.dbh"
@@ -12,7 +11,7 @@
 
 class lpterm_c: public run_c, virtual utility_c {
     public:
-        lpterm_c(data_c *, void *);
+        lpterm_c(void *);
         ~lpterm_c(void);
         gboolean is_iconview_key(GdkEventKey *);
         gboolean is_lpterm_key(GdkEventKey *);
@@ -47,7 +46,6 @@ class lpterm_c: public run_c, virtual utility_c {
 
         GList *run_button_list;
         pthread_mutex_t *rbl_mutex;
-	data_c *data_p;
 
 
 }; 

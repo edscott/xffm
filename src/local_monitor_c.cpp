@@ -14,7 +14,7 @@ stat_func (GtkTreeModel *, GtkTreePath *, GtkTreeIter *, gpointer);
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-local_monitor_c::local_monitor_c(data_c *data0, const gchar *data): xfdir_c(data0, data), store(NULL){
+local_monitor_c::local_monitor_c( const gchar *data): xfdir_c(data), store(NULL){
     items_hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
     cancellable = g_cancellable_new ();
     gfile = g_file_new_for_path (data);

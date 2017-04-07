@@ -266,7 +266,7 @@ fork_function (void *data) {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-run_c::run_c(data_c *data0, void *data): run_output_c(data0, data) {}
+run_c::run_c(void *data): run_output_c(data) {}
 
 pid_t run_c::thread_run(const gchar **arguments){
 

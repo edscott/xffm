@@ -4,7 +4,7 @@
 
 class pathbar_c: virtual utility_c, public gtk_c {
     public:
-	pathbar_c(data_c *, void *window_v, GtkNotebook *data);
+	pathbar_c(void *window_v, GtkNotebook *data);
 	GtkWidget *get_pathbar(void);
         void pathbar_ok(GtkButton *);
         void toggle_pathbar(const gchar *);

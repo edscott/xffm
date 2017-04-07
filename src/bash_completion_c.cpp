@@ -12,7 +12,7 @@ ya_strcmp ( gconstpointer a, gconstpointer b) {
 
 
 
-bash_completion_c::bash_completion_c(data_c *data0, void *data): print_c(data0, data){
+bash_completion_c::bash_completion_c(void *data): print_c(data){
 }
 
 void

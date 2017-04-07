@@ -6,7 +6,7 @@
 
 class xfdir_local_c: public local_monitor_c, public local_dnd_c, virtual utility_c{
     public:
-	xfdir_local_c(data_c *, const gchar *, void *);
+	xfdir_local_c(const gchar *, void *);
         ~xfdir_local_c(void);
         void reload(const gchar *);
         gchar *make_tooltip_text (GtkTreePath *);
@@ -59,8 +59,8 @@ class xfdir_local_c: public local_monitor_c, public local_dnd_c, virtual utility
         GtkMenu *selection_menu;
         GtkMenu *directory_menu;
 
+	static pthread_mutex_t readdir_mutex;
         void *view_v;
-	data_c *data_p;
 
 };
 

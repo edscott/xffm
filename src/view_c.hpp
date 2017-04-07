@@ -6,7 +6,6 @@
 #include "print_c.hpp"
 
 #include "thread_control_c.hpp"
-#include "data_c.hpp"
 #include "utility_c.hpp"
 
 #include "xfdir_root_c.hpp"
@@ -22,7 +21,7 @@ enum {
 
 class view_c: public widgets_c, public thread_control_c, virtual utility_c {
     public:
-        view_c(data_c *, void *, GtkNotebook *, const gchar *);
+        view_c(void *, GtkNotebook *, const gchar *);
         ~view_c(void);
         void reload(const gchar *);
         GtkTreeModel *get_tree_model(void);
@@ -76,7 +75,6 @@ class view_c: public widgets_c, public thread_control_c, virtual utility_c {
 
         lpterm_c *lpterm_p;
         xfdir_c *xfdir_p;
-	data_c *data_p;
     
         void create_target_list (void);
         GtkTargetList	*target_list;

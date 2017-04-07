@@ -9,7 +9,7 @@
 static void *insert_decoration_f (void *);
 
     
-pixbuf_icons_c::pixbuf_icons_c(data_c *data0): pixbuf_hash_c(data0){
+pixbuf_icons_c::pixbuf_icons_c(void){
     pixbuf_mutex = PTHREAD_MUTEX_INITIALIZER;
     icon_theme = gtk_icon_theme_get_default ();
     if (!icon_theme){

@@ -116,11 +116,10 @@ signal_drag_delete (GtkWidget * widget, GdkDragContext * context, gpointer data)
 // class methods
 ////////////////////////////////////////
 
-view_c::view_c(data_c *data0, void *window_data, GtkNotebook *notebook, const gchar *data) : widgets_c(data0, window_data, notebook), thread_control_c((void *)this) {
+view_c::view_c(void *window_data, GtkNotebook *notebook, const gchar *data) : widgets_c(window_data, notebook), thread_control_c((void *)this) {
     xfdir_p = NULL; // to avoid race with gtk loop
     NOOP( "view_c::view_c.....\n");
     all_set_up = FALSE;
-    data_p = data0;
     init();
     xfdir_type = get_xfdir_type(data);
     xfdir_p = create_xfdir_p(xfdir_type, data);
@@ -152,11 +151,11 @@ xfdir_c *
 view_c::create_xfdir_p(gint type, const gchar *data){
     xfdir_c *new_xfdir_p;
     if (g_file_test(data, G_FILE_TEST_IS_DIR) ){
-	new_xfdir_p = (xfdir_c *)new LOCAL_CLASS(data_p, data, (void *)this);
+	new_xfdir_p = (xfdir_c *)new LOCAL_CLASS(data, (void *)this);
 	gtk_widget_show(GTK_WIDGET(get_hidden_button()));
     } else {
 	// load specific class xfdir here
-	new_xfdir_p = (xfdir_c *)new ROOT_CLASS(data_p);
+	new_xfdir_p = (xfdir_c *)new ROOT_CLASS();
 	gtk_widget_hide(GTK_WIDGET(get_hidden_button()));
     }
     return new_xfdir_p;
@@ -190,7 +189,7 @@ view_c::init(void){
     signals();
     pack();
     // lp_term object creation
-    lpterm_p = new lpterm_c(data_p, (void *)this);
+    lpterm_p = new lpterm_c((void *)this);
     
     lpterm_p->print_status(g_strdup(""));
     lpterm_p->show_text();

@@ -13,8 +13,7 @@ static gboolean status_keyboard_event (GtkWidget *, GdkEventKey *, gpointer);
 
 //////////////////////////////////////////////////////////////////
 
-lpterm_c::lpterm_c(data_c *data0, void *data): run_c(data0, data){
-    data_p = data0;
+lpterm_c::lpterm_c(void *data): run_c(data){
     active = FALSE;
     view_c *view_p = (view_c *)data;
     iconview = view_p->get_iconview();
@@ -372,7 +371,7 @@ lpterm_c::shell_command(const gchar *c, gboolean save){
     pid_t pid = thread_run(command?command:c);
     if (!pid) return NULL; 
     run_button_c *run_button_p = NULL;
-    run_button_p = new run_button_c(data_p, view_v, c, pid, run_in_shell(c));
+    run_button_p = new run_button_c(view_v, c, pid, run_in_shell(c));
     // We save the original sudo command, not the one modified with "-A"
     if (save) csh_save_history(c);
     g_free (command);

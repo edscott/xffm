@@ -5,7 +5,6 @@
 #include "utility_c.hpp"
 #include "mime_magic_c.hpp"
 #include "lite_c.hpp"
-#include "data_c.hpp"
 
 #define USER_RFM_DIR            g_get_user_config_dir(),"rfm"
 #define USER_RFM_CACHE_DIR      g_get_user_cache_dir(),"rfm"
@@ -17,7 +16,7 @@
 
 class mime_c: virtual utility_c, public mime_magic_c, public lite_c {
     public:
-        mime_c(data_c *);
+        mime_c(void);
         ~mime_c(void);
         gchar *mime_type (const gchar *);
         gchar *mime_type (const gchar *, struct stat *);
@@ -49,7 +48,6 @@ class mime_c: virtual utility_c, public mime_magic_c, public lite_c {
         void *mime_gencache(gchar *);
 
     private:
-        data_c *data_p;
         gchar *mime_magic (const gchar *);
 
         gboolean load_hashes_from_cache(void);
@@ -73,6 +71,23 @@ class mime_c: virtual utility_c, public mime_magic_c, public lite_c {
         long long get_cache_sum (void);
         void write_cache_sum (long long);
         gint check_dir (char *);
+
+        static pthread_mutex_t cache_mutex;
+        static pthread_mutex_t mimetype_hash_mutex;
+        static pthread_mutex_t alias_hash_mutex;
+        static pthread_mutex_t application_hash_mutex;
+
+
+        static GHashTable *generic_icon_hash;
+        static GHashTable *mimetype_hash;
+        static GHashTable *alias_hash;
+        static GHashTable *application_hash_type;
+        static GHashTable *application_hash_sfx;
+        static GHashTable *application_hash_icon;
+        static GHashTable *application_hash_text;
+        static GHashTable *application_hash_text2;
+        static GHashTable *application_hash_output;
+        static GHashTable *application_hash_output_ext;
 
 };
 

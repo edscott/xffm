@@ -13,7 +13,7 @@ using namespace std;
 
 class widgets_c: virtual utility_c, public gtk_c{
     public:
-        widgets_c(data_c *, void *, GtkNotebook *);
+        widgets_c(void *, GtkNotebook *);
         ~widgets_c(void);
 
         GtkIconView *get_iconview(void);

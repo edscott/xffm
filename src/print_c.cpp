@@ -27,7 +27,7 @@ static void *clear_text_buffer_f(void *);
 //                       print_c class methods                            //
 ///////////////////////////////////////////////////////////////////////////
 
-print_c::print_c(data_c *data0, void *data):pixbuf_c(data0){
+print_c::print_c(void *data){
     view_v = data;
     view_c *view_p = (view_c *)data;
     status = GTK_TEXT_VIEW(view_p->get_status());

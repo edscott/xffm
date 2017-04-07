@@ -6,7 +6,7 @@
 #include "csh_completion_c.hpp"
 class run_c: public run_output_c, virtual utility_c {
     public:
-        run_c(data_c *, void *);
+        run_c(void *);
         
         pid_t thread_run(const gchar *command);
         pid_t thread_run(const gchar **arguments);

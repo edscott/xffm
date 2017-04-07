@@ -5,7 +5,7 @@
 
 class menu_c: public gtk_c  {
     public:
-        menu_c(data_c *);
+        menu_c(void);
         ~menu_c(void);
 	virtual gboolean popup(GtkTreePath *);
         virtual gboolean popup(void);

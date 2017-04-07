@@ -37,7 +37,7 @@ typedef struct xd_t{
 
 class local_monitor_c: public xfdir_c, virtual utility_c {
     public:
-        local_monitor_c(data_c *, const gchar *);
+        local_monitor_c(const gchar *);
         ~local_monitor_c(void);
 
         gboolean add_new_item(GFile *);

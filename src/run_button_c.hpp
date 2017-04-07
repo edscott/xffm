@@ -5,7 +5,7 @@
 
 class run_button_c: virtual utility_c, public gtk_c {
     public:
-        run_button_c(data_c *, void *, const gchar *, pid_t, gboolean);
+        run_button_c(void *, const gchar *, pid_t, gboolean);
         ~run_button_c(void);
         void run_button_setup (GtkWidget *);
 

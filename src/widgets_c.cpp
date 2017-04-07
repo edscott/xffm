@@ -3,7 +3,7 @@
 #include "window_c.hpp"
 #include "widgets_c.hpp"
 
-widgets_c::widgets_c(data_c *data0, void *window_data, GtkNotebook *data): gtk_c(data0)
+widgets_c::widgets_c(void *window_data, GtkNotebook *data)
 {
     window_v = window_data;
     notebook = data;
@@ -11,7 +11,7 @@ widgets_c::widgets_c(data_c *data0, void *window_data, GtkNotebook *data): gtk_c
         g_warning("widgets_c::widgets_c(): notebook cannot be NULL\n");
         throw 1;
     }
-    pathbar_p = new pathbar_c(data0, window_data, data);
+    pathbar_p = new pathbar_c(window_data, data);
     window_c *window_p = (window_c *)window_data;
     create();
     setup_scolled_windows();

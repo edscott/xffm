@@ -18,7 +18,7 @@ typedef struct thread_run_t {
     char **argv;
 } thread_run_t;
 
-run_button_c::run_button_c(data_c *data0, void *data, const gchar * exec_command, pid_t child, gboolean shell_wrap):gtk_c(data0){
+run_button_c::run_button_c(void *data, const gchar * exec_command, pid_t child, gboolean shell_wrap){
     view_v = data;
     in_shell = shell_wrap;
     

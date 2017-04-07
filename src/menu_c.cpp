@@ -4,7 +4,7 @@ menu_c::~menu_c(void){
     gtk_widget_destroy(GTK_WIDGET(view_menu));
 }
 
-menu_c::menu_c(data_c *data0): gtk_c(data0){
+menu_c::menu_c(void){
     create_menu();
     
 }

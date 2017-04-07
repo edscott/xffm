@@ -4,7 +4,7 @@
 
 class xfdir_root_c: public xfdir_c, virtual utility_c {
     public:
-	xfdir_root_c(data_c *);
+	xfdir_root_c(void);
         void reload(const gchar *);
 	const gchar *get_xfdir_iconname(void);
         void item_activated (GtkIconView *, GtkTreePath *, void *);

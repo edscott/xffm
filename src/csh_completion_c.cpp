@@ -2,7 +2,7 @@
 #include "csh_completion_c.hpp"
 #include "view_c.hpp"
 
-csh_completion_c::csh_completion_c(data_c *data0, void *data): bash_completion_c(data0, data){
+csh_completion_c::csh_completion_c(void *data): bash_completion_c(data){
     csh_cmd_save = NULL;
     csh_history_list = NULL;
     csh_load_history();

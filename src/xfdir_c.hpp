@@ -44,7 +44,7 @@ enum
 
 class xfdir_c: virtual utility_c, public menu_c {
     public:
-        xfdir_c(data_c *, const gchar *);
+        xfdir_c(const gchar *);
         ~xfdir_c(void);
 
 	// Pure
@@ -85,7 +85,7 @@ class xfdir_c: virtual utility_c, public menu_c {
 	gint dir_count; 
 
     private:
-        data_c *data_p;
+        static GHashTable *highlight_hash;
 
 };
 

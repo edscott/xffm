@@ -9,7 +9,7 @@
 
 class pixbuf_icons_c: public pixbuf_cairo_c, public pixbuf_hash_c, virtual utility_c {
     public:
-        pixbuf_icons_c(data_c *);
+        pixbuf_icons_c(void);
         ~pixbuf_icons_c(void);
         GdkPixbuf *absolute_path_icon(const gchar *, gint);
         GdkPixbuf *get_theme_pixbuf(const gchar *, gint);

@@ -2,6 +2,9 @@
 #include "view_c.hpp"
 #include "local_dnd_c.hpp"
 #include "xfdir_local_c.hpp"
+
+pthread_mutex_t xfdir_local_c::readdir_mutex=PTHREAD_MUTEX_INITIALIZER;
+
 static gint compare_by_name (const void *, const void *);
 static gboolean free_stat_func (GtkTreeModel *model,
                             GtkTreePath *path,
@@ -11,11 +14,9 @@ static gboolean free_stat_func (GtkTreeModel *model,
 ////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////
 
-xfdir_local_c::xfdir_local_c(data_c *data0, const gchar *data, void *dataV): 
-    local_monitor_c(data0, data), local_dnd_c(dataV)
+xfdir_local_c::xfdir_local_c(const gchar *data, void *dataV): 
+    local_monitor_c(data), local_dnd_c(dataV)
 {
-
-    data_p = data0;
     view_v = dataV;
     create_menu();
     view_c *view_p = (view_c *)view_v;
@@ -266,8 +267,7 @@ xfdir_local_c::read_items (gint *heartbeat) {
 //  mutex protect...
         //FIXME: must be mutex protected (OK) and threaded
     fprintf(stderr, "** requesting readdir mutex for %s...\n", path);
-    pthread_mutex_t *mutex = data_p->get_readdir_mutex();
-    pthread_mutex_lock(mutex);
+    pthread_mutex_lock(&readdir_mutex);
     fprintf(stderr, "++ mutex for %s obtained.\n", path);
     struct dirent *d; // static pointer
     errno=0;
@@ -287,7 +287,7 @@ xfdir_local_c::read_items (gint *heartbeat) {
         fprintf(stderr, "read_files_local: %s\n", strerror(errno));
     }
 // unlock mutex
-    pthread_mutex_unlock(mutex);
+    pthread_mutex_unlock(&readdir_mutex);
     fprintf(stderr, "-- mutex for %s released.\n", path);
 
     closedir (directory);

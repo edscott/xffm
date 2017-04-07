@@ -5,7 +5,6 @@
 #include "tooltip_c.hpp"
 #include "pixbuf_c.hpp"
 #include "mime_c.hpp"
-#include "data_c.hpp"
 #define SIZE_BUTTON	20
 #define SIZE_DIALOG	36
 #define SIZE_ICON	48
@@ -14,7 +13,7 @@
 
 class gtk_c: virtual utility_c, public tooltip_c, public pixbuf_c, public mime_c{
     public:
-        gtk_c(data_c *);
+        gtk_c(void);
         ~gtk_c(void);
         void setup_image_button (GtkWidget *, const gchar *, const gchar *);    
         GtkWidget *new_add_page_tab(GtkWidget *, GtkWidget **);
@@ -32,7 +31,8 @@ class gtk_c: virtual utility_c, public tooltip_c, public pixbuf_c, public mime_c
         GtkMenu *mk_menu(const gchar **,  void (*menu_callback)(GtkWidget *, gpointer));
     private:
 	void set_bin_image(GtkWidget *, const gchar *, gint);
-	data_c *data_p;
+        static GHashTable *iconname_hash;
+        static void populate_iconname_hash(void);
 	
 };
 

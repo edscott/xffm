@@ -2,15 +2,13 @@
 #define WINDOW_C_HPP
 #include "xffm+.h"
 
-#include "data_c.hpp"
 #include "menu_c.hpp"
 #include "utility_c.hpp"
 
 class window_c: public menu_c {
     public:
-        window_c(data_c *);
+        window_c(GtkApplication *);
         ~window_c(void);
-	data_c *get_data_p(void);
         GtkNotebook *get_notebook(void);
 	void create_new_page(const gchar *);
 	void go_home(void);
@@ -24,6 +22,7 @@ class window_c: public menu_c {
         const gchar *get_tooltip_path_string(void);
         void set_tooltip_path_string(const gchar *);
         GtkWidget *get_tt_window(void);
+	GtkApplication *app; 
         
 	void shell_dialog(void);
     private:
@@ -40,9 +39,8 @@ class window_c: public menu_c {
         GtkWidget *tt_window;
 
         GMenuModel *signal_menu_model;
-        void create_menu_model(GtkApplication *);
-        void add_actions(GtkApplication *);
-	data_c *data_p;
+        void create_menu_model(void);
+        void add_actions(void);
 
 };
 

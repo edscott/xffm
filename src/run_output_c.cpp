@@ -8,7 +8,7 @@
 #include "window_c.hpp"
 #include "view_c.hpp"
 
-run_output_c::run_output_c(data_c *data0, void *data): csh_completion_c(data0, data){
+run_output_c::run_output_c(void *data): csh_completion_c(data){
     // This will hash commands to know what has just finished
     c_string_hash = 
             g_hash_table_new_full (g_direct_hash, g_direct_equal, NULL, g_free);

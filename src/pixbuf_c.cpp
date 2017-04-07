@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #include "pixbuf_c.hpp"
 
-pixbuf_c::pixbuf_c(data_c *data0):pixbuf_icons_c(data0){}
 
 gint
 pixbuf_c::get_pixel_size(gint size){

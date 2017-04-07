@@ -5,7 +5,7 @@
 static void pathbar_go(GtkButton *, gpointer);
 static void *update_pathbar_f(void *);
 
-pathbar_c::pathbar_c(data_c *data0, void *window_data, GtkNotebook *data): gtk_c(data0) {
+pathbar_c::pathbar_c(void *window_data, GtkNotebook *data) {
     notebook = data;
     window_c *window_p = (window_c *)window_data;
     pathbar = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
