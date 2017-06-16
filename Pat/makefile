@@ -2,7 +2,7 @@ HEADERS = stdout.diag.h
 SOURCES = gtk_words_gui.c stdout.diag.c
 
 tablas: tablas.c
-	gcc -o tablas  -Wall -g -O2 -Wno-implicit-int tablas.c smd_5.1.7.o -lm `pkg-config dbh2 --cflags --libs` `pkg-config gtk+-3.0 --cflags --libs`
+	gcc -o tablas  -Wall -g -O2 -Wno-implicit-int tablas.c -lm `pkg-config dbh2 --cflags --libs` `pkg-config gtk+-3.0 --cflags --libs`
 
  
 dumpsmd: dumpsmd.c
