@@ -319,7 +319,7 @@ xfdir_local_c::sort_directory_list(GList *list){
                 continue;
             } 
             xd_p->mimetype = mime_type(xd_p->d_name, xd_p->st); // using stat obtained above
-            xd_p->mimefile = g_strdup(mime_file(xd_p->d_name)); // 
+            xd_p->mimefile = g_strdup(mime_magic_c::mime_file(xd_p->d_name)); // 
 	}
     }
     // Default sort order:

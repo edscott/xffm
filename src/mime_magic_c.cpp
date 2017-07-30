@@ -1,12 +1,11 @@
 #include "mime_magic_c.hpp"
+#if 0
 
 mime_magic_c::mime_magic_c(void){
-    magic_mutex = PTHREAD_MUTEX_INITIALIZER;
     cookie = magic_open (MAGIC_NONE);
     magic_load (cookie, NULL);
 
 }
-
 
 
 // Lib magic is available...
@@ -112,5 +111,5 @@ mime_magic_c::mime_file (const gchar *file) {
 
 
 //////////////////////////////////////////////////////////////////////////////
-
+#endif
 

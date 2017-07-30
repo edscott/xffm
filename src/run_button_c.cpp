@@ -7,6 +7,8 @@
 #include "window_c.hpp"
 #include "run_button_c.hpp"
 
+//namespace gtk_c;
+
 static void *run_wait_f (void *);
 static void *make_run_data_button (void *);
 static void *zap_run_button(void *);
