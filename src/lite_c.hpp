@@ -172,11 +172,16 @@ static void init(GHashTable **type_hash, GHashTable **key_hash){
 	lite_key_hash = g_hash_table_new (g_str_hash, g_str_equal);
 	lite_t *lite_type_p = lite_v;
 	for (;lite_type_p && lite_type_p->id; lite_type_p++){
-	    g_hash_table_insert(lite_type_hash,(void *)lite_type_p->id, (void *)lite_type_p);
+	    void *key = (void *)g_strdup(lite_type_p->id);
+	    void *data = calloc(1, sizeof(lite_t));
+	    memcpy(data, (void *)lite_type_p, sizeof(lite_t));
+	    g_hash_table_insert(lite_type_hash,key, data);
 	}
 	const gchar **cp = lite_keys;
 	for (;cp && *cp; cp+=2){
-	    g_hash_table_insert(lite_key_hash, (void *)cp[0], (void *)cp[1]);
+	    void *key = (void *)g_strdup(cp[0]);
+	    void *data = (void *)g_strdup(cp[1]);
+	    g_hash_table_insert(lite_key_hash, key, data);
 	}
     }
     *type_hash = lite_type_hash;
