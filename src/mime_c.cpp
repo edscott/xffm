@@ -11,7 +11,6 @@
 #define PACKAGE_DATA_DIR ""
 #endif
 
-//namespace mime_magic_c;
 
 typedef struct mime_t {
     char *key;
@@ -109,7 +108,7 @@ mime_c::~mime_c (void){
 
 gchar *
 mime_c::mime_magic(const gchar *file){
-    gchar *unalias = mime_magic_c::mime_magic_unalias(file);
+    gchar *unalias = mime_magic_unalias(file);
     gchar *alias = mime_get_alias_type(unalias);
     g_free(unalias);
     return alias;
@@ -225,10 +224,10 @@ mime_c::mime_function(const gchar *path, const gchar *function) {
     if (!path || !function) return NULL;
 
     if (strcmp(function, "mime_file")==0) {
-	return g_strdup(mime_magic_c::mime_file(path));
+	return g_strdup(mime_file(path));
     }
     if (strcmp(function, "mime_encoding")==0) {
-	return mime_magic_c::mime_encoding(path);
+	return mime_encoding(path);
     }
     if (strcmp(function, "mime_magic")==0) {
 	return mime_magic(path);

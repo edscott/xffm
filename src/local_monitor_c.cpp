@@ -414,7 +414,7 @@ local_monitor_c::get_emblem_string(xd_t *xd_p, gboolean use_lite){
             g = g_strconcat(emblem, "#888888", NULL); 
             g_free(emblem); 
             emblem = g;
-        } else if (get_lite_colors(xd_p->mimetype, &red, &green, &blue)){
+        } else if (lite_c::get_lite_colors(xd_p->mimetype, &red, &green, &blue)){
             g_free(colors);
             colors = g_strdup_printf("#%02x%02x%02x", red, green, blue);
         }
@@ -466,7 +466,7 @@ local_monitor_c::get_emblem_string(xd_t *xd_p, gboolean use_lite){
         g_free(emblem); 
         emblem = g;
         if (use_lite) {
-            const gchar *lite_emblem = get_lite_emblem(xd_p->mimetype);
+            const gchar *lite_emblem = gtk_c::get_lite_emblem(xd_p->mimetype);
             if (lite_emblem){
                 g = g_strconcat(emblem, "/NE/", lite_emblem, "/1.8/200", NULL); 
                 g_free(emblem); 

@@ -33,7 +33,7 @@ xffm_SOURCES = \
 		    pixbuf_cairo_c.cpp \
 	    mime_c.cpp \
 		mime_magic_c.hpp \
-		lite_c.cpp \
+		lite_c.hpp \
 	  xffm_c.cpp \
 	  window_c.cpp \
 	  view_c.cpp  \
