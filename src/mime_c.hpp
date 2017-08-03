@@ -7,12 +7,20 @@
 #include "lite_c.hpp"
 
 #define USER_RFM_DIR            g_get_user_config_dir(),"rfm"
-#define USER_RFM_CACHE_DIR      g_get_user_cache_dir(),"rfm"
 #define USER_DBH_DIR		USER_RFM_DIR,"dbh"
 #define USER_DBH_CACHE_DIR	USER_RFM_CACHE_DIR,"dbh"
 #define SYSTEM_MODULE_DIR	PACKAGE_DATA_DIR,"rfm","rmodules"
-#define USER_APPLICATIONS 	USER_RFM_DIR,"user-applications.2"
+
+//#include "mime_hash_t.hpp"
+#define USER_RFM_CACHE_DIR      g_get_user_cache_dir(),"rfm"
 #define APPLICATION_MIME_FILE 	SYSTEM_MODULE_DIR,"mime-module.xml"
+#define USER_APPLICATIONS 	USER_RFM_DIR,"user-applications.2"
+
+#include <libxml/parser.h>
+#include <libxml/tree.h>
+#include <string.h>
+#include <errno.h>
+#include <dbh.h>
 
 class mime_c: virtual utility_c, public lite_c, public mime_magic_c {
     public:
@@ -48,6 +56,20 @@ class mime_c: virtual utility_c, public lite_c, public mime_magic_c {
         void *mime_gencache(gchar *);
 
     private:
+	/*
+	mime_hash_t<string_hash_c("key","value",NULL)> app_sfx_hash; // key is g_utf8_strdown ((gchar *)value(value), -1);
+	mime_hash_t<string_hash_c("alias","type",NULL)> app_alias_hash; // key is g_utf8_strdown ((gchar *)value(type), -1);
+	mime_hash_t<string_hash_c("generic-icon","name",NULL)> app_generic_icon_hash; // key is g_utf8_strdown ((gchar *)value(name), -1);
+
+	mime_hash_t<string_hash_c("application",NULL,"command")> app_type_hash; // key is get_hash_key(type)
+	mime_hash_t<string_hash_c("application","command","icon")> app_icon_hash; // key is get_hash_key(value(command))
+	mime_hash_t<string_hash_c("application","command","text")> app_text_hash; // key is get_hash_key(value(command))
+	mime_hash_t<string_hash_c("application","command","text2")> app_text2_hash; // key is get_hash_key(value(command))
+	mime_hash_t<string_hash_c("application","command","output")> app_output_hash; // key is get_hash_key(value(command))
+	mime_hash_t<string_hash_c("application","command","output_ext")> app_output_ext_hash; // key is get_hash_key(value(command))
+
+*/
+
         gchar *mime_magic (const gchar *);
 
         gboolean load_hashes_from_cache(void);

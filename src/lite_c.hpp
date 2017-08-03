@@ -175,7 +175,7 @@ static void init(GHashTable **type_hash, GHashTable **key_hash){
 	    void *key = (void *)g_strdup(lite_type_p->id);
 	    void *data = calloc(1, sizeof(lite_t));
 	    memcpy(data, (void *)lite_type_p, sizeof(lite_t));
-	    g_hash_table_insert(lite_type_hash,key, data);
+	    g_hash_table_insert(lite_type_hash, key, data);
 	}
 	const gchar **cp = lite_keys;
 	for (;cp && *cp; cp+=2){

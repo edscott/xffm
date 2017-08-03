@@ -4,13 +4,6 @@
 
 class mime_magic_c {
     public:
-	
-        //mime_magic_c(void);
-	/*
-        gchar * mime_magic_unalias (const gchar *);
-        gchar * mime_encoding (const gchar *);
-        const gchar * mime_file (const gchar *);
-	*/
 
 	// Lib magic is available...
 	//

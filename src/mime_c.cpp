@@ -1,16 +1,10 @@
 #include "mime_c.hpp"
 // gcc -std=c++11 mime_c.cpp `pkg-config gtk+-3.0 --cflags` `pkg-config dbh2 --cflags` `pkg-config --cflags libxml-2.0`
-#include <libxml/parser.h>
-#include <libxml/tree.h>
-#include <string.h>
-#include <errno.h>
-#include <dbh.h>
 
 #ifndef PACKAGE_DATA_DIR
 #warning "PACKAGE_DATA_DIR not defined"
 #define PACKAGE_DATA_DIR ""
 #endif
-
 
 typedef struct mime_t {
     char *key;
@@ -67,6 +61,7 @@ static gchar *get_cache_path (const gchar *);
 static gint check_dir (char *);
 
 mime_c::mime_c (void) {
+
     if (!generic_icon_hash){
         pthread_mutex_init(&cache_mutex, NULL);
         pthread_mutex_init(&mimetype_hash_mutex, NULL);
@@ -696,6 +691,7 @@ mime_c::mime_build_hashes (void) {
             // apps may be null
             for(subnode = node->children; subnode; subnode = subnode->next) {
                 if(xmlStrEqual (subnode->name, (const xmlChar *)"key")) {
+			    // key --> value
                     value = xmlGetProp (subnode, (const xmlChar *)"value");
 		    gchar *sfx = g_utf8_strdown ((gchar *)value, -1);
 		    g_free (value);
@@ -710,6 +706,7 @@ mime_c::mime_build_hashes (void) {
 		    continue;
 		}
                 if(xmlStrEqual (subnode->name, (const xmlChar *)"alias")) {
+			    // alias --> type
                     value = xmlGetProp (subnode, (const xmlChar *)"type");
 		    gchar *alias_type = g_utf8_strdown ((gchar *)value, -1);
 		    g_free (value);
@@ -724,6 +721,7 @@ mime_c::mime_build_hashes (void) {
 		    continue;
 		}
                 if(xmlStrEqual (subnode->name, (const xmlChar *)"generic-icon")) {
+			    // generic-icon --> name
                     value = xmlGetProp (subnode, (const xmlChar *)"name");
 		    if(value && strlen((const gchar *)value)) {
 			g_hash_table_replace (generic_icon_hash, 
@@ -735,6 +733,7 @@ mime_c::mime_build_hashes (void) {
 		}
                 if(xmlStrEqual (subnode->name, (const xmlChar *)"application")) {
                     int i;
+			    // application --> command --> 
                     value = xmlGetProp (subnode, (const xmlChar *)"command");
                     if(value) {
                         if(!apps) {
@@ -754,6 +753,7 @@ mime_c::mime_build_hashes (void) {
                         }
                         apps[i] = (gchar *)value;
                         xmlChar *extra_value;
+			        // application --> command --> icon
                         extra_value = 
                             xmlGetProp (subnode, (const xmlChar *)"icon");
                         if(extra_value) {
@@ -761,6 +761,7 @@ mime_c::mime_build_hashes (void) {
                             NOOP("mime-module, adding- %s : %s\n", value, extra_value);
                             g_hash_table_replace (application_hash_icon, k, extra_value);
                         }
+			        // application --> command --> text
                         extra_value = 
                             xmlGetProp (subnode, (const xmlChar *)"text");
                         if(extra_value) {
@@ -768,6 +769,7 @@ mime_c::mime_build_hashes (void) {
                             NOOP("mime-module a, adding- %s : %s\n", value, extra_value);
 			    g_hash_table_replace (application_hash_text, k, extra_value);
                         }
+			        // application --> command --> text2
                         extra_value = 
                             xmlGetProp (subnode, (const xmlChar *)"text2");
                         if(extra_value) {
@@ -775,6 +777,7 @@ mime_c::mime_build_hashes (void) {
                             NOOP("mime-module b, adding- %s : %s\n", value, extra_value);
                             g_hash_table_replace (application_hash_text2, k, extra_value);
                         }
+			        // application --> command --> output
                         extra_value = 
                             xmlGetProp (subnode, (const xmlChar *)"output");
                         if(extra_value) {
@@ -783,6 +786,7 @@ mime_c::mime_build_hashes (void) {
                             g_hash_table_replace (application_hash_output, k, extra_value);
                   
                         }
+			        // application --> command --> output_ext
                         extra_value = 
                             xmlGetProp (subnode, (const xmlChar *)"output_ext");
                         if(extra_value) {
