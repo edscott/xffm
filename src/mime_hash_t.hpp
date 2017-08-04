@@ -10,22 +10,45 @@
 #include <string.h>
 #include <errno.h>
 #include <dbh.h>
+//template <class>
+struct foo_t {
+	    xmlDocPtr doc;
+            gchar const *keys[4];
+            gchar *mimefile;
+};
 
 
-class string_hash_c {
+//template <class Type = string_hash_c >
+template <class Type>
+class mime_hash_t {
     public:
-	string_hash_c(gchar *data0, gchar *data1, gchar *data2){
-	    xmlkey = (data0)?g_strdup(data0):NULL;
-	    xmldata = (data1)?g_strdup(data1):NULL;
-	    xmlsubdata = (data2)?g_strdup(data2):NULL;
+	mime_hash_t(void){
+
+        }/*
+	mime_hash_t(const gchar *data0, const gchar *data1, const gchar *data2){
+            xmlkey = data0;
+            xmldata = data1;
+            xmlsubdata = data2;
+            pthread_mutex_init(&mutex, NULL);
+	    hash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
+            build_hash();
+        }*/
+/*	string_hash_c(const gchar *data0, const gchar *data1, const gchar *data2){
+	    xmlkey = data0;
+	    xmldata = data1;
+	    xmlsubdata = data2;
 	}
-	~string_hash_c(void){
-	    g_free(xmlkey);
-	    g_free(xmldata);
-	    g_free(xmlsubdata);
-	}
-/*	void ((*get_data_free_f)(void *)){
+	void ((*get_data_free_f)(void *)){
 	    return (g_free);
+	}*/
+/*	void set_xmlkey(const gchar *){
+	    return ;
+	}
+	void set_xmldata(const gchar *){
+	    return ;
+	}
+	void set_xmlsubdata(const gchar *){
+	    return ;
 	}*/
 	const gchar *get_xmlkey(void){
 	    return xmlkey;
@@ -36,43 +59,39 @@ class string_hash_c {
 	const gchar *get_xmlsubdata(void){
 	    return xmlsubdata;
 	}
+        
     private:
-	gchar *xmlkey;
-	gchar *xmldata;
-	gchar *xmlsubdata;
-};
-
-template <class T>
-class mime_hash_t {
+	const gchar *xmlkey;
+	const gchar *xmldata;
+	const gchar *xmlsubdata;
 
     public:
+#if 0
 	mime_hash_t(gchar *name){
 	    hashname = g_strdup(name);
-	    init(g_free);
+	    pthread_mutex_init(&mutex, NULL);
+	    hash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
+/*	    if(!load_hash_from_cache()) {
+		std::cerr<<"mime_hash_t:: now building hash from scratch:"<<hashname<<"\n";
+		build_hash(Type);
+		//generate_cache();
+		//write_cache_sum (get_cache_sum ());
+	    } else {
+		std::cerr<<"mime_hash_t:: hash loaded from disk cache:"<<hashname<<"\n";
+	    }
+*/
 	}
+#endif
 	~mime_hash_t(void){
-	    g_free(hashname);
-	    g_hash_table_destroy(hash);
-	    pthread_mutex_destroy(&mutex);
+	    //g_free(hashname);
+	    //g_hash_table_destroy(hash);
+	    //pthread_mutex_destroy(&mutex);
 	}
 	    
 
     private:
 	gboolean load_hash_from_cache(void){return FALSE;}
 	
-	void init(void (*f)){
-	    pthread_mutex_init(&mutex, NULL);
-	    hash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
-	    if(!load_hash_from_cache()) {
-		std::cerr<<"mime_hash_t:: now building hash from scratch:"<<hashname<<"\n";
-		build_hash();
-		//generate_cache();
-		//write_cache_sum (get_cache_sum ());
-	    } else {
-		std::cerr<<"mime_hash_t:: hash loaded from disk cache:"<<hashname<<"\n";
-	    }
-	    
-	}
 	pthread_mutex_t mutex;
 	GHashTable *hash;
 	gchar  *hashname;
@@ -84,35 +103,43 @@ class mime_hash_t {
 	    g_string_free (gs, TRUE);
 	    return key;
 	}
-	
-	void build_hash (void) {
+    public:
+	void build_hash (Type T) {
+            if (T.mimefile) {
+                // FIXME this does not work, as instanciation is created in 
+                //       last step of compile, before run.
+                fprintf(stderr, "hash from %s is already initialized.\n", T.mimefile);
+                return;
+            }
+	    hash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
+            xmlkey = T.keys[0];
+            xmldata = T.keys[1];
+            xmlsubdata = T.keys[2];
+	    xmlDocPtr doc = T.doc;
+
 	    xmlChar *value;
 	    xmlNodePtr node;
 	    xmlNodePtr subnode;
-	    xmlDocPtr doc;
+
 
 	    //build hashes from system files
 	    gchar *mimefile = g_build_filename (APPLICATION_MIME_FILE, NULL);
 
 	    std::cerr<<"mime_hash_t::build_hash(): reading mime specification file="<<mimefile<<"\n";
+            const gchar *key = get_xmlkey();
+            const gchar *xmldata = get_xmldata();
+            printf("...\n");
+	    std::cerr<<"mime_hash_t::build_hash(): data: " << key << ", "<< xmldata <<"\n";
 	    if(access (mimefile, R_OK) != 0) {
 		g_free (mimefile);
 		DBG ("access(%s, R_OK)!=0 (%s)\n", mimefile, strerror(errno));
 		return;
 	    }
-	    xmlKeepBlanksDefault (0);
 
-	    if((doc = xmlParseFile (mimefile)) == NULL) {
-		fprintf(stderr, "mime_hash_t:: Cannot parse XML file: %s. Replace this file.\n", mimefile);
-		g_free (mimefile);
-		return;
-	    }
 
-	    node = xmlDocGetRootElement (doc);
+	    node = xmlDocGetRootElement (T.doc);
 	    if(!xmlStrEqual (node->name, (const xmlChar *)"mime-info")) {
 		fprintf(stderr, "mime_hash_t::Invalid XML file: %s (no mime-info). Replace this file.\n", mimefile);
-		g_free (mimefile);
-		xmlFreeDoc (doc);
 		return;
 	    }
 	    /* Now parse the xml tree */
@@ -128,9 +155,9 @@ class mime_hash_t {
 		    }
 
 		    for(subnode = node->children; subnode; subnode = subnode->next) {
-			if(xmlStrEqual (subnode->name, (const xmlChar *)T->get_xmlkey())) {
+			if(xmlStrEqual (subnode->name, (const xmlChar *)get_xmlkey())) {
 			    // xmlkey --> xmldata
-			    value = xmlGetProp (subnode, (const xmlChar *)T->get_xmldata());
+			    value = xmlGetProp (subnode, (const xmlChar *)get_xmldata());
 			    gchar *key_string = g_utf8_strdown ((gchar *)value, -1);
 			    g_free (value);
 			    gchar *hash_key = get_hash_key (key_string);
@@ -146,8 +173,6 @@ class mime_hash_t {
 		    g_free(type);
 		}
 	    }
-	    xmlFreeDoc (doc);
-	    g_free (mimefile);	    
 	    NOOP("mime_hash_t::hash table build is now complete.\n");
 	}
 

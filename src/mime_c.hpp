@@ -11,7 +11,7 @@
 #define USER_DBH_CACHE_DIR	USER_RFM_CACHE_DIR,"dbh"
 #define SYSTEM_MODULE_DIR	PACKAGE_DATA_DIR,"rfm","rmodules"
 
-//#include "mime_hash_t.hpp"
+#include "mime_hash_t.hpp"
 #define USER_RFM_CACHE_DIR      g_get_user_cache_dir(),"rfm"
 #define APPLICATION_MIME_FILE 	SYSTEM_MODULE_DIR,"mime-module.xml"
 #define USER_APPLICATIONS 	USER_RFM_DIR,"user-applications.2"
@@ -55,7 +55,10 @@ class mime_c: virtual utility_c, public lite_c, public mime_magic_c {
         gboolean generate_caches (void);
         void *mime_gencache(gchar *);
 
+        static foo_t foo;
     private:
+	mime_hash_t<const foo_t> app_sfx_hash; // key is g_utf8_strdown ((gchar *)value(value), -1);
+        
 	/*
 	mime_hash_t<string_hash_c("key","value",NULL)> app_sfx_hash; // key is g_utf8_strdown ((gchar *)value(value), -1);
 	mime_hash_t<string_hash_c("alias","type",NULL)> app_alias_hash; // key is g_utf8_strdown ((gchar *)value(type), -1);

@@ -60,7 +60,43 @@ static long long get_cache_sum (void);
 static gchar *get_cache_path (const gchar *);
 static gint check_dir (char *);
 
+xmlDocPtr openXML(gchar *f){
+}
+
+void closeXML(xmlDocPtr){
+}
+
+foo_t mime_c::foo={
+    NULL,
+    {NULL, NULL, NULL, NULL},
+    NULL
+};
+
 mime_c::mime_c (void) {
+    memset(&foo, 0, sizeof(foo_t));
+    
+    gchar *mimefile = g_build_filename (APPLICATION_MIME_FILE, NULL);
+    if(access (mimefile, R_OK) != 0) {
+        fprintf(stderr, "access(%s, R_OK)!=0 (%s)\n", mimefile, strerror(errno));
+        g_free(mimefile);
+        mimefile=NULL;
+    }
+    xmlKeepBlanksDefault (0);
+    if(mimefile && (foo.doc = xmlParseFile (mimefile)) == NULL) {
+        fprintf(stderr, "mime_hash_t:: Cannot parse XML file: %s. Replace this file.\n", mimefile);
+        return;
+    }
+
+    foo.keys[0]="key";
+    foo.keys[1]="value";
+
+    // create all hashes from common XML input
+    app_sfx_hash.build_hash(foo);
+
+    if (mimefile) xmlFreeDoc (foo.doc);
+    foo.mimefile = mimefile;
+
+/////////////////////////////////////
 
     if (!generic_icon_hash){
         pthread_mutex_init(&cache_mutex, NULL);
@@ -957,6 +993,8 @@ mime_c::save_text_cache(GHashTable *hash_table, const gchar *filename) {
 
 gboolean
 mime_c::generate_caches (void) {
+    // FIXME: currently broken.
+    return FALSE;
     DBHashTable *cache;
     if(!application_hash_sfx || !application_hash_type) {
         DBG ("cannot build cache without application_hashes\n");
