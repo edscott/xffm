@@ -55,9 +55,9 @@ class mime_c: virtual utility_c, public lite_c, public mime_magic_c {
         gboolean generate_caches (void);
         void *mime_gencache(gchar *);
 
-        static foo_t foo;
+        static string4_hash_t sfx_data;
     private:
-	mime_hash_t<const foo_t> app_sfx_hash; // key is g_utf8_strdown ((gchar *)value(value), -1);
+	mime_hash_t<const string4_hash_t> app_sfx_hash; // key is g_utf8_strdown ((gchar *)value(value), -1);
         
 	/*
 	mime_hash_t<string_hash_c("key","value",NULL)> app_sfx_hash; // key is g_utf8_strdown ((gchar *)value(value), -1);

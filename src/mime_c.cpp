@@ -66,35 +66,36 @@ xmlDocPtr openXML(gchar *f){
 void closeXML(xmlDocPtr){
 }
 
-foo_t mime_c::foo={
-    NULL,
-    {NULL, NULL, NULL, NULL},
-    NULL
-};
+string4_hash_t mime_c::sfx_data;
 
 mime_c::mime_c (void) {
-    memset(&foo, 0, sizeof(foo_t));
+    xmlDocPtr doc;
+    xmlKeepBlanksDefault (0);
+    memset(&sfx_data, 0, sizeof(string4_hash_t));
     
     gchar *mimefile = g_build_filename (APPLICATION_MIME_FILE, NULL);
     if(access (mimefile, R_OK) != 0) {
         fprintf(stderr, "access(%s, R_OK)!=0 (%s)\n", mimefile, strerror(errno));
         g_free(mimefile);
         mimefile=NULL;
-    }
-    xmlKeepBlanksDefault (0);
-    if(mimefile && (foo.doc = xmlParseFile (mimefile)) == NULL) {
+    } 
+    if(mimefile && (doc = xmlParseFile (mimefile)) == NULL) {
         fprintf(stderr, "mime_hash_t:: Cannot parse XML file: %s. Replace this file.\n", mimefile);
-        return;
+        g_free(mimefile);
+        mimefile=NULL;
     }
+    if (mimefile){
+	sfx_data.doc = doc;
+	sfx_data.keys[0]="key";
+	sfx_data.keys[1]="value";
+	sfx_data.mimefile = mimefile;
+	sfx_data.hash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
 
-    foo.keys[0]="key";
-    foo.keys[1]="value";
+	// create all hashes from common XML input
+	app_sfx_hash.build_hash(sfx_data);
 
-    // create all hashes from common XML input
-    app_sfx_hash.build_hash(foo);
-
-    if (mimefile) xmlFreeDoc (foo.doc);
-    foo.mimefile = mimefile;
+	xmlFreeDoc (doc);
+    }
 
 /////////////////////////////////////
 

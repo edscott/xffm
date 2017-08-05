@@ -11,10 +11,11 @@
 #include <errno.h>
 #include <dbh.h>
 //template <class>
-struct foo_t {
+struct string4_hash_t {
 	    xmlDocPtr doc;
             gchar const *keys[4];
             gchar *mimefile;
+	    GHashTable *hash;
 };
 
 
@@ -23,7 +24,6 @@ template <class Type>
 class mime_hash_t {
     public:
 	mime_hash_t(void){
-
         }/*
 	mime_hash_t(const gchar *data0, const gchar *data1, const gchar *data2){
             xmlkey = data0;
@@ -93,8 +93,7 @@ class mime_hash_t {
 	gboolean load_hash_from_cache(void){return FALSE;}
 	
 	pthread_mutex_t mutex;
-	GHashTable *hash;
-	gchar  *hashname;
+	//gchar  *hashname;
 
 	gchar *get_hash_key (const gchar * pre_key) {
 	    GString *gs = g_string_new (pre_key);
@@ -105,16 +104,11 @@ class mime_hash_t {
 	}
     public:
 	void build_hash (Type T) {
-            if (T.mimefile) {
-                // FIXME this does not work, as instanciation is created in 
-                //       last step of compile, before run.
-                fprintf(stderr, "hash from %s is already initialized.\n", T.mimefile);
-                return;
-            }
-	    hash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
             xmlkey = T.keys[0];
             xmldata = T.keys[1];
             xmlsubdata = T.keys[2];
+	    gchar *mimefile = T.mimefile;
+	    
 	    xmlDocPtr doc = T.doc;
 
 	    xmlChar *value;
@@ -123,15 +117,11 @@ class mime_hash_t {
 
 
 	    //build hashes from system files
-	    gchar *mimefile = g_build_filename (APPLICATION_MIME_FILE, NULL);
 
-	    std::cerr<<"mime_hash_t::build_hash(): reading mime specification file="<<mimefile<<"\n";
             const gchar *key = get_xmlkey();
             const gchar *xmldata = get_xmldata();
             printf("...\n");
-	    std::cerr<<"mime_hash_t::build_hash(): data: " << key << ", "<< xmldata <<"\n";
-	    if(access (mimefile, R_OK) != 0) {
-		g_free (mimefile);
+	    if(mimefile==NULL || access (mimefile, R_OK) != 0) {
 		DBG ("access(%s, R_OK)!=0 (%s)\n", mimefile, strerror(errno));
 		return;
 	    }
@@ -164,7 +154,7 @@ class mime_hash_t {
 			    if(key_string) {
 					NOOP("mime_hash_t::replacing hash element \"%s\" with key %s --> %s\n", 
 					    key_string, hash_key, type);
-					g_hash_table_replace (hash, hash_key, g_strdup(type));
+					g_hash_table_replace (T.hash, hash_key, g_strdup(type));
 			    }
 			    g_free (key_string);
 			    continue;
@@ -173,7 +163,8 @@ class mime_hash_t {
 		    g_free(type);
 		}
 	    }
-	    NOOP("mime_hash_t::hash table build is now complete.\n");
+	    fprintf(stderr, "mime_hash_t::hash table build (%p) for %s with \"%s\"-->\"%s\" is now complete.\n", 
+		    T.hash, T.mimefile, key, xmldata);
 	}
 
 
