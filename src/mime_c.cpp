@@ -1089,10 +1089,10 @@ mime_c::generate_caches (void) {
     return TRUE;
 }
 
-#if 0
+#if 10
 const gchar *
 mime_c::locate_mime_t (const gchar * file){
-    return mime_sfxhash_c<string4_hash_t>::locate_mime_t(file,sfx_data); 
+    return mime_sfxhash_c<string4_hash_t>::locate_mime(file, sfx_data); 
 }
 #else
 // XXX this is the site to modify...

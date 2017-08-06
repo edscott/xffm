@@ -11,11 +11,11 @@ struct string4_hash_t {
 
 template <class Type>
 class mime_sfxhash_c: public  mime_hash_t<Type>{
-#if 0
+#if 10
     public:
 // XXX this is the site to modify...
 static const gchar *
-locate_mime_t (const gchar * file, Type T ) {
+locate_mime (const gchar * file, Type T ) {
     const gchar *type;
     const gchar *p;
     //load_hashes ();
@@ -35,10 +35,10 @@ locate_mime_t (const gchar * file, Type T ) {
         gchar *sfx;
         /* try all lower case (hash table keys are set this way) */
         sfx = g_utf8_strdown (p, -1);
-        gchar *key = get_hash_key (sfx,T);
+        gchar *key = mime_sfxhash_c::get_hash_key (sfx,T);
         TRACE("mime-module, lOOking for \"%s\" with key=%s\n", sfx, key);
 
-        type = (const gchar *)g_hash_table_lookup (get_hash(T), key);
+        type = (const gchar *)g_hash_table_lookup (T.hash, key);
         g_free (key);
         if(type) {
             NOOP(stderr,"mime-module, FOUND %s: %s\n", sfx, type);
@@ -56,8 +56,8 @@ locate_mime_t (const gchar * file, Type T ) {
 	gchar *sfx;
 	/* try all lower case (hash table keys are set this way) */
 	sfx = g_utf8_strdown (*q_p, -1);
-	gchar *key = get_hash_key (sfx,T);
-	type = (const gchar *)g_hash_table_lookup (get_hash(T), key);
+	gchar *key = mime_sfxhash_c::get_hash_key (sfx,T);
+	type = (const gchar *)g_hash_table_lookup (T.hash, key);
 	g_free (key);
 	if(type) {
 	    NOOP(stderr,"mime-module(2), FOUND %s: %s\n", sfx, type);
