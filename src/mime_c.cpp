@@ -40,15 +40,15 @@ GHashTable *mime_c::generic_icon_hash=NULL;
 GHashTable *mime_c::mimetype_hash=NULL;
 GHashTable *mime_c::alias_hash=NULL;
 GHashTable *mime_c::application_hash_type=NULL;
-GHashTable *mime_c::application_hash_sfx=NULL;
+//GHashTable *mime_c::application_hash_sfx=NULL;
 GHashTable *mime_c::application_hash_icon=NULL;
 GHashTable *mime_c::application_hash_text=NULL;
 GHashTable *mime_c::application_hash_text2=NULL;
 GHashTable *mime_c::application_hash_output=NULL;
 GHashTable *mime_c::application_hash_output_ext=NULL;
 
-
 static void free_apps(void *);
+#if 0
 static void add2type_hash (DBHashTable *, void *);
 static void add2sfx_hash (DBHashTable *, void *);
 static void add2cache_text (gpointer, gpointer, gpointer);
@@ -59,6 +59,7 @@ static void write_cache_sum (long long);
 static long long get_cache_sum (void);
 static gchar *get_cache_path (const gchar *);
 static gint check_dir (char *);
+#endif
 
 xmlDocPtr openXML(gchar *f){
 }
@@ -110,7 +111,7 @@ mime_c::mime_c (void) {
         application_hash_type = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, free_apps);
 
         // Read only hashes:
-        application_hash_sfx = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
+        //application_hash_sfx = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
         application_hash_icon = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
         application_hash_text = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
         application_hash_text2 = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
@@ -119,6 +120,7 @@ mime_c::mime_c (void) {
         generic_icon_hash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
     }
 
+#if 0
     if(!load_hashes_from_cache()) {
         DBG("mime_c:: now building hashes from scratch\n");
         mime_build_hashes ();
@@ -127,6 +129,9 @@ mime_c::mime_c (void) {
     } else {
         DBG("mime_c:: hashes loaded from disk cache\n");
     }
+#else
+        mime_build_hashes ();
+#endif
     return;
 }
 
@@ -456,9 +461,11 @@ mime_c::mime_add (gchar *type, gchar *q) {
     // thread will dispose of config_command:
     gchar *config_command=g_strdup_printf("%s:%s", type, command);
     g_free(command);
+#if 0
     pthread_t thread;
     pthread_create(&thread, NULL, gencache, (void *)config_command); 
     pthread_detach(thread);
+#endif
     return NULL;
 }
 
@@ -558,7 +565,7 @@ mime_c::mime_get_alias_type(const gchar *type){
 ///////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+#if 0
 gboolean
 mime_c::load_hashes_from_cache (void) {
     // FIXME: currently broken.
@@ -675,6 +682,18 @@ mime_c::load_text_hash(GHashTable *hash_table, const gchar *filename){
     fclose(cache);
 }
 
+void
+mime_c::destroy_application_hash_sfx (void) {
+    if(!application_hash_sfx) return;
+    g_hash_table_destroy (application_hash_sfx);
+}
+
+void
+mime_c::destroy_application_hash_type (void) {
+    if(!application_hash_type) return;
+    g_hash_table_destroy (application_hash_type);
+}
+#endif
 
 void
 mime_c::mime_build_hashes (void) {
@@ -727,7 +746,7 @@ mime_c::mime_build_hashes (void) {
             apps = NULL;
             // apps may be null
             for(subnode = node->children; subnode; subnode = subnode->next) {
-                if(xmlStrEqual (subnode->name, (const xmlChar *)"key")) {
+                /*if(xmlStrEqual (subnode->name, (const xmlChar *)"key")) {
 			    // key --> value
                     value = xmlGetProp (subnode, (const xmlChar *)"value");
 		    gchar *sfx = g_utf8_strdown ((gchar *)value, -1);
@@ -741,7 +760,7 @@ mime_c::mime_build_hashes (void) {
 		    g_free (sfx);
 		    g_free (sfx_key);
 		    continue;
-		}
+		}*/
                 if(xmlStrEqual (subnode->name, (const xmlChar *)"alias")) {
 			    // alias --> type
                     value = xmlGetProp (subnode, (const xmlChar *)"type");
@@ -868,17 +887,6 @@ mime_c::mime_build_hashes (void) {
     NOOP("mime-module, hash table build is now complete.\n");
 }
 
-void
-mime_c::destroy_application_hash_sfx (void) {
-    if(!application_hash_sfx) return;
-    g_hash_table_destroy (application_hash_sfx);
-}
-
-void
-mime_c::destroy_application_hash_type (void) {
-    if(!application_hash_type) return;
-    g_hash_table_destroy (application_hash_type);
-}
 
 gchar *
 mime_c::get_hash_key (const gchar * pre_key) {
@@ -977,7 +985,7 @@ mime_c::mimeable_file (struct stat *st_p) {
     return result;
 }
 
-
+#if 0
 void 
 mime_c::save_text_cache(GHashTable *hash_table, const gchar *filename) {
     gchar *file=g_build_filename(USER_RFM_CACHE_DIR, filename, NULL);
@@ -1088,73 +1096,12 @@ mime_c::generate_caches (void) {
 
     return TRUE;
 }
+#endif
 
-#if 10
 const gchar *
 mime_c::locate_mime_t (const gchar * file){
     return mime_sfxhash_c<string4_hash_t>::locate_mime(file, sfx_data); 
 }
-#else
-// XXX this is the site to modify...
-const gchar *
-mime_c::locate_mime_t (const gchar * file) {
-    const gchar *type;
-    const gchar *p;
-    //load_hashes ();
-    TRACE("mime-module, locate_mime_t looking in sfx hash for \"%s\"\n", file);
-
-    if (!strchr(file,'.')) return NULL;
-    ///  now look in sfx hash...
-    gchar *basename = g_path_get_basename (file);
-
-    p = strchr (basename, '.');
-    // Right to left:
-    for (;p && *p; p = strchr (p, '.'))
-    {
-        while (*p=='.') p++;
-        if (*p == 0) break;
-        
-        gchar *sfx;
-        /* try all lower case (hash table keys are set this way) */
-        sfx = g_utf8_strdown (p, -1);
-        gchar *key = get_hash_key (sfx);
-        TRACE("mime-module, lOOking for \"%s\" with key=%s\n", sfx, key);
-
-        type = (const gchar *)g_hash_table_lookup (application_hash_sfx, key);
-        g_free (key);
-        if(type) {
-            NOOP(stderr,"mime-module, FOUND %s: %s\n", sfx, type);
-            g_free (sfx);
-            g_free (basename);
-            return type;
-        } 
-        g_free (sfx);
-    }
-    // Left to right, test all extensions.
-    gchar **q = g_strsplit(basename, ".", -1);
-    gchar **q_p = q+1;
-    
-    for (;q_p && *q_p; q_p++){
-	gchar *sfx;
-	/* try all lower case (hash table keys are set this way) */
-	sfx = g_utf8_strdown (*q_p, -1);
-	gchar *key = get_hash_key (sfx);
-	type = (const gchar *)g_hash_table_lookup (application_hash_sfx, key);
-	g_free (key);
-	if(type) {
-	    NOOP(stderr,"mime-module(2), FOUND %s: %s\n", sfx, type);
-	    g_free (sfx);
-	    g_free (basename);
-	    g_strfreev(q);
-	    return type;
-	}
-	g_free (sfx);
-    }
-    g_strfreev(q);
-    g_free (basename);
-    return NULL;
-}
-#endif
 
 gchar **
 mime_c::locate_apps (const gchar * type) {
@@ -1250,6 +1197,7 @@ mime_c::get_hash_key_strstrip (void *p){
     return key;
 }
 
+#if 0
 
 void *
 mime_c::mime_gencache (gchar *data) {
@@ -1371,7 +1319,6 @@ mime_c::check_dir (char *path) {
     }
     return FALSE;
 }
-
 
 //**************************************************************
 
@@ -1509,6 +1456,7 @@ gencache (void *data) {
     mime_c *mime_p = (mime_c *)arg[0];
     return mime_p->mime_gencache((gchar *)arg[1]);
 }
+#endif
 
 static void
 free_apps(void *data){
