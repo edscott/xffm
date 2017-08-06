@@ -11,12 +11,6 @@
 #include <errno.h>
 #include <dbh.h>
 //template <class>
-struct string4_hash_t {
-	    xmlDocPtr doc;
-            gchar const *keys[4];
-            gchar *mimefile;
-	    GHashTable *hash;
-};
 
 
 //template <class Type = string_hash_c >
@@ -59,12 +53,14 @@ class mime_hash_t {
 	const gchar *get_xmlsubdata(void){
 	    return xmlsubdata;
 	}
-        
+        GHashTable *get_hash(Type T){
+	    return T.hash;
+	}
     private:
 	const gchar *xmlkey;
 	const gchar *xmldata;
 	const gchar *xmlsubdata;
-
+	GHashTable *hash;
     public:
 #if 0
 	mime_hash_t(gchar *name){
@@ -95,18 +91,20 @@ class mime_hash_t {
 	pthread_mutex_t mutex;
 	//gchar  *hashname;
 
-	gchar *get_hash_key (const gchar * pre_key) {
+    public:
+	static gchar *get_hash_key (const gchar * pre_key, Type T) {
 	    GString *gs = g_string_new (pre_key);
 	    gchar *key;
 	    key = g_strdup_printf ("%10u", g_string_hash (gs));
 	    g_string_free (gs, TRUE);
 	    return key;
 	}
-    public:
+
 	void build_hash (Type T) {
             xmlkey = T.keys[0];
             xmldata = T.keys[1];
             xmlsubdata = T.keys[2];
+	    hash = T.hash;
 	    gchar *mimefile = T.mimefile;
 	    
 	    xmlDocPtr doc = T.doc;
@@ -118,9 +116,6 @@ class mime_hash_t {
 
 	    //build hashes from system files
 
-            const gchar *key = get_xmlkey();
-            const gchar *xmldata = get_xmldata();
-            printf("...\n");
 	    if(mimefile==NULL || access (mimefile, R_OK) != 0) {
 		DBG ("access(%s, R_OK)!=0 (%s)\n", mimefile, strerror(errno));
 		return;
@@ -150,7 +145,7 @@ class mime_hash_t {
 			    value = xmlGetProp (subnode, (const xmlChar *)get_xmldata());
 			    gchar *key_string = g_utf8_strdown ((gchar *)value, -1);
 			    g_free (value);
-			    gchar *hash_key = get_hash_key (key_string);
+			    gchar *hash_key = get_hash_key (key_string,T);
 			    if(key_string) {
 					NOOP("mime_hash_t::replacing hash element \"%s\" with key %s --> %s\n", 
 					    key_string, hash_key, type);
@@ -164,7 +159,7 @@ class mime_hash_t {
 		}
 	    }
 	    fprintf(stderr, "mime_hash_t::hash table build (%p) for %s with \"%s\"-->\"%s\" is now complete.\n", 
-		    T.hash, T.mimefile, key, xmldata);
+		    T.hash, T.mimefile, get_xmlkey(), get_xmldata());
 	}
 
 
