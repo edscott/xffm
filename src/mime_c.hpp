@@ -7,8 +7,6 @@
 #include "lite_c.hpp"
 
 #define USER_RFM_DIR            g_get_user_config_dir(),"rfm"
-#define USER_DBH_DIR		USER_RFM_DIR,"dbh"
-#define USER_DBH_CACHE_DIR	USER_RFM_CACHE_DIR,"dbh"
 #define SYSTEM_MODULE_DIR	PACKAGE_DATA_DIR,"rfm","rmodules"
 
 #include "mime_sfxhash_c.hh"
@@ -22,48 +20,89 @@
 #include <errno.h>
 #include <dbh.h>
 
+enum {
+    SFX,
+    ALIAS,
+    COMMAND,
+    GENERIC_ICON,
+    COMMAND_ICON,
+    COMMAND_TEXT,
+    COMMAND_TEXT2,
+    COMMAND_OUTPUT,
+    COMMAND_OUTPUT_EXT,
+    MIME_HASHES
+};
+
+
 class mime_c: virtual utility_c, public lite_c, public mime_magic_c {
     public:
-        mime_c(void);
         ~mime_c(void);
-        gchar *mime_type (const gchar *);
-        gchar *mime_type (const gchar *, struct stat *);
-        gchar *mime_function(const gchar *, const gchar *);
 
+        static void init_hashes(void);
+        static void create_hashes(xmlDocPtr);
+        static void build_hashes(xmlDocPtr, const gchar *);
 
+        static void mime_build_hashes (void); // to be zapped  
 
-        const gchar *find_mimetype_in_hash(const gchar *);
-       /* void *mime_magic (void *p);
-        void *mime_encoding (void *p);
-        void *mime_file (void *p);
-        void *mime_function(const gchar *, const gchar *);*/
-        gboolean mime_is_valid_command (const char *);
+        static void add_type_to_hashtable(const gchar *, const gchar *, gboolean );
+
+   
+        static gchar *mime_type (const gchar *);
+        static gchar *mime_type (const gchar *, struct stat *);
+        static gchar *mimetype1(const gchar *);
+        static gchar *mimetype2(const gchar *);
+        static gchar *get_hash_key (const gchar * );
+        static const gchar *mimeable_file (struct stat *);
+        static void *put_mimetype_in_hash(const gchar *, const gchar *);
+        static gchar *mime_magic (const gchar *);
+        static const gchar *locate_mime_t (const gchar * );
+        static gchar *mime_get_alias_type(const gchar *p);
+        static gchar *mime_function(const gchar *, const gchar *);
+        static const gchar *find_mimetype_in_hash(const gchar *);
+        static gchar *mime_command (const char *p);
+        static gchar **locate_apps (const gchar * );
+        static gboolean mime_is_valid_command (const char *);
+        static const gchar *get_mimetype_iconname(const gchar *);
+
+    public:
+        static txt_hash_t hash_data[MIME_HASHES];
+
+        static mime_sfxhash_c<const txt_hash_t> app_sfx_hash; 
+	static mime_aliashash_c<const txt_hash_t> app_alias_hash;
+	static mime_hash_c<const txt_hash_t> app_genericicon_hash; 
+	
+        static mime_application_hash_c<const txt_hash_t> app_command_hash;
+
+	static mime_command_hash_c<const txt_hash_t> app_icon_hash;
+	static mime_command_hash_c<const txt_hash_t> app_type_hash;
+	static mime_command_hash_c<const txt_hash_t> app_text_hash;
+	static mime_command_hash_c<const txt_hash_t> app_text2_hash;
+	static mime_command_hash_c<const txt_hash_t> app_output_hash;
+	static mime_command_hash_c<const txt_hash_t> app_output_ext_hash;
+
         const gchar *mime_command_text (gchar *p) ;
         const gchar *mime_command_text2 (gchar *p);
         const gchar *mime_command_icon (gchar *p);
         const gchar *mime_command_output (gchar *p);
         const gchar *mime_command_output_ext (gchar *p);
-        const gchar *get_mimetype_iconname(const gchar *);
         
-        gchar *mime_command (const char *p);
         gchar **mime_apps (const char *p);
         void *mime_add (gchar *, gchar *);
         void *mime_append (gchar *, gchar *);
         gchar *mime_mk_command_line (const gchar *, const gchar *);
         gchar *mime_mk_terminal_line (const gchar *p);
-        gchar *mime_get_alias_type(const gchar *p);
         gboolean generate_caches (void);
         void *mime_gencache(gchar *);
 
-        static string4_hash_t sfx_data;
     private:
+        //void create_hash(txt_hash_t &,  xmlDocPtr, const gchar *, const gchar *);
+        //void create_hash(txt_hash_t &,  xmlDocPtr, const gchar *, const gchar *, const gchar *);
 
-	mime_sfxhash_c<const string4_hash_t> app_sfx_hash; // key is g_utf8_strdown ((gchar *)value(value), -1);
-//	mime_hash_t<const string4_hash_t> app_sfx_hash; // key is g_utf8_strdown ((gchar *)value(value), -1);
         
 	/*
 	mime_hash_t<string_hash_c("key","value",NULL)> app_sfx_hash; // key is g_utf8_strdown ((gchar *)value(value), -1);
 	mime_hash_t<string_hash_c("alias","type",NULL)> app_alias_hash; // key is g_utf8_strdown ((gchar *)value(type), -1);
+
 	mime_hash_t<string_hash_c("generic-icon","name",NULL)> app_generic_icon_hash; // key is g_utf8_strdown ((gchar *)value(name), -1);
 
 	mime_hash_t<string_hash_c("application",NULL,"command")> app_type_hash; // key is get_hash_key(type)
@@ -75,46 +114,19 @@ class mime_c: virtual utility_c, public lite_c, public mime_magic_c {
 
 */
 
-        gchar *mime_magic (const gchar *);
 
-        gboolean load_hashes_from_cache(void);
-        long long read_cache_sum (void);
-        gchar *get_cache_path (const gchar *);
-        void load_text_hash(GHashTable *, const gchar *);
-
-        void mime_build_hashes (void);   
-        void destroy_application_hash_sfx (void);
-        void destroy_application_hash_type (void);
-        gchar *get_hash_key (const gchar * );
-        void add_type_to_hashtable(const gchar *, const gchar *, gboolean );
-        const gchar *mimeable_file (struct stat *);
-        void save_text_cache(GHashTable *, const gchar *);
-        const gchar *locate_mime_t (const gchar * );
-        gchar **locate_apps (const gchar * );
-        void *put_mimetype_in_hash(const gchar *, const gchar *);
-        gchar *mimetype1(const gchar *);
-        gchar *mimetype2(const gchar *);
         gchar *get_hash_key_strstrip (void *);
-        long long get_cache_sum (void);
-        void write_cache_sum (long long);
-        gint check_dir (char *);
 
-        static pthread_mutex_t cache_mutex;
-        static pthread_mutex_t mimetype_hash_mutex;
         static pthread_mutex_t alias_hash_mutex;
-        static pthread_mutex_t application_hash_mutex;
 
 
-        static GHashTable *generic_icon_hash;
-        static GHashTable *mimetype_hash;
-        static GHashTable *alias_hash;
         static GHashTable *application_hash_type;
-        static GHashTable *application_hash_sfx;
-        static GHashTable *application_hash_icon;
-        static GHashTable *application_hash_text;
-        static GHashTable *application_hash_text2;
-        static GHashTable *application_hash_output;
-        static GHashTable *application_hash_output_ext;
+
+    private:
+
+
+        static pthread_mutex_t mimetype_hash_mutex;
+        static GHashTable *mimetype_hash;
 
 };
 

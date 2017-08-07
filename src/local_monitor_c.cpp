@@ -170,7 +170,7 @@ local_monitor_c::add_local_item(GtkListStore *list_store, xd_t *xd_p){
     gtk_list_store_append (list_store, &iter);
     gchar *utf_name = utf_string(xd_p->d_name);
     // plain extension mimetype fallback
-    if (!xd_p->mimetype) xd_p->mimetype = mime_type(xd_p->d_name); 
+    if (!xd_p->mimetype) xd_p->mimetype = mime_c::mime_type(xd_p->d_name); 
     gchar *icon_name = get_iconname(xd_p);
     
     // chop file extension (will now appear on the icon). (XXX only for big icons)
@@ -466,7 +466,7 @@ local_monitor_c::get_emblem_string(xd_t *xd_p, gboolean use_lite){
         g_free(emblem); 
         emblem = g;
         if (use_lite) {
-            const gchar *lite_emblem = gtk_c::get_lite_emblem(xd_p->mimetype);
+            const gchar *lite_emblem = lite_c::get_lite_emblem(xd_p->mimetype);
             if (lite_emblem){
                 g = g_strconcat(emblem, "/NE/", lite_emblem, "/1.8/200", NULL); 
                 g_free(emblem); 
@@ -503,7 +503,7 @@ local_monitor_c::get_mime_iconname(xd_t *xd_p){
 
     if (xd_p->mimetype) {
         // here we should get generic-icon from mime-module.xml!
-        const gchar *basic = get_mimetype_iconname(xd_p->mimetype);
+        const gchar *basic = mime_c::get_mimetype_iconname(xd_p->mimetype);
         //DBG("xfdir_local_c::get_mime_iconname(%s) -> %s\n", xd_p->mimetype, basic);
         if (basic) {
             // check if the pixbuf is actually available

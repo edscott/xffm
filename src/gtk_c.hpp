@@ -11,7 +11,7 @@
 #define SIZE_PREVIEW	96
 #define SIZE_TIP	128
 
-class gtk_c: virtual utility_c, public tooltip_c, public pixbuf_c, public mime_c{
+class gtk_c: virtual utility_c, public tooltip_c, public pixbuf_c{
     public:
         gtk_c(void);
         ~gtk_c(void);

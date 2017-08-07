@@ -71,7 +71,7 @@ xfdir_local_c::item_activated (GtkIconView *iconview, GtkTreePath *tpath, void *
     }
 
     if (!mimetype){
-        mimetype = mime_type(ddname, NULL);
+        mimetype = mime_c::mime_type(ddname, NULL);
     }
 
     if (!mimetype){
@@ -82,13 +82,13 @@ xfdir_local_c::item_activated (GtkIconView *iconview, GtkTreePath *tpath, void *
     if (strcmp(mimetype, "inode/directory")==0){
          view_p->reload(ddname);
     } else {
-        gchar *command = mime_command(mimetype);
+        gchar *command = mime_c::mime_command(mimetype);
         view_p->get_lpterm_p()->print_error(g_strdup_printf("mimetype = %s (%s)\n", mimetype, command));
         if (!command){
             // try pure mime magic
             g_free(mimetype);
-            mimetype = mime_function(ddname, "mime_magic");
-            command = mime_command(mimetype);
+            mimetype = mime_c::mime_function(ddname, "mime_magic");
+            command = mime_c::mime_command(mimetype);
         }
         if (!command && strncmp(mimetype, "text/", strlen("text/"))==0){
                 command = get_text_editor();
@@ -156,10 +156,10 @@ xfdir_c::item_activated (GtkIconView *iconview, GtkTreePath *tpath, void *data)
         view_p->reload(full_path);
     } else {
         // uses mimetype, should be delegated to xfdir_local_c...
-        gchar *mimetype = mime_type(full_path);
-        const gchar *command = mime_command(mimetype);
-        const gchar *command1 = mime_command_text(mimetype);
-        const gchar *command2 = mime_command_text2(mimetype);
+        gchar *mimetype = mime_c::mime_type(full_path);
+        const gchar *command = mime_c::mime_command(mimetype);
+        const gchar *command1 = mime_c::mime_command_text(mimetype);
+        const gchar *command2 = mime_c::mime_command_text2(mimetype);
         view_p->get_lpterm_p()->print_error(g_strdup_printf("%s: %s\n", mimetype, command));
         view_p->get_lpterm_p()->print_error(g_strdup_printf("%s: %s\n", mimetype, command1));
         view_p->get_lpterm_p()->print_error(g_strdup_printf("%s: %s\n", mimetype, command2));
@@ -318,8 +318,8 @@ xfdir_local_c::sort_directory_list(GList *list){
                         xd_p->d_name, strerror(errno));
                 continue;
             } 
-            xd_p->mimetype = mime_type(xd_p->d_name, xd_p->st); // using stat obtained above
-            xd_p->mimefile = g_strdup(gtk_c::mime_file(xd_p->d_name)); // 
+            xd_p->mimetype = mime_c::mime_type(xd_p->d_name, xd_p->st); // using stat obtained above
+            xd_p->mimefile = g_strdup(mime_c::mime_file(xd_p->d_name)); // 
 	}
     }
     // Default sort order:
@@ -487,7 +487,7 @@ xfdir_local_c::get_path_info (GtkTreeModel *treemodel, GtkTreePath *tpath, const
     }
     
     if (!mimefile){
-	mimefile = mime_function(full_path, "mime_file");
+	mimefile = mime_c::mime_function(full_path, "mime_file");
 	gtk_list_store_set (GTK_LIST_STORE(treemodel), &iter,
 		COL_MIMEFILE, mimefile, 
 	    -1);
@@ -604,8 +604,8 @@ xfdir_local_c::path_info (const gchar *file_path, struct stat *st, const gchar *
     // mime overkill    
     gchar *mimetype;
     if (!mimedata) {
-	mimetype = mime_type(file_path, st);
-	if (!mimetype) mimetype = mime_function(file_path, "mime_magic");
+	mimetype = mime_c::mime_type(file_path, st);
+	if (!mimetype) mimetype = mime_c::mime_function(file_path, "mime_magic");
 	if (!mimetype)mimetype = g_strdup(_("unknown"));
     } else {
 	mimetype = g_strdup(mimedata);
@@ -622,7 +622,7 @@ xfdir_local_c::path_info (const gchar *file_path, struct stat *st, const gchar *
     g_free(u);
 #endif
 
-    gchar *mimeencoding = mime_function(file_path, "mime_encoding");
+    gchar *mimeencoding = mime_c::mime_function(file_path, "mime_encoding");
 
     if (!mimefile)mimefile = g_strdup(_("unknown"));    
     if (!mimeencoding)mimeencoding = g_strdup(_("unknown"));    
