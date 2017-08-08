@@ -83,6 +83,17 @@ xfdir_local_c::item_activated (GtkIconView *iconview, GtkTreePath *tpath, void *
          view_p->reload(ddname);
     } else {
         gchar *command = mime_c::mime_command(mimetype);
+        {
+            // FIXME: not working...
+            const gchar *text = GET_COMMAND_TEXT(mimetype);
+            const gchar *text2 = GET_COMMAND_TEXT2(mimetype);
+            const gchar *icon = GET_COMMAND_ICON(mimetype);
+            const gchar *output = GET_COMMAND_OUTPUT(mimetype);
+            const gchar *ext = GET_COMMAND_OUTPUT_EXT(mimetype);
+            fprintf(stderr, "xfdir_local_c::item_activated: %s, %s, %s, %s, %s\n",
+                    text, text2, icon, output, ext);
+        }
+
         view_p->get_lpterm_p()->print_error(g_strdup_printf("mimetype = %s (%s)\n", mimetype, command));
         if (!command){
             // try pure mime magic

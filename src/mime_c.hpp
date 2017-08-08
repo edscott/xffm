@@ -33,6 +33,11 @@ enum {
     MIME_HASHES
 };
 
+#define GET_COMMAND_TEXT(X) mime_c::command_text_hash.lookup(X, mime_c::hash_data[COMMAND_TEXT])
+#define GET_COMMAND_TEXT2(X) mime_c::command_text2_hash.lookup(X, mime_c::hash_data[COMMAND_TEXT2])
+#define GET_COMMAND_ICON(X) mime_c::command_icon_hash.lookup(X, mime_c::hash_data[COMMAND_ICON])
+#define GET_COMMAND_OUTPUT(X) mime_c::command_output_hash.lookup(X, mime_c::hash_data[COMMAND_OUTPUT])
+#define GET_COMMAND_OUTPUT_EXT(X) mime_c::command_ext_hash.lookup(X, mime_c::hash_data[COMMAND_OUTPUT_EXT])
 
 class mime_c: virtual utility_c, public lite_c, public mime_magic_c {
     public:
@@ -73,12 +78,11 @@ class mime_c: virtual utility_c, public lite_c, public mime_magic_c {
 	
         static mime_application_hash_c<const txt_hash_t> app_command_hash;
 
-	static mime_command_hash_c<const txt_hash_t> app_icon_hash;
-	static mime_command_hash_c<const txt_hash_t> app_type_hash;
-	static mime_command_hash_c<const txt_hash_t> app_text_hash;
-	static mime_command_hash_c<const txt_hash_t> app_text2_hash;
-	static mime_command_hash_c<const txt_hash_t> app_output_hash;
-	static mime_command_hash_c<const txt_hash_t> app_output_ext_hash;
+	static mime_command_hash_c<const txt_hash_t> command_icon_hash;
+	static mime_command_hash_c<const txt_hash_t> command_text_hash;
+	static mime_command_hash_c<const txt_hash_t> command_text2_hash;
+	static mime_command_hash_c<const txt_hash_t> command_output_hash;
+	static mime_command_hash_c<const txt_hash_t> command_ext_hash;
 
         const gchar *mime_command_text (gchar *p) ;
         const gchar *mime_command_text2 (gchar *p);
@@ -106,11 +110,11 @@ class mime_c: virtual utility_c, public lite_c, public mime_magic_c {
 	mime_hash_t<string_hash_c("generic-icon","name",NULL)> app_generic_icon_hash; // key is g_utf8_strdown ((gchar *)value(name), -1);
 
 	mime_hash_t<string_hash_c("application",NULL,"command")> app_type_hash; // key is get_hash_key(type)
-	mime_hash_t<string_hash_c("application","command","icon")> app_icon_hash; // key is get_hash_key(value(command))
-	mime_hash_t<string_hash_c("application","command","text")> app_text_hash; // key is get_hash_key(value(command))
-	mime_hash_t<string_hash_c("application","command","text2")> app_text2_hash; // key is get_hash_key(value(command))
-	mime_hash_t<string_hash_c("application","command","output")> app_output_hash; // key is get_hash_key(value(command))
-	mime_hash_t<string_hash_c("application","command","output_ext")> app_output_ext_hash; // key is get_hash_key(value(command))
+	mime_hash_t<string_hash_c("application","command","icon")> command_icon_hash; // key is get_hash_key(value(command))
+	mime_hash_t<string_hash_c("application","command","text")> command_text_hash; // key is get_hash_key(value(command))
+	mime_hash_t<string_hash_c("application","command","text2")> command_text2_hash; // key is get_hash_key(value(command))
+	mime_hash_t<string_hash_c("application","command","output")> command_output_hash; // key is get_hash_key(value(command))
+	mime_hash_t<string_hash_c("application","command","output_ext")> command_ext_hash; // key is get_hash_key(value(command))
 
 */
 

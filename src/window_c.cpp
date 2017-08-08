@@ -19,7 +19,7 @@ static void  shell(GSimpleAction *, GVariant *, gpointer data);
 static void  search(GSimpleAction *, GVariant *, gpointer data);
 static void  finish(GSimpleAction *, GVariant *, gpointer data);
 
-
+GtkWidget *window_c::window=NULL;
 
 window_c::window_c(GtkApplication *data) {
     app = data;
@@ -547,6 +547,10 @@ static void
                        gpointer       data)
 {
     DBG("finish\n");
+
+    gtk_widget_hide(window_c::window);
+    while (gtk_events_pending()) gtk_main_iteration();
+    fprintf(stderr, "finish...\n");
     _exit(123);
 }
 

@@ -156,7 +156,14 @@ add(const gchar *key, const gchar *command, gboolean prepend, Type T){
 template <class Type>
 class mime_command_hash_c: public  mime_hash_c<Type>{
     public:
- void build_hash (Type T, const gchar *mimefile) {
+        static const gchar *lookup(const gchar *p, Type T){
+            if (!p) return NULL;
+            gchar *key=mime_command_hash_c::get_hash_key_strstrip (p, T);
+            const gchar *value=(const gchar *)g_hash_table_lookup (T.hash, key);
+            g_free(key);
+            return value;
+        }
+void build_hash (Type T, const gchar *mimefile) {
     xmlChar *value;
     xmlNodePtr node;
     xmlNodePtr subnode;

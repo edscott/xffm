@@ -70,11 +70,11 @@ mime_c::build_hashes(xmlDocPtr doc, const gchar *mimefile){
 
     app_command_hash.build_hash(hash_data[COMMAND], mimefile);
 
-    app_icon_hash.build_hash(hash_data[COMMAND_ICON], mimefile);
-    app_text_hash.build_hash(hash_data[COMMAND_TEXT], mimefile);
-    app_text2_hash.build_hash(hash_data[COMMAND_TEXT2], mimefile);
-    app_output_hash.build_hash(hash_data[COMMAND_OUTPUT], mimefile);
-    app_output_ext_hash.build_hash(hash_data[COMMAND_OUTPUT_EXT], mimefile);
+    command_icon_hash.build_hash(hash_data[COMMAND_ICON], mimefile);
+    command_text_hash.build_hash(hash_data[COMMAND_TEXT], mimefile);
+    command_text2_hash.build_hash(hash_data[COMMAND_TEXT2], mimefile);
+    command_output_hash.build_hash(hash_data[COMMAND_OUTPUT], mimefile);
+    command_ext_hash.build_hash(hash_data[COMMAND_OUTPUT_EXT], mimefile);
 }
 
 void
@@ -115,14 +115,12 @@ mime_c::mime_magic(const gchar *file){
 const gchar *
 mime_c::find_mimetype_in_hash(const gchar *file){
     const gchar *type=NULL; 
-#ifndef NO_MIMETYPE_HASH
     if (!mimetype_hash) return type;
     gchar *key = get_hash_key (file);
     pthread_mutex_lock(&mimetype_hash_mutex);
     type = (const gchar *)g_hash_table_lookup (mimetype_hash, key);
     pthread_mutex_unlock(&mimetype_hash_mutex);
     g_free (key);
-#endif
     return type;
 }
 
@@ -131,13 +129,11 @@ mime_c::find_mimetype_in_hash(const gchar *file){
 gchar *
 mime_c::mime_type (const gchar *file){
     if (!file) return NULL;
-#ifndef NO_MIMETYPE_HASH
     const gchar *old_mimetype = find_mimetype_in_hash(file);
     if (old_mimetype) {
 	// already tabulated. Just return previous value.
 	return g_strdup(old_mimetype);
     }
-#endif
     if(file[strlen (file) - 1] == '~' || file[strlen (file) - 1] == '%') {
 	gchar *r_file = g_strdup(file);
 	r_file[strlen (r_file) - 1] = 0;
@@ -294,7 +290,7 @@ gboolean mime_c::mime_is_valid_command (const char *cmd_fmt) {
     return retval;
 }
 
- 
+/* 
 const gchar *
 mime_c::mime_command_text (gchar *p) {
     NOOP("mime_command_text()...\n");
@@ -327,7 +323,6 @@ mime_c::mime_command_icon (gchar *p) {
     return value;
 }
 
-
 const gchar *
 mime_c::mime_command_output (gchar *p) {
     NOOP("mime_command_output()...\n");
@@ -347,6 +342,7 @@ mime_c::mime_command_output_ext (gchar *p) {
     g_free(key);
     return value;
 }
+*/
 
     
 

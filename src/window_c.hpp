@@ -25,9 +25,9 @@ class window_c: public menu_c {
 	GtkApplication *app; 
         
 	void shell_dialog(void);
+        static GtkWidget *window;
     private:
         GtkNotebook *notebook;
-        GtkWidget *window;
         GtkWidget *new_tab_button;
 	
                 

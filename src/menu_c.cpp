@@ -1,3 +1,4 @@
+#include "window_c.hpp"
 #include "menu_c.hpp"
 
 menu_c::~menu_c(void){
@@ -19,7 +20,12 @@ static void menu_option(GtkWidget *menu_item, gpointer data){
     else if (strcmp(what, _("Remove bookmark"))==0){}
     else if (strcmp(what, _("Search"))==0){}
     else if (strcmp(what, _("Close"))==0){}
-    else if (strcmp(what, _("Exit"))==0){ _exit(123);}
+    else if (strcmp(what, _("Exit"))==0){ 
+        gtk_widget_hide(window_c::window);
+        while (gtk_events_pending()) gtk_main_iteration();
+        fprintf(stderr, "exiting...\n");
+        _exit(123);
+    }
     //} else if (strcmp(what, )==0){}
     
 }

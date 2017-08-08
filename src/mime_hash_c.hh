@@ -41,6 +41,15 @@ class mime_hash_c {
 	    //pthread_mutex_destroy(&mutex);
 	}
 	    
+
+        static gchar *
+        get_hash_key_strstrip (const gchar *p, Type T){
+            gchar *pp=g_strdup((char *)p);
+            g_strstrip(pp);
+            gchar *key=get_hash_key ((gchar *)pp, T);
+            g_free(pp);
+            return key;
+        }
 	static gchar *get_hash_key (const gchar * pre_key, Type T) {
 	    GString *gs = g_string_new (pre_key);
 	    gchar *key;
