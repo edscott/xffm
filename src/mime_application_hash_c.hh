@@ -140,6 +140,31 @@ class mime_application_hash_c: public  mime_hash_c<Type>{
             }
             fprintf(stderr, "mime_application_hash_c::hash table build (%p) with \"%s\"-->\"%s\" is now complete.\n", 
                     T.hash, T.xmlkey, T.xmlsubdata);
+
+#ifdef PENDING
+    // now load any previous user defined applications:
+    //
+    gchar *file=g_build_filename(USER_APPLICATIONS, NULL);
+    DBG("mime-module, loading user defined applications from %s\n",file);
+    FILE *config=fopen(file, "r");
+    if (config) {
+	gchar type[4096];
+	while (fgets(type, 4096, config) && !feof(config)) {
+	    char *s=strchr(type, '\n');
+	    *s=0;
+	    s=strchr(type, ':');
+	    if (!s) continue;
+	    *s=0;
+	    const gchar *command=s+1;
+	    add_type_to_hashtable(type, command, TRUE);
+	}
+	fclose(config);
+    }
+    g_free(file);
+    
+    
+    NOOP("mime-module, hash table build is now complete.\n");
+#endif
         }
 };
 

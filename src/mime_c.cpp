@@ -95,16 +95,10 @@ mime_c::init_hashes (void) {
 
 
 
-
-mime_c::~mime_c (void){
-}
-
-
-
 gchar *
 mime_c::mime_magic(const gchar *file){
     gchar *unalias = mime_magic_unalias(file);
-    gchar *alias = mime_get_alias_type(unalias);
+    gchar *alias = MIME_GET_ALIAS_TYPE(unalias);
     g_free(unalias);
     return alias;
 }
@@ -290,61 +284,6 @@ gboolean mime_c::mime_is_valid_command (const char *cmd_fmt) {
     return retval;
 }
 
-/* 
-const gchar *
-mime_c::mime_command_text (gchar *p) {
-    NOOP("mime_command_text()...\n");
-    if (!p) return NULL;
-    gchar *key=get_hash_key_strstrip (p);
-    const gchar *value=(const gchar *)g_hash_table_lookup (hash_data[COMMAND_TEXT].hash, key);
-    g_free(key);
-    return value;
-}
-
- 
-const gchar *
-mime_c::mime_command_text2 (gchar *p) {
-    NOOP("mime_command_text2()...\n");
-    if (!p) return NULL;
-    gchar *key=get_hash_key_strstrip (p);
-    const gchar *value=(const gchar *)g_hash_table_lookup (hash_data[COMMAND_TEXT2].hash, key);
-    g_free(key);
-    return value;
-}
-
- 
-const gchar *
-mime_c::mime_command_icon (gchar *p) {
-    NOOP("mime_command_icon()...\n");
-    if (!p) return NULL;
-    gchar *key=get_hash_key_strstrip (p);
-    const gchar *value=(const gchar *)g_hash_table_lookup (hash_data[COMMAND_ICON].hash, key);
-    g_free(key);
-    return value;
-}
-
-const gchar *
-mime_c::mime_command_output (gchar *p) {
-    NOOP("mime_command_output()...\n");
-    if (!p) return NULL;
-    gchar *key=get_hash_key_strstrip (p);
-    const gchar *value=(const gchar *)g_hash_table_lookup (hash_data[COMMAND_OUTPUT].hash, key);
-    g_free(key);
-    return value;
-}
- 
-const gchar *
-mime_c::mime_command_output_ext (gchar *p) {
-    NOOP("mime_command_output_ext()...\n");
-    if (!p) return NULL;
-    gchar *key=get_hash_key_strstrip (p);
-    const gchar *value=(const gchar *)g_hash_table_lookup (hash_data[COMMAND_OUTPUT_EXT].hash, key);
-    g_free(key);
-    return value;
-}
-*/
-
-    
 
 gchar *
 mime_c::mime_command (const char *type) {
@@ -352,7 +291,7 @@ mime_c::mime_command (const char *type) {
     gchar **apps;
     int i;
     gchar *cmd_fmt = NULL;
-    apps = locate_apps (type);
+    apps = LOCATE_APPS(type);
     if(!apps) {
         NOOP ("APPS: --> NULL\n");
         return NULL;
@@ -384,7 +323,7 @@ mime_c::mime_apps (const char *type) {
     NOOP("mime_apps()...\n");
     NOOP ("MIME: mime_apps(%s)\n", type);
     gchar **apps;
-    apps = locate_apps (type);
+    apps = LOCATE_APPS(type);
     if(!apps)
         return NULL;
     if(!apps[0]) {
@@ -494,40 +433,8 @@ mime_c::mime_mk_terminal_line (const gchar *command) {
     return command_line;
 }
 
-
-gchar *
-mime_c::mime_get_alias_type(const gchar *type){
-    return mime_aliashash_c<txt_hash_t>::get_alias_type(type, hash_data[ALIAS]); 
-}
- 
-
 ///////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////
-
-#ifdef PENDING
-    // now load any previous user defined applications:
-    //
-    gchar *file=g_build_filename(USER_APPLICATIONS, NULL);
-    DBG("mime-module, loading user defined applications from %s\n",file);
-    FILE *config=fopen(file, "r");
-    if (config) {
-	gchar type[4096];
-	while (fgets(type, 4096, config) && !feof(config)) {
-	    char *s=strchr(type, '\n');
-	    *s=0;
-	    s=strchr(type, ':');
-	    if (!s) continue;
-	    *s=0;
-	    const gchar *command=s+1;
-	    add_type_to_hashtable(type, command, TRUE);
-	}
-	fclose(config);
-    }
-    g_free(file);
-    
-    
-    NOOP("mime-module, hash table build is now complete.\n");
-#endif
 
 
 gchar *
@@ -577,29 +484,15 @@ mime_c::mimeable_file (struct stat *st_p) {
     return result;
 }
 
-
-const gchar *
-mime_c::locate_mime_t (const gchar * file){
-    return mime_sfxhash_c<txt_hash_t>::get_type_from_sfx(file, hash_data[SFX]); 
-}
-
-gchar **
-mime_c::locate_apps (const gchar * type) {
-    return mime_application_hash_c<txt_hash_t>::lookup(type, hash_data[COMMAND]);
-}
-
-
  
 void *
 mime_c::put_mimetype_in_hash(const gchar *file, const gchar *mimetype){
-#ifndef NO_MIMETYPE_HASH
     if (!mimetype_hash) return NULL;
     gchar *key = get_hash_key (file);
     pthread_mutex_lock(&mimetype_hash_mutex);
     g_hash_table_replace (mimetype_hash, g_strdup(key), g_strdup(mimetype));
     pthread_mutex_unlock(&mimetype_hash_mutex);
     g_free (key);
-#endif
     return NULL;
 }
 
@@ -630,9 +523,9 @@ mime_c::mimetype1(const gchar *file){
 
 gchar *
 mime_c::mimetype2(const gchar *file){
-    const gchar *type = locate_mime_t (file);
+    const gchar *type = LOCATE_MIME_T(file);
     if(type && strlen(type)) {
-        NOOP ("MIME:locate_mime_t(%s) -> %s\n", file, type);
+        NOOP ("MIME:LOCATE_MIME_T(%s) -> %s\n", file, type);
 	put_mimetype_in_hash(file, type);
         return g_strdup(type);
     }

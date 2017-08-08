@@ -3,7 +3,7 @@
 #include "mime_hash_c.hh"
 
 template <class Type>
-class mime_sfxhash_c: public  mime_hash_c<Type>{
+class mime_sfx_hash_c: public  mime_hash_c<Type>{
     public:
         static const gchar *
         get_type_from_sfx(const gchar * file, Type T ) {
@@ -26,7 +26,7 @@ class mime_sfxhash_c: public  mime_hash_c<Type>{
                 gchar *sfx;
                 /* try all lower case (hash table keys are set this way) */
                 sfx = g_utf8_strdown (p, -1);
-                gchar *key = mime_sfxhash_c::get_hash_key (sfx,T);
+                gchar *key = mime_sfx_hash_c::get_hash_key (sfx,T);
                 TRACE("mime-module, lOOking for \"%s\" with key=%s\n", sfx, key);
 
                 type = (const gchar *)g_hash_table_lookup (T.hash, key);
@@ -47,7 +47,7 @@ class mime_sfxhash_c: public  mime_hash_c<Type>{
                 gchar *sfx;
                 /* try all lower case (hash table keys are set this way) */
                 sfx = g_utf8_strdown (*q_p, -1);
-                gchar *key = mime_sfxhash_c::get_hash_key (sfx,T);
+                gchar *key = mime_sfx_hash_c::get_hash_key (sfx,T);
                 type = (const gchar *)g_hash_table_lookup (T.hash, key);
                 g_free (key);
                 if(type) {

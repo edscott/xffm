@@ -39,9 +39,13 @@ enum {
 #define GET_COMMAND_OUTPUT(X) mime_c::command_output_hash.lookup(X, mime_c::hash_data[COMMAND_OUTPUT])
 #define GET_COMMAND_OUTPUT_EXT(X) mime_c::command_ext_hash.lookup(X, mime_c::hash_data[COMMAND_OUTPUT_EXT])
 
+#define LOCATE_APPS(X) mime_application_hash_c<txt_hash_t>::lookup(type, hash_data[COMMAND])
+#define LOCATE_MIME_T(X) mime_sfx_hash_c<txt_hash_t>::get_type_from_sfx(X, hash_data[SFX])
+#define MIME_GET_ALIAS_TYPE(X) mime_aliashash_c<txt_hash_t>::get_alias_type(X, hash_data[ALIAS])
+
+
 class mime_c: virtual utility_c, public lite_c, public mime_magic_c {
     public:
-        ~mime_c(void);
 
         static void init_hashes(void);
         static void create_hashes(xmlDocPtr);
@@ -60,19 +64,16 @@ class mime_c: virtual utility_c, public lite_c, public mime_magic_c {
         static const gchar *mimeable_file (struct stat *);
         static void *put_mimetype_in_hash(const gchar *, const gchar *);
         static gchar *mime_magic (const gchar *);
-        static const gchar *locate_mime_t (const gchar * );
-        static gchar *mime_get_alias_type(const gchar *p);
         static gchar *mime_function(const gchar *, const gchar *);
         static const gchar *find_mimetype_in_hash(const gchar *);
         static gchar *mime_command (const char *p);
-        static gchar **locate_apps (const gchar * );
         static gboolean mime_is_valid_command (const char *);
         static const gchar *get_mimetype_iconname(const gchar *);
 
     public:
         static txt_hash_t hash_data[MIME_HASHES];
 
-        static mime_sfxhash_c<const txt_hash_t> app_sfx_hash; 
+        static mime_sfx_hash_c<const txt_hash_t> app_sfx_hash; 
 	static mime_aliashash_c<const txt_hash_t> app_alias_hash;
 	static mime_hash_c<const txt_hash_t> app_genericicon_hash; 
 	
