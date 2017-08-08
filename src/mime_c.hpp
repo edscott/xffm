@@ -9,7 +9,7 @@
 #define USER_RFM_DIR            g_get_user_config_dir(),"rfm"
 #define SYSTEM_MODULE_DIR	PACKAGE_DATA_DIR,"rfm","rmodules"
 
-#include "mime_sfxhash_c.hh"
+#include "mime_hash_c.hh"
 #define USER_RFM_CACHE_DIR      g_get_user_cache_dir(),"rfm"
 #define APPLICATION_MIME_FILE 	SYSTEM_MODULE_DIR,"mime-module.xml"
 #define USER_APPLICATIONS 	USER_RFM_DIR,"user-applications.2"

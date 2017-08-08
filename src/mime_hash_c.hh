@@ -11,6 +11,16 @@
 #include <errno.h>
 
 
+
+typedef struct txt_hash_t {
+	    GHashTable *hash;
+	    xmlDocPtr doc;
+            gchar const *xmlkey;
+            gchar const *xmldata;
+            gchar const *xmlsubdata;
+            pthread_mutex_t mutex;
+}txt_hash_t;
+
 enum {
     INODE_SOCKET,
     INODE_BLOCKDEVICE,
@@ -62,68 +72,73 @@ class mime_hash_c {
                     g_hash_table_lookup(T.hash, key);
         }
 
-static xmlDocPtr openXML(const gchar *mimefile){
-    xmlDocPtr doc;
-    xmlKeepBlanksDefault (0);
-    if(access (mimefile, R_OK) != 0) {
-        fprintf(stderr, "access(%s, R_OK)!=0 (%s)\n", mimefile, strerror(errno));
-        return NULL;
-    } 
-    if((doc = xmlParseFile (mimefile)) == NULL) {
-        fprintf(stderr, "mime_hash_t:: Cannot parse XML file: %s. Replace this file.\n", mimefile);
-        return NULL;
-    }
-    return doc;
-}
-
-
-void build_hash (Type T, const gchar *mimefile) {
-    xmlChar *value;
-    xmlNodePtr node;
-    xmlNodePtr subnode;
-    //build hashes from system files
-
-    node = xmlDocGetRootElement (T.doc);
-    if(!xmlStrEqual (node->name, (const xmlChar *)"mime-info")) {
-        fprintf(stderr, "mime_hash_t::Invalid XML file: %s (no mime-info). Replace this file.\n", mimefile);
-        return;
-    }
-    /* Now parse the xml tree */
-    NOOP("mime_hash_t:: parsing %s\n", mimefile);
-    for(node = node->children; node; node = node->next) {
-        if(xmlStrEqual (node->name, (const xmlChar *)"mime-key")) {
-            gchar *type;
-            //  type has to be defined. 
-            type = (gchar *)xmlGetProp (node, (const xmlChar *)"type");
-            if(!type) {
-                DBG("mime_hash_t:: return on type==NULL\n");
-                 return;
+        static xmlDocPtr openXML(const gchar *mimefile){
+            xmlDocPtr doc;
+            xmlKeepBlanksDefault (0);
+            if(access (mimefile, R_OK) != 0) {
+                fprintf(stderr, "access(%s, R_OK)!=0 (%s)\n", mimefile, strerror(errno));
+                return NULL;
+            } 
+            if((doc = xmlParseFile (mimefile)) == NULL) {
+                fprintf(stderr, "mime_hash_t:: Cannot parse XML file: %s. Replace this file.\n", mimefile);
+                return NULL;
             }
+            return doc;
+        }
 
-            for(subnode = node->children; subnode; subnode = subnode->next) {
-                if(xmlStrEqual (subnode->name, (const xmlChar *)T.xmlkey)) {
-                    // xmlkey --> xmldata
-                    value = xmlGetProp (subnode, (const xmlChar *)T.xmldata);
-                    gchar *key_string = g_utf8_strdown ((gchar *)value, -1);
-                    g_free (value);
-                    gchar *hash_key = get_hash_key (key_string,T);
-                    if(key_string) {
-                                NOOP("mime_hash_t::replacing hash element \"%s\" with key %s --> %s\n", 
-                                    key_string, hash_key, type);
-                                g_hash_table_replace (T.hash, hash_key, g_strdup(type));
+
+        static void build_hash (Type T, const gchar *mimefile) {
+            xmlChar *value;
+            xmlNodePtr node;
+            xmlNodePtr subnode;
+            //build hashes from system files
+
+            node = xmlDocGetRootElement (T.doc);
+            if(!xmlStrEqual (node->name, (const xmlChar *)"mime-info")) {
+                fprintf(stderr, "mime_hash_t::Invalid XML file: %s (no mime-info). Replace this file.\n", mimefile);
+                return;
+            }
+            /* Now parse the xml tree */
+            NOOP("mime_hash_t:: parsing %s\n", mimefile);
+            for(node = node->children; node; node = node->next) {
+                if(xmlStrEqual (node->name, (const xmlChar *)"mime-key")) {
+                    gchar *type;
+                    //  type has to be defined. 
+                    type = (gchar *)xmlGetProp (node, (const xmlChar *)"type");
+                    if(!type) {
+                        DBG("mime_hash_t:: return on type==NULL\n");
+                         return;
                     }
-                    g_free (key_string);
-                    continue;
+
+                    for(subnode = node->children; subnode; subnode = subnode->next) {
+                        if(xmlStrEqual (subnode->name, (const xmlChar *)T.xmlkey)) {
+                            // xmlkey --> xmldata
+                            value = xmlGetProp (subnode, (const xmlChar *)T.xmldata);
+                            gchar *key_string = g_utf8_strdown ((gchar *)value, -1);
+                            g_free (value);
+                            gchar *hash_key = get_hash_key (key_string,T);
+                            if(key_string) {
+                                        NOOP("mime_hash_t::replacing hash element \"%s\" with key %s --> %s\n", 
+                                            key_string, hash_key, type);
+                                        g_hash_table_replace (T.hash, hash_key, g_strdup(type));
+                            }
+                            g_free (key_string);
+                            continue;
+                        }
+                    }
+                    g_free(type);
                 }
             }
-            g_free(type);
+            fprintf(stderr, "mime_hash_t::hash table build (%p) with \"%s\"-->\"%s\" is now complete.\n", 
+                    T.hash, T.xmlkey, T.xmldata);
         }
-    }
-    fprintf(stderr, "mime_hash_t::hash table build (%p) with \"%s\"-->\"%s\" is now complete.\n", 
-            T.hash, T.xmlkey, T.xmldata);
-}
 
 
 };
+
+#include "mime_alias_hash_c.hh"
+#include "mime_sfx_hash_c.hh"
+#include "mime_command_hash_c.hh"
+#include "mime_application_hash_c.hh"
 
 #endif
