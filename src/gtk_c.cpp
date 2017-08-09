@@ -46,7 +46,7 @@ gtk_c::setup_image_button (GtkWidget *button, const gchar *icon_name, const gcha
     gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
     GtkWidget *image = gtk_image_new_from_icon_name (icon_name, GTK_ICON_SIZE_SMALL_TOOLBAR);
     GdkPixbuf *pixbuf = 
-            get_pixbuf(icon_name, GTK_ICON_SIZE_SMALL_TOOLBAR);
+            pixbuf_c::get_pixbuf(icon_name, GTK_ICON_SIZE_SMALL_TOOLBAR);
     if (image) {
         gtk_container_add (GTK_CONTAINER (button), image);
         // On page remove, reference count will be decreased
@@ -91,7 +91,7 @@ gtk_c::set_bin_image(GtkWidget *bin, const gchar *icon_id, gint size){
         gtk_container_remove(GTK_CONTAINER(box), icon);
     }
     if(icon_id) {
-        GdkPixbuf *pb = get_pixbuf (icon_id, size);
+        GdkPixbuf *pb = pixbuf_c::get_pixbuf (icon_id, size);
         GtkWidget *image = gtk_image_new_from_pixbuf (pb);
 	gtk_box_pack_start(GTK_BOX(box), image, FALSE, FALSE,0);
         g_object_set_data(G_OBJECT(bin), "icon", image);
@@ -133,7 +133,7 @@ gtk_c::set_bin_contents(GtkWidget *bin, const char *icon_id, const char *text, g
 GtkWidget * 
 gtk_c::menu_item_new(const gchar *icon_id, const gchar *text)
 {
-    GdkPixbuf *pb = (icon_id)? get_pixbuf (icon_id, GTK_ICON_SIZE_SMALL_TOOLBAR): NULL;    
+    GdkPixbuf *pb = (icon_id)? pixbuf_c::get_pixbuf (icon_id, GTK_ICON_SIZE_SMALL_TOOLBAR): NULL;    
     GtkWidget *w = gtk_menu_item_new_with_label ("");
     GtkWidget *replacement = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0);
     GtkWidget *label = gtk_bin_get_child(GTK_BIN(w));

@@ -10,18 +10,18 @@ class pixbuf_hash_c: virtual utility_c {
     public:
 	pixbuf_hash_c(void);
 	~pixbuf_hash_c(void);
-        void zap_thumbnail_file(const gchar *, gint);
+        static void zap_thumbnail_file(const gchar *, gint);
 	
-	GdkPixbuf *find_in_pixbuf_hash(const gchar *, gint);
-	void put_in_pixbuf_hash(const gchar *, gint, const GdkPixbuf *);
-        gchar *get_thumbnail_path (const gchar * file, gint size);
+	static GdkPixbuf *find_in_pixbuf_hash(const gchar *, gint);
+	static void put_in_pixbuf_hash(const gchar *, gint, const GdkPixbuf *);
+        static gchar *get_thumbnail_path (const gchar * file, gint size);
 
     protected:
     private:
-	void free_pixbuf_tt(void *);
-	void rm_from_pixbuf_hash (const gchar *, gint);
-        gchar *get_hash_key (const gchar *, gint);
-        GdkPixbuf *lookup_icon(const gchar *, gint);
+	static void free_pixbuf_tt(void *);
+	static void rm_from_pixbuf_hash (const gchar *, gint);
+        static gchar *get_hash_key (const gchar *, gint);
+        static GdkPixbuf *lookup_icon(const gchar *, gint);
         static GHashTable *pixbuf_hash;
 
 };

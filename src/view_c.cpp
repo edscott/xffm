@@ -503,7 +503,7 @@ view_c::update_tab_label_icon(void){
     g_list_free(children);
     const gchar *icon_name = xfdir_p->get_xfdir_iconname();
     GdkPixbuf *pixbuf = 
-            get_pixbuf(icon_name, GTK_ICON_SIZE_BUTTON);
+            pixbuf_c::get_pixbuf(icon_name, GTK_ICON_SIZE_BUTTON);
     if (pixbuf){
 	GtkWidget *image = gtk_image_new_from_pixbuf (pixbuf);
 	gtk_container_add (GTK_CONTAINER (get_page_label_icon_box()), image);
@@ -517,7 +517,7 @@ view_c::get_tree_model(void){return xfdir_p->get_tree_model();}
 void
 view_c::set_application_icon (void) {
     const gchar *iconname = xfdir_p->get_xfdir_iconname();
-    GdkPixbuf *icon_pixbuf = get_pixbuf (iconname, GTK_ICON_SIZE_DIALOG);
+    GdkPixbuf *icon_pixbuf = pixbuf_c::get_pixbuf (iconname, GTK_ICON_SIZE_DIALOG);
     if(icon_pixbuf) {
 	GtkWindow *window = ((window_c *)get_window_v())->get_window();
         gtk_window_set_icon (window, icon_pixbuf);
@@ -532,7 +532,7 @@ view_c::set_application_icon (gint page_num) {
     if (!view_p->get_xfdir_p()) return;
     
     const gchar *iconname = view_p->get_xfdir_p()->get_xfdir_iconname();
-    GdkPixbuf *icon_pixbuf = get_pixbuf (iconname, GTK_ICON_SIZE_DIALOG);
+    GdkPixbuf *icon_pixbuf = pixbuf_c::get_pixbuf (iconname, GTK_ICON_SIZE_DIALOG);
     if(icon_pixbuf) {
 	GtkWindow *window = ((window_c *)get_window_v())->get_window();
         gtk_window_set_icon (window, icon_pixbuf);

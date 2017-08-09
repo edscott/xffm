@@ -3,6 +3,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <tubo.h>
+#include "pixbuf_c.hpp"
 #include "view_c.hpp"
 #include "window_c.hpp"
 #include "run_button_c.hpp"
@@ -183,7 +184,7 @@ make_run_data_button (void *data) {
     const gchar *icon = run_button_p->get_icon_id();
 
     // Test for validity of icon
-    if (!icon || !run_button_p->find_pixbuf(icon, -16)){
+    if (!icon || !pixbuf_c::find_pixbuf(icon, -16)){
         run_button_p->set_icon_id("emblem-run");
     } 
     

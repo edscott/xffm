@@ -209,9 +209,9 @@ local_monitor_c::add_local_item(GtkListStore *list_store, xd_t *xd_p){
         g_free(h_name);
     }
    
-    GdkPixbuf *normal_pixbuf = get_pixbuf(icon_name,  get_icon_size(xd_p->d_name));
-    //GdkPixbuf *highlight_pixbuf = get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);
-    GdkPixbuf *highlight_pixbuf = get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);
+    GdkPixbuf *normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  get_icon_size(xd_p->d_name));
+    //GdkPixbuf *highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);
+    GdkPixbuf *highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);
     gtk_list_store_set (list_store, &iter, 
             DISPLAY_NAME, utf_name,
             ACTUAL_NAME, xd_p->d_name,
@@ -507,7 +507,7 @@ local_monitor_c::get_mime_iconname(xd_t *xd_p){
         //DBG("xfdir_local_c::get_mime_iconname(%s) -> %s\n", xd_p->mimetype, basic);
         if (basic) {
             // check if the pixbuf is actually available
-            GdkPixbuf *pixbuf = get_pixbuf(basic,  GTK_ICON_SIZE_DIALOG);
+            GdkPixbuf *pixbuf = pixbuf_c::get_pixbuf(basic,  GTK_ICON_SIZE_DIALOG);
             if (pixbuf) return basic;
         } else {
 	    if (strstr(xd_p->mimetype, "text/html")){

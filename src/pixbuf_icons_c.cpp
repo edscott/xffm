@@ -1,6 +1,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <errno.h>
+#include "util_c.hpp"
 #include "pixbuf_icons_c.hpp"
 
 #ifndef PREFIX
@@ -8,16 +9,21 @@
 #endif
 static void *insert_decoration_f (void *);
 
+GThread *pixbuf_icons_c::self;
+GtkIconTheme *pixbuf_icons_c::icon_theme;
+pthread_mutex_t pixbuf_icons_c::pixbuf_mutex;
     
-pixbuf_icons_c::pixbuf_icons_c(void){
-    pixbuf_mutex = PTHREAD_MUTEX_INITIALIZER;
-    icon_theme = gtk_icon_theme_get_default ();
+
+void
+pixbuf_icons_c::init(void){
+    pixbuf_icons_c::pixbuf_mutex = PTHREAD_MUTEX_INITIALIZER;
+    pixbuf_icons_c::icon_theme = gtk_icon_theme_get_default ();
     if (!icon_theme){
         DBG("cannot get default icon theme!\n");
         icon_theme = gtk_icon_theme_new();
         //throw 1;
     }
-    self = g_thread_self();
+    pixbuf_icons_c::self = g_thread_self();
     gchar *resource_path = g_build_filename(PREFIX, "share", "icons", "xffm+", NULL);
     gtk_icon_theme_add_resource_path (icon_theme,resource_path);
 
@@ -40,19 +46,9 @@ pixbuf_icons_c::pixbuf_icons_c(void){
     g_free(resource_path);
 }
 
-pixbuf_icons_c::~pixbuf_icons_c(void){
+/*pixbuf_icons_c::~pixbuf_icons_c(void){
     pthread_mutex_destroy(&pixbuf_mutex);
-}
-
-
-
-void
-pixbuf_icons_c::threadwait (void) {
-    struct timespec thread_wait = {
-        0, 100000000
-    };
-    nanosleep (&thread_wait, NULL);
-}
+}*/
 
 
 gboolean
@@ -155,7 +151,7 @@ pixbuf_icons_c::pixbuf_new_from_file (const gchar *path, gint width, gint height
         gtk_thread_wants_lock = TRUE;
     } else {
         // hold your horses...
-        while (gtk_thread_wants_lock) threadwait();
+        while (gtk_thread_wants_lock) util_c::threadwait();
     }
     pthread_mutex_lock(&pixbuf_mutex);
 
@@ -206,9 +202,9 @@ pixbuf_icons_c::composite_icon(const gchar *icon_name, gint size){
 
     // Now decorate the pixbuf with label, color and emblems, if any.
     if (label || color || emblems) {
-        void *arg[] = {(void *)this, (void *)pixbuf, (void *)label, (void *)color, (void *)emblems };
+        void *arg[] = {NULL, (void *)pixbuf, (void *)label, (void *)color, (void *)emblems };
         // Done by main gtk thread:
-        context_function(insert_decoration_f, arg);
+        util_c::context_function(insert_decoration_f, arg);
     }
     
 
@@ -225,18 +221,18 @@ pixbuf_icons_c::composite_icon(const gchar *icon_name, gint size){
 static void *
 insert_decoration_f (void *data){
     void **arg = (void **)data;
-    pixbuf_icons_c *pixbuf_icons_p =(pixbuf_icons_c *)arg[0];
+    //pixbuf_icons_c *pixbuf_icons_p =(pixbuf_icons_c *)arg[0];
     GdkPixbuf *base_pixbuf = (GdkPixbuf *)arg[1];
     const gchar *label = (const gchar *)arg[2];
     const gchar *color = (const gchar *)arg[3];
     const gchar *emblems = (const gchar *)arg[4];
 
-    cairo_t   *pixbuf_context = pixbuf_icons_p->pixbuf_cairo_create(base_pixbuf);
+    cairo_t   *pixbuf_context = pixbuf_cairo_c::pixbuf_cairo_create(base_pixbuf);
     
     gdk_cairo_set_source_pixbuf(pixbuf_context, base_pixbuf,0,0);
     cairo_paint_with_alpha(pixbuf_context, 1.0);
     if (color){
-        pixbuf_icons_p->add_color_pixbuf(pixbuf_context, base_pixbuf, color);
+        pixbuf_cairo_c::add_color_pixbuf(pixbuf_context, base_pixbuf, color);
     }
 
     if (emblems){
@@ -258,10 +254,10 @@ insert_decoration_f (void *data){
             gchar *emblem = p[1];
             gchar *scale = p[2];
             gchar *alpha = p[3];
-            GdkPixbuf *tag = pixbuf_icons_p->find_in_pixbuf_hash (emblem, 48);
-            if (!tag) tag = pixbuf_icons_p->get_theme_pixbuf(emblem, 48);
+            GdkPixbuf *tag = pixbuf_hash_c::find_in_pixbuf_hash (emblem, 48);
+            if (!tag) tag = pixbuf_icons_c::get_theme_pixbuf(emblem, 48);
             if (tag) {
-                pixbuf_icons_p->insert_pixbuf_tag (pixbuf_context, tag, base_pixbuf, position, scale, alpha);
+                pixbuf_cairo_c::insert_pixbuf_tag (pixbuf_context, tag, base_pixbuf, position, scale, alpha);
             } else {
                 DBG("insert_decoration_f(): Cannot get pixbuf for %s\n", emblem);
             }
@@ -269,10 +265,10 @@ insert_decoration_f (void *data){
         g_strfreev(tokens);
     }
     if (label){
-        pixbuf_icons_p->add_label_pixbuf(pixbuf_context, base_pixbuf, label);
+        pixbuf_cairo_c::add_label_pixbuf(pixbuf_context, base_pixbuf, label);
     }
 
-    pixbuf_icons_p->pixbuf_cairo_destroy(pixbuf_context, base_pixbuf);
+    pixbuf_cairo_c::pixbuf_cairo_destroy(pixbuf_context, base_pixbuf);
     return NULL;
 }
 

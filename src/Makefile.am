@@ -22,6 +22,7 @@ xffm_SOURCES = \
 	  combobox_c.cpp \
 	  main.cpp \
 	  gnu_utils_c.cpp \
+	  util_c.cpp \
 	  utility_c.cpp \
           run_button_c.cpp \
 	  pathbar_c.cpp   \
