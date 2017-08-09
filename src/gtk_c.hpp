@@ -1,7 +1,6 @@
 #ifndef GTK_C_HPP
 #define GTK_C_HPP
 #include "xffm+.h"
-#include "utility_c.hpp"
 #include "tooltip_c.hpp"
 #include "pixbuf_c.hpp"
 #include "mime_c.hpp"
@@ -11,7 +10,7 @@
 #define SIZE_PREVIEW	96
 #define SIZE_TIP	128
 
-class gtk_c: virtual utility_c, public tooltip_c{
+class gtk_c:  public tooltip_c{
     public:
         gtk_c(void);
         ~gtk_c(void);

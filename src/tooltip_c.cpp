@@ -1,4 +1,5 @@
 #include "tooltip_c.hpp"
+#include "util_c.hpp"
 
 GHashTable *tooltip_c::tooltip_text_hash=NULL;
 GtkWidget  *tooltip_c::tt_window = NULL;
@@ -162,7 +163,7 @@ tooltip_c::get_tt_window(const GdkPixbuf *pixbuf, const gchar *markup, const gch
     if (label_text) {
 	GtkWidget *label = gtk_label_new("");
 	gtk_widget_show(label);
-	gchar *utf_text =  utf_string (label_text);
+	gchar *utf_text =  util_c::utf_string (label_text);
 	gchar *label_markup;
         label_markup = 
             g_strdup_printf("<span color=\"yellow\" font_family=\"monospace\" weight=\"bold\"> %s </span>",utf_text); 
@@ -320,7 +321,7 @@ custom_tooltip_f(void * data){
 
 void tooltip_c::custom_tooltip(GtkWidget *widget, GdkPixbuf *pixbuf, const gchar *text){
     void *arg[]={widget, pixbuf, (void *)text, (void *)this};
-    context_function(custom_tooltip_f, arg);
+    util_c::context_function(custom_tooltip_f, arg);
 }
 
 GHashTable *

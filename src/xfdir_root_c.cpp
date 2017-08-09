@@ -1,3 +1,4 @@
+#include "util_c.hpp"
 #include "view_c.hpp"
 #include "xfdir_root_c.hpp"
 
@@ -31,7 +32,7 @@ xfdir_root_c::mk_tree_model (void)
     DBG("mk_tree_model:: model = %p\n", list_store);
     // Root
     const gchar *name = "/";
-    gchar *utf_name = utf_string(_("Root Directory"));
+    gchar *utf_name = util_c::utf_string(_("Root Directory"));
     const gchar *icon_name = "folder/SE/emblem-root/3.0/180";
     const gchar *highlight_name = "document-open/SE/emblem-root/3.0/180";
     GdkPixbuf *normal_pixbuf;
@@ -53,7 +54,7 @@ xfdir_root_c::mk_tree_model (void)
 
     // Home
     name = g_get_home_dir();
-    utf_name = utf_string(_("Home Directory"));
+    utf_name = util_c::utf_string(_("Home Directory"));
     icon_name = "folder/SE/emblem-home/3.0/180";
     highlight_name = "document-open/SE/emblem-home/3.0/180";
     normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);

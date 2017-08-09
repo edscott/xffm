@@ -2,7 +2,8 @@
 #include "view_c.hpp"
 #include "window_c.hpp"
 #include "pathbar_c.hpp"
-
+#include "util_c.hpp"
+//using namespace util_c;
 ///////////////////////////////////////////////////
 //         static thread functions  (used)       //
 ///////////////////////////////////////////////////
@@ -912,7 +913,7 @@ view_c::setup_tooltip(gint x, gint y){
 
 #if 1    
     gchar *vname = xfdir_p->get_verbatim_name(tpath);
-    gchar *fcontent = g_strdup_printf("<b>%s</b>", chop_excess(vname));
+    gchar *fcontent = g_strdup_printf("<b>%s</b>", util_c::chop_excess(vname));
     g_free(vname);
 #else
     gchar *vname = xfdir_p->get_verbatim_name(tpath);

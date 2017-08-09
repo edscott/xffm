@@ -3,6 +3,7 @@
 #include "view_c.hpp"
 #include "lpterm_c.hpp"
 #include "run_button_c.hpp"
+#include "util_c.hpp"
 
 #ifdef HAVE_READLINE_HISTORY_H
 # include <readline/history.h>
@@ -274,8 +275,7 @@ lpterm_c::internal_cd (gchar ** argvp) {
 		    strncmp(argvp[1], "~/", strlen("~/"))==0){
 		gg = g_strdup_printf("%s%s", g_get_home_dir (), argvp[1]+1);
 	    } else {
-		//gchar *tilde_dir = rfm_get_tilde_dir(argvp[1]);
-		gchar *tilde_dir = get_tilde_dir(argvp[1]);
+		gchar *tilde_dir = util_c::get_tilde_dir(argvp[1]);
 		if (tilde_dir) gg = g_strconcat(tilde_dir, strchr(argvp[1], '/')+1, NULL);
 		else gg = g_strdup(argvp[1]);
 		g_free(tilde_dir);	
@@ -405,7 +405,7 @@ lpterm_c::run_lp_command(void){
 
 void
 lpterm_c::open_terminal(void){
-    const gchar *terminal = what_term();
+    const gchar *terminal = util_c::what_term();
     shell_command(terminal, FALSE);
 }
 

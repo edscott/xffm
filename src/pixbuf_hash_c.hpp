@@ -1,12 +1,11 @@
 #ifndef PIXBUF_HASH_C_HPP
 #define PIXBUF_HASH_C_HPP
 #include "xffm+.h"
-#include "utility_c.hpp"
 
 #define USER_XFFM_CACHE_DIR      g_get_user_cache_dir(),"xffm+"
 #define XFFM_THUMBNAIL_DIR 	USER_XFFM_CACHE_DIR,"thumbnails"
 
-class pixbuf_hash_c: virtual utility_c {
+class pixbuf_hash_c {
     public:
 	pixbuf_hash_c(void);
 	~pixbuf_hash_c(void);

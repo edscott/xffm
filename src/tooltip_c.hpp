@@ -1,10 +1,9 @@
 #ifndef TOOLTIP_C_HPP
 #define TOOLTIP_C_HPP
 #include "xffm+.h"
-#include "utility_c.hpp"
 
 
-class tooltip_c: virtual utility_c {
+class tooltip_c {
     public:
         tooltip_c(void);
         ~tooltip_c(void);

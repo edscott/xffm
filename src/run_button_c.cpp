@@ -7,8 +7,8 @@
 #include "view_c.hpp"
 #include "window_c.hpp"
 #include "run_button_c.hpp"
+#include "util_c.hpp"
 
-//namespace gtk_c;
 
 static void *run_wait_f (void *);
 static void *make_run_data_button (void *);
@@ -52,10 +52,6 @@ run_button_c::~run_button_c(void){
     g_free (workdir);
 }
 
-void *
-run_button_c::_context_function(void * (*function)(gpointer), void * function_data){
-    return context_function(function, function_data);
-}
 
 void
 run_button_c::set_icon_id(const gchar *data){
@@ -213,7 +209,7 @@ run_wait_f (void *data) {
     // before gtk has fully created the little run button.
     //
     
-    run_button_p->_context_function(make_run_data_button, data);
+    util_c::context_function(make_run_data_button, data);
     TRACE("run_wait_f: thread waitpid for %d on (%s/%s)\n", 
             run_button_p->get_pid(), 
             run_button_p->get_command(), 
@@ -279,7 +275,7 @@ run_wait_f (void *data) {
     fflush(NULL);  
     // Destroy little button (if exists) and free run_data_p 
     // associated memory. Done in main thread for gtk instruction set.
-    run_button_p->_context_function(zap_run_button, data);
+    util_c::context_function(zap_run_button, data);
     return NULL;
 }
 

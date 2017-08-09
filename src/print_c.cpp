@@ -7,6 +7,7 @@
 #include <pthread.h>
 #include <pwd.h>
 #include <gtk/gtk.h>
+#include "util_c.hpp"
 
 #include "print_c.hpp"
 #include "view_c.hpp"
@@ -53,14 +54,14 @@ print_c::get_status_label(void){
 
 void print_c::print_error(gchar *string){
     void *arg[]={(void *)this, (void *)"tag/bold", (void *)string};
-    context_function(print_e, arg);
+    util_c::context_function(print_e, arg);
     g_free(string);
 
 }
 
 void print_c::print_debug(gchar *string){
     void *arg[]={(void *)this, (void *)"tag/italic", (void *)string};
-    context_function(print_d, arg);
+    util_c::context_function(print_d, arg);
     g_free(string);
 
 }
@@ -68,21 +69,21 @@ void print_c::print_debug(gchar *string){
 
 void print_c::print(gchar *string){
     void *arg[]={(void *)this, NULL, (void *)string};
-    context_function(print_f, arg);
+    util_c::context_function(print_f, arg);
     g_free(string);
 }
 
 void print_c::print_tag(const gchar *tag, gchar *string){
     void *arg[]={(void *)this, (void *)tag, (void *)string};
-    context_function(print_f, arg);
+    util_c::context_function(print_f, arg);
     g_free(string);
 }
 
 void print_c::print_icon(const gchar *iconname, gchar *string)
 {
-    GdkPixbuf *pixbuf = get_pixbuf(iconname, -16);
+    GdkPixbuf *pixbuf = pixbuf_c::get_pixbuf(iconname, -16);
     void *arg[]={(void *)pixbuf, (void *)this, NULL, (void *)string};
-    context_function(print_i, arg);
+    util_c::context_function(print_i, arg);
     g_free(string);
 }
 
@@ -91,22 +92,22 @@ void print_c::print_icon_tag(const gchar *iconname,
 	                     const gchar *tag, 
 			     gchar *string)
 {
-    GdkPixbuf *pixbuf = get_pixbuf(iconname, -16);
+    GdkPixbuf *pixbuf = pixbuf_c::get_pixbuf(iconname, -16);
     void *arg[]={(void *)pixbuf, (void *)this, (void *)tag, (void *)string};
-    context_function(print_i, arg);
+    util_c::context_function(print_i, arg);
     g_free(string);
 }
 
 void print_c::print_status(gchar *string){
     void *arg[]={(void *)this, (void *)string};
-    context_function(print_s, arg);
+    util_c::context_function(print_s, arg);
     g_free(string);
 }
 
 
 void print_c::print_status_label(gchar *string){
     void *arg[]={(void *)status_label, (void *)string};
-    context_function(print_sl, arg);
+    util_c::context_function(print_sl, arg);
     g_free(string);
 }
 
@@ -431,7 +432,7 @@ print_c::insert_string (GtkTextBuffer * buffer, const gchar * s, GtkTextTag **ta
         return;
     }
 
-    gchar *q = utf_string (s);
+    gchar *q = util_c::utf_string (s);
     /// this should be mutex protected since this function is being called
     //  from threads all over the place.
     static pthread_mutex_t insert_mutex =  PTHREAD_MUTEX_INITIALIZER;

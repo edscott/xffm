@@ -1,6 +1,7 @@
 #include "pathbar_c.hpp"
 #include "window_c.hpp"
 #include "view_c.hpp"
+#include "util_c.hpp"
 
 static void pathbar_go(GtkButton *, gpointer);
 static void *update_pathbar_f(void *);
@@ -33,7 +34,7 @@ pathbar_c::pathbar_button (const char *icon_id, const char *text) {
     g_object_set_data(G_OBJECT(pb_button), "name", text?g_strdup(text):NULL); 
     gchar *markup = NULL;
     if (text) {
-        gchar *v = utf_string(text);
+        gchar *v = util_c::utf_string(text);
         gchar *g = g_markup_escape_text(v, -1);
         g_free(v);
         markup = g_strdup_printf("<span size=\"x-small\">%s</span>", g);
@@ -49,7 +50,7 @@ void
 pathbar_c::update_pathbar(const gchar *path){
     TRACE( "pathbar_c::update pathbar to %s\n", path);
     void *arg[]={(void *)this, (void *)(path?g_strdup(path):NULL)};
-    context_function(update_pathbar_f, arg);
+    util_c::context_function(update_pathbar_f, arg);
 }
 
 void 
@@ -143,7 +144,7 @@ pathbar_c::toggle_pathbar(const gchar *path){
         if (strcmp(name, "RFM_ROOT")==0) continue;
         if (!path) {
             // no path means none is differentiated.
-            gchar *v = utf_string(name);
+            gchar *v = util_c::utf_string(name);
             gchar *g = g_markup_escape_text(v, -1);
             g_free(v);
             gchar *markup = g_strdup_printf("<span size=\"x-small\" color=\"blue\" bgcolor=\"#dcdad5\">%s</span>", g);
@@ -160,7 +161,7 @@ pathbar_c::toggle_pathbar(const gchar *path){
         }
         if (!strlen(pb_path)) pb_path=G_DIR_SEPARATOR_S;//?
         if (strcmp(pb_path, path)==0) {
-            gchar *v = utf_string(name);
+            gchar *v = util_c::utf_string(name);
             gchar *g = g_markup_escape_text(v, -1);
             g_free(v);
             gchar *markup = g_strdup_printf("<span size=\"x-small\" color=\"red\"bgcolor=\"#dcdad5\">%s</span>", g);
@@ -169,7 +170,7 @@ pathbar_c::toggle_pathbar(const gchar *path){
             g_free(markup);
         }
         else {
-            gchar *v = utf_string(name);
+            gchar *v = util_c::utf_string(name);
             gchar *g = g_markup_escape_text(v, -1);
             g_free(v);
             gchar *markup = g_strdup_printf("<span size=\"x-small\" color=\"blue\"bgcolor=\"#dcdad5\">%s</span>", g);

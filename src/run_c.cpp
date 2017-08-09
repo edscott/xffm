@@ -13,6 +13,7 @@
 
 #include <unistd.h>
 #include <gtk/gtk.h>
+#include "util_c.hpp"
 
 #include "window_c.hpp"
 #include "view_c.hpp"
@@ -338,7 +339,7 @@ pid_t run_c::thread_run(const gchar *command){
 
     gchar *ncommand;
     if (run_in_shell(command)){
-       	ncommand = g_strdup_printf("%s -c \"%s\"", u_shell(), command);
+       	ncommand = g_strdup_printf("%s -c \"%s\"", util_c::u_shell(), command);
     } else ncommand = g_strdup(command);
     if(!g_shell_parse_argv (ncommand, &argc, &argv, &error)) {
         gchar *msg = g_strcompress (error->message);

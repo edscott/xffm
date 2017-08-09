@@ -2,7 +2,6 @@
 #define MIME_C_HPP
 #include "xffm+.h"
 
-#include "utility_c.hpp"
 #include "mime_magic_c.hpp"
 #include "lite_c.hpp"
 
@@ -44,7 +43,7 @@ enum {
 #define MIME_GET_ALIAS_TYPE(X) mime_aliashash_c<txt_hash_t>::get_alias_type(X, hash_data[ALIAS])
 
 
-class mime_c: virtual utility_c, public lite_c, public mime_magic_c {
+class mime_c: public lite_c, public mime_magic_c {
     public:
 
         static void init_hashes(void);

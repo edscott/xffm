@@ -9,7 +9,7 @@
 #define RUN_FLAG_FILE 		USER_DBH_CACHE_DIR,"runflag64.dbh"
 
 
-class lpterm_c: public run_c, virtual utility_c {
+class lpterm_c: public run_c {
     public:
         lpterm_c(void *);
         ~lpterm_c(void);

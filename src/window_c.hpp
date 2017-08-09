@@ -3,7 +3,6 @@
 #include "xffm+.h"
 
 #include "menu_c.hpp"
-#include "utility_c.hpp"
 
 class window_c: public menu_c {
     public:

@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <gio/gio.h>
+#include "util_c.hpp"
 
 #include "local_monitor_c.hpp"
 void
@@ -168,7 +169,7 @@ local_monitor_c::add_local_item(GtkListStore *list_store, xd_t *xd_p){
     
     GtkTreeIter iter;
     gtk_list_store_append (list_store, &iter);
-    gchar *utf_name = utf_string(xd_p->d_name);
+    gchar *utf_name = util_c::utf_string(xd_p->d_name);
     // plain extension mimetype fallback
     if (!xd_p->mimetype) xd_p->mimetype = mime_c::mime_type(xd_p->d_name); 
     gchar *icon_name = get_iconname(xd_p);
@@ -188,7 +189,7 @@ local_monitor_c::add_local_item(GtkListStore *list_store, xd_t *xd_p){
         if (strchr(t, '.') && strrchr(t, '.') != t){
             *strrchr(t, '.') = 0;
             g_free(utf_name);
-            utf_name = utf_string(t);
+            utf_name = util_c::utf_string(t);
             g_free(t);
         }
     }

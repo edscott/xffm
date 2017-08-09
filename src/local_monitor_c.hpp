@@ -35,7 +35,7 @@ typedef struct xd_t{
 #include "xffm+.h"
 #include "xfdir_c.hpp" // for treemodel column enum
 
-class local_monitor_c: public xfdir_c, virtual utility_c {
+class local_monitor_c: public xfdir_c {
     public:
         local_monitor_c(const gchar *);
         ~local_monitor_c(void);

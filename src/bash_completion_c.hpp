@@ -3,10 +3,9 @@
 #include "xffm+.h"
 #include "print_c.hpp"
 #include "base_completion_c.hpp"
-#include "utility_c.hpp"
 
 
-class bash_completion_c: protected base_completion_c, public print_c, virtual utility_c {
+class bash_completion_c: protected base_completion_c, public print_c {
     public:
 	bash_completion_c(void *);
 

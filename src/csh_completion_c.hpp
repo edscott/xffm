@@ -5,7 +5,7 @@
 #define CSH_HISTORY 	USER_RFM_CACHE_DIR,"lp_terminal_history"
 
 
-class csh_completion_c: public bash_completion_c, virtual utility_c {
+class csh_completion_c: public bash_completion_c {
     public:
 	csh_completion_c(void *);
         gboolean csh_is_valid_command (const gchar *);

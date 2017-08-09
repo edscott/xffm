@@ -4,7 +4,7 @@
 #include "local_monitor_c.hpp"
 #include "local_dnd_c.hpp"
 
-class xfdir_local_c: public local_monitor_c, public local_dnd_c, virtual utility_c{
+class xfdir_local_c: public local_monitor_c, public local_dnd_c{
     public:
 	xfdir_local_c(const gchar *, void *);
         ~xfdir_local_c(void);

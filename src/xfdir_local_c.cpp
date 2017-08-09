@@ -2,6 +2,7 @@
 #include "view_c.hpp"
 #include "local_dnd_c.hpp"
 #include "xfdir_local_c.hpp"
+#include "util_c.hpp"
 
 pthread_mutex_t xfdir_local_c::readdir_mutex=PTHREAD_MUTEX_INITIALIZER;
 
@@ -102,7 +103,7 @@ xfdir_local_c::item_activated (GtkIconView *iconview, GtkTreePath *tpath, void *
             command = mime_c::mime_command(mimetype);
         }
         if (!command && strncmp(mimetype, "text/", strlen("text/"))==0){
-                command = get_text_editor();
+                command = util_c::get_text_editor();
             view_p->get_lpterm_p()->print_error(g_strdup_printf("text mimetype = %s (%s)\n", mimetype, command));
         }
        /* gchar **a = mime_apps(mimetype);
@@ -484,7 +485,7 @@ xfdir_local_c::get_path_info (GtkTreeModel *treemodel, GtkTreePath *tpath, const
     g_free(file_path);
     
     if (lstat(full_path, &st) != 0) {
-        gchar *u = utf_string(full_path);
+        gchar *u = util_c::utf_string(full_path);
         g_free(full_path);
         g_free(mimetype);
         g = g_strdup_printf(_("Cannot lstat \"%s\":\n%s\n"), u, strerror(errno));
@@ -598,10 +599,10 @@ xfdir_local_c::path_info (const gchar *file_path, struct stat *st, const gchar *
         gchar lpath[_POSIX_PATH_MAX + 1];
         memset (lpath, 0, _POSIX_PATH_MAX + 1);
         if(readlink (file_path, lpath, _POSIX_PATH_MAX) > 0) {
-            gchar *v = utf_string(lpath);
+            gchar *v = util_c::utf_string(lpath);
             gchar *escaped_markup = g_markup_escape_text(v, -1);
             g_free(v);
-            gchar *q = utf_string (escaped_markup);
+            gchar *q = util_c::utf_string (escaped_markup);
             g_free(escaped_markup);
             gchar *linkto=g_strdup_printf (_("Link to %s"), q);
             pretext_stuff = g_strdup_printf ("%s\n<i>%s</i>\n\n", linkto, pretext);
@@ -624,7 +625,7 @@ xfdir_local_c::path_info (const gchar *file_path, struct stat *st, const gchar *
         
 #if 1
     gchar *u = g_strdup(mimefiledata);
-    const gchar *cu = chop_excess(u);
+    const gchar *cu = util_c::chop_excess(u);
     gchar *mimefile = g_strdup(cu);
     g_free(u);
 #else
@@ -659,10 +660,10 @@ xfdir_local_c::path_info (const gchar *file_path, struct stat *st, const gchar *
     //    gchar *ss= rfm_time_to_string(st->st_mtime);   
 
     //gchar *t = g_path_get_dirname (file_path);
-    //gchar *v = utf_string(t);
+    //gchar *v = util_c::utf_string(t);
     //gchar *escaped_markup = g_markup_escape_text(v, -1);
     //g_free(v);
-    //gchar *dirname = utf_string (escaped_markup);
+    //gchar *dirname = util_c::utf_string (escaped_markup);
     //g_free(t);
     //g_free(escaped_markup);
     

@@ -1,6 +1,7 @@
 //#define DEBUG_TRACE 1
 #include "csh_completion_c.hpp"
 #include "view_c.hpp"
+#include "util_c.hpp"
 
 csh_completion_c::csh_completion_c(void *data): bash_completion_c(data){
     csh_cmd_save = NULL;
@@ -121,8 +122,8 @@ csh_completion_c::csh_load_history (void) {
                     continue;
                 }
             }
-	    gchar *newline = compact_line(line);
-	    GList *element = find_in_string_list(csh_history_list, newline);
+	    gchar *newline = util_c::compact_line(line);
+	    GList *element = util_c::find_in_string_list(csh_history_list, newline);
 
 	    if (element) { 
 		// remove old element
@@ -162,7 +163,7 @@ csh_completion_c::csh_save_history (const gchar * data) {
     }
 
     // if command is already in history, bring it to the front
-    GList *item = find_in_string_list(csh_history_list, command_p);
+    GList *item = util_c::find_in_string_list(csh_history_list, command_p);
     if (item){
 	void *data = item->data;
 	// remove old position

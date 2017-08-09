@@ -1,3 +1,4 @@
+#include "util_c.hpp"
 #include "mime_c.hpp"
 // gcc -std=c++11 mime_c.cpp `pkg-config gtk+-3.0 --cflags` `pkg-config dbh2 --cflags` `pkg-config --cflags libxml-2.0`
 
@@ -401,7 +402,7 @@ mime_c::mime_mk_command_line (const gchar *command_fmt, const gchar *path) {
     NOOP ("MIME: command_fmt fmt=%s\n", fmt);
 
     NOOP ("MIME: path=%s\n", path);
-    gchar *esc_path = esc_string (path);
+    gchar *esc_path = util_c::esc_string (path);
     command_line = g_strdup_printf (fmt, esc_path);
     g_free (esc_path);
     NOOP ("MIME2: command_line=%s\n", command_line);
@@ -420,8 +421,8 @@ mime_c::mime_mk_terminal_line (const gchar *command) {
     if(!command)
         return NULL;
 
-    const gchar *term = what_term ();
-    const gchar *exec_flag = term_exec_option(term);
+    const gchar *term = util_c::what_term ();
+    const gchar *exec_flag = util_c::term_exec_option(term);
     /*
     // Validation is already done by rfm_what_term
     if(!mime_is_valid_command ((void *)term)) {

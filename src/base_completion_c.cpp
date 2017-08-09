@@ -3,7 +3,7 @@
 #include <pwd.h>
 #include <glob.h>
 #include <unistd.h>
-
+#include "util_c.hpp"
 
 gchar *
 base_completion_c::get_token(const char *in_token, gint *match_count_p){
@@ -21,7 +21,7 @@ base_completion_c::get_token(const char *in_token, gint *match_count_p){
 	if (strncmp(in_token, "~/", strlen("~/"))==0){
 	    token = g_strconcat(g_get_home_dir(), in_token+1, NULL);
 	} else {
-	    gchar *dir = get_tilde_dir(in_token);
+	    gchar *dir = util_c::get_tilde_dir(in_token);
 	    if (dir) token = g_strconcat(dir, strchr(in_token, '/')+1, NULL);
 	    g_free(dir);
 	}
@@ -260,7 +260,7 @@ base_completion_c::top_match (GSList **matches_p){
 	NOOP (stderr,  "comparing a %s\n", (gchar *)a->data);
 	for(b = a->next; b && b->data; b = b->next) {
 	    NOOP (stderr,  "comparing b %s\n", (gchar *)b->data);
-	    length=length_equal_string(
+	    length=util_c::length_equal_string(
 		    (const gchar *)(a->data), (const gchar *)(b->data));
 	    if(length < equal_length) {
 		equal_length = length;

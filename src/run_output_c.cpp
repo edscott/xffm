@@ -4,6 +4,7 @@
 #include <pthread.h>
 #include <tubo.h>
 #include "run_output_c.hpp"
+#include "util_c.hpp"
 
 #include "window_c.hpp"
 #include "view_c.hpp"
@@ -76,7 +77,7 @@ run_output_c::start_string(gchar *command, pid_t controller, gboolean with_shell
     
     const gchar bold[]={27, '[', '1', 'm', 0};
     if (with_shell) {
-        gg = g_strconcat (g, " ", u_shell(), " ", bold, command, "\n", NULL);
+        gg = g_strconcat (g, " ", util_c::u_shell(), " ", bold, command, "\n", NULL);
         g_free (g);
         return gg;
     }

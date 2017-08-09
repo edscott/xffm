@@ -14,9 +14,8 @@
 #define RUN_FLAG_FILE 		USER_DBH_CACHE_DIR,"runflag64.dbh"
 
 #include "base_completion_c.hpp"
-#include "utility_c.hpp"
 
-class combobox_c: public base_completion_c, virtual utility_c {
+class combobox_c: public base_completion_c {
     public:
 	// Constructor/destructor
 	combobox_c(GtkComboBox *, gint);

@@ -1,4 +1,4 @@
-
+#include "util_c.hpp"
 #include "combobox_c.hpp"
 
 #define CURSOR_KEYSTROKE(x) (	\
@@ -430,7 +430,7 @@ combobox_c::set_combo (const gchar *data) {
 
 	/* create new hash */
 	for(tmp = *limited_list_p; tmp; tmp = tmp->next) {
-	    gchar *utf_string = valid_utf_pathstring ((gchar *) (tmp->data));
+	    gchar *utf_string = util_c::valid_utf_pathstring ((gchar *) (tmp->data));
 	    NOOP("utf_string=%s\n",utf_string); 
 	    if(strcmp (utf_string, (gchar *) (tmp->data))) {
 		NOOP ("combo hash table %s ---> %s\n", (gchar *) (tmp->data), utf_string);
@@ -443,7 +443,7 @@ combobox_c::set_combo (const gchar *data) {
 	}
 	// Set popdown list:
 	fprintf(stderr, "now setting popdown list...\n");
-	set_store_data_from_list ((GtkListStore *)model, limited_list_p);
+	util_c::set_store_data_from_list ((GtkListStore *)model, limited_list_p);
 
 	// Set tooltip to reflect values in popdown list:
 	gchar *tooltip_text=NULL;
@@ -630,12 +630,12 @@ combobox_c::combo_key_press_history(GtkWidget * entry, GdkEventKey * event, gpoi
 
     if(dead_key) {
         if(event->keyval != GDK_KEY_Shift_L && event->keyval != GDK_KEY_Shift_R) {
-            event->keyval = compose_key (event->keyval, dead_key);
+            event->keyval = util_c::compose_key (event->keyval, dead_key);
             NOOP ("composing to %c\n", (char)event->keyval);
             dead_key = 0;
         }
     } else {
-        dead_key = deadkey (event->keyval);
+        dead_key = util_c::deadkey (event->keyval);
         NOOP ("deadkey is  0x%x\n", (unsigned)dead_key);
         if(dead_key) return TRUE;
     }
@@ -834,7 +834,7 @@ combobox_c::combo_key_press_history(GtkWidget * entry, GdkEventKey * event, gpoi
         } else {                /* normal key */
 	    NOOP("normal key\n");
             gchar *utf_c = NULL;
-            *c = translate_key (event->keyval);
+            *c = util_c::translate_key (event->keyval);
 
             if(!g_utf8_validate (c, -1, NULL)) {
                 const char *fc;

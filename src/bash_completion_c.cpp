@@ -4,6 +4,7 @@
 #include <pwd.h>
 #include <glob.h>
 #include <unistd.h>
+#include "util_c.hpp"
 
 static gint
 ya_strcmp ( gconstpointer a, gconstpointer b) {
@@ -186,7 +187,7 @@ bash_completion_c::list_matches (GSList **matches_p, gint match_type){
 	NOOP(stderr, "comparing a %s\n", (gchar *)a->data);
 	for(b = a->next; b && b->data; b = b->next) {
 	    NOOP(stderr, "comparing b %s\n", (gchar *)b->data);
-	    length=length_equal_string(
+	    length=util_c::length_equal_string(
 		    (const gchar *)(a->data), (const gchar *)(b->data));
 	    if(length < equal_length) {
 		equal_length = length;
@@ -464,7 +465,7 @@ bash_completion_c::bash_complete(const gchar *token, gint *matches_p){
 	suggest = extra_space(suggest, matches_p);
 	if (strcmp(suggest, active_token)==0){
 	    g_free(suggest);
-	    suggest = get_tilde_dir(active_token);
+	    suggest = util_c::get_tilde_dir(active_token);
 	}
 	g_free(active_token);
 	return suggest;
@@ -566,7 +567,7 @@ bash_completion_c::bash_complete(const gchar *token, gint *matches_p){
 	NOOP( "extra_completion ...%s -> %s\n", command_token, suggest);
 	if (suggest && strcmp(suggest, command_token)==0){
 	    g_free(suggest);
-	    suggest = get_tilde_dir(command_token);
+	    suggest = util_c::get_tilde_dir(command_token);
 	    NOOP( "extra_completion ...%s -> %s\n", command_token, suggest);
 	}
 	if (!suggest) {
@@ -579,7 +580,7 @@ bash_completion_c::bash_complete(const gchar *token, gint *matches_p){
 	suggest = extra_completion(file_token, matches_p);
 	if (suggest && strcmp(suggest, file_token)==0){
 	    g_free(suggest);
-	    suggest = get_tilde_dir(file_token);
+	    suggest = util_c::get_tilde_dir(file_token);
 	}
 	if (!suggest) {
 	    suggest = bash_file_completion(file_token, matches_p);
@@ -684,7 +685,7 @@ bash_completion_c::bash_file_completion(const char *in_file_token, gint *match_c
 	if (strncmp(in_file_token, "~/", strlen("~/"))==0){
 	    file_token = g_strconcat(g_get_home_dir(), in_file_token+1, NULL);
 	} else {
-	    gchar *dir = get_tilde_dir(in_file_token);
+	    gchar *dir = util_c::get_tilde_dir(in_file_token);
 	    if (dir) file_token = g_strconcat(dir, strchr(in_file_token, '/')+1, NULL);
 	    g_free(dir);
 	}
@@ -784,7 +785,7 @@ bash_completion_c::bash_exec_completion(const char *in_token, gint *match_count_
 	if (strncmp(in_token, "~/", strlen("~/"))==0){
 	    token = g_strconcat(g_get_home_dir(), in_token+1, NULL);
 	} else {
-	    gchar *dir = get_tilde_dir(in_token);
+	    gchar *dir = util_c::get_tilde_dir(in_token);
 	    if (dir) token = g_strconcat(dir, strchr(in_token, '/')+1, NULL);
 	    g_free(dir);
 	}

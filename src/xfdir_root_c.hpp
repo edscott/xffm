@@ -2,7 +2,7 @@
 #define XFDIR_ROOT_C_HPP
 #include "xfdir_c.hpp"
 
-class xfdir_root_c: public xfdir_c, virtual utility_c {
+class xfdir_root_c: public xfdir_c {
     public:
 	xfdir_root_c(void);
         void reload(const gchar *);

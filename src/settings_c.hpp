@@ -4,7 +4,7 @@
 #include "xffm+.h"
 #include "gtk_c.hpp"
 
-class  settings_c: public gtk_c, virtual utility_c, public environment {
+class  settings_c: public gtk_c, public environment {
     public:
         settings_c(data_c *);
         gboolean run_settings_dialog(void);

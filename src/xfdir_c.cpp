@@ -2,6 +2,7 @@
 
 #include "xfdir_c.hpp"
 #include "view_c.hpp"
+#include "util_c.hpp"
 
 using namespace std;
 GHashTable *xfdir_c::highlight_hash=NULL;
@@ -190,14 +191,14 @@ gchar *
 xfdir_c::get_window_name (void) {
     gchar *iconname;
     if(!path) {
-        iconname = utf_string (g_get_host_name());
+        iconname = util_c::utf_string (g_get_host_name());
     } else if(g_path_is_absolute(path) &&
 	    g_file_test (path, G_FILE_TEST_EXISTS)) {
         gchar *basename = g_path_get_basename (path);
         gchar *pathname = g_strdup (path);
-        gchar *b = utf_string (basename);   // non chopped
-        chop_excess (pathname);
-        gchar *q = utf_string (pathname);   // non chopped
+        gchar *b = util_c::utf_string (basename);   // non chopped
+        util_c::chop_excess (pathname);
+        gchar *q = util_c::utf_string (pathname);   // non chopped
 
         g_free (basename);
         g_free (pathname);
@@ -206,8 +207,8 @@ xfdir_c::get_window_name (void) {
         g_free (q);
         g_free (b);
     } else {
-        iconname = utf_string (path);
-        chop_excess (iconname);
+        iconname = util_c::utf_string (path);
+        util_c::chop_excess (iconname);
     }
 
 #ifdef DEBUG

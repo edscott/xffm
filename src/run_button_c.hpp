@@ -1,9 +1,8 @@
 #ifndef RUN_BUTTON_C_HPP
 #define RUN_BUTTON_C_HPP
-#include "utility_c.hpp"
 #include "gtk_c.hpp"
 
-class run_button_c: virtual utility_c, public gtk_c {
+class run_button_c: public gtk_c {
     public:
         run_button_c(void *, const gchar *, pid_t, gboolean);
         ~run_button_c(void);
@@ -20,7 +19,6 @@ class run_button_c: virtual utility_c, public gtk_c {
         gint get_grandchild(void);
         void *get_view_v(void);
         GtkWidget *make_menu(void);
-        void *_context_function(void * (*function)(gpointer), void * function_data);
         GtkWidget *get_menu(void){return menu;}
 	
     protected:
