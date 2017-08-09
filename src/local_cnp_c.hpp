@@ -1,9 +1,8 @@
 #ifndef LOCAL_CNP_C_HPP
 #define LOCAL_CNP_C_HPP
 #include "xffm+.h"
-#include "gnu_utils_c.hpp"
 
-class  local_cnp_c: virtual gnu_utils_c{
+class  local_cnp_c{
     public:
         local_cnp_c(void *);
     protected:

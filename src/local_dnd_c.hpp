@@ -1,9 +1,8 @@
 #ifndef LOCAL_DND_C_HPP
 #define LOCAL_DND_C_HPP
 #include "xffm+.h"
-#include "gnu_utils_c.hpp"
 
-class  local_dnd_c: virtual gnu_utils_c{
+class  local_dnd_c{
     public:
         local_dnd_c(void *);
         gboolean _set_dnd_data(GtkSelectionData * , GList *, GtkTreeModel *, const gchar *, gint);

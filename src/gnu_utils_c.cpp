@@ -1,7 +1,6 @@
 #include "gnu_utils_c.hpp"
 #include "view_c.hpp"
 
-gnu_utils_c::gnu_utils_c(void ){}
 
 gchar **
 gnu_utils_c::non_empty_strsplit(const gchar *input, const gchar *token){

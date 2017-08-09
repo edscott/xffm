@@ -1,4 +1,5 @@
 #include "local_dnd_c.hpp"
+#include "gnu_utils_c.hpp"
 
 local_dnd_c::local_dnd_c(void *data):key_file(NULL){view_p = data;}
 
@@ -349,13 +350,13 @@ local_dnd_c::_receive_dnd(const gchar *view_target, const gchar *target, GtkSele
     // Proceed with command
     switch (action){
         case GDK_ACTION_COPY:
-            cp(view_p, list, fulltarget, options);
+            gnu_utils_c::cp(view_p, list, fulltarget, options);
             break;
         case GDK_ACTION_MOVE:
-            mv(view_p, list, fulltarget, options);
+            gnu_utils_c::mv(view_p, list, fulltarget, options);
             break;
         case GDK_ACTION_LINK:
-            ln(view_p, list, fulltarget, options);
+            gnu_utils_c::ln(view_p, list, fulltarget, options);
          break;
     }
     
