@@ -196,8 +196,10 @@ get_lite_emblem(const gchar *mimetype){
     static GHashTable *key_hash=NULL;
     if (!mimetype) return NULL;
     if (!key_hash) lite_c::init(&type_hash, &key_hash);
+    if (!key_hash) fprintf(stderr, "get_lite_emblem!\n");
     const gchar *lite_key = (const gchar *)g_hash_table_lookup(key_hash, mimetype);
     if (!lite_key) return NULL;
+    if (!type_hash) fprintf(stderr, "get_lite_emblem 2!\n");
     lite_t *lite_p = (lite_t *)g_hash_table_lookup(type_hash, lite_key);
     if (!lite_p) return NULL;
     return lite_p->icon;
@@ -208,8 +210,10 @@ get_lite_colors(const gchar *mimetype, guchar *r, guchar *g, guchar *b){
     static GHashTable *type_hash=NULL;
     static GHashTable *key_hash=NULL;
     if (!mimetype) return FALSE;
+    if (!key_hash) fprintf(stderr, "get_lite_emblem 3!\n");
      if (!key_hash) lite_c::init(&type_hash, &key_hash);
     const gchar *lite_key = (const gchar *)g_hash_table_lookup(key_hash, mimetype);
+    if (!type_hash) fprintf(stderr, "get_lite_emblem 4!\n");
     if (!lite_key) return FALSE;
     lite_t *lite_p = (lite_t *)g_hash_table_lookup(type_hash, lite_key);
     if (!lite_p) return FALSE;

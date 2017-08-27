@@ -113,6 +113,7 @@ mime_c::find_mimetype_in_hash(const gchar *file){
     if (!mimetype_hash) return type;
     gchar *key = get_hash_key (file);
     pthread_mutex_lock(&mimetype_hash_mutex);
+    if (!mimetype_hash) fprintf(stderr, "mimetype_hash!\n");
     type = (const gchar *)g_hash_table_lookup (mimetype_hash, key);
     pthread_mutex_unlock(&mimetype_hash_mutex);
     g_free (key);

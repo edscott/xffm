@@ -28,11 +28,10 @@ typedef struct pixbuf_t {
 GHashTable *pixbuf_hash_c::pixbuf_hash=NULL;
 
 
-pixbuf_hash_c::pixbuf_hash_c(void){
-    if (!pixbuf_hash) {
-        pixbuf_hash = g_hash_table_new_full (g_str_hash, g_str_equal,g_free, free_pixbuf_t);
-        fprintf(stderr, "constructing common pixbuf hash table: %p.\n", (void *)pixbuf_hash);
-    }
+void 
+pixbuf_hash_c::init(void){
+    pixbuf_hash = g_hash_table_new_full (g_str_hash, g_str_equal,g_free, free_pixbuf_t);
+    fprintf(stderr, "constructing common pixbuf hash table: %p.\n", (void *)pixbuf_hash);
 }
 
 pixbuf_hash_c::~pixbuf_hash_c(void){
@@ -154,6 +153,7 @@ pixbuf_hash_c::rm_from_pixbuf_hash (const gchar *icon_name, gint size) {
     gchar *hash_key = get_hash_key (icon_name, size);
 
     NOOP(stderr, "rm_from_pixbuf_hash: %s\n", hash_key);
+    if (!pixbuf_hash) fprintf(stderr, "pixbuf_hash!\n");
 
     void *d = g_hash_table_lookup(pixbuf_hash, hash_key);
     
@@ -174,6 +174,7 @@ pixbuf_hash_c::lookup_icon(const gchar *icon_name, gint size){
     NOOP(stderr, "find in pixbuf hash(%p): %s(%d)\n",(void *)pixbuf_hash, icon_name, size);
     gchar *hash_key = get_hash_key (icon_name, size);
 
+    if (!pixbuf_hash) fprintf(stderr, "pixbuf_hash 2!\n");
     pixbuf_t *pixbuf_p = (pixbuf_t *)g_hash_table_lookup (pixbuf_hash, hash_key);
     if(!pixbuf_p || !GDK_IS_PIXBUF(pixbuf_p->pixbuf)) {
 	return NULL;

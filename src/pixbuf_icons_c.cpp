@@ -16,6 +16,7 @@ pthread_mutex_t pixbuf_icons_c::pixbuf_mutex;
 
 void
 pixbuf_icons_c::init(void){
+    pixbuf_hash_c::init();
     pixbuf_icons_c::pixbuf_mutex = PTHREAD_MUTEX_INITIALIZER;
     pixbuf_icons_c::icon_theme = gtk_icon_theme_get_default ();
     if (!icon_theme){
