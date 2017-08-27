@@ -12,24 +12,22 @@
 
 class gtk_c:  public tooltip_c{
     public:
-        gtk_c(void);
-        ~gtk_c(void);
-        void setup_image_button (GtkWidget *, const gchar *, const gchar *);    
-        GtkWidget *new_add_page_tab(GtkWidget *, GtkWidget **);
-	void set_bin_contents(GtkWidget *, const char *, const char *, gint);
-	void set_bin_markup(GtkWidget *, const char *);
-        gint get_icon_size(const gchar *);
-        GtkWidget *hbox_new(gboolean, gint);
-        GtkWidget *vbox_new(gboolean, gint);
-        GtkWidget *dialog_button (const char *, const char *);
-        GtkWidget *toggle_button (const char *, const char *);
+        static void init(void);
+        static void setup_image_button (GtkWidget *, const gchar *, const gchar *);    
+        static GtkWidget *new_add_page_tab(GtkWidget *, GtkWidget **);
+	static void set_bin_contents(GtkWidget *, const char *, const char *, gint);
+	static void set_bin_markup(GtkWidget *, const char *);
+        static gint get_icon_size(const gchar *);
+        static GtkWidget *hbox_new(gboolean, gint);
+        static GtkWidget *vbox_new(gboolean, gint);
+        static GtkWidget *dialog_button (const char *, const char *);
+        static GtkWidget *toggle_button (const char *, const char *);
 
-    protected:
-        GtkWidget *menu_item_new(const gchar *, const gchar *);
-        GtkMenu *mk_menu(const gchar **);
-        GtkMenu *mk_menu(const gchar **,  void (*menu_callback)(GtkWidget *, gpointer));
-    private:
-	void set_bin_image(GtkWidget *, const gchar *, gint);
+        static GtkWidget *menu_item_new(const gchar *, const gchar *);
+        static GtkMenu *mk_menu(const gchar **);
+        static GtkMenu *mk_menu(const gchar **,  void (*menu_callback)(GtkWidget *, gpointer));
+    //private:
+	static void set_bin_image(GtkWidget *, const gchar *, gint);
         static GHashTable *iconname_hash;
         static void populate_iconname_hash(void);
 	

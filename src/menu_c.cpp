@@ -42,7 +42,7 @@ menu_c::create_menu(void){
         N_("Close"),
         N_("Exit"),
         NULL};
-    view_menu = mk_menu(view_items, menu_option);
+    view_menu = gtk_c::mk_menu(view_items, menu_option);
 //    view_menu = mk_menu(view_items, menu_option);
 }
 gboolean

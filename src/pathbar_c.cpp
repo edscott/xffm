@@ -40,7 +40,7 @@ pathbar_c::pathbar_button (const char *icon_id, const char *text) {
         markup = g_strdup_printf("<span size=\"x-small\">%s</span>", g);
         g_free(g);
     }
-    set_bin_contents(pb_button, icon_id, markup, 12);
+    gtk_c::set_bin_contents(pb_button, icon_id, markup, 12);
     g_free(markup);
     return pb_button;
 }
@@ -148,7 +148,7 @@ pathbar_c::toggle_pathbar(const gchar *path){
             gchar *g = g_markup_escape_text(v, -1);
             g_free(v);
             gchar *markup = g_strdup_printf("<span size=\"x-small\" color=\"blue\" bgcolor=\"#dcdad5\">%s</span>", g);
-            set_bin_markup(GTK_WIDGET(children->data), markup);
+            gtk_c::set_bin_markup(GTK_WIDGET(children->data), markup);
             g_free(g);
             g_free(markup);
             continue;
@@ -165,7 +165,7 @@ pathbar_c::toggle_pathbar(const gchar *path){
             gchar *g = g_markup_escape_text(v, -1);
             g_free(v);
             gchar *markup = g_strdup_printf("<span size=\"x-small\" color=\"red\"bgcolor=\"#dcdad5\">%s</span>", g);
-            set_bin_markup(GTK_WIDGET(children->data), markup);
+            gtk_c::set_bin_markup(GTK_WIDGET(children->data), markup);
             g_free(g);
             g_free(markup);
         }
@@ -174,7 +174,7 @@ pathbar_c::toggle_pathbar(const gchar *path){
             gchar *g = g_markup_escape_text(v, -1);
             g_free(v);
             gchar *markup = g_strdup_printf("<span size=\"x-small\" color=\"blue\"bgcolor=\"#dcdad5\">%s</span>", g);
-            set_bin_markup(GTK_WIDGET(children->data), markup);
+            gtk_c::set_bin_markup(GTK_WIDGET(children->data), markup);
             g_free(g);
             g_free(markup);
         }

@@ -63,7 +63,7 @@ window_c::window_c(GtkApplication *data) {
 
 
     new_tab_button = gtk_button_new ();
-    setup_image_button(new_tab_button, "list-add", _("Open a new tab (Ctrl+T)"));
+    gtk_c::setup_image_button(new_tab_button, "list-add", _("Open a new tab (Ctrl+T)"));
     gtk_widget_show(new_tab_button);
 /*
     GtkWidget *button = gtk_button_new ();
@@ -410,12 +410,12 @@ window_c::shell_dialog(void){
 
      //   add_cancel_ok(widgets_p, GTK_DIALOG (dialog));
         // button yes
-        GtkWidget *button = dialog_button ("ok", _("Ok"));
+        GtkWidget *button = gtk_c::dialog_button ("ok", _("Ok"));
         gtk_widget_show (button);
         gtk_box_pack_end (GTK_BOX (hbox2), button, FALSE, FALSE, 0);
         g_object_set_data(G_OBJECT(button), "dialog", dialog);
         g_signal_connect (G_OBJECT (button), "clicked", G_CALLBACK (click_button), GINT_TO_POINTER(1));
-        GtkWidget *button2 = dialog_button ("cancel", _("Cancel"));
+        GtkWidget *button2 = gtk_c::dialog_button ("cancel", _("Cancel"));
         gtk_widget_show (button2);
         gtk_box_pack_end (GTK_BOX (hbox2), button2, FALSE, FALSE, 0);
         g_object_set_data(G_OBJECT(button2), "dialog", dialog);

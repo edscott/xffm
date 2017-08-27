@@ -3,7 +3,7 @@
 #include "xffm+.h"
 #include "gtk_c.hpp"
 
-class menu_c: public gtk_c  {
+class menu_c  {
     public:
         menu_c(void);
         ~menu_c(void);

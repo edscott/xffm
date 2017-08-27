@@ -2,7 +2,7 @@
 #define RUN_BUTTON_C_HPP
 #include "gtk_c.hpp"
 
-class run_button_c: public gtk_c {
+class run_button_c {
     public:
         run_button_c(void *, const gchar *, pid_t, gboolean);
         ~run_button_c(void);

@@ -2,7 +2,7 @@
 #define PATHBAR_C_HPP
 #include "gtk_c.hpp"
 
-class pathbar_c: public gtk_c {
+class pathbar_c {
     public:
 	pathbar_c(void *window_v, GtkNotebook *data);
 	GtkWidget *get_pathbar(void);

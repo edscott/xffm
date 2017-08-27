@@ -927,7 +927,7 @@ view_c::setup_tooltip(gint x, gint y){
     GdkPixbuf *pixbuf = xfdir_p->get_tooltip_pixbuf(tpath);
     if (!pixbuf) pixbuf = xfdir_p->get_normal_pixbuf(tpath); 
     
-    GtkWidget *tt_window = get_tt_window(
+    GtkWidget *tt_window = gtk_c::get_tt_window(
                 pixbuf, fname,     
                 fcontent);
     g_free(fname);

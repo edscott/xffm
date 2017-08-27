@@ -8,6 +8,7 @@ main (int argc, char **argv){
     try {
         mime_c::init_hashes();
         pixbuf_icons_c::init();
+	gtk_c::init();
         xffm_c xffm(argc, argv);
         return xffm.run();
     }

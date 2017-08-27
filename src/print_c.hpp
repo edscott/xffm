@@ -1,7 +1,6 @@
 #ifndef PRINT_C_HPP
 #define PRINT_C_HPP
 #include "xffm+.h"
-#include "gtk_c.hpp"
 
 
 class print_c {

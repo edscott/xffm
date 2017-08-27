@@ -186,7 +186,7 @@ make_run_data_button (void *data) {
     
     TRACE("make_run_data_button: icon_id=\"%s\" tip=\"%s\"\n", run_button_p->get_icon_id(), run_button_p->get_tip());
 
-    run_button_p->setup_image_button(button, run_button_p->get_icon_id(), run_button_p->get_tip());
+    gtk_c::setup_image_button(button, run_button_p->get_icon_id(), run_button_p->get_tip());
     g_signal_connect(button, "toggled", G_CALLBACK (run_button_toggled), data);
     gtk_box_pack_end (GTK_BOX (view_p->get_button_space()), button, FALSE, FALSE, 0);
     gtk_widget_show (button);

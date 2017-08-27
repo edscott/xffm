@@ -16,10 +16,10 @@ widgets_c::widgets_c(void *window_data, GtkNotebook *data)
     create();
     setup_scolled_windows();
     setup_size_scale();
-    setup_image_button(hidden_button, "emblem-show-hidden",  _("Show hidden files"));
+    gtk_c::setup_image_button(hidden_button, "emblem-show-hidden",  _("Show hidden files"));
     NOOP( "toggle hidden_button=%p\n", hidden_button);
-    setup_image_button(clear_button, "edit-clear-all",  _("Clear"));
-    setup_image_button(page_label_button, "window-close", _("Close Tab"));
+    gtk_c::setup_image_button(clear_button, "edit-clear-all",  _("Clear"));
+    gtk_c::setup_image_button(page_label_button, "window-close", _("Close Tab"));
 }
 
 widgets_c::~widgets_c(void){

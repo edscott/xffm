@@ -974,8 +974,8 @@ xfdir_local_c::create_menu(void){
         N_("bcrypt"),
          NULL};
 
-    selection_menu = mk_menu(selection_items, menu_option);
-    directory_menu = mk_menu(directory_items, menu_option);
+    selection_menu = gtk_c::mk_menu(selection_items, menu_option);
+    directory_menu = gtk_c::mk_menu(directory_items, menu_option);
     g_object_set_data(G_OBJECT(selection_menu),"xfdir_local_p", (void *)this);
     g_object_set_data(G_OBJECT(directory_menu),"xfdir_local_p", (void *)this);
 }

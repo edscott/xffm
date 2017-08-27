@@ -8,17 +8,12 @@ gtk_c::get_icon_size(const gchar *name){
     return GTK_ICON_SIZE_DIALOG;
 }
 
-gtk_c::gtk_c(void){
-    if (!iconname_hash){
-        iconname_hash = g_hash_table_new(g_str_hash, g_str_equal);
-        populate_iconname_hash();
-    }
-    //fprintf(stderr, "gtk_c constructor OK\n");
-}
-
-
-gtk_c::~gtk_c(void){
-    DBG("gtk_c::~gtk_c\n");
+void 
+gtk_c::init(void){
+    iconname_hash = g_hash_table_new(g_str_hash, g_str_equal);
+    populate_iconname_hash();
+    init_tooltip_c();
+    //fprintf(stderr, "gtk_c init OK\n");
 }
 
 void

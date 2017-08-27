@@ -5,14 +5,11 @@ GHashTable *tooltip_c::tooltip_text_hash=NULL;
 GtkWidget  *tooltip_c::tt_window = NULL;
 gboolean   tooltip_c::tooltip_is_mapped = FALSE;
 
-tooltip_c::tooltip_c(void){
-    if (!tooltip_text_hash){
-        tooltip_text_hash = g_hash_table_new_full(g_direct_hash, g_direct_equal, NULL, g_free);
-    }
+void
+tooltip_c::init_tooltip_c(void){
+    tooltip_text_hash = g_hash_table_new_full(g_direct_hash, g_direct_equal, NULL, g_free);
 }
 
-tooltip_c::~tooltip_c(void){
-}
 
 GtkWidget * 
 tooltip_c::get_tt_window(void){return tt_window;}
@@ -115,16 +112,16 @@ tooltip_c::get_tooltip_map(void){ return tooltip_is_mapped;}
 
 static void
 tooltip_unmap (GtkWidget *window, gpointer data){
-    tooltip_c *tooltip_p =(tooltip_c *)data;
-    tooltip_p->set_tooltip_map(FALSE);
+    //tooltip_c *tooltip_p =(tooltip_c *)data;
+    tooltip_c::set_tooltip_map(FALSE);
 }
 
 // This is a gtk placement bug workaround. Should probably fix gtk code and
 // submit the patch: this is a long standing bug...
 static void
 tooltip_map (GtkWidget *window, gpointer data){
-    tooltip_c *tooltip_p =(tooltip_c *)data;
-    tooltip_p->set_tooltip_map(TRUE);
+    //tooltip_c *tooltip_p =(tooltip_c *)data;
+    tooltip_c::set_tooltip_map(TRUE);
 }
 
 
@@ -134,8 +131,8 @@ tooltip_c::get_tt_window(const GdkPixbuf *pixbuf, const gchar *markup, const gch
     if (!tt_window) {
         tt_window = gtk_window_new(GTK_WINDOW_POPUP);
         //NOOP(stderr, "New tooltip window now...\n");
-        g_signal_connect (G_OBJECT (tt_window), "map", G_CALLBACK (tooltip_map), (void *)this);
-        g_signal_connect (G_OBJECT (tt_window), "unmap", G_CALLBACK (tooltip_unmap), (void *)this);
+        g_signal_connect (G_OBJECT (tt_window), "map", G_CALLBACK (tooltip_map), NULL);
+        g_signal_connect (G_OBJECT (tt_window), "unmap", G_CALLBACK (tooltip_unmap), NULL);
         gtk_window_set_type_hint (GTK_WINDOW (tt_window), GDK_WINDOW_TYPE_HINT_TOOLTIP);
         gtk_widget_set_app_paintable (tt_window, TRUE);
         gtk_window_set_resizable (GTK_WINDOW (tt_window), FALSE);
@@ -238,8 +235,8 @@ widget_tooltip_function(
         GtkTooltip * tooltip,
         gpointer user_data
 ) {
-    tooltip_c *tooltip_p = (tooltip_c *)user_data;
-    GtkWidget *tt_window = tooltip_p->get_tt_window();
+    //tooltip_c *tooltip_p = (tooltip_c *)user_data;
+    GtkWidget *tt_window = tooltip_c::get_tt_window();
     gchar *tooltip_text = (gchar *)g_object_get_data(G_OBJECT(widget), "tooltip_text");
     if (tt_window) {
 	GtkWidget *tooltip_target = (GtkWidget *)
@@ -262,7 +259,7 @@ widget_tooltip_function(
 	    tooltip_text = strchr(tooltip_text, '\n') + 1;
 	}
     }
-    tt_window = tooltip_p->get_tt_window(tooltip_pixbuf, tooltip_text, label_text);
+    tt_window = tooltip_c::get_tt_window(tooltip_pixbuf, tooltip_text, label_text);
 
     gtk_widget_set_tooltip_window (widget, GTK_WINDOW(tt_window));
 
@@ -276,15 +273,15 @@ widget_tooltip_function(
 
 static void
 destroy_widget(GtkWidget *button, void *data){
-    tooltip_c *tooltip_p = (tooltip_c *)data;
+    //tooltip_c *tooltip_p = (tooltip_c *)data;
     GdkPixbuf *tooltip_pixbuf = (GdkPixbuf *)
         g_object_get_data(G_OBJECT(button), "tooltip_pixbuf");
-    if (!tooltip_p->get_tooltip_text_hash()) DBG("destroy_widget: hash is null!\n");
+    if (!tooltip_c::get_tooltip_text_hash()) DBG("destroy_widget: hash is null!\n");
     gchar *tooltip_text =
-        (gchar *)g_hash_table_lookup(tooltip_p->get_tooltip_text_hash(), button);
+        (gchar *)g_hash_table_lookup(tooltip_c::get_tooltip_text_hash(), button);
     if (tooltip_text) {
         // The free is done by removing item from hash table:
-        g_hash_table_remove(tooltip_p->get_tooltip_text_hash(), button);
+        g_hash_table_remove(tooltip_c::get_tooltip_text_hash(), button);
     }
 
     if (tooltip_pixbuf) g_object_unref(tooltip_pixbuf);
@@ -300,27 +297,27 @@ custom_tooltip_f(void * data){
     GtkWidget *widget = (GtkWidget *)arg[0];
     GdkPixbuf *pixbuf = (GdkPixbuf *)arg[1];
     const gchar *text = (const gchar *)arg[2];
-    void *object = arg[3];
-    tooltip_c *tooltip_p = (tooltip_c *)object;
+    //void *object = arg[3];
+    //tooltip_c *tooltip_p = (tooltip_c *)object;
 
     //fprintf(stderr, "custom_tooltip_f for %s\n", text);
 
     gchar *t = g_strdup(text);
     g_object_set_data(G_OBJECT(widget), "tooltip_text", t);
-    if (!tooltip_p->get_tooltip_text_hash()) DBG("custom_tooltip_f: hash is null!\n");
-    g_hash_table_replace(tooltip_p->get_tooltip_text_hash(), widget, t);
+    if (!tooltip_c::get_tooltip_text_hash()) DBG("custom_tooltip_f: hash is null!\n");
+    g_hash_table_replace(tooltip_c::get_tooltip_text_hash(), widget, t);
     g_object_set_data(G_OBJECT(widget), "tooltip_pixbuf", pixbuf);
 
     gtk_widget_set_has_tooltip(widget, TRUE);
     g_signal_connect (G_OBJECT (widget), "destroy",
-	    G_CALLBACK (destroy_widget), object);
+	    G_CALLBACK (destroy_widget), NULL);
     g_signal_connect (G_OBJECT (widget), "query-tooltip",
-	    G_CALLBACK (widget_tooltip_function), object);
+	    G_CALLBACK (widget_tooltip_function), NULL);
     return NULL;
 }
 
 void tooltip_c::custom_tooltip(GtkWidget *widget, GdkPixbuf *pixbuf, const gchar *text){
-    void *arg[]={widget, pixbuf, (void *)text, (void *)this};
+    void *arg[]={widget, pixbuf, (void *)text};
     util_c::context_function(custom_tooltip_f, arg);
 }
 

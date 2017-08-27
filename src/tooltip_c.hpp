@@ -5,25 +5,23 @@
 
 class tooltip_c {
     public:
-        tooltip_c(void);
-        ~tooltip_c(void);
-        GtkWidget * get_tt_window(void);
-        GtkWidget *get_tt_window(const GdkPixbuf *, const gchar *, const gchar *);
+        static void init_tooltip_c(void);
+        static GtkWidget * get_tt_window(void);
+        static GtkWidget *get_tt_window(const GdkPixbuf *, const gchar *, const gchar *);
         
-        GHashTable *get_tooltip_text_hash(void);
-        void set_tooltip_map(gboolean);
-        gboolean get_tooltip_map(void);
-        void reset_tooltip(void);
-        void custom_tooltip(GtkWidget *, GdkPixbuf *, const gchar *);
-        void set_box_gradient(GtkWidget *wbox);
+        static GHashTable *get_tooltip_text_hash(void);
+        static void set_tooltip_map(gboolean);
+        static gboolean get_tooltip_map(void);
+        static void reset_tooltip(void);
+        static void custom_tooltip(GtkWidget *, GdkPixbuf *, const gchar *);
+        static void set_box_gradient(GtkWidget *wbox);
 
-    protected:
         
-    private:
+    //private:
         static GHashTable *tooltip_text_hash;
         static GtkWidget *tt_window;
-        GdkPixbuf *shadow_it(const GdkPixbuf *);
-        void tooltip_placement_bug_workaround(GtkWidget *);
+        static GdkPixbuf *shadow_it(const GdkPixbuf *);
+        static void tooltip_placement_bug_workaround(GtkWidget *);
         static gboolean tooltip_is_mapped;
 };
 
