@@ -90,6 +90,8 @@ tooltip_c::tooltip_placement_bug_workaround(GtkWidget *tooltip_window){
     last_y = monitor.height-1;
     gtk_window_move (GTK_WINDOW (tooltip_window), 
             last_x,last_y);
+    fprintf(stderr, "tooltip_c.cpp:: Wayland tooltip move to %d, %d not working...\n", last_x,last_y);
+    while (gtk_events_pending())gtk_main_iteration();
 #endif
 #endif
         return;
@@ -129,7 +131,10 @@ tooltip_map (GtkWidget *window, gpointer data){
 GtkWidget *
 tooltip_c::get_tt_window(const GdkPixbuf *pixbuf, const gchar *markup, const gchar *label_text){
     if (!tt_window) {
-        tt_window = gtk_window_new(GTK_WINDOW_POPUP);
+        tt_window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	gtk_window_set_decorated (GTK_WINDOW (tt_window),FALSE);
+	//EWG: GTK_WINDOW_POPUP make Wayland exit application...
+        //tt_window = gtk_window_new(GTK_WINDOW_POPUP);
         //NOOP(stderr, "New tooltip window now...\n");
         g_signal_connect (G_OBJECT (tt_window), "map", G_CALLBACK (tooltip_map), NULL);
         g_signal_connect (G_OBJECT (tt_window), "unmap", G_CALLBACK (tooltip_unmap), NULL);
@@ -300,7 +305,7 @@ custom_tooltip_f(void * data){
     //void *object = arg[3];
     //tooltip_c *tooltip_p = (tooltip_c *)object;
 
-    //fprintf(stderr, "custom_tooltip_f for %s\n", text);
+    fprintf(stderr, "custom_tooltip_f for %s\n", text);
 
     gchar *t = g_strdup(text);
     g_object_set_data(G_OBJECT(widget), "tooltip_text", t);

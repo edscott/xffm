@@ -50,9 +50,10 @@ gtk_c::setup_image_button (GtkWidget *button, const gchar *icon_name, const gcha
         gtk_widget_show (image);
     }
     // Elaborate tooltip
-    custom_tooltip(button, pixbuf, icon_tip);
+    fprintf(stderr, "gtk_c.cpp:: custom_tooltip not working right in Wayland\n");
+    //custom_tooltip(button, pixbuf, icon_tip);
     // Simple tooltip:
-    // gtk_widget_set_tooltip_text (button, icon_tip);
+     gtk_widget_set_tooltip_text (button, icon_tip);
     
 }  
 
