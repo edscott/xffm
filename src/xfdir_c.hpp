@@ -3,6 +3,8 @@
 
 #include "xffm+.h"
 
+#include "dnd_c.hpp"
+
 #include "menu_c.hpp"
 #define SET_DIR(x) x|=0x01
 #define IS_DIR (x&0x01)
@@ -41,12 +43,15 @@ enum
   NUM_COLS
 };
 
-class xfdir_c:  public menu_c {
+class xfdir_c:  public menu_c, public dnd_c {
     public:
         xfdir_c(const gchar *);
         ~xfdir_c(void);
 
-	// Pure
+	virtual gboolean set_dnd_data(GtkSelectionData *, GList *);
+	virtual gboolean receive_dnd(const gchar *, GtkSelectionData *, GdkDragAction);
+	
+        // Pure
         virtual void reload(const gchar *)=0;
 	virtual const gchar *get_xfdir_iconname(void)=0;
         virtual void item_activated (GtkIconView *, GtkTreePath *, void *)=0;
@@ -54,8 +59,7 @@ class xfdir_c:  public menu_c {
         virtual gchar *make_tooltip_text (GtkTreePath *);
         virtual gchar *get_verbatim_name (GtkTreePath *);
         virtual void highlight_drop(GtkTreePath *);
-	virtual gboolean set_dnd_data(GtkSelectionData *, GList *);
-	virtual gboolean receive_dnd(const gchar *, GtkSelectionData *, GdkDragAction);
+
 	// Common
 	GdkPixbuf *get_normal_pixbuf(GtkTreePath *);
         GdkPixbuf *get_tooltip_pixbuf(GtkTreePath *);

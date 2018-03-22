@@ -1,50 +1,30 @@
 dnl 5.2.4
 
 AC_DEFUN([RFM_SET_PKG_CONF_DIR],[
+# check for usual targets:
 if test $prefix = NONE; then
    PREF=$ac_default_prefix
 else
    PREF=$prefix
 fi  
-AC_ARG_WITH(pkglibdata, [AC_HELP_STRING([--with-pkglibdata], [Place pkgconfig .pc files at libdata/pkgconfig, relative to prefix])])
-AC_ARG_WITH(pkgdatadir, [AC_HELP_STRING([--with-pkgdatadir], [Place pkgconfig .pc files at (datadir)/pkgconfig])])
-PKG_CONF_DIR=
-if test x"$with_pkglibdata" != x ; then
-    PKG_CONF_DIR="$PREF/libdata/pkgconfig"
-else
-  if test x"$with_pkgshare" != x ; then
-    PKG_CONF_DIR="$PREF/share/pkgconfig"
-  else
-    DIRS="lib libdata share"
-    TOP_COUNT=0
-    for DIR in $DIRS
-    do
-        TARGET=$PREF/$DIR/pkgconfig
-        if test -e $TARGET ; then
-            echo "Searching for pkgconfig directory $TARGET... found."
-            R=`ls $TARGET | grep \.pc\$`
-                echo "score: $TARGET -> ${#R}"
-                if test ${#R} -gt $TOP_COUNT ; then
-                    TOP_COUNT=${#R}
-                    PKG_CONF_DIR=$TARGET
-                fi
-        else
-            echo "Searching for pkgconfig directory $TARGET... not found."
-        fi
-    done
-    if test ${#PKG_CONF_DIR} -eq 0 ; then
-        PKG_CONF_DIR="$libdir/pkgconfig"
-        echo "*** Could not determine pkgconfig target. Using default $PKG_CONF_DIR"
-        echo "    target. If this is not correct, use either --with_pkglibdata or"
-        echo "    --with_pkgshare option and rerun configure"
-    else
-        echo "    Using $PKG_CONF_DIR as target for pkgconfig file."
-        echo "    If this is not correct, use either --with_pkglibdata or"
-        echo "    --with_pkgshare option and rerun configure"
-    fi
-  fi
+
+LOCATION="lib"
+
+if [test -e /usr/libdata/pkgconfig] || [test -e /usr/local/libdata/pkgconfig] ; then
+    echo "Searching for pkgconfig directory at libdata... found."
+    LOCATION="libdata"
 fi
-AC_SUBST([PKG_CONF_DIR]) PKG_CONF_DIR="$libdir/pkgconfig"
+if [test -e /usr/share/pkgconfig] || [test -e /usr/local/share/pkgconfig] ; then
+    echo "Searching for pkgconfig directory at share... found."
+    LOCATION="share"
+fi
+if [test -e /usr/lib/pkgconfig] || [test -e /usr/local/lib/pkgconfig] ; then
+    echo "Searching for pkgconfig directory at lib... found."
+    LOCATION="lib"
+fi
+
+PKG_CONF_DIR="$PREF/$LOCATION/pkgconfig"
+AC_SUBST([PKG_CONF_DIR]) 
 ]
 )
 
