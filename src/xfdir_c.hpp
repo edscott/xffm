@@ -3,7 +3,6 @@
 
 #include "xffm+.h"
 
-#include "dnd_c.hpp"
 
 #include "menu_c.hpp"
 #define SET_DIR(x) x|=0x01
@@ -43,7 +42,7 @@ enum
   NUM_COLS
 };
 
-class xfdir_c:  public menu_c, public dnd_c {
+class xfdir_c:  public menu_c {
     public:
         xfdir_c(const gchar *);
         ~xfdir_c(void);

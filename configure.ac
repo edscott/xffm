@@ -30,7 +30,8 @@ AC_COPYRIGHT([Copyright (c) 2000-2016 Edscott Wilson Garcia. <edscott@users.sf.n
 AC_PROG_INSTALL
 AM_PROG_AR
 LT_INIT(disable-static)
-AM_INIT_AUTOMAKE([1.11 -Wall no-dist-gzip dist-bzip2])
+#AM_INIT_AUTOMAKE([1.11 no-dist-gzip dist-bzip2])
+AM_INIT_AUTOMAKE([1.11 -Wall -Wno-deprecated no-dist-gzip dist-bzip2])
 # Support silent build rules. Disable
 # by either passing --disable-silent-rules to configure or passing V=1
 # to make
