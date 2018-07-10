@@ -1,0 +1,337 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:38:41 CDT 2013 ---
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-09 17:28-0600\n"
+"PO-Revision-Date: 2011-04-22 23:51+0330\n"
+"Last-Translator: Arash Mousavi <mousavi.arash@gmail.com>\n"
+"Language-Team: Persian <translate@ifsug.org>\n"
+"Language: fa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Persian\n"
+"X-Poedit-Country: IRAN, ISLAMIC REPUBLIC OF\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: .././src/find-module.i:25
+msgid "Any"
+msgstr "هر چیز"
+
+#: .././src/find-module.i:26
+msgid "Regular"
+msgstr "با قاعده"
+
+#: .././src/find-module.i:27
+msgid "Directory"
+msgstr "شاخه"
+
+#: .././src/find-module.i:28
+msgid "Symbolic Link"
+msgstr "پیوند نمادی"
+
+#: .././src/find-module.i:29
+msgid "Socket"
+msgstr "سوکت"
+
+#: .././src/find-module.i:30
+msgid "Block device"
+msgstr "دستگاه بلوک"
+
+#: .././src/find-module.i:31
+msgid "Character device"
+msgstr "دستگاه نویسه"
+
+#: .././src/find-module.i:32
+msgid "FIFO"
+msgstr "FIFO"
+
+#. / option "upper_limit_spin" (only in gtk dialog)
+#: .././src/find-module.i:162 .././src/find-module_gui.c:767
+msgid "Results"
+msgstr "نتایج"
+
+#: .././src/find-module.i:162
+msgid "Upper limit:"
+msgstr "حد بالایی:"
+
+#: .././src/find-module.i:165 .././src/find-module.i:171
+msgid "Counting files..."
+msgstr "در حال شمارش پرونده‌ها..."
+
+#. Standalone
+#: .././src/find-module.i:179 .././src/find-module.i:183
+#, fuzzy
+msgid "Search Complete"
+msgstr "جستجو کامل شد."
+
+#: .././src/find-module.i:197
+#, fuzzy
+msgid "Found %d match"
+msgid_plural "Found %d matches"
+msgstr[0] "%d تطبیق"
+
+#: .././src/find-module.i:200
+#, fuzzy
+msgid "%s Finished : %s"
+msgstr "زمان پایان:"
+
+#: .././src/find-module.i:237
+msgid "Select Files..."
+msgstr "برگزیدن پرونده‌ها..."
+
+#: .././src/find-module.i:239
+msgid "Select folder to search in"
+msgstr "یک پوشه جهت جست‌وجو در آن انتخاب کنید"
+
+#: .././src/find-module.i:719 .././src/find-module.i:723
+msgid "Searching..."
+msgstr "در حال جست و جو"
+
+#: .././src/find-module_gui.c:58
+msgid ""
+"Basic rules:\n"
+"\n"
+"*  Will match any character zero or more times.\n"
+"?  Will match any character exactly one time\n"
+"[] Match any character within the [] \n"
+"^  Match at beginning of string\n"
+"$  Match at end of string \n"
+msgstr ""
+
+#: .././src/find-module_gui.c:66
+msgid ""
+"Reserved characters for extended regexp are\n"
+". ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"In  basic regular expressions the metacharacters\n"
+"?, +, {, |, (, and ) lose their special meaning.\n"
+"\n"
+"The  period  .   matches  any  single  character.\n"
+"The caret ^ matches at the start of line.\n"
+"The dollar $ matches at the end of line.\n"
+"\n"
+"Characters within [ ] matches any single \n"
+"       character in the list.\n"
+"Characters within [^ ] matches any single\n"
+"       character *not* in the list.\n"
+"Characters inside [ - ] matches a range of\n"
+"       characters (ie [0-9] or [a-z]).\n"
+"\n"
+"A regular expression may be followed by one\n"
+"       of several repetition operators:\n"
+"?      The preceding item is optional and matched\n"
+"       at most once.\n"
+"*      The preceding item will be matched zero\n"
+"       or more times.\n"
+"+      The preceding item will be matched one or\n"
+"       more times.\n"
+"{n}    The preceding item is matched exactly n times.\n"
+"{n,}   The preceding item is matched n or more times.\n"
+"{n,m}  The preceding item is matched at least n times,\n"
+"       but not more than m times.\n"
+"\n"
+"To match any reserved character, precede it with \\. \n"
+"\n"
+"Two regular expressions may be joined by the logical or\n"
+"       operator |.\n"
+"Two regular expressions may be concatenated.\n"
+"\n"
+"More information is available by typing \"man grep\"\n"
+msgstr ""
+
+#: .././src/find-module_gui.c:158
+msgid "Search returned no results"
+msgstr "جستجو بی‌نتیجه بود"
+
+#: .././src/find-module_gui.c:165
+#, fuzzy
+msgid "No editor component found."
+msgstr "مؤلفه تقویم یافت نشد."
+
+#: .././src/find-module_gui.c:226 .././src/find-module_gui.c:241
+msgid "unknown"
+msgstr "نامعلوم"
+
+#: .././src/find-module_gui.c:278
+msgid "Modified"
+msgstr "تغییر داده شد"
+
+#: .././src/find-module_gui.c:281
+msgid "Created"
+msgstr "ایجاد شد"
+
+#: .././src/find-module_gui.c:284
+#, fuzzy
+msgid "Accessed"
+msgstr "زمان دسترسی:"
+
+#: .././src/find-module_gui.c:594 .././src/find-module_gui.c:650
+#: .././src/find-module_gui.c:1021 .././src/find-module_gui.c:1031
+msgid "Find"
+msgstr "جست‌وجو"
+
+#: .././src/find-module_gui.c:677
+msgid "Path"
+msgstr "مسیر"
+
+#: .././src/find-module_gui.c:710
+msgid "Filter:"
+msgstr "صافی:"
+
+#. / option -r "recursive"
+#: .././src/find-module_gui.c:758
+msgid "Recursive"
+msgstr "بازگشتی"
+
+#. / option -D "recursiveH"
+#: .././src/find-module_gui.c:761
+#, fuzzy
+msgid "Find hidden files and directories"
+msgstr "چشم‌پوشی از پرونده‌ها و پوشه‌های مخفی"
+
+#. / option -a "xdev"
+#: .././src/find-module_gui.c:764
+msgid "Stay on single filesystem"
+msgstr "باقی ماندن بر یک سیستم پرونده"
+
+#: .././src/find-module_gui.c:767
+#, fuzzy
+msgid "Upper limit"
+msgstr "حد بالایی:"
+
+#. option -s +KByte "size_greater", "size_greater_spin"
+#: .././src/find-module_gui.c:772
+msgid "At Least"
+msgstr "حداقل"
+
+#: .././src/find-module_gui.c:772 .././src/find-module_gui.c:777
+msgid "kBytes"
+msgstr "کیلوبایت"
+
+#. option -s -KByte "size_smaller", "size_smaller_spin"
+#: .././src/find-module_gui.c:777
+msgid "At Most"
+msgstr "حداکثر"
+
+#: .././src/find-module_gui.c:784
+msgid "User"
+msgstr "کاربر"
+
+#: .././src/find-module_gui.c:789
+msgid "Group"
+msgstr "گروه"
+
+#. option -o octal "octal_p" "permissions_entry"
+#: .././src/find-module_gui.c:793
+msgid "Octal Permissions"
+msgstr "اجازه‌های هشت‌هشتی"
+
+#. option -p suid | exe
+#: .././src/find-module_gui.c:798
+msgid "SUID"
+msgstr ""
+
+#: .././src/find-module_gui.c:798
+msgid "Executable"
+msgstr "اجرایی"
+
+#. radio_p freed on destroy event for dialog.
+#. option -k minutes "last_minutes", "last_minutes_spin"
+#: .././src/find-module_gui.c:806
+msgid "Minutes"
+msgstr "دقیقه"
+
+#. option -h hours "last_hours", "last_hours_spin"
+#: .././src/find-module_gui.c:810
+msgid "Hours"
+msgstr "ساعت"
+
+#. option -d days "last_days", "last_days_spin"
+#: .././src/find-module_gui.c:814
+msgid "Days"
+msgstr "روزها"
+
+#. option -m months "last_months", "last_months_spin"
+#: .././src/find-module_gui.c:818
+msgid "Months"
+msgstr "ماه"
+
+#: .././src/find-module_gui.c:828
+msgid "File type : "
+msgstr "نوع پرونده : "
+
+#. //////////////  grep options.... /////////////////////////
+#: .././src/find-module_gui.c:844
+msgid "Contains"
+msgstr "دارد"
+
+#: .././src/find-module_gui.c:866
+msgid "Contains the text"
+msgstr "حاوی متن"
+
+#: .././src/find-module_gui.c:907
+msgid "Case Sensitive"
+msgstr "حساس به بزرگی و کوچکی حروف"
+
+#: .././src/find-module_gui.c:914
+msgid "Extended regexp"
+msgstr "regexp گسترش یافته"
+
+#: .././src/find-module_gui.c:921
+msgid "Include binary files"
+msgstr "شامل پرونده‌های دوگانی‌"
+
+#: .././src/find-module_gui.c:928
+msgid "Line Count"
+msgstr "شمارش خط"
+
+#: .././src/find-module_gui.c:953
+msgid "Match"
+msgstr "تطبیق"
+
+#: .././src/find-module_gui.c:963
+msgid "Anywhere"
+msgstr "هر کجا"
+
+#: .././src/find-module_gui.c:975
+msgid "Whole words only"
+msgstr "فقط تمام کلمات‌"
+
+#: .././src/find-module_gui.c:987
+msgid "lines"
+msgstr "سطر شماره‌گذاری شود"
+
+#: .././src/find-module_gui.c:998
+msgid "No match"
+msgstr "بدون تطبیق"
+
+#: .././src/find-module_gui.c:1021 .././src/find-module_gui.c:1061
+msgid "Close"
+msgstr "خروج"
+
+#: .././src/find-module_gui.c:1041
+msgid "Cancel"
+msgstr "لغو"
+
+#: .././src/find-module_gui.c:1051
+msgid "Clear"
+msgstr "پاک کردن"
+
+#: .././src/find-module_gui.c:1093
+msgid "Edit"
+msgstr "ویرایش"
+
+#: .././Rodent-fgr.desktop.in.in.h:1
+msgid "Home Folder"
+msgstr "پوشه‌ی آغازه"
+
+#: .././Rodent-fgr.desktop.in.in.h:2
+msgid "Search tool based on fgr"
+msgstr ""
+

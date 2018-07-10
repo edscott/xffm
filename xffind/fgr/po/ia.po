@@ -1,0 +1,290 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2011 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- mié jun 29 18:50:25 CDT 2011 ---
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Gamma\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-09 17:25-0600\n"
+"PO-Revision-Date: 2011-01-11 10:12+0100\n"
+"Last-Translator: g.sora <g.sora@tiscali.it>\n"
+"Language-Team: Interlingua <kde-i18n-it@kde.org>\n"
+"Language: ia\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 1.0\n"
+
+#: ../src/fgr.c:137
+#, fuzzy
+msgid "Options:"
+msgstr "Optiones"
+
+#: ../src/fgr.c:137
+msgid "Path"
+msgstr "Percurso"
+
+#: ../src/fgr.c:138
+msgid "Locate documents and folders on this computer by name or content"
+msgstr ""
+
+#: ../src/fgr.c:139
+msgid "Filter:"
+msgstr "Filtro:"
+
+#: ../src/fgr.c:139
+#, fuzzy
+msgid "Search for files"
+msgstr "Cerca files..."
+
+#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
+#: ../src/fgr.c:141
+msgid "Contents:"
+msgstr "Contentos:"
+
+#: ../src/fgr.c:141
+#, fuzzy
+msgid "File's contents filtered as plain text."
+msgstr "Salveguardar nota como texto plan"
+
+#: ../src/fgr.c:144
+msgid "Verbose output debugging mode."
+msgstr "Modo de cribrar de typo a resultato verbose "
+
+#: ../src/fgr.c:146
+msgid "Show version information"
+msgstr "Monstra information de le version"
+
+#: ../src/fgr.c:148
+#, fuzzy
+msgid "Filter Details"
+msgstr "Celar detalios"
+
+#: ../src/fgr.c:151
+#, fuzzy
+msgid "Stay on single filesystem"
+msgstr "Systema de file de sol lectura"
+
+#: ../src/fgr.c:153
+msgid "Print..."
+msgstr "Imprime..."
+
+#: ../src/fgr.c:153
+msgid "The unique Process ID that identifies this process."
+msgstr "Le unic ID de Processo que il identifica iste processo."
+
+#: ../src/fgr.c:155
+#, fuzzy
+msgid "Find hidden files and directories"
+msgstr "Files e Directorios"
+
+#: ../src/fgr.c:156
+msgid "Filter"
+msgstr "Filtro"
+
+#: ../src/fgr.c:157
+msgid ""
+"To display files which pass the filter (stars and regexps will be processed)"
+msgstr ""
+
+#: ../src/fgr.c:159
+msgid "Recursive"
+msgstr "Recursive"
+
+#: ../src/fgr.c:160 ../src/fgr.c:161 ../src/fgr.c:162 ../src/fgr.c:163
+msgid "KByte"
+msgstr "KByte"
+
+#: ../src/fgr.c:161
+msgid "is greater than or equal to"
+msgstr "es major que o equal a"
+
+#: ../src/fgr.c:163
+msgid "is less than or equal to"
+msgstr "es minor que o equal a"
+
+#: ../src/fgr.c:165
+msgid "Set UID"
+msgstr "Fixa UID"
+
+#: ../src/fgr.c:165
+#, fuzzy
+msgid "Executable Text Files"
+msgstr "Files que on pote executar"
+
+#: ../src/fgr.c:167
+msgid "The permissions of the file, in octal notation."
+msgstr ""
+
+#: ../src/fgr.c:168
+msgid "Type"
+msgstr "Typo"
+
+#: ../src/fgr.c:170
+msgid "Any"
+msgstr "Qualcunque"
+
+#: ../src/fgr.c:170
+#, fuzzy
+msgid "Default type"
+msgstr "Tempore predefinite"
+
+#: ../src/fgr.c:171
+#, fuzzy
+msgid "Regular file"
+msgstr "Grillia regular"
+
+#: ../src/fgr.c:172
+msgid "Directory"
+msgstr "Directorio"
+
+#: ../src/fgr.c:173
+msgid "Symbolic Link"
+msgstr "Ligamine symbolic"
+
+#: ../src/fgr.c:174
+#, fuzzy
+msgid "UNIX Socket"
+msgstr "Schema UNIX"
+
+#: ../src/fgr.c:175
+#, fuzzy
+msgid "Block device"
+msgstr "Dispositivos de bloco (Block)"
+
+#: ../src/fgr.c:176
+#, fuzzy
+msgid "Character device"
+msgstr "Dispositivos de characteres"
+
+#: ../src/fgr.c:177
+msgid "FIFO"
+msgstr "FIFO"
+
+#: ../src/fgr.c:179 ../src/fgr.c:181
+#, fuzzy
+msgid "Minutes"
+msgstr "minutas"
+
+#: ../src/fgr.c:180 ../src/fgr.c:183 ../src/fgr.c:186 ../src/fgr.c:189
+msgid "Details"
+msgstr "Detalios"
+
+#: ../src/fgr.c:180 ../src/fgr.c:183 ../src/fgr.c:186 ../src/fgr.c:189
+#: ../src/fgr.c:192 ../src/fgr.c:193 ../src/fgr.c:196 ../src/fgr.c:197
+#: ../src/fgr.c:200 ../src/fgr.c:201
+msgid "TIME"
+msgstr ""
+
+#: ../src/fgr.c:181 ../src/fgr.c:184 ../src/fgr.c:187 ../src/fgr.c:190
+msgid "Previous"
+msgstr "Previe"
+
+#: ../src/fgr.c:182 ../src/fgr.c:184
+#, fuzzy
+msgid "Hours"
+msgstr "Hora:"
+
+#: ../src/fgr.c:185 ../src/fgr.c:187
+msgid "Days"
+msgstr ""
+
+#: ../src/fgr.c:188
+msgid "Month"
+msgstr "Mense"
+
+#: ../src/fgr.c:190
+msgid "Month(s)"
+msgstr "Mense(s)"
+
+#: ../src/fgr.c:193
+#, fuzzy
+msgid "Modification Time :"
+msgstr "B3/Modification de B2"
+
+#: ../src/fgr.c:197
+#, fuzzy
+msgid "Access Time :"
+msgstr "Accedite:"
+
+#: ../src/fgr.c:201
+#, fuzzy
+msgid "Creation Time :"
+msgstr "Tempore de creation"
+
+#: ../src/fgr.c:204 ../src/fgr.c:205
+msgid "uid"
+msgstr "uid"
+
+#: ../src/fgr.c:205
+msgid "User:"
+msgstr "Usator:"
+
+#: ../src/fgr.c:207 ../src/fgr.c:208
+#, fuzzy
+msgid "gid"
+msgstr "uid"
+
+#: ../src/fgr.c:208
+msgid "Group:"
+msgstr "Gruppo:"
+
+#: ../src/fgr.c:211
+msgid ""
+"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+"character that  normally  follows  a file  name"
+msgstr ""
+
+#: ../src/fgr.c:213
+#, fuzzy
+msgid "Content View"
+msgstr "Dimension de contento"
+
+#: ../src/fgr.c:214 ../src/fgr.c:215 ../src/fgr.c:216 ../src/fgr.c:217
+msgid "STRING"
+msgstr ""
+
+#: ../src/fgr.c:215 ../src/fgr.c:217
+msgid "Regular expression"
+msgstr "Expression regular"
+
+#: ../src/fgr.c:217
+msgid "Extended"
+msgstr "Extendite"
+
+#: ../src/fgr.c:219
+#, fuzzy
+msgid "Ignore case"
+msgstr "Ignora images"
+
+#: ../src/fgr.c:221
+msgid "Text Files"
+msgstr "Files de texto"
+
+#: ../src/fgr.c:223
+#, fuzzy
+msgid "No match"
+msgstr "%d coincidentia"
+
+#: ../src/fgr.c:225
+#, fuzzy
+msgid "Line Count"
+msgstr "Computo de file"
+
+#: ../src/fgr.c:227
+msgid "Whole words only"
+msgstr "Solmente parolas integre"
+
+#: ../src/fgr.c:229
+#, fuzzy
+msgid "Match whole lines only"
+msgstr "Coincide Integre classe de fenestra"
+
+#: ../src/fgr.c:272
+#, fuzzy
+msgid "Usage : %s [OPTIONS]\n"
+msgstr "Usage:%s %s\n"

@@ -1,0 +1,282 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2011 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- mi� jun 29 18:50:41 CDT 2011 ---
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Gamma\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-09 17:25-0600\n"
+"PO-Revision-Date: 2005-09-24 14:17+0900\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: Latvian <lv@li.org>\n"
+"Language: lv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%s0==1  n%s00!=11 ? 0 : n != 0 ? 1 : 2);\n"
+
+#: ../src/fgr.c:137
+msgid "Options:"
+msgstr "Opcijas:"
+
+#: ../src/fgr.c:137
+msgid "Path"
+msgstr "Ceļš"
+
+#: ../src/fgr.c:138
+msgid "Locate documents and folders on this computer by name or content"
+msgstr "Meklē mapes un failus šajā datorā pēc to nosaukuma vai satura"
+
+#: ../src/fgr.c:139
+msgid "Filter:"
+msgstr "Filtrs:"
+
+#: ../src/fgr.c:139
+#, fuzzy
+msgid "Search for files"
+msgstr "Meklēt failus"
+
+#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
+#: ../src/fgr.c:141
+msgid "Contents:"
+msgstr "Saturs:"
+
+#: ../src/fgr.c:141
+#, fuzzy
+msgid "File's contents filtered as plain text."
+msgstr "Saglabāt failu kā vienkāršu tekstu?"
+
+#: ../src/fgr.c:144
+msgid "Verbose output debugging mode."
+msgstr "Daudzvārdīgā izvada atkļūdošanas režīms."
+
+#: ../src/fgr.c:146
+msgid "Show version information"
+msgstr "Parādīt versijas informāciju"
+
+#: ../src/fgr.c:148
+msgid "Filter Details"
+msgstr "Filtra detaļas"
+
+#: ../src/fgr.c:151
+#, fuzzy
+msgid "Stay on single filesystem"
+msgstr "Skenēt failsistēmu"
+
+#: ../src/fgr.c:153
+msgid "Print..."
+msgstr "Drukāt..."
+
+#: ../src/fgr.c:153
+msgid "The unique Process ID that identifies this process."
+msgstr "Unikāls procesa ID, pēc kura var atšķirt procesu."
+
+#: ../src/fgr.c:155
+#, fuzzy
+msgid "Find hidden files and directories"
+msgstr "Ielāpu pievienošana failiem un direktorijām."
+
+#: ../src/fgr.c:156
+msgid "Filter"
+msgstr "Filtrs"
+
+#: ../src/fgr.c:157
+msgid ""
+"To display files which pass the filter (stars and regexps will be processed)"
+msgstr ""
+
+#: ../src/fgr.c:159
+msgid "Recursive"
+msgstr "Rekursijas"
+
+#: ../src/fgr.c:160 ../src/fgr.c:161 ../src/fgr.c:162 ../src/fgr.c:163
+msgid "KByte"
+msgstr "KBaiti"
+
+#: ../src/fgr.c:161
+msgid "is greater than or equal to"
+msgstr "ir vienāds vai lielāks par"
+
+#: ../src/fgr.c:163
+msgid "is less than or equal to"
+msgstr "ir vienāds vai mazāks par"
+
+#: ../src/fgr.c:165
+msgid "Set UID"
+msgstr "Piešķirt UID"
+
+#: ../src/fgr.c:165
+msgid "Executable Text Files"
+msgstr "Izpildāmi teksta faili"
+
+#: ../src/fgr.c:167
+msgid "The permissions of the file, in octal notation."
+msgstr "Faila atļaujas oktālā pierakstā."
+
+#: ../src/fgr.c:168
+msgid "Type"
+msgstr "Tips"
+
+#: ../src/fgr.c:170
+msgid "Any"
+msgstr "Ikviens"
+
+#: ../src/fgr.c:170
+#, fuzzy
+msgid "Default type"
+msgstr "Noklusētais laiks"
+
+#: ../src/fgr.c:171
+#, fuzzy
+msgid "Regular file"
+msgstr "Regulārs režģis"
+
+#: ../src/fgr.c:172
+msgid "Directory"
+msgstr "Mape"
+
+#: ../src/fgr.c:173
+msgid "Symbolic Link"
+msgstr "Simboliskā saite"
+
+#: ../src/fgr.c:174
+#, fuzzy
+msgid "UNIX Socket"
+msgstr "UNIX shēma"
+
+#: ../src/fgr.c:175
+#, fuzzy
+msgid "Block device"
+msgstr "bloka iekārta"
+
+#: ../src/fgr.c:176
+#, fuzzy
+msgid "Character device"
+msgstr "simboliska iekārta"
+
+#: ../src/fgr.c:177
+msgid "FIFO"
+msgstr "FIFO"
+
+#: ../src/fgr.c:179 ../src/fgr.c:181
+msgid "Minutes"
+msgstr "Minūtes"
+
+#: ../src/fgr.c:180 ../src/fgr.c:183 ../src/fgr.c:186 ../src/fgr.c:189
+msgid "Details"
+msgstr "Detaļas"
+
+#: ../src/fgr.c:180 ../src/fgr.c:183 ../src/fgr.c:186 ../src/fgr.c:189
+#: ../src/fgr.c:192 ../src/fgr.c:193 ../src/fgr.c:196 ../src/fgr.c:197
+#: ../src/fgr.c:200 ../src/fgr.c:201
+#, fuzzy
+msgid "TIME"
+msgstr "NOILDZE"
+
+#: ../src/fgr.c:181 ../src/fgr.c:184 ../src/fgr.c:187 ../src/fgr.c:190
+msgid "Previous"
+msgstr "Iepriekšējais"
+
+#: ../src/fgr.c:182 ../src/fgr.c:184
+msgid "Hours"
+msgstr "Stundas"
+
+#: ../src/fgr.c:185 ../src/fgr.c:187
+msgid "Days"
+msgstr "Dienas"
+
+#: ../src/fgr.c:188
+msgid "Month"
+msgstr "Mēnesis"
+
+#: ../src/fgr.c:190
+msgid "Month(s)"
+msgstr "mēnešiem"
+
+#: ../src/fgr.c:193
+#, fuzzy
+msgid "Modification Time :"
+msgstr "Grozījumu laiks"
+
+#: ../src/fgr.c:197
+#, fuzzy
+msgid "Access Time :"
+msgstr "Vidējais piekļuves laiks:"
+
+#: ../src/fgr.c:201
+#, fuzzy
+msgid "Creation Time :"
+msgstr "Izveides laiks"
+
+#: ../src/fgr.c:204 ../src/fgr.c:205
+msgid "uid"
+msgstr "uid"
+
+#: ../src/fgr.c:205
+msgid "User:"
+msgstr "Lietotājs:"
+
+#: ../src/fgr.c:207 ../src/fgr.c:208
+#, fuzzy
+msgid "gid"
+msgstr "id"
+
+#: ../src/fgr.c:208
+msgid "Group:"
+msgstr "Grupa:"
+
+#: ../src/fgr.c:211
+msgid ""
+"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+"character that  normally  follows  a file  name"
+msgstr ""
+
+#: ../src/fgr.c:213
+msgid "Content View"
+msgstr "Satura skats"
+
+#: ../src/fgr.c:214 ../src/fgr.c:215 ../src/fgr.c:216 ../src/fgr.c:217
+msgid "STRING"
+msgstr "VIRKNE"
+
+#: ../src/fgr.c:215 ../src/fgr.c:217
+msgid "Regular expression"
+msgstr "Regulārā izteiksme"
+
+#: ../src/fgr.c:217
+msgid "Extended"
+msgstr "Izvērsts"
+
+#: ../src/fgr.c:219
+msgid "Ignore case"
+msgstr "Ignorēt burtu reģistru"
+
+#: ../src/fgr.c:221
+msgid "Text Files"
+msgstr "Teksta faili"
+
+#: ../src/fgr.c:223
+msgid "No match"
+msgstr "Nav rezultātu"
+
+#: ../src/fgr.c:225
+#, fuzzy
+msgid "Line Count"
+msgstr "Rindas komentārs"
+
+#: ../src/fgr.c:227
+msgid "Whole words only"
+msgstr "Tikai pilnus vārdus"
+
+#: ../src/fgr.c:229
+#, fuzzy
+msgid "Match whole lines only"
+msgstr "Sakrīt visa logu klase"
+
+#: ../src/fgr.c:272
+#, fuzzy
+msgid "Usage : %s [OPTIONS]\n"
+msgstr "Izmantošana: %s [IESPĒJAS]..."

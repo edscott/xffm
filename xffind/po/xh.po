@@ -1,0 +1,345 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:44:53 CDT 2013 ---
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-09 17:28-0600\n"
+"PO-Revision-Date: 2005-02-17 10:54+0200\n"
+"Last-Translator: Canonical Ltd <translations@canonical.com>\n"
+"Language-Team: Xhosa <xh-translate@ubuntu.com>\n"
+"Language: xh\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: .././src/find-module.i:25
+msgid "Any"
+msgstr "Nayiphi na"
+
+#: .././src/find-module.i:26
+msgid "Regular"
+msgstr "Rhoqo"
+
+#: .././src/find-module.i:27
+msgid "Directory"
+msgstr "Uvimba weefayili"
+
+#: .././src/find-module.i:28
+msgid "Symbolic Link"
+msgstr "Ikhonkco olunophawu"
+
+#: .././src/find-module.i:29
+msgid "Socket"
+msgstr "Isokethi"
+
+#: .././src/find-module.i:30
+msgid "Block device"
+msgstr "Isixhobo esithintelayo"
+
+#: .././src/find-module.i:31
+msgid "Character device"
+msgstr "Isixhobo seempawu"
+
+#: .././src/find-module.i:32
+msgid "FIFO"
+msgstr ""
+
+#. / option "upper_limit_spin" (only in gtk dialog)
+#: .././src/find-module.i:162 .././src/find-module_gui.c:767
+msgid "Results"
+msgstr "Iziphumo"
+
+#: .././src/find-module.i:162
+msgid "Upper limit:"
+msgstr "Umda ophezulu:"
+
+#: .././src/find-module.i:165 .././src/find-module.i:171
+msgid "Counting files..."
+msgstr "Ibala iifayile ..."
+
+#. Standalone
+#: .././src/find-module.i:179 .././src/find-module.i:183
+#, fuzzy
+msgid "Search Complete"
+msgstr "Umda wokukhangela"
+
+#: .././src/find-module.i:197
+#, fuzzy
+msgid "Found %d match"
+msgid_plural "Found %d matches"
+msgstr[0] " %d telekisa"
+msgstr[1] "%d iintelekiso"
+
+#: .././src/find-module.i:200
+#, c-format
+msgid "%s Finished : %s"
+msgstr "%s Igqityiwe : %s"
+
+#: .././src/find-module.i:237
+#, fuzzy
+msgid "Select Files..."
+msgstr "Khetha Ifayile..."
+
+#: .././src/find-module.i:239
+#, fuzzy
+msgid "Select folder to search in"
+msgstr "Khetha isiqulathi seefayili oza kungenisa kuso"
+
+#: .././src/find-module.i:719 .././src/find-module.i:723
+msgid "Searching..."
+msgstr "Isakhangela..."
+
+#: .././src/find-module_gui.c:58
+msgid ""
+"Basic rules:\n"
+"\n"
+"*  Will match any character zero or more times.\n"
+"?  Will match any character exactly one time\n"
+"[] Match any character within the [] \n"
+"^  Match at beginning of string\n"
+"$  Match at end of string \n"
+msgstr ""
+
+#: .././src/find-module_gui.c:66
+msgid ""
+"Reserved characters for extended regexp are\n"
+". ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"In  basic regular expressions the metacharacters\n"
+"?, +, {, |, (, and ) lose their special meaning.\n"
+"\n"
+"The  period  .   matches  any  single  character.\n"
+"The caret ^ matches at the start of line.\n"
+"The dollar $ matches at the end of line.\n"
+"\n"
+"Characters within [ ] matches any single \n"
+"       character in the list.\n"
+"Characters within [^ ] matches any single\n"
+"       character *not* in the list.\n"
+"Characters inside [ - ] matches a range of\n"
+"       characters (ie [0-9] or [a-z]).\n"
+"\n"
+"A regular expression may be followed by one\n"
+"       of several repetition operators:\n"
+"?      The preceding item is optional and matched\n"
+"       at most once.\n"
+"*      The preceding item will be matched zero\n"
+"       or more times.\n"
+"+      The preceding item will be matched one or\n"
+"       more times.\n"
+"{n}    The preceding item is matched exactly n times.\n"
+"{n,}   The preceding item is matched n or more times.\n"
+"{n,m}  The preceding item is matched at least n times,\n"
+"       but not more than m times.\n"
+"\n"
+"To match any reserved character, precede it with \\. \n"
+"\n"
+"Two regular expressions may be joined by the logical or\n"
+"       operator |.\n"
+"Two regular expressions may be concatenated.\n"
+"\n"
+"More information is available by typing \"man grep\"\n"
+msgstr ""
+
+#: .././src/find-module_gui.c:158
+#, fuzzy
+msgid "Search returned no results"
+msgstr "Iziphumo zokukhangela"
+
+#: .././src/find-module_gui.c:165
+#, fuzzy
+msgid "No editor component found."
+msgstr "Akukho ngxenye ya khalenda efunyenweyo."
+
+#: .././src/find-module_gui.c:226 .././src/find-module_gui.c:241
+msgid "unknown"
+msgstr "ayaziwa"
+
+#: .././src/find-module_gui.c:278
+msgid "Modified"
+msgstr "Ilungisiwe"
+
+#: .././src/find-module_gui.c:281
+msgid "Created"
+msgstr "Yenziwe"
+
+#: .././src/find-module_gui.c:284
+msgid "Accessed"
+msgstr "Igqithiselwe"
+
+#: .././src/find-module_gui.c:594 .././src/find-module_gui.c:650
+#: .././src/find-module_gui.c:1021 .././src/find-module_gui.c:1031
+msgid "Find"
+msgstr "Fumana"
+
+#: .././src/find-module_gui.c:677
+msgid "Path"
+msgstr "Indlela"
+
+#: .././src/find-module_gui.c:710
+msgid "Filter:"
+msgstr "Icebo lokucoca ulwelo:"
+
+#. / option -r "recursive"
+#: .././src/find-module_gui.c:758
+msgid "Recursive"
+msgstr "Yenziwe  kwakhona ngaphandle kosiba"
+
+#. / option -D "recursiveH"
+#: .././src/find-module_gui.c:761
+msgid "Find hidden files and directories"
+msgstr ""
+
+#. / option -a "xdev"
+#: .././src/find-module_gui.c:764
+#, fuzzy
+msgid "Stay on single filesystem"
+msgstr "Inkqubo yefayili yokufunda kuphela"
+
+#: .././src/find-module_gui.c:767
+#, fuzzy
+msgid "Upper limit"
+msgstr "Umda ophezulu:"
+
+#. option -s +KByte "size_greater", "size_greater_spin"
+#: .././src/find-module_gui.c:772
+msgid "At Least"
+msgstr "Eyona incinci noko"
+
+#: .././src/find-module_gui.c:772 .././src/find-module_gui.c:777
+msgid "kBytes"
+msgstr "kBytes"
+
+#. option -s -KByte "size_smaller", "size_smaller_spin"
+#: .././src/find-module_gui.c:777
+msgid "At Most"
+msgstr "Eyona ininzi noko"
+
+#: .././src/find-module_gui.c:784
+msgid "User"
+msgstr "Umsebenzisi"
+
+#: .././src/find-module_gui.c:789
+msgid "Group"
+msgstr "Yenza iqela"
+
+#. option -o octal "octal_p" "permissions_entry"
+#: .././src/find-module_gui.c:793
+msgid "Octal Permissions"
+msgstr "Iimvume Zesibhozo"
+
+#. option -p suid | exe
+#: .././src/find-module_gui.c:798
+msgid "SUID"
+msgstr ""
+
+#: .././src/find-module_gui.c:798
+#, fuzzy
+msgid "Executable"
+msgstr "Iphunyeziwe:"
+
+#. radio_p freed on destroy event for dialog.
+#. option -k minutes "last_minutes", "last_minutes_spin"
+#: .././src/find-module_gui.c:806
+msgid "Minutes"
+msgstr "Imizuzu"
+
+#. option -h hours "last_hours", "last_hours_spin"
+#: .././src/find-module_gui.c:810
+msgid "Hours"
+msgstr "Iiyure"
+
+#. option -d days "last_days", "last_days_spin"
+#: .././src/find-module_gui.c:814
+msgid "Days"
+msgstr "Iintsuku"
+
+#. option -m months "last_months", "last_months_spin"
+#: .././src/find-module_gui.c:818
+msgid "Months"
+msgstr "Iinyanga"
+
+#: .././src/find-module_gui.c:828
+#, fuzzy
+msgid "File type : "
+msgstr "Uhlobo lwefayili:"
+
+#. //////////////  grep options.... /////////////////////////
+#: .././src/find-module_gui.c:844
+#, fuzzy
+msgid "Contains"
+msgstr "iqulethe"
+
+#: .././src/find-module_gui.c:866
+msgid "Contains the text"
+msgstr "Ziqulethe umbhalo"
+
+#: .././src/find-module_gui.c:907
+msgid "Case Sensitive"
+msgstr "Iyabeva Oonobumba"
+
+#: .././src/find-module_gui.c:914
+#, fuzzy
+msgid "Extended regexp"
+msgstr "Qwalasela Ibar yasecaleni"
+
+#: .././src/find-module_gui.c:921
+#, fuzzy
+msgid "Include binary files"
+msgstr "Faka kunye neefayili:"
+
+#: .././src/find-module_gui.c:928
+#, fuzzy
+msgid "Line Count"
+msgstr "Umgca Wenkcazo"
+
+#: .././src/find-module_gui.c:953
+#, fuzzy
+msgid "Match"
+msgstr "Ziyadibana"
+
+#: .././src/find-module_gui.c:963
+#, fuzzy
+msgid "Anywhere"
+msgstr "Akukho ndawo"
+
+#: .././src/find-module_gui.c:975
+msgid "Whole words only"
+msgstr "Amagama apheleleyo kuphela"
+
+#: .././src/find-module_gui.c:987
+msgid "lines"
+msgstr "imigca"
+
+#: .././src/find-module_gui.c:998
+msgid "No match"
+msgstr "Akukho luthelekiso"
+
+#: .././src/find-module_gui.c:1021 .././src/find-module_gui.c:1061
+msgid "Close"
+msgstr "Vala"
+
+#: .././src/find-module_gui.c:1041
+msgid "Cancel"
+msgstr "Hlaba"
+
+#: .././src/find-module_gui.c:1051
+msgid "Clear"
+msgstr "Cika"
+
+#: .././src/find-module_gui.c:1093
+msgid "Edit"
+msgstr "Hlela"
+
+#: .././Rodent-fgr.desktop.in.in.h:1
+msgid "Home Folder"
+msgstr "Isiqulathi -zifayili Sasekhaya"
+
+#: .././Rodent-fgr.desktop.in.in.h:2
+msgid "Search tool based on fgr"
+msgstr ""
+

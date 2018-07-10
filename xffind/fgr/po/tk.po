@@ -1,0 +1,292 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2011 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- mi� jun 29 18:51:38 CDT 2011 ---
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Gamma\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-10-27 13:29-0500\n"
+"PO-Revision-Date: 2004-08-16 19:45+0330\n"
+"Last-Translator: Gurban Mühemmet Tewekgeli <gmtavakkoli@yahoo.com>\n"
+"Language-Team: Turkmen <kakilikgroup@yahoo.com>\n"
+"Language: tk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: ../src/fgr.c:139
+#, fuzzy
+msgid "Options:"
+msgstr "Opşenler"
+
+#: ../src/fgr.c:139
+msgid "Path"
+msgstr "Ýol"
+
+#: ../src/fgr.c:140
+msgid "Locate documents and folders on this computer by name or content"
+msgstr ""
+
+#: ../src/fgr.c:141
+#, fuzzy
+msgid "Filter:"
+msgstr "Çapçy:"
+
+#: ../src/fgr.c:141
+#, fuzzy
+msgid "Search for files"
+msgstr "Gözle:"
+
+#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
+#: ../src/fgr.c:143
+msgid "Contents:"
+msgstr "Mazmunlar:"
+
+#: ../src/fgr.c:143
+msgid "File's contents filtered as plain text."
+msgstr ""
+
+#: ../src/fgr.c:146
+msgid "Verbose output debugging mode."
+msgstr ""
+
+#: ../src/fgr.c:148
+#, fuzzy
+msgid "Show version information"
+msgstr "Ýekebara bilgiler"
+
+#: ../src/fgr.c:150
+#, fuzzy
+msgid "Filter Details"
+msgstr "Fleur De Lis"
+
+#: ../src/fgr.c:153
+#, fuzzy
+msgid "Stay on single filesystem"
+msgstr "Faýlsistem Ahtar"
+
+#: ../src/fgr.c:155
+msgid "Print..."
+msgstr "Çap Et..."
+
+#: ../src/fgr.c:155
+msgid "The unique Process ID that identifies this process."
+msgstr ""
+
+#: ../src/fgr.c:157
+msgid "Find hidden files and directories"
+msgstr ""
+
+#: ../src/fgr.c:158
+msgid "Filter"
+msgstr ""
+
+#: ../src/fgr.c:159
+msgid ""
+"To display files which pass the filter (stars and regexps will be processed)"
+msgstr ""
+
+#: ../src/fgr.c:161
+msgid "Recursive"
+msgstr ""
+
+#: ../src/fgr.c:162 ../src/fgr.c:163 ../src/fgr.c:164 ../src/fgr.c:165
+#, fuzzy
+msgid "KByte"
+msgstr "Baýtlar"
+
+#: ../src/fgr.c:163
+msgid "is greater than or equal to"
+msgstr ""
+
+#: ../src/fgr.c:165
+msgid "is less than or equal to"
+msgstr ""
+
+#: ../src/fgr.c:167
+#, fuzzy
+msgid "Set UID"
+msgstr "Ullançy ID-sini düz"
+
+#: ../src/fgr.c:167
+#, fuzzy
+msgid "Executable Text Files"
+msgstr "Ehli Metin Faýllar"
+
+#: ../src/fgr.c:169
+msgid "The permissions of the file, in octal notation."
+msgstr "Faýlyň ejazalary, sekizlik ýazymda."
+
+#: ../src/fgr.c:170
+msgid "Type"
+msgstr "Hil"
+
+#: ../src/fgr.c:172
+#, fuzzy
+msgid "Any"
+msgstr "We"
+
+#: ../src/fgr.c:172
+#, fuzzy
+msgid "Default type"
+msgstr "Öň bellenen kalam hili"
+
+#: ../src/fgr.c:173
+#, fuzzy
+msgid "Regular file"
+msgstr "Faýla saglaw bejer"
+
+#: ../src/fgr.c:174
+msgid "Directory"
+msgstr "Daýrektory"
+
+#: ../src/fgr.c:175
+#, fuzzy
+msgid "Symbolic Link"
+msgstr "Saýlanan baglaýyş"
+
+#: ../src/fgr.c:176
+#, fuzzy
+msgid "UNIX Socket"
+msgstr "Suket"
+
+#: ../src/fgr.c:177
+msgid "Block device"
+msgstr ""
+
+#: ../src/fgr.c:178
+#, fuzzy
+msgid "Character device"
+msgstr "Karkater ködlemeleri"
+
+#: ../src/fgr.c:179
+msgid "FIFO"
+msgstr ""
+
+#: ../src/fgr.c:181 ../src/fgr.c:183
+#, fuzzy
+msgid "Minutes"
+msgstr "minutlar"
+
+#: ../src/fgr.c:182 ../src/fgr.c:185 ../src/fgr.c:188 ../src/fgr.c:191
+msgid "Details"
+msgstr ""
+
+#: ../src/fgr.c:182 ../src/fgr.c:185 ../src/fgr.c:188 ../src/fgr.c:191
+#: ../src/fgr.c:194 ../src/fgr.c:195 ../src/fgr.c:198 ../src/fgr.c:199
+#: ../src/fgr.c:202 ../src/fgr.c:203
+msgid "TIME"
+msgstr ""
+
+#: ../src/fgr.c:183 ../src/fgr.c:186 ../src/fgr.c:189 ../src/fgr.c:192
+msgid "Previous"
+msgstr "Öňki"
+
+#: ../src/fgr.c:184 ../src/fgr.c:186
+#, fuzzy
+msgid "Hours"
+msgstr "sagat"
+
+#: ../src/fgr.c:187 ../src/fgr.c:189
+msgid "Days"
+msgstr ""
+
+#: ../src/fgr.c:190
+msgid "Month"
+msgstr ""
+
+#: ../src/fgr.c:192
+msgid "Month(s)"
+msgstr ""
+
+#: ../src/fgr.c:195
+#, fuzzy
+msgid "Modification Time :"
+msgstr "Üýgetmek Tariha Görä"
+
+#: ../src/fgr.c:199
+#, fuzzy
+msgid "Access Time :"
+msgstr "Elýetgiş:"
+
+#: ../src/fgr.c:203
+#, fuzzy
+msgid "Creation Time :"
+msgstr "Bu haltaniň içinde bejer:"
+
+#: ../src/fgr.c:206 ../src/fgr.c:207
+#, fuzzy
+msgid "uid"
+msgstr "Palçyk"
+
+#: ../src/fgr.c:207
+#, fuzzy
+msgid "User:"
+msgstr "Ullançy"
+
+#: ../src/fgr.c:209 ../src/fgr.c:210
+msgid "gid"
+msgstr ""
+
+#: ../src/fgr.c:210
+msgid "Group:"
+msgstr "Topar:"
+
+#: ../src/fgr.c:213
+msgid ""
+"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+"character that  normally  follows  a file  name"
+msgstr ""
+
+#: ../src/fgr.c:215
+#, fuzzy
+msgid "Content View"
+msgstr "Muzmun ululyky:"
+
+#: ../src/fgr.c:216 ../src/fgr.c:217 ../src/fgr.c:218 ../src/fgr.c:219
+msgid "STRING"
+msgstr ""
+
+#: ../src/fgr.c:217 ../src/fgr.c:219
+msgid "Regular expression"
+msgstr ""
+
+#: ../src/fgr.c:219
+msgid "Extended"
+msgstr ""
+
+#: ../src/fgr.c:221
+msgid "Ignore case"
+msgstr "Kiçi/beýik harplary red et"
+
+#: ../src/fgr.c:223
+#, fuzzy
+msgid "Text Files"
+msgstr "Metin faýllar"
+
+#: ../src/fgr.c:225
+msgid "No match"
+msgstr ""
+
+#: ../src/fgr.c:227
+msgid "Line Count"
+msgstr ""
+
+#: ../src/fgr.c:229
+#, fuzzy
+msgid "Whole words only"
+msgstr "Diňe söziň ehlini nezirle"
+
+#: ../src/fgr.c:231
+#, fuzzy
+msgid "Match whole lines only"
+msgstr "Diňe söziň ehlini nezirle"
+
+#: ../src/fgr.c:274
+#, c-format
+msgid "Usage : %s [OPTIONS]\n"
+msgstr ""

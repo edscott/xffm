@@ -1,0 +1,338 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:42:29 CDT 2013 ---
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-09 17:28-0600\n"
+"PO-Revision-Date: 2007-06-03 05:06+0530\n"
+"Last-Translator: Dr.T.Vasudevan <agnihot3@gmail.com>\n"
+"Language-Team: TAMIL <ubuntu-l10n-tam@lists.ubuntu.com>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"\n"
+
+#: .././src/find-module.i:25
+msgid "Any"
+msgstr "ஏதாவது"
+
+#: .././src/find-module.i:26
+msgid "Regular"
+msgstr "வழக்கமான"
+
+#: .././src/find-module.i:27
+msgid "Directory"
+msgstr "i அடைவு"
+
+#: .././src/find-module.i:28
+msgid "Symbolic Link"
+msgstr "உருவக இணைப்பு"
+
+#: .././src/find-module.i:29
+msgid "Socket"
+msgstr "துளை"
+
+#: .././src/find-module.i:30
+msgid "Block device"
+msgstr "கட்டம் சாதனம்"
+
+#: .././src/find-module.i:31
+msgid "Character device"
+msgstr "எழுத்துரு சாதனம்"
+
+#: .././src/find-module.i:32
+msgid "FIFO"
+msgstr "எப்ஐஎப்ஓ"
+
+#. / option "upper_limit_spin" (only in gtk dialog)
+#: .././src/find-module.i:162 .././src/find-module_gui.c:767
+msgid "Results"
+msgstr "விளைவுகள்"
+
+#: .././src/find-module.i:162
+msgid "Upper limit:"
+msgstr "மேல் எல்லை:"
+
+#: .././src/find-module.i:165 .././src/find-module.i:171
+msgid "Counting files..."
+msgstr "கணக்கிடுகின்ற கோப்புகள்..."
+
+#. Standalone
+#: .././src/find-module.i:179 .././src/find-module.i:183
+msgid "Search Complete"
+msgstr "தேடல் முடிவடைந்தது"
+
+#: .././src/find-module.i:197
+#, fuzzy
+msgid "Found %d match"
+msgid_plural "Found %d matches"
+msgstr[0] "%d பொருத்தம்"
+msgstr[1] "%d பொருத்தங்கள்"
+
+#: .././src/find-module.i:200
+#, c-format
+msgid "%s Finished : %s"
+msgstr "%s முடிவடைந்தது : %s"
+
+#: .././src/find-module.i:237
+msgid "Select Files..."
+msgstr "கோப்புகளைத் தேர்வு செய்க..."
+
+#: .././src/find-module.i:239
+msgid "Select folder to search in"
+msgstr "தேட வேண்டிய அடைவினை தேர்ந்தெடு"
+
+#: .././src/find-module.i:719 .././src/find-module.i:723
+msgid "Searching..."
+msgstr "தேடுகிறது..."
+
+#: .././src/find-module_gui.c:58
+msgid ""
+"Basic rules:\n"
+"\n"
+"*  Will match any character zero or more times.\n"
+"?  Will match any character exactly one time\n"
+"[] Match any character within the [] \n"
+"^  Match at beginning of string\n"
+"$  Match at end of string \n"
+msgstr ""
+
+#: .././src/find-module_gui.c:66
+msgid ""
+"Reserved characters for extended regexp are\n"
+". ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"In  basic regular expressions the metacharacters\n"
+"?, +, {, |, (, and ) lose their special meaning.\n"
+"\n"
+"The  period  .   matches  any  single  character.\n"
+"The caret ^ matches at the start of line.\n"
+"The dollar $ matches at the end of line.\n"
+"\n"
+"Characters within [ ] matches any single \n"
+"       character in the list.\n"
+"Characters within [^ ] matches any single\n"
+"       character *not* in the list.\n"
+"Characters inside [ - ] matches a range of\n"
+"       characters (ie [0-9] or [a-z]).\n"
+"\n"
+"A regular expression may be followed by one\n"
+"       of several repetition operators:\n"
+"?      The preceding item is optional and matched\n"
+"       at most once.\n"
+"*      The preceding item will be matched zero\n"
+"       or more times.\n"
+"+      The preceding item will be matched one or\n"
+"       more times.\n"
+"{n}    The preceding item is matched exactly n times.\n"
+"{n,}   The preceding item is matched n or more times.\n"
+"{n,m}  The preceding item is matched at least n times,\n"
+"       but not more than m times.\n"
+"\n"
+"To match any reserved character, precede it with \\. \n"
+"\n"
+"Two regular expressions may be joined by the logical or\n"
+"       operator |.\n"
+"Two regular expressions may be concatenated.\n"
+"\n"
+"More information is available by typing \"man grep\"\n"
+msgstr ""
+
+#: .././src/find-module_gui.c:158
+msgid "Search returned no results"
+msgstr "தேடுதல் எந்த முடிவையும் கொடுக்கவில்லை"
+
+#: .././src/find-module_gui.c:165
+#, fuzzy
+msgid "No editor component found."
+msgstr "கேட் தொகுப்பி உறுப்பு"
+
+#: .././src/find-module_gui.c:226 .././src/find-module_gui.c:241
+msgid "unknown"
+msgstr "தெரியாதது"
+
+#: .././src/find-module_gui.c:278
+msgid "Modified"
+msgstr "மாற்றப்பட்ட"
+
+#: .././src/find-module_gui.c:281
+msgid "Created"
+msgstr "உருவாக்கப்பட்டது"
+
+#: .././src/find-module_gui.c:284
+msgid "Accessed"
+msgstr "அணுகிய"
+
+#: .././src/find-module_gui.c:594 .././src/find-module_gui.c:650
+#: .././src/find-module_gui.c:1021 .././src/find-module_gui.c:1031
+msgid "Find"
+msgstr "(F) தேடு"
+
+#: .././src/find-module_gui.c:677
+msgid "Path"
+msgstr "பாதை"
+
+#: .././src/find-module_gui.c:710
+msgid "Filter:"
+msgstr "வடிப்பி:"
+
+#. / option -r "recursive"
+#: .././src/find-module_gui.c:758
+msgid "Recursive"
+msgstr "மறுச்சுழல் "
+
+#. / option -D "recursiveH"
+#: .././src/find-module_gui.c:761
+msgid "Find hidden files and directories"
+msgstr "மறைந்த கோப்புகளையும் அடைவுகளையும் தேடு"
+
+#. / option -a "xdev"
+#: .././src/find-module_gui.c:764
+#, fuzzy
+msgid "Stay on single filesystem"
+msgstr "கோப்பு முறைமையை வருடவும்"
+
+#: .././src/find-module_gui.c:767
+msgid "Upper limit"
+msgstr "மேல் வரம்பு"
+
+#. option -s +KByte "size_greater", "size_greater_spin"
+#: .././src/find-module_gui.c:772
+msgid "At Least"
+msgstr "ஆகக்குறைந்த "
+
+#: .././src/find-module_gui.c:772 .././src/find-module_gui.c:777
+msgid "kBytes"
+msgstr "கேபைட்ஸ்"
+
+#. option -s -KByte "size_smaller", "size_smaller_spin"
+#: .././src/find-module_gui.c:777
+msgid "At Most"
+msgstr "ஆகக்கூடிய "
+
+#: .././src/find-module_gui.c:784
+msgid "User"
+msgstr "பயனர்"
+
+#: .././src/find-module_gui.c:789
+msgid "Group"
+msgstr "குழு"
+
+#. option -o octal "octal_p" "permissions_entry"
+#: .././src/find-module_gui.c:793
+msgid "Octal Permissions"
+msgstr "எண்ம அனுமதி"
+
+#. option -p suid | exe
+#: .././src/find-module_gui.c:798
+msgid "SUID"
+msgstr "SUID"
+
+#: .././src/find-module_gui.c:798
+#, fuzzy
+msgid "Executable"
+msgstr "செயல்படுத்தகூடியவை:"
+
+#. radio_p freed on destroy event for dialog.
+#. option -k minutes "last_minutes", "last_minutes_spin"
+#: .././src/find-module_gui.c:806
+msgid "Minutes"
+msgstr "நிமிடங்கள்"
+
+#. option -h hours "last_hours", "last_hours_spin"
+#: .././src/find-module_gui.c:810
+msgid "Hours"
+msgstr "மணிகள்"
+
+#. option -d days "last_days", "last_days_spin"
+#: .././src/find-module_gui.c:814
+msgid "Days"
+msgstr "நாட்கள்"
+
+#. option -m months "last_months", "last_months_spin"
+#: .././src/find-module_gui.c:818
+msgid "Months"
+msgstr "மாதங்கள்"
+
+#: .././src/find-module_gui.c:828
+msgid "File type : "
+msgstr "கோப்பு வகை :"
+
+#. //////////////  grep options.... /////////////////////////
+#: .././src/find-module_gui.c:844
+msgid "Contains"
+msgstr "கொண்டுள்ளது"
+
+#: .././src/find-module_gui.c:866
+msgid "Contains the text"
+msgstr "(t)உரையில்"
+
+#: .././src/find-module_gui.c:907
+msgid "Case Sensitive"
+msgstr "உணர்வுள்ள உறை மூடி"
+
+#: .././src/find-module_gui.c:914
+#, fuzzy
+msgid "Extended regexp"
+msgstr "விரிவாக்கிய"
+
+#: .././src/find-module_gui.c:921
+msgid "Include binary files"
+msgstr "உள்ளடக்குஇரும கோப்புகள்"
+
+#: .././src/find-module_gui.c:928
+msgid "Line Count"
+msgstr "வரி எண்ணிக்கை"
+
+#: .././src/find-module_gui.c:953
+msgid "Match"
+msgstr "(M) பொருத்தம்"
+
+#: .././src/find-module_gui.c:963
+#, fuzzy
+msgid "Anywhere"
+msgstr "எங்கும் இல்லை"
+
+#: .././src/find-module_gui.c:975
+msgid "Whole words only"
+msgstr "முழுவார்த்தைகள் மட்டும்"
+
+#: .././src/find-module_gui.c:987
+msgid "lines"
+msgstr "வரிகள்"
+
+#: .././src/find-module_gui.c:998
+msgid "No match"
+msgstr "ஒத்து போகவில்லை"
+
+#: .././src/find-module_gui.c:1021 .././src/find-module_gui.c:1061
+msgid "Close"
+msgstr "மூடு"
+
+#: .././src/find-module_gui.c:1041
+msgid "Cancel"
+msgstr "n ரத்துசெய்க"
+
+#: .././src/find-module_gui.c:1051
+msgid "Clear"
+msgstr "துடை"
+
+#: .././src/find-module_gui.c:1093
+msgid "Edit"
+msgstr "தொகு"
+
+#: .././Rodent-fgr.desktop.in.in.h:1
+msgid "Home Folder"
+msgstr "இல்ல அடைவு"
+
+#: .././Rodent-fgr.desktop.in.in.h:2
+msgid "Search tool based on fgr"
+msgstr ""
+

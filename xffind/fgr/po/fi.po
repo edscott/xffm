@@ -1,0 +1,273 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2011 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- mi� jun 29 18:50:37 CDT 2011 ---
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Gamma\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-09 17:25-0600\n"
+"PO-Revision-Date: 2010-07-18 00:17+0300\n"
+"Last-Translator: Lauri Nurmi <lanurmi@iki.fi>\n"
+"Language-Team: Finnish <translation-team-fi@lists.sourceforge.net>\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../src/fgr.c:137
+msgid "Options:"
+msgstr "Valinnat:"
+
+#: ../src/fgr.c:137
+msgid "Path"
+msgstr "Polku"
+
+#: ../src/fgr.c:138
+msgid "Locate documents and folders on this computer by name or content"
+msgstr ""
+"Etsi asiakirjoja ja kansioita tietokoneelta nimen tai sisällön perusteella"
+
+#: ../src/fgr.c:139
+msgid "Filter:"
+msgstr "Suodatin:"
+
+#: ../src/fgr.c:139
+#, fuzzy
+msgid "Search for files"
+msgstr "Etsi tiedostoja"
+
+#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
+#: ../src/fgr.c:141
+msgid "Contents:"
+msgstr "Sisältö:"
+
+#: ../src/fgr.c:141
+msgid "File's contents filtered as plain text."
+msgstr "Tiedoston sisältö suodatettuna selväkieliseksi tekstiksi."
+
+#: ../src/fgr.c:144
+msgid "Verbose output debugging mode."
+msgstr "Lavea tulostevianjäljitystila."
+
+#: ../src/fgr.c:146
+msgid "Show version information"
+msgstr "Näytä versiotiedot"
+
+#: ../src/fgr.c:148
+msgid "Filter Details"
+msgstr "Suotimen yksityiskohdat"
+
+#: ../src/fgr.c:151
+msgid "Stay on single filesystem"
+msgstr "Etsi vain tästä tiedostojärjestelmästä"
+
+#: ../src/fgr.c:153
+msgid "Print..."
+msgstr "Tulosta…"
+
+#: ../src/fgr.c:153
+msgid "The unique Process ID that identifies this process."
+msgstr "Prosessin ainutkertainen tunniste (PID)."
+
+#: ../src/fgr.c:155
+#, fuzzy
+msgid "Find hidden files and directories"
+msgstr "Tiedostot ja kansiot"
+
+#: ../src/fgr.c:156
+msgid "Filter"
+msgstr "Suodata"
+
+#: ../src/fgr.c:157
+msgid ""
+"To display files which pass the filter (stars and regexps will be processed)"
+msgstr ""
+"Näytä tiedostot, jotka läpäisevät suodattimen (* ja säännölliset lausekkeet "
+"suoritetaan)"
+
+#: ../src/fgr.c:159
+msgid "Recursive"
+msgstr "Rekursiivinen"
+
+#: ../src/fgr.c:160 ../src/fgr.c:161 ../src/fgr.c:162 ../src/fgr.c:163
+msgid "KByte"
+msgstr "kilotavu"
+
+#: ../src/fgr.c:161
+msgid "is greater than or equal to"
+msgstr "on suurempi tai yhtäsuuri kuin"
+
+#: ../src/fgr.c:163
+msgid "is less than or equal to"
+msgstr "on pienempi tai yhtäsuuri kuin"
+
+#: ../src/fgr.c:165
+msgid "Set UID"
+msgstr "Aseta Omistaja"
+
+#: ../src/fgr.c:165
+msgid "Executable Text Files"
+msgstr "Suoritettavat tekstitiedostot"
+
+#: ../src/fgr.c:167
+msgid "The permissions of the file, in octal notation."
+msgstr "Tiedoston oikeudet oktaalilukumuodossa."
+
+#: ../src/fgr.c:168
+msgid "Type"
+msgstr "Tyyppi"
+
+#: ../src/fgr.c:170
+msgid "Any"
+msgstr "Mikä tahansa"
+
+#: ../src/fgr.c:170
+msgid "Default type"
+msgstr "Oletustyyppi"
+
+#: ../src/fgr.c:171
+msgid "Regular file"
+msgstr "Tavallinen tiedosto"
+
+#: ../src/fgr.c:172
+msgid "Directory"
+msgstr "Hakemisto"
+
+#: ../src/fgr.c:173
+msgid "Symbolic Link"
+msgstr "Symbolinen linkki"
+
+#: ../src/fgr.c:174
+msgid "UNIX Socket"
+msgstr "UNIX-pistoke"
+
+#: ../src/fgr.c:175
+msgid "Block device"
+msgstr "Lohkolaite"
+
+#: ../src/fgr.c:176
+msgid "Character device"
+msgstr "Merkkilaite"
+
+#: ../src/fgr.c:177
+msgid "FIFO"
+msgstr "FIFO-jono"
+
+#: ../src/fgr.c:179 ../src/fgr.c:181
+msgid "Minutes"
+msgstr "Minuuttia"
+
+#: ../src/fgr.c:180 ../src/fgr.c:183 ../src/fgr.c:186 ../src/fgr.c:189
+msgid "Details"
+msgstr "Yksityiskohdat"
+
+#: ../src/fgr.c:180 ../src/fgr.c:183 ../src/fgr.c:186 ../src/fgr.c:189
+#: ../src/fgr.c:192 ../src/fgr.c:193 ../src/fgr.c:196 ../src/fgr.c:197
+#: ../src/fgr.c:200 ../src/fgr.c:201
+msgid "TIME"
+msgstr "AIKA"
+
+#: ../src/fgr.c:181 ../src/fgr.c:184 ../src/fgr.c:187 ../src/fgr.c:190
+msgid "Previous"
+msgstr "Edellinen"
+
+#: ../src/fgr.c:182 ../src/fgr.c:184
+msgid "Hours"
+msgstr "Tuntia"
+
+#: ../src/fgr.c:185 ../src/fgr.c:187
+msgid "Days"
+msgstr "päivää"
+
+#: ../src/fgr.c:188
+msgid "Month"
+msgstr "Kuukausi"
+
+#: ../src/fgr.c:190
+#, fuzzy
+msgid "Month(s)"
+msgstr "kuukausi"
+
+#: ../src/fgr.c:193
+msgid "Modification Time :"
+msgstr "Viimeksi muokattu:"
+
+#: ../src/fgr.c:197
+msgid "Access Time :"
+msgstr "Viimeksi luettu:"
+
+#: ../src/fgr.c:201
+msgid "Creation Time :"
+msgstr "Luomisaika:"
+
+#: ../src/fgr.c:204 ../src/fgr.c:205
+msgid "uid"
+msgstr "uid"
+
+#: ../src/fgr.c:205
+msgid "User:"
+msgstr "Käyttäjä:"
+
+#: ../src/fgr.c:207 ../src/fgr.c:208
+msgid "gid"
+msgstr "gid"
+
+#: ../src/fgr.c:208
+msgid "Group:"
+msgstr "Ryhmä:"
+
+#: ../src/fgr.c:211
+msgid ""
+"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+"character that  normally  follows  a file  name"
+msgstr ""
+
+#: ../src/fgr.c:213
+msgid "Content View"
+msgstr "Sisältönäkymä"
+
+#: ../src/fgr.c:214 ../src/fgr.c:215 ../src/fgr.c:216 ../src/fgr.c:217
+msgid "STRING"
+msgstr "MERKKIJONO"
+
+#: ../src/fgr.c:215 ../src/fgr.c:217
+msgid "Regular expression"
+msgstr "Säännöllinen lauseke"
+
+#: ../src/fgr.c:217
+msgid "Extended"
+msgstr "Laajennettu"
+
+#: ../src/fgr.c:219
+msgid "Ignore case"
+msgstr "Jätä kirjainkoko huomiotta"
+
+#: ../src/fgr.c:221
+msgid "Text Files"
+msgstr "Tekstitiedostot"
+
+#: ../src/fgr.c:223
+msgid "No match"
+msgstr "Ei vastaavuutta"
+
+#: ../src/fgr.c:225
+msgid "Line Count"
+msgstr "Rivimäärä"
+
+#: ../src/fgr.c:227
+msgid "Whole words only"
+msgstr "Vain kokonaiset sanat"
+
+#: ../src/fgr.c:229
+#, fuzzy
+msgid "Match whole lines only"
+msgstr "Täsmää vain kokonaisia sanoja"
+
+#: ../src/fgr.c:272
+#, c-format
+msgid "Usage : %s [OPTIONS]\n"
+msgstr "Käytä : %s [OPTIONS]\n"

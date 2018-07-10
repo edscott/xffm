@@ -1,0 +1,294 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2011 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- mi� jun 29 18:51:55 CDT 2011 ---
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Gamma\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-09 17:25-0600\n"
+"PO-Revision-Date: 2007-03-04 20:50+0100\n"
+"Last-Translator: Erdal Ronahi <erdal.ronahi@gmail.com>\n"
+"Language-Team: Kurdish <gnu-ku-wergerandin@lists.sourceforge.net>\n"
+"Language: ku\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: KBabel 1.10\n"
+"X-Rosetta-Export-Date: 2007-03-04 18:28+0000\n"
+
+#: ../src/fgr.c:137
+#, fuzzy
+msgid "Options:"
+msgstr "Vebijêrk:\t"
+
+#: ../src/fgr.c:137
+msgid "Path"
+msgstr "Rê"
+
+#: ../src/fgr.c:138
+msgid "Locate documents and folders on this computer by name or content"
+msgstr ""
+
+#: ../src/fgr.c:139
+msgid "Filter:"
+msgstr "Parzûn:"
+
+#: ../src/fgr.c:139
+#, fuzzy
+msgid "Search for files"
+msgstr "Li Dosiyan Bigere"
+
+#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
+#: ../src/fgr.c:141
+msgid "Contents:"
+msgstr "Naverok:"
+
+#: ../src/fgr.c:141
+msgid "File's contents filtered as plain text."
+msgstr ""
+
+#: ../src/fgr.c:144
+#, fuzzy
+msgid "Verbose output debugging mode."
+msgstr "Koda neqandina çewtiyan çalak bike"
+
+#: ../src/fgr.c:146
+msgid "Show version information"
+msgstr "Agahiya guhertoyê nîşan bide"
+
+#: ../src/fgr.c:148
+#, fuzzy
+msgid "Filter Details"
+msgstr "Vebijêrkên Mevsikê"
+
+#: ../src/fgr.c:151
+#, fuzzy
+msgid "Stay on single filesystem"
+msgstr "Li pergala pelan venihêre"
+
+#: ../src/fgr.c:153
+msgid "Print..."
+msgstr "Çap..."
+
+#: ../src/fgr.c:153
+msgid "The unique Process ID that identifies this process."
+msgstr ""
+
+#: ../src/fgr.c:155
+#, fuzzy
+msgid "Find hidden files and directories"
+msgstr "Pelan û peldankan dubare bixebitîne"
+
+#: ../src/fgr.c:156
+msgid "Filter"
+msgstr "Parzûn"
+
+#: ../src/fgr.c:157
+msgid ""
+"To display files which pass the filter (stars and regexps will be processed)"
+msgstr ""
+
+#: ../src/fgr.c:159
+#, fuzzy
+msgid "Recursive"
+msgstr "Dubare Cot-beş Kirin"
+
+#: ../src/fgr.c:160 ../src/fgr.c:161 ../src/fgr.c:162 ../src/fgr.c:163
+msgid "KByte"
+msgstr "Kbayt"
+
+#: ../src/fgr.c:161
+#, fuzzy
+msgid "is greater than or equal to"
+msgstr "mezintir e ji"
+
+#: ../src/fgr.c:163
+#, fuzzy
+msgid "is less than or equal to"
+msgstr "Yek xulekê kêmtir berê"
+
+#: ../src/fgr.c:165
+#, fuzzy
+msgid "Set UID"
+msgstr "IDa bikarhêner mîheng bike"
+
+#: ../src/fgr.c:165
+#, fuzzy
+msgid "Executable Text Files"
+msgstr "Bila di ser pel de were nivisandin?"
+
+#: ../src/fgr.c:167
+#, fuzzy
+msgid "The permissions of the file, in octal notation."
+msgstr "Mafê gihiştina pel."
+
+#: ../src/fgr.c:168
+msgid "Type"
+msgstr "Cure"
+
+#: ../src/fgr.c:170
+msgid "Any"
+msgstr "Hema yek"
+
+#: ../src/fgr.c:170
+#, fuzzy
+msgid "Default type"
+msgstr "Hêmana jxweber heyî"
+
+#: ../src/fgr.c:171
+#, fuzzy
+msgid "Regular file"
+msgstr "Asayî"
+
+#: ../src/fgr.c:172
+msgid "Directory"
+msgstr "Pelrêç"
+
+#: ../src/fgr.c:173
+msgid "Symbolic Link"
+msgstr "Girêdana Sembolîk"
+
+#: ../src/fgr.c:174
+#, fuzzy
+msgid "UNIX Socket"
+msgstr "Şemaya UNIX'ê"
+
+#: ../src/fgr.c:175
+#, fuzzy
+msgid "Block device"
+msgstr "Vegere cîhazan"
+
+#: ../src/fgr.c:176
+#, fuzzy
+msgid "Character device"
+msgstr "Koma tîpan:"
+
+#: ../src/fgr.c:177
+msgid "FIFO"
+msgstr "FIFO"
+
+#: ../src/fgr.c:179 ../src/fgr.c:181
+msgid "Minutes"
+msgstr "Xulek"
+
+#: ../src/fgr.c:180 ../src/fgr.c:183 ../src/fgr.c:186 ../src/fgr.c:189
+msgid "Details"
+msgstr "Kîtekît"
+
+#: ../src/fgr.c:180 ../src/fgr.c:183 ../src/fgr.c:186 ../src/fgr.c:189
+#: ../src/fgr.c:192 ../src/fgr.c:193 ../src/fgr.c:196 ../src/fgr.c:197
+#: ../src/fgr.c:200 ../src/fgr.c:201
+msgid "TIME"
+msgstr ""
+
+#: ../src/fgr.c:181 ../src/fgr.c:184 ../src/fgr.c:187 ../src/fgr.c:190
+msgid "Previous"
+msgstr "Paş"
+
+#: ../src/fgr.c:182 ../src/fgr.c:184
+msgid "Hours"
+msgstr "saet"
+
+#: ../src/fgr.c:185 ../src/fgr.c:187
+msgid "Days"
+msgstr "Roj"
+
+#: ../src/fgr.c:188
+msgid "Month"
+msgstr "Meh"
+
+#: ../src/fgr.c:190
+#, fuzzy
+msgid "Month(s)"
+msgstr "Meh"
+
+#: ../src/fgr.c:193
+#, fuzzy
+msgid "Modification Time :"
+msgstr "bi dîroka guherandinê"
+
+#: ../src/fgr.c:197
+#, fuzzy
+msgid "Access Time :"
+msgstr "Hatiye gihiştin:"
+
+#: ../src/fgr.c:201
+#, fuzzy
+msgid "Creation Time :"
+msgstr "Îmaj tê afirandin"
+
+#: ../src/fgr.c:204 ../src/fgr.c:205
+#, fuzzy
+msgid "uid"
+msgstr "id"
+
+#: ../src/fgr.c:205
+msgid "User:"
+msgstr "Bikarhêner:"
+
+#: ../src/fgr.c:207 ../src/fgr.c:208
+#, fuzzy
+msgid "gid"
+msgstr "id"
+
+#: ../src/fgr.c:208
+msgid "Group:"
+msgstr "Kom:"
+
+#: ../src/fgr.c:211
+msgid ""
+"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+"character that  normally  follows  a file  name"
+msgstr ""
+
+#: ../src/fgr.c:213
+msgid "Content View"
+msgstr "Dîtina Naverokê"
+
+#: ../src/fgr.c:214 ../src/fgr.c:215 ../src/fgr.c:216 ../src/fgr.c:217
+msgid "STRING"
+msgstr "HEVOK"
+
+#: ../src/fgr.c:215 ../src/fgr.c:217
+msgid "Regular expression"
+msgstr "Îfadeya Sererast"
+
+#: ../src/fgr.c:217
+msgid "Extended"
+msgstr "Berfirehkirî"
+
+#: ../src/fgr.c:219
+#, fuzzy
+msgid "Ignore case"
+msgstr "Ignorieren"
+
+#: ../src/fgr.c:221
+msgid "Text Files"
+msgstr "Pelên nivîsar"
+
+#: ../src/fgr.c:223
+msgid "No match"
+msgstr "Lihevhatin tune"
+
+#: ../src/fgr.c:225
+#, fuzzy
+msgid "Line Count"
+msgstr "Hejmara Pelan"
+
+#: ../src/fgr.c:227
+msgid "Whole words only"
+msgstr "Tenê hemû peyv"
+
+#: ../src/fgr.c:229
+#, fuzzy
+msgid "Match whole lines only"
+msgstr "Danişînên Konsolê yên Hevgirtî"
+
+#: ../src/fgr.c:272
+#, fuzzy
+msgid "Usage : %s [OPTIONS]\n"
+msgstr "Bikaranîn: %s %s\n"

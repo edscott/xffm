@@ -1,0 +1,266 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2011 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- mi� jun 29 18:52:09 CDT 2011 ---
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Gamma\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-09 17:25-0600\n"
+"PO-Revision-Date: 2010-11-08 22:53+0800\n"
+"Last-Translator: Aron Xu <happyaron.xu@gmail.com>\n"
+"Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
+"Language: zhCN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: ../src/fgr.c:137
+msgid "Options:"
+msgstr "操作："
+
+#: ../src/fgr.c:137
+msgid "Path"
+msgstr "路径"
+
+#: ../src/fgr.c:138
+msgid "Locate documents and folders on this computer by name or content"
+msgstr "按名称或内容定位此计算机上的文档和文件夹"
+
+#: ../src/fgr.c:139
+msgid "Filter:"
+msgstr "过滤器:"
+
+#: ../src/fgr.c:139
+msgid "Search for files"
+msgstr "搜索文件"
+
+#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
+#: ../src/fgr.c:141
+msgid "Contents:"
+msgstr "内容："
+
+#: ../src/fgr.c:141
+msgid "File's contents filtered as plain text."
+msgstr "过滤为纯文本后文件内容。"
+
+#: ../src/fgr.c:144
+msgid "Verbose output debugging mode."
+msgstr "详尽的调试模式。"
+
+#: ../src/fgr.c:146
+msgid "Show version information"
+msgstr "显示版本信息"
+
+#: ../src/fgr.c:148
+msgid "Filter Details"
+msgstr "过滤器细节"
+
+#: ../src/fgr.c:151
+msgid "Stay on single filesystem"
+msgstr "局限于单文件系统"
+
+#: ../src/fgr.c:153
+msgid "Print..."
+msgstr "打印..."
+
+#: ../src/fgr.c:153
+msgid "The unique Process ID that identifies this process."
+msgstr "标识此进程的唯一进程号(UID)。"
+
+#: ../src/fgr.c:155
+msgid "Find hidden files and directories"
+msgstr "查找隐藏目录和文件"
+
+#: ../src/fgr.c:156
+msgid "Filter"
+msgstr "过滤器"
+
+#: ../src/fgr.c:157
+msgid ""
+"To display files which pass the filter (stars and regexps will be processed)"
+msgstr "显示通过过滤器的文件(星号和正则表达式将被处理)"
+
+#: ../src/fgr.c:159
+msgid "Recursive"
+msgstr "递归"
+
+#: ../src/fgr.c:160 ../src/fgr.c:161 ../src/fgr.c:162 ../src/fgr.c:163
+msgid "KByte"
+msgstr "K 字节"
+
+#: ../src/fgr.c:161
+msgid "is greater than or equal to"
+msgstr "大于或等于"
+
+#: ../src/fgr.c:163
+msgid "is less than or equal to"
+msgstr "小于或等于"
+
+#: ../src/fgr.c:165
+msgid "Set UID"
+msgstr "设定UID"
+
+#: ../src/fgr.c:165
+msgid "Executable Text Files"
+msgstr "可执行文本文件"
+
+#: ../src/fgr.c:167
+msgid "The permissions of the file, in octal notation."
+msgstr "文件的权限，以八进制显示。"
+
+#: ../src/fgr.c:168
+msgid "Type"
+msgstr "类型"
+
+#: ../src/fgr.c:170
+msgid "Any"
+msgstr "任何"
+
+#: ../src/fgr.c:170
+msgid "Default type"
+msgstr "默认类型"
+
+#: ../src/fgr.c:171
+msgid "Regular file"
+msgstr "常规文件"
+
+#: ../src/fgr.c:172
+msgid "Directory"
+msgstr "目录"
+
+#: ../src/fgr.c:173
+msgid "Symbolic Link"
+msgstr "符号链接"
+
+#: ../src/fgr.c:174
+msgid "UNIX Socket"
+msgstr "UNIX 套接字"
+
+#: ../src/fgr.c:175
+msgid "Block device"
+msgstr "块设备"
+
+#: ../src/fgr.c:176
+msgid "Character device"
+msgstr "字符设备"
+
+#: ../src/fgr.c:177
+msgid "FIFO"
+msgstr "管道"
+
+#: ../src/fgr.c:179 ../src/fgr.c:181
+msgid "Minutes"
+msgstr "分"
+
+#: ../src/fgr.c:180 ../src/fgr.c:183 ../src/fgr.c:186 ../src/fgr.c:189
+msgid "Details"
+msgstr "细节"
+
+#: ../src/fgr.c:180 ../src/fgr.c:183 ../src/fgr.c:186 ../src/fgr.c:189
+#: ../src/fgr.c:192 ../src/fgr.c:193 ../src/fgr.c:196 ../src/fgr.c:197
+#: ../src/fgr.c:200 ../src/fgr.c:201
+msgid "TIME"
+msgstr "时间"
+
+#: ../src/fgr.c:181 ../src/fgr.c:184 ../src/fgr.c:187 ../src/fgr.c:190
+msgid "Previous"
+msgstr "上一个"
+
+#: ../src/fgr.c:182 ../src/fgr.c:184
+msgid "Hours"
+msgstr "小时"
+
+#: ../src/fgr.c:185 ../src/fgr.c:187
+msgid "Days"
+msgstr "天"
+
+#: ../src/fgr.c:188
+msgid "Month"
+msgstr "月"
+
+#: ../src/fgr.c:190
+msgid "Month(s)"
+msgstr "月"
+
+#: ../src/fgr.c:193
+msgid "Modification Time :"
+msgstr "修改时间 :"
+
+#: ../src/fgr.c:197
+msgid "Access Time :"
+msgstr "存取时间 :"
+
+#: ../src/fgr.c:201
+msgid "Creation Time :"
+msgstr "创建时间 :"
+
+#: ../src/fgr.c:204 ../src/fgr.c:205
+msgid "uid"
+msgstr "用户 ID"
+
+#: ../src/fgr.c:205
+msgid "User:"
+msgstr "用户："
+
+#: ../src/fgr.c:207 ../src/fgr.c:208
+msgid "gid"
+msgstr "组 ID"
+
+#: ../src/fgr.c:208
+msgid "Group:"
+msgstr "组："
+
+#: ../src/fgr.c:211
+msgid ""
+"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+"character that  normally  follows  a file  name"
+msgstr ""
+
+#: ../src/fgr.c:213
+msgid "Content View"
+msgstr "内容视图"
+
+#: ../src/fgr.c:214 ../src/fgr.c:215 ../src/fgr.c:216 ../src/fgr.c:217
+msgid "STRING"
+msgstr "字符串"
+
+#: ../src/fgr.c:215 ../src/fgr.c:217
+msgid "Regular expression"
+msgstr "正则表达式(X)"
+
+#: ../src/fgr.c:217
+msgid "Extended"
+msgstr "增大"
+
+#: ../src/fgr.c:219
+msgid "Ignore case"
+msgstr "忽略大小写"
+
+#: ../src/fgr.c:221
+msgid "Text Files"
+msgstr "文本文件"
+
+#: ../src/fgr.c:223
+msgid "No match"
+msgstr "无匹配"
+
+#: ../src/fgr.c:225
+msgid "Line Count"
+msgstr "行数"
+
+#: ../src/fgr.c:227
+msgid "Whole words only"
+msgstr "匹配整个单词(W)"
+
+#: ../src/fgr.c:229
+msgid "Match whole lines only"
+msgstr "仅匹配整行"
+
+#: ../src/fgr.c:272
+#, c-format
+msgid "Usage : %s [OPTIONS]\n"
+msgstr "运用选择 : %s [OPTIONS]\n"

@@ -1,0 +1,268 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2011 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- mi� jun 29 18:52:15 CDT 2011 ---
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Gamma\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-09 17:25-0600\n"
+"PO-Revision-Date: 2010-11-11 07:44+0100\n"
+"Last-Translator: Petr Pisar <petr.pisar@atlas.cz>\n"
+"Language-Team: Czech <translation-team-cs@lists.sourceforge.net>\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8-bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2  n<=4) ? 1 : 2;\n"
+
+#: ../src/fgr.c:137
+msgid "Options:"
+msgstr "Možnosti:"
+
+#: ../src/fgr.c:137
+msgid "Path"
+msgstr "Cesta"
+
+#: ../src/fgr.c:138
+msgid "Locate documents and folders on this computer by name or content"
+msgstr "Hledá dokumenty a složky v tomto počítači podle názvu či obsahu"
+
+#: ../src/fgr.c:139
+msgid "Filter:"
+msgstr "Filtr:"
+
+#: ../src/fgr.c:139
+msgid "Search for files"
+msgstr "Hledat soubory"
+
+#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
+#: ../src/fgr.c:141
+msgid "Contents:"
+msgstr "Obsah:"
+
+#: ../src/fgr.c:141
+msgid "File's contents filtered as plain text."
+msgstr "Obsah souboru filtrovaný jako prostý text."
+
+#: ../src/fgr.c:144
+msgid "Verbose output debugging mode."
+msgstr "\"Ukecaný\" režim ladícího výstupu"
+
+#: ../src/fgr.c:146
+msgid "Show version information"
+msgstr "Zobrazit informaci o verzi"
+
+#: ../src/fgr.c:148
+msgid "Filter Details"
+msgstr "Detaily filtru"
+
+#: ../src/fgr.c:151
+msgid "Stay on single filesystem"
+msgstr "Prohledat pouze jeden souborový systém"
+
+#: ../src/fgr.c:153
+msgid "Print..."
+msgstr "Tisk..."
+
+#: ../src/fgr.c:153
+#, fuzzy
+msgid "The unique Process ID that identifies this process."
+msgstr "Uživatel, který tento proces vlastní."
+
+#: ../src/fgr.c:155
+msgid "Find hidden files and directories"
+msgstr "Prohledat skryté soubory a adresáře"
+
+#: ../src/fgr.c:156
+msgid "Filter"
+msgstr "Filtr"
+
+#: ../src/fgr.c:157
+msgid ""
+"To display files which pass the filter (stars and regexps will be processed)"
+msgstr ""
+"Zobrazit soubory, které odpovídají zadání filtru (hvězdička bude zpracována)"
+
+#: ../src/fgr.c:159
+msgid "Recursive"
+msgstr "Rekurzivní"
+
+#: ../src/fgr.c:160 ../src/fgr.c:161 ../src/fgr.c:162 ../src/fgr.c:163
+msgid "KByte"
+msgstr "KByte"
+
+#: ../src/fgr.c:161
+msgid "is greater than or equal to"
+msgstr "je větší nebo rovno"
+
+#: ../src/fgr.c:163
+msgid "is less than or equal to"
+msgstr "je menší nebo rovno"
+
+#: ../src/fgr.c:165
+msgid "Set UID"
+msgstr "Nastavit UID"
+
+#: ../src/fgr.c:165
+msgid "Executable Text Files"
+msgstr "Spustitelné textové soubory"
+
+#: ../src/fgr.c:167
+msgid "The permissions of the file, in octal notation."
+msgstr "Oprávnění souboru v osmičkovém zápisu."
+
+#: ../src/fgr.c:168
+msgid "Type"
+msgstr "Typ"
+
+#: ../src/fgr.c:170
+msgid "Any"
+msgstr "Libovolné"
+
+#: ../src/fgr.c:170
+msgid "Default type"
+msgstr "Výchozí typ"
+
+#: ../src/fgr.c:171
+msgid "Regular file"
+msgstr "Obyčejný soubor"
+
+#: ../src/fgr.c:172
+msgid "Directory"
+msgstr "Adresář"
+
+#: ../src/fgr.c:173
+msgid "Symbolic Link"
+msgstr "Symbolický odkaz"
+
+#: ../src/fgr.c:174
+msgid "UNIX Socket"
+msgstr "Unixový soket"
+
+#: ../src/fgr.c:175
+msgid "Block device"
+msgstr "Blokové zařízení"
+
+#: ../src/fgr.c:176
+msgid "Character device"
+msgstr "Znakové zařízení"
+
+#: ../src/fgr.c:177
+msgid "FIFO"
+msgstr "FIFO"
+
+#: ../src/fgr.c:179 ../src/fgr.c:181
+msgid "Minutes"
+msgstr "Minutách"
+
+#: ../src/fgr.c:180 ../src/fgr.c:183 ../src/fgr.c:186 ../src/fgr.c:189
+msgid "Details"
+msgstr "Detaily"
+
+#: ../src/fgr.c:180 ../src/fgr.c:183 ../src/fgr.c:186 ../src/fgr.c:189
+#: ../src/fgr.c:192 ../src/fgr.c:193 ../src/fgr.c:196 ../src/fgr.c:197
+#: ../src/fgr.c:200 ../src/fgr.c:201
+msgid "TIME"
+msgstr "CAS"
+
+#: ../src/fgr.c:181 ../src/fgr.c:184 ../src/fgr.c:187 ../src/fgr.c:190
+msgid "Previous"
+msgstr "Předchozí"
+
+#: ../src/fgr.c:182 ../src/fgr.c:184
+msgid "Hours"
+msgstr "Hodinách"
+
+#: ../src/fgr.c:185 ../src/fgr.c:187
+msgid "Days"
+msgstr "Dnech   "
+
+#: ../src/fgr.c:188
+msgid "Month"
+msgstr "Měsíc"
+
+#: ../src/fgr.c:190
+msgid "Month(s)"
+msgstr "Týdny"
+
+#: ../src/fgr.c:193
+msgid "Modification Time :"
+msgstr "Čas změny :"
+
+#: ../src/fgr.c:197
+msgid "Access Time :"
+msgstr "Čas přístupu :"
+
+#: ../src/fgr.c:201
+msgid "Creation Time :"
+msgstr "Čas vytvoření :"
+
+#: ../src/fgr.c:204 ../src/fgr.c:205
+msgid "uid"
+msgstr "id uživatele (uid)"
+
+#: ../src/fgr.c:205
+msgid "User:"
+msgstr "Uživatel:"
+
+#: ../src/fgr.c:207 ../src/fgr.c:208
+msgid "gid"
+msgstr "id skupiny (gid)"
+
+#: ../src/fgr.c:208
+msgid "Group:"
+msgstr "Skupina:"
+
+#: ../src/fgr.c:211
+msgid ""
+"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+"character that  normally  follows  a file  name"
+msgstr ""
+
+#: ../src/fgr.c:213
+msgid "Content View"
+msgstr "Zobrazení obsahu"
+
+#: ../src/fgr.c:214 ../src/fgr.c:215 ../src/fgr.c:216 ../src/fgr.c:217
+msgid "STRING"
+msgstr "ŘETĚZEC"
+
+#: ../src/fgr.c:215 ../src/fgr.c:217
+msgid "Regular expression"
+msgstr "Regulární výraz"
+
+#: ../src/fgr.c:217
+msgid "Extended"
+msgstr "Rozšířený"
+
+#: ../src/fgr.c:219
+msgid "Ignore case"
+msgstr "Ignorovat velikost písmen"
+
+#: ../src/fgr.c:221
+msgid "Text Files"
+msgstr "Textové soubory"
+
+#: ../src/fgr.c:223
+msgid "No match"
+msgstr "Žádná shoda"
+
+#: ../src/fgr.c:225
+msgid "Line Count"
+msgstr "Počet řádků"
+
+#: ../src/fgr.c:227
+msgid "Whole words only"
+msgstr "Pouze celá slova"
+
+#: ../src/fgr.c:229
+msgid "Match whole lines only"
+msgstr "Vzorek se vztahuje na celé řádky"
+
+#: ../src/fgr.c:272
+#, c-format
+msgid "Usage : %s [OPTIONS]\n"
+msgstr "Použití : %s [Volby]\n"

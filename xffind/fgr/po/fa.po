@@ -1,0 +1,286 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2011 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- mi� jun 29 18:47:43 CDT 2011 ---
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Gamma\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-09 17:25-0600\n"
+"PO-Revision-Date: 2005-09-24 12:28+0900\n"
+"Last-Translator: Abbas Izad <abbasizad@hotmail.com>\n"
+"Language-Team: Persian <translation-team-fa@lists.sourceforge.net>\n"
+"Language: fa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.3\n"
+
+#: ../src/fgr.c:137
+#, fuzzy
+msgid "Options:"
+msgstr "گزینه‌ها"
+
+#: ../src/fgr.c:137
+msgid "Path"
+msgstr "مسیر"
+
+#: ../src/fgr.c:138
+msgid "Locate documents and folders on this computer by name or content"
+msgstr ""
+"پیدا کردن نوشتارها و پوشه‌های موجود در این کامپیوتر با استفاده از نام یا "
+"محتوای آنها"
+
+#: ../src/fgr.c:139
+msgid "Filter:"
+msgstr "صافی:"
+
+#: ../src/fgr.c:139
+#, fuzzy
+msgid "Search for files"
+msgstr "جستجوی پروندهٔ:"
+
+#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
+#: ../src/fgr.c:141
+msgid "Contents:"
+msgstr "محتویات:"
+
+#: ../src/fgr.c:141
+#, fuzzy
+msgid "File's contents filtered as plain text."
+msgstr "ذخیرۀ یادداشت به عنوان متن ساده"
+
+#: ../src/fgr.c:144
+#, fuzzy
+msgid "Verbose output debugging mode."
+msgstr "اشکال‌زدایی طولانی"
+
+#: ../src/fgr.c:146
+msgid "Show version information"
+msgstr "نمایش اطلاعات نسخه"
+
+#: ../src/fgr.c:148
+msgid "Filter Details"
+msgstr "جزئیات پالایه"
+
+#: ../src/fgr.c:151
+msgid "Stay on single filesystem"
+msgstr "باقی ماندن بر یک سیستم پرونده"
+
+#: ../src/fgr.c:153
+msgid "Print..."
+msgstr "چاپ..."
+
+#: ../src/fgr.c:153
+#, fuzzy
+msgid "The unique Process ID that identifies this process."
+msgstr "شناسایی پروژۀ یکتا"
+
+#: ../src/fgr.c:155
+#, fuzzy
+msgid "Find hidden files and directories"
+msgstr "چشم‌پوشی از پرونده‌ها و پوشه‌های مخفی"
+
+#: ../src/fgr.c:156
+msgid "Filter"
+msgstr "فیلتر"
+
+#: ../src/fgr.c:157
+msgid ""
+"To display files which pass the filter (stars and regexps will be processed)"
+msgstr ""
+"برای پرونده‌هایی که از فیلتر رد می‌شوند (ستاره‌ها و regexps پردازش خواهند شد)"
+
+#: ../src/fgr.c:159
+msgid "Recursive"
+msgstr "بازگشتی"
+
+#: ../src/fgr.c:160 ../src/fgr.c:161 ../src/fgr.c:162 ../src/fgr.c:163
+#, fuzzy
+msgid "KByte"
+msgstr "بایت"
+
+#: ../src/fgr.c:161
+#, fuzzy
+msgid "is greater than or equal to"
+msgstr "بیشتر یا مساوی است با"
+
+#: ../src/fgr.c:163
+#, fuzzy
+msgid "is less than or equal to"
+msgstr "کمتر یا مساوی است با"
+
+#: ../src/fgr.c:165
+msgid "Set UID"
+msgstr "تعیین UID"
+
+#: ../src/fgr.c:165
+msgid "Executable Text Files"
+msgstr "پرونده‌های متنی قابل اجرا"
+
+#: ../src/fgr.c:167
+msgid "The permissions of the file, in octal notation."
+msgstr "اجازه‌های پرونده، در نشانه‌گذاری هشت‌هشتی"
+
+#: ../src/fgr.c:168
+msgid "Type"
+msgstr "نوع"
+
+#: ../src/fgr.c:170
+msgid "Any"
+msgstr "همه"
+
+#: ../src/fgr.c:170
+#, fuzzy
+msgid "Default type"
+msgstr "زمان پیش‌فرض‌"
+
+#: ../src/fgr.c:171
+#, fuzzy
+msgid "Regular file"
+msgstr "عادی"
+
+#: ../src/fgr.c:172
+msgid "Directory"
+msgstr "شاخه"
+
+#: ../src/fgr.c:173
+msgid "Symbolic Link"
+msgstr "پیوند نمادی"
+
+#: ../src/fgr.c:174
+#, fuzzy
+msgid "UNIX Socket"
+msgstr "طرحواره یونیکس"
+
+#: ../src/fgr.c:175
+msgid "Block device"
+msgstr "دستگاه بلوک"
+
+#: ../src/fgr.c:176
+msgid "Character device"
+msgstr "دستگاه نویسه"
+
+#: ../src/fgr.c:177
+msgid "FIFO"
+msgstr "FIFO"
+
+#: ../src/fgr.c:179 ../src/fgr.c:181
+msgid "Minutes"
+msgstr "دقیقه"
+
+#: ../src/fgr.c:180 ../src/fgr.c:183 ../src/fgr.c:186 ../src/fgr.c:189
+msgid "Details"
+msgstr "جزئیات"
+
+#: ../src/fgr.c:180 ../src/fgr.c:183 ../src/fgr.c:186 ../src/fgr.c:189
+#: ../src/fgr.c:192 ../src/fgr.c:193 ../src/fgr.c:196 ../src/fgr.c:197
+#: ../src/fgr.c:200 ../src/fgr.c:201
+#, fuzzy
+msgid "TIME"
+msgstr "TIMEOUT"
+
+#: ../src/fgr.c:181 ../src/fgr.c:184 ../src/fgr.c:187 ../src/fgr.c:190
+msgid "Previous"
+msgstr "قبلی"
+
+#: ../src/fgr.c:182 ../src/fgr.c:184
+msgid "Hours"
+msgstr "ساعت"
+
+#: ../src/fgr.c:185 ../src/fgr.c:187
+msgid "Days"
+msgstr "روز"
+
+#: ../src/fgr.c:188
+msgid "Month"
+msgstr "ماه‌"
+
+#: ../src/fgr.c:190
+#, fuzzy
+msgid "Month(s)"
+msgstr "ماه"
+
+#: ../src/fgr.c:193
+msgid "Modification Time :"
+msgstr "زمان تغییر :"
+
+#: ../src/fgr.c:197
+msgid "Access Time :"
+msgstr "زمان دستیابی :"
+
+#: ../src/fgr.c:201
+msgid "Creation Time :"
+msgstr "زمان ایجاد :"
+
+#: ../src/fgr.c:204 ../src/fgr.c:205
+msgid "uid"
+msgstr "شناسۀ کاربر"
+
+#: ../src/fgr.c:205
+msgid "User:"
+msgstr "کاربر:"
+
+#: ../src/fgr.c:207 ../src/fgr.c:208
+#, fuzzy
+msgid "gid"
+msgstr "شناسۀ کاربر"
+
+#: ../src/fgr.c:208
+msgid "Group:"
+msgstr "گروه:"
+
+#: ../src/fgr.c:211
+msgid ""
+"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+"character that  normally  follows  a file  name"
+msgstr ""
+
+#: ../src/fgr.c:213
+msgid "Content View"
+msgstr "نمای محتویات"
+
+#: ../src/fgr.c:214 ../src/fgr.c:215 ../src/fgr.c:216 ../src/fgr.c:217
+msgid "STRING"
+msgstr "STRING"
+
+#: ../src/fgr.c:215 ../src/fgr.c:217
+msgid "Regular expression"
+msgstr "عبارت منظم‌"
+
+#: ../src/fgr.c:217
+#, fuzzy
+msgid "Extended"
+msgstr "بسط‌یافته"
+
+#: ../src/fgr.c:219
+msgid "Ignore case"
+msgstr "نادیده گرفتن بزرگی و کوچکی"
+
+#: ../src/fgr.c:221
+msgid "Text Files"
+msgstr "پرونده متنی"
+
+#: ../src/fgr.c:223
+msgid "No match"
+msgstr "بدون تطبیق"
+
+#: ../src/fgr.c:225
+msgid "Line Count"
+msgstr "شمارش خط"
+
+#: ../src/fgr.c:227
+msgid "Whole words only"
+msgstr "فقط تمام کلمات‌"
+
+#: ../src/fgr.c:229
+#, fuzzy
+msgid "Match whole lines only"
+msgstr "تطبیق ردۀ کامل پنجره‌"
+
+#: ../src/fgr.c:272
+#, fuzzy
+msgid "Usage : %s [OPTIONS]\n"
+msgstr "کاربرد: %s %s\n"

@@ -1,0 +1,286 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2011 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- mi� jun 29 18:48:11 CDT 2011 ---
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Gamma\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-09 17:25-0600\n"
+"PO-Revision-Date: 2006-02-27 11:41+0700\n"
+"Last-Translator: Leang Chumsoben <soben@khmeros.info>\n"
+"Language-Team: Khmer <support@khmeros.info>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11\n"
+
+#: ../src/fgr.c:137
+msgid "Options:"
+msgstr "ជម្រើស ៖"
+
+#: ../src/fgr.c:137
+msgid "Path"
+msgstr "ផ្លូវ"
+
+#: ../src/fgr.c:138
+msgid "Locate documents and folders on this computer by name or content"
+msgstr ""
+
+#: ../src/fgr.c:139
+msgid "Filter:"
+msgstr "តម្រង ៖"
+
+#: ../src/fgr.c:139
+msgid "Search for files"
+msgstr "ស្វែងរក​ឯកសារ"
+
+#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
+#: ../src/fgr.c:141
+msgid "Contents:"
+msgstr "មាតិកា ៖"
+
+#: ../src/fgr.c:141
+#, fuzzy
+msgid "File's contents filtered as plain text."
+msgstr "រក្សា​ទុក​ចំណាំ​ជា​អត្ថបទ​ធម្មតា"
+
+#: ../src/fgr.c:144
+msgid "Verbose output debugging mode."
+msgstr "របៀប​បំបាត់​កំហុស​ដែល​មាន​លទ្ធ​ដោយ​បរិយាយ ។"
+
+#: ../src/fgr.c:146
+msgid "Show version information"
+msgstr "បង្ហាញ​ព័ត៌មាន​កំណែ"
+
+#: ../src/fgr.c:148
+msgid "Filter Details"
+msgstr "សេចក្តី​លម្អិត​តម្រង"
+
+#: ../src/fgr.c:151
+#, fuzzy
+msgid "Stay on single filesystem"
+msgstr "ប្រព័ន្ធ​ឯកសារ​បាន​តែ​អាន"
+
+#: ../src/fgr.c:153
+msgid "Print..."
+msgstr "បោះពុម្ព..."
+
+#: ../src/fgr.c:153
+msgid "The unique Process ID that identifies this process."
+msgstr "លេខសម្គាល់​ដំណើរការ​មានតែមួយ ដែល​កំណត់អត្តសញ្ញាណ​ដំណើរការ​នេះ ។"
+
+#: ../src/fgr.c:155
+#, fuzzy
+msgid "Find hidden files and directories"
+msgstr "បង្ហាញ​ថត និង​ឯកសារ​ដែល​បាន​លាក់"
+
+#: ../src/fgr.c:156
+msgid "Filter"
+msgstr "តម្រង"
+
+#: ../src/fgr.c:157
+msgid ""
+"To display files which pass the filter (stars and regexps will be processed)"
+msgstr ""
+
+#: ../src/fgr.c:159
+msgid "Recursive"
+msgstr "ហៅ​ខ្លួន​ឯង"
+
+#: ../src/fgr.c:160 ../src/fgr.c:161 ../src/fgr.c:162 ../src/fgr.c:163
+msgid "KByte"
+msgstr "គីឡូបៃ"
+
+#: ../src/fgr.c:161
+#, fuzzy
+msgid "is greater than or equal to"
+msgstr "ច្រើន​ជាង​"
+
+#: ../src/fgr.c:163
+#, fuzzy
+msgid "is less than or equal to"
+msgstr "មិន​ស្មើ"
+
+#: ../src/fgr.c:165
+msgid "Set UID"
+msgstr "កំណត់ UID"
+
+#: ../src/fgr.c:165
+#, fuzzy
+msgid "Executable Text Files"
+msgstr "ឯកសារ​ដែល​អាច​ប្រតិបត្តិ​បាន"
+
+#: ../src/fgr.c:167
+msgid "The permissions of the file, in octal notation."
+msgstr ""
+
+#: ../src/fgr.c:168
+msgid "Type"
+msgstr "ប្រភេទ"
+
+#: ../src/fgr.c:170
+msgid "Any"
+msgstr "ណា​មួយ"
+
+#: ../src/fgr.c:170
+#, fuzzy
+msgid "Default type"
+msgstr "ពេល​​វេលា​​លំនាំ​​ដើម​"
+
+#: ../src/fgr.c:171
+#, fuzzy
+msgid "Regular file"
+msgstr "ក្រឡាចត្រង្គ​ធម្មតា"
+
+#: ../src/fgr.c:172
+msgid "Directory"
+msgstr "ថត"
+
+#: ../src/fgr.c:173
+msgid "Symbolic Link"
+msgstr "តំណ​និម្មិតសញ្ញា"
+
+#: ../src/fgr.c:174
+#, fuzzy
+msgid "UNIX Socket"
+msgstr "គ្រោងការណ៍​យូនីក"
+
+#: ../src/fgr.c:175
+#, fuzzy
+msgid "Block device"
+msgstr "ឧបករណ៍​ទប់ស្កាត់"
+
+#: ../src/fgr.c:176
+#, fuzzy
+msgid "Character device"
+msgstr "ឧបករណ៍​តួអក្សរ"
+
+#: ../src/fgr.c:177
+msgid "FIFO"
+msgstr "FIFO"
+
+#: ../src/fgr.c:179 ../src/fgr.c:181
+msgid "Minutes"
+msgstr "នាទី"
+
+#: ../src/fgr.c:180 ../src/fgr.c:183 ../src/fgr.c:186 ../src/fgr.c:189
+msgid "Details"
+msgstr "សេចក្ដី​លម្អិត"
+
+#: ../src/fgr.c:180 ../src/fgr.c:183 ../src/fgr.c:186 ../src/fgr.c:189
+#: ../src/fgr.c:192 ../src/fgr.c:193 ../src/fgr.c:196 ../src/fgr.c:197
+#: ../src/fgr.c:200 ../src/fgr.c:201
+msgid "TIME"
+msgstr ""
+
+#: ../src/fgr.c:181 ../src/fgr.c:184 ../src/fgr.c:187 ../src/fgr.c:190
+msgid "Previous"
+msgstr "រក​មុន"
+
+#: ../src/fgr.c:182 ../src/fgr.c:184
+msgid "Hours"
+msgstr "ម៉ោង"
+
+#: ../src/fgr.c:185 ../src/fgr.c:187
+msgid "Days"
+msgstr "ថ្ងៃ"
+
+#: ../src/fgr.c:188
+msgid "Month"
+msgstr "ខែ​"
+
+#: ../src/fgr.c:190
+msgid "Month(s)"
+msgstr "ខែ​"
+
+#: ../src/fgr.c:193
+#, fuzzy
+msgid "Modification Time :"
+msgstr "ពេលវេលា​កំណែប្រែ​"
+
+#: ../src/fgr.c:197
+#, fuzzy
+msgid "Access Time :"
+msgstr "បាន​ដំណើរការ ៖"
+
+#: ../src/fgr.c:201
+#, fuzzy
+msgid "Creation Time :"
+msgstr "ពេលវេលា​បង្កើត"
+
+#: ../src/fgr.c:204 ../src/fgr.c:205
+#, fuzzy
+msgid "uid"
+msgstr "Uuid"
+
+#: ../src/fgr.c:205
+msgid "User:"
+msgstr "អ្នក​ប្រើ ៖"
+
+#: ../src/fgr.c:207 ../src/fgr.c:208
+#, fuzzy
+msgid "gid"
+msgstr "មិន​ចេះ​ប្រែប្រួល"
+
+#: ../src/fgr.c:208
+msgid "Group:"
+msgstr "ក្រុម ៖"
+
+#: ../src/fgr.c:211
+msgid ""
+"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+"character that  normally  follows  a file  name"
+msgstr ""
+
+#: ../src/fgr.c:213
+#, fuzzy
+msgid "Content View"
+msgstr "​ទិដ្ឋ​ភាព​បរិបទ"
+
+#: ../src/fgr.c:214 ../src/fgr.c:215 ../src/fgr.c:216 ../src/fgr.c:217
+msgid "STRING"
+msgstr ""
+
+#: ../src/fgr.c:215 ../src/fgr.c:217
+msgid "Regular expression"
+msgstr "កន្សោម​ធម្មតា"
+
+#: ../src/fgr.c:217
+msgid "Extended"
+msgstr "បានបន្ថែម"
+
+#: ../src/fgr.c:219
+#, fuzzy
+msgid "Ignore case"
+msgstr "មិន​អើពើ​រូបភាព"
+
+#: ../src/fgr.c:221
+msgid "Text Files"
+msgstr "ឯកសារ​អត្ថបទ"
+
+#: ../src/fgr.c:223
+#, fuzzy
+msgid "No match"
+msgstr "%d ផ្គូផ្គង​"
+
+#: ../src/fgr.c:225
+msgid "Line Count"
+msgstr "ចំនួន​ជួរ​​"
+
+#: ../src/fgr.c:227
+msgid "Whole words only"
+msgstr "តែ​ពាក្យ​ទាំងមូល​ប៉ុណ្ណោះ"
+
+#: ../src/fgr.c:229
+#, fuzzy
+msgid "Match whole lines only"
+msgstr "ផ្គូផ្គង​ថ្នាក់​បង្អួច​ទាំងមូល"
+
+#: ../src/fgr.c:272
+#, fuzzy
+msgid "Usage : %s [OPTIONS]\n"
+msgstr "ការ​ប្រើ ៖ %s %s\n"

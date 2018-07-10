@@ -1,0 +1,286 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2011 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- mi� jun 29 18:49:47 CDT 2011 ---
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Gamma\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-09 17:25-0600\n"
+"PO-Revision-Date: 2006-08-16 03:27+0300\n"
+"Last-Translator: Alexander Nyakhaychyk <nyakhaychyk@gmail.com>\n"
+"Language-Team: Belarusian <i18n@mova.org>\n"
+"Language: be\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%s0==1  n%s00!=11 ? 0 : n%s0>=2  n%s0<=4  "
+"(n%s00<10 || n%s00>=20) ? 1 : 2);\n"
+
+#: ../src/fgr.c:137
+msgid "Options:"
+msgstr "Уласьцівасьці:"
+
+#: ../src/fgr.c:137
+msgid "Path"
+msgstr "Шлях"
+
+#: ../src/fgr.c:138
+msgid "Locate documents and folders on this computer by name or content"
+msgstr "Шукаць мясцовыя дакумэнты і тэчкі па назьве і зьмесьце"
+
+#: ../src/fgr.c:139
+msgid "Filter:"
+msgstr "Фільтр:"
+
+#: ../src/fgr.c:139
+#, fuzzy
+msgid "Search for files"
+msgstr "Пошук файлаў"
+
+#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
+#: ../src/fgr.c:141
+msgid "Contents:"
+msgstr "Зьмест:"
+
+#: ../src/fgr.c:141
+#, fuzzy
+msgid "File's contents filtered as plain text."
+msgstr "Запісаць заметку як просты тэкст"
+
+#: ../src/fgr.c:144
+#, fuzzy
+msgid "Verbose output debugging mode."
+msgstr "уключыць адладачны код"
+
+#: ../src/fgr.c:146
+msgid "Show version information"
+msgstr "Паказаць звесткі пра версію"
+
+#: ../src/fgr.c:148
+#, fuzzy
+msgid "Filter Details"
+msgstr "Параметры ўваходу"
+
+#: ../src/fgr.c:151
+#, fuzzy
+msgid "Stay on single filesystem"
+msgstr "Файлавая сыстэма толькі для чытаньня"
+
+#: ../src/fgr.c:153
+msgid "Print..."
+msgstr "Друкаваць..."
+
+#: ../src/fgr.c:153
+msgid "The unique Process ID that identifies this process."
+msgstr ""
+
+#: ../src/fgr.c:155
+#, fuzzy
+msgid "Find hidden files and directories"
+msgstr "Разрешить наличие доступных для всех на запись файлов и каталогов"
+
+#: ../src/fgr.c:156
+msgid "Filter"
+msgstr "Фільтр"
+
+#: ../src/fgr.c:157
+msgid ""
+"To display files which pass the filter (stars and regexps will be processed)"
+msgstr ""
+
+#: ../src/fgr.c:159
+msgid "Recursive"
+msgstr "Рэкурсыўна"
+
+#: ../src/fgr.c:160 ../src/fgr.c:161 ../src/fgr.c:162 ../src/fgr.c:163
+#, fuzzy
+msgid "KByte"
+msgstr "Байт"
+
+#: ../src/fgr.c:161
+#, fuzzy
+msgid "is greater than or equal to"
+msgstr "больш ці роўна"
+
+#: ../src/fgr.c:163
+#, fuzzy
+msgid "is less than or equal to"
+msgstr "менш ці роўна"
+
+#: ../src/fgr.c:165
+msgid "Set UID"
+msgstr "Усталяваць UID"
+
+#: ../src/fgr.c:165
+msgid "Executable Text Files"
+msgstr "<span weight=\"bold\">Запускныя тэкставыя файлы</span>"
+
+#: ../src/fgr.c:167
+msgid "The permissions of the file, in octal notation."
+msgstr "Правы доступу да файла ў васьмярычным запісе."
+
+#: ../src/fgr.c:168
+msgid "Type"
+msgstr "Від"
+
+#: ../src/fgr.c:170
+msgid "Any"
+msgstr "Любы"
+
+#: ../src/fgr.c:170
+#, fuzzy
+msgid "Default type"
+msgstr "Прадвызначаны элемент"
+
+#: ../src/fgr.c:171
+#, fuzzy
+msgid "Regular file"
+msgstr "звычайны файл"
+
+#: ../src/fgr.c:172
+msgid "Directory"
+msgstr "Тэчка"
+
+#: ../src/fgr.c:173
+msgid "Symbolic Link"
+msgstr "Сімвалічная спасылка"
+
+#: ../src/fgr.c:174
+#, fuzzy
+msgid "UNIX Socket"
+msgstr "Схема UNIX"
+
+#: ../src/fgr.c:175
+msgid "Block device"
+msgstr "Блёкавая прылада"
+
+#: ../src/fgr.c:176
+msgid "Character device"
+msgstr "Знакавая прылада"
+
+#: ../src/fgr.c:177
+msgid "FIFO"
+msgstr ""
+
+#: ../src/fgr.c:179 ../src/fgr.c:181
+msgid "Minutes"
+msgstr "Хвілінаў"
+
+#: ../src/fgr.c:180 ../src/fgr.c:183 ../src/fgr.c:186 ../src/fgr.c:189
+msgid "Details"
+msgstr "Падрабязнасці"
+
+#: ../src/fgr.c:180 ../src/fgr.c:183 ../src/fgr.c:186 ../src/fgr.c:189
+#: ../src/fgr.c:192 ../src/fgr.c:193 ../src/fgr.c:196 ../src/fgr.c:197
+#: ../src/fgr.c:200 ../src/fgr.c:201
+msgid "TIME"
+msgstr "TIME"
+
+#: ../src/fgr.c:181 ../src/fgr.c:184 ../src/fgr.c:187 ../src/fgr.c:190
+msgid "Previous"
+msgstr "Папярэдні"
+
+#: ../src/fgr.c:182 ../src/fgr.c:184
+msgid "Hours"
+msgstr "Гадзін"
+
+#: ../src/fgr.c:185 ../src/fgr.c:187
+msgid "Days"
+msgstr "Дзён"
+
+#: ../src/fgr.c:188
+msgid "Month"
+msgstr "Месяц"
+
+#: ../src/fgr.c:190
+#, fuzzy
+msgid "Month(s)"
+msgstr "месяц(ы)"
+
+#: ../src/fgr.c:193
+#, fuzzy
+msgid "Modification Time :"
+msgstr "Час апошняй зьмены"
+
+#: ../src/fgr.c:197
+#, fuzzy
+msgid "Access Time :"
+msgstr "Час апошняга доступу:"
+
+#: ../src/fgr.c:201
+#, fuzzy
+msgid "Creation Time :"
+msgstr "Час стварэньня"
+
+#: ../src/fgr.c:204 ../src/fgr.c:205
+#, fuzzy
+msgid "uid"
+msgstr "id"
+
+#: ../src/fgr.c:205
+msgid "User:"
+msgstr "Карыстальнік:"
+
+#: ../src/fgr.c:207 ../src/fgr.c:208
+#, fuzzy
+msgid "gid"
+msgstr "id"
+
+#: ../src/fgr.c:208
+msgid "Group:"
+msgstr "Група:"
+
+#: ../src/fgr.c:211
+msgid ""
+"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+"character that  normally  follows  a file  name"
+msgstr ""
+
+#: ../src/fgr.c:213
+msgid "Content View"
+msgstr "Прагляд зьместу"
+
+#: ../src/fgr.c:214 ../src/fgr.c:215 ../src/fgr.c:216 ../src/fgr.c:217
+msgid "STRING"
+msgstr "STRING"
+
+#: ../src/fgr.c:215 ../src/fgr.c:217
+msgid "Regular expression"
+msgstr "Сталы выраз"
+
+#: ../src/fgr.c:217
+msgid "Extended"
+msgstr "Пашыраны"
+
+#: ../src/fgr.c:219
+msgid "Ignore case"
+msgstr "Ігнараваць рэгістар"
+
+#: ../src/fgr.c:221
+msgid "Text Files"
+msgstr "Тэкставыя файлы"
+
+#: ../src/fgr.c:223
+msgid "No match"
+msgstr "Нічога не знойдзена"
+
+#: ../src/fgr.c:225
+msgid "Line Count"
+msgstr "Колькасць радкоў"
+
+#: ../src/fgr.c:227
+msgid "Whole words only"
+msgstr "Толькі асобныя словы"
+
+#: ../src/fgr.c:229
+#, fuzzy
+msgid "Match whole lines only"
+msgstr "Супадаюць цалкам радкі"
+
+#: ../src/fgr.c:272
+#, fuzzy
+msgid "Usage : %s [OPTIONS]\n"
+msgstr "Выкарыстаньне: %s [ПАРАМЭТАР]\n"

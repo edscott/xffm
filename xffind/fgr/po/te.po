@@ -1,0 +1,295 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2011 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- mi� jun 29 18:52:32 CDT 2011 ---
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Gamma\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-09 17:25-0600\n"
+"PO-Revision-Date: 2009-09-10 15:09+0530\n"
+"Last-Translator: Krishna Babu K <kkrothap@redhat.com>\n"
+"Language-Team: Telugu <en@li.org>\n"
+"Language: te\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"\n"
+"\n"
+"\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#: ../src/fgr.c:137
+msgid "Options:"
+msgstr "ఐచ్చికములు:"
+
+#: ../src/fgr.c:137
+msgid "Path"
+msgstr "త్రోవ"
+
+#: ../src/fgr.c:138
+msgid "Locate documents and folders on this computer by name or content"
+msgstr "నామము లేదా విషయము ద్వారా ఈ కంప్యూటర్‌నందలి పత్రములను మరియు సంచయాలను గుర్తించుము"
+
+#: ../src/fgr.c:139
+msgid "Filter:"
+msgstr "గలని:"
+
+#: ../src/fgr.c:139
+#, fuzzy
+msgid "Search for files"
+msgstr "దస్త్రముల కొరకు వెతుకు"
+
+#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
+#: ../src/fgr.c:141
+msgid "Contents:"
+msgstr "సారం:"
+
+#: ../src/fgr.c:141
+#, fuzzy
+msgid "File's contents filtered as plain text."
+msgstr "ఫైలును సాదా పాఠము వలె దాయాలా?"
+
+#: ../src/fgr.c:144
+#, fuzzy
+msgid "Verbose output debugging mode."
+msgstr "డీబగ్గింగ్ సంహిత ను చేతనంచేయి"
+
+#: ../src/fgr.c:146
+msgid "Show version information"
+msgstr "వివరణం సమాచారం చూపుము"
+
+#: ../src/fgr.c:148
+#, fuzzy
+msgid "Filter Details"
+msgstr "వాడుకరి వివరాలు"
+
+#: ../src/fgr.c:151
+#, fuzzy
+msgid "Stay on single filesystem"
+msgstr "దస్త్ర వ్యవస్థను సంశోధించు"
+
+#: ../src/fgr.c:153
+msgid "Print..."
+msgstr "ముద్రించు(P)..."
+
+#: ../src/fgr.c:153
+msgid "The unique Process ID that identifies this process."
+msgstr ""
+
+#: ../src/fgr.c:155
+#, fuzzy
+msgid "Find hidden files and directories"
+msgstr "దాగిఉన్న దస్త్రాలను మరియు సంచయాలను చూపుము"
+
+#: ../src/fgr.c:156
+msgid "Filter"
+msgstr "వడపోత"
+
+#: ../src/fgr.c:157
+msgid ""
+"To display files which pass the filter (stars and regexps will be processed)"
+msgstr ""
+
+#: ../src/fgr.c:159
+#, fuzzy
+msgid "Recursive"
+msgstr "పునరావృతికరణ"
+
+#: ../src/fgr.c:160 ../src/fgr.c:161 ../src/fgr.c:162 ../src/fgr.c:163
+#, fuzzy
+msgid "KByte"
+msgstr "Bytes"
+
+#: ../src/fgr.c:161
+#, fuzzy
+msgid "is greater than or equal to"
+msgstr "ఎక్కువ లేదా సమానం"
+
+#: ../src/fgr.c:163
+#, fuzzy
+msgid "is less than or equal to"
+msgstr "తక్కువ లేదా సమానం"
+
+#: ../src/fgr.c:165
+#, fuzzy
+msgid "Set UID"
+msgstr "వాడుకరి ID అమర్చు(u)"
+
+#: ../src/fgr.c:165
+msgid "Executable Text Files"
+msgstr "విర్వర్తించబడు పాఠ్య దస్త్రములు"
+
+#: ../src/fgr.c:167
+msgid "The permissions of the file, in octal notation."
+msgstr "దస్త్రం యొక్క అనుమతులు,అష్టసంఖ్యామానములో."
+
+#: ../src/fgr.c:168
+msgid "Type"
+msgstr "రకం"
+
+#: ../src/fgr.c:170
+msgid "Any"
+msgstr "ఏదేని"
+
+#: ../src/fgr.c:170
+#, fuzzy
+msgid "Default type"
+msgstr "అప్రమేయ అంశము"
+
+#: ../src/fgr.c:171
+#, fuzzy
+msgid "Regular file"
+msgstr "క్రమమైన "
+
+#: ../src/fgr.c:172
+msgid "Directory"
+msgstr "వివరము"
+
+#: ../src/fgr.c:173
+msgid "Symbolic Link"
+msgstr "చిహ్నమైన లింకు"
+
+#: ../src/fgr.c:174
+#, fuzzy
+msgid "UNIX Socket"
+msgstr "UNIX స్కీమ్"
+
+#: ../src/fgr.c:175
+#, fuzzy
+msgid "Block device"
+msgstr "వెనుకకు పరికరముల దగ్గరకు"
+
+#: ../src/fgr.c:176
+#, fuzzy
+msgid "Character device"
+msgstr "అక్షర సమితి (a):"
+
+#: ../src/fgr.c:177
+msgid "FIFO"
+msgstr ""
+
+#: ../src/fgr.c:179 ../src/fgr.c:181
+msgid "Minutes"
+msgstr "నిముషములు"
+
+#: ../src/fgr.c:180 ../src/fgr.c:183 ../src/fgr.c:186 ../src/fgr.c:189
+msgid "Details"
+msgstr "వివరాలు"
+
+#: ../src/fgr.c:180 ../src/fgr.c:183 ../src/fgr.c:186 ../src/fgr.c:189
+#: ../src/fgr.c:192 ../src/fgr.c:193 ../src/fgr.c:196 ../src/fgr.c:197
+#: ../src/fgr.c:200 ../src/fgr.c:201
+#, fuzzy
+msgid "TIME"
+msgstr "కాలముముగిసింది"
+
+#: ../src/fgr.c:181 ../src/fgr.c:184 ../src/fgr.c:187 ../src/fgr.c:190
+msgid "Previous"
+msgstr "ముందుది(P)"
+
+#: ../src/fgr.c:182 ../src/fgr.c:184
+msgid "Hours"
+msgstr "గంటలు"
+
+#: ../src/fgr.c:185 ../src/fgr.c:187
+msgid "Days"
+msgstr "రోజులు"
+
+#: ../src/fgr.c:188
+msgid "Month"
+msgstr "నెల"
+
+#: ../src/fgr.c:190
+#, fuzzy
+msgid "Month(s)"
+msgstr "నెల"
+
+#: ../src/fgr.c:193
+#, fuzzy
+msgid "Modification Time :"
+msgstr "సవకణ సమయం"
+
+#: ../src/fgr.c:197
+#, fuzzy
+msgid "Access Time :"
+msgstr "వాడబడినది:"
+
+#: ../src/fgr.c:201
+#, fuzzy
+msgid "Creation Time :"
+msgstr "సృష్టింపు సమయం"
+
+#: ../src/fgr.c:204 ../src/fgr.c:205
+#, fuzzy
+msgid "uid"
+msgstr "బుల్ట్"
+
+#: ../src/fgr.c:205
+msgid "User:"
+msgstr "యూజర్:"
+
+#: ../src/fgr.c:207 ../src/fgr.c:208
+#, fuzzy
+msgid "gid"
+msgstr "ghi"
+
+#: ../src/fgr.c:208
+msgid "Group:"
+msgstr "గ్రూప్:"
+
+#: ../src/fgr.c:211
+msgid ""
+"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+"character that  normally  follows  a file  name"
+msgstr ""
+
+#: ../src/fgr.c:213
+msgid "Content View"
+msgstr "దర్శన సారము "
+
+#: ../src/fgr.c:214 ../src/fgr.c:215 ../src/fgr.c:216 ../src/fgr.c:217
+msgid "STRING"
+msgstr "స్ట్రింగ్"
+
+#: ../src/fgr.c:215 ../src/fgr.c:217
+msgid "Regular expression"
+msgstr "(x) క్రమమైన సమీకరణము"
+
+#: ../src/fgr.c:217
+msgid "Extended"
+msgstr "పొడగింపబడింది"
+
+#: ../src/fgr.c:219
+msgid "Ignore case"
+msgstr "బడిని వదిలివేయుము(I)"
+
+#: ../src/fgr.c:221
+msgid "Text Files"
+msgstr "పాఠ్య దస్త్రములు"
+
+#: ../src/fgr.c:223
+msgid "No match"
+msgstr "సరిజోడీ లేదు"
+
+#: ../src/fgr.c:225
+#, fuzzy
+msgid "Line Count"
+msgstr "వరుస క్రింద"
+
+#: ../src/fgr.c:227
+msgid "Whole words only"
+msgstr "(W) పూర్తి పదాలు మాత్రమే"
+
+#: ../src/fgr.c:229
+#, fuzzy
+msgid "Match whole lines only"
+msgstr "(h) మొత్తము విండో క్లాస్‌ను సరిపోల్చుము"
+
+#: ../src/fgr.c:272
+#, fuzzy
+msgid "Usage : %s [OPTIONS]\n"
+msgstr "ఉపయోగం: ఓర్కా [ఐచ్చికం...]"

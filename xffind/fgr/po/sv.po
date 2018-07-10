@@ -1,0 +1,270 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2011 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- mi� jun 29 18:47:37 CDT 2011 ---
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Gamma\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-09 17:25-0600\n"
+"PO-Revision-Date: 2010-11-08 19:20+0100\n"
+"Last-Translator: Göran Uddeborg <goeran@uddeborg.se>\n"
+"Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../src/fgr.c:137
+msgid "Options:"
+msgstr "Alternativ:"
+
+#: ../src/fgr.c:137
+msgid "Path"
+msgstr "Sökväg"
+
+#: ../src/fgr.c:138
+msgid "Locate documents and folders on this computer by name or content"
+msgstr ""
+"Sök efter dokument och mappar på den här datorn efter namn eller innehåll"
+
+#: ../src/fgr.c:139
+msgid "Filter:"
+msgstr "Filter:"
+
+#: ../src/fgr.c:139
+msgid "Search for files"
+msgstr "Sök efter filer"
+
+#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
+#: ../src/fgr.c:141
+msgid "Contents:"
+msgstr "Innehåll:"
+
+#: ../src/fgr.c:141
+#, fuzzy
+msgid "File's contents filtered as plain text."
+msgstr "Spara filen som vanlig text?"
+
+#: ../src/fgr.c:144
+msgid "Verbose output debugging mode."
+msgstr "Felsökningsläge med detaljerad utmatning."
+
+#: ../src/fgr.c:146
+msgid "Show version information"
+msgstr "Visa versionsinformation"
+
+#: ../src/fgr.c:148
+msgid "Filter Details"
+msgstr "Filterinformation"
+
+#: ../src/fgr.c:151
+msgid "Stay on single filesystem"
+msgstr "Stanna inom ett enda filsystem"
+
+#: ../src/fgr.c:153
+msgid "Print..."
+msgstr "Skriv ut..."
+
+#: ../src/fgr.c:153
+msgid "The unique Process ID that identifies this process."
+msgstr "Den unika processidentifieraren som identifierar processen."
+
+#: ../src/fgr.c:155
+msgid "Find hidden files and directories"
+msgstr "Sök efter gömda filer och kataloger"
+
+#: ../src/fgr.c:156
+msgid "Filter"
+msgstr "Filter"
+
+#: ../src/fgr.c:157
+msgid ""
+"To display files which pass the filter (stars and regexps will be processed)"
+msgstr ""
+"Att visa filer som passerar filtret (stjärnor och regexps kommer att "
+"bearbetas)"
+
+#: ../src/fgr.c:159
+msgid "Recursive"
+msgstr "Rekursiv"
+
+#: ../src/fgr.c:160 ../src/fgr.c:161 ../src/fgr.c:162 ../src/fgr.c:163
+msgid "KByte"
+msgstr "Kibyte"
+
+#: ../src/fgr.c:161
+msgid "is greater than or equal to"
+msgstr "är större än eller lika med"
+
+#: ../src/fgr.c:163
+msgid "is less than or equal to"
+msgstr "är mindre än eller lika med"
+
+#: ../src/fgr.c:165
+msgid "Set UID"
+msgstr "Sätt UID"
+
+#: ../src/fgr.c:165
+msgid "Executable Text Files"
+msgstr "Körbara textfiler"
+
+#: ../src/fgr.c:167
+msgid "The permissions of the file, in octal notation."
+msgstr "Rättigheterna för filen med oktal notation."
+
+#: ../src/fgr.c:168
+msgid "Type"
+msgstr "Typ"
+
+#: ../src/fgr.c:170
+msgid "Any"
+msgstr "Vilka som helst"
+
+#: ../src/fgr.c:170
+msgid "Default type"
+msgstr "Standardtyp"
+
+#: ../src/fgr.c:171
+msgid "Regular file"
+msgstr "Vanlig fil"
+
+#: ../src/fgr.c:172
+msgid "Directory"
+msgstr "Katalog"
+
+#: ../src/fgr.c:173
+msgid "Symbolic Link"
+msgstr "Symbolisk länk"
+
+#: ../src/fgr.c:174
+msgid "UNIX Socket"
+msgstr "UNIX-uttag"
+
+#: ../src/fgr.c:175
+msgid "Block device"
+msgstr "Blockenhet"
+
+#: ../src/fgr.c:176
+msgid "Character device"
+msgstr "Teckenenhet"
+
+#: ../src/fgr.c:177
+msgid "FIFO"
+msgstr "FIFO"
+
+#: ../src/fgr.c:179 ../src/fgr.c:181
+msgid "Minutes"
+msgstr "Minuterna"
+
+#: ../src/fgr.c:180 ../src/fgr.c:183 ../src/fgr.c:186 ../src/fgr.c:189
+msgid "Details"
+msgstr "Detaljer"
+
+#: ../src/fgr.c:180 ../src/fgr.c:183 ../src/fgr.c:186 ../src/fgr.c:189
+#: ../src/fgr.c:192 ../src/fgr.c:193 ../src/fgr.c:196 ../src/fgr.c:197
+#: ../src/fgr.c:200 ../src/fgr.c:201
+msgid "TIME"
+msgstr "TID"
+
+#: ../src/fgr.c:181 ../src/fgr.c:184 ../src/fgr.c:187 ../src/fgr.c:190
+msgid "Previous"
+msgstr "Föregående"
+
+#: ../src/fgr.c:182 ../src/fgr.c:184
+msgid "Hours"
+msgstr "Timmarna"
+
+#: ../src/fgr.c:185 ../src/fgr.c:187
+msgid "Days"
+msgstr "Dagarna"
+
+#: ../src/fgr.c:188
+msgid "Month"
+msgstr "Månad"
+
+#: ../src/fgr.c:190
+msgid "Month(s)"
+msgstr "Månad(er)"
+
+#: ../src/fgr.c:193
+msgid "Modification Time :"
+msgstr "Modifieringstid:"
+
+#: ../src/fgr.c:197
+msgid "Access Time :"
+msgstr "Accesstid:"
+
+#: ../src/fgr.c:201
+msgid "Creation Time :"
+msgstr "Skapelsetid:"
+
+#: ../src/fgr.c:204 ../src/fgr.c:205
+msgid "uid"
+msgstr "uid"
+
+#: ../src/fgr.c:205
+msgid "User:"
+msgstr "Användare:"
+
+#: ../src/fgr.c:207 ../src/fgr.c:208
+msgid "gid"
+msgstr "gid"
+
+#: ../src/fgr.c:208
+msgid "Group:"
+msgstr "Grupp:"
+
+#: ../src/fgr.c:211
+msgid ""
+"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+"character that  normally  follows  a file  name"
+msgstr ""
+
+#: ../src/fgr.c:213
+msgid "Content View"
+msgstr "Innehållsvy"
+
+#: ../src/fgr.c:214 ../src/fgr.c:215 ../src/fgr.c:216 ../src/fgr.c:217
+msgid "STRING"
+msgstr "STRÄNG"
+
+#: ../src/fgr.c:215 ../src/fgr.c:217
+msgid "Regular expression"
+msgstr "Reguljärt uttryck"
+
+#: ../src/fgr.c:217
+msgid "Extended"
+msgstr "Utökad"
+
+#: ../src/fgr.c:219
+msgid "Ignore case"
+msgstr "Ignorera skiftläge"
+
+#: ../src/fgr.c:221
+msgid "Text Files"
+msgstr "Textfiler"
+
+#: ../src/fgr.c:223
+msgid "No match"
+msgstr "Ingen matchning"
+
+#: ../src/fgr.c:225
+msgid "Line Count"
+msgstr "Radantal"
+
+#: ../src/fgr.c:227
+msgid "Whole words only"
+msgstr "Endast hela ord"
+
+#: ../src/fgr.c:229
+msgid "Match whole lines only"
+msgstr "Sök överensstämmelse endast för hela rader"
+
+#: ../src/fgr.c:272
+#, c-format
+msgid "Usage : %s [OPTIONS]\n"
+msgstr "Användning: %s [VAL]\n"

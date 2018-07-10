@@ -1,0 +1,358 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:39:49 CDT 2013 ---
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-09 17:28-0600\n"
+"PO-Revision-Date: 2003-01-08 07:44+EDT\n"
+"Last-Translator: Ge'ez Frontier Foundation <locales@geez.org>\n"
+"Language-Team: Amharic <locales@geez.org>\n"
+"Language: am\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: .././src/find-module.i:25
+msgid "Any"
+msgstr "ማነኛውም"
+
+#: .././src/find-module.i:26
+#, fuzzy
+msgid "Regular"
+msgstr "ሞቢል፦ (e)"
+
+#: .././src/find-module.i:27
+msgid "Directory"
+msgstr "ዶሴ"
+
+#: .././src/find-module.i:28
+#, fuzzy
+msgid "Symbolic Link"
+msgstr "ምልክቶች"
+
+#: .././src/find-module.i:29
+#, fuzzy
+msgid "Socket"
+msgstr "ሮከት"
+
+#: .././src/find-module.i:30
+#, fuzzy
+msgid "Block device"
+msgstr "የሲዲ ዲቫይስ የልም"
+
+#: .././src/find-module.i:31
+#, fuzzy
+msgid "Character device"
+msgstr "ፊደል ኮድ"
+
+#: .././src/find-module.i:32
+msgid "FIFO"
+msgstr ""
+
+#. / option "upper_limit_spin" (only in gtk dialog)
+#: .././src/find-module.i:162 .././src/find-module_gui.c:767
+msgid "Results"
+msgstr "ውጤቶች"
+
+#: .././src/find-module.i:162
+#, fuzzy
+msgid "Upper limit:"
+msgstr "ከፍተኛ ሰዓት፦"
+
+#: .././src/find-module.i:165 .././src/find-module.i:171
+#, fuzzy
+msgid "Counting files..."
+msgstr "ፋይል ን በማስቀመጥ ላይ"
+
+#. Standalone
+#: .././src/find-module.i:179 .././src/find-module.i:183
+#, fuzzy
+msgid "Search Complete"
+msgstr "ፋይሎችን አስስ"
+
+#: .././src/find-module.i:197
+#, c-format
+msgid "Found %d match"
+msgid_plural "Found %d matches"
+msgstr[0] ""
+msgstr[1] ""
+
+#: .././src/find-module.i:200
+#, c-format
+msgid "%s Finished : %s"
+msgstr "%sን ጨርሷል ፦ %s"
+
+#: .././src/find-module.i:237
+#, fuzzy
+msgid "Select Files..."
+msgstr "ፋይል ምረጡ"
+
+#: .././src/find-module.i:239
+#, fuzzy
+msgid "Select folder to search in"
+msgstr "ዶሴ ምረጡ"
+
+#: .././src/find-module.i:719 .././src/find-module.i:723
+#, fuzzy
+msgid "Searching..."
+msgstr "በማስቀመጥ ላይ..."
+
+#: .././src/find-module_gui.c:58
+msgid ""
+"Basic rules:\n"
+"\n"
+"*  Will match any character zero or more times.\n"
+"?  Will match any character exactly one time\n"
+"[] Match any character within the [] \n"
+"^  Match at beginning of string\n"
+"$  Match at end of string \n"
+msgstr ""
+
+#: .././src/find-module_gui.c:66
+msgid ""
+"Reserved characters for extended regexp are\n"
+". ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"In  basic regular expressions the metacharacters\n"
+"?, +, {, |, (, and ) lose their special meaning.\n"
+"\n"
+"The  period  .   matches  any  single  character.\n"
+"The caret ^ matches at the start of line.\n"
+"The dollar $ matches at the end of line.\n"
+"\n"
+"Characters within [ ] matches any single \n"
+"       character in the list.\n"
+"Characters within [^ ] matches any single\n"
+"       character *not* in the list.\n"
+"Characters inside [ - ] matches a range of\n"
+"       characters (ie [0-9] or [a-z]).\n"
+"\n"
+"A regular expression may be followed by one\n"
+"       of several repetition operators:\n"
+"?      The preceding item is optional and matched\n"
+"       at most once.\n"
+"*      The preceding item will be matched zero\n"
+"       or more times.\n"
+"+      The preceding item will be matched one or\n"
+"       more times.\n"
+"{n}    The preceding item is matched exactly n times.\n"
+"{n,}   The preceding item is matched n or more times.\n"
+"{n,m}  The preceding item is matched at least n times,\n"
+"       but not more than m times.\n"
+"\n"
+"To match any reserved character, precede it with \\. \n"
+"\n"
+"Two regular expressions may be joined by the logical or\n"
+"       operator |.\n"
+"Two regular expressions may be concatenated.\n"
+"\n"
+"More information is available by typing \"man grep\"\n"
+msgstr ""
+
+#: .././src/find-module_gui.c:158
+#, fuzzy
+msgid "Search returned no results"
+msgstr "የአሰሳ ውጤቶች፦ (R)"
+
+#: .././src/find-module_gui.c:165
+msgid "No editor component found."
+msgstr ""
+
+#: .././src/find-module_gui.c:226 .././src/find-module_gui.c:241
+msgid "unknown"
+msgstr "ያልታወቀ"
+
+#: .././src/find-module_gui.c:278
+#, fuzzy
+msgid "Modified"
+msgstr "የተሻሻለ፦"
+
+#: .././src/find-module_gui.c:281
+#, fuzzy
+msgid "Created"
+msgstr "ፍጠር (C)"
+
+#: .././src/find-module_gui.c:284
+#, fuzzy
+msgid "Accessed"
+msgstr "መረጃ ፍለጋ፦"
+
+#: .././src/find-module_gui.c:594 .././src/find-module_gui.c:650
+#: .././src/find-module_gui.c:1021 .././src/find-module_gui.c:1031
+msgid "Find"
+msgstr "ፈልግ"
+
+#: .././src/find-module_gui.c:677
+msgid "Path"
+msgstr "መተላለፊያ"
+
+#: .././src/find-module_gui.c:710
+#, fuzzy
+msgid "Filter:"
+msgstr "አጣራ"
+
+#. / option -r "recursive"
+#: .././src/find-module_gui.c:758
+msgid "Recursive"
+msgstr ""
+
+#. / option -D "recursiveH"
+#: .././src/find-module_gui.c:761
+msgid "Find hidden files and directories"
+msgstr ""
+
+#. / option -a "xdev"
+#: .././src/find-module_gui.c:764
+msgid "Stay on single filesystem"
+msgstr ""
+
+#: .././src/find-module_gui.c:767
+#, fuzzy
+msgid "Upper limit"
+msgstr "የበላይ"
+
+#. option -s +KByte "size_greater", "size_greater_spin"
+#: .././src/find-module_gui.c:772
+msgid "At Least"
+msgstr ""
+
+#: .././src/find-module_gui.c:772 .././src/find-module_gui.c:777
+#, fuzzy
+msgid "kBytes"
+msgstr "ባይቶች"
+
+#. option -s -KByte "size_smaller", "size_smaller_spin"
+#: .././src/find-module_gui.c:777
+msgid "At Most"
+msgstr ""
+
+#: .././src/find-module_gui.c:784
+msgid "User"
+msgstr "ተጠቃሚ"
+
+#: .././src/find-module_gui.c:789
+msgid "Group"
+msgstr "መድረክ (G)"
+
+#. option -o octal "octal_p" "permissions_entry"
+#: .././src/find-module_gui.c:793
+#, fuzzy
+msgid "Octal Permissions"
+msgstr "ፈቃዶች"
+
+#. option -p suid | exe
+#: .././src/find-module_gui.c:798
+msgid "SUID"
+msgstr "SUID"
+
+#: .././src/find-module_gui.c:798
+#, fuzzy
+msgid "Executable"
+msgstr "አስኪድ"
+
+#. radio_p freed on destroy event for dialog.
+#. option -k minutes "last_minutes", "last_minutes_spin"
+#: .././src/find-module_gui.c:806
+msgid "Minutes"
+msgstr "ደቂቃዎች"
+
+#. option -h hours "last_hours", "last_hours_spin"
+#: .././src/find-module_gui.c:810
+msgid "Hours"
+msgstr "ሰዓቶች"
+
+#. option -d days "last_days", "last_days_spin"
+#: .././src/find-module_gui.c:814
+msgid "Days"
+msgstr "ቀን"
+
+#. option -m months "last_months", "last_months_spin"
+#: .././src/find-module_gui.c:818
+#, fuzzy
+msgid "Months"
+msgstr "ወር"
+
+#: .././src/find-module_gui.c:828
+#, fuzzy
+msgid "File type : "
+msgstr "መጻፊያ ሳጥን ዓይነት፦ %s"
+
+#. //////////////  grep options.... /////////////////////////
+#: .././src/find-module_gui.c:844
+#, fuzzy
+msgid "Contains"
+msgstr "ቀጥል (C)"
+
+#: .././src/find-module_gui.c:866
+#, fuzzy
+msgid "Contains the text"
+msgstr "ጽሑፉን ቅጂ"
+
+#: .././src/find-module_gui.c:907
+msgid "Case Sensitive"
+msgstr ""
+
+#: .././src/find-module_gui.c:914
+msgid "Extended regexp"
+msgstr ""
+
+#: .././src/find-module_gui.c:921
+#, fuzzy
+msgid "Include binary files"
+msgstr "የቀን መቁጠሪያ ፋይል"
+
+#: .././src/find-module_gui.c:928
+#, fuzzy
+msgid "Line Count"
+msgstr "የመስመር ቀለም"
+
+#: .././src/find-module_gui.c:953
+#, fuzzy
+msgid "Match"
+msgstr "የፊደሎቱን መጠን አመሳስል"
+
+#: .././src/find-module_gui.c:963
+msgid "Anywhere"
+msgstr ""
+
+#: .././src/find-module_gui.c:975
+msgid "Whole words only"
+msgstr ""
+
+#: .././src/find-module_gui.c:987
+msgid "lines"
+msgstr "መስመሮች"
+
+#: .././src/find-module_gui.c:998
+#, fuzzy
+msgid "No match"
+msgstr "ኢሜይል የልም።"
+
+#: .././src/find-module_gui.c:1021 .././src/find-module_gui.c:1061
+msgid "Close"
+msgstr "ዝጋ"
+
+#: .././src/find-module_gui.c:1041
+msgid "Cancel"
+msgstr "ተወው"
+
+#: .././src/find-module_gui.c:1051
+msgid "Clear"
+msgstr "ሰርዝ (L)"
+
+#: .././src/find-module_gui.c:1093
+msgid "Edit"
+msgstr "አስተካክል (E)"
+
+#: .././Rodent-fgr.desktop.in.in.h:1
+msgid "Home Folder"
+msgstr "የቤት ዶሴ"
+
+#: .././Rodent-fgr.desktop.in.in.h:2
+msgid "Search tool based on fgr"
+msgstr ""
+

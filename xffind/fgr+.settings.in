@@ -1,0 +1,32 @@
+ 
+            =======================================
+               SUMMARY OF @PACKAGE@ CONFIGURATION
+	    =======================================
+--------------------
+General Information:
+--------------------
+                         Target: @PACKAGE@
+	                Version: @VERSION@
+		    Host system: @host_cpu@-@host_vendor@-@host_os@
+	     Installation point: @prefix@
+	           Gtk+ version: @GTK_VERSION@ 
+
+------------------
+Compiling Options:
+------------------
+                         CFLAGS: @CFLAGS@
+                       CXXFLAGS: @CXXFLAGS@
+                     GTK_CFLAGS: @GTK_CFLAGS@
+                       GTK_LIBS: @GTK_LIBS@
+                        LDFLAGS: @LDFLAGS@
+ 	 	Extra libraries: @LIBS@
+ 		       Archiver: @AR@
+ 		 	 Ranlib: @RANLIB@
+ 	              Debugging: @WITH_DEBUG@
+		        Tracing: @WITH_TRACE@
+		     Core dumps: @WITH_CORE@
+
+ 
+
+
+      

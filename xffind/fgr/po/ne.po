@@ -1,0 +1,282 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2011 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- mi� jun 29 18:51:53 CDT 2011 ---
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Gamma\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-09 17:25-0600\n"
+"PO-Revision-Date: 2007-11-16 12:55+0545\n"
+"Last-Translator: Narayan Kumar Magar <narayan@mpp.org.np>\n"
+"Language-Team: Nepali <info@mpp.org.np>\n"
+"Language: ne\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=2; plural=n != 1\n"
+
+#: ../src/fgr.c:137
+msgid "Options:"
+msgstr "विकल्प:"
+
+#: ../src/fgr.c:137
+msgid "Path"
+msgstr "मार्ग"
+
+#: ../src/fgr.c:138
+msgid "Locate documents and folders on this computer by name or content"
+msgstr "यस कम्प्युटरका कागजात र फोल्डरलाई नाम र सामाग्री अनुरुप राख्नुहोस्"
+
+#: ../src/fgr.c:139
+msgid "Filter:"
+msgstr "फिल्टर:"
+
+#: ../src/fgr.c:139
+#, fuzzy
+msgid "Search for files"
+msgstr "फाइलको खोजी गर्नुहोस्"
+
+#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
+#: ../src/fgr.c:141
+msgid "Contents:"
+msgstr "सामग्रीहरू:"
+
+#: ../src/fgr.c:141
+#, fuzzy
+msgid "File's contents filtered as plain text."
+msgstr "सादा पाठका रूपमा द्रष्टब्य बचत गर्नुहोस्"
+
+#: ../src/fgr.c:144
+#, fuzzy
+msgid "Verbose output debugging mode."
+msgstr "भर्बोस त्रुटिमोचन"
+
+#: ../src/fgr.c:146
+msgid "Show version information"
+msgstr "संस्करण सूचना देखाउनुहोस्"
+
+#: ../src/fgr.c:148
+msgid "Filter Details"
+msgstr "फिल्टर विस्तृत विवरण"
+
+#: ../src/fgr.c:151
+#, fuzzy
+msgid "Stay on single filesystem"
+msgstr "फाइल प्रणाली स्क्यान गर्नुहोस्"
+
+#: ../src/fgr.c:153
+msgid "Print..."
+msgstr "मुद्रण गर्नुहोस्..."
+
+#: ../src/fgr.c:153
+#, fuzzy
+msgid "The unique Process ID that identifies this process."
+msgstr "अद्वितिय परियोजना पहिचान"
+
+#: ../src/fgr.c:155
+#, fuzzy
+msgid "Find hidden files and directories"
+msgstr "प्याच फाइलहरू र डाइरेक्टरीहरू ।"
+
+#: ../src/fgr.c:156
+msgid "Filter"
+msgstr "फिल्टर"
+
+#: ../src/fgr.c:157
+msgid ""
+"To display files which pass the filter (stars and regexps will be processed)"
+msgstr ""
+
+#: ../src/fgr.c:159
+msgid "Recursive"
+msgstr "पुनरावृतिक"
+
+#: ../src/fgr.c:160 ../src/fgr.c:161 ../src/fgr.c:162 ../src/fgr.c:163
+#, fuzzy
+msgid "KByte"
+msgstr "बाइट"
+
+#: ../src/fgr.c:161
+msgid "is greater than or equal to"
+msgstr "यो भन्दा ठूलो वा बराबर छ"
+
+#: ../src/fgr.c:163
+msgid "is less than or equal to"
+msgstr "यो भन्दा सानो वा बराबर छ"
+
+#: ../src/fgr.c:165
+msgid "Set UID"
+msgstr "UID सेट गर्नुहोस्"
+
+#: ../src/fgr.c:165
+#, fuzzy
+msgid "Executable Text Files"
+msgstr "कार्यान्वयन योग्य फाइल"
+
+#: ../src/fgr.c:167
+msgid "The permissions of the file, in octal notation."
+msgstr "ओक्टल सङ्केतमा फाइलको अनुमतिहरू ।"
+
+#: ../src/fgr.c:168
+msgid "Type"
+msgstr "प्रकार"
+
+#: ../src/fgr.c:170
+msgid "Any"
+msgstr "कुनै"
+
+#: ../src/fgr.c:170
+msgid "Default type"
+msgstr "पूर्वनिर्धारित प्रकार"
+
+#: ../src/fgr.c:171
+msgid "Regular file"
+msgstr "नियमित फाइल"
+
+#: ../src/fgr.c:172
+msgid "Directory"
+msgstr "डाइरेक्टरी"
+
+#: ../src/fgr.c:173
+msgid "Symbolic Link"
+msgstr "साङ्केतिक लिङ्क"
+
+#: ../src/fgr.c:174
+msgid "UNIX Socket"
+msgstr "युनिक्स सकेट"
+
+#: ../src/fgr.c:175
+msgid "Block device"
+msgstr "यन्त्र बन्द गर्नुहोस्"
+
+#: ../src/fgr.c:176
+msgid "Character device"
+msgstr "क्यारेक्टर यन्त्र"
+
+#: ../src/fgr.c:177
+msgid "FIFO"
+msgstr "FIFO"
+
+#: ../src/fgr.c:179 ../src/fgr.c:181
+msgid "Minutes"
+msgstr "मिनेट"
+
+#: ../src/fgr.c:180 ../src/fgr.c:183 ../src/fgr.c:186 ../src/fgr.c:189
+msgid "Details"
+msgstr "Details"
+
+#: ../src/fgr.c:180 ../src/fgr.c:183 ../src/fgr.c:186 ../src/fgr.c:189
+#: ../src/fgr.c:192 ../src/fgr.c:193 ../src/fgr.c:196 ../src/fgr.c:197
+#: ../src/fgr.c:200 ../src/fgr.c:201
+#, fuzzy
+msgid "TIME"
+msgstr "समयमा"
+
+#: ../src/fgr.c:181 ../src/fgr.c:184 ../src/fgr.c:187 ../src/fgr.c:190
+msgid "Previous"
+msgstr "अघिल्लो"
+
+#: ../src/fgr.c:182 ../src/fgr.c:184
+msgid "Hours"
+msgstr "घण्टा"
+
+#: ../src/fgr.c:185 ../src/fgr.c:187
+msgid "Days"
+msgstr "दिन"
+
+#: ../src/fgr.c:188
+msgid "Month"
+msgstr "महिना"
+
+#: ../src/fgr.c:190
+#, fuzzy
+msgid "Month(s)"
+msgstr "महिना(हरू)"
+
+#: ../src/fgr.c:193
+#, fuzzy
+msgid "Modification Time :"
+msgstr "परिमार्जन मिति"
+
+#: ../src/fgr.c:197
+#, fuzzy
+msgid "Access Time :"
+msgstr "पहुँच:"
+
+#: ../src/fgr.c:201
+#, fuzzy
+msgid "Creation Time :"
+msgstr "सिर्जना समय"
+
+#: ../src/fgr.c:204 ../src/fgr.c:205
+msgid "uid"
+msgstr "uid"
+
+#: ../src/fgr.c:205
+msgid "User:"
+msgstr "प्रयोगकर्ता:"
+
+#: ../src/fgr.c:207 ../src/fgr.c:208
+msgid "gid"
+msgstr "gid"
+
+#: ../src/fgr.c:208
+msgid "Group:"
+msgstr "समूह:"
+
+#: ../src/fgr.c:211
+msgid ""
+"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+"character that  normally  follows  a file  name"
+msgstr ""
+
+#: ../src/fgr.c:213
+msgid "Content View"
+msgstr "हालको दृश्य"
+
+#: ../src/fgr.c:214 ../src/fgr.c:215 ../src/fgr.c:216 ../src/fgr.c:217
+msgid "STRING"
+msgstr "STRING"
+
+#: ../src/fgr.c:215 ../src/fgr.c:217
+msgid "Regular expression"
+msgstr "नियमित अभिव्यक्ति"
+
+#: ../src/fgr.c:217
+#, fuzzy
+msgid "Extended"
+msgstr "विस्तारित"
+
+#: ../src/fgr.c:219
+msgid "Ignore case"
+msgstr "केस उपेक्षा गर्नुहोस्"
+
+#: ../src/fgr.c:221
+msgid "Text Files"
+msgstr "पाठ फाइल"
+
+#: ../src/fgr.c:223
+msgid "No match"
+msgstr "जोडा मिलेन"
+
+#: ../src/fgr.c:225
+msgid "Line Count"
+msgstr "रेखा गणना गर्नुहोस्"
+
+#: ../src/fgr.c:227
+msgid "Whole words only"
+msgstr "पूरा शब्द मात्र"
+
+#: ../src/fgr.c:229
+#, fuzzy
+msgid "Match whole lines only"
+msgstr "सम्पूर्ण शब्दहरूको मात्र जोडा मिलाउनुहोस्"
+
+#: ../src/fgr.c:272
+#, fuzzy
+msgid "Usage : %s [OPTIONS]\n"
+msgstr "उपयोग: %s [OPTION...] %s\n"

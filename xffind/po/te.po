@@ -1,0 +1,353 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:44:52 CDT 2013 ---
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-09 17:28-0600\n"
+"PO-Revision-Date: 2012-03-02 13:48+0530\n"
+"Last-Translator: Sasi Bhushan Boddepalli <sasi@swecha.net>\n"
+"Language-Team: Telugu <indlinux-telugu@lists.sourceforge.net>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"product=accerciserkeywords=I18N+L10Ncomponent=general\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: .././src/find-module.i:25
+msgid "Any"
+msgstr "ఏదేని"
+
+#: .././src/find-module.i:26
+msgid "Regular"
+msgstr "సాదారణ"
+
+#: .././src/find-module.i:27
+msgid "Directory"
+msgstr "వివరము"
+
+#: .././src/find-module.i:28
+msgid "Symbolic Link"
+msgstr "చిహ్నమైన లింకు"
+
+#: .././src/find-module.i:29
+#, fuzzy
+msgid "Socket"
+msgstr "సాకెట్ "
+
+#: .././src/find-module.i:30
+#, fuzzy
+msgid "Block device"
+msgstr "%s అవరోధ పరికరం"
+
+#: .././src/find-module.i:31
+#, fuzzy
+msgid "Character device"
+msgstr "అక్షర సమితి (a)"
+
+#: .././src/find-module.i:32
+msgid "FIFO"
+msgstr ""
+
+#. / option "upper_limit_spin" (only in gtk dialog)
+#: .././src/find-module.i:162 .././src/find-module_gui.c:767
+msgid "Results"
+msgstr "ఫలితాలు"
+
+#: .././src/find-module.i:162
+#, fuzzy
+msgid "Upper limit:"
+msgstr "ఎగువ పరిమితి రోజు"
+
+#: .././src/find-module.i:165 .././src/find-module.i:171
+#, fuzzy
+msgid "Counting files..."
+msgstr "ఫైళ్ళను దిగుమతించుట..."
+
+#. Standalone
+#: .././src/find-module.i:179 .././src/find-module.i:183
+#, fuzzy
+msgid "Search Complete"
+msgstr "అన్వేషణ పూర్తైంది."
+
+#: .././src/find-module.i:197
+#, fuzzy
+msgid "Found %d match"
+msgid_plural "Found %d matches"
+msgstr[0] "%d% పోలిక"
+msgstr[1] "%d% పోలికలు"
+
+#: .././src/find-module.i:200
+#, c-format
+msgid "%s Finished : %s"
+msgstr "%s పూర్తైనది : %s"
+
+#: .././src/find-module.i:237
+msgid "Select Files..."
+msgstr "దస్త్రాలను ఎంచుకొనుము..."
+
+#: .././src/find-module.i:239
+msgid "Select folder to search in"
+msgstr "శోధించవలసిన సంచయాన్ని ఎంచుకోండి"
+
+#: .././src/find-module.i:719 .././src/find-module.i:723
+msgid "Searching..."
+msgstr "వెతుకుతోంది..."
+
+#: .././src/find-module_gui.c:58
+msgid ""
+"Basic rules:\n"
+"\n"
+"*  Will match any character zero or more times.\n"
+"?  Will match any character exactly one time\n"
+"[] Match any character within the [] \n"
+"^  Match at beginning of string\n"
+"$  Match at end of string \n"
+msgstr ""
+
+#: .././src/find-module_gui.c:66
+msgid ""
+"Reserved characters for extended regexp are\n"
+". ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"In  basic regular expressions the metacharacters\n"
+"?, +, {, |, (, and ) lose their special meaning.\n"
+"\n"
+"The  period  .   matches  any  single  character.\n"
+"The caret ^ matches at the start of line.\n"
+"The dollar $ matches at the end of line.\n"
+"\n"
+"Characters within [ ] matches any single \n"
+"       character in the list.\n"
+"Characters within [^ ] matches any single\n"
+"       character *not* in the list.\n"
+"Characters inside [ - ] matches a range of\n"
+"       characters (ie [0-9] or [a-z]).\n"
+"\n"
+"A regular expression may be followed by one\n"
+"       of several repetition operators:\n"
+"?      The preceding item is optional and matched\n"
+"       at most once.\n"
+"*      The preceding item will be matched zero\n"
+"       or more times.\n"
+"+      The preceding item will be matched one or\n"
+"       more times.\n"
+"{n}    The preceding item is matched exactly n times.\n"
+"{n,}   The preceding item is matched n or more times.\n"
+"{n,m}  The preceding item is matched at least n times,\n"
+"       but not more than m times.\n"
+"\n"
+"To match any reserved character, precede it with \\. \n"
+"\n"
+"Two regular expressions may be joined by the logical or\n"
+"       operator |.\n"
+"Two regular expressions may be concatenated.\n"
+"\n"
+"More information is available by typing \"man grep\"\n"
+msgstr ""
+
+#: .././src/find-module_gui.c:158
+msgid "Search returned no results"
+msgstr "శోధన యెటువంటి ఫలితాలను తిరిగియివ్వలేదు"
+
+#: .././src/find-module_gui.c:165
+#, fuzzy
+msgid "No editor component found."
+msgstr "క్యాలెండరు కార్యక్రమాలేవీ కనపడలేదు."
+
+#: .././src/find-module_gui.c:226 .././src/find-module_gui.c:241
+msgid "unknown"
+msgstr "తెలియని"
+
+#: .././src/find-module_gui.c:278
+msgid "Modified"
+msgstr "మార్చిన"
+
+#: .././src/find-module_gui.c:281
+msgid "Created"
+msgstr "సృష్టించబడింది"
+
+#: .././src/find-module_gui.c:284
+msgid "Accessed"
+msgstr "వాడబడినది"
+
+#: .././src/find-module_gui.c:594 .././src/find-module_gui.c:650
+#: .././src/find-module_gui.c:1021 .././src/find-module_gui.c:1031
+msgid "Find"
+msgstr "వెతుకు (F)"
+
+#: .././src/find-module_gui.c:677
+msgid "Path"
+msgstr "త్రోవ"
+
+#: .././src/find-module_gui.c:710
+msgid "Filter:"
+msgstr "వడపోత:"
+
+#. / option -r "recursive"
+#: .././src/find-module_gui.c:758
+#, fuzzy
+msgid "Recursive"
+msgstr "పునరావృతి"
+
+#. / option -D "recursiveH"
+#: .././src/find-module_gui.c:761
+#, fuzzy
+msgid "Find hidden files and directories"
+msgstr "పాచెస్ ఫైళ్ళు మరియు డైరెక్టరీల"
+
+#. / option -a "xdev"
+#: .././src/find-module_gui.c:764
+#, fuzzy
+msgid "Stay on single filesystem"
+msgstr "దస్త్ర వ్యవస్థను సంశోధించు"
+
+#: .././src/find-module_gui.c:767
+#, fuzzy
+msgid "Upper limit"
+msgstr "ఎగువ పరిమితి రోజు"
+
+#. option -s +KByte "size_greater", "size_greater_spin"
+#: .././src/find-module_gui.c:772
+#, fuzzy
+msgid "At Least"
+msgstr "కనీసం"
+
+#: .././src/find-module_gui.c:772 .././src/find-module_gui.c:777
+#, fuzzy
+msgid "kBytes"
+msgstr "బైట్లు"
+
+#. option -s -KByte "size_smaller", "size_smaller_spin"
+#: .././src/find-module_gui.c:777
+#, fuzzy
+msgid "At Most"
+msgstr "ఎక్కువ(o)"
+
+#: .././src/find-module_gui.c:784
+msgid "User"
+msgstr "వినియోగదారు"
+
+#: .././src/find-module_gui.c:789
+msgid "Group"
+msgstr "గ్రూప్"
+
+#. option -o octal "octal_p" "permissions_entry"
+#: .././src/find-module_gui.c:793
+msgid "Octal Permissions"
+msgstr "అష్టపు అనుమతులు"
+
+#. option -p suid | exe
+#: .././src/find-module_gui.c:798
+msgid "SUID"
+msgstr "SUID"
+
+#: .././src/find-module_gui.c:798
+#, fuzzy
+msgid "Executable"
+msgstr "నిర్వర్తించదగిన:"
+
+#. radio_p freed on destroy event for dialog.
+#. option -k minutes "last_minutes", "last_minutes_spin"
+#: .././src/find-module_gui.c:806
+msgid "Minutes"
+msgstr "నిముషములు"
+
+#. option -h hours "last_hours", "last_hours_spin"
+#: .././src/find-module_gui.c:810
+msgid "Hours"
+msgstr "గంటలు"
+
+#. option -d days "last_days", "last_days_spin"
+#: .././src/find-module_gui.c:814
+msgid "Days"
+msgstr "రోజులు"
+
+#. option -m months "last_months", "last_months_spin"
+#: .././src/find-module_gui.c:818
+#, fuzzy
+msgid "Months"
+msgstr "నెల"
+
+#: .././src/find-module_gui.c:828
+#, fuzzy
+msgid "File type : "
+msgstr "ఫైలు రకం(t):"
+
+#. //////////////  grep options.... /////////////////////////
+#: .././src/find-module_gui.c:844
+#, fuzzy
+msgid "Contains"
+msgstr "పాత్రలు"
+
+#: .././src/find-module_gui.c:866
+msgid "Contains the text"
+msgstr "పాఠమును కలిగివున్నది(t)"
+
+#: .././src/find-module_gui.c:907
+msgid "Case Sensitive"
+msgstr "సందర్భ స్పందన"
+
+#: .././src/find-module_gui.c:914
+#, fuzzy
+msgid "Extended regexp"
+msgstr "పొడగింపబడింది"
+
+#: .././src/find-module_gui.c:921
+#, fuzzy
+msgid "Include binary files"
+msgstr "దస్త్రాలను ఉంచు (f):"
+
+#: .././src/find-module_gui.c:928
+#, fuzzy
+msgid "Line Count"
+msgstr "వరుస క్రింద"
+
+#: .././src/find-module_gui.c:953
+msgid "Match"
+msgstr "సరిచూచు (M)"
+
+#: .././src/find-module_gui.c:963
+msgid "Anywhere"
+msgstr ""
+
+#: .././src/find-module_gui.c:975
+msgid "Whole words only"
+msgstr "(W) పూర్తి పదాలు మాత్రమే"
+
+#: .././src/find-module_gui.c:987
+msgid "lines"
+msgstr "వరుసలు"
+
+#: .././src/find-module_gui.c:998
+msgid "No match"
+msgstr "ఏదీ సరిపోలిలేదు"
+
+#: .././src/find-module_gui.c:1021 .././src/find-module_gui.c:1061
+msgid "Close"
+msgstr "మూసివేయి"
+
+#: .././src/find-module_gui.c:1041
+msgid "Cancel"
+msgstr "రద్దుచేయి"
+
+#: .././src/find-module_gui.c:1051
+msgid "Clear"
+msgstr "శుబ్రం చేయు(C)"
+
+#: .././src/find-module_gui.c:1093
+msgid "Edit"
+msgstr "సరిచేయు (E)"
+
+#: .././Rodent-fgr.desktop.in.in.h:1
+msgid "Home Folder"
+msgstr "నివాస సంచయం"
+
+#: .././Rodent-fgr.desktop.in.in.h:2
+msgid "Search tool based on fgr"
+msgstr ""
+

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2014 Edscott Wilson Garcia <edscott@users.sf.net> -->
+<application>
+ <id type="desktop">Rodent-fgr.desktop</id>
+ <metadata_license>CC0-1.0</metadata_license>
+ <project_license>GPL-3.0+</project_license>
+ <name>Search tool based on fgr</name>
+ <summary>@SUMMARY@</summary>
+ <description>
+  <p>
+ Search tool for Rodent (aka, graphic front end to command line fgr). 
+  </p>
+  <p>
+ Fgr is a succesor of command line glob which works in combination with grep 
+ (either GNU or BSD version) by means of thread controlled pipes (libtubo). 
+ Rodent-fgr is meant to be a desktop graphic interface to fgr to compliment
+ fast, small and powerful file management. Rodent-fgr is specially thought 
+ out for the maintainance of large sets of source code and is highly customizable,
+ either from the rodent-fm settings dialog ---if installed--- or else by setting 
+ the corresponding environment variables.  Content search is left to the excellent
+ code developed by GNU grep <a href="http://git.sv.gnu.org/cgit/grep.git/tree/AUTHORS">authors</a>,
+ without duplicating any code. Updates to GNU grep are used automatically. 
+  </p>
+  <ul>
+  <li>GNU's not Unix, but Unix is a beast; its plural form is Unixen.</li>
+  </ul>
+  <p>
+  You probably want to install this application if you are having problems
+  searching for files based on content.
+  </p>
+ </description>
+ <screenshots>
+  <screenshot type="default" width="1038" height="642">http://xffm.sourceforge.net/screenshots/ss-1.png</screenshot>
+  <screenshot width="1155" height="647">http://xffm.sourceforge.net/screenshots/ss-2.png</screenshot>
+  <screenshot width="1154" height="645">http://xffm.sourceforge.net/screenshots/ss-3.png</screenshot>
+ </screenshots>
+ <url type="homepage">@HOMEPAGE@</url>
+ <updatecontact>edscott@imp.mx</updatecontact>
+ <project_group>xffm</project_group>
+</application>
+

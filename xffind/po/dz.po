@@ -1,0 +1,353 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:39:03 CDT 2013 ---
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-09 17:28-0600\n"
+"PO-Revision-Date: 2007-06-13 12:40+0530\n"
+"Last-Translator: Dawa pemo <daws403@hotmail.com>\n"
+"Language-Team: dzongkha <pgeyleg@dit.gov.bt>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2;plural=(n!=1);\n"
+"X-Poedit-Language: Dzongkha\n"
+"X-Poedit-Country: BHUTAN\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: .././src/find-module.i:25
+msgid "Any"
+msgstr "ག་འབད་རུང་"
+
+#: .././src/find-module.i:26
+msgid "Regular"
+msgstr "དུས་རྒྱུན་"
+
+#: .././src/find-module.i:27
+msgid "Directory"
+msgstr "སྣོད་ཐོ།"
+
+#: .././src/find-module.i:28
+#, fuzzy
+msgid "Symbolic Link"
+msgstr "མཚོན་རྟགས་ཀྱི་འབྲེལ་ལམ།"
+
+#: .././src/find-module.i:29
+#, fuzzy
+msgid "Socket"
+msgstr "སོ་ཀེཊིསི་"
+
+#: .././src/find-module.i:30
+msgid "Block device"
+msgstr "ཐབས་འཕྲུལ་འགག"
+
+#: .././src/find-module.i:31
+msgid "Character device"
+msgstr "ཡིག་འབྲུ་ཐབས་འཕྲུལ།"
+
+#: .././src/find-module.i:32
+msgid "FIFO"
+msgstr "ཨེཕ་ཨའི་ཨེཕ་ཨོ།"
+
+#. / option "upper_limit_spin" (only in gtk dialog)
+#: .././src/find-module.i:162 .././src/find-module_gui.c:767
+msgid "Results"
+msgstr "གྲུབ་འབྲས་ཚུ་(R)"
+
+#: .././src/find-module.i:162
+#, fuzzy
+msgid "Upper limit:"
+msgstr "ལག་ལེན་པའི་ཚད་"
+
+#: .././src/find-module.i:165 .././src/find-module.i:171
+#, fuzzy
+msgid "Counting files..."
+msgstr "ཡིག་སྣོད་དཔར་བསྐྲུན་འབད་དོ..."
+
+#. Standalone
+#: .././src/find-module.i:179 .././src/find-module.i:183
+#, fuzzy
+msgid "Search Complete"
+msgstr "འཚོལ་ཞིབ་མཇུག་བསྡུ།"
+
+#: .././src/find-module.i:197
+#, c-format
+msgid "Found %d match"
+msgid_plural "Found %d matches"
+msgstr[0] "མཐུན་སྒྲིག་ %d ཐོབ་ཡོདཔ།"
+msgstr[1] "མཐུན་སྒྲིག་ཚུ་ %d ཐོབ་ཡོདཔ།"
+
+#: .././src/find-module.i:200
+#, c-format
+msgid "%s Finished : %s"
+msgstr "%s མཇུག་བསྡུ་ཡོདཔ། : %s"
+
+#: .././src/find-module.i:237
+#, fuzzy
+msgid "Select Files..."
+msgstr "ཡིག་སྣོད་སེལ་འཐུ་འབད།"
+
+#: .././src/find-module.i:239
+msgid "Select folder to search in"
+msgstr "འཚོལ་ཞིབ་འབད་ནིའི་དོན་ལུ་ སྣོད་འཛིན་སེལ་འཐུ་འབད།"
+
+#: .././src/find-module.i:719 .././src/find-module.i:723
+msgid "Searching..."
+msgstr "འཚོལ་ཞིབ་འབད་དོ།་་་"
+
+#: .././src/find-module_gui.c:58
+msgid ""
+"Basic rules:\n"
+"\n"
+"*  Will match any character zero or more times.\n"
+"?  Will match any character exactly one time\n"
+"[] Match any character within the [] \n"
+"^  Match at beginning of string\n"
+"$  Match at end of string \n"
+msgstr ""
+
+#: .././src/find-module_gui.c:66
+msgid ""
+"Reserved characters for extended regexp are\n"
+". ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"In  basic regular expressions the metacharacters\n"
+"?, +, {, |, (, and ) lose their special meaning.\n"
+"\n"
+"The  period  .   matches  any  single  character.\n"
+"The caret ^ matches at the start of line.\n"
+"The dollar $ matches at the end of line.\n"
+"\n"
+"Characters within [ ] matches any single \n"
+"       character in the list.\n"
+"Characters within [^ ] matches any single\n"
+"       character *not* in the list.\n"
+"Characters inside [ - ] matches a range of\n"
+"       characters (ie [0-9] or [a-z]).\n"
+"\n"
+"A regular expression may be followed by one\n"
+"       of several repetition operators:\n"
+"?      The preceding item is optional and matched\n"
+"       at most once.\n"
+"*      The preceding item will be matched zero\n"
+"       or more times.\n"
+"+      The preceding item will be matched one or\n"
+"       more times.\n"
+"{n}    The preceding item is matched exactly n times.\n"
+"{n,}   The preceding item is matched n or more times.\n"
+"{n,m}  The preceding item is matched at least n times,\n"
+"       but not more than m times.\n"
+"\n"
+"To match any reserved character, precede it with \\. \n"
+"\n"
+"Two regular expressions may be joined by the logical or\n"
+"       operator |.\n"
+"Two regular expressions may be concatenated.\n"
+"\n"
+"More information is available by typing \"man grep\"\n"
+msgstr ""
+
+#: .././src/find-module_gui.c:158
+msgid "Search returned no results"
+msgstr "འཚོལ་ཞིབ་འབད་མི་འདི་ གྲུབ་འབྲས་མ་འབྱུང་"
+
+#: .././src/find-module_gui.c:165
+#, fuzzy
+msgid "No editor component found."
+msgstr "ཡོངས་འབྲེལ་གྱི་ཐབས་འཕྲུལ་ འཚོལ་མ་ཐོབ།"
+
+#: .././src/find-module_gui.c:226 .././src/find-module_gui.c:241
+msgid "unknown"
+msgstr "མ་ཤེསཔ"
+
+#: .././src/find-module_gui.c:278
+msgid "Modified"
+msgstr "ལེགས་བཅོས་འབད་ཡོདཔ།"
+
+#: .././src/find-module_gui.c:281
+msgid "Created"
+msgstr "གསར་བསྐྲུན་འབད་ཡོདཔ།"
+
+#: .././src/find-module_gui.c:284
+msgid "Accessed"
+msgstr "འཛུལ་སྤྱོད་འབད་ཡོདཔ།"
+
+#: .././src/find-module_gui.c:594 .././src/find-module_gui.c:650
+#: .././src/find-module_gui.c:1021 .././src/find-module_gui.c:1031
+msgid "Find"
+msgstr "འཚོལ།"
+
+#: .././src/find-module_gui.c:677
+msgid "Path"
+msgstr "འགྲུལ་ལམ་"
+
+#: .././src/find-module_gui.c:710
+msgid "Filter:"
+msgstr "ཚགས་མ: (i)"
+
+#. / option -r "recursive"
+#: .././src/find-module_gui.c:758
+msgid "Recursive"
+msgstr "ལོག་རིམ་"
+
+#. / option -D "recursiveH"
+#: .././src/find-module_gui.c:761
+#, fuzzy
+msgid "Find hidden files and directories"
+msgstr "ཡིག་སྣོད་ཚུ་དང་སྣོད་ཐོ་ཚུ་མཚམས་ཐོརཝ་ཨིན།"
+
+#. / option -a "xdev"
+#: .././src/find-module_gui.c:764
+#, fuzzy
+msgid "Stay on single filesystem"
+msgstr "ཡིག་སྣོད་རིམ་ལུགས་ཞིབ་ལྟ་འབད་"
+
+#: .././src/find-module_gui.c:767
+#, fuzzy
+msgid "Upper limit"
+msgstr "ལག་ལེན་པའི་ཚད་"
+
+#. option -s +KByte "size_greater", "size_greater_spin"
+#: .././src/find-module_gui.c:772
+#, fuzzy
+msgid "At Least"
+msgstr "ཉུང་ཤོས་རང་"
+
+#: .././src/find-module_gui.c:772 .././src/find-module_gui.c:777
+#, fuzzy
+msgid "kBytes"
+msgstr "བཱའིཊིསི།"
+
+#. option -s -KByte "size_smaller", "size_smaller_spin"
+#: .././src/find-module_gui.c:777
+#, fuzzy
+msgid "At Most"
+msgstr "མང་ཤེོས།(o)"
+
+#: .././src/find-module_gui.c:784
+msgid "User"
+msgstr "ལག་ལེན་པ།"
+
+#: .././src/find-module_gui.c:789
+msgid "Group"
+msgstr "སྡེ་ཚན།"
+
+#. option -o octal "octal_p" "permissions_entry"
+#: .././src/find-module_gui.c:793
+msgid "Octal Permissions"
+msgstr "ཨོཀ་ཊཱལ་གནང་བ་ཚུ།"
+
+#. option -p suid | exe
+#: .././src/find-module_gui.c:798
+msgid "SUID"
+msgstr "ཨེསི་ཡུ་ཨའི་ཌི།"
+
+#: .././src/find-module_gui.c:798
+#, fuzzy
+msgid "Executable"
+msgstr "ལག་ལེན་འཐབ་བཏུབ་:"
+
+#. radio_p freed on destroy event for dialog.
+#. option -k minutes "last_minutes", "last_minutes_spin"
+#: .././src/find-module_gui.c:806
+msgid "Minutes"
+msgstr "སྐར་མ་ཚུ་"
+
+#. option -h hours "last_hours", "last_hours_spin"
+#: .././src/find-module_gui.c:810
+msgid "Hours"
+msgstr "ཆུ་ཚོད་ཚུ་"
+
+#. option -d days "last_days", "last_days_spin"
+#: .././src/find-module_gui.c:814
+msgid "Days"
+msgstr "ཉིནམ་ཚུ་"
+
+#. option -m months "last_months", "last_months_spin"
+#: .././src/find-module_gui.c:818
+msgid "Months"
+msgstr "ཟླཝ་ཚུ་"
+
+#: .././src/find-module_gui.c:828
+#, fuzzy
+msgid "File type : "
+msgstr "ཡིག་སྣོད་ཀྱི་དབྱེ་བ་:(t)"
+
+#. //////////////  grep options.... /////////////////////////
+#: .././src/find-module_gui.c:844
+#, fuzzy
+msgid "Contains"
+msgstr "ནང་ན་ཡོདཔ་"
+
+#: .././src/find-module_gui.c:866
+msgid "Contains the text"
+msgstr "ནང་ན་ཚིག་ཡིག་ཡོད།(t)"
+
+#: .././src/find-module_gui.c:907
+msgid "Case Sensitive"
+msgstr "གནད་དོན་ཉེན་ཅན།(a)"
+
+#: .././src/find-module_gui.c:914
+#, fuzzy
+msgid "Extended regexp"
+msgstr "རྒྱ་བསྐྱེད་ཅན་གྱི་ཁ་བྱང་"
+
+#: .././src/find-module_gui.c:921
+#, fuzzy
+msgid "Include binary files"
+msgstr "ཡིག་སྣོད་ཚུ་ གྲངས་སུ་བཙུགས།(I)"
+
+#: .././src/find-module_gui.c:928
+msgid "Line Count"
+msgstr "གྲལ་ཐིག་གྱངས་ཁ་"
+
+#: .././src/find-module_gui.c:953
+msgid "Match"
+msgstr "མཐུན་སྒྲིག་འབད་"
+
+#: .././src/find-module_gui.c:963
+msgid "Anywhere"
+msgstr ""
+
+#: .././src/find-module_gui.c:975
+#, fuzzy
+msgid "Whole words only"
+msgstr "མིང་ཚིག་ཧྲིལ་བུམ་རྐྱངམ་ཅིག་མཐུན་སྒྲིག་འབད་(t)"
+
+#: .././src/find-module_gui.c:987
+msgid "lines"
+msgstr "གྱལ་རིམ།"
+
+#: .././src/find-module_gui.c:998
+msgid "No match"
+msgstr "མཐུན་སྒྲིག་མེད།"
+
+#: .././src/find-module_gui.c:1021 .././src/find-module_gui.c:1061
+msgid "Close"
+msgstr "ཁ་བསྡམ།"
+
+#: .././src/find-module_gui.c:1041
+msgid "Cancel"
+msgstr "ཆ་མེད་གཏང་"
+
+#: .././src/find-module_gui.c:1051
+msgid "Clear"
+msgstr "བསལ།(C)"
+
+#: .././src/find-module_gui.c:1093
+msgid "Edit"
+msgstr "ཞུན་དག་འབད་ནི།(E)"
+
+#: .././Rodent-fgr.desktop.in.in.h:1
+msgid "Home Folder"
+msgstr "ཁྱིམ་གྱི་ སྣོད་འཛིན་ "
+
+#: .././Rodent-fgr.desktop.in.in.h:2
+msgid "Search tool based on fgr"
+msgstr ""
+

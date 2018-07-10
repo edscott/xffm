@@ -1,0 +1,357 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:41:31 CDT 2013 ---
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-09 17:28-0600\n"
+"PO-Revision-Date: 2008-07-18 14:35-0800\n"
+"Last-Translator: Zabeeh Khan <zabeehkhan@gmail.com>\n"
+"Language-Team: Pashto <pathanisation@googlegroups.com>\n"
+"Language: ps\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Pashto, Pushto\n"
+"X-Poedit-Country: AFGHANISTAN\n"
+
+#: .././src/find-module.i:25
+msgid "Any"
+msgstr "هريو"
+
+#: .././src/find-module.i:26
+msgid "Regular"
+msgstr "ساده"
+
+#: .././src/find-module.i:27
+msgid "Directory"
+msgstr "درکموند"
+
+#: .././src/find-module.i:28
+msgid "Symbolic Link"
+msgstr "پېلامي تړنه"
+
+#: .././src/find-module.i:29
+#, fuzzy
+msgid "Socket"
+msgstr "ساکټ ننوتۍ"
+
+#: .././src/find-module.i:30
+#, fuzzy
+msgid "Block device"
+msgstr ":فلاپي وزله"
+
+#: .././src/find-module.i:31
+#, fuzzy
+msgid "Character device"
+msgstr "لوښه کوډوونې"
+
+#: .././src/find-module.i:32
+msgid "FIFO"
+msgstr ""
+
+#. / option "upper_limit_spin" (only in gtk dialog)
+#: .././src/find-module.i:162 .././src/find-module_gui.c:767
+#, fuzzy
+msgid "Results"
+msgstr "د ازموېنې پاېله"
+
+#: .././src/find-module.i:162
+msgid "Upper limit:"
+msgstr ""
+
+#: .././src/find-module.i:165 .././src/find-module.i:171
+#, fuzzy
+msgid "Counting files..."
+msgstr "دوتنې لمېسل کيږي"
+
+#. Standalone
+#: .././src/find-module.i:179 .././src/find-module.i:183
+#, fuzzy
+msgid "Search Complete"
+msgstr "پلټون سيمه"
+
+#: .././src/find-module.i:197
+#, fuzzy
+msgid "Found %d match"
+msgid_plural "Found %d matches"
+msgstr[0] "د سارولو لپاره ويېونه"
+msgstr[1] "د سارولو لپاره ويېونه"
+
+#: .././src/find-module.i:200
+#, fuzzy
+msgid "%s Finished : %s"
+msgstr "بشپړ شو"
+
+#: .././src/find-module.i:237
+msgid "Select Files..."
+msgstr "...دوتنې ټاکل"
+
+#: .././src/find-module.i:239
+#, fuzzy
+msgid "Select folder to search in"
+msgstr "د ټولو نښلنونو ساتلو لپاره پوښۍ وټاکئ"
+
+#: .././src/find-module.i:719 .././src/find-module.i:723
+msgid "Searching..."
+msgstr "...پلټل کيږي"
+
+#: .././src/find-module_gui.c:58
+msgid ""
+"Basic rules:\n"
+"\n"
+"*  Will match any character zero or more times.\n"
+"?  Will match any character exactly one time\n"
+"[] Match any character within the [] \n"
+"^  Match at beginning of string\n"
+"$  Match at end of string \n"
+msgstr ""
+
+#: .././src/find-module_gui.c:66
+msgid ""
+"Reserved characters for extended regexp are\n"
+". ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"In  basic regular expressions the metacharacters\n"
+"?, +, {, |, (, and ) lose their special meaning.\n"
+"\n"
+"The  period  .   matches  any  single  character.\n"
+"The caret ^ matches at the start of line.\n"
+"The dollar $ matches at the end of line.\n"
+"\n"
+"Characters within [ ] matches any single \n"
+"       character in the list.\n"
+"Characters within [^ ] matches any single\n"
+"       character *not* in the list.\n"
+"Characters inside [ - ] matches a range of\n"
+"       characters (ie [0-9] or [a-z]).\n"
+"\n"
+"A regular expression may be followed by one\n"
+"       of several repetition operators:\n"
+"?      The preceding item is optional and matched\n"
+"       at most once.\n"
+"*      The preceding item will be matched zero\n"
+"       or more times.\n"
+"+      The preceding item will be matched one or\n"
+"       more times.\n"
+"{n}    The preceding item is matched exactly n times.\n"
+"{n,}   The preceding item is matched n or more times.\n"
+"{n,m}  The preceding item is matched at least n times,\n"
+"       but not more than m times.\n"
+"\n"
+"To match any reserved character, precede it with \\. \n"
+"\n"
+"Two regular expressions may be joined by the logical or\n"
+"       operator |.\n"
+"Two regular expressions may be concatenated.\n"
+"\n"
+"More information is available by typing \"man grep\"\n"
+msgstr ""
+
+#: .././src/find-module_gui.c:158
+#, fuzzy
+msgid "Search returned no results"
+msgstr "لټون پاېلې"
+
+#: .././src/find-module_gui.c:165
+#, fuzzy
+msgid "No editor component found."
+msgstr "د ځال کومې وزلې ونه موندل شوې"
+
+#: .././src/find-module_gui.c:226 .././src/find-module_gui.c:241
+msgid "unknown"
+msgstr "ناڅرګند"
+
+#: .././src/find-module_gui.c:278
+msgid "Modified"
+msgstr "بدل شوی"
+
+#: .././src/find-module_gui.c:281
+msgid "Created"
+msgstr "جوړ شوی"
+
+#: .././src/find-module_gui.c:284
+#, fuzzy
+msgid "Accessed"
+msgstr "لاسری:"
+
+#: .././src/find-module_gui.c:594 .././src/find-module_gui.c:650
+#: .././src/find-module_gui.c:1021 .././src/find-module_gui.c:1031
+msgid "Find"
+msgstr "لټول"
+
+#: .././src/find-module_gui.c:677
+msgid "Path"
+msgstr "يونلور"
+
+#: .././src/find-module_gui.c:710
+msgid "Filter:"
+msgstr ":چاڼ"
+
+#. / option -r "recursive"
+#: .././src/find-module_gui.c:758
+#, fuzzy
+msgid "Recursive"
+msgstr "بياپېښيږي"
+
+#. / option -D "recursiveH"
+#: .././src/find-module_gui.c:761
+#, fuzzy
+msgid "Find hidden files and directories"
+msgstr "پټې دوتنې او پوښۍ ښودل"
+
+#. / option -a "xdev"
+#: .././src/find-module_gui.c:764
+#, fuzzy
+msgid "Stay on single filesystem"
+msgstr "دوتنه غونډال ځېرل"
+
+#: .././src/find-module_gui.c:767
+msgid "Upper limit"
+msgstr ""
+
+#. option -s +KByte "size_greater", "size_greater_spin"
+#: .././src/find-module_gui.c:772
+#, fuzzy
+msgid "At Least"
+msgstr "شاوخوا"
+
+#: .././src/find-module_gui.c:772 .././src/find-module_gui.c:777
+#, fuzzy
+msgid "kBytes"
+msgstr "باېټه"
+
+#. option -s -KByte "size_smaller", "size_smaller_spin"
+#: .././src/find-module_gui.c:777
+msgid "At Most"
+msgstr ""
+
+#: .././src/find-module_gui.c:784
+msgid "User"
+msgstr "کارن"
+
+#: .././src/find-module_gui.c:789
+msgid "Group"
+msgstr "ډله"
+
+#. option -o octal "octal_p" "permissions_entry"
+#: .././src/find-module_gui.c:793
+#, fuzzy
+msgid "Octal Permissions"
+msgstr "پرېښلې"
+
+#. option -p suid | exe
+#: .././src/find-module_gui.c:798
+msgid "SUID"
+msgstr ""
+
+#: .././src/find-module_gui.c:798
+#, fuzzy
+msgid "Executable"
+msgstr "چلول"
+
+#. radio_p freed on destroy event for dialog.
+#. option -k minutes "last_minutes", "last_minutes_spin"
+#: .././src/find-module_gui.c:806
+msgid "Minutes"
+msgstr "مېنټونه"
+
+#. option -h hours "last_hours", "last_hours_spin"
+#: .././src/find-module_gui.c:810
+msgid "Hours"
+msgstr "ګېنټې"
+
+#. option -d days "last_days", "last_days_spin"
+#: .././src/find-module_gui.c:814
+msgid "Days"
+msgstr "ورځې"
+
+#. option -m months "last_months", "last_months_spin"
+#: .././src/find-module_gui.c:818
+#, fuzzy
+msgid "Months"
+msgstr "مياشت"
+
+#: .././src/find-module_gui.c:828
+#, fuzzy
+msgid "File type : "
+msgstr ":دوتنه ډول"
+
+#. //////////////  grep options.... /////////////////////////
+#: .././src/find-module_gui.c:844
+#, fuzzy
+msgid "Contains"
+msgstr "لري"
+
+#: .././src/find-module_gui.c:866
+msgid "Contains the text"
+msgstr "ليکنه لري"
+
+#: .././src/find-module_gui.c:907
+#, fuzzy
+msgid "Case Sensitive"
+msgstr "کېس انګېره"
+
+#: .././src/find-module_gui.c:914
+#, fuzzy
+msgid "Extended regexp"
+msgstr "ژور"
+
+#: .././src/find-module_gui.c:921
+#, fuzzy
+msgid "Include binary files"
+msgstr ":دوتنې ننويستل"
+
+#: .././src/find-module_gui.c:928
+#, fuzzy
+msgid "Line Count"
+msgstr "لاندکرښه ستن"
+
+#: .././src/find-module_gui.c:953
+#, fuzzy
+msgid "Match"
+msgstr "ټول سارول"
+
+#: .././src/find-module_gui.c:963
+msgid "Anywhere"
+msgstr ""
+
+#: .././src/find-module_gui.c:975
+msgid "Whole words only"
+msgstr "يوازې بشپړ ويېونه"
+
+#: .././src/find-module_gui.c:987
+msgid "lines"
+msgstr "ليکې"
+
+#: .././src/find-module_gui.c:998
+msgid "No match"
+msgstr "هېڅ ساری"
+
+#: .././src/find-module_gui.c:1021 .././src/find-module_gui.c:1061
+msgid "Close"
+msgstr "بندول"
+
+#: .././src/find-module_gui.c:1041
+msgid "Cancel"
+msgstr "بندول"
+
+#: .././src/find-module_gui.c:1051
+msgid "Clear"
+msgstr "پاکول"
+
+#: .././src/find-module_gui.c:1093
+msgid "Edit"
+msgstr "سمون"
+
+#: .././Rodent-fgr.desktop.in.in.h:1
+msgid "Home Folder"
+msgstr "کور پوښۍ"
+
+#: .././Rodent-fgr.desktop.in.in.h:2
+msgid "Search tool based on fgr"
+msgstr ""
+

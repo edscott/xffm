@@ -1,0 +1,6166 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2011 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- mi� jun 29 18:51:56 CDT 2011 ---
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Gamma\n"
+"Report-Msgid-Bugs-To: http://bugs.xffm.org\n"
+"POT-Creation-Date: 2011-02-03 16:33-0600\n"
+"PO-Revision-Date: 2010-04-24 02:30+0200\n"
+"Last-Translator: Daniel Martinez <entaltoaragon@gmail.com>\n"
+"Language-Team: Aragonés <softaragones@googlegroups.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"menuscomponent=general\n"
+
+msgid "%5d item"
+msgid_plural "%5d items"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "%'u item"
+msgid_plural "%'u items"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "%'d item selected"
+msgid_plural "%'d items selected"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Name"
+msgstr "Nome"
+
+msgid "Personal settings"
+msgstr "Peferencias presonals"
+
+msgid " (containing %'d item)"
+msgid_plural " (containing %'d items)"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Multimedia menu"
+msgstr "Menú de programas multimedia"
+
+msgid "Sound  Video"
+msgstr "Vidio y soniu"
+
+msgid "Programming"
+msgstr "Programacion"
+
+msgid "Tools for software development"
+msgstr "Ainas ta lo desarrollo de software"
+
+msgid "Education"
+msgstr "Educacion"
+
+msgid "Games"
+msgstr "Chuegos"
+
+msgid "Games and amusements"
+msgstr "Chuegos y distraccions"
+
+msgid "Graphics"
+msgstr "Graficos"
+
+msgid "Graphics applications"
+msgstr "Aplicacions graficas"
+
+msgid "Hardware"
+msgstr "Hardware"
+
+msgid "Settings for several hardware devices"
+msgstr "Propiedaz ta varios dispositivos de hardware"
+
+msgid "Internet and Network"
+msgstr "Internet y rete"
+
+msgid "Network-related settings"
+msgstr "Propiedatz arredol d'o rete"
+
+msgid "Look and Feel"
+msgstr "Visualizacion y comportamiento"
+
+msgid "Settings controlling the desktop appearance and behavior"
+msgstr "Propiedaz que controlan l'apariencia y o comportamiento d'o escritorio"
+
+msgid "Internet"
+msgstr "Internet"
+
+msgid "Programs for Internet access such as web and email"
+msgstr "Programas ta l'acceso a internet, tals como web y e-mail"
+
+msgid "Office"
+msgstr "Oficina"
+
+msgid "Office Applications"
+msgstr "Aplicacions d'oficina"
+
+msgid "Personal"
+msgstr "Presonal"
+
+msgid "Administration"
+msgstr "Almenistracion"
+
+msgid "Change system-wide settings (affects all users)"
+msgstr "Cambear as preferencias globals d'o sistema (ta toz os usuarios)"
+
+msgid "Personal preferences"
+msgstr "Preferencias presonals "
+
+msgid "Preferences"
+msgstr "Preferencias"
+
+msgid "System"
+msgstr "Sistema"
+
+msgid "System settings"
+msgstr "Preferencias d'o sistema"
+
+msgid "System Tools"
+msgstr "Ainas d'o sistema"
+
+msgid "System configuration and monitoring"
+msgstr "Configuracion y monitorizacion d'o sistema"
+
+msgid "Universal Access"
+msgstr "Acceso universal"
+
+msgid "Universal Access Settings"
+msgstr "Preferencias d'acceso universal"
+
+msgid "Accessories"
+msgstr "Accesorios"
+
+msgid "Desktop accessories"
+msgstr "Accesorios d'o escritorio"
+
+msgid "Applications"
+msgstr "Aplicacions"
+
+msgid "Personal preferences and administration settings"
+msgstr "Preferencias presonals y opcions d'almenistracion"
+
+msgid "Applications that did not fit in other categories"
+msgstr "Aplicacions que no dentran en denguna atra categoria"
+
+msgid "Other"
+msgstr "Atras"
+
+msgid "Menu Editor"
+msgstr "Editor d'o menu"
+
+msgid "Edit Menus"
+msgstr "Editar menus"
+
+msgid "Applications:"
+msgstr "Aplicacions:"
+
+msgid "Defaults"
+msgstr "Predeterminaus"
+
+msgid "Menus:"
+msgstr "Menus:"
+
+msgid "Simple Menu Editor %s"
+msgstr "Editor simple d'o menu %s"
+
+msgid "Show"
+msgstr "Amostrar"
+
+msgid "Item"
+msgstr "Elemento"
+
+msgid "Change which applications are shown on the main menu"
+msgstr "Cambea as aplicacions que s'amostran en o menu prencipal"
+
+msgid "Main Menu"
+msgstr "Menu prencipal"
+
+msgid "Items:"
+msgstr "Elementos"
+
+msgid "Move Down"
+msgstr "Baixar"
+
+msgid "Move Up"
+msgstr "Puyar"
+
+msgid "New Item"
+msgstr "Nuevo elemento"
+
+msgid "New Separator"
+msgstr "Nuevo separador"
+
+msgid "Restore the default menu layout"
+msgstr "Restaurar o menu por defecto"
+
+msgid "Revert Changes?"
+msgstr "Revertir cambeos?"
+
+msgid "Revert all menus to original settings?"
+msgstr "Revertir os cambeos de toz os menus a l'orichinal?"
+
+msgid "New Menu"
+msgstr "Nuevo menu"
+
+msgid "Browse and organize your bookmarks"
+msgstr "Examine y chestione os suyos marcadors"
+
+msgid "Epiphany Web Bookmarks"
+msgstr "Marcadors d'epiphany"
+
+msgid "Web Bookmarks"
+msgstr "Marcadors"
+
+msgid "Search the web"
+msgstr "Buscar en a web"
+
+msgid "http://www.google.com"
+msgstr "http://www.google.es"
+
+msgid "http://www.google.com/search?q=%samp;ie=UTF-8amp;oe=UTF-8"
+msgstr "http://www.google.es/search?q=%samp;ie=UTF-8amp;oe=UTF-8"
+
+msgid "Browse the web"
+msgstr "Buscar en a web"
+
+msgid "Epiphany"
+msgstr "Epiphany"
+
+msgid "Epiphany Web Browser"
+msgstr "Navegador web Epiphany"
+
+msgid "Web Browser"
+msgstr "Navegador web"
+
+msgid "Fingerprints"
+msgstr "Rastros"
+
+msgid "Issued By"
+msgstr "Emitiu por"
+
+msgid "Issued To"
+msgstr "Emitiu a"
+
+msgid "Validity"
+msgstr "Validez"
+
+msgid "Certificate Fields"
+msgstr "Campos d'o certificau"
+
+msgid "Certificate Hierarchy"
+msgstr "Cherarquia de certificaus"
+
+msgid "Common Name:"
+msgstr "Nombre comun:"
+
+msgid "Details"
+msgstr "Detalles"
+
+msgid "Expires On:"
+msgstr "Remata o:"
+
+msgid "Field Value"
+msgstr "Valura d'o campo"
+
+msgid "General"
+msgstr "Cheneral"
+
+msgid "Issued On:"
+msgstr "Emitiu lo:"
+
+msgid "MD5 Fingerprint:"
+msgstr "Rastro MD5:"
+
+msgid "Organization:"
+msgstr "Organizacion:"
+
+msgid "Organizational Unit:"
+msgstr "Unidat organizativa:"
+
+msgid "SHA1 Fingerprint:"
+msgstr "Rastro SHA1:"
+
+msgid "Serial Number:"
+msgstr "Numero de serie:"
+
+msgid "Automatic"
+msgstr "Automatica"
+
+msgid "Use a different encoding:"
+msgstr "Fer servir una codificacion diferent:"
+
+msgid "Clear All..."
+msgstr "Limpiar tot…"
+
+msgid "Cookies"
+msgstr "Cookies"
+
+msgid "Passwords"
+msgstr "Claus de paso"
+
+msgid "Personal Data"
+msgstr "Datos presonals"
+
+msgid "Text Encoding"
+msgstr "Codificacion d'o texto"
+
+msgid "Use the encoding specified by the document"
+msgstr "Fer servir a codificacion especificada por o documento"
+
+msgid "Show passwords"
+msgstr "Amostrar claus de paso"
+
+msgid "Sign Text"
+msgstr "Sinyar texto"
+
+msgid ""
+"To confirm that you want to sign the above text, choose a certificate to "
+"sign the text with and enter its password below."
+msgstr ""
+"Ta confirmar que quiere sinyar o texto de l'alto, trie un certificau con que "
+"sinyar-lo y meta a suya clau de paso d'o certificau abaxo."
+
+msgid "Certificate:"
+msgstr "Certificau:"
+
+msgid "Password:"
+msgstr "Clau de paso:"
+
+msgid "View Certificate#x2026;"
+msgstr "Veyer certificau#x2026;"
+
+msgid "Downloads"
+msgstr "Descargas"
+
+msgid "Encodings"
+msgstr "Codificacions"
+
+msgid "Fonts"
+msgstr "Fuentz"
+
+msgid "Home page"
+msgstr "Pachina prencipal"
+
+msgid "Languages"
+msgstr "Luengas"
+
+msgid "Style"
+msgstr "Estilo"
+
+msgid "Temporary Files"
+msgstr "Archivos temporals"
+
+msgid "Web Content"
+msgstr "Conteniu web"
+
+msgid "For example, not from advertisers on these sites"
+msgstr "Por exemplo, no de publicidat d'istos puestos"
+
+msgid "Automatically open downloaded files"
+msgstr "Ubrir automaticament os archivos descargaus"
+
+msgid "Add Language"
+msgstr "Anyadir luenga"
+
+msgid "Allow popup windows"
+msgstr "Permitir finestras emerchentz"
+
+msgid "Choose a language:"
+msgstr "Tríe una luenga:"
+
+msgid "Clear"
+msgstr "Borrar"
+
+msgid "Default:"
+msgstr "Predeterminada:"
+
+msgid "Enable JavaScript"
+msgstr "Activar JavaScript"
+
+msgid "Enable plugins"
+msgstr "Activar complementos"
+
+msgid "Fonts  Style"
+msgstr "Fuentz y estilo"
+
+msgid "Language"
+msgstr "Luenga"
+
+msgid "MB"
+msgstr "MB"
+
+msgid "Monospace font:"
+msgstr "Fuent monoespaciada:"
+
+msgid "Only from sites you visit"
+msgstr "Solo que dende os puestos que visita"
+
+msgid "Privacy"
+msgstr "Privacidat"
+
+msgid "Sans serif font:"
+msgstr "Fuent Sans Serif:"
+
+msgid "Serif font:"
+msgstr "Fuent Serif:"
+
+msgid "Set to Current Page"
+msgstr "Poner a pachina actual"
+
+msgid "Set to Blank Page"
+msgstr "Poner una pachina bueda"
+
+msgid "Use custom stylesheet"
+msgstr "Fer servir fuella d'estilos presonalizada"
+
+msgid "Address:"
+msgstr "Adreza:"
+
+msgid "Always accept"
+msgstr "Aceptar ta cutio"
+
+msgid "Disk space:"
+msgstr "Espacio en o disco:"
+
+msgid "Download folder:"
+msgstr "Carpeta de descarga:"
+
+msgid "Edit Stylesheet#x2026;"
+msgstr "Editar fuella d'estilos#x2026;"
+
+msgid "Never accept"
+msgstr "Brenca aceptar"
+
+msgid "Remember passwords"
+msgstr "Remerar claus de paso"
+
+msgid "Use system fonts"
+msgstr "Fer servir fuentz d'o sistema"
+
+msgid "Background"
+msgstr "Fundo"
+
+msgid "Footers"
+msgstr "Piet de pachina"
+
+msgid "Frames"
+msgstr "Marcos"
+
+msgid "Headers"
+msgstr "Cabeceras"
+
+msgid "As laid out on the screen"
+msgstr "Como se distribuyan en a pantalla"
+
+msgid "Only the selected frame"
+msgstr "Solo que lo marco trigau"
+
+msgid "Page title"
+msgstr "Titol de pachina"
+
+msgid "Page numbers"
+msgstr "Numeros de pachina"
+
+msgid "Print background colors"
+msgstr "Imprentar colors d'o fundo"
+
+msgid "Print background images"
+msgstr "Imprentar imachens d'o fundo"
+
+msgid "Date"
+msgstr "Calendata"
+
+msgid "Each frame separately"
+msgstr "Cada marco por separau"
+
+msgid "Page address"
+msgstr "Adreza d'a pachina"
+
+msgid "Unknown"
+msgstr "Desconoxiu"
+
+msgid "Web Inspector"
+msgstr "Inspector web"
+
+msgid "Epiphany can't be used now. Initialization failed."
+msgstr "Epiphany no se puede fer servir agora. Ha fallau a inicializacion."
+
+msgid ""
+"CA Certificates file we should use was not found, all SSL sites will be "
+"considered to have a broken certificate."
+msgstr ""
+"No s'ha trobau l'archivo de certificaus CA que se teneba que fer servir, se "
+"considerara que totz os puestos con certificau SSL lo tienen crebau."
+
+msgid "Send an email message to “%s”"
+msgstr "Ninviar un mensache d'e-mail a “%s”"
+
+msgid "Arabic (IBM-864)"
+msgstr "Arabe (IBM-864)"
+
+msgid "Arabic (ISO-8859-6)"
+msgstr "Arabe (ISO-8859-6)"
+
+msgid "Arabic (MacArabic)"
+msgstr "Arabe (MacArabic)"
+
+msgid "Arabic (Windows-1256)"
+msgstr "Arabe(Windows-1256)"
+
+msgid "Baltic (ISO-8859-13)"
+msgstr "Baltico (ISO-8859-13)"
+
+msgid "Baltic (ISO-8859-4)"
+msgstr "Baltico (ISO-8859-4)"
+
+msgid "Baltic (Windows-1257)"
+msgstr "Baltico (Windows-1257)"
+
+msgid "Armenian (ARMSCII-8)"
+msgstr "Armenio (ARMSCII-8)"
+
+msgid "Georgian (GEOSTD8)"
+msgstr "Cheorchiano (GEOSTD8)"
+
+msgid "Central European (IBM-852)"
+msgstr "Centrouropeo (IBM-852)"
+
+msgid "Central European (ISO-8859-2)"
+msgstr "Centrouropeo (ISO-8859-2)"
+
+msgid "Central European (MacCE)"
+msgstr "Centrouropeo (MacCE)"
+
+msgid "Central European (Windows-1250)"
+msgstr "Centrouropeo (Windows-1250)"
+
+msgid "Chinese Simplified (GB18030)"
+msgstr "Chino simplificau (GB18030)"
+
+msgid "Chinese Simplified (GB2312)"
+msgstr "Chino simplificau (GB2312)"
+
+msgid "Chinese Simplified (GBK)"
+msgstr "Chino simplificau (GBK)"
+
+msgid "Chinese Simplified (HZ)"
+msgstr "Chino simplificau (HZ)"
+
+msgid "Chinese Simplified (ISO-2022-CN)"
+msgstr "Chino simplificau (ISO-2022-CN)"
+
+msgid "Chinese Traditional (Big5)"
+msgstr "Chino tradicional (Big5)"
+
+msgid "Chinese Traditional (Big5-HKSCS)"
+msgstr "Chino tradicional (Big5-HKSCS)"
+
+msgid "Chinese Traditional (EUC-TW)"
+msgstr "Chino tradicional (EUC-TW)"
+
+msgid "Cyrillic (IBM-855)"
+msgstr "Cirilico (IBM-855)"
+
+msgid "Cyrillic (ISO-8859-5)"
+msgstr "Cirilico (ISO-8859-5)"
+
+msgid "Cyrillic (ISO-IR-111)"
+msgstr "Cirilico (ISO-IR-111)"
+
+msgid "Cyrillic (KOI8-R)"
+msgstr "Cirilico (KOI8-R)"
+
+msgid "Cyrillic (MacCyrillic)"
+msgstr "Cirilico (MacCyrillic)"
+
+msgid "Cyrillic (Windows-1251)"
+msgstr "Cirilico (Windows-1251)"
+
+msgid "Cyrillic/Russian (IBM-866)"
+msgstr "Cirilico/Ruso (IBM-866)"
+
+msgid "Greek (ISO-8859-7)"
+msgstr "Griego (ISO-8859-7)"
+
+msgid "Greek (MacGreek)"
+msgstr "Griego (MacGreek)"
+
+msgid "Greek (Windows-1253)"
+msgstr "Griego (Windows-1253)"
+
+msgid "Gujarati (MacGujarati)"
+msgstr "Gujarati (MacGujarati)"
+
+msgid "Gurmukhi (MacGurmukhi)"
+msgstr "Gurmukhi (MacGurmukhi)"
+
+msgid "Hindi (MacDevanagari)"
+msgstr "Hindi (MacDevanagari)"
+
+msgid "Hebrew (IBM-862)"
+msgstr "Hebreo (IBM-862)"
+
+msgid "Hebrew (ISO-8859-8-I)"
+msgstr "Hebreo (ISO-8859-8-I)"
+
+msgid "Hebrew (MacHebrew)"
+msgstr "Hebreo (MacHebrew)"
+
+msgid "Hebrew (Windows-1255)"
+msgstr "Hebreo (Windows-1255)"
+
+msgid "Visual Hebrew (ISO-8859-8)"
+msgstr "Hebreo visual (ISO-8859-8)"
+
+msgid "Japanese (EUC-JP)"
+msgstr "Chapones (EUC-JP)"
+
+msgid "Japanese (ISO-2022-JP)"
+msgstr "Chapones (ISO-2022-JP)"
+
+msgid "Japanese (Shift-JIS)"
+msgstr "Chapones (Shift-JIS)"
+
+msgid "Korean (EUC-KR)"
+msgstr "Coreano (EUC-KR)"
+
+msgid "Korean (ISO-2022-KR)"
+msgstr "Coreano (ISO-2022-KR)"
+
+msgid "Korean (JOHAB)"
+msgstr "Coreano (JOHAB)"
+
+msgid "Korean (UHC)"
+msgstr "Coreano (UHC)"
+
+msgid "Celtic (ISO-8859-14)"
+msgstr "Celta (ISO-8859-14)"
+
+msgid "Icelandic (MacIcelandic)"
+msgstr "Islandes (MacIcelandic)"
+
+msgid "Nordic (ISO-8859-10)"
+msgstr "Nordico (ISO-8859-10)"
+
+msgid "Persian (MacFarsi)"
+msgstr "Persa (MacFarsi)"
+
+msgid "Croatian (MacCroatian)"
+msgstr "Croata (MacCroatian)"
+
+msgid "Romanian (MacRomanian)"
+msgstr "Rumano (MacRomanian)"
+
+msgid "Romanian (ISO-8859-16)"
+msgstr "Rumano (ISO-8859-16)"
+
+msgid "South European (ISO-8859-3)"
+msgstr "Sur uropeo (ISO-8859-3)"
+
+msgid "Thai (TIS-620)"
+msgstr "Tailandes (TIS-620)"
+
+msgid "Thai (ISO-8859-11)"
+msgstr "Tailandes (ISO-8859-11)"
+
+msgid "Thai (Windows-874)"
+msgstr "Tailandes (Windows-874)"
+
+msgid "Turkish (IBM-857)"
+msgstr "Turco (IBM-857)"
+
+msgid "Turkish (ISO-8859-9)"
+msgstr "Turco (ISO-8859-9)"
+
+msgid "Turkish (MacTurkish)"
+msgstr "Turco (MacTurkish)"
+
+msgid "Turkish (Windows-1254)"
+msgstr "Turco (Windows-1254)"
+
+msgid "Unicode (UTF-8)"
+msgstr "Unicode (UTF-8)"
+
+msgid "Cyrillic/Ukrainian (KOI8-U)"
+msgstr "Cirilico/Ucraniano (KOI8-U)"
+
+msgid "Cyrillic/Ukrainian (MacUkrainian)"
+msgstr "Cirilico/Ucraniano (MacUkranian)"
+
+msgid "Vietnamese (TCVN)"
+msgstr "Vietnamita (TCVN)"
+
+msgid "Vietnamese (VISCII)"
+msgstr "Vietnamita (VISCII)"
+
+msgid "Vietnamese (VPS)"
+msgstr "Vietnamita (VPS)"
+
+msgid "Vietnamese (Windows-1258)"
+msgstr "Vietnamita (Windows-1258)"
+
+msgid "Western (IBM-850)"
+msgstr "Occidental (IBM-850)"
+
+msgid "Western (ISO-8859-1)"
+msgstr "Occidental (ISO-8859-1)"
+
+msgid "Western (ISO-8859-15)"
+msgstr "Occidental (ISO-8859-15)"
+
+msgid "Western (MacRoman)"
+msgstr "Occidental (MacRoman)"
+
+msgid "Western (Windows-1252)"
+msgstr "Occidental (Windows-1252)"
+
+msgid "English (US-ASCII)"
+msgstr "Angles (US-ASCII)"
+
+msgid "Unicode (UTF-16 BE)"
+msgstr "Unicode (UTF-16 BE)"
+
+msgid "Unicode (UTF-16 LE)"
+msgstr "Unicode (UTF-16 LE)"
+
+msgid "Unicode (UTF-32 BE)"
+msgstr "Unicode (UTF-32 BE)"
+
+msgid "Unicode (UTF-32 LE)"
+msgstr "Unicode (UTF-32 LE)"
+
+msgid "Unknown (%s)"
+msgstr "Desconoxiu (%s)"
+
+msgid "All"
+msgstr "Tot"
+
+msgid "Others"
+msgstr "Atros"
+
+msgid "Local files"
+msgstr "Archivos locals"
+
+msgid "Blank page"
+msgstr "Pachina bueda"
+
+msgid "Not now"
+msgstr "Agora no"
+
+msgid "Store password"
+msgstr "Alzar clau de paso"
+
+msgid ""
+"Would you like to store the password for %s in %s?"
+msgstr "Quiere alzar la clau de paso ta %s en %s?"
+
+msgid "Deny"
+msgstr "Denegar"
+
+msgid "Allow"
+msgstr "Permitir"
+
+msgid "The page at %s wants to know your location."
+msgstr "A pachina %s quiere saber a suya ubicacion."
+
+msgid "None specified"
+msgstr "Denguna especificada"
+
+msgid "Oops! Error loading %s"
+msgstr "Error en cargar %s"
+
+msgid "Oops! It was impossible to load this website"
+msgstr "Estio imposible de cargar ista pachina web"
+
+msgid ""
+"The website at %s is probably unavailable, the precise "
+"error was:<em>%s</em>. If this persists you might want "
+"to check your internet connection or if the website at %s "
+"is working correctly."
+msgstr ""
+"Probablement o puesto web en %s no sia disponible, la error "
+"estio: <em>%s</em>. Si isto contina, puede que ameniste "
+"comprebar a suya conexion a Internet u si la pachina web en %s</"
+"strong> funciona correctament."
+
+msgid "Try again"
+msgstr "Prebar atra vegada"
+
+msgid "Oops! This site might have caused Epiphany to close unexpectedly"
+msgstr "O puesto puet haber causau que Epiphany se trancase inesperadament."
+
+msgid ""
+"This page was loading when the web browser closed unexpectedly. This "
+"might happen again if you reload the page. If it does, please report the "
+"problem to the %s developers."
+msgstr ""
+"Ista pachina yera cargando-se cuan lo navegado se tranco de traza inesperada."
+"Isto puet pasar atra vegada si torna a cargar la pachina. Si pasa, "
+"informe d'o problema a los desembolicadors de %s."
+
+msgid "Load again anyway"
+msgstr "Prebar de cargar atra vegada de todas trazas"
+
+msgid "http://www.google.com/search?q=%sie=UTF-8oe=UTF-8"
+msgstr "http://www.google.es/search?q=%sie=UTF-8oe=UTF-8"
+
+msgid "Loading “%s”…"
+msgstr "Ye cargando-se “%s”…"
+
+msgid "Loading…"
+msgstr "Ye cargando-se…"
+
+msgid "%s Files"
+msgstr "%s archivos"
+
+msgid "File is not a valid .desktop file"
+msgstr "L'archivo no ye un archivo .desktop valido"
+
+msgid "Unrecognized desktop file Version '%s'"
+msgstr "No se renonoixe a version \"%s\" d'o archivo desktop"
+
+msgid "Starting %s"
+msgstr "Prencipiando %s"
+
+msgid "Application does not accept documents on command line"
+msgstr "L'aplicacion no acepta documento en a linea de comandos"
+
+msgid "Unrecognized launch option: %d"
+msgstr "Opcion de execucion no reconoxida: %d"
+
+msgid "Can't pass document URIs to a 'Type=Link' desktop entry"
+msgstr ""
+"No se puet pasar os URI de documentos a dentradas d'escritorio Type=Link"
+
+msgid "Not a launchable item"
+msgstr "O elemento no ye echecutable"
+
+msgid "Disable connection to session manager"
+msgstr "Desactivar a conexion a lo chestor de sesion"
+
+msgid "Specify file containing saved configuration"
+msgstr "Trigar l'archivo an ye a configuracion alzada"
+
+msgid "FILE"
+msgstr "ARCHIVO"
+
+msgid "Specify session management ID"
+msgstr "Especifique l'ID de chestion d'a sesion"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Session management options:"
+msgstr "Opcions de chestion d'a sesion:"
+
+msgid "Show session management options"
+msgstr "Amostrar as opcions de chestion d'a sesion"
+
+msgid "Show “%s”"
+msgstr "Amostrar “%s“"
+
+msgid "Move on Toolbar"
+msgstr "Mover enta la barra d'ainas"
+
+msgid "Move the selected item on the toolbar"
+msgstr "Mueve lo elemento trigau en a barra d'ainas"
+
+msgid "Remove from Toolbar"
+msgstr "Sacar d'a barra d'ainas"
+
+msgid "Remove the selected item from the toolbar"
+msgstr "Saca o elemento trigau d'a barra d'ainas"
+
+msgid "Delete Toolbar"
+msgstr "Sacar barra d'ainas"
+
+msgid "Remove the selected toolbar"
+msgstr "Sacar a barra d'ainas trigada"
+
+msgid "Separator"
+msgstr "Separator"
+
+msgid "All supported types"
+msgstr "Totz os tipos soportaus"
+
+msgid "Web pages"
+msgstr "Pachinas web"
+
+msgid "Images"
+msgstr "Imachens"
+
+msgid "All files"
+msgstr "Toz os archivos"
+
+msgid "Desktop"
+msgstr "Escritorio"
+
+msgid "Could not create a temporary directory in “%s”."
+msgstr "No s'ha puesto creyar o directorio temporal en: \"%s\"."
+
+msgid "The file “%s” exists. Please move it out of the way."
+msgstr "l'archivo \"%s\" ya existe. Muevalo difuera d'a ruta."
+
+msgid "Failed to create directory “%s”."
+msgstr "S'ha fallau al creyar o directorio \"%s\"."
+
+msgid "Directory “%s” is not writable"
+msgstr "O directorio \"%s\" no ye escribible"
+
+msgid "You do not have permission to create files in this directory."
+msgstr "No tiene os permisos ta creyar archivos en iste directorio."
+
+msgid "Directory not Writable"
+msgstr "Directorio no escribible"
+
+msgid "Cannot overwrite existing file “%s”"
+msgstr "No se puet sobrescribir l'archivo \"%s\""
+
+msgid ""
+"A file with this name already exists and you don't have permission to "
+"overwrite it."
+msgstr ""
+"Ya existe un archivo con iste nome y no tiene permiso ta sobrescribir-lo."
+
+msgid "Cannot Overwrite File"
+msgstr "No se puet sobrescribir l'archivo"
+
+msgid "Could not display help: %s"
+msgstr "No s'ha puesto amostrar l'aduya: %s"
+
+msgid "Master password needed"
+msgstr "Cal la clau de paso mayestra"
+
+msgid ""
+"The passwords from the previous version (Gecko) are locked with a master "
+"password. If you want Epiphany to import them, please enter your master "
+"password below."
+msgstr ""
+"As claus de paso d'a version anterior (Gecko) son bloqueyadas con una clau "
+"de paso mayestra. Si quiere que Epiphany las importe meta debaxo a suya clau "
+"de paso mayestra."
+
+msgid "Failed to copy cookies file from Mozilla."
+msgstr "Ha fallau en copiar l'archivo de \"cookies\" de Mozilla."
+
+msgid "Popup Windows"
+msgstr "Finestras emerchents"
+
+msgid "History"
+msgstr "Historial"
+
+msgid "Bookmark"
+msgstr "Marcador"
+
+msgid "Bookmarks"
+msgstr "Marcadors"
+
+msgid "Address Entry"
+msgstr "Dentrada d'adreza"
+
+msgid "Download"
+msgstr "Descargar"
+
+msgid "Today %I:%M %p"
+msgstr "Hue %H:%M"
+
+msgid "Yesterday %I:%M %p"
+msgstr "Ayere %H:%M"
+
+msgid "%a %I:%M %p"
+msgstr "%a %H:%M"
+
+msgid "%b %d %I:%M %p"
+msgstr "%d %b %H:%M"
+
+msgid "%b %d %Y"
+msgstr "%d %b %Y"
+
+msgid "50%"
+msgstr "50%"
+
+msgid "75%"
+msgstr "75%"
+
+msgid "100%"
+msgstr "100%"
+
+msgid "125%"
+msgstr "125%"
+
+msgid "150%"
+msgstr "150%"
+
+msgid "175%"
+msgstr "175%"
+
+msgid "200%"
+msgstr "200%"
+
+msgid "300%"
+msgstr "300%"
+
+msgid "400%"
+msgstr "400%"
+
+msgid "%u:%02u hour left"
+msgid_plural "%u:%02u hours left"
+msgstr[0] "manca %u:%02u hora"
+msgstr[1] "mancan %u:%02u horas"
+
+msgid "%u hour left"
+msgid_plural "%u hours left"
+msgstr[0] "manca %u hora"
+msgstr[1] "mancan %u horas"
+
+msgid "%u:%02u minute left"
+msgid_plural "%u:%02u minutes left"
+msgstr[0] "manca %u:%02u minuto"
+msgstr[1] "mancan %u:%02u minutos"
+
+msgid "%u second left"
+msgid_plural "%u seconds left"
+msgstr[0] "manca %u segundo"
+msgstr[1] "mancan %u segundos"
+
+msgid "Finished"
+msgstr "Rematau"
+
+msgid "Error downloading: %s"
+msgstr "Error en descargar: %s"
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Open"
+msgstr "Ubrir"
+
+msgid "Show in folder"
+msgstr "Amostrar en una carpeta"
+
+msgid "Starting…"
+msgstr "Prencipiando…"
+
+msgid "Drag and drop this icon to create a link to this page"
+msgstr "Arrastre y suelte iste icono ta creyar un enrastre a ista pachina"
+
+msgid "%s:"
+msgstr "%s:"
+
+msgid "Executes the script “%s”"
+msgstr "Executa l'script \"%s\""
+
+msgid "%d _Similar"
+msgid_plural "%d _Similar"
+msgstr[0] "%d _igual"
+msgstr[1] "%d _iguals"
+
+msgid "_Unify With %d Identical Bookmark"
+msgid_plural "_Unify With %d Identical Bookmarks"
+msgstr[0] "_Unificar con %d marcador igual"
+msgstr[1] "_Unificar con %d marcadors iguals"
+
+msgid "“%s” Properties"
+msgstr "Propiedaz de “%s”"
+
+msgid "Title:"
+msgstr "Titol:"
+
+msgid "Topics:"
+msgstr "Temas:"
+
+msgid "Show all topics"
+msgstr "Amostrar totz os temas"
+
+msgid "Entertainment"
+msgstr "Entretenimiento"
+
+msgid "News"
+msgstr "Noticias"
+
+msgid "Shopping"
+msgstr "Mercau"
+
+msgid "Sports"
+msgstr "Esportes"
+
+msgid "Travel"
+msgstr "Viaches"
+
+msgid "Work"
+msgstr "Treballo"
+
+msgid "Update bookmark “%s”?"
+msgstr "Quiere esviellar o marcador \"%s\"?"
+
+msgid "The bookmarked page has moved to “%s”."
+msgstr "A pachina marcada s'ha moviu enta \"%s\"."
+
+msgid "Don't Update"
+msgstr "No esviellar"
+
+msgid "Update"
+msgstr "Esviellar"
+
+msgid "Update Bookmark?"
+msgstr "Quiere esviellar o marcador?"
+
+msgid "Most Visited"
+msgstr "Mas vesitaus"
+
+msgid "Not Categorized"
+msgstr "No categorizau"
+
+msgid "Nearby Sites"
+msgstr "Puestos a man"
+
+msgid "Untitled"
+msgstr "Sin titol"
+
+msgid "Epiphany (RDF)"
+msgstr "Epiphany (RDF)"
+
+msgid "Mozilla (HTML)"
+msgstr "Mozilla (HTML)"
+
+msgid "Remove from this topic"
+msgstr "Sacar-lo d'iste tema"
+
+msgid "File"
+msgstr "Archivo"
+
+msgid "Edit"
+msgstr "Editar"
+
+msgid "View"
+msgstr "Veyer"
+
+msgid "Help"
+msgstr "Aduya"
+
+msgid "New Topic"
+msgstr "Tema nuevo"
+
+msgid "Create a new topic"
+msgstr "Creyar un tema nuevo"
+
+msgid "Open in New _Window"
+msgid_plural "Open in New _Windows"
+msgstr[0] "Ubrir en una nueva _finestra"
+msgstr[1] "Ubrir en nuevas _finestras"
+
+msgid "Open the selected bookmark in a new window"
+msgstr "Ubre lo marcador trigau en una finestra nueva"
+
+msgid "Open in New _Tab"
+msgid_plural "Open in New _Tabs"
+msgstr[0] "Ubrir en una pestanya nueva"
+msgstr[1] "Ubrir en _pestanyas nuevas"
+
+msgid "Open the selected bookmark in a new tab"
+msgstr "Ubre lo marcador trigau en una pestanya nueva"
+
+msgid "Rename…"
+msgstr "Renombrar…"
+
+msgid "Rename the selected bookmark or topic"
+msgstr "Renombra lo marcador trigau u lo tema"
+
+msgid "Properties"
+msgstr "Propiedatz"
+
+msgid "View or modify the properties of the selected bookmark"
+msgstr "Veyer u cambear as propiedatz d'o marcador trigau"
+
+msgid "Import Bookmarks…"
+msgstr "Importar marcadors…"
+
+msgid "Import bookmarks from another browser or a bookmarks file"
+msgstr "Importar marcadors dende atro navegador u un archivo de marcadors"
+
+msgid "Export Bookmarks…"
+msgstr "Exportar marcadors…"
+
+msgid "Export bookmarks to a file"
+msgstr "Exportar marcadors d'un archivo"
+
+msgid "Close"
+msgstr "Trancar"
+
+msgid "Close the bookmarks window"
+msgstr "Trancar a finestra de marcadors"
+
+msgid "Cut"
+msgstr "Tallar"
+
+msgid "Cut the selection"
+msgstr "Talla la tria"
+
+msgid "Copy"
+msgstr "Copiar"
+
+msgid "Copy the selection"
+msgstr "Copia la tria"
+
+msgid "Paste"
+msgstr "Apegar"
+
+msgid "Paste the clipboard"
+msgstr "Apegar d'o portapapels"
+
+msgid "Delete"
+msgstr "Borrar"
+
+msgid "Delete the selected bookmark or topic"
+msgstr "Borra o marcador trigau u lo tema"
+
+msgid "Select All"
+msgstr "Trigar tot"
+
+msgid "Select all bookmarks or text"
+msgstr "Trigar totz os marcadors u texto"
+
+msgid "Contents"
+msgstr "Contenius"
+
+msgid "Display bookmarks help"
+msgstr "Amostrar aduya d'os marcadors"
+
+msgid "About"
+msgstr "Arredol"
+
+msgid "Display credits for the web browser creators"
+msgstr "Amostrar os creditos d'os creyadors d'o navegador web"
+
+msgid "Show on Toolbar"
+msgstr "Amostrar en a barra d'ainas"
+
+msgid "Show the selected bookmark on a toolbar"
+msgstr "Amostrar o marcador trigau en una barra d'ainas"
+
+msgid "Title"
+msgstr "Titol"
+
+msgid "Show the title column"
+msgstr "Amostrar a columna de titol"
+
+msgid "Address"
+msgstr "Adreza"
+
+msgid "Show the address column"
+msgstr "Amostrar a columna d'adreza"
+
+msgid "Type a topic"
+msgstr "Escriba un asunto"
+
+msgid "Delete topic “%s”?"
+msgstr "Quiere borrar o tema \"%s\"?"
+
+msgid "Delete this topic?"
+msgstr "Quiere borrar o tema?"
+
+msgid ""
+"Deleting this topic will cause all its bookmarks to become uncategorized, "
+"unless they also belong to other topics. The bookmarks will not be deleted."
+msgstr ""
+"En borrar iste tema, totz os suyos marcadors pasaran a \"Sin categoria\", de "
+"no ser que perteneixcan a atros temas. Os marcadors no se borraran."
+
+msgid "Delete Topic"
+msgstr "Borrar tema"
+
+msgid "Firefox"
+msgstr "Firefox"
+
+msgid "Firebird"
+msgstr "Firebird"
+
+msgid "Mozilla “%s” profile"
+msgstr "O perfil “%s” de Mozilla"
+
+msgid "Galeon"
+msgstr "Galeon"
+
+msgid "Konqueror"
+msgstr "Konqueror"
+
+msgid "Import failed"
+msgstr "Ha fallau la importacion"
+
+msgid "Import Failed"
+msgstr "Ha fallau la importacion"
+
+msgid ""
+"The bookmarks from “%s” could not be imported because the file is corrupted "
+"or of an unsupported type."
+msgstr ""
+"No s'han puesto importar os marcadors de \"%s\" debiu a que l'archivo ye "
+"corrompiu u ye de un tipo no soportau."
+
+msgid "Import Bookmarks from File"
+msgstr "Importar marcadors d'o archivo"
+
+msgid "Firefox/Mozilla bookmarks"
+msgstr "Marcadors de Firefox/Mozilla"
+
+msgid "Galeon/Konqueror bookmarks"
+msgstr "Marcadors de Galeon/Konqueror"
+
+msgid "Epiphany bookmarks"
+msgstr "Marcadors d'epiphany"
+
+msgid "Export Bookmarks"
+msgstr "Exportar marcadors"
+
+msgid "File format:"
+msgstr "Formato d'archivo:"
+
+msgid "Import Bookmarks"
+msgstr "Importar marcadors"
+
+msgid "Import"
+msgstr "Importar"
+
+msgid "Import bookmarks from:"
+msgstr "Importar marcadors dende:"
+
+msgid "Copy Address"
+msgstr "Copiar adreza"
+
+msgid "Search:"
+msgstr "Buscar:"
+
+msgid "Topics"
+msgstr "Temas"
+
+msgid "Show properties for this bookmark"
+msgstr "Amuestra las propiedatz ta iste marcador"
+
+msgid "Open this bookmark in a new tab"
+msgstr "Ubre iste marcador en una pestanya nueva"
+
+msgid "Open this bookmark in a new window"
+msgstr "Ubre iste marcador en una finestra nueva"
+
+msgid "Open in New Tabs"
+msgstr "Ubrir en pestanyas nuevas"
+
+msgid "Open the bookmarks in this topic in new tabs"
+msgstr "Ubre los marcadors d'iste tema en pestanyas nuevas"
+
+msgid "Related"
+msgstr "Relacionau"
+
+msgid "Topic"
+msgstr "Tema"
+
+msgid "Create topic “%s”"
+msgstr "Creyar tema \"%s\""
+
+msgid "Other…"
+msgstr "Atros…"
+
+msgid "Other encodings"
+msgstr "Atras codificacions"
+
+msgid "Not found"
+msgstr "No trobau"
+
+msgid "Wrapped"
+msgstr "Dende o prencipie"
+
+msgid "Find links:"
+msgstr "Mirar enlaces:"
+
+msgid "Find:"
+msgstr "Buscar:"
+
+msgid "Case sensitive"
+msgstr "Sensible a mayusclas"
+
+msgid "Find Previous"
+msgstr "Trobar anterior"
+
+msgid "Find previous occurrence of the search string"
+msgstr "Trobar l'aparixion anterior d'a cadena de busqueda"
+
+msgid "Find Next"
+msgstr "Trobar vinient"
+
+msgid "Find next occurrence of the search string"
+msgstr "Trobar l'aparixion vinient d'a cadena de busqueda"
+
+msgid "Leave Fullscreen"
+msgstr "Surtir de pantalla completa"
+
+msgid "Go"
+msgstr "Ir-ie"
+
+msgid "Open the selected history link in a new window"
+msgstr "Ubrir o enrastre de l'historial trigau en una finestra nueva"
+
+msgid "Open the selected history link in a new tab"
+msgstr "Ubrir l'enrastre de l'historial trigau en una pestanya nueva"
+
+msgid "Add Bookmark…"
+msgstr "Anyadir marcador…"
+
+msgid "Bookmark the selected history link"
+msgstr "Marcar l'enrastre historico trigau"
+
+msgid "Close the history window"
+msgstr "Trancar a finestra d'o historial"
+
+msgid "Delete the selected history link"
+msgstr "Borrar l'enrastre de l'historial trigau"
+
+msgid "Select all history links or text"
+msgstr "Trie totz os enrastres d'o historial u texto"
+
+msgid "Clear History"
+msgstr "Limpiar historial"
+
+msgid "Clear your browsing history"
+msgstr "Limpiar l'historial de navegacion"
+
+msgid "Display history help"
+msgstr "Amostrar l'aduya de l'historial"
+
+msgid "Date and Time"
+msgstr "Calendata y hora"
+
+msgid "Show the date and time column"
+msgstr "Amostrar as columnas de titol y calendata"
+
+msgid "Clear browsing history?"
+msgstr "Borrar historial de navegacion?"
+
+msgid ""
+"Clearing the browsing history will cause all history links to be permanently "
+"deleted."
+msgstr ""
+"O borrau d'o historial de navego ferá que totz os enrastres d'o historial se "
+"borren ta cutio."
+
+msgid "Last 30 minutes"
+msgstr "Zagueros 30 minutos"
+
+msgid "Today"
+msgstr "Güe"
+
+msgid "Last %d day"
+msgid_plural "Last %d days"
+msgstr[0] "Zaguer %d diya"
+msgstr[1] "Zagueros %d diyas"
+
+msgid "Sites"
+msgstr "Puestos"
+
+msgid "GNOME Web Browser"
+msgstr "Navegador web de GNOME"
+
+msgid "Open a new tab in an existing browser window"
+msgstr "Ubre una pestanya nueva en una finestra existent d'o navegador"
+
+msgid "Open a new browser window"
+msgstr "Ubre una finestra nueva d'o navegador"
+
+msgid "Launch the bookmarks editor"
+msgstr "Encetar o editor de marcadors"
+
+msgid "Import bookmarks from the given file"
+msgstr "Importar marcadors dende l'archivo dau"
+
+msgid "Load the given session file"
+msgstr "Cargar l'archivo de sesions dau"
+
+msgid "Add a bookmark"
+msgstr "Adibir un marcador"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "Start a private instance"
+msgstr "Encetar una instancia privada"
+
+msgid "Profile directory to use in the private instance"
+msgstr "Directorio de perfils ta fer servir en a instancia privada"
+
+msgid "DIR"
+msgstr "DIR"
+
+msgid "URL …"
+msgstr "URL…"
+
+msgid "Could not start GNOME Web Browser"
+msgstr "No s'ha puesto prencipiar o navegador web de GNOME"
+
+msgid ""
+"Startup failed because of the following error:\n"
+"%s"
+msgstr ""
+"L'inicio ha fallau debiu a la vinient error:\n"
+"%s"
+
+msgid "GNOME Web Browser options"
+msgstr "Opcions d'o navegador web de GNOME"
+
+msgid "Close tab"
+msgstr "Trancar pestanya"
+
+msgid "Downloads will be aborted and logout proceed in %d second."
+msgid_plural "Downloads will be aborted and logout proceed in %d seconds."
+msgstr[0] ""
+"As descargas se cancelaran y se procedera a la surtida en %d segundo."
+msgstr[1] ""
+"As descargas se cancelaran y se procedera a la surtida en %d segundos."
+
+msgid "Abort pending downloads?"
+msgstr "Quiere cancelar as descargas pendientz?"
+
+msgid ""
+"There are still downloads pending. If you log out, they will be aborted and "
+"lost."
+msgstr ""
+"Encara bi ha descargas pendientz. Si surte d'a sesion, se cancelaran y se "
+"perderan."
+
+msgid "Cancel Logout"
+msgstr "Cancelar surtida"
+
+msgid "Abort Downloads"
+msgstr "Cancelar descargas"
+
+msgid "Don't recover"
+msgstr "No recuperar"
+
+msgid "Recover session"
+msgstr "Recuperar sesion"
+
+msgid "Do you want to recover the previous browser windows and tabs?"
+msgstr "Quiere recuperar as finestras y pestanyas de navego anteriors?"
+
+msgid "Switch to this tab"
+msgstr "Cambear a ista pestanya"
+
+msgid "Back"
+msgstr "Tazaga"
+
+msgid "Go to the previous visited page"
+msgstr "Ir a la pachina vesitada anterior"
+
+msgid "Back history"
+msgstr "Tazaga por l'historial"
+
+msgid "Forward"
+msgstr "Tabant"
+
+msgid "Go to the next visited page"
+msgstr "Ir a la vinient pachina vesitada"
+
+msgid "Forward history"
+msgstr "Avanza por l'historial"
+
+msgid "Up"
+msgstr "Puyar"
+
+msgid "Go up one level"
+msgstr "Puyar un ran"
+
+msgid "List of upper levels"
+msgstr "Lista d'os rans superiors"
+
+msgid "Enter a web address to open, or a phrase to search for"
+msgstr "Meta una adreza web ta ubrir, u una frase ta mirar"
+
+msgid "Zoom"
+msgstr "Zoom"
+
+msgid "Adjust the text size"
+msgstr "Achustar o tamanyo d'o texto"
+
+msgid "Go to the address entered in the address entry"
+msgstr "Ir a la adreza mesa"
+
+msgid "Home"
+msgstr "Inicio"
+
+msgid "Go to the home page"
+msgstr "Ir a la pachina d'inicio"
+
+msgid "New Tab"
+msgstr "Nueva Pestanya"
+
+msgid "Open a new tab"
+msgstr "Ubrir una nueva pestanya"
+
+msgid "New Window"
+msgstr "Nueva finestra"
+
+msgid "Open a new window"
+msgstr "Ubrir una finestra nueva"
+
+msgid "Default"
+msgstr "Predeterminau"
+
+msgid "Text below icons"
+msgstr "Texto debaxo d'os iconos"
+
+msgid "Text beside icons"
+msgstr "Texto a man d'os iconos"
+
+msgid "Icons only"
+msgstr "Solo que os iconos"
+
+msgid "Text only"
+msgstr "Solo que o texto"
+
+msgid "Toolbar Editor"
+msgstr "Editor d'a barra d'ainas"
+
+msgid "Toolbar button labels:"
+msgstr "Etiquetas d'os botons d'a barra:"
+
+msgid "Add a New Toolbar"
+msgstr "Adibir una nueva barra de ferramientas"
+
+msgid "Tools"
+msgstr "Ainas"
+
+msgid "Tabs"
+msgstr "Pestanyas"
+
+msgid "Toolbars"
+msgstr "Barras de ferramientas"
+
+msgid "Open…"
+msgstr "Ubrir…"
+
+msgid "Open a file"
+msgstr "Ubrir un archivo"
+
+msgid "Save As…"
+msgstr "Guardar como…"
+
+msgid "Save the current page"
+msgstr "Guardar a pachina autual"
+
+msgid "Page Setup"
+msgstr "Configuracion de pachina"
+
+msgid "Setup the page settings for printing"
+msgstr "Configurar as opcions d'imprenta"
+
+msgid "Print Preview"
+msgstr "Vista previa d'imprenta"
+
+msgid "Print preview"
+msgstr "Vista previa d'imprenta"
+
+msgid "Print…"
+msgstr "Imprentar…"
+
+msgid "Print the current page"
+msgstr "Imprenta a pachina actual"
+
+msgid "Send Link by Email…"
+msgstr "Ninviar enrastre por correu-e…"
+
+msgid "Send a link of the current page"
+msgstr "Ninvia un enrastre a la pachina actual"
+
+msgid "Close this tab"
+msgstr "Trancar ista pestanya"
+
+msgid "Undo"
+msgstr "Desfer"
+
+msgid "Undo the last action"
+msgstr "Desfa a zaguera accion"
+
+msgid "Redo"
+msgstr "Refer"
+
+msgid "Redo the last undone action"
+msgstr "Refa a zaguera accion desfeita"
+
+msgid "Paste clipboard"
+msgstr "Apegar d'o portapapels"
+
+msgid "Delete text"
+msgstr "Borrar texto"
+
+msgid "Select the entire page"
+msgstr "Tria la pachina completa"
+
+msgid "Find…"
+msgstr "Mirar…"
+
+msgid "Find a word or phrase in the page"
+msgstr "Trobar una parola u frase en a pachina"
+
+msgid "Find next occurrence of the word or phrase"
+msgstr "Trobar l'aparixion vinient d'a parola u frase"
+
+msgid "Find previous occurrence of the word or phrase"
+msgstr "Trobar l'aparixion anterior d'a parola u frase"
+
+msgid "View and remove cookies and passwords"
+msgstr "Veyer y borrar cookies y claus de paso"
+
+msgid "Certificates"
+msgstr "Certificaus"
+
+msgid "Manage Certificates"
+msgstr "Chestionar certificaus"
+
+msgid "Configure the web browser"
+msgstr "Configurar o navegador web"
+
+msgid "Customize Toolbars…"
+msgstr "Presonalizar barras d'ainas…"
+
+msgid "Customize toolbars"
+msgstr "Presonalizar barras d'ainas"
+
+msgid "Stop"
+msgstr "Aturar"
+
+msgid "Stop current data transfer"
+msgstr "Atura la transferencia de datos actual"
+
+msgid "Reload"
+msgstr "Recargar"
+
+msgid "Display the latest content of the current page"
+msgstr "Amostrar o zaguer conteniu d'a pachina actual"
+
+msgid "Larger Text"
+msgstr "Texto mas gran"
+
+msgid "Increase the text size"
+msgstr "Enampla o tamanyo d'o texto"
+
+msgid "Smaller Text"
+msgstr "Texto mas chicot"
+
+msgid "Decrease the text size"
+msgstr "Achiquir o tamanyo d'o texto"
+
+msgid "Normal Size"
+msgstr "Tamanyo normal"
+
+msgid "Use the normal text size"
+msgstr "Fer servir o tamanyo de texto normal"
+
+msgid "Change the text encoding"
+msgstr "Cambear a codificacion d'o texto"
+
+msgid "Page Source"
+msgstr "Codigo fuent"
+
+msgid "View the source code of the page"
+msgstr "Veyer o codigo fuent d'a pachina"
+
+msgid "Page Security Information"
+msgstr "Informacion de seguridat d'a pachina"
+
+msgid "Display security information for the web page"
+msgstr "Amostrar informacion de seguridat ta la pachina web"
+
+msgid "Add a bookmark for the current page"
+msgstr "Anyadir un marcador ta la pachina actual"
+
+msgid "Edit Bookmarks"
+msgstr "Editar marcadors"
+
+msgid "Open the bookmarks window"
+msgstr "Ubrir a finestra de marcadors"
+
+msgid "Location…"
+msgstr "Adreza…"
+
+msgid "Go to a specified location"
+msgstr "Ir a una adreza especificada"
+
+msgid "Open the history window"
+msgstr "Ubrir a finestra d'o historial"
+
+msgid "Previous Tab"
+msgstr "Pestanya anterior"
+
+msgid "Activate previous tab"
+msgstr "Activar pestanya anterior"
+
+msgid "Next Tab"
+msgstr "Vinient pestanya"
+
+msgid "Activate next tab"
+msgstr "Activar vinient pestanya"
+
+msgid "Move Tab Left"
+msgstr "Mover a pestanya a la cucha"
+
+msgid "Move current tab to left"
+msgstr "Mover a pestanya actual enta la cucha"
+
+msgid "Move Tab Right"
+msgstr "Mover a pestanya a la dreita"
+
+msgid "Move current tab to right"
+msgstr "Mover a pestanya actual enta la dreita"
+
+msgid "Detach Tab"
+msgstr "Deseparar pestanya"
+
+msgid "Detach current tab"
+msgstr "Deseparar a pestanya actual"
+
+msgid "Display web browser help"
+msgstr "Amostrar aduya d'o navegador"
+
+msgid "Work Offline"
+msgstr "Treballar desenchegau"
+
+msgid "Switch to offline mode"
+msgstr "Cambear a modo desenchegau"
+
+msgid "Hide Toolbars"
+msgstr "Amagar barras d'ainas"
+
+msgid "Show or hide toolbar"
+msgstr "Amostrar u amagar a barra d'ainas"
+
+msgid "Downloads Bar"
+msgstr "Barra de descargas"
+
+msgid "Show the active downloads for this window"
+msgstr "Amostrar as descargas activas ta ista finestra"
+
+msgid "Hide Menubar"
+msgstr "Amagar a barra de menu"
+
+msgid "Fullscreen"
+msgstr "Pantalla completa"
+
+msgid "Browse at full screen"
+msgstr "Navegar a pantalla completa"
+
+msgid "Show or hide unrequested popup windows from this site"
+msgstr ""
+"Amostrar u amagar finestras emerchentz no solicitadas dende iste puesto"
+
+msgid "Selection Caret"
+msgstr "Cursor de tria"
+
+msgid "Show Only This Frame"
+msgstr "Amostrar solo que iste marco"
+
+msgid "Show only this frame in this window"
+msgstr "Amostrar solo que iste marco en ista finestra"
+
+msgid "Open Link"
+msgstr "Ubrir enrastre"
+
+msgid "Open link in this window"
+msgstr "Ubrir l'enrastre en ista finestra"
+
+msgid "Open Link in New Window"
+msgstr "Ubrir l'enrastre en una finestra nueva"
+
+msgid "Open link in a new window"
+msgstr "Ubrir l'enrastre en una finestra nueva"
+
+msgid "Open Link in New Tab"
+msgstr "Ubrir l'enrastre en una pestanya nueva"
+
+msgid "Open link in a new tab"
+msgstr "Ubrir l'enrastre en una pestanya nueva"
+
+msgid "Download Link"
+msgstr "Escargar enrastre"
+
+msgid "Save Link As…"
+msgstr "Guardar enrastre como…"
+
+msgid "Save link with a different name"
+msgstr "Guardar con un nome diferent"
+
+msgid "Bookmark Link…"
+msgstr "Adibir l'enrastre a marcadors…"
+
+msgid "Copy Link Address"
+msgstr "Copiar l'adreza d'o entrastre"
+
+msgid "Send Email…"
+msgstr "Ninviar Email…"
+
+msgid "Copy Email Address"
+msgstr "Copiar l'adreza d'email"
+
+msgid "Open Image"
+msgstr "Ubrir Imachen"
+
+msgid "Save Image As…"
+msgstr "Guardar imachen como…"
+
+msgid "Use Image As Background"
+msgstr "Fer servir ista imachen como fundo"
+
+msgid "Copy Image Address"
+msgstr "Copiar l'adreza d'a imachen"
+
+msgid "Start Animation"
+msgstr "Prencipiar animacion"
+
+msgid "Stop Animation"
+msgstr "Aturar animacion"
+
+msgid "Inspect Element"
+msgstr "Inspeccionar elemento"
+
+msgid "There are unsubmitted changes to form elements"
+msgstr "Bi ha cambeos no ninviaus en os elementos d'o formulario"
+
+msgid "If you close the document anyway, you will lose that information."
+msgstr "Si tranca o documento, perdera ixa informacion."
+
+msgid "Close Document"
+msgstr "Trancar documento"
+
+msgid "There are ongoing downloads in this window"
+msgstr "Bi ha descargas en curso en ista finestra"
+
+msgid "If you close this window, the downloads will be cancelled"
+msgstr "Si tranca ista finestra, se cancelaran as descargas"
+
+msgid "Close window and cancel downloads"
+msgstr "Trancar a finestra y cancelar as descargas"
+
+msgid "Save As"
+msgstr "Guardar como"
+
+msgid "Print"
+msgstr "Imprentar"
+
+msgid "Find"
+msgstr "Trancar documento"
+
+msgid "Larger"
+msgstr "Mas gran"
+
+msgid "Smaller"
+msgstr "Mas chicot"
+
+msgid "Insecure"
+msgstr "Inseguro"
+
+msgid "Broken"
+msgstr "Crebau"
+
+msgid "Low"
+msgstr "Baxo"
+
+msgid "High"
+msgstr "Alto"
+
+msgid "Security level: %s"
+msgstr "Ran de seguridat: %s"
+
+msgid "Open image “%s”"
+msgstr "Ubrir imachen “%s”"
+
+msgid "Use as desktop background “%s”"
+msgstr "Fer servir \"%s\" como fundo d'o escritorio"
+
+msgid "Save image “%s”"
+msgstr "Guardar imachen “%s”"
+
+msgid "Copy image address “%s”"
+msgstr "Copiar l'adreza d'a imachen \"%s\""
+
+msgid "Send email to address “%s”"
+msgstr "Ninviar email a l'adreza “%s”"
+
+msgid "Copy email address “%s”"
+msgstr "Copiar l'adreza d'email “%s”"
+
+msgid "Save link “%s”"
+msgstr "Guardar enrastre “%s”"
+
+msgid "Bookmark link “%s”"
+msgstr "Adibir a marcadors l'enrastre “%s”"
+
+msgid "Copy link's address “%s”"
+msgstr "Copiar a adreza de l'enrastre “%s”"
+
+msgid "Select the personal data you want to clear"
+msgstr "Trie os datos presonals que quiere borrar"
+
+msgid ""
+"You are about to clear personal data that is stored about the web pages you "
+"have visited. Before proceeding, check the types of information that you "
+"want to remove:"
+msgstr ""
+"Ye a punto de borrar datos presonals alzaus arredol de pachinas web que ha "
+"vesitau. Antis de proceder, comprebe o tipo d'informacion que quiere borrar:"
+
+msgid "Clear All Personal Data"
+msgstr "Borrar totz os datos presonals"
+
+msgid "Saved passwords"
+msgstr "Claus de paso guardadas"
+
+msgid "Temporary files"
+msgstr "Archivos temporals"
+
+msgid ""
+"Note: You cannot undo this action. The data you are "
+"choosing to clear will be deleted forever."
+msgstr ""
+"Nota: No puede desfer ista accion. Os datos que ye trigando "
+"ta borrar se perderan ta cutio."
+
+msgid "Cookie Properties"
+msgstr "Propiedatz de cookies"
+
+msgid "Content:"
+msgstr "Conteniu:"
+
+msgid "Path:"
+msgstr "Camín:"
+
+msgid "Send for:"
+msgstr "Ninviar ta:"
+
+msgid "Encrypted connections only"
+msgstr "Solo que conexions cifradas"
+
+msgid "Any type of connection"
+msgstr "Cualsiquier tipo de conexion"
+
+msgid "Expires:"
+msgstr "Expira:"
+
+msgid "End of current session"
+msgstr "Fin d'a sesion actual"
+
+msgid "Domain"
+msgstr "Dominio"
+
+msgid "Host"
+msgstr "Servidor"
+
+msgid "User Name"
+msgstr "Nome d'usuario"
+
+msgid "User Password"
+msgstr "Clau de paso d'usuario"
+
+msgid "Save Link As"
+msgstr "Guardar entrastre como"
+
+msgid "Save Image As"
+msgstr "Guardar imachen como"
+
+msgid "%s (%s)"
+msgstr "%s (%s)"
+
+msgid "User defined (%s)"
+msgstr "Definiu por l'usuario (%s)"
+
+msgid "System language (%s)"
+msgid_plural "System languages (%s)"
+msgstr[0] "Luenga d'o sistema (%s)"
+msgstr[1] "Luengas d'o sistema (%s)"
+
+msgid "Select a Directory"
+msgstr "Trie un directorio"
+
+msgid "Save"
+msgstr "Guardar"
+
+msgid ""
+"The GNOME Web Browser is free software; you can redistribute it and/or "
+"modify it under the terms of the GNU General Public License as published by "
+"the Free Software Foundation; either version 2 of the License, or (at your "
+"option) any later version."
+msgstr ""
+"O navegador de GNOME ye software libre, puede redistribuyir-lo y/o modificar-"
+"lo baxo os terminos d'a Licencia Publica Cheneral GNU tal como se publica "
+"por la Free Software Foundation; ya sia en a version 2 d'a licencia, u (a la "
+"suya opcion) cualsiquier version posterior."
+
+msgid ""
+"The GNOME Web Browser is distributed in the hope that it will be useful, but "
+"WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY "
+"or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
+"more details."
+msgstr ""
+"O navegador web de GNOME se distribuye con l'asperanza de que le sia util, "
+"pero SIN DE GARANTIAS; sin inclos a garantia implicita de MERCANTILIDAT u "
+"IDOENIDAT TA UN PROPOSITO PARTICULAR. Veiga la Licencia Publica Cheneral de "
+"GNU ta mas detalles."
+
+msgid ""
+"You should have received a copy of the GNU General Public License along with "
+"the GNOME Web Browser; if not, write to the Free Software Foundation, Inc., "
+"51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA"
+msgstr ""
+"Deberia d'haber recibiu una copia d'a Licencia Publica Cheneral GNU chunto "
+"con o Navegador web de GNOME; si no, escriba a la Free Software Foundation, "
+"Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA"
+
+msgid "Contact us at:"
+msgstr "Contacte con nusatros en:"
+
+msgid "Contributors:"
+msgstr "Contribuidors:"
+
+msgid "Past developers:"
+msgstr "Contribuidors anteriors:"
+
+msgid ""
+"Lets you view web pages and find information on the internet.\n"
+"Powered by WebKit"
+msgstr ""
+"Le permite veyer pachinas web y trobar informacion en Internet.\n"
+"Alacetau en WebKit."
+
+msgid "translator-credits"
+msgstr "Daniel Martínez Cucalón <entaltoaragon@gmail.com>, 2010-2011"
+
+msgid "GNOME Web Browser Website"
+msgstr "Pachina web d'o nevegador web de GNOME"
+
+msgid "Enable caret browsing mode?"
+msgstr "Activar o modo de navego con cursor?"
+
+msgid ""
+"Pressing F7 turns caret browsing on or off. This feature places a moveable "
+"cursor in web pages, allowing you to move around with your keyboard. Do you "
+"want to enable caret browsing on?"
+msgstr ""
+"Pretar F7 cambea o modo de navego de cursor dentre activau y desactivau. "
+"Ista caracteristica mete un cursor movible en as pachinas web, permitindo-le "
+"mover-se con o suyo teclau. Quiere activar o modo de navego con cursor?"
+
+msgid "Enable"
+msgstr "Activar"
+
+msgid "Disable history"
+msgstr "Deshabilitar historial"
+
+msgid "Epiphany cannot quit"
+msgstr "Epiphany no puede surtir"
+
+msgid "Active extensions"
+msgstr "Autivar extensions"
+
+msgid "Allow popups"
+msgstr "Permitir finestras emerchents"
+
+msgid ""
+"Allow sites to open new windows using JavaScript (if JavaScript is "
+"enabled)."
+msgstr ""
+"Permitir que os puestos web ubran finestras nuevas fendo servir "
+"JavaScript (si JavaScript ye autivau)"
+
+msgid "Always show the tab bar"
+msgstr "Amostrar de perén a barra de pestanyas"
+
+msgid "ISO-8859-1"
+msgstr "ISO-8859-1"
+
+msgid "Preferred languages, two letter codes."
+msgstr "Luengas preferidas, codigos de dos letras."
+
+msgid "Size of disk cache"
+msgstr "Tamanyo d'a cache en disco"
+
+msgid "Size of disk cache, in MB."
+msgstr "Tamanyo d'a cache en disco, en MB"
+
+msgid "URL Search"
+msgstr "Buscar URL"
+
+msgid "x-western"
+msgstr "x-western"
+
+msgid "Show Downloads"
+msgstr "Amostrar descargas"
+
+msgid "%u:%02u.%02u"
+msgstr "%u:%02u.%02u"
+
+msgid "%02u.%02u"
+msgstr "%02u.%02u"
+
+msgid "Failed"
+msgstr "Archivo"
+
+msgid "%"
+msgstr "%"
+
+msgid "Open this file?"
+msgstr "Ubrir iste archivo?"
+
+msgid "Download this file?"
+msgstr "Descargar iste archivo?"
+
+msgid ""
+"GConf error:\n"
+"  %s"
+msgstr ""
+"Error de GConf:\n"
+" %s"
+
+msgid ""
+"Error launching the command “%s” in order to decompress the comic book: %s"
+msgstr ""
+"S'ha produciu un error executando lo comando “%s” prebando de descomprimir o "
+"libro de comic: %s"
+
+msgid "The command “%s” failed at decompressing the comic book."
+msgstr "O comando “%s” ha fallau al descomprimir o libro de comic."
+
+msgid "The command “%s” did not end normally."
+msgstr "O comando “%s” no remató normalment."
+
+msgid "Not a comic book MIME type: %s"
+msgstr "No ye un tipo MIME de comic: %s"
+
+msgid "Can't find an appropriate command to decompress this type of comic book"
+msgstr ""
+"No se puede trobar un comando apropiau ta descomprimir iste tipo de libro de "
+"comic"
+
+msgid "Unknown MIME Type"
+msgstr "Tipo MIME desconoxiu"
+
+msgid "File corrupted"
+msgstr "L'archivo ye corrompiu"
+
+msgid "No files in archive"
+msgstr "Dengun archivo en l'archivo"
+
+msgid "No images found in archive %s"
+msgstr "No s'han trobau imachens en l'archivo %s"
+
+msgid "There was an error deleting “%s”."
+msgstr "Habió una error borrando “%s”."
+
+msgid "Error %s"
+msgstr "Error %s"
+
+msgid "Comic Books"
+msgstr "Libros de comic"
+
+msgid "DjVu document has incorrect format"
+msgstr "O documento DjVu tiene un formato incorrecto"
+
+msgid ""
+"The document is composed of several files. One or more of these files cannot "
+"be accessed."
+msgstr ""
+"Iste documento ye compuesto de varios archivos. No se puede acceder a uno u "
+"mas d'els."
+
+msgid "DjVu Documents"
+msgstr "Documento DjVu"
+
+msgid "DVI document has incorrect format"
+msgstr "O documento DVI tiene un formato incorrecto"
+
+msgid "DVI Documents"
+msgstr "Documentos DVI"
+
+msgid "This work is in the Public Domain"
+msgstr "Iste treballo ye de dominio publico"
+
+msgid "Yes"
+msgstr "Si"
+
+msgid "No"
+msgstr "No"
+
+msgid "Type 1"
+msgstr "Tipo 1"
+
+msgid "Type 1C"
+msgstr "Tipo 1C"
+
+msgid "Type 3"
+msgstr "Tipo 3"
+
+msgid "TrueType"
+msgstr "TrueType"
+
+msgid "Type 1 (CID)"
+msgstr "Tipo 1 (CID)"
+
+msgid "Type 1C (CID)"
+msgstr "Tipo 1C (CID)"
+
+msgid "TrueType (CID)"
+msgstr "TrueType (CID)"
+
+msgid "Unknown font type"
+msgstr "TIpo de fuent desconoxiu"
+
+msgid "No name"
+msgstr "Sin nome"
+
+msgid "Embedded subset"
+msgstr "Subconchunto incrustau"
+
+msgid "Embedded"
+msgstr "Incrustau"
+
+msgid "Not embedded"
+msgstr "Sin incrustrar"
+
+msgid "PDF Documents"
+msgstr "Documents PDF"
+
+msgid "Failed to load document “%s”"
+msgstr "S'ha fallau al cargar lo documento “%s”"
+
+msgid "Failed to save document “%s”"
+msgstr "S'ha fallau a l'alzar o documento “%s”"
+
+msgid "PostScript Documents"
+msgstr "Documents PostScript"
+
+msgid "Invalid document"
+msgstr "Documento no valido"
+
+msgid "Couldn't save attachment “%s”: %s"
+msgstr "No se puede alzar l'adchunto “%s”: %s"
+
+msgid "Couldn't open attachment “%s”: %s"
+msgstr "No se puede ubrir lo adchunto “%s”: %s"
+
+msgid "Couldn't open attachment “%s”"
+msgstr "No se puede ubrir lo adchunto “%s”"
+
+msgid "File type %s (%s) is not supported"
+msgstr "O tipo d'archivo %s (%s) no ye almitiu"
+
+msgid "All Documents"
+msgstr "Totz os documents"
+
+msgid "All Files"
+msgstr "Totz os archivos"
+
+msgid "Failed to create a temporary file: %s"
+msgstr "S'ha fallau al creyar l'archivo temporal: %s"
+
+msgid "Failed to create a temporary directory: %s"
+msgstr "S'ha fallau al creyar o directorio temporal: %s"
+
+msgid "Best Fit"
+msgstr "Achuste optimo"
+
+msgid "Fit Page Width"
+msgstr "Achustar a l'amplo de pachina"
+
+msgid "70%"
+msgstr "70%"
+
+msgid "85%"
+msgstr "85%"
+
+msgid "800%"
+msgstr "800%"
+
+msgid "1600%"
+msgstr "1600%"
+
+msgid "3200%"
+msgstr "3200%"
+
+msgid "6400%"
+msgstr "6400%"
+
+msgid "Document Viewer"
+msgstr "Visualizador de documentos"
+
+msgid "View multi-page documents"
+msgstr "Veyer documentos multipachina"
+
+msgid "Delete the temporary file"
+msgstr "Borrar l'archivo temporal"
+
+msgid "GNOME Document Previewer"
+msgstr "Previsualizador de documentos de GNOME"
+
+msgid "Failed to print document"
+msgstr "No s'ha puesto imprentar o documento"
+
+msgid "The selected printer '%s' could not be found"
+msgstr "A impresora trigada '%s' no s'ha puesto trobar"
+
+msgid "Previous Page"
+msgstr "Pachina anterior"
+
+msgid "Go to the previous page"
+msgstr "Ir a la pachina anterior"
+
+msgid "Next Page"
+msgstr "Pachina vinient"
+
+msgid "Go to the next page"
+msgstr "Ir a la pachina vinient"
+
+msgid "Enlarge the document"
+msgstr "Engrandar o documento"
+
+msgid "Shrink the document"
+msgstr "Entrecullir o documento"
+
+msgid "Print this document"
+msgstr "Imprentar iste documento"
+
+msgid "Make the current document fill the window"
+msgstr "Fer que o documento actual s'achuste a la pantalla"
+
+msgid "Make the current document fill the window width"
+msgstr "Fer que o documento actual s'achuste a l'amplo de pantalla"
+
+msgid "Page"
+msgstr "Pachina"
+
+msgid "Select Page"
+msgstr "Trigar pachina"
+
+msgid "Document"
+msgstr "Documento"
+
+msgid "Author:"
+msgstr "Autor:"
+
+msgid "Keywords:"
+msgstr "Parolas clau:"
+
+msgid "Producer:"
+msgstr "Productor:"
+
+msgid "Creator:"
+msgstr "Creyador:"
+
+msgid "Created:"
+msgstr "Creyau:"
+
+msgid "Modified:"
+msgstr "Modificau:"
+
+msgid "Number of Pages:"
+msgstr "Numero de pachinas:"
+
+msgid "Optimized:"
+msgstr "Optimizau:"
+
+msgid "Format:"
+msgstr "Formato:"
+
+msgid "Security:"
+msgstr "Seguridat:"
+
+msgid "Paper Size:"
+msgstr "Tamanyo d'o papel:"
+
+msgid "None"
+msgstr "Dengun"
+
+msgid "default:mm"
+msgstr "default:mm"
+
+msgid "%.0f × %.0f mm"
+msgstr "%.0f × %.0f mm"
+
+msgid "%.2f × %.2f inch"
+msgstr "%.2f × %.2f pulgadas"
+
+msgid "(%d of %d)"
+msgstr "(%d de %d)"
+
+msgid "of %d"
+msgstr "de %d"
+
+msgid "Preparing to print…"
+msgstr "Parando ta imprentar…"
+
+msgid "Finishing…"
+msgstr "Rematando…"
+
+msgid "Printing page %d of %d…"
+msgstr "Imprentando pachina %d de %d…"
+
+msgid "Invalid page selection"
+msgstr "A tria de pachinas no ye valida"
+
+msgid "Warning"
+msgstr "Alvertencia"
+
+msgid "Your print range selection does not include any pages"
+msgstr "En o rango d'impresion trigau no bi ha denguna pachina"
+
+msgid "Page Scaling:"
+msgstr "Escalau de pachina:"
+
+msgid "Shrink to Printable Area"
+msgstr "Entrecullir a l'area imprentable"
+
+msgid "Fit to Printable Area"
+msgstr "Achustar a l'area imprentable"
+
+msgid "Auto Rotate and Center"
+msgstr "Chirar y centrar automaticament"
+
+msgid "Select page size using document page size"
+msgstr "Trigar o tamanyo de pachina fendo servir o tamanyo d'a pachina"
+
+msgid ""
+"When enabled, each page will be printed on the same size paper as the "
+"document page."
+msgstr ""
+"Cuan siga activau, cada pachina s'imprentará con o mesmo tamanyo que as "
+"pachina d'o documento."
+
+msgid "Document View"
+msgstr "Vista de documento"
+
+msgid "Jump to page:"
+msgstr "Blincar a la pachina:"
+
+msgid "End of presentation. Click to exit."
+msgstr "Fin d'a presentacion. Click ta surtir."
+
+msgid "Go to first page"
+msgstr "Ir a la primera pachina"
+
+msgid "Go to previous page"
+msgstr "Ir a la pachina anterior"
+
+msgid "Go to next page"
+msgstr "Ir a la pachina vinient"
+
+msgid "Go to last page"
+msgstr "Ir a la zaguera pachina"
+
+msgid "Go to page"
+msgstr "Ir a la pachina"
+
+msgid "Go to page %s"
+msgstr "Ir a la pachina %s"
+
+msgid "Go to %s on file “%s”"
+msgstr "Ir a la pachina %s en l'archivo “%s”"
+
+msgid "Go to file “%s”"
+msgstr "Ir a l'archivo “%s”"
+
+msgid "Launch %s"
+msgstr "Executar %s"
+
+msgid "Case Sensitive"
+msgstr "Sensible a mayusclas"
+
+msgid "Icon:"
+msgstr "Icono:"
+
+msgid "Note"
+msgstr "Nota"
+
+msgid "Comment"
+msgstr "Comentario"
+
+msgid "Insert"
+msgstr "Insertar"
+
+msgid "Circle"
+msgstr "Circlo"
+
+msgid "Color:"
+msgstr "Color:"
+
+msgid "Style:"
+msgstr "Estilo:"
+
+msgid "Transparent"
+msgstr "Transparent"
+
+msgid "Initial window state:"
+msgstr "Estau d'a finestra al prencipiar:"
+
+msgid "Unlock Document"
+msgstr "Desbloqueyar documento"
+
+msgid "Enter password"
+msgstr "Dentrar clau de paso"
+
+msgid "Password required"
+msgstr "S'amenista clau de paso"
+
+msgid ""
+"The document “%s” is locked and requires a password before it can be opened."
+msgstr "O documento “%s” ye bloqueyau y cal una clau de paso ta ubrir-lo."
+
+msgid "Remember password until you log out"
+msgstr "Remerar clau de paso dica que tranque a sesion"
+
+msgid "Remember forever"
+msgstr "Remerar ta cutio"
+
+msgid "Document License"
+msgstr "Licencia d'o documento"
+
+msgid "Font"
+msgstr "Fuent"
+
+msgid "Usage terms"
+msgstr "Terminos d'uso"
+
+msgid "Text License"
+msgstr "Licencia d'o texto"
+
+msgid "Further Information"
+msgstr "Informacion d'esvenidero"
+
+msgid "List"
+msgstr "Lista"
+
+msgid "Text"
+msgstr "Texto"
+
+msgid "Add"
+msgstr "Anyadir"
+
+msgid "Page %d"
+msgstr "Pachina %d"
+
+msgid "Attachments"
+msgstr "Adchuntos"
+
+msgid "Open Bookmark"
+msgstr "Ubrir marcador"
+
+msgid "Rename Bookmark"
+msgstr "Renombrar marcador"
+
+msgid "Remove Bookmark"
+msgstr "Borrar marcador"
+
+msgid "Page %s"
+msgstr "Pachina %s"
+
+msgid "Layers"
+msgstr "Capas"
+
+msgid "Index"
+msgstr "Endiz"
+
+msgid "Page %s — %s"
+msgstr "Pachina %s — %s"
+
+msgid "The document contains no pages"
+msgstr "O documento no tiene pachinas"
+
+msgid "The document contains only empty pages"
+msgstr "O documento solo tiene que pachinas buedas"
+
+msgid "Unable to open document"
+msgstr "No ye posible ubrir o documento"
+
+msgid "Loading document from “%s”"
+msgstr "Cargando documento dende “%s”"
+
+msgid "Downloading document (%d%%)"
+msgstr "Descargando documento (%d%%)"
+
+msgid "Failed to load remote file."
+msgstr "S'ha fallau al cargar l'archivo remoto."
+
+msgid "Reloading document from %s"
+msgstr "Recargando lo documento dende %s"
+
+msgid "Failed to reload document."
+msgstr "S'ha fallau recargando lo documento."
+
+msgid "Open Document"
+msgstr "Ubrir documento"
+
+msgid "Saving image to %s"
+msgstr "Alzando imachen en %s"
+
+msgid "Uploading document (%d%%)"
+msgstr "Puyando documento (%d%%)"
+
+msgid "Uploading attachment (%d%%)"
+msgstr "Puyando adchunto (%d%%)"
+
+msgid "Uploading image (%d%%)"
+msgstr "Puyando imachen (%d%%)"
+
+msgid "Save a Copy"
+msgstr "Alzar una copia"
+
+msgid "%d pending job in queue"
+msgid_plural "%d pending jobs in queue"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Printing job “%s”"
+msgstr "Imprentando treballo “%s”"
+
+msgid "Save a copy of document “%s” before closing?"
+msgstr "Alzar una copia d'o documento “%s” antis de trancar?"
+
+msgid "Close without Saving"
+msgstr "Tran"
+
+msgid "Wait until print job “%s” finishes before closing?"
+msgstr ""
+"Aguardar dica que lo treballo d'impresion “%s” remate antis de trancar?"
+
+msgid "Close after Printing"
+msgstr "Trancar dimpues d'imprentar"
+
+msgid "There was an error displaying help"
+msgstr "Habió una error amostrando l'aduya"
+
+msgid "Evince"
+msgstr "Evince"
+
+msgid "© 1996–2010 The Evince authors"
+msgstr "© 1996–2010 Os autors d'evince"
+
+msgid "%d found on this page"
+msgid_plural "%d found on this page"
+msgstr[0] "%d trobau en ista pachina"
+msgstr[1] "%d trobaus en ista pachina"
+
+msgid "%sd%% remaining to search"
+msgstr "%sd%% restant ta mirar"
+
+msgid "Open an existing document"
+msgstr "Ubrir un documento existent"
+
+msgid "Open a Copy"
+msgstr "Ubrir una copia"
+
+msgid "Open a copy of the current document in a new window"
+msgstr "Ubrir una copia d'o documento actual en una finestra nueva"
+
+msgid "Save a Copy…"
+msgstr "Alzar una copia…"
+
+msgid "Save a copy of the current document"
+msgstr "Alzar una copia d'o documento actual"
+
+msgid "Find a word or phrase in the document"
+msgstr "Trobar una parola u frase en o documento"
+
+msgid "Toolbar"
+msgstr "Barra d'ainas"
+
+msgid "Rotate Left"
+msgstr "Chirar a la cucha"
+
+msgid "Rotate Right"
+msgstr "Chirar a la dreita"
+
+msgid "Save Current Settings as Default"
+msgstr "Alzar as configuracions actuals como predefinidas"
+
+msgid "Reload the document"
+msgstr "Recargar o documento"
+
+msgid "Autoscroll"
+msgstr "Autoesplazar"
+
+msgid "First Page"
+msgstr "Primera pachina"
+
+msgid "Go to the first page"
+msgstr "Ir a la primera pachina"
+
+msgid "Last Page"
+msgstr "Zaguera pachina"
+
+msgid "Go to the last page"
+msgstr "Ir a la zaguera pachina"
+
+msgid "Add Bookmark"
+msgstr "Anyadir marcador"
+
+msgid "Leave fullscreen mode"
+msgstr "Surtir d'o modo pantalla completa"
+
+msgid "Start Presentation"
+msgstr "Prencipiar presentacion"
+
+msgid "Start a presentation"
+msgstr "Prencipiar una presentacion"
+
+msgid "Show or hide the toolbar"
+msgstr "Amostrar u amagar a barra d'ainas"
+
+msgid "Continuous"
+msgstr "Contino"
+
+msgid "Show the entire document"
+msgstr "Amostrar lo documento de raso"
+
+msgid "Dual"
+msgstr "Dual"
+
+msgid "Show two pages at once"
+msgstr "Amostrar dos pachinas de vez"
+
+msgid "Expand the window to fill the screen"
+msgstr "Enamplar a finestra ta plenar a pantalla"
+
+msgid "Presentation"
+msgstr "Presentacion"
+
+msgid "Inverted Colors"
+msgstr "Colors invertidas"
+
+msgid "Show page contents with the colors inverted"
+msgstr "Amostrar os contenius d'a pachina con as colors invertidas"
+
+msgid "Go To"
+msgstr "Ir a"
+
+msgid "Open in New Window"
+msgstr "Ubrir en una finestra nueva"
+
+msgid "Copy Image"
+msgstr "Copiar imachen"
+
+msgid "Open Attachment"
+msgstr "Ubrir adchunto"
+
+msgid "Save Attachment As…"
+msgstr "Alzar adchunto como…"
+
+msgid "Adjust the zoom level"
+msgstr "Achustar o nivel de zoom"
+
+msgid "Open Folder"
+msgstr "Ubrir carpeta"
+
+msgid "Previous"
+msgstr "Anterior"
+
+msgid "Next"
+msgstr "Siguient"
+
+msgid "Zoom In"
+msgstr "Engrandar"
+
+msgid "Zoom Out"
+msgstr "Achiquir"
+
+msgid "Fit Width"
+msgstr "Achustar a l'amplo de pachina"
+
+msgid "Unable to launch external application."
+msgstr "No ye posible executar l'aplicacion externa."
+
+msgid "Unable to open external link"
+msgstr "No ye posible ubrir l'enrastre externo"
+
+msgid "Couldn't find appropriate format to save image"
+msgstr "No se puede trobar un formato apropiau ta alzar a imachen"
+
+msgid "The image could not be saved."
+msgstr "A imachen no se puede alzar."
+
+msgid "Save Image"
+msgstr "Alzar imachen"
+
+msgid "Unable to open attachment"
+msgstr "No ye posible ubrir l'adchunto"
+
+msgid "The attachment could not be saved."
+msgstr "L'adchunto no se puede alzar."
+
+msgid "Save Attachment"
+msgstr "Alzar adchunto"
+
+msgid "%s — Password Required"
+msgstr "%s — Cal una clau de paso"
+
+msgid "By extension"
+msgstr "Por extension"
+
+msgid "GNOME Document Viewer"
+msgstr "Visualizador de documentos de GNOME"
+
+msgid "PAGE"
+msgstr "PACHINA"
+
+msgid "The page number of the document to display."
+msgstr "O numero de pachina d'o documento a amostrar."
+
+msgid "NUMBER"
+msgstr "NUMERO"
+
+msgid "Run evince in fullscreen mode"
+msgstr "Executar evince en modo pantalla plena"
+
+msgid "Run evince in presentation mode"
+msgstr "Executar evince en modo presentacion"
+
+msgid "Run evince as a previewer"
+msgstr "Executar evince como un previsualizador"
+
+msgid "The word or phrase to find in the document"
+msgstr "A parola u frase ta trobar en o documento"
+
+msgid "STRING"
+msgstr "CADENA"
+
+msgid "Archive Manager"
+msgstr "Chestor d'archivadors"
+
+msgid "Compression level"
+msgstr "Ran de compresion"
+
+msgid "Default volume size"
+msgstr "Tamanyo predeterminau d'o volumen"
+
+msgid "Display size"
+msgstr "Amostrar tamanyo"
+
+msgid "Display time"
+msgstr "Amostrar hora"
+
+msgid "Display type"
+msgstr "Amostrar tipo"
+
+msgid "Editors"
+msgstr "Editors"
+
+msgid "List Mode"
+msgstr "Modo lista"
+
+msgid "Name column width"
+msgstr "Amplo d'a columna \"nome\""
+
+msgid "Sort type"
+msgstr "Tipo d'ordenacion"
+
+msgid "The default size for volumes."
+msgstr "O tamanyo predeterminau d'os volumens"
+
+msgid "Use mime icons"
+msgstr "Fer servir iconos MIME"
+
+msgid "View statusbar"
+msgstr "Veyer barra d'estau"
+
+msgid "View toolbar"
+msgstr "Veyer barra d'ainas"
+
+msgid "Load Options"
+msgstr "Carga as opcions"
+
+msgid "Create"
+msgstr "Creyar"
+
+msgid "Compress"
+msgstr "Comprimir"
+
+msgid "Location"
+msgstr "Puesto"
+
+msgid "Filename:"
+msgstr "Nome de l'archivo:"
+
+msgid "Other Options"
+msgstr "Atras opcions"
+
+msgid "<span weight=\"bold\" size=\"larger\">Password required</span>"
+msgstr ""
+"<span weight=\"bold\" size=\"larger\">S'amenista una clau de paso</span>"
+
+msgid "Files:"
+msgstr "Archivos:"
+
+msgid "Selected files"
+msgstr "Archivos trigaus"
+
+msgid "example: *.txt; *.doc"
+msgstr "exemplo: *.txt; *.doc"
+
+msgid "Password"
+msgstr "Clau de paso"
+
+msgid ""
+"The file has been modified with an external application. If you don't update "
+"the file in the archive, all of your changes will be lost."
+msgid_plural ""
+"%d files have been modified with an external application. If you don't "
+"update the files in the archive, all of your changes will be lost."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Compress..."
+msgstr "Comprimir..."
+
+msgid "Create a compressed archive with the selected objects"
+msgstr "Creyar un archivador comprimiu con os obchetos trigaus"
+
+msgid "Archive type not supported."
+msgstr "Tipo de archivador no soportau."
+
+msgid "All archives"
+msgstr "Totz os archivadors"
+
+msgid "Last Output"
+msgstr "Zaguer resultau"
+
+msgid "Copyright © 2001–2010 Free Software Foundation, Inc."
+msgstr "Copyright © 2001–2010 Free Software Foundation, Inc."
+
+msgid "An archive manager for GNOME."
+msgstr "Un chestor d'archivadors ta Gnome"
+
+msgid "Add Files"
+msgstr "Anyadir archivos"
+
+msgid "Add a Folder"
+msgstr "Anyadir una carpeta"
+
+msgid "example: *.o; *.bak"
+msgstr "exemplo: *.o; *.bak"
+
+msgid "Save Options"
+msgstr "Alzar opcions"
+
+msgid "Please use a different name."
+msgstr "Faiga servir un nome diferent."
+
+msgid "Create Folder"
+msgstr "Creyar carpeta"
+
+msgid "Archive not created"
+msgstr "Archivador no creyau"
+
+msgid "Actions"
+msgstr "Accions"
+
+msgid "New"
+msgstr "Nuevo"
+
+msgid "There was an internal error trying to search for applications:"
+msgstr "Habió una error interna en prebar de mirar aplicacions:"
+
+msgid "Location:"
+msgstr "Puesto:"
+
+msgid "Name:"
+msgstr "Nome:"
+
+msgid "%s Properties"
+msgstr "Propiedatz de %s"
+
+msgid "Modified on:"
+msgstr "Modificau o:"
+
+msgid "Archive size:"
+msgstr "Tamanyo d'o archivador:"
+
+msgid "Content size:"
+msgstr "Tamanyo d'o conteniu:"
+
+msgid "Number of files:"
+msgstr "Numero d'archivos:"
+
+msgid "File Format: %s"
+msgstr "Formato d'archivo: %s"
+
+msgid "All Supported Files"
+msgstr "Totz os archivos soportaus"
+
+msgid "File Format"
+msgstr "Formato d'archivo"
+
+msgid "Extension(s)"
+msgstr "Extensions"
+
+msgid "File format not recognized"
+msgstr "No s'ha reconoxiu o formato d'archivo"
+
+msgid "File not found."
+msgstr "No s'ha trobau l'archivo."
+
+msgid "The file doesn't exist"
+msgstr "L'archivo no existe pas"
+
+msgid "Adding file: "
+msgstr "Anyadindo archivo:"
+
+msgid "Recompressing archive"
+msgstr "Recomprimindo archivador"
+
+msgid "Decompressing archive"
+msgstr "Descomprimindo archivador"
+
+msgid "7-Zip (.7z)"
+msgstr "7-Zip (.7z)"
+
+msgid "Tar compressed with 7z (.tar.7z)"
+msgstr "Tar comprimiu con 7z (.tar.7z)"
+
+msgid "Ace (.ace)"
+msgstr "Ace (.ace)"
+
+msgid "Ar (.ar)"
+msgstr "Ar (.ar)"
+
+msgid "Arj (.arj)"
+msgstr "Arj (.arj)"
+
+msgid "Tar compressed with bzip2 (.tar.bz2)"
+msgstr "Tar comprimiu con bzip2 (.tar.bz2)"
+
+msgid "Tar compressed with bzip (.tar.bz)"
+msgstr "Tar comprimiu con bzip (.tar.bz)"
+
+msgid "Cabinet (.cab)"
+msgstr "Cabinet (.cab)"
+
+msgid "Rar Archived Comic Book (.cbr)"
+msgstr "Libro de comic archivau en rar (.cbr)"
+
+msgid "Zip Archived Comic Book (.cbz)"
+msgstr "Libro de comic archivau en zip (.cbz)"
+
+msgid "Tar compressed with gzip (.tar.gz)"
+msgstr "Tar comprimiu con gzip (.tar.gz)"
+
+msgid "Ear (.ear)"
+msgstr "Ear (.ear)"
+
+msgid "Jar (.jar)"
+msgstr "Jar (.jar)"
+
+msgid "Lha (.lzh)"
+msgstr "Lha (.lzh)"
+
+msgid "Lrzip (.lrz)"
+msgstr "Lrzip (.lrz)"
+
+msgid "Tar compressed with lrzip (.tar.lrz)"
+msgstr "Tar comprimiu con lrzip (.tar.lrz)"
+
+msgid "Tar compressed with lzip (.tar.lz)"
+msgstr "Tar comprimiu con lzip (.tar.lz)"
+
+msgid "Tar compressed with lzma (.tar.lzma)"
+msgstr "Tar comprimiu con lzma (.tar.lzma)"
+
+msgid "Tar compressed with lzop (.tar.lzo)"
+msgstr "Tar comprimiu con lzop (.tar.lzo)"
+
+msgid "Windows Imaging Format (.wim)"
+msgstr "Formato d'imachen de Windows (.wim)"
+
+msgid "Rar (.rar)"
+msgstr "Rar (.rar)"
+
+msgid "Tar uncompressed (.tar)"
+msgstr "Tar sin compresion (.tar)"
+
+msgid "Tar compressed with compress (.tar.Z)"
+msgstr "Tar comprimiu con compress (.tar.Z)"
+
+msgid "War (.war)"
+msgstr "War (.war)"
+
+msgid "Xz (.xz)"
+msgstr "Xz (.xz)"
+
+msgid "Tar compressed with xz (.tar.xz)"
+msgstr "Tar comprimiu con xz (.tar.xz)"
+
+msgid "Zoo (.zoo)"
+msgstr "Zoo (.zoo)"
+
+msgid "Zip (.zip)"
+msgstr "Zip (.zip)"
+
+msgid "%d object (%s)"
+msgid_plural "%d objects (%s)"
+msgstr[0] "%d obcheto (%s)"
+msgstr[1] "%d obchetos (%s)"
+
+msgid "%d object selected (%s)"
+msgid_plural "%d objects selected (%s)"
+msgstr[0] "%d obcheto trigau (%s)"
+msgstr[1] "%d obchetos trigaus (%s)"
+
+msgid "Folder"
+msgstr "Carpeta"
+
+msgid "Creating archive"
+msgstr "Creyando archivador"
+
+msgid "Loading archive"
+msgstr "Cargando archivador"
+
+msgid "Reading archive"
+msgstr "Leyendo archivador"
+
+msgid "Testing archive"
+msgstr "Comprebando archivador"
+
+msgid "Saving archive"
+msgstr "Alzando archivador"
+
+msgid "Open the Archive"
+msgstr "Ubrir l'archivador"
+
+msgid "Show the Files"
+msgstr "Amostrar os archivos"
+
+msgid "Archive:"
+msgstr "Archivador:"
+
+msgid "please wait..."
+msgstr "aguarde..."
+
+msgid "Could not open \"%s\""
+msgstr "No s'ha puesto ubrir \"%s\""
+
+msgid "Command not found."
+msgstr "No s'ha trobau lo comando"
+
+msgid "Create Archive"
+msgstr "Creyar archivador"
+
+msgid "Folders"
+msgstr "Carpetas"
+
+msgid "Size"
+msgstr "Tamanyo"
+
+msgid "Type"
+msgstr "Tipo"
+
+msgid "Date Modified"
+msgstr "Calendata de modificacion"
+
+msgid "Close the folders pane"
+msgstr "Trancar o panel de carpetas"
+
+msgid "Open archive"
+msgstr "Ubrir un archivador"
+
+msgid "The new name is void."
+msgstr "O nome nuevo ye buedo."
+
+msgid "Rename"
+msgstr "Renombrar"
+
+msgid "New folder name"
+msgstr "Nome de carpeta nuevo"
+
+msgid "New file name"
+msgstr "Nome d'archivo nuevo"
+
+msgid "Paste Selection"
+msgstr "Apegar tria"
+
+msgid "Add files to an archive"
+msgstr "Anyadir archivos a un archivador"
+
+msgid "%d %B %Y, %H:%M"
+msgstr "%d %B %Y, %H:%M"
+
+msgid "ARCHIVE"
+msgstr "ARCHIVADOR"
+
+msgid "FOLDER"
+msgstr "CARPETA"
+
+msgid "File Roller"
+msgstr "File Roller"
+
+msgid "Archive"
+msgstr "Archivador"
+
+msgid "Open Recent"
+msgstr "Ubrir recient"
+
+msgid "Add Files..."
+msgstr "Anyadir archivos…"
+
+msgid "Add a Folder..."
+msgstr "Anyadir una carpeta…"
+
+msgid "Add Folder"
+msgstr "Anyadir carpeta"
+
+msgid "Close the current archive"
+msgstr "Tranca l'archivador actual"
+
+msgid "Display the File Roller Manual"
+msgstr "Amuestra lo manual de File Roller"
+
+msgid "Rename..."
+msgstr "Renombrar…"
+
+msgid "Find..."
+msgstr "Mirar…"
+
+msgid "New..."
+msgstr "Nuevo…"
+
+msgid "Create a new archive"
+msgstr "Creyar un archivador nuevo"
+
+msgid "Open..."
+msgstr "Ubrir..."
+
+msgid "Open With..."
+msgstr "Ubrir con..."
+
+msgid "Password..."
+msgstr "Clau de paso"
+
+msgid "Show archive properties"
+msgstr "Amostrar as propiedatz d'o archivador"
+
+msgid "Save As..."
+msgstr "Alzar como..."
+
+msgid "Select all files"
+msgstr "Trigar totz os archivos"
+
+msgid "Statusbar"
+msgstr "Barra d'estau"
+
+msgid "View All Files"
+msgstr "Veyer totz os archivos"
+
+msgid "View as a Folder"
+msgstr "Veyer como una carpeta"
+
+msgid "by Size"
+msgstr "por tamanyo"
+
+msgid "by Type"
+msgstr "por tipo"
+
+msgid "/dev/urandom is not a character device"
+msgstr "/dev/urandom no ye un dispositivo de caracters"
+
+msgid "Display ID"
+msgstr "ID de pantalla"
+
+msgid "could not find user \"%s\" on system"
+msgstr "no s'ha puesto trobar l'usuario \"%s\" en o sistema"
+
+msgid "Unable to open session"
+msgstr "No s'ha puesto ubrir a sesion"
+
+msgid "Server was to be spawned by user %s but that user doesn't exist"
+msgstr ""
+"O servidor teneba que estar lanzau por l'usuario %s pero ixe usuario no "
+"existe pas"
+
+msgid "Username"
+msgstr "Nome d'usuario"
+
+msgid "The username"
+msgstr "O nombre d'usuario"
+
+msgid "Hostname"
+msgstr "Nombre d'o equipo"
+
+msgid "The hostname"
+msgstr "O nombre d'o equipo"
+
+msgid "Display Device"
+msgstr "Pantalla"
+
+msgid "The display device"
+msgstr "A pantalla"
+
+msgid "general failure"
+msgstr "error cheneral"
+
+msgid "out of memory"
+msgstr "sin memoria"
+
+msgid "unknown error"
+msgstr "error desconoxida"
+
+msgid "Username:"
+msgstr "Nombre d'usuario:"
+
+msgid "Unable to change to user"
+msgstr "No s'ha puesto cambear l'usuario"
+
+msgid "User %s doesn't exist"
+msgstr "L'usuario %s no existe"
+
+msgid "Group %s doesn't exist"
+msgstr "A colla %s no existe"
+
+msgid "Could not create socket!"
+msgstr "No s'ha puesto creyar o socket!"
+
+msgid "Error in checksum"
+msgstr "Error en a suma de comprebacion"
+
+msgid "Bad address"
+msgstr "Adreza erronea"
+
+msgid "%s: Error in checksum"
+msgstr "%s: Error en a suma de comprebacion"
+
+msgid "GdmXdmcpDisplayFactory: Could not read XDMCP header!"
+msgstr "GdmXdmcpDisplayFactory: No s'ha puesto leyer a cabecera XDMCP."
+
+msgid "XMDCP: Incorrect XDMCP version!"
+msgstr "XDMCP: A version de XDMCP no ye correcta."
+
+msgid "Logdir %s does not exist or isn't a directory."
+msgstr "O directorio de rechistro %s no existe u no ye un directorio."
+
+msgid "The GDM user should not be root. Aborting!"
+msgstr "L'usuario de GDM no ha d'estar root. S'aborta."
+
+msgid "Print GDM version"
+msgstr "Amostrar a version de GDM"
+
+msgid "GNOME Display Manager"
+msgstr "Chestor de dentrada de GNOME"
+
+msgid "GNOME Display Manager Session Worker"
+msgstr "Treballador de sesion de GDM"
+
+msgid "Login Window"
+msgstr "Finestra d'encetar sesion"
+
+msgid "Power Manager"
+msgstr "Chestor d'enerchia"
+
+msgid "Power management daemon"
+msgstr "Demonio d'o chestor d'enerchia"
+
+msgid "GNOME On-Screen Keyboard"
+msgstr "Teclau en pantalla de GNOME"
+
+msgid "Use an on-screen keyboard"
+msgstr "Fer servir o teclau en pantalla"
+
+msgid "Metacity"
+msgstr "Metacity"
+
+msgid "Select System"
+msgstr "Trigar sistema"
+
+msgid "Value"
+msgstr "Valura"
+
+msgid "percentage of time complete"
+msgstr "porcentache de tiempo rematau"
+
+msgid "Inactive Text"
+msgstr "Texto inactivo"
+
+msgid "Active Text"
+msgstr "Texto activo"
+
+msgid "%a %b %e, %l:%M:%S %p"
+msgstr "%a %b %e, %H:%M:%S"
+
+msgid "%a %b %e, %l:%M %p"
+msgstr "%a %b %e, %H:%M"
+
+msgid "%a %l:%M:%S %p"
+msgstr "%a %H:%M:%S"
+
+msgid "%a %l:%M %p"
+msgstr "%a %H:%M"
+
+msgid "Automatically logging in…"
+msgstr "Encetar sesion automaticament…"
+
+msgid "Cancelling…"
+msgstr "Cancelando…"
+
+msgid "Custom"
+msgstr "Presonalizada"
+
+msgid "Custom session"
+msgstr "Sesion presonalizada"
+
+msgid "Computer Name"
+msgstr "Nome d'o ordinador"
+
+msgid "Login"
+msgstr "Encetar sesion"
+
+msgid "Unlock"
+msgstr "Desbloquear"
+
+msgid "Version"
+msgstr "Version"
+
+msgid "Suspend"
+msgstr "Suspender"
+
+msgid "Restart"
+msgstr "Reiniciar"
+
+msgid "Shut Down"
+msgstr "Amortar"
+
+msgid "Panel"
+msgstr "Panel"
+
+msgid "Languages:"
+msgstr "Luengas:"
+
+msgid "Language:"
+msgstr "Luenga:"
+
+msgid "Choose a language from the full list of available languages."
+msgstr "Trie una luenga d'a lista de luengas disposables."
+
+msgid "Unspecified"
+msgstr "Sin especificar"
+
+msgid "Label Text"
+msgstr "Texto d'a etiqueta"
+
+msgid "Icon name"
+msgstr "Nome d'o icono"
+
+msgid "Default Item"
+msgstr "Elemento predeterminau"
+
+msgid "Session"
+msgstr "Sesión"
+
+msgid "Banner message text"
+msgstr "Mensache de texto de dentrada"
+
+msgid "Use Compiz as the window manager"
+msgstr "Fer servir Compiz como chestor de finestras"
+
+msgid "Is it Running?"
+msgstr "Ye echecutando-se?"
+
+msgid "Log in as %s"
+msgstr "Dentrar-ie como %s"
+
+msgid "Choose a different account"
+msgstr "Trie una cuenta diferent"
+
+msgid "Guest"
+msgstr "Convidau"
+
+msgid "Log in as a temporary guest"
+msgstr "Dentrar-ie como un convidau temporal"
+
+msgid "Automatic Login"
+msgstr "Dentrada automatica"
+
+msgid "Automatically log into the system after selecting options"
+msgstr ""
+"Encetar sesion en o sistema automaticament dimpues de trigar as opcions"
+
+msgid "Currently logged in"
+msgstr "Actualment con a sesion encetada"
+
+msgid "COMMAND"
+msgstr "COMANDO"
+
+msgid "Keyboard:"
+msgstr "Teclau:"
+
+msgid "Keyboard"
+msgstr "Teclau"
+
+msgid "Can't log out: %s"
+msgstr "No se puede trancar a sesion: %s"
+
+msgid "Available"
+msgstr "Disposable"
+
+msgid "Invisible"
+msgstr "Invisible"
+
+msgid "Busy"
+msgstr "Aqueferau"
+
+msgid "Away"
+msgstr "Ausent"
+
+msgid "System Preferences"
+msgstr "Preferencias d'o sistema"
+
+msgid "Lock Screen"
+msgstr "Bloquear pantalla"
+
+msgid "Switch User"
+msgstr "Cambear l'usuario"
+
+msgid "Quit…"
+msgstr "Surtir…"
+
+msgid "Aqua"
+msgstr "Augua"
+
+msgid "Blinds"
+msgstr "Cortinas"
+
+msgid "Blue Marble"
+msgstr "Bola azula"
+
+msgid "Foot Fall"
+msgstr "Chislas de pietz"
+
+msgid "Fresh Flower"
+msgstr "Flor fresca"
+
+msgid "Garden"
+msgstr "Chardín"
+
+msgid "Green Meadow"
+msgstr "Pradera verda"
+
+msgid "Spaceflare"
+msgstr "Borracadura"
+
+msgid "Spaceflare Nova"
+msgstr "Borracadura de nova"
+
+msgid "Spaceflare Supernova"
+msgstr "Borracadura de supernova"
+
+msgid "Sundown Dunes"
+msgstr "Ocaso en as dunas"
+
+msgid "Terraform Blue"
+msgstr "Tierra azula"
+
+msgid "Terraform Green"
+msgstr "Tierra verda"
+
+msgid "Terraform Orange"
+msgstr "Tierra narancha"
+
+msgid "Two Wings"
+msgstr "Dos alas"
+
+msgid "Wood"
+msgstr "Fusta"
+
+msgid "Yellow Flower"
+msgstr "Flor amariella"
+
+msgid "Flow"
+msgstr "Fluixo"
+
+msgid "Gulp"
+msgstr "Trago"
+
+msgid "Silk"
+msgstr "Seda"
+
+msgid "Spring"
+msgstr "Primavera"
+
+msgid "Waves"
+msgstr "Onda"
+
+msgid "Dune"
+msgstr "Duna"
+
+msgid "Lady Bird"
+msgstr "Cuqueta de Dios"
+
+msgid "Rain Drops"
+msgstr "Chislas de plevia"
+
+msgid "Cannot find a terminal, using xterm, even if it may not work"
+msgstr ""
+"No s'ha puesto trobar una terminal, fendo servir xterm, incluso si puede que "
+"no funcione"
+
+msgid "could not get the screen resources (CRTCs, outputs, modes)"
+msgstr ""
+"no s'han puesto obtener os recursos d'as pantallas (CRTCs, surtidas, modos)"
+
+msgid "unhandled X error while getting the range of screen sizes"
+msgstr ""
+"error no manellau mientras se prebaba de obtener o rango de tamanyos de "
+"pantalla"
+
+msgid "could not get the range of screen sizes"
+msgstr "no s'ha puesto obtener o rango de tamanyos de pantalla"
+
+msgid "RANDR extension is not present"
+msgstr "A extension RANDR no ye present"
+
+msgid "could not get information about output %d"
+msgstr "no se puede obtener a informacion arredol d'a surtida %d"
+
+msgid ""
+"requested position/size for CRTC %d is outside the allowed limit: position="
+"(%d, %d), size=(%d, %d), maximum=(%d, %d)"
+msgstr ""
+"a posicion y/o tamanyo que calen ta lo CRTC %d ye difuera d'os límites "
+"permitius: posicion=(%d, %d), tamanyo=(%d, %d), maximo=(%d, %d)"
+
+msgid "could not set the configuration for CRTC %d"
+msgstr "no se puede establir a configuracion ta o CRTC %d"
+
+msgid "could not get information about CRTC %d"
+msgstr "No s'ha puesto obtener a informacion arredol de CRTC %d"
+
+msgid "Laptop"
+msgstr "Portatil"
+
+msgid ""
+"none of the saved display configurations matched the active configuration"
+msgstr "dengun d'os modos trigaus no ye compatible con os modos posibles:"
+
+msgid "CRTC %d cannot drive output %s"
+msgstr "o CRTC %d no puede adugar a surtida %s"
+
+msgid "output %s does not support mode %dx%d@%dHz"
+msgstr "A surtida %s no soporta lo modo %dx%d@%dHz"
+
+msgid "CRTC %d does not support rotation=%s"
+msgstr "CRTC %d no soporta a rotacion=%s"
+
+msgid ""
+"output %s does not have the same parameters as another cloned output:\n"
+"existing mode = %d, new mode = %d\n"
+"existing coordinates = (%d, %d), new coordinates = (%d, %d)\n"
+"existing rotation = %s, new rotation = %s"
+msgstr ""
+"a surtida %s no tien os mesmos parametros que atra surtida clonada:\n"
+"modo existent = %d, modo nueu = %d\n"
+"coordenadas existentz = (%d, %d), nuevas coordenadas = (%d, %d)\n"
+"rotacion existent = %s, rotacion nueva = %s"
+
+msgid "cannot clone to output %s"
+msgstr "no s'ha puesto clonar a la surtida %s"
+
+msgid "Trying modes for CRTC %d\n"
+msgstr "Prebando modos ta CRTC %d\n"
+
+msgid "CRTC %d: trying mode %dx%d@%dHz with output at %dx%d@%dHz (pass %d)\n"
+msgstr ""
+"CRTC %d: prebando lo modo %dx%d@%dHz con surtida en %dx%d@%dHz (pasada %d)\n"
+
+msgid ""
+"could not assign CRTCs to outputs:\n"
+"%s"
+msgstr ""
+"no s'ha puesto asignar CRTCs a las surtidas:\n"
+"%s"
+
+msgid ""
+"none of the selected modes were compatible with the possible modes:\n"
+"%s"
+msgstr ""
+"dengun d'os modos triados son compatibles con os modos posibles:\n"
+"%s"
+
+msgid ""
+"required virtual size does not fit available size: requested=(%d, %d), "
+"minimum=(%d, %d), maximum=(%d, %d)"
+msgstr ""
+"o tamanyo virtual que cal no s'achusta a lo tamanyo disponible: requeriu:"
+"(%d, %d), menimo=(%d, %d), maximo=(%d, %d)"
+
+msgid "Mirror Screens"
+msgstr "Reflexar pantallas"
+
+msgid "About GNOME"
+msgstr "Arredol de GNOME"
+
+msgid "Learn more about GNOME"
+msgstr "Aprenda mas arredol de GNOME"
+
+msgid "GNOME Library"
+msgstr "Biblioteca de GNOME"
+
+msgid "Friends of GNOME"
+msgstr "Amistanzas de GNOME"
+
+msgid "Contact"
+msgstr "Contauto"
+
+msgid "The Mysterious GEGL"
+msgstr "O misterioso GEGL"
+
+msgid "The Squeaky Rubber GNOME"
+msgstr "O pito de goma GNOME"
+
+msgid "Wanda The GNOME Fish"
+msgstr "Wanda, o pex de GNOME"
+
+msgid "Open URL"
+msgstr "Ubrir URL"
+
+msgid "Copy URL"
+msgstr "Copiar URL"
+
+msgid "About the GNOME Desktop"
+msgstr "Arredol d'o escritorio GNOME"
+
+msgid "%(name)s: %(value)s"
+msgstr "%(name)s: %(value)s"
+
+msgid "Welcome to the GNOME Desktop"
+msgstr "Biemplegau a lo escritorio GNOME"
+
+msgid "Brought to you by:"
+msgstr "Trayiu a tu por:"
+
+msgid "Distributor"
+msgstr "Distribuidor"
+
+msgid "Build Date"
+msgstr "Calendata de compilacion"
+
+msgid "Display information on this GNOME version"
+msgstr "Amostrar informacion d'ista version de GNOME"
+
+msgid ""
+"GNOME also includes a complete development platform for applications "
+"programmers, allowing the creation of powerful and complex applications."
+msgstr ""
+"GNOME tambien incluye una plataforma de desarrollo ta programadors, "
+"permitiendo a creacion de complexas y potents aplicacions."
+
+msgid ""
+"GNOME includes most of what you see on your computer, including the file "
+"manager, web browser, menus, and many applications."
+msgstr ""
+"GNOME incluye a mayoria d'o que veyes en o tuyo ordenador, incluyendo o "
+"chestor d'archivos, navegador web, menus, y atras muitas aplicacions."
+
+msgid ""
+"GNOME is a Free, usable, stable, accessible desktop environment for the "
+"Unix-like family of operating systems."
+msgstr ""
+"GNOME ye un entorno d'escritorio libre, usable, accesible y estable ta la "
+"parentalla de sistemas operativos Unix-like."
+
+msgid ""
+"GNOME's focus on usability and accessibility, regular release cycle, and "
+"strong corporate backing make it unique among Free Software desktops."
+msgstr ""
+"L'enfasis de GNOME en a facilidat d'uso y accesibilidat, un ciclo de "
+"lanzamiento regular, y fuerte refirme corporativo lo fan unico entre los "
+"escritorios de Software Libre."
+
+msgid ""
+"GNOME's greatest strength is our strong community. Virtually anyone, with "
+"or without coding skills, can contribute to making GNOME better."
+msgstr ""
+"O mayor fuerte de GNOME ye a suya fuerte comunidad. Virtualment "
+"cualsiquiera, con u sin habilidatz de programacion, puede contribuyir a "
+"fer un GNOME millor."
+
+msgid ""
+"Hundreds of people have contributed code to GNOME since it was started in "
+"1997; many more have contributed in other important ways, including "
+"translations, documentation, and quality assurance."
+msgstr ""
+"Cientos de presonas han contribuiu codigo ta GNOME dende que prencipio en "
+"1997; muita mas chen ha contribuiu d'atras importantes trazas, incluyendo "
+"traduccions, documentacion y asistencia de calidat."
+
+msgid "Error reading file '%s': %s"
+msgstr "Error leyendo l'archivo '%s': %s"
+
+msgid "Error rewinding file '%s': %s"
+msgstr "Error rebobinando l'archivo '%s': %s"
+
+msgid "File '%s' is not a regular file or directory."
+msgstr "L'archivo '%s' no ye un archivo regular ni un directorio."
+
+msgid "Cannot find file '%s'"
+msgstr "No se puede trobar l'archivo '%s'"
+
+msgid "No filename to save to"
+msgstr "No bi ha nome d'archivo ta guardar"
+
+msgid "No URL to launch"
+msgstr "Ni bi ha URL que lanzar"
+
+msgid "No command (Exec) to launch"
+msgstr "No bi ha dengun comando (Exec) que lanzar"
+
+msgid "Bad command (Exec) to launch"
+msgstr "Comando incorrecto (Exec) ta lanzar"
+
+msgid "Default GNOME Theme"
+msgstr "Tema predeterminau de GNOME"
+
+msgid "GNOME Shell"
+msgstr "GNOME Shell"
+
+msgid "Show date in clock"
+msgstr "Amostrar a calendata en o reloch"
+
+msgid "Show the week date in the calendar"
+msgstr "Amostrar a calendata d'a semana en o calendario"
+
+msgid "Show time with seconds"
+msgstr "Amostrar a hora con segundos"
+
+msgid "Uuids of extensions to disable"
+msgstr "Uuid d'as extensions que desactivar"
+
+msgid "disabled OpenSearch providers"
+msgstr "proveedors OpenSearch desactivaus"
+
+msgid "Command not found"
+msgstr "No s'ha trobau lo comando"
+
+msgid "Could not parse command:"
+msgstr "No s'ha puesto analizar o comando:"
+
+msgid "Execution of '%s' failed:"
+msgstr "Ha fallau a echecucion de \"%s\":"
+
+msgid "APPLICATIONS"
+msgstr "APLICACIONS"
+
+msgid "SETTINGS"
+msgstr "CONFIGURACION"
+
+msgid "Remove from Favorites"
+msgstr "Sacar d'os favoritos"
+
+msgid "Add to Favorites"
+msgstr "Anyadir a os favoritos"
+
+msgid "%s has been added to your favorites."
+msgstr "S'ha anyadiu %s a os suyos favoritos."
+
+msgid "%s has been removed from your favorites."
+msgstr "S'ha sacau %s d'os suyos favoritos"
+
+msgid "All Day"
+msgstr "Tot o diya"
+
+msgid "%H:%M"
+msgstr "%H:%M"
+
+msgid "%l:%M %p"
+msgstr "%l:%M %p"
+
+msgid "S"
+msgstr "D"
+
+msgid "M"
+msgstr "L"
+
+msgid "T"
+msgstr "M"
+
+msgid "W"
+msgstr "X"
+
+msgid "F"
+msgstr "V"
+
+msgid "Su"
+msgstr "Dom"
+
+msgid "Th"
+msgstr "Ch"
+
+msgid "Nothing Scheduled"
+msgstr "Cosa programau"
+
+msgid "%A, %B %d"
+msgstr "%A, %d de %B"
+
+msgid "%A, %B %d, %Y"
+msgstr "%A, %d de %B de %Y"
+
+msgid "Tomorrow"
+msgstr "Maitin"
+
+msgid "This week"
+msgstr "Ista semana"
+
+msgid "Next week"
+msgstr "A semana vinient"
+
+msgid "Remove"
+msgstr "Sacar"
+
+msgid "Date and Time Settings"
+msgstr "Achustes de hora y calendata"
+
+msgid "Open Calendar"
+msgstr "Ubrir calendario"
+
+msgid "%a %b %e, %R:%S"
+msgstr "%a %e de %b, %R:%S"
+
+msgid "%a %b %e, %R"
+msgstr "%a %e de %b, %R"
+
+msgid "%a %R:%S"
+msgstr "%a %R:%S"
+
+msgid "%a %R"
+msgstr "%a %R"
+
+msgid "%A %B %e, %Y"
+msgstr "%A, %e de %B de %Y"
+
+msgid "RECENT ITEMS"
+msgstr "ELEMENTOS RECIENTZ"
+
+msgid "Log Out %s"
+msgstr "Trancar a sesion %s"
+
+msgid "Log Out"
+msgstr "Trancar sesion"
+
+msgid "Click Log Out to quit these applications and log out of the system."
+msgstr ""
+"Prete \"Trancar sesion ta salir de ixas aplicacions y trancar a sesion d'o "
+"sistema."
+
+msgid "You will be logged out automatically in %d seconds."
+msgstr "A suya sesion se trancara automaticament en %d segundos."
+
+msgid "Logging out of the system."
+msgstr "Trancando a sesion."
+
+msgid "Power Off"
+msgstr "Amortar"
+
+msgid "Click Power Off to quit these applications and power off the system."
+msgstr "Prete \"Amortar\" ta salir d'ixas aplicacions y amortar o sistema."
+
+msgid "Powering off the system."
+msgstr "Amortando o sistema."
+
+msgid "The system will restart automatically in %d seconds."
+msgstr "O sistema se reiniciara automaticament en %d segundos."
+
+msgid "Restarting the system."
+msgstr "Reiniciando lo sistema."
+
+msgid "No extensions installed"
+msgstr "No bi ha extensions instaladas"
+
+msgid "Enabled"
+msgstr "Activau"
+
+msgid "Disabled"
+msgstr "Desactivau"
+
+msgid "Error"
+msgstr "Error"
+
+msgid "Out of date"
+msgstr "Caducau"
+
+msgid "View Source"
+msgstr "Veyer fuent"
+
+msgid "Web Page"
+msgstr "Pachina web"
+
+msgid "System Information"
+msgstr "Informacion d'o sistema"
+
+msgid "Windows"
+msgstr "Finestras"
+
+msgid "Quit %s"
+msgstr "Salir de %s"
+
+msgid "Activities"
+msgstr "Actividatz"
+
+msgid "Retry"
+msgstr "Prebar atra vegada"
+
+msgid "PLACES  DEVICES"
+msgstr "PUESTOS Y DISPOSITIVOS"
+
+msgid "Sorry, that didn't work. Please try again."
+msgstr "Prebe atra vegada."
+
+msgid "toggle-switch-us"
+msgstr "toggle-switch-intl"
+
+msgid "Please enter a command:"
+msgstr "Dentre un comando:"
+
+msgid "Searching..."
+msgstr "Mirando..."
+
+msgid "Power Off..."
+msgstr "Amortar..."
+
+msgid "My Account"
+msgstr "A mia cuenta"
+
+msgid "System Settings"
+msgstr "Configuracion d'o sistema"
+
+msgid "Log Out..."
+msgstr "Trancar a sesion..."
+
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
+msgid "Visibility"
+msgstr "Visibilidat"
+
+msgid "Bluetooth Settings"
+msgstr "Cofiguracion de Bluetooth"
+
+msgid "OK"
+msgstr "Aceptar"
+
+msgid "Localization Settings"
+msgstr "Configuracion rechional"
+
+msgid "<unknown>"
+msgstr "<desconoxiu>"
+
+msgid "disabled"
+msgstr "desactivada"
+
+msgid "connecting..."
+msgstr "conectando…"
+
+msgid "authentication required"
+msgstr "s'amenista autenticacion"
+
+msgid "cable unplugged"
+msgstr "cordon desenchegau"
+
+msgid "unavailable"
+msgstr "no disponible"
+
+msgid "More..."
+msgstr "Mas..."
+
+msgid "Enable networking"
+msgstr "Activar rete"
+
+msgid "Network Settings"
+msgstr "Configuracion d'o rete"
+
+msgid "Networking is disabled"
+msgstr "O rete ye desactivau"
+
+msgid "Network Manager"
+msgstr "Chestor d'o rete"
+
+msgid "Power Settings"
+msgstr "Configuracion d'enerchia"
+
+msgid "Estimating..."
+msgstr "Estimando…"
+
+msgid "%d hour remaining"
+msgid_plural "%d hours remaining"
+msgstr[0] "Manca %d hora"
+msgstr[1] "Mancan %d horas"
+
+msgid "%d %s %d %s remaining"
+msgstr "Mancan %d %s %d %s"
+
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] "hora"
+msgstr[1] "horas"
+
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] "minuto"
+msgstr[1] "minutos"
+
+msgid "%d minute remaining"
+msgid_plural "%d minutes remaining"
+msgstr[0] "Manca %d minuto"
+msgstr[1] "Mancan %d minutos"
+
+msgid "AC adapter"
+msgstr "Adaptador de corrient"
+
+msgid "Laptop battery"
+msgstr "Bateria d'o portatil"
+
+msgid "UPS"
+msgstr "SAI"
+
+msgid "Monitor"
+msgstr "Monitor"
+
+msgid "PDA"
+msgstr "PDA"
+
+msgid "Cell phone"
+msgstr "Telefono movil"
+
+msgid "Media player"
+msgstr "Reproductor multimedia"
+
+msgid "Tablet"
+msgstr "Tablet"
+
+msgid "Computer"
+msgstr "Equipo"
+
+msgid "Volume"
+msgstr "Volumen"
+
+msgid "Microphone"
+msgstr "Microfono"
+
+msgid "%s is online."
+msgstr "%s ye enchegau/da."
+
+msgid "%s is offline."
+msgstr "%s ye desenchegau/da."
+
+msgid "%s is away."
+msgstr "%s ye ausent."
+
+msgid "%s is busy."
+msgstr "%s ye aqueferau/da."
+
+msgid "Sent at %X on %A"
+msgstr "Ninviau a las %X o %A"
+
+msgid "%s is now known as %s"
+msgstr "Agora %s se dice %s"
+
+msgid "Type to search..."
+msgstr "Tecleyar ta mirar..."
+
+msgid "Search"
+msgstr "Mirar"
+
+msgid "'%s' is ready"
+msgstr "'%s' ye parau"
+
+msgid "%u Output"
+msgid_plural "%u Outputs"
+msgstr[0] "%u surtida"
+msgstr[1] "%u surtidas"
+
+msgid "%u Input"
+msgid_plural "%u Inputs"
+msgstr[0] "%u dentrada"
+msgstr[1] "%u dentradas"
+
+msgid "System Sounds"
+msgstr "Sonius d'o sistema"
+
+msgid "Print version"
+msgstr "Imprentar version"
+
+msgid "Failed to launch '%s'"
+msgstr "Ha fallau en encetar \"%s\""
+
+msgid "United Kingdom"
+msgstr "Reino Uniu"
+
+msgid "Home Folder"
+msgstr "Carpeta presonal"
+
+msgid "File System"
+msgstr "Sistema d'archivos"
+
+msgid "Default Background"
+msgstr "Fundo predeterminau"
+
+msgid "Adwaita"
+msgstr "Adwaita"
+
+msgid "There is only one"
+msgstr "Solo bi ha que uno"
+
+msgid "High Contrast"
+msgstr "Alto contraste"
+
+msgid "High contrast theme"
+msgstr "Tema d'alto contraste"
+
+msgid "High Contrast Inverse"
+msgstr "Alto contraste invertiu"
+
+msgid "High contrast inverse theme"
+msgstr "Tema d'alto contraste invertiu"
+
+msgid "Low Contrast"
+msgstr "Baxo contraste"
+
+msgid "Manage your network connections"
+msgstr "Chestione as suyas conexions de rete"
+
+msgid "Network"
+msgstr "Rete"
+
+msgid "Stamp"
+msgstr "Marca de tiempo"
+
+msgid "Network Connections"
+msgstr "Conexions de rete"
+
+msgid "Mobile broadband connection '%s' active"
+msgstr "A conexion de banda ampla movil \"%s\" ye activa"
+
+msgid "CDMA"
+msgstr "CDMA"
+
+msgid "Mobile Broadband (%s)"
+msgstr "Banda ampla movil (%s)"
+
+msgid "Mobile Broadband"
+msgstr "Banda ampla movil"
+
+msgid "roaming"
+msgstr "roaming"
+
+msgid "GSM"
+msgstr "GSM"
+
+msgid "You are now connected to the GSM network."
+msgstr "Agora ye enchegau a lo rete GSM."
+
+msgid "PIN code:"
+msgstr "Codigo PIN:"
+
+msgid "Show PIN code"
+msgstr "Amostrar codigo PIN"
+
+msgid "SIM PUK unlock required"
+msgstr "Cal desbloqueo PUK d'a SIM"
+
+msgid "SIM PUK Unlock Required"
+msgstr "Cal desbloqueo PUK d'a SIM"
+
+msgid "PUK code:"
+msgstr "Codigo PUK:"
+
+msgid "New PIN code:"
+msgstr "Codigo PIN nuevo:"
+
+msgid "Re-enter new PIN code:"
+msgstr "Torna a meter o codigo PIN nuevo:"
+
+msgid "Show PIN/PUK codes"
+msgstr "Amostrar codigos PIN/PUK"
+
+msgid "Auto Ethernet"
+msgstr "Ethernet automatica"
+
+msgid "Wired Networks (%s)"
+msgstr "Retes cableaus (%s)"
+
+msgid "Wired Network (%s)"
+msgstr "Rete cableau (%s)"
+
+msgid "Wired Networks"
+msgstr "Retes cableaus"
+
+msgid "Wired Network"
+msgstr "Rete cableau"
+
+msgid "disconnected"
+msgstr "desenchegau"
+
+msgid "You are now connected to the wired network."
+msgstr "Agora ye enchegau a lo rete cableau."
+
+msgid "Preparing wired network connection '%s'..."
+msgstr "Parando a conexion cableada \"%s\"..."
+
+msgid "(none)"
+msgstr "(denguna)"
+
+msgid "Wireless Networks (%s)"
+msgstr "Retes inalambricos (%s)"
+
+msgid "Wireless Network (%s)"
+msgstr "Rete inalambrico (%s)"
+
+msgid "Wireless Network"
+msgid_plural "Wireless Networks"
+msgstr[0] "Rete inalambrico"
+msgstr[1] "Retes inalambricos"
+
+msgid "wireless is disabled"
+msgstr "o rete inalambrico ye desactivau"
+
+msgid "More networks"
+msgstr "Mas retes"
+
+msgid "Wireless Networks Available"
+msgstr "Retes inalambricos disposables"
+
+msgid "Preparing wireless network connection '%s'..."
+msgstr "Parando a conexion de rete inalambrico \"%s\"..."
+
+msgid "WiMAX Mobile Broadband (%s)"
+msgstr "Banda ampla movil WiMAX (%s)"
+
+msgid "WiMAX Mobile Broadband"
+msgstr "Banda ampla movil WiMAX"
+
+msgid "LEAP"
+msgstr "LEAP"
+
+msgid "Dynamic WEP"
+msgstr "WEP dinamica"
+
+msgid "WPA/WPA2"
+msgstr "WPA/WPA2"
+
+msgid "WEP"
+msgstr "WEP"
+
+msgid "%u Mb/s"
+msgstr "%u Mb/s"
+
+msgid "%d dB"
+msgstr "%d dB"
+
+msgid "unknown"
+msgstr "Desconoxiu"
+
+msgid "Ethernet (%s)"
+msgstr "Ethernet (%s)"
+
+msgid "802.11 WiFi (%s)"
+msgstr "802.11 WiFi (%s)"
+
+msgid "GSM (%s)"
+msgstr "GSM (%s)"
+
+msgid "CDMA (%s)"
+msgstr "CDMA (%s)"
+
+msgid "WiMAX (%s)"
+msgstr "WiMAX (%s)"
+
+msgid "Interface:"
+msgstr "Interfaz:"
+
+msgid "Hardware Address:"
+msgstr "Adreza hardware:"
+
+msgid "Driver:"
+msgstr "Controlador:"
+
+msgid "Speed:"
+msgstr "Velocidat:"
+
+msgid "CINR:"
+msgstr "CINR:"
+
+msgid "BSID:"
+msgstr "BSID:"
+
+msgid "IPv4"
+msgstr "IPv4"
+
+msgid "IP Address:"
+msgstr "Adreza IP:"
+
+msgid "Broadcast Address:"
+msgstr "Adreza de difusion:"
+
+msgid "Primary DNS:"
+msgstr "DNS primario:"
+
+msgid "Secondary DNS:"
+msgstr "DNS secundario:"
+
+msgid "Ternary DNS:"
+msgstr "DNS terciario:"
+
+msgid "IPv6"
+msgstr "IPv6"
+
+msgid "Ignored"
+msgstr "Ignorau"
+
+msgid "Mobile broadband network password"
+msgstr "Clau de paso d'o rete de banda ampla movil"
+
+msgid "Disconnect"
+msgstr "Desenchegar"
+
+msgid "Enable Networking"
+msgstr "Activar rete"
+
+msgid "Enable Wireless"
+msgstr "Activar inalambrico"
+
+msgid "Enable Mobile Broadband"
+msgstr "Activar banda ampla movil"
+
+msgid "Enable WiMAX Mobile Broadband"
+msgstr "Activar banda ampla movil WiMAX"
+
+msgid "Enable Notifications"
+msgstr "Activar notificacions"
+
+msgid "Connection Information"
+msgstr "Informacion d'a conexion"
+
+msgid "Edit Connections..."
+msgstr "Editar conexions..."
+
+msgid "Disconnected"
+msgstr "Desenchegau"
+
+msgid "The network connection has been disconnected."
+msgstr "A conexion de rete a estau desenchegada."
+
+msgid "Preparing network connection '%s'..."
+msgstr "Parando a conexion de rete \"%s\"..."
+
+msgid "NetworkManager Applet"
+msgstr "Miniaplicacion Chestor d'o rete"
+
+msgid "Active Network Connections"
+msgstr "Conexions de rete activas"
+
+msgid "Connection:"
+msgstr "Conexion:"
+
+msgid "Network name:"
+msgstr "Nome d'o rete:"
+
+msgid "Wireless security:"
+msgstr "Seguridat inalambrica:"
+
+msgid "automatic"
+msgstr "automatico"
+
+msgid "Show password"
+msgstr "Amostrar clau de paso"
+
+msgid "Service:"
+msgstr "Servicio"
+
+msgid "Addresses"
+msgstr "Adrezas"
+
+msgid "DHCP client ID:"
+msgstr "ID d'o client DHCP:"
+
+msgid "Manual"
+msgstr "Manual"
+
+msgid "DNS servers:"
+msgstr "Servidors DNS:"
+
+msgid "2G (GPRS/EDGE)"
+msgstr "2G (GPRS/EDGE)"
+
+msgid "3G (UMTS/HSPA)"
+msgstr "3G (UMTS/HSPA)"
+
+msgid "Advanced"
+msgstr "Avanzada"
+
+msgid "Any"
+msgstr "Cualsiquier"
+
+msgid "Basic"
+msgstr "Basica"
+
+msgid "Change..."
+msgstr "Cambear..."
+
+msgid "Network ID:"
+msgstr "ID de Rete:"
+
+msgid "Number:"
+msgstr "Numero:"
+
+msgid "PIN:"
+msgstr "PIN:"
+
+msgid "Type:"
+msgstr "Tipo:"
+
+msgid "1 Gb/s"
+msgstr "1 Gb/s"
+
+msgid "10 Gb/s"
+msgstr "10 Gb/s"
+
+msgid "10 Mb/s"
+msgstr "10 Mb/s"
+
+msgid "100 Mb/s"
+msgstr "100 Mb/s"
+
+msgid "BNC"
+msgstr "BNC"
+
+msgid "Full duplex"
+msgstr "Full duplex"
+
+msgid "Cloned MAC address:"
+msgstr "Adreza MAC clonada:"
+
+msgid "Device MAC address:"
+msgstr "Adreza MAC d'o dispositivo:"
+
+msgid "Port:"
+msgstr "Puerto:"
+
+msgid "bytes"
+msgstr "bytes"
+
+msgid "A (5 GHz)"
+msgstr "A (5 GHz)"
+
+msgid "Ad-hoc"
+msgstr "Ad-hoc"
+
+msgid "B/G (2.4 GHz)"
+msgstr "B/G (2.4 GHz)"
+
+msgid "Band:"
+msgstr "Banda:"
+
+msgid "Channel:"
+msgstr "Canal:"
+
+msgid "Mb/s"
+msgstr "Mb/s"
+
+msgid "BSSID:"
+msgstr "BSSID:"
+
+msgid "SSID:"
+msgstr "SSID:"
+
+msgid "mW"
+msgstr "mW"
+
+msgid "CHAP"
+msgstr "CHAP"
+
+msgid "MSCHAP v2"
+msgstr "MSCHAPv2"
+
+msgid "EAP"
+msgstr "EAP"
+
+msgid "MSCHAP"
+msgstr "MSCHAP"
+
+msgid "PAP"
+msgstr "PAP"
+
+msgid "DSL"
+msgstr "ADSL"
+
+msgid "DSL connection %d"
+msgstr "Conexion ADSL %d"
+
+msgid "Automatic (VPN)"
+msgstr "Automatico (VPN)"
+
+msgid "Automatic (VPN) addresses only"
+msgstr "Solo que adrezas automaticas (VPN)"
+
+msgid "Automatic (PPP)"
+msgstr "Automatico (PPP)"
+
+msgid "Automatic (PPP) addresses only"
+msgstr "Solo que adrezas automaticas (PPP)"
+
+msgid "Automatic (PPPoE)"
+msgstr "Automatico (PPPoE)"
+
+msgid "Automatic (PPPoE) addresses only"
+msgstr "Solo que adrezas automaticas (PPPoE)"
+
+msgid "Automatic (DHCP)"
+msgstr "Automatico (DHCP)"
+
+msgid "Automatic (DHCP) addresses only"
+msgstr "Solo que adrezas automaticas (DHCP)"
+
+msgid "IPv6 Settings"
+msgstr "Achustes d'IPv6"
+
+msgid "MSCHAPv2"
+msgstr "MSCHAPv2"
+
+msgid "none"
+msgstr "denguno"
+
+msgid "PPP Settings"
+msgstr "Achustes de PPP"
+
+msgid "VPN"
+msgstr "VPN"
+
+msgid "VPN connection %d"
+msgstr "Conexion VPN %d"
+
+msgid "Wired"
+msgstr "Cableau"
+
+msgid "Wired connection %d"
+msgstr "Conexion cableada %d"
+
+msgid "802.1x Security"
+msgstr "Seguridat 802.1x"
+
+msgid "default"
+msgstr "predeterminau"
+
+msgid "%u (%u MHz)"
+msgstr "%u (%u MHz)"
+
+msgid "Wireless"
+msgstr "Inalambrico"
+
+msgid "Wireless connection %d"
+msgstr "Conexion inalambrica %d"
+
+msgid "WEP 40/128-bit Key (Hex or ASCII)"
+msgstr "Clau WEP 40/128-bit (Hexadecimal u ASCII)"
+
+msgid "WEP 128-bit Passphrase"
+msgstr "Frase de paso WEP de 128 bits"
+
+msgid "Dynamic WEP (802.1x)"
+msgstr "WEP dinamica (802.1x)"
+
+msgid "WPA  WPA2 Personal"
+msgstr "WPA y WPA2 presonal"
+
+msgid "WPA  WPA2 Enterprise"
+msgstr "WPA y WPA2 enterprise"
+
+msgid "Wireless Security"
+msgstr "Seguridat inalambrica"
+
+msgid "Editing %s"
+msgstr "Editando %s"
+
+msgid "Save..."
+msgstr "Alzar..."
+
+msgid "Export"
+msgstr "Exportar"
+
+msgid "never"
+msgstr "brenca"
+
+msgid "now"
+msgstr "agora"
+
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] "fa %d menutos"
+msgstr[1] "fa %d menutos"
+
+msgid "%d hour ago"
+msgid_plural "%d hours ago"
+msgstr[0] "fa %d hora"
+msgstr[1] "fa %d horas"
+
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "fa %d diya"
+msgstr[1] "fa %d diyas"
+
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "fa %d mes"
+msgstr[1] "fa %d meses"
+
+msgid "%d year ago"
+msgid_plural "%d years ago"
+msgstr[0] "fa %d anyada"
+msgstr[1] "fa %d anyadas"
+
+msgid "Last Used"
+msgstr "Feita servir por zaguera vegada"
+
+msgid "Edit..."
+msgstr "Editar..."
+
+msgid "%s Network"
+msgstr "Rete %s"
+
+msgid "Error: %s"
+msgstr "Error: %s"
+
+msgid "Usage:"
+msgstr "Uso:"
+
+msgid "EVDO"
+msgstr "EVDO"
+
+msgid "GPRS"
+msgstr "GPRS"
+
+msgid "EDGE"
+msgstr "EDGE"
+
+msgid "UMTS"
+msgstr "UMTS"
+
+msgid "HSDPA"
+msgstr "HSDPA"
+
+msgid "HSUPA"
+msgstr "HSUPA"
+
+msgid "HSPA"
+msgstr "HSPA"
+
+msgid "WiMAX"
+msgstr "WiMAX"
+
+msgid "not enabled"
+msgstr "no activau"
+
+msgid "not registered"
+msgstr "no ye rechistrau"
+
+msgid "searching"
+msgstr "buscando"
+
+msgid "%s (%s roaming)"
+msgstr "%s (%s roaming)"
+
+msgid "%s (roaming)"
+msgstr "%s (roaming)"
+
+msgid "Roaming network"
+msgstr "Rete roaming"
+
+msgid "Your Device:"
+msgstr "O suyo dispositivo:"
+
+msgid "Your Provider:"
+msgstr "O suyo proveedor:"
+
+msgid "Provider"
+msgstr "Proveedor"
+
+msgid "Provider:"
+msgstr "Proveedor:"
+
+msgid "Choose your Provider"
+msgstr "Trie o suyo proveedor:"
+
+msgid "Country or Region List:"
+msgstr "Lista de paises u rechions"
+
+msgid "Country or region"
+msgstr "Pais u rechion"
+
+msgid "My country is not listed"
+msgstr "O mio pais no ye en a lista"
+
+msgid "Choose your Provider's Country or Region"
+msgstr "Trie o pais u la rechion d'o suyo proveedor"
+
+msgid "Installed GSM device"
+msgstr "Dispositivo GSM instalau"
+
+msgid "Installed CDMA device"
+msgstr "Dispositivo CDMA instalau"
+
+msgid "Any device"
+msgstr "Cualsiquier dispositivo"
+
+msgid "Choose CA Certificate"
+msgstr "Trie un certificau CA:"
+
+msgid "MD5"
+msgstr "MD5"
+
+msgid "GTC"
+msgstr "GTC"
+
+msgid "Version 0"
+msgstr "Version 0"
+
+msgid "Version 1"
+msgstr "Version 1"
+
+msgid "PEAP version:"
+msgstr "Version PEAP:"
+
+msgid "Identity:"
+msgstr "Identidat:"
+
+msgid "Private key:"
+msgstr "Clau privada:"
+
+msgid "User certificate:"
+msgstr "Certificau de l'usuario"
+
+msgid "TLS"
+msgstr "TLS"
+
+msgid "Tunneled TLS"
+msgstr "TLS tunelau"
+
+msgid "Protected EAP (PEAP)"
+msgstr "EAP protechiu (PEAP)"
+
+msgid "1 (Default)"
+msgstr "1 (Predeterminau)"
+
+msgid "2"
+msgstr "2"
+
+msgid "3"
+msgstr "3"
+
+msgid "4"
+msgstr "4"
+
+msgid "Open System"
+msgstr "Sistema ubierto"
+
+msgid "Shared Key"
+msgstr "Clau compartida"
+
+msgid "Show key"
+msgstr "Amostrar clau"
+
+msgid "WEP index:"
+msgstr "Endiz WEP:"
+
+msgid "Key:"
+msgstr "Clau:"
+
+msgid "An instance of nm-applet is already running.\n"
+msgstr "Ya ye atra instancia de nm-applet echecutanso-se.\n"
+
+msgid "Apply"
+msgstr "Aplicar"
+
+msgid "Unable to convert characters from %s to %s."
+msgstr "No se pueden convertir caracters de %s a %s."
+
+msgid "Attempt to set invalid NRC map '%c'."
+msgstr "S'ha prebau de definir un mapa NRC no valido \"%c\"."
+
+msgid "Unrecognized identified coding system."
+msgstr "Sistema de codificacion identificau no reconoxiu."
+
+msgid "Attempt to set invalid wide NRC map '%c'."
+msgstr "S'ha prebau de definir un amplo no valido en o mapa NRC \"%c\"."
+
+msgid "Duplicate (%s/%s)!"
+msgstr "Duplicau (%s/%s)"
+
+msgid "Could not open console.\n"
+msgstr "No s'ha puesto ubrir a consola.\n"
+
+msgid "Could not parse the geometry spec passed to --geometry"
+msgstr ""
+"No s'ha puesto analizar a especificacion de cheometria pasada a --geometry"
+
+msgid "Error compiling regular expression \"%s\"."
+msgstr "Error en compilar a expresion regular \"%s\"."
+
+msgid "Error reading from child: %s."
+msgstr "Error en leyer dende o fillo: %s."
+
+msgid "Unable to send data to child, invalid charset convertor"
+msgstr ""
+"No se pueden ninviar os datos a lo fillo, conversor de codigos de caracters "
+"invalido"
+
+msgid "Error (%s) converting data for child, dropping."
+msgstr "Error (%s) en convertir datos dende o fillo, omitiendo."
+
+msgid "Chat on Google Talk, Facebook, MSN and many other chat services"
+msgstr "Charra en Google Talk, Facebook, MSN, y muitos atros servicios de chat"
+
+msgid "Empathy"
+msgstr "Empathy"
+
+msgid "Empathy Internet Messaging"
+msgstr "Client de mensacheria instantania Empathy"
+
+msgid "IM Client"
+msgstr "Client d'IM"
+
+msgid "Always open a separate chat window for new chats."
+msgstr "Ubrir una finestra direrent ta nuevas charradas."
+
+msgid "Chat window theme"
+msgstr "Tema d'a finestra de chat"
+
+msgid "Compact contact list"
+msgstr "Lista de contactos preta"
+
+msgid "Default directory to select an avatar image from"
+msgstr "Directorio por defecto d'an trigar un avatar"
+
+msgid "Disable popup notifications when away"
+msgstr "Desactivar notificacions emerchents cuan siga ausent"
+
+msgid "Disable sounds when away"
+msgstr "Desactivar sonius cuan siga ausent"
+
+msgid "Display incoming events in the status area"
+msgstr "Amostrar os eventos dentrantes en l'area d'estau"
+
+msgid "Empathy can publish the user's location"
+msgstr "Empathy puede publicar a localización d'o usuario"
+
+msgid "Empathy can use the GPS to guess the location"
+msgstr "Empathy puede fer servir o GPS ta suposar a localización"
+
+msgid "Empathy can use the cellular network to guess the location"
+msgstr "Empathy puede fer servir o rete movil ta suposar a localización"
+
+msgid "Empathy can use the network to guess the location"
+msgstr "Empathy puede fer servir o rete ta suposar a localización"
+
+msgid "Empathy default download folder"
+msgstr "Carpeta predeterminada de descargas d'Empathy"
+
+msgid "Empathy has migrated butterfly logs"
+msgstr "Empathy ha migrau os logs de butterfly"
+
+msgid "Empathy should auto-away when idle"
+msgstr "Empathy se meterá ausent automaticament cuan siga inactivo"
+
+msgid "Empathy should auto-connect on startup"
+msgstr "Empathy s'enchegará automaticament al prencipie"
+
+msgid "Empathy should reduce the location's accuracy"
+msgstr "Empathy reducirá a precisión d'a localización"
+
+msgid "Empathy should use the avatar of the contact as the chat window icon"
+msgstr ""
+"Empathy ferá servir l'avatar d'o contacto como o icono d'a finestra de chat"
+
+msgid "Enable popup notifications for new messages"
+msgstr "Activar notificacions emerchents ta mensaches nuevos"
+
+msgid "Hide main window"
+msgstr "Amagar finestra prencipal"
+
+msgid "Hide the main window."
+msgstr "Amagar a finestra prencipal"
+
+msgid "Open new chats in separate windows"
+msgstr "Ubrir nuevas charradas en finestras separadas"
+
+msgid "Play a sound for incoming messages"
+msgstr "Fer sentir un soniu ta os mensaches dentrants"
+
+msgid "Play a sound for new conversations"
+msgstr "Fer sentir un soniu ta as nuevas charradas"
+
+msgid "Play a sound for outgoing messages"
+msgstr "Fer sentir un soniu ta os mensaches salients"
+
+msgid "Play a sound when a contact logs in"
+msgstr "Fer sentir un soniu cuando un contacto s'enchega"
+
+msgid "Play a sound when a contact logs out"
+msgstr "Fer sentir un soniu cuando un contacto se desenchega"
+
+msgid "Show avatars"
+msgstr "Amostrar avatars"
+
+msgid "Show contact list in rooms"
+msgstr "Amostrar lista de contactos en salas"
+
+msgid "Show offline contacts"
+msgstr "Amostrar contactos desenchegaus"
+
+msgid "Show protocols"
+msgstr "Amostrar protocols"
+
+msgid "The last directory that an avatar image was chosen from."
+msgstr "O zaguero directorio d'an s'ha trigau un avatar."
+
+msgid "Use graphical smileys"
+msgstr "Fer servir emoticons graficos"
+
+msgid "Use notification sounds"
+msgstr "Fer servir sonius de notificación"
+
+msgid "Use theme for chat rooms"
+msgstr "Fer servir tema ta salas de charrada"
+
+msgid "Whether Empathy can publish the user's location to their contacts."
+msgstr ""
+"Dice cuan Empathy puede publicar a localizacion d'o usuario a os suyos "
+"contactos."
+
+msgid "Whether Empathy can use the GPS to guess the location."
+msgstr "Dice cuan Empathy puede usar o GPS ta suposar a localización."
+
+msgid "Whether Empathy can use the cellular network to guess the location."
+msgstr ""
+"Dice cuan Empathy puede fer servir o rete movil ta suposar a localización."
+
+msgid "Whether Empathy can use the network to guess the location."
+msgstr "Dice cuan Empathy puede fer servir o rete ta suposar a localización."
+
+msgid "Whether Empathy has migrated butterfly logs."
+msgstr "Dice si Empathy ha migrau os rechistros de butterfly."
+
+msgid "Manage Messaging and VoIP accounts"
+msgstr "Chestionar cuentas de mensacheria y VoIP"
+
+msgid "Messaging and VoIP Accounts"
+msgstr "Cuentas de mensacheria y VoIP"
+
+msgid "File transfer completed, but the file was corrupted"
+msgstr "Trasferencia d'archivo rematada, pero l'archivo ye corrupto."
+
+msgid "File transfer not supported by remote contact"
+msgstr "O contacto remoto no soporta a transferencia d'archivos"
+
+msgid "The selected file is not a regular file"
+msgstr "L'archivo trigau no ye un archivo regular"
+
+msgid "The selected file is empty"
+msgstr "L'archivo trigau ye buedo"
+
+msgid "Socket type not supported"
+msgstr "Tipo de socket no soportau"
+
+msgid "No reason was specified"
+msgstr "No s'ha especificau una razón"
+
+msgid "The change in state was requested"
+msgstr "S'ha demandau o cambeo d'estau"
+
+msgid "You canceled the file transfer"
+msgstr "Has cancelau a transferencia d'archivo"
+
+msgid "The other participant canceled the file transfer"
+msgstr "L'atro participant ha cancelau a transferencia d'archivo"
+
+msgid "Error while trying to transfer the file"
+msgstr "Error prebando de transferir l'archivo"
+
+msgid "The other participant is unable to transfer the file"
+msgstr "L'atro participant no puede transferir l'archivo"
+
+msgid "Unknown reason"
+msgstr "Razón desconoxida"
+
+msgid "Offline"
+msgstr "Desenchegau"
+
+msgid "No reason specified"
+msgstr "Denguna razón especificada"
+
+msgid "Status is set to offline"
+msgstr "L'estau s'ha meso como desenchegau"
+
+msgid "Network error"
+msgstr "Error de rete"
+
+msgid "Authentication failed"
+msgstr "Error d'autenticación"
+
+msgid "Encryption error"
+msgstr "Error de cifrau"
+
+msgid "Name in use"
+msgstr "Nome en uso"
+
+msgid "Certificate not provided"
+msgstr "Certifucau no proporcionau"
+
+msgid "Certificate untrusted"
+msgstr "Certificau no seguro"
+
+msgid "Certificate expired"
+msgstr "Certificau caducau"
+
+msgid "Certificate not activated"
+msgstr "Certifucau no activau"
+
+msgid "Certificate error"
+msgstr "Error de certificau"
+
+msgid "Encryption is not available"
+msgstr "Cifrau no disposable"
+
+msgid "Certificate is invalid"
+msgstr "O certificau no ye valido"
+
+msgid "Connection can't be established"
+msgstr "No se puede establir a conixión"
+
+msgid "Connection has been lost"
+msgstr "A conixión s'ha perdiu"
+
+msgid "The account already exists on the server"
+msgstr "A cuenta ya existe en o servidor"
+
+msgid "Server is currently too busy to handle the connection"
+msgstr "O servidor ye masiau aqueferau ta manellar a conixión"
+
+msgid "People Nearby"
+msgstr "Chent a man"
+
+msgid "Yahoo! Japan"
+msgstr "Yahoo! Chapón"
+
+msgid "Google Talk"
+msgstr "Google Talk"
+
+msgid "Facebook Chat"
+msgstr "Chat de Facebook"
+
+msgid "%d second ago"
+msgid_plural "%d seconds ago"
+msgstr[0] "fa %d segundo"
+msgstr[1] "fa %d segundos"
+
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "fa %d semana"
+msgstr[1] "fa %d semanas"
+
+msgid "in the future"
+msgstr "en l'esvenidero"
+
+msgid "Account"
+msgstr "Cuenta"
+
+msgid "Server"
+msgstr "Servidor"
+
+msgid "Port"
+msgstr "Puerto"
+
+msgid "The account %s cannot be edited in Empathy."
+msgstr "A cuenta %s no se puet editar en Empathy."
+
+msgid "Account:"
+msgstr "Cuenta:"
+
+msgid "This account already exists on the server"
+msgstr "Ista cuenta ya existe en o servidor"
+
+msgid "Create a new account on the server"
+msgstr "Creyar una nueva cuenta en o servidor"
+
+msgid "%s$s on %s$s"
+msgstr "%s$s en %s$s"
+
+msgid "%s Account"
+msgstr "Cuenta de %s"
+
+msgid "New account"
+msgstr "Cuenta nueva"
+
+msgid "Example: MyScreenName"
+msgstr "Exemplo: NombreTaAmostrar"
+
+msgid "Remember Password"
+msgstr "Remerar clau de paso"
+
+msgid "Remember password"
+msgstr "Remerar clau de paso"
+
+msgid "What is your AIM password?"
+msgstr "¿Cuala ye la tuya clau d'AIM?"
+
+msgid "Server:"
+msgstr "Servidor:"
+
+msgid "Example: username"
+msgstr "Exemplo: nomedusuario"
+
+msgid "What is your GroupWise User ID?"
+msgstr "¿Cualo ye lo tuyo ID d'usuario de GroupWise?"
+
+msgid "What is your GroupWise password?"
+msgstr "¿Cuala ye la tuya clau de GroupWise?"
+
+msgid "Example: 123456789"
+msgstr "Exemplo: 123456789"
+
+msgid "Character set:"
+msgstr "Conchunto de caracteres"
+
+msgid "ICQ UIN:"
+msgstr "UIN d'ICQ:"
+
+msgid "What is your ICQ UIN?"
+msgstr "¿Cualo ye lo tuyo ICQ UIN?"
+
+msgid "What is your ICQ password?"
+msgstr "¿Cuala ye la tuya clau d'ICQ?"
+
+msgid "Auto"
+msgstr "Automatico"
+
+msgid "UDP"
+msgstr "UDP"
+
+msgid "TCP"
+msgstr "TCP"
+
+msgid "Register"
+msgstr "Rechistrar"
+
+msgid "Options"
+msgstr "Opcions"
+
+msgid "Network:"
+msgstr "Rete:"
+
+msgid "Real name:"
+msgstr "Nome reyal:"
+
+msgid "Servers"
+msgstr "Servidors"
+
+msgid "Which IRC network?"
+msgstr "¿Cualo rete de IRC?"
+
+msgid "Example: user@gmail.com"
+msgstr "Exemplo: usuario@gmail.com"
+
+msgid "Example: user@jabber.org"
+msgstr "Exemplo: usuario@jabber.org"
+
+msgid "Encryption required (TLS/SSL)"
+msgstr "S'amenista cifrau (TLS/SSL)"
+
+msgid "Ignore SSL certificate errors"
+msgstr "No parar cuenta d'as errors de certificau SSL"
+
+msgid "Priority:"
+msgstr "Prioridat:"
+
+msgid ""
+"This is your username, not your normal Facebook login.\n"
+"If you are facebook.com/badger, enter badger.\n"
+"Use <a href=\"http://www.facebook.com/username/\">this page</a> to choose a "
+"Facebook username if you don't have one."
+msgstr ""
+"Iste ye lo tuyo nome d'usuario, no lo tuyo login normal de Facebook.\n"
+"Si tu yes facebook.com/badger, mete badger.\n"
+"Fe servir <a href=\"http://www.facebook.com/username/\">ista pachina</a> ta "
+"trigar un nome d'usuario de Facebook si encara no tiens uno."
+
+msgid "Use old SSL"
+msgstr "Fer servir SSL viello"
+
+msgid "What is your Facebook password?"
+msgstr "¿Cuala ye la tuya clau de Facebook?"
+
+msgid "What is your Facebook username?"
+msgstr "¿Cualo ye lo tuyo nome d'usuario de Facebook?"
+
+msgid "What is your Google ID?"
+msgstr "¿Cualo ye lo tuyo ID de google?"
+
+msgid "What is your Google password?"
+msgstr "¿Cuala ye la tuya clau de Google?"
+
+msgid "What is your Jabber ID?"
+msgstr "¿Cualo ye lo tuyo Jabber ID?"
+
+msgid "What is your Jabber password?"
+msgstr "¿Cuala ye la tuya clau de Jabber?"
+
+msgid "What is your desired Jabber ID?"
+msgstr "¿Cualo ID de Jabber quiers?"
+
+msgid "What is your desired Jabber password?"
+msgstr "¿Cuala clau de Jabber quiers?"
+
+msgid "Example: user@hotmail.com"
+msgstr "Exemplo: usuario@hotmail.com"
+
+msgid "What is your Windows Live ID?"
+msgstr "¿Cualo ye lo tuyo ID de Windows Live?"
+
+msgid "What is your Windows Live password?"
+msgstr "¿Cuala ye la tuya clau de Windows Live?"
+
+msgid "E-mail address:"
+msgstr "Adreza de e-mail:"
+
+msgid "Nickname:"
+msgstr "Mote:"
+
+msgid "First Name:"
+msgstr "Nome:"
+
+msgid "Jabber ID:"
+msgstr "Jabber ID:"
+
+msgid "Last Name:"
+msgstr "Apellius:"
+
+msgid "Published Name:"
+msgstr "Nome publicau:"
+
+msgid "Example: user@my.sip.server"
+msgstr "Exemplo: usuario@o.moi.servidor.sip"
+
+msgid "Authentication username:"
+msgstr "Nome d'usuario d'autenticación:"
+
+msgid "Proxy Options"
+msgstr "Opcions de proxy"
+
+msgid "STUN Server:"
+msgstr "Servidor STUN:"
+
+msgid "What is your SIP account password?"
+msgstr "¿Cuala ye la tuya clau d'a cuenta SIP?"
+
+msgid "What is your SIP login ID?"
+msgstr "¿Cualo ye lo tuyo ID de login SIP?"
+
+msgid "What is your Yahoo! ID?"
+msgstr "¿Cualo ye o tuyo ID de Yahoo!?"
+
+msgid "What is your Yahoo! password?"
+msgstr "¿Cuala ye la tuya clau de Yahoo!?"
+
+msgid "Yahoo! ID:"
+msgstr "ID de Yahoo!:"
+
+msgid "Couldn't convert image"
+msgstr "No s'ha puesto convertir a imachen"
+
+msgid "Select Your Avatar Image"
+msgstr "Trigar a tuya imachen d'Avatar"
+
+msgid "No Image"
+msgstr "Sin imachen"
+
+msgid "Failed to open private chat"
+msgstr "No s'ha puesto ubrir chat privau"
+
+msgid "Usage: %s"
+msgstr "Uso: %s"
+
+msgid "offline"
+msgstr "desenchegau"
+
+msgid "invalid contact"
+msgstr "contacto no valido"
+
+msgid "too long message"
+msgstr "mensache masiau gran"
+
+msgid "not implemented"
+msgstr "sin implementar"
+
+msgid "Error sending message '%s': %s"
+msgstr "Error ninviando lo mensache '%s': %s"
+
+msgid "Topic:"
+msgstr "Tema:"
+
+msgid "Topic set to: %s"
+msgstr "Tema meso a: %s"
+
+msgid "No topic defined"
+msgstr "Tema sin definir"
+
+msgid "Insert Smiley"
+msgstr "Meter emoticon"
+
+msgid "Send"
+msgstr "Ninviar"
+
+msgid "%s has disconnected"
+msgstr "% s'ha desenchegau"
+
+msgid " (%s)"
+msgstr "(%s)"
+
+msgid "Would you like to store this password?"
+msgstr "¿Te gustaria guardar ista clau?"
+
+msgid "Remember"
+msgstr "Remerar"
+
+msgid "Join"
+msgstr "Chuntar-se"
+
+msgid "Connected"
+msgstr "Enchegau"
+
+msgid "Conversation"
+msgstr "Charrada"
+
+msgid "%A %B %d %Y"
+msgstr "%A %B %d %Y"
+
+msgid "Edit Contact Information"
+msgstr "Editar a información d'o contacto"
+
+msgid "Personal Information"
+msgstr "Informacion presonal"
+
+msgid "New Contact"
+msgstr "Nuevo contacto"
+
+msgid "_Report this contact as abusive"
+msgid_plural "_Report these contacts as abusive"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Ungrouped"
+msgstr "Sin colla"
+
+msgid "Removing group"
+msgstr "Borrando colla"
+
+msgid "Removing contact"
+msgstr "Borrando contacto"
+
+msgid "Add Contact…"
+msgstr "Anyadir contacto…"
+
+msgid "Previous Conversations"
+msgstr "Charradas anteriors"
+
+msgid "Send File"
+msgstr "Ninviar archivo"
+
+msgid "Information"
+msgstr "Información"
+
+msgid "Search contacts"
+msgstr "Buscar contactos"
+
+msgid "Search: "
+msgstr "Buscar:"
+
+msgid "No contacts found"
+msgstr "No s'han trobau contactos"
+
+msgid "Select a contact"
+msgstr "Trigar un contacto"
+
+msgid "Phone number:"
+msgstr "Numero de telefono:"
+
+msgid "Website:"
+msgstr "Pachina web:"
+
+msgid "Birthday:"
+msgstr "Cabo d'año:"
+
+msgid "State:"
+msgstr "Estau:"
+
+msgid "City:"
+msgstr "Ciudat:"
+
+msgid "Area:"
+msgstr "Area:"
+
+msgid "Postal Code:"
+msgstr "Codigo postal:"
+
+msgid "Street:"
+msgstr "Carrera:"
+
+msgid "Text:"
+msgstr "Texto:"
+
+msgid "Description:"
+msgstr "Descripcion:"
+
+msgid "Accuracy Level:"
+msgstr "Ran de precisión:"
+
+msgid "Error:"
+msgstr "Error:"
+
+msgid "Last Updated on:"
+msgstr "Esviellau por zaguera vegada en:"
+
+msgid "%s, %s"
+msgstr "%s, %s"
+
+msgid "%B %e, %Y at %R UTC"
+msgstr "%e de %B de %Y a las %R UTC"
+
+msgid "Client:"
+msgstr "Client:"
+
+msgid "OS:"
+msgstr "Sistema operativo:"
+
+msgid "Version:"
+msgstr "Version:"
+
+msgid "Groups"
+msgstr "Collas"
+
+msgid "Add Group"
+msgstr "Anyadir colla"
+
+msgid "Select"
+msgstr "Trigar"
+
+msgid "Group"
+msgstr "Colla"
+
+msgid "The following identity will be blocked:"
+msgid_plural "The following identities will be blocked:"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "The following identity can not be blocked:"
+msgid_plural "The following identities can not be blocked:"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Linked contact containing %u contact"
+msgid_plural "Linked contacts containing %u contacts"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Online from a phone or mobile device"
+msgstr "Enchegau con un telefono movil u con un dispositivo movil"
+
+msgid "New Network"
+msgstr "Nuevo rete"
+
+msgid "Choose an IRC network"
+msgstr "Trigar un rete d'IRC"
+
+msgid "new server"
+msgstr "nuevo servidor"
+
+msgid "SSL"
+msgstr "SSL"
+
+msgid "Link"
+msgstr "Enrastre"
+
+msgid "Conversations"
+msgstr "Conversacions"
+
+msgid "For:"
+msgstr "Ta:"
+
+msgid "Chat"
+msgstr "Chat"
+
+msgid "New Conversation"
+msgstr "Nueva charrada"
+
+msgid "Send Video"
+msgstr "Ninviar Vidio"
+
+msgid "Call"
+msgstr "Gritar"
+
+msgid ""
+"Enter your password for account\n"
+"%s"
+msgstr ""
+"Mete a tuya clau de paso ta la cuenta\n"
+"%s"
+
+msgid "Set status"
+msgstr "Meter estau"
+
+msgid "Custom messages…"
+msgstr "Mensaches presonalizaus…"
+
+msgid "New %s account"
+msgstr "Nueva cuenta de %s"
+
+msgid "Phrase not found"
+msgstr "Frase no trobada"
+
+msgid "Contact connected"
+msgstr "Contacto desenchegau"
+
+msgid "Contact disconnected"
+msgstr "Contacto desenchegau"
+
+msgid "Connected to server"
+msgstr "Enchegau a lo servidor"
+
+msgid "Disconnected from server"
+msgstr "Desenchegau de lo servidor"
+
+msgid "Continue"
+msgstr "Continar"
+
+msgid "Certificate Details"
+msgstr "Detalles de certificau"
+
+msgid "Select a file"
+msgstr "Trigar un archivo"
+
+msgid "Unicode"
+msgstr "Unicode"
+
+msgid "Western"
+msgstr "Occidental"
+
+msgid "No error message"
+msgstr "Sin mensache d'error"
+
+msgid "- Empathy IM Client"
+msgstr "Client de mensacheria instantanea Empathy"
+
+msgid "An Instant Messaging client for GNOME"
+msgstr "Un client de mensacheria instantanea ta GNOME"
+
+msgid "Select the accounts you want to import:"
+msgstr "Trigar as cuentas que quiers importar:"
+
+msgid "No, that's all for now"
+msgstr "No, ya ye prou"
+
+msgid ""
+"Empathy can automatically discover and chat with the people connected on the "
+"same network as you. If you want to use this feature, please check that the "
+"details below are correct. You can easily change these details later or "
+"disable this feature by using the 'Accounts' dialog"
+msgstr ""
+"Empathy puede automaticament detectar y charrar con la chent conectada en o "
+"mesmo rete que tu. Si quiers fer servir ista caracteristica, por favor "
+"compreba que os siguients detalles con correctos. Puetz cambearlos facilment "
+"dimpues u desactivar ista caracteristica fendo servir o dialogo de 'Cuentas'"
+
+msgid "Edit->Accounts"
+msgstr "Editar->Cuentas"
+
+msgid "telepathy-salut not installed"
+msgstr "telepathy-salut no ye instalau"
+
+msgid "Welcome to Empathy"
+msgstr "Biemplegau a Empathy"
+
+msgid "Import your existing accounts"
+msgstr "Importar as tuyas cuentas existents"
+
+msgid "There are unsaved modifications to your %s account."
+msgstr "Bi ha modificacions en a tuya cuenta de %s sin guardar."
+
+msgid "Connecting…"
+msgstr "Conectando…"
+
+msgid "Offline — %s"
+msgstr "Desenchegau — %s"
+
+msgid "Disconnected — %s"
+msgstr "Desenchegau — %s"
+
+msgid "Unknown Status"
+msgstr "Estau desconoxiu"
+
+msgid "Disable"
+msgstr "Desactivau"
+
+msgid "Protocol:"
+msgstr "Protocolo:"
+
+msgid "Add…"
+msgstr "Anyadir…"
+
+msgid "Import…"
+msgstr "Importar…"
+
+msgid "People nearby"
+msgstr "Chen a man"
+
+msgid "- Empathy Audio/Video Client"
+msgstr "- Client d'audio/vidio Empathy"
+
+msgid "Empathy Audio/Video Client"
+msgstr "Client d'audio/vidio Empathy"
+
+msgid "Contrast"
+msgstr "Contraste"
+
+msgid "Gamma"
+msgstr "Gamma"
+
+msgid "Audio input"
+msgstr "Dentrada d'audio"
+
+msgid "Video input"
+msgstr "Dentrada de vidio"
+
+msgid "Dialpad"
+msgstr "Teclau"
+
+msgid "Call with %s"
+msgstr "Gritar con %s"
+
+msgid "Technical Details"
+msgstr "Detalles tecnicos"
+
+msgid "Audio"
+msgstr "Audio"
+
+msgid "Call the contact again"
+msgstr "Tornar a gritar a lo contacto"
+
+msgid "Disable camera and stop sending video"
+msgstr "Desactivar a camara y aturar de ninviar vidio"
+
+msgid "Enable camera and send video"
+msgstr "Activar a camara y ninviar vidio"
+
+msgid "Enable camera but don't send video"
+msgstr "Activar a camara pero no ninviar vidio"
+
+msgid "Hang up"
+msgstr "Colgar"
+
+msgid "Preview"
+msgstr "Previsualizar"
+
+msgid "Redial"
+msgstr "Tornar a marcar"
+
+msgid "Send Audio"
+msgstr "Ninviar audio"
+
+msgid "Video"
+msgstr "Vidio"
+
+msgid "%s (%d unread)"
+msgid_plural "%s (%d unread)"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "%s (and %u other)"
+msgid_plural "%s (and %u others)"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "%s (%d unread from others)"
+msgid_plural "%s (%d unread from others)"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "%s (%d unread from all)"
+msgid_plural "%s (%d unread from all)"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Typing a message."
+msgstr "Escribindo un mensache"
+
+msgid "Show Contact List"
+msgstr "Amostrar lista de contacto"
+
+msgid "Invitation to join %s"
+msgstr "Convite a chuntar-te a %s"
+
+msgid "%s is inviting you to join %s"
+msgstr "%s ye convidando-te a chuntar-te a %s"
+
+msgid "%s invited you to join %s"
+msgstr "%s t'ha convidau a chuntar-te a %s"
+
+msgid "You have been invited to join %s"
+msgstr "T'han convidau a chuntar-te a %s"
+
+msgid ""
+"\n"
+"Message: %s"
+msgstr ""
+"\n"
+"Mensache: %s"
+
+msgid "%s of %s at %s/s"
+msgstr "%s de %s a %s/s"
+
+msgid "%s of %s"
+msgstr "%s de %s"
+
+msgid "Sending \"%s\" to %s"
+msgstr "Ninviando \"%s\" a %s"
+
+msgid "Error sending \"%s\" to %s"
+msgstr "Error ninviando \"%s\" a %s"
+
+msgid "Error sending a file"
+msgstr "Error ninviando un archivo"
+
+msgid "\"%s\" sent to %s"
+msgstr "\"%s\" ninviau a %s"
+
+msgid "File transfer completed"
+msgstr "Transferencia d'archivo rematada"
+
+msgid "Hashing \"%s\""
+msgstr "Fendo o hash \"%s\""
+
+msgid "Remaining"
+msgstr "Restant"
+
+msgid "File Transfers"
+msgstr "Transferencias d'archivos"
+
+msgid ""
+"No accounts to import could be found. Empathy currently only supports "
+"importing accounts from Pidgin."
+msgstr ""
+"No se pueden trobar denguna cuenta ta importar. Actualment Empathy  soporta "
+"importar solo que cuentas de Pidgin."
+
+msgid "Import Accounts"
+msgstr "Importar cuentas"
+
+msgid "Protocol"
+msgstr "Protocolo"
+
+msgid "Source"
+msgstr "Fuent"
+
+msgid "Reconnect"
+msgstr "Reenchegar"
+
+msgid "Edit Account"
+msgstr "Editar cuenta"
+
+msgid "Contact List"
+msgstr "Lista de contactos"
+
+msgid "Show and edit accounts"
+msgstr "Amostrar y editar cuentas"
+
+msgid "Find in Contact List"
+msgstr "Buscar en a lista de contacto"
+
+msgid "Show Protocols"
+msgstr "Amostrar protocols"
+
+msgid "Accounts"
+msgstr "Cuentas"
+
+msgid "Join…"
+msgstr "Chuntar-se…"
+
+msgid "New Conversation…"
+msgstr "Nueva conversacion…"
+
+msgid "Offline Contacts"
+msgstr "Contactos desenchegaus"
+
+msgid "Search for Contacts…"
+msgstr "Buscar contactos…"
+
+msgid "Message received"
+msgstr "Mensache recibiu"
+
+msgid "Message sent"
+msgstr "Mensache ninviau"
+
+msgid "New conversation"
+msgstr "Nueva charrada"
+
+msgid "Contact goes online"
+msgstr "Contacto s'enchega"
+
+msgid "Contact goes offline"
+msgstr "Contacto se desenchega"
+
+msgid "Account connected"
+msgstr "Cuenta enchegada"
+
+msgid "Account disconnected"
+msgstr "Cuenta desenchegada"
+
+msgid "Enable notifications when a contact comes online"
+msgstr "Activar notificacions cuan s'enchega un contacto"
+
+msgid "Enable notifications when a contact goes offline"
+msgstr "Activar notificacions cuan se desenchega un contacto"
+
+msgid "Enable notifications when the chat is not focused"
+msgstr "Activar notificacions cuan a conversacion no tiene lo foco"
+
+msgid "Log conversations"
+msgstr "Rechistrar charradas"
+
+msgid "Notifications"
+msgstr "Notificacions"
+
+msgid "Sounds"
+msgstr "Sonius"
+
+msgid "Themes"
+msgstr "Temas"
+
+msgid "Automatically connect on startup"
+msgstr "Conectar automaticament en dentrar"
+
+msgid "Cellphone"
+msgstr "Movil"
+
+msgid "Enable sound notifications"
+msgstr "Activar notificacions de soniu"
+
+msgid "GPS"
+msgstr "GPS"
+
+msgid "Network (IP, Wi-Fi)"
+msgstr "Rete (IP, Wi-Fi)"
+
+msgid "Status"
+msgstr "Estau"
+
+msgid "Quit"
+msgstr "Surtir"
+
+msgid "Pause"
+msgstr "Pausar"
+
+msgid "Level "
+msgstr "Ran"
+
+msgid "Message"
+msgstr "Mensache"
+
+msgid "Critical"
+msgstr "Critico"
+
+msgid "Level"
+msgstr "Ran"
+
+msgid "Invite"
+msgstr "Convidar"
+
+msgid "- Empathy Accounts"
+msgstr "- Cuentas d'empathy"
+
+msgid "Empathy Accounts"
+msgstr "Cuentas d'empathy"
+
+msgid "Empathy Debugger"
+msgstr "Debugger d'Empathy"
+
+msgid "- Empathy Chat Client"
+msgstr "- Client de mensacheria instantanea Empathy"
+
+msgid "Accept"
+msgstr "Aceptar"
+
+msgid "%s is now offline."
+msgstr "%s ye agora desenchegau."
+
+msgid "%s is now online."
+msgstr "%s ye agora enchegau."
+
+msgid "Exceeded maximum number of notifications"
+msgstr "S'ha plegau a lo maximo numero de notificacions"
+
+msgid "Invalid notification identifier"
+msgstr "Identificador de notificacion no valido"
+
+msgid "Clear all notifications"
+msgstr "Escoscar todas as notificacions"
+
+msgid "Notification"
+msgstr "Notificacion"
+
+msgid "Display notifications"
+msgstr "Amostrar notificacions"
+
+msgid "Error reading PTY size, using defaults: %s\n"
+msgstr ""
+"Error en leyer o tamanyo PTY, fendo servir as valuras predeterminadas: %s.\n"
+
+msgid "Update standard folders to current language?"
+msgstr "Esviellar as carpetas estandar a la luenga actual?"
+
+msgid ""
+"You have logged in in a new language. You can automatically update the names "
+"of some standard folders in your home folder to match this language. The "
+"update would change the following folders:"
+msgstr ""
+"Ha iniciau sesión en una luenga nueva. Puede esviellar os nombres de bellas "
+"carpetas estandar en a suya carpeta presonal de traza automatica ta fer-las "
+"coincidir con ista luenga. L'esvielle cambeara as carpetas vinients:"
+
+msgid "Keep Old Names"
+msgstr "Conservar nombres antigos"
+
+msgid "Update Names"
+msgstr "Esviellar nombres"
+
+msgid "Current folder name"
+msgstr "Nombre d'a capeta autual"
+
+msgid "Note that existing content will not be moved."
+msgstr "Para cuenta de que no se borrará lo conteniu existent"
+
+msgid "Don't ask me this again"
+msgstr "No demandar-me isto de nuevo"
+
+msgid "There was an error updating the folders"
+msgstr "Habió una error al esviellar as carpetas"
+
+msgid "Update common folders names to match current locale"
+msgstr ""
+"Esviellar os nombres d'as carpetas ta conincidir con a configuracion "
+"rechional actual"
+
+msgid "rodent-translation-team"
+msgstr ""
+"***  Aragonés <softaragones@googlegroups.com>\n"
+"\n"
+"-  Daniel Martinez <entaltoaragon@gmail.com>, 2010-2011.\n"
+"-  Daniel Martinez Cucalon <entaltoaragon@gmail.com>, 2010-2011.\n"
+"-------------------------------------"

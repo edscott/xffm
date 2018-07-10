@@ -1,0 +1,295 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2011 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- mi� jun 29 18:48:46 CDT 2011 ---
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Gamma\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-09 17:25-0600\n"
+"PO-Revision-Date: 2009-09-21 10:00+0530\n"
+"Last-Translator: \n"
+"Language-Team: Assamese <>\n"
+"Language: as\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"cgi?product=file-rollercomponent=general\n"
+"Plural-Forms: nplurals=2; plural=(n!=1)\n"
+"X-Generator: Lokalize 0.2\n"
+
+#: ../src/fgr.c:137
+#, fuzzy
+msgid "Options:"
+msgstr "বিকল্প"
+
+#: ../src/fgr.c:137
+msgid "Path"
+msgstr "পাথ"
+
+#: ../src/fgr.c:138
+msgid "Locate documents and folders on this computer by name or content"
+msgstr ""
+"নাম অথবা বিষয়বস্তুৰ তথ্য প্ৰয়োগ কৰি এই কম্পিউটাৰত নথিপত্ৰ বা ডকুমেন্ট অনুসন্ধান কৰক"
+
+#: ../src/fgr.c:139
+msgid "Filter:"
+msgstr "ফিল্টাৰ:"
+
+#: ../src/fgr.c:139
+#, fuzzy
+msgid "Search for files"
+msgstr "নথিপত্ৰ অনুসন্ধান"
+
+#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
+#: ../src/fgr.c:141
+msgid "Contents:"
+msgstr "বিষয়বস্তু:"
+
+#: ../src/fgr.c:141
+#, fuzzy
+msgid "File's contents filtered as plain text."
+msgstr "নথিপত্ৰটোক সমতল লিখনী হিচাপে সঞ্চয় কৰিব নে?"
+
+#: ../src/fgr.c:144
+#, fuzzy
+msgid "Verbose output debugging mode."
+msgstr "debugging কোড সক্ৰিয় কৰক"
+
+#: ../src/fgr.c:146
+msgid "Show version information"
+msgstr "সংস্কৰণ সংক্ৰান্ত তথ্য প্ৰদৰ্শন কৰা হ'ব"
+
+#: ../src/fgr.c:148
+#, fuzzy
+msgid "Filter Details"
+msgstr "ব্যৱহাৰকাৰী বিৱৰণসমূহ"
+
+#: ../src/fgr.c:151
+#, fuzzy
+msgid "Stay on single filesystem"
+msgstr "স্কেন কৰা হ'ব"
+
+#: ../src/fgr.c:153
+msgid "Print..."
+msgstr "প্ৰিন্ট কৰক (P)..."
+
+#: ../src/fgr.c:153
+msgid "The unique Process ID that identifies this process."
+msgstr ""
+
+#: ../src/fgr.c:155
+#, fuzzy
+msgid "Find hidden files and directories"
+msgstr "আড়াল কৰা নথিপত্ৰ আৰু ফোল্ডাৰ প্ৰদৰ্শন কৰা হ'ব"
+
+#: ../src/fgr.c:156
+msgid "Filter"
+msgstr "ফিল্টাৰ"
+
+#: ../src/fgr.c:157
+msgid ""
+"To display files which pass the filter (stars and regexps will be processed)"
+msgstr ""
+
+#: ../src/fgr.c:159
+#, fuzzy
+msgid "Recursive"
+msgstr "পুনৰাবৃত্ত"
+
+#: ../src/fgr.c:160 ../src/fgr.c:161 ../src/fgr.c:162 ../src/fgr.c:163
+#, fuzzy
+msgid "KByte"
+msgstr "বাইট"
+
+#: ../src/fgr.c:161
+#, fuzzy
+msgid "is greater than or equal to"
+msgstr "থেকে বেশি"
+
+#: ../src/fgr.c:163
+#, fuzzy
+msgid "is less than or equal to"
+msgstr "এক মিনিটৰ আগতে"
+
+#: ../src/fgr.c:165
+#, fuzzy
+msgid "Set UID"
+msgstr "প্ৰস্তুত কৰক(S)"
+
+#: ../src/fgr.c:165
+msgid "Executable Text Files"
+msgstr "এক্সিকিউটেবল টেক্সট নথিপত্ৰ"
+
+#: ../src/fgr.c:167
+msgid "The permissions of the file, in octal notation."
+msgstr "অক্টাল সংখ্যায় প্ৰকাশিত নথিপত্ৰৰ অনুমতি ।"
+
+#: ../src/fgr.c:168
+msgid "Type"
+msgstr "ধৰন"
+
+#: ../src/fgr.c:170
+msgid "Any"
+msgstr "অনিৰ্দিষ্ট"
+
+#: ../src/fgr.c:170
+#, fuzzy
+msgid "Default type"
+msgstr "অবিকল্পিত বস্তু"
+
+#: ../src/fgr.c:171
+#, fuzzy
+msgid "Regular file"
+msgstr "স্বাভাবিক"
+
+#: ../src/fgr.c:172
+msgid "Directory"
+msgstr "ডিৰেক্টৰি"
+
+#: ../src/fgr.c:173
+msgid "Symbolic Link"
+msgstr "সাঙ্কেতিক সংযোগ"
+
+#: ../src/fgr.c:174
+#, fuzzy
+msgid "UNIX Socket"
+msgstr "UNIX ৰ সময়"
+
+#: ../src/fgr.c:175
+#, fuzzy
+msgid "Block device"
+msgstr "ডিভাইচসমূহলে উভতি যাওক"
+
+#: ../src/fgr.c:176
+#, fuzzy
+msgid "Character device"
+msgstr "অক্ষৰ মালা (h):"
+
+#: ../src/fgr.c:177
+msgid "FIFO"
+msgstr "FIFO"
+
+#: ../src/fgr.c:179 ../src/fgr.c:181
+msgid "Minutes"
+msgstr "মিনিট"
+
+#: ../src/fgr.c:180 ../src/fgr.c:183 ../src/fgr.c:186 ../src/fgr.c:189
+msgid "Details"
+msgstr "বিৱৰণ"
+
+#: ../src/fgr.c:180 ../src/fgr.c:183 ../src/fgr.c:186 ../src/fgr.c:189
+#: ../src/fgr.c:192 ../src/fgr.c:193 ../src/fgr.c:196 ../src/fgr.c:197
+#: ../src/fgr.c:200 ../src/fgr.c:201
+#, fuzzy
+msgid "TIME"
+msgstr "TIMEOUT"
+
+#: ../src/fgr.c:181 ../src/fgr.c:184 ../src/fgr.c:187 ../src/fgr.c:190
+msgid "Previous"
+msgstr "পূৰ্ববৰ্তী (P)"
+
+#: ../src/fgr.c:182 ../src/fgr.c:184
+msgid "Hours"
+msgstr "ঘন্টা"
+
+#: ../src/fgr.c:185 ../src/fgr.c:187
+msgid "Days"
+msgstr "দিন"
+
+#: ../src/fgr.c:188
+msgid "Month"
+msgstr "মাহ"
+
+#: ../src/fgr.c:190
+#, fuzzy
+msgid "Month(s)"
+msgstr "মাহ"
+
+#: ../src/fgr.c:193
+#, fuzzy
+msgid "Modification Time :"
+msgstr "পৰিবৰ্তনৰ সময়কাল"
+
+#: ../src/fgr.c:197
+#, fuzzy
+msgid "Access Time :"
+msgstr "সৰ্বশেষ ব্যবহাৰ:"
+
+#: ../src/fgr.c:201
+#, fuzzy
+msgid "Creation Time :"
+msgstr "সৃষ্টিৰ সময়কাল"
+
+#: ../src/fgr.c:204 ../src/fgr.c:205
+#, fuzzy
+msgid "uid"
+msgstr "id"
+
+#: ../src/fgr.c:205
+msgid "User:"
+msgstr "ব্যৱহাৰকৰ্তা"
+
+#: ../src/fgr.c:207 ../src/fgr.c:208
+#, fuzzy
+msgid "gid"
+msgstr "id"
+
+#: ../src/fgr.c:208
+msgid "Group:"
+msgstr "দল:"
+
+#: ../src/fgr.c:211
+msgid ""
+"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+"character that  normally  follows  a file  name"
+msgstr ""
+
+#: ../src/fgr.c:213
+msgid "Content View"
+msgstr "প্ৰদৰ্শন"
+
+#: ../src/fgr.c:214 ../src/fgr.c:215 ../src/fgr.c:216 ../src/fgr.c:217
+msgid "STRING"
+msgstr "STRING"
+
+#: ../src/fgr.c:215 ../src/fgr.c:217
+msgid "Regular expression"
+msgstr "Regular expression"
+
+#: ../src/fgr.c:217
+msgid "Extended"
+msgstr "এক্সটেন্ডেড"
+
+#: ../src/fgr.c:219
+msgid "Ignore case"
+msgstr "হৰফেৰ কেছ অগ্ৰাহ্য কৰা হ'ব (I)"
+
+#: ../src/fgr.c:221
+msgid "Text Files"
+msgstr "টেক্সট নথিপত্ৰ"
+
+#: ../src/fgr.c:223
+msgid "No match"
+msgstr "কোনো মিল নাই"
+
+#: ../src/fgr.c:225
+#, fuzzy
+msgid "Line Count"
+msgstr "স্পিনআপ ৰিট্ৰায়ৰ গণনা"
+
+#: ../src/fgr.c:227
+msgid "Whole words only"
+msgstr "অকল সম্পূৰ্ণ শব্দ (W)"
+
+#: ../src/fgr.c:229
+#, fuzzy
+msgid "Match whole lines only"
+msgstr "সম্পূৰ্ণ শব্দ মেলানো হবে (w)"
+
+#: ../src/fgr.c:272
+#, fuzzy
+msgid "Usage : %s [OPTIONS]\n"
+msgstr "Usage: %s [game]"

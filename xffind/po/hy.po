@@ -1,0 +1,362 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:43:45 CDT 2013 ---
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-09 17:28-0600\n"
+"PO-Revision-Date: 2010-05-21 11:27+0400\n"
+"Last-Translator: Arman Vardanyan <armvardany@yandex.ru>\n"
+"Language-Team:  <norik@freenet.am>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: .././src/find-module.i:25
+#, fuzzy
+msgid "Any"
+msgstr "Ամսաթիվը կարևոր չէ"
+
+#: .././src/find-module.i:26
+msgid "Regular"
+msgstr "Սովորական"
+
+#: .././src/find-module.i:27
+msgid "Directory"
+msgstr "Պանակ"
+
+#: .././src/find-module.i:28
+msgid "Symbolic Link"
+msgstr "Սիմվոլիկ հղում"
+
+#: .././src/find-module.i:29
+#, fuzzy
+msgid "Socket"
+msgstr "Արգելափակված"
+
+#: .././src/find-module.i:30
+#, fuzzy
+msgid "Block device"
+msgstr "Ետ՝ դեպի սարքերը"
+
+#: .././src/find-module.i:31
+#, fuzzy
+msgid "Character device"
+msgstr "Կոդավորում"
+
+#: .././src/find-module.i:32
+msgid "FIFO"
+msgstr ""
+
+#. / option "upper_limit_spin" (only in gtk dialog)
+#: .././src/find-module.i:162 .././src/find-module_gui.c:767
+#, fuzzy
+msgid "Results"
+msgstr "Որոնման արդյունքներ"
+
+#: .././src/find-module.i:162
+#, fuzzy
+msgid "Upper limit:"
+msgstr "Վերին Արժեք․"
+
+#: .././src/find-module.i:165 .././src/find-module.i:171
+#, fuzzy
+msgid "Counting files..."
+msgstr "Հատորի տեղադրում…"
+
+#. Standalone
+#: .././src/find-module.i:179 .././src/find-module.i:183
+#, fuzzy
+msgid "Search Complete"
+msgstr "Փնտրումն ավարտվել է"
+
+#: .././src/find-module.i:197
+#, fuzzy
+msgid "Found %d match"
+msgid_plural "Found %d matches"
+msgstr[0] "Համընկնում չկա"
+msgstr[1] "Համընկնում չկա"
+
+#: .././src/find-module.i:200
+#, fuzzy
+msgid "%s Finished : %s"
+msgstr "Պատրաստ է"
+
+#: .././src/find-module.i:237
+msgid "Select Files..."
+msgstr "նիշքերի ընտրություն..."
+
+#: .././src/find-module.i:239
+#, fuzzy
+msgid "Select folder to search in"
+msgstr "Ընտրել ֆայլ` ավելացնելու համար․"
+
+#: .././src/find-module.i:719 .././src/find-module.i:723
+#, fuzzy
+msgid "Searching..."
+msgstr "Փնտրում"
+
+#: .././src/find-module_gui.c:58
+msgid ""
+"Basic rules:\n"
+"\n"
+"*  Will match any character zero or more times.\n"
+"?  Will match any character exactly one time\n"
+"[] Match any character within the [] \n"
+"^  Match at beginning of string\n"
+"$  Match at end of string \n"
+msgstr ""
+
+#: .././src/find-module_gui.c:66
+msgid ""
+"Reserved characters for extended regexp are\n"
+". ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"In  basic regular expressions the metacharacters\n"
+"?, +, {, |, (, and ) lose their special meaning.\n"
+"\n"
+"The  period  .   matches  any  single  character.\n"
+"The caret ^ matches at the start of line.\n"
+"The dollar $ matches at the end of line.\n"
+"\n"
+"Characters within [ ] matches any single \n"
+"       character in the list.\n"
+"Characters within [^ ] matches any single\n"
+"       character *not* in the list.\n"
+"Characters inside [ - ] matches a range of\n"
+"       characters (ie [0-9] or [a-z]).\n"
+"\n"
+"A regular expression may be followed by one\n"
+"       of several repetition operators:\n"
+"?      The preceding item is optional and matched\n"
+"       at most once.\n"
+"*      The preceding item will be matched zero\n"
+"       or more times.\n"
+"+      The preceding item will be matched one or\n"
+"       more times.\n"
+"{n}    The preceding item is matched exactly n times.\n"
+"{n,}   The preceding item is matched n or more times.\n"
+"{n,m}  The preceding item is matched at least n times,\n"
+"       but not more than m times.\n"
+"\n"
+"To match any reserved character, precede it with \\. \n"
+"\n"
+"Two regular expressions may be joined by the logical or\n"
+"       operator |.\n"
+"Two regular expressions may be concatenated.\n"
+"\n"
+"More information is available by typing \"man grep\"\n"
+msgstr ""
+
+#: .././src/find-module_gui.c:158
+msgid "Search returned no results"
+msgstr ""
+
+#: .././src/find-module_gui.c:165
+#, fuzzy
+msgid "No editor component found."
+msgstr "Խմբագրել բաղադրիչները %s (%s)–ում"
+
+#: .././src/find-module_gui.c:226 .././src/find-module_gui.c:241
+msgid "unknown"
+msgstr "անհայտ"
+
+#: .././src/find-module_gui.c:278
+msgid "Modified"
+msgstr "Փոփոխված"
+
+#: .././src/find-module_gui.c:281
+#, fuzzy
+msgid "Created"
+msgstr "Ստեղծել"
+
+#: .././src/find-module_gui.c:284
+#, fuzzy
+msgid "Accessed"
+msgstr "Մատչելի"
+
+#: .././src/find-module_gui.c:594 .././src/find-module_gui.c:650
+#: .././src/find-module_gui.c:1021 .././src/find-module_gui.c:1031
+msgid "Find"
+msgstr "Փնտրել"
+
+#: .././src/find-module_gui.c:677
+msgid "Path"
+msgstr "Ճանապարհ"
+
+#: .././src/find-module_gui.c:710
+#, fuzzy
+msgid "Filter:"
+msgstr "Ֆիլտր"
+
+#. / option -r "recursive"
+#: .././src/find-module_gui.c:758
+#, fuzzy
+msgid "Recursive"
+msgstr "Ռեկուրսիվ "
+
+#. / option -D "recursiveH"
+#: .././src/find-module_gui.c:761
+#, fuzzy
+msgid "Find hidden files and directories"
+msgstr "Կիրառում է կարկատանները ֆայլերի և պանակների վրա"
+
+#. / option -a "xdev"
+#: .././src/find-module_gui.c:764
+#, fuzzy
+msgid "Stay on single filesystem"
+msgstr "նիշքային համակարգը հասանելի է միայն կարդալու համար"
+
+#: .././src/find-module_gui.c:767
+#, fuzzy
+msgid "Upper limit"
+msgstr "Վերին Արժեք․"
+
+#. option -s +KByte "size_greater", "size_greater_spin"
+#: .././src/find-module_gui.c:772
+msgid "At Least"
+msgstr ""
+
+#: .././src/find-module_gui.c:772 .././src/find-module_gui.c:777
+#, fuzzy
+msgid "kBytes"
+msgstr "? բայթեր"
+
+#. option -s -KByte "size_smaller", "size_smaller_spin"
+#: .././src/find-module_gui.c:777
+msgid "At Most"
+msgstr ""
+
+#: .././src/find-module_gui.c:784
+msgid "User"
+msgstr "Օգտագործող"
+
+#: .././src/find-module_gui.c:789
+msgid "Group"
+msgstr "Խումբ"
+
+#. option -o octal "octal_p" "permissions_entry"
+#: .././src/find-module_gui.c:793
+msgid "Octal Permissions"
+msgstr "Ութանգամյան թույլտվություն"
+
+#. option -p suid | exe
+#: .././src/find-module_gui.c:798
+msgid "SUID"
+msgstr ""
+
+#: .././src/find-module_gui.c:798
+#, fuzzy
+msgid "Executable"
+msgstr "Աշխատեցնել"
+
+#. radio_p freed on destroy event for dialog.
+#. option -k minutes "last_minutes", "last_minutes_spin"
+#: .././src/find-module_gui.c:806
+#, fuzzy
+msgid "Minutes"
+msgstr "րոպեներ"
+
+#. option -h hours "last_hours", "last_hours_spin"
+#: .././src/find-module_gui.c:810
+#, fuzzy
+msgid "Hours"
+msgstr "%s ժամեր"
+
+#. option -d days "last_days", "last_days_spin"
+#: .././src/find-module_gui.c:814
+#, fuzzy
+msgid "Days"
+msgstr "5 օր"
+
+#. option -m months "last_months", "last_months_spin"
+#: .././src/find-module_gui.c:818
+#, fuzzy
+msgid "Months"
+msgstr "3 ամիս"
+
+#: .././src/find-module_gui.c:828
+#, fuzzy
+msgid "File type : "
+msgstr "Սարքտեսակ."
+
+#. //////////////  grep options.... /////////////////////////
+#: .././src/find-module_gui.c:844
+#, fuzzy
+msgid "Contains"
+msgstr "Կոնտեյներներ"
+
+#: .././src/find-module_gui.c:866
+#, fuzzy
+msgid "Contains the text"
+msgstr "Չեղյալ է համարում ինքնաստուգումը"
+
+#: .././src/find-module_gui.c:907
+msgid "Case Sensitive"
+msgstr "Զգայուն ռեգիստրի նկատմամբ"
+
+#: .././src/find-module_gui.c:914
+#, fuzzy
+msgid "Extended regexp"
+msgstr "Ընդլայնված"
+
+#: .././src/find-module_gui.c:921
+#, fuzzy
+msgid "Include binary files"
+msgstr "Ներառել ֆայլեր"
+
+#: .././src/find-module_gui.c:928
+#, fuzzy
+msgid "Line Count"
+msgstr "Գիծ"
+
+#: .././src/find-module_gui.c:953
+#, fuzzy
+msgid "Match"
+msgstr "Համընկնումներ"
+
+#: .././src/find-module_gui.c:963
+msgid "Anywhere"
+msgstr ""
+
+#: .././src/find-module_gui.c:975
+msgid "Whole words only"
+msgstr "Միայն ամբողջ բառեր"
+
+#: .././src/find-module_gui.c:987
+#, fuzzy
+msgid "lines"
+msgstr "տող"
+
+#: .././src/find-module_gui.c:998
+msgid "No match"
+msgstr "Համընկնում չկա"
+
+#: .././src/find-module_gui.c:1021 .././src/find-module_gui.c:1061
+msgid "Close"
+msgstr "Փակել"
+
+#: .././src/find-module_gui.c:1041
+msgid "Cancel"
+msgstr "Հրաժարվել"
+
+#: .././src/find-module_gui.c:1051
+msgid "Clear"
+msgstr "Մաքրել"
+
+#: .././src/find-module_gui.c:1093
+msgid "Edit"
+msgstr "Խմբագրել"
+
+#: .././Rodent-fgr.desktop.in.in.h:1
+msgid "Home Folder"
+msgstr "Տնային պանակ"
+
+#: .././Rodent-fgr.desktop.in.in.h:2
+msgid "Search tool based on fgr"
+msgstr ""
+
