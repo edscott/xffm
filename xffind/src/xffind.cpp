@@ -21,6 +21,10 @@
 #include <string.h>
 #include <unistd.h>
 #include <dirent.h>
+#include <pwd.h>
+#include <grp.h>
+
+#include <iostream>
 
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>
@@ -62,6 +66,9 @@ main (int argc, char *argv[]) {
     TRACE ("call to gtk_init");
     gtk_init (&argc, &argv);
     
-    do_find_standalone(argv[1]);
+    xf::FindDialog<double>::dialog(argv[1]);
+    //g_idle_add(set_up_dialog, path);
+    gtk_main();
+
     return 0;
 }

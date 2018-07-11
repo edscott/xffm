@@ -106,8 +106,7 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_xffind_OBJECTS = xffind-fgr+.$(OBJEXT) xffind-find-module.$(OBJEXT) \
-	xffind-find-module_gui.$(OBJEXT)
+am_xffind_OBJECTS = xffind-xffind.$(OBJEXT)
 xffind_OBJECTS = $(am_xffind_OBJECTS)
 am__DEPENDENCIES_1 =
 am__DEPENDENCIES_2 = $(am__DEPENDENCIES_1)
@@ -132,24 +131,6 @@ DEFAULT_INCLUDES = -I. -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
 am__mv = mv -f
-COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
-	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
-LTCOMPILE = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) \
-	$(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) \
-	$(AM_CFLAGS) $(CFLAGS)
-AM_V_CC = $(am__v_CC_$(V))
-am__v_CC_ = $(am__v_CC_$(AM_DEFAULT_VERBOSITY))
-am__v_CC_0 = @echo "  CC      " $@;
-am__v_CC_1 = 
-CCLD = $(CC)
-LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
-	$(AM_LDFLAGS) $(LDFLAGS) -o $@
-AM_V_CCLD = $(am__v_CCLD_$(V))
-am__v_CCLD_ = $(am__v_CCLD_$(AM_DEFAULT_VERBOSITY))
-am__v_CCLD_0 = @echo "  CCLD    " $@;
-am__v_CCLD_1 = 
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
 LTCXXCOMPILE = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
@@ -168,6 +149,24 @@ AM_V_CXXLD = $(am__v_CXXLD_$(V))
 am__v_CXXLD_ = $(am__v_CXXLD_$(AM_DEFAULT_VERBOSITY))
 am__v_CXXLD_0 = @echo "  CXXLD   " $@;
 am__v_CXXLD_1 = 
+COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
+	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+LTCOMPILE = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) \
+	$(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) \
+	$(AM_CFLAGS) $(CFLAGS)
+AM_V_CC = $(am__v_CC_$(V))
+am__v_CC_ = $(am__v_CC_$(AM_DEFAULT_VERBOSITY))
+am__v_CC_0 = @echo "  CC      " $@;
+am__v_CC_1 = 
+CCLD = $(CC)
+LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
+	$(AM_LDFLAGS) $(LDFLAGS) -o $@
+AM_V_CCLD = $(am__v_CCLD_$(V))
+am__v_CCLD_ = $(am__v_CCLD_$(AM_DEFAULT_VERBOSITY))
+am__v_CCLD_0 = @echo "  CCLD    " $@;
+am__v_CCLD_1 = 
 SOURCES = $(xffind_SOURCES)
 DIST_SOURCES = $(xffind_SOURCES)
 am__can_run_installinfo = \
@@ -196,14 +195,14 @@ ETAGS = etags
 CTAGS = ctags
 am__DIST_COMMON = $(srcdir)/Makefile.in $(top_srcdir)/depcomp
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
-ACLOCAL = ${SHELL} /home/GIT/xffm+/fgr+/missing aclocal-1.15
+ACLOCAL = ${SHELL} /home/GIT/xffm+/xffind/missing aclocal-1.15
 ALL_LINGUAS = es
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 0
 AR = ar
-AUTOCONF = ${SHELL} /home/GIT/xffm+/fgr+/missing autoconf
-AUTOHEADER = ${SHELL} /home/GIT/xffm+/fgr+/missing autoheader
-AUTOMAKE = ${SHELL} /home/GIT/xffm+/fgr+/missing automake-1.15
+AUTOCONF = ${SHELL} /home/GIT/xffm+/xffind/missing autoconf
+AUTOHEADER = ${SHELL} /home/GIT/xffm+/xffind/missing autoheader
+AUTOMAKE = ${SHELL} /home/GIT/xffm+/xffind/missing automake-1.15
 AWK = gawk
 BUGMAIL = https://sourceforge.net/p/xffm/bugs/milestone/rodent-fgr/
 CATALOGS =  es.gmo
@@ -272,7 +271,7 @@ LN_S = ln -s
 LTLIBOBJS = 
 LT_SYS_LIBRARY_PATH = 
 MAINT = #
-MAKEINFO = ${SHELL} /home/GIT/xffm+/fgr+/missing makeinfo
+MAKEINFO = ${SHELL} /home/GIT/xffm+/xffind/missing makeinfo
 MANIFEST_TOOL = :
 MASTER_SITE = http://sourceforge.net/projects/xffm+/files
 MKDIR_P = /bin/mkdir -p
@@ -320,10 +319,10 @@ WITH_TRACE = no
 XGETTEXT = /usr/bin/xgettext
 XGETTEXT_ARGS = --keyword=Q_
 _GNU_SOURCE = 
-abs_builddir = /home/GIT/xffm+/fgr+/src
-abs_srcdir = /home/GIT/xffm+/fgr+/src
-abs_top_builddir = /home/GIT/xffm+/fgr+
-abs_top_srcdir = /home/GIT/xffm+/fgr+
+abs_builddir = /home/GIT/xffm+/xffind/src
+abs_srcdir = /home/GIT/xffm+/xffind/src
+abs_top_builddir = /home/GIT/xffm+/xffind
+abs_top_srcdir = /home/GIT/xffm+/xffind
 ac_ct_AR = ar
 ac_ct_CC = gcc
 ac_ct_CXX = g++
@@ -356,7 +355,7 @@ host_vendor = unknown
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /home/GIT/xffm+/fgr+/install-sh
+install_sh = ${SHELL} /home/GIT/xffm+/xffind/install-sh
 intltool__v_merge_options_ = $(intltool__v_merge_options_$(AM_DEFAULT_VERBOSITY))
 intltool__v_merge_options_0 = -q
 intltoolize = intltoolize
@@ -399,20 +398,14 @@ GUI_CFLAGS = -pthread -I/usr/include/gtk-3.0 -I/usr/include/at-spi2-atk/2.0 -I/u
 
 xffind_SOURCES = \
 	$(top_srcdir)/debug.h \
-	fgr+.cpp	\
-	find-module.h	\
-	find-module.c	\
-	find-module.i	\
-	find-module_gui.h	\
-	find-module_gui.c	\
-	find-module.h
+	xffind.cpp	
 
 xffind_CPPFLAGS = $(AM_CPPFLAGS) 
 xffind_LDADD = $(LDADD) 
 all: all-am
 
 .SUFFIXES:
-.SUFFIXES: .c .cpp .lo .o .obj
+.SUFFIXES: .cpp .lo .o .obj
 $(srcdir)/Makefile.in: # $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
@@ -502,61 +495,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-include ./$(DEPDIR)/xffind-fgr+.Po
-include ./$(DEPDIR)/xffind-find-module.Po
-include ./$(DEPDIR)/xffind-find-module_gui.Po
-
-.c.o:
-	$(AM_V_CC)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
-	$(COMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ $< &&\
-	$(am__mv) $$depbase.Tpo $$depbase.Po
-#	$(AM_V_CC)source='$<' object='$@' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(COMPILE) -c -o $@ $<
-
-.c.obj:
-	$(AM_V_CC)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.obj$$||'`;\
-	$(COMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ `$(CYGPATH_W) '$<'` &&\
-	$(am__mv) $$depbase.Tpo $$depbase.Po
-#	$(AM_V_CC)source='$<' object='$@' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(COMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
-
-.c.lo:
-	$(AM_V_CC)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.lo$$||'`;\
-	$(LTCOMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ $< &&\
-	$(am__mv) $$depbase.Tpo $$depbase.Plo
-#	$(AM_V_CC)source='$<' object='$@' libtool=yes \
-#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(LTCOMPILE) -c -o $@ $<
-
-xffind-find-module.o: find-module.c
-	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xffind_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT xffind-find-module.o -MD -MP -MF $(DEPDIR)/xffind-find-module.Tpo -c -o xffind-find-module.o `test -f 'find-module.c' || echo '$(srcdir)/'`find-module.c
-	$(AM_V_at)$(am__mv) $(DEPDIR)/xffind-find-module.Tpo $(DEPDIR)/xffind-find-module.Po
-#	$(AM_V_CC)source='find-module.c' object='xffind-find-module.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xffind_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o xffind-find-module.o `test -f 'find-module.c' || echo '$(srcdir)/'`find-module.c
-
-xffind-find-module.obj: find-module.c
-	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xffind_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT xffind-find-module.obj -MD -MP -MF $(DEPDIR)/xffind-find-module.Tpo -c -o xffind-find-module.obj `if test -f 'find-module.c'; then $(CYGPATH_W) 'find-module.c'; else $(CYGPATH_W) '$(srcdir)/find-module.c'; fi`
-	$(AM_V_at)$(am__mv) $(DEPDIR)/xffind-find-module.Tpo $(DEPDIR)/xffind-find-module.Po
-#	$(AM_V_CC)source='find-module.c' object='xffind-find-module.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xffind_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o xffind-find-module.obj `if test -f 'find-module.c'; then $(CYGPATH_W) 'find-module.c'; else $(CYGPATH_W) '$(srcdir)/find-module.c'; fi`
-
-xffind-find-module_gui.o: find-module_gui.c
-	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xffind_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT xffind-find-module_gui.o -MD -MP -MF $(DEPDIR)/xffind-find-module_gui.Tpo -c -o xffind-find-module_gui.o `test -f 'find-module_gui.c' || echo '$(srcdir)/'`find-module_gui.c
-	$(AM_V_at)$(am__mv) $(DEPDIR)/xffind-find-module_gui.Tpo $(DEPDIR)/xffind-find-module_gui.Po
-#	$(AM_V_CC)source='find-module_gui.c' object='xffind-find-module_gui.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xffind_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o xffind-find-module_gui.o `test -f 'find-module_gui.c' || echo '$(srcdir)/'`find-module_gui.c
-
-xffind-find-module_gui.obj: find-module_gui.c
-	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xffind_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT xffind-find-module_gui.obj -MD -MP -MF $(DEPDIR)/xffind-find-module_gui.Tpo -c -o xffind-find-module_gui.obj `if test -f 'find-module_gui.c'; then $(CYGPATH_W) 'find-module_gui.c'; else $(CYGPATH_W) '$(srcdir)/find-module_gui.c'; fi`
-	$(AM_V_at)$(am__mv) $(DEPDIR)/xffind-find-module_gui.Tpo $(DEPDIR)/xffind-find-module_gui.Po
-#	$(AM_V_CC)source='find-module_gui.c' object='xffind-find-module_gui.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xffind_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o xffind-find-module_gui.obj `if test -f 'find-module_gui.c'; then $(CYGPATH_W) 'find-module_gui.c'; else $(CYGPATH_W) '$(srcdir)/find-module_gui.c'; fi`
+include ./$(DEPDIR)/xffind-xffind.Po
 
 .cpp.o:
 	$(AM_V_CXX)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
@@ -582,19 +521,19 @@ xffind-find-module_gui.obj: find-module_gui.c
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(LTCXXCOMPILE) -c -o $@ $<
 
-xffind-fgr+.o: fgr+.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xffind_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xffind-fgr+.o -MD -MP -MF $(DEPDIR)/xffind-fgr+.Tpo -c -o xffind-fgr+.o `test -f 'fgr+.cpp' || echo '$(srcdir)/'`fgr+.cpp
-	$(AM_V_at)$(am__mv) $(DEPDIR)/xffind-fgr+.Tpo $(DEPDIR)/xffind-fgr+.Po
-#	$(AM_V_CXX)source='fgr+.cpp' object='xffind-fgr+.o' libtool=no \
+xffind-xffind.o: xffind.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xffind_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xffind-xffind.o -MD -MP -MF $(DEPDIR)/xffind-xffind.Tpo -c -o xffind-xffind.o `test -f 'xffind.cpp' || echo '$(srcdir)/'`xffind.cpp
+	$(AM_V_at)$(am__mv) $(DEPDIR)/xffind-xffind.Tpo $(DEPDIR)/xffind-xffind.Po
+#	$(AM_V_CXX)source='xffind.cpp' object='xffind-xffind.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xffind_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xffind-fgr+.o `test -f 'fgr+.cpp' || echo '$(srcdir)/'`fgr+.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xffind_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xffind-xffind.o `test -f 'xffind.cpp' || echo '$(srcdir)/'`xffind.cpp
 
-xffind-fgr+.obj: fgr+.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xffind_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xffind-fgr+.obj -MD -MP -MF $(DEPDIR)/xffind-fgr+.Tpo -c -o xffind-fgr+.obj `if test -f 'fgr+.cpp'; then $(CYGPATH_W) 'fgr+.cpp'; else $(CYGPATH_W) '$(srcdir)/fgr+.cpp'; fi`
-	$(AM_V_at)$(am__mv) $(DEPDIR)/xffind-fgr+.Tpo $(DEPDIR)/xffind-fgr+.Po
-#	$(AM_V_CXX)source='fgr+.cpp' object='xffind-fgr+.obj' libtool=no \
+xffind-xffind.obj: xffind.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xffind_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xffind-xffind.obj -MD -MP -MF $(DEPDIR)/xffind-xffind.Tpo -c -o xffind-xffind.obj `if test -f 'xffind.cpp'; then $(CYGPATH_W) 'xffind.cpp'; else $(CYGPATH_W) '$(srcdir)/xffind.cpp'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/xffind-xffind.Tpo $(DEPDIR)/xffind-xffind.Po
+#	$(AM_V_CXX)source='xffind.cpp' object='xffind-xffind.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xffind_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xffind-fgr+.obj `if test -f 'fgr+.cpp'; then $(CYGPATH_W) 'fgr+.cpp'; else $(CYGPATH_W) '$(srcdir)/fgr+.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xffind_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xffind-xffind.obj `if test -f 'xffind.cpp'; then $(CYGPATH_W) 'xffind.cpp'; else $(CYGPATH_W) '$(srcdir)/xffind.cpp'; fi`
 
 mostlyclean-libtool:
 	-rm -f *.lo
