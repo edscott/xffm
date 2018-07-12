@@ -14,7 +14,7 @@ AM_CPPFLAGS =  -I./ \
 	-DPACKAGE_LOCALE_DIR=\""$(localedir)"\"	\
 	-DPACKAGE_ICON_DIR=\""$(icondir)"\"
 
-LDADD = $(TCMALLOC)  @TUBO_LIBS@ @GTK_LIBS@ -lpthread
+LDADD = $(TCMALLOC)  @TUBO_LIBS@ @GTK_LIBS@ -lpthread -lX11
 GUI_CFLAGS = @GTK_CFLAGS@						\
 	-DPACKAGE_DATA_DIR=\""$(datadir)"\" 				\
 	-DPACKAGE_LOCALE_DIR=\""$(localedir)"\"		
