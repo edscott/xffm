@@ -24,7 +24,13 @@ bin_PROGRAMS = xffind
 
 xffind_SOURCES =      \
 	$(top_srcdir)/debug.h \
-	xffind.cpp	
+	xffind.hh \
+	  xfutil.hh \
+	  xfpixbuf.hh \
+	    xficons.hh \
+	      xfcairo.hh \
+	      xfhash.hh \
+	xffind.cc
 	
 
 xffind_CPPFLAGS = $(AM_CPPFLAGS) 

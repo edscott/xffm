@@ -1,5 +1,5 @@
 #!/bin/sh
-package="fgr+"
+package="xffind+"
 
 echo "Creating system specific build files for $package..."
 

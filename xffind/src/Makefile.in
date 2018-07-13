@@ -398,14 +398,20 @@ GUI_CFLAGS = @GTK_CFLAGS@						\
 
 xffind_SOURCES = \
 	$(top_srcdir)/debug.h \
-	xffind.cpp	
+	xffind.hh \
+	  xfutil.hh \
+	  xfpixbuf.hh \
+	    xficons.hh \
+	      xfcairo.hh \
+	      xfhash.hh \
+	xffind.cc
 
 xffind_CPPFLAGS = $(AM_CPPFLAGS) 
 xffind_LDADD = $(LDADD) 
 all: all-am
 
 .SUFFIXES:
-.SUFFIXES: .cpp .lo .o .obj
+.SUFFIXES: .cc .lo .o .obj
 $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
@@ -497,7 +503,7 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xffind-xffind.Po@am__quote@
 
-.cpp.o:
+.cc.o:
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
 @am__fastdepCXX_TRUE@	$(CXXCOMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ $< &&\
 @am__fastdepCXX_TRUE@	$(am__mv) $$depbase.Tpo $$depbase.Po
@@ -505,7 +511,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXXCOMPILE) -c -o $@ $<
 
-.cpp.obj:
+.cc.obj:
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.obj$$||'`;\
 @am__fastdepCXX_TRUE@	$(CXXCOMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ `$(CYGPATH_W) '$<'` &&\
 @am__fastdepCXX_TRUE@	$(am__mv) $$depbase.Tpo $$depbase.Po
@@ -513,7 +519,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
 
-.cpp.lo:
+.cc.lo:
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.lo$$||'`;\
 @am__fastdepCXX_TRUE@	$(LTCXXCOMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ $< &&\
 @am__fastdepCXX_TRUE@	$(am__mv) $$depbase.Tpo $$depbase.Plo
@@ -521,19 +527,19 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LTCXXCOMPILE) -c -o $@ $<
 
-xffind-xffind.o: xffind.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xffind_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xffind-xffind.o -MD -MP -MF $(DEPDIR)/xffind-xffind.Tpo -c -o xffind-xffind.o `test -f 'xffind.cpp' || echo '$(srcdir)/'`xffind.cpp
+xffind-xffind.o: xffind.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xffind_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xffind-xffind.o -MD -MP -MF $(DEPDIR)/xffind-xffind.Tpo -c -o xffind-xffind.o `test -f 'xffind.cc' || echo '$(srcdir)/'`xffind.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/xffind-xffind.Tpo $(DEPDIR)/xffind-xffind.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='xffind.cpp' object='xffind-xffind.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='xffind.cc' object='xffind-xffind.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xffind_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xffind-xffind.o `test -f 'xffind.cpp' || echo '$(srcdir)/'`xffind.cpp
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xffind_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xffind-xffind.o `test -f 'xffind.cc' || echo '$(srcdir)/'`xffind.cc
 
-xffind-xffind.obj: xffind.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xffind_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xffind-xffind.obj -MD -MP -MF $(DEPDIR)/xffind-xffind.Tpo -c -o xffind-xffind.obj `if test -f 'xffind.cpp'; then $(CYGPATH_W) 'xffind.cpp'; else $(CYGPATH_W) '$(srcdir)/xffind.cpp'; fi`
+xffind-xffind.obj: xffind.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xffind_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xffind-xffind.obj -MD -MP -MF $(DEPDIR)/xffind-xffind.Tpo -c -o xffind-xffind.obj `if test -f 'xffind.cc'; then $(CYGPATH_W) 'xffind.cc'; else $(CYGPATH_W) '$(srcdir)/xffind.cc'; fi`
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/xffind-xffind.Tpo $(DEPDIR)/xffind-xffind.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='xffind.cpp' object='xffind-xffind.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='xffind.cc' object='xffind-xffind.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xffind_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xffind-xffind.obj `if test -f 'xffind.cpp'; then $(CYGPATH_W) 'xffind.cpp'; else $(CYGPATH_W) '$(srcdir)/xffind.cpp'; fi`
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xffind_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xffind-xffind.obj `if test -f 'xffind.cc'; then $(CYGPATH_W) 'xffind.cc'; else $(CYGPATH_W) '$(srcdir)/xffind.cc'; fi`
 
 mostlyclean-libtool:
 	-rm -f *.lo

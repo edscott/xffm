@@ -398,14 +398,20 @@ GUI_CFLAGS = -pthread -I/usr/include/gtk-3.0 -I/usr/include/at-spi2-atk/2.0 -I/u
 
 xffind_SOURCES = \
 	$(top_srcdir)/debug.h \
-	xffind.cpp	
+	xffind.hh \
+	  xfutil.hh \
+	  xfpixbuf.hh \
+	    xficons.hh \
+	      xfcairo.hh \
+	      xfhash.hh \
+	xffind.cc
 
 xffind_CPPFLAGS = $(AM_CPPFLAGS) 
 xffind_LDADD = $(LDADD) 
 all: all-am
 
 .SUFFIXES:
-.SUFFIXES: .cpp .lo .o .obj
+.SUFFIXES: .cc .lo .o .obj
 $(srcdir)/Makefile.in: # $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
@@ -497,7 +503,7 @@ distclean-compile:
 
 include ./$(DEPDIR)/xffind-xffind.Po
 
-.cpp.o:
+.cc.o:
 	$(AM_V_CXX)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
 	$(CXXCOMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ $< &&\
 	$(am__mv) $$depbase.Tpo $$depbase.Po
@@ -505,7 +511,7 @@ include ./$(DEPDIR)/xffind-xffind.Po
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXXCOMPILE) -c -o $@ $<
 
-.cpp.obj:
+.cc.obj:
 	$(AM_V_CXX)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.obj$$||'`;\
 	$(CXXCOMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ `$(CYGPATH_W) '$<'` &&\
 	$(am__mv) $$depbase.Tpo $$depbase.Po
@@ -513,7 +519,7 @@ include ./$(DEPDIR)/xffind-xffind.Po
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
 
-.cpp.lo:
+.cc.lo:
 	$(AM_V_CXX)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.lo$$||'`;\
 	$(LTCXXCOMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ $< &&\
 	$(am__mv) $$depbase.Tpo $$depbase.Plo
@@ -521,19 +527,19 @@ include ./$(DEPDIR)/xffind-xffind.Po
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(LTCXXCOMPILE) -c -o $@ $<
 
-xffind-xffind.o: xffind.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xffind_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xffind-xffind.o -MD -MP -MF $(DEPDIR)/xffind-xffind.Tpo -c -o xffind-xffind.o `test -f 'xffind.cpp' || echo '$(srcdir)/'`xffind.cpp
+xffind-xffind.o: xffind.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xffind_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xffind-xffind.o -MD -MP -MF $(DEPDIR)/xffind-xffind.Tpo -c -o xffind-xffind.o `test -f 'xffind.cc' || echo '$(srcdir)/'`xffind.cc
 	$(AM_V_at)$(am__mv) $(DEPDIR)/xffind-xffind.Tpo $(DEPDIR)/xffind-xffind.Po
-#	$(AM_V_CXX)source='xffind.cpp' object='xffind-xffind.o' libtool=no \
+#	$(AM_V_CXX)source='xffind.cc' object='xffind-xffind.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xffind_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xffind-xffind.o `test -f 'xffind.cpp' || echo '$(srcdir)/'`xffind.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xffind_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xffind-xffind.o `test -f 'xffind.cc' || echo '$(srcdir)/'`xffind.cc
 
-xffind-xffind.obj: xffind.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xffind_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xffind-xffind.obj -MD -MP -MF $(DEPDIR)/xffind-xffind.Tpo -c -o xffind-xffind.obj `if test -f 'xffind.cpp'; then $(CYGPATH_W) 'xffind.cpp'; else $(CYGPATH_W) '$(srcdir)/xffind.cpp'; fi`
+xffind-xffind.obj: xffind.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xffind_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xffind-xffind.obj -MD -MP -MF $(DEPDIR)/xffind-xffind.Tpo -c -o xffind-xffind.obj `if test -f 'xffind.cc'; then $(CYGPATH_W) 'xffind.cc'; else $(CYGPATH_W) '$(srcdir)/xffind.cc'; fi`
 	$(AM_V_at)$(am__mv) $(DEPDIR)/xffind-xffind.Tpo $(DEPDIR)/xffind-xffind.Po
-#	$(AM_V_CXX)source='xffind.cpp' object='xffind-xffind.obj' libtool=no \
+#	$(AM_V_CXX)source='xffind.cc' object='xffind-xffind.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xffind_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xffind-xffind.obj `if test -f 'xffind.cpp'; then $(CYGPATH_W) 'xffind.cpp'; else $(CYGPATH_W) '$(srcdir)/xffind.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xffind_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xffind-xffind.obj `if test -f 'xffind.cc'; then $(CYGPATH_W) 'xffind.cc'; else $(CYGPATH_W) '$(srcdir)/xffind.cc'; fi`
 
 mostlyclean-libtool:
 	-rm -f *.lo

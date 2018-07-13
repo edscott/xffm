@@ -1,5 +1,6 @@
-#ifndef __XFFIND__H_
-# define __XFFIND__H_
+#ifndef XFFIND__HH
+# define XFFIND__HH
+#include "xfpixbuf.hh"
 
 typedef struct radio_t {
     GtkBox *box;
@@ -8,11 +9,6 @@ typedef struct radio_t {
 
 namespace xf
 {
-    
-template <class Type>
-class Icons{
-public:
-};
 
 template <class Type>
 class Signals{
@@ -40,7 +36,8 @@ public:
 template <class Type>
 class FindDialog
 {
-    typedef xf::Signals<double> xfsignal;
+    typedef Signals<double> signals;
+    typedef Pixbuf<double> pixbuf;
 #define TB_CALLBACK(X)  (void (*)(GtkToggleButton *,gpointer)) X
 //    typedef typename  void (*)(GtkToggleButton *,gpointer) toggleButtonCallback;
 public:
@@ -98,9 +95,10 @@ private:
 
 	// FIXME: incorporate pixbuf template for this
 	
-	/*GdkPixbuf *pixbuf = xf::Icons<double>::get_pixbuf("xffm/stock_find", SIZE_ICON);
-	gtk_window_set_icon ((GtkWindow *) dialog_, pixbuf);
-	g_object_unref(pixbuf);*/
+	GdkPixbuf *pixbuf = pixbuf::get_pixbuf("edit-find", SIZE_ICON);
+//	GdkPixbuf *pixbuf = pixbuf::get_pixbuf("xffm/stock_find", SIZE_ICON);
+	gtk_window_set_icon (dialog_, pixbuf);
+	g_object_unref(pixbuf);
 	
     }
 
@@ -301,23 +299,23 @@ private:
 	// option -k minutes "last_minutes", "last_minutes_spin"
 	radio_p->toggle[0] = add_option_spin(right_options_vbox, "last_minutes", "last_minutes_spin", _("Minutes"), last_minutes);
 	g_signal_connect (G_OBJECT (radio_p->toggle[0]), "toggled", 
-		G_CALLBACK (TB_CALLBACK(xfsignal::sensitivize_radio)), radio_p);
+		G_CALLBACK (TB_CALLBACK(signals::sensitivize_radio)), radio_p);
 	
        // option -h hours "last_hours", "last_hours_spin"
 	radio_p->toggle[1] = add_option_spin(right_options_vbox, "last_hours", "last_hours_spin", _("Hours"), last_hours);
 	g_signal_connect (G_OBJECT (radio_p->toggle[1]), "toggled", 
-	    G_CALLBACK (TB_CALLBACK(xfsignal::sensitivize_radio)), radio_p);
+	    G_CALLBACK (TB_CALLBACK(signals::sensitivize_radio)), radio_p);
 	
 	// option -d days "last_days", "last_days_spin"
 	radio_p->toggle[2] = add_option_spin(right_options_vbox, "last_days", "last_days_spin", _("Days"), last_days);
 	    //gtk_box_pack_start (GTK_BOX (topPaneHbox_), GTK_WIDGET(check), FALSE, FALSE, 0);
 	    g_signal_connect (G_OBJECT (radio_p->toggle[2]), "toggled", 
-		G_CALLBACK (TB_CALLBACK(xfsignal::sensitivize_radio)), radio_p);
+		G_CALLBACK (TB_CALLBACK(signals::sensitivize_radio)), radio_p);
 	
 	// option -m months "last_months", "last_months_spin"
 	radio_p->toggle[3] = add_option_spin(right_options_vbox, "last_months", "last_months_spin", _("Months"), last_months);
 	g_signal_connect (G_OBJECT (radio_p->toggle[3]), "toggled", 
-	    G_CALLBACK (TB_CALLBACK(xfsignal::sensitivize_radio)), radio_p);
+	    G_CALLBACK (TB_CALLBACK(signals::sensitivize_radio)), radio_p);
 	
 	 ///////////
 
@@ -755,7 +753,7 @@ private:
 	    g_object_set_data(G_OBJECT(dialog_), check_name, check);
 	    gtk_box_pack_start (hbox, GTK_WIDGET(check), FALSE, FALSE, 0);
 	    g_signal_connect (G_OBJECT (check), "toggled", 
-		    G_CALLBACK (TB_CALLBACK(xfsignal::sensitivize)), 
+		    G_CALLBACK (TB_CALLBACK(signals::sensitivize)), 
 		    size_hbox);
 	    gtk_widget_set_sensitive(GTK_WIDGET(size_hbox), FALSE);
 	}
@@ -810,7 +808,7 @@ private:
 	    g_object_set_data(G_OBJECT(dialog_), check_name, check);
 	    gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(check), FALSE, FALSE, 0);
 	    g_signal_connect (G_OBJECT (check), "toggled", 
-		     G_CALLBACK (TB_CALLBACK(xfsignal::sensitivize)), size_hbox);
+		     G_CALLBACK (TB_CALLBACK(signals::sensitivize)), size_hbox);
 	    gtk_widget_set_sensitive(GTK_WIDGET(size_hbox), FALSE);
 	}
 	gtk_widget_show (GTK_WIDGET(size_hbox));
@@ -872,7 +870,7 @@ private:
 	    g_object_set_data(G_OBJECT(dialog_), check_name, (gpointer)check);
 	    gtk_box_pack_start (hbox, GTK_WIDGET(check), FALSE, FALSE, 0);
 	    g_signal_connect (G_OBJECT (check), "toggled", 
-		    G_CALLBACK (TB_CALLBACK(xfsignal::sensitivize)), (gpointer)size_hbox);
+		    G_CALLBACK (TB_CALLBACK(signals::sensitivize)), (gpointer)size_hbox);
 	    gtk_widget_set_sensitive(GTK_WIDGET(size_hbox), FALSE);
 	}
 	gtk_widget_show (GTK_WIDGET(size_hbox));
@@ -927,7 +925,7 @@ private:
 	    g_object_set_data(G_OBJECT(dialog_), check_name, check);
 	    gtk_box_pack_start (hbox, GTK_WIDGET(check), FALSE, FALSE, 0);
 	    g_signal_connect (G_OBJECT (check), "toggled", 
-		    G_CALLBACK (TB_CALLBACK(xfsignal::sensitivize)), size_hbox);
+		    G_CALLBACK (TB_CALLBACK(signals::sensitivize)), size_hbox);
 	    gtk_widget_set_sensitive(GTK_WIDGET(size_hbox), FALSE);
 	}
 	gtk_widget_show (GTK_WIDGET(size_hbox));
