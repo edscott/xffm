@@ -74,7 +74,9 @@ public:
 	if (pixbuf) return pixbuf;
 	pixbuf = pixbuf_icons_c::get_theme_pixbuf("image-missing", pixels);
 	if (pixbuf) pixbuf_hash_c::put_in_pixbuf_hash(icon_name, pixels, pixbuf);
-	std::cerr<<"image-missing pixbuf returned.\n";
+	std::cerr<<"xf::Pixbuf::get_pixbuf(): image-missing. "
+	    <<"Please install icon \""
+	    <<icon_name<<"\"\n";
 	return pixbuf;
      }
 

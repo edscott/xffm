@@ -1,6 +1,8 @@
 #ifndef XFFIND__HH
 # define XFFIND__HH
 #include "xfpixbuf.hh"
+#include "xfgtk.hh"
+#include "xftooltip.hh"
 
 typedef struct radio_t {
     GtkBox *box;
@@ -9,6 +11,50 @@ typedef struct radio_t {
 
 namespace xf
 {
+    static const gchar *
+    filter_text_help=
+	        N_("Basic rules:\n" "\n"
+                          "*  Will match any character zero or more times.\n"
+                          "?  Will match any character exactly one time\n"
+                          "[] Match any character within the [] \n"
+                          "^  Match at beginning of string\n" 
+			  "$  Match at end of string \n");
+    static const gchar *
+    grep_text_help=
+		N_("Reserved characters for extended regexp are\n"
+                          ". ^ $ [ ] ? * + { } | \\ ( ) : \n"
+                          "In  basic regular expressions the metacharacters\n"
+                          "?, +, {, |, (, and ) lose their special meaning.\n"
+                          "\n"
+                          "The  period . matches  any  single  character.\n"
+                          "The caret ^ matches at the start of line.\n"
+                          "The dollar $ matches at the end of line.\n" "\n"
+                          "Characters within [ ] matches any single \n"
+                          "       character in the list.\n"
+                          "Characters within [^ ] matches any single\n"
+                          "       character *not* in the list.\n"
+                          "Characters inside [ - ] matches a range of\n"
+                          "       characters (ie [0-9] or [a-z]).\n" "\n"
+                          "A regular expression may be followed by one\n"
+                          "       of several repetition operators:\n"
+                          "?      The preceding item is optional and matched\n"
+                          "       at most once.\n"
+                          "*      The preceding item will be matched zero\n"
+                          "       or more times.\n"
+                          "+      The preceding item will be matched one or\n"
+                          "       more times.\n"
+                          "{n}    The preceding item is matched exactly n times.\n"
+                          "{n,}   The preceding item is matched n or more times.\n"
+                          "{n,m}  The preceding item is matched at least n times,\n"
+                          "       but not more than m times.\n" "\n"
+                          "To match any reserved character, precede it with \\. \n"
+                          "\n"
+                          "Two regular expressions may be joined by the logical or\n"
+                          "       operator |.\n"
+                          "Two regular expressions may be concatenated.\n" "\n"
+                          "More information is available by typing \"man grep\"\n"
+			  );
+
 
 template <class Type>
 class Signals{
@@ -31,14 +77,62 @@ public:
 	    }
 	}
     }
+
+    static void
+    command_help (GtkWidget * button, gpointer data) {
+	GtkWidget *dialog_=GTK_WIDGET(g_object_get_data(G_OBJECT(button), "dialog_"));
+	gchar *argv[]={(gchar *)data, (gchar *)"--help", NULL};
+	std::cerr<<"fixme: signals::command_help\n";
+	// FIXME
+	/*
+	rfm_clear_text (widgets_p); 
+	rfm_show_text (widgets_p); 
+	rfm_thread_run_argv_full (widgets_p, argv, FALSE, NULL, rfm_markup_stdout_f, rfm_dump_output, rfm_null_function);
+	*/
+    }
+
+    static void
+    on_help_filter (GtkToggleButton * button, gpointer data) {
+	std::cerr<<"fixme: signals::on_help_filter\n";
+	// FIXME
+	/*GtkWidget *dialog=data;
+	widgets_t *widgets_p=g_object_get_data(G_OBJECT(dialog), "widgets_p");
+	if (gtk_toggle_button_get_active (button)) {
+	    rfm_clear_text(widgets_p);
+	    rfm_show_text (widgets_p); 
+	    rfm_diagnostics(widgets_p,"xffm_tag/blue", _(filter_text_help), NULL);
+	    rfm_scroll_to_top(widgets_p);
+	} else {
+	    rfm_clear_text(widgets_p);
+	}*/
+    }
+
+    static void
+    on_help_grep (GtkToggleButton * button, gpointer data) {
+	std::cerr<<"fixme: signals::on_help_grep\n";
+	// FIXME
+	/*GtkWidget *dialog=data;
+	widgets_t *widgets_p=g_object_get_data(G_OBJECT(dialog), "widgets_p");
+	if (gtk_toggle_button_get_active (button)) {
+	    rfm_clear_text(widgets_p);
+	    rfm_show_text (widgets_p); 
+	    rfm_diagnostics(widgets_p,"xffm_tag/blue", _(grep_text_help), NULL);
+	    rfm_scroll_to_top(widgets_p);
+	} else {
+	    rfm_clear_text(widgets_p);
+	}*/
+    }
 };
 
 template <class Type>
 class FindDialog
 {
+    typedef Gtk<double> gtk_c;
     typedef Signals<double> signals;
-    typedef Pixbuf<double> pixbuf;
-#define TB_CALLBACK(X)  (void (*)(GtkToggleButton *,gpointer)) X
+    typedef Pixbuf<double> pixbuf_c;
+    typedef Tooltip<double> tooltip_c;
+#define TB_CALLBACK(X)  (void (*)(GtkButton *,gpointer)) X
+#define W_CALLBACK(X)  (void (*)(GtkWidget *,gpointer)) X
 //    typedef typename  void (*)(GtkToggleButton *,gpointer) toggleButtonCallback;
 public:
     FindDialog(const gchar *path){
@@ -93,27 +187,15 @@ private:
 	gtk_window_set_title (dialog_, _("Find"));
 	gtk_window_set_position (dialog_, GTK_WIN_POS_MOUSE);
 
-	// FIXME: incorporate pixbuf template for this
-	
-	GdkPixbuf *pixbuf = pixbuf::get_pixbuf("edit-find", SIZE_ICON);
-//	GdkPixbuf *pixbuf = pixbuf::get_pixbuf("xffm/stock_find", SIZE_ICON);
+	GdkPixbuf *pixbuf = pixbuf_c::get_pixbuf("edit-find", SIZE_ICON);
 	gtk_window_set_icon (dialog_, pixbuf);
 	g_object_unref(pixbuf);
 	
     }
 
-    GtkBox *vboxNew(gboolean homogeneous, gint spacing){
-	GtkWidget *box = gtk_box_new(GTK_ORIENTATION_VERTICAL, spacing);
-	gtk_box_set_homogeneous (GTK_BOX(box), homogeneous);
-	return GTK_BOX(box);
-    }
-    GtkBox *hboxNew(gboolean homogeneous, gint spacing){
-	GtkWidget *box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, spacing);
-	gtk_box_set_homogeneous (GTK_BOX(box), homogeneous);
-	return GTK_BOX(box);
-    }
+
     void mkVpane(void){
-	mainVbox_ = vboxNew(FALSE, 0);
+	mainVbox_ = gtk_c::vboxNew(FALSE, 0);
 	gtk_widget_show (GTK_WIDGET(mainVbox_));
 	gtk_container_add (GTK_CONTAINER (dialog_), GTK_WIDGET(mainVbox_));
 
@@ -122,7 +204,7 @@ private:
 	gtk_widget_show (GTK_WIDGET(vpane_));
 	gtk_box_pack_start (mainVbox_, GTK_WIDGET(vpane_), TRUE, TRUE, 0);
 	// hack: widgets_p->paper = dialog_;
-	topPaneVbox_ = vboxNew(FALSE, 6);
+	topPaneVbox_ = gtk_c::vboxNew(FALSE, 6);
 	gtk_container_set_border_width (GTK_CONTAINER (topPaneVbox_), 5);
 
 	GtkScrolledWindow *sw = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new(NULL, NULL));
@@ -144,10 +226,10 @@ private:
 	gtk_text_view_set_wrap_mode (diagnostics, GTK_WRAP_WORD);
 	gtk_text_view_set_cursor_visible (diagnostics, FALSE);
 
-	topPaneHbox_=GTK_BOX( hboxNew(FALSE, 0));
+	topPaneHbox_= gtk_c::hboxNew(FALSE, 0);
 	gtk_box_pack_start (topPaneVbox_, GTK_WIDGET(topPaneHbox_), FALSE, FALSE, 0);
 
-	gchar *t=g_strdup_printf("<b>%s <i>(fgr)</i></b>  ", _("Find"));
+	gchar *t=g_strdup_printf("<b>%s </b>  ", _("Find"));
 	GtkLabel *title = GTK_LABEL(gtk_label_new (t));
 	g_free(t);
 	gtk_widget_show (GTK_WIDGET(title));
@@ -164,24 +246,23 @@ private:
 	GtkAccelGroup *accel_group = gtk_accel_group_new ();
 
 
-		
-	// FIXME
-	/*
-	GtkWidget *button;
-	button = rfm_dialog_button ("xffm/stock_dialog-question", NULL);
-	rfm_add_custom_tooltip(button, NULL, "fgr --help");
-	g_signal_connect (G_OBJECT (button), "clicked", G_CALLBACK (command_help), "fgr");
+			
+	GtkButton *button;
+	button = gtk_c::dialog_button ("dialog-question", NULL);
+	tooltip_c::custom_tooltip(GTK_WIDGET(button), NULL, "fgr --help");
+	g_signal_connect (G_OBJECT (button), "clicked", 
+		 G_CALLBACK (W_CALLBACK(signals::command_help)), (gpointer)"fgr");
 	g_object_set_data(G_OBJECT(button), "dialog_", dialog_);
-	gtk_box_pack_start (GTK_BOX (topPaneHbox_), button, FALSE, FALSE, 0);
-	gtk_widget_show(button);*/
+	gtk_box_pack_start (GTK_BOX (topPaneHbox_), GTK_WIDGET(button), FALSE, FALSE, 0);
+	gtk_widget_show(GTK_WIDGET(button));
 
        
 
-	GtkBox *vbox7a = GTK_BOX (vboxNew (FALSE, 5));
+	GtkBox *vbox7a = gtk_c::vboxNew (FALSE, 5);
 	gtk_widget_show (GTK_WIDGET(vbox7a));
 	gtk_box_pack_start (topPaneVbox_, GTK_WIDGET(vbox7a), TRUE, TRUE, 0);
 
-	GtkBox *path_box = GTK_BOX (hboxNew (FALSE, 0));
+	GtkBox *path_box = gtk_c::hboxNew (FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (vbox7a), GTK_WIDGET(path_box), FALSE, FALSE, 0);
 
 	gchar *t=g_strdup_printf("%s:", _("Path"));
@@ -195,21 +276,19 @@ private:
 	g_object_set_data(G_OBJECT(dialog_), "path_combo", path_combo);
 
 
-	// FIXME
-	/*
-	button = rfm_dialog_button ("xffm/stock_directory", NULL);
-	GtkWidget *vbox = vboxNew (FALSE, 6);
-	gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (path_box), path_label, FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (path_box), path_combo, FALSE, TRUE, 0);
-	gtk_box_pack_start (GTK_BOX (path_box), vbox, FALSE, FALSE, 0);
-	gtk_widget_show (vbox);
-	gtk_widget_show (path_combo);
-	gtk_widget_show (button);
+	button = gtk_c::dialog_button ("folder", NULL);
+	GtkBox *vbox = gtk_c::vboxNew (FALSE, 6);
+	gtk_box_pack_start (vbox, GTK_WIDGET(button), FALSE, FALSE, 0);
+	gtk_box_pack_start (path_box, GTK_WIDGET(path_label), FALSE, FALSE, 0);
+	gtk_box_pack_start (path_box, GTK_WIDGET(path_combo), FALSE, TRUE, 0);
+	gtk_box_pack_start (path_box, GTK_WIDGET(vbox), FALSE, FALSE, 0);
+	gtk_widget_show (GTK_WIDGET(vbox));
+	gtk_widget_show (GTK_WIDGET(path_combo));
+	gtk_widget_show (GTK_WIDGET(button));
 	g_object_set_data(G_OBJECT(dialog_), "fileselector", button);
-	*/
+	
 
-	GtkBox *filter_box = GTK_BOX (hboxNew (FALSE, 0));
+	GtkBox *filter_box = gtk_c::hboxNew (FALSE, 0);
 	gtk_box_pack_start (vbox7a, GTK_WIDGET(filter_box), TRUE, FALSE, 5);
 
 	gchar *text=g_strdup_printf("%s ", _("Filter:"));
@@ -225,27 +304,24 @@ private:
 	gtk_box_pack_start (GTK_BOX (filter_box), GTK_WIDGET(filter_combo), FALSE, TRUE, 0);
 	g_object_set_data(G_OBJECT(dialog_), "filter_combo", (gpointer)filter_combo);
 	
-// FIXME
-	/*
-
-	GtkWidget *togglebutton2 = rfm_toggle_button("xffm/stock_dialog-question", "");
-	gtk_box_pack_start (GTK_BOX (filter_box), togglebutton2, FALSE, FALSE, 0);
+	GtkToggleButton *togglebutton2 = gtk_c::toggle_button("dialog-question", "");
+	gtk_box_pack_start (filter_box, GTK_WIDGET(togglebutton2), FALSE, FALSE, 0);
 	g_object_set_data(G_OBJECT(dialog_), "togglebutton2", togglebutton2);
-	rfm_add_custom_tooltip(togglebutton2, NULL,  _(filter_text_help));
+	tooltip_c::custom_tooltip(GTK_WIDGET(togglebutton2), NULL,  _(filter_text_help));
 	g_signal_connect (togglebutton2,
-			  "toggled", G_CALLBACK (on_help_filter), 
+			  "toggled", G_CALLBACK (TB_CALLBACK(signals::on_help_filter)), 
 			  (gpointer) dialog_);
-	*/
+	
 
-	GtkBox *hbox17 = GTK_BOX (hboxNew (FALSE, 0));
+	GtkBox *hbox17 = gtk_c::hboxNew (FALSE, 0);
 	gtk_widget_show (GTK_WIDGET(hbox17));
 	gtk_box_pack_start (vbox7a, GTK_WIDGET(hbox17), TRUE, FALSE, 0);
 
-	GtkBox *left_options_vbox = GTK_BOX (vboxNew (FALSE, 0));
+	GtkBox *left_options_vbox = gtk_c::vboxNew (FALSE, 0);
 	gtk_box_pack_start (hbox17, GTK_WIDGET(left_options_vbox), FALSE, FALSE, 0);
-	GtkBox *center_options_vbox = GTK_BOX (vboxNew (FALSE, 0));
+	GtkBox *center_options_vbox = gtk_c::vboxNew (FALSE, 0);
 	gtk_box_pack_start (hbox17, GTK_WIDGET(center_options_vbox), FALSE, FALSE, 0);
-	GtkBox *right_options_vbox = GTK_BOX (vboxNew (FALSE, 0));
+	GtkBox *right_options_vbox = gtk_c::vboxNew (FALSE, 0);
 	gtk_box_pack_start (hbox17, GTK_WIDGET(right_options_vbox), FALSE, FALSE, 0);
 
 	/// option -r "recursive"
@@ -320,7 +396,7 @@ private:
 	 ///////////
 
      
-	GtkBox *hbox21 = GTK_BOX (hboxNew (FALSE, 0));
+	GtkBox *hbox21 = gtk_c::hboxNew (FALSE, 0);
 	gtk_widget_show (GTK_WIDGET(hbox21));
 	gtk_box_pack_start (left_options_vbox, GTK_WIDGET(hbox21), TRUE, FALSE, 0);
 
@@ -342,17 +418,17 @@ private:
 	gtk_box_pack_start (topPaneVbox_, GTK_WIDGET(contains_label), FALSE, FALSE, 1);
 	gtk_label_set_use_markup (GTK_LABEL (contains_label), TRUE);
 
-	GtkBox *hbox26 = GTK_BOX (hboxNew (FALSE, 0));
+	GtkBox *hbox26 = gtk_c::hboxNew (FALSE, 0);
 	gtk_widget_show (GTK_WIDGET(hbox26));
 	gtk_box_pack_start (topPaneVbox_, GTK_WIDGET(hbox26), FALSE, FALSE, 0);
 	gtk_container_set_border_width (GTK_CONTAINER (hbox26), 2);
 
-	GtkBox *vbox8 = GTK_BOX (vboxNew (FALSE, 5));
+	GtkBox *vbox8 = gtk_c::vboxNew (FALSE, 5);
 	gtk_widget_show (GTK_WIDGET(vbox8));
 	gtk_box_pack_start (hbox26, GTK_WIDGET(vbox8), TRUE, TRUE, 0);
 	gtk_container_set_border_width (GTK_CONTAINER (vbox8), 5);
 
-	GtkBox *grep_box = GTK_BOX (hboxNew (FALSE, 0));
+	GtkBox *grep_box = gtk_c::hboxNew (FALSE, 0);
 	gtk_box_pack_start (vbox8, GTK_WIDGET(grep_box), FALSE, FALSE, 0);
 
 	t=g_strdup_printf("%s: ",_("Contains the text"));
@@ -368,22 +444,21 @@ private:
 	gtk_widget_set_sensitive (GTK_WIDGET(grep_combo), TRUE);
 	g_object_set_data(G_OBJECT(dialog_), "grep_combo", grep_combo);
 
-// FIXME
-	/*
-	GtkWidget *togglebutton3 = rfm_toggle_button ("xffm/stock_dialog-question", "");
-	gtk_box_pack_start (GTK_BOX (grep_box), togglebutton3, FALSE, FALSE, 0);
+	
+	GtkToggleButton *togglebutton3 = gtk_c::toggle_button ("dialog-question", "");
+	gtk_box_pack_start (grep_box, GTK_WIDGET(togglebutton3), FALSE, FALSE, 0);
 	g_object_set_data(G_OBJECT(dialog_), "togglebutton3", togglebutton3);
-	rfm_add_custom_tooltip(togglebutton3, NULL, _(grep_text_help));
-	g_signal_connect (togglebutton3,
-			  "toggled", G_CALLBACK (on_help_grep), 
+	tooltip_c::custom_tooltip(GTK_WIDGET(togglebutton3), NULL, _(grep_text_help));
+	g_signal_connect (GTK_WIDGET(togglebutton3),
+			  "toggled", G_CALLBACK (TB_CALLBACK(signals::on_help_grep)), 
 			  (gpointer) dialog_);
-	*/
+	
 
-	GtkBox *hbox20 = GTK_BOX (hboxNew (FALSE, 0));
+	GtkBox *hbox20 = gtk_c::hboxNew (FALSE, 0);
 	gtk_widget_show (GTK_WIDGET(hbox20));
 	gtk_box_pack_start (vbox8, GTK_WIDGET(hbox20), FALSE, FALSE, 0);
 
-	GtkBox *vbox13 = GTK_BOX (vboxNew (FALSE, 0));
+	GtkBox *vbox13 = gtk_c::vboxNew (FALSE, 0);
 	gtk_box_pack_start (hbox20, GTK_WIDGET(vbox13), TRUE, TRUE, 0);
 
 	GtkCheckButton *case_sensitive =  
@@ -420,17 +495,17 @@ private:
 	g_object_set_data(G_OBJECT(dialog_), "line_count", line_count);
 	
        
-	GtkBox *hbox28 = GTK_BOX (hboxNew (FALSE, 0));
+	GtkBox *hbox28 = gtk_c::hboxNew (FALSE, 0);
 	gtk_box_pack_start (topPaneVbox_, GTK_WIDGET(hbox28), TRUE, TRUE, 0);
 	gtk_container_set_border_width (GTK_CONTAINER (hbox28), 2);
 
-	GtkBox *vbox11 = GTK_BOX (vboxNew (FALSE, 0));
+	GtkBox *vbox11 = gtk_c::vboxNew (FALSE, 0);
 	gtk_widget_show (GTK_WIDGET(vbox11));
 	gtk_box_pack_start (hbox28, GTK_WIDGET(vbox11), TRUE, TRUE, 0);
 
 
 
-	GtkBox *hbox24 = GTK_BOX (hboxNew (FALSE, 0));
+	GtkBox *hbox24 = gtk_c::hboxNew (FALSE, 0);
 	gtk_box_pack_start (vbox11, GTK_WIDGET(hbox24), FALSE, FALSE, 0);
 	gtk_container_set_border_width (GTK_CONTAINER (hbox24), 5);
 	
@@ -686,16 +761,16 @@ private:
 
 	GtkRadioButton *radio1 =  
 	    GTK_RADIO_BUTTON(gtk_radio_button_new_with_label (NULL, "mtime"));
-	// FIXME
-	// rfm_add_custom_tooltip(radio1, NULL, _("Modified"));
+	// FIXME should work when radios are sensitive... check this
+	tooltip_c::custom_tooltip(GTK_WIDGET(radio1), NULL, _("Modified"));
 	GtkRadioButton *radio2 = 
 	    GTK_RADIO_BUTTON(gtk_radio_button_new_with_label_from_widget ( radio1, "ctime"));
-	// FIXME
-	// rfm_add_custom_tooltip(radio2, NULL, _("Created"));
+	// FIXME should work when radios are sensitive... check this
+	tooltip_c::custom_tooltip(GTK_WIDGET(radio2), NULL, _("Created"));
 	GtkRadioButton *radio3 = 
 	    GTK_RADIO_BUTTON(gtk_radio_button_new_with_label_from_widget ( radio1, "atime"));
-	// FIXME
-	// rfm_add_custom_tooltip(radio3, NULL, _("Accessed"));
+	// FIXME should work when radios are sensitive... check this
+	tooltip_c::custom_tooltip(GTK_WIDGET(radio3), NULL, _("Accessed"));
 
 	g_object_set_data(G_OBJECT(dialog_), "radio1", radio1 );
 	g_object_set_data(G_OBJECT(dialog_), "radio2", radio2 );
@@ -704,7 +779,7 @@ private:
 	gtk_widget_show (GTK_WIDGET(radio2));
 	gtk_widget_show (GTK_WIDGET(radio3));
 
-	GtkBox *radio_box=GTK_BOX(vboxNew (FALSE, 0));
+	GtkBox *radio_box=gtk_c::vboxNew (FALSE, 0);
 	g_object_set_data(G_OBJECT(dialog_), "radio_box", radio_box );
 	gtk_widget_show (GTK_WIDGET(radio_box));
 	gtk_box_pack_start (options_vbox, GTK_WIDGET(radio_box), TRUE, FALSE, 0);
@@ -715,7 +790,7 @@ private:
 	/*GtkWidget *label = gtk_label_new(_("modified"));
 	gtk_box_pack_start (GTK_BOX (radio_box), label, TRUE, FALSE, 0);
 	gtk_widget_show (label);*/
-	GtkBox *box=GTK_BOX (vboxNew (FALSE, 0));
+	GtkBox *box=gtk_c::vboxNew (FALSE, 0);
 	gtk_widget_show (GTK_WIDGET(box));
 	gtk_box_pack_start (radio_box, GTK_WIDGET(box), TRUE, FALSE, 0);
 
@@ -741,11 +816,11 @@ private:
 	    DBG("add_option_entry(): incorrect function call\n");
 	    return NULL;
 	}
-	GtkBox *hbox = GTK_BOX (hboxNew (FALSE, 0));
+	GtkBox *hbox = gtk_c::hboxNew (FALSE, 0);
 	gtk_widget_show (GTK_WIDGET(hbox));
 	gtk_box_pack_start (options_vbox, GTK_WIDGET(hbox), TRUE, FALSE, 0);
 
-	GtkBox *size_hbox = GTK_BOX (hboxNew (FALSE, 0));
+	GtkBox *size_hbox = gtk_c::hboxNew (FALSE, 0);
 	GtkCheckButton *check = NULL;
 	if (check_name) {
 	    check = GTK_CHECK_BUTTON(gtk_check_button_new());
@@ -796,11 +871,11 @@ private:
 	    DBG("add_option_radio2(): incorrect function call\n");
 	    return NULL;
 	}
-	GtkBox *hbox = GTK_BOX(hboxNew (FALSE, 0));
+	GtkBox *hbox = gtk_c::hboxNew (FALSE, 0);
 	gtk_widget_show (GTK_WIDGET(hbox));
 	gtk_box_pack_start (GTK_BOX (options_vbox), GTK_WIDGET(hbox), TRUE, FALSE, 0);
 
-	GtkBox *size_hbox = GTK_BOX(hboxNew (FALSE, 0));
+	GtkBox *size_hbox = gtk_c::hboxNew (FALSE, 0);
 	GtkCheckButton *check = NULL;
 	if (check_name) {
 	    check = GTK_CHECK_BUTTON(gtk_check_button_new());
@@ -858,11 +933,11 @@ private:
 	    DBG("add_option_spin(): incorrect function call\n");
 	    return NULL;
 	}
-	GtkBox *hbox = GTK_BOX(hboxNew (FALSE, 0));
+	GtkBox *hbox = gtk_c::hboxNew (FALSE, 0);
 	gtk_widget_show (GTK_WIDGET(hbox));
 	gtk_box_pack_start (options_vbox, GTK_WIDGET(hbox), TRUE, FALSE, 0);
 
-	GtkBox *size_hbox = GTK_BOX(hboxNew (FALSE, 0));
+	GtkBox *size_hbox = gtk_c::hboxNew (FALSE, 0);
 	GtkCheckButton *check = NULL;
 	if (check_name) {
 	    check = GTK_CHECK_BUTTON(gtk_check_button_new());
@@ -913,11 +988,11 @@ private:
 	    DBG("add_option_spin(): incorrect function call\n");
 	    return NULL;
 	}
-	GtkBox *hbox = GTK_BOX(hboxNew (FALSE, 0));
+	GtkBox *hbox = gtk_c::hboxNew (FALSE, 0);
 	gtk_widget_show (GTK_WIDGET(hbox));
 	gtk_box_pack_start (options_vbox, GTK_WIDGET(hbox), TRUE, FALSE, 0);
 
-	GtkBox *size_hbox = GTK_BOX(hboxNew (FALSE, 0));
+	GtkBox *size_hbox = gtk_c::hboxNew (FALSE, 0);
 	GtkCheckButton *check = NULL;
 	if (check_name) {
 	    check = GTK_CHECK_BUTTON(gtk_check_button_new());
