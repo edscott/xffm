@@ -11,53 +11,11 @@ typedef struct radio_t {
 
 namespace xf
 {
-    static const gchar *
-    filter_text_help=
-	        N_("Basic rules:\n" "\n"
-                          "*  Will match any character zero or more times.\n"
-                          "?  Will match any character exactly one time\n"
-                          "[] Match any character within the [] \n"
-                          "^  Match at beginning of string\n" 
-			  "$  Match at end of string \n");
-    static const gchar *
-    grep_text_help=
-		N_("Reserved characters for extended regexp are\n"
-                          ". ^ $ [ ] ? * + { } | \\ ( ) : \n"
-                          "In  basic regular expressions the metacharacters\n"
-                          "?, +, {, |, (, and ) lose their special meaning.\n"
-                          "\n"
-                          "The  period . matches  any  single  character.\n"
-                          "The caret ^ matches at the start of line.\n"
-                          "The dollar $ matches at the end of line.\n" "\n"
-                          "Characters within [ ] matches any single \n"
-                          "       character in the list.\n"
-                          "Characters within [^ ] matches any single\n"
-                          "       character *not* in the list.\n"
-                          "Characters inside [ - ] matches a range of\n"
-                          "       characters (ie [0-9] or [a-z]).\n" "\n"
-                          "A regular expression may be followed by one\n"
-                          "       of several repetition operators:\n"
-                          "?      The preceding item is optional and matched\n"
-                          "       at most once.\n"
-                          "*      The preceding item will be matched zero\n"
-                          "       or more times.\n"
-                          "+      The preceding item will be matched one or\n"
-                          "       more times.\n"
-                          "{n}    The preceding item is matched exactly n times.\n"
-                          "{n,}   The preceding item is matched n or more times.\n"
-                          "{n,m}  The preceding item is matched at least n times,\n"
-                          "       but not more than m times.\n" "\n"
-                          "To match any reserved character, precede it with \\. \n"
-                          "\n"
-                          "Two regular expressions may be joined by the logical or\n"
-                          "       operator |.\n"
-                          "Two regular expressions may be concatenated.\n" "\n"
-                          "More information is available by typing \"man grep\"\n"
-			  );
 
 
 template <class Type>
 class Signals{
+    typedef Gtk<double> gtk_c;
 public:
     static void 
     sensitivize (GtkToggleButton *togglebutton, gpointer data){
@@ -80,9 +38,11 @@ public:
 
     static void
     command_help (GtkWidget * button, gpointer data) {
-	GtkWidget *dialog_=GTK_WIDGET(g_object_get_data(G_OBJECT(button), "dialog_"));
-	gchar *argv[]={(gchar *)data, (gchar *)"--help", NULL};
+	GtkWindow *dialog_=GTK_WINDOW(g_object_get_data(G_OBJECT(button), "dialog_"));
+	const gchar *message = (const gchar *)data;
 	std::cerr<<"fixme: signals::command_help\n";
+	gtk_c::quick_help(dialog_, message);
+
 	// FIXME
 	/*
 	rfm_clear_text (widgets_p); 
@@ -92,8 +52,11 @@ public:
     }
 
     static void
-    on_help_filter (GtkToggleButton * button, gpointer data) {
-	std::cerr<<"fixme: signals::on_help_filter\n";
+    on_buttonHelp (GtkWidget * button, gpointer data) {
+	GtkWindow *dialog_=GTK_WINDOW(g_object_get_data(G_OBJECT(button), "dialog_"));
+	const gchar *message = (const gchar *)data;
+	std::cerr<<"fixme: signals::on_buttonHelp\n";
+	gtk_c::quick_help(dialog_, message);
 	// FIXME
 	/*GtkWidget *dialog=data;
 	widgets_t *widgets_p=g_object_get_data(G_OBJECT(dialog), "widgets_p");
@@ -107,21 +70,6 @@ public:
 	}*/
     }
 
-    static void
-    on_help_grep (GtkToggleButton * button, gpointer data) {
-	std::cerr<<"fixme: signals::on_help_grep\n";
-	// FIXME
-	/*GtkWidget *dialog=data;
-	widgets_t *widgets_p=g_object_get_data(G_OBJECT(dialog), "widgets_p");
-	if (gtk_toggle_button_get_active (button)) {
-	    rfm_clear_text(widgets_p);
-	    rfm_show_text (widgets_p); 
-	    rfm_diagnostics(widgets_p,"xffm_tag/blue", _(grep_text_help), NULL);
-	    rfm_scroll_to_top(widgets_p);
-	} else {
-	    rfm_clear_text(widgets_p);
-	}*/
-    }
 };
 
 template <class Type>
@@ -131,6 +79,7 @@ class FindDialog
     typedef Signals<double> signals;
     typedef Pixbuf<double> pixbuf_c;
     typedef Tooltip<double> tooltip_c;
+#define B_CALLBACK(X)  (void (*)(GtkButton *,gpointer)) X
 #define TB_CALLBACK(X)  (void (*)(GtkButton *,gpointer)) X
 #define W_CALLBACK(X)  (void (*)(GtkWidget *,gpointer)) X
 //    typedef typename  void (*)(GtkToggleButton *,gpointer) toggleButtonCallback;
@@ -304,13 +253,13 @@ private:
 	gtk_box_pack_start (GTK_BOX (filter_box), GTK_WIDGET(filter_combo), FALSE, TRUE, 0);
 	g_object_set_data(G_OBJECT(dialog_), "filter_combo", (gpointer)filter_combo);
 	
-	GtkToggleButton *togglebutton2 = gtk_c::toggle_button("dialog-question", "");
-	gtk_box_pack_start (filter_box, GTK_WIDGET(togglebutton2), FALSE, FALSE, 0);
-	g_object_set_data(G_OBJECT(dialog_), "togglebutton2", togglebutton2);
-	tooltip_c::custom_tooltip(GTK_WIDGET(togglebutton2), NULL,  _(filter_text_help));
-	g_signal_connect (togglebutton2,
-			  "toggled", G_CALLBACK (TB_CALLBACK(signals::on_help_filter)), 
-			  (gpointer) dialog_);
+	GtkButton *dialogbutton2 = gtk_c::dialog_button("dialog-question", "");
+	gtk_box_pack_start (filter_box, GTK_WIDGET(dialogbutton2), FALSE, FALSE, 0);
+	g_object_set_data(G_OBJECT(dialogbutton2), "dialog_", dialog_);
+	tooltip_c::custom_tooltip(GTK_WIDGET(dialogbutton2), NULL,  _(filter_text_help));
+	g_signal_connect (dialogbutton2,
+			  "clicked", G_CALLBACK (W_CALLBACK(signals::on_buttonHelp)), 
+			  (gpointer)filter_text_help);
 	
 
 	GtkBox *hbox17 = gtk_c::hboxNew (FALSE, 0);
@@ -445,13 +394,13 @@ private:
 	g_object_set_data(G_OBJECT(dialog_), "grep_combo", grep_combo);
 
 	
-	GtkToggleButton *togglebutton3 = gtk_c::toggle_button ("dialog-question", "");
-	gtk_box_pack_start (grep_box, GTK_WIDGET(togglebutton3), FALSE, FALSE, 0);
-	g_object_set_data(G_OBJECT(dialog_), "togglebutton3", togglebutton3);
-	tooltip_c::custom_tooltip(GTK_WIDGET(togglebutton3), NULL, _(grep_text_help));
-	g_signal_connect (GTK_WIDGET(togglebutton3),
-			  "toggled", G_CALLBACK (TB_CALLBACK(signals::on_help_grep)), 
-			  (gpointer) dialog_);
+	GtkButton *button3 = gtk_c::dialog_button ("dialog-question", "");
+	gtk_box_pack_start (grep_box, GTK_WIDGET(button3), FALSE, FALSE, 0);
+	g_object_set_data(G_OBJECT(button3), "dialog_", dialog_);
+	//tooltip_c::custom_tooltip(GTK_WIDGET(togglebutton3), NULL, _(grep_text_help));
+	g_signal_connect (GTK_WIDGET(button3),
+			  "clicked", G_CALLBACK (W_CALLBACK(signals::on_buttonHelp)), 
+			  (gpointer) _(grep_text_help));
 	
 
 	GtkBox *hbox20 = gtk_c::hboxNew (FALSE, 0);
@@ -1084,32 +1033,28 @@ gchar  *last_workdir = NULL;
     
 //gboolean have_grep = FALSE;
 
-const gchar *
-filter_text_help=
+    static constexpr gchar *
+    filter_text_help=
 	        N_("Basic rules:\n" "\n"
                           "*  Will match any character zero or more times.\n"
                           "?  Will match any character exactly one time\n"
                           "[] Match any character within the [] \n"
                           "^  Match at beginning of string\n" 
 			  "$  Match at end of string \n");
-const gchar *
-grep_text_help=
-		N_("Reserved characters for extended regexp are\n"
+    static constexpr gchar *
+    grep_text_help=
+		N_("Reserved characters for extended regexp are "
                           ". ^ $ [ ] ? * + { } | \\ ( ) : \n"
-                          "In  basic regular expressions the metacharacters\n"
-                          "?, +, {, |, (, and ) lose their special meaning.\n"
+                          "In  basic regular expressions the metacharacters ?, +, {, |, (, and ) \n"
+			  "  lose their special meaning.\n"
                           "\n"
-                          "The  period  .   madirenttches  any  single  character.\n"
+                          "The  period . matches  any  single  character.\n"
                           "The caret ^ matches at the start of line.\n"
                           "The dollar $ matches at the end of line.\n" "\n"
-                          "Characters within [ ] matches any single \n"
-                          "       character in the list.\n"
-                          "Characters within [^ ] matches any single\n"
-                          "       character *not* in the list.\n"
-                          "Characters inside [ - ] matches a range of\n"
-                          "       characters (ie [0-9] or [a-z]).\n" "\n"
-                          "A regular expression may be followed by one\n"
-                          "       of several repetition operators:\n"
+                          "Characters within [ ] matches any single character in the list.\n"
+                          "Characters within [^ ] matches any single character *not* in the list.\n"
+                          "Characters inside [ - ] matches a range of characters (ie [0-9] or [a-z]).\n" "\n"
+                          "A regular expression may be followed by one of several repetition operators:\n"
                           "?      The preceding item is optional and matched\n"
                           "       at most once.\n"
                           "*      The preceding item will be matched zero\n"
@@ -1122,83 +1067,10 @@ grep_text_help=
                           "       but not more than m times.\n" "\n"
                           "To match any reserved character, precede it with \\. \n"
                           "\n"
-                          "Two regular expressions may be joined by the logical or\n"
-                          "       operator |.\n"
+                          "Two regular expressions may be joined by the logical or operator |.\n"
                           "Two regular expressions may be concatenated.\n" "\n"
-                          "More information is available by typing \"man grep\"\n"
-			  );
+                          "More information is available by typing \"man grep\"\n");
 
 };
-
-#if 0
-template <class Type>
-class xffind: public xffindGUI<Type>
-{
-public:
-    xffind(const char *path){
-    }
-    xffind(void){
-    }
-    void helpFilter (GtkToggleButton * button) {
-	GtkTextView *textView=GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(window), "helpTextView"));
-	clearText(textView);
-	if (gtk_toggle_button_get_active (button)) {
-	    showText(textView); 
-	    printTag("blue", _(filter_text_help), NULL);
-	    scrollTop(textView);
-	} 
-    }
-
-    void clearText (GtkTextView *textView) {
-	if (!textView){
-	    std::cerr<<"DBG> clearText(): textView is null\n";
-	    return;
-	}
-	GtkTextIter start, end;
-	GtkTextBuffer *buffer = gtk_text_view_get_buffer (textView);
-	gtk_text_buffer_get_bounds (buffer, &start, &end);
-	gtk_text_buffer_delete (buffer, &start, &end);
-	GtkPaned *vpane_ = GTK_PANED(g_object_get_data(G_OBJECT(textView), "vpane_"));
-        hidePane (vpane_);
-    }
-    void hidePane (GtkPaned *vpane_) {
-	if(!vpane_){
-	    std::cerr<<"DBG> hidePane(): vpane_ is null\n";
-	    return ;
-	}
-	GtkAllocation allocation;
-	gtk_widget_get_allocation (vpane_, &allocation);
-	gtk_paned_set_position (GTK_PANED (vpane_), 10000);
-    }
-
-    void showText (GtkTextView *textView) {
-	if(!textView){
-	    std::cerr<<"DBG> showText(): textView is null\n";
-	    return ;
-	}
-	GtkPaned *vpane_ = GTK_PANED(g_object_get_data(G_OBJECT(textView), "vpane_"));
-	if(!vpane_){
-	    std::cerr<<"DBG> showText(): vpane_ is null\n";
-	    return ;
-	}
-	GtkAllocation allocation;
-	gtk_widget_get_allocation (vpane_, &allocation);
-	if (allocation.height <= 50) {
-	    std::cerr<<"DBG> showText(): allocation.height <= 50\n";
-	    return ;
-	}
-	gdouble position = gtk_paned_get_position (vpane_);
-	if(position > allocation.height * 0.90) {
-	    gtk_paned_set_position (vpane_, allocation.height * 0.75);
-	}
-	return ;
-    }
-
-
-private:
-    GtkWidget *fill_string_option_menu (GtkComboBox *om, GSList * strings);
-    GtkWidget *create_find_dialog (void);
-};
-#endif
 } // namespace xf
 #endif
