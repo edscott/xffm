@@ -2,6 +2,18 @@
 #define XFGTK_HH
 #include "xfpixbuf.hh"
 
+#define BIG_ICON_SIZE 		96 
+#define MEDIUM_ICON_SIZE 	72 
+#define SMALL_ICON_SIZE 	48 
+#define TINY_ICON_SIZE 		24 
+#define LIST_ICON_SIZE  	0
+
+#define SIZE_BUTTON	20
+#define SIZE_DIALOG	36
+#define SIZE_ICON	48
+#define SIZE_PREVIEW	96
+#define SIZE_TIP	128
+
 static GHashTable *iconname_hash=NULL;
 
 namespace xf
@@ -193,7 +205,7 @@ public:
      GtkWidget *dialog, *label, *content_area;
      GtkDialogFlags flags;
 
-	std::cerr<<"fixme: signals::quick_help\n";
+     std::cerr<<"fixme: signals::quick_help\n";
 
      // Create the widgets
      flags = GTK_DIALOG_DESTROY_WITH_PARENT;

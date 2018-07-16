@@ -42,13 +42,6 @@ public:
 	const gchar *message = (const gchar *)data;
 	std::cerr<<"fixme: signals::command_help\n";
 	gtk_c::quick_help(dialog_, message);
-
-	// FIXME
-	/*
-	rfm_clear_text (widgets_p); 
-	rfm_show_text (widgets_p); 
-	rfm_thread_run_argv_full (widgets_p, argv, FALSE, NULL, rfm_markup_stdout_f, rfm_dump_output, rfm_null_function);
-	*/
     }
 
     static void
@@ -57,17 +50,6 @@ public:
 	const gchar *message = (const gchar *)data;
 	std::cerr<<"fixme: signals::on_buttonHelp\n";
 	gtk_c::quick_help(dialog_, message);
-	// FIXME
-	/*GtkWidget *dialog=data;
-	widgets_t *widgets_p=g_object_get_data(G_OBJECT(dialog), "widgets_p");
-	if (gtk_toggle_button_get_active (button)) {
-	    rfm_clear_text(widgets_p);
-	    rfm_show_text (widgets_p); 
-	    rfm_diagnostics(widgets_p,"xffm_tag/blue", _(filter_text_help), NULL);
-	    rfm_scroll_to_top(widgets_p);
-	} else {
-	    rfm_clear_text(widgets_p);
-	}*/
     }
 
 };
@@ -142,7 +124,6 @@ private:
 	
     }
 
-
     void mkVpane(void){
 	mainVbox_ = gtk_c::vboxNew(FALSE, 0);
 	gtk_widget_show (GTK_WIDGET(mainVbox_));
@@ -186,15 +167,12 @@ private:
 	gtk_label_set_use_markup (title, TRUE);
     }
 
-
     void createDialog(const gchar *path){
 	// FIXME: path not in use...
 	mkDialog();
 	mkVpane();
 
 	GtkAccelGroup *accel_group = gtk_accel_group_new ();
-
-
 			
 	GtkButton *button;
 	button = gtk_c::dialog_button ("dialog-question", NULL);
@@ -538,53 +516,54 @@ private:
 	gtk_button_box_set_layout (hbuttonbox2, GTK_BUTTONBOX_EDGE);
 
 // FIXME
-	/*
+	
 	GtkWidget *button_image;
 	gchar *g=g_strdup_printf("%s/%s", _("Find"), _("Close"));
-	GtkWidget *find_button =  
-	    rfm_dialog_button("xffm/stock_find", g);
+	GtkButton *find_button =  
+	    gtk_c::dialog_button("edit-find", g);
 	g_free(g);
 	g_object_set_data(G_OBJECT(dialog_), "find_button", find_button);
 	g_object_set_data(G_OBJECT(find_button), "dialog_", dialog_);
 	
-	GtkWidget *apply_button =  
-	    rfm_dialog_button("xffm/stock_find", _("Find"));
+	GtkButton *apply_button =  
+	    gtk_c::dialog_button("edit-find", _("Find"));
 	g_object_set_data(G_OBJECT(dialog_), "apply_button", apply_button);
 	g_object_set_data(G_OBJECT(apply_button), "dialog_", dialog_);
 
-	GtkWidget *cancel_button =  
-	    rfm_dialog_button("xffm/stock_cancel", _("Cancel"));
+	GtkButton *cancel_button =  
+	    gtk_c::dialog_button("cancel", _("Cancel"));
 	g_object_set_data(G_OBJECT(dialog_), "cancel_button", cancel_button);
 	g_object_set_data(G_OBJECT(cancel_button), "dialog_", dialog_);
-	gtk_widget_set_sensitive(cancel_button, FALSE);
+	gtk_widget_set_sensitive(GTK_WIDGET(cancel_button), FALSE);
 	
 
-	GtkWidget *clear_button =  
-	    rfm_dialog_button("xffm/stock_clear", _("Clear"));
+	GtkButton *clear_button =  
+	    gtk_c::dialog_button("clear", _("Clear"));
 	g_object_set_data(G_OBJECT(dialog_), "clear_button", clear_button);
 	g_object_set_data(G_OBJECT(clear_button), "dialog_", dialog_);
-	g_signal_connect (G_OBJECT (clear_button), "clicked",
-		G_CALLBACK (clear_text), NULL);
+	// FIXME
+	//g_signal_connect (G_OBJECT (clear_button), "clicked",
+	//	G_CALLBACK (clear_text), NULL);
 
-	GtkWidget *close_button =  
-	    rfm_dialog_button("xffm/stock_close", _("Close"));
+	GtkButton *close_button =  
+	    gtk_c::dialog_button("close", _("Close"));
 	g_object_set_data(G_OBJECT(dialog_), "close_button", close_button);
 	g_object_set_data(G_OBJECT(close_button), "dialog_", dialog_);
 
 
-	gtk_widget_show (find_button);
-	gtk_container_add (GTK_CONTAINER (hbuttonbox2), find_button);
-	gtk_widget_set_can_default(find_button, TRUE);
+	gtk_widget_show (GTK_WIDGET(find_button));
+	gtk_container_add (GTK_CONTAINER (hbuttonbox2), GTK_WIDGET(find_button));
+	gtk_widget_set_can_default(GTK_WIDGET(find_button), TRUE);
 
-	gtk_widget_show (apply_button);
-	gtk_container_add (GTK_CONTAINER (hbuttonbox2), apply_button);
-	gtk_widget_set_can_default(apply_button, TRUE);
+	gtk_widget_show (GTK_WIDGET(apply_button));
+	gtk_container_add (GTK_CONTAINER (hbuttonbox2), GTK_WIDGET(apply_button));
+	gtk_widget_set_can_default(GTK_WIDGET(apply_button), TRUE);
 
-	gtk_widget_show (clear_button);
-	gtk_container_add (GTK_CONTAINER (hbuttonbox2), clear_button);
+	gtk_widget_show (GTK_WIDGET(clear_button));
+	gtk_container_add (GTK_CONTAINER (hbuttonbox2), GTK_WIDGET(clear_button));
 
-	gtk_widget_show (cancel_button);
-	gtk_container_add (GTK_CONTAINER (hbuttonbox2), cancel_button);
+	gtk_widget_show (GTK_WIDGET(cancel_button));
+	gtk_container_add (GTK_CONTAINER (hbuttonbox2), GTK_WIDGET(cancel_button));
 
 	const gchar *editor = getenv("EDITOR");
 	if (editor && strlen(editor)){
@@ -593,18 +572,19 @@ private:
 	    gchar *editor_path = g_find_program_in_path(basename);
 	    if (editor_path){
 		gchar *iconpath=g_strdup(basename);
-		GdkPixbuf *pix = rfm_get_pixbuf (iconpath, SMALL_ICON_SIZE); //refs
-		if (!pix) iconpath = g_strdup("xffm/stock_edit");
+		GdkPixbuf *pix = pixbuf_c::get_pixbuf (iconpath, SMALL_ICON_SIZE); //refs
+		if (!pix) iconpath = g_strdup("document-open");
 		else g_object_unref(pix);
 
-		GtkWidget *edit_button = 
-		    rfm_dialog_button(iconpath, _("Edit"));
+		GtkButton *edit_button = 
+		    gtk_c::dialog_button(iconpath, _("Edit"));
 		g_free(iconpath);
 		g_object_set_data(G_OBJECT(dialog_), "edit_button", edit_button);
 		g_object_set_data(G_OBJECT(edit_button), "dialog_", dialog_);
-		g_signal_connect (G_OBJECT (edit_button), "clicked", G_CALLBACK (edit_command), NULL);
-		gtk_widget_show(edit_button);
-		gtk_container_add (GTK_CONTAINER (hbuttonbox2), edit_button);
+		// FIXME
+		//g_signal_connect (G_OBJECT (edit_button), "clicked", G_CALLBACK (edit_command), NULL);
+		gtk_widget_show(GTK_WIDGET(edit_button));
+		gtk_container_add (GTK_CONTAINER (hbuttonbox2), GTK_WIDGET(edit_button));
 		g_free(editor_path);
 	    } 
 	    g_free(basename);
@@ -613,14 +593,12 @@ private:
 	}
 
 
-	gtk_widget_show (close_button);
-	gtk_container_add (GTK_CONTAINER (hbuttonbox2), close_button);
-	gtk_widget_add_accelerator (close_button, "clicked", accel_group, GDK_KEY_Escape, 0, GTK_ACCEL_VISIBLE);
+	gtk_widget_show (GTK_WIDGET(close_button));
+	gtk_container_add (GTK_CONTAINER (hbuttonbox2), GTK_WIDGET(close_button));
+	gtk_widget_add_accelerator (GTK_WIDGET(close_button), "clicked", accel_group, GDK_KEY_Escape, (GdkModifierType)0, GTK_ACCEL_VISIBLE);
 
-	gtk_widget_grab_default (find_button);
-	gtk_window_add_accel_group (GTK_WINDOW (dialog_), accel_group);
-
-	*/
+	gtk_widget_grab_default (GTK_WIDGET(find_button));
+	gtk_window_add_accel_group (dialog_, accel_group);
 
 	gtk_widget_realize(GTK_WIDGET(dialog_));
      
@@ -1008,28 +986,29 @@ private:
 	}
     }
 
-// default values:
-gint result_limit=256;
-gint size_greater=16;
-gint size_smaller=1024;
-gint last_minutes=60;
-gint last_hours=2;
-gint last_days=7;
-gint last_months=2;
-gboolean default_recursive=TRUE;
-gboolean default_recursiveH=FALSE;
-gboolean default_xdev=TRUE;
-gboolean default_case_sensitive=FALSE;
-gboolean default_ext_regexp=FALSE;
-gboolean default_look_in_binaries=FALSE;
-gboolean default_line_count=FALSE;
-gint default_type_index=0;
-gboolean default_anywhere=TRUE;
-gboolean default_match_words=FALSE;
-gboolean default_match_lines=FALSE;
-gboolean default_match_no_match=FALSE;
-GSList *find_list = NULL;
-gchar  *last_workdir = NULL;
+    // default values:
+     
+    gint result_limit=256;
+    gint size_greater=16;
+    gint size_smaller=1024;
+    gint last_minutes=60;
+    gint last_hours=2;
+    gint last_days=7;
+    gint last_months=2;
+    gboolean default_recursive=TRUE;
+    gboolean default_recursiveH=FALSE;
+    gboolean default_xdev=TRUE;
+    gboolean default_case_sensitive=FALSE;
+    gboolean default_ext_regexp=FALSE;
+    gboolean default_look_in_binaries=FALSE;
+    gboolean default_line_count=FALSE;
+    gint default_type_index=0;
+    gboolean default_anywhere=TRUE;
+    gboolean default_match_words=FALSE;
+    gboolean default_match_lines=FALSE;
+    gboolean default_match_no_match=FALSE;
+    GSList *find_list = NULL;
+    gchar  *last_workdir = NULL;
     
 //gboolean have_grep = FALSE;
 
