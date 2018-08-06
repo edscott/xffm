@@ -5,9 +5,9 @@ echo '************************ xffm.org ************************************'
 AC_PREREQ([2.63])
 
 m4_define([vers], [0.0.0.1])
-m4_define([package], [fgr+])
-m4_define([bugreport], [https://sourceforge.net/p/xffm/bugs/milestone/rodent-fgr/])
-m4_define([bugmail], ["https://sourceforge.net/p/xffm/bugs/milestone/rodent-fgr/"])
+m4_define([package], [xffind])
+m4_define([bugreport], [https://sourceforge.net/p/xffm/bugs/])
+m4_define([bugmail], ["https://sourceforge.net/p/xffm/bugs/"])
 m4_define([package_copyright], ["Copyright (c) 2000-2018 Edscott Wilson Garcia. <edscott@users.sf.net>"])
 m4_define([summary],["Advanced user search dialog"]) 
  
@@ -139,11 +139,11 @@ XDT_I18N([$linguas])
 AC_CHECK_PROG(cv_dpkg, dpkg, yes, no)
 
 AC_OUTPUT([
-fgr+.settings
-fgr+.appdata.xml
 Makefile
 src/Makefile
-fgr+.desktop.in
+xffind.desktop.in
+xffind.settings
+xffind.appdata.xml
 ])
 #po/Makefile.in
 #man/Makefile

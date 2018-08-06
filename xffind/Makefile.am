@@ -26,9 +26,9 @@ dirfuse=$(dirplug)/filesystem_user_space
 dirsmb=$(dirplug)/samba
 
 EXTRA_DIST = $(noinst_DATA) \
-    fgr+.appdata.xml.in \
-    fgr+.appdata.xml.in \
-    fgr+.desktop.in.in \
+    xffind+.appdata.xml.in \
+    xffind+.appdata.xml.in \
+    xffind+.desktop.in.in \
     configure.ac \
     @PACKAGE@.settings.in ChangeLog
 
