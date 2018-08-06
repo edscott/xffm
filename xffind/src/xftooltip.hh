@@ -81,26 +81,21 @@ public:
 
     static void 
     tooltip_placement_bug_workaround(GtkWidget *tooltip_window){
-#if GTK_MAJOR_VERSION==3
-#if GTK_MINOR_VERSION>=8
 	// gtk3.8 bug workaround (still in current 3.13):
 	static gint last_x = 0;
 	static gint last_y = 0;
 	
-	GdkScreen *screen = gtk_widget_get_screen (tooltip_window);
-	gint monitor_num = gdk_screen_get_monitor_at_point (screen,
+        GdkMonitor *monitor = gdk_display_get_monitor_at_point (gdk_display_get_default (),
 						     last_x,
-						     last_y);
-	GdkRectangle monitor;
-	gdk_screen_get_monitor_workarea (screen, monitor_num, &monitor);
-	last_x = monitor.width-1;
-	last_y = monitor.height-1;
+						     last_y); 
+        GdkRectangle workarea;
+        gdk_monitor_get_workarea (monitor, &workarea);
+	last_x = workarea.width-1;
+	last_y = workarea.height-1;
 	gtk_window_move (GTK_WINDOW (tooltip_window), 
 		last_x,last_y);
 	fprintf(stderr, "tooltip_c.cpp:: Wayland tooltip move to %d, %d not working...\n", last_x,last_y);
 	while (gtk_events_pending())gtk_main_iteration();
-#endif
-#endif
 	    return;
     }
 

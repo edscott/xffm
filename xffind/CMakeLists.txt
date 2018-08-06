@@ -1,5 +1,5 @@
 cmake_minimum_required (VERSION 3.1)
-
+#set(CMAKE_INSTALL_PREFIX /tmp)
 project (xffind CXX)
 # Version info
 set(xffind_VERSION_MAJOR 0)
@@ -26,4 +26,4 @@ add_executable(xffind src/xffind.cc)
 target_link_libraries(xffind 
     ${GTK3_LIBRARIES}
     ${X11_LIBRARIES})
-
+install(TARGETS xffind RUNTIME DESTINATION bin)
