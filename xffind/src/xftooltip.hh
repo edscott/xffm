@@ -94,7 +94,6 @@ public:
 	last_y = workarea.height-1;
 	gtk_window_move (GTK_WINDOW (tooltip_window), 
 		last_x,last_y);
-	fprintf(stderr, "tooltip_c.cpp:: Wayland tooltip move to %d, %d not working...\n", last_x,last_y);
 	while (gtk_events_pending())gtk_main_iteration();
 	    return;
     }

@@ -66,7 +66,9 @@ main (int argc, char *argv[]) {
     setlocale (LC_ALL, "");
     TRACE ("call to gtk_init");
     gtk_init (&argc, &argv);
-    xf::FindDialog<double> gui((const gchar *)argv[1]);
+    // How to do this: ?
+//    xf::Find<xf::Signals> gui((const gchar *)argv[1]);
+    xf::Find<double> gui((const gchar *)argv[1]);
     //xf::FindDialog<double>::dialog(argv[1]);
     //g_idle_add(set_up_dialog, path);
     gtk_main();

@@ -10,10 +10,6 @@
 #include "xfhash.hh"
 #include "xfutil.hh"
 
-#ifdef CMAKE_INSTALL_PREFIX
-#warning "CMAKE_INSTALL_PREFIX is defined"
-#endif
-
 #ifndef PREFIX
 # warning "PREFIX not defined: defaulting to /usr/local"
 #define PREFIX "/usr/local"
