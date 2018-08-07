@@ -13,20 +13,80 @@
 #include "xfpixbuf.hh"
 
 #define MAX_LINES_IN_BUFFER 10000    
-//#include "pthreadCalls.h"
-////////////////////////////////////////////////////////////////////////////
-//                       print class methods                            //
-///////////////////////////////////////////////////////////////////////////
 namespace xf
 {
 
 
 template <class Type>
 class Print {
-    using util_c = Util<Type>;
-    using pixbuf_c = Pixbuf<Type>;
+    using util_c = Util<double>;
+    using pixbuf_c = Pixbuf<double>;
 public:
 
+    static void print(GtkTextView *textview, const gchar *tag, gchar *string){
+	void *arg[]={(void *)textview, (void *)tag, (void *)string};
+	context_function(print_f, arg);
+	g_free(string);
+    }
+   
+    static void print(GtkTextView *textview, gchar *string){
+        print(textview, NULL, string);
+    }
+
+    static void print_debug(GtkTextView *textview, gchar *string){
+	void *arg[]={(void *)textview, (void *)"tag/italic", (void *)string};
+	context_function(print_d, arg);
+	g_free(string);
+
+    }
+        
+    static void print_icon(GtkTextView *textview, const gchar *iconname, gchar *string)
+    {
+	GdkPixbuf *pixbuf = pixbuf_c::get_pixbuf(iconname, -16);
+	void *arg[]={(void *)pixbuf, (void *)textview, NULL, (void *)string};
+	context_function(print_i, arg);
+	g_free(string);
+    }
+
+    static void print_icon_tag(GtkTextView *textview, 
+                                const gchar *iconname, 
+				const gchar *tag, 
+				gchar *string)
+    {
+	GdkPixbuf *pixbuf = pixbuf_c::get_pixbuf(iconname, -16);
+	void *arg[]={(void *)pixbuf, (void *)textview, (void *)tag, (void *)string};
+	context_function(print_i, arg);
+	g_free(string);
+    }
+
+    static void print_status(GtkTextView *textview, gchar *string){
+	void *arg[]={(void *)textview, (void *)string};
+	context_function(print_s, arg);
+	g_free(string);
+    }
+
+    static void print_status_label(GtkLabel *label, gchar *string){
+	void *arg[]={(void *)label, (void *)string};
+	context_function(print_sl, arg);
+	g_free(string);
+    }
+
+    static void clear_text(GtkTextView *textview){
+	void *arg[]={(void *)textview, NULL};
+        context_function(clear_text_buffer_f, arg);
+    }
+
+    static void print_error(GtkTextView *textview, gchar *string){
+	void *arg[]={(void *)textview, (void *)"tag/bold", (void *)string};
+	context_function(print_e, arg);
+	g_free(string);
+
+    }
+
+
+
+
+private:
     static gboolean
     context_function_f(gpointer data){
         void **arg = (void **)data;
@@ -92,16 +152,6 @@ public:
         return NULL;
     }
 
-    static void print(GtkTextView *textview, const gchar *tag, gchar *string){
-	void *arg[]={(void *)textview, (void *)tag, (void *)string};
-	context_function(print_f, arg);
-	g_free(string);
-    }
-   
-    static void print(GtkTextView *textview, gchar *string){
-        print(textview, NULL, string);
-    }
-
     static void *
     print_e(void *data){
         if (!data) return GINT_TO_POINTER(-1);
@@ -110,14 +160,6 @@ public:
         print_f((void *)e_arg1);
         return print_f(data);
     }
-
-    static void print_error(GtkTextView *textview, gchar *string){
-	void *arg[]={(void *)textview, (void *)"tag/bold", (void *)string};
-	context_function(print_e, arg);
-	g_free(string);
-
-    }
-
     static void *
     print_d(void *data){
         if (!data) return GINT_TO_POINTER(-1);
@@ -125,13 +167,6 @@ public:
         void *d_arg[]={arg[0],(void *)"tag/italic", (void *)"DBG> "};
         print_f((void *)d_arg);
         return print_f(data);
-    }
-
-    static void print_debug(GtkTextView *textview, gchar *string){
-	void *arg[]={(void *)textview, (void *)"tag/italic", (void *)string};
-	context_function(print_d, arg);
-	g_free(string);
-
     }
 
     static void *
@@ -147,26 +182,6 @@ public:
         gtk_text_buffer_insert_pixbuf (buffer, &end, pixbuf);
         return print_f(arg+1);
     }
-        
-    static void print_icon(GtkTextView *textview, const gchar *iconname, gchar *string)
-    {
-	GdkPixbuf *pixbuf = pixbuf_c::get_pixbuf(iconname, -16);
-	void *arg[]={(void *)pixbuf, (void *)textview, NULL, (void *)string};
-	context_function(print_i, arg);
-	g_free(string);
-    }
-
-    static void print_icon_tag(GtkTextView *textview, 
-                                const gchar *iconname, 
-				const gchar *tag, 
-				gchar *string)
-    {
-	GdkPixbuf *pixbuf = pixbuf_c::get_pixbuf(iconname, -16);
-	void *arg[]={(void *)pixbuf, (void *)textview, (void *)tag, (void *)string};
-	context_function(print_i, arg);
-	g_free(string);
-    }
-
     static void *
     print_s(void *data){
         if (!data) return GINT_TO_POINTER(-1);
@@ -186,13 +201,6 @@ public:
         }
         return NULL;
     }
-
-    static void print_status(GtkTextView *textview, gchar *string){
-	void *arg[]={(void *)textview, (void *)string};
-	context_function(print_s, arg);
-	g_free(string);
-    }
-
     static void *
     print_sl(void *data){
         if (!data) return GINT_TO_POINTER(-1);
@@ -202,12 +210,6 @@ public:
         if (!GTK_IS_LABEL(status_label)) return GINT_TO_POINTER(-1);
         gtk_label_set_markup(status_label, text);
         return NULL;
-    }
-
-    static void print_status_label(GtkLabel *label, gchar *string){
-	void *arg[]={(void *)label, (void *)string};
-	context_function(print_sl, arg);
-	g_free(string);
     }
 
 
@@ -273,6 +275,16 @@ public:
 	return t;
     }
 
+    static void *
+    clear_text_buffer_f(void *data){
+        if (!data) return GINT_TO_POINTER(-1);
+        void **arg=(void **)data;
+        GtkTextBuffer *buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (arg[0]));
+        GtkTextIter start, end;
+        gtk_text_buffer_get_bounds (buffer, &start, &end);
+        gtk_text_buffer_delete (buffer, &start, &end);
+        return NULL;
+    }
 /*
  
    
@@ -281,10 +293,6 @@ public:
 	view_p->show_diagnostics();
     }
 
-    static void clear_text(void){
-	view_c *view_p = (view_c *)view_v;
-	view_p->clear_diagnostics();
-    }
 
     static void clear_status(void){
 	view_c *view_p = (view_c *)view_v;
@@ -594,10 +602,13 @@ public:
         gint fontsize = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(widget),	"fontsize"));
 
         gint newsize=8; // default font size.
-        const gchar *p = getenv ("RFM_FIXED_FONT_SIZE");
+        const gchar *p = getenv ("FIXED_FONT_SIZE");
+            fprintf(stderr, "%s:\n", p);
         if(p && strlen (p)) {
             errno=0;
             long value = strtol(p, NULL, 0);
+            gchar *string = g_strdup_printf("%d --> %d\n", newsize, value);
+            fprintf(stderr, "%s\n", string);
             if (errno == 0){
                 newsize = value;
             }
