@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 3.1)
-#set(CMAKE_INSTALL_PREFIX /tmp)
 project (xffind CXX)
+#set(CMAKE_INSTALL_PREFIX /tmp)
 # Version info
 set(xffind_VERSION_MAJOR 0)
 set(xffind_VERSION_MINOR 3)

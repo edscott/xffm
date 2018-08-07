@@ -1,6 +1,6 @@
 #ifndef XFFIND__HH
 # define XFFIND__HH
-#include "xfdialoggui.hh"
+#include "xfdialog.hh"
 namespace xf
 {
 

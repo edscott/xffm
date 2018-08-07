@@ -1,10 +1,8 @@
 #ifndef SIGNALS__HH
 # define SIGNALS__HH
 
-typedef struct radio_t {
-    GtkBox *box;
-    GtkToggleButton *toggle[5];
-} radio_t;
+#include "types.h"
+#include "xfprint.hh"
 
 namespace xf
 {
@@ -12,7 +10,8 @@ namespace xf
 
 template <class Type>
 class Signals{
-    typedef Gtk<double> gtk_c;
+    using gtk_c = Gtk<double>;
+    using print_c = Print<double>;
 public:
     static void 
     sensitivize (GtkToggleButton *togglebutton, gpointer data){
@@ -47,6 +46,46 @@ public:
 	const gchar *message = (const gchar *)data;
 	std::cerr<<"fixme: signals::on_buttonHelp\n";
 	gtk_c::quick_help(dialog_, message);
+    }
+
+
+    static void
+    onClearButton (GtkWidget * button, gpointer data) {
+	GtkTextView *diagnostics = GTK_TEXT_VIEW(data);
+	std::cerr<<"fixme: signals::onClearButton\n";
+        print_c::print(diagnostics, g_strdup("1.fixme: signals::onClearButton\n"));
+        print_c::print(diagnostics, "tag/green", g_strdup("2.fixme: signals::onClearButton\n"));
+        print_c::print_debug(diagnostics, g_strdup("3.fixme: signals::onClearButton\n"));
+        print_c::print_error(diagnostics, g_strdup("4.fixme: signals::onClearButton\n"));
+        print_c::print_icon(diagnostics, "edit-find",  g_strdup("5.fixme: signals::onClearButton\n"));
+        print_c::print_icon_tag(diagnostics, "edit-find",  "tag/red",g_strdup("fixme: signals::onClearButton\n"));
+
+    }
+
+    static void
+    onEditButton (GtkWidget * button, gpointer data) {
+	GtkTextView *diagnostics = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(data), "diagnostics"));
+	std::cerr<<"fixme: signals::onEditButton\n";
+        print_c::print_status(diagnostics, g_strdup("fixme: signals::onEditButton\n"));
+    }
+
+    static void
+    onCloseButton (GtkWidget * button, gpointer data) {
+	std::cerr<<"fixme: signals::onCloseButton\n";
+        GtkWidget *dialog = GTK_WIDGET(data);
+        gtk_widget_hide(dialog);
+        while (gtk_events_pending()) gtk_main_iteration();
+        exit(1);
+    }
+
+    static void
+    onCancelButton (GtkWidget * button, gpointer data) {
+	std::cerr<<"fixme: signals::onCancelButton\n";
+    }
+
+    static void
+    onFindButton (GtkWidget * button, gpointer data) {
+	std::cerr<<"fixme: signals::onFindButton\n";
     }
 
 };
