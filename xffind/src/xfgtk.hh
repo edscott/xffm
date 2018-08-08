@@ -202,7 +202,24 @@ public:
     static void
     quick_help (GtkWindow *parent, const gchar *message)
     {
-     GtkWidget *dialog, *label, *content_area;
+     static GtkWidget *dialog = NULL;
+     static gchar *last_message = NULL;
+     // Already mapped? Destroy.
+     if (dialog && GTK_IS_WIDGET(dialog)){
+         gtk_widget_hide(dialog);
+         gtk_widget_destroy(dialog);
+         // Last mapped is the same? Do not remap.
+         if (last_message && strcmp(last_message, message) == 0){
+             g_free(last_message);
+             last_message = NULL;
+             dialog = NULL;
+             return;
+         }
+     }
+     // Map dialog.
+     g_free(last_message);
+     last_message = g_strdup(message);
+     GtkWidget *label, *content_area;
      GtkDialogFlags flags;
 
      std::cerr<<"fixme: signals::quick_help\n";
