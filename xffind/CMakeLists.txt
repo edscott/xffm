@@ -4,7 +4,6 @@ project (xffind CXX)
 # Version info
 set(xffind_VERSION_MAJOR 0)
 set(xffind_VERSION_MINOR 3)
-#set(CMAKE_PREFIX_PATH "/usr/local/lib/pkgconfig")
 set(ENV{PKG_CONFIG_PATH}  "/usr/local/lib/pkgconfig")
 list(APPEND CMAKE_MODULE_PATH 
     "${PROJECT_SOURCE_DIR}/src/cmake")

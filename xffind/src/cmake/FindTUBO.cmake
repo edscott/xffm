@@ -32,6 +32,9 @@
 # the PKG_CONFIG_PATH environment variable.
 find_package(PkgConfig)
 pkg_check_modules(TUBO tubo)
+pkg_get_variable(INCLUDEDIRS tubo includedir)
+set(TUBO_INCLUDE_DIRS "${INCLUDEDIRS}")
+
 
 set(VERSION_OK TRUE)
 if (TUBO_VERSION)
@@ -47,4 +50,4 @@ if (TUBO_VERSION)
 endif ()
 
 include(FindPackageHandleStandardArgs)
-FIND_PACKAGE_HANDLE_STANDARD_ARGS(TUBO DEFAULT_MSG TUBO_INCLUDE_DIRS TUBO_LIBRARIES VERSION_OK)
+FIND_PACKAGE_HANDLE_STANDARD_ARGS(TUBO TUBO_INCLUDE_DIRS TUBO_LIBRARIES VERSION_OK)
