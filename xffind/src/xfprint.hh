@@ -603,12 +603,12 @@ private:
 
         gint newsize=12; // default font size.
         const gchar *p = getenv ("FIXED_FONT_SIZE");
-            fprintf(stderr, "%s:\n", p);
+            NOOP(stderr, "%s:\n", p);
         if(p && strlen (p)) {
             errno=0;
             long value = strtol(p, NULL, 0);
             gchar *string = g_strdup_printf("%d --> %ld\n", newsize, value);
-            fprintf(stderr, "%s\n", string);
+            NOOP(stderr, "%s\n", string);
             if (errno == 0){
                 newsize = value;
             }
