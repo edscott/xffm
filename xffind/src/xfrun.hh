@@ -14,7 +14,8 @@
         
 
 static pthread_mutex_t fork_mutex_=PTHREAD_MUTEX_INITIALIZER;       
-
+static pthread_mutex_t string_hash_mutex=PTHREAD_MUTEX_INITIALIZER;       
+static GHashTable *stringHash = NULL;
 namespace xf 
 {
 template <class Type>
@@ -23,11 +24,73 @@ class Run {
     using util_c = Util<double>;
 private:
 
-    
+    static void
+    push_hash(pid_t controller, gchar *string){
+        pthread_mutex_lock(&string_hash_mutex);
+        if (!stringHash) {
+            stringHash = 
+                    g_hash_table_new_full (g_direct_hash, g_direct_equal, NULL, g_free);      
+        }
+        g_hash_table_replace(stringHash, GINT_TO_POINTER(controller), string);
+        pthread_mutex_unlock(&string_hash_mutex);
+    }
+
+    static gchar *
+    pop_hash(pid_t controller){
+        pthread_mutex_lock(&string_hash_mutex);
+        if (!stringHash) {
+            pthread_mutex_unlock(&string_hash_mutex);
+            return NULL;
+        }
+
+        gchar *string = (gchar *)g_hash_table_lookup (stringHash, GINT_TO_POINTER(controller));
+        if (!string){
+            pthread_mutex_unlock(&string_hash_mutex);
+            DBG("controller %d not found in hashtable\n", controller);
+            return g_strdup("");
+        }
+        g_hash_table_steal(stringHash, GINT_TO_POINTER(controller));
+        pthread_mutex_unlock(&string_hash_mutex);
+        gchar bold[]={27, '[', '1', 'm',0};
+        gchar *dbg_string = g_strconcat(bold, string, NULL);
+        g_free(string);
+        return dbg_string;
+    }
+
+    static gchar *
+    exit_string(gchar *tubo_string){
+        gchar *string = NULL;
+        if(strchr (tubo_string, '\n')) *strchr (tubo_string, '\n') = 0;
+        gchar *s = strchr (tubo_string, '(');
+        int pid = -1;
+        long id = 0;
+        if (s) {
+            s++;
+            if(strchr (s, ')')) *strchr (s, ')') = 0;
+            errno = 0;
+            id = strtol(s, NULL, 10);
+            if (!errno){
+                pid = Tubo_child((pid_t) id);
+            }
+        }
+#ifdef DEBUG_TRACE
+        gchar *g = g_strdup_printf("%c[31m<%d>", 27, pid);
+#else
+        gchar *g = g_strdup("");
+#endif
+        //gchar *c_string = pop_hash((pid_t)id);
+        gchar *c_string = pop_hash((pid_t)pid);
+        string = g_strconcat(g, c_string, "\n", NULL);
+        g_free(c_string);
+        g_free(g);
+        return string;
+    }
+
+
 public:
 
     static pid_t 
-    thread_run(GtkTextView *textview, const gchar **arguments){
+    thread_run(GtkTextView *textview, const gchar **arguments, gboolean scrollUp){
         gchar *command = g_strdup("");
         const gchar **p = arguments;
         for (;p && *p; p++){
@@ -46,7 +109,7 @@ public:
                                     NULL, // stdin
                                     run_operate_stdout, //stdout_f,
                                     run_operate_stderr, //stderr_f
-                                    fork_finished_function,
+                                    (scrollUp)?scrollToTop:fork_finished_function,
                                     textview, // XXX view_v,
                                     flags);
         pid_t grandchild=Tubo_child (pid);
@@ -55,8 +118,7 @@ public:
 #else
         print_c::print_icon_tag(textview, "emblem-greenball", "tag/bold", g_strdup_printf("%s\n", command));
 #endif
-        // FIXME: no hash around here
-        // push_hash(grandchild, g_strdup(command));
+        push_hash(grandchild, g_strdup(command));
         g_free(command);
         return pid;
     }
@@ -90,7 +152,7 @@ public:
         return retval;
     }
 
-    static pid_t thread_run(GtkTextView *textview, const gchar *command){
+    static pid_t thread_run(GtkTextView *textview, const gchar *command, gboolean scrollUp){
         GError *error = NULL;
         gint argc;
         gchar **argv;
@@ -113,12 +175,11 @@ public:
             g_free(argv[0]);
             argv[0] = full_path;
         }
-        pid_t pid = thread_run(textview, (const gchar **)argv);
+        pid_t pid = thread_run(textview, (const gchar **)argv, scrollUp);
         
         g_strfreev(argv);
         return pid;
     }
-
 
     static void *thread_f(void *data){
         return NULL;
@@ -169,10 +230,9 @@ public:
         outline[j] = 0;
 
         if(strncmp (line, exit_token, strlen (exit_token)) == 0) {
-            //gchar *string = lpterm_p->exit_string(line);
-            //FIXME: use the command executed for outline
-            print_c::print_icon(textview, "emblem-redball", g_strdup(outline));
-            //g_free(string);
+            gchar *string = exit_string(line);
+            print_c::print_icon(textview, "emblem-redball", g_strdup(string));
+            g_free(string);
         } else {
             print_c::print(textview, g_strdup(outline));
         }
@@ -249,6 +309,20 @@ public:
             usleep(1000);
         }
        return;
+    }
+
+    static gboolean scrollToTop_f(void *data) {
+        //view_c *view_p = (view_c *)data;
+        //view_p->get_lpterm_p()->print("tag/bold", g_strdup_printf("%s\n", "run complete."));
+        GtkTextView *textview = GTK_TEXT_VIEW(data);
+        print_c::show_text(textview);
+        print_c::scroll_to_top(textview);
+        return FALSE;
+    }
+
+    static void
+    scrollToTop (void *data) {
+        g_timeout_add(1, scrollToTop_f, data);                                                
     }
 
     static gboolean done_f(void *data) {

@@ -42,6 +42,31 @@ protected:
     }
     
 private:
+    
+    GtkWidget *
+    fill_string_option_menu (GtkComboBox *om, const gchar *ftypes[]) {
+        // Create GSList.
+        GSList *strings = NULL;    
+        for(int i = 0; ftypes[i] != NULL; i++) {
+            strings = g_slist_append (strings, g_strdup(_(ftypes[i])));
+        }
+        //Fill her up.
+        GSList *p;
+        for (p=strings; p && p->data; p=p->next) {
+            gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(om), (const gchar *)p->data);
+          /* Note: The model will keep a copy of the string internally, 
+           * so the list may be freed */
+        }
+        gtk_combo_box_set_active(om, default_type_index);
+
+        for(p=strings; p && p->data; p=p->next) {
+            g_free(p->data);
+        }
+        g_slist_free(strings);
+        return (GtkWidget *)om;
+    }
+
+
     void setWindowMaxSize(void){
 	gint x_return, y_return;
 	guint w_return, h_return, d_return, border_return;
@@ -97,6 +122,7 @@ private:
 
 	GtkTextView *diagnostics = GTK_TEXT_VIEW(gtk_text_view_new ());
 	g_object_set_data(G_OBJECT(dialog_), "diagnostics", (gpointer)diagnostics);
+	g_object_set_data(G_OBJECT(diagnostics), "vpane", (gpointer)vpane);
         
 	GtkScrolledWindow *scrolledwindow = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new (NULL, NULL));
 	gtk_widget_show (GTK_WIDGET(scrolledwindow));
@@ -124,7 +150,9 @@ private:
     }
 
     void createDialog_(const gchar *path){
-	// FIXME: path not in use...
+        gchar *default_path;
+        if (path) default_path = g_strdup(path);
+        else default_path = g_get_current_dir();
 	mkDialog();
 	GtkPaned *vpane = mkVpane();
 
@@ -134,7 +162,7 @@ private:
 	button = gtk_c::dialog_button ("dialog-question", NULL);
 	tooltip_c::custom_tooltip(GTK_WIDGET(button), NULL, "fgr --help");
 	g_signal_connect (G_OBJECT (button), "clicked", 
-		 WIDGET_CALLBACK(Type::command_help), (gpointer)"fgr");
+		 WIDGET_CALLBACK(Type::command_up), (gpointer)"fgr --help");
 	g_object_set_data(G_OBJECT(button), "dialog_", dialog_);
         GtkBox *topPaneHbox = GTK_BOX (g_object_get_data(G_OBJECT(dialog_), "topPaneHbox"));
 	gtk_box_pack_start (topPaneHbox, GTK_WIDGET(button), FALSE, FALSE, 0);
@@ -155,23 +183,25 @@ private:
 	g_free(t);
 	gtk_widget_show (path_label);
 
-	GtkComboBox *path_combo = GTK_COMBO_BOX(gtk_combo_box_new_with_entry ());
-
-	g_object_set_data (G_OBJECT (path_combo), "GladeParentKey", path_combo);
-	g_object_set_data(G_OBJECT(dialog_), "path_combo", path_combo);
-
+	GtkEntry *path_entry = GTK_ENTRY(gtk_entry_new ());
+	g_object_set_data(G_OBJECT(dialog_), "path_entry", path_entry);
+        gtk_entry_set_text(path_entry, default_path);
+        g_free(default_path);
 
 	button = gtk_c::dialog_button ("folder", NULL);
 	GtkBox *vbox = gtk_c::vboxNew (FALSE, 6);
 	gtk_box_pack_start (vbox, GTK_WIDGET(button), FALSE, FALSE, 0);
 	gtk_box_pack_start (path_box, GTK_WIDGET(path_label), FALSE, FALSE, 0);
-	gtk_box_pack_start (path_box, GTK_WIDGET(path_combo), FALSE, TRUE, 0);
+	gtk_box_pack_start (path_box, GTK_WIDGET(path_entry), FALSE, TRUE, 0);
 	gtk_box_pack_start (path_box, GTK_WIDGET(vbox), FALSE, FALSE, 0);
 	gtk_widget_show (GTK_WIDGET(vbox));
-	gtk_widget_show (GTK_WIDGET(path_combo));
+	gtk_widget_show (GTK_WIDGET(path_entry));
 	gtk_widget_show (GTK_WIDGET(button));
 	g_object_set_data(G_OBJECT(dialog_), "fileselector", button);
 	
+        g_signal_connect (G_OBJECT(button), 
+                        "clicked", BUTTON_CALLBACK (Type::folderChooser), 
+                        (gpointer) path_entry);
 
 	GtkBox *filter_box = gtk_c::hboxNew (FALSE, 0);
 	gtk_box_pack_start (vbox7a, GTK_WIDGET(filter_box), TRUE, FALSE, 5);
@@ -183,11 +213,11 @@ private:
 	gtk_box_pack_start (filter_box, GTK_WIDGET(filter_label), FALSE, FALSE, 0);
 
 
-	GtkComboBox *filter_combo = GTK_COMBO_BOX(gtk_combo_box_new_with_entry ());
-	g_object_set_data (G_OBJECT (filter_combo), "GladeParentKey", (gpointer)filter_combo);
-	gtk_widget_show (GTK_WIDGET(filter_combo));
-	gtk_box_pack_start (GTK_BOX (filter_box), GTK_WIDGET(filter_combo), FALSE, TRUE, 0);
-	g_object_set_data(G_OBJECT(dialog_), "filter_combo", (gpointer)filter_combo);
+	GtkEntry *filter_entry = GTK_ENTRY(gtk_entry_new());
+	g_object_set_data (G_OBJECT (filter_entry), "GladeParentKey", (gpointer)filter_entry);
+	gtk_widget_show (GTK_WIDGET(filter_entry));
+	gtk_box_pack_start (GTK_BOX (filter_box), GTK_WIDGET(filter_entry), FALSE, TRUE, 0);
+	g_object_set_data(G_OBJECT(dialog_), "filter_entry", (gpointer)filter_entry);
 	
 	GtkButton *dialogbutton2 = gtk_c::dialog_button("dialog-question", "");
 	gtk_box_pack_start (filter_box, GTK_WIDGET(dialogbutton2), FALSE, FALSE, 0);
@@ -294,6 +324,20 @@ private:
 	gtk_box_pack_start (hbox21, GTK_WIDGET(file_type_om), TRUE, TRUE, 0);
 	g_object_set_data(G_OBJECT(dialog_), "file_type_om", file_type_om);
 
+        const gchar *ftypes[] = {
+            N_("Any"),
+            N_("Regular"),
+            N_("Directory"),
+            N_("Symbolic Link"),
+            N_("Socket"),
+            N_("Block device"),
+            N_("Character device"),
+            N_("FIFO"),
+            NULL
+        };
+        fill_string_option_menu (GTK_COMBO_BOX(file_type_om), ftypes);
+
+
 	////////////////  grep options.... /////////////////////////
 	
 	t=g_strdup_printf("<b>%s</b>", _("Contains"));
@@ -322,13 +366,14 @@ private:
 	gtk_widget_show (GTK_WIDGET(grep_label));
 	gtk_box_pack_start (grep_box, GTK_WIDGET(grep_label), FALSE, FALSE, 0);
 
-	GtkComboBox *grep_combo = GTK_COMBO_BOX(gtk_combo_box_new_with_entry ());
-	g_object_set_data (G_OBJECT (grep_combo), "GladeParentKey", grep_combo);
-	gtk_widget_show (GTK_WIDGET(grep_combo));
-	gtk_box_pack_start (grep_box, GTK_WIDGET(grep_combo), FALSE, FALSE, 5);
-	gtk_widget_set_sensitive (GTK_WIDGET(grep_combo), TRUE);
-	g_object_set_data(G_OBJECT(dialog_), "grep_combo", grep_combo);
+    
 
+	GtkEntry *grep_entry = GTK_ENTRY(gtk_entry_new());
+	gtk_widget_show (GTK_WIDGET(grep_entry));
+	gtk_box_pack_start (grep_box, GTK_WIDGET(grep_entry), FALSE, FALSE, 5);
+	gtk_widget_set_sensitive (GTK_WIDGET(grep_entry), TRUE);
+	g_object_set_data(G_OBJECT(dialog_), "grep_entry", grep_entry);
+ 
 	
 	GtkButton *button3 = gtk_c::dialog_button ("dialog-question", "");
 	gtk_box_pack_start (grep_box, GTK_WIDGET(button3), FALSE, FALSE, 0);
@@ -353,6 +398,8 @@ private:
 	gtk_widget_set_sensitive (GTK_WIDGET(case_sensitive), FALSE);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (case_sensitive), default_case_sensitive);
 	g_object_set_data(G_OBJECT(dialog_), "case_sensitive", case_sensitive);
+        g_signal_connect (G_OBJECT (grep_entry), "key_release_event", 
+                EVENT_CALLBACK (Type::on_key_release), (gpointer) case_sensitive);
 
 	GtkCheckButton *ext_regexp =  
 	    GTK_CHECK_BUTTON(gtk_check_button_new_with_mnemonic (_("Extended regexp")));
@@ -361,6 +408,9 @@ private:
 	gtk_widget_set_sensitive (GTK_WIDGET(ext_regexp), FALSE);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (ext_regexp), default_ext_regexp);
 	g_object_set_data(G_OBJECT(dialog_), "ext_regexp", ext_regexp);
+        g_signal_connect (G_OBJECT (grep_entry), "key_release_event", 
+                EVENT_CALLBACK (Type::on_key_release), (gpointer) ext_regexp);
+
 
 	GtkCheckButton *look_in_binaries = 
 	    GTK_CHECK_BUTTON(gtk_check_button_new_with_mnemonic (_("Include binary files")));
@@ -369,6 +419,8 @@ private:
 	gtk_widget_set_sensitive (GTK_WIDGET(look_in_binaries), FALSE);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (look_in_binaries), default_look_in_binaries);
 	g_object_set_data(G_OBJECT(dialog_), "look_in_binaries", look_in_binaries);
+        g_signal_connect (G_OBJECT (grep_entry), "key_release_event", 
+                EVENT_CALLBACK (Type::on_key_release), (gpointer) look_in_binaries);
 
         /*
 	GtkCheckButton *line_count = 
@@ -379,6 +431,8 @@ private:
 	gtk_widget_set_sensitive (GTK_WIDGET(line_count), FALSE);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (line_count), default_line_count);
 	g_object_set_data(G_OBJECT(dialog_), "line_count", line_count);
+        g_signal_connect (G_OBJECT (grep_entry), "key_release_event", 
+                EVENT_CALLBACK (Type::on_key_release), (gpointer) line_count);
 	*/
        
 	GtkBox *hbox28 = gtk_c::hboxNew (FALSE, 0);
@@ -403,6 +457,8 @@ private:
 	gtk_box_pack_start (GTK_BOX (hbox24), GTK_WIDGET(label40), FALSE, FALSE, 0);
 	gtk_widget_set_sensitive (GTK_WIDGET(label40), FALSE);
 	g_object_set_data(G_OBJECT(dialog_), "label40", label40);
+        g_signal_connect (G_OBJECT (grep_entry), "key_release_event", 
+                EVENT_CALLBACK (Type::on_key_release), (gpointer) label40);
 
 	GSList *anywhere_group = NULL;
 	GtkRadioButton *anywhere = 
@@ -416,6 +472,8 @@ private:
 	if (default_anywhere) {
 	    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (anywhere), default_anywhere);
 	}
+        g_signal_connect (G_OBJECT (grep_entry), "key_release_event", 
+                EVENT_CALLBACK (Type::on_key_release), (gpointer) anywhere);
 	 
 
 	GtkRadioButton *match_words = 
@@ -429,6 +487,8 @@ private:
 	if (default_match_words) {
 	    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (match_words), default_match_words);
 	}
+        g_signal_connect (G_OBJECT (grep_entry), "key_release_event", 
+                EVENT_CALLBACK (Type::on_key_release), (gpointer) match_words);
 
 
 	GtkRadioButton *match_lines = 
@@ -442,6 +502,8 @@ private:
 	if (default_match_lines) {
 	    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (match_lines), default_match_lines);
 	}
+        g_signal_connect (G_OBJECT (grep_entry), "key_release_event", 
+                EVENT_CALLBACK (Type::on_key_release), (gpointer) match_lines);
 
 	GtkRadioButton *match_no_match =
 	    GTK_RADIO_BUTTON (gtk_radio_button_new_with_mnemonic (NULL, _("No match")));
@@ -454,6 +516,8 @@ private:
 	if (default_match_no_match) {
 	    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (match_no_match), default_match_no_match);
 	}
+        g_signal_connect (G_OBJECT (grep_entry), "key_release_event", 
+                EVENT_CALLBACK (Type::on_key_release), (gpointer) match_no_match);
 
 	gtk_widget_show(GTK_WIDGET(topPaneHbox));
 	gtk_widget_show (GTK_WIDGET(path_box));
@@ -586,17 +650,17 @@ private:
 	gint combo_width;
 	combo_width = width - label_allocation.width - 120;
 	if (combo_width > 100){
-	    gtk_widget_set_size_request (GTK_WIDGET(path_combo), combo_width, -1);
+	    gtk_widget_set_size_request (GTK_WIDGET(path_entry), combo_width, -1);
 	}
 	gtk_widget_get_allocation(GTK_WIDGET(filter_label), &label_allocation);
 	combo_width = width - label_allocation.width - 120;
 	if (combo_width > 100){
-	    gtk_widget_set_size_request (GTK_WIDGET(filter_combo), combo_width, -1);
+	    gtk_widget_set_size_request (GTK_WIDGET(filter_entry), combo_width, -1);
 	}
 	gtk_widget_get_allocation(GTK_WIDGET(grep_label), &label_allocation);
 	combo_width = width - label_allocation.width - 120;
 	if (combo_width > 100){
-	    gtk_widget_set_size_request (GTK_WIDGET(grep_combo), combo_width, -1);
+	    gtk_widget_set_size_request (GTK_WIDGET(grep_entry), combo_width, -1);
 	}
 
 	// This will be constrained to the maximum width set by geometry_ hints:

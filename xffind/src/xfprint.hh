@@ -71,11 +71,6 @@ public:
 	g_free(string);
     }
 
-    static void clear_text(GtkTextView *textview){
-	void *arg[]={(void *)textview, NULL};
-        context_function(clear_text_buffer_f, arg);
-    }
-
     static void print_error(GtkTextView *textview, gchar *string){
 	void *arg[]={(void *)textview, (void *)"tag/bold", (void *)string};
 	context_function(print_e, arg);
@@ -84,6 +79,57 @@ public:
     }
 
 
+    static void clear_text(GtkTextView *textview){
+	void *arg[]={(void *)textview, NULL};
+        context_function(clear_text_buffer_f, arg);
+    }
+
+
+    static void show_text(GtkTextView *textview){
+        GtkPaned *vpane = GTK_PANED(g_object_get_data(G_OBJECT(textview), "vpane"));
+	void *arg[]={(void *)vpane, NULL};
+        context_function(show_text_buffer_f, arg);
+    }
+
+
+    static void hide_text(GtkTextView *textview){
+        GtkPaned *vpane = GTK_PANED(g_object_get_data(G_OBJECT(textview), "vpane"));
+	void *arg[]={(void *)vpane, NULL};
+        context_function(hide_text_buffer_f, arg);
+    }
+
+
+    static void *
+    scroll_to_top(GtkTextView *diagnostics){
+	// make sure all text is written before attempting scroll
+	while (gtk_events_pending()) gtk_main_iteration();
+	GtkTextIter start, end;
+	GtkTextBuffer *buffer = gtk_text_view_get_buffer (diagnostics);
+	gtk_text_buffer_get_bounds (buffer, &start, &end);
+        gtk_text_view_scroll_to_iter (diagnostics,
+                              &start,
+                              0.0,
+                              FALSE,
+                              0.0, 0.0);        
+	while (gtk_events_pending()) gtk_main_iteration();
+	return NULL;
+    }
+
+    static void *
+    scroll_to_bottom(GtkTextView *diagnostics){
+	// make sure all text is written before attempting scroll
+	while (gtk_events_pending()) gtk_main_iteration();
+	GtkTextIter start, end;
+	GtkTextBuffer *buffer;
+	buffer = gtk_text_view_get_buffer (diagnostics);
+	gtk_text_buffer_get_bounds (buffer, &start, &end);
+	GtkTextMark *mark = gtk_text_buffer_create_mark (buffer, "scrolldown", &end, FALSE);
+	gtk_text_view_scroll_to_mark (diagnostics, mark, 0.2,    /*gdouble within_margin, */
+				      TRUE, 1.0, 1.0);
+	//gtk_text_view_scroll_mark_onscreen (diagnostics, mark);
+	gtk_text_buffer_delete_mark(buffer, mark);
+	return NULL;
+    }
 
 
 private:
@@ -214,38 +260,6 @@ private:
 
 
 
-    static void *
-    scroll_to_top(GtkTextView *diagnostics){
-	// make sure all text is written before attempting scroll
-	while (gtk_events_pending()) gtk_main_iteration();
-	GtkTextMark *mark;
-	GtkTextIter start, end;
-	GtkTextBuffer *buffer;
-	buffer = gtk_text_view_get_buffer (diagnostics);
-	gtk_text_buffer_get_bounds (buffer, &start, &end);
-	mark = gtk_text_buffer_create_mark (buffer, "scrollmark", &start, FALSE);
-	gtk_text_view_scroll_to_mark (diagnostics, mark, 0.2,    /*gdouble within_margin, */
-				      TRUE, 0.0, 0.0);
-	gtk_text_buffer_delete_mark (buffer, mark);
-	return NULL;
-    }
-
-    static void *
-    scroll_to_bottom(GtkTextView *diagnostics){
-	// make sure all text is written before attempting scroll
-	while (gtk_events_pending()) gtk_main_iteration();
-	GtkTextIter start, end;
-	GtkTextBuffer *buffer;
-	buffer = gtk_text_view_get_buffer (diagnostics);
-	gtk_text_buffer_get_bounds (buffer, &start, &end);
-	GtkTextMark *mark = gtk_text_buffer_create_mark (buffer, "scrolldown", &end, FALSE);
-	gtk_text_view_scroll_to_mark (diagnostics, mark, 0.2,    /*gdouble within_margin, */
-				      TRUE, 1.0, 1.0);
-	//gtk_text_view_scroll_mark_onscreen (diagnostics, mark);
-	gtk_text_buffer_delete_mark(buffer, mark);
-	return NULL;
-    }
-
     static gchar *
     get_current_text (GtkTextView *textview) {
 	// get current text
@@ -285,21 +299,47 @@ private:
         gtk_text_buffer_delete (buffer, &start, &end);
         return NULL;
     }
+
+    static void *
+    hide_text_buffer_f (void *data) {
+        if (!data) return GINT_TO_POINTER(-1);
+        void **arg=(void **)data;
+        GtkPaned *vpane = GTK_PANED(arg[0]);
+        if(!vpane) {
+            fprintf(stderr, "vpane is NULL\n");
+            return NULL;
+        }
+        gtk_paned_set_position (vpane, 10000);
+        return NULL;
+    }
+
+    static void *
+    show_text_buffer_f (void *data) {
+        if (!data) return GINT_TO_POINTER(-1);
+        void **arg=(void **)data;
+        GtkPaned *vpane = GTK_PANED(arg[0]);
+        if(!vpane) {
+            fprintf(stderr, "vpane is NULL\n");
+            return NULL;
+        }
+        GtkWidget *window = gtk_widget_get_toplevel(GTK_WIDGET(vpane));
+
+        GtkAllocation allocation;
+        gtk_widget_get_allocation (window, &allocation);
+        
+        if (allocation.height > 50)
+        {
+            gdouble position = 
+                gtk_paned_get_position (vpane);
+            if(position > allocation.height * 0.75) {
+                gtk_paned_set_position (vpane, allocation.height * 0.60);
+            }
+        }
+        return NULL;
+    }
+
 /*
- 
-   
-    static void show_text(void){
-	view_c *view_p = (view_c *)view_v;
-	view_p->show_diagnostics();
-    }
-
-
-    static void clear_status(void){
-	view_c *view_p = (view_c *)view_v;
-	view_p->clear_status();
-    }
-
-    static const gchar *
+     static const gchar *
     get_workdir(void){
 	view_c *view_p = (view_c *)view_v;
 	return view_p->get_path();

@@ -35,11 +35,13 @@ public:
     }
 
     static void
-    command_help (GtkWidget * button, gpointer data) {
-	GtkWindow *dialog_=GTK_WINDOW(g_object_get_data(G_OBJECT(button), "dialog_"));
-	const gchar *message = (const gchar *)data;
-	std::cerr<<"fixme: signals::command_help\n";
-	gtk_c::quick_help(dialog_, message);
+    command_up (GtkWidget * button, gpointer data) {
+        quick_command(button, data, TRUE);
+    }
+
+    static void
+    command_down (GtkWidget * button, gpointer data) {
+        quick_command(button, data, FALSE);
     }
 
     static void
@@ -56,6 +58,7 @@ public:
 	GtkTextView *diagnostics = GTK_TEXT_VIEW(data);
 	std::cerr<<"fixme: signals::onClearButton\n";
         print_c::clear_text(diagnostics);
+        print_c::hide_text(diagnostics);
 
     }
 
@@ -64,7 +67,8 @@ public:
 	GtkTextView *diagnostics = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(data), "diagnostics"));
 	std::cerr<<"fixme: signals::onEditButton\n";
         print_c::print_status(diagnostics, g_strdup("fixme: signals::onEditButton testing run\n"));
-        run_c::thread_run(diagnostics, "ls -l");
+        print_c::show_text(diagnostics);        
+        run_c::thread_run(diagnostics, "ls -l", FALSE);
     }
 
     static void
@@ -84,6 +88,8 @@ public:
     static void
     onFindButton (GtkWidget * button, gpointer data) {
 	GtkTextView *diagnostics = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(data), "diagnostics"));
+        print_c::show_text(diagnostics);
+
 	std::cerr<<"fixme: signals::onFindButton\n";
         print_c::print(diagnostics, g_strdup("1.fixme: signals::\n"));
         print_c::print(diagnostics, "tag/green", g_strdup("2.fixme: signals::\n"));
@@ -92,6 +98,64 @@ public:
         print_c::print_icon(diagnostics, "edit-find",  g_strdup("5.fixme: signals::\n"));
         print_c::print_icon_tag(diagnostics, "edit-find",  "tag/red",g_strdup("fixme: signals::\n"));
     }
+
+    static gint
+    on_key_release (GtkWidget * widget, GdkEventKey * event, gpointer data) {
+        const gchar *text = gtk_entry_get_text(GTK_ENTRY(widget));
+        gboolean active = FALSE;
+        if (text && strlen(text)) active = TRUE;
+        //std::cerr<<"on_key_release: "<< text << " active: " << active << "\n";
+        if (data){
+            gtk_widget_set_sensitive(GTK_WIDGET(data), active);
+        }
+        return FALSE;
+    }
+
+    static void
+    folderChooser (GtkButton * button, gpointer data) {
+        GtkEntry *entry = GTK_ENTRY(data);
+        const gchar *text = _("Select folder to search in");
+        //const gchar *text = _("Select Files...");
+         GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER;
+        // GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_OPEN;
+        GtkDialog *dialog = GTK_DIALOG(gtk_file_chooser_dialog_new (text,
+                                                         GTK_WINDOW (gtk_widget_get_toplevel(GTK_WIDGET(entry))),
+                                                         action,
+                                                         _("Cancel"),
+                                                         GTK_RESPONSE_CANCEL,
+                                                         _("Open"),
+                                                         GTK_RESPONSE_ACCEPT,
+                                                         NULL));
+        gtk_file_chooser_set_action ((GtkFileChooser *) dialog, action);
+        gchar *current_folder = g_get_current_dir();
+        gtk_file_chooser_set_current_folder ((GtkFileChooser *) dialog, current_folder);
+
+        gint response = gtk_dialog_run(dialog);
+
+        if(response == GTK_RESPONSE_ACCEPT) {
+            gchar *filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
+            gtk_entry_set_text (entry, filename);
+            NOOP ("Got %s\n", filename);
+            g_free (filename);
+        }
+        gtk_widget_hide (GTK_WIDGET(dialog));
+        gtk_widget_destroy (GTK_WIDGET(dialog));
+
+    }
+
+
+private:
+    
+    static void
+    quick_command (GtkWidget * button, gpointer data, gboolean scrollUp) {
+	GtkWindow *dialog_=GTK_WINDOW(g_object_get_data(G_OBJECT(button), "dialog_"));
+	GtkTextView *diagnostics = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(dialog_), "diagnostics"));
+	std::cerr<<"fixme: signals::quick_command\n";
+        print_c::clear_text(diagnostics);
+        //run_c::thread_run(diagnostics, (const gchar *)data);
+        run_c::thread_run(diagnostics, (const gchar *)data, scrollUp);
+    }
+
 
 };
 
