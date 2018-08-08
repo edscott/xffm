@@ -601,13 +601,13 @@ private:
         if (!GTK_IS_WIDGET(widget)) return;
         gint fontsize = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(widget),	"fontsize"));
 
-        gint newsize=8; // default font size.
+        gint newsize=12; // default font size.
         const gchar *p = getenv ("FIXED_FONT_SIZE");
             fprintf(stderr, "%s:\n", p);
         if(p && strlen (p)) {
             errno=0;
             long value = strtol(p, NULL, 0);
-            gchar *string = g_strdup_printf("%d --> %d\n", newsize, value);
+            gchar *string = g_strdup_printf("%d --> %ld\n", newsize, value);
             fprintf(stderr, "%s\n", string);
             if (errno == 0){
                 newsize = value;
