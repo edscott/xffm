@@ -4,6 +4,7 @@
 #include "types.h"
 #include "xfprint.hh"
 #include "xfrun.hh"
+#include "xfutil.hh"
 
 namespace xf
 {
@@ -14,6 +15,7 @@ class Signals: public Run<Type>{
     using gtk_c = Gtk<double>;
     using print_c = Print<double>;
     using run_c = Run<double>;
+    using util_c = Util<double>;
 public:
     static void 
     sensitivize (GtkToggleButton *togglebutton, gpointer data){
@@ -86,10 +88,11 @@ public:
     }
 
     static void
-    onFindButton (GtkWidget * button, gpointer data) {
-	GtkTextView *diagnostics = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(data), "diagnostics"));
+    onFindButton (GtkWidget * button, gpointer dialog) {
+	GtkTextView *diagnostics = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(dialog), "diagnostics"));
+        updateCompletions(dialog);
+        
         print_c::show_text(diagnostics);
-
 	std::cerr<<"fixme: signals::onFindButton\n";
         print_c::print(diagnostics, g_strdup("1.fixme: signals::\n"));
         print_c::print(diagnostics, "tag/green", g_strdup("2.fixme: signals::\n"));
@@ -110,7 +113,12 @@ public:
         }
         return FALSE;
     }
-
+    static gint
+    on_completion (GtkWidget * widget, GdkEventKey * event, gpointer data) {
+        GtkEntryCompletion *completion = gtk_entry_get_completion(GTK_ENTRY(widget));
+        gtk_entry_completion_complete (completion);
+        return FALSE;
+    }
     static void
     folderChooser (GtkButton * button, gpointer data) {
         GtkEntry *entry = GTK_ENTRY(data);
@@ -154,6 +162,25 @@ private:
         print_c::clear_text(diagnostics);
         //run_c::thread_run(diagnostics, (const gchar *)data);
         run_c::thread_run(diagnostics, (const gchar *)data, scrollUp);
+    }
+
+    static void 
+    updateCompletions(gpointer dialog){ 
+        gchar *history;
+        GtkEntry *entry;
+        GtkTreeModel *model;
+
+        history = g_build_filename (FILTER_HISTORY);
+        entry = GTK_ENTRY(g_object_get_data(G_OBJECT(dialog), "filter_entry"));
+        model = GTK_TREE_MODEL(g_object_get_data(G_OBJECT(entry), "model"));
+        util_c::saveHistory(history, model, gtk_entry_get_text(entry));
+        g_free(history);
+
+        history = g_build_filename (GREP_HISTORY);
+        entry = GTK_ENTRY(g_object_get_data(G_OBJECT(dialog), "grep_entry"));
+        model = GTK_TREE_MODEL(g_object_get_data(G_OBJECT(entry), "model"));
+        util_c::saveHistory(history, model, gtk_entry_get_text(entry));
+        g_free(history);
     }
 
 

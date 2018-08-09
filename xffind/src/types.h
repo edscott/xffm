@@ -6,6 +6,9 @@
 #define WIDGET_CALLBACK(X)  G_CALLBACK((void (*)(GtkWidget *,gpointer)) X)
 #define CONTEXT_CALLBACK(X)  (gboolean (*)(gpointer)) X
 
+#define FILTER_HISTORY g_get_user_data_dir(),"xffm+","xffind.filter",NULL
+#define GREP_HISTORY g_get_user_data_dir(),"xffm+","xffind.grep",NULL
+
 typedef struct radio_t {
     GtkBox *box;
     GtkToggleButton *toggle[5];

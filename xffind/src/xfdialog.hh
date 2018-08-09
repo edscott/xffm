@@ -5,7 +5,6 @@
 #include "xftooltip.hh"
 #include "xfutil.hh"
 #include "types.h"
-#define FILTER_HISTORY g_get_user_data_dir(),".xffm","xffind.filter",NULL
 
 namespace xf
 {
@@ -216,18 +215,15 @@ private:
 	gtk_box_pack_start (filter_box, GTK_WIDGET(filter_label), FALSE, FALSE, 0);
 
 
-	GtkEntry *filter_entry = GTK_ENTRY(gtk_entry_new());
-	g_object_set_data (G_OBJECT (filter_entry), "GladeParentKey", (gpointer)filter_entry);
+	gchar *history = g_build_filename(FILTER_HISTORY);
+        GtkEntry *filter_entry = mkCompletionEntry(history);
+	g_object_set_data(G_OBJECT(dialog_), "filter_entry", (gpointer)filter_entry);
+	g_free(history);
 	gtk_widget_show (GTK_WIDGET(filter_entry));
 	gtk_box_pack_start (GTK_BOX (filter_box), GTK_WIDGET(filter_entry), FALSE, TRUE, 0);
-	g_object_set_data(G_OBJECT(dialog_), "filter_entry", (gpointer)filter_entry);
-	gchar *history = g_build_filename(FILTER_HISTORY);
-	//FIXME: do the entry completion stuff
-	GList *historyList = NULL;
-	util_c::loadHistory(history, &historyList);
-	g_free(history);
 
-	
+
+
 	GtkButton *dialogbutton2 = gtk_c::dialog_button("dialog-question", "");
 	gtk_box_pack_start (filter_box, GTK_WIDGET(dialogbutton2), FALSE, FALSE, 0);
 	g_object_set_data(G_OBJECT(dialogbutton2), "dialog_", dialog_);
@@ -376,13 +372,13 @@ private:
 	gtk_box_pack_start (grep_box, GTK_WIDGET(grep_label), FALSE, FALSE, 0);
 
     
-
-	GtkEntry *grep_entry = GTK_ENTRY(gtk_entry_new());
+	history = g_build_filename(GREP_HISTORY);
+	GtkEntry *grep_entry = mkCompletionEntry(history);
+	g_object_set_data(G_OBJECT(dialog_), "grep_entry", grep_entry);
+	g_free(history);        
 	gtk_widget_show (GTK_WIDGET(grep_entry));
 	gtk_box_pack_start (grep_box, GTK_WIDGET(grep_entry), FALSE, FALSE, 5);
-	gtk_widget_set_sensitive (GTK_WIDGET(grep_entry), TRUE);
-	g_object_set_data(G_OBJECT(dialog_), "grep_entry", grep_entry);
- 
+	gtk_widget_set_sensitive (GTK_WIDGET(grep_entry), TRUE);   
 	
 	GtkButton *button3 = gtk_c::dialog_button ("dialog-question", "");
 	gtk_box_pack_start (grep_box, GTK_WIDGET(button3), FALSE, FALSE, 0);
@@ -1091,6 +1087,30 @@ private:
                           "More information is available by typing \"man grep\"\n");
 private:
 
+    GtkEntry *mkCompletionEntry(const gchar *history){
+	GtkEntry *entry = GTK_ENTRY(gtk_entry_new());
+        GtkTreeModel *model = util_c::loadHistory(history);
+        g_object_set_data(G_OBJECT(entry), "model", model);
+        GtkTreeIter iter;
+        if (gtk_tree_model_get_iter_first (model, &iter)){
+            gchar *value;
+            gtk_tree_model_get (model, &iter, 0, &value, -1);
+	    gtk_entry_set_text(entry, value);	
+            gtk_editable_select_region (GTK_EDITABLE(entry), 0, strlen(value));
+            g_free(value);
+        }
+        
+        GtkEntryCompletion *completion = gtk_entry_completion_new();
+        gtk_entry_set_completion (entry, completion);
+        gtk_entry_completion_set_model (completion, model);
+        gtk_entry_completion_set_popup_completion(completion, TRUE);
+        gtk_entry_completion_set_text_column (completion, 0);
+                                      
+        g_signal_connect (entry,
+			  "key_release_event", EVENT_CALLBACK(Type::on_completion), 
+			  (gpointer)NULL);
+        return entry;
+    }
     
 
 };

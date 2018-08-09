@@ -721,7 +721,90 @@ public:
 	return editors_v;
     }
     
-    gpointer
+    // TreeModel histories
+    static GtkTreeModel *
+    loadHistory (const gchar *history) {
+        GtkTreeStore *store = gtk_tree_store_new (1, G_TYPE_STRING);
+	FILE *historyFile = fopen (history, "r");
+	if(!historyFile) {
+            std::cerr<<"util_c::loadHistory(): creating new history "<<history<<"\n";
+            return GTK_TREE_MODEL(store);
+        }
+        gchar line[2048];
+        memset (line, 0, 2048);
+        GtkTreeIter iter;
+        while(fgets (line, 2047, historyFile) && !feof (historyFile)) {
+            if(strchr (line, '\n')) *strchr (line, '\n') = 0;
+            if(strlen (line) == 0) continue;
+            gchar *newline = compact_line(line);
+            gtk_tree_store_append (store, &iter, NULL);
+            gtk_tree_store_set (store, &iter, 0, newline, -1);
+            std::cerr<<"setting tree store value: "<<newline<<"\n";
+            g_free(newline);
+        }
+        fclose (historyFile);
+	return GTK_TREE_MODEL(store);
+    }
+
+    static void 
+    saveHistory (const gchar *history, GtkTreeModel *model, const gchar *data) {
+	gchar *historyDir = g_path_get_dirname(history);
+        fprintf(stderr, "history dir = %s\n", historyDir);
+	if (!g_file_test(historyDir,G_FILE_TEST_IS_DIR)){
+	    g_mkdir_with_parents (historyDir, 0770);
+	}
+	g_free(historyDir);
+        GtkTreeStore *store =GTK_TREE_STORE(model);
+        GtkTreeIter iter;
+        GtkTreeIter *iter_p;
+        gboolean next = TRUE;
+        gboolean found = FALSE;
+        next = gtk_tree_model_get_iter_first (model, &iter);
+        while (next){
+            gchar *value;
+            gtk_tree_model_get (model, &iter, 0, &value, -1);
+            if (strcmp(data, value)==0) {
+                g_free(value); // ?
+                found = TRUE;
+                break;
+            }
+            g_free(value);
+            next = gtk_tree_model_iter_next(model, &iter);
+        }
+
+	// if item is already in history, bring it to the front
+        // else, prepend item.
+        if (found) {
+            gtk_tree_store_move_after (store, &iter, NULL);
+        } else {
+            gtk_tree_store_prepend (store, &iter, NULL);
+            gtk_tree_store_set (store, &iter, 0, data, -1);
+            std::cerr<<"prepending tree store value: "<<data<<"\n";
+        }
+	// rewrite history file
+	FILE *historyFile = fopen (history, "w");
+	if(!historyFile) {
+            std::cerr<< "util_c::saveHistory(): unable to write to file "<<history<<"\n";
+            return;
+        }
+
+        next = gtk_tree_model_get_iter_first (model, &iter);
+        while (next){
+            gchar *value;
+            gtk_tree_model_get (model, &iter, 0, &value, -1);
+		
+            fprintf (historyFile, "%s\n", (gchar *)value);
+
+            g_free(value);
+            next = gtk_tree_model_iter_next(model, &iter);
+        }
+
+	fclose (historyFile);
+	return;
+    }
+    
+    // List histories
+    static gpointer
     loadHistory (const gchar *history, GList **history_list_p) {
 	//gchar *history = g_build_filename (CSH_HISTORY, NULL);
 	GList *p;
@@ -745,7 +828,7 @@ public:
 		if (element) { 
 		    // remove old element
 		    gchar *data=(gchar *)element->data;
-		    csh_history_list = g_list_remove(*history_list_p, data);
+		    *history_list_p = g_list_remove(*history_list_p, data);
 		    g_free(data);
 		}
 		// put element at top of the pile
@@ -758,9 +841,10 @@ public:
     }
 
 
-    void
+    static void 
     saveHistory (const gchar *history, GList **history_list_p, const gchar * data) {
 	gchar *historyDir = g_path_get_dirname(history);
+        fprintf(stderr, "history dir = %s\n", historyDir);
 	if (!g_file_test(historyDir,G_FILE_TEST_IS_DIR)){
 	    g_mkdir_with_parents (historyDir, 0660);
 	}
@@ -784,13 +868,12 @@ public:
 	    *history_list_p = g_list_remove(*history_list_p, data);
 	    // insert at top of list (item 0 is empty string)
 	    *history_list_p = g_list_insert(*history_list_p, data, 0);
-	    goto save_to_disk;
-	}
+	} else {
+            // so the item was not found. proceed to prepend
+            fprintf(stderr, "prepend: %s\n", item);
+            *history_list_p = g_list_prepend(*history_list_p, item);
+        }
 
-	// so the item was not found. proceed to insert
-	*history_list_p = g_list_insert(*history_list_p, item, 0);
-
-    save_to_disk:
 	// rewrite history file
 	//gchar *history = g_build_filename (CSH_HISTORY, NULL);
 	// read it first to synchronize with other xffm+ instances
@@ -810,6 +893,7 @@ public:
 	disk_history = g_list_prepend (disk_history, g_strdup (item));
 	disk_history = g_list_reverse(disk_history);
 
+        // write it out
 	historyFile = fopen (history, "w");
 	if(historyFile) {
 	    GList *p;
@@ -819,8 +903,13 @@ public:
 	    }
 	    fclose (historyFile);
 	}
-	g_list_free (disk_history);
-	//g_free (history);
+        // cleanout old history list
+	for(p = g_list_first (*history_list_p); p && p->data; p = p->next) {
+            g_free(p->data);
+        }
+	g_list_free (*history_list_p);
+        // assign new history list
+	*history_list_p = disk_history;
 	return;
     }
     
@@ -1050,7 +1139,7 @@ open_with (const gchar *path) {
 
 #endif
 
-}
+} // namespace xf
 #endif
 
 
