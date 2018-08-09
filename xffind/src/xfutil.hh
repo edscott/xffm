@@ -720,6 +720,110 @@ public:
 	}; 
 	return editors_v;
     }
+    
+    gpointer
+    loadHistory (const gchar *history, GList **history_list_p) {
+	//gchar *history = g_build_filename (CSH_HISTORY, NULL);
+	GList *p;
+	// clean out history list before loading a new one.
+	for(p = *history_list_p; p; p = p->next) {
+	    g_free (p->data);
+	}
+	g_list_free (*history_list_p);
+	*history_list_p = NULL;
+
+	FILE *historyFile = fopen (history, "r");
+	if(historyFile) {
+	    gchar line[2048];
+	    memset (line, 0, 2048);
+	    while(fgets (line, 2047, historyFile) && !feof (historyFile)) {
+		if(strchr (line, '\n')) *strchr (line, '\n') = 0;
+		if(strlen (line) == 0) continue;
+		gchar *newline = compact_line(line);
+		GList *element = find_in_string_list(*history_list_p, newline);
+
+		if (element) { 
+		    // remove old element
+		    gchar *data=(gchar *)element->data;
+		    csh_history_list = g_list_remove(*history_list_p, data);
+		    g_free(data);
+		}
+		// put element at top of the pile
+		*history_list_p = g_list_prepend(*history_list_p, newline);
+	    }
+	    fclose (historyFile);
+	}
+	    
+	return NULL;
+    }
+
+
+    void
+    saveHistory (const gchar *history, GList **history_list_p, const gchar * data) {
+	gchar *historyDir = g_path_get_dirname(history);
+	if (!g_file_test(historyDir,G_FILE_TEST_IS_DIR)){
+	    g_mkdir_with_parents (historyDir, 0660);
+	}
+	g_free(historyDir);
+	GList *p;
+	gchar *item = g_strdup(data);
+	g_strstrip (item);
+	// Get last registered item
+	void *last = g_list_nth_data (*history_list_p, 0);
+	if (last && strcmp((gchar *)last, item) == 0) {
+	    g_free(item);
+	    // repeat of last item. nothing to do here.
+	    return;
+	}
+
+	// if item is already in history, bring it to the front
+	GList *itemData = find_in_string_list(*history_list_p, item);
+	if (itemData){
+	    void *data = itemData->data;
+	    // remove old position
+	    *history_list_p = g_list_remove(*history_list_p, data);
+	    // insert at top of list (item 0 is empty string)
+	    *history_list_p = g_list_insert(*history_list_p, data, 0);
+	    goto save_to_disk;
+	}
+
+	// so the item was not found. proceed to insert
+	*history_list_p = g_list_insert(*history_list_p, item, 0);
+
+    save_to_disk:
+	// rewrite history file
+	//gchar *history = g_build_filename (CSH_HISTORY, NULL);
+	// read it first to synchronize with other xffm+ instances
+	GList *disk_history = NULL;       
+	FILE *historyFile = fopen (history, "r");
+	if(historyFile) {
+	    char line[2048];
+	    memset (line, 0, 2048);
+	    while(fgets (line, 2047, historyFile) && !feof (historyFile)) {
+		if(strchr (line, '\n')) *strchr (line, '\n') = 0;
+		if(strcmp (line, item) != 0) {
+		    disk_history = g_list_prepend (disk_history, g_strdup (line));
+		}
+	    }
+	    fclose (historyFile);
+	}
+	disk_history = g_list_prepend (disk_history, g_strdup (item));
+	disk_history = g_list_reverse(disk_history);
+
+	historyFile = fopen (history, "w");
+	if(historyFile) {
+	    GList *p;
+	    for(p = g_list_first (disk_history); p && p->data; p = p->next) {
+		fprintf (historyFile, "%s\n", (gchar *)p->data);
+		g_free (p->data);
+	    }
+	    fclose (historyFile);
+	}
+	g_list_free (disk_history);
+	//g_free (history);
+	return;
+    }
+    
 
 };
 

@@ -3,7 +3,9 @@
 #include "xfpixbuf.hh"
 #include "xfgtk.hh"
 #include "xftooltip.hh"
+#include "xfutil.hh"
 #include "types.h"
+#define FILTER_HISTORY g_get_user_data_dir(),".xffm","xffind.filter",NULL
 
 namespace xf
 {
@@ -12,6 +14,7 @@ namespace xf
 template <class Type>
 class FindDialog
 {
+    using util_c = Util<double>;
     using gtk_c = Gtk<double>;
     using pixbuf_c = Pixbuf<double>;
     using tooltip_c = Tooltip<double>;
@@ -218,6 +221,12 @@ private:
 	gtk_widget_show (GTK_WIDGET(filter_entry));
 	gtk_box_pack_start (GTK_BOX (filter_box), GTK_WIDGET(filter_entry), FALSE, TRUE, 0);
 	g_object_set_data(G_OBJECT(dialog_), "filter_entry", (gpointer)filter_entry);
+	gchar *history = g_build_filename(FILTER_HISTORY);
+	//FIXME: do the entry completion stuff
+	GList *historyList = NULL;
+	util_c::loadHistory(history, &historyList);
+	g_free(history);
+
 	
 	GtkButton *dialogbutton2 = gtk_c::dialog_button("dialog-question", "");
 	gtk_box_pack_start (filter_box, GTK_WIDGET(dialogbutton2), FALSE, FALSE, 0);
@@ -1080,6 +1089,9 @@ private:
                           "Two regular expressions may be joined by the logical or operator |.\n"
                           "Two regular expressions may be concatenated.\n" "\n"
                           "More information is available by typing \"man grep\"\n");
+private:
+
+    
 
 };
 } // namespace xf
