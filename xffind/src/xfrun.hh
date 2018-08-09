@@ -88,6 +88,34 @@ private:
 
 
 public:
+    static pid_t 
+    thread_run(gpointer data, const gchar **arguments, void (*stdout_f)(void *, void *, int)){
+        gchar *command = g_strdup("");
+        const gchar **p = arguments;
+        for (;p && *p; p++){
+            gchar *g =  g_strdup_printf("%s %s", command, *p);
+            g_free(command);
+            command = g;
+        }
+        int flags = TUBO_EXIT_TEXT|TUBO_VALID_ANSI|TUBO_CONTROLLER_PID;
+        /* FIXME: workdir must be set in constructor
+        if (chdir(get_workdir())<0){
+            printc::print_error(textview, g_strdup_printf("chdir(%s): %s\n", get_workdir(), strerror(errno)));
+            return 0;
+        }
+        */
+        pid_t pid = Tubo_fork (fork_function,(gchar **)arguments,
+                                    NULL, // stdin
+                                    stdout_f,
+                                    run_operate_stderr, //stderr_f
+                                    fork_finished_function,
+                                    data, // XXX view_v,
+                                    flags);
+        pid_t grandchild=Tubo_child (pid);
+        push_hash(grandchild, g_strdup(command));
+        g_free(command);
+        return pid;
+    }
 
     static pid_t 
     thread_run(GtkTextView *textview, const gchar **arguments, gboolean scrollUp){

@@ -4,6 +4,7 @@
 #include "xfgtk.hh"
 #include "xftooltip.hh"
 #include "xfutil.hh"
+#include "xfsignals.hh"
 #include "types.h"
 
 namespace xf
@@ -329,17 +330,7 @@ private:
 	gtk_box_pack_start (hbox21, GTK_WIDGET(file_type_om), TRUE, TRUE, 0);
 	g_object_set_data(G_OBJECT(dialog_), "file_type_om", file_type_om);
 
-        const gchar *ftypes[] = {
-            N_("Any"),
-            N_("Regular"),
-            N_("Directory"),
-            N_("Symbolic Link"),
-            N_("Socket"),
-            N_("Block device"),
-            N_("Character device"),
-            N_("FIFO"),
-            NULL
-        };
+
         fill_string_option_menu (GTK_COMBO_BOX(file_type_om), ftypes);
 
 
@@ -427,7 +418,7 @@ private:
         g_signal_connect (G_OBJECT (grep_entry), "key_release_event", 
                 EVENT_CALLBACK (Type::on_key_release), (gpointer) look_in_binaries);
 
-        /*
+        
 	GtkCheckButton *line_count = 
 	    GTK_CHECK_BUTTON(gtk_check_button_new_with_mnemonic (_("Line Count")));
 	// XXX: (FIXME) this option (-c) does not work in fgr...
@@ -438,7 +429,7 @@ private:
 	g_object_set_data(G_OBJECT(dialog_), "line_count", line_count);
         g_signal_connect (G_OBJECT (grep_entry), "key_release_event", 
                 EVENT_CALLBACK (Type::on_key_release), (gpointer) line_count);
-	*/
+	
        
 	GtkBox *hbox28 = gtk_c::hboxNew (FALSE, 0);
 	gtk_box_pack_start (topPaneVbox, GTK_WIDGET(hbox28), TRUE, TRUE, 0);
