@@ -214,7 +214,13 @@ private:
         model = GTK_TREE_MODEL(g_object_get_data(G_OBJECT(entry), "model"));
         util_c::saveHistory(history, model, gtk_entry_get_text(entry));
         g_free(history);
-    }
+ 
+        history = g_build_filename (PATH_HISTORY);
+        entry = GTK_ENTRY(g_object_get_data(G_OBJECT(dialog), "path_entry"));
+        model = GTK_TREE_MODEL(g_object_get_data(G_OBJECT(entry), "model"));
+        util_c::saveHistory(history, model, gtk_entry_get_text(entry));
+        g_free(history);
+   }
 
     static const gchar *
     get_time_type(GtkWindow *dialog){

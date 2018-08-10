@@ -26,7 +26,6 @@ protected:
         createDialog_(path);
     }
     
-
     gboolean whichGrep(void){
 	gchar *grep = g_find_program_in_path ("grep");
 	if (!grep) return FALSE;
@@ -155,9 +154,8 @@ private:
     }
 
     void createDialog_(const gchar *path){
-        gchar *default_path;
+        gchar *default_path=NULL;
         if (path) default_path = g_strdup(path);
-        else default_path = g_get_current_dir();
 	mkDialog();
 	GtkPaned *vpane = mkVpane();
 
@@ -188,10 +186,15 @@ private:
 	g_free(t);
 	gtk_widget_show (path_label);
 
-	GtkEntry *path_entry = GTK_ENTRY(gtk_entry_new ());
+	gchar *historyPath = g_build_filename(PATH_HISTORY);
+	GtkEntry *path_entry = mkCompletionEntry(historyPath);
 	g_object_set_data(G_OBJECT(dialog_), "path_entry", path_entry);
-        gtk_entry_set_text(path_entry, default_path);
-        g_free(default_path);
+	g_free(historyPath);
+        if (default_path){
+            gtk_entry_set_text(path_entry, default_path);
+            g_free(default_path);
+        }
+
 
 	button = gtk_c::dialog_button ("folder", NULL);
 	GtkBox *vbox = gtk_c::vboxNew (FALSE, 6);
@@ -380,6 +383,7 @@ private:
 	g_signal_connect (GTK_WIDGET(button3),
 			  "clicked", WIDGET_CALLBACK(Type::on_buttonHelp), 
 			  (gpointer) _(grep_text_help));
+        gboolean active_grep = (gtk_entry_get_text(grep_entry) && strlen(gtk_entry_get_text(grep_entry))); 
 	
 
 	GtkBox *hbox20 = gtk_c::hboxNew (FALSE, 0);
@@ -393,17 +397,18 @@ private:
 	    GTK_CHECK_BUTTON(gtk_check_button_new_with_mnemonic (_("Case Sensitive")));
 	gtk_widget_show (GTK_WIDGET(case_sensitive));
 	gtk_box_pack_start (GTK_BOX (vbox13), GTK_WIDGET(case_sensitive), FALSE, FALSE, 0);
-	gtk_widget_set_sensitive (GTK_WIDGET(case_sensitive), FALSE);
+	gtk_widget_set_sensitive (GTK_WIDGET(case_sensitive), active_grep);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (case_sensitive), default_case_sensitive);
 	g_object_set_data(G_OBJECT(dialog_), "case_sensitive", case_sensitive);
         g_signal_connect (G_OBJECT (grep_entry), "key_release_event", 
                 EVENT_CALLBACK (Type::on_key_release), (gpointer) case_sensitive);
 
+
 	GtkCheckButton *ext_regexp =  
 	    GTK_CHECK_BUTTON(gtk_check_button_new_with_mnemonic (_("Extended regexp")));
 	gtk_widget_show (GTK_WIDGET(ext_regexp));
 	gtk_box_pack_start (GTK_BOX (vbox13), GTK_WIDGET(ext_regexp), FALSE, FALSE, 0);
-	gtk_widget_set_sensitive (GTK_WIDGET(ext_regexp), FALSE);
+	gtk_widget_set_sensitive (GTK_WIDGET(ext_regexp), active_grep);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (ext_regexp), default_ext_regexp);
 	g_object_set_data(G_OBJECT(dialog_), "ext_regexp", ext_regexp);
         g_signal_connect (G_OBJECT (grep_entry), "key_release_event", 
@@ -414,7 +419,7 @@ private:
 	    GTK_CHECK_BUTTON(gtk_check_button_new_with_mnemonic (_("Include binary files")));
 	gtk_widget_show (GTK_WIDGET(look_in_binaries));
 	gtk_box_pack_start (GTK_BOX (vbox13), GTK_WIDGET(look_in_binaries), FALSE, FALSE, 0);
-	gtk_widget_set_sensitive (GTK_WIDGET(look_in_binaries), FALSE);
+	gtk_widget_set_sensitive (GTK_WIDGET(look_in_binaries), active_grep);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (look_in_binaries), default_look_in_binaries);
 	g_object_set_data(G_OBJECT(dialog_), "look_in_binaries", look_in_binaries);
         g_signal_connect (G_OBJECT (grep_entry), "key_release_event", 
@@ -426,7 +431,7 @@ private:
 	// XXX: (FIXME) this option (-c) does not work in fgr...
 	//    gtk_widget_show (line_count);
 	gtk_box_pack_start (GTK_BOX (vbox13), GTK_WIDGET(line_count), FALSE, FALSE, 0);
-	gtk_widget_set_sensitive (GTK_WIDGET(line_count), FALSE);
+	gtk_widget_set_sensitive (GTK_WIDGET(line_count), active_grep);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (line_count), default_line_count);
 	g_object_set_data(G_OBJECT(dialog_), "line_count", line_count);
         g_signal_connect (G_OBJECT (grep_entry), "key_release_event", 
@@ -453,7 +458,7 @@ private:
 	g_free(t);
 	gtk_widget_show (GTK_WIDGET(label40));
 	gtk_box_pack_start (GTK_BOX (hbox24), GTK_WIDGET(label40), FALSE, FALSE, 0);
-	gtk_widget_set_sensitive (GTK_WIDGET(label40), FALSE);
+	gtk_widget_set_sensitive (GTK_WIDGET(label40), active_grep);
 	g_object_set_data(G_OBJECT(dialog_), "label40", label40);
         g_signal_connect (G_OBJECT (grep_entry), "key_release_event", 
                 EVENT_CALLBACK (Type::on_key_release), (gpointer) label40);
@@ -466,7 +471,7 @@ private:
 	gtk_radio_button_set_group (anywhere, anywhere_group);
 	g_object_set_data(G_OBJECT(dialog_), "anywhere", anywhere);
 	anywhere_group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (anywhere));
-	gtk_widget_set_sensitive (GTK_WIDGET(anywhere), FALSE);
+	gtk_widget_set_sensitive (GTK_WIDGET(anywhere), active_grep);
 	if (default_anywhere) {
 	    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (anywhere), default_anywhere);
 	}
@@ -481,7 +486,7 @@ private:
 	gtk_radio_button_set_group (match_words, anywhere_group);
 	g_object_set_data(G_OBJECT(dialog_), "match_words", match_words);
 	anywhere_group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (match_words));
-	gtk_widget_set_sensitive (GTK_WIDGET(match_words), FALSE);
+	gtk_widget_set_sensitive (GTK_WIDGET(match_words), active_grep);
 	if (default_match_words) {
 	    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (match_words), default_match_words);
 	}
@@ -496,7 +501,7 @@ private:
 	gtk_radio_button_set_group (match_lines, anywhere_group);
 	g_object_set_data(G_OBJECT(dialog_), "match_lines", match_lines);
 	anywhere_group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (match_lines));
-	gtk_widget_set_sensitive (GTK_WIDGET(match_lines), FALSE);
+	gtk_widget_set_sensitive (GTK_WIDGET(match_lines), active_grep);
 	if (default_match_lines) {
 	    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (match_lines), default_match_lines);
 	}
@@ -510,7 +515,7 @@ private:
 	gtk_radio_button_set_group (match_no_match, anywhere_group);
 	g_object_set_data(G_OBJECT(dialog_), "match_no_match", match_no_match);
 	anywhere_group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (match_no_match));
-	gtk_widget_set_sensitive (GTK_WIDGET(match_no_match), FALSE);
+	gtk_widget_set_sensitive (GTK_WIDGET(match_no_match), active_grep);
 	if (default_match_no_match) {
 	    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (match_no_match), default_match_no_match);
 	}
@@ -653,6 +658,9 @@ private:
  	
 	gtk_paned_set_position (vpane, 1000);
 	gtk_widget_show_all(GTK_WIDGET(dialog_));
+        // FIXME: line count option is not correctly processed: 
+        //        needs alternate processing method.
+        gtk_widget_hide(GTK_WIDGET(line_count));
 	
 	return;
     }

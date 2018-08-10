@@ -8,6 +8,7 @@
 
 #define FILTER_HISTORY g_get_user_data_dir(),"xffm+","xffind.filter",NULL
 #define GREP_HISTORY g_get_user_data_dir(),"xffm+","xffind.grep",NULL
+#define PATH_HISTORY g_get_user_data_dir(),"xffm+","xffind.path",NULL
 
 typedef struct radio_t {
     GtkBox *box;
