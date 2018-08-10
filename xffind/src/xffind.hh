@@ -13,7 +13,13 @@ public:
 	    std::cerr<<"DBG> grep command not found\n";
 	    exit(1);
 	}
-	this->createDialog(path);
+        gchar *fullPath = NULL;
+        if (path){
+            if (g_path_is_absolute(path)) fullPath = g_strdup(path);
+            else fullPath = g_build_filename(g_get_home_dir(), path, NULL);
+        }
+	this->createDialog(fullPath);
+        g_free(fullPath);
     }
 };
 }

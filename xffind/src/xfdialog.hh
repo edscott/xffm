@@ -1,5 +1,6 @@
 #ifndef XFDIALOG__HH
 # define XFDIALOG__HH
+#include "xficons.hh"
 #include "xfpixbuf.hh"
 #include "xfgtk.hh"
 #include "xftooltip.hh"
@@ -17,6 +18,7 @@ class FindDialog
     using util_c = Util<double>;
     using gtk_c = Gtk<double>;
     using pixbuf_c = Pixbuf<double>;
+    using pixbuf_icons_c = Icons<double>;
     using tooltip_c = Tooltip<double>;
 //    typedef typename  void (*)(GtkToggleButton *,gpointer) toggleButtonCallback;
 protected:
@@ -535,35 +537,19 @@ private:
 	gtk_container_set_border_width (GTK_CONTAINER (hbuttonbox2), 3);
 	gtk_button_box_set_layout (hbuttonbox2, GTK_BUTTONBOX_EDGE);
 
-// FIXME
-	
-	/*GtkWidget *button_image;
-	gchar *g=g_strdup_printf("%s/%s", _("Find"), _("Close"));
-	GtkButton *find_button =  
-	    gtk_c::dialog_button("edit-find", g);
-	g_free(g);
-	g_object_set_data(G_OBJECT(dialog_), "find_button", find_button);
-	g_object_set_data(G_OBJECT(find_button), "dialog_", dialog_);*/
-	
-	/*GtkButton *applyButton =  
-	    gtk_c::dialog_button("edit-find", _("Find"));
-	g_object_set_data(G_OBJECT(dialog_), "apply_button", applyButton);
-	g_object_set_data(G_OBJECT(applyButton), "dialog_", dialog_);
-	g_signal_connect (G_OBJECT (applyButton), "clicked",
-		BUTTON_CALLBACK(Type::onApplyButton), g_object_get_data(G_OBJECT(dialog_), "diagnostics"));*/
 
 	GtkButton *cancelButton =  
-	    gtk_c::dialog_button("cancel", _("Cancel"));
+	    gtk_c::dialog_button("process-stop", _("Cancel"));
 	g_object_set_data(G_OBJECT(dialog_), "cancel_button", cancelButton);
 	g_object_set_data(G_OBJECT(cancelButton), "dialog_", dialog_);
 	gtk_widget_set_sensitive(GTK_WIDGET(cancelButton), FALSE);
 	g_signal_connect (G_OBJECT (cancelButton), "clicked",
-		BUTTON_CALLBACK(Type::onCancelButton), g_object_get_data(G_OBJECT(dialog_), "diagnostics"));
+		BUTTON_CALLBACK(Type::onCancelButton), (void *)dialog_);
 	gtk_widget_show (GTK_WIDGET(cancelButton));
 	
 
 	GtkButton *clearButton =  
-	    gtk_c::dialog_button("clear", _("Clear"));
+	    gtk_c::dialog_button("user-trash", _("Clear"));
 	g_object_set_data(G_OBJECT(dialog_), "clear_button", clearButton);
 	g_object_set_data(G_OBJECT(clearButton), "dialog_", dialog_);
 	g_signal_connect (G_OBJECT (clearButton), "clicked",
@@ -571,7 +557,7 @@ private:
 	gtk_widget_show (GTK_WIDGET(clearButton));
 
 	GtkButton *closeButton =  
-	    gtk_c::dialog_button("close", _("Close"));
+	    gtk_c::dialog_button("application-exit", _("Close"));
 	g_object_set_data(G_OBJECT(dialog_), "close_button", closeButton);
 	g_object_set_data(G_OBJECT(closeButton), "dialog_", dialog_);
 	g_signal_connect (G_OBJECT (closeButton), "clicked",
@@ -580,7 +566,7 @@ private:
 
 
 	GtkButton *findButton =  
-	    gtk_c::dialog_button("find", _("Find"));
+	    gtk_c::dialog_button("system-search", _("Find"));
 	gtk_widget_set_can_default(GTK_WIDGET(findButton), TRUE);
 	g_signal_connect (G_OBJECT (findButton), "clicked",
 		BUTTON_CALLBACK(Type::onFindButton), (gpointer)dialog_);
@@ -597,25 +583,28 @@ private:
 	    gchar *editor_path = g_find_program_in_path(basename);
 	    if (editor_path){
 		gchar *iconpath=g_strdup(basename);
-		GdkPixbuf *pix = pixbuf_c::get_pixbuf (iconpath, SMALL_ICON_SIZE); //refs
-		if (!pix) iconpath = g_strdup("document-open");
-		else g_object_unref(pix);
+                GdkPixbuf *pix = pixbuf_icons_c::get_theme_pixbuf(iconpath, SMALL_ICON_SIZE);
+		if (!pix) {
+                    iconpath = g_strdup("document-open");
+		    pix = pixbuf_c::get_pixbuf (iconpath, SMALL_ICON_SIZE); //refs
+                }
+		g_object_unref(pix);
 
 		GtkButton *edit_button = 
 		    gtk_c::dialog_button(iconpath, _("Edit"));
 		g_free(iconpath);
 		g_object_set_data(G_OBJECT(dialog_), "edit_button", edit_button);
 		g_object_set_data(G_OBJECT(edit_button), "dialog_", dialog_);
-		// FIXME: pass list of files in data pointer...
 		g_signal_connect (G_OBJECT (edit_button), "clicked", 
                         BUTTON_CALLBACK (Type::onEditButton), (gpointer)dialog_);
 		gtk_widget_show(GTK_WIDGET(edit_button));
 		gtk_container_add (GTK_CONTAINER (hbuttonbox2), GTK_WIDGET(edit_button));
 		g_free(editor_path);
+	        gtk_widget_set_sensitive(GTK_WIDGET(edit_button), FALSE);
 	    } 
 	    g_free(basename);
 	} else {
-	    NOOP("getenv(\"EDITOR\") = %s\n", editor);
+	    DBG("getenv(\"EDITOR\") = \"%s\"\n", editor);
 	}
 
 
@@ -639,7 +628,7 @@ private:
 	// width will be the smaller of the two.
 	gint width = (geometry_.max_width < allocation.width)?
 	    geometry_.max_width: allocation.width;
-	NOOP(stderr, "max w= %d, top_pane w= %d, label w=%d\n", 
+	TRACE(stderr, "max w= %d, top_pane w= %d, label w=%d\n", 
 		geometry_.max_width,
 		 allocation.width, 
 		label_allocation.width);

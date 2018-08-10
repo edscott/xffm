@@ -89,7 +89,10 @@ private:
 
 public:
     static pid_t 
-    thread_run(gpointer data, const gchar **arguments, void (*stdout_f)(void *, void *, int)){
+    thread_run(gpointer data, const gchar **arguments, 
+            void (*stdout_f)(void *, void *, int),
+            void (*stderr_f)(void *, void *, int),
+            void (*finish_f)(void *)){
         gchar *command = g_strdup("");
         const gchar **p = arguments;
         for (;p && *p; p++){
@@ -97,6 +100,7 @@ public:
             g_free(command);
             command = g;
         }
+        DBG("command = %s\n", command);
         int flags = TUBO_EXIT_TEXT|TUBO_VALID_ANSI|TUBO_CONTROLLER_PID;
         /* FIXME: workdir must be set in constructor
         if (chdir(get_workdir())<0){
@@ -107,8 +111,8 @@ public:
         pid_t pid = Tubo_fork (fork_function,(gchar **)arguments,
                                     NULL, // stdin
                                     stdout_f,
-                                    run_operate_stderr, //stderr_f
-                                    fork_finished_function,
+                                    stderr_f,
+                                    finish_f,
                                     data, // XXX view_v,
                                     flags);
         pid_t grandchild=Tubo_child (pid);
@@ -142,9 +146,9 @@ public:
                                     flags);
         pid_t grandchild=Tubo_child (pid);
 #ifdef DEBUG_TRACE        
-        print_c::print_icon_tag(textview, "emblem-greenball", "tag/green", g_strdup_printf("<%d> %s\n", grandchild, command));
+        print_c::print_icon(textview, "system-run", "tag/green", g_strdup_printf("<%d> %s\n", grandchild, command));
 #else
-        print_c::print_icon_tag(textview, "emblem-greenball", "tag/bold", g_strdup_printf("%s\n", command));
+        print_c::print_icon(textview, "system-run", "tag/bold", g_strdup_printf("%s\n", command));
 #endif
         push_hash(grandchild, g_strdup(command));
         g_free(command);
@@ -259,7 +263,7 @@ public:
 
         if(strncmp (line, exit_token, strlen (exit_token)) == 0) {
             gchar *string = exit_string(line);
-            print_c::print_icon(textview, "emblem-redball", g_strdup(string));
+            print_c::print_icon(textview, "process-stop", g_strdup(string));
             g_free(string);
         } else {
             print_c::print(textview, g_strdup(outline));
@@ -423,7 +427,7 @@ public:
 
 
         if (i>=MAX_COMMAND_ARGS - 1) {
-            NOOP("%s: (> %d)\n", strerror(E2BIG), MAX_COMMAND_ARGS);
+            TRACE("%s: (> %d)\n", strerror(E2BIG), MAX_COMMAND_ARGS);
             argv[MAX_COMMAND_ARGS - 1]=NULL;
         }
 

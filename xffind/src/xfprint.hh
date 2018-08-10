@@ -48,7 +48,7 @@ public:
 	g_free(string);
     }
 
-    static void print_icon_tag(GtkTextView *textview, 
+    static void print_icon(GtkTextView *textview, 
                                 const gchar *iconname, 
 				const gchar *tag, 
 				gchar *string)
@@ -306,7 +306,7 @@ private:
         void **arg=(void **)data;
         GtkPaned *vpane = GTK_PANED(arg[0]);
         if(!vpane) {
-            fprintf(stderr, "vpane is NULL\n");
+            DBG("vpane is NULL\n");
             return NULL;
         }
         gtk_paned_set_position (vpane, 10000);
@@ -319,7 +319,7 @@ private:
         void **arg=(void **)data;
         GtkPaned *vpane = GTK_PANED(arg[0]);
         if(!vpane) {
-            fprintf(stderr, "vpane is NULL\n");
+            DBG("vpane is NULL\n");
             return NULL;
         }
         GtkWidget *window = gtk_widget_get_toplevel(GTK_WIDGET(vpane));
@@ -439,7 +439,7 @@ private:
         } 
 
         tag = gtk_text_tag_table_lookup (gtk_text_buffer_get_tag_table (buffer), id);
-        if (!tag) fprintf(stderr, "No GtkTextTag for %s\n", id);
+        // if (!tag) DBG("No GtkTextTag for %s\n", id);
         return tag;
     }
 
@@ -473,7 +473,7 @@ private:
         const char *esc_location = strstr (s, esc);
         if(esc_location) {      //vt escape sequence
             // do a split
-                NOOP(stderr, "0.splitting %s\n", s);
+                TRACE( "0.splitting %s\n", s);
             gchar **split = g_strsplit(s, esc, -1);
             if (!split) {
                 DBG("insert_string(): split_esc barfed\n");
@@ -484,7 +484,7 @@ private:
             gint count = 0;
             for (;pp && *pp; pp++, count++){
                 if (strlen(*pp) == 0) continue;
-                NOOP(stderr, "split %d: %s\n", count, *pp);
+                TRACE( "split %d: %s\n", count, *pp);
                 if (count==0 && head_section){
                     insert_string (buffer, *pp, NULL);
                     continue;
@@ -494,14 +494,14 @@ private:
                     insert_string (buffer, "\n", NULL);
                     continue;
                 }
-                NOOP(stderr, "1.splitting %s\n", *pp);
+                TRACE( "1.splitting %s\n", *pp);
                 
                 gchar **ss = g_strsplit(*pp, "m", 2);
 
                 // Insert tags
                 gchar **tags = NULL;
                 if (strchr(ss[0],';')) {
-                    NOOP(stderr, "2.splitting %s\n", ss[0]);
+                    TRACE( "2.splitting %s\n", ss[0]);
                     tags = g_strsplit(ss[0], ";", -1);
                 } else {
                     tags = (gchar **)malloc(sizeof(gchar *) * 2 );
@@ -527,11 +527,11 @@ private:
                     }
                     const gchar *tag = get_ansi_tag(*t);
                     if (!tag) {
-                        NOOP(stderr, "no ansi tag for %s\n", *t);
+                        TRACE( "no ansi tag for %s\n", *t);
                         continue;
                     }
                     gtags[i++] = resolve_tag(buffer, tag);
-                    NOOP(stderr, "ansi_tag=%s\n", tag);
+                    TRACE( "ansi_tag=%s\n", tag);
                 }
 
 
@@ -615,7 +615,7 @@ private:
             }
                     
         } else {
-            NOOP(stderr, "gtk_text_buffer_insert %s\n", q);
+            TRACE( "gtk_text_buffer_insert %s\n", q);
             gtk_text_buffer_insert (buffer, &end, q, -1);
         }
         pthread_mutex_unlock(&insert_mutex);
@@ -643,12 +643,12 @@ private:
 
         gint newsize=12; // default font size.
         const gchar *p = getenv ("FIXED_FONT_SIZE");
-            NOOP(stderr, "%s:\n", p);
+            TRACE( "%s:\n", p);
         if(p && strlen (p)) {
             errno=0;
             long value = strtol(p, NULL, 0);
             gchar *string = g_strdup_printf("%d --> %ld\n", newsize, value);
-            NOOP(stderr, "%s\n", string);
+            TRACE( "%s\n", string);
             if (errno == 0){
                 newsize = value;
             }
@@ -669,7 +669,7 @@ private:
             gtk_css_provider_load_from_data (css_provider, data, -1, &error);
             g_free(data);
             if (error){
-                fprintf(stderr, "gtk_css_provider_load_from_data: %s\n", error->message);
+                DBG("gtk_css_provider_load_from_data: %s\n", error->message);
                 g_error_free(error);
                 return;
             }

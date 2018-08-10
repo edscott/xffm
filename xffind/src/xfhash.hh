@@ -14,10 +14,6 @@
 using namespace std;
 
 //static void free_pixbuf_t(void *);
-
-#include "debug.h"
-#include "intl.h"
-
 typedef struct pixbuf_t {
     time_t mtime; // stat mtime info for thumbnails
     gint   size;  // pixbuf icon size
@@ -71,7 +67,7 @@ public:
 	/* thumbnails are not subject to thumbnailization: */
 	gchar *dirname = g_path_get_dirname (file);
 	if(strncmp (cache_dir, dirname, strlen (cache_dir)) == 0) {
-	    NOOP ("thumbnails cannot be thumbnailed:%s\n", file);
+	    TRACE ("thumbnails cannot be thumbnailed:%s\n", file);
 	    g_free (cache_dir);
 	    g_free (dirname);
 	    return NULL;
@@ -102,7 +98,7 @@ public:
 	g_free (filename);
 	g_free (cache_dir);
 	g_free (thumbnail_dir);
-	NOOP ("thread: %s ->thumbnail_path=%s\n", file, thumbnail_path);
+	TRACE ("thread: %s ->thumbnail_path=%s\n", file, thumbnail_path);
 
 	return thumbnail_path;
     }
@@ -164,7 +160,7 @@ public:
 	if (!icon_name) return ;
 	gchar *hash_key = get_hash_key (icon_name, size);
 
-	NOOP(stderr, "rm_from_pixbuf_hash: %s\n", hash_key);
+	TRACE( "rm_from_pixbuf_hash: %s\n", hash_key);
 	if (!pixbuf_hash) fprintf(stderr, "pixbuf_hash!\n");
 
 	void *d = g_hash_table_lookup(pixbuf_hash, hash_key);
@@ -188,7 +184,7 @@ public:
 	    createHash();
 	   // return NULL;
 	}
-	NOOP(stderr, "find in pixbuf hash(%p): %s(%d)\n",(void *)pixbuf_hash, icon_name, size);
+	TRACE( "find in pixbuf hash(%p): %s(%d)\n",(void *)pixbuf_hash, icon_name, size);
 	gchar *hash_key = get_hash_key (icon_name, size);
 
 	pixbuf_t *pixbuf_p = (pixbuf_t *)g_hash_table_lookup (pixbuf_hash, hash_key);
@@ -245,7 +241,7 @@ public:
 	    hash_key = g_strdup_printf ("%010u-%d", g_string_hash (gs), usize);
 	}
 	g_string_free (gs, TRUE);
-	NOOP("%s: hashkey=%s\n", key, hash_key);
+	TRACE("%s: hashkey=%s\n", key, hash_key);
 	return hash_key;
     }
 
@@ -253,7 +249,7 @@ public:
     free_pixbuf_t(void *data){
 	pixbuf_t *pixbuf_p = (pixbuf_t *) data;
 	if (!pixbuf_p) return ;
-	NOOP(stderr, "destroying pixbuf_t for %s size %d\n", pixbuf_p->path, pixbuf_p->size);
+	TRACE( "destroying pixbuf_t for %s size %d\n", pixbuf_p->path, pixbuf_p->size);
 	if (pixbuf_p->pixbuf && !G_IS_OBJECT (pixbuf_p->pixbuf)) {
 	    cerr << "This should not happen: pixbuf_p->mime_id, not a pixbuf:"
 		<< pixbuf_p->mime_id << "\n";

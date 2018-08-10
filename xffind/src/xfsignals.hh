@@ -6,7 +6,6 @@
 #include "xfrun.hh"
 #include "xfutil.hh"
 static const gchar *ftypes[] = {
-    N_("Any"),
     N_("Regular"),
     N_("Directory"),
     N_("Symbolic Link"),
@@ -14,18 +13,31 @@ static const gchar *ftypes[] = {
     N_("Block device"),
     N_("Character device"),
     N_("FIFO"),
+    N_("Any"),
+    NULL
+};
+const char *ft[] = {
+    "reg",
+    "dir",
+    "sym",
+    "sock",
+    "blk",
+    "chr",
+    "fifo",
+    "any",
     NULL
 };
 
 typedef struct fgrData_t{
     GtkWindow *dialog;
+    pid_t pid;
     gint resultLimit;
     gint resultLimitCounter;
     GSList *findList;
     gchar **argument;
 }fgrData_t;
 
-static GSList *controllers = NULL;
+static GHashTable *controllerHash = NULL;
 static GSList *lastFind = NULL;
 
 namespace xf
@@ -72,7 +84,7 @@ public:
     on_buttonHelp (GtkWidget * button, gpointer data) {
 	GtkWindow *dialog_=GTK_WINDOW(g_object_get_data(G_OBJECT(button), "dialog_"));
 	const gchar *message = (const gchar *)data;
-	std::cerr<<"fixme: signals::on_buttonHelp\n";
+	TRACE("fixme: signals::on_buttonHelp\n");
 	gtk_c::quick_help(dialog_, message);
     }
 
@@ -80,7 +92,7 @@ public:
     static void
     onClearButton (GtkWidget * button, gpointer data) {
 	GtkTextView *diagnostics = GTK_TEXT_VIEW(data);
-	std::cerr<<"fixme: signals::onClearButton\n";
+	TRACE("fixme: signals::onClearButton\n");
         print_c::clear_text(diagnostics);
         print_c::hide_text(diagnostics);
 
@@ -89,15 +101,16 @@ public:
     static void
     onEditButton (GtkWidget * button, gpointer data) {
 	GtkTextView *diagnostics = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(data), "diagnostics"));
-	std::cerr<<"fixme: signals::onEditButton\n";
-        print_c::print_status(diagnostics, g_strdup("fixme: signals::onEditButton testing run\n"));
+	TRACE("fixme: signals::onEditButton\n");
+        //print_c::print_status(diagnostics, g_strdup("fixme: signals::onEditButton testing run\n"));
         print_c::show_text(diagnostics);        
-        run_c::thread_run(diagnostics, "ls -l", FALSE);
+        //run_c::thread_run(diagnostics, "ls -l", FALSE);
+        edit_command(data);
     }
 
     static void
     onCloseButton (GtkWidget * button, gpointer data) {
-	std::cerr<<"fixme: signals::onCloseButton\n";
+	TRACE("fixme: signals::onCloseButton\n");
         GtkWidget *dialog = GTK_WIDGET(data);
         gtk_widget_hide(dialog);
         while (gtk_events_pending()) gtk_main_iteration();
@@ -106,23 +119,20 @@ public:
 
     static void
     onCancelButton (GtkWidget * button, gpointer data) {
-	std::cerr<<"fixme: signals::onCancelButton\n";
+	TRACE("fixme: signals::onCancelButton\n");
+        cancel_all(data);
     }
 
     static void
     onFindButton (GtkWidget * button, gpointer dialog) {
+        if (!controllerHash){
+            controllerHash = g_hash_table_new_full(g_direct_hash, g_direct_equal, NULL, g_free);
+        }
 	GtkTextView *diagnostics = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(dialog), "diagnostics"));
         updateCompletions(dialog);
         
         print_c::show_text(diagnostics);
         on_find_clicked_action (GTK_WINDOW(dialog));
-/*	std::cerr<<"fixme: signals::onFindButton\n";
-        print_c::print(diagnostics, g_strdup("1.fixme: signals::\n"));
-        print_c::print(diagnostics, "tag/green", g_strdup("2.fixme: signals::\n"));
-        print_c::print_debug(diagnostics, g_strdup("3.fixme: signals::\n"));
-        print_c::print_error(diagnostics, g_strdup("4.fixme: signals::\n"));
-        print_c::print_icon(diagnostics, "edit-find",  g_strdup("5.fixme: signals::\n"));
-        print_c::print_icon_tag(diagnostics, "edit-find",  "tag/red",g_strdup("fixme: signals::\n"));*/
     }
 
     static gint
@@ -166,7 +176,7 @@ public:
         if(response == GTK_RESPONSE_ACCEPT) {
             gchar *filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
             gtk_entry_set_text (entry, filename);
-            NOOP ("Got %s\n", filename);
+            TRACE("Got %s\n", filename);
             g_free (filename);
         }
         gtk_widget_hide (GTK_WIDGET(dialog));
@@ -181,7 +191,7 @@ private:
     quick_command (GtkWidget * button, gpointer data, gboolean scrollUp) {
 	GtkWindow *dialog_=GTK_WINDOW(g_object_get_data(G_OBJECT(button), "dialog_"));
 	GtkTextView *diagnostics = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(dialog_), "diagnostics"));
-	std::cerr<<"fixme: signals::quick_command\n";
+	TRACE("fixme: signals::quick_command\n");
         print_c::clear_text(diagnostics);
         //run_c::thread_run(diagnostics, (const gchar *)data);
         run_c::thread_run(diagnostics, (const gchar *)data, scrollUp);
@@ -217,20 +227,92 @@ private:
         return "-A";
     }
 
+    static gboolean removeFunc(gpointer key, gpointer value, gpointer data){
+        GtkTextView *diagnostics = GTK_TEXT_VIEW(data);
+        print_c::print_icon(diagnostics, "edit-delete", "tag/bold", 
+                g_strdup_printf("%s: \"%s\"\n",_("Cancel"), (gchar *) value));
+        //Signal process controller to kill child process.
+        kill(GPOINTER_TO_INT(key), SIGUSR2);
+        return FALSE;
+    }
+    static void
+    cancel_all(void * dialog){
+        void *diagnostics = g_object_get_data(G_OBJECT(dialog), "diagnostics");
+        g_hash_table_foreach_remove (controllerHash, removeFunc, diagnostics);
+        GtkWidget *cancel = GTK_WIDGET(g_object_get_data(G_OBJECT(dialog), "cancel_button"));
+        gtk_widget_set_sensitive(cancel, FALSE);
+    }
+
+    static gboolean
+    Cleanup (void *dialog) {
+       if (g_hash_table_size(controllerHash) == 0){
+            GtkWidget *cancel = GTK_WIDGET(g_object_get_data(G_OBJECT(dialog), "cancel_button"));
+            gtk_widget_set_sensitive(cancel, FALSE);
+       }
+
+       GtkWidget *edit_button = GTK_WIDGET(g_object_get_data(G_OBJECT(dialog), "edit_button"));
+       if (g_slist_length(lastFind)){
+            const gchar *editor = getenv("EDITOR");
+            if (!editor || strlen(editor)==0){
+                GtkTextView *diagnostics = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(dialog), "diagnostics"));
+                print_c::print_icon(diagnostics, "dialog-warning", 
+                        g_strdup_printf("%s (EDITOR=\"\")\n", _("No editor component found.")));
+                return FALSE;
+            }
+	    gtk_widget_set_sensitive(GTK_WIDGET(edit_button), TRUE);
+       } else {
+	    gtk_widget_set_sensitive(GTK_WIDGET(edit_button), FALSE);
+       }
+       return FALSE;
+    }
+
+    static void
+    forkCleanup (void *data) {
+       DBG("forkCleanup\n");
+        fgrData_t *Data = (fgrData_t *)data;
+        g_hash_table_remove(controllerHash, GINT_TO_POINTER(Data->pid));
+        g_timeout_add(1, Cleanup, (void *)Data->dialog);
+        
+    }
+
+    static void
+    stderr_f (void *data, void *stream, int childFD) {
+        fgrData_t *Data = (fgrData_t *)data;
+        GtkTextView *diagnostics = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(Data->dialog), "diagnostics"));
+        if (!gtk_widget_is_visible(GTK_WIDGET(diagnostics))) return;
+
+        char *line;
+        line = (char *)stream;
+
+
+        if(line[0] != '\n') {
+            // FIXME use print_icon()
+            print_c::print(diagnostics, "tag/red", g_strdup(line));
+        }
+
+        // With this, this thread will not do a DOS attack
+        // on the gtk event loop.
+        static gint count = 1;
+        if (count % 20 == 0){
+            usleep(10000);
+        } 
+       return;
+    }
+
     static void
     stdout_f (void *data, void *stream, int childFD) {
         fgrData_t *Data = (fgrData_t *)data;
         char *line;
         line = (char *)stream;
-        NOOP ("FORK stdout: %s\n", line);
+        TRACE("FORK stdout: %s\n", line);
 
         if(line[0] == '\n') return;
         GtkTextView *diagnostics = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(Data->dialog), "diagnostics"));
 
         if (Data->resultLimit > 0 && Data->resultLimit==Data->resultLimitCounter) {
             gchar *g=g_strdup_printf("%s. %s %d", _("Results"), _("Upper limit:"), Data->resultLimit);
-            print_c::print_icon_tag(diagnostics, "dialog-warning", "tag/green", g_strconcat(g, "\n", NULL));
-            print_c::print_icon_tag(diagnostics, "dialog-info", "tag/blue",  g_strconcat(_("Counting files..."), "\n", NULL));
+            print_c::print_icon(diagnostics, "dialog-warning", "tag/green", g_strconcat(g, "\n", NULL));
+            print_c::print_icon(diagnostics, "dialog-info", "tag/blue",  g_strconcat(_("Counting files..."), "\n", NULL));
             g_free(g);
         }
 
@@ -252,7 +334,7 @@ private:
                 g_free(fgr);
                 g_free(plural_text);
                 gchar *g = g_strdup_printf("%c[31m%s\n",27, m);
-                print_c::print_icon (diagnostics, "emblem_redball", g);
+                print_c::print_icon (diagnostics, "process-stop", g);
                 g_free(m);
                 // Free last find results
                 GSList *list = lastFind;
@@ -260,20 +342,30 @@ private:
                 g_slist_free(lastFind);
                 // assign new find results
                 lastFind = Data->findList;
-                // Free fgrData_t *Data
-                freeFgrData(Data);
-                // FIXME: remove controller pid from controller list
+                // Free fgrData_t *Data: wait 10 seconds to avoid any race with cleanup function.
+                g_timeout_add(10, freeFgrData, (void *)Data);
+                list = lastFind;
+                for (;list && list->data; list=list->next){
+                    DBG("last find: %s\n", (gchar *)list->data);
+                }
         } else {
-            Data->resultLimitCounter++; 
-            if (Data->resultLimit ==0 ||
-                (Data->resultLimit > 0 && Data->resultLimit > Data->resultLimitCounter) ) {
-                print_c::print(diagnostics, g_strdup(line));
-                //fprintf(stderr, "resultLimitCounter:%d %s\n", Data->resultLimitCounter, line);
-                gchar *file = g_strdup(line);
-                if (strchr(file, '\n')) *strchr(file, '\n') = 0;
-                Data->findList = g_slist_prepend(Data->findList, file);
-            } 
-        }
+            if (!gtk_widget_is_visible(GTK_WIDGET(diagnostics))) return;
+            gchar *file = g_strdup(line);
+            if (strchr(file, '\n')) *strchr(file, '\n') = 0;
+            if (g_file_test(file, G_FILE_TEST_EXISTS)) {
+                Data->resultLimitCounter++; 
+                if (Data->resultLimit ==0 ||
+                    (Data->resultLimit > 0 && Data->resultLimit > Data->resultLimitCounter) ) {
+                    print_c::print(diagnostics, g_strdup_printf("%s\n", file));
+                    DBG("--> %s\n",file);
+                    //DBG("resultLimitCounter:%d %s\n", Data->resultLimitCounter, line);
+                    Data->findList = g_slist_prepend(Data->findList, file);
+                }
+            } else {
+               DBG("ignoring: \"%s\"\n", file);
+               g_free(file);
+            }
+        }         
         // With this, this thread will not do a DOS attack
         // on the gtk event loop.
         static gint count = 1;
@@ -284,28 +376,14 @@ private:
         return;
     }
 
-    
-
-    static void
-    cancel_all (fgrData_t *Data) {
-        // Send a KILL to each fgr that is still running. This is done
-        // by sending a SIGUSR2 to the controller (SIGUSR1 would pass on a TERM).
-        GSList *tmp = controllers;
-        for (; tmp && tmp->data; tmp=tmp->next){
-            kill(GPOINTER_TO_INT(tmp->data), SIGUSR2);
-        }
-        g_slist_free(controllers);
-        controllers=NULL;
-    }
-    
-    static void
-    freeFgrData(fgrData_t *Data){
+    static gboolean
+    freeFgrData(void *data){
+        fgrData_t *Data = (fgrData_t *)data;
         gchar **a=Data->argument;
         for (;*a; a++) g_free(*a);
         g_free(Data->argument);
-        // We keep Data around to avoid any potential race
-        // between stderr_f and stdout_f. Just a small calculated leak.
-        //g_free(Data);
+        g_free(Data);
+        return FALSE;
     }
 
     static gboolean
@@ -339,7 +417,7 @@ private:
 
 
         GtkWidget *cancel = GTK_WIDGET(g_object_get_data(G_OBJECT(dialog), "cancel_button"));
-        gtk_widget_show(cancel);
+        //gtk_widget_show(cancel);
         gtk_widget_set_sensitive(cancel, TRUE);
 
         /* get the parameters set by the user... *****/
@@ -347,7 +425,7 @@ private:
 
 
         gchar *message = g_strconcat( _("Searching..."), "\n", NULL);
-        print_c::print_icon_tag(diagnostics, "emblem_find", "tag/green", message);
+        print_c::print_icon(diagnostics, "edit-find", "tag/green", message);
 
         /*
     // not here: FIXME    
@@ -362,13 +440,18 @@ private:
     */
 
         int flags = TUBO_EXIT_TEXT|TUBO_VALID_ANSI|TUBO_CONTROLLER_PID;
-        pid_t controller = run_c::thread_run(Data, (const gchar **)Data->argument, stdout_f);
+        Data->pid = run_c::thread_run(Data, (const gchar **)Data->argument, stdout_f, stderr_f, forkCleanup);
 
         // When the dialog is destroyed on action, then output is going to a
         // widgets_p away from dialog window, so we let the process run on and on.
-        // FIXME: enable cancel button with controllers.
-	controllers = 
-	    g_slist_prepend(controllers, GINT_TO_POINTER(controller));
+        gchar *command = g_strdup("");
+        gchar **p=Data->argument;
+        for (;p && *p; p++){
+            gchar *g = g_strconcat(command, " ", *p, NULL);
+            g_free(command);
+            command = g;
+        }
+        g_hash_table_replace(controllerHash, GINT_TO_POINTER(Data->pid), command);
 
     }
 
@@ -380,7 +463,7 @@ private:
         /* limit */
         Data->resultLimit = gtk_spin_button_get_value_as_int (
                 GTK_SPIN_BUTTON (g_object_get_data(G_OBJECT(dialog), "upper_limit_spin")));
-        Data->resultLimitCounter = -1; // fgr ends with "fgr search complete"
+        Data->resultLimitCounter = 0; // fgr ends with "fgr search complete"
         Data->argument = (gchar **)calloc(MAX_COMMAND_ARGS, sizeof(gchar *));
         if (!Data->argument){
             std::cerr<<"calloc error at get_arguments()\n";
@@ -558,17 +641,7 @@ private:
         }
 
         /* select list */
-        const char *ft[] = {
-            "any",
-            "reg",
-            "dir",
-            "sym",
-            "sock",
-            "blk",
-            "chr",
-            "fifo",
-            NULL
-        };
+
         const gchar *ftype = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT(
                 g_object_get_data(G_OBJECT(dialog), "file_type_om")));
         for(int j = 0; ftypes[j] != NULL; j++) {
@@ -589,9 +662,54 @@ private:
         }
 
         /* last Data->argument is the path */
+        //Data->argument[i++] = g_strdup_printf("\"%s\"", path); g_free(path);
         Data->argument[i++] = path;
         Data->argument[i] = (char *)0;
     }
+
+    static void
+    edit_command (gpointer data) {
+        GtkWindow *dialog = GTK_WINDOW(data);
+        GtkTextView *diagnostics = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(dialog), "diagnostics"));
+        GSList *list = lastFind;
+
+        /*if (!list || g_slist_length(list) < 1) {
+            rfm_diagnostics(widgets_p, "xffm/stock_dialog-warning",NULL);
+            rfm_diagnostics(widgets_p, "xffm_tag/stderr", _("Search returned no results"), "\n", NULL);
+            return;
+        }*/
+
+        const gchar *editor = getenv("EDITOR");
+        if (!editor || strlen(editor)==0){
+            print_c::print_error(diagnostics, g_strdup_printf("%s (EDITOR=\"%s\")\n",
+                        _("No editor component found."), editor));
+            return;
+        }
+
+        gchar *command = g_strdup(editor);
+      
+
+        for (; list && list->data; list=list->next){
+            gchar *g = g_strconcat(command, " \"", (gchar *)list->data, "\"", NULL);
+            g_free(command);
+            command = g;
+        }
+
+        // Hack: for nano or vi, run in terminal
+        gboolean in_terminal = FALSE;
+        if (strstr(command, "nano") || 
+                (strstr(command, "vi") && !strstr(command, "gvim")))
+        {
+            in_terminal = TRUE;
+        }
+
+        run_c::thread_run(diagnostics, command, FALSE);
+        //RFM_THREAD_RUN2ARGV(widgets_p, command, in_terminal);
+        
+        //widgets_p->workdir = g_strdup(g_get_home_dir());
+    }
+
+
 };
 
 }

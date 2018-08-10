@@ -31,7 +31,7 @@ public:
 		length=i+1;
 	    }
 	}
-	 NOOP(stderr, "%s --- %s differ at length =%d\n", a,b,length);
+	 TRACE(stderr, "%s --- %s differ at length =%d\n", a,b,length);
        return length;
     }
 
@@ -118,7 +118,7 @@ public:
 	    }
 	    break;
 	case GDK_KEY_dead_acute:
-	    NOOP ("dead key=0x%x composing %c\n", (unsigned)dead_key, (char)key);
+	    TRACE ("dead key=0x%x composing %c\n", (unsigned)dead_key, (char)key);
 	    switch (key) {
 	    case GDK_KEY_A:
 		return GDK_KEY_Aacute;
@@ -322,7 +322,7 @@ public:
     valid_utf_pathstring (const gchar * string) {
 	gchar *utf_string = NULL;
 	utf_string = recursive_utf_string (string);
-	NOOP ("valid_utf_pathstring: string=%s utf_string=%s\n", string, utf_string);
+	TRACE ("valid_utf_pathstring: string=%s utf_string=%s\n", string, utf_string);
 	return utf_string;
     }
 
@@ -339,7 +339,7 @@ public:
 	if(g_utf8_validate (path, -1, NULL))
 	    return g_strdup (path);
 	dir = g_path_get_dirname (path);
-	NOOP ("dir=%s\n", dir);
+	TRACE ("dir=%s\n", dir);
 	if(!dir || !strlen (dir) || strcmp (dir, "./") == 0 || strcmp (dir, ".") == 0) {
 	    /* short circuit non-paths */
 	    g_free (dir);
@@ -357,7 +357,7 @@ public:
 
 	valid = g_strconcat (utf_dir, G_DIR_SEPARATOR_S, utf_base, NULL);
 
-	NOOP("dir=%s base=%s valide=%s\n",dir, base, valid); 
+	TRACE("dir=%s base=%s valide=%s\n",dir, base, valid); 
 	g_free (utf_base);
 	g_free (utf_dir);
 	g_free (dir);
@@ -630,7 +630,7 @@ public:
 	    }
 	    estring[j] = string[i];
 	}
-	NOOP ("ESC:estring=%s\n", estring);
+	TRACE ("ESC:estring=%s\n", estring);
 	return estring;
     }
 
@@ -749,7 +749,7 @@ public:
     static void 
     saveHistory (const gchar *history, GtkTreeModel *model, const gchar *data) {
 	gchar *historyDir = g_path_get_dirname(history);
-        fprintf(stderr, "history dir = %s\n", historyDir);
+        DBG("history dir = %s\n", historyDir);
 	if (!g_file_test(historyDir,G_FILE_TEST_IS_DIR)){
 	    g_mkdir_with_parents (historyDir, 0770);
 	}
@@ -844,7 +844,7 @@ public:
     static void 
     saveHistory (const gchar *history, GList **history_list_p, const gchar * data) {
 	gchar *historyDir = g_path_get_dirname(history);
-        fprintf(stderr, "history dir = %s\n", historyDir);
+        DBG("history dir = %s\n", historyDir);
 	if (!g_file_test(historyDir,G_FILE_TEST_IS_DIR)){
 	    g_mkdir_with_parents (historyDir, 0660);
 	}
@@ -870,7 +870,7 @@ public:
 	    *history_list_p = g_list_insert(*history_list_p, data, 0);
 	} else {
             // so the item was not found. proceed to prepend
-            fprintf(stderr, "prepend: %s\n", item);
+            DBG("prepend: %s\n", item);
             *history_list_p = g_list_prepend(*history_list_p, item);
         }
 
@@ -937,14 +937,14 @@ get_command_fmt(record_entry_t *en) {
 static gchar *
 strip_path(gchar *command_fmt, const gchar *path){
     if (!path) return command_fmt;
-    NOOP("stipping %s\n", command_fmt);
+    TRACE("stipping %s\n", command_fmt);
     if (strstr(command_fmt, path)){
         gchar *end = strstr(command_fmt,path) + strlen(path);
         *strstr(command_fmt, path) = 0;
         gchar *g = g_strconcat(command_fmt, "%","s",end, NULL);
         g_free(command_fmt);
         command_fmt=g;
-        NOOP("stipped %s\n", command_fmt);
+        TRACE("stipped %s\n", command_fmt);
         return command_fmt;
     }
     // What if the path is quoted or escaped or both
@@ -1003,7 +1003,7 @@ open_with (const gchar *path) {
     /* open with */
     gchar *command=NULL;
     gchar *command_fmt=NULL;
-    NOOP ("open_with()... \n");
+    TRACE ("open_with()... \n");
 
     if(!path) {
         return;
@@ -1042,7 +1042,7 @@ open_with (const gchar *path) {
     }
 
     command_fmt = MIME_command (en->mimetype);
-    NOOP ("OPEN: command_fmt(%s) = %s\n", en->mimetype, command_fmt);
+    TRACE ("OPEN: command_fmt(%s) = %s\n", en->mimetype, command_fmt);
     if(!command_fmt) {
         command_fmt = MIME_command (en->mimemagic);
     }
@@ -1064,7 +1064,7 @@ open_with (const gchar *path) {
     gchar *text_editor = NULL;
     if(!command_fmt) {
 	text_editor = rodent_get_text_editor(en);
-	NOOP ("OPEN: text_editor = %s\n", text_editor);
+	TRACE ("OPEN: text_editor = %s\n", text_editor);
 	if(text_editor) {
 	    /* OK to apply an editor */
 	    command_fmt = g_strconcat(text_editor, " ", NULL);
@@ -1089,7 +1089,7 @@ open_with (const gchar *path) {
 	}
     }
 
-    NOOP ("open_with(): magic=%s, mime=%s, command_fmt=%s, editor=%s\n",
+    TRACE ("open_with(): magic=%s, mime=%s, command_fmt=%s, editor=%s\n",
 	    en->mimemagic, en->mimetype, command_fmt, text_editor);
     g_free(text_editor);
 
@@ -1112,7 +1112,7 @@ open_with (const gchar *path) {
 {
     gchar *f = g_build_filename (RUN_DBH_FILE, NULL);
     gchar *ff = g_build_filename (RUN_FLAG_FILE, NULL);
-    NOOP (stderr, "RUN_DBH_FILE=%s RUN_FLAG_FILE=%s\n", f, ff);
+    TRACE (stderr, "RUN_DBH_FILE=%s RUN_FLAG_FILE=%s\n", f, ff);
     
     gchar *title;
     if (selection_list) {
@@ -1133,7 +1133,7 @@ open_with (const gchar *path) {
             MATCH_COMMAND); 
    g_free (f);
         g_free (ff);
-	NOOP(stderr, "got: \"%s\"\n", g);
+	TRACE(stderr, "got: \"%s\"\n", g);
     }
 
 

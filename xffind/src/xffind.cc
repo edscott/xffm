@@ -39,7 +39,12 @@
 #endif
 
 #include "../intl.h"
-#include "../debug.h"
+
+# undef TRACE
+# define TRACE(...)   { (void)0; }
+//# define TRACE(...)  fprintf(stderr, "TRACE> "); fprintf(stderr, __VA_ARGS__);
+# undef DBG
+# define DBG(...)  fprintf(stderr, "DBG> "); fprintf(stderr, __VA_ARGS__);
 
 
 #include "xffind.hh"

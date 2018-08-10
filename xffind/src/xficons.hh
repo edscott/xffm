@@ -258,8 +258,7 @@ public:
 	    gint i;
 	    for (p=tokens; p && *p; p += 4){
 		for (i=1; i<4; i++) if (*(p+i) == NULL) {
-		    fprintf(stderr,
-			    "*** composite_icon(): incorrect composite specification: %s\n %s\n",
+		    DBG("*** composite_icon(): incorrect composite specification: %s\n %s\n",
 			    emblems,
 			    "*** (format: [[base_icon_name]/position/emblem_name/scale/alpha])");
 		    g_strfreev(tokens);

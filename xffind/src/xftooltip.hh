@@ -71,7 +71,7 @@ public:
     ", 
 	    -1, &error);
 	if (error){
-	    fprintf(stderr, "gerror: %s\n", error->message);
+	    DBG("gerror: %s\n", error->message);
 	    g_error_free(error);
 	}
 	gtk_style_context_add_provider (style_context, GTK_STYLE_PROVIDER(css_provider),
@@ -248,11 +248,11 @@ public:
 	    GtkWidget *tooltip_target = (GtkWidget *)
 		g_object_get_data(G_OBJECT(tt_window), "tooltip_target");
 
-	    //fprintf(stderr, "tooltip target,widget %p,%p\"\n", tooltip_target, widget); 
+	    TRACE("tooltip target,widget %p,%p\"\n", tooltip_target, widget); 
 
 	    if (tooltip_target == widget) return TRUE;
 	} else {
-	    //fprintf(stderr, "New tooltip window\"%s\"\n", tooltip_text); 
+	    TRACE("New tooltip window\"%s\"\n", tooltip_text); 
 	}
 
 	GdkPixbuf *tooltip_pixbuf = (GdkPixbuf *)g_object_get_data(G_OBJECT(widget), "tooltip_pixbuf");
@@ -306,7 +306,7 @@ public:
 	//void *object = arg[3];
 	//tooltip_c *tooltip_p = (tooltip_c *)object;
 
-	fprintf(stderr, "custom_tooltip_f for %s\n", text);
+	DBG("custom_tooltip_f for %s\n", text);
 
 	gchar *t = g_strdup(text);
 	g_object_set_data(G_OBJECT(widget), "tooltip_text", t);

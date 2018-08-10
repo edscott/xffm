@@ -34,7 +34,7 @@ public:
 	iconname_hash = g_hash_table_new(g_str_hash, g_str_equal);
 	populate_iconname_hash();
 	//FIXME: init_tooltip_c();
-	//fprintf(stderr, "gtk_c init OK\n");
+	DBG("gtk_c init OK\n");
     }
 // FIXME: iconname_hash should be in a class template for fm
     static void
@@ -71,7 +71,7 @@ public:
 	    gtk_widget_show (image);
 	}
 	// Elaborate tooltip
-	fprintf(stderr, "gtk_c.cpp:: custom_tooltip not working right in Wayland\n");
+	DBG("gtk_c.cpp:: custom_tooltip not working right in Wayland\n");
 	//custom_tooltip(button, pixbuf, icon_tip);
 	// Simple tooltip:
 	 gtk_widget_set_tooltip_text (button, icon_tip);
