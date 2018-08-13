@@ -153,6 +153,125 @@ private:
         return vpane;
     }
 
+    GtkWidget *advancedOptions(void){
+	auto vbox7b = gtk_c::vboxNew (FALSE, 0);
+
+	auto hbox17 = gtk_c::hboxNew (FALSE, 0);
+	//gtk_widget_show (GTK_WIDGET(hbox17));
+	gtk_box_pack_start (vbox7b, GTK_WIDGET(hbox17), TRUE, FALSE, 0);
+
+	auto left_options_vbox = gtk_c::vboxNew (FALSE, 0);
+	gtk_box_pack_start (hbox17, GTK_WIDGET(left_options_vbox), FALSE, FALSE, 0);
+	auto center_options_vbox = gtk_c::vboxNew (FALSE, 0);
+	gtk_box_pack_start (hbox17, GTK_WIDGET(center_options_vbox), FALSE, FALSE, 0);
+	auto right_options_vbox = gtk_c::vboxNew (FALSE, 0);
+	gtk_box_pack_start (hbox17, GTK_WIDGET(right_options_vbox), FALSE, FALSE, 0);
+
+	/// option -r "recursive"
+	gtk_toggle_button_set_active(add_option_spin(left_options_vbox, "recursive", NULL, _("Recursive"), 0), default_recursive);
+
+	/// option -D "recursiveH"
+	gtk_toggle_button_set_active(add_option_spin(left_options_vbox, "recursiveH", NULL, _("Find hidden files and directories"), 0), default_recursiveH);
+
+	/// option -a "xdev"
+	gtk_toggle_button_set_active(add_option_spin(left_options_vbox, "xdev", NULL, _("Stay on single filesystem"), 0), default_xdev);
+
+	/// option "upper_limit_spin" (only in gtk dialog_)
+	gchar *text = g_strdup_printf("%s (%s)", _("Results"), _("Upper limit"));
+	add_option_spin(left_options_vbox, NULL, "upper_limit_spin", text, result_limit);
+	g_free(text);
+
+	// option -s +KByte "size_greater", "size_greater_spin"
+	text = g_strdup_printf("%s (%s)", _("At Least"), _("kBytes"));
+	add_option_spin(center_options_vbox, "size_greater", "size_greater_spin", text, size_greater);
+	g_free(text);
+	
+	// option -s -KByte "size_smaller", "size_smaller_spin"
+	text = g_strdup_printf("%s (%s)", _("At Most"), _("kBytes"));
+	add_option_spin(center_options_vbox, "size_smaller", "size_smaller_spin", text, size_smaller);
+	g_free(text);
+
+	auto slist = get_user_slist();
+	// option -u uid "uid" "uid_combo"
+	add_option_combo(center_options_vbox, "uid", "uid_combo", _("User"), slist);
+	slist = free_string_slist(slist);
+
+	// option -g gid "gid" "gid_combo"
+	slist = get_group_slist();
+	add_option_combo(center_options_vbox, "gid", "gid_combo", _("Group"), slist);
+	slist = free_string_slist(slist);
+	
+	// option -o octal "octal_p" "permissions_entry"
+	add_option_entry(center_options_vbox, "octal_p", "permissions_entry", _("Octal Permissions"), "0666");
+	auto entry = GTK_ENTRY(g_object_get_data(G_OBJECT(dialog_), "permissions_entry"));
+	gtk_widget_set_size_request (GTK_WIDGET(entry), 75, -1);
+	
+	// option -p suid | exe 
+	add_option_radio2(center_options_vbox, "suidexe", "suid_radio", "exe_radio", _("SUID"), _("Executable"));
+
+	
+	// option -M -A -C
+	radio_t *radio_p = create_radios(right_options_vbox);
+	// radio_p freed on destroy event for dialog_.
+
+	// option -k minutes "last_minutes", "last_minutes_spin"
+	radio_p->toggle[0] = add_option_spin(right_options_vbox, "last_minutes", "last_minutes_spin", _("Minutes"), last_minutes);
+	g_signal_connect (G_OBJECT (radio_p->toggle[0]), "toggled", 
+		BUTTON_CALLBACK(Type::sensitivize_radio), radio_p);
+	
+       // option -h hours "last_hours", "last_hours_spin"
+	radio_p->toggle[1] = add_option_spin(right_options_vbox, "last_hours", "last_hours_spin", _("Hours"), last_hours);
+	g_signal_connect (G_OBJECT (radio_p->toggle[1]), "toggled", 
+	    BUTTON_CALLBACK(Type::sensitivize_radio), radio_p);
+	
+	// option -d days "last_days", "last_days_spin"
+	radio_p->toggle[2] = add_option_spin(right_options_vbox, "last_days", "last_days_spin", _("Days"), last_days);
+	    //gtk_box_pack_start (GTK_BOX (topPaneHbox), GTK_WIDGET(check), FALSE, FALSE, 0);
+	    g_signal_connect (G_OBJECT (radio_p->toggle[2]), "toggled", 
+		BUTTON_CALLBACK(Type::sensitivize_radio), radio_p);
+	
+	// option -m months "last_months", "last_months_spin"
+	radio_p->toggle[3] = add_option_spin(right_options_vbox, "last_months", "last_months_spin", _("Months"), last_months);
+	g_signal_connect (G_OBJECT (radio_p->toggle[3]), "toggled", 
+	    BUTTON_CALLBACK(Type::sensitivize_radio), radio_p);
+	
+	 ///////////
+
+     
+	auto hbox21 = gtk_c::hboxNew (FALSE, 0);
+	//gtk_widget_show (GTK_WIDGET(hbox21));
+	gtk_box_pack_start (left_options_vbox, GTK_WIDGET(hbox21), TRUE, FALSE, 0);
+
+	auto label37 = GTK_LABEL(gtk_label_new (_("File type : ")));
+	//gtk_widget_show (GTK_WIDGET(label37));
+	gtk_box_pack_start (hbox21, GTK_WIDGET(label37), FALSE, FALSE, 0);
+
+	auto file_type_om =  GTK_COMBO_BOX_TEXT(gtk_combo_box_text_new());
+	//gtk_widget_show (GTK_WIDGET(file_type_om));
+	gtk_box_pack_start (hbox21, GTK_WIDGET(file_type_om), TRUE, TRUE, 0);
+	g_object_set_data(G_OBJECT(dialog_), "file_type_om", file_type_om);
+
+
+        fill_string_option_menu (GTK_COMBO_BOX(file_type_om), ftypes);
+	//gtk_widget_show (GTK_WIDGET(right_options_vbox));
+	//gtk_widget_show (GTK_WIDGET(center_options_vbox));
+	//gtk_widget_show (GTK_WIDGET(left_options_vbox));
+        auto closeButton = gtk_c::dialog_button(NULL, _("Close"));
+	gtk_box_pack_start (vbox7b, GTK_WIDGET(closeButton), FALSE, FALSE, 0);
+        g_signal_connect(G_OBJECT (closeButton), "clicked", 
+		BUTTON_CALLBACK(Type::onCloseDetails), (void *)dialog_);
+        
+
+        gtk_widget_show_all(GTK_WIDGET(vbox7b));
+        auto window = GTK_DIALOG(gtk_dialog_new_with_buttons(_("Details"), dialog_, GTK_DIALOG_DESTROY_WITH_PARENT, NULL));
+        auto contentArea = GTK_BOX(gtk_dialog_get_content_area (window));
+	gtk_box_pack_start (contentArea, GTK_WIDGET(vbox7b), FALSE, FALSE, 0);
+        gtk_widget_show_all(GTK_WIDGET(contentArea));
+
+
+        return GTK_WIDGET(window);
+    }
+
     void createDialog_(const gchar *path){
         gchar *default_path=NULL;
         if (path) default_path = g_strdup(path);
@@ -238,103 +357,17 @@ private:
 			  (gpointer)filter_text_help);
 	
 
-	auto hbox17 = gtk_c::hboxNew (FALSE, 0);
-	gtk_widget_show (GTK_WIDGET(hbox17));
-	gtk_box_pack_start (vbox7a, GTK_WIDGET(hbox17), TRUE, FALSE, 0);
-
-	auto left_options_vbox = gtk_c::vboxNew (FALSE, 0);
-	gtk_box_pack_start (hbox17, GTK_WIDGET(left_options_vbox), FALSE, FALSE, 0);
-	auto center_options_vbox = gtk_c::vboxNew (FALSE, 0);
-	gtk_box_pack_start (hbox17, GTK_WIDGET(center_options_vbox), FALSE, FALSE, 0);
-	auto right_options_vbox = gtk_c::vboxNew (FALSE, 0);
-	gtk_box_pack_start (hbox17, GTK_WIDGET(right_options_vbox), FALSE, FALSE, 0);
-
-	/// option -r "recursive"
-	gtk_toggle_button_set_active(add_option_spin(left_options_vbox, "recursive", NULL, _("Recursive"), 0), default_recursive);
-
-	/// option -D "recursiveH"
-	gtk_toggle_button_set_active(add_option_spin(left_options_vbox, "recursiveH", NULL, _("Find hidden files and directories"), 0), default_recursiveH);
-
-	/// option -a "xdev"
-	gtk_toggle_button_set_active(add_option_spin(left_options_vbox, "xdev", NULL, _("Stay on single filesystem"), 0), default_xdev);
-
-	/// option "upper_limit_spin" (only in gtk dialog_)
-	text = g_strdup_printf("%s (%s)", _("Results"), _("Upper limit"));
-	add_option_spin(left_options_vbox, NULL, "upper_limit_spin", text, result_limit);
-	g_free(text);
-
-	// option -s +KByte "size_greater", "size_greater_spin"
-	text = g_strdup_printf("%s (%s)", _("At Least"), _("kBytes"));
-	add_option_spin(center_options_vbox, "size_greater", "size_greater_spin", text, size_greater);
-	g_free(text);
-	
-	// option -s -KByte "size_smaller", "size_smaller_spin"
-	text = g_strdup_printf("%s (%s)", _("At Most"), _("kBytes"));
-	add_option_spin(center_options_vbox, "size_smaller", "size_smaller_spin", text, size_smaller);
-	g_free(text);
-
-	auto slist = get_user_slist();
-	// option -u uid "uid" "uid_combo"
-	add_option_combo(center_options_vbox, "uid", "uid_combo", _("User"), slist);
-	slist = free_string_slist(slist);
-
-	// option -g gid "gid" "gid_combo"
-	slist = get_group_slist();
-	add_option_combo(center_options_vbox, "gid", "gid_combo", _("Group"), slist);
-	slist = free_string_slist(slist);
-	
-	// option -o octal "octal_p" "permissions_entry"
-	add_option_entry(center_options_vbox, "octal_p", "permissions_entry", _("Octal Permissions"), "0666");
-	auto entry = GTK_ENTRY(g_object_get_data(G_OBJECT(dialog_), "permissions_entry"));
-	gtk_widget_set_size_request (GTK_WIDGET(entry), 75, -1);
-	
-	// option -p suid | exe 
-	add_option_radio2(center_options_vbox, "suidexe", "suid_radio", "exe_radio", _("SUID"), _("Executable"));
-
-	
-	// option -M -A -C
-	radio_t *radio_p = create_radios(right_options_vbox);
-	// radio_p freed on destroy event for dialog_.
-
-	// option -k minutes "last_minutes", "last_minutes_spin"
-	radio_p->toggle[0] = add_option_spin(right_options_vbox, "last_minutes", "last_minutes_spin", _("Minutes"), last_minutes);
-	g_signal_connect (G_OBJECT (radio_p->toggle[0]), "toggled", 
-		BUTTON_CALLBACK(Type::sensitivize_radio), radio_p);
-	
-       // option -h hours "last_hours", "last_hours_spin"
-	radio_p->toggle[1] = add_option_spin(right_options_vbox, "last_hours", "last_hours_spin", _("Hours"), last_hours);
-	g_signal_connect (G_OBJECT (radio_p->toggle[1]), "toggled", 
-	    BUTTON_CALLBACK(Type::sensitivize_radio), radio_p);
-	
-	// option -d days "last_days", "last_days_spin"
-	radio_p->toggle[2] = add_option_spin(right_options_vbox, "last_days", "last_days_spin", _("Days"), last_days);
-	    //gtk_box_pack_start (GTK_BOX (topPaneHbox), GTK_WIDGET(check), FALSE, FALSE, 0);
-	    g_signal_connect (G_OBJECT (radio_p->toggle[2]), "toggled", 
-		BUTTON_CALLBACK(Type::sensitivize_radio), radio_p);
-	
-	// option -m months "last_months", "last_months_spin"
-	radio_p->toggle[3] = add_option_spin(right_options_vbox, "last_months", "last_months_spin", _("Months"), last_months);
-	g_signal_connect (G_OBJECT (radio_p->toggle[3]), "toggled", 
-	    BUTTON_CALLBACK(Type::sensitivize_radio), radio_p);
-	
-	 ///////////
-
-     
-	auto hbox21 = gtk_c::hboxNew (FALSE, 0);
-	gtk_widget_show (GTK_WIDGET(hbox21));
-	gtk_box_pack_start (left_options_vbox, GTK_WIDGET(hbox21), TRUE, FALSE, 0);
-
-	auto label37 = GTK_LABEL(gtk_label_new (_("File type : ")));
-	gtk_widget_show (GTK_WIDGET(label37));
-	gtk_box_pack_start (hbox21, GTK_WIDGET(label37), FALSE, FALSE, 0);
-
-	auto file_type_om =  GTK_COMBO_BOX_TEXT(gtk_combo_box_text_new());
-	gtk_widget_show (GTK_WIDGET(file_type_om));
-	gtk_box_pack_start (hbox21, GTK_WIDGET(file_type_om), TRUE, TRUE, 0);
-	g_object_set_data(G_OBJECT(dialog_), "file_type_om", file_type_om);
-
-
-        fill_string_option_menu (GTK_COMBO_BOX(file_type_om), ftypes);
+        ////////////   advanced options... /////////////////////////
+	auto advancedDialog = advancedOptions();
+        auto advancedButton = gtk_c::toggle_button(NULL, _("Details"));
+        g_object_set_data(G_OBJECT(dialog_), "advancedButton", advancedButton);
+        g_object_set_data(G_OBJECT(dialog_), "advancedDialog", advancedDialog);
+	gtk_box_pack_start (vbox7a, GTK_WIDGET(advancedButton), TRUE, FALSE, 5);
+	g_signal_connect (advancedButton,
+			  "clicked", WIDGET_CALLBACK(Type::onDetails), 
+			  (gpointer)dialog_);
+	//gtk_box_pack_start (vbox7a, GTK_WIDGET(advancedBox), TRUE, FALSE, 5);
+        //gtk_widget_show(GTK_WIDGET(advancedBox));
 
 
 	////////////////  grep options.... /////////////////////////
@@ -523,9 +556,6 @@ private:
 	gtk_widget_show(GTK_WIDGET(topPaneHbox));
 	gtk_widget_show (GTK_WIDGET(path_box));
 	gtk_widget_show (GTK_WIDGET(filter_box));
-	gtk_widget_show (GTK_WIDGET(right_options_vbox));
-	gtk_widget_show (GTK_WIDGET(center_options_vbox));
-	gtk_widget_show (GTK_WIDGET(left_options_vbox));
 	gtk_widget_show (GTK_WIDGET(grep_box));
 	gtk_widget_show (GTK_WIDGET(vbox13));
 	gtk_widget_show (GTK_WIDGET(hbox28));
@@ -682,10 +712,11 @@ private:
             gtk_widget_grab_focus (GTK_WIDGET(path_entry));
         }
 
-	gtk_widget_show_all(GTK_WIDGET(dialog_));
+	gtk_widget_show(GTK_WIDGET(dialog_));
         // XXX: line count option is not correctly processed: 
         //        needs alternate processing method.
-        gtk_widget_hide(GTK_WIDGET(line_count));
+        //gtk_widget_hide(GTK_WIDGET(line_count));
+        //gtk_widget_show(GTK_WIDGET(advancedBox));
 	
 	return;
     }

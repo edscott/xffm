@@ -1,0 +1,3 @@
+#define xffm_VERSION_MAJOR @xffm_VERSION_MAJOR@
+#define xffm_VERSION_MINOR @xffm_VERSION_MINOR@
+#define PREFIX "@CMAKE_INSTALL_PREFIX@"

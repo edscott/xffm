@@ -120,6 +120,24 @@ public:
     }
 
     static void
+    onCloseDetails (GtkWidget * button, gpointer data) {
+        auto advancedButton = GTK_TOGGLE_BUTTON(g_object_get_data(G_OBJECT(data), "advancedButton"));
+        auto advancedDialog = GTK_WIDGET(g_object_get_data(G_OBJECT(data), "advancedDialog"));
+        gtk_widget_hide(advancedDialog);
+        gtk_toggle_button_set_active(advancedButton, FALSE);
+    }
+
+    static void
+    onDetails (GtkWidget * button, gpointer data) {
+        auto advancedDialog = GTK_WIDGET(g_object_get_data(G_OBJECT(data), "advancedDialog"));
+        if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(button))){
+            gtk_widget_show_all(advancedDialog);
+        } else {
+            gtk_widget_hide(advancedDialog);
+        }
+    }
+
+    static void
     onCancelButton (GtkWidget * button, gpointer data) {
 	TRACE("fixme: signals::onCancelButton\n");
         cancel_all(data);

@@ -8,17 +8,8 @@ set(ENV{PKG_CONFIG_PATH}  "/usr/local/lib/pkgconfig")
 list(APPEND CMAKE_MODULE_PATH 
     "${PROJECT_SOURCE_DIR}/src/cmake")
 
-find_package(PkgConfig REQUIRED)
-find_package(GTK3 3.22.17 REQUIRED)
-find_package(X11 REQUIRED)
-find_package(TUBO 5.0.16 REQUIRED)
-
-# configure header file
-configure_file(
-    "${PROJECT_SOURCE_DIR}/config.h.cmake"
-    "${PROJECT_BINARY_DIR}/config.h"
-    )
 include_directories(
+    "../common/"
     "${PROJECT_SOURCE_DIR}"
     "${PROJECT_BINARY_DIR}" 
     "${GTK3_INCLUDE_DIRS}"

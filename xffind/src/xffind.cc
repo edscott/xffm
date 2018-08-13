@@ -4,7 +4,7 @@
  */
 
 #define XFFIND_CC
-#include  "config.h"
+#include  "../config.h"
 
 
 
@@ -38,7 +38,7 @@
 # include <sys/resource.h>
 #endif
 
-#include "../intl.h"
+#include "intl.h"
 
 # undef TRACE
 # define TRACE(...)   { (void)0; }
