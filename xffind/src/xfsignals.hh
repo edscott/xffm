@@ -35,6 +35,7 @@ typedef struct fgrData_t{
     gint resultLimitCounter;
     GSList *findList;
     gchar **argument;
+    gboolean done;
 }fgrData_t;
 
 static GHashTable *controllerHash = NULL;
@@ -114,6 +115,7 @@ public:
         GtkWidget *dialog = GTK_WIDGET(data);
         gtk_widget_hide(dialog);
         while (gtk_events_pending()) gtk_main_iteration();
+        gtk_main_quit();
         exit(1);
     }
 
@@ -136,10 +138,17 @@ public:
     }
 
     static gint
+    onCloseEvent (GtkWidget * widget, GdkEventKey * event, gpointer data) {
+        onCloseButton (NULL, data);
+        return FALSE;
+    }
+
+    static gint
     on_key_release (GtkWidget * widget, GdkEventKey * event, gpointer data) {
-        const gchar *text = gtk_entry_get_text(GTK_ENTRY(widget));
         gboolean active = FALSE;
+	gchar *text = util_c::compact_line(gtk_entry_get_text(GTK_ENTRY(widget)));
         if (text && strlen(text)) active = TRUE;
+        g_free(text);
         //std::cerr<<"on_key_release: "<< text << " active: " << active << "\n";
         if (data){
             gtk_widget_set_sensitive(GTK_WIDGET(data), active);
@@ -250,7 +259,9 @@ private:
     }
 
     static gboolean
-    Cleanup (void *dialog) {
+    Cleanup (void *data) {
+       fgrData_t *Data = (fgrData_t *)data;
+       GtkWindow *dialog = Data->dialog;
        if (g_hash_table_size(controllerHash) == 0){
             GtkWidget *cancel = GTK_WIDGET(g_object_get_data(G_OBJECT(dialog), "cancel_button"));
             gtk_widget_set_sensitive(cancel, FALSE);
@@ -269,7 +280,11 @@ private:
        } else {
 	    gtk_widget_set_sensitive(GTK_WIDGET(edit_button), FALSE);
        }
-       return FALSE;
+       if (Data->done) {
+           freeFgrData(Data);
+           return FALSE;
+       }
+       return TRUE;
     }
 
     static void
@@ -277,7 +292,7 @@ private:
        DBG("forkCleanup\n");
         fgrData_t *Data = (fgrData_t *)data;
         g_hash_table_remove(controllerHash, GINT_TO_POINTER(Data->pid));
-        g_timeout_add(1, Cleanup, (void *)Data->dialog);
+        g_timeout_add_seconds(1, Cleanup, (void *)Data);
         
     }
 
@@ -348,8 +363,7 @@ private:
                 g_slist_free(lastFind);
                 // assign new find results
                 lastFind = Data->findList;
-                // Free fgrData_t *Data: wait 10 seconds to avoid any race with cleanup function.
-                g_timeout_add(10, freeFgrData, (void *)Data);
+                Data->done = TRUE;
                 list = lastFind;
                 for (;list && list->data; list=list->next){
                     DBG("last find: %s\n", (gchar *)list->data);
@@ -420,6 +434,7 @@ private:
         }
         fgrData_t *Data = (fgrData_t *)calloc(1,sizeof(fgrData_t));
         Data->dialog = dialog;
+        Data->done = FALSE; // (This is redundant with calloc, here just for clarity).
 
 
         GtkWidget *cancel = GTK_WIDGET(g_object_get_data(G_OBJECT(dialog), "cancel_button"));
@@ -429,9 +444,6 @@ private:
         /* get the parameters set by the user... *****/
         get_arguments(path, Data);
 
-
-        gchar *message = g_strconcat( _("Searching..."), "\n", NULL);
-        print_c::print_icon(diagnostics, "edit-find", "tag/green", message);
 
         /*
     // not here: FIXME    
@@ -458,6 +470,9 @@ private:
             command = g;
         }
         g_hash_table_replace(controllerHash, GINT_TO_POINTER(Data->pid), command);
+        print_c::print_icon(diagnostics, "system-search", "tag/green", g_strconcat( _("Searching..."), "\n", NULL));
+        print_c::print_icon(diagnostics, "system-run", "tag/bold", 
+                g_strdup_printf("%s: \"%s\"\n",_("Searching..."), (gchar *) command));
 
     }
 

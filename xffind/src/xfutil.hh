@@ -735,8 +735,8 @@ public:
         GtkTreeIter iter;
         while(fgets (line, 2047, historyFile) && !feof (historyFile)) {
             if(strchr (line, '\n')) *strchr (line, '\n') = 0;
-            if(strlen (line) == 0) continue;
             gchar *newline = compact_line(line);
+            //if(strlen (line) == 0) continue;
             gtk_tree_store_append (store, &iter, NULL);
             gtk_tree_store_set (store, &iter, 0, newline, -1);
             std::cerr<<"setting tree store value: "<<newline<<"\n";
@@ -764,7 +764,7 @@ public:
             gchar *value;
             gtk_tree_model_get (model, &iter, 0, &value, -1);
             if (strcmp(data, value)==0) {
-                g_free(value); // ?
+                g_free(value); // yeah...
                 found = TRUE;
                 break;
             }

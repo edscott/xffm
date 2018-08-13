@@ -655,8 +655,35 @@ private:
 	gtk_window_set_default_size(GTK_WINDOW (dialog_),  allocation.width+50,  allocation.height+75);
  	
 	gtk_paned_set_position (vpane, 1000);
+
+        g_signal_connect (path_entry,
+			  "activate", BUTTON_CALLBACK(Type::onFindButton), 
+			  (gpointer)dialog_);
+        g_signal_connect (filter_entry,
+			  "activate", BUTTON_CALLBACK(Type::onFindButton), 
+			  (gpointer)dialog_);
+        g_signal_connect (grep_entry,
+			  "activate", BUTTON_CALLBACK(Type::onFindButton), 
+			  (gpointer)dialog_);
+        g_signal_connect (G_OBJECT (dialog_), 
+                "destroy_event",  EVENT_CALLBACK(Type::onCloseEvent), NULL);
+        g_signal_connect (G_OBJECT (dialog_), 
+                "delete_event",  EVENT_CALLBACK(Type::onCloseEvent), NULL);
+
+        if(gtk_entry_get_text(grep_entry) && strlen(gtk_entry_get_text(grep_entry))){
+            gtk_editable_set_position (GTK_EDITABLE(grep_entry), 0);
+            gtk_widget_grab_focus(GTK_WIDGET(grep_entry));
+
+        } else if(gtk_entry_get_text(filter_entry) && strlen(gtk_entry_get_text(filter_entry))){
+            gtk_editable_set_position (GTK_EDITABLE(filter_entry), 0);
+            gtk_widget_grab_focus (GTK_WIDGET(filter_entry));
+        } else {
+            gtk_editable_set_position (GTK_EDITABLE(path_entry), 0);
+            gtk_widget_grab_focus (GTK_WIDGET(path_entry));
+        }
+
 	gtk_widget_show_all(GTK_WIDGET(dialog_));
-        // FIXME: line count option is not correctly processed: 
+        // XXX: line count option is not correctly processed: 
         //        needs alternate processing method.
         gtk_widget_hide(GTK_WIDGET(line_count));
 	
