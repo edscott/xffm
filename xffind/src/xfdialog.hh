@@ -263,7 +263,8 @@ private:
         
 
         gtk_widget_show_all(GTK_WIDGET(vbox7b));
-        auto window = GTK_DIALOG(gtk_dialog_new_with_buttons(_("Details"), dialog_, GTK_DIALOG_DESTROY_WITH_PARENT, NULL));
+        auto window = GTK_DIALOG(gtk_dialog_new_with_buttons(_("Details"), dialog_, 
+                    GTK_DIALOG_DESTROY_WITH_PARENT, _("Ok"), GTK_RESPONSE_ACCEPT, NULL));
         auto contentArea = GTK_BOX(gtk_dialog_get_content_area (window));
 	gtk_box_pack_start (contentArea, GTK_WIDGET(vbox7b), FALSE, FALSE, 0);
         gtk_widget_show_all(GTK_WIDGET(contentArea));

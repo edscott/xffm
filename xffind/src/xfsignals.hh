@@ -432,7 +432,7 @@ private:
         gchar *path = g_strdup(gtk_entry_get_text(entry));
         /* tilde expansion */
         if(path[0] == '~'){
-            gchar *t = g_strconcat(g_get_home_dir(),"/", path+1);
+            gchar *t = g_strconcat(g_get_home_dir(),"/", path+1, NULL);
             g_free(path);
             path = t;
         }

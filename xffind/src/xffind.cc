@@ -4,7 +4,9 @@
  */
 
 #define XFFIND_CC
-#include  "../config.h"
+// FIXME: this is a hack, depends on build directory name...
+// #include  "../build/config.h"
+#include  "config.h"
 
 
 
