@@ -34,7 +34,6 @@ include_directories(
 
 #    "${PROJECT_SOURCE_DIR}"
 
-#add_subdirectory(xftubo)
 #add_subdirectory(xffgr)
 add_subdirectory(xffind)
 

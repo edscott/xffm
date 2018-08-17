@@ -1,7 +1,6 @@
 #ifndef XFRUN_HH
 #define XFRUN_HH
 
-#include <tubo.h>
 
 #include <string.h>
 #include <stdlib.h>
@@ -11,6 +10,8 @@
 #include <gtk/gtk.h>
 #include "xfutil.hh"
 #include "xfprint.hh"
+#include <tubo.h>
+#include "xftubo.hh"
         
 
 static pthread_mutex_t fork_mutex_=PTHREAD_MUTEX_INITIALIZER;       
@@ -22,6 +23,7 @@ template <class Type>
 class Run {
     using print_c = Print<double>;
     using util_c = Util<double>;
+    using tubo_c = Tubo<double>;
 private:
 
     static void
@@ -70,7 +72,7 @@ private:
             errno = 0;
             id = strtol(s, NULL, 10);
             if (!errno){
-                pid = Tubo_child((pid_t) id);
+                pid = tubo_c::getChild((pid_t) id);
             }
         }
 #ifdef DEBUG_TRACE
@@ -108,14 +110,16 @@ public:
             return 0;
         }
         */
-        pid_t pid = Tubo_fork (fork_function,(gchar **)arguments,
+
+        pid_t pid = tubo_c::Fork (fork_function,(gchar **)arguments,
                                     NULL, // stdin
                                     stdout_f,
                                     stderr_f,
                                     finish_f,
                                     data, // XXX view_v,
                                     flags);
-        pid_t grandchild=Tubo_child (pid);
+        pid_t grandchild=tubo_c::getChild (pid);
+
         push_hash(grandchild, g_strdup(command));
         g_free(command);
         return pid;
@@ -137,14 +141,15 @@ public:
             return 0;
         }
         */
-        pid_t pid = Tubo_fork (fork_function,(gchar **)arguments,
+
+        pid_t pid = tubo_c::Fork (fork_function,(gchar **)arguments,
                                     NULL, // stdin
                                     run_operate_stdout, //stdout_f,
                                     run_operate_stderr, //stderr_f
                                     (scrollUp)?scrollToTop:fork_finished_function,
                                     textview, // XXX view_v,
                                     flags);
-        pid_t grandchild=Tubo_child (pid);
+        pid_t grandchild=tubo_c::getChild (pid);
 #ifdef DEBUG_TRACE        
         print_c::print_icon(textview, "system-run", "tag/green", g_strdup_printf("<%d> %s\n", grandchild, command));
 #else
