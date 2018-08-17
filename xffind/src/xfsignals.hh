@@ -368,9 +368,7 @@ private:
                     g_strdup_printf (
                             ngettext ("Found %d match", "Found %d matches", 
                                 Data->resultLimitCounter), Data->resultLimitCounter);
-                gchar *fgr = g_find_program_in_path("fgr");
-                gchar *m = g_strdup_printf(_("%s Finished : %s"), fgr, plural_text);
-                g_free(fgr);
+                gchar *m = g_strdup_printf(_("%s Finished : %s"), xffindProgram, plural_text);
                 g_free(plural_text);
                 gchar *g = g_strdup_printf("%c[31m%s\n",27, m);
                 print_c::print_icon (diagnostics, "process-stop", g);
@@ -510,7 +508,8 @@ private:
         }
         
         /* the rest */
-        Data->argument[i++] = g_strdup("fgr");
+        Data->argument[i++] = g_strdup(xffindProgram);
+        Data->argument[i++] = g_strdup("--fgr");
         Data->argument[i++] = g_strdup("-v"); // (verbose output) 
         if(gtk_toggle_button_get_active ((GtkToggleButton *) 
                     g_object_get_data(G_OBJECT(dialog), "recursive")))

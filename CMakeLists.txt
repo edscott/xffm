@@ -4,6 +4,7 @@ project (xffm C CXX)
 # Version info
 set(xffm_VERSION_MAJOR 0)
 set(xffm_VERSION_MINOR 3)
+set(CMAKE_CXX_FLAGS "-ggdb")
 set(ENV{PKG_CONFIG_PATH}  "/usr/local/lib/pkgconfig")
 include(GNUInstallDirs)
 # configure header file
@@ -23,18 +24,15 @@ find_package(PkgConfig REQUIRED)
 find_package(GLIB 2.52.3 REQUIRED)
 find_package(GTK3 3.22.17 REQUIRED)
 find_package(X11 REQUIRED)
-find_package(TUBO 5.0.16 REQUIRED)
 
 
 include_directories(
     "common/"
     "${PROJECT_BINARY_DIR}" 
-    "${GTK3_INCLUDE_DIRS}"
-    "${TUBO_INCLUDE_DIRS}"   )
+    "${GTK3_INCLUDE_DIRS}"   )
 
 #    "${PROJECT_SOURCE_DIR}"
 
-#add_subdirectory(xffgr)
 add_subdirectory(xffind)
 
 

@@ -4,8 +4,6 @@
  */
 
 #define XFFIND_CC
-// FIXME: this is a hack, depends on build directory name...
-// #include  "../build/config.h"
 #include  "config.h"
 
 
@@ -48,11 +46,14 @@
 # undef DBG
 # define DBG(...)  fprintf(stderr, "DBG> "); fprintf(stderr, __VA_ARGS__);
 
+static const gchar *xffindProgram;
 
+#include "xffgr.hh"
 #include "xffind.hh"
 #include "xfsignals.hh"
 int
 main (int argc, char *argv[]) {
+    xffindProgram = argv[0];
     /* start loading required dynamic libraries here... */
 #ifdef ENABLE_NLS
     /* this binds rfm domain: */
@@ -72,6 +73,11 @@ main (int argc, char *argv[]) {
 
     TRACE ("call to setlocale");
     setlocale (LC_ALL, "");
+    if (argv[1] && strcmp(argv[1],"--fgr")==0){
+        xf::Fgr<double> *fgr = new(xf::Fgr<double>);
+        fgr->main(argc, argv);
+        exit(1);
+    }
     TRACE ("call to gtk_init");
     gtk_init (&argc, &argv);
     xf::Find<xf::Signals<double>> dialog((const gchar *)argv[1]);
