@@ -225,6 +225,7 @@ static char *token;
 static void *object = NULL;
 
 namespace xf {
+namespace find {
 template <class Type>
 class Fgr {
 public:
@@ -981,6 +982,7 @@ private:
         return (pass);
     }
 };
+} // namespace find
 } // namespace xf
 
 

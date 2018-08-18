@@ -5,10 +5,12 @@
 #include "xfgtk.hh"
 #include "xftooltip.hh"
 #include "xfutil.hh"
-#include "xfsignals.hh"
+#include "signals.hh"
 #include "types.h"
 
 namespace xf
+{
+namespace find
 {
 
 
@@ -1159,6 +1161,7 @@ private:
     
 
 };
+} // namespace find
 } // namespace xf
 #endif
 

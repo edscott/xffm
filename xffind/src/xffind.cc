@@ -48,9 +48,9 @@
 
 static const gchar *xffindProgram;
 
-#include "xffgr.hh"
-#include "xffind.hh"
-#include "xfsignals.hh"
+#include "fgr.hh"
+#include "find.hh"
+#include "signals.hh"
 int
 main (int argc, char *argv[]) {
     xffindProgram = argv[0];
@@ -74,13 +74,13 @@ main (int argc, char *argv[]) {
     TRACE ("call to setlocale");
     setlocale (LC_ALL, "");
     if (argv[1] && strcmp(argv[1],"--fgr")==0){
-        xf::Fgr<double> *fgr = new(xf::Fgr<double>);
+        xf::find::Fgr<double> *fgr = new(xf::find::Fgr<double>);
         fgr->main(argc, argv);
         exit(1);
     }
     TRACE ("call to gtk_init");
     gtk_init (&argc, &argv);
-    xf::Find<xf::Signals<double>> dialog((const gchar *)argv[1]);
+    xf::find::Find<xf::find::Signals<double>> dialog((const gchar *)argv[1]);
     //g_idle_add(set_up_dialog, path);
     gtk_main();
 

@@ -41,8 +41,8 @@ typedef struct fgrData_t{
 static GHashTable *controllerHash = NULL;
 static GSList *lastFind = NULL;
 
-namespace xf
-{
+namespace xf {
+namespace find {
 
 
 template <class Type>
@@ -750,5 +750,6 @@ private:
 
 };
 
-}
+} // namespace find
+} // namespace xf
 #endif

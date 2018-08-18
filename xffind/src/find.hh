@@ -1,7 +1,9 @@
 #ifndef XFFIND__HH
 # define XFFIND__HH
-#include "xfdialog.hh"
+#include "dialog.hh"
 namespace xf
+{
+namespace find
 {
 
 
@@ -22,5 +24,6 @@ public:
         g_free(fullPath);
     }
 };
-}
+} // namespace find
+} // namespace xf
 #endif
