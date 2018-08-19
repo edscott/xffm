@@ -75,7 +75,11 @@ main (int argc, char *argv[]) {
     gtk_init (&argc, &argv);
 //    xf::Term<xf::TermSignals<double>> dialog((const gchar *)argv[1]);
 //    xf::term::Term<double> dialog((const gchar *)argv[1]);
-    xf::Term<double> dialog((const gchar *)argv[1]);
+//    xf::termDialog<double>("Term","utilities-terminal") dialog((const gchar *)argv[1]);
+ //   xf::termDialog<double>("Term","utilities-terminal") dialog((const gchar *)argv[1]);
+ //   xf::termDialog<double>("Term","utilities-terminal") ;
+    xf::termDialog<double> term("Term","utilities-terminal");
+    term.createDialog("/home");
     gtk_main();
 
     return 0;

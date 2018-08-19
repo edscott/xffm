@@ -22,23 +22,21 @@ class termDialog : public Dialog<Type> {
     using tooltip_c = Tooltip<double>;
  //   using dialog_c = xfDialog<double>;
  //
-public:
-   /* GtkWindow *createXFDialog_(const gchar *path){
-        gchar *default_path=NULL;
-        if (path) default_path = g_strdup(path);
-	return mkDialog();
-    }*/
 private:
 
  
 
     ///
 public:
+    termDialog(const gchar *title, const gchar *icon):Dialog<Type>(title, icon){
+	fprintf(stderr, "%s %s\n", title, icon);
+    }
     void createDialog(const gchar *path){
         gchar *default_path=NULL;
         if (path) default_path = g_strdup(path);
 DBG("1\n");
-	dialog_ = this->mkDialog("Term","utilities-terminal" );
+	GtkWindow *dialog = this->dialog();
+	//GtkWindow *dialog = this->mkDialog("Term","utilities-terminal" );
 DBG("12\n");
 
 	// create view page box
@@ -83,8 +81,8 @@ DBG("162\n");
 DBG("17\n");
 	gtk_box_pack_start (page_child, GTK_WIDGET(buttonSpace), FALSE, FALSE, 0);
 DBG("171\n");
-
-	gtk_widget_show_all(GTK_WIDGET(dialog_));
+	gtk_container_add(GTK_CONTAINER(dialog) , GTK_WIDGET(page_child));
+	gtk_widget_show_all(GTK_WIDGET(dialog));
 DBG("172\n");
 	
     }
@@ -239,7 +237,6 @@ DBG("172\n");
     }
 
 private:
-    GtkWindow *dialog_;
 
 
 };
