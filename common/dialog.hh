@@ -27,7 +27,17 @@ protected:
     GtkWindow *dialog(){
 	return dialog_;
     }
+    /*void setSize(gint w, gint h){
+	gint minW, natW;
+	gint minH, natH;
+	gtk_widget_get_preferred_width (GTK_WIDGET(dialog_), &minW, &natW);
+	gtk_widget_get_preferred_height (GTK_WIDGET(dialog_), &minH, &natH);
+	DBG("minimum_width=%d natural_width=%d\n", minW,natW);
+	DBG("minimum_height=%d natural_height=%d\n", minH,natH);
 
+	gtk_widget_set_size_request (GTK_WIDGET(dialog_), w, h);
+    }*/
+	
     void setDialogTitle(const gchar *title){
 	gtk_window_set_title (dialog_, title);
     }

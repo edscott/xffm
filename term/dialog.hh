@@ -30,6 +30,10 @@ private:
 public:
     termDialog(const gchar *title, const gchar *icon):Dialog<Type>(title, icon){
 	fprintf(stderr, "%s %s\n", title, icon);
+	gtk_widget_set_size_request (GTK_WIDGET(this->dialog()),400,200);
+	gtk_window_set_default_size (this->dialog(),600 ,400);
+
+	//this->setSize(600,400);
     }
     void createDialog(const gchar *path){
         gchar *default_path=NULL;
