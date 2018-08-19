@@ -42,11 +42,9 @@ static GHashTable *controllerHash = NULL;
 static GSList *lastFind = NULL;
 
 namespace xf {
-namespace find {
-
 
 template <class Type>
-class Signals: public Run<Type>{
+class findSignals: public Run<Type>{
     using gtk_c = Gtk<double>;
     using print_c = Print<double>;
     using run_c = Run<double>;
@@ -750,6 +748,5 @@ private:
 
 };
 
-} // namespace find
 } // namespace xf
 #endif

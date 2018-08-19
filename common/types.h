@@ -2,6 +2,7 @@
 # define TYPES_H
 
 
+#define SIZE_CALLBACK(X)  G_CALLBACK((void (*)(GtkWidget *,GdkRectangle *,gpointer)) X)
 #define EVENT_CALLBACK(X)  G_CALLBACK((gint (*)(GtkWidget *,GdkEventKey *,gpointer)) X)
 #define BUTTON_CALLBACK(X)  G_CALLBACK((void (*)(GtkButton *,gpointer)) X)
 #define WIDGET_CALLBACK(X)  G_CALLBACK((void (*)(GtkWidget *,gpointer)) X)

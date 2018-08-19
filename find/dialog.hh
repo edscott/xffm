@@ -11,8 +11,6 @@
 
 namespace xf
 {
-namespace find
-{
 
 
 template <class Type>
@@ -1162,7 +1160,6 @@ private:
     
 
 };
-} // namespace find
 } // namespace xf
 #endif
 

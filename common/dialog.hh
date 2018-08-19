@@ -1,6 +1,5 @@
 #ifndef XF_DIALOG
 #define XF_DIALOG
-
 namespace xf {
 template <class Type>
 class Dialog {
@@ -15,6 +14,9 @@ public:
     }*/
     Dialog(const gchar *title, const gchar *icon){
 	dialog_ = GTK_WINDOW(gtk_window_new (GTK_WINDOW_TOPLEVEL));
+
+	gtk_widget_get_preferred_width (GTK_WIDGET(dialog_), &dialogMinW_, &dialogNatW_);
+	gtk_widget_get_preferred_height (GTK_WIDGET(dialog_), &dialogMinH_, &dialogNatH_);
 	gtk_window_set_type_hint(dialog_, GDK_WINDOW_TYPE_HINT_DIALOG);
 	setWindowMaxSize(dialog_);
 	gtk_window_set_position (dialog_, GTK_WIN_POS_MOUSE);
@@ -30,8 +32,6 @@ protected:
     /*void setSize(gint w, gint h){
 	gint minW, natW;
 	gint minH, natH;
-	gtk_widget_get_preferred_width (GTK_WIDGET(dialog_), &minW, &natW);
-	gtk_widget_get_preferred_height (GTK_WIDGET(dialog_), &minH, &natH);
 	DBG("minimum_width=%d natural_width=%d\n", minW,natW);
 	DBG("minimum_height=%d natural_height=%d\n", minH,natH);
 
@@ -65,7 +65,10 @@ private:
 	geometry.max_height = h_return -25;
 	gtk_window_set_geometry_hints (dialog, GTK_WIDGET(dialog), &geometry, GDK_HINT_MAX_SIZE);
     }
+
+private:
     GtkWindow *dialog_;
+    gint dialogMinW_, dialogNatW_, dialogMinH_, dialogNatH_;
 };
 }
 

@@ -3,9 +3,6 @@
 #include "dialog.hh"
 namespace xf
 {
-namespace find
-{
-
 
 template <class Type>
 class Find: protected FindDialog<Type> {
@@ -24,6 +21,5 @@ public:
         g_free(fullPath);
     }
 };
-} // namespace find
 } // namespace xf
 #endif

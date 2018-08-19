@@ -12,6 +12,43 @@
 
 namespace xf 
 {
+template <class Type>
+class termSignals{
+public:
+    static void onSizeAllocate (GtkWidget    *widget,
+		   GdkRectangle *allocation,
+		   gpointer      data){
+	DBG("SIZE allocate\n");
+	auto vpane = GTK_PANED(data);
+	gint max, current;
+	g_object_get(G_OBJECT(vpane), "max-position", &max, NULL);
+	g_object_get(G_OBJECT(vpane), "position", &current, NULL);
+	DBG(">> max=%d, current=%d dialogw=%d dialogH+%d\n",
+		max, current, allocation->width, allocation->height);
+	gint oldMax = 
+	    GPOINTER_TO_INT(g_object_get_data(G_OBJECT(vpane), "oldMax"));
+	gint oldCurrent = 
+	    GPOINTER_TO_INT(g_object_get_data(G_OBJECT(vpane), "oldCurrent"));
+	if (max != oldMax) {
+	    // window size is changing
+	    DBG("// window size is changing\n");
+	    gdouble ratio = (gdouble)oldCurrent / oldMax;
+	    gint newCurrent = floor(ratio * max);
+	    g_object_set_data(G_OBJECT(vpane), "oldCurrent", GINT_TO_POINTER(newCurrent));
+	    g_object_set_data(G_OBJECT(vpane), "oldMax", GINT_TO_POINTER(max));
+	    gtk_paned_set_position(vpane, newCurrent);
+
+	} else if (current != oldCurrent) {
+	    // pane is resizing
+	    DBG("// pane is resizing\n");
+	    g_object_set_data(G_OBJECT(vpane), "oldCurrent", GINT_TO_POINTER(current));
+	}
+
+
+    }
+private:
+
+};
     
 template <class Type>
 class termDialog : public Dialog<Type> {
@@ -32,7 +69,6 @@ public:
 	fprintf(stderr, "%s %s\n", title, icon);
 	gtk_widget_set_size_request (GTK_WIDGET(this->dialog()),400,200);
 	gtk_window_set_default_size (this->dialog(),600 ,400);
-
 	//this->setSize(600,400);
     }
     void createDialog(const gchar *path){
@@ -50,6 +86,9 @@ DBG("13\n");
 	//FIXME
 	//   page vpane
 	auto vpane = createVPaned(GTK_WIDGET(page_child));
+	g_signal_connect (G_OBJECT (this->dialog()), "size-allocate", 
+		SIZE_CALLBACK(termSignals<Type>::onSizeAllocate), (void *)vpane);
+
 DBG("14\n");
         //     vpane whatever
         /*gtk_container_add (
@@ -71,7 +110,7 @@ DBG("151\n");
 	    g_object_get_data(G_OBJECT(page_child),"hview_box"));
 	gtk_box_pack_start (hview_box, GTK_WIDGET(vpane), TRUE, TRUE, 0);
 DBG("152\n");
-	gtk_paned_set_position (vpane, 1000);
+
 DBG("153\n");
 	// big button box
 	auto big_button_space = createBigButtonSpace();
@@ -86,8 +125,16 @@ DBG("17\n");
 	gtk_box_pack_start (page_child, GTK_WIDGET(buttonSpace), FALSE, FALSE, 0);
 DBG("171\n");
 	gtk_container_add(GTK_CONTAINER(dialog) , GTK_WIDGET(page_child));
-	gtk_widget_show_all(GTK_WIDGET(dialog));
+	gtk_widget_show_all(GTK_WIDGET(page_child));
+	gtk_widget_realize(GTK_WIDGET(dialog));
+	gint max, current;
+	g_object_get(G_OBJECT(vpane), "max-position", &max, NULL);
+	gtk_paned_set_position (vpane, max);
+	g_object_get(G_OBJECT(vpane), "position", &current, NULL);
+	g_object_set_data(G_OBJECT(vpane), "oldCurrent", GINT_TO_POINTER(current));
+	g_object_set_data(G_OBJECT(vpane), "oldMax", GINT_TO_POINTER(max));
 DBG("172\n");
+	gtk_widget_show_all(GTK_WIDGET(dialog));
 	
     }
     GtkBox *createPageBox(void){
@@ -154,6 +201,9 @@ DBG("172\n");
 	 g_object_set_data(G_OBJECT(vpane), "bottom_scrolled_window", bottom_scrolled_window);
 	gtk_paned_pack1 (vpane, GTK_WIDGET(top_scrolled_window), FALSE, TRUE);
 	gtk_paned_pack2 (vpane, GTK_WIDGET(bottom_scrolled_window), TRUE, TRUE);
+
+	g_object_set(G_OBJECT(vpane), "position-set", TRUE, NULL);
+	gint max, current;
 	gtk_widget_show_all(GTK_WIDGET(vpane));
 	return vpane;
 
