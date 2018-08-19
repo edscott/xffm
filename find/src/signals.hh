@@ -1,10 +1,10 @@
 #ifndef SIGNALS__HH
 # define SIGNALS__HH
 
-#include "types.h"
-#include "xfprint.hh"
-#include "xfrun.hh"
-#include "xfutil.hh"
+#include "common/types.h"
+#include "common/print.hh"
+#include "common/run.hh"
+#include "common/util.hh"
 static const gchar *ftypes[] = {
     N_("Regular"),
     N_("Directory"),

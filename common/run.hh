@@ -8,10 +8,9 @@
 
 #include <unistd.h>
 #include <gtk/gtk.h>
-#include "xfutil.hh"
-#include "xfprint.hh"
-#include <tubo.h>
-#include "xftubo.hh"
+#include "util.hh"
+#include "print.hh"
+#include "tubo.hh"
         
 
 static pthread_mutex_t fork_mutex_=PTHREAD_MUTEX_INITIALIZER;       

@@ -1,12 +1,13 @@
 #ifndef XFDIALOG__HH
 # define XFDIALOG__HH
-#include "xficons.hh"
-#include "xfpixbuf.hh"
-#include "xfgtk.hh"
-#include "xftooltip.hh"
-#include "xfutil.hh"
+#include "common/types.h"
+#include "common/icons.hh"
+#include "common/pixbuf.hh"
+#include "common/gtk.hh"
+#include "common/tooltip.hh"
+#include "common/util.hh"
+
 #include "signals.hh"
-#include "types.h"
 
 namespace xf
 {

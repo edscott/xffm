@@ -1,6 +1,6 @@
 #ifndef XFTOOLTIP_HH
 #define XFTOOLTIP_HH
-#include "xfutil.hh"
+#include "util.hh"
 
 static GHashTable *tooltip_text_hash=NULL;
 static GtkWidget  *tt_window = NULL;

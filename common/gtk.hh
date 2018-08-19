@@ -1,6 +1,6 @@
 #ifndef XFGTK_HH
 #define XFGTK_HH
-#include "xfpixbuf.hh"
+#include "pixbuf.hh"
 
 #define BIG_ICON_SIZE 		96 
 #define MEDIUM_ICON_SIZE 	72 

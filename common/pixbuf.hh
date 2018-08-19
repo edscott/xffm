@@ -11,7 +11,7 @@
 #define SIZE_PREVIEW	96
 #define SIZE_TIP	128
 
-#include "xficons.hh"
+#include "icons.hh"
 
 namespace xf
 {

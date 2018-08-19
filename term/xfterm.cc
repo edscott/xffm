@@ -38,22 +38,20 @@
 # include <sys/resource.h>
 #endif
 
-#include "intl.h"
+#include "common/intl.h"
 
 # undef TRACE
 # define TRACE(...)   { (void)0; }
 //# define TRACE(...)  fprintf(stderr, "TRACE> "); fprintf(stderr, __VA_ARGS__);
 # undef DBG
 # define DBG(...)  fprintf(stderr, "DBG> "); fprintf(stderr, __VA_ARGS__);
-
 static const gchar *xftermProgram;
 
-#include "xffgr.hh"
-#include "xffind.hh"
-#include "xfsignals.hh"
+#include "term.hh"
+//#include "signals.hh"
 int
 main (int argc, char *argv[]) {
-    xffindProgram = argv[0];
+    xftermProgram = argv[0];
     /* start loading required dynamic libraries here... */
 #ifdef ENABLE_NLS
     /* this binds rfm domain: */
@@ -75,7 +73,9 @@ main (int argc, char *argv[]) {
     setlocale (LC_ALL, "");
     TRACE ("call to gtk_init");
     gtk_init (&argc, &argv);
-    xf::Lpterm<xf::TermSignals<double>> dialog((const gchar *)argv[1]);
+//    xf::Term<xf::TermSignals<double>> dialog((const gchar *)argv[1]);
+//    xf::term::Term<double> dialog((const gchar *)argv[1]);
+    xf::Term<double> dialog((const gchar *)argv[1]);
     gtk_main();
 
     return 0;

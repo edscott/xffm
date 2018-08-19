@@ -3,12 +3,9 @@
 #include "dialog.hh"
 namespace xf
 {
-namespace term
-{
-
 
 template <class Type>
-class Term: protected TermDialog<Type> {
+class Term: protected termDialog<Type> {
 public:
     Term(const gchar *path){
         gchar *fullPath = NULL;
@@ -20,6 +17,5 @@ public:
         g_free(fullPath);
     }
 };
-} // namespace find
 } // namespace xf
 #endif

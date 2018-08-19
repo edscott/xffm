@@ -9,8 +9,8 @@
 #include <gtk/gtk.h>
 
 #include "types.h"
-#include "xfutil.hh"
-#include "xfpixbuf.hh"
+#include "util.hh"
+#include "pixbuf.hh"
 
 #define MAX_LINES_IN_BUFFER 10000    
 namespace xf

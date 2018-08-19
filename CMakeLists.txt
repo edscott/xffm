@@ -27,12 +27,13 @@ find_package(X11 REQUIRED)
 
 
 include_directories(
-    "common/"
+    "./"
     "${PROJECT_BINARY_DIR}" 
     "${GTK3_INCLUDE_DIRS}"   )
 
 #    "${PROJECT_SOURCE_DIR}"
 
-add_subdirectory(xffind)
+add_subdirectory(find)
+add_subdirectory(term)
 
 

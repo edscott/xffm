@@ -6,9 +6,9 @@
 //#include "util_c.hpp"
 //#include "pixbuf_icons_c.hpp"
 
-#include "xfcairo.hh"
-#include "xfhash.hh"
-#include "xfutil.hh"
+#include "cairo.hh"
+#include "hash.hh"
+#include "util.hh"
 
 #ifndef PREFIX
 # warning "PREFIX not defined: defaulting to /usr/local"

@@ -38,7 +38,6 @@
 # include <sys/resource.h>
 #endif
 
-#include "intl.h"
 
 # undef TRACE
 # define TRACE(...)   { (void)0; }
@@ -47,7 +46,7 @@
 # define DBG(...)  fprintf(stderr, "DBG> "); fprintf(stderr, __VA_ARGS__);
 
 static const gchar *xffindProgram;
-
+#include "common/intl.h"
 #include "fgr.hh"
 #include "find.hh"
 #include "signals.hh"
