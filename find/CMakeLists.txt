@@ -1,5 +1,5 @@
     
-add_executable(xffind src/xffind.cc)
+add_executable(xffind xffind.cc)
 target_link_libraries(xffind 
     ${GTK3_LIBRARIES}
     ${X11_LIBRARIES}
