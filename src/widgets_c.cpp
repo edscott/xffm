@@ -211,12 +211,12 @@ widgets_c::pack(void){
     gtk_widget_show (button_space);
 
     gtk_widget_show (page_child);
-
+    
     // Insert page into notebook:
     gint next_position = gtk_notebook_get_current_page(GTK_NOTEBOOK(notebook))+1;
     gtk_notebook_insert_page (GTK_NOTEBOOK(notebook),
             page_child, 
-            page_label_box, 
+            this->pageLabelBox(), 
             next_position);
     gtk_notebook_set_tab_reorderable (GTK_NOTEBOOK(notebook), page_child, TRUE);
     gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), next_position);
