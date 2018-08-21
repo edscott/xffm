@@ -29,9 +29,6 @@ public:
     }
     
     GtkBox *vButtonBox(void){ return vButtonBox_;}
-    void insertVButtonBox(GtkBox *hViewBox){
-	gtk_box_pack_start (hViewBox, GTK_WIDGET(vButtonBox_), FALSE, FALSE, 0);
-    }
    
 private:
     GtkBox *vButtonBox_;

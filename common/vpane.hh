@@ -38,10 +38,6 @@ public:
     }
     
     GtkPaned *vpane(void){ return vpane_;}
-    void insertVPane(GtkBox *hViewBox){
-	gtk_box_pack_start (hViewBox, GTK_WIDGET(vpane_), TRUE, TRUE, 0);
-    }
-
 
 private:
     GtkPaned *vpane_;

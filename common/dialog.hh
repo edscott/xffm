@@ -75,7 +75,7 @@ public:
 	setWindowMaxSize(dialog_);
 	gtk_window_set_position (dialog_, GTK_WIN_POS_MOUSE);
         this->insertNotebook(dialog_);
-        this->addPage();
+        this->addPage("startup");
         DBG("dialog this=%p\n", (void *)this);
         //this->insertPageChild(this->notebook());
         

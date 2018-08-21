@@ -38,7 +38,7 @@ public:
         this->setVpanePosition(0);
         print_c::print(this->diagnostics(), "tag/red", g_strdup("Hello world!\n"));
         //DBG("current page = %d\n", this->currentPage());
-        this->setPageLabel(this->currentPage(), "foo");
+        //this->setPageLabel(this->currentPage(), "foo");
     }
     void createDialog(const gchar *path){
         gchar *default_path=NULL;

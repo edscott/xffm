@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 3.1)
 project (xffm C CXX)
-#set(CMAKE_INSTALL_PREFIX /tmp)
+set(CMAKE_INSTALL_PREFIX /tmp)
 # Version info
 set(xffm_VERSION_MAJOR 0)
 set(xffm_VERSION_MINOR 3)
@@ -33,7 +33,8 @@ include_directories(
 
 #    "${PROJECT_SOURCE_DIR}"
 
-add_subdirectory(find)
+#add_subdirectory(icons)
+#add_subdirectory(find)
 add_subdirectory(term)
 
 
