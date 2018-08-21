@@ -235,6 +235,19 @@ public:
     }
 
 
+    void setTabIcon(GtkWidget *child, const gchar *icon){
+        PageChild<Type> *page = (PageChild<Type> *)g_hash_table_lookup(pageHash_, (void *)child);
+        if (!page){
+            DBG("setVpanePosition:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
+            return;
+        }
+        page->setTabIcon(icon);
+    }
+
+    void setTabIcon(const gchar *icon){
+        setTabIcon(currentPageChild(), icon);
+    }
+
     void setVpanePosition(GtkWidget *child, gint position){
         PageChild<Type> *page = (PageChild<Type> *)g_hash_table_lookup(pageHash_, (void *)child);
         if (!page){
@@ -286,9 +299,9 @@ public:
     void setPageLabel(const gchar *text){
         setPageLabel(currentPageChild(), text);
     }
-    void setPageLabel(gint pageNumber, const gchar *text){
+    void setPageLabel(GtkWidget *child, const gchar *text){
          PageChild<Type> *page = (PageChild<Type> *)
-             g_hash_table_lookup(pageHash_, GINT_TO_POINTER(pageNumber+1));
+             g_hash_table_lookup(pageHash_, (void *)child);
          page->setPageLabel(text);
          
          /*auto label = GTK_LABEL(gtk_label_new(""));

@@ -21,7 +21,6 @@ public:
 	pageLabelButton_ = GTK_BUTTON(gtk_button_new ());
 
         // FIXME: this goes in term::dialog:
-        //gtk_c::set_bin_image(GTK_WIDGET(pageLabelIconBox_), "utilities-terminal", GTK_ICON_SIZE_SMALL_TOOLBAR);
 
 	gtk_box_pack_start (pageLabelBox_, GTK_WIDGET(pageLabelSpinnerBox_), TRUE, TRUE, 0);
 	gtk_box_pack_start (pageLabelSpinnerBox_, GTK_WIDGET(pageLabelSpinner_), TRUE, TRUE, 0);
@@ -52,11 +51,15 @@ public:
 	return;
 
     }
-    void setPageLabel(const gchar *text){
+    void setTabIcon(const gchar *icon){
+         gtk_c::set_container_image(GTK_CONTAINER(pageLabelIconBox_), icon, GTK_ICON_SIZE_SMALL_TOOLBAR);
+   }
+     void setPageLabel(const gchar *text){
          gtk_label_set_markup(pageLabel_, text);
          //gtk_notebook_set_tab_label(notebook_, child, GTK_WIDGET(label));
    }
     
+   
     void set_spinner(gboolean state)
     {
 	if (!state){

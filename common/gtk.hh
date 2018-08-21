@@ -96,6 +96,26 @@ public:
     }
 
     static void
+    set_container_image(GtkContainer *container, const gchar *icon_id, gint size){
+	if (!container || !GTK_IS_WIDGET(container)) {
+	    g_warning("incorrect function call\n");
+	    return;
+	}
+        GList *list = gtk_container_get_children (container);
+        for (GList *p = list; p && p->data; p= p->next){
+            gtk_container_remove(container, GTK_WIDGET(p->data));
+	}
+        g_list_free(list);
+	if(icon_id) {
+	    GdkPixbuf *pb = pixbuf_c::get_pixbuf (icon_id, size);
+	    GtkWidget *image = gtk_image_new_from_pixbuf (pb);
+            gtk_container_add(container, image);
+	    gtk_widget_show(image);
+	    g_object_unref(pb);
+	} 
+    }
+
+    static void
     set_bin_image(GtkWidget *bin, const gchar *icon_id, gint size){
 	if (!bin || !GTK_IS_WIDGET(bin)) {
 	    g_warning("rfm_set_bin_image(): incorrect function call\n");

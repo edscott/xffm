@@ -36,6 +36,8 @@ public:
 	//DBG("%s %s\n", title, icon);
         this->setDialogSize(600,400);
         this->setVpanePosition(0);
+        this->setTabIcon("utilities-terminal");
+        this->setPageLabel("workdir...");
         print_c::print(this->diagnostics(), "tag/red", g_strdup("Hello world!\n"));
         //DBG("current page = %d\n", this->currentPage());
         //this->setPageLabel(this->currentPage(), "foo");
