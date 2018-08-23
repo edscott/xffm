@@ -24,6 +24,7 @@ class Print {
 public:
 
     static void print(GtkTextView *textview, const gchar *tag, gchar *string){
+        if (!textview) return;
 	void *arg[]={(void *)textview, (void *)tag, (void *)string};
 	context_function(print_f, arg);
 	g_free(string);
@@ -33,7 +34,9 @@ public:
         print(textview, NULL, string);
     }
 
+
     static void print_debug(GtkTextView *textview, gchar *string){
+        if (!textview) return;
 	void *arg[]={(void *)textview, (void *)"tag/italic", (void *)string};
 	context_function(print_d, arg);
 	g_free(string);
@@ -42,6 +45,7 @@ public:
         
     static void print_icon(GtkTextView *textview, const gchar *iconname, gchar *string)
     {
+        if (!textview) return;
 	GdkPixbuf *pixbuf = pixbuf_c::get_pixbuf(iconname, -16);
 	void *arg[]={(void *)pixbuf, (void *)textview, NULL, (void *)string};
 	context_function(print_i, arg);
@@ -53,6 +57,7 @@ public:
 				const gchar *tag, 
 				gchar *string)
     {
+        if (!textview) return;
 	GdkPixbuf *pixbuf = pixbuf_c::get_pixbuf(iconname, -16);
 	void *arg[]={(void *)pixbuf, (void *)textview, (void *)tag, (void *)string};
 	context_function(print_i, arg);
@@ -60,18 +65,21 @@ public:
     }
 
     static void print_status(GtkTextView *textview, gchar *string){
+        if (!textview) return;
 	void *arg[]={(void *)textview, (void *)string};
 	context_function(print_s, arg);
 	g_free(string);
     }
 
     static void print_status_label(GtkLabel *label, gchar *string){
+        if (!label || !string) return;
 	void *arg[]={(void *)label, (void *)string};
 	context_function(print_sl, arg);
 	g_free(string);
     }
 
     static void print_error(GtkTextView *textview, gchar *string){
+        if (!textview) return;
 	void *arg[]={(void *)textview, (void *)"tag/bold", (void *)string};
 	context_function(print_e, arg);
 	g_free(string);
@@ -80,12 +88,14 @@ public:
 
 
     static void clear_text(GtkTextView *textview){
+        if (!textview) return;
 	void *arg[]={(void *)textview, NULL};
         context_function(clear_text_buffer_f, arg);
     }
 
 
     static void show_text(GtkTextView *textview){
+        if (!textview) return;
         GtkPaned *vpane = GTK_PANED(g_object_get_data(G_OBJECT(textview), "vpane"));
 	void *arg[]={(void *)vpane, NULL};
         context_function(show_text_buffer_f, arg);
@@ -93,6 +103,7 @@ public:
 
 
     static void hide_text(GtkTextView *textview){
+        if (!textview) return;
         GtkPaned *vpane = GTK_PANED(g_object_get_data(G_OBJECT(textview), "vpane"));
 	void *arg[]={(void *)vpane, NULL};
         context_function(hide_text_buffer_f, arg);
@@ -100,13 +111,14 @@ public:
 
 
     static void *
-    scroll_to_top(GtkTextView *diagnostics){
+    scroll_to_top(GtkTextView *textview){
+        if (!textview) return NULL;
 	// make sure all text is written before attempting scroll
 	while (gtk_events_pending()) gtk_main_iteration();
 	GtkTextIter start, end;
-	GtkTextBuffer *buffer = gtk_text_view_get_buffer (diagnostics);
+	GtkTextBuffer *buffer = gtk_text_view_get_buffer (textview);
 	gtk_text_buffer_get_bounds (buffer, &start, &end);
-        gtk_text_view_scroll_to_iter (diagnostics,
+        gtk_text_view_scroll_to_iter (textview,
                               &start,
                               0.0,
                               FALSE,
@@ -116,17 +128,18 @@ public:
     }
 
     static void *
-    scroll_to_bottom(GtkTextView *diagnostics){
+    scroll_to_bottom(GtkTextView *textview){
+        if (!textview) return NULL;
 	// make sure all text is written before attempting scroll
 	while (gtk_events_pending()) gtk_main_iteration();
 	GtkTextIter start, end;
 	GtkTextBuffer *buffer;
-	buffer = gtk_text_view_get_buffer (diagnostics);
+	buffer = gtk_text_view_get_buffer (textview);
 	gtk_text_buffer_get_bounds (buffer, &start, &end);
 	GtkTextMark *mark = gtk_text_buffer_create_mark (buffer, "scrolldown", &end, FALSE);
-	gtk_text_view_scroll_to_mark (diagnostics, mark, 0.2,    /*gdouble within_margin, */
+	gtk_text_view_scroll_to_mark (textview, mark, 0.2,    /*gdouble within_margin, */
 				      TRUE, 1.0, 1.0);
-	//gtk_text_view_scroll_mark_onscreen (diagnostics, mark);
+	//gtk_text_view_scroll_mark_onscreen (textview, mark);
 	gtk_text_buffer_delete_mark(buffer, mark);
 	return NULL;
     }

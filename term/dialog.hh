@@ -16,7 +16,7 @@ namespace xf
 {
     
 template <class Type>
-class termDialog : public Dialog<Type> {
+class termDialog : public Dialog<Type>{
     using print_c = Print<double>;
  /*   using util_c = Util<double>;
     using gtk_c = Gtk<double>;
@@ -34,6 +34,7 @@ public:
     //termDialog(const gchar *title, const gchar *icon):Dialog<Type>(title, icon){
     termDialog(void){
 	//DBG("%s %s\n", title, icon);
+
         this->setDialogSize(600,400);
         this->setVpanePosition(0);
         this->setTabIcon("utilities-terminal");

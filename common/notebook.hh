@@ -1,6 +1,6 @@
 #ifndef XF_NOTEBOOK
 #define XF_NOTEBOOK
-#include "pagechild.hh"
+#include "page/pagechild.hh"
 
 namespace xf {
 
