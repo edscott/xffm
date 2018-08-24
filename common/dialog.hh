@@ -67,7 +67,7 @@ public:
         gtk_widget_set_has_tooltip (GTK_WIDGET(dialog_), TRUE);
         // FIXME:
         //g_signal_connect (G_OBJECT (dialog_), "query-tooltip", G_CALLBACK (window_tooltip_f), (void *)this);
-        //g_signal_connect (window, "key-press-event", G_CALLBACK (window_keyboard_event), (void *)this);
+        g_signal_connect (G_OBJECT (dialog_), "key-press-event", EVENT_CALLBACK (Type::window_keyboard_event), (void *)this);
 
 	gtk_widget_get_preferred_width (GTK_WIDGET(dialog_), &dialogMinW_, &dialogNatW_);
 	gtk_widget_get_preferred_height (GTK_WIDGET(dialog_), &dialogMinH_, &dialogNatH_);

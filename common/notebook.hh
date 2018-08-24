@@ -132,9 +132,10 @@ public:
 
     static void
     on_new_page(GtkButton *button, void *data){
-        DBG("on_new_page this: %p\n", data);
         auto notebook = (Notebook<Type> *)data;
-        notebook->addPage("foo");
+        const gchar *workdir = notebook->workdir();
+        DBG("on_new_page this: %p (%s)\n", data, workdir);
+        notebook->addPage(notebook->workdir());
     }
 
     static void
@@ -152,6 +153,7 @@ template <class Type>
 class Notebook {
     using gtk_c = Gtk<double>;
     using pixbuf_c = Pixbuf<double>;
+    using util_c = Util<double>;
 public:
     Notebook(void){
         notebook_ = GTK_NOTEBOOK(gtk_notebook_new());
@@ -187,10 +189,16 @@ public:
 
     }
     
-    void addPage(const gchar *text){
+    void addPage(const gchar *workdir){
+        
         auto page = new(PageChild<Type>);
         g_object_set_data(G_OBJECT(page->pageChild()), "Notebook", (void *)this);
-        page->setPageLabel(text);
+        // FIXME: this page label is path specific. Should go in term/ files
+        //page->setPageLabel(workdir);
+        gchar *g = get_window_name(workdir);
+        page->setPageLabel(g); 
+        page->setWorkdir(workdir);
+        g_free(g);
         gint pageNumber = gtk_notebook_append_page (notebook_,
                           GTK_WIDGET(page->pageChild()),
                           GTK_WIDGET(page->pageLabelBox()));
@@ -234,6 +242,32 @@ public:
         }
     }
 
+    gchar *
+    get_window_name (const gchar *path) {
+        gchar *iconname;
+        if(!path) {
+            iconname = util_c::utf_string (g_get_host_name());
+        } else if(g_path_is_absolute(path) &&
+                g_file_test (path, G_FILE_TEST_EXISTS)) {
+            gchar *basename = g_path_get_basename (path);
+            gchar *pathname = g_strdup (path);
+            gchar *b = util_c::utf_string (basename);   // non chopped
+            util_c::chop_excess (pathname);
+            gchar *q = util_c::utf_string (pathname);   // non chopped
+
+            g_free (basename);
+            g_free (pathname);
+            //iconname = g_strconcat (display_host, ":  ", b, " (", q, ")", NULL);
+            iconname = g_strconcat (b, " (", q, ")", NULL);
+            g_free (q);
+            g_free (b);
+        } else {
+            iconname = util_c::utf_string (path);
+            util_c::chop_excess (iconname);
+        }
+
+        return (iconname);
+    }
 
     void setTabIcon(GtkWidget *child, const gchar *icon){
         PageChild<Type> *page = (PageChild<Type> *)g_hash_table_lookup(pageHash_, (void *)child);
@@ -261,6 +295,19 @@ public:
         setVpanePosition(currentPageChild(), position);
     }
 
+    const gchar *workdir(GtkWidget *child){
+        PageChild<Type> *page = (PageChild<Type> *)g_hash_table_lookup(pageHash_, (void *)child);
+
+        if (!page){
+            DBG("setVpanePosition:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
+            return NULL;
+        }
+        return page->workdir();
+    }
+
+    const gchar * workdir(void){
+        return  workdir(currentPageChild());
+    }
     GtkTextView *diagnostics(GtkWidget *child){
         PageChild<Type> *page = (PageChild<Type> *)g_hash_table_lookup(pageHash_, (void *)child);
 
@@ -291,6 +338,11 @@ public:
 
     gint currentPage(void){
         return gtk_notebook_get_current_page(notebook_);
+    }
+    PageChild<Type> *currentPageObject(void){
+        auto child = currentPageChild();
+        auto page = g_hash_table_lookup(pageHash_, (void *)child);
+        return (PageChild<Type> *)page;
     }
     GtkWidget *currentPageChild(void){
         return gtk_notebook_get_nth_page (notebook_,currentPage());

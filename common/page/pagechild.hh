@@ -3,12 +3,12 @@
 #include "vbuttonbox.hh"
 #include "hbuttonbox.hh"
 #include "vpane.hh"
-#include "common/completion/csh.hh"
+#include "common/completion/completion.hh"
 
 namespace xf{
 
 template <class Type>
-class PageChild: public Vpane<Type>, VButtonBox<Type>, HButtonBox<Type>, CshCompletion<Type> {
+class PageChild : public Completion<Type>{
     using gtk_c = Gtk<double>;
 public:
 
@@ -39,21 +39,23 @@ public:
 	gtk_widget_show_all(GTK_WIDGET(pageLabelBox_));
 
         GtkBox *hViewBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
-        GtkBox *hButtonBox = this->hButtonBox();
-        GtkBox *vButtonBox = this->vButtonBox();
-        GtkPaned *vpane = this->vpane();
-	gtk_box_pack_start (hViewBox, GTK_WIDGET(vpane), TRUE, TRUE, 0);
-	gtk_box_pack_start (hViewBox, GTK_WIDGET(vButtonBox), FALSE, FALSE, 0);
-	gtk_box_pack_start (pageChild_, GTK_WIDGET(hViewBox), TRUE, TRUE, 0);
-	gtk_box_pack_start (pageChild_, GTK_WIDGET(hButtonBox), FALSE, FALSE, 0);
+        hButtonBox_=HButtonBox<Type>::newBox();
+        vButtonBox_ = VButtonBox<Type>::newBox();
+        vpane_ = Vpane<Type>::newVpane();
 
-        //this->setCompletionTextView(this->diagnostics());
-        //this->setCompletionInput(this->status());
+	gtk_box_pack_start (hViewBox, GTK_WIDGET(vpane_), TRUE, TRUE, 0);
+	gtk_box_pack_start (hViewBox, GTK_WIDGET(vButtonBox_), FALSE, FALSE, 0);
+	gtk_box_pack_start (pageChild_, GTK_WIDGET(hViewBox), TRUE, TRUE, 0);
+	gtk_box_pack_start (pageChild_, GTK_WIDGET(hButtonBox_), FALSE, FALSE, 0);
+
+        this->setOutput(this->diagnostics());
+        this->setInput(this->status());
 	gtk_widget_show_all(GTK_WIDGET(pageChild_));
 
 	return;
 
     }
+
     void setTabIcon(const gchar *icon){
          gtk_c::set_container_image(GTK_CONTAINER(pageLabelIconBox_), icon, GTK_ICON_SIZE_SMALL_TOOLBAR);
    }
@@ -62,6 +64,13 @@ public:
          //gtk_notebook_set_tab_label(notebook_, child, GTK_WIDGET(label));
    }
     
+    void setVpanePosition(gint position){
+	gtk_paned_set_position (vpane_, position);
+        gint max;
+	g_object_get(G_OBJECT(vpane_), "max-position", &max, NULL);
+ 	g_object_set_data(G_OBJECT(vpane_), "oldCurrent", GINT_TO_POINTER(position));
+	g_object_set_data(G_OBJECT(vpane_), "oldMax", GINT_TO_POINTER(max));   
+    }
    
     void set_spinner(gboolean state)
     {
@@ -80,6 +89,22 @@ public:
     GtkBox *pageLabelSpinnerBox(void){ return pageLabelSpinnerBox_;}
     GtkBox *pageLabelIconBox(void){ return pageLabelIconBox_;}
     GtkButton *pageLabelButton(void){ return pageLabelButton_;}
+    
+    GtkBox *hButtonBox(void){return hButtonBox_;}
+    GtkImage *status_icon(void){ return GTK_IMAGE(g_object_get_data(G_OBJECT(hButtonBox_), "status"));}
+    GtkImage *iconview_icon(void){ return GTK_IMAGE(g_object_get_data(G_OBJECT(hButtonBox_), "status"));}
+    GtkTextView *status(void){ return GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(hButtonBox_), "status"));}
+    GtkBox *statusBox(void){ return GTK_BOX(g_object_get_data(G_OBJECT(hButtonBox_), "status"));}
+    GtkButton *status_button(void){ return GTK_BUTTON(g_object_get_data(G_OBJECT(hButtonBox_), "status"));}
+    GtkLabel *status_label(void){ return GTK_LABEL(g_object_get_data(G_OBJECT(hButtonBox_), "status"));}
+
+    GtkBox *vButtonBox(void){return vButtonBox_;}
+    GtkButton *clear_button(void){ return GTK_BUTTON(g_object_get_data(G_OBJECT(vButtonBox_), "clear_button"));}
+    GtkScale *size_scale(void){ return GTK_SCALE(g_object_get_data(G_OBJECT(vButtonBox_), "size_scale"));}
+    
+    GtkPaned *vpane(void){return vpane_;}
+    GtkTextView *diagnostics(void){ return GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(vpane_), "diagnostics"));}
+
 private:
     GtkBox *pageChild_;
     GtkLabel *pageLabel_;
@@ -88,6 +113,11 @@ private:
     GtkBox *pageLabelSpinnerBox_;
     GtkBox *pageLabelIconBox_;
     GtkButton *pageLabelButton_;
+
+    GtkBox *hButtonBox_;
+    GtkBox *vButtonBox_;
+    GtkPaned *vpane_;
+
 
 };
 

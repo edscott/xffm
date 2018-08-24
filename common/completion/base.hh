@@ -31,7 +31,7 @@ public:
     }
 private:
     gchar *workdir_;*/
-protected:
+    
     static gchar *
     get_token(const char *in_token, gint *match_count_p){
         if (!in_token) {
@@ -269,7 +269,7 @@ protected:
     ya_strcmp ( gconstpointer a, gconstpointer b) {
         return strcmp ((char *) a, (char *) b);
     }
-
+    
     static gchar *
     top_match (GSList **matches_p){
         *matches_p = g_slist_sort (*matches_p, ya_strcmp);
@@ -300,6 +300,7 @@ protected:
         }*/
         return suggest;
     }
+
 
     static glong 
     maxOptions(void){

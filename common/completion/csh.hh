@@ -129,17 +129,17 @@ protected:
     }
 
     gboolean
-    csh_completion(gint direction){
+    csh_completion(GtkTextView *input, GtkTextView *output,  gint direction){
 
         // Completing?
-        const gchar *suggest = csh_find(csh_cmd_save_, direction);
+        const gchar *suggest = csh_find(input, output, csh_cmd_save_, direction);
         if (suggest){
             TRACE("csh_completion: suggest=%s at csh_nth_=%d\n", suggest, csh_nth_); 
-            csh_place_command(suggest);
+            csh_place_command(input, output, suggest);
             return TRUE;
         }
         TRACE("csh_completion: no match to %s\n", csh_cmd_save_);
-        csh_place_command(csh_cmd_save_);
+        csh_place_command(input, output, csh_cmd_save_);
         
         return FALSE;
     }
@@ -215,11 +215,11 @@ protected:
     }
 
     gboolean
-    csh_history(gint offset){
+    csh_history(GtkTextView *input, GtkTextView *output,  gint offset){
         csh_history_counter_ += offset;
         if (csh_history_counter_ < 0)  {
             csh_history_counter_ = -1;
-            csh_place_command("");
+            csh_place_command(input, output, "");
             return TRUE;
         }
         if (csh_history_counter_ > g_list_length(csh_history_list_)-2) 
@@ -230,7 +230,7 @@ protected:
         TRACE( "csh_history: get csh_history_counter_=%d offset=%d \n", csh_history_counter_, offset);
         
         if(p) {
-            csh_place_command(p);
+            csh_place_command(input, output, p);
         }
         return TRUE;
     }
@@ -244,7 +244,7 @@ private:
         gboolean csh_completing_;
 
     const gchar *
-    csh_find(const gchar *token, gint direction){
+    csh_find(GtkTextView *input, GtkTextView *output, const gchar *token, gint direction){
         if (csh_nth_) csh_nth_ += direction;
         if (csh_nth_ >= g_list_length(csh_history_list_)){
             csh_nth_ = g_list_length(csh_history_list_)-1;
@@ -259,14 +259,14 @@ private:
         // When you reach the bottom, put command back.
         if (direction < 0) {
             csh_nth_ = 0;
-            csh_place_command(token);
+            csh_place_command(input, output, token);
         }
         return NULL;
     }
     void 
-    csh_place_command(GtkTextView *input, const gchar *data){
+    csh_place_command(GtkTextView *input, GtkTextView *output,  const gchar *data){
         print_c::print_status (input, g_strdup(data));
-        place_cursor();
+        place_cursor(input, output);
     }
 
     gpointer

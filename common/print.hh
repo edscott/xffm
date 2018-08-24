@@ -272,7 +272,7 @@ private:
     }
 
 
-
+public:
     static gchar *
     get_current_text (GtkTextView *textview) {
 	// get current text
@@ -301,6 +301,7 @@ private:
 	TRACE ("lpterm_c::get_text_to_cursor: to cursor position=%d %s\n", cursor_position, t);
 	return t;
     }
+private:
 
     static void *
     clear_text_buffer_f(void *data){
