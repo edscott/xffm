@@ -3,7 +3,7 @@
 #include "vbuttonbox.hh"
 #include "hbuttonbox.hh"
 #include "vpane.hh"
-#include "completion/csh.hh"
+#include "common/completion/csh.hh"
 
 namespace xf{
 
@@ -47,8 +47,8 @@ public:
 	gtk_box_pack_start (pageChild_, GTK_WIDGET(hViewBox), TRUE, TRUE, 0);
 	gtk_box_pack_start (pageChild_, GTK_WIDGET(hButtonBox), FALSE, FALSE, 0);
 
-        this->setCompletionTextView(this->diagnostics());
-        this->setCompletionInput(this->status());
+        //this->setCompletionTextView(this->diagnostics());
+        //this->setCompletionInput(this->status());
 	gtk_widget_show_all(GTK_WIDGET(pageChild_));
 
 	return;

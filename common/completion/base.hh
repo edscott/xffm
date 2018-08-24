@@ -21,7 +21,7 @@ class BaseCompletion {
     using util_c = Util<double>;
 
 public:
-    BaseCompletion(void){
+    /*BaseCompletion(void){
         workdir_ = NULL;
     }
     gchar *workdir(void){ return workdir_;}
@@ -30,9 +30,9 @@ public:
         workdir = g_strdup(workdir);
     }
 private:
-    gchar *workdir_;
+    gchar *workdir_;*/
 protected:
-    gchar *
+    static gchar *
     get_token(const char *in_token, gint *match_count_p){
         if (!in_token) {
             *match_count_p = -2; // invalid token
@@ -59,7 +59,7 @@ protected:
         return token;
     }
 
-    GSList *
+    static GSList *
     base_file_completion(const gchar *workdir, const char *in_file_token, gint *match_count_p){
         
         gchar *file_token = get_token(in_file_token, match_count_p);
@@ -134,7 +134,7 @@ protected:
         return matches;
     }
 
-    GSList *
+    static GSList *
     base_exec_completion(const gchar *workdir, const char *in_token, gint *match_count_p){
         GSList *matches=NULL;
 
@@ -216,7 +216,7 @@ protected:
     }
 
 
-    gchar *
+    static gchar *
     base_suggestion(gint which, const gchar *workdir, const char *in_file_token, gint *match_count_p){
         GSList *list;
         if (which == MATCH_FILE)
@@ -245,18 +245,18 @@ protected:
     }
 
 
-    gchar *
+    static gchar *
     base_file_suggestion(const gchar *workdir, const char *in_file_token, gint *match_count_p){
         return base_suggestion(MATCH_FILE, workdir, in_file_token, match_count_p);
     }
 
     // XXX FIXME: this basically duplicates the above...
-    gchar *
+    static gchar *
     base_exec_suggestion(const gchar *workdir, const char *in_file_token, gint *match_count_p){
         return base_suggestion(MATCH_COMMAND, workdir, in_file_token, match_count_p);
     }
 
-    void
+    static void
     free_match_list(GSList *matches){
         GSList *p=matches;
         for (;p && p->data; p=p->next) g_free(p->data);
@@ -270,7 +270,7 @@ protected:
         return strcmp ((char *) a, (char *) b);
     }
 
-    gchar *
+    static gchar *
     top_match (GSList **matches_p){
         *matches_p = g_slist_sort (*matches_p, ya_strcmp);
         GSList *a;
@@ -301,9 +301,9 @@ protected:
         return suggest;
     }
 
-    glong 
+    static glong 
     maxOptions(void){
-        const gchar *env_maximum=getenv("RFM_MAXIMUM_COMPLETION_OPTIONS");
+        const gchar *env_maximum=getenv("XFFM_MAXIMUM_COMPLETION_OPTIONS");
         if (!env_maximum || !strlen(env_maximum)) return 104;
         errno=0;
         glong amount = strtol(env_maximum, (char **) NULL, 10);

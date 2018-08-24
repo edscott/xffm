@@ -5,10 +5,13 @@
 #include "bash.hh"
 #define CSH_HISTORY 	g_get_user_cache_dir(),"lp_terminal_history"
 
+// We keep this non static so different pages of the notebook
+// will have different csh histories. 
+// In the end, startup history file will join all histories.
 namespace xf {
 template <class Type>
 
-class CshCompletion: public BashCompletion<Type>{
+class CshCompletion{
     using print_c = Print<double>;
     using util_c = Util<double>;
     
@@ -22,7 +25,7 @@ public:
         csh_clean_start();
     }
 
-    gboolean
+    static gboolean
     csh_is_valid_command (const gchar *cmd_fmt) {
         //return GINT_TO_POINTER(TRUE);
         TRACE ("csh_is_valid_command(%s)\n", cmd_fmt);
@@ -81,12 +84,12 @@ public:
 
 protected:
     void 
-    csh_dirty_start(void){ 
+    csh_dirty_start(GtkTextView *input){ 
         TRACE( "csh_dirty_start\n");
         //start from current position.
         g_free(csh_cmd_save_);
         while (gtk_events_pending()) gtk_main_iteration();
-        csh_cmd_save_ = print_c::get_text_to_cursor(this->textView());
+        csh_cmd_save_ = print_c::get_text_to_cursor(input);
         TRACE( "csh_dirty_start: %s\n", csh_cmd_save_);
         if (csh_cmd_save_ && strlen(csh_cmd_save_)){
             csh_nth_ = 0;
@@ -117,8 +120,8 @@ protected:
     }
 
     gboolean
-    query_cursor_position(void){
-        GtkTextBuffer *buffer = gtk_text_view_get_buffer (this->input());
+    query_cursor_position(GtkTextView *input){
+        GtkTextBuffer *buffer = gtk_text_view_get_buffer (input);
         gint position = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(buffer), "cursor-position"));
         TRACE("cursor position=%d\n", position);
         if (!position) csh_completing_ = FALSE;
@@ -261,8 +264,8 @@ private:
         return NULL;
     }
     void 
-    csh_place_command(const gchar *data){
-        print_c::print_status (this->input(), g_strdup(data));
+    csh_place_command(GtkTextView *input, const gchar *data){
+        print_c::print_status (input, g_strdup(data));
         place_cursor();
     }
 
@@ -311,13 +314,13 @@ private:
     }
 
     void 
-    place_cursor(void){
+    place_cursor(GtkTextView *input, GtkTextView *output){
         GtkTextIter iter;
-        GtkTextBuffer *buffer = gtk_text_view_get_buffer (this->input());
+        GtkTextBuffer *buffer = gtk_text_view_get_buffer (input);
         if (csh_completing_ && csh_cmd_save_) {
             gtk_text_buffer_get_iter_at_offset (buffer, &iter, strlen(csh_cmd_save_));
         } else {
-            gchar *text = print_c::get_current_text (this->textView());
+            gchar *text = print_c::get_current_text (output);
             gtk_text_buffer_get_iter_at_offset (buffer, &iter, strlen(text));
             g_free(text);
         }
