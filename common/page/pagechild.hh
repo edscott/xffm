@@ -13,6 +13,7 @@ class PageChild : public Completion<Type>{
 public:
 
     PageChild(void){
+	pageWorkdir_ = NULL;
 	pageChild_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
 	pageLabel_ = GTK_LABEL(gtk_label_new ("foobar"));
 	pageLabelBox_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
@@ -53,7 +54,17 @@ public:
 	gtk_widget_show_all(GTK_WIDGET(pageChild_));
 
 	return;
+    }
 
+    
+    void setPageWorkdir(const gchar *dir){
+	g_free(pageWorkdir_);
+	pageWorkdir_ = g_strdup(dir);
+	gchar *g = Completion<Type>::get_terminal_name(pageWorkdir_);
+	setPageLabel(g);
+	g_free(g);
+	// and for bash completion
+	this->setWorkdir(dir);
     }
 
     void setTabIcon(const gchar *icon){
@@ -82,6 +93,10 @@ public:
 	gtk_widget_hide(GTK_WIDGET(pageLabelIconBox_));  
 	gtk_spinner_start (pageLabelSpinner_);
     }
+
+
+       
+
     GtkBox *pageChild(void){ return pageChild_;}
     GtkLabel *pageLabel(void){ return pageLabel_;}
     GtkBox *pageLabelBox(void){ return pageLabelBox_;}
@@ -117,6 +132,8 @@ private:
     GtkBox *hButtonBox_;
     GtkBox *vButtonBox_;
     GtkPaned *vpane_;
+
+    gchar *pageWorkdir_;
 
 
 };

@@ -54,16 +54,14 @@ private:
 public:
     //termDialog(const gchar *title, const gchar *icon):Dialog<Type>(title, icon){
     termDialog(void){
+	// Here we override the default start up of the Dialog class template
 	//DBG("%s %s\n", title, icon);
         gchar *workdir = g_get_current_dir();
         this->setDialogSize(600,400);
         this->setVpanePosition(0);
         this->setTabIcon("utilities-terminal");
         auto page = this->currentPageObject();
-        page->setWorkdir(workdir);
-        gchar *g = this->get_window_name(workdir);
-        this->setPageLabel(g); // FIXME: this could be compacted
-        g_free(g);
+        page->setPageWorkdir(workdir);
         print_c::print(this->diagnostics(), "tag/red", g_strdup("Hello world!\n"));
         //DBG("current page = %d\n", this->currentPage());
         //this->setPageLabel(this->currentPage(), "foo");

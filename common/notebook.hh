@@ -191,14 +191,13 @@ public:
     
     void addPage(const gchar *workdir){
         
-        auto page = new(PageChild<Type>);
+        auto page = new(PageChild<double>);
         g_object_set_data(G_OBJECT(page->pageChild()), "Notebook", (void *)this);
-        // FIXME: this page label is path specific. Should go in term/ files
-        //page->setPageLabel(workdir);
-        gchar *g = get_window_name(workdir);
-        page->setPageLabel(g); 
-        page->setWorkdir(workdir);
-        g_free(g);
+	// This will set the workdir for completion
+        page->setPageWorkdir(workdir);  
+        // This will (and should) be set by the corresponding
+	// page class template 
+	// page->setPageLabel(g); 
         gint pageNumber = gtk_notebook_append_page (notebook_,
                           GTK_WIDGET(page->pageChild()),
                           GTK_WIDGET(page->pageLabelBox()));
@@ -222,7 +221,7 @@ public:
         }
         DBG("disconnect page %d\n", pageNumber);
        //gtk_widget_hide(child);
-        PageChild<Type> *page = (PageChild<Type> *)g_hash_table_lookup(pageHash_, (void *)child);
+         auto page = (PageChild<Type> *)g_hash_table_lookup(pageHash_, (void *)child);
         if (currentPage == pageNumber) {
             gtk_notebook_set_current_page (notebook_, pageNumber-1);
         } 
@@ -242,32 +241,6 @@ public:
         }
     }
 
-    gchar *
-    get_window_name (const gchar *path) {
-        gchar *iconname;
-        if(!path) {
-            iconname = util_c::utf_string (g_get_host_name());
-        } else if(g_path_is_absolute(path) &&
-                g_file_test (path, G_FILE_TEST_EXISTS)) {
-            gchar *basename = g_path_get_basename (path);
-            gchar *pathname = g_strdup (path);
-            gchar *b = util_c::utf_string (basename);   // non chopped
-            util_c::chop_excess (pathname);
-            gchar *q = util_c::utf_string (pathname);   // non chopped
-
-            g_free (basename);
-            g_free (pathname);
-            //iconname = g_strconcat (display_host, ":  ", b, " (", q, ")", NULL);
-            iconname = g_strconcat (b, " (", q, ")", NULL);
-            g_free (q);
-            g_free (b);
-        } else {
-            iconname = util_c::utf_string (path);
-            util_c::chop_excess (iconname);
-        }
-
-        return (iconname);
-    }
 
     void setTabIcon(GtkWidget *child, const gchar *icon){
         PageChild<Type> *page = (PageChild<Type> *)g_hash_table_lookup(pageHash_, (void *)child);

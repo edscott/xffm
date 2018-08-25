@@ -5,10 +5,37 @@
 namespace xf {
 template <class Type>
 class Completion : public CshCompletion<Type>{
+    using util_c = Util<double>;
 
 public:
     Completion(void){
         workdir_ = NULL;
+    }
+    static     gchar *
+    get_terminal_name (const gchar *path) {
+        gchar *iconname;
+        if(!path) {
+            iconname = util_c::utf_string (g_get_host_name());
+        } else if(g_path_is_absolute(path) &&
+                g_file_test (path, G_FILE_TEST_EXISTS)) {
+            gchar *basename = g_path_get_basename (path);
+            gchar *pathname = g_strdup (path);
+            gchar *b = util_c::utf_string (basename);   // non chopped
+            util_c::chop_excess (pathname);
+            gchar *q = util_c::utf_string (pathname);   // non chopped
+
+            g_free (basename);
+            g_free (pathname);
+            //iconname = g_strconcat (display_host, ":  ", b, " (", q, ")", NULL);
+            iconname = g_strconcat (b, " (", q, ")", NULL);
+            g_free (q);
+            g_free (b);
+        } else {
+            iconname = util_c::utf_string (path);
+            util_c::chop_excess (iconname);
+        }
+
+        return (iconname);
     }
 
     void setInput(GtkTextView *input){input_ = input;}
@@ -47,6 +74,21 @@ public:
         if((event->keyval == GDK_KEY_Return) || (event->keyval == GDK_KEY_KP_Enter)) {
             this->csh_clean_start();
             // FIXME run_lp_command();
+	    // like this:
+	    // lpterm_c::run_lp_command(input_, output_);
+	    // 
+	    // or better:
+	    // Type::run_lp_command(input_, output_);
+	    //
+	    // and on other types, a void function in class
+	    //
+	    // here we must go into the lpterm class template, run command
+	    // and setup run button...
+	    // to do this... lpterm class template must be composed of static
+	    // functions. As such, no problemo to call from here
+	    // but if this completion class template is used without
+	    // lp command, then this command must change according to <Type>
+	    //run_c::thread_run(output_, , FALSE);
             return TRUE;
         }
         if((event->keyval == GDK_KEY_Page_Up) || (event->keyval == GDK_KEY_Page_Down)) {
@@ -88,22 +130,9 @@ public:
         }
         return retval;
     }
-
-/*
-    void *
-    shell_command(const gchar *c, gboolean save){
-        // Make sure any sudo command has the "-A" option
-        gchar *command = sudo_fix(c);
-        pid_t pid = thread_run(command?command:c);
-        if (!pid) return NULL; 
-        run_button_c *run_button_p = NULL;
-        run_button_p = new run_button_c(view_v, c, pid, run_in_shell(c));
-        // We save the original sudo command, not the one modified with "-A"
-        if (save) csh_save_history(c);
-        g_free (command);
-        return (void *)run_button_p;
-    }
-    */
+//////////////////////////////////////////////////////////
+    //FIXME: lpterm command stuff
+  
 private:
     GtkTextView *output_;
     GtkTextView *input_;
