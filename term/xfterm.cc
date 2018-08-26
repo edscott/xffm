@@ -48,7 +48,7 @@
 static const gchar *xftermProgram;
 
 #include "term.hh"
-//#include "signals.hh"
+//#include "term/lpterm.hh"
 int
 main (int argc, char *argv[]) {
     xftermProgram = argv[0];
@@ -77,6 +77,7 @@ main (int argc, char *argv[]) {
     //term.createDialog("/home");
 
     auto xfterm = new(xf::termDialog<xf::completionSignals<double> >);
+//    auto xfterm = new(xf::termDialog<xf::LpTerm >);
     xfterm->setDialogTitle("Term");
     xfterm->setDialogIcon("utilities-terminal");
 

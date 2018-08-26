@@ -36,24 +36,40 @@ class lptermSignals {
 
 template <class Type>
 class LpTerm {
-    lpterm_c(void *data): run_c(data){
+private:
+    gboolean active;
+    GtkIconView *iconview_;
+    GtkWidget *status_button_;
+    GtkWidget *status_icon_;
+    GtkWidget *iconview_icon_;
+
+    GList *run_button_list;
+    pthread_mutex_t *rbl_mutex;
+public:
+    void setIconview(GtkIconView *iconview){iconview_ = iconview;}
+    void setStatusButton(GtkWidget *status_button){status_button_ = status_button;}
+    void setStatusIcon(GtkWidget *status_icon){status_icon_ = status_icon;}
+    void setIconviewIcon(GtkWidget *iconview_icon){iconview_icon_ = iconview_icon;}
+
+    LpTerm(void *data): run_c(data){
 	active = FALSE;
 	view_c *view_p = (view_c *)data;
-	iconview = view_p->get_iconview();
-	status_icon = view_p->get_status_icon();
-	iconview_icon = view_p->get_iconview_icon();
-	status_button = view_p->get_status_button();
 	pthread_mutexattr_t r_attr;
 	pthread_mutexattr_init(&r_attr);
 	pthread_mutexattr_settype(&r_attr, PTHREAD_MUTEX_RECURSIVE);
 	rbl_mutex = (pthread_mutex_t *)calloc(1, sizeof(pthread_mutex_t));
 	pthread_mutex_init(rbl_mutex, &r_attr);
 	run_button_list = NULL;
-	g_signal_connect (status, "key-press-event", G_CALLBACK (status_keyboard_event), data);
-	g_signal_connect (status_button, "button-press-event", G_CALLBACK (on_status_button_press), (void *)this);
+	// FIXME: these callback functions and connection should go in pagechild
+	 /*
+	g_signal_connect (status, "key-press-event", 
+		EVENT_CALLBACK (status_keyboard_event), data);
+	g_signal_connect (status_button, "button-press-event", 
+		BUTTON_CALLBACK (on_status_button_press), (void *)this);
+		*/
     }
 
-    ~lpterm_c(void){
+    ~LpTerm(void){
 	GList *l = run_button_list;
 	pthread_mutex_lock(rbl_mutex);
 	for (; l && l->data; l=l->next){
@@ -181,7 +197,7 @@ class LpTerm {
     }
 	
 	
-    gboolean
+    static gboolean
     is_iconview_key(GdkEventKey *event){
 	gint keys[] = {
 	    GDK_KEY_Right,
@@ -242,7 +258,7 @@ class LpTerm {
        */
 
 
-    gboolean
+    static gboolean
     is_lpterm_key(GdkEventKey * event){
 	// No mask, then it is a lpterm key:
 	if (event->state == 0) return TRUE;
@@ -367,7 +383,7 @@ class LpTerm {
 	return FALSE;
     }
      
-    gchar *
+    static gchar *
     sudo_fix(const gchar *command){
 	if (!strstr(command, "sudo ")) return NULL; 
 	gchar *new_command = NULL;
@@ -430,6 +446,8 @@ class LpTerm {
 	const gchar *terminal = util_c::what_term();
 	shell_command(terminal, FALSE);
     }
+
+
 #if 0
     gint
     lpterm_keyboard_event( GdkEventKey * event, gpointer data) {
