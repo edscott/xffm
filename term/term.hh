@@ -3,6 +3,12 @@
 #include "dialog.hh"
 namespace xf
 {
+
+template <class Type>
+class staticTerm {
+};
+
+
 template <class Type>
 class Term: protected termDialog<Type> {
 public:

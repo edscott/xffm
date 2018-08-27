@@ -213,6 +213,10 @@ public:
             
         // The main fork
         pid_t PID = fork ();
+	if (PID < 0) {
+	    fprintf(stderr, "fork(): %s\n", strerror(errno));
+	    return PID;
+	}
         newfork->PID = PID;
         if(PID == 0) { /* the child */
             controller(newfork, 1, instance, parent);

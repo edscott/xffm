@@ -320,7 +320,8 @@ private:
         if (csh_completing_ && csh_cmd_save_) {
             gtk_text_buffer_get_iter_at_offset (buffer, &iter, strlen(csh_cmd_save_));
         } else {
-            gchar *text = print_c::get_current_text (output);
+            gchar *text = print_c::get_current_text (input);
+//            gchar *text = print_c::get_current_text (output);
             gtk_text_buffer_get_iter_at_offset (buffer, &iter, strlen(text));
             g_free(text);
         }

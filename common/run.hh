@@ -101,7 +101,7 @@ public:
             g_free(command);
             command = g;
         }
-        DBG("command = %s\n", command);
+        DBG("thread_run command = %s\n", command);
         int flags = TUBO_EXIT_TEXT|TUBO_VALID_ANSI|TUBO_CONTROLLER_PID;
         /* FIXME: workdir must be set in constructor
         if (chdir(get_workdir())<0){
@@ -117,10 +117,13 @@ public:
                                     finish_f,
                                     data, // XXX view_v,
                                     flags);
+	if (pid < 0) {
+	    g_free(command);
+	    return 0;
+	}
         pid_t grandchild=tubo_c::getChild (pid);
-
-        push_hash(grandchild, g_strdup(command));
-        g_free(command);
+	// Reference to command now belongs to the hashtable.
+        push_hash(grandchild, command);
         return pid;
     }
 
@@ -453,6 +456,38 @@ public:
         threadwait ();
         _exit (123);
     }
+
+    static gchar *
+    sudo_fix(const gchar *command){
+	if (!strstr(command, "sudo ")) return NULL; 
+	gchar *new_command = NULL;
+	if (strncmp(strstr(command, "sudo "), "sudo -A ", strlen("sudo -A "))!=0)
+	{
+	    gchar *original_head=g_strdup(command);
+	    gchar *pos = strstr(original_head, "sudo ");
+	    if (pos){
+		*pos = 0;
+		gchar *tail=g_strdup(strstr(command, "sudo ")+strlen("sudo "));
+		new_command = g_strconcat(original_head, "sudo -A ", tail, NULL);
+		g_free(tail);
+	    }
+	    g_free(original_head);
+	}
+	return new_command;
+    }
+
+    static pid_t 
+    shell_command(GtkTextView *textview, const gchar *c, gboolean scrollUp){
+	// Make sure any sudo command has the "-A" option
+	gchar *command = sudo_fix(c);
+	DBG("shell_command = %s\n", c);
+	pid_t pid = thread_run(textview, command?command:c, scrollUp);
+	g_free (command);
+	if (!pid) return 0;
+	return pid;
+    }
+
+    
 };
 }
 

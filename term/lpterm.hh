@@ -8,8 +8,8 @@
 # include <readline/history.h>
 //#endif
 namespace xf {
-template <class Type>
-class LpTerm;
+template <class Type> class LpTerm;
+template <class Type> class PageChild;
 
 template <class Type>
 class lptermSignals {
@@ -26,93 +26,30 @@ class lptermSignals {
 	TRACE("status_keyboard_event\n");
 	return FALSE;
     }
-};
-
-
-//////////////////////////////////////////////////////////////////
-// some static, some instanciated (for mutex)
-
-
-
-template <class Type>
-class LpTerm {
-private:
-    gboolean active;
-    GtkIconView *iconview_;
-    GtkWidget *status_button_;
-    GtkWidget *status_icon_;
-    GtkWidget *iconview_icon_;
-
-    GList *run_button_list;
-    pthread_mutex_t *rbl_mutex;
-public:
-    void setIconview(GtkIconView *iconview){iconview_ = iconview;}
-    void setStatusButton(GtkWidget *status_button){status_button_ = status_button;}
-    void setStatusIcon(GtkWidget *status_icon){status_icon_ = status_icon;}
-    void setIconviewIcon(GtkWidget *iconview_icon){iconview_icon_ = iconview_icon;}
-
-    LpTerm(void *data): run_c(data){
-	active = FALSE;
-	view_c *view_p = (view_c *)data;
-	pthread_mutexattr_t r_attr;
-	pthread_mutexattr_init(&r_attr);
-	pthread_mutexattr_settype(&r_attr, PTHREAD_MUTEX_RECURSIVE);
-	rbl_mutex = (pthread_mutex_t *)calloc(1, sizeof(pthread_mutex_t));
-	pthread_mutex_init(rbl_mutex, &r_attr);
-	run_button_list = NULL;
-	// FIXME: these callback functions and connection should go in pagechild
-	 /*
-	g_signal_connect (status, "key-press-event", 
-		EVENT_CALLBACK (status_keyboard_event), data);
-	g_signal_connect (status_button, "button-press-event", 
-		BUTTON_CALLBACK (on_status_button_press), (void *)this);
-		*/
-    }
-
-    ~LpTerm(void){
-	GList *l = run_button_list;
-	pthread_mutex_lock(rbl_mutex);
-	for (; l && l->data; l=l->next){
-	    run_button_c *rb_p = (run_button_c *)l->data;
-	    unreference_run_button(rb_p);
-	}
-	g_list_free(run_button_list);
-	run_button_list=NULL;
-	pthread_mutex_unlock(rbl_mutex);
-	pthread_mutex_destroy(rbl_mutex);
-	g_free(rbl_mutex);
-    }
-
-    void
-    reference_run_button(run_button_c *rb_p){
-	DBG("reference_run_button(%p)\n", (void *)rb_p);
-	pthread_mutex_lock(rbl_mutex);
-	run_button_list = g_list_prepend(run_button_list, (void *)rb_p);
-	pthread_mutex_unlock(rbl_mutex);
-    }
-
-    void
-    unreference_run_button(run_button_c *rb_p){
-	DBG("unreference_run_button(%p)\n", (void *)rb_p);
-	pthread_mutex_lock(rbl_mutex);
-	void *p = g_list_find(run_button_list, (void *)rb_p);
-	if (p){
-	    run_button_list = g_list_remove(run_button_list, (void *)rb_p);
-	    delete (rb_p);
-	}
-	pthread_mutex_unlock(rbl_mutex);
-    }
-
+#if 0
     gboolean 
     window_keyboard_event(GdkEventKey * event, void *data)
     {
-	view_c *view_p = (view_c *)data;
 	TRACE("window_keyboard_event\n");
 	/* asian Input methods */
 	if(event->keyval == GDK_KEY_space && (event->state & (GDK_MOD1_MASK | GDK_SHIFT_MASK))) {
 	    return FALSE;
 	}
 
+
+    /*
+       Ctrl-Left               Word left
+       Ctrl-Right              Word right
+       Ctrl-Y                  Delete line
+       Ctrl-K                  Delete to end of line
+       Ctrl-BS                 Delete word left
+       Ctrl-Del        	   Delete word right
+       Ctrl-A                  Select all text
+       Ctrl-U                  Deselect block
+       Ctrl-V       	   Paste block from clipboard
+       Ctrl-X                  Cut block
+       Ctrl-C                  Copy block to clipboard
+       */
 
 	gint ignore[]={
 	    GDK_KEY_Control_L,
@@ -149,20 +86,20 @@ public:
 	}
 
 
-	TRACE( "window_keyboard_event: lpterm is active = %d\n", event->keyval, active);
+	TRACE( "window_keyboard_event: lpterm is active_ = %d\n", event->keyval, active_);
 
-	if (!active && is_iconview_key(event)) {
+	if (!active_ && is_iconview_key(event)) {
 	    TRACE("window_keyboard_event: Sending key to iconview default handler.\n");
 	    return FALSE;
 	}
 
-	if (active && (event->keyval == GDK_KEY_Escape)) {
+	if (active_ && (event->keyval == GDK_KEY_Escape)) {
 	    TRACE("window_keyboard_event: set_active_lp = %d\n", FALSE);
 	    lp_set_active(FALSE); 
 	    return TRUE;
 	}
 
-	if (!active) {
+	if (!active_) {
 	    TRACE("window_keyboard_event: set_active_lp = %d\n", TRUE);
 	    lp_set_active(TRUE); 
 	    if (event->keyval == GDK_KEY_Tab){
@@ -173,6 +110,10 @@ public:
 
 	    } 
 	}
+
+	// XXXXXXXX
+	//
+	//
 	// By now we have a lp key to process
 	TRACE( "window_keyboard_event: send key to status dialog for lpterm command\n");
 	lpterm_keyboard_event(event, data);
@@ -220,44 +161,6 @@ public:
 	return FALSE;
     }
 
-    gboolean
-    lp_get_active(void){return active;}
-
-    void
-    lp_set_active(gboolean state){
-	active = state;
-	if (state){
-	    gtk_widget_hide(GTK_WIDGET(status_button));
-	    gtk_widget_show(GTK_WIDGET(status));
-	    gtk_widget_show(status_icon);
-	    gtk_widget_hide(iconview_icon);
-	    gtk_widget_grab_focus (GTK_WIDGET(status));
-	} else {
-	    gtk_widget_hide(GTK_WIDGET(status));
-	    gtk_widget_show(GTK_WIDGET(status_button));
-	    gtk_widget_show(iconview_icon);
-	    gtk_widget_hide(status_icon);
-	    gtk_widget_grab_focus (GTK_WIDGET(iconview));
-	}
-	return;
-    }
-
-
-    /*
-       Ctrl-Left               Word left
-       Ctrl-Right              Word right
-       Ctrl-Y                  Delete line
-       Ctrl-K                  Delete to end of line
-       Ctrl-BS                 Delete word left
-       Ctrl-Del        	   Delete word right
-       Ctrl-A                  Select all text
-       Ctrl-U                  Deselect block
-       Ctrl-V       	   Paste block from clipboard
-       Ctrl-X                  Cut block
-       Ctrl-C                  Copy block to clipboard
-       */
-
-
     static gboolean
     is_lpterm_key(GdkEventKey * event){
 	// No mask, then it is a lpterm key:
@@ -302,10 +205,125 @@ public:
 	}
 	return FALSE;
     }
+#endif
+
+};
+
+
+//////////////////////////////////////////////////////////////////
+// some static, some instanciated (for mutex)
+
+
+
+template <class Type>
+class LpTerm {
+    using util_c = Util<Type>;
+    using print_c = Print<Type>;
+    using run_c = Run<Type>;
+private:
+    GtkTextView *textview_;
+    PageChild<Type> *page_;
+
+    gboolean active_;
+    GtkIconView *iconview_;
+    GtkWidget *status_button_;
+    GtkWidget *status_icon_;
+    GtkWidget *iconview_icon_;
+
+public:
+    void setPage(PageChild<Type> *page){page_ = page;}
+    void setTextview(GtkTextView *textview){textview_ = textview;}
+    void setIconview(GtkIconView *iconview){iconview_ = iconview;}
+    void setStatusButton(GtkWidget *status_button){status_button_ = status_button;}
+    void setStatusIcon(GtkWidget *status_icon){status_icon_ = status_icon;}
+    void setIconviewIcon(GtkWidget *iconview_icon){iconview_icon_ = iconview_icon;}
+
+    LpTerm(void){
+	active_ = FALSE;
+	// FIXME: these callback functions and connection should be connected 
+	// in pagechild
+	 /*
+	g_signal_connect (status, "key-press-event", 
+		EVENT_CALLBACK (status_keyboard_event), data);
+	g_signal_connect (status_button, "button-press-event", 
+		BUTTON_CALLBACK (on_status_button_press), (void *)this);
+		*/
+    }
 
     gboolean
-    internal_cd (gchar ** argvp) {   
+    lp_get_active(void){return active_;}
+
+    void
+    lp_set_active(gboolean state){
+	active_ = state;
+/*	if (state){
+	    gtk_widget_hide(GTK_WIDGET(status_button));
+	    gtk_widget_show(GTK_WIDGET(status));
+	    gtk_widget_show(status_icon);
+	    gtk_widget_hide(iconview_icon);
+	    gtk_widget_grab_focus (GTK_WIDGET(status));
+	} else {
+	    gtk_widget_hide(GTK_WIDGET(status));
+	    gtk_widget_show(GTK_WIDGET(status_button));
+	    gtk_widget_show(iconview_icon);
+	    gtk_widget_hide(status_icon);
+	    gtk_widget_grab_focus (GTK_WIDGET(iconview));
+	}*/
+	return;
+    }
+
+    gchar * 
+    run_lp_command(GtkTextView *output, const gchar *workdir, const gchar *command){
+	gchar *newWorkdir =NULL;
+	gchar ** commands = NULL;
+	if (strchr(command, ';')) commands = g_strsplit(command, ";", -1);
+	if (!commands) {
+	    commands = (gchar **) calloc(2, sizeof(gchar *));
+	    commands[0] = g_strdup(command); 
+	}
+	gchar **c;
+	for (c=commands; c && *c; c++){
+	    if (process_internal_command (output, workdir, *c)) {
+		DBG("internal command=%s\n", command);
+		continue;
+	    }
+	    // automatic shell determination:
+	    run_c::thread_run(output, *c, FALSE);
+	    // forced shell to command:
+	    //run_c::shell_command(output, *c, FALSE);
+	    /*
+	    run_button_c *run_button_p = NULL;
+	    // XXX runbutton constructor will need textview and runbutton box
+	    run_button_p = new run_button_c(view_v, c, pid, run_in_shell(c));
+	    // run_button_p will run alone and call its own destructor.
+*/
+	    // Here we save to csh history.
+	    // We save the original sudo command,
+	    //   not the one modified with "-A".
+	}
+	g_strfreev(commands); 
+	return newWorkdir;
+    }
+
+    void
+    open_terminal(GtkTextView *output){
+	const gchar *terminal = util_c::what_term();
+	run_c::shell_command(output, terminal, FALSE);
+/*	run_button_c *run_button_p = NULL;
+	// XXX runbutton constructor will need textview and runbutton box
+	run_button_p = new run_button_c(view_v, c, pid, run_in_shell(c));*/
+    // This is not configured to save to csh history.
+    }
+
+    // FIXME: we should allow expansion of environment variables like $HOME
+    //        and whatever else is in the environment.
+    gchar *
+    internal_cd (GtkTextView *output, const gchar *workdir, gchar ** argvp) {   
 	gchar *gg=NULL;
+
+	if (argvp[1] == NULL){
+	    return g_strdup(g_get_home_dir());
+	}
 
 	if(argvp[1]) {
 	    if (*argvp[1] == '~'){
@@ -322,29 +340,27 @@ public:
 		gg = g_strdup(argvp[1]);
 	    }
 
-	} else {
-	    gg = g_strdup(g_get_home_dir ());
-	}
-	show_text();
+	} 
+	print_c::show_text(output);
 
 	// must allow relative paths too.
 	if (!g_path_is_absolute(gg)){
-	    if(!g_file_test (get_workdir(), G_FILE_TEST_IS_DIR)) 
+	    if(!g_file_test (workdir, G_FILE_TEST_IS_DIR)) 
 	    {
-		print_error(g_strdup_printf("%s: %s\n", gg, strerror (ENOENT)));
+		print_c::print_error(output, g_strdup_printf("%s: %s\n", gg, strerror (ENOENT)));
 		g_free (gg);
-		return TRUE;
+		return NULL;
 	    } 
-	    gchar *fullpath = g_strconcat(get_workdir(), G_DIR_SEPARATOR_S, gg, NULL);
+	    gchar *fullpath = g_strconcat(workdir, G_DIR_SEPARATOR_S, gg, NULL);
 	    g_free(gg);
 	    gg = fullpath;
 	}
 
 	gchar *rpath = realpath(gg, NULL);
 	if (!rpath){
-	    print_error(g_strdup_printf("%s: %s\n", gg, strerror (ENOENT)));
+	    print_c::print_error(output, g_strdup_printf("%s: %s\n", gg, strerror (ENOENT)));
 	    g_free (gg);
-	    return TRUE;
+	    return NULL;
 	}
 
 	if (gg[strlen(gg)-1]==G_DIR_SEPARATOR || strstr(gg, "/..")){
@@ -354,101 +370,51 @@ public:
 	    g_free (rpath);
 	}
 
-	print_tag("tag/green", g_strdup_printf("cd %s\n", gg));
-	clear_status();
+	print_c::print(output, "tag/green", g_strdup_printf("cd %s\n", gg));
+	if (chdir(gg) < 0) {
+	    print_c::print_error(output, g_strdup_printf("%s\n", strerror(errno)));
+	    return NULL;
+	}
+	//print_c::clear_text();
 
-	view_c *view_p =(view_c *)view_v;
-	view_p->reload(gg);
+	// FIXME: here we must signal a reload to the iconview...
+	//view_p->reload(gg);
 
-	g_free (gg);
-	return TRUE;
+	return gg;
     }
 
-
+    // FIXME: we need to add history as an internal command with csh history.
     gboolean
-    process_internal_command (const gchar *command) {
+    process_internal_command (GtkTextView *output, const gchar *workdir, const gchar *command) {
 	gint argcp;
 	gchar **argvp;
 	GError *error = NULL;
 	if(!g_shell_parse_argv (command, &argcp, &argvp, &error)) {
-	    print_error(g_strdup_printf("%s\n", error->message));
-	    return TRUE;
+	    print_c::print_error(output, g_strdup_printf("%s\n", error->message));
+	    return FALSE;
 	} else if(strcmp (argvp[0], "cd")==0) {
 	    // shortcircuit chdir
-	    internal_cd (argvp);
+	    gchar *gg = internal_cd (output, workdir, argvp);
 	    g_strfreev (argvp);
+	    if (gg) {
+		DBG("newWorkdir-gg = %s\n", gg);
+		DBG("page_ = %p\n", (void *)page_);
+		if (page_) {
+		    page_->setPageWorkdir(gg);
+		    g_free(gg);
+		}
+		return TRUE;
+	    }
+
 	    return TRUE;
 	}
 	g_strfreev (argvp);
-	return FALSE;
+	return  FALSE;
     }
      
-    static gchar *
-    sudo_fix(const gchar *command){
-	if (!strstr(command, "sudo ")) return NULL; 
-	gchar *new_command = NULL;
-	if (strncmp(strstr(command, "sudo "), "sudo -A ", strlen("sudo -A "))!=0)
-	{
-	    gchar *original_head=g_strdup(command);
-	    gchar *pos = strstr(original_head, "sudo ");
-	    if (pos){
-		*pos = 0;
-		gchar *tail=g_strdup(strstr(command, "sudo ")+strlen("sudo "));
-		new_command = g_strconcat(original_head, "sudo -A ", tail, NULL);
-		g_free(tail);
-	    }
-	    g_free(original_head);
-	}
-	return new_command;
-    }
-
-    void *
-    shell_command(const gchar *c, gboolean save){
-	// Make sure any sudo command has the "-A" option
-	gchar *command = sudo_fix(c);
-	pid_t pid = thread_run(command?command:c);
-	if (!pid) return NULL; 
-	run_button_c *run_button_p = NULL;
-	run_button_p = new run_button_c(view_v, c, pid, run_in_shell(c));
-	// We save the original sudo command, not the one modified with "-A"
-	if (save) csh_save_history(c);
-	g_free (command);
-	return (void *)run_button_p;
-    }
-
-    void *
-    shell_command(const gchar *c){
-	return shell_command(c, TRUE);
-    }
-
-    void 
-    run_lp_command(void){
-	gchar *command = get_current_text();
-	gchar ** commands = NULL;
-	if (strchr(command, ';')) commands = g_strsplit(command, ";", -1);
-	if (!commands) {
-	    commands = (gchar **) calloc(2, sizeof(gchar *));
-	    commands[0] = g_strdup(command); 
-	}
-	gchar **c;
-	for (c=commands; c && *c; c++){
-	    if(process_internal_command (*c)) continue;
-	    // shell to command
-	    shell_command(*c);
-	    clear_status();
-	}
-	g_strfreev(commands); 
-	g_free(command);
-    }
-
-    void
-    open_terminal(void){
-	const gchar *terminal = util_c::what_term();
-	shell_command(terminal, FALSE);
-    }
-
 
 #if 0
+    // This is now at completion class
     gint
     lpterm_keyboard_event( GdkEventKey * event, gpointer data) {
 	TRACE( "lpterm_keyboard_event...\n");

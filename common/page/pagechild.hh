@@ -4,12 +4,19 @@
 #include "hbuttonbox.hh"
 #include "vpane.hh"
 #include "common/completion/completion.hh"
+#include "threadcontrol.hh"
+#include "runbutton.hh"
 
 namespace xf{
+template <class Type> class RunButton;
 
 template <class Type>
-class PageChild : public Completion<Type>{
+class PageChild : public Completion<Type>, ThreadControl<Type>{
     using gtk_c = Gtk<double>;
+private:
+    GList *run_button_list;
+    pthread_mutex_t *rbl_mutex;
+
 public:
 
     PageChild(void){
@@ -49,16 +56,62 @@ public:
 	gtk_box_pack_start (pageChild_, GTK_WIDGET(hViewBox), TRUE, TRUE, 0);
 	gtk_box_pack_start (pageChild_, GTK_WIDGET(hButtonBox_), FALSE, FALSE, 0);
 
+	// Data for lpterm
         this->setOutput(this->diagnostics());
         this->setInput(this->status());
+        this->setPage(this);
+
+	pthread_mutexattr_t r_attr;
+	pthread_mutexattr_init(&r_attr);
+	pthread_mutexattr_settype(&r_attr, PTHREAD_MUTEX_RECURSIVE);
+	rbl_mutex = (pthread_mutex_t *)calloc(1, sizeof(pthread_mutex_t));
+	pthread_mutex_init(rbl_mutex, &r_attr);
+	run_button_list = NULL;
+
+
+
 	gtk_widget_show_all(GTK_WIDGET(pageChild_));
 
 	return;
     }
+    
+    ~PageChild(void){
+	GList *l = run_button_list;
+	pthread_mutex_lock(rbl_mutex);
+	for (; l && l->data; l=l->next){
+	    //run_button_c *rb_p = (run_button_c *)l->data;
+	    unreference_run_button(l->data);
+	}
+	g_list_free(run_button_list);
+	run_button_list=NULL;
+	pthread_mutex_unlock(rbl_mutex);
+	pthread_mutex_destroy(rbl_mutex);
+	g_free(rbl_mutex);
+    }
 
+//    void reference_run_button(run_button_c *rb_p){
+    void *reference_run_button(void *rb_p){
+	DBG("reference_run_button(%p)\n", rb_p);
+	pthread_mutex_lock(rbl_mutex);
+	run_button_list = g_list_prepend(run_button_list, rb_p);
+	pthread_mutex_unlock(rbl_mutex);
+    }
+
+    void
+    unreference_run_button(void *rb_p){
+	DBG("unreference_run_button(%p)\n", rb_p);
+	pthread_mutex_lock(rbl_mutex);
+	void *p = g_list_find(run_button_list, rb_p);
+	if (p){
+	    run_button_list = g_list_remove(run_button_list, rb_p);
+	    // FIXME delete ((RunButton<Type> *)rb_p);
+	}
+	pthread_mutex_unlock(rbl_mutex);
+    }
     
     void setPageWorkdir(const gchar *dir){
-	g_free(pageWorkdir_);
+	DBG("setPageWorkdir: %s\n", dir);
+	//g_free(pageWorkdir_);
 	pageWorkdir_ = g_strdup(dir);
 	gchar *g = Completion<Type>::get_terminal_name(pageWorkdir_);
 	setPageLabel(g);

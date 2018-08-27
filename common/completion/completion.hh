@@ -1,11 +1,15 @@
 #ifndef COMPLETION_HH
 #define COMPLETION_HH
+#include <unistd.h>
 #include "csh.hh"
+#include "common/print.hh"
+#include "term/lpterm.hh"
 
 namespace xf {
 template <class Type>
-class Completion : public CshCompletion<Type>{
+class Completion : public CshCompletion<Type>, public LpTerm<Type>{
     using util_c = Util<double>;
+    using print_c = Print<double>;
 
 public:
     Completion(void){
@@ -72,7 +76,16 @@ public:
         }
         // On activate, run the lpcommand.
         if((event->keyval == GDK_KEY_Return) || (event->keyval == GDK_KEY_KP_Enter)) {
+	    gchar *command = print_c::get_current_text(input_);
+	    DBG("activated with %s\n", command);
             this->csh_clean_start();
+	    chdir(workdir_);
+	    this->run_lp_command(output_, workdir_, command);
+	    this->csh_save_history(command);
+	    print_c::clear_text(input_);
+	    g_free(command);
+	    chdir(workdir_);
+
             // FIXME run_lp_command();
 	    // like this:
 	    // lpterm_c::run_lp_command(input_, output_);
@@ -137,7 +150,6 @@ private:
     GtkTextView *output_;
     GtkTextView *input_;
     gchar *workdir_;
-
 
 };
 }

@@ -205,6 +205,7 @@ public:
         DBG("******* added page number %d: child=%p\n", pageNumber, (void *)page->pageChild());
         g_hash_table_replace(pageHash_, (void *)page->pageChild(), (void *)page);
         gtk_notebook_set_current_page (notebook_,pageNumber);
+	g_object_set_data(G_OBJECT(page->status()), "notebook", (void *)page); 
         g_signal_connect(G_OBJECT(page->pageLabelButton()), "clicked", 
                 BUTTON_CALLBACK(notebookSignals<Type>::on_remove_page), (void *)page); 
 
