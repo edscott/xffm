@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include "csh.hh"
 #include "common/print.hh"
-#include "term/lpterm.hh"
+#include "lpterm.hh"
 
 namespace xf {
 template <class Type>
@@ -79,29 +79,10 @@ public:
 	    gchar *command = print_c::get_current_text(input_);
 	    DBG("activated with %s\n", command);
             this->csh_clean_start();
-	    chdir(workdir_);
 	    this->run_lp_command(output_, workdir_, command);
 	    this->csh_save_history(command);
 	    print_c::clear_text(input_);
 	    g_free(command);
-	    chdir(workdir_);
-
-            // FIXME run_lp_command();
-	    // like this:
-	    // lpterm_c::run_lp_command(input_, output_);
-	    // 
-	    // or better:
-	    // Type::run_lp_command(input_, output_);
-	    //
-	    // and on other types, a void function in class
-	    //
-	    // here we must go into the lpterm class template, run command
-	    // and setup run button...
-	    // to do this... lpterm class template must be composed of static
-	    // functions. As such, no problemo to call from here
-	    // but if this completion class template is used without
-	    // lp command, then this command must change according to <Type>
-	    //run_c::thread_run(output_, , FALSE);
             return TRUE;
         }
         if((event->keyval == GDK_KEY_Page_Up) || (event->keyval == GDK_KEY_Page_Down)) {

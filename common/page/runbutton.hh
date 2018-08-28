@@ -19,6 +19,7 @@ namespace xf {
 template <class Type> class PageChild;
 template <class Type> class RunButton;
 template <class Type> class RunButtonSignals {
+public:
     static void
     ps_signal(GtkWidget *menuitem, gpointer data){
 
@@ -47,6 +48,8 @@ template <class Type> class RunButtonSignals {
 
 };
 
+template <class Type> class PageChild;
+
 template <class Type>
 class RunButton {
     using pixbuf_c = Pixbuf<double>;
@@ -55,36 +58,41 @@ class RunButton {
     using util_c = Util<double>;
     using run_c = Run<double>;
 private:
-    PageChild<Type> *pageChild_p;
-    GtkTextView *textview;
-    GtkBox *button_space;
+    PageChild<Type> *page_; 
+    GtkTextView *textview_;
+    GtkBox *button_space_;
 
     pid_t pid_;
     pid_t grandchild_;
     gchar *command_;
     gchar *tip_;
     gchar *icon_id_;
-    GtkWidget *button_;
-    GtkWidget *menu_;
+    GtkMenuButton *button_;
+    GtkMenu *menu_;
+    gboolean in_shell_;
 public:    
-        gboolean in_shell;
-        GtkWidget *get_menu(void){return menu_;}
 
-    RunButton(void *data, const gchar * exec_command, pid_t child, gboolean shell_wrap){
-	pageChild_p = (PageChild<Type> *)data;
-	textview = pageChild_p->diagnostics();
-	button_space = pageChild_p->button_space();
+    RunButton(void){}
+    RunButton(void *data, const gchar * exec_command, pid_t child, gboolean shellIcon)
+    {
+	setup(data, exec_command, child, shellIcon);
+    }
+    void setup(void *data, const gchar * exec_command, pid_t child, gboolean shellIcon)
+    {
+	page_ = (PageChild<Type> *)data;
+	textview_ = page_->diagnostics();
+	button_space_ = page_->hButtonBox();
 	
-	in_shell = shell_wrap;
+	in_shell_ = shellIcon;
 	pid_ = child;
-	grandchild_ = Tubo<Type>::Tubo_child(child);
+	grandchild_ = Tubo<Type>::getChild(child);
 	command_ = g_strdup (exec_command);
 	icon_id_ = NULL;
 	tip_ = NULL;
-	TRACE ("RunButton::setup_run_button_thread: controller/process=%d/%d\n", (int)child, (gint)grandchild_);
+	DBG ("RunButton::setup_run_button_thread: controller/process=%d/%d\n", (int)child, (gint)grandchild_);
 
 	create_menu();
-	pageChild_p->thread_create("RunButton::RunButton: run_wait_f", 
+	page_->thread_create("RunButton::RunButton: run_wait_f", 
 		run_wait_f, (void *) this, FALSE);
     }
 
@@ -99,31 +107,33 @@ public:
 	g_free (command_);
 	g_free (icon_id_);
     }
-
-
-    void
-    set_icon_id(const gchar *data){
+    // read only
+    PageChild<Type> *page(void){return page_;}
+    gboolean inShell(void){return in_shell_;}
+    gint pid(void){ return (gint)pid_;}
+    gint grandchild(void){ return (gint)grandchild_;}
+    GtkMenu *menu(void){return menu_;}
+    GtkBox *button_space(void){return button_space_;}
+    // read/write
+    void setButton(GtkMenuButton *button){button_ = button;}
+    const gchar *icon_id(void){ return (const gchar *)icon_id_;}
+    void set_icon_id(const gchar *data){
 	g_free(icon_id_); 
 	icon_id_ = data?g_strdup(data):NULL;
     }
+    const gchar *command(void){ return (const gchar *)command_;}
+    void set_command(const gchar *command){
+	g_free(command_);
+	command_ = g_strdup(command); 
+    }
+    const gchar *tip(void){ return (const gchar *)tip_;}
+    void set_tip(const gchar *tip){
+	g_free(tip_);
+	tip_ = g_strdup(tip); 
+    }
 
-    const gchar *
-    get_icon_id(void){ return (const gchar *)icon_id_;}
 
-    const gchar *
-    get_command(void){ return (const gchar *)command_;}
-
-    const gchar *
-    get_tip(void){ return (const gchar *)tip_;}
-
-    gint
-    get_pid(void){ return (gint)pid_;}
-
-    gint
-    get_grandchild(void){ return (gint)grandchild_;}
-
-    void
-    create_menu(void){
+    void create_menu(void){
 	const gchar *items[]={N_("Renice Process"),N_("Suspend (STOP)"),N_("Continue (CONT)"),
 	    N_("Interrupt (INT)"),N_("Hangup (HUP)"),N_("User 1 (USR1)"),
 	    N_("User 2 (USR2)"),N_("Terminate (TERM)"),N_("Kill (KILL)"),
@@ -135,7 +145,7 @@ public:
 
 
 	
-	menu_ = gtk_menu_new();
+	menu_ = GTK_MENU(gtk_menu_new());
 	const gchar **p = items;
 	gint i;
 	for (i=0;p && *p; p++,i++){
@@ -146,80 +156,95 @@ public:
 	    g_signal_connect ((gpointer) v, "activate", MENUITEM_CALLBACK (RunButtonSignals<Type>::ps_signal), GINT_TO_POINTER(signals[i]));
 	    gtk_widget_show (v);
 	}
-	gtk_widget_show (menu_);
+	gtk_widget_show (GTK_WIDGET(menu_));
 	return ;
     }
 
-    void
-    run_button_setup (void){
+    static void
+    run_button_setup (void *data){
+	auto run_button_p = (RunButton<Type> *)data;
 
 	// Little icon assignment
 	// Shell commands come from lpterminal (with specific shell characters).
+	gchar *command = g_strdup(run_button_p->command());
+	using pixbuf_icons_c = Icons<Type>;
 	
-	if (in_shell) icon_id_ = g_strdup("utilities-terminal");
+	if (run_button_p->inShell()) run_button_p->set_icon_id("utilities-terminal");
 	else {
-	    command_ = g_strstrip(command_);
-	    gchar **args = g_strsplit(command_, " ", -1);
+	    command = g_strstrip(command);
+	    gchar **args = g_strsplit(command, " ", -1);
+	    gchar *icon_id = NULL;
 	    if (args && args[0]) {
-		icon_id_ = g_path_get_basename(args[0]);
+		icon_id = g_path_get_basename(args[0]);
+		// xterm exception
+		if (strcmp(icon_id, "xterm")==0){
+		    g_free(icon_id);
+		    icon_id = g_strdup("utilities-terminal");
+		} else if (!pixbuf_icons_c::iconThemeHasIcon(icon_id)){
+		    g_free(icon_id);
+		    icon_id = NULL;
+		}
 		TRACE("RunButton::run_button_setup: attempting icon for \"%s\"\n", icon_id_);
 	    }
-	    else icon_id_ = g_strdup("emblem-run");
 	    g_strfreev(args);
+	    if (!icon_id) {
+	    // FIXME: make emblem available 
+	    // icon_id = g_strdup("emblem-run");
+		icon_id = g_strdup("system-run");
+	    }
+	    run_button_p->set_icon_id(icon_id);
 	}
 
 
-	tip_ = g_strdup_printf(" %s=%d\n", _("PID"), grandchild_); 
+	gchar *tip = g_strdup_printf(" %s=%d\n", _("PID"), run_button_p->grandchild()); 
 	gint i=40;
 	gint j=0;
 	gchar buffer[2048]; memset(buffer, 0, 2048);
 	do {
-	    if (i>strlen(command_)) i=strlen(command_);
-	    strncat(buffer, command_+j, i);
+	    if (i>strlen(command)) i=strlen(command);
+	    strncat(buffer, command+j, i);
 	    j += i;
-	    if (j<strlen(command_))strcat(buffer, "\n");
-	} while (j<strlen(command_));
-	gchar *g = g_strconcat(tip_, buffer, NULL);
-	g_free(tip_);
-	tip_ = g;
-	TRACE("RunButton::new_run_button: icon_id_=%s  command_=%s pid_=%d grandchild_=%d tip_=%s\n", icon_id_, command_, pid_, grandchild_, tip_);
+	    if (j<strlen(command))strcat(buffer, "\n");
+	} while (j<strlen(command));
+	gchar *g = g_strconcat(tip, buffer, NULL);
+	g_free(tip);
+	tip = g;
+	run_button_p->set_tip(tip);
+	g_free(tip);
+	g_free(command);
+	DBG("RunButton::new_run_button: icon_id_=%s  command_=%s pid_=%d grandchild_=%d tip_=%s\n", run_button_p->icon_id(), run_button_p->command(), run_button_p->pid(), run_button_p->grandchild(), run_button_p->tip());
 	return ;
     }
 ////////////////////////////////////////////////////////////////////
 
-    void *
+    static void *
     make_run_data_button (void *data) {
 	auto run_button_p = (RunButton<Type> *)data;
-	GtkWidget *button_ = gtk_menu_button_new ();
-
+	auto button = GTK_MENU_BUTTON(gtk_menu_button_new ());
+	run_button_p->setButton(button);
+	DBG("make_run_data_button... \n");
 	//GMenuModel *menu_ = run_button_p->get_signal_menu_model();
 	//fprintf(stderr, "make_run_data_button: menu_ model is %p\n", menu_);
-	//gtk_menu_button_set_menu_model (GTK_MENU_BUTTON (button_), menu_);
-	gtk_menu_button_set_popup (GTK_MENU_BUTTON (button_),  run_button_p->get_menu());
-
-
-	const gchar *icon = run_button_p->get_icon_id();
-
-	// Test for validity of icon
-	if (!icon || !pixbuf_c::find_pixbuf(icon, -16)){
-	    run_button_p->set_icon_id("emblem-run");
-	} 
-	run_button_setup();
+	//gtk_menu_button_set_menu_model (GTK_MENU_BUTTON (button), menu_);
+	gtk_menu_button_set_popup (button,  GTK_WIDGET(run_button_p->menu()));
+	    
+	// static:
+	run_button_setup(data);
 	
-	TRACE("make_run_data_button: icon_id_=\"%s\" tip_=\"%s\"\n", run_button_p->get_icon_id(), run_button_p->get_tip());
+	TRACE("make_run_data_button: icon_id_=\"%s\" tip_=\"%s\"\n", run_button_p->icon_id(), run_button_p->tip());
 
-	gtk_c::setup_image_button(button_, run_button_p->get_icon_id(), run_button_p->get_tip());
-	//g_signal_connect(button_, "toggled", G_CALLBACK (run_button_toggled), data);
-	gtk_box_pack_end (GTK_BOX (pageChild_p->get_button_space()), button_, FALSE, FALSE, 0);
-	gtk_widget_show (button_);
+	gtk_c::setup_image_button(GTK_WIDGET(button), run_button_p->icon_id(), run_button_p->tip());
+	//g_signal_connect(button, "toggled", G_CALLBACK (run_button_toggled), data);
+	gtk_box_pack_end (run_button_p->button_space(), GTK_WIDGET(button), FALSE, FALSE, 0);
+	gtk_widget_show (GTK_WIDGET(button));
 	// flush gtk
 	while (gtk_events_pending()) gtk_main_iteration();
-	TRACE ("make_run_data_button: button_ made for grandchildPID=%d\n", (int)run_button_p->get_pid());
+	DBG ("make_run_data_button: button made for grandchildPID=%d\n", (int)run_button_p->pid());
 	return NULL;
     }
 
 
-    void *
+    static void *
     run_wait_f (void *data) {
 	auto run_button_p = (RunButton<Type> *) data;
 	/* create little button (note: thread protected within subroutine) */
@@ -228,30 +253,31 @@ public:
 	// before gtk has fully created the little run button.
 	//
 	util_c::context_function(make_run_data_button, data);
-	TRACE("run_wait_f: thread waitpid for %d on (%s/%s)\n", 
-		run_button_p->get_pid(), 
-		run_button_p->get_command(), 
-		run_button_p->get_workdir());
+	DBG("run_wait_f: thread waitpid for %d on (%s/%s)\n", 
+		run_button_p->pid(), 
+		run_button_p->command(), 
+		run_button_p->page()->pageWorkdir());
 
-	pageChild_p->reference_run_button(run_button_p);
+	// referenced already in pagechild.hh:
+	//page()->reference_run_button(run_button_p);
 	
 	gint status;
-	waitpid (run_button_p->get_pid(), &status, 0);
+	waitpid (run_button_p->pid(), &status, 0);
 
-	TRACE("run_wait_f: thread waitpid for %d complete!\n", run_button_p->get_pid());
+	TRACE("run_wait_f: thread waitpid for %d complete!\n", run_button_p->pid());
 	/* remove little button */
 	
 #ifdef DEBUG_TRACE    
 	// This is out of sync here (grayball), so only in debug mode.
-	print_c::print_icon(textview, "emblem-grayball", g_strdup_printf("%s %d/%d\n", run_button_p->get_command(),
-		run_button_p->get_pid(), run_button_p->get_grandchild()));
+	print_c::print_icon(run_button_p->textview_, "emblem-grayball", g_strdup_printf("%s %d/%d\n", run_button_p->command(),
+		run_button_p->pid(), run_button_p->grandchild()));
 #endif
 	
 	/// FIXME: the following code is to signal the background monitor
 	//         currently no monitor is enabled.
 	// Run has completed.  
 	// no use for controller process anymore....
-	TRACE("run has completed: %d\n", run_button_p->get_pid());
+	TRACE("run has completed: %d\n", run_button_p->pid());
 	// FIXME: what does rfm_remove_child do??
 	//        remove controller!
 	// FIXME: enable
@@ -264,13 +290,15 @@ public:
 	return NULL;
     }
 
-    void *
+    static void *
     zap_run_button(void * data){
 	TRACE("zap_run_button...\n");
 	auto run_button_p = (RunButton<Type> *)data;
-	pageChild_p->unreference_run_button(run_button_p);
+	run_button_p->page()->unreference_run_button(run_button_p);
 	return NULL;
     }
+
+    GtkTextView *textview(void){return textview_;}
 
     ////////////////////////  app action callbacks ///////////////////////////////////
 
@@ -320,11 +348,11 @@ public:
     void
     ps_renice(void){
 
-	glong pid = get_grandchild();
-	if (in_shell) pid = shell_child_pid(pid);
+	glong pid = grandchild();
+	if (inShell()) pid = shell_child_pid(pid);
 
 	gchar *command = g_strdup_printf("renice +1 -p %ld", pid);
-	run_c::shell_command(textview, command, FALSE);
+	run_c::shell_command(textview_, command, FALSE);
 	// Here we do not need to save "$command" to history...
 	g_free(command);
 
@@ -336,7 +364,7 @@ public:
 	auto run_button_p = (RunButton<Type> *)data;
 	DBG("send_signal %d to %d\n", 
 		GPOINTER_TO_INT(g_object_get_data(G_OBJECT(w),"signal_id")), 
-		run_button_p->get_grandchild());
+		run_button_p->grandchild());
 
 
     }
@@ -352,18 +380,18 @@ public:
     
 public:
     void sendSignal(gint signal_id){
-	glong pid = get_grandchild();
+	glong pid = grandchild();
 	if (!pid) return;
 	// Do we need sudo?
 	gboolean sudoize = FALSE;
-	if (strncmp(get_command(), "sudo", strlen("sudo"))==0) sudoize = TRUE;
+	if (strncmp(command(), "sudo", strlen("sudo"))==0) sudoize = TRUE;
 	// Are we running in a shell?
-	if (in_shell || sudoize){
+	if (inShell() || sudoize){
 	    DBG("shell child pid required...\n");
 	    pid = shell_child_pid(pid);
 	}
 	    
-	fprintf(stderr, "signal to pid: %ld (in_shell=%d sudo=%d)\n", pid, in_shell, sudoize);
+	fprintf(stderr, "signal to pid: %ld (inShell()=%d sudo=%d)\n", pid, inShell(), sudoize);
 	if (sudoize) {
 	    //        1.undetached child will remain as zombie
 	    //        2.sudo will remain in wait state and button will not disappear
@@ -376,18 +404,18 @@ public:
 	    }
 	    gchar *command;
 	    if (signal_id == SIGKILL) {
-		command =  g_strdup_printf("%s -A kill -%d %ld %d", sudo, signal_id, pid, get_grandchild());
+		command =  g_strdup_printf("%s -A kill -%d %ld %d", sudo, signal_id, pid, grandchild());
 	    } else {
 		command =  g_strdup_printf("%s -A kill -%d %ld", sudo, signal_id, pid);
 	    }
-	    Run<Type>::shell_command(textview, command, FALSE);
+	    Run<Type>::shell_command(textview_, command, FALSE);
 	    // Again, when we signal process, there is no need to save command
 	    // in the csh history file.
 	    g_free(command);
 	    g_free(sudo);
 	} else {
 	    DBG("normal ps_signal to %d...\n", (int)pid);
-	    print_c::print_icon(textview, "emblem-important", "tag/blue", g_strdup_printf("kill -%d %ld\n",
+	    print_c::print_icon(textview_, "emblem-important", "tag/blue", g_strdup_printf("kill -%d %ld\n",
 		    signal_id, pid));
 	    kill((pid_t)pid, signal_id);
 	}

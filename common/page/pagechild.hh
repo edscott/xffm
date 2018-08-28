@@ -1,18 +1,23 @@
 #ifndef XF_PAGE_CHILD
 #define XF_PAGE_CHILD
+#include "common/run.hh"
+#include "common/completion/completion.hh"
 #include "vbuttonbox.hh"
 #include "hbuttonbox.hh"
 #include "vpane.hh"
-#include "common/completion/completion.hh"
 #include "threadcontrol.hh"
 #include "runbutton.hh"
 
 namespace xf{
-template <class Type> class RunButton;
+//template <class Type> class RunButton;
 
 template <class Type>
-class PageChild : public Completion<Type>, ThreadControl<Type>{
+class PageChild :
+    public Completion<Type>,
+    public ThreadControl<Type>
+{
     using gtk_c = Gtk<double>;
+    using run_c = Run<double>;
 private:
     GList *run_button_list;
     pthread_mutex_t *rbl_mutex;
@@ -104,11 +109,23 @@ public:
 	void *p = g_list_find(run_button_list, rb_p);
 	if (p){
 	    run_button_list = g_list_remove(run_button_list, rb_p);
-	    // FIXME delete ((RunButton<Type> *)rb_p);
+	    delete ((RunButton<Type> *)rb_p);
 	}
 	pthread_mutex_unlock(rbl_mutex);
     }
-    
+
+    void 
+    newRunButton(const gchar * command, pid_t child){
+	DBG("page->newRunButton\n");
+	gboolean shellIcon = run_c::run_in_shell(command);
+	auto runButton = (RunButton<Type> *)new(RunButton<Type>);
+	runButton->setup((void *)this, command, child, shellIcon);
+	//runButton->make_run_data_button(runButton);
+	//auto runButton = (RunButton<Type> *)new(RunButton<Type>(this, command, child, shellIcon));
+	reference_run_button((void *)runButton);
+	// final creation will occur with context function.
+    }
+    const gchar *pageWorkdir(void){return (const gchar *)pageWorkdir_;}
     void setPageWorkdir(const gchar *dir){
 	DBG("setPageWorkdir: %s\n", dir);
 	//g_free(pageWorkdir_);

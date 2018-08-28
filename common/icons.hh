@@ -98,6 +98,12 @@ public:
 	return NULL;
     }
 
+    static gboolean iconThemeHasIcon(const gchar *icon_name){
+	if (!icon_name) return FALSE;
+	if (!icon_theme) init();
+        return gtk_icon_theme_has_icon (icon_theme,icon_name);
+    }
+
     static GdkPixbuf *
     get_theme_pixbuf(const gchar *icon_name, gint size){
 	if (!icon_theme) init();
