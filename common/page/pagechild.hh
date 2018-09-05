@@ -7,6 +7,7 @@
 #include "vpane.hh"
 #include "threadcontrol.hh"
 #include "runbutton.hh"
+#include "pathbar.hh"
 
 namespace xf{
 //template <class Type> class RunButton;
