@@ -2,6 +2,8 @@
 #define PATHBAR_HH
 #include "common/gtk.hh"
 #include "common/util.hh"
+
+
 namespace xf {
 
 template <class Type> 
@@ -17,8 +19,29 @@ private:
 public:
     Pathbar(void) {
 	pathbar_ = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+
 	g_object_set_data(G_OBJECT(pathbar_), "callback", (void *)pathbar_go);
 	GtkButton *pb_button = pathbar_button( NULL, ".");
+
+        GError *error=NULL;
+	GtkStyleContext *style_context = gtk_widget_get_style_context (GTK_WIDGET(pathbar_));
+	gtk_style_context_add_class(style_context, GTK_STYLE_CLASS_BUTTON );
+	GtkCssProvider *css_provider = gtk_css_provider_new();
+	gtk_css_provider_load_from_data (css_provider, 
+    "\
+    box * {\
+      background-color: #dcdad5;\
+      border-width: 0px;\
+      border-radius: 0px;\
+      border-color: transparent;\
+    }\
+    ", 
+	    -1, &error);
+	gtk_style_context_add_provider (style_context, GTK_STYLE_PROVIDER(css_provider),
+				    GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+
+        
 
 	gtk_box_pack_start (GTK_BOX (pathbar_), GTK_WIDGET(pb_button), FALSE, FALSE, 0);
 	g_object_set_data(G_OBJECT(pb_button), "name", g_strdup("RFM_ROOT"));
@@ -34,6 +57,21 @@ public:
     pathbar_button (const char *icon_id, const char *text) {
 	GtkButton  *pb_button = GTK_BUTTON( gtk_button_new ());
 
+ /*       GError *error=NULL;
+	GtkStyleContext *style_context = gtk_widget_get_style_context (GTK_WIDGET(pb_button));
+	gtk_style_context_add_class(style_context, GTK_STYLE_CLASS_BUTTON );
+	GtkCssProvider *css_provider = gtk_css_provider_new();
+	gtk_css_provider_load_from_data (css_provider, 
+    "\
+    box * {\
+      background-color: #dcdad5;\
+      height: 75px;\
+    }\
+    ", 
+	    -1, &error);
+	gtk_style_context_add_provider (style_context, GTK_STYLE_PROVIDER(css_provider),
+				    GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);*/
+
 	g_object_set (G_OBJECT(pb_button), 
 		"can-focus", FALSE, 
 		"relief", GTK_RELIEF_NONE, 
@@ -47,7 +85,7 @@ public:
 	    markup = g_strdup_printf("<span size=\"x-small\">%s</span>", g);
 	    g_free(g);
 	}
-	gtk_c::set_bin_contents(GTK_WIDGET(pb_button), icon_id, markup, 12);
+	gtk_c::set_bin_contents(GTK_BIN(pb_button), icon_id, markup, 12);
 	g_free(markup);
 	return pb_button;
     }
@@ -162,7 +200,7 @@ public:
 		gchar *g = g_markup_escape_text(v, -1);
 		g_free(v);
 		gchar *markup = g_strdup_printf("<span size=\"x-small\" color=\"blue\" bgcolor=\"#dcdad5\">%s</span>", g);
-		gtk_c::set_bin_markup(GTK_WIDGET(children->data), markup);
+		gtk_c::set_bin_markup(GTK_BIN(children->data), markup);
 		g_free(g);
 		g_free(markup);
 		continue;
@@ -179,7 +217,7 @@ public:
 		gchar *g = g_markup_escape_text(v, -1);
 		g_free(v);
 		gchar *markup = g_strdup_printf("<span size=\"x-small\" color=\"red\"bgcolor=\"#dcdad5\">%s</span>", g);
-		gtk_c::set_bin_markup(GTK_WIDGET(children->data), markup);
+		gtk_c::set_bin_markup(GTK_BIN(children->data), markup);
 		g_free(g);
 		g_free(markup);
 	    }
@@ -188,7 +226,7 @@ public:
 		gchar *g = g_markup_escape_text(v, -1);
 		g_free(v);
 		gchar *markup = g_strdup_printf("<span size=\"x-small\" color=\"blue\"bgcolor=\"#dcdad5\">%s</span>", g);
-		gtk_c::set_bin_markup(GTK_WIDGET(children->data), markup);
+		gtk_c::set_bin_markup(GTK_BIN(children->data), markup);
 		g_free(g);
 		g_free(markup);
 	    }

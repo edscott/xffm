@@ -8,7 +8,8 @@ class Vpane{
 public:
     static GtkPaned *newVpane(void){
 	auto vpane = GTK_PANED(gtk_paned_new(GTK_ORIENTATION_VERTICAL));
-	gtk_paned_set_wide_handle (vpane, TRUE);
+	//gtk_paned_set_wide_handle (vpane, TRUE);
+	gtk_paned_set_wide_handle (vpane, FALSE);
 	auto top_scrolled_window = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new (NULL, NULL));
 	 g_object_set_data(G_OBJECT(vpane), "top_scrolled_window", top_scrolled_window);	 
 	auto bottom_scrolled_window = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new (NULL, NULL));

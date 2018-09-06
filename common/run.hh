@@ -44,7 +44,7 @@ private:
             return NULL;
         }
 
-        gchar *string = (gchar *)g_hash_table_lookup (stringHash, GINT_TO_POINTER(controller));
+        auto string = (gchar *)g_hash_table_lookup (stringHash, GINT_TO_POINTER(controller));
         if (!string){
             pthread_mutex_unlock(&string_hash_mutex);
             DBG("controller %d not found in hashtable\n", controller);
@@ -53,7 +53,7 @@ private:
         g_hash_table_steal(stringHash, GINT_TO_POINTER(controller));
         pthread_mutex_unlock(&string_hash_mutex);
         gchar bold[]={27, '[', '1', 'm',0};
-        gchar *dbg_string = g_strconcat(bold, string, NULL);
+        auto dbg_string = g_strconcat(bold, string, NULL);
         g_free(string);
         return dbg_string;
     }
@@ -62,7 +62,7 @@ private:
     exit_string(gchar *tubo_string){
         gchar *string = NULL;
         if(strchr (tubo_string, '\n')) *strchr (tubo_string, '\n') = 0;
-        gchar *s = strchr (tubo_string, '(');
+        auto s = strchr (tubo_string, '(');
         int pid = -1;
         long id = 0;
         if (s) {
@@ -75,9 +75,9 @@ private:
             }
         }
 #ifdef DEBUG_TRACE
-        gchar *g = g_strdup_printf("%c[31m<%d>", 27, pid);
+        auto g = g_strdup_printf("%c[31m<%d>", 27, pid);
 #else
-        gchar *g = g_strdup("");
+        auto g = g_strdup("");
 #endif
         //gchar *c_string = pop_hash((pid_t)id);
         gchar *c_string = pop_hash((pid_t)pid);
@@ -94,10 +94,10 @@ public:
             void (*stdout_f)(void *, void *, int),
             void (*stderr_f)(void *, void *, int),
             void (*finish_f)(void *)){
-        gchar *command = g_strdup("");
-        const gchar **p = arguments;
+        auto command = g_strdup("");
+        auto p = arguments;
         for (;p && *p; p++){
-            gchar *g =  g_strdup_printf("%s %s", command, *p);
+            auto g =  g_strdup_printf("%s %s", command, *p);
             g_free(command);
             command = g;
         }
@@ -129,10 +129,10 @@ public:
 
     static pid_t 
     thread_run(GtkTextView *textview, const gchar **arguments, gboolean scrollUp){
-        gchar *command = g_strdup("");
-        const gchar **p = arguments;
+        auto command = g_strdup("");
+        auto p = arguments;
         for (;p && *p; p++){
-            gchar *g =  g_strdup_printf("%s %s", command, *p);
+            auto g =  g_strdup_printf("%s %s", command, *p);
             g_free(command);
             command = g;
         }
@@ -183,7 +183,7 @@ public:
             retval = TRUE;
         }
         else {
-            gchar *p = g_find_program_in_path(g[0]);
+            auto p = g_find_program_in_path(g[0]);
             if (!p) retval = TRUE;
             g_free(p);
         }
@@ -201,7 +201,7 @@ public:
             ncommand = g_strdup_printf("%s -c \"%s\"", util_c::u_shell(), command);
         } else ncommand = g_strdup(command);
         if(!g_shell_parse_argv (ncommand, &argc, &argv, &error)) {
-            gchar *msg = g_strcompress (error->message);
+            auto msg = g_strcompress (error->message);
             print_c::print_error(textview, g_strdup_printf("%s: %s\n", msg, ncommand));
             g_free(ncommand);
             g_error_free (error);
@@ -209,7 +209,7 @@ public:
             return 0;
         }
         g_free(ncommand);
-        gchar *full_path = g_find_program_in_path(argv[0]);
+        auto full_path = g_find_program_in_path(argv[0]);
         if (full_path){
             g_free(argv[0]);
             argv[0] = full_path;
@@ -293,7 +293,7 @@ public:
 
     static void
     run_operate_stderr (void *data, void *stream, int childFD) {
-        GtkTextView *textview = GTK_TEXT_VIEW(data);
+        auto textview = GTK_TEXT_VIEW(data);
         if (!gtk_widget_is_visible(GTK_WIDGET(textview))) return;
         /*view_c *view_p = (view_c *)data;
         window_c *window_p = (window_c *)(view_p->get_window_v());
@@ -318,8 +318,8 @@ public:
 
     static void
     operate_stdout (void *data, void *stream, gint childFD) {
-        GtkTextView *textview = GTK_TEXT_VIEW(data);
-        gchar *line = (gchar *)stream;
+        auto textview = GTK_TEXT_VIEW(data);
+        auto line = (gchar *)stream;
 
         print_c::print(textview, "tag/green",  g_strdup(line));
         // This is a bit hacky, to keep runaway output from hogging
@@ -335,8 +335,8 @@ public:
     }
     static void
     operate_stderr (void *data, void *stream, gint childFD) {
-        GtkTextView *textview = GTK_TEXT_VIEW(data);
-        gchar *line = (gchar *)stream;
+        auto textview = GTK_TEXT_VIEW(data);
+        auto line = (gchar *)stream;
 
         print_c::print(textview, "tag/red",  g_strdup(line));
         // This is a bit hacky, to keep runaway output from hogging
@@ -353,7 +353,7 @@ public:
     static gboolean scrollToTop_f(void *data) {
         //view_c *view_p = (view_c *)data;
         //view_p->get_lpterm_p()->print("tag/bold", g_strdup_printf("%s\n", "run complete."));
-        GtkTextView *textview = GTK_TEXT_VIEW(data);
+        auto textview = GTK_TEXT_VIEW(data);
         print_c::show_text(textview);
         print_c::scroll_to_top(textview);
         return FALSE;
@@ -388,7 +388,7 @@ public:
 
     static void
     fork_function (void *data) {
-        gchar **argv = (char **)data;
+        auto argv = (gchar **)data;
 
         gint i = 0;
         static gchar *sudo_cmd=NULL;
@@ -406,8 +406,8 @@ public:
             } 	
             if (sudo_cmd){
                 if (strchr(argv[i], '&')){
-                    gchar **a = g_strsplit(argv[i], "&", -1);
-                    gchar **p=a;
+                    auto a = g_strsplit(argv[i], "&", -1);
+                    auto p=a;
                     for (;p && *p; p++){
                         const gchar *space = (strlen(*p))?" ":"";
                         const gchar *amp = (*(p+1))?"&amp;":"";
@@ -417,14 +417,14 @@ public:
                     }
                     g_strfreev(a);
                 } else {
-                    gchar *a = g_strdup(argv[i]);
+                    auto a = g_strdup(argv[i]);
                     if (strlen(a) >13) {
                         a[12] = 0;
                         a[11] = '.';
                         a[10] = '.';
                         a[9] = '.';
                     }
-                    gchar *g = g_strconcat(sudo_cmd,  " <i>",a, "</i>", NULL);
+                    auto g = g_strconcat(sudo_cmd,  " <i>",a, "</i>", NULL);
                     g_free(a);
                     g_free(sudo_cmd);
                     sudo_cmd=g;
@@ -439,7 +439,7 @@ public:
         }
 
         if (sudo_cmd) {
-            gchar *g = g_strconcat(sudo_cmd,  "\n", NULL);
+            auto g = g_strconcat(sudo_cmd,  "\n", NULL);
             g_free(sudo_cmd);
             sudo_cmd = g;
             // This  function makes copies of the strings pointed to by name and value
@@ -463,11 +463,11 @@ public:
 	gchar *new_command = NULL;
 	if (strncmp(strstr(command, "sudo "), "sudo -A ", strlen("sudo -A "))!=0)
 	{
-	    gchar *original_head=g_strdup(command);
-	    gchar *pos = strstr(original_head, "sudo ");
+	    auto original_head=g_strdup(command);
+	    auto pos = strstr(original_head, "sudo ");
 	    if (pos){
 		*pos = 0;
-		gchar *tail=g_strdup(strstr(command, "sudo ")+strlen("sudo "));
+		auto tail=g_strdup(strstr(command, "sudo ")+strlen("sudo "));
 		new_command = g_strconcat(original_head, "sudo -A ", tail, NULL);
 		g_free(tail);
 	    }
@@ -479,7 +479,7 @@ public:
     static pid_t 
     shell_command(GtkTextView *textview, const gchar *c, gboolean scrollUp){
 	// Make sure any sudo command has the "-A" option
-	gchar *command = sudo_fix(c);
+	auto command = sudo_fix(c);
 	DBG("shell_command = %s\n", c);
 	pid_t pid = thread_run(textview, command?command:c, scrollUp);
 	g_free (command);

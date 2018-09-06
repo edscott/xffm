@@ -14,6 +14,25 @@ class VButtonBox {
 public:
     static GtkBox *newBox(void){
 	auto vButtonBox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
+
+        GError *error=NULL;
+	GtkStyleContext *style_context = gtk_widget_get_style_context (GTK_WIDGET(vButtonBox));
+	gtk_style_context_add_class(style_context, GTK_STYLE_CLASS_BUTTON );
+	GtkCssProvider *css_provider = gtk_css_provider_new();
+	gtk_css_provider_load_from_data (css_provider, 
+    "\
+    box * {\
+      background-color: #dcdad5;\
+      border-width: 0px;\
+      border-radius: 0px;\
+      border-color: transparent;\
+    }\
+    ", 
+	    -1, &error);
+	gtk_style_context_add_provider (style_context, GTK_STYLE_PROVIDER(css_provider),
+				    GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+
 	auto clear_button =  gtk_c::dialog_button("edit-clear", NULL);
 	 g_object_set_data(G_OBJECT(vButtonBox), "clear_button", clear_button);
 	auto size_scale = newSizeScale();

@@ -165,9 +165,9 @@ public:
         //gtk_menu_button_set_popover (menu_button, popover);
         gtk_widget_show(GTK_WIDGET(menu_button));
 
-        auto new_tab_button = gtk_button_new ();
+        auto new_tab_button = GTK_BUTTON(gtk_button_new ());
         gtk_c::setup_image_button(new_tab_button, "list-add", _("Open a new tab (Ctrl+T)"));
-        gtk_widget_show(new_tab_button);
+        gtk_widget_show(GTK_WIDGET(new_tab_button));
 
         auto button_box = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
         gtk_box_pack_start(button_box, GTK_WIDGET(new_tab_button),  FALSE, FALSE, 0);
@@ -176,7 +176,7 @@ public:
         gtk_notebook_set_action_widget (notebook_, GTK_WIDGET(button_box), GTK_PACK_END);
     
         // FIXME:
-        void *p = (void *)this;
+        auto p = (void *)this;
         DBG("notebook this=%p/%p\n", (void *)this, p);
 
         g_signal_connect(G_OBJECT(new_tab_button), "clicked", 
@@ -197,7 +197,7 @@ public:
         // This will (and should) be set by the corresponding
 	// page class template 
 	// page->setPageLabel(g); 
-        gint pageNumber = gtk_notebook_append_page (notebook_,
+        auto pageNumber = gtk_notebook_append_page (notebook_,
                           GTK_WIDGET(page->pageChild()),
                           GTK_WIDGET(page->pageLabelBox()));
         gtk_notebook_set_tab_reorderable (notebook_,GTK_WIDGET(page->pageChild()), TRUE);

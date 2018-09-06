@@ -17,14 +17,14 @@ public:
 	g_object_get(G_OBJECT(vpane), "position", &current, NULL);
 	TRACE(">> max=%d, current=%d dialogw=%d dialogH+%d\n",
 		max, current, allocation->width, allocation->height);
-	gint oldMax = 
+	auto oldMax = 
 	    GPOINTER_TO_INT(g_object_get_data(G_OBJECT(vpane), "oldMax"));
-	gint oldCurrent = 
+	auto oldCurrent = 
 	    GPOINTER_TO_INT(g_object_get_data(G_OBJECT(vpane), "oldCurrent"));
 	if (max != oldMax) {
 	    // window size is changing
 	    TRACE("// window size is changing\n");
-	    gdouble ratio = (gdouble)oldCurrent / oldMax;
+	    auto ratio = (gdouble)oldCurrent / oldMax;
 	    gint newCurrent = floor(ratio * max);
 	    g_object_set_data(G_OBJECT(vpane), "oldCurrent", GINT_TO_POINTER(newCurrent));
 	    g_object_set_data(G_OBJECT(vpane), "oldMax", GINT_TO_POINTER(max));
@@ -56,6 +56,7 @@ public:
 	return;
     }*/
     Dialog(const gchar *title, const gchar *icon){
+
         Dialog();
 	setDialogIcon(icon);
 	setDialogTitle(title);
@@ -63,6 +64,9 @@ public:
 
     Dialog(void){
 	dialog_ = GTK_WINDOW(gtk_window_new (GTK_WINDOW_TOPLEVEL));
+
+                
+
 	gtk_window_set_default_size (dialog_,600 ,400);
         gtk_widget_set_has_tooltip (GTK_WIDGET(dialog_), TRUE);
         // FIXME:
@@ -101,7 +105,7 @@ public:
 	gtk_window_set_title (dialog_, title);
     }
     void setDialogIcon(const gchar *icon){
-	GdkPixbuf *pixbuf = pixbuf_c::get_pixbuf(icon, SIZE_ICON);
+	auto pixbuf = pixbuf_c::get_pixbuf(icon, SIZE_ICON);
 	gtk_window_set_icon (dialog_, pixbuf);
 	g_object_unref(pixbuf);
     }
@@ -125,9 +129,9 @@ private:
 	gint x_return, y_return;
 	guint w_return, h_return, d_return, border_return;
 	Window root_return;
-	Drawable drawable = gdk_x11_get_default_root_xwindow ();
+	auto drawable = gdk_x11_get_default_root_xwindow ();
 	//Visual Xvisual = gdk_x11_visual_get_xvisual(gdk_visual_get_system());
-	Display *display = gdk_x11_display_get_xdisplay(gdk_display_get_default());
+	auto display = gdk_x11_display_get_xdisplay(gdk_display_get_default());
 	XGetGeometry(display, drawable, &root_return,
 		&x_return, &y_return, 
 		&w_return, &h_return, 

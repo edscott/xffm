@@ -18,9 +18,9 @@ namespace xf
 typedef struct _Data Data;
 struct _Data
 {
-   GtkWidget *box,
-           *image,
-           *entry;
+   GtkWidget *box;
+   GtkWidget *image;
+   GtkWidget *entry;
    GdkPixbuf *pixbuf;
 };
 

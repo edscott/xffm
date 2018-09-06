@@ -52,7 +52,7 @@ public:
 	// (whenever possible)
 	// Pixbuf reference count increases each time a pixbuf is requested from 
 	// hash table. Caller is responsible for unreferencing when no longer used.
-	gint pixels = get_pixel_size(size);
+	auto pixels = get_pixel_size(size);
 	GdkPixbuf *pixbuf = pixbuf_hash_c::find_in_pixbuf_hash(icon_name, pixels);
 	if (pixbuf) return pixbuf;
 	// Not found, huh?
@@ -82,7 +82,7 @@ public:
 
     static GdkPixbuf *
     find_pixbuf(const gchar *icon_name, gint size){
-	gint pixels = get_pixel_size(size);
+	GdkPixbuf *pixels = get_pixel_size(size);
 	return pixbuf_hash_c::find_in_pixbuf_hash(icon_name, pixels);
     }
 };

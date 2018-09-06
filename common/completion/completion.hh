@@ -7,7 +7,9 @@
 
 namespace xf {
 template <class Type>
-class Completion : public CshCompletion<Type>, public LpTerm<Type>{
+class Completion : public CshCompletion<Type>
+                   , public LpTerm<Type>
+{
     using util_c = Util<double>;
     using print_c = Print<double>;
 

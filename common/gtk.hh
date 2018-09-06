@@ -57,12 +57,11 @@ public:
     }
 
     static void
-    setup_image_button (GtkWidget *button, const gchar *icon_name, const gchar *icon_tip){
-	gtk_widget_set_can_focus (button, FALSE);
-	gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
-	GtkWidget *image = gtk_image_new_from_icon_name (icon_name, GTK_ICON_SIZE_SMALL_TOOLBAR);
-	GdkPixbuf *pixbuf = 
-		pixbuf_c::get_pixbuf(icon_name, GTK_ICON_SIZE_SMALL_TOOLBAR);
+    setup_image_button (GtkButton *button, const gchar *icon_name, const gchar *icon_tip){
+	gtk_widget_set_can_focus (GTK_WIDGET(button), FALSE);
+	gtk_button_set_relief (button, GTK_RELIEF_NONE);
+	auto image = gtk_image_new_from_icon_name (icon_name, GTK_ICON_SIZE_SMALL_TOOLBAR);
+	auto pixbuf = pixbuf_c::get_pixbuf(icon_name, GTK_ICON_SIZE_SMALL_TOOLBAR);
 	if (image) {
 	    gtk_container_add (GTK_CONTAINER (button), image);
 	    // On page remove, reference count will be decreased
@@ -74,22 +73,24 @@ public:
 	DBG("gtk_c.cpp:: custom_tooltip not working right in Wayland\n");
 	//custom_tooltip(button, pixbuf, icon_tip);
 	// Simple tooltip:
-	 gtk_widget_set_tooltip_text (button, icon_tip);
+	 gtk_widget_set_tooltip_text (GTK_WIDGET(button), icon_tip);
 	
     }  
 
     static GtkWidget *
-    new_add_page_tab(GtkWidget *notebook, GtkWidget **new_button_p){
-	GtkWidget *page_child_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-	GtkWidget *page_label_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-	GtkWidget *page_label_icon_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-	GtkWidget *page_label_button = gtk_button_new ();
-	gtk_box_pack_start (GTK_BOX (page_label_box), page_label_icon_box, TRUE, TRUE, 0);
-	gtk_box_pack_end (GTK_BOX (page_label_box), page_label_button, TRUE, TRUE, 0);
-	gtk_widget_show_all (page_label_box);
-	gtk_widget_show (page_child_box);
-	gtk_notebook_append_page (GTK_NOTEBOOK(notebook), page_child_box, page_label_box);
-	gtk_notebook_set_tab_reorderable (GTK_NOTEBOOK(notebook), page_child_box, FALSE);
+    new_add_page_tab(GtkWidget *notebook, GtkButton **new_button_p){
+	auto page_child_box = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
+	auto page_label_box = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+	auto page_label_icon_box = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+	auto page_label_button = GTK_BOX(gtk_button_new ());
+	gtk_box_pack_start (page_label_box, GTK_WIDGET(page_label_icon_box), TRUE, TRUE, 0);
+	gtk_box_pack_end (page_label_box, GTK_WIDGET(page_label_button), TRUE, TRUE, 0);
+	gtk_widget_show_all (GTK_WIDGET(page_label_box));
+	gtk_widget_show (GTK_WIDGET(page_child_box));
+	gtk_notebook_append_page (GTK_NOTEBOOK(notebook), 
+                GTK_WIDGET(page_child_box), GTK_WIDGET(page_label_box));
+	gtk_notebook_set_tab_reorderable (GTK_NOTEBOOK(notebook), 
+                GTK_WIDGET(page_child_box), FALSE);
 	setup_image_button(page_label_button, "list-add", _("Open a new tab (Ctrl+T)"));
 	if (new_button_p) *new_button_p = page_label_button;
 	return page_child_box;
@@ -101,14 +102,14 @@ public:
 	    g_warning("incorrect function call\n");
 	    return;
 	}
-        GList *list = gtk_container_get_children (container);
+        auto list = gtk_container_get_children (container);
         for (GList *p = list; p && p->data; p= p->next){
             gtk_container_remove(container, GTK_WIDGET(p->data));
 	}
         g_list_free(list);
 	if(icon_id) {
-	    GdkPixbuf *pb = pixbuf_c::get_pixbuf (icon_id, size);
-	    GtkWidget *image = gtk_image_new_from_pixbuf (pb);
+	    auto pb = pixbuf_c::get_pixbuf (icon_id, size);
+	    auto image = gtk_image_new_from_pixbuf (pb);
             gtk_container_add(container, image);
 	    gtk_widget_show(image);
 	    g_object_unref(pb);
@@ -116,20 +117,20 @@ public:
     }
 
     static void
-    set_bin_image(GtkWidget *bin, const gchar *icon_id, gint size){
+    set_bin_image(GtkBin *bin, const gchar *icon_id, gint size){
 	if (!bin || !GTK_IS_WIDGET(bin)) {
 	    g_warning("rfm_set_bin_image(): incorrect function call\n");
 	    return;
 	}
-	GtkWidget *box = gtk_bin_get_child(GTK_BIN(bin));
-	GtkWidget *icon = (GtkWidget *)g_object_get_data(G_OBJECT(bin),"icon");
+	auto box = GTK_BOX(gtk_bin_get_child(bin));
+	auto icon = (GtkWidget *)g_object_get_data(G_OBJECT(bin),"icon");
 
 	if (icon){
 	    gtk_container_remove(GTK_CONTAINER(box), icon);
 	}
 	if(icon_id) {
-	    GdkPixbuf *pb = pixbuf_c::get_pixbuf (icon_id, size);
-	    GtkWidget *image = gtk_image_new_from_pixbuf (pb);
+	    auto pb = pixbuf_c::get_pixbuf (icon_id, size);
+	    auto image = gtk_image_new_from_pixbuf (pb);
 	    gtk_box_pack_start(GTK_BOX(box), image, FALSE, FALSE,0);
 	    g_object_set_data(G_OBJECT(bin), "icon", image);
 	    gtk_widget_show(image);
@@ -140,30 +141,30 @@ public:
     }
 
     static void 
-    set_bin_markup(GtkWidget *bin, const char *text){
+    set_bin_markup(GtkBin *bin, const char *text){
 	if (!bin || !GTK_IS_WIDGET(bin)) {
 	    g_warning("rfm_set_bin_markup(): incorrect function call\n");
 	    return;
 	}
-	GtkLabel *label = (GtkLabel *)g_object_get_data(G_OBJECT(bin), "label");
+	auto label = GTK_LABEL(g_object_get_data(G_OBJECT(bin), "label"));
 	gtk_label_set_markup(label, (text)?text:"");
     }
 
     static void
-    set_bin_contents(GtkWidget *bin, const char *icon_id, const char *text, gint size){
-	GtkWidget *child = gtk_bin_get_child(GTK_BIN(bin));
+    set_bin_contents(GtkBin *bin, const char *icon_id, const char *text, gint size){
+	auto child = gtk_bin_get_child(bin);
 	if (child) gtk_container_remove(GTK_CONTAINER(bin), child);
 	child = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-	gtk_widget_set_size_request (child, -1, 12);
+	gtk_widget_set_size_request (child, -1, size);
 	gtk_container_add(GTK_CONTAINER(bin), child);
 				
-	GtkWidget *label = gtk_label_new("");
+	auto label = GTK_LABEL(gtk_label_new(""));
 	g_object_set_data(G_OBJECT(bin), "label", label);
-	gtk_box_pack_end(GTK_BOX(child), label, TRUE, FALSE,0);
+	gtk_box_pack_end(GTK_BOX(child), GTK_WIDGET(label), TRUE, FALSE,0);
 	
 	set_bin_markup(bin, text);
 	set_bin_image(bin, icon_id, size);
-	gtk_widget_show_all (bin);
+	gtk_widget_show_all (GTK_WIDGET(bin));
     }
 
 
@@ -171,51 +172,51 @@ public:
     menu_item_new(const gchar *icon_id, const gchar *text)
     {
 	GdkPixbuf *pb = (icon_id)? pixbuf_c::get_pixbuf (icon_id, GTK_ICON_SIZE_SMALL_TOOLBAR): NULL;    
-	GtkWidget *w = gtk_menu_item_new_with_label ("");
-	GtkWidget *replacement = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0);
-	GtkWidget *label = gtk_bin_get_child(GTK_BIN(w));
+	auto w = gtk_menu_item_new_with_label ("");
+	auto replacement = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0));
+	auto label = GTK_LABEL(gtk_bin_get_child(GTK_BIN(w)));
 	if (label && GTK_IS_WIDGET(label)) {
 	    g_object_ref(label);
-	    gtk_container_remove(GTK_CONTAINER(w), label);
+	    gtk_container_remove(GTK_CONTAINER(w), GTK_WIDGET(label));
 	}
 
 	if (pb){
-	    GtkWidget *image = gtk_image_new_from_pixbuf (pb);
+	    auto image = gtk_image_new_from_pixbuf (pb);
 	    gtk_widget_show (image);
-	    gtk_box_pack_start(GTK_BOX(replacement), image, FALSE,FALSE,0);
+	    gtk_box_pack_start(replacement, image, FALSE,FALSE,0);
 	    g_object_set_data(G_OBJECT(w), "image", image);
 	}
 	if (label && GTK_IS_WIDGET(label)) {
-	    gtk_label_set_markup(GTK_LABEL(label), text);
-	    gtk_box_pack_start(GTK_BOX(replacement), label, FALSE,FALSE,3);
+	    gtk_label_set_markup(label, text);
+	    gtk_box_pack_start(replacement, GTK_WIDGET(label), FALSE,FALSE,3);
 	    g_object_set_data(G_OBJECT(w), "label", label);
-	    gtk_widget_show(label);
+	    gtk_widget_show(GTK_WIDGET(label));
 	    g_object_unref(label);
 	}
-	gtk_widget_show(replacement);
-	gtk_container_add(GTK_CONTAINER(w), replacement);
+	gtk_widget_show(GTK_WIDGET(replacement));
+	gtk_container_add(GTK_CONTAINER(w), GTK_WIDGET(replacement));
 	return w;
     }
 
 
     static GtkBox *vboxNew(gboolean homogeneous, gint spacing){
-	GtkWidget *box = gtk_box_new(GTK_ORIENTATION_VERTICAL, spacing);
-	gtk_box_set_homogeneous (GTK_BOX(box), homogeneous);
-	return GTK_BOX(box);
+	auto box = GTK_BOX(gtk_box_new(GTK_ORIENTATION_VERTICAL, spacing));
+	gtk_box_set_homogeneous (box, homogeneous);
+	return box;
     }
 
     static GtkBox *hboxNew(gboolean homogeneous, gint spacing){
-	GtkWidget *box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, spacing);
-	gtk_box_set_homogeneous (GTK_BOX(box), homogeneous);
-	return GTK_BOX(box);
+	auto box = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, spacing));
+	gtk_box_set_homogeneous (box, homogeneous);
+	return box;
     }
 
 
     static GtkButton *
     dialog_button (const char *icon_id, const char *text) {
-	GtkWidget *button = gtk_button_new ();
-	set_bin_contents(button, icon_id, text, SIZE_BUTTON);
-	return GTK_BUTTON(button);
+	auto button = GTK_BUTTON(gtk_button_new ());
+	set_bin_contents(GTK_BIN(button), icon_id, text, SIZE_BUTTON);
+	return button;
 
     }
 
@@ -239,21 +240,17 @@ public:
      // Map dialog.
      g_free(last_message);
      last_message = g_strdup(message);
-     GtkWidget *label, *content_area;
-     GtkDialogFlags flags;
-
-     std::cerr<<"fixme: signals::quick_help\n";
+     GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT;
 
      // Create the widgets
-     flags = GTK_DIALOG_DESTROY_WITH_PARENT;
      dialog = gtk_dialog_new_with_buttons (_("Help"),
 					   parent,
 					   flags,
 					   _("_OK"),
 					   GTK_RESPONSE_NONE,
 					   NULL);
-     content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
-     label = gtk_label_new (message);
+     auto content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
+     auto label = GTK_LABEL(gtk_label_new (message));
 
      // Ensure that the dialog box is destroyed when the user responds
 
@@ -264,31 +261,29 @@ public:
 
      // Add the label, and show everything we have added
 
-     gtk_container_add (GTK_CONTAINER (content_area), label);
+     gtk_container_add (GTK_CONTAINER (content_area), GTK_WIDGET(label));
      gtk_widget_show_all (dialog);
     }
 
     static GtkToggleButton *
     toggle_button (const char *icon_id, const char *text) {
-	GtkWidget *button = gtk_toggle_button_new ();
+	auto button = GTK_TOGGLE_BUTTON(gtk_toggle_button_new ());
 	set_bin_contents(button, icon_id, text, SIZE_BUTTON);
-	return GTK_TOGGLE_BUTTON(button);
+	return button;
     }
 
     static GtkMenu *
     mk_menu(const gchar **data, void (*menu_callback)(GtkWidget *, gpointer)){
-	
-	GtkMenu *menu = GTK_MENU(gtk_menu_new());
-	const gchar **p = data;
-	gint i;
+	auto menu = GTK_MENU(gtk_menu_new());
+	auto p = data;
 	if (!iconname_hash) initHash();
-	for (i=0;p && *p; p++,i++){
-	    const gchar *icon_name = (const gchar *)g_hash_table_lookup(iconname_hash, _(*p));
-	    GtkWidget *v = menu_item_new(icon_name, _(*p));
+	for (gint i=0;p && *p; p++,i++){
+	    auto icon_name = (const gchar *)g_hash_table_lookup(iconname_hash, _(*p));
+	    auto v = menu_item_new(icon_name, _(*p));
 	    g_object_set_data(G_OBJECT(v), "menu", (void *)menu);
-	    gtk_container_add (GTK_CONTAINER (menu), v);
+	    gtk_container_add (GTK_CONTAINER (menu), GTK_WIDGET(v));
 	    g_signal_connect ((gpointer) v, "activate", G_CALLBACK (*menu_callback), (void *)_(*p));
-	    gtk_widget_show (v);
+	    gtk_widget_show (GTK_WIDGET(v));
 	}
 	gtk_widget_show (GTK_WIDGET(menu));
 	return menu;

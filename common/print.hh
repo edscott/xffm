@@ -46,7 +46,7 @@ public:
     static void print_icon(GtkTextView *textview, const gchar *iconname, gchar *string)
     {
         if (!textview) return;
-	GdkPixbuf *pixbuf = pixbuf_c::get_pixbuf(iconname, -16);
+	auto pixbuf = pixbuf_c::get_pixbuf(iconname, -16);
 	void *arg[]={(void *)pixbuf, (void *)textview, NULL, (void *)string};
 	context_function(print_i, arg);
 	g_free(string);
@@ -58,7 +58,7 @@ public:
 				gchar *string)
     {
         if (!textview) return;
-	GdkPixbuf *pixbuf = pixbuf_c::get_pixbuf(iconname, -16);
+	auto pixbuf = pixbuf_c::get_pixbuf(iconname, -16);
 	void *arg[]={(void *)pixbuf, (void *)textview, (void *)tag, (void *)string};
 	context_function(print_i, arg);
 	g_free(string);
@@ -96,7 +96,7 @@ public:
 
     static void show_text(GtkTextView *textview){
         if (!textview) return;
-        GtkPaned *vpane = GTK_PANED(g_object_get_data(G_OBJECT(textview), "vpane"));
+        auto vpane = GTK_PANED(g_object_get_data(G_OBJECT(textview), "vpane"));
 	void *arg[]={(void *)vpane, NULL};
         context_function(show_text_buffer_f, arg);
     }
@@ -104,7 +104,7 @@ public:
 
     static void hide_text(GtkTextView *textview){
         if (!textview) return;
-        GtkPaned *vpane = GTK_PANED(g_object_get_data(G_OBJECT(textview), "vpane"));
+        auto vpane = GTK_PANED(g_object_get_data(G_OBJECT(textview), "vpane"));
 	void *arg[]={(void *)vpane, NULL};
         context_function(hide_text_buffer_f, arg);
     }
@@ -116,7 +116,7 @@ public:
 	// make sure all text is written before attempting scroll
 	while (gtk_events_pending()) gtk_main_iteration();
 	GtkTextIter start, end;
-	GtkTextBuffer *buffer = gtk_text_view_get_buffer (textview);
+	auto buffer = gtk_text_view_get_buffer (textview);
 	gtk_text_buffer_get_bounds (buffer, &start, &end);
         gtk_text_view_scroll_to_iter (textview,
                               &start,
@@ -133,10 +133,9 @@ public:
 	// make sure all text is written before attempting scroll
 	while (gtk_events_pending()) gtk_main_iteration();
 	GtkTextIter start, end;
-	GtkTextBuffer *buffer;
-	buffer = gtk_text_view_get_buffer (textview);
+	auto buffer = gtk_text_view_get_buffer (textview);
 	gtk_text_buffer_get_bounds (buffer, &start, &end);
-	GtkTextMark *mark = gtk_text_buffer_create_mark (buffer, "scrolldown", &end, FALSE);
+	auto mark = gtk_text_buffer_create_mark (buffer, "scrolldown", &end, FALSE);
 	gtk_text_view_scroll_to_mark (textview, mark, 0.2,    /*gdouble within_margin, */
 				      TRUE, 1.0, 1.0);
 	//gtk_text_view_scroll_mark_onscreen (textview, mark);
@@ -153,7 +152,7 @@ private:
         gpointer function_data = arg[1];
         pthread_mutex_t *mutex = (pthread_mutex_t *)arg[2];
         pthread_cond_t *signal = (pthread_cond_t *)arg[3];
-        void **result_p = (void **)arg[4];
+        auto result_p = (void **)arg[4];
         void *result = (*function)(function_data);
         pthread_mutex_lock(mutex);
         *result_p = result;
@@ -165,7 +164,7 @@ private:
     static void *context_function(void * (*function)(gpointer), void * function_data){
 	pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 	pthread_cond_t signal = PTHREAD_COND_INITIALIZER; 
-	void *result=GINT_TO_POINTER(-1);
+	auto result=GINT_TO_POINTER(-1);
 	void *arg[] = {
 	    (void *)function,
 	    (void *)function_data,
@@ -191,18 +190,18 @@ private:
     print_f(void *data){
         if (!data) return GINT_TO_POINTER(-1);
         void **arg = (void **)data;
-        GtkTextView *textview = GTK_TEXT_VIEW(arg[0]);
+        auto textview = GTK_TEXT_VIEW(arg[0]);
         if (!GTK_IS_TEXT_VIEW(textview)) return GINT_TO_POINTER(-1);
-        const gchar *tag = (const gchar *)arg[1];
-        const gchar *string = (const gchar *)arg[2];
+        auto tag = (const gchar *)arg[1];
+        auto string = (const gchar *)arg[2];
         set_font_size (GTK_WIDGET(textview));
 
-        GtkTextBuffer *buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (textview));
+        auto buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (textview));
         if (trim_diagnostics(buffer)){
             // textview is at line limit.
         }
 
-        GtkTextTag **tags = resolve_tags(buffer, tag);
+        auto tags = resolve_tags(buffer, tag);
         if(string && strlen (string)) {
             insert_string (buffer, string, tags);
         }
@@ -244,14 +243,14 @@ private:
     static void *
     print_s(void *data){
         if (!data) return GINT_TO_POINTER(-1);
-        void **arg = (void **)data;
-        GtkTextView *textview = GTK_TEXT_VIEW(arg[0]);
+        auto arg = (void **)data;
+        auto textview = GTK_TEXT_VIEW(arg[0]);
  
         if (!GTK_IS_TEXT_VIEW(textview)) return GINT_TO_POINTER(-1);
-        const gchar *string = (const gchar *)arg[1];
+        auto string = (const gchar *)arg[1];
 
         set_font_size (GTK_WIDGET(textview));
-        GtkTextBuffer *buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (textview));
+        auto buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (textview));
         GtkTextIter start, end;
         gtk_text_buffer_get_bounds (buffer, &start, &end);
         gtk_text_buffer_delete (buffer, &start, &end);
@@ -263,9 +262,9 @@ private:
     static void *
     print_sl(void *data){
         if (!data) return GINT_TO_POINTER(-1);
-        void **arg = (void **)data;
-        GtkLabel *status_label = GTK_LABEL(arg[0]);
-        const gchar *text = (const gchar *)arg[1];
+        auto arg = (void **)data;
+        auto status_label = GTK_LABEL(arg[0]);
+        auto text = (const gchar *)arg[1];
         if (!GTK_IS_LABEL(status_label)) return GINT_TO_POINTER(-1);
         gtk_label_set_markup(status_label, text);
         return NULL;
@@ -277,10 +276,10 @@ public:
     get_current_text (GtkTextView *textview) {
 	// get current text
 	GtkTextIter start, end;
-	GtkTextBuffer *buffer = gtk_text_view_get_buffer (textview);
+	auto buffer = gtk_text_view_get_buffer (textview);
 
 	gtk_text_buffer_get_bounds (buffer, &start, &end);
-	gchar *t = gtk_text_buffer_get_text (buffer, &start, &end, TRUE);
+	auto t = gtk_text_buffer_get_text (buffer, &start, &end, TRUE);
 	g_strchug(t);
 	return t;
     }
@@ -289,14 +288,14 @@ public:
     get_text_to_cursor (GtkTextView *textview) {
 	// get current text
 	GtkTextIter start, end;
-	GtkTextBuffer *buffer = gtk_text_view_get_buffer (textview);
+	auto buffer = gtk_text_view_get_buffer (textview);
 	gint cursor_position;
 	// cursor_position is a GtkTextBuffer internal property (read only)
 	g_object_get (G_OBJECT (buffer), "cursor-position", &cursor_position, NULL);
 	
 	gtk_text_buffer_get_iter_at_offset (buffer, &start, 0);
 	gtk_text_buffer_get_iter_at_offset (buffer, &end, cursor_position);
-	gchar *t = gtk_text_buffer_get_text (buffer, &start, &end, TRUE);
+	auto t = gtk_text_buffer_get_text (buffer, &start, &end, TRUE);
 	g_strchug(t);
 	TRACE ("lpterm_c::get_text_to_cursor: to cursor position=%d %s\n", cursor_position, t);
 	return t;
@@ -306,8 +305,8 @@ private:
     static void *
     clear_text_buffer_f(void *data){
         if (!data) return GINT_TO_POINTER(-1);
-        void **arg=(void **)data;
-        GtkTextBuffer *buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (arg[0]));
+        auto arg=(void **)data;
+        auto buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (arg[0]));
         GtkTextIter start, end;
         gtk_text_buffer_get_bounds (buffer, &start, &end);
         gtk_text_buffer_delete (buffer, &start, &end);
@@ -317,8 +316,8 @@ private:
     static void *
     hide_text_buffer_f (void *data) {
         if (!data) return GINT_TO_POINTER(-1);
-        void **arg=(void **)data;
-        GtkPaned *vpane = GTK_PANED(arg[0]);
+        auto arg=(void **)data;
+        auto vpane = GTK_PANED(arg[0]);
         if(!vpane) {
             DBG("vpane is NULL\n");
             return NULL;
@@ -330,21 +329,20 @@ private:
     static void *
     show_text_buffer_f (void *data) {
         if (!data) return GINT_TO_POINTER(-1);
-        void **arg=(void **)data;
-        GtkPaned *vpane = GTK_PANED(arg[0]);
+        auto arg=(void **)data;
+        auto vpane = GTK_PANED(arg[0]);
         if(!vpane) {
             DBG("vpane is NULL\n");
             return NULL;
         }
-        GtkWidget *window = gtk_widget_get_toplevel(GTK_WIDGET(vpane));
+        auto window = gtk_widget_get_toplevel(GTK_WIDGET(vpane));
 
         GtkAllocation allocation;
         gtk_widget_get_allocation (window, &allocation);
         
         if (allocation.height > 50)
         {
-            gdouble position = 
-                gtk_paned_get_position (vpane);
+            auto position = gtk_paned_get_position (vpane);
             if(position > allocation.height * 0.75) {
                 gtk_paned_set_position (vpane, allocation.height * 0.60);
             }
@@ -478,7 +476,7 @@ private:
     static void insert_string (GtkTextBuffer * buffer, const gchar * s, GtkTextTag **tags) {
         if(!s) return;
         GtkTextIter start, end, real_end;
-        gint line = gtk_text_buffer_get_line_count (buffer);
+        auto line = gtk_text_buffer_get_line_count (buffer);
         gchar *a = NULL;
        
 
@@ -526,7 +524,7 @@ private:
                 gchar **t = tags;
                 gint tag_count = 0;
                 for (;t && *t; t++)tag_count++;
-                GtkTextTag **gtags = (GtkTextTag **)malloc((tag_count+1)*sizeof(GtkTextTag *));
+                auto gtags = (GtkTextTag **)malloc((tag_count+1)*sizeof(GtkTextTag *));
                 if (!gtags) g_error("malloc: %s\n", "no memory");
                 memset(gtags, 0, (tag_count+1)*sizeof(GtkTextTag *));
 
@@ -561,11 +559,11 @@ private:
             return;
         }
 
-        GtkTextMark *mark = gtk_text_buffer_get_mark (buffer, "rfm-ow");
+        auto mark = gtk_text_buffer_get_mark (buffer, "rfm-ow");
         gchar *cr = (gchar *)strchr (s, 0x0D);
         if(cr && cr[1] == 0x0A) *cr = ' ';       //CR-LF
         if(strchr (s, 0x0D)) {      //CR
-            gchar *aa = g_strdup (s);
+            auto aa = g_strdup (s);
             *strchr (aa, 0x0D) = 0;
             insert_string (buffer, aa, tags);
             g_free (aa);
@@ -597,8 +595,8 @@ private:
         gtk_text_buffer_get_end_iter (buffer, &real_end);
 
         // overwrite section
-        gchar *pretext = gtk_text_buffer_get_text (buffer, &start, &end, TRUE);
-        gchar *posttext = gtk_text_buffer_get_text (buffer, &end, &real_end, TRUE);
+        auto pretext = gtk_text_buffer_get_text (buffer, &start, &end, TRUE);
+        auto posttext = gtk_text_buffer_get_text (buffer, &end, &real_end, TRUE);
         long prechars = g_utf8_strlen (pretext, -1);
         long postchars = g_utf8_strlen (posttext, -1);
         long qchars = g_utf8_strlen (q, -1);
@@ -641,8 +639,8 @@ private:
      
     static gboolean trim_diagnostics(GtkTextBuffer *buffer) {
     //  This is just to prevent a memory overrun (intentional or unintentional).
-        gint line_count = gtk_text_buffer_get_line_count (buffer);
-        glong max_lines_in_buffer = MAX_LINES_IN_BUFFER;
+        auto line_count = gtk_text_buffer_get_line_count (buffer);
+        auto max_lines_in_buffer = MAX_LINES_IN_BUFFER;
         if (line_count > max_lines_in_buffer) {
             gtk_text_buffer_set_text(buffer, "", -1);
             return TRUE;
@@ -653,15 +651,15 @@ private:
     static void
     set_font_size (GtkWidget * widget) {
         if (!GTK_IS_WIDGET(widget)) return;
-        gint fontsize = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(widget),	"fontsize"));
+        auto fontsize = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(widget),	"fontsize"));
 
         gint newsize=12; // default font size.
-        const gchar *p = getenv ("FIXED_FONT_SIZE");
+        auto p = getenv ("FIXED_FONT_SIZE");
             TRACE( "%s:\n", p);
         if(p && strlen (p)) {
             errno=0;
             long value = strtol(p, NULL, 0);
-            gchar *string = g_strdup_printf("%d --> %ld\n", newsize, value);
+            auto string = g_strdup_printf("%d --> %ld\n", newsize, value);
             TRACE( "%s\n", string);
             if (errno == 0){
                 newsize = value;
@@ -673,11 +671,11 @@ private:
             g_object_set_data(G_OBJECT(widget), 
                     "fontsize", GINT_TO_POINTER(fontsize));
 
-            GtkStyleContext *style_context = gtk_widget_get_style_context (widget);
+            auto style_context = gtk_widget_get_style_context (widget);
             gtk_style_context_add_class(style_context, GTK_STYLE_CLASS_VIEW );
-            GtkCssProvider *css_provider = gtk_css_provider_new();
+            auto css_provider = gtk_css_provider_new();
             GError *error=NULL;
-            gchar *data = g_strdup_printf("* {\
+            auto data = g_strdup_printf("* {\
     font-size: %dpx;\
     }", fontsize);
             gtk_css_provider_load_from_data (css_provider, data, -1, &error);
