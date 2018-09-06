@@ -15,7 +15,8 @@ namespace xf{
 template <class Type>
 class PageChild :
     public Completion<Type>,
-    public ThreadControl<Type>
+    public ThreadControl<Type>,
+    public Pathbar<Type>
 {
     using gtk_c = Gtk<double>;
     using run_c = Run<double>;
@@ -26,7 +27,6 @@ private:
 public:
 
     PageChild(void){
-	pageWorkdir_ = NULL;
 	pageChild_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
 	pageLabel_ = GTK_LABEL(gtk_label_new ("foobar"));
 	pageLabelBox_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
@@ -48,8 +48,10 @@ public:
 	set_spinner(FALSE);
 
 	// pathbar should be created with pathbar_c object.
-	// FIXME: add pathbar
-	// gtk_box_pack_start (pageChild, pathbar_p->get_pathbar(), FALSE, FALSE, 0);
+	// FIXME: configure pathbar
+	//this->update_pathbar("/home/edscott");
+	gtk_box_pack_start (pageChild_, this->get_pathbar(), FALSE, FALSE, 0);
+
 	gtk_widget_show_all(GTK_WIDGET(pageLabelBox_));
 
         GtkBox *hViewBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
@@ -126,16 +128,15 @@ public:
 	reference_run_button((void *)runButton);
 	// final creation will occur with context function.
     }
-    const gchar *pageWorkdir(void){return (const gchar *)pageWorkdir_;}
+    const gchar *pageWorkdir(void){return (const gchar *)this->workdir();}
     void setPageWorkdir(const gchar *dir){
 	DBG("setPageWorkdir: %s\n", dir);
-	//g_free(pageWorkdir_);
-	pageWorkdir_ = g_strdup(dir);
-	gchar *g = Completion<Type>::get_terminal_name(pageWorkdir_);
+	this->setWorkdir(dir);
+	DBG("update_pathbar: %s\n", dir);
+	this->update_pathbar(dir);
+	gchar *g = Completion<Type>::get_terminal_name(this->workdir());
 	setPageLabel(g);
 	g_free(g);
-	// and for bash completion
-	this->setWorkdir(dir);
     }
 
     void setTabIcon(const gchar *icon){
@@ -204,7 +205,6 @@ private:
     GtkBox *vButtonBox_;
     GtkPaned *vpane_;
 
-    gchar *pageWorkdir_;
 
 
 };

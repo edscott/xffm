@@ -10,23 +10,20 @@ class Pathbar
     using gtk_c = Gtk<double>;
     using util_c = Util<double>;
 private:
-        GtkNotebook *notebook_;
         //void *window_p;
 	GtkWidget *pathbar_;
         //void *view_p;
     
 public:
-    Pathbar(void *window_data, GtkNotebook *data) {
-	notebook_ = data;
-	//window_c *window_p = (window_c *)window_data;
+    Pathbar(void) {
 	pathbar_ = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
 	g_object_set_data(G_OBJECT(pathbar_), "callback", (void *)pathbar_go);
-	GtkWidget *pb_button = pathbar_button( NULL, ".");
+	GtkButton *pb_button = pathbar_button( NULL, ".");
 
-	gtk_box_pack_start (GTK_BOX (pathbar_), pb_button, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (pathbar_), GTK_WIDGET(pb_button), FALSE, FALSE, 0);
 	g_object_set_data(G_OBJECT(pb_button), "name", g_strdup("RFM_ROOT"));
 	g_signal_connect (G_OBJECT(pb_button) , "clicked", BUTTON_CALLBACK (pathbar_go), (void *)this);
-	gtk_widget_show(pb_button);
+	gtk_widget_show(GTK_WIDGET(pb_button));
     }
 
     GtkWidget *
@@ -89,8 +86,9 @@ public:
 	    
 	GtkRequisition minimum;
 	GtkAllocation allocation;
-	gtk_widget_get_allocation(pathbar_, &allocation);
-	TRACE("pathbar width=%d\n", allocation.width);
+	//gtk_widget_get_allocation(pathbar_, &allocation);
+	gtk_widget_get_allocation(gtk_widget_get_toplevel(pathbar_), &allocation);
+	DBG("pathbar width=%d\n", allocation.width);
 	gint width = allocation.width;
 
 	// First we hide all buttons, except "RFM_ROOT"
@@ -125,7 +123,9 @@ public:
 
 	// Show active button
 	gtk_widget_show(GTK_WIDGET(active->data));
+
 	gtk_widget_get_preferred_size(GTK_WIDGET(active->data), &minimum, NULL);
+	    DBG("#### width, minimum.width %d %d\n",width,  minimum.width);
 	width -= minimum.width;
      
 	// Work backwards from active button we show buttons that will fit.
@@ -134,6 +134,7 @@ public:
 	    gchar *name = (gchar *)g_object_get_data(G_OBJECT(children->data), "name");
 	    if (strcmp(name, "RFM_ROOT")==0) continue;
 	    gtk_widget_get_allocation(GTK_WIDGET(children->data), &allocation);
+	    DBG("#### width, allocaltion.width %d %d\n",width,  allocation.width);
 	    width -= allocation.width;
 	    if (width < 0) break;
 	    gtk_widget_show(GTK_WIDGET(children->data));
@@ -210,7 +211,7 @@ public:
 	Pathbar *pathbar_p = (Pathbar *)arg[0];
 	gchar *path = (gchar *)arg[1];
 	GtkWidget *pathbar = pathbar_p->get_pathbar();
-	TRACE( "update_pathbar_f:: %s\n", path);
+	DBG( "update_pathbar_f:: %s\n", path);
 
 	if (!pathbar) return NULL;
 	if (!path){
@@ -266,9 +267,9 @@ public:
 	// Add new tail
 	gpointer callback = (gpointer)g_object_get_data(G_OBJECT(pathbar), "callback");
 	if (strcmp(path, "RFM_MODULE")) for (;paths[i]; i++){
-	    GtkWidget *pb_button = pathbar_p->pathbar_button(NULL, 
+	    GtkButton *pb_button = pathbar_p->pathbar_button(NULL, 
 		    strlen(paths[i])?paths[i]:G_DIR_SEPARATOR_S);
-	    gtk_container_add(GTK_CONTAINER(pathbar), pb_button);
+	    gtk_container_add(GTK_CONTAINER(pathbar), GTK_WIDGET(pb_button));
 
 	    gchar *g = (pb_path!=NULL)?
 		g_strdup_printf("%s%s%s",pb_path, 
@@ -277,7 +278,7 @@ public:
 		g_strdup(paths[i]);
 	    g_free(pb_path);
 	    pb_path = g;
-	    TRACE( "+++***** setting pbpath --> %s\n", pb_path);
+	    DBG( "+++***** setting pbpath --> %s\n", pb_path);
 	    g_object_set_data(G_OBJECT(pb_button), "path", g_strdup(pb_path));
 	    g_signal_connect (G_OBJECT(pb_button) , "clicked", G_CALLBACK (callback), (void *)pathbar_p);
 	    
