@@ -8,6 +8,7 @@
 #include "threadcontrol.hh"
 #include "runbutton.hh"
 #include "pathbar.hh"
+#include "pagebase.hh"
 
 namespace xf{
 //template <class Type> class RunButton;
@@ -16,7 +17,8 @@ template <class Type>
 class PageChild :
     public Completion<Type>,
     public ThreadControl<Type>,
-    public Pathbar<Type>
+    public Pathbar<Type>,
+    public PageBase<Type>
 {
     using gtk_c = Gtk<double>;
     using run_c = Run<double>;
@@ -128,13 +130,13 @@ public:
 	reference_run_button((void *)runButton);
 	// final creation will occur with context function.
     }
-    const gchar *pageWorkdir(void){return (const gchar *)this->workdir();}
+    const gchar *pageWorkdir(void){return (const gchar *)this->workDir();}
     void setPageWorkdir(const gchar *dir){
 	DBG("setPageWorkdir: %s\n", dir);
-	this->setWorkdir(dir);
+	this->setWorkDir(dir);
 	DBG("update_pathbar: %s\n", dir);
 	this->update_pathbar(dir);
-	gchar *g = Completion<Type>::get_terminal_name(this->workdir());
+	gchar *g = Completion<Type>::get_terminal_name(this->workDir());
 	setPageLabel(g);
 	g_free(g);
     }

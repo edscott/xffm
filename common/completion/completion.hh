@@ -6,6 +6,7 @@
 #include "lpterm.hh"
 
 namespace xf {
+template <class Type> class PageChild;
 template <class Type>
 class Completion : public CshCompletion<Type>
                    , public LpTerm<Type>
@@ -14,9 +15,6 @@ class Completion : public CshCompletion<Type>
     using print_c = Print<double>;
 
 public:
-    Completion(void){
-        workdir_ = NULL;
-    }
     static     gchar *
     get_terminal_name (const gchar *path) {
         gchar *iconname;
@@ -46,15 +44,7 @@ public:
 
     void setInput(GtkTextView *input){input_ = input;}
     void setOutput(GtkTextView *output){output_ = output;}
-    void setWorkdir(const gchar *workdir){
-        g_free(workdir_);
-        workdir_ = g_strdup(workdir);
-        DBG("workdir set to %s\n", workdir_);
-    }
-    const gchar * workdir(void){
-        DBG("returning workdir_%s\n", workdir_);
-        return workdir_;
-    }
+
     gint
     keyboard_event( GdkEventKey * event) {
         TRACE( "lpterm_c::lpterm_keyboard_event...\n");
@@ -81,7 +71,9 @@ public:
 	    gchar *command = print_c::get_current_text(input_);
 	    DBG("activated with %s\n", command);
             this->csh_clean_start();
-	    this->run_lp_command(output_, workdir_, command);
+            const gchar *workdir = ((PageChild<Type> *)this)->workDir();
+            DBG("command at %s\n", workdir);
+	    this->run_lp_command(output_, workdir, command);
 	    this->csh_save_history(command);
 	    print_c::clear_text(input_);
 	    g_free(command);
@@ -95,7 +87,7 @@ public:
         }
         // tab for bash completion.
         if(event->keyval == GDK_KEY_Tab) {
-            BashCompletion<Type>::bash_completion(input_, output_, workdir_);
+            BashCompletion<Type>::bash_completion(input_, output_, ((PageChild<Type> *)this)->workDir());
             return TRUE;
         }
 
@@ -132,7 +124,6 @@ public:
 private:
     GtkTextView *output_;
     GtkTextView *input_;
-    gchar *workdir_;
 
 };
 }

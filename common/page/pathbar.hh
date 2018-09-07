@@ -5,6 +5,7 @@
 
 
 namespace xf {
+template <class Type> class PageChild;
 
 template <class Type> 
 class Pathbar
@@ -107,6 +108,7 @@ public:
 		const gchar *path = (gchar *)g_object_get_data(G_OBJECT(button), "path");
 		if (!path) path = "xffm:root";
 		DBG("FIXME: send cd instruction: %s\n", path);
+                ((PageChild<Type> *)this)->setPageWorkdir(path);
 		/*
 		view_c *view_p = (view_c *)g_object_get_data(G_OBJECT(pathbar_), "view_p");
 		if (!view_p) g_error("view_p data not set for g_object pathbar!\n");

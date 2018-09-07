@@ -2,6 +2,8 @@
 #define MENU_POPOVER_HH
 
 #undef TRY_POPOVER
+//#define TRY_POPOVER 1
+
 namespace xf {
 template <class Type>
 class MenuPopover {
@@ -24,7 +26,7 @@ public:
     
     GtkMenuButton *menuButton_;
 #ifdef TRY_POPOVER
-    GtkPopoverMenu *createPopover(GtkWidget *widget){
+    GtkPopover *createPopover(GtkWidget *widget){
         menuItem_t item[]={
             {N_("Home"), (void *)home, NULL},
             {N_("Open terminal"), (void *)terminal, NULL},
@@ -35,24 +37,22 @@ public:
         auto popOver = GTK_POPOVER(gtk_popover_new (widget));
         
         auto menuPopover = GTK_POPOVER_MENU(gtk_popover_menu_new());
-        auto menu = GTK_MENU(gtk_menu_new());
         //g_object_set(G_OBJECT(menuPopover), "name", "main", NULL);
 
         auto p = item;
         gint i;
         for (i=0;p && p->label && i<1; p++,i++){
             GtkWidget *v = gtk_menu_item_new_with_label (_(p->label));
-            gtk_container_add (GTK_CONTAINER (menu), v);
+            gtk_container_add (GTK_CONTAINER (menuPopover), v);
             g_signal_connect ((gpointer) v, "activate", MENUITEM_CALLBACK (p->callback), p->callbackData);
             gtk_widget_show (v);
         }
 
-        gtk_widget_show (GTK_WIDGET(menu));
-        gtk_container_add (GTK_CONTAINER (menuPopover), GTK_WIDGET(menu));
         gtk_widget_show (GTK_WIDGET(menuPopover));
         gtk_container_add (GTK_CONTAINER (popOver), GTK_WIDGET(menuPopover));
+        gtk_widget_show (GTK_WIDGET(popOver));
 
-        return menuPopover;
+        return popOver;
     }
 #else
 

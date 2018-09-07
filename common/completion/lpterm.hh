@@ -288,6 +288,19 @@ public:
 		continue;
 	    }
 	    // automatic shell determination:
+            if (strcmp(workdir, "xffm:root")==0) {
+                if (chdir(g_get_home_dir()) < 0){
+                    DBG("Cannot chdir to %s\n", g_get_home_dir());
+                    DBG("aborting command: \"%s\"\n", command);
+                    continue;
+                }
+            } else {
+                if (chdir(workdir) < 0){
+                    DBG("Cannot chdir to %s\n", workdir);
+                    DBG("aborting command: \"%s\"\n", command);
+                    continue;
+                }
+            }
 	    pid_t child = run_c::thread_run(output, *c, FALSE);
 	    page_->newRunButton(*c, child);
 	    // forced shell to command:
@@ -323,6 +336,8 @@ public:
 	gchar *gg=NULL;
 
 	if (argvp[1] == NULL){
+	    print_c::show_text(output);
+	    print_c::print(output, "tag/green", g_strdup_printf("cd %s\n", g_get_home_dir()));
 	    return g_strdup(g_get_home_dir());
 	}
 

@@ -12,17 +12,27 @@ public:
 	auto hButtonBox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
 	
 	auto status_icon = // Term input (status) icon. 
-            GTK_IMAGE(gtk_image_new_from_icon_name ("utilities-terminal", GTK_ICON_SIZE_SMALL_TOOLBAR)); 
-	 g_object_set_data(G_OBJECT(hButtonBox), "status_icon", status_icon);
+            //GTK_IMAGE(gtk_image_new_from_icon_name ("utilities-terminal", GTK_ICON_SIZE_SMALL_TOOLBAR)); 
+            GTK_BUTTON(gtk_button_new());
+        gtk_c::setup_image_button(status_icon, "utilities-terminal", _("Terminal"));
+        fixme network down
+            g_signal_connect(status_icon, "clicked", 
+                NOTEBOOK_4_CALLBACK (notebookSignals<double>::change_current_page), NULL);
+
+        
+        g_object_set_data(G_OBJECT(hButtonBox), "status_icon", status_icon);
 	auto iconview_icon = 
             GTK_IMAGE(gtk_image_new_from_icon_name ("system-file-manager", GTK_ICON_SIZE_SMALL_TOOLBAR)); 
 	 g_object_set_data(G_OBJECT(hButtonBox), "iconview_icon", iconview_icon);
+
+
 	auto status = 
             createStatus(); // Status textview
          g_object_set_data(G_OBJECT(hButtonBox), "status", status);
 	auto statusBox = 
             GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
 	 g_object_set_data(G_OBJECT(hButtonBox), "statusBox", statusBox);
+
 	auto status_button = 
             GTK_BUTTON(gtk_button_new());
 	 g_object_set_data(G_OBJECT(hButtonBox), "status_button", status_button);

@@ -216,24 +216,29 @@ public:
         }
         DBG("disconnect page %d\n", pageNumber);
        //gtk_widget_hide(child);
-         auto page = (PageChild<Type> *)g_hash_table_lookup(pageHash_, (void *)child);
+        auto page = (PageChild<Type> *)g_hash_table_lookup(pageHash_, (void *)child);
         if (currentPage == pageNumber) {
             gtk_notebook_set_current_page (notebook_, pageNumber-1);
         } 
-        // FIXME: freaking memory leak, but removing page makes notebook crazy
+
         gtk_widget_hide(child);
+        g_hash_table_remove(pageHash_, (void *)child);
+        while (gtk_events_pending()) gtk_main_iteration();
+        if (g_hash_table_size(pageHash_) == 0){
+            gtk_widget_hide(gtk_widget_get_toplevel(child));
+        }
+        while (gtk_events_pending()) gtk_main_iteration();
+        if (g_hash_table_size(pageHash_) == 0){
+            gtk_main_quit();
+            exit(1);
+        }
+
+        delete(page);
+        // XXX:   removing page makes notebook crazy
+        //         Maybe because child is already hidden, which removes page...
         //gtk_notebook_remove_page (notebook_, pageNumber);
 
         DBG("******** deleted page with child %p\n", (void *)child);
-
-        g_hash_table_remove(pageHash_, (void *)child);
-        while (gtk_events_pending()) gtk_main_iteration();
-        delete(page);
-        if (g_hash_table_size(pageHash_) == 0){
-            gtk_main_quit();
-            // freaking leak is closed here...
-            exit(1);
-        }
     }
 
 
@@ -270,7 +275,20 @@ public:
             DBG("setVpanePosition:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
             return NULL;
         }
-        return page->workdir();
+        return page->workDir();
+    }
+
+    gboolean setWorkdir(const gchar *dir){
+        return  setWorkdir(currentPageChild(dir));
+    }
+    gboolean setWorkdir(GtkWidget *child, const gchar *dir){
+        PageChild<Type> *page = (PageChild<Type> *)g_hash_table_lookup(pageHash_, (void *)child);
+
+        if (!page){
+            DBG("setVpanePosition:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
+            return NULL;
+        }
+        return page->setWorkDir(dir);
     }
 
     const gchar * workdir(void){
