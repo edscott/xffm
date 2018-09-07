@@ -5,6 +5,7 @@ namespace xf {
 
 template <class Type>
 class HButtonBox {
+    using gtk_c = Gtk<double>;
 public:
     static GtkBox *newBox(void){
 	// The box
@@ -29,6 +30,14 @@ public:
             createStatusLabel();
 	 g_object_set_data(G_OBJECT(hButtonBox), "status_label", status_label);
 
+	auto clear_button =  gtk_c::dialog_button("edit-clear", NULL);
+	 g_object_set_data(G_OBJECT(hButtonBox), "clear_button", clear_button);
+	auto size_scale = newSizeScale();
+	 g_object_set_data(G_OBJECT(hButtonBox), "size_scale", size_scale);
+
+
+	gtk_box_pack_end (hButtonBox, GTK_WIDGET(size_scale), FALSE, FALSE, 0);
+	gtk_box_pack_end (hButtonBox, GTK_WIDGET(clear_button), FALSE, FALSE, 0);
 	
         gtk_box_pack_start (hButtonBox, GTK_WIDGET(status_icon), FALSE, FALSE, 5);
         gtk_box_pack_start (hButtonBox, GTK_WIDGET(iconview_icon), FALSE, FALSE, 5);
@@ -45,6 +54,14 @@ public:
 
 
 private:
+    static GtkScale *newSizeScale(void){
+	auto size_scale = GTK_SCALE(gtk_scale_new_with_range(GTK_ORIENTATION_HORIZONTAL, 6.0, 24.0, 6.0));
+        gtk_range_set_value(GTK_RANGE(size_scale), 12);
+        gtk_range_set_increments (GTK_RANGE(size_scale), 2.0, 6.0);
+	gtk_widget_set_size_request (GTK_WIDGET(size_scale),75,-1);
+	gtk_scale_set_value_pos (size_scale,GTK_POS_RIGHT);
+        return size_scale;
+    }
     static GtkTextView *createStatus(void){
 	GtkTextView *status = GTK_TEXT_VIEW(gtk_text_view_new ());
 	gtk_text_view_set_pixels_above_lines (status, 10);

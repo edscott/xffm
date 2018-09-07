@@ -56,11 +56,11 @@ public:
 
         GtkBox *hViewBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
         hButtonBox_=HButtonBox<Type>::newBox();
-        vButtonBox_ = VButtonBox<Type>::newBox();
+        //vButtonBox_ = VButtonBox<Type>::newBox();
         vpane_ = Vpane<Type>::newVpane();
 
 	gtk_box_pack_start (hViewBox, GTK_WIDGET(vpane_), TRUE, TRUE, 0);
-	gtk_box_pack_start (hViewBox, GTK_WIDGET(vButtonBox_), FALSE, FALSE, 0);
+	//gtk_box_pack_start (hViewBox, GTK_WIDGET(vButtonBox_), FALSE, FALSE, 0);
 	gtk_box_pack_start (pageChild_, GTK_WIDGET(hViewBox), TRUE, TRUE, 0);
 	gtk_box_pack_start (pageChild_, GTK_WIDGET(hButtonBox_), FALSE, FALSE, 0);
 
@@ -166,6 +166,57 @@ public:
 	gtk_spinner_start (pageLabelSpinner_);
     }
 
+    void
+    set_font_family (GtkWidget * widget, const gchar *in_family, gboolean fixed) {
+	if (!in_family) g_error("in_family cannot be NULL\n");
+	if (!GTK_IS_WIDGET(widget)) return;
+	gchar *family = g_object_get_data(G_OBJECT(widget), "font-family");
+	gint fontsize = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(widget),	"fontsize"));
+
+	gint newsize=8; // default font size.
+	const gchar *p;
+	if (fixed) p = getenv ("RFM_FIXED_FONT_SIZE");
+	else p = getenv ("RFM_VARIABLE_FONT_SIZE");
+	if(p && strlen (p)) {
+	    errno=0;
+	    long value = strtol(p, NULL, 0);
+	    if (errno == 0){
+		newsize = value;
+	    }
+	}
+
+	if(newsize != fontsize || !family || strcmp(family, in_family)) {
+	    TRACE(stderr, "XXX setting %s fontsize  %d -> %d \n", in_family, fontsize, newsize);
+	    if (!family || strcmp(family, in_family)) {
+		g_free(family);
+		family = g_strdup(in_family);
+		g_object_set_data(G_OBJECT(widget), "font-family", family);
+	    }
+	    fontsize = newsize;
+	    g_object_set_data(G_OBJECT(widget), 
+		    "fontsize", GINT_TO_POINTER(fontsize));
+
+	    GtkStyleContext *style_context = gtk_widget_get_style_context (widget);
+	    gtk_style_context_add_class(style_context, GTK_STYLE_CLASS_VIEW );
+	    GtkCssProvider *css_provider = gtk_css_provider_new();
+	    GError *error=NULL;
+	    gchar *data = g_strdup_printf("* {\
+    font-family: %s;\
+    font-size: %dpx;\
+    }", family, fontsize);
+	    gtk_css_provider_load_from_data (css_provider, data, -1, &error);
+	    g_free(data);
+	    if (error){
+		fprintf(stderr, "gerror: %s\n", error->message);
+		g_error_free(error);
+	    }
+	    gtk_style_context_add_provider (style_context, GTK_STYLE_PROVIDER(css_provider),
+				    GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+	     
+
+
+	}
+    }
 
        
 

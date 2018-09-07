@@ -233,7 +233,7 @@ public:
 	
 	TRACE("make_run_data_button: icon_id_=\"%s\" tip_=\"%s\"\n", run_button_p->icon_id(), run_button_p->tip());
 
-	gtk_c::setup_image_button(GTK_WIDGET(button), run_button_p->icon_id(), run_button_p->tip());
+	gtk_c::setup_image_button(GTK_BUTTON(button), run_button_p->icon_id(), run_button_p->tip());
 	//g_signal_connect(button, "toggled", G_CALLBACK (run_button_toggled), data);
 	gtk_box_pack_end (run_button_p->button_space(), GTK_WIDGET(button), FALSE, FALSE, 0);
 	gtk_widget_show (GTK_WIDGET(button));
