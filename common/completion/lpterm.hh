@@ -9,7 +9,7 @@
 //#endif
 namespace xf {
 template <class Type> class LpTerm;
-template <class Type> class PageChild;
+template <class Type> class Page;
 
 template <class Type>
 class lptermSignals {
@@ -222,7 +222,7 @@ class LpTerm {
     using run_c = Run<Type>;
 private:
     GtkTextView *textview_;
-    PageChild<Type> *page_;
+    Page<Type> *page_;
 
     gboolean active_;
     GtkIconView *iconview_;
@@ -231,7 +231,7 @@ private:
     GtkWidget *iconview_icon_;
 
 public:
-    void setPage(PageChild<Type> *page){page_ = page;}
+    void setPage(Page<Type> *page){page_ = page;}
     void setTextview(GtkTextView *textview){textview_ = textview;}
     void setIconview(GtkIconView *iconview){iconview_ = iconview;}
     void setStatusButton(GtkWidget *status_button){status_button_ = status_button;}

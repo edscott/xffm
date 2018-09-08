@@ -1,7 +1,7 @@
 #ifndef XF_NOTEBOOK
 #define XF_NOTEBOOK
 #include "menupopover.hh"
-#include "page/pagechild.hh"
+#include "page/page.hh"
 
 namespace xf {
 
@@ -142,7 +142,7 @@ public:
     static void
     on_remove_page(GtkButton *button, void *data){
         DBG("on_remove_page this: %p\n", data);
-        auto page = (PageChild<Type> *)data;
+        auto page = (Page<Type> *)data;
         auto notebook = (Notebook<Type> *)(g_object_get_data(G_OBJECT(page->pageChild()), "Notebook"));
         notebook->removePage(GTK_WIDGET(page->pageChild()));
     }
@@ -183,7 +183,7 @@ public:
     
     void addPage(const gchar *workdir){
         
-        auto page = new(PageChild<double>);
+        auto page = new(Page<double>);
         g_object_set_data(G_OBJECT(page->pageChild()), "Notebook", (void *)this);
 
         // This will (and should) be set by the corresponding
@@ -202,6 +202,8 @@ public:
 	g_object_set_data(G_OBJECT(page->status()), "notebook", (void *)page); 
         g_signal_connect(G_OBJECT(page->pageLabelButton()), "clicked", 
                 BUTTON_CALLBACK(notebookSignals<Type>::on_remove_page), (void *)page); 
+	// Default into iconview...
+	//PageSignals<Type>::onIconviewIcon(NULL, (void *)page);
 
 
     }
@@ -216,7 +218,7 @@ public:
         }
         DBG("disconnect page %d\n", pageNumber);
        //gtk_widget_hide(child);
-        auto page = (PageChild<Type> *)g_hash_table_lookup(pageHash_, (void *)child);
+        auto page = (Page<Type> *)g_hash_table_lookup(pageHash_, (void *)child);
         if (currentPage == pageNumber) {
             gtk_notebook_set_current_page (notebook_, pageNumber-1);
         } 
@@ -243,7 +245,7 @@ public:
 
 
     void setTabIcon(GtkWidget *child, const gchar *icon){
-        PageChild<Type> *page = (PageChild<Type> *)g_hash_table_lookup(pageHash_, (void *)child);
+        Page<Type> *page = (Page<Type> *)g_hash_table_lookup(pageHash_, (void *)child);
         if (!page){
             DBG("setVpanePosition:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
             return;
@@ -256,7 +258,7 @@ public:
     }
 
     void setVpanePosition(GtkWidget *child, gint position){
-        PageChild<Type> *page = (PageChild<Type> *)g_hash_table_lookup(pageHash_, (void *)child);
+        Page<Type> *page = (Page<Type> *)g_hash_table_lookup(pageHash_, (void *)child);
         if (!page){
             DBG("setVpanePosition:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
             return;
@@ -269,7 +271,7 @@ public:
     }
 
     const gchar *workdir(GtkWidget *child){
-        PageChild<Type> *page = (PageChild<Type> *)g_hash_table_lookup(pageHash_, (void *)child);
+        Page<Type> *page = (Page<Type> *)g_hash_table_lookup(pageHash_, (void *)child);
 
         if (!page){
             DBG("setVpanePosition:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
@@ -282,7 +284,7 @@ public:
         return  setWorkdir(currentPageChild(dir));
     }
     gboolean setWorkdir(GtkWidget *child, const gchar *dir){
-        PageChild<Type> *page = (PageChild<Type> *)g_hash_table_lookup(pageHash_, (void *)child);
+        Page<Type> *page = (Page<Type> *)g_hash_table_lookup(pageHash_, (void *)child);
 
         if (!page){
             DBG("setVpanePosition:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
@@ -295,7 +297,7 @@ public:
         return  workdir(currentPageChild());
     }
     GtkTextView *diagnostics(GtkWidget *child){
-        PageChild<Type> *page = (PageChild<Type> *)g_hash_table_lookup(pageHash_, (void *)child);
+        Page<Type> *page = (Page<Type> *)g_hash_table_lookup(pageHash_, (void *)child);
 
         if (!page){
             DBG("setVpanePosition:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
@@ -309,7 +311,7 @@ public:
     }
 
     GtkPaned *vpane(GtkWidget *child){
-        PageChild<Type> *page = (PageChild<Type> *)g_hash_table_lookup(pageHash_, (void *)child);
+        Page<Type> *page = (Page<Type> *)g_hash_table_lookup(pageHash_, (void *)child);
 
         if (!page){
             DBG("setVpanePosition:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
@@ -325,10 +327,10 @@ public:
     gint currentPage(void){
         return gtk_notebook_get_current_page(notebook_);
     }
-    PageChild<Type> *currentPageObject(void){
+    Page<Type> *currentPageObject(void){
         auto child = currentPageChild();
         auto page = g_hash_table_lookup(pageHash_, (void *)child);
-        return (PageChild<Type> *)page;
+        return (Page<Type> *)page;
     }
     GtkWidget *currentPageChild(void){
         return gtk_notebook_get_nth_page (notebook_,currentPage());
@@ -338,7 +340,7 @@ public:
         setPageLabel(currentPageChild(), text);
     }
     void setPageLabel(GtkWidget *child, const gchar *text){
-         PageChild<Type> *page = (PageChild<Type> *)
+         Page<Type> *page = (Page<Type> *)
              g_hash_table_lookup(pageHash_, (void *)child);
          page->setPageLabel(text);
          

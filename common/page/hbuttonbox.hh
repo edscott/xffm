@@ -2,7 +2,6 @@
 #define XF_HBUTTONBOX
 
 namespace xf {
-
 template <class Type>
 class HButtonBox {
     using gtk_c = Gtk<double>;
@@ -11,19 +10,14 @@ public:
 	// The box
 	auto hButtonBox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
 	
-	auto status_icon = // Term input (status) icon. 
-            //GTK_IMAGE(gtk_image_new_from_icon_name ("utilities-terminal", GTK_ICON_SIZE_SMALL_TOOLBAR)); 
-            GTK_BUTTON(gtk_button_new());
-        gtk_c::setup_image_button(status_icon, "utilities-terminal", _("Terminal"));
-        fixme network down
-            g_signal_connect(status_icon, "clicked", 
-                NOTEBOOK_4_CALLBACK (notebookSignals<double>::change_current_page), NULL);
+        auto statusIcon =  GTK_BUTTON(gtk_button_new());
+        gtk_c::setup_image_button(statusIcon, "utilities-terminal", _("Terminal"));
+        g_object_set_data(G_OBJECT(hButtonBox), "statusIcon", statusIcon);
 
         
-        g_object_set_data(G_OBJECT(hButtonBox), "status_icon", status_icon);
-	auto iconview_icon = 
-            GTK_IMAGE(gtk_image_new_from_icon_name ("system-file-manager", GTK_ICON_SIZE_SMALL_TOOLBAR)); 
-	 g_object_set_data(G_OBJECT(hButtonBox), "iconview_icon", iconview_icon);
+	auto iconviewIcon = GTK_BUTTON(gtk_button_new());
+        gtk_c::setup_image_button(iconviewIcon, "system-file-manager", _("Iconview"));
+	 g_object_set_data(G_OBJECT(hButtonBox), "iconviewIcon", iconviewIcon);
 
 
 	auto status = 
@@ -33,30 +27,30 @@ public:
             GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
 	 g_object_set_data(G_OBJECT(hButtonBox), "statusBox", statusBox);
 
-	auto status_button = 
+	auto statusButton = 
             GTK_BUTTON(gtk_button_new());
-	 g_object_set_data(G_OBJECT(hButtonBox), "status_button", status_button);
-	auto status_label = 
+	 g_object_set_data(G_OBJECT(hButtonBox), "statusButton", statusButton);
+	auto statusLabel = 
             createStatusLabel();
-	 g_object_set_data(G_OBJECT(hButtonBox), "status_label", status_label);
+	 g_object_set_data(G_OBJECT(hButtonBox), "statusLabel", statusLabel);
 
-	auto clear_button =  gtk_c::dialog_button("edit-clear", NULL);
-	 g_object_set_data(G_OBJECT(hButtonBox), "clear_button", clear_button);
-	auto size_scale = newSizeScale();
-	 g_object_set_data(G_OBJECT(hButtonBox), "size_scale", size_scale);
+	auto clearButton =  gtk_c::dialog_button("edit-clear", NULL);
+	 g_object_set_data(G_OBJECT(hButtonBox), "clearButton", clearButton);
+	auto sizeScale = newSizeScale();
+	 g_object_set_data(G_OBJECT(hButtonBox), "sizeScale", sizeScale);
 
 
-	gtk_box_pack_end (hButtonBox, GTK_WIDGET(size_scale), FALSE, FALSE, 0);
-	gtk_box_pack_end (hButtonBox, GTK_WIDGET(clear_button), FALSE, FALSE, 0);
+	gtk_box_pack_end (hButtonBox, GTK_WIDGET(sizeScale), FALSE, FALSE, 0);
+	gtk_box_pack_end (hButtonBox, GTK_WIDGET(clearButton), FALSE, FALSE, 0);
 	
-        gtk_box_pack_start (hButtonBox, GTK_WIDGET(status_icon), FALSE, FALSE, 5);
-        gtk_box_pack_start (hButtonBox, GTK_WIDGET(iconview_icon), FALSE, FALSE, 5);
+        gtk_box_pack_start (hButtonBox, GTK_WIDGET(statusIcon), FALSE, FALSE, 5);
+        gtk_box_pack_start (hButtonBox, GTK_WIDGET(iconviewIcon), FALSE, FALSE, 5);
         gtk_box_pack_start (hButtonBox, GTK_WIDGET(status), TRUE, TRUE, 0);
-        gtk_box_pack_start (hButtonBox, GTK_WIDGET(status_button), TRUE, TRUE, 0);
+        gtk_box_pack_start (hButtonBox, GTK_WIDGET(statusButton), TRUE, TRUE, 0);
 	gtk_widget_show_all(GTK_WIDGET(hButtonBox));
 
-        gtk_container_add (GTK_CONTAINER (status_button), GTK_WIDGET(statusBox));
-        gtk_box_pack_start (statusBox, GTK_WIDGET(status_label), FALSE, FALSE, 0);
+        gtk_container_add (GTK_CONTAINER (statusButton), GTK_WIDGET(statusBox));
+        gtk_box_pack_start (statusBox, GTK_WIDGET(statusLabel), FALSE, FALSE, 0);
 	gtk_widget_show_all(GTK_WIDGET(statusBox));
         return hButtonBox;  
     }

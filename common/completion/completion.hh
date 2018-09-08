@@ -6,7 +6,7 @@
 #include "lpterm.hh"
 
 namespace xf {
-template <class Type> class PageChild;
+template <class Type> class Page;
 template <class Type>
 class Completion : public CshCompletion<Type>
                    , public LpTerm<Type>
@@ -71,7 +71,7 @@ public:
 	    gchar *command = print_c::get_current_text(input_);
 	    DBG("activated with %s\n", command);
             this->csh_clean_start();
-            const gchar *workdir = ((PageChild<Type> *)this)->workDir();
+            const gchar *workdir = ((Page<Type> *)this)->workDir();
             DBG("command at %s\n", workdir);
 	    this->run_lp_command(output_, workdir, command);
 	    this->csh_save_history(command);
@@ -87,7 +87,7 @@ public:
         }
         // tab for bash completion.
         if(event->keyval == GDK_KEY_Tab) {
-            BashCompletion<Type>::bash_completion(input_, output_, ((PageChild<Type> *)this)->workDir());
+            BashCompletion<Type>::bash_completion(input_, output_, ((Page<Type> *)this)->workDir());
             return TRUE;
         }
 

@@ -16,7 +16,7 @@ typedef struct thread_run_t {
 */
 
 namespace xf {
-template <class Type> class PageChild;
+template <class Type> class Page;
 template <class Type> class RunButton;
 template <class Type> class RunButtonSignals {
 public:
@@ -48,7 +48,7 @@ public:
 
 };
 
-template <class Type> class PageChild;
+template <class Type> class Page;
 
 template <class Type>
 class RunButton {
@@ -58,7 +58,7 @@ class RunButton {
     using util_c = Util<double>;
     using run_c = Run<double>;
 private:
-    PageChild<Type> *page_; 
+    Page<Type> *page_; 
     GtkTextView *textview_;
     GtkBox *button_space_;
 
@@ -79,7 +79,7 @@ public:
     }
     void setup(void *data, const gchar * exec_command, pid_t child, gboolean shellIcon)
     {
-	page_ = (PageChild<Type> *)data;
+	page_ = (Page<Type> *)data;
 	textview_ = page_->diagnostics();
 	button_space_ = page_->hButtonBox();
 	
@@ -108,7 +108,7 @@ public:
 	g_free (icon_id_);
     }
     // read only
-    PageChild<Type> *page(void){return page_;}
+    Page<Type> *page(void){return page_;}
     gboolean inShell(void){return in_shell_;}
     gint pid(void){ return (gint)pid_;}
     gint grandchild(void){ return (gint)grandchild_;}
