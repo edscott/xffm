@@ -77,12 +77,12 @@ public:
 	
     }  
 
-    static GtkWidget *
+    static GtkBox *
     new_add_page_tab(GtkWidget *notebook, GtkButton **new_button_p){
 	auto page_child_box = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
 	auto page_label_box = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
 	auto page_label_icon_box = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
-	auto page_label_button = GTK_BOX(gtk_button_new ());
+	auto page_label_button = GTK_BUTTON(gtk_button_new ());
 	gtk_box_pack_start (page_label_box, GTK_WIDGET(page_label_icon_box), TRUE, TRUE, 0);
 	gtk_box_pack_end (page_label_box, GTK_WIDGET(page_label_button), TRUE, TRUE, 0);
 	gtk_widget_show_all (GTK_WIDGET(page_label_box));
@@ -268,7 +268,7 @@ public:
     static GtkToggleButton *
     toggle_button (const char *icon_id, const char *text) {
 	auto button = GTK_TOGGLE_BUTTON(gtk_toggle_button_new ());
-	set_bin_contents(button, icon_id, text, SIZE_BUTTON);
+	set_bin_contents(GTK_BIN(button), icon_id, text, SIZE_BUTTON);
 	return button;
     }
 
