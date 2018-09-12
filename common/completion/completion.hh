@@ -52,6 +52,16 @@ public:
             g_warning ("on_status_key_press(): returning on event==0\n");
             return TRUE;
         }
+	//FIXME: code to be added and tested.
+	if (event->keyval == GDK_KEY_Escape){
+	    // set mode to iconview
+	    // press statusIcon button
+	    // grab focus in iconview
+	}
+	// set mode to terminal, without full show of diagnostics.
+	// or maybe do the show when command is executed...
+	// show textview (not full if not currently shown)
+	//
         gtk_widget_grab_focus (GTK_WIDGET(input_));
 
         
