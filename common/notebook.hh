@@ -203,7 +203,7 @@ public:
         g_signal_connect(G_OBJECT(page->pageLabelButton()), "clicked", 
                 BUTTON_CALLBACK(notebookSignals<Type>::on_remove_page), (void *)page); 
 	// Default into iconview...
-	//PageSignals<Type>::onIconviewIcon(NULL, (void *)page);
+	PageSignals<Type>::onStatusIcon(NULL, (void *)page);
 
 
     }
@@ -238,7 +238,7 @@ public:
         delete(page);
         // XXX:   removing page makes notebook crazy
         //         Maybe because child is already hidden, which removes page...
-        //gtk_notebook_remove_page (notebook_, pageNumber);
+        gtk_notebook_remove_page (notebook_, pageNumber);
 
         DBG("******** deleted page with child %p\n", (void *)child);
     }

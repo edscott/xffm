@@ -112,7 +112,8 @@ public:
 	    auto image = gtk_image_new_from_pixbuf (pb);
             gtk_container_add(container, image);
 	    gtk_widget_show(image);
-	    g_object_unref(pb);
+	    g_object_ref(pb);
+	    // no no no no... g_object_unref(pb);
 	} 
     }
 
@@ -134,7 +135,9 @@ public:
 	    gtk_box_pack_start(GTK_BOX(box), image, FALSE, FALSE,0);
 	    g_object_set_data(G_OBJECT(bin), "icon", image);
 	    gtk_widget_show(image);
-	    g_object_unref(pb);
+	    // Pixbufs are hashed, so references must be kept.
+	    g_object_ref(pb);
+	    //g_object_unref(pb);
 	} else {
 	    g_object_set_data(G_OBJECT(bin), "icon", NULL);
 	}
@@ -191,7 +194,7 @@ public:
 	    gtk_box_pack_start(replacement, GTK_WIDGET(label), FALSE,FALSE,3);
 	    g_object_set_data(G_OBJECT(w), "label", label);
 	    gtk_widget_show(GTK_WIDGET(label));
-	    g_object_unref(label);
+	    //g_object_unref(label);
 	}
 	gtk_widget_show(GTK_WIDGET(replacement));
 	gtk_container_add(GTK_CONTAINER(w), GTK_WIDGET(replacement));

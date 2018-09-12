@@ -101,6 +101,13 @@ public:
         context_function(show_text_buffer_f, arg);
     }
 
+    static void show_textFull(GtkTextView *textview){
+        if (!textview) return;
+        auto vpane = GTK_PANED(g_object_get_data(G_OBJECT(textview), "vpane"));
+	void *arg[]={(void *)vpane, GINT_TO_POINTER(1),NULL};
+        context_function(show_text_buffer_f, arg);
+    }
+
 
     static void hide_text(GtkTextView *textview){
         if (!textview) return;
@@ -322,31 +329,45 @@ private:
             DBG("vpane is NULL\n");
             return NULL;
         }
-        gtk_paned_set_position (vpane, 10000);
+	gint max;
+	GtkWidget *window = gtk_widget_get_toplevel(GTK_WIDGET(vpane));
+	GtkAllocation allocation;
+	gtk_widget_get_allocation(window, &allocation);
+	gint height = allocation.height;
+
+	//g_object_get(G_OBJECT(vpane), "max-position", &max, NULL);
+	DBG("setting vpane position to %d\n", height);
+        gtk_paned_set_position (vpane, height);
         return NULL;
     }
 
     static void *
     show_text_buffer_f (void *data) {
+            DBG("show_text_buffer_f\n");
         if (!data) return GINT_TO_POINTER(-1);
         auto arg=(void **)data;
         auto vpane = GTK_PANED(arg[0]);
+	auto fullview =arg[1]; 
         if(!vpane) {
             DBG("vpane is NULL\n");
             return NULL;
         }
-        auto window = gtk_widget_get_toplevel(GTK_WIDGET(vpane));
-
-        GtkAllocation allocation;
-        gtk_widget_get_allocation (window, &allocation);
-        
-        if (allocation.height > 50)
-        {
-            auto position = gtk_paned_get_position (vpane);
-            if(position > allocation.height * 0.75) {
-                gtk_paned_set_position (vpane, allocation.height * 0.60);
-            }
-        }
+	gint min, max;
+	g_object_get(G_OBJECT(vpane), "min-position", &min, NULL);
+	g_object_get(G_OBJECT(vpane), "max-position", &max, NULL);
+	if (fullview) {
+	    DBG("setting vpane position to %d\n", min);
+	    gtk_paned_set_position (vpane, min);
+	    return NULL;
+	}
+	GtkWidget *window = gtk_widget_get_toplevel(GTK_WIDGET(vpane));
+	GtkAllocation allocation;
+	gtk_widget_get_allocation(window, &allocation);
+	gint height = allocation.height;
+	if (gtk_paned_get_position(vpane) > height - 35) {
+	    DBG("setting vpane position to %d\n", height-40);
+	    gtk_paned_set_position (vpane, height-40);
+	} else DBG("not setting vpane position to %d\n", height-40);
         return NULL;
     }
 
