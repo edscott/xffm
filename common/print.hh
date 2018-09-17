@@ -674,48 +674,44 @@ private:
         }
         return FALSE;
     }
+public:
+    static void
+    set_font_size (GtkWidget * widget, gint fontsize) {
+        if (!GTK_IS_WIDGET(widget)) return;
+        auto oldfontsize = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(widget),	"fontsize"));
 
+        if (oldfontsize == fontsize) return;
+
+
+        TRACE("fontsize %d --> %d\n", oldfontsize, fontsize);
+        g_object_set_data(G_OBJECT(widget), "fontsize", GINT_TO_POINTER(fontsize));
+
+        auto style_context = gtk_widget_get_style_context (widget);
+        gtk_style_context_add_class(style_context, GTK_STYLE_CLASS_VIEW );
+        auto css_provider = gtk_css_provider_new();
+        GError *error=NULL;
+        auto data = g_strdup_printf("* {\
+font-size: %dpx;\
+}", fontsize);
+        gtk_css_provider_load_from_data (css_provider, data, -1, &error);
+        g_free(data);
+        if (error){
+            DBG("gtk_css_provider_load_from_data: %s\n", error->message);
+            g_error_free(error);
+            return;
+        }
+        gtk_style_context_add_provider (style_context, 
+                GTK_STYLE_PROVIDER(css_provider),
+                GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+            
+    }
+private:
     static void
     set_font_size (GtkWidget * widget) {
         if (!GTK_IS_WIDGET(widget)) return;
         auto fontsize = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(widget),	"fontsize"));
-
-        gint newsize=12; // default font size.
-        auto p = getenv ("FIXED_FONT_SIZE");
-            TRACE( "%s:\n", p);
-        if(p && strlen (p)) {
-            errno=0;
-            long value = strtol(p, NULL, 0);
-            auto string = g_strdup_printf("%d --> %ld\n", newsize, value);
-            TRACE( "%s\n", string);
-            if (errno == 0){
-                newsize = value;
-            }
-        }
-
-        if(newsize != fontsize) {
-            fontsize = newsize;
-            g_object_set_data(G_OBJECT(widget), 
-                    "fontsize", GINT_TO_POINTER(fontsize));
-
-            auto style_context = gtk_widget_get_style_context (widget);
-            gtk_style_context_add_class(style_context, GTK_STYLE_CLASS_VIEW );
-            auto css_provider = gtk_css_provider_new();
-            GError *error=NULL;
-            auto data = g_strdup_printf("* {\
-    font-size: %dpx;\
-    }", fontsize);
-            gtk_css_provider_load_from_data (css_provider, data, -1, &error);
-            g_free(data);
-            if (error){
-                DBG("gtk_css_provider_load_from_data: %s\n", error->message);
-                g_error_free(error);
-                return;
-            }
-            gtk_style_context_add_provider (style_context, 
-                    GTK_STYLE_PROVIDER(css_provider),
-                    GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-            
+        if (!fontsize){
+            set_font_size(widget, 12);
         }
     }
 };

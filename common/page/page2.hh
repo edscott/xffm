@@ -28,6 +28,19 @@ public:
         auto page = (Page<Type> *)data;
         page->showIconview(FALSE, TRUE);
     }
+    static gboolean
+    rangeChangeValue(GtkRange     *range,
+               GtkScrollType scroll,
+               gdouble       value,
+               gpointer      data){
+        gint round = value + 0.5;
+        if (value > 24) round = 24;
+        
+        TRACE("rangeChangeValue: %lf->%d\n", value, round);
+        auto page = (Page<Type> *)data;
+        page->setFontSize(round);
+        return FALSE;
+    }
 };
 
 template <class Type>
@@ -84,6 +97,10 @@ public:
                 BUTTON_CALLBACK(PageSignals<Type>::toggleToIconview), (void *)this);
         g_signal_connect(G_OBJECT(this->toggleToTerminal_), "clicked", 
                 BUTTON_CALLBACK(PageSignals<Type>::toggleToTerminal), (void *)this);
+        g_signal_connect(G_OBJECT(this->sizeScale_), "change-value", 
+                RANGE_CALLBACK(PageSignals<Type>::rangeChangeValue), (void *)this);
+
+
 
 	// Data for lpterm
         this->setOutput(this->output_);
@@ -116,6 +133,17 @@ public:
 	pthread_mutex_unlock(rbl_mutex);
 	pthread_mutex_destroy(rbl_mutex);
 	g_free(rbl_mutex);
+    }
+    void setFontSize(gint size){
+        print_c::set_font_size(GTK_WIDGET(this->output_), size);
+        print_c::set_font_size(GTK_WIDGET(this->input_), size);
+        /*if (size != fontSize_){
+            fontSize_ = size;
+            DBG("setting font size... %d\n", size);
+            g_object_set_data(G_OBJECT(this->output_), "fontsize", GINT_TO_POINTER(size));
+            //setenv("FIXED_FONT_SIZE",
+            //set_font_family(GTK_WIDGET(this->output_), "monospace",TRUE);
+        }*/
     }
 
 //    void reference_run_button(run_button_c *rb_p){
@@ -277,6 +305,7 @@ private:
     GtkButton *pageLabelButton_;
 
     gboolean terminalMode_;
+    gint fontSize_;
 
 public:
 
@@ -284,8 +313,8 @@ public:
     set_font_family (GtkWidget * widget, const gchar *in_family, gboolean fixed) {
 	if (!in_family) g_error("in_family cannot be NULL\n");
 	if (!GTK_IS_WIDGET(widget)) return;
-	gchar *family = g_object_get_data(G_OBJECT(widget), "font-family");
-	gint fontsize = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(widget),	"fontsize"));
+	auto family = (gchar *) g_object_get_data(G_OBJECT(widget), "font-family");
+	auto fontsize = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(widget),	"fontsize"));
 
 	gint newsize=8; // default font size.
 	const gchar *p;

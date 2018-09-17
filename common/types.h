@@ -2,6 +2,7 @@
 # define TYPES_H
 
 
+#define RANGE_CALLBACK(X)  G_CALLBACK((gboolean (*)(GtkRange *,GtkScrollType,gdouble,gpointer)) X)
 #define SIZE_CALLBACK(X)  G_CALLBACK((void (*)(GtkWidget *,GdkRectangle *,gpointer)) X)
 #define EVENT_CALLBACK(X)  G_CALLBACK((gint (*)(GtkWidget *,GdkEventKey *,gpointer)) X)
 #define MENUITEM_CALLBACK(X)  G_CALLBACK((void (*)(GtkMenuItem *,gpointer)) X)
