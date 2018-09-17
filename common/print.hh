@@ -352,7 +352,8 @@ private:
             DBG("vpane is NULL\n");
             return NULL;
         }
-	gint min, max;
+        DBG("show_text_fuffer_f full=%d\n", GPOINTER_TO_INT(fullview));
+        gint min, max;
 	g_object_get(G_OBJECT(vpane), "min-position", &min, NULL);
 	g_object_get(G_OBJECT(vpane), "max-position", &max, NULL);
 	if (fullview) {
@@ -360,14 +361,19 @@ private:
 	    gtk_paned_set_position (vpane, min);
 	    return NULL;
 	}
-	GtkWidget *window = gtk_widget_get_toplevel(GTK_WIDGET(vpane));
+	//GtkWidget *window = gtk_widget_get_toplevel(GTK_WIDGET(vpane));
 	GtkAllocation allocation;
-	gtk_widget_get_allocation(window, &allocation);
-	gint height = allocation.height;
-	if (gtk_paned_get_position(vpane) > height - 35) {
-	    DBG("setting vpane position to %d\n", height-40);
-	    gtk_paned_set_position (vpane, height-40);
-	} else DBG("not setting vpane position to %d\n", height-40);
+	//gtk_widget_get_allocation(window, &allocation);
+	//gint height = allocation.height;
+	gtk_widget_get_allocation(GTK_WIDGET(vpane), &allocation);
+	gint vheight = allocation.height;
+        gint height = 2*vheight/4;
+
+        DBG("vheight = %d, position = %d\n", vheight, gtk_paned_get_position(vpane));
+	if (gtk_paned_get_position(vpane) > height) {
+	    DBG("setting vpane position to %d\n", height);
+	    gtk_paned_set_position (vpane, height);
+	} else DBG("not setting vpane position to %d\n", height);
         return NULL;
     }
 

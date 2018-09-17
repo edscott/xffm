@@ -200,6 +200,7 @@ public:
             gtk_widget_show(GTK_WIDGET(this->statusButton_));
             gtk_widget_show(GTK_WIDGET(this->statusLabel_));
             print_c::hide_text(this->output_);
+            terminalMode_ = FALSE;
         } else 
         {
             gtk_widget_hide(GTK_WIDGET(this->toggleToTerminal_));
@@ -213,8 +214,42 @@ public:
             gtk_widget_show(GTK_WIDGET(this->sizeScale_));
             if (full) print_c::show_textFull(this->output_);
             else print_c::show_text(this->output_);
+            terminalMode_ = TRUE;
         }
 
+    }
+    gint
+    keyboardEvent( GdkEventKey * event) {
+        // <ESC> Toggles to iconview mode
+        // <TAB> Toggles to terminal mode (partial output)
+        if (terminalMode_){
+            if (event->keyval == GDK_KEY_Escape) {
+                showIconview(TRUE, TRUE);
+                return TRUE;
+            }
+        } else { // in iconview mode: toggle to terminal
+            if (event->keyval == GDK_KEY_Tab) {
+                showIconview(FALSE, TRUE);
+                return TRUE;
+            }
+            // These navigation keys belong to iconview.
+            gint navigationKeys[]={
+                GDK_KEY_Page_Up, GDK_KEY_KP_Page_Up,
+                GDK_KEY_Page_Down, GDK_KEY_KP_Page_Down,
+                GDK_KEY_Right, GDK_KEY_KP_Right,
+                GDK_KEY_Left, GDK_KEY_KP_Left,
+                GDK_KEY_Up, GDK_KEY_KP_Up,
+                GDK_KEY_Down, GDK_KEY_KP_Down,
+                GDK_KEY_Return, GDK_KEY_KP_Enter,
+                -1};
+            for (int i=0; navigationKeys[i] > 0; i++){
+                if (event->keyval == navigationKeys[i]) return FALSE;
+            }
+            // Any other key activates terminal (partial output).
+            showIconview(FALSE, FALSE);
+            // Send key to completion.
+        }
+        return this->completionKeyboardEvent(event);
     }
 
     GtkBox *pageChild(void){ return pageChild_;}
@@ -240,6 +275,8 @@ private:
     GtkBox *pageLabelSpinnerBox_;
     GtkBox *pageLabelIconBox_;
     GtkButton *pageLabelButton_;
+
+    gboolean terminalMode_;
 
 public:
 

@@ -26,7 +26,7 @@ public:
         //auto input = page_p->input();
         //auto output = page_p->output();
         // do the completion thing
-        page_p->keyboard_event(event);
+        page_p->keyboardEvent(event);
         return TRUE;
     }
 

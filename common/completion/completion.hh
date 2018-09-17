@@ -46,7 +46,7 @@ public:
     void setOutput(GtkTextView *output){completionOutput_ = output;}
 
     gint
-    keyboard_event( GdkEventKey * event) {
+    completionKeyboardEvent( GdkEventKey * event) {
         TRACE( "lpterm_c::lpterm_keyboard_event...\n");
         if(!event) {
             g_warning ("on_status_key_press(): returning on event==0\n");
