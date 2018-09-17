@@ -16,7 +16,14 @@ namespace xf{
 template <class Type> class Page;
 template <class Type>
 class PageSignals{
+    using print_c = Print<double>;
 public:
+    static void clearText(GtkButton *button, gpointer data){
+        auto page = (Page<Type> *)data;
+        print_c::clear_text(page->output());
+        //page->showIconview(TRUE, TRUE);
+    }
+
     static void toggleToIconview(GtkButton *button, gpointer data){
         // This will toggle into iconview
         auto page = (Page<Type> *)data;
@@ -38,7 +45,8 @@ public:
         
         TRACE("rangeChangeValue: %lf->%d\n", value, round);
         auto page = (Page<Type> *)data;
-        page->setFontSize(round);
+        print_c::set_font_size(GTK_WIDGET(page->output()), round);
+        print_c::set_font_size(GTK_WIDGET(page->input()), round);
         return FALSE;
     }
 };
@@ -99,6 +107,8 @@ public:
                 BUTTON_CALLBACK(PageSignals<Type>::toggleToTerminal), (void *)this);
         g_signal_connect(G_OBJECT(this->sizeScale_), "change-value", 
                 RANGE_CALLBACK(PageSignals<Type>::rangeChangeValue), (void *)this);
+        g_signal_connect(G_OBJECT(this->clearButton_), "clicked", 
+                BUTTON_CALLBACK(PageSignals<Type>::clearText), (void *)this);
 
 
 
@@ -133,17 +143,6 @@ public:
 	pthread_mutex_unlock(rbl_mutex);
 	pthread_mutex_destroy(rbl_mutex);
 	g_free(rbl_mutex);
-    }
-    void setFontSize(gint size){
-        print_c::set_font_size(GTK_WIDGET(this->output_), size);
-        print_c::set_font_size(GTK_WIDGET(this->input_), size);
-        /*if (size != fontSize_){
-            fontSize_ = size;
-            DBG("setting font size... %d\n", size);
-            g_object_set_data(G_OBJECT(this->output_), "fontsize", GINT_TO_POINTER(size));
-            //setenv("FIXED_FONT_SIZE",
-            //set_font_family(GTK_WIDGET(this->output_), "monospace",TRUE);
-        }*/
     }
 
 //    void reference_run_button(run_button_c *rb_p){
