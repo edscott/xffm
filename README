@@ -1,0 +1,8 @@
+
+TODO: 
+  * back to xfterm branch
+  * environment variables for EDITOR and SUDO_ASKPASS and SSH_ASKPASS (rodent-getpass) --getpass
+  * simple rcfile for environment, monitor changes and reload.
+  * merge xfterm and xffind (--find --term --fgr --getpass)
+  * process cmake colors (maybe), use black background for lpterm
+  * run in background as default (--foreground to override)
