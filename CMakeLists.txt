@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 3.1)
 project (xffm C CXX)
-set(CMAKE_INSTALL_PREFIX /tmp)
+set(CMAKE_INSTALL_PREFIX /usr/local)
 # Version info
 set(xffm_VERSION_MAJOR 0)
 set(xffm_VERSION_MINOR 3)
@@ -27,14 +27,12 @@ find_package(X11 REQUIRED)
 
 
 include_directories(
-    "./"
+    "./xffm"
     "${PROJECT_BINARY_DIR}" 
     "${GTK3_INCLUDE_DIRS}"   )
 
 #    "${PROJECT_SOURCE_DIR}"
 
-#add_subdirectory(icons)
-#add_subdirectory(find)
-add_subdirectory(term)
+add_subdirectory(xffm)
 
 

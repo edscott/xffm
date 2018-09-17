@@ -1,7 +1,6 @@
 #ifndef XF_NOTEBOOK
 #define XF_NOTEBOOK
 #include "menupopover.hh"
-#warning "include page/page.hh"
 #include "page/page2.hh"
 
 namespace xf {
@@ -159,6 +158,7 @@ class Notebook : public MenuPopover<Type>{
 public:
     Notebook(void){
         notebook_ = GTK_NOTEBOOK(gtk_notebook_new());
+        g_object_set_data(G_OBJECT(this->menuButton_), "notebook_p", (void *)this);
         pageHash_ =g_hash_table_new_full(g_direct_hash, g_direct_equal, NULL, NULL);
         gtk_notebook_set_scrollable (notebook_, TRUE);
 
@@ -204,8 +204,8 @@ public:
 	//g_object_set_data(G_OBJECT(page->input()), "page", (void *)page); 
         g_signal_connect(G_OBJECT(page->pageLabelButton()), "clicked", 
                 BUTTON_CALLBACK(notebookSignals<Type>::on_remove_page), (void *)page); 
-	// Default into iconview...
-	page->showIconview(TRUE, TRUE);
+	// Default into iconview if set as default...
+	page->showIconview(page->iconviewIsDefault(), TRUE);
 
 
     }

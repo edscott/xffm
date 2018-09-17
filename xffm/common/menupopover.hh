@@ -3,10 +3,14 @@
 
 #undef TRY_POPOVER
 //#define TRY_POPOVER 1
+#include "common/run.hh"
 
 namespace xf {
+template <class Type> class Notebook;
+template <class Type> class Page;
 template <class Type>
 class MenuPopover {
+    using run_c = Run<Type>;
 public:
     MenuPopover(void) {
 
@@ -22,17 +26,18 @@ public:
        gtk_widget_show(GTK_WIDGET(menuButton_));
     }
     GtkMenuButton *menuButton(){ return menuButton_;}
-    private:
+    protected:
     
     GtkMenuButton *menuButton_;
+    private:
 #ifdef TRY_POPOVER
     GtkPopover *createPopover(GtkWidget *widget){
         menuItem_t item[]={
-            {N_("Home"), (void *)home, NULL},
-            {N_("Open terminal"), (void *)terminal, NULL},
-            {N_("Execute Shell Command"), (void *)shell, NULL},
-            {N_("Search"), (void *)search, NULL},
-            {N_("Exit"), (void *)finish, NULL},
+            {N_("Home"), (void *)home, (void *) menuButton_},
+            {N_("Open terminal"), (void *)terminal, (void *) menuButton_},
+            {N_("Execute Shell Command"), (void *)shell, (void *) menuButton_},
+            {N_("Search"), (void *)search, (void *) menuButton_},
+            {N_("Exit"), (void *)finish, (void *) menuButton_},
             {NULL}};
         auto popOver = GTK_POPOVER(gtk_popover_new (widget));
         
@@ -58,11 +63,11 @@ public:
 
     GtkMenu *createMenu(void){
         menuItem_t item[]={
-            {N_("Home"), (void *)home, NULL},
-            {N_("Open terminal"), (void *)terminal, NULL},
-            {N_("Execute Shell Command"), (void *)shell, NULL},
-            {N_("Search"), (void *)search, NULL},
-            {N_("Exit"), (void *)finish, NULL},
+            {N_("Home"), (void *)home, (void *) menuButton_},
+            {N_("Open terminal"), (void *)terminal, (void *) menuButton_},
+            {N_("Execute Shell Command"), (void *)shell, (void *) menuButton_},
+            {N_("Search"), (void *)search, (void *) menuButton_},
+            {N_("Exit"), (void *)finish, (void *) menuButton_},
             {NULL}};
         
         auto menu = GTK_MENU(gtk_menu_new());
@@ -107,19 +112,18 @@ public:
     }
 
     static void
-     search(GtkMenuItem *menuItem, gpointer data)
+    search(GtkMenuItem *menuItem, gpointer data)
     {
         DBG("Search\n");
-        // get current view
-
-  /*      window_c *window_p = (window_c *)data;
-        view_c *view_p =(view_c *)window_p->get_active_view_p();
-
-        const gchar *path = view_p->get_xfdir_p()->get_path();
-        if (!g_file_test(path, G_FILE_TEST_IS_DIR)) path = g_get_home_dir();
-        gchar *command = g_strdup_printf("xffind %s", path);
-        view_p->get_lpterm_p()->shell_command(command, FALSE);
-        g_free(command);*/
+        // get current directory
+        auto notebook_p = (Notebook<Type> *)g_object_get_data(G_OBJECT(data), "notebook_p");
+        const gchar *path = notebook_p->workdir();
+        auto page_p = (Page<Type> *)notebook_p->currentPageObject();
+        if (!path || !g_file_test(path, G_FILE_TEST_IS_DIR)) path = g_get_home_dir();
+	gchar *c = g_strdup_printf("xffind \"%s\"", path);
+        pid_t child = run_c::thread_run(page_p->output(), c, FALSE);
+	page_p->newRunButton(c, child);
+        g_free(c);
     }
 
     static void

@@ -357,8 +357,10 @@ private:
 	g_object_get(G_OBJECT(vpane), "min-position", &min, NULL);
 	g_object_get(G_OBJECT(vpane), "max-position", &max, NULL);
 	if (fullview) {
-	    DBG("setting vpane position to %d\n", min);
+	    DBG("show_text_buffer_f:setting vpane position to %d\n", min);
 	    gtk_paned_set_position (vpane, min);
+            while (gtk_events_pending()) gtk_main_iteration();
+            DBG("vpane position=%d\n", gtk_paned_get_position(vpane));
 	    return NULL;
 	}
 	//GtkWidget *window = gtk_widget_get_toplevel(GTK_WIDGET(vpane));

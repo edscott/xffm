@@ -214,6 +214,9 @@ public:
 	gtk_spinner_start (pageLabelSpinner_);
     }
 
+    
+    void setDefaultIconview(gboolean state){iconviewIsDefault_ = state;}
+    gboolean iconviewIsDefault(void){return iconviewIsDefault_;}
        
     void showIconview(gboolean state, gboolean full){
         if (state) {
@@ -239,6 +242,7 @@ public:
             gtk_widget_show(GTK_WIDGET(this->input_));
             gtk_widget_show(GTK_WIDGET(this->clearButton_));
             gtk_widget_show(GTK_WIDGET(this->sizeScale_));
+            while (gtk_events_pending())gtk_main_iteration();
             if (full) print_c::show_textFull(this->output_);
             else print_c::show_text(this->output_);
             terminalMode_ = TRUE;
@@ -288,8 +292,10 @@ public:
     GtkButton *pageLabelButton(void){ return pageLabelButton_;}
     
     GtkPaned *vpane(void){return this->vpane_;}
-    GtkTextView *input(){ return this->input_;}
-    GtkTextView *output(){ return this->output_;}
+    GtkTextView *input(void){ return this->input_;}
+    GtkTextView *output(void){ return this->output_;}
+    GtkButton *toggleToTerminal(void){return this->toggleToTerminal_;} 
+    GtkButton *toggleToIconview(void){return this->toggleToIconview_;} 
 
     GtkBox *hButtonBox(void){return this->hButtonBox_;}   
     GtkBox *vButtonBox(void){return this->vButtonBox_;}   
@@ -304,7 +310,7 @@ private:
     GtkButton *pageLabelButton_;
 
     gboolean terminalMode_;
-    gint fontSize_;
+    gboolean iconviewIsDefault_;
 
 public:
 
