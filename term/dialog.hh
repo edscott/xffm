@@ -29,9 +29,10 @@ public:
         auto page = this->currentPageObject();
         page->setPageWorkdir(workdir);
 
-	PageSignals<Type>::onIconviewIcon(NULL, page);
+	// Default into terminal...
+	page->showIconview(FALSE, TRUE);
 
-        print_c::print(page->diagnostics(), "tag/red", g_strdup("Hello world!\n"));
+        print_c::print(page->output(), "tag/red", g_strdup("Hello world!\n"));
         //DBG("current page = %d\n", this->currentPage());
         //this->setPageLabel(this->currentPage(), "foo");
     }

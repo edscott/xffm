@@ -21,10 +21,10 @@ public:
     {
         DBG("window_keyboard_event\n");
         auto dialog_p = (Dialog<Type> *)data;
-        auto notebook = dialog_p->notebook();
         auto page_p = dialog_p->currentPageObject();
-        auto input = page_p->status();
-        auto output = page_p->diagnostics();
+        //auto notebook = dialog_p->notebook();
+        //auto input = page_p->input();
+        //auto output = page_p->output();
         // do the completion thing
         page_p->keyboard_event(event);
         return TRUE;

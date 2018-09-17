@@ -42,8 +42,8 @@ public:
         return (iconname);
     }
 
-    void setInput(GtkTextView *input){input_ = input;}
-    void setOutput(GtkTextView *output){output_ = output;}
+    void setInput(GtkTextView *input){completionInput_ = input;}
+    void setOutput(GtkTextView *output){completionOutput_ = output;}
 
     gint
     keyboard_event( GdkEventKey * event) {
@@ -62,78 +62,77 @@ public:
 	// or maybe do the show when command is executed...
 	// show textview (not full if not currently shown)
 	//
-        gtk_widget_grab_focus (GTK_WIDGET(input_));
+        gtk_widget_grab_focus (GTK_WIDGET(completionInput_));
 
         
         if(event->keyval == GDK_KEY_Up || event->keyval == GDK_KEY_KP_Up) {
-            if (this->is_completing()) this->csh_completion(input_, output_, 1);
-            else this->csh_history(input_, output_, 1);
+            if (this->is_completing()) this->csh_completion(completionInput_, completionOutput_, 1);
+            else this->csh_history(completionInput_, completionOutput_, 1);
             return TRUE;
         }
         if(event->keyval == GDK_KEY_Down || event->keyval == GDK_KEY_KP_Down) {
-            if (this->is_completing()) this->csh_completion(input_, output_, -1);
-            else this->csh_history(input_, output_, -1);
+            if (this->is_completing()) this->csh_completion(completionInput_, completionOutput_, -1);
+            else this->csh_history(completionInput_, completionOutput_, -1);
 
             return TRUE;
         }
         // On activate, run the lpcommand.
         if((event->keyval == GDK_KEY_Return) || (event->keyval == GDK_KEY_KP_Enter)) {
-	    gchar *command = print_c::get_current_text(input_);
+	    gchar *command = print_c::get_current_text(completionInput_);
 	    DBG("activated with %s\n", command);
             this->csh_clean_start();
             const gchar *workdir = ((Page<Type> *)this)->workDir();
             DBG("command at %s\n", workdir);
-	    this->run_lp_command(output_, workdir, command);
+	    this->run_lp_command(completionOutput_, workdir, command);
 	    this->csh_save_history(command);
-	    print_c::clear_text(input_);
+	    print_c::clear_text(completionInput_);
 	    g_free(command);
             return TRUE;
         }
         if((event->keyval == GDK_KEY_Page_Up) || (event->keyval == GDK_KEY_Page_Down)) {
             gboolean retval;
-            g_signal_emit_by_name ((gpointer)output_, "key-press-event", event, &retval);
+            g_signal_emit_by_name ((gpointer)completionOutput_, "key-press-event", event, &retval);
             
             return TRUE;
         }
         // tab for bash completion.
         if(event->keyval == GDK_KEY_Tab) {
-            BashCompletion<Type>::bash_completion(input_, output_, ((Page<Type> *)this)->workDir());
+            BashCompletion<Type>::bash_completion(completionInput_, completionOutput_, ((Page<Type> *)this)->workDir());
             return TRUE;
         }
 
         // Let the internal callback do its business first.
         TRACE("Let the internal callback do its business first.\n");
         gboolean retval;
-        g_signal_emit_by_name ((gpointer)input_, "key-press-event", event, &retval);
+        g_signal_emit_by_name ((gpointer)completionInput_, "key-press-event", event, &retval);
         while (gtk_events_pending())gtk_main_iteration();
         TRACE("Now do our stuff.\n");
 
         // Now do our stuff.
         
         // If cursor is back at position 0, then reset.
-        this->query_cursor_position(input_);
+        this->query_cursor_position(completionInput_);
 
         // On right or left, change the csh completion token.
         if((event->keyval == GDK_KEY_Right) || (event->keyval == GDK_KEY_KP_Right)) {
-            this->csh_dirty_start(input_);
+            this->csh_dirty_start(completionInput_);
         }
         // On right or left, change the csh completion token.
         if((event->keyval == GDK_KEY_Left) || (event->keyval == GDK_KEY_KP_Left)) {
-            this->csh_dirty_start(input_);
+            this->csh_dirty_start(completionInput_);
         }
 
 
         if (event->keyval >= GDK_KEY_space && event->keyval <= GDK_KEY_asciitilde){
-            this->csh_dirty_start(input_);
+            this->csh_dirty_start(completionInput_);
         }
         return retval;
     }
 //////////////////////////////////////////////////////////
-    //FIXME: lpterm command stuff
   
 private:
-    GtkTextView *output_;
-    GtkTextView *input_;
+    GtkTextView *completionOutput_;
+    GtkTextView *completionInput_;
 
 };
 }

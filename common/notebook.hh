@@ -1,7 +1,8 @@
 #ifndef XF_NOTEBOOK
 #define XF_NOTEBOOK
 #include "menupopover.hh"
-#include "page/page.hh"
+#warning "include page/page.hh"
+#include "page/page2.hh"
 
 namespace xf {
 
@@ -199,11 +200,12 @@ public:
 	// This will set the workdir for completion
         page->setPageWorkdir(workdir);  
 	
-	g_object_set_data(G_OBJECT(page->status()), "notebook", (void *)page); 
+	//g_object_set_data(G_OBJECT(page->input()), "notebook", (void *)notebook); 
+	//g_object_set_data(G_OBJECT(page->input()), "page", (void *)page); 
         g_signal_connect(G_OBJECT(page->pageLabelButton()), "clicked", 
                 BUTTON_CALLBACK(notebookSignals<Type>::on_remove_page), (void *)page); 
 	// Default into iconview...
-	PageSignals<Type>::onStatusIcon(NULL, (void *)page);
+	page->showIconview(TRUE, TRUE);
 
 
     }

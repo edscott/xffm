@@ -6,54 +6,53 @@ template <class Type>
 class HButtonBox {
     using gtk_c = Gtk<double>;
 public:
-    static GtkBox *newBox(void){
+    HButtonBox(void){
 	// The box
-	auto hButtonBox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+	hButtonBox_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
 	
-        auto statusIcon =  GTK_BUTTON(gtk_button_new());
-        gtk_c::setup_image_button(statusIcon, "utilities-terminal", _("Terminal"));
-        g_object_set_data(G_OBJECT(hButtonBox), "statusIcon", statusIcon);
+        toggleToTerminal_ =  GTK_BUTTON(gtk_button_new());
+        gtk_c::setup_image_button(toggleToTerminal_, "utilities-terminal", _("Terminal"));
 
         
-	auto iconviewIcon = GTK_BUTTON(gtk_button_new());
-        gtk_c::setup_image_button(iconviewIcon, "system-file-manager", _("Iconview"));
-	 g_object_set_data(G_OBJECT(hButtonBox), "iconviewIcon", iconviewIcon);
+	toggleToIconview_ = GTK_BUTTON(gtk_button_new());
+        gtk_c::setup_image_button(toggleToIconview_, "system-file-manager", _("Iconview"));
 
 
-	auto status = 
-            createStatus(); // Status textview
-         g_object_set_data(G_OBJECT(hButtonBox), "status", status);
-	auto statusBox = 
-            GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
-	 g_object_set_data(G_OBJECT(hButtonBox), "statusBox", statusBox);
+	input_ = createStatus(); // Status textview
+	statusBox_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
 
-	auto statusButton = 
-            GTK_BUTTON(gtk_button_new());
-	 g_object_set_data(G_OBJECT(hButtonBox), "statusButton", statusButton);
-	auto statusLabel = 
-            createStatusLabel();
-	 g_object_set_data(G_OBJECT(hButtonBox), "statusLabel", statusLabel);
+	statusButton_ = GTK_BUTTON(gtk_button_new());
+	statusLabel_ = createStatusLabel();
 
-	auto clearButton =  gtk_c::dialog_button("edit-clear", NULL);
-	 g_object_set_data(G_OBJECT(hButtonBox), "clearButton", clearButton);
-	auto sizeScale = newSizeScale();
-	 g_object_set_data(G_OBJECT(hButtonBox), "sizeScale", sizeScale);
+	clearButton_ =  gtk_c::dialog_button("edit-clear", NULL);
+	sizeScale_ = newSizeScale();
 
 
-	gtk_box_pack_end (hButtonBox, GTK_WIDGET(sizeScale), FALSE, FALSE, 0);
-	gtk_box_pack_end (hButtonBox, GTK_WIDGET(clearButton), FALSE, FALSE, 0);
+	gtk_box_pack_end (hButtonBox_, GTK_WIDGET(sizeScale_), FALSE, FALSE, 0);
+	gtk_box_pack_end (hButtonBox_, GTK_WIDGET(clearButton_), FALSE, FALSE, 0);
 	
-        gtk_box_pack_start (hButtonBox, GTK_WIDGET(statusIcon), FALSE, FALSE, 5);
-        gtk_box_pack_start (hButtonBox, GTK_WIDGET(iconviewIcon), FALSE, FALSE, 5);
-        gtk_box_pack_start (hButtonBox, GTK_WIDGET(status), TRUE, TRUE, 0);
-        gtk_box_pack_start (hButtonBox, GTK_WIDGET(statusButton), TRUE, TRUE, 0);
-	gtk_widget_show_all(GTK_WIDGET(hButtonBox));
+        gtk_box_pack_start (hButtonBox_, GTK_WIDGET(toggleToTerminal_), FALSE, FALSE, 5);
+        gtk_box_pack_start (hButtonBox_, GTK_WIDGET(toggleToIconview_), FALSE, FALSE, 5);
+        gtk_box_pack_start (hButtonBox_, GTK_WIDGET(input_), TRUE, TRUE, 0);
+        gtk_box_pack_start (hButtonBox_, GTK_WIDGET(statusButton_), TRUE, TRUE, 0);
+	gtk_widget_show_all(GTK_WIDGET(hButtonBox_));
 
-        gtk_container_add (GTK_CONTAINER (statusButton), GTK_WIDGET(statusBox));
-        gtk_box_pack_start (statusBox, GTK_WIDGET(statusLabel), FALSE, FALSE, 0);
-	gtk_widget_show_all(GTK_WIDGET(statusBox));
-        return hButtonBox;  
+        gtk_container_add (GTK_CONTAINER (statusButton_), GTK_WIDGET(statusBox_));
+        gtk_box_pack_start (statusBox_, GTK_WIDGET(statusLabel_), FALSE, FALSE, 0);
+	gtk_widget_show_all(GTK_WIDGET(statusBox_));
+        return;  
     }
+
+protected:
+    GtkBox *hButtonBox_;
+    GtkBox *statusBox_;
+    GtkTextView *input_;
+    GtkButton *toggleToIconview_;
+    GtkButton *toggleToTerminal_;
+    GtkButton *statusButton_;
+    GtkLabel *statusLabel_;
+    GtkButton *clearButton_;
+    GtkScale *sizeScale_;
     
 
 
@@ -67,16 +66,16 @@ private:
         return size_scale;
     }
     static GtkTextView *createStatus(void){
-	GtkTextView *status = GTK_TEXT_VIEW(gtk_text_view_new ());
-	gtk_text_view_set_pixels_above_lines (status, 10);
-	gtk_text_view_set_monospace (status, TRUE);
-	gtk_text_view_set_editable (status, TRUE);
-	gtk_text_view_set_cursor_visible (status, TRUE);
-	gtk_text_view_place_cursor_onscreen(status);
-	gtk_text_view_set_wrap_mode (status, GTK_WRAP_CHAR);
-	gtk_widget_set_can_focus(GTK_WIDGET(status), TRUE);
-	gtk_widget_show_all(GTK_WIDGET(status));
-	return status;
+	GtkTextView *input = GTK_TEXT_VIEW(gtk_text_view_new ());
+	gtk_text_view_set_pixels_above_lines (input, 10);
+	gtk_text_view_set_monospace (input, TRUE);
+	gtk_text_view_set_editable (input, TRUE);
+	gtk_text_view_set_cursor_visible (input, TRUE);
+	gtk_text_view_place_cursor_onscreen(input);
+	gtk_text_view_set_wrap_mode (input, GTK_WRAP_CHAR);
+	gtk_widget_set_can_focus(GTK_WIDGET(input), TRUE);
+	gtk_widget_show_all(GTK_WIDGET(input));
+	return input;
     }
     static GtkLabel *createStatusLabel(void){
         auto status_label =

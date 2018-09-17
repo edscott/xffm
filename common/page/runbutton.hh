@@ -80,7 +80,7 @@ public:
     void setup(void *data, const gchar * exec_command, pid_t child, gboolean shellIcon)
     {
 	page_ = (Page<Type> *)data;
-	textview_ = page_->diagnostics();
+	textview_ = page_->output();
 	button_space_ = page_->hButtonBox();
 	
 	in_shell_ = shellIcon;
