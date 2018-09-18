@@ -90,6 +90,16 @@ main (int argc, char *argv[]) {
 	}
 	setsid(); // detach main process from tty
     }
+
+    // FIXME: set these environment variables *only* if they are not already set
+    //        in the environment (allow user override)
+
+    // XXX xterm is mandatory...
+    
+    setenv("TERMINAL", "xterm -rv", 1);
+    const gchar *term_cmd = getenv("TERMINAL_CMD");
+    if (!term_cmd || !strlen(term_cmd)) term_cmd = "xterm -e";
+
     gchar *getpass = g_find_program_in_path("xfgetpass");
     if (!getpass) {
         std::cerr<<"*** Warning: Xffm not correctly installed. Cannot find xfgetpass in path\n";
@@ -98,6 +108,36 @@ main (int argc, char *argv[]) {
         setenv("SUDO_ASKPASS", getpass, 1);
         setenv("SSH_ASKPASS", getpass, 1);
     }
+    
+    gchar *e = NULL;
+    if (getenv("EDITOR")) e = g_find_program_in_path(getenv("EDITOR"));
+     
+    if (!e){
+        e = g_find_program_in_path("gvim");
+        if (!e){
+            e = g_find_program_in_path("vi");
+            if (!e) {
+                e = g_find_program_in_path("nano");
+                if(!e){
+                    // nano is mandatory
+                    std::cerr<<"*** Warning: No suitable EDITOR found (tried gvim, vi, nano)\n";
+                } else {
+                    g_free(e);
+                    e = g_strdup_printf("%s nano", term_cmd);
+                }
+            } else {
+                g_free(e);
+                e = g_strdup_printf("%s vi", term_cmd);
+            }
+        } else {
+            g_free(e);
+            e = g_strdup("gvim -f");
+        }
+    }
+    setenv("EDITOR", e, 1);
+
+
+
 
 
 

@@ -444,18 +444,30 @@ private:
 
         GtkTextTag *tag = NULL;
         lpterm_colors_t lpterm_colors_v[] = {
+
             {"tag/command", {101, 0x5858, 0x3434, 0xcfcf}},
             {"tag/stderr", {102, 0xcccc, 0, 0}},
             {"tag/command_id", {103, 0x0000, 0x0000, 0xffff}},
+            {"tag/black", {1, 0x0000, 0x0000, 0x0000}},
+            {"tag/white", {0, 0xffff, 0xffff, 0xffff}},
+            {"tag/grey", {110, 0x8888, 0x8888, 0x8888}},
+#ifdef LIGHT_BG
             {"tag/green", {104, 0x0000, 0xaaaa, 0x0000}},
             {"tag/red", {105, 0xcdcd, 0x0000, 0x0000}},
             {"tag/blue", {106, 0x0000, 0x0000, 0xcdcd}},
             {"tag/yellow", {107, 0xcdcd, 0xcdcd, 0x0000}},
             {"tag/magenta", {108, 0xcdcd, 0x0000, 0xcdcd}},
             {"tag/cyan", {109, 0x0000, 0xcdcd, 0xcdcd}},
-            {"tag/black", {1, 0x0000, 0x0000, 0x0000}},
-            {"tag/white", {0, 0xffff, 0xffff, 0xffff}},
-            {"tag/grey", {110, 0x8888, 0x8888, 0x8888}},
+#else
+            {"tag/green", {104, 0x0000, 0xffff, 0x0000}},
+            {"tag/red", {105, 0xffff, 0x0000, 0x0000}},
+            {"tag/blue", {106, 0x0000, 0x0000, 0xffff}},
+            {"tag/yellow", {107, 0xffff, 0xffff, 0x0000}},
+            {"tag/magenta", {108, 0xffff, 0x0000, 0xffff}},
+            {"tag/cyan", {109, 0x0000, 0xffff, 0xffff}},
+#endif
+
+
             {NULL, {0, 0, 0, 0}}
 
         };
