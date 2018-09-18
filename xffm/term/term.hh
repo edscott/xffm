@@ -23,7 +23,7 @@ public:
     termDialog(void){
 	// Here we override the default start up of the Dialog class template
         gchar *workdir = g_get_current_dir();
-        this->setDialogSize(600,400);
+        this->setDialogSize(900,600);
         auto page = this->currentPageObject();
         page->setPageWorkdir(workdir);
 	// Default into terminal...

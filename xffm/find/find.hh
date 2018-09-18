@@ -9,7 +9,7 @@ class Find: protected FindDialog<Type> {
 public:
     Find(const gchar *path){
 	if (!this->whichGrep()){
-	    std::cerr<<"DBG> grep command not found\n";
+	    DBG("grep command not found\n");
 	    exit(1);
 	}
         gchar *fullPath = NULL;

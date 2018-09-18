@@ -11,11 +11,11 @@ public:
 	hButtonBox_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
 	
         toggleToTerminal_ =  GTK_BUTTON(gtk_button_new());
-        gtk_c::setup_image_button(toggleToTerminal_, "utilities-terminal", _("Terminal"));
+        gtk_c::setup_image_button(toggleToTerminal_, "utilities-terminal-symbolic", _("Terminal"));
 
         
 	toggleToIconview_ = GTK_BUTTON(gtk_button_new());
-        gtk_c::setup_image_button(toggleToIconview_, "system-file-manager", _("Iconview"));
+        gtk_c::setup_image_button(toggleToIconview_, "system-file-manager-symbolic", _("Iconview"));
 
 
 	input_ = createStatus(); // Status textview
@@ -24,7 +24,9 @@ public:
 	statusButton_ = GTK_BUTTON(gtk_button_new());
 	statusLabel_ = createStatusLabel();
 
-	clearButton_ =  gtk_c::dialog_button("edit-clear", NULL);
+	clearButton_ =  gtk_c::dialog_button("edit-delete-symbolic", NULL);
+	gtk_widget_set_can_focus (GTK_WIDGET(clearButton_), FALSE);
+	gtk_button_set_relief (clearButton_, GTK_RELIEF_NONE);
 	sizeScale_ = newSizeScale();
 
 
@@ -59,7 +61,7 @@ protected:
 private:
     static GtkScale *newSizeScale(void){
 	auto size_scale = GTK_SCALE(gtk_scale_new_with_range(GTK_ORIENTATION_HORIZONTAL, 6.0, 24.0, 6.0));
-        gtk_range_set_value(GTK_RANGE(size_scale), 12);
+        gtk_range_set_value(GTK_RANGE(size_scale), DEFAULT_FIXED_FONT_SIZE);
         gtk_range_set_increments (GTK_RANGE(size_scale), 2.0, 6.0);
 	gtk_widget_set_size_request (GTK_WIDGET(size_scale),75,-1);
 	gtk_scale_set_value_pos (size_scale,GTK_POS_RIGHT);

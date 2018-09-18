@@ -264,8 +264,9 @@ private:
         
 
         gtk_widget_show_all(GTK_WIDGET(vbox7b));
-        auto window = GTK_DIALOG(gtk_dialog_new_with_buttons(_("Details"), dialog_, 
-                    GTK_DIALOG_DESTROY_WITH_PARENT, _("Ok"), GTK_RESPONSE_ACCEPT, NULL));
+        auto window = GTK_DIALOG(gtk_dialog_new());
+        gtk_window_set_title(GTK_WINDOW(dialog_), _("Details"));
+            
         auto contentArea = GTK_BOX(gtk_dialog_get_content_area (window));
 	gtk_box_pack_start (contentArea, GTK_WIDGET(vbox7b), FALSE, FALSE, 0);
         gtk_widget_show_all(GTK_WIDGET(contentArea));
@@ -282,7 +283,7 @@ private:
 
 	auto accel_group = gtk_accel_group_new ();
 			
-	auto button = gtk_c::dialog_button ("dialog-question", NULL);
+	auto button = gtk_c::dialog_button ("dialog-question-symbolic", NULL);
 	tooltip_c::custom_tooltip(GTK_WIDGET(button), NULL, "fgr --help");
 	g_signal_connect (G_OBJECT (button), "clicked", 
 		 WIDGET_CALLBACK(Type::command_up), (gpointer)"fgr --help");
@@ -316,7 +317,7 @@ private:
         }
 
 
-	button = gtk_c::dialog_button ("folder", NULL);
+	button = gtk_c::dialog_button ("folder-symbolic", NULL);
 	auto vbox = gtk_c::vboxNew (FALSE, 6);
 	gtk_box_pack_start (vbox, GTK_WIDGET(button), FALSE, FALSE, 0);
 	gtk_box_pack_start (path_box, GTK_WIDGET(path_label), FALSE, FALSE, 0);
@@ -350,7 +351,7 @@ private:
 
 
 
-	auto dialogbutton2 = gtk_c::dialog_button("dialog-question", "");
+	auto dialogbutton2 = gtk_c::dialog_button("dialog-question-symbolic", "");
 	gtk_box_pack_start (filter_box, GTK_WIDGET(dialogbutton2), FALSE, FALSE, 0);
 	g_object_set_data(G_OBJECT(dialogbutton2), "dialog_", dialog_);
 	tooltip_c::custom_tooltip(GTK_WIDGET(dialogbutton2), NULL,  _(filter_text_help));
@@ -409,7 +410,7 @@ private:
 	gtk_box_pack_start (grep_box, GTK_WIDGET(grep_entry), FALSE, FALSE, 5);
 	gtk_widget_set_sensitive (GTK_WIDGET(grep_entry), TRUE);   
 	
-	auto button3 = gtk_c::dialog_button ("dialog-question", "");
+	auto button3 = gtk_c::dialog_button ("dialog-question-symbolic", "");
 	gtk_box_pack_start (grep_box, GTK_WIDGET(button3), FALSE, FALSE, 0);
 	g_object_set_data(G_OBJECT(button3), "dialog_", dialog_);
 	//tooltip_c::custom_tooltip(GTK_WIDGET(togglebutton3), NULL, _(grep_text_help));
@@ -584,7 +585,7 @@ private:
 	
 
 	auto clearButton =  
-	    gtk_c::dialog_button("user-trash", _("Clear"));
+	    gtk_c::dialog_button("edit-delete-symbolic", _("Clear"));
 	g_object_set_data(G_OBJECT(dialog_), "clear_button", clearButton);
 	g_object_set_data(G_OBJECT(clearButton), "dialog_", dialog_);
 	g_signal_connect (G_OBJECT (clearButton), "clicked",
@@ -592,7 +593,7 @@ private:
 	gtk_widget_show (GTK_WIDGET(clearButton));
 
 	auto closeButton =  
-	    gtk_c::dialog_button("application-exit", _("Close"));
+	    gtk_c::dialog_button("application-exit-symbolic", _("Close"));
 	g_object_set_data(G_OBJECT(dialog_), "close_button", closeButton);
 	g_object_set_data(G_OBJECT(closeButton), "dialog_", dialog_);
 	g_signal_connect (G_OBJECT (closeButton), "clicked",
@@ -601,7 +602,7 @@ private:
 
 
 	auto findButton =  
-	    gtk_c::dialog_button("system-search", _("Find"));
+	    gtk_c::dialog_button("system-search-symbolic", _("Find"));
 	gtk_widget_set_can_default(GTK_WIDGET(findButton), TRUE);
 	g_signal_connect (G_OBJECT (findButton), "clicked",
 		BUTTON_CALLBACK(Type::onFindButton), (gpointer)dialog_);
@@ -639,7 +640,7 @@ private:
 	    } 
 	    g_free(basename);
 	} else {
-	    DBG("getenv(\"EDITOR\") = \"%s\"\n", editor);
+	    TRACE("getenv(\"EDITOR\") = \"%s\"\n", editor);
 	}
 
 

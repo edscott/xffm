@@ -16,6 +16,21 @@
 #define GREP_HISTORY g_get_user_data_dir(),"xffm+","xffind.grep",NULL
 #define PATH_HISTORY g_get_user_data_dir(),"xffm+","xffind.path",NULL
 
+#define BIG_ICON_SIZE 		96 
+#define MEDIUM_ICON_SIZE 	72 
+#define SMALL_ICON_SIZE 	48 
+#define TINY_ICON_SIZE 		24 
+#define LIST_ICON_SIZE  	0
+
+#define TINY_BUTTON	16
+#define SIZE_BUTTON	22
+#define SIZE_DIALOG	24
+#define SIZE_ICON	48
+#define SIZE_PREVIEW	96
+#define SIZE_TIP	128
+
+#define DEFAULT_FIXED_FONT_SIZE 16
+
 typedef struct menuItem_t {
     const gchar *label;
     void *callback;

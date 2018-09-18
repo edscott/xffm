@@ -184,7 +184,10 @@ public:
 	this->setWorkDir(dir);
 	DBG("update_pathbar: %s\n", dir);
 	this->update_pathbar(dir);
-	gchar *g = Completion<Type>::get_terminal_name(this->workDir());
+        if (g_file_test(dir, G_FILE_TEST_IS_DIR)){
+	    print_c::print(this->output(), "tag/green", g_strdup_printf("cd %s\n", dir));
+        }
+    	gchar *g = Completion<Type>::get_terminal_name(this->workDir());
 	setPageLabel(g);
 	g_free(g);
     }

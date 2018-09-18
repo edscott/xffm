@@ -739,15 +739,14 @@ font-size: %dpx;\
         gtk_style_context_add_provider (style_context, 
                 GTK_STYLE_PROVIDER(css_provider),
                 GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-            
     }
 private:
     static void
     set_font_size (GtkWidget * widget) {
         if (!GTK_IS_WIDGET(widget)) return;
-        auto fontsize = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(widget),	"fontsize"));
+        auto fontsize = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(widget),"fontsize"));
         if (!fontsize){
-            set_font_size(widget, 12);
+            set_font_size(widget, DEFAULT_FIXED_FONT_SIZE);
         }
     }
 };

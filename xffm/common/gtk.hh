@@ -2,17 +2,6 @@
 #define XFGTK_HH
 #include "pixbuf.hh"
 
-#define BIG_ICON_SIZE 		96 
-#define MEDIUM_ICON_SIZE 	72 
-#define SMALL_ICON_SIZE 	48 
-#define TINY_ICON_SIZE 		24 
-#define LIST_ICON_SIZE  	0
-
-#define SIZE_BUTTON	20
-#define SIZE_DIALOG	36
-#define SIZE_ICON	48
-#define SIZE_PREVIEW	96
-#define SIZE_TIP	128
 
 static GHashTable *iconname_hash=NULL;
 
@@ -218,7 +207,8 @@ public:
     static GtkButton *
     dialog_button (const char *icon_id, const char *text) {
 	auto button = GTK_BUTTON(gtk_button_new ());
-	set_bin_contents(GTK_BIN(button), icon_id, text, SIZE_BUTTON);
+	set_bin_contents(GTK_BIN(button), icon_id, text, TINY_BUTTON);
+	gtk_button_set_relief (button, GTK_RELIEF_NONE);        
 	return button;
 
     }

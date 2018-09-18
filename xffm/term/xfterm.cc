@@ -45,12 +45,22 @@
 # undef DBG
 # define DBG(...)  fprintf(stderr, "DBG> "); fprintf(stderr, __VA_ARGS__);
 static const gchar *xftermProgram;
+static const gchar *xffindProgram;
+
+
 
 #include "common/intl.h"
 #include "common/response.hh"
 #include "term.hh"
+
+#include "find/fgr.hh"
+#include "find/find.hh"
+#include "find/signals.hh"
+
+
 int
 main (int argc, char *argv[]) {
+    xffindProgram = argv[0];
     xftermProgram = argv[0];
     /* start loading required dynamic libraries here... */
 #ifdef ENABLE_NLS
@@ -73,8 +83,23 @@ main (int argc, char *argv[]) {
 
     TRACE ("call to setlocale");
     setlocale (LC_ALL, "");
+    if (argv[1] && strcmp(argv[1],"--fgr")==0){
+        xf::Fgr<double> *fgr = new(xf::Fgr<double>);
+        fgr->main(argc, argv);
+        return 0;
+    }
+
+
+    
     TRACE ("call to gtk_init");
     gtk_init (&argc, &argv);
+    if (argv[1] && strcmp(argv[1],"--find")==0){
+        xf::Find<xf::findSignals<double>> dialog((const gchar *)argv[2]);
+        //g_idle_add(set_up_dialog, path);
+        gtk_main();
+        return 0;
+    }
+    
 
     // In order for SSH_ASKPASS to work (for sshfs or for executing
     // ssh commands at the lpterminal) we must detach the tty. 

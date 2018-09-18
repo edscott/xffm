@@ -2,6 +2,7 @@
 #define PATHBAR_HH
 #include "common/gtk.hh"
 #include "common/util.hh"
+#include "common/print.hh"
 
 
 namespace xf {
@@ -12,6 +13,7 @@ class Pathbar
 {
     using gtk_c = Gtk<double>;
     using util_c = Util<double>;
+    using print_c = Print<double>;
 private:
         //void *window_p;
 	GtkWidget *pathbar_;
@@ -107,8 +109,10 @@ public:
 	    if (button == children->data){
 		const gchar *path = (gchar *)g_object_get_data(G_OBJECT(button), "path");
 		if (!path) path = "xffm:root";
-		DBG("FIXME: send cd instruction: %s\n", path);
-                ((Page<Type> *)this)->setPageWorkdir(path);
+                auto page = (Page<Type> *)this;
+                page->setPageWorkdir(path);
+                
+
 		/*
 		view_c *view_p = (view_c *)g_object_get_data(G_OBJECT(pathbar_), "view_p");
 		if (!view_p) g_error("view_p data not set for g_object pathbar!\n");

@@ -73,7 +73,7 @@ private:
     }
 
 
-    static void add_cancel_ok(GtkDialog *dialog){
+    /*static void add_cancel_ok(GtkDialog *dialog){
         // button no
         auto button = gtk_c::dialog_button("xffm/stock_cancel", _("Cancel"));
         gtk_widget_show (GTK_WIDGET(button));
@@ -84,7 +84,7 @@ private:
         gtk_widget_show (GTK_WIDGET(button));
         g_object_set_data (G_OBJECT (dialog), "action_true_button",(void *) button);
         gtk_dialog_add_action_widget (GTK_DIALOG (dialog), GTK_WIDGET(button), GTK_RESPONSE_YES);
-    }
+    }*/
 
     static void
     cancel_entry (GtkButton *button, gpointer data) {
@@ -157,7 +157,7 @@ private:
         gtk_box_set_homogeneous(vbox, FALSE);
         gtk_box_pack_start (bhbox, GTK_WIDGET(vbox), TRUE, TRUE, 0);
         // put image here
-        auto pixbuf = pixbuf_c::get_pixbuf("user-info-symbolic", 64);
+        auto pixbuf = pixbuf_c::get_pixbuf("user-info-symbolic", BIG_ICON_SIZE);
 //        auto pixbuf = pixbuf_c::get_pixbuf("user-info-symbolic",SIZE_ICON);
         auto image = GTK_IMAGE(gtk_image_new_from_pixbuf(pixbuf));
         //g_object_unref(pixbuf);
