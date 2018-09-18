@@ -1,5 +1,5 @@
 /*
- * Copyright 2005-2012 Edscott Wilson Garcia 
+ * Copyright 2005-2018 Edscott Wilson Garcia 
  * license: GPL v.3
  */
 
