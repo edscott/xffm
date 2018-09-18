@@ -14,16 +14,18 @@ class MenuPopover {
 public:
     MenuPopover(void) {
 
-       menuButton_ = GTK_MENU_BUTTON(gtk_menu_button_new());
+        menuButton_ = GTK_MENU_BUTTON(gtk_menu_button_new());
 #ifdef TRY_POPOVER
-       auto popover = createPopover(GTK_WIDGET(menuButton_));
-       gtk_menu_button_set_popover(menuButton_, GTK_WIDGET(popover));
+        auto popover = createPopover(GTK_WIDGET(menuButton_));
+        gtk_menu_button_set_popover(menuButton_, GTK_WIDGET(popover));
 #else
-       auto menu = createMenu();
-       gtk_menu_button_set_popup (menuButton_, GTK_WIDGET(menu));
+        auto menu = createMenu();
+        gtk_menu_button_set_popup (menuButton_, GTK_WIDGET(menu));
+        gtk_widget_set_can_focus (GTK_WIDGET(menuButton_), FALSE);
+	gtk_button_set_relief (GTK_BUTTON(menuButton_), GTK_RELIEF_NONE);
 #endif
  
-       gtk_widget_show(GTK_WIDGET(menuButton_));
+        gtk_widget_show(GTK_WIDGET(menuButton_));
     }
     GtkMenuButton *menuButton(){ return menuButton_;}
     protected:

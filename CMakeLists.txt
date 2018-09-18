@@ -1,6 +1,7 @@
 cmake_minimum_required (VERSION 3.1)
 project (xffm C CXX)
 set(CMAKE_INSTALL_PREFIX /usr/local)
+set(PREFIX_BIN /usr/local/bin)
 # Version info
 set(xffm_VERSION_MAJOR 0)
 set(xffm_VERSION_MINOR 3)
