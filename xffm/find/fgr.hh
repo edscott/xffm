@@ -234,6 +234,7 @@ public:
         if (strcmp(base, "fgr")) fgrMain(argc, argv);
         else  fgrMain(argc-1, ++argv);
         g_free(base);
+	return 0;
     }
 
 private:

@@ -125,6 +125,7 @@ public:
 	run_button_list = NULL;
 
 
+	print_c::setColor(GTK_WIDGET(this->output()));
 
 	gtk_widget_show_all(GTK_WIDGET(pageChild_));
 
@@ -151,6 +152,7 @@ public:
 	pthread_mutex_lock(rbl_mutex);
 	run_button_list = g_list_prepend(run_button_list, rb_p);
 	pthread_mutex_unlock(rbl_mutex);
+	return NULL;
     }
 
     void

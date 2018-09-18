@@ -678,6 +678,28 @@ private:
     }
 public:
     static void
+    setColor(GtkWidget * widget) {
+        auto style_context = gtk_widget_get_style_context (widget);
+        gtk_style_context_add_class(style_context, GTK_STYLE_CLASS_VIEW );
+        auto css_provider = gtk_css_provider_new();
+        GError *error=NULL;
+        auto data = g_strdup_printf("* {\
+background-color: black;\
+color: white;\
+}");
+        gtk_css_provider_load_from_data (css_provider, data, -1, &error);
+        g_free(data);
+        if (error){
+            DBG("gtk_css_provider_load_from_data: %s\n", error->message);
+            g_error_free(error);
+            return;
+        }
+        gtk_style_context_add_provider (style_context, 
+                GTK_STYLE_PROVIDER(css_provider),
+                GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+    }
+    static void
     set_font_size (GtkWidget * widget, gint fontsize) {
         if (!GTK_IS_WIDGET(widget)) return;
         auto oldfontsize = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(widget),	"fontsize"));

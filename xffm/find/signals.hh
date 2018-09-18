@@ -487,7 +487,7 @@ private:
         print_c::print_icon(diagnostics, "system-search", "tag/green", g_strconcat( _("Searching..."), "\n", NULL));
         print_c::print_icon(diagnostics, "system-run", "tag/bold", 
                 g_strdup_printf("%s: \"%s\"\n",_("Searching..."), (gchar *) command));
-
+	return FALSE;
     }
 
     static void
