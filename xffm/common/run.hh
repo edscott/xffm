@@ -308,6 +308,7 @@ public:
             } else {                
                 print_c::print(textview, "tag/red", g_strdup(line));
             }
+                //print_c::print(textview, g_strdup(line));
         }
 
         // With this, this thread will not do a DOS attack

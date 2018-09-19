@@ -31,7 +31,17 @@ public:
         page->setDefaultIconview(FALSE);
         //gtk_widget_hide(GTK_WIDGET(page->toggleToTerminal()));
         //gtk_widget_hide(GTK_WIDGET(page->toggleToIconview()));
-        print_c::print(page->output(), "tag/red", g_strdup("Hello world!\n"));
+     
+        print_c::print(page->output(), "red", g_strdup("Hello world!\n"));
+        print_c::print(page->output(), "Red", g_strdup("Hello world!\n"));
+        print_c::print(page->output(), "bold/red/white_bg", g_strdup("Hello world!\n"));
+        print_c::print(page->output(), "bold/Red", g_strdup("Hello world!\n"));
+
+        print_c::print(page->output(), "bold/Red", g_strdup("Hello world!\n"));
+        print_c::print(page->output(), "white", g_strdup("Use "));
+
+        print_c::print(page->output(), "bold/White", g_strdup("script -f -c \"command\" dev/null "));
+        print_c::print(page->output(), "white", g_strdup("for color output (YMMV)\n"));
     }
 };
 

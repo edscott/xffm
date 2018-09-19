@@ -37,7 +37,7 @@ public:
 
     static void print_debug(GtkTextView *textview, gchar *string){
         if (!textview) return;
-	void *arg[]={(void *)textview, (void *)"tag/italic", (void *)string};
+	void *arg[]={(void *)textview, (void *)"italic", (void *)string};
 	context_function(print_d, arg);
 	g_free(string);
 
@@ -80,7 +80,7 @@ public:
 
     static void print_error(GtkTextView *textview, gchar *string){
         if (!textview) return;
-	void *arg[]={(void *)textview, (void *)"tag/bold", (void *)string};
+	void *arg[]={(void *)textview, (void *)"bold", (void *)string};
 	context_function(print_e, arg);
 	g_free(string);
 
@@ -221,7 +221,7 @@ private:
     print_e(void *data){
         if (!data) return GINT_TO_POINTER(-1);
         void **arg=(void **)data;
-        void *e_arg1[]={arg[0],(void *)"tag/red", (void *)"*** "};
+        void *e_arg1[]={arg[0],(void *)"red", (void *)"*** "};
         print_f((void *)e_arg1);
         return print_f(data);
     }
@@ -229,7 +229,7 @@ private:
     print_d(void *data){
         if (!data) return GINT_TO_POINTER(-1);
         void **arg=(void **)data;
-        void *d_arg[]={arg[0],(void *)"tag/italic", (void *)"DBG> "};
+        void *d_arg[]={arg[0],(void *)"italic", (void *)"DBG> "};
         print_f((void *)d_arg);
         return print_f(data);
     }
@@ -396,29 +396,46 @@ private:
     static const gchar *
     get_ansi_tag(const gchar *code){
         static sequence_t sequence_v[] = {
-                {"tag/black", "30"},
-                {"tag/black_bg", "40"},
-                {"tag/red", "31"},
-                {"tag/red_bg", "41"},
-                {"tag/green", "32"},
-                {"tag/green_bg", "42"},
-                {"tag/yellow", "33"},
-                {"tag/yellow_bg", "43"},
-                {"tag/blue", "34"},
-                {"tag/blue_bg", "44"},
-                {"tag/magenta", "35"},
-                {"tag/magenta_bg", "45"},
-                {"tag/cyan", "36"},
-                {"tag/cyan_bg", "46"},
-                {"tag/white", "37"},
-                {"tag/white_bg", "47"},
+                {"black", "30"},
+                {"black_bg", "40"},
+                {"red", "31"},
+                {"red_bg", "41"},
+                {"green", "32"},
+                {"green_bg", "42"},
+                {"yellow", "33"},
+                {"yellow_bg", "43"},
+                {"blue", "34"},
+                {"blue_bg", "44"},
+                {"magenta", "35"},
+                {"magenta_bg", "45"},
+                {"cyan", "36"},
+                {"cyan_bg", "46"},
+                {"white", "37"},
+                {"white_bg", "47"},
+              
+                {"Black_bg", "100"},
+                {"Black", "90"},
+                {"Red_bg", "101"},
+                {"Red", "91"},
+                {"Green_bg", "102"},
+                {"Green", "92"},
+                {"Yellow_bg", "103"},
+                {"Yellow", "93"},
+                {"Blue_bg", "104"},
+                {"Blue", "94"},
+                {"Magenta_bg", "105"},
+                {"Magenta", "95"},
+                {"Cyan_bg", "106"},
+                {"Cyan", "96"},
+                {"White_bg", "107"},
+                {"White", "97"},
 
-                {"tag/bold", "1"},
-                {"tag/bold", "01"},
-                {"tag/italic", "4"},
-                {"tag/italic", "04"},
-                {"tag/blink", "5"},
-                {"tag/blink", "05"},
+                {"bold", "1"},
+                {"bold", "01"},
+                {"italic", "4"},
+                {"italic", "04"},
+                {"blink", "5"},
+                {"blink", "05"},
                 {NULL, ""},
                 {NULL, "0"},
                 {NULL, "00"},
@@ -445,28 +462,29 @@ private:
         GtkTextTag *tag = NULL;
         lpterm_colors_t lpterm_colors_v[] = {
 
-            {"tag/command", {101, 0x5858, 0x3434, 0xcfcf}},
-            {"tag/stderr", {102, 0xcccc, 0, 0}},
-            {"tag/command_id", {103, 0x0000, 0x0000, 0xffff}},
-            {"tag/black", {1, 0x0000, 0x0000, 0x0000}},
-            {"tag/white", {0, 0xffff, 0xffff, 0xffff}},
-            {"tag/grey", {110, 0x8888, 0x8888, 0x8888}},
-#ifdef LIGHT_BG
-            {"tag/green", {104, 0x0000, 0xaaaa, 0x0000}},
-            {"tag/red", {105, 0xcdcd, 0x0000, 0x0000}},
-            {"tag/blue", {106, 0x0000, 0x0000, 0xcdcd}},
-            {"tag/yellow", {107, 0xcdcd, 0xcdcd, 0x0000}},
-            {"tag/magenta", {108, 0xcdcd, 0x0000, 0xcdcd}},
-            {"tag/cyan", {109, 0x0000, 0xcdcd, 0xcdcd}},
-#else
-            {"tag/green", {104, 0x0000, 0xffff, 0x0000}},
-            {"tag/red", {105, 0xffff, 0x0000, 0x0000}},
-            {"tag/blue", {106, 0x0000, 0x0000, 0xffff}},
-            {"tag/yellow", {107, 0xffff, 0xffff, 0x0000}},
-            {"tag/magenta", {108, 0xffff, 0x0000, 0xffff}},
-            {"tag/cyan", {109, 0x0000, 0xffff, 0xffff}},
-#endif
-
+            {"command", {101, 0x5858, 0x3434, 0xcfcf}},
+            {"stderr", {102, 0xcccc, 0, 0}},
+            {"command_id", {103, 0x0000, 0x0000, 0xffff}},
+            {"grey", {110, 0x8888, 0x8888, 0x8888}},
+// xterm colors
+            // normal
+            {"black", {201, 0x0000, 0x0000, 0x0000}},
+            {"red", {202, 0xcdcd, 0x0, 0x0}},
+            {"green", {203, 0x0, 0xcdcd, 0x0}},
+            {"yellow", {204, 0xcdcd, 0xcdcd, 0x0}},
+            {"blue", {205, 0x0, 0x0, 0xeeee}},
+            {"magenta", {206, 0xcdcd, 0x0, 0xcdcd}},
+            {"cyan", {207, 0x0, 0xcdcd, 0xcdcd}},
+            {"white", {208, 0xe5e5, 0xe5e5, 0xe5e5}}, //gray
+            // bright
+            {"Black", {211, 0x7f7f, 0x7f7f, 0x7f7f}},
+            {"Red", {212, 0xffff, 0x0, 0x0}},
+            {"Green", {213, 0x0, 0xffff, 0x0}},
+            {"Yellow", {214, 0xffff, 0xffff, 0x0}},
+            {"Blue", {215, 0x0, 0x0, 0xffff}},
+            {"Magenta", {216, 0xffff, 0x0, 0xffff}},
+            {"Cyan", {217, 0x0, 0xffff, 0xffff}},
+            {"White", {218, 0xffff, 0xffff, 0xffff}}, 
 
             {NULL, {0, 0, 0, 0}}
 
@@ -485,9 +503,9 @@ private:
                 g_free(bg_id);
            }
             gtk_text_buffer_create_tag (buffer, 
-                    "tag/bold", "weight", PANGO_WEIGHT_BOLD, "foreground_gdk", NULL, NULL);
+                    "bold", "weight", PANGO_WEIGHT_BOLD, "foreground_gdk", NULL, NULL);
             gtk_text_buffer_create_tag (buffer, 
-                    "tag/italic", "style", PANGO_STYLE_ITALIC, "foreground_gdk", NULL, NULL);
+                    "italic", "style", PANGO_STYLE_ITALIC, "foreground_gdk", NULL, NULL);
             g_object_set_data(G_OBJECT(buffer), "text_tag_initialized", GINT_TO_POINTER(1));
         } 
 
@@ -496,22 +514,43 @@ private:
         return tag;
     }
 
-
-
     static GtkTextTag **
     resolve_tags(GtkTextBuffer * buffer, const gchar *tag){
-        GtkTextTag **tags = NULL;
-        if(tag) {
-            if(strncmp (tag, "tag/", strlen ("tag/")) == 0) {
-                tags = (GtkTextTag **)malloc(2*sizeof(GtkTextTag *));
-                if (!tags) g_error("malloc\n");
-                tags[0] = resolve_tag (buffer, tag);
-                tags[1] = NULL;
-            } else if(strncmp (tag, "icon/", strlen ("icon/")) == 0){
-                //icon = rfm_get_pixbuf (id, SIZE_BUTTON);
-            }
+        if (!tag) return NULL;
+        gchar **userTags;
+        if (strchr(tag, '/')){
+            // multiple tags
+            userTags = g_strsplit(tag, "/", -1);
+        } else {
+            userTags = (gchar **)calloc(2, sizeof(GtkTextTag *));
+            userTags[0] = g_strdup(tag);
         }
+        gchar **t;
+        gint tag_count = 0;
+        for (t = userTags;t && *t; t++){
+            tag_count++;
+        }
+        auto tags = (GtkTextTag **)calloc(tag_count+1, sizeof(GtkTextTag *));
+        int i=0;
+        for (t=userTags; t && *t;t++){
+            tags[i] = resolve_tag (buffer, *t);
+            if (tags[i] == NULL) {
+                DBG("*** print_c::invalid tag: \"%s\"\n", *t);
+            } else i++;
+        }
+        g_strfreev(userTags);
         return tags;
+    }
+
+    static gchar *
+    concat(gchar **fullString, const gchar *separator, const gchar* addOn){
+        gchar *newString;
+        if (!(*fullString)) newString=g_strdup(addOn);
+        else {
+            newString = g_strconcat(*fullString, separator, addOn, NULL);
+            g_free(*fullString);
+        }
+        return newString;
     }
 
     static void insert_string (GtkTextBuffer * buffer, const gchar * s, GtkTextTag **tags) {
@@ -524,77 +563,84 @@ private:
         gchar esc[]={0x1B, '[', 0};
         gboolean head_section = strncmp(s, esc, strlen(esc));
         const char *esc_location = strstr (s, esc);
-        if(esc_location) {      //vt escape sequence
+        if(esc_location) {      // escape sequence: <ESC>[
+
             // do a split
                 TRACE( "0.splitting %s\n", s);
             gchar **split = g_strsplit(s, esc, -1);
-            if (!split) {
-                DBG("insert_string(): split_esc barfed\n");
-                return;
-            }
-
-            gchar **pp=split;
-            gint count = 0;
-            for (;pp && *pp; pp++, count++){
-                if (strlen(*pp) == 0) continue;
-                TRACE( "split %d: %s\n", count, *pp);
-                if (count==0 && head_section){
-                    insert_string (buffer, *pp, NULL);
-                    continue;
-                }
+            insert_string (buffer, split[0], NULL);
+            gchar *fullTag=NULL;
+            gchar **pp=split+1;
+            GtkTextTag **textviewTags = NULL;
+            // single
+            for (;pp && *pp; pp++){
                 gchar *code = *pp;
-                if (*code == 'K'){
+               
+                // this was for mpg123... FIXME no eol
+                // mpg123 is not providing new lines
+                /* if (*code == 'K'){
                     insert_string (buffer, "\n", NULL);
                     continue;
+                }*/
+                if (*code == 'K'){
+                     // erase from cursor to eol
+                     // insert string with whatever tag you have.
+                    insert_string (buffer, code+1, textviewTags);
+                    continue;
                 }
-                TRACE( "1.splitting %s\n", *pp);
-                
-                gchar **ss = g_strsplit(*pp, "m", 2);
-
-                // Insert tags
-                gchar **tags = NULL;
-                if (strchr(ss[0],';')) {
-                    TRACE( "2.splitting %s\n", ss[0]);
-                    tags = g_strsplit(ss[0], ";", -1);
+                /* if (strncmp(code, "0K", 2)==0 ||strncmp(code, "1K", 2)==0 || strncmp(code, "2K", 2)==0){
+                    // erase from cursor to eol, from bol to cursor, erase line
+                    fullString = concat(&fullString, "", code+2);
+                    continue;
+                }*/
+                 // split on m
+                if (*code == 'm'){
+                    g_free(fullTag); fullTag = NULL;
+                    g_free(textviewTags); textviewTags = NULL;
+                    insert_string (buffer, code+1, NULL);
+                    continue;
+                }
+                gchar **ss = g_strsplit(code, "m", 2);
+                gchar **codes;
+                // Check for multiple tags
+                if (strchr(code, ';')){
+                    codes = g_strsplit(ss[0], ";", -1);
                 } else {
-                    tags = (gchar **)malloc(sizeof(gchar *) * 2 );
-                    if (!tags) g_error("malloc: %s\n", "no memory");
-                    tags[0] = g_strdup(ss[0]);
-                    tags[1] = 0;
+                    codes = (gchar **)calloc(2, sizeof(gchar*));
+                    codes[0] = g_strdup(ss[0]);
                 }
-                gchar **t = tags;
-                gint tag_count = 0;
-                for (;t && *t; t++)tag_count++;
-                auto gtags = (GtkTextTag **)malloc((tag_count+1)*sizeof(GtkTextTag *));
-                if (!gtags) g_error("malloc: %s\n", "no memory");
-                memset(gtags, 0, (tag_count+1)*sizeof(GtkTextTag *));
-
-
-                gint i;
-                for (i=0,t = tags;t && *t; t++) {
-                    if (!strcmp(*t,"01") || !strcmp(*t,"1")
-                        || !strcmp(*t,"05") || !strcmp(*t,"5"))
-                    {
-                        gtags[i++] = resolve_tag(buffer, "tag/bold");
+                DBG( "1.splitting %s --> %s, %s: codes[0]=%s\n", *pp, ss[0], ss[1],codes[0]);
+                // construct xffm tag
+                gchar **t;
+                gchar *thisTag=NULL;
+                for (t=codes; t && *t; t++){
+                    const gchar *ansiTag = get_ansi_tag(*t);
+                    if (!ansiTag){
+                        DBG("no ansiTag for \"%s\"\n", *t);
+                        if (strcmp(*t, "0")) {
+                            g_free(fullTag); fullTag = NULL;
+                            g_free(textviewTags); textviewTags = NULL;
+                            insert_string (buffer, ss[1], NULL);
+                            g_strfreev(ss);
+                            goto endloop;
+                        }
                         continue;
+                    } else {
+                        DBG("ansiTag=%s\n", ansiTag);
+                        fullTag = concat(&fullTag, "/", ansiTag);
+                        DBG("fullTag= %s\n", fullTag); 
                     }
-                    const gchar *tag = get_ansi_tag(*t);
-                    if (!tag) {
-                        TRACE( "no ansi tag for %s\n", *t);
-                        continue;
-                    }
-                    gtags[i++] = resolve_tag(buffer, tag);
-                    TRACE( "ansi_tag=%s\n", tag);
                 }
-
-
                 // Insert string
-                insert_string (buffer, ss[1], gtags);
-                g_free(gtags);
-
+                g_free(textviewTags);
+                if (fullTag) textviewTags = resolve_tags(buffer, fullTag);
+                else textviewTags = NULL;
+                insert_string (buffer, ss[1], textviewTags);
                 g_strfreev(ss);
-                
+endloop:;
             }
+            g_free(fullTag);
+            g_free(textviewTags);
             g_strfreev(split);
             // done
             return;
@@ -663,7 +709,7 @@ private:
                     break;
                 default: // Max. 3 tags...
                     gtk_text_buffer_insert_with_tags (buffer, &end, q, -1,
-                            tags[0],tags[1],tags[1], NULL);
+                            tags[0],tags[1],tags[2], NULL);
                     break;
             }
                     
