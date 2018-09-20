@@ -305,7 +305,7 @@ private:
 
     static void
     forkCleanup (void *data) {
-       DBG("forkCleanup\n");
+       TRACE("forkCleanup\n");
         fgrData_t *Data = (fgrData_t *)data;
         g_hash_table_remove(controllerHash, GINT_TO_POINTER(Data->pid));
         g_timeout_add_seconds(1, Cleanup, (void *)Data);
@@ -380,7 +380,7 @@ private:
                 Data->done = TRUE;
                 list = lastFind;
                 for (;list && list->data; list=list->next){
-                    DBG("last find: %s\n", (gchar *)list->data);
+                    TRACE("last find: %s\n", (gchar *)list->data);
                 }
         } else {
             if (!gtk_widget_is_visible(GTK_WIDGET(diagnostics))) return;
@@ -391,12 +391,12 @@ private:
                 if (Data->resultLimit ==0 ||
                     (Data->resultLimit > 0 && Data->resultLimit > Data->resultLimitCounter) ) {
                     print_c::print(diagnostics, g_strdup_printf("%s\n", file));
-                    DBG("--> %s\n",file);
-                    //DBG("resultLimitCounter:%d %s\n", Data->resultLimitCounter, line);
+                    TRACE("--> %s\n",file);
+                    //TRACE("resultLimitCounter:%d %s\n", Data->resultLimitCounter, line);
                     Data->findList = g_slist_prepend(Data->findList, file);
                 }
             } else {
-               DBG("ignoring: \"%s\"\n", file);
+               TRACE("ignoring: \"%s\"\n", file);
                g_free(file);
             }
         }         
@@ -487,7 +487,7 @@ private:
         print_c::print_icon(diagnostics, "system-search", "tag/green", g_strconcat( _("Searching..."), "\n", NULL));
         print_c::print_icon(diagnostics, "system-run", "tag/bold", 
                 g_strdup_printf("%s: \"%s\"\n",_("Searching..."), (gchar *) command));
-
+	return FALSE;
     }
 
     static void

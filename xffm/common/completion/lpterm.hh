@@ -337,7 +337,8 @@ public:
 
 	if (argvp[1] == NULL){
 	    print_c::show_text(output);
-	    print_c::print(output, "tag/green", g_strdup_printf("cd %s\n", g_get_home_dir()));
+	    //taken care of in taskbar object
+	    //print_c::print(output, "green", g_strdup_printf("cd %s\n", g_get_home_dir()));
 	    return g_strdup(g_get_home_dir());
 	}
 
@@ -390,7 +391,8 @@ public:
 	    g_free (rpath);
 	}
 
-	print_c::print(output, "tag/green", g_strdup_printf("cd %s\n", gg));
+	//taken care of in taskbar object
+        //print_c::print(output, "green", g_strdup_printf("cd %s\n", gg));
 	if (chdir(gg) < 0) {
 	    print_c::print_error(output, g_strdup_printf("%s\n", strerror(errno)));
 	    return NULL;

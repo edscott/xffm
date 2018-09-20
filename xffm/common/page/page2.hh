@@ -18,6 +18,12 @@ template <class Type>
 class PageSignals{
     using print_c = Print<double>;
 public:
+    static void scriptRun(GtkButton *button, gpointer data){
+        auto page = (Page<Type> *)data;
+        page->scriptRun();
+    }
+
+
     static void clearText(GtkButton *button, gpointer data){
         auto page = (Page<Type> *)data;
         print_c::clear_text(page->output());
@@ -86,7 +92,7 @@ public:
 	gtk_box_pack_start (pageLabelBox_, GTK_WIDGET(pageLabelIconBox_), TRUE, TRUE, 0);
 	gtk_box_pack_start (pageLabelBox_, GTK_WIDGET(pageLabel_), TRUE, TRUE, 2);
 	gtk_box_pack_end (pageLabelBox_, GTK_WIDGET(pageLabelButton_), TRUE, TRUE, 0);
-        gtk_c::setup_image_button(pageLabelButton_, "window-close", _("Close"));
+        gtk_c::setup_image_button(pageLabelButton_, "window-close-symbolic", _("Close"));
     
 	//set_spinner(pageSpinner_, TRUE, pageLabelIconBox_);
 	set_spinner(FALSE);
@@ -109,6 +115,8 @@ public:
                 RANGE_CALLBACK(PageSignals<Type>::rangeChangeValue), (void *)this);
         g_signal_connect(G_OBJECT(this->clearButton_), "clicked", 
                 BUTTON_CALLBACK(PageSignals<Type>::clearText), (void *)this);
+        g_signal_connect(G_OBJECT(this->scriptButton_), "clicked", 
+                BUTTON_CALLBACK(PageSignals<Type>::scriptRun), (void *)this);
 
 
 
@@ -125,6 +133,7 @@ public:
 	run_button_list = NULL;
 
 
+	print_c::setColor(GTK_WIDGET(this->output()));
 
 	gtk_widget_show_all(GTK_WIDGET(pageChild_));
 
@@ -144,6 +153,19 @@ public:
 	pthread_mutex_destroy(rbl_mutex);
 	g_free(rbl_mutex);
     }
+    
+    void scriptRun(void){
+	    gchar *command = print_c::get_current_text(this->input());
+            // leaning toothpick syndrome...
+            gchar *g = g_strdup_printf("script -f -c \\\"%s\\\" /dev/null", command);
+            g_free(command);
+            command = g;
+            this->csh_clean_start();
+	    this->run_lp_command(this->output(), this->workDir(), command);
+	    this->csh_save_history(command);
+	    print_c::clear_text(this->input());
+	    g_free(command);
+    }
 
 //    void reference_run_button(run_button_c *rb_p){
     void *reference_run_button(void *rb_p){
@@ -151,6 +173,7 @@ public:
 	pthread_mutex_lock(rbl_mutex);
 	run_button_list = g_list_prepend(run_button_list, rb_p);
 	pthread_mutex_unlock(rbl_mutex);
+	return NULL;
     }
 
     void
@@ -182,7 +205,10 @@ public:
 	this->setWorkDir(dir);
 	DBG("update_pathbar: %s\n", dir);
 	this->update_pathbar(dir);
-	gchar *g = Completion<Type>::get_terminal_name(this->workDir());
+        if (g_file_test(dir, G_FILE_TEST_IS_DIR)){
+	    print_c::print(this->output(), "tag/green", g_strdup_printf("cd %s\n", dir));
+        }
+    	gchar *g = Completion<Type>::get_terminal_name(this->workDir());
 	setPageLabel(g);
 	g_free(g);
     }
@@ -222,26 +248,20 @@ public:
         if (state) {
             gtk_widget_hide(GTK_WIDGET(this->toggleToIconview_));
             gtk_widget_hide(GTK_WIDGET(this->input_));
-            gtk_widget_hide(GTK_WIDGET(this->clearButton_));
-            gtk_widget_hide(GTK_WIDGET(this->sizeScale_));
+            gtk_widget_hide(GTK_WIDGET(this->termButtonBox_));
 
             gtk_widget_show(GTK_WIDGET(this->toggleToTerminal_));
-            gtk_widget_show(GTK_WIDGET(this->statusBox_));
             gtk_widget_show(GTK_WIDGET(this->statusButton_));
-            gtk_widget_show(GTK_WIDGET(this->statusLabel_));
             print_c::hide_text(this->output_);
             terminalMode_ = FALSE;
         } else 
         {
             gtk_widget_hide(GTK_WIDGET(this->toggleToTerminal_));
-            gtk_widget_hide(GTK_WIDGET(this->statusBox_));
             gtk_widget_hide(GTK_WIDGET(this->statusButton_));
-            gtk_widget_hide(GTK_WIDGET(this->statusLabel_));
 
             gtk_widget_show(GTK_WIDGET(this->toggleToIconview_));
             gtk_widget_show(GTK_WIDGET(this->input_));
-            gtk_widget_show(GTK_WIDGET(this->clearButton_));
-            gtk_widget_show(GTK_WIDGET(this->sizeScale_));
+            gtk_widget_show(GTK_WIDGET(this->termButtonBox_));
             while (gtk_events_pending())gtk_main_iteration();
             if (full) print_c::show_textFull(this->output_);
             else print_c::show_text(this->output_);
@@ -281,6 +301,10 @@ public:
             // Send key to completion.
         }
         return this->completionKeyboardEvent(event);
+    }
+    
+    void setSizeScale(gint size){
+        gtk_range_set_value(GTK_RANGE(this->sizeScale_), size);
     }
 
     GtkBox *pageChild(void){ return pageChild_;}

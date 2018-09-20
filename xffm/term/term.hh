@@ -23,7 +23,14 @@ public:
     termDialog(void){
 	// Here we override the default start up of the Dialog class template
         gchar *workdir = g_get_current_dir();
-        this->setDialogSize(600,400);
+	// set minimum size
+        this->setMinimumSize(500,300);
+	// set actual size (read this from rc file) FIXME
+	this->setDefaultSize(750,500);
+	// set actual size (read this from rc file) FIXME
+	// FIXME: does not work, must retrieve adjustment
+	//        for gtk range and set value (common/dialog.hh)
+	this->setDefaultFixedFontSize(13);
         auto page = this->currentPageObject();
         page->setPageWorkdir(workdir);
 	// Default into terminal...
@@ -31,7 +38,17 @@ public:
         page->setDefaultIconview(FALSE);
         //gtk_widget_hide(GTK_WIDGET(page->toggleToTerminal()));
         //gtk_widget_hide(GTK_WIDGET(page->toggleToIconview()));
-        print_c::print(page->output(), "tag/red", g_strdup("Hello world!\n"));
+     
+        print_c::print(page->output(), "red", g_strdup("Hello world!\n"));
+        print_c::print(page->output(), "Red", g_strdup("Hello world!\n"));
+        print_c::print(page->output(), "bold/red/white_bg", g_strdup("Hello world!\n"));
+        print_c::print(page->output(), "bold/Red", g_strdup("Hello world!\n"));
+
+        print_c::print(page->output(), "bold/Red", g_strdup("Hello world!\n"));
+        print_c::print(page->output(), "white", g_strdup("Use "));
+
+        print_c::print(page->output(), "bold/White", g_strdup("script -f -c \\\"command\\\" dev/null "));
+        print_c::print(page->output(), "white", g_strdup("for color output (YMMV)\n"));
     }
 };
 

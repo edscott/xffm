@@ -1,7 +1,9 @@
 #ifndef XF_DIALOG
 #define XF_DIALOG
+GtkWidget *mainWindow;
 #include "common/types.h"
 #include "notebook.hh"
+
 namespace xf {
 template <class Type> class Dialog;
 template <class Type> class dialogSignals{
@@ -111,12 +113,11 @@ public:
 
     Dialog(void){
 	dialog_ = GTK_WINDOW(gtk_window_new (GTK_WINDOW_TOPLEVEL));
+        mainWindow = GTK_WIDGET(dialog_);
         g_signal_connect (G_OBJECT (dialog_), "delete-event", EVENT_CALLBACK (dialogSignals<Type>::delete_event), NULL);
 
 
-                
-
-	gtk_window_set_default_size (dialog_,600 ,400);
+        setDefaultSize(600 ,400);
         gtk_widget_set_has_tooltip (GTK_WIDGET(dialog_), TRUE);
         // FIXME:
         //g_signal_connect (G_OBJECT (dialog_), "query-tooltip", G_CALLBACK (window_tooltip_f), (void *)this);
@@ -163,15 +164,17 @@ protected:
     GtkWindow *dialog(){
 	return dialog_;
     }
-    void setDialogSize(gint w, gint h){
-	gint minW, natW;
-	gint minH, natH;
-	DBG("minimum_width=%d natural_width=%d\n", minW,natW);
-	DBG("minimum_height=%d natural_height=%d\n", minH,natH);
-
+    void setMinimumSize(gint w, gint h){
 	gtk_widget_set_size_request (GTK_WIDGET(dialog_), w, h);
     }
-	
+    void setDefaultSize(gint w, gint h){
+	gtk_window_set_default_size (GTK_WINDOW(dialog_), w, h);
+    }
+    void setDefaultFixedFontSize(gint size){
+	DEFAULT_FIXED_FONT_SIZE = size;
+        auto page = this->currentPageObject();
+        page->setSizeScale(size);
+    }
 
 private:
     void setWindowMaxSize(GtkWindow *dialog){

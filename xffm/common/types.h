@@ -2,6 +2,8 @@
 # define TYPES_H
 
 
+#define RESPONSE_EVENT_CALLBACK(X)  G_CALLBACK((gint (*)(GtkDialog *,GdkEvent *,gpointer)) X)
+#define ENTRY_CALLBACK(X)  G_CALLBACK((void (*)(GtkEntry *,gpointer)) X)
 #define RANGE_CALLBACK(X)  G_CALLBACK((gboolean (*)(GtkRange *,GtkScrollType,gdouble,gpointer)) X)
 #define SIZE_CALLBACK(X)  G_CALLBACK((void (*)(GtkWidget *,GdkRectangle *,gpointer)) X)
 #define EVENT_CALLBACK(X)  G_CALLBACK((gint (*)(GtkWidget *,GdkEventKey *,gpointer)) X)
@@ -13,6 +15,20 @@
 #define FILTER_HISTORY g_get_user_data_dir(),"xffm+","xffind.filter",NULL
 #define GREP_HISTORY g_get_user_data_dir(),"xffm+","xffind.grep",NULL
 #define PATH_HISTORY g_get_user_data_dir(),"xffm+","xffind.path",NULL
+
+#define BIG_ICON_SIZE 		96 
+#define MEDIUM_ICON_SIZE 	72 
+#define SMALL_ICON_SIZE 	48 
+#define TINY_ICON_SIZE 		24 
+#define LIST_ICON_SIZE  	0
+
+#define TINY_BUTTON	16
+#define SIZE_BUTTON	22
+#define SIZE_DIALOG	24
+#define SIZE_ICON	48
+#define SIZE_PREVIEW	96
+#define SIZE_TIP	128
+
 
 typedef struct menuItem_t {
     const gchar *label;

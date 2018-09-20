@@ -290,7 +290,6 @@ public:
         }
         return;
     }
-
     static void
     run_operate_stderr (void *data, void *stream, int childFD) {
         auto textview = GTK_TEXT_VIEW(data);
@@ -301,10 +300,15 @@ public:
 
         char *line;
         line = (char *)stream;
-
-
         if(line[0] != '\n') {
-            print_c::print(textview, "tag/red", g_strdup(line));
+            if (strstr(line, "error")||strstr(line,_("error"))) {
+                print_c::print(textview, "tag/magenta", g_strdup(line));
+            } else if (strstr(line, "warning")||strstr(line, _("warning"))) {
+                print_c::print(textview, "tag/yellow", g_strdup(line));
+            } else {                
+                print_c::print(textview, "tag/red", g_strdup(line));
+            }
+                //print_c::print(textview, g_strdup(line));
         }
 
         // With this, this thread will not do a DOS attack
