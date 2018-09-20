@@ -1,7 +1,9 @@
 #ifndef XF_DIALOG
 #define XF_DIALOG
+GtkWidget *mainWindow;
 #include "common/types.h"
 #include "notebook.hh"
+
 namespace xf {
 template <class Type> class Dialog;
 template <class Type> class dialogSignals{
@@ -111,6 +113,7 @@ public:
 
     Dialog(void){
 	dialog_ = GTK_WINDOW(gtk_window_new (GTK_WINDOW_TOPLEVEL));
+        mainWindow = GTK_WIDGET(dialog_);
         g_signal_connect (G_OBJECT (dialog_), "delete-event", EVENT_CALLBACK (dialogSignals<Type>::delete_event), NULL);
 
 

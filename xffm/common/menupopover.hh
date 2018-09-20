@@ -152,8 +152,9 @@ public:
     finish(GtkMenuItem *menuItem, gpointer data)
     {
         DBG("finish\n");
-        GtkWidget *window = gtk_widget_get_toplevel(GTK_WIDGET(menuItem));
-        gtk_widget_hide(window);
+        // The following does not retrieve the main window...
+        //GtkWidget *window = gtk_widget_get_toplevel(GTK_WIDGET(menuItem));
+        gtk_widget_hide(mainWindow);
         while (gtk_events_pending()) gtk_main_iteration();
         gtk_main_quit();
         exit(0);
