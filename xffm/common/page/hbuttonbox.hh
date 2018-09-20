@@ -9,6 +9,7 @@ public:
     HButtonBox(void){
 	// The box
 	hButtonBox_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+	termButtonBox_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
 	
         toggleToTerminal_ =  GTK_BUTTON(gtk_button_new());
         gtk_c::setup_image_button(toggleToTerminal_, "utilities-terminal-symbolic", _("Terminal"));
@@ -24,14 +25,22 @@ public:
 	statusButton_ = GTK_BUTTON(gtk_button_new());
 	statusLabel_ = createStatusLabel();
 
+	scriptButton_ =  gtk_c::dialog_button("document-revert-symbolic", NULL);
+	gtk_widget_set_can_focus (GTK_WIDGET(scriptButton_), FALSE);
+	gtk_button_set_relief (scriptButton_, GTK_RELIEF_NONE);
+
 	clearButton_ =  gtk_c::dialog_button("edit-delete-symbolic", NULL);
 	gtk_widget_set_can_focus (GTK_WIDGET(clearButton_), FALSE);
 	gtk_button_set_relief (clearButton_, GTK_RELIEF_NONE);
+
+
 	sizeScale_ = newSizeScale();
 
+	gtk_box_pack_end (hButtonBox_, GTK_WIDGET(termButtonBox_), FALSE, FALSE, 0);
 
-	gtk_box_pack_end (hButtonBox_, GTK_WIDGET(sizeScale_), FALSE, FALSE, 0);
-	gtk_box_pack_end (hButtonBox_, GTK_WIDGET(clearButton_), FALSE, FALSE, 0);
+	gtk_box_pack_end (termButtonBox_, GTK_WIDGET(clearButton_), FALSE, FALSE, 0);
+	gtk_box_pack_end (termButtonBox_, GTK_WIDGET(sizeScale_), FALSE, FALSE, 0);
+	gtk_box_pack_end (termButtonBox_, GTK_WIDGET(scriptButton_), FALSE, FALSE, 0);
 	
         gtk_box_pack_start (hButtonBox_, GTK_WIDGET(toggleToTerminal_), FALSE, FALSE, 5);
         gtk_box_pack_start (hButtonBox_, GTK_WIDGET(toggleToIconview_), FALSE, FALSE, 5);
@@ -47,6 +56,7 @@ public:
 
 protected:
     GtkBox *hButtonBox_;
+    GtkBox *termButtonBox_;
     GtkBox *statusBox_;
     GtkTextView *input_;
     GtkButton *toggleToIconview_;
@@ -54,6 +64,7 @@ protected:
     GtkButton *statusButton_;
     GtkLabel *statusLabel_;
     GtkButton *clearButton_;
+    GtkButton *scriptButton_;
     GtkScale *sizeScale_;
 
 private:

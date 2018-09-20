@@ -18,6 +18,12 @@ template <class Type>
 class PageSignals{
     using print_c = Print<double>;
 public:
+    static void scriptRun(GtkButton *button, gpointer data){
+        auto page = (Page<Type> *)data;
+        page->scriptRun();
+    }
+
+
     static void clearText(GtkButton *button, gpointer data){
         auto page = (Page<Type> *)data;
         print_c::clear_text(page->output());
@@ -109,6 +115,8 @@ public:
                 RANGE_CALLBACK(PageSignals<Type>::rangeChangeValue), (void *)this);
         g_signal_connect(G_OBJECT(this->clearButton_), "clicked", 
                 BUTTON_CALLBACK(PageSignals<Type>::clearText), (void *)this);
+        g_signal_connect(G_OBJECT(this->scriptButton_), "clicked", 
+                BUTTON_CALLBACK(PageSignals<Type>::scriptRun), (void *)this);
 
 
 
@@ -144,6 +152,19 @@ public:
 	pthread_mutex_unlock(rbl_mutex);
 	pthread_mutex_destroy(rbl_mutex);
 	g_free(rbl_mutex);
+    }
+    
+    void scriptRun(void){
+	    gchar *command = print_c::get_current_text(this->input());
+            // leaning toothpick syndrome...
+            gchar *g = g_strdup_printf("script -f -c \\\"%s\\\" /dev/null", command);
+            g_free(command);
+            command = g;
+            this->csh_clean_start();
+	    this->run_lp_command(this->output(), this->workDir(), command);
+	    this->csh_save_history(command);
+	    print_c::clear_text(this->input());
+	    g_free(command);
     }
 
 //    void reference_run_button(run_button_c *rb_p){
@@ -227,26 +248,20 @@ public:
         if (state) {
             gtk_widget_hide(GTK_WIDGET(this->toggleToIconview_));
             gtk_widget_hide(GTK_WIDGET(this->input_));
-            gtk_widget_hide(GTK_WIDGET(this->clearButton_));
-            gtk_widget_hide(GTK_WIDGET(this->sizeScale_));
+            gtk_widget_hide(GTK_WIDGET(this->termButtonBox_));
 
             gtk_widget_show(GTK_WIDGET(this->toggleToTerminal_));
-            gtk_widget_show(GTK_WIDGET(this->statusBox_));
             gtk_widget_show(GTK_WIDGET(this->statusButton_));
-            gtk_widget_show(GTK_WIDGET(this->statusLabel_));
             print_c::hide_text(this->output_);
             terminalMode_ = FALSE;
         } else 
         {
             gtk_widget_hide(GTK_WIDGET(this->toggleToTerminal_));
-            gtk_widget_hide(GTK_WIDGET(this->statusBox_));
             gtk_widget_hide(GTK_WIDGET(this->statusButton_));
-            gtk_widget_hide(GTK_WIDGET(this->statusLabel_));
 
             gtk_widget_show(GTK_WIDGET(this->toggleToIconview_));
             gtk_widget_show(GTK_WIDGET(this->input_));
-            gtk_widget_show(GTK_WIDGET(this->clearButton_));
-            gtk_widget_show(GTK_WIDGET(this->sizeScale_));
+            gtk_widget_show(GTK_WIDGET(this->termButtonBox_));
             while (gtk_events_pending())gtk_main_iteration();
             if (full) print_c::show_textFull(this->output_);
             else print_c::show_text(this->output_);

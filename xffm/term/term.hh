@@ -47,7 +47,7 @@ public:
         print_c::print(page->output(), "bold/Red", g_strdup("Hello world!\n"));
         print_c::print(page->output(), "white", g_strdup("Use "));
 
-        print_c::print(page->output(), "bold/White", g_strdup("script -f -c \"command\" dev/null "));
+        print_c::print(page->output(), "bold/White", g_strdup("script -f -c \\\"command\\\" dev/null "));
         print_c::print(page->output(), "white", g_strdup("for color output (YMMV)\n"));
     }
 };
