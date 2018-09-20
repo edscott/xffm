@@ -2,5 +2,7 @@
 TODO: 
   * back to xfterm branch
   * window size does not shrink... check minimum size and set size at startup
-  * simple rcfile for environment, monitor changes and reload.
+  * simple rcfile for environment, monitor changes and reload (font size, window size)
   * new tab shows iconview always in slow box (geminis) pinpoints problem.
+  * on return with blank line: /bin/bash -c is executed...
+  * 20 files with FIXMEs
