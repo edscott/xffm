@@ -1,8 +1,6 @@
 
 TODO: 
   * back to xfterm branch
-  * environment variables for EDITOR and SUDO_ASKPASS and SSH_ASKPASS (rodent-getpass) --getpass
+  * window size does not shrink... check minimum size and set size at startup
   * simple rcfile for environment, monitor changes and reload.
-  * merge xfterm and xffind (--find --term --fgr --getpass)
-  * process cmake colors (maybe), use black background for lpterm
-  * run in background as default (--foreground to override)
+  * new tab shows iconview always in slow box (geminis) pinpoints problem.
