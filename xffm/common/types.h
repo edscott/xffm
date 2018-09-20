@@ -29,7 +29,6 @@
 #define SIZE_PREVIEW	96
 #define SIZE_TIP	128
 
-#define DEFAULT_FIXED_FONT_SIZE 16
 
 typedef struct menuItem_t {
     const gchar *label;

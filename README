@@ -1,8 +1,10 @@
 
 TODO: 
+  * add a run in script button!
+  * On main menu quit, first hide window and then all gtk event, since an open child will keep dead window on screen.
   * back to xfterm branch
-  * window size does not shrink... check minimum size and set size at startup
   * simple rcfile for environment, monitor changes and reload (font size, window size)
   * new tab shows iconview always in slow box (geminis) pinpoints problem.
   * on return with blank line: /bin/bash -c is executed...
   * 20 files with FIXMEs
+  xffind: grep options unsensitive when text is input via mouse button 2 click

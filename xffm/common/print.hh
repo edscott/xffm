@@ -1,6 +1,7 @@
 #ifndef XFPRINT_HH
 #define XFPRINT_HH
 
+#define DEFAULT_FIXED_FONT_SIZE defaultFixedFontSize
 
 #include <string.h>
 #include <stdlib.h>
@@ -12,6 +13,7 @@
 #include "util.hh"
 #include "pixbuf.hh"
 
+static gint defaultFixedFontSize=12;
 #define MAX_LINES_IN_BUFFER 10000    
 namespace xf
 {
@@ -795,6 +797,7 @@ private:
             set_font_size(widget, DEFAULT_FIXED_FONT_SIZE);
         }
     }
+
 };
 }
 
