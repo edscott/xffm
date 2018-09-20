@@ -156,7 +156,7 @@ public:
         gtk_widget_hide(window);
         while (gtk_events_pending()) gtk_main_iteration();
         gtk_main_quit();
-        _exit(123);
+        exit(0);
     }
 
 

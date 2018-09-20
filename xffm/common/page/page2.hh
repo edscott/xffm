@@ -287,6 +287,10 @@ public:
         }
         return this->completionKeyboardEvent(event);
     }
+    
+    void setSizeScale(gint size){
+        gtk_range_set_value(GTK_RANGE(this->sizeScale_), size);
+    }
 
     GtkBox *pageChild(void){ return pageChild_;}
     GtkLabel *pageLabel(void){ return pageLabel_;}

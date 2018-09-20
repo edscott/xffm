@@ -114,9 +114,7 @@ public:
         g_signal_connect (G_OBJECT (dialog_), "delete-event", EVENT_CALLBACK (dialogSignals<Type>::delete_event), NULL);
 
 
-                
-
-	gtk_window_set_default_size (dialog_,600 ,400);
+        setDefaultSize(600 ,400);
         gtk_widget_set_has_tooltip (GTK_WIDGET(dialog_), TRUE);
         // FIXME:
         //g_signal_connect (G_OBJECT (dialog_), "query-tooltip", G_CALLBACK (window_tooltip_f), (void *)this);
@@ -171,6 +169,8 @@ protected:
     }
     void setDefaultFixedFontSize(gint size){
 	DEFAULT_FIXED_FONT_SIZE = size;
+        auto page = this->currentPageObject();
+        page->setSizeScale(size);
     }
 
 private:

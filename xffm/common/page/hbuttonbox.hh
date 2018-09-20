@@ -55,8 +55,6 @@ protected:
     GtkLabel *statusLabel_;
     GtkButton *clearButton_;
     GtkScale *sizeScale_;
-    
-
 
 private:
     static GtkScale *newSizeScale(void){
