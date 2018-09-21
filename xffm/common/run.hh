@@ -199,7 +199,9 @@ public:
         gchar *ncommand;
         if (run_in_shell(command)){
             ncommand = g_strdup_printf("%s -c \"%s\"", util_c::u_shell(), command);
-        } else ncommand = g_strdup(command);
+        } else {
+            ncommand = g_strdup(command);
+        }
         if(!g_shell_parse_argv (ncommand, &argc, &argv, &error)) {
             auto msg = g_strcompress (error->message);
             print_c::print_error(textview, g_strdup_printf("%s: %s\n", msg, ncommand));

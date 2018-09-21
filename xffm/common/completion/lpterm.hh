@@ -274,6 +274,23 @@ public:
 
     gchar * 
     run_lp_command(GtkTextView *output, const gchar *workdir, const gchar *command){
+        // escape all quotes
+        gchar *ncommand;
+        if (strchr (command, '\"') || strchr(command,'\'')){
+            gchar **g;
+            if (strchr (command, '\"')) {
+                g = g_strsplit(command, "\"", -1);
+                ncommand = g_strjoinv ("\\\"", g);
+                g_strfreev(g);
+            } else {
+                g = g_strsplit(command, "\'", -1);
+                ncommand = g_strjoinv ("\\\'", g);
+                g_strfreev(g);
+            }
+            DBG("ncommand is %s\n", ncommand);
+        } else ncommand = g_strdup(command);
+        command = ncommand;
+
 	gchar *newWorkdir =NULL;
 	gchar ** commands = NULL;
 	if (strchr(command, ';')) commands = g_strsplit(command, ";", -1);
@@ -321,7 +338,8 @@ public:
 	    // We save the original sudo command,
 	    //   not the one modified with "-A".
 	}
-	g_strfreev(commands); 
+	g_strfreev(commands);
+        g_free(ncommand); 
 	return newWorkdir;
     }
 

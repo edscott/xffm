@@ -156,8 +156,7 @@ public:
     
     void scriptRun(void){
 	    gchar *command = print_c::get_current_text(this->input());
-            // leaning toothpick syndrome...
-            gchar *g = g_strdup_printf("script -f -c \\\"%s\\\" /dev/null", command);
+            gchar *g = g_strdup_printf("script -f -c \"%s\" /dev/null", command);
             g_free(command);
             command = g;
             this->csh_clean_start();
