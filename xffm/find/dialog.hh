@@ -434,7 +434,8 @@ private:
 	gtk_widget_set_sensitive (GTK_WIDGET(case_sensitive), active_grep);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (case_sensitive), default_case_sensitive);
 	g_object_set_data(G_OBJECT(dialog_), "case_sensitive", case_sensitive);
-        g_signal_connect (G_OBJECT (grep_entry), "key_release_event", 
+
+        g_signal_connect (G_OBJECT (grep_entry), "event", 
                 EVENT_CALLBACK (Type::on_key_release), (gpointer) case_sensitive);
 
 
@@ -445,7 +446,7 @@ private:
 	gtk_widget_set_sensitive (GTK_WIDGET(ext_regexp), active_grep);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (ext_regexp), default_ext_regexp);
 	g_object_set_data(G_OBJECT(dialog_), "ext_regexp", ext_regexp);
-        g_signal_connect (G_OBJECT (grep_entry), "key_release_event", 
+        g_signal_connect (G_OBJECT (grep_entry), "event", 
                 EVENT_CALLBACK (Type::on_key_release), (gpointer) ext_regexp);
 
 
@@ -456,9 +457,8 @@ private:
 	gtk_widget_set_sensitive (GTK_WIDGET(look_in_binaries), active_grep);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (look_in_binaries), default_look_in_binaries);
 	g_object_set_data(G_OBJECT(dialog_), "look_in_binaries", look_in_binaries);
-        g_signal_connect (G_OBJECT (grep_entry), "key_release_event", 
+        g_signal_connect (G_OBJECT (grep_entry), "event", 
                 EVENT_CALLBACK (Type::on_key_release), (gpointer) look_in_binaries);
-
         
 	auto line_count = 
 	    GTK_CHECK_BUTTON(gtk_check_button_new_with_mnemonic (_("Line Count")));
@@ -468,7 +468,7 @@ private:
 	gtk_widget_set_sensitive (GTK_WIDGET(line_count), active_grep);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (line_count), default_line_count);
 	g_object_set_data(G_OBJECT(dialog_), "line_count", line_count);
-        g_signal_connect (G_OBJECT (grep_entry), "key_release_event", 
+        g_signal_connect (G_OBJECT (grep_entry), "event", 
                 EVENT_CALLBACK (Type::on_key_release), (gpointer) line_count);
 	
        
@@ -494,10 +494,10 @@ private:
 	gtk_box_pack_start (GTK_BOX (hbox24), GTK_WIDGET(label40), FALSE, FALSE, 0);
 	gtk_widget_set_sensitive (GTK_WIDGET(label40), active_grep);
 	g_object_set_data(G_OBJECT(dialog_), "label40", label40);
-        g_signal_connect (G_OBJECT (grep_entry), "key_release_event", 
+        g_signal_connect (G_OBJECT (grep_entry), "event", 
                 EVENT_CALLBACK (Type::on_key_release), (gpointer) label40);
 
-	GSList *anywhere_group = NULL;
+        GSList *anywhere_group = NULL;
 	auto anywhere = 
 	    GTK_RADIO_BUTTON (gtk_radio_button_new_with_mnemonic (NULL, _("Anywhere")));
 	gtk_widget_show (GTK_WIDGET(anywhere));
@@ -509,7 +509,7 @@ private:
 	if (default_anywhere) {
 	    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (anywhere), default_anywhere);
 	}
-        g_signal_connect (G_OBJECT (grep_entry), "key_release_event", 
+        g_signal_connect (G_OBJECT (grep_entry), "event", 
                 EVENT_CALLBACK (Type::on_key_release), (gpointer) anywhere);
 	 
 
@@ -524,7 +524,7 @@ private:
 	if (default_match_words) {
 	    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (match_words), default_match_words);
 	}
-        g_signal_connect (G_OBJECT (grep_entry), "key_release_event", 
+        g_signal_connect (G_OBJECT (grep_entry), "event", 
                 EVENT_CALLBACK (Type::on_key_release), (gpointer) match_words);
 
 
@@ -539,7 +539,7 @@ private:
 	if (default_match_lines) {
 	    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (match_lines), default_match_lines);
 	}
-        g_signal_connect (G_OBJECT (grep_entry), "key_release_event", 
+        g_signal_connect (G_OBJECT (grep_entry), "event", 
                 EVENT_CALLBACK (Type::on_key_release), (gpointer) match_lines);
 
 	auto match_no_match =
@@ -553,7 +553,7 @@ private:
 	if (default_match_no_match) {
 	    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (match_no_match), default_match_no_match);
 	}
-        g_signal_connect (G_OBJECT (grep_entry), "key_release_event", 
+        g_signal_connect (G_OBJECT (grep_entry), "event", 
                 EVENT_CALLBACK (Type::on_key_release), (gpointer) match_no_match);
 
 	gtk_widget_show(GTK_WIDGET(topPaneHbox));

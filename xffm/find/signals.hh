@@ -159,18 +159,27 @@ public:
         return FALSE;
     }
 
-    static gint
-    on_key_release (GtkWidget * widget, GdkEventKey * event, gpointer data) {
+    static void grepOptions (GtkEntry *widget, gpointer data) {
         gboolean active = FALSE;
 	gchar *text = util_c::compact_line(gtk_entry_get_text(GTK_ENTRY(widget)));
         if (text && strlen(text)) active = TRUE;
         g_free(text);
-        //std::cerr<<"on_key_release: "<< text << " active: " << active << "\n";
         if (data){
             gtk_widget_set_sensitive(GTK_WIDGET(data), active);
-        }
+        }        
+    }    
+    static gint  on_key_release (GtkWidget * widget, GdkEventKey * event, gpointer data) {
+        grepOptions(GTK_ENTRY(widget), data);
         return FALSE;
     }
+ 
+    static void onSelectionReceived (GtkWidget        *widget,
+               GtkSelectionData *data,
+               guint             time,
+               gpointer          user_data){
+        grepOptions(GTK_ENTRY(widget), data);
+    }
+  
     static gint
     on_completion (GtkWidget * widget, GdkEventKey * event, gpointer data) {
         GtkEntryCompletion *completion = gtk_entry_get_completion(GTK_ENTRY(widget));
