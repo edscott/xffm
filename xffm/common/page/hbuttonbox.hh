@@ -13,10 +13,10 @@ public:
 	
         toggleToTerminal_ =  GTK_BUTTON(gtk_button_new());
         gtk_c::setup_image_button(toggleToTerminal_, "utilities-terminal-symbolic", _("Terminal"));
-
-        
+        gtk_widget_set_tooltip_markup (GTK_WIDGET(toggleToTerminal_),_("Embedded Terminal"));
 	toggleToIconview_ = GTK_BUTTON(gtk_button_new());
         gtk_c::setup_image_button(toggleToIconview_, "system-file-manager-symbolic", _("Iconview"));
+        gtk_widget_set_tooltip_markup (GTK_WIDGET(toggleToIconview_),_("All items in the iconview."));
 
 
 	input_ = createStatus(); // Status textview
@@ -28,13 +28,16 @@ public:
 	scriptButton_ =  gtk_c::dialog_button("document-revert-symbolic", NULL);
 	gtk_widget_set_can_focus (GTK_WIDGET(scriptButton_), FALSE);
 	gtk_button_set_relief (scriptButton_, GTK_RELIEF_NONE);
+        gtk_widget_set_tooltip_markup (GTK_WIDGET(scriptButton_),_("Script Recorder"));
 
 	clearButton_ =  gtk_c::dialog_button("edit-delete-symbolic", NULL);
 	gtk_widget_set_can_focus (GTK_WIDGET(clearButton_), FALSE);
 	gtk_button_set_relief (clearButton_, GTK_RELIEF_NONE);
+        gtk_widget_set_tooltip_markup (GTK_WIDGET(clearButton_),_("Clear log view"));
 
 
 	sizeScale_ = newSizeScale();
+        gtk_widget_set_tooltip_markup (GTK_WIDGET(sizeScale_),_("Terminal font"));
 
 	gtk_box_pack_end (hButtonBox_, GTK_WIDGET(termButtonBox_), FALSE, FALSE, 0);
 

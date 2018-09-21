@@ -1,6 +1,5 @@
 
 TODO: 
-  * Add tooltips to script, clear and change font size (simple tooltip).
   * back to xfterm branch
   * simple rcfile for environment, monitor changes and reload (font size, window size)
   * new tab shows iconview always in slow box (geminis) pinpoints problem.
