@@ -153,9 +153,9 @@ public:
                                     flags);
         pid_t grandchild=tubo_c::getChild (pid);
 #ifdef DEBUG_TRACE        
-        print_c::print_icon(textview, "system-run", "tag/green", g_strdup_printf("<%d> %s\n", grandchild, command));
+        print_c::print_icon(textview, "system-run-symbolic", "green", g_strdup_printf("<%d> %s\n", grandchild, command));
 #else
-        print_c::print_icon(textview, "system-run", "tag/bold", g_strdup_printf("%s\n", command));
+        print_c::print_icon(textview, "system-run-symbolic", "bold", g_strdup_printf("%s\n", command));
 #endif
         push_hash(grandchild, g_strdup(command));
         g_free(command);
@@ -365,7 +365,7 @@ public:
 
     static void
     scrollToTop (void *data) {
-        g_timeout_add(1, scrollToTop_f, data);                                                
+        g_timeout_add(5, scrollToTop_f, data);                                                
     }
 
     static gboolean done_f(void *data) {
@@ -376,7 +376,7 @@ public:
 
     static void
     fork_finished_function (void *data) {
-        g_timeout_add(1, done_f, data);                                                
+        g_timeout_add(5, done_f, data);                                                
     }
 
     static void

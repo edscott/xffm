@@ -301,7 +301,13 @@ public:
                     continue;
                 }
             }
-	    pid_t child = run_c::thread_run(output, *c, FALSE);
+            gboolean scrollup = FALSE;
+            if (strncmp(command, "man", strlen("man"))==0) {
+                scrollup = TRUE;
+                print_c::clear_text(output);
+            }
+
+            pid_t child = run_c::shell_command(output, *c, scrollup);
 	    page_->newRunButton(*c, child);
 	    // forced shell to command:
 	    //run_c::shell_command(output, *c, FALSE);
