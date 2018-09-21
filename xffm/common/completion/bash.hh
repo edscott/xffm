@@ -115,7 +115,7 @@ private:
         print_c::show_text(output);
         gchar *message1=g_strdup_printf("%s (> %ld)",
                 _("Too many matches"), base_c::maxOptions());
-        print_c::print_icon(output, "dialog-info", "tag/red", g_strdup_printf("%s\n", message1));
+        print_c::print_icon(output, "dialog-info", "red", g_strdup_printf("%s\n", message1));
         g_free(message1);
         print_c::scroll_to_bottom(output);
     }
@@ -152,9 +152,9 @@ private:
         if (!match) {
             const gchar *option_type = get_match_type_text(match_type);
             match = _("Found no match");
-            print_c::print_icon(output, "dialog-warning", "tag/red", g_strdup_printf(" %s\n", match));
+            print_c::print_icon(output, "dialog-warning", "red", g_strdup_printf(" %s\n", match));
         } else {
-            print_c::print(output, ("tag/blue", g_strdup_printf(" %s\n", match)));
+            print_c::print(output, ("blue", g_strdup_printf(" %s\n", match)));
         }
         print_c::scroll_to_bottom(output);
     }
@@ -164,11 +164,11 @@ private:
 	if (!output) return;
         print_c::show_text(output);
 
-        print_c::print_icon(output, "dialog-info", "tag/green", g_strdup_printf("%s bash %s/%s--> ",
+        print_c::print_icon(output, "dialog-info", "green", g_strdup_printf("%s bash %s/%s--> ",
                 _("Completion mode:"), 
                 _("command"),
                 _("file")));
-        print_c::print(output,  ("tag/red", g_strdup("TAB.")));
+        print_c::print(output,  ("red", g_strdup("TAB.")));
         print_c::scroll_to_bottom(output);
     }
 
@@ -177,11 +177,11 @@ private:
 	if (!output) return;
         print_c::show_text(output);
 #ifdef DEBUG_TRACE
-        print_c::print_icon(output, "dialog-info", "tag/green", g_strdup(_("Options >>")));
+        print_c::print_icon(output, "dialog-info", "green", g_strdup(_("Options >>")));
         const gchar *option_type = get_match_type_text(match_type);
-        print_c::print(output,  ("tag/red", g_strdup_printf("(%s)\n", option_type));
+        print_c::print(output,  ("red", g_strdup_printf("(%s)\n", option_type));
 #else
-        print_c::print(output,  ("tag/green", g_strdup_printf("%s\n", _("Options >>"))));
+        print_c::print(output,  ("green", g_strdup_printf("%s\n", _("Options >>"))));
 #endif
         print_c::scroll_to_bottom(output);
     }

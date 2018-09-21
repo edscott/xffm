@@ -415,7 +415,7 @@ public:
 	    g_free(sudo);
 	} else {
 	    DBG("normal ps_signal to %d...\n", (int)pid);
-	    print_c::print_icon(textview_, "emblem-important", "tag/blue", g_strdup_printf("kill -%d %ld\n",
+	    print_c::print_icon(textview_, "emblem-important", "blue", g_strdup_printf("kill -%d %ld\n",
 		    signal_id, pid));
 	    kill((pid_t)pid, signal_id);
 	}

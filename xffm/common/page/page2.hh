@@ -206,7 +206,7 @@ public:
 	DBG("update_pathbar: %s\n", dir);
 	this->update_pathbar(dir);
         if (g_file_test(dir, G_FILE_TEST_IS_DIR)){
-	    print_c::print(this->output(), "tag/green", g_strdup_printf("cd %s\n", dir));
+	    print_c::print(this->output(), "green", g_strdup_printf("cd %s\n", dir));
         }
     	gchar *g = Completion<Type>::get_terminal_name(this->workDir());
 	setPageLabel(g);

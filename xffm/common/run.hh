@@ -153,9 +153,9 @@ public:
                                     flags);
         pid_t grandchild=tubo_c::getChild (pid);
 #ifdef DEBUG_TRACE        
-        print_c::print_icon(textview, "system-run-symbolic", "green", g_strdup_printf("<%d> %s\n", grandchild, command));
+        print_c::print_icon(textview, "system-run", "green", g_strdup_printf("<%d> %s\n", grandchild, command));
 #else
-        print_c::print_icon(textview, "system-run-symbolic", "bold", g_strdup_printf("%s\n", command));
+        print_c::print_icon(textview, "system-run", "bold", g_strdup_printf("%s\n", command));
 #endif
         push_hash(grandchild, g_strdup(command));
         g_free(command);
@@ -302,11 +302,11 @@ public:
         line = (char *)stream;
         if(line[0] != '\n') {
             if (strstr(line, "error")||strstr(line,_("error"))) {
-                print_c::print(textview, "tag/magenta", g_strdup(line));
+                print_c::print(textview, "magenta", g_strdup(line));
             } else if (strstr(line, "warning")||strstr(line, _("warning"))) {
-                print_c::print(textview, "tag/yellow", g_strdup(line));
+                print_c::print(textview, "yellow", g_strdup(line));
             } else {                
-                print_c::print(textview, "tag/red", g_strdup(line));
+                print_c::print(textview, "red", g_strdup(line));
             }
                 //print_c::print(textview, g_strdup(line));
         }
@@ -325,7 +325,7 @@ public:
         auto textview = GTK_TEXT_VIEW(data);
         auto line = (gchar *)stream;
 
-        print_c::print(textview, "tag/green",  g_strdup(line));
+        print_c::print(textview, "green",  g_strdup(line));
         // This is a bit hacky, to keep runaway output from hogging
         // up the gtk event loop.
         static gint count = 1;
@@ -342,7 +342,7 @@ public:
         auto textview = GTK_TEXT_VIEW(data);
         auto line = (gchar *)stream;
 
-        print_c::print(textview, "tag/red",  g_strdup(line));
+        print_c::print(textview, "red",  g_strdup(line));
         // This is a bit hacky, to keep runaway output from hogging
         // up the gtk event loop.
         static gint count = 1;
@@ -356,7 +356,7 @@ public:
 
     static gboolean scrollToTop_f(void *data) {
         //view_c *view_p = (view_c *)data;
-        //view_p->get_lpterm_p()->print("tag/bold", g_strdup_printf("%s\n", "run complete."));
+        //view_p->get_lpterm_p()->print("bold", g_strdup_printf("%s\n", "run complete."));
         auto textview = GTK_TEXT_VIEW(data);
         print_c::show_text(textview);
         print_c::scroll_to_top(textview);
@@ -370,7 +370,7 @@ public:
 
     static gboolean done_f(void *data) {
         //view_c *view_p = (view_c *)data;
-        //view_p->get_lpterm_p()->print("tag/bold", g_strdup_printf("%s\n", "run complete."));
+        //view_p->get_lpterm_p()->print("bold", g_strdup_printf("%s\n", "run complete."));
         return FALSE;
     }
 
