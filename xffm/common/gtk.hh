@@ -23,7 +23,7 @@ public:
 	iconname_hash = g_hash_table_new(g_str_hash, g_str_equal);
 	populate_iconname_hash();
 	//FIXME: init_tooltip_c();
-	DBG("gtk_c init OK\n");
+	TRACE("gtk_c init OK\n");
     }
 // FIXME: iconname_hash should be in a class template for fm
     static void

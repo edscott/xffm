@@ -38,7 +38,7 @@ protected:
 	    gchar line[256];
 	    memset (line, 0, 256);
 	    if(fgets (line, 255, pipe) == NULL)
-		DBG ("fgets: %s\n", strerror (errno));
+		ERROR ("fgets: %s\n", strerror (errno));
 	    pclose (pipe);
 	    if(strstr (line, "GNU")) gnuGrep_ = TRUE;
 	}
@@ -823,7 +823,7 @@ private:
 	    const gchar *default_value)
     {
 	if ((!entry_name && !check_name)|| !options_vbox || !dialog_) {
-	    DBG("add_option_entry(): incorrect function call\n");
+	    ERROR("add_option_entry(): incorrect function call\n");
 	    return NULL;
 	}
 	auto hbox = gtk_c::hboxNew (FALSE, 0);
@@ -878,7 +878,7 @@ private:
 	    const gchar *text2)
     {
 	if ((!radio1_name  && !check_name)|| !options_vbox || !dialog_) {
-	    DBG("add_option_radio2(): incorrect function call\n");
+	    ERROR("add_option_radio2(): incorrect function call\n");
 	    return NULL;
 	}
 	auto hbox = gtk_c::hboxNew (FALSE, 0);
@@ -940,7 +940,7 @@ private:
 	//if (icon_info) g_object_unref(icon_info);
 
 	if ((!spin_name && !check_name)|| !options_vbox || !dialog_) {
-	    DBG("add_option_spin(): incorrect function call\n");
+	    ERROR("add_option_spin(): incorrect function call\n");
 	    return NULL;
 	}
 	auto hbox = gtk_c::hboxNew (FALSE, 0);
@@ -995,7 +995,7 @@ private:
 	    GSList *list)
     {
 	if ((!combo_name && !check_name)|| !options_vbox || !dialog_) {
-	    DBG("add_option_spin(): incorrect function call\n");
+	    ERROR("add_option_spin(): incorrect function call\n");
 	    return NULL;
 	}
 	auto hbox = gtk_c::hboxNew (FALSE, 0);

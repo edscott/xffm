@@ -66,7 +66,7 @@ public:
 	pthread_t thread;
 	gint retval = pthread_create(&thread, NULL, thread_f, data);
 	if (retval){
-	    g_warning("thread_create(): %s\n", strerror(retval));
+	    ERROR("thread_create(): %s\n", strerror(retval));
 	    return retval;
 	}
 	if (joinable){
@@ -89,7 +89,7 @@ public:
 	if (thread) inc_dec_view_ref(FALSE);
 #ifdef DEBUG_THREADS
 	pthread_mutex_lock(&reference_mutex);
-	if (!thread_hash) DBG("thread_unreference: hash is null!\n");
+	if (!thread_hash) ERROR("thread_unreference: hash is null!\n");
 	const gchar *removed_text = (const gchar *)g_hash_table_lookup(thread_hash, (void *)thread);
 	TRACE( "- view decrement: 0x%x (%s) view ref = %d\n", 
 		GPOINTER_TO_INT(thread), removed_text,
@@ -165,7 +165,7 @@ public:
 	if (r==0 && !heartbeat_p->condition) {
 	    if (!cond_timed_wait(path, heartbeat_p->signal, heartbeat_p->mutex, 2)) {
 		pthread_mutex_unlock(heartbeat_p->mutex);
-		DBG("file_test_with_wait(): dead heartbeat, aborting\n");
+		ERROR("file_test_with_wait(): dead heartbeat, aborting\n");
 		// Dead heartbeat:
 		// Fire off a wait and cleanup thread.
 		// nonjoinable just to pick up zombie
@@ -202,7 +202,7 @@ public:
 	TRACE("heartbeat doing stat %s\n", heartbeat_p->path);
 	struct stat st;
 	if (lstat(heartbeat_p->path, &st) < 0) {
-	    DBG("heartbeat_g_file_test(): cannot lstat %s\n", heartbeat_p->path);
+	    ERROR("heartbeat_g_file_test(): cannot lstat %s\n", heartbeat_p->path);
 	    return NULL;
 	}
 	
@@ -213,7 +213,7 @@ public:
 		return GINT_TO_POINTER(TRUE);
 	    }
 	    if (stat(heartbeat_p->path, &st) < 0) {
-		DBG("heartbeat_g_file_test(): cannot stat %s\n", heartbeat_p->path);
+		ERROR("heartbeat_g_file_test(): cannot stat %s\n", heartbeat_p->path);
 		return NULL;
 	    }
 	}
@@ -292,7 +292,7 @@ private:
 	if (thread) inc_dec_view_ref(TRUE);
 
 #ifdef DEBUG_THREADS
-	if (!thread_hash) DBG("thread_reference: hash is null!\n");
+	if (!thread_hash) ERROR("thread_reference: hash is null!\n");
 	TRACE( "- view increment: 0x%x:0x%x (%s) view ref = %d\n",
 		GPOINTER_TO_INT(this), GPOINTER_TO_INT(thread), 
 		dbg_text, g_list_length(thread_list)+1);

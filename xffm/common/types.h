@@ -30,6 +30,14 @@
 #define SIZE_PREVIEW	96
 #define SIZE_TIP	128
 
+# undef TRACE
+# define TRACE(...)   { (void)0; }
+//# define TRACE(...)  fprintf(stderr, "TRACE> "); fprintf(stderr, __VA_ARGS__);
+# undef DBG
+//# define DBG(...)   { (void)0; }
+# define DBG(...)  fprintf(stderr, "DBG> "); fprintf(stderr, __VA_ARGS__);
+# undef ERROR
+# define ERROR(...)  fprintf(stderr, "*** ERROR> "); fprintf(stderr, __VA_ARGS__);
 
 typedef struct menuItem_t {
     const gchar *label;

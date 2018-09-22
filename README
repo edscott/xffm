@@ -1,6 +1,22 @@
 
 TODO: 
   * back to xfterm branch
+  * vpane placement bug:
+    - identified placement is correct on initial window, and incorrect
+      on all subsequent windows without call to page::showIconview().
+      Apparently there is a race once the new page is added and the geometry
+      of the vpane changes... The bug has been identified. Not yet fixed.
+  * bash completion: 
+    - finds directory and appends /, giving // to output
+    - if directory and executable are options, directory options are not
+      presented in output, only executable (not a bug:
+      same happens in bash shell!)
+    - finds item but outputs "Found no match"
+    - when directory in input, and no match or multiple match, returns
+      "found no match"
+  * xffind:
+    - on close/destroy signal gtk_widget_hide failed 
+       GTK_IS_WIDGET (widget)' failed
   * simple rcfile for environment, monitor changes and reload (font size, window size)
   * new tab shows iconview always in slow box (geminis) pinpoints problem.
   * on return with blank line: /bin/bash -c is executed...

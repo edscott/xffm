@@ -109,7 +109,7 @@ public:
 	gchar *thumbnail_path = get_thumbnail_path (file, size);
 	if (g_file_test(thumbnail_path, G_FILE_TEST_EXISTS)) {
 	    if (g_file_test(thumbnail_path, G_FILE_TEST_EXISTS) && unlink(thumbnail_path) < 0) {
-		DBG("Cannot unlink thumbnail file: %s (%s)\n",
+		ERROR("Cannot unlink thumbnail file: %s (%s)\n",
 		    thumbnail_path, strerror(errno));
 	    }
 	}
@@ -121,7 +121,7 @@ public:
     static void 
     put_in_pixbuf_hash(const gchar *path, gint size, const GdkPixbuf *pixbuf){
 	if (!path || !pixbuf || !GDK_IS_PIXBUF(pixbuf)) {
-	    DBG("put_in_pixbuf_hash() %s is not a pixbuf\n", path);
+	    ERROR("put_in_pixbuf_hash() %s is not a pixbuf\n", path);
 	    return;
 	}
 	TRACE("rfm_put_in_pixbuf_hash(%s, %d)\n", path, size);
@@ -141,7 +141,7 @@ public:
 		pixbuf_p->mtime = st.st_mtime;
 		pixbuf_p->st_size = st.st_size;
 		pixbuf_p->st_ino = st.st_ino;
-	    } else DBG("cannot stat %s\n", path);
+	    } else ERROR("cannot stat %s\n", path);
 	} 
 	// Replace or insert item in pixbuf hash
 	gchar *hash_key = get_hash_key (pixbuf_p->path, pixbuf_p->size);

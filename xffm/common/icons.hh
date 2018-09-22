@@ -38,7 +38,7 @@ public:
 	pixbuf_mutex = PTHREAD_MUTEX_INITIALIZER;
 	icon_theme = gtk_icon_theme_get_default ();
 	if (!icon_theme){
-	    DBG("cannot get default icon theme!\n");
+	    ERROR("cannot get default icon theme!\n");
 	    icon_theme = gtk_icon_theme_new();
 	    //throw 1;
 	}
@@ -117,7 +117,7 @@ public:
 		      GTK_ICON_LOOKUP_FORCE_SIZE,  // GtkIconLookupFlags flags,
 		      &error);
 	if (error) {
-	    DBG("get_theme_pixbuf: %s\n", error->message);
+	    ERROR("get_theme_pixbuf: %s\n", error->message);
 	    g_error_free(error);
 	    return NULL;
 	} else if (theme_pixbuf) {
@@ -263,7 +263,7 @@ public:
 	    gint i;
 	    for (p=tokens; p && *p; p += 4){
 		for (i=1; i<4; i++) if (*(p+i) == NULL) {
-		    DBG("*** composite_icon(): incorrect composite specification: %s\n %s\n",
+		    ERROR("*** composite_icon(): incorrect composite specification: %s\n %s\n",
 			    emblems,
 			    "*** (format: [[base_icon_name]/position/emblem_name/scale/alpha])");
 		    g_strfreev(tokens);
@@ -278,7 +278,7 @@ public:
 		if (tag) {
 		    pixbuf_cairo_c::insert_pixbuf_tag (pixbuf_context, tag, base_pixbuf, position, scale, alpha);
 		} else {
-		    DBG("insert_decoration_f(): Cannot get pixbuf for %s\n", emblem);
+		    ERROR("insert_decoration_f(): Cannot get pixbuf for %s\n", emblem);
 		}
 	    }
 	    g_strfreev(tokens);

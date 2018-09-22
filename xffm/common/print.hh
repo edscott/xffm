@@ -336,7 +336,7 @@ private:
         auto arg=(void **)data;
         auto vpane = GTK_PANED(arg[0]);
         if(!vpane) {
-            DBG("vpane is NULL\n");
+            ERROR("vpane is NULL\n");
             return NULL;
         }
 	gint max;
@@ -345,7 +345,6 @@ private:
 	gtk_widget_get_allocation(window, &allocation);
 	gint height = allocation.height;
 
-	//g_object_get(G_OBJECT(vpane), "max-position", &max, NULL);
 	DBG("setting vpane position to %d\n", height);
         gtk_paned_set_position (vpane, height);
         return NULL;
@@ -353,16 +352,14 @@ private:
 
     static void *
     show_text_buffer_f (void *data) {
-            DBG("show_text_buffer_f\n");
         if (!data) return GINT_TO_POINTER(-1);
         auto arg=(void **)data;
         auto vpane = GTK_PANED(arg[0]);
 	auto fullview =arg[1]; 
         if(!vpane) {
-            DBG("vpane is NULL\n");
+            ERROR("vpane is NULL\n");
             return NULL;
         }
-        DBG("show_text_fuffer_f full=%d\n", GPOINTER_TO_INT(fullview));
         gint min, max;
 	g_object_get(G_OBJECT(vpane), "min-position", &min, NULL);
 	g_object_get(G_OBJECT(vpane), "max-position", &max, NULL);
@@ -370,7 +367,7 @@ private:
 	    DBG("show_text_buffer_f:setting vpane position to %d\n", min);
 	    gtk_paned_set_position (vpane, min);
             while (gtk_events_pending()) gtk_main_iteration();
-            DBG("vpane position=%d\n", gtk_paned_get_position(vpane));
+            DBG("vpane position set to =%d\n", gtk_paned_get_position(vpane));
 	    return NULL;
 	}
 	//GtkWidget *window = gtk_widget_get_toplevel(GTK_WIDGET(vpane));
@@ -520,7 +517,7 @@ private:
         } 
 
         tag = gtk_text_tag_table_lookup (gtk_text_buffer_get_tag_table (buffer), id);
-        // if (!tag) DBG("No GtkTextTag for %s\n", id);
+        // if (!tag) ERROR("No GtkTextTag for %s\n", id);
         return tag;
     }
 
@@ -545,7 +542,7 @@ private:
         for (t=userTags; t && *t;t++){
             tags[i] = resolve_tag (buffer, *t);
             if (tags[i] == NULL) {
-                DBG("*** print_c::invalid tag: \"%s\"\n", *t);
+                ERROR("*** print_c::invalid tag: \"%s\"\n", *t);
             } else i++;
         }
         g_strfreev(userTags);
@@ -626,7 +623,7 @@ private:
                 for (t=codes; t && *t; t++){
                     const gchar *ansiTag = get_ansi_tag(*t);
                     if (!ansiTag){
-                        DBG("no ansiTag for \"%s\"\n", *t);
+                        ERROR("no ansiTag for \"%s\"\n", *t);
                         if (strcmp(*t, "0")) {
                             g_free(fullTag); fullTag = NULL;
                             g_free(textviewTags); textviewTags = NULL;
@@ -758,7 +755,7 @@ color: white;\
         gtk_css_provider_load_from_data (css_provider, data, -1, &error);
         g_free(data);
         if (error){
-            DBG("gtk_css_provider_load_from_data: %s\n", error->message);
+            ERROR("gtk_css_provider_load_from_data: %s\n", error->message);
             g_error_free(error);
             return;
         }
@@ -788,7 +785,7 @@ font-size: %dpx;\
         gtk_css_provider_load_from_data (css_provider, data, -1, &error);
         g_free(data);
         if (error){
-            DBG("gtk_css_provider_load_from_data: %s\n", error->message);
+            ERROR("gtk_css_provider_load_from_data: %s\n", error->message);
             g_error_free(error);
             return;
         }

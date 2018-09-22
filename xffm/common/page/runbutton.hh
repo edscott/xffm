@@ -222,7 +222,7 @@ public:
 	auto run_button_p = (RunButton<Type> *)data;
 	auto button = GTK_MENU_BUTTON(gtk_menu_button_new ());
 	run_button_p->setButton(button);
-	DBG("make_run_data_button... \n");
+	TRACE("make_run_data_button... \n");
 	//GMenuModel *menu_ = run_button_p->get_signal_menu_model();
 	//fprintf(stderr, "make_run_data_button: menu_ model is %p\n", menu_);
 	//gtk_menu_button_set_menu_model (GTK_MENU_BUTTON (button), menu_);

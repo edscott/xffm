@@ -149,7 +149,7 @@ private:
             gchar *d;
             d = g_strdup(workdir);
             if (chdir(d) < 0){ 
-                DBG("chdir %s\n",d);
+                TRACE("chdir %s\n",d);
             }
             g_free(d);
             

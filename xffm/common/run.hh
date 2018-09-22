@@ -47,7 +47,7 @@ private:
         auto string = (gchar *)g_hash_table_lookup (stringHash, GINT_TO_POINTER(controller));
         if (!string){
             pthread_mutex_unlock(&string_hash_mutex);
-            DBG("controller %d not found in hashtable\n", controller);
+            ERROR("controller %d not found in hashtable\n", controller);
             return g_strdup("");
         }
         g_hash_table_steal(stringHash, GINT_TO_POINTER(controller));
@@ -101,7 +101,7 @@ public:
             g_free(command);
             command = g;
         }
-        DBG("thread_run command = %s\n", command);
+        TRACE("thread_run command = %s\n", command);
         int flags = TUBO_EXIT_TEXT|TUBO_VALID_ANSI|TUBO_CONTROLLER_PID;
         /* FIXME: workdir must be set in constructor
         if (chdir(get_workdir())<0){
@@ -304,7 +304,9 @@ public:
         line = (char *)stream;
         if(line[0] != '\n') {
             if (strstr(line, "error")||strstr(line,_("error"))) {
-                print_c::print(textview, "magenta", g_strdup(line));
+                print_c::print(textview, "Magenta", g_strdup(line));
+            } else if (strstr(line, "***")) {
+                print_c::print(textview, "red/white_bg", g_strdup(line));
             } else if (strstr(line, "warning")||strstr(line, _("warning"))) {
                 print_c::print(textview, "yellow", g_strdup(line));
             } else {                
@@ -486,7 +488,7 @@ public:
     shell_command(GtkTextView *textview, const gchar *c, gboolean scrollUp){
 	// Make sure any sudo command has the "-A" option
 	auto command = sudo_fix(c);
-	DBG("shell_command = %s\n", c);
+	TRACE("shell_command = %s\n", c);
 	pid_t pid = thread_run(textview, command?command:c, scrollUp);
 	g_free (command);
 	if (!pid) return 0;

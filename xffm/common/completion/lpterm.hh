@@ -307,14 +307,14 @@ public:
 	    // automatic shell determination:
             if (strcmp(workdir, "xffm:root")==0) {
                 if (chdir(g_get_home_dir()) < 0){
-                    DBG("Cannot chdir to %s\n", g_get_home_dir());
-                    DBG("aborting command: \"%s\"\n", command);
+                    ERROR("Cannot chdir to %s\n", g_get_home_dir());
+                    ERROR("aborting command: \"%s\"\n", command);
                     continue;
                 }
             } else {
                 if (chdir(workdir) < 0){
-                    DBG("Cannot chdir to %s\n", workdir);
-                    DBG("aborting command: \"%s\"\n", command);
+                    ERROR("Cannot chdir to %s\n", workdir);
+                    ERROR("aborting command: \"%s\"\n", command);
                     continue;
                 }
             }

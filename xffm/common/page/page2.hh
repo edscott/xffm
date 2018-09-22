@@ -99,7 +99,7 @@ public:
 
 	gtk_box_pack_start (pageChild_, this->get_pathbar(), FALSE, FALSE, 0);
 
-	gtk_widget_show_all(GTK_WIDGET(pageLabelBox_));
+	//gtk_widget_show_all(GTK_WIDGET(pageLabelBox_));
 
         GtkBox *hViewBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
 
@@ -134,12 +134,9 @@ public:
 
 
 	print_c::setColor(GTK_WIDGET(this->output()));
-	gtk_widget_realize(GTK_WIDGET(pageChild_));
-	//gtk_paned_set_position(this->vpane_, 0);
-
-
+	//gtk_widget_realize(GTK_WIDGET(pageChild_));
+	gtk_widget_show_all(GTK_WIDGET(pageLabelBox_));
 	gtk_widget_show_all(GTK_WIDGET(pageChild_));
-
 	return;
     }
     
@@ -192,7 +189,7 @@ public:
 
     void 
     newRunButton(const gchar * command, pid_t child){
-	DBG("page->newRunButton\n");
+	TRACE("page->newRunButton\n");
 	gboolean shellIcon = run_c::run_in_shell(command);
 	auto runButton = (RunButton<Type> *)new(RunButton<Type>);
 	runButton->setup((void *)this, command, child, shellIcon);
@@ -203,9 +200,9 @@ public:
     }
     const gchar *pageWorkdir(void){return (const gchar *)this->workDir();}
     void setPageWorkdir(const gchar *dir){
-	DBG("setPageWorkdir: %s\n", dir);
+	TRACE("setPageWorkdir: %s\n", dir);
 	this->setWorkDir(dir);
-	DBG("update_pathbar: %s\n", dir);
+	TRACE("update_pathbar: %s\n", dir);
 	this->update_pathbar(dir);
         if (g_file_test(dir, G_FILE_TEST_IS_DIR)){
 	    print_c::print(this->output(), "green", g_strdup_printf("cd %s\n", dir));
@@ -247,6 +244,12 @@ public:
     gboolean iconviewIsDefault(void){return iconviewIsDefault_;}
        
     void showIconview(gboolean state, gboolean full){
+	if (!gtk_widget_is_visible(GTK_WIDGET(this->pageChild_))){
+		ERROR("page2.hh:: showIconview() call with invisible parent\n");
+		return;
+	}
+
+	return;
         if (state) {
             gtk_widget_hide(GTK_WIDGET(this->toggleToIconview_));
             gtk_widget_hide(GTK_WIDGET(this->input_));

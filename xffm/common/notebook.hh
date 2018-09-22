@@ -20,7 +20,7 @@ public:
                    guint        new_page,
                    gpointer     data)
     {
-        DBG("switch_page: new page=%d\n", new_page);
+        TRACE("switch_page: new page=%d\n", new_page);
 
 
         //FIXME: what else?
@@ -28,13 +28,13 @@ public:
         // This callback may occur after view has been destroyed.
         window_c *window_p = (window_c *)g_object_get_data(G_OBJECT(notebook), "window_p");
         if (!window_p->is_view_in_list(data)) {
-            DBG("switch_page:: view_p %p no longer exists.\n", data);
+            ERROR("switch_page:: view_p %p no longer exists.\n", data);
             return;
         }
 
         view_c *view_p = (view_c *)data;
         gint current_page = gtk_notebook_get_current_page (notebook);
-        DBG("switch_page, page_num=%d current_page=%d xfdir_p=%p\n" ,new_page, current_page, view_p->get_xfdir_p());
+        TRACE("switch_page, page_num=%d current_page=%d xfdir_p=%p\n" ,new_page, current_page, view_p->get_xfdir_p());
         if (!view_p->get_xfdir_p()) return;
         view_p->set_window_title(new_page);
         view_p->set_application_icon(new_page);
@@ -47,7 +47,7 @@ public:
                    guint        page_num,
                    gpointer     data)
     {
-        DBG("page_added\n");
+        TRACE("page_added\n");
     }
 
     static void
@@ -56,7 +56,7 @@ public:
                    guint        page_num,
                    gpointer     data)
     {
-        DBG("page_removed\n");
+        TRACE("page_removed\n");
     }
 
     static void
@@ -65,7 +65,7 @@ public:
                    guint        page_num,
                    gpointer     data)
     {
-        DBG("page_reordered\n");
+        TRACE("page_reordered\n");
     }
 #define NOTEBOOK_1_CALLBACK(X)  G_CALLBACK((void (*)(GtkNotebook *,GtkDirectionType *,gpointer)) X)
 
@@ -74,7 +74,7 @@ public:
                    GtkDirectionType arg1,
                    gpointer         data)
     {
-        DBG("move_focus_out\n");
+        TRACE("move_focus_out\n");
     }
 
 #define NOTEBOOK_2_CALLBACK(X)  G_CALLBACK((gboolean (*)(GtkNotebook *,GtkDirectionType *, gboolean, gpointer)) X)
@@ -85,7 +85,7 @@ public:
                    gboolean         arg2,
                    gpointer         data)
     {
-        DBG("reorder_tab\n");
+        TRACE("reorder_tab\n");
         return FALSE;
     }
 
@@ -95,7 +95,7 @@ public:
                    GtkNotebookTab arg1,
                    gpointer       data)
     {
-        DBG("focus_tab\n");
+        TRACE("focus_tab\n");
         return FALSE;
     }
         
@@ -105,7 +105,7 @@ public:
                    gint         arg1,
                    gpointer     data)
     {
-        DBG("change_current_page\n");
+        TRACE("change_current_page\n");
         return FALSE;
     }
 
@@ -117,7 +117,7 @@ public:
                    gint         y,
                    gpointer     data)
     {
-        DBG("create_window\n");
+        TRACE("create_window\n");
         return NULL;
     }
 
@@ -127,7 +127,7 @@ public:
                    gboolean     arg1,
                    gpointer     data)
     {
-        DBG("select_page\n");
+        TRACE("select_page\n");
         return FALSE;
     }
 
@@ -135,13 +135,13 @@ public:
     on_new_page(GtkButton *button, void *data){
         auto notebook = (Notebook<Type> *)data;
         const gchar *workdir = notebook->workdir();
-        DBG("on_new_page this: %p (%s)\n", data, workdir);
+        TRACE("on_new_page this: %p (%s)\n", data, workdir);
         notebook->addPage(notebook->workdir());
     }
 
     static void
     on_remove_page(GtkButton *button, void *data){
-        DBG("on_remove_page this: %p\n", data);
+        TRACE("on_remove_page this: %p\n", data);
         auto page = (Page<Type> *)data;
         auto notebook = (Notebook<Type> *)(g_object_get_data(G_OBJECT(page->pageChild()), "Notebook"));
         notebook->removePage(GTK_WIDGET(page->pageChild()));
@@ -220,11 +220,11 @@ public:
         auto pageNumber = gtk_notebook_page_num (notebook_, child);
         auto currentPage = gtk_notebook_get_current_page (notebook_);
         if (pageNumber < 0){
-            DBG("child %p is not in notebook\n", (void *)child);
+            ERROR("child %p is not in notebook\n", (void *)child);
             exit(1);
             return;
         }
-        DBG("disconnect page %d\n", pageNumber);
+        TRACE("disconnect page %d\n", pageNumber);
        //gtk_widget_hide(child);
         auto page = (Page<Type> *)g_hash_table_lookup(pageHash_, (void *)child);
         if (currentPage == pageNumber) {
@@ -244,8 +244,6 @@ public:
         }
 
         delete(page);
-        // XXX:   removing page makes notebook crazy
-        //         Maybe because child is already hidden, which removes page...
         gtk_notebook_remove_page (notebook_, pageNumber);
 
         DBG("******** deleted page with child %p\n", (void *)child);
@@ -255,7 +253,7 @@ public:
     void setTabIcon(GtkWidget *child, const gchar *icon){
         Page<Type> *page = (Page<Type> *)g_hash_table_lookup(pageHash_, (void *)child);
         if (!page){
-            DBG("setVpanePosition:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
+            ERROR("setVpanePosition:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
             return;
         }
         page->setTabIcon(icon);
@@ -268,7 +266,7 @@ public:
     void setVpanePosition(GtkWidget *child, gint position){
         Page<Type> *page = (Page<Type> *)g_hash_table_lookup(pageHash_, (void *)child);
         if (!page){
-            DBG("setVpanePosition:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
+            ERROR("setVpanePosition:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
             return;
         }
         page->setVpanePosition(position);
@@ -282,7 +280,7 @@ public:
         Page<Type> *page = (Page<Type> *)g_hash_table_lookup(pageHash_, (void *)child);
 
         if (!page){
-            DBG("setVpanePosition:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
+            ERROR("setVpanePosition:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
             return NULL;
         }
         return page->workDir();
@@ -295,7 +293,7 @@ public:
         Page<Type> *page = (Page<Type> *)g_hash_table_lookup(pageHash_, (void *)child);
 
         if (!page){
-            DBG("setVpanePosition:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
+            ERROR("setVpanePosition:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
             return NULL;
         }
         return page->setWorkDir(dir);
@@ -308,7 +306,7 @@ public:
         Page<Type> *page = (Page<Type> *)g_hash_table_lookup(pageHash_, (void *)child);
 
         if (!page){
-            DBG("setVpanePosition:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
+            ERROR("setVpanePosition:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
             return NULL;
         }
         return page->diagnostics();
@@ -322,7 +320,7 @@ public:
         Page<Type> *page = (Page<Type> *)g_hash_table_lookup(pageHash_, (void *)child);
 
         if (!page){
-            DBG("setVpanePosition:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
+            ERROR("setVpanePosition:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
             return NULL;
         }
         return page->vpane();

@@ -260,7 +260,7 @@ public:
 
     // This returns the last running instance counter id
     static gint getInstance(void){ 
-        DBG("Do you want Tubo_id() or would Tubo_get_id(pid) be what you want?\n");
+        ERROR("Do you want Tubo_id() or would Tubo_get_id(pid) be what you want?\n");
         return instance;
     }
 
@@ -355,7 +355,7 @@ private:
             const gchar **p;
             for(p = invalid_sequence_p; p && *p; p++) {
                 if (strncmp(esc,*p,strlen(*p))==0){
-                    DBG( "*** Tubo: sequence <ESC>%s is not in validAnsiSequence list\n", *p);
+                    ERROR( "*** Tubo: sequence <ESC>%s is not in validAnsiSequence list\n", *p);
                     return FALSE;
                 }
             }
@@ -404,7 +404,7 @@ private:
         gchar line[TUBO_BLK_SIZE];
         memset (line, 0, TUBO_BLK_SIZE);
         if(which < 1 || which > 2){
-            DBG( "*** Tubo:  readFD(): argument out of range\n");
+            ERROR( "*** Tubo:  readFD(): argument out of range\n");
             return FALSE;
         }
 
@@ -413,7 +413,7 @@ private:
             // coverity[string_null_argument : FALSE]
             int result = read (fork_p->tubo[which][0], line + i, 1);
             if(result < 0) {
-                DBG( "*** Tubo:  readFD(%d->%d) %s\n", which, fork_p->tubo[which][0], strerror (errno));
+                ERROR( "*** Tubo:  readFD(%d->%d) %s\n", which, fork_p->tubo[which][0], strerror (errno));
                 return FALSE;
             }
             if(result == 0) {
@@ -428,7 +428,8 @@ private:
     // check for valid output (if so configured)
         if (fork_p->flags & TUBO_VALID_ANSI) {
             if (!validAnsiSequence(line)){
-                DBG( "*** Tubo: Sending SIGTERM to child process (flags & TUBO_REAP_CHILD==TRUE)\n");
+                ERROR( "*** Tubo: Received !validAnsiSequence\n");
+		ERROR("Sending SIGTERM to child process (flags & TUBO_REAP_CHILD==TRUE)\n");
                 // send child TERM signal: SIGUSR1 gets 
                 // translated to SIGTERM for grandchild
                 kill (fork_p->grandchild, SIGTERM); 	    
@@ -590,7 +591,7 @@ private:
             // open named sem
             newfork->stdout_sem = sem_open(newfork->stdout_sem_name, 0, 0700, 0);
             if (newfork->stdout_sem == SEM_FAILED) {
-                DBG( "*** Tubo: Cannot open named semaphore: %s (%s)\n", 
+                ERROR( "*** Tubo: Cannot open named semaphore: %s (%s)\n", 
                         newfork->stdout_sem_name, strerror(errno));
             } else {
                 // wait on remote sem
@@ -611,7 +612,7 @@ private:
             // open named sem
             newfork->stderr_sem = sem_open(newfork->stderr_sem_name, 0, 0700, 0);
             if (newfork->stderr_sem == SEM_FAILED) {
-                DBG( "*** Tubo: Cannot open named semaphore: %s (%s)\n", 
+                ERROR( "*** Tubo: Cannot open named semaphore: %s (%s)\n", 
                         newfork->stderr_sem_name, strerror(errno));
             } else {
                 // wait on remote sem
@@ -630,7 +631,7 @@ private:
         if (!setShmName(newfork->setup_sem_name, "-setup", parent, instance_in)) _exit(123);
         newfork->setup_sem = sem_open(newfork->setup_sem_name, 0, 0700, 0);
         if (newfork->setup_sem == SEM_FAILED) {
-            DBG( "*** Tubo: Cannot open named semaphore: %s (%s)\n", 
+            ERROR( "*** Tubo: Cannot open named semaphore: %s (%s)\n", 
                         newfork->setup_sem_name, strerror(errno));
         }
             
@@ -643,13 +644,13 @@ private:
                 setpgid (0, 0);     /* or setpgrp(); */
                 if(newfork->fork_function)
                     (*(newfork->fork_function)) (newfork->fork_function_data);
-                DBG( "Tubo_thread incorrect usage: fork_function must _exit()\n");
+                ERROR( "Tubo_thread incorrect usage: fork_function must _exit()\n");
                 _exit (123);
             } else {
                 TRACE( "grandchild here B... \n");
                 TRACE( "* execvp %s\n", newfork->argv[0]);
                 execvp(newfork->argv[0], newfork->argv);
-                DBG( "*** Tubo:  Cannot execvp %s (%s)\n", newfork->argv[0],strerror(errno));
+                ERROR( "*** Tubo:  Cannot execvp %s (%s)\n", newfork->argv[0],strerror(errno));
                 _exit(123);
             }
         } 
@@ -660,19 +661,19 @@ private:
         gint fd = 
             shm_open(newfork->shm_gchild_name, O_RDWR, 0700);
         if(fd < 0){
-            DBG( "*** Tubo: child shm open(%s): %s\n", newfork->shm_gchild_name, strerror (errno));
+            ERROR( "*** Tubo: child shm open(%s): %s\n", newfork->shm_gchild_name, strerror (errno));
         } else {
                 TRACE( "C>>>> grandchild id is 0x%x\n", grandchildPID);
                 pid_t *gchild = 
                     (pid_t *)mmap(NULL, sizeof (pid_t), PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
                 close(fd);
                 if (gchild == MAP_FAILED){
-                    DBG( "*** Tubo: child mmap failed for %s: %s\n", 
+                    ERROR( "*** Tubo: child mmap failed for %s: %s\n", 
                             newfork->shm_gchild_name, strerror (errno));
                 } else{
                     *gchild = grandchildPID;
                     if(msync (gchild, sizeof(pid_t), MS_SYNC) < 0){
-                        DBG( "*** Tubo: Child msync(%s): %s\n", newfork->shm_gchild_name, strerror (errno));
+                        ERROR( "*** Tubo: Child msync(%s): %s\n", newfork->shm_gchild_name, strerror (errno));
                     }
                     munmap (gchild, sizeof(pid_t));
                 }
@@ -739,7 +740,7 @@ private:
             TRACE("mallocing local semaphores...\n");
             newfork->local_semaphore = (sem_t *) malloc (3 * sizeof (sem_t));
             if (!newfork->local_semaphore){
-                DBG( "*** Tubo: malloc(%lu) %s\n", 
+                ERROR( "*** Tubo: malloc(%lu) %s\n", 
                         (long unsigned)(3 * sizeof (sem_t)), strerror(errno));
                 return;
             }
@@ -777,7 +778,7 @@ private:
             if(newfork->stderr_f == NULL) {
                 // greenlight to fork_finished function:
                 if (newfork->tubo[2][0]>0){
-                        DBG( "*** Tubo: file descriptor 2-r should not be open\n");
+                        ERROR( "*** Tubo: file descriptor 2-r should not be open\n");
                 }
                 newfork->done_value++;
             } else {
@@ -838,7 +839,7 @@ private:
     static gboolean restoreFD(gint *save_p, gint original){
         if (*save_p != -1) {
           if(dup2(*save_p, original) < 0){
-              DBG("*** Tubo: cannot restore %d\n", original);
+              ERROR("*** Tubo: cannot restore %d\n", original);
               close(*save_p);        
               return FALSE;
           }
@@ -858,7 +859,7 @@ private:
             // This sets stdin straight from the pipe.
             if (dup2(newfork->tubo[0][0], fileno(stdin)) < 0){
                 // unable to create pipe
-                DBG( "*** Tubo: unable to create stdin pipe with dup2\n");
+                ERROR( "*** Tubo: unable to create stdin pipe with dup2\n");
                 restoreFD(save_stdin_p, fileno(stdin));
                 return FALSE;
             }
@@ -872,7 +873,7 @@ private:
                 newfork->nullfd = fopen ("/dev/null", "rb");
                 if (dup2 (fileno (newfork->nullfd), fd) < 0){
                     // unable to create pipe
-                    DBG( "*** Tubo: unable to create stdin pipe with dup2\n");
+                    ERROR( "*** Tubo: unable to create stdin pipe with dup2\n");
                     restoreFD(save_stdin_p, fileno(stdin));
 
                     return FALSE;
@@ -889,7 +890,7 @@ private:
                 // unable to create pipe
                 restoreFD(save_stdin_p, fileno(stdin));
                 restoreFD(save_stdout_p, fileno(stdout));
-                DBG( "*** Tubo: unable to create stdout pipe with dup2\n");
+                ERROR( "*** Tubo: unable to create stdout pipe with dup2\n");
                 
                 return FALSE;
             }
@@ -900,7 +901,7 @@ private:
             if (newfork->stdout_sem == SEM_FAILED) {
                 restoreFD(save_stdin_p, fileno(stdin));
                 restoreFD(save_stdout_p, fileno(stdout));
-                DBG( "*** Tubo: Cannot create named semaphore: %s (%s)\n", 
+                ERROR( "*** Tubo: Cannot create named semaphore: %s (%s)\n", 
                         newfork->stdout_sem_name, strerror(errno));
                 return FALSE;
             }
@@ -916,7 +917,7 @@ private:
                 restoreFD(save_stdin_p, fileno(stdin));
                 restoreFD(save_stderr_p, fileno(stderr));
                 restoreFD(save_stdout_p, fileno(stdout));
-                DBG("unable to create stderr pipe with dup2\n");
+                ERROR("unable to create stderr pipe with dup2\n");
                 return FALSE;
             }
             close(newfork->tubo[2][1]);
@@ -927,7 +928,7 @@ private:
                 restoreFD(save_stdin_p, fileno(stdin));
                 restoreFD(save_stdout_p, fileno(stdout));
                 restoreFD(save_stderr_p, fileno(stderr));
-                DBG( "*** Tubo: Cannot create named semaphore: %s (%s)\n", 
+                ERROR( "*** Tubo: Cannot create named semaphore: %s (%s)\n", 
                         newfork->stderr_sem_name, strerror(errno));
                 return FALSE;
             }
@@ -939,7 +940,7 @@ private:
                 restoreFD(save_stdin_p, fileno(stdin));
                 restoreFD(save_stdout_p, fileno(stdout));
                 restoreFD(save_stderr_p, fileno(stderr));
-            DBG( "*** Tubo: Cannot create named semaphore: %s (%s)\n", 
+            ERROR( "*** Tubo: Cannot create named semaphore: %s (%s)\n", 
                     newfork->setup_sem_name, strerror(errno));
                 return FALSE;
         }
@@ -949,14 +950,14 @@ private:
                 restoreFD(save_stdin_p, fileno(stdin));
                 restoreFD(save_stdout_p, fileno(stdout));
                 restoreFD(save_stderr_p, fileno(stderr));
-            DBG( "*** Tubo: parent shm open(%s): %s\n", newfork->shm_gchild_name, strerror (errno));
+            ERROR( "*** Tubo: parent shm open(%s): %s\n", newfork->shm_gchild_name, strerror (errno));
                 return FALSE;
         } else {
             if(ftruncate (fd, sizeof (pid_t)) < 0) {
                 restoreFD(save_stdin_p, fileno(stdin));
                 restoreFD(save_stdout_p, fileno(stdout));
                 restoreFD(save_stderr_p, fileno(stderr));
-                DBG( "*** Tubo: ftruncate(%s): %s\n", newfork->shm_gchild_name, strerror (errno));
+                ERROR( "*** Tubo: ftruncate(%s): %s\n", newfork->shm_gchild_name, strerror (errno));
                 close(fd);
                 return FALSE;
             }
@@ -967,7 +968,7 @@ private:
                 restoreFD(save_stdin_p, fileno(stdin));
                 restoreFD(save_stdout_p, fileno(stdout));
                 restoreFD(save_stderr_p, fileno(stderr));
-                 DBG( "*** Tubo: mmap failed for %s: %s\n", 
+                 ERROR( "*** Tubo: mmap failed for %s: %s\n", 
                     newfork->shm_gchild_name, strerror (errno));
                 return FALSE;
             } 
@@ -1029,7 +1030,7 @@ private:
             ){
         TRACE("Parent=0x%x\n", getpid());
         forkStruct_t *newfork = (forkStruct_t *)calloc(1, sizeof(forkStruct_t));
-        if (!newfork) {DBG("*** Tubo: malloc: %s\n", strerror(errno)); return NULL;}
+        if (!newfork) {ERROR("*** Tubo: calloc: %s\n", strerror(errno)); return NULL;}
 
         instance++;
         newfork->flags = flags;
@@ -1038,7 +1039,7 @@ private:
 
         if (stdin_fd_p){
             if(PIPE(newfork->tubo[0]) == -1 || newfork->tubo[0][0] <= 2  || newfork->tubo[0][1] <= 2) {
-                DBG("Incorrect pipes (0): %d <-> %d \n", newfork->tubo[0][0], newfork->tubo[0][1]); 
+                ERROR("Incorrect pipes (0): %d <-> %d \n", newfork->tubo[0][0], newfork->tubo[0][1]); 
                 closePipes (newfork);
                 newfork->stdin_fd = -1;
                 g_free(newfork);
@@ -1052,7 +1053,7 @@ private:
 
         if (stdout_f){
             if(PIPE(newfork->tubo[1]) == -1 || newfork->tubo[1][0] <= 2  || newfork->tubo[1][1] <= 2) {
-                DBG("Incorrect pipes (1): %d <-> %d \n", newfork->tubo[1][0], newfork->tubo[1][1]); 
+                ERROR("Incorrect pipes (1): %d <-> %d \n", newfork->tubo[1][0], newfork->tubo[1][1]); 
                 closePipes (newfork);
                 g_free(newfork);
                 return NULL;
@@ -1062,7 +1063,7 @@ private:
 
         if (stderr_f){
             if(PIPE(newfork->tubo[2]) == -1 || newfork->tubo[2][0] <= 2  || newfork->tubo[2][1] <= 2) {
-                DBG("Incorrect pipes (2): %d <-> %d \n", newfork->tubo[2][0], newfork->tubo[2][1]); 
+                ERROR("Incorrect pipes (2): %d <-> %d \n", newfork->tubo[2][0], newfork->tubo[2][1]); 
                 closePipes (newfork);
                 g_free(newfork);
                 return NULL;
