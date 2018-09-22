@@ -134,6 +134,9 @@ public:
 
 
 	print_c::setColor(GTK_WIDGET(this->output()));
+	gtk_widget_realize(GTK_WIDGET(pageChild_));
+	//gtk_paned_set_position(this->vpane_, 0);
+
 
 	gtk_widget_show_all(GTK_WIDGET(pageChild_));
 

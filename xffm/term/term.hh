@@ -34,7 +34,7 @@ public:
         auto page = this->currentPageObject();
         page->setPageWorkdir(workdir);
 	// Default into terminal...
-	page->showIconview(FALSE, TRUE);
+	//page->showIconview(FALSE, TRUE);
         page->setDefaultIconview(FALSE);
         //gtk_widget_hide(GTK_WIDGET(page->toggleToTerminal()));
         //gtk_widget_hide(GTK_WIDGET(page->toggleToIconview()));

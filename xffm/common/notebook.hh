@@ -155,6 +155,7 @@ class Notebook : public MenuPopover<Type>{
     using gtk_c = Gtk<double>;
     using pixbuf_c = Pixbuf<double>;
     using util_c = Util<double>;
+    using print_c = Print<double>;
 public:
     Notebook(void){
         notebook_ = GTK_NOTEBOOK(gtk_notebook_new());
@@ -184,7 +185,6 @@ public:
     }
     
     void addPage(const gchar *workdir){
-        
         auto page = new(Page<double>);
         g_object_set_data(G_OBJECT(page->pageChild()), "Notebook", (void *)this);
 
@@ -201,12 +201,17 @@ public:
 	// This will set the workdir for completion
         page->setPageWorkdir(workdir);  
 	
-	//g_object_set_data(G_OBJECT(page->input()), "notebook", (void *)notebook); 
-	//g_object_set_data(G_OBJECT(page->input()), "page", (void *)page); 
         g_signal_connect(G_OBJECT(page->pageLabelButton()), "clicked", 
                 BUTTON_CALLBACK(notebookSignals<Type>::on_remove_page), (void *)page); 
 	// Default into iconview if set as default...
-	page->showIconview(page->iconviewIsDefault(), TRUE);
+	//if (termView) PageSignals<Type>::toggleToTerminal(NULL, (gpointer)page);
+	//else PageSignals<Type>::toggleToIconview(NULL, (gpointer)page);
+	//page->showIconview(page->iconviewIsDefault(), TRUE);
+	//FIXME FIXME FIXME
+	// multiple tries and fix not found
+	// need to analyse what is happening step by step...
+	PageSignals<Type>::toggleToTerminal(NULL, (gpointer)page);
+	//page->showIconview(FALSE, TRUE);
 
 
     }

@@ -109,6 +109,14 @@ public:
 	void *arg[]={(void *)vpane, GINT_TO_POINTER(1),NULL};
         context_function(show_text_buffer_f, arg);
     }
+ /*   static gboolean show_textFull(void *data){
+	show_textFull(GTK_TEXT_VIEW(data));
+	return FALSE;
+    }
+    static gboolean hide_text(void *data){
+	hide_text(GTK_TEXT_VIEW(data));
+	return FALSE;
+    } */
 
 
     static void hide_text(GtkTextView *textview){
