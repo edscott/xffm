@@ -230,7 +230,7 @@ private:
 
         if (!list) return NULL;
         gchar *suggest = NULL;
-        fprintf(stderr, "COMPLETE: matches %d\n", g_slist_length (list));
+        DBG("base:: COMPLETE: matches %d\n", g_slist_length (list));
         if(g_slist_length (list) == 1) {
             gchar *s =(gchar *)list->data;
             suggest = g_strdup (s);

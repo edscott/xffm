@@ -54,14 +54,14 @@ public:
 	    // window size is changing
 	    auto ratio = (gdouble)oldCurrent / oldMax;
 	    gint newCurrent = floor(ratio * max);
-	    DBG("// window size is changing oldCurrent= %d, oldMax=%d, newcurrent=%d, max=%d\n",
+	    TRACE("// window size is changing oldCurrent= %d, oldMax=%d, newcurrent=%d, max=%d\n",
 		    oldCurrent, oldMax, newCurrent, max);
 	    if (!G_IS_OBJECT(vpane)) return;
 	    g_object_set_data(G_OBJECT(vpane), "oldCurrent", GINT_TO_POINTER(newCurrent));
 	    if (!G_IS_OBJECT(vpane)) return;
 	    g_object_set_data(G_OBJECT(vpane), "oldMax", GINT_TO_POINTER(max));
 	    if (!G_IS_OBJECT(vpane)) return;
-	    DBG("resizePane(): new pane position=%d\n", newCurrent);
+	    TRACE("resizePane(): new pane position=%d\n", newCurrent);
 	    gtk_paned_set_position(vpane, newCurrent);
 
 	} else if (current != oldCurrent) {

@@ -202,7 +202,7 @@ public:
                           GTK_WIDGET(page->pageChild()),
                           GTK_WIDGET(page->pageLabelBox()));
         gtk_notebook_set_tab_reorderable (notebook_,GTK_WIDGET(page->pageChild()), TRUE);
-        DBG("******* added page number %d: child=%p\n", pageNumber, (void *)page->pageChild());
+        TRACE("******* added page number %d: child=%p\n", pageNumber, (void *)page->pageChild());
         g_hash_table_replace(pageHash_, (void *)page->pageChild(), (void *)page);
         gtk_notebook_set_current_page (notebook_,pageNumber);
 	// This will set the workdir for completion
@@ -219,14 +219,6 @@ public:
 	    page->showIconview(!terminalMode, FALSE);
 	    setVpanePosition(oldPosition);
 	}
-
-	//if (termView) PageSignals<Type>::toggleToTerminal(NULL, (gpointer)page);
-	//else PageSignals<Type>::toggleToIconview(NULL, (gpointer)page);
-	//page->showIconview(page->iconviewIsDefault(), TRUE);
-	//PageSignals<Type>::toggleToTerminal(NULL, (gpointer)page);
-	//page->showIconview(FALSE, TRUE);
-
-
     }
 
     void removePage(GtkWidget *child){
@@ -259,7 +251,7 @@ public:
         delete(page);
         gtk_notebook_remove_page (notebook_, pageNumber);
 
-        DBG("******** deleted page with child %p\n", (void *)child);
+        TRACE("******** deleted page with child %p\n", (void *)child);
     }
 
 

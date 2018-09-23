@@ -1,13 +1,8 @@
 
 TODO: 
   * back to xfterm branch
-  * vpane placement bug:
-    - identified placement is correct on initial window, and incorrect
-      on all subsequent windows without call to page::showIconview().
-      Apparently there is a race once the new page is added and the geometry
-      of the vpane changes... The bug has been identified. Not yet fixed.
   * bash completion: 
-    - finds directory and appends /, giving // to output
+    - finds directory and appends /, giving // to output (when an exec option and directory option are both matches... build/xffm//)
     - if directory and executable are options, directory options are not
       presented in output, only executable (not a bug:
       same happens in bash shell!)

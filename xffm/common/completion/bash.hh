@@ -81,6 +81,7 @@ public:
                 g_free(suggest);
                 suggest = g;
             } else if (tail) {
+		DBG("bash_suggestion: suggest=\"%s\" tail=\"%s\"\n", suggest, tail);
                 gchar *g = g_strconcat(suggest, tail, NULL);
                 g_free(suggest);
                 suggest = g;
@@ -215,6 +216,7 @@ private:
 
         int i;
         if (output) for(i = 1, p = *matches_p; p && p->data; p = p->next, i++) {
+	    DBG("msg_show_match call 1\n");
             msg_show_match(output, match_type, (const gchar *)p->data);
         }
         return suggest;
@@ -224,7 +226,7 @@ private:
     complete_it(GtkTextView *output, GSList **matches_p, gint match_type){
         if (!matches_p || !(*matches_p)) return NULL;
         gchar *suggest = NULL;
-        TRACE( "COMPLETE: matches %d\n", g_slist_length (*matches_p));
+        DBG( "COMPLETE: matches %d\n", g_slist_length (*matches_p));
         if(g_slist_length (*matches_p) == 1) {
             gchar *s =(gchar *)(*matches_p)->data;
             suggest = g_strdup (s);
@@ -232,9 +234,9 @@ private:
             if (output) print_c::show_text(output);
             msg_result_text(output, match_type);
             suggest=base_c::top_match(matches_p);
-            gint i;
             GSList *p;
-            if (output) for(i = 1, p = *matches_p; p && p->data; p = p->next, i++) {
+            if (output) for(p = *matches_p; p && p->data; p = p->next) {
+		DBG("msg_show_match call 12\n");
                 msg_show_match(output, match_type, (const gchar *)p->data);
             }
         }
@@ -246,6 +248,7 @@ private:
         if (*match_count_p <= 0) {
             switch (*match_count_p) {
                 case 0:
+		    DBG("msg_show_match call 123\n");
                     msg_show_match(output, match_type, NULL); break;
                 case -1: 
                     msg_too_many_matches(output); break;
@@ -660,6 +663,8 @@ private:
         gchar *suggest = bash_complete(output, workdir, g_strchug(p), matches_p);
         g_free(p);
         if (suggest) {
+	    DBG("bash_complete_with_head: token=\"%s\", suggest=\"%s\"\n",
+		    token, suggest);
             gchar *g = g_strconcat(token, suggest, NULL);
             g_free(suggest);
             suggest=g;
