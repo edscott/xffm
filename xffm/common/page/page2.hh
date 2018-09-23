@@ -249,7 +249,6 @@ public:
 		return;
 	}
 
-	return;
         if (state) {
             gtk_widget_hide(GTK_WIDGET(this->toggleToIconview_));
             gtk_widget_hide(GTK_WIDGET(this->input_));
@@ -268,7 +267,7 @@ public:
             gtk_widget_show(GTK_WIDGET(this->input_));
             gtk_widget_show(GTK_WIDGET(this->termButtonBox_));
             while (gtk_events_pending())gtk_main_iteration();
-            if (full) print_c::show_textFull(this->output_);
+            if (full) setVpanePosition(0);
             else print_c::show_text(this->output_);
             terminalMode_ = TRUE;
         }

@@ -347,6 +347,7 @@ private:
 
 	DBG("setting vpane position to %d\n", height);
         gtk_paned_set_position (vpane, height);
+	g_object_set_data(G_OBJECT(vpane), "oldCurrent", GINT_TO_POINTER(height));
         return NULL;
     }
 
@@ -366,6 +367,7 @@ private:
 	if (fullview) {
 	    DBG("show_text_buffer_f:setting vpane position to %d\n", min);
 	    gtk_paned_set_position (vpane, min);
+	    g_object_set_data(G_OBJECT(vpane), "oldCurrent", GINT_TO_POINTER(min));
             while (gtk_events_pending()) gtk_main_iteration();
             DBG("vpane position set to =%d\n", gtk_paned_get_position(vpane));
 	    return NULL;
@@ -382,6 +384,7 @@ private:
 	if (gtk_paned_get_position(vpane) > height) {
 	    DBG("setting vpane position to %d\n", height);
 	    gtk_paned_set_position (vpane, height);
+	    g_object_set_data(G_OBJECT(vpane), "oldCurrent", GINT_TO_POINTER(height));
 	} else DBG("not setting vpane position to %d\n", height);
         return NULL;
     }

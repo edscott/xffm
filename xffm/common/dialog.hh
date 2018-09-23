@@ -41,6 +41,10 @@ public:
 	if (!G_IS_OBJECT(vpane)) return;
 	auto oldMax = 
 	    GPOINTER_TO_INT(g_object_get_data(G_OBJECT(vpane), "oldMax"));
+	if (oldMax == 0){
+	    // vpane is not set up yet...
+	    return;
+	}
 	if (!G_IS_OBJECT(vpane)) return;
 	auto oldCurrent = 
 	    GPOINTER_TO_INT(g_object_get_data(G_OBJECT(vpane), "oldCurrent"));

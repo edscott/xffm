@@ -185,6 +185,13 @@ public:
     }
     
     void addPage(const gchar *workdir){
+	gint oldPosition = -1;
+	gboolean terminalMode;
+	if (gtk_notebook_get_current_page (notebook_) >= 0){
+	    oldPosition = gtk_paned_get_position(vpane());
+	    auto w = currentPageObject()->toggleToIconview();
+	    terminalMode = gtk_widget_is_visible(GTK_WIDGET(w));
+	}
         auto page = new(Page<double>);
         g_object_set_data(G_OBJECT(page->pageChild()), "Notebook", (void *)this);
 
@@ -203,14 +210,20 @@ public:
 	
         g_signal_connect(G_OBJECT(page->pageLabelButton()), "clicked", 
                 BUTTON_CALLBACK(notebookSignals<Type>::on_remove_page), (void *)page); 
-	// Default into iconview if set as default...
+	// If current page exists, use the same vpane position, otherwise
+	// use default value 
+	
+	if (oldPosition < 0) {
+	    page->showIconview(page->iconviewIsDefault(), TRUE);
+	} else {
+	    page->showIconview(!terminalMode, FALSE);
+	    setVpanePosition(oldPosition);
+	}
+
 	//if (termView) PageSignals<Type>::toggleToTerminal(NULL, (gpointer)page);
 	//else PageSignals<Type>::toggleToIconview(NULL, (gpointer)page);
 	//page->showIconview(page->iconviewIsDefault(), TRUE);
-	//FIXME FIXME FIXME
-	// multiple tries and fix not found
-	// need to analyse what is happening step by step...
-	PageSignals<Type>::toggleToTerminal(NULL, (gpointer)page);
+	//PageSignals<Type>::toggleToTerminal(NULL, (gpointer)page);
 	//page->showIconview(FALSE, TRUE);
 
 
