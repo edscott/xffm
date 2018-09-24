@@ -751,10 +751,16 @@ public:
         gtk_style_context_add_class(style_context, GTK_STYLE_CLASS_VIEW );
         auto css_provider = gtk_css_provider_new();
         GError *error=NULL;
-        auto data = g_strdup_printf("* {\
-background-color: black;\
-color: white;\
-}");
+        auto data = g_strdup_printf("\
+* {\
+   background-color: black;\
+   color: white;\
+  }\
+*:selected {\
+  background-color: blue;\
+  color: yellow;\
+}\
+");
         gtk_css_provider_load_from_data (css_provider, data, -1, &error);
         g_free(data);
         if (error){
