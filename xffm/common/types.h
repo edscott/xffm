@@ -38,6 +38,8 @@
 # define DBG(...)  fprintf(stderr, "DBG> "); fprintf(stderr, __VA_ARGS__);
 # undef ERROR
 # define ERROR(...)  fprintf(stderr, "*** ERROR> "); fprintf(stderr, __VA_ARGS__);
+# undef WARN
+# define WARN(...)  fprintf(stderr, "warning> "); fprintf(stderr, __VA_ARGS__);
 
 typedef struct menuItem_t {
     const gchar *label;

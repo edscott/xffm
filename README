@@ -1,6 +1,7 @@
 
 TODO: 
   * back to xfterm branch
+  * textview selection color is whitefg and blackbg, which does not go well with current blackbg
   * bash completion: 
     - finds directory and appends /, giving // to output (when an exec option and directory option are both matches... build/xffm//)
     - if directory and executable are options, directory options are not
@@ -14,6 +15,6 @@ TODO:
        GTK_IS_WIDGET (widget)' failed
   * simple rcfile for environment, monitor changes and reload (font size, window size)
   * new tab shows iconview always in slow box (geminis) pinpoints problem.
-  * on return with blank line: /bin/bash -c is executed...
+  * on return with blank line: /bin/bash -c is executed... change behavoir to useful pwd.
   * 20 files with FIXMEs
 

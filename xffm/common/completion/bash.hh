@@ -26,10 +26,20 @@ public:
 
 public:
     static void bash_completion(GtkTextView *input, GtkTextView *output, const char *workdir){
+        TRACE("bash_completion\n");
         gchar *head=print_c::get_text_to_cursor(input);
         gint head_len = strlen(head);
         g_free (head);
         gchar *token = print_c::get_current_text (input);
+        gchar *newToken = tokenExpand(input, token);
+        if (newToken){
+            g_free(token);
+            token = newToken;
+            print_c::clear_text(input);
+            print_c::print(input, "red", g_strdup(newToken));
+            while(gtk_events_pending())gtk_main_iteration();
+            return;
+        }
 
         if (strncmp(token, "sudo", strlen("sudo"))==0 &&
             strncmp(token, "sudo -A", strlen("sudo -A"))){
@@ -44,7 +54,7 @@ public:
         gint token_len = strlen(token);
         gchar *suggest = bash_suggestion(output, workdir, token, head_len);
         g_free (token);
-
+        TRACE("bash_completion; %s\n", suggest);
         if (suggest) {
             gint suggest_len = strlen(suggest);
             GtkTextIter end;
@@ -65,23 +75,26 @@ public:
 
     static gchar *
     bash_suggestion(GtkTextView *output, const char *workdir, const gchar *in_token, gint token_len){
+        TRACE("bash_suggestion\n");
         if (!valid_token(output, in_token)) return NULL;
         gchar *token = g_strdup(in_token);
         gchar *tail = NULL;
-        if (token_len) {
+        if (strlen(in_token+token_len)) {
             tail = g_strdup(in_token + token_len);
             token[token_len] = 0;
         }
-        gint matches;
-        gchar *suggest = bash_complete_with_head(output, workdir, token, &matches);
+        gchar *suggest = bash_complete_with_head(output, workdir, token);
         //fprintf(stderr, "completion count = %d\n", matches);
         if (suggest){
-            if (matches == 1 && suggest[strlen(suggest)-1] != '/') {
-                gchar *g = g_strconcat(suggest, " ", NULL);
-                g_free(suggest);
-                suggest = g;
-            } else if (tail) {
-		DBG("bash_suggestion: suggest=\"%s\" tail=\"%s\"\n", suggest, tail);
+            gint matchCount = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(output), "matchCount"));
+            DBG("got matchCount=%d\n", matchCount);
+            if (suggest[strlen(suggest)-1] != '/' && !tail) {
+                if (matchCount == 1){
+                    tail = g_strdup(" ");
+                }
+            } 
+            if (tail && strlen(tail)) {
+		TRACE("bash_suggestion: suggest=\"%s\" tail=\"%s\"\n", suggest, tail);
                 gchar *g = g_strconcat(suggest, tail, NULL);
                 g_free(suggest);
                 suggest = g;
@@ -89,6 +102,7 @@ public:
         }
         g_free(token);
         g_free(tail);
+	TRACE("retval, bash_suggestion: suggest=\"%s\"\n", suggest);
         return suggest;
     }
 private:
@@ -109,57 +123,7 @@ private:
     }*/
 
     //   private completion methods
-
-    static void
-    msg_too_many_matches(GtkTextView *output){
-	if (!output) return;
-        print_c::show_text(output);
-        gchar *message1=g_strdup_printf("%s (> %ld)",
-                _("Too many matches"), base_c::maxOptions());
-        print_c::print_icon(output, "dialog-info", "red", g_strdup_printf("%s\n", message1));
-        g_free(message1);
-        print_c::scroll_to_bottom(output);
-    }
-
-    static const gchar *
-    get_match_type_text(gint match_type){
-        switch (match_type){
-            case MATCH_COMMAND:
-                return _("Command");
-                break;
-            case MATCH_FILE:
-                return _("File");
-                break;
-            case MATCH_HISTORY:
-                return _("Command history");
-                break;
-            case MATCH_USER:
-                return _("User");
-                break;
-            case MATCH_VARIABLE:
-                return _("Variable");
-                break;
-            case MATCH_HOST:
-                return _("Host");
-                break;
-        }
-        return "WTF";
-    }
     
-    static void
-    msg_show_match(GtkTextView *output, gint match_type, const gchar *match){
-	if (!output) return;
-        print_c::show_text(output);
-        if (!match) {
-            const gchar *option_type = get_match_type_text(match_type);
-            match = _("Found no match");
-            print_c::print_icon(output, "dialog-warning", "red", g_strdup_printf(" %s\n", match));
-        } else {
-            print_c::print(output, ("blue", g_strdup_printf(" %s\n", match)));
-        }
-        print_c::scroll_to_bottom(output);
-    }
-
     static void
     msg_help_text(GtkTextView *output){
 	if (!output) return;
@@ -187,69 +151,26 @@ private:
         print_c::scroll_to_bottom(output);
     }
 
-    static gchar *
-    list_matches (GtkTextView *output, GSList **matches_p, gint match_type){
-	
-        *matches_p = g_slist_sort (*matches_p, base_c::ya_strcmp);
-        GSList *a;
-        GSList *b;
-        int length;
-        GSList *p = *matches_p;
-        char *suggest = g_strdup ((gchar *) (p->data));
-        int equal_length=strlen(suggest);
-        for(a = *matches_p; a && a->data; a = a->next) {
-            TRACE(stderr, "comparing a %s\n", (gchar *)a->data);
-            for(b = a->next; b && b->data; b = b->next) {
-                TRACE(stderr, "comparing b %s\n", (gchar *)b->data);
-                length=util_c::length_equal_string(
-                        (const gchar *)(a->data), (const gchar *)(b->data));
-                if(length < equal_length) {
-                    equal_length = length;
-                }
-                TRACE(stderr, "comparing %s to %s: length=%d\n", (gchar *)a->data, (gchar *)b->data, length);
-            }
-        }
-        suggest[equal_length]=0;
-        TRACE(stderr, "string=%s, equal_length=%d, suggest=%s\n",
-                (gchar *) (p->data), equal_length, suggest);
-
-
-        int i;
-        if (output) for(i = 1, p = *matches_p; p && p->data; p = p->next, i++) {
-	    DBG("msg_show_match call 1\n");
-            msg_show_match(output, match_type, (const gchar *)p->data);
-        }
-        return suggest;
-    }
-
-    static gchar *
-    complete_it(GtkTextView *output, GSList **matches_p, gint match_type){
-        if (!matches_p || !(*matches_p)) return NULL;
-        gchar *suggest = NULL;
-        DBG( "COMPLETE: matches %d\n", g_slist_length (*matches_p));
-        if(g_slist_length (*matches_p) == 1) {
-            gchar *s =(gchar *)(*matches_p)->data;
-            suggest = g_strdup (s);
-        } else {
-            if (output) print_c::show_text(output);
-            msg_result_text(output, match_type);
-            suggest=base_c::top_match(matches_p);
-            GSList *p;
-            if (output) for(p = *matches_p; p && p->data; p = p->next) {
-		DBG("msg_show_match call 12\n");
-                msg_show_match(output, match_type, (const gchar *)p->data);
-            }
-        }
-        return suggest;
+#if 0
+    static void
+    msg_too_many_matches(GtkTextView *output){
+	if (!output) return;
+        print_c::show_text(output);
+        gchar *message1=g_strdup_printf("%s (> %ld)",
+                _("Too many matches"), base_c::maxOptions());
+        print_c::print_icon(output, "dialog-info", "red", g_strdup_printf("%s\n", message1));
+        g_free(message1);
+        print_c::scroll_to_bottom(output);
     }
 
     static gchar *
     msg_output(GtkTextView *output, gint *match_count_p, GSList *matches, gint match_type){
+        TRACE("msg_output\n");
         if (*match_count_p <= 0) {
             switch (*match_count_p) {
                 case 0:
-		    DBG("msg_show_match call 123\n");
-                    msg_show_match(output, match_type, NULL); break;
+		    DBG("No match\n");
+                    //msg_show_match(output, match_type, NULL); break;
                 case -1: 
                     msg_too_many_matches(output); break;
                 default:
@@ -261,231 +182,63 @@ private:
         gchar *suggest = complete_it(output, &matches, match_type);
         return suggest;
     }
+#endif
 
     static gchar *
-    bash_file_completion(GtkTextView *output, const char *workdir, const char *in_file_token, gint *match_count_p){
-        GSList *matches = base_c::base_file_completion(workdir, in_file_token, match_count_p);
-        gchar *suggest = msg_output(output, match_count_p, matches, MATCH_FILE);
-        base_c::free_match_list(matches);
+    bash_file_completion(GtkTextView *output, const char *workdir, const char *in_file_token){
+        gchar *suggest = base_c::base_file_completion(output, workdir, in_file_token);
         return suggest;
     }
 
     static gchar *
-    bash_exec_completion(GtkTextView *output, const char *workdir, const gchar *in_token, gint *match_count_p){
-        fprintf(stderr, "bash_exec_completion for %s\n", in_token);
-        GSList *matches = base_c::base_exec_completion(workdir, in_token, match_count_p);
-        fprintf(stderr, "match count = %d\n", *match_count_p);
-        gchar *suggest = msg_output(output, match_count_p, matches, MATCH_COMMAND);
+    bash_exec_completion(GtkTextView *output, const char *workdir, const gchar *in_token){
+        DBG("bash_exec_completion for %s\n", in_token);
+        gchar *suggest = base_c::base_exec_completion(output, workdir, in_token);
 
-        TRACE( "complete_it: MATCH_COMMAND=%d suggest=%s, matches=%d\n",
-                MATCH_COMMAND, suggest, g_slist_length(matches));
+        DBG( "complete_it: %s,  suggest=%s\n", in_token, suggest);
         if (!suggest) {
-            suggest = base_c::base_file_suggestion(workdir, in_token, match_count_p);
+            suggest = base_c::base_file_completion(output, workdir, in_token);
             if (suggest) {
-
                 gchar *d = g_strdup(workdir);
                 gchar *absolute_suggest = g_build_filename(d, suggest, NULL);
                 g_free(d);
                 g_strchomp (absolute_suggest);
-                TRACE(stderr, "file absolute_suggest=%s (%s)\n", absolute_suggest, suggest);
+                DBG("file absolute_suggest=%s (%s)\n", absolute_suggest, suggest);
                 if (access(absolute_suggest, X_OK) != 0){
                     g_free(suggest);
                     suggest=NULL;
-                    TRACE(stderr, "access \"%s\": %s\n", absolute_suggest, strerror(errno));
+                    WARN("access \"%s\": %s\n", absolute_suggest, strerror(errno));
                 } 
                 g_free(absolute_suggest);
             }
         }
 
-        TRACE(stderr, "suggest=%s\n", suggest);
-        if (*match_count_p==1 && g_file_test(suggest, G_FILE_TEST_IS_DIR)){
-            gchar *s=g_strconcat(suggest, "/", NULL);
-            g_free(suggest);
-            suggest = s;
-        }
-        base_c::free_match_list(matches);
-        return suggest;
-    }
-
-
-
-    static gchar *
-    variable_complete(GtkTextView *output, const gchar *token, gint *match_p){
-        // variable, starts with a $ (pending)
-        gchar **env = environ;
-        GSList *envlist = NULL;
-        for (; env && *env; env++){
-            gchar *e = g_strdup_printf("$%s", *env);
-            if (strchr(e, '=')) {
-                *(strchr(e, '=')) = 0;
-                envlist = g_slist_prepend (envlist, e);
+        DBG("suggest=%s\n", suggest);
+        if (suggest && g_file_test(suggest, G_FILE_TEST_IS_DIR)){
+            // only add slash if not already in suggest string...
+            if (suggest[strlen(suggest)-1] != G_DIR_SEPARATOR) {
+                gchar *s=g_strconcat(suggest, G_DIR_SEPARATOR_S, NULL);
+                g_free(suggest);
+                suggest = s;
             }
-        }
-        GSList *matches = NULL;
-        GSList *list;
-        for (list=envlist; list && list->data; list = list->next){
-            if (strncmp(token, (gchar *)list->data, strlen(token))==0){
-                matches = g_slist_prepend (matches, g_strdup((gchar *)list->data));
-            } 
-        }
-        if (matches){
-            *match_p = g_slist_length(matches);
-        } else {
-            *match_p = 0;
-        }
-        for (list=envlist; list && list->data; list = list->next){ g_free(list->data);}
-        g_slist_free(envlist);
-        gchar *suggest = complete_it(output, &matches, MATCH_VARIABLE);
-        for (list=matches; list && list->data; list = list->next){ g_free(list->data);}
-        g_slist_free(matches);
-        return suggest;
-    }
-
-
-    static gchar *
-    userdir_complete(GtkTextView *output, const gchar *token, gint *match_p){
-        // username, starts with a ~ (pending)
-        // Get username from passwd. If user has a shell, append a /
-        // otherwise, append a space.
-        // Function: 
-        struct passwd *pw;
-        GSList *pwlist = NULL;
-        while((pw = getpwent ()) != NULL) {
-            gboolean shell_ok = strcmp(pw->pw_shell, "/bin/false") && 
-                g_file_test(pw->pw_shell, G_FILE_TEST_IS_EXECUTABLE);
-            pwlist = g_slist_prepend (pwlist, g_strdup_printf ("~%s%s", 
-                    pw->pw_name,
-                    (shell_ok)?"/":""));
-    // bug: space will be escaped on 2+ completion:	(shell_ok)?"/":" "));
-        }
-        endpwent ();
-        GSList *matches = NULL;
-        GSList *list;
-        for (list=pwlist; list && list->data; list = list->next){
-            if (strncmp(token, (gchar *)list->data, strlen(token))==0){
-                matches = g_slist_prepend (matches, g_strdup((gchar *)list->data));
-            } 
-        }
-        if (matches){
-            *match_p = g_slist_length(matches);
-        } else {
-            *match_p = 0;
-        }
-        for (list=pwlist; list && list->data; list = list->next){ g_free(list->data);}
-        g_slist_free(pwlist);
-        gchar *suggest = complete_it(output, &matches, MATCH_USER);
-        for (list=matches; list && list->data; list = list->next){ g_free(list->data);}
-        g_slist_free(matches);
-        return suggest;
-    }
-
-    static gchar *
-    hostname_complete(GtkTextView *output, const gchar *token, gint *match_p){
-        // hostname, starts with a @ (pending)
-        // Get host from /etc/hosts
-        GSList *hostlist = NULL;
-        FILE *hosts=fopen("/etc/hosts", "r");
-        if (hosts){
-            gchar buffer[1024];
-            memset (buffer, 0, 1024);
-            while(fgets(buffer, 1023, hosts) && !feof(hosts)){
-                g_strchug(buffer);
-                if (*buffer == '#') continue;
-                gchar *t[2];
-                t[0] = strchr(buffer, '\t');
-                t[1] = strchr(buffer, ' ');
-                gchar *p=NULL;
-                if (t[0] && t[1]) {
-                    if (t[0] < t[1]) p = t[0];
-                    else p = t[1];
-                } else if (t[0]) p = t[0];
-                else p = t[1];
-                // chop
-                if (p) {
-                    if (strchr(p, '\n')) *strchr(p, '\n')=0;
-                    g_strstrip(p);
-                    hostlist = g_slist_prepend(hostlist, g_strdup_printf("@%s", p));
-                }
-            }
-            fclose(hosts);
-        }
-        GSList *matches = NULL;
-        GSList *list;
-        for (list=hostlist; list && list->data; list = list->next){
-            if (strncmp(token, (gchar *)list->data, strlen(token))==0){
-                matches = g_slist_prepend (matches, g_strdup((gchar *)list->data));
-            } 
-        }
-        if (matches){
-            *match_p = g_slist_length(matches);
-        } else {
-            *match_p = 0;
-        }
-        for (list=hostlist; list && list->data; list = list->next){ g_free(list->data);}
-        g_slist_free(hostlist);
-        gchar *suggest = complete_it(output, &matches, MATCH_HOST);
-        for (list=matches; list && list->data; list = list->next){ g_free(list->data);}
-        g_slist_free(matches);
-        return suggest;
-
-        return NULL;
-    }
-
-    static gchar *
-    extra_completion(GtkTextView *output, const gchar *token, gint *matches_p){
-       if (*token == '$' || *token == '@' || *token == '~'){
-            gchar *suggest = NULL;
-            switch (*token){
-                case '$':
-                    suggest = variable_complete(output, token, matches_p);
-                    break;
-                case '~':
-                    suggest = userdir_complete(output, token, matches_p);
-                    break;
-                case '@':
-                    suggest = hostname_complete(output, token, matches_p);
-                    break;
-            }
-            return suggest;
-        }
-       return NULL;
-    }
-
-    static gchar *
-    extra_space(gchar *suggest, gint *matches_p){
-        gint loc = strlen(suggest) -1;
-        if (loc < 0) loc = 0;
-        if (*matches_p == 1 && suggest[loc] != '/'){
-            gchar *g = g_strconcat(suggest, " ", NULL);
-            g_free(suggest);
-            suggest = g;
         }
         return suggest;
     }
 
 #define ALT_CHAR 13
     static gchar *
-    bash_complete(GtkTextView *output, const char *workdir, const gchar *token, gint *matches_p){
+    bash_complete(GtkTextView *output, const char *workdir, const gchar *token){
         //
         // If we are dealing with file completion, then we have a head.
-
+        TRACE("bash_complete\n");
         gchar *active_token = g_strdup(token);
         g_strchug(active_token);
         gchar *file_token = NULL;
         gchar *command_token = NULL;
         const gchar *head = NULL;
 
-        gchar *suggest = extra_completion(output, active_token, matches_p);
-        if (suggest) {
-            suggest = extra_space(suggest, matches_p);
-            if (strcmp(suggest, active_token)==0){
-                g_free(suggest);
-                suggest = util_c::get_tilde_dir(active_token);
-            }
-            g_free(active_token);
-            return suggest;
-        }
-     
+        gchar *suggest = NULL;
+
         // Obtain the file token separation, if any.
         gboolean esc_space;
         // Test for use of escaped spaces.
@@ -576,30 +329,11 @@ private:
             head = active_token;
         }
 
-        gboolean extra_completed = FALSE;
         if (command_token) {
-            suggest = extra_completion(output, command_token, matches_p);
-            TRACE( "extra_completion ...%s -> %s\n", command_token, suggest);
-            if (suggest && strcmp(suggest, command_token)==0){
-                g_free(suggest);
-                suggest = util_c::get_tilde_dir(command_token);
-                TRACE( "extra_completion ...%s -> %s\n", command_token, suggest);
-            }
-            if (!suggest) {
-                suggest = bash_exec_completion(output, workdir, command_token, matches_p);	
-                TRACE( "bash_exec_completion ...%s -> %s\n", command_token, suggest);
-            } else extra_completed = TRUE;
+                suggest = bash_exec_completion(output, workdir, command_token);	
         }
         else if (file_token) {
-            TRACE( "bash_file_completion ...%s\n", file_token);
-            suggest = extra_completion(output, file_token, matches_p);
-            if (suggest && strcmp(suggest, file_token)==0){
-                g_free(suggest);
-                suggest = util_c::get_tilde_dir(file_token);
-            }
-            if (!suggest) {
-                suggest = bash_file_completion(output, workdir, file_token, matches_p);
-            }  else extra_completed = TRUE;
+                suggest = bash_file_completion(output, workdir, file_token);
         }
 
         if (suggest) {
@@ -624,10 +358,6 @@ private:
             }
           }
         }
-        // add final space for $, @ and ~ completion.
-        if (extra_completed){
-            suggest = extra_space(suggest, matches_p);
-        }
         if (head && suggest) {
             gchar *g = g_strconcat(head, suggest, NULL);
             g_free(suggest);
@@ -642,12 +372,13 @@ private:
 
 
     static gchar *
-    bash_complete_with_head(GtkTextView *output, const char *workdir, const gchar *in_token, gint *matches_p){
+    bash_complete_with_head(GtkTextView *output, const char *workdir, const gchar *in_token){
         // Do we have a command separator?
         gboolean multiple_command = (strrchr(in_token, ';') || strrchr(in_token, '&') ||  strrchr(in_token, '|'));
 
         if (!multiple_command){
-            return bash_complete(output, workdir, in_token, matches_p);
+            TRACE("bash_complete_with_head: !multiple_command\n");
+            return bash_complete(output, workdir, in_token);
         }
         gchar *token = g_strdup(in_token);
         gchar *t[3];
@@ -660,7 +391,7 @@ private:
         else g_error("should never happen");
         gchar *p = g_strdup(t[i]+1);
         *(t[i]+1) = 0;
-        gchar *suggest = bash_complete(output, workdir, g_strchug(p), matches_p);
+        gchar *suggest = bash_complete(output, workdir, g_strchug(p));
         g_free(p);
         if (suggest) {
 	    DBG("bash_complete_with_head: token=\"%s\", suggest=\"%s\"\n",
@@ -689,6 +420,39 @@ private:
         g_free(t);
         return TRUE;
     }
+
+
+    static gchar *tokenExpand(GtkTextView *input, const gchar *token){
+       gchar *newToken = NULL;
+       if (strchr(token,'~')){
+           gchar *g = g_strdup(token);
+           *(strchr(g, '~')) = 0;
+           gchar *gg = g_strdup(strchr(token, '~') +1);
+           newToken = g_strconcat(g, g_get_home_dir(), gg, NULL);
+           g_free(g);
+           g_free(gg);
+
+       }
+       else if (strchr(token,'$')){
+           gchar *g = g_strdup(token);
+           *(strchr(g, '$')) = 0;
+            gchar *t = g_strdup(strchr(token, '$'));
+            gint len = 0;
+            for (gchar *tt = t; tt && *tt; tt++, len++){
+                if (*tt == G_DIR_SEPARATOR || *tt == ' ') {
+                    *tt = 0;
+                    break;
+                }
+            }
+            const gchar *e = getenv(t+1);
+            if (e && strlen(e)){
+                newToken = g_strconcat(g, e, token+len+strlen(g), NULL);
+            }
+            g_free(t);
+            g_free(g);
+       } 
+       return newToken;
+    }    
 
 
 

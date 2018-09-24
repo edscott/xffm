@@ -274,6 +274,8 @@ public:
 
     gchar * 
     run_lp_command(GtkTextView *output, const gchar *workdir, const gchar *command){
+        // On empty string, do a simple pwd
+        if (!command || !strlen(command)) command = "pwd";
         // escape all quotes
         gchar *ncommand;
         if (strchr (command, '\"') || strchr(command,'\'')){

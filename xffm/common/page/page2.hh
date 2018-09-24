@@ -156,6 +156,10 @@ public:
     
     void scriptRun(void){
 	    gchar *command = print_c::get_current_text(this->input());
+            if (!command || !strlen(command)){
+                g_free(command);
+                command = g_strdup("ls --color -Flah");
+            }
             gchar *g = g_strdup_printf("script -f -c \"%s\" /dev/null", command);
             g_free(command);
             command = g;

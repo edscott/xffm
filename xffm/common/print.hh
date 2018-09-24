@@ -345,7 +345,7 @@ private:
 	gtk_widget_get_allocation(window, &allocation);
 	gint height = allocation.height;
 
-	DBG("setting vpane position to %d\n", height);
+	TRACE("setting vpane position to %d\n", height);
         gtk_paned_set_position (vpane, height);
 	g_object_set_data(G_OBJECT(vpane), "oldCurrent", GINT_TO_POINTER(height));
         return NULL;
@@ -365,11 +365,11 @@ private:
 	g_object_get(G_OBJECT(vpane), "min-position", &min, NULL);
 	g_object_get(G_OBJECT(vpane), "max-position", &max, NULL);
 	if (fullview) {
-	    DBG("show_text_buffer_f:setting vpane position to %d\n", min);
+	    TRACE("show_text_buffer_f:setting vpane position to %d\n", min);
 	    gtk_paned_set_position (vpane, min);
 	    g_object_set_data(G_OBJECT(vpane), "oldCurrent", GINT_TO_POINTER(min));
             while (gtk_events_pending()) gtk_main_iteration();
-            DBG("vpane position set to =%d\n", gtk_paned_get_position(vpane));
+            TRACE("vpane position set to =%d\n", gtk_paned_get_position(vpane));
 	    return NULL;
 	}
 	//GtkWidget *window = gtk_widget_get_toplevel(GTK_WIDGET(vpane));
@@ -380,12 +380,12 @@ private:
 	gint vheight = allocation.height;
         gint height = 2*vheight/4;
 
-        DBG("vheight = %d, position = %d\n", vheight, gtk_paned_get_position(vpane));
+        TRACE("vheight = %d, position = %d\n", vheight, gtk_paned_get_position(vpane));
 	if (gtk_paned_get_position(vpane) > height) {
-	    DBG("setting vpane position to %d\n", height);
+	    TRACE("setting vpane position to %d\n", height);
 	    gtk_paned_set_position (vpane, height);
 	    g_object_set_data(G_OBJECT(vpane), "oldCurrent", GINT_TO_POINTER(height));
-	} else DBG("not setting vpane position to %d\n", height);
+	} else TRACE("not setting vpane position to %d\n", height);
         return NULL;
     }
 
@@ -619,7 +619,7 @@ private:
                     codes = (gchar **)calloc(2, sizeof(gchar*));
                     codes[0] = g_strdup(ss[0]);
                 }
-                DBG( "1.splitting %s --> %s, %s: codes[0]=%s\n", *pp, ss[0], ss[1],codes[0]);
+                TRACE( "1.splitting %s --> %s, %s: codes[0]=%s\n", *pp, ss[0], ss[1],codes[0]);
                 // construct xffm tag
                 gchar **t;
                 gchar *thisTag=NULL;
@@ -636,9 +636,9 @@ private:
                         }
                         continue;
                     } else {
-                        DBG("ansiTag=%s\n", ansiTag);
+                        TRACE("ansiTag=%s\n", ansiTag);
                         fullTag = concat(&fullTag, "/", ansiTag);
-                        DBG("fullTag= %s\n", fullTag); 
+                        TRACE("fullTag= %s\n", fullTag); 
                     }
                 }
                 // Insert string

@@ -152,8 +152,8 @@ public:
                                     textview, // XXX view_v,
                                     flags);
         pid_t grandchild=tubo_c::getChild (pid);
-#ifdef DEBUG_TRACE        
-        print_c::print_icon(textview, "system-run", "green", g_strdup_printf("<%d> %s\n", grandchild, command));
+#if 1       
+        print_c::print_icon(textview, "system-run", "green", g_strdup_printf("%d:%s\n", grandchild, command));
 #else
         print_c::print_icon(textview, "system-run", "bold", g_strdup_printf("%s\n", command));
 #endif
@@ -195,6 +195,7 @@ public:
         GError *error = NULL;
         gint argc;
         gchar **argv;
+
 
         gchar *ncommand;
         if (run_in_shell(command)){
@@ -271,9 +272,11 @@ public:
         outline[j] = 0;
 
         if(strncmp (line, exit_token, strlen (exit_token)) == 0) {
+#ifdef DEBUG
             gchar *string = exit_string(line);
             print_c::print_icon(textview, "process-stop", g_strdup(string));
             g_free(string);
+#endif
         } else {
             print_c::print(textview, g_strdup(outline));
         }
@@ -310,7 +313,7 @@ public:
             } else if (strstr(line, "warning")||strstr(line, _("warning"))) {
                 print_c::print(textview, "yellow", g_strdup(line));
             } else {                
-                print_c::print(textview, "red", g_strdup(line));
+                print_c::print(textview, "Red", g_strdup(line));
             }
                 //print_c::print(textview, g_strdup(line));
         }

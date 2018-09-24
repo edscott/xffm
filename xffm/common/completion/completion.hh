@@ -97,6 +97,7 @@ public:
         }
         // tab for bash completion.
         if(event->keyval == GDK_KEY_Tab) {
+            WARN("event->keyval == GDK_KEY_Tab\n");
             BashCompletion<Type>::bash_completion(completionInput_, completionOutput_, ((Page<Type> *)this)->workDir());
             return TRUE;
         }
