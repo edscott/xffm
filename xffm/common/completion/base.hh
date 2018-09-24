@@ -226,7 +226,7 @@ private:
             //msg_too_many_matches();
             //*match_count_p = -1;
         } else if (stack_glob_v.gl_pathc == 0){
-            ERROR("NO MATCHES\n");
+            DBG("NO MATCHES\n");
             globfree(&stack_glob_v);
             g_free(token);
             return NULL;
@@ -247,7 +247,7 @@ private:
                     base = g_path_get_basename(stack_glob_v.gl_pathv[i]);
                 }
                 matches = g_slist_append (matches, base);
-                DBG("%d) %s\n", i, base);
+                TRACE("%d) %s\n", i, base);
             }
         }
         globfree(&stack_glob_v);
@@ -385,7 +385,7 @@ private:
         else if (which == MATCH_COMMAND)
             suggest = base_exec_completion(output, workdir, in_file_token);
         else {
-            ERROR( "unknown match type: %d\n", which);
+            DBG( "unknown match type: %d\n", which);
             return NULL;
         }
 
@@ -403,19 +403,19 @@ private:
 
     static gchar *
     base_file_suggestion(GtkTextView *output, const gchar *workdir, const char *in_file_token){
-        DBG("base_file_suggestion\n");
+        TRACE("base_file_suggestion\n");
         return base_suggestion(output, MATCH_FILE, workdir, in_file_token);
     }
 
     static gchar *
     base_exec_suggestion(GtkTextView *output, const gchar *workdir, const char *in_file_token){
-        DBG("base_exec_suggestion\n");
+        TRACE("base_exec_suggestion\n");
         return base_suggestion(output, MATCH_COMMAND, workdir, in_file_token);
     }
 
     static void
     free_match_list(GSList *matches){
-        DBG("free_match_list\n");
+        TRACE("free_match_list\n");
         GSList *p=matches;
         for (;p && p->data; p=p->next) g_free(p->data);
         g_slist_free (matches);

@@ -87,7 +87,7 @@ public:
         //fprintf(stderr, "completion count = %d\n", matches);
         if (suggest){
             gint matchCount = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(output), "matchCount"));
-            DBG("got matchCount=%d\n", matchCount);
+            TRACE("got matchCount=%d\n", matchCount);
             if (suggest[strlen(suggest)-1] != '/' && !tail) {
                 if (matchCount == 1){
                     tail = g_strdup(" ");
@@ -169,7 +169,7 @@ private:
         if (*match_count_p <= 0) {
             switch (*match_count_p) {
                 case 0:
-		    DBG("No match\n");
+		    TRACE("No match\n");
                     //msg_show_match(output, match_type, NULL); break;
                 case -1: 
                     msg_too_many_matches(output); break;
@@ -192,10 +192,10 @@ private:
 
     static gchar *
     bash_exec_completion(GtkTextView *output, const char *workdir, const gchar *in_token){
-        DBG("bash_exec_completion for %s\n", in_token);
+        TRACE("bash_exec_completion for %s\n", in_token);
         gchar *suggest = base_c::base_exec_completion(output, workdir, in_token);
 
-        DBG( "complete_it: %s,  suggest=%s\n", in_token, suggest);
+        TRACE( "complete_it: %s,  suggest=%s\n", in_token, suggest);
         if (!suggest) {
             suggest = base_c::base_file_completion(output, workdir, in_token);
             if (suggest) {
@@ -203,7 +203,7 @@ private:
                 gchar *absolute_suggest = g_build_filename(d, suggest, NULL);
                 g_free(d);
                 g_strchomp (absolute_suggest);
-                DBG("file absolute_suggest=%s (%s)\n", absolute_suggest, suggest);
+                TRACE("file absolute_suggest=%s (%s)\n", absolute_suggest, suggest);
                 if (access(absolute_suggest, X_OK) != 0){
                     g_free(suggest);
                     suggest=NULL;
@@ -213,7 +213,7 @@ private:
             }
         }
 
-        DBG("suggest=%s\n", suggest);
+        TRACE("suggest=%s\n", suggest);
         if (suggest && g_file_test(suggest, G_FILE_TEST_IS_DIR)){
             // only add slash if not already in suggest string...
             if (suggest[strlen(suggest)-1] != G_DIR_SEPARATOR) {
@@ -394,7 +394,7 @@ private:
         gchar *suggest = bash_complete(output, workdir, g_strchug(p));
         g_free(p);
         if (suggest) {
-	    DBG("bash_complete_with_head: token=\"%s\", suggest=\"%s\"\n",
+	    TRACE("bash_complete_with_head: token=\"%s\", suggest=\"%s\"\n",
 		    token, suggest);
             gchar *g = g_strconcat(token, suggest, NULL);
             g_free(suggest);
