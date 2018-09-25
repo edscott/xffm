@@ -109,6 +109,14 @@ public:
 	void *arg[]={(void *)vpane, GINT_TO_POINTER(1),NULL};
         context_function(show_text_buffer_f, arg);
     }
+ /*   static gboolean show_textFull(void *data){
+	show_textFull(GTK_TEXT_VIEW(data));
+	return FALSE;
+    }
+    static gboolean hide_text(void *data){
+	hide_text(GTK_TEXT_VIEW(data));
+	return FALSE;
+    } */
 
 
     static void hide_text(GtkTextView *textview){
@@ -328,7 +336,7 @@ private:
         auto arg=(void **)data;
         auto vpane = GTK_PANED(arg[0]);
         if(!vpane) {
-            DBG("vpane is NULL\n");
+            ERROR("vpane is NULL\n");
             return NULL;
         }
 	gint max;
@@ -337,32 +345,31 @@ private:
 	gtk_widget_get_allocation(window, &allocation);
 	gint height = allocation.height;
 
-	//g_object_get(G_OBJECT(vpane), "max-position", &max, NULL);
-	DBG("setting vpane position to %d\n", height);
+	TRACE("setting vpane position to %d\n", height);
         gtk_paned_set_position (vpane, height);
+	g_object_set_data(G_OBJECT(vpane), "oldCurrent", GINT_TO_POINTER(height));
         return NULL;
     }
 
     static void *
     show_text_buffer_f (void *data) {
-            DBG("show_text_buffer_f\n");
         if (!data) return GINT_TO_POINTER(-1);
         auto arg=(void **)data;
         auto vpane = GTK_PANED(arg[0]);
 	auto fullview =arg[1]; 
         if(!vpane) {
-            DBG("vpane is NULL\n");
+            ERROR("vpane is NULL\n");
             return NULL;
         }
-        DBG("show_text_fuffer_f full=%d\n", GPOINTER_TO_INT(fullview));
         gint min, max;
 	g_object_get(G_OBJECT(vpane), "min-position", &min, NULL);
 	g_object_get(G_OBJECT(vpane), "max-position", &max, NULL);
 	if (fullview) {
-	    DBG("show_text_buffer_f:setting vpane position to %d\n", min);
+	    TRACE("show_text_buffer_f:setting vpane position to %d\n", min);
 	    gtk_paned_set_position (vpane, min);
+	    g_object_set_data(G_OBJECT(vpane), "oldCurrent", GINT_TO_POINTER(min));
             while (gtk_events_pending()) gtk_main_iteration();
-            DBG("vpane position=%d\n", gtk_paned_get_position(vpane));
+            TRACE("vpane position set to =%d\n", gtk_paned_get_position(vpane));
 	    return NULL;
 	}
 	//GtkWidget *window = gtk_widget_get_toplevel(GTK_WIDGET(vpane));
@@ -373,11 +380,12 @@ private:
 	gint vheight = allocation.height;
         gint height = 2*vheight/4;
 
-        DBG("vheight = %d, position = %d\n", vheight, gtk_paned_get_position(vpane));
+        TRACE("vheight = %d, position = %d\n", vheight, gtk_paned_get_position(vpane));
 	if (gtk_paned_get_position(vpane) > height) {
-	    DBG("setting vpane position to %d\n", height);
+	    TRACE("setting vpane position to %d\n", height);
 	    gtk_paned_set_position (vpane, height);
-	} else DBG("not setting vpane position to %d\n", height);
+	    g_object_set_data(G_OBJECT(vpane), "oldCurrent", GINT_TO_POINTER(height));
+	} else TRACE("not setting vpane position to %d\n", height);
         return NULL;
     }
 
@@ -512,7 +520,7 @@ private:
         } 
 
         tag = gtk_text_tag_table_lookup (gtk_text_buffer_get_tag_table (buffer), id);
-        // if (!tag) DBG("No GtkTextTag for %s\n", id);
+        // if (!tag) ERROR("No GtkTextTag for %s\n", id);
         return tag;
     }
 
@@ -537,7 +545,7 @@ private:
         for (t=userTags; t && *t;t++){
             tags[i] = resolve_tag (buffer, *t);
             if (tags[i] == NULL) {
-                DBG("*** print_c::invalid tag: \"%s\"\n", *t);
+                ERROR("*** print_c::invalid tag: \"%s\"\n", *t);
             } else i++;
         }
         g_strfreev(userTags);
@@ -611,14 +619,14 @@ private:
                     codes = (gchar **)calloc(2, sizeof(gchar*));
                     codes[0] = g_strdup(ss[0]);
                 }
-                DBG( "1.splitting %s --> %s, %s: codes[0]=%s\n", *pp, ss[0], ss[1],codes[0]);
+                TRACE( "1.splitting %s --> %s, %s: codes[0]=%s\n", *pp, ss[0], ss[1],codes[0]);
                 // construct xffm tag
                 gchar **t;
                 gchar *thisTag=NULL;
                 for (t=codes; t && *t; t++){
                     const gchar *ansiTag = get_ansi_tag(*t);
                     if (!ansiTag){
-                        DBG("no ansiTag for \"%s\"\n", *t);
+                        ERROR("no ansiTag for \"%s\"\n", *t);
                         if (strcmp(*t, "0")) {
                             g_free(fullTag); fullTag = NULL;
                             g_free(textviewTags); textviewTags = NULL;
@@ -628,9 +636,9 @@ private:
                         }
                         continue;
                     } else {
-                        DBG("ansiTag=%s\n", ansiTag);
+                        TRACE("ansiTag=%s\n", ansiTag);
                         fullTag = concat(&fullTag, "/", ansiTag);
-                        DBG("fullTag= %s\n", fullTag); 
+                        TRACE("fullTag= %s\n", fullTag); 
                     }
                 }
                 // Insert string
@@ -743,14 +751,20 @@ public:
         gtk_style_context_add_class(style_context, GTK_STYLE_CLASS_VIEW );
         auto css_provider = gtk_css_provider_new();
         GError *error=NULL;
-        auto data = g_strdup_printf("* {\
-background-color: black;\
-color: white;\
-}");
+        auto data = g_strdup_printf("\
+textview text {\
+   background-color: black;\
+   color: white;\
+  }\
+.view text selection {\
+  background-color: blue;\
+  color: yellow;\
+}\
+");
         gtk_css_provider_load_from_data (css_provider, data, -1, &error);
         g_free(data);
         if (error){
-            DBG("gtk_css_provider_load_from_data: %s\n", error->message);
+            ERROR("gtk_css_provider_load_from_data: %s\n", error->message);
             g_error_free(error);
             return;
         }
@@ -780,7 +794,7 @@ font-size: %dpx;\
         gtk_css_provider_load_from_data (css_provider, data, -1, &error);
         g_free(data);
         if (error){
-            DBG("gtk_css_provider_load_from_data: %s\n", error->message);
+            ERROR("gtk_css_provider_load_from_data: %s\n", error->message);
             g_error_free(error);
             return;
         }

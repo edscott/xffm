@@ -22,7 +22,7 @@ public:
 	g_object_set(G_OBJECT(vpane_), "position-set", TRUE, NULL);
         gtk_container_add (GTK_CONTAINER(bottom_scrolled_window_), GTK_WIDGET(output_));
         
-        gtk_widget_show_all(GTK_WIDGET(vpane_));
+        //gtk_widget_show_all(GTK_WIDGET(vpane_));
         return ;
     }
 

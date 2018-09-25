@@ -2,6 +2,7 @@
 # define TYPES_H
 
 
+#define SELECTION_RECEIVED_CALLBACK(X)  G_CALLBACK((void (*)(GtkWidget *,GtkSelectionData *,guint,gpointer)) X)
 #define RESPONSE_EVENT_CALLBACK(X)  G_CALLBACK((gint (*)(GtkDialog *,GdkEvent *,gpointer)) X)
 #define ENTRY_CALLBACK(X)  G_CALLBACK((void (*)(GtkEntry *,gpointer)) X)
 #define RANGE_CALLBACK(X)  G_CALLBACK((gboolean (*)(GtkRange *,GtkScrollType,gdouble,gpointer)) X)
@@ -29,6 +30,16 @@
 #define SIZE_PREVIEW	96
 #define SIZE_TIP	128
 
+# undef TRACE
+# define TRACE(...)   { (void)0; }
+//# define TRACE(...)  fprintf(stderr, "TRACE> "); fprintf(stderr, __VA_ARGS__);
+# undef DBG
+//# define DBG(...)   { (void)0; }
+# define DBG(...)  fprintf(stderr, "DBG> "); fprintf(stderr, __VA_ARGS__);
+# undef ERROR
+# define ERROR(...)  fprintf(stderr, "*** ERROR> "); fprintf(stderr, __VA_ARGS__);
+# undef WARN
+# define WARN(...)  fprintf(stderr, "warning> "); fprintf(stderr, __VA_ARGS__);
 
 typedef struct menuItem_t {
     const gchar *label;

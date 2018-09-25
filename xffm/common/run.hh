@@ -47,7 +47,7 @@ private:
         auto string = (gchar *)g_hash_table_lookup (stringHash, GINT_TO_POINTER(controller));
         if (!string){
             pthread_mutex_unlock(&string_hash_mutex);
-            DBG("controller %d not found in hashtable\n", controller);
+            ERROR("controller %d not found in hashtable\n", controller);
             return g_strdup("");
         }
         g_hash_table_steal(stringHash, GINT_TO_POINTER(controller));
@@ -101,7 +101,7 @@ public:
             g_free(command);
             command = g;
         }
-        DBG("thread_run command = %s\n", command);
+        TRACE("thread_run command = %s\n", command);
         int flags = TUBO_EXIT_TEXT|TUBO_VALID_ANSI|TUBO_CONTROLLER_PID;
         /* FIXME: workdir must be set in constructor
         if (chdir(get_workdir())<0){
@@ -152,10 +152,10 @@ public:
                                     textview, // XXX view_v,
                                     flags);
         pid_t grandchild=tubo_c::getChild (pid);
-#ifdef DEBUG_TRACE        
-        print_c::print_icon(textview, "system-run", "tag/green", g_strdup_printf("<%d> %s\n", grandchild, command));
+#if 1       
+        print_c::print_icon(textview, "system-run", "green", g_strdup_printf("%d:%s\n", grandchild, command));
 #else
-        print_c::print_icon(textview, "system-run", "tag/bold", g_strdup_printf("%s\n", command));
+        print_c::print_icon(textview, "system-run", "bold", g_strdup_printf("%s\n", command));
 #endif
         push_hash(grandchild, g_strdup(command));
         g_free(command);
@@ -196,10 +196,13 @@ public:
         gint argc;
         gchar **argv;
 
+
         gchar *ncommand;
         if (run_in_shell(command)){
             ncommand = g_strdup_printf("%s -c \"%s\"", util_c::u_shell(), command);
-        } else ncommand = g_strdup(command);
+        } else {
+            ncommand = g_strdup(command);
+        }
         if(!g_shell_parse_argv (ncommand, &argc, &argv, &error)) {
             auto msg = g_strcompress (error->message);
             print_c::print_error(textview, g_strdup_printf("%s: %s\n", msg, ncommand));
@@ -269,9 +272,11 @@ public:
         outline[j] = 0;
 
         if(strncmp (line, exit_token, strlen (exit_token)) == 0) {
+#ifdef DEBUG
             gchar *string = exit_string(line);
             print_c::print_icon(textview, "process-stop", g_strdup(string));
             g_free(string);
+#endif
         } else {
             print_c::print(textview, g_strdup(outline));
         }
@@ -302,11 +307,13 @@ public:
         line = (char *)stream;
         if(line[0] != '\n') {
             if (strstr(line, "error")||strstr(line,_("error"))) {
-                print_c::print(textview, "tag/magenta", g_strdup(line));
+                print_c::print(textview, "Magenta", g_strdup(line));
+            } else if (strstr(line, "***")) {
+                print_c::print(textview, "red/white_bg", g_strdup(line));
             } else if (strstr(line, "warning")||strstr(line, _("warning"))) {
-                print_c::print(textview, "tag/yellow", g_strdup(line));
+                print_c::print(textview, "yellow", g_strdup(line));
             } else {                
-                print_c::print(textview, "tag/red", g_strdup(line));
+                print_c::print(textview, "Red", g_strdup(line));
             }
                 //print_c::print(textview, g_strdup(line));
         }
@@ -325,7 +332,7 @@ public:
         auto textview = GTK_TEXT_VIEW(data);
         auto line = (gchar *)stream;
 
-        print_c::print(textview, "tag/green",  g_strdup(line));
+        print_c::print(textview, "green",  g_strdup(line));
         // This is a bit hacky, to keep runaway output from hogging
         // up the gtk event loop.
         static gint count = 1;
@@ -342,7 +349,7 @@ public:
         auto textview = GTK_TEXT_VIEW(data);
         auto line = (gchar *)stream;
 
-        print_c::print(textview, "tag/red",  g_strdup(line));
+        print_c::print(textview, "red",  g_strdup(line));
         // This is a bit hacky, to keep runaway output from hogging
         // up the gtk event loop.
         static gint count = 1;
@@ -356,7 +363,7 @@ public:
 
     static gboolean scrollToTop_f(void *data) {
         //view_c *view_p = (view_c *)data;
-        //view_p->get_lpterm_p()->print("tag/bold", g_strdup_printf("%s\n", "run complete."));
+        //view_p->get_lpterm_p()->print("bold", g_strdup_printf("%s\n", "run complete."));
         auto textview = GTK_TEXT_VIEW(data);
         print_c::show_text(textview);
         print_c::scroll_to_top(textview);
@@ -365,18 +372,18 @@ public:
 
     static void
     scrollToTop (void *data) {
-        g_timeout_add(1, scrollToTop_f, data);                                                
+        g_timeout_add(5, scrollToTop_f, data);                                                
     }
 
     static gboolean done_f(void *data) {
         //view_c *view_p = (view_c *)data;
-        //view_p->get_lpterm_p()->print("tag/bold", g_strdup_printf("%s\n", "run complete."));
+        //view_p->get_lpterm_p()->print("bold", g_strdup_printf("%s\n", "run complete."));
         return FALSE;
     }
 
     static void
     fork_finished_function (void *data) {
-        g_timeout_add(1, done_f, data);                                                
+        g_timeout_add(5, done_f, data);                                                
     }
 
     static void
@@ -484,7 +491,7 @@ public:
     shell_command(GtkTextView *textview, const gchar *c, gboolean scrollUp){
 	// Make sure any sudo command has the "-A" option
 	auto command = sudo_fix(c);
-	DBG("shell_command = %s\n", c);
+	TRACE("shell_command = %s\n", c);
 	pid_t pid = thread_run(textview, command?command:c, scrollUp);
 	g_free (command);
 	if (!pid) return 0;

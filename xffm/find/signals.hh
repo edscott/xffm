@@ -159,18 +159,27 @@ public:
         return FALSE;
     }
 
-    static gint
-    on_key_release (GtkWidget * widget, GdkEventKey * event, gpointer data) {
+    static void grepOptions (GtkEntry *widget, gpointer data) {
         gboolean active = FALSE;
 	gchar *text = util_c::compact_line(gtk_entry_get_text(GTK_ENTRY(widget)));
         if (text && strlen(text)) active = TRUE;
         g_free(text);
-        //std::cerr<<"on_key_release: "<< text << " active: " << active << "\n";
         if (data){
             gtk_widget_set_sensitive(GTK_WIDGET(data), active);
-        }
+        }        
+    }    
+    static gint  on_key_release (GtkWidget * widget, GdkEventKey * event, gpointer data) {
+        grepOptions(GTK_ENTRY(widget), data);
         return FALSE;
     }
+ 
+    static void onSelectionReceived (GtkWidget        *widget,
+               GtkSelectionData *data,
+               guint             time,
+               gpointer          user_data){
+        grepOptions(GTK_ENTRY(widget), data);
+    }
+  
     static gint
     on_completion (GtkWidget * widget, GdkEventKey * event, gpointer data) {
         GtkEntryCompletion *completion = gtk_entry_get_completion(GTK_ENTRY(widget));
@@ -260,7 +269,7 @@ private:
 
     static gboolean removeFunc(gpointer key, gpointer value, gpointer data){
         GtkTextView *diagnostics = GTK_TEXT_VIEW(data);
-        print_c::print_icon(diagnostics, "edit-delete", "tag/bold", 
+        print_c::print_icon(diagnostics, "edit-delete", "bold", 
                 g_strdup_printf("%s: \"%s\"\n",_("Cancel"), (gchar *) value));
         //Signal process controller to kill child process.
         kill(GPOINTER_TO_INT(key), SIGUSR2);
@@ -324,7 +333,7 @@ private:
 
         if(line[0] != '\n') {
             // FIXME use print_icon()
-            print_c::print(diagnostics, "tag/red", g_strdup(line));
+            print_c::print(diagnostics, "red", g_strdup(line));
         }
 
         // With this, this thread will not do a DOS attack
@@ -348,8 +357,8 @@ private:
 
         if (Data->resultLimit > 0 && Data->resultLimit==Data->resultLimitCounter) {
             gchar *g=g_strdup_printf("%s. %s %d", _("Results"), _("Upper limit:"), Data->resultLimit);
-            print_c::print_icon(diagnostics, "dialog-warning", "tag/green", g_strconcat(g, "\n", NULL));
-            print_c::print_icon(diagnostics, "dialog-info", "tag/blue",  g_strconcat(_("Counting files..."), "\n", NULL));
+            print_c::print_icon(diagnostics, "dialog-warning", "green", g_strconcat(g, "\n", NULL));
+            print_c::print_icon(diagnostics, "dialog-info", "blue",  g_strconcat(_("Counting files..."), "\n", NULL));
             g_free(g);
         }
 
@@ -484,8 +493,8 @@ private:
             command = g;
         }
         g_hash_table_replace(controllerHash, GINT_TO_POINTER(Data->pid), command);
-        print_c::print_icon(diagnostics, "system-search", "tag/green", g_strconcat( _("Searching..."), "\n", NULL));
-        print_c::print_icon(diagnostics, "system-run", "tag/bold", 
+        print_c::print_icon(diagnostics, "system-search", "green", g_strconcat( _("Searching..."), "\n", NULL));
+        print_c::print_icon(diagnostics, "system-run", "bold", 
                 g_strdup_printf("%s: \"%s\"\n",_("Searching..."), (gchar *) command));
 	return FALSE;
     }
@@ -711,7 +720,7 @@ private:
 
         /*if (!list || g_slist_length(list) < 1) {
             rfm_diagnostics(widgets_p, "xffm/stock_dialog-warning",NULL);
-            rfm_diagnostics(widgets_p, "xffm_tag/stderr", _("Search returned no results"), "\n", NULL);
+            rfm_diagnostics(widgets_p, "xffm_stderr", _("Search returned no results"), "\n", NULL);
             return;
         }*/
 

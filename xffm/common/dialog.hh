@@ -21,7 +21,7 @@ public:
     static gboolean
     window_keyboard_event (GtkWidget *window, GdkEventKey * event, gpointer data)
     {
-        DBG("window_keyboard_event\n");
+        TRACE("window_keyboard_event\n");
         auto dialog_p = (Dialog<Type> *)data;
         auto page_p = dialog_p->currentPageObject();
         //auto notebook = dialog_p->notebook();
@@ -41,6 +41,10 @@ public:
 	if (!G_IS_OBJECT(vpane)) return;
 	auto oldMax = 
 	    GPOINTER_TO_INT(g_object_get_data(G_OBJECT(vpane), "oldMax"));
+	if (oldMax == 0){
+	    // vpane is not set up yet...
+	    return;
+	}
 	if (!G_IS_OBJECT(vpane)) return;
 	auto oldCurrent = 
 	    GPOINTER_TO_INT(g_object_get_data(G_OBJECT(vpane), "oldCurrent"));
@@ -57,6 +61,7 @@ public:
 	    if (!G_IS_OBJECT(vpane)) return;
 	    g_object_set_data(G_OBJECT(vpane), "oldMax", GINT_TO_POINTER(max));
 	    if (!G_IS_OBJECT(vpane)) return;
+	    TRACE("resizePane(): new pane position=%d\n", newCurrent);
 	    gtk_paned_set_position(vpane, newCurrent);
 
 	} else if (current != oldCurrent) {
@@ -130,12 +135,10 @@ public:
 	gtk_window_set_position (dialog_, GTK_WIN_POS_MOUSE);
         this->insertNotebook(dialog_);
         this->addPage("startup");
-        DBG("dialog this=%p\n", (void *)this);
+        TRACE("dialog this=%p\n", (void *)this);
         //this->insertPageChild(this->notebook());
         
         
-        //gtk_widget_show_all(GTK_WIDGET(pageChild));
-	gtk_widget_realize(GTK_WIDGET(dialog_));
 	gint max, current;
         auto vpane = this->vpane();
 	g_object_get(G_OBJECT(vpane), "max-position", &max, NULL);

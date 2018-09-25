@@ -35,7 +35,7 @@ public:
         if(!cmd_fmt) return FALSE;
         if(!g_shell_parse_argv (cmd_fmt, &argc, &argv, &error)) {
             gchar *msg = g_strcompress (error->message);
-            DBG ("%s: %s\n", msg, cmd_fmt);
+            ERROR ("%s: %s\n", msg, cmd_fmt);
             g_error_free (error);
             g_free (msg);
             return (FALSE);
@@ -56,7 +56,7 @@ public:
         if(!path) {
             gboolean direct_path = g_file_test (argv[0], G_FILE_TEST_EXISTS) ||
                 strncmp (argv[0], "./", strlen ("./")) == 0 || strncmp (argv[0], "../", strlen ("../")) == 0;
-            //DBG("argv[0]=%s\n",argv[0]);
+            TRACE("argv[0]=%s\n",argv[0]);
             if(direct_path) {
                 path = g_strdup (argv[0]);
             }

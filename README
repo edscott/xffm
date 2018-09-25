@@ -1,9 +1,10 @@
 
 TODO: 
-  * Add tooltips to script, clear and change font size (simple tooltip).
   * back to xfterm branch
+  x bash completion: bugs fixed, now in observation
+  * xffind:
+    - on close/destroy signal gtk_widget_hide failed 
+       GTK_IS_WIDGET (widget)' failed
   * simple rcfile for environment, monitor changes and reload (font size, window size)
-  * new tab shows iconview always in slow box (geminis) pinpoints problem.
-  * on return with blank line: /bin/bash -c is executed...
   * 20 files with FIXMEs
-  xffind: grep options unsensitive when text is input via mouse button 2 click
+

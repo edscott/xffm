@@ -34,8 +34,8 @@ public:
         auto page = this->currentPageObject();
         page->setPageWorkdir(workdir);
 	// Default into terminal...
-	page->showIconview(FALSE, TRUE);
         page->setDefaultIconview(FALSE);
+	page->showIconview(FALSE, TRUE);
         //gtk_widget_hide(GTK_WIDGET(page->toggleToTerminal()));
         //gtk_widget_hide(GTK_WIDGET(page->toggleToIconview()));
      
@@ -45,10 +45,10 @@ public:
         print_c::print(page->output(), "bold/Red", g_strdup("Hello world!\n"));
 
         print_c::print(page->output(), "bold/Red", g_strdup("Hello world!\n"));
-        print_c::print(page->output(), "white", g_strdup("Use "));
+        //print_c::print(page->output(), "white", g_strdup("Use "));
 
-        print_c::print(page->output(), "bold/White", g_strdup("script -f -c \\\"command\\\" dev/null "));
-        print_c::print(page->output(), "white", g_strdup("for color output (YMMV)\n"));
+        //print_c::print(page->output(), "bold/White", g_strdup("script -f -c \\\"command\\\" dev/null "));
+        //print_c::print(page->output(), "white", g_strdup("for color output (YMMV)\n"));
     }
 };
 

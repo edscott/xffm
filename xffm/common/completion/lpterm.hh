@@ -274,6 +274,25 @@ public:
 
     gchar * 
     run_lp_command(GtkTextView *output, const gchar *workdir, const gchar *command){
+        // On empty string, do a simple pwd
+        if (!command || !strlen(command)) command = "pwd";
+        // escape all quotes
+        gchar *ncommand;
+        if (strchr (command, '\"') || strchr(command,'\'')){
+            gchar **g;
+            if (strchr (command, '\"')) {
+                g = g_strsplit(command, "\"", -1);
+                ncommand = g_strjoinv ("\\\"", g);
+                g_strfreev(g);
+            } else {
+                g = g_strsplit(command, "\'", -1);
+                ncommand = g_strjoinv ("\\\'", g);
+                g_strfreev(g);
+            }
+            DBG("ncommand is %s\n", ncommand);
+        } else ncommand = g_strdup(command);
+        command = ncommand;
+
 	gchar *newWorkdir =NULL;
 	gchar ** commands = NULL;
 	if (strchr(command, ';')) commands = g_strsplit(command, ";", -1);
@@ -290,18 +309,24 @@ public:
 	    // automatic shell determination:
             if (strcmp(workdir, "xffm:root")==0) {
                 if (chdir(g_get_home_dir()) < 0){
-                    DBG("Cannot chdir to %s\n", g_get_home_dir());
-                    DBG("aborting command: \"%s\"\n", command);
+                    ERROR("Cannot chdir to %s\n", g_get_home_dir());
+                    ERROR("aborting command: \"%s\"\n", command);
                     continue;
                 }
             } else {
                 if (chdir(workdir) < 0){
-                    DBG("Cannot chdir to %s\n", workdir);
-                    DBG("aborting command: \"%s\"\n", command);
+                    ERROR("Cannot chdir to %s\n", workdir);
+                    ERROR("aborting command: \"%s\"\n", command);
                     continue;
                 }
             }
-	    pid_t child = run_c::thread_run(output, *c, FALSE);
+            gboolean scrollup = FALSE;
+            if (strncmp(command, "man", strlen("man"))==0) {
+                scrollup = TRUE;
+                print_c::clear_text(output);
+            }
+
+            pid_t child = run_c::shell_command(output, *c, scrollup);
 	    page_->newRunButton(*c, child);
 	    // forced shell to command:
 	    //run_c::shell_command(output, *c, FALSE);
@@ -315,7 +340,8 @@ public:
 	    // We save the original sudo command,
 	    //   not the one modified with "-A".
 	}
-	g_strfreev(commands); 
+	g_strfreev(commands);
+        g_free(ncommand); 
 	return newWorkdir;
     }
 

@@ -49,6 +49,7 @@ public:
 	gtk_box_pack_start (GTK_BOX (pathbar_), GTK_WIDGET(pb_button), FALSE, FALSE, 0);
 	g_object_set_data(G_OBJECT(pb_button), "name", g_strdup("RFM_ROOT"));
 	g_signal_connect (G_OBJECT(pb_button) , "clicked", BUTTON_CALLBACK (pathbar_go), (void *)this);
+	DBG("showing pathbar pb_button\n");
 	gtk_widget_show(GTK_WIDGET(pb_button));
     }
 
@@ -116,7 +117,7 @@ public:
 		/*
 		view_c *view_p = (view_c *)g_object_get_data(G_OBJECT(pathbar_), "view_p");
 		if (!view_p) g_error("view_p data not set for g_object pathbar!\n");
-		DBG("pathbar_ok: path=%s\n", path);
+		TRACE("pathbar_ok: path=%s\n", path);
 		view_p->reload(path);*/
 	    } 
 	}
@@ -132,7 +133,7 @@ public:
 	GtkAllocation allocation;
 	//gtk_widget_get_allocation(pathbar_, &allocation);
 	gtk_widget_get_allocation(gtk_widget_get_toplevel(pathbar_), &allocation);
-	DBG("pathbar width=%d\n", allocation.width);
+	TRACE("pathbar width=%d\n", allocation.width);
 	gint width = allocation.width;
 
 	// First we hide all buttons, except "RFM_ROOT"
@@ -169,7 +170,7 @@ public:
 	gtk_widget_show(GTK_WIDGET(active->data));
 
 	gtk_widget_get_preferred_size(GTK_WIDGET(active->data), &minimum, NULL);
-	    DBG("#### width, minimum.width %d %d\n",width,  minimum.width);
+	    TRACE("#### width, minimum.width %d %d\n",width,  minimum.width);
 	width -= minimum.width;
      
 	// Work backwards from active button we show buttons that will fit.
@@ -178,7 +179,7 @@ public:
 	    gchar *name = (gchar *)g_object_get_data(G_OBJECT(children->data), "name");
 	    if (strcmp(name, "RFM_ROOT")==0) continue;
 	    gtk_widget_get_allocation(GTK_WIDGET(children->data), &allocation);
-	    DBG("#### width, allocaltion.width %d %d\n",width,  allocation.width);
+	    TRACE("#### width, allocaltion.width %d %d\n",width,  allocation.width);
 	    width -= allocation.width;
 	    if (width < 0) break;
 	    gtk_widget_show(GTK_WIDGET(children->data));
@@ -255,7 +256,7 @@ public:
 	Pathbar *pathbar_p = (Pathbar *)arg[0];
 	gchar *path = (gchar *)arg[1];
 	GtkWidget *pathbar = pathbar_p->get_pathbar();
-	DBG( "update_pathbar_f:: %s\n", path);
+	TRACE( "update_pathbar_f:: %s\n", path);
 
 	if (!pathbar) return NULL;
 	if (!path){
@@ -322,7 +323,7 @@ public:
 		g_strdup(paths[i]);
 	    g_free(pb_path);
 	    pb_path = g;
-	    DBG( "+++***** setting pbpath --> %s\n", pb_path);
+	    TRACE( "+++***** setting pbpath --> %s\n", pb_path);
 	    g_object_set_data(G_OBJECT(pb_button), "path", g_strdup(pb_path));
 	    g_signal_connect (G_OBJECT(pb_button) , "clicked", G_CALLBACK (callback), (void *)pathbar_p);
 	    

@@ -17,7 +17,7 @@ public:
     }
 
     const gchar *workDir(void){
-        DBG("workDir_ is %s\n", workDir_);
+        TRACE("workDir_ is %s\n", workDir_);
         return workDir_;
     }
 

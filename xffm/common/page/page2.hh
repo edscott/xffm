@@ -99,7 +99,7 @@ public:
 
 	gtk_box_pack_start (pageChild_, this->get_pathbar(), FALSE, FALSE, 0);
 
-	gtk_widget_show_all(GTK_WIDGET(pageLabelBox_));
+	//gtk_widget_show_all(GTK_WIDGET(pageLabelBox_));
 
         GtkBox *hViewBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
 
@@ -134,9 +134,9 @@ public:
 
 
 	print_c::setColor(GTK_WIDGET(this->output()));
-
+	//gtk_widget_realize(GTK_WIDGET(pageChild_));
+	gtk_widget_show_all(GTK_WIDGET(pageLabelBox_));
 	gtk_widget_show_all(GTK_WIDGET(pageChild_));
-
 	return;
     }
     
@@ -156,8 +156,11 @@ public:
     
     void scriptRun(void){
 	    gchar *command = print_c::get_current_text(this->input());
-            // leaning toothpick syndrome...
-            gchar *g = g_strdup_printf("script -f -c \\\"%s\\\" /dev/null", command);
+            if (!command || !strlen(command)){
+                g_free(command);
+                command = g_strdup("ls --color -Flah");
+            }
+            gchar *g = g_strdup_printf("script -f -c \"%s\" /dev/null", command);
             g_free(command);
             command = g;
             this->csh_clean_start();
@@ -190,7 +193,7 @@ public:
 
     void 
     newRunButton(const gchar * command, pid_t child){
-	DBG("page->newRunButton\n");
+	TRACE("page->newRunButton\n");
 	gboolean shellIcon = run_c::run_in_shell(command);
 	auto runButton = (RunButton<Type> *)new(RunButton<Type>);
 	runButton->setup((void *)this, command, child, shellIcon);
@@ -201,12 +204,12 @@ public:
     }
     const gchar *pageWorkdir(void){return (const gchar *)this->workDir();}
     void setPageWorkdir(const gchar *dir){
-	DBG("setPageWorkdir: %s\n", dir);
+	TRACE("setPageWorkdir: %s\n", dir);
 	this->setWorkDir(dir);
-	DBG("update_pathbar: %s\n", dir);
+	TRACE("update_pathbar: %s\n", dir);
 	this->update_pathbar(dir);
         if (g_file_test(dir, G_FILE_TEST_IS_DIR)){
-	    print_c::print(this->output(), "tag/green", g_strdup_printf("cd %s\n", dir));
+	    print_c::print(this->output(), "green", g_strdup_printf("cd %s\n", dir));
         }
     	gchar *g = Completion<Type>::get_terminal_name(this->workDir());
 	setPageLabel(g);
@@ -245,6 +248,11 @@ public:
     gboolean iconviewIsDefault(void){return iconviewIsDefault_;}
        
     void showIconview(gboolean state, gboolean full){
+	if (!gtk_widget_is_visible(GTK_WIDGET(this->pageChild_))){
+		ERROR("page2.hh:: showIconview() call with invisible parent\n");
+		return;
+	}
+
         if (state) {
             gtk_widget_hide(GTK_WIDGET(this->toggleToIconview_));
             gtk_widget_hide(GTK_WIDGET(this->input_));
@@ -263,7 +271,7 @@ public:
             gtk_widget_show(GTK_WIDGET(this->input_));
             gtk_widget_show(GTK_WIDGET(this->termButtonBox_));
             while (gtk_events_pending())gtk_main_iteration();
-            if (full) print_c::show_textFull(this->output_);
+            if (full) setVpanePosition(0);
             else print_c::show_text(this->output_);
             terminalMode_ = TRUE;
         }

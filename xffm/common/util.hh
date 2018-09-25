@@ -512,7 +512,7 @@ public:
 	    memset (outbuf, 0, 8);
 	    gint outbuf_len = g_unichar_to_utf8 (gu, outbuf);
 	    if(outbuf_len < 0) {
-		//DBG ("utf_string: unichar=%d char =%c outbuf_len=%d\n", gu, p[0], outbuf_len);
+		ERROR ("utf_string: unichar=%d char =%c outbuf_len=%d\n", gu, p[0], outbuf_len);
 	    }
 	    gchar *qq = g_strconcat (actual_tag, outbuf, NULL);
 	    g_free (actual_tag);
@@ -662,7 +662,7 @@ public:
 	    g_free(t);
 	    return term;
 	}
-	DBG ("TERMINAL_CMD=%s: %s\n", getenv ("TERMINAL_CMD"), strerror (ENOENT));
+	ERROR("TERMINAL_CMD=%s: %s\n", getenv ("TERMINAL_CMD"), strerror (ENOENT));
 
 	return NULL;
     }

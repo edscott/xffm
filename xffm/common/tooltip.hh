@@ -71,7 +71,7 @@ public:
     ", 
 	    -1, &error);
 	if (error){
-	    DBG("gerror: %s\n", error->message);
+	    ERROR("gerror: %s\n", error->message);
 	    g_error_free(error);
 	}
 	gtk_style_context_add_provider (style_context, GTK_STYLE_PROVIDER(css_provider),
@@ -282,7 +282,7 @@ public:
 	//tooltip_c *tooltip_p = (tooltip_c *)data;
 	GdkPixbuf *tooltip_pixbuf = (GdkPixbuf *)
 	    g_object_get_data(G_OBJECT(button), "tooltip_pixbuf");
-	if (!get_tooltip_text_hash()) DBG("destroy_widget: hash is null!\n");
+	if (!get_tooltip_text_hash()) ERROR("destroy_widget: hash is null!\n");
 	gchar *tooltip_text =
 	    (gchar *)g_hash_table_lookup(get_tooltip_text_hash(), button);
 	if (tooltip_text) {
@@ -310,7 +310,7 @@ public:
 
 	gchar *t = g_strdup(text);
 	g_object_set_data(G_OBJECT(widget), "tooltip_text", t);
-	if (!get_tooltip_text_hash()) DBG("custom_tooltip_f: hash is null!\n");
+	if (!get_tooltip_text_hash()) ERROR("custom_tooltip_f: hash is null!\n");
 	g_hash_table_replace(get_tooltip_text_hash(), widget, t);
 	g_object_set_data(G_OBJECT(widget), "tooltip_pixbuf", pixbuf);
 
