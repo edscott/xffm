@@ -49,8 +49,11 @@ public:
     setup_image_button (GtkButton *button, const gchar *icon_name, const gchar *icon_tip){
 	gtk_widget_set_can_focus (GTK_WIDGET(button), FALSE);
 	gtk_button_set_relief (button, GTK_RELIEF_NONE);
-	auto image = gtk_image_new_from_icon_name (icon_name, GTK_ICON_SIZE_SMALL_TOOLBAR);
+
+	//auto image = gtk_image_new_from_icon_name (icon_name, GTK_ICON_SIZE_SMALL_TOOLBAR);
+//	auto pixbuf = pixbuf_c::get_pixbuf(icon_name, GTK_ICON_SIZE_SMALL_TOOLBAR);
 	auto pixbuf = pixbuf_c::get_pixbuf(icon_name, GTK_ICON_SIZE_SMALL_TOOLBAR);
+        auto image = gtk_image_new_from_pixbuf(pixbuf);
 	if (image) {
 	    gtk_container_add (GTK_CONTAINER (button), image);
 	    // On page remove, reference count will be decreased
