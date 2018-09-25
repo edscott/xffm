@@ -1,7 +1,6 @@
 
 TODO: 
   * back to xfterm branch
-  ** textview selection color is whitefg and blackbg, which does not go well with current blackbg
   x bash completion: bugs fixed, now in observation
   * xffind:
     - on close/destroy signal gtk_widget_hide failed 

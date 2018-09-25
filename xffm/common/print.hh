@@ -752,11 +752,11 @@ public:
         auto css_provider = gtk_css_provider_new();
         GError *error=NULL;
         auto data = g_strdup_printf("\
-* {\
+textview text {\
    background-color: black;\
    color: white;\
   }\
-*:selected {\
+.view text selection {\
   background-color: blue;\
   color: yellow;\
 }\
