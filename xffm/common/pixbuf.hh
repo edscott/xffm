@@ -51,7 +51,7 @@ public:
 	GdkPixbuf *pixbuf = pixbuf_hash_c::find_in_pixbuf_hash(icon_name, pixels);
 	if (pixbuf) return pixbuf;
 	// Not found, huh?
-	std::cerr<<"Create pixbuf and put in hashtable: "<<icon_name<<"\n";
+	DBG("Create pixbuf and put in hashtable: \"%s\"\n", icon_name);
 	pixbuf = pixbuf_icons_c::absolute_path_icon(icon_name, pixels);
 
 	if (!pixbuf){
@@ -69,9 +69,7 @@ public:
 	if (pixbuf) return pixbuf;
 	pixbuf = pixbuf_icons_c::get_theme_pixbuf("image-missing", pixels);
 	if (pixbuf) pixbuf_hash_c::put_in_pixbuf_hash(icon_name, pixels, pixbuf);
-	std::cerr<<"xf::Pixbuf::get_pixbuf(): image-missing. "
-	    <<"Please install icon \""
-	    <<icon_name<<"\"\n";
+	WARN("xf::Pixbuf::get_pixbuf(): image-missing. Please install icon \"%s\"\n", icon_name);
 	return pixbuf;
      }
 

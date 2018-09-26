@@ -1,7 +1,7 @@
 #ifndef XFTOOLTIP_HH
 #define XFTOOLTIP_HH
 #include "util.hh"
-
+static pthread_mutex_t hashMutex = PTHREAD_MUTEX_INITIALIZER;
 static GHashTable *tooltip_text_hash=NULL;
 static GtkWidget  *tt_window = NULL;
 static gboolean   tooltip_is_mapped = FALSE;
@@ -15,6 +15,7 @@ public:
     static void
     init_tooltip_c(void){
 	tooltip_text_hash = g_hash_table_new_full(g_direct_hash, g_direct_equal, NULL, g_free);
+        DBG("Created tooltip_text_hash: %p\n", tooltip_text_hash);
     }
 
 
@@ -100,10 +101,8 @@ public:
 
     static void
     reset_tooltip(void){
-	//NOOP(stderr, "rfm_reset_tooltip\n"); 
 	if (tt_window) {
 	    g_object_set_data(G_OBJECT(tt_window), "tooltip_target", NULL);
-	    //NOOP(stderr, "rfm_reset_tooltip OK\n"); 
 	}
     }
 
@@ -282,13 +281,16 @@ public:
 	//tooltip_c *tooltip_p = (tooltip_c *)data;
 	GdkPixbuf *tooltip_pixbuf = (GdkPixbuf *)
 	    g_object_get_data(G_OBJECT(button), "tooltip_pixbuf");
-	if (!get_tooltip_text_hash()) ERROR("destroy_widget: hash is null!\n");
-	gchar *tooltip_text =
-	    (gchar *)g_hash_table_lookup(get_tooltip_text_hash(), button);
-	if (tooltip_text) {
-	    // The free is done by removing item from hash table:
-	    g_hash_table_remove(get_tooltip_text_hash(), button);
-	}
+	if (get_tooltip_text_hash()==NULL) {
+            ERROR("destroy_widget: hash is null!\n");
+        } else {
+	    gchar *tooltip_text =
+	        (gchar *)g_hash_table_lookup(get_tooltip_text_hash(), button);
+	    if (tooltip_text) {
+	        // The free is done by removing item from hash table:
+	        g_hash_table_remove(get_tooltip_text_hash(), button);
+	    }
+        }
 
 	if (tooltip_pixbuf) g_object_unref(tooltip_pixbuf);
 	g_object_set_data(G_OBJECT(button), "tooltip_text", NULL);
@@ -310,8 +312,12 @@ public:
 
 	gchar *t = g_strdup(text);
 	g_object_set_data(G_OBJECT(widget), "tooltip_text", t);
-	if (!get_tooltip_text_hash()) ERROR("custom_tooltip_f: hash is null!\n");
-	g_hash_table_replace(get_tooltip_text_hash(), widget, t);
+	if (!get_tooltip_text_hash()) {
+            ERROR("custom_tooltip_f: hash is null! (%p, %p)\n",
+               get_tooltip_text_hash(), tooltip_text_hash);
+        } else {
+    	    g_hash_table_replace(get_tooltip_text_hash(), widget, t);
+        }
 	g_object_set_data(G_OBJECT(widget), "tooltip_pixbuf", pixbuf);
 
 	gtk_widget_set_has_tooltip(widget, TRUE);
@@ -330,7 +336,9 @@ public:
 
     static GHashTable *
     get_tooltip_text_hash(void){
+	pthread_mutex_lock(&hashMutex);
 	if (!tooltip_text_hash) init_tooltip_c();
+	pthread_mutex_unlock(&hashMutex);
 	return tooltip_text_hash;
     }
 };

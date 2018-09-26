@@ -33,7 +33,7 @@ class Icons {
 public:
     static void
     init(void){
-	std::cerr<<"Calling Icons initializer...\n";
+	TRACE("Calling Icons initializer...\n");
 	//pixbuf_hash_c::init();
 	pixbuf_mutex = PTHREAD_MUTEX_INITIALIZER;
 	icon_theme = gtk_icon_theme_get_default ();

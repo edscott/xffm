@@ -284,7 +284,8 @@ private:
 	auto accel_group = gtk_accel_group_new ();
 			
 	auto button = gtk_c::dialog_button ("dialog-question-symbolic", NULL);
-	tooltip_c::custom_tooltip(GTK_WIDGET(button), NULL, "fgr --help");
+        gtk_widget_set_tooltip_text(GTK_WIDGET(button), "fgr --help");
+	//tooltip_c::custom_tooltip(GTK_WIDGET(button), NULL, "fgr --help");
 	g_signal_connect (G_OBJECT (button), "clicked", 
 		 WIDGET_CALLBACK(Type::command_up), (gpointer)"fgr --help");
 	g_object_set_data(G_OBJECT(button), "dialog_", dialog_);
@@ -362,6 +363,8 @@ private:
 
         ////////////   advanced options... /////////////////////////
 	auto advancedDialog = advancedOptions();
+        gtk_window_set_transient_for(GTK_WINDOW(advancedDialog), GTK_WINDOW(dialog_));
+        
         auto advancedButton = gtk_c::toggle_button(NULL, _("Details"));
         g_object_set_data(G_OBJECT(dialog_), "advancedButton", advancedButton);
         g_object_set_data(G_OBJECT(dialog_), "advancedDialog", advancedDialog);
@@ -771,16 +774,16 @@ private:
 
 	auto radio1 =  
 	    GTK_RADIO_BUTTON(gtk_radio_button_new_with_label (NULL, "mtime"));
-	// FIXME should work when radios are sensitive... check this
-	tooltip_c::custom_tooltip(GTK_WIDGET(radio1), NULL, _("Modified"));
+        gtk_widget_set_tooltip_text(GTK_WIDGET(radio1), _("Modified"));
+	//tooltip_c::custom_tooltip(GTK_WIDGET(radio1), NULL, _("Modified"));
 	auto radio2 = 
 	    GTK_RADIO_BUTTON(gtk_radio_button_new_with_label_from_widget ( radio1, "ctime"));
-	// FIXME should work when radios are sensitive... check this
-	tooltip_c::custom_tooltip(GTK_WIDGET(radio2), NULL, _("Created"));
+        gtk_widget_set_tooltip_text(GTK_WIDGET(radio2), _("Created"));
+	//tooltip_c::custom_tooltip(GTK_WIDGET(radio2), NULL, _("Created"));
 	auto radio3 = 
 	    GTK_RADIO_BUTTON(gtk_radio_button_new_with_label_from_widget ( radio1, "atime"));
-	// FIXME should work when radios are sensitive... check this
-	tooltip_c::custom_tooltip(GTK_WIDGET(radio3), NULL, _("Accessed"));
+        gtk_widget_set_tooltip_text(GTK_WIDGET(radio3), _("Accessed"));
+	//tooltip_c::custom_tooltip(GTK_WIDGET(radio3), NULL, _("Accessed"));
 
 	g_object_set_data(G_OBJECT(dialog_), "radio1", radio1 );
 	g_object_set_data(G_OBJECT(dialog_), "radio2", radio2 );
