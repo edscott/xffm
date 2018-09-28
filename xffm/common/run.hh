@@ -153,7 +153,8 @@ public:
                                     flags);
         pid_t grandchild=tubo_c::getChild (pid);
 #if 1       
-        print_c::print_icon(textview, "system-run", "green", g_strdup_printf("%d:%s\n", grandchild, command));
+        print_c::print(textview, "Green", g_strdup_printf("%d:", grandchild));
+        print_c::print(textview, "green", g_strdup_printf("%s\n", command));
 #else
         print_c::print_icon(textview, "system-run", "bold", g_strdup_printf("%s\n", command));
 #endif

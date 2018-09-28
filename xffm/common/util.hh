@@ -31,7 +31,7 @@ public:
 		length=i+1;
 	    }
 	}
-	 TRACE(stderr, "%s --- %s differ at length =%d\n", a,b,length);
+	 TRACE("%s --- %s differ at length =%d\n", a,b,length);
        return length;
     }
 
@@ -727,7 +727,7 @@ public:
         GtkTreeStore *store = gtk_tree_store_new (1, G_TYPE_STRING);
 	FILE *historyFile = fopen (history, "r");
 	if(!historyFile) {
-            std::cerr<<"util_c::loadHistory(): creating new history "<<history<<"\n";
+            DBG("util_c::loadHistory(): creating new history: \"%s\"\n", history);
             return GTK_TREE_MODEL(store);
         }
         gchar line[2048];
@@ -739,7 +739,7 @@ public:
             //if(strlen (line) == 0) continue;
             gtk_tree_store_append (store, &iter, NULL);
             gtk_tree_store_set (store, &iter, 0, newline, -1);
-            std::cerr<<"setting tree store value: "<<newline<<"\n";
+            TRACE("setting tree store value: %s\n" , newline);
             g_free(newline);
         }
         fclose (historyFile);
@@ -749,7 +749,7 @@ public:
     static void 
     saveHistory (const gchar *history, GtkTreeModel *model, const gchar *data) {
 	gchar *historyDir = g_path_get_dirname(history);
-        DBG("history dir = %s\n", historyDir);
+        TRACE("history dir = %s\n", historyDir);
 	if (!g_file_test(historyDir,G_FILE_TEST_IS_DIR)){
 	    g_mkdir_with_parents (historyDir, 0770);
 	}
@@ -779,12 +779,12 @@ public:
         } else {
             gtk_tree_store_prepend (store, &iter, NULL);
             gtk_tree_store_set (store, &iter, 0, data, -1);
-            std::cerr<<"prepending tree store value: "<<data<<"\n";
+            TRACE("prepending tree store value: %s\n", data);
         }
 	// rewrite history file
 	FILE *historyFile = fopen (history, "w");
 	if(!historyFile) {
-            std::cerr<< "util_c::saveHistory(): unable to write to file "<<history<<"\n";
+            ERROR("util_c::saveHistory(): unable to write to file: \"%s\"\n", history);
             return;
         }
 
@@ -844,7 +844,7 @@ public:
     static void 
     saveHistory (const gchar *history, GList **history_list_p, const gchar * data) {
 	gchar *historyDir = g_path_get_dirname(history);
-        DBG("history dir = %s\n", historyDir);
+        TRACE("history dir = %s\n", historyDir);
 	if (!g_file_test(historyDir,G_FILE_TEST_IS_DIR)){
 	    g_mkdir_with_parents (historyDir, 0660);
 	}
@@ -870,7 +870,7 @@ public:
 	    *history_list_p = g_list_insert(*history_list_p, data, 0);
 	} else {
             // so the item was not found. proceed to prepend
-            DBG("prepend: %s\n", item);
+            TRACE("prepend: %s\n", item);
             *history_list_p = g_list_prepend(*history_list_p, item);
         }
 

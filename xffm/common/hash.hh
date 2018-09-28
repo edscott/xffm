@@ -42,7 +42,7 @@ public:
     //static GHashTable *pixbuf_hash;
     static void createHash(void){
 	pixbuf_hash = g_hash_table_new_full (g_str_hash, g_str_equal,g_free, free_pixbuf_t);
-	fprintf(stderr, "Common pixbuf hash table address: %p.\n", (void *)pixbuf_hash);
+	TRACE( "Common pixbuf hash table address: %p.\n", (void *)pixbuf_hash);
     }
 
 
@@ -180,7 +180,7 @@ public:
     static GdkPixbuf *
     lookup_icon(const gchar *icon_name, gint size){
 	if (!pixbuf_hash) {
-	    std::cerr<<"Hash::lookup_icon(): Unable to load hash\n";
+	    DBG("Hash::lookup_icon(): Creating new hashtable\n");
 	    createHash();
 	   // return NULL;
 	}

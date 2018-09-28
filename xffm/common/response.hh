@@ -4,6 +4,7 @@
 #include "common/gtk.hh"
 #include "common/pixbuf.hh"
 #include "common/util.hh"
+#include "common/dialog.hh"
 
 namespace xf {
 template <class Type>
@@ -119,6 +120,7 @@ private:
     responseDialog (const gchar * ptext, const gchar *default_value, gboolean hidden) {
 
         auto dialog = GTK_DIALOG(gtk_dialog_new ());
+        gtk_window_set_transient_for(GTK_WINDOW(dialog), GTK_WINDOW(mainWindow));
         //gtk_window_set_type_hint(GTK_WINDOW(dialog), GDK_WINDOW_TYPE_HINT_DIALOG);
 
         gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);

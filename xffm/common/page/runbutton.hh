@@ -176,6 +176,7 @@ public:
 	    gchar *icon_id = NULL;
 	    if (args && args[0]) {
 		icon_id = g_path_get_basename(args[0]);
+		TRACE("RunButton::run_button_setup: attempting icon for \"%s\"\n", icon_id);
 		// xterm exception
 		if (strcmp(icon_id, "xterm")==0){
 		    g_free(icon_id);
@@ -184,7 +185,6 @@ public:
 		    g_free(icon_id);
 		    icon_id = NULL;
 		}
-		TRACE("RunButton::run_button_setup: attempting icon for \"%s\"\n", icon_id_);
 	    }
 	    g_strfreev(args);
 	    if (!icon_id) {
