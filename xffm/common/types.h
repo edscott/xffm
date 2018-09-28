@@ -1,13 +1,21 @@
 #ifndef TYPES_H
 # define TYPES_H
+namespace xf {
+#ifdef XFFM_CC
+template <class Type> class fmDialog;
+#endif
+template <class Type> class Notebook;
+}
 
 
+#define EVENT_CALLBACK(X)  G_CALLBACK((gint (*)(GtkWidget *,GdkEvent *,gpointer)) X)
+#define KEY_EVENT_CALLBACK(X)  G_CALLBACK((gint (*)(GtkWidget *,GdkEventKey *,gpointer)) X)
+#define ICONVIEW_CALLBACK(X)  G_CALLBACK((void (*)(GtkIconView *,GtkTreePath *,gpointer)) X)
 #define SELECTION_RECEIVED_CALLBACK(X)  G_CALLBACK((void (*)(GtkWidget *,GtkSelectionData *,guint,gpointer)) X)
 #define RESPONSE_EVENT_CALLBACK(X)  G_CALLBACK((gint (*)(GtkDialog *,GdkEvent *,gpointer)) X)
 #define ENTRY_CALLBACK(X)  G_CALLBACK((void (*)(GtkEntry *,gpointer)) X)
 #define RANGE_CALLBACK(X)  G_CALLBACK((gboolean (*)(GtkRange *,GtkScrollType,gdouble,gpointer)) X)
 #define SIZE_CALLBACK(X)  G_CALLBACK((void (*)(GtkWidget *,GdkRectangle *,gpointer)) X)
-#define EVENT_CALLBACK(X)  G_CALLBACK((gint (*)(GtkWidget *,GdkEventKey *,gpointer)) X)
 #define MENUITEM_CALLBACK(X)  G_CALLBACK((void (*)(GtkMenuItem *,gpointer)) X)
 #define BUTTON_CALLBACK(X)  G_CALLBACK((void (*)(GtkButton *,gpointer)) X)
 #define WIDGET_CALLBACK(X)  G_CALLBACK((void (*)(GtkWidget *,gpointer)) X)

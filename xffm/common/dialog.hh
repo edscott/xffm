@@ -3,6 +3,7 @@
 GtkWidget *mainWindow;
 #include "common/types.h"
 #include "notebook.hh"
+#include <memory>
 
 namespace xf {
 template <class Type> class Dialog;
@@ -126,7 +127,7 @@ public:
         gtk_widget_set_has_tooltip (GTK_WIDGET(dialog_), TRUE);
         // FIXME:
         //g_signal_connect (G_OBJECT (dialog_), "query-tooltip", G_CALLBACK (window_tooltip_f), (void *)this);
-        g_signal_connect (G_OBJECT (dialog_), "key-press-event", EVENT_CALLBACK (dialogSignals<Type>::window_keyboard_event), (void *)this);
+        g_signal_connect (G_OBJECT (dialog_), "key-press-event", KEY_EVENT_CALLBACK (dialogSignals<Type>::window_keyboard_event), (void *)this);
 
 	gtk_widget_get_preferred_width (GTK_WIDGET(dialog_), &dialogMinW_, &dialogNatW_);
 	gtk_widget_get_preferred_height (GTK_WIDGET(dialog_), &dialogMinH_, &dialogNatH_);
@@ -134,7 +135,12 @@ public:
 	setWindowMaxSize(dialog_);
 	gtk_window_set_position (dialog_, GTK_WIN_POS_MOUSE);
         this->insertNotebook(dialog_);
-        this->addPage("startup");
+#ifdef XFFM_CC
+        auto dialog = (fmDialog<Type> *) this;
+#else
+        auto dialog = (Dialog<Type> *) this;
+#endif       
+        dialog->addPage("xffm:root"); // FIXME: use path if specified
         TRACE("dialog this=%p\n", (void *)this);
         //this->insertPageChild(this->notebook());
         

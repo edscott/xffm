@@ -249,7 +249,7 @@ public:
        
     void showIconview(gboolean state, gboolean full){
 	if (!gtk_widget_is_visible(GTK_WIDGET(this->pageChild_))){
-		ERROR("page2.hh:: showIconview() call with invisible parent\n");
+		TRACE("page2.hh:: showIconview() call with invisible parent\n");
 		return;
 	}
 
@@ -322,6 +322,7 @@ public:
     GtkBox *pageLabelSpinnerBox(void){ return pageLabelSpinnerBox_;}
     GtkBox *pageLabelIconBox(void){ return pageLabelIconBox_;}
     GtkButton *pageLabelButton(void){ return pageLabelButton_;}
+    GtkScrolledWindow *top_scrolled_window(void){ return this->top_scrolled_window_;};
     
     GtkPaned *vpane(void){return this->vpane_;}
     GtkTextView *input(void){ return this->input_;}

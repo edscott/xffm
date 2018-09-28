@@ -133,7 +133,7 @@ private:
                 _("Completion mode:"), 
                 _("command"),
                 _("file")));
-        print_c::print(output,  ("red", g_strdup("TAB.")));
+        print_c::print(output,  "red", g_strdup("TAB.\n"));
         print_c::scroll_to_bottom(output);
     }
 

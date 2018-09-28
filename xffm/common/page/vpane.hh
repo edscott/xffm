@@ -26,6 +26,7 @@ public:
         return ;
     }
 
+
 protected:
     GtkPaned *vpane_;
     GtkTextView *output_;

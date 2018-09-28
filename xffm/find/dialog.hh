@@ -439,7 +439,7 @@ private:
 	g_object_set_data(G_OBJECT(dialog_), "case_sensitive", case_sensitive);
 
         g_signal_connect (G_OBJECT (grep_entry), "event", 
-                EVENT_CALLBACK (Type::on_key_release), (gpointer) case_sensitive);
+                KEY_EVENT_CALLBACK (Type::on_key_release), (gpointer) case_sensitive);
 
 
 	auto ext_regexp =  
@@ -450,7 +450,7 @@ private:
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (ext_regexp), default_ext_regexp);
 	g_object_set_data(G_OBJECT(dialog_), "ext_regexp", ext_regexp);
         g_signal_connect (G_OBJECT (grep_entry), "event", 
-                EVENT_CALLBACK (Type::on_key_release), (gpointer) ext_regexp);
+                KEY_EVENT_CALLBACK (Type::on_key_release), (gpointer) ext_regexp);
 
 
 	auto look_in_binaries = 
@@ -461,7 +461,7 @@ private:
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (look_in_binaries), default_look_in_binaries);
 	g_object_set_data(G_OBJECT(dialog_), "look_in_binaries", look_in_binaries);
         g_signal_connect (G_OBJECT (grep_entry), "event", 
-                EVENT_CALLBACK (Type::on_key_release), (gpointer) look_in_binaries);
+                KEY_EVENT_CALLBACK (Type::on_key_release), (gpointer) look_in_binaries);
         
 	auto line_count = 
 	    GTK_CHECK_BUTTON(gtk_check_button_new_with_mnemonic (_("Line Count")));
@@ -472,7 +472,7 @@ private:
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (line_count), default_line_count);
 	g_object_set_data(G_OBJECT(dialog_), "line_count", line_count);
         g_signal_connect (G_OBJECT (grep_entry), "event", 
-                EVENT_CALLBACK (Type::on_key_release), (gpointer) line_count);
+                KEY_EVENT_CALLBACK (Type::on_key_release), (gpointer) line_count);
 	
        
 	auto hbox28 = gtk_c::hboxNew (FALSE, 0);
@@ -498,7 +498,7 @@ private:
 	gtk_widget_set_sensitive (GTK_WIDGET(label40), active_grep);
 	g_object_set_data(G_OBJECT(dialog_), "label40", label40);
         g_signal_connect (G_OBJECT (grep_entry), "event", 
-                EVENT_CALLBACK (Type::on_key_release), (gpointer) label40);
+                KEY_EVENT_CALLBACK (Type::on_key_release), (gpointer) label40);
 
         GSList *anywhere_group = NULL;
 	auto anywhere = 
@@ -513,7 +513,7 @@ private:
 	    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (anywhere), default_anywhere);
 	}
         g_signal_connect (G_OBJECT (grep_entry), "event", 
-                EVENT_CALLBACK (Type::on_key_release), (gpointer) anywhere);
+                KEY_EVENT_CALLBACK (Type::on_key_release), (gpointer) anywhere);
 	 
 
 	auto match_words = 
@@ -528,7 +528,7 @@ private:
 	    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (match_words), default_match_words);
 	}
         g_signal_connect (G_OBJECT (grep_entry), "event", 
-                EVENT_CALLBACK (Type::on_key_release), (gpointer) match_words);
+                KEY_EVENT_CALLBACK (Type::on_key_release), (gpointer) match_words);
 
 
 	auto match_lines = 
@@ -543,7 +543,7 @@ private:
 	    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (match_lines), default_match_lines);
 	}
         g_signal_connect (G_OBJECT (grep_entry), "event", 
-                EVENT_CALLBACK (Type::on_key_release), (gpointer) match_lines);
+                KEY_EVENT_CALLBACK (Type::on_key_release), (gpointer) match_lines);
 
 	auto match_no_match =
 	    GTK_RADIO_BUTTON (gtk_radio_button_new_with_mnemonic (NULL, _("No match")));
@@ -557,7 +557,7 @@ private:
 	    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (match_no_match), default_match_no_match);
 	}
         g_signal_connect (G_OBJECT (grep_entry), "event", 
-                EVENT_CALLBACK (Type::on_key_release), (gpointer) match_no_match);
+                KEY_EVENT_CALLBACK (Type::on_key_release), (gpointer) match_no_match);
 
 	gtk_widget_show(GTK_WIDGET(topPaneHbox));
 	gtk_widget_show (GTK_WIDGET(path_box));
@@ -1157,7 +1157,7 @@ private:
         gtk_entry_completion_set_text_column (completion, 0);
                                       
         g_signal_connect (entry,
-			  "key_release_event", EVENT_CALLBACK(Type::on_completion), 
+			  "key_release_event", KEY_EVENT_CALLBACK(Type::on_completion), 
 			  (gpointer)NULL);
         return entry;
     }

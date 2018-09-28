@@ -6,9 +6,6 @@
 namespace xf {
 
 template <class Type>
-class Notebook;
-
-template <class Type>
 class notebookSignals {
 public:
     /////////////  notebook specific signal bindings: /////////////////////////
@@ -136,7 +133,12 @@ public:
         auto notebook = (Notebook<Type> *)data;
         const gchar *workdir = notebook->workdir();
         TRACE("on_new_page this: %p (%s)\n", data, workdir);
+#ifdef XFFM_CC
+        auto dialog = (fmDialog<Type> *) data;
+        dialog->addPage(notebook->workdir());
+#else
         notebook->addPage(notebook->workdir());
+#endif
     }
 
     static void
@@ -184,7 +186,7 @@ public:
 
     }
     
-    void addPage(const gchar *workdir){
+    Page<double> *addPage(const gchar *workdir){
 	gint oldPosition = -1;
 	gboolean terminalMode;
 	if (gtk_notebook_get_current_page (notebook_) >= 0){
@@ -219,6 +221,7 @@ public:
 	    page->showIconview(!terminalMode, FALSE);
 	    setVpanePosition(oldPosition);
 	}
+        return page;
     }
 
     void removePage(GtkWidget *child){

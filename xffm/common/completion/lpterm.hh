@@ -244,7 +244,7 @@ public:
 	// in pagechild
 	 /*
 	g_signal_connect (status, "key-press-event", 
-		EVENT_CALLBACK (status_keyboard_event), data);
+		KEY_EVENT_CALLBACK (status_keyboard_event), data);
 	g_signal_connect (status_button, "button-press-event", 
 		BUTTON_CALLBACK (on_status_button_press), (void *)this);
 		*/
