@@ -134,6 +134,9 @@ main (int argc, char *argv[]) {
     
     gchar *e = NULL;
     if (getenv("EDITOR")) e = g_find_program_in_path(getenv("EDITOR"));
+    if (e && strstr(e, "nano")){
+          e = g_strdup_printf("%s nano", term_cmd);
+    }
      
     if (!e){
         e = g_find_program_in_path("gvim");

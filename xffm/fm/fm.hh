@@ -52,7 +52,8 @@ public:
 	if (workdir && strcmp(workdir, "xffm:root")==0){
 	    WARN("now adding RootView to xffm addPage()\n");
 	    //auto baseView =  std::make_shared<BaseView>(double);
-	    auto baseView =  new RootView<Type>("xffm:root");
+	    //auto baseView =  new RootView<Type>("xffm:root");
+	    auto baseView =  new BaseView<RootView<Type>>("xffm:root");
 
 	    g_object_set_data(G_OBJECT(page->top_scrolled_window()), "baseView", (void *)baseView);
 	    gtk_container_add (GTK_CONTAINER (page->top_scrolled_window()), GTK_WIDGET(baseView->iconView()));

@@ -1,3 +1,4 @@
+#warning "work in progress: should be LocalView class template"
 #ifndef XF_VIEW__HH
 # define XF_VIEW__HH
 namespace xf
