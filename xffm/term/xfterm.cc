@@ -165,7 +165,7 @@ main (int argc, char *argv[]) {
     //xf::termDialog<double> term("Term","utilities-terminal");
     //term.createDialog("/home");
 
-    auto xfterm = new(xf::termDialog<double>);
+    auto xfterm = new(xf::termDialog<double>)(argv[1]);
 //    auto xfterm = new(xf::termDialog<xf::completionSignals<double> >);
 //    auto xfterm = new(xf::termDialog<xf::LpTerm >);
     xfterm->setDialogTitle("Term");

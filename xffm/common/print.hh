@@ -626,7 +626,7 @@ private:
                 for (t=codes; t && *t; t++){
                     const gchar *ansiTag = get_ansi_tag(*t);
                     if (!ansiTag){
-                        ERROR("no ansiTag for \"%s\"\n", *t);
+                        DBG("no ansiTag for \"%s\"\n", *t);
                         if (strcmp(*t, "0")) {
                             g_free(fullTag); fullTag = NULL;
                             g_free(textviewTags); textviewTags = NULL;

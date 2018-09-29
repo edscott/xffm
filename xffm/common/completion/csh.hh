@@ -35,7 +35,7 @@ public:
         if(!cmd_fmt) return FALSE;
         if(!g_shell_parse_argv (cmd_fmt, &argc, &argv, &error)) {
             gchar *msg = g_strcompress (error->message);
-            ERROR ("%s: %s\n", msg, cmd_fmt);
+            DBG ("csh.hh:: %s: %s\n", msg, cmd_fmt);
             g_error_free (error);
             g_free (msg);
             return (FALSE);
