@@ -446,7 +446,7 @@ public:
 
 
         if (i>=MAX_COMMAND_ARGS - 1) {
-            TRACE("%s: (> %d)\n", strerror(E2BIG), MAX_COMMAND_ARGS);
+            TRACE("run.hh::%s: (> %d)\n", strerror(E2BIG), MAX_COMMAND_ARGS);
             argv[MAX_COMMAND_ARGS - 1]=NULL;
         }
 

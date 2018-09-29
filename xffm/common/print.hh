@@ -626,14 +626,15 @@ private:
                 for (t=codes; t && *t; t++){
                     const gchar *ansiTag = get_ansi_tag(*t);
                     if (!ansiTag){
-                        DBG("no ansiTag for \"%s\"\n", *t);
                         if (strcmp(*t, "0")) {
                             g_free(fullTag); fullTag = NULL;
                             g_free(textviewTags); textviewTags = NULL;
                             insert_string (buffer, ss[1], NULL);
                             g_strfreev(ss);
                             goto endloop;
-                        }
+                        } else {
+			    WARN("no ansiTag for \"%s\"\n", *t);
+			}
                         continue;
                     } else {
                         TRACE("ansiTag=%s\n", ansiTag);
