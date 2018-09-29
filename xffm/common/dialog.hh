@@ -116,8 +116,14 @@ public:
 	setDialogIcon(icon);
 	setDialogTitle(title);
     }
-
+    Dialog(const gchar *path){
+	init(path);
+    }
     Dialog(void){
+	init(NULL);
+    }
+
+    void init(const gchar *path){
 	dialog_ = GTK_WINDOW(gtk_window_new (GTK_WINDOW_TOPLEVEL));
         mainWindow = GTK_WIDGET(dialog_);
         g_signal_connect (G_OBJECT (dialog_), "delete-event", EVENT_CALLBACK (dialogSignals<Type>::delete_event), NULL);
@@ -140,7 +146,8 @@ public:
 #else
         auto dialog = (Dialog<Type> *) this;
 #endif       
-        dialog->addPage("xffm:root"); // FIXME: use path if specified
+
+        dialog->addPage(path); 
         TRACE("dialog this=%p\n", (void *)this);
         //this->insertPageChild(this->notebook());
         

@@ -186,7 +186,7 @@ public:
 
     }
     
-    Page<double> *addPage(const gchar *workdir){
+    Page<double> *addPage(const gchar *path){
 	gint oldPosition = -1;
 	gboolean terminalMode;
 	if (gtk_notebook_get_current_page (notebook_) >= 0){
@@ -208,7 +208,16 @@ public:
         g_hash_table_replace(pageHash_, (void *)page->pageChild(), (void *)page);
         gtk_notebook_set_current_page (notebook_,pageNumber);
 	// This will set the workdir for completion
-        page->setPageWorkdir(workdir);  
+	        
+	gchar *workdir;
+	if (path && g_file_test(path, G_FILE_TEST_IS_DIR))
+	    workdir = g_strdup(path);
+	else if (path)
+	    workdir = g_strdup(g_get_home_dir());
+	else workdir = g_get_current_dir();
+
+        page->setPageWorkdir(workdir); 
+	g_free(workdir);
 	
         g_signal_connect(G_OBJECT(page->pageLabelButton()), "clicked", 
                 BUTTON_CALLBACK(notebookSignals<Type>::on_remove_page), (void *)page); 
