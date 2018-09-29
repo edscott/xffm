@@ -3,6 +3,7 @@
 namespace xf {
 #ifdef XFFM_CC
 template <class Type> class fmDialog;
+template <class Type> class BaseView;
 #endif
 template <class Type> class Notebook;
 }

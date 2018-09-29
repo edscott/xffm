@@ -194,7 +194,7 @@ public:
 	    auto w = currentPageObject()->toggleToIconview();
 	    terminalMode = gtk_widget_is_visible(GTK_WIDGET(w));
 	}
-        auto page = new(Page<double>);
+        auto page = new(Page<Type>)((Dialog<Type> *)this);
         g_object_set_data(G_OBJECT(page->pageChild()), "Notebook", (void *)this);
 
         // This will (and should) be set by the corresponding

@@ -52,11 +52,9 @@ public:
         iconView_=createIconview();
         if (!highlight_hash) highlight_hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
         g_signal_connect (this->iconView_, "item-activated", 
-                ICONVIEW_CALLBACK (BaseView<double>::item_activated), (void *)this);
-    /*    g_signal_connect (get_iconview(), "motion-notify-event", 
-                G_CALLBACK (motion_notify_event), (void *)this);
-        g_signal_connect (get_iconview(), "leave-notify-event", 
-                G_CALLBACK (leave_notify_event), (void *)this);*/
+                ICONVIEW_CALLBACK (BaseView<Type>::item_activated), (void *)this);
+        g_signal_connect (this->iconView_, "motion-notify-event", 
+                ICONVIEW_CALLBACK (BaseView<Type>::motion_notify_event), (void *)this);
     }
     BaseView(void){
         init(NULL);
@@ -203,13 +201,6 @@ protected:
     }
 
 
-    void
-    clear_highlights(void){
-        if (!this) return;
-        if (!highlight_hash || g_hash_table_size(highlight_hash) == 0) return;
-        g_hash_table_foreach_remove (highlight_hash, BaseView<double>::unhighlight, (void *)this);
-    }
-
     gint 
     get_icon_column(void){ return DISPLAY_PIXBUF;}
 
@@ -311,27 +302,31 @@ public:
         */
     }
  
-#if 0
-    void 
+   /* void 
     highlight(void){
         highlight(highlight_x, highlight_y);
-    }
+    }*/
 
     void 
     highlight(gdouble X, gdouble Y){
-        if (!xfdir_p) return; // avoid race condition here.
-        highlight_x = X;
-        highlight_y = Y;
+        //if (!xfdir_p) return; // avoid race condition here.
+        //highlight_x = X; highlight_y = Y;
         GtkTreeIter iter;
-        GtkIconView *iconview = get_iconview();
         
-        GtkTreePath *tpath = gtk_icon_view_get_path_at_pos (iconview, X, Y); 
+        GtkTreePath *tpath = gtk_icon_view_get_path_at_pos (iconView_, X, Y); 
         if (tpath) {
-            xfdir_p->highlight(tpath);
-            //xfdir_p->tooltip(iconview, gtk_tree_path_copy(tpath));
+            highlight(tpath);
+            //xfdir_p->tooltip(iconview_, gtk_tree_path_copy(tpath));
         }
-        else xfdir_p->clear_highlights();
+        else clear_highlights();
     }
+
+    void
+    clear_highlights(void){
+        if (!highlight_hash || g_hash_table_size(highlight_hash) == 0) return;
+        g_hash_table_foreach_remove (highlight_hash, BaseView<double>::unhighlight, (void *)this);
+    }
+    
     
 
     static gboolean
@@ -341,14 +336,19 @@ public:
     {
         GdkEventMotion *e = (GdkEventMotion *)ev;
         GdkEventButton  *event = (GdkEventButton  *)ev;
-        view_c * view_p = (view_c *)data;
+        //view_c * view_p = (view_c *)data;
+	auto baseView = (BaseView<Type> *)data;
         if (!data) {
-            g_warning("motion_notify_event: data cannot be NULL\n");
+            DBG("BaseView::motion_notify_event: data cannot be NULL\n");
             return FALSE;
         }
-        if (!view_p->all_set_up) return FALSE;
-    //    if (!view_p->get_xfdir_p()) return FALSE;
-        NOOP("motion_notify, drag mode = %d\n", view_p->get_drag_mode());
+	DBG("motion_notify_event\n");
+
+#if 0
+	// drag mode stuff...
+	//
+        //if (!view_p->all_set_up) return FALSE;
+        TRACE("motion_notify, drag mode = %d\n", view_p->get_drag_mode());
         // Are we intending to set up a DnD?
         gint mode = view_p->get_drag_mode();
         // But is there a selection for the mode?
@@ -410,33 +410,15 @@ public:
                 view_p->set_drag_mode(1);
             }
         }
-                                     
+#endif                                     
 
-
-
-        if (view_p->get_dir_count() > 500) return FALSE;
-        view_p->highlight(e->x, e->y);
+	// XXX: Why this limitation?
+        // if (view_p->get_dir_count() > 500) return FALSE;
+        baseView->highlight(e->x, e->y);
         return FALSE;
     }
 
-    static gboolean
-    leave_notify_event (GtkWidget *widget,
-                   GdkEvent  *event,
-                   gpointer   data){
-        if (!data) {
-            g_warning("leave_notify_event: data cannot be NULL\n");
-            return FALSE;
-        }
-        view_c * view_p = (view_c *)data;
-        if (!view_p->all_set_up) return FALSE;
 
-        //fprintf(TRACE("leave_notify_event\n");
-        view_p->get_xfdir_p()->clear_highlights();
-        window_c *window_p = (window_c *)view_p->get_window_v();
-        window_p->set_tt_window(NULL, NULL);
-        return FALSE;
-    }
-#endif
 protected:
 
     gchar *path_;

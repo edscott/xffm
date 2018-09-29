@@ -46,11 +46,11 @@ public:
         auto page = notebook->addPage(workdir);
         WARN("now adding RootView to xffm addPage()\n");
         //auto baseView =  std::make_shared<BaseView>(double);
-        auto rootView =  new RootView<Type>("xffm:root");
+        auto baseView =  new RootView<Type>("xffm:root");
 
-        g_object_set_data(G_OBJECT(page->top_scrolled_window()), "rootView", (void *)rootView);
-        gtk_container_add (GTK_CONTAINER (page->top_scrolled_window()), GTK_WIDGET(rootView->iconView()));
-        gtk_widget_show (GTK_WIDGET(rootView->iconView()));
+        g_object_set_data(G_OBJECT(page->top_scrolled_window()), "baseView", (void *)baseView);
+        gtk_container_add (GTK_CONTAINER (page->top_scrolled_window()), GTK_WIDGET(baseView->iconView()));
+        gtk_widget_show (GTK_WIDGET(baseView->iconView()));
         
 
     }
