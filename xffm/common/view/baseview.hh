@@ -342,7 +342,7 @@ public:
             DBG("BaseView::motion_notify_event: data cannot be NULL\n");
             return FALSE;
         }
-	DBG("motion_notify_event\n");
+	TRACE("motion_notify_event\n");
 
 #if 0
 	// drag mode stuff...

@@ -96,7 +96,6 @@ main (int argc, char *argv[]) {
         gtk_main();
         return 0;
     }
-    
 
     // In order for SSH_ASKPASS to work (for sshfs or for executing
     // ssh commands at the lpterminal) we must detach the tty. 
@@ -112,6 +111,8 @@ main (int argc, char *argv[]) {
 	}
 	setsid(); // detach main process from tty
     }
+
+    const gchar *path = argv[1];
 
     // FIXME: set these environment variables *only* if they are not already set
     //        in the environment (allow user override)
@@ -158,7 +159,7 @@ main (int argc, char *argv[]) {
     }
     setenv("EDITOR", e, 1);
 
-    auto xffm = new(xf::fmDialog<double>);
+    auto xffm = new(xf::fmDialog<double>)(path);
     xffm->setDialogTitle("Fm");
     xffm->setDialogIcon("system-file-manager");
 
