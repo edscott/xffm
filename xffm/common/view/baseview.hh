@@ -314,11 +314,6 @@ protected:
         return ;
     }
 
-    void 
-    highlight_drop(GtkTreePath *tpath){
-        return;
-    }
-
     void
     highlight(GtkTreePath *tpath){
             //TRACE("highlight %d, %d\n", highlight_x, highlight_y);
@@ -636,78 +631,6 @@ public:
         }
 	TRACE("motion_notify_event\n");
 
-#if 0
-	// drag mode stuff...
-	//
-        //if (!view_p->all_set_up) return FALSE;
-        TRACE("motion_notify, drag mode = %d\n", baseView->dragMode());
-        // Are we intending to set up a DnD?
-        // Say yes...
-        gint mode = baseView->dragMode();
-        // -1 : move
-        // -1 : move (with shift)
-        // -2 : copy (with ctl)
-        // -3 : ln (with ctl+shift)
-        // But is there a selection for the mode?
-        if (mode){
-            TRACE("// Are we intending to set up a DnD? Maybe...mode = %d\n",  mode);
-            // should not happen:
-            // if (mode>0) { return FALSE; }
-            // Valid selection?
-            GList *selection_list = gtk_icon_view_get_selected_items (baseView->iconView());
-            if (!selection_list) {
-                baseView->setDragMode(0);
-                return FALSE;
-            }
-
-            baseView->setSelectionList(selection_list);
-            TRACE("// Have we dragged outside the icon area?\n");
-            if (!gtk_icon_view_get_item_at_pos (baseView->iconView(), e->x, e->y, NULL,NULL)) 
-            {
-                DBG("// Yeah. Let us start drag action now\n");
-                // First de allow this to work as a click cancellation.
-                // (if not rubberbanding)
-                baseView->setClickCancel(1);
-                
-                // Set up for for move||copy||link drag now
-                // Deprecated method
-          /*      gtk_drag_source_set (GTK_WIDGET(view_p->get_iconview()),
-                             (GdkModifierType)(GDK_BUTTON1_MASK), target_table,
-                             NUM_TARGETS, GDK_ACTION_MOVE);  
-                gtk_drag_source_set_target_list (GTK_WIDGET(view_p->get_iconview()),
-                        view_p->get_target_list());*/
-
-                GdkDragContext *context = 
-                    gtk_drag_begin_with_coordinates (GTK_WIDGET(baseView->iconView()),
-                       baseView->getTargetList(),
-                       (GdkDragAction)(((gint)GDK_ACTION_MOVE)|
-                       ((gint)GDK_ACTION_COPY)|
-                       ((gint)GDK_ACTION_LINK)),
-                       1, //drag button
-                       ev,
-                       e->x, e->y);
-     
-                if (g_list_length(selection_list) >1){
-                    gtk_drag_set_icon_name (context, "edit-copy-symbolic", 0, 0);
-                } else {
-                    gtk_drag_set_icon_name (context, "document-send-symbolic", 0, 0);
-                    // FIXME: get item pixbuf
-                    /*xfdir_c *x = view_p->get_xfdir_p();
-                    GtkTreeModel *treemodel = x->get_tree_model();
-                    GtkTreePath *tpath = (GtkTreePath *)selection_list->data;
-                    GtkTreeIter iter;
-                    gtk_tree_model_get_iter (treemodel, &iter, tpath);
-                    GdkPixbuf *pixbuf;
-                    // XXX  will this add a ref to pixbuf? nah!
-                    gtk_tree_model_get (treemodel, &iter, 
-                        NORMAL_PIXBUF, &pixbuf, -1);       
-                    gtk_drag_set_icon_pixbuf (context, pixbuf, 0, 0);*/
-                }
-                baseView->setDragMode(1);
-            }
-        }
-#endif                                     
-
 	// XXX: Why this limitation?
         // if (view_p->get_dir_count() > 500) return FALSE;
         baseView->highlight(e->x, e->y);
@@ -789,7 +712,7 @@ public:
             GdkDragContext * dc, gint drag_x, gint drag_y, 
             guint t, gpointer data) {
 	auto baseView = (BaseView<Type> *)data;
-
+        TRACE("signal_drag_motion\n");
                                         
         GtkTreePath *tpath;
                                         
@@ -799,25 +722,20 @@ public:
                                         drag_x, drag_y,
                                         &tpath,
                                         &pos)){
+            GtkTreeIter iter;
+            gtk_tree_model_get_iter (baseView->treeModel(), &iter, tpath);
+            gchar *g;
+            gtk_tree_model_get (baseView->treeModel(), &iter,  ACTUAL_NAME, &g, -1);
             // drop into?
             // must be a directory
-            // FIXME:
-            //view_p->get_xfdir_p()->highlight_drop(tpath);
-            ////view_p->highlight(drag_x, drag_y);
+            if (g_file_test(g, G_FILE_TEST_IS_DIR)){
+                baseView->highlight(tpath);
+            } else {
+                baseView->highlight(NULL);
+            }
         } else {
-            // FIXME:
-            //view_p->get_xfdir_p()->clear_highlights();
+            baseView->highlight(NULL);
         }
-        // Called by the receiving end of the DnD
-        //
-     //   GdkDragAction action = gdk_drag_context_get_actions(dc);
-            
-      //  gdk_drag_status (dc, action, t);
-
-        
-      //  fprintf (stderr, "DND>> drag_motion\n");
-        // Set drag source to move copy or link here.
-       
         return FALSE;
     }
 
@@ -884,9 +802,6 @@ public:
           case TARGET_URI_LIST:
             {
                 DBG( ">>> DND send, TARGET_URI_LIST\n"); 
-                // FIXME:
-                
-                //xfdir_c *xfdir_p = view_p->get_xfdir_p();
                 GList *selection_list = baseView->selectionList();
                 gboolean result = baseView->setDndData(selection_data, selection_list);
               
