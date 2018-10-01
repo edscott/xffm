@@ -7,9 +7,11 @@ template <class Type> class BaseView;
 #endif
 template <class Type> class Notebook;
 }
+#define DRAG_CALLBACK(X)  G_CALLBACK((void (*)(GtkWidget *,GdkDragContext *,gpointer)) X)
 
 
 #define EVENT_CALLBACK(X)  G_CALLBACK((gint (*)(GtkWidget *,GdkEvent *,gpointer)) X)
+#define BUTTON_EVENT_CALLBACK(X)  G_CALLBACK((gint (*)(GtkWidget *,GdkEventButton *,gpointer)) X)
 #define KEY_EVENT_CALLBACK(X)  G_CALLBACK((gint (*)(GtkWidget *,GdkEventKey *,gpointer)) X)
 #define ICONVIEW_CALLBACK(X)  G_CALLBACK((void (*)(GtkIconView *,GtkTreePath *,gpointer)) X)
 #define SELECTION_RECEIVED_CALLBACK(X)  G_CALLBACK((void (*)(GtkWidget *,GtkSelectionData *,guint,gpointer)) X)

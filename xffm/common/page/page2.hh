@@ -84,7 +84,7 @@ public:
             DBG("leave_notify_event: data cannot be NULL\n");
             return FALSE;
         }
-	WARN("leave_notify_event\n");
+	DBG("leave_notify_event\n");
 
 	auto page = (Page<Type> *)data;
         auto dialog = page->parent();
