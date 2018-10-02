@@ -93,7 +93,7 @@ class BaseView{
     gint dragMode_;
     gint clickCancel_;
     GList *selectionList_;
-    GtkTargetList *targetList_;
+    //GtkTargetList *targetList_;
 public:
     void init(const gchar *path){
         if (path) path = g_strdup(path);
@@ -165,7 +165,7 @@ public:
 
     GtkIconView *iconView(void){return iconView_;}
     GtkTreeModel *treeModel(void){return treeModel_;}
-    GtkTargetList *getTargetList(void){return targetList_;}
+    //GtkTargetList *getTargetList(void){return targetList_;}
 
 protected:
 
@@ -479,7 +479,7 @@ public:
     createTargetList (void) {
         DBG("create_target_list..\n");
         //if(target_list) return;
-        targetList_ = gtk_target_list_new (targetTable, NUM_TARGETS);
+        //targetList_ = gtk_target_list_new (targetTable, NUM_TARGETS);
         // The default dnd action: move.
         gtk_icon_view_enable_model_drag_dest (iconView_,
                                           targetTable, 
@@ -665,7 +665,8 @@ public:
             goto drag_over;         /* of course */
         }
 
-        TRACE("rodent_mouse: DND receive, action=%d\n", action);
+        WARN("rodent_mouse: DND receive, action=%d\n", action);
+        WARN("actions mv/cp/ln: %d/%d/%d\n", GDK_ACTION_MOVE, GDK_ACTION_COPY, GDK_ACTION_LINK);
         if(action != GDK_ACTION_MOVE && 
            action != GDK_ACTION_COPY &&
            action != GDK_ACTION_LINK) {
