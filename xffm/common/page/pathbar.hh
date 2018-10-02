@@ -106,13 +106,21 @@ public:
     pathbar_ok(GtkButton * button){
 	GList *children_list = gtk_container_get_children(GTK_CONTAINER(pathbar_));
 	GList *children = children_list;
+        auto page = (Page<Type> *)this;
 	for (;children && children->data; children=children->next){
 	    if (button == children->data){
 		const gchar *path = (gchar *)g_object_get_data(G_OBJECT(button), "path");
-		if (!path) path = "xffm:root";
-                auto page = (Page<Type> *)this;
+		if (!path) {
+#ifdef XFFM_CC
+                    auto dialog = (fmDialog<Type> *)page->parent();
+                    dialog->load("xffm:root");
+                    page->setPageWorkdir(g_get_home_dir());
+#else  
+                    ERROR("pathbar_ok : path = NULL\n");  //;
+#endif          
+                    return;
+                }
                 page->setPageWorkdir(path);
-                
 
 		/*
 		view_c *view_p = (view_c *)g_object_get_data(G_OBJECT(pathbar_), "view_p");

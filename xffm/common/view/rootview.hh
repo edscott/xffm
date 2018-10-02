@@ -25,6 +25,8 @@ RootView(const gchar *path):
 }
 */
 
+    static gboolean enableDragSource(void){ return FALSE;}
+    static gboolean enableDragDest(void){ return FALSE;}
 
     static void 
     reload(const gchar *data){

@@ -223,12 +223,15 @@ public:
                 BUTTON_CALLBACK(notebookSignals<Type>::on_remove_page), (void *)page); 
 	// If current page exists, use the same vpane position, otherwise
 	// use default value 
-	
 	if (oldPosition < 0) {
 	    page->showIconview(page->iconviewIsDefault(), TRUE);
 	} else {
 	    page->showIconview(!terminalMode, FALSE);
-	    setVpanePosition(oldPosition);
+            // //FIXME FIXME FIXME:
+            // This breaks everything if vpane is in
+            // a position greater than zero.
+            // both for xfterm and xffm
+	    //setVpanePosition(oldPosition);
 	}
         return page;
     }

@@ -43,11 +43,14 @@
         xf::Response<double>::sendPassword(argv+1);
         exit(1);
     } else {
+#define FORK
+#ifdef FORK
 	if(fork ()){
 	    sleep(2);
 	    _exit (123);
 	}
 	setsid(); // detach main process from tty
+#endif
     }
 
     const gchar *path = argv[1];

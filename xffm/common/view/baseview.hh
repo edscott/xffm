@@ -103,9 +103,17 @@ public:
         selectionList_ = NULL;
         
         iconView_=createIconview();
-        createTargetList();
+        createSourceTargetList();
+        createDestTargetList();
 	
+        if (!Type::enableDragSource()){
+            gtk_icon_view_unset_model_drag_source (iconView_);
+        }
+        if (!Type::enableDragDest()){
+            gtk_icon_view_unset_model_drag_dest (iconView_);
+        }
 	treeModel_ = Type::mkTreeModel(path);
+        
 	g_object_set_data(G_OBJECT(treeModel_), "iconview", iconView_);
 	gtk_icon_view_set_model(iconView_, treeModel_);
 
@@ -159,8 +167,9 @@ public:
     }
 
     ~BaseView(void){
-        g_free(path_); 
-        g_object_unref(treeModel_);
+        // segfault:
+        // g_free(path_); 
+        //g_object_unref(treeModel_);
     }
 
     GtkIconView *iconView(void){return iconView_;}
@@ -476,27 +485,32 @@ public:
 
 
     void
-    createTargetList (void) {
-        DBG("create_target_list..\n");
-        //if(target_list) return;
-        //targetList_ = gtk_target_list_new (targetTable, NUM_TARGETS);
-        // The default dnd action: move.
-        gtk_icon_view_enable_model_drag_dest (iconView_,
-                                          targetTable, 
-                                          NUM_TARGETS,
-                                          (GdkDragAction)
-                                    ((gint)GDK_ACTION_MOVE|
-                                     (gint)GDK_ACTION_COPY|
-                                     (gint)GDK_ACTION_LINK));
+    createSourceTargetList (void) {
+        DBG("createSourceTargetList..\n");
         gtk_icon_view_enable_model_drag_source
                                    (iconView_,
                                     (GdkModifierType)
                                     0,
-                            //	((gint)GDK_SHIFT_MASK|(gint)GDK_CONTROL_MASK),
-                                    //GdkModifierType start_button_mask,
                                     targetTable,
                                     NUM_TARGETS,
                                     (GdkDragAction)
+                                    ((gint)GDK_ACTION_MOVE|
+                                     (gint)GDK_ACTION_COPY|
+                                     (gint)GDK_ACTION_LINK));
+        return;
+    }
+
+    void
+    createDestTargetList (void) {
+        DBG("createDestTargetList..\n");
+        //if(target_list) return;
+        //targetList_ = gtk_target_list_new (targetTable, NUM_TARGETS);
+        // The default dnd action: move.
+
+        gtk_icon_view_enable_model_drag_dest (iconView_,
+                                          targetTable, 
+                                          NUM_TARGETS,
+                                          (GdkDragAction)
                                     ((gint)GDK_ACTION_MOVE|
                                      (gint)GDK_ACTION_COPY|
                                      (gint)GDK_ACTION_LINK));
@@ -654,7 +668,6 @@ public:
 
         gboolean result = FALSE;
         gchar *target = NULL;
-        GtkTreePath *tpath=NULL;
 
 
 
@@ -662,7 +675,9 @@ public:
         
         TRACE("rodent_mouse: DND receive, info=%d (%d,%d)\n", info, TARGET_STRING, TARGET_URI_LIST);
         if(info != TARGET_URI_LIST) {
-            goto drag_over;         /* of course */
+            gtk_drag_finish(context, FALSE, FALSE, time);
+            return;
+      //            goto drag_over;         /* of course */
         }
 
         WARN("rodent_mouse: DND receive, action=%d\n", action);
@@ -671,18 +686,21 @@ public:
            action != GDK_ACTION_COPY &&
            action != GDK_ACTION_LINK) {
             DBG("Drag drop mode is not GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK\n");
-            goto drag_over;         /* of course */
+            gtk_drag_finish(context, FALSE, FALSE, time);
+            return;
+      //      goto drag_over;         /* of course */
         }
 
 
+        GtkTreePath *tpath=NULL;
         if (gtk_icon_view_get_item_at_pos (baseView->iconView(),
                                    x, y, &tpath, NULL))
         {
             GtkTreeIter iter;
             gtk_tree_model_get_iter (baseView->treeModel(), &iter, tpath);
-            gtk_tree_model_get (baseView->treeModel(), &iter, 
-                    ACTUAL_NAME, &target, -1);	
+            gtk_tree_model_get (baseView->treeModel(), &iter, ACTUAL_NAME, &target, -1);	
         } else tpath=NULL;
+
                     // nah
        /* gtk_icon_view_get_drag_dest_item (view_p->get_iconview(),
                                       &tpath,
@@ -694,14 +712,16 @@ public:
         
         if (tpath) gtk_tree_path_free(tpath);
         g_free(target);
-      drag_over:
         auto dndData = (const char *)gtk_selection_data_get_data (selection_data);
         
 	DBG("dndData = \"%s\"\n", dndData);
 
+        // FIXME: if sourcedir == targetdir, 
+        // gtk_drag_finish(context, FALSE, FALSE);
         gtk_drag_finish (context, TRUE, 
                 (action == GDK_ACTION_MOVE) ? TRUE : FALSE, 
                 time);
+
         DBG("rodent_mouse: DND receive, drag_over\n");
         return;
 
@@ -753,9 +773,8 @@ public:
         
     }
 
-
     static void
-    signal_drag_begin (GtkWidget * widget, GdkDragContext * drag_context, gpointer data) {
+    signal_drag_begin (GtkWidget * widget, GdkDragContext * context, gpointer data) {
         WARN("signal_drag_begin\n");
 	auto baseView = (BaseView<Type> *)data;
 
