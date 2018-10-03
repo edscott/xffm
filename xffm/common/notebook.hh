@@ -187,6 +187,7 @@ public:
     }
     
     Page<double> *addPage(const gchar *path){
+#if 0
 	gint oldPosition = -1;
 	gboolean terminalMode;
 	if (gtk_notebook_get_current_page (notebook_) >= 0){
@@ -194,6 +195,8 @@ public:
 	    auto w = currentPageObject()->toggleToIconview();
 	    terminalMode = gtk_widget_is_visible(GTK_WIDGET(w));
 	}
+#endif
+	
         auto page = new(Page<Type>)((Dialog<Type> *)this);
         g_object_set_data(G_OBJECT(page->pageChild()), "Notebook", (void *)this);
 
@@ -221,18 +224,25 @@ public:
 	
         g_signal_connect(G_OBJECT(page->pageLabelButton()), "clicked", 
                 BUTTON_CALLBACK(notebookSignals<Type>::on_remove_page), (void *)page); 
+#if 1	    
+	page->showIconview(page->iconviewIsDefault());
+#else
 	// If current page exists, use the same vpane position, otherwise
 	// use default value 
 	if (oldPosition < 0) {
 	    page->showIconview(page->iconviewIsDefault(), TRUE);
 	} else {
 	    page->showIconview(!terminalMode, FALSE);
-            // //FIXME FIXME FIXME:
-            // This breaks everything if vpane is in
+            // XXX:
+            // setVpanePosition breaks everything if vpane is in
             // a position greater than zero.
-            // both for xfterm and xffm
-	    //setVpanePosition(oldPosition);
+            // both for xfterm and xffm.
+	    // Would have to be done after the iconview is 
+	    // added.
+	    // Not really a thing to have, come to think of it.
+	    // setVpanePosition(oldPosition);
 	}
+#endif
         return page;
     }
 

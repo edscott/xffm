@@ -38,9 +38,9 @@ public:
         //page->setPageWorkdir(workdir);
 	// Default into iconview...
         page->setDefaultIconview(TRUE);
-	page->showIconview(TRUE, TRUE);
+	page->showIconview(TRUE);
         //page->setDefaultIconview(FALSE);
-	//page->showIconview(FALSE, FALSE);
+	//page->showIconview(FALSE);
     }
 
     //FIXME:
@@ -51,87 +51,35 @@ public:
         auto notebook = (Notebook<Type> *)this;
         auto page = notebook->addPage(workdir);
         
-        while (gtk_events_pending())gtk_main_iteration();
+        //while (gtk_events_pending())gtk_main_iteration();
         load(workdir);
+	page->showIconview(page->iconviewIsDefault());
     }
     void load(const gchar *workdir){
         auto notebook = (Notebook<Type> *)this;
         auto page = notebook->currentPageObject();
 
-        // FIXME: if object data, then hide current and show other
-        //        otherwise hide, create and show.
+	auto baseView = (BaseView<RootView<Type>> *)
+	g_object_get_data(G_OBJECT(page->top_scrolled_window()), "baseView");
 
-	WARN("adding page with workdir=%s\n", workdir);
-	if (workdir && strcmp(workdir, "xffm:root")==0)
-        {
-            auto rootView =  new BaseView<RootView<Type>>("xffm:root");
-            g_object_set_data(G_OBJECT(page->top_scrolled_window()), "rootView", (void *)rootView);
-            g_object_set_data(G_OBJECT(page->top_scrolled_window()), "baseView", (void *)rootView);
-            gtk_container_add (GTK_CONTAINER (page->top_scrolled_window()),
-                    GTK_WIDGET(rootView->iconView()));
-            gtk_widget_show (GTK_WIDGET(rootView->iconView()));
-            while (gtk_events_pending())gtk_main_iteration();
-        }
-    }
-
-#if 0
-
-            auto rootView = (BaseView<RootView<Type>> *)
-                g_object_get_data(G_OBJECT(page->top_scrolled_window()), "rootView");
-            auto baseView = (BaseView<Type> *)
-                g_object_get_data(G_OBJECT(page->top_scrolled_window()), "baseView");
-            if (!rootView) {
-                WARN("new rootview\n");
-                rootView =  new BaseView<RootView<Type>>("xffm:root");
-                g_object_set_data(G_OBJECT(page->top_scrolled_window()), "rootView", (void *)rootView);
-            }
-
-            if ((void *)baseView != (void *)rootView){
-                if (baseView){
-                WARN("removing baseview\n");
-                    g_object_ref(G_OBJECT(baseView->iconView()));
-                    gtk_container_remove(GTK_CONTAINER (page->top_scrolled_window()), 
-                                GTK_WIDGET(baseView->iconView()));
-                }
-                WARN("adding rootview\n");
-                gtk_container_add (GTK_CONTAINER (page->top_scrolled_window()),
-                        GTK_WIDGET(rootView->iconView()));
-                gtk_widget_show (GTK_WIDGET(rootView->iconView()));
-                while (gtk_events_pending())gtk_main_iteration();
-                if (baseView){
-              //      g_object_unref(G_OBJECT(baseView->iconView()));
-                //    delete (baseView);
-                }
-                g_object_set_data(G_OBJECT(page->top_scrolled_window()), "baseView", 
-                        (void *)rootView);
-            }
-
-
-/*
-
-            if (baseView) {
-                    WARN("deleting baseView...\n");
-	            gtk_widget_hide (GTK_WIDGET(baseView->iconView()));
-                    gtk_container_remove(GTK_CONTAINER (page->top_scrolled_window()), 
-                            GTK_WIDGET(baseView->iconView()));
-	            //delete(baseView);
-            }
-            WARN("now creating RootView\n");
-            //auto baseView =  std::make_shared<BaseView>(double);
-            //auto baseView =  new RootView<Type>("xffm:root");
-            auto rootView =  new BaseView<RootView<Type>>("xffm:root");
-            
-            g_object_set_data(G_OBJECT(page->top_scrolled_window()), "baseView", (void *)rootView);
-            //g_object_set_data(G_OBJECT(page->top_scrolled_window()), "rootView", (void *)rootView);
-            gtk_container_add (GTK_CONTAINER (page->top_scrolled_window()), GTK_WIDGET(rootView->iconView()));
-            gtk_widget_show (GTK_WIDGET(rootView->iconView()));
-	    //gtk_widget_hide (GTK_WIDGET(rootView->iconView()));
-            */
+	if (baseView){
+	    WARN("removing baseView\n");
+	    gtk_widget_hide (GTK_WIDGET(baseView->iconView()));		
+	    g_object_ref(G_OBJECT(baseView->iconView()));
+	    gtk_container_remove(GTK_CONTAINER (page->top_scrolled_window()), 
+			GTK_WIDGET(baseView->iconView()));
+	    delete baseView;
 	}
-      
+	WARN("adding rootview\n");
+	auto rootView =  new BaseView<RootView<Type>>("xffm:root");
 
+	gtk_container_add (GTK_CONTAINER (page->top_scrolled_window()),
+		GTK_WIDGET(rootView->iconView()));
+	gtk_widget_show (GTK_WIDGET(rootView->iconView()));
+	while (gtk_events_pending())gtk_main_iteration();
+	g_object_set_data(G_OBJECT(page->top_scrolled_window()), "baseView",(void *)rootView);
+	
     }
-#endif
 };
 
 
