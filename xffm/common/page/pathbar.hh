@@ -14,52 +14,66 @@ class Pathbar
     using gtk_c = Gtk<double>;
     using util_c = Util<double>;
     using print_c = Print<double>;
-private:
-        //void *window_p;
-	GtkWidget *pathbar_;
-        //void *view_p;
     
 public:
-    Pathbar(void) {
+    Pathbar(const gchar *path) {
 	pathbar_ = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+        setStyle();
 
 	g_object_set_data(G_OBJECT(pathbar_), "callback", (void *)pathbar_go);
-	GtkButton *pb_button = pathbar_button( NULL, ".");
-
-        GError *error=NULL;
-	GtkStyleContext *style_context = gtk_widget_get_style_context (GTK_WIDGET(pathbar_));
-	gtk_style_context_add_class(style_context, GTK_STYLE_CLASS_BUTTON );
-	GtkCssProvider *css_provider = gtk_css_provider_new();
-	gtk_css_provider_load_from_data (css_provider, 
-    "\
-    box * {\
-      background-color: #dcdad5;\
-      border-width: 0px;\
-      border-radius: 0px;\
-      border-color: transparent;\
-    }\
-    ", 
-	    -1, &error);
-	gtk_style_context_add_provider (style_context, GTK_STYLE_PROVIDER(css_provider),
-				    GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-
-
-        
-
+        // xffm:root button:
+	auto pb_button = pathbar_button( NULL, ".");       
 	gtk_box_pack_start (GTK_BOX (pathbar_), GTK_WIDGET(pb_button), FALSE, FALSE, 0);
 	g_object_set_data(G_OBJECT(pb_button), "name", g_strdup("RFM_ROOT"));
 	g_signal_connect (G_OBJECT(pb_button) , "clicked", BUTTON_CALLBACK (pathbar_go), (void *)this);
-	DBG("showing pathbar pb_button\n");
+	TRACE("showing pathbar pb_button: %s\n", path);
 	gtk_widget_show(GTK_WIDGET(pb_button));
+
+#if 0
+        // Full path buttons:
+        // XXX none of this will print out the full button paths
+        // colosal fail.
+        gchar **dirs = g_strsplit(path, G_DIR_SEPARATOR_S, -1);
+        gchar *buttonPath = NULL;
+        for (gchar **dir = dirs; dir && *dir; dir++){
+            const gchar *text = (strcmp(*dir,"")==0)?"/":*dir;
+            if (buttonPath == NULL) buttonPath = g_strdup("");
+            else {
+                gchar *g = g_strconcat(buttonPath, G_DIR_SEPARATOR_S, *dir, NULL);
+                g_free(buttonPath);
+                buttonPath=g;
+            }
+            pb_button = pathbar_button( NULL, text);       
+            gtk_box_pack_start (GTK_BOX (pathbar_), GTK_WIDGET(pb_button), FALSE, FALSE, 0);
+            g_object_set_data(G_OBJECT(pb_button), "name", g_strdup(text));
+            g_object_set_data(G_OBJECT(pb_button), "path", g_strdup(buttonPath));
+            g_signal_connect (G_OBJECT(pb_button) , "clicked", BUTTON_CALLBACK (pathbar_go), (void *)this);
+            DBG("showing pathbar pb_button: \"%s\":%s\n", text, buttonPath);
+            gtk_widget_show(GTK_WIDGET(pb_button));
+        }
+        g_free(buttonPath);
+        g_strfreev(dirs);
+        update_pathbar(path);
+#endif   
     }
 
     GtkWidget *
-    get_pathbar(void){ return pathbar_;}
+    pathbar(void){ return pathbar_;}
 
+    void 
+    update_pathbar(const gchar *path){
+	TRACE( "update pathbar to %s\n", path);
+	void *arg[]={(void *)this, (void *)(path?g_strdup(path):NULL)};
+	util_c::context_function(update_pathbar_f, arg);
+    }
+
+private:
+    GtkWidget *pathbar_;
 
     GtkButton *
     pathbar_button (const char *icon_id, const char *text) {
 	GtkButton  *pb_button = GTK_BUTTON( gtk_button_new ());
+        TRACE("pathbar_button():: text=%s\n", text);
 
  /*       GError *error=NULL;
 	GtkStyleContext *style_context = gtk_widget_get_style_context (GTK_WIDGET(pb_button));
@@ -96,14 +110,8 @@ public:
 
 
     void 
-    update_pathbar(const gchar *path){
-	TRACE( "update pathbar to %s\n", path);
-	void *arg[]={(void *)this, (void *)(path?g_strdup(path):NULL)};
-	util_c::context_function(update_pathbar_f, arg);
-    }
-
-    void 
     pathbar_ok(GtkButton * button){
+        TRACE("pathbar_ok\n");
 	GList *children_list = gtk_container_get_children(GTK_CONTAINER(pathbar_));
 	GList *children = children_list;
         auto page = (Page<Type> *)this;
@@ -133,6 +141,7 @@ public:
 
     void 
     toggle_pathbar(const gchar *path){
+        TRACE("toggle_pathbar\n");
 	GList *children_list = 
 	    gtk_container_get_children(GTK_CONTAINER(pathbar_));
 	GList *children;
@@ -249,6 +258,26 @@ public:
 	g_list_free(children_list);
     }
 
+private:
+    void setStyle(void){
+        GError *error=NULL;
+	GtkStyleContext *style_context = gtk_widget_get_style_context (GTK_WIDGET(pathbar_));
+	gtk_style_context_add_class(style_context, GTK_STYLE_CLASS_BUTTON );
+	GtkCssProvider *css_provider = gtk_css_provider_new();
+	gtk_css_provider_load_from_data (css_provider, 
+    "\
+    box * {\
+      background-color: #dcdad5;\
+      border-width: 0px;\
+      border-radius: 0px;\
+      border-color: transparent;\
+    }\
+    ", 
+	    -1, &error);
+	gtk_style_context_add_provider (style_context, GTK_STYLE_PROVIDER(css_provider),
+				    GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+    }
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
     static void
@@ -263,7 +292,7 @@ public:
 	void **arg = (void **)data;
 	Pathbar *pathbar_p = (Pathbar *)arg[0];
 	gchar *path = (gchar *)arg[1];
-	GtkWidget *pathbar = pathbar_p->get_pathbar();
+	GtkWidget *pathbar = pathbar_p->pathbar();
 	TRACE( "update_pathbar_f:: %s\n", path);
 
 	if (!pathbar) return NULL;

@@ -40,7 +40,7 @@ public:
     static void toggleToTerminal(GtkButton *button, gpointer data){
         // This will toggle into terminal
         auto page = (Page<Type> *)data;
-        //page->showIconview(FALSE);
+        page->showIconview(FALSE);
     }
     static gboolean
     rangeChangeValue(GtkRange     *range,
@@ -123,7 +123,7 @@ private:
 
 public:
 
-    Page(Dialog<Type> *parent){
+    Page(Dialog<Type> *parent, const gchar *workdir):Pathbar<Type>(workdir){
 	parent_ = parent;
 	pageChild_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
 	pageLabel_ = GTK_LABEL(gtk_label_new ("foobar"));
@@ -145,7 +145,7 @@ public:
 	//set_spinner(pageSpinner_, TRUE, pageLabelIconBox_);
 	set_spinner(FALSE);
 
-	gtk_box_pack_start (pageChild_, this->get_pathbar(), FALSE, FALSE, 0);
+	gtk_box_pack_start (pageChild_, this->pathbar(), FALSE, FALSE, 0);
 
 	//gtk_widget_show_all(GTK_WIDGET(pageLabelBox_));
 

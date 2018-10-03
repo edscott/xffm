@@ -147,6 +147,7 @@ public:
         auto page = (Page<Type> *)data;
         auto notebook = (Notebook<Type> *)(g_object_get_data(G_OBJECT(page->pageChild()), "Notebook"));
         notebook->removePage(GTK_WIDGET(page->pageChild()));
+        while(gtk_events_pending()) gtk_main_iteration();
     }
 
 
@@ -187,8 +188,17 @@ public:
     }
     
     Page<double> *addPage(const gchar *path){
+	gchar *workdir;
+	if (path && g_file_test(path, G_FILE_TEST_IS_DIR)){
+	    workdir = g_strdup(path);
+        } else if (path) {
+	    workdir = g_strdup(g_get_home_dir());
+        }
+	else {
+            workdir = g_get_current_dir();
+        }
 	
-        auto page = new(Page<Type>)((Dialog<Type> *)this);
+        auto page = new(Page<Type>)((Dialog<Type> *)this, workdir);
         g_object_set_data(G_OBJECT(page->pageChild()), "Notebook", (void *)this);
 
         // This will (and should) be set by the corresponding
@@ -203,22 +213,15 @@ public:
         gtk_notebook_set_current_page (notebook_,pageNumber);
 	// This will set the workdir for completion
 	        
-	gchar *workdir;
-	if (path && g_file_test(path, G_FILE_TEST_IS_DIR))
-	    workdir = g_strdup(path);
-	else if (path)
-	    workdir = g_strdup(g_get_home_dir());
-	else workdir = g_get_current_dir();
-
         page->setPageWorkdir(workdir); 
 	g_free(workdir);
 	
         g_signal_connect(G_OBJECT(page->pageLabelButton()), "clicked", 
                 BUTTON_CALLBACK(notebookSignals<Type>::on_remove_page), (void *)page); 
-#if 1	    
-	//page->showIconview(FALSE);
-	//page->showIconview(page->iconviewIsDefault());
-#else
+#ifndef XFFM_CC	    
+        // Terminal mode: 
+	while (gtk_events_pending()) gtk_main_iteration();
+        page->showIconview(FALSE);
 #endif
         return page;
     }
@@ -260,7 +263,7 @@ public:
     void setTabIcon(GtkWidget *child, const gchar *icon){
         Page<Type> *page = (Page<Type> *)g_hash_table_lookup(pageHash_, (void *)child);
         if (!page){
-            ERROR("setVpanePosition:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
+            ERROR("setTabIcon:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
             return;
         }
         page->setTabIcon(icon);
@@ -287,7 +290,7 @@ public:
         Page<Type> *page = (Page<Type> *)g_hash_table_lookup(pageHash_, (void *)child);
 
         if (!page){
-            ERROR("setVpanePosition:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
+            ERROR("workdir:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
             return NULL;
         }
         return page->workDir();
@@ -300,7 +303,7 @@ public:
         Page<Type> *page = (Page<Type> *)g_hash_table_lookup(pageHash_, (void *)child);
 
         if (!page){
-            ERROR("setVpanePosition:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
+            ERROR("setWorkdir:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
             return NULL;
         }
         return page->setWorkDir(dir);
@@ -313,7 +316,7 @@ public:
         Page<Type> *page = (Page<Type> *)g_hash_table_lookup(pageHash_, (void *)child);
 
         if (!page){
-            ERROR("setVpanePosition:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
+            ERROR("diagnostics:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
             return NULL;
         }
         return page->diagnostics();
@@ -327,7 +330,7 @@ public:
         Page<Type> *page = (Page<Type> *)g_hash_table_lookup(pageHash_, (void *)child);
 
         if (!page){
-            ERROR("setVpanePosition:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
+            ERROR("vpane:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
             return NULL;
         }
         return page->vpane();

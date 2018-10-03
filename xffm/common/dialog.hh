@@ -85,7 +85,7 @@ public:
 	    TRACE("resize page %d\n", i);
 	    GtkWidget *child = gtk_notebook_get_nth_page (dialog_p->notebook(), i);
 	    auto vpane = dialog_p->vpane(child);
-	    resizePane(vpane);
+	    if (vpane) resizePane(vpane);
 
 	}
 	// do this for all notebook pages, visible or not
