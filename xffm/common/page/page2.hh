@@ -40,7 +40,7 @@ public:
     static void toggleToTerminal(GtkButton *button, gpointer data){
         // This will toggle into terminal
         auto page = (Page<Type> *)data;
-        page->showIconview(FALSE);
+        //page->showIconview(FALSE);
     }
     static gboolean
     rangeChangeValue(GtkRange     *range,

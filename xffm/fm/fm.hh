@@ -53,7 +53,7 @@ public:
         
         //while (gtk_events_pending())gtk_main_iteration();
         load(workdir);
-	page->showIconview(page->iconviewIsDefault());
+	page->showIconview(TRUE);
     }
     void load(const gchar *workdir){
         auto notebook = (Notebook<Type> *)this;
