@@ -3,39 +3,14 @@
 
 #define SET_DIR(x) x|=0x01
 #define IS_DIR (x&0x01)
-enum
+
+// XXX: These must be the first two items in all iconviews:
+enum 
 {
-  DISPLAY_PIXBUF,
-  NORMAL_PIXBUF,
-  HIGHLIGHT_PIXBUF,
-  TOOLTIP_PIXBUF,
-  DISPLAY_NAME,
-  ACTUAL_NAME,
-  TOOLTIP_TEXT,
-  ICON_NAME,
-  BASIC_COLS
+  DISPLAY_PIXBUF_COLUMN,
+  NORMAL_PIXBUF_COLUMN
 };
 
-// FIXME: this enum goes into localview class template
-enum
-{
-  COL_DISPLAY_PIXBUF,
-  COL_NORMAL_PIXBUF,
-  COL_HIGHLIGHT_PIXBUF,
-  COL_TOOLTIP_PIXBUF,
-  COL_DISPLAY_NAME,
-  COL_ACTUAL_NAME,
-  COL_TOOLTIP_TEXT,
-  COL_ICON_NAME,
-  COL_TYPE,
-  COL_MIMETYPE, 
-  COL_MIMEFILE, 
-  COL_STAT,
-  COL_PREVIEW_PATH,
-  COL_PREVIEW_TIME,
-  COL_PREVIEW_PIXBUF,
-  NUM_COLS
-};
 //FIXME: extended enums will depend on class template using them
 //       all must be compatible with BASIC_COLS, for basicview
 //       callbacks..
@@ -194,8 +169,7 @@ protected:
             gchar *g;
             GtkTreeIter iter;
             gtk_tree_model_get_iter (treemodel, &iter, tpath);
-            gtk_tree_model_get (treemodel, &iter, 
-                ACTUAL_NAME, &g, -1);
+            gtk_tree_model_get (treemodel, &iter, actualNameColumn(), &g, -1);
             // 2 is added for the \r\n 
             selection_len += (strlen (g) + strlen (format) + 2);
             g_free(g);
@@ -221,7 +195,7 @@ protected:
             GtkTreeIter iter;
             gtk_tree_model_get_iter (treemodel, &iter, tpath);
             gtk_tree_model_get (treemodel, &iter, 
-                ACTUAL_NAME, &g, -1); 
+                actualNameColumn(), &g, -1); 
 
             gchar *gg=g_strconcat(files,format,g,"\n", NULL);
             g_free(g);
@@ -263,7 +237,7 @@ protected:
         gchar *verbatim_name=NULL;
         gtk_tree_model_get_iter (treeModel_, &iter, tpath);
         gtk_tree_model_get (treeModel_, &iter, 
-                ACTUAL_NAME, &verbatim_name, -1);
+                actualNameColumn(), &verbatim_name, -1);
         return verbatim_name;
     }
 
@@ -274,7 +248,7 @@ protected:
         GdkPixbuf *pixbuf=NULL;
         gtk_tree_model_get_iter (treeModel_, &iter, tpath);
         gtk_tree_model_get (treeModel_, &iter, 
-                NORMAL_PIXBUF, &pixbuf, -1);
+                Type::normalPixbufC()   , &pixbuf, -1);
         return pixbuf;
     }
 
@@ -284,7 +258,7 @@ protected:
         GdkPixbuf *pixbuf=NULL;
         gtk_tree_model_get_iter (treeModel_, &iter, tpath);
         gtk_tree_model_get (treeModel_, &iter, 
-                TOOLTIP_PIXBUF, &pixbuf, -1);
+                Type::tooltipPixbufC(), &pixbuf, -1);
         return pixbuf;
     }
 
@@ -294,7 +268,7 @@ protected:
         gchar *text=NULL;
         gtk_tree_model_get_iter (treeModel_, &iter, tpath);
         gtk_tree_model_get (treeModel_, &iter, 
-                TOOLTIP_TEXT, &text, -1);
+                Type::tooltipTextC(), &text, -1);
         return text;
     }
 
@@ -305,7 +279,7 @@ protected:
         GtkTreeIter iter;
         gtk_tree_model_get_iter (treeModel_, &iter, tpath);
         gtk_list_store_set (GTK_LIST_STORE(treeModel_), &iter,
-                TOOLTIP_PIXBUF, pixbuf, 
+                Type::tooltipPixbufC(), pixbuf, 
             -1);
 
         return ;
@@ -317,7 +291,7 @@ protected:
         GtkTreeIter iter;
         gtk_tree_model_get_iter (treeModel_, &iter, tpath);
         gtk_list_store_set (GTK_LIST_STORE(treeModel_), &iter,
-                TOOLTIP_TEXT, text, 
+                Type::tooltipTextC(), text, 
             -1);
 
         return ;
@@ -353,9 +327,9 @@ protected:
         
         GdkPixbuf *highlight_pixbuf;
         gtk_tree_model_get (treeModel_, &iter, 
-                HIGHLIGHT_PIXBUF, &highlight_pixbuf, -1);
+                highlightPixbufC(), &highlight_pixbuf, -1);
         gtk_list_store_set (GTK_LIST_STORE(treeModel_), &iter,
-                DISPLAY_PIXBUF, highlight_pixbuf, 
+                iconColumn(), highlight_pixbuf, 
                 -1);
         return;
     }
@@ -424,7 +398,6 @@ public:
         if (!baseView)  return FALSE;
         TRACE("unhighlight %s\n", (gchar *)key);
         GtkTreeModel *model =baseView->get_tree_model();
-        if (!baseView) return FALSE;
                 
         GtkTreePath *tpath = gtk_tree_path_new_from_string ((gchar *)key);
         if (!tpath) return FALSE;
@@ -433,13 +406,21 @@ public:
         gtk_tree_model_get_iter (model, &iter, tpath);
         gtk_tree_path_free (tpath);
         GdkPixbuf *normal_pixbuf;
-        gtk_tree_model_get (model, &iter, 
-                NORMAL_PIXBUF, &normal_pixbuf, -1);
+        // FIXME: This does not work
+        /*gtk_tree_model_get (model, &iter, 
+                baseView->normalPixbufC(), &normal_pixbuf, -1);
         gtk_list_store_set (GTK_LIST_STORE(model), &iter,
-                DISPLAY_PIXBUF, normal_pixbuf, 
-            -1);
+                baseView->iconColumn(), normal_pixbuf, 
+            -1);*/
+        // This does:
 
-        return TRUE;
+        gtk_tree_model_get (model, &iter, 
+                NORMAL_PIXBUF_COLUMN, &normal_pixbuf, -1);
+        gtk_list_store_set (GTK_LIST_STORE(model), &iter,
+                DISPLAY_PIXBUF_COLUMN, normal_pixbuf, 
+            -1);
+       return TRUE;
+
     }
 
  
@@ -465,7 +446,7 @@ public:
     void
     clear_highlights(void){
         if (!highlight_hash || g_hash_table_size(highlight_hash) == 0) return;
-        g_hash_table_foreach_remove (highlight_hash, BaseView<double>::unhighlight, (void *)this);
+        g_hash_table_foreach_remove (highlight_hash, BaseView<Type>::unhighlight, (void *)this);
     }
 
     void setClickCancel(gint state){ 
@@ -698,7 +679,7 @@ public:
         {
             GtkTreeIter iter;
             gtk_tree_model_get_iter (baseView->treeModel(), &iter, tpath);
-            gtk_tree_model_get (baseView->treeModel(), &iter, ACTUAL_NAME, &target, -1);	
+            gtk_tree_model_get (baseView->treeModel(), &iter, baseView->actualNameColumn(), &target, -1);	
         } else tpath=NULL;
 
                     // nah
@@ -746,7 +727,7 @@ public:
             GtkTreeIter iter;
             gtk_tree_model_get_iter (baseView->treeModel(), &iter, tpath);
             gchar *g;
-            gtk_tree_model_get (baseView->treeModel(), &iter,  ACTUAL_NAME, &g, -1);
+            gtk_tree_model_get (baseView->treeModel(), &iter,  baseView->actualNameColumn(), &g, -1);
             // drop into?
             // must be a directory
             if (g_file_test(g, G_FILE_TEST_IS_DIR)){
@@ -853,12 +834,22 @@ protected:
 
 private:
  
-    static gint 
+    gint 
+    actualNameColumn(void){ return Type::actualNameColumn();}
+    gint 
     iconColumn(void){ return Type::iconColumn();}
-
-    static gint 
+    gint 
     textColumn(void){ return Type::textColumn();}
+    gint
+    highlightPixbufC(void){return Type::highlightPixbufC();}
+    gint
+    normalPixbufC(void){return Type::normalPixbufC();}
+    gint
+    tooltipPixbufC(void){return Type::tooltipPixbufC();}
+    gint
+    tooltipTextC(void){return Type::tooltipTextC();}
 
+    
     static void
     item_activated (GtkIconView *iconview,
                     GtkTreePath *tpath,

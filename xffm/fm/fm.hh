@@ -13,7 +13,8 @@
 #include "common/print.hh"
 #include "common/completion/csh.hh"
 
-#include "common/view/rootview.hh"
+#include "view/rootview.hh"
+//#include "view/localview.hh"
 
 namespace xf
 {
@@ -59,7 +60,7 @@ public:
         auto notebook = (Notebook<Type> *)this;
         auto page = notebook->currentPageObject();
 
-	auto baseView = (BaseView<RootView<Type>> *)
+	auto baseView = (BaseView<RootView<Type> > *)
 	g_object_get_data(G_OBJECT(page->top_scrolled_window()), "baseView");
 
 	if (baseView){
@@ -71,7 +72,7 @@ public:
 	    delete baseView;
 	}
 	WARN("adding rootview\n");
-	auto rootView =  new BaseView<RootView<Type>>("xffm:root");
+	auto rootView =  new BaseView<RootView<Type> >("xffm:root");
 
 	gtk_container_add (GTK_CONTAINER (page->top_scrolled_window()),
 		GTK_WIDGET(rootView->iconView()));

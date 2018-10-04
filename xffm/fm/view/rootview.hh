@@ -3,11 +3,24 @@
 
 #include "baseview.hh"
 
+enum
+{
+  DISPLAY_PIXBUF,
+  NORMAL_PIXBUF,
+  HIGHLIGHT_PIXBUF,
+  TOOLTIP_PIXBUF,
+  DISPLAY_NAME,
+  ACTUAL_NAME,
+  TOOLTIP_TEXT,
+  ICON_NAME,
+  BASIC_COLS
+};
+
 namespace xf
 {
 
 template <class Type>
-class RootView: public BaseView<Type> {
+class RootView  {
 
     using pixbuf_c = Pixbuf<Type>;
     using util_c = Util<Type>;
@@ -28,11 +41,6 @@ RootView(const gchar *path):
     static gboolean enableDragSource(void){ return FALSE;}
     static gboolean enableDragDest(void){ return FALSE;}
 
-    static void 
-    reload(const gchar *data){
-	return;
-    }
-
     static const gchar *
     get_xfdir_iconname(void){
 	return "system-file-manager";
@@ -52,11 +60,20 @@ RootView(const gchar *path):
 	g_free(name);
     }
 
+    static gint
+    actualNameColumn(void){ return ACTUAL_NAME;}
     static gint 
     iconColumn(void){ return DISPLAY_PIXBUF;}
-
     static gint 
     textColumn(void){ return DISPLAY_NAME;}
+    static gint
+    highlightPixbufC(void){return HIGHLIGHT_PIXBUF;}
+    static gint
+    normalPixbufC(void){return NORMAL_PIXBUF;}
+    static gint
+    tooltipPixbufC(void){return TOOLTIP_PIXBUF;}
+    static gint
+    tooltipTextC(void){return TOOLTIP_TEXT;}
 
 
     static GtkTreeModel *
