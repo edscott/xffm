@@ -11,7 +11,7 @@
 #include "common/util.hh"
 
 #include "common/print.hh"
-#include "common/completion/csh.hh"
+#include "completion/csh.hh"
 
 #include "view/rootview.hh"
 //#include "view/localview.hh"
