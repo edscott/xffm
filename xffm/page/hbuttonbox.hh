@@ -57,6 +57,7 @@ public:
         return;  
     }
 
+
 protected:
     GtkBox *hButtonBox_;
     GtkBox *termButtonBox_;

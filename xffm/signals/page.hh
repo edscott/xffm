@@ -36,14 +36,29 @@ public:
                GtkScrollType scroll,
                gdouble       value,
                gpointer      data){
+        // minimum and maximun font size in range:
+        gint min=10;
+        gint max=30;
+
         gint round = value + 0.5;
-        if (value > 24) round = 24;
+        if (value > max) round = max;
+        if (value < min) round = min;
         
         TRACE("rangeChangeValue: %lf->%d\n", value, round);
         auto page = (Page<Type> *)data;
         print_c::set_font_size(GTK_WIDGET(page->output()), round);
         print_c::set_font_size(GTK_WIDGET(page->input()), round);
+        //page->parent()->resizeWindow(round, min, max);
         return FALSE;
+    }
+
+    static gboolean
+    rangeOff (GtkWidget *widget,
+               GdkEvent  *event,
+               gpointer   data){
+        auto page = (Page<Type> *)data;
+        WARN("range off\n");
+        page->parent()->resizeWindow(page->fontSize());
     }
 
 #ifdef XFFM_CC

@@ -75,6 +75,10 @@ public:
                 BUTTON_CALLBACK(PageSignals<Type>::clearText), (void *)this);
         g_signal_connect(G_OBJECT(this->scriptButton_), "clicked", 
                 BUTTON_CALLBACK(PageSignals<Type>::scriptRun), (void *)this);
+
+        g_signal_connect(G_OBJECT(this->sizeScale_), "button-release-event", 
+                EVENT_CALLBACK(PageSignals<Type>::rangeOff), (void *)this);
+
 #ifdef XFFM_CC
         g_signal_connect (this->top_scrolled_window_, "leave-notify-event", 
                 EVENT_CALLBACK (PageSignals<Type>::leave_notify_event),
@@ -318,6 +322,13 @@ private:
 
 public:
 
+    gint fontSize(void){
+        auto range = GTK_RANGE(this->sizeScale_);
+        gdouble value = gtk_range_get_value (range);
+        gint round = value + 0.5;
+        return round;
+    }
+        
     static void
     set_font_family (GtkWidget * widget, const gchar *in_family, gboolean fixed) {
 	if (!in_family) g_error("in_family cannot be NULL\n");

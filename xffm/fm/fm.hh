@@ -25,8 +25,6 @@ class fmDialog : public Dialog<Type>{
 public:
     fmDialog(const gchar *path):Dialog<Type>(path){
 	// Here we override the default start up of the Dialog class template
-	// set minimum size
-        this->setMinimumSize(500,300);
 	// set actual size (read this from rc file) FIXME
 	this->setDefaultSize(750,500);
 	// set actual size (read this from rc file) FIXME

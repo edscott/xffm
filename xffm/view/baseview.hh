@@ -1,7 +1,7 @@
 #ifndef XF_BASEVIEW__HH
 # define XF_BASEVIEW__HH
 
-#include "baseviewsignals.hh"
+#include "signals/baseview.hh"
 
 namespace xf
 {
