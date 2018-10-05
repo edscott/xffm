@@ -23,12 +23,7 @@ public:
     termDialog(const gchar *path):Dialog<Type>(path){
 	// Here we override the default start up of the Dialog class template
         // gchar *workdir = g_get_current_dir();
-	// set actual size (read this from rc file) FIXME
-	this->setDefaultSize(750,500);
-	// set actual size (read this from rc file) FIXME
-	// FIXME: does not work, must retrieve adjustment
-	//        for gtk range and set value (common/dialog.hh)
-	this->setDefaultFixedFontSize(13);
+	//this->setDefaultSize(750,500);
         auto page = this->currentPageObject();
         //page->setPageWorkdir(workdir);
 	// Default into terminal...

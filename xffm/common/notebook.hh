@@ -201,7 +201,13 @@ public:
         auto page = g_hash_table_lookup(pageHash_, (void *)child);
         return (Page<Type> *)page;
     }
-    GtkWidget *currentPageChild(void){
+     Page<Type> *currentPageObject(gint pageNum){
+        auto child = gtk_notebook_get_nth_page (notebook_,pageNum);
+        auto page = g_hash_table_lookup(pageHash_, (void *)child);
+        return (Page<Type> *)page;
+    }
+   
+     GtkWidget *currentPageChild(void){
         return gtk_notebook_get_nth_page (notebook_,currentPage());
     }
 

@@ -1,7 +1,7 @@
 #ifndef XFPRINT_HH
 #define XFPRINT_HH
 
-#define DEFAULT_FIXED_FONT_SIZE defaultFixedFontSize
+#define DEFAULT_FIXED_FONT_SIZE 13
 
 #include <string.h>
 #include <stdlib.h>

@@ -24,15 +24,7 @@ class fmDialog : public Dialog<Type>{
     using print_c = Print<double>;
 public:
     fmDialog(const gchar *path):Dialog<Type>(path){
-	// Here we override the default start up of the Dialog class template
-	// set actual size (read this from rc file) FIXME
-	this->setDefaultSize(750,500);
-	// set actual size (read this from rc file) FIXME
-	// FIXME: does not work, must retrieve adjustment
-	//        for gtk range and set value (common/dialog.hh)
-	this->setDefaultFixedFontSize(13);
-
-
+	
         auto page = this->currentPageObject();
         //page->setPageWorkdir(workdir);
 	// Default into iconview...

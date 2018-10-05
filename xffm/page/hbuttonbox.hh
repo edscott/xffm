@@ -74,7 +74,25 @@ protected:
 private:
     static GtkScale *newSizeScale(void){
 	auto size_scale = GTK_SCALE(gtk_scale_new_with_range(GTK_ORIENTATION_HORIZONTAL, 6.0, 24.0, 6.0));
-        gtk_range_set_value(GTK_RANGE(size_scale), DEFAULT_FIXED_FONT_SIZE);
+        // Load saved value fron xffm+/settings.ini file (if any)
+        GKeyFile *key_file = g_key_file_new();
+        gchar *file = g_build_filename(g_get_user_config_dir(),"xffm+","settings.ini", NULL);
+        gboolean loaded = g_key_file_load_from_file(key_file, file,
+               (GKeyFileFlags) (G_KEY_FILE_KEEP_COMMENTS |  G_KEY_FILE_KEEP_TRANSLATIONS),
+                NULL);
+        g_free(file);
+        gint size = DEFAULT_FIXED_FONT_SIZE;
+        if (loaded) {
+            GError *error = NULL;
+            size = g_key_file_get_integer (key_file, "xfterm", "fontSize", &error);
+            if (error){
+                ERROR("%s\n", error->message);
+                g_error_free(error);
+                size = DEFAULT_FIXED_FONT_SIZE;
+            }
+        } 
+        g_key_file_free(key_file);
+        gtk_range_set_value(GTK_RANGE(size_scale), size);
         gtk_range_set_increments (GTK_RANGE(size_scale), 2.0, 6.0);
 	gtk_widget_set_size_request (GTK_WIDGET(size_scale),75,-1);
 	gtk_scale_set_value_pos (size_scale,GTK_POS_RIGHT);

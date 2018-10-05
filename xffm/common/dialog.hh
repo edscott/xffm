@@ -47,7 +47,7 @@ public:
 	gtk_widget_get_preferred_width (GTK_WIDGET(dialog_), &dialogMinW_, &dialogNatW_);
 	gtk_widget_get_preferred_height (GTK_WIDGET(dialog_), &dialogMinH_, &dialogNatH_);
 	gtk_window_set_type_hint(dialog_, GDK_WINDOW_TYPE_HINT_DIALOG);
-	setWindowMaxSize(dialog_);
+	//setWindowMaxSize(dialog_);
 	gtk_window_set_position (dialog_, GTK_WIN_POS_MOUSE);
         this->insertNotebook(dialog_);
 #ifdef XFFM_CC
@@ -70,7 +70,8 @@ public:
         
 	g_signal_connect (G_OBJECT (dialog_), "size-allocate", 
 		SIZE_CALLBACK(dialogSignals<Type>::onSizeAllocate), (void *)this);
-        
+        setDefaultSize();
+        setDefaultFixedFontSize();
         gtk_window_present (dialog_);
         while (gtk_events_pending()) gtk_main_iteration();
 	return;
@@ -86,42 +87,59 @@ public:
     }
 
     void resizeWindow(gint fontSize){
-        gint Dw = 2*maximumSize_.width/3 - naturalSize_.width ;
+        if (fontSize == 0){
+            ERROR("fontSize cannot be zero\n");
+            return;
+        }
+        if (naturalSize_.width == 0 ||
+                naturalSize_.height == 0){
+            gtk_widget_get_preferred_size (GTK_WIDGET(dialog_),
+                               &minimumSize_,
+                               &naturalSize_);
+        }
+        gint Dw = 4*maximumSize_.width/5 - naturalSize_.width ;
         if (Dw < 0) Dw = 0;
-        gint Dh = 4*maximumSize_.height/5 - naturalSize_.height;
+        gint Dh = 6*maximumSize_.height/7 - naturalSize_.height;
         if (Dh < 0) Dh = 0;
         double fraction = (double)(fontSize - 6)/(24 - 6);
-        gint w = fraction * Dw + naturalSize_.width;
-        gint h = fraction * Dh + naturalSize_.height;
-        WARN("resize window %d: %lf --> %d,%d\n",
-               fontSize, fraction, w, h);
+        gint w = (fraction * Dw) + naturalSize_.width;
+        gint h = (fraction * Dh) + naturalSize_.height;
+        WARN("resize window %d: %lf --> %d,%d (min: %d, %d)\n",
+               fontSize, fraction, w, h,
+               naturalSize_.width,
+               naturalSize_.height);
         gtk_window_resize (GTK_WINDOW(dialog_), w, h);
         
     } 
+
+    void
+    saveSettings(void){
+        GKeyFile *key_file = g_key_file_new();
+        gchar *file = g_build_filename(g_get_user_config_dir(),"xffm+","settings.ini", NULL);
+        gboolean loaded = g_key_file_load_from_file(key_file, file,
+               (GKeyFileFlags) (G_KEY_FILE_KEEP_COMMENTS |  G_KEY_FILE_KEEP_TRANSLATIONS),
+                NULL);
+        if (!loaded) {
+            gchar *text = g_strdup_printf(_("Creating a new file (%s)"), file);
+            DBG("%s", text);
+            g_free(text);
+        }
+        auto page = this->currentPageObject();
+        g_key_file_set_integer (key_file, "xfterm", "fontSize", page->fontSize());
+        write_keyfile(key_file, file);
+        g_free(file);
+        g_key_file_free(key_file);
+   }
 protected:
     GtkWindow *dialog(){
 	return dialog_;
     }
 
-    void setDefaultSize(gint w, gint h){
-        chosenSize_.width = w;
-        chosenSize_.height = h;
-        gtk_widget_get_preferred_size (GTK_WIDGET(dialog_),
-                               &minimumSize_,
-                               &naturalSize_);
-        WARN("Size: minimum=%d,%d, natural=%d,%d, choosen=%d,%d max=%d,%d\n",
-                minimumSize_.width, minimumSize_.height,
-                naturalSize_.width, naturalSize_.height,
-                w,h,
-                maximumSize_.width, maximumSize_.height);
 
-	//gtk_window_set_default_size (GTK_WINDOW(dialog_), w, h);
-        //gtk_window_resize (GTK_WINDOW(dialog_), w, h);
-    }
-    void setDefaultFixedFontSize(gint size){
-	DEFAULT_FIXED_FONT_SIZE = size;
+    void setDefaultFixedFontSize(void){
         auto page = this->currentPageObject();
-        page->setSizeScale(size);
+	gint size = page->fontSize();;
+//        page->setSizeScale(size);
         print_c::set_font_size(GTK_WIDGET(page->output()), size);
         print_c::set_font_size(GTK_WIDGET(page->input()), size);
         resizeWindow(size);
@@ -132,7 +150,22 @@ private:
         GtkRequisition naturalSize_;
         GtkRequisition chosenSize_;
         GtkRequisition maximumSize_;
-    void setWindowMaxSize(GtkWindow *dialog){
+    void setDefaultSize(void){
+        gtk_widget_get_preferred_size (GTK_WIDGET(dialog_),
+                               &minimumSize_,
+                               &naturalSize_);
+        setWindowMaxSize();
+        WARN("Size: minimum=%d,%d, natural=%d,%d, max=%d,%d\n",
+                minimumSize_.width, minimumSize_.height,
+                naturalSize_.width, naturalSize_.height,
+                maximumSize_.width, maximumSize_.height);
+    }
+
+    void setDefaultSize(gint w, gint h){
+        chosenSize_.width = w;
+        chosenSize_.height = h;
+    }
+    void setWindowMaxSize(void){
 	gint x_return, y_return;
 	guint w_return, h_return, d_return, border_return;
 	Window root_return;
@@ -149,7 +182,30 @@ private:
 	geometry.max_height = h_return -25;
         maximumSize_.width = geometry.max_width;
         maximumSize_.height = geometry.max_height;
-	gtk_window_set_geometry_hints (dialog, GTK_WIDGET(dialog), &geometry, GDK_HINT_MAX_SIZE);
+	gtk_window_set_geometry_hints (GTK_WINDOW(dialog_), GTK_WIDGET(dialog_), &geometry, GDK_HINT_MAX_SIZE);
+    }
+
+    static void
+    write_keyfile(GKeyFile *key_file, const gchar *file){
+        TRACE( "group_options_write_keyfile: %s\n", file);
+        // Write out key_file:
+        gsize file_length;
+        gchar *file_string = g_key_file_to_data (key_file, &file_length, NULL);
+        gchar *config_directory = g_path_get_dirname(file);
+        if (!g_file_test(config_directory, G_FILE_TEST_IS_DIR)){
+            TRACE( "creating directory %s\n", config_directory);
+            g_mkdir_with_parents(config_directory, 0700);
+        }
+        g_free(config_directory);
+        gint fd = creat(file, O_WRONLY | S_IRWXU);
+        if (fd >= 0){
+            if (write(fd, file_string, file_length) < 0){
+                ERROR("write_keyfile(): cannot write to %s: %s\n", file, strerror(errno));
+            }
+            close(fd);
+        } else {
+            ERROR("write_keyfile(): cannot open %s for write: %s\n", file, strerror(errno));
+        }
     }
 
 private:

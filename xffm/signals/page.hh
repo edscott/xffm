@@ -58,7 +58,18 @@ public:
                gpointer   data){
         auto page = (Page<Type> *)data;
         WARN("range off\n");
-        page->parent()->resizeWindow(page->fontSize());
+        auto size = page->fontSize();
+        page->parent()->resizeWindow(size);
+        page->parent()->saveSettings();
+        // for all pages, change fontSize
+        auto notebook = page->parent()->notebook();
+        for (int i=0; i<gtk_notebook_get_n_pages (notebook); i++){
+            auto page2 = page->parent()->currentPageObject(i);
+            if ((void *)page2 == (void *)page) continue;
+            page2->setSizeScale(size);
+            print_c::set_font_size(GTK_WIDGET(page2->output()), size);
+            print_c::set_font_size(GTK_WIDGET(page2->input()), size);
+        }
     }
 
 #ifdef XFFM_CC
