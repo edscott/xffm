@@ -62,11 +62,19 @@ namespace xf
 {
 
 template <class Type>
-class LocalView: public BaseView<Type> {
+class LocalView {
 
     using gtk_c = Gtk<Type>;
     using pixbuf_c = Pixbuf<Type>;
     using util_c = Util<Type>;
+
+    GHashTable *itemsHash_;
+    GCancellable *cancellable_;
+    GFile *gfile_;
+    GFileMonitor *monitor_;
+    gboolean showsHidden_;
+    GtkListStore *store_;
+    
     //using lite_c = Lite<Type>;
     //using mime_c = Mime<Type>;
 public:
@@ -82,7 +90,26 @@ RootView(const gchar *path):
     gtk_icon_view_set_selection_mode (this->iconView_, GTK_SELECTION_SINGLE);   
 }
 */
+    LocalView(const gchar *path){
+	itemsHash_ = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
+	cancellable_ = g_cancellable_new ();
+	gfile_ = g_file_new_for_path (path);
+	monitor_ = NULL;
+	showsHidden_ = FALSE;
 
+    }
+    ~LocalView(void){
+	stop_monitor();
+	g_hash_table_destroy(itemsHash_);
+	//g_cancellable_cancel (cancellable_);
+	//g_object_unref(cancellable_);
+	if (gfile_) g_object_unref(gfile_);
+	if (monitor_) g_object_unref(monitor_);
+    }
+
+    GFile *
+    gfile(void){ return gfile_;}
+    
     static gboolean enableDragSource(void){ return TRUE;}
     static gboolean enableDragDest(void){ return TRUE;}
 
@@ -122,6 +149,7 @@ RootView(const gchar *path):
 	g_free(name);
     }
 
+    // This mkTreeModel should be static...
     static GtkTreeModel *
     mkTreeModel (const gchar *path)
     {
@@ -236,12 +264,106 @@ RootView(const gchar *path):
 
     void
     free_xd_p(xd_t *xd_p){
-        g_free(xd_p->mimefile);
-        g_free(xd_p->mimetype);
+        //g_free(xd_p->mimefile);
+        //g_free(xd_p->mimetype);
         g_free(xd_p->d_name);
         g_free(xd_p->path);
         g_free(xd_p);
     }
+
+    xd_t *
+    get_xd_p(GFile *first){
+
+	gchar *path = g_file_get_path(gfile_);
+	gchar *basename = g_file_get_basename(first);
+	struct dirent *d; // static pointer
+	TRACE("looking for %s info\n", basename);
+	DIR *directory = opendir(path);
+	xd_t *xd_p = NULL;
+	if (directory) {
+	  while ((d = readdir(directory))  != NULL) {
+	    if(strcmp (d->d_name, basename)) continue;
+	    xd_p = get_xd_p(d);
+	    break;
+	  }
+	  closedir (directory);
+	} else {
+	  g_warning("monitor_f(): opendir %s: %s\n", path, strerror(errno));
+	}
+	g_free(basename); 
+	g_free(path); 
+	return xd_p;
+    }
+
+    gboolean
+    add_new_item(GFile *file){
+       xd_t *xd_p = get_xd_p(file);
+	if (xd_p) {
+	    add_local_item(store_, xd_p);
+	    free_xd_p(xd_p);
+	    return TRUE;
+	} 
+	return FALSE;
+    }
+
+    gboolean 
+    remove_item(GFile *file){
+	// find the iter and remove item
+	gchar *basename = g_file_get_basename(file);
+	g_hash_table_remove(itemsHash_, basename); 
+	gtk_tree_model_foreach (GTK_TREE_MODEL(store_), rm_func, (gpointer) basename); 
+	g_free(basename);
+	return TRUE;
+    }
+
+    gboolean 
+    restat_item(GFile *src){
+	gchar *basename = g_file_get_basename(src);
+	if (!g_hash_table_lookup(itemsHash_, basename)) {
+	    g_free(basename);
+	    return FALSE; 
+	}
+	g_free(basename);
+	gchar *fullpath = g_file_get_path(src);
+	gtk_tree_model_foreach (GTK_TREE_MODEL(store_), stat_func, (gpointer) fullpath); 
+	g_free(fullpath);
+	return TRUE;
+    }
+
+    void
+    start_monitor(const gchar *data, GtkTreeModel *data2){
+	store_ = GTK_LIST_STORE(data2);
+	DBG("*** start_monitor: %s\n", data);
+	if (gfile_) g_object_unref(gfile_);
+	gfile_ = g_file_new_for_path (data);
+	GError *error=NULL;
+	if (monitor_) g_object_unref(monitor_);
+	monitor_ = g_file_monitor_directory (gfile_, G_FILE_MONITOR_WATCH_MOVES, cancellable_,&error);
+	if (error){
+	    DBG("g_file_monitor_directory(%s) failed: %s\n",
+		    data, error->message);
+	    g_object_unref(gfile_);
+	    gfile_=NULL;
+	    return;
+	}
+	g_signal_connect (monitor_, "changed", 
+		G_CALLBACK (monitor_f), (void *)this);
+    }
+
+
+    void 
+    stop_monitor(void){
+	gchar *p = g_file_get_path(gfile_);
+	DBG("*** stop_monitor at: %s\n", p);
+	g_free(p);
+	g_file_monitor_cancel(monitor_);
+	while (gtk_events_pending())gtk_main_iteration();  
+	g_hash_table_remove_all(itemsHash_);
+	// hash table remains alive (but empty) until destructor.
+    }
+
+    void
+    set_showHidden(gboolean state){showsHidden_ = state;}
 
     static gint
     insert_list_into_model(GList *data, GtkListStore *list_store){
@@ -264,15 +386,15 @@ RootView(const gchar *path):
 
     static void
     add_local_item(GtkListStore *list_store, xd_t *xd_p){
-        // FIXME: items_hash is on a object basis, not static item...
+        // FIXME: itemsHash_ is on a object basis, not static item...
         // if it already exists, do nothing
-        if (g_hash_table_lookup(items_hash, (void *)xd_p->d_name)){    
+        if (g_hash_table_lookup(itemsHash_, (void *)xd_p->d_name)){    
             DBG("local_monitor_c::not re-adding %s\n", xd_p->d_name);
             return;
         }
 
-        //FIXME need for shows_hidden only in monitor function...
-        //if (!shows_hidden && xd_p->d_name[0] == '.'  && strcmp("..", xd_p->d_name)){
+        //FIXME need for shows_hidden only in monitor_ function...
+        //if (!showsHidden_ && xd_p->d_name[0] == '.'  && strcmp("..", xd_p->d_name)){
         if (xd_p->d_name[0] == '.'  && strcmp("..", xd_p->d_name)){
             return;
         }
@@ -340,7 +462,7 @@ RootView(const gchar *path):
         g_free(icon_name);
         g_free(highlight_name);
         g_free(utf_name);
-        g_hash_table_replace(items_hash, g_strdup(xd_p->d_name), GINT_TO_POINTER(1));
+        g_hash_table_replace(itemsHash_, g_strdup(xd_p->d_name), GINT_TO_POINTER(1));
     }
     
     static gint
@@ -401,7 +523,7 @@ RootView(const gchar *path):
         return get_iconname(xd_p, TRUE);
     }
 
-    static gchar *
+    gchar *
     get_iconname(xd_t *xd_p, gboolean use_lite){
         gchar *name = get_basic_iconname(xd_p);
         gchar *emblem = get_emblem_string(xd_p, use_lite);
@@ -411,14 +533,14 @@ RootView(const gchar *path):
         return iconname;
     }
 
-    static gchar *
+    gchar *
     get_basic_iconname(xd_t *xd_p){
 
         // Directories:
         if (strcmp(xd_p->d_name, "..")==0) return  g_strdup("go-up");
 #ifdef HAVE_STRUCT_DIRENT_D_TYPE
         if (xd_p->d_type == DT_DIR) {
-            gchar *path = g_file_get_path(gfile);
+            gchar *path = g_file_get_path(gfile_);
             if (strcmp(path, g_get_home_dir())==0) {
                 g_free(path);
                 return get_home_iconname(xd_p->d_name);
@@ -462,7 +584,7 @@ RootView(const gchar *path):
         }
 #else
         if ((xd_p->st && S_ISDIR(xd_p->st->st_mode))) {
-            gchar *path = g_file_get_path(gfile);
+            gchar *path = g_file_get_path(gfile_);
             if (strcmp(path, g_get_home_dir())==0) {
                 g_free(path);
                 return get_home_iconname(xd_p->d_name);
@@ -715,6 +837,123 @@ RootView(const gchar *path):
         }
         return emblem;
     }
+
+    static gboolean stat_func (GtkTreeModel *model,
+				GtkTreePath *path,
+				GtkTreeIter *iter,
+				gpointer data){
+	struct stat *st=NULL;
+	gchar *text;
+	gchar *basename = g_path_get_basename((gchar *)data);
+	gtk_tree_model_get (model, iter, 
+		COL_ACTUAL_NAME, &text, 
+		COL_STAT, &st, 
+		-1);  
+	
+	if (strcmp(basename, text)){
+	    g_free(text);
+	    g_free(basename);
+	    return FALSE;
+	}
+	g_free(text);
+	g_free(basename);
+	g_free(st);
+
+	GtkListStore *store = GTK_LIST_STORE(model);
+	st = (struct stat *)calloc(1, sizeof(struct stat));
+	if (stat((gchar *)data, st) != 0){
+	    fprintf(stderr, "stat: %s\n", strerror(errno));
+	    return FALSE;
+	}
+
+	gtk_list_store_set (store, iter, 
+		COL_STAT,st, 
+		-1);
+
+	return TRUE;
+    }
+
+    static gboolean rm_func (GtkTreeModel *model,
+				GtkTreePath *path,
+				GtkTreeIter *iter,
+				gpointer data){
+	gchar *text;
+	struct stat *st_p=NULL;
+	gtk_tree_model_get (model, iter, 
+		COL_STAT, &st_p, 
+		COL_ACTUAL_NAME, &text, 
+		-1);  
+	
+	if (strcmp(text, (gchar *)data)){
+	    g_free(text);
+	    return FALSE;
+	}
+	DBG("removing %s from treemodel.\n", text);
+	GtkListStore *store = GTK_LIST_STORE(model);
+
+    //  free stat record, if any
+	g_free(st_p);
+
+	gtk_list_store_remove(store, iter);
+	g_free(text);
+	return TRUE;
+    }
+
+
+    void
+    monitor_f (GFileMonitor      *mon,
+	      GFile             *first,
+	      GFile             *second,
+	      GFileMonitorEvent  event,
+	      gpointer           data)
+    {
+	gchar *f= first? g_file_get_basename (first):g_strdup("--");
+	gchar *s= second? g_file_get_basename (second):g_strdup("--");
+       
+
+	fprintf(stderr, "*** monitor_f call...\n");
+	auto p = (LocalView<Type> *)data;
+
+	switch (event){
+	    case G_FILE_MONITOR_EVENT_DELETED:
+	    case G_FILE_MONITOR_EVENT_MOVED_OUT:
+		fprintf(stderr,"Received DELETED  (%d): \"%s\", \"%s\"\n", event, f, s);
+		p->remove_item(first);
+		break;
+	    case G_FILE_MONITOR_EVENT_CREATED:
+	    case G_FILE_MONITOR_EVENT_MOVED_IN:
+		fprintf(stderr,"Received  CREATED (%d): \"%s\", \"%s\"\n", event, f, s);
+		p->add_new_item(first);
+		break;
+	    case G_FILE_MONITOR_EVENT_CHANGES_DONE_HINT:
+	       fprintf(stderr,"Received  CHANGES_DONE_HINT (%d): \"%s\", \"%s\"\n", event, f, s);
+		p->restat_item(first);
+		// if image, then reload the pixbuf
+		break;
+	    case G_FILE_MONITOR_EVENT_CHANGED:
+		fprintf(stderr,"Received  CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
+		break;
+	    case G_FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED:
+		fprintf(stderr,"Received  ATTRIBUTE_CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
+		p->restat_item(first);
+		break;
+	    case G_FILE_MONITOR_EVENT_PRE_UNMOUNT:
+		fprintf(stderr,"Received  PRE_UNMOUNT (%d): \"%s\", \"%s\"\n", event, f, s);
+		break;
+	    case G_FILE_MONITOR_EVENT_UNMOUNTED:
+		fprintf(stderr,"Received  UNMOUNTED (%d): \"%s\", \"%s\"\n", event, f, s);
+		break;
+	    case G_FILE_MONITOR_EVENT_MOVED:
+	    case G_FILE_MONITOR_EVENT_RENAMED:
+		fprintf(stderr,"Received  MOVED (%d): \"%s\", \"%s\"\n", event, f, s);
+		p->remove_item(first);
+		p->add_new_item(second);
+		break;
+	}
+	g_free(f);
+	g_free(s);
+    }
+
 
 
 };

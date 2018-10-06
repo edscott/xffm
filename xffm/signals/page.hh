@@ -70,6 +70,7 @@ public:
             print_c::set_font_size(GTK_WIDGET(page2->output()), size);
             print_c::set_font_size(GTK_WIDGET(page2->input()), size);
         }
+	return FALSE;
     }
 
 #ifdef XFFM_CC

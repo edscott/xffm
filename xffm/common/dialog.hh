@@ -97,9 +97,9 @@ public:
                                &minimumSize_,
                                &naturalSize_);
         }
-        gint Dw = 4*maximumSize_.width/5 - naturalSize_.width ;
+        gint Dw = 8*maximumSize_.width/9 - naturalSize_.width ;
         if (Dw < 0) Dw = 0;
-        gint Dh = 6*maximumSize_.height/7 - naturalSize_.height;
+        gint Dh = 12*maximumSize_.height/13 - naturalSize_.height;
         if (Dh < 0) Dh = 0;
         double fraction = (double)(fontSize - 6)/(24 - 6);
         gint w = (fraction * Dw) + naturalSize_.width;

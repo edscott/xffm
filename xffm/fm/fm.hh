@@ -14,7 +14,7 @@
 #include "completion/csh.hh"
 
 #include "view/rootview.hh"
-//#include "view/localview.hh"
+#include "view/localview.hh"
 
 namespace xf
 {
@@ -46,29 +46,73 @@ public:
         load(workdir);
 	page->showIconview(TRUE);
     }
+
+    
     void load(const gchar *workdir){
         auto notebook = (Notebook<Type> *)this;
         auto page = notebook->currentPageObject();
 
-	auto baseView = (BaseView<RootView<Type> > *)
-	g_object_get_data(G_OBJECT(page->top_scrolled_window()), "baseView");
 
-	if (baseView){
-	    WARN("removing baseView\n");
-	    gtk_widget_hide (GTK_WIDGET(baseView->iconView()));		
-	    g_object_ref(G_OBJECT(baseView->iconView()));
-	    gtk_container_remove(GTK_CONTAINER (page->top_scrolled_window()), 
-			GTK_WIDGET(baseView->iconView()));
-	    delete baseView;
+
+	if (g_object_get_data(G_OBJECT(page->top_scrolled_window()),
+		    "rootView")){
+	    g_object_set_data(G_OBJECT(page->top_scrolled_window()),
+		    "rootView", NULL);
+	    auto baseView = (BaseView<RootView<Type> > *)
+		g_object_get_data(G_OBJECT(page->top_scrolled_window()),
+			"baseView");
+	    if (baseView){
+		WARN("removing baseView\n");
+		gtk_widget_hide (GTK_WIDGET(baseView->iconView()));		
+		g_object_ref(G_OBJECT(baseView->iconView()));
+		gtk_container_remove(GTK_CONTAINER (page->top_scrolled_window()), 
+			    GTK_WIDGET(baseView->iconView()));
+		delete baseView;
+	    }
 	}
-	WARN("adding rootview\n");
-	auto rootView =  new BaseView<RootView<Type> >("xffm:root");
+	// FIXME 
+	// basically the same. We need to define a template function
+	if (g_object_get_data(G_OBJECT(page->top_scrolled_window()),
+		    "localView")){
+	    g_object_set_data(G_OBJECT(page->top_scrolled_window()),
+		    "localView", NULL);
+	    auto baseView = (BaseView<LocalView<Type> > *)
+		g_object_get_data(G_OBJECT(page->top_scrolled_window()),
+			"baseView");
+	    if (baseView){
+		WARN("removing baseView\n");
+		gtk_widget_hide (GTK_WIDGET(baseView->iconView()));		
+		g_object_ref(G_OBJECT(baseView->iconView()));
+		gtk_container_remove(GTK_CONTAINER (page->top_scrolled_window()), 
+			    GTK_WIDGET(baseView->iconView()));
+		delete baseView;
+	    }
+	}
+	if (!workdir || strcmp(workdir, "xffm:root")==0) {
 
-	gtk_container_add (GTK_CONTAINER (page->top_scrolled_window()),
-		GTK_WIDGET(rootView->iconView()));
-	gtk_widget_show (GTK_WIDGET(rootView->iconView()));
-	while (gtk_events_pending())gtk_main_iteration();
-	g_object_set_data(G_OBJECT(page->top_scrolled_window()), "baseView",(void *)rootView);
+	    WARN("adding rootview\n");
+	    auto baseView =  new BaseView<RootView<Type> >("xffm:root");
+
+	    gtk_container_add (GTK_CONTAINER (page->top_scrolled_window()),
+		    GTK_WIDGET(baseView->iconView()));
+	    gtk_widget_show (GTK_WIDGET(baseView->iconView()));
+	    while (gtk_events_pending())gtk_main_iteration();
+	    g_object_set_data(G_OBJECT(page->top_scrolled_window()), "baseView",(void *)baseView);
+	    g_object_set_data(G_OBJECT(page->top_scrolled_window()), "rootView",(void *)baseView);
+	}
+	// FIXME 
+	// basically the same. We need to define a template function
+	if (g_file_test(workdir, G_FILE_TEST_IS_DIR)) {
+	    WARN("adding localview\n");
+	    auto baseView =  new BaseView<LocalView<Type> >(workdir);
+
+	    gtk_container_add (GTK_CONTAINER (page->top_scrolled_window()),
+		    GTK_WIDGET(baseView->iconView()));
+	    gtk_widget_show (GTK_WIDGET(baseView->iconView()));
+	    while (gtk_events_pending())gtk_main_iteration();
+	    g_object_set_data(G_OBJECT(page->top_scrolled_window()), "baseView",(void *)baseView);
+	    g_object_set_data(G_OBJECT(page->top_scrolled_window()), "localView",(void *)baseView);
+	}
 	
     }
 };
