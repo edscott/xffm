@@ -35,6 +35,7 @@ template <class Type> class BaseView;
 
 template <class Type> 
 class BaseViewSignals {
+    using fmDialog_c = fmDialog<double>;
 public:
     static void
     item_activated (GtkIconView *iconview,
@@ -42,7 +43,14 @@ public:
                     gpointer     data)
     {
         DBG("BaseView::item activated\n");
-	Type::item_activated(iconview, tpath, data);
+	gchar *path = Type::item_activated(iconview, tpath, data);
+	auto dialog = (fmDialog_c *)data;
+	dialog->load(path); 
+
+        //auto baseView = (BaseView<Type> *)data;
+	//baseView->reload(path);
+	g_free(path);
+	
         /*
         auto view = (BaseView *)data;
         xfdir_c *xfdir_p = view_p->get_xfdir_p();

@@ -17,7 +17,13 @@ class BaseView{
     gint normal_pixbuf_column_;
     gint actual_name_column_;
 
-    //GtkTargetList *targetList_;
+    gchar *path_;
+    GtkTreeModel *treeModel_;
+    gint dirCount_; 
+    GtkIconView *iconView_;
+
+    void *parent_;
+
 public:
     void init(const gchar *path){
         if (path) path = g_strdup(path);
@@ -52,7 +58,7 @@ public:
 
         if (!highlight_hash) highlight_hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
         g_signal_connect (this->iconView_, "item-activated", 
-                ICONVIEW_CALLBACK (BaseViewSignals<Type>::item_activated), (void *)this);
+                ICONVIEW_CALLBACK (BaseViewSignals<Type>::item_activated), (void *)parent_);
         g_signal_connect (this->iconView_, "motion-notify-event", 
                 ICONVIEW_CALLBACK (BaseViewSignals<Type>::motion_notify_event), (void *)this);
      //g_signal_connect (this->iconView_, "query-tooltip", 
@@ -86,205 +92,38 @@ public:
 	    "drag-begin", DRAG_CALLBACK (BaseViewSignals<Type>::signal_drag_begin), (void *)this);
         
     }
-    BaseView(void){
+    BaseView(void *parent){
+	parent_ = parent;
         init(NULL);
     }
 
-    BaseView(const gchar *path){
+    BaseView(void *parent, const gchar *path){
+	parent_ = parent;
         init(path);
     }
 
     ~BaseView(void){
+	// FIXME: destroy treemodel
         // segfault:
-        // g_free(path_); 
-        //g_object_unref(treeModel_);
+        //g_free(path_); 
+        g_object_unref(treeModel_);
     }
+
+   /* void reload(const gchar *path){
+	if (path){
+	    WARN("FIXME: reloading path %s\n", path);
+	    auto dialog = (fmDialog<double> *)parent_;
+	    dialog->load(path);
+	} else {
+	    WARN("FIXME: not a reload activate\n");
+	}
+
+    }*/
 
     GtkIconView *iconView(void){return iconView_;}
     GtkTreeModel *treeModel(void){return treeModel_;}
     //GtkTargetList *getTargetList(void){return targetList_;}
-
-protected:
-
-    gint get_dir_count(void){ return dirCount_;}
-
-
-    
-    gchar *
-    make_tooltip_text (GtkTreePath *tpath ) {
-        return g_strdup("tooltip_text not defined in treeModel_!\n");
-    }
-
-    gchar *
-    get_verbatim_name (GtkTreePath *tpath ) {
-        GtkTreeIter iter;
-        gchar *verbatim_name=NULL;
-        gtk_tree_model_get_iter (treeModel_, &iter, tpath);
-        gtk_tree_model_get (treeModel_, &iter, 
-                actualNameColumn(), &verbatim_name, -1);
-        return verbatim_name;
-    }
-
-
-    GdkPixbuf *
-    get_normal_pixbuf (GtkTreePath *tpath ) {
-        GtkTreeIter iter;
-        GdkPixbuf *pixbuf=NULL;
-        gtk_tree_model_get_iter (treeModel_, &iter, tpath);
-        gtk_tree_model_get (treeModel_, &iter, 
-                Type::normalPixbufC()   , &pixbuf, -1);
-        return pixbuf;
-    }
-
-    GdkPixbuf *
-    get_tooltip_pixbuf (GtkTreePath *tpath ) {
-        GtkTreeIter iter;
-        GdkPixbuf *pixbuf=NULL;
-        gtk_tree_model_get_iter (treeModel_, &iter, tpath);
-        gtk_tree_model_get (treeModel_, &iter, 
-                Type::tooltipPixbufC(), &pixbuf, -1);
-        return pixbuf;
-    }
-
-    gchar *
-    get_tooltip_text (GtkTreePath *tpath ) {
-        GtkTreeIter iter;
-        gchar *text=NULL;
-        gtk_tree_model_get_iter (treeModel_, &iter, tpath);
-        gtk_tree_model_get (treeModel_, &iter, 
-                Type::tooltipTextC(), &text, -1);
-        return text;
-    }
-
-
-
-    void
-    set_tooltip_pixbuf (GtkTreePath *tpath, GdkPixbuf *pixbuf ) {
-        GtkTreeIter iter;
-        gtk_tree_model_get_iter (treeModel_, &iter, tpath);
-        gtk_list_store_set (GTK_LIST_STORE(treeModel_), &iter,
-                Type::tooltipPixbufC(), pixbuf, 
-            -1);
-
-        return ;
-    }
-
-
-    void
-    set_tooltip_text (GtkTreePath *tpath, const gchar *text ) {
-        GtkTreeIter iter;
-        gtk_tree_model_get_iter (treeModel_, &iter, tpath);
-        gtk_list_store_set (GTK_LIST_STORE(treeModel_), &iter,
-                Type::tooltipTextC(), text, 
-            -1);
-
-        return ;
-    }
-    const gchar *
-    get_label(void){
-        return get_path();
-    }
-
-    const gchar *
-    get_path(void){return (const gchar *)path_;}
-
-    gint 
-    get_icon_highlight_size(const gchar *name){
-        return GTK_ICON_SIZE_DIALOG;
-    }
-
-
-    gchar *
-    get_window_name (void) {
-        gchar *iconname;
-        if(!path_) {
-            iconname = util_c::utf_string (g_get_host_name());
-        } else if(g_path_is_absolute(path_) &&
-                g_file_test (path_, G_FILE_TEST_EXISTS)) {
-            gchar *basename = g_path_get_basename (path_);
-            gchar *pathname = g_strdup (path_);
-            gchar *b = util_c::utf_string (basename);   // non chopped
-            util_c::chop_excess (pathname);
-            gchar *q = util_c::utf_string (pathname);   // non chopped
-
-            g_free (basename);
-            g_free (pathname);
-            //iconname = g_strconcat (display_host, ":  ", b, " (", q, ")", NULL);
-            iconname = g_strconcat (b, " (", q, ")", NULL);
-            g_free (q);
-            g_free (b);
-        } else {
-            iconname = util_c::utf_string (path_);
-            util_c::chop_excess (iconname);
-        }
-
-#ifdef DEBUG
-        gchar *gg = g_strdup_printf("%s-%d-D", iconname, getpid());
-        g_free(iconname);
-        iconname = gg;
-#else
-#ifdef CORE
-        gchar *gg = g_strdup_printf("%s-%d-C", iconname, getpid());
-        g_free(iconname);
-        iconname = gg;
-#endif
-#endif
-        return (iconname);
-    }
-
-    /////////////////////////////////////////////////////////////////////////////////
-
- 
-   /* void 
-    highlight(void){
-        highlight(highlight_x, highlight_y);
-    }*/
-
-    void
-    createSourceTargetList (void) {
-        DBG("createSourceTargetList..\n");
-        gtk_icon_view_enable_model_drag_source
-                                   (iconView_,
-                                    (GdkModifierType)
-                                    0,
-                                    targetTable,
-                                    NUM_TARGETS,
-                                    (GdkDragAction)
-                                    ((gint)GDK_ACTION_MOVE|
-                                     (gint)GDK_ACTION_COPY|
-                                     (gint)GDK_ACTION_LINK));
-        return;
-    }
-
-    void
-    createDestTargetList (void) {
-        DBG("createDestTargetList..\n");
-        //if(target_list) return;
-        //targetList_ = gtk_target_list_new (targetTable, NUM_TARGETS);
-        // The default dnd action: move.
-
-        gtk_icon_view_enable_model_drag_dest (iconView_,
-                                          targetTable, 
-                                          NUM_TARGETS,
-                                          (GdkDragAction)
-                                    ((gint)GDK_ACTION_MOVE|
-                                     (gint)GDK_ACTION_COPY|
-                                     (gint)GDK_ACTION_LINK));
-        return;
-    }
-
-
-    
-
-protected:
-
-    gchar *path_;
-    GtkTreeModel *treeModel_;
-    gint dirCount_; 
-    GtkIconView *iconView_;
-
-public:
-    GtkTreeModel *
+   GtkTreeModel *
     get_tree_model (void){return treeModel_;}
 
     gint
@@ -459,7 +298,167 @@ public:
 
 
 
-private: 
+private:
+
+    gint get_dir_count(void){ return dirCount_;}
+
+
+    
+    gchar *
+    make_tooltip_text (GtkTreePath *tpath ) {
+        return g_strdup("tooltip_text not defined in treeModel_!\n");
+    }
+
+    gchar *
+    get_verbatim_name (GtkTreePath *tpath ) {
+        GtkTreeIter iter;
+        gchar *verbatim_name=NULL;
+        gtk_tree_model_get_iter (treeModel_, &iter, tpath);
+        gtk_tree_model_get (treeModel_, &iter, 
+                actualNameColumn(), &verbatim_name, -1);
+        return verbatim_name;
+    }
+
+
+    GdkPixbuf *
+    get_normal_pixbuf (GtkTreePath *tpath ) {
+        GtkTreeIter iter;
+        GdkPixbuf *pixbuf=NULL;
+        gtk_tree_model_get_iter (treeModel_, &iter, tpath);
+        gtk_tree_model_get (treeModel_, &iter, 
+                Type::normalPixbufC()   , &pixbuf, -1);
+        return pixbuf;
+    }
+
+    GdkPixbuf *
+    get_tooltip_pixbuf (GtkTreePath *tpath ) {
+        GtkTreeIter iter;
+        GdkPixbuf *pixbuf=NULL;
+        gtk_tree_model_get_iter (treeModel_, &iter, tpath);
+        gtk_tree_model_get (treeModel_, &iter, 
+                Type::tooltipPixbufC(), &pixbuf, -1);
+        return pixbuf;
+    }
+
+    gchar *
+    get_tooltip_text (GtkTreePath *tpath ) {
+        GtkTreeIter iter;
+        gchar *text=NULL;
+        gtk_tree_model_get_iter (treeModel_, &iter, tpath);
+        gtk_tree_model_get (treeModel_, &iter, 
+                Type::tooltipTextC(), &text, -1);
+        return text;
+    }
+
+
+
+    void
+    set_tooltip_pixbuf (GtkTreePath *tpath, GdkPixbuf *pixbuf ) {
+        GtkTreeIter iter;
+        gtk_tree_model_get_iter (treeModel_, &iter, tpath);
+        gtk_list_store_set (GTK_LIST_STORE(treeModel_), &iter,
+                Type::tooltipPixbufC(), pixbuf, 
+            -1);
+
+        return ;
+    }
+
+
+    void
+    set_tooltip_text (GtkTreePath *tpath, const gchar *text ) {
+        GtkTreeIter iter;
+        gtk_tree_model_get_iter (treeModel_, &iter, tpath);
+        gtk_list_store_set (GTK_LIST_STORE(treeModel_), &iter,
+                Type::tooltipTextC(), text, 
+            -1);
+
+        return ;
+    }
+    const gchar *
+    get_label(void){
+        return get_path();
+    }
+
+    const gchar *
+    get_path(void){return (const gchar *)path_;}
+
+    gint 
+    get_icon_highlight_size(const gchar *name){
+        return GTK_ICON_SIZE_DIALOG;
+    }
+
+
+    gchar *
+    get_window_name (void) {
+        gchar *iconname;
+        if(!path_) {
+            iconname = util_c::utf_string (g_get_host_name());
+        } else if(g_path_is_absolute(path_) &&
+                g_file_test (path_, G_FILE_TEST_EXISTS)) {
+            gchar *basename = g_path_get_basename (path_);
+            gchar *pathname = g_strdup (path_);
+            gchar *b = util_c::utf_string (basename);   // non chopped
+            util_c::chop_excess (pathname);
+            gchar *q = util_c::utf_string (pathname);   // non chopped
+
+            g_free (basename);
+            g_free (pathname);
+            //iconname = g_strconcat (display_host, ":  ", b, " (", q, ")", NULL);
+            iconname = g_strconcat (b, " (", q, ")", NULL);
+            g_free (q);
+            g_free (b);
+        } else {
+            iconname = util_c::utf_string (path_);
+            util_c::chop_excess (iconname);
+        }
+
+#ifdef DEBUG
+        gchar *gg = g_strdup_printf("%s-%d-D", iconname, getpid());
+        g_free(iconname);
+        iconname = gg;
+#else
+#ifdef CORE
+        gchar *gg = g_strdup_printf("%s-%d-C", iconname, getpid());
+        g_free(iconname);
+        iconname = gg;
+#endif
+#endif
+        return (iconname);
+    }
+
+    void
+    createSourceTargetList (void) {
+        DBG("createSourceTargetList..\n");
+        gtk_icon_view_enable_model_drag_source
+                                   (iconView_,
+                                    (GdkModifierType)
+                                    0,
+                                    targetTable,
+                                    NUM_TARGETS,
+                                    (GdkDragAction)
+                                    ((gint)GDK_ACTION_MOVE|
+                                     (gint)GDK_ACTION_COPY|
+                                     (gint)GDK_ACTION_LINK));
+        return;
+    }
+
+    void
+    createDestTargetList (void) {
+        DBG("createDestTargetList..\n");
+        //if(target_list) return;
+        //targetList_ = gtk_target_list_new (targetTable, NUM_TARGETS);
+        // The default dnd action: move.
+
+        gtk_icon_view_enable_model_drag_dest (iconView_,
+                                          targetTable, 
+                                          NUM_TARGETS,
+                                          (GdkDragAction)
+                                    ((gint)GDK_ACTION_MOVE|
+                                     (gint)GDK_ACTION_COPY|
+                                     (gint)GDK_ACTION_LINK));
+        return;
+    }
+ 
     static GtkIconView *createIconview(void){
         auto icon_view = GTK_ICON_VIEW(gtk_icon_view_new());
         g_object_set(G_OBJECT(icon_view), "has-tooltip", TRUE, NULL);

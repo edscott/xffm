@@ -70,6 +70,7 @@ public:
 		delete baseView;
 	    }
 	}
+#if 10
 	// FIXME 
 	// basically the same. We need to define a template function
 	if (g_object_get_data(G_OBJECT(page->top_scrolled_window()),
@@ -88,10 +89,11 @@ public:
 		delete baseView;
 	    }
 	}
+#endif
 	if (!workdir || strcmp(workdir, "xffm:root")==0) {
 
 	    WARN("adding rootview\n");
-	    auto baseView =  new BaseView<RootView<Type> >("xffm:root");
+	    auto baseView =  new BaseView<RootView<Type> >((void *)this, "xffm:root");
 
 	    gtk_container_add (GTK_CONTAINER (page->top_scrolled_window()),
 		    GTK_WIDGET(baseView->iconView()));
@@ -100,11 +102,12 @@ public:
 	    g_object_set_data(G_OBJECT(page->top_scrolled_window()), "baseView",(void *)baseView);
 	    g_object_set_data(G_OBJECT(page->top_scrolled_window()), "rootView",(void *)baseView);
 	}
+#if 10
 	// FIXME 
 	// basically the same. We need to define a template function
 	if (g_file_test(workdir, G_FILE_TEST_IS_DIR)) {
 	    WARN("adding localview\n");
-	    auto baseView =  new BaseView<LocalView<Type> >(workdir);
+	    auto baseView =  new BaseView<LocalView<Type> >((void *)this, workdir);
 
 	    gtk_container_add (GTK_CONTAINER (page->top_scrolled_window()),
 		    GTK_WIDGET(baseView->iconView()));
@@ -113,6 +116,7 @@ public:
 	    g_object_set_data(G_OBJECT(page->top_scrolled_window()), "baseView",(void *)baseView);
 	    g_object_set_data(G_OBJECT(page->top_scrolled_window()), "localView",(void *)baseView);
 	}
+#endif
 	
     }
 };

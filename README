@@ -5,6 +5,7 @@ TODO:
   * bug: on starting xffm/xfterm with no path, toolbar does not show full path.
   * bug: do a "git branch whatever" in script mode. Script will expect input
          and cannot be terminated by menu signals...
+	 update: on a script command that loops, the kill pid is incorrect.
   x bash completion: bugs fixed, now in observation
   * xffind:
     - on close/destroy signal gtk_widget_hide failed 

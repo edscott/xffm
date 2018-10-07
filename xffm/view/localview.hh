@@ -1,5 +1,7 @@
 #ifndef XF_LOCALVIEW__HH
 # define XF_LOCALVIEW__HH
+// FIXME: determine HAVE_STRUCT_DIRENT_D_TYPE on configure (for freebsd)
+#define HAVE_STRUCT_DIRENT_D_TYPE 1
 
 #include "baseview.hh"
 // FIXME: #include "lite.hh"
@@ -36,7 +38,7 @@ enum
   NUM_COLS
 };
 
-pthread_mutex_t readdir_mutex=PTHREAD_MUTEX_INITIALIZER;
+static pthread_mutex_t readdir_mutex=PTHREAD_MUTEX_INITIALIZER;
 
 #define MAX_AUTO_STAT 500
 
@@ -68,51 +70,51 @@ class LocalView {
     using pixbuf_c = Pixbuf<Type>;
     using util_c = Util<Type>;
 
-    GHashTable *itemsHash_;
-    GCancellable *cancellable_;
-    GFile *gfile_;
-    GFileMonitor *monitor_;
-    gboolean showsHidden_;
-    GtkListStore *store_;
-    
-    //using lite_c = Lite<Type>;
-    //using mime_c = Mime<Type>;
 public:
-/*
-RootView(const gchar *path): 
-    BaseView<Type>("xffm:root")
-{
-    this->treemodel_ = mk_tree_model();
-    g_object_set_data(G_OBJECT(this->treemodel_), "iconview", this->iconView_);
-    gtk_icon_view_set_model(this->iconView_, this->treemodel_);
-    gtk_icon_view_set_text_column (this->iconView_, this->get_text_column());
-    gtk_icon_view_set_pixbuf_column (this->iconView_,  this->get_icon_column());
-    gtk_icon_view_set_selection_mode (this->iconView_, GTK_SELECTION_SINGLE);   
-}
-*/
-    LocalView(const gchar *path){
-	itemsHash_ = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
-	cancellable_ = g_cancellable_new ();
-	gfile_ = g_file_new_for_path (path);
-	monitor_ = NULL;
-	showsHidden_ = FALSE;
 
-    }
-    ~LocalView(void){
-	stop_monitor();
-	g_hash_table_destroy(itemsHash_);
-	//g_cancellable_cancel (cancellable_);
-	//g_object_unref(cancellable_);
-	if (gfile_) g_object_unref(gfile_);
-	if (monitor_) g_object_unref(monitor_);
-    }
-
-    GFile *
-    gfile(void){ return gfile_;}
-    
     static gboolean enableDragSource(void){ return TRUE;}
     static gboolean enableDragDest(void){ return TRUE;}
 
+    static const gchar *
+    get_xfdir_iconname(void){
+	return "system-file-manager";
+    }
+
+    static gchar *
+    item_activated (GtkIconView *iconview, GtkTreePath *tpath, void *data)
+    {
+	    DBG("LocalView::item activated\n");
+	GtkTreeModel *treeModel = gtk_icon_view_get_model (iconview);
+	GtkTreeIter iter;
+	if (!gtk_tree_model_get_iter (treeModel, &iter, tpath)) return NULL;
+	gchar *path=NULL;
+	gtk_tree_model_get (treeModel, &iter, 
+		COL_PATH, &path,
+		-1);
+
+	if (g_file_test(path, G_FILE_TEST_IS_DIR)) {
+	    gchar *basename = g_path_get_basename(path);
+	    if (strcmp(basename, "..")==0){
+		gchar *current=g_path_get_dirname(path);
+		gchar *up=g_path_get_dirname(current);
+		g_free(current);
+		g_free(path);
+		path=up;
+	    }
+	    WARN("FIXME: stop monitor (if running) \"%s\"\n", path);
+	    // FIXME: stop monitor (if running)
+	    // FIXME: reload treemodel
+	    return(path);
+	    // FIXME: restart Monitor
+	} else {
+	    WARN("FIXME: open or execute file \"%s\"\n", path);
+	    // FIXME: open or execute file
+	}
+
+	//view_p->reload(name);
+	g_free(path);
+	return NULL;
+    }
 
     static gint
     actualNameColumn(void){ return COL_ACTUAL_NAME;}
@@ -130,25 +132,7 @@ RootView(const gchar *path):
     tooltipTextC(void){return COL_TOOLTIP_TEXT;}
 
 
-    static const gchar *
-    get_xfdir_iconname(void){
-	return "system-file-manager";
-    }
-
-    static void
-    item_activated (GtkIconView *iconview, GtkTreePath *tpath, void *data)
-    {
-	    DBG("LocalView::item activated\n");
-	GtkTreeModel *treeModel = gtk_icon_view_get_model (iconview);
-	GtkTreeIter iter;
-	if (!gtk_tree_model_get_iter (treeModel, &iter, tpath)) return;
-	gchar *name;
-	gtk_tree_model_get (treeModel, &iter, COL_ACTUAL_NAME, &name,-1);
-	WARN("FIXME: load item iconview \"%s\"\n", name);
-	//view_p->reload(name);
-	g_free(name);
-    }
-
+    
     // This mkTreeModel should be static...
     static GtkTreeModel *
     mkTreeModel (const gchar *path)
@@ -191,10 +175,15 @@ RootView(const gchar *path):
 	return GTK_TREE_MODEL (list_store);
     }
 
+private:
+
+
+
 
     //FIXME: must be done by non main thread (already mutex protected)
     static GList *
-    read_items (const gchar *path, gboolean showsHidden, gint *heartbeat) {
+    read_items (const gchar *path, gboolean showsHidden, gint *heartbeat)
+    {
         GList *directory_list = NULL;
         if (!g_file_test(path, G_FILE_TEST_IS_DIR)){
             WARN("read_items(): g_file_test(%s, G_FILE_TEST_IS_DIR) failed\n", path);
@@ -244,6 +233,7 @@ RootView(const gchar *path):
         return (directory_list);
     }
 
+    // Convert a dirent entry into a xd_t structure.
     static xd_t *
     get_xd_p(const gchar *directory, struct dirent *d){
         xd_t *xd_p = (xd_t *)calloc(1,sizeof(xd_t));
@@ -262,8 +252,9 @@ RootView(const gchar *path):
         return xd_p;
     }
 
-    void
+    static void
     free_xd_p(xd_t *xd_p){
+	// The following 2 must be "const gchar *"
         //g_free(xd_p->mimefile);
         //g_free(xd_p->mimetype);
         g_free(xd_p->d_name);
@@ -271,198 +262,29 @@ RootView(const gchar *path):
         g_free(xd_p);
     }
 
-    xd_t *
-    get_xd_p(GFile *first){
+    static GList *
+    sort_directory_list(GList *list){
+        // FIXME: get sort order and type
+        gboolean do_stat = (g_list_length(list) <= MAX_AUTO_STAT);
 
-	gchar *path = g_file_get_path(gfile_);
-	gchar *basename = g_file_get_basename(first);
-	struct dirent *d; // static pointer
-	TRACE("looking for %s info\n", basename);
-	DIR *directory = opendir(path);
-	xd_t *xd_p = NULL;
-	if (directory) {
-	  while ((d = readdir(directory))  != NULL) {
-	    if(strcmp (d->d_name, basename)) continue;
-	    xd_p = get_xd_p(d);
-	    break;
-	  }
-	  closedir (directory);
-	} else {
-	  g_warning("monitor_f(): opendir %s: %s\n", path, strerror(errno));
-	}
-	g_free(basename); 
-	g_free(path); 
-	return xd_p;
-    }
-
-    gboolean
-    add_new_item(GFile *file){
-       xd_t *xd_p = get_xd_p(file);
-	if (xd_p) {
-	    add_local_item(store_, xd_p);
-	    free_xd_p(xd_p);
-	    return TRUE;
-	} 
-	return FALSE;
-    }
-
-    gboolean 
-    remove_item(GFile *file){
-	// find the iter and remove item
-	gchar *basename = g_file_get_basename(file);
-	g_hash_table_remove(itemsHash_, basename); 
-	gtk_tree_model_foreach (GTK_TREE_MODEL(store_), rm_func, (gpointer) basename); 
-	g_free(basename);
-	return TRUE;
-    }
-
-    gboolean 
-    restat_item(GFile *src){
-	gchar *basename = g_file_get_basename(src);
-	if (!g_hash_table_lookup(itemsHash_, basename)) {
-	    g_free(basename);
-	    return FALSE; 
-	}
-	g_free(basename);
-	gchar *fullpath = g_file_get_path(src);
-	gtk_tree_model_foreach (GTK_TREE_MODEL(store_), stat_func, (gpointer) fullpath); 
-	g_free(fullpath);
-	return TRUE;
-    }
-
-    void
-    start_monitor(const gchar *data, GtkTreeModel *data2){
-	store_ = GTK_LIST_STORE(data2);
-	DBG("*** start_monitor: %s\n", data);
-	if (gfile_) g_object_unref(gfile_);
-	gfile_ = g_file_new_for_path (data);
-	GError *error=NULL;
-	if (monitor_) g_object_unref(monitor_);
-	monitor_ = g_file_monitor_directory (gfile_, G_FILE_MONITOR_WATCH_MOVES, cancellable_,&error);
-	if (error){
-	    DBG("g_file_monitor_directory(%s) failed: %s\n",
-		    data, error->message);
-	    g_object_unref(gfile_);
-	    gfile_=NULL;
-	    return;
-	}
-	g_signal_connect (monitor_, "changed", 
-		G_CALLBACK (monitor_f), (void *)this);
-    }
-
-
-    void 
-    stop_monitor(void){
-	gchar *p = g_file_get_path(gfile_);
-	DBG("*** stop_monitor at: %s\n", p);
-	g_free(p);
-	g_file_monitor_cancel(monitor_);
-	while (gtk_events_pending())gtk_main_iteration();  
-	g_hash_table_remove_all(itemsHash_);
-	// hash table remains alive (but empty) until destructor.
-    }
-
-    void
-    set_showHidden(gboolean state){showsHidden_ = state;}
-
-    static gint
-    insert_list_into_model(GList *data, GtkListStore *list_store){
-        GList *directory_list = (GList *)data;
-        gint dir_count = g_list_length(directory_list);
-        GList *l = directory_list;
-        for (; l && l->data; l= l->next){
-            while (gtk_events_pending()) gtk_main_iteration();
-            xd_t *xd_p = (xd_t *)l->data;
-            add_local_item(list_store, xd_p);
-        }
-        GList *p = directory_list;
-        for (;p && p->data; p=p->next){
-            xd_t *xd_p = (xd_t *)p->data;
-            free_xd_p(xd_p);
-        }
-        g_list_free(directory_list);
-        return dir_count;
-    }
-
-    static void
-    add_local_item(GtkListStore *list_store, xd_t *xd_p){
-        // FIXME: itemsHash_ is on a object basis, not static item...
-        // if it already exists, do nothing
-        if (g_hash_table_lookup(itemsHash_, (void *)xd_p->d_name)){    
-            DBG("local_monitor_c::not re-adding %s\n", xd_p->d_name);
-            return;
-        }
-
-        //FIXME need for shows_hidden only in monitor_ function...
-        //if (!showsHidden_ && xd_p->d_name[0] == '.'  && strcmp("..", xd_p->d_name)){
-        if (xd_p->d_name[0] == '.'  && strcmp("..", xd_p->d_name)){
-            return;
-        }
-        
-        GtkTreeIter iter;
-        gtk_list_store_append (list_store, &iter);
-        gchar *utf_name = util_c::utf_string(xd_p->d_name);
-        // plain extension mimetype fallback
-        // FIXME: enable mime_c template
-        //if (!xd_p->mimetype) xd_p->mimetype = mime_c::mime_type(xd_p->d_name); 
-        gchar *icon_name = get_iconname(xd_p);
-        
-        // chop file extension (will now appear on the icon). (XXX only for big icons)
-        gboolean is_dir;
-        gboolean is_reg_not_link;
-#ifdef HAVE_STRUCT_DIRENT_D_TYPE
-        is_dir = (xd_p->d_type == DT_DIR);
-        is_reg_not_link = (xd_p->d_type == DT_REG && !(xd_p->d_type == DT_LNK));
-#else 
-        is_dir = (xd_p->st && S_ISDIR(xd_p->st->st_mode));
-        is_reg_not_link = (xd_p->st && S_ISREG(xd_p->st->st_mode) && !S_ISLNK(xd_p->st->st_mode));
-#endif
-        if (is_reg_not_link) {
-            gchar *t = g_strdup(xd_p->d_name);
-            if (strchr(t, '.') && strrchr(t, '.') != t){
-                *strrchr(t, '.') = 0;
-                g_free(utf_name);
-                utf_name = util_c::utf_string(t);
-                g_free(t);
+        if (do_stat){
+            GList *l;
+            for (l=list; l && l->data; l=l->next){
+                xd_t *xd_p = (xd_t *)l->data;
+                xd_p->st = (struct stat *)calloc(1, sizeof(struct stat));
+                if (!xd_p->st) continue;
+                if (stat(xd_p->path, xd_p->st)){
+                    DBG("xfdir_local_c::sort_directory_list: cannot stat %s (%s)\n", 
+                            xd_p->path, strerror(errno));
+                    continue;
+                }
+               // FIXME: enamble mime_c 
+                //xd_p->mimetype = mime_c::mime_type(xd_p->d_name, xd_p->st); // using stat obtained above
+                //xd_p->mimefile = g_strdup(mime_c::mime_file(xd_p->d_name)); // 
             }
         }
-        gchar *highlight_name;
-        if (is_dir){
-            if (strcmp(xd_p->d_name, "..")==0) {
-                highlight_name = g_strdup("go-up");
-            } else highlight_name = g_strdup("document-open");
-        } else {
-            gchar *h_name = get_iconname(xd_p, FALSE);
-            if (xd_p->st && U_RX(xd_p->st->st_mode)) {
-                highlight_name = 
-                    g_strdup_printf("%s/NE/emblem-run/2.0/220", h_name);
-            } else {
-                highlight_name = 
-                    g_strdup_printf("%s/NE/document-open/2.0/220", h_name);
-            }
-            g_free(h_name);
-        }
-       
-        GdkPixbuf *normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  gtk_c::get_icon_size(xd_p->d_name));
-        //GdkPixbuf *highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);
-        GdkPixbuf *highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);
-        gtk_list_store_set (list_store, &iter, 
-                COL_DISPLAY_NAME, utf_name,
-                COL_ACTUAL_NAME, xd_p->d_name,
-                COL_PATH, xd_p->path,
-                COL_ICON_NAME, icon_name,
-                COL_DISPLAY_PIXBUF, normal_pixbuf, 
-                COL_NORMAL_PIXBUF, normal_pixbuf, 
-                COL_HIGHLIGHT_PIXBUF, highlight_pixbuf, 
-                COL_TYPE,xd_p->d_type, 
-                COL_STAT,xd_p->st, 
-                COL_MIMETYPE, xd_p->mimetype,
-                COL_MIMEFILE, xd_p->mimefile, // may be null here.
-                -1);
-        g_free(icon_name);
-        g_free(highlight_name);
-        g_free(utf_name);
-        g_hash_table_replace(itemsHash_, g_strdup(xd_p->d_name), GINT_TO_POINTER(1));
+        // Default sort order:
+        return g_list_sort (list,compare_by_name);
     }
     
     static gint
@@ -493,37 +315,118 @@ RootView(const gchar *path):
         return strcasecmp(xd_a->d_name, xd_b->d_name);
     }
 
+    static gint
+    insert_list_into_model(GList *data, GtkListStore *list_store){
+        GList *directory_list = (GList *)data;
+        gint dir_count = g_list_length(directory_list);
+        GList *l = directory_list;
+        for (; l && l->data; l= l->next){
+            while (gtk_events_pending()) gtk_main_iteration();
+            xd_t *xd_p = (xd_t *)l->data;
+            add_local_item(list_store, xd_p);
+        }
+        GList *p = directory_list;
+        for (;p && p->data; p=p->next){
+            xd_t *xd_p = (xd_t *)p->data;
+            free_xd_p(xd_p);
+        }
+        g_list_free(directory_list);
+        return dir_count;
+    }
 
-    static GList *
-    sort_directory_list(GList *list){
-        // FIXME: get sort order and type
-        gboolean do_stat = (g_list_length(list) <= MAX_AUTO_STAT);
+    static void
+    add_local_item(GtkListStore *list_store, xd_t *xd_p){
+        // FIXME: itemsHash_ is on a object basis, not static item...
+        // if it already exists, do nothing
+	// FIXME: enable itemsHash_ for monitor function.
+        //if (g_hash_table_lookup(itemsHash_, (void *)xd_p->d_name)){    
+        //    DBG("local_monitor_c::not re-adding %s\n", xd_p->d_name);
+        //  return;
+        //}
 
-        if (do_stat){
-            GList *l;
-            for (l=list; l && l->data; l=l->next){
-                xd_t *xd_p = (xd_t *)l->data;
-                xd_p->st = (struct stat *)calloc(1, sizeof(struct stat));
-                if (!xd_p->st) continue;
-                if (stat(xd_p->d_name, xd_p->st)){
-                    DBG("xfdir_local_c::sort_directory_list: cannot stat %s (%s)\n", 
-                            xd_p->d_name, strerror(errno));
-                    continue;
-                }
-               // FIXME: enamble mime_c 
-                //xd_p->mimetype = mime_c::mime_type(xd_p->d_name, xd_p->st); // using stat obtained above
-                //xd_p->mimefile = g_strdup(mime_c::mime_file(xd_p->d_name)); // 
+        //FIXME need for shows_hidden only in monitor_ function...
+        //if (!showsHidden_ && xd_p->d_name[0] == '.'  && strcmp("..", xd_p->d_name)){
+        if (xd_p->d_name[0] == '.'  && strcmp("..", xd_p->d_name)){
+            return;
+        }
+        
+        GtkTreeIter iter;
+        gtk_list_store_append (list_store, &iter);
+        gchar *utf_name = util_c::utf_string(xd_p->d_name);
+        // plain extension mimetype fallback
+        // FIXME: enable mime_c template
+        //if (!xd_p->mimetype) xd_p->mimetype = mime_c::mime_type(xd_p->d_name); 
+        gchar *icon_name = get_iconname(xd_p);
+	TRACE("icon name for %s is %s\n", xd_p->d_name, icon_name);
+        
+        // chop file extension (will now appear on the icon). (XXX only for big icons)
+        gboolean is_dir;
+        gboolean is_reg_not_link;
+#ifdef HAVE_STRUCT_DIRENT_D_TYPE
+        is_dir = (xd_p->d_type == DT_DIR);
+        is_reg_not_link = (xd_p->d_type == DT_REG && !(xd_p->d_type == DT_LNK));
+#else 
+        is_dir = (xd_p->st && S_ISDIR(xd_p->st->st_mode));
+        is_reg_not_link = (xd_p->st && S_ISREG(xd_p->st->st_mode) && !S_ISLNK(xd_p->st->st_mode));
+#endif
+        if (is_reg_not_link) {
+            gchar *t = g_strdup(xd_p->d_name);
+            if (strchr(t, '.') && strrchr(t, '.') != t){
+                *strrchr(t, '.') = 0;
+                g_free(utf_name);
+                utf_name = util_c::utf_string(t);
+                g_free(t);
             }
         }
-        // Default sort order:
-        return g_list_sort (list,compare_by_name);
+        gchar *highlight_name;
+        if (is_dir){
+            if (strcmp(xd_p->d_name, "..")==0) {
+                highlight_name = g_strdup("go-up");
+            } else highlight_name = g_strdup("document-open");
+        } else {
+            gchar *h_name = get_iconname(xd_p, FALSE);
+            if (xd_p->st && U_RX(xd_p->st->st_mode)) {
+                highlight_name = 
+                    g_strdup_printf("%s/NE/application-x-executable-symbolic/2.5/220", h_name);
+            } else {
+                highlight_name = 
+                    g_strdup_printf("%s/NE/document-open-symbolic/3.0/220", h_name);
+            }
+            g_free(h_name);
+        }
+       
+        GdkPixbuf *normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
+        // XXX: what's with function gtk_c::get_icon_size()
+	// probably to get a smaller up arrow. Too nerdy...
+	//GdkPixbuf *normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  gtk_c::get_icon_size(xd_p->d_name));
+        //GdkPixbuf *highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);
+        GdkPixbuf *highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);
+        gtk_list_store_set (list_store, &iter, 
+                COL_DISPLAY_NAME, utf_name,
+                COL_ACTUAL_NAME, xd_p->d_name,
+                COL_PATH, xd_p->path,
+                COL_ICON_NAME, icon_name,
+                COL_DISPLAY_PIXBUF, normal_pixbuf, 
+                COL_NORMAL_PIXBUF, normal_pixbuf, 
+                COL_HIGHLIGHT_PIXBUF, highlight_pixbuf, 
+                COL_TYPE,xd_p->d_type, 
+                COL_STAT,xd_p->st, 
+                COL_MIMETYPE, xd_p->mimetype,
+                COL_MIMEFILE, xd_p->mimefile, // may be null here.
+                -1);
+        g_free(icon_name);
+        g_free(highlight_name);
+        g_free(utf_name);
+	// FIXME: enable itemsHash_ for monitor function.
+        //g_hash_table_replace(itemsHash_, g_strdup(xd_p->d_name), GINT_TO_POINTER(1));
     }
+
     static gchar *
     get_iconname(xd_t *xd_p){
         return get_iconname(xd_p, TRUE);
     }
 
-    gchar *
+    static gchar *
     get_iconname(xd_t *xd_p, gboolean use_lite){
         gchar *name = get_basic_iconname(xd_p);
         gchar *emblem = get_emblem_string(xd_p, use_lite);
@@ -533,20 +436,17 @@ RootView(const gchar *path):
         return iconname;
     }
 
-    gchar *
+    static gchar *
     get_basic_iconname(xd_t *xd_p){
 
         // Directories:
         if (strcmp(xd_p->d_name, "..")==0) return  g_strdup("go-up");
 #ifdef HAVE_STRUCT_DIRENT_D_TYPE
         if (xd_p->d_type == DT_DIR) {
-            gchar *path = g_file_get_path(gfile_);
-            if (strcmp(path, g_get_home_dir())==0) {
-                g_free(path);
+            if (strcmp(xd_p->path, g_get_home_dir())==0) {
                 return get_home_iconname(xd_p->d_name);
                 
             }
-            g_free(path);
             return  g_strdup("folder");
         }
 
@@ -557,19 +457,19 @@ RootView(const gchar *path):
     */
         // Character device:
         if (xd_p->d_type == DT_CHR ) {
-            return  g_strdup("text-x-generic-template/SW/emblem-chardevice/2.0/220");
+            return  g_strdup("text-x-generic-template/SW/input-keyboard-symbolic/2.0/220");
         }
         // Named pipe (FIFO):
         if (xd_p->d_type == DT_FIFO ) {
-            return  g_strdup("text-x-generic-template/SW/emblem-fifo/2.0/220");
+            return  g_strdup("text-x-generic-template/SW/emblem-synchronizing-symbolic/2.0/220");
         }
         // UNIX domain socket:
         if (xd_p->d_type == DT_SOCK ) {
-            return  g_strdup("text-x-generic-template/SW/emblem-socket/2.0/220");
+            return  g_strdup("text-x-generic-template/SW/emblem-shared-symbolic/2.0/220");
         }
         // Block device
         if (xd_p->d_type == DT_BLK ) {
-            return  g_strdup("text-x-generic-template/SW/emblem-blockdevice/2.0/220");
+            return  g_strdup("text-x-generic-template/SW/drive-harddisk-symbolic/2.0/220");
         }
         // Regular file:
 
@@ -584,12 +484,9 @@ RootView(const gchar *path):
         }
 #else
         if ((xd_p->st && S_ISDIR(xd_p->st->st_mode))) {
-            gchar *path = g_file_get_path(gfile_);
-            if (strcmp(path, g_get_home_dir())==0) {
-                g_free(path);
+            if (strcmp(xd_p->path, g_get_home_dir())==0) {
                 return get_home_iconname(xd_p->d_name);
             }
-            g_free(path);
             return  g_strdup("folder");
         }
 
@@ -600,19 +497,19 @@ RootView(const gchar *path):
     */
         // Character device:
         if ((xd_p->st && S_ISCHR(xd_p->st->st_mode))) {
-            return  g_strdup("text-x-generic-template/SW/emblem-chardevice/2.0/220");
+            return  g_strdup("text-x-generic-template/SW/input-keyboard-symbolic/2.0/220");
         }
         // Named pipe (FIFO):
         if ((xd_p->st && S_ISFIFO(xd_p->st->st_mode))) {
-            return  g_strdup("text-x-generic-template/SW/emblem-fifo/2.0/220");
+            return  g_strdup("text-x-generic-template/SW/emblem-synchronizing-symbolic/2.0/220");
         }
         // UNIX domain socket:
         if ((xd_p->st && S_ISSOCK(xd_p->st->st_mode))) {
-            return  g_strdup("text-x-generic-template/SW/emblem-socket/2.0/220");
+            return  g_strdup("text-x-generic-template/SW/emblem-shared-symbolic/2.0/220");
         }
         // Block device
         if ((xd_p->st && S_ISBLK(xd_p->st->st_mode))) {
-            return  g_strdup("text-x-generic-template/SW/emblem-blockdevice/2.0/220");
+            return  g_strdup("text-x-generic-template/SW/drive-harddisk-symbolic/2.0/220");
         }
         // Regular file:
 
@@ -624,23 +521,6 @@ RootView(const gchar *path):
         return  g_strdup("text-x-generic");
     }
 
-    static gchar *
-    get_home_iconname(const gchar *data){
-        if (!data) return g_strdup("user-home");
-        const gchar *dir[]={N_("Documents"), N_("Downloads"),N_("Music"),N_("Pictures"),
-                    N_("Templates"),N_("Videos"),N_("Desktop"),N_("Bookmarks"),
-                    N_(".Trash"),NULL};
-        const gchar *icon[]={"folder-documents", "folder-download","folder-music","folder-pictures",
-                      "folder-templates","folder-videos","user-desktop","user-bookmarks",
-                      "user-trash",NULL};
-        const gchar **p, **i;
-        for (p=dir, i=icon; p && *p ; p++, i++){
-            if (strcasecmp(*p, data) == 0) {
-                return g_strdup(*i);
-            }
-        }
-        return g_strdup("folder");
-    }
 
     static const gchar *
     get_mime_iconname(xd_t *xd_p){
@@ -691,6 +571,24 @@ RootView(const gchar *path):
         }
         return  "text-x-generic";
 #endif
+    }
+
+    static gchar *
+    get_home_iconname(const gchar *data){
+        if (!data) return g_strdup("user-home");
+        const gchar *dir[]={N_("Documents"), N_("Downloads"),N_("Music"),N_("Pictures"),
+                    N_("Templates"),N_("Videos"),N_("Desktop"),N_("Bookmarks"),
+                    N_(".Trash"),NULL};
+        const gchar *icon[]={"folder-documents", "folder-download","folder-music","folder-pictures",
+                      "folder-templates","folder-videos","user-desktop","user-bookmarks",
+                      "user-trash",NULL};
+        const gchar **p, **i;
+        for (p=dir, i=icon; p && *p ; p++, i++){
+            if (strcasecmp(*p, data) == 0) {
+                return g_strdup(*i);
+            }
+        }
+        return g_strdup("folder");
     }
 
     static gchar *
@@ -786,18 +684,18 @@ RootView(const gchar *path):
             }
             // all access:
             else if (O_ALL(xd_p->st->st_mode) || O_RW(xd_p->st->st_mode)){
-                    g = g_strdup_printf("%s%s%s/C/face-surprise/2.0/180/NW/emblem-exec/3.0/180",
+                    g = g_strdup_printf("%s%s%s/C/face-surprise/2.5/180/NW/application-x-executable-symbolic/3.0/180",
                             extension, colors, emblem);
             // read/write/exec
             } else if((MY_GROUP(xd_p->st->st_gid) && G_ALL(xd_p->st->st_mode)) 
                     || (MY_FILE(xd_p->st->st_uid) && U_ALL(xd_p->st->st_mode))){
-                    g = g_strdup_printf("%s%s%s/NW/emblem-exec/3.0/180", 
+                    g = g_strdup_printf("%s%s%s/NW/application-x-executable-symbolic/3.0/180", 
                             extension, colors, emblem);
             // read/exec
             } else if (O_RX(xd_p->st->st_mode)
                     ||(MY_GROUP(xd_p->st->st_gid) && G_RX(xd_p->st->st_mode)) 
                     || (MY_FILE(xd_p->st->st_uid) && U_RX(xd_p->st->st_mode))){
-                    g = g_strdup_printf("%s%s%s/NW/emblem-exec/3.0/180", 
+                    g = g_strdup_printf("%s%s%s/NW/application-x-executable-symbolic/3.0/180", 
                             extension, colors, emblem);
 
             // read/write
@@ -838,6 +736,170 @@ RootView(const gchar *path):
         return emblem;
     }
 
+
+    ///////////////////////////////////////////////////////////
+#if 0
+    // FIXME: revise this for monitor function...
+    static xd_t *
+    get_xd_p(GFile *first){
+	gchar *path = g_file_get_path(gfile_);
+	gchar *basename = g_file_get_basename(first);
+	struct dirent *d; // static pointer
+	TRACE("looking for %s info\n", basename);
+	DIR *directory = opendir(path);
+	xd_t *xd_p = NULL;
+	if (directory) {
+	  while ((d = readdir(directory))  != NULL) {
+	    if(strcmp (d->d_name, basename)) continue;
+	    xd_p = get_xd_p(d);
+	    break;
+	  }
+	  closedir (directory);
+	} else {
+	  g_warning("monitor_f(): opendir %s: %s\n", path, strerror(errno));
+	}
+	g_free(basename); 
+	g_free(path); 
+	return xd_p;
+    }
+
+    GHashTable *itemsHash_;
+    GCancellable *cancellable_;
+    GFile *gfile_;
+    GFileMonitor *monitor_;
+    gboolean showsHidden_;
+    GtkListStore *store_;
+    
+    //using lite_c = Lite<Type>;
+    //using mime_c = Mime<Type>;
+public:
+    LocalView(const gchar *path){
+	itemsHash_ = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
+	cancellable_ = g_cancellable_new ();
+	gfile_ = g_file_new_for_path (path);
+	monitor_ = NULL;
+	showsHidden_ = FALSE;
+
+    }
+    ~LocalView(void){
+	stop_monitor();
+	g_hash_table_destroy(itemsHash_);
+	//g_cancellable_cancel (cancellable_);
+	//g_object_unref(cancellable_);
+	if (gfile_) g_object_unref(gfile_);
+	if (monitor_) g_object_unref(monitor_);
+    }
+
+    GFile *
+    gfile(void){ return gfile_;}
+    
+    static gboolean enableDragSource(void){ return TRUE;}
+    static gboolean enableDragDest(void){ return TRUE;}
+
+
+    static gint
+    actualNameColumn(void){ return COL_ACTUAL_NAME;}
+    static gint 
+    iconColumn(void){ return COL_DISPLAY_PIXBUF;}
+    static gint 
+    textColumn(void){ return COL_DISPLAY_NAME;}
+    static gint
+    highlightPixbufC(void){return COL_HIGHLIGHT_PIXBUF;}
+    static gint
+    normalPixbufC(void){return COL_NORMAL_PIXBUF;}
+    static gint
+    tooltipPixbufC(void){return COL_TOOLTIP_PIXBUF;}
+    static gint
+    tooltipTextC(void){return COL_TOOLTIP_TEXT;}
+
+
+    static const gchar *
+    get_xfdir_iconname(void){
+	return "system-file-manager";
+    }
+
+    static void
+    item_activated (GtkIconView *iconview, GtkTreePath *tpath, void *data)
+    {
+	    DBG("LocalView::item activated\n");
+	GtkTreeModel *treeModel = gtk_icon_view_get_model (iconview);
+	GtkTreeIter iter;
+	if (!gtk_tree_model_get_iter (treeModel, &iter, tpath)) return;
+	gchar *name;
+	gtk_tree_model_get (treeModel, &iter, COL_ACTUAL_NAME, &name,-1);
+	WARN("FIXME: load item iconview \"%s\"\n", name);
+	//view_p->reload(name);
+	g_free(name);
+    }
+    gboolean
+    add_new_item(GFile *file){
+       xd_t *xd_p = get_xd_p(file);
+	if (xd_p) {
+	    add_local_item(store_, xd_p);
+	    free_xd_p(xd_p);
+	    return TRUE;
+	} 
+	return FALSE;
+    }
+
+    gboolean 
+    remove_item(GFile *file){
+	// find the iter and remove item
+	gchar *basename = g_file_get_basename(file);
+	g_hash_table_remove(itemsHash_, basename); 
+	gtk_tree_model_foreach (GTK_TREE_MODEL(store_), rm_func, (gpointer) basename); 
+	g_free(basename);
+	return TRUE;
+    }
+
+    gboolean 
+    restat_item(GFile *src){
+	gchar *basename = g_file_get_basename(src);
+	if (!g_hash_table_lookup(itemsHash_, basename)) {
+	    g_free(basename);
+	    return FALSE; 
+	}
+	g_free(basename);
+	gchar *fullpath = g_file_get_path(src);
+	gtk_tree_model_foreach (GTK_TREE_MODEL(store_), stat_func, (gpointer) fullpath); 
+	g_free(fullpath);
+	return TRUE;
+    }
+
+    void
+    start_monitor(const gchar *data, GtkTreeModel *data2){
+	store_ = GTK_LIST_STORE(data2);
+	DBG("*** start_monitor: %s\n", data);
+	if (gfile_) g_object_unref(gfile_);
+	gfile_ = g_file_new_for_path (data);
+	GError *error=NULL;
+	if (monitor_) g_object_unref(monitor_);
+	monitor_ = g_file_monitor_directory (gfile_, G_FILE_MONITOR_WATCH_MOVES, cancellable_,&error);
+	if (error){
+	    DBG("g_file_monitor_directory(%s) failed: %s\n",
+		    data, error->message);
+	    g_object_unref(gfile_);
+	    gfile_=NULL;
+	    return;
+	}
+	g_signal_connect (monitor_, "changed", 
+		G_CALLBACK (monitor_f), (void *)this);
+    }
+
+
+    void 
+    stop_monitor(void){
+	gchar *p = g_file_get_path(gfile_);
+	DBG("*** stop_monitor at: %s\n", p);
+	g_free(p);
+	g_file_monitor_cancel(monitor_);
+	while (gtk_events_pending())gtk_main_iteration();  
+	g_hash_table_remove_all(itemsHash_);
+	// hash table remains alive (but empty) until destructor.
+    }
+
+    void
+    set_showHidden(gboolean state){showsHidden_ = state;}
     static gboolean stat_func (GtkTreeModel *model,
 				GtkTreePath *path,
 				GtkTreeIter *iter,
@@ -954,6 +1016,7 @@ RootView(const gchar *path):
 	g_free(s);
     }
 
+#endif
 
 
 };

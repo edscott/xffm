@@ -25,18 +25,6 @@ class RootView  {
     using pixbuf_c = Pixbuf<Type>;
     using util_c = Util<Type>;
 public:
-/*
-RootView(const gchar *path): 
-    BaseView<Type>("xffm:root")
-{
-    this->treemodel_ = mk_tree_model();
-    g_object_set_data(G_OBJECT(this->treemodel_), "iconview", this->iconView_);
-    gtk_icon_view_set_model(this->iconView_, this->treemodel_);
-    gtk_icon_view_set_text_column (this->iconView_, this->get_text_column());
-    gtk_icon_view_set_pixbuf_column (this->iconView_,  this->get_icon_column());
-    gtk_icon_view_set_selection_mode (this->iconView_, GTK_SELECTION_SINGLE);   
-}
-*/
 
     static gboolean enableDragSource(void){ return FALSE;}
     static gboolean enableDragDest(void){ return FALSE;}
@@ -46,18 +34,21 @@ RootView(const gchar *path):
 	return "system-file-manager";
     }
 
-    static void
+    static gchar *
     item_activated (GtkIconView *iconview, GtkTreePath *tpath, void *data)
     {
+	// FIXME: should have a path column to 
+	//        load localview items directly
 	    DBG("RootView::item activated\n");
 	GtkTreeModel *treeModel = gtk_icon_view_get_model (iconview);
 	GtkTreeIter iter;
-	if (!gtk_tree_model_get_iter (treeModel, &iter, tpath)) return;
+	if (!gtk_tree_model_get_iter (treeModel, &iter, tpath)) return NULL;
 	gchar *name;
 	gtk_tree_model_get (treeModel, &iter, ACTUAL_NAME, &name,-1);
 	WARN("FIXME: load item iconview \"%s\"\n", name);
 	//view_p->reload(name);
 	g_free(name);
+	return NULL;
     }
 
     static gint
