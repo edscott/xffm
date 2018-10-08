@@ -50,10 +50,24 @@ public:
     
     void load(const gchar *workdir){
         auto notebook = (Notebook<Type> *)this;
-        auto page = notebook->currentPageObject();
+	auto page = notebook->currentPageObject();
+	WARN("adding rootview\n");
+	auto baseView =  new BaseView<Type>((void *)this, workdir);
 
+        if (!RootView<Type>::enableDragSource()){
+            gtk_icon_view_unset_model_drag_source (baseView->iconView());
+        }
+        if (!RootView<Type>::enableDragDest()){
+            gtk_icon_view_unset_model_drag_dest (baseView->iconView());
+        }
 
+	gtk_container_add (GTK_CONTAINER (page->top_scrolled_window()),
+		GTK_WIDGET(baseView->iconView()));
+	gtk_widget_show (GTK_WIDGET(baseView->iconView()));
+	RootView<Type>::loadModel(baseView->treeModel(), workdir);
+	while (gtk_events_pending())gtk_main_iteration();
 
+#if 0
 	if (g_object_get_data(G_OBJECT(page->top_scrolled_window()),
 		    "rootView")){
 	    g_object_set_data(G_OBJECT(page->top_scrolled_window()),
@@ -70,7 +84,6 @@ public:
 		delete baseView;
 	    }
 	}
-#if 10
 	// FIXME 
 	// basically the same. We need to define a template function
 	if (g_object_get_data(G_OBJECT(page->top_scrolled_window()),
@@ -89,7 +102,6 @@ public:
 		delete baseView;
 	    }
 	}
-#endif
 	if (!workdir || strcmp(workdir, "xffm:root")==0) {
 
 	    WARN("adding rootview\n");
@@ -102,7 +114,6 @@ public:
 	    g_object_set_data(G_OBJECT(page->top_scrolled_window()), "baseView",(void *)baseView);
 	    g_object_set_data(G_OBJECT(page->top_scrolled_window()), "rootView",(void *)baseView);
 	}
-#if 10
 	// FIXME 
 	// basically the same. We need to define a template function
 	if (g_file_test(workdir, G_FILE_TEST_IS_DIR)) {

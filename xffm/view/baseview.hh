@@ -3,6 +3,28 @@
 
 #include "signals/baseview.hh"
 
+enum
+{
+  DISPLAY_PIXBUF,
+  NORMAL_PIXBUF,
+  HIGHLIGHT_PIXBUF,
+  TOOLTIP_PIXBUF,
+  DISPLAY_NAME,
+  ACTUAL_NAME,
+  PATH,
+  TOOLTIP_TEXT,
+  ICON_NAME,
+  TYPE,
+  MIMETYPE, 
+  MIMEFILE, 
+  STAT,
+  PREVIEW_PATH,
+  PREVIEW_TIME,
+  PREVIEW_PIXBUF,
+  NUM_COLS
+};
+
+
 namespace xf
 {
 
@@ -23,6 +45,34 @@ class BaseView{
     GtkIconView *iconView_;
 
     void *parent_;
+    
+    // This mkTreeModel should be static...
+    static GtkTreeModel *
+    mkTreeModel (const gchar *path)
+    {
+
+	GtkTreeIter iter;
+	GtkListStore *list_store = gtk_list_store_new (NUM_COLS, 
+	    GDK_TYPE_PIXBUF, // icon in display
+	    GDK_TYPE_PIXBUF, // normal icon reference
+	    GDK_TYPE_PIXBUF, // highlight icon reference
+	    GDK_TYPE_PIXBUF, // preview, tooltip image (cache)
+	    G_TYPE_STRING,   // name in display (UTF-8)
+	    G_TYPE_STRING,   // name from filesystem (verbatim)
+	    G_TYPE_STRING,   // path (verbatim)
+	    G_TYPE_STRING,   // tooltip text (cache)
+	    G_TYPE_STRING,   // icon identifier (name or composite key)
+	    G_TYPE_INT,      // mode (to identify directories)
+	    G_TYPE_STRING,   // mimetype (further identification of files)
+	    G_TYPE_STRING,   // mimefile (further identification of files)
+	    G_TYPE_POINTER,  // stat record or NULL
+	    G_TYPE_STRING,   // Preview path
+	    G_TYPE_INT,      // Preview time
+	    GDK_TYPE_PIXBUF); // Preview pixbuf
+		
+
+	return GTK_TREE_MODEL (list_store);
+    }
 
 public:
     void init(const gchar *path){
@@ -32,27 +82,17 @@ public:
         clickCancel_ = 0;
         selectionList_ = NULL;
         
-	normal_pixbuf_column_ = Type::normalPixbufC();
-	display_pixbuf_column_ = Type::iconColumn();
-	actual_name_column_ = Type::actualNameColumn();
-	
         iconView_=createIconview();
         createSourceTargetList();
         createDestTargetList();
 	
-        if (!Type::enableDragSource()){
-            gtk_icon_view_unset_model_drag_source (iconView_);
-        }
-        if (!Type::enableDragDest()){
-            gtk_icon_view_unset_model_drag_dest (iconView_);
-        }
-	treeModel_ = Type::mkTreeModel(path);
+	treeModel_ = mkTreeModel(path);
         
 	g_object_set_data(G_OBJECT(treeModel_), "iconview", iconView_);
 	gtk_icon_view_set_model(iconView_, treeModel_);
 
-	gtk_icon_view_set_text_column (iconView_, Type::textColumn());
-	gtk_icon_view_set_pixbuf_column (iconView_,  iconColumn());
+	gtk_icon_view_set_text_column (iconView_, DISPLAY_NAME);
+	gtk_icon_view_set_pixbuf_column (iconView_,  DISPLAY_PIXBUF);
 	gtk_icon_view_set_selection_mode (iconView_, GTK_SELECTION_SINGLE);
 
 
@@ -126,13 +166,6 @@ public:
    GtkTreeModel *
     get_tree_model (void){return treeModel_;}
 
-    gint
-    normalPixbufC(void){return normal_pixbuf_column_;}
-    gint 
-    iconColumn(void){ return display_pixbuf_column_;}
-    gint 
-    actualNameColumn(void){ return actual_name_column_;}
-
     void
     freeSelectionList(void){
         if (selectionList_) 
@@ -202,7 +235,7 @@ public:
             gchar *g;
             GtkTreeIter iter;
             gtk_tree_model_get_iter (treemodel, &iter, tpath);
-            gtk_tree_model_get (treemodel, &iter, actualNameColumn(), &g, -1);
+            gtk_tree_model_get (treemodel, &iter, ACTUAL_NAME, &g, -1);
             // 2 is added for the \r\n 
             selection_len += (strlen (g) + strlen (format) + 2);
             g_free(g);
@@ -228,7 +261,7 @@ public:
             GtkTreeIter iter;
             gtk_tree_model_get_iter (treemodel, &iter, tpath);
             gtk_tree_model_get (treemodel, &iter, 
-                actualNameColumn(), &g, -1); 
+                ACTUAL_NAME, &g, -1); 
 
             gchar *gg=g_strconcat(files,format,g,"\n", NULL);
             g_free(g);
@@ -289,9 +322,9 @@ public:
         
         GdkPixbuf *highlight_pixbuf;
         gtk_tree_model_get (treeModel_, &iter, 
-                Type::highlightPixbufC(), &highlight_pixbuf, -1);
+                HIGHLIGHT_PIXBUF, &highlight_pixbuf, -1);
         gtk_list_store_set (GTK_LIST_STORE(treeModel_), &iter,
-                Type::iconColumn(), highlight_pixbuf, 
+                DISPLAY_PIXBUF, highlight_pixbuf, 
                 -1);
         return;
     }
@@ -315,7 +348,7 @@ private:
         gchar *verbatim_name=NULL;
         gtk_tree_model_get_iter (treeModel_, &iter, tpath);
         gtk_tree_model_get (treeModel_, &iter, 
-                actualNameColumn(), &verbatim_name, -1);
+                ACTUAL_NAME, &verbatim_name, -1);
         return verbatim_name;
     }
 
@@ -326,7 +359,7 @@ private:
         GdkPixbuf *pixbuf=NULL;
         gtk_tree_model_get_iter (treeModel_, &iter, tpath);
         gtk_tree_model_get (treeModel_, &iter, 
-                Type::normalPixbufC()   , &pixbuf, -1);
+                NORMAL_PIXBUF , &pixbuf, -1);
         return pixbuf;
     }
 
@@ -336,7 +369,7 @@ private:
         GdkPixbuf *pixbuf=NULL;
         gtk_tree_model_get_iter (treeModel_, &iter, tpath);
         gtk_tree_model_get (treeModel_, &iter, 
-                Type::tooltipPixbufC(), &pixbuf, -1);
+                TOOLTIP_PIXBUF, &pixbuf, -1);
         return pixbuf;
     }
 
@@ -346,7 +379,7 @@ private:
         gchar *text=NULL;
         gtk_tree_model_get_iter (treeModel_, &iter, tpath);
         gtk_tree_model_get (treeModel_, &iter, 
-                Type::tooltipTextC(), &text, -1);
+                TOOLTIP_TEXT, &text, -1);
         return text;
     }
 
@@ -357,7 +390,7 @@ private:
         GtkTreeIter iter;
         gtk_tree_model_get_iter (treeModel_, &iter, tpath);
         gtk_list_store_set (GTK_LIST_STORE(treeModel_), &iter,
-                Type::tooltipPixbufC(), pixbuf, 
+                TOOLTIP_PIXBUF, pixbuf, 
             -1);
 
         return ;
@@ -369,7 +402,7 @@ private:
         GtkTreeIter iter;
         gtk_tree_model_get_iter (treeModel_, &iter, tpath);
         gtk_list_store_set (GTK_LIST_STORE(treeModel_), &iter,
-                Type::tooltipTextC(), text, 
+                TOOLTIP_TEXT, text, 
             -1);
 
         return ;

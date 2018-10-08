@@ -3,19 +3,6 @@
 
 #include "baseview.hh"
 
-enum
-{
-  DISPLAY_PIXBUF,
-  NORMAL_PIXBUF,
-  HIGHLIGHT_PIXBUF,
-  TOOLTIP_PIXBUF,
-  DISPLAY_NAME,
-  ACTUAL_NAME,
-  TOOLTIP_TEXT,
-  ICON_NAME,
-  BASIC_COLS
-};
-
 namespace xf
 {
 
@@ -51,39 +38,18 @@ public:
 	return NULL;
     }
 
-    static gint
-    actualNameColumn(void){ return ACTUAL_NAME;}
-    static gint 
-    iconColumn(void){ return DISPLAY_PIXBUF;}
-    static gint 
-    textColumn(void){ return DISPLAY_NAME;}
-    static gint
-    highlightPixbufC(void){return HIGHLIGHT_PIXBUF;}
-    static gint
-    normalPixbufC(void){return NORMAL_PIXBUF;}
-    static gint
-    tooltipPixbufC(void){return TOOLTIP_PIXBUF;}
-    static gint
-    tooltipTextC(void){return TOOLTIP_TEXT;}
 
-
-    static GtkTreeModel *
-    mkTreeModel (const gchar *path)
+    static gboolean
+    loadModel (GtkTreeModel *treeModel, const gchar *path)
     {
-	GtkTreeIter iter;
-       // path = g_strdup("xffm:root");  
-	GtkListStore *list_store = gtk_list_store_new (BASIC_COLS, 
-		GDK_TYPE_PIXBUF, // icon in display
-		GDK_TYPE_PIXBUF, // normal icon reference
-		GDK_TYPE_PIXBUF, // highlight icon reference
-		GDK_TYPE_PIXBUF, // preview, tooltip image (cache)
-		G_TYPE_STRING,   // name in display (UTF-8)
-		G_TYPE_STRING,   // name from filesystem (verbatim)
-		G_TYPE_STRING,   // tooltip text (cache)
-		G_TYPE_STRING   // icon identifier (name or composite key)
-		); // Preview pixbuf
 		
-	DBG("mk_tree_model:: model = %p\n", list_store);
+	DBG("mk_tree_model:: model = %p\n", treeModel);
+	// Remove previous liststore rows, if any
+	GtkTreeIter iter;
+	if (gtk_tree_model_get_iter_first (treeModel, &iter)){
+	    while (gtk_list_store_remove (GTK_LIST_STORE(treeModel),&iter));
+	}
+
 	// Root
 	const gchar *name = "/";
 	gchar *utf_name = util_c::utf_string(_("Root Directory"));
@@ -93,8 +59,8 @@ public:
 	GdkPixbuf *highlight_pixbuf;
 	normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
 	highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);   
-	gtk_list_store_append (list_store, &iter);
-	gtk_list_store_set (list_store, &iter, 
+	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
+	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
 		DISPLAY_NAME, utf_name,
 		ACTUAL_NAME, name,
 		ICON_NAME, icon_name,
@@ -114,8 +80,8 @@ public:
 	normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
 	highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);   
 
-	gtk_list_store_append (list_store, &iter);
-	gtk_list_store_set (list_store, &iter, 
+	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
+	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
 		DISPLAY_NAME, utf_name,
 		ACTUAL_NAME, name,
 		ICON_NAME, icon_name,
@@ -126,7 +92,7 @@ public:
 		-1);
 	g_free(utf_name);
 
-	return GTK_TREE_MODEL (list_store);
+	return TRUE;
     }
 
 };

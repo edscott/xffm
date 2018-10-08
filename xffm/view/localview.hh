@@ -16,28 +16,6 @@ typedef struct xd_t{
     const gchar *mimetype;
     const gchar *mimefile;
 }xd_t;
-
-enum
-{
-  COL_DISPLAY_PIXBUF,
-  COL_NORMAL_PIXBUF,
-  COL_HIGHLIGHT_PIXBUF,
-  COL_TOOLTIP_PIXBUF,
-  COL_DISPLAY_NAME,
-  COL_ACTUAL_NAME,
-  COL_PATH,
-  COL_TOOLTIP_TEXT,
-  COL_ICON_NAME,
-  COL_TYPE,
-  COL_MIMETYPE, 
-  COL_MIMEFILE, 
-  COL_STAT,
-  COL_PREVIEW_PATH,
-  COL_PREVIEW_TIME,
-  COL_PREVIEW_PIXBUF,
-  NUM_COLS
-};
-
 static pthread_mutex_t readdir_mutex=PTHREAD_MUTEX_INITIALIZER;
 
 #define MAX_AUTO_STAT 500
@@ -116,55 +94,30 @@ public:
 	return NULL;
     }
 
-    static gint
-    actualNameColumn(void){ return COL_ACTUAL_NAME;}
-    static gint 
-    iconColumn(void){ return COL_DISPLAY_PIXBUF;}
-    static gint 
-    textColumn(void){ return COL_DISPLAY_NAME;}
-    static gint
-    highlightPixbufC(void){return COL_HIGHLIGHT_PIXBUF;}
-    static gint
-    normalPixbufC(void){return COL_NORMAL_PIXBUF;}
-    static gint
-    tooltipPixbufC(void){return COL_TOOLTIP_PIXBUF;}
-    static gint
-    tooltipTextC(void){return COL_TOOLTIP_TEXT;}
-
-
-    
     // This mkTreeModel should be static...
-    static GtkTreeModel *
-    mkTreeModel (const gchar *path)
+    static gboolean
+    loadModel (GtkTreeModel *treeModel, const gchar *path)
     {
         if (!path || !g_file_test(path, G_FILE_TEST_EXISTS)) {
             ERROR( "%s does not exist\n", path);
-            return NULL;
+            return FALSE;
         }
         if (chdir(path)<0){
             ERROR( "chdir(%s): %s\n", path, strerror(errno));
-            return NULL;
+            return FALSE;
         }
-
+ 
+	// Remove previous liststore rows, if any
 	GtkTreeIter iter;
-       // path = g_strdup("xffm:root");  
-	GtkListStore *list_store = gtk_list_store_new (NUM_COLS, 
-	    GDK_TYPE_PIXBUF, // icon in display
-	    GDK_TYPE_PIXBUF, // normal icon reference
-	    GDK_TYPE_PIXBUF, // highlight icon reference
-	    GDK_TYPE_PIXBUF, // preview, tooltip image (cache)
-	    G_TYPE_STRING,   // name in display (UTF-8)
-	    G_TYPE_STRING,   // name from filesystem (verbatim)
-	    G_TYPE_STRING,   // path (verbatim)
-	    G_TYPE_STRING,   // tooltip text (cache)
-	    G_TYPE_STRING,   // icon identifier (name or composite key)
-	    G_TYPE_INT,      // mode (to identify directories)
-	    G_TYPE_STRING,   // mimetype (further identification of files)
-	    G_TYPE_STRING,   // mimefile (further identification of files)
-	    G_TYPE_POINTER,  // stat record or NULL
-	    G_TYPE_STRING,   // Preview path
-	    G_TYPE_INT,      // Preview time
-	    GDK_TYPE_PIXBUF); // Preview pixbuf
+	if (gtk_tree_model_get_iter_first (treeModel, &iter)){
+	    while (gtk_list_store_remove (GTK_LIST_STORE(treeModel),&iter));
+	}
+        if (!Type::enableDragSource()){
+            gtk_icon_view_unset_model_drag_source (iconView_);
+        }
+        if (!Type::enableDragDest()){
+            gtk_icon_view_unset_model_drag_dest (iconView_);
+        }
 
         int heartbeat = 0;
 
@@ -172,7 +125,7 @@ public:
         insert_list_into_model(directory_list, list_store);
 		
 
-	return GTK_TREE_MODEL (list_store);
+	return TRUE;
     }
 
 private:
@@ -795,23 +748,6 @@ public:
     
     static gboolean enableDragSource(void){ return TRUE;}
     static gboolean enableDragDest(void){ return TRUE;}
-
-
-    static gint
-    actualNameColumn(void){ return COL_ACTUAL_NAME;}
-    static gint 
-    iconColumn(void){ return COL_DISPLAY_PIXBUF;}
-    static gint 
-    textColumn(void){ return COL_DISPLAY_NAME;}
-    static gint
-    highlightPixbufC(void){return COL_HIGHLIGHT_PIXBUF;}
-    static gint
-    normalPixbufC(void){return COL_NORMAL_PIXBUF;}
-    static gint
-    tooltipPixbufC(void){return COL_TOOLTIP_PIXBUF;}
-    static gint
-    tooltipTextC(void){return COL_TOOLTIP_TEXT;}
-
 
     static const gchar *
     get_xfdir_iconname(void){

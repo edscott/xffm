@@ -43,10 +43,10 @@ public:
                     gpointer     data)
     {
         DBG("BaseView::item activated\n");
-	gchar *path = Type::item_activated(iconview, tpath, data);
+/*	gchar *path = Type::item_activated(iconview, tpath, data);
 	auto dialog = (fmDialog_c *)data;
 	dialog->load(path); 
-
+*/
         //auto baseView = (BaseView<Type> *)data;
 	//baseView->reload(path);
 	g_free(path);
