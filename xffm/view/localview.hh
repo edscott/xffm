@@ -67,14 +67,14 @@ public:
 		-1);
 
 	if (g_file_test(path, G_FILE_TEST_IS_DIR)) {
-	    gchar *basename = g_path_get_basename(path);
+	   /* gchar *basename = g_path_get_basename(path);
 	    if (strcmp(basename, "..")==0){
 		gchar *current=g_path_get_dirname(path);
 		gchar *up=g_path_get_dirname(current);
 		g_free(current);
 		g_free(path);
 		path=up;
-	    }
+	    }*/
 	    WARN("FIXME: stop monitor (if running) \"%s\"\n", path);
 	    // FIXME: stop monitor (if running)
 	    // FIXME: reload treemodel
@@ -151,6 +151,7 @@ private:
         while ((d = readdir(directory))  != NULL){
             TRACE( "%p  %s\n", d, d->d_name);
             if(strcmp (d->d_name, ".") == 0) continue;
+            if (strcmp(path,"/")==0 && strcmp (d->d_name, "..") == 0) continue;
             if(!showsHidden && d->d_name[0] == '.' && strcmp (d->d_name, "..")) continue;
             xd_t *xd_p = get_xd_p(path, d);
             directory_list = g_list_prepend(directory_list, xd_p);
@@ -183,7 +184,13 @@ private:
     get_xd_p(const gchar *directory, struct dirent *d){
         xd_t *xd_p = (xd_t *)calloc(1,sizeof(xd_t));
         xd_p->d_name = g_strdup(d->d_name);
-        xd_p->path = g_strconcat(directory, G_DIR_SEPARATOR_S, d->d_name, NULL);
+        if (strcmp(d->d_name, "..")==0){
+	    xd_p->path = g_path_get_dirname(directory);
+        } else if (strcmp(directory, G_DIR_SEPARATOR_S)==0){
+            xd_p->path = g_strconcat(G_DIR_SEPARATOR_S, d->d_name, NULL);
+        } else {
+            xd_p->path = g_strconcat(directory, G_DIR_SEPARATOR_S, d->d_name, NULL);
+        }
 
         // These will be filled in later by thread:
         xd_p->mimetype = NULL;

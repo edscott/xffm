@@ -30,6 +30,10 @@ private:
     GList *run_button_list;
     pthread_mutex_t *rbl_mutex;
     Dialog<Type> *parent_;
+#ifdef XFFM_CC	
+    BaseView<Type> *baseView_;
+#endif
+    
 
 public:
 
@@ -121,13 +125,19 @@ public:
 #ifdef XFFM_CC
 	auto baseView = (BaseView<Type> *)
 	    g_object_get_data(G_OBJECT(top_scrolled_window()), "baseView");
-    	if (baseView) delete baseView;
+    	if (baseView){
+            WARN("now deleting BaseView...\n");
+            delete baseView;
+        } else {
+            ERROR("not deleting BaseView object\n");
+        }
 
 
 #endif
     }
 	
     Dialog<Type> *parent(void){return parent_;}
+
     
     void scriptRun(void){
 	    gchar *command = print_c::get_current_text(this->input());

@@ -84,7 +84,7 @@ public:
         auto currentPage = gtk_notebook_get_current_page (notebook_);
         if (pageNumber < 0){
             ERROR("child %p is not in notebook\n", (void *)child);
-            exit(1);
+            //exit(1);
             return;
         }
         TRACE("disconnect page %d\n", pageNumber);
@@ -105,7 +105,7 @@ public:
             gtk_main_quit();
             exit(1);
         }
-
+        
         delete(page);
         gtk_notebook_remove_page (notebook_, pageNumber);
 

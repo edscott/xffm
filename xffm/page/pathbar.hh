@@ -3,7 +3,9 @@
 #include "common/gtk.hh"
 #include "common/util.hh"
 #include "common/print.hh"
-
+#ifdef XFFM_CC
+# include "view/baseview.hh"
+#endif
 
 namespace xf {
 template <class Type> class Page;
@@ -118,17 +120,16 @@ private:
 	for (;children && children->data; children=children->next){
 	    if (button == children->data){
 		const gchar *path = (gchar *)g_object_get_data(G_OBJECT(button), "path");
-		if (!path) {
-#ifdef XFFM_CC
-                    auto dialog = (fmDialog<Type> *)page->parent();
-                    dialog->load("xffm:root");
-                    page->setPageWorkdir(g_get_home_dir());
-#else  
-                    ERROR("pathbar_ok : path = NULL\n");  //;
-#endif          
-                    return;
+                if (!path){
+                    ERROR("path is null at pathbar.hh::pathbar_ok\n");
                 }
+#ifdef XFFM_CC
+                auto baseView = (BaseView<Type> *)
+                    g_object_get_data(G_OBJECT(page->top_scrolled_window()), "baseView");
+                baseView->loadModel(path);
+#else
                 page->setPageWorkdir(path);
+#endif          
 
 		/*
 		view_c *view_p = (view_c *)g_object_get_data(G_OBJECT(pathbar_), "view_p");

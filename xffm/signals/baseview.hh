@@ -71,8 +71,10 @@ public:
         if (!tpath) return FALSE;
 
         GtkTreeIter iter;
-        gtk_tree_model_get_iter (model, &iter, tpath);
+        gboolean result = gtk_tree_model_get_iter (model, &iter, tpath);
         gtk_tree_path_free (tpath);
+
+        if (!result) return TRUE;
         GdkPixbuf *normal_pixbuf;
 
         gtk_tree_model_get (model, &iter, 

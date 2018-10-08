@@ -34,6 +34,7 @@ namespace xf
 template <class Type>
 class BaseView{
     using util_c = Util<Type>;
+    using page_c = Page<Type>;
     gint dragMode_;
     gint clickCancel_;
     GList *selectionList_;
@@ -47,7 +48,7 @@ class BaseView{
     gint dirCount_; 
     GtkIconView *iconView_;
 
-    void *parent_;
+    page_c *page_;
     
     // This mkTreeModel should be static...
     static GtkTreeModel *
@@ -133,13 +134,13 @@ public:
 	    "drag-begin", DRAG_CALLBACK (BaseViewSignals<Type>::signal_drag_begin), (void *)this);
         
     }
-    BaseView(void *parent){
-	parent_ = parent;
+    BaseView(page_c *page){
+	page_ = page;
         init(NULL);
     }
 
-    BaseView(void *parent, const gchar *path){
-	parent_ = parent;
+    BaseView(page_c *page, const gchar *path){
+	page_ = page;
         init(path);
     }
 
@@ -167,7 +168,7 @@ public:
             if (LocalView<Type>::loadModel(iconView_, path)){
                 g_free(lastPath); 
                 g_object_set_data(G_OBJECT(iconView_), "path", g_strdup(path));
-                
+		page_->setPageWorkdir(path);
             }
             return;
         } else if (!strcmp(path, "xffm:root")==0) {

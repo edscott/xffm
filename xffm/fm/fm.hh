@@ -39,17 +39,25 @@ public:
         
         //while (gtk_events_pending())gtk_main_iteration();
         if (workdir == NULL) workdir = g_strdup("xffm:root");
-        load(workdir);
+        auto baseView = load(workdir);
 	page->showIconview(TRUE);
     }
 
-    
-    void load(const gchar *workdir){
+    void removePage(GtkWidget *child){
+        WARN("removePage iconview page\n");
+        auto notebook = (Notebook<Type> *)this;
+        //auto baseView = notebook->baseView(child);
+        notebook->removePage(child);
+        //delete baseView;
+    }
+   
+    BaseView<Type> *load(const gchar *workdir){
         auto notebook = (Notebook<Type> *)this;
 	auto page = notebook->currentPageObject();
 	WARN("adding rootview\n");
 	// Create BaseView object.
-        auto baseView =  new BaseView<Type>((void *)this, workdir);
+        auto baseView =  new BaseView<Type>(page, workdir);
+        g_object_set_data(G_OBJECT(page->top_scrolled_window()), "baseView", baseView);
         // Add the iconview into the scrolled window.
 	gtk_container_add (GTK_CONTAINER (page->top_scrolled_window()),
 		GTK_WIDGET(baseView->iconView()));
@@ -57,6 +65,7 @@ public:
         // Load contents, depending on what path specifies.
 	baseView->loadModel(workdir);
 	while (gtk_events_pending())gtk_main_iteration();
+        return baseView;
     }
 };
 
