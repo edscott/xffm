@@ -9,6 +9,25 @@ set(xffm_VERSION_MINOR 3)
 set(CMAKE_CXX_FLAGS "-ggdb")
 set(ENV{PKG_CONFIG_PATH}  "/usr/local/lib/pkgconfig")
 include(GNUInstallDirs)
+
+# look for header files
+message(STATUS "Checking for signal.h...")
+find_path(SIGNAL_H
+  NAMES signal.h
+)
+set(SIGNAL_H ${SIGNAL_H})
+if(NOT SIGNAL_H)
+    message( FATAL_ERROR "signal.h is not found" )
+endif()
+message(STATUS "Checking for grep command...")
+find_program(HAVE_GREP
+  NAMES grep
+)
+set(HAVE_GREP ${HAVE_GREP})
+if(NOT HAVE_GREP)
+    message( FATAL_ERROR "grep is not found" )
+endif()
+
 # configure header file
 configure_file(
     "${PROJECT_SOURCE_DIR}/config.h.cmake"
@@ -16,17 +35,18 @@ configure_file(
     )
 list(APPEND CMAKE_MODULE_PATH 
     "${PROJECT_SOURCE_DIR}/cmake")
-
-# look for header files
-#find_path(SIGNAL_H
-#  NAMES signal.h
-#)
-
 find_package(PkgConfig REQUIRED)
 find_package(GLIB 2.52.3 REQUIRED)
 find_package(GTK3 3.22.17 REQUIRED)
 find_package(X11 REQUIRED)
+#CHECK_INCLUDE_FILE_CXX("signal.h" HAVE_SIGNAL_H)
 
+#find_program(GREP NAMES "grep")
+#CHECK_INCLUDE_FILE_CXX("UnitTest++.h" HAVE_UNITTESTXX)
+#IF(NOT HAVE_UNITTESTXX)
+#  UNSET(HAVE_UNITTESTXX CACHE)
+#  message( FATAL_ERROR "UnitTest++ is not found" )
+#ENDIF()
 
 include_directories(
     "./xffm"

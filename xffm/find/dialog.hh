@@ -465,7 +465,7 @@ private:
         
 	auto line_count = 
 	    GTK_CHECK_BUTTON(gtk_check_button_new_with_mnemonic (_("Line Count")));
-	// XXX: (FIXME) this option (-c) does not work in fgr...
+	// XXX: this option (-c) does not work in fgr...
 	//    gtk_widget_show (line_count);
 	gtk_box_pack_start (GTK_BOX (vbox13), GTK_WIDGET(line_count), FALSE, FALSE, 0);
 	gtk_widget_set_sensitive (GTK_WIDGET(line_count), active_grep);

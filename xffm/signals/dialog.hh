@@ -21,16 +21,69 @@ public:
     static gboolean
     window_keyboard_event (GtkWidget *window, GdkEventKey * event, gpointer data)
     {
-        TRACE("window_keyboard_event\n");
+
+	TRACE("window_keyboard_event\n");
+	/* asian Input methods */
+	if(event->keyval == GDK_KEY_space && (event->state & (GDK_MOD1_MASK | GDK_SHIFT_MASK))) {
+	    return FALSE;
+	}
+    /*
+       Ctrl-Left               Word left
+       Ctrl-Right              Word right
+       Ctrl-Y                  Delete line
+       Ctrl-K                  Delete to end of line
+       Ctrl-BS                 Delete word left
+       Ctrl-Del        	   Delete word right
+       Ctrl-A                  Select all text
+       Ctrl-U                  Deselect block
+       Ctrl-V       	   Paste block from clipboard
+       Ctrl-X                  Cut block
+       Ctrl-C                  Copy block to clipboard
+       */
+
+	gint ignore[]={
+	    GDK_KEY_Control_L,
+	    GDK_KEY_Control_R,
+	    GDK_KEY_Shift_L,
+	    GDK_KEY_Shift_R,
+	    GDK_KEY_Shift_Lock,
+	    GDK_KEY_Caps_Lock,
+	    GDK_KEY_Meta_L,
+	    GDK_KEY_Meta_R,
+	    GDK_KEY_Alt_L,
+	    GDK_KEY_Alt_R,
+	    GDK_KEY_Super_L,
+	    GDK_KEY_Super_R,
+	    GDK_KEY_Hyper_L,
+	    GDK_KEY_Hyper_R,
+	    GDK_KEY_ISO_Lock,
+	    GDK_KEY_ISO_Level2_Latch,
+	    GDK_KEY_ISO_Level3_Shift,
+	    GDK_KEY_ISO_Level3_Latch,
+	    GDK_KEY_ISO_Level3_Lock,
+	    GDK_KEY_ISO_Level5_Shift,
+	    GDK_KEY_ISO_Level5_Latch,
+	    GDK_KEY_ISO_Level5_Lock,
+	    0
+	};
+
+	gint i;
+	for (i=0; ignore[i]; i++) {
+	    if(event->keyval ==  ignore[i]) {
+		TRACE("window_keyboard_event: key ignored\n");
+		return TRUE;
+	    }
+	}
+
+
+        DBG("window_keyboard_event\n");
         auto dialog_p = (Dialog<Type> *)data;
         auto page_p = dialog_p->currentPageObject();
-        //auto notebook = dialog_p->notebook();
-        //auto input = page_p->input();
-        //auto output = page_p->output();
-        // do the completion thing
+
         page_p->keyboardEvent(event);
         return TRUE;
     }
+
 
     static void resizePane(GtkPaned *vpane){
 	gint max, current;

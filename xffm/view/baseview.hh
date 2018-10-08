@@ -80,7 +80,7 @@ class BaseView{
 
 public:
     void init(const gchar *path){
-        if (path) path = g_strdup(path);
+        if (path) path_ = g_strdup(path);
         else path_ = NULL;
         dragMode_ = 0;
         clickCancel_ = 0;
@@ -145,9 +145,8 @@ public:
     }
 
     ~BaseView(void){
-	// FIXME: destroy treemodel
-        // segfault:
-        //g_free(path_); 
+        TRACE("BaseView destructor.\n");
+        g_free(path_); 
         g_object_unref(treeModel_);
     }
 
@@ -181,6 +180,11 @@ public:
         return;
     }
 
+    gint
+    keyboardEvent( GdkEventKey * event) {
+        DBG("baseView key\n");
+        return TRUE;
+    }
 
     GtkIconView *iconView(void){return iconView_;}
     GtkTreeModel *treeModel(void){return treeModel_;}

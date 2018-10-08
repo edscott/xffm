@@ -47,8 +47,6 @@ public:
 	pageLabelIconBox_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
 	pageLabelButton_ = GTK_BUTTON(gtk_button_new ());
 
-        // FIXME: this goes in term::dialog:
-
 	gtk_box_pack_start (pageLabelBox_, GTK_WIDGET(pageLabelSpinnerBox_), TRUE, TRUE, 0);
 	gtk_box_pack_start (pageLabelSpinnerBox_, GTK_WIDGET(pageLabelSpinner_), TRUE, TRUE, 0);
 	gtk_box_pack_start (pageLabelBox_, GTK_WIDGET(pageLabelIconBox_), TRUE, TRUE, 0);
@@ -135,7 +133,10 @@ public:
 
 #endif
     }
-	
+
+#ifdef XFFM_CC
+    BaseView<Type> *baseView(void){ return baseView_;}
+#endif
     Dialog<Type> *parent(void){return parent_;}
 
     
@@ -264,6 +265,10 @@ public:
     }
     gint
     keyboardEvent( GdkEventKey * event) {
+
+
+        DBG("page keyboard_event\n");
+
         // <ESC> Toggles to iconview mode
         // <TAB> Toggles to terminal mode (partial output)
         if (terminalMode_){
@@ -277,7 +282,7 @@ public:
                 return TRUE;
             }
             // These navigation keys belong to iconview.
-            gint navigationKeys[]={
+            /*gint navigationKeys[]={
                 GDK_KEY_Page_Up, GDK_KEY_KP_Page_Up,
                 GDK_KEY_Page_Down, GDK_KEY_KP_Page_Down,
                 GDK_KEY_Right, GDK_KEY_KP_Right,
@@ -285,9 +290,23 @@ public:
                 GDK_KEY_Up, GDK_KEY_KP_Up,
                 GDK_KEY_Down, GDK_KEY_KP_Down,
                 GDK_KEY_Return, GDK_KEY_KP_Enter,
+                -1};*/
+            gint navigationKeys[]={
+                GDK_KEY_Page_Up, GDK_KEY_KP_Page_Up,
+                GDK_KEY_Page_Down, GDK_KEY_KP_Page_Down,
+                GDK_KEY_Right, GDK_KEY_KP_Right,
+                GDK_KEY_Left, GDK_KEY_KP_Left,
+                GDK_KEY_Return, GDK_KEY_KP_Enter,
                 -1};
             for (int i=0; navigationKeys[i] > 0; i++){
-                if (event->keyval == navigationKeys[i]) return FALSE;
+                if (event->keyval == navigationKeys[i]) {
+                    WARN("navigation key\n");
+#ifdef XFFM_CC
+                    return baseView()->keyboardEvent(event);
+#else
+                    return FALSE;
+#endif
+                }
             }
             // Any other key activates terminal (partial output).
             showIconview(FALSE);
@@ -295,6 +314,7 @@ public:
         }
         return this->completionKeyboardEvent(event);
     }
+
     
     void setSizeScale(gint size){
         gtk_range_set_value(GTK_RANGE(this->sizeScale_), size);

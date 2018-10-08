@@ -40,7 +40,7 @@ public:
         g_signal_connect (G_OBJECT (dialog_), "delete-event", EVENT_CALLBACK (dialogSignals<Type>::delete_event), NULL);
 
         gtk_widget_set_has_tooltip (GTK_WIDGET(dialog_), TRUE);
-        // FIXME:
+        // FIXME: enable tooltip
         //g_signal_connect (G_OBJECT (dialog_), "query-tooltip", G_CALLBACK (window_tooltip_f), (void *)this);
         g_signal_connect (G_OBJECT (dialog_), "key-press-event", KEY_EVENT_CALLBACK (dialogSignals<Type>::window_keyboard_event), (void *)this);
 
