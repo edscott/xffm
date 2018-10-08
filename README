@@ -1,15 +1,38 @@
 
 TODO: 
-  * back to xfterm branch
-  * transform start.hh into a class template: affects xfterm.cc and xffm.cc
+  * Enable localview monitor.
+  * enable localview open
+  * enable localview openwith
+  * enable localview popup
+     - openwith xx
+     - duplicate/symlink/rename
+     - cutnpaste
+     - properties
+  * enable previews
+  * enable DnD
+  * enable listview
+  * enable showhidden
+  * enable show backups
+  * enable sort modes 
+     - Type
+     - Name
+     - Date
+     - up/down
+
+Bugs:
   * bug: on starting xffm/xfterm with no path, toolbar does not show full path.
   * bug: do a "git branch whatever" in script mode. Script will expect input
          and cannot be terminated by menu signals...
 	 update: on a script command that loops, the kill pid is incorrect.
-  x bash completion: bugs fixed, now in observation
   * xffind:
     - on close/destroy signal gtk_widget_hide failed 
        GTK_IS_WIDGET (widget)' failed
+
+Cleanups:  
+
+  * transform start.hh into a class template: affects xfterm.cc and xffm.cc
   * simple rcfile for environment, monitor changes and reload (font size, window size)
-  * 20 files with FIXMEs
+  * 20+ files with FIXMEs
+
+
 
