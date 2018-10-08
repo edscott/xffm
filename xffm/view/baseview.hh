@@ -1,7 +1,6 @@
 #ifndef XF_BASEVIEW__HH
 # define XF_BASEVIEW__HH
 
-#include "signals/baseview.hh"
 
 enum
 {
@@ -23,6 +22,10 @@ enum
   PREVIEW_PIXBUF,
   NUM_COLS
 };
+
+#include "view/rootview.hh"
+#include "view/localview.hh"
+#include "signals/baseview.hh"
 
 
 namespace xf
@@ -83,8 +86,6 @@ public:
         selectionList_ = NULL;
         
         iconView_=createIconview();
-        createSourceTargetList();
-        createDestTargetList();
 	
 	treeModel_ = mkTreeModel(path);
         
@@ -98,7 +99,7 @@ public:
 
         if (!highlight_hash) highlight_hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
         g_signal_connect (this->iconView_, "item-activated", 
-                ICONVIEW_CALLBACK (BaseViewSignals<Type>::item_activated), (void *)parent_);
+                ICONVIEW_CALLBACK (BaseViewSignals<Type>::item_activated), (void *)this);
         g_signal_connect (this->iconView_, "motion-notify-event", 
                 ICONVIEW_CALLBACK (BaseViewSignals<Type>::motion_notify_event), (void *)this);
      //g_signal_connect (this->iconView_, "query-tooltip", 
@@ -149,16 +150,36 @@ public:
         g_object_unref(treeModel_);
     }
 
-   /* void reload(const gchar *path){
-	if (path){
-	    WARN("FIXME: reloading path %s\n", path);
-	    auto dialog = (fmDialog<double> *)parent_;
-	    dialog->load(path);
-	} else {
-	    WARN("FIXME: not a reload activate\n");
-	}
+    void loadModel(const gchar *path){
+        if (!path){
+            ERROR("baseview.hh::loadModel(); path is null.\n");
+            return;
+        }
+        // Enable dnd by default.
+        // Local object will disable if not required.
+        createSourceTargetList();
+        createDestTargetList();
 
-    }*/
+	// Remove previous liststore rows, if any
+        auto lastPath =  g_object_get_data(G_OBJECT(iconView_), "path");
+
+        if (g_file_test(path, G_FILE_TEST_EXISTS)){
+            if (LocalView<Type>::loadModel(iconView_, path)){
+                g_free(lastPath); 
+                g_object_set_data(G_OBJECT(iconView_), "path", g_strdup(path));
+                
+            }
+            return;
+        } else if (!strcmp(path, "xffm:root")==0) {
+           ERROR("baseview.hh::loadModel(): unknown path \"%s\"\n", path);
+        }
+        g_free(lastPath); 
+        g_object_set_data(G_OBJECT(iconView_), "path", g_strdup("xffm:root"));
+        RootView<Type>::loadModel(iconView_);
+
+        return;
+    }
+
 
     GtkIconView *iconView(void){return iconView_;}
     GtkTreeModel *treeModel(void){return treeModel_;}

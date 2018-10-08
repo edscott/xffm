@@ -1,8 +1,6 @@
 #ifndef XF_ROOTVIEW__HH
 # define XF_ROOTVIEW__HH
 
-#include "baseview.hh"
-
 namespace xf
 {
 
@@ -40,15 +38,19 @@ public:
 
 
     static gboolean
-    loadModel (GtkTreeModel *treeModel, const gchar *path)
+    loadModel (GtkIconView *iconView)
     {
 		
+        auto treeModel = gtk_icon_view_get_model (iconView);
 	DBG("mk_tree_model:: model = %p\n", treeModel);
-	// Remove previous liststore rows, if any
-	GtkTreeIter iter;
+        while (gtk_events_pending()) gtk_main_iteration();
+ 	GtkTreeIter iter;
 	if (gtk_tree_model_get_iter_first (treeModel, &iter)){
 	    while (gtk_list_store_remove (GTK_LIST_STORE(treeModel),&iter));
 	}
+        // Disable DnD
+        gtk_icon_view_unset_model_drag_source (iconView);
+        gtk_icon_view_unset_model_drag_dest (iconView);
 
 	// Root
 	const gchar *name = "/";

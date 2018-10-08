@@ -43,19 +43,20 @@ public:
                     gpointer     data)
     {
         DBG("BaseView::item activated\n");
-/*	gchar *path = Type::item_activated(iconview, tpath, data);
-	auto dialog = (fmDialog_c *)data;
-	dialog->load(path); 
-*/
-        //auto baseView = (BaseView<Type> *)data;
-	//baseView->reload(path);
-	g_free(path);
+        // Get activated path.
+
+	gchar *path;
+        GtkTreeIter iter;
+        auto treeModel = gtk_icon_view_get_model(iconview);
+        gtk_tree_model_get_iter (treeModel, &iter, tpath);
+        //this is wrong here: gtk_tree_path_free (tpath);
+        GdkPixbuf *normal_pixbuf;
+
+        gtk_tree_model_get (treeModel, &iter, PATH, &path, -1);
 	
-        /*
-        auto view = (BaseView *)data;
-        xfdir_c *xfdir_p = view_p->get_xfdir_p();
-        xfdir_p->item_activated(iconview, tpath, data);
-        */
+        auto baseView = (BaseView<Type> *)data;
+	baseView->loadModel(path);
+	g_free(path);
     }
    
 
@@ -75,9 +76,9 @@ public:
         GdkPixbuf *normal_pixbuf;
 
         gtk_tree_model_get (model, &iter, 
-                baseView->normalPixbufC(), &normal_pixbuf, -1);
+                NORMAL_PIXBUF, &normal_pixbuf, -1);
         gtk_list_store_set (GTK_LIST_STORE(model), &iter,
-                baseView->iconColumn(), normal_pixbuf, 
+                DISPLAY_PIXBUF, normal_pixbuf, 
             -1);
        return TRUE;
 
@@ -243,7 +244,7 @@ public:
         {
             GtkTreeIter iter;
             gtk_tree_model_get_iter (baseView->treeModel(), &iter, tpath);
-            gtk_tree_model_get (baseView->treeModel(), &iter, baseView->actualNameColumn(), &target, -1);	
+            gtk_tree_model_get (baseView->treeModel(), &iter, ACTUAL_NAME, &target, -1);	
         } else tpath=NULL;
 
                     // nah
@@ -291,7 +292,7 @@ public:
             GtkTreeIter iter;
             gtk_tree_model_get_iter (baseView->treeModel(), &iter, tpath);
             gchar *g;
-            gtk_tree_model_get (baseView->treeModel(), &iter,  baseView->actualNameColumn(), &g, -1);
+            gtk_tree_model_get (baseView->treeModel(), &iter, ACTUAL_NAME, &g, -1);
             // drop into?
             // must be a directory
             if (g_file_test(g, G_FILE_TEST_IS_DIR)){

@@ -3,7 +3,6 @@
 // FIXME: determine HAVE_STRUCT_DIRENT_D_TYPE on configure (for freebsd)
 #define HAVE_STRUCT_DIRENT_D_TYPE 1
 
-#include "baseview.hh"
 // FIXME: #include "lite.hh"
 #include "common/util.hh"
 // FIXME: #include "common/mime.hh"
@@ -50,9 +49,6 @@ class LocalView {
 
 public:
 
-    static gboolean enableDragSource(void){ return TRUE;}
-    static gboolean enableDragDest(void){ return TRUE;}
-
     static const gchar *
     get_xfdir_iconname(void){
 	return "system-file-manager";
@@ -67,7 +63,7 @@ public:
 	if (!gtk_tree_model_get_iter (treeModel, &iter, tpath)) return NULL;
 	gchar *path=NULL;
 	gtk_tree_model_get (treeModel, &iter, 
-		COL_PATH, &path,
+		PATH, &path,
 		-1);
 
 	if (g_file_test(path, G_FILE_TEST_IS_DIR)) {
@@ -96,33 +92,29 @@ public:
 
     // This mkTreeModel should be static...
     static gboolean
-    loadModel (GtkTreeModel *treeModel, const gchar *path)
+    loadModel (GtkIconView *iconView, const gchar *path)
     {
         if (!path || !g_file_test(path, G_FILE_TEST_EXISTS)) {
             ERROR( "%s does not exist\n", path);
             return FALSE;
         }
         if (chdir(path)<0){
-            ERROR( "chdir(%s): %s\n", path, strerror(errno));
+            DBG( "chdir(%s): %s\n", path, strerror(errno));
+            WARN("localView.hh::loadModel(): here we should open the file with app or dialog\n");
             return FALSE;
         }
- 
-	// Remove previous liststore rows, if any
-	GtkTreeIter iter;
+        auto treeModel = gtk_icon_view_get_model (iconView);
+        while (gtk_events_pending()) gtk_main_iteration();
+ 	GtkTreeIter iter;
 	if (gtk_tree_model_get_iter_first (treeModel, &iter)){
 	    while (gtk_list_store_remove (GTK_LIST_STORE(treeModel),&iter));
 	}
-        if (!Type::enableDragSource()){
-            gtk_icon_view_unset_model_drag_source (iconView_);
-        }
-        if (!Type::enableDragDest()){
-            gtk_icon_view_unset_model_drag_dest (iconView_);
-        }
+
 
         int heartbeat = 0;
 
         GList *directory_list = read_items (path, TRUE, &heartbeat);
-        insert_list_into_model(directory_list, list_store);
+        insert_list_into_model(directory_list, GTK_LIST_STORE(treeModel));
 		
 
 	return TRUE;
@@ -355,17 +347,17 @@ private:
         //GdkPixbuf *highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);
         GdkPixbuf *highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);
         gtk_list_store_set (list_store, &iter, 
-                COL_DISPLAY_NAME, utf_name,
-                COL_ACTUAL_NAME, xd_p->d_name,
-                COL_PATH, xd_p->path,
-                COL_ICON_NAME, icon_name,
-                COL_DISPLAY_PIXBUF, normal_pixbuf, 
-                COL_NORMAL_PIXBUF, normal_pixbuf, 
-                COL_HIGHLIGHT_PIXBUF, highlight_pixbuf, 
-                COL_TYPE,xd_p->d_type, 
-                COL_STAT,xd_p->st, 
-                COL_MIMETYPE, xd_p->mimetype,
-                COL_MIMEFILE, xd_p->mimefile, // may be null here.
+                DISPLAY_NAME, utf_name,
+                ACTUAL_NAME, xd_p->d_name,
+                PATH, xd_p->path,
+                ICON_NAME, icon_name,
+                DISPLAY_PIXBUF, normal_pixbuf, 
+                NORMAL_PIXBUF, normal_pixbuf, 
+                HIGHLIGHT_PIXBUF, highlight_pixbuf, 
+                TYPE,xd_p->d_type, 
+                STAT,xd_p->st, 
+                MIMETYPE, xd_p->mimetype,
+                MIMEFILE, xd_p->mimefile, // may be null here.
                 -1);
         g_free(icon_name);
         g_free(highlight_name);
@@ -746,8 +738,6 @@ public:
     GFile *
     gfile(void){ return gfile_;}
     
-    static gboolean enableDragSource(void){ return TRUE;}
-    static gboolean enableDragDest(void){ return TRUE;}
 
     static const gchar *
     get_xfdir_iconname(void){
