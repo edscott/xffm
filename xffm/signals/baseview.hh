@@ -204,7 +204,7 @@ public:
 //receiver:
 
     static void
-    signal_drag_data (GtkWidget * widget,
+    signal_drag_data_receive (GtkWidget * widget,
                       GdkDragContext * context,
                       gint x, gint y, 
                       GtkSelectionData * selection_data, 
@@ -214,8 +214,6 @@ public:
         DBG( "DND>> signal_drag_data\n");
 	auto baseView = (BaseView<Type> *)data;
 
-        gboolean result = FALSE;
-        gchar *target = NULL;
 
 
 
@@ -240,37 +238,35 @@ public:
         }
 
 
+        gchar *target = NULL;
         GtkTreePath *tpath=NULL;
         if (gtk_icon_view_get_item_at_pos (baseView->iconView(),
                                    x, y, &tpath, NULL))
         {
             GtkTreeIter iter;
             gtk_tree_model_get_iter (baseView->treeModel(), &iter, tpath);
-            gtk_tree_model_get (baseView->treeModel(), &iter, ACTUAL_NAME, &target, -1);	
+            gtk_tree_model_get (baseView->treeModel(), &iter, PATH, &target, -1);	
         } else tpath=NULL;
 
                     // nah
        /* gtk_icon_view_get_drag_dest_item (view_p->get_iconview(),
                                       &tpath,
                                       GtkIconViewDropPosition *pos);*/
-        // this stuff will be immersed in specific class
-        // FIXME:
-        // result = view_p->get_xfdir_p()->receive_dnd(target, selection_data, action);
    
         
         if (tpath) gtk_tree_path_free(tpath);
-        g_free(target);
         auto dndData = (const char *)gtk_selection_data_get_data (selection_data);
+	DBG("dndData = \"\n%s\"\n", dndData);
         
-	DBG("dndData = \"%s\"\n", dndData);
+        auto result = baseView->receiveDndData(target, selection_data, action);
 
         // FIXME: if sourcedir == targetdir, 
         // gtk_drag_finish(context, FALSE, FALSE);
-        gtk_drag_finish (context, TRUE, 
-                (action == GDK_ACTION_MOVE) ? TRUE : FALSE, 
+        gtk_drag_finish (context, result, 
+                (action == GDK_ACTION_MOVE) ? result : FALSE, 
                 time);
 
-        DBG("rodent_mouse: DND receive, drag_over\n");
+        DBG("DND receive, drag_over\n");
         return;
 
     } 
@@ -345,7 +341,7 @@ public:
     }
 
     static void
-    signal_drag_data_get (GtkWidget * widget,
+    signal_drag_data_send (GtkWidget * widget,
                        GdkDragContext * context, 
                        GtkSelectionData * selection_data, 
                        guint info, 

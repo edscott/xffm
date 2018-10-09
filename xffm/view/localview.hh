@@ -103,6 +103,8 @@ public:
             WARN("localView.hh::loadModel(): here we should open the file with app or dialog\n");
             return FALSE;
         }
+        gtk_icon_view_set_selection_mode (iconView,GTK_SELECTION_MULTIPLE);      
+        
         auto treeModel = gtk_icon_view_get_model (iconView);
         while (gtk_events_pending()) gtk_main_iteration();
  	GtkTreeIter iter;

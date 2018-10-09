@@ -81,7 +81,10 @@ class BaseView{
 public:
     void init(const gchar *path){
         if (path) path_ = g_strdup(path);
-        else path_ = NULL;
+        else {
+            ERROR("baseView::init:path_ == NULL\n");
+            exit(1);
+        }
         dragMode_ = 0;
         clickCancel_ = 0;
         selectionList_ = NULL;
@@ -118,9 +121,9 @@ public:
 	    G_CALLBACK(BaseViewSignals<Type>::button_press_f), (void *)this);
 
     g_signal_connect (G_OBJECT (this->iconView_), 
-	    "drag-data-received", G_CALLBACK (BaseViewSignals<Type>::signal_drag_data), (void *)this);
+	    "drag-data-received", G_CALLBACK (BaseViewSignals<Type>::signal_drag_data_receive), (void *)this);
     g_signal_connect (G_OBJECT (this->iconView_), 
-	    "drag-data-get", G_CALLBACK (BaseViewSignals<Type>::signal_drag_data_get), (void *)this);
+	    "drag-data-get", G_CALLBACK (BaseViewSignals<Type>::signal_drag_data_send), (void *)this);
     g_signal_connect (G_OBJECT (this->iconView_), 
 	    "drag-motion", G_CALLBACK (BaseViewSignals<Type>::signal_drag_motion), (void *)this);
     g_signal_connect (G_OBJECT (this->iconView_), 
@@ -134,10 +137,6 @@ public:
 	    "drag-begin", DRAG_CALLBACK (BaseViewSignals<Type>::signal_drag_begin), (void *)this);
         
     }
-    BaseView(page_c *page){
-	page_ = page;
-        init(NULL);
-    }
 
     BaseView(page_c *page, const gchar *path){
 	page_ = page;
@@ -150,11 +149,19 @@ public:
         g_object_unref(treeModel_);
     }
 
+    void setPath(const gchar *path){
+        g_free(path_);
+        path_=g_strdup(path);
+    }
+
     void loadModel(const gchar *path){
         if (!path){
             ERROR("baseview.hh::loadModel(); path is null.\n");
             return;
         }
+
+        // FIXME: double reference to path_ below...
+        setPath(path);
         // Enable dnd by default.
         // Local object will disable if not required.
         createSourceTargetList();
@@ -249,73 +256,63 @@ public:
     }
 
     gboolean
-    setDndData(GtkSelectionData * selection_data, GList *selection_list){
+    setDndData(GtkSelectionData *selection_data, GList *selection_list){
         WARN( "set_dnd_data() baseview default.\n");
-        GtkTreeModel *treemodel = this->treeModel_;
-        GList *tmp;
         const gchar *format = "file://";
-        gint selection_len = 0;
-        /* count length of bytes to be allocated */
-        for(tmp = selection_list; tmp; tmp = tmp->next) {
+        GList *uriList = NULL;
+        for(GList *tmp = selection_list; tmp; tmp = tmp->next) {
             GtkTreePath *tpath = (GtkTreePath *)tmp->data;
-            gchar *g;
+            gchar *path;
             GtkTreeIter iter;
-            gtk_tree_model_get_iter (treemodel, &iter, tpath);
-            gtk_tree_model_get (treemodel, &iter, ACTUAL_NAME, &g, -1);
-            // 2 is added for the \r\n 
-            selection_len += (strlen (g) + strlen (format) + 2);
-            g_free(g);
-           /* 
-            gchar *dndpath = g_build_filename(view_path, g, NULL);
-            g_free(g);
-            // 2 is added for the \r\n 
-            selection_len += (strlen (dndpath) + strlen (format) + 2);
-            g_free(dndpath);
-            */
+            gtk_tree_model_get_iter (this->treeModel_, &iter, tpath);
+            gtk_tree_model_get (this->treeModel_, &iter, PATH, &path, -1);
+            uriList = g_list_append(uriList, g_strconcat(format, path, NULL));
+            g_free(path);
         }
-        /* 1 is added for terminating null character */
-        fprintf(stderr, "allocating %d bytes for dnd data\n",selection_len + 1);
-        //files = (gchar *)calloc (selection_len + 1,1);
-        /*if (!files) {
-            g_error("signal_drag_data_get(): malloc %s", strerror(errno));
-            return;
-        }*/
-        gchar *files = g_strdup("");
-        for(tmp = selection_list; tmp; tmp = tmp->next) {
-            GtkTreePath *tpath = (GtkTreePath *)tmp->data;
-            gchar *g;
-            GtkTreeIter iter;
-            gtk_tree_model_get_iter (treemodel, &iter, tpath);
-            gtk_tree_model_get (treemodel, &iter, 
-                ACTUAL_NAME, &g, -1); 
 
-            gchar *gg=g_strconcat(files,format,g,"\n", NULL);
-            g_free(g);
-            g_free(files);
-            files=gg;
-/*
-            gchar *dndpath = g_build_filename(view_path, g, NULL);
-            g_free(g);
-            g=g_strconcat(files,format,dndpath,"\n", NULL);
-            g_free(files);
-            files=g;
-*/
-            /*sprintf (files, "%s%s\r\n", format, dndpath);
-            files += (strlen (format) + strlen (dndpath) + 2);
-            g_free(dndpath);*/
+        gchar **uris = (gchar **)calloc(g_list_length(selection_list)+1, sizeof(gchar *));
+        gchar **f=uris;
+        for(GList *tmp = uriList;  tmp && tmp->data;  tmp = tmp->next, f++) {
+            *f = (gchar *)tmp->data;
         }
-        gtk_selection_data_set (selection_data, 
-            gtk_selection_data_get_selection(selection_data),
-            8, (const guchar *)files, selection_len);
-        DBG(">>> DND send, drag data is:\n%s\n", files);
-        g_free(files);
-        return TRUE;
+        g_list_free(uriList);
+
+        auto result = gtk_selection_data_set_uris (selection_data, uris);
+        if (!result){
+            ERROR("!gtk_selection_data_set_uris");
+        }
+        g_strfreev(uris);
+        return result;
+        
     }
 
     gboolean
-    receive_dnd(const gchar *target, GtkSelectionData *data, GdkDragAction action){
-        WARN("receive_dnd() not define for this class.\n");
-        return FALSE;
+    receiveDndData(gchar *target, const GtkSelectionData *selection_data, GdkDragAction action){
+        WARN("receiveDndData: target=%s action=%d\n", target, action);
+        if (!selection_data) {
+            WARN("!selection_data\n");
+            return FALSE;
+        }
+        gchar **files = gtk_selection_data_get_uris (selection_data);
+        if (!files) {
+            WARN("!files\n");
+            return FALSE;
+        }
+        if (!target) target = g_strdup_printf("file://%s",path_);
+        for (gchar **f = files; f && *f; f++){
+            WARN("DND: %s --> %s\n", *f, target);
+        }
+
+        gchar *source = g_path_get_dirname(*files);
+        gboolean result = FALSE;
+        if (strcmp(source, target) ) result = TRUE;
+        else {
+            WARN("receiveDndData: source and target are the same\n");
+        }
+        g_strfreev(files);
+        g_free(target);
+
+        return result;
     }
 
     void

@@ -19,7 +19,7 @@ public:
 	return "system-file-manager";
     }
 
-    static gchar *
+ /*   static gchar *
     item_activated (GtkIconView *iconview, GtkTreePath *tpath, void *data)
     {
 	// FIXME: should have a path column to 
@@ -34,7 +34,7 @@ public:
 	//view_p->reload(name);
 	g_free(name);
 	return NULL;
-    }
+    }*/
 
 
     static gboolean
@@ -51,6 +51,7 @@ public:
         // Disable DnD
         gtk_icon_view_unset_model_drag_source (iconView);
         gtk_icon_view_unset_model_drag_dest (iconView);
+        gtk_icon_view_set_selection_mode (iconView,GTK_SELECTION_SINGLE);      
 
 	// Root
 	const gchar *name = "/";
