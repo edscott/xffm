@@ -9,13 +9,10 @@ GHashTable *highlight_hash=NULL;
 #define SHIFT_MODE (event->state & GDK_SHIFT_MASK)
 enum {
     TARGET_URI_LIST,
+    TARGET_MOZ_URL,
     TARGET_PLAIN,
     TARGET_UTF8,
     TARGET_STRING,
-    TARGET_ROOTWIN,
-    TARGET_MOZ_URL,
-    TARGET_XDS,
-    TARGET_RAW,
     TARGETS
 };
 
@@ -28,6 +25,9 @@ static GtkTargetEntry targetTable[] = {
 };
 
 #define NUM_TARGETS (sizeof(targetTable)/sizeof(GtkTargetEntry))
+static gboolean dragOn_=FALSE;
+static     gint buttonPressX=-1;
+static     gint buttonPressY=-1;
 
 namespace xf
 {
@@ -42,7 +42,6 @@ public:
                     GtkTreePath *tpath,
                     gpointer     data)
     {
-        DBG("BaseView::item activated\n");
         // Get activated path.
 
 	gchar *path;
@@ -54,9 +53,15 @@ public:
 
         gtk_tree_model_get (treeModel, &iter, PATH, &path, -1);
 	
+        DBG("BaseView::item activated: %s\n", path);
         auto baseView = (BaseView<Type> *)data;
-	baseView->loadModel(path);
+        auto lastPath = g_strdup(baseView->path());
+	if (!baseView->loadModel(path)){
+            WARN("reloading %s\n", lastPath);
+            baseView->loadModel(lastPath);
+        }
 	g_free(path);
+	g_free(lastPath);
     }
    
 
@@ -92,6 +97,8 @@ public:
     {
         //GdkEventButton *event_button = (GdkEventButton *)event;
 	auto baseView = (BaseView<Type> *)data;
+        buttonPressX = buttonPressY = -1;
+        dragOn_ = FALSE;
         baseView->setDragMode(0);
         if (!gtk_icon_view_get_item_at_pos (baseView->iconView(),
                                    event->x, event->y,
@@ -119,8 +126,12 @@ public:
                    gpointer   data)
     {
         auto baseView = (BaseView<Type> *)data;
+        buttonPressX = buttonPressY = -1;
+        dragOn_ = FALSE;
 
         if (event->button == 1) {
+            baseView->setDragMode(TRUE);
+
             gboolean retval = FALSE;
             //GList *selection_list = gtk_icon_view_get_selected_items (baseView->iconView());
             gint mode = 0;
@@ -144,6 +155,16 @@ public:
                 // select item
                 gtk_icon_view_select_path (baseView->iconView(), tpath);
                 retval = TRUE; 
+                buttonPressX = event->x;
+                buttonPressY = event->y;
+                GtkTargetList *targets= gtk_target_list_new (targetTable,TARGETS);
+                GdkDragContext *context =
+                    gtk_drag_begin_with_coordinates (GTK_WIDGET(baseView->iconView()),
+                                 targets,
+                                 GDK_ACTION_MOVE, //GdkDragAction actions,
+                                 1, //gint button,
+                                 (GdkEvent *)event, //GdkEvent *event,
+                                 event->x, event->y);
             }
             if (tpath) gtk_tree_path_free(tpath);
             return retval;
@@ -191,11 +212,19 @@ public:
             DBG("BaseView::motion_notify_event: data cannot be NULL\n");
             return FALSE;
         }
-	TRACE("motion_notify_event\n");
+	TRACE("motion_notify_event, dragmode= %d\n", baseView->dragMode());
+
+        if (buttonPressX >= 0 && buttonPressY >= 0 && !dragOn_){
+            // start DnD (multiple selection)
+            dragOn_ = TRUE;
+        }
+        buttonPressX = buttonPressY = -1;
 
 	// XXX: Why this limitation?
         // if (view_p->get_dir_count() > 500) return FALSE;
         baseView->highlight(e->x, e->y);
+
+    
         return FALSE;
     }
 
@@ -221,6 +250,7 @@ public:
         
         TRACE("rodent_mouse: DND receive, info=%d (%d,%d)\n", info, TARGET_STRING, TARGET_URI_LIST);
         if(info != TARGET_URI_LIST) {
+            ERROR("signal_drag_data_receive: info != TARGET_URI_LIST\n");
             gtk_drag_finish(context, FALSE, FALSE, time);
             return;
       //            goto drag_over;         /* of course */
@@ -231,7 +261,7 @@ public:
         if(action != GDK_ACTION_MOVE && 
            action != GDK_ACTION_COPY &&
            action != GDK_ACTION_LINK) {
-            DBG("Drag drop mode is not GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK\n");
+            ERROR("Drag drop mode is not GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK\n");
             gtk_drag_finish(context, FALSE, FALSE, time);
             return;
       //      goto drag_over;         /* of course */
@@ -246,6 +276,10 @@ public:
             GtkTreeIter iter;
             gtk_tree_model_get_iter (baseView->treeModel(), &iter, tpath);
             gtk_tree_model_get (baseView->treeModel(), &iter, PATH, &target, -1);	
+            if (!g_file_test(target, G_FILE_TEST_IS_DIR)){
+                g_free(target);
+                target=NULL;
+            }
         } else tpath=NULL;
 
                     // nah
@@ -262,6 +296,7 @@ public:
 
         // FIXME: if sourcedir == targetdir, 
         // gtk_drag_finish(context, FALSE, FALSE);
+        WARN("drag finish result=%d\n", result);
         gtk_drag_finish (context, result, 
                 (action == GDK_ACTION_MOVE) ? result : FALSE, 
                 time);
@@ -277,7 +312,7 @@ public:
             GdkDragContext * dc, gint drag_x, gint drag_y, 
             guint t, gpointer data) {
 	auto baseView = (BaseView<Type> *)data;
-        TRACE("signal_drag_motion\n");
+        DBG("signal_drag_motion\n");
                                         
         GtkTreePath *tpath;
                                         
@@ -347,7 +382,7 @@ public:
                        guint info, 
                        guint time,
                        gpointer data) {
-        WARN("signal_drag_data_get\n");
+        WARN("signal_drag_data_send\n");
         //g_free(files);
         
         //int drag_type;
@@ -358,8 +393,6 @@ public:
         /* prepare data for the receiver */
         switch (info) {
 #if 10
-          case TARGET_RAW:
-            DBG( ">>> DND send, TARGET_RAW\n"); return;;
           case TARGET_UTF8:
             DBG( ">>> DND send, TARGET_UTF8\n"); return;
 #endif
@@ -379,13 +412,13 @@ public:
 
     static void
     signal_drag_leave (GtkWidget * widget, GdkDragContext * drag_context, guint time, gpointer data) {
-        DBG("signal_drag_leave\n");
+        ERROR("signal_drag_leave\n");
 
     }
 
     static void
     signal_drag_delete (GtkWidget * widget, GdkDragContext * context, gpointer data) {
-        DBG("signal_drag_delete\n");
+        ERROR("signal_drag_delete\n");
     }
     
 };

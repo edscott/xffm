@@ -43,16 +43,17 @@ class BaseView{
     gint normal_pixbuf_column_;
     gint actual_name_column_;
 
-    gchar *path_;
     GtkTreeModel *treeModel_;
     gint dirCount_; 
     GtkIconView *iconView_;
 
+    gchar *path_;
     page_c *page_;
+
     
     // This mkTreeModel should be static...
     static GtkTreeModel *
-    mkTreeModel (const gchar *path)
+    mkTreeModel (void)
     {
 
 	GtkTreeIter iter;
@@ -79,19 +80,16 @@ class BaseView{
     }
 
 public:
-    void init(const gchar *path){
-        if (path) path_ = g_strdup(path);
-        else {
-            ERROR("baseView::init:path_ == NULL\n");
-            exit(1);
-        }
+    BaseView(page_c *page, const gchar *path){
+	page_ = page; 
+        path_ = NULL;
         dragMode_ = 0;
         clickCancel_ = 0;
         selectionList_ = NULL;
         
         iconView_=createIconview();
 	
-	treeModel_ = mkTreeModel(path);
+	treeModel_ = mkTreeModel();
         
 	g_object_set_data(G_OBJECT(treeModel_), "iconview", iconView_);
 	gtk_icon_view_set_model(iconView_, treeModel_);
@@ -103,44 +101,40 @@ public:
 
         if (!highlight_hash) highlight_hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
         g_signal_connect (this->iconView_, "item-activated", 
-                ICONVIEW_CALLBACK (BaseViewSignals<Type>::item_activated), (void *)this);
+            ICONVIEW_CALLBACK (BaseViewSignals<Type>::item_activated), (void *)this);
         g_signal_connect (this->iconView_, "motion-notify-event", 
                 ICONVIEW_CALLBACK (BaseViewSignals<Type>::motion_notify_event), (void *)this);
-     //g_signal_connect (this->iconView_, "query-tooltip", 
-       //     G_CALLBACK (query_tooltip_f), (void *)this);
+         //g_signal_connect (this->iconView_, "query-tooltip", 
+           //     G_CALLBACK (query_tooltip_f), (void *)this);
 
-     // Why not "clicked" signal? 
-     // Because this is to filter cancelled dnd event from
-     // actual activated events.
-     g_signal_connect (this->iconView_, "button-release-event",
-	    G_CALLBACK(BaseViewSignals<Type>::button_click_f), (void *)this);
-     g_signal_connect (this->iconView_, "button-release-event",
-	    G_CALLBACK(BaseViewSignals<Type>::button_release_f), (void *)this);
+         // Why not "clicked" signal? 
+         // Because this is to filter cancelled dnd event from
+         // actual activated events.
+         g_signal_connect (this->iconView_, "button-release-event",
+                G_CALLBACK(BaseViewSignals<Type>::button_click_f), (void *)this);
+         g_signal_connect (this->iconView_, "button-release-event",
+                G_CALLBACK(BaseViewSignals<Type>::button_release_f), (void *)this);
 
-     g_signal_connect (this->iconView_, "button-press-event",
-	    G_CALLBACK(BaseViewSignals<Type>::button_press_f), (void *)this);
+         g_signal_connect (this->iconView_, "button-press-event",
+                G_CALLBACK(BaseViewSignals<Type>::button_press_f), (void *)this);
 
-    g_signal_connect (G_OBJECT (this->iconView_), 
-	    "drag-data-received", G_CALLBACK (BaseViewSignals<Type>::signal_drag_data_receive), (void *)this);
-    g_signal_connect (G_OBJECT (this->iconView_), 
-	    "drag-data-get", G_CALLBACK (BaseViewSignals<Type>::signal_drag_data_send), (void *)this);
-    g_signal_connect (G_OBJECT (this->iconView_), 
-	    "drag-motion", G_CALLBACK (BaseViewSignals<Type>::signal_drag_motion), (void *)this);
-    g_signal_connect (G_OBJECT (this->iconView_), 
-	    "drag-leave", G_CALLBACK (BaseViewSignals<Type>::signal_drag_leave), (void *)this);
-    g_signal_connect (G_OBJECT (this->iconView_), 
-	    "drag-data-delete", G_CALLBACK (BaseViewSignals<Type>::signal_drag_delete), (void *)this);
+        g_signal_connect (G_OBJECT (this->iconView_), 
+                "drag-data-received", G_CALLBACK (BaseViewSignals<Type>::signal_drag_data_receive), (void *)this);
+        g_signal_connect (G_OBJECT (this->iconView_), 
+                "drag-data-get", G_CALLBACK (BaseViewSignals<Type>::signal_drag_data_send), (void *)this);
+        g_signal_connect (G_OBJECT (this->iconView_), 
+                "drag-motion", G_CALLBACK (BaseViewSignals<Type>::signal_drag_motion), (void *)this);
+        g_signal_connect (G_OBJECT (this->iconView_), 
+                "drag-leave", G_CALLBACK (BaseViewSignals<Type>::signal_drag_leave), (void *)this);
+        g_signal_connect (G_OBJECT (this->iconView_), 
+                "drag-data-delete", G_CALLBACK (BaseViewSignals<Type>::signal_drag_delete), (void *)this);
 
-    g_signal_connect (G_OBJECT (this->iconView_), 
-	    "drag-end", DRAG_CALLBACK (BaseViewSignals<Type>::signal_drag_end), (void *)this);
-    g_signal_connect (G_OBJECT (this->iconView_), 
-	    "drag-begin", DRAG_CALLBACK (BaseViewSignals<Type>::signal_drag_begin), (void *)this);
-        
-    }
-
-    BaseView(page_c *page, const gchar *path){
-	page_ = page;
-        init(path);
+        g_signal_connect (G_OBJECT (this->iconView_), 
+                "drag-end", DRAG_CALLBACK (BaseViewSignals<Type>::signal_drag_end), (void *)this);
+        g_signal_connect (G_OBJECT (this->iconView_), 
+                "drag-begin", DRAG_CALLBACK (BaseViewSignals<Type>::signal_drag_begin), (void *)this);
+        loadModel(path);
+            
     }
 
     ~BaseView(void){
@@ -149,18 +143,10 @@ public:
         g_object_unref(treeModel_);
     }
 
-    void setPath(const gchar *path){
-        g_free(path_);
-        path_=g_strdup(path);
-    }
+    const gchar *path(){return path_;}
 
-    void loadModel(const gchar *path){
-        if (!path){
-            ERROR("baseview.hh::loadModel(); path is null.\n");
-            return;
-        }
-
-        // FIXME: double reference to path_ below...
+    gboolean loadModel(const gchar *path){
+        if (!path) path = "xffm:root";
         setPath(path);
         // Enable dnd by default.
         // Local object will disable if not required.
@@ -168,23 +154,21 @@ public:
         createDestTargetList();
 
 	// Remove previous liststore rows, if any
-        auto lastPath =  g_object_get_data(G_OBJECT(iconView_), "path");
-
+    
+        gboolean result;
         if (g_file_test(path, G_FILE_TEST_EXISTS)){
-            if (LocalView<Type>::loadModel(iconView_, path)){
-                g_free(lastPath); 
-                g_object_set_data(G_OBJECT(iconView_), "path", g_strdup(path));
-		page_->setPageWorkdir(path);
+            result = LocalView<Type>::loadModel(iconView_, path);
+            if (!result){
+		ERROR("baseview.hh:loadModel: cannot load view for %s\n", path);
             }
-            return;
+            return result;
         } else if (!strcmp(path, "xffm:root")==0) {
            ERROR("baseview.hh::loadModel(): unknown path \"%s\"\n", path);
         }
-        g_free(lastPath); 
-        g_object_set_data(G_OBJECT(iconView_), "path", g_strdup("xffm:root"));
-        RootView<Type>::loadModel(iconView_);
+        setPath("xffm:root");
+        result = RootView<Type>::loadModel(iconView_);
 
-        return;
+        return result;
     }
 
     gint
@@ -257,7 +241,7 @@ public:
 
     gboolean
     setDndData(GtkSelectionData *selection_data, GList *selection_list){
-        WARN( "set_dnd_data() baseview default.\n");
+        WARN( "setDndData() baseview default.\n");
         const gchar *format = "file://";
         GList *uriList = NULL;
         for(GList *tmp = selection_list; tmp; tmp = tmp->next) {
@@ -267,6 +251,7 @@ public:
             gtk_tree_model_get_iter (this->treeModel_, &iter, tpath);
             gtk_tree_model_get (this->treeModel_, &iter, PATH, &path, -1);
             uriList = g_list_append(uriList, g_strconcat(format, path, NULL));
+            WARN("append to uriList: %s\n", path);
             g_free(path);
         }
 
@@ -288,7 +273,6 @@ public:
 
     gboolean
     receiveDndData(gchar *target, const GtkSelectionData *selection_data, GdkDragAction action){
-        WARN("receiveDndData: target=%s action=%d\n", target, action);
         if (!selection_data) {
             WARN("!selection_data\n");
             return FALSE;
@@ -298,12 +282,17 @@ public:
             WARN("!files\n");
             return FALSE;
         }
-        if (!target) target = g_strdup_printf("file://%s",path_);
         for (gchar **f = files; f && *f; f++){
-            WARN("DND: %s --> %s\n", *f, target);
+            WARN("DND: %s --> %s\n", *f, path_);
         }
 
         gchar *source = g_path_get_dirname(*files);
+        if (!target){
+            if (strncmp(source, "file://", strlen("file://"))==0){
+                target = g_strconcat("file://", path_, NULL);
+            } else target = g_strdup(path_);
+        }
+        WARN("source=%s target=%s action=%d\n", source, target, action);
         gboolean result = FALSE;
         if (strcmp(source, target) ) result = TRUE;
         else {
@@ -356,6 +345,22 @@ public:
 
 private:
 
+    void setPath(const gchar *path){
+        g_free(path_);
+        if (path) path_ = g_strdup(path);
+        else {
+            ERROR("baseView::setPath(NULL)\n");
+            exit(1);
+        }
+        auto lastPath =  g_object_get_data(G_OBJECT(iconView_), "path");
+        g_free(lastPath); 
+        g_object_set_data(G_OBJECT(iconView_), "path", g_strdup(path_));
+        if (g_file_test(path_, G_FILE_TEST_IS_DIR)){
+            page_->setPageWorkdir(path_);
+        } else {
+            page_->setPageWorkdir(g_get_home_dir());
+        }
+    }
     gint get_dir_count(void){ return dirCount_;}
 
 

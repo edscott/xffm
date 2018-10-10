@@ -94,12 +94,11 @@ public:
     static gboolean
     loadModel (GtkIconView *iconView, const gchar *path)
     {
-        if (!path || !g_file_test(path, G_FILE_TEST_EXISTS)) {
-            ERROR( "%s does not exist\n", path);
+        if (!g_file_test(path, G_FILE_TEST_EXISTS)){
+            ERROR("loadModel. %s does not exist\n", path);
             return FALSE;
         }
-        if (chdir(path)<0){
-            DBG( "chdir(%s): %s\n", path, strerror(errno));
+        if (!g_file_test(path, G_FILE_TEST_IS_DIR)){
             WARN("localView.hh::loadModel(): here we should open the file with app or dialog\n");
             return FALSE;
         }
