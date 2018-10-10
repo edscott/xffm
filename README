@@ -10,6 +10,10 @@ TODO:
      - properties
   * enable previews
   * enable DnD
+     - iconview need not use internal DnD. Use special DnD to enable multiple selections
+       Ctl selection was necessary in treeview and to avoid selection of somthing off screen
+       keep it that way.
+  * enable treeview now!
   * enable listview
   * enable showhidden
   * enable show backups

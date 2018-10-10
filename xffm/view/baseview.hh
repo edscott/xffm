@@ -150,8 +150,8 @@ public:
         setPath(path);
         // Enable dnd by default.
         // Local object will disable if not required.
-        createSourceTargetList();
-        createDestTargetList();
+        //createSourceTargetList();
+        //createDestTargetList();
 
 	// Remove previous liststore rows, if any
     
