@@ -35,8 +35,6 @@ template <class Type>
 class BaseView{
     using util_c = Util<Type>;
     using page_c = Page<Type>;
-    gint dragMode_;
-    gint clickCancel_;
     GList *selectionList_;
     
     gint display_pixbuf_column_;
@@ -83,8 +81,6 @@ public:
     BaseView(page_c *page, const gchar *path){
 	page_ = page; 
         path_ = NULL;
-        dragMode_ = 0;
-        clickCancel_ = 0;
         selectionList_ = NULL;
         
         iconView_=createIconview();
@@ -210,16 +206,7 @@ public:
         else clear_highlights();
     }
 
-    gboolean 
-    clickCancel(void){
-        if (clickCancel_ <= 0) return FALSE;
-        return TRUE;
-    }
     
-    void setDragMode(gboolean state){ dragMode_ = state;};
-    gint dragMode(void){return dragMode_;}
-
-
     void
     setSelectionList(GList *list){
         if (selectionList_) freeSelectionList();
@@ -228,16 +215,6 @@ public:
 
     GList *
     selectionList(void){return selectionList_;}
-
-
-    void setClickCancel(gint state){ 
-        clickCancel_ = state;
-        /*if (state <= 0) {
-            click_cancel = state;
-            return;
-        }
-        if (click_cancel == 0) click_cancel = state;*/
-    }
 
     gboolean
     setDndData(GtkSelectionData *selection_data, GList *selection_list){

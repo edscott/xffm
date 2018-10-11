@@ -1,8 +1,6 @@
 #ifndef XFPIXBUF_HH
 #define XFPIXBUF_HH
-#ifdef HAVE_CONFIG_H
 # include <config.h>
-#endif
 #include <stdlib.h>
 
 

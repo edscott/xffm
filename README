@@ -24,6 +24,7 @@ TODO:
      - up/down
 
 Bugs:
+  * bug: no completion on 'executable ""' when exeecutable is specified, should display file options (all).
   * bug: on starting xffm/xfterm with no path, toolbar does not show full path.
   * bug: do a "git branch whatever" in script mode. Script will expect input
          and cannot be terminated by menu signals...

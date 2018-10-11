@@ -26,8 +26,10 @@ static GtkTargetEntry targetTable[] = {
 
 #define NUM_TARGETS (sizeof(targetTable)/sizeof(GtkTargetEntry))
 static gboolean dragOn_=FALSE;
-static     gint buttonPressX=-1;
-static     gint buttonPressY=-1;
+static gboolean rubberBand_=FALSE;
+static gint buttonPressX=-1;
+static gint buttonPressY=-1;
+static gint dragMode_=0;
 
 namespace xf
 {
@@ -91,34 +93,58 @@ public:
 
     }
     static gboolean
+    button_click_f (GtkWidget *widget,
+                   GdkEventButton  *event,
+                   gpointer   data)
+    {
+	//auto baseView = (BaseView<Type> *)data;
+	WARN("no action on button_click_f\n");
+        return FALSE;
+    }
+
+    static gboolean
     button_release_f (GtkWidget *widget,
                    GdkEventButton  *event,
                    gpointer   data)
     {
         //GdkEventButton *event_button = (GdkEventButton *)event;
 	auto baseView = (BaseView<Type> *)data;
-        buttonPressX = buttonPressY = -1;
-        dragOn_ = FALSE;
-        baseView->setDragMode(0);
-        if (!gtk_icon_view_get_item_at_pos (baseView->iconView(),
+        if (!dragOn_){
+	    GtkTreePath *tpath;
+	    if (!gtk_icon_view_get_item_at_pos (baseView->iconView(),
                                    event->x, event->y,
-                                   NULL,NULL)){
-            // What here?
+                                   &tpath,NULL)){
+		WARN("button down cancelled.\n");
+		if (rubberBand_) return FALSE;
+		return TRUE;
+	    }
+	    if (rubberBand_) {
+		gtk_tree_path_free(tpath);
+		return FALSE;
+	    }
+	    WARN("Here we do a call to activate item.\n");
+	    //Cancel DnD prequel.
+	    buttonPressX = buttonPressY = -1;
+	    dragOn_ = FALSE;
+	    if (dragMode_ ) { // copy/move/link mode
+		return TRUE;
+	    }
+	    // default mode:
+
+	    // unselect everything
+	    gtk_icon_view_unselect_all (baseView->iconView());
+	    // reselect item to activate
+	    gtk_icon_view_select_path (baseView->iconView(),tpath);
+	    gtk_tree_path_free(tpath);
+	    return TRUE;
         }
+
+	buttonPressX = buttonPressY = -1;
+        dragOn_ = FALSE;
+	
+        dragMode_ = 0;
         return FALSE;
     }
-
-    static gboolean
-    button_click_f (GtkWidget *widget,
-                   GdkEventButton  *event,
-                   gpointer   data)
-    {
-	auto baseView = (BaseView<Type> *)data;
-        if (baseView->clickCancel()) return TRUE;
-        return FALSE;
-    }
-
-
 
     static gboolean
     button_press_f (GtkWidget *widget,
@@ -129,58 +155,116 @@ public:
         buttonPressX = buttonPressY = -1;
         dragOn_ = FALSE;
 
+        GtkTreePath *tpath;
         if (event->button == 1) {
-            baseView->setDragMode(TRUE);
-
             gboolean retval = FALSE;
             //GList *selection_list = gtk_icon_view_get_selected_items (baseView->iconView());
             gint mode = 0;
-            GtkTreePath *tpath;
             if (gtk_icon_view_get_item_at_pos (baseView->iconView(),
                                    event->x, event->y,
                                    &tpath,NULL)) {
                 
-                if (CONTROL_MODE && SHIFT_MODE) mode = -3; // link
-                else if (CONTROL_MODE) mode = -2; // copy
-                else if (SHIFT_MODE) mode = -1; // move
-                else mode = -1; // default (move)
-                baseView->setClickCancel(0);
+		DBG("button press %d mode %d\n", event->button, mode);
+		buttonPressX = event->x;
+		buttonPressY = event->y;
+		rubberBand_ = FALSE;
+                if (CONTROL_MODE && SHIFT_MODE) {
+		    dragMode_ = -3; // link mode
+		} else if (CONTROL_MODE) {
+		    dragMode_ = -2; // copy
+		    // select item and add to selection list
+		    if (gtk_icon_view_path_is_selected (baseView->iconView(), tpath)) {
+			// if selected
+			gtk_icon_view_unselect_path (baseView->iconView(), tpath);
+		    } else { // not selected
+			gtk_icon_view_select_path (baseView->iconView(), tpath);
+		    }
+		} else if (SHIFT_MODE) {
+		    // select all items in interval
+		    dragMode_ = -1; // move
+		    gtk_icon_view_select_path (baseView->iconView(), tpath);
+		    auto items = gtk_icon_view_get_selected_items (baseView->iconView());
+
+		    gchar *item = gtk_tree_path_to_string (tpath);
+		    gchar *startItem;
+		    if (strrchr(item, ':')) startItem = g_strdup(strrchr(startItem, ':')+1);
+		    else startItem = g_strdup(item);
+		    g_free(item);
+
+		    WARN("Starting from %s\n", startItem);
+
+		    void *startPath;
+
+		    for (GList *l=items; l && l->data; l=l->next){
+			gchar *item = gtk_tree_path_to_string ((GtkTreePath *)l->data);
+			if (strcmp(item, startItem)==0){
+			    startPath = l->data;
+			    g_free(item);
+			    break;
+			}
+			g_free(item);
+		    }
+
+		    GList *s = g_list_find(items, startPath);
+		    gint start, end;
+
+		    if (s->prev == NULL) {
+			gchar *lastitem = gtk_tree_path_to_string ((GtkTreePath *)g_list_last(items)->data);
+			end = atoi(startItem);
+			start = atoi(lastitem);
+			WARN("lastitem %s\n", lastitem);
+			g_free(lastitem);
+
+		    } else {
+			gchar *firstitem = gtk_tree_path_to_string ((GtkTreePath *)g_list_first(items)->data);
+			end = atoi(firstitem);
+			start = atoi(startItem);
+			WARN("firstitem %s\n", firstitem);
+			g_free(firstitem);
+		    }
+		    g_free(startItem);
+		    // To free the return value, use:
+		    g_list_free_full (items, (GDestroyNotify) gtk_tree_path_free);
+		    WARN("loop %d -> %d\n", start, end);
+		    for (int i=start; i<=end; i++){
+			    gchar *item = g_strdup_printf("%0d", i);
+			    WARN("selecting %s(%d)\n", item, i);
+			    GtkTreePath *tp = gtk_tree_path_new_from_string(item);
+			    g_free(item);
+			    gtk_icon_view_select_path (baseView->iconView(), tp);
+			    gtk_tree_path_free(tp);
+		    }
+
+		} else {
+		    // unselect all
+		    //gtk_icon_view_unselect_all (baseView->iconView());
+		    // select single item
+		    gtk_icon_view_select_path (baseView->iconView(), tpath);
+		    dragMode_ = 0; // default (move)
+		}
+                retval = TRUE; 
+		gtk_tree_path_free(tpath);
+		tpath = NULL; // just in case.
             } else { 
                 tpath=NULL;
-                baseView->setClickCancel(-1);
+		dragMode_ = 0;
+		rubberBand_ = TRUE;
             }
-            DBG("button press %d mode %d\n", event->button, mode);
-            baseView->setDragMode(mode);
-            if (CONTROL_MODE){
-                // select item
-                gtk_icon_view_select_path (baseView->iconView(), tpath);
-                retval = TRUE; 
-                buttonPressX = event->x;
-                buttonPressY = event->y;
-                GtkTargetList *targets= gtk_target_list_new (targetTable,TARGETS);
-                GdkDragContext *context =
-                    gtk_drag_begin_with_coordinates (GTK_WIDGET(baseView->iconView()),
-                                 targets,
-                                 GDK_ACTION_MOVE, //GdkDragAction actions,
-                                 1, //gint button,
-                                 (GdkEvent *)event, //GdkEvent *event,
-                                 event->x, event->y);
-            }
-            if (tpath) gtk_tree_path_free(tpath);
+
             return retval;
         }
 
         // long press or button 3 should do popup menu...
         if (event->button != 3) return FALSE;
-        GtkTreePath *tpath;
 
         WARN("button press event: button 3 should do popup, as well as longpress...\n");
-        if (!gtk_icon_view_get_item_at_pos (GTK_ICON_VIEW(widget),
+        if (gtk_icon_view_get_item_at_pos (GTK_ICON_VIEW(widget),
                                    event->x,
                                    event->y,
                                    &tpath, NULL)) {
 
-            tpath = NULL;
+		gtk_tree_path_free(tpath);
+
         }
 
         
@@ -205,8 +289,8 @@ public:
                    GdkEvent  *ev,
                    gpointer   data)
     {
-        GdkEventMotion *e = (GdkEventMotion *)ev;
-        GdkEventButton  *event = (GdkEventButton  *)ev;
+        auto e = (GdkEventMotion *)ev;
+        auto event = (GdkEventButton  *)ev;
 	auto baseView = (BaseView<Type> *)data;
         if (!data) {
             DBG("BaseView::motion_notify_event: data cannot be NULL\n");
@@ -214,11 +298,23 @@ public:
         }
 	TRACE("motion_notify_event, dragmode= %d\n", baseView->dragMode());
 
-        if (buttonPressX >= 0 && buttonPressY >= 0 && !dragOn_){
-            // start DnD (multiple selection)
-            dragOn_ = TRUE;
+        if (buttonPressX >= 0 && buttonPressY >= 0){
+	    WARN("buttonPressX >= 0 && buttonPressY >= 0\n");
+	    if (sqrt(pow(e->x - buttonPressX,2) + pow(e->y - buttonPressY, 2)) > 10){
+	        // start DnD (multiple selection)
+		WARN("dragOn_ = TRUE\n");
+		dragOn_ = TRUE;
+		auto targets= gtk_target_list_new (targetTable,TARGETS);
+		auto context =
+		    gtk_drag_begin_with_coordinates (GTK_WIDGET(baseView->iconView()),
+			     targets,
+			     GDK_ACTION_MOVE, //GdkDragAction actions,
+			     1, //gint button,
+			     (GdkEvent *)event, //GdkEvent *event,
+			     event->x, event->y);
+		buttonPressX = buttonPressY = -1;
+	    }
         }
-        buttonPressX = buttonPressY = -1;
 
 	// XXX: Why this limitation?
         // if (view_p->get_dir_count() > 500) return FALSE;
@@ -346,7 +442,7 @@ public:
         
 	auto baseView = (BaseView<Type> *)data;
 
-        baseView->setDragMode(0);
+        dragMode_ = 0;
         //gtk_drag_source_unset(GTK_WIDGET(baseView->iconView()));
         baseView->freeSelectionList();
         
