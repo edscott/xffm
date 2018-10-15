@@ -27,22 +27,9 @@ struct _Data
 template <class Type>
 class Cairo{
 public:
-    /* Key for automated pixbuf updating and destruction */
-    //static const cairo_user_data_key_t pixbuf_key;
 
-    /**
-    * pixbuf_cairo_create:
-    * @pixbuf: GdkPixbuf that you wish to wrap with cairo context
-    *
-    * This function will initialize new cairo context with contents of @pixbuf. You
-    * can then draw using returned context. When finished drawing, you must call
-    * pixbuf_cairo_destroy() or your pixbuf will not be updated with new contents!
-    *
-    * Return value: New cairo_t context. When you're done with it, call
-    * pixbuf_cairo_destroy() to update your pixbuf and free memory.
-    */
-    static cairo_t *
-    pixbuf_cairo_create( GdkPixbuf *pixbuf)
+    static cairo_surface_t *
+    pixbuf_cairo_surface( GdkPixbuf *pixbuf)
     {
 	if (!pixbuf || !GDK_IS_PIXBUF(pixbuf)) return NULL;
        gint         width,        /* Width of both pixbuf and surface */
@@ -53,7 +40,6 @@ public:
        guchar          *p_pixels,     /* Pixbuf's pixel data */
 		   *s_pixels;     /* Surface's pixel data */
        cairo_surface_t *surface;      /* Temporary image surface */
-       cairo_t         *cr;           /* Final context */
 
        //g_object_ref( G_OBJECT( pixbuf ) );
 
@@ -141,7 +127,28 @@ public:
 	  s_pixels += s_stride;
 	  p_pixels += p_stride;
        }
+       return surface;
+    }
 
+    /* Key for automated pixbuf updating and destruction */
+    //static const cairo_user_data_key_t pixbuf_key;
+
+    /**
+    * pixbuf_cairo_create:
+    * @pixbuf: GdkPixbuf that you wish to wrap with cairo context
+    *
+    * This function will initialize new cairo context with contents of @pixbuf. You
+    * can then draw using returned context. When finished drawing, you must call
+    * pixbuf_cairo_destroy() or your pixbuf will not be updated with new contents!
+    *
+    * Return value: New cairo_t context. When you're done with it, call
+    * pixbuf_cairo_destroy() to update your pixbuf and free memory.
+    */
+    static cairo_t *
+    pixbuf_cairo_create( GdkPixbuf *pixbuf)
+    {
+       cairo_t         *cr;           /* Final context */
+       cairo_surface_t *surface = pixbuf_cairo_surface(pixbuf);
        /* Create context and set user data */
        cr = cairo_create( surface );
        cairo_surface_destroy( surface );

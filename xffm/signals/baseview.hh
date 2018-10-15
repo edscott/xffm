@@ -1,5 +1,6 @@
 #ifndef XF_BASEVIEWSIGNALS__HH
 # define XF_BASEVIEW__HH
+#include "common/pixbuf.hh"
 
 #define SET_DIR(x) x|=0x01
 #define IS_DIR (x&0x01)
@@ -38,6 +39,8 @@ template <class Type> class BaseView;
 template <class Type> 
 class BaseViewSignals {
     using fmDialog_c = fmDialog<double>;
+    using pixbuf_c = Pixbuf<double>;
+    using cairo_c = Cairo<double>;
 public:
     static void
     //item_activated (GtkIconView *iconview,
@@ -458,23 +461,41 @@ public:
     signal_drag_begin (GtkWidget * widget, GdkDragContext * context, gpointer data) {
         WARN("signal_drag_begin\n");
 	auto baseView = (BaseView<Type> *)data;
-
+        cairo_surface_t *icon;
     //  single or multiple item selected?
         GList *selection_list = gtk_icon_view_get_selected_items (baseView->iconView());
         baseView->setSelectionList(selection_list);
         if (g_list_length(selection_list)==1){
             DBG("Single selection\n");
+            icon = gtk_icon_view_create_drag_icon(baseView->iconView(), (GtkTreePath *)selection_list->data);
         } else if (g_list_length(selection_list)>1){
             DBG("Multiple selection\n");
+            GdkPixbuf *pixbuf = pixbuf_c::get_pixbuf("edit-copy", GTK_ICON_SIZE_DIALOG);
+
+            gint width = gdk_pixbuf_get_width (pixbuf);
+            gint height = gdk_pixbuf_get_height (pixbuf);
+            ERROR("width=%d height=%d\n",width, height);
+            GdkWindow *window = gtk_widget_get_parent_window (GTK_WIDGET(baseView->iconView()));
+            if (!window) ERROR("gdk winodw is null\n");
+            icon = gdk_window_create_similar_surface(window, CAIRO_CONTENT_COLOR_ALPHA, width, height);
+
+            cairo_surface_set_device_offset(icon, 3,3);
+         //   icon = cairo_c::pixbuf_cairo_surface(pixbuf);
+            cairo_t *cr = cairo_create (icon);
+                    
+            cairo_set_source_rgb (cr, 1, 1, 1);
+            cairo_rectangle (cr, 0, 0, width, height);
+            cairo_fill (cr);
+
+            gdk_cairo_set_source_pixbuf (cr, pixbuf, 0, 0);
+            cairo_paint (cr);
+            cairo_destroy(cr);
+
+
         } else return;
-    
-    //  set drag icon
-    /*
-        drag_view_p = view_p;
-        rodent_hide_tip ();
-        if (!view_p->en || !view_p->en->path) return; 
-        write_drag_info(view_p->en->path, view_p->en->type);
-        view_p->mouse_event.drag_event.context = drag_context;*/
+   
+        gtk_drag_set_icon_surface(context, icon);
+        cairo_surface_destroy(icon);
     }
 
     static void
