@@ -91,6 +91,10 @@ public:
         iconView_=createIconview();
 	
 	treeModel_ = mkTreeModel();
+        // Enable dnd by default.
+        // Local object will disable if not required.
+        createSourceTargetList();
+        createDestTargetList();
         
 	g_object_set_data(G_OBJECT(treeModel_), "iconview", iconView_);
 	gtk_icon_view_set_model(iconView_, treeModel_);
@@ -149,10 +153,6 @@ public:
     gboolean loadModel(const gchar *path){
         if (!path) path = "xffm:root";
         setPath(path);
-        // Enable dnd by default.
-        // Local object will disable if not required.
-        //createSourceTargetList();
-        //createDestTargetList();
 
 	// Remove previous liststore rows, if any
     
@@ -224,32 +224,26 @@ public:
     gboolean
     setDndData(GtkSelectionData *selection_data, GList *selection_list){
         WARN( "setDndData() baseview default.\n");
-        const gchar *format = "file://";
-        GList *uriList = NULL;
+        const gchar *format = "file:";
+        gchar *dndData = g_strdup("");
         for(GList *tmp = selection_list; tmp; tmp = tmp->next) {
             GtkTreePath *tpath = (GtkTreePath *)tmp->data;
             gchar *path;
             GtkTreeIter iter;
             gtk_tree_model_get_iter (this->treeModel_, &iter, tpath);
             gtk_tree_model_get (this->treeModel_, &iter, PATH, &path, -1);
-            uriList = g_list_append(uriList, g_strconcat(format, path, NULL));
-            WARN("append to uriList: %s\n", path);
+            gchar *g = g_strconcat(dndData,format, path, "\n", NULL);
+            g_free(dndData);
+            dndData = g;
+            WARN("append: %s -> %s\n", path, dndData);
             g_free(path);
         }
 
-        gchar **uris = (gchar **)calloc(g_list_length(selection_list)+1, sizeof(gchar *));
-        gchar **f=uris;
-        for(GList *tmp = uriList;  tmp && tmp->data;  tmp = tmp->next, f++) {
-            *f = (gchar *)tmp->data;
-        }
-        g_list_free(uriList);
+        gtk_selection_data_set (selection_data, 
+	    gtk_selection_data_get_selection(selection_data),
+	    8, (const guchar *)dndData, strlen(dndData)+1);
 
-        auto result = gtk_selection_data_set_uris (selection_data, uris);
-        if (!result){
-            ERROR("!gtk_selection_data_set_uris");
-        }
-        g_strfreev(uris);
-        return result;
+       return TRUE;
         
     }
 
@@ -259,26 +253,44 @@ public:
             WARN("!selection_data\n");
             return FALSE;
         }
-        gchar **files = gtk_selection_data_get_uris (selection_data);
+        auto dndData = (const char *)gtk_selection_data_get_data (selection_data);
+
+        gchar **files = g_strsplit(dndData, "\n", -1);
+        
         if (!files) {
             WARN("!files\n");
             return FALSE;
         }
-        for (gchar **f = files; f && *f; f++){
-            WARN("DND: %s --> %s\n", *f, path_);
-        }
 
         gchar *source = g_path_get_dirname(*files);
         if (!target){
-            if (strncmp(source, "file://", strlen("file://"))==0){
-                target = g_strconcat("file://", path_, NULL);
+            if (strncmp(source, "file:", strlen("file:"))==0){
+                target = g_strconcat("file:", path_, NULL);
             } else target = g_strdup(path_);
         }
-        WARN("source=%s target=%s action=%d\n", source, target, action);
+        //WARN("source=%s target=%s action=%d\n", source, target, action);
         gboolean result = FALSE;
         if (strcmp(source, target) ) result = TRUE;
         else {
             WARN("receiveDndData: source and target are the same\n");
+        }
+
+        for (gchar **f = files; f && *f; f++){
+            if (strlen(*f)==0) continue;
+            gchar *src = *f;
+            if (strncmp(src, "file:", strlen("file:"))==0) src += strlen("file:");
+            switch (action){
+                case GDK_ACTION_MOVE:
+                    WARN("DND move: %s --> %s\n", src, path_);
+                    break;
+                case GDK_ACTION_COPY:
+                    WARN("DND copy: %s --> %s\n", src, path_);
+                    break;
+                case GDK_ACTION_LINK:
+                    WARN("DND link: %s --> %s\n", src, path_);
+                    break;
+            }
+
         }
         g_strfreev(files);
         g_free(target);

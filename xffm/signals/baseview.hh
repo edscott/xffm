@@ -136,7 +136,7 @@ public:
 	    // unselect everything
 	    gtk_icon_view_unselect_all (baseView->iconView());
 	    // reselect item to activate
-	    //gtk_icon_view_select_path (baseView->iconView(),tpath);
+	    gtk_icon_view_select_path (baseView->iconView(),tpath);
 	    WARN("Here we do a call to activate item.\n");
 	    item_activated(tpath, data);
 	    gtk_tree_path_free(tpath);
@@ -241,7 +241,7 @@ public:
 
 		} else {
 		    // unselect all
-		    //gtk_icon_view_unselect_all (baseView->iconView());
+		    gtk_icon_view_unselect_all (baseView->iconView());
 		    // select single item
 		    gtk_icon_view_select_path (baseView->iconView(), tpath);
 		    dragMode_ = 0; // default (move)
@@ -303,7 +303,7 @@ public:
 	TRACE("motion_notify_event, dragmode= %d\n", baseView->dragMode());
 
         if (buttonPressX >= 0 && buttonPressY >= 0){
-	    WARN("buttonPressX >= 0 && buttonPressY >= 0\n");
+	    TRACE("buttonPressX >= 0 && buttonPressY >= 0\n");
 	    if (sqrt(pow(e->x - buttonPressX,2) + pow(e->y - buttonPressY, 2)) > 10){
 	        // start DnD (multiple selection)
 		WARN("dragOn_ = TRUE\n");
@@ -312,7 +312,9 @@ public:
 		auto context =
 		    gtk_drag_begin_with_coordinates (GTK_WIDGET(baseView->iconView()),
 			     targets,
-			     GDK_ACTION_MOVE, //GdkDragAction actions,
+			     (GdkDragAction)(((gint)GDK_ACTION_MOVE)|
+                   ((gint)GDK_ACTION_COPY)|
+                   ((gint)GDK_ACTION_LINK)), //GdkDragAction actions,
 			     1, //gint button,
 			     (GdkEvent *)event, //GdkEvent *event,
 			     event->x, event->y);
@@ -356,8 +358,8 @@ public:
       //            goto drag_over;         /* of course */
         }
 
-        WARN("rodent_mouse: DND receive, action=%d\n", action);
-        WARN("actions mv/cp/ln: %d/%d/%d\n", GDK_ACTION_MOVE, GDK_ACTION_COPY, GDK_ACTION_LINK);
+        //WARN("rodent_mouse: DND receive, action=%d\n", action);
+        //WARN("actions mv/cp/ln: %d/%d/%d\n", GDK_ACTION_MOVE, GDK_ACTION_COPY, GDK_ACTION_LINK);
         if(action != GDK_ACTION_MOVE && 
            action != GDK_ACTION_COPY &&
            action != GDK_ACTION_LINK) {
@@ -412,7 +414,7 @@ public:
             GdkDragContext * dc, gint drag_x, gint drag_y, 
             guint t, gpointer data) {
 	auto baseView = (BaseView<Type> *)data;
-        DBG("signal_drag_motion\n");
+        TRACE("signal_drag_motion\n");
                                         
         GtkTreePath *tpath;
                                         
@@ -512,7 +514,7 @@ public:
 
     static void
     signal_drag_leave (GtkWidget * widget, GdkDragContext * drag_context, guint time, gpointer data) {
-        ERROR("signal_drag_leave\n");
+        DBG("signal_drag_leave\n");
 
     }
 

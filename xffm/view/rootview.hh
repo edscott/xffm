@@ -49,8 +49,8 @@ public:
 	    while (gtk_list_store_remove (GTK_LIST_STORE(treeModel),&iter));
 	}
         // Disable DnD
-        gtk_icon_view_unset_model_drag_source (iconView);
-        gtk_icon_view_unset_model_drag_dest (iconView);
+        //gtk_icon_view_unset_model_drag_source (iconView);
+        //gtk_icon_view_unset_model_drag_dest (iconView);
         gtk_icon_view_set_selection_mode (iconView,GTK_SELECTION_SINGLE);      
 
 	// Root
