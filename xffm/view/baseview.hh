@@ -148,6 +148,17 @@ public:
         g_object_unref(treeModel_);
     }
 
+    void selectables(void){
+        auto iconViewType = (const gchar *)g_object_get_data(G_OBJECT(this->iconView()), "iconViewType");
+        
+        if (strcmp("LocalView", iconViewType) == 0){
+            LocalView<Type>::selectables(this->iconView());        
+        } else {
+            WARN("All icons are selectable for iconViewType: %s\n", iconViewType);
+        }
+        return;
+    }
+
     const gchar *path(){return path_;}
 
     gboolean loadModel(const gchar *path){
@@ -259,6 +270,11 @@ public:
         
         if (!files) {
             WARN("!files\n");
+            return FALSE;
+        }
+        if (*files==NULL) {
+            WARN("files==NULL\n");
+            g_strfreev(files);
             return FALSE;
         }
 

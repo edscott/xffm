@@ -48,6 +48,28 @@ class LocalView {
     using util_c = Util<Type>;
 
 public:
+    
+    static void selectables(GtkIconView *iconview){
+        GtkTreePath *tpath = gtk_tree_path_new_first ();
+	GtkTreeModel *treeModel = gtk_icon_view_get_model (iconview);
+	GtkTreeIter iter;
+	if (!gtk_tree_model_get_iter (treeModel, &iter, tpath)) {
+            gtk_tree_path_free(tpath);
+            return ;
+        }
+        gchar *name;
+	gtk_tree_model_get (treeModel, &iter, ACTUAL_NAME, &name, -1);
+        gboolean retval = TRUE;
+        if (strcmp(name, "..")==0 )retval = FALSE;
+        g_free(name);
+        if (!retval) {
+            gtk_icon_view_unselect_path (iconview,tpath);
+        }
+        gtk_tree_path_free(tpath);
+            
+        return ;
+    }
+
 
     static const gchar *
     get_xfdir_iconname(void){
@@ -102,6 +124,8 @@ public:
             WARN("localView.hh::loadModel(): here we should open the file with app or dialog\n");
             return FALSE;
         }
+        g_object_set_data(G_OBJECT(iconView), "iconViewType", (void *)"LocalView");
+                
         gtk_icon_view_set_selection_mode (iconView,GTK_SELECTION_MULTIPLE);      
         
         auto treeModel = gtk_icon_view_get_model (iconView);

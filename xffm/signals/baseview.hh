@@ -117,17 +117,18 @@ public:
 	auto baseView = (BaseView<Type> *)data;
         if (!dragOn_){
 	    GtkTreePath *tpath;
+
+	    if (rubberBand_) {
+                baseView->selectables();
+		return FALSE;
+	    }
 	    if (!gtk_icon_view_get_item_at_pos (baseView->iconView(),
                                    event->x, event->y,
                                    &tpath,NULL)){
 		WARN("button down cancelled.\n");
-		if (rubberBand_) return FALSE;
 		return TRUE;
 	    }
-	    if (rubberBand_) {
-		gtk_tree_path_free(tpath);
-		return FALSE;
-	    }
+
 	    //Cancel DnD prequel.
 	    buttonPressX = buttonPressY = -1;
 	    dragOn_ = FALSE;
@@ -183,7 +184,9 @@ public:
 			// if selected
 			gtk_icon_view_unselect_path (baseView->iconView(), tpath);
 		    } else { // not selected
-			if (baseView->isSelectable(tpath)) gtk_icon_view_select_path (baseView->iconView(), tpath);
+			//if (baseView->isSelectable(tpath)) 
+                        gtk_icon_view_select_path (baseView->iconView(), tpath);
+                        baseView->selectables();
 		    }
 		} else if (SHIFT_MODE) {
 		    // select all items in interval
@@ -233,15 +236,19 @@ public:
 		    g_list_free_full (items, (GDestroyNotify) gtk_tree_path_free);
 		    WARN("loop %d -> %d\n", start, end);
 		    gtk_icon_view_unselect_all (baseView->iconView());
+                    GtkTreePath *tp;
 		    for (int i=start; i<=end; i++){
 			    gchar *item = g_strdup_printf("%0d", i);
 			    WARN("selecting %s(%d)\n", item, i);
-			    GtkTreePath *tp = gtk_tree_path_new_from_string(item);
+			    tp = gtk_tree_path_new_from_string(item);
 			    g_free(item);
-			    if (baseView->isSelectable(tpath)) gtk_icon_view_select_path (baseView->iconView(), tp);
+			    //if (baseView->isSelectable(tpath)) 
+                                
+                            gtk_icon_view_select_path (baseView->iconView(), tp);
 			    gtk_tree_path_free(tp);
 		    }
-
+                    baseView->selectables();
+                    
 		} else {
 		    // unselect all
 		    gtk_icon_view_unselect_all (baseView->iconView());
@@ -308,6 +315,12 @@ public:
         if (buttonPressX >= 0 && buttonPressY >= 0){
 	    TRACE("buttonPressX >= 0 && buttonPressY >= 0\n");
 	    if (sqrt(pow(e->x - buttonPressX,2) + pow(e->y - buttonPressY, 2)) > 10){
+                baseView->selectables();
+                GList *selection_list = gtk_icon_view_get_selected_items (baseView->iconView());
+                if (selection_list==NULL) {
+                    return FALSE;
+                }
+                baseView->setSelectionList(NULL);
 	        // start DnD (multiple selection)
 		WARN("dragOn_ = TRUE\n");
 		dragOn_ = TRUE;

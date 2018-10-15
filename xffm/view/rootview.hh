@@ -41,6 +41,7 @@ public:
     loadModel (GtkIconView *iconView)
     {
 		
+        g_object_set_data(G_OBJECT(iconView), "iconViewType", (void *)"RootView");
         auto treeModel = gtk_icon_view_get_model (iconView);
 	DBG("mk_tree_model:: model = %p\n", treeModel);
         while (gtk_events_pending()) gtk_main_iteration();
