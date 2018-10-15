@@ -40,23 +40,24 @@ class BaseViewSignals {
     using fmDialog_c = fmDialog<double>;
 public:
     static void
-    item_activated (GtkIconView *iconview,
-                    GtkTreePath *tpath,
+    //item_activated (GtkIconView *iconview,
+    item_activated (
+                    const GtkTreePath *tpath,
                     gpointer     data)
     {
         // Get activated path.
+        auto baseView = (BaseView<Type> *)data;
 
 	gchar *path;
         GtkTreeIter iter;
-        auto treeModel = gtk_icon_view_get_model(iconview);
-        gtk_tree_model_get_iter (treeModel, &iter, tpath);
+        auto treeModel = gtk_icon_view_get_model(baseView->iconView());
+        gtk_tree_model_get_iter (treeModel, &iter, (GtkTreePath *)tpath);
         //this is wrong here: gtk_tree_path_free (tpath);
         GdkPixbuf *normal_pixbuf;
 
         gtk_tree_model_get (treeModel, &iter, PATH, &path, -1);
 	
         DBG("BaseView::item activated: %s\n", path);
-        auto baseView = (BaseView<Type> *)data;
         auto lastPath = g_strdup(baseView->path());
 	if (!baseView->loadModel(path)){
             WARN("reloading %s\n", lastPath);
@@ -92,6 +93,8 @@ public:
        return TRUE;
 
     }
+
+
     static gboolean
     button_click_f (GtkWidget *widget,
                    GdkEventButton  *event,
@@ -122,7 +125,6 @@ public:
 		gtk_tree_path_free(tpath);
 		return FALSE;
 	    }
-	    WARN("Here we do a call to activate item.\n");
 	    //Cancel DnD prequel.
 	    buttonPressX = buttonPressY = -1;
 	    dragOn_ = FALSE;
@@ -134,7 +136,9 @@ public:
 	    // unselect everything
 	    gtk_icon_view_unselect_all (baseView->iconView());
 	    // reselect item to activate
-	    gtk_icon_view_select_path (baseView->iconView(),tpath);
+	    //gtk_icon_view_select_path (baseView->iconView(),tpath);
+	    WARN("Here we do a call to activate item.\n");
+	    item_activated(tpath, data);
 	    gtk_tree_path_free(tpath);
 	    return TRUE;
         }
@@ -158,7 +162,6 @@ public:
         GtkTreePath *tpath;
         if (event->button == 1) {
             gboolean retval = FALSE;
-            //GList *selection_list = gtk_icon_view_get_selected_items (baseView->iconView());
             gint mode = 0;
             if (gtk_icon_view_get_item_at_pos (baseView->iconView(),
                                    event->x, event->y,
@@ -177,7 +180,7 @@ public:
 			// if selected
 			gtk_icon_view_unselect_path (baseView->iconView(), tpath);
 		    } else { // not selected
-			gtk_icon_view_select_path (baseView->iconView(), tpath);
+			if (baseView->isSelectable(tpath)) gtk_icon_view_select_path (baseView->iconView(), tpath);
 		    }
 		} else if (SHIFT_MODE) {
 		    // select all items in interval
@@ -226,12 +229,13 @@ public:
 		    // To free the return value, use:
 		    g_list_free_full (items, (GDestroyNotify) gtk_tree_path_free);
 		    WARN("loop %d -> %d\n", start, end);
+		    gtk_icon_view_unselect_all (baseView->iconView());
 		    for (int i=start; i<=end; i++){
 			    gchar *item = g_strdup_printf("%0d", i);
 			    WARN("selecting %s(%d)\n", item, i);
 			    GtkTreePath *tp = gtk_tree_path_new_from_string(item);
 			    g_free(item);
-			    gtk_icon_view_select_path (baseView->iconView(), tp);
+			    if (baseView->isSelectable(tpath)) gtk_icon_view_select_path (baseView->iconView(), tp);
 			    gtk_tree_path_free(tp);
 		    }
 

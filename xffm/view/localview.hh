@@ -354,7 +354,10 @@ private:
 	//GdkPixbuf *normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  gtk_c::get_icon_size(xd_p->d_name));
         //GdkPixbuf *highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);
         GdkPixbuf *highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);
+	guint flags=0;
+	//setSelectable(xd_p->d_name, flags);
         gtk_list_store_set (list_store, &iter, 
+		FLAGS, flags,
                 DISPLAY_NAME, utf_name,
                 ACTUAL_NAME, xd_p->d_name,
                 PATH, xd_p->path,

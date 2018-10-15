@@ -24,6 +24,7 @@ TODO:
      - up/down
 
 Bugs:
+  * bug: symlink to directory does not show correct icon and is not grouped with directories.
   * bug: no completion on 'executable ""' when exeecutable is specified, should display file options (all).
   * bug: on starting xffm/xfterm with no path, toolbar does not show full path.
   * bug: do a "git branch whatever" in script mode. Script will expect input

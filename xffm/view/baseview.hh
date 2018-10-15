@@ -4,6 +4,7 @@
 
 enum
 {
+  FLAGS,
   DISPLAY_PIXBUF,
   NORMAL_PIXBUF,
   HIGHLIGHT_PIXBUF,
@@ -27,6 +28,9 @@ enum
 #include "view/localview.hh"
 #include "signals/baseview.hh"
 
+// Flag bits:
+#define IS_NOTSELECTABLE(F) ((0x01<<1)&F)
+#define SET_NOTSELECTABLE(F) (F|=(0x01<<1))
 
 namespace xf
 {
@@ -56,6 +60,7 @@ class BaseView{
 
 	GtkTreeIter iter;
 	GtkListStore *list_store = gtk_list_store_new (NUM_COLS, 
+	    G_TYPE_UINT,      // flags
 	    GDK_TYPE_PIXBUF, // icon in display
 	    GDK_TYPE_PIXBUF, // normal icon reference
 	    GDK_TYPE_PIXBUF, // highlight icon reference
@@ -319,6 +324,22 @@ public:
     }
 
 
+    guint
+    setSelectable(gchar *name, guint flags){
+	if (strcmp(name, "..")==0) return SET_NOTSELECTABLE(flags);
+	return flags;
+    }
+
+    guint
+    isSelectable(GtkTreePath *tpath ) {
+        GtkTreeIter iter;
+	guint flags;
+        gtk_tree_model_get_iter (treeModel_, &iter, tpath);
+        gtk_tree_model_get (treeModel_, &iter, 
+                FLAGS , &flags, -1);
+        return !IS_NOTSELECTABLE(flags);
+    }
+
 
 private:
 
@@ -356,7 +377,6 @@ private:
                 ACTUAL_NAME, &verbatim_name, -1);
         return verbatim_name;
     }
-
 
     GdkPixbuf *
     get_normal_pixbuf (GtkTreePath *tpath ) {
