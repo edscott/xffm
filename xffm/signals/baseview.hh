@@ -5,7 +5,8 @@
 #define SET_DIR(x) x|=0x01
 #define IS_DIR (x&0x01)
 
-GHashTable *highlight_hash=NULL;
+static gboolean controlMode = FALSE;
+static GHashTable *highlight_hash=NULL;
 #define CONTROL_MODE (event->state & GDK_CONTROL_MASK)
 #define SHIFT_MODE (event->state & GDK_SHIFT_MASK)
 enum {
@@ -165,6 +166,7 @@ public:
 
         GtkTreePath *tpath;
         if (event->button == 1) {
+	    controlMode = FALSE;
             gboolean retval = FALSE;
             gint mode = 0;
             if (gtk_icon_view_get_item_at_pos (baseView->iconView(),
@@ -178,6 +180,7 @@ public:
                 if (CONTROL_MODE && SHIFT_MODE) {
 		    dragMode_ = -3; // link mode
 		} else if (CONTROL_MODE) {
+		    controlMode = TRUE;
 		    dragMode_ = -2; // copy
 		    // select item and add to selection list
 		    if (gtk_icon_view_path_is_selected (baseView->iconView(), tpath)) {
@@ -324,6 +327,19 @@ public:
 	        // start DnD (multiple selection)
 		WARN("dragOn_ = TRUE\n");
 		dragOn_ = TRUE;
+		// in control mode, reselect item at x,y
+		if(controlMode) {
+		    GtkTreePath * tpath;
+		    if (gtk_icon_view_get_item_at_pos (GTK_ICON_VIEW(widget),
+                                   buttonPressX, buttonPressY,
+                                   &tpath, NULL)) {
+		    gtk_icon_view_select_path (baseView->iconView(), tpath);
+		    gtk_tree_path_free(tpath);
+		    }
+
+		}
+
+
 		auto targets= gtk_target_list_new (targetTable,TARGETS);
 		auto context =
 		    gtk_drag_begin_with_coordinates (GTK_WIDGET(baseView->iconView()),
