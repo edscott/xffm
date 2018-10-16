@@ -243,7 +243,14 @@ public:
             GtkTreeIter iter;
             gtk_tree_model_get_iter (this->treeModel_, &iter, tpath);
             gtk_tree_model_get (this->treeModel_, &iter, PATH, &path, -1);
-            gchar *g = g_strconcat(dndData,format, path, "\n", NULL);
+            if (!dndData) dndData = g_strdup("");
+            else {
+                gchar *e = g_strconcat(dndData, "\r\n",  NULL);
+                g_free(dndData);
+                dndData = e;
+            }
+
+            gchar *g = g_strconcat(dndData,format, path, NULL);
             g_free(dndData);
             dndData = g;
             WARN("append: %s -> %s\n", path, dndData);
