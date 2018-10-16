@@ -137,6 +137,8 @@ public:
         g_signal_connect (G_OBJECT (this->iconView_), 
                 "drag-end", DRAG_CALLBACK (BaseViewSignals<Type>::signal_drag_end), (void *)this);
         g_signal_connect (G_OBJECT (this->iconView_), 
+                "drag-failed", DRAG_CALLBACK (BaseViewSignals<Type>::signal_drag_failed), (void *)this);
+        g_signal_connect (G_OBJECT (this->iconView_), 
                 "drag-begin", DRAG_CALLBACK (BaseViewSignals<Type>::signal_drag_begin), (void *)this);
         loadModel(path);
             
@@ -236,24 +238,21 @@ public:
     gboolean
     setDndData(GtkSelectionData *selection_data, GList *selection_list){
         WARN( "setDndData() baseview default.\n");
-        gchar *dndData = g_strdup("");
+        gchar *dndData = NULL;
         for(GList *tmp = selection_list; tmp; tmp = tmp->next) {
             GtkTreePath *tpath = (GtkTreePath *)tmp->data;
             gchar *path;
             GtkTreeIter iter;
             gtk_tree_model_get_iter (this->treeModel_, &iter, tpath);
             gtk_tree_model_get (this->treeModel_, &iter, PATH, &path, -1);
-            if (!dndData) dndData = g_strdup("");
+            if (!dndData) dndData = g_strconcat(format, path, NULL);
             else {
-                gchar *e = g_strconcat(dndData, "\r\n",  NULL);
+                gchar *e = g_strconcat(dndData, "\n", format, path, NULL);
                 g_free(dndData);
                 dndData = e;
             }
-
-            gchar *g = g_strconcat(dndData,format, path, NULL);
-            g_free(dndData);
-            dndData = g;
-            WARN("append: %s -> %s\n", path, dndData);
+            WARN("dndData: \"%s\"\n", dndData);
+            WARN("append: %s -> \"%s\"\n", path, dndData);
             g_free(path);
         }
 

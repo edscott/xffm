@@ -484,7 +484,38 @@ public:
         while (gtk_events_pending())gtk_main_iteration();
         gtk_drag_source_unset(GTK_WIDGET(baseView->iconView()));
         baseView->freeSelectionList();
-        
+       
+    }
+
+    static gboolean
+    signal_drag_failed (GtkWidget      *widget,
+                   GdkDragContext *context,
+                   GtkDragResult   result,
+                   gpointer        user_data){
+        const gchar *message;
+        switch (result) {
+            case GTK_DRAG_RESULT_SUCCESS:
+                message="The drag operation was successful.";
+                break;
+            case GTK_DRAG_RESULT_NO_TARGET:
+                message="No suitable drag target.";
+                break;
+            case GTK_DRAG_RESULT_USER_CANCELLED:
+                message="The user cancelled the drag operation.";
+                break;
+            case GTK_DRAG_RESULT_TIMEOUT_EXPIRED:
+                message="The drag operation timed out.";
+                break;
+            case GTK_DRAG_RESULT_GRAB_BROKEN:
+                message="The pointer or keyboard grab used for the drag operation was broken.";
+                break;
+            case GTK_DRAG_RESULT_ERROR:
+                message="The drag operation failed due to some unspecified error.";
+                break;
+        }
+        ERROR("Drag was not accepted: %s\n", message);
+        return TRUE;
+
     }
 
     static void
