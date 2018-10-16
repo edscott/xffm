@@ -231,11 +231,11 @@ public:
 
     GList *
     selectionList(void){return selectionList_;}
-
+//#define format ""
+#define format "file:/"
     gboolean
     setDndData(GtkSelectionData *selection_data, GList *selection_list){
         WARN( "setDndData() baseview default.\n");
-        const gchar *format = "file:";
         gchar *dndData = g_strdup("");
         for(GList *tmp = selection_list; tmp; tmp = tmp->next) {
             GtkTreePath *tpath = (GtkTreePath *)tmp->data;
@@ -280,8 +280,8 @@ public:
 
         gchar *source = g_path_get_dirname(*files);
         if (!target){
-            if (strncmp(source, "file:", strlen("file:"))==0){
-                target = g_strconcat("file:", path_, NULL);
+            if (strncmp(source, format, strlen(format))==0){
+                target = g_strconcat(format, path_, NULL);
             } else target = g_strdup(path_);
         }
         //WARN("source=%s target=%s action=%d\n", source, target, action);
@@ -294,7 +294,7 @@ public:
         for (gchar **f = files; f && *f; f++){
             if (strlen(*f)==0) continue;
             gchar *src = *f;
-            if (strncmp(src, "file:", strlen("file:"))==0) src += strlen("file:");
+            if (strncmp(src, format, strlen(format))==0) src += strlen(format);
             switch (action){
                 case GDK_ACTION_MOVE:
                     WARN("DND move: %s --> %s\n", src, path_);

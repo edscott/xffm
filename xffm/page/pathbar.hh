@@ -110,7 +110,6 @@ private:
 	return pb_button;
     }
 
-
     void 
     pathbar_ok(GtkButton * button){
         TRACE("pathbar_ok\n");

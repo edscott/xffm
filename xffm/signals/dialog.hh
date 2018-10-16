@@ -128,7 +128,13 @@ public:
     static void onSizeAllocate (GtkWidget    *widget,
 		   GdkRectangle *allocation,
 		   gpointer      data){
-	TRACE("dialog.hh::onSizeAllocate():SIZE allocate\n");
+        static gint lastX=-1;
+        static gint lastY=-1;
+        if (allocation->width == lastX && allocation->height == lastY) return;
+	DBG("dialog.hh::onSizeAllocate():SIZE allocate\n");
+        lastX = allocation->width;
+        lastY = allocation->height;
+        
         auto dialog_p = (Dialog<Type> *)data;
 
 	gint pages = gtk_notebook_get_n_pages (dialog_p->notebook());

@@ -269,6 +269,11 @@ public:
 		DBG("page_ = %p\n", (void *)page_);
 		if (page_) {
 		    page_->setPageWorkdir(gg);
+#ifdef XFFM_CC
+                auto baseView = (BaseView<Type> *)
+                    g_object_get_data(G_OBJECT(page_->top_scrolled_window()), "baseView");
+                baseView->loadModel(gg);
+#endif  
 		    g_free(gg);
 		}
 		return TRUE;

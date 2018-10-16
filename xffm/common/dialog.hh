@@ -138,7 +138,7 @@ protected:
 
     void setDefaultFixedFontSize(void){
         auto page = this->currentPageObject();
-	gint size = page->fontSize();;
+	gint size = page->fontSize();
 //        page->setSizeScale(size);
         print_c::set_font_size(GTK_WIDGET(page->output()), size);
         print_c::set_font_size(GTK_WIDGET(page->input()), size);
