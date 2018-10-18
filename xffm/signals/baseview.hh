@@ -1,6 +1,7 @@
 #ifndef XF_BASEVIEWSIGNALS__HH
 # define XF_BASEVIEW__HH
 #include "common/pixbuf.hh"
+#include "view/localview.hh"
 
 #define SET_DIR(x) x|=0x01
 #define IS_DIR (x&0x01)
@@ -292,13 +293,23 @@ public:
                                    event->x,
                                    event->y,
                                    &tpath, NULL)) {
-
+                // FIXME: context sensitive menu here
 		gtk_tree_path_free(tpath);
 
         }
 
         
         gboolean retval = FALSE;
+        auto iconViewType = (const gchar *)g_object_get_data(G_OBJECT(baseView->iconView()), "iconViewType");
+        if (!iconViewType){
+            ERROR("baseview.hh:g_object_get_data(G_OBJECT(baseView->iconView()), \"iconViewType\" is null.\n");
+            return retval;
+        }
+
+        if (strcmp(iconViewType, "LocalView")==0){
+            auto menu = LocalView<Type>::popUp();
+            gtk_menu_popup_at_pointer (menu, (const GdkEvent *)event);
+        }
 
         /* FIXME: enable popup...       
         if (tpath) {

@@ -39,15 +39,96 @@ static pthread_mutex_t readdir_mutex=PTHREAD_MUTEX_INITIALIZER;
 
 namespace xf
 {
+static GtkMenu *localPopUp=NULL;
+
 
 template <class Type>
 class LocalView {
-
+    
     using gtk_c = Gtk<Type>;
     using pixbuf_c = Pixbuf<Type>;
     using util_c = Util<Type>;
 
 public:
+    static void
+    toggleItem(GtkCheckMenuItem *menuItem, gpointer data)
+    {
+        auto item = (const gchar *)data;
+        gint value; 
+        if (Dialog<Type>::getSettingInteger("LocalView", item) > 0){
+            value = 0;
+            gtk_check_menu_item_set_active(menuItem, FALSE);
+        } else {
+            value = 1;
+            gtk_check_menu_item_set_active(menuItem, TRUE);
+        }
+        Dialog<Type>::saveSettings("LocalView", item, value);
+
+    }
+    static void
+    noop(GtkMenuItem *menuItem, gpointer data)
+    {
+        DBG("noop\n")
+    }
+
+    static GtkMenu *popUp(void){
+        if (localPopUp) return localPopUp;
+        auto menu = GTK_MENU(gtk_menu_new());
+         menuCheckItem_t item[]={
+            {N_("Show hidden files"), (void *)toggleItem, 
+                (void *) "ShowHidden", "ShowHidden"},
+            {N_("Show Backup Files"), (void *)toggleItem, 
+                (void *) "ShowBackups", "ShowBackups"},
+            
+            {N_("Add bookmark"), (void *)noop, (void *) menu, FALSE},
+            {N_("Remove bookmark"), (void *)noop, (void *) menu, FALSE},
+            {N_("Create a new empty folder inside this folder"), (void *)noop, (void *) menu, FALSE},
+            {N_("Open in New Window"), (void *)noop, (void *) menu, FALSE},
+            {N_("Reload"), (void *)noop, (void *) menu, FALSE},
+            {N_("Close"), (void *)noop, (void *) menu, FALSE},
+            // main menu items
+            //{N_("Open in New Tab"), (void *)noop, (void *) menu},
+            //{N_("Home"), (void *)noop, (void *) menu},
+            //{N_("Open terminal"), (void *)noop, (void *) menu},
+            //{N_("About"), (void *)noop, (void *) menu},
+            //
+            //common buttons /(also an iconsize +/- button)
+            //{N_("Paste"), (void *)noop, (void *) menu},
+            //{N_("Sort data in ascending order"), (void *)noop, (void *) menu},
+            //{N_("Sort data in descending order"), (void *)noop, (void *) menu},
+            //{N_("Sort case insensitive"), (void *)noop, (void *) menu},
+            
+            //{N_("Select All"), (void *)noop, (void *) menu},
+            //{N_("Invert Selection"), (void *)noop, (void *) menu},
+            //{N_("Unselect"), (void *)noop, (void *) menu},
+            //{N_("Select Items Matching..."), (void *)noop, (void *) menu},
+            //{N_("Unselect Items Matching..."), (void *)noop, (void *) menu},
+            //{N_("Sort by name"), (void *)noop, (void *) menu},
+            //{N_("Default sort order"), (void *)noop, (void *) menu},
+            //{N_("Sort by date"), (void *)noop, (void *) menu},
+            //{N_("Sort by size"), (void *)noop, (void *) menu},
+            //{N_("View as list""), (void *)noop, (void *) menu},
+            {NULL,NULL,NULL, FALSE}};
+        
+        auto p = item;
+        gint i;
+        for (i=0;p && p->label; p++,i++){
+            GtkWidget *v;
+            if (p->toggleID){
+                v = gtk_check_menu_item_new_with_label(_(p->label));
+                if (Dialog<Type>::getSettingInteger("LocalView", p->toggleID) > 0){
+                   gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(v), TRUE);
+                } 
+            }
+            else v = gtk_menu_item_new_with_label (_(p->label));
+            gtk_container_add (GTK_CONTAINER (menu), v);
+            g_signal_connect ((gpointer) v, "activate", MENUITEM_CALLBACK (p->callback), p->callbackData);
+            gtk_widget_show (v);
+        }
+        gtk_widget_show (GTK_WIDGET(menu));
+        return menu;
+        
+    }
     
     static void selectables(GtkIconView *iconview){
         GtkTreePath *tpath = gtk_tree_path_new_first ();
@@ -137,8 +218,8 @@ public:
 
 
         int heartbeat = 0;
-
-        GList *directory_list = read_items (path, TRUE, &heartbeat);
+    
+        GList *directory_list = read_items (path, &heartbeat);
         insert_list_into_model(directory_list, GTK_LIST_STORE(treeModel));
 		
 
@@ -152,7 +233,7 @@ private:
 
     //FIXME: must be done by non main thread (already mutex protected)
     static GList *
-    read_items (const gchar *path, gboolean showsHidden, gint *heartbeat)
+    read_items (const gchar *path,  gint *heartbeat)
     {
         GList *directory_list = NULL;
         if (!g_file_test(path, G_FILE_TEST_IS_DIR)){
@@ -165,19 +246,17 @@ private:
             WARN("xfdir_local_c::read_items(): opendir %s: %s\n", path, strerror(errno));
             return NULL;
         }
-
     //  mutex protect...
         DBG("** requesting readdir mutex for %s...\n", path);
         pthread_mutex_lock(&readdir_mutex);
         DBG( "++ mutex for %s obtained.\n", path);
         struct dirent *d; // static pointer
         errno=0;
-        TRACE( "shows hidden=%d\n", showsHidden);
+        TRACE( "shows hidden=%d\n", showHidden);
         while ((d = readdir(directory))  != NULL){
             TRACE( "%p  %s\n", d, d->d_name);
             if(strcmp (d->d_name, ".") == 0) continue;
             if (strcmp(path,"/")==0 && strcmp (d->d_name, "..") == 0) continue;
-            if(!showsHidden && d->d_name[0] == '.' && strcmp (d->d_name, "..")) continue;
             xd_t *xd_p = get_xd_p(path, d);
             directory_list = g_list_prepend(directory_list, xd_p);
             if (heartbeat) {
@@ -310,6 +389,22 @@ private:
         g_list_free(directory_list);
         return dir_count;
     }
+    
+    static gboolean backupType(const gchar *file){
+        if (!file) return FALSE;
+        // GNU backup type:
+         if(file[strlen (file) - 1] == '~' || 
+                 file[strlen (file) - 1] == '%'|| 
+                 file[strlen (file) - 1] == '#') return TRUE;
+        // MIME backup type:
+        const gchar *e = strrchr(file, '.');
+        if (e){
+            if (strcmp(e,".old")==0) return TRUE;
+            else if (strcmp(e,".bak")==0) return TRUE;
+            else if (strcmp(e,".sik")==0) return TRUE;
+        }
+        return FALSE;
+    }
 
     static void
     add_local_item(GtkListStore *list_store, xd_t *xd_p){
@@ -322,8 +417,13 @@ private:
         //}
 
         //FIXME need for shows_hidden only in monitor_ function...
-        //if (!showsHidden_ && xd_p->d_name[0] == '.'  && strcmp("..", xd_p->d_name)){
-        if (xd_p->d_name[0] == '.'  && strcmp("..", xd_p->d_name)){
+        //      monitor must reload when showHidden changes...
+        gboolean showHidden = (Dialog<Type>::getSettingInteger("LocalView", "ShowHidden") > 0);
+        if (!showHidden && xd_p->d_name[0] == '.'  && strcmp("..", xd_p->d_name)){
+            return;
+        }
+        gboolean showBackups = (Dialog<Type>::getSettingInteger("LocalView", "ShowBackups") > 0);
+        if (!showBackups && backupType(xd_p->d_name)){
             return;
         }
         
