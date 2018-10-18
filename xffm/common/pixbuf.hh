@@ -16,7 +16,7 @@ class Pixbuf {
 public:
     static gint
     get_pixel_size(gint size){
-	gint pixels = 24;;
+	gint pixels = 24;
 	switch (size){
 	    case GTK_ICON_SIZE_MENU:          // Size appropriate for menus (16px).
 	    case GTK_ICON_SIZE_SMALL_TOOLBAR: // Size appropriate for small toolbars (16px).

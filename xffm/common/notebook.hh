@@ -74,7 +74,7 @@ public:
 #ifndef XFFM_CC	    
         // Terminal mode: 
 	while (gtk_events_pending()) gtk_main_iteration();
-        page->showIconview(FALSE);
+        page->showIconview(0);
 #endif
         return page;
     }

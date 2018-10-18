@@ -48,6 +48,9 @@ class BaseView{
     GtkTreeModel *treeModel_;
     gint dirCount_; 
     GtkIconView *iconView_;
+    
+    GtkWidget *source_;
+    GtkWidget *destination_;
 
     gchar *path_;
     page_c *page_;
@@ -89,12 +92,21 @@ public:
         selectionList_ = NULL;
         
         iconView_=createIconview();
+
+        source_ = GTK_WIDGET(page_->pageChild());
+        //source_ = GTK_WIDGET(page_->top_scrolled_window());
+        //source_ = GTK_WIDGET(iconView_);
+        destination_ = GTK_WIDGET(iconView_);
 	
 	treeModel_ = mkTreeModel();
         // Enable dnd by default.
         // Local object will disable if not required.
-        createSourceTargetList();
-        createDestTargetList();
+         createSourceTargetList(source_);
+         //createSourceTargetList();
+        // 
+        // Only enable destination drops.
+        //createDestTargetList();
+        createDestTargetList(destination_);
         
 	g_object_set_data(G_OBJECT(treeModel_), "iconview", iconView_);
 	gtk_icon_view_set_model(iconView_, treeModel_);
@@ -119,27 +131,38 @@ public:
                 G_CALLBACK(BaseViewSignals<Type>::button_click_f), (void *)this);
          g_signal_connect (this->iconView_, "button-release-event",
                 G_CALLBACK(BaseViewSignals<Type>::button_release_f), (void *)this);
-
          g_signal_connect (this->iconView_, "button-press-event",
                 G_CALLBACK(BaseViewSignals<Type>::button_press_f), (void *)this);
 
-        g_signal_connect (G_OBJECT (this->iconView_), 
-                "drag-data-received", G_CALLBACK (BaseViewSignals<Type>::signal_drag_data_receive), (void *)this);
-        g_signal_connect (G_OBJECT (this->iconView_), 
+        // source widget
+        g_signal_connect (G_OBJECT (source_), 
+                "drag-begin", DRAG_CALLBACK (BaseViewSignals<Type>::signal_drag_begin), (void *)this);
+        g_signal_connect (G_OBJECT (source_), 
                 "drag-data-get", G_CALLBACK (BaseViewSignals<Type>::signal_drag_data_send), (void *)this);
-        g_signal_connect (G_OBJECT (this->iconView_), 
-                "drag-motion", G_CALLBACK (BaseViewSignals<Type>::signal_drag_motion), (void *)this);
-        g_signal_connect (G_OBJECT (this->iconView_), 
+        g_signal_connect (G_OBJECT (source_), 
+                "drag-end", DRAG_CALLBACK (BaseViewSignals<Type>::signal_drag_end), (void *)this);
+      
+        // destination widget
+        g_signal_connect (G_OBJECT (destination_), 
+                "drag-data-received", G_CALLBACK (BaseViewSignals<Type>::signal_drag_data_receive), (void *)this);
+        g_signal_connect (G_OBJECT (destination_), 
                 "drag-leave", G_CALLBACK (BaseViewSignals<Type>::signal_drag_leave), (void *)this);
-        g_signal_connect (G_OBJECT (this->iconView_), 
+
+        // Not necessary with GTK_DEST_DEFAULT_MOTION
+        //g_signal_connect (G_OBJECT (destination_), 
+        //      "drag-motion", G_CALLBACK (BaseViewSignals<Type>::signal_drag_motion), (void *)this);
+        // Not necessary with GTK_DEST_DEFAULT_DROP
+        //
+        //g_signal_connect (G_OBJECT (destination_), 
+        //        "drag-drop", G_CALLBACK (BaseViewSignals<Type>::signal_drag_drop), (void *)this);
+        
+        // Overkill?
+        /*g_signal_connect (G_OBJECT (source_), 
                 "drag-data-delete", G_CALLBACK (BaseViewSignals<Type>::signal_drag_delete), (void *)this);
 
-        g_signal_connect (G_OBJECT (this->iconView_), 
-                "drag-end", DRAG_CALLBACK (BaseViewSignals<Type>::signal_drag_end), (void *)this);
-        g_signal_connect (G_OBJECT (this->iconView_), 
-                "drag-failed", DRAG_CALLBACK (BaseViewSignals<Type>::signal_drag_failed), (void *)this);
-        g_signal_connect (G_OBJECT (this->iconView_), 
-                "drag-begin", DRAG_CALLBACK (BaseViewSignals<Type>::signal_drag_begin), (void *)this);
+        g_signal_connect (G_OBJECT (source_), 
+                "drag-failed", DRAG_CALLBACK (BaseViewSignals<Type>::signal_drag_failed), (void *)this);*/
+
         loadModel(path);
             
     }
@@ -150,6 +173,9 @@ public:
         g_object_unref(treeModel_);
     }
 
+
+    GtkWidget *source(){ return source_;}
+    
     void selectables(void){
         auto iconViewType = (const gchar *)g_object_get_data(G_OBJECT(this->iconView()), "iconViewType");
         
@@ -233,6 +259,7 @@ public:
 
     GList *
     selectionList(void){return selectionList_;}
+#if 0
 //#define format ""
 #define format "file:/"
     gboolean
@@ -263,9 +290,11 @@ public:
        return TRUE;
         
     }
+#endif
 
     gboolean
     receiveDndData(gchar *target, const GtkSelectionData *selection_data, GdkDragAction action){
+        WARN("BaseView::receiveDndData\n");
         if (!selection_data) {
             WARN("!selection_data\n");
             return FALSE;
@@ -290,11 +319,12 @@ public:
                 target = g_strconcat(format, path_, NULL);
             } else target = g_strdup(path_);
         }
-        //WARN("source=%s target=%s action=%d\n", source, target, action);
+        WARN("BaseView::receiveDndData: source=%s target=%s action=%d\n", source, target, action);
         gboolean result = FALSE;
         if (strcmp(source, target) ) result = TRUE;
         else {
             WARN("receiveDndData: source and target are the same\n");
+            return FALSE;
         }
 
         for (gchar **f = files; f && *f; f++){
@@ -316,6 +346,11 @@ public:
         }
         g_strfreev(files);
         g_free(target);
+        // not needed with GTK_DEST_DEFAULT_DROP
+        /*gtk_drag_finish (context, result, 
+                (action == GDK_ACTION_MOVE) ? result : FALSE, 
+                time);*/
+
 
         return result;
     }
@@ -523,8 +558,7 @@ private:
         DBG("createSourceTargetList..\n");
         gtk_icon_view_enable_model_drag_source
                                    (iconView_,
-                                    (GdkModifierType)
-                                    0,
+                                    (GdkModifierType) 0,
                                     targetTable,
                                     NUM_TARGETS,
                                     (GdkDragAction)
@@ -533,6 +567,36 @@ private:
                                      (gint)GDK_ACTION_LINK));
         return;
     }
+
+    void
+    createSourceTargetList (GtkWidget *widget) {
+        DBG("createSourceTargetList..\n");
+        gtk_drag_source_set (widget,
+                     (GdkModifierType) 0, //GdkModifierType start_button_mask,
+                     targetTable,
+                     NUM_TARGETS,
+                     (GdkDragAction)
+                                    ((gint)GDK_ACTION_MOVE|
+                                     (gint)GDK_ACTION_COPY|
+                                     (gint)GDK_ACTION_LINK));
+        return;
+    }
+
+    void
+    createDestTargetList (GtkWidget *widget) {
+        DBG("createSourceTargetList..\n");
+        gtk_drag_dest_set (widget,
+                     (GtkDestDefaults)
+                                   ((gint)GTK_DEST_DEFAULT_DROP|
+                                    (gint)GTK_DEST_DEFAULT_MOTION),
+                     targetTable,
+                     NUM_TARGETS,
+                     (GdkDragAction)
+                                    ((gint)GDK_ACTION_MOVE|
+                                     (gint)GDK_ACTION_COPY|
+                                     (gint)GDK_ACTION_LINK));
+        return;
+   }
 
     void
     createDestTargetList (void) {

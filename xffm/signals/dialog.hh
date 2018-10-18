@@ -134,8 +134,10 @@ public:
 	DBG("dialog.hh::onSizeAllocate():SIZE allocate\n");
         lastX = allocation->width;
         lastY = allocation->height;
-        
+
         auto dialog_p = (Dialog<Type> *)data;
+        // Save selection width and height to .ini
+        dialog_p->saveSettings(); 
 
 	gint pages = gtk_notebook_get_n_pages (dialog_p->notebook());
 	TRACE("pages = %d\n", pages);

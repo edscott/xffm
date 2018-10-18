@@ -23,13 +23,13 @@ public:
     static void toggleToIconview(GtkButton *button, gpointer data){
         // This will toggle into iconview
         auto page = (Page<Type> *)data;
-        page->showIconview(TRUE);
+        page->showIconview(1);
     }
 
     static void toggleToTerminal(GtkButton *button, gpointer data){
         // This will toggle into terminal
         auto page = (Page<Type> *)data;
-        page->showIconview(FALSE);
+        page->showIconview(0);
     }
     static gboolean
     rangeChangeValue(GtkRange     *range,

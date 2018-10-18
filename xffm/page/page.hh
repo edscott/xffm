@@ -233,13 +233,13 @@ public:
     void setDefaultIconview(gboolean state){iconviewIsDefault_ = state;}
     gboolean iconviewIsDefault(void){return iconviewIsDefault_;}
        
-    void showIconview(gboolean state){
+    void showIconview(gint state){
 	if (!gtk_widget_is_visible(GTK_WIDGET(this->pageChild_))){
 		TRACE("page2.hh:: showIconview() call with invisible parent\n");
 		return;
 	}
 
-        if (state) {
+        if (state > 0) {
             gtk_widget_hide(GTK_WIDGET(this->toggleToIconview_));
             gtk_widget_hide(GTK_WIDGET(this->input_));
             gtk_widget_hide(GTK_WIDGET(this->termButtonBox_));
@@ -248,8 +248,7 @@ public:
             gtk_widget_show(GTK_WIDGET(this->statusButton_));
             print_c::hide_text(this->output_);
             terminalMode_ = FALSE;
-        } else 
-        {
+        } else  {
             gtk_widget_hide(GTK_WIDGET(this->toggleToTerminal_));
             gtk_widget_hide(GTK_WIDGET(this->statusButton_));
 
@@ -257,10 +256,15 @@ public:
             gtk_widget_show(GTK_WIDGET(this->input_));
             gtk_widget_show(GTK_WIDGET(this->termButtonBox_));
             while (gtk_events_pending())gtk_main_iteration();
-            setVpanePosition(0);
-            // print_c::show_text(this->output_);
+            if (state == 0) setVpanePosition(0);
+            else {
+                gint position = parent_->getSettingInteger("window", "height");
+                if (position < 0) position = 200;
+                else position /= 2;
+                setVpanePosition(position);
+            }// print_c::show_text(this->output_);
             terminalMode_ = TRUE;
-        }
+        } 
 
     }
     gint
@@ -273,12 +277,12 @@ public:
         // <TAB> Toggles to terminal mode (partial output)
         if (terminalMode_){
             if (event->keyval == GDK_KEY_Escape) {
-                showIconview(TRUE);
+                showIconview(1);
                 return TRUE;
             }
         } else { // in iconview mode: toggle to terminal
-            if (event->keyval == GDK_KEY_Tab) {
-                showIconview(FALSE);
+            if (event->keyval == GDK_KEY_Tab || event->keyval == GDK_KEY_Escape) {
+                showIconview(0);
                 return TRUE;
             }
             // These navigation keys belong to iconview.
@@ -309,7 +313,7 @@ public:
                 }
             }
             // Any other key activates terminal (partial output).
-            showIconview(FALSE);
+            showIconview(-1);
             // Send key to completion.
         }
         return this->completionKeyboardEvent(event);

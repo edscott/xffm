@@ -9,7 +9,7 @@ static gboolean controlMode = FALSE;
 static GHashTable *highlight_hash=NULL;
 #define CONTROL_MODE (event->state & GDK_CONTROL_MASK)
 #define SHIFT_MODE (event->state & GDK_SHIFT_MASK)
-enum {
+/*enum {
     TARGET_URI_LIST,
     TARGET_MOZ_URL,
     TARGET_PLAIN,
@@ -24,6 +24,15 @@ static GtkTargetEntry targetTable[] = {
     {(gchar *)"text/plain", 0, TARGET_PLAIN},
     {(gchar *)"UTF8_STRING", 0, TARGET_UTF8},
     {(gchar *)"STRING", 0, TARGET_STRING}
+};*/
+
+enum {
+    TARGET_URI_LIST,
+    TARGETS
+};
+
+static GtkTargetEntry targetTable[] = {
+    {(gchar *)"text/uri-list", 0, TARGET_URI_LIST},
 };
 
 #define NUM_TARGETS (sizeof(targetTable)/sizeof(GtkTargetEntry))
@@ -33,7 +42,11 @@ static gint buttonPressX=-1;
 static gint buttonPressY=-1;
 static gint dragMode_=0;
 
+static GtkTargetList *targets=NULL;
+static GdkDragContext *context=NULL;
+
 namespace xf
+
 {
 template <class Type> class BaseView;
 
@@ -339,10 +352,10 @@ public:
 
 		}
 
+                if (!targets) targets= gtk_target_list_new (targetTable,TARGETS);
 
-		auto targets= gtk_target_list_new (targetTable,TARGETS);
-		auto context =
-		    gtk_drag_begin_with_coordinates (GTK_WIDGET(baseView->iconView()),
+		context =
+		    gtk_drag_begin_with_coordinates (baseView->source(),
 			     targets,
 			     (GdkDragAction)(((gint)GDK_ACTION_MOVE)|
                    ((gint)GDK_ACTION_COPY)|
@@ -350,7 +363,9 @@ public:
 			     1, //gint button,
 			     (GdkEvent *)event, //GdkEvent *event,
 			     event->x, event->y);
+                             
 		buttonPressX = buttonPressY = -1;
+                //g_object_ref(G_OBJECT(context)); 
 	    }
         }
 
@@ -385,7 +400,8 @@ public:
         TRACE("rodent_mouse: DND receive, info=%d (%d,%d)\n", info, TARGET_STRING, TARGET_URI_LIST);
         if(info != TARGET_URI_LIST) {
             ERROR("signal_drag_data_receive: info != TARGET_URI_LIST\n");
-            gtk_drag_finish(context, FALSE, FALSE, time);
+            // not needed with GTK_DEST_DEFAULT_DROP
+            // gtk_drag_finish(context, FALSE, FALSE, time);
             return;
       //            goto drag_over;         /* of course */
         }
@@ -396,7 +412,8 @@ public:
            action != GDK_ACTION_COPY &&
            action != GDK_ACTION_LINK) {
             ERROR("Drag drop mode is not GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK\n");
-            gtk_drag_finish(context, FALSE, FALSE, time);
+            // not needed with GTK_DEST_DEFAULT_DROP
+            // gtk_drag_finish(context, FALSE, FALSE, time);
             return;
       //      goto drag_over;         /* of course */
         }
@@ -428,13 +445,11 @@ public:
         
         auto result = baseView->receiveDndData(target, selection_data, action);
 
-        // FIXME: if sourcedir == targetdir, 
-        // gtk_drag_finish(context, FALSE, FALSE);
         WARN("drag finish result=%d\n", result);
-        gtk_drag_finish (context, result, 
+     /*   gtk_drag_finish (context, result, 
                 (action == GDK_ACTION_MOVE) ? result : FALSE, 
                 time);
-
+*/
         DBG("DND receive, drag_over\n");
         return;
 
@@ -481,10 +496,10 @@ public:
 	auto baseView = (BaseView<Type> *)data;
 
         dragMode_ = 0;
-        while (gtk_events_pending())gtk_main_iteration();
-        gtk_drag_source_unset(GTK_WIDGET(baseView->iconView()));
-        baseView->freeSelectionList();
-       
+        //while (gtk_events_pending())gtk_main_iteration();
+        //gtk_drag_source_unset(GTK_WIDGET(baseView->iconView()));
+        //baseView->freeSelectionList();
+      
     }
 
     static gboolean
@@ -531,7 +546,7 @@ public:
             icon = gtk_icon_view_create_drag_icon(baseView->iconView(), (GtkTreePath *)selection_list->data);
         } else if (g_list_length(selection_list)>1){
             DBG("Multiple selection\n");
-            GdkPixbuf *pixbuf = pixbuf_c::get_pixbuf("edit-copy", GTK_ICON_SIZE_DIALOG);
+            GdkPixbuf *pixbuf = pixbuf_c::get_pixbuf("edit-copy", -96);
 
             gint width = gdk_pixbuf_get_width (pixbuf);
             gint height = gdk_pixbuf_get_height (pixbuf);
@@ -544,7 +559,7 @@ public:
          //   icon = cairo_c::pixbuf_cairo_surface(pixbuf);
             cairo_t *cr = cairo_create (icon);
                     
-            cairo_set_source_rgb (cr, 1, 1, 1);
+            cairo_set_source_rgb (cr, (double)0x4a/0xff, (double)0x90/0xff, (double)0xd9/0xff);
             cairo_rectangle (cr, 0, 0, width, height);
             cairo_fill (cr);
 
@@ -576,22 +591,43 @@ public:
 
         /* prepare data for the receiver */
         switch (info) {
-#if 10
-          case TARGET_UTF8:
-            DBG( ">>> DND send, TARGET_UTF8\n"); return;
-#endif
           case TARGET_URI_LIST:
             {
                 DBG( ">>> DND send, TARGET_URI_LIST\n"); 
                 GList *selection_list = baseView->selectionList();
-                gboolean result = baseView->setDndData(selection_data, selection_list);
-              
-            }
-            break;
-          default:
-            DBG( ">>> DND send, non listed target\n"); 
-            break;
+                //gboolean result = baseView->setDndData(selection_data, selection_list);
+
+#define format "file:/"
+                gchar *dndData = NULL;
+                for(GList *tmp = selection_list; tmp; tmp = tmp->next) {
+                    GtkTreePath *tpath = (GtkTreePath *)tmp->data;
+                    gchar *path;
+                    GtkTreeIter iter;
+                    gtk_tree_model_get_iter (baseView->treeModel(), &iter, tpath);
+                    gtk_tree_model_get (baseView->treeModel(), &iter, PATH, &path, -1);
+                    if (!dndData) dndData = g_strconcat(format, path, NULL);
+                    else {
+                        gchar *e = g_strconcat(dndData, "\n", format, path, NULL);
+                        g_free(dndData);
+                        dndData = e;
+                    }
+                    WARN("dndData: \"%s\"\n", dndData);
+                    WARN("append: %s -> \"%s\"\n", path, dndData);
+                    g_free(path);
+                }
+
+                gtk_selection_data_set (selection_data, 
+                    gtk_selection_data_get_selection(selection_data),
+                    8, (const guchar *)dndData, strlen(dndData)+1);
+                      
+                    }
+                    break;
+                  default:
+                    DBG( ">>> DND send, non listed target\n"); 
+                    break;
+                
         }
+        
     }
 
     static void

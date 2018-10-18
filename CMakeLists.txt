@@ -36,8 +36,8 @@ configure_file(
 list(APPEND CMAKE_MODULE_PATH 
     "${PROJECT_SOURCE_DIR}/cmake")
 find_package(PkgConfig REQUIRED)
-find_package(GLIB 2.52.3 REQUIRED)
-find_package(GTK3 3.22.17 REQUIRED)
+find_package(GLIB 2.58.1 REQUIRED)
+find_package(GTK3 3.24.1 REQUIRED)
 find_package(X11 REQUIRED)
 #CHECK_INCLUDE_FILE_CXX("signal.h" HAVE_SIGNAL_H)
 

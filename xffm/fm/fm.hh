@@ -27,7 +27,7 @@ public:
         //page->setPageWorkdir(workdir);
 	// Default into iconview...
         page->setDefaultIconview(TRUE);
-	page->showIconview(TRUE);
+	page->showIconview(1);
         //page->setDefaultIconview(FALSE);
 	//page->showIconview(FALSE);
     }
@@ -40,7 +40,7 @@ public:
         //while (gtk_events_pending())gtk_main_iteration();
         if (workdir == NULL) workdir = g_strdup("xffm:root");
         auto baseView = load(workdir);
-	page->showIconview(TRUE);
+	page->showIconview(1);
     }
 
     void removePage(GtkWidget *child){

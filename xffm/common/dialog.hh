@@ -97,6 +97,14 @@ public:
                                &minimumSize_,
                                &naturalSize_);
         }
+        // First try a saved width/height
+        gint width = getSettingInteger("window", "width");
+        gint height = getSettingInteger("window", "height");
+        if (width >= naturalSize_.width && height >= naturalSize_.height){
+            gtk_window_resize (GTK_WINDOW(dialog_), width, height);
+            return;
+        }
+        // Now adapt a window size to the selected font
         gint Dw = 8*maximumSize_.width/9 - naturalSize_.width ;
         if (Dw < 0) Dw = 0;
         gint Dh = 12*maximumSize_.height/13 - naturalSize_.height;
@@ -124,11 +132,39 @@ public:
             DBG("%s", text);
             g_free(text);
         }
+        GtkAllocation allocation;
+        gtk_widget_get_allocation(GTK_WIDGET(dialog_), &allocation);
+        g_key_file_set_integer (key_file, "window", "width", allocation.width);
+        g_key_file_set_integer (key_file, "window", "height", allocation.height);
+        
         auto page = this->currentPageObject();
         g_key_file_set_integer (key_file, "xfterm", "fontSize", page->fontSize());
+        
+
         write_keyfile(key_file, file);
         g_free(file);
         g_key_file_free(key_file);
+   }
+   static gint 
+   getSettingInteger(const gchar *group, const gchar *item){
+        GKeyFile *key_file = g_key_file_new();
+        gchar *file = g_build_filename(g_get_user_config_dir(),"xffm+","settings.ini", NULL);
+        gboolean loaded = g_key_file_load_from_file(key_file, file,
+               (GKeyFileFlags) (G_KEY_FILE_KEEP_COMMENTS |  G_KEY_FILE_KEEP_TRANSLATIONS),
+                NULL);
+        g_free(file);
+        gint value=-1;
+        if (loaded) {
+            GError *error = NULL;
+            value = g_key_file_get_integer (key_file, group, item, &error);
+            if (error){
+                ERROR("%s\n", error->message);
+                g_error_free(error);
+                value = -1;
+            }
+        } 
+        g_key_file_free(key_file);
+        return value;
    }
 protected:
     GtkWindow *dialog(){
