@@ -36,8 +36,16 @@ configure_file(
 list(APPEND CMAKE_MODULE_PATH 
     "${PROJECT_SOURCE_DIR}/cmake")
 find_package(PkgConfig REQUIRED)
-find_package(GLIB 2.58.1 REQUIRED)
+#DND Works with Archlinux updated box
+#find_package(GTK3 3.24.1 REQUIRED)
+#find_package(GLIB 2.58.1 REQUIRED)
+
+#DND does not work with gentoo local libs
+find_package(GLIB 2.56.2 REQUIRED)
 find_package(GTK3 3.24.1 REQUIRED)
+#Gentoo installed, DND does not work
+find_package(GLIB 2.52.3 REQUIRED)
+find_package(GTK3 3.22.30 REQUIRED)
 find_package(X11 REQUIRED)
 #CHECK_INCLUDE_FILE_CXX("signal.h" HAVE_SIGNAL_H)
 

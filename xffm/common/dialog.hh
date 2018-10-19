@@ -177,7 +177,7 @@ public:
             GError *error = NULL;
             value = g_key_file_get_integer (key_file, group, item, &error);
             if (error){
-                ERROR("%s\n", error->message);
+                TRACE("%s\n", error->message);
                 g_error_free(error);
                 value = -1;
             }
