@@ -162,13 +162,40 @@ public:
 	gtk_widget_show_all (GTK_WIDGET(bin));
     }
 
+    static void 
+    menu_item_content(GtkMenuItem *menuItem, const gchar *icon_id, const gchar *text, gint size){
+        auto image = GTK_IMAGE(g_object_get_data(G_OBJECT(menuItem), "image"));
+        auto label = GTK_LABEL(g_object_get_data(G_OBJECT(menuItem), "label"));
+        auto box = (GtkBox *)g_object_get_data(G_OBJECT(menuItem), "box");
+        gtk_container_remove(GTK_CONTAINER(menuItem), GTK_WIDGET(box));
+	box = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0));
+        g_object_set_data(G_OBJECT(menuItem), "box", box);
 
+	GdkPixbuf *pb = (icon_id)? pixbuf_c::get_pixbuf (icon_id, size): NULL;    
+	if (pb){
+	    image = GTK_IMAGE(gtk_image_new_from_pixbuf (pb));
+	    gtk_widget_show (GTK_WIDGET(image));
+	    gtk_box_pack_start(box, GTK_WIDGET(image), FALSE,FALSE,0);
+	    g_object_set_data(G_OBJECT(menuItem), "image", image);
+	}
+        label = GTK_LABEL(gtk_label_new(""));
+        gchar *markup = g_strdup_printf("<span size=\"larger\" color=\"red\"><b><i>%s</i></b></span>", text);
+        gtk_label_set_markup(label, markup);
+        g_free(markup);
+        gtk_box_pack_start(box, GTK_WIDGET(label), FALSE,FALSE,0);
+	gtk_widget_show (GTK_WIDGET(label));
+        g_object_set_data(G_OBJECT(menuItem), "label", label);
+	gtk_widget_show(GTK_WIDGET(box));
+	gtk_container_add(GTK_CONTAINER(menuItem), GTK_WIDGET(box));
+        return;
+    }
     static GtkWidget * 
-    menu_item_new(const gchar *icon_id, const gchar *text)
+    menu_item_new(const gchar *icon_id, const gchar *text, gint size)
     {
-	GdkPixbuf *pb = (icon_id)? pixbuf_c::get_pixbuf (icon_id, GTK_ICON_SIZE_SMALL_TOOLBAR): NULL;    
+	GdkPixbuf *pb = (icon_id)? pixbuf_c::get_pixbuf (icon_id, size): NULL;    
 	auto w = gtk_menu_item_new_with_label ("");
-	auto replacement = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0));
+	auto box = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0));
+        g_object_set_data(G_OBJECT(w), "box", box);
 	auto label = GTK_LABEL(gtk_bin_get_child(GTK_BIN(w)));
 	if (label && GTK_IS_WIDGET(label)) {
 	    g_object_ref(label);
@@ -178,19 +205,27 @@ public:
 	if (pb){
 	    auto image = gtk_image_new_from_pixbuf (pb);
 	    gtk_widget_show (image);
-	    gtk_box_pack_start(replacement, image, FALSE,FALSE,0);
+	    gtk_box_pack_start(box, image, FALSE,FALSE,0);
 	    g_object_set_data(G_OBJECT(w), "image", image);
 	}
 	if (label && GTK_IS_WIDGET(label)) {
-	    gtk_label_set_markup(label, text);
-	    gtk_box_pack_start(replacement, GTK_WIDGET(label), FALSE,FALSE,3);
+            gchar *markup = g_strdup_printf("<span size=\"larger\" color=\"red\"><b><i>%s</i></b></span>", text);
+            gtk_label_set_markup(label, markup);
+            g_free(markup);
+	    gtk_box_pack_start(box, GTK_WIDGET(label), FALSE,FALSE,3);
 	    g_object_set_data(G_OBJECT(w), "label", label);
 	    gtk_widget_show(GTK_WIDGET(label));
-	    //g_object_unref(label);
+	    g_object_unref(label);
 	}
-	gtk_widget_show(GTK_WIDGET(replacement));
-	gtk_container_add(GTK_CONTAINER(w), GTK_WIDGET(replacement));
+	gtk_widget_show(GTK_WIDGET(box));
+	gtk_container_add(GTK_CONTAINER(w), GTK_WIDGET(box));
 	return w;
+    }
+
+    static GtkWidget * 
+    menu_item_new(const gchar *icon_id, const gchar *text)
+    {
+        return menu_item_new(icon_id, text, GTK_ICON_SIZE_SMALL_TOOLBAR);
     }
 
 

@@ -76,16 +76,19 @@ public:
         GtkTreeIter iter;
 	if (!gtk_tree_model_get_iter (treeModel, &iter, tpath)) return NULL;
 	gchar *aname=NULL;
+        gchar *iconName=NULL;
 	gtk_tree_model_get (treeModel, &iter, 
 		ACTUAL_NAME, &aname,
+		ICON_NAME, &iconName,
 		-1);
         gchar *name = util_c::valid_utf_pathstring(aname);
         g_free(aname);
         if (localPopUpItem) {
             // change title
             auto title = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(localPopUpItem), "title"));
-            gtk_menu_item_set_label (title, name);
+            gtk_c::menu_item_content(title, iconName, name, -48);
             g_free(name);
+            g_free(iconName);
             return localPopUpItem;
         }
          
@@ -114,7 +117,9 @@ public:
         
         auto p = item;
         gint i;
-        GtkWidget *title = gtk_menu_item_new_with_label (name); // XXX: use pango markup?
+        //GtkWidget *title = gtk_menu_item_new_with_label (name); // XXX: use pango markup?
+        GtkWidget *title = gtk_c::menu_item_new(iconName, name, -48); // XXX: use pango markup?
+        g_free(iconName);
         g_free(name);
         gtk_widget_set_sensitive(title, FALSE);
         gtk_widget_show (title);
