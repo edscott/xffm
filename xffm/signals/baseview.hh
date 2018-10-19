@@ -289,16 +289,6 @@ public:
         if (event->button != 3) return FALSE;
 
         WARN("button press event: button 3 should do popup, as well as longpress...\n");
-        if (gtk_icon_view_get_item_at_pos (GTK_ICON_VIEW(widget),
-                                   event->x,
-                                   event->y,
-                                   &tpath, NULL)) {
-                // FIXME: context sensitive menu here
-		gtk_tree_path_free(tpath);
-
-        }
-
-        
         gboolean retval = FALSE;
         auto iconViewType = (const gchar *)g_object_get_data(G_OBJECT(baseView->iconView()), "iconViewType");
         if (!iconViewType){
@@ -306,19 +296,23 @@ public:
             return retval;
         }
 
-        if (strcmp(iconViewType, "LocalView")==0){
-            auto menu = LocalView<Type>::popUp();
-            gtk_menu_popup_at_pointer (menu, (const GdkEvent *)event);
-        }
+        GtkMenu *menu;
 
-        /* FIXME: enable popup...       
-        if (tpath) {
-            retval = ((view_c *)data)->get_xfdir_p()->popup(tpath);
-            gtk_tree_path_free(tpath);
+        if (gtk_icon_view_get_item_at_pos (GTK_ICON_VIEW(widget),
+                                   event->x,
+                                   event->y,
+                                   &tpath, NULL)) {
+            if (strcmp(iconViewType, "LocalView")==0) {
+                menu = LocalView<Type>::popUp(baseView->treeModel(), tpath);
+                gtk_menu_popup_at_pointer (menu, (const GdkEvent *)event);
+            }
+	    gtk_tree_path_free(tpath);
         } else {
-            retval = ((view_c *)data)->get_xfdir_p()->popup();
+            if (strcmp(iconViewType, "LocalView")==0) {
+                menu = LocalView<Type>::popUp();
+                gtk_menu_popup_at_pointer (menu, (const GdkEvent *)event);
+            }
         }
-        */
 
         return retval;
     }

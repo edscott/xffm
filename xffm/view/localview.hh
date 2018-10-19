@@ -41,6 +41,7 @@ namespace xf
 {
 static GtkMenu *localPopUp=NULL;
 
+static GtkMenu *localPopUpItem=NULL;
 
 template <class Type>
 class LocalView {
@@ -71,21 +72,79 @@ public:
         DBG("noop\n")
     }
 
+    static GtkMenu *popUp(GtkTreeModel *treeModel, GtkTreePath *tpath){
+        GtkTreeIter iter;
+	if (!gtk_tree_model_get_iter (treeModel, &iter, tpath)) return NULL;
+	gchar *aname=NULL;
+	gtk_tree_model_get (treeModel, &iter, 
+		ACTUAL_NAME, &aname,
+		-1);
+        gchar *name = util_c::valid_utf_pathstring(aname);
+        g_free(aname);
+        if (localPopUpItem) {
+            // change title
+            auto title = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(localPopUpItem), "title"));
+            gtk_menu_item_set_label (title, name);
+            g_free(name);
+            return localPopUpItem;
+        }
+         
+        localPopUpItem = GTK_MENU(gtk_menu_new());
+         menuItem_t item[]={
+            {N_("Create a new empty folder inside this folder"), (void *)noop, (void *) localPopUpItem},
+            {N_("Open in New Tab"), (void *)noop, (void *) localPopUpItem},
+            //common buttons /(also an iconsize +/- button)
+            {N_("Copy"), (void *)noop, (void *) localPopUpItem},
+            {N_("Cut"), (void *)noop, (void *) localPopUpItem},
+            {N_("Paste"), (void *)noop, (void *) localPopUpItem},
+            {N_("bcrypt"), (void *)noop, (void *) localPopUpItem},
+            {N_("Rename"), (void *)noop, (void *) localPopUpItem},
+            {N_("Duplicate"), (void *)noop, (void *) localPopUpItem},
+            {N_("Link"), (void *)noop, (void *) localPopUpItem},
+            {N_("Touch"), (void *)noop, (void *) localPopUpItem},
+            {N_("File Information..."), (void *)noop, (void *) localPopUpItem},
+            {N_("Properties"), (void *)noop, (void *) localPopUpItem},
+            {N_("Delete"), (void *)noop, (void *) localPopUpItem},
+            {N_("Mimetype command"), (void *)noop, (void *) localPopUpItem},
+            {N_("autotype_Prun"), (void *)noop, (void *) localPopUpItem},
+            {N_("Open with"), (void *)noop, (void *) localPopUpItem},
+            {N_("Mount the volume associated with this folder"), (void *)noop, (void *) localPopUpItem},
+            {N_("Unmount the volume associated with this folder"), (void *)noop, (void *) localPopUpItem},
+             {NULL,NULL,NULL}};
+        
+        auto p = item;
+        gint i;
+        GtkWidget *title = gtk_menu_item_new_with_label (name); // XXX: use pango markup?
+        g_free(name);
+        gtk_widget_set_sensitive(title, FALSE);
+        gtk_widget_show (title);
+        g_object_set_data(G_OBJECT(localPopUpItem), "title", title);
+        gtk_container_add (GTK_CONTAINER (localPopUpItem), title);
+        for (i=0;p && p->label; p++,i++){
+            GtkWidget *v = gtk_menu_item_new_with_label (_(p->label));
+            gtk_container_add (GTK_CONTAINER (localPopUpItem), v);
+            g_signal_connect ((gpointer) v, "activate", MENUITEM_CALLBACK (p->callback), p->callbackData);
+            gtk_widget_show (v);
+        }
+        gtk_widget_show (GTK_WIDGET(localPopUpItem));
+        return localPopUpItem;
+        
+    }
     static GtkMenu *popUp(void){
         if (localPopUp) return localPopUp;
-        auto menu = GTK_MENU(gtk_menu_new());
+        localPopUp = GTK_MENU(gtk_menu_new());
          menuCheckItem_t item[]={
             {N_("Show hidden files"), (void *)toggleItem, 
                 (void *) "ShowHidden", "ShowHidden"},
             {N_("Show Backup Files"), (void *)toggleItem, 
                 (void *) "ShowBackups", "ShowBackups"},
             
-            {N_("Add bookmark"), (void *)noop, (void *) menu, FALSE},
-            {N_("Remove bookmark"), (void *)noop, (void *) menu, FALSE},
-            {N_("Create a new empty folder inside this folder"), (void *)noop, (void *) menu, FALSE},
-            {N_("Open in New Window"), (void *)noop, (void *) menu, FALSE},
-            {N_("Reload"), (void *)noop, (void *) menu, FALSE},
-            {N_("Close"), (void *)noop, (void *) menu, FALSE},
+            {N_("Add bookmark"), (void *)noop, (void *) localPopUp, FALSE},
+            {N_("Remove bookmark"), (void *)noop, (void *) localPopUp, FALSE},
+            {N_("Create a new empty folder inside this folder"), (void *)noop, (void *) localPopUp, FALSE},
+            {N_("Open in New Window"), (void *)noop, (void *) localPopUp, FALSE},
+            {N_("Reload"), (void *)noop, (void *) localPopUp, FALSE},
+            {N_("Close"), (void *)noop, (void *) localPopUp, FALSE},
             // main menu items
             //{N_("Open in New Tab"), (void *)noop, (void *) menu},
             //{N_("Home"), (void *)noop, (void *) menu},
@@ -121,15 +180,14 @@ public:
                 } 
             }
             else v = gtk_menu_item_new_with_label (_(p->label));
-            gtk_container_add (GTK_CONTAINER (menu), v);
+            gtk_container_add (GTK_CONTAINER (localPopUp), v);
             g_signal_connect ((gpointer) v, "activate", MENUITEM_CALLBACK (p->callback), p->callbackData);
             gtk_widget_show (v);
         }
-        gtk_widget_show (GTK_WIDGET(menu));
-        return menu;
+        gtk_widget_show (GTK_WIDGET(localPopUp));
+        return localPopUp;
         
-    }
-    
+    }      
     static void selectables(GtkIconView *iconview){
         GtkTreePath *tpath = gtk_tree_path_new_first ();
 	GtkTreeModel *treeModel = gtk_icon_view_get_model (iconview);
