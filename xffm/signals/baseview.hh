@@ -304,12 +304,17 @@ public:
                                    &tpath, NULL)) {
             if (strcmp(iconViewType, "LocalView")==0) {
                 menu = LocalView<Type>::popUp(baseView->treeModel(), tpath);
+                g_object_set_data(G_OBJECT(menu),"baseView", (void *)baseView);
                 gtk_menu_popup_at_pointer (menu, (const GdkEvent *)event);
             }
 	    gtk_tree_path_free(tpath);
         } else {
             if (strcmp(iconViewType, "LocalView")==0) {
                 menu = LocalView<Type>::popUp();
+                g_object_set_data(G_OBJECT(menu),"baseView", (void *)baseView);
+                auto oldPath = (gchar *)g_object_get_data(G_OBJECT(menu),"path");
+                g_free(oldPath);
+                g_object_set_data(G_OBJECT(menu),"path", g_strdup(baseView->path()));
                 gtk_menu_popup_at_pointer (menu, (const GdkEvent *)event);
             }
         }

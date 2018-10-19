@@ -42,7 +42,7 @@ namespace xf
 static GtkMenu *localPopUp=NULL;
 
 static GtkMenu *localPopUpItem=NULL;
-
+template <class Type> class BaseView;
 template <class Type>
 class LocalView {
     
@@ -63,8 +63,11 @@ public:
             value = 1;
             gtk_check_menu_item_set_active(menuItem, TRUE);
         }
+        auto baseView = (BaseView<Type> *)g_object_get_data(G_OBJECT(localPopUp), "baseView");
+        auto path = (const gchar *)g_object_get_data(G_OBJECT(localPopUp), "path");
+        
         Dialog<Type>::saveSettings("LocalView", item, value);
-
+        baseView->loadModel(path);
     }
     static void
     noop(GtkMenuItem *menuItem, gpointer data)
@@ -223,7 +226,7 @@ public:
     static gchar *
     item_activated (GtkIconView *iconview, GtkTreePath *tpath, void *data)
     {
-	    DBG("LocalView::item activated\n");
+	    WARN("LocalView::item activated\n");
 	GtkTreeModel *treeModel = gtk_icon_view_get_model (iconview);
 	GtkTreeIter iter;
 	if (!gtk_tree_model_get_iter (treeModel, &iter, tpath)) return NULL;
@@ -346,6 +349,7 @@ private:
         return (directory_list);
     }
 
+public:
     // Convert a dirent entry into a xd_t structure.
     static xd_t *
     get_xd_p(const gchar *directory, struct dirent *d){
@@ -380,7 +384,7 @@ private:
         g_free(xd_p->path);
         g_free(xd_p);
     }
-
+private:
     static GList *
     sort_directory_list(GList *list){
         // FIXME: get sort order and type
@@ -469,15 +473,9 @@ private:
         return FALSE;
     }
 
+public:
     static void
     add_local_item(GtkListStore *list_store, xd_t *xd_p){
-        // FIXME: itemsHash_ is on a object basis, not static item...
-        // if it already exists, do nothing
-	// FIXME: enable itemsHash_ for monitor function.
-        //if (g_hash_table_lookup(itemsHash_, (void *)xd_p->d_name)){    
-        //    DBG("local_monitor_c::not re-adding %s\n", xd_p->d_name);
-        //  return;
-        //}
 
         //FIXME need for shows_hidden only in monitor_ function...
         //      monitor must reload when showHidden changes...
@@ -502,6 +500,9 @@ private:
         // chop file extension (will now appear on the icon). (XXX only for big icons)
         gboolean is_dir;
         gboolean is_reg_not_link;
+
+// FIXME: get HAVE_STRUCT_DIRENT_D_TYPE from cmake...
+#define HAVE_STRUCT_DIRENT_D_TYPE
 #ifdef HAVE_STRUCT_DIRENT_D_TYPE
         is_dir = (xd_p->d_type == DT_DIR);
         is_reg_not_link = (xd_p->d_type == DT_REG && !(xd_p->d_type == DT_LNK));
@@ -563,7 +564,7 @@ private:
 	// FIXME: enable itemsHash_ for monitor function.
         //g_hash_table_replace(itemsHash_, g_strdup(xd_p->d_name), GINT_TO_POINTER(1));
     }
-
+private:
     static gchar *
     get_iconname(xd_t *xd_p){
         return get_iconname(xd_p, TRUE);
@@ -879,7 +880,6 @@ private:
         return emblem;
     }
 
-
     ///////////////////////////////////////////////////////////
 #if 0
     // FIXME: revise this for monitor function...
@@ -1024,6 +1024,10 @@ public:
 
     void
     set_showHidden(gboolean state){showsHidden_ = state;}
+
+
+
+    
     static gboolean stat_func (GtkTreeModel *model,
 				GtkTreePath *path,
 				GtkTreeIter *iter,

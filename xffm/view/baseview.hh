@@ -26,6 +26,7 @@ enum
 
 #include "view/rootview.hh"
 #include "view/localview.hh"
+#include "view/localmonitor.hh"
 #include "signals/baseview.hh"
 
 // Flag bits:
@@ -54,6 +55,8 @@ class BaseView{
 
     gchar *path_;
     page_c *page_;
+
+    LocalMonitor<Type> *localMonitor_;
 
     
     // This mkTreeModel should be static...
@@ -90,6 +93,7 @@ public:
 	page_ = page; 
         path_ = NULL;
         selectionList_ = NULL;
+        localMonitor_ = NULL;
         
         iconView_=createIconview();
 
@@ -197,9 +201,15 @@ public:
     
         gboolean result;
         if (g_file_test(path, G_FILE_TEST_EXISTS)){
+            // stop current monitor
+            if (localMonitor_) delete (localMonitor_);
             result = LocalView<Type>::loadModel(iconView_, path);
             if (!result){
 		ERROR("baseview.hh:loadModel: cannot load view for %s\n", path);
+            } else {
+                // start new monitor
+                localMonitor_ = new(LocalMonitor<Type>)(treeModel_, path);
+                localMonitor_->start_monitor(treeModel_, path);
             }
             return result;
         } else if (!strcmp(path, "xffm:root")==0) {
