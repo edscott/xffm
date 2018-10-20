@@ -179,9 +179,7 @@ public:
 	    g_object_set_data(G_OBJECT(menuItem), "image", image);
 	}
         label = GTK_LABEL(gtk_label_new(""));
-        gchar *markup = g_strdup_printf("<span size=\"larger\" color=\"red\"><b><i>%s</i></b></span>", text);
-        gtk_label_set_markup(label, markup);
-        g_free(markup);
+        gtk_label_set_markup(label, text);
         gtk_box_pack_start(box, GTK_WIDGET(label), FALSE,FALSE,0);
 	gtk_widget_show (GTK_WIDGET(label));
         g_object_set_data(G_OBJECT(menuItem), "label", label);

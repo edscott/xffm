@@ -201,16 +201,20 @@ public:
     
         gboolean result;
         if (g_file_test(path, G_FILE_TEST_EXISTS)){
-            // stop current monitor
-            if (localMonitor_) delete (localMonitor_);
-            result = LocalView<Type>::loadModel(iconView_, path);
-            if (!result){
-		ERROR("baseview.hh:loadModel: cannot load view for %s\n", path);
-            } else {
-                // start new monitor
-                localMonitor_ = new(LocalMonitor<Type>)(treeModel_, path);
-                localMonitor_->start_monitor(treeModel_, path);
-            }
+	    if (g_file_test(path, G_FILE_TEST_IS_DIR)){
+		// stop current monitor
+		if (localMonitor_) delete (localMonitor_);
+		result = LocalView<Type>::loadModel(iconView_, path);
+		if (!result){
+		    ERROR("baseview.hh:loadModel: cannot load view for %s\n", path);
+		} else {
+		    // start new monitor
+		    localMonitor_ = new(LocalMonitor<Type>)(treeModel_, path);
+		    localMonitor_->start_monitor(treeModel_, path);
+		}
+	    } else {
+		result = LocalView<Type>::item_activated(this->iconView(), path);
+	    }
             return result;
         } else if (!strcmp(path, "xffm:root")==0) {
            ERROR("baseview.hh::loadModel(): unknown path \"%s\"\n", path);

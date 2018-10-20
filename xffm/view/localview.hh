@@ -6,6 +6,9 @@
 // FIXME: #include "lite.hh"
 #include "common/util.hh"
 // FIXME: #include "common/mime.hh"
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
 typedef struct xd_t{
     gchar *d_name;
@@ -50,6 +53,53 @@ class LocalView {
     using pixbuf_c = Pixbuf<Type>;
     using util_c = Util<Type>;
 
+    static gchar *fileInfo(const gchar *path){
+	gchar *file = g_find_program_in_path("file");
+	if (!file) return g_strdup("\"file\" command not in path!");
+	gchar *result = NULL; 
+	gchar *command = g_strdup_printf("%s \"%s\"", file, path);
+	result = pipeCommand(command);
+	g_free(command);
+	g_free(file);
+
+	if (result){
+	    if (strchr(result, ':')) return g_strdup(strchr(result, ':')+1);
+	    g_free(result);
+	}
+	return NULL;
+    }
+
+    static gchar *statInfo(const gchar *path){
+	gchar *ls = g_find_program_in_path("ls");
+	gchar *result = NULL; 
+	if (ls) {
+	    gchar *command = g_strdup_printf("%s -lhdH \"%s\"", ls, path);
+	    result = pipeCommand(command);
+	    g_free(command);
+	    g_free(ls);
+	}
+	if (result){
+	    if (strstr(result, path)) *strstr(result, path) = 0;
+	    return (result);
+	}
+	return NULL;
+    }
+
+    static gchar *pipeCommand(const gchar *command){
+	FILE *pipe = popen (command, "r");
+	gchar *extract=NULL;
+	if(pipe) {
+#define PAGE_LINE 256
+	    gchar line[PAGE_LINE];
+	    line[PAGE_LINE - 1] = 0;
+	    fgets (line, PAGE_LINE - 1, pipe);
+	    if (strchr(line, '\n'))*(strchr(line, '\n'))=0;
+	    pclose (pipe);
+	    return g_strdup(line);
+	} 
+	return NULL;
+    }
+
 public:
     static void
     toggleItem(GtkCheckMenuItem *menuItem, gpointer data)
@@ -75,23 +125,45 @@ public:
         DBG("noop\n")
     }
 
+    static void changeTitle(const gchar *iconName, 
+	    const gchar *name, const gchar *path)
+    {
+	// change title
+	auto title = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(localPopUpItem), "title"));
+	gchar *extra = fileInfo(path);
+	gchar *statLine=statInfo(path);
+	gchar *markup = g_strdup_printf("<span size=\"larger\" color=\"red\"><b><i>%s</i></b></span>\n<span color=\"blue\">%s</span>\n<span color=\"green\">%s</span>", name, extra?extra:"no file info", statLine?statLine:"no stat info");
+	gtk_c::menu_item_content(title, iconName, markup, -48);
+	g_free(statLine);
+	g_free(extra);
+	g_free(markup);
+    }
+
     static GtkMenu *popUp(GtkTreeModel *treeModel, GtkTreePath *tpath){
         GtkTreeIter iter;
 	if (!gtk_tree_model_get_iter (treeModel, &iter, tpath)) return NULL;
 	gchar *aname=NULL;
         gchar *iconName=NULL;
+	gchar *path;
 	gtk_tree_model_get (treeModel, &iter, 
 		ACTUAL_NAME, &aname,
 		ICON_NAME, &iconName,
+		PATH, &path,
 		-1);
+	/*if (!st){
+	    st = (struct stat *)calloc(1, sizeof(struct stat));
+	    stat(path, st);
+	    //  FIXME
+	    // STAT only performed if sort order is date or size
+	    // 
+	}*/
         gchar *name = util_c::valid_utf_pathstring(aname);
         g_free(aname);
         if (localPopUpItem) {
-            // change title
-            auto title = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(localPopUpItem), "title"));
-            gtk_c::menu_item_content(title, iconName, name, -48);
-            g_free(name);
-            g_free(iconName);
+	    changeTitle(iconName, name, path);
+	    g_free(name);
+	    g_free(iconName);
+	    g_free(path);
             return localPopUpItem;
         }
          
@@ -120,14 +192,17 @@ public:
         
         auto p = item;
         gint i;
-        //GtkWidget *title = gtk_menu_item_new_with_label (name); // XXX: use pango markup?
-        GtkWidget *title = gtk_c::menu_item_new(iconName, name, -48); // XXX: use pango markup?
-        g_free(iconName);
-        g_free(name);
+	    
+	
+        GtkWidget *title = gtk_c::menu_item_new(iconName, ""); 
         gtk_widget_set_sensitive(title, FALSE);
         gtk_widget_show (title);
         g_object_set_data(G_OBJECT(localPopUpItem), "title", title);
         gtk_container_add (GTK_CONTAINER (localPopUpItem), title);
+	changeTitle(iconName, name, path);
+        g_free(iconName);
+	g_free(path);
+        g_free(name);
         for (i=0;p && p->label; p++,i++){
             GtkWidget *v = gtk_menu_item_new_with_label (_(p->label));
             gtk_container_add (GTK_CONTAINER (localPopUpItem), v);
@@ -223,40 +298,11 @@ public:
 	return "system-file-manager";
     }
 
-    static gchar *
-    item_activated (GtkIconView *iconview, GtkTreePath *tpath, void *data)
+    static gboolean
+    item_activated (GtkIconView *iconview, const gchar *path)
     {
-	    WARN("LocalView::item activated\n");
-	GtkTreeModel *treeModel = gtk_icon_view_get_model (iconview);
-	GtkTreeIter iter;
-	if (!gtk_tree_model_get_iter (treeModel, &iter, tpath)) return NULL;
-	gchar *path=NULL;
-	gtk_tree_model_get (treeModel, &iter, 
-		PATH, &path,
-		-1);
-
-	if (g_file_test(path, G_FILE_TEST_IS_DIR)) {
-	   /* gchar *basename = g_path_get_basename(path);
-	    if (strcmp(basename, "..")==0){
-		gchar *current=g_path_get_dirname(path);
-		gchar *up=g_path_get_dirname(current);
-		g_free(current);
-		g_free(path);
-		path=up;
-	    }*/
-	    WARN("FIXME: stop monitor (if running) \"%s\"\n", path);
-	    // FIXME: stop monitor (if running)
-	    // FIXME: reload treemodel
-	    return(path);
-	    // FIXME: restart Monitor
-	} else {
-	    WARN("FIXME: open or execute file \"%s\"\n", path);
-	    // FIXME: open or execute file
-	}
-
-	//view_p->reload(name);
-	g_free(path);
-	return NULL;
+	WARN("LocalView::item activated: %s\n", path);
+	return FALSE;
     }
 
     // This mkTreeModel should be static...
