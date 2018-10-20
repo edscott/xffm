@@ -53,6 +53,7 @@ class LocalView {
     using pixbuf_c = Pixbuf<Type>;
     using util_c = Util<Type>;
 
+
     static gchar *fileInfo(const gchar *path){
 	gchar *file = g_find_program_in_path("file");
 	if (!file) return g_strdup("\"file\" command not in path!");
@@ -63,8 +64,17 @@ class LocalView {
 	g_free(file);
 
 	if (result){
-	    if (strchr(result, ':')) return g_strdup(strchr(result, ':')+1);
+	    gchar *retval;
+	    if (strchr(result, ':')) retval=g_strdup(strchr(result, ':')+1);
+	    else retval = g_strdup(result);
 	    g_free(result);
+	    gchar *p=retval;
+	    for(;p && *p; p++) {
+		if (*p == '<') *p='[';
+		else if (*p == '>') *p=']';
+	    }
+	    util_c::lineBreaker(retval, 40);
+	    return retval;
 	}
 	return NULL;
     }
@@ -548,7 +558,6 @@ public:
         gboolean is_reg_not_link;
 
 // FIXME: get HAVE_STRUCT_DIRENT_D_TYPE from cmake...
-#define HAVE_STRUCT_DIRENT_D_TYPE
 #ifdef HAVE_STRUCT_DIRENT_D_TYPE
         is_dir = (xd_p->d_type == DT_DIR);
         is_reg_not_link = (xd_p->d_type == DT_REG && !(xd_p->d_type == DT_LNK));

@@ -11,6 +11,22 @@ namespace xf
 template <class Type>
 class Util {
 public:
+    static void 
+    lineBreaker(gchar *inputLine, gint lineLength){
+	if (strlen(inputLine) > lineLength){
+	    gchar *remainder;
+	    gchar *p = inputLine+lineLength;
+	    do{
+		if (*p ==' ' || *p =='_') {
+		    *p = '\n';
+		    remainder = p+1;
+		    break;
+		}
+		p++;
+	    } while (*p);
+	    lineBreaker(remainder, lineLength);
+	}
+    }
     static void
     threadwait (void) {
 	struct timespec thread_wait = {
