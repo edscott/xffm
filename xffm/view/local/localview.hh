@@ -1,14 +1,14 @@
 #ifndef XF_LOCALVIEW__HH
 # define XF_LOCALVIEW__HH
+
 // FIXME: determine HAVE_STRUCT_DIRENT_D_TYPE on configure (for freebsd)
 #define HAVE_STRUCT_DIRENT_D_TYPE 1
 
 // FIXME: #include "lite.hh"
 #include "common/util.hh"
 // FIXME: #include "common/mime.hh"
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
+
+#include "localpopup.hh"
 
 typedef struct xd_t{
     gchar *d_name;
@@ -42,245 +42,17 @@ static pthread_mutex_t readdir_mutex=PTHREAD_MUTEX_INITIALIZER;
 
 namespace xf
 {
-static GtkMenu *localPopUp=NULL;
-
-static GtkMenu *localPopUpItem=NULL;
 template <class Type> class BaseView;
 template <class Type>
-class LocalView {
+class LocalView: public LocalPopUp<Type> {
     
     using gtk_c = Gtk<Type>;
     using pixbuf_c = Pixbuf<Type>;
     using util_c = Util<Type>;
 
 
-    static gchar *fileInfo(const gchar *path){
-	gchar *file = g_find_program_in_path("file");
-	if (!file) return g_strdup("\"file\" command not in path!");
-	gchar *result = NULL; 
-	gchar *command = g_strdup_printf("%s \"%s\"", file, path);
-	result = pipeCommand(command);
-	g_free(command);
-	g_free(file);
-
-	if (result){
-	    gchar *retval;
-	    if (strchr(result, ':')) retval=g_strdup(strchr(result, ':')+1);
-	    else retval = g_strdup(result);
-	    g_free(result);
-	    gchar *p=retval;
-	    for(;p && *p; p++) {
-		if (*p == '<') *p='[';
-		else if (*p == '>') *p=']';
-	    }
-	    util_c::lineBreaker(retval, 40);
-	    return retval;
-	}
-	return NULL;
-    }
-
-    static gchar *statInfo(const gchar *path){
-	gchar *ls = g_find_program_in_path("ls");
-	gchar *result = NULL; 
-	if (ls) {
-	    gchar *command = g_strdup_printf("%s -lhdH \"%s\"", ls, path);
-	    result = pipeCommand(command);
-	    g_free(command);
-	    g_free(ls);
-	}
-	if (result){
-	    if (strstr(result, path)) *strstr(result, path) = 0;
-	    return (result);
-	}
-	return NULL;
-    }
-
-    static gchar *pipeCommand(const gchar *command){
-	FILE *pipe = popen (command, "r");
-	gchar *extract=NULL;
-	if(pipe) {
-#define PAGE_LINE 256
-	    gchar line[PAGE_LINE];
-	    line[PAGE_LINE - 1] = 0;
-	    fgets (line, PAGE_LINE - 1, pipe);
-	    if (strchr(line, '\n'))*(strchr(line, '\n'))=0;
-	    pclose (pipe);
-	    return g_strdup(line);
-	} 
-	return NULL;
-    }
-
 public:
-    static void
-    toggleItem(GtkCheckMenuItem *menuItem, gpointer data)
-    {
-        auto item = (const gchar *)data;
-        gint value; 
-        if (Dialog<Type>::getSettingInteger("LocalView", item) > 0){
-            value = 0;
-            gtk_check_menu_item_set_active(menuItem, FALSE);
-        } else {
-            value = 1;
-            gtk_check_menu_item_set_active(menuItem, TRUE);
-        }
-        auto baseView = (BaseView<Type> *)g_object_get_data(G_OBJECT(localPopUp), "baseView");
-        auto path = (const gchar *)g_object_get_data(G_OBJECT(localPopUp), "path");
-        
-        Dialog<Type>::saveSettings("LocalView", item, value);
-        baseView->loadModel(path);
-    }
-    static void
-    noop(GtkMenuItem *menuItem, gpointer data)
-    {
-        DBG("noop\n")
-    }
 
-    static void changeTitle(const gchar *iconName, 
-	    const gchar *name, const gchar *path)
-    {
-	// change title
-	auto title = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(localPopUpItem), "title"));
-	gchar *extra = fileInfo(path);
-	gchar *statLine=statInfo(path);
-	gchar *markup = g_strdup_printf("<span size=\"larger\" color=\"red\"><b><i>%s</i></b></span>\n<span color=\"blue\">%s</span>\n<span color=\"green\">%s</span>", name, extra?extra:"no file info", statLine?statLine:"no stat info");
-	gtk_c::menu_item_content(title, iconName, markup, -48);
-	g_free(statLine);
-	g_free(extra);
-	g_free(markup);
-    }
-
-    static GtkMenu *popUp(GtkTreeModel *treeModel, GtkTreePath *tpath){
-        GtkTreeIter iter;
-	if (!gtk_tree_model_get_iter (treeModel, &iter, tpath)) return NULL;
-	gchar *aname=NULL;
-        gchar *iconName=NULL;
-	gchar *path;
-	gtk_tree_model_get (treeModel, &iter, 
-		ACTUAL_NAME, &aname,
-		ICON_NAME, &iconName,
-		PATH, &path,
-		-1);
-	/*if (!st){
-	    st = (struct stat *)calloc(1, sizeof(struct stat));
-	    stat(path, st);
-	    //  FIXME
-	    // STAT only performed if sort order is date or size
-	    // 
-	}*/
-        gchar *name = util_c::valid_utf_pathstring(aname);
-        g_free(aname);
-        if (localPopUpItem) {
-	    changeTitle(iconName, name, path);
-	    g_free(name);
-	    g_free(iconName);
-	    g_free(path);
-            return localPopUpItem;
-        }
-         
-        localPopUpItem = GTK_MENU(gtk_menu_new());
-         menuItem_t item[]={
-            {N_("Create a new empty folder inside this folder"), (void *)noop, (void *) localPopUpItem},
-            {N_("Open in New Tab"), (void *)noop, (void *) localPopUpItem},
-            //common buttons /(also an iconsize +/- button)
-            {N_("Copy"), (void *)noop, (void *) localPopUpItem},
-            {N_("Cut"), (void *)noop, (void *) localPopUpItem},
-            {N_("Paste"), (void *)noop, (void *) localPopUpItem},
-            {N_("bcrypt"), (void *)noop, (void *) localPopUpItem},
-            {N_("Rename"), (void *)noop, (void *) localPopUpItem},
-            {N_("Duplicate"), (void *)noop, (void *) localPopUpItem},
-            {N_("Link"), (void *)noop, (void *) localPopUpItem},
-            {N_("Touch"), (void *)noop, (void *) localPopUpItem},
-            {N_("File Information..."), (void *)noop, (void *) localPopUpItem},
-            {N_("Properties"), (void *)noop, (void *) localPopUpItem},
-            {N_("Delete"), (void *)noop, (void *) localPopUpItem},
-            {N_("Mimetype command"), (void *)noop, (void *) localPopUpItem},
-            {N_("autotype_Prun"), (void *)noop, (void *) localPopUpItem},
-            {N_("Open with"), (void *)noop, (void *) localPopUpItem},
-            {N_("Mount the volume associated with this folder"), (void *)noop, (void *) localPopUpItem},
-            {N_("Unmount the volume associated with this folder"), (void *)noop, (void *) localPopUpItem},
-             {NULL,NULL,NULL}};
-        
-        auto p = item;
-        gint i;
-	    
-	
-        GtkWidget *title = gtk_c::menu_item_new(iconName, ""); 
-        gtk_widget_set_sensitive(title, FALSE);
-        gtk_widget_show (title);
-        g_object_set_data(G_OBJECT(localPopUpItem), "title", title);
-        gtk_container_add (GTK_CONTAINER (localPopUpItem), title);
-	changeTitle(iconName, name, path);
-        g_free(iconName);
-	g_free(path);
-        g_free(name);
-        for (i=0;p && p->label; p++,i++){
-            GtkWidget *v = gtk_menu_item_new_with_label (_(p->label));
-            gtk_container_add (GTK_CONTAINER (localPopUpItem), v);
-            g_signal_connect ((gpointer) v, "activate", MENUITEM_CALLBACK (p->callback), p->callbackData);
-            gtk_widget_show (v);
-        }
-        gtk_widget_show (GTK_WIDGET(localPopUpItem));
-        return localPopUpItem;
-        
-    }
-    static GtkMenu *popUp(void){
-        if (localPopUp) return localPopUp;
-        localPopUp = GTK_MENU(gtk_menu_new());
-         menuCheckItem_t item[]={
-            {N_("Show hidden files"), (void *)toggleItem, 
-                (void *) "ShowHidden", "ShowHidden"},
-            {N_("Show Backup Files"), (void *)toggleItem, 
-                (void *) "ShowBackups", "ShowBackups"},
-            
-            {N_("Add bookmark"), (void *)noop, (void *) localPopUp, FALSE},
-            {N_("Remove bookmark"), (void *)noop, (void *) localPopUp, FALSE},
-            {N_("Create a new empty folder inside this folder"), (void *)noop, (void *) localPopUp, FALSE},
-            {N_("Open in New Window"), (void *)noop, (void *) localPopUp, FALSE},
-            {N_("Reload"), (void *)noop, (void *) localPopUp, FALSE},
-            {N_("Close"), (void *)noop, (void *) localPopUp, FALSE},
-            // main menu items
-            //{N_("Open in New Tab"), (void *)noop, (void *) menu},
-            //{N_("Home"), (void *)noop, (void *) menu},
-            //{N_("Open terminal"), (void *)noop, (void *) menu},
-            //{N_("About"), (void *)noop, (void *) menu},
-            //
-            //common buttons /(also an iconsize +/- button)
-            //{N_("Paste"), (void *)noop, (void *) menu},
-            //{N_("Sort data in ascending order"), (void *)noop, (void *) menu},
-            //{N_("Sort data in descending order"), (void *)noop, (void *) menu},
-            //{N_("Sort case insensitive"), (void *)noop, (void *) menu},
-            
-            //{N_("Select All"), (void *)noop, (void *) menu},
-            //{N_("Invert Selection"), (void *)noop, (void *) menu},
-            //{N_("Unselect"), (void *)noop, (void *) menu},
-            //{N_("Select Items Matching..."), (void *)noop, (void *) menu},
-            //{N_("Unselect Items Matching..."), (void *)noop, (void *) menu},
-            //{N_("Sort by name"), (void *)noop, (void *) menu},
-            //{N_("Default sort order"), (void *)noop, (void *) menu},
-            //{N_("Sort by date"), (void *)noop, (void *) menu},
-            //{N_("Sort by size"), (void *)noop, (void *) menu},
-            //{N_("View as list""), (void *)noop, (void *) menu},
-            {NULL,NULL,NULL, FALSE}};
-        
-        auto p = item;
-        gint i;
-        for (i=0;p && p->label; p++,i++){
-            GtkWidget *v;
-            if (p->toggleID){
-                v = gtk_check_menu_item_new_with_label(_(p->label));
-                if (Dialog<Type>::getSettingInteger("LocalView", p->toggleID) > 0){
-                   gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(v), TRUE);
-                } 
-            }
-            else v = gtk_menu_item_new_with_label (_(p->label));
-            gtk_container_add (GTK_CONTAINER (localPopUp), v);
-            g_signal_connect ((gpointer) v, "activate", MENUITEM_CALLBACK (p->callback), p->callbackData);
-            gtk_widget_show (v);
-        }
-        gtk_widget_show (GTK_WIDGET(localPopUp));
-        return localPopUp;
-        
-    }      
     static void selectables(GtkIconView *iconview){
         GtkTreePath *tpath = gtk_tree_path_new_first ();
 	GtkTreeModel *treeModel = gtk_icon_view_get_model (iconview);
@@ -724,10 +496,7 @@ private:
     static const gchar *
     get_mime_iconname(xd_t *xd_p){
         const gchar *basic = "text-x-generic";
-//FIXME: enable Mime template
-#if 1
-        return basic;
-#else
+#if 0
         if (xd_p->mimetype) {
             // here we should get generic-icon from mime-module.xml!
             const gchar *basic = mime_c::get_mimetype_iconname(xd_p->mimetype);
@@ -768,8 +537,8 @@ private:
              "x-package-repository";
     */
         }
-        return  "text-x-generic";
 #endif
+        return basic;
     }
 
     static gchar *
@@ -867,7 +636,7 @@ private:
                 emblem = g;
             }
 // FIXME: enable lite template
-#if 0 
+#if 10 
             else if (lite_c::get_lite_colors(xd_p->mimetype, &red, &green, &blue)){
                 g_free(colors);
                 colors = g_strdup_printf("#%02x%02x%02x", red, green, blue);

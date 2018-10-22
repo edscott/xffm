@@ -25,8 +25,8 @@ enum
 };
 
 #include "view/rootview.hh"
-#include "view/localview.hh"
-#include "view/localmonitor.hh"
+#include "view/local/localview.hh"
+#include "view/local/localmonitor.hh"
 #include "signals/baseview.hh"
 
 // Flag bits:

@@ -27,6 +27,64 @@ public:
 	    lineBreaker(remainder, lineLength);
 	}
     }
+
+    static gchar *fileInfo(const gchar *path){
+	gchar *file = g_find_program_in_path("file");
+	if (!file) return g_strdup("\"file\" command not in path!");
+	gchar *result = NULL; 
+	gchar *command = g_strdup_printf("%s \"%s\"", file, path);
+	result = pipeCommand(command);
+	g_free(command);
+	g_free(file);
+
+	if (result){
+	    gchar *retval;
+	    if (strchr(result, ':')) retval=g_strdup(strchr(result, ':')+1);
+	    else retval = g_strdup(result);
+	    g_free(result);
+	    gchar *p=retval;
+	    for(;p && *p; p++) {
+		if (*p == '<') *p='[';
+		else if (*p == '>') *p=']';
+	    }
+	    lineBreaker(retval, 40);
+	    return retval;
+	}
+	return NULL;
+    }
+
+    static gchar *statInfo(const gchar *path){
+	gchar *ls = g_find_program_in_path("ls");
+	gchar *result = NULL; 
+	if (ls) {
+	    gchar *command = g_strdup_printf("%s -lhdH \"%s\"", ls, path);
+	    result = pipeCommand(command);
+	    g_free(command);
+	    g_free(ls);
+	}
+	if (result){
+	    if (strstr(result, path)) *strstr(result, path) = 0;
+	    return (result);
+	}
+	return NULL;
+    }
+
+    static gchar *pipeCommand(const gchar *command){
+	FILE *pipe = popen (command, "r");
+	gchar *extract=NULL;
+	if(pipe) {
+#define PAGE_LINE 256
+	    gchar line[PAGE_LINE];
+	    line[PAGE_LINE - 1] = 0;
+	    fgets (line, PAGE_LINE - 1, pipe);
+	    if (strchr(line, '\n'))*(strchr(line, '\n'))=0;
+	    pclose (pipe);
+	    return g_strdup(line);
+	} 
+	return NULL;
+    }
+
+
     static void
     threadwait (void) {
 	struct timespec thread_wait = {
