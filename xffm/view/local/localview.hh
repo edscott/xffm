@@ -636,7 +636,7 @@ private:
                 emblem = g;
             }
 // FIXME: enable lite template
-#if 10 
+#if 0 
             else if (lite_c::get_lite_colors(xd_p->mimetype, &red, &green, &blue)){
                 g_free(colors);
                 colors = g_strdup_printf("#%02x%02x%02x", red, green, blue);
