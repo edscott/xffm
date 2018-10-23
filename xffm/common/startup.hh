@@ -15,6 +15,16 @@
 #endif
     /* ignore hangups? */
     (void)signal (SIGHUP, SIG_IGN);
+#define CORE 1
+#ifdef CORE
+    struct rlimit rlim;
+    if (!strstr(argv[0], "getpass")) {
+	fprintf(stderr, "Enabling core dumps...\n");
+    }
+    rlim.rlim_cur = RLIM_INFINITY;
+    rlim.rlim_max = RLIM_INFINITY;
+    setrlimit (RLIMIT_CORE, &rlim);
+#endif
 
     TRACE ("call to setlocale");
     setlocale (LC_ALL, "");
