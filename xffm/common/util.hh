@@ -628,6 +628,21 @@ public:
 	return b;
     }
 
+#define MAX_NAME_LENGTH 13
+    static gboolean
+    chopBeginning (gchar * b) {
+	gint len = strlen (b);
+
+	if(len <= MAX_NAME_LENGTH) {
+	    return FALSE;
+	}
+        gint newStart = len - MAX_NAME_LENGTH;
+        memmove(b, b+newStart, MAX_NAME_LENGTH+1);
+	return TRUE;
+    }
+
+
+
     static gchar *
     compact_line(const gchar *line){
 	//1. Remove leading and trailing whitespace

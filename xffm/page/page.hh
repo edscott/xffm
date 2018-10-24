@@ -208,7 +208,7 @@ public:
             gchar *upbasename=g_path_get_basename(updirname);
             gchar *choppedName;
             if (strcmp(upbasename, G_DIR_SEPARATOR_S)!=0){
-                choppedName = g_strconcat("...", upbasename, G_DIR_SEPARATOR_S, NULL);
+                choppedName = g_strconcat(upbasename, G_DIR_SEPARATOR_S, NULL);
             } else {
                 choppedName = g_strdup(G_DIR_SEPARATOR_S);
             }
@@ -216,7 +216,13 @@ public:
                 gchar *g = g_strconcat(choppedName, basename, G_DIR_SEPARATOR_S, NULL);
                 g_free(choppedName);
                 choppedName = g;
-            } 
+            }
+            if (util_c::chopBeginning(choppedName)) {
+                gchar *g = g_strconcat("...", choppedName, NULL);
+                g_free(choppedName);
+                choppedName = g;
+
+            }
             gchar *q = util_c::utf_string (choppedName);   // non chopped
 
             g_free (basename);
