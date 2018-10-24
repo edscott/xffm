@@ -1,6 +1,7 @@
 #ifndef XF_PAGE_CHILD
 #define XF_PAGE_CHILD
 #include "common/run.hh"
+#include "common/util.hh"
 #include "completion/completion.hh"
 #include "vbuttonbox.hh"
 #include "hbuttonbox.hh"
@@ -24,6 +25,7 @@ class Page :
     protected VButtonBox<Type>
 {
     using gtk_c = Gtk<double>;
+    using util_c = Util<double>;
     using run_c = Run<double>;
     using print_c = Print<double>;
 private:
@@ -189,6 +191,50 @@ public:
 	// final creation will occur with context function.
     }
     const gchar *pageWorkdir(void){return (const gchar *)this->workDir();}
+    static     gchar *
+    get_tab_name (const gchar *path) {
+        gchar *name;
+        if(!path) {
+            name = util_c::utf_string (g_get_host_name());
+        } else if(g_path_is_absolute(path) &&
+                g_file_test (path, G_FILE_TEST_EXISTS)) {
+            gchar *basename = g_path_get_basename (path);
+            gchar *b = util_c::utf_string (basename);   // non chopped
+
+            //util_c::chop_excess (pathname);
+            gchar *dirname= g_path_get_dirname(path);
+            basename=g_path_get_basename(dirname);
+            gchar *updirname = g_path_get_dirname(dirname);
+            gchar *upbasename=g_path_get_basename(updirname);
+            gchar *choppedName;
+            if (strcmp(upbasename, G_DIR_SEPARATOR_S)!=0){
+                choppedName = g_strconcat("...", upbasename, G_DIR_SEPARATOR_S, NULL);
+            } else {
+                choppedName = g_strdup(G_DIR_SEPARATOR_S);
+            }
+            if (strcmp(basename, G_DIR_SEPARATOR_S)!=0){
+                gchar *g = g_strconcat(choppedName, basename, G_DIR_SEPARATOR_S, NULL);
+                g_free(choppedName);
+                choppedName = g;
+            } 
+            gchar *q = util_c::utf_string (choppedName);   // non chopped
+
+            g_free (basename);
+            g_free (upbasename);
+            g_free (dirname);
+            g_free (updirname);
+            g_free (choppedName);
+            //iconname = g_strconcat (display_host, ":  ", b, " (", q, ")", NULL);
+            name = g_strconcat (b, " (", q, ")", NULL);
+            g_free (q);
+            g_free (b);
+        } else {
+            name = util_c::utf_string (path);
+            util_c::chop_excess (name);
+        }
+
+        return (name);
+    }
     void setPageWorkdir(const gchar *dir){
 	TRACE("setPageWorkdir: %s\n", dir);
 	this->setWorkDir(dir);
@@ -197,7 +243,7 @@ public:
         if (g_file_test(dir, G_FILE_TEST_IS_DIR)){
 	    print_c::print(this->output(), "green", g_strdup_printf("cd %s\n", dir));
         }
-    	gchar *g = Completion<Type>::get_terminal_name(this->workDir());
+    	gchar *g = get_tab_name(this->workDir());
 	setPageLabel(g);
 	g_free(g);
     }
