@@ -103,6 +103,7 @@ public:
 
     gboolean
     add_new_item(GFile *file){
+        WARN("add_new_item ...\n");
        xd_t *xd_p = get_xd_p(file);
         if (xd_p) {
             LocalView<Type>::add_local_item(store_, xd_p);
@@ -143,6 +144,7 @@ public:
     gboolean 
     remove_item(GFile *file){
         // find the iter and remove item
+        WARN("remove item...\n");
         gchar *basename = g_file_get_basename(file);
         g_hash_table_remove(itemsHash_, basename); 
         gtk_tree_model_foreach (GTK_TREE_MODEL(store_), rm_func, (gpointer) basename); 
@@ -185,6 +187,7 @@ public:
 
     gboolean 
     restat_item(GFile *src){
+        WARN("add_new_item ...\n");
         gchar *basename = g_file_get_basename(src);
         if (!g_hash_table_lookup(itemsHash_, basename)) {
             g_free(basename);

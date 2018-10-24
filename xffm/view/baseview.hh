@@ -46,7 +46,9 @@ class BaseView{
     gint normal_pixbuf_column_;
     gint actual_name_column_;
 
+
     GtkTreeModel *treeModel_;
+    //GtkTreeModelSort *sortModel_;
     gint dirCount_; 
     GtkIconView *iconView_;
     
@@ -58,7 +60,29 @@ class BaseView{
 
     LocalMonitor<Type> *localMonitor_;
 
-    
+/*    static gint nameCompare(GtkTreeModel *model,
+                           GtkTreeIter *a,
+                           GtkTreeIter *b,
+                           gpointer data){
+        gchar *aName;
+        gchar *bName;
+	gtk_tree_model_get (model, a, ACTUAL_NAME, &aName, -1);
+	gtk_tree_model_get (model, b, ACTUAL_NAME, &bName, -1);
+        if (aName == NULL && bName == NULL) return 0;
+        if (aName == NULL) {
+            g_free(bName);
+            return -1;
+        }
+        if (bName == NULL){
+            g_free(aName);
+            return 1;
+        }
+        gint result = strcmp(aName, bName);
+        g_free(aName);
+        g_free(bName);
+        return result;
+    }*/
+
     // This mkTreeModel should be static...
     static GtkTreeModel *
     mkTreeModel (void)
@@ -83,9 +107,15 @@ class BaseView{
 	    G_TYPE_STRING,   // Preview path
 	    G_TYPE_INT,      // Preview time
 	    GDK_TYPE_PIXBUF); // Preview pixbuf
-		
-
 	return GTK_TREE_MODEL (list_store);
+        /*GtkTreeSortable *sortModel = GTK_TREE_SORTABLE(gtk_tree_model_sort_new_with_model (GTK_TREE_MODEL(list_store)));		
+        gtk_tree_sortable_set_sort_column_id (sortModel,ACTUAL_NAME, GTK_SORT_ASCENDING);
+        gtk_tree_sortable_set_sort_func (sortModel,
+                                 ACTUAL_NAME,
+                                 nameCompare,
+                                 NULL,
+                                 NULL);
+	return GTK_TREE_MODEL (sortModel);*/
     }
 
 public:
@@ -102,6 +132,8 @@ public:
         //source_ = GTK_WIDGET(iconView_);
         destination_ = GTK_WIDGET(iconView_);
 	
+        //sortModel_ = GTK_TREE_MODEL_SORT(mkTreeModel());
+	//treeModel_ = gtk_tree_model_sort_get_model(sortModel_);
 	treeModel_ = mkTreeModel();
         // Enable dnd by default.
         // Local object will disable if not required.
