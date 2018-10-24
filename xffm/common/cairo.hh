@@ -439,7 +439,7 @@ public:
 
 	GdkPixbuf   *t_pixbuf = NULL;
 	gchar *layout_text;
-	    layout_text = g_strdup_printf("<span foreground=\"yellow\" background=\"blue\" size=\"%s\">%s </span>", text_size, _(icon_text));
+	    layout_text = g_strdup_printf("<span foreground=\"black\" background=\"#ffffff\" size=\"%s\" font_weight=\"bold\">%s </span>", text_size, _(icon_text));
 
 	PangoContext *context = gdk_pango_context_get_for_screen (gdk_screen_get_default());
 

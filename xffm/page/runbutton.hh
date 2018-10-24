@@ -134,14 +134,15 @@ public:
 
 
     void create_menu(void){
-	const gchar *items[]={N_("Renice Process"),N_("Suspend (STOP)"),N_("Continue (CONT)"),
-	    N_("Interrupt (INT)"),N_("Hangup (HUP)"),N_("User 1 (USR1)"),
-	    N_("User 2 (USR2)"),N_("Terminate (TERM)"),N_("Kill (KILL)"),
+	const gchar *items[]={N_("Renice Process"),N_("Suspend"),N_("Continue"),
+	    N_("Interrupt"),N_("Hangup"),N_("User 1 (USR1)"),
+	    N_("User 2 (USR2)"),N_("Terminate"),N_("Abort"),
+            N_("Kill"),
 	    N_("Segmentation fault"),NULL};
 	gint signals[] = {
 	    -1,
 	    SIGSTOP, SIGCONT, SIGINT, SIGHUP, SIGUSR1, 
-	    SIGUSR2, SIGTERM, SIGKILL, SIGSEGV};
+	    SIGUSR2, SIGTERM, SIGABRT, SIGKILL, SIGSEGV};
 
 
 	

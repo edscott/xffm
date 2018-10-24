@@ -19,6 +19,8 @@ typedef struct xd_t{
     const gchar *mimefile;
 }xd_t;
 static pthread_mutex_t readdir_mutex=PTHREAD_MUTEX_INITIALIZER;
+// Maximum character length to put file extension as a icon label:
+#define EXTENSION_LABEL_LENGTH 4
 
 #define MAX_AUTO_STAT 500
 
@@ -340,9 +342,11 @@ public:
         if (is_reg_not_link) {
             gchar *t = g_strdup(xd_p->d_name);
             if (strchr(t, '.') && strrchr(t, '.') != t){
-                *strrchr(t, '.') = 0;
-                g_free(utf_name);
-                utf_name = util_c::utf_string(t);
+                if (strlen(strchr(t, '.')+1) <= EXTENSION_LABEL_LENGTH) {
+                    *strrchr(t, '.') = 0;
+                    g_free(utf_name);
+                    utf_name = util_c::utf_string(t);
+                }
                 g_free(t);
             }
         }
@@ -643,7 +647,8 @@ private:
             }
 #endif
             gchar *extension = g_strdup("");
-            if (strrchr(xd_p->d_name, '.') && strrchr(xd_p->d_name, '.') != xd_p->d_name) {
+            if (strrchr(xd_p->d_name, '.') && strrchr(xd_p->d_name, '.') != xd_p->d_name
+                    && strlen(strrchr(xd_p->d_name, '.')) <= EXTENSION_LABEL_LENGTH) {
                 extension = g_strconcat("*", strrchr(xd_p->d_name, '.')+1, NULL) ;
             }
             if (!xd_p->st) {
