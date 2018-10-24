@@ -255,7 +255,7 @@ private:
         g_signal_connect (notebook_, "select-page", 
                 NOTEBOOK_6_CALLBACK (notebookSignals<double>::select_page), NULL);
         g_signal_connect (notebook_, "switch-page", 
-                NOTEBOOK_CALLBACK (notebookSignals<double>::switch_page), NULL);
+                NOTEBOOK_CALLBACK (notebookSignals<double>::switch_page), (void *)this);
 
     }
 #if 0    

@@ -16,6 +16,14 @@ public:
                    gpointer     data)
     {
         TRACE("switch_page: new page=%d\n", new_page);
+        auto notebook_p = (Notebook<Type> *)data;
+        auto page_p = (Page<Type> *)notebook_p->currentPageObject(new_page);
+        if (!page_p){
+            WARN("page_p is null\n");
+            return;
+        }
+
+        page_p->setDialogTitle();
 
 
         //FIXME: what else?

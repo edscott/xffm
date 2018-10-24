@@ -241,6 +241,14 @@ public:
 
         return (name);
     }
+    void setDialogTitle(void){
+        gchar *gg = Completion<Type>::get_terminal_name(this->workDir());
+        gchar *g = g_strconcat("xffm: ", gg, NULL);
+        g_free(gg); 
+        auto dialog = (Dialog<Type> *)parent_;
+        dialog->setDialogTitle(g);
+	g_free(g);
+    }
     void setPageWorkdir(const gchar *dir){
 	TRACE("setPageWorkdir: %s\n", dir);
 	this->setWorkDir(dir);
@@ -252,6 +260,7 @@ public:
     	gchar *g = get_tab_name(this->workDir());
 	setPageLabel(g);
 	g_free(g);
+        setDialogTitle();
     }
 
     void setTabIcon(const gchar *icon){
