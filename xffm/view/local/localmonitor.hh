@@ -106,6 +106,8 @@ public:
         WARN("add_new_item ...\n");
        xd_t *xd_p = get_xd_p(file);
         if (xd_p) {
+            // FIXME: here we should insert according to sort order...
+            // LocalView<Type>::insertLocalItem(store, xd_p);
             LocalView<Type>::add_local_item(store_, xd_p);
             g_hash_table_replace(itemsHash_, g_strdup(xd_p->d_name), GINT_TO_POINTER(1));
             LocalView<Type>::free_xd_p(xd_p);
@@ -187,7 +189,7 @@ public:
 
     gboolean 
     restat_item(GFile *src){
-        WARN("add_new_item ...\n");
+        WARN("restat_item ...\n");
         gchar *basename = g_file_get_basename(src);
         if (!g_hash_table_lookup(itemsHash_, basename)) {
             g_free(basename);
@@ -227,13 +229,11 @@ private:
                 DBG("Received  CREATED (%d): \"%s\", \"%s\"\n", event, f, s);
                 p->add_new_item(first);
                 break;
-            case G_FILE_MONITOR_EVENT_CHANGES_DONE_HINT:
-               DBG("Received  CHANGES_DONE_HINT (%d): \"%s\", \"%s\"\n", event, f, s);
-                p->restat_item(first);
-                // if image, then reload the pixbuf
-                break;
+
             case G_FILE_MONITOR_EVENT_CHANGED:
                 DBG("Received  CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
+                p->restat_item(first);
+                //FIXME:  if image, then reload the pixbuf
                 break;
             case G_FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED:
                 DBG("Received  ATTRIBUTE_CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
@@ -251,7 +251,11 @@ private:
                 p->remove_item(first);
                 p->add_new_item(second);
                 break;
-        }
+            case G_FILE_MONITOR_EVENT_CHANGES_DONE_HINT:
+               DBG("Received  CHANGES_DONE_HINT (%d): \"%s\", \"%s\"\n", event, f, s);
+                //p->restat_item(first);
+                // if image, then reload the pixbuf
+                break;        }
         g_free(f);
         g_free(s);
     }
