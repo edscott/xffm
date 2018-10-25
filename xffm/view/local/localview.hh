@@ -199,6 +199,11 @@ public:
         xd_p->st = NULL;
 #ifdef HAVE_STRUCT_DIRENT_D_TYPE
         xd_p->d_type = d->d_type;
+        // stat symbolic links now...
+        if (xd_p->d_type == DT_LNK){
+            xd_p->st = (struct stat *)calloc(1, sizeof(struct stat));
+            stat(xd_p->path, xd_p->st);
+        }
 #else
         xd_p->d_type = 0;
 #endif
@@ -213,6 +218,34 @@ public:
         g_free(xd_p->d_name);
         g_free(xd_p->path);
         g_free(xd_p);
+    }
+    
+    static gint
+    compare_by_name (const void *a, const void *b) {
+        // compare by name, directories or symlinks to directories on top
+        const xd_t *xd_a = (const xd_t *)a;
+        const xd_t *xd_b = (const xd_t *)b;
+
+        if (strcmp(xd_a->d_name, "..")==0) return -1;
+        if (strcmp(xd_b->d_name, "..")==0) return 1;
+
+        gboolean a_cond = FALSE;
+        gboolean b_cond = FALSE;
+
+#ifdef HAVE_STRUCT_DIRENT_D_TYPE
+        a_cond = ((xd_a->d_type == DT_DIR )||(xd_a->st && S_ISDIR(xd_a->st->st_mode)));
+        b_cond = ((xd_b->d_type == DT_DIR )||(xd_b->st && S_ISDIR(xd_b->st->st_mode)));
+#else
+        if (xd_a->st && xd_b->st && 
+                (S_ISDIR(xd_a->st->st_mode) || S_ISDIR(xd_b->st->st_mode))) {
+            a_cond = (S_ISDIR(xd_a->st->st_mode)|| S_ISDIR(xd_a->st->st_mode));
+            b_cond = (S_ISDIR(xd_b->st->st_mode)|| S_ISDIR(xd_b->st->st_mode));
+        } 
+#endif
+
+        if (a_cond && !b_cond) return -1; 
+        if (!a_cond && b_cond) return 1;
+        return strcasecmp(xd_a->d_name, xd_b->d_name);
     }
 private:
     static GList *
@@ -238,34 +271,6 @@ private:
         }
         // Default sort order:
         return g_list_sort (list,compare_by_name);
-    }
-    
-    static gint
-    compare_by_name (const void *a, const void *b) {
-        // compare by name, directories or symlinks to directories on top
-        const xd_t *xd_a = (const xd_t *)a;
-        const xd_t *xd_b = (const xd_t *)b;
-
-        if (strcmp(xd_a->d_name, "..")==0) return -1;
-        if (strcmp(xd_b->d_name, "..")==0) return 1;
-
-        gboolean a_cond = FALSE;
-        gboolean b_cond = FALSE;
-
-#ifdef HAVE_STRUCT_DIRENT_D_TYPE
-        a_cond = (xd_a->d_type == DT_DIR);
-        b_cond = (xd_b->d_type == DT_DIR);
-#else
-        if (xd_a->st && xd_b->st && 
-                (S_ISDIR(xd_a->st->st_mode) || S_ISDIR(xd_b->st->st_mode))) {
-            a_cond = (S_ISDIR(xd_a->st->st_mode));
-            b_cond = (S_ISDIR(xd_b->st->st_mode));
-        } 
-#endif
-
-        if (a_cond && !b_cond) return -1; 
-        if (!a_cond && b_cond) return 1;
-        return strcasecmp(xd_a->d_name, xd_b->d_name);
     }
 
     static gint
@@ -417,19 +422,18 @@ private:
         // Directories:
         if (strcmp(xd_p->d_name, "..")==0) return  g_strdup("go-up");
 #ifdef HAVE_STRUCT_DIRENT_D_TYPE
-        if (xd_p->d_type == DT_DIR) {
-            if (strcmp(xd_p->path, g_get_home_dir())==0) {
-                return get_home_iconname(xd_p->d_name);
-                
-            }
-            return  g_strdup("folder");
-        }
 
         // Symlinks:
-    /*    if (xd_p->d_type == xd_p->d_type == DT_LNK) {
+    /*    if (xd_p->d_type == DT_LNK) {
             return  g_strdup("text-x-generic-template/SW/emblem-symbolic-link/2.0/220");
         }
     */
+        if ((xd_p->d_type == DT_DIR )||(xd_p->st && S_ISDIR(xd_p->st->st_mode))) {
+            if (strcmp(xd_p->path, g_get_home_dir())==0) {
+                return get_home_iconname(xd_p->d_name);
+            }
+            return  g_strdup("folder");
+        }
         // Character device:
         if (xd_p->d_type == DT_CHR ) {
             return  g_strdup("text-x-generic-template/SW/input-keyboard-symbolic/2.0/220");
