@@ -4,7 +4,7 @@
 // FIXME: determine HAVE_STRUCT_DIRENT_D_TYPE on configure (for freebsd)
 #define HAVE_STRUCT_DIRENT_D_TYPE 1
 
-// FIXME: #include "lite.hh"
+#include "common/lite.hh"
 #include "common/util.hh"
 // FIXME: #include "common/mime.hh"
 
@@ -693,13 +693,10 @@ private:
                 g_free(emblem); 
                 emblem = g;
             }
-// FIXME: enable lite template
-#if 0 
-            else if (lite_c::get_lite_colors(xd_p->mimetype, &red, &green, &blue)){
+            else if (Lite<Type>::get_lite_colors(xd_p->mimetype, &red, &green, &blue)){
                 g_free(colors);
                 colors = g_strdup_printf("#%02x%02x%02x", red, green, blue);
             }
-#endif
             gchar *extension = g_strdup("");
             if (strrchr(xd_p->d_name, '.') && strrchr(xd_p->d_name, '.') != xd_p->d_name
                     && strlen(strrchr(xd_p->d_name, '.')) <= EXTENSION_LABEL_LENGTH) {
@@ -748,17 +745,14 @@ private:
             g_free(extension);
             g_free(emblem); 
             emblem = g;
-// FIXME: enable lite template
-#if 0 
             if (use_lite) {
-                const gchar *lite_emblem = lite_c::get_lite_emblem(xd_p->mimetype);
+                const gchar *lite_emblem = Lite<Type>::get_lite_emblem(xd_p->mimetype);
                 if (lite_emblem){
                     g = g_strconcat(emblem, "/NE/", lite_emblem, "/1.8/200", NULL); 
                     g_free(emblem); 
                     emblem = g;
                 }
             } 
-#endif
         }
         return emblem;
     }
