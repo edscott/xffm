@@ -152,7 +152,7 @@ public:
 	for (i=0;p && *p; p++,i++){
 	    GtkWidget *v = gtk_menu_item_new_with_label (_(*p));
 	    g_object_set_data(G_OBJECT(v), "run_button_p", (void *)this);
-	    fprintf(stderr, "set data: (%p) -> %p\n", (void *)v, (void *)this);
+	    TRACE("set data: (%p) -> %p\n", (void *)v, (void *)this);
 	    gtk_container_add (GTK_CONTAINER (menu_), v);
 	    g_signal_connect ((gpointer) v, "activate", MENUITEM_CALLBACK (RunButtonSignals<Type>::ps_signal), GINT_TO_POINTER(signals[i]));
 	    gtk_widget_show (v);
@@ -224,9 +224,6 @@ public:
 	auto button = GTK_MENU_BUTTON(gtk_menu_button_new ());
 	run_button_p->setButton(button);
 	TRACE("make_run_data_button... \n");
-	//GMenuModel *menu_ = run_button_p->get_signal_menu_model();
-	//fprintf(stderr, "make_run_data_button: menu_ model is %p\n", menu_);
-	//gtk_menu_button_set_menu_model (GTK_MENU_BUTTON (button), menu_);
 	gtk_menu_button_set_popup (button,  GTK_WIDGET(run_button_p->menu()));
 	    
 	// static:
@@ -392,7 +389,7 @@ public:
 	    pid = shell_child_pid(pid);
 	}
 	    
-	fprintf(stderr, "signal to pid: %ld (inShell()=%d sudo=%d)\n", pid, inShell(), sudoize);
+	DBG("signal to pid: %ld (inShell()=%d sudo=%d)\n", pid, inShell(), sudoize);
 	if (sudoize) {
 	    //        1.undetached child will remain as zombie
 	    //        2.sudo will remain in wait state and button will not disappear

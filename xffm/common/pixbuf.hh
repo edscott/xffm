@@ -49,7 +49,7 @@ public:
 	GdkPixbuf *pixbuf = pixbuf_hash_c::find_in_pixbuf_hash(icon_name, pixels);
 	if (pixbuf) return pixbuf;
 	// Not found, huh?
-	DBG("Create pixbuf and put in hashtable: \"%s\"\n", icon_name);
+	TRACE("Create pixbuf and put in hashtable: \"%s\"\n", icon_name);
 	pixbuf = pixbuf_icons_c::absolute_path_icon(icon_name, pixels);
 
 	if (!pixbuf){

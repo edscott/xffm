@@ -76,7 +76,7 @@ public:
 	}
 
 
-        DBG("window_keyboard_event\n");
+        TRACE("window_keyboard_event\n");
         auto dialog_p = (Dialog<Type> *)data;
         auto page_p = dialog_p->currentPageObject();
 
@@ -131,7 +131,7 @@ public:
         static gint lastX=-1;
         static gint lastY=-1;
         if (allocation->width == lastX && allocation->height == lastY) return;
-	DBG("dialog.hh::onSizeAllocate():SIZE allocate\n");
+	TRACE("dialog.hh::onSizeAllocate():SIZE allocate\n");
         lastX = allocation->width;
         lastY = allocation->height;
 

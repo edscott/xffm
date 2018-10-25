@@ -332,7 +332,7 @@ public:
     keyboardEvent( GdkEventKey * event) {
 
 
-        DBG("page keyboard_event\n");
+        TRACE("page keyboard_event\n");
 
         // <ESC> Toggles to iconview mode
         // <TAB> Toggles to terminal mode (partial output)

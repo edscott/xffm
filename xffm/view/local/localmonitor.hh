@@ -48,7 +48,7 @@ public:
         // add all initial items to hash
         gtk_tree_model_foreach (treeModel, add2hash, (void *)itemsHash_);
         store_ = GTK_LIST_STORE(treeModel);
-        WARN( "*** start_monitor: %s\n", path);
+        TRACE( "*** start_monitor: %s\n", path);
         if (gfile_) g_object_unref(gfile_);
         gfile_ = g_file_new_for_path (path);
         GError *error=NULL;
@@ -68,7 +68,7 @@ public:
     void 
     stop_monitor(void){
 	gchar *p = g_file_get_path(gfile_);
-	WARN("*** stop_monitor at: %s\n", p);
+	TRACE("*** stop_monitor at: %s\n", p);
 	g_free(p);
 	g_file_monitor_cancel(monitor_);
 	while (gtk_events_pending())gtk_main_iteration();  
@@ -103,12 +103,13 @@ public:
 
     gboolean
     add_new_item(GFile *file){
-        WARN("add_new_item ...\n");
+        TRACE("add_new_item ...\n");
        xd_t *xd_p = get_xd_p(file);
         if (xd_p) {
-            // FIXME: here we should insert according to sort order...
-            // LocalView<Type>::insertLocalItem(store, xd_p);
-            LocalView<Type>::add_local_item(store_, xd_p);
+            // here we should insert according to sort order...
+            LocalView<Type>::insertLocalItem(store_, xd_p);
+            // this just appends:
+            //LocalView<Type>::add_local_item(store_, xd_p);
             g_hash_table_replace(itemsHash_, g_strdup(xd_p->d_name), GINT_TO_POINTER(1));
             LocalView<Type>::free_xd_p(xd_p);
             return TRUE;
@@ -123,7 +124,7 @@ public:
 	gchar *text;
 	struct stat *st_p=NULL;
 	gtk_tree_model_get (model, iter, 
-		STAT, &st_p, 
+		ST_DATA, &st_p, 
 		ACTUAL_NAME, &text, 
 		-1);  
 	
@@ -131,7 +132,7 @@ public:
 	    g_free(text);
 	    return FALSE;
 	}
-	DBG("removing %s from treemodel.\n", text);
+	TRACE("removing %s from treemodel.\n", text);
 	GtkListStore *store = GTK_LIST_STORE(model);
 
     //  free stat record, if any
@@ -146,7 +147,7 @@ public:
     gboolean 
     remove_item(GFile *file){
         // find the iter and remove item
-        WARN("remove item...\n");
+        TRACE("remove item...\n");
         gchar *basename = g_file_get_basename(file);
         g_hash_table_remove(itemsHash_, basename); 
         gtk_tree_model_foreach (GTK_TREE_MODEL(store_), rm_func, (gpointer) basename); 
@@ -163,7 +164,7 @@ public:
 	gchar *basename = g_path_get_basename((gchar *)data);
 	gtk_tree_model_get (model, iter, 
 		ACTUAL_NAME, &text, 
-		STAT, &st, 
+		ST_DATA, &st, 
 		-1);  
 	
 	if (strcmp(basename, text)){
@@ -182,14 +183,14 @@ public:
 	    return FALSE;
 	}
 
-	gtk_list_store_set (store, iter, STAT,st, -1);
+	gtk_list_store_set (store, iter, ST_DATA, st, -1);
 
 	return TRUE;
     }
 
     gboolean 
     restat_item(GFile *src){
-        WARN("restat_item ...\n");
+        TRACE("restat_item ...\n");
         gchar *basename = g_file_get_basename(src);
         if (!g_hash_table_lookup(itemsHash_, basename)) {
             g_free(basename);
@@ -215,44 +216,44 @@ private:
         gchar *s= second? g_file_get_basename (second):g_strdup("--");
        
 
-        DBG("*** monitor_f call...\n");
+        TRACE("*** monitor_f call...\n");
         auto p = (LocalMonitor<Type> *)data;
 
         switch (event){
             case G_FILE_MONITOR_EVENT_DELETED:
             case G_FILE_MONITOR_EVENT_MOVED_OUT:
-                DBG("Received DELETED  (%d): \"%s\", \"%s\"\n", event, f, s);
+                TRACE("Received DELETED  (%d): \"%s\", \"%s\"\n", event, f, s);
                 p->remove_item(first);
                 break;
             case G_FILE_MONITOR_EVENT_CREATED:
             case G_FILE_MONITOR_EVENT_MOVED_IN:
-                DBG("Received  CREATED (%d): \"%s\", \"%s\"\n", event, f, s);
+                TRACE("Received  CREATED (%d): \"%s\", \"%s\"\n", event, f, s);
                 p->add_new_item(first);
                 break;
 
             case G_FILE_MONITOR_EVENT_CHANGED:
-                DBG("Received  CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
+                TRACE("Received  CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
                 p->restat_item(first);
                 //FIXME:  if image, then reload the pixbuf
                 break;
             case G_FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED:
-                DBG("Received  ATTRIBUTE_CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
+                TRACE("Received  ATTRIBUTE_CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
                 p->restat_item(first);
                 break;
             case G_FILE_MONITOR_EVENT_PRE_UNMOUNT:
-                DBG("Received  PRE_UNMOUNT (%d): \"%s\", \"%s\"\n", event, f, s);
+                TRACE("Received  PRE_UNMOUNT (%d): \"%s\", \"%s\"\n", event, f, s);
                 break;
             case G_FILE_MONITOR_EVENT_UNMOUNTED:
-                DBG("Received  UNMOUNTED (%d): \"%s\", \"%s\"\n", event, f, s);
+                TRACE("Received  UNMOUNTED (%d): \"%s\", \"%s\"\n", event, f, s);
                 break;
             case G_FILE_MONITOR_EVENT_MOVED:
             case G_FILE_MONITOR_EVENT_RENAMED:
-                DBG("Received  MOVED (%d): \"%s\", \"%s\"\n", event, f, s);
+                TRACE("Received  MOVED (%d): \"%s\", \"%s\"\n", event, f, s);
                 p->remove_item(first);
                 p->add_new_item(second);
                 break;
             case G_FILE_MONITOR_EVENT_CHANGES_DONE_HINT:
-               DBG("Received  CHANGES_DONE_HINT (%d): \"%s\", \"%s\"\n", event, f, s);
+               TRACE("Received  CHANGES_DONE_HINT (%d): \"%s\", \"%s\"\n", event, f, s);
                 //p->restat_item(first);
                 // if image, then reload the pixbuf
                 break;        }

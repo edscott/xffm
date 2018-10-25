@@ -19,6 +19,8 @@ typedef struct xd_t{
     const gchar *mimefile;
 }xd_t;
 static pthread_mutex_t readdir_mutex=PTHREAD_MUTEX_INITIALIZER;
+static gboolean inserted_;
+
 // Maximum character length to put file extension as a icon label:
 #define EXTENSION_LABEL_LENGTH 4
 
@@ -143,9 +145,9 @@ private:
             return NULL;
         }
     //  mutex protect...
-        DBG("** requesting readdir mutex for %s...\n", path);
+        TRACE("** requesting readdir mutex for %s...\n", path);
         pthread_mutex_lock(&readdir_mutex);
-        DBG( "++ mutex for %s obtained.\n", path);
+        TRACE( "++ mutex for %s obtained.\n", path);
         struct dirent *d; // static pointer
         errno=0;
         TRACE( "shows hidden=%d\n", showHidden);
@@ -165,7 +167,7 @@ private:
         }
     // unlock mutex
         pthread_mutex_unlock(&readdir_mutex);
-        DBG("-- mutex for %s released.\n", path);
+        TRACE("-- mutex for %s released.\n", path);
 
         closedir (directory);
 
@@ -217,6 +219,8 @@ public:
         //g_free(xd_p->mimetype);
         g_free(xd_p->d_name);
         g_free(xd_p->path);
+        //this is a problematic memory leak (FIXME)
+        //g_free(xd_p->st);
         g_free(xd_p);
     }
     
@@ -250,7 +254,8 @@ public:
 private:
     static GList *
     sort_directory_list(GList *list){
-        // FIXME: get sort order and type
+        // FIXME:  only do stat when sort order is date or size
+        /*
         gboolean do_stat = (g_list_length(list) <= MAX_AUTO_STAT);
 
         if (do_stat){
@@ -269,6 +274,7 @@ private:
                 //xd_p->mimefile = g_strdup(mime_c::mime_file(xd_p->d_name)); // 
             }
         }
+        */
         // Default sort order:
         return g_list_sort (list,compare_by_name);
     }
@@ -308,10 +314,44 @@ private:
         return FALSE;
     }
 
+private:
+    static gboolean
+    insertItem(GtkTreeModel *treeModel, GtkTreePath *path, GtkTreeIter *iter, gpointer data){
+        // get current xd_p
+        struct stat *st;
+        gchar *name;
+        gint type;
+        gtk_tree_model_get(treeModel, iter, ST_DATA, &st, ACTUAL_NAME, &name, TYPE, &type, -1);
+        xd_t *xd_p = (xd_t *)data;
+        xd_t *xd_b = (xd_t *)calloc(1, sizeof(xd_t));
+        xd_b->d_name = name;
+        xd_b->d_type = type;
+        xd_b->st = st;
+        TRACE("compare %s with iconview item \"%s\"\n", xd_p->d_name, name);
+        if (compare_by_name((void *)xd_p, (void *)(xd_b)) < 0){
+            GtkTreeIter newIter;
+            gtk_list_store_insert_before (GTK_LIST_STORE(treeModel), &newIter, iter);
+            add_local_item(GTK_LIST_STORE(treeModel), &newIter, xd_p);
+            free_xd_p(xd_b);
+            inserted_ = TRUE;
+            return inserted_;
+        }
+        free_xd_p(xd_b);
+        
+        return inserted_;
+    }
+
+
 public:
     static void
-    add_local_item(GtkListStore *list_store, xd_t *xd_p){
+    insertLocalItem(GtkListStore *listStore, xd_t *xd_p){
+        inserted_=FALSE;
+        gtk_tree_model_foreach (GTK_TREE_MODEL(listStore), insertItem, (void *)xd_p);
+        if (!inserted_) add_local_item(listStore, xd_p);
+    }
 
+    static void
+    add_local_item(GtkListStore *list_store, xd_t *xd_p){
         //FIXME need for shows_hidden only in monitor_ function...
         //      monitor must reload when showHidden changes...
         gboolean showHidden = (Dialog<Type>::getSettingInteger("LocalView", "ShowHidden") > 0);
@@ -322,9 +362,19 @@ public:
         if (!showBackups && backupType(xd_p->d_name)){
             return;
         }
-        
+
         GtkTreeIter iter;
+        //gtk_list_store_prepend (list_store, &iter);
         gtk_list_store_append (list_store, &iter);
+        add_local_item(list_store, &iter, xd_p);
+    }
+
+private:
+    static void
+    add_local_item(GtkListStore *list_store, GtkTreeIter *iter, xd_t *xd_p){
+
+
+        
         gchar *utf_name = util_c::utf_string(xd_p->d_name);
         // plain extension mimetype fallback
         // FIXME: enable mime_c template
@@ -380,7 +430,7 @@ public:
         GdkPixbuf *highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);
 	guint flags=0;
 	//setSelectable(xd_p->d_name, flags);
-        gtk_list_store_set (list_store, &iter, 
+        gtk_list_store_set (list_store, iter, 
 		FLAGS, flags,
                 DISPLAY_NAME, utf_name,
                 ACTUAL_NAME, xd_p->d_name,
@@ -390,7 +440,7 @@ public:
                 NORMAL_PIXBUF, normal_pixbuf, 
                 HIGHLIGHT_PIXBUF, highlight_pixbuf, 
                 TYPE,xd_p->d_type, 
-                STAT,xd_p->st, 
+                ST_DATA,xd_p->st, 
                 MIMETYPE, xd_p->mimetype,
                 MIMEFILE, xd_p->mimefile, // may be null here.
                 -1);
@@ -712,273 +762,6 @@ private:
         }
         return emblem;
     }
-
-    ///////////////////////////////////////////////////////////
-#if 0
-    // FIXME: revise this for monitor function...
-    static xd_t *
-    get_xd_p(GFile *first){
-	gchar *path = g_file_get_path(gfile_);
-	gchar *basename = g_file_get_basename(first);
-	struct dirent *d; // static pointer
-	TRACE("looking for %s info\n", basename);
-	DIR *directory = opendir(path);
-	xd_t *xd_p = NULL;
-	if (directory) {
-	  while ((d = readdir(directory))  != NULL) {
-	    if(strcmp (d->d_name, basename)) continue;
-	    xd_p = get_xd_p(d);
-	    break;
-	  }
-	  closedir (directory);
-	} else {
-	  g_warning("monitor_f(): opendir %s: %s\n", path, strerror(errno));
-	}
-	g_free(basename); 
-	g_free(path); 
-	return xd_p;
-    }
-
-    GHashTable *itemsHash_;
-    GCancellable *cancellable_;
-    GFile *gfile_;
-    GFileMonitor *monitor_;
-    gboolean showsHidden_;
-    GtkListStore *store_;
-    
-    //using lite_c = Lite<Type>;
-    //using mime_c = Mime<Type>;
-public:
-    LocalView(const gchar *path){
-	itemsHash_ = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
-	cancellable_ = g_cancellable_new ();
-	gfile_ = g_file_new_for_path (path);
-	monitor_ = NULL;
-	showsHidden_ = FALSE;
-
-    }
-    ~LocalView(void){
-	stop_monitor();
-	g_hash_table_destroy(itemsHash_);
-	//g_cancellable_cancel (cancellable_);
-	//g_object_unref(cancellable_);
-	if (gfile_) g_object_unref(gfile_);
-	if (monitor_) g_object_unref(monitor_);
-    }
-
-    GFile *
-    gfile(void){ return gfile_;}
-    
-
-    static const gchar *
-    get_xfdir_iconname(void){
-	return "system-file-manager";
-    }
-
-    static void
-    item_activated (GtkIconView *iconview, GtkTreePath *tpath, void *data)
-    {
-	    DBG("LocalView::item activated\n");
-	GtkTreeModel *treeModel = gtk_icon_view_get_model (iconview);
-	GtkTreeIter iter;
-	if (!gtk_tree_model_get_iter (treeModel, &iter, tpath)) return;
-	gchar *name;
-	gtk_tree_model_get (treeModel, &iter, COL_ACTUAL_NAME, &name,-1);
-	WARN("FIXME: load item iconview \"%s\"\n", name);
-	//view_p->reload(name);
-	g_free(name);
-    }
-    gboolean
-    add_new_item(GFile *file){
-       xd_t *xd_p = get_xd_p(file);
-	if (xd_p) {
-	    add_local_item(store_, xd_p);
-	    free_xd_p(xd_p);
-	    return TRUE;
-	} 
-	return FALSE;
-    }
-
-    gboolean 
-    remove_item(GFile *file){
-	// find the iter and remove item
-	gchar *basename = g_file_get_basename(file);
-	g_hash_table_remove(itemsHash_, basename); 
-	gtk_tree_model_foreach (GTK_TREE_MODEL(store_), rm_func, (gpointer) basename); 
-	g_free(basename);
-	return TRUE;
-    }
-
-    gboolean 
-    restat_item(GFile *src){
-	gchar *basename = g_file_get_basename(src);
-	if (!g_hash_table_lookup(itemsHash_, basename)) {
-	    g_free(basename);
-	    return FALSE; 
-	}
-	g_free(basename);
-	gchar *fullpath = g_file_get_path(src);
-	gtk_tree_model_foreach (GTK_TREE_MODEL(store_), stat_func, (gpointer) fullpath); 
-	g_free(fullpath);
-	return TRUE;
-    }
-
-    void
-    start_monitor(const gchar *data, GtkTreeModel *data2){
-	store_ = GTK_LIST_STORE(data2);
-	DBG("*** start_monitor: %s\n", data);
-	if (gfile_) g_object_unref(gfile_);
-	gfile_ = g_file_new_for_path (data);
-	GError *error=NULL;
-	if (monitor_) g_object_unref(monitor_);
-	monitor_ = g_file_monitor_directory (gfile_, G_FILE_MONITOR_WATCH_MOVES, cancellable_,&error);
-	if (error){
-	    DBG("g_file_monitor_directory(%s) failed: %s\n",
-		    data, error->message);
-	    g_object_unref(gfile_);
-	    gfile_=NULL;
-	    return;
-	}
-	g_signal_connect (monitor_, "changed", 
-		G_CALLBACK (monitor_f), (void *)this);
-    }
-
-
-    void 
-    stop_monitor(void){
-	gchar *p = g_file_get_path(gfile_);
-	DBG("*** stop_monitor at: %s\n", p);
-	g_free(p);
-	g_file_monitor_cancel(monitor_);
-	while (gtk_events_pending())gtk_main_iteration();  
-	g_hash_table_remove_all(itemsHash_);
-	// hash table remains alive (but empty) until destructor.
-    }
-
-    void
-    set_showHidden(gboolean state){showsHidden_ = state;}
-
-
-
-    
-    static gboolean stat_func (GtkTreeModel *model,
-				GtkTreePath *path,
-				GtkTreeIter *iter,
-				gpointer data){
-	struct stat *st=NULL;
-	gchar *text;
-	gchar *basename = g_path_get_basename((gchar *)data);
-	gtk_tree_model_get (model, iter, 
-		COL_ACTUAL_NAME, &text, 
-		COL_STAT, &st, 
-		-1);  
-	
-	if (strcmp(basename, text)){
-	    g_free(text);
-	    g_free(basename);
-	    return FALSE;
-	}
-	g_free(text);
-	g_free(basename);
-	g_free(st);
-
-	GtkListStore *store = GTK_LIST_STORE(model);
-	st = (struct stat *)calloc(1, sizeof(struct stat));
-	if (stat((gchar *)data, st) != 0){
-	    fprintf(stderr, "stat: %s\n", strerror(errno));
-	    return FALSE;
-	}
-
-	gtk_list_store_set (store, iter, 
-		COL_STAT,st, 
-		-1);
-
-	return TRUE;
-    }
-
-    static gboolean rm_func (GtkTreeModel *model,
-				GtkTreePath *path,
-				GtkTreeIter *iter,
-				gpointer data){
-	gchar *text;
-	struct stat *st_p=NULL;
-	gtk_tree_model_get (model, iter, 
-		COL_STAT, &st_p, 
-		COL_ACTUAL_NAME, &text, 
-		-1);  
-	
-	if (strcmp(text, (gchar *)data)){
-	    g_free(text);
-	    return FALSE;
-	}
-	DBG("removing %s from treemodel.\n", text);
-	GtkListStore *store = GTK_LIST_STORE(model);
-
-    //  free stat record, if any
-	g_free(st_p);
-
-	gtk_list_store_remove(store, iter);
-	g_free(text);
-	return TRUE;
-    }
-
-
-    void
-    monitor_f (GFileMonitor      *mon,
-	      GFile             *first,
-	      GFile             *second,
-	      GFileMonitorEvent  event,
-	      gpointer           data)
-    {
-	gchar *f= first? g_file_get_basename (first):g_strdup("--");
-	gchar *s= second? g_file_get_basename (second):g_strdup("--");
-       
-
-	fprintf(stderr, "*** monitor_f call...\n");
-	auto p = (LocalView<Type> *)data;
-
-	switch (event){
-	    case G_FILE_MONITOR_EVENT_DELETED:
-	    case G_FILE_MONITOR_EVENT_MOVED_OUT:
-		fprintf(stderr,"Received DELETED  (%d): \"%s\", \"%s\"\n", event, f, s);
-		p->remove_item(first);
-		break;
-	    case G_FILE_MONITOR_EVENT_CREATED:
-	    case G_FILE_MONITOR_EVENT_MOVED_IN:
-		fprintf(stderr,"Received  CREATED (%d): \"%s\", \"%s\"\n", event, f, s);
-		p->add_new_item(first);
-		break;
-	    case G_FILE_MONITOR_EVENT_CHANGES_DONE_HINT:
-	       fprintf(stderr,"Received  CHANGES_DONE_HINT (%d): \"%s\", \"%s\"\n", event, f, s);
-		p->restat_item(first);
-		// if image, then reload the pixbuf
-		break;
-	    case G_FILE_MONITOR_EVENT_CHANGED:
-		fprintf(stderr,"Received  CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
-		break;
-	    case G_FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED:
-		fprintf(stderr,"Received  ATTRIBUTE_CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
-		p->restat_item(first);
-		break;
-	    case G_FILE_MONITOR_EVENT_PRE_UNMOUNT:
-		fprintf(stderr,"Received  PRE_UNMOUNT (%d): \"%s\", \"%s\"\n", event, f, s);
-		break;
-	    case G_FILE_MONITOR_EVENT_UNMOUNTED:
-		fprintf(stderr,"Received  UNMOUNTED (%d): \"%s\", \"%s\"\n", event, f, s);
-		break;
-	    case G_FILE_MONITOR_EVENT_MOVED:
-	    case G_FILE_MONITOR_EVENT_RENAMED:
-		fprintf(stderr,"Received  MOVED (%d): \"%s\", \"%s\"\n", event, f, s);
-		p->remove_item(first);
-		p->add_new_item(second);
-		break;
-	}
-	g_free(f);
-	g_free(s);
-    }
-
-#endif
-
 
 };
 }

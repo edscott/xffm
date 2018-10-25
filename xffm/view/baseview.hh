@@ -17,7 +17,7 @@ enum
   TYPE,
   MIMETYPE, 
   MIMEFILE, 
-  STAT,
+  ST_DATA,
   PREVIEW_PATH,
   PREVIEW_TIME,
   PREVIEW_PIXBUF,
@@ -103,10 +103,11 @@ class BaseView{
 	    G_TYPE_INT,      // mode (to identify directories)
 	    G_TYPE_STRING,   // mimetype (further identification of files)
 	    G_TYPE_STRING,   // mimefile (further identification of files)
-	    G_TYPE_POINTER,  // stat record or NULL
+	    G_TYPE_POINTER,  // stat record or NULL 
 	    G_TYPE_STRING,   // Preview path
 	    G_TYPE_INT,      // Preview time
-	    GDK_TYPE_PIXBUF); // Preview pixbuf
+	    GDK_TYPE_PIXBUF  // Preview pixbuf
+            ); // 
 	return GTK_TREE_MODEL (list_store);
         /*GtkTreeSortable *sortModel = GTK_TREE_SORTABLE(gtk_tree_model_sort_new_with_model (GTK_TREE_MODEL(list_store)));		
         gtk_tree_sortable_set_sort_column_id (sortModel,ACTUAL_NAME, GTK_SORT_ASCENDING);
@@ -630,7 +631,7 @@ private:
 
     void
     createDestTargetList (GtkWidget *widget) {
-        DBG("createSourceTargetList..\n");
+        DBG("createDestTargetList..\n");
         gtk_drag_dest_set (widget,
                      (GtkDestDefaults)
                                    ((gint)GTK_DEST_DEFAULT_DROP|
