@@ -8,7 +8,7 @@ class MimeAliasHash: public  MimeHash<Type>{
         static gchar *
         get_alias_type(const gchar *type, Type T){
             if(type) {
-                gchar *hash_key=mime_aliashash_c::get_hash_key(type, T);
+                gchar *hash_key=get_hash_key(type, T);
                 const gchar *basic_type = (const gchar *)g_hash_table_lookup(T.hash, hash_key);
                 g_free(hash_key);
                 if (basic_type) return g_strdup(basic_type);
@@ -28,7 +28,7 @@ class MimeAliasHash: public  MimeHash<Type>{
                 return;
             }
             /* Now parse the xml tree */
-            NOOP("mime_hash_t:: parsing %s\n", mimefile);
+            TRACE("mime_hash_t:: parsing %s\n", mimefile);
             for(node = node->children; node; node = node->next) {
                 if(xmlStrEqual (node->name, (const xmlChar *)"mime-key")) {
                     gchar *type;

@@ -12,7 +12,7 @@ class MimeApplicationHash: public  MimeHash<Type>{
             //load_hashes ();
             ///  now look in hash...
 
-            gchar *key = mime_hash_c<Type>::get_hash_key (type, T);
+            gchar *key = get_hash_key (type, T);
             pthread_mutex_lock(&T.mutex);
             apps = (gchar **)g_hash_table_lookup (T.hash, key);
             pthread_mutex_unlock(&T.mutex);
@@ -58,7 +58,7 @@ class MimeApplicationHash: public  MimeHash<Type>{
                 for(j = 0; j < old_apps_count; j++){
                     if (strcmp(command, old_apps[j]) == 0){ //
                         duplicate=TRUE;
-                        NOOP ("mime-module,mime-module: duplicate command \"%s\"\n", command);
+                        TRACE ("mime-module,mime-module: duplicate command \"%s\"\n", command);
                         if (prepend) continue;
                     }
                     apps[k] = g_strdup(old_apps[j]);
@@ -73,13 +73,13 @@ class MimeApplicationHash: public  MimeHash<Type>{
             pthread_mutex_unlock(&T.mutex);
             /*
             gint i;
-            NOOP("(%d) %s: %s\n", prepend, type, command); fflush(NULL);
+            TRACE("(%d) %s: %s\n", prepend, type, command); fflush(NULL);
             for(i = 0; apps[i]; i++)
-                NOOP(" %s", apps[i]);
-            NOOP("\n");
+                TRACE(" %s", apps[i]);
+            TRACE("\n");
             */
 
-            NOOP("OPEN APPS: mime_write(%s)\n", type);
+            TRACE("OPEN APPS: mime_write(%s)\n", type);
 
         }
 
@@ -96,7 +96,7 @@ class MimeApplicationHash: public  MimeHash<Type>{
                 return;
             }
             /* Now parse the xml tree */
-            NOOP("mime_hash_t:: parsing %s\n", mimefile);
+            TRACE("mime_hash_t:: parsing %s\n", mimefile);
             for(node = node->children; node; node = node->next) {
                 if(xmlStrEqual (node->name, (const xmlChar *)"mime-key")) {
                     gchar *type;
@@ -131,8 +131,8 @@ class MimeApplicationHash: public  MimeHash<Type>{
                        }
                     }
                     if(apps) {
-                        gchar *type_key = mime_application_hash_c::get_hash_key (type, T);
-                        NOOP("mime-module, adding-%d : %s for %s (%s)\n", i, value, type, type_key);
+                        gchar *type_key = get_hash_key (type, T);
+                        TRACE("mime-module, adding-%d : %s for %s (%s)\n", i, value, type, type_key);
                         g_hash_table_replace (T.hash, type_key, apps);
                     } 
                     g_free(type);
@@ -163,7 +163,7 @@ class MimeApplicationHash: public  MimeHash<Type>{
     g_free(file);
     
     
-    NOOP("mime-module, hash table build is now complete.\n");
+    TRACE("mime-module, hash table build is now complete.\n");
 #endif
         }
 };

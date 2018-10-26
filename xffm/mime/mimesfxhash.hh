@@ -4,7 +4,7 @@
 namespace xf {
 
 template <class Type>
-class MimeSfxHash_c: public  MimeHash<Type>{
+class MimeSfxHash: public  MimeHash<Type>{
     public:
         static const gchar *
         get_type_from_sfx(const gchar * file, Type T ) {
@@ -27,13 +27,13 @@ class MimeSfxHash_c: public  MimeHash<Type>{
                 gchar *sfx;
                 /* try all lower case (hash table keys are set this way) */
                 sfx = g_utf8_strdown (p, -1);
-                gchar *key = mime_sfx_hash_c::get_hash_key (sfx,T);
+                gchar *key = get_hash_key (sfx,T);
                 TRACE("mime-module, lOOking for \"%s\" with key=%s\n", sfx, key);
 
                 type = (const gchar *)g_hash_table_lookup (T.hash, key);
                 g_free (key);
                 if(type) {
-                    NOOP(stderr,"mime-module, FOUND %s: %s\n", sfx, type);
+                    TRACE(stderr,"mime-module, FOUND %s: %s\n", sfx, type);
                     g_free (sfx);
                     g_free (basename);
                     return type;
@@ -48,11 +48,11 @@ class MimeSfxHash_c: public  MimeHash<Type>{
                 gchar *sfx;
                 /* try all lower case (hash table keys are set this way) */
                 sfx = g_utf8_strdown (*q_p, -1);
-                gchar *key = mime_sfx_hash_c::get_hash_key (sfx,T);
+                gchar *key = get_hash_key (sfx,T);
                 type = (const gchar *)g_hash_table_lookup (T.hash, key);
                 g_free (key);
                 if(type) {
-                    NOOP(stderr,"mime-module(2), FOUND %s: %s\n", sfx, type);
+                    TRACE(stderr,"mime-module(2), FOUND %s: %s\n", sfx, type);
                     g_free (sfx);
                     g_free (basename);
                     g_strfreev(q);

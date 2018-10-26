@@ -5,8 +5,8 @@
 #define HAVE_STRUCT_DIRENT_D_TYPE 1
 
 #include "mime/lite.hh"
+// FIXME: #include "mime/mime.hh"
 #include "common/util.hh"
-// FIXME: #include "common/mime.hh"
 
 #include "localpopup.hh"
 
@@ -285,7 +285,7 @@ private:
         gint dir_count = g_list_length(directory_list);
         GList *l = directory_list;
         for (; l && l->data; l= l->next){
-            while (gtk_events_pending()) gtk_main_iteration();
+            //while (gtk_events_pending()) gtk_main_iteration();
             xd_t *xd_p = (xd_t *)l->data;
             add_local_item(list_store, xd_p);
         }
@@ -401,7 +401,7 @@ private:
                     *strrchr(t, '.') = 0;
                     g_free(utf_name);
                     utf_name = util_c::utf_string(t);
-                }
+                } 
                 g_free(t);
             }
         }

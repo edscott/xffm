@@ -67,9 +67,15 @@ public:
 
     void 
     stop_monitor(void){
-	gchar *p = g_file_get_path(gfile_);
-	TRACE("*** stop_monitor at: %s\n", p);
-	g_free(p);
+        if (!monitor_) {
+            WARN("no monitor to stop\n");
+            return;
+        }
+        if (gfile_) {
+	    gchar *p = g_file_get_path(gfile_);
+	    TRACE("*** stop_monitor at: %s\n", p);
+	    g_free(p);
+        }
 	g_file_monitor_cancel(monitor_);
 	while (gtk_events_pending())gtk_main_iteration();  
 	g_hash_table_remove_all(itemsHash_);

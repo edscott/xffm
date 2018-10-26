@@ -44,8 +44,6 @@ namespace xf {
 template <class Type>
 class MimeHash {
     public:
-	MimeHash(void){}
-    public:
 	~MimeHash(void){
 	    //g_free(hashname);
 	    //g_hash_table_destroy(hash);
@@ -100,7 +98,7 @@ class MimeHash {
                 return;
             }
             /* Now parse the xml tree */
-            NOOP("mime_hash_t:: parsing %s\n", mimefile);
+            TRACE("mime_hash_t:: parsing %s\n", mimefile);
             for(node = node->children; node; node = node->next) {
                 if(xmlStrEqual (node->name, (const xmlChar *)"mime-key")) {
                     gchar *type;
@@ -119,7 +117,7 @@ class MimeHash {
                             g_free (value);
                             gchar *hash_key = get_hash_key (key_string,T);
                             if(key_string) {
-                                        NOOP("mime_hash_t::replacing hash element \"%s\" with key %s --> %s\n", 
+                                        TRACE("mime_hash_t::replacing hash element \"%s\" with key %s --> %s\n", 
                                             key_string, hash_key, type);
                                         g_hash_table_replace (T.hash, hash_key, g_strdup(type));
                             }

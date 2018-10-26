@@ -236,14 +236,31 @@ public:
         if (g_file_test(path, G_FILE_TEST_EXISTS)){
 	    if (g_file_test(path, G_FILE_TEST_IS_DIR)){
 		// stop current monitor
-		if (localMonitor_) delete (localMonitor_);
+		if (localMonitor_) {
+                    delete (localMonitor_);
+                    localMonitor_ = NULL;
+                }
 		result = LocalView<Type>::loadModel(iconView_, path);
 		if (!result){
 		    ERROR("baseview.hh:loadModel: cannot load view for %s\n", path);
 		} else {
 		    // start new monitor
-		    localMonitor_ = new(LocalMonitor<Type>)(treeModel_, path);
-		    localMonitor_->start_monitor(treeModel_, path);
+                    gint items = 0;
+                    GtkTreeIter iter;
+                    if (gtk_tree_model_get_iter_first (treeModel_, &iter)) {
+                        items++;
+                        while (gtk_tree_model_iter_next(treeModel_, &iter)) items++;
+                    }
+                    WARN("FIXME: Set filecount %d message in status button...\n");
+
+                    
+
+                    if (items <= 500) {
+		        localMonitor_ = new(LocalMonitor<Type>)(treeModel_, path);
+		        localMonitor_->start_monitor(treeModel_, path);
+                    } else {
+                        localMonitor_ = NULL;
+                    }
 		}
 	    } else {
 		result = LocalView<Type>::item_activated(this->iconView(), path);

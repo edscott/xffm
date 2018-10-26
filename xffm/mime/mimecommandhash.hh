@@ -7,7 +7,7 @@ class MimeCommandHash: public  MimeHash<Type>{
     public:
         static const gchar *lookup(const gchar *p, Type T){
             if (!p) return NULL;
-            gchar *key=mime_command_hash_c::get_hash_key_strstrip (p, T);
+            gchar *key=get_hash_key_strstrip (p, T);
             const gchar *value=(const gchar *)g_hash_table_lookup (T.hash, key);
             g_free(key);
             return value;
@@ -24,7 +24,7 @@ class MimeCommandHash: public  MimeHash<Type>{
                 return;
             }
             /* Now parse the xml tree */
-            NOOP("mime_hash_t:: parsing %s\n", mimefile);
+            TRACE("mime_hash_t:: parsing %s\n", mimefile);
             for(node = node->children; node; node = node->next) {
                 if(xmlStrEqual (node->name, (const xmlChar *)"mime-key")) {
                     gchar *type;
@@ -46,8 +46,8 @@ class MimeCommandHash: public  MimeHash<Type>{
                                 extra_value = 
                                     xmlGetProp (subnode, (const xmlChar *)T.xmlsubdata);
                                 if(extra_value) {
-                                    gchar *k=mime_command_hash_c::get_hash_key ((gchar *)value, T);
-                                    NOOP(stderr,"mime_command_hash_c::build_hash: adding %s: %s--> %s\n",
+                                    gchar *k=get_hash_key ((gchar *)value, T);
+                                    TRACE(stderr,"mime_command_hash_c::build_hash: adding %s: %s--> %s\n",
                                             type, value, extra_value);
                                     g_hash_table_replace (T.hash, k, extra_value);
                                 }	
@@ -62,5 +62,5 @@ class MimeCommandHash: public  MimeHash<Type>{
         }
    
 };
-
+}
 #endif
