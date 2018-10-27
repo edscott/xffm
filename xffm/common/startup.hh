@@ -53,7 +53,7 @@
         xf::Response<double>::sendPassword(argv+1);
         exit(1);
     } else {
-//#define FORK
+#define FORK
 #ifdef FORK
 	if(fork ()){
 	    sleep(2);

@@ -180,7 +180,7 @@ public:
     static GdkPixbuf *
     lookup_icon(const gchar *icon_name, gint size){
 	if (!pixbuf_hash) {
-	    DBG("Hash::lookup_icon(): Creating new hashtable\n");
+	    TRACE("Hash::lookup_icon(): Creating new hashtable\n");
 	    createHash();
 	   // return NULL;
 	}

@@ -251,7 +251,7 @@ public:
                         items++;
                         while (gtk_tree_model_iter_next(treeModel_, &iter)) items++;
                     }
-                    WARN("FIXME: Set filecount %d message in status button...\n");
+                    WARN("FIXME: Set filecount %d message in status button...\n", items);
 
                     
 

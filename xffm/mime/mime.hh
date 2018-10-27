@@ -59,8 +59,179 @@ namespace xf {
 
 template <class Type>
 class Mime {
+    const gchar *
+    mimeable_file (struct stat *st_p) {
+        const gchar *result = NULL;
+#ifdef S_IFWHT
+        if(st_p->st_mode == S_IFWHT) {
+            TRACE("mime-module, S_IFWHT file!\n");
+            return NULL;
+        }
+#endif
+        if(S_ISSOCK (st_p->st_mode))
+            result = inode[INODE_SOCKET];
+        else if(S_ISBLK (st_p->st_mode))
+            result = inode[INODE_BLOCKDEVICE];
+        else if(S_ISCHR (st_p->st_mode))
+            result = inode[INODE_CHARDEVICE];
+        else if(S_ISFIFO (st_p->st_mode))
+            result = inode[INODE_FIFO];
+        //else if (S_ISLNK(st_p->st_mode)) result= "inode/symlink";
+        else if(S_ISDIR (st_p->st_mode))
+            result = inode[INODE_DIRECTORY];
+        else
+            return NULL;
+        return result;
+    }
+
+     
+    void *
+    put_mimetype_in_hash(const gchar *file, const gchar *mimetype){
+        if (!mimetype_hash) return NULL;
+        gchar *key = get_hash_key (file);
+        pthread_mutex_lock(&mimetype_hash_mutex);
+        g_hash_table_replace (mimetype_hash, g_strdup(key), g_strdup(mimetype));
+        pthread_mutex_unlock(&mimetype_hash_mutex);
+        g_free (key);
+        return NULL;
+    }
+    gchar *
+    mimetype1(const gchar *file){
+        if (!strchr(file, '.')){
+            if (strstr(file, "README")) {
+                return g_strdup("text/x-readme");
+            }
+            if (strstr(file, "core")){
+                return g_strdup("application/x-core");
+            }
+            if (strstr(file, "INSTALL")){
+                return g_strdup("text/x-install");
+            }
+            if (strstr(file, "COPYING")) {
+                return g_strdup("text/x-credits");
+            }
+            if (strstr(file, "AUTHORS")) {
+                return g_strdup("text/x-authors");
+            }
+            if (strstr(file, "TODO")) {
+                return g_strdup("text/x-info");
+            }
+        }
+        return NULL;
+    }
+
+    gchar *
+    mimetype2(const gchar *file){
+        const gchar *type = LOCATE_MIME_T(file);
+        if(type && strlen(type)) {
+            TRACE ("MIME:LOCATE_MIME_T(%s) -> %s\n", file, type);
+            put_mimetype_in_hash(file, type);
+            return g_strdup(type);
+        }
+        TRACE ("mime_type(): Could not locate mimetype for %s\n", file);
+        return NULL;
+    }
 
 
+    const gchar *
+    find_mimetype_in_hash(const gchar *file){
+        const gchar *type=NULL; 
+        if (!mimetype_hash) return type;
+        gchar *key = get_hash_key (file);
+        pthread_mutex_lock(&mimetype_hash_mutex);
+        if (!mimetype_hash) ERROR("mimetype_hash is NULL.\n");
+        type = (const gchar *)g_hash_table_lookup (mimetype_hash, key);
+        pthread_mutex_unlock(&mimetype_hash_mutex);
+        g_free (key);
+        return type;
+    }
+
+    // This function will return a basic mimetype, never an alias.
+     
+    gchar *
+    mime_type (const gchar *file){
+        if (!file) return NULL;
+        const gchar *old_mimetype = find_mimetype_in_hash(file);
+        if (old_mimetype) {
+            // already tabulated. Just return previous value.
+            return g_strdup(old_mimetype);
+        }
+        if(file[strlen (file) - 1] == '~' || file[strlen (file) - 1] == '%') {
+            gchar *r_file = g_strdup(file);
+            r_file[strlen (r_file) - 1] = 0;
+            gchar *retval = mime_type(r_file);
+            g_free(r_file);
+            return retval;
+        }
+        gchar *retval = mimetype1(file);
+        if (retval) return retval;  
+        return mimetype2(file);
+    }
+        
+     
+    gchar *
+    mime_type (const gchar *file, struct stat *st_p) {
+        if (!file) return NULL;
+#ifndef NO_MIMETYPE_HASH
+        const gchar *old_mimetype = find_mimetype_in_hash(file);
+        if (old_mimetype) {
+            // already tabulated. Just return previous value.
+            return g_strdup(old_mimetype);
+        }
+#endif
+        if(file[strlen (file) - 1] == '~' || file[strlen (file) - 1] == '%') {
+            gchar *r_file = g_strdup(file);
+            r_file[strlen (r_file) - 1] = 0;
+            gchar *retval = mime_type(r_file, st_p);
+            g_free(r_file);
+            return retval;
+        }
+        gchar *retval = mimetype1(file);
+        if (retval) return retval;  
+        
+        // Get a mimetype from the stat information, if this applies.
+        //
+
+
+        gboolean try_extension = TRUE;
+        // If stat information is not provided, then stat the item.
+        struct stat st_v;
+        memset(&st_v, 0, sizeof(struct stat));
+        if(!st_p) {
+            st_p = &st_v;
+            if (stat (file, st_p) < 0) {
+                try_extension = FALSE;
+            }
+        }
+
+        if (try_extension){
+            const gchar *type = mimeable_file (st_p);
+            if(type) {
+                put_mimetype_in_hash(file, type);
+                TRACE ("MIME: stat mime_type(%s) -> %s\n", file, type);
+                return g_strdup(type);
+            }
+
+            // Empty files (st_ino is there to make sure we do not have an empty stat):
+            if (st_p->st_size == 0 && st_p->st_ino != 0) {
+                return g_strdup("text/plain");
+            }
+        }
+
+        retval = mimetype2(file);
+        if (retval) return retval;  
+
+        // 
+        // Empty files (st_ino is there to make sure we do not have an empty stat):
+        if (st_p->st_size == 0 && st_p->st_ino != 0) {
+            return g_strdup("text/plain");
+        }
+
+        return mime_magic(file);
+
+    }
+
+//////////////////////////////////////////////////////////////////
     static void
     free_apps(void *data){
         if (!data) return;
@@ -148,104 +319,6 @@ class Mime {
 
 
      
-    const gchar *
-    find_mimetype_in_hash(const gchar *file){
-        const gchar *type=NULL; 
-        if (!mimetype_hash) return type;
-        gchar *key = get_hash_key (file);
-        pthread_mutex_lock(&mimetype_hash_mutex);
-        if (!mimetype_hash) fprintf(stderr, "mimetype_hash!\n");
-        type = (const gchar *)g_hash_table_lookup (mimetype_hash, key);
-        pthread_mutex_unlock(&mimetype_hash_mutex);
-        g_free (key);
-        return type;
-    }
-
-    // This function will return a basic mimetype, never an alias.
-     
-    gchar *
-    mime_type (const gchar *file){
-        if (!file) return NULL;
-        const gchar *old_mimetype = find_mimetype_in_hash(file);
-        if (old_mimetype) {
-            // already tabulated. Just return previous value.
-            return g_strdup(old_mimetype);
-        }
-        if(file[strlen (file) - 1] == '~' || file[strlen (file) - 1] == '%') {
-            gchar *r_file = g_strdup(file);
-            r_file[strlen (r_file) - 1] = 0;
-            gchar *retval = mime_type(r_file);
-            g_free(r_file);
-            return retval;
-        }
-        gchar *retval = mimetype1(file);
-        if (retval) return retval;  
-        return mimetype2(file);
-    }
-        
-     
-    gchar *
-    mime_type (const gchar *file, struct stat *st_p) {
-        if (!file) return NULL;
-#ifndef NO_MIMETYPE_HASH
-        const gchar *old_mimetype = find_mimetype_in_hash(file);
-        if (old_mimetype) {
-            // already tabulated. Just return previous value.
-            return g_strdup(old_mimetype);
-        }
-#endif
-        if(file[strlen (file) - 1] == '~' || file[strlen (file) - 1] == '%') {
-            gchar *r_file = g_strdup(file);
-            r_file[strlen (r_file) - 1] = 0;
-            gchar *retval = mime_type(r_file, st_p);
-            g_free(r_file);
-            return retval;
-        }
-        gchar *retval = mimetype1(file);
-        if (retval) return retval;  
-        
-        // Get a mimetype from the stat information, if this applies.
-        //
-
-
-        gboolean try_extension = TRUE;
-        // If stat information is not provided, then stat the item.
-        struct stat st_v;
-        memset(&st_v, 0, sizeof(struct stat));
-        if(!st_p) {
-            st_p = &st_v;
-            if (stat (file, st_p) < 0) {
-                try_extension = FALSE;
-            }
-        }
-
-        if (try_extension){
-            const gchar *type = mimeable_file (st_p);
-            if(type) {
-                put_mimetype_in_hash(file, type);
-                NOOP ("MIME: stat mime_type(%s) -> %s\n", file, type);
-                return g_strdup(type);
-            }
-
-            // Empty files (st_ino is there to make sure we do not have an empty stat):
-            if (st_p->st_size == 0 && st_p->st_ino != 0) {
-                return g_strdup("text/plain");
-            }
-        }
-
-        retval = mimetype2(file);
-        if (retval) return retval;  
-
-        // 
-        // Empty files (st_ino is there to make sure we do not have an empty stat):
-        if (st_p->st_size == 0 && st_p->st_ino != 0) {
-            return g_strdup("text/plain");
-        }
-
-        return mime_magic(file);
-
-    }
-
 
     gchar *
     mime_function(const gchar *path, const gchar *function) {
@@ -270,7 +343,7 @@ class Mime {
      
     gboolean mime_is_valid_command (const char *cmd_fmt) {
         //return GINT_TO_POINTER(TRUE);
-        NOOP ("MIME: mime_is_valid_command(%s)\n", cmd_fmt);
+        TRACE ("MIME: mime_is_valid_command(%s)\n", cmd_fmt);
         GError *error = NULL;
         int argc;
         gchar *path;
@@ -305,7 +378,7 @@ class Mime {
                 path = g_strdup (argv[0]);
             }
         }
-        NOOP ("mime_is_valid_command(): g_find_program_in_path(%s)=%s\n", argv[0], path);
+        TRACE ("mime_is_valid_command(): g_find_program_in_path(%s)=%s\n", argv[0], path);
 
         //if (!path || access(path, X_OK) != 0) {
         if(!path) {
@@ -330,17 +403,17 @@ class Mime {
 
     gchar *
     mime_command (const char *type) {
-        NOOP ("APPS: mime_command(%s)\n", type);
+        TRACE ("APPS: mime_command(%s)\n", type);
         gchar **apps;
         int i;
         gchar *cmd_fmt = NULL;
         apps = LOCATE_APPS(type);
         if(!apps) {
-            NOOP ("APPS: --> NULL\n");
+            TRACE ("APPS: --> NULL\n");
             return NULL;
         }
         if(!apps[0]) {
-            NOOP ("APPS: --> NULL\n");
+            TRACE ("APPS: --> NULL\n");
             g_free (apps);
             return NULL;
         }
@@ -350,21 +423,21 @@ class Mime {
             cmd_fmt = g_strcompress (apps[i]);
             if(mime_is_valid_command (cmd_fmt)) {
                 g_strfreev (apps);
-                NOOP ("APPS: --> %s\n", cmd_fmt);
+                TRACE ("APPS: --> %s\n", cmd_fmt);
                 return cmd_fmt;
             }
         }
         g_free (cmd_fmt);
         g_strfreev (apps);
-        NOOP ("APPS: --> NULL\n");
+        TRACE ("APPS: --> NULL\n");
         return NULL;
     }
 
 
     gchar **
     mime_apps (const char *type) {
-        NOOP("mime_apps()...\n");
-        NOOP ("MIME: mime_apps(%s)\n", type);
+        TRACE("mime_apps()...\n");
+        TRACE ("MIME: mime_apps(%s)\n", type);
         gchar **apps;
         apps = LOCATE_APPS(type);
         if(!apps)
@@ -382,7 +455,7 @@ class Mime {
      
     void *
     mime_add (gchar *type, gchar *q) {
-        NOOP("mime_add()...\n");
+        TRACE("mime_add()...\n");
         gchar *command = g_strdup(q);
         g_strstrip(command);
         if(!command || !strlen (command)){
@@ -390,7 +463,7 @@ class Mime {
             return NULL;
         }
 
-        NOOP ("OPEN APPS: adding type %s->%s\n", type, command);
+        TRACE ("OPEN APPS: adding type %s->%s\n", type, command);
         add_type_to_hashtable(type, command, TRUE);
       
 
@@ -412,7 +485,7 @@ class Mime {
             g_free(command);
             return NULL;
         }
-        NOOP ("OPEN APPS: appending type %s->%s\n", type, command);
+        TRACE ("OPEN APPS: appending type %s->%s\n", type, command);
         add_type_to_hashtable(type, command, FALSE);
         g_free(command);
         return NULL;
@@ -421,9 +494,9 @@ class Mime {
 
     gchar *
     mime_mk_command_line (const gchar *command_fmt, const gchar *path) {
-        NOOP("mime_mk_command_line()...\n");
+        TRACE("mime_mk_command_line()...\n");
 
-        NOOP ("MIME: mime_mk_command_line(%s)\n", path);
+        TRACE ("MIME: mime_mk_command_line(%s)\n", path);
         gchar *command_line = NULL;
         gchar *fmt = NULL;
 
@@ -432,7 +505,7 @@ class Mime {
         if(!path)
             path = "";
 
-        NOOP ("MIME: command_fmt=%s\n", command_fmt);
+        TRACE ("MIME: command_fmt=%s\n", command_fmt);
 
         /* this is to send path as an argument */
 
@@ -441,13 +514,13 @@ class Mime {
         } else {
             fmt = g_strconcat (command_fmt, " %s", NULL);
         }
-        NOOP ("MIME: command_fmt fmt=%s\n", fmt);
+        TRACE ("MIME: command_fmt fmt=%s\n", fmt);
 
-        NOOP ("MIME: path=%s\n", path);
+        TRACE ("MIME: path=%s\n", path);
         gchar *esc_path = util_c::esc_string (path);
         command_line = g_strdup_printf (fmt, esc_path);
         g_free (esc_path);
-        NOOP ("MIME2: command_line=%s\n", command_line);
+        TRACE ("MIME2: command_line=%s\n", command_line);
 
         g_free (fmt);
         return command_line;
@@ -456,8 +529,8 @@ class Mime {
      
     gchar *
     mime_mk_terminal_line (const gchar *command) {
-        NOOP("mime_mk_terminal_line()...\n");
-        NOOP ("MIME: mime_mk_command_line(%s)\n", command);
+        TRACE("mime_mk_terminal_line()...\n");
+        TRACE ("MIME: mime_mk_command_line(%s)\n", command);
         gchar *command_line = NULL;
 
         if(!command)
@@ -502,79 +575,6 @@ class Mime {
 
     }
 
-    const gchar *
-    mimeable_file (struct stat *st_p) {
-        const gchar *result = NULL;
-#ifdef S_IFWHT
-        if(st_p->st_mode == S_IFWHT) {
-            NOOP("mime-module, S_IFWHT file!\n");
-            return NULL;
-        }
-#endif
-        if(S_ISSOCK (st_p->st_mode))
-            result = inode[INODE_SOCKET];
-        else if(S_ISBLK (st_p->st_mode))
-            result = inode[INODE_BLOCKDEVICE];
-        else if(S_ISCHR (st_p->st_mode))
-            result = inode[INODE_CHARDEVICE];
-        else if(S_ISFIFO (st_p->st_mode))
-            result = inode[INODE_FIFO];
-        //else if (S_ISLNK(st_p->st_mode)) result= "inode/symlink";
-        else if(S_ISDIR (st_p->st_mode))
-            result = inode[INODE_DIRECTORY];
-        else
-            return NULL;
-        return result;
-    }
-
-     
-    void *
-    put_mimetype_in_hash(const gchar *file, const gchar *mimetype){
-        if (!mimetype_hash) return NULL;
-        gchar *key = get_hash_key (file);
-        pthread_mutex_lock(&mimetype_hash_mutex);
-        g_hash_table_replace (mimetype_hash, g_strdup(key), g_strdup(mimetype));
-        pthread_mutex_unlock(&mimetype_hash_mutex);
-        g_free (key);
-        return NULL;
-    }
-
-    gchar *
-    mimetype1(const gchar *file){
-        if (!strchr(file, '.')){
-            if (strstr(file, "README")) {
-                return g_strdup("text/x-readme");
-            }
-            if (strstr(file, "core")){
-                return g_strdup("application/x-core");
-            }
-            if (strstr(file, "INSTALL")){
-                return g_strdup("text/x-install");
-            }
-            if (strstr(file, "COPYING")) {
-                return g_strdup("text/x-credits");
-            }
-            if (strstr(file, "AUTHORS")) {
-                return g_strdup("text/x-authors");
-            }
-            if (strstr(file, "TODO")) {
-                return g_strdup("text/x-info");
-            }
-        }
-        return NULL;
-    }
-
-    gchar *
-    mimetype2(const gchar *file){
-        const gchar *type = LOCATE_MIME_T(file);
-        if(type && strlen(type)) {
-            NOOP ("MIME:LOCATE_MIME_T(%s) -> %s\n", file, type);
-            put_mimetype_in_hash(file, type);
-            return g_strdup(type);
-        }
-        NOOP ("mime_type(): Could not locate mimetype for %s\n", file);
-        return NULL;
-    }
 
     const gchar *
     get_mimetype_iconname(const gchar *mimetype){
