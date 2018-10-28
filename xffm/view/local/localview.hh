@@ -7,7 +7,7 @@
 //#define USE_MIME 1
 #undef USE_LITE
 //#define USE_LITE 1
-#include "mime/lite.hh"
+//#include "mime/lite.hh"
 #include "mime/mime.hh"
 #include "common/util.hh"
 
@@ -402,7 +402,7 @@ private:
         if (is_reg_not_link) {
             gchar *t = g_strdup(xd_p->d_name);
             if (strchr(t, '.') && strrchr(t, '.') != t){
-                if (strlen(strchr(t, '.')+1) <= EXTENSION_LABEL_LENGTH) {
+                if (strlen(strrchr(t, '.')+1) <= EXTENSION_LABEL_LENGTH) {
                     *strrchr(t, '.') = 0;
                     g_free(utf_name);
                     utf_name = util_c::utf_string(t);
@@ -632,6 +632,88 @@ private:
     }
 
     static gchar *
+    regularEmblem(xd_t *xd_p, gchar *emblem){
+	gchar *g;
+	if (xd_p->d_name[0] == '.') {
+	    g = g_strconcat(emblem, "#888888", NULL); 
+	    g_free(emblem); 
+	    emblem = g;
+	    return emblem;
+	}
+	guchar red;
+	guchar green;
+	guchar blue;
+	gchar *colors = g_strdup("");
+#if 0
+	if (getColors(xd_p, &red, &green, &blue)){
+	    g_free(colors);
+	    colors = g_strdup_printf("#%02x%02x%02x", red, green, blue);
+	}
+	
+	gchar *extension = g_strdup("");
+	if (strrchr(xd_p->d_name, '.') && strrchr(xd_p->d_name, '.') != xd_p->d_name
+		&& strlen(strrchr(xd_p->d_name, '.')+1) <= EXTENSION_LABEL_LENGTH) {
+	    extension = g_strconcat("*", strrchr(xd_p->d_name, '.')+1, NULL) ;
+	}
+	if (!xd_p->st) {
+	    g = g_strdup_printf("%s%s", 
+		    extension, colors);
+	}
+	// all access:
+	else if (O_ALL(xd_p->st->st_mode) || O_RW(xd_p->st->st_mode)){
+		g = g_strdup_printf("%s%s%s/C/face-surprise-symbolic/2.5/180/NW/application-x-executable-symbolic/3.0/180",
+			extension, colors, emblem);
+	// read/write/exec
+	} else if((MY_GROUP(xd_p->st->st_gid) && G_ALL(xd_p->st->st_mode)) 
+		|| (MY_FILE(xd_p->st->st_uid) && U_ALL(xd_p->st->st_mode))){
+		g = g_strdup_printf("%s%s%s/NW/application-x-executable-symbolic/3.0/180", 
+			extension, colors, emblem);
+	// read/exec
+	} else if (O_RX(xd_p->st->st_mode)
+		||(MY_GROUP(xd_p->st->st_gid) && G_RX(xd_p->st->st_mode)) 
+		|| (MY_FILE(xd_p->st->st_uid) && U_RX(xd_p->st->st_mode))){
+		g = g_strdup_printf("%s%s%s/NW/application-x-executable-symbolic/3.0/180", 
+			extension, colors, emblem);
+
+	// read/write
+	} else if ((MY_GROUP(xd_p->st->st_gid) && G_RW(xd_p->st->st_mode))
+		|| (MY_FILE(xd_p->st->st_uid) && U_RW(xd_p->st->st_mode))) {
+		g = g_strdup_printf("%s%s%s", 
+			extension, colors, emblem);
+
+	// read only:
+	} else if (O_R(xd_p->st->st_mode) 
+		|| (MY_GROUP(xd_p->st->st_gid) && G_R(xd_p->st->st_mode)) 
+		|| (MY_FILE(xd_p->st->st_uid) && U_R(xd_p->st->st_mode))){
+		g = g_strdup_printf("%s%s%s/NW/face-surprise-symbolic/3.0/130", 
+			extension, colors, emblem);
+	} else if (S_ISREG(xd_p->st->st_mode)) {
+	    // no access: (must be have stat info to get this emblem)
+	    g = g_strdup_printf("%s%s%s/NW/face-sick-symbolic/2.0/180", 
+		    extension, colors, emblem);
+	} else {
+	    g = g_strdup_printf("%s%s", 
+		    extension, colors);
+	}
+	g_free(extension);
+	g_free(emblem); 
+	emblem = g;
+#ifdef USE_LITE
+	if (use_lite) {
+	    const gchar *lite_emblem = Lite<Type>::get_lite_emblem(xd_p->mimetype);
+	    WARN("lite_emblem=%s\n", lite_emblem);
+	    if (lite_emblem){
+		g = g_strconcat(emblem, "/NE/", lite_emblem, "/1.8/200", NULL); 
+		g_free(emblem); 
+		emblem = g;
+	    }
+	} 
+#endif
+#endif
+	return emblem;
+    }
+
+    static gchar *
     get_emblem_string(xd_t *xd_p, gboolean use_lite){
         gchar *emblem = g_strdup("");
         // No emblem for go up
@@ -693,80 +775,7 @@ private:
         }
         
         else if (is_reg){
-            guchar red;
-            guchar green;
-            guchar blue;
-            gchar *colors = g_strdup("");
-            if (xd_p->d_name[0] == '.') {
-                g = g_strconcat(emblem, "#888888", NULL); 
-                g_free(emblem); 
-                emblem = g;
-            }
-#ifdef USE_LITE
-            else if (Lite<Type>::get_lite_colors(xd_p->mimetype, &red, &green, &blue)){
-                g_free(colors);
-                colors = g_strdup_printf("#%02x%02x%02x", red, green, blue);
-            }
-#endif
-            gchar *extension = g_strdup("");
-            if (strrchr(xd_p->d_name, '.') && strrchr(xd_p->d_name, '.') != xd_p->d_name
-                    && strlen(strrchr(xd_p->d_name, '.')) <= EXTENSION_LABEL_LENGTH) {
-                extension = g_strconcat("*", strrchr(xd_p->d_name, '.')+1, NULL) ;
-            }
-            if (!xd_p->st) {
-                g = g_strdup_printf("%s%s", 
-                        extension, colors);
-            }
-            // all access:
-            else if (O_ALL(xd_p->st->st_mode) || O_RW(xd_p->st->st_mode)){
-                    g = g_strdup_printf("%s%s%s/C/face-surprise/2.5/180/NW/application-x-executable-symbolic/3.0/180",
-                            extension, colors, emblem);
-            // read/write/exec
-            } else if((MY_GROUP(xd_p->st->st_gid) && G_ALL(xd_p->st->st_mode)) 
-                    || (MY_FILE(xd_p->st->st_uid) && U_ALL(xd_p->st->st_mode))){
-                    g = g_strdup_printf("%s%s%s/NW/application-x-executable-symbolic/3.0/180", 
-                            extension, colors, emblem);
-            // read/exec
-            } else if (O_RX(xd_p->st->st_mode)
-                    ||(MY_GROUP(xd_p->st->st_gid) && G_RX(xd_p->st->st_mode)) 
-                    || (MY_FILE(xd_p->st->st_uid) && U_RX(xd_p->st->st_mode))){
-                    g = g_strdup_printf("%s%s%s/NW/application-x-executable-symbolic/3.0/180", 
-                            extension, colors, emblem);
-
-            // read/write
-            } else if ((MY_GROUP(xd_p->st->st_gid) && G_RW(xd_p->st->st_mode))
-                    || (MY_FILE(xd_p->st->st_uid) && U_RW(xd_p->st->st_mode))) {
-                    g = g_strdup_printf("%s%s%s", 
-                            extension, colors, emblem);
-
-            // read only:
-            } else if (O_R(xd_p->st->st_mode) 
-                    || (MY_GROUP(xd_p->st->st_gid) && G_R(xd_p->st->st_mode)) 
-                    || (MY_FILE(xd_p->st->st_uid) && U_R(xd_p->st->st_mode))){
-                    g = g_strdup_printf("%s%s%s/NW/emblem-readonly/3.0/130", 
-                            extension, colors, emblem);
-            } else if (S_ISREG(xd_p->st->st_mode)) {
-                // no access: (must be have stat info to get this emblem)
-                g = g_strdup_printf("%s%s%s/NW/emblem-unreadable/3.0/180/C/face-angry/2.0/180", 
-                        extension, colors, emblem);
-            } else {
-                g = g_strdup_printf("%s%s", 
-                        extension, colors);
-            }
-            g_free(extension);
-            g_free(emblem); 
-            emblem = g;
-#ifdef USE_LITE
-            if (use_lite) {
-                const gchar *lite_emblem = Lite<Type>::get_lite_emblem(xd_p->mimetype);
-		WARN("lite_emblem=%s\n", lite_emblem);
-                if (lite_emblem){
-                    g = g_strconcat(emblem, "/NE/", lite_emblem, "/1.8/200", NULL); 
-                    g_free(emblem); 
-                    emblem = g;
-                }
-            } 
-#endif
+	    emblem = regularEmblem(xd_p, emblem);
         }
         return emblem;
     }

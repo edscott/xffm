@@ -7,4 +7,5 @@
 #define @SIGNAL_H@
 #define @HAVE_GREP@
 #define MIMETYPE_PROGRAM "@MIMETYPE_PROGRAM@"
+#define @FREEDESKTOP@
 

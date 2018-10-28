@@ -11,6 +11,30 @@ set(ENV{PKG_CONFIG_PATH}  "/usr/local/lib/pkgconfig")
 include(GNUInstallDirs)
 
 # look for header files
+
+message(STATUS "Checking for freedesktop.org.xml...")
+find_file(FREEDESKTOP  NAMES freedesktop.org.xml 
+    PATHS
+    /usr/share/mime/packages 
+    /usr/local/share/mime/packages 
+    )
+if(NOT FREEDESKTOP)
+    set(FREEDESKTOP ${FREEDESKTOP})
+    message( FATAL_ERROR "freedesktop.org.xml is not found" )
+else()
+    set(FREEDESKTOP "FREEDESKTOP \"${FREEDESKTOP}\" ")
+    message( STATUS  "freedesktop.org.xml was found." )
+endif()
+
+message(STATUS "Checking for mimetype (perl)...")
+find_program(MIMETYPE_PROGRAM mimetype)
+if(NOT MIMETYPE_PROGRAM)
+    set(MIMETYPE_PROGRAM ${MIMETYPE_PROGRAM})
+    message( FATAL_ERROR "mimetype is not found, ${MIMETYPE_PROGRAM}. Install: gentoo: dev-perl/File-MimeInfo or Archlinux: perl-file-mimeinfo\n" )
+else()
+    message( STATUS "${MIMETYPE_PROGRAM} was found. Good!" )
+endif()
+
 message(STATUS "Checking for signal.h...")
 find_path(SIGNAL_H  NAMES signal.h )
 if(NOT SIGNAL_H)
@@ -41,15 +65,6 @@ endif()
 #    set(LIBMAGIC "HAVE_LIBMAGIC 1")
 #    message(STATUS "libmagic was found." )
 #endif()
-message(STATUS "Checking for mimetype (perl)...")
-find_program(MIMETYPE_PROGRAM mimetype)
-if(NOT MIMETYPE_PROGRAM)
-    set(MIMETYPE_PROGRAM ${MIMETYPE_PROGRAM})
-    message( FATAL_ERROR "mimetype is not found, ${MIMETYPE_PROGRAM}. Install: gentoo: dev-perl/File-MimeInfo or Archlinux: perl-file-mimeinfo\n" )
-else()
-    message( STATUS "${MIMETYPE_PROGRAM} was found. Good!" )
-endif()
-
 
 # configure header file
 configure_file(
@@ -64,6 +79,7 @@ find_package(PkgConfig REQUIRED)
 #find_package(GLIB 2.58.1 REQUIRED)
 
 #DND does not work with gentoo local libs
+find_package(LibXml2 2.9.8 REQUIRED)
 find_package(GLIB 2.56.2 REQUIRED)
 find_package(GTK3 3.24.1 REQUIRED)
 #Gentoo installed, DND does not work
