@@ -17,13 +17,18 @@ class LocalPopUp {
 
 public:
      static void changeTitle(const gchar *iconName, 
-	    const gchar *name, const gchar *path)
+	    const gchar *name, const gchar *path, const gchar *mimetype)
     {
 	// change title
 	auto title = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(localItemPopUp), "title"));
 	gchar *extra = util_c::fileInfo(path);
 	gchar *statLine=util_c::statInfo(path);
-	gchar *markup = g_strdup_printf("<span size=\"larger\" color=\"red\"><b><i>%s</i></b></span>\n<span color=\"blue\">%s</span>\n<span color=\"green\">%s</span>", name, extra?extra:"no file info", statLine?statLine:"no stat info");
+	gchar *markup = g_strdup_printf("<span size=\"larger\" color=\"red\"><b><i>%s%s%s</i></b></span>\n<span color=\"blue\">%s</span>\n<span color=\"green\">%s</span>", 
+		name, 
+		mimetype?": ":"",
+		mimetype?mimetype:"",
+		extra?extra:"no file info", 
+		statLine?statLine:"no stat info");
 	gtk_c::menu_item_content(title, iconName, markup, -48);
 	g_free(statLine);
 	g_free(extra);
@@ -36,11 +41,20 @@ public:
 	gchar *aname=NULL;
         gchar *iconName=NULL;
 	gchar *path;
+	gchar *mimetype;
 	gtk_tree_model_get (treeModel, &iter, 
 		ACTUAL_NAME, &aname,
 		ICON_NAME, &iconName,
+		MIMETYPE, &mimetype,
 		PATH, &path,
 		-1);
+	if (!mimetype){
+	    mimetype = Mime<Type>::mimeType(path); 
+	    gtk_list_store_set(GTK_LIST_STORE(treeModel), &iter, 
+		MIMETYPE, mimetype, -1);
+	}
+
+	    
 	/*if (!st){
 	    st = (struct stat *)calloc(1, sizeof(struct stat));
 	    stat(path, st);
@@ -51,9 +65,10 @@ public:
         gchar *name = util_c::valid_utf_pathstring(aname);
         g_free(aname);
         if (localItemPopUp) {
-	    changeTitle(iconName, name, path);
+	    changeTitle(iconName, name, path, mimetype);
 	    g_free(name);
 	    g_free(iconName);
+	    g_free(mimetype);
 	    g_free(path);
             return localItemPopUp;
         }
@@ -90,7 +105,8 @@ public:
         gtk_widget_show (title);
         g_object_set_data(G_OBJECT(localItemPopUp), "title", title);
         gtk_container_add (GTK_CONTAINER (localItemPopUp), title);
-	changeTitle(iconName, name, path);
+	changeTitle(iconName, name, path, mimetype);
+        g_free(mimetype);
         g_free(iconName);
 	g_free(path);
         g_free(name);

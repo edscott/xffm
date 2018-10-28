@@ -1,9 +1,9 @@
 #ifndef XF_LITE_HPP
 #define XF_LITE_HPP
-
-namespace xf {
 static GHashTable *liteTypeHash = NULL;
 static GHashTable *liteKeyHash = NULL;
+
+namespace xf {
 typedef struct composite_t{
     const gchar *sub_id;
     const gchar *where;
@@ -21,7 +21,7 @@ typedef struct lite_t {
     guchar blue;
 } lite_t;
 static pthread_mutex_t liteMutex = PTHREAD_MUTEX_INITIALIZER;
-static const lite_t lite_v[]={
+static lite_t lite_v[]={
     {"lite/regular", NULL, NULL, 0xff, 0xff, 0xff}, 
     {"lite/image", N_("image"), "emblem-image", 0xff, 0xcc, 0xff}, 
     {"lite/Audio", N_("Audio"), "emblem-music", 0, 0xff, 0xff},
@@ -57,9 +57,12 @@ static const lite_t lite_v[]={
     {NULL,NULL,NULL, 0,0,0}
 };
 
-static constexpr gchar const *lite_keys[] = {
+static gchar const *lite_keys[] = {
+    "image", "lite/image",
     //"image/jpeg", "lite/image",
 
+    "text", "lite/text",
+    "text/plain", "lite/tex",
     "text/x-tex", "lite/tex",
     "text/x-log", "lite/text-log",
     "text/x-readme", "lite/text-readme",
@@ -74,6 +77,18 @@ static constexpr gchar const *lite_keys[] = {
     "text/x-install", "lite/text-install",
     "text/x-info", "lite/text-info",
     "text/html", "lite/text-html",
+    "text/javascript", "lite/script",
+    "text/scriptlet", "lite/script",
+    "text/x-dcl", "lite/script",
+    "text/x-lua", "lite/script",
+    "text/x-matlab", "lite/script",
+    "text/x-tcl", "lite/script",
+    "text/x-csh", "lite/script",
+    "text/x-sh", "lite/script",
+    "text/x-shellscript", "lite/script",
+    "text/x-python", "lite/script",
+
+    "application", "lite/application",
     "application/x-lyx", "lite/lyx",
     "application/x-trash", "lite/trash",
     "application/pdf", "lite/pdf",
@@ -130,10 +145,6 @@ static constexpr gchar const *lite_keys[] = {
 
     "application/x-shellscript", "lite/script",
     "application/x-csh", "lite/script",
-    "text/x-csh", "lite/script",
-    "text/x-sh", "lite/script",
-    "text/x-shellscript", "lite/script",
-    "text/x-python", "lite/script",
     "application/javascript", "lite/script",
     "application/sieve", "lite/script",
     "application/x-awk", "lite/script",
@@ -143,12 +154,6 @@ static constexpr gchar const *lite_keys[] = {
     "application/x-php", "lite/script",
     "application/x-ruby", "lite/script",
     "application/x-setupscript", "lite/script",
-    "text/javascript", "lite/script",
-    "text/scriptlet", "lite/script",
-    "text/x-dcl", "lite/script",
-    "text/x-lua", "lite/script",
-    "text/x-matlab", "lite/script",
-    "text/x-tcl", "lite/script",
     NULL, NULL
 };
 
@@ -160,32 +165,51 @@ class Lite {
         pthread_mutex_lock (&liteMutex);  
 	liteTypeHash = g_hash_table_new (g_str_hash, g_str_equal);
 	liteKeyHash = g_hash_table_new (g_str_hash, g_str_equal);
-	const lite_t *lite_type_p = lite_v;
+	lite_t *lite_type_p = lite_v;
 	for (;lite_type_p && lite_type_p->id; lite_type_p++){
-	    void *key = (void *)g_strdup(lite_type_p->id);
-	    void *data = calloc(1, sizeof(lite_t));
-	    memcpy(data, (void *)lite_type_p, sizeof(lite_t));
+	    DBG("liteTypeHash: -> %s:%p\n", lite_type_p->id, lite_type_p);
+	    auto key = (void *)g_strdup(lite_type_p->id);
+	    auto data = calloc(1, sizeof(lite_t));
+	    memcpy(data, lite_type_p, sizeof(lite_t));
 	    g_hash_table_insert(liteTypeHash, key, data);
 	}
-	const gchar * const *cp = lite_keys;
+	gchar const **cp = lite_keys;
 	for (;cp && *cp; cp+=2){
-	    void *key = (void *)g_strdup(cp[0]);
-	    void *data = (void *)g_strdup(cp[1]);
+	    auto key = (void *)g_strdup(cp[0]);
+	    auto data = (void *)g_strdup(cp[1]);
+	    WARN("liteKeyHash: %s, %s\n", cp[0], cp[1]);
 	    g_hash_table_insert(liteKeyHash, key, data);
 	}
         pthread_mutex_unlock (&liteMutex);  
     }
 
 
+    static const gchar *getLiteKey(const gchar *mimetype){
+        if (!mimetype) return NULL;
+        auto lite_key = g_hash_table_lookup(liteKeyHash, mimetype);
+	if (!lite_key) {
+	    gchar *mkey = g_strdup(mimetype);
+	    if (strchr(mkey, '/')) *strchr(mkey, '/') = 0;
+            lite_key = g_hash_table_lookup(liteKeyHash, mimetype);
+	    g_free(mkey);
+	    if (!lite_key) {
+		WARN("lite_key for %s is NULL\n", mimetype);
+		return NULL;
+	    }
+	}
+	return (const gchar *)lite_key;
+    }
+
     public:
 
 
     static const gchar *
     get_lite_emblem(const gchar *mimetype){
+	//return NULL;
         init();
-        if (!mimetype) return NULL;
-        const gchar *lite_key = (const gchar *)g_hash_table_lookup(liteKeyHash, mimetype);
-        lite_t *lite_p = (lite_t *)g_hash_table_lookup(liteTypeHash, lite_key);
+        auto lite_key = getLiteKey(mimetype);
+        if (!lite_key) return NULL;
+        auto lite_p = (lite_t *)g_hash_table_lookup(liteTypeHash, (const gchar *)lite_key);
         if (!lite_p) return NULL;
         return lite_p->icon;
     }
@@ -193,10 +217,9 @@ class Lite {
     static gboolean 
     get_lite_colors(const gchar *mimetype, guchar *r, guchar *g, guchar *b){
         init();
-        if (!mimetype) return FALSE;
-        const gchar *lite_key = (const gchar *)g_hash_table_lookup(liteKeyHash, mimetype);
+        auto lite_key = getLiteKey(mimetype);
         if (!lite_key) return FALSE;
-        lite_t *lite_p = (lite_t *)g_hash_table_lookup(liteTypeHash, lite_key);
+        auto lite_p = (lite_t *)g_hash_table_lookup(liteTypeHash, lite_key);
         if (!lite_p) return FALSE;
         *r = lite_p->red;
         *g = lite_p->green;

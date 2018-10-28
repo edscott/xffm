@@ -4,6 +4,98 @@
 // For starters, we need mime_type() and mime_file(), 
 // then type_from_sfx and alias_type and apps and command
 
+// We have now simplified, removing custom made mime determination
+// with now mature shared-mime-info package.
+// This follows the same principle used in replacing custom made
+// iconview with now mature gtk iconview.
+// Things get simpler and maintainance not so complicated (methinks).
+// 
+// Remake: simplify with now mature shared-mime-info package
+namespace xf {
+
+template <class Type>
+class Mime {
+
+private:
+    static gchar *
+    mime (const gchar *command){
+	FILE *pipe = popen (command, "r");
+	if(pipe == NULL) {
+	    ERROR("Cannot pipe from %s\n", command);
+	    return NULL;
+	}
+#define MIMETYPE_LINE 256
+	gchar *retval = NULL;
+        gchar line[MIMETYPE_LINE];
+        line[MIMETYPE_LINE - 1] = 0;
+	if (!fgets (line, MIMETYPE_LINE - 1, pipe)) {
+	    ERROR("!fgets (line, MIMETYPE_LINE - 1, pipe)\n");
+        } 
+	else 
+	{
+	    retval = g_strdup(line);
+	    if (strchr(retval, '\n')) *strchr(retval, '\n') = 0;
+	}
+        pclose (pipe);
+	return retval;
+    }
+
+public:    
+
+    static gchar *
+    mimeMagic (const gchar *file){
+	//only magic:
+	gchar *command = g_strdup_printf("%s -L -M --output-format=\"%%m\" \"%s\"", MIMETYPE_PROGRAM, file);
+	gchar *retval = mime(command);
+	g_free(command);
+	return retval;
+    }
+
+    static gchar *
+    mimeType (const gchar *file){
+	gchar *command = g_strdup_printf("%s -L --output-format=\"%%m\" \"%s\"", MIMETYPE_PROGRAM, file);
+	TRACE("mimeType command: %s\n", command);
+ 	gchar *retval = mime(command);
+	TRACE("mimeType: %s --> %s\n", file, retval);
+	g_free(command);
+	return retval;
+   } 
+
+        
+    static gchar *
+    mimeType (const gchar *file, struct stat *st_p) {
+        if (!file) return NULL;
+        if(file[strlen (file) - 1] == '~' || file[strlen (file) - 1] == '%') {
+            gchar *r_file = g_strdup(file);
+            r_file[strlen (r_file) - 1] = 0;
+            gchar *retval = mimeType(r_file, st_p);
+            g_free(r_file);
+            return retval;
+        }
+        return mimeMagic(file);
+    }
+
+// FIXME: use language code -l code, --language=code 
+    static gchar *
+    mimeFile (const gchar *file){
+	gchar *command = g_strdup_printf("%s -d -L --output-format=\"%%d\" \"%s\"", MIMETYPE_PROGRAM, file);
+ 	gchar *retval = mime(command);
+	g_free(command);
+	return retval;
+   } 
+   
+    static const gchar *
+    get_mimetype_iconname(const gchar *mimetype){
+	//FIXME: pull in value built from hash:
+	return NULL;
+        //return MimeHash<txt_hash_t>::lookup(mimetype, hash_data[GENERIC_ICON]); 
+    }
+
+
+};
+}
+#if 0 //deprecated stuff
+
 #include "mime/mimemagic.hh"
 #include "mime/lite.hh"
 #include "mime/mimehash.hh"
@@ -596,4 +688,5 @@ class Mime {
 
 };
 }
+#endif // deprecated stuff
 #endif

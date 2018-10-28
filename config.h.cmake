@@ -6,5 +6,5 @@
 
 #define @SIGNAL_H@
 #define @HAVE_GREP@
-#define @LIBMAGIC@
+#define MIMETYPE_PROGRAM "@MIMETYPE_PROGRAM@"
 

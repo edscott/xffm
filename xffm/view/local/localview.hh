@@ -3,9 +3,12 @@
 
 // FIXME: determine HAVE_STRUCT_DIRENT_D_TYPE on configure (for freebsd)
 #define HAVE_STRUCT_DIRENT_D_TYPE 1
-
+#undef USE_MIME
+//#define USE_MIME 1
+#undef USE_LITE
+//#define USE_LITE 1
 #include "mime/lite.hh"
-// FIXME: #include "mime/mime.hh"
+#include "mime/mime.hh"
 #include "common/util.hh"
 
 #include "localpopup.hh"
@@ -269,9 +272,8 @@ private:
                             xd_p->path, strerror(errno));
                     continue;
                 }
-               // FIXME: enamble mime_c 
-                //xd_p->mimetype = mime_c::mime_type(xd_p->d_name, xd_p->st); // using stat obtained above
-                //xd_p->mimefile = g_strdup(mime_c::mime_file(xd_p->d_name)); // 
+                xd_p->mimetype = Mime<Type>::mimeType(xd_p->d_name, xd_p->st); // using stat obtained above
+                xd_p->mimefile = g_strdup(Mime<Type>::mimeFile(xd_p->d_name)); // 
             }
         }
         */
@@ -377,8 +379,11 @@ private:
         
         gchar *utf_name = util_c::utf_string(xd_p->d_name);
         // plain extension mimetype fallback
-        // FIXME: enable mime_c template
-        //if (!xd_p->mimetype) xd_p->mimetype = mime_c::mime_type(xd_p->d_name); 
+	//
+	// FIXME: maybe do a group mimetype for all items...
+#ifdef USE_MIME
+        if (!xd_p->mimetype) xd_p->mimetype = Mime<Type>::mimeType(xd_p->path); 
+#endif
         gchar *icon_name = get_iconname(xd_p);
 	TRACE("icon name for %s is %s\n", xd_p->d_name, icon_name);
         
@@ -459,7 +464,9 @@ private:
     static gchar *
     get_iconname(xd_t *xd_p, gboolean use_lite){
         gchar *name = get_basic_iconname(xd_p);
+	TRACE("basic iconname: %s --> %s\n", xd_p->d_name, name);
         gchar *emblem = get_emblem_string(xd_p, use_lite);
+	if (!name) name = g_strdup("image-missing");
         gchar *iconname = g_strconcat(name, emblem, NULL);
         g_free(name);
         g_free(emblem);
@@ -472,7 +479,7 @@ private:
         // Directories:
         if (strcmp(xd_p->d_name, "..")==0) return  g_strdup("go-up");
 #ifdef HAVE_STRUCT_DIRENT_D_TYPE
-
+#warning "HAVE_STRUCT_DIRENT_D_TYPE defined"
         // Symlinks:
     /*    if (xd_p->d_type == DT_LNK) {
             return  g_strdup("text-x-generic-template/SW/emblem-symbolic-link/2.0/220");
@@ -553,20 +560,22 @@ private:
 
     static const gchar *
     get_mime_iconname(xd_t *xd_p){
-        const gchar *basic = "text-x-generic";
-#if 0
+        const gchar *basic = NULL;
+#ifdef USE_MIME
         if (xd_p->mimetype) {
             // here we should get generic-icon from mime-module.xml!
-            const gchar *basic = mime_c::get_mimetype_iconname(xd_p->mimetype);
-            //DBG("xfdir_local_c::get_mime_iconname(%s) -> %s\n", xd_p->mimetype, basic);
+            basic = Mime<Type>::get_mimetype_iconname(xd_p->mimetype);
+            TRACE("xfdir_local_c::get_mime_iconname(%s) -> %s\n", xd_p->mimetype, basic);
             if (basic) {
                 // check if the pixbuf is actually available
                 GdkPixbuf *pixbuf = pixbuf_c::get_pixbuf(basic,  GTK_ICON_SIZE_DIALOG);
                 if (pixbuf) return basic;
+		else return "text-x-generic";
             } else {
                 if (strstr(xd_p->mimetype, "text/html")){
                     return "text-html";
                 }
+		return "text-x-generic";
             }
 
     /*
@@ -596,7 +605,7 @@ private:
     */
         }
 #endif
-        return basic;
+        return "text-x-generic";
     }
 
     static gchar *
@@ -693,10 +702,12 @@ private:
                 g_free(emblem); 
                 emblem = g;
             }
+#ifdef USE_LITE
             else if (Lite<Type>::get_lite_colors(xd_p->mimetype, &red, &green, &blue)){
                 g_free(colors);
                 colors = g_strdup_printf("#%02x%02x%02x", red, green, blue);
             }
+#endif
             gchar *extension = g_strdup("");
             if (strrchr(xd_p->d_name, '.') && strrchr(xd_p->d_name, '.') != xd_p->d_name
                     && strlen(strrchr(xd_p->d_name, '.')) <= EXTENSION_LABEL_LENGTH) {
@@ -745,14 +756,17 @@ private:
             g_free(extension);
             g_free(emblem); 
             emblem = g;
+#ifdef USE_LITE
             if (use_lite) {
                 const gchar *lite_emblem = Lite<Type>::get_lite_emblem(xd_p->mimetype);
+		WARN("lite_emblem=%s\n", lite_emblem);
                 if (lite_emblem){
                     g = g_strconcat(emblem, "/NE/", lite_emblem, "/1.8/200", NULL); 
                     g_free(emblem); 
                     emblem = g;
                 }
             } 
+#endif
         }
         return emblem;
     }
