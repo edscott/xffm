@@ -43,8 +43,9 @@ public:
     get_pixbuf(const gchar *icon_name, gint size){
 	TRACE("get_pixbuf(%s)\n", icon_name);
 	if (!icon_name){
-	    ERROR("pixbuf_c::get_pixbuf() icon_name is NULL.\n");
-	    return get_pixbuf("image-missing", size);
+	    return NULL;
+	    //ERROR("pixbuf_c::get_pixbuf() icon_name is NULL.\n");
+	    //return get_pixbuf("image-missing", size);
 	}
 	// if item is not found in hash, it will be created and inserted into hash 
 	// (whenever possible)

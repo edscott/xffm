@@ -12,6 +12,7 @@ class LocalPopUp {
     using gtk_c = Gtk<Type>;
     using pixbuf_c = Pixbuf<Type>;
     using util_c = Util<Type>;
+    using pixbuf_icons_c = Icons<Type>;
 
 
 
@@ -42,8 +43,10 @@ public:
         gchar *iconName=NULL;
 	gchar *path;
 	gchar *mimetype;
+	gchar *displayName;
 	gtk_tree_model_get (treeModel, &iter, 
 		ACTUAL_NAME, &aname,
+		DISPLAY_NAME, &displayName,
 		ICON_NAME, &iconName,
 		MIMETYPE, &mimetype,
 		PATH, &path,
@@ -64,59 +67,115 @@ public:
 	}*/
         gchar *name = util_c::valid_utf_pathstring(aname);
         g_free(aname);
-        if (localItemPopUp) {
-	    changeTitle(iconName, name, path, mimetype);
-	    g_free(name);
-	    g_free(iconName);
-	    g_free(mimetype);
-	    g_free(path);
-            return localItemPopUp;
-        }
-         
-        localItemPopUp = GTK_MENU(gtk_menu_new());
-         menuItem_t item[]={
-            {N_("Create a new empty folder inside this folder"), (void *)noop, (void *) localItemPopUp},
-            {N_("Open in New Tab"), (void *)noop, (void *) localItemPopUp},
-            //common buttons /(also an iconsize +/- button)
-            {N_("Copy"), (void *)noop, (void *) localItemPopUp},
-            {N_("Cut"), (void *)noop, (void *) localItemPopUp},
-            {N_("Paste"), (void *)noop, (void *) localItemPopUp},
-            {N_("bcrypt"), (void *)noop, (void *) localItemPopUp},
-            {N_("Rename"), (void *)noop, (void *) localItemPopUp},
-            {N_("Duplicate"), (void *)noop, (void *) localItemPopUp},
-            {N_("Link"), (void *)noop, (void *) localItemPopUp},
-            {N_("Touch"), (void *)noop, (void *) localItemPopUp},
-            {N_("File Information..."), (void *)noop, (void *) localItemPopUp},
-            {N_("Properties"), (void *)noop, (void *) localItemPopUp},
-            {N_("Delete"), (void *)noop, (void *) localItemPopUp},
-            {N_("Mimetype command"), (void *)noop, (void *) localItemPopUp},
-            {N_("autotype_Prun"), (void *)noop, (void *) localItemPopUp},
-            {N_("Open with"), (void *)noop, (void *) localItemPopUp},
-            {N_("Mount the volume associated with this folder"), (void *)noop, (void *) localItemPopUp},
-            {N_("Unmount the volume associated with this folder"), (void *)noop, (void *) localItemPopUp},
-             {NULL,NULL,NULL}};
-        
-        auto p = item;
-        gint i;
+
+        if (!localItemPopUp) {
+	    localItemPopUp = GTK_MENU(gtk_menu_new());
+	     menuItem_t item[]={
+		{("mimetypeOpen"), (void *)command, (void *) localItemPopUp},
+		{N_("Create a new empty folder inside this folder"), (void *)noop, (void *) localItemPopUp},
+		{N_("Open in New Tab"), (void *)noop, (void *) localItemPopUp},
+		//common buttons /(also an iconsize +/- button)
+		{N_("Copy"), (void *)noop, (void *) localItemPopUp},
+		{N_("Cut"), (void *)noop, (void *) localItemPopUp},
+		{N_("Paste"), (void *)noop, (void *) localItemPopUp},
+		{N_("bcrypt"), (void *)noop, (void *) localItemPopUp},
+		{N_("Rename"), (void *)noop, (void *) localItemPopUp},
+		{N_("Duplicate"), (void *)noop, (void *) localItemPopUp},
+		{N_("Link"), (void *)noop, (void *) localItemPopUp},
+		{N_("Touch"), (void *)noop, (void *) localItemPopUp},
+		{N_("File Information..."), (void *)noop, (void *) localItemPopUp},
+		{N_("Properties"), (void *)noop, (void *) localItemPopUp},
+		{N_("Delete"), (void *)noop, (void *) localItemPopUp},
+		{N_("Mimetype command"), (void *)noop, (void *) localItemPopUp},
+		{N_("autotype_Prun"), (void *)noop, (void *) localItemPopUp},
+		{N_("Open with"), (void *)noop, (void *) localItemPopUp},
+		{N_("Mount the volume associated with this folder"), (void *)noop, (void *) localItemPopUp},
+		{N_("Unmount the volume associated with this folder"), (void *)noop, (void *) localItemPopUp},
+		 {NULL,NULL,NULL}};
 	    
-	
-        GtkWidget *title = gtk_c::menu_item_new(iconName, ""); 
-        gtk_widget_set_sensitive(title, FALSE);
-        gtk_widget_show (title);
-        g_object_set_data(G_OBJECT(localItemPopUp), "title", title);
-        gtk_container_add (GTK_CONTAINER (localItemPopUp), title);
+	    auto p = item;
+	    gint i;
+		
+	    
+	    GtkWidget *title = gtk_c::menu_item_new(iconName, ""); 
+	    gtk_widget_set_sensitive(title, FALSE);
+	    gtk_widget_show (title);
+	    g_object_set_data(G_OBJECT(localItemPopUp), "title", title);
+	    gtk_container_add (GTK_CONTAINER (localItemPopUp), title);
+
+	    for (i=0;p && p->label; p++,i++){
+		//GtkWidget *v = gtk_menu_item_new_with_label (_(p->label));
+		GtkWidget *v = gtk_c::menu_item_new(NULL, _(p->label));
+		g_object_set_data(G_OBJECT(localItemPopUp), p->label, v);
+		gtk_widget_set_sensitive(v, FALSE);
+		gtk_container_add (GTK_CONTAINER (localItemPopUp), v);
+		g_signal_connect ((gpointer) v, "activate", MENUITEM_CALLBACK (p->callback), p->callbackData);
+		gtk_widget_show (v);
+	    }
+	    gtk_widget_show (GTK_WIDGET(localItemPopUp));
+
+	}
+
+	// get mimetype app from hashtable (FIXME)
+	if (mimetype && strncmp(mimetype, "text/", strlen("text/")) == 0){
+	    // environ EDITOR
+	    gchar *editor = util_c::get_text_editor();
+
+	    /*const gchar *editor = getenv("EDITOR");
+	    if (!editor || !strlen(editor)) {
+		gchar *g;
+		if ((g=g_find_program_in_path("gvim"))!=NULL){
+		    editor = "gvim";
+		    g_free(g);
+		}
+		else if((g=g_find_program_in_path("nano"))!=NULL){
+		    g_free(g);
+		    editor = "nano";
+		}
+		else if((g=g_find_program_in_path("vi"))!=NULL){
+		    g_free(g);
+		    editor = "vi";
+		}
+	    }*/
+	    auto v = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(localItemPopUp), "mimetypeOpen"));
+	    //gtk_c::menu_item_content(v, "gvim", markup, -24);
+	    gchar *icon = g_strdup(editor);
+	    g_strstrip(icon);
+	    if (strchr(icon, ' ')) *strchr(icon, ' ') = 0;
+	    gchar *g = g_path_get_basename(icon);
+	    g_free(icon);
+	    icon = g;
+	    GdkPixbuf *p = pixbuf_c::get_pixbuf(icon, -24);
+	    gchar *markup = g_strdup_printf("<b>%s %s</b>", editor, displayName);
+	    
+	    gboolean iconOK = pixbuf_icons_c::iconThemeHasIcon(icon);
+	    gtk_c::menu_item_content(v, iconOK?icon:"accessories-text-editor-symbolic", markup, -24);
+	    //gtk_c::menu_item_content(v, p?icon:"accessories-text-editor-symbolic", markup, -24);
+	    auto command = (gchar *)g_object_get_data(G_OBJECT(v), "command");
+	    g_free(command);
+
+	    
+	    command = g_strdup_printf("%s \"%s\"", editor, path);
+	    g_object_set_data(G_OBJECT(v), "command", command);
+                   
+	    gtk_widget_show(GTK_WIDGET(v));
+	    gtk_widget_set_sensitive(GTK_WIDGET(v), TRUE);
+	    
+	    g_free(displayName);
+	    g_free(icon);
+	    g_free(markup);
+
+	} else {
+	    auto v = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "mimetypeOpen"));
+	    gtk_widget_hide(v);
+	}
+
 	changeTitle(iconName, name, path, mimetype);
-        g_free(mimetype);
-        g_free(iconName);
+	g_free(name);
+	g_free(iconName);
+	g_free(mimetype);
 	g_free(path);
-        g_free(name);
-        for (i=0;p && p->label; p++,i++){
-            GtkWidget *v = gtk_menu_item_new_with_label (_(p->label));
-            gtk_container_add (GTK_CONTAINER (localItemPopUp), v);
-            g_signal_connect ((gpointer) v, "activate", MENUITEM_CALLBACK (p->callback), p->callbackData);
-            gtk_widget_show (v);
-        }
-        gtk_widget_show (GTK_WIDGET(localItemPopUp));
+         
         return localItemPopUp;
         
     }
@@ -200,7 +259,20 @@ public:
     static void
     noop(GtkMenuItem *menuItem, gpointer data)
     {
-        DBG("noop\n")
+        DBG("noop\n");
+    }
+    static void
+    command(GtkMenuItem *menuItem, gpointer data)
+    {
+	auto command = (gchar *)g_object_get_data(G_OBJECT(menuItem), "command");
+	// execute command...
+        DBG("command %s\n", command);
+	// get baseView
+	auto baseView =  (BaseView<Type> *)g_object_get_data(G_OBJECT(data), "baseView");
+	// get page
+	auto page = baseView->page();
+	page->command(command);
+	
     }
   
 };

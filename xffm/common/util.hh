@@ -460,6 +460,8 @@ public:
 	if(!value) return NULL;
 	
 	gchar *editor=g_path_get_basename(value);
+	g_strstrip(editor);
+	//if (strchr(editor, ' ')) *strchr(editor, ' ') = 0;
 	// if nano or vi, then use terminal emulator
 	if (editor && 
 		(strncmp(editor, "vi",strlen("vi"))==0 

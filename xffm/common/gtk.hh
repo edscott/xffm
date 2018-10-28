@@ -207,9 +207,10 @@ public:
 	    g_object_set_data(G_OBJECT(w), "image", image);
 	}
 	if (label && GTK_IS_WIDGET(label)) {
-            gchar *markup = g_strdup_printf("<span size=\"larger\" color=\"red\"><b><i>%s</i></b></span>", text);
+            gtk_label_set_markup(label, text);
+            /*gchar *markup = g_strdup_printf("<span size=\"larger\" color=\"red\"><b><i>%s</i></b></span>", text);
             gtk_label_set_markup(label, markup);
-            g_free(markup);
+            g_free(markup);*/
 	    gtk_box_pack_start(box, GTK_WIDGET(label), FALSE,FALSE,3);
 	    g_object_set_data(G_OBJECT(w), "label", label);
 	    gtk_widget_show(GTK_WIDGET(label));

@@ -185,7 +185,7 @@ public:
 	GtkListStore *store = GTK_LIST_STORE(model);
 	st = (struct stat *)calloc(1, sizeof(struct stat));
 	if (stat((gchar *)data, st) != 0){
-	    ERROR( "stat: %s\n", strerror(errno));
+	    TRACE( "stat: %s\n", strerror(errno));
 	    return FALSE;
 	}
 

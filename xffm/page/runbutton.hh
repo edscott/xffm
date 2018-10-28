@@ -170,14 +170,17 @@ public:
 	gchar *command = g_strdup(run_button_p->command());
 	using pixbuf_icons_c = Icons<Type>;
 	
-	if (run_button_p->inShell()) run_button_p->set_icon_id("utilities-terminal");
-	else {
+	/*if (run_button_p->inShell()) {
+	    WARN("run_button_p->inShell\n");
+	    run_button_p->set_icon_id("utilities-terminal");
+	} else */
+	{
 	    command = g_strstrip(command);
 	    gchar **args = g_strsplit(command, " ", -1);
 	    gchar *icon_id = NULL;
 	    if (args && args[0]) {
 		icon_id = g_path_get_basename(args[0]);
-		TRACE("RunButton::run_button_setup: attempting icon for \"%s\"\n", icon_id);
+		WARN("RunButton::run_button_setup: attempting icon for \"%s\"\n", icon_id);
 		// xterm exception
 		if (strcmp(icon_id, "xterm")==0){
 		    g_free(icon_id);

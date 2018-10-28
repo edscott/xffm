@@ -141,6 +141,9 @@ public:
 #endif
     Dialog<Type> *parent(void){return parent_;}
 
+    void command(const gchar *command){
+        this->run_lp_command(this->output(), this->workDir(), command);
+    }
     
     void scriptRun(void){
 	    gchar *command = print_c::get_current_text(this->input());

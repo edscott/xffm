@@ -120,6 +120,9 @@ class BaseView{
     }
 
 public:
+    page_c *page(void){return page_;}
+
+    
     BaseView(page_c *page, const gchar *path){
 	page_ = page; 
         path_ = NULL;
