@@ -121,22 +121,6 @@ public:
 	    // environ EDITOR
 	    gchar *editor = util_c::get_text_editor();
 
-	    /*const gchar *editor = getenv("EDITOR");
-	    if (!editor || !strlen(editor)) {
-		gchar *g;
-		if ((g=g_find_program_in_path("gvim"))!=NULL){
-		    editor = "gvim";
-		    g_free(g);
-		}
-		else if((g=g_find_program_in_path("nano"))!=NULL){
-		    g_free(g);
-		    editor = "nano";
-		}
-		else if((g=g_find_program_in_path("vi"))!=NULL){
-		    g_free(g);
-		    editor = "vi";
-		}
-	    }*/
 	    auto v = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(localItemPopUp), "mimetypeOpen"));
 	    //gtk_c::menu_item_content(v, "gvim", markup, -24);
 	    gchar *icon = g_strdup(editor);
