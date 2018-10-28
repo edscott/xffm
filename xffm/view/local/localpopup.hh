@@ -24,7 +24,7 @@ public:
 	auto title = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(localItemPopUp), "title"));
 	gchar *extra = util_c::fileInfo(path);
 	gchar *statLine=util_c::statInfo(path);
-	gchar *markup = g_strdup_printf("<span size=\"larger\" color=\"red\"><b><i>%s%s%s</i></b></span>\n<span color=\"blue\">%s</span>\n<span color=\"green\">%s</span>", 
+	gchar *markup = g_strdup_printf("<span size=\"larger\" color=\"red\"><b><i>%s</i></b></span><span color=\"#aa0000\">%s%s</span>\n<span color=\"blue\">%s</span>\n<span color=\"green\">%s</span>", 
 		name, 
 		mimetype?": ":"",
 		mimetype?mimetype:"",
