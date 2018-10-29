@@ -96,7 +96,7 @@ public:
         //return MimeHash<txt_hash_t>::lookup(mimetype, hash_data[GENERIC_ICON]); 
     }
 
-
+//#define WORKINPROGRESS 1
 #ifdef WORKINPROGRESS
 static void
 mime_build_hashes (void) {

@@ -315,6 +315,24 @@ private:
         }
         return FALSE;
     }
+     
+    static gboolean cHdr(const gchar *file){
+        if (!file) return FALSE;
+        const gchar *ext = strrchr(file, '.');
+        if (!ext) return FALSE;        
+        if(strcmp(ext, ".h")==0 || strcmp(ext, ".hpp")==0 
+                || strcmp(ext, ".hh")==0) return TRUE;
+        return FALSE;
+    }
+   
+    static gboolean cSrc(const gchar *file){
+        if (!file) return FALSE;
+        const gchar *ext = strrchr(file, '.');
+        if (!ext) return FALSE;        
+        if(strcmp(ext, ".c")==0 || strcmp(ext, ".cpp")==0 
+                || strcmp(ext, ".cc")==0) return TRUE;
+        return FALSE;
+    }
 
 private:
     static gboolean
@@ -465,7 +483,7 @@ private:
     get_iconname(xd_t *xd_p, gboolean use_lite){
         gchar *name = get_basic_iconname(xd_p);
 	TRACE("basic iconname: %s --> %s\n", xd_p->d_name, name);
-        gchar *emblem = get_emblem_string(xd_p, use_lite);
+        gchar *emblem = getEmblem(xd_p);
 	if (!name) name = g_strdup("image-missing");
         gchar *iconname = g_strconcat(name, emblem, NULL);
         g_free(name);
@@ -627,157 +645,138 @@ private:
     }
 
     static gchar *
-    get_emblem_string(xd_t *xd_p){
-        return get_emblem_string(xd_p, TRUE);
-    }
-
-    static gchar *
-    regularEmblem(xd_t *xd_p, gchar *emblem){
-	gchar *g;
-	if (xd_p->d_name[0] == '.') {
-	    g = g_strconcat(emblem, "#888888", NULL); 
-	    g_free(emblem); 
-	    emblem = g;
-	    return emblem;
-	}
-	guchar red;
-	guchar green;
-	guchar blue;
-	gchar *colors = g_strdup("");
-#if 0
-	if (getColors(xd_p, &red, &green, &blue)){
-	    g_free(colors);
-	    colors = g_strdup_printf("#%02x%02x%02x", red, green, blue);
-	}
-	
-	gchar *extension = g_strdup("");
+    extension(xd_t *xd_p){
+	auto extension = g_strdup("");
 	if (strrchr(xd_p->d_name, '.') && strrchr(xd_p->d_name, '.') != xd_p->d_name
 		&& strlen(strrchr(xd_p->d_name, '.')+1) <= EXTENSION_LABEL_LENGTH) {
 	    extension = g_strconcat("*", strrchr(xd_p->d_name, '.')+1, NULL) ;
 	}
-	if (!xd_p->st) {
-	    g = g_strdup_printf("%s%s", 
-		    extension, colors);
+        return extension;
+    }
+
+    static gchar *
+    addColors(xd_t *xd_p, const gchar *extension, const gchar *emblem){
+        // hidden files:
+         if (xd_p->d_name[0] == '.') {
+	    return g_strconcat(extension, "#888888", emblem, NULL); 
 	}
+        if (strcmp(xd_p->d_name, "core")==0) {
+	    return g_strconcat(extension, "#880000", emblem, NULL); 
+        }
+
+        if (xd_p->mimetype){
+            // FIXME Here we can do additional mimetype coloring...
+        }
+
+        // simple file extension coloring fallback
+        gchar *ext = strrchr(xd_p->d_name, '.');
+        if (!ext) return g_strconcat(ext, emblem, NULL);
+        if (cHdr(xd_p->d_name)){
+            return g_strconcat(extension, "#eed680", emblem, NULL);
+        }
+        if (cSrc(xd_p->d_name)){
+            return g_strconcat(extension, "#887fd3", emblem, NULL);
+        }
+        if (backupType(xd_p->d_name)){
+            return g_strconcat(extension, "#cc7777", emblem, NULL);
+        }
+        return g_strconcat(extension, emblem, NULL);
+    }
+
+    static gchar *
+    statEmblem(xd_t *xd_p, const gchar *emblem){
+        if (!xd_p->st){
+            return g_strdup(emblem);
+        }
+        if (xd_p->st->st_mode & S_IFMT == S_IFDIR) {
+            // all access:
+            if (O_ALL(xd_p->st->st_mode)){
+                return g_strconcat(emblem, "/C/face-surprise/2.0/180", NULL);
+            }
+            if ((MY_GROUP(xd_p->st->st_gid) && G_ALL(xd_p->st->st_mode)) 
+                    || (MY_FILE(xd_p->st->st_uid) && U_ALL(xd_p->st->st_mode))){
+                return g_strdup(emblem);
+            }
+            // read only:
+            if (O_RX(xd_p->st->st_mode) 
+                    || (MY_GROUP(xd_p->st->st_gid) && G_RX(xd_p->st->st_mode)) 
+                    || (MY_FILE(xd_p->st->st_uid) && U_RX(xd_p->st->st_mode))){
+                return g_strconcat(emblem, "/C/emblem-readonly/3.0/180", NULL);
+            }
+            else {
+                // no access:
+                return g_strconcat(emblem, "/C/face-angry/3.0/180", NULL);
+            }
+        }
+        // The rest is only for regular files (links too?)
+        if (xd_p->st->st_mode & S_IFMT != S_IFREG) return g_strdup(emblem);
+
+
 	// all access:
-	else if (O_ALL(xd_p->st->st_mode) || O_RW(xd_p->st->st_mode)){
-		g = g_strdup_printf("%s%s%s/C/face-surprise-symbolic/2.5/180/NW/application-x-executable-symbolic/3.0/180",
-			extension, colors, emblem);
+	if (O_ALL(xd_p->st->st_mode) || O_RW(xd_p->st->st_mode)){
+		return g_strdup_printf("%s/C/face-surprise-symbolic/2.5/180/NW/application-x-executable-symbolic/3.0/180", 
+                        emblem);
 	// read/write/exec
 	} else if((MY_GROUP(xd_p->st->st_gid) && G_ALL(xd_p->st->st_mode)) 
 		|| (MY_FILE(xd_p->st->st_uid) && U_ALL(xd_p->st->st_mode))){
-		g = g_strdup_printf("%s%s%s/NW/application-x-executable-symbolic/3.0/180", 
-			extension, colors, emblem);
+		return g_strdup_printf("%s/NW/application-x-executable-symbolic/3.0/180", 
+			emblem);
 	// read/exec
 	} else if (O_RX(xd_p->st->st_mode)
 		||(MY_GROUP(xd_p->st->st_gid) && G_RX(xd_p->st->st_mode)) 
 		|| (MY_FILE(xd_p->st->st_uid) && U_RX(xd_p->st->st_mode))){
-		g = g_strdup_printf("%s%s%s/NW/application-x-executable-symbolic/3.0/180", 
-			extension, colors, emblem);
+		return g_strdup_printf("%s/NW/application-x-executable-symbolic/3.0/180", 
+			emblem);
 
 	// read/write
 	} else if ((MY_GROUP(xd_p->st->st_gid) && G_RW(xd_p->st->st_mode))
 		|| (MY_FILE(xd_p->st->st_uid) && U_RW(xd_p->st->st_mode))) {
-		g = g_strdup_printf("%s%s%s", 
-			extension, colors, emblem);
+		return g_strdup(emblem);
 
 	// read only:
 	} else if (O_R(xd_p->st->st_mode) 
 		|| (MY_GROUP(xd_p->st->st_gid) && G_R(xd_p->st->st_mode)) 
 		|| (MY_FILE(xd_p->st->st_uid) && U_R(xd_p->st->st_mode))){
-		g = g_strdup_printf("%s%s%s/NW/face-surprise-symbolic/3.0/130", 
-			extension, colors, emblem);
+		return g_strdup_printf("%s/NW/face-surprise-symbolic/3.0/130", 
+			emblem);
 	} else if (S_ISREG(xd_p->st->st_mode)) {
 	    // no access: (must be have stat info to get this emblem)
-	    g = g_strdup_printf("%s%s%s/NW/face-sick-symbolic/2.0/180", 
-		    extension, colors, emblem);
-	} else {
-	    g = g_strdup_printf("%s%s", 
-		    extension, colors);
+	    return g_strdup_printf("%s/NW/face-sick-symbolic/2.0/180", 
+		    emblem);
 	}
-	g_free(extension);
-	g_free(emblem); 
-	emblem = g;
-#ifdef USE_LITE
-	if (use_lite) {
-	    const gchar *lite_emblem = Lite<Type>::get_lite_emblem(xd_p->mimetype);
-	    WARN("lite_emblem=%s\n", lite_emblem);
-	    if (lite_emblem){
-		g = g_strconcat(emblem, "/NE/", lite_emblem, "/1.8/200", NULL); 
-		g_free(emblem); 
-		emblem = g;
-	    }
-	} 
-#endif
-#endif
-	return emblem;
+        return g_strdup(emblem);
     }
 
     static gchar *
-    get_emblem_string(xd_t *xd_p, gboolean use_lite){
-        gchar *emblem = g_strdup("");
+    getEmblem(xd_t *xd_p){
         // No emblem for go up
-        if (strcmp(xd_p->d_name, "..")==0) return emblem;
-        gchar *g;
-        gboolean is_dir;
-        gboolean is_lnk;
-        gboolean is_reg;
+        if (strcmp(xd_p->d_name, "..")==0) return g_strdup("");
+        
+        // First we work on d_type (no stat)
+        gchar *emblem = linkEmblem(xd_p);
+        
+        // Now we try stat emblem
+        gchar *aux = statEmblem(xd_p, emblem);
+        g_free(emblem); emblem = aux;
+
+        gchar *extend = extension(xd_p);
+        auto fullEmblem = addColors(xd_p, extend, emblem);
+        g_free(emblem);
+        g_free(extend);
+	return fullEmblem;
+    }
+
+    static gchar *
+    linkEmblem(xd_t *xd_p){
+        gchar *emblem;
+        gboolean is_dir = FALSE;
+        gboolean is_lnk = FALSE;
 #ifdef HAVE_STRUCT_DIRENT_D_TYPE
-        is_dir = (xd_p->d_type == DT_DIR);
         is_lnk = (xd_p->d_type == DT_LNK);
-        is_reg = (xd_p->d_type == DT_REG);
-#else 
-        is_dir = (xd_p->st && S_ISDIR(xd_p->st->st_mode));
-        is_reg = (xd_p->st && S_ISREG(xd_p->st->st_mode));
-        is_lnk = (xd_p->st && S_ISLNK(xd_p->st->st_mode));
 #endif
-        
+        if (!is_lnk) return g_strdup("");
         // Symlinks:
-        if (is_lnk) {
-            if (xd_p->d_name[0] == '.') {
-                g = g_strconcat(emblem, "#888888", NULL); 
-                g_free(emblem); 
-                emblem = g;
-            }
-            g = g_strconcat(emblem, "/SW/emblem-symbolic-link/2.0/220", NULL);
-            g_free(emblem);
-            emblem = g;
-        }
-        if (is_dir && xd_p->d_name[0] == '.') {
-            g = g_strconcat(emblem, "#888888", NULL); 
-            g_free(emblem); 
-            emblem = g;
-        }
-        if (is_dir){
-            if (!xd_p->st){
-                g = g_strdup(emblem);
-            }
-            // all access:
-            else if (xd_p->st && O_ALL(xd_p->st->st_mode)){
-                g = g_strconcat(emblem, "/C/face-surprise/2.0/180", NULL);
-            }
-            else if ((MY_GROUP(xd_p->st->st_gid) && G_ALL(xd_p->st->st_mode)) 
-                    || (MY_FILE(xd_p->st->st_uid) && U_ALL(xd_p->st->st_mode))){
-                g = g_strdup(emblem);
-            }
-            // read only:
-            else if (O_RX(xd_p->st->st_mode) 
-                    || (MY_GROUP(xd_p->st->st_gid) && G_RX(xd_p->st->st_mode)) 
-                    || (MY_FILE(xd_p->st->st_uid) && U_RX(xd_p->st->st_mode))){
-                g = g_strconcat(emblem, "/C/emblem-readonly/3.0/180", NULL);
-            }
-            else {
-                // no access:
-                g = g_strconcat(emblem, "/C/face-angry/3.0/180", NULL);
-            }
-            g_free(emblem); 
-            emblem = g;
-        }
-        
-        else if (is_reg){
-	    emblem = regularEmblem(xd_p, emblem);
-        }
-        return emblem;
+        return g_strdup("/SW/emblem-symbolic-link/2.0/220");        
     }
 
 };
