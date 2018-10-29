@@ -19,7 +19,7 @@ typedef struct xd_t{
     unsigned char d_type;
     struct stat *st;
     const gchar *mimetype;
-    const gchar *mimefile;
+    const gchar *icon;
 }xd_t;
 static pthread_mutex_t readdir_mutex=PTHREAD_MUTEX_INITIALIZER;
 static gboolean inserted_;
@@ -200,15 +200,22 @@ public:
 
         // These will be filled in later by thread:
         xd_p->mimetype = NULL;
-        xd_p->mimefile = NULL;
+        xd_p->icon = NULL;
         xd_p->st = NULL;
+        // hash based mimetype
 #ifdef HAVE_STRUCT_DIRENT_D_TYPE
         xd_p->d_type = d->d_type;
         // stat symbolic links now...
         if (xd_p->d_type == DT_LNK){
             xd_p->st = (struct stat *)calloc(1, sizeof(struct stat));
             stat(xd_p->path, xd_p->st);
+            xd_p->mimetype = "inode/directory";
+            xd_p->icon = "folder";
+        } else {
+            xd_p->mimetype = Mime<Type>::mimeType(xd_p->path);
+            xd_p->icon = Mime<Type>::mimeIcon(xd_p->path);
         }
+
 #else
         xd_p->d_type = 0;
 #endif
@@ -218,7 +225,7 @@ public:
     static void
     free_xd_p(xd_t *xd_p){
 	// The following 2 must be "const gchar *"
-        //g_free(xd_p->mimefile);
+        //g_free(xd_p->icon);
         //g_free(xd_p->mimetype);
         g_free(xd_p->d_name);
         g_free(xd_p->path);
@@ -257,6 +264,10 @@ public:
 private:
     static GList *
     sort_directory_list(GList *list){
+
+       
+        // mimefile is really not necessary to keep around. FIXME: eliminate it from columns...
+
         // FIXME:  only do stat when sort order is date or size
         /*
         gboolean do_stat = (g_list_length(list) <= MAX_AUTO_STAT);
@@ -465,7 +476,7 @@ private:
                 TYPE,xd_p->d_type, 
                 ST_DATA,xd_p->st, 
                 MIMETYPE, xd_p->mimetype,
-                MIMEFILE, xd_p->mimefile, // may be null here.
+                MIMEICON, xd_p->icon, // may be null here.
                 -1);
         g_free(icon_name);
         g_free(highlight_name);
@@ -481,7 +492,9 @@ private:
 
     static gchar *
     get_iconname(xd_t *xd_p, gboolean use_lite){
-        gchar *name = get_basic_iconname(xd_p);
+        gchar *name;
+        if (xd_p->icon) name = g_strdup(xd_p->icon);
+        else name = get_basic_iconname(xd_p);
 	TRACE("basic iconname: %s --> %s\n", xd_p->d_name, name);
         gchar *emblem = getEmblem(xd_p);
 	if (!name) name = g_strdup("image-missing");

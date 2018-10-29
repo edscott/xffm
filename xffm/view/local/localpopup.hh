@@ -42,7 +42,7 @@ public:
 	gchar *aname=NULL;
         gchar *iconName=NULL;
 	gchar *path;
-	gchar *mimetype;
+	const gchar *mimetype;
 	gchar *displayName;
 	gtk_tree_model_get (treeModel, &iter, 
 		ACTUAL_NAME, &aname,
@@ -157,7 +157,6 @@ public:
 	changeTitle(iconName, name, path, mimetype);
 	g_free(name);
 	g_free(iconName);
-	g_free(mimetype);
 	g_free(path);
          
         return localItemPopUp;
