@@ -18,6 +18,15 @@
 // Remake: simplify with now mature shared-mime-info package
 namespace xf {
 
+GHashTable *application_hash_sfx=NULL;
+GHashTable *alias_hash=NULL;
+GHashTable *application_hash_icon=NULL;
+GHashTable *application_hash_text=NULL;
+GHashTable *application_hash_text2=NULL;
+GHashTable *application_hash_output=NULL;
+GHashTable *application_hash_output_ext=NULL;
+GHashTable *application_hash_type=NULL;
+
 template <class Type>
 class Mime {
 
@@ -96,186 +105,223 @@ public:
         //return MimeHash<txt_hash_t>::lookup(mimetype, hash_data[GENERIC_ICON]); 
     }
 
-//#define WORKINPROGRESS 1
+#define WORKINPROGRESS 1
 #ifdef WORKINPROGRESS
-static void
-mime_build_hashes (void) {
-    xmlChar *value;
-    xmlNodePtr node;
-    xmlNodePtr subnode;
-    xmlDocPtr doc;
-    gchar **apps;
+    static void
+    mimeBuildHashes (void) {
+        xmlChar *value;
+        xmlNodePtr node;
+        xmlNodePtr subnode;
+        xmlDocPtr doc;
+        gchar **apps;
 
 
-    //build hashes from system files
-    const gchar *mimefile = FREEDESKTOP;
+        //build hashes from system files
+        const gchar *mimefile = FREEDESKTOP;
 
-    TRACE("mime-module, reading mime specification file=%s\n", mimefile);
-    if(access (mimefile, R_OK) != 0) {
-        DBG ("access(%s, R_OK)!=0 (%s)\n", mimefile, strerror(errno));
-        return;
-    }
-    xmlKeepBlanksDefault (0);
-
-    if((doc = xmlParseFile (mimefile)) == NULL) {
-        gchar *g = g_strconcat (mimefile, ".bak", NULL);
-        DBG ("mime-module, invalid xml file %s.bak\n", mimefile);
-        if (rename (mimefile, g)<0){
-            fprintf(stderr, "mime_build_hashes(): rename %s->%s (%s)\n",mimefile, g,strerror(errno));
+        WARN("mime-module, reading mime specification file=%s\n", mimefile);
+        if(access (mimefile, R_OK) != 0) {
+            DBG ("access(%s, R_OK)!=0 (%s)\n", mimefile, strerror(errno));
+            return;
         }
-        g_free (g);
-        return;
-    }
+        xmlKeepBlanksDefault (0);
 
-    node = xmlDocGetRootElement (doc);
-    if(!xmlStrEqual (node->name, (const xmlChar *)"mime-info")) {
-        gchar *g = g_strconcat (mimefile, ".bak", NULL);
-        DBG ("mime-module, invalid xml file %s.bak\n", mimefile);
-        if (rename (mimefile, g)<0){
-            fprintf(stderr, "rename(): %s --> %s (%s)\n", mimefile, g, strerror(errno));
-        }
-        g_free (g);
-        xmlFreeDoc (doc);
-        return;
-    }
-    /* Now parse the xml tree */
-    TRACE("mime-module, parsing %s\n", mimefile);
-    for(node = node->children; node; node = node->next) {
-        if(xmlStrEqual (node->name, (const xmlChar *)"mime-key")) {
-            gchar *type_key = NULL;
-            gchar *type;
-
-            //  type has to be defined. 
-            type = (gchar *)xmlGetProp (node, (const xmlChar *)"type");
-            if(!type) {
-		TRACE("mime-module, return on type==NULL\n");
-                 return;
+        if((doc = xmlParseFile (mimefile)) == NULL) {
+            gchar *g = g_strconcat (mimefile, ".bak", NULL);
+            DBG ("mime-module, invalid xml file %s.bak\n", mimefile);
+            if (rename (mimefile, g)<0){
+                fprintf(stderr, "mime_build_hashes(): rename %s->%s (%s)\n",mimefile, g,strerror(errno));
             }
+            g_free (g);
+            return;
+        }
 
-            apps = NULL;
-            // apps may be null
-            for(subnode = node->children; subnode; subnode = subnode->next) {
-                if(xmlStrEqual (subnode->name, (const xmlChar *)"key")) {
-                    value = xmlGetProp (subnode, (const xmlChar *)"value");
-		    gchar *sfx = g_utf8_strdown ((gchar *)value, -1);
-		    g_free (value);
-		    gchar *sfx_key = get_hash_key (sfx);
-		    if(sfx_key) {
-			TRACE("mime-module,replacing hash element \"%s\" with key %s --> %s\n", 
-				sfx, sfx_key, type);
-			g_hash_table_replace (application_hash_sfx, g_strdup(sfx_key), g_strdup(type));
-		    }
-		    g_free (sfx);
-		    g_free (sfx_key);
-		    continue;
-		}
-                if(xmlStrEqual (subnode->name, (const xmlChar *)"alias")) {
-                    value = xmlGetProp (subnode, (const xmlChar *)"type");
-		    gchar *alias_type = g_utf8_strdown ((gchar *)value, -1);
-		    g_free (value);
-		    gchar *alias_key = get_hash_key (alias_type);
-		    if(alias_key) {
-			TRACE("mime-module, inserting alias hash element %s with key %s --> %s\n", 
-				alias_type, alias_key, type);
-			g_hash_table_replace (alias_hash, g_strdup(alias_key), g_strdup(type));
-		    }
-		    g_free (alias_type);
-		    g_free (alias_key);
-		    continue;
-		}
-                if(xmlStrEqual (subnode->name, (const xmlChar *)"application")) {
-                    int i;
-                    value = xmlGetProp (subnode, (const xmlChar *)"command");
-                    if(value) {
-                        if(!apps) {
-                            i = 0;
-                            apps = (gchar **)malloc (2 * sizeof (gchar *));
-			    if (!apps) g_error("malloc: %s", strerror(errno));
-                            memset (apps, 0, 2 * sizeof (gchar *));
-                        } else {
-                            gchar **tmp = apps;
-                            for(i = 0; apps[i]; i++) ;
-                            apps = (gchar **)malloc ((i + 2) * sizeof (gchar *));
-			    if (!apps) g_error("malloc: %s", strerror(errno));
-                            memset (apps, 0, (i + 2) * sizeof (gchar *));
-                            for(i = 0; tmp[i]; i++)
-                                apps[i] = tmp[i];
-                            g_free (tmp);
+        node = xmlDocGetRootElement (doc);
+        if(!xmlStrEqual (node->name, (const xmlChar *)"mime-info")) {
+            gchar *g = g_strconcat (mimefile, ".bak", NULL);
+            DBG ("mime-module, invalid xml file %s.bak\n", mimefile);
+            if (rename (mimefile, g)<0){
+                fprintf(stderr, "rename(): %s --> %s (%s)\n", mimefile, g, strerror(errno));
+            }
+            g_free (g);
+            xmlFreeDoc (doc);
+            return;
+        }
+        /* Now parse the xml tree */
+        WARN("mime-module, parsing %s\n", mimefile);
+        for(node = node->children; node; node = node->next) {
+            if(xmlStrEqual (node->name, (const xmlChar *)"mime-key")) {
+                gchar *type_key = NULL;
+                gchar *type;
+
+                //  type has to be defined. 
+                type = (gchar *)xmlGetProp (node, (const xmlChar *)"type");
+                if(!type) {
+                    TRACE("mime-module, return on type==NULL\n");
+                     return;
+                }
+
+                apps = NULL;
+                // apps may be null
+                for(subnode = node->children; subnode; subnode = subnode->next) {
+                    if(xmlStrEqual (subnode->name, (const xmlChar *)"key")) {
+                        value = xmlGetProp (subnode, (const xmlChar *)"value");
+                        gchar *sfx = g_utf8_strdown ((gchar *)value, -1);
+                        g_free (value);
+                        gchar *sfx_key = get_hash_key (sfx);
+                        if(sfx_key) {
+                            TRACE("mime-module,replacing hash element \"%s\" with key %s --> %s\n", 
+                                    sfx, sfx_key, type);
+                            g_hash_table_replace (application_hash_sfx, g_strdup(sfx_key), g_strdup(type));
                         }
-                        apps[i] = (gchar *)value;
-                        xmlChar *extra_value;
-                        extra_value = 
-                            xmlGetProp (subnode, (const xmlChar *)"icon");
-                        if(extra_value) {
-                            gchar *k=get_hash_key ((gchar *)value);
-                            TRACE("mime-module, adding- %s : %s\n", value, extra_value);
-                            g_hash_table_replace (application_hash_icon, k, extra_value);
+                        g_free (sfx);
+                        g_free (sfx_key);
+                        continue;
+                    }
+                    if(xmlStrEqual (subnode->name, (const xmlChar *)"alias")) {
+                        value = xmlGetProp (subnode, (const xmlChar *)"type");
+                        gchar *alias_type = g_utf8_strdown ((gchar *)value, -1);
+                        g_free (value);
+                        gchar *alias_key = get_hash_key (alias_type);
+                        if(alias_key) {
+                            TRACE("mime-module, inserting alias hash element %s with key %s --> %s\n", 
+                                    alias_type, alias_key, type);
+                            g_hash_table_replace (alias_hash, g_strdup(alias_key), g_strdup(type));
                         }
-                        extra_value = 
-                            xmlGetProp (subnode, (const xmlChar *)"text");
-                        if(extra_value) {
-                            gchar *k=get_hash_key ((gchar *)value);
-                            TRACE("mime-module a, adding- %s : %s\n", value, extra_value);
-			    g_hash_table_replace (application_hash_text, k, extra_value);
-                        }
-                        extra_value = 
-                            xmlGetProp (subnode, (const xmlChar *)"text2");
-                        if(extra_value) {
-                            gchar *k=get_hash_key ((gchar *)value);
-                            TRACE("mime-module b, adding- %s : %s\n", value, extra_value);
-                            g_hash_table_replace (application_hash_text2, k, extra_value);
-                        }
-                        extra_value = 
-                            xmlGetProp (subnode, (const xmlChar *)"output");
-                        if(extra_value) {
-                            gchar *k=get_hash_key ((gchar *)value);
-                            TRACE("mime-module c, adding- %s : %s\n", value, extra_value);
-                            g_hash_table_replace (application_hash_output, k, extra_value);
-                  
-                        }
-                        extra_value = 
-                            xmlGetProp (subnode, (const xmlChar *)"output_ext");
-                        if(extra_value) {
-                            gchar *k=get_hash_key ((gchar *)value);
-                            TRACE("mime-module d, adding- %s : %s\n", value, extra_value);
-                            g_hash_table_replace (application_hash_output_ext, k, extra_value);
+                        g_free (alias_type);
+                        g_free (alias_key);
+                        continue;
+                    }
+                    if(xmlStrEqual (subnode->name, (const xmlChar *)"application")) {
+                        int i;
+                        value = xmlGetProp (subnode, (const xmlChar *)"command");
+                        if(value) {
+                            if(!apps) {
+                                i = 0;
+                                apps = (gchar **)malloc (2 * sizeof (gchar *));
+                                if (!apps) g_error("malloc: %s", strerror(errno));
+                                memset (apps, 0, 2 * sizeof (gchar *));
+                            } else {
+                                gchar **tmp = apps;
+                                for(i = 0; apps[i]; i++) ;
+                                apps = (gchar **)malloc ((i + 2) * sizeof (gchar *));
+                                if (!apps) g_error("malloc: %s", strerror(errno));
+                                memset (apps, 0, (i + 2) * sizeof (gchar *));
+                                for(i = 0; tmp[i]; i++)
+                                    apps[i] = tmp[i];
+                                g_free (tmp);
+                            }
+                            apps[i] = (gchar *)value;
+                            xmlChar *extra_value;
+                            extra_value = 
+                                xmlGetProp (subnode, (const xmlChar *)"icon");
+                            if(extra_value) {
+                                gchar *k=get_hash_key ((gchar *)value);
+                                TRACE("mime-module, adding- %s : %s\n", value, extra_value);
+                                g_hash_table_replace (application_hash_icon, k, extra_value);
+                            }
+                            extra_value = 
+                                xmlGetProp (subnode, (const xmlChar *)"text");
+                            if(extra_value) {
+                                gchar *k=get_hash_key ((gchar *)value);
+                                TRACE("mime-module a, adding- %s : %s\n", value, extra_value);
+                                g_hash_table_replace (application_hash_text, k, extra_value);
+                            }
+                            extra_value = 
+                                xmlGetProp (subnode, (const xmlChar *)"text2");
+                            if(extra_value) {
+                                gchar *k=get_hash_key ((gchar *)value);
+                                TRACE("mime-module b, adding- %s : %s\n", value, extra_value);
+                                g_hash_table_replace (application_hash_text2, k, extra_value);
+                            }
+                            extra_value = 
+                                xmlGetProp (subnode, (const xmlChar *)"output");
+                            if(extra_value) {
+                                gchar *k=get_hash_key ((gchar *)value);
+                                TRACE("mime-module c, adding- %s : %s\n", value, extra_value);
+                                g_hash_table_replace (application_hash_output, k, extra_value);
+                      
+                            }
+                            extra_value = 
+                                xmlGetProp (subnode, (const xmlChar *)"output_ext");
+                            if(extra_value) {
+                                gchar *k=get_hash_key ((gchar *)value);
+                                TRACE("mime-module d, adding- %s : %s\n", value, extra_value);
+                                g_hash_table_replace (application_hash_output_ext, k, extra_value);
+                            }
                         }
                     }
                 }
+                if(apps) {
+                    type_key = get_hash_key (type);
+                    TRACE("mime-module, adding-%d : %s for %s (%s)\n", i, value, type, type_key);
+                    g_hash_table_replace (application_hash_type, type_key, apps);
+                } 
+                g_free(type);
             }
-            if(apps) {
-		type_key = get_hash_key (type);
-                TRACE("mime-module, adding-%d : %s for %s (%s)\n", i, value, type, type_key);
-                g_hash_table_replace (application_hash_type, type_key, apps);
-            } 
-	    g_free(type);
         }
+        xmlFreeDoc (doc);
+        /*
+        // now load any previous user defined applications:
+        //
+        gchar *file=g_build_filename(USER_APPLICATIONS, NULL);
+        DBG("mime-module, loading user defined applications from %s\n",file);
+        FILE *config=fopen(file, "r");
+        if (config) {
+            gchar type[4096];
+            while (fgets(type, 4096, config) && !feof(config)) {
+                char *s=strchr(type, '\n');
+                *s=0;
+                s=strchr(type, ':');
+                if (!s) continue;
+                *s=0;
+                const gchar *command=s+1;
+                add_type_to_hashtable(type, command, TRUE);
+            }
+            fclose(config);
+        }
+        g_free(file);
+        */
+        
+        WARN("mime-module, hash table build is now complete.\n");
     }
-    xmlFreeDoc (doc);
-    /*
-    // now load any previous user defined applications:
-    //
-    gchar *file=g_build_filename(USER_APPLICATIONS, NULL);
-    DBG("mime-module, loading user defined applications from %s\n",file);
-    FILE *config=fopen(file, "r");
-    if (config) {
-	gchar type[4096];
-	while (fgets(type, 4096, config) && !feof(config)) {
-	    char *s=strchr(type, '\n');
-	    *s=0;
-	    s=strchr(type, ':');
-	    if (!s) continue;
-	    *s=0;
-	    const gchar *command=s+1;
-	    add_type_to_hashtable(type, command, TRUE);
-	}
-	fclose(config);
+
+private:
+
+    static gchar *
+    get_hash_key (const gchar * pre_key) {
+        GString *gs = g_string_new (pre_key);
+        gchar *key;
+        key = g_strdup_printf ("%10u", g_string_hash (gs));
+        g_string_free (gs, TRUE);
+        return key;
     }
-    g_free(file);
-    */
-    
-    TRACE("mime-module, hash table build is now complete.\n");
-}
+
+    static gchar *
+    get_hash_key_strstrip (void *p){
+        gchar *pp=g_strdup((char *)p);
+        g_strstrip(pp);
+        gchar *key=get_hash_key ((gchar *)pp);
+        g_free(pp);
+        return key;
+    }
+
+/*    static gchar *
+    get_hash_key_strstrip (const gchar *p, Type T){
+        gchar *pp=g_strdup((char *)p);
+        g_strstrip(pp);
+        gchar *key=get_hash_key ((gchar *)pp, T);
+        g_free(pp);
+        return key;
+    }
+    static gchar *get_hash_key (const gchar * pre_key, Type T) {
+        GString *gs = g_string_new (pre_key);
+        gchar *key;
+        key = g_strdup_printf ("%10u", g_string_hash (gs));
+        g_string_free (gs, TRUE);
+        return key;
+    }*/
+
 #endif
     
 

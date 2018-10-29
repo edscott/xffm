@@ -22,6 +22,7 @@ class fmDialog : public Dialog<Type>{
     using print_c = Print<double>;
 public:
     fmDialog(const gchar *path):Dialog<Type>(path){
+        Mime<Type>::mimeBuildHashes();
 	
         auto page = this->currentPageObject();
         //page->setPageWorkdir(workdir);
