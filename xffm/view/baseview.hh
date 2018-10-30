@@ -12,12 +12,12 @@ enum
   DISPLAY_NAME,
   ACTUAL_NAME,
   PATH,
+  SIZE,
+  DATE,
   TOOLTIP_TEXT,
   ICON_NAME,
   TYPE,
   MIMETYPE, 
-  MIMEICON, 
-  ST_DATA,
   PREVIEW_PATH,
   PREVIEW_TIME,
   PREVIEW_PIXBUF,
@@ -98,14 +98,14 @@ class BaseView{
 	    G_TYPE_STRING,   // name in display (UTF-8)
 	    G_TYPE_STRING,   // name from filesystem (verbatim)
 	    G_TYPE_STRING,   // path (verbatim)
+            G_TYPE_UINT,     // date
+            G_TYPE_UINT,     // size
 	    G_TYPE_STRING,   // tooltip text (cache)
 	    G_TYPE_STRING,   // icon identifier (name or composite key)
 	    G_TYPE_INT,      // mode (to identify directories)
 	    G_TYPE_STRING,   // mimetype (further identification of files)
-	    G_TYPE_STRING,   // mimefile (further identification of files)
-	    G_TYPE_POINTER,  // stat record or NULL 
 	    G_TYPE_STRING,   // Preview path
-	    G_TYPE_INT,      // Preview time
+	    G_TYPE_UINT,      // Preview time
 	    GDK_TYPE_PIXBUF  // Preview pixbuf
             ); // 
 	return GTK_TREE_MODEL (list_store);

@@ -18,21 +18,20 @@ class LocalPopUp {
 
 public:
      static void changeTitle(const gchar *iconName, 
-	    const gchar *name, const gchar *path, const gchar *mimetype)
+	    const gchar *name, const gchar *path, 
+            const gchar *mimetype, const gchar *fileInfo)
     {
 	// change title
 	auto title = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(localItemPopUp), "title"));
-	gchar *extra = util_c::fileInfo(path);
 	gchar *statLine=util_c::statInfo(path);
 	gchar *markup = g_strdup_printf("<span size=\"larger\" color=\"red\"><b><i>%s</i></b></span><span color=\"#aa0000\">%s%s</span>\n<span color=\"blue\">%s</span>\n<span color=\"green\">%s</span>", 
 		name, 
 		mimetype?": ":"",
 		mimetype?mimetype:"",
-		extra?extra:"no file info", 
+		fileInfo?fileInfo:"no file info", 
 		statLine?statLine:"no stat info");
 	gtk_c::menu_item_content(title, iconName, markup, -48);
 	g_free(statLine);
-	g_free(extra);
 	g_free(markup);
     }
 
@@ -117,7 +116,11 @@ public:
 	}
 
 	// get mimetype app from hashtable (FIXME)
-	if (mimetype && strncmp(mimetype, "text/", strlen("text/")) == 0){
+        gboolean textMimetype = (mimetype && strncmp(mimetype, "text/", strlen("text/")) == 0);
+	gchar *fileInfo = util_c::fileInfo(path);
+        gboolean textFiletype =(fileInfo && 
+                (strstr(fileInfo, "text")||strstr(fileInfo,"empty")));
+	if (textMimetype || textFiletype) {
 	    // environ EDITOR
 	    gchar *editor = util_c::get_text_editor();
 
@@ -154,7 +157,8 @@ public:
 	    gtk_widget_hide(v);
 	}
 
-	changeTitle(iconName, name, path, mimetype);
+	changeTitle(iconName, name, path, mimetype, fileInfo);
+        g_free (fileInfo);
 	g_free(name);
 	g_free(iconName);
 	g_free(path);

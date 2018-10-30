@@ -171,7 +171,7 @@ public:
             /* try all lower case (hash table keys are set this way) */
             sfx = g_utf8_strdown (p, -1);
             gchar *key = get_hash_key (sfx);
-            DBG("mime-module, lOOking for \"%s\" with key=%s\n", sfx, key);
+            TRACE("mime-module, lOOking for \"%s\" with key=%s\n", sfx, key);
 
             pthread_mutex_lock(&application_hash_mutex);
             type = (const gchar *)g_hash_table_lookup (application_hash_sfx, key);
@@ -241,18 +241,22 @@ public:
 
     static gchar *
     mimeMagic (const gchar *file){
+#ifdef MIMETYPE_PROGRAM
 	//only magic:
 	gchar *command = g_strdup_printf("%s -L -M --output-format=\"%%m\" \"%s\"", MIMETYPE_PROGRAM, file);
 	gchar *retval = mime(command);
 	g_free(command);
 	return retval;
+#else
+        return NULL;
+#endif
     }
 
     static const gchar *
     mimeIcon (const gchar *file){
         const gchar *retval = locate_icon(file);
         if (retval) {
-	    DBG("locate_icon: %s --> %s\n", file, retval);
+	    TRACE("locate_icon: %s --> %s\n", file, retval);
         }
 	return retval;
    } 
@@ -262,10 +266,10 @@ public:
     mimeType (const gchar *file){
         const gchar *retval = locate_mime_t(file);
         if (retval) {
-	    DBG("locate_mime_t: %s --> %s\n", file, retval);
+	    TRACE("locate_mime_t: %s --> %s\n", file, retval);
             return retval;
         }
-#ifndef MIMETYPE_PROGRAM-NOTFOUND
+#ifdef MIMETYPE_PROGRAM
 	gchar *command = g_strdup_printf("%s -L --output-format=\"%%m\" \"%s\"", MIMETYPE_PROGRAM, file);
 	TRACE("mimeType command: %s\n", command);
  	retval = mime(command);
@@ -277,26 +281,41 @@ public:
    } 
 
         
-    static gchar *
+    static const gchar *
     mimeType (const gchar *file, struct stat *st_p) {
         if (!file) return NULL;
+        if (st_p){
+            if(S_ISSOCK (st_p->st_mode)) return "inode/socket";
+            else if(S_ISBLK (st_p->st_mode)) return "inode/blockdevice";
+            else if(S_ISCHR (st_p->st_mode)) return "inode/chardevice";
+            else if(S_ISFIFO (st_p->st_mode)) return "inode/fifo";
+            else if (S_ISLNK(st_p->st_mode)) return "inode/symlink";
+            else if(S_ISDIR (st_p->st_mode)) return "inode/directory";
+        }
         if(file[strlen (file) - 1] == '~' || file[strlen (file) - 1] == '%') {
             gchar *r_file = g_strdup(file);
             r_file[strlen (r_file) - 1] = 0;
-            gchar *retval = mimeType(r_file, st_p);
+            const gchar *retval = mimeType(r_file, st_p);
             g_free(r_file);
             return retval;
         }
-        return mimeMagic(file);
+
+        return NULL;
+        // mimemagic return value should be const gchar *
+        //return mimeMagic(file);
     }
 
 // FIXME: use language code -l code, --language=code 
     static gchar *
     mimeFile (const gchar *file){
+#ifdef MIMETYPE_PROGRAM
 	gchar *command = g_strdup_printf("%s -d -L --output-format=\"%%d\" \"%s\"", MIMETYPE_PROGRAM, file);
  	gchar *retval = mime(command);
 	g_free(command);
 	return retval;
+#else
+        return NULL;
+#endif
    } 
    
     static const gchar *

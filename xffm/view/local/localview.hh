@@ -166,7 +166,7 @@ private:
             }
         }
         if (errno) {
-            WARN("read_files_local: %s\n", strerror(errno));
+            WARN("read_files_local: %s: %s\n", strerror(errno), path);
         }
     // unlock mutex
         pthread_mutex_unlock(&readdir_mutex);
@@ -209,11 +209,13 @@ public:
         if (xd_p->d_type == DT_LNK){
             xd_p->st = (struct stat *)calloc(1, sizeof(struct stat));
             stat(xd_p->path, xd_p->st);
-            xd_p->mimetype = "inode/directory";
-            xd_p->icon = "folder";
+            xd_p->mimetype = Mime<Type>::mimeType(xd_p->path, xd_p->st);
         } else {
+            if (TRUE){
+                xd_p->st = (struct stat *)calloc(1, sizeof(struct stat));
+                stat(xd_p->path, xd_p->st);
+            }
             xd_p->mimetype = Mime<Type>::mimeType(xd_p->path);
-            xd_p->icon = Mime<Type>::mimeIcon(xd_p->path);
         }
 
 #else
@@ -229,8 +231,7 @@ public:
         //g_free(xd_p->mimetype);
         g_free(xd_p->d_name);
         g_free(xd_p->path);
-        //this is a problematic memory leak (FIXME)
-        //g_free(xd_p->st);
+        g_free(xd_p->st);
         g_free(xd_p);
     }
     
@@ -264,12 +265,10 @@ public:
 private:
     static GList *
     sort_directory_list(GList *list){
-
-       
-        // mimefile is really not necessary to keep around. FIXME: eliminate it from columns...
-
-        // FIXME:  only do stat when sort order is date or size
-        /*
+#if 0
+        stat is done in xd_t record creation...
+        // FIXME:  only do a full stat when sort order is date or size
+        
         gboolean do_stat = (g_list_length(list) <= MAX_AUTO_STAT);
 
         if (do_stat){
@@ -283,11 +282,9 @@ private:
                             xd_p->path, strerror(errno));
                     continue;
                 }
-                xd_p->mimetype = Mime<Type>::mimeType(xd_p->d_name, xd_p->st); // using stat obtained above
-                xd_p->mimefile = g_strdup(Mime<Type>::mimeFile(xd_p->d_name)); // 
             }
         }
-        */
+#endif        
         // Default sort order:
         return g_list_sort (list,compare_by_name);
     }
@@ -350,14 +347,19 @@ private:
     insertItem(GtkTreeModel *treeModel, GtkTreePath *path, GtkTreeIter *iter, gpointer data){
         // get current xd_p
         struct stat *st;
+        guint size;
+        guint date;
         gchar *name;
-        gint type;
-        gtk_tree_model_get(treeModel, iter, ST_DATA, &st, ACTUAL_NAME, &name, TYPE, &type, -1);
+        guint type;
+        gtk_tree_model_get(treeModel, iter, 
+                ACTUAL_NAME, &name, 
+                SIZE, &size,
+                DATE, &date,
+                TYPE, &type, -1);
         xd_t *xd_p = (xd_t *)data;
         xd_t *xd_b = (xd_t *)calloc(1, sizeof(xd_t));
         xd_b->d_name = name;
         xd_b->d_type = type;
-        xd_b->st = st;
         TRACE("compare %s with iconview item \"%s\"\n", xd_p->d_name, name);
         if (compare_by_name((void *)xd_p, (void *)(xd_b)) < 0){
             GtkTreeIter newIter;
@@ -407,12 +409,6 @@ private:
 
         
         gchar *utf_name = util_c::utf_string(xd_p->d_name);
-        // plain extension mimetype fallback
-	//
-	// FIXME: maybe do a group mimetype for all items...
-#ifdef USE_MIME
-        if (!xd_p->mimetype) xd_p->mimetype = Mime<Type>::mimeType(xd_p->path); 
-#endif
         gchar *icon_name = get_iconname(xd_p);
 	TRACE("icon name for %s is %s\n", xd_p->d_name, icon_name);
         
@@ -463,6 +459,8 @@ private:
         //GdkPixbuf *highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);
         GdkPixbuf *highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);
 	guint flags=0;
+        guint size = (xd_p->st)?xd_p->st->st_size:0;
+        guint date = (xd_p->st)?xd_p->st->st_mtim.tv_sec:0;
 	//setSelectable(xd_p->d_name, flags);
         gtk_list_store_set (list_store, iter, 
 		FLAGS, flags,
@@ -474,9 +472,9 @@ private:
                 NORMAL_PIXBUF, normal_pixbuf, 
                 HIGHLIGHT_PIXBUF, highlight_pixbuf, 
                 TYPE,xd_p->d_type, 
-                ST_DATA,xd_p->st, 
+                SIZE,size, 
+                DATE,date, 
                 MIMETYPE, xd_p->mimetype,
-                MIMEICON, xd_p->icon, // may be null here.
                 -1);
         g_free(icon_name);
         g_free(highlight_name);
@@ -497,6 +495,7 @@ private:
         else name = get_basic_iconname(xd_p);
 	TRACE("basic iconname: %s --> %s\n", xd_p->d_name, name);
         gchar *emblem = getEmblem(xd_p);
+        TRACE("emblem=%s\n", emblem);
 	if (!name) name = g_strdup("image-missing");
         gchar *iconname = g_strconcat(name, emblem, NULL);
         g_free(name);
@@ -660,6 +659,7 @@ private:
     static gchar *
     extension(xd_t *xd_p){
 	auto extension = g_strdup("");
+        if (xd_p->d_type != DT_REG) return extension;
 	if (strrchr(xd_p->d_name, '.') && strrchr(xd_p->d_name, '.') != xd_p->d_name
 		&& strlen(strrchr(xd_p->d_name, '.')+1) <= EXTENSION_LABEL_LENGTH) {
 	    extension = g_strconcat("*", strrchr(xd_p->d_name, '.')+1, NULL) ;
@@ -668,13 +668,13 @@ private:
     }
 
     static gchar *
-    addColors(xd_t *xd_p, const gchar *extension, const gchar *emblem){
+    getColor(xd_t *xd_p){
         // hidden files:
          if (xd_p->d_name[0] == '.') {
-	    return g_strconcat(extension, "#888888", emblem, NULL); 
+	    return g_strdup("#888888"); 
 	}
         if (strcmp(xd_p->d_name, "core")==0) {
-	    return g_strconcat(extension, "#880000", emblem, NULL); 
+	    return g_strdup("#880000"); 
         }
 
         if (xd_p->mimetype){
@@ -683,42 +683,49 @@ private:
 
         // simple file extension coloring fallback
         gchar *ext = strrchr(xd_p->d_name, '.');
-        if (!ext) return g_strconcat(ext, emblem, NULL);
+        if (!ext) return g_strdup("");
         if (cHdr(xd_p->d_name)){
-            return g_strconcat(extension, "#eed680", emblem, NULL);
+            return g_strdup("#eed680");
         }
         if (cSrc(xd_p->d_name)){
-            return g_strconcat(extension, "#887fd3", emblem, NULL);
+            return g_strdup("#887fd3");
         }
         if (backupType(xd_p->d_name)){
-            return g_strconcat(extension, "#cc7777", emblem, NULL);
+            return g_strdup("#cc7777");
         }
-        return g_strconcat(extension, emblem, NULL);
+        return g_strdup("");
     }
 
     static gchar *
     statEmblem(xd_t *xd_p, const gchar *emblem){
         if (!xd_p->st){
+            WARN("statEmblem: no stat for %s\n", xd_p->path);
             return g_strdup(emblem);
         }
-        if (xd_p->st->st_mode & S_IFMT == S_IFDIR) {
+        if (xd_p->d_type == DT_DIR) {
+            TRACE("dir emblem...\n");
             // all access:
             if (O_ALL(xd_p->st->st_mode)){
-                return g_strconcat(emblem, "/C/face-surprise/2.0/180", NULL);
+                TRACE("all access: %s\n", xd_p->path); 
+                return g_strdup(emblem);
+                //return g_strconcat(emblem, "/C/face-surprise/3.0/180", NULL);
             }
             if ((MY_GROUP(xd_p->st->st_gid) && G_ALL(xd_p->st->st_mode)) 
                     || (MY_FILE(xd_p->st->st_uid) && U_ALL(xd_p->st->st_mode))){
+                TRACE("all access group: %s\n", xd_p->path); 
                 return g_strdup(emblem);
             }
             // read only:
             if (O_RX(xd_p->st->st_mode) 
                     || (MY_GROUP(xd_p->st->st_gid) && G_RX(xd_p->st->st_mode)) 
                     || (MY_FILE(xd_p->st->st_uid) && U_RX(xd_p->st->st_mode))){
-                return g_strconcat(emblem, "/C/emblem-readonly/3.0/180", NULL);
+                TRACE("read only: %s\n", xd_p->path); 
+                return g_strconcat(emblem, "/NW/dialog-warning/3.0/180", NULL);
             }
             else {
                 // no access:
-                return g_strconcat(emblem, "/C/face-angry/3.0/180", NULL);
+                DBG("no access: %s\n", xd_p->path); 
+                return g_strconcat(emblem, "/NW/dialog-error/3.0/180", NULL);
             }
         }
         // The rest is only for regular files (links too?)
@@ -750,11 +757,11 @@ private:
 	} else if (O_R(xd_p->st->st_mode) 
 		|| (MY_GROUP(xd_p->st->st_gid) && G_R(xd_p->st->st_mode)) 
 		|| (MY_FILE(xd_p->st->st_uid) && U_R(xd_p->st->st_mode))){
-		return g_strdup_printf("%s/NW/face-surprise-symbolic/3.0/130", 
+		return g_strdup_printf("%s/NW/dialog-warning/3.0/130", 
 			emblem);
 	} else if (S_ISREG(xd_p->st->st_mode)) {
 	    // no access: (must be have stat info to get this emblem)
-	    return g_strdup_printf("%s/NW/face-sick-symbolic/2.0/180", 
+	    return g_strdup_printf("%s/NW/dialog-error/3.0/180", 
 		    emblem);
 	}
         return g_strdup(emblem);
@@ -767,15 +774,25 @@ private:
         
         // First we work on d_type (no stat)
         gchar *emblem = linkEmblem(xd_p);
-        
+        if (xd_p->d_type == DT_LNK){
+            return emblem;
+        }
+        TRACE("getEmblem: %s\n", xd_p->path);
         // Now we try stat emblem
         gchar *aux = statEmblem(xd_p, emblem);
         g_free(emblem); emblem = aux;
+        TRACE("getEmblem: %s --> %s\n", xd_p->path, emblem);
 
         gchar *extend = extension(xd_p);
-        auto fullEmblem = addColors(xd_p, extend, emblem);
+        TRACE("extend: %s --> %s\n", xd_p->path, extend);
+        auto color = getColor(xd_p);
+        auto fullEmblem = g_strconcat(extend, color, emblem, NULL);
+
+        //auto fullEmblem = addColors(xd_p, extend, emblem);
+        g_free(color);
         g_free(emblem);
         g_free(extend);
+        TRACE("fullEmblem: %s --> %s\n", xd_p->path, fullEmblem);
 	return fullEmblem;
     }
 

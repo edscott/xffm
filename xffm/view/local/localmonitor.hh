@@ -128,9 +128,7 @@ public:
 				GtkTreeIter *iter,
 				gpointer data){
 	gchar *text;
-	struct stat *st_p=NULL;
 	gtk_tree_model_get (model, iter, 
-		ST_DATA, &st_p, 
 		ACTUAL_NAME, &text, 
 		-1);  
 	
@@ -140,9 +138,6 @@ public:
 	}
 	TRACE("removing %s from treemodel.\n", text);
 	GtkListStore *store = GTK_LIST_STORE(model);
-
-    //  free stat record, if any
-	g_free(st_p);
 
 	gtk_list_store_remove(store, iter);
 	g_free(text);
@@ -165,12 +160,10 @@ public:
 				GtkTreePath *path,
 				GtkTreeIter *iter,
 				gpointer data){
-	struct stat *st=NULL;
 	gchar *text;
 	gchar *basename = g_path_get_basename((gchar *)data);
 	gtk_tree_model_get (model, iter, 
 		ACTUAL_NAME, &text, 
-		ST_DATA, &st, 
 		-1);  
 	
 	if (strcmp(basename, text)){
@@ -180,16 +173,17 @@ public:
 	}
 	g_free(text);
 	g_free(basename);
-	g_free(st);
 
 	GtkListStore *store = GTK_LIST_STORE(model);
-	st = (struct stat *)calloc(1, sizeof(struct stat));
-	if (stat((gchar *)data, st) != 0){
+	struct stat st;
+	if (stat((gchar *)data, &st) != 0){
 	    TRACE( "stat: %s\n", strerror(errno));
 	    return FALSE;
 	}
 
-	gtk_list_store_set (store, iter, ST_DATA, st, -1);
+	gtk_list_store_set (store, iter, 
+                SIZE, st.st_size, 
+                DATE, st.st_mtim.tv_sec );
 
 	return TRUE;
     }
