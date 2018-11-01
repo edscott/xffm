@@ -210,12 +210,13 @@ public:
             xd_p->st = (struct stat *)calloc(1, sizeof(struct stat));
             stat(xd_p->path, xd_p->st);
             xd_p->mimetype = Mime<Type>::mimeType(xd_p->path, xd_p->st);
+            //xd_p->mimetype = Mime<Type>::locate_mime_t(xd_p->path);
         } else {
             if (TRUE){
                 xd_p->st = (struct stat *)calloc(1, sizeof(struct stat));
                 stat(xd_p->path, xd_p->st);
             }
-            xd_p->mimetype = Mime<Type>::mimeType(xd_p->path);
+            xd_p->mimetype = Mime<Type>::locate_mime_t(xd_p->path);
         }
 
 #else

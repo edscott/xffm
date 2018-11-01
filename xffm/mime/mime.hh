@@ -155,7 +155,7 @@ public:
             pthread_mutex_unlock(&application_hash_mutex);
             g_free (key);
             if(type) {
-                DBG("mime-module(2), FOUND %s: %s\n", file, type);
+                TRACE("mime-module(2), FOUND %s: %s\n", file, type);
                 g_free (basename);
                 return type;
             }
@@ -178,7 +178,7 @@ public:
             pthread_mutex_unlock(&application_hash_mutex);
             g_free (key);
             if(type) {
-                DBG("mime-module, FOUND %s: %s\n", sfx, type);
+                TRACE("mime-module, FOUND %s: %s\n", sfx, type);
                 g_free (sfx);
                 g_free (basename);
                 return type;
@@ -199,7 +199,7 @@ public:
             pthread_mutex_unlock(&application_hash_mutex);
             g_free (key);
             if(type) {
-                DBG("mime-module(2), FOUND %s: %s\n", sfx, type);
+                TRACE("mime-module(2), FOUND %s: %s\n", sfx, type);
                 g_free (sfx);
                 g_free (basename);
                 g_strfreev(q);

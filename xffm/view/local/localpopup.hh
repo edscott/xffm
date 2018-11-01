@@ -71,6 +71,7 @@ public:
 	    localItemPopUp = GTK_MENU(gtk_menu_new());
 	     menuItem_t item[]={
 		{("mimetypeOpen"), (void *)command, (void *) localItemPopUp},
+		{N_("Open with"), (void *)openWith, (void *) localItemPopUp},
 		{N_("Create a new empty folder inside this folder"), (void *)noop, (void *) localItemPopUp},
 		{N_("Open in New Tab"), (void *)noop, (void *) localItemPopUp},
 		//common buttons /(also an iconsize +/- button)
@@ -87,7 +88,6 @@ public:
 		{N_("Delete"), (void *)noop, (void *) localItemPopUp},
 		{N_("Mimetype command"), (void *)noop, (void *) localItemPopUp},
 		{N_("autotype_Prun"), (void *)noop, (void *) localItemPopUp},
-		{N_("Open with"), (void *)noop, (void *) localItemPopUp},
 		{N_("Mount the volume associated with this folder"), (void *)noop, (void *) localItemPopUp},
 		{N_("Unmount the volume associated with this folder"), (void *)noop, (void *) localItemPopUp},
 		 {NULL,NULL,NULL}};
@@ -113,6 +113,13 @@ public:
 	    }
 	    gtk_widget_show (GTK_WIDGET(localItemPopUp));
 
+	}
+
+	// Open with
+	{
+	    auto v = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(localItemPopUp), "Open with"));
+	    gtk_widget_show(GTK_WIDGET(v));
+	    gtk_widget_set_sensitive(GTK_WIDGET(v), TRUE);
 	}
 
 	// get mimetype app from hashtable (FIXME)
@@ -261,6 +268,135 @@ public:
 	page->command(command);
 	
     }
+    static void
+    openWith(GtkMenuItem *menuItem, gpointer data)
+    {
+	GtkWindow *parent = NULL; //FIXME set to dialog_
+        auto response = getResponse (parent, _("Open with"), _("Run in Terminal")) ;
+	WARN("response = %s\n", response);
+    }
+
+private:
+
+    static void
+    activate_entry (GtkEntry * entry, gpointer data) {
+	auto dialog = GTK_WIDGET(g_object_get_data(G_OBJECT(entry), "dialog"));
+	gtk_dialog_response (GTK_DIALOG(dialog),GTK_RESPONSE_YES);
+    }
+
+    static void
+    cancel_entry (GtkEntry * entry, gpointer data) {
+	GtkWidget *dialog = g_object_get_data(G_OBJECT(entry), "dialog");
+	gtk_dialog_response (GTK_DIALOG(dialog),GTK_RESPONSE_CANCEL);
+    }
+
+    static gboolean 
+    response_delete(GtkWidget *dialog, GdkEvent *event, gpointer data){
+	gtk_dialog_response (GTK_DIALOG(dialog),GTK_RESPONSE_CANCEL);
+	return TRUE;
+    }
+
+    static void add_cancel_ok(GtkDialog *dialog){
+	// button no
+	auto button =
+	    gtk_c::dialog_button ("xffm/stock_cancel", _("Cancel"));
+	gtk_widget_show (GTK_WIDGET(button));
+	gtk_dialog_add_action_widget (GTK_DIALOG (dialog), GTK_WIDGET(button), GTK_RESPONSE_NO);
+	g_object_set_data (G_OBJECT (dialog), "action_false_button", button);
+	// button yes
+	button = gtk_c::dialog_button ("xffm/stock_ok", _("Ok"));
+	gtk_widget_show (GTK_WIDGET(button));
+	g_object_set_data (G_OBJECT (dialog), "action_true_button", button);
+	gtk_dialog_add_action_widget (GTK_DIALOG (dialog), GTK_WIDGET(button), GTK_RESPONSE_YES);
+    }
+
+    static gchar *
+    getResponse (GtkWindow *parent, const gchar *text, const gchar *checkboxText) {
+	gchar *response_txt = NULL;
+	gint response = GTK_RESPONSE_NONE;
+	GtkWidget *hbox, *label, *entry;
+	if(!text) text = "";
+	auto dialog = gtk_dialog_new ();
+	gtk_window_set_type_hint(GTK_WINDOW(dialog), GDK_WINDOW_TYPE_HINT_DIALOG);
+
+	response_txt = NULL;
+	gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+	if(parent) {
+	    gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (parent));
+	}
+	gtk_window_set_resizable (GTK_WINDOW (dialog), TRUE);
+	gtk_container_set_border_width (GTK_CONTAINER (dialog), 6);
+
+	GtkWidget *title_label=NULL;
+	if (text) {
+	    title_label = gtk_label_new ("");
+	    gchar *markup = g_strdup_printf("<b>%s</b>", text);
+	    gtk_label_set_markup(GTK_LABEL(title_label), markup);
+	    g_free(markup);
+	}
+	if(text)
+	    label = gtk_label_new (text);
+	else 
+	    label = gtk_label_new ("");
+
+	hbox = GTK_WIDGET(gtk_c::hboxNew (TRUE, 6));
+	auto vbox = gtk_c::vboxNew (TRUE, 6);
+	gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area(GTK_DIALOG (dialog))), GTK_WIDGET(vbox), FALSE, FALSE, 0);
+
+	entry = gtk_entry_new ();
+	GtkWidget *checkbox = NULL;
+	if (checkboxText) checkbox = gtk_check_button_new_with_label(checkboxText);
+
+	if (title_label){
+	    gtk_box_pack_start (GTK_BOX (vbox), title_label, TRUE, TRUE, 0);
+	}
+	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (hbox), entry, TRUE, TRUE, 0);
+	gtk_widget_show_all (hbox);
+	if (checkboxText) {
+	    gtk_box_pack_start (GTK_BOX (vbox), checkbox, TRUE, TRUE, 0);
+	}
+
+
+	gtk_entry_set_text ((GtkEntry *) entry, "fixme:default app");
+
+	g_object_set_data(G_OBJECT(entry),"dialog", dialog);
+	g_signal_connect (G_OBJECT (entry), "activate", G_CALLBACK (activate_entry), dialog);
+
+	add_cancel_ok(GTK_DIALOG (dialog));
+
+	gtk_widget_realize (dialog);
+	if(text){
+	    // This may or may not work, depending on the window manager.
+	    // That is why we duplicate above with markup.
+	    gtk_window_set_title (GTK_WINDOW (dialog), text);
+	} else {
+	    gdk_window_set_decorations (gtk_widget_get_window(dialog), GDK_DECOR_BORDER);
+	}
+
+	g_signal_connect (G_OBJECT (dialog), "delete-event", G_CALLBACK (response_delete), dialog);
+	/* show dialog and return */
+	gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
+	gtk_widget_show_all (dialog);
+	response  = gtk_dialog_run(GTK_DIALOG(dialog));
+
+
+	if(response == GTK_RESPONSE_YES) {
+	    const gchar *et = gtk_entry_get_text (GTK_ENTRY(entry));
+	    if(et && strlen (et)) {
+		response_txt = g_strdup (et);
+	    }
+	}
+	gtk_widget_hide (dialog);
+	gtk_widget_destroy (dialog);
+	if(response_txt != NULL){
+	    g_strstrip (response_txt);
+	}
+
+	return response_txt;
+    }
+
   
 };
 }
