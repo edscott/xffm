@@ -265,7 +265,8 @@ public:
         auto baseView = (BaseView<Type> *)g_object_get_data(G_OBJECT(localPopUp), "baseView");
         auto path = (const gchar *)g_object_get_data(G_OBJECT(localPopUp), "path");
         
-        Dialog<Type>::saveSettings("LocalView", item, value);
+        Dialog<Type>::setSettingInteger("LocalView", item, value);
+	Dialog<Type>::writeSettings();
         baseView->loadModel(path);
     }
     static void
@@ -311,6 +312,8 @@ public:
 	}
 	// save value as default for mimetype
 	Dialog<Type>::setSettingString("MimeTypeApplications", mimetype, response);
+	Dialog<Type>::writeSettings();
+
     }
 
 private:

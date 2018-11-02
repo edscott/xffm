@@ -60,7 +60,8 @@ public:
         WARN("range off\n");
         auto size = page->fontSize();
         page->parent()->resizeWindow(size);
-        page->parent()->saveSettings();
+	Dialog<Type>::setSettingInteger("xfterm", "fontSize",size);
+	Dialog<Type>::writeSettings();
         // for all pages, change fontSize
         auto notebook = page->parent()->notebook();
         for (int i=0; i<gtk_notebook_get_n_pages (notebook); i++){

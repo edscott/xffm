@@ -137,7 +137,9 @@ public:
 
         auto dialog_p = (Dialog<Type> *)data;
         // Save selection width and height to .ini
-        dialog_p->saveSettings(); 
+	Dialog<Type>::setSettingInteger( "window", "width", lastX);
+	Dialog<Type>::setSettingInteger( "window", "height", lastY);
+	Dialog<Type>::writeSettings();
 
 	gint pages = gtk_notebook_get_n_pages (dialog_p->notebook());
 	TRACE("pages = %d\n", pages);
