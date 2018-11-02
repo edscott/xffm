@@ -13,6 +13,7 @@ class LocalPopUp {
     using pixbuf_c = Pixbuf<Type>;
     using util_c = Util<Type>;
     using pixbuf_icons_c = Icons<Type>;
+    using page_c = Page<Type>;
 
 
 
@@ -95,7 +96,7 @@ public:
 	    auto p = item;
 	    gint i;
 		
-	    
+
 	    GtkWidget *title = gtk_c::menu_item_new(iconName, ""); 
 	    gtk_widget_set_sensitive(title, FALSE);
 	    gtk_widget_show (title);
@@ -115,15 +116,34 @@ public:
 
 	}
 
-	// Open with
+	auto cleanup = (gchar *) g_object_get_data(G_OBJECT(localItemPopUp), "DISPLAY_NAME");
+	g_free(cleanup);
+	cleanup = (gchar *) g_object_get_data(G_OBJECT(localItemPopUp), "PATH");
+	g_free(cleanup);
+	g_object_set_data(G_OBJECT(localItemPopUp), "DISPLAY_NAME", displayName);
+	g_object_set_data(G_OBJECT(localItemPopUp), "PATH", path);
+	// mimetype is const gchar *
+	g_object_set_data(G_OBJECT(localItemPopUp), "MIMETYPE", (void *)mimetype);
+
+	// Open with dialog
 	{
 	    auto v = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(localItemPopUp), "Open with"));
 	    gtk_widget_show(GTK_WIDGET(v));
 	    gtk_widget_set_sensitive(GTK_WIDGET(v), TRUE);
 	}
 
-	// get mimetype app from hashtable (FIXME)
-        gboolean textMimetype = (mimetype && strncmp(mimetype, "text/", strlen("text/")) == 0);
+	// open with mimetype application
+	{
+	    auto v = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(localItemPopUp), "mimetypeOpen"));
+	    const gchar **apps = Mime<Type>::locate_apps(mimetype);
+	    //FIXME : use default mimetype application if already selected.
+	    const gchar *app = apps[0];
+	    // FIXME use format to construct command
+
+	}
+        
+	// FIXME: this will only be fallback if above mimetype application fails...
+	gboolean textMimetype = (mimetype && strncmp(mimetype, "text/", strlen("text/")) == 0);
 	gchar *fileInfo = util_c::fileInfo(path);
         gboolean textFiletype =(fileInfo && 
                 (strstr(fileInfo, "text")||strstr(fileInfo,"empty")));
@@ -155,7 +175,6 @@ public:
 	    gtk_widget_show(GTK_WIDGET(v));
 	    gtk_widget_set_sensitive(GTK_WIDGET(v), TRUE);
 	    
-	    g_free(displayName);
 	    g_free(icon);
 	    g_free(markup);
 
@@ -168,7 +187,6 @@ public:
         g_free (fileInfo);
 	g_free(name);
 	g_free(iconName);
-	g_free(path);
          
         return localItemPopUp;
         
@@ -268,12 +286,31 @@ public:
 	page->command(command);
 	
     }
+ 
     static void
     openWith(GtkMenuItem *menuItem, gpointer data)
-    {
-	GtkWindow *parent = NULL; //FIXME set to dialog_
-        auto response = getResponse (parent, _("Open with"), _("Run in Terminal")) ;
-	WARN("response = %s\n", response);
+    {	
+	//auto displayName = (const gchar *)g_object_get_data(G_OBJECT(data), "DISPLAY_NAME");
+	//gchar *title = g_strdup_printf("<b>%s <span color=\"blue\">%s</span></b>",_("File"), displayName);
+	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "PATH");
+	auto mimetype = (const gchar *)g_object_get_data(G_OBJECT(data), "MIMETYPE");
+	gchar *title = g_strdup_printf("<b><span size=\"larger\" color=\"blue\">%s</span></b>\n<span color=\"#880000\">(%s)</span>", 
+		path, mimetype);
+	const gchar **apps = Mime<Type>::locate_apps(mimetype);
+	
+        auto response = getResponse (_("Open with"),
+		title,_("Open with"),
+		_("Run in Terminal"), apps);
+	gboolean valid = Mime<Type>::isValidCommand(response);
+	WARN("response = %s, valid=%d\n", response, valid);
+	if (!valid){
+	    gchar *message = g_strdup_printf("\n<span color=\"#990000\"><b>%s</b></span>:\n <b>%s</b>\n", _("Invalid entry"), response); 
+	    gtk_c::quick_help (GTK_WINDOW(mainWindow), message);
+	    g_free(message);
+	    return;
+	}
+	// save value as default for mimetype
+	Dialog<Type>::setSettingString("MimeTypeApplications", mimetype, response);
     }
 
 private:
@@ -299,78 +336,95 @@ private:
     static void add_cancel_ok(GtkDialog *dialog){
 	// button no
 	auto button =
-	    gtk_c::dialog_button ("xffm/stock_cancel", _("Cancel"));
+	    gtk_c::dialog_button ("window-close-symbolic", _("Cancel"));
 	gtk_widget_show (GTK_WIDGET(button));
 	gtk_dialog_add_action_widget (GTK_DIALOG (dialog), GTK_WIDGET(button), GTK_RESPONSE_NO);
 	g_object_set_data (G_OBJECT (dialog), "action_false_button", button);
 	// button yes
-	button = gtk_c::dialog_button ("xffm/stock_ok", _("Ok"));
+	button = gtk_c::dialog_button ("system-run-symbolic", _("Ok"));
 	gtk_widget_show (GTK_WIDGET(button));
 	g_object_set_data (G_OBJECT (dialog), "action_true_button", button);
 	gtk_dialog_add_action_widget (GTK_DIALOG (dialog), GTK_WIDGET(button), GTK_RESPONSE_YES);
     }
 
     static gchar *
-    getResponse (GtkWindow *parent, const gchar *text, const gchar *checkboxText) {
+    getResponse ( const gchar *windowTitle,
+	    const gchar *title,  
+	    const gchar *text,  
+	    const gchar *checkboxText,
+	    const gchar **completionOptions) {
 	gchar *response_txt = NULL;
 	gint response = GTK_RESPONSE_NONE;
-	GtkWidget *hbox, *label, *entry;
 	if(!text) text = "";
 	auto dialog = gtk_dialog_new ();
 	gtk_window_set_type_hint(GTK_WINDOW(dialog), GDK_WINDOW_TYPE_HINT_DIALOG);
 
 	response_txt = NULL;
 	gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
-	if(parent) {
-	    gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (parent));
-	}
+	gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (mainWindow));
 	gtk_window_set_resizable (GTK_WINDOW (dialog), TRUE);
 	gtk_container_set_border_width (GTK_CONTAINER (dialog), 6);
 
 	GtkWidget *title_label=NULL;
-	if (text) {
+	if (title) {
 	    title_label = gtk_label_new ("");
-	    gchar *markup = g_strdup_printf("<b>%s</b>", text);
-	    gtk_label_set_markup(GTK_LABEL(title_label), markup);
-	    g_free(markup);
+	    gtk_label_set_markup(GTK_LABEL(title_label), title);
 	}
-	if(text)
-	    label = gtk_label_new (text);
-	else 
-	    label = gtk_label_new ("");
+	
+	auto label = GTK_LABEL(gtk_label_new (""));
 
-	hbox = GTK_WIDGET(gtk_c::hboxNew (TRUE, 6));
+	if(text) gtk_label_set_markup(label, text);
+
+	auto hbox = gtk_c::hboxNew (TRUE, 6);
 	auto vbox = gtk_c::vboxNew (TRUE, 6);
 	gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area(GTK_DIALOG (dialog))), GTK_WIDGET(vbox), FALSE, FALSE, 0);
-
-	entry = gtk_entry_new ();
-	GtkWidget *checkbox = NULL;
-	if (checkboxText) checkbox = gtk_check_button_new_with_label(checkboxText);
+	GtkComboBoxText *combo;
+	GtkEntry *entry;
+	if (completionOptions){
+	    combo = GTK_COMBO_BOX_TEXT(gtk_combo_box_text_new_with_entry());
+	    const gchar **p;
+	    for (p=completionOptions; p && *p; p++){
+		gtk_combo_box_text_append_text (combo,*p);
+		DBG("setting combo value: %s\n" , *p);
+	    }
+	    gtk_combo_box_set_active (GTK_COMBO_BOX(combo),0);
+	    // FIXME: set item 0 to default, if any
+	} else {
+	    entry = GTK_ENTRY(gtk_entry_new ());
+	    //gtk_entry_set_text ((GtkEntry *) entry, "fixme:default app, if any");
+	}
 
 	if (title_label){
 	    gtk_box_pack_start (GTK_BOX (vbox), title_label, TRUE, TRUE, 0);
 	}
-	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
-	gtk_box_pack_start (GTK_BOX (hbox), entry, TRUE, TRUE, 0);
-	gtk_widget_show_all (hbox);
-	if (checkboxText) {
+	gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET(hbox), FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(label), TRUE, TRUE, 0);
+
+	if (completionOptions){
+	    gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(combo), TRUE, TRUE, 0);
+	} else {
+	    gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(entry), TRUE, TRUE, 0);
+	    g_object_set_data(G_OBJECT(entry),"dialog", dialog);
+	    g_signal_connect (G_OBJECT (entry), "activate", G_CALLBACK (activate_entry), dialog);
+	}
+
+	gtk_widget_show_all (GTK_WIDGET(hbox));
+	GtkWidget *checkbox = NULL;
+	if (checkboxText) { //FIXME do something with this
+	    checkbox = gtk_check_button_new_with_label(checkboxText);
 	    gtk_box_pack_start (GTK_BOX (vbox), checkbox, TRUE, TRUE, 0);
 	}
 
+	//gtk_entry_set_text ((GtkEntry *) entry, "fixme:default app");
 
-	gtk_entry_set_text ((GtkEntry *) entry, "fixme:default app");
-
-	g_object_set_data(G_OBJECT(entry),"dialog", dialog);
-	g_signal_connect (G_OBJECT (entry), "activate", G_CALLBACK (activate_entry), dialog);
 
 	add_cancel_ok(GTK_DIALOG (dialog));
 
 	gtk_widget_realize (dialog);
-	if(text){
+	if(windowTitle){
 	    // This may or may not work, depending on the window manager.
 	    // That is why we duplicate above with markup.
-	    gtk_window_set_title (GTK_WINDOW (dialog), text);
+	    gtk_window_set_title (GTK_WINDOW (dialog), windowTitle);
 	} else {
 	    gdk_window_set_decorations (gtk_widget_get_window(dialog), GDK_DECOR_BORDER);
 	}
@@ -383,10 +437,17 @@ private:
 
 
 	if(response == GTK_RESPONSE_YES) {
-	    const gchar *et = gtk_entry_get_text (GTK_ENTRY(entry));
+	    const gchar *et;
+	    if (completionOptions){
+		et = gtk_combo_box_text_get_active_text (combo);
+	    } else {
+		et = gtk_entry_get_text (entry);
+	    }
 	    if(et && strlen (et)) {
 		response_txt = g_strdup (et);
 	    }
+	    //FIXME: save option as mimetype default in settings, and use it to
+	    //       set entry text.
 	}
 	gtk_widget_hide (dialog);
 	gtk_widget_destroy (dialog);

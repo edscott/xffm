@@ -164,6 +164,41 @@ public:
         g_key_file_free(key_file);
    }
     
+   static void
+   setSettingString(const gchar *group, const gchar *item, const gchar *value){
+        GKeyFile *key_file = g_key_file_new();
+        gchar *file = g_build_filename(g_get_user_config_dir(),"xffm+","settings.ini", NULL);
+        gboolean loaded = g_key_file_load_from_file(key_file, file,
+               (GKeyFileFlags) (G_KEY_FILE_KEEP_COMMENTS |  G_KEY_FILE_KEEP_TRANSLATIONS),
+                NULL);
+        g_free(file);
+        g_key_file_set_string (key_file, group, item, value);
+        write_keyfile(key_file, file);
+        g_free(file);
+        g_key_file_free(key_file);
+   }
+    
+   static gchar *
+   getSettingString(const gchar *group, const gchar *item){
+        GKeyFile *key_file = g_key_file_new();
+        gchar *file = g_build_filename(g_get_user_config_dir(),"xffm+","settings.ini", NULL);
+        gboolean loaded = g_key_file_load_from_file(key_file, file,
+               (GKeyFileFlags) (G_KEY_FILE_KEEP_COMMENTS |  G_KEY_FILE_KEEP_TRANSLATIONS),
+                NULL);
+        g_free(file);
+        gchar *value=NULL;
+        if (loaded) {
+            GError *error = NULL;
+            value = g_key_file_get_string (key_file, group, item, &error);
+            if (error){
+                TRACE("%s\n", error->message);
+                g_error_free(error);
+                value = NULL;
+            }
+        } 
+        g_key_file_free(key_file);
+        return value;
+   }
    static gint 
    getSettingInteger(const gchar *group, const gchar *item){
         GKeyFile *key_file = g_key_file_new();

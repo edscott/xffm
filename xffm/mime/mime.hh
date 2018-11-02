@@ -5,6 +5,7 @@
 //#include <libxml/tree.h>
 #include <string.h>
 #include <errno.h>
+#include "common/util.hh"
 
 // For starters, we need mime_type() and mime_file(), 
 // then type_from_sfx and alias_type and apps and command
@@ -21,16 +22,16 @@ static pthread_mutex_t application_hash_mutex=PTHREAD_MUTEX_INITIALIZER;
 static GHashTable *application_hash_sfx=NULL;
 static GHashTable *alias_hash=NULL;
 static GHashTable *application_hash_icon=NULL;
+static GHashTable *application_hash_type=NULL;
 
 static GHashTable *application_hash_text=NULL;
 static GHashTable *application_hash_text2=NULL;
 static GHashTable *application_hash_output=NULL;
 static GHashTable *application_hash_output_ext=NULL;
-static GHashTable *application_hash_type=NULL;
 
 template <class Type>
 class Mime {
-
+    using util_c = Util<Type>;
 private:
     static gchar *
     mime (const gchar *command){
@@ -64,54 +65,54 @@ private:
         g_hash_table_replace (application_hash_sfx, (void *)sfx_key, (void *)value);
         pthread_mutex_unlock(&application_hash_mutex);
     }
-/*
-void
-add2type_hash (DBHashTable * cache) {
-    gchar *type_key = (gchar *) malloc (DBH_KEYLENGTH (cache));
-    if (!type_key) g_error("malloc: %s", strerror(errno));
-    memset(type_key, 0, DBH_KEYLENGTH (cache));
-    memcpy (type_key, DBH_KEY (cache), DBH_KEYLENGTH (cache));
-    //gchar *string = g_strdup ((gchar *) DBH_DATA (cache));
-    const gchar *string = DBH_DATA (cache);
 
-    gint count = 0;
-    gint i;
-    for(i = 0; i < strlen (string); i++){
-        if(string[i] == '@'){
-            count++;
-	}
-    }
-    if(!count) {
-        DBG ("Apparent cache corruption. Please delete \"history\" in user preferences dialog (sysmsg: add2type_hash() count==0)\n");
-        g_free(type_key);
+    static void
+    add2ApplicationHash(const gchar *type, const gchar *command, gboolean prepend){
+        // Always use basic mimetype: avoid hashing alias mimetypes...
+        const gchar *basic_type = getBasicType(type);
+        if (!basic_type) basic_type = type;
+        gchar *key = get_hash_key (basic_type);
+        pthread_mutex_lock(&application_hash_mutex);
+	auto apps = (gchar **)g_hash_table_lookup(application_hash_type, key);
+	if (apps) {
+	    int size = 1; // final 0
+	    gchar **p;
+	    for (p=apps; p && *p; p++) size++;
+
+	    gchar **newApps = (gchar **)calloc(size+1, sizeof(gchar *));
+	    if (!newApps){
+		ERROR("add2ApplicationHash: calloc() %s\n", strerror(errno));
+		exit(1);
+	    }
+	    int i=0;
+	    if (prepend) newApps[i++] = g_strdup(command);
+	    for (p=apps; p && *p; p++){
+		newApps[i++] = g_strdup(*p);
+	    }
+	    if (!prepend) newApps[i++] = g_strdup(command);
+	    g_hash_table_replace(application_hash_type, key, (void *)newApps);
+	} else {
+	    gchar **newApps = (gchar **)calloc(2, sizeof(gchar *));
+	    newApps[0] = g_strdup(command);
+	    g_hash_table_insert(application_hash_type, key, (void *)newApps);
+	} 
+        pthread_mutex_unlock(&application_hash_mutex);
         return;
+
     }
 
-    gchar **apps = g_strsplit(string, "@", -1);
-#if 0
-    gchar **apps = (gchar **) malloc ((count + 1) * sizeof (gchar *));
-    if (!apps) g_error("malloc: %s", strerror(errno));
-    memset (apps, 0, (count + 1) * sizeof (gchar *));
-
-    NOOP("mime-module, %d loading cache type element %s -> %s\n", count, type_key, string);
-
-    for(i = 0; i < count; i++) {
-
-        apps[i] = strtok ((i == 0) ? string : NULL, "@");
-    }
-    apps[count] = NULL;
-#endif
-
-#if 0
-    TRACE("mime-module, hash table replacing apps:");
-    for(i = 0; i < count; i++) TRACE("\"%s\"", apps[i]); TRACE("\n");
-#endif
-    g_hash_table_replace (application_hash_type, (gpointer) type_key, (gpointer) apps);
-}
-*/
 
 public:    
 
+    static const gchar *
+    getBasicType(const gchar *mimetype) {
+	const gchar *retval = mimetype;
+	gchar *key = get_hash_key (mimetype);
+        const gchar *alias = (const gchar *)g_hash_table_lookup (alias_hash, key);
+        if (alias) retval = alias;
+	g_free(key);
+	return retval;
+    }
 
     static const gchar *
     locate_icon (const gchar *mimetype) {
@@ -121,17 +122,20 @@ public:
             return NULL;
         }
         TRACE("mime-module, locate_icon looking in icon hash for \"%s\"\n", mimetype);
-        gchar *key = get_hash_key (mimetype);
+        
+	const gchar *basicType = getBasicType(mimetype);
+	gchar *key = get_hash_key (mimetype);
         icon = (const gchar *)g_hash_table_lookup (application_hash_icon, key);
+	g_free(key);
+
         if (!icon){
-            const gchar *alias = (const gchar *)g_hash_table_lookup (alias_hash, key);
+            const gchar *alias = getBasicType(mimetype);
             if (alias) {
-                g_free(key);
                 key = get_hash_key (alias);
                 icon = (const gchar *)g_hash_table_lookup (application_hash_icon, key);
+		g_free(key);
             }
         }
-        g_free(key);
         return icon;
     }
 
@@ -212,30 +216,19 @@ public:
         return NULL;
     }
 
-    static gchar **
+    static const gchar **
     locate_apps (const gchar * type) {
-        gchar **apps;
 
         //load_hashes ();
         ///  now look in hash...
 
         gchar *key = get_hash_key (type);
         pthread_mutex_lock(&application_hash_mutex);
-        apps = g_hash_table_lookup (application_hash_type, key);
+	WARN("loading apps for mimetype: %s\n", type);
+        auto apps = (const gchar **)g_hash_table_lookup (application_hash_type, key);
         pthread_mutex_unlock(&application_hash_mutex);
         g_free (key);
-        if(apps) {
-            gint i;
-            for(i = 0; apps[i]; i++) ;
-            gchar **a_apps = (gchar **) malloc ((i + 1) * sizeof (gchar *));
-            if (!a_apps) g_error("malloc: %s", strerror(errno));
-            memset (a_apps, 0, (i + 1) * sizeof (gchar *));
-            for(i = 0; apps[i]; i++) {
-                a_apps[i] = g_strdup (apps[i]);
-            }
-            return a_apps;
-        }
-        return NULL;
+        return apps;
     }
 
 
@@ -324,11 +317,18 @@ public:
 	return NULL;
         //return MimeHash<txt_hash_t>::lookup(mimetype, hash_data[GENERIC_ICON]); 
     }
+
+    static void freeStrV(void *data){
+	auto p = (gchar **)data;
+	g_strfreev(p);
+    }
+
     static void
     mimeBuildHashes (void) {
         application_hash_sfx = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
         alias_hash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
         application_hash_icon = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
+        application_hash_type = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, freeStrV);
         FILE *input;
 #ifdef FREEDESKTOP_GLOBS
         if ((input = fopen(FREEDESKTOP_GLOBS, "r")) != NULL) {
@@ -391,6 +391,101 @@ public:
             fclose(input);
         } else ERROR("Cannot open %s\n", FREEDESKTOP_ALIAS);
 #endif
+
+	// FIXME: break the following code into routines...
+	// mimetype registered applications...
+	// /usr/share/applications
+	// /usr/local/share/applications
+	const gchar *directories[] = {
+	    "/usr/share/applications",
+	    "/usr/local/share/applications"
+	};
+	for (int i=0; i<2; i++) {
+	    processApplicationDir(directories[i]);
+	}
+    }
+    static void
+    processApplicationDir(const gchar *dir){
+	DIR *directory = opendir(dir);
+	if (!directory) {
+	    WARN("mime_c:: opendir %s: %s\n", dir, strerror(errno));
+	    return;
+	}
+	WARN("Now reading directory: %s\n", dir);
+	readApplicationDir(dir, directory);
+	closedir (directory);
+    }
+
+    static void 
+    readApplicationDir(const gchar *dir, DIR *directory){
+	//  mutex protect...
+	//pthread_mutex_lock(&readdir_mutex);
+	struct dirent *d; // static pointer
+	errno=0;
+	while ((d = readdir(directory))  != NULL){
+	    WARN("Now reading file: %s\n", d->d_name);
+	    parseDesktopFile(dir, d);
+	}
+    }
+
+    static void
+    parseDesktopFile(const gchar *dir, struct dirent *d){
+	TRACE( "%p  %s\n", d, d->d_name);
+	if(strstr(d->d_name, ".desktop") == NULL) return;
+	// get [Desktop Entry] Exec
+	// get [Desktop Entry] TryExec
+	// get [Desktop Entry] MimeType
+	//
+	GKeyFile *key_file = g_key_file_new();
+	gchar *file = g_build_filename(dir,d->d_name, NULL);
+	gboolean loaded = g_key_file_load_from_file(key_file, file, 
+		(GKeyFileFlags) (G_KEY_FILE_KEEP_COMMENTS |  G_KEY_FILE_KEEP_TRANSLATIONS), NULL);
+	g_free(file);
+	if (!loaded) return;
+	const gchar *group = "Desktop Entry";
+	if (!g_key_file_has_group (key_file, group)){
+	    g_key_file_free(key_file);
+	    return;
+	}
+	GError *error = NULL;
+	if (!g_key_file_has_key (key_file, group, "MimeType", &error)){
+	    g_key_file_free(key_file);
+	    return;
+	}
+	error = NULL;
+	gchar *exec = g_key_file_get_string (key_file, group, "Exec", &error);
+	if (error){ exec = NULL; error=NULL;}
+	gchar *tryExec = g_key_file_get_string (key_file, group, "TryExec", &error);
+	if (error){ tryExec = NULL; error=NULL; }
+	gchar *terminal = g_key_file_get_string (key_file, group, "Terminal", &error);
+	if (error){ terminal = NULL; error=NULL; }
+	gchar *icon = g_key_file_get_string (key_file, group, "Icon", &error);
+	if (error){ icon = NULL;  error=NULL;}
+	gchar *mimeType = g_key_file_get_string (key_file, group, "MimeType", &error);
+
+	if (mimeType){
+	    gchar **types = g_strsplit(mimeType, ";", -1);
+	    gchar **p;
+	    for (p=types; p && *p; p++){
+		gchar *e = (exec)?exec:tryExec;
+		
+		if (*p && e){
+		    if (strstr(e, "%U")) *(strstr(e, "%U")+1) = 's';
+		    if (strstr(e, "%u")) *(strstr(e, "%u")+1) = 's';
+		    if (strstr(e, "%F")) *(strstr(e, "%F")+1) = 's';
+		    if (strstr(e, "%f")) *(strstr(e, "%f")+1) = 's';
+		    DBG("Adding application %s --> %s\n", *p, e);
+		    add2ApplicationHash(*p, e, TRUE);
+		}
+	    }
+	    g_strfreev(types);
+	}
+	g_free(mimeType);
+	g_free(exec);
+	g_free(tryExec);
+	g_free(terminal);
+	g_free(icon);
+	g_key_file_free(key_file);
     }
         
 private:
@@ -412,8 +507,222 @@ private:
         g_free(pp);
         return key;
     }
-        
+    
+    static gchar *
+    mkCommandLine (const gchar *command_fmt, const gchar *path) {
+        TRACE("mime_mk_command_line()...\n");
 
+        TRACE ("MIME: mime_mk_command_line(%s)\n", path);
+        gchar *command_line = NULL;
+        gchar *fmt = NULL;
+
+        if(!command_fmt)
+            return NULL;
+        if(!path)
+            path = "";
+
+        TRACE ("MIME: command_fmt=%s\n", command_fmt);
+
+        /* this is to send path as an argument */
+
+        if(strstr (command_fmt, "%s")) {
+            fmt = g_strdup (command_fmt);
+        } else {
+            fmt = g_strconcat (command_fmt, " %s", NULL);
+        }
+        TRACE ("MIME: command_fmt fmt=%s\n", fmt);
+
+        TRACE ("MIME: path=%s\n", path);
+        gchar *esc_path = util_c::esc_string (path);
+        command_line = g_strdup_printf (fmt, esc_path);
+        g_free (esc_path);
+        TRACE ("MIME2: command_line=%s\n", command_line);
+
+        g_free (fmt);
+        return command_line;
+    }
+        
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+     
+    static gchar *
+    mkTerminalLine (const gchar *command) {
+        TRACE("mime_mk_terminal_line()...\n");
+        TRACE ("MIME: mime_mk_command_line(%s)\n", command);
+        gchar *command_line = NULL;
+
+        if(!command)
+            return NULL;
+
+        const gchar *term = util_c::what_term ();
+        const gchar *exec_flag = util_c::term_exec_option(term);
+        /*
+        // Validation is already done by rfm_what_term
+        if(!mime_is_valid_command ((void *)term)) {
+            DBG ("%s == NULL\n", term);
+            return NULL;
+        }*/
+        command_line = g_strdup_printf ("%s %s %s", term, exec_flag, command);
+
+        return command_line;
+    }
+
+public:     
+    static gboolean isValidCommand (const char *cmd_fmt) {
+        //return GINT_TO_POINTER(TRUE);
+        TRACE ("MIME: mime_is_valid_command(%s)\n", cmd_fmt);
+        GError *error = NULL;
+        int argc;
+        gchar *path;
+        gchar **argv;
+        if(!cmd_fmt)
+            return  (FALSE);
+        if(!g_shell_parse_argv (cmd_fmt, &argc, &argv, &error)) {
+            gchar *msg = g_strcompress (error->message);
+            DBG ("%s: %s\n", msg, cmd_fmt);
+            g_error_free (error);
+            g_free (msg);
+            return  (FALSE);
+        }
+        gchar **ap = argv;
+        if (*ap==NULL) {
+            errno = ENOENT;
+            return  (FALSE);
+        }
+
+        // assume command is correct if environment is being set
+        if (strchr(*ap, '=')){
+            g_strfreev (argv);
+            return  (TRUE);
+        }
+
+        path = g_find_program_in_path (*ap);
+        if(!path) {
+            gboolean direct_path = g_file_test (argv[0], G_FILE_TEST_EXISTS) ||
+                strncmp (argv[0], "./", strlen ("./")) == 0 || strncmp (argv[0], "../", strlen ("../")) == 0;
+            //DBG("argv[0]=%s\n",argv[0]);
+            if(direct_path) {
+                path = g_strdup (argv[0]);
+            }
+        }
+        TRACE ("mime_is_valid_command(): g_find_program_in_path(%s)=%s\n", argv[0], path);
+
+        //if (!path || access(path, X_OK) != 0) {
+        if(!path) {
+            g_strfreev (argv);
+            errno = ENOENT;
+            return  (FALSE);
+        }
+        // here we test for execution within sudo
+        // XXX we could also check for commands executed in a terminal, but not today...
+        gboolean retval=(TRUE);
+        if (strcmp(argv[0],"sudo")==0) {
+            int i=1;
+            if (strcmp(argv[i],"-A")==0) i++;
+            retval=isValidCommand(argv[i]);
+        }
+
+        g_strfreev (argv);
+        g_free (path);
+        return retval;
+    }
+
+/*
+    static gchar *
+    mime_command (const char *type) {
+        TRACE ("APPS: mime_command(%s)\n", type);
+        gchar **apps;
+        int i;
+        gchar *cmd_fmt = NULL;
+        apps = locate_apps(type);
+        if(!apps) {
+            TRACE ("APPS: --> NULL\n");
+            return NULL;
+        }
+        if(!apps[0]) {
+            TRACE ("APPS: --> NULL\n");
+            g_free (apps);
+            return NULL;
+        }
+
+        for(i = 0; apps[i]; i++) {
+            g_free (cmd_fmt);
+            cmd_fmt = g_strcompress (apps[i]);
+            if(mime_is_valid_command (cmd_fmt)) {
+                g_strfreev (apps);
+                TRACE ("APPS: --> %s\n", cmd_fmt);
+                return cmd_fmt;
+            }
+        }
+        g_free (cmd_fmt);
+        g_strfreev (apps);
+        TRACE ("APPS: --> NULL\n");
+        return NULL;
+    }
+
+*/
+    /*
+    static gchar **
+    mime_apps (const char *type) {
+        TRACE("mime_apps()...\n");
+        TRACE ("MIME: mime_apps(%s)\n", type);
+        gchar **apps;
+        apps = locate_apps(type);
+        if(!apps)
+            return NULL;
+        if(!apps[0]) {
+            g_free (apps);
+            return NULL;
+        }
+        return apps;
+    }
+*/
+
+    // Insert a command to a mimetype. This will regenerate the disk
+    // cache.
+ /*    
+    static void *
+    mime_add (gchar *type, gchar *q) {
+        TRACE("mime_add()...\n");
+        gchar *command = g_strdup(q);
+        g_strstrip(command);
+        if(!command || !strlen (command)){
+            g_free(command);
+            return NULL;
+        }
+
+        TRACE ("OPEN APPS: adding type %s->%s\n", type, command);
+        add2ApplicationHash(type, command, TRUE);
+      
+
+        // thread will dispose of config_command:
+        gchar *config_command=g_strdup_printf("%s:%s", type, command);
+        g_free(command);
+
+        return NULL;
+    }
+
+    // Append a command to a mimetype. This will not regenerate the disk
+    // cache, (see dotdesktop module for the reason why not)
+     
+    static void *
+    mime_append (gchar *type, gchar *q) {
+        gchar *command = g_strdup(q);
+        g_strstrip(command);
+        if(!command || !strlen (command)){
+            g_free(command);
+            return NULL;
+        }
+        TRACE ("OPEN APPS: appending type %s->%s\n", type, command);
+        add2ApplicationHash(type, command, FALSE);
+        g_free(command);
+        return NULL;
+    }
+
+*/
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
 //#define WORKINPROGRESS 1
 #ifdef WORKINPROGRESS
     static void
@@ -629,7 +938,7 @@ private:
                 if (!s) continue;
                 *s=0;
                 const gchar *command=s+1;
-                add_type_to_hashtable(type, command, TRUE);
+                add2ApplicationHash(type, command, TRUE);
             }
             fclose(config);
         }
@@ -891,12 +1200,6 @@ class Mime {
     }
 
 //////////////////////////////////////////////////////////////////
-    static void
-    free_apps(void *data){
-        if (!data) return;
-        gchar **apps = (gchar **)data;
-        g_strfreev(apps);
-    }
 
     static void create_hash(txt_hash_t &T,  xmlDocPtr doc, const gchar *xmlkey, const gchar *xmldata){
             memset(&T, 0, sizeof(txt_hash_t));
@@ -996,218 +1299,6 @@ class Mime {
     }
 
 
-
-
-
-     
-    gboolean mime_is_valid_command (const char *cmd_fmt) {
-        //return GINT_TO_POINTER(TRUE);
-        TRACE ("MIME: mime_is_valid_command(%s)\n", cmd_fmt);
-        GError *error = NULL;
-        int argc;
-        gchar *path;
-        gchar **argv;
-        if(!cmd_fmt)
-            return  (FALSE);
-        if(!g_shell_parse_argv (cmd_fmt, &argc, &argv, &error)) {
-            gchar *msg = g_strcompress (error->message);
-            DBG ("%s: %s\n", msg, cmd_fmt);
-            g_error_free (error);
-            g_free (msg);
-            return  (FALSE);
-        }
-        gchar **ap = argv;
-        if (*ap==NULL) {
-            errno = ENOENT;
-            return  (FALSE);
-        }
-
-        // assume command is correct if environment is being set
-        if (strchr(*ap, '=')){
-            g_strfreev (argv);
-            return  (TRUE);
-        }
-
-        path = g_find_program_in_path (*ap);
-        if(!path) {
-            gboolean direct_path = g_file_test (argv[0], G_FILE_TEST_EXISTS) ||
-                strncmp (argv[0], "./", strlen ("./")) == 0 || strncmp (argv[0], "../", strlen ("../")) == 0;
-            //DBG("argv[0]=%s\n",argv[0]);
-            if(direct_path) {
-                path = g_strdup (argv[0]);
-            }
-        }
-        TRACE ("mime_is_valid_command(): g_find_program_in_path(%s)=%s\n", argv[0], path);
-
-        //if (!path || access(path, X_OK) != 0) {
-        if(!path) {
-            g_strfreev (argv);
-            errno = ENOENT;
-            return  (FALSE);
-        }
-        // here we test for execution within sudo
-        // XXX we could also check for commands executed in a terminal, but not today...
-        gboolean retval=(TRUE);
-        if (strcmp(argv[0],"sudo")==0) {
-            int i=1;
-            if (strcmp(argv[i],"-A")==0) i++;
-            retval=mime_is_valid_command(argv[i]);
-        }
-
-        g_strfreev (argv);
-        g_free (path);
-        return retval;
-    }
-
-
-    gchar *
-    mime_command (const char *type) {
-        TRACE ("APPS: mime_command(%s)\n", type);
-        gchar **apps;
-        int i;
-        gchar *cmd_fmt = NULL;
-        apps = LOCATE_APPS(type);
-        if(!apps) {
-            TRACE ("APPS: --> NULL\n");
-            return NULL;
-        }
-        if(!apps[0]) {
-            TRACE ("APPS: --> NULL\n");
-            g_free (apps);
-            return NULL;
-        }
-
-        for(i = 0; apps[i]; i++) {
-            g_free (cmd_fmt);
-            cmd_fmt = g_strcompress (apps[i]);
-            if(mime_is_valid_command (cmd_fmt)) {
-                g_strfreev (apps);
-                TRACE ("APPS: --> %s\n", cmd_fmt);
-                return cmd_fmt;
-            }
-        }
-        g_free (cmd_fmt);
-        g_strfreev (apps);
-        TRACE ("APPS: --> NULL\n");
-        return NULL;
-    }
-
-
-    gchar **
-    mime_apps (const char *type) {
-        TRACE("mime_apps()...\n");
-        TRACE ("MIME: mime_apps(%s)\n", type);
-        gchar **apps;
-        apps = LOCATE_APPS(type);
-        if(!apps)
-            return NULL;
-        if(!apps[0]) {
-            g_free (apps);
-            return NULL;
-        }
-        return apps;
-    }
-
-
-    // Insert a command to a mimetype. This will regenerate the disk
-    // cache.
-     
-    void *
-    mime_add (gchar *type, gchar *q) {
-        TRACE("mime_add()...\n");
-        gchar *command = g_strdup(q);
-        g_strstrip(command);
-        if(!command || !strlen (command)){
-            g_free(command);
-            return NULL;
-        }
-
-        TRACE ("OPEN APPS: adding type %s->%s\n", type, command);
-        add_type_to_hashtable(type, command, TRUE);
-      
-
-        // thread will dispose of config_command:
-        gchar *config_command=g_strdup_printf("%s:%s", type, command);
-        g_free(command);
-
-        return NULL;
-    }
-
-    // Append a command to a mimetype. This will not regenerate the disk
-    // cache, (see dotdesktop module for the reason why not)
-     
-    void *
-    mime_append (gchar *type, gchar *q) {
-        gchar *command = g_strdup(q);
-        g_strstrip(command);
-        if(!command || !strlen (command)){
-            g_free(command);
-            return NULL;
-        }
-        TRACE ("OPEN APPS: appending type %s->%s\n", type, command);
-        add_type_to_hashtable(type, command, FALSE);
-        g_free(command);
-        return NULL;
-    }
-
-
-    gchar *
-    mime_mk_command_line (const gchar *command_fmt, const gchar *path) {
-        TRACE("mime_mk_command_line()...\n");
-
-        TRACE ("MIME: mime_mk_command_line(%s)\n", path);
-        gchar *command_line = NULL;
-        gchar *fmt = NULL;
-
-        if(!command_fmt)
-            return NULL;
-        if(!path)
-            path = "";
-
-        TRACE ("MIME: command_fmt=%s\n", command_fmt);
-
-        /* this is to send path as an argument */
-
-        if(strstr (command_fmt, "%s")) {
-            fmt = g_strdup (command_fmt);
-        } else {
-            fmt = g_strconcat (command_fmt, " %s", NULL);
-        }
-        TRACE ("MIME: command_fmt fmt=%s\n", fmt);
-
-        TRACE ("MIME: path=%s\n", path);
-        gchar *esc_path = util_c::esc_string (path);
-        command_line = g_strdup_printf (fmt, esc_path);
-        g_free (esc_path);
-        TRACE ("MIME2: command_line=%s\n", command_line);
-
-        g_free (fmt);
-        return command_line;
-    }
-
-     
-    gchar *
-    mime_mk_terminal_line (const gchar *command) {
-        TRACE("mime_mk_terminal_line()...\n");
-        TRACE ("MIME: mime_mk_command_line(%s)\n", command);
-        gchar *command_line = NULL;
-
-        if(!command)
-            return NULL;
-
-        const gchar *term = util_c::what_term ();
-        const gchar *exec_flag = util_c::term_exec_option(term);
-        /*
-        // Validation is already done by rfm_what_term
-        if(!mime_is_valid_command ((void *)term)) {
-            DBG ("%s == NULL\n", term);
-            return NULL;
-        }*/
-        command_line = g_strdup_printf ("%s %s %s", term, exec_flag, command);
-
-        return command_line;
-    }
-
 ///////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1222,7 +1313,7 @@ class Mime {
     }
 
     void
-    add_type_to_hashtable(const gchar *type, const gchar *command, gboolean prepend){
+    add2ApplicationHash(const gchar *type, const gchar *command, gboolean prepend){
         // Always use basic mimetype: avoid hashing alias mimetypes...
         gchar *basic_type = mime_aliashash_c<txt_hash_t>::get_alias_type(type, hash_data[ALIAS]);
         if (!basic_type) return;

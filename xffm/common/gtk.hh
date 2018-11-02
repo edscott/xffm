@@ -280,7 +280,8 @@ public:
 					   GTK_RESPONSE_NONE,
 					   NULL);
      auto content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
-     auto label = GTK_LABEL(gtk_label_new (message));
+     auto label = GTK_LABEL(gtk_label_new (""));
+     gtk_label_set_markup(label, message);
 
      // Ensure that the dialog box is destroyed when the user responds
 
