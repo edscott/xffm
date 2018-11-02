@@ -507,7 +507,7 @@ private:
         g_free(pp);
         return key;
     }
-    
+public:    
     static gchar *
     mkCommandLine (const gchar *command_fmt, const gchar *path) {
         TRACE("mime_mk_command_line()...\n");
@@ -541,7 +541,7 @@ private:
         g_free (fmt);
         return command_line;
     }
-        
+private:       
 //////////////////////////////////////////////////////////////////////////////////////////////
 
      

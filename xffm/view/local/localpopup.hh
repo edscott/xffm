@@ -299,9 +299,15 @@ public:
 		path, mimetype);
 	const gchar **apps = Mime<Type>::locate_apps(mimetype);
 	
+	gchar *defaultApp = Dialog<Type>::getSettingString("MimeTypeApplications", mimetype);
         auto response = getResponse (_("Open with"),
 		title,_("Open with"),
-		_("Run in Terminal"), apps);
+		_("Run in Terminal"), apps,
+		defaultApp);
+	g_free(defaultApp);
+	if (!response) return;
+
+	// Check whether applicacion is valid.
 	gboolean valid = Mime<Type>::isValidCommand(response);
 	WARN("response = %s, valid=%d\n", response, valid);
 	if (!valid){
@@ -313,6 +319,12 @@ public:
 	// save value as default for mimetype
 	Dialog<Type>::setSettingString("MimeTypeApplications", mimetype, response);
 	Dialog<Type>::writeSettings();
+	gchar *command = Mime<Type>::mkCommandLine(response, path);
+	// get baseView
+	auto baseView =  (BaseView<Type> *)g_object_get_data(G_OBJECT(data), "baseView");
+	auto page = baseView->page();
+	page->command(command);
+	g_free(command);
 
     }
 
@@ -355,7 +367,8 @@ private:
 	    const gchar *title,  
 	    const gchar *text,  
 	    const gchar *checkboxText,
-	    const gchar **completionOptions) {
+	    const gchar **completionOptions,
+	    const gchar *defaultValue) {
 	gchar *response_txt = NULL;
 	gint response = GTK_RESPONSE_NONE;
 	if(!text) text = "";
@@ -390,11 +403,15 @@ private:
 		gtk_combo_box_text_append_text (combo,*p);
 		DBG("setting combo value: %s\n" , *p);
 	    }
+	    if (defaultValue) {
+		gtk_combo_box_text_prepend_text (combo,defaultValue);
+	    }
 	    gtk_combo_box_set_active (GTK_COMBO_BOX(combo),0);
-	    // FIXME: set item 0 to default, if any
 	} else {
 	    entry = GTK_ENTRY(gtk_entry_new ());
-	    //gtk_entry_set_text ((GtkEntry *) entry, "fixme:default app, if any");
+	    if (defaultValue) {
+		gtk_entry_set_text ((GtkEntry *) entry, defaultValue);
+	    }
 	}
 
 	if (title_label){
@@ -417,9 +434,6 @@ private:
 	    checkbox = gtk_check_button_new_with_label(checkboxText);
 	    gtk_box_pack_start (GTK_BOX (vbox), checkbox, TRUE, TRUE, 0);
 	}
-
-	//gtk_entry_set_text ((GtkEntry *) entry, "fixme:default app");
-
 
 	add_cancel_ok(GTK_DIALOG (dialog));
 
