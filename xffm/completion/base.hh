@@ -167,9 +167,8 @@ private:
         return listMatches(output, matches, MATCH_FILE);
     }
 
-    static gchar *
-    base_exec_completion(GtkTextView *output, const gchar *workdir, const char *in_token){
-        GSList *matches=NULL;
+    static GSList *
+    baseExecCompletionList(const gchar *workdir, const char *in_token){
 
         gchar *token=get_token(in_token);
             
@@ -233,6 +232,9 @@ private:
             //*match_count_p = 0;
             //msg_show_match(MATCH_FILE, NULL);
         } 
+	
+	GSList *matches=NULL;
+
         struct stat st;
         gint i;
         for (i=0; i<stack_glob_v.gl_pathc; i++){
@@ -252,9 +254,14 @@ private:
         }
         globfree(&stack_glob_v);
         g_free(token);
-        return  listMatches(output, matches, MATCH_COMMAND);
+        return  matches;
     }
 
+    static gchar *
+    base_exec_completion(GtkTextView *output, const gchar *workdir, const char *in_token){
+	GSList *matches = baseExecCompletionList(workdir, in_token);
+        return  listMatches(output, matches, MATCH_COMMAND);
+    }
 
     static gchar *
     listMatches (GtkTextView *output, GSList *matches, gint match_type){

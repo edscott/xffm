@@ -384,6 +384,41 @@ public:
 
     }
 
+public:
+   
+    static gint
+    on_completion (GtkWidget * widget, GdkEventKey * event, gpointer data) {
+	auto store = (GtkListStore *)data;
+	// get entry text
+	auto entry = GTK_ENTRY(widget);
+	const gchar *text = gtk_entry_get_text(entry);
+	if (!text || strlen(text)<2) return FALSE;
+	// Get GSlist of bash completion
+	// get baseView
+	auto baseView =  (BaseView<Type> *)g_object_get_data(G_OBJECT(localItemPopUp), "baseView");
+	// get page
+	auto page = baseView->page();
+	const gchar *wd = page->workDir();
+	if (!wd) wd = g_get_home_dir();
+    
+	auto slist = BaseCompletion<Type>::baseExecCompletionList(wd, text);
+	// remove all old model entries
+	gtk_list_store_clear(store);
+	// add new entries from GSList
+	GSList *p;
+	GtkTreeIter iter;
+	for (p=slist; p && p->data; p=p->next){
+	    TRACE("completion list: %s\n", (const gchar *)p->data);
+	    gtk_list_store_append (store, &iter);
+	    gtk_list_store_set(store, &iter, 0, (const gchar *)p->data, -1);
+	    g_free(p->data);
+	}
+	g_slist_free(slist);
+
+        auto completion = gtk_entry_get_completion(GTK_ENTRY(widget));
+        gtk_entry_completion_complete (completion);
+        return FALSE;
+    }
 private:
 
     static void
@@ -419,11 +454,12 @@ private:
     }
 
     static gchar *
-    getResponse ( const gchar *windowTitle,
+    getResponse ( 
+	    const gchar *windowTitle,
 	    const gchar *title,  
 	    const gchar *text,  
 	    const gchar *checkboxText,
-	    const gchar **completionOptions,
+	    const gchar **comboOptions,
 	    const gchar *defaultValue) {
 	gchar *response_txt = NULL;
 	gint response = GTK_RESPONSE_NONE;
@@ -452,10 +488,10 @@ private:
 	gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area(GTK_DIALOG (dialog))), GTK_WIDGET(vbox), FALSE, FALSE, 0);
 	GtkComboBoxText *combo;
 	GtkEntry *entry;
-	if (completionOptions){
+	if (comboOptions){
 	    combo = GTK_COMBO_BOX_TEXT(gtk_combo_box_text_new_with_entry());
 	    const gchar **p;
-	    for (p=completionOptions; p && *p; p++){
+	    for (p=comboOptions; p && *p; p++){
 		gtk_combo_box_text_append_text (combo,*p);
 		DBG("setting combo value: %s\n" , *p);
 	    }
@@ -463,12 +499,33 @@ private:
 		gtk_combo_box_text_prepend_text (combo,defaultValue);
 	    }
 	    gtk_combo_box_set_active (GTK_COMBO_BOX(combo),0);
+	    entry =  GTK_ENTRY(gtk_bin_get_child(GTK_BIN(combo)));
 	} else {
 	    entry = GTK_ENTRY(gtk_entry_new ());
 	    if (defaultValue) {
 		gtk_entry_set_text ((GtkEntry *) entry, defaultValue);
 	    }
+
 	}
+
+	// 
+	// * for combobox, entry is child of combobox.
+	// model must update on keyrelease
+	//
+	auto completion = gtk_entry_completion_new();
+	gtk_entry_set_completion (entry, completion);
+	gtk_entry_completion_set_popup_completion(completion, TRUE);
+	gtk_entry_completion_set_text_column (completion, 0);
+	gtk_entry_completion_set_minimum_key_length (completion, 2);
+	auto completionStore = gtk_list_store_new(1, G_TYPE_STRING);
+	gtk_entry_completion_set_model (completion, GTK_TREE_MODEL(completionStore));
+	g_signal_connect (entry,
+			  "key_release_event", 
+			  //"key_press_event", 
+			  KEY_EVENT_CALLBACK(LocalPopUp<Type>::on_completion), 
+			  (gpointer)completionStore);
+			      
+
 
 	if (title_label){
 	    gtk_box_pack_start (GTK_BOX (vbox), title_label, TRUE, TRUE, 0);
@@ -476,7 +533,7 @@ private:
 	gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET(hbox), FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(label), TRUE, TRUE, 0);
 
-	if (completionOptions){
+	if (comboOptions){
 	    gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(combo), TRUE, TRUE, 0);
 	} else {
 	    gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(entry), TRUE, TRUE, 0);
@@ -511,7 +568,7 @@ private:
 
 	if(response == GTK_RESPONSE_YES) {
 	    const gchar *et;
-	    if (completionOptions){
+	    if (comboOptions){
 		et = gtk_combo_box_text_get_active_text (combo);
 	    } else {
 		et = gtk_entry_get_text (entry);
@@ -519,8 +576,11 @@ private:
 	    if(et && strlen (et)) {
 		response_txt = g_strdup (et);
 	    }
-	    //FIXME: save option as mimetype default in settings, and use it to
-	    //       set entry text.
+	    //Save option as mimetype default in settings, 
+	    //and use it to set entry text.
+	    //This is done when function returns, after
+	    //checking if response is actually a valid 
+	    //answer.
 	}
 	gtk_widget_hide (dialog);
 	gtk_widget_destroy (dialog);

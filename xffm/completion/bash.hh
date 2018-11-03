@@ -189,7 +189,7 @@ private:
         gchar *suggest = base_c::base_file_completion(output, workdir, in_file_token);
         return suggest;
     }
-
+public:
     static gchar *
     bash_exec_completion(GtkTextView *output, const char *workdir, const gchar *in_token){
         TRACE("bash_exec_completion for %s\n", in_token);
@@ -224,7 +224,7 @@ private:
         }
         return suggest;
     }
-
+private:
 #define ALT_CHAR 13
     static gchar *
     bash_complete(GtkTextView *output, const char *workdir, const gchar *token){
