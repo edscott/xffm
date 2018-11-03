@@ -20,6 +20,7 @@ template <class Type> class Notebook;
 #define RANGE_CALLBACK(X)  G_CALLBACK((gboolean (*)(GtkRange *,GtkScrollType,gdouble,gpointer)) X)
 #define SIZE_CALLBACK(X)  G_CALLBACK((void (*)(GtkWidget *,GdkRectangle *,gpointer)) X)
 #define MENUITEM_CALLBACK(X)  G_CALLBACK((void (*)(GtkMenuItem *,gpointer)) X)
+#define COMBO_CALLBACK(X)  G_CALLBACK((void (*)(GtkComboBox *,gpointer)) X)
 #define BUTTON_CALLBACK(X)  G_CALLBACK((void (*)(GtkButton *,gpointer)) X)
 #define WIDGET_CALLBACK(X)  G_CALLBACK((void (*)(GtkWidget *,gpointer)) X)
 #define CONTEXT_CALLBACK(X)  (gboolean (*)(gpointer)) X

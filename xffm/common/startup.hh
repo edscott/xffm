@@ -85,9 +85,6 @@
     
     gchar *e = NULL;
     if (getenv("EDITOR")) e = g_find_program_in_path(getenv("EDITOR"));
-    if (e && strstr(e, "nano")){
-          e = g_strdup_printf("%s nano", term_cmd);
-    }
      
     if (!e){
         e = g_find_program_in_path("gvim");
@@ -98,14 +95,8 @@
                 if(!e){
                     // nano is mandatory
                     std::cerr<<"*** Warning: No suitable EDITOR found (tried gvim, vi, nano)\n";
-                } else {
-                    g_free(e);
-                    e = g_strdup_printf("%s nano", term_cmd);
-                }
-            } else {
-                g_free(e);
-                e = g_strdup_printf("%s vi", term_cmd);
-            }
+                } 
+	    } 
         } else {
             g_free(e);
             e = g_strdup("gvim -f");

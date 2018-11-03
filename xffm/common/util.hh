@@ -461,6 +461,7 @@ public:
 	
 	gchar *editor=g_path_get_basename(value);
 	g_strstrip(editor);
+#if 0
 	//if (strchr(editor, ' ')) *strchr(editor, ' ') = 0;
 	// if nano or vi, then use terminal emulator
 	if (editor && 
@@ -478,6 +479,7 @@ public:
 	    g_free(editor);
 	    editor = g_strdup(value);
 	}
+#endif
 	return (editor);
     }
        

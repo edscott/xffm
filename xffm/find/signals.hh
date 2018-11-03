@@ -731,7 +731,12 @@ private:
             return;
         }
 
-        gchar *command = g_strdup(editor);
+        gchar *command;
+	if (Mime<Type>::runInTerminal(editor)){
+	    command = Mime<Type>::mkTerminalLine(editor, "");
+	} else {
+	    command = g_strdup(editor);
+	}
       
 
         for (; list && list->data; list=list->next){

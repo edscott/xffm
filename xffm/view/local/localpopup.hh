@@ -236,21 +236,20 @@ public:
 
 	    auto command = (gchar *)g_object_get_data(G_OBJECT(v), "command");
 	    g_free(command);
-	    command = Mime<Type>::mkCommandLine(defaultApp, path);
-	    gchar *markup = g_strdup_printf("<b>%s</b>", command);
+	    if (Mime<Type>::runInTerminal(defaultApp)){
+		command = Mime<Type>::mkTerminalLine(defaultApp, path);
+	    } else {
+		command = Mime<Type>::mkCommandLine(defaultApp, path);
+	    }
+	    auto displayCommand = Mime<Type>::mkCommandLine(defaultApp, path);
+	    auto markup = g_strdup_printf("<b>%s</b>", displayCommand);
+	    g_free(displayCommand);
 
-	    gchar *icon = g_strdup(defaultApp);
-	    g_strstrip(icon);
-	    if (strchr(icon, ' ')) *strchr(icon, ' ') = 0;
-	    gchar *g = g_path_get_basename(icon);
-	    g_free(icon);
-	    icon = g;
-	    GdkPixbuf *p = pixbuf_c::get_pixbuf(icon, -24); 
-	    gboolean iconOK = pixbuf_icons_c::iconThemeHasIcon(icon);
+	    auto icon = Mime<Type>::baseIcon(defaultApp);
+	    //auto p = pixbuf_c::get_pixbuf(icon, -24); 
+	    auto iconOK = pixbuf_icons_c::iconThemeHasIcon(icon);
 	    gtk_c::menu_item_content(v, iconOK?icon:"system-run-symbolic", markup, -24);
-	    
-
-	    //gtk_c::menu_item_content(v, "system-run-symbolic", markup, -24);
+	    g_free(icon);
 	    g_free(markup);
 	    
 	    g_object_set_data(G_OBJECT(v), "command", command);
@@ -376,14 +375,9 @@ public:
 	Dialog<Type>::setSettingString("MimeTypeApplications", mimetype, response);
 	Dialog<Type>::writeSettings();
 	gchar *command;
-	// FIXME: set checkbutton status with entry value when combo changes or keypress
 	// Is the terminal flag set?
 	if (Mime<Type>::runInTerminal(response)){
-	    // FIXME: collapse into single function call
-	    command = Mime<Type>::mkCommandLine(response, path);
-	    gchar *g = Mime<Type>::mkTerminalLine(command);
-	    g_free(command);
-	    command = g;
+	    command = Mime<Type>::mkTerminalLine(response, path);
 	} else {
 	    command = Mime<Type>::mkCommandLine(response, path);
 	}
@@ -397,6 +391,14 @@ public:
 
 public:
    
+    static void
+    comboChanged (GtkComboBox *combo, gpointer data){
+	auto checkButton = GTK_TOGGLE_BUTTON(data);
+	auto entry = GTK_ENTRY(gtk_bin_get_child(GTK_BIN(combo)));
+	const gchar *text = gtk_entry_get_text(entry);
+	gtk_toggle_button_set_active(checkButton, Mime<Type>::runInTerminal(text));
+    }
+
     static gint
     on_completion (GtkWidget * widget, GdkEventKey * event, gpointer data) {
 	auto store = (GtkListStore *)data;
@@ -404,6 +406,20 @@ public:
 	auto entry = GTK_ENTRY(widget);
 	const gchar *text = gtk_entry_get_text(entry);
 	if (!text || strlen(text)<2) return FALSE;
+
+	// Determine if Terminal check button should be depressed
+	auto checkButton = GTK_TOGGLE_BUTTON(g_object_get_data(G_OBJECT(entry), "checkButton"));
+	gtk_toggle_button_set_active(checkButton, Mime<Type>::runInTerminal(text));
+	// Hard coded exceptions:
+	// nano vi and others...
+	if (Mime<Type>::fixedInTerminal(text)){
+	    gchar *a = Mime<Type>::baseCommand(text);
+	    gtk_toggle_button_set_active(checkButton, TRUE);
+	    Dialog<Type>::setSettingInteger("Terminal", a, 1);
+	    Dialog<Type>::writeSettings();
+	    g_free(a);
+	}
+
 	// Get GSlist of bash completion
 	// get baseView
 	auto baseView =  (BaseView<Type> *)g_object_get_data(G_OBJECT(localItemPopUp), "baseView");
@@ -454,18 +470,21 @@ private:
     toggleTerminal (GtkToggleButton *togglebutton, gpointer data){
 	if (!data) return;
 	const gchar *app = gtk_entry_get_text(GTK_ENTRY(data));
+	// Hard coded exceptions:
+	if (Mime<Type>::fixedInTerminal(app)) {
+	    gtk_toggle_button_set_active(togglebutton, TRUE);
+	    return;
+	}
+	
 	// if not valid command, do nothing 
 	if (!Mime<Type>::isValidCommand(app)) return;
 	// Valid command, continue. Get basename 
-	gchar *a = g_strdup(app);
-	g_strstrip(a);
-	if (strchr(a, ' ')) *(strchr(a, ' ')) = 0;
 	gint value;
 	if (gtk_toggle_button_get_active(togglebutton)) value = 1; else value = 0;
+	gchar *a = Mime<Type>::baseCommand(app);
 	Dialog<Type>::setSettingInteger("Terminal", a, value);
 	Dialog<Type>::writeSettings();
 	g_free(a);
-	// FIXME add Terminal entries for nano vi and others...
     }
 
 
@@ -530,6 +549,7 @@ private:
 	    }
 	    gtk_combo_box_set_active (GTK_COMBO_BOX(combo),0);
 	    entry =  GTK_ENTRY(gtk_bin_get_child(GTK_BIN(combo)));
+
 	} else {
 	    entry = GTK_ENTRY(gtk_entry_new ());
 	    if (defaultValue) {
@@ -553,7 +573,7 @@ private:
 			  "key_release_event", 
 			  //"key_press_event", 
 			  KEY_EVENT_CALLBACK(LocalPopUp<Type>::on_completion), 
-			  (gpointer)completionStore);
+			  (void *)completionStore);
 			      
 
 
@@ -568,17 +588,25 @@ private:
 	} else {
 	    gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(entry), TRUE, TRUE, 0);
 	    g_object_set_data(G_OBJECT(entry),"dialog", dialog);
-	    g_signal_connect (G_OBJECT (entry), "activate", G_CALLBACK (activate_entry), dialog);
+	    g_signal_connect (G_OBJECT (entry), "activate", G_CALLBACK (activate_entry), (void *)dialog);
 	}
 
 	gtk_widget_show_all (GTK_WIDGET(hbox));
-	GtkWidget *checkbox = NULL;
+	GtkWidget *checkButton = NULL;
 	if (checkboxText) { 
-	    checkbox = gtk_check_button_new_with_label(checkboxText);
-	    gtk_box_pack_start (GTK_BOX (vbox), checkbox, TRUE, TRUE, 0);
-	    g_signal_connect (G_OBJECT (checkbox), "toggled", 
+	    checkButton = gtk_check_button_new_with_label(checkboxText);
+	    gtk_box_pack_start (GTK_BOX (vbox), checkButton, TRUE, TRUE, 0);
+	    g_signal_connect (G_OBJECT (checkButton), "clicked", 
 		BUTTON_CALLBACK(toggleTerminal), entry);
+	    g_object_set_data(G_OBJECT(entry), "checkButton", (void *)checkButton); 
+	    if (defaultValue && Mime<Type>::runInTerminal(defaultValue)){
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkButton), TRUE);
+	    }
 
+	    if (comboOptions) g_signal_connect (combo,
+			  "changed", 
+			  COMBO_CALLBACK(LocalPopUp<Type>::comboChanged), 
+			  (void *)checkButton);
 	    // signal callback: in keyfile set Terminal.mimetype 0/1
 	    // save settings
 	    // On execution, check keyfile value

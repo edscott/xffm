@@ -545,6 +545,24 @@ private:
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 public:     
+
+    static gboolean
+    fixedInTerminal(const gchar *app){
+	gchar *a = Mime<Type>::baseCommand(app);
+	gchar *b = strrchr(a, G_DIR_SEPARATOR);
+	if (!b) b=a; else b++;
+	gchar const *exceptions[] = {"vi", "vim", "vimdiff", "vimtutor", "nano", NULL};
+	gchar const **q;
+	gboolean retval = FALSE;
+	for (q=exceptions; q && *q; q++){
+	    if (strcmp(a, *q) == 0){
+		retval=TRUE;
+		break;
+	    }
+	}
+	g_free(a);
+	return retval;
+    }
     static gchar *
     baseCommand(const gchar *commandFmt){
 	if (!commandFmt) return NULL;
@@ -553,37 +571,44 @@ public:
 	if (strchr(a, ' ')) *(strchr(a, ' ')) = 0;
 	return a;
     }
+    static gchar *
+    baseIcon(const gchar *iconFmt){
+	if (!iconFmt) return NULL;
+	gchar *a = g_strdup(iconFmt);
+	g_strstrip(a);
+	if (strchr(a, ' ')) *(strchr(a, ' ')) = 0;
+	gchar *g = g_path_get_basename(a);
+	g_free(a);
+	a=g;
+	return a;
+    }
 
     static gboolean
     runInTerminal(const gchar *commandFmt){
+	if (fixedInTerminal(commandFmt)) return TRUE;
 	gchar *a = baseCommand(commandFmt);
 	gboolean retval = FALSE;
 	if (g_key_file_has_group(keyFile, "Terminal") &&
-	g_key_file_has_key (keyFile, "Terminal", a, NULL)
-	&& Dialog<Type>::getSettingInteger("Terminal", a))
-	    retval = TRUE;
+	    g_key_file_has_key (keyFile, "Terminal", a, NULL) && 
+	    Dialog<Type>::getSettingInteger("Terminal", a))
+		retval = TRUE;
+	g_free(a);
 	return retval;
     }
 
     static gchar *
-    mkTerminalLine (const gchar *command) {
+    mkTerminalLine (const gchar *command, const gchar *path) {
         TRACE("mime_mk_terminal_line()...\n");
         TRACE ("MIME: mime_mk_command_line(%s)\n", command);
         gchar *command_line = NULL;
 
-        if(!command)
-            return NULL;
+        if(!command) return NULL;
+	gchar *a = mkCommandLine(command, path);
 
         const gchar *term = util_c::what_term ();
         const gchar *exec_flag = util_c::term_exec_option(term);
-        /*
-        // Validation is already done by rfm_what_term
-        if(!mime_is_valid_command ((void *)term)) {
-            DBG ("%s == NULL\n", term);
-            return NULL;
-        }*/
-        command_line = g_strdup_printf ("%s %s %s", term, exec_flag, command);
-
+        command_line = g_strdup_printf ("%s %s %s", term, exec_flag, a);
+	g_free(a);
         return command_line;
     }
 
