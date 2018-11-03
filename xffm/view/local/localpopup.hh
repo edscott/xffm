@@ -87,7 +87,7 @@ public:
 		{N_("File Information..."), (void *)noop, (void *) localItemPopUp},
 		{N_("Properties"), (void *)noop, (void *) localItemPopUp},
 		{N_("Delete"), (void *)noop, (void *) localItemPopUp},
-		{N_("Mimetype command"), (void *)noop, (void *) localItemPopUp},
+		//{N_("Mimetype command"), (void *)noop, (void *) localItemPopUp},
 		{N_("autotype_Prun"), (void *)noop, (void *) localItemPopUp},
 		{N_("Mount the volume associated with this folder"), (void *)noop, (void *) localItemPopUp},
 		{N_("Unmount the volume associated with this folder"), (void *)noop, (void *) localItemPopUp},
@@ -133,60 +133,14 @@ public:
 	}
 
 	// open with mimetype application
-	{
-	    auto v = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(localItemPopUp), "mimetypeOpen"));
-	    const gchar **apps = Mime<Type>::locate_apps(mimetype);
-	    //FIXME : use default mimetype application if already selected.
-	    const gchar *app = apps[0];
-	    // FIXME use format to construct command
-
-	}
-        
-	// FIXME: this will only be fallback if above mimetype application fails...
-	gboolean textMimetype = (mimetype && strncmp(mimetype, "text/", strlen("text/")) == 0);
 	gchar *fileInfo = util_c::fileInfo(path);
-        gboolean textFiletype =(fileInfo && 
-                (strstr(fileInfo, "text")||strstr(fileInfo,"empty")));
-	if (textMimetype || textFiletype) {
-	    // environ EDITOR
-	    gchar *editor = util_c::get_text_editor();
+	setUpMimeTypeApp(mimetype, path, fileInfo);
 
-	    auto v = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(localItemPopUp), "mimetypeOpen"));
-	    //gtk_c::menu_item_content(v, "gvim", markup, -24);
-	    gchar *icon = g_strdup(editor);
-	    g_strstrip(icon);
-	    if (strchr(icon, ' ')) *strchr(icon, ' ') = 0;
-	    gchar *g = g_path_get_basename(icon);
-	    g_free(icon);
-	    icon = g;
-	    GdkPixbuf *p = pixbuf_c::get_pixbuf(icon, -24);
-	    gchar *markup = g_strdup_printf("<b>%s %s</b>", editor, displayName);
-	    
-	    gboolean iconOK = pixbuf_icons_c::iconThemeHasIcon(icon);
-	    gtk_c::menu_item_content(v, iconOK?icon:"accessories-text-editor-symbolic", markup, -24);
-	    //gtk_c::menu_item_content(v, p?icon:"accessories-text-editor-symbolic", markup, -24);
-	    auto command = (gchar *)g_object_get_data(G_OBJECT(v), "command");
-	    g_free(command);
-
-	    
-	    command = g_strdup_printf("%s \"%s\"", editor, path);
-	    g_object_set_data(G_OBJECT(v), "command", command);
-                   
-	    gtk_widget_show(GTK_WIDGET(v));
-	    gtk_widget_set_sensitive(GTK_WIDGET(v), TRUE);
-	    
-	    g_free(icon);
-	    g_free(markup);
-
-	} else {
-	    auto v = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "mimetypeOpen"));
-	    gtk_widget_hide(v);
-	}
 
 	changeTitle(iconName, name, path, mimetype, fileInfo);
-        g_free (fileInfo);
 	g_free(name);
 	g_free(iconName);
+	g_free(fileInfo);
          
         return localItemPopUp;
         
@@ -248,7 +202,107 @@ public:
         gtk_widget_show (GTK_WIDGET(localPopUp));
         return localPopUp;
         
-    }      
+    }  
+
+    static gchar *
+    defaultMimeTypeApp(const gchar *mimetype, const gchar *fileInfo){
+	gchar *defaultApp = Dialog<Type>::getSettingString("MimeTypeApplications", mimetype);
+	if (!defaultApp) {
+	    const gchar **apps = Mime<Type>::locate_apps(mimetype);
+	    if (apps && *apps) defaultApp = g_strdup(*apps);
+	}
+
+	if (!defaultApp)  {
+	    gboolean textMimetype = (mimetype && strncmp(mimetype, "text/", strlen("text/")) == 0);
+	    gboolean textFiletype =(fileInfo && 
+		    (strstr(fileInfo, "text")||strstr(fileInfo,"empty")));
+	    if (textMimetype || textFiletype) {
+		gchar *editor = util_c::get_text_editor();
+		defaultApp =g_strdup_printf("%s %%s", editor);
+		g_free(editor);
+	    }
+	}
+	return defaultApp;
+    }
+
+    static void 
+    setUpMimeTypeApp(const gchar *mimetype, const gchar *path, const gchar *fileInfo)
+    {
+	gchar *defaultApp = defaultMimeTypeApp(mimetype, fileInfo);
+
+	auto v = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(localItemPopUp), "mimetypeOpen"));
+	if (defaultApp)  {
+	    auto v = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(localItemPopUp), "mimetypeOpen"));
+
+	    auto command = (gchar *)g_object_get_data(G_OBJECT(v), "command");
+	    g_free(command);
+	    command = Mime<Type>::mkCommandLine(defaultApp, path);
+	    gchar *markup = g_strdup_printf("<b>%s</b>", command);
+
+	    gchar *icon = g_strdup(defaultApp);
+	    g_strstrip(icon);
+	    if (strchr(icon, ' ')) *strchr(icon, ' ') = 0;
+	    gchar *g = g_path_get_basename(icon);
+	    g_free(icon);
+	    icon = g;
+	    GdkPixbuf *p = pixbuf_c::get_pixbuf(icon, -24); 
+	    gboolean iconOK = pixbuf_icons_c::iconThemeHasIcon(icon);
+	    gtk_c::menu_item_content(v, iconOK?icon:"system-run-symbolic", markup, -24);
+	    
+
+	    //gtk_c::menu_item_content(v, "system-run-symbolic", markup, -24);
+	    g_free(markup);
+	    
+	    g_object_set_data(G_OBJECT(v), "command", command);
+	    gtk_widget_show(GTK_WIDGET(v));
+	    gtk_widget_set_sensitive(GTK_WIDGET(v), TRUE);
+	    return;
+	} else {
+	    auto v = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "mimetypeOpen"));
+	    gtk_widget_hide(v);
+	}
+	return;
+    }
+
+    /*
+     	//fallback if above mimetype application fails...
+	gboolean textMimetype = (mimetype && strncmp(mimetype, "text/", strlen("text/")) == 0);
+	gchar *fileInfo = util_c::fileInfo(path);
+        gboolean textFiletype =(fileInfo && 
+                (strstr(fileInfo, "text")||strstr(fileInfo,"empty")));
+	if (textMimetype || textFiletype) {
+	    // environ EDITOR
+	    gchar *editor = util_c::get_text_editor();
+
+	    auto v = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(localItemPopUp), "mimetypeOpen"));
+	    //gtk_c::menu_item_content(v, "gvim", markup, -24);
+	    gchar *icon = g_strdup(editor);
+	    g_strstrip(icon);
+	    if (strchr(icon, ' ')) *strchr(icon, ' ') = 0;
+	    gchar *g = g_path_get_basename(icon);
+	    g_free(icon);
+	    icon = g;
+	    GdkPixbuf *p = pixbuf_c::get_pixbuf(icon, -24);
+	    gchar *markup = g_strdup_printf("<b>%s %s</b>", editor, displayName);
+	    
+	    gboolean iconOK = pixbuf_icons_c::iconThemeHasIcon(icon);
+	    gtk_c::menu_item_content(v, iconOK?icon:"accessories-text-editor-symbolic", markup, -24);
+	    
+	    auto command = (gchar *)g_object_get_data(G_OBJECT(v), "command");
+	    g_free(command);
+
+	    command = g_strdup_printf("%s \"%s\"", editor, path);
+	    g_object_set_data(G_OBJECT(v), "command", command);
+                   
+	    gtk_widget_show(GTK_WIDGET(v));
+	    gtk_widget_set_sensitive(GTK_WIDGET(v), TRUE);
+	    
+	    g_free(icon);
+	    g_free(markup);
+	    g_free(fileInfo);
+	    return;
+	} 
+*/
 public:
     static void
     toggleItem(GtkCheckMenuItem *menuItem, gpointer data)
@@ -298,8 +352,10 @@ public:
 	gchar *title = g_strdup_printf("<b><span size=\"larger\" color=\"blue\">%s</span></b>\n<span color=\"#880000\">(%s)</span>", 
 		path, mimetype);
 	const gchar **apps = Mime<Type>::locate_apps(mimetype);
-	
-	gchar *defaultApp = Dialog<Type>::getSettingString("MimeTypeApplications", mimetype);
+
+	gchar *fileInfo = util_c::fileInfo(path);	
+	gchar *defaultApp = defaultMimeTypeApp(mimetype, fileInfo);
+	g_free(fileInfo);
         auto response = getResponse (_("Open with"),
 		title,_("Open with"),
 		_("Run in Terminal"), apps,

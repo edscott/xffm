@@ -183,7 +183,8 @@ public:
 
 	gtk_list_store_set (store, iter, 
                 SIZE, st.st_size, 
-                DATE, st.st_mtim.tv_sec );
+                DATE, st.st_mtim.tv_sec ,
+		-1);
 
 	return TRUE;
     }
