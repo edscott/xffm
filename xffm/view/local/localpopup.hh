@@ -375,7 +375,18 @@ public:
 	// save value as default for mimetype
 	Dialog<Type>::setSettingString("MimeTypeApplications", mimetype, response);
 	Dialog<Type>::writeSettings();
-	gchar *command = Mime<Type>::mkCommandLine(response, path);
+	gchar *command;
+	// FIXME: set checkbutton status with entry value when combo changes or keypress
+	// Is the terminal flag set?
+	if (Mime<Type>::runInTerminal(response)){
+	    // FIXME: collapse into single function call
+	    command = Mime<Type>::mkCommandLine(response, path);
+	    gchar *g = Mime<Type>::mkTerminalLine(command);
+	    g_free(command);
+	    command = g;
+	} else {
+	    command = Mime<Type>::mkCommandLine(response, path);
+	}
 	// get baseView
 	auto baseView =  (BaseView<Type> *)g_object_get_data(G_OBJECT(data), "baseView");
 	auto page = baseView->page();
@@ -438,6 +449,25 @@ private:
 	gtk_dialog_response (GTK_DIALOG(dialog),GTK_RESPONSE_CANCEL);
 	return TRUE;
     }
+    
+    static void 
+    toggleTerminal (GtkToggleButton *togglebutton, gpointer data){
+	if (!data) return;
+	const gchar *app = gtk_entry_get_text(GTK_ENTRY(data));
+	// if not valid command, do nothing 
+	if (!Mime<Type>::isValidCommand(app)) return;
+	// Valid command, continue. Get basename 
+	gchar *a = g_strdup(app);
+	g_strstrip(a);
+	if (strchr(a, ' ')) *(strchr(a, ' ')) = 0;
+	gint value;
+	if (gtk_toggle_button_get_active(togglebutton)) value = 1; else value = 0;
+	Dialog<Type>::setSettingInteger("Terminal", a, value);
+	Dialog<Type>::writeSettings();
+	g_free(a);
+	// FIXME add Terminal entries for nano vi and others...
+    }
+
 
     static void add_cancel_ok(GtkDialog *dialog){
 	// button no
@@ -543,9 +573,15 @@ private:
 
 	gtk_widget_show_all (GTK_WIDGET(hbox));
 	GtkWidget *checkbox = NULL;
-	if (checkboxText) { //FIXME do something with this
+	if (checkboxText) { 
 	    checkbox = gtk_check_button_new_with_label(checkboxText);
 	    gtk_box_pack_start (GTK_BOX (vbox), checkbox, TRUE, TRUE, 0);
+	    g_signal_connect (G_OBJECT (checkbox), "toggled", 
+		BUTTON_CALLBACK(toggleTerminal), entry);
+
+	    // signal callback: in keyfile set Terminal.mimetype 0/1
+	    // save settings
+	    // On execution, check keyfile value
 	}
 
 	add_cancel_ok(GTK_DIALOG (dialog));

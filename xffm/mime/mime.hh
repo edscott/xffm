@@ -544,7 +544,27 @@ public:
 private:       
 //////////////////////////////////////////////////////////////////////////////////////////////
 
-     
+public:     
+    static gchar *
+    baseCommand(const gchar *commandFmt){
+	if (!commandFmt) return NULL;
+	gchar *a = g_strdup(commandFmt);
+	g_strstrip(a);
+	if (strchr(a, ' ')) *(strchr(a, ' ')) = 0;
+	return a;
+    }
+
+    static gboolean
+    runInTerminal(const gchar *commandFmt){
+	gchar *a = baseCommand(commandFmt);
+	gboolean retval = FALSE;
+	if (g_key_file_has_group(keyFile, "Terminal") &&
+	g_key_file_has_key (keyFile, "Terminal", a, NULL)
+	&& Dialog<Type>::getSettingInteger("Terminal", a))
+	    retval = TRUE;
+	return retval;
+    }
+
     static gchar *
     mkTerminalLine (const gchar *command) {
         TRACE("mime_mk_terminal_line()...\n");
@@ -567,7 +587,6 @@ private:
         return command_line;
     }
 
-public:     
     static gboolean isValidCommand (const char *cmd_fmt) {
         //return GINT_TO_POINTER(TRUE);
         TRACE ("MIME: mime_is_valid_command(%s)\n", cmd_fmt);
