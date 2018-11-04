@@ -85,22 +85,30 @@
     
     gchar *e = NULL;
     if (getenv("EDITOR")) e = g_find_program_in_path(getenv("EDITOR"));
-     
-    if (!e){
+    if (e) {
+	gchar *g = g_path_get_basename(e);
+	g_free(e);
+	if (strrchr(g, ' ')) *(strrchr(g, ' ')) = 0;
+	if (strcmp(g, "nano")==0) g = g_strdup_printf("%s nano", term_cmd); 
+	if (strcmp(g, "vi")==0) g = g_strdup_printf("%s vi", term_cmd); 
+	if (strcmp(g, "vim")==0) g = g_strdup_printf("%s vim", term_cmd); 
+	//if (strcmp(g, "emacs")==0) g = g_strdup_printf("%s emacs", term_cmd); 
+	if (strcmp(g, "gvim")==0) g = g_strdup_printf("gvim -f", term_cmd); 
+	e=g;
+    } else {
         e = g_find_program_in_path("gvim");
-        if (!e){
-            e = g_find_program_in_path("vi");
-            if (!e) {
-                e = g_find_program_in_path("nano");
-                if(!e){
-                    // nano is mandatory
-                    std::cerr<<"*** Warning: No suitable EDITOR found (tried gvim, vi, nano)\n";
-                } 
+	if (e) {
+	    g_free(e);
+	    e = g_strdup("gvim -f");
+	} else {
+	    e = g_find_program_in_path("nano");
+	    if(!e){
+		// nano is mandatory
+		std::cerr<<"*** Warning: No suitable EDITOR found (tried gvim, nano)\n";
 	    } 
-        } else {
-            g_free(e);
-            e = g_strdup("gvim -f");
-        }
+	    g_free(e);
+	    e = g_strdup_printf("%s nano", term_cmd);
+	}
     }
     setenv("EDITOR", e, 1);
 
