@@ -24,6 +24,7 @@ public:
     {
 	// change title
 	auto title = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(localItemPopUp), "title"));
+	DBG("changeTitle, title = %p\n",(void *)title);
 	gchar *statLine=util_c::statInfo(path);
 	gchar *markup = g_strdup_printf("<span size=\"larger\" color=\"red\"><b><i>%s</i></b></span><span color=\"#aa0000\">%s%s</span>\n<span color=\"blue\">%s</span>\n<span color=\"green\">%s</span>", 
 		name, 
@@ -31,19 +32,72 @@ public:
 		mimetype?mimetype:"",
 		fileInfo?fileInfo:"no file info", 
 		statLine?statLine:"no stat info");
+	TRACE("iconName=%s, markup=%s\n", iconName, markup);
 	gtk_c::menu_item_content(title, iconName, markup, -48);
 	g_free(statLine);
 	g_free(markup);
     }
 
-    static GtkMenu *popUp(GtkTreeModel *treeModel, GtkTreePath *tpath){
-        GtkTreeIter iter;
-	if (!gtk_tree_model_get_iter (treeModel, &iter, tpath)) return NULL;
+    static GtkMenu *createLocalItemPopUp(void){
+	localItemPopUp = GTK_MENU(gtk_menu_new());
+	menuItem_t item[]={
+	    {("mimetypeOpen"), (void *)command, (void *) localItemPopUp},
+	    {N_("Open with"), (void *)openWith, (void *) localItemPopUp},
+	    {N_("Run Executable..."), (void *)runWith, (void *) localItemPopUp},
+	    
+	    {N_("Create a new empty folder inside this folder"), (void *)noop, (void *) localItemPopUp},
+	    {N_("Open in New Tab"), (void *)noop, (void *) localItemPopUp},
+	    //common buttons /(also an iconsize +/- button)
+	    {N_("Copy"), (void *)noop, (void *) localItemPopUp},
+	    {N_("Cut"), (void *)noop, (void *) localItemPopUp},
+	    {N_("Paste"), (void *)noop, (void *) localItemPopUp},
+	    {N_("bcrypt"), (void *)noop, (void *) localItemPopUp},
+	    {N_("Rename"), (void *)noop, (void *) localItemPopUp},
+	    {N_("Duplicate"), (void *)noop, (void *) localItemPopUp},
+	    {N_("Link"), (void *)noop, (void *) localItemPopUp},
+	    {N_("Touch"), (void *)noop, (void *) localItemPopUp},
+	    {N_("File Information..."), (void *)noop, (void *) localItemPopUp},
+	    {N_("Properties"), (void *)noop, (void *) localItemPopUp},
+	    {N_("Delete"), (void *)noop, (void *) localItemPopUp},
+	    //{N_("Mimetype command"), (void *)noop, (void *) localItemPopUp},
+	    {N_("autotype_Prun"), (void *)noop, (void *) localItemPopUp},
+	    {N_("Mount the volume associated with this folder"), (void *)noop, (void *) localItemPopUp},
+	    {N_("Unmount the volume associated with this folder"), (void *)noop, (void *) localItemPopUp},
+	     {NULL,NULL,NULL}};
+	// Create title element
+	GtkWidget *title = gtk_c::menu_item_new(NULL, ""); 
+	gtk_widget_set_sensitive(title, FALSE);
+	gtk_widget_show (title);
+	g_object_set_data(G_OBJECT(localItemPopUp), "title", title);
+	gtk_container_add (GTK_CONTAINER (localItemPopUp), title);
+	auto p = item;
+	for (gint i=0;p && p->label; p++,i++){
+	    GtkWidget *v = gtk_c::menu_item_new(NULL, _(p->label));
+	    g_object_set_data(G_OBJECT(localItemPopUp), p->label, v);
+	    gtk_widget_set_sensitive(v, FALSE);
+	    gtk_container_add (GTK_CONTAINER (localItemPopUp), v);
+	    g_signal_connect ((gpointer) v, "activate", MENUITEM_CALLBACK (p->callback), p->callbackData);
+	    gtk_widget_show (v);
+	}
+	gtk_widget_show (GTK_WIDGET(localItemPopUp));
+	return localItemPopUp;
+    }
+
+    static void
+    resetLocalItemPopup(GtkTreeModel *treeModel, const GtkTreePath *tpath) {
+	DBG("resetLocalItemPopup\n");
 	gchar *aname=NULL;
-        gchar *iconName=NULL;
+	gchar *iconName=NULL;
 	gchar *path;
-	const gchar *mimetype;
+	gchar *mimetype;
 	gchar *displayName;
+        GtkTreeIter iter;
+	GtkTreePath *ttpath = gtk_tree_path_copy(tpath);
+	if (!gtk_tree_model_get_iter (treeModel, &iter, ttpath)) {
+	    gtk_tree_path_free(ttpath);
+	    return;
+	}
+	gtk_tree_path_free(ttpath);
 	gtk_tree_model_get (treeModel, &iter, 
 		ACTUAL_NAME, &aname,
 		DISPLAY_NAME, &displayName,
@@ -51,100 +105,82 @@ public:
 		MIMETYPE, &mimetype,
 		PATH, &path,
 		-1);
+	if (!path){
+	    ERROR("resetLocalItemPopup: path is NULL\n");
+	    return;
+	}
+	gchar *fileInfo = util_c::fileInfo(path);
 	if (!mimetype){
-	    mimetype = Mime<Type>::mimeType(path); 
+	    auto m = Mime<Type>::mimeType(path); 
+	    mimetype = g_strdup(m); 
 	    gtk_list_store_set(GTK_LIST_STORE(treeModel), &iter, 
 		MIMETYPE, mimetype, -1);
 	}
 
-	    
-	/*if (!st){
-	    st = (struct stat *)calloc(1, sizeof(struct stat));
-	    stat(path, st);
-	    //  FIXME
-	    // STAT only performed if sort order is date or size
-	    // 
-	}*/
-        gchar *name = util_c::valid_utf_pathstring(aname);
-        g_free(aname);
-
-        if (!localItemPopUp) {
-	    localItemPopUp = GTK_MENU(gtk_menu_new());
-	     menuItem_t item[]={
-		{("mimetypeOpen"), (void *)command, (void *) localItemPopUp},
-		{N_("Open with"), (void *)openWith, (void *) localItemPopUp},
-		{N_("Create a new empty folder inside this folder"), (void *)noop, (void *) localItemPopUp},
-		{N_("Open in New Tab"), (void *)noop, (void *) localItemPopUp},
-		//common buttons /(also an iconsize +/- button)
-		{N_("Copy"), (void *)noop, (void *) localItemPopUp},
-		{N_("Cut"), (void *)noop, (void *) localItemPopUp},
-		{N_("Paste"), (void *)noop, (void *) localItemPopUp},
-		{N_("bcrypt"), (void *)noop, (void *) localItemPopUp},
-		{N_("Rename"), (void *)noop, (void *) localItemPopUp},
-		{N_("Duplicate"), (void *)noop, (void *) localItemPopUp},
-		{N_("Link"), (void *)noop, (void *) localItemPopUp},
-		{N_("Touch"), (void *)noop, (void *) localItemPopUp},
-		{N_("File Information..."), (void *)noop, (void *) localItemPopUp},
-		{N_("Properties"), (void *)noop, (void *) localItemPopUp},
-		{N_("Delete"), (void *)noop, (void *) localItemPopUp},
-		//{N_("Mimetype command"), (void *)noop, (void *) localItemPopUp},
-		{N_("autotype_Prun"), (void *)noop, (void *) localItemPopUp},
-		{N_("Mount the volume associated with this folder"), (void *)noop, (void *) localItemPopUp},
-		{N_("Unmount the volume associated with this folder"), (void *)noop, (void *) localItemPopUp},
-		 {NULL,NULL,NULL}};
-	    
-	    auto p = item;
-	    gint i;
-		
-
-	    GtkWidget *title = gtk_c::menu_item_new(iconName, ""); 
-	    gtk_widget_set_sensitive(title, FALSE);
-	    gtk_widget_show (title);
-	    g_object_set_data(G_OBJECT(localItemPopUp), "title", title);
-	    gtk_container_add (GTK_CONTAINER (localItemPopUp), title);
-
-	    for (i=0;p && p->label; p++,i++){
-		//GtkWidget *v = gtk_menu_item_new_with_label (_(p->label));
-		GtkWidget *v = gtk_c::menu_item_new(NULL, _(p->label));
-		g_object_set_data(G_OBJECT(localItemPopUp), p->label, v);
-		gtk_widget_set_sensitive(v, FALSE);
-		gtk_container_add (GTK_CONTAINER (localItemPopUp), v);
-		g_signal_connect ((gpointer) v, "activate", MENUITEM_CALLBACK (p->callback), p->callbackData);
-		gtk_widget_show (v);
-	    }
-	    gtk_widget_show (GTK_WIDGET(localItemPopUp));
-
+	const gchar *keys[] = {"DISPLAY_NAME",  "PATH", "MIMETYPE", NULL};
+	const gchar **q;
+	for (q=keys; q && *q; q++){
+	    auto cleanup = (gchar *)g_object_get_data(G_OBJECT(localItemPopUp), *q);
+	    g_free(cleanup);
 	}
-
-	auto cleanup = (gchar *) g_object_get_data(G_OBJECT(localItemPopUp), "DISPLAY_NAME");
-	g_free(cleanup);
-	cleanup = (gchar *) g_object_get_data(G_OBJECT(localItemPopUp), "PATH");
-	g_free(cleanup);
 	g_object_set_data(G_OBJECT(localItemPopUp), "DISPLAY_NAME", displayName);
 	g_object_set_data(G_OBJECT(localItemPopUp), "PATH", path);
-	// mimetype is const gchar *
 	g_object_set_data(G_OBJECT(localItemPopUp), "MIMETYPE", (void *)mimetype);
+        gchar *name = util_c::valid_utf_pathstring(aname);
+	// Set title element
+	changeTitle(iconName, name, path, mimetype, fileInfo);
+	g_free(name);
+	g_free(aname);
+	g_free(iconName);
+	g_free(fileInfo);
+	// this now belongs to data of localItemPopup: g_free(path);
+	// this now belongs to localItemPopup: g_free(displayName);
+	// this now belongs to localItemPopup: g_free(mimetype);
+    }
+
+    static void
+    resetMenuItems(GtkTreeModel *treeModel, const GtkTreePath *tpath) {
+	GtkTreeIter iter;
+	GtkTreePath *ttpath = gtk_tree_path_copy(tpath);
+	if (!gtk_tree_model_get_iter (treeModel, &iter, ttpath)) {
+	    gtk_tree_path_free(ttpath);
+	    return;
+	}
+	gtk_tree_path_free(ttpath);
+	gchar *path;
+	gchar *mimetype;
+	gtk_tree_model_get (treeModel, &iter, 
+		MIMETYPE, &mimetype,
+		PATH, &path,
+	    -1);
+
+	// Run with dialog
+	auto v1 = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(localItemPopUp), "Run Executable..."));
+	struct stat st;
+	gtk_widget_set_sensitive(GTK_WIDGET(v1), g_file_test(path, G_FILE_TEST_IS_EXECUTABLE));
+	if (g_file_test(path, G_FILE_TEST_IS_EXECUTABLE)) gtk_widget_show(GTK_WIDGET(v1));
+	else gtk_widget_hide(GTK_WIDGET(v1));
+
 
 	// Open with dialog
-	{
-	    auto v = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(localItemPopUp), "Open with"));
-	    gtk_widget_show(GTK_WIDGET(v));
-	    gtk_widget_set_sensitive(GTK_WIDGET(v), TRUE);
-	}
-
+	auto v2 = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(localItemPopUp), "Open with"));
+	gtk_widget_show(GTK_WIDGET(v2));
+	gtk_widget_set_sensitive(GTK_WIDGET(v2), TRUE);
 	// open with mimetype application
 	gchar *fileInfo = util_c::fileInfo(path);
 	setUpMimeTypeApp(mimetype, path, fileInfo);
 
-
-	changeTitle(iconName, name, path, mimetype, fileInfo);
-	g_free(name);
-	g_free(iconName);
-	g_free(fileInfo);
-         
-        return localItemPopUp;
-        
+	g_free(path);
+	g_free(mimetype);
     }
+
+    static GtkMenu *popUp(GtkTreeModel *treeModel, const GtkTreePath *tpath){
+        if (!localItemPopUp) localItemPopUp = createLocalItemPopUp();   
+	resetLocalItemPopup(treeModel, tpath);
+	resetMenuItems(treeModel, tpath);
+        return localItemPopUp;
+    }
+
     static GtkMenu *popUp(void){
         if (localPopUp) return localPopUp;
         localPopUp = GTK_MENU(gtk_menu_new());
@@ -340,12 +376,40 @@ public:
 	page->command(command);
 	
     }
- 
+
+    static void
+    runWith(GtkMenuItem *menuItem, gpointer data){
+	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "PATH");
+	auto displayPath = util_c::valid_utf_pathstring(path);
+	auto markup = 
+	    g_strdup_printf("<span color=\"blue\" size=\"larger\"><b>%s</b></span>", displayPath);  
+	g_free(displayPath);
+	
+	auto response = getResponse (_("Run Executable..."),
+		markup,_("Custom arguments:"),
+		_("Run in Terminal"), NULL,
+		NULL,
+		path);
+	g_free(markup);
+	if (!response) return;
+	// Is the terminal flag set?
+	gchar *command;
+	if (Mime<Type>::runInTerminal(response)){
+	    command = Mime<Type>::mkTerminalLine(response, path);
+	} else {
+	    command = Mime<Type>::mkCommandLine(response, path);
+	}
+	// get baseView
+	auto baseView =  (BaseView<Type> *)g_object_get_data(G_OBJECT(data), "baseView");
+	auto page = baseView->page();
+	page->command(command);
+	g_free(command);
+	WARN("2)response = %s\n", response);
+    }
+
     static void
     openWith(GtkMenuItem *menuItem, gpointer data)
     {	
-	//auto displayName = (const gchar *)g_object_get_data(G_OBJECT(data), "DISPLAY_NAME");
-	//gchar *title = g_strdup_printf("<b>%s <span color=\"blue\">%s</span></b>",_("File"), displayName);
 	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "PATH");
 	auto mimetype = (const gchar *)g_object_get_data(G_OBJECT(data), "MIMETYPE");
 	gchar *title = g_strdup_printf("<b><span size=\"larger\" color=\"blue\">%s</span></b>\n<span color=\"#880000\">(%s)</span>", 
@@ -358,13 +422,13 @@ public:
         auto response = getResponse (_("Open with"),
 		title,_("Open with"),
 		_("Run in Terminal"), apps,
-		defaultApp);
+		defaultApp, NULL);
 	g_free(defaultApp);
 	if (!response) return;
 
 	// Check whether applicacion is valid.
 	gboolean valid = Mime<Type>::isValidCommand(response);
-	WARN("response = %s, valid=%d\n", response, valid);
+	TRACE("response = %s, valid=%d\n", response, valid);
 	if (!valid){
 	    gchar *message = g_strdup_printf("\n<span color=\"#990000\"><b>%s</b></span>:\n <b>%s</b>\n", _("Invalid entry"), response); 
 	    gtk_c::quick_help (GTK_WINDOW(mainWindow), message);
@@ -486,6 +550,22 @@ private:
 	Dialog<Type>::writeSettings();
 	g_free(a);
     }
+    
+    static void 
+    toggleTerminalRun (GtkToggleButton *togglebutton, gpointer data){
+	if (!data) {
+	    ERROR("toggleTerminalRun: data not set to default app\n");
+	    return;
+	}
+	auto app = (gchar *)data;
+	WARN("runPath = %s\n", app);
+	gint value;
+	if (gtk_toggle_button_get_active(togglebutton)) value = 1; else value = 0;
+	gchar *a = Mime<Type>::baseCommand(app);
+	Dialog<Type>::setSettingInteger("Terminal", a, value);
+	Dialog<Type>::writeSettings();
+	g_free(a);
+    }
 
 
     static void add_cancel_ok(GtkDialog *dialog){
@@ -509,7 +589,8 @@ private:
 	    const gchar *text,  
 	    const gchar *checkboxText,
 	    const gchar **comboOptions,
-	    const gchar *defaultValue) {
+	    const gchar *defaultValue,
+	    const gchar *runPath) {
 	gchar *response_txt = NULL;
 	gint response = GTK_RESPONSE_NONE;
 	if(!text) text = "";
@@ -552,9 +633,9 @@ private:
 
 	} else {
 	    entry = GTK_ENTRY(gtk_entry_new ());
-	    if (defaultValue) {
-		gtk_entry_set_text ((GtkEntry *) entry, defaultValue);
-	    }
+	    //if (defaultValue) {
+		//gtk_entry_set_text ((GtkEntry *) entry, defaultValue);
+	    //}
 
 	}
 
@@ -562,18 +643,20 @@ private:
 	// * for combobox, entry is child of combobox.
 	// model must update on keyrelease
 	//
-	auto completion = gtk_entry_completion_new();
-	gtk_entry_set_completion (entry, completion);
-	gtk_entry_completion_set_popup_completion(completion, TRUE);
-	gtk_entry_completion_set_text_column (completion, 0);
-	gtk_entry_completion_set_minimum_key_length (completion, 2);
-	auto completionStore = gtk_list_store_new(1, G_TYPE_STRING);
-	gtk_entry_completion_set_model (completion, GTK_TREE_MODEL(completionStore));
-	g_signal_connect (entry,
-			  "key_release_event", 
-			  //"key_press_event", 
-			  KEY_EVENT_CALLBACK(LocalPopUp<Type>::on_completion), 
-			  (void *)completionStore);
+	if (comboOptions){
+	    auto completion = gtk_entry_completion_new();
+	    gtk_entry_set_completion (entry, completion);
+	    gtk_entry_completion_set_popup_completion(completion, TRUE);
+	    gtk_entry_completion_set_text_column (completion, 0);
+	    gtk_entry_completion_set_minimum_key_length (completion, 2);
+	    auto completionStore = gtk_list_store_new(1, G_TYPE_STRING);
+	    gtk_entry_completion_set_model (completion, GTK_TREE_MODEL(completionStore));
+	    g_signal_connect (entry,
+			      "key_release_event", 
+			      //"key_press_event", 
+			      KEY_EVENT_CALLBACK(LocalPopUp<Type>::on_completion), 
+			      (void *)completionStore);
+	}
 			      
 
 
@@ -596,11 +679,19 @@ private:
 	if (checkboxText) { 
 	    checkButton = gtk_check_button_new_with_label(checkboxText);
 	    gtk_box_pack_start (GTK_BOX (vbox), checkButton, TRUE, TRUE, 0);
-	    g_signal_connect (G_OBJECT (checkButton), "clicked", 
-		BUTTON_CALLBACK(toggleTerminal), entry);
+	    if (runPath) {
+		g_signal_connect (G_OBJECT (checkButton), "clicked", 
+		    BUTTON_CALLBACK(toggleTerminalRun), g_strdup(runPath));
+	    } else {
+		g_signal_connect (G_OBJECT (checkButton), "clicked", 
+		    BUTTON_CALLBACK(toggleTerminal), entry);
+	    }
 	    g_object_set_data(G_OBJECT(entry), "checkButton", (void *)checkButton); 
 	    if (defaultValue && Mime<Type>::runInTerminal(defaultValue)){
-		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkButton), TRUE);
+		    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkButton), TRUE);
+	    }
+	    if (runPath && Mime<Type>::runInTerminal(runPath)){
+		    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkButton), TRUE);
 	    }
 
 	    if (comboOptions) g_signal_connect (combo,
@@ -628,17 +719,18 @@ private:
 	gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
 	gtk_widget_show_all (dialog);
 	response  = gtk_dialog_run(GTK_DIALOG(dialog));
+	if (checkboxText) g_free(g_object_get_data(G_OBJECT(checkButton), "app"));
 
 
 	if(response == GTK_RESPONSE_YES) {
 	    const gchar *et;
-	    if (comboOptions){
-		et = gtk_combo_box_text_get_active_text (combo);
-	    } else {
-		et = gtk_entry_get_text (entry);
+	    if (runPath) {
+		response_txt = g_strdup_printf("%s %s", runPath, gtk_entry_get_text (entry));
 	    }
-	    if(et && strlen (et)) {
-		response_txt = g_strdup (et);
+	    else if (comboOptions){
+		response_txt = g_strdup (gtk_combo_box_text_get_active_text (combo));
+	    }  else {
+		response_txt = g_strdup(gtk_entry_get_text (entry));
 	    }
 	    //Save option as mimetype default in settings, 
 	    //and use it to set entry text.

@@ -77,7 +77,7 @@ public:
 	
         DBG("BaseView::item activated: %s\n", path);
         auto lastPath = g_strdup(baseView->path());
-	if (!baseView->loadModel(path)){
+	if (!baseView->loadModel(treeModel, tpath, path)){
             WARN("reloading %s\n", lastPath);
             baseView->loadModel(lastPath);
         }

@@ -198,6 +198,19 @@ public:
 
     const gchar *path(){return path_;}
 
+    gboolean loadModel(GtkTreeModel *treeModel, const GtkTreePath *tpath, 
+	    const gchar *path){
+        if (g_file_test(path, G_FILE_TEST_EXISTS)){
+	    WARN("%s is  valid path\n", path);
+	    if (!g_file_test(path, G_FILE_TEST_IS_DIR)){
+		WARN("%s is not dir\n", path);
+		return LocalView<Type>::item_activated(this, treeModel, tpath, path);
+	    }
+	}
+	WARN("%s is not valid path\n", path);
+	return loadModel(path);
+    }
+
     gboolean loadModel(const gchar *path){
         if (!path) path = "xffm:root";
         setPath(path);
@@ -235,7 +248,7 @@ public:
                     }
 		}
 	    } else {
-		result = LocalView<Type>::item_activated(this->iconView(), path);
+		//result = LocalView<Type>::item_activated(path);
 	    }
             return result;
         } else if (!strcmp(path, "xffm:root")==0) {

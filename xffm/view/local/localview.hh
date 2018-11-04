@@ -87,10 +87,59 @@ public:
 	return "system-file-manager";
     }
 
+    static void
+    runWith(BaseView<Type> *baseView, GtkTreeModel *treeModel, const GtkTreePath *tpath, const gchar *path){
+        TRACE("%s is executable file\n", path);
+	if (!localItemPopUp) LocalPopUp<Type>::createLocalItemPopUp();
+	LocalPopUp<Type>::resetLocalItemPopup(treeModel, tpath);
+	LocalPopUp<Type>::resetMenuItems(treeModel, tpath);
+	// Set to non static object BaseView:
+	g_object_set_data(G_OBJECT(localItemPopUp), "baseView",(void *) baseView);
+	// get corresponding menuitem
+	auto menuItem = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(localItemPopUp), "Run Executable..."));
+	// openwith dialog.
+	LocalPopUp<Type>::runWith(menuItem, localItemPopUp);
+	//LocalPopUp<Type>::runWithX(treeModel, tpath, path);
+    }
+
+    static void
+    openWith(BaseView<Type> *baseView, GtkTreeModel *treeModel, const GtkTreePath *tpath, const gchar *path){
+	    TRACE("%s is regular file\n", path);
+	    // setup for dialog
+	    // if popup menu is not created, then create
+	    if (!localItemPopUp) LocalPopUp<Type>::createLocalItemPopUp();
+	    LocalPopUp<Type>::resetLocalItemPopup(treeModel, tpath);
+	    LocalPopUp<Type>::resetMenuItems(treeModel, tpath);
+	    // Set to non static object BaseView:
+	    g_object_set_data(G_OBJECT(localItemPopUp), "baseView",(void *) baseView);
+	    // get corresponding menuitem
+	    auto menuItem = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(localItemPopUp), "Open with"));
+	    // openwith dialog.
+	    LocalPopUp<Type>::openWith(menuItem, localItemPopUp);
+	    // This would open command directly (deprecated mode)
+	    // LocalPopUp<Type>::command(menuItem, localItemPopUp);
+    }
+
     static gboolean
-    item_activated (GtkIconView *iconview, const gchar *path)
+    item_activated (BaseView<Type> *baseView, 
+	    GtkTreeModel *treeModel, const GtkTreePath *tpath,
+	    const gchar *path)
     {
-	WARN("LocalView::item activated: %s\n", path);
+	// regular file test (stat)
+	struct stat st;
+	stat(path, &st);
+	// FIXME: if executable, then dialog to open with null (run) With entry for arguments
+	if ((st.st_mode & S_IFMT) == S_IFREG){
+	    if (g_file_test(path, G_FILE_TEST_IS_EXECUTABLE)) {
+		runWith(baseView, treeModel, tpath, path);
+	    } else {
+		openWith(baseView, treeModel, tpath, path);
+	    }
+	} else{
+	    DBG("%s NOT a regular file\n", path);
+	}
+	
+	TRACE("LocalView::item activated: %s\n", path);
 	return FALSE;
     }
 
@@ -103,7 +152,7 @@ public:
             return FALSE;
         }
         if (!g_file_test(path, G_FILE_TEST_IS_DIR)){
-            WARN("localView.hh::loadModel(): here we should open the file with app or dialog\n");
+            ERROR("localView.hh::loadModel(): here we should open the file with app or dialog\n");
             return FALSE;
         }
         g_object_set_data(G_OBJECT(iconView), "iconViewType", (void *)"LocalView");

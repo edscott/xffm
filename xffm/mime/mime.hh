@@ -474,7 +474,7 @@ public:
 		    if (strstr(e, "%u")) *(strstr(e, "%u")+1) = 's';
 		    if (strstr(e, "%F")) *(strstr(e, "%F")+1) = 's';
 		    if (strstr(e, "%f")) *(strstr(e, "%f")+1) = 's';
-		    DBG("Adding application %s --> %s\n", *p, e);
+		    TRACE("Adding application %s --> %s\n", *p, e);
 		    add2ApplicationHash(*p, e, TRUE);
 		}
 	    }
@@ -791,7 +791,7 @@ public:
 
         WARN("mime-module, reading mime specification file=%s\n", mimefile);
         if(access (mimefile, R_OK) != 0) {
-            DBG ("access(%s, R_OK)!=0 (%s)\n", mimefile, strerror(errno));
+            WARN ("access(%s, R_OK)!=0 (%s)\n", mimefile, strerror(errno));
             return;
         }
         xmlKeepBlanksDefault (0);
