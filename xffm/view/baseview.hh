@@ -191,7 +191,7 @@ public:
         if (strcmp("LocalView", iconViewType) == 0){
             LocalView<Type>::selectables(this->iconView());        
         } else {
-            WARN("All icons are selectable for iconViewType: %s\n", iconViewType);
+            TRACE("All icons are selectable for iconViewType: %s\n", iconViewType);
         }
         return;
     }
@@ -201,13 +201,14 @@ public:
     gboolean loadModel(GtkTreeModel *treeModel, const GtkTreePath *tpath, 
 	    const gchar *path){
         if (g_file_test(path, G_FILE_TEST_EXISTS)){
-	    WARN("%s is  valid path\n", path);
+	    TRACE("%s is  valid path\n", path);
 	    if (!g_file_test(path, G_FILE_TEST_IS_DIR)){
-		WARN("%s is not dir\n", path);
+		DBG("%s is not dir\n", path);
 		return LocalView<Type>::item_activated(this, treeModel, tpath, path);
 	    }
-	}
-	WARN("%s is not valid path\n", path);
+	} else {
+	    DBG("%s is not valid path\n", path);
+        }
 	return loadModel(path);
     }
 
@@ -233,15 +234,20 @@ public:
                     gint items = 0;
                     GtkTreeIter iter;
                     if (gtk_tree_model_get_iter_first (treeModel_, &iter)) {
-                        items++;
                         while (gtk_tree_model_iter_next(treeModel_, &iter)) items++;
                     }
-                    WARN("FIXME: Set filecount %d message in status button...\n", items);
+                    auto fileCount = g_strdup_printf("%0d", items);
+                    // We do not count "../"
+                    auto text = g_strdup_printf(_("Files: %s"), fileCount); 
+                    g_free(fileCount);
+                    page_->updateStatusLabel(text);
+                    g_free(text);
+                    TRACE("FIXME: Set filecount %d message in status button...\n", items);
 
                     
 
                     if (items <= 500) {
-		        localMonitor_ = new(LocalMonitor<Type>)(treeModel_, path);
+		        localMonitor_ = new(LocalMonitor<Type>)(treeModel_, path, this);
 		        localMonitor_->start_monitor(treeModel_, path);
                     } else {
                         localMonitor_ = NULL;
@@ -256,6 +262,7 @@ public:
         }
         setPath("xffm:root");
         result = RootView<Type>::loadModel(iconView_);
+        page_->updateStatusLabel(NULL);
 
         return result;
     }

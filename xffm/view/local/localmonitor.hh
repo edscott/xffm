@@ -11,8 +11,29 @@ class LocalMonitor {
     GHashTable *itemsHash_;
     gboolean shows_hidden_;
     GtkListStore *store_;
+    BaseView<Type> *baseView_;
+        
+    gint
+    countItems(void){
+        GtkTreeIter iter;
+        gint items = 0;
+        if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL(store_), &iter)) {
+            while (gtk_tree_model_iter_next(GTK_TREE_MODEL(store_), &iter)) items++;
+        }
+        return items;
+    }
+    void updateFileCountLabel(void){
+        auto items = countItems();
+        auto fileCount = g_strdup_printf("%0d", items);
+        auto text = g_strdup_printf(_("Files: %s"), fileCount); 
+        baseView()->page()->updateStatusLabel(text);
+        g_free(text);
+        g_free(fileCount);
+    }
+
 public:    
-    LocalMonitor(GtkTreeModel *treeModel, const gchar *path){
+    LocalMonitor(GtkTreeModel *treeModel, const gchar *path, BaseView<Type> *baseView){
+        baseView_ = baseView;
         itemsHash_ = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
         cancellable_ = g_cancellable_new ();
         gfile_ = g_file_new_for_path (path);
@@ -31,6 +52,8 @@ public:
         }
         if (gfile_) g_object_unref(gfile_);
     }
+
+    BaseView<Type> *baseView(void) { return baseView_;}
 
     static gboolean
     add2hash (GtkTreeModel *model,
@@ -225,11 +248,13 @@ private:
             case G_FILE_MONITOR_EVENT_MOVED_OUT:
                 TRACE("Received DELETED  (%d): \"%s\", \"%s\"\n", event, f, s);
                 p->remove_item(first);
+                p->updateFileCountLabel();
                 break;
             case G_FILE_MONITOR_EVENT_CREATED:
             case G_FILE_MONITOR_EVENT_MOVED_IN:
                 TRACE("Received  CREATED (%d): \"%s\", \"%s\"\n", event, f, s);
                 p->add_new_item(first);
+                p->updateFileCountLabel();
                 break;
 
             case G_FILE_MONITOR_EVENT_CHANGED:

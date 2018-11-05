@@ -99,13 +99,14 @@ private:
 	gtk_widget_show_all(GTK_WIDGET(input));
 	return input;
     }
+
     static GtkLabel *createStatusLabel(void){
         auto status_label =
             GTK_LABEL(gtk_label_new (""));
-        gchar *g = g_strdup_printf("<span color=\"blue\"><b>%s-%s</b></span>",
-                "xffm+", VERSION);
-        gtk_label_set_markup(status_label,g);
-        g_free(g);
+ //       gchar *g = g_strdup_printf("<span color=\"blue\"><b>%s-%s</b></span>",
+ //               "xffm+", VERSION);
+ //       gtk_label_set_markup(status_label,g);
+ //       g_free(g);
         return status_label;
     }
 

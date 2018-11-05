@@ -422,7 +422,7 @@ public:
 	auto baseView =  (BaseView<Type> *)g_object_get_data(G_OBJECT(data), "baseView");
 	auto page = baseView->page();
 	page->command(command);
-	WARN("2)command = %s\n", command);
+	TRACE("2)command = %s\n", command);
 	g_free(command);
     }
 
@@ -620,7 +620,7 @@ private:
 	    return;
 	}
 	auto path = (const gchar *)data;
-	WARN("runPath = %s\n", path);
+	TRACE("runPath = %s\n", path);
 	gint value;
 	if (gtk_toggle_button_get_active(togglebutton)) value = 1; else value = 0;
 	gchar *a = Mime<Type>::baseCommand(path);

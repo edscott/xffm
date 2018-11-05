@@ -234,7 +234,7 @@ public:
         if (!type) return NULL;
         gchar *key = get_hash_key (type);
         pthread_mutex_lock(&application_hash_mutex);
-	WARN("loading apps for mimetype: %s\n", type);
+	TRACE("loading apps for mimetype: %s\n", type);
         auto apps = (const gchar **)g_hash_table_lookup (application_hash_type, key);
         pthread_mutex_unlock(&application_hash_mutex);
         g_free (key);
@@ -420,10 +420,10 @@ public:
     processApplicationDir(const gchar *dir){
 	DIR *directory = opendir(dir);
 	if (!directory) {
-	    WARN("mime_c:: opendir %s: %s\n", dir, strerror(errno));
+	    TRACE("mime_c:: opendir %s: %s\n", dir, strerror(errno));
 	    return;
 	}
-	WARN("Now reading directory: %s\n", dir);
+	TRACE("Now reading directory: %s\n", dir);
 	readApplicationDir(dir, directory);
 	closedir (directory);
     }
@@ -435,7 +435,7 @@ public:
 	struct dirent *d; // static pointer
 	errno=0;
 	while ((d = readdir(directory))  != NULL){
-	    WARN("Now reading file: %s\n", d->d_name);
+	    TRACE("Now reading file: %s\n", d->d_name);
 	    parseDesktopFile(dir, d);
 	}
     }
@@ -656,7 +656,7 @@ public:
         if(!path) {
             gboolean direct_path = g_file_test (argv[0], G_FILE_TEST_EXISTS) ||
                 strncmp (argv[0], "./", strlen ("./")) == 0 || strncmp (argv[0], "../", strlen ("../")) == 0;
-            //DBG("argv[0]=%s\n",argv[0]);
+            TRACE("argv[0]=%s\n",argv[0]);
             if(direct_path) {
                 path = g_strdup (argv[0]);
             }

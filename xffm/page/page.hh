@@ -136,6 +136,19 @@ public:
 #endif
     }
 
+    void updateStatusLabel(const gchar *text){
+        gchar *gg = NULL;
+        if (!text) {
+            gg = g_strdup_printf("xffm+-%s", VERSION);
+            text=gg;
+        }
+        gchar *g = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", text);
+        gtk_label_set_markup(this->statusLabel_,g);
+        g_free(g); 
+        g_free(gg);
+    }
+      
+
 #ifdef XFFM_CC
     BaseView<Type> *baseView(void){ return baseView_;}
 #endif
