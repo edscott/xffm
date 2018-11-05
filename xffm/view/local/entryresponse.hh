@@ -1,0 +1,330 @@
+#ifndef XF_RESPOND__HH
+# define XF_RESPOND__HH
+namespace xf
+{
+template <class Type>
+class EntryResponse {
+    
+    using gtk_c = Gtk<Type>;
+    using pixbuf_c = Pixbuf<Type>;
+    using util_c = Util<Type>;
+    using pixbuf_icons_c = Icons<Type>;
+    using page_c = Page<Type>;
+
+
+    GtkDialog *response_;
+    GtkLabel *responseLabel_;
+    GtkLabel *entryLabel_;
+    GtkLabel *checkboxLabel_;
+    GtkComboBoxText *combo_;
+    GtkEntry *entry_;
+    GtkCheckButton *checkbutton_;
+    GtkEntryCompletion *bashCompletion_;
+    GtkListStore *bashCompletionStore_;
+private:
+    void setLabel(GtkLabel *label, const gchar *value){
+        gtk_label_set_markup(label, value);
+        gtk_widget_show(GTK_WIDGET(label));
+    }
+        
+    void connectBashCompletion(const gchar *wd, GtkEntry *entry){
+        g_object_set_data(G_OBJECT(entry), "workDir", (void *)wd);
+	gtk_entry_set_completion (entry, bashCompletion_);
+	g_signal_connect (G_OBJECT(entry),
+			      "key_release_event", 
+			      KEY_EVENT_CALLBACK(EntryResponse<Type>::on_completion), 
+			      (void *)bashCompletionStore_);
+        g_signal_connect (G_OBJECT (entry), "activate", 
+                G_CALLBACK (EntryResponse<Type>::activate_entry), (void *)response_);
+    }
+
+public:
+    ~EntryResponse(void){
+    }
+
+    EntryResponse (GtkWindow *parent, const gchar *windowTitle){
+        bashCompletionStore_ = NULL;
+	response_ = GTK_DIALOG(gtk_dialog_new ());
+	gtk_window_set_type_hint(GTK_WINDOW(response_), GDK_WINDOW_TYPE_HINT_DIALOG);
+	gtk_window_set_modal (GTK_WINDOW (response_), TRUE);
+	gtk_window_set_transient_for (GTK_WINDOW (response_), GTK_WINDOW (parent));
+	gtk_window_set_resizable (GTK_WINDOW (response_), TRUE);
+	gtk_container_set_border_width (GTK_CONTAINER (response_), 6);
+
+	auto vbox = gtk_c::vboxNew (TRUE, 6);
+        gtk_widget_show(GTK_WIDGET(vbox));
+	gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area(GTK_DIALOG (response_))), GTK_WIDGET(vbox), FALSE, FALSE, 0);
+
+	auto hbox = gtk_c::hboxNew (TRUE, 6);
+        gtk_widget_show(GTK_WIDGET(hbox));
+
+	responseLabel_ = GTK_LABEL(gtk_label_new (""));
+	gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET(responseLabel_), TRUE, TRUE, 0);
+
+	entryLabel_ = GTK_LABEL(gtk_label_new (""));
+	gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET(hbox), FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(entryLabel_), TRUE, TRUE, 0);
+	
+        combo_ = GTK_COMBO_BOX_TEXT(gtk_combo_box_text_new_with_entry());
+        gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(combo_), TRUE, TRUE, 0);
+        g_object_set_data(G_OBJECT(combo_),"response", response_);
+        
+        entry_ = GTK_ENTRY(gtk_entry_new ());
+        gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(entry_), TRUE, TRUE, 0);
+        g_object_set_data(G_OBJECT(entry_),"response", response_);
+
+        bashCompletion_ = gtk_entry_completion_new();
+        gtk_entry_completion_set_popup_completion(bashCompletion_, TRUE);
+        gtk_entry_completion_set_text_column (bashCompletion_, 0);
+        gtk_entry_completion_set_minimum_key_length (bashCompletion_, 2);
+        bashCompletionStore_ = gtk_list_store_new(1, G_TYPE_STRING);
+        gtk_entry_completion_set_model (bashCompletion_, GTK_TREE_MODEL(bashCompletionStore_));
+
+	checkbutton_ = GTK_CHECK_BUTTON(gtk_check_button_new_with_label(""));
+	gtk_box_pack_start (GTK_BOX (vbox),GTK_WIDGET(checkbutton_), TRUE, TRUE, 0);
+        // not needed yet:
+        // g_object_set_data(G_OBJECT(checkbutton), "entryResponse", this);
+	add_cancel_ok(GTK_DIALOG (response_));
+
+	gtk_widget_realize (GTK_WIDGET(response_));
+	if(windowTitle){
+	    gtk_window_set_title (GTK_WINDOW (response_), windowTitle);
+	} else {
+	    gdk_window_set_decorations (
+                    gtk_widget_get_window(GTK_WIDGET(response_)), GDK_DECOR_BORDER);
+	}
+
+	g_signal_connect (G_OBJECT (response_), "delete-event", G_CALLBACK (response_delete), response_);
+
+        return;
+    }
+
+    void setResponseLabel(const gchar *value){
+        setLabel(responseLabel_, value);
+    }
+    void setEntryLabel(const gchar *value){
+        setLabel(entryLabel_, value);
+        gtk_widget_show(GTK_WIDGET(entry_));
+    }
+
+    void setComboLabel(const gchar *value){
+        setLabel(entryLabel_, value);
+        gtk_widget_show(GTK_WIDGET(combo_));
+    }
+
+    GtkCheckButton *checkButton(void){ return checkbutton_;}
+
+    void setCheckButton(const gchar *text){
+        auto child = gtk_bin_get_child(GTK_BIN(checkbutton_));
+        auto label = GTK_LABEL(gtk_label_new(""));
+        gtk_label_set_markup(label, text);
+        gtk_container_remove(GTK_CONTAINER(checkbutton_), child);
+        gtk_container_add(GTK_CONTAINER(checkbutton_), GTK_WIDGET(label));
+        gtk_widget_show(GTK_WIDGET(label));
+        gtk_widget_show(GTK_WIDGET(checkbutton_));
+    }
+
+    gboolean checkButtonState(void){
+        return gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_));
+    }
+   
+    void setCheckButton(gboolean state){
+        // Set the toggle state.
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_), state);
+    }
+
+    // Simple entry methods.
+    // /////////////////////
+
+    GtkEntry *entry(void){
+        return entry_;
+    }
+
+    void setEntryDefault(const gchar *value){
+        if (!value) return;
+        gtk_entry_set_text(entry_, value);
+        gtk_widget_show(GTK_WIDGET(entry_));
+    }
+			      
+    void setEntryBashCompletion(const gchar *wd){
+        connectBashCompletion(wd, entry_);
+    }
+
+    void setCheckButtonEntryCallback(void *clickAction){
+        // Set the toggle action.
+        g_signal_connect (G_OBJECT (checkbutton_), "clicked", 
+		    BUTTON_CALLBACK(clickAction), 
+                    (void *)entry_);
+        gtk_widget_show(GTK_WIDGET(checkbutton_));
+    }
+
+    void setCheckButtonEntryCallback(void *clickAction, void * data){
+        // Set the toggle action.
+        g_signal_connect (G_OBJECT (checkbutton_), "clicked", 
+		    BUTTON_CALLBACK(clickAction), 
+                    data);
+        gtk_widget_show(GTK_WIDGET(checkbutton_));
+    }
+    void setEntryCallback(void *changeAction){
+        // Set the toggle action.
+        g_signal_connect (G_OBJECT (entry_), "key-release-event", 
+		    BUTTON_EVENT_CALLBACK(changeAction), this);
+        gtk_widget_show(GTK_WIDGET(entry_));
+    }
+
+    // Combobox methods.
+    // /////////////////
+    GtkEntry *comboEntry(void){
+        return GTK_ENTRY(gtk_bin_get_child(GTK_BIN(combo_)));
+    }
+
+    void setComboOptions(const gchar **comboOptions){        
+        if (!comboOptions || *comboOptions==NULL){
+            ERROR("setComboOptions() with comboOptions = NULL is not valid.\n");
+            return;
+        }
+
+        for (const gchar **p=comboOptions; p && *p; p++){
+            gtk_combo_box_text_append_text (combo_,*p);
+            DBG("setting combo value: %s\n" , *p);
+        }
+        gtk_combo_box_set_active (GTK_COMBO_BOX(combo_),0);
+        gtk_widget_show(GTK_WIDGET(combo_));
+    }
+
+    void setComboDefault(const gchar *value){
+        if (!value) return;
+        gtk_combo_box_text_prepend_text (combo_, value);
+        gtk_combo_box_set_active (GTK_COMBO_BOX(combo_),0);
+        gtk_widget_show(GTK_WIDGET(combo_));
+    }
+    void setComboBashCompletion(const gchar *wd){
+        auto entry = GTK_ENTRY(gtk_bin_get_child(GTK_BIN(combo_)));
+        connectBashCompletion(wd, entry);
+    }
+
+
+    void setCheckButtonComboCallback(void *clickAction){
+        // Set the toggle action.
+        g_signal_connect (G_OBJECT (checkbutton_), "clicked", 
+		    BUTTON_CALLBACK(clickAction), 
+                    (void *)gtk_bin_get_child(GTK_BIN(combo_)));
+        gtk_widget_show(GTK_WIDGET(checkbutton_));
+    }
+
+    void setComboCallback(void *changeAction){
+        // Set the toggle action.
+        g_signal_connect (G_OBJECT (combo_), "changed", 
+		    BUTTON_CALLBACK(changeAction), this);
+        gtk_widget_show(GTK_WIDGET(checkbutton_));
+    }
+
+
+
+    gchar * 
+    runResponse(void){
+        /* show response_ and return */
+	gtk_window_set_position(GTK_WINDOW(response_), GTK_WIN_POS_CENTER);
+	gtk_widget_show (GTK_WIDGET(response_));
+	gint response  = gtk_dialog_run(GTK_DIALOG(response_));
+	//if (checkboxText) g_free(g_object_get_data(G_OBJECT(checkButton), "app"));
+        gchar *responseTxt = NULL;
+	if(response == GTK_RESPONSE_YES) {
+            if (gtk_widget_is_visible(GTK_WIDGET(entry_))) 
+                responseTxt = g_strdup(gtk_entry_get_text (entry_));
+            else if (gtk_widget_is_visible(GTK_WIDGET(combo_)))
+                responseTxt = g_strdup (gtk_combo_box_text_get_active_text (combo_));
+	}
+	gtk_widget_hide (GTK_WIDGET(response_));
+	gtk_widget_destroy (GTK_WIDGET(response_));
+	if(responseTxt != NULL){
+	    g_strstrip (responseTxt);
+	}
+        if (bashCompletionStore_) gtk_list_store_clear(bashCompletionStore_);
+        
+	return responseTxt;
+    }
+
+private:
+
+    static gint
+    on_completion (GtkWidget * widget, GdkEventKey * event, gpointer data) {
+	auto store = (GtkListStore *)data;
+	// get entry text
+	auto entry = GTK_ENTRY(widget);
+	const gchar *text = gtk_entry_get_text(entry);
+	if (!text || strlen(text)<2) return FALSE;
+
+	// Determine if Terminal check button should be depressed
+	auto checkButton = GTK_TOGGLE_BUTTON(g_object_get_data(G_OBJECT(entry), "checkButton"));
+	// FIXME gtk_toggle_button_set_active(checkButton, Mime<Type>::runInTerminal(text));
+	// Hard coded exceptions:
+	// nano vi and others...
+	if (Mime<Type>::fixedInTerminal(text)){
+	    gchar *a = Mime<Type>::baseCommand(text);
+	    gtk_toggle_button_set_active(checkButton, TRUE);
+	    Dialog<Type>::setSettingInteger("Terminal", a, 1);
+	    Dialog<Type>::writeSettings();
+	    g_free(a);
+	}
+
+	// Get GSlist of bash completion
+
+	auto wd = (const gchar *)g_object_get_data(G_OBJECT(entry), "workDir");
+        if (!wd) wd = g_get_home_dir();
+	
+	auto slist = BaseCompletion<Type>::baseExecCompletionList(wd, text);
+	// remove all old model entries
+	gtk_list_store_clear(store);
+	// add new entries from GSList
+	GSList *p;
+	GtkTreeIter iter;
+	for (p=slist; p && p->data; p=p->next){
+	    TRACE("completion list: %s\n", (const gchar *)p->data);
+	    gtk_list_store_append (store, &iter);
+	    gtk_list_store_set(store, &iter, 0, (const gchar *)p->data, -1);
+	    g_free(p->data);
+	}
+	g_slist_free(slist);
+
+        auto completion = gtk_entry_get_completion(GTK_ENTRY(widget));
+        gtk_entry_completion_complete (completion);
+        return FALSE;
+    }
+
+    static void
+    activate_entry (GtkEntry * entry, gpointer data) {
+	auto dialog = GTK_WIDGET(g_object_get_data(G_OBJECT(entry), "dialog"));
+	gtk_dialog_response (GTK_DIALOG(dialog),GTK_RESPONSE_YES);
+    }
+
+    static void
+    cancel_entry (GtkEntry * entry, gpointer data) {
+	GtkWidget *dialog = g_object_get_data(G_OBJECT(entry), "dialog");
+	gtk_dialog_response (GTK_DIALOG(dialog),GTK_RESPONSE_CANCEL);
+    }
+
+    static gboolean 
+    response_delete(GtkWidget *dialog, GdkEvent *event, gpointer data){
+	gtk_dialog_response (GTK_DIALOG(dialog),GTK_RESPONSE_CANCEL);
+	return TRUE;
+    }
+
+    static void add_cancel_ok(GtkDialog *dialog){
+	// button no
+	auto button =
+	    gtk_c::dialog_button ("window-close-symbolic", _("Cancel"));
+	gtk_widget_show (GTK_WIDGET(button));
+	gtk_dialog_add_action_widget (GTK_DIALOG (dialog), GTK_WIDGET(button), GTK_RESPONSE_NO);
+	g_object_set_data (G_OBJECT (dialog), "action_false_button", button);
+	// button yes
+	button = gtk_c::dialog_button ("system-run-symbolic", _("Ok"));
+	gtk_widget_show (GTK_WIDGET(button));
+	g_object_set_data (G_OBJECT (dialog), "action_true_button", button);
+	gtk_dialog_add_action_widget (GTK_DIALOG (dialog), GTK_WIDGET(button), GTK_RESPONSE_YES);
+    }
+  
+};
+}
+#endif
+

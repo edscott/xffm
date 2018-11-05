@@ -1,5 +1,7 @@
 #ifndef XF_LOCALITEMPOPUP__HH
 # define XF_LOCALITEMPOPUP__HH
+#include "entryresponse.hh"
+
 namespace xf
 {
 
@@ -385,26 +387,43 @@ public:
 	    g_strdup_printf("<span color=\"blue\" size=\"larger\"><b>%s</b></span>", displayPath);  
 	g_free(displayPath);
 	
-	auto response = getResponse (_("Run Executable..."),
+        auto entryResponse = new(EntryResponse<Type>)(GTK_WINDOW(mainWindow), _("Run Executable..."));
+        entryResponse->setResponseLabel(markup);
+        g_free(markup);
+
+        entryResponse->setCheckButton(_("Run in Terminal"));
+        entryResponse->setCheckButton(Mime<Type>::runInTerminal(path));
+
+        entryResponse->setEntryLabel(_("Custom arguments:"));
+        // get last used arguments...
+        entryResponse->setEntryDefault("");
+        
+        entryResponse->setCheckButtonEntryCallback((void *)toggleTerminalRun, (void *)path); 
+        auto response = entryResponse->runResponse();
+        delete entryResponse;
+
+	/*auto response = getResponse (_("Run Executable..."),
 		markup,_("Custom arguments:"),
 		_("Run in Terminal"), NULL,
 		NULL,
 		path);
-	g_free(markup);
+        
+	g_free(markup);*/
 	if (!response) return;
 	// Is the terminal flag set?
-	gchar *command;
-	if (Mime<Type>::runInTerminal(response)){
-	    command = Mime<Type>::mkTerminalLine(response, path);
+	gchar *command ;
+	if (Mime<Type>::runInTerminal(path)){
+	    command = Mime<Type>::mkTerminalLine(path, response);
 	} else {
-	    command = Mime<Type>::mkCommandLine(response, path);
+	    command = Mime<Type>::mkCommandLine(path, response);
 	}
+        g_free(response);
 	// get baseView
 	auto baseView =  (BaseView<Type> *)g_object_get_data(G_OBJECT(data), "baseView");
 	auto page = baseView->page();
 	page->command(command);
+	WARN("2)command = %s\n", command);
 	g_free(command);
-	WARN("2)response = %s\n", response);
     }
 
     static void
@@ -412,23 +431,59 @@ public:
     {	
 	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "PATH");
 	auto mimetype = (const gchar *)g_object_get_data(G_OBJECT(data), "MIMETYPE");
-	gchar *title = g_strdup_printf("<b><span size=\"larger\" color=\"blue\">%s</span></b>\n<span color=\"#880000\">(%s)</span>", 
+        if (!mimetype){
+            mimetype = Mime<Type>::mimeType(path);
+        }
+	gchar *responseLabel = g_strdup_printf("<b><span size=\"larger\" color=\"blue\">%s</span></b>\n<span color=\"#880000\">(%s)</span>", 
 		path, mimetype);
 	const gchar **apps = Mime<Type>::locate_apps(mimetype);
 
 	gchar *fileInfo = util_c::fileInfo(path);	
 	gchar *defaultApp = defaultMimeTypeApp(mimetype, fileInfo);
 	g_free(fileInfo);
+        
+	auto baseView =  (BaseView<Type> *)g_object_get_data(G_OBJECT(localItemPopUp), "baseView");
+	// get page
+	auto page = baseView->page();
+	const gchar *wd = page->workDir();
+	if (!wd) wd = g_get_home_dir();
+
+        auto entryResponse = new(EntryResponse<Type>)(GTK_WINDOW(mainWindow), _("Open with"));
+        entryResponse->setResponseLabel(responseLabel);
+        g_free(responseLabel);
+
+        entryResponse->setCheckButton(_("Run in Terminal"));
+        entryResponse->setCheckButton(defaultApp && Mime<Type>::runInTerminal(defaultApp));
+
+        if (!apps || apps[0] == NULL || apps[1] == NULL) {
+            entryResponse->setEntryLabel(_("Open with"));
+            entryResponse->setEntryDefault(defaultApp);
+            entryResponse->setEntryBashCompletion(wd);
+            
+            entryResponse->setCheckButtonEntryCallback((void *)toggleTerminal); 
+            entryResponse->setEntryCallback((void *)entryKeyRelease); 
+        } else {
+            entryResponse->setComboLabel(_("Open with"));
+            entryResponse->setComboOptions(apps);
+            entryResponse->setComboDefault(defaultApp);
+            entryResponse->setComboBashCompletion(wd);
+
+            entryResponse->setCheckButtonComboCallback((void *)toggleTerminal); 
+            entryResponse->setComboCallback((void *)comboChanged); 
+        }
+        auto response = entryResponse->runResponse();
+        delete entryResponse;
+/*
         auto response = getResponse (_("Open with"),
-		title,_("Open with"),
+		responseLabel,_("Open with"),
 		_("Run in Terminal"), apps,
 		defaultApp, NULL);
+                */
 	g_free(defaultApp);
 	if (!response) return;
 
 	// Check whether applicacion is valid.
 	gboolean valid = Mime<Type>::isValidCommand(response);
-	TRACE("response = %s, valid=%d\n", response, valid);
 	if (!valid){
 	    gchar *message = g_strdup_printf("\n<span color=\"#990000\"><b>%s</b></span>:\n <b>%s</b>\n", _("Invalid entry"), response); 
 	    gtk_c::quick_help (GTK_WINDOW(mainWindow), message);
@@ -445,9 +500,6 @@ public:
 	} else {
 	    command = Mime<Type>::mkCommandLine(response, path);
 	}
-	// get baseView
-	auto baseView =  (BaseView<Type> *)g_object_get_data(G_OBJECT(data), "baseView");
-	auto page = baseView->page();
 	page->command(command);
 	g_free(command);
 
@@ -457,13 +509,23 @@ public:
    
     static void
     comboChanged (GtkComboBox *combo, gpointer data){
-	auto checkButton = GTK_TOGGLE_BUTTON(data);
-	auto entry = GTK_ENTRY(gtk_bin_get_child(GTK_BIN(combo)));
+        auto entryResponse = (EntryResponse<Type> *)data;
+	auto checkButton = GTK_TOGGLE_BUTTON(entryResponse->checkButton());
+        auto entry = entryResponse->comboEntry();
 	const gchar *text = gtk_entry_get_text(entry);
 	gtk_toggle_button_set_active(checkButton, Mime<Type>::runInTerminal(text));
     }
 
-    static gint
+    static void
+    entryKeyRelease (GtkWidget *widget, GdkEvent  *event, gpointer data){
+        auto entryResponse = (EntryResponse<Type> *)data;
+	auto checkButton = GTK_TOGGLE_BUTTON(entryResponse->checkButton());
+        auto entry = GTK_ENTRY(widget);
+	const gchar *text = gtk_entry_get_text(entry);
+	gtk_toggle_button_set_active(checkButton, Mime<Type>::runInTerminal(text));
+    }
+
+   static gint
     on_completion (GtkWidget * widget, GdkEventKey * event, gpointer data) {
 	auto store = (GtkListStore *)data;
 	// get entry text
@@ -554,14 +616,14 @@ private:
     static void 
     toggleTerminalRun (GtkToggleButton *togglebutton, gpointer data){
 	if (!data) {
-	    ERROR("toggleTerminalRun: data not set to default app\n");
+	    ERROR("toggleTerminalRun: data not set to path\n");
 	    return;
 	}
-	auto app = (gchar *)data;
-	WARN("runPath = %s\n", app);
+	auto path = (const gchar *)data;
+	WARN("runPath = %s\n", path);
 	gint value;
 	if (gtk_toggle_button_get_active(togglebutton)) value = 1; else value = 0;
-	gchar *a = Mime<Type>::baseCommand(app);
+	gchar *a = Mime<Type>::baseCommand(path);
 	Dialog<Type>::setSettingInteger("Terminal", a, value);
 	Dialog<Type>::writeSettings();
 	g_free(a);
