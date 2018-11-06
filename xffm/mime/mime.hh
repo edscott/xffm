@@ -279,10 +279,14 @@ public:
 	TRACE("mimeType: %s --> %s\n", file, retval);
         if (retval) add2sfx_hash(file, retval);
 	g_free(command);
-#else
-        return "unknown mimetype";
-#endif
 	return retval;
+#else
+        struct stat st;
+        if (stat(file, &st) < 0) return "unknown mimetype";
+        const gchar *r = mimeType(file, &st);
+        return g_strdup(r);
+        
+#endif
    } 
 
         
@@ -305,7 +309,7 @@ public:
             return retval;
         }
 
-        return NULL;
+        return "inode/regular";
         // mimemagic return value should be const gchar *
         //return mimeMagic(file);
     }

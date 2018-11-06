@@ -1,6 +1,6 @@
 #ifndef XF_LOCALITEMPOPUP__HH
 # define XF_LOCALITEMPOPUP__HH
-#include "entryresponse.hh"
+#include "common/comboresponse.hh"
 
 namespace xf
 {
@@ -47,7 +47,6 @@ public:
 	    {N_("Open with"), (void *)openWith, (void *) localItemPopUp},
 	    {N_("Run Executable..."), (void *)runWith, (void *) localItemPopUp},
 	    
-	    {N_("Create a new empty folder inside this folder"), (void *)noop, (void *) localItemPopUp},
 	    {N_("Open in New Tab"), (void *)noop, (void *) localItemPopUp},
 	    //common buttons /(also an iconsize +/- button)
 	    {N_("Copy"), (void *)noop, (void *) localItemPopUp},
@@ -155,19 +154,36 @@ public:
 		MIMETYPE, &mimetype,
 		PATH, &path,
 	    -1);
+	struct stat st;
+        if (stat(path, &st)<0){
+            ERROR("resetMenuItems(): cannot stat %s\n", path);
+            g_free(path);
+            // FIXME: hide all menuitems...
+            return;
+        }
 
+
+        gboolean state = FALSE;
 	// Run with dialog
 	auto v1 = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(localItemPopUp), "Run Executable..."));
-	struct stat st;
-	gtk_widget_set_sensitive(GTK_WIDGET(v1), g_file_test(path, G_FILE_TEST_IS_EXECUTABLE));
-	if (g_file_test(path, G_FILE_TEST_IS_EXECUTABLE)) gtk_widget_show(GTK_WIDGET(v1));
+
+        state = (g_file_test(path, G_FILE_TEST_IS_EXECUTABLE) &&
+                g_file_test(path, G_FILE_TEST_IS_REGULAR));
+	gtk_widget_set_sensitive(GTK_WIDGET(v1), state);
+	if (state) gtk_widget_show(GTK_WIDGET(v1));
 	else gtk_widget_hide(GTK_WIDGET(v1));
 
 
 	// Open with dialog
 	auto v2 = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(localItemPopUp), "Open with"));
-	gtk_widget_show(GTK_WIDGET(v2));
-	gtk_widget_set_sensitive(GTK_WIDGET(v2), TRUE);
+        state = g_file_test(path, G_FILE_TEST_IS_REGULAR);
+        if (state) {
+            gtk_widget_show(GTK_WIDGET(v2));
+        } else {
+            gtk_widget_hide(GTK_WIDGET(v2));
+        }
+	gtk_widget_set_sensitive(GTK_WIDGET(v2), state);
+
 	// open with mimetype application
 	gchar *fileInfo = util_c::fileInfo(path);
 	setUpMimeTypeApp(mimetype, path, fileInfo);
@@ -191,6 +207,7 @@ public:
                 (void *) "ShowHidden", "ShowHidden"},
             {N_("Show Backup Files"), (void *)toggleItem, 
                 (void *) "ShowBackups", "ShowBackups"},
+	    {N_("New"), (void *)newItem, (void *) localPopUp},
             
             {N_("Add bookmark"), (void *)noop, (void *) localPopUp, FALSE},
             {N_("Remove bookmark"), (void *)noop, (void *) localPopUp, FALSE},
@@ -380,6 +397,50 @@ public:
     }
 
     static void
+    newItem(GtkMenuItem *menuItem, gpointer data){
+	auto baseView =  (BaseView<Type> *)g_object_get_data(G_OBJECT(data), "baseView");
+	auto page = baseView->page();
+	auto path = page->workDir();
+	auto displayPath = util_c::valid_utf_pathstring(path);
+	auto markup = 
+	    g_strdup_printf("<span color=\"blue\" size=\"larger\"><b>%s</b></span>", displayPath);  
+	g_free(displayPath);
+        auto entryResponse = new(EntryResponse<Type>)(GTK_WINDOW(mainWindow), _("Create new..."));
+        entryResponse->setResponseLabel(markup);
+        g_free(markup);
+
+        entryResponse->setCheckButton(_("Directory"));
+        entryResponse->setEntryLabel(_("New Name:"));
+        // get last used arguments...
+        entryResponse->setEntryDefault("");
+        auto response = entryResponse->runResponse();
+        gboolean isDirectory = 
+            gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(entryResponse->checkButton()));
+        delete entryResponse;
+
+	if (!response || !strlen(response)){
+            gtk_c::quick_help(NULL, _("No name specified!")); 
+            return;
+        }
+        // XXX: Will character code set of response match that of path?
+        auto newPath = g_build_filename(path, response, NULL);
+        if (!g_file_test(newPath, G_FILE_TEST_EXISTS)){
+            if (isDirectory){
+                mkdir(newPath, 0700);
+            } else {
+                FILE *f = fopen(newPath, "w");
+                if (f) fclose(f);
+            }
+        } else {
+            auto message = g_strdup_printf(_("Another file with the same name already exists in “%s”."), path);
+            gtk_c::quick_help(NULL, message); 
+            g_free(message);
+            return;
+        }
+        g_free(response);
+    }
+
+    static void
     runWith(GtkMenuItem *menuItem, gpointer data){
 	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "PATH");
 	auto displayPath = util_c::valid_utf_pathstring(path);
@@ -447,32 +508,43 @@ public:
 	auto page = baseView->page();
 	const gchar *wd = page->workDir();
 	if (!wd) wd = g_get_home_dir();
-
-        auto entryResponse = new(EntryResponse<Type>)(GTK_WINDOW(mainWindow), _("Open with"));
-        entryResponse->setResponseLabel(responseLabel);
-        g_free(responseLabel);
-
-        entryResponse->setCheckButton(_("Run in Terminal"));
-        entryResponse->setCheckButton(defaultApp && Mime<Type>::runInTerminal(defaultApp));
-
+        gchar *response = NULL;
         if (!apps || apps[0] == NULL || apps[1] == NULL) {
+            auto entryResponse = new(EntryResponse<Type>)(GTK_WINDOW(mainWindow), _("Open with"));
+            entryResponse->setResponseLabel(responseLabel);
+            g_free(responseLabel);
+
+            entryResponse->setCheckButton(_("Run in Terminal"));
+            entryResponse->setCheckButton(defaultApp && Mime<Type>::runInTerminal(defaultApp));
+
             entryResponse->setEntryLabel(_("Open with"));
             entryResponse->setEntryDefault(defaultApp);
             entryResponse->setEntryBashCompletion(wd);
             
             entryResponse->setCheckButtonEntryCallback((void *)toggleTerminal); 
             entryResponse->setEntryCallback((void *)entryKeyRelease); 
+            response = entryResponse->runResponse();
+            delete entryResponse;
         } else {
-            entryResponse->setComboLabel(_("Open with"));
-            entryResponse->setComboOptions(apps);
-            entryResponse->setComboDefault(defaultApp);
-            entryResponse->setComboBashCompletion(wd);
+            auto comboResponse = new(ComboResponse<Type>)(GTK_WINDOW(mainWindow), _("Open with"));
+            comboResponse->setResponseLabel(responseLabel);
+            g_free(responseLabel);
 
-            entryResponse->setCheckButtonComboCallback((void *)toggleTerminal); 
-            entryResponse->setComboCallback((void *)comboChanged); 
+            comboResponse->setCheckButton(_("Run in Terminal"));
+            comboResponse->setCheckButton(defaultApp && Mime<Type>::runInTerminal(defaultApp));
+
+            comboResponse->setComboLabel(_("Open with"));
+            comboResponse->setComboOptions(apps);
+            comboResponse->setComboDefault(defaultApp);
+            comboResponse->setComboBashCompletion(wd);
+
+            comboResponse->setCheckButtonComboCallback((void *)toggleTerminal); 
+            comboResponse->setComboCallback((void *)comboChanged); 
+        
+            response = comboResponse->runResponse();
+            delete comboResponse;
         }
-        auto response = entryResponse->runResponse();
-        delete entryResponse;
+
 /*
         auto response = getResponse (_("Open with"),
 		responseLabel,_("Open with"),
@@ -509,9 +581,9 @@ public:
    
     static void
     comboChanged (GtkComboBox *combo, gpointer data){
-        auto entryResponse = (EntryResponse<Type> *)data;
-	auto checkButton = GTK_TOGGLE_BUTTON(entryResponse->checkButton());
-        auto entry = entryResponse->comboEntry();
+        auto comboResponse = (ComboResponse<Type> *)data;
+	auto checkButton = GTK_TOGGLE_BUTTON(comboResponse->checkButton());
+        auto entry = comboResponse->comboEntry();
 	const gchar *text = gtk_entry_get_text(entry);
 	gtk_toggle_button_set_active(checkButton, Mime<Type>::runInTerminal(text));
     }
