@@ -208,15 +208,13 @@ public:
             {N_("Show Backup Files"), (void *)toggleItem, 
                 (void *) "ShowBackups", "ShowBackups"},
 	    {N_("New"), (void *)newItem, (void *) localPopUp},
+            {N_("Open in New Tab"), (void *)noop, (void *) localPopUp},
+            {N_("Open in New Window"), (void *)noop, (void *) localPopUp, FALSE},
             
+	    {N_("Paste"), (void *)noop, (void *) localPopUp},
             {N_("Add bookmark"), (void *)noop, (void *) localPopUp, FALSE},
             {N_("Remove bookmark"), (void *)noop, (void *) localPopUp, FALSE},
-            {N_("Create a new empty folder inside this folder"), (void *)noop, (void *) localPopUp, FALSE},
-            {N_("Open in New Window"), (void *)noop, (void *) localPopUp, FALSE},
-            {N_("Reload"), (void *)noop, (void *) localPopUp, FALSE},
-            {N_("Close"), (void *)noop, (void *) localPopUp, FALSE},
             // main menu items
-            //{N_("Open in New Tab"), (void *)noop, (void *) menu},
             //{N_("Home"), (void *)noop, (void *) menu},
             //{N_("Open terminal"), (void *)noop, (void *) menu},
             //{N_("About"), (void *)noop, (void *) menu},

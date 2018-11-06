@@ -82,6 +82,26 @@ public:
     gchar *getResponse(void){
         return g_strdup (gtk_combo_box_text_get_active_text (combo_));
     }
+    
+    gchar * 
+    runResponse(void){
+        /* show response_ and return */
+	gtk_window_set_position(GTK_WINDOW(this->response_), GTK_WIN_POS_CENTER);
+	gtk_widget_show (GTK_WIDGET(this->response_));
+	gint response  = gtk_dialog_run(GTK_DIALOG(this->response_));
+	//if (checkboxText) g_free(g_object_get_data(G_OBJECT(checkButton), "app"));
+        gchar *responseTxt = NULL;
+	if(response == GTK_RESPONSE_YES) {
+            responseTxt = getResponse();
+	}
+	gtk_widget_hide (GTK_WIDGET(this->response_));
+	if(responseTxt != NULL){
+	    g_strstrip (responseTxt);
+	}
+        if (this->bashCompletionStore_) gtk_list_store_clear(this->bashCompletionStore_);
+        
+	return responseTxt;
+    }
  
 };
 }
