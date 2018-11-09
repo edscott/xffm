@@ -460,6 +460,9 @@ public:
         if (!Fstab<Type>::mount(baseView, path)){
             DBG("localpopup.hh:: mount command failed\n");
         } else {
+            DBG("FIXME: monitor mount pid, and when it exits, reload localview (if not changed)\n");
+            // problem with the above: what if tab has been closed?
+            // 
             // Here we have a race, since the mount command is not yet complete
             // (running in another thread...)
             // that thread should touch mount directory...
