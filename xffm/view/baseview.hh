@@ -212,6 +212,10 @@ public:
 	return loadModel(path);
     }
 
+    // XXX: broken:
+   /*gboolean loadModel(void){
+        return loadModel(path());
+   }*/
     gboolean loadModel(const gchar *path){
         if (!path) path = "xffm:root";
         setPath(path);
@@ -559,11 +563,8 @@ private:
     }
     const gchar *
     get_label(void){
-        return get_path();
+        return path();
     }
-
-    const gchar *
-    get_path(void){return (const gchar *)path_;}
 
     gint 
     get_icon_highlight_size(const gchar *name){

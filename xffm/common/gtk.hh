@@ -251,7 +251,13 @@ public:
     }
 
     static void
-    quick_help (GtkWindow *parent, const gchar *message)
+    quick_help (GtkWindow *parent, const gchar *message){
+        quickHelp(parent, message, NULL);
+    }
+
+
+    static void
+    quickHelp (GtkWindow *parent, const gchar *message, const gchar *icon)
     {
      static GtkWidget *dialog = NULL;
      static gchar *last_message = NULL;
@@ -282,6 +288,7 @@ public:
      auto content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
      auto label = GTK_LABEL(gtk_label_new (""));
      gtk_label_set_markup(label, message);
+     
 
      // Ensure that the dialog box is destroyed when the user responds
 
@@ -291,8 +298,19 @@ public:
 			       dialog);
 
      // Add the label, and show everything we have added
-
-     gtk_container_add (GTK_CONTAINER (content_area), GTK_WIDGET(label));
+     auto hbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+     gtk_container_add (GTK_CONTAINER (content_area), GTK_WIDGET(hbox));
+     if (icon){
+	auto pixbuf = Pixbuf<Type>::get_pixbuf(icon, GTK_ICON_SIZE_LARGE_TOOLBAR);
+        if (pixbuf) {
+            auto image = gtk_image_new_from_pixbuf(pixbuf);
+	    if (image) {
+	        gtk_box_pack_start(hbox, image, FALSE, FALSE,0);
+	        gtk_widget_show (image);
+            }
+	}
+     }
+     gtk_box_pack_start(hbox, GTK_WIDGET(label), FALSE, FALSE,0);
      gtk_widget_show_all (dialog);
     }
 

@@ -180,17 +180,20 @@ public:
     }
 
     static gboolean stat_func (GtkTreeModel *model,
-				GtkTreePath *path,
+				GtkTreePath *tpath,
 				GtkTreeIter *iter,
 				gpointer data){
 	gchar *text;
+        gchar *path;
 	gchar *basename = g_path_get_basename((gchar *)data);
 	gtk_tree_model_get (model, iter, 
 		ACTUAL_NAME, &text, 
+                PATH, &path,
 		-1);  
 	
 	if (strcmp(basename, text)){
 	    g_free(text);
+            g_free(path);
 	    g_free(basename);
 	    return FALSE;
 	}
@@ -200,14 +203,25 @@ public:
 	GtkListStore *store = GTK_LIST_STORE(model);
 	struct stat st;
 	if (stat((gchar *)data, &st) != 0){
-	    TRACE( "stat: %s\n", strerror(errno));
+	    TRACE( "localmonitor stat_func() stat: %s\n", strerror(errno));
+            g_free(path);
 	    return FALSE;
 	}
+
+        gchar *iconName = LocalView<Type>::get_iconname(path);
+        WARN("localmonitor stat_func(): iconname=%s\n", iconName);
+        GdkPixbuf *pixbuf = Pixbuf<Type>::get_pixbuf(iconName,  GTK_ICON_SIZE_DIALOG);
 
 	gtk_list_store_set (store, iter, 
                 SIZE, st.st_size, 
                 DATE, st.st_mtim.tv_sec ,
+                ICON_NAME, iconName,
+                DISPLAY_PIXBUF, pixbuf,
+                NORMAL_PIXBUF, pixbuf,
 		-1);
+        g_free(iconName);
+        g_free(path);
+
 
 	return TRUE;
     }
@@ -260,6 +274,7 @@ private:
             case G_FILE_MONITOR_EVENT_CHANGED:
                 TRACE("Received  CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
                 p->restat_item(first);
+                // reload icon
                 //FIXME:  if image, then reload the pixbuf
                 break;
             case G_FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED:

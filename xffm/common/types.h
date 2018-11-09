@@ -83,6 +83,118 @@ typedef struct lpterm_colors_t {
 } lpterm_colors_t;
 
 
+/** higher level types **/
+
+#define __MONITOR_TYPE		(0x1<<8)
+#define IS_MONITOR_TYPE(x)	((x) & __MONITOR_TYPE)
+#define SET_MONITOR_TYPE(x)	(x) |=  __MONITOR_TYPE
+#define UNSET_MONITOR_TYPE(x)	(x) &= (__MONITOR_TYPE ^ __MASK )
+
+#define __LOCAL_TYPE		(0x1<<9)
+#define IS_LOCAL_TYPE(x)	((x) & __LOCAL_TYPE)
+#define SET_LOCAL_TYPE(x)	(x) |=  __LOCAL_TYPE
+#define UNSET_LOCAL_TYPE(x)	(x) &= (__LOCAL_TYPE ^ __MASK )
+
+#define __DUMMY_TYPE		(0x1<<10)
+#define IS_DUMMY_TYPE(x)	((x) & __DUMMY_TYPE)
+#define SET_DUMMY_TYPE(x)	(x) |= __DUMMY_TYPE
+#define UNSET_DUMMY_TYPE(x)	(x) &= (__DUMMY_TYPE ^ __MASK )
+
+#define __ROOT_TYPE		(0x1<<11)
+#define IS_ROOT_TYPE(x)		((x) & __ROOT_TYPE)
+#define SET_ROOT_TYPE(x)	(x) |= __ROOT_TYPE
+#define UNSET_ROOT_TYPE(x)	(x) &= (__ROOT_TYPE ^ __MASK )
+
+#define __UP_TYPE		(0x1<<12)
+#define IS_UP_TYPE(x)		((x) & __UP_TYPE)
+#define SET_UP_TYPE(x)		(x) |= __UP_TYPE
+#define UNSET_UP_TYPE(x)	(x) &= (__UP_TYPE ^ __MASK )
+
+#define __PROC_TYPE		(0x1<<13)
+#define IS_PROC_TYPE(x)		((x) & __PROC_TYPE)
+#define SET_PROC_TYPE(x)	(x) |= __PROC_TYPE
+#define UNSET_PROC_TYPE(x)	(x) &= (__PROC_TYPE ^ __MASK )
+
+#define __CDFS_TYPE		(0x1<<14)
+#define IS_CDFS_TYPE(x)		((x) & __CDFS_TYPE)
+#define SET_CDFS_TYPE(x)	(x) |= __CDFS_TYPE
+#define UNSET_CDFS_TYPE(x)	(x) &= (__CDFS_TYPE ^ __MASK )
+
+#define __USER_TYPE		(0x1<<15)
+#define IS_USER_TYPE(x)		((x) & __USER_TYPE)
+#define SET_USER_TYPE(x)	(x) |= __USER_TYPE
+#define UNSET_USER_TYPE(x)	(x) &= (__USER_TYPE ^ __MASK )
+
+#define __NFS_TYPE		(0x1<<16)
+#define IS_NFS_TYPE(x)		((x) & __NFS_TYPE)
+#define SET_NFS_TYPE(x)		(x) |= __NFS_TYPE
+#define UNSET_NFS_TYPE(x)	(x) &= (__NFS_TYPE ^ __MASK )
+
+#define __SMB_TYPE		(0x1<<17)
+#define IS_SMB_TYPE(x)		((x) & __SMB_TYPE)
+#define SET_SMB_TYPE(x)		(x) |= __SMB_TYPE
+#define UNSET_SMB_TYPE(x)	(x) &= (__SMB_TYPE ^ __MASK )
+
+#define __FSTAB_TYPE		(0x1<<18)
+#define IS_FSTAB_TYPE(x)	((x) & __FSTAB_TYPE)
+#define SET_FSTAB_TYPE(x)	(x) |= __FSTAB_TYPE
+#define UNSET_FSTAB_TYPE(x)	(x) &= (__FSTAB_TYPE ^ __MASK )
+
+#define __MTAB_TYPE		(0x1<<19)
+#define IS_MTAB_TYPE(x)		((x) & __MTAB_TYPE)
+#define SET_MTAB_TYPE(x)	(x) |= __MTAB_TYPE
+#define UNSET_MTAB_TYPE(x)	(x) &= (__MTAB_TYPE ^ __MASK )
+
+#define __PARTITION_TYPE	(0x1<<20)
+#define IS_PARTITION_TYPE(x)	((x) & __PARTITION_TYPE)
+#define SET_PARTITION_TYPE(x)	(x) |= __PARTITION_TYPE
+#define UNSET_PARTITION_TYPE(x)	(x) &= (__PARTITION_TYPE ^ __MASK )
+
+#define __EXE_TYPE		(0x1<<21)
+#define IS_EXE_TYPE(x)		((x) & __EXE_TYPE)
+#define SET_EXE_TYPE(x)		(x) |= __EXE_TYPE
+#define UNSET_EXE_TYPE(x)	(x) &= (__EXE_TYPE ^ __MASK )
+
+#define __NOWRITE_TYPE		(0x1<<22)
+#define IS_NOWRITE_TYPE(x)	((x) & __NOWRITE_TYPE)
+#define SET_NOWRITE_TYPE(x)	(x) |= __NOWRITE_TYPE
+#define UNSET_NOWRITE_TYPE(x)	(x) &= (__NOWRITE_TYPE ^ __MASK )
+
+#define __NOACCESS_TYPE		(0x1<<23)
+#define IS_NOACCESS_TYPE(x)	((x) & __NOACCESS_TYPE)
+#define SET_NOACCESS_TYPE(x)	(x) |= __NOACCESS_TYPE
+#define UNSET_NOACCESS_TYPE(x)	(x) &= (__NOACCESS_TYPE ^ __MASK )
+
+#define __BROKEN_LNK		(0x1<<24)
+#define IS_BROKEN_LNK(x)	((x) & __BROKEN_LNK)
+#define SET_BROKEN_LNK(x)	(x) |= __BROKEN_LNK
+#define UNSET_BROKEN_LNK(x)	(x) &= (__BROKEN_LNK ^ __MASK )
+
+#define __MOUNTED_TYPE		(0x1<<25)
+#define IS_MOUNTED_TYPE(x)	((x) & __MOUNTED_TYPE)
+#define SET_MOUNTED_TYPE(x)	(x) |= __MOUNTED_TYPE
+#define UNSET_MOUNTED_TYPE(x)	(x) &= (__MOUNTED_TYPE ^ __MASK )
+
+#define __DOTDESKTOP		(0x1<<26)
+#define IS_DOTDESKTOP(x)	((x) & __DOTDESKTOP)
+#define SET_DOTDESKTOP(x)	(x) |= __DOTDESKTOP
+#define UNSET_DOTDESKTOP(x)	(x) &= (__DOTDESKTOP ^ __MASK )
+
+#define __PLUGIN_TYPE1		(0x1<<27)
+#define IS_PLUGIN_TYPE1(x)	((x) & __PLUGIN_TYPE1)
+#define SET_PLUGIN_TYPE1(x)	(x) |= __PLUGIN_TYPE1
+#define UNSET_PLUGIN_TYPE1(x)	(x) &= (__PLUGIN_TYPE1 ^ __MASK )
+
+#define __PLUGIN_TYPE2		(0x1<<28)
+#define IS_PLUGIN_TYPE2(x)	((x) & __PLUGIN_TYPE2)
+#define SET_PLUGIN_TYPE2(x)	(x) |= __PLUGIN_TYPE2
+#define UNSET_PLUGIN_TYPE2(x)	(x) &= (__PLUGIN_TYPE2 ^ __MASK )
+
+#define __PLUGIN_TYPE3		(0x1<<29)
+#define IS_PLUGIN_TYPE3(x)	((x) & __PLUGIN_TYPE3)
+#define SET_PLUGIN_TYPE3(x)	(x) |= __PLUGIN_TYPE3
+#define UNSET_PLUGIN_TYPE3(x)	(x) &= (__PLUGIN_TYPE3 ^ __MASK )
+
 
 
 

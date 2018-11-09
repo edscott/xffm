@@ -1,6 +1,7 @@
 #ifndef XF_LOCALITEMPOPUP__HH
 # define XF_LOCALITEMPOPUP__HH
 #include "common/comboresponse.hh"
+#include "view/fstab.hh"
 
 namespace xf
 {
@@ -46,8 +47,13 @@ public:
 	    {("mimetypeOpen"), (void *)command, (void *) localItemPopUp},
 	    {N_("Open with"), (void *)openWith, (void *) localItemPopUp},
 	    {N_("Run Executable..."), (void *)runWith, (void *) localItemPopUp},
+	    {N_("Extract files from the archive"), (void *)noop, (void *) localItemPopUp},
+
 	    
 	    {N_("Open in New Tab"), (void *)noop, (void *) localItemPopUp},
+	    {N_("Create a compressed archive with the selected objects"), (void *)noop, (void *) localItemPopUp},
+	    {N_("Mount the volume associated with this folder"), (void *)mount, (void *) localItemPopUp},
+	    {N_("Unmount the volume associated with this folder"), (void *)mount, (void *) localItemPopUp},
 	    //common buttons /(also an iconsize +/- button)
 	    {N_("Copy"), (void *)noop, (void *) localItemPopUp},
 	    {N_("Cut"), (void *)noop, (void *) localItemPopUp},
@@ -62,8 +68,6 @@ public:
 	    {N_("Delete"), (void *)noop, (void *) localItemPopUp},
 	    //{N_("Mimetype command"), (void *)noop, (void *) localItemPopUp},
 	    {N_("autotype_Prun"), (void *)noop, (void *) localItemPopUp},
-	    {N_("Mount the volume associated with this folder"), (void *)noop, (void *) localItemPopUp},
-	    {N_("Unmount the volume associated with this folder"), (void *)noop, (void *) localItemPopUp},
 	     {NULL,NULL,NULL}};
 	// Create title element
 	GtkWidget *title = gtk_c::menu_item_new(NULL, ""); 
@@ -139,6 +143,92 @@ public:
 	// this now belongs to localItemPopup: g_free(mimetype);
     }
 
+private:
+    static void
+    runWithDialog(const gchar *path){
+	// Run with dialog
+	auto v1 = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(localItemPopUp), "Run Executable..."));
+
+        gboolean state = (g_file_test(path, G_FILE_TEST_IS_EXECUTABLE) &&
+                g_file_test(path, G_FILE_TEST_IS_REGULAR));
+	gtk_widget_set_sensitive(GTK_WIDGET(v1), state);
+	if (state) gtk_widget_show(GTK_WIDGET(v1));
+	else gtk_widget_hide(GTK_WIDGET(v1));
+    }
+
+    static void
+    openWithDialog(const gchar *path, const gchar *mimetype, const gchar *fileInfo){
+	// Open with dialog
+	auto v2 = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(localItemPopUp), "Open with"));
+        gboolean state = g_file_test(path, G_FILE_TEST_IS_REGULAR);
+        if (state) {
+            gtk_widget_show(GTK_WIDGET(v2));
+        } else {
+            gtk_widget_hide(GTK_WIDGET(v2));
+        }
+	gtk_widget_set_sensitive(GTK_WIDGET(v2), state);
+	// open with mimetype application
+	setUpMimeTypeApp(mimetype, path, fileInfo);
+    }
+
+    static void
+    showDirectoryItems(const gchar *path){
+        // Directory items...
+        const gchar *directoryItems[] ={
+            "title",
+            "Open in New Tab",
+            "Create a compressed archive with the selected objects",
+            "Mount the volume associated with this folder",
+            "Unmount the volume associated with this folder",
+        NULL};
+        const gchar *commonItems[]={
+            "Copy",
+            "Cut",
+            "bcrypt",
+            "Rename",
+            "Duplicate",
+            "Link",
+            "Touch",
+            "Properties",
+            "Delete",
+            NULL,
+        };
+        GtkWidget *w;
+        // unhide 
+        const gchar **p;
+        for (p=directoryItems; p &&*p; p++){
+            w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), *p));
+            if (w) {
+                gtk_widget_show(w);
+                gtk_widget_set_sensitive(w, FALSE);
+            }
+        }
+        for (p=commonItems; p &&*p; p++){
+            w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), *p));
+            if (w) {
+                gtk_widget_show(w);
+                gtk_widget_set_sensitive(w, FALSE); // WIP
+            }
+        }
+
+        // mount options
+        if (Fstab<Type>::isMounted(path)){
+            w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Unmount the volume associated with this folder"));
+            gtk_widget_set_sensitive(w, TRUE);
+        } else {
+            gtk_widget_set_sensitive(w, FALSE);
+            w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Mount the volume associated with this folder"));
+            if (Fstab<Type>::isInFstab(path)){
+                gtk_widget_set_sensitive(w, TRUE);
+            } else {
+                gtk_widget_set_sensitive(w, FALSE);
+            }
+        }
+
+    }
+
+
+public:
     static void
     resetMenuItems(GtkTreeModel *treeModel, const GtkTreePath *tpath) {
 	GtkTreeIter iter;
@@ -147,49 +237,35 @@ public:
 	    gtk_tree_path_free(ttpath);
 	    return;
 	}
+
 	gtk_tree_path_free(ttpath);
 	gchar *path;
-	gchar *mimetype;
+        path = (gchar *)g_object_get_data(G_OBJECT(localItemPopUp), "path");
+        g_free(path);
+	gchar *mimetype = (gchar *)g_object_get_data(G_OBJECT(localItemPopUp), "mimetype");;
+        g_free(mimetype);
 	gtk_tree_model_get (treeModel, &iter, 
 		MIMETYPE, &mimetype,
 		PATH, &path,
 	    -1);
+        g_object_set_data(G_OBJECT(localItemPopUp), "path", path);
+        g_object_set_data(G_OBJECT(localItemPopUp), "mimetype", mimetype);
 	struct stat st;
+        // Hide all...
+        GList *children = gtk_container_get_children (GTK_CONTAINER(localItemPopUp));
+        for (GList *child = children; child && child->data; child=child->next){
+            gtk_widget_hide(GTK_WIDGET(child->data));
+        }
         if (stat(path, &st)<0){
             ERROR("resetMenuItems(): cannot stat %s\n", path);
-            g_free(path);
-            // FIXME: hide all menuitems...
             return;
         }
-
-
-        gboolean state = FALSE;
-	// Run with dialog
-	auto v1 = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(localItemPopUp), "Run Executable..."));
-
-        state = (g_file_test(path, G_FILE_TEST_IS_EXECUTABLE) &&
-                g_file_test(path, G_FILE_TEST_IS_REGULAR));
-	gtk_widget_set_sensitive(GTK_WIDGET(v1), state);
-	if (state) gtk_widget_show(GTK_WIDGET(v1));
-	else gtk_widget_hide(GTK_WIDGET(v1));
-
-
-	// Open with dialog
-	auto v2 = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(localItemPopUp), "Open with"));
-        state = g_file_test(path, G_FILE_TEST_IS_REGULAR);
-        if (state) {
-            gtk_widget_show(GTK_WIDGET(v2));
-        } else {
-            gtk_widget_hide(GTK_WIDGET(v2));
-        }
-	gtk_widget_set_sensitive(GTK_WIDGET(v2), state);
-
-	// open with mimetype application
-	gchar *fileInfo = util_c::fileInfo(path);
-	setUpMimeTypeApp(mimetype, path, fileInfo);
-
-	g_free(path);
-	g_free(mimetype);
+        runWithDialog(path);
+        gchar *fileInfo = util_c::fileInfo(path);
+        openWithDialog(path, mimetype, fileInfo);
+        if ((st.st_mode & S_IFMT) == S_IFDIR) showDirectoryItems(path);
+	g_free(fileInfo);
+        
     }
 
     static GtkMenu *popUp(GtkTreeModel *treeModel, const GtkTreePath *tpath){
@@ -375,12 +451,44 @@ public:
 	Dialog<Type>::writeSettings();
         baseView->loadModel(path);
     }
+
+    static void
+    mount(GtkMenuItem *menuItem, gpointer data)
+    {
+	auto baseView =  (BaseView<Type> *)g_object_get_data(G_OBJECT(data), "baseView");
+        auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
+        if (!Fstab<Type>::mount(baseView, path)){
+            DBG("localpopup.hh:: mount command failed\n");
+        } else {
+            // Here we have a race, since the mount command is not yet complete
+            // (running in another thread...)
+            // that thread should touch mount directory...
+           g_timeout_add_seconds (1, timeoutReload, (void *)baseView);
+
+            /* sleep(3);
+            DBG("Reload model (should really only update mount/umount item icon\n");
+            auto page = baseView->page();
+            auto viewPath = page->workDir();            
+            baseView->loadModel(viewPath);*/
+        }
+    }
+
+    static gboolean
+    timeoutReload(gpointer data){
+        auto baseView = (BaseView<Type> *)data;
+        auto page = baseView->page();
+        auto viewPath = page->workDir();            
+        baseView->loadModel(viewPath);
+        return FALSE;
+    }
+
+
     static void
     noop(GtkMenuItem *menuItem, gpointer data)
     {
         DBG("noop\n");
     }
-    static void
+   static void
     command(GtkMenuItem *menuItem, gpointer data)
     {
 	auto command = (gchar *)g_object_get_data(G_OBJECT(menuItem), "command");
@@ -878,6 +986,9 @@ private:
 
 	return response_txt;
     }
+private:
+
+
 
   
 };

@@ -165,16 +165,25 @@ public:
 	if (gtk_tree_model_get_iter_first (treeModel, &iter)){
 	    while (gtk_list_store_remove (GTK_LIST_STORE(treeModel),&iter));
 	}
-
+        while (gtk_events_pending()) gtk_main_iteration();
+        WARN("removed old stuff\n");
 
         int heartbeat = 0;
     
         GList *directory_list = read_items (path, &heartbeat);
         insert_list_into_model(directory_list, GTK_LIST_STORE(treeModel));
+        WARN("added new stuff\n");
 		
 
 	return TRUE;
     }
+
+ /*   static gboolean
+    reloadModel (BaseView<Type> *baseView){
+        GtkIconView *iconView=
+        const gchar *path=
+        loadModel(iconView, path);
+    }*/
 
 private:
 
@@ -491,7 +500,7 @@ private:
                 highlight_name = g_strdup("go-up");
             } else highlight_name = g_strdup("document-open");
         } else {
-            gchar *h_name = get_iconname(xd_p, FALSE);
+            gchar *h_name = get_iconname(xd_p);
             if (xd_p->st && U_RX(xd_p->st->st_mode)) {
                 highlight_name = 
                     g_strdup_printf("%s/NE/application-x-executable-symbolic/2.5/220", h_name);
@@ -532,14 +541,27 @@ private:
 	// FIXME: enable itemsHash_ for monitor function.
         //g_hash_table_replace(itemsHash_, g_strdup(xd_p->d_name), GINT_TO_POINTER(1));
     }
+public:
+    
+    static gchar *
+    get_iconname(const gchar *path){
+        struct stat st;
+        gchar *name;
+        if (stat(path, &st) < 0) 
+            name = get_basic_iconname(path, NULL);
+        else 
+            name = get_basic_iconname(path, &st);
+	if (!name) name = g_strdup("image-missing");
+
+        gchar *emblem = getEmblem(path, &st);
+        gchar *iconname = g_strconcat(name, emblem, NULL);
+        g_free(name);
+        g_free(emblem);
+        return iconname;
+    }
 private:
     static gchar *
     get_iconname(xd_t *xd_p){
-        return get_iconname(xd_p, TRUE);
-    }
-
-    static gchar *
-    get_iconname(xd_t *xd_p, gboolean use_lite){
         gchar *name;
         if (xd_p->icon) name = g_strdup(xd_p->icon);
         else name = get_basic_iconname(xd_p);
@@ -551,6 +573,50 @@ private:
         g_free(name);
         g_free(emblem);
         return iconname;
+    }
+
+    static gchar *
+    get_basic_iconname(const gchar *path, struct stat *st){
+
+        // Directories:
+        gchar *base = g_path_get_basename(path);
+        if (strcmp(base, "..")==0){
+            g_free(base);
+            return  g_strdup("go-up");
+        }
+        g_free(base);
+        if ((st && S_ISDIR(st->st_mode))) {
+            if (strcmp(path, g_get_home_dir())==0) {
+                return get_home_iconname(path);
+            }
+            return  g_strdup("folder");
+        }
+
+        // Character device:
+        if ((st && S_ISCHR(st->st_mode))) {
+            return  g_strdup("text-x-generic-template/SW/input-keyboard-symbolic/2.0/220");
+        }
+        // Named pipe (FIFO):
+        if ((st && S_ISFIFO(st->st_mode))) {
+            return  g_strdup("text-x-generic-template/SW/emblem-synchronizing-symbolic/2.0/220");
+        }
+        // UNIX domain socket:
+        if ((st && S_ISSOCK(st->st_mode))) {
+            return  g_strdup("text-x-generic-template/SW/emblem-shared-symbolic/2.0/220");
+        }
+        // Block device
+        if ((st && S_ISBLK(st->st_mode))) {
+            return  g_strdup("text-x-generic-template/SW/drive-harddisk-symbolic/2.0/220");
+        }
+        // Regular file:
+/*
+ * FIXME
+        if ((st && S_ISREG(st->st_mode))) {
+            const gchar *basic = get_mime_iconname(xd_p->mimetype);
+            return g_strdup(basic);
+        }
+        */
+        return  g_strdup("text-x-generic");
     }
 
     static gchar *
@@ -567,7 +633,7 @@ private:
     */
         if ((xd_p->d_type == DT_DIR )||(xd_p->st && S_ISDIR(xd_p->st->st_mode))) {
             if (strcmp(xd_p->path, g_get_home_dir())==0) {
-                return get_home_iconname(xd_p->d_name);
+                return get_home_iconname(xd_p->path);
             }
             return  g_strdup("folder");
         }
@@ -590,7 +656,7 @@ private:
         // Regular file:
 
         if (xd_p->d_type == DT_REG ) {
-            const gchar *basic = get_mime_iconname(xd_p);
+            const gchar *basic = get_mime_iconname(xd_p->mimetype);
             return g_strdup(basic);
         }
 
@@ -630,7 +696,7 @@ private:
         // Regular file:
 
         if ((xd_p->st && S_ISREG(xd_p->st->st_mode))) {
-            const gchar *basic = get_mime_iconname(xd_p);
+            const gchar *basic = get_mime_iconname(xd_p->mimetype);
             return g_strdup(basic);
         }
 #endif
@@ -639,58 +705,33 @@ private:
 
 
     static const gchar *
-    get_mime_iconname(xd_t *xd_p){
+    get_mime_iconname(const gchar *mimetype){
         const gchar *basic = NULL;
 #ifdef USE_MIME
-        if (xd_p->mimetype) {
+        if (mimetype) {
             // here we should get generic-icon from mime-module.xml!
-            basic = Mime<Type>::get_mimetype_iconname(xd_p->mimetype);
-            TRACE("xfdir_local_c::get_mime_iconname(%s) -> %s\n", xd_p->mimetype, basic);
+            basic = Mime<Type>::get_mimetype_iconname(mimetype);
+            TRACE("xfdir_local_c::get_mime_iconname(%s) -> %s\n", mimetype, basic);
             if (basic) {
                 // check if the pixbuf is actually available
                 GdkPixbuf *pixbuf = pixbuf_c::get_pixbuf(basic,  GTK_ICON_SIZE_DIALOG);
                 if (pixbuf) return basic;
 		else return "text-x-generic";
             } else {
-                if (strstr(xd_p->mimetype, "text/html")){
+                if (strstr(mimetype, "text/html")){
                     return "text-html";
                 }
 		return "text-x-generic";
             }
-
-    /*
-             "image-x-generic";
-             "audio-x-generic";
-             "font-x-generic";
-             "package-x-generic";
-             "video-x-generic";
-             "x-office-address-book";
-             "x-office-calendar";
-             "x-office-document";
-             "x-office-document-template";
-             "x-office-drawing";
-             "x-office-drawing-template";
-             "x-office-presentation";
-             "x-office-presentation-template";
-             "x-office-spreadsheet";
-             "x-office-spreadsheet-template";
-             "text-html";
-             "text-x-preview";
-             "text-x-script";
-             "application-x-executable";
-             "application-certificate";
-             "application-x-addon";
-             "application-x-firmware";
-             "x-package-repository";
-    */
         }
 #endif
         return "text-x-generic";
     }
 
     static gchar *
-    get_home_iconname(const gchar *data){
-        if (!data) return g_strdup("user-home");
+    get_home_iconname(const gchar *path){
+        if (!path) return g_strdup("user-home");
+        gchar *base = g_path_get_basename(path);
         const gchar *dir[]={N_("Documents"), N_("Downloads"),N_("Music"),N_("Pictures"),
                     N_("Templates"),N_("Videos"),N_("Desktop"),N_("Bookmarks"),
                     N_(".Trash"),NULL};
@@ -699,53 +740,53 @@ private:
                       "user-trash",NULL};
         const gchar **p, **i;
         for (p=dir, i=icon; p && *p ; p++, i++){
-            if (strcasecmp(*p, data) == 0) {
+            if (strcasecmp(*p, base) == 0) {
+                g_free(base);
                 return g_strdup(*i);
             }
         }
+        g_free(base);
         return g_strdup("folder");
     }
 
+
     static gchar *
-    extension(xd_t *xd_p){
+    extension(const gchar *base){
 	auto extension = g_strdup("");
-        if (xd_p->d_type != DT_REG) return extension;
-	if (strrchr(xd_p->d_name, '.') && strrchr(xd_p->d_name, '.') != xd_p->d_name
-		&& strlen(strrchr(xd_p->d_name, '.')+1) <= EXTENSION_LABEL_LENGTH) {
-	    extension = g_strconcat("*", strrchr(xd_p->d_name, '.')+1, NULL) ;
+	if (strrchr(base, '.') && strrchr(base, '.') != base
+		&& strlen(strrchr(base, '.')+1) <= EXTENSION_LABEL_LENGTH) {
+	    extension = g_strconcat("*", strrchr(base, '.')+1, NULL) ;
 	}
         return extension;
     }
 
     static gchar *
-    getColor(xd_t *xd_p){
+    getColor(const gchar *d_name){
+
         // hidden files:
-         if (xd_p->d_name[0] == '.') {
+         if (d_name[0] == '.') {
 	    return g_strdup("#888888"); 
 	}
-        if (strcmp(xd_p->d_name, "core")==0) {
+        if (strcmp(d_name, "core")==0) {
 	    return g_strdup("#880000"); 
         }
 
-        if (xd_p->mimetype){
-            // FIXME Here we can do additional mimetype coloring...
-        }
-
         // simple file extension coloring fallback
-        gchar *ext = strrchr(xd_p->d_name, '.');
+        const gchar *ext = strrchr(d_name, '.');
         if (!ext) return g_strdup("");
-        if (cHdr(xd_p->d_name)){
+        if (cHdr(d_name)){
             return g_strdup("#eed680");
         }
-        if (cSrc(xd_p->d_name)){
+        if (cSrc(d_name)){
             return g_strdup("#887fd3");
         }
-        if (backupType(xd_p->d_name)){
+        if (backupType(d_name)){
             return g_strdup("#cc7777");
         }
         return g_strdup("");
     }
 
+#if 0
     static gchar *
     statEmblem(xd_t *xd_p, const gchar *emblem){
         if (!xd_p->st){
@@ -754,6 +795,13 @@ private:
         }
         if (xd_p->d_type == DT_DIR) {
             TRACE("dir emblem...\n");
+            if (Fstab<Type>::isMounted(xd_p->path)){
+                return g_strconcat(emblem, "/NW/greenball/3.0/180", NULL);
+            }
+            if (Fstab<Type>::isInFstab(xd_p->path)){
+                return g_strconcat(emblem, "/NW/grayball/3.0/180", NULL);
+            }
+
             // all access:
             if (O_ALL(xd_p->st->st_mode)){
                 TRACE("all access: %s\n", xd_p->path); 
@@ -816,6 +864,85 @@ private:
 	}
         return g_strdup(emblem);
     }
+#endif
+
+    static gchar *
+    statEmblem( const gchar *path, struct stat *st, const gchar *emblem){
+        if (!st){
+            WARN("statEmblem: no stat for st==NULL\n");
+            return g_strdup(emblem);
+        }
+        if ((st->st_mode & S_IFMT) == S_IFDIR) {
+            TRACE("dir emblem...\n");
+            if (Fstab<Type>::isMounted(path)){
+                return g_strconcat(emblem, "/NW/greenball/3.0/180", NULL);
+            }
+            if (Fstab<Type>::isInFstab(path)){
+                return g_strconcat(emblem, "/NW/grayball/3.0/180", NULL);
+            }
+
+            // all access:
+            if (O_ALL(st->st_mode)){
+                TRACE("all access: %s\n", path); 
+                return g_strdup(emblem);
+                //return g_strconcat(emblem, "/C/face-surprise/3.0/180", NULL);
+            }
+            if ((MY_GROUP(st->st_gid) && G_ALL(st->st_mode)) 
+                    || (MY_FILE(st->st_uid) && U_ALL(st->st_mode))){
+                TRACE("all access group: %s\n", path); 
+                return g_strdup(emblem);
+            }
+            // read only:
+            if (O_RX(st->st_mode) 
+                    || (MY_GROUP(st->st_gid) && G_RX(st->st_mode)) 
+                    || (MY_FILE(st->st_uid) && U_RX(st->st_mode))){
+                TRACE("read only: %s\n", path); 
+                return g_strconcat(emblem, "/NW/dialog-warning/3.0/180", NULL);
+            }
+            else {
+                // no access:
+                DBG("no access: %s\n", path); 
+                return g_strconcat(emblem, "/NW/dialog-error/3.0/180", NULL);
+            }
+        }
+        // The rest is only for regular files (links too?)
+        if (st->st_mode & S_IFMT != S_IFREG) return g_strdup(emblem);
+
+
+	// all access:
+	if (O_ALL(st->st_mode) || O_RW(st->st_mode)){
+		return g_strdup_printf("%s/C/face-surprise-symbolic/2.5/180/NW/application-x-executable-symbolic/3.0/180", 
+                        emblem);
+	// read/write/exec
+	} else if((MY_GROUP(st->st_gid) && G_ALL(st->st_mode)) 
+		|| (MY_FILE(st->st_uid) && U_ALL(st->st_mode))){
+		return g_strdup_printf("%s/NW/application-x-executable-symbolic/3.0/180", 
+			emblem);
+	// read/exec
+	} else if (O_RX(st->st_mode)
+		||(MY_GROUP(st->st_gid) && G_RX(st->st_mode)) 
+		|| (MY_FILE(st->st_uid) && U_RX(st->st_mode))){
+		return g_strdup_printf("%s/NW/application-x-executable-symbolic/3.0/180", 
+			emblem);
+
+	// read/write
+	} else if ((MY_GROUP(st->st_gid) && G_RW(st->st_mode))
+		|| (MY_FILE(st->st_uid) && U_RW(st->st_mode))) {
+		return g_strdup(emblem);
+
+	// read only:
+	} else if (O_R(st->st_mode) 
+		|| (MY_GROUP(st->st_gid) && G_R(st->st_mode)) 
+		|| (MY_FILE(st->st_uid) && U_R(st->st_mode))){
+		return g_strdup_printf("%s/NW/dialog-warning/3.0/130", 
+			emblem);
+	} else if (S_ISREG(st->st_mode)) {
+	    // no access: (must be have stat info to get this emblem)
+	    return g_strdup_printf("%s/NW/dialog-error/3.0/180", 
+		    emblem);
+	}
+        return g_strdup(emblem);
+    }
 
     static gchar *
     getEmblem(xd_t *xd_p){
@@ -829,13 +956,14 @@ private:
         }
         TRACE("getEmblem: %s\n", xd_p->path);
         // Now we try stat emblem
-        gchar *aux = statEmblem(xd_p, emblem);
+        gchar *aux = statEmblem(xd_p->path, xd_p->st, emblem);
         g_free(emblem); emblem = aux;
         TRACE("getEmblem: %s --> %s\n", xd_p->path, emblem);
-
-        gchar *extend = extension(xd_p);
+        gchar *extend;
+        if (xd_p->d_type != DT_REG) extend = g_strdup("");
+        else extend = extension(xd_p->d_name);
         TRACE("extend: %s --> %s\n", xd_p->path, extend);
-        auto color = getColor(xd_p);
+        auto color = getColor(xd_p->d_name);
         auto fullEmblem = g_strconcat(extend, color, emblem, NULL);
 
         //auto fullEmblem = addColors(xd_p, extend, emblem);
@@ -843,6 +971,41 @@ private:
         g_free(emblem);
         g_free(extend);
         TRACE("fullEmblem: %s --> %s\n", xd_p->path, fullEmblem);
+	return fullEmblem;
+    }
+
+    static gchar *
+    getEmblem(const gchar *path, struct stat *st){
+        // No emblem for go up
+        gchar *base = g_path_get_basename(path);
+        if (strcmp(base, "..")==0){
+            g_free(base);
+            return g_strdup("");
+        }
+        
+        gchar *emblem;
+        if ((st->st_mode & S_IFMT) == S_IFLNK){
+            return g_strdup("/SW/emblem-symbolic-link/2.0/220");
+        }
+        emblem = g_strdup("");
+        // Now we try stat emblem
+        gchar *aux = statEmblem(path, st, emblem);
+        g_free(emblem); emblem = aux;
+        TRACE("getEmblem: %s --> %s\n", path, emblem);
+
+        gchar *extend;
+        if ((st->st_mode & S_IFMT) == S_IFDIR) extend = g_strdup("");
+        else extend = extension(base);
+        TRACE("extend: %s --> %s\n", path, extend);
+        auto color = getColor(base);
+        auto fullEmblem = g_strconcat(extend, color, emblem, NULL);
+
+        //auto fullEmblem = addColors(xd_p, extend, emblem);
+        g_free(color);
+        g_free(emblem);
+        g_free(extend);
+        TRACE("fullEmblem: %s --> %s\n", path, fullEmblem);
+        g_free(base);
 	return fullEmblem;
     }
 
