@@ -463,7 +463,14 @@ public:
             // Here we have a race, since the mount command is not yet complete
             // (running in another thread...)
             // that thread should touch mount directory...
-           g_timeout_add_seconds (1, timeoutReload, (void *)baseView);
+            // XXX: this is a hack and not always works, depending on how long it
+            // takes to mount the unit
+            // g_file_monitor does not check if folders are mounted or not
+            //
+            // FIXME: open a dialog with the mount instruction, once the mount instruction
+            // is complete, reload the iconView. Yeah, that's makes things less simple...
+            //
+           g_timeout_add_seconds (2, timeoutReload, (void *)baseView);
 
             /* sleep(3);
             DBG("Reload model (should really only update mount/umount item icon\n");
