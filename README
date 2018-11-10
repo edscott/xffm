@@ -1,5 +1,7 @@
 
 TODO: 
+  * bug: open with xffm ../ and see how it is borked
+  * add bookmarks to rootview
   * Enable localview monitor.
   * enable localview open
   * enable localview openwith
