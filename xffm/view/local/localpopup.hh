@@ -473,7 +473,7 @@ public:
             // FIXME: open a dialog with the mount instruction, once the mount instruction
             // is complete, reload the iconView. Yeah, that's makes things less simple...
             //
-           g_timeout_add_seconds (2, timeoutReload, (void *)baseView);
+            //g_timeout_add_seconds (2, timeoutReload, (void *)baseView);
 
             /* sleep(3);
             DBG("Reload model (should really only update mount/umount item icon\n");
@@ -482,7 +482,7 @@ public:
             baseView->loadModel(viewPath);*/
         }
     }
-
+/*
     static gboolean
     timeoutReload(gpointer data){
         auto baseView = (BaseView<Type> *)data;
@@ -491,7 +491,7 @@ public:
         baseView->loadModel(viewPath);
         return FALSE;
     }
-
+*/
 
     static void
     noop(GtkMenuItem *menuItem, gpointer data)

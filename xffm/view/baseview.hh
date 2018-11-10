@@ -32,6 +32,7 @@ enum
 // Flag bits:
 #define IS_NOTSELECTABLE(F) ((0x01<<1)&F)
 #define SET_NOTSELECTABLE(F) (F|=(0x01<<1))
+static GHashTable *validBaseViewHash = NULL;
 
 namespace xf
 {
@@ -97,7 +98,8 @@ public:
         path_ = NULL;
         selectionList_ = NULL;
         localMonitor_ = NULL;
-        
+        if (!validBaseViewHash) validBaseViewHash = g_hash_table_new(g_direct_hash, g_direct_equal); 
+	g_hash_table_replace(validBaseViewHash, (void *)this, GINT_TO_POINTER(1));
         iconView_=createIconview();
 
         source_ = GTK_WIDGET(page_->pageChild());
@@ -178,10 +180,16 @@ public:
 
     ~BaseView(void){
         TRACE("BaseView destructor.\n");
+	g_hash_table_remove(validBaseViewHash, (void *)this);
+	
         g_free(path_); 
         g_object_unref(treeModel_);
+
     }
 
+    static gboolean validBaseView(BaseView<Type> *baseView) {
+	return GPOINTER_TO_INT(g_hash_table_lookup(validBaseViewHash, (void *)baseView));
+    }
 
     GtkWidget *source(){ return source_;}
     

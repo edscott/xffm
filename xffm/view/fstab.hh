@@ -130,13 +130,13 @@ public:
         // Sudo check...
         // 
         // BSD sudo not necessary if vfs.usermount?
-        gboolean use_sudo = TRUE;
+        gboolean useSudo = TRUE;
         // not for root
-        if(!getuid ()) use_sudo = FALSE;
+        if(!getuid ()) useSudo = FALSE;
         // not for general user mounts
         if(isInFstab(path)){
             // Is it user type? No need for sudo then.
-            if (IS_USER_TYPE(getMntType(path))) use_sudo = FALSE;
+            if (IS_USER_TYPE(getMntType(path))) useSudo = FALSE;
         } else {
             // barf: function incorrectly called with non fstab item.
             ERROR("%s not in /etc/fstab\n", path);
@@ -144,7 +144,7 @@ public:
         }
         // sudo requested but not installed, barf.
         
-        if (use_sudo) {
+        if (useSudo) {
             auto p = g_find_program_in_path ("sudo");
             if(p == NULL) {
                 // barf!
@@ -160,9 +160,36 @@ public:
             } else g_free (p);
         }
 
+#if 1
+	// Simple fstab item mount...
+	const gchar *arg[5];
+	gint i=0;
+	if (useSudo) {
+	    arg[i++] = "sudo";
+	    arg[i++] = "-A";
+	}
+	arg[i++] = (isMounted(path))?umount:mount;
+	arg[i++] = path;
+	arg[i++] = NULL;
+	auto voidP = (void **)calloc (2, sizeof(void *));
+	if (!voidP){
+	    ERROR("mount(%s): calloc: %s\n", path,strerror(errno));
+	    exit(1);
+	}
+	pid_t controller = Run<Type>::thread_run(
+		(void *)baseView, // data to fork_finished_function
+		arg,
+		Run<Type>::run_operate_stdout,
+		Run<Type>::run_operate_stderr,
+		fork_finished_function);
+
+	    
+
+#else
+
         gchar *commandFmt;
 
-        if(use_sudo) commandFmt = g_strdup("sudo -A");
+        if(useSudo) commandFmt = g_strdup("sudo -A");
         else commandFmt = g_strdup("");
         gchar *g = g_strconcat(commandFmt, " ", (isMounted(path))?umount:mount, NULL);
         g_free(commandFmt);
@@ -173,12 +200,27 @@ public:
 	page->command(command);
         g_free(commandFmt);
         g_free(command);
-
+#endif
 
         TRACE ("fstab_mount %s done \n",path);
         return TRUE;
     }
 
+private:
+
+    static gboolean done_f(void *data) {
+        auto baseView = (BaseView<Type> *)data;
+	if (!BaseView<Type>::validBaseView(baseView)) return FALSE;
+        auto page = baseView->page();
+        auto viewPath = page->workDir();            
+        baseView->loadModel(viewPath);
+        return FALSE;
+    }
+
+    static void
+    fork_finished_function (void *data) {
+        g_timeout_add(5, done_f, data);
+    }
 
 private:
     
@@ -260,7 +302,7 @@ private:
             found = TRUE;
         }
         (void)endmntent (fstab_fd);
-        if (!found) ERROR("getMntType (): %s not found in /etc/fstab\n");
+        if (!found) ERROR("getMntType (): %s not found in /etc/fstab\n", path);
         return type;
     }
 
