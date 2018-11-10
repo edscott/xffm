@@ -54,6 +54,9 @@ public:
 	    {N_("Create a compressed archive with the selected objects"), (void *)noop, (void *) localItemPopUp},
 	    {N_("Mount the volume associated with this folder"), (void *)mount, (void *) localItemPopUp},
 	    {N_("Unmount the volume associated with this folder"), (void *)mount, (void *) localItemPopUp},
+            {N_("Add bookmark"), (void *)noop, (void *) localItemPopUp},
+            {N_("Remove bookmark"), (void *)noop, (void *) localItemPopUp},
+	    
 	    //common buttons /(also an iconsize +/- button)
 	    {N_("Copy"), (void *)noop, (void *) localItemPopUp},
 	    {N_("Cut"), (void *)noop, (void *) localItemPopUp},
@@ -180,6 +183,8 @@ private:
             "Create a compressed archive with the selected objects",
             "Mount the volume associated with this folder",
             "Unmount the volume associated with this folder",
+	    "Add bookmark",
+	    "Remove bookmark",
         NULL};
         const gchar *commonItems[]={
             "Copy",
@@ -260,6 +265,10 @@ public:
             ERROR("resetMenuItems(): cannot stat %s\n", path);
             return;
         }
+            
+	auto v2 = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "title"));
+        gtk_widget_show(v2);
+	
         runWithDialog(path);
         gchar *fileInfo = util_c::fileInfo(path);
         openWithDialog(path, mimetype, fileInfo);
@@ -288,9 +297,7 @@ public:
             {N_("Open in New Window"), (void *)noop, (void *) localPopUp, FALSE},
             
 	    {N_("Paste"), (void *)noop, (void *) localPopUp},
-            {N_("Add bookmark"), (void *)noop, (void *) localPopUp, FALSE},
-            {N_("Remove bookmark"), (void *)noop, (void *) localPopUp, FALSE},
-            // main menu items
+             // main menu items
             //{N_("Home"), (void *)noop, (void *) menu},
             //{N_("Open terminal"), (void *)noop, (void *) menu},
             //{N_("About"), (void *)noop, (void *) menu},
@@ -459,39 +466,20 @@ public:
         auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
         if (!Fstab<Type>::mount(baseView, path)){
             DBG("localpopup.hh:: mount command failed\n");
-        } else {
-            DBG("FIXME: monitor mount pid, and when it exits, reload localview (if not changed)\n");
-            // problem with the above: what if tab has been closed?
-            // 
-            // Here we have a race, since the mount command is not yet complete
-            // (running in another thread...)
-            // that thread should touch mount directory...
-            // XXX: this is a hack and not always works, depending on how long it
-            // takes to mount the unit
-            // g_file_monitor does not check if folders are mounted or not
-            //
-            // FIXME: open a dialog with the mount instruction, once the mount instruction
-            // is complete, reload the iconView. Yeah, that's makes things less simple...
-            //
-            //g_timeout_add_seconds (2, timeoutReload, (void *)baseView);
+        } 
+    }
 
-            /* sleep(3);
-            DBG("Reload model (should really only update mount/umount item icon\n");
-            auto page = baseView->page();
-            auto viewPath = page->workDir();            
-            baseView->loadModel(viewPath);*/
-        }
+    static void
+    AddBookmark(GtkMenuItem *menuItem, gpointer data)
+    {
+        DBG("Add bookmark\n");
     }
-/*
-    static gboolean
-    timeoutReload(gpointer data){
-        auto baseView = (BaseView<Type> *)data;
-        auto page = baseView->page();
-        auto viewPath = page->workDir();            
-        baseView->loadModel(viewPath);
-        return FALSE;
+
+    static void
+    RemoveBookmark(GtkMenuItem *menuItem, gpointer data)
+    {
+        DBG("Remove bookmark\n");
     }
-*/
 
     static void
     noop(GtkMenuItem *menuItem, gpointer data)
@@ -521,7 +509,7 @@ public:
 	auto markup = 
 	    g_strdup_printf("<span color=\"blue\" size=\"larger\"><b>%s</b></span>", displayPath);  
 	g_free(displayPath);
-        auto entryResponse = new(EntryResponse<Type>)(GTK_WINDOW(mainWindow), _("Create new..."));
+        auto entryResponse = new(EntryResponse<Type>)(GTK_WINDOW(mainWindow), _("Create new..."), NULL);
         entryResponse->setResponseLabel(markup);
         g_free(markup);
 
@@ -564,7 +552,7 @@ public:
 	    g_strdup_printf("<span color=\"blue\" size=\"larger\"><b>%s</b></span>", displayPath);  
 	g_free(displayPath);
 	
-        auto entryResponse = new(EntryResponse<Type>)(GTK_WINDOW(mainWindow), _("Run Executable..."));
+        auto entryResponse = new(EntryResponse<Type>)(GTK_WINDOW(mainWindow), _("Run Executable..."), "system-run");
         entryResponse->setResponseLabel(markup);
         g_free(markup);
 
@@ -626,7 +614,7 @@ public:
 	if (!wd) wd = g_get_home_dir();
         gchar *response = NULL;
         if (!apps || apps[0] == NULL || apps[1] == NULL) {
-            auto entryResponse = new(EntryResponse<Type>)(GTK_WINDOW(mainWindow), _("Open with"));
+            auto entryResponse = new(EntryResponse<Type>)(GTK_WINDOW(mainWindow), _("Open with"), NULL);
             entryResponse->setResponseLabel(responseLabel);
             g_free(responseLabel);
 
@@ -642,7 +630,7 @@ public:
             response = entryResponse->runResponse();
             delete entryResponse;
         } else {
-            auto comboResponse = new(ComboResponse<Type>)(GTK_WINDOW(mainWindow), _("Open with"));
+            auto comboResponse = new(ComboResponse<Type>)(GTK_WINDOW(mainWindow), _("Open with"), NULL);
             comboResponse->setResponseLabel(responseLabel);
             g_free(responseLabel);
 

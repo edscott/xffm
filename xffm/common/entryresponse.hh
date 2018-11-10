@@ -12,6 +12,7 @@ class EntryResponse {
     using page_c = Page<Type>;
 
 
+    gchar *entryIcon_;
     GtkLabel *responseLabel_;
     GtkLabel *entryLabel_;
     GtkLabel *checkboxLabel_;
@@ -45,7 +46,7 @@ public:
         gtk_widget_destroy(GTK_WIDGET(response_));
     }
 
-    EntryResponse (GtkWindow *parent, const gchar *windowTitle){
+    EntryResponse (GtkWindow *parent, const gchar *windowTitle, const gchar *icon){
         bashCompletionStore_ = NULL;
 	response_ = GTK_DIALOG(gtk_dialog_new ());
 	gtk_window_set_type_hint(GTK_WINDOW(response_), GDK_WINDOW_TYPE_HINT_DIALOG);
@@ -64,8 +65,21 @@ public:
 	responseLabel_ = GTK_LABEL(gtk_label_new (""));
 	gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET(responseLabel_), TRUE, TRUE, 0);
 
-	entryLabel_ = GTK_LABEL(gtk_label_new (""));
 	gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET(hbox_), FALSE, FALSE, 0);
+
+
+	if (icon){
+	    GdkPixbuf *p = Icons<Type>::get_theme_pixbuf(icon, -48);
+	    if (p){
+		auto image = GTK_IMAGE(gtk_image_new_from_pixbuf(p));
+		gtk_box_pack_start (GTK_BOX (hbox_), GTK_WIDGET(image), TRUE, TRUE, 0);
+		gtk_widget_show(GTK_WIDGET(image));
+		DBG("Loaded icon %s\n", icon);
+	    } else {
+		DBG("Cannot load icon %s\n", icon);
+	    }
+	}
+	entryLabel_ = GTK_LABEL(gtk_label_new (""));
 	gtk_box_pack_start (GTK_BOX (hbox_), GTK_WIDGET(entryLabel_), TRUE, TRUE, 0);
 	
         entry_ = GTK_ENTRY(gtk_entry_new ());

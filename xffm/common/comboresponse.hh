@@ -18,7 +18,7 @@ protected:
 
 public:
 
-        ComboResponse (GtkWindow *parent, const gchar *windowTitle): EntryResponse<Type>(parent, windowTitle) {
+        ComboResponse (GtkWindow *parent, const gchar *windowTitle, const gchar *icon): EntryResponse<Type>(parent, windowTitle, icon) {
 	
         combo_ = GTK_COMBO_BOX_TEXT(gtk_combo_box_text_new_with_entry());
         gtk_box_pack_start (GTK_BOX (this->hbox_), GTK_WIDGET(combo_), TRUE, TRUE, 0);
