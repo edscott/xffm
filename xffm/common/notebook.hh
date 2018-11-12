@@ -65,7 +65,7 @@ public:
         g_hash_table_replace(pageHash_, (void *)page->pageChild(), (void *)page);
         gtk_notebook_set_current_page (notebook_,pageNumber);
 	// This will set the workdir for completion
-	        
+	WARN("Notebook::   addPage(%s)\n", workdir);      
         page->setPageWorkdir(workdir); 
 	g_free(workdir);
 	
@@ -259,52 +259,6 @@ private:
 
     }
 #if 0    
-    void
-    view_c::remove_page(void){
-        gint page_num = gtk_notebook_page_num (notebook_, get_page_child());
-        gint current_page = gtk_notebook_get_current_page (get_notebook());
-
-        gtk_notebook_remove_page (get_notebook(), page_num);
-        if (current_page == page_num) {
-            gtk_notebook_set_current_page (get_notebook(), page_num-1);
-        }    
-    }
-
-void
-view_c::set_page_label(void){
-    gchar *tab_label = g_path_get_basename(xfdir_p->get_label());
-    gtk_label_set_markup(GTK_LABEL(get_page_label()), tab_label);
-    g_free(tab_label);
-}
-
-void
-view_c::set_view_details(void){
-    set_page_label();
-    set_window_title();
-    set_application_icon();
-    update_tab_label_icon();
-    while (gtk_events_pending()) gtk_main_iteration();
-    update_pathbar(xfdir_p->get_path());
-}
-
-void
-view_c::update_tab_label_icon(void){
-    GList *children = 
-	gtk_container_get_children (GTK_CONTAINER(get_page_label_icon_box()));
-    GList *l = children;
-    for (;l && l->data; l=l->next){
-	 gtk_widget_destroy(GTK_WIDGET(l->data));
-    }
-    g_list_free(children);
-    const gchar *icon_name = xfdir_p->get_xfdir_iconname();
-    GdkPixbuf *pixbuf = 
-            pixbuf_c::get_pixbuf(icon_name, GTK_ICON_SIZE_BUTTON);
-    if (pixbuf){
-	GtkWidget *image = gtk_image_new_from_pixbuf (pixbuf);
-	gtk_container_add (GTK_CONTAINER (get_page_label_icon_box()), image);
-	gtk_widget_show(image);
-    }
-}
 
 void
 view_c::set_application_icon (void) {
@@ -330,40 +284,6 @@ view_c::set_application_icon (gint page_num) {
         gtk_window_set_icon (window, icon_pixbuf);
     }
     // FIXME add to tab label (not here...)
-}
-
-void
-view_c::set_window_title(void){
-    gchar *window_title = xfdir_p->get_window_name();
-    GtkWindow *window = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET(get_notebook())));
-    gtk_window_set_title (window, window_title);
-    g_free (window_title);
-
-}
-
-void
-view_c::set_window_title(gint page_num){
-    GtkWidget *child_box = gtk_notebook_get_nth_page(get_notebook(), page_num);
-    view_c *view_p = (view_c *)g_object_get_data(G_OBJECT(child_box), "view_p");
-    if (!view_p->get_xfdir_p()) {
-        fprintf(stderr, "view_c::set_window_title(gint page_num): no xfdir_p\n");
-        return;
-    }
-
-    gchar *window_title = view_p->get_xfdir_p()->get_window_name();
-    GtkWindow *window = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET(get_notebook())));
-    gtk_window_set_title (window, window_title);
-    g_free (window_title);
-
-}
-
-static void 
-on_remove_page_button(GtkWidget *b, gpointer data){
-    view_c *view_p = (view_c *)data;
-    view_p->remove_page();       
-    // delete object: (remove from view_list)
-    window_c *window_p = (window_c *)view_p->get_window_v();
-    window_p->remove_view_from_list(data); // this calls view_c destructor
 }
 
 #endif

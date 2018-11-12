@@ -18,8 +18,7 @@ class Pathbar
     using print_c = Print<double>;
     
 public:
-    Pathbar(const gchar *path) {
-	WARN("Pathbar(%s)\n", path);
+    Pathbar(void) {
 	pathbar_ = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
         setStyle();
 
@@ -29,7 +28,7 @@ public:
 	gtk_box_pack_start (GTK_BOX (pathbar_), GTK_WIDGET(pb_button), FALSE, FALSE, 0);
 	g_object_set_data(G_OBJECT(pb_button), "name", g_strdup("RFM_ROOT"));
 	g_signal_connect (G_OBJECT(pb_button) , "clicked", BUTTON_CALLBACK (pathbar_go), (void *)this);
-	TRACE("showing pathbar pb_button: %s\n", path);
+	TRACE("showing pathbar pb_button\n" );
 	gtk_widget_show(GTK_WIDGET(pb_button));
 
 #if 0
@@ -140,22 +139,17 @@ private:
 	}
     }
 
-    void 
-    toggle_pathbar(const gchar *path){
-        TRACE("toggle_pathbar\n");
-	GList *children_list = 
-	    gtk_container_get_children(GTK_CONTAINER(pathbar_));
-	GList *children;
-	    
+    static void         
+    showWhatFits(GtkWidget *pathbar, const gchar *path, GList *children_list){
 	GtkRequisition minimum;
 	GtkAllocation allocation;
-	//gtk_widget_get_allocation(pathbar_, &allocation);
-	gtk_widget_get_allocation(gtk_widget_get_toplevel(pathbar_), &allocation);
-	TRACE("pathbar width=%d\n", allocation.width);
+        //gtk_widget_realize(GTK_WIDGET(gtk_widget_get_toplevel(pathbar)));
+	//gtk_widget_get_allocation(pathbar, &allocation);
+	gtk_widget_get_allocation(gtk_widget_get_toplevel(pathbar), &allocation);
+	WARN("pathbar width=%d\n", allocation.width);
 	gint width = allocation.width;
-
 	// First we hide all buttons, except "RFM_ROOT"
-	children = g_list_last(children_list);
+	GList *children = g_list_last(children_list);
 	for (;children && children->data; children=children->prev){
 	    gchar *name = (gchar *)g_object_get_data(G_OBJECT(children->data), "name");
 	    if (strcmp(name, "RFM_ROOT")==0) {
@@ -183,12 +177,11 @@ private:
 		break;
 	    }
 	}
-
-	// Show active button
+ 	// Show active button
 	gtk_widget_show(GTK_WIDGET(active->data));
 
 	gtk_widget_get_preferred_size(GTK_WIDGET(active->data), &minimum, NULL);
-	    TRACE("#### width, minimum.width %d %d\n",width,  minimum.width);
+	    WARN("#### width, minimum.width %d %d\n",width,  minimum.width);
 	width -= minimum.width;
      
 	// Work backwards from active button we show buttons that will fit.
@@ -197,7 +190,7 @@ private:
 	    gchar *name = (gchar *)g_object_get_data(G_OBJECT(children->data), "name");
 	    if (strcmp(name, "RFM_ROOT")==0) continue;
 	    gtk_widget_get_allocation(GTK_WIDGET(children->data), &allocation);
-	    TRACE("#### width, allocaltion.width %d %d\n",width,  allocation.width);
+	    WARN("#### width, allocaltion.width %d %d\n",width,  allocation.width);
 	    width -= allocation.width;
 	    if (width < 0) break;
 	    gtk_widget_show(GTK_WIDGET(children->data));
@@ -213,9 +206,23 @@ private:
 	    if (width < 0) break;
 	    gtk_widget_show(GTK_WIDGET(children->data));
 	}
+    }
+
+    void 
+    toggle_pathbar(const gchar *path){
+        // Hiding stuff which does not fit does not work until
+        // window has been shown. This is not yet the case on
+        // initial startup, so we skip that on first pass.
+        WARN("*** toggle_pathbar\n");
+	GList *children_list = 
+	    gtk_container_get_children(GTK_CONTAINER(pathbar_));
+
+        if (gtk_widget_is_visible(mainWindow)) showWhatFits(pathbar_, path, children_list);
+        else gtk_widget_show_all(GTK_WIDGET(pathbar_));
+
 
 	// Finally, we differentiate active button.
-	children = g_list_first(children_list);
+	GList *children = g_list_first(children_list);
 	for (;children && children->data; children=children->next){
 	    gchar *name = (gchar *)g_object_get_data(G_OBJECT(children->data), "name");
 	    if (strcmp(name, "RFM_ROOT")==0) continue;
@@ -294,7 +301,7 @@ private:
 	Pathbar *pathbar_p = (Pathbar *)arg[0];
 	gchar *path = (gchar *)arg[1];
 	GtkWidget *pathbar = pathbar_p->pathbar();
-	TRACE( "update_pathbar_f:: %s\n", path);
+	WARN( "update_pathbar_f:: %s\n", path);
 
 	if (!pathbar) return NULL;
 	if (!path){
@@ -306,7 +313,7 @@ private:
 	// Trim pathbar.
 	gchar **paths;
 	if (strcmp(path, G_DIR_SEPARATOR_S)==0){
-	    paths = (gchar **)malloc(2*sizeof(gchar *));
+	    paths = (gchar **)calloc(2, sizeof(gchar *));
 	    if (!paths){
 		g_warning("update_pathbar(): cannot malloc\n");
 		return NULL;
@@ -326,7 +333,7 @@ private:
 	    gchar *name = (gchar *)g_object_get_data(G_OBJECT(children->data), "name");
 	    if (strcmp(name, "RFM_ROOT")==0 || strcmp(name, "<")==0) continue;
 	    //gchar *p = g_strdup_printf("%s%c", paths[i], G_DIR_SEPARATOR);
-	    TRACE( "(%d) comparing %s <--> %s\n", i, name, paths[i]);
+	    WARN( "(%d) comparing %s <--> %s\n", i, name, paths[i]);
 	    if (paths[i] && strcmp(name, paths[i]) == 0){
 		g_free(pb_path);
 		const gchar *p = (const gchar *)g_object_get_data(G_OBJECT(children->data), "path");
@@ -336,7 +343,7 @@ private:
 	    }
 	    // Eliminate tail (only if tail will differ)
 	    if (paths[i] == NULL) break;
-	    TRACE( "Zapping tail: \"%s\"\n", paths[i]);
+	    WARN( "Zapping tail: \"%s\"\n", paths[i]);
 	    GList *tail = children;
 	    for (;tail && tail->data; tail = tail->next){
 		gchar *name  = (gchar *)g_object_get_data(G_OBJECT(tail->data), "name");
@@ -361,10 +368,10 @@ private:
 		g_strdup(paths[i]);
 	    g_free(pb_path);
 	    pb_path = g;
-	    TRACE( "+++***** setting pbpath --> %s\n", pb_path);
+	    WARN( "+++***** setting pbpath --> %s\n", pb_path);
 	    g_object_set_data(G_OBJECT(pb_button), "path", g_strdup(pb_path));
 	    g_signal_connect (G_OBJECT(pb_button) , "clicked", G_CALLBACK (callback), (void *)pathbar_p);
-	    
+	    gtk_widget_show(GTK_WIDGET(pb_button));
 	}
 	g_free(pb_path);
 	g_strfreev(paths);

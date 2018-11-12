@@ -39,7 +39,7 @@ private:
 
 public:
 
-    Page(Dialog<Type> *parent, const gchar *workdir):Pathbar<Type>(workdir){
+    Page(Dialog<Type> *parent, const gchar *workdir){
 	parent_ = parent;
 	pageChild_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
 	pageLabel_ = GTK_LABEL(gtk_label_new ("foobar"));
@@ -266,6 +266,8 @@ public:
 	g_free(g);
     }
     void setPageWorkdir(const gchar *dir){
+        // Avoid multiple resets...
+        if (this->workDir() && strcmp(dir, this->workDir())==0) return;
 	TRACE("setPageWorkdir: %s\n", dir);
 	this->setWorkDir(dir);
 	TRACE("update_pathbar: %s\n", dir);

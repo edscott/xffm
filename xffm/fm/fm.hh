@@ -25,7 +25,6 @@ public:
         Mime<Type>::mimeBuildHashes();
 	
         auto page = this->currentPageObject();
-        //page->setPageWorkdir(workdir);
 	// Default into iconview...
         page->setDefaultIconview(TRUE);
 	page->showIconview(1);
@@ -37,10 +36,7 @@ public:
         WARN("loading iconview page\n");
         auto notebook = (Notebook<Type> *)this;
         auto page = notebook->addPage(workdir);
-        
-        //while (gtk_events_pending())gtk_main_iteration();
-        if (workdir == NULL) workdir = g_strdup("xffm:root");
-        auto baseView = load(workdir);
+        auto baseView = load(page->workDir());
 	page->showIconview(1);
     }
 
@@ -55,7 +51,7 @@ public:
     BaseView<Type> *load(const gchar *workdir){
         auto notebook = (Notebook<Type> *)this;
 	auto page = notebook->currentPageObject();
-	WARN("adding rootview\n");
+	WARN("fm.hh::adding page: %s\n", workdir);
 	// Create BaseView object.
         auto baseView =  new BaseView<Type>(page, workdir);
         g_object_set_data(G_OBJECT(page->top_scrolled_window()), "baseView", baseView);

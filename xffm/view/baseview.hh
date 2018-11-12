@@ -211,6 +211,7 @@ public:
         if (g_file_test(path, G_FILE_TEST_EXISTS)){
 	    TRACE("%s is  valid path\n", path);
 	    if (!g_file_test(path, G_FILE_TEST_IS_DIR)){
+                // Not a directory, but valid path: activate item.
 		DBG("%s is not dir\n", path);
 		return LocalView<Type>::item_activated(this, treeModel, tpath, path);
 	    }
@@ -490,6 +491,8 @@ private:
         auto lastPath =  g_object_get_data(G_OBJECT(iconView_), "path");
         g_free(lastPath); 
         g_object_set_data(G_OBJECT(iconView_), "path", g_strdup(path_));
+
+        WARN("*** Baseview:: setPath()\n");
         if (g_file_test(path_, G_FILE_TEST_IS_DIR)){
             page_->setPageWorkdir(path_);
         } else {
