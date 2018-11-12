@@ -45,7 +45,7 @@ public:
                 g_free(buttonPath);
                 buttonPath=g;
             }
-	    WARN("adding  button %s from %s\n",text,path );
+	    TRACE("adding  button %s from %s\n",text,path );
             pb_button = pathbar_button( NULL, text);       
             gtk_box_pack_start (GTK_BOX (pathbar_), GTK_WIDGET(pb_button), FALSE, FALSE, 0);
             g_object_set_data(G_OBJECT(pb_button), "name", g_strdup(text));
@@ -65,7 +65,7 @@ public:
 
     void 
     update_pathbar(const gchar *path){
-	WARN( "update pathbar to %s\n", path);
+	TRACE( "update pathbar to %s\n", path);
 	void *arg[]={(void *)this, (void *)(path?g_strdup(path):NULL)};
 	util_c::context_function(update_pathbar_f, arg);
     }
@@ -146,7 +146,7 @@ private:
         //gtk_widget_realize(GTK_WIDGET(gtk_widget_get_toplevel(pathbar)));
 	//gtk_widget_get_allocation(pathbar, &allocation);
 	gtk_widget_get_allocation(gtk_widget_get_toplevel(pathbar), &allocation);
-	WARN("pathbar width=%d\n", allocation.width);
+	TRACE("pathbar width=%d\n", allocation.width);
 	gint width = allocation.width;
 	// First we hide all buttons, except "RFM_ROOT"
 	GList *children = g_list_last(children_list);
@@ -181,7 +181,7 @@ private:
 	gtk_widget_show(GTK_WIDGET(active->data));
 
 	gtk_widget_get_preferred_size(GTK_WIDGET(active->data), &minimum, NULL);
-	    WARN("#### width, minimum.width %d %d\n",width,  minimum.width);
+	    TRACE("#### width, minimum.width %d %d\n",width,  minimum.width);
 	width -= minimum.width;
      
 	// Work backwards from active button we show buttons that will fit.
@@ -190,7 +190,7 @@ private:
 	    gchar *name = (gchar *)g_object_get_data(G_OBJECT(children->data), "name");
 	    if (strcmp(name, "RFM_ROOT")==0) continue;
 	    gtk_widget_get_allocation(GTK_WIDGET(children->data), &allocation);
-	    WARN("#### width, allocaltion.width %d %d\n",width,  allocation.width);
+	    TRACE("#### width, allocaltion.width %d %d\n",width,  allocation.width);
 	    width -= allocation.width;
 	    if (width < 0) break;
 	    gtk_widget_show(GTK_WIDGET(children->data));
@@ -213,7 +213,7 @@ private:
         // Hiding stuff which does not fit does not work until
         // window has been shown. This is not yet the case on
         // initial startup, so we skip that on first pass.
-        WARN("*** toggle_pathbar\n");
+        TRACE("*** toggle_pathbar\n");
 	GList *children_list = 
 	    gtk_container_get_children(GTK_CONTAINER(pathbar_));
 
@@ -301,7 +301,7 @@ private:
 	Pathbar *pathbar_p = (Pathbar *)arg[0];
 	gchar *path = (gchar *)arg[1];
 	GtkWidget *pathbar = pathbar_p->pathbar();
-	WARN( "update_pathbar_f:: %s\n", path);
+	TRACE( "update_pathbar_f:: %s\n", path);
 
 	if (!pathbar) return NULL;
 	if (!path){
@@ -333,7 +333,7 @@ private:
 	    gchar *name = (gchar *)g_object_get_data(G_OBJECT(children->data), "name");
 	    if (strcmp(name, "RFM_ROOT")==0 || strcmp(name, "<")==0) continue;
 	    //gchar *p = g_strdup_printf("%s%c", paths[i], G_DIR_SEPARATOR);
-	    WARN( "(%d) comparing %s <--> %s\n", i, name, paths[i]);
+	    TRACE( "(%d) comparing %s <--> %s\n", i, name, paths[i]);
 	    if (paths[i] && strcmp(name, paths[i]) == 0){
 		g_free(pb_path);
 		const gchar *p = (const gchar *)g_object_get_data(G_OBJECT(children->data), "path");
@@ -343,7 +343,7 @@ private:
 	    }
 	    // Eliminate tail (only if tail will differ)
 	    if (paths[i] == NULL) break;
-	    WARN( "Zapping tail: \"%s\"\n", paths[i]);
+	    TRACE( "Zapping tail: \"%s\"\n", paths[i]);
 	    GList *tail = children;
 	    for (;tail && tail->data; tail = tail->next){
 		gchar *name  = (gchar *)g_object_get_data(G_OBJECT(tail->data), "name");
@@ -368,7 +368,7 @@ private:
 		g_strdup(paths[i]);
 	    g_free(pb_path);
 	    pb_path = g;
-	    WARN( "+++***** setting pbpath --> %s\n", pb_path);
+	    TRACE( "+++***** setting pbpath --> %s\n", pb_path);
 	    g_object_set_data(G_OBJECT(pb_button), "path", g_strdup(pb_path));
 	    g_signal_connect (G_OBJECT(pb_button) , "clicked", G_CALLBACK (callback), (void *)pathbar_p);
 	    gtk_widget_show(GTK_WIDGET(pb_button));

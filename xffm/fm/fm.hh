@@ -33,7 +33,7 @@ public:
     }
 
     void addPage(const gchar *workdir){
-        WARN("loading iconview page\n");
+        TRACE("loading iconview page\n");
         auto notebook = (Notebook<Type> *)this;
         auto page = notebook->addPage(workdir);
         auto baseView = load(page->workDir());
@@ -41,7 +41,7 @@ public:
     }
 
     void removePage(GtkWidget *child){
-        WARN("removePage iconview page\n");
+        TRACE("removePage iconview page\n");
         auto notebook = (Notebook<Type> *)this;
         //auto baseView = notebook->baseView(child);
         notebook->removePage(child);
@@ -51,7 +51,7 @@ public:
     BaseView<Type> *load(const gchar *workdir){
         auto notebook = (Notebook<Type> *)this;
 	auto page = notebook->currentPageObject();
-	WARN("fm.hh::adding page: %s\n", workdir);
+	TRACE("fm.hh::adding page: %s\n", workdir);
 	// Create BaseView object.
         auto baseView =  new BaseView<Type>(page, workdir);
         g_object_set_data(G_OBJECT(page->top_scrolled_window()), "baseView", baseView);

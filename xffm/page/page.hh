@@ -126,7 +126,7 @@ public:
 	auto baseView = (BaseView<Type> *)
 	    g_object_get_data(G_OBJECT(top_scrolled_window()), "baseView");
     	if (baseView){
-            WARN("now deleting BaseView...\n");
+            TRACE("now deleting BaseView...\n");
             delete baseView;
         } else {
             ERROR("not deleting BaseView object\n");
@@ -383,7 +383,7 @@ public:
                 -1};
             for (int i=0; navigationKeys[i] > 0; i++){
                 if (event->keyval == navigationKeys[i]) {
-                    WARN("navigation key\n");
+                    TRACE("navigation key\n");
 #ifdef XFFM_CC
                     return baseView()->keyboardEvent(event);
 #else

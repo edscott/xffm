@@ -65,7 +65,7 @@ public:
         g_hash_table_replace(pageHash_, (void *)page->pageChild(), (void *)page);
         gtk_notebook_set_current_page (notebook_,pageNumber);
 	// This will set the workdir for completion
-	WARN("Notebook::   addPage(%s)\n", workdir);      
+	TRACE("Notebook::   addPage(%s)\n", workdir);      
         page->setPageWorkdir(workdir); 
 	g_free(workdir);
 	

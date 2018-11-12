@@ -333,7 +333,7 @@ public:
 #define format "file:/"
     gboolean
     setDndData(GtkSelectionData *selection_data, GList *selection_list){
-        WARN( "setDndData() baseview default.\n");
+        TRACE( "setDndData() baseview default.\n");
         gchar *dndData = NULL;
         for(GList *tmp = selection_list; tmp; tmp = tmp->next) {
             GtkTreePath *tpath = (GtkTreePath *)tmp->data;
@@ -347,8 +347,8 @@ public:
                 g_free(dndData);
                 dndData = e;
             }
-            WARN("dndData: \"%s\"\n", dndData);
-            WARN("append: %s -> \"%s\"\n", path, dndData);
+            TRACE("dndData: \"%s\"\n", dndData);
+            TRACE("append: %s -> \"%s\"\n", path, dndData);
             g_free(path);
         }
 
