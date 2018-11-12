@@ -446,11 +446,11 @@ public:
     add_local_item(GtkListStore *list_store, xd_t *xd_p){
         //FIXME need for shows_hidden only in monitor_ function...
         //      monitor must reload when showHidden changes...
-        gboolean showHidden = (Dialog<Type>::getSettingInteger("LocalView", "ShowHidden") > 0);
+        gboolean showHidden = (Settings<Type>::getSettingInteger("LocalView", "ShowHidden") > 0);
         if (!showHidden && xd_p->d_name[0] == '.'  && strcmp("..", xd_p->d_name)){
             return;
         }
-        gboolean showBackups = (Dialog<Type>::getSettingInteger("LocalView", "ShowBackups") > 0);
+        gboolean showBackups = (Settings<Type>::getSettingInteger("LocalView", "ShowBackups") > 0);
         if (!showBackups && backupType(xd_p->d_name)){
             return;
         }

@@ -12,7 +12,6 @@ class EntryResponse {
     using page_c = Page<Type>;
 
 
-    gchar *entryIcon_;
     GtkLabel *responseLabel_;
     GtkLabel *entryLabel_;
     GtkLabel *checkboxLabel_;
@@ -59,8 +58,7 @@ public:
         gtk_widget_show(GTK_WIDGET(vbox));
 	gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area(GTK_DIALOG (response_))), GTK_WIDGET(vbox), FALSE, FALSE, 0);
 
-	hbox_ = gtk_c::hboxNew (TRUE, 6);
-        gtk_widget_show(GTK_WIDGET(hbox_));
+	hbox_ = gtk_c::hboxNew (FALSE, 6);
 
 	responseLabel_ = GTK_LABEL(gtk_label_new (""));
 	gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET(responseLabel_), TRUE, TRUE, 0);
@@ -72,21 +70,22 @@ public:
 	    GdkPixbuf *p = Icons<Type>::get_theme_pixbuf(icon, -48);
 	    if (p){
 		auto image = GTK_IMAGE(gtk_image_new_from_pixbuf(p));
-		gtk_box_pack_start (GTK_BOX (hbox_), GTK_WIDGET(image), TRUE, TRUE, 0);
+		gtk_box_pack_start (GTK_BOX (hbox_), GTK_WIDGET(image), FALSE, FALSE, 0);
 		gtk_widget_show(GTK_WIDGET(image));
-		DBG("Loaded icon %s\n", icon);
+		TRACE("Loaded icon %s\n", icon);
 	    } else {
-		DBG("Cannot load icon %s\n", icon);
+		TRACE("Cannot load icon %s\n", icon);
 	    }
 	}
 	entryLabel_ = GTK_LABEL(gtk_label_new (""));
-	gtk_box_pack_start (GTK_BOX (hbox_), GTK_WIDGET(entryLabel_), TRUE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (hbox_), GTK_WIDGET(entryLabel_), FALSE, TRUE, 0);
 	
         entry_ = GTK_ENTRY(gtk_entry_new ());
         gtk_box_pack_start (GTK_BOX (hbox_), GTK_WIDGET(entry_), TRUE, TRUE, 0);
         g_object_set_data(G_OBJECT(entry_),"response", response_);
         g_signal_connect (G_OBJECT (entry_), "activate", 
                 ENTRY_CALLBACK (EntryResponse<Type>::activate_entry), (void *)response_);
+        gtk_widget_show(GTK_WIDGET(hbox_));
 
         bashCompletion_ = gtk_entry_completion_new();
         gtk_entry_completion_set_popup_completion(bashCompletion_, TRUE);
@@ -221,8 +220,8 @@ private:
 	if (Mime<Type>::fixedInTerminal(text)){
 	    gchar *a = Mime<Type>::baseCommand(text);
 	    gtk_toggle_button_set_active(checkButton, TRUE);
-	    Dialog<Type>::setSettingInteger("Terminal", a, 1);
-	    Dialog<Type>::writeSettings();
+	    Settings<Type>::setSettingInteger("Terminal", a, 1);
+	    Settings<Type>::writeSettings();
 	    g_free(a);
 	}
 

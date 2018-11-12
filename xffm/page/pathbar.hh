@@ -19,6 +19,7 @@ class Pathbar
     
 public:
     Pathbar(const gchar *path) {
+	WARN("Pathbar(%s)\n", path);
 	pathbar_ = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
         setStyle();
 
@@ -45,6 +46,7 @@ public:
                 g_free(buttonPath);
                 buttonPath=g;
             }
+	    WARN("adding  button %s from %s\n",text,path );
             pb_button = pathbar_button( NULL, text);       
             gtk_box_pack_start (GTK_BOX (pathbar_), GTK_WIDGET(pb_button), FALSE, FALSE, 0);
             g_object_set_data(G_OBJECT(pb_button), "name", g_strdup(text));
@@ -55,7 +57,7 @@ public:
         }
         g_free(buttonPath);
         g_strfreev(dirs);
-        update_pathbar(path);
+        //update_pathbar(path);
 #endif   
     }
 
@@ -64,7 +66,7 @@ public:
 
     void 
     update_pathbar(const gchar *path){
-	TRACE( "update pathbar to %s\n", path);
+	WARN( "update pathbar to %s\n", path);
 	void *arg[]={(void *)this, (void *)(path?g_strdup(path):NULL)};
 	util_c::context_function(update_pathbar_f, arg);
     }
@@ -129,7 +131,6 @@ private:
 #else
                 page->setPageWorkdir(path);
 #endif          
-
 		/*
 		view_c *view_p = (view_c *)g_object_get_data(G_OBJECT(pathbar_), "view_p");
 		if (!view_p) g_error("view_p data not set for g_object pathbar!\n");

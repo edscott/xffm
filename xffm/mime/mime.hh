@@ -5,6 +5,7 @@
 //#include <libxml/tree.h>
 #include <string.h>
 #include <errno.h>
+#include "common/settings.hh"
 #include "common/util.hh"
 
 // For starters, we need mime_type() and mime_file(), 
@@ -154,8 +155,11 @@ public:
         const gchar *type;
         const gchar *p;
         if (!application_hash_sfx) {
-            ERROR("!application_hash_sfx\n");
-            return NULL;
+	    mimeBuildHashes();
+	    if (!application_hash_sfx) {
+		ERROR("!application_hash_sfx\n");
+		return NULL;
+	    }
         }
         TRACE("mime-module, locate_mime_t looking in sfx hash for \"%s\"\n", file);
 
@@ -604,10 +608,12 @@ public:
 	if (fixedInTerminal(commandFmt)) return TRUE;
 	gchar *a = baseCommand(commandFmt);
 	gboolean retval = FALSE;
-	if (g_key_file_has_group(keyFile, "Terminal") &&
+	if (Settings<Type>::keyFileHasGroupKey("Terminal",  a) &&
+		Settings<Type>::getSettingInteger("Terminal", a))retval = TRUE;
+	/*if (g_key_file_has_group(keyFile, "Terminal") &&
 	    g_key_file_has_key (keyFile, "Terminal", a, NULL) && 
 	    Dialog<Type>::getSettingInteger("Terminal", a))
-		retval = TRUE;
+		retval = TRUE;*/
 	g_free(a);
 	return retval;
     }

@@ -335,7 +335,7 @@ public:
             while (gtk_events_pending())gtk_main_iteration();
             if (state == 0) setVpanePosition(0);
             else {
-                gint position = parent_->getSettingInteger("window", "height");
+                gint position = Settings<Type>::getSettingInteger("window", "height");
                 if (position < 0) position = 200;
                 else position /= 2;
                 setVpanePosition(position);

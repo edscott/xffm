@@ -1,6 +1,6 @@
 #ifndef XF_LOCALITEMPOPUP__HH
 # define XF_LOCALITEMPOPUP__HH
-#include "common/comboresponse.hh"
+#include "response/comboresponse.hh"
 #include "view/fstab.hh"
 
 namespace xf
@@ -326,7 +326,7 @@ public:
             GtkWidget *v;
             if (p->toggleID){
                 v = gtk_check_menu_item_new_with_label(_(p->label));
-                if (Dialog<Type>::getSettingInteger("LocalView", p->toggleID) > 0){
+                if (Settings<Type>::getSettingInteger("LocalView", p->toggleID) > 0){
                    gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(v), TRUE);
                 } 
             }
@@ -342,7 +342,7 @@ public:
 
     static gchar *
     defaultMimeTypeApp(const gchar *mimetype, const gchar *fileInfo){
-	gchar *defaultApp = Dialog<Type>::getSettingString("MimeTypeApplications", mimetype);
+	gchar *defaultApp = Settings<Type>::getSettingString("MimeTypeApplications", mimetype);
 	if (!defaultApp) {
 	    const gchar **apps = Mime<Type>::locate_apps(mimetype);
 	    if (apps && *apps) defaultApp = g_strdup(*apps);
@@ -444,7 +444,7 @@ public:
     {
         auto item = (const gchar *)data;
         gint value; 
-        if (Dialog<Type>::getSettingInteger("LocalView", item) > 0){
+        if (Settings<Type>::getSettingInteger("LocalView", item) > 0){
             value = 0;
             gtk_check_menu_item_set_active(menuItem, FALSE);
         } else {
@@ -454,8 +454,8 @@ public:
         auto baseView = (BaseView<Type> *)g_object_get_data(G_OBJECT(localPopUp), "baseView");
         auto path = (const gchar *)g_object_get_data(G_OBJECT(localPopUp), "path");
         
-        Dialog<Type>::setSettingInteger("LocalView", item, value);
-	Dialog<Type>::writeSettings();
+        Settings<Type>::setSettingInteger("LocalView", item, value);
+	Settings<Type>::writeSettings();
         baseView->loadModel(path);
     }
 
@@ -667,8 +667,8 @@ public:
 	    return;
 	}
 	// save value as default for mimetype
-	Dialog<Type>::setSettingString("MimeTypeApplications", mimetype, response);
-	Dialog<Type>::writeSettings();
+	Settings<Type>::setSettingString("MimeTypeApplications", mimetype, response);
+	Settings<Type>::writeSettings();
 	gchar *command;
 	// Is the terminal flag set?
 	if (Mime<Type>::runInTerminal(response)){
@@ -717,8 +717,8 @@ public:
 	if (Mime<Type>::fixedInTerminal(text)){
 	    gchar *a = Mime<Type>::baseCommand(text);
 	    gtk_toggle_button_set_active(checkButton, TRUE);
-	    Dialog<Type>::setSettingInteger("Terminal", a, 1);
-	    Dialog<Type>::writeSettings();
+	    Settings<Type>::setSettingInteger("Terminal", a, 1);
+	    Settings<Type>::writeSettings();
 	    g_free(a);
 	}
 
@@ -784,8 +784,8 @@ private:
 	gint value;
 	if (gtk_toggle_button_get_active(togglebutton)) value = 1; else value = 0;
 	gchar *a = Mime<Type>::baseCommand(app);
-	Dialog<Type>::setSettingInteger("Terminal", a, value);
-	Dialog<Type>::writeSettings();
+	Settings<Type>::setSettingInteger("Terminal", a, value);
+	Settings<Type>::writeSettings();
 	g_free(a);
     }
     
@@ -800,8 +800,8 @@ private:
 	gint value;
 	if (gtk_toggle_button_get_active(togglebutton)) value = 1; else value = 0;
 	gchar *a = Mime<Type>::baseCommand(path);
-	Dialog<Type>::setSettingInteger("Terminal", a, value);
-	Dialog<Type>::writeSettings();
+	Settings<Type>::setSettingInteger("Terminal", a, value);
+	Settings<Type>::writeSettings();
 	g_free(a);
     }
 

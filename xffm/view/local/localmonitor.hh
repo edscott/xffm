@@ -132,9 +132,10 @@ public:
 
     gboolean
     add_new_item(GFile *file){
-        TRACE("add_new_item ...\n");
        xd_t *xd_p = get_xd_p(file);
         if (xd_p) {
+	    WARN("add_new_item ...(%s)\n", xd_p->d_name);
+	    if (xd_p->d_name[0] == '.' && !shows_hidden_) return FALSE;
             // here we should insert according to sort order...
             LocalView<Type>::insertLocalItem(store_, xd_p);
             // this just appends:
@@ -230,6 +231,11 @@ public:
     restat_item(GFile *src){
         TRACE("restat_item ...\n");
         gchar *basename = g_file_get_basename(src);
+	if (basename[0] == '.' && !shows_hidden_) {
+	    g_free(basename);
+	    return FALSE;
+	}
+	
         if (!g_hash_table_lookup(itemsHash_, basename)) {
             g_free(basename);
             return FALSE; 

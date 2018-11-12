@@ -1,7 +1,7 @@
 #ifndef XF_HBUTTONBOX
 #define XF_HBUTTONBOX
 
-#include "common/dialog.hh"
+#include "common/settings.hh"
 
 namespace xf {
 template <class Type> class Dialog;
@@ -78,7 +78,7 @@ private:
     static GtkScale *newSizeScale(void){
 	auto size_scale = GTK_SCALE(gtk_scale_new_with_range(GTK_ORIENTATION_HORIZONTAL, 6.0, 24.0, 6.0));
         // Load saved value fron xffm+/settings.ini file (if any)
-        gint size = Dialog<Type>::getSettingInteger("xfterm", "fontSize");
+        gint size = Settings<Type>::getSettingInteger("xfterm", "fontSize");
         if (size < 0) size = DEFAULT_FIXED_FONT_SIZE;
         gtk_range_set_value(GTK_RANGE(size_scale), size);
         gtk_range_set_increments (GTK_RANGE(size_scale), 2.0, 6.0);

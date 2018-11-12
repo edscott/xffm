@@ -1,6 +1,7 @@
 
 TODO: 
-  * bug: open with xffm ../ and see how it is borked
+  * bug: monitor is added hidden files created, even when show hidden is off
+
   * add bookmarks to rootview
   * Enable localview monitor.
   * enable localview open
