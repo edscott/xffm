@@ -1,7 +1,7 @@
 #ifndef SIGNALS__HH
 # define SIGNALS__HH
 
-#include "common/types.h"
+#include "types.h"
 #include "common/print.hh"
 #include "common/run.hh"
 #include "common/util.hh"

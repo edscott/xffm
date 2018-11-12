@@ -4,7 +4,7 @@
 #include "common/util.hh"
 #include "common/print.hh"
 #ifdef XFFM_CC
-# include "view/baseview.hh"
+# include "fm/view/baseview.hh"
 #endif
 
 namespace xf {

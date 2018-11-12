@@ -1,10 +1,10 @@
-#ifndef RESPONSE_HH
-#define RESPONSE_HH
-#include "common/types.h"
+#ifndef XF_PASSWDRESPONSE_HH
+#define XF_PASSWDRESPONSE_HH
+#include "types.h"
 #include "common/gtk.hh"
 #include "common/pixbuf.hh"
 #include "common/util.hh"
-#include "common/dialog.hh"
+#include "dialog/dialog.hh"
 
 namespace xf {
 template <class Type>

@@ -1,3 +1,4 @@
+add_subdirectory(icons)
     
 add_executable(xffm xffm.cc)
 include_directories(

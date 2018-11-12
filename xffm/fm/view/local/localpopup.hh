@@ -1,7 +1,7 @@
 #ifndef XF_LOCALITEMPOPUP__HH
 # define XF_LOCALITEMPOPUP__HH
 #include "response/comboresponse.hh"
-#include "view/fstab.hh"
+#include "fm/view/fstab.hh"
 
 namespace xf
 {

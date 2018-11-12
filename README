@@ -1,13 +1,8 @@
 
 TODO: 
-  * bug: monitor is added hidden files created, even when show hidden is off
 
   * add bookmarks to rootview
-  * Enable localview monitor.
-  * enable localview open
-  * enable localview openwith
   * enable localview popup
-     - openwith xx
      - duplicate/symlink/rename
      - cutnpaste
      - properties
@@ -16,10 +11,7 @@ TODO:
      - iconview need not use internal DnD. Use special DnD to enable multiple selections
        Ctl selection was necessary in treeview and to avoid selection of somthing off screen
        keep it that way.
-  * enable treeview now!
   * enable listview
-  * enable showhidden
-  * enable show backups
   * enable sort modes 
      - Type
      - Name
@@ -27,9 +19,6 @@ TODO:
      - up/down
 
 Bugs:
-  * bug: symlink to directory does not show correct icon and is not grouped with directories.
-  * bug: no completion on 'executable ""' when exeecutable is specified, should display file options (all).
-  * bug: on starting xffm/xfterm with no path, toolbar does not show full path.
   * bug: do a "git branch whatever" in script mode. Script will expect input
          and cannot be terminated by menu signals...
 	 update: on a script command that loops, the kill pid is incorrect.
@@ -40,7 +29,6 @@ Bugs:
 Cleanups:  
 
   * transform start.hh into a class template: affects xfterm.cc and xffm.cc
-  * simple rcfile for environment, monitor changes and reload (font size, window size)
   * 20+ files with FIXMEs
 
 

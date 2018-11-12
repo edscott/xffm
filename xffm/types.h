@@ -1,5 +1,31 @@
 #ifndef TYPES_H
 # define TYPES_H
+
+
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+
+#include <glob.h>
+#include <limits.h>
+#include <memory.h>
+#include <signal.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <dirent.h>
+#include <pwd.h>
+#include <grp.h>
+
+#include <iostream>
+
+#include <gtk/gtk.h>
+#include <gdk/gdkx.h>
+#include <gmodule.h>
+#include <X11/Xlib.h>
+#include <X11/Xatom.h>
+
 namespace xf {
 #ifdef XFFM_CC
 template <class Type> class fmDialog;

@@ -2,7 +2,7 @@
 #define XF_PAGE_CHILD
 #include "common/run.hh"
 #include "common/util.hh"
-#include "completion/completion.hh"
+#include "term/completion/completion.hh"
 #include "vbuttonbox.hh"
 #include "hbuttonbox.hh"
 #include "vpane.hh"
@@ -10,7 +10,7 @@
 #include "runbutton.hh"
 #include "pathbar.hh"
 #include "pagebase.hh"
-#include "signals/page.hh"
+#include "dialog/signals/page.hh"
 
 namespace xf{
 

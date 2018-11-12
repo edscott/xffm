@@ -1,7 +1,7 @@
 #ifndef XF_DIALOG_SIGNALS
 #define XF_DIALOG_SIGNALS
-#include "common/types.h"
-#include "common/notebook.hh"
+#include "types.h"
+#include "dialog/notebook.hh"
 #include <memory>
 
 namespace xf {

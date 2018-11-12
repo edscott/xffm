@@ -2,16 +2,16 @@
 # define XF_FM_HH
 
 
-#include "common/types.h"
+#include "types.h"
 #include "common/icons.hh"
 #include "common/pixbuf.hh"
 #include "common/gtk.hh"
 #include "common/tooltip.hh"
-#include "common/dialog.hh"
+#include "common/print.hh"
 #include "common/util.hh"
 
-#include "common/print.hh"
-#include "completion/csh.hh"
+#include "dialog/dialog.hh"
+#include "term/completion/csh.hh"
 #include "view/baseview.hh"
 
 namespace xf

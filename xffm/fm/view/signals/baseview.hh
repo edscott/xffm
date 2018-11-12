@@ -1,7 +1,7 @@
 #ifndef XF_BASEVIEWSIGNALS__HH
-# define XF_BASEVIEW__HH
+# define XF_BASEVIEWSIGNALS__HH
 #include "common/pixbuf.hh"
-#include "view/local/localview.hh"
+#include "fm/view/local/localview.hh"
 
 #define SET_DIR(x) x|=0x01
 #define IS_DIR (x&0x01)

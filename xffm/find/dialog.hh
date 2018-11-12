@@ -1,6 +1,6 @@
 #ifndef XFDIALOG__HH
 # define XFDIALOG__HH
-#include "common/types.h"
+#include "types.h"
 #include "common/icons.hh"
 #include "common/pixbuf.hh"
 #include "common/gtk.hh"

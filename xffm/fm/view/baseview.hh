@@ -24,9 +24,9 @@ enum
   NUM_COLS
 };
 
-#include "view/rootview.hh"
-#include "view/local/localview.hh"
-#include "view/local/localmonitor.hh"
+#include "rootview.hh"
+#include "local/localview.hh"
+#include "local/localmonitor.hh"
 #include "signals/baseview.hh"
 
 // Flag bits:

@@ -98,7 +98,7 @@
 // FIXME: test for gnu grep...
 #define GNU_GREP 1
 
-#include "common/types.h"
+#include "types.h"
 
 typedef struct globber_t {
     int options;

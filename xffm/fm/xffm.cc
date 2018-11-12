@@ -4,33 +4,9 @@
  */
 
 #define XFFM_CC
-#include  "config.h"
+#include "config.h"
+#include "types.h"
 
-
-
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-
-#include <glob.h>
-#include <limits.h>
-#include <memory.h>
-#include <signal.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <dirent.h>
-#include <pwd.h>
-#include <grp.h>
-
-#include <iostream>
-
-#include <gtk/gtk.h>
-#include <gdk/gdkx.h>
-#include <gmodule.h>
-#include <X11/Xlib.h>
-#include <X11/Xatom.h>
 
 #define FORCE_CORE
 #ifdef FORCE_CORE
@@ -38,7 +14,6 @@
 # include <sys/resource.h>
 #endif
 
-#include "common/types.h"
 static const gchar *xffmProgram;
 static const gchar *xftermProgram;
 static const gchar *xffindProgram;
@@ -46,7 +21,7 @@ static const gchar *xffindProgram;
 
 
 #include "common/intl.h"
-#include "common/response.hh"
+#include "response/passwdresponse.hh"
 #include "fm.hh"
 
 #include "find/fgr.hh"
@@ -61,7 +36,7 @@ main (int argc, char *argv[]) {
     xffmProgram = argv[0];
     // common stuff
     // FIXME: this should be called as a class 
-#include "common/startup.hh"
+#include "dialog/startup.hh"
 
     auto xffm = new(xf::fmDialog<double>)(path);
     xffm->setDialogTitle("Fm");

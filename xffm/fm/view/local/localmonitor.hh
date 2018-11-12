@@ -9,7 +9,6 @@ class LocalMonitor {
     GFile *gfile_;
     GFileMonitor *monitor_;
     GHashTable *itemsHash_;
-    gboolean shows_hidden_;
     GtkListStore *store_;
     BaseView<Type> *baseView_;
         
@@ -34,6 +33,7 @@ class LocalMonitor {
 public:    
     LocalMonitor(GtkTreeModel *treeModel, const gchar *path, BaseView<Type> *baseView){
         baseView_ = baseView;
+        gboolean showHidden = (Settings<Type>::getSettingInteger("LocalView", "ShowHidden") > 0);
         itemsHash_ = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
         cancellable_ = g_cancellable_new ();
         gfile_ = g_file_new_for_path (path);
@@ -133,9 +133,10 @@ public:
     gboolean
     add_new_item(GFile *file){
        xd_t *xd_p = get_xd_p(file);
+        gboolean showHidden = (Settings<Type>::getSettingInteger("LocalView", "ShowHidden") > 0);
         if (xd_p) {
-	    WARN("add_new_item ...(%s)\n", xd_p->d_name);
-	    if (xd_p->d_name[0] == '.' && !shows_hidden_) return FALSE;
+	    TRACE("add_new_item ...(%s) shows:hidden=%d\n", xd_p->d_name, showHidden);
+	    if (xd_p->d_name[0] == '.' && !showHidden) return FALSE;
             // here we should insert according to sort order...
             LocalView<Type>::insertLocalItem(store_, xd_p);
             // this just appends:
@@ -210,7 +211,7 @@ public:
 	}
 
         gchar *iconName = LocalView<Type>::get_iconname(path);
-        WARN("localmonitor stat_func(): iconname=%s\n", iconName);
+        TRACE("localmonitor stat_func(): iconname=%s\n", iconName);
         GdkPixbuf *pixbuf = Pixbuf<Type>::get_pixbuf(iconName,  GTK_ICON_SIZE_DIALOG);
 
 	gtk_list_store_set (store, iter, 
@@ -231,7 +232,8 @@ public:
     restat_item(GFile *src){
         TRACE("restat_item ...\n");
         gchar *basename = g_file_get_basename(src);
-	if (basename[0] == '.' && !shows_hidden_) {
+        gboolean showHidden = (Settings<Type>::getSettingInteger("LocalView", "ShowHidden") > 0);
+	if (basename[0] == '.' && !showHidden) {
 	    g_free(basename);
 	    return FALSE;
 	}
