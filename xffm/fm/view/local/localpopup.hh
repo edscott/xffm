@@ -48,14 +48,14 @@ public:
 	    {N_("Open with"), (void *)openWith, (void *) localItemPopUp},
 	    {N_("Run Executable..."), (void *)runWith, (void *) localItemPopUp},
 	    {N_("Extract files from the archive"), (void *)noop, (void *) localItemPopUp},
+	    {N_("Mount the volume associated with this folder"), (void *)mount, (void *) localItemPopUp},
+	    {N_("Unmount the volume associated with this folder"), (void *)mount, (void *) localItemPopUp},
+            {N_("Add bookmark"), (void *)addBookmark, (void *) localItemPopUp},
+            {N_("Remove bookmark"), (void *)removeBookmark, (void *) localItemPopUp},
 
 	    
 	    {N_("Open in New Tab"), (void *)noop, (void *) localItemPopUp},
 	    {N_("Create a compressed archive with the selected objects"), (void *)noop, (void *) localItemPopUp},
-	    {N_("Mount the volume associated with this folder"), (void *)mount, (void *) localItemPopUp},
-	    {N_("Unmount the volume associated with this folder"), (void *)mount, (void *) localItemPopUp},
-            {N_("Add bookmark"), (void *)noop, (void *) localItemPopUp},
-            {N_("Remove bookmark"), (void *)noop, (void *) localItemPopUp},
 	    
 	    //common buttons /(also an iconsize +/- button)
 	    {N_("Copy"), (void *)noop, (void *) localItemPopUp},
@@ -216,11 +216,19 @@ private:
             }
         }
 
+	// bookmark options
+        w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Add bookmark"));
+        gtk_widget_set_sensitive(w, TRUE);
+        w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Remove bookmark"));
+        gtk_widget_set_sensitive(w, TRUE);
+	
+
         // mount options
         if (Fstab<Type>::isMounted(path)){
             w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Unmount the volume associated with this folder"));
             gtk_widget_set_sensitive(w, TRUE);
         } else {
+            w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Unmount the volume associated with this folder"));
             gtk_widget_set_sensitive(w, FALSE);
             w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Mount the volume associated with this folder"));
             if (Fstab<Type>::isInFstab(path)){
@@ -470,16 +478,53 @@ public:
     }
 
     static void
-    AddBookmark(GtkMenuItem *menuItem, gpointer data)
+    addBookmark(GtkMenuItem *menuItem, gpointer data)
     {
-        DBG("Add bookmark\n");
+	// FIXME: put basics into rootview
+        TRACE("Add bookmark\n");
+	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
+	gint i=0;
+	gchar *item;
+	do {
+	    item = g_strdup_printf("item-%0d", i++);
+	    if (Settings<Type>::keyFileHasGroupKey("Bookmarks", item)){
+		gchar *g = Settings<Type>::getSettingString("Bookmarks", item);
+		if (strcmp(g, path) ==0){
+		    DBG("%s already bookmarked\n", path);
+		    g_free(g);
+		    g_free(item);
+		    return;
+		}
+	    } else break;
+	} while(TRUE);
+	Settings<Type>::setSettingString("Bookmarks", item, path);
+	g_free(item);
+	Settings<Type>::writeSettings();
     }
 
     static void
-    RemoveBookmark(GtkMenuItem *menuItem, gpointer data)
+    removeBookmark(GtkMenuItem *menuItem, gpointer data)
     {
+	// FIXME: put basics into rootview
         DBG("Remove bookmark\n");
+	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
+	gint i=0;
+	gchar *item;
+	do {
+	    item = g_strdup_printf("item-%0d", i++);
+	    if (Settings<Type>::keyFileHasGroupKey("Bookmarks", item)){
+		gchar *g = Settings<Type>::getSettingString("Bookmarks", item);
+		if (strcmp(g, path) ==0){
+		    Settings<Type>::removeKey("Bookmarks", item);
+		    g_free(g);
+		    g_free(item);
+		    Settings<Type>::writeSettings();
+		    return;
+		}
+	    } else break;
+	} while(TRUE);
     }
+
 
     static void
     noop(GtkMenuItem *menuItem, gpointer data)

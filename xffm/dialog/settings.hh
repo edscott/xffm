@@ -95,6 +95,12 @@ public:
         } 
         return value;
    }
+   
+   static gboolean
+   removeKey(const gchar *group, const gchar *key){
+       return g_key_file_remove_key (keyFile, group, key, NULL);
+   }
+
    static gint 
    getSettingInteger(const gchar *group, const gchar *item){
         gint value=-1;
