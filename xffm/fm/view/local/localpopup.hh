@@ -48,14 +48,14 @@ public:
 	    {N_("Open with"), (void *)openWith, (void *) localItemPopUp},
 	    {N_("Run Executable..."), (void *)runWith, (void *) localItemPopUp},
 	    {N_("Extract files from the archive"), (void *)noop, (void *) localItemPopUp},
+	    {N_("Open in New Tab"), (void *)newTab, (void *) localItemPopUp},
+	    {N_("Create a compressed archive with the selected objects"), (void *)tarball, (void *) localItemPopUp},
 	    {N_("Mount the volume associated with this folder"), (void *)mount, (void *) localItemPopUp},
 	    {N_("Unmount the volume associated with this folder"), (void *)mount, (void *) localItemPopUp},
             {N_("Add bookmark"), (void *)addBookmark, (void *) localItemPopUp},
             {N_("Remove bookmark"), (void *)removeBookmark, (void *) localItemPopUp},
 
 	    
-	    {N_("Open in New Tab"), (void *)noop, (void *) localItemPopUp},
-	    {N_("Create a compressed archive with the selected objects"), (void *)noop, (void *) localItemPopUp},
 	    
 	    //common buttons /(also an iconsize +/- button)
 	    {N_("Copy"), (void *)noop, (void *) localItemPopUp},
@@ -215,6 +215,15 @@ private:
                 gtk_widget_set_sensitive(w, FALSE); // WIP
             }
         }
+
+        //////  Directory options
+
+        // open in new tab
+        w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Open in New Tab"));
+        gtk_widget_set_sensitive(w, TRUE);
+        // Create compressed tarball
+         w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Create a compressed archive with the selected objects"));
+        gtk_widget_set_sensitive(w, TRUE);
 
 	// bookmark options
         if (!RootView<Type>::isBookmarked(path)) {
@@ -508,6 +517,26 @@ public:
         reloadIcons(baseView);
     }
 
+
+
+    static void
+    newTab(GtkMenuItem *menuItem, gpointer data)
+    {
+	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
+	auto baseView =  (BaseView<Type> *)g_object_get_data(G_OBJECT(data), "baseView");
+	auto page = baseView->page();
+        auto dialog = (fmDialog<Type> *)page->parent();
+        dialog->addPage(path);
+    }
+
+
+    static void
+    tarball(GtkMenuItem *menuItem, gpointer data)
+    {
+	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
+	auto baseView =  (BaseView<Type> *)g_object_get_data(G_OBJECT(data), "baseView");
+        DBG("tarball\n");
+    }
 
     static void
     noop(GtkMenuItem *menuItem, gpointer data)
