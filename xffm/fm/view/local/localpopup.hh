@@ -217,10 +217,13 @@ private:
         }
 
 	// bookmark options
-        w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Add bookmark"));
-        gtk_widget_set_sensitive(w, TRUE);
-        w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Remove bookmark"));
-        gtk_widget_set_sensitive(w, TRUE);
+        if (!RootView<Type>::isBookmarked(path)) {
+            w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Add bookmark"));
+            gtk_widget_set_sensitive(w, TRUE);
+        } else {
+            w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Remove bookmark"));
+            gtk_widget_set_sensitive(w, TRUE);
+        }
 	
 
         // mount options
@@ -478,51 +481,31 @@ public:
     }
 
     static void
+    reloadIcons(BaseView<Type> *baseView){
+	if (!BaseView<Type>::validBaseView(baseView)) return;
+        auto page = baseView->page();
+        auto viewPath = page->workDir();            
+        baseView->loadModel(viewPath);
+    }
+
+    static void
     addBookmark(GtkMenuItem *menuItem, gpointer data)
     {
-	// FIXME: put basics into rootview
         TRACE("Add bookmark\n");
 	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
-	gint i=0;
-	gchar *item;
-	do {
-	    item = g_strdup_printf("item-%0d", i++);
-	    if (Settings<Type>::keyFileHasGroupKey("Bookmarks", item)){
-		gchar *g = Settings<Type>::getSettingString("Bookmarks", item);
-		if (strcmp(g, path) ==0){
-		    DBG("%s already bookmarked\n", path);
-		    g_free(g);
-		    g_free(item);
-		    return;
-		}
-	    } else break;
-	} while(TRUE);
-	Settings<Type>::setSettingString("Bookmarks", item, path);
-	g_free(item);
-	Settings<Type>::writeSettings();
+        if (!RootView<Type>::addBookmark(path)) return;
+	auto baseView =  (BaseView<Type> *)g_object_get_data(G_OBJECT(data), "baseView");
+        reloadIcons(baseView);
     }
 
     static void
     removeBookmark(GtkMenuItem *menuItem, gpointer data)
     {
-	// FIXME: put basics into rootview
         DBG("Remove bookmark\n");
 	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
-	gint i=0;
-	gchar *item;
-	do {
-	    item = g_strdup_printf("item-%0d", i++);
-	    if (Settings<Type>::keyFileHasGroupKey("Bookmarks", item)){
-		gchar *g = Settings<Type>::getSettingString("Bookmarks", item);
-		if (strcmp(g, path) ==0){
-		    Settings<Type>::removeKey("Bookmarks", item);
-		    g_free(g);
-		    g_free(item);
-		    Settings<Type>::writeSettings();
-		    return;
-		}
-	    } else break;
-	} while(TRUE);
+        if (!RootView<Type>::removeBookmark(path)) return;
+	auto baseView =  (BaseView<Type> *)g_object_get_data(G_OBJECT(data), "baseView");
+        reloadIcons(baseView);
     }
 
 

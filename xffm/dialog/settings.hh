@@ -2,12 +2,14 @@
 #define XF_SETTINGS_HH
 static GKeyFile *keyFile = NULL;
 static const gchar *settingsfile = NULL;
+gsize mTime;
 namespace xf {
 
 template <class Type>
 class Settings {
 
 public:
+
     static void
     readSettings(void){
         keyFile = g_key_file_new();
@@ -20,7 +22,30 @@ public:
             DBG("%s", text);
             g_free(text);
         }
+        struct stat st;
+        if (stat(settingsfile, &st) < 0){
+            ERROR("settings.hh:: cannot access %s\n", settingsfile);
+            exit(1);
+        }
+        mTime = st.st_mtime;
     }
+
+    static void
+    reloadSettings(void){
+        struct stat st;
+        if (stat(settingsfile, &st) < 0){
+            ERROR("settings.hh:: cannot access %s\n", settingsfile);
+            exit(1);
+        }
+        if (st.st_mtime == mTime){
+            return;
+
+        }
+        DBG("%s reload %ld -> %ld \n", settingsfile, mTime, st.st_mtime);
+        g_key_file_free(keyFile);
+        readSettings();
+    }
+
 /*
     static void
     saveSettings(const gchar *group, const gchar *item, gint value){
@@ -73,18 +98,34 @@ public:
     }
  
 public:
+    static gchar **
+    getKeys(const gchar *group){
+         reloadSettings();
+         return g_key_file_get_keys (keyFile, group, NULL, NULL);
+   
+    }
+    static gchar **
+    getKeys(const gchar *group, gsize *size){
+         reloadSettings();
+         return g_key_file_get_keys (keyFile, group, size, NULL);
+   
+    }
+
    static void
    setSettingInteger(const gchar *group, const gchar *item, int value){
-        g_key_file_set_integer (keyFile, group, item, value);
+       reloadSettings();
+       g_key_file_set_integer (keyFile, group, item, value);
    }
     
    static void
    setSettingString(const gchar *group, const gchar *item, const gchar *value){
-        g_key_file_set_string (keyFile, group, item, value);
+       reloadSettings();
+       g_key_file_set_string (keyFile, group, item, value);
    }
     
    static gchar *
    getSettingString(const gchar *group, const gchar *item){
+        reloadSettings();
         gchar *value=NULL;
 	GError *error = NULL;
 	value = g_key_file_get_string (keyFile, group, item, &error);
@@ -98,11 +139,13 @@ public:
    
    static gboolean
    removeKey(const gchar *group, const gchar *key){
+       reloadSettings();
        return g_key_file_remove_key (keyFile, group, key, NULL);
    }
 
    static gint 
    getSettingInteger(const gchar *group, const gchar *item){
+        reloadSettings();
         gint value=-1;
 	GError *error = NULL;
 	value = g_key_file_get_integer (keyFile, group, item, &error);
@@ -115,6 +158,7 @@ public:
    }
     static gboolean
     keyFileHasGroupKey(const gchar *group, const gchar *key) {
+        reloadSettings();
 	if (g_key_file_has_group(keyFile, group) &&
 	g_key_file_has_key (keyFile, group, key, NULL) && 
 	getSettingInteger(group, key))

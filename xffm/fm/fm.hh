@@ -33,11 +33,14 @@ public:
     }
 
     void addPage(const gchar *workdir){
-        TRACE("loading iconview page\n");
+        TRACE("loading iconview page %s\n", workdir);
         auto notebook = (Notebook<Type> *)this;
         auto page = notebook->addPage(workdir);
         auto baseView = load(page->workDir());
 	page->showIconview(1);
+        if (workdir == NULL){
+            baseView->loadModel(workdir);
+        }
     }
 
     void removePage(GtkWidget *child){
@@ -66,7 +69,7 @@ public:
     }
 };
 
-
+/*
 template <class Type>
 class Fm: protected fmDialog<Type> {
 public:
@@ -75,10 +78,11 @@ public:
         if (path){
             if (g_path_is_absolute(path)) fullPath = g_strdup(path);
             else fullPath = g_build_filename(g_get_home_dir(), path, NULL);
-        }
-	this->createDialog(fullPath);
-        g_free(fullPath);
+            this->createDialog(fullPath);
+            g_free(fullPath);
+        } else this->createDialog(path);
     }
 };
+*/
 } // namespace xf
 #endif

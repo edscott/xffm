@@ -2,11 +2,8 @@
 TODO: 
 
   * add bookmarks to rootview: 
-    - modify icon if bookmarked (isBookmarked() function (rootview)
-    - put localviewpopup basics into rootview
-    - hide/show menu item with isBookmarked() function.
-    - Add bookmarked items to rootview
-    - monitor settings file and reload rootview if bookmarks group changes.
+    - put localviewpopup basics into rootview, popup menu to remove bookmark... maybe
+    
     
   * enable localview popup
      - duplicate/symlink/rename

@@ -949,6 +949,10 @@ private:
         if (xd_p->d_type == DT_LNK){
             return emblem;
         }
+        if (RootView<Type>::isBookmarked(xd_p->path)){
+            return g_strdup("/NE/bookmark-new/2.0/220");
+        }
+
         TRACE("getEmblem: %s\n", xd_p->path);
         // Now we try stat emblem
         gchar *aux = statEmblem(xd_p->path, xd_p->st, emblem);
@@ -981,6 +985,9 @@ private:
         gchar *emblem;
         if ((st->st_mode & S_IFMT) == S_IFLNK){
             return g_strdup("/SW/emblem-symbolic-link/2.0/220");
+        }
+        if (RootView<Type>::isBookmarked(path)){
+            return g_strdup("/NE/bookmark-new/2.0/220");
         }
         emblem = g_strdup("");
         // Now we try stat emblem
