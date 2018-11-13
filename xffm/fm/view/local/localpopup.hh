@@ -93,6 +93,7 @@ public:
 
     static void
     resetLocalItemPopup(GtkTreeModel *treeModel, const GtkTreePath *tpath) {
+        // baseView data is set in BaseViewSignals on button press (button=3)
 	DBG("resetLocalItemPopup\n");
 	gchar *aname=NULL;
 	gchar *iconName=NULL;
@@ -533,9 +534,49 @@ public:
     static void
     tarball(GtkMenuItem *menuItem, gpointer data)
     {
-	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
+        // File chooser
+        auto entryResponse = new(EntryFolderResponse<Type>)(GTK_WINDOW(mainWindow), _("Create a compressed archive with the selected objects"), NULL);
+
+        
+	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "PATH");
+	auto displayPath = util_c::valid_utf_pathstring(path);
+	auto markup = 
+	    g_strdup_printf("<span color=\"blue\" size=\"larger\"><b>%s</b></span>", displayPath);  
+	g_free(displayPath);
+	
+        entryResponse->setResponseLabel(markup);
+        g_free(markup);
+
+        //entryResponse->setCheckButton(_("Run in Terminal"));
+        //entryResponse->setCheckButton(Mime<Type>::runInTerminal(path));
+
+        entryResponse->setEntryLabel(_("Choose Directory"));
+        // get last used arguments...
+        gchar *dirname = g_path_get_dirname(path);
+        entryResponse->setEntryDefault(dirname);
+        g_free(dirname);
+        
+        //entryResponse->setCheckButtonEntryCallback((void *)toggleTerminalRun, (void *)path); 
+        auto response = entryResponse->runResponse();
+        delete entryResponse;
+
+        
+
+/*	if (!response) return;
+	// Is the terminal flag set?
+	gchar *command ;
+	if (Mime<Type>::runInTerminal(path)){
+	    command = Mime<Type>::mkTerminalLine(path, response);
+	} else {
+	    command = Mime<Type>::mkCommandLine(path, response);
+	}
+        g_free(response);
+	// get baseView
 	auto baseView =  (BaseView<Type> *)g_object_get_data(G_OBJECT(data), "baseView");
-        DBG("tarball\n");
+	auto page = baseView->page();
+	page->command(command);
+	TRACE("2)command = %s\n", command);
+	g_free(command);*/
     }
 
     static void
@@ -624,13 +665,7 @@ public:
         auto response = entryResponse->runResponse();
         delete entryResponse;
 
-	/*auto response = getResponse (_("Run Executable..."),
-		markup,_("Custom arguments:"),
-		_("Run in Terminal"), NULL,
-		NULL,
-		path);
-        
-	g_free(markup);*/
+
 	if (!response) return;
 	// Is the terminal flag set?
 	gchar *command ;
