@@ -476,7 +476,6 @@ public:
         auto path = (const gchar *)g_object_get_data(G_OBJECT(localPopUp), "path");
         
         Settings<Type>::setSettingInteger("LocalView", item, value);
-	Settings<Type>::writeSettings();
         baseView->loadModel(path);
     }
 
@@ -550,15 +549,45 @@ public:
         //entryResponse->setCheckButton(_("Run in Terminal"));
         //entryResponse->setCheckButton(Mime<Type>::runInTerminal(path));
 
-        entryResponse->setEntryLabel(_("Choose Directory"));
+        entryResponse->setEntryLabel(_("Specify Output Directory..."));
         // get last used arguments...
-        gchar *dirname = g_path_get_dirname(path);
+        gchar *dirname = NULL;
+	if (Settings<Type>::keyFileHasGroupKey("Tarballs", "Default")){
+	    dirname = Settings<Type>::getSettingString("Tarballs", "Default");
+	} 
+	if (!dirname || !g_file_test(dirname, G_FILE_TEST_IS_DIR) ) {
+	    g_free(dirname);
+	    dirname = g_path_get_dirname(path);
+	}
         entryResponse->setEntryDefault(dirname);
         g_free(dirname);
         
         //entryResponse->setCheckButtonEntryCallback((void *)toggleTerminalRun, (void *)path); 
         auto response = entryResponse->runResponse();
         delete entryResponse;
+	WARN("response=%s\n", response);
+	if (response){
+	    g_strstrip(response);
+	    Settings<Type>::setSettingString("Tarballs", "Default", response);
+	    if (!g_file_test(response, G_FILE_TEST_IS_DIR)){
+		// FIXME dialog 
+	    } else {
+		gchar *basename = g_path_get_basename(path);
+		gchar *fmt = g_strdup_printf("tar -cjf \"%s/%s.tar.bz2\"", response, basename);
+		gchar *command = Mime<Type>::mkCommandLine(fmt, basename);
+		    
+		WARN("command= %s\n", command);
+		auto baseView =  (BaseView<Type> *)
+		    g_object_get_data(G_OBJECT(data), "baseView");
+		auto page = baseView->page();
+		page->command(command);
+		g_free(basename);
+		g_free(fmt);
+		g_free(command);
+		//FIXME chdir basename and run command in shell
+	    }
+	    g_free(response);
+	}
 
         
 
@@ -759,8 +788,8 @@ public:
 	    return;
 	}
 	// save value as default for mimetype
+	if (strrchr(response,'\n')) *(strrchr(response,'\n')) = 0;
 	Settings<Type>::setSettingString("MimeTypeApplications", mimetype, response);
-	Settings<Type>::writeSettings();
 	gchar *command;
 	// Is the terminal flag set?
 	if (Mime<Type>::runInTerminal(response)){
@@ -810,7 +839,6 @@ public:
 	    gchar *a = Mime<Type>::baseCommand(text);
 	    gtk_toggle_button_set_active(checkButton, TRUE);
 	    Settings<Type>::setSettingInteger("Terminal", a, 1);
-	    Settings<Type>::writeSettings();
 	    g_free(a);
 	}
 
@@ -877,7 +905,6 @@ private:
 	if (gtk_toggle_button_get_active(togglebutton)) value = 1; else value = 0;
 	gchar *a = Mime<Type>::baseCommand(app);
 	Settings<Type>::setSettingInteger("Terminal", a, value);
-	Settings<Type>::writeSettings();
 	g_free(a);
     }
     
@@ -893,7 +920,6 @@ private:
 	if (gtk_toggle_button_get_active(togglebutton)) value = 1; else value = 0;
 	gchar *a = Mime<Type>::baseCommand(path);
 	Settings<Type>::setSettingInteger("Terminal", a, value);
-	Settings<Type>::writeSettings();
 	g_free(a);
     }
 

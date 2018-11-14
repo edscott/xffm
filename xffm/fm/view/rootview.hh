@@ -191,7 +191,6 @@ public:
         } while (TRUE);
 	Settings<Type>::setSettingString("Bookmarks", item, path);
 	g_free(item);
-	Settings<Type>::writeSettings();
         return TRUE;
     }
 
@@ -202,7 +201,6 @@ public:
 	if (!item) return FALSE;
         Settings<Type>::removeKey("Bookmarks", item);
         g_free(item);
-        Settings<Type>::writeSettings();
         return TRUE;
     }
 

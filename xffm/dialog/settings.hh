@@ -29,7 +29,7 @@ public:
         }
         mTime = st.st_mtime;
     }
-
+private:
     static void
     reloadSettings(void){
         struct stat st;
@@ -115,12 +115,14 @@ public:
    setSettingInteger(const gchar *group, const gchar *item, int value){
        reloadSettings();
        g_key_file_set_integer (keyFile, group, item, value);
+       writeSettings();
    }
     
    static void
    setSettingString(const gchar *group, const gchar *item, const gchar *value){
        reloadSettings();
        g_key_file_set_string (keyFile, group, item, value);
+       writeSettings();
    }
     
    static gchar *
@@ -140,7 +142,9 @@ public:
    static gboolean
    removeKey(const gchar *group, const gchar *key){
        reloadSettings();
-       return g_key_file_remove_key (keyFile, group, key, NULL);
+       auto retval = g_key_file_remove_key (keyFile, group, key, NULL);
+       writeSettings();
+       return retval;
    }
 
    static gint 

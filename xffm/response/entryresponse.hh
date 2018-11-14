@@ -249,7 +249,6 @@ private:
 	    gchar *a = Mime<Type>::baseCommand(text);
 	    gtk_toggle_button_set_active(checkButton, TRUE);
 	    Settings<Type>::setSettingInteger("Terminal", a, 1);
-	    Settings<Type>::writeSettings();
 	    g_free(a);
 	}
 

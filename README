@@ -1,11 +1,7 @@
 
 TODO: 
 
-  * tarball in localpopup.hh
-    - Save last selected output directory in settings.ini and set entry with this value
-    - prepare and do the command
-    - Open dialog showing progress and destroy with command is complete (not modal)
-      or do it in the terminal area (preferred)
+  * check tarball creation output in lpterm 
 
   * add bookmarks to rootview: 
     - put localviewpopup basics into rootview, popup menu to remove bookmark... maybe
