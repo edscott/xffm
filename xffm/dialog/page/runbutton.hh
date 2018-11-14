@@ -147,7 +147,15 @@ public:
 
 	
 	menu_ = GTK_MENU(gtk_menu_new());
-	const gchar **p = items;
+	GtkMenuItem *title = GTK_MENU_ITEM(gtk_c::menu_item_new(NULL, "")); 
+	gtk_widget_set_sensitive(GTK_WIDGET(title), FALSE);
+	gtk_widget_show (GTK_WIDGET(title));
+	gtk_container_add (GTK_CONTAINER (menu_), GTK_WIDGET(title));
+	gchar *markup = g_strdup_printf("<span color=\"blue\" size=\"larger\">pid: %d</span>", grandchild_);
+	gtk_c::menu_item_content(title, NULL, markup, -48);
+        g_free(markup);
+
+        const gchar **p = items;
 	gint i;
 	for (i=0;p && *p; p++,i++){
 	    GtkWidget *v = gtk_menu_item_new_with_label (_(*p));
