@@ -1,0 +1,47 @@
+1. History of xffm
+   xftree, gtk1.x
+   xffm gtk2.x
+   rodent gtk2.24-3.10
+   xffm+ gtk3.24
+What's behind the design of xffm
+ Generic C++ programming, inspired by dune/dumux from U of Stutgart
+ I am working with the code from UoS, and to better understand the manner 
+ in which generic programming is used, I am writing (I wrote) a new version 
+ of xffm with generic programming and gtk+-3.24.1 as minimu requirement.
+ Dependencies have been reduced to a minimum, although inclusion of all optional
+ dependencies provide a much better experience.
+
+reduce bloatware to a minimum
+- uses already installed code (cp, ln, ...)
+What i use it for
+principal functions
+ find|grep to find stuff in other people's code, and in my code (which can be very extensive)
+ create and unpack tarballs
+ run commands in background
+ navigate filesystem
+
+Xffm+ functions
+ mount/umount
+  - items in fstab
+  - block devices from /dev
+  - ecryptfs
+  - remote nfs 
+  - remote sshfs
+ find/install/update packages (gentoo, archlinux, ... freebsd, debian, redhat, suse)
+ basic filemanagement
+  - navigate filesystem 
+  - filesystem bookmarks 
+  - cp/mv/ln/rm/touch/mkdir
+  - execute programs
+  - open files with third party applications
+  - view/modify file properties
+
+Deprecated stuff (by experience I do not use these any more)
+  - system processed iconview
+  - application launcher iconview 
+  - SMB network navigator
+  - mount/umount remote cifs
+  - mount/umount remote ftpfs
+
+ 
+
