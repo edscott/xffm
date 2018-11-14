@@ -1,6 +1,7 @@
 #ifndef XF_LOCALITEMPOPUP__HH
 # define XF_LOCALITEMPOPUP__HH
 #include "response/comboresponse.hh"
+#include "response/commandresponse.hh"
 #include "fm/view/fstab.hh"
 
 namespace xf
@@ -576,11 +577,15 @@ public:
 		gchar *fmt = g_strdup_printf("tar -cjf \"%s/%s.tar.bz2\"", response, basename);
 		gchar *command = Mime<Type>::mkCommandLine(fmt, basename);
 		    
+                // execute command...
+                // get baseView
+                auto baseView =  (BaseView<Type> *)g_object_get_data(G_OBJECT(data), "baseView");
+                auto page = baseView->page();
+                pid_t pid = page->command(command);
+
+                // open follow dialog for long commands...
 		WARN("command= %s\n", command);
-		auto baseView =  (BaseView<Type> *)
-		    g_object_get_data(G_OBJECT(data), "baseView");
-		auto page = baseView->page();
-		page->command(command);
+                CommandResponse<Type>::dialog(command,"system-run", pid );
 		g_free(basename);
 		g_free(fmt);
 		g_free(command);

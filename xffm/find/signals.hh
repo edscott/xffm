@@ -5,7 +5,7 @@
 #include "common/print.hh"
 #include "common/run.hh"
 #include "common/util.hh"
-#include "response/passwdresponse.hh"
+#include "response/entryfileresponse.hh"
 static const gchar *ftypes[] = {
     N_("Regular"),
     N_("Directory"),
@@ -191,7 +191,7 @@ public:
     folderChooser (GtkButton * button, gpointer data) {
         GtkEntry *entry = GTK_ENTRY(data);
         const gchar *text = _("Select folder to search in");
-        Response<Type>::folderChooser(entry, text);
+        EntryFileResponse<Type>::folderChooser(entry, text);
     }
 
 

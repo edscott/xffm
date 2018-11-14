@@ -1,6 +1,6 @@
 #ifndef XF_ENTRYRESPONSE_HH
 # define XF_ENTRYRESPONSE_HH
-#include "passwdresponse.hh"
+#include "entryfileresponse.hh"
 namespace xf
 {
 template <class Type> class Response;
@@ -26,7 +26,7 @@ public:
     folderChooser (GtkButton * button, gpointer data) {
         GtkEntry *entry = GTK_ENTRY(data);
         const gchar *text = _("Choose directory");
-        Response<Type>::folderChooser(entry, text);
+        EntryFileResponse<Type>::folderChooser(entry, text);
     }
 
 };

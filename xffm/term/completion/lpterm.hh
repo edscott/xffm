@@ -92,8 +92,9 @@ public:
 	return;
     }
 
-    gchar * 
+    pid_t 
     run_lp_command(GtkTextView *output, const gchar *workdir, const gchar *command){
+        pid_t child = 0;
         // On empty string, do a simple pwd
         if (!command || !strlen(command)) command = "pwd";
         // escape all quotes
@@ -146,7 +147,7 @@ public:
                 print_c::clear_text(output);
             }
 
-            pid_t child = run_c::shell_command(output, *c, scrollup);
+            child = run_c::shell_command(output, *c, scrollup);
 	    page_->newRunButton(*c, child);
 	    // forced shell to command:
 	    //run_c::shell_command(output, *c, FALSE);
@@ -162,7 +163,7 @@ public:
 	}
 	g_strfreev(commands);
         g_free(ncommand); 
-	return newWorkdir;
+	return child;
     }
 
     void
