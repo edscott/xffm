@@ -239,8 +239,11 @@ public:
 	TRACE("make_run_data_button: icon_id_=\"%s\" tip_=\"%s\"\n", run_button_p->icon_id(), run_button_p->tip());
 
 	gtk_c::setup_image_button(GTK_BUTTON(button), run_button_p->icon_id(), run_button_p->tip());
+	gtk_widget_set_can_focus (GTK_WIDGET(button), FALSE);
+	gtk_button_set_relief (GTK_BUTTON(button), GTK_RELIEF_NONE);
+	
 	//g_signal_connect(button, "toggled", G_CALLBACK (run_button_toggled), data);
-	gtk_box_pack_end (run_button_p->button_space(), GTK_WIDGET(button), FALSE, FALSE, 0);
+	gtk_box_pack_start (run_button_p->button_space(), GTK_WIDGET(button), FALSE, FALSE, 0);
 	gtk_widget_show (GTK_WIDGET(button));
 	// flush gtk
 	while (gtk_events_pending()) gtk_main_iteration();

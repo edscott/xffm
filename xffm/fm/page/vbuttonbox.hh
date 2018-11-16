@@ -12,6 +12,7 @@ class VButtonBox {
 	 g_object_set_data(G_OBJECT(vButtonBox_), "hidden_button", hidden_button);
 	gtk_box_pack_end (vButtonBox_, GTK_WIDGET(hidden_button), FALSE, FALSE, 0);*/    
 public:
+    GtkBox *vButtonBox(void){return vButtonBox_;}
     VButtonBox(void){
 	vButtonBox_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
 
@@ -20,9 +21,10 @@ public:
 	gtk_style_context_add_class(style_context, GTK_STYLE_CLASS_BUTTON );
 	GtkCssProvider *css_provider = gtk_css_provider_new();
 	gtk_css_provider_load_from_data (css_provider, 
+ //     background-color: #dcdad5;
     "\
     box * {\
-      background-color: #dcdad5;\
+      background-color: #333333;\
       border-width: 0px;\
       border-radius: 0px;\
       border-color: transparent;\
@@ -45,8 +47,8 @@ public:
 	return ;
     }
 protected:
-    GtkBox *vButtonBox_;
 private:
+    GtkBox *vButtonBox_;
     static GtkScale *newSizeScale(void){
 	auto size_scale = GTK_SCALE(gtk_scale_new_with_range(GTK_ORIENTATION_VERTICAL, 6.0, 24.0, 6.0));
         gtk_range_set_value(GTK_RANGE(size_scale), 12);

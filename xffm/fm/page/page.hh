@@ -20,7 +20,7 @@ class Page :
     public PageBase<Type>,
     protected Vpane<Type>,
     public HButtonBox<double>,
-    protected VButtonBox<Type>
+    public VButtonBox<Type>
 {
     using gtk_c = Gtk<double>;
     using util_c = Util<double>;
@@ -62,7 +62,7 @@ public:
         GtkBox *hViewBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
 
 	gtk_box_pack_start (hViewBox, GTK_WIDGET(this->vpane_), TRUE, TRUE, 0);
-	//gtk_box_pack_start (hViewBox, GTK_WIDGET(vButtonBox_), FALSE, FALSE, 0);
+	gtk_box_pack_start (hViewBox, GTK_WIDGET(this->vButtonBox()), FALSE, FALSE, 0);
 	gtk_box_pack_start (pageChild_, GTK_WIDGET(hViewBox), TRUE, TRUE, 0);
 	gtk_box_pack_start (pageChild_, GTK_WIDGET(this->hButtonBox()), FALSE, FALSE, 0);
         g_signal_connect(G_OBJECT(this->toggleToIconview()), "clicked", 
@@ -394,7 +394,6 @@ public:
     GtkPaned *vpane(void){return this->vpane_;}
     GtkTextView *output(void){ return this->output_;}
 
-    GtkBox *vButtonBox(void){return this->vButtonBox_;}   
 
 private:
     GtkBox *pageChild_;
