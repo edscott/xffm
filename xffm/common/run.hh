@@ -152,10 +152,10 @@ public:
                                     textview, // XXX view_v,
                                     flags);
         pid_t grandchild=tubo_c::getChild (pid);
-#if 1       
+#if 0       
         print_c::print(textview, "Green", g_strdup_printf("%d:%s\n", grandchild, command));
 #else
-        print_c::print_icon(textview, "system-run", "bold", g_strdup_printf("%s\n", command));
+        print_c::print_icon(textview, "greenball", "Green", g_strdup_printf("%d:%s\n", grandchild, command));
 #endif
         push_hash(grandchild, g_strdup(command));
         g_free(command);
@@ -274,7 +274,8 @@ public:
         if(strncmp (line, exit_token, strlen (exit_token)) == 0) {
 //#ifdef DEBUG
             gchar *string = exit_string(line);
-            print_c::print_icon(textview, "process-stop", g_strdup(string));
+	    print_c::print_icon(textview, "redball", "Red", g_strdup(string));
+            //print_c::print_icon(textview, "process-stop", g_strdup(string));
             g_free(string);
 //#endif
         } else {
