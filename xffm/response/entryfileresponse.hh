@@ -1,8 +1,5 @@
 #ifndef XF_ENTRYFILERESPONSE_HH
 #define XF_ENTRYFILERESPONSE_HH
-#include "types.h"
-#include "common/gtk.hh"
-#include "common/pixbuf.hh"
 namespace xf {
 
 template <class Type>

@@ -1,7 +1,7 @@
 #ifndef LPTERM_HH
 #define LPTERM_HH
-//#include "run_button_c.hpp"
 
+#warning "add cmake test for HAVE_READLINE_HISTORY_H"
 //#ifdef HAVE_READLINE_HISTORY_H
 # include <readline/history.h>
 //#endif
