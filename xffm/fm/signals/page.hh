@@ -103,7 +103,7 @@ public:
 
 	auto page = (Page<Type> *)data;
         auto dialog = page->parent();
-	auto baseView = (BaseView<Type> *)g_object_get_data(G_OBJECT(page->top_scrolled_window()),"baseView");
+	auto baseView = (BaseView<Type> *)g_object_get_data(G_OBJECT(page->topScrolledWindow()),"baseView");
 	if (baseView) {
 	    baseView->clear_highlights();
 	}

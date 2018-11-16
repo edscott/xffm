@@ -122,7 +122,7 @@ private:
                 }
 #ifdef XFFM_CC
                 auto baseView = (BaseView<Type> *)
-                    g_object_get_data(G_OBJECT(page->top_scrolled_window()), "baseView");
+                    g_object_get_data(G_OBJECT(page->topScrolledWindow()), "baseView");
                 baseView->loadModel(path);
 #else
                 page->setPageWorkdir(path);

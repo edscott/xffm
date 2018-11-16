@@ -88,7 +88,6 @@ public:
     }
 
 
-private:
     static GtkButton *newButton(const gchar *icon, const gchar *tooltipText){
 	auto button =  GTK_BUTTON(gtk_button_new());
         gtk_c::setup_image_button(button, icon, tooltipText);
@@ -97,6 +96,7 @@ private:
         gtk_widget_set_tooltip_markup (GTK_WIDGET(button),tooltipText);
 	return button;
     }
+private:
 
     static GtkButton *newButtonL(const gchar *icon, const gchar *tooltipText){
 	auto button =  gtk_c::dialog_button(icon, NULL);

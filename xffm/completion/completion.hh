@@ -41,8 +41,8 @@ public:
         return (iconname);
     }
 
-    void setInput(GtkTextView *input){completionInput_ = input;}
-    void setOutput(GtkTextView *output){completionOutput_ = output;}
+    void setCompletionInput(GtkTextView *input){completionInput_ = input;}
+    void setCompletionOutput(GtkTextView *output){completionOutput_ = output;}
 
     gint
     completionKeyboardEvent( GdkEventKey * event) {

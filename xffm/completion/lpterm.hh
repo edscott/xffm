@@ -49,7 +49,7 @@ private:
     GtkWidget *iconview_icon_;
 
 public:
-    void setPage(Page<Type> *page){page_ = page;}
+    void setLPTermPage(Page<Type> *page){page_ = page;}
     void setTextview(GtkTextView *textview){textview_ = textview;}
     void setIconview(GtkIconView *iconview){iconview_ = iconview;}
     void setStatusButton(GtkWidget *status_button){status_button_ = status_button;}
@@ -270,7 +270,7 @@ public:
 		    page_->setPageWorkdir(gg);
 #ifdef XFFM_CC
                 auto baseView = (BaseView<Type> *)
-                    g_object_get_data(G_OBJECT(page_->top_scrolled_window()), "baseView");
+                    g_object_get_data(G_OBJECT(page_->topScrolledWindow()), "baseView");
                 baseView->loadModel(gg);
 #endif  
 		    g_free(gg);

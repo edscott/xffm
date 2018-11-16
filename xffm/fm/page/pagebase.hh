@@ -1,10 +1,23 @@
 #ifndef PAGE_BASE
 #define PAGE_BASE
+#include "vbuttonbox.hh"
+#include "hbuttonbox.hh"
+#include "pathbar.hh"
+#include "vpane.hh"
+#include "completion/completion.hh"
+#include "threadcontrol.hh"
 
 namespace xf {
 
 template <class Type>
-class PageBase {
+class PageBase :
+    public HButtonBox<double>,
+    public VButtonBox<double>,
+    public Vpane<double>,
+    public ThreadControl<double>,
+    public Pathbar<double>,
+    public Completion<double>
+{
 private:
     gchar *workDir_;
 
@@ -13,7 +26,7 @@ protected:
 public:
 
     PageBase(void){
-        workDir_ = NULL;
+        workDir_ = g_strdup(g_get_home_dir());
     }
 
     const gchar *workDir(void){
@@ -22,9 +35,13 @@ public:
     }
 
     gboolean setWorkDir(const gchar *g){
+	if (!g_file_test(g, G_FILE_TEST_IS_DIR)){
+	    ERROR("%s is not a directory\n", g);
+	    return FALSE;
+	}
         g_free(workDir_);
         workDir_ = g_strdup(g);
-        return g_file_test(workDir_, G_FILE_TEST_IS_DIR);
+        return TRUE;
     }
 
 };

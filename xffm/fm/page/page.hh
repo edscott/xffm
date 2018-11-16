@@ -1,41 +1,57 @@
 #ifndef XF_PAGE_CHILD
 #define XF_PAGE_CHILD
-#include "completion/completion.hh"
-#include "vbuttonbox.hh"
-#include "hbuttonbox.hh"
-#include "vpane.hh"
-#include "threadcontrol.hh"
 #include "runbutton.hh"
-#include "pathbar.hh"
 #include "pagebase.hh"
 #include "fm/signals/page.hh"
 
 namespace xf{
 
 template <class Type>
-class Page :
-    public Completion<Type>,
-    public ThreadControl<Type>,
-    public Pathbar<Type>,
-    public PageBase<Type>,
-    protected Vpane<Type>,
-    public HButtonBox<double>,
-    public VButtonBox<Type>
+class Page : public PageBase<double>
 {
+    // fmDialog elements are not yet defined,
+    // so you cannot use a static Type, like double.
+    using fmdialog_c = fmDialog<Type>;
+
+    using baseview_c = BaseView<double>;
     using gtk_c = Gtk<double>;
     using util_c = Util<double>;
     using run_c = Run<double>;
+    using runbutton_c = RunButton<double>;
     using print_c = Print<double>;
-private:
+    using pagesignals_c = PageSignals<double>;
+    using settings_c = Settings<double>;
+    using completion_c = Completion<double>;
+
     GList *run_button_list;
     pthread_mutex_t *rbl_mutex;
-    fmDialog<Type> *parent_;
-    BaseView<Type> *baseView_;
+    fmdialog_c *parent_;
+    baseview_c *baseView_;
     
+    GtkBox *pageChild_;
+    GtkLabel *pageLabel_;
+    GtkBox *pageLabelBox_;
+    GtkSpinner *pageLabelSpinner_;
+    GtkBox *pageLabelSpinnerBox_;
+    GtkBox *pageLabelIconBox_;
+    GtkButton *pageLabelButton_;
+
+    gboolean terminalMode_;
+    gboolean iconviewIsDefault_;
 
 public:
 
-    Page(fmDialog<Type> *parent, const gchar *workdir){
+    baseview_c *baseView(void){ return baseView_;}
+    fmdialog_c *parent(void){return parent_;}
+    GtkBox *pageChild(void){ return pageChild_;}
+    GtkLabel *pageLabel(void){ return pageLabel_;}
+    GtkBox *pageLabelBox(void){ return pageLabelBox_;}
+    GtkSpinner *pageLabelSpinner(void){ return pageLabelSpinner_;}
+    GtkBox *pageLabelSpinnerBox(void){ return pageLabelSpinnerBox_;}
+    GtkBox *pageLabelIconBox(void){ return pageLabelIconBox_;}
+    GtkButton *pageLabelButton(void){ return pageLabelButton_;}
+
+    Page(fmdialog_c *parent, const gchar *workdir){
 	parent_ = parent;
 	pageChild_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
 	pageLabel_ = GTK_LABEL(gtk_label_new ("foobar"));
@@ -61,35 +77,34 @@ public:
 
         GtkBox *hViewBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
 
-	gtk_box_pack_start (hViewBox, GTK_WIDGET(this->vpane_), TRUE, TRUE, 0);
+	gtk_box_pack_start (hViewBox, GTK_WIDGET(this->vpane()), TRUE, TRUE, 0);
 	gtk_box_pack_start (hViewBox, GTK_WIDGET(this->vButtonBox()), FALSE, FALSE, 0);
 	gtk_box_pack_start (pageChild_, GTK_WIDGET(hViewBox), TRUE, TRUE, 0);
 	gtk_box_pack_start (pageChild_, GTK_WIDGET(this->hButtonBox()), FALSE, FALSE, 0);
         g_signal_connect(G_OBJECT(this->toggleToIconview()), "clicked", 
-                BUTTON_CALLBACK(PageSignals<Type>::toggleToIconview), (void *)this);
+                BUTTON_CALLBACK(pagesignals_c::toggleToIconview), (void *)this);
         g_signal_connect(G_OBJECT(this->toggleToTerminal()), "clicked", 
-                BUTTON_CALLBACK(PageSignals<Type>::toggleToTerminal), (void *)this);
+                BUTTON_CALLBACK(pagesignals_c::toggleToTerminal), (void *)this);
         g_signal_connect(G_OBJECT(this->sizeScale()), "change-value", 
-                RANGE_CALLBACK(PageSignals<Type>::rangeChangeValue), (void *)this);
+                RANGE_CALLBACK(pagesignals_c::rangeChangeValue), (void *)this);
         g_signal_connect(G_OBJECT(this->clearButton()), "clicked", 
-                BUTTON_CALLBACK(PageSignals<Type>::clearText), (void *)this);
+                BUTTON_CALLBACK(pagesignals_c::clearText), (void *)this);
         g_signal_connect(G_OBJECT(this->scriptButton()), "clicked", 
-                BUTTON_CALLBACK(PageSignals<Type>::scriptRun), (void *)this);
+                BUTTON_CALLBACK(pagesignals_c::scriptRun), (void *)this);
 
         g_signal_connect(G_OBJECT(this->sizeScale()), "button-release-event", 
-                EVENT_CALLBACK(PageSignals<Type>::rangeOff), (void *)this);
+                EVENT_CALLBACK(pagesignals_c::rangeOff), (void *)this);
 
-#ifdef XFFM_CC
-        g_signal_connect (this->top_scrolled_window_, "leave-notify-event", 
-                EVENT_CALLBACK (PageSignals<Type>::leave_notify_event),
+        g_signal_connect (this->topScrolledWindow(), "leave-notify-event", 
+                EVENT_CALLBACK (pagesignals_c::leave_notify_event),
 		(void *)this);
-#endif
 
 
+	print_c::setColor(GTK_WIDGET(this->output()));
 	// Data for lpterm
-        this->setOutput(this->output_);
-        this->setInput(this->input());
-        this->setPage(this);
+        this->setCompletionOutput(this->output());
+        this->setCompletionInput(this->input());
+        this->setLPTermPage(this);
 
 	pthread_mutexattr_t r_attr;
 	pthread_mutexattr_init(&r_attr);
@@ -99,7 +114,7 @@ public:
 	run_button_list = NULL;
 
 
-	print_c::setColor(GTK_WIDGET(this->output()));
+
 	//gtk_widget_realize(GTK_WIDGET(pageChild_));
 	gtk_widget_show_all(GTK_WIDGET(pageLabelBox_));
 	gtk_widget_show_all(GTK_WIDGET(pageChild_));
@@ -110,7 +125,6 @@ public:
 	GList *l = run_button_list;
 	pthread_mutex_lock(rbl_mutex);
 	for (; l && l->data; l=l->next){
-	    //run_button_c *rb_p = (run_button_c *)l->data;
 	    unreference_run_button(l->data);
 	}
 	g_list_free(run_button_list);
@@ -118,29 +132,20 @@ public:
 	pthread_mutex_unlock(rbl_mutex);
 	pthread_mutex_destroy(rbl_mutex);
 	g_free(rbl_mutex);
-#ifdef XFFM_CC
-	auto baseView = (BaseView<Type> *)
-	    g_object_get_data(G_OBJECT(top_scrolled_window()), "baseView");
+	auto baseView = (baseview_c *)
+	    g_object_get_data(G_OBJECT(this->topScrolledWindow()), "baseView");
     	if (baseView){
             TRACE("now deleting BaseView...\n");
             delete baseView;
         } else {
             ERROR("not deleting BaseView object\n");
         }
-
-
-#endif
     }
 
     void updateStatusLabel(const gchar *text){
 	this->setStatusLabel(text);
     }
       
-
-#ifdef XFFM_CC
-    BaseView<Type> *baseView(void){ return baseView_;}
-#endif
-    fmDialog<Type> *parent(void){return parent_;}
 
     pid_t command(const gchar *command){
         return (this->run_lp_command(this->output(), this->workDir(), command));
@@ -178,7 +183,7 @@ public:
 	void *p = g_list_find(run_button_list, rb_p);
 	if (p){
 	    run_button_list = g_list_remove(run_button_list, rb_p);
-	    delete ((RunButton<Type> *)rb_p);
+	    delete ((runbutton_c *)rb_p);
 	}
 	pthread_mutex_unlock(rbl_mutex);
     }
@@ -187,10 +192,10 @@ public:
     newRunButton(const gchar * command, pid_t child){
 	TRACE("page->newRunButton\n");
 	gboolean shellIcon = run_c::run_in_shell(command);
-	auto runButton = (RunButton<Type> *)new(RunButton<Type>);
+	auto runButton = (runbutton_c *)new(runbutton_c);
 	runButton->setup((void *)this, command, child, shellIcon);
 	//runButton->make_run_data_button(runButton);
-	//auto runButton = (RunButton<Type> *)new(RunButton<Type>(this, command, child, shellIcon));
+	//auto runButton = (runbutton_c *)new(runbutton_c(this, command, child, shellIcon));
 	reference_run_button((void *)runButton);
 	// final creation will occur with context function.
     }
@@ -246,10 +251,10 @@ public:
         return (name);
     }
     void setDialogTitle(void){
-        gchar *gg = Completion<Type>::get_terminal_name(this->workDir());
+        gchar *gg = completion_c::get_terminal_name(this->workDir());
         gchar *g = g_strconcat("xffm: ", gg, NULL);
         g_free(gg); 
-        auto dialog = (fmDialog<Type> *)parent_;
+        auto dialog = (fmdialog_c *)parent_;
         dialog->setDialogTitle(g);
 	g_free(g);
     }
@@ -278,11 +283,11 @@ public:
    }
     
     void setVpanePosition(gint position){
-	gtk_paned_set_position (this->vpane_, position);
+	gtk_paned_set_position (this->vpane(), position);
         gint max;
-	g_object_get(G_OBJECT(this->vpane_), "max-position", &max, NULL);
- 	g_object_set_data(G_OBJECT(this->vpane_), "oldCurrent", GINT_TO_POINTER(position));
-	g_object_set_data(G_OBJECT(this->vpane_), "oldMax", GINT_TO_POINTER(max));   
+	g_object_get(G_OBJECT(this->vpane()), "max-position", &max, NULL);
+ 	g_object_set_data(G_OBJECT(this->vpane()), "oldCurrent", GINT_TO_POINTER(position));
+	g_object_set_data(G_OBJECT(this->vpane()), "oldMax", GINT_TO_POINTER(max));   
     }
    
     void set_spinner(gboolean state)
@@ -309,14 +314,14 @@ public:
         if (state > 0) {
 	    this->showFmBox();
 	    
-            print_c::hide_text(this->output_);
+            print_c::hide_text(this->output());
             terminalMode_ = FALSE;
         } else  {
 	    this->showTermBox();
             while (gtk_events_pending())gtk_main_iteration();
             if (state == 0) setVpanePosition(0);
             else {
-                gint position = Settings<Type>::getSettingInteger("window", "height");
+                gint position = settings_c::getSettingInteger("window", "height");
                 if (position < 0) position = 200;
                 else position /= 2;
                 setVpanePosition(position);
@@ -363,11 +368,7 @@ public:
             for (int i=0; navigationKeys[i] > 0; i++){
                 if (event->keyval == navigationKeys[i]) {
                     TRACE("navigation key\n");
-#ifdef XFFM_CC
                     return baseView()->keyboardEvent(event);
-#else
-                    return FALSE;
-#endif
                 }
             }
             // Any other key activates terminal (partial output).
@@ -381,33 +382,6 @@ public:
     void setSizeScale(gint size){
         gtk_range_set_value(GTK_RANGE(this->sizeScale()), size);
     }
-
-    GtkBox *pageChild(void){ return pageChild_;}
-    GtkLabel *pageLabel(void){ return pageLabel_;}
-    GtkBox *pageLabelBox(void){ return pageLabelBox_;}
-    GtkSpinner *pageLabelSpinner(void){ return pageLabelSpinner_;}
-    GtkBox *pageLabelSpinnerBox(void){ return pageLabelSpinnerBox_;}
-    GtkBox *pageLabelIconBox(void){ return pageLabelIconBox_;}
-    GtkButton *pageLabelButton(void){ return pageLabelButton_;}
-    GtkScrolledWindow *top_scrolled_window(void){ return this->top_scrolled_window_;};
-    
-    GtkPaned *vpane(void){return this->vpane_;}
-    GtkTextView *output(void){ return this->output_;}
-
-
-private:
-    GtkBox *pageChild_;
-    GtkLabel *pageLabel_;
-    GtkBox *pageLabelBox_;
-    GtkSpinner *pageLabelSpinner_;
-    GtkBox *pageLabelSpinnerBox_;
-    GtkBox *pageLabelIconBox_;
-    GtkButton *pageLabelButton_;
-
-    gboolean terminalMode_;
-    gboolean iconviewIsDefault_;
-
-public:
 
     gint fontSize(void){
         auto range = GTK_RANGE(this->sizeScale());

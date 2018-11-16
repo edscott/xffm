@@ -1,6 +1,6 @@
 #ifndef XF_VBUTTONBOX
 #define XF_VBUTTONBOX
-
+#include "hbuttonbox.hh"
 namespace xf {
 
 template <class Type>
@@ -34,6 +34,8 @@ public:
 	gtk_style_context_add_provider (style_context, GTK_STYLE_PROVIDER(css_provider),
 				    GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 
+	auto help = HButtonBox<double>::newButton("help-about-symbolic", _("Help"));
+	gtk_box_pack_end (vButtonBox_, GTK_WIDGET(help), FALSE, FALSE, 0);
 
 /*	auto clear_button =  gtk_c::dialog_button("edit-clear", NULL);
 	 g_object_set_data(G_OBJECT(vButtonBox_), "clear_button", clear_button);
