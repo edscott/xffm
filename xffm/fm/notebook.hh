@@ -51,7 +51,7 @@ public:
             workdir = g_get_current_dir();
         }
 	
-        auto page = new(Page<Type>)((Dialog<Type> *)this, workdir);
+        auto page = new(Page<Type>)((fmDialog<Type> *)this, workdir);
         g_object_set_data(G_OBJECT(page->pageChild()), "Notebook", (void *)this);
 
         // This will (and should) be set by the corresponding

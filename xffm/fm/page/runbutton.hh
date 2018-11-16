@@ -77,7 +77,7 @@ public:
     {
 	page_ = (Page<Type> *)data;
 	textview_ = page_->output();
-	button_space_ = page_->hButtonBox();
+	button_space_ = page_->vButtonBox();
 	
 	in_shell_ = shellIcon;
 	pid_ = child;

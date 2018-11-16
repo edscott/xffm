@@ -19,7 +19,7 @@ class Page :
     public Pathbar<Type>,
     public PageBase<Type>,
     protected Vpane<Type>,
-    protected HButtonBox<Type>,
+    public HButtonBox<double>,
     protected VButtonBox<Type>
 {
     using gtk_c = Gtk<double>;
@@ -29,15 +29,13 @@ class Page :
 private:
     GList *run_button_list;
     pthread_mutex_t *rbl_mutex;
-    Dialog<Type> *parent_;
-#ifdef XFFM_CC	
+    fmDialog<Type> *parent_;
     BaseView<Type> *baseView_;
-#endif
     
 
 public:
 
-    Page(Dialog<Type> *parent, const gchar *workdir){
+    Page(fmDialog<Type> *parent, const gchar *workdir){
 	parent_ = parent;
 	pageChild_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
 	pageLabel_ = GTK_LABEL(gtk_label_new ("foobar"));
@@ -66,19 +64,19 @@ public:
 	gtk_box_pack_start (hViewBox, GTK_WIDGET(this->vpane_), TRUE, TRUE, 0);
 	//gtk_box_pack_start (hViewBox, GTK_WIDGET(vButtonBox_), FALSE, FALSE, 0);
 	gtk_box_pack_start (pageChild_, GTK_WIDGET(hViewBox), TRUE, TRUE, 0);
-	gtk_box_pack_start (pageChild_, GTK_WIDGET(this->hButtonBox_), FALSE, FALSE, 0);
-        g_signal_connect(G_OBJECT(this->toggleToIconview_), "clicked", 
+	gtk_box_pack_start (pageChild_, GTK_WIDGET(this->hButtonBox()), FALSE, FALSE, 0);
+        g_signal_connect(G_OBJECT(this->toggleToIconview()), "clicked", 
                 BUTTON_CALLBACK(PageSignals<Type>::toggleToIconview), (void *)this);
-        g_signal_connect(G_OBJECT(this->toggleToTerminal_), "clicked", 
+        g_signal_connect(G_OBJECT(this->toggleToTerminal()), "clicked", 
                 BUTTON_CALLBACK(PageSignals<Type>::toggleToTerminal), (void *)this);
-        g_signal_connect(G_OBJECT(this->sizeScale_), "change-value", 
+        g_signal_connect(G_OBJECT(this->sizeScale()), "change-value", 
                 RANGE_CALLBACK(PageSignals<Type>::rangeChangeValue), (void *)this);
-        g_signal_connect(G_OBJECT(this->clearButton_), "clicked", 
+        g_signal_connect(G_OBJECT(this->clearButton()), "clicked", 
                 BUTTON_CALLBACK(PageSignals<Type>::clearText), (void *)this);
-        g_signal_connect(G_OBJECT(this->scriptButton_), "clicked", 
+        g_signal_connect(G_OBJECT(this->scriptButton()), "clicked", 
                 BUTTON_CALLBACK(PageSignals<Type>::scriptRun), (void *)this);
 
-        g_signal_connect(G_OBJECT(this->sizeScale_), "button-release-event", 
+        g_signal_connect(G_OBJECT(this->sizeScale()), "button-release-event", 
                 EVENT_CALLBACK(PageSignals<Type>::rangeOff), (void *)this);
 
 #ifdef XFFM_CC
@@ -90,7 +88,7 @@ public:
 
 	// Data for lpterm
         this->setOutput(this->output_);
-        this->setInput(this->input_);
+        this->setInput(this->input());
         this->setPage(this);
 
 	pthread_mutexattr_t r_attr;
@@ -135,22 +133,14 @@ public:
     }
 
     void updateStatusLabel(const gchar *text){
-        gchar *gg = NULL;
-        if (!text) {
-            gg = g_strdup_printf("xffm+-%s", VERSION);
-            text=gg;
-        }
-        gchar *g = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", text);
-        gtk_label_set_markup(this->statusLabel_,g);
-        g_free(g); 
-        g_free(gg);
+	this->setStatusLabel(text);
     }
       
 
 #ifdef XFFM_CC
     BaseView<Type> *baseView(void){ return baseView_;}
 #endif
-    Dialog<Type> *parent(void){return parent_;}
+    fmDialog<Type> *parent(void){return parent_;}
 
     pid_t command(const gchar *command){
         return (this->run_lp_command(this->output(), this->workDir(), command));
@@ -259,7 +249,7 @@ public:
         gchar *gg = Completion<Type>::get_terminal_name(this->workDir());
         gchar *g = g_strconcat("xffm: ", gg, NULL);
         g_free(gg); 
-        auto dialog = (Dialog<Type> *)parent_;
+        auto dialog = (fmDialog<Type> *)parent_;
         dialog->setDialogTitle(g);
 	g_free(g);
     }
@@ -317,21 +307,12 @@ public:
 	}
 
         if (state > 0) {
-            gtk_widget_hide(GTK_WIDGET(this->toggleToIconview_));
-            gtk_widget_hide(GTK_WIDGET(this->input_));
-            gtk_widget_hide(GTK_WIDGET(this->termButtonBox_));
-
-            gtk_widget_show(GTK_WIDGET(this->toggleToTerminal_));
-            gtk_widget_show(GTK_WIDGET(this->statusButton_));
+	    this->showFmBox();
+	    
             print_c::hide_text(this->output_);
             terminalMode_ = FALSE;
         } else  {
-            gtk_widget_hide(GTK_WIDGET(this->toggleToTerminal_));
-            gtk_widget_hide(GTK_WIDGET(this->statusButton_));
-
-            gtk_widget_show(GTK_WIDGET(this->toggleToIconview_));
-            gtk_widget_show(GTK_WIDGET(this->input_));
-            gtk_widget_show(GTK_WIDGET(this->termButtonBox_));
+	    this->showTermBox();
             while (gtk_events_pending())gtk_main_iteration();
             if (state == 0) setVpanePosition(0);
             else {
@@ -339,7 +320,7 @@ public:
                 if (position < 0) position = 200;
                 else position /= 2;
                 setVpanePosition(position);
-            }// print_c::show_text(this->output_);
+            }
             terminalMode_ = TRUE;
         } 
 
@@ -398,7 +379,7 @@ public:
 
     
     void setSizeScale(gint size){
-        gtk_range_set_value(GTK_RANGE(this->sizeScale_), size);
+        gtk_range_set_value(GTK_RANGE(this->sizeScale()), size);
     }
 
     GtkBox *pageChild(void){ return pageChild_;}
@@ -411,12 +392,8 @@ public:
     GtkScrolledWindow *top_scrolled_window(void){ return this->top_scrolled_window_;};
     
     GtkPaned *vpane(void){return this->vpane_;}
-    GtkTextView *input(void){ return this->input_;}
     GtkTextView *output(void){ return this->output_;}
-    GtkButton *toggleToTerminal(void){return this->toggleToTerminal_;} 
-    GtkButton *toggleToIconview(void){return this->toggleToIconview_;} 
 
-    GtkBox *hButtonBox(void){return this->hButtonBox_;}   
     GtkBox *vButtonBox(void){return this->vButtonBox_;}   
 
 private:
@@ -434,7 +411,7 @@ private:
 public:
 
     gint fontSize(void){
-        auto range = GTK_RANGE(this->sizeScale_);
+        auto range = GTK_RANGE(this->sizeScale());
         gdouble value = gtk_range_get_value (range);
         gint round = value + 0.5;
         return round;

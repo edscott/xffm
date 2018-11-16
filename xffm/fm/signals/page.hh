@@ -3,7 +3,6 @@
 
 namespace xf{
 template <class Type> class Page;
-template <class Type> class Dialog;
 template <class Type>
 class PageSignals{
     using print_c = Print<double>;
