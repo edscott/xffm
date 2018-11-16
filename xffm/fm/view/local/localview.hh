@@ -3,7 +3,6 @@
 
 // FIXME: determine HAVE_STRUCT_DIRENT_D_TYPE on configure (for freebsd)
 #define HAVE_STRUCT_DIRENT_D_TYPE 1
-#include "mime.hh"
 #include "common/util.hh"
 
 #include "localpopup.hh"

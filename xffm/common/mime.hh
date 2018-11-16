@@ -5,8 +5,6 @@
 //#include <libxml/tree.h>
 #include <string.h>
 #include <errno.h>
-#include "dialog/settings.hh"
-#include "common/util.hh"
 
 // For starters, we need mime_type() and mime_file(), 
 // then type_from_sfx and alias_type and apps and command

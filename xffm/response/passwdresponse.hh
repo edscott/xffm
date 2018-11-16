@@ -1,6 +1,6 @@
 #ifndef XF_PASSWDRESPONSE_HH
 #define XF_PASSWDRESPONSE_HH
-#include "dialog/dialog.hh"
+#include "fm/dialog.hh"
 
 namespace xf {
 

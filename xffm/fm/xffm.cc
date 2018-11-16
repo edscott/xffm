@@ -29,15 +29,17 @@ static GtkWidget *mainWindow = NULL;
 #include "common/tooltip.hh"
 #include "common/pixbuf.hh"
 #include "common/icons.hh"
+#include "common/settings.hh"
+#include "common/mime.hh"
 
-#include "dialog/settings.hh"
-
-#include "response/passwdresponse.hh"
-#include "fm.hh"
 
 #include "find/fgr.hh"
 #include "find/find.hh"
 #include "find/signals.hh"
+
+#include "response/passwdresponse.hh"
+#include "fm.hh"
+
 
 
 int
@@ -47,7 +49,7 @@ main (int argc, char *argv[]) {
     xffmProgram = argv[0];
     // common stuff
     // FIXME: this should be called as a class 
-#include "dialog/startup.hh"
+#include "startup.hh"
 
     auto xffm = new(xf::fmDialog<double>)(path);
     xffm->setDialogTitle("Fm");

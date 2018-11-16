@@ -3,8 +3,8 @@
 
 
 
-#include "dialog/dialog.hh"
-#include "term/completion/csh.hh"
+#include "dialog.hh"
+#include "completion/csh.hh"
 #include "view/baseview.hh"
 
 namespace xf

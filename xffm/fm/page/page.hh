@@ -1,6 +1,6 @@
 #ifndef XF_PAGE_CHILD
 #define XF_PAGE_CHILD
-#include "term/completion/completion.hh"
+#include "completion/completion.hh"
 #include "vbuttonbox.hh"
 #include "hbuttonbox.hh"
 #include "vpane.hh"
@@ -8,7 +8,7 @@
 #include "runbutton.hh"
 #include "pathbar.hh"
 #include "pagebase.hh"
-#include "dialog/signals/page.hh"
+#include "fm/signals/page.hh"
 
 namespace xf{
 
