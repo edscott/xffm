@@ -594,23 +594,6 @@ public:
 	    g_free(response);
 	}
 
-        
-
-/*	if (!response) return;
-	// Is the terminal flag set?
-	gchar *command ;
-	if (Mime<Type>::runInTerminal(path)){
-	    command = Mime<Type>::mkTerminalLine(path, response);
-	} else {
-	    command = Mime<Type>::mkCommandLine(path, response);
-	}
-        g_free(response);
-	// get baseView
-	auto baseView =  (BaseView<Type> *)g_object_get_data(G_OBJECT(data), "baseView");
-	auto page = baseView->page();
-	page->command(command);
-	TRACE("2)command = %s\n", command);
-	g_free(command);*/
     }
 
     static void

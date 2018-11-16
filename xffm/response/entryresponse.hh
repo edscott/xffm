@@ -127,7 +127,6 @@ public:
         // not needed yet:
         // g_object_set_data(G_OBJECT(checkbutton), "entryResponse", this);
 	add_cancel_ok(GTK_DIALOG (response_));
-	addMakeDefault(GTK_DIALOG (response_));
 
 	gtk_widget_realize (GTK_WIDGET(response_));
 	if(windowTitle){
@@ -307,19 +306,7 @@ private:
 	gtk_widget_show (GTK_WIDGET(button));
 	g_object_set_data (G_OBJECT (dialog), "action_true_button", button);
 	gtk_dialog_add_action_widget (GTK_DIALOG (dialog), GTK_WIDGET(button), GTK_RESPONSE_YES);
-
-	button = gtk_c::dialog_button ("emblem-important-symbolic", _("Make Default"));
-	gtk_widget_show (GTK_WIDGET(button));
-	gtk_dialog_add_action_widget (GTK_DIALOG (dialog), GTK_WIDGET(button), GTK_RESPONSE_YES);
-
     }
-    static void addMakeDefault(GtkDialog *dialog){
-	auto button = 
-	    gtk_c::dialog_button ("emblem-important-symbolic", _("Make Default"));
-	gtk_widget_show (GTK_WIDGET(button));
-	gtk_dialog_add_action_widget (GTK_DIALOG (dialog), GTK_WIDGET(button), GTK_RESPONSE_YES);
-    }
-
   
 };
 }

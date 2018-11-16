@@ -127,6 +127,30 @@ public:
 	    if (g_file_test(path, G_FILE_TEST_IS_EXECUTABLE)) {
 		runWith(baseView, treeModel, tpath, path);
 	    } else {
+		auto mimetype = Mime<Type>::mimeType(path);
+		gchar *response = Settings<Type>::getSettingString("MimeTypeApplications", mimetype);
+		if (response) {
+		    gchar *command;
+		    // Check whether applicacion is valid.
+		    gboolean valid = Mime<Type>::isValidCommand(response);
+		    if (!valid){
+			gchar *message = g_strdup_printf("\n<span color=\"#990000\"><b>%s</b></span>:\n <b>%s</b>\n", _("Invalid entry"), response); 
+			gtk_c::quick_help (GTK_WINDOW(mainWindow), message);
+			g_free(message);
+			return FALSE;
+		    }		 
+		    // Is the terminal flag set?
+		    if (Mime<Type>::runInTerminal(response)){
+			command = Mime<Type>::mkTerminalLine(response, path);
+		    } else {
+			command = Mime<Type>::mkCommandLine(response, path);
+		    }
+		    auto page = baseView->page();
+		    page->command(command);
+		    g_free(response);
+		    g_free(command);
+		    return FALSE;
+		}
 		openWith(baseView, treeModel, tpath, path);
 	    }
 	} else{
