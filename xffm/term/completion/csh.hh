@@ -1,7 +1,5 @@
 #ifndef CSHCOMPLETION_HH
 #define CSHCOMPLETION_HH
-#include "common/util.hh"
-#include "common/print.hh"
 #include "bash.hh"
 #define CSH_HISTORY 	g_get_user_cache_dir(),"lp_terminal_history"
 

@@ -1,6 +1,5 @@
 #ifndef MENU_POPOVER_HH
 #define MENU_POPOVER_HH
-#include "common/run.hh"
 
 namespace xf {
 template <class Type> class Notebook;

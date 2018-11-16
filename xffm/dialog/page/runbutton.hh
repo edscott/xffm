@@ -3,10 +3,6 @@
 #include <string.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-#include "common/tubo.hh"
-#include "common/gtk.hh"
-#include "common/util.hh"
-#include "common/run.hh"
 
 /*
 typedef struct thread_run_t {

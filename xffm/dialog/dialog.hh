@@ -1,11 +1,8 @@
 #ifndef XF_DIALOG
 #define XF_DIALOG
-static GtkWidget *mainWindow = NULL;
 
-#include "types.h"
 #include "notebook.hh"
 #include "signals/dialog.hh"
-#include "common/print.hh"
 #include <memory>
 
 namespace xf {

@@ -2,7 +2,6 @@
 #define COMPLETION_HH
 #include <unistd.h>
 #include "csh.hh"
-#include "common/print.hh"
 #include "lpterm.hh"
 
 namespace xf {

@@ -6,6 +6,7 @@
 #define XFFM_CC
 #include "config.h"
 #include "types.h"
+#include "intl.h"
 
 
 #define FORCE_CORE
@@ -13,14 +14,24 @@
 # include <sys/time.h>
 # include <sys/resource.h>
 #endif
+#include <memory>
 
 static const gchar *xffmProgram;
 static const gchar *xftermProgram;
 static const gchar *xffindProgram;
+static GtkWidget *mainWindow = NULL;
 
+#include "common/tubo.hh"
+#include "common/print.hh"
+#include "common/run.hh"
+#include "common/util.hh"
+#include "common/gtk.hh"
+#include "common/tooltip.hh"
+#include "common/pixbuf.hh"
+#include "common/icons.hh"
 
+#include "dialog/settings.hh"
 
-#include "common/intl.h"
 #include "response/passwdresponse.hh"
 #include "fm.hh"
 

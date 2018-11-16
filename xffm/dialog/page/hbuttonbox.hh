@@ -1,7 +1,6 @@
 #ifndef XF_HBUTTONBOX
 #define XF_HBUTTONBOX
 
-#include "dialog/settings.hh"
 
 namespace xf {
 template <class Type> class Dialog;

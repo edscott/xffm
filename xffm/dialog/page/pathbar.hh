@@ -1,8 +1,5 @@
 #ifndef PATHBAR_HH
 #define PATHBAR_HH
-#include "common/gtk.hh"
-#include "common/util.hh"
-#include "common/print.hh"
 #ifdef XFFM_CC
 # include "fm/view/baseview.hh"
 #endif

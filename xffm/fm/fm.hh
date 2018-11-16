@@ -2,13 +2,6 @@
 # define XF_FM_HH
 
 
-#include "types.h"
-#include "common/icons.hh"
-#include "common/pixbuf.hh"
-#include "common/gtk.hh"
-#include "common/tooltip.hh"
-#include "common/print.hh"
-#include "common/util.hh"
 
 #include "dialog/dialog.hh"
 #include "term/completion/csh.hh"

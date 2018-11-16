@@ -1,8 +1,6 @@
 #ifndef LPTERM_HH
 #define LPTERM_HH
 //#include "run_button_c.hpp"
-#include "common/run.hh"
-#include "common/util.hh"
 
 //#ifdef HAVE_READLINE_HISTORY_H
 # include <readline/history.h>

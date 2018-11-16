@@ -1,9 +1,5 @@
 #ifndef XF_PASSWDRESPONSE_HH
 #define XF_PASSWDRESPONSE_HH
-#include "types.h"
-#include "common/gtk.hh"
-#include "common/pixbuf.hh"
-#include "common/util.hh"
 #include "dialog/dialog.hh"
 
 namespace xf {

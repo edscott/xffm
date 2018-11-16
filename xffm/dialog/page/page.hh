@@ -1,7 +1,5 @@
 #ifndef XF_PAGE_CHILD
 #define XF_PAGE_CHILD
-#include "common/run.hh"
-#include "common/util.hh"
 #include "term/completion/completion.hh"
 #include "vbuttonbox.hh"
 #include "hbuttonbox.hh"

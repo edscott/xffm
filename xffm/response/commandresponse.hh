@@ -1,8 +1,5 @@
 #ifndef XF_COMMANDRESPONSE_HH
 #define XF_COMMANDRESPONSE_HH
-#include "types.h"
-#include "common/gtk.hh"
-#include "common/pixbuf.hh"
 namespace xf {
 
 template <class Type>
