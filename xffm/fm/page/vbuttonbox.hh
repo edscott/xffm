@@ -41,7 +41,7 @@ public:
 
 	gtk_box_pack_end (vButtonBox_, GTK_WIDGET(clear_button), FALSE, FALSE, 0);
 	gtk_box_pack_end (vButtonBox_, GTK_WIDGET(size_scale), FALSE, FALSE, 0);*/
-	//gtk_widget_show_all(GTK_WIDGET(vButtonBox_));
+	gtk_widget_show_all(GTK_WIDGET(vButtonBox_));
 	return ;
     }
 protected:
