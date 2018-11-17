@@ -46,24 +46,6 @@ private:
         readSettings();
     }
 
-/*
-    static void
-    saveSettings(const gchar *group, const gchar *item, gint value){
-        g_key_file_set_integer (keyFile, group, item, value);
-        writeSettings();
-    }
-
-    static void
-    saveSettings(void){
-        GtkAllocation allocation;
-        gtk_widget_get_allocation(GTK_WIDGET(dialog_), &allocation);
-        g_key_file_set_integer (keyFile, "window", "width", allocation.width);
-        g_key_file_set_integer (keyFile, "window", "height", allocation.height);
-        auto page = this->currentPageObject();
-        g_key_file_set_integer (keyFile, "xfterm", "fontSize", page->fontSize());
-        writeSettings();
-    }
-*/
     static void
     writeSettings(void){
         TRACE( "group_options_write_keyfile: %s\n", settingsfile);

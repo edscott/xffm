@@ -17,7 +17,6 @@
 #include <memory>
 
 static const gchar *xffmProgram;
-static const gchar *xftermProgram;
 static const gchar *xffindProgram;
 static GtkWidget *mainWindow = NULL;
 
@@ -45,7 +44,6 @@ static GtkWidget *mainWindow = NULL;
 int
 main (int argc, char *argv[]) {
     xffindProgram = argv[0];
-    xftermProgram = argv[0];
     xffmProgram = argv[0];
     // common stuff
     // FIXME: this should be called as a class 

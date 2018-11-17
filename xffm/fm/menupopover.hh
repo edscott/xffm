@@ -78,7 +78,7 @@ public:
         auto notebook_p = (Notebook<Type> *)g_object_get_data(G_OBJECT(data), "notebook_p");
         const gchar *path = notebook_p->workdir();
         if (!path || !g_file_test(path, G_FILE_TEST_IS_DIR)) path = g_get_home_dir();
-	gchar *find = g_strdup_printf("xfterm --find \"%s\"", path);
+	gchar *find = g_strdup_printf("xffm --find \"%s\"", path);
         run(notebook_p, find);
         g_free(find);
     }

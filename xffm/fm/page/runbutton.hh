@@ -147,7 +147,7 @@ public:
 	gtk_widget_set_sensitive(GTK_WIDGET(title), FALSE);
 	gtk_widget_show (GTK_WIDGET(title));
 	gtk_container_add (GTK_CONTAINER (menu_), GTK_WIDGET(title));
-	gchar *markup = g_strdup_printf("<span color=\"blue\" size=\"larger\">pid: %d</span>", grandchild_);
+	gchar *markup = g_strdup_printf("<span color=\"blue\" size=\"larger\">%s\n</span><span color=\"red\" size=\"larger\">pid: %d</span>", command_, grandchild_);
 	gtk_c::menu_item_content(title, NULL, markup, -48);
         g_free(markup);
 
