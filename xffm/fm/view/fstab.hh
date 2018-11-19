@@ -22,6 +22,27 @@
 #include <sys/param.h>
 #include <sys/mount.h>
 #endif
+/*
+msgid "eCryptfs Volume"
+msgid "SSHFS Remote Synchronization Folder"
+msgid "SFTP over SSH2"
+msgid "SFTP (via SSH)"
+msgid "Secure FTP (SFTP)"
+msgid "Mount"
+msgid "Mount %s"
+msgid "Mount point"
+msgid "Mount Point"
+msgid "Mount Volume"
+msgid "Mount user-space filesystems (FUSE)"
+msgid "FUSE Volume"
+msgid "Mount Helper"
+msgid "Mount user-space filesystems (FUSE)"
+msgid "Mount local disks and devices"
+msgid "Unix networks (NFS)"
+msgid "CIFS Volume"
+msgid "NFS Network Volume"
+msgid "NFS remote directory"
+*/
 
 
 # include <mntent.h>

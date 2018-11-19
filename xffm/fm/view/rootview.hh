@@ -52,18 +52,30 @@ public:
         // Disable DnD
         //gtk_icon_view_unset_model_drag_source (iconView);
         //gtk_icon_view_unset_model_drag_dest (iconView);
-        gtk_icon_view_set_selection_mode (iconView,GTK_SELECTION_SINGLE);      
+        gtk_icon_view_set_selection_mode (iconView,GTK_SELECTION_SINGLE); 
 
+	addRootItem(treeModel);
+	addHomeItem(treeModel);
+	addFstabItem(treeModel);
+#ifdef HAVE_LIBXML2
+	addPkgItem(treeModel);
+#endif
+        addLocalBookmarks(treeModel);
+
+	return TRUE;
+    }
+
+    static void
+    addRootItem(GtkTreeModel *treeModel){
+ 	GtkTreeIter iter;
 	// Root
-	const gchar *name = "/";
-	gchar *utf_name = util_c::utf_string(_("Root Directory"));
-	const gchar *icon_name = "system-file-manager";
-	const gchar *highlight_name = "system-file-manager/SE/document-open/2.0/225";
+	auto name = "/";
+	auto utf_name = util_c::utf_string(_("Root Directory"));
+	auto icon_name = "system-file-manager";
+	auto highlight_name = "system-file-manager/SE/document-open/2.0/225";
 	//const gchar *highlight_name = "document-open/SE/system-file-manager-symbolic/3.0/180";
-	GdkPixbuf *normal_pixbuf;
-	GdkPixbuf *highlight_pixbuf;
-	normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
-	highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);   
+	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
+	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);   
 	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
 	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
 		DISPLAY_NAME, utf_name,
@@ -77,14 +89,18 @@ public:
 
 		-1);
 	g_free(utf_name);
+    }
 
+    static void
+    addHomeItem(GtkTreeModel *treeModel){
+ 	GtkTreeIter iter;
 	// Home
-	name = g_get_home_dir();
-	utf_name = util_c::utf_string(_("Home Directory"));
-	icon_name = "user-home";
-	highlight_name = "user-home/SE/document-open/2.0/225";
-	normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
-	highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);   
+	auto name = g_get_home_dir();
+	auto utf_name = util_c::utf_string(_("Home Directory"));
+	auto icon_name = "user-home";
+	auto highlight_name = "user-home/SE/document-open/2.0/225";
+	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
+	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);   
 
 	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
 	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
@@ -98,11 +114,77 @@ public:
 		TOOLTIP_TEXT,_("This is the user's home directory"),
 		-1);
 	g_free(utf_name);
-
-        addLocalBookmarks(treeModel);
-
-	return TRUE;
     }
+
+    static void
+    addFstabItem(GtkTreeModel *treeModel){	
+ 	GtkTreeIter iter;
+	auto name = "xffm:fstab";
+	auto utf_name = util_c::utf_string(_("Mount Helper"));
+	auto icon_name = "folder-remote";
+	auto highlight_name = "folder-remote/SE/document-open/2.0/225";
+	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
+	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG); 
+	auto tooltipText = g_strdup_printf("%s\n%s\n%s\n%s",
+		_("Mount local disks and devices"),
+		_("eCryptfs Volume"),
+		_("SSHFS Remote Synchronization Folder"),
+		_("NFS Network Volume"),
+		_("CIFS Volume"));
+
+	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
+	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
+		DISPLAY_NAME, utf_name,
+		ACTUAL_NAME, name,
+                PATH, name,
+		ICON_NAME, icon_name,
+		DISPLAY_PIXBUF, normal_pixbuf,
+		NORMAL_PIXBUF, normal_pixbuf,
+		HIGHLIGHT_PIXBUF, highlight_pixbuf,
+		TOOLTIP_TEXT,_("This is the user's home directory"),
+		-1);
+	g_free(utf_name);
+    }
+
+#if defined HAVE_PACMAN || defined HAVE_EMERGE || defined HAVE_PKG
+    static void
+    addPkgItem(GtkTreeModel *treeModel){	
+ 	GtkTreeIter iter;
+	auto name = "xffm:pkg";
+	auto utf_name = util_c::utf_string(_("Software Updater"));
+#ifdef HAVE_PACMAN
+	auto icon_name = "package-x-generic/SE/emblem-archlinux/2.0/225";
+#else 
+#  ifdef HAVE_EMERGE
+	auto icon_name = "package-x-generic/SE/emblem-gentoo/2.0/225";
+#  else 
+	auto icon_name = "package-x-generic/SE/x-package-repository/2.0/225";
+#  endif
+#endif
+	auto highlight_name = "package-x-generic/SE/document-open/2.0/225";
+	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
+	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG); 
+	auto tooltipText = g_strdup_printf("%s",
+		_("Add or remove software installed on the system"));
+
+	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
+	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
+		DISPLAY_NAME, utf_name,
+		ACTUAL_NAME, name,
+                PATH, name,
+		ICON_NAME, icon_name,
+		DISPLAY_PIXBUF, normal_pixbuf,
+		NORMAL_PIXBUF, normal_pixbuf,
+		HIGHLIGHT_PIXBUF, highlight_pixbuf,
+		TOOLTIP_TEXT,_("This is the user's home directory"),
+		-1);
+	g_free(utf_name);
+    }
+#else
+#warning "Package manager only with pkg, emerge or pacman"
+    static void
+    addPkgItem(GtkTreeModel *treeModel){}
+#endif
 
     static void
     addLocalBookmarks(GtkTreeModel *treeModel){

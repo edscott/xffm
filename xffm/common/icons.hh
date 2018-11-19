@@ -54,6 +54,12 @@ public:
 	auto path = g_build_filename(resource_path, "24x24", NULL);
 	gtk_icon_theme_append_search_path (icon_theme, path);
 	g_free(path);
+	path = g_build_filename(resource_path, "48x48", NULL);
+	gtk_icon_theme_append_search_path (icon_theme, path);
+	g_free(path);
+	path = g_build_filename(resource_path, "scalable", NULL);
+	gtk_icon_theme_append_search_path (icon_theme, path);
+	g_free(path);
 
 	// xffm+ svg icons are at:
 	path = g_build_filename(PREFIX, "share", "icons", "xffm+", "scalable", "stock", NULL);

@@ -6,6 +6,10 @@
 
 #define @SIGNAL_H@
 #define @HAVE_GREP@
+#define @HAVE_EMERGE@
+#define @HAVE_PACMAN@
+#define @HAVE_PKG@
+#define @HAVE_LIBXML2@
 #define @MIMETYPE_PROGRAM@
 #define @FREEDESKTOP_GLOBS@
 #define @FREEDESKTOP_ALIAS@
