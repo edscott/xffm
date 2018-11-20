@@ -7,8 +7,8 @@ namespace xf
 template <class Type>
 class RootView  {
 
-    using pixbuf_c = Pixbuf<Type>;
-    using util_c = Util<Type>;
+    using pixbuf_c = Pixbuf<double>;
+    using util_c = Util<double>;
 public:
 
     static gboolean enableDragSource(void){ return FALSE;}
@@ -64,6 +64,31 @@ public:
 
 	return TRUE;
     }
+    
+    static void
+    addXffmItem(GtkTreeModel *treeModel){
+ 	GtkTreeIter iter;
+	// Root
+	auto name = "xffm:root";
+	auto utf_name = util_c::utf_string(".");
+	auto icon_name = "go-up";
+	auto highlight_name = "go-up/NW/go-up-symbolic/2.0/225";
+	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
+	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);   
+	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
+	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
+		DISPLAY_NAME, utf_name,
+		ACTUAL_NAME, name,
+		ICON_NAME, icon_name,
+                PATH, name,
+		DISPLAY_PIXBUF, normal_pixbuf,
+		NORMAL_PIXBUF, normal_pixbuf,
+		HIGHLIGHT_PIXBUF, highlight_pixbuf,
+		TOOLTIP_TEXT,_("xffm:root"),
+
+		-1);
+	g_free(utf_name);
+    }
 
     static void
     addRootItem(GtkTreeModel *treeModel){
@@ -73,7 +98,7 @@ public:
 	auto utf_name = util_c::utf_string(_("Root Directory"));
 	auto icon_name = "system-file-manager";
 	auto highlight_name = "system-file-manager/SE/document-open/2.0/225";
-	//const gchar *highlight_name = "document-open/SE/system-file-manager-symbolic/3.0/180";
+	//const gchar *highlight_name = "document-open/NE/system-file-manager-symbolic/3.0/180";
 	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
 	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);   
 	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
@@ -98,7 +123,7 @@ public:
 	auto name = g_get_home_dir();
 	auto utf_name = util_c::utf_string(_("Home Directory"));
 	auto icon_name = "user-home";
-	auto highlight_name = "user-home/SE/document-open/2.0/225";
+	auto highlight_name = "user-home/NE/document-open/2.0/225";
 	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
 	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);   
 
@@ -122,7 +147,7 @@ public:
 	auto name = "xffm:fstab";
 	auto utf_name = util_c::utf_string(_("Mount Helper"));
 	auto icon_name = "folder-remote";
-	auto highlight_name = "folder-remote/SE/document-open/2.0/225";
+	auto highlight_name = "folder-remote/NE/document-open/2.0/225";
 	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
 	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG); 
 	auto tooltipText = g_strdup_printf("%s\n%s\n%s\n%s",
@@ -154,14 +179,18 @@ public:
 	auto utf_name = util_c::utf_string(_("Software Updater"));
 #ifdef HAVE_PACMAN
 	auto icon_name = "package-x-generic/SE/emblem-archlinux/2.0/225";
+	auto highlight_name = "package-x-generic/NE/document-open/2.0/225/SE/emblem-archlinux/2.0/225";
 #else 
 #  ifdef HAVE_EMERGE
 	auto icon_name = "package-x-generic/SE/emblem-gentoo/2.0/225";
+	auto highlight_name = "package-x-generic/NE/document-open/2.0/225/SE/emblem-gentoo/2.0/225";
+
 #  else 
 	auto icon_name = "package-x-generic/SE/x-package-repository/2.0/225";
+	auto highlight_name = "package-x-generic/NE/document-open/2.0/225/SE/x-package-repository/2.0/225";
+
 #  endif
 #endif
-	auto highlight_name = "package-x-generic/SE/document-open/2.0/225";
 	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
 	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG); 
 	auto tooltipText = g_strdup_printf("%s",
@@ -201,16 +230,8 @@ public:
                 auto basename = g_path_get_basename(*p);
                 auto utf_name = util_c::utf_string(basename);
              
-                const gchar *icon_name = "emblem-documents/NE/bookmark-new/2.0/220";
-                const gchar *highlight_name = "emblem-documents/NE/document-open/2.0/220";
-
-                /*if (g_file_test(*p, G_FILE_TEST_IS_DIR)){
-                    icon_name = "folder/NE/bookmark-new/2.0/220";
-                    highlight_name = "document-open/NE/bookmark-new/2.0/220";
-                } else {
-                    icon_name = "emblem-documents/NE/bookmark-new/2.0/220";
-                    highlight_name = "emblem-documents/NE/document-open/2.0/220";
-                }*/
+                const gchar *icon_name = "emblem-documents/SE/bookmark-new/2.0/220";
+                const gchar *highlight_name = "emblem-documents/SE/bookmark-new/2.0/220/NE/document-open/2.0/220";
                 GdkPixbuf *normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
                 GdkPixbuf *highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);   
                 

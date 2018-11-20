@@ -189,7 +189,7 @@ public:
         int heartbeat = 0;
     
         GList *directory_list = read_items (path, &heartbeat);
-        insert_list_into_model(directory_list, GTK_LIST_STORE(treeModel));
+        insert_list_into_model(directory_list, GTK_LIST_STORE(treeModel), path);
         WARN("added new stuff\n");
 		
 
@@ -367,7 +367,10 @@ private:
     }
 
     static gint
-    insert_list_into_model(GList *data, GtkListStore *list_store){
+    insert_list_into_model(GList *data, GtkListStore *list_store, const gchar *path){
+	if(strcmp(path, "/")==0){
+	    RootView<Type>::addXffmItem(GTK_TREE_MODEL(list_store));
+	}
         GList *directory_list = (GList *)data;
         gint dir_count = g_list_length(directory_list);
         GList *l = directory_list;
@@ -515,7 +518,7 @@ private:
         gchar *highlight_name;
         if (is_dir){
             if (strcmp(xd_p->d_name, "..")==0) {
-                highlight_name = g_strdup("go-up");
+                highlight_name = g_strdup("go-up/NW/go-up-symbolic/2.0/225");
             } else highlight_name = g_strdup("document-open");
         } else {
             gchar *h_name = get_iconname(xd_p);
@@ -973,7 +976,7 @@ private:
             return emblem;
         }
         if (RootView<Type>::isBookmarked(xd_p->path)){
-            return g_strdup("/NE/bookmark-new/2.0/220");
+            return g_strdup("/SE/bookmark-new/2.0/220");
         }
 
         TRACE("getEmblem: %s\n", xd_p->path);
@@ -1010,7 +1013,7 @@ private:
             return g_strdup("/SW/emblem-symbolic-link/2.0/220");
         }
         if (RootView<Type>::isBookmarked(path)){
-            return g_strdup("/NE/bookmark-new/2.0/220");
+            return g_strdup("/SE/bookmark-new/2.0/220");
         }
         emblem = g_strdup("");
         // Now we try stat emblem

@@ -51,8 +51,134 @@ msgid "NFS remote directory"
 namespace xf {
 template <class Type>
 class Fstab {
+    using pixbuf_c = Pixbuf<double>;
+    using util_c = Util<double>;
 public:
+
+    static gboolean
+    loadModel (GtkIconView *iconView)
+    {
+		
+        g_object_set_data(G_OBJECT(iconView), "iconViewType", (void *)"RootView");
+        auto treeModel = gtk_icon_view_get_model (iconView);
+	TRACE("mk_tree_model:: model = %p\n", treeModel);
+        while (gtk_events_pending()) gtk_main_iteration();
+ 	GtkTreeIter iter;
+	if (gtk_tree_model_get_iter_first (treeModel, &iter)){
+	    while (gtk_list_store_remove (GTK_LIST_STORE(treeModel),&iter));
+	}
+        // Disable DnD
+        //gtk_icon_view_unset_model_drag_source (iconView);
+        //gtk_icon_view_unset_model_drag_dest (iconView);
+        gtk_icon_view_set_selection_mode (iconView,GTK_SELECTION_SINGLE); 
+
+	RootView<Type>::addXffmItem(treeModel);
+	addNFSItem(treeModel);
+	addEcryptFSItem(treeModel);
+	addSSHItem(treeModel);
+	addCIFSItem(treeModel);
+
+	return TRUE;
+    }
+
     
+    static void
+    addNFSItem(GtkTreeModel *treeModel){
+ 	GtkTreeIter iter;
+	auto name = "xffm:nfs";
+	auto utf_name = util_c::utf_string(_("NFS Network Volume"));
+	auto icon_name = "video-display/SE/emblem-nfs/2.0/225";
+	auto highlight_name = "video-display/SE/emblem-nfs/2.0/225/NE/document-open/2.0/225";
+	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
+	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);   
+	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
+	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
+		DISPLAY_NAME, utf_name,
+		ACTUAL_NAME, name,
+		ICON_NAME, icon_name,
+                PATH, name,
+		DISPLAY_PIXBUF, normal_pixbuf,
+		NORMAL_PIXBUF, normal_pixbuf,
+		HIGHLIGHT_PIXBUF, highlight_pixbuf,
+		TOOLTIP_TEXT,_("xffm:nfs"),
+
+		-1);
+	g_free(utf_name);
+    }
+
+    static void
+    addSSHItem(GtkTreeModel *treeModel){
+ 	GtkTreeIter iter;
+	auto name = "xffm:nfs";
+	auto utf_name = util_c::utf_string(_("SFTP (via SSH)"));
+	auto icon_name = "video-display/SE/emblem-ssh/2.0/225";
+	auto highlight_name = "video-display/SE/emblem-ssh/2.0/225/NE/document-open/2.0/225";
+	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
+	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);   
+	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
+	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
+		DISPLAY_NAME, utf_name,
+		ACTUAL_NAME, name,
+		ICON_NAME, icon_name,
+                PATH, name,
+		DISPLAY_PIXBUF, normal_pixbuf,
+		NORMAL_PIXBUF, normal_pixbuf,
+		HIGHLIGHT_PIXBUF, highlight_pixbuf,
+		TOOLTIP_TEXT,_("xffm:sshfs"),
+
+		-1);
+	g_free(utf_name);
+    }
+
+    static void
+    addEcryptFSItem(GtkTreeModel *treeModel){
+ 	GtkTreeIter iter;
+	auto name = "xffm:nfs";
+	auto utf_name = util_c::utf_string(_("eCryptfs Volume"));
+	auto icon_name = "video-display/SE/emblem-lock/2.0/225";
+	auto highlight_name = "video-display/SE/emblem-lock/2.0/225/NE/document-open/2.0/225";
+	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
+	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);   
+	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
+	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
+		DISPLAY_NAME, utf_name,
+		ACTUAL_NAME, name,
+		ICON_NAME, icon_name,
+                PATH, name,
+		DISPLAY_PIXBUF, normal_pixbuf,
+		NORMAL_PIXBUF, normal_pixbuf,
+		HIGHLIGHT_PIXBUF, highlight_pixbuf,
+		TOOLTIP_TEXT,_("xffm:ecryptfs"),
+
+		-1);
+	g_free(utf_name);
+    }
+
+    static void
+    addCIFSItem(GtkTreeModel *treeModel){
+ 	GtkTreeIter iter;
+	auto name = "xffm:cifs";
+	auto utf_name = util_c::utf_string(_("CIFS Volume"));
+	auto icon_name = "video-display/SE/emblem-smb/2.0/225";
+	auto highlight_name = "video-display/SE/emblem-smb/2.0/225/NE/document-open/2.0/225";
+	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
+	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);   
+	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
+	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
+		DISPLAY_NAME, utf_name,
+		ACTUAL_NAME, name,
+		ICON_NAME, icon_name,
+                PATH, name,
+		DISPLAY_PIXBUF, normal_pixbuf,
+		NORMAL_PIXBUF, normal_pixbuf,
+		HIGHLIGHT_PIXBUF, highlight_pixbuf,
+		TOOLTIP_TEXT,_("xffm:cifs"),
+
+		-1);
+	g_free(utf_name);
+    }
+   
+   
     static gboolean
     isMounted (const gchar *mnt_fsname) {
         if(!mnt_fsname) {

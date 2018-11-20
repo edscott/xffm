@@ -270,6 +270,11 @@ public:
 		//result = LocalView<Type>::item_activated(path);
 	    }
             return result;
+        } else if (strcmp(path, "xffm:fstab")==0) {
+	    result = Fstab<Type>::loadModel(iconView_);
+	    page_->updateStatusLabel(NULL);
+	    return result;
+
         } else if (!strcmp(path, "xffm:root")==0) {
            ERROR("baseview.hh::loadModel(): unknown path \"%s\"\n", path);
         }
