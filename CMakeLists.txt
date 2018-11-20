@@ -139,10 +139,10 @@ find_package(LibXml2 2.9.8 )
 find_program(HAVE_LIBXML2 xmllint )
 if(NOT HAVE_LIBXML2)
     set(HAVE_LIBXML2 "HAVE_LIBXML2_NOTFOUND")
-    message( STATUS "LibXml2 is not found" )
+    message( WARNING "LibXml2 not found: \"Software Updater\" will not be built." )
 else()
     set(HAVE_LIBXML2 "HAVE_LIBXML2 1")
-    message( STATUS "LibXml2 was found." )
+    message( STATUS "LibXml2 was found: \"Software Updater\" available for pkg, emerge and pacman." )
 endif()
 
 # mimeinfo is now replaced by dev-perl/File-MimeInfo

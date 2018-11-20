@@ -77,8 +77,114 @@ public:
 	addEcryptFSItem(treeModel);
 	addSSHItem(treeModel);
 	addCIFSItem(treeModel);
+        addPartitionItems(treeModel);
 
 	return TRUE;
+    }
+
+    static gchar *
+    e2Label(const gchar *partition){
+        const gchar *command = "ls -l /dev/disk/by-label";
+	FILE *pipe = popen (command, "r");
+	if(pipe == NULL) {
+	    ERROR("Cannot pipe from %s\n", command);
+	    return NULL;
+	}
+        gchar line[256];
+        memset(line, 0, 256);
+        gchar *label = NULL;
+	while (fgets (line, 255, pipe) && !feof(pipe)) {
+            if (strstr(line, "->") && strstr(line, partition)) {
+                *(strstr(line, "->")) = 0;
+                g_strstrip(line);
+                if (strrchr(line, ' ')) label = g_strdup(strrchr(line, ' ')+1);
+                break;
+            }
+	}
+        pclose (pipe);
+	return label;
+
+    }
+
+
+    static gchar *
+    getMntDir (gchar * mnt_fsname) {
+        FILE *fstab_fd = setmntent ("/etc/mtab", "r");
+        if(!fstab_fd)
+            return NULL;
+        struct mntent *mnt_struct;
+        gchar *mnt_dir = NULL;
+        struct mntent mntbuf;
+        gchar buf[2048]; 
+        while ((mnt_struct = getmntent_r (fstab_fd, &mntbuf, buf, 2048)) != NULL) {
+            if(strcmp (mnt_fsname, mnt_struct->mnt_fsname) == 0) {
+                // hit: multiple entries use first listed 
+                // user types have preference and use last listed 
+                if(strstr (mnt_struct->mnt_opts, "user")) {
+                    g_free (mnt_dir);
+                    mnt_dir = g_strdup (mnt_struct->mnt_dir);
+                }
+                if(!mnt_dir) {
+                    mnt_dir = g_strdup (mnt_struct->mnt_dir);
+                }
+            }
+        }
+        (void)endmntent (fstab_fd);
+        return mnt_dir;
+    }
+
+
+    static void // Linux
+    addPartitionItems (GtkTreeModel *treeModel) {
+ 	GtkTreeIter iter;
+        FILE *partitions = fopen ("/proc/partitions", "r");
+        if(!partitions) return;
+
+        gchar line[1024];
+        memset (line, 0, 1024);
+        while(fgets (line, 1023, partitions) && !feof (partitions)) {
+            if(strlen (line) < 5) continue;
+            if(strchr (line, '#')) continue;
+            TRACE ("partitions: %s\n", line);
+            gchar *p = strrchr (line, ' ');
+            if(p == NULL) continue;
+            g_strstrip (p);
+            TRACE ("partitions add: %s\n", p);
+            if(!strlen (p)) continue;
+            if (strncmp(p, "sd", 2) == 0 || strncmp(p, "hd", 2)==0){
+                if (p[3] < '0' || p[3] >'9') continue;
+                gchar *path = g_strdup_printf ("/dev/%s", p);
+                gchar *mntDir = getMntDir(path);
+                auto label = e2Label(p);
+                auto name = (label)?label:p;
+                auto fullName = (mntDir)?g_strdup_printf("%s\n(%s)", name, mntDir): g_strdup(name);
+                auto utf_name = util_c::utf_string(fullName);
+                g_free(fullName);
+                gboolean mounted = isMounted(path);
+                auto icon_name = (mounted)?"drive-harddisk/NE/greenball/2.0/225":
+                    "drive-harddisk/NE/grayball/2.0/225";
+                auto highlight_name = "drive-harddisk/NW/edit-select-symbolic/2.0/225";
+                auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
+                auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);   
+                gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
+                gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
+                        DISPLAY_NAME, utf_name,
+                        ACTUAL_NAME, name,
+                        ICON_NAME, icon_name,
+                        PATH, name,
+                        DISPLAY_PIXBUF, normal_pixbuf,
+                        NORMAL_PIXBUF, normal_pixbuf,
+                        HIGHLIGHT_PIXBUF, highlight_pixbuf,
+                        TOOLTIP_TEXT,"FIXME: UUID or partition type...",
+
+                        -1);
+                g_free(path);
+                g_free(utf_name);
+            }
+            memset (line, 0, 1024);
+        }
+        fclose (partitions);
+        return;
     }
 
     
