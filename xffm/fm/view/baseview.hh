@@ -60,6 +60,7 @@ class BaseView{
     page_c *page_;
 
     LocalMonitor<Type> *localMonitor_;
+    FstabMonitor<Type> *fstabMonitor_;
 
     // This mkTreeModel should be static...
     static GtkTreeModel *
@@ -98,6 +99,7 @@ public:
         path_ = NULL;
         selectionList_ = NULL;
         localMonitor_ = NULL;
+        fstabMonitor_ = NULL;
         if (!validBaseViewHash) validBaseViewHash = g_hash_table_new(g_direct_hash, g_direct_equal); 
 	g_hash_table_replace(validBaseViewHash, (void *)this, GINT_TO_POINTER(1));
         iconView_=createIconview();
@@ -228,17 +230,21 @@ public:
     gboolean loadModel(const gchar *path){
         if (!path) path = "xffm:root";
         setPath(path);
+        // stop current monitor
+        if (localMonitor_) {
+            delete (localMonitor_);
+            localMonitor_ = NULL;
+        }
+        if (fstabMonitor_) {
+            delete (fstabMonitor_);
+            fstabMonitor_ = NULL;
+        }
 
 	// Remove previous liststore rows, if any
     
         gboolean result;
         if (g_file_test(path, G_FILE_TEST_EXISTS)){
 	    if (g_file_test(path, G_FILE_TEST_IS_DIR)){
-		// stop current monitor
-		if (localMonitor_) {
-                    delete (localMonitor_);
-                    localMonitor_ = NULL;
-                }
 		result = LocalView<Type>::loadModel(iconView_, path);
 		if (!result){
 		    ERROR("baseview.hh:loadModel: cannot load view for %s\n", path);
@@ -260,7 +266,7 @@ public:
                     
 
                     if (items <= 500) {
-		        localMonitor_ = new(LocalMonitor<Type>)(treeModel_, path, this);
+		        localMonitor_ = new(LocalMonitor<Type>)(treeModel_, this);
 		        localMonitor_->start_monitor(treeModel_, path);
                     } else {
                         localMonitor_ = NULL;
@@ -273,6 +279,8 @@ public:
         } else if (strcmp(path, "xffm:fstab")==0) {
 	    result = Fstab<Type>::loadModel(iconView_);
 	    page_->updateStatusLabel(NULL);
+            fstabMonitor_ = new(FstabMonitor<Type>)(treeModel_, this);
+            fstabMonitor_->start_monitor(treeModel_, "/dev/disk/by-partuuid");
 	    return result;
 
         } else if (!strcmp(path, "xffm:root")==0) {

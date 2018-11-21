@@ -47,6 +47,9 @@ msgid "NFS remote directory"
 
 # include <mntent.h>
 
+#include "fstabmonitor.hh"
+
+
     // XXX this is Linux Version. FreeBSD differs (see fstab module)
 namespace xf {
 template <class Type>
@@ -82,6 +85,7 @@ public:
 	return TRUE;
     }
 
+
     static gchar *
     e2Label(const gchar *partition){
         const gchar *command = "ls -l /dev/disk/by-label";
@@ -108,7 +112,7 @@ public:
 
 
     static gchar *
-    getMntDir (gchar * mnt_fsname) {
+    getMntDir (const gchar * mnt_fsname) {
         FILE *fstab_fd = setmntent ("/etc/mtab", "r");
         if(!fstab_fd)
             return NULL;
@@ -133,54 +137,103 @@ public:
         return mnt_dir;
     }
 
+    static gchar *
+    getPartitionPath(const gchar *line){
+        if(strlen (line) < 5) return NULL;
+        if(strchr (line, '#')) return NULL;
+        TRACE ("partitions: %s\n", line);
+        if (!strrchr (line, ' ')) return NULL;
+        gchar *p = g_strdup(strrchr (line, ' '));
+        g_strstrip (p);
+        TRACE ("partitions add: %s\n", p);
+        if(!strlen (p)) {
+            g_free(p);
+            return NULL;
+        }
+        if (strncmp(p, "sd", 2) == 0 || strncmp(p, "hd", 2)==0){
+            if (p[3] < '0' || p[3] >'9') return NULL;
+            gchar *path = g_strdup_printf ("/dev/%s", p);
+            g_free(p);
+            return path;
+        }
+        g_free(p);
+        return NULL;
+    }
+
+    static gchar *
+    partition2uuid(const gchar *partition){
+        const gchar *command = "ls -l /dev/disk/by-partuuid";
+	FILE *pipe = popen (command, "r");
+	if(pipe == NULL) {
+	    ERROR("Cannot pipe from %s\n", command);
+	    return NULL;
+	}
+        gchar line[256];
+        memset(line, 0, 256);
+        gchar *uuid = NULL;
+	while (fgets (line, 255, pipe) && !feof(pipe)) {
+            TRACE("%s: %s\n", partition, line);
+            if (strstr(line, "->") && strstr(line, partition)) {
+                *strstr(line, "->") = 0;
+                g_strstrip(line);
+                if (strrchr(line, ' ')){
+                    uuid = g_strdup(strrchr(line, ' '));
+                    g_strstrip(uuid);
+                }
+                break;
+            }
+	}
+        pclose (pipe);
+	return uuid;
+    }
+
+    static void
+    addPartition(GtkTreeModel *treeModel, const gchar *path){
+ 	GtkTreeIter iter;
+        gchar *basename = g_path_get_basename(path);
+        gchar *mntDir = getMntDir(path);
+        auto label = e2Label(basename);
+        auto name = (label)?label:basename;
+        auto fullName = (mntDir)?g_strdup_printf("%s\n(%s)", name, mntDir): g_strdup(name);
+        auto utf_name = util_c::utf_string(fullName);
+        g_free(fullName);
+        gboolean mounted = isMounted(path);
+        auto icon_name = (mounted)?"drive-harddisk/NE/greenball/2.0/225":
+            "drive-harddisk/NE/grayball/2.0/225";
+        auto highlight_name = "drive-harddisk/NW/edit-select-symbolic/2.0/225";
+        auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
+        auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);   
+        auto uuid = partition2uuid(basename);
+        gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
+        gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
+                DISPLAY_NAME, utf_name,
+                ACTUAL_NAME, uuid,
+                ICON_NAME, icon_name,
+                PATH, name,
+                DISPLAY_PIXBUF, normal_pixbuf,
+                NORMAL_PIXBUF, normal_pixbuf,
+                HIGHLIGHT_PIXBUF, highlight_pixbuf,
+                TOOLTIP_TEXT,"FIXME: UUID or partition type...",
+
+                -1);
+        g_free(basename);
+        g_free(utf_name);
+        g_free(uuid);
+    
+    }
 
     static void // Linux
     addPartitionItems (GtkTreeModel *treeModel) {
- 	GtkTreeIter iter;
         FILE *partitions = fopen ("/proc/partitions", "r");
         if(!partitions) return;
 
         gchar line[1024];
         memset (line, 0, 1024);
         while(fgets (line, 1023, partitions) && !feof (partitions)) {
-            if(strlen (line) < 5) continue;
-            if(strchr (line, '#')) continue;
-            TRACE ("partitions: %s\n", line);
-            gchar *p = strrchr (line, ' ');
-            if(p == NULL) continue;
-            g_strstrip (p);
-            TRACE ("partitions add: %s\n", p);
-            if(!strlen (p)) continue;
-            if (strncmp(p, "sd", 2) == 0 || strncmp(p, "hd", 2)==0){
-                if (p[3] < '0' || p[3] >'9') continue;
-                gchar *path = g_strdup_printf ("/dev/%s", p);
-                gchar *mntDir = getMntDir(path);
-                auto label = e2Label(p);
-                auto name = (label)?label:p;
-                auto fullName = (mntDir)?g_strdup_printf("%s\n(%s)", name, mntDir): g_strdup(name);
-                auto utf_name = util_c::utf_string(fullName);
-                g_free(fullName);
-                gboolean mounted = isMounted(path);
-                auto icon_name = (mounted)?"drive-harddisk/NE/greenball/2.0/225":
-                    "drive-harddisk/NE/grayball/2.0/225";
-                auto highlight_name = "drive-harddisk/NW/edit-select-symbolic/2.0/225";
-                auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
-                auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);   
-                gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
-                gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
-                        DISPLAY_NAME, utf_name,
-                        ACTUAL_NAME, name,
-                        ICON_NAME, icon_name,
-                        PATH, name,
-                        DISPLAY_PIXBUF, normal_pixbuf,
-                        NORMAL_PIXBUF, normal_pixbuf,
-                        HIGHLIGHT_PIXBUF, highlight_pixbuf,
-                        TOOLTIP_TEXT,"FIXME: UUID or partition type...",
-
-                        -1);
-                g_free(path);
-                g_free(utf_name);
-            }
+            gchar *path = getPartitionPath(line);
+            if (!path) continue;
+            addPartition(treeModel, path);
+            g_free(path);
             memset (line, 0, 1024);
         }
         fclose (partitions);
