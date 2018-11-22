@@ -83,14 +83,8 @@ typedef struct menuItem_t {
     const gchar *label;
     void *callback;
     void *callbackData;
-}menuItem_t;
-
-typedef struct menuCheckItem_t {
-    const gchar *label;
-    void *callback;
-    void *callbackData;
     const gchar *toggleID;
-}menuCheckItem_t;
+}menuItem_t;
 
 typedef struct radio_t {
     GtkBox *box;

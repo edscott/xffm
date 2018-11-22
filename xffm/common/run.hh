@@ -308,7 +308,7 @@ public:
         line = (char *)stream;
         if(line[0] != '\n') {
             if (strstr(line, "error")||strstr(line,_("error"))) {
-                print_c::print(textview, "Magenta", g_strdup(line));
+                print_c::print(textview, "Cyan", g_strdup(line));
             } else if (strstr(line, "***")) {
                 print_c::print(textview, "red/white_bg", g_strdup(line));
             } else if (strstr(line, "warning")||strstr(line, _("warning"))) {

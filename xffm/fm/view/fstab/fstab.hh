@@ -47,13 +47,14 @@ msgid "NFS remote directory"
 
 # include <mntent.h>
 
+#include "fstabpopup.hh"
 #include "fstabmonitor.hh"
 
 
     // XXX this is Linux Version. FreeBSD differs (see fstab module)
 namespace xf {
 template <class Type>
-class Fstab {
+class Fstab: public FstabPopUp<Type> {
     using pixbuf_c = Pixbuf<double>;
     using util_c = Util<double>;
 public:
@@ -62,7 +63,7 @@ public:
     loadModel (GtkIconView *iconView)
     {
 		
-        g_object_set_data(G_OBJECT(iconView), "iconViewType", (void *)"RootView");
+        g_object_set_data(G_OBJECT(iconView), "iconViewType", (void *)"Fstab");
         auto treeModel = gtk_icon_view_get_model (iconView);
 	TRACE("mk_tree_model:: model = %p\n", treeModel);
         while (gtk_events_pending()) gtk_main_iteration();
@@ -184,6 +185,7 @@ public:
             }
 	}
         pclose (pipe);
+        //if (strchr(uuid, '\n')) *strchr(uuid, '\n') = 0;
 	return uuid;
     }
 
@@ -209,7 +211,7 @@ public:
                 DISPLAY_NAME, utf_name,
                 ACTUAL_NAME, uuid,
                 ICON_NAME, icon_name,
-                PATH, name,
+                PATH, path,
                 DISPLAY_PIXBUF, normal_pixbuf,
                 NORMAL_PIXBUF, normal_pixbuf,
                 HIGHLIGHT_PIXBUF, highlight_pixbuf,

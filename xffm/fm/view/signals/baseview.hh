@@ -295,6 +295,7 @@ public:
             ERROR("baseview.hh:g_object_get_data(G_OBJECT(baseView->iconView()), \"iconViewType\" is null.\n");
             return retval;
         }
+        WARN("baseview.hh: iconViewType=%s\n", iconViewType);
 
         GtkMenu *menu;
 
@@ -306,6 +307,10 @@ public:
                 menu = LocalView<Type>::popUp(baseView->treeModel(), tpath);
                 g_object_set_data(G_OBJECT(menu),"baseView", (void *)baseView);
                 gtk_menu_popup_at_pointer (menu, (const GdkEvent *)event);
+            }else if (strcmp(iconViewType, "Fstab")==0) {  
+                menu = Fstab<Type>::popUp(baseView->treeModel(), tpath);
+                g_object_set_data(G_OBJECT(menu),"baseView", (void *)baseView);
+                gtk_menu_popup_at_pointer (menu, (const GdkEvent *)event);
             }
 	    gtk_tree_path_free(tpath);
         } else {
@@ -315,6 +320,15 @@ public:
                 auto oldPath = (gchar *)g_object_get_data(G_OBJECT(menu),"path");
                 g_free(oldPath);
                 g_object_set_data(G_OBJECT(menu),"path", g_strdup(baseView->path()));
+                LocalView<Type>::resetLocalPopup();
+                gtk_menu_popup_at_pointer (menu, (const GdkEvent *)event);
+            } else if (strcmp(iconViewType, "Fstab")==0) {
+                menu = Fstab<Type>::popUp();
+                g_object_set_data(G_OBJECT(menu),"baseView", (void *)baseView);
+                auto oldPath = (gchar *)g_object_get_data(G_OBJECT(menu),"path");
+                g_free(oldPath);
+                g_object_set_data(G_OBJECT(menu),"path", g_strdup(baseView->path()));
+                Fstab<Type>::resetLocalPopup();
                 gtk_menu_popup_at_pointer (menu, (const GdkEvent *)event);
             }
         }
