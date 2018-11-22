@@ -518,10 +518,20 @@ private:
 
     static gboolean done_f(void *data) {
         auto baseView = (BaseView<Type> *)data;
-	if (!BaseView<Type>::validBaseView(baseView)) return FALSE;
+	if (!BaseView<Type>::validBaseView(baseView)) {
+            ERROR("Fstab::done_f(): invalid baseView: %p\n", baseView);
+            return FALSE;
+        }
         auto page = baseView->page();
-        auto viewPath = page->workDir();            
-        baseView->loadModel(viewPath);
+        auto viewPath = page->workDir();  
+        ERROR("Fstab::done_f(): baseView->loadModel(%s)\n", viewPath);
+        auto iconViewType = (const gchar *)g_object_get_data(G_OBJECT(baseView->iconView()), "iconViewType");
+        if (strcmp("LocalView", iconViewType) == 0){
+            baseView->loadModel(viewPath);
+        } else if (strcmp(iconViewType, "Fstab")==0){
+            baseView->loadModel("xffm:fstab");
+            
+        }
         return FALSE;
     }
 
@@ -580,7 +590,7 @@ private:
         gboolean found = FALSE;
         while ((mnt_struct = getmntent_r (fstab_fd, &mntbuf, buf, 2048)) != NULL) {
 
-            if (strcmp(path, mnt_struct->mnt_dir)) continue;
+            if (strcmp(path, mnt_struct->mnt_dir) && strcmp(path, mnt_struct->mnt_fsname)) continue;
             TRACE ("getMntType(): found item %s\n", path);
             // Flag is as present in fstab
             SET_FSTAB_TYPE (type);

@@ -9,6 +9,7 @@ namespace xf
 static GtkMenu *fstabPopUp=NULL;
 static GtkMenu *fstabItemPopUp=NULL;
 template <class Type> class BaseView;
+template <class Type> class Fstab;
 template <class Type>
 class FstabPopUp {
     
@@ -118,8 +119,123 @@ class FstabPopUp {
     }
 
     static void
+    resetMenuItems(GtkTreeModel *treeModel, const GtkTreePath *tpath) {
+	GtkTreeIter iter;
+	GtkTreePath *ttpath = gtk_tree_path_copy(tpath);
+	if (!gtk_tree_model_get_iter (treeModel, &iter, ttpath)) {
+	    gtk_tree_path_free(ttpath);
+	    return;
+	}
+
+	gtk_tree_path_free(ttpath);
+	gchar *path;
+        path = (gchar *)g_object_get_data(G_OBJECT(fstabItemPopUp), "path");
+        g_free(path);
+	gtk_tree_model_get (treeModel, &iter, 
+		PATH, &path,
+	    -1);
+        g_object_set_data(G_OBJECT(fstabItemPopUp), "path", path);
+	struct stat st;
+        // Hide all...
+        GList *children = gtk_container_get_children (GTK_CONTAINER(fstabItemPopUp));
+        for (GList *child = children; child && child->data; child=child->next){
+            gtk_widget_hide(GTK_WIDGET(child->data));
+        }
+        if (stat(path, &st)<0){
+            ERROR("resetMenuItems(): cannot stat %s\n", path);
+            return;
+        }
+            
+	auto v2 = GTK_WIDGET(g_object_get_data(G_OBJECT(fstabItemPopUp), "title"));
+        gtk_widget_show(v2);
+        // mount options
+        GtkWidget *w;
+        if (Fstab<Type>::isMounted(path)){
+            w = GTK_WIDGET(g_object_get_data(G_OBJECT(fstabItemPopUp), "Unmount the volume associated with this folder"));
+            gtk_widget_set_sensitive(w, TRUE);
+            gtk_widget_show(w);
+        } else {
+            w = GTK_WIDGET(g_object_get_data(G_OBJECT(fstabItemPopUp), "Unmount the volume associated with this folder"));
+            gtk_widget_set_sensitive(w, FALSE);
+            w = GTK_WIDGET(g_object_get_data(G_OBJECT(fstabItemPopUp), "Mount the volume associated with this folder"));
+            gtk_widget_set_sensitive(w, TRUE);
+            gtk_widget_show(w);
+        }
+    }
+
+    static void
     mount(GtkMenuItem *menuItem, gpointer data)
     {
+        auto baseView = (BaseView<Type> *)g_object_get_data(G_OBJECT(data), "baseView");
+	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "PATH");
+        if (Fstab<Type>::isInFstab(path)) {
+            Fstab<Type>::mount(baseView, path);
+            return;            
+        }
+	auto dname = (const gchar *)g_object_get_data(G_OBJECT(data), "DISPLAY_NAME");
+        auto label = g_strdup_printf("LABEL=%s", dname);
+        if (Fstab<Type>::isInFstab(label)) {
+            Fstab<Type>::mount(baseView, label);
+            g_free(label);
+            return;            
+        }
+        g_free(label);
+
+
+       // File chooser
+        auto entryResponse = new(EntryFolderResponse<Type>)(GTK_WINDOW(mainWindow), _("Mount Device"), NULL);
+
+        
+        auto basename = g_path_get_basename(path);
+	auto displayPath = util_c::valid_utf_pathstring(path);
+	auto markup = 
+	    g_strdup_printf("<span color=\"blue\" size=\"larger\"><b>%s</b></span>", path);  
+	g_free(displayPath);
+	
+        entryResponse->setResponseLabel(markup);
+        g_free(markup);
+
+        entryResponse->setEntryLabel(_("Mount point:"));
+        // get last used arguments...
+        gchar *dirname = NULL;
+	if (Settings<Type>::keyFileHasGroupKey("MountPoints", basename)){
+	    dirname = Settings<Type>::getSettingString("MountPoints", basename);
+	} 
+	if (!dirname || !g_file_test(dirname, G_FILE_TEST_IS_DIR) ) {
+	    g_free(dirname);
+	    dirname = g_path_get_dirname(path);
+	}
+        entryResponse->setEntryDefault(dirname);
+        g_free(dirname);
+        
+        auto response = entryResponse->runResponse();
+        delete entryResponse;
+	WARN("response=%s\n", response);
+	if (response){
+	    g_strstrip(response);
+	    Settings<Type>::setSettingString("MountPoints", basename, response);
+	    if (!g_file_test(response, G_FILE_TEST_IS_DIR)){
+		// FIXME dialog 
+	    } else {
+		gchar *fmt = g_strdup_printf("sudo -A mount %s %s", basename, response);
+		gchar *command = Mime<Type>::mkCommandLine(fmt, basename);
+		    
+                // execute command...
+                // get baseView
+                auto baseView =  (BaseView<Type> *)g_object_get_data(G_OBJECT(data), "baseView");
+                auto page = baseView->page();
+                pid_t pid = page->command(command);
+
+                // open follow dialog for long commands...
+		WARN("command= %s\n", command);
+                CommandResponse<Type>::dialog(command,"system-run", pid );
+		g_free(fmt);
+		g_free(command);
+		//FIXME chdir basename and run command in shell
+	    }
+	    g_free(response);
+	}
+	g_free(basename);
         ERROR("FIXME: mount\n");
 	/*auto baseView =  (BaseView<Type> *)g_object_get_data(G_OBJECT(data), "baseView");
         auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
@@ -160,7 +276,7 @@ public:
     static GtkMenu *popUp(GtkTreeModel *treeModel, const GtkTreePath *tpath){
         if (!fstabItemPopUp) fstabItemPopUp = createLocalItemPopUp();   
 	resetLocalItemPopup(treeModel, tpath);
-	//resetMenuItems(treeModel, tpath);
+	resetMenuItems(treeModel, tpath);
         return fstabItemPopUp;
     }
     
