@@ -1,8 +1,8 @@
 #ifndef XF_NOTEBOOK
 #define XF_NOTEBOOK
-#include "menupopover.hh"
-#include "page/page.hh"
-#include "signals/notebook.hh"
+#include "fm/dialog/menupopover.hh"
+#include "fm/page/page.hh"
+#include "fm/dialog/notebooksignals.hh"
 
 namespace xf {
 

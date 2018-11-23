@@ -2,7 +2,7 @@
 #define XF_PAGE_CHILD
 #include "runbutton.hh"
 #include "pagebase.hh"
-#include "fm/signals/page.hh"
+#include "fm/page/pagesignals.hh"
 
 namespace xf{
 

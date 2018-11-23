@@ -44,6 +44,7 @@ static gboolean inserted_;
 namespace xf
 {
 template <class Type> class BaseView;
+template <class Type> class LocalMonitor;
 template <class Type>
 class LocalView: public LocalPopUp<Type> {
     
@@ -162,19 +163,22 @@ public:
     }
 
     // This mkTreeModel should be static...
-    static gboolean
-    loadModel (GtkIconView *iconView, const gchar *path)
+    static LocalMonitor<Type> *
+    loadModel (BaseView<Type> *baseView, const gchar *path)
     {
+        LocalMonitor<Type> *p = NULL;
+        auto iconView = baseView->iconView();
         if (!g_file_test(path, G_FILE_TEST_EXISTS)){
             ERROR("loadModel. %s does not exist\n", path);
-            return FALSE;
+            return NULL;
         }
         if (!g_file_test(path, G_FILE_TEST_IS_DIR)){
-            ERROR("localView.hh::loadModel(): here we should open the file with app or dialog\n");
-            return FALSE;
+            gchar *dirname = g_path_get_dirname(path);
+            p = loadModel(baseView, dirname);
+            g_free(dirname);
+            return p;
         }
-        g_object_set_data(G_OBJECT(iconView), "iconViewType", (void *)"LocalView");
-                
+
         gtk_icon_view_set_selection_mode (iconView,GTK_SELECTION_MULTIPLE);      
         
         auto treeModel = gtk_icon_view_get_model (iconView);
@@ -191,17 +195,28 @@ public:
         GList *directory_list = read_items (path, &heartbeat);
         insert_list_into_model(directory_list, GTK_LIST_STORE(treeModel), path);
         WARN("added new stuff\n");
-		
+        // Start the file monitor
+        // count items...
+        gint items = 0;
+        if (gtk_tree_model_get_iter_first (treeModel, &iter)) {
+            while (gtk_tree_model_iter_next(treeModel, &iter)) items++;
+        }
+        auto fileCount = g_strdup_printf("%0d", items);
+        // We do not count "../"
+        auto text = g_strdup_printf(_("Files: %s"), fileCount); 
+        g_free(fileCount);
+        baseView->page()->updateStatusLabel(text);
+        g_free(text);
+        TRACE("FIXME: Set filecount %d message in status button...\n", items);
 
-	return TRUE;
+        // monitor for less than 500 items...
+        if (items <= 500) {
+            p = new(LocalMonitor<Type>)(treeModel, baseView);
+            p->start_monitor(treeModel, path);
+        } 
+	return p;
     }
 
- /*   static gboolean
-    reloadModel (BaseView<Type> *baseView){
-        GtkIconView *iconView=
-        const gchar *path=
-        loadModel(iconView, path);
-    }*/
 
 private:
 

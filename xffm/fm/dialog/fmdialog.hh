@@ -5,7 +5,7 @@
 
 #include "dialog.hh"
 #include "completion/csh.hh"
-#include "view/baseview.hh"
+#include "fm/view/base/baseview.hh"
 
 namespace xf
 {

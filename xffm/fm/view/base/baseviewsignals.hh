@@ -1,13 +1,50 @@
 #ifndef XF_BASEVIEWSIGNALS__HH
 # define XF_BASEVIEWSIGNALS__HH
+
+enum
+{
+    ROOTVIEW_TYPE,
+    LOCALVIEW_TYPE,
+    FSTAB_TYPE,
+    NFS_TYPE,
+    SSHFS_TYPE,
+    ECRYPTFS_TYPE,
+    PKG_TYPE
+};
+
+enum
+{
+  FLAGS,
+  DISPLAY_PIXBUF,
+  NORMAL_PIXBUF,
+  HIGHLIGHT_PIXBUF,
+  TOOLTIP_PIXBUF,
+  DISPLAY_NAME,
+  ACTUAL_NAME,
+  PATH,
+  SIZE,
+  DATE,
+  TOOLTIP_TEXT,
+  ICON_NAME,
+  TYPE,
+  MIMETYPE, 
+  PREVIEW_PATH,
+  PREVIEW_TIME,
+  PREVIEW_PIXBUF,
+  NUM_COLS
+};
+
+#include "fm/view/root/rootview.hh"
 #include "common/pixbuf.hh"
 #include "fm/view/local/localview.hh"
+#include "fm/view/local/localmonitor.hh"
+
+// Flag bits:
+#define IS_NOTSELECTABLE(F) ((0x01<<1)&F)
+#define SET_NOTSELECTABLE(F) (F|=(0x01<<1))
 
 #define SET_DIR(x) x|=0x01
 #define IS_DIR (x&0x01)
-
-static gboolean controlMode = FALSE;
-static GHashTable *highlight_hash=NULL;
 #define CONTROL_MODE (event->state & GDK_CONTROL_MASK)
 #define SHIFT_MODE (event->state & GDK_SHIFT_MASK)
 /*enum {
@@ -46,9 +83,14 @@ static gint dragMode_=0;
 static GtkTargetList *targets=NULL;
 static GdkDragContext *context=NULL;
 
-namespace xf
+static GHashTable *validBaseViewHash = NULL;
+static gboolean controlMode = FALSE;
+static GHashTable *highlight_hash=NULL;
 
+namespace xf
 {
+
+
 template <class Type> class BaseView;
 
 template <class Type> 
@@ -290,49 +332,48 @@ public:
 
         WARN("button press event: button 3 should do popup, as well as longpress...\n");
         gboolean retval = FALSE;
-        auto iconViewType = (const gchar *)g_object_get_data(G_OBJECT(baseView->iconView()), "iconViewType");
-        if (!iconViewType){
-            ERROR("baseview.hh:g_object_get_data(G_OBJECT(baseView->iconView()), \"iconViewType\" is null.\n");
-            return retval;
-        }
-        WARN("baseview.hh: iconViewType=%s\n", iconViewType);
-
-        GtkMenu *menu;
-
-        if (gtk_icon_view_get_item_at_pos (GTK_ICON_VIEW(widget),
+        GtkMenu *menu = NULL;
+        gboolean itemMenu = gtk_icon_view_get_item_at_pos (GTK_ICON_VIEW(widget),
                                    event->x,
                                    event->y,
-                                   &tpath, NULL)) {
-            if (strcmp(iconViewType, "LocalView")==0) {
-                menu = LocalView<Type>::popUp(baseView->treeModel(), tpath);
-                g_object_set_data(G_OBJECT(menu),"baseView", (void *)baseView);
-                gtk_menu_popup_at_pointer (menu, (const GdkEvent *)event);
-            }else if (strcmp(iconViewType, "Fstab")==0) {  
-                menu = Fstab<Type>::popUp(baseView->treeModel(), tpath);
-                g_object_set_data(G_OBJECT(menu),"baseView", (void *)baseView);
-                gtk_menu_popup_at_pointer (menu, (const GdkEvent *)event);
-            }
-	    gtk_tree_path_free(tpath);
-        } else {
-            if (strcmp(iconViewType, "LocalView")==0) {
-                menu = LocalView<Type>::popUp();
-                g_object_set_data(G_OBJECT(menu),"baseView", (void *)baseView);
-                auto oldPath = (gchar *)g_object_get_data(G_OBJECT(menu),"path");
-                g_free(oldPath);
-                g_object_set_data(G_OBJECT(menu),"path", g_strdup(baseView->path()));
-                LocalView<Type>::resetLocalPopup();
-                gtk_menu_popup_at_pointer (menu, (const GdkEvent *)event);
-            } else if (strcmp(iconViewType, "Fstab")==0) {
-                menu = Fstab<Type>::popUp();
-                g_object_set_data(G_OBJECT(menu),"baseView", (void *)baseView);
-                auto oldPath = (gchar *)g_object_get_data(G_OBJECT(menu),"path");
-                g_free(oldPath);
-                g_object_set_data(G_OBJECT(menu),"path", g_strdup(baseView->path()));
-                Fstab<Type>::resetLocalPopup();
-                gtk_menu_popup_at_pointer (menu, (const GdkEvent *)event);
-            }
-        }
+                                   &tpath, NULL);
+        switch (baseView->viewType()){
+            case (ROOTVIEW_TYPE):
+                WARN("ROOTVIEW_TYPE menu here...\n");
+                break;
+            case (LOCALVIEW_TYPE):
+                if (itemMenu) menu = LocalView<Type>::popUp(baseView->treeModel(), tpath);
+                else menu = LocalView<Type>::popUp();
+                break;
+            case (FSTAB_TYPE):
+                if (itemMenu) menu = Fstab<Type>::popUp(baseView->treeModel(), tpath);
+                //else menu = Fstab<Type>::popUp(baseView->treeModel(), tpath);
 
+
+                break;
+            default:
+                ERROR("ViewType %d not defined.\n", baseView->viewType());
+                break;
+        }
+        if (menu) {
+            g_object_set_data(G_OBJECT(menu),"baseView", (void *)baseView);
+            if (itemMenu) {
+                gtk_tree_path_free(tpath);
+            } else {
+                auto oldPath = (gchar *)g_object_get_data(G_OBJECT(menu),"path");
+                g_free(oldPath);
+                g_object_set_data(G_OBJECT(menu),"path", g_strdup(baseView->path()));
+                switch(baseView->viewType()) {
+                    case (LOCALVIEW_TYPE):
+                        LocalView<Type>::resetLocalPopup();
+                        break;
+                    case (FSTAB_TYPE):
+                        Fstab<Type>::resetLocalPopup();
+                        break;
+                }
+            }
+            gtk_menu_popup_at_pointer (menu, (const GdkEvent *)event);
+        }   
         return retval;
     }
 
@@ -427,7 +468,7 @@ public:
             // not needed with GTK_DEST_DEFAULT_DROP
             // gtk_drag_finish(context, FALSE, FALSE, time);
             return;
-      //            goto drag_over;         /* of course */
+      //            goto drag_over;         
         }
 
         //WARN("rodent_mouse: DND receive, action=%d\n", action);
@@ -439,7 +480,7 @@ public:
             // not needed with GTK_DEST_DEFAULT_DROP
             // gtk_drag_finish(context, FALSE, FALSE, time);
             return;
-      //      goto drag_over;         /* of course */
+      //      goto drag_over;         
         }
 
 
@@ -664,7 +705,6 @@ public:
     signal_drag_delete (GtkWidget * widget, GdkDragContext * context, gpointer data) {
         ERROR("signal_drag_delete\n");
     }
-    
 };
 }
 #endif

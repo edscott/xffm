@@ -1,6 +1,6 @@
 #ifndef XF_FSTABMONITOR__HH
 # define XF_FSTABMONITOR__HH
-#include "fm/view/basemonitor.hh"
+#include "fm/view/base/basemonitor.hh"
 namespace xf
 {
 template <class Type> class Fstab;

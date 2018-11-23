@@ -59,11 +59,11 @@ class Fstab: public FstabPopUp<Type> {
     using util_c = Util<double>;
 public:
 
-    static gboolean
-    loadModel (GtkIconView *iconView)
+    static FstabMonitor<Type> *
+    loadModel (BaseView<Type> *baseView)
     {
 		
-        g_object_set_data(G_OBJECT(iconView), "iconViewType", (void *)"Fstab");
+        auto iconView = baseView->iconView();
         auto treeModel = gtk_icon_view_get_model (iconView);
 	TRACE("mk_tree_model:: model = %p\n", treeModel);
         while (gtk_events_pending()) gtk_main_iteration();
@@ -83,7 +83,9 @@ public:
 	addCIFSItem(treeModel);
         addPartitionItems(treeModel);
 
-	return TRUE;
+        FstabMonitor<Type> *p = new(FstabMonitor<Type>)(treeModel, baseView);
+        p->start_monitor(treeModel, "/dev/disk/by-partuuid");
+        return p;
     }
 
 
@@ -525,12 +527,14 @@ private:
         auto page = baseView->page();
         auto viewPath = page->workDir();  
         ERROR("Fstab::done_f(): baseView->loadModel(%s)\n", viewPath);
-        auto iconViewType = (const gchar *)g_object_get_data(G_OBJECT(baseView->iconView()), "iconViewType");
-        if (strcmp("LocalView", iconViewType) == 0){
-            baseView->loadModel(viewPath);
-        } else if (strcmp(iconViewType, "Fstab")==0){
-            baseView->loadModel("xffm:fstab");
-            
+        auto viewType = baseView->viewType();
+        switch (baseView->viewType()){
+            case (LOCALVIEW_TYPE):
+                baseView->loadModel(viewPath);
+                break;
+            case (FSTAB_TYPE):
+                baseView->loadModel("xffm:fstab");
+                break;
         }
         return FALSE;
     }

@@ -1,38 +1,6 @@
 #ifndef XF_BASEVIEW__HH
 # define XF_BASEVIEW__HH
-
-
-enum
-{
-  FLAGS,
-  DISPLAY_PIXBUF,
-  NORMAL_PIXBUF,
-  HIGHLIGHT_PIXBUF,
-  TOOLTIP_PIXBUF,
-  DISPLAY_NAME,
-  ACTUAL_NAME,
-  PATH,
-  SIZE,
-  DATE,
-  TOOLTIP_TEXT,
-  ICON_NAME,
-  TYPE,
-  MIMETYPE, 
-  PREVIEW_PATH,
-  PREVIEW_TIME,
-  PREVIEW_PIXBUF,
-  NUM_COLS
-};
-
-#include "rootview.hh"
-#include "local/localview.hh"
-#include "local/localmonitor.hh"
-#include "signals/baseview.hh"
-
-// Flag bits:
-#define IS_NOTSELECTABLE(F) ((0x01<<1)&F)
-#define SET_NOTSELECTABLE(F) (F|=(0x01<<1))
-static GHashTable *validBaseViewHash = NULL;
+#include "baseviewsignals.hh"
 
 namespace xf
 {
@@ -61,6 +29,11 @@ class BaseView{
 
     LocalMonitor<Type> *localMonitor_;
     FstabMonitor<Type> *fstabMonitor_;
+    gint viewType_;
+public:
+    void setViewType(gint value){viewType_ = value;}
+    gint viewType(void){ return viewType_;}
+private:
 
     // This mkTreeModel should be static...
     static GtkTreeModel *
@@ -196,12 +169,13 @@ public:
     GtkWidget *source(){ return source_;}
     
     void selectables(void){
-        auto iconViewType = (const gchar *)g_object_get_data(G_OBJECT(this->iconView()), "iconViewType");
-        
-        if (strcmp("LocalView", iconViewType) == 0){
-            LocalView<Type>::selectables(this->iconView());        
-        } else {
-            TRACE("All icons are selectable for iconViewType: %s\n", iconViewType);
+        switch (this->viewType()){
+            case (LOCALVIEW_TYPE):
+                LocalView<Type>::selectables(this->iconView());        
+                break;
+            default:
+                DBG("BaseView::selectables(): All icons are selectable for viewType: %d\n",
+                        this->viewType());
         }
         return;
     }
@@ -223,12 +197,28 @@ public:
 	return loadModel(path);
     }
 
-    // XXX: broken:
-   /*gboolean loadModel(void){
-        return loadModel(path());
-   }*/
     gboolean loadModel(const gchar *path){
-        if (!path) path = "xffm:root";
+        if (!path) {
+            path = "xffm:root";
+            setViewType(ROOTVIEW_TYPE);
+        } else if (g_file_test(path, G_FILE_TEST_EXISTS)){
+            setViewType(LOCALVIEW_TYPE);
+        } else if (strcmp(path, "xffm:fstab")==0) {
+            setViewType(FSTAB_TYPE);
+        } else if (strcmp(path, "xffm:nfs")==0) {
+            setViewType(NFS_TYPE);
+        } else if (strcmp(path, "xffm:sshfs")==0) {
+            setViewType(SSHFS_TYPE);
+        } else if (strcmp(path, "xffm:ecryptfs")==0) {
+            setViewType(ECRYPTFS_TYPE);
+        } else if (strcmp(path, "xffm:pkg")==0) {
+            setViewType(PKG_TYPE);
+        } else {
+            ERROR("BaseView::loadModel() %s not defined.\n", path);
+            path = "xffm:root";
+            setViewType(ROOTVIEW_TYPE);
+        }
+        
         setPath(path);
         // stop current monitor
         if (localMonitor_) {
@@ -240,9 +230,25 @@ public:
             fstabMonitor_ = NULL;
         }
 
+        switch (viewType_){
+            case (ROOTVIEW_TYPE):
+                RootView<Type>::loadModel(this);
+                page_->updateStatusLabel(NULL);
+                break;
+            case (LOCALVIEW_TYPE):
+                localMonitor_ = LocalView<Type>::loadModel(this, path);
+                break;
+            case (FSTAB_TYPE):
+                fstabMonitor_ = Fstab<Type>::loadModel(this);
+	        page_->updateStatusLabel(NULL);
+                break;
+            default:
+                ERROR("ViewType %d not defined.\n", viewType_);
+                break;
+        }
 	// Remove previous liststore rows, if any
     
-        gboolean result;
+   /*     gboolean result;
         if (g_file_test(path, G_FILE_TEST_EXISTS)){
 	    if (g_file_test(path, G_FILE_TEST_IS_DIR)){
 		result = LocalView<Type>::loadModel(iconView_, path);
@@ -276,7 +282,8 @@ public:
 		//result = LocalView<Type>::item_activated(path);
 	    }
             return result;
-        } else if (strcmp(path, "xffm:fstab")==0) {
+        } else  
+        if (strcmp(path, "xffm:fstab")==0) {
 	    result = Fstab<Type>::loadModel(iconView_);
 	    page_->updateStatusLabel(NULL);
             fstabMonitor_ = new(FstabMonitor<Type>)(treeModel_, this);
@@ -289,8 +296,8 @@ public:
         setPath("xffm:root");
         result = RootView<Type>::loadModel(iconView_);
         page_->updateStatusLabel(NULL);
-
-        return result;
+*/
+        return TRUE;
     }
 
     gint

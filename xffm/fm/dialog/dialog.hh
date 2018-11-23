@@ -2,7 +2,7 @@
 #define XF_DIALOG
 
 #include "notebook.hh"
-#include "signals/dialog.hh"
+#include "dialogsignals.hh"
 #include <memory>
 
 namespace xf {

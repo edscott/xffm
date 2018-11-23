@@ -1,6 +1,6 @@
 #ifndef XF_LOCALITEMPOPUP__HH
 # define XF_LOCALITEMPOPUP__HH
-#include "fm/view/basepopup.hh"
+#include "fm/view/base/basepopup.hh"
 #include "response/comboresponse.hh"
 #include "response/commandresponse.hh"
 #include "fm/view/fstab/fstab.hh"

@@ -37,7 +37,7 @@ static GtkWidget *mainWindow = NULL;
 #include "find/signals.hh"
 
 #include "response/passwdresponse.hh"
-#include "fm.hh"
+#include "dialog/fmdialog.hh"
 
 
 

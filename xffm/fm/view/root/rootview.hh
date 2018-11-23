@@ -38,8 +38,9 @@ public:
 
 
     static gboolean
-    loadModel (GtkIconView *iconView)
+    loadModel (BaseView<Type> * baseView)
     {
+        auto iconView = baseView->iconView();
 		
         g_object_set_data(G_OBJECT(iconView), "iconViewType", (void *)"RootView");
         auto treeModel = gtk_icon_view_get_model (iconView);
