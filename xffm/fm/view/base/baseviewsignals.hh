@@ -9,6 +9,7 @@ enum
     NFS_TYPE,
     SSHFS_TYPE,
     ECRYPTFS_TYPE,
+    CIFS_TYPE,
     PKG_TYPE
 };
 

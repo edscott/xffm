@@ -211,6 +211,8 @@ public:
             setViewType(SSHFS_TYPE);
         } else if (strcmp(path, "xffm:ecryptfs")==0) {
             setViewType(ECRYPTFS_TYPE);
+        } else if (strcmp(path, "xffm:cifs")==0) {
+            setViewType(CIFS_TYPE);
         } else if (strcmp(path, "xffm:pkg")==0) {
             setViewType(PKG_TYPE);
         } else {

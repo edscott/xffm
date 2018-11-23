@@ -272,7 +272,7 @@ public:
     static void
     addSSHItem(GtkTreeModel *treeModel){
  	GtkTreeIter iter;
-	auto name = "xffm:nfs";
+	auto name = "xffm:sshfs";
 	auto utf_name = util_c::utf_string(_("SFTP (via SSH)"));
 	auto icon_name = "video-display/SE/emblem-ssh/2.0/225";
 	auto highlight_name = "video-display/SE/emblem-ssh/2.0/225/NE/document-open/2.0/225";
@@ -296,7 +296,7 @@ public:
     static void
     addEcryptFSItem(GtkTreeModel *treeModel){
  	GtkTreeIter iter;
-	auto name = "xffm:nfs";
+	auto name = "xffm:ecryptfs";
 	auto utf_name = util_c::utf_string(_("eCryptfs Volume"));
 	auto icon_name = "video-display/SE/emblem-lock/2.0/225";
 	auto highlight_name = "video-display/SE/emblem-lock/2.0/225/NE/document-open/2.0/225";
