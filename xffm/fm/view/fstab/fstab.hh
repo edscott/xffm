@@ -90,6 +90,30 @@ public:
 
 
     static gchar *
+    fsType(const gchar *partition){
+        gchar *command = g_strdup_printf("lsblk -no FSTYPE %s", partition);
+	FILE *pipe = popen (command, "r");
+	if(pipe == NULL) {
+	    ERROR("Cannot pipe from %s\n", command);
+	    g_free(command);
+	    return NULL;
+	}
+	g_free(command);
+
+        gchar line[256];
+        memset(line, 0, 256);
+	while (fgets (line, 255, pipe) && !feof(pipe)) {
+	    if (strchr(line,'\n')) *strchr(line,'\n') = 0;
+	    if (strstr(line, "swap")) return NULL;
+	    if (strcmp(line, "")==0) return NULL;
+	    break;
+	}
+        pclose (pipe);
+	return g_strdup(line);
+    }
+
+
+    static gchar *
     e2Label(const gchar *partition){
         const gchar *command = "ls -l /dev/disk/by-label";
 	FILE *pipe = popen (command, "r");
@@ -192,16 +216,33 @@ public:
     }
 
     static void
-    addPartition(GtkTreeModel *treeModel, const gchar *path){
+    addPartition(GtkTreeModel *treeModel, const gchar *path, const gchar *fstype){
+	// FIXME: do something with fstype
  	GtkTreeIter iter;
         gchar *basename = g_path_get_basename(path);
         gchar *mntDir = getMntDir(path);
         auto label = e2Label(basename);
         auto name = (label)?label:basename;
-        auto fullName = (mntDir)?g_strdup_printf("%s\n(%s)", name, mntDir): g_strdup(name);
-        auto utf_name = util_c::utf_string(fullName);
-        g_free(fullName);
+
         gboolean mounted = isMounted(path);
+        gchar *text;
+	if (mntDir) { 
+	    gchar *mountedOn = (mounted)?
+		g_strdup_printf(_("Mounted on %s"),mntDir):
+		g_strconcat (_("Mount on"), " ", mntDir, NULL);
+	    text = (label)?	g_strdup_printf("%s (%s)\n<span size=\"large\">%s</span>",
+			label, path, mountedOn):
+		g_strdup_printf("%s\n<span size=\"large\">%s</span>",
+			path, mountedOn);
+	    g_free(mountedOn);
+	} else { // implies not mounted
+	    text = (label)?	g_strdup_printf("%s (%s)\n<span size=\"large\">%s</span>",
+			label, path, _("Not mounted")):
+			g_strdup_printf("%s\n<span size=\"large\">%s</span>",
+			path, _("Not mounted"));
+	}
+
+        auto utf_name = util_c::utf_string(name);
         auto icon_name = (mounted)?"drive-harddisk/NE/greenball/2.0/225":
             "drive-harddisk/NE/grayball/2.0/225";
         auto highlight_name = "drive-harddisk/NW/edit-select-symbolic/2.0/225";
@@ -217,9 +258,10 @@ public:
                 DISPLAY_PIXBUF, normal_pixbuf,
                 NORMAL_PIXBUF, normal_pixbuf,
                 HIGHLIGHT_PIXBUF, highlight_pixbuf,
-                TOOLTIP_TEXT,"FIXME: UUID or partition type...",
+                TOOLTIP_TEXT,text,
 
                 -1);
+        g_free(text);
         g_free(basename);
         g_free(utf_name);
         g_free(uuid);
@@ -228,7 +270,7 @@ public:
 
     static void // Linux
     addPartitionItems (GtkTreeModel *treeModel) {
-        FILE *partitions = fopen ("/proc/partitions", "r");
+	FILE *partitions = fopen ("/proc/partitions", "r");
         if(!partitions) return;
 
         gchar line[1024];
@@ -236,8 +278,10 @@ public:
         while(fgets (line, 1023, partitions) && !feof (partitions)) {
             gchar *path = getPartitionPath(line);
             if (!path) continue;
-            addPartition(treeModel, path);
+	    gchar *fstype = fsType(path);
+            if (fstype) addPartition(treeModel, path, fstype);
             g_free(path);
+            g_free(fstype);
             memset (line, 0, 1024);
         }
         fclose (partitions);
@@ -348,16 +392,24 @@ public:
             DBG ("isMounted() mnt_point != NULL not met!\n");
             return FALSE;
         }
-        gchar *mnt_point = realpath(mnt_fsname, NULL);
+        gchar *mnt_point;
+	if (g_path_is_absolute(mnt_fsname)) {
+	    mnt_point = realpath(mnt_fsname, NULL);
+	} else {
+	    mnt_point = g_strdup(mnt_fsname);
+	}
+
         
         struct mntent *m;
         //const gchar *mnttab;
         FILE *tab_file;
 
         // try both /etc/mtab and /proc/mounts 
-        const gchar *mfile[]={"/proc/mounts", "/etc/mtab", NULL};
+        //const gchar *mfile[]={"/proc/mounts", "/etc/mtab", NULL};
+        const gchar *mfile[]={"/proc/mounts", NULL};
         const gchar **pfile;
         for (pfile=mfile; pfile && *pfile; pfile++){
+	    TRACE("isMounted: %s\n", *pfile);
             if((tab_file = fopen (*pfile, "r")) == NULL) {
                 continue;
             }
@@ -372,10 +424,10 @@ public:
             struct mntent mntbuf;
             gchar buf[2048]; 
             while ((m = getmntent_r (tab_file, &mntbuf, buf, 2048)) != NULL) {	
-                TRACE("isMounted():%s:  %s  or  %s\n", mnt_point, m->mnt_dir, m->mnt_fsname);
+                TRACE(".isMounted():%s:  %s  or  %s\n", mnt_point, m->mnt_dir, m->mnt_fsname);
                 if((mnt_point && strcmp (m->mnt_dir, mnt_point) == 0) || 
                    (mnt_fsname && strcmp (m->mnt_fsname, mnt_fsname) == 0)) {
-                    TRACE("isMounted(): GOTCHA  %s  %s:%s\n", m->mnt_dir, m->mnt_fsname, mnt_point);
+                    TRACE("..isMounted(): GOTCHA  %s  %s:%s\n", m->mnt_dir, m->mnt_fsname, mnt_point);
                     endmntent (tab_file);
                     g_free(mnt_point);
                     return TRUE;
@@ -385,6 +437,43 @@ public:
         }
         g_free(mnt_point);
         return FALSE;
+    }
+
+    static gchar *
+    mountTarget (const gchar *label) {
+        if (!label){
+            ERROR("mountTarget() label is null\n");
+            return NULL;
+        }
+        struct mntent *mnt_struct;
+        FILE *fstab_fd;
+        gchar *result = NULL;
+        if((fstab_fd = setmntent ("/etc/fstab", "r")) == NULL) {
+            DBG ("mountTarget(): Unable to open %s\n", "/etc/fstab");
+            return result;
+        }
+
+        struct mntent mntbuf;
+        gchar buf[2048]; 
+        while ((mnt_struct = getmntent_r (fstab_fd, &mntbuf, buf, 2048)) != NULL) {
+            if(strstr (mnt_struct->mnt_type, MNTTYPE_SWAP))
+                continue;
+            if(!g_file_test (mnt_struct->mnt_dir, G_FILE_TEST_IS_DIR))
+                continue;
+
+            TRACE("mountTarget():%s --->  %s   or   %s\n", 
+                    label, mnt_struct->mnt_dir, mnt_struct->mnt_fsname);
+
+            if(strcmp (label, mnt_struct->mnt_fsname)==0) {
+                TRACE("mountTarget():%s ---> %d %s\n", 
+                        mnt_struct->mnt_fsname, result, mnt_struct->mnt_type);
+		result = g_strdup(mnt_struct->mnt_dir);
+                break;
+            }
+        }
+
+        (void)endmntent (fstab_fd);
+        return result;
     }
 
     static gboolean
@@ -425,33 +514,23 @@ public:
         return result;
     }
 
-    // mount from fstab data
     static gboolean
-    mount (BaseView<Type> *baseView, const gchar *path) {
-        TRACE("enter Fstab<Type>::mount(%s)\n", path);
-        const gchar *argument[10];
-        const gchar **ap;
-        const gchar *umount = "umount";
-        const gchar *mount = "mount";
-
-
-        ap = argument;
-
-        // Sudo check...
+    sudoMount(const gchar *mnt){
+       // Sudo check...
         // 
         // BSD sudo not necessary if vfs.usermount?
         gboolean useSudo = TRUE;
         // not for root
         if(!getuid ()) useSudo = FALSE;
         // not for general user mounts
-        if(isInFstab(path)){
+        if(isInFstab(mnt)){
             // Is it user type? No need for sudo then.
-            if (IS_USER_TYPE(getMntType(path))) useSudo = FALSE;
-        } else {
+            if (IS_USER_TYPE(getMntType(mnt))) useSudo = FALSE;
+        } /*else {
             // barf: function incorrectly called with non fstab item.
-            ERROR("%s not in /etc/fstab\n", path);
+            ERROR("%s not in /etc/fstab\n", mnt);
             return FALSE;
-        }
+        }*/
         // sudo requested but not installed, barf.
         
         if (useSudo) {
@@ -469,23 +548,37 @@ public:
 
             } else g_free (p);
         }
+	return useSudo;
+    }
 
-#if 1
-	// Simple fstab item mount...
-	const gchar *arg[5];
+    // mount from fstab data or directly
+    static gboolean
+    mountPath (BaseView<Type> *baseView, const gchar *path, const gchar *mountPoint) 
+    {
+        WARN("Fstab<Type>::mountPath(%s, %s)\n", path, mountPoint);
+	if (!g_path_is_absolute(path)){
+	    ERROR("mountPath: %s is not absolute.\n", path);
+	    return FALSE;
+	}
+        const gchar *umount = "umount";
+        const gchar *mount = "mount";
+        gboolean useSudo = sudoMount(path);
+ 
+	gboolean mounted = isMounted(path);
+
+	const gchar *arg[10];
 	gint i=0;
 	if (useSudo) {
 	    arg[i++] = "sudo";
 	    arg[i++] = "-A";
 	}
-	arg[i++] = (isMounted(path))?umount:mount;
+	arg[i++] = (mounted)?umount:mount;
 	arg[i++] = path;
+	arg[i++] = mountPoint;
 	arg[i++] = NULL;
-	auto voidP = (void **)calloc (2, sizeof(void *));
-	if (!voidP){
-	    ERROR("mount(%s): calloc: %s\n", path,strerror(errno));
-	    exit(1);
-	}
+
+	//DBG("%s %s %s %s %s %s\n", arg[0], arg[1], arg[2], arg[3], arg[4] );
+
 	pid_t controller = Run<Type>::thread_run(
 		(void *)baseView, // data to fork_finished_function
 		arg,
@@ -493,24 +586,12 @@ public:
 		Run<Type>::run_operate_stderr,
 		fork_finished_function);
 
-	    
-
-#else
-
-        gchar *commandFmt;
-
-        if(useSudo) commandFmt = g_strdup("sudo -A");
-        else commandFmt = g_strdup("");
-        gchar *g = g_strconcat(commandFmt, " ", (isMounted(path))?umount:mount, NULL);
-        g_free(commandFmt);
-        commandFmt = g;
-	gchar *command = Mime<Type>::mkCommandLine(commandFmt, path);
-	// get baseView
-	auto page = baseView->page();
-	page->command(command);
-        g_free(commandFmt);
-        g_free(command);
-#endif
+	// open follow dialog for long commands...
+	auto command = g_strdup_printf((mounted)?
+		    _("Unmounting %s"):_("Mounting %s"), path);
+	CommandResponse<Type>::dialog(command,"system-run", Tubo<Type>::getChild(controller) );
+	WARN("%s %s\n", command, mountPoint);
+	g_free(command);
 
         TRACE ("fstab_mount %s done \n",path);
         return TRUE;

@@ -13,6 +13,8 @@ public:
     dialog(const gchar *message, const gchar *icon, gint pid)
     {
         if (pid == 0) return NULL;
+	if (!isPidAlive(pid)) return NULL;
+	
          GtkWindow *dialog = NULL;
 
          // Create the widgets
@@ -59,6 +61,7 @@ public:
          arg[0]=(void *)progress;
          arg[1]=(void *)dialog;
          arg[2]=GINT_TO_POINTER(pid);
+         //g_timeout_add(750, pulse_f, (void *)arg);
          g_timeout_add(250, pulse_f, (void *)arg);
 	 //gtk_dialog_run(dialog);
          
@@ -66,12 +69,9 @@ public:
          return dialog;
     }
 
-    static gboolean pulse_f(void *data) {
-        auto arg = (void **)data;
-        auto progress = GTK_PROGRESS_BAR(arg[0]);
-        gtk_progress_bar_pulse(progress);
+    static gboolean
+    isPidAlive(pid_t pid){
         // pid active?
-        gint pid = GPOINTER_TO_INT(arg[2]);
         gchar *c = g_strdup_printf("ps -p %d", pid); 
         gchar *s = g_strdup_printf("%d", pid);
         gboolean alive = FALSE;
@@ -88,13 +88,27 @@ public:
             }
             pclose(pipe);
         }
+	WARN("%s alive=%d\n", c, alive);
         g_free(c);
         g_free(s);
-        if (alive) return TRUE;
-        auto dialog = GTK_WIDGET(arg[1]);
-        gtk_widget_hide(GTK_WIDGET(dialog));
-        gtk_widget_destroy(GTK_WIDGET(dialog));
-        return FALSE;
+        return (alive);
+    }
+
+    static gboolean pulse_f(void *data) {
+        auto arg = (void **)data;
+        auto progress = GTK_PROGRESS_BAR(arg[0]);
+	if (!GTK_IS_PROGRESS_BAR(progress)){
+	    return FALSE;
+	}
+        gint pid = GPOINTER_TO_INT(arg[2]);
+	if (!isPidAlive(pid)){
+	    auto dialog = GTK_WIDGET(arg[1]);
+	    gtk_widget_hide(GTK_WIDGET(dialog));
+	    gtk_widget_destroy(GTK_WIDGET(dialog));
+	    return FALSE;
+	}
+        gtk_progress_bar_pulse(progress);
+        return TRUE;
     }
 
     /*static void

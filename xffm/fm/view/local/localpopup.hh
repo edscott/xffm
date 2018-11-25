@@ -462,7 +462,7 @@ public:
     {
 	auto baseView =  (BaseView<Type> *)g_object_get_data(G_OBJECT(data), "baseView");
         auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
-        if (!Fstab<Type>::mount(baseView, path)){
+        if (!Fstab<Type>::mountPath(baseView, path, NULL)){
             DBG("localpopup.hh:: mount command failed\n");
         } 
     }
@@ -635,7 +635,8 @@ public:
 	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "PATH");
 	auto displayPath = util_c::valid_utf_pathstring(path);
 	auto markup = 
-	    g_strdup_printf("<span color=\"blue\" size=\"larger\"><b>%s</b></span>", displayPath);  
+	    g_strdup_printf("<span color=\"blue\" size=\"larger\"><b>%s</b></span>\n<span color=\"red\">(%s)</span>", displayPath, 
+		_("Item is executable by the user"));  
 	g_free(displayPath);
 	
         auto entryResponse = new(EntryResponse<Type>)(GTK_WINDOW(mainWindow), _("Run Executable..."), "system-run");

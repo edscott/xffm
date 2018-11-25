@@ -72,6 +72,7 @@ class FstabPopUp {
 	DBG("resetLocalItemPopup\n");
 	gchar *aname=NULL;
 	gchar *iconName=NULL;
+	gchar *text;
 	gchar *path;
 	gchar *displayName;
         GtkTreeIter iter;
@@ -86,12 +87,16 @@ class FstabPopUp {
 		DISPLAY_NAME, &displayName,
 		ICON_NAME, &iconName,
 		PATH, &path,
+                TOOLTIP_TEXT,&text,
 		-1);
 	if (!path){
 	    ERROR("resetLocalItemPopup: path is NULL\n");
 	    return;
 	}
-	gchar *fileInfo = util_c::fileInfo(path);
+	gchar *g = util_c::fileInfo(path);
+	gchar *fileInfo = g_strconcat(g, ": ", (text)?text:"", NULL);
+	//gchar *fileInfo = g_strconcat(g,  NULL);
+	g_free(g);
 
 	const gchar *keys[] = {"DISPLAY_NAME",  "PATH",  NULL};
 	const gchar **q;
@@ -108,6 +113,7 @@ class FstabPopUp {
 
         BasePopUp<Type>::changeTitle(fstabItemPopUp, iconName, displayName, path, mimetype, fileInfo);
         //BasePopUp<Type>::changeTitle(fstabItemPopUp, iconName, path, displayName, mimetype, fileInfo);
+	g_free(text);
 	g_free(mimetype);
 	g_free(name);
 	g_free(aname);
@@ -169,14 +175,20 @@ class FstabPopUp {
         auto baseView = (BaseView<Type> *)g_object_get_data(G_OBJECT(data), "baseView");
 	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "PATH");
         if (Fstab<Type>::isInFstab(path)) {
-            Fstab<Type>::mount(baseView, path);
+	    WARN("mount: %s\n", path);
+            Fstab<Type>::mountPath(baseView, path, NULL);
             return;            
         }
 	auto dname = (const gchar *)g_object_get_data(G_OBJECT(data), "DISPLAY_NAME");
         auto label = g_strdup_printf("LABEL=%s", dname);
         if (Fstab<Type>::isInFstab(label)) {
-            Fstab<Type>::mount(baseView, label);
+	    gchar *mountTarget = Fstab<Type>::mountTarget(label);
+	    WARN("mount: %s --> %s\n", label, mountTarget);
+            if (mountTarget){
+		Fstab<Type>::mountPath(baseView, mountTarget, NULL);
+	    }
             g_free(label);
+            g_free(mountTarget);
             return;            
         }
         g_free(label);
@@ -203,7 +215,7 @@ class FstabPopUp {
 	} 
 	if (!dirname || !g_file_test(dirname, G_FILE_TEST_IS_DIR) ) {
 	    g_free(dirname);
-	    dirname = g_path_get_dirname(path);
+	    dirname = g_strdup_printf("/tmp/%s", basename);
 	}
         entryResponse->setEntryDefault(dirname);
         g_free(dirname);
@@ -215,33 +227,19 @@ class FstabPopUp {
 	    g_strstrip(response);
 	    Settings<Type>::setSettingString("MountPoints", basename, response);
 	    if (!g_file_test(response, G_FILE_TEST_IS_DIR)){
-		// FIXME dialog 
-	    } else {
-		gchar *fmt = g_strdup_printf("sudo -A mount %s %s", basename, response);
-		gchar *command = Mime<Type>::mkCommandLine(fmt, basename);
-		    
-                // execute command...
-                // get baseView
-                auto baseView =  (BaseView<Type> *)g_object_get_data(G_OBJECT(data), "baseView");
-                auto page = baseView->page();
-                pid_t pid = page->command(command);
-
-                // open follow dialog for long commands...
-		WARN("command= %s\n", command);
-                CommandResponse<Type>::dialog(command,"system-run", pid );
-		g_free(fmt);
-		g_free(command);
-		//FIXME chdir basename and run command in shell
-	    }
+		// Try to create...
+		// FIXME: use sudo if configured and fails
+		if (g_mkdir_with_parents(response, 0770) <0){
+		    gchar *m = g_strdup_printf("\nmkdir %s: %s\n", response, strerror(errno));
+		    Gtk<Type>::quickHelp (GTK_WINDOW(mainWindow), m, "dialog-error");
+		    g_free(response);
+		    return;
+		}
+	    } 
+	    Fstab<Type>::mountPath(baseView, path, response);
 	    g_free(response);
 	}
 	g_free(basename);
-        ERROR("FIXME: mount\n");
-	/*auto baseView =  (BaseView<Type> *)g_object_get_data(G_OBJECT(data), "baseView");
-        auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
-        if (!Fstab<Type>::mount(baseView, path)){
-            DBG("localpopup.hh:: mount command failed\n");
-        } */
     }
     
 public:

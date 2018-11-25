@@ -68,6 +68,7 @@ private:
         TRACE("*** monitor_f call...\n");
         auto p = (FstabMonitor<Type> *)data;
         gchar *path;
+        gchar *fsType;
         switch (event){
             case G_FILE_MONITOR_EVENT_DELETED:
             case G_FILE_MONITOR_EVENT_MOVED_OUT:
@@ -80,8 +81,11 @@ private:
                 TRACE("Received  CREATED (%d): \"%s\", \"%s\"\n", event, f, s);
                 path = uuid2Partition(f);
                 TRACE("adding partition %s\n", path);
-                Fstab<Type>::addPartition(GTK_TREE_MODEL(p->store_), path);
-                g_hash_table_replace(p->itemsHash_, g_strdup(f), GINT_TO_POINTER(1));
+		fsType = Fstab<Type>::fsType(path);
+                Fstab<Type>::addPartition(GTK_TREE_MODEL(p->store_), path, fsType);
+                
+		g_hash_table_replace(p->itemsHash_, g_strdup(f), GINT_TO_POINTER(1));
+		g_free(fsType);
                 break;
 
             case G_FILE_MONITOR_EVENT_CHANGED:
