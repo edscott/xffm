@@ -381,7 +381,7 @@ public:
         
     }
 #endif
-
+// FIXME: cp/ln/mv should go in localView object
     gboolean
     receiveDndData(gchar *target, const GtkSelectionData *selection_data, GdkDragAction action){
         WARN("BaseView::receiveDndData\n");
@@ -434,6 +434,25 @@ public:
             }
 
         }
+	const gchar *command;
+	const gchar *message;
+	switch (action){
+	    case GDK_ACTION_MOVE:
+		message = _("Moving files");
+		command = "mv -b -f";
+		break;
+	    case GDK_ACTION_COPY:
+		message = _("Copying files locally");
+		command = "cp -R -b -f";
+		break;
+	    case GDK_ACTION_LINK:
+		message = _("Create Link");
+		command = "ln -s -b -f";
+		break;
+
+	}
+	auto dialog = CommandProgressResponse<Type>::dialog(
+		message, "system-run", command, files, path_);
         g_strfreev(files);
         g_free(target);
         // not needed with GTK_DEST_DEFAULT_DROP
@@ -444,6 +463,8 @@ public:
 
         return result;
     }
+    
+
 
     void
     highlight(GtkTreePath *tpath){
