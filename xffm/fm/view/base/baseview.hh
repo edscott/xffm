@@ -514,7 +514,7 @@ private:
         g_free(lastPath); 
         g_object_set_data(G_OBJECT(iconView_), "path", g_strdup(path_));
 
-        WARN("*** Baseview:: setPath()\n");
+        TRACE("Baseview:: setPath()\n");
         if (g_file_test(path_, G_FILE_TEST_IS_DIR)){
             page_->setPageWorkdir(path_);
         } else {

@@ -174,7 +174,9 @@ class FstabPopUp {
     {
         auto baseView = (BaseView<Type> *)g_object_get_data(G_OBJECT(data), "baseView");
 	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "PATH");
-        if (Fstab<Type>::isInFstab(path)) {
+
+	WARN("FstabPopup::mount %s\n", path);
+        if (Fstab<Type>::isInFstab(path) || Fstab<Type>::isMounted(path)) {
 	    WARN("mount: %s\n", path);
             Fstab<Type>::mountPath(baseView, path, NULL);
             return;            

@@ -14,6 +14,7 @@ public:
     {
         if (pid == 0) return NULL;
 	if (!isPidAlive(pid)) return NULL;
+	return NULL;
 	
          GtkWindow *dialog = NULL;
 

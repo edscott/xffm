@@ -228,18 +228,18 @@ public:
         gchar *text;
 	if (mntDir) { 
 	    gchar *mountedOn = (mounted)?
-		g_strdup_printf(_("Mounted on %s"),mntDir):
-		g_strconcat (_("Mount on"), " ", mntDir, NULL);
+		g_strconcat (_("Mounted on:"), " ", mntDir, " <span color=\"red\">(", fstype, ")</span>", NULL):
+		g_strconcat (_("Mount on"), " ", mntDir, " <span color=\"red\">(", fstype, ")</span>", NULL);
 	    text = (label)?	g_strdup_printf("%s (%s)\n<span size=\"large\">%s</span>",
 			label, path, mountedOn):
 		g_strdup_printf("%s\n<span size=\"large\">%s</span>",
 			path, mountedOn);
 	    g_free(mountedOn);
 	} else { // implies not mounted
-	    text = (label)?	g_strdup_printf("%s (%s)\n<span size=\"large\">%s</span>",
-			label, path, _("Not mounted")):
-			g_strdup_printf("%s\n<span size=\"large\">%s</span>",
-			path, _("Not mounted"));
+	    text = (label)?g_strdup_printf("%s (%s)\n<span size=\"large\">%s <span color=\"red\">(%s)</span></span>",
+			label, path, _("Not mounted"), fstype):
+			g_strdup_printf("%s\n<span size=\"large\">%s <span color=\"red\">(%s)</span></span>",
+			path, _("Not mounted"), fstype);
 	}
 
         auto utf_name = util_c::utf_string(name);
@@ -526,11 +526,7 @@ public:
         if(isInFstab(mnt)){
             // Is it user type? No need for sudo then.
             if (IS_USER_TYPE(getMntType(mnt))) useSudo = FALSE;
-        } /*else {
-            // barf: function incorrectly called with non fstab item.
-            ERROR("%s not in /etc/fstab\n", mnt);
-            return FALSE;
-        }*/
+        } 
         // sudo requested but not installed, barf.
         
         if (useSudo) {
@@ -582,8 +578,8 @@ public:
 	pid_t controller = Run<Type>::thread_run(
 		(void *)baseView, // data to fork_finished_function
 		arg,
-		Run<Type>::run_operate_stdout,
-		Run<Type>::run_operate_stderr,
+		run_operate_stdout,
+		run_operate_stderr,
 		fork_finished_function);
 
 	// open follow dialog for long commands...
@@ -607,7 +603,7 @@ private:
         }
         auto page = baseView->page();
         auto viewPath = page->workDir();  
-        ERROR("Fstab::done_f(): baseView->loadModel(%s)\n", viewPath);
+        TRACE("Fstab::done_f(): baseView->loadModel(%s)\n", viewPath);
         auto viewType = baseView->viewType();
         switch (baseView->viewType()){
             case (LOCALVIEW_TYPE):
@@ -623,6 +619,16 @@ private:
     static void
     fork_finished_function (void *data) {
         g_timeout_add(5, done_f, data);
+    }
+    static void
+    run_operate_stdout (void *data, void *stream, int childFD){
+	auto baseView = (BaseView<Type> *)data;
+	Run<Type>::run_operate_stdout((void *)baseView->page()->output(), stream, childFD);
+    }
+    static void
+    run_operate_stderr (void *data, void *stream, int childFD){
+	auto baseView = (BaseView<Type> *)data;
+	Run<Type>::run_operate_stderr((void *)baseView->page()->output(), stream, childFD);
     }
 
 private:
