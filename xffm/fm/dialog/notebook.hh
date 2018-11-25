@@ -5,6 +5,7 @@
 #include "fm/dialog/notebooksignals.hh"
 
 namespace xf {
+template <class Type> class Dialog;
 
 template <class Type>
 class Notebook : public MenuPopover<Type>{
@@ -39,19 +40,37 @@ public:
         return;
 
     }
+
+    BaseView<Type> *loadIconview(Page<Type> *page, const gchar *path){
+	if (!path) path = "xffm:root";
+	WARN("loadIconview::adding path: %s\n", path);
+	// Create BaseView object.
+        auto baseView =  new BaseView<Type>(page);
+        g_object_set_data(G_OBJECT(page->topScrolledWindow()), "baseView", baseView);
+        // Add the iconview into the scrolled window.
+	gtk_container_add (GTK_CONTAINER (page->topScrolledWindow()),
+		GTK_WIDGET(baseView->iconView()));
+	gtk_widget_show (GTK_WIDGET(baseView->iconView()));
+
+        // Load contents, depending on what path specifies.
+	baseView->loadModel(path);
+	while (gtk_events_pending())gtk_main_iteration();
+        return baseView;
+    }
     
     Page<double> *addPage(const gchar *path){
 	gchar *workdir;
-	if (path && g_file_test(path, G_FILE_TEST_IS_DIR)){
-	    workdir = g_strdup(path);
-        } else if (path) {
-	    workdir = g_strdup(g_get_home_dir());
-        }
-	else {
+	if (!path) {
             workdir = g_get_current_dir();
+	} else {
+	    if (g_file_test(path, G_FILE_TEST_IS_DIR)){
+		workdir = g_strdup(path);
+	    } else {
+		workdir = g_strdup(g_get_home_dir());
+	    }
         }
 	
-        auto page = new(Page<Type>)((fmDialog<Type> *)this, workdir);
+        auto page = new(Page<Type>)((Dialog<Type> *)this, workdir);
         g_object_set_data(G_OBJECT(page->pageChild()), "Notebook", (void *)this);
 
         // This will (and should) be set by the corresponding
@@ -66,16 +85,18 @@ public:
         gtk_notebook_set_current_page (notebook_,pageNumber);
 	// This will set the workdir for completion
 	TRACE("Notebook::   addPage(%s)\n", workdir);      
-        page->setPageWorkdir(workdir); 
-	g_free(workdir);
+	page->showIconview(1);
 	
         g_signal_connect(G_OBJECT(page->pageLabelButton()), "clicked", 
                 BUTTON_CALLBACK(notebookSignals<Type>::on_remove_page), (void *)page); 
-#ifndef XFFM_CC	    
-        // Terminal mode: 
-	while (gtk_events_pending()) gtk_main_iteration();
-        page->showIconview(0);
-#endif
+	auto baseView = loadIconview(page, path);
+	page->setBaseView(baseView);
+        page->setPageWorkdir(workdir); 
+	g_free(workdir);
+	/*if (!g_file_test(path, G_FILE_TEST_IS_DIR) 
+		    || strcmp(path, "xffm:local")!=0) {
+	    page->setPageLabel(baseView->path());
+	}*/
         return page;
     }
 

@@ -67,7 +67,8 @@ public:
     page_c *page(void){return page_;}
 
     
-    BaseView(page_c *page, const gchar *path){
+    BaseView(page_c *page){
+    //BaseView(page_c *page, const gchar *path){
 	page_ = page; 
         path_ = NULL;
         selectionList_ = NULL;
@@ -149,7 +150,7 @@ public:
         g_signal_connect (G_OBJECT (source_), 
                 "drag-failed", DRAG_CALLBACK (BaseViewSignals<Type>::signal_drag_failed), (void *)this);*/
 
-        loadModel(path);
+        //loadModel(path);
             
     }
 
@@ -197,30 +198,25 @@ public:
 	return loadModel(path);
     }
 
+    static gint
+    getViewType(const gchar *path){
+        if (!path) return ROOTVIEW_TYPE;
+        if (g_file_test(path, G_FILE_TEST_EXISTS)) return (LOCALVIEW_TYPE);
+        if (strcmp(path, "xffm:local")==0) return (LOCALVIEW_TYPE);
+        if (strcmp(path, "xffm:root")==0) return (ROOTVIEW_TYPE);
+        if (strcmp(path, "xffm:fstab")==0) return (FSTAB_TYPE);
+        if (strcmp(path, "xffm:nfs")==0) return (NFS_TYPE);
+        if (strcmp(path, "xffm:sshfs")==0) return (SSHFS_TYPE);
+        if (strcmp(path, "xffm:ecryptfs")==0) return (ECRYPTFS_TYPE);
+        if (strcmp(path, "xffm:cifs")==0) return (CIFS_TYPE);
+        if (strcmp(path, "xffm:pkg")==0) return (PKG_TYPE);
+        ERROR("BaseView::loadModel() %s not defined.\n", path);
+        return (ROOTVIEW_TYPE);
+    }
+    
+
     gboolean loadModel(const gchar *path){
-        if (!path) {
-            path = "xffm:root";
-            setViewType(ROOTVIEW_TYPE);
-        } else if (g_file_test(path, G_FILE_TEST_EXISTS)){
-            setViewType(LOCALVIEW_TYPE);
-        } else if (strcmp(path, "xffm:fstab")==0) {
-            setViewType(FSTAB_TYPE);
-        } else if (strcmp(path, "xffm:nfs")==0) {
-            setViewType(NFS_TYPE);
-        } else if (strcmp(path, "xffm:sshfs")==0) {
-            setViewType(SSHFS_TYPE);
-        } else if (strcmp(path, "xffm:ecryptfs")==0) {
-            setViewType(ECRYPTFS_TYPE);
-        } else if (strcmp(path, "xffm:cifs")==0) {
-            setViewType(CIFS_TYPE);
-        } else if (strcmp(path, "xffm:pkg")==0) {
-            setViewType(PKG_TYPE);
-        } else {
-            ERROR("BaseView::loadModel() %s not defined.\n", path);
-            path = "xffm:root";
-            setViewType(ROOTVIEW_TYPE);
-        }
-        
+        setViewType(getViewType(path));
         setPath(path);
         // stop current monitor
         if (localMonitor_) {
@@ -238,7 +234,11 @@ public:
                 page_->updateStatusLabel(NULL);
                 break;
             case (LOCALVIEW_TYPE):
-                localMonitor_ = LocalView<Type>::loadModel(this, path);
+		if (strcmp(path, "xffm:local")==0) {
+		    localMonitor_ = LocalView<Type>::loadModel(this, g_get_home_dir());
+		} else {
+		    localMonitor_ = LocalView<Type>::loadModel(this, path);
+		}
                 break;
             case (FSTAB_TYPE):
                 fstabMonitor_ = Fstab<Type>::loadModel(this);
@@ -248,7 +248,6 @@ public:
                 ERROR("ViewType %d not defined.\n", viewType_);
                 break;
         }
-	// Remove previous liststore rows, if any
     
    /*     gboolean result;
         if (g_file_test(path, G_FILE_TEST_EXISTS)){

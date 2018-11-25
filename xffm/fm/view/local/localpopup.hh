@@ -11,6 +11,7 @@ namespace xf
 static GtkMenu *localPopUp=NULL;
 static GtkMenu *localItemPopUp=NULL;
 template <class Type> class BaseView;
+template <class Type> class Dialog;
 template <class Type>
 class LocalPopUp {
     
@@ -503,7 +504,7 @@ public:
 	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
 	auto baseView =  (BaseView<Type> *)g_object_get_data(G_OBJECT(data), "baseView");
 	auto page = baseView->page();
-        auto dialog = (fmDialog<Type> *)page->parent();
+        auto dialog = (Dialog<Type> *)page->parent();
         dialog->addPage(path);
     }
 

@@ -5,13 +5,14 @@
 #include "fm/page/pagesignals.hh"
 
 namespace xf{
+template <class Type> class Dialog;
 
 template <class Type>
 class Page : public PageBase<double>
 {
     // fmDialog elements are not yet defined,
     // so you cannot use a static Type, like double.
-    using fmdialog_c = fmDialog<Type>;
+    using dialog_c = Dialog<Type>;
 
     using baseview_c = BaseView<double>;
     using gtk_c = Gtk<double>;
@@ -25,7 +26,7 @@ class Page : public PageBase<double>
 
     GList *run_button_list;
     pthread_mutex_t *rbl_mutex;
-    fmdialog_c *parent_;
+    dialog_c *parent_;
     baseview_c *baseView_;
     
     GtkBox *pageChild_;
@@ -42,7 +43,8 @@ class Page : public PageBase<double>
 public:
 
     baseview_c *baseView(void){ return baseView_;}
-    fmdialog_c *parent(void){return parent_;}
+    void setBaseView(baseview_c *baseView){baseView_ = baseView;}
+    dialog_c *parent(void){return parent_;}
     GtkBox *pageChild(void){ return pageChild_;}
     GtkLabel *pageLabel(void){ return pageLabel_;}
     GtkBox *pageLabelBox(void){ return pageLabelBox_;}
@@ -51,7 +53,7 @@ public:
     GtkBox *pageLabelIconBox(void){ return pageLabelIconBox_;}
     GtkButton *pageLabelButton(void){ return pageLabelButton_;}
 
-    Page(fmdialog_c *parent, const gchar *workdir){
+    Page(dialog_c *parent, const gchar *workdir){
 	parent_ = parent;
 	pageChild_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
 	pageLabel_ = GTK_LABEL(gtk_label_new ("foobar"));
@@ -199,7 +201,9 @@ public:
 	reference_run_button((void *)runButton);
 	// final creation will occur with context function.
     }
+    
     const gchar *pageWorkdir(void){return (const gchar *)this->workDir();}
+    
     static     gchar *
     get_tab_name (const gchar *path) {
         gchar *name;
@@ -254,16 +258,16 @@ public:
         gchar *gg = completion_c::get_terminal_name(this->workDir());
         gchar *g = g_strconcat("xffm: ", gg, NULL);
         g_free(gg); 
-        auto dialog = (fmdialog_c *)parent_;
+        auto dialog = (dialog_c *)parent_;
         dialog->setDialogTitle(g);
 	g_free(g);
     }
     void setPageWorkdir(const gchar *dir){
         // Avoid multiple resets...
-        if (this->workDir() && strcmp(dir, this->workDir())==0) return;
-	TRACE("setPageWorkdir: %s\n", dir);
+        //if (this->workDir() && strcmp(dir, this->workDir())==0) return;
+	WARN("setPageWorkdir: %s\n", dir);
 	this->setWorkDir(dir);
-	TRACE("update_pathbar: %s\n", dir);
+	WARN("update_pathbar: %s\n", dir);
 	this->update_pathbar(dir);
         if (g_file_test(dir, G_FILE_TEST_IS_DIR)){
 	    print_c::print(this->output(), "green", g_strdup_printf("cd %s\n", dir));

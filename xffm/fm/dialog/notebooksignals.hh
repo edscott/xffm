@@ -137,14 +137,14 @@ public:
     static void
     on_new_page(GtkButton *button, void *data){
         auto notebook = (Notebook<Type> *)data;
-        const gchar *workdir = notebook->workdir();
+	auto page = notebook->currentPageObject();
+	auto baseView = page->baseView();
+	
+        //const gchar *workdir = notebook->workdir();
         TRACE("on_new_page this: %p (%s)\n", data, workdir);
-#ifdef XFFM_CC
-        auto dialog = (fmDialog<Type> *) data;
-        dialog->addPage(notebook->workdir());
-#else
-        notebook->addPage(notebook->workdir());
-#endif
+        //auto dialog = (Dialog<Type> *) data;
+        //dialog->addPage(notebook->workdir());
+        notebook->addPage(baseView->path());
     }
 
     static void

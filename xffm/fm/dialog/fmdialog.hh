@@ -15,14 +15,6 @@ class fmDialog : public Dialog<Type>{
     using print_c = Print<double>;
 public:
     fmDialog(const gchar *path):Dialog<Type>(path){
-        Mime<Type>::mimeBuildHashes();
-	
-        auto page = this->currentPageObject();
-	// Default into iconview...
-        page->setDefaultIconview(TRUE);
-	page->showIconview(1);
-        //page->setDefaultIconview(FALSE);
-	//page->showIconview(FALSE);
     }
 
     void addPage(const gchar *workdir){
@@ -36,13 +28,6 @@ public:
         }
     }
 
-    void removePage(GtkWidget *child){
-        TRACE("removePage iconview page\n");
-        auto notebook = (Notebook<Type> *)this;
-        //auto baseView = notebook->baseView(child);
-        notebook->removePage(child);
-        //delete baseView;
-    }
    
     BaseView<Type> *load(const gchar *workdir){
         auto notebook = (Notebook<Type> *)this;
@@ -61,21 +46,5 @@ public:
         return baseView;
     }
 };
-
-/*
-template <class Type>
-class Fm: protected fmDialog<Type> {
-public:
-    Fm(const gchar *path){
-        gchar *fullPath = NULL;
-        if (path){
-            if (g_path_is_absolute(path)) fullPath = g_strdup(path);
-            else fullPath = g_build_filename(g_get_home_dir(), path, NULL);
-            this->createDialog(fullPath);
-            g_free(fullPath);
-        } else this->createDialog(path);
-    }
-};
-*/
 } // namespace xf
 #endif

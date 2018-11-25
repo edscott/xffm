@@ -64,10 +64,13 @@
     }
 
     gchar *path = NULL;
-    if (argv[1] && g_file_test(argv[1], G_FILE_TEST_IS_DIR)){
-	path = (gchar *)calloc(1,PATH_MAX);
-	realpath(argv[1], path);
-    }
+    if (argv[1]){
+	if (g_file_test(argv[1], G_FILE_TEST_IS_DIR)){
+	    path = (gchar *)calloc(1,PATH_MAX);
+	    realpath(argv[1], path);
+	}
+	else path = g_strdup(argv[1]);
+    } else path = g_strdup("xffm:root");
 
     // FIXME: set these environment variables *only* if they are not already set
     //        in the environment (allow user override)

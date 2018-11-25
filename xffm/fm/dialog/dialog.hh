@@ -12,24 +12,23 @@ class Dialog :public Notebook<Type> {
     using pixbuf_c = Pixbuf<double>;
     using print_c = Print<double>;
 public:
-    /*Dialog(void){
-	dialog_ = GTK_WINDOW(gtk_window_new (GTK_WINDOW_TOPLEVEL));
-	gtk_window_set_type_hint(dialog_, GDK_WINDOW_TYPE_HINT_DIALOG);
-	setWindowMaxSize(dialog_);
-	gtk_window_set_position (dialog_, GTK_WIN_POS_MOUSE);
-	return;
-    }*/
-    Dialog(const gchar *title, const gchar *icon){
+    Dialog(const gchar *path){
+	init(path);
+        Mime<Type>::mimeBuildHashes();
+        auto page = this->currentPageObject();
+	// Default into iconview...
+        page->setDefaultIconview(TRUE);
+	page->showIconview(1);
+    }
+
+ /*   Dialog(const gchar *title, const gchar *icon){
         Dialog();
 	setDialogIcon(icon);
 	setDialogTitle(title);
     }
-    Dialog(const gchar *path){
-	init(path);
-    }
     Dialog(void){
 	init(NULL);
-    }
+    }*/
 
     void init(const gchar *path){
 	Settings<Type>::readSettings();
@@ -47,14 +46,9 @@ public:
 	gtk_window_set_type_hint(dialog_, GDK_WINDOW_TYPE_HINT_DIALOG);
 	//setWindowMaxSize(dialog_);
 	gtk_window_set_position (dialog_, GTK_WIN_POS_MOUSE);
-        this->insertNotebook(dialog_);
-#ifdef XFFM_CC
-        auto dialog = (fmDialog<Type> *) this;
-#else
-        auto dialog = (Dialog<Type> *) this;
-#endif       
+        this->insertNotebook(dialog_);     
 
-        dialog->addPage(path); 
+        this->addPage(path); 
         TRACE("dialog this=%p\n", (void *)this);
         //this->insertPageChild(this->notebook());
         

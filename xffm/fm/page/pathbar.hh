@@ -118,15 +118,12 @@ private:
 	    if (button == children->data){
 		const gchar *path = (gchar *)g_object_get_data(G_OBJECT(button), "path");
                 if (!path){
-                    ERROR("path is null at pathbar.hh::pathbar_ok\n");
+		    path="xffm:root";
+                    TRACE("path is null at pathbar.hh::pathbar_ok\n");
                 }
-#ifdef XFFM_CC
                 auto baseView = (BaseView<Type> *)
                     g_object_get_data(G_OBJECT(page->topScrolledWindow()), "baseView");
                 baseView->loadModel(path);
-#else
-                page->setPageWorkdir(path);
-#endif          
 		/*
 		view_c *view_p = (view_c *)g_object_get_data(G_OBJECT(pathbar_), "view_p");
 		if (!view_p) g_error("view_p data not set for g_object pathbar!\n");

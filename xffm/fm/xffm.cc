@@ -37,7 +37,7 @@ static GtkWidget *mainWindow = NULL;
 #include "find/signals.hh"
 
 #include "response/passwdresponse.hh"
-#include "dialog/fmdialog.hh"
+#include "dialog/dialog.hh"
 
 
 
@@ -49,8 +49,8 @@ main (int argc, char *argv[]) {
     // FIXME: this should be called as a class 
 #include "startup.hh"
 
-    auto xffm = new(xf::fmDialog<double>)(path);
-    xffm->setDialogTitle("Fm");
+    auto xffm = new(xf::Dialog<double>)(path);
+    //xffm->setDialogTitle("Fm");
     xffm->setDialogIcon("system-file-manager");
 
     gtk_main();
