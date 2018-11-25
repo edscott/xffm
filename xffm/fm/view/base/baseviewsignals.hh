@@ -603,10 +603,11 @@ public:
     signal_drag_begin (GtkWidget * widget, GdkDragContext * context, gpointer data) {
         WARN("signal_drag_begin\n");
 	auto baseView = (BaseView<Type> *)data;
-        cairo_surface_t *icon;
     //  single or multiple item selected?
         GList *selection_list = gtk_icon_view_get_selected_items (baseView->iconView());
         baseView->setSelectionList(selection_list);
+	/*
+        cairo_surface_t *icon;
         if (g_list_length(selection_list)==1){
             DBG("Single selection\n");
             icon = gtk_icon_view_create_drag_icon(baseView->iconView(), (GtkTreePath *)selection_list->data);
@@ -638,6 +639,7 @@ public:
    
         gtk_drag_set_icon_surface(context, icon);
         cairo_surface_destroy(icon);
+	*/
     }
 
     static void
