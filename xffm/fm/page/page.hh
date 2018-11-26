@@ -243,8 +243,8 @@ public:
             g_free (dirname);
             g_free (updirname);
             g_free (choppedName);
-            //iconname = g_strconcat (display_host, ":  ", b, " (", q, ")", NULL);
-            name = g_strconcat (b, " (", q, ")", NULL);
+            //name = g_strconcat (b, " (", q, ")", NULL);
+            name = g_strconcat (b, NULL);
             g_free (q);
             g_free (b);
         } else {
