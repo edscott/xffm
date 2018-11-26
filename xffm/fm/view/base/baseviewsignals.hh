@@ -343,8 +343,15 @@ public:
                 WARN("ROOTVIEW_TYPE menu here...\n");
                 break;
             case (LOCALVIEW_TYPE):
-                if (itemMenu) menu = LocalView<Type>::popUp(baseView->treeModel(), tpath);
-                else menu = LocalView<Type>::popUp();
+                if (itemMenu) {
+		    menu = LocalView<Type>::popUp(baseView->treeModel(), tpath);
+		} else {
+		    menu = LocalView<Type>::popUp();
+		    /*auto p = g_object_get_data(G_OBJECT(menu), "path");
+		    g_free(p);
+
+		    g_object_set_data(G_OBJECT(menu), "path", (void *)g_strdup(baseView->path()));*/
+		}
                 break;
             case (FSTAB_TYPE):
                 if (itemMenu) menu = Fstab<Type>::popUp(baseView->treeModel(), tpath);
@@ -366,7 +373,9 @@ public:
                 g_object_set_data(G_OBJECT(menu),"path", g_strdup(baseView->path()));
                 switch(baseView->viewType()) {
                     case (LOCALVIEW_TYPE):
-                        LocalView<Type>::resetLocalPopup();
+			//g_object_set_data(G_OBJECT(menu),"path", (void *)baseView->path());
+
+                        LocalView<Type>::resetLocalPopup(baseView->path());
                         break;
                     case (FSTAB_TYPE):
                         Fstab<Type>::resetLocalPopup();
@@ -493,11 +502,16 @@ public:
             GtkTreeIter iter;
             gtk_tree_model_get_iter (baseView->treeModel(), &iter, tpath);
             gtk_tree_model_get (baseView->treeModel(), &iter, PATH, &target, -1);	
+	    DBG("target1=%s\n", target);
             if (!g_file_test(target, G_FILE_TEST_IS_DIR)){
                 g_free(target);
                 target=NULL;
             }
-        } else tpath=NULL;
+	    DBG("target2=%s\n", target);
+        } else {
+	    DBG("target3=%s\n", target);
+	    tpath=NULL;
+	}
 
                     // nah
        /* gtk_icon_view_get_drag_dest_item (view_p->get_iconview(),
@@ -528,7 +542,30 @@ public:
             guint t, gpointer data) {
 	auto baseView = (BaseView<Type> *)data;
         TRACE("signal_drag_motion\n");
-                                        
+/*
+	// This does not work as intended
+	gint actions = gdk_drag_context_get_actions(dc);
+	if(actions == GDK_ACTION_MOVE){
+	    gdk_drag_status (dc, GDK_ACTION_MOVE, t);
+	    GdkPixbuf *pixbuf = Pixbuf<Type>::get_pixbuf("folder", -24);
+	    gtk_drag_set_icon_pixbuf (dc, pixbuf,10,10);
+	    //DBG("signal_drag_motion GDK_ACTION_MOVE\n");
+	} else if(actions == GDK_ACTION_COPY) {
+  	    gdk_drag_status (dc, GDK_ACTION_COPY, t);
+	    GdkPixbuf *pixbuf = Pixbuf<Type>::get_pixbuf("insert-image", -24);
+	    gtk_drag_set_icon_pixbuf (dc, pixbuf,10,10);
+	    //DBG("signal_drag_motion GDK_ACTION_COPY\n");
+	} else if(actions == GDK_ACTION_LINK){
+	    GdkPixbuf *pixbuf = Pixbuf<Type>::get_pixbuf("mark-location", -24);
+	    gtk_drag_set_icon_pixbuf (dc, pixbuf,10,10);
+	    gdk_drag_status (dc, GDK_ACTION_LINK, t);
+	    //DBG("signal_drag_motion GDK_ACTION_LINK \n");
+	} else {
+	    gdk_drag_status (dc, GDK_ACTION_MOVE, t);
+	    //gdk_drag_status (dc, (GdkDragAction)0, t);   
+	    //DBG("signal_drag_motion WTF\n");
+	}
+	*/
         GtkTreePath *tpath;
                                         
         GtkIconViewDropPosition pos;
@@ -540,7 +577,7 @@ public:
             GtkTreeIter iter;
             gtk_tree_model_get_iter (baseView->treeModel(), &iter, tpath);
             gchar *g;
-            gtk_tree_model_get (baseView->treeModel(), &iter, ACTUAL_NAME, &g, -1);
+            gtk_tree_model_get (baseView->treeModel(), &iter, PATH, &g, -1);
             // drop into?
             // must be a directory
             if (g_file_test(g, G_FILE_TEST_IS_DIR)){
@@ -548,6 +585,7 @@ public:
             } else {
                 baseView->highlight(NULL);
             }
+	    g_free(g);
         } else {
             baseView->highlight(NULL);
         }
@@ -606,6 +644,8 @@ public:
     //  single or multiple item selected?
         GList *selection_list = gtk_icon_view_get_selected_items (baseView->iconView());
         baseView->setSelectionList(selection_list);
+	GdkPixbuf *pixbuf = Pixbuf<Type>::get_pixbuf("list-add", -48);
+	gtk_drag_set_icon_pixbuf (context, pixbuf,10,10);
 	/*
         cairo_surface_t *icon;
         if (g_list_length(selection_list)==1){

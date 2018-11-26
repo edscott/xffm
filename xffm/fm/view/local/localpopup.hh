@@ -61,9 +61,10 @@ public:
     }
 
     static void
-    resetLocalPopup(void) {
+    resetLocalPopup(const gchar *path) {
         // Path is set on buttonpress signal...
-        auto path = (const gchar *)g_object_get_data(G_OBJECT(localPopUp), "path");
+        //auto path = (const gchar *)g_object_get_data(G_OBJECT(localPopUp), "path");
+	DBG("resetLocalPopup path=%s\n", path);
         if (!path){
 	    ERROR("resetLocalPopup: path is NULL\n");
 	    return;
@@ -171,6 +172,7 @@ private:
 
     static void
     showDirectoryItems(const gchar *path){
+	WARN("showDirectoryItems: %s\n", path);
         // Directory items...
         const gchar *directoryItems[] ={
             "title",
@@ -284,6 +286,7 @@ public:
 	auto v2 = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "title"));
         gtk_widget_show(v2);
 	
+	WARN("resetMenuItems  %s\n", path);
         runWithDialog(path);
         gchar *fileInfo = util_c::fileInfo(path);
         openWithDialog(path, mimetype, fileInfo);

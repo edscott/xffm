@@ -136,8 +136,12 @@ public:
                 "drag-leave", G_CALLBACK (BaseViewSignals<Type>::signal_drag_leave), (void *)this);
 
         // Not necessary with GTK_DEST_DEFAULT_MOTION
-        //g_signal_connect (G_OBJECT (destination_), 
-        //      "drag-motion", G_CALLBACK (BaseViewSignals<Type>::signal_drag_motion), (void *)this);
+	// while using default iconview dnd, but this is not
+	// our case.
+        g_signal_connect (G_OBJECT (destination_), 
+              "drag-motion", 
+	      G_CALLBACK (BaseViewSignals<Type>::signal_drag_motion),
+	      (void *)this);
         // Not necessary with GTK_DEST_DEFAULT_DROP
         //
         //g_signal_connect (G_OBJECT (destination_), 
@@ -404,18 +408,23 @@ public:
         }
 
         gchar *source = g_path_get_dirname(*files);
+	if (strncmp(source, "file:/", strlen("file:/"))==0){
+	    gchar *g = g_strdup(source + strlen("file:/"));
+	    g_free(source);
+	    source=g;
+	}
         if (!target){
-            if (strncmp(source, format, strlen(format))==0){
-                target = g_strconcat(format, path_, NULL);
-            } else target = g_strdup(path_);
+	    target = g_strdup(path_);
         }
         WARN("BaseView::receiveDndData: source=%s target=%s action=%d\n", source, target, action);
         gboolean result = FALSE;
         if (strcmp(source, target) ) result = TRUE;
         else {
+	    g_free(source);
             WARN("receiveDndData: source and target are the same\n");
             return FALSE;
         }
+	g_free(source);
 
         for (gchar **f = files; f && *f; f++){
             if (strlen(*f)==0) continue;
@@ -432,7 +441,6 @@ public:
                     WARN("DND link: %s --> %s\n", src, path_);
                     break;
             }
-
         }
 	const gchar *command;
 	const gchar *message;
@@ -452,7 +460,7 @@ public:
 
 	}
 	auto dialog = CommandProgressResponse<Type>::dialog(
-		message, "system-run", command, files, path_);
+		message, "system-run", command, files, target);
         g_strfreev(files);
         g_free(target);
         // not needed with GTK_DEST_DEFAULT_DROP

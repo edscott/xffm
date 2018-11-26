@@ -62,7 +62,7 @@ public:
                 v = gtk_c::menu_item_new(NULL, _(p->label));
             }
 	    g_object_set_data(G_OBJECT(menu), p->label, v);
-	    gtk_widget_set_sensitive(v, FALSE);
+	    gtk_widget_set_sensitive(v, TRUE);
 	    gtk_container_add (GTK_CONTAINER (menu), v);
 	    g_signal_connect ((gpointer) v, "activate", 
                     (p->callback)?MENUITEM_CALLBACK (p->callback):MENUITEM_CALLBACK (noop), 
