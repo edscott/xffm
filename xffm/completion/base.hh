@@ -171,11 +171,14 @@ private:
     baseExecCompletionList(const gchar *workdir, const char *in_token){
 
         gchar *token=get_token(in_token);
+        if (!token || !strlen(token)) return NULL;
             
         glob_t stack_glob_v;
-        gboolean straight_path = g_path_is_absolute(token) ||
-            strncmp(token, "./", strlen("./"))==0 ||
-            strncmp(token, "../", strlen("../"))==0;
+        gboolean straight_path = g_path_is_absolute(token);
+        if (strlen(token)>1 &&  strncmp(token, "./", strlen("./"))==0)
+            straight_path = TRUE;
+        if (strlen(token)>2 &&  strncmp(token, "../", strlen("../"))==0)
+            straight_path = TRUE;
 
         if (straight_path) {
             gchar *d;
