@@ -67,77 +67,65 @@ class FstabPopUp {
     }
 
     static void 
-    resetLocalItemPopup(GtkTreeModel *treeModel, const GtkTreePath *tpath) {
-        // baseView data is set in BaseViewSignals on button press (button=3)
-	DBG("resetLocalItemPopup\n");
-	gchar *aname=NULL;
-	gchar *iconName=NULL;
-	gchar *text;
-	gchar *path;
-	gchar *displayName;
+    resetLocalItemPopup(BaseView<Type> *baseView, const GtkTreePath *tpath) {
+        BasePopUp<Type>::clearKeys(fstabItemPopUp);
         GtkTreeIter iter;
 	GtkTreePath *ttpath = gtk_tree_path_copy(tpath);
-	if (!gtk_tree_model_get_iter (treeModel, &iter, ttpath)) {
+	if (!gtk_tree_model_get_iter (baseView->treeModel(), &iter, ttpath)) {
 	    gtk_tree_path_free(ttpath);
 	    return;
 	}
 	gtk_tree_path_free(ttpath);
-	gtk_tree_model_get (treeModel, &iter, 
-		ACTUAL_NAME, &aname,
+	gchar *partuuid;
+	gchar *iconName;
+	gchar *tooltipText;
+	gchar *path;
+	gchar *displayName;
+        gtk_tree_model_get (baseView->treeModel(), &iter, 
+                ACTUAL_NAME, &partuuid,
+		MIMETYPE, &partuuid,
 		DISPLAY_NAME, &displayName,
 		ICON_NAME, &iconName,
 		PATH, &path,
-                TOOLTIP_TEXT,&text,
+                TOOLTIP_TEXT,&tooltipText,
 		-1);
 	if (!path){
-	    ERROR("resetLocalItemPopup: path is NULL\n");
+	    ERROR("fstabItemPopup: path is NULL\n");
 	    return;
 	}
+
 	gchar *g = util_c::fileInfo(path);
-	gchar *fileInfo = g_strconcat(g, ": ", (text)?text:"", NULL);
-	//gchar *fileInfo = g_strconcat(g,  NULL);
+	gchar *fileInfo = g_strconcat(g, ": ", (tooltipText)?tooltipText:"", NULL);
 	g_free(g);
 
-	const gchar *keys[] = {"DISPLAY_NAME",  "PATH",  NULL};
-	const gchar **q;
-	for (q=keys; q && *q; q++){
-	    auto cleanup = (gchar *)g_object_get_data(G_OBJECT(fstabItemPopUp), *q);
-	    g_free(cleanup);
-	}
-	g_object_set_data(G_OBJECT(fstabItemPopUp), "DISPLAY_NAME", displayName);
-	g_object_set_data(G_OBJECT(fstabItemPopUp), "PATH", path);
-        gchar *name = util_c::valid_utf_pathstring(aname);
-	// Set title element
-//        BasePopUp<Type>::changeTitle(fstabItemPopUp, iconName, name, path, mimetype, fileInfo);
-        gchar *mimetype = g_strdup_printf("partuuid: %s", name);
+        gchar *mimetype = g_strdup_printf("partuuid: %s", partuuid);
 
-        BasePopUp<Type>::changeTitle(fstabItemPopUp, iconName, displayName, path, mimetype, fileInfo);
-        //BasePopUp<Type>::changeTitle(fstabItemPopUp, iconName, path, displayName, mimetype, fileInfo);
-	g_free(text);
-	g_free(mimetype);
-	g_free(name);
-	g_free(aname);
-	g_free(iconName);
-	g_free(fileInfo);
-	// this now belongs to data of localItemPopup: g_free(path);
-	// this now belongs to localItemPopup: g_free(displayName);
-	// this now belongs to localItemPopup: g_free(mimetype);
+	g_object_set_data(G_OBJECT(fstabItemPopUp), "iconName", iconName);
+	g_object_set_data(G_OBJECT(fstabItemPopUp), "displayName", displayName);
+	g_object_set_data(G_OBJECT(fstabItemPopUp), "path", g_strdup(path));
+	g_object_set_data(G_OBJECT(fstabItemPopUp), "mimetype", partuuid);
+	g_object_set_data(G_OBJECT(fstabItemPopUp), "fileInfo", util_c::fileInfo(path));
+	g_object_set_data(G_OBJECT(fstabItemPopUp), "tooltipText", tooltipText);
+ 	// Set title element
+        BasePopUp<Type>::changeTitle(fstabItemPopUp);
     }
 
     static void
-    resetMenuItems(GtkTreeModel *treeModel, const GtkTreePath *tpath) {
-	GtkTreeIter iter;
+    resetMenuItems(BaseView<Type> *baseView, const GtkTreePath *tpath) {
+        resetLocalItemPopup(baseView, tpath);
+        GtkTreeIter iter;
 	GtkTreePath *ttpath = gtk_tree_path_copy(tpath);
-	if (!gtk_tree_model_get_iter (treeModel, &iter, ttpath)) {
+	if (!gtk_tree_model_get_iter (baseView->treeModel(), &iter, ttpath)) {
 	    gtk_tree_path_free(ttpath);
 	    return;
 	}
 
 	gtk_tree_path_free(ttpath);
+
 	gchar *path;
         path = (gchar *)g_object_get_data(G_OBJECT(fstabItemPopUp), "path");
         g_free(path);
-	gtk_tree_model_get (treeModel, &iter, 
+	gtk_tree_model_get (baseView->treeModel(), &iter, 
 		PATH, &path,
 	    -1);
         g_object_set_data(G_OBJECT(fstabItemPopUp), "path", path);
@@ -146,10 +134,6 @@ class FstabPopUp {
         GList *children = gtk_container_get_children (GTK_CONTAINER(fstabItemPopUp));
         for (GList *child = children; child && child->data; child=child->next){
             gtk_widget_hide(GTK_WIDGET(child->data));
-        }
-        if (stat(path, &st)<0){
-            ERROR("resetMenuItems(): cannot stat %s\n", path);
-            return;
         }
             
 	auto v2 = GTK_WIDGET(g_object_get_data(G_OBJECT(fstabItemPopUp), "title"));
@@ -245,9 +229,10 @@ class FstabPopUp {
     }
     
 public:
-    static GtkMenu *popUp(void){
+    /*
+    static GtkMenu *popUp(BaseView<Type> *baseView){
         if (!fstabPopUp) fstabPopUp = createLocalPopUp();   
-        // this is called from button press event... resetLocalPopup();
+        Popup();
         return fstabPopUp;
     }
 
@@ -272,13 +257,13 @@ public:
 	// Set title element
 	BasePopUp<Type>::changeTitle(fstabPopUp,(gchar *)"folder-remote", _("Mount Helper"), NULL, NULL, "xffm:fstab");
     }
-
-    static GtkMenu *popUp(GtkTreeModel *treeModel, const GtkTreePath *tpath){
+*/
+    static GtkMenu *popUp(BaseView<Type> *baseView, const GtkTreePath *tpath){
         if (!fstabItemPopUp) fstabItemPopUp = createLocalItemPopUp();   
-	resetLocalItemPopup(treeModel, tpath);
-	resetMenuItems(treeModel, tpath);
+	resetMenuItems(baseView, tpath);
         return fstabItemPopUp;
     }
+
     
 
 

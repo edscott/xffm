@@ -83,11 +83,11 @@ public:
     }
 
     static void
-    runWith(BaseView<Type> *baseView, GtkTreeModel *treeModel, const GtkTreePath *tpath, const gchar *path){
+    runWith(BaseView<Type> *baseView, const GtkTreePath *tpath, const gchar *path){
         TRACE("%s is executable file\n", path);
 	if (!localItemPopUp) LocalPopUp<Type>::createLocalItemPopUp();
-	LocalPopUp<Type>::resetLocalItemPopup(treeModel, tpath);
-	LocalPopUp<Type>::resetMenuItems(treeModel, tpath);
+	//LocalPopUp<Type>::resetLocalItemPopup(baseView, tpath);
+	LocalPopUp<Type>::resetMenuItems(baseView, tpath);
 	// Set to non static object BaseView:
 	g_object_set_data(G_OBJECT(localItemPopUp), "baseView",(void *) baseView);
 	// get corresponding menuitem
@@ -98,13 +98,13 @@ public:
     }
 
     static void
-    openWith(BaseView<Type> *baseView, GtkTreeModel *treeModel, const GtkTreePath *tpath, const gchar *path){
+    openWith(BaseView<Type> *baseView, const GtkTreePath *tpath, const gchar *path){
 	    TRACE("%s is regular file\n", path);
 	    // setup for dialog
 	    // if popup menu is not created, then create
 	    if (!localItemPopUp) LocalPopUp<Type>::createLocalItemPopUp();
-	    LocalPopUp<Type>::resetLocalItemPopup(treeModel, tpath);
-	    LocalPopUp<Type>::resetMenuItems(treeModel, tpath);
+	    //LocalPopUp<Type>::resetLocalItemPopup(baseView, tpath);
+	    LocalPopUp<Type>::resetMenuItems(baseView, tpath);
 	    // Set to non static object BaseView:
 	    g_object_set_data(G_OBJECT(localItemPopUp), "baseView",(void *) baseView);
 	    // get corresponding menuitem
@@ -126,7 +126,7 @@ public:
 	// FIXME: if executable, then dialog to open with null (run) With entry for arguments
 	if ((st.st_mode & S_IFMT) == S_IFREG){
 	    if (g_file_test(path, G_FILE_TEST_IS_EXECUTABLE)) {
-		runWith(baseView, treeModel, tpath, path);
+		runWith(baseView, tpath, path);
 	    } else {
 		auto mimetype = Mime<Type>::mimeType(path);
 		gchar *response = Settings<Type>::getSettingString("MimeTypeApplications", mimetype);
@@ -152,7 +152,7 @@ public:
 		    g_free(command);
 		    return FALSE;
 		}
-		openWith(baseView, treeModel, tpath, path);
+		openWith(baseView, tpath, path);
 	    }
 	} else{
 	    DBG("%s NOT a regular file\n", path);
@@ -166,6 +166,7 @@ public:
     static LocalMonitor<Type> *
     loadModel (BaseView<Type> *baseView, const gchar *path)
     {
+	baseView->enableDnD();	
         LocalMonitor<Type> *p = NULL;
         auto iconView = baseView->iconView();
         if (!g_file_test(path, G_FILE_TEST_EXISTS)){

@@ -63,6 +63,7 @@ public:
     loadModel (BaseView<Type> *baseView)
     {
 		
+	baseView->disableDnD();	
         auto iconView = baseView->iconView();
         auto treeModel = gtk_icon_view_get_model (iconView);
 	TRACE("mk_tree_model:: model = %p\n", treeModel);

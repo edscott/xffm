@@ -344,9 +344,9 @@ public:
                 break;
             case (LOCALVIEW_TYPE):
                 if (itemMenu) {
-		    menu = LocalView<Type>::popUp(baseView->treeModel(), tpath);
+		    menu = LocalView<Type>::popUp(baseView, tpath);
 		} else {
-		    menu = LocalView<Type>::popUp();
+		    menu = LocalView<Type>::popUp(baseView);
 		    /*auto p = g_object_get_data(G_OBJECT(menu), "path");
 		    g_free(p);
 
@@ -354,7 +354,7 @@ public:
 		}
                 break;
             case (FSTAB_TYPE):
-                if (itemMenu) menu = Fstab<Type>::popUp(baseView->treeModel(), tpath);
+                if (itemMenu) menu = Fstab<Type>::popUp(baseView, tpath);
                 //else menu = Fstab<Type>::popUp(baseView->treeModel(), tpath);
 
 
@@ -367,7 +367,8 @@ public:
             g_object_set_data(G_OBJECT(menu),"baseView", (void *)baseView);
             if (itemMenu) {
                 gtk_tree_path_free(tpath);
-            } else {
+            } 
+            /*else {
                 auto oldPath = (gchar *)g_object_get_data(G_OBJECT(menu),"path");
                 g_free(oldPath);
                 g_object_set_data(G_OBJECT(menu),"path", g_strdup(baseView->path()));
@@ -381,7 +382,7 @@ public:
                         Fstab<Type>::resetLocalPopup();
                         break;
                 }
-            }
+            }*/
             gtk_menu_popup_at_pointer (menu, (const GdkEvent *)event);
         }   
         return retval;

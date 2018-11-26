@@ -10,9 +10,19 @@ class BasePopUp {
     using pixbuf_icons_c = Icons<double>;
     
 public: 
-    static void changeTitle(GtkMenu *menu, const gchar *iconName, 
-	    const gchar *name, const gchar *path, 
-            const gchar *mimetype, const gchar *fileInfo)
+    static void
+    clearKeys(GtkMenu *menu){
+      const gchar *keys[] = {"tooltipText", "displayName",  "path", "mimetype", "fileInfo", "iconName", NULL};
+	const gchar **q;
+	for (q=keys; q && *q; q++){
+	    auto cleanup = g_object_get_data(G_OBJECT(menu), *q);
+            TRACE("g_free:%s --> %p\n", *q, cleanup);
+	    g_free(cleanup);
+            g_object_set_data(G_OBJECT(menu), *q, NULL);
+	}
+    }
+
+    static void changeTitle(GtkMenu *menu)
     {
 	// change title
 	auto title = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(menu), "title"));
@@ -21,12 +31,19 @@ public:
             return;
         }
 	TRACE("changeTitle, title = %p\n",(void *)title);
+        auto iconName = (gchar *)g_object_get_data(G_OBJECT(menu), "iconName");
+        auto path = (gchar *)g_object_get_data(G_OBJECT(menu), "path");
+        auto mimetype = (gchar *)g_object_get_data(G_OBJECT(menu), "mimetype");
+        auto fileInfo = (gchar *)g_object_get_data(G_OBJECT(menu), "fileInfo");
+        auto display_name = (gchar *)g_object_get_data(G_OBJECT(menu), "displayName");
 	gchar *statLine=NULL;
         if (g_file_test(path, G_FILE_TEST_EXISTS)){
             statLine = util_c::statInfo(path);
         }
+
+
 	gchar *markup = g_strdup_printf("<span size=\"larger\" color=\"red\"><b><i>%s</i></b></span><span color=\"#aa0000\">%s%s</span>\n<span color=\"blue\">%s</span>\n<span color=\"green\">%s</span>", 
-		name, 
+		display_name, 
 		mimetype?": ":"",
 		mimetype?mimetype:"",
 		fileInfo?fileInfo:"", 

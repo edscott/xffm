@@ -62,6 +62,8 @@ public:
 
     static void
     resetLocalPopup(const gchar *path) {
+        BasePopUp<Type>::clearKeys(localPopUp);
+
         // Path is set on buttonpress signal...
         //auto path = (const gchar *)g_object_get_data(G_OBJECT(localPopUp), "path");
 	DBG("resetLocalPopup path=%s\n", path);
@@ -69,25 +71,17 @@ public:
 	    ERROR("resetLocalPopup: path is NULL\n");
 	    return;
 	}
-	const gchar *mimetype = Mime<Type>::mimeType(path);
-	const gchar *keys[] = {"DISPLAY_NAME",  "MIMETYPE", NULL};
-	const gchar **q;
-	for (q=keys; q && *q; q++){
-	    auto cleanup = (gchar *)g_object_get_data(G_OBJECT(localPopUp), *q);
-	    g_free(cleanup);
-	}
-        gchar *name = util_c::valid_utf_pathstring(path);
-	g_object_set_data(G_OBJECT(localPopUp), "DISPLAY_NAME", name);
-	g_object_set_data(G_OBJECT(localPopUp), "MIMETYPE", g_strdup(mimetype));
-	// Set title element
-        gchar *fileInfo = util_c::fileInfo(path);
-	BasePopUp<Type>::changeTitle(localPopUp,(gchar *)"folder", name, path, mimetype, fileInfo);
-	g_free(fileInfo);
+	g_object_set_data(G_OBJECT(localPopUp), "iconName", g_strdup("folder"));
+	g_object_set_data(G_OBJECT(localPopUp), "displayName", util_c::valid_utf_pathstring(path));
+	g_object_set_data(G_OBJECT(localPopUp), "path", g_strdup(path));
+	g_object_set_data(G_OBJECT(localPopUp), "mimetype", g_strdup(Mime<Type>::mimeType(path)));
+	g_object_set_data(G_OBJECT(localPopUp), "fileInfo", util_c::fileInfo(path));
+	BasePopUp<Type>::changeTitle(localPopUp);
     }
 
-
+/*
     static void
-    resetLocalItemPopup(GtkTreeModel *treeModel, const GtkTreePath *tpath) {
+    resetLocalItemPopup(BaseView<Type> *baseView, const GtkTreePath *tpath) {
         // baseView data is set in BaseViewSignals on button press (button=3)
 	DBG("resetLocalItemPopup\n");
 	gchar *aname=NULL;
@@ -97,12 +91,12 @@ public:
 	gchar *displayName;
         GtkTreeIter iter;
 	GtkTreePath *ttpath = gtk_tree_path_copy(tpath);
-	if (!gtk_tree_model_get_iter (treeModel, &iter, ttpath)) {
+	if (!gtk_tree_model_get_iter (baseView->treeModel(), &iter, ttpath)) {
 	    gtk_tree_path_free(ttpath);
 	    return;
 	}
 	gtk_tree_path_free(ttpath);
-	gtk_tree_model_get (treeModel, &iter, 
+	gtk_tree_model_get (baseView->treeModel(), &iter, 
 		ACTUAL_NAME, &aname,
 		DISPLAY_NAME, &displayName,
 		ICON_NAME, &iconName,
@@ -117,7 +111,7 @@ public:
 	if (!mimetype){
 	    auto m = Mime<Type>::mimeType(path); 
 	    mimetype = g_strdup(m); 
-	    gtk_list_store_set(GTK_LIST_STORE(treeModel), &iter, 
+	    gtk_list_store_set(GTK_LIST_STORE(baseView->treeModel()), &iter, 
 		MIMETYPE, mimetype, -1);
 	}
 
@@ -141,7 +135,7 @@ public:
 	// this now belongs to localItemPopup: g_free(displayName);
 	// this now belongs to localItemPopup: g_free(mimetype);
     }
-
+*/
 private:
     static void
     runWithDialog(const gchar *path){
@@ -157,17 +151,25 @@ private:
 
     static void
     openWithDialog(const gchar *path, const gchar *mimetype, const gchar *fileInfo){
+        WARN("openWithDialog(): path=%s\n", path);
+        gboolean state;
+        if (strchr(path, '\'')){
+            gchar **f = g_strsplit(path,"\'", 2);
+            state = g_file_test(f[0], G_FILE_TEST_IS_REGULAR);
+            WARN("%s is regular: %d\n", f[0], state);
+            g_strfreev(f);
+        } else {
+            state = g_file_test(path, G_FILE_TEST_IS_REGULAR);
+        }
+
 	// Open with dialog
 	auto v2 = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(localItemPopUp), "Open with"));
-        gboolean state = g_file_test(path, G_FILE_TEST_IS_REGULAR);
         if (state) {
             gtk_widget_show(GTK_WIDGET(v2));
         } else {
             gtk_widget_hide(GTK_WIDGET(v2));
         }
 	gtk_widget_set_sensitive(GTK_WIDGET(v2), state);
-	// open with mimetype application
-	setUpMimeTypeApp(mimetype, path, fileInfo);
     }
 
     static void
@@ -249,61 +251,119 @@ private:
 
     }
 
+    static void 
+    setPath(BaseView<Type> * baseView, GList *selection_list, const GtkTreePath *tpath){
+        BasePopUp<Type>::clearKeys(localItemPopUp);
 
+        GtkTreeIter iter;
+        if (g_list_length(selection_list) > 1) {
+            gchar *paths = g_strdup("");
+            for (GList *l = selection_list; l && l->data; l=l->next){
+                if (!gtk_tree_model_get_iter (baseView->treeModel(), &iter, (GtkTreePath *)l->data)){
+                    continue;
+                }
+                gchar *path;
+        	gtk_tree_model_get (baseView->treeModel(), &iter, PATH, &path, -1);
+                gchar *g = g_strconcat(paths, path, "\'", NULL);
+                g_free(paths);
+                g_free(path);
+                paths = g;
+            }
+            gchar *fileInfo = g_strdup_printf("%s %d", _("Files:"), g_list_length(selection_list));
+            g_object_set_data(G_OBJECT(localItemPopUp), "fileInfo", fileInfo);
+            g_object_set_data(G_OBJECT(localItemPopUp), "iconName", g_strdup("edit-copy"));
+            g_object_set_data(G_OBJECT(localItemPopUp), "displayName", g_strdup(_("Multiple selections")));
+            g_object_set_data(G_OBJECT(localItemPopUp), "path", paths);
+            g_object_set_data(G_OBJECT(localItemPopUp), "mimetype", g_strdup(""));
+            return;
+        }
+	struct stat st;
+        gchar *path;
+        gchar *iconName;
+        gchar *mimetype;
+        gchar *displayName;
+	GtkTreePath *ttpath = gtk_tree_path_copy(tpath);
+	if (!gtk_tree_model_get_iter (baseView->treeModel(), &iter, ttpath)) {
+	    gtk_tree_path_free(ttpath);
+	    return ;
+	}
+	gtk_tree_path_free(ttpath);
+	gtk_tree_model_get (baseView->treeModel(), &iter, 
+		//ACTUAL_NAME, &aname,
+		DISPLAY_NAME, &displayName,
+                MIMETYPE, &mimetype, 
+		ICON_NAME, &iconName,
+                PATH, &path, 
+                -1);
+        if (!mimetype){
+            auto m = Mime<Type>::mimeType(path); 
+            mimetype = g_strdup(m); 
+            gtk_list_store_set(GTK_LIST_STORE(baseView->treeModel()), &iter, 
+                MIMETYPE, mimetype, -1);
+        }
+
+	gchar *fileInfo = util_c::fileInfo(path);
+        g_object_set_data(G_OBJECT(localItemPopUp), "fileInfo", fileInfo);
+        g_object_set_data(G_OBJECT(localItemPopUp), "iconName", iconName);
+        g_object_set_data(G_OBJECT(localItemPopUp), "displayName", displayName);
+        g_object_set_data(G_OBJECT(localItemPopUp), "path", path);
+        g_object_set_data(G_OBJECT(localItemPopUp), "mimetype", mimetype);
+        if (stat(path, &st)<0){
+            ERROR("resetMenuItems(): cannot stat %s (expect problems)\n", path);
+        }
+       return;
+    }
 public:
     static void
-    resetMenuItems(GtkTreeModel *treeModel, const GtkTreePath *tpath) {
+    resetMenuItems(BaseView<Type> *baseView, const GtkTreePath *tpath) {
 	GtkTreeIter iter;
 	GtkTreePath *ttpath = gtk_tree_path_copy(tpath);
-	if (!gtk_tree_model_get_iter (treeModel, &iter, ttpath)) {
+	if (!gtk_tree_model_get_iter (baseView->treeModel(), &iter, ttpath)) {
 	    gtk_tree_path_free(ttpath);
 	    return;
 	}
 
 	gtk_tree_path_free(ttpath);
-	gchar *path;
-        path = (gchar *)g_object_get_data(G_OBJECT(localItemPopUp), "path");
-        g_free(path);
-	gchar *mimetype = (gchar *)g_object_get_data(G_OBJECT(localItemPopUp), "mimetype");;
-        g_free(mimetype);
-	gtk_tree_model_get (treeModel, &iter, 
-		MIMETYPE, &mimetype,
-		PATH, &path,
-	    -1);
-        g_object_set_data(G_OBJECT(localItemPopUp), "path", path);
-        g_object_set_data(G_OBJECT(localItemPopUp), "mimetype", mimetype);
-	struct stat st;
+
+        //  single or multiple item selected?
+        GList *selection_list = gtk_icon_view_get_selected_items (baseView->iconView());
+        baseView->setSelectionList(selection_list);
+        setPath(baseView, selection_list, tpath);
+ 	// Set title element
+        BasePopUp<Type>::changeTitle(localItemPopUp);
+
+ 
         // Hide all...
         GList *children = gtk_container_get_children (GTK_CONTAINER(localItemPopUp));
         for (GList *child = children; child && child->data; child=child->next){
             gtk_widget_hide(GTK_WIDGET(child->data));
         }
-        if (stat(path, &st)<0){
-            ERROR("resetMenuItems(): cannot stat %s\n", path);
-            return;
-        }
             
 	auto v2 = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "title"));
         gtk_widget_show(v2);
 	
-	WARN("resetMenuItems  %s\n", path);
-        runWithDialog(path);
-        gchar *fileInfo = util_c::fileInfo(path);
+        auto fileInfo =(const gchar *)g_object_get_data(G_OBJECT(localItemPopUp), "fileInfo");
+        auto path =(const gchar *)g_object_get_data(G_OBJECT(localItemPopUp), "path");
+        auto mimetype =(const gchar *)g_object_get_data(G_OBJECT(localItemPopUp), "mimetype");
+        if (g_list_length(selection_list) > 1) {
+        } else {
+	    fileInfo = util_c::fileInfo(path);
+            runWithDialog(path);
+            // open with mimetype application
+            setUpMimeTypeApp(mimetype, path, fileInfo);
+            if (g_file_test(path, G_FILE_TEST_IS_DIR)) showDirectoryItems(path);
+        }
         openWithDialog(path, mimetype, fileInfo);
-        if ((st.st_mode & S_IFMT) == S_IFDIR) showDirectoryItems(path);
-	g_free(fileInfo);
-        
     }
 
-    static GtkMenu *popUp(GtkTreeModel *treeModel, const GtkTreePath *tpath){
+    static GtkMenu *popUp(BaseView<Type> *baseView, const GtkTreePath *tpath){
         if (!localItemPopUp) localItemPopUp = createLocalItemPopUp();   
-	resetLocalItemPopup(treeModel, tpath);
-	resetMenuItems(treeModel, tpath);
+	resetMenuItems(baseView, tpath);
         return localItemPopUp;
     }
-    static GtkMenu *popUp(void){
+    static GtkMenu *popUp(BaseView<Type> *baseView){
         if (!localPopUp) localPopUp = createLocalPopUp();   
-        // this is called from button press event... resetLocalPopup();
+        resetLocalPopup(baseView->path());
         return localPopUp;
     }
     static GtkMenu *createLocalPopUp(void){
@@ -544,7 +604,6 @@ public:
         entryResponse->setEntryDefault(dirname);
         g_free(dirname);
         
-        //entryResponse->setCheckButtonEntryCallback((void *)toggleTerminalRun, (void *)path); 
         auto response = entryResponse->runResponse();
         delete entryResponse;
 	WARN("response=%s\n", response);
@@ -636,7 +695,7 @@ public:
 
     static void
     runWith(GtkMenuItem *menuItem, gpointer data){
-	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "PATH");
+	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
 	auto displayPath = util_c::valid_utf_pathstring(path);
 	auto markup = 
 	    g_strdup_printf("<span color=\"blue\" size=\"larger\"><b>%s</b></span>\n<span color=\"red\">(%s)</span>", displayPath, 
@@ -679,16 +738,30 @@ public:
     static void
     openWith(GtkMenuItem *menuItem, gpointer data)
     {	
-	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "PATH");
-	auto mimetype = (const gchar *)g_object_get_data(G_OBJECT(data), "MIMETYPE");
+	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
+	auto mimetype = (const gchar *)g_object_get_data(G_OBJECT(data), "mimetype");
         if (!mimetype){
             mimetype = Mime<Type>::mimeType(path);
         }
+        gboolean multiple = FALSE;
+        gchar *mpath = g_strdup(path);
+        for (char *p = mpath; p && *p; p++){
+            if (*p=='\'') {
+                multiple = TRUE;
+                *p = '\n';
+            }
+        }
 	gchar *responseLabel = g_strdup_printf("<b><span size=\"larger\" color=\"blue\">%s</span></b>\n<span color=\"#880000\">(%s)</span>", 
-		path, mimetype);
+		mpath, mimetype);
+        for (char *p = mpath; p && *p; p++){
+            if (*p=='\n') *p = ' ';
+        }
+
 	const gchar **apps = Mime<Type>::locate_apps(mimetype);
 
-	gchar *fileInfo = util_c::fileInfo(path);	
+	gchar *fileInfo;
+        if (multiple) fileInfo = g_strdup("FIXMEfileinfo");
+        else fileInfo = util_c::fileInfo(path);	
 	gchar *defaultApp = defaultMimeTypeApp(mimetype, fileInfo);
 	g_free(fileInfo);
         
@@ -734,12 +807,6 @@ public:
             delete comboResponse;
         }
 
-/*
-        auto response = getResponse (_("Open with"),
-		responseLabel,_("Open with"),
-		_("Run in Terminal"), apps,
-		defaultApp, NULL);
-                */
 	g_free(defaultApp);
 	if (!response) return;
 
@@ -755,12 +822,27 @@ public:
 	if (strrchr(response,'\n')) *(strrchr(response,'\n')) = 0;
 	Settings<Type>::setSettingString("MimeTypeApplications", mimetype, response);
 	gchar *command;
+        if (!multiple) {
 	// Is the terminal flag set?
-	if (Mime<Type>::runInTerminal(response)){
-	    command = Mime<Type>::mkTerminalLine(response, path);
-	} else {
-	    command = Mime<Type>::mkCommandLine(response, path);
-	}
+	    if (Mime<Type>::runInTerminal(response)){
+                command = Mime<Type>::mkTerminalLine(response, mpath);
+            } else {
+                command = Mime<Type>::mkCommandLine(response, mpath);
+            }
+        } else { // hack
+   	    if (Mime<Type>::runInTerminal(response)){
+                command = Mime<Type>::mkTerminalLine(response, "");
+            } else {
+                command = Mime<Type>::mkCommandLine(response, "");
+            }
+            gchar **f = g_strsplit(path, "\'", -1);
+            for (gchar **p=f; p&& *p; p++){
+                gchar *g = g_strconcat(command, " ", *p, NULL);
+                g_free(command);
+                command = g;
+            }
+        }
+        TRACE("command line= %s\n", command);
 	page->command(command);
 	g_free(command);
 
@@ -834,24 +916,6 @@ public:
     }
 private:
 
-    static void
-    activate_entry (GtkEntry * entry, gpointer data) {
-	auto dialog = GTK_WIDGET(g_object_get_data(G_OBJECT(entry), "dialog"));
-	gtk_dialog_response (GTK_DIALOG(dialog),GTK_RESPONSE_YES);
-    }
-
-    static void
-    cancel_entry (GtkEntry * entry, gpointer data) {
-	GtkWidget *dialog = g_object_get_data(G_OBJECT(entry), "dialog");
-	gtk_dialog_response (GTK_DIALOG(dialog),GTK_RESPONSE_CANCEL);
-    }
-
-    static gboolean 
-    response_delete(GtkWidget *dialog, GdkEvent *event, gpointer data){
-	gtk_dialog_response (GTK_DIALOG(dialog),GTK_RESPONSE_CANCEL);
-	return TRUE;
-    }
-    
     static void 
     toggleTerminal (GtkToggleButton *togglebutton, gpointer data){
 	if (!data) return;
@@ -887,185 +951,6 @@ private:
 	g_free(a);
     }
 
-
-    static void add_cancel_ok(GtkDialog *dialog){
-	// button no
-	auto button =
-	    gtk_c::dialog_button ("window-close-symbolic", _("Cancel"));
-	gtk_widget_show (GTK_WIDGET(button));
-	gtk_dialog_add_action_widget (GTK_DIALOG (dialog), GTK_WIDGET(button), GTK_RESPONSE_NO);
-	g_object_set_data (G_OBJECT (dialog), "action_false_button", button);
-	// button yes
-	button = gtk_c::dialog_button ("system-run-symbolic", _("Ok"));
-	gtk_widget_show (GTK_WIDGET(button));
-	g_object_set_data (G_OBJECT (dialog), "action_true_button", button);
-	gtk_dialog_add_action_widget (GTK_DIALOG (dialog), GTK_WIDGET(button), GTK_RESPONSE_YES);
-    }
-
-    static gchar *
-    getResponse ( 
-	    const gchar *windowTitle,
-	    const gchar *title,  
-	    const gchar *text,  
-	    const gchar *checkboxText,
-	    const gchar **comboOptions,
-	    const gchar *defaultValue,
-	    const gchar *runPath) {
-	gchar *response_txt = NULL;
-	gint response = GTK_RESPONSE_NONE;
-	if(!text) text = "";
-	auto dialog = gtk_dialog_new ();
-	gtk_window_set_type_hint(GTK_WINDOW(dialog), GDK_WINDOW_TYPE_HINT_DIALOG);
-
-	response_txt = NULL;
-	gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
-	gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (mainWindow));
-	gtk_window_set_resizable (GTK_WINDOW (dialog), TRUE);
-	gtk_container_set_border_width (GTK_CONTAINER (dialog), 6);
-
-	GtkWidget *title_label=NULL;
-	if (title) {
-	    title_label = gtk_label_new ("");
-	    gtk_label_set_markup(GTK_LABEL(title_label), title);
-	}
-	
-	auto label = GTK_LABEL(gtk_label_new (""));
-
-	if(text) gtk_label_set_markup(label, text);
-
-	auto hbox = gtk_c::hboxNew (TRUE, 6);
-	auto vbox = gtk_c::vboxNew (TRUE, 6);
-	gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area(GTK_DIALOG (dialog))), GTK_WIDGET(vbox), FALSE, FALSE, 0);
-	GtkComboBoxText *combo;
-	GtkEntry *entry;
-	if (comboOptions){
-	    combo = GTK_COMBO_BOX_TEXT(gtk_combo_box_text_new_with_entry());
-	    const gchar **p;
-	    for (p=comboOptions; p && *p; p++){
-		gtk_combo_box_text_append_text (combo,*p);
-		DBG("setting combo value: %s\n" , *p);
-	    }
-	    if (defaultValue) {
-		gtk_combo_box_text_prepend_text (combo,defaultValue);
-	    }
-	    gtk_combo_box_set_active (GTK_COMBO_BOX(combo),0);
-	    entry =  GTK_ENTRY(gtk_bin_get_child(GTK_BIN(combo)));
-
-	} else {
-	    entry = GTK_ENTRY(gtk_entry_new ());
-	    //if (defaultValue) {
-		//gtk_entry_set_text ((GtkEntry *) entry, defaultValue);
-	    //}
-
-	}
-
-	// 
-	// * for combobox, entry is child of combobox.
-	// model must update on keyrelease
-	//
-	if (comboOptions){
-	    auto completion = gtk_entry_completion_new();
-	    gtk_entry_set_completion (entry, completion);
-	    gtk_entry_completion_set_popup_completion(completion, TRUE);
-	    gtk_entry_completion_set_text_column (completion, 0);
-	    gtk_entry_completion_set_minimum_key_length (completion, 2);
-	    auto completionStore = gtk_list_store_new(1, G_TYPE_STRING);
-	    gtk_entry_completion_set_model (completion, GTK_TREE_MODEL(completionStore));
-	    g_signal_connect (entry,
-			      "key_release_event", 
-			      //"key_press_event", 
-			      KEY_EVENT_CALLBACK(LocalPopUp<Type>::on_completion), 
-			      (void *)completionStore);
-	}
-			      
-
-
-	if (title_label){
-	    gtk_box_pack_start (GTK_BOX (vbox), title_label, TRUE, TRUE, 0);
-	}
-	gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET(hbox), FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(label), TRUE, TRUE, 0);
-
-	if (comboOptions){
-	    gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(combo), TRUE, TRUE, 0);
-	} else {
-	    gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(entry), TRUE, TRUE, 0);
-	    g_object_set_data(G_OBJECT(entry),"dialog", dialog);
-	    g_signal_connect (G_OBJECT (entry), "activate", G_CALLBACK (activate_entry), (void *)dialog);
-	}
-
-	gtk_widget_show_all (GTK_WIDGET(hbox));
-	GtkWidget *checkButton = NULL;
-	if (checkboxText) { 
-	    checkButton = gtk_check_button_new_with_label(checkboxText);
-	    gtk_box_pack_start (GTK_BOX (vbox), checkButton, TRUE, TRUE, 0);
-	    if (runPath) {
-		g_signal_connect (G_OBJECT (checkButton), "clicked", 
-		    BUTTON_CALLBACK(toggleTerminalRun), g_strdup(runPath));
-	    } else {
-		g_signal_connect (G_OBJECT (checkButton), "clicked", 
-		    BUTTON_CALLBACK(toggleTerminal), entry);
-	    }
-	    g_object_set_data(G_OBJECT(entry), "checkButton", (void *)checkButton); 
-	    if (defaultValue && Mime<Type>::runInTerminal(defaultValue)){
-		    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkButton), TRUE);
-	    }
-	    if (runPath && Mime<Type>::runInTerminal(runPath)){
-		    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkButton), TRUE);
-	    }
-
-	    if (comboOptions) g_signal_connect (combo,
-			  "changed", 
-			  COMBO_CALLBACK(LocalPopUp<Type>::comboChanged), 
-			  (void *)checkButton);
-	    // signal callback: in keyfile set Terminal.mimetype 0/1
-	    // save settings
-	    // On execution, check keyfile value
-	}
-
-	add_cancel_ok(GTK_DIALOG (dialog));
-
-	gtk_widget_realize (dialog);
-	if(windowTitle){
-	    // This may or may not work, depending on the window manager.
-	    // That is why we duplicate above with markup.
-	    gtk_window_set_title (GTK_WINDOW (dialog), windowTitle);
-	} else {
-	    gdk_window_set_decorations (gtk_widget_get_window(dialog), GDK_DECOR_BORDER);
-	}
-
-	g_signal_connect (G_OBJECT (dialog), "delete-event", G_CALLBACK (response_delete), dialog);
-	/* show dialog and return */
-	gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
-	gtk_widget_show_all (dialog);
-	response  = gtk_dialog_run(GTK_DIALOG(dialog));
-	if (checkboxText) g_free(g_object_get_data(G_OBJECT(checkButton), "app"));
-
-
-	if(response == GTK_RESPONSE_YES) {
-	    const gchar *et;
-	    if (runPath) {
-		response_txt = g_strdup_printf("%s %s", runPath, gtk_entry_get_text (entry));
-	    }
-	    else if (comboOptions){
-		response_txt = g_strdup (gtk_combo_box_text_get_active_text (combo));
-	    }  else {
-		response_txt = g_strdup(gtk_entry_get_text (entry));
-	    }
-	    //Save option as mimetype default in settings, 
-	    //and use it to set entry text.
-	    //This is done when function returns, after
-	    //checking if response is actually a valid 
-	    //answer.
-	}
-	gtk_widget_hide (dialog);
-	gtk_widget_destroy (dialog);
-	if(response_txt != NULL){
-	    g_strstrip (response_txt);
-	}
-
-	return response_txt;
-    }
 private:
 
 

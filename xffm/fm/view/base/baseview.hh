@@ -65,7 +65,16 @@ private:
 
 public:
     page_c *page(void){return page_;}
-
+    
+    void disableDnD(void){
+        gtk_drag_source_unset(source_);
+        gtk_drag_dest_unset(destination_);
+    }
+    
+    void enableDnD(void){
+        createSourceTargetList(source_);
+        createDestTargetList(destination_);
+    }
     
     BaseView(page_c *page){
     //BaseView(page_c *page, const gchar *path){
