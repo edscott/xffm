@@ -81,7 +81,8 @@ public:
         source_ = GTK_WIDGET(page_->pageChild());
         //source_ = GTK_WIDGET(page_->top_scrolled_window());
         //source_ = GTK_WIDGET(iconView_);
-        destination_ = GTK_WIDGET(iconView_);
+        //destination_ = GTK_WIDGET(iconView_);
+        destination_ = GTK_WIDGET(page_->pageChild());
 	
         //sortModel_ = GTK_TREE_MODEL_SORT(mkTreeModel());
 	//treeModel_ = gtk_tree_model_sort_get_model(sortModel_);

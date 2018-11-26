@@ -542,30 +542,7 @@ public:
             guint t, gpointer data) {
 	auto baseView = (BaseView<Type> *)data;
         TRACE("signal_drag_motion\n");
-/*
-	// This does not work as intended
-	gint actions = gdk_drag_context_get_actions(dc);
-	if(actions == GDK_ACTION_MOVE){
-	    gdk_drag_status (dc, GDK_ACTION_MOVE, t);
-	    GdkPixbuf *pixbuf = Pixbuf<Type>::get_pixbuf("folder", -24);
-	    gtk_drag_set_icon_pixbuf (dc, pixbuf,10,10);
-	    //DBG("signal_drag_motion GDK_ACTION_MOVE\n");
-	} else if(actions == GDK_ACTION_COPY) {
-  	    gdk_drag_status (dc, GDK_ACTION_COPY, t);
-	    GdkPixbuf *pixbuf = Pixbuf<Type>::get_pixbuf("insert-image", -24);
-	    gtk_drag_set_icon_pixbuf (dc, pixbuf,10,10);
-	    //DBG("signal_drag_motion GDK_ACTION_COPY\n");
-	} else if(actions == GDK_ACTION_LINK){
-	    GdkPixbuf *pixbuf = Pixbuf<Type>::get_pixbuf("mark-location", -24);
-	    gtk_drag_set_icon_pixbuf (dc, pixbuf,10,10);
-	    gdk_drag_status (dc, GDK_ACTION_LINK, t);
-	    //DBG("signal_drag_motion GDK_ACTION_LINK \n");
-	} else {
-	    gdk_drag_status (dc, GDK_ACTION_MOVE, t);
-	    //gdk_drag_status (dc, (GdkDragAction)0, t);   
-	    //DBG("signal_drag_motion WTF\n");
-	}
-	*/
+
         GtkTreePath *tpath;
                                         
         GtkIconViewDropPosition pos;
@@ -644,8 +621,17 @@ public:
     //  single or multiple item selected?
         GList *selection_list = gtk_icon_view_get_selected_items (baseView->iconView());
         baseView->setSelectionList(selection_list);
-	GdkPixbuf *pixbuf = Pixbuf<Type>::get_pixbuf("list-add", -48);
-	gtk_drag_set_icon_pixbuf (context, pixbuf,10,10);
+        if (g_list_length(selection_list) > 1) {
+            GdkPixbuf *pixbuf = Pixbuf<Type>::get_pixbuf("edit-copy", -48);
+            gtk_drag_set_icon_pixbuf (context, pixbuf,10,10);
+        } else {
+            auto tpath = (GtkTreePath *)selection_list->data;
+            GtkTreeIter iter;
+            GdkPixbuf *pixbuf;
+            gtk_tree_model_get_iter (baseView->treeModel(), &iter, tpath);
+            gtk_tree_model_get (baseView->treeModel(), &iter, DISPLAY_PIXBUF, &pixbuf, -1);
+            gtk_drag_set_icon_pixbuf (context, pixbuf,10,10);
+        }
 	/*
         cairo_surface_t *icon;
         if (g_list_length(selection_list)==1){
