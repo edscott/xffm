@@ -1,5 +1,47 @@
 #ifndef XF_BASEVIEW__HH
 # define XF_BASEVIEW__HH
+
+
+enum
+{
+    ROOTVIEW_TYPE,
+    LOCALVIEW_TYPE,
+    FSTAB_TYPE,
+    NFS_TYPE,
+    SSHFS_TYPE,
+    ECRYPTFS_TYPE,
+    CIFS_TYPE,
+    PKG_TYPE
+};
+
+enum
+{
+  FLAGS,
+  DISPLAY_PIXBUF,
+  NORMAL_PIXBUF,
+  HIGHLIGHT_PIXBUF,
+  TOOLTIP_PIXBUF,
+  DISPLAY_NAME,
+  ACTUAL_NAME,
+  PATH,
+  SIZE,
+  DATE,
+  TOOLTIP_TEXT,
+  ICON_NAME,
+  TYPE,
+  MIMETYPE, 
+  PREVIEW_PATH,
+  PREVIEW_TIME,
+  PREVIEW_PIXBUF,
+  NUM_COLS
+};
+
+enum {
+    TARGET_URI_LIST,
+    TARGETS
+};
+
+#define URIFILE "file://"
 #include "baseviewsignals.hh"
 
 namespace xf
@@ -363,41 +405,26 @@ public:
 
     GList *
     selectionList(void){return selectionList_;}
-#if 0
-//#define format ""
-#define format "file:/"
-    gboolean
-    setDndData(GtkSelectionData *selection_data, GList *selection_list){
-        TRACE( "setDndData() baseview default.\n");
-        gchar *dndData = NULL;
-        for(GList *tmp = selection_list; tmp; tmp = tmp->next) {
-            GtkTreePath *tpath = (GtkTreePath *)tmp->data;
-            gchar *path;
-            GtkTreeIter iter;
-            gtk_tree_model_get_iter (this->treeModel_, &iter, tpath);
-            gtk_tree_model_get (this->treeModel_, &iter, PATH, &path, -1);
-            if (!dndData) dndData = g_strconcat(format, path, NULL);
-            else {
-                gchar *e = g_strconcat(dndData, "\n", format, path, NULL);
-                g_free(dndData);
-                dndData = e;
+
+    GList *
+    removeUriFormat(gchar **files){
+        GList *fileList = NULL;
+        for (auto f=files; f && *f; f++){
+            gchar *file = *f;
+            if (strlen(file) > strlen(URIFILE)){
+                if (strncmp(file, URIFILE, strlen(URIFILE))==0){
+                    file = *f + strlen(URIFILE);
+                }
             }
-            TRACE("dndData: \"%s\"\n", dndData);
-            TRACE("append: %s -> \"%s\"\n", path, dndData);
-            g_free(path);
+            fileList = g_list_prepend(fileList, g_strdup(file));
         }
-
-        gtk_selection_data_set (selection_data, 
-	    gtk_selection_data_get_selection(selection_data),
-	    8, (const guchar *)dndData, strlen(dndData)+1);
-
-       return TRUE;
-        
+        fileList = g_list_reverse(fileList);
+        return fileList;
     }
-#endif
-// FIXME: cp/ln/mv should go in localView object
+
+
     gboolean
-    receiveDndData(gchar *target, const GtkSelectionData *selection_data, GdkDragAction action){
+    receiveDndData(const gchar *target, const GtkSelectionData *selection_data, GdkDragAction action){
         WARN("BaseView::receiveDndData\n");
         if (!selection_data) {
             WARN("!selection_data\n");
@@ -418,13 +445,13 @@ public:
         }
 
         gchar *source = g_path_get_dirname(*files);
-	if (strncmp(source, "file:/", strlen("file:/"))==0){
-	    gchar *g = g_strdup(source + strlen("file:/"));
+	if (strncmp(source, URIFILE, strlen(URIFILE))==0){
+	    gchar *g = g_strdup(source + strlen(URIFILE));
 	    g_free(source);
 	    source=g;
 	}
         if (!target){
-	    target = g_strdup(path_);
+	    target = (const gchar *)path_;
         }
         WARN("BaseView::receiveDndData: source=%s target=%s action=%d\n", source, target, action);
         gboolean result = FALSE;
@@ -436,7 +463,10 @@ public:
         }
 	g_free(source);
 
-        for (gchar **f = files; f && *f; f++){
+        GList *fileList = removeUriFormat(files);
+        g_strfreev(files);
+
+/*        for (gchar **f = files; f && *f; f++){
             if (strlen(*f)==0) continue;
             gchar *src = *f;
             if (strncmp(src, format, strlen(format))==0) src += strlen(format);
@@ -452,6 +482,8 @@ public:
                     break;
             }
         }
+        */
+
 	const gchar *command;
 	const gchar *message;
 	switch (action){
@@ -470,9 +502,10 @@ public:
 
 	}
 	auto dialog = CommandProgressResponse<Type>::dialog(
-		message, "system-run", command, files, target);
-        g_strfreev(files);
-        g_free(target);
+		message, "system-run", command, fileList, target);
+        for (auto l=fileList; l && l->data; l= l->next) g_free(l->data);
+        g_list_free(fileList);
+
         // not needed with GTK_DEST_DEFAULT_DROP
         /*gtk_drag_finish (context, result, 
                 (action == GDK_ACTION_MOVE) ? result : FALSE, 

@@ -53,11 +53,10 @@ public:
     static GtkWindow *
     dialog(const gchar *message, const gchar *icon, 
 	    const gchar *command,
-	    gchar **files,
+	    GList *fileList,
 	    const gchar *target)
     {
-	gint items = 0;
-        for (gchar **f = files; f && *f; f++) items++;
+	gint items = g_list_length(fileList);
 	if (!items) return NULL;
 
 	auto dialog = BaseProgressResponse<Type>::dialog(message, icon);
@@ -69,7 +68,7 @@ public:
 	
 	gint count = 0;
 
-        for (gchar **f = files; f && *f; f++) {
+        for (auto l = fileList; l && l->data; l=l->next) {
 	    gchar *text = g_strdup_printf("%s %d/%d", _("Items:"), count+1, items); 
 	    gtk_progress_bar_set_text (progress, text);
 	    g_free(text);
@@ -77,13 +76,11 @@ public:
 	    gtk_progress_bar_set_fraction(progress, (double)count/items);
 	    while (gtk_events_pending()) gtk_main_iteration(); 
 	    
-	    gchar *src = (strncmp(*f,"file:/", strlen("file:/"))==0)?
-		*f + strlen("file:/"): *f;
-	    gchar *text2 = g_strdup_printf("%s \"%s\" \"%s\"", 
-		    command, src, target);
+	    auto src = (const gchar *)l->data;
+	    gchar *text2 = g_strdup_printf("%s \"%s\" \"%s\"",  command, src, target);
 	    FILE *pipe = popen (text2, "r");
 	    if(pipe == NULL) {
-		ERROR("Cannot pipe from %s\n", command);
+		ERROR("Cannot pipe from \'%s\'\n", text2);
 		g_free(text2);
 		return NULL;
 	    }
@@ -92,12 +89,9 @@ public:
 	    gchar line[256];
 	    memset(line, 0, 256);
 	    while (fgets (line, 255, pipe) && !feof(pipe)) {
-		//if (strcmp(line, "")==0) return NULL;
+                if (line[0] != '\n') DBG("CommandProgressResponse:: %s", line);
 	    }
 	    pclose (pipe);
-
-	    //sleep(1);
-	    // do command..
 	    count++;
 	}
 	gtk_widget_destroy(GTK_WIDGET(dialog));

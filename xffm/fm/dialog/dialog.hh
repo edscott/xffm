@@ -4,7 +4,6 @@
 #include "notebook.hh"
 #include "dialogsignals.hh"
 #include <memory>
-static GtkClipboard *clipBoard;
 
 namespace xf {
 
@@ -15,7 +14,6 @@ class Dialog :public Notebook<Type> {
 public:
     Dialog(const gchar *path){
 	init(path);
-	clipBoard = gtk_clipboard_get((GdkAtom)"CLIPBOARD");
         Mime<Type>::mimeBuildHashes();
         auto page = this->currentPageObject();
 	// Default into iconview...

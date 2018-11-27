@@ -1,40 +1,6 @@
 #ifndef XF_BASEVIEWSIGNALS__HH
 # define XF_BASEVIEWSIGNALS__HH
 
-enum
-{
-    ROOTVIEW_TYPE,
-    LOCALVIEW_TYPE,
-    FSTAB_TYPE,
-    NFS_TYPE,
-    SSHFS_TYPE,
-    ECRYPTFS_TYPE,
-    CIFS_TYPE,
-    PKG_TYPE
-};
-
-enum
-{
-  FLAGS,
-  DISPLAY_PIXBUF,
-  NORMAL_PIXBUF,
-  HIGHLIGHT_PIXBUF,
-  TOOLTIP_PIXBUF,
-  DISPLAY_NAME,
-  ACTUAL_NAME,
-  PATH,
-  SIZE,
-  DATE,
-  TOOLTIP_TEXT,
-  ICON_NAME,
-  TYPE,
-  MIMETYPE, 
-  PREVIEW_PATH,
-  PREVIEW_TIME,
-  PREVIEW_PIXBUF,
-  NUM_COLS
-};
-
 #include "fm/view/root/rootview.hh"
 #include "common/pixbuf.hh"
 #include "fm/view/local/localview.hh"
@@ -48,7 +14,8 @@ enum
 #define IS_DIR (x&0x01)
 #define CONTROL_MODE (event->state & GDK_CONTROL_MASK)
 #define SHIFT_MODE (event->state & GDK_SHIFT_MASK)
-/*enum {
+/* Overkill... Simple target list in baseview.hh
+ * enum {
     TARGET_URI_LIST,
     TARGET_MOZ_URL,
     TARGET_PLAIN,
@@ -64,11 +31,6 @@ static GtkTargetEntry targetTable[] = {
     {(gchar *)"UTF8_STRING", 0, TARGET_UTF8},
     {(gchar *)"STRING", 0, TARGET_STRING}
 };*/
-
-enum {
-    TARGET_URI_LIST,
-    TARGETS
-};
 
 static GtkTargetEntry targetTable[] = {
     {(gchar *)"text/uri-list", 0, TARGET_URI_LIST},
@@ -503,14 +465,14 @@ public:
             GtkTreeIter iter;
             gtk_tree_model_get_iter (baseView->treeModel(), &iter, tpath);
             gtk_tree_model_get (baseView->treeModel(), &iter, PATH, &target, -1);	
-	    DBG("target1=%s\n", target);
+	    TRACE("target1=%s\n", target);
             if (!g_file_test(target, G_FILE_TEST_IS_DIR)){
                 g_free(target);
                 target=NULL;
             }
-	    DBG("target2=%s\n", target);
+	    TRACE("target2=%s\n", target);
         } else {
-	    DBG("target3=%s\n", target);
+	    TRACE("target3=%s\n", target);
 	    tpath=NULL;
 	}
 
@@ -525,6 +487,7 @@ public:
 	DBG("dndData = \"\n%s\"\n", dndData);
         
         auto result = baseView->receiveDndData(target, selection_data, action);
+        g_free(target);
 
         WARN("drag finish result=%d\n", result);
      /*   gtk_drag_finish (context, result, 
@@ -547,6 +510,15 @@ public:
         GtkTreePath *tpath;
                                         
         GtkIconViewDropPosition pos;
+        gint actions = gdk_drag_context_get_actions(dc);
+        if(actions == GDK_ACTION_MOVE)
+            gdk_drag_status (dc, GDK_ACTION_MOVE, t);
+        else if(actions == GDK_ACTION_COPY)
+            gdk_drag_status (dc, GDK_ACTION_COPY, t);
+        else if(actions == GDK_ACTION_LINK)
+            gdk_drag_status (dc, GDK_ACTION_LINK, t);
+        else
+            gdk_drag_status (dc, GDK_ACTION_MOVE, t);
             
         if (gtk_icon_view_get_dest_item_at_pos (baseView->iconView(),
                                         drag_x, drag_y,
@@ -669,6 +641,29 @@ public:
 	*/
     }
 
+    static gchar *
+    getSelectionData(BaseView<Type> *baseView, const gchar *instruction){
+        GList *selection_list = baseView->selectionList();
+        gchar *data = (instruction)?g_strdup_printf("%s\n", instruction): NULL;
+        
+        for(GList *tmp = selection_list; tmp && tmp->data; tmp = tmp->next) {
+            GtkTreePath *tpath = (GtkTreePath *)tmp->data;
+            gchar *path;
+            GtkTreeIter iter;
+            gtk_tree_model_get_iter (baseView->treeModel(), &iter, tpath);
+            gtk_tree_model_get (baseView->treeModel(), &iter, PATH, &path, -1);
+            if (!data) data = g_strconcat(URIFILE, path, NULL);
+            else {
+                gchar *e = g_strconcat(data, "\n", URIFILE, path, NULL);
+                g_free(data);
+                data = e;
+            }
+            WARN("BaseViewSignals::getSelectionData(): append: %s -> \"%s\"\n", path, data);
+            g_free(path);
+        }
+        return data;
+    }
+
     static void
     signal_drag_data_send (GtkWidget * widget,
                        GdkDragContext * context, 
@@ -682,47 +677,20 @@ public:
         //int drag_type;
 
 	auto baseView = (BaseView<Type> *)data;
-
-
         /* prepare data for the receiver */
-        switch (info) {
-          case TARGET_URI_LIST:
-            {
-                DBG( ">>> DND send, TARGET_URI_LIST\n"); 
-                GList *selection_list = baseView->selectionList();
-                //gboolean result = baseView->setDndData(selection_data, selection_list);
-
-#define format "file:/"
-                gchar *dndData = NULL;
-                for(GList *tmp = selection_list; tmp; tmp = tmp->next) {
-                    GtkTreePath *tpath = (GtkTreePath *)tmp->data;
-                    gchar *path;
-                    GtkTreeIter iter;
-                    gtk_tree_model_get_iter (baseView->treeModel(), &iter, tpath);
-                    gtk_tree_model_get (baseView->treeModel(), &iter, PATH, &path, -1);
-                    if (!dndData) dndData = g_strconcat(format, path, NULL);
-                    else {
-                        gchar *e = g_strconcat(dndData, "\n", format, path, NULL);
-                        g_free(dndData);
-                        dndData = e;
-                    }
-                    WARN("dndData: \"%s\"\n", dndData);
-                    WARN("append: %s -> \"%s\"\n", path, dndData);
-                    g_free(path);
-                }
-
-                gtk_selection_data_set (selection_data, 
-                    gtk_selection_data_get_selection(selection_data),
-                    8, (const guchar *)dndData, strlen(dndData)+1);
-                      
-                    }
-                    break;
-                  default:
-                    DBG( ">>> DND send, non listed target\n"); 
-                    break;
-                
+        if (info != TARGET_URI_LIST) {
+            ERROR("signal_drag_data_send: invalid target");
         }
-        
+        DBG( ">>> DND send, TARGET_URI_LIST\n"); 
+
+        gchar *dndData = getSelectionData(baseView, NULL);
+        if (!dndData){
+            ERROR("signal_drag_data_send: condition dndData != NULL not met\n");
+        }
+        gtk_selection_data_set (selection_data, 
+            gtk_selection_data_get_selection(selection_data),
+            8, (const guchar *)dndData, strlen(dndData)+1);
+                    
     }
 
     static void

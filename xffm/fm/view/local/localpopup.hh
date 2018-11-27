@@ -11,6 +11,7 @@ namespace xf
 static GtkMenu *localPopUp=NULL;
 static GtkMenu *localItemPopUp=NULL;
 template <class Type> class BaseView;
+template <class Type> class BaseViewSignals;
 template <class Type> class Dialog;
 template <class Type>
 class LocalPopUp {
@@ -29,7 +30,7 @@ public:
     static GtkMenu *createLocalItemPopUp(void){
 	menuItem_t item[]=
         {
-	    {("mimetypeOpen"), (void *)command, NULL},
+	    {("mimetypeOpen"), (void *)command, NULL, NULL},
 	    {N_("Open with"), (void *)openWith, NULL, NULL},
 	    {N_("Run Executable..."), (void *)runWith, NULL, NULL},
 	    {N_("Extract files from the archive"), NULL, NULL, NULL},
@@ -41,9 +42,9 @@ public:
             {N_("Remove bookmark"), (void *)removeBookmark, NULL, NULL},
 	    
 	    //common buttons /(also an iconsize +/- button)
-	    {N_("Copy"), NULL, NULL, NULL},
-	    {N_("Cut"), NULL, NULL, NULL},
-	    {N_("Paste"), NULL, NULL, NULL},
+	    {N_("Copy"), (void *)copy, NULL, NULL},
+	    {N_("Cut"), (void *)cut, NULL, NULL},
+	    {N_("Paste"), (void *)paste, NULL, NULL},
 	    {N_("bcrypt"), NULL, NULL, NULL},
 	    {N_("Rename"), NULL, NULL, NULL},
 	    {N_("Duplicate"), NULL, NULL, NULL}, 
@@ -388,7 +389,9 @@ public:
             {N_("Open in New Tab"), NULL, NULL, NULL},
             {N_("Open in New Window"), NULL, NULL, NULL},
             
-	    {N_("Paste"), NULL, NULL, NULL},
+	    {N_("Copy"), (void *)copy, NULL, NULL},
+	    {N_("Cut"), (void *)cut, NULL, NULL},
+	    {N_("Paste"), (void *)paste, NULL, NULL},
              // main menu items
             //{N_("Home"), NULL, (void *) menu},
             //{N_("Open terminal"), NULL, (void *) menu},
@@ -927,6 +930,43 @@ public:
         return FALSE;
     }
 private:
+    static void
+    pasteClip(GtkClipboard *clipBoard, const gchar *text, gpointer data){
+        // FIXME: ensure path utfs are same as os paths
+        WARN("pasteClip(target=%s):\n%s\n", (const gchar *)data, text);
+    }
+
+    static void
+    paste(GtkMenuItem *menuItem, gpointer data) { 
+        DBG("paste\n");
+        gtk_clipboard_request_text (clipBoard, pasteClip, (void *) "fixme:target");
+    }
+
+    static void 
+    putInClipBoard(BaseView<Type> *baseView, const gchar *instruction){
+         if (!baseView || ! instruction){
+            ERROR("baseView||instruction is null\n");
+            exit(1);
+        }
+        DBG("%s\n", instruction); 
+        // FIXME: ensure paths are valid utf.
+        GList *selection_list = gtk_icon_view_get_selected_items (baseView->iconView());
+        baseView->setSelectionList(selection_list);
+        gchar *clipData = BaseViewSignals<Type>::getSelectionData(baseView,instruction );
+        gtk_clipboard_set_text (clipBoard, clipData, strlen(clipData)+1);
+    }
+
+    static void
+    copy(GtkMenuItem *menuItem, gpointer data) { 
+	auto baseView = (BaseView<Type> *)g_object_get_data(G_OBJECT(data), "baseView");
+        putInClipBoard(baseView, "copy");
+    }
+
+    static void
+    cut(GtkMenuItem *menuItem, gpointer data) { 
+	auto baseView = (BaseView<Type> *)g_object_get_data(G_OBJECT(data), "baseView");
+        putInClipBoard(baseView, "cut");
+    }
 
     static void 
     toggleTerminal (GtkToggleButton *togglebutton, gpointer data){
