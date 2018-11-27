@@ -157,7 +157,7 @@ class FstabPopUp {
     mount(GtkMenuItem *menuItem, gpointer data)
     {
         auto baseView = (BaseView<Type> *)g_object_get_data(G_OBJECT(data), "baseView");
-	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "PATH");
+	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
 
 	WARN("FstabPopup::mount %s\n", path);
         if (Fstab<Type>::isInFstab(path) || Fstab<Type>::isMounted(path)) {
@@ -165,7 +165,7 @@ class FstabPopUp {
             Fstab<Type>::mountPath(baseView, path, NULL);
             return;            
         }
-	auto dname = (const gchar *)g_object_get_data(G_OBJECT(data), "DISPLAY_NAME");
+	auto dname = (const gchar *)g_object_get_data(G_OBJECT(data), "displayName");
         auto label = g_strdup_printf("LABEL=%s", dname);
         if (Fstab<Type>::isInFstab(label)) {
 	    gchar *mountTarget = Fstab<Type>::mountTarget(label);
@@ -245,15 +245,15 @@ public:
 	    return;
 	}
 	const gchar *mimetype = Mime<Type>::mimeType(path);
-	const gchar *keys[] = {"DISPLAY_NAME",  "MIMETYPE", NULL};
+	const gchar *keys[] = {"displayName",  "mimetype", NULL};
 	const gchar **q;
 	for (q=keys; q && *q; q++){
 	    auto cleanup = (gchar *)g_object_get_data(G_OBJECT(fstabPopUp), *q);
 	    g_free(cleanup);
 	}
         gchar *name = util_c::valid_utf_pathstring(path);
-	g_object_set_data(G_OBJECT(fstabPopUp), "DISPLAY_NAME", name);
-	g_object_set_data(G_OBJECT(fstabPopUp), "MIMETYPE", g_strdup(mimetype));
+	g_object_set_data(G_OBJECT(fstabPopUp), "displayNam", name);
+	g_object_set_data(G_OBJECT(fstabPopUp), "mimetype", g_strdup(mimetype));
 	// Set title element
 	BasePopUp<Type>::changeTitle(fstabPopUp,(gchar *)"folder-remote", _("Mount Helper"), NULL, NULL, "xffm:fstab");
     }

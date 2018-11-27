@@ -499,13 +499,13 @@ public:
             if(!g_file_test (mnt_struct->mnt_dir, G_FILE_TEST_IS_DIR))
                 continue;
 
-            TRACE("isInFstab():%s --->  %s   or   %s\n", 
+            DBG("isInFstab():%s --->  %s   or   %s\n", 
                     path, mnt_struct->mnt_dir, mnt_struct->mnt_fsname);
 
             if(strcmp (path, mnt_struct->mnt_dir) == 0 || 
                     strcmp (path, mnt_struct->mnt_fsname) == 0) {
                 if (getFstabType (mnt_struct->mnt_type)) result = TRUE;
-                TRACE("isInFstab():%s ---> %d %s\n", 
+                DBG("isInFstab():%s ---> %d %s\n", 
                         mnt_struct->mnt_fsname, result, mnt_struct->mnt_type);
                 break;
             }
