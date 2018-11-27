@@ -5,7 +5,70 @@ namespace xf
 {
 
 template <class Type>
-class LocalMonitor: public BaseMonitor<Type> {
+class LocalMonitor: public BaseMonitor<Type>
+   // ,public ThreadControl<Type>
+{
+    pthread_t mountThread;
+    void **mountArg;
+    //pthread_t clipboardThread;
+
+    static gchar *md5sum(const gchar *file){
+        gchar *md5sum = g_find_program_in_path("md5sum");
+        if (!md5sum){
+            ERROR("cannot find md5sum program\n");
+            return NULL;
+        }
+        g_free(md5sum);
+        gchar *command = g_strdup_printf("md5sum %s", file);
+        FILE *pipe = popen(command, "r");
+        if (!pipe){
+            ERROR("cannot pipe to %s\n", command);
+            g_free(command);
+            return NULL;
+        }
+        g_free(command);
+        gchar buffer[1024];
+        memset (buffer, 0, 1024);
+        fgets(buffer, 1023, pipe);
+        pclose(pipe);
+        if (strlen(buffer)) return g_strdup(buffer);
+        return NULL;
+    }
+            
+    static void *
+    mountThreadF(void *data){
+        // get initial md5sum
+        static gchar *sum = md5sum("/proc/mounts");
+        if (!sum) return NULL;
+        DBG("initial md5sum=%s", sum);
+        void **arg = (void **)data;
+        auto localMonitor = (LocalMonitor<Type> *)arg[0];
+        while (arg[1]){
+            //usleep()
+            sleep(1);
+            gchar *newSum = md5sum("/proc/mounts");
+            if (!newSum) return NULL;
+            DBG("new md5sum /proc/mounts = %s\n", newSum);
+            if (strcmp(newSum, sum)){
+                WARN("now we test whether icon update is necessary...\n");
+                g_free(sum);
+                sum = newSum;
+            }
+
+            // if changed from md5sum
+            //   get new md5sum
+            //   trigger an icon reload:
+            //     Check if path is applicable 
+            //      (dirname matches baseview->path)
+            //      if so, trigger an attribute change
+            //      for folder so that monitor will update 
+            //      the icon
+        }
+        g_free(sum);
+        DBG("now exiting mountThreadF()\n");
+        g_free(data);
+        return NULL;
+    }
 public:    
     LocalMonitor(GtkTreeModel *treeModel, BaseView<Type> *baseView):
         BaseMonitor<Type>(treeModel, baseView)
@@ -13,10 +76,22 @@ public:
     }
     ~LocalMonitor(void){
         TRACE("Destructor:~local_monitor_c()\n");
+        // stop mountThread
+        mountArg[1] = NULL;
     }
     void
     start_monitor(GtkTreeModel *treeModel, const gchar *path){
         this->startMonitor(treeModel, path, (void *)monitor_f);
+        // start mountThread
+        mountArg = (void **)calloc(2, sizeof(void *));
+        mountArg[0] = (void *)this;
+        mountArg[1] = GINT_TO_POINTER(TRUE);
+	gint retval = pthread_create(&mountThread, NULL, mountThreadF, (void *)mountArg);
+	if (retval){
+	    ERROR("thread_create(): %s\n", strerror(retval));
+	    //return retval;
+	}
+        
     }
 
     xd_t *
@@ -160,20 +235,20 @@ private:
                 break;
 
             case G_FILE_MONITOR_EVENT_CHANGED:
-                TRACE("Received  CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
+                DBG("Received  CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
                 p->restat_item(first);
                 // reload icon
                 //FIXME:  if image, then reload the pixbuf
                 break;
             case G_FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED:
-                TRACE("Received  ATTRIBUTE_CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
+                DBG("Received  ATTRIBUTE_CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
                 p->restat_item(first);
                 break;
             case G_FILE_MONITOR_EVENT_PRE_UNMOUNT:
-                TRACE("Received  PRE_UNMOUNT (%d): \"%s\", \"%s\"\n", event, f, s);
+                DBG("Received  PRE_UNMOUNT (%d): \"%s\", \"%s\"\n", event, f, s);
                 break;
             case G_FILE_MONITOR_EVENT_UNMOUNTED:
-                TRACE("Received  UNMOUNTED (%d): \"%s\", \"%s\"\n", event, f, s);
+                DBG("Received  UNMOUNTED (%d): \"%s\", \"%s\"\n", event, f, s);
                 break;
             case G_FILE_MONITOR_EVENT_MOVED:
             case G_FILE_MONITOR_EVENT_RENAMED:
