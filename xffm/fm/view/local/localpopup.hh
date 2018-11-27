@@ -354,6 +354,18 @@ public:
             if (g_file_test(path, G_FILE_TEST_IS_DIR)) showDirectoryItems(path);
         }
         openWithDialog(path, mimetype, fileInfo);
+    //  Delete/trash/shred
+        const gchar *key[]={
+	    "Delete",
+	    "Cut",
+	    "Copy",
+	    NULL
+	};
+	for (auto k=key; k && *k; k++){
+	    auto w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), *k));
+	    gtk_widget_show(w);
+	    gtk_widget_set_sensitive(w, TRUE);
+	}
     }
 
     static GtkMenu *popUp(BaseView<Type> *baseView, const GtkTreePath *tpath){

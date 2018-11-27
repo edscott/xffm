@@ -630,7 +630,7 @@ public:
             GtkTreeIter iter;
             GdkPixbuf *pixbuf;
             gtk_tree_model_get_iter (baseView->treeModel(), &iter, tpath);
-            gtk_tree_model_get (baseView->treeModel(), &iter, DISPLAY_PIXBUF, &pixbuf, -1);
+            gtk_tree_model_get (baseView->treeModel(), &iter, NORMAL_PIXBUF, &pixbuf, -1);
             gtk_drag_set_icon_pixbuf (context, pixbuf,10,10);
         }
 	/*
