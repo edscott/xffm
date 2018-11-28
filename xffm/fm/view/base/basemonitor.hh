@@ -32,6 +32,8 @@ protected:
     }
 
 public:    
+    GFileMonitor *monitor(void) {return monitor_;}
+    
     BaseMonitor(GtkTreeModel *treeModel, BaseView<Type> *baseView){
         baseView_ = baseView;
         gboolean showHidden = (Settings<Type>::getSettingInteger("LocalView", "ShowHidden") > 0);
@@ -59,17 +61,21 @@ public:
 private:
     static gboolean
     add2hash (GtkTreeModel *model,
-                            GtkTreePath *path,
+                            GtkTreePath *tpath,
                             GtkTreeIter *iter,
                             gpointer data){
         auto hash = (GHashTable *)data;
-        gchar *name;
-	gtk_tree_model_get (model, iter, ACTUAL_NAME, &name, -1);  
-        g_hash_table_replace(hash, name, GINT_TO_POINTER(1));
+        gchar *path;
+	gtk_tree_model_get (model, iter, PATH, &path, -1);  
+	// use hashkey
+	gchar *key = Hash<Type>::get_hash_key(path, 10);
+	g_free(path);
+        g_hash_table_replace(hash, key, GINT_TO_POINTER(1));
         return FALSE;
     }
 
 public:
+
     void
     startMonitor(GtkTreeModel *treeModel, const gchar *path, void *monitor_f){
         // add all initial items to hash
@@ -110,43 +116,51 @@ public:
     }
 
 protected:
+    gboolean pathInTreeHash(const gchar *path){
+	gchar *key = Hash<Type>::get_hash_key(path, 10);
+	if(g_hash_table_lookup(itemsHash_,key)) return TRUE;
+	return FALSE;
+    }
+
     gboolean 
-    remove_item(const gchar *basename){
+    remove_item(const gchar *path){
         // find the iter and remove iteam
         TRACE("remove item...\n");
-        g_hash_table_remove(itemsHash_, basename); 
-        gtk_tree_model_foreach (GTK_TREE_MODEL(store_), rm_func, (gpointer) basename); 
+	// use hashkey
+	gchar *key = Hash<Type>::get_hash_key(path, 10);
+        g_hash_table_remove(itemsHash_, key); 
+        gtk_tree_model_foreach (GTK_TREE_MODEL(store_), rm_func, (gpointer) path); 
         return TRUE;
     }
     gboolean 
     remove_item(GFile *file){
         // find the iter and remove item
         TRACE("remove item...\n");
-        gchar *basename = g_file_get_basename(file);
-        remove_item(basename);
-        g_free(basename);
+        gchar *path = g_file_get_path(file);
+        remove_item(path);
+        g_free(path);
         return TRUE;
     }
 
 private:
     static gboolean rm_func (GtkTreeModel *model,
-				GtkTreePath *path,
+				GtkTreePath *tpath,
 				GtkTreeIter *iter,
 				gpointer data){
-	gchar *text;
+	gchar *path;
 	gtk_tree_model_get (model, iter, 
-		ACTUAL_NAME, &text, 
+		PATH, &path, 
 		-1);  
 	
-	if (strcmp(text, (gchar *)data)){
-	    g_free(text);
+	if (strcmp(path, (gchar *)data)){
+	    g_free(path);
 	    return FALSE;
 	}
-	TRACE("removing %s from treemodel.\n", text);
+	TRACE("removing %s from treemodel.\n", path);
 	GtkListStore *store = GTK_LIST_STORE(model);
 
 	gtk_list_store_remove(store, iter);
-	g_free(text);
+	g_free(path);
 	return TRUE;
     }
 

@@ -31,10 +31,6 @@ static GHashTable *pixbuf_hash;
 namespace xf
 {
 template <class Type>
-class Hash;
-    
-
-template <class Type>
 class Hash {
 //private:
 	

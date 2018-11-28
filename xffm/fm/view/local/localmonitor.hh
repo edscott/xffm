@@ -34,7 +34,13 @@ class LocalMonitor: public BaseMonitor<Type>
         if (strlen(buffer)) return g_strdup(buffer);
         return NULL;
     }
-            
+        // FIXME 
+    static GList *getMountPaths(void){
+	// get first two items per line of /proc/mounts
+	// add both to list
+	return NULL;
+    }
+
     static void *
     mountThreadF(void *data){
         // get initial md5sum
@@ -54,7 +60,18 @@ class LocalMonitor: public BaseMonitor<Type>
                 g_free(sum);
                 sum = newSum;
             }
-
+	    // get mount paths:paths
+	    auto paths = getMountPaths();
+	    for (auto p=paths; p && p->data; p=p->next){
+		auto path = (const gchar *)p->data;
+		if (localMonitor->pathInTreeHash(path)){
+		    // create gfile, child
+		    GFile *child = g_file_new_for_path (path);
+		    g_file_monitor_emit_event (localMonitor->monitor(),
+                           child, NULL, G_FILE_MONITOR_EVENT_CHANGED);
+		    //? g_object_unref(child);
+		}
+	    }
             // if changed from md5sum
             //   get new md5sum
             //   trigger an icon reload:
