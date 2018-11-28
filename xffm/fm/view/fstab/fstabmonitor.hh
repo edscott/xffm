@@ -10,33 +10,91 @@ template <class Type> class Fstab;
 // 
 template <class Type>
 class FstabMonitor: public BaseMonitor<Type> {
-    static void 
+    // Please note, sending signal to monitor avoid race condition if
+    // this thread tries to do more than this...
+    static void *sendChangeSignal(void *data){
+       auto arg = (void **)data;
+       auto baseMonitor = (BaseMonitor<Type> *)arg[0];
+       auto path = (gchar *)arg[1];
+       GFile *child = g_file_new_for_path (path);
+       g_free(path);
+       g_file_monitor_emit_event (baseMonitor->monitor(),
+                   child, NULL, G_FILE_MONITOR_EVENT_CHANGED);
+        //? g_object_unref(child);
+        return NULL;
+    }
+
+    static gboolean 
+    checkIfMounted(GtkTreeModel *treeModel,
+                            GtkTreePath *tpath,
+                            GtkTreeIter *iter,
+                            gpointer data){
+        gchar *path;
+        gboolean retval = FALSE;
+        // Mounted but not in mounts hash:
+ 	gtk_tree_model_get (treeModel, iter, PATH, &path, -1);
+        if (Fstab<Type>::isMounted(path)) {
+            gchar *key = Hash<Type>::get_hash_key(path, 10);
+            if (!g_hash_table_lookup((GHashTable *)data, key)){
+                // update the icon
+                DBG("*** Send change signal for %s (now mounted)\n", (gchar *)path);
+                void *arg[] = { 
+                    g_object_get_data(G_OBJECT(treeModel), "baseMonitor"),
+                    (void *)path };
+                Util<Type>::context_function(sendChangeSignal, arg);
+            }
+            g_free(key);
+        }
+        return retval;
+    }
+    static gboolean 
+    checkIfNotMounted(GtkTreeModel *treeModel,
+                            GtkTreePath *tpath,
+                            GtkTreeIter *iter,
+                            gpointer data){
+        gchar *path;
+        gboolean retval = FALSE;
+        // Mounted but not in mounts hash:
+ 	gtk_tree_model_get (treeModel, iter, PATH, &path, -1);
+        if (!Fstab<Type>::isMounted(path)) {
+            gchar *key = Hash<Type>::get_hash_key(path, 10);
+            if (g_hash_table_lookup((GHashTable *)data, key)){
+                // update the icon
+                DBG("*** Send change signal for %s (now unmounted)\n", (gchar *)path);
+                void *arg[] = { 
+                    g_object_get_data(G_OBJECT(treeModel), "baseMonitor"),
+                    (void *)path };
+                Util<Type>::context_function(sendChangeSignal, arg);
+            }
+            g_free(key);
+        }
+        return retval;
+    }
+
+    /*static void // iterates on items hashtable
     checkIfMounted_f(gpointer key,
                gpointer value,
                gpointer data){
-        DBG("checkIfMounted_f: key=%s value=%s\n", key, value);
-        if (Fstab<Type>::isMounted((const gchar *)value))
-           DBG("%s is mounted\n", (const gchar *)value);
-        if (!g_hash_table_lookup((GHashTable *)data, key)) 
-           DBG("%s is not in itemshash\n", (const gchar *)value);
+
+        // Mounted but not in mounts hash:
         if (Fstab<Type>::isMounted((const gchar *)value) 
-                && g_hash_table_lookup((GHashTable *)data, key)){
+             &&   !g_hash_table_lookup((GHashTable *)data, key)){
             DBG("*** Send change signal for %s (now mounted)\n", (const gchar *)value);
             // Do this with a g_add_timeout
         }
     }
-    static void
+    static void // iterates on /proc/mounts hashtable
     checkIfNotMounted_f(gpointer key,
                gpointer value,
                gpointer data){
-        DBG("checkIfNotMounted_f: key=%s value=%s\n", key, value);
+        // Not mounted but in mounts hash:
         if (!Fstab<Type>::isMounted((const gchar *)value) 
                 && g_hash_table_lookup((GHashTable *)data, key)){
             DBG("*** Send change signal for %s (now unmounted)\n", (const gchar *)value);
             // Do this with a g_add_timeout
         }
 
-    }
+    }*/
 public:    
     FstabMonitor(GtkTreeModel *treeModel, BaseView<Type> *baseView):
         BaseMonitor<Type>(treeModel, baseView)
@@ -54,7 +112,8 @@ public:
     mountThreadF(void *data){
         void **arg = (void **)data;
         auto baseMonitor = (BaseMonitor<Type> *)arg[0];
-        auto itemsHash = (GHashTable *)arg[2];
+        g_object_set_data(G_OBJECT(baseMonitor->treeModel()), "baseMonitor", (void *)baseMonitor);
+        auto itemsH = (GHashTable *)arg[2];
         // get initial md5sum
         gchar *sum = Util<Type>::md5sum("/proc/mounts");
         if (!sum) {
@@ -65,6 +124,7 @@ public:
         DBG("FstabMonitor::mountThreadF(): initial md5sum=%s", sum);
         
 	auto hash = getMountHash(NULL);
+
 
         while (arg[1]){// arg[1] is semaphore to thread
             usleep(250000);
@@ -87,14 +147,17 @@ public:
                 // if (isMounted() and not in hash)
                 // if so, then send change signal for gfile path. 
                 // This should set the greenball.
-                g_hash_table_foreach(itemsHash, checkIfMounted_f, (void *)hash);
+                DBG("thread itemshash=%p\n", itemsH);
+                gtk_tree_model_foreach(baseMonitor->treeModel(), checkIfMounted, (void *)hash);
+                //g_hash_table_foreach(itemsH, checkIfMounted_f, (void *)hash);
                 //
                 // Any new umounts?
                 // Foreach item in hash, check if 
                 // if (!isMounted(item) && in itemsHash_)
                 // then
                 //     sendSignal change for gfile(item)
-                g_hash_table_foreach(hash, checkIfNotMounted_f, (void *)itemsHash);
+                gtk_tree_model_foreach(baseMonitor->treeModel(), checkIfNotMounted, (void *)hash);
+                //g_hash_table_foreach(hash, checkIfNotMounted_f, (void *)itemsH);
                 //
                 // Update hash.
                 hash = getMountHash(hash);
@@ -143,7 +206,7 @@ private:
                 g_strfreev(items);
                 continue;
             }
-            if (g_path_is_absolute(items[0]) && g_path_is_absolute(items[1])){
+            if (g_path_is_absolute(items[0]) || g_path_is_absolute(items[1])){
                 for (gint i=0; i<2; i++){
                     // use hashkey
                     gchar *key = Hash<Type>::get_hash_key(items[i], 10);

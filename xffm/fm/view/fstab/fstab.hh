@@ -244,8 +244,8 @@ public:
 	}
 
         auto utf_name = util_c::utf_string(name);
-        auto icon_name = (mounted)?"drive-harddisk/NE/greenball/2.0/225":
-            "drive-harddisk/NE/grayball/2.0/225";
+        auto icon_name = (mounted)?"drive-harddisk/NW/greenball/3.0/180":
+            "drive-harddisk/NW/grayball/3.0/180";
         auto highlight_name = "drive-harddisk/NW/edit-select-symbolic/2.0/225";
         auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
         auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);   

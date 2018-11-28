@@ -34,12 +34,13 @@ protected:
 public:    
     GHashTable *itemsHash(void){return itemsHash_;}
     GFileMonitor *monitor(void) {return monitor_;}
+    GtkTreeModel *treeModel(void){return GTK_TREE_MODEL(store_);}
     
     BaseMonitor(GtkTreeModel *treeModel, BaseView<Type> *baseView){
         itemsHash_ = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_free);
+                DBG("BaseMonitor thread itemshash=%p\n", itemsHash_);
         baseView_ = baseView;
         gboolean showHidden = (Settings<Type>::getSettingInteger("LocalView", "ShowHidden") > 0);
-        itemsHash_ = NULL;
         cancellable_ = g_cancellable_new ();
         gfile_ = NULL;
         store_ = GTK_LIST_STORE(treeModel);
@@ -70,8 +71,8 @@ private:
 	gtk_tree_model_get (model, iter, PATH, &path, -1);  
 	// use hashkey
 	gchar *key = Hash<Type>::get_hash_key(path, 10);
-	g_free(path);
         g_hash_table_replace(hash, key, g_strdup(path));
+	g_free(path);
         return FALSE;
     }
 

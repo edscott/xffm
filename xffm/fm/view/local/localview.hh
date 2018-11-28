@@ -983,7 +983,10 @@ private:
     getEmblem(xd_t *xd_p){
         // No emblem for go up
         if (strcmp(xd_p->d_name, "..")==0) return g_strdup("");
-        
+    
+        //FIXME: first determine the cut/copy emblem, or maybe just
+        //       do the color thing with cut status...
+
         // First we work on d_type (no stat)
         gchar *emblem = linkEmblem(xd_p);
         if (xd_p->d_type == DT_LNK){

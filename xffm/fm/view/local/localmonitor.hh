@@ -31,6 +31,7 @@ public:
         pthread_t mountThread;
         this->startMonitor(treeModel, path, (void *)monitor_f);
         // start mountThread
+                DBG("LocalMonitor thread itemshash=%p\n", this->itemsHash());
         mountArg_ = (void **)calloc(4, sizeof(void *));
         mountArg_[0] = (void *)this;
         mountArg_[1] = GINT_TO_POINTER(TRUE);
@@ -219,6 +220,8 @@ private:
                 break;        }
         g_free(f);
         g_free(s);
+        if (first) g_object_unref(first);
+        if (second) g_object_unref(second);
     }
 
 
