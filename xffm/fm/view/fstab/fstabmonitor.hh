@@ -3,6 +3,7 @@
 #include "fm/view/base/basemonitor.hh"
 namespace xf
 {
+template <class Type> class LocalView;
 template <class Type> class BaseMonitor;
 template <class Type> class Fstab;
 // Linux files:
@@ -10,6 +11,8 @@ template <class Type> class Fstab;
 // 
 template <class Type>
 class FstabMonitor: public BaseMonitor<Type> {
+    void **mountArg_; // Needs to exist until destructor is called.
+    
     // Please note, sending signal to monitor avoid race condition if
     // this thread tries to do more than this...
     static void *sendChangeSignal(void *data){
@@ -71,30 +74,6 @@ class FstabMonitor: public BaseMonitor<Type> {
         return retval;
     }
 
-    /*static void // iterates on items hashtable
-    checkIfMounted_f(gpointer key,
-               gpointer value,
-               gpointer data){
-
-        // Mounted but not in mounts hash:
-        if (Fstab<Type>::isMounted((const gchar *)value) 
-             &&   !g_hash_table_lookup((GHashTable *)data, key)){
-            DBG("*** Send change signal for %s (now mounted)\n", (const gchar *)value);
-            // Do this with a g_add_timeout
-        }
-    }
-    static void // iterates on /proc/mounts hashtable
-    checkIfNotMounted_f(gpointer key,
-               gpointer value,
-               gpointer data){
-        // Not mounted but in mounts hash:
-        if (!Fstab<Type>::isMounted((const gchar *)value) 
-                && g_hash_table_lookup((GHashTable *)data, key)){
-            DBG("*** Send change signal for %s (now unmounted)\n", (const gchar *)value);
-            // Do this with a g_add_timeout
-        }
-
-    }*/
 public:    
     FstabMonitor(GtkTreeModel *treeModel, BaseView<Type> *baseView):
         BaseMonitor<Type>(treeModel, baseView)
@@ -102,10 +81,31 @@ public:
     }
     ~FstabMonitor(void){
         TRACE("Destructor:~local_monitor_c()\n");
+        // stop mountThread
+        mountArg_[1] = NULL;
+        while (mountArg_[3]){
+            TRACE("***Waiting for mountThread to exit\n");
+        }
+        g_hash_table_destroy(this->itemsHash());
+        g_free(mountArg_);
+        TRACE("***Destructor:~local_monitor_c() complete\n");
     }
     void
     start_monitor(GtkTreeModel *treeModel, const gchar *path){
         this->startMonitor(treeModel, path, (void *)monitor_f);
+        // start mountThread
+        pthread_t mountThread;
+                DBG("LocalMonitor thread itemshash=%p\n", this->itemsHash());
+        mountArg_ = (void **)calloc(4, sizeof(void *));
+        mountArg_[0] = (void *)this;
+        mountArg_[1] = GINT_TO_POINTER(TRUE);
+        mountArg_[2] = (void *)this->itemsHash();
+        mountArg_[3] = GINT_TO_POINTER(TRUE);
+	gint retval = pthread_create(&mountThread, NULL, FstabMonitor<Type>::mountThreadF, (void *)this->mountArg_);
+	if (retval){
+	    ERROR("thread_create(): %s\n", strerror(retval));
+	    //return retval;
+	}
     }
 
     static void *
@@ -277,8 +277,8 @@ private:
               GFileMonitorEvent  event,
               gpointer           data)
     {
-        gchar *f= first? g_file_get_basename (first):g_strdup("--");
-        gchar *s= second? g_file_get_basename (second):g_strdup("--");
+        gchar *f= first? g_file_get_path (first):g_strdup("--");
+        gchar *s= second? g_file_get_path (second):g_strdup("--");
        
 
         TRACE("*** monitor_f call...\n");
@@ -305,7 +305,8 @@ private:
                 break;
 
             case G_FILE_MONITOR_EVENT_CHANGED:
-                TRACE("Received  CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
+                DBG("*** Received  CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
+                p->redoIcon(f);
                 break;
             case G_FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED:
                 TRACE("Received  ATTRIBUTE_CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
@@ -327,8 +328,54 @@ private:
 
         g_free(f);
         g_free(s);
+        if (first) g_object_unref(first);
+        if (second) g_object_unref(second);
+    }
+    gboolean 
+    redoIcon(const gchar *path){
+        DBG("redoIcon %s ...\n", path);
+        gchar *key = Hash<Type>::get_hash_key(path, 10);
+        if (!g_hash_table_lookup(this->itemsHash(), key)) {
+            g_free(key);
+            DBG("*** %s not in itemsHash\n", path);
+            return FALSE; 
+        }
+        g_free(key);
+        gtk_tree_model_foreach (GTK_TREE_MODEL(this->store_), changeIcon, (gpointer) path); 
+        return TRUE;
     }
 
+   static gboolean changeIcon (GtkTreeModel *model,
+				GtkTreePath *tpath,
+				GtkTreeIter *iter,
+				gpointer data){
+	auto path = (const gchar *)data;
+        gchar *currentPath;
+	gtk_tree_model_get (model, iter, PATH, &currentPath, -1);  
+        
+        DBG("fstabmonitor currentPath \"%s\" == \"%s\"\n", currentPath, path);
+        if (strcmp(path, currentPath)){
+            g_free(currentPath);
+            return FALSE;
+        }
+        g_free(currentPath);
+        DBG("*** fstabmonitor currentPath %s\n", currentPath, path);
+	
+	GtkListStore *store = GTK_LIST_STORE(model);
+
+        gboolean mounted = Fstab<Type>::isMounted(path);
+        auto iconName = (mounted)?"drive-harddisk/NW/greenball/3.0/180":
+            "drive-harddisk/NW/grayball/3.0/180";
+        DBG("fstabmonitor stat_func(): iconname=%s\n", iconName);
+        GdkPixbuf *pixbuf = Pixbuf<Type>::get_pixbuf(iconName,  GTK_ICON_SIZE_DIALOG);
+	gtk_list_store_set (store, iter, 
+                ICON_NAME, iconName,
+                DISPLAY_PIXBUF, pixbuf,
+                NORMAL_PIXBUF, pixbuf,
+		-1);
+
+	return TRUE;
+    }
 
 
 };

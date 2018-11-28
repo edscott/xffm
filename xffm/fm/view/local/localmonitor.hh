@@ -6,9 +6,7 @@ namespace xf
 
 template <class Type>
 class LocalMonitor: public BaseMonitor<Type>
-   // ,public ThreadControl<Type>
 {
-    //pthread_t clipboardThread;
     void **mountArg_; // Needs to exist until destructor is called.
 public:    
     LocalMonitor(GtkTreeModel *treeModel, BaseView<Type> *baseView):
@@ -28,9 +26,9 @@ public:
     }
     void
     start_monitor(GtkTreeModel *treeModel, const gchar *path){
-        pthread_t mountThread;
         this->startMonitor(treeModel, path, (void *)monitor_f);
         // start mountThread
+        pthread_t mountThread;
                 DBG("LocalMonitor thread itemshash=%p\n", this->itemsHash());
         mountArg_ = (void **)calloc(4, sizeof(void *));
         mountArg_[0] = (void *)this;
