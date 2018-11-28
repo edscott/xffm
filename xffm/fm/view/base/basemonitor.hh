@@ -4,11 +4,11 @@ namespace xf
 {
 template <class Type>
 class BaseMonitor {
+    GHashTable *itemsHash_;
 protected:
     GCancellable *cancellable_;
     GFile *gfile_;
     GFileMonitor *monitor_;
-    GHashTable *itemsHash_;
     GtkListStore *store_;
     BaseView<Type> *baseView_;
         
@@ -32,12 +32,14 @@ protected:
     }
 
 public:    
+    GHashTable *itemsHash(void){return itemsHash_;}
     GFileMonitor *monitor(void) {return monitor_;}
     
     BaseMonitor(GtkTreeModel *treeModel, BaseView<Type> *baseView){
+        itemsHash_ = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_free);
         baseView_ = baseView;
         gboolean showHidden = (Settings<Type>::getSettingInteger("LocalView", "ShowHidden") > 0);
-        itemsHash_ = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
+        itemsHash_ = NULL;
         cancellable_ = g_cancellable_new ();
         gfile_ = NULL;
         store_ = GTK_LIST_STORE(treeModel);
@@ -50,7 +52,6 @@ public:
         //g_object_unref(cancellable);
         if (monitor_) {
             stop_monitor();
-            g_hash_table_destroy(itemsHash_);
             g_object_unref(monitor_);
         }
         if (gfile_) g_object_unref(gfile_);
@@ -70,16 +71,28 @@ private:
 	// use hashkey
 	gchar *key = Hash<Type>::get_hash_key(path, 10);
 	g_free(path);
-        g_hash_table_replace(hash, key, GINT_TO_POINTER(1));
+        g_hash_table_replace(hash, key, g_strdup(path));
         return FALSE;
     }
 
 public:
+    
+    gboolean pathInTreeHash(const gchar *path, GHashTable *hash){
+        gboolean retval = FALSE;
+	gchar *key = Hash<Type>::get_hash_key(path, 10);
+        TRACE("looking for %s (%s) in hash: %p\n", path, key, hash);
+	if(hash && g_hash_table_lookup(hash,key)) {
+            WARN("found %s (%s) in hash: %p\n", path, key, hash);
+            retval = TRUE;
+        }
+        g_free(key);
+	return FALSE;
+    }
 
     void
     startMonitor(GtkTreeModel *treeModel, const gchar *path, void *monitor_f){
         // add all initial items to hash
-        gtk_tree_model_foreach (treeModel, add2hash, (void *)itemsHash_);
+        if (itemsHash_) gtk_tree_model_foreach (treeModel, add2hash, (void *)itemsHash_);
         store_ = GTK_LIST_STORE(treeModel);
         TRACE( "*** start_monitor: %s\n", path);
         if (gfile_) g_object_unref(gfile_);
@@ -111,16 +124,10 @@ public:
         }
 	g_file_monitor_cancel(monitor_);
 	while (gtk_events_pending())gtk_main_iteration();  
-	g_hash_table_remove_all(itemsHash_);
-	// hash table remains alive (but empty) until destructor.
+	// hash table remains alive until mountThread finishes.
     }
 
 protected:
-    gboolean pathInTreeHash(const gchar *path){
-	gchar *key = Hash<Type>::get_hash_key(path, 10);
-	if(g_hash_table_lookup(itemsHash_,key)) return TRUE;
-	return FALSE;
-    }
 
     gboolean 
     remove_item(const gchar *path){
@@ -128,7 +135,7 @@ protected:
         TRACE("remove item...\n");
 	// use hashkey
 	gchar *key = Hash<Type>::get_hash_key(path, 10);
-        g_hash_table_remove(itemsHash_, key); 
+        if (itemsHash_) g_hash_table_remove(itemsHash_, key); 
         gtk_tree_model_foreach (GTK_TREE_MODEL(store_), rm_func, (gpointer) path); 
         return TRUE;
     }

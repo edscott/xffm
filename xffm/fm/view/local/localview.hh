@@ -575,8 +575,6 @@ private:
         g_free(icon_name);
         g_free(highlight_name);
         g_free(utf_name);
-	// FIXME: enable itemsHash_ for monitor function.
-        //g_hash_table_replace(itemsHash_, g_strdup(xd_p->d_name), GINT_TO_POINTER(1));
     }
 public:
     

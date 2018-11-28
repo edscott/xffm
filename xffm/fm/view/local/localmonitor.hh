@@ -8,107 +8,39 @@ template <class Type>
 class LocalMonitor: public BaseMonitor<Type>
    // ,public ThreadControl<Type>
 {
-    pthread_t mountThread;
-    void **mountArg;
     //pthread_t clipboardThread;
-
-    static gchar *md5sum(const gchar *file){
-        gchar *md5sum = g_find_program_in_path("md5sum");
-        if (!md5sum){
-            ERROR("cannot find md5sum program\n");
-            return NULL;
-        }
-        g_free(md5sum);
-        gchar *command = g_strdup_printf("md5sum %s", file);
-        FILE *pipe = popen(command, "r");
-        if (!pipe){
-            ERROR("cannot pipe to %s\n", command);
-            g_free(command);
-            return NULL;
-        }
-        g_free(command);
-        gchar buffer[1024];
-        memset (buffer, 0, 1024);
-        fgets(buffer, 1023, pipe);
-        pclose(pipe);
-        if (strlen(buffer)) return g_strdup(buffer);
-        return NULL;
-    }
-        // FIXME 
-    static GList *getMountPaths(void){
-	// get first two items per line of /proc/mounts
-	// add both to list
-	return NULL;
-    }
-
-    static void *
-    mountThreadF(void *data){
-        // get initial md5sum
-        static gchar *sum = md5sum("/proc/mounts");
-        if (!sum) return NULL;
-        DBG("initial md5sum=%s", sum);
-        void **arg = (void **)data;
-        auto localMonitor = (LocalMonitor<Type> *)arg[0];
-        while (arg[1]){
-            //usleep()
-            sleep(1);
-            gchar *newSum = md5sum("/proc/mounts");
-            if (!newSum) return NULL;
-            DBG("new md5sum /proc/mounts = %s\n", newSum);
-            if (strcmp(newSum, sum)){
-                WARN("now we test whether icon update is necessary...\n");
-                g_free(sum);
-                sum = newSum;
-            }
-	    // get mount paths:paths
-	    auto paths = getMountPaths();
-	    for (auto p=paths; p && p->data; p=p->next){
-		auto path = (const gchar *)p->data;
-		if (localMonitor->pathInTreeHash(path)){
-		    // create gfile, child
-		    GFile *child = g_file_new_for_path (path);
-		    g_file_monitor_emit_event (localMonitor->monitor(),
-                           child, NULL, G_FILE_MONITOR_EVENT_CHANGED);
-		    //? g_object_unref(child);
-		}
-	    }
-            // if changed from md5sum
-            //   get new md5sum
-            //   trigger an icon reload:
-            //     Check if path is applicable 
-            //      (dirname matches baseview->path)
-            //      if so, trigger an attribute change
-            //      for folder so that monitor will update 
-            //      the icon
-        }
-        g_free(sum);
-        DBG("now exiting mountThreadF()\n");
-        g_free(data);
-        return NULL;
-    }
+    void **mountArg_; // Needs to exist until destructor is called.
 public:    
     LocalMonitor(GtkTreeModel *treeModel, BaseView<Type> *baseView):
         BaseMonitor<Type>(treeModel, baseView)
     {       
     }
     ~LocalMonitor(void){
-        TRACE("Destructor:~local_monitor_c()\n");
+        TRACE("***Destructor:~local_monitor_c()\n");
         // stop mountThread
-        mountArg[1] = NULL;
+        mountArg_[1] = NULL;
+        while (mountArg_[3]){
+            TRACE("***Waiting for mountThread to exit\n");
+        }
+        g_hash_table_destroy(this->itemsHash());
+        g_free(mountArg_);
+        TRACE("***Destructor:~local_monitor_c() complete\n");
     }
     void
     start_monitor(GtkTreeModel *treeModel, const gchar *path){
+        pthread_t mountThread;
         this->startMonitor(treeModel, path, (void *)monitor_f);
         // start mountThread
-        mountArg = (void **)calloc(2, sizeof(void *));
-        mountArg[0] = (void *)this;
-        mountArg[1] = GINT_TO_POINTER(TRUE);
-	gint retval = pthread_create(&mountThread, NULL, mountThreadF, (void *)mountArg);
+        mountArg_ = (void **)calloc(4, sizeof(void *));
+        mountArg_[0] = (void *)this;
+        mountArg_[1] = GINT_TO_POINTER(TRUE);
+        mountArg_[2] = (void *)this->itemsHash();
+        mountArg_[3] = GINT_TO_POINTER(TRUE);
+	gint retval = pthread_create(&mountThread, NULL, FstabMonitor<Type>::mountThreadF, (void *)this->mountArg_);
 	if (retval){
 	    ERROR("thread_create(): %s\n", strerror(retval));
 	    //return retval;
 	}
-        
     }
 
     xd_t *
@@ -146,7 +78,9 @@ public:
             LocalView<Type>::insertLocalItem(this->store_, xd_p);
             // this just appends:
             //LocalView<Type>::add_local_item(store_, xd_p);
-            g_hash_table_replace(this->itemsHash_, g_strdup(xd_p->path), GINT_TO_POINTER(1));
+            // use hashkey
+            gchar *key = Hash<Type>::get_hash_key(xd_p->path, 10);
+            g_hash_table_replace(this->itemsHash(), key, g_strdup(xd_p->path));
             LocalView<Type>::free_xd_p(xd_p);
             return TRUE;
         } 
@@ -203,21 +137,26 @@ public:
     gboolean 
     restat_item(GFile *src){
         TRACE("restat_item ...\n");
-        gchar *basename = g_file_get_basename(src);
+        // First we use a hash to check if item is in treemodel.
+        // Then, if found, we go on to find the item in the treemodel and update.
+        gchar *path = g_file_get_path(src);
         gboolean showHidden = (Settings<Type>::getSettingInteger("LocalView", "ShowHidden") > 0);
-	if (basename[0] == '.' && !showHidden) {
-	    g_free(basename);
+	if (path[0] == '.' && !showHidden) {
+	    g_free(path);
 	    return FALSE;
 	}
+        // use hashkey
+        
+        gchar *key = Hash<Type>::get_hash_key(path, 10);
 	
-        if (!g_hash_table_lookup(this->itemsHash_, basename)) {
-            g_free(basename);
+        if (!g_hash_table_lookup(this->itemsHash(), key)) {
+            g_free(path);
+            g_free(key);
             return FALSE; 
         }
-        g_free(basename);
-        gchar *fullpath = g_file_get_path(src);
-        gtk_tree_model_foreach (GTK_TREE_MODEL(this->store_), stat_func, (gpointer) fullpath); 
-        g_free(fullpath);
+        g_free(key);
+        gtk_tree_model_foreach (GTK_TREE_MODEL(this->store_), stat_func, (gpointer) path); 
+        g_free(path);
         return TRUE;
     }
 
@@ -252,7 +191,7 @@ private:
                 break;
 
             case G_FILE_MONITOR_EVENT_CHANGED:
-                DBG("Received  CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
+                WARN("monitor_f(): Received  CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
                 p->restat_item(first);
                 // reload icon
                 //FIXME:  if image, then reload the pixbuf

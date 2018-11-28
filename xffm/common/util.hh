@@ -11,6 +11,30 @@ namespace xf
 template <class Type>
 class Util {
 public:
+
+    static gchar *md5sum(const gchar *file){
+        gchar *md5sum = g_find_program_in_path("md5sum");
+        if (!md5sum){
+            ERROR("cannot find md5sum program\n");
+            return NULL;
+        }
+        g_free(md5sum);
+        gchar *command = g_strdup_printf("md5sum %s", file);
+        FILE *pipe = popen(command, "r");
+        if (!pipe){
+            ERROR("cannot pipe to %s\n", command);
+            g_free(command);
+            return NULL;
+        }
+        g_free(command);
+        gchar buffer[1024];
+        memset (buffer, 0, 1024);
+        fgets(buffer, 1023, pipe);
+        pclose(pipe);
+        if (strlen(buffer)) return g_strdup(buffer);
+        return NULL;
+    }
+
     static void 
     lineBreaker(gchar *inputLine, gint lineLength){
 	if (strlen(inputLine) > lineLength){

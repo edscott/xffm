@@ -3,13 +3,40 @@
 #include "fm/view/base/basemonitor.hh"
 namespace xf
 {
+template <class Type> class BaseMonitor;
 template <class Type> class Fstab;
 // Linux files:
 // (/proc/mounts), /proc/partitions
 // 
 template <class Type>
 class FstabMonitor: public BaseMonitor<Type> {
+    static void 
+    checkIfMounted_f(gpointer key,
+               gpointer value,
+               gpointer data){
+        DBG("checkIfMounted_f: key=%s value=%s\n", key, value);
+        if (Fstab<Type>::isMounted((const gchar *)value))
+           DBG("%s is mounted\n", (const gchar *)value);
+        if (!g_hash_table_lookup((GHashTable *)data, key)) 
+           DBG("%s is not in itemshash\n", (const gchar *)value);
+        if (Fstab<Type>::isMounted((const gchar *)value) 
+                && g_hash_table_lookup((GHashTable *)data, key)){
+            DBG("*** Send change signal for %s (now mounted)\n", (const gchar *)value);
+            // Do this with a g_add_timeout
+        }
+    }
+    static void
+    checkIfNotMounted_f(gpointer key,
+               gpointer value,
+               gpointer data){
+        DBG("checkIfNotMounted_f: key=%s value=%s\n", key, value);
+        if (!Fstab<Type>::isMounted((const gchar *)value) 
+                && g_hash_table_lookup((GHashTable *)data, key)){
+            DBG("*** Send change signal for %s (now unmounted)\n", (const gchar *)value);
+            // Do this with a g_add_timeout
+        }
 
+    }
 public:    
     FstabMonitor(GtkTreeModel *treeModel, BaseView<Type> *baseView):
         BaseMonitor<Type>(treeModel, baseView)
@@ -23,8 +50,134 @@ public:
         this->startMonitor(treeModel, path, (void *)monitor_f);
     }
 
+    static void *
+    mountThreadF(void *data){
+        void **arg = (void **)data;
+        auto baseMonitor = (BaseMonitor<Type> *)arg[0];
+        auto itemsHash = (GHashTable *)arg[2];
+        // get initial md5sum
+        gchar *sum = Util<Type>::md5sum("/proc/mounts");
+        if (!sum) {
+            DBG("Exiting mountThreadF() on md5sum error (sum)\n");
+            g_free(data);
+            return NULL;
+        }
+        DBG("FstabMonitor::mountThreadF(): initial md5sum=%s", sum);
+        
+	auto hash = getMountHash(NULL);
+
+        while (arg[1]){// arg[1] is semaphore to thread
+            usleep(250000);
+            //sleep(1);
+            TRACE("mountThreadF loop for arg=%p\n", data);
+            gchar *newSum = Util<Type>::md5sum("/proc/mounts");
+            if (!newSum){
+                DBG("Exiting mountThreadF() on md5sum error (newSum)\n");
+                g_hash_table_destroy(hash);
+                g_free(sum);
+                return NULL;
+            }
+            if (strcmp(newSum, sum)){
+                WARN("new md5sum /proc/mounts = %s (%s)\n", newSum, sum);
+                WARN("now we test whether icon update is necessary...\n");
+                g_free(sum);
+                sum = newSum;
+                // Any new mounts?
+                // Foreach item in itemsHash_ check
+                // if (isMounted() and not in hash)
+                // if so, then send change signal for gfile path. 
+                // This should set the greenball.
+                g_hash_table_foreach(itemsHash, checkIfMounted_f, (void *)hash);
+                //
+                // Any new umounts?
+                // Foreach item in hash, check if 
+                // if (!isMounted(item) && in itemsHash_)
+                // then
+                //     sendSignal change for gfile(item)
+                g_hash_table_foreach(hash, checkIfNotMounted_f, (void *)itemsHash);
+                //
+                // Update hash.
+                hash = getMountHash(hash);
+            }
+            /*
+	    static gboolean sendChangeSignal(void *data){
+                auto path = (const gchar *)data;
+		GFile *child = g_file_new_for_path (path);
+		g_file_monitor_emit_event (baseMonitor->monitor(),
+                           child, NULL, G_FILE_MONITOR_EVENT_CHANGED);
+		//? g_object_unref(child);
+	    }
+            */
+            // if changed from md5sum
+            //   get new md5sum
+            //   trigger an icon reload:
+            //     Check if path is applicable 
+            //      (dirname matches baseview->path)
+            //      if so, trigger an attribute change
+            //      for folder so that monitor will update 
+            //      the icon
+        }
+        g_free(sum);
+        DBG("***now exiting mountThreadF()\n");
+        g_hash_table_destroy(hash);
+        // g_free(data);
+        arg[3] = NULL; // arg[3] is semaphore to calling thread.
+        return NULL;
+    }
+
 private:
 
+     static GHashTable *getMountHash(GHashTable *oldHash){
+         if (oldHash) g_hash_table_destroy(oldHash);
+	// Get first two items per line of /proc/mounts
+	// and add both to hash.
+        GHashTable  *hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_free);
+        FILE *mounts = fopen("/proc/mounts", "r");
+        if (!mounts) return NULL;
+        gchar buffer[2048];
+        memset(buffer, 0, 2048);
+        while (fgets(buffer, 2047, mounts) && !feof(mounts)){
+            gchar **items = g_strsplit(buffer, " ", 3);
+            if (!items) continue;
+            if (!items[0] || !items[1]) {
+                g_strfreev(items);
+                continue;
+            }
+            if (g_path_is_absolute(items[0]) && g_path_is_absolute(items[1])){
+                for (gint i=0; i<2; i++){
+                    // use hashkey
+                    gchar *key = Hash<Type>::get_hash_key(items[i], 10);
+                    g_hash_table_replace(hash, key, g_strdup(items[i]));
+                }
+            }
+        }
+        fclose(mounts);
+	return hash;
+     }
+/*
+     static GList *getMountPaths(void){
+	// Get first two items per line of /proc/mounts
+	// and add both to list.
+        GList *list = NULL;
+        FILE *mounts = fopen("/proc/mounts", "r");
+        if (!mounts) return NULL;
+        gchar buffer[2048];
+        memset(buffer, 0, 2048);
+        while (fgets(buffer, 2047, mounts) && !feof(mounts)){
+            gchar **items = g_strsplit(buffer, " ", 3);
+            if (!items) continue;
+            if (!items[0] || !items[1]) {
+                g_strfreev(items);
+                continue;
+            }
+            if (g_path_is_absolute(items[0]) && g_path_is_absolute(items[1])){
+                for (gint i=0; i<2; i++) list = g_list_prepend(list, items[i]);
+            }
+        }
+        fclose(mounts);
+	return list;
+    }
+ */   
     static gchar *
     uuid2Partition(const gchar *partuuid){
         const gchar *command = "ls -l /dev/disk/by-partuuid";
@@ -84,7 +237,7 @@ private:
 		fsType = Fstab<Type>::fsType(path);
                 Fstab<Type>::addPartition(GTK_TREE_MODEL(p->store_), path, fsType);
                 
-		g_hash_table_replace(p->itemsHash_, g_strdup(f), GINT_TO_POINTER(1));
+		g_hash_table_replace(p->itemsHash(), g_strdup(f), GINT_TO_POINTER(1));
 		g_free(fsType);
                 break;
 
