@@ -215,11 +215,10 @@ private:
                TRACE("Received  CHANGES_DONE_HINT (%d): \"%s\", \"%s\"\n", event, f, s);
                 //p->restat_item(first);
                 // if image, then reload the pixbuf
-                break;        }
+                break;       
+        }
         g_free(f);
         g_free(s);
-        if (first) g_object_unref(first);
-        if (second) g_object_unref(second);
     }
 
 

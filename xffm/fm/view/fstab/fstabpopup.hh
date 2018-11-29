@@ -82,9 +82,9 @@ class FstabPopUp {
 	gchar *path;
 	gchar *displayName;
         gtk_tree_model_get (baseView->treeModel(), &iter, 
-                ACTUAL_NAME, &partuuid,
-		MIMETYPE, &partuuid,
-		DISPLAY_NAME, &displayName,
+                PARTUUID, &partuuid,
+		//MIMETYPE, &partuuid,
+		DISK_LABEL, &displayName,
 		ICON_NAME, &iconName,
 		PATH, &path,
                 TOOLTIP_TEXT,&tooltipText,

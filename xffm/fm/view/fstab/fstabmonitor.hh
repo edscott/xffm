@@ -1,5 +1,6 @@
 #ifndef XF_FSTABMONITOR__HH
 # define XF_FSTABMONITOR__HH
+#include "response/timeoutresponse.hh"
 #include "fm/view/base/basemonitor.hh"
 namespace xf
 {
@@ -12,7 +13,6 @@ template <class Type> class Fstab;
 template <class Type>
 class FstabMonitor: public BaseMonitor<Type> {
     void **mountArg_; // Needs to exist until destructor is called.
-    
     // Please note, sending signal to monitor avoid race condition if
     // this thread tries to do more than this...
     static void *sendChangeSignal(void *data){
@@ -23,7 +23,9 @@ class FstabMonitor: public BaseMonitor<Type> {
        g_free(path);
        g_file_monitor_emit_event (baseMonitor->monitor(),
                    child, NULL, G_FILE_MONITOR_EVENT_CHANGED);
-        //? g_object_unref(child);
+       // Seems that the event will manage reference to g_file
+       // or at least the following unref does not wreak havoc...
+        g_object_unref(child);
         return NULL;
     }
 
@@ -162,23 +164,6 @@ public:
                 // Update hash.
                 hash = getMountHash(hash);
             }
-            /*
-	    static gboolean sendChangeSignal(void *data){
-                auto path = (const gchar *)data;
-		GFile *child = g_file_new_for_path (path);
-		g_file_monitor_emit_event (baseMonitor->monitor(),
-                           child, NULL, G_FILE_MONITOR_EVENT_CHANGED);
-		//? g_object_unref(child);
-	    }
-            */
-            // if changed from md5sum
-            //   get new md5sum
-            //   trigger an icon reload:
-            //     Check if path is applicable 
-            //      (dirname matches baseview->path)
-            //      if so, trigger an attribute change
-            //      for folder so that monitor will update 
-            //      the icon
         }
         g_free(sum);
         DBG("***now exiting mountThreadF()\n");
@@ -187,9 +172,96 @@ public:
         arg[3] = NULL; // arg[3] is semaphore to calling thread.
         return NULL;
     }
-
+/*
+    static void *
+    deviceThreadF(void *data){
+        void **arg = (void **)data;
+        // get initial md5sum
+        gchar *sum = Util<Type>::md5sum("/proc/mounts");
+        if (!sum) {
+            DBG("Exiting deviceThreadF() on md5sum error (sum)\n");
+            g_free(data);
+            return NULL;
+        }
+        DBG("FstabMonitor::deviceThreadF(): initial md5sum=%s", sum);
+        
+	auto deviceList = getDeviceList();
+        while (arg[1]){// arg[1] is semaphore to thread
+            usleep(250000);
+            TRACE("deviceThreadF loop for arg=%p\n", data);
+            gchar *newSum = Util<Type>::md5sum("/proc/mounts");
+            if (!newSum){
+                DBG("deviceThreadF: Exiting mountThreadF() on md5sum error (newSum)\n");
+                g_hash_table_destroy(hash);
+                g_free(sum);
+                return NULL;
+            }
+            if (strcmp(newSum, sum)){
+                WARN("deviceThreadF: new md5sum /proc/mounts = %s (%s)\n", newSum, sum);
+                WARN("deviceThreadF: now we test whether icon update is necessary...\n");
+                g_free(sum);
+                sum = newSum;
+                // Change in devices?
+                GList *devices = getDeviceList();
+                for (auto l = devices; l && l->data; l=l->next){
+                    if (!g_list_find_custom (deviceList, l->data, strcmp)){
+                        // device has been added
+                    }
+                }
+                for (auto l=deviceList, l && l->data; l= l->next)
+                    if (!g_list_find_custom (deviceList, l->data, strcmp)){
+                        // device has been removed
+                    }
+                 }
+                for (auto l=deviceList, l && l->data; l= l->next) g_free(l->data);
+                g_list_free(deviceList);
+                deviceList = devices;
+            }
+        }
+        g_free(sum);
+        DBG("***now exiting deviceThreadF()\n");
+        g_hash_table_destroy(hash);
+        // g_free(data);
+        arg[3] = NULL; // arg[3] is semaphore to calling thread.
+        return NULL;
+    }
+    */
 private:
+    
+    
+/*
+    static gchar *
+    getDeviceList(void){
+        GList *list = NULL;
+        const gchar *command = "ls -l /dev/disk/by-path";
+	FILE *pipe = popen (command, "r");
+	if(pipe == NULL) {
+	    ERROR("Cannot pipe from %s\n", command);
+	    return NULL;
+	}
+        gchar line[256];
+        memset(line, 0, 256);
+        gchar *label = NULL;
+	while (fgets (line, 255, pipe) && !feof(pipe)) {
+            if (strstr(line, "->")) {
+                const gchar *d = strstr(line, "->") + 1;
+                if (strchr(d, '\n')) *strchr(d, '\n') = 0;
+                g_strstrip(d);
+                device = g_path_get_basename(d);
+                if (strlen(device) < 3) {g_free(device) ; continue;}
+                if (!strncmp(d,"sd", strlen("sd")) && !strncmp(d,"hd", strlen("hd"))){
+                    g_free(device) ; continue;
+                }
+                if (d[3] > 0) {g_free(device) ; continue;}; 
+                list = g_list_prepend(list, g_strdup_printf("/dev/%s", device));
+                g_free(device);
+            }
+	}
+        pclose (pipe);
+	return list;
 
+    }
+*/
      static GHashTable *getMountHash(GHashTable *oldHash){
          if (oldHash) g_hash_table_destroy(oldHash);
 	// Get first two items per line of /proc/mounts
@@ -242,19 +314,34 @@ private:
     }
  */   
     static gchar *
-    uuid2Partition(const gchar *partuuid){
+    uuid2Partition(const gchar *partuuidPath){
         const gchar *command = "ls -l /dev/disk/by-partuuid";
 	FILE *pipe = popen (command, "r");
 	if(pipe == NULL) {
 	    ERROR("Cannot pipe from %s\n", command);
 	    return NULL;
 	}
+        gchar *partuuid = g_path_get_basename(partuuidPath);
         gchar line[256];
         memset(line, 0, 256);
         gchar *partition = NULL;
+            WARN("uuid2Partition(): looking for : \"%s\"\n", partuuid);
 	while (fgets (line, 255, pipe) && !feof(pipe)) {
-            TRACE("%s: %s\n", partuuid, line);
-            if (strstr(line, "->") && strstr(line, partuuid)) {
+            WARN("uuid2Partition(): %s: %s\n", partuuid, line);
+            if (!strstr(line, "->")) continue;
+            if (!strstr(line, partuuid)) continue;
+            WARN("uuid2Partition(): GOTCHA: %s\n", line);
+            gchar **f = g_strsplit(line, "->", 2);
+            if (strchr(f[1], '\n')) *strchr(f[1], '\n') = 0;
+            g_strstrip(f[1]);
+            gchar *basename = g_path_get_basename(f[1]);
+            WARN("uuid2Partition(): GOTCHA: basename=%s\n", basename);
+            g_strfreev(f);
+            partition = g_strconcat ("/dev/", basename, NULL);
+            g_free(basename);
+            break;
+
+            /*if (strstr(line, "->") && strstr(line, partuuid)) {
                 if (strchr(line, '\n')) *strchr(line, '\n') = 0;
                 partition = g_strdup_printf("/dev/%s", strrchr(line, '/')+1);
                 g_strstrip(partition);
@@ -263,13 +350,38 @@ private:
                     partition=NULL;
                 }
                 break;
-            }
+            }*/
 	}
         pclose (pipe);
+        g_free(partuuid);
 	return partition;
 
     }
     
+    static gboolean rm_func (GtkTreeModel *model,
+				GtkTreePath *tpath,
+				GtkTreeIter *iter,
+				gpointer data){
+	gchar *partuuid;
+	gchar *path;
+	gtk_tree_model_get (model, iter, 
+		PATH, &path, 
+		PARTUUID, &partuuid, 
+		-1);  
+	
+	if (strcmp(partuuid, (gchar *)data)){
+	    g_free(partuuid);
+	    g_free(path);
+	    return FALSE;
+	}
+	TRACE("removing %s (%s) from treemodel.\n", path, partuuid);
+	GtkListStore *store = GTK_LIST_STORE(model);
+
+	gtk_list_store_remove(store, iter);
+	g_free(path);
+	return TRUE;
+    }
+
     static void
     monitor_f (GFileMonitor      *mon,
               GFile             *first,
@@ -277,32 +389,47 @@ private:
               GFileMonitorEvent  event,
               gpointer           data)
     {
+
+        // Here we enter with full path to partiuuid...
         gchar *f= first? g_file_get_path (first):g_strdup("--");
         gchar *s= second? g_file_get_path (second):g_strdup("--");
        
 
         TRACE("*** monitor_f call...\n");
         auto p = (FstabMonitor<Type> *)data;
-        gchar *path;
         gchar *fsType;
         switch (event){
             case G_FILE_MONITOR_EVENT_DELETED:
             case G_FILE_MONITOR_EVENT_MOVED_OUT:
-                TRACE("Received DELETED  (%d): \"%s\", \"%s\"\n", event, f, s);
-                TRACE("rm %s \n", f);
-                p->remove_item(f);
+            {
+                WARN("Received DELETED  (%d): \"%s\", \"%s\"\n", event, f, s);
+                DBG("*** rm %s \n", f);
+                gchar *devicePath = uuid2Partition(f);
+                gchar *baseuuid = g_path_get_basename(f);
+	        gchar *key = Hash<Type>::get_hash_key(devicePath, 10);
+                if (p->itemsHash()) g_hash_table_remove(p->itemsHash(), key); 
+                gtk_tree_model_foreach (p->treeModel(), rm_func, (gpointer) baseuuid); 
+                g_free(devicePath);
+                g_free(baseuuid);
                 break;
+            }
             case G_FILE_MONITOR_EVENT_CREATED:
             case G_FILE_MONITOR_EVENT_MOVED_IN:
-                TRACE("Received  CREATED (%d): \"%s\", \"%s\"\n", event, f, s);
-                path = uuid2Partition(f);
-                TRACE("adding partition %s\n", path);
-		fsType = Fstab<Type>::fsType(path);
-                Fstab<Type>::addPartition(GTK_TREE_MODEL(p->store_), path, fsType);
+            {
+                WARN("Received  CREATED (%d): \"%s\", \"%s\"\n", event, f, s);
+                gchar *devicePath = uuid2Partition(f);
+                WARN("adding partition %s \n", devicePath);
+		fsType = Fstab<Type>::fsType(devicePath);
+                Fstab<Type>::addPartition(GTK_TREE_MODEL(p->store_), devicePath, fsType);
                 
 		g_hash_table_replace(p->itemsHash(), g_strdup(f), GINT_TO_POINTER(1));
+
+
+                g_free(devicePath);
 		g_free(fsType);
+
                 break;
+            }
 
             case G_FILE_MONITOR_EVENT_CHANGED:
                 DBG("*** Received  CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
@@ -328,8 +455,6 @@ private:
 
         g_free(f);
         g_free(s);
-        if (first) g_object_unref(first);
-        if (second) g_object_unref(second);
     }
     gboolean 
     redoIcon(const gchar *path){

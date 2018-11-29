@@ -47,6 +47,10 @@ msgid "NFS remote directory"
 
 # include <mntent.h>
 
+#define PARTUUID        ACTUAL_NAME
+#define DISK_LABEL      DISPLAY_NAME
+#define FSTYPE          MIMETYPE
+
 #include "fstabpopup.hh"
 #include "fstabmonitor.hh"
 
@@ -91,8 +95,8 @@ public:
 
 
     static gchar *
-    fsType(const gchar *partition){
-        gchar *command = g_strdup_printf("lsblk -no FSTYPE %s", partition);
+    fsType(const gchar *partitionPath){
+        gchar *command = g_strdup_printf("lsblk -no FSTYPE %s", partitionPath);
 	FILE *pipe = popen (command, "r");
 	if(pipe == NULL) {
 	    ERROR("Cannot pipe from %s\n", command);
@@ -113,15 +117,46 @@ public:
 	return g_strdup(line);
     }
 
+    static gchar *
+    id2Partition(const gchar *id){ // disk partition only
+        gchar *baseId = g_path_get_basename(id);
+        const gchar *command = "ls -l /dev/disk/by-id";
+	FILE *pipe = popen (command, "r");
+	if(pipe == NULL) {
+	    ERROR("Cannot pipe from %s\n", command);
+	    return NULL;
+	}
+        gchar line[256];
+        memset(line, 0, 256);
+        gchar *partition = NULL;
+	while (fgets (line, 255, pipe) && !feof(pipe)) {
+            if (strstr(line, "-part")) continue;
+            gchar **f = g_strsplit(line, "->", 2);
+            if (!strstr(f[0], baseId)){
+                g_strfreev(f);
+                continue;
+            }
+            if (strchr(f[1], '\n')) *strchr(f[1], '\n');
+            g_strstrip(f[1]);
+            gchar *g = g_path_get_basename(f[1]);
+            partition = g_strconcat("/dev/", g, NULL);
+            g_free(g);
+            g_strfreev(f);
+            break;
+	}
+        pclose (pipe);
+	return partition;
+    }
 
     static gchar *
-    e2Label(const gchar *partition){
+    e2Label(const gchar *partitionPath){
         const gchar *command = "ls -l /dev/disk/by-label";
 	FILE *pipe = popen (command, "r");
 	if(pipe == NULL) {
 	    ERROR("Cannot pipe from %s\n", command);
 	    return NULL;
 	}
+        auto partition = g_path_get_basename(partitionPath); 
         gchar line[256];
         memset(line, 0, 256);
         gchar *label = NULL;
@@ -134,6 +169,7 @@ public:
             }
 	}
         pclose (pipe);
+        g_free(partition);
 	return label;
 
     }
@@ -141,6 +177,7 @@ public:
 
     static gchar *
     getMntDir (const gchar * mnt_fsname) {
+        if (!mnt_fsname) return NULL;
         FILE *fstab_fd = setmntent ("/etc/mtab", "r");
         if(!fstab_fd)
             return NULL;
@@ -188,18 +225,45 @@ public:
         return NULL;
     }
 
+ 
+   static gchar *
+    getPartitionDiskPath(const gchar *line){
+        if(strlen (line) < 5) return NULL;
+        if(strchr (line, '#')) return NULL;
+        TRACE ("partitions: %s\n", line);
+        if (!strrchr (line, ' ')) return NULL;
+        gchar *p = g_strdup(strrchr (line, ' '));
+        g_strstrip (p);
+        TRACE ("partitions add: %s\n", p);
+        if(!strlen (p)) {
+            g_free(p);
+            return NULL;
+        }
+        if (strncmp(p, "sd", 2) == 0 || strncmp(p, "hd", 2)==0){
+            if (p[3] >= '0' || p[3] <= '9') return NULL;
+            gchar *path = g_strdup_printf ("/dev/%s", p);
+            g_free(p);
+            return path;
+        }
+        g_free(p);
+        return NULL;
+    }
+
     static gchar *
-    partition2uuid(const gchar *partition){
+    partition2uuid(const gchar *partitionPath){
+        // Returns basename of partition uuid.
         const gchar *command = "ls -l /dev/disk/by-partuuid";
 	FILE *pipe = popen (command, "r");
 	if(pipe == NULL) {
 	    ERROR("Cannot pipe from %s\n", command);
 	    return NULL;
 	}
+        gchar *partition = g_path_get_basename(partitionPath);
         gchar line[256];
         memset(line, 0, 256);
         gchar *uuid = NULL;
 	while (fgets (line, 255, pipe) && !feof(pipe)) {
+            if (strchr(line, '\n')) *strchr(line, '\n') = 0;
             TRACE("%s: %s\n", partition, line);
             if (strstr(line, "->") && strstr(line, partition)) {
                 *strstr(line, "->") = 0;
@@ -212,18 +276,25 @@ public:
             }
 	}
         pclose (pipe);
-        //if (strchr(uuid, '\n')) *strchr(uuid, '\n') = 0;
+        g_free(partition);
 	return uuid;
     }
 
     static void
     addPartition(GtkTreeModel *treeModel, const gchar *path, const gchar *fstype){
-	// FIXME: do something with fstype
+        if (!path){
+            ERROR("addPartition: path cannot be null\n");
+            return;
+        }
  	GtkTreeIter iter;
         gchar *basename = g_path_get_basename(path);
         gchar *mntDir = getMntDir(path);
         auto label = e2Label(basename);
-        auto name = (label)?label:basename;
+        if (label){
+           g_free(basename);
+        } else {
+           label = basename;
+        }
 
         gboolean mounted = isMounted(path);
         gchar *text;
@@ -243,30 +314,34 @@ public:
 			path, _("Not mounted"), fstype);
 	}
 
-        auto utf_name = util_c::utf_string(name);
+        auto utf_name = util_c::utf_string(label);
+        g_free(label);
+
         auto icon_name = (mounted)?"drive-harddisk/NW/greenball/3.0/180":
             "drive-harddisk/NW/grayball/3.0/180";
         auto highlight_name = "drive-harddisk/NW/edit-select-symbolic/2.0/225";
         auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
         auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);   
-        auto uuid = partition2uuid(basename);
+        auto uuid = partition2uuid(path);
         gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
         gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
-                DISPLAY_NAME, utf_name,
-                ACTUAL_NAME, uuid,
+                DISK_LABEL, utf_name, // path-basename or label
+                FSTYPE, fstype,
+                PARTUUID, uuid, // partition-basename
                 ICON_NAME, icon_name,
-                PATH, path,
+                PATH, path, // absolute
                 DISPLAY_PIXBUF, normal_pixbuf,
                 NORMAL_PIXBUF, normal_pixbuf,
                 HIGHLIGHT_PIXBUF, highlight_pixbuf,
                 TOOLTIP_TEXT,text,
-
                 -1);
-        g_free(text);
-        g_free(basename);
         g_free(utf_name);
+        // fstype is constant
         g_free(uuid);
-    
+        // icon_name is constant
+        // path is constant
+        // pixbufs belong to pixbuf hash
+        g_free(text);
     }
 
     static void // Linux
@@ -278,6 +353,11 @@ public:
         memset (line, 0, 1024);
         while(fgets (line, 1023, partitions) && !feof (partitions)) {
             gchar *path = getPartitionPath(line);
+            if (!path) continue; // not a partition path line...
+            if (!g_path_is_absolute(path)){
+                ERROR("partition path should be absolute: %s\n", path);
+                continue;
+            }
             if (!path) continue;
 	    gchar *fstype = fsType(path);
             if (fstype) addPartition(treeModel, path, fstype);
@@ -301,8 +381,8 @@ public:
 	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);   
 	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
 	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
-		DISPLAY_NAME, utf_name,
-		ACTUAL_NAME, name,
+		DISK_LABEL, utf_name,
+		PARTUUID, name,
 		ICON_NAME, icon_name,
                 PATH, name,
 		DISPLAY_PIXBUF, normal_pixbuf,
@@ -325,8 +405,8 @@ public:
 	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);   
 	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
 	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
-		DISPLAY_NAME, utf_name,
-		ACTUAL_NAME, name,
+		DISK_LABEL, utf_name,
+		PARTUUID, name,
 		ICON_NAME, icon_name,
                 PATH, name,
 		DISPLAY_PIXBUF, normal_pixbuf,
@@ -349,8 +429,8 @@ public:
 	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);   
 	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
 	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
-		DISPLAY_NAME, utf_name,
-		ACTUAL_NAME, name,
+		DISK_LABEL, utf_name,
+		PARTUUID, name,
 		ICON_NAME, icon_name,
                 PATH, name,
 		DISPLAY_PIXBUF, normal_pixbuf,
@@ -373,8 +453,8 @@ public:
 	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);   
 	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
 	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
-		DISPLAY_NAME, utf_name,
-		ACTUAL_NAME, name,
+		DISK_LABEL, utf_name,
+		PARTUUID, name,
 		ICON_NAME, icon_name,
                 PATH, name,
 		DISPLAY_PIXBUF, normal_pixbuf,

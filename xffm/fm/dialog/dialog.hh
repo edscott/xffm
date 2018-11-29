@@ -11,6 +11,9 @@ template <class Type>
 class Dialog :public Notebook<Type> {
     using pixbuf_c = Pixbuf<double>;
     using print_c = Print<double>;
+    GFileMonitor *deviceMonitor_;
+    GCancellable *cancellable_;
+    GFile *gfile_;
 public:
     Dialog(const gchar *path){
 	init(path);
@@ -19,16 +22,17 @@ public:
 	// Default into iconview...
         page->setDefaultIconview(TRUE);
 	page->showIconview(1);
+        startDeviceMonitor();
     }
 
  /*   Dialog(const gchar *title, const gchar *icon){
         Dialog();
 	setDialogIcon(icon);
 	setDialogTitle(title);
+    } */
+    ~Dialog(void){
+	g_file_monitor_cancel(deviceMonitor_);
     }
-    Dialog(void){
-	init(NULL);
-    }*/
 
     void init(const gchar *path){
 	Settings<Type>::readSettings();
@@ -68,6 +72,72 @@ public:
         while (gtk_events_pending()) gtk_main_iteration();
 	return;
     }
+
+    void
+    startDeviceMonitor(void){
+        const gchar *path = "/dev/disk/by-id";
+        gfile_ = g_file_new_for_path (path);
+        GError *error=NULL;
+        cancellable_ = g_cancellable_new ();
+        
+        deviceMonitor_ = g_file_monitor (gfile_, G_FILE_MONITOR_WATCH_MOVES, cancellable_,&error);
+        if (error){
+            ERROR("g_file_monitor_directory(%s) failed: %s\n",
+                    path, error->message);
+            g_object_unref(gfile_);
+            return;
+        }
+        g_signal_connect (deviceMonitor_, "changed", 
+                G_CALLBACK (monitor_f), (void *)this);
+    }
+
+    static void
+    monitor_f (GFileMonitor      *mon,
+              GFile             *first,
+              GFile             *second,
+              GFileMonitorEvent  event,
+              gpointer           data)
+    {
+
+        // Here we enter with full path to partiuuid...
+        gchar *f= first? g_file_get_path (first):g_strdup("--");
+        gchar *s= second? g_file_get_path (second):g_strdup("--");
+       
+        gchar *base = g_path_get_basename(f);
+        TRACE("*** monitor_f call...\n");
+        gchar *fsType;
+        switch (event){
+            case G_FILE_MONITOR_EVENT_DELETED:
+            case G_FILE_MONITOR_EVENT_MOVED_OUT:
+            if (!strstr(f, "part")){
+                gchar *path = Fstab<Type>::id2Partition(f);
+                gchar *markup = g_strdup_printf("%s %s", _("Removed"), base);
+                TimeoutResponse<Type>::dialog(markup, "drive-harddisk/SE/go-down/3.0/180");
+                g_free(markup);
+                g_free(path);
+                DBG("*** Device has been removed: %s\n", f);
+            }
+            break;
+            case G_FILE_MONITOR_EVENT_CREATED:
+            case G_FILE_MONITOR_EVENT_MOVED_IN:
+            if (!strstr(f, "part")){
+                gchar *g = g_strdup_printf(_("Inserted %s"), "" );
+                gchar *path = Fstab<Type>::id2Partition(f);
+                gchar *label = Fstab<Type>::e2Label(path);
+                gchar *markup = g_strdup_printf("%s    <span color=\"red\">%s</span>    <span color=\"green\">%s</span>\n%s\n", g, path, label?label:"", base );
+                TimeoutResponse<Type>::dialog(markup, "drive-harddisk/SE/go-up/3.0/180");
+                g_free(markup);
+                g_free(path);
+                g_free(label);
+                DBG("*** Device has been added: %s\n", f);
+            }
+            break;
+        }
+
+        g_free(f);
+        g_free(s);
+    }
+   
 
     void setDialogTitle(const gchar *title){
 	gtk_window_set_title (dialog_, title);
