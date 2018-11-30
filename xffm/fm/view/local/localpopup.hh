@@ -4,6 +4,7 @@
 #include "response/comboresponse.hh"
 #include "response/commandresponse.hh"
 #include "fm/view/fstab/fstab.hh"
+#include "localclipboard.hh"
 
 namespace xf
 {
@@ -42,9 +43,9 @@ public:
             {N_("Remove bookmark"), (void *)removeBookmark, NULL, NULL},
 	    
 	    //common buttons /(also an iconsize +/- button)
-	    {N_("Copy"), (void *)copy, NULL, NULL},
-	    {N_("Cut"), (void *)cut, NULL, NULL},
-	    {N_("Paste"), (void *)paste, NULL, NULL},
+	    {N_("Copy"), (void *)LocalClipBoard<Type>::copy, NULL, NULL},
+	    {N_("Cut"), (void *)LocalClipBoard<Type>::cut, NULL, NULL},
+	    {N_("Paste"), (void *)LocalClipBoard<Type>::paste, NULL, NULL},
 	    {N_("bcrypt"), NULL, NULL, NULL},
 	    {N_("Rename"), NULL, NULL, NULL},
 	    {N_("Duplicate"), NULL, NULL, NULL}, 
@@ -62,21 +63,33 @@ public:
     }
 
     static void
-    resetLocalPopup(const gchar *path) {
+    resetLocalPopup(BaseView<Type> *baseView) {
         BasePopUp<Type>::clearKeys(localPopUp);
 
         // Path is set on buttonpress signal...
         //auto path = (const gchar *)g_object_get_data(G_OBJECT(localPopUp), "path");
-	DBG("resetLocalPopup path=%s\n", path);
-        if (!path){
+	DBG("resetLocalPopup path=%s\n", baseView->path());
+        if (!baseView->path()){
 	    ERROR("resetLocalPopup: path is NULL\n");
 	    return;
 	}
+        // unsensitivize "Paste" only if valid pasteboard...
+        auto w = GTK_WIDGET(g_object_get_data(G_OBJECT(localPopUp), "Paste"));
+        if (w) gtk_widget_set_sensitive(w, LocalClipBoard<Type>::clipBoardIsValid());
+        
+        GList *selection_list = gtk_icon_view_get_selected_items (baseView->iconView());
+        baseView->setSelectionList(selection_list);
+        w = GTK_WIDGET(g_object_get_data(G_OBJECT(localPopUp), "Copy"));
+        if (w) gtk_widget_set_sensitive(w, g_list_length(selection_list) > 0);
+        w = GTK_WIDGET(g_object_get_data(G_OBJECT(localPopUp), "Cut"));
+        if (w) gtk_widget_set_sensitive(w, g_list_length(selection_list) > 0);
+
+
 	g_object_set_data(G_OBJECT(localPopUp), "iconName", g_strdup("folder"));
-	g_object_set_data(G_OBJECT(localPopUp), "displayName", util_c::valid_utf_pathstring(path));
-	g_object_set_data(G_OBJECT(localPopUp), "path", g_strdup(path));
-	g_object_set_data(G_OBJECT(localPopUp), "mimetype", g_strdup(Mime<Type>::mimeType(path)));
-	g_object_set_data(G_OBJECT(localPopUp), "fileInfo", util_c::fileInfo(path));
+	g_object_set_data(G_OBJECT(localPopUp), "displayName", util_c::valid_utf_pathstring(baseView->path()));
+	g_object_set_data(G_OBJECT(localPopUp), "path", g_strdup(baseView->path()));
+	g_object_set_data(G_OBJECT(localPopUp), "mimetype", g_strdup(Mime<Type>::mimeType(baseView->path())));
+	g_object_set_data(G_OBJECT(localPopUp), "fileInfo", util_c::fileInfo(baseView->path()));
 	BasePopUp<Type>::changeTitle(localPopUp);
     }
 
@@ -189,6 +202,7 @@ private:
         const gchar *commonItems[]={
             "Copy",
             "Cut",
+            "Paste",
             "bcrypt",
             "Rename",
             "Duplicate",
@@ -204,6 +218,10 @@ private:
         for (p=directoryItems; p &&*p; p++){
             w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), *p));
             if (w) {
+                auto oldPath = (gchar *)g_object_get_data(G_OBJECT(w), "path");
+                g_free(oldPath);
+                g_object_set_data(G_OBJECT(w), "path", g_strdup(path));
+
                 gtk_widget_show(w);
                 gtk_widget_set_sensitive(w, FALSE);
             }
@@ -211,9 +229,19 @@ private:
         for (p=commonItems; p &&*p; p++){
             w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), *p));
             if (w) {
+                auto oldPath = (gchar *)g_object_get_data(G_OBJECT(w), "path");
+                g_free(oldPath);
+                g_object_set_data(G_OBJECT(w), "path", g_strdup(path));
+
+                gtk_widget_show(w);
                 gtk_widget_show(w);
                 gtk_widget_set_sensitive(w, FALSE); // WIP
             }
+        }
+        // unsensitivize "Paste" only if valid pasteboard...
+        {
+            auto w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Paste"));
+            if (w) gtk_widget_set_sensitive(w, LocalClipBoard<Type>::clipBoardIsValid());
         }
 
         //////  Directory options
@@ -376,7 +404,7 @@ public:
     }
     static GtkMenu *popUp(BaseView<Type> *baseView){
         if (!localPopUp) localPopUp = createLocalPopUp();   
-        resetLocalPopup(baseView->path());
+        resetLocalPopup(baseView);
         return localPopUp;
     }
     static GtkMenu *createLocalPopUp(void){
@@ -389,16 +417,15 @@ public:
             {N_("Open in New Tab"), NULL, NULL, NULL},
             {N_("Open in New Window"), NULL, NULL, NULL},
             
-	    {N_("Copy"), (void *)copy, NULL, NULL},
-	    {N_("Cut"), (void *)cut, NULL, NULL},
-	    {N_("Paste"), (void *)paste, NULL, NULL},
+	    {N_("Copy"), (void *)LocalClipBoard<Type>::copy, NULL, NULL},
+	    {N_("Cut"), (void *)LocalClipBoard<Type>::cut, NULL, NULL},
+	    {N_("Paste"), (void *)LocalClipBoard<Type>::paste, NULL, NULL},
              // main menu items
             //{N_("Home"), NULL, (void *) menu},
             //{N_("Open terminal"), NULL, (void *) menu},
             //{N_("About"), NULL, (void *) menu},
             //
             //common buttons /(also an iconsize +/- button)
-            //{N_("Paste"), NULL, (void *) menu},
             //{N_("Sort data in ascending order"), NULL, (void *) menu},
             //{N_("Sort data in descending order"), NULL, (void *) menu},
             //{N_("Sort case insensitive"), NULL, (void *) menu},
@@ -930,43 +957,6 @@ public:
         return FALSE;
     }
 private:
-    static void
-    pasteClip(GtkClipboard *clipBoard, const gchar *text, gpointer data){
-        // FIXME: ensure path utfs are same as os paths
-        WARN("pasteClip(target=%s):\n%s\n", (const gchar *)data, text);
-    }
-
-    static void
-    paste(GtkMenuItem *menuItem, gpointer data) { 
-        DBG("paste\n");
-        gtk_clipboard_request_text (clipBoard, pasteClip, (void *) "fixme:target");
-    }
-
-    static void 
-    putInClipBoard(BaseView<Type> *baseView, const gchar *instruction){
-         if (!baseView || ! instruction){
-            ERROR("baseView||instruction is null\n");
-            exit(1);
-        }
-        DBG("%s\n", instruction); 
-        // FIXME: ensure paths are valid utf.
-        GList *selection_list = gtk_icon_view_get_selected_items (baseView->iconView());
-        baseView->setSelectionList(selection_list);
-        gchar *clipData = BaseViewSignals<Type>::getSelectionData(baseView,instruction );
-        gtk_clipboard_set_text (clipBoard, clipData, strlen(clipData)+1);
-    }
-
-    static void
-    copy(GtkMenuItem *menuItem, gpointer data) { 
-	auto baseView = (BaseView<Type> *)g_object_get_data(G_OBJECT(data), "baseView");
-        putInClipBoard(baseView, "copy");
-    }
-
-    static void
-    cut(GtkMenuItem *menuItem, gpointer data) { 
-	auto baseView = (BaseView<Type> *)g_object_get_data(G_OBJECT(data), "baseView");
-        putInClipBoard(baseView, "cut");
-    }
 
     static void 
     toggleTerminal (GtkToggleButton *togglebutton, gpointer data){

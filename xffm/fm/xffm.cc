@@ -19,7 +19,6 @@
 static const gchar *xffmProgram;
 static const gchar *xffindProgram;
 static GtkWidget *mainWindow = NULL;
-static GtkClipboard *clipBoard;
 
 #include "common/tubo.hh"
 #include "common/print.hh"
@@ -53,8 +52,9 @@ main (int argc, char *argv[]) {
     auto xffm = new(xf::Dialog<double>)(path);
     //xffm->setDialogTitle("Fm");
     xffm->setDialogIcon("system-file-manager");
-    clipBoard = gtk_clipboard_get_for_display (gdk_display_get_default(), GDK_SELECTION_CLIPBOARD);
-    gtk_main();
 
+    xf::LocalClipBoard<double>::startClipBoard();  
+    gtk_main();
+    xf::LocalClipBoard<double>::stopClipBoard();  
     return 0;
 }

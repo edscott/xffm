@@ -5,8 +5,6 @@
 #define HAVE_STRUCT_DIRENT_D_TYPE 1
 #include "common/util.hh"
 
-#include "localpopup.hh"
-
 typedef struct xd_t{
     gchar *d_name;
     gchar *path;
@@ -17,6 +15,12 @@ typedef struct xd_t{
 }xd_t;
 static pthread_mutex_t readdir_mutex=PTHREAD_MUTEX_INITIALIZER;
 static gboolean inserted_;
+static GList *localMonitorList = NULL;
+
+#include "localpopup.hh"
+#include "localdnd.hh"
+#include "localclipboard.hh"
+#include "localmonitor.hh"
 
 // Maximum character length to put file extension as a icon label:
 #define EXTENSION_LABEL_LENGTH 4
@@ -214,6 +218,7 @@ public:
         if (items <= 500) {
             p = new(LocalMonitor<Type>)(treeModel, baseView);
             p->start_monitor(treeModel, path);
+            localMonitorList = g_list_append(localMonitorList, (void *)p->monitor());
         } 
 	return p;
     }
@@ -995,11 +1000,19 @@ private:
         if (RootView<Type>::isBookmarked(xd_p->path)){
             return g_strdup("/SE/bookmark-new/2.0/220");
         }
-
+        gchar *aux;
+        if (LocalClipBoard<Type>::isInClipBoard(xd_p->path)){
+            if(LocalClipBoard<Type>::isClipBoardCut()) {
+                aux = g_strdup("/NE/edit-cut/2.0/220");
+            } else {
+                aux = g_strdup("/NE/edit-copy/2.0/220");
+            }
+        } else {
+            aux = statEmblem(xd_p->path, xd_p->st, emblem);
+        }
         TRACE("getEmblem: %s\n", xd_p->path);
-        // Now we try stat emblem
-        gchar *aux = statEmblem(xd_p->path, xd_p->st, emblem);
         g_free(emblem); emblem = aux;
+       
         TRACE("getEmblem: %s --> %s\n", xd_p->path, emblem);
         gchar *extend;
         if (xd_p->d_type != DT_REG) extend = g_strdup("");

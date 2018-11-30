@@ -276,6 +276,7 @@ public:
         setPath(path);
         // stop current monitor
         if (localMonitor_) {
+            localMonitorList = g_list_remove(localMonitorList, (void *)localMonitor_->monitor());
             delete (localMonitor_);
             localMonitor_ = NULL;
         }
@@ -406,115 +407,7 @@ public:
     GList *
     selectionList(void){return selectionList_;}
 
-    GList *
-    removeUriFormat(gchar **files){
-        GList *fileList = NULL;
-        for (auto f=files; f && *f; f++){
-            gchar *file = *f;
-            if (strlen(file) > strlen(URIFILE)){
-                if (strncmp(file, URIFILE, strlen(URIFILE))==0){
-                    file = *f + strlen(URIFILE);
-                }
-            }
-            fileList = g_list_prepend(fileList, g_strdup(file));
-        }
-        fileList = g_list_reverse(fileList);
-        return fileList;
-    }
 
-
-    gboolean
-    receiveDndData(const gchar *target, const GtkSelectionData *selection_data, GdkDragAction action){
-        WARN("BaseView::receiveDndData\n");
-        if (!selection_data) {
-            WARN("!selection_data\n");
-            return FALSE;
-        }
-        auto dndData = (const char *)gtk_selection_data_get_data (selection_data);
-
-        gchar **files = g_strsplit(dndData, "\n", -1);
-        
-        if (!files) {
-            WARN("!files\n");
-            return FALSE;
-        }
-        if (*files==NULL) {
-            WARN("files==NULL\n");
-            g_strfreev(files);
-            return FALSE;
-        }
-
-        gchar *source = g_path_get_dirname(*files);
-	if (strncmp(source, URIFILE, strlen(URIFILE))==0){
-	    gchar *g = g_strdup(source + strlen(URIFILE));
-	    g_free(source);
-	    source=g;
-	}
-        if (!target){
-	    target = (const gchar *)path_;
-        }
-        WARN("BaseView::receiveDndData: source=%s target=%s action=%d\n", source, target, action);
-        gboolean result = FALSE;
-        if (strcmp(source, target) ) result = TRUE;
-        else {
-	    g_free(source);
-            WARN("receiveDndData: source and target are the same\n");
-            return FALSE;
-        }
-	g_free(source);
-
-        GList *fileList = removeUriFormat(files);
-        g_strfreev(files);
-
-/*        for (gchar **f = files; f && *f; f++){
-            if (strlen(*f)==0) continue;
-            gchar *src = *f;
-            if (strncmp(src, format, strlen(format))==0) src += strlen(format);
-            switch (action){
-                case GDK_ACTION_MOVE:
-                    WARN("DND move: %s --> %s\n", src, path_);
-                    break;
-                case GDK_ACTION_COPY:
-                    WARN("DND copy: %s --> %s\n", src, path_);
-                    break;
-                case GDK_ACTION_LINK:
-                    WARN("DND link: %s --> %s\n", src, path_);
-                    break;
-            }
-        }
-        */
-
-	const gchar *command;
-	const gchar *message;
-	switch (action){
-	    case GDK_ACTION_MOVE:
-		message = _("Moving files");
-		command = "mv -b -f";
-		break;
-	    case GDK_ACTION_COPY:
-		message = _("Copying files locally");
-		command = "cp -R -b -f";
-		break;
-	    case GDK_ACTION_LINK:
-		message = _("Create Link");
-		command = "ln -s -b -f";
-		break;
-
-	}
-	auto dialog = CommandProgressResponse<Type>::dialog(
-		message, "system-run", command, fileList, target);
-        for (auto l=fileList; l && l->data; l= l->next) g_free(l->data);
-        g_list_free(fileList);
-
-        // not needed with GTK_DEST_DEFAULT_DROP
-        /*gtk_drag_finish (context, result, 
-                (action == GDK_ACTION_MOVE) ? result : FALSE, 
-                time);*/
-
-
-        return result;
-    }
-    
 
 
     void

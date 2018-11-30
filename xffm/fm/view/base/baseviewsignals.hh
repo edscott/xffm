@@ -4,7 +4,6 @@
 #include "fm/view/root/rootview.hh"
 #include "common/pixbuf.hh"
 #include "fm/view/local/localview.hh"
-#include "fm/view/local/localmonitor.hh"
 
 // Flag bits:
 #define IS_NOTSELECTABLE(F) ((0x01<<1)&F)
@@ -54,6 +53,7 @@ namespace xf
 {
 
 
+template <class Type> class LocalClipboard;
 template <class Type> class BaseView;
 
 template <class Type> 
@@ -306,6 +306,11 @@ public:
                 break;
             case (LOCALVIEW_TYPE):
                 if (itemMenu) {
+                    if (!CONTROL_MODE){
+                        // unselect all
+		        gtk_icon_view_unselect_all (baseView->iconView());
+                    }
+                    gtk_icon_view_select_path (baseView->iconView(), tpath);
 		    menu = LocalView<Type>::popUp(baseView, tpath);
 		} else {
 		    menu = LocalView<Type>::popUp(baseView);
@@ -441,11 +446,7 @@ public:
             // not needed with GTK_DEST_DEFAULT_DROP
             // gtk_drag_finish(context, FALSE, FALSE, time);
             return;
-      //            goto drag_over;         
         }
-
-        //WARN("rodent_mouse: DND receive, action=%d\n", action);
-        //WARN("actions mv/cp/ln: %d/%d/%d\n", GDK_ACTION_MOVE, GDK_ACTION_COPY, GDK_ACTION_LINK);
         if(action != GDK_ACTION_MOVE && 
            action != GDK_ACTION_COPY &&
            action != GDK_ACTION_LINK) {
@@ -453,9 +454,7 @@ public:
             // not needed with GTK_DEST_DEFAULT_DROP
             // gtk_drag_finish(context, FALSE, FALSE, time);
             return;
-      //      goto drag_over;         
         }
-
 
         gchar *target = NULL;
         GtkTreePath *tpath=NULL;
@@ -486,15 +485,24 @@ public:
         auto dndData = (const char *)gtk_selection_data_get_data (selection_data);
 	DBG("dndData = \"\n%s\"\n", dndData);
         
-        auto result = baseView->receiveDndData(target, selection_data, action);
+        switch (baseView->viewType()) {
+            case (LOCALVIEW_TYPE):
+            {
+                auto result = LocalDnd<Type>::receiveDndData(baseView, target, selection_data, action);
+                TRACE("drag finish result=%d\n", result);
+                break;
+            }
+
+            default :
+                DBG("BaseViewSignals:: receiveDndData not defined for view type %d\n", baseView->viewType());
+                break;
+        }
         g_free(target);
 
-        WARN("drag finish result=%d\n", result);
      /*   gtk_drag_finish (context, result, 
                 (action == GDK_ACTION_MOVE) ? result : FALSE, 
-                time);
-*/
-        DBG("DND receive, drag_over\n");
+                time); */
+        TRACE("DND receive, drag_over\n");
         return;
 
     } 
@@ -529,7 +537,7 @@ public:
             gchar *g;
             gtk_tree_model_get (baseView->treeModel(), &iter, PATH, &g, -1);
             // drop into?
-            // must be a directory
+            // must be a directory (XXX this is quite local stuff...)
             if (g_file_test(g, G_FILE_TEST_IS_DIR)){
                 baseView->highlight(tpath);
             } else {
@@ -641,29 +649,6 @@ public:
 	*/
     }
 
-    static gchar *
-    getSelectionData(BaseView<Type> *baseView, const gchar *instruction){
-        GList *selection_list = baseView->selectionList();
-        gchar *data = (instruction)?g_strdup_printf("%s\n", instruction): NULL;
-        
-        for(GList *tmp = selection_list; tmp && tmp->data; tmp = tmp->next) {
-            GtkTreePath *tpath = (GtkTreePath *)tmp->data;
-            gchar *path;
-            GtkTreeIter iter;
-            gtk_tree_model_get_iter (baseView->treeModel(), &iter, tpath);
-            gtk_tree_model_get (baseView->treeModel(), &iter, PATH, &path, -1);
-            if (!data) data = g_strconcat(URIFILE, path, NULL);
-            else {
-                gchar *e = g_strconcat(data, "\n", URIFILE, path, NULL);
-                g_free(data);
-                data = e;
-            }
-            WARN("BaseViewSignals::getSelectionData(): append: %s -> \"%s\"\n", path, data);
-            g_free(path);
-        }
-        return data;
-    }
-
     static void
     signal_drag_data_send (GtkWidget * widget,
                        GdkDragContext * context, 
@@ -682,14 +667,25 @@ public:
             ERROR("signal_drag_data_send: invalid target");
         }
         DBG( ">>> DND send, TARGET_URI_LIST\n"); 
+        gchar *dndData = NULL;
+        switch (baseView->viewType()) {
+            case (LOCALVIEW_TYPE):
+            {
+                dndData = LocalDnd<Type>::sendDndData(baseView);
+                TRACE("drag finish result=%d\n", result);
+                break;
+            }
 
-        gchar *dndData = getSelectionData(baseView, NULL);
-        if (!dndData){
-            ERROR("signal_drag_data_send: condition dndData != NULL not met\n");
+            default :
+                DBG("BaseViewSignals:: sendDndData not defined for view type %d\n", baseView->viewType());
+                break;
         }
-        gtk_selection_data_set (selection_data, 
-            gtk_selection_data_get_selection(selection_data),
-            8, (const guchar *)dndData, strlen(dndData)+1);
+
+        if (dndData){
+            gtk_selection_data_set (selection_data, 
+                gtk_selection_data_get_selection(selection_data),
+                8, (const guchar *)dndData, strlen(dndData)+1);
+        }
                     
     }
 
