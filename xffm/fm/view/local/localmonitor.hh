@@ -29,7 +29,7 @@ public:
         this->startMonitor(treeModel, path, (void *)monitor_f);
         // start mountThread
         pthread_t mountThread;
-                DBG("LocalMonitor thread itemshash=%p\n", this->itemsHash());
+        TRACE("LocalMonitor thread itemshash=%p\n", this->itemsHash());
         mountArg_ = (void **)calloc(4, sizeof(void *));
         mountArg_[0] = (void *)this;
         mountArg_[1] = GINT_TO_POINTER(TRUE);
@@ -58,7 +58,7 @@ public:
 	  }
 	  closedir (directory);
 	} else {
-	  WARN("monitor_f(): opendir %s: %s\n", path, strerror(errno));
+	  DBG("monitor_f(): opendir %s: %s\n", path, strerror(errno));
 	}
 	g_free(basename); 
 	g_free(path); 
@@ -90,33 +90,27 @@ public:
 				GtkTreePath *tpath,
 				GtkTreeIter *iter,
 				gpointer data){
-	gchar *text;
         gchar *path;
-	gchar *basename = g_path_get_basename((gchar *)data);
-	gtk_tree_model_get (model, iter, 
-		ACTUAL_NAME, &text, 
-                PATH, &path,
-		-1);  
-	
-	if (strcmp(basename, text)){
-	    g_free(text);
+	auto inPath = (gchar *)data;
+	gtk_tree_model_get (model, iter, PATH, &path, -1);  
+
+	TRACE("stat_func: %s <--> %s\n", path, inPath);
+	if (strcmp(path, inPath)){
             g_free(path);
-	    g_free(basename);
 	    return FALSE;
 	}
-	g_free(text);
-	g_free(basename);
+        g_free(path);
+	TRACE("stat_func: gotcha %s\n", inPath);
 
 	GtkListStore *store = GTK_LIST_STORE(model);
 	struct stat st;
-	if (stat((gchar *)data, &st) != 0){
-	    TRACE( "localmonitor stat_func() stat: %s\n", strerror(errno));
-            g_free(path);
+	if (stat(inPath, &st) != 0){
+	    DBG( "localmonitor stat_func(%s) stat: %s\n", inPath, strerror(errno));
 	    return FALSE;
 	}
 
-        gchar *iconName = LocalView<Type>::get_iconname(path);
-        TRACE("localmonitor stat_func(): iconname=%s\n", iconName);
+        gchar *iconName = LocalIcons<Type>::get_iconname(inPath);
+        TRACE("***localmonitor stat_func(): iconname=%s\n", iconName);
         GdkPixbuf *pixbuf = Pixbuf<Type>::get_pixbuf(iconName,  GTK_ICON_SIZE_DIALOG);
 
 	gtk_list_store_set (store, iter, 
@@ -127,9 +121,6 @@ public:
                 NORMAL_PIXBUF, pixbuf,
 		-1);
         g_free(iconName);
-        g_free(path);
-
-
 	return TRUE;
     }
 
@@ -139,6 +130,7 @@ public:
         // First we use a hash to check if item is in treemodel.
         // Then, if found, we go on to find the item in the treemodel and update.
         gchar *path = g_file_get_path(src);
+	TRACE("restat_item %s \n", path);
         gboolean showHidden = (Settings<Type>::getSettingInteger("LocalView", "ShowHidden") > 0);
 	if (path[0] == '.' && !showHidden) {
 	    g_free(path);
@@ -151,6 +143,7 @@ public:
         if (!g_hash_table_lookup(this->itemsHash(), key)) {
             g_free(path);
             g_free(key);
+	    TRACE("restat_item %s is not in itemsHash()\n", path);
             return FALSE; 
         }
         g_free(key);
@@ -168,8 +161,8 @@ private:
               GFileMonitorEvent  event,
               gpointer           data)
     {
-        gchar *f= first? g_file_get_basename (first):g_strdup("--");
-        gchar *s= second? g_file_get_basename (second):g_strdup("--");
+        gchar *f= first? g_file_get_path (first):g_strdup("--");
+        gchar *s= second? g_file_get_path (second):g_strdup("--");
        
 
         TRACE("*** monitor_f call...\n");
@@ -190,20 +183,20 @@ private:
                 break;
 
             case G_FILE_MONITOR_EVENT_CHANGED:
-                WARN("monitor_f(): Received  CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
+                TRACE("monitor_f(): Received  CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
                 p->restat_item(first);
                 // reload icon
                 //FIXME:  if image, then reload the pixbuf
                 break;
             case G_FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED:
-                DBG("Received  ATTRIBUTE_CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
+                TRACE("Received  ATTRIBUTE_CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
                 p->restat_item(first);
                 break;
             case G_FILE_MONITOR_EVENT_PRE_UNMOUNT:
-                DBG("Received  PRE_UNMOUNT (%d): \"%s\", \"%s\"\n", event, f, s);
+                TRACE("Received  PRE_UNMOUNT (%d): \"%s\", \"%s\"\n", event, f, s);
                 break;
             case G_FILE_MONITOR_EVENT_UNMOUNTED:
-                DBG("Received  UNMOUNTED (%d): \"%s\", \"%s\"\n", event, f, s);
+                TRACE("Received  UNMOUNTED (%d): \"%s\", \"%s\"\n", event, f, s);
                 break;
             case G_FILE_MONITOR_EVENT_MOVED:
             case G_FILE_MONITOR_EVENT_RENAMED:

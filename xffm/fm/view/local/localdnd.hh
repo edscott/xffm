@@ -86,7 +86,7 @@ public:
 	    ERROR("LocalDnd::execute: target cannot be NULL\n");
             return FALSE;
         }
-        WARN("LocalDnd::execute: source=%s target=%s command=%d\n", source, target, command);
+        WARN("LocalDnd::execute: source=%s target=%s command=%s\n", source, target, command);
         gboolean result = FALSE;
         if (strcmp(source, target) ) result = TRUE;
         else {

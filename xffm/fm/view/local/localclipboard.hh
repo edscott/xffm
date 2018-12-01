@@ -14,7 +14,7 @@ public:
     static void
     pasteClip(GtkClipboard *clipBoard, const gchar *text, gpointer data){
         auto target = (const gchar *)data;
-        WARN("pasteClip(target=%s):\n%s\n", target, text);
+        TRACE("pasteClip(target=%s):\n%s\n", target, text);
         if (strncmp(text, "copy\n", strlen("copy\n")) == 0){
             auto message = _("Copying files locally");
             auto command = "cp -R -b -f";
@@ -36,7 +36,7 @@ public:
     static void
     paste(GtkMenuItem *menuItem, gpointer data) { 
         // Two options here, paste in local view or paste in highlight directory
-        DBG("paste\n");
+        TRACE("paste\n");
         // if the menuitem has the data object "path" set, then the
         // target is a highlighted folder. Otherwise, "path" may be
         // retrieved from the menu data object "path" or baseview
@@ -71,26 +71,7 @@ public:
             ERROR("LocalClipBoard::putInClipBoard(): Not a valid utf8 string: %s\n", clipData);
             gtk_clipboard_set_text (clipBoard, "", 1);
         } else gtk_clipboard_set_text (clipBoard, clipData, strlen(clipData)+1);
-        
-        // icon update business
-        // for each file, send monitor the changed signal
-        gchar **files = g_strsplit(clipData, "\n", -1);
-        for (auto list = localMonitorList; list && list->data; list = list->next){
-            auto monitor = (GFileMonitor *)list->data;
-                WARN("monitor %p update: ***\n", list->data);
-            for (auto f = files+1; f && *f; f++) {
-                WARN("monitor %p update: *** %s\n", list->data, *f);
-                GFile *child = g_file_new_for_path (*f); 
-                g_file_monitor_emit_event (monitor,
-                        child, NULL, G_FILE_MONITOR_EVENT_CHANGED);
-                g_object_unref(child);
-            }
-        }
-        g_strfreev(files);
 	gtk_icon_view_unselect_all (baseView->iconView());
-    
-       // Seems that the event will manage reference to g_file
-       
     }
 
     static void
@@ -122,7 +103,7 @@ public:
                 g_free(data);
                 data = e;
             }
-            WARN("BaseViewSignals::getSelectionData(): append: %s -> \"%s\"\n", path, data);
+            TRACE("BaseViewSignals::getSelectionData(): append: %s -> \"%s\"\n", path, data);
             g_free(path);
         }
         return data;
@@ -144,6 +125,88 @@ public:
     }
 
     static void
+    addClipBoardEmblems(void){
+	TRACE("*** addClipBoardEmblems\n");
+        gchar **files = NULL;
+	if (clipBoardCache) files = g_strsplit(clipBoardCache, "\n", -1);
+	sendMonitorSignals(files);
+        g_strfreev(files);
+    }
+
+    static gchar *
+    removeClipBoardEmblems(void){
+	TRACE("*** removeClipBoardEmblems\n");
+	if (!clipBoardCache) return NULL;
+        gchar **files = g_strsplit(clipBoardCache, "\n", -1);
+
+	g_free(clipBoardCache);
+	clipBoardCache = NULL;  
+
+	sendMonitorSignals(files);
+        g_strfreev(files);
+	return NULL;
+    }
+
+    static void
+    sendMonitorSignals(gchar **files){
+        // icon update business
+        // for each file, send monitor the changed signal
+        for (auto list = localMonitorList; list && list->data; list = list->next){
+            auto monitor = (GFileMonitor *)list->data;
+            TRACE("Sending signal to monitor %p to update icons, files=%p. ***\n", 
+		    list->data, files);
+            for (gchar **f = files; f && *f; f++) {
+		if (strncmp(*f, URIFILE, strlen(URIFILE))) {
+		    TRACE("sendMonitorSignals: %s is not URL.\n", *f);
+		    continue;
+		}
+		else TRACE("sendMonitorSignals: signaling change for %s.\n", *f);
+		const gchar *path = *f + strlen(URIFILE);
+                TRACE("monitor %p update: %s\n", list->data, path);
+                GFile *child = g_file_new_for_path (path); 
+                g_file_monitor_emit_event (monitor,
+                        child, NULL, G_FILE_MONITOR_EVENT_CHANGED);
+                g_object_unref(child);
+            }
+        }
+    }
+
+    static gchar *
+    clipBoardEmblem(const gchar *path){
+	gchar *emblem = NULL;
+        if (isInClipBoard(path)){
+            if(isClipBoardCut()) {
+                emblem = g_strdup("/NE/edit-cut/2.0/220");
+            } else {
+                emblem = g_strdup("/NE/edit-copy/2.0/220");
+            }
+        }
+	TRACE("clipBoardEmblem for %s %s\n", path, emblem);
+	return emblem;
+    }
+
+    static void 
+    updateClipBoardCache(const gchar *text){
+	gboolean updateIconBusiness = FALSE;
+        if (!validClipBoard){
+	    if (clipBoardCache){
+		// Update any previously set icons.
+		clipBoardCache = removeClipBoardEmblems();
+		updateIconBusiness = TRUE;
+	    }
+	}
+	else if (!clipBoardCache || strcmp(text, clipBoardCache)){
+	    // Update any previously set icons.
+	    clipBoardCache = removeClipBoardEmblems();
+            g_free(clipBoardCache);
+            clipBoardCache = g_strdup(text);
+	    updateIconBusiness = TRUE;
+        }
+	if (!updateIconBusiness) return;
+	addClipBoardEmblems();
+    }
+
+    static void
     setValidity(GtkClipboard *clipBoard, const gchar *text, gpointer data){
         if (!text || strlen(text)<5){
             validClipBoard = FALSE;
@@ -153,16 +216,7 @@ public:
             validClipBoard = TRUE;
         } else validClipBoard = FALSE;
         TRACE("Clip board is valid = %d\n", validClipBoard);
-        if (!validClipBoard){
-            g_free(clipBoardCache);
-            clipBoardCache = NULL;
-            return;
-        }
-        if (!clipBoardCache || strcmp(text, clipBoardCache)){
-            g_free(clipBoardCache);
-            clipBoardCache = g_strdup(text);
-            return;
-        }
+	updateClipBoardCache(text);
         return;
     }
 
