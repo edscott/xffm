@@ -7,6 +7,7 @@ gchar *clipBoardCache = NULL;
 
 namespace xf
 {
+template <class Type> class LocalDnd;
 template <class Type>
 class LocalClipBoard {
 
@@ -14,23 +15,29 @@ public:
     static void
     pasteClip(GtkClipboard *clipBoard, const gchar *text, gpointer data){
         auto target = (const gchar *)data;
+        gchar **files = g_strsplit(text, "\n", -1);
+
         TRACE("pasteClip(target=%s):\n%s\n", target, text);
         if (strncmp(text, "copy\n", strlen("copy\n")) == 0){
             auto message = _("Copying files locally");
             auto command = "cp -R -b -f";
             DBG("execute(%s, %s, files, %s)\n", message, command, target);
-            //if (!LocalDnd<Type>::execute(message, command, files, target);
+            if (!LocalDnd<Type>::execute(message, command, files, target)){
+		    DBG("pasteClip: failed \"%s\"\n", command);
+	    }
             clearClipBoard();
         } else if (strncmp(text, "move\n", strlen("move\n")) == 0){
             auto message = _("Moving files");
             auto command = "mv -b -f";
             DBG("execute(%s, %s, files, %s)\n", message, command, target);
-            //if (!LocalDnd<Type>::execute(message, command, files, target);
+            if (!LocalDnd<Type>::execute(message, command, files, target)){
+		    DBG("pasteClip: failed \"%s\"\n", command);
+	    }
             clearClipBoard();
         } else {
             DBG("LocalClipBoard::pasteClip: Invalid clipboard contents.\n");
-            return;
         }
+        if (files) g_strfreev(files);
     }
 
     static void
