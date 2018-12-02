@@ -39,6 +39,7 @@ static GList *localMonitorList = NULL;
 // Maximum character length to put file extension as a icon label:
 #define EXTENSION_LABEL_LENGTH 4
 
+#include "localrm.hh"
 #include "localicons.hh"
 #include "localpopup.hh"
 #include "localdnd.hh"

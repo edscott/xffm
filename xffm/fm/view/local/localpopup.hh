@@ -14,6 +14,7 @@ static GtkMenu *localItemPopUp=NULL;
 template <class Type> class BaseView;
 template <class Type> class BaseViewSignals;
 template <class Type> class Dialog;
+template <class Type> class LocalRm;
 template <class Type>
 class LocalPopUp {
     
@@ -53,7 +54,7 @@ public:
 	    {N_("Touch"), NULL, NULL, NULL},
 	    {N_("File Information..."), NULL, NULL, NULL},
 	    {N_("Properties"), NULL, NULL, NULL},
-	    {N_("Delete"), NULL, NULL, NULL},
+	    {N_("Delete"), (void *)LocalRm<Type>::rm, NULL, NULL},
 	    //{N_("Mimetype command"), NULL, NULL, NULL},
 	    {N_("autotype_Prun"), NULL, NULL, NULL},
 	     {NULL,NULL,NULL,NULL}
@@ -83,6 +84,13 @@ public:
         if (w) gtk_widget_set_sensitive(w, g_list_length(selection_list) > 0);
         w = GTK_WIDGET(g_object_get_data(G_OBJECT(localPopUp), "Cut"));
         if (w) gtk_widget_set_sensitive(w, g_list_length(selection_list) > 0);
+        w = GTK_WIDGET(g_object_get_data(G_OBJECT(localPopUp), "Delete"));
+        if (w) {
+	    if (g_list_length(selection_list) > 0) gtk_widget_show(w);
+	    else gtk_widget_hide(w);
+	    gtk_widget_set_sensitive(w, g_list_length(selection_list) > 0);
+	} else ERROR(" no widget for Delete\n");
+
 
 
 	g_object_set_data(G_OBJECT(localPopUp), "iconName", g_strdup("folder"));
@@ -420,6 +428,7 @@ public:
 	    {N_("Copy"), (void *)LocalClipBoard<Type>::copy, NULL, NULL},
 	    {N_("Cut"), (void *)LocalClipBoard<Type>::cut, NULL, NULL},
 	    {N_("Paste"), (void *)LocalClipBoard<Type>::paste, NULL, NULL},
+	    {N_("Delete"), (void *)LocalRm<Type>::rm, NULL, NULL},
              // main menu items
             //{N_("Home"), NULL, (void *) menu},
             //{N_("Open terminal"), NULL, (void *) menu},
