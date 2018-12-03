@@ -88,7 +88,7 @@ private:
 	gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
 
         // title
-	gchar *g=g_strdup_printf("Rodent: %s", _("Remove"));
+	gchar *g=g_strdup_printf("Xffm+ %s", _("Remove"));
 	gtk_window_set_title (rmDialog, g);
 	// icon
 	auto pb = Pixbuf<Type>::get_pixbuf("edit-delete", SIZE_ICON);

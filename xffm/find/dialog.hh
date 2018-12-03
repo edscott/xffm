@@ -24,6 +24,7 @@ class FindDialog
 //    typedef typename  void (*)(GtkToggleButton *,gpointer) toggleButtonCallback;
 protected:
     void createDialog(const gchar *path){
+	Settings<Type>::readSettings();        
         createDialog_(path);
     }
     

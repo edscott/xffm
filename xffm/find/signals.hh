@@ -706,7 +706,7 @@ private:
                         _("No editor component found."), editor));
             return;
         }
-
+        DBG("editor = %s\n", editor);
         gchar *command;
 	if (Mime<Type>::runInTerminal(editor)){
 	    command = Mime<Type>::mkTerminalLine(editor, "");
@@ -714,12 +714,14 @@ private:
 	    command = g_strdup(editor);
 	}
       
+        DBG("command = %s\n", command);
 
         for (; list && list->data; list=list->next){
             gchar *g = g_strconcat(command, " \"", (gchar *)list->data, "\"", NULL);
             g_free(command);
             command = g;
         }
+        DBG("command args = %s\n", command);
 
         // Hack: for nano or vi, run in terminal
         gboolean in_terminal = FALSE;
@@ -729,6 +731,7 @@ private:
             in_terminal = TRUE;
         }
 
+        DBG("thread_run %s\n", command);
         run_c::thread_run(diagnostics, command, FALSE);
         //RFM_THREAD_RUN2ARGV(widgets_p, command, in_terminal);
         
