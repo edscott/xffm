@@ -1,6 +1,8 @@
 
 TODO: 
 
+  * history internal lpterm command. Enable use of | grep to filter output...
+
   * check tarball creation output in lpterm 
 
   * add bookmarks to rootview: 

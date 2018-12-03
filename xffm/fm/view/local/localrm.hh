@@ -64,26 +64,41 @@ public:
             gtk_tree_model_get(baseView->treeModel(), &iter, PATH, &path, -1);
             list = g_list_append(list, path);
         }
-        auto text = g_strdup_printf(_("Delete %s"), (gchar *)list->data);
-        auto message = g_list_length(list) > 1 ? 
-            g_strdup_printf("<span color=\"red\">%s (%d)</span>", _("Multiple selections"), g_list_length(list)):
-            "";
-	auto rmDialog = createRemove(baseView, text, message, TRUE);
-
-        g_object_set_data(G_OBJECT(rmDialog), "list", list);
-        /* dialog specifics */
-        auto togglebutton=GTK_WIDGET(g_object_get_data(G_OBJECT(rmDialog), "togglebutton"));
-
-        if(g_list_length (selection_list) < 2) {
-            gtk_widget_hide(togglebutton);
+        while (list && g_list_length(list)>0) {
+            list = rmQuery(baseView, list);
         }
-        gtk_main();
     }
 
 private:
+    static GList *
+    rmQuery(BaseView<Type> *baseView, GList *list){
+	DBG("rmQuery: rm\n");
+        if (!list || !g_list_length(list)) {
+            g_list_free(list);
+            return NULL;
+        }
+        auto text = g_strdup_printf(_("Delete %s"), (gchar *)list->data);
+        auto message = g_list_length(list) > 1 ? 
+        g_strdup_printf("<span color=\"red\">%s (%d)</span>", _("Multiple selections"), g_list_length(list)):
+        "";
+        auto rmDialog = createRemove(baseView, text, message, TRUE);
+        g_object_set_data(G_OBJECT(rmDialog), "list", list);
+        /* dialog specifics */
+        auto togglebutton=GTK_WIDGET(g_object_get_data(G_OBJECT(rmDialog), "togglebutton"));
+        if(g_list_length (list) < 2) {
+            gtk_widget_hide(togglebutton);
+        }
+        gtk_main();
+        list = (GList *)g_object_get_data(G_OBJECT(rmDialog), "list");
+        gtk_widget_hide(GTK_WIDGET(rmDialog));
+        gtk_widget_destroy(GTK_WIDGET(rmDialog));
+        return list;
+   }
+
     static
     GtkWindow *
     createRemove (BaseView<Type> *baseView, const gchar *text, const gchar *message, gboolean always) {
+	DBG("createRemove: rm\n");
 	auto rmDialog = GTK_WINDOW(gtk_window_new (GTK_WINDOW_TOPLEVEL));
 	gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
 
@@ -93,7 +108,6 @@ private:
 	// icon
 	auto pb = Pixbuf<Type>::get_pixbuf("edit-delete", SIZE_ICON);
 	gtk_window_set_icon (rmDialog, pb);
-	g_object_unref(pb);
 	//gtk_window_set_modal (rmDialog, TRUE);
 
 	auto vbox2 = Gtk<Type>::vboxNew (FALSE, 0);
@@ -102,7 +116,6 @@ private:
 
 	pb = Pixbuf<Type>::get_pixbuf ("edit-delete", -96);
 	auto q = gtk_image_new_from_pixbuf (pb);
-	g_object_unref(pb);
 	gtk_widget_show (GTK_WIDGET(q));
 	gtk_box_pack_start (vbox2, GTK_WIDGET(q), TRUE, TRUE, 5);
 
@@ -204,6 +217,38 @@ private:
     }
 
     static void
+    removeAllFromList(GtkWidget *dialog){
+        auto list = (GList *)g_object_get_data(G_OBJECT(dialog), "list");
+        if (!list){
+            DBG("removeAllFromList(): list is NULL\n");
+            return;
+        }
+        for (auto tmp = list; tmp && tmp->data; tmp=tmp->next){
+            g_free(tmp->data);
+        }
+        g_list_free(list);
+        g_object_set_data(G_OBJECT(dialog), "list", NULL);
+    }
+        
+    static void
+    removeItemFromList(GtkWidget *dialog, void *path){
+        auto list = (GList *)g_object_get_data(G_OBJECT(dialog), "list");
+        if (!list){
+            DBG("removeItemFromList(): list is NULL\n");
+            return;
+        }
+        list = g_list_remove (list, path);
+        g_free(path);
+        g_object_set_data(G_OBJECT(dialog), "list", list);
+       /* if (g_list_length(list)==0) {
+            g_list_free(list);
+            g_object_set_data(G_OBJECT(dialog), "list", NULL);
+        } else {
+            g_object_set_data(G_OBJECT(dialog), "list", NULL);
+        }*/
+    }
+
+    static void
     apply_action(GtkWidget * button, gpointer data){
         auto dialog=GTK_WIDGET(g_object_get_data(G_OBJECT(button), "rmDialog"));
         auto list = (GList *)g_object_get_data(G_OBJECT(dialog), "list");
@@ -224,11 +269,16 @@ private:
             case TRASH_YES:
                 DBG( "**single trash: %s\n", (gchar *)list->data);
                 mode = MODE_TRASH;
+                // Trash operation
+                removeItemFromList(dialog, list->data);
+
                 break;
             case SHRED_YES:
                 DBG( "**single shred: %s\n", (gchar *)list->data);
                 mode = MODE_SHRED;
-                break;
+                 // Shred operation
+                removeItemFromList(dialog, list->data);
+               break;
             case RM_YES:
             {
                 DBG( "**single remove: %s\n", (gchar *)list->data);
@@ -245,45 +295,36 @@ private:
                     
                     rfm_view_thread_create(widgets_p->view_p, do_the_remove, arg, "do_the_remove");   
                 }*/
-                auto path = (gchar *) list->data;
-                list = g_list_remove (list, list->data);
-                g_free(path);
-                if (g_list_length(list)==0) {
-                    g_list_free(list);
-                    g_object_set_data(G_OBJECT(dialog), "list", NULL);
-                }
-                
+                // rm operation
+                removeItemFromList(dialog, list->data);
                 break;
             }
             case RM_NO:
             {
                 DBG( "remove cancelled: %s\n", (gchar *)list->data);
-                auto path = (gchar *) list->data;
-                list = g_list_remove (list, list->data);
-                g_free(path);
-                if (g_list_length(list)==0) {
-                    g_list_free(list);
-                    g_object_set_data(G_OBJECT(dialog), "list", NULL);
-                }
+                removeItemFromList(dialog, list->data);
                 break;
             }
+            ////////////////////////////////
             case TRASH_YES_ALL:
                 DBG( "trash all\n");
                 mode = MODE_TRASH;
+                removeAllFromList(dialog);
                 break;
             case SHRED_YES_ALL:
                 DBG( "shred all\n");
                 mode = MODE_SHRED;
+                removeAllFromList(dialog);
                 break;
             case RM_YES_ALL:
             {
-                GList *full_list = NULL;
+                /*GList *full_list = NULL;
                 DBG( "remove all\n");
                 for (auto tmp = list; tmp && tmp->data; tmp=tmp->next){
                     TRACE( "**remove all: %s\n", (gchar *)tmp->data);
                     full_list = g_list_append (full_list, g_strdup((gchar *)tmp->data));
                 }
-                /*{
+                {
                     void **arg =(void **)malloc(3*sizeof(void *));
                     if (!arg) g_error("malloc: %s\n", strerror(errno));
                     arg[0]=widgets_p;
@@ -291,29 +332,21 @@ private:
                     arg[2]=GINT_TO_POINTER(mode);
                     rfm_view_thread_create(widgets_p->view_p, do_the_remove, arg, "do_the_remove");
                 }*/
-                for (auto tmp = list; tmp && tmp->data; tmp=tmp->next){
-                    g_free(tmp->data);
-                }
-                g_list_free(list);
-                g_object_set_data(G_OBJECT(dialog), "list", NULL);
+                removeAllFromList(dialog);
                 break;
             }
             case RM_CANCEL:
                 DBG( "**cancel remove\n");
+                removeAllFromList(dialog);
                 break;
             default:
             {
                 DBG( "**default : cancel remove all\n");
-                for (auto tmp = list; tmp && tmp->data; tmp=tmp->next){
-                    g_free(tmp->data);
-                }
-                g_list_free(list);
-                g_object_set_data(G_OBJECT(dialog), "list", NULL);
+                removeAllFromList(dialog);
                break;
             }
         }
         gtk_widget_hide(dialog);
-        gtk_widget_destroy(dialog);
         gtk_main_quit();
 
         // We are already in a thread environment here, so there is no need to
