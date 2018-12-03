@@ -15,7 +15,8 @@
 # define MODE_TRASH             3
 namespace xf
 {
-
+template <class Type> class BaseProgressResponse;
+template <class Type> class TimeoutResponse;
 template <class Type>
 class LocalRm {
 
@@ -248,6 +249,53 @@ private:
         }*/
     }
 
+    static gboolean trashIt(const gchar *path){
+        GFile *file = g_file_new_for_path(path);
+        GError *error=NULL;
+        auto retval = g_file_trash (file, NULL, &error);
+        if (error){
+            gchar *m = g_strdup_printf(_("Could not move %s to trash"), path);
+            gchar *message = g_strdup_printf("<span color=\"red\">%s</span>\n(%s)", m, error->message);
+            TimeoutResponse<Type>::dialog(message, "dialog-error");
+            //Gtk<Type>::quickHelp(GTK_WINDOW(mainWindow), message, "dialog-error");
+            DBG("trashIt(%s): %s\n", path, error->message);
+            g_error_free(error);
+        }
+        return retval;
+    }
+
+    static gboolean
+    multiTrash(const gchar *message, const gchar *icon, GList *fileList)
+    {
+	gint items = g_list_length(fileList);
+	if (!items) return FALSE;
+
+	auto dialog = BaseProgressResponse<Type>::dialog(message, icon);
+	auto progress = GTK_PROGRESS_BAR(g_object_get_data(G_OBJECT(dialog), "progress"));
+
+        gtk_window_set_title(dialog, message);
+	gtk_widget_show_all (GTK_WIDGET(dialog));
+
+	
+	gint count = 0;
+        gboolean retval;
+        for (auto l = fileList; l && l->data; l=l->next) {
+	    gchar *text = g_strdup_printf("%s %d/%d", _("Items:"), count+1, items); 
+	    gtk_progress_bar_set_text (progress, text);
+	    g_free(text);
+	    gtk_progress_bar_set_show_text (progress, TRUE);
+	    gtk_progress_bar_set_fraction(progress, (double)count/items);
+	    while (gtk_events_pending()) gtk_main_iteration(); 
+	    auto path = (const gchar *)l->data;
+
+            retval = trashIt(path);
+            if (!retval)break;
+	    count++;
+	}
+	gtk_widget_destroy(GTK_WIDGET(dialog));
+	return retval;
+    }
+
     static void
     apply_action(GtkWidget * button, gpointer data){
         auto dialog=GTK_WIDGET(g_object_get_data(G_OBJECT(button), "rmDialog"));
@@ -261,6 +309,7 @@ private:
         if (result == RM_YES && apply_to_all) result=RM_YES_ALL;
         else if (result == SHRED_YES && apply_to_all) result=SHRED_YES_ALL;
         else if (result == RM_NO && apply_to_all) result=RM_CANCEL;
+        else if (result == TRASH_YES && apply_to_all) result=TRASH_YES_ALL;
         
         TRACE( "**apply_action: 0x%x\n", result);
 
@@ -270,9 +319,28 @@ private:
                 DBG( "**single trash: %s\n", (gchar *)list->data);
                 mode = MODE_TRASH;
                 // Trash operation
+                if (!trashIt((gchar *)list->data)){
+                    // FIXME: do a quick help dialog here...
+                    DBG("Cannot trash %s\n", (gchar *)list->data);
+                    gchar *m = g_strdup_printf(_("Could not move %s to trash"), (gchar *)list->data);
+                   //TimeoutResponse<Type>::dialog(m, "dialog-error");
+                   //Gtk<Type>::quickHelp(GTK_WINDOW(mainWindow), m, "dialog-error");
+                   break;
+                }
                 removeItemFromList(dialog, list->data);
 
                 break;
+            case TRASH_YES_ALL:
+                DBG( "trash all\n");
+                mode = MODE_TRASH;
+                if (!multiTrash(_("Trash"), "user-trash", list)){
+                    DBG("Cannot multiTrash %s\n", (gchar *)list->data);
+                    break;
+                }
+
+                removeAllFromList(dialog);
+                break;
+
             case SHRED_YES:
                 DBG( "**single shred: %s\n", (gchar *)list->data);
                 mode = MODE_SHRED;
@@ -306,11 +374,6 @@ private:
                 break;
             }
             ////////////////////////////////
-            case TRASH_YES_ALL:
-                DBG( "trash all\n");
-                mode = MODE_TRASH;
-                removeAllFromList(dialog);
-                break;
             case SHRED_YES_ALL:
                 DBG( "shred all\n");
                 mode = MODE_SHRED;

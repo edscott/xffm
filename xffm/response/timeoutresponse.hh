@@ -17,7 +17,10 @@ public:
         if (!message) message = "<span size=\"larger\" color=\"blue\">Custom message markup appears <span color=\"red\">here</span></span>";
          // Create the widgets
          auto dialog = GTK_WINDOW(gtk_window_new (GTK_WINDOW_TOPLEVEL));
-         //gtk_window_set_transient_for (dialog,GTK_WINDOW(mainWindow));
+         gtk_window_set_keep_above (dialog,TRUE);
+
+         //gtk_window_set_position(dialog, GTK_WIN_POS_MOUSE);
+         gtk_window_move(dialog, 0,0);
 
          auto vbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
          gtk_container_add (GTK_CONTAINER (dialog), GTK_WIDGET(vbox));
@@ -46,13 +49,22 @@ public:
         
          gtk_widget_show_all(GTK_WIDGET(dialog));
          while (gtk_events_pending()) gtk_main_iteration();
-         sleep(4);
 
-	 gtk_widget_hide(GTK_WIDGET(dialog));
-         gtk_widget_destroy(GTK_WIDGET(dialog));
+         void **arg = (void **)calloc(2, sizeof(void *));
+
+         g_timeout_add_seconds (4, sleepit, (void *) dialog);
          return;
     }
 private:
+    static gboolean
+    sleepit(void *data){
+        auto dialog = GTK_WIDGET(data);
+        gtk_widget_hide(GTK_WIDGET(dialog));
+        gtk_widget_destroy(GTK_WIDGET(dialog));
+        return FALSE;
+    }
+
+        
     static gboolean delete_event (GtkWidget *widget,
                GdkEvent  *event,
                gpointer   user_data){
