@@ -294,13 +294,39 @@ private:
 	    gtk_progress_bar_set_fraction(progress, (double)count/items);
 	    while (gtk_events_pending()) gtk_main_iteration(); 
 	    auto path = (const gchar *)l->data;
-
-            retval = trashIt(rmDialog, path);
-            if (!retval)break;
+            // Try first item in foreground.
+            if (!count) {
+                retval = trashIt(rmDialog, path);
+                if (!retval)break;
+            } else {
+                // send the rest in background
+                GFile *file = g_file_new_for_path(path);
+                g_file_trash_async (file, G_PRIORITY_LOW, 
+                    NULL,   // GCancellable *cancellable,
+                    asyncTrashCallback,
+                    GINT_TO_POINTER(count+1));
+            }
+                // or send with progress bar and cancel option.
 	    count++;
 	}
 	gtk_widget_destroy(GTK_WIDGET(dialog));
 	return retval;
+    }
+
+    static void
+    asyncTrashCallback(GObject *obj,
+                        GAsyncResult *res,
+                        gpointer data){
+        auto file = (GFile *)obj;
+        DBG("asyncTrashCallback: trashed item %d\n", GPOINTER_TO_INT(data));
+        gboolean success = g_file_trash_finish (file, res, NULL);
+        if (!success){
+            gchar *path = g_file_get_path(file);
+            ERROR("Failed to trash item %d (%s)\n", GPOINTER_TO_INT(data), path);
+            g_free(path);
+        }
+        g_object_unref(file);
+
     }
 
     static void
