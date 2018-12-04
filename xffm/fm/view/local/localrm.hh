@@ -1,5 +1,6 @@
 #ifndef XF_LOCALRM__HH
 # define XF_LOCALRM__HH
+#include "common/gio.hh"
 
 # define RM_NO			0
 # define RM_YES			1
@@ -9,14 +10,8 @@
 # define TRASH_YES		5
 # define TRASH_YES_ALL		6
 # define RM_CANCEL		7
-
-# define MODE_RM                1
-# define MODE_SHRED             2
-# define MODE_TRASH             3
 namespace xf
 {
-template <class Type> class BaseProgressResponse;
-template <class Type> class TimeoutResponse;
 template <class Type>
 class LocalRm {
 
@@ -256,78 +251,6 @@ private:
         }*/
     }
 
-    static gboolean trashIt(GtkDialog *rmDialog, const gchar *path){
-        GFile *file = g_file_new_for_path(path);
-        GError *error=NULL;
-        auto retval = g_file_trash (file, NULL, &error);
-        if (error){
-            gchar *m = g_strdup_printf(_("Could not move %s to trash"), path);
-            gchar *message = g_strdup_printf("<span color=\"red\">%s</span>\n(%s)", m, error->message);
-            TimeoutResponse<Type>::dialog(GTK_WINDOW(rmDialog), message, "dialog-error");
-            //Gtk<Type>::quickHelp(GTK_WINDOW(mainWindow), message, "dialog-error");
-            DBG("trashIt(%s): %s\n", path, error->message);
-            g_error_free(error);
-        }
-        return retval;
-    }
-
-    static gboolean
-    multiTrash(GtkDialog *rmDialog, const gchar *message, const gchar *icon, GList *fileList)
-    {
-	gint items = g_list_length(fileList);
-	if (!items) return FALSE;
-
-	auto dialog = BaseProgressResponse<Type>::dialog(message, icon);
-	auto progress = GTK_PROGRESS_BAR(g_object_get_data(G_OBJECT(dialog), "progress"));
-
-        gtk_window_set_title(dialog, message);
-	gtk_widget_show_all (GTK_WIDGET(dialog));
-
-	
-	gint count = 0;
-        gboolean retval;
-        for (auto l = fileList; l && l->data; l=l->next) {
-	    gchar *text = g_strdup_printf("%s %d/%d", _("Items:"), count+1, items); 
-	    gtk_progress_bar_set_text (progress, text);
-	    g_free(text);
-	    gtk_progress_bar_set_show_text (progress, TRUE);
-	    gtk_progress_bar_set_fraction(progress, (double)count/items);
-	    while (gtk_events_pending()) gtk_main_iteration(); 
-	    auto path = (const gchar *)l->data;
-            // Try first item in foreground.
-            if (!count) {
-                retval = trashIt(rmDialog, path);
-                if (!retval)break;
-            } else {
-                // send the rest in background
-                GFile *file = g_file_new_for_path(path);
-                g_file_trash_async (file, G_PRIORITY_LOW, 
-                    NULL,   // GCancellable *cancellable,
-                    asyncTrashCallback,
-                    GINT_TO_POINTER(count+1));
-            }
-                // or send with progress bar and cancel option.
-	    count++;
-	}
-	gtk_widget_destroy(GTK_WIDGET(dialog));
-	return retval;
-    }
-
-    static void
-    asyncTrashCallback(GObject *obj,
-                        GAsyncResult *res,
-                        gpointer data){
-        auto file = (GFile *)obj;
-        DBG("asyncTrashCallback: trashed item %d\n", GPOINTER_TO_INT(data));
-        gboolean success = g_file_trash_finish (file, res, NULL);
-        if (!success){
-            gchar *path = g_file_get_path(file);
-            ERROR("Failed to trash item %d (%s)\n", GPOINTER_TO_INT(data), path);
-            g_free(path);
-        }
-        g_object_unref(file);
-
-    }
 
     static void
     responseAction(GtkWidget * button, gpointer data){
@@ -351,20 +274,14 @@ private:
     apply_action(GtkDialog *rmDialog, gint result){
         auto list = (GList *)g_object_get_data(G_OBJECT(rmDialog), "list");
        
-        TRACE( "**apply_action: 0x%x\n", result);
+        DBG( "**apply_action: 0x%x\n", result);
 
-        gint mode = MODE_RM;
         switch (result) {
             case TRASH_YES:
                 DBG( "**single trash: %s\n", (gchar *)list->data);
-                mode = MODE_TRASH;
                 // Trash operation
-                if (!trashIt(rmDialog, (gchar *)list->data)){
-                    // FIXME: do a quick help dialog here...
+                if (!Gio<Type>::doIt(rmDialog, (gchar *)list->data, MODE_TRASH)){
                     DBG("Cannot trash %s\n", (gchar *)list->data);
-                    //gchar *m = g_strdup_printf(_("Could not move %s to trash"), (gchar *)list->data);
-                   //TimeoutResponse<Type>::dialog(m, "dialog-error");
-                   //Gtk<Type>::quickHelp(GTK_WINDOW(mainWindow), m, "dialog-error");
                    break;
                 }
                 removeItemFromList(rmDialog, list->data);
@@ -372,41 +289,39 @@ private:
                 break;
             case TRASH_YES_ALL:
                 DBG( "trash all\n");
-                mode = MODE_TRASH;
-                if (!multiTrash(rmDialog, _("Trash"), "user-trash", list)){
+                if (!Gio<Type>::multiDoIt(rmDialog, _("Trash"), "user-trash", list, MODE_TRASH)){
                     DBG("Cannot multiTrash %s\n", (gchar *)list->data);
                     break;
                 }
 
                 removeAllFromList(rmDialog);
                 break;
-
-            case SHRED_YES:
-                DBG( "**single shred: %s\n", (gchar *)list->data);
-                mode = MODE_SHRED;
-                 // Shred operation
-                removeItemFromList(rmDialog, list->data);
-               break;
             case RM_YES:
             {
                 DBG( "**single remove: %s\n", (gchar *)list->data);
-                
-
-    /*	    GSList *single_list = g_slist_append (NULL, g_strdup((gchar *)list->data));
-                {
-                    void **arg =(void **)malloc(3*sizeof(void *));
-                    if (!arg) g_error("malloc: %s\n", strerror(errno));
-                    arg[0]=widgets_p;
-                    arg[1]=single_list;
-                    arg[2]=GINT_TO_POINTER(mode);
-                    TRACE("** single rm thread requested\n");
-                    
-                    rfm_view_thread_create(widgets_p->view_p, do_the_remove, arg, "do_the_remove");   
-                }*/
-                // rm operation
+                 // rm operation
+                if (!Gio<Type>::doIt(rmDialog, (gchar *)list->data, MODE_RM)){
+                    DBG("Cannot delete %s\n", (gchar *)list->data);
+                   break;
+                }
                 removeItemFromList(rmDialog, list->data);
                 break;
             }
+            case RM_YES_ALL:
+            {
+                if (!Gio<Type>::multiDoIt(rmDialog, _("Delete"), "edit-delete", list, MODE_RM)){
+                    DBG("Cannot multiDelete %s\n", (gchar *)list->data);
+                    break;
+                }
+                removeAllFromList(rmDialog);
+                break;
+            }
+
+            case SHRED_YES:
+                DBG( "**single shred: %s\n", (gchar *)list->data);
+                 // Shred operation
+                removeItemFromList(rmDialog, list->data);
+               break;
             case RM_NO:
             {
                 DBG( "remove cancelled: %s\n", (gchar *)list->data);
@@ -416,28 +331,8 @@ private:
             ////////////////////////////////
             case SHRED_YES_ALL:
                 DBG( "shred all\n");
-                mode = MODE_SHRED;
                 removeAllFromList(rmDialog);
                 break;
-            case RM_YES_ALL:
-            {
-                /*GList *full_list = NULL;
-                DBG( "remove all\n");
-                for (auto tmp = list; tmp && tmp->data; tmp=tmp->next){
-                    TRACE( "**remove all: %s\n", (gchar *)tmp->data);
-                    full_list = g_list_append (full_list, g_strdup((gchar *)tmp->data));
-                }
-                {
-                    void **arg =(void **)malloc(3*sizeof(void *));
-                    if (!arg) g_error("malloc: %s\n", strerror(errno));
-                    arg[0]=widgets_p;
-                    arg[1]=full_list;
-                    arg[2]=GINT_TO_POINTER(mode);
-                    rfm_view_thread_create(widgets_p->view_p, do_the_remove, arg, "do_the_remove");
-                }*/
-                removeAllFromList(rmDialog);
-                break;
-            }
             case RM_CANCEL:
                 DBG( "**cancel remove\n");
                 removeAllFromList(rmDialog);

@@ -50,6 +50,8 @@ class CommandProgressResponse {
     using util_c = Util<double>;
 
 public:
+    // FIXME: operation is too fast to show dialog, operations are
+    //        all queued to background, so the dialog is superfluos
     static GtkWindow *
     dialog(const gchar *message, const gchar *icon, 
 	    const gchar *command,
@@ -75,7 +77,25 @@ public:
 	    gtk_progress_bar_set_show_text (progress, TRUE);
 	    gtk_progress_bar_set_fraction(progress, (double)count/items);
 	    while (gtk_events_pending()) gtk_main_iteration(); 
-	    
+            gchar **argv;
+            gint argc;
+	    g_shell_parse_argv (command,
+                    &argc,
+                    &argv,
+                    NULL);
+            const gchar *arg[argc+3];
+            for (int i=0; i<argc; i++){
+                arg[i] = argv[i];
+            }
+            arg[argc] = (const gchar *)l->data;
+            arg[argc+1] = target;
+            arg[argc+2] = 0;
+            Run<Type>::thread_run(NULL, arg, 
+                    Run<Type>::run_operate_stdout, 
+                    Run<Type>::run_operate_stderr, 
+                    NULL);
+            g_strfreev(argv);
+          /*      
 	    auto src = (const gchar *)l->data;
 	    gchar *text2 = g_strdup_printf("%s \"%s\" \"%s\"",  command, src, target);
 	    FILE *pipe = popen (text2, "r");
@@ -85,13 +105,13 @@ public:
 		return NULL;
 	    }
 	    g_free(text2);
-
 	    gchar line[256];
 	    memset(line, 0, 256);
 	    while (fgets (line, 255, pipe) && !feof(pipe)) {
                 if (line[0] != '\n') DBG("CommandProgressResponse:: %s", line);
 	    }
 	    pclose (pipe);
+            */
 	    count++;
 	}
 	gtk_widget_destroy(GTK_WIDGET(dialog));

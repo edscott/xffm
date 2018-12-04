@@ -38,6 +38,7 @@ public:
 	Settings<Type>::readSettings();
 	dialog_ = GTK_WINDOW(gtk_window_new (GTK_WINDOW_TOPLEVEL));
         mainWindow = GTK_WIDGET(dialog_);
+        g_object_set_data(G_OBJECT(mainWindow), "dialogObject", (void *)this);
         g_signal_connect (G_OBJECT (dialog_), "delete-event", EVENT_CALLBACK (dialogSignals<Type>::delete_event), NULL);
 
         gtk_widget_set_has_tooltip (GTK_WIDGET(dialog_), TRUE);

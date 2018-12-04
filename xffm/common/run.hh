@@ -18,6 +18,7 @@ static pthread_mutex_t string_hash_mutex=PTHREAD_MUTEX_INITIALIZER;
 static GHashTable *stringHash = NULL;
 namespace xf 
 {
+template <class Type> class Dialog;
 template <class Type>
 class Run {
     using print_c = Print<double>;
@@ -232,7 +233,16 @@ public:
 
     static void
     run_operate_stdout (void *data, void *stream, int childFD) {
-        GtkTextView *textview = GTK_TEXT_VIEW(data);
+        GtkTextView *textview;
+        if (!data){
+            auto dialogObject = (Dialog<Type> *)
+                g_object_get_data(G_OBJECT(mainWindow), "dialogObject");
+            auto page = dialogObject->currentPageObject();
+            textview = page->output();
+            
+        } else {
+           textview = GTK_TEXT_VIEW(data);
+        }
         if (!gtk_widget_is_visible(GTK_WIDGET(textview))) return;
         /*
         view_c *view_p = (view_c *)data;
@@ -298,8 +308,20 @@ public:
     }
     static void
     run_operate_stderr (void *data, void *stream, int childFD) {
-        auto textview = GTK_TEXT_VIEW(data);
-        if (!gtk_widget_is_visible(GTK_WIDGET(textview))) return;
+        GtkTextView *textview;
+        if (!data){
+            auto dialogObject = (Dialog<Type> *)
+                g_object_get_data(G_OBJECT(mainWindow), "dialogObject");
+            auto page = dialogObject->currentPageObject();
+            textview = page->output();
+            
+        } else {
+           textview = GTK_TEXT_VIEW(data);
+        }  
+
+        Print<Type>::show_text(textview);      
+        //if (!gtk_widget_is_visible(GTK_WIDGET(textview))) return;
+        
         /*view_c *view_p = (view_c *)data;
         window_c *window_p = (window_c *)(view_p->get_window_v());
         if (!window_p->is_view_in_list(data)) return;*/
