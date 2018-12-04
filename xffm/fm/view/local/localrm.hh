@@ -89,10 +89,16 @@ private:
         if(g_list_length (list) < 2) {
             gtk_widget_hide(togglebutton);
         }
-        gtk_main();
+	gtk_widget_show (GTK_WIDGET(rmDialog));
+	gint response = gtk_dialog_run(GTK_DIALOG(rmDialog));
+        //list = (GList *)g_object_get_data(G_OBJECT(rmDialog), "list");
+
+	apply_action(rmDialog);
         list = (GList *)g_object_get_data(G_OBJECT(rmDialog), "list");
+	
         gtk_widget_hide(GTK_WIDGET(rmDialog));
         gtk_widget_destroy(GTK_WIDGET(rmDialog));
+	
         return list;
    }
 
@@ -164,7 +170,7 @@ private:
 	auto button = Gtk<Type>::dialog_button ("window-close", _("Cancel"));
 	gtk_container_add (GTK_CONTAINER (buttonbox),GTK_WIDGET(button));
 	g_signal_connect (G_OBJECT (button), "clicked", 
-		G_CALLBACK (apply_action), GINT_TO_POINTER(RM_CANCEL));
+		G_CALLBACK (responseAction), GINT_TO_POINTER(RM_CANCEL));
 	g_object_set_data(G_OBJECT(button), "rmDialog", rmDialog);
 	g_object_set_data(G_OBJECT(rmDialog), "cancelbutton", button);
     /****************/
@@ -172,7 +178,7 @@ private:
 	button = Gtk<Type>::dialog_button ("edit-delete/NE/edit-delete-symbolic/2.0/150", _("Shred"));
 	gtk_container_add (GTK_CONTAINER (buttonbox), GTK_WIDGET(button));
 	g_signal_connect (G_OBJECT (button), "clicked", 
-		G_CALLBACK (apply_action), GINT_TO_POINTER(SHRED_YES));
+		G_CALLBACK (responseAction), GINT_TO_POINTER(SHRED_YES));
 	g_object_set_data(G_OBJECT(button), "rmDialog", rmDialog);
 
     /****************/
@@ -180,14 +186,14 @@ private:
 	button = Gtk<Type>::dialog_button ("edit-delete", _("Delete"));
 	gtk_container_add (GTK_CONTAINER (buttonbox), GTK_WIDGET(button));
 	g_signal_connect (G_OBJECT (button), "clicked", 
-		G_CALLBACK (apply_action), GINT_TO_POINTER(RM_YES));
+		G_CALLBACK (responseAction), GINT_TO_POINTER(RM_YES));
 	g_object_set_data(G_OBJECT(button), "rmDialog", rmDialog);
 
 
 	button = Gtk<Type>::dialog_button ("user-trash", _("Trash"));
 	gtk_container_add (GTK_CONTAINER (buttonbox), GTK_WIDGET(button));
 	g_signal_connect (G_OBJECT (button), "clicked", 
-		G_CALLBACK (apply_action), GINT_TO_POINTER(TRASH_YES));
+		G_CALLBACK (responseAction), GINT_TO_POINTER(TRASH_YES));
 	g_object_set_data(G_OBJECT(button), "rmDialog", rmDialog);
 	g_object_set_data(G_OBJECT(rmDialog), "trashbutton", button);
 
@@ -199,8 +205,7 @@ private:
 
 	gtk_widget_grab_focus (GTK_WIDGET(button));
 
-	gtk_window_set_position(rmDialog, GTK_WIN_POS_CENTER);
-	gtk_widget_show (GTK_WIDGET(rmDialog));
+	gtk_window_set_position(rmDialog, GTK_WIN_POS_MOUSE);
 
 
      
@@ -213,7 +218,7 @@ private:
     on_destroy_event (GtkWidget * rmDialog, GdkEvent * event, gpointer data) {
         // Send cancel response
 	auto  button=GTK_WIDGET(g_object_get_data(G_OBJECT(rmDialog), "cancelbutton"));
-	apply_action(button, GINT_TO_POINTER(RM_CANCEL));
+	responseAction(button, GINT_TO_POINTER(RM_CANCEL));
 	return TRUE;
     }
 
@@ -297,7 +302,7 @@ private:
     }
 
     static void
-    apply_action(GtkWidget * button, gpointer data){
+    responseAction(GtkWidget * button, gpointer data){
         auto dialog=GTK_WIDGET(g_object_get_data(G_OBJECT(button), "rmDialog"));
         auto list = (GList *)g_object_get_data(G_OBJECT(dialog), "list");
         gtk_widget_hide(dialog);
@@ -310,7 +315,15 @@ private:
         else if (result == SHRED_YES && apply_to_all) result=SHRED_YES_ALL;
         else if (result == RM_NO && apply_to_all) result=RM_CANCEL;
         else if (result == TRASH_YES && apply_to_all) result=TRASH_YES_ALL;
-        
+	gtk_dialog_response(dialog, result);
+
+    }
+
+    static void
+    //apply_action(GtkWidget * button, gpointer data){
+    apply_action(GtkDialog *rmDialog){
+        list = (GList *)g_object_get_data(G_OBJECT(rmDialog), "list");
+       
         TRACE( "**apply_action: 0x%x\n", result);
 
         gint mode = MODE_RM;
@@ -319,10 +332,10 @@ private:
                 DBG( "**single trash: %s\n", (gchar *)list->data);
                 mode = MODE_TRASH;
                 // Trash operation
-                if (!trashIt((gchar *)list->data)){
+                if (!trashIt(rmDialog, (gchar *)list->data)){
                     // FIXME: do a quick help dialog here...
                     DBG("Cannot trash %s\n", (gchar *)list->data);
-                    gchar *m = g_strdup_printf(_("Could not move %s to trash"), (gchar *)list->data);
+                    //gchar *m = g_strdup_printf(_("Could not move %s to trash"), (gchar *)list->data);
                    //TimeoutResponse<Type>::dialog(m, "dialog-error");
                    //Gtk<Type>::quickHelp(GTK_WINDOW(mainWindow), m, "dialog-error");
                    break;
@@ -333,7 +346,7 @@ private:
             case TRASH_YES_ALL:
                 DBG( "trash all\n");
                 mode = MODE_TRASH;
-                if (!multiTrash(_("Trash"), "user-trash", list)){
+                if (!multiTrash(rmDialog, _("Trash"), "user-trash", list)){
                     DBG("Cannot multiTrash %s\n", (gchar *)list->data);
                     break;
                 }
@@ -410,7 +423,7 @@ private:
             }
         }
         gtk_widget_hide(dialog);
-        gtk_main_quit();
+        //gtk_main_quit();
 
         // We are already in a thread environment here, so there is no need to
         // spawn another thread.
