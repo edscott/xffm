@@ -314,7 +314,7 @@ public:
             } else if (strstr(line, "warning")||strstr(line, _("warning"))) {
                 print_c::print(textview, "yellow", g_strdup(line));
             } else {                
-                print_c::print(textview, "Red", g_strdup(line));
+                print_c::print(textview, "bold", g_strdup(line));
             }
                 //print_c::print(textview, g_strdup(line));
         }

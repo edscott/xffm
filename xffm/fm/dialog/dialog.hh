@@ -112,7 +112,7 @@ public:
             if (!strstr(f, "part")){
                 gchar *path = Fstab<Type>::id2Partition(f);
                 gchar *markup = g_strdup_printf("%s %s", _("Removed"), base);
-                TimeoutResponse<Type>::dialog(markup, "drive-harddisk/SE/go-down/3.0/180");
+                TimeoutResponse<Type>::dialog(NULL, markup, "drive-harddisk/SE/go-down/3.0/180");
                 g_free(markup);
                 g_free(path);
                 DBG("*** Device has been removed: %s\n", f);
@@ -125,7 +125,7 @@ public:
                 gchar *path = Fstab<Type>::id2Partition(f);
                 gchar *label = Fstab<Type>::e2Label(path);
                 gchar *markup = g_strdup_printf("%s    <span color=\"red\">%s</span>    <span color=\"green\">%s</span>\n%s\n", g, path, label?label:"", base );
-                TimeoutResponse<Type>::dialog(markup, "drive-harddisk/SE/go-up/3.0/180");
+                TimeoutResponse<Type>::dialog(NULL, markup, "drive-harddisk/SE/go-up/3.0/180");
                 g_free(markup);
                 g_free(path);
                 g_free(label);

@@ -12,13 +12,14 @@ class TimeoutResponse {
     using util_c = Util<double>;
 public:
     static void
-    dialog(const gchar *message, const gchar *icon){
+    dialog(GtkWindow *parent, const gchar *message, const gchar *icon){
         if (!icon) icon = "emblem-important";
         if (!message) message = "<span size=\"larger\" color=\"blue\">Custom message markup appears <span color=\"red\">here</span></span>";
          // Create the widgets
          auto dialog = GTK_WINDOW(gtk_window_new (GTK_WINDOW_TOPLEVEL));
-         gtk_window_set_keep_above (dialog,TRUE);
-
+         //gtk_window_set_keep_above (dialog,TRUE);
+         if (!parent) parent = GTK_WINDOW(mainWindow);
+         gtk_window_set_transient_for(dialog, parent);
          //gtk_window_set_position(dialog, GTK_WIN_POS_MOUSE);
          gtk_window_move(dialog, 0,0);
 
@@ -47,17 +48,24 @@ public:
          gtk_window_set_modal(dialog, TRUE);
          gtk_window_set_transient_for (dialog,GTK_WINDOW(mainWindow));
         
+	 gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER_ON_PARENT);
          gtk_widget_show_all(GTK_WIDGET(dialog));
-         while (gtk_events_pending()) gtk_main_iteration();
+         time_t now = time(NULL);
+         while (time(NULL) < now + 3) {
+            while (gtk_events_pending()) gtk_main_iteration();
+          //  usleep(100000);
+         }
 
-         void **arg = (void **)calloc(2, sizeof(void *));
 
-         g_timeout_add_seconds (4, sleepit, (void *) dialog);
+         //void **arg = (void **)calloc(2, sizeof(void *));
+         //g_timeout_add_seconds (4, zapit, (void *) dialog);
+         zapit((void *)dialog);   
+
          return;
     }
 private:
     static gboolean
-    sleepit(void *data){
+    zapit(void *data){
         auto dialog = GTK_WIDGET(data);
         gtk_widget_hide(GTK_WIDGET(dialog));
         gtk_widget_destroy(GTK_WIDGET(dialog));
