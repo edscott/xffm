@@ -300,12 +300,6 @@ private:
         }
         if ((st->st_mode & S_IFMT) == S_IFDIR) {
             TRACE("dir emblem...\n");
-            if (Fstab<Type>::isMounted(path)){
-                return g_strdup("/NW/greenball/3.0/180");
-            }
-            if (Fstab<Type>::isInFstab(path)){
-                return g_strdup("/NW/grayball/3.0/180");
-            }
 
             // all access:
             if (O_ALL(st->st_mode)){
@@ -366,6 +360,17 @@ private:
     }
 
     static gchar *
+    addEmblem(gchar *emblem, const gchar *newEmblem){
+        if (!newEmblem) return emblem;
+        if (!emblem) emblem = g_strdup(newEmblem);
+        else {
+            gchar *g = g_strconcat(emblem, newEmblem, NULL);
+            g_free(emblem);
+            emblem = g;
+        }
+        return emblem;
+    }
+    static gchar *
     getEmblem(xd_t *xd_p){
         // No emblem for go up
         if (strcmp(xd_p->d_name, "..")==0) return g_strdup("");
@@ -374,15 +379,29 @@ private:
         //       do the color thing with cut status...
 
         // First we work on d_type (no stat)
-        gchar *emblem = linkEmblem(xd_p);
-        if (xd_p->d_type == DT_LNK){
-            return emblem;
-        }
+        gchar *emblem = NULL;
+
+        gboolean is_lnk = FALSE;
+#ifdef HAVE_STRUCT_DIRENT_D_TYPE
+        is_lnk = (xd_p->d_type == DT_LNK);
+#endif
+        // Symlinks:
+        if (is_lnk) return g_strdup("/SW/emblem-symbolic-link/2.0/220");       
+
         if (RootView<Type>::isBookmarked(xd_p->path)){
-            return g_strdup("/SE/bookmark-new/2.0/220");
+            emblem = g_strdup("/SE/bookmark-new/2.0/220");
         }
-        g_free(emblem);
-	emblem = LocalClipBoard<Type>::clipBoardEmblem(xd_p->path);
+
+	gchar *clipEmblem = LocalClipBoard<Type>::clipBoardEmblem(xd_p->path);
+        emblem = addEmblem(emblem, clipEmblem);
+        g_free(clipEmblem);
+
+        if (Fstab<Type>::isMounted(xd_p->path)){
+            emblem = addEmblem(emblem, "/NW/greenball/3.0/180");
+        } else if (Fstab<Type>::isInFstab(xd_p->path)){
+            emblem = addEmblem(emblem, "/NW/grayball/3.0/180");
+        }
+
 	if (!emblem) emblem = statEmblem(xd_p->path, xd_p->st);
 	if (!emblem) emblem = g_strdup("");
 
@@ -411,15 +430,25 @@ private:
             g_free(base);
             return g_strdup("");
         }
-        
+        gchar *emblem = NULL;
         if ((st->st_mode & S_IFMT) == S_IFLNK){
             return g_strdup("/SW/emblem-symbolic-link/2.0/220");
         }
         if (RootView<Type>::isBookmarked(path)){
-            return g_strdup("/SE/bookmark-new/2.0/220");
+            emblem = g_strdup("/SE/bookmark-new/2.0/220");
         }
-	gchar *emblem = LocalClipBoard<Type>::clipBoardEmblem(path);
-	if (!emblem) emblem = statEmblem(path, st);
+
+	gchar *clipEmblem = LocalClipBoard<Type>::clipBoardEmblem(path);
+        emblem = addEmblem(emblem, clipEmblem);
+        g_free(clipEmblem);
+
+        if (Fstab<Type>::isMounted(path)){
+            emblem = addEmblem(emblem, "/NW/greenball/3.0/180");
+        } else if (Fstab<Type>::isInFstab(path)){
+            emblem = addEmblem(emblem, "/NW/grayball/3.0/180");
+        }
+
+        if (!emblem) emblem = statEmblem(path, st);
 	if (!emblem) emblem = g_strdup("");
         TRACE("getEmblem: %s --> %s\n", path, emblem);
 
@@ -438,19 +467,6 @@ private:
         TRACE("fullEmblem: %s --> %s\n", path, fullEmblem);
         g_free(base);
 	return fullEmblem;
-    }
-
-    static gchar *
-    linkEmblem(xd_t *xd_p){
-        gchar *emblem;
-        gboolean is_dir = FALSE;
-        gboolean is_lnk = FALSE;
-#ifdef HAVE_STRUCT_DIRENT_D_TYPE
-        is_lnk = (xd_p->d_type == DT_LNK);
-#endif
-        if (!is_lnk) return g_strdup("");
-        // Symlinks:
-        return g_strdup("/SW/emblem-symbolic-link/2.0/220");        
     }
 
 
