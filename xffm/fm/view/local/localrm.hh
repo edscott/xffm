@@ -289,7 +289,8 @@ private:
                 break;
             case TRASH_YES_ALL:
                 DBG( "trash all\n");
-                if (!Gio<Type>::multiDoIt(rmDialog, _("Trash"), "user-trash", list, MODE_TRASH)){
+                if (!Gio<Type>::multiDoIt(rmDialog, list, MODE_TRASH)){
+                //if (!Gio<Type>::multiDoIt(rmDialog, _("Trash"), "user-trash", list, MODE_TRASH)){
                     DBG("Cannot multiTrash %s\n", (gchar *)list->data);
                     break;
                 }
@@ -309,7 +310,7 @@ private:
             }
             case RM_YES_ALL:
             {
-                if (!Gio<Type>::multiDoIt(rmDialog, _("Delete"), "edit-delete", list, MODE_RM)){
+                if (!Gio<Type>::multiDoIt(rmDialog, list, MODE_RM)){
                     DBG("Cannot multiDelete %s\n", (gchar *)list->data);
                     break;
                 }
@@ -329,7 +330,7 @@ private:
                break;
             case SHRED_YES_ALL:
                 DBG( "shred all\n");
-                if (!Gio<Type>::multiDoIt(rmDialog, _("Shred"), "edit-delete/NE/edit-delete-symbolic/2.0/150", list, MODE_SHRED)){
+                if (!Gio<Type>::multiDoIt(rmDialog, list, MODE_SHRED)){
                     DBG("Cannot multishred %s\n", (gchar *)list->data);
                     break;
                 }

@@ -25,7 +25,7 @@ public:
             auto command = "cp -R -b -f";
             DBG("execute(%s, %s, files, %s)\n", message, command, target);
 
-            Gio<Type>::execute(message, "edit-copy", files, target, MODE_COPY);
+            Gio<Type>::execute(files, target, MODE_COPY);
             /*if (!LocalDnd<Type>::execute(message, command, files, target)){
 		    DBG("pasteClip: failed \"%s\"\n", command);
 	    }*/
@@ -34,7 +34,7 @@ public:
             auto message = _("Moving files");
             auto command = "mv -b -f";
             DBG("execute(%s, %s, files, %s)\n", message, command, target);
-            Gio<Type>::execute(message, "edit-copy/NE/edit-cut/2.0/220", files, target, MODE_MOVE);
+            Gio<Type>::execute(files, target, MODE_MOVE);
             /*if (!LocalDnd<Type>::execute(message, command, files, target)){
 		    DBG("pasteClip: failed \"%s\"\n", command);
 	    }*/

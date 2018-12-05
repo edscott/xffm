@@ -52,7 +52,7 @@ public:
         auto dndData = (const char *)gtk_selection_data_get_data (selection_data);
 
         gchar **files = g_strsplit(dndData, "\n", -1);
-        auto result = Gio<Type>::execute(message, icon, files, target? target: baseView->path(), mode);
+        auto result = Gio<Type>::execute(files, target? target: baseView->path(), mode);
         if (files) g_strfreev(files);
         return result;
     }

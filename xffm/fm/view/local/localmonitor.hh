@@ -8,6 +8,31 @@ template <class Type>
 class LocalMonitor: public BaseMonitor<Type>
 {
     void **mountArg_; // Needs to exist until destructor is called.
+    static gboolean findInModel (GtkTreeModel *treeModel,
+                            GtkTreePath *tpath,
+                            GtkTreeIter *iter,
+                            gpointer data){
+        auto arg = (void **)data;
+        auto needle = (const gchar *)arg[0];
+        gchar *path;
+        gtk_tree_model_get (treeModel, iter, PATH, &path, -1);
+        if (strcmp(path, needle) == 0){
+            arg[1] = GINT_TO_POINTER(1);
+            g_free(path);
+            return TRUE;
+        }
+        g_free(path);
+        return FALSE;
+    }
+    static gboolean isInModel(GtkTreeModel *treeModel, const gchar *path){
+        void *arg[2] = {
+            (void *)path,
+            NULL}
+        ;
+        gtk_tree_model_foreach(treeModel, findInModel, (void *)arg);
+        if (arg[1]) return TRUE;
+        return FALSE;
+    }
 public:    
     LocalMonitor(GtkTreeModel *treeModel, BaseView<Type> *baseView):
         BaseMonitor<Type>(treeModel, baseView)
@@ -178,9 +203,9 @@ private:
             case G_FILE_MONITOR_EVENT_CREATED:
             case G_FILE_MONITOR_EVENT_MOVED_IN:
                 TRACE("Received  CREATED (%d): \"%s\", \"%s\"\n", event, f, s);
-                /*if (g_file_test(f, G_FILE_TEST_EXISTS)){
+                /*if (isInModel(p->treeModel(), f)){
                     p->restat_item(first);
-                } else */
+                } else*/ 
                 {
                     p->add_new_item(first);
                     p->updateFileCountLabel();
@@ -205,9 +230,12 @@ private:
                 break;
             case G_FILE_MONITOR_EVENT_MOVED:
             case G_FILE_MONITOR_EVENT_RENAMED:
-                TRACE("Received  MOVED (%d): \"%s\", \"%s\"\n", event, f, s);
+                WARN("Received  MOVED (%d): \"%s\", \"%s\"\n", event, f, s);
                 p->remove_item(first);
-                p->add_new_item(second);
+                if (isInModel(p->treeModel(), s))
+                {
+                    p->restat_item(second);
+                } else p->add_new_item(second);
                 break;
             case G_FILE_MONITOR_EVENT_CHANGES_DONE_HINT:
                TRACE("Received  CHANGES_DONE_HINT (%d): \"%s\", \"%s\"\n", event, f, s);

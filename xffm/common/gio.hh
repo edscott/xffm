@@ -126,7 +126,7 @@ class Gio {
     }
 public:
     static gboolean 
-    execute(const gchar *message, const gchar *icon, gchar **files, const gchar *target, gint mode){
+    execute(gchar **files, const gchar *target, gint mode){
         if (!files) {
             WARN("!files\n");
             return FALSE;
@@ -146,7 +146,7 @@ public:
 	    ERROR("LocalDnd::execute: target cannot be NULL\n");
             return FALSE;
         }
-        WARN("LocalDnd::execute: source=%s target=%s command=%s\n", source, target, 
+        WARN("execute: source=%s target=%s command=%s\n", source, target, 
                 mode==MODE_COPY?"copy":mode==MODE_MOVE?"move":"link");
         gboolean result = FALSE;
         if (strcmp(source, target) ) result = TRUE;
@@ -158,7 +158,7 @@ public:
 	g_free(source);
 
         GList *fileList = removeUriFormat(files);
-        multiDoIt(message, icon, fileList, target, mode);
+        multiDoIt(fileList, target, mode);
 
         for (auto l=fileList; l && l->data; l= l->next) g_free(l->data);
         g_list_free(fileList);
@@ -207,13 +207,19 @@ public:
                }
                break;
             case MODE_LINK:
-               if (g_file_test(path, G_FILE_TEST_IS_DIR)){
-		   GNUln(path, target);
-               } else {
-		   GNUln(path, target);
-                   // retval = g_file_create_symbolic_link (file, NULL, &error);
-               }
+            {   
+               //GNUln(path, target);
+               gchar *base = g_path_get_basename(path);
+               GFile *link = g_file_new_build_filename(target, base, NULL);
+               WARN("*** %s --> %s\n", link, path);
+               g_free(base);
+               retval = g_file_make_symbolic_link (link, 
+                           path,
+                           NULL,
+                        &error);
+               g_object_unref(link);
                break;
+            }
         }
         if (error){
             gchar *m;
@@ -221,6 +227,8 @@ public:
                 m = g_strdup_printf("%s %s", _("Could not copy item:"), path);
             else if (mode == MODE_MOVE) 
                 m = g_strdup_printf("%s %s", _("Could not move item:"), path);
+            else if (mode == MODE_LINK)
+                m = g_strdup_printf("%s --> \"%s\"", _("Create symbolic link"), path);
             gchar *message = g_strdup_printf("<span color=\"red\">%s</span>\n(%s)", m, error->message);
             TimeoutResponse<Type>::dialog(GTK_WINDOW(mainWindow), message, "dialog-error");
             g_free(m);
@@ -269,29 +277,16 @@ public:
     }
 
     static gboolean
-    multiDoIt(const gchar *message, const gchar *icon, GList *fileList, const gchar *target, gint mode)
+    multiDoIt(GList *fileList, const gchar *target, gint mode)
     {
         if (mode != MODE_COPY && mode != MODE_LINK && mode != MODE_MOVE) 
 	    return FALSE;
 	gint items = g_list_length(fileList);
 	if (!items) return FALSE;
 
-	auto dialog = BaseProgressResponse<Type>::dialog(message, icon);
-	auto progress = GTK_PROGRESS_BAR(g_object_get_data(G_OBJECT(dialog), "progress"));
-
-        gtk_window_set_title(dialog, message);
-	gtk_widget_show_all (GTK_WIDGET(dialog));
-
-	
 	gint count = 0;
         gboolean retval;
         for (auto l = fileList; l && l->data; l=l->next) {
-	    gchar *text = g_strdup_printf("%s %d/%d", _("Items:"), count+1, items); 
-	    gtk_progress_bar_set_text (progress, text);
-	    g_free(text);
-	    gtk_progress_bar_set_show_text (progress, TRUE);
-	    gtk_progress_bar_set_fraction(progress, (double)count/items);
-	    while (gtk_events_pending()) gtk_main_iteration(); 
 	    auto path = (const gchar *)l->data;
             // Try first item in foreground.
             if (!count) {
@@ -311,35 +306,21 @@ public:
 	    }
 	    count++;
 	}
-	gtk_widget_destroy(GTK_WIDGET(dialog));
 	return retval;
     }
 
 
     static gboolean
-    multiDoIt(GtkDialog *rmDialog, const gchar *message, const gchar *icon, GList *fileList, gint mode)
+    multiDoIt(GtkDialog *rmDialog, GList *fileList, gint mode)
     {
         if (mode != MODE_RM && mode != MODE_TRASH && mode != MODE_SHRED)
 	    return FALSE;
 	gint items = g_list_length(fileList);
 	if (!items) return FALSE;
 
-	auto dialog = BaseProgressResponse<Type>::dialog(message, icon);
-	auto progress = GTK_PROGRESS_BAR(g_object_get_data(G_OBJECT(dialog), "progress"));
-
-        gtk_window_set_title(dialog, message);
-	gtk_widget_show_all (GTK_WIDGET(dialog));
-
-	
 	gint count = 0;
         gboolean retval;
         for (auto l = fileList; l && l->data; l=l->next) {
-	    gchar *text = g_strdup_printf("%s %d/%d", _("Items:"), count+1, items); 
-	    gtk_progress_bar_set_text (progress, text);
-	    g_free(text);
-	    gtk_progress_bar_set_show_text (progress, TRUE);
-	    gtk_progress_bar_set_fraction(progress, (double)count/items);
-	    while (gtk_events_pending()) gtk_main_iteration(); 
 	    auto path = (const gchar *)l->data;
             // Try first item in foreground.
             if (!count) {
@@ -371,7 +352,6 @@ public:
 	    }
 	    count++;
 	}
-	gtk_widget_destroy(GTK_WIDGET(dialog));
 	return retval;
     }
 
