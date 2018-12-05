@@ -6,6 +6,38 @@
 #include "fm/view/fstab/fstab.hh"
 #include "localclipboard.hh"
 
+static const gchar *directoryItems[] ={
+    "Open in New Tab",
+    "Create a compressed archive with the selected objects",
+    "Mount the volume associated with this folder",
+    "Unmount the volume associated with this folder",
+    "Add bookmark",
+    "Remove bookmark",
+NULL};
+
+static const gchar *regularItems[]={
+    "mimetypeOpen",
+    "Open with",
+    "Run Executable...",
+    "Extract files from the archive",
+};
+
+static const gchar *commonItems[]={
+    "Copy",
+    "Cut",
+    "Paste",
+    "Rename",
+    "Duplicate",
+    "Link",
+    "Properties",
+    "Delete",
+    NULL,
+};
+
+static const gchar *generalItems[]={
+    "title",
+};
+
 namespace xf
 {
 
@@ -24,10 +56,37 @@ class LocalPopUp {
     using pixbuf_icons_c = Icons<Type>;
     using page_c = Page<Type>;
 
-
-
 public:
 
+    static GtkMenu *createLocalPopUp(void){
+         menuItem_t item[]={
+	    {N_("New"), (void *)newItem, NULL, NULL},
+            {N_("Open in New Tab"), NULL, NULL, NULL},
+            {N_("Open in New Window"), NULL, NULL, NULL},
+            
+	    {N_("Copy"), (void *)LocalClipBoard<Type>::copy, NULL, NULL},
+	    {N_("Cut"), (void *)LocalClipBoard<Type>::cut, NULL, NULL},
+	    {N_("Paste"), (void *)LocalClipBoard<Type>::paste, NULL, NULL},
+	    {N_("Delete"), (void *)LocalRm<Type>::rm, NULL, NULL},
+            //{N_("About"), NULL, (void *) menu},
+            //
+            //only for listview: {N_("Sort by size"), NULL, (void *) menu},
+            //only for listview: {N_("Sort by date"), NULL, (void *) menu},
+            
+            {N_("Select All"), NULL, NULL, NULL},
+            {N_("Select Items Matching..."), NULL, NULL, NULL},
+            {N_("View as list"), NULL, NULL, NULL},
+            {N_("Show hidden files"), (void *)toggleItem, 
+                (void *) "ShowHidden", "ShowHidden"},
+            {N_("Show Backup Files"), (void *)toggleItem, 
+                (void *) "ShowBackups", "ShowBackups"},
+            {N_("Sort data in descending order"), (void *)toggleItem, 
+                (void *) "Descending", "Descending"},
+            {NULL,NULL,NULL, NULL}};
+	localPopUp = BasePopUp<Type>::createPopup(item); 
+        decorateEditItems(localPopUp);
+        return localPopUp;        
+    }  
 
     static GtkMenu *createLocalItemPopUp(void){
 	menuItem_t item[]=
@@ -47,22 +106,64 @@ public:
 	    {N_("Copy"), (void *)LocalClipBoard<Type>::copy, NULL, NULL},
 	    {N_("Cut"), (void *)LocalClipBoard<Type>::cut, NULL, NULL},
 	    {N_("Paste"), (void *)LocalClipBoard<Type>::paste, NULL, NULL},
-	    {N_("bcrypt"), NULL, NULL, NULL},
+	    {N_("Delete"), (void *)LocalRm<Type>::rm, NULL, NULL},
 	    {N_("Rename"), NULL, NULL, NULL},
 	    {N_("Duplicate"), NULL, NULL, NULL}, 
 	    {N_("Link"), NULL, NULL, NULL},
-	    {N_("Touch"), NULL, NULL, NULL},
-	    {N_("File Information..."), NULL, NULL, NULL},
 	    {N_("Properties"), NULL, NULL, NULL},
-	    {N_("Delete"), (void *)LocalRm<Type>::rm, NULL, NULL},
-	    //{N_("Mimetype command"), NULL, NULL, NULL},
-	    {N_("autotype_Prun"), NULL, NULL, NULL},
 	     {NULL,NULL,NULL,NULL}
         };
 	localItemPopUp = BasePopUp<Type>::createPopup(item); 
+        // Customize most important menu items
+        GtkMenuItem *mItem;
+        gchar *markup;
+        decorateEditItems(localItemPopUp);
+        mItem = (GtkMenuItem *)g_object_get_data(G_OBJECT(localItemPopUp), "Open with");
+        markup = g_strdup_printf("<b>%s</b>", _("Open with"));
+        gtk_c::menu_item_content(mItem, "system-run", markup, -24);
+        g_free(markup);
+
+        const gchar *smallKey[]={
+            "Rename",
+            "Duplicate",
+            "Link",
+            "Properties",
+            NULL
+        };
+        for (auto k=smallKey; k && *k; k++){
+            mItem = (GtkMenuItem *)g_object_get_data(G_OBJECT(localItemPopUp), *k);
+            markup = g_strdup_printf("<span size=\"small\">%s</span>", _(*k));
+	    gtk_c::menu_item_content(mItem, "view-refresh-symbolic", markup, -16);
+	    g_free(markup);
+        }
+
+
         return localItemPopUp;
     }
-
+    static void
+    decorateEditItems(GtkMenu *menu){
+        const gchar *key[]={
+            "Cut",
+            "Copy",
+            "Paste",
+            "Delete",
+            NULL
+        };
+        const gchar *keyIcon[]={
+            "edit-cut",
+            "edit-copy",
+            "edit-paste",
+            "edit-delete",
+            NULL
+        };
+        gint i=0;
+        for (auto k=key; k && *k; k++, i++){
+            auto mItem = (GtkMenuItem *)g_object_get_data(G_OBJECT(menu), *k);
+            auto markup = g_strdup_printf("<span color=\"blue\">%s</span>", _(*k));
+	    gtk_c::menu_item_content(mItem, keyIcon[i], markup, -24);
+	    g_free(markup);
+        }
+    }
     static void
     resetLocalPopup(BaseView<Type> *baseView) {
         BasePopUp<Type>::clearKeys(localPopUp);
@@ -101,63 +202,65 @@ public:
 	BasePopUp<Type>::changeTitle(localPopUp);
     }
 
-/*
     static void
-    resetLocalItemPopup(BaseView<Type> *baseView, const GtkTreePath *tpath) {
-        // baseView data is set in BaseViewSignals on button press (button=3)
-	DBG("resetLocalItemPopup\n");
-	gchar *aname=NULL;
-	gchar *iconName=NULL;
-	gchar *path;
-	gchar *mimetype;
-	gchar *displayName;
-        GtkTreeIter iter;
+    resetMenuItems(BaseView<Type> *baseView, const GtkTreePath *tpath) {
+	GtkTreeIter iter;
 	GtkTreePath *ttpath = gtk_tree_path_copy(tpath);
 	if (!gtk_tree_model_get_iter (baseView->treeModel(), &iter, ttpath)) {
 	    gtk_tree_path_free(ttpath);
 	    return;
 	}
-	gtk_tree_path_free(ttpath);
-	gtk_tree_model_get (baseView->treeModel(), &iter, 
-		ACTUAL_NAME, &aname,
-		DISPLAY_NAME, &displayName,
-		ICON_NAME, &iconName,
-		MIMETYPE, &mimetype,
-		PATH, &path,
-		-1);
-	if (!path){
-	    ERROR("resetLocalItemPopup: path is NULL\n");
-	    return;
-	}
-	gchar *fileInfo = util_c::fileInfo(path);
-	if (!mimetype){
-	    auto m = Mime<Type>::mimeType(path); 
-	    mimetype = g_strdup(m); 
-	    gtk_list_store_set(GTK_LIST_STORE(baseView->treeModel()), &iter, 
-		MIMETYPE, mimetype, -1);
-	}
 
-	const gchar *keys[] = {"DISPLAY_NAME",  "PATH", "MIMETYPE", NULL};
-	const gchar **q;
-	for (q=keys; q && *q; q++){
-	    auto cleanup = (gchar *)g_object_get_data(G_OBJECT(localItemPopUp), *q);
-	    g_free(cleanup);
+	gtk_tree_path_free(ttpath);
+
+        //  single or multiple item selected?
+        GList *selection_list = gtk_icon_view_get_selected_items (baseView->iconView());
+        baseView->setSelectionList(selection_list);
+        setPath(baseView, selection_list, tpath);
+ 	// Set title element
+        BasePopUp<Type>::changeTitle(localItemPopUp);
+
+ 
+        // Hide all...
+        GList *children = gtk_container_get_children (GTK_CONTAINER(localItemPopUp));
+        for (GList *child = children; child && child->data; child=child->next){
+            gtk_widget_hide(GTK_WIDGET(child->data));
+        }
+            
+	auto v2 = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "title"));
+        gtk_widget_show(v2);
+	
+        auto fileInfo =(const gchar *)g_object_get_data(G_OBJECT(localItemPopUp), "fileInfo");
+        auto path =(const gchar *)g_object_get_data(G_OBJECT(localItemPopUp), "path");
+        auto mimetype =(const gchar *)g_object_get_data(G_OBJECT(localItemPopUp), "mimetype");
+        if (g_list_length(selection_list) > 1) {
+        } else {
+	    fileInfo = util_c::fileInfo(path);
+            runWithDialog(path);
+            // open with mimetype application
+            setUpMimeTypeApp(mimetype, path, fileInfo);
+            if (g_file_test(path, G_FILE_TEST_IS_DIR)) showDirectoryItems(path);
+        }
+        openWithDialog(path, mimetype, fileInfo);
+ 
+	for (auto k=commonItems; k && *k; k++){
+	    auto w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), *k));
+	    gtk_widget_show(w);
+            gtk_widget_set_sensitive(w, g_list_length(selection_list) > 0);
 	}
-	g_object_set_data(G_OBJECT(localItemPopUp), "DISPLAY_NAME", displayName);
-	g_object_set_data(G_OBJECT(localItemPopUp), "PATH", path);
-	g_object_set_data(G_OBJECT(localItemPopUp), "MIMETYPE", (void *)mimetype);
-        gchar *name = util_c::valid_utf_pathstring(aname);
-	// Set title element
-        BasePopUp<Type>::changeTitle(localItemPopUp, iconName, name, path, mimetype, fileInfo);
-	g_free(name);
-	g_free(aname);
-	g_free(iconName);
-	g_free(fileInfo);
-	// this now belongs to data of localItemPopup: g_free(path);
-	// this now belongs to localItemPopup: g_free(displayName);
-	// this now belongs to localItemPopup: g_free(mimetype);
     }
-*/
+
+    static GtkMenu *popUp(BaseView<Type> *baseView, const GtkTreePath *tpath){
+        if (!localItemPopUp) localItemPopUp = createLocalItemPopUp();   
+	resetMenuItems(baseView, tpath);
+        return localItemPopUp;
+    }
+    static GtkMenu *popUp(BaseView<Type> *baseView){
+        if (!localPopUp) localPopUp = createLocalPopUp();   
+        resetLocalPopup(baseView);
+        return localPopUp;
+    }
+
 private:
     static void
     runWithDialog(const gchar *path){
@@ -211,11 +314,9 @@ private:
             "Copy",
             "Cut",
             "Paste",
-            "bcrypt",
             "Rename",
             "Duplicate",
             "Link",
-            "Touch",
             "Properties",
             "Delete",
             NULL,
@@ -240,8 +341,6 @@ private:
                 auto oldPath = (gchar *)g_object_get_data(G_OBJECT(w), "path");
                 g_free(oldPath);
                 g_object_set_data(G_OBJECT(w), "path", g_strdup(path));
-
-                gtk_widget_show(w);
                 gtk_widget_show(w);
                 gtk_widget_set_sensitive(w, FALSE); // WIP
             }
@@ -350,109 +449,6 @@ private:
         }
        return;
     }
-public:
-    static void
-    resetMenuItems(BaseView<Type> *baseView, const GtkTreePath *tpath) {
-	GtkTreeIter iter;
-	GtkTreePath *ttpath = gtk_tree_path_copy(tpath);
-	if (!gtk_tree_model_get_iter (baseView->treeModel(), &iter, ttpath)) {
-	    gtk_tree_path_free(ttpath);
-	    return;
-	}
-
-	gtk_tree_path_free(ttpath);
-
-        //  single or multiple item selected?
-        GList *selection_list = gtk_icon_view_get_selected_items (baseView->iconView());
-        baseView->setSelectionList(selection_list);
-        setPath(baseView, selection_list, tpath);
- 	// Set title element
-        BasePopUp<Type>::changeTitle(localItemPopUp);
-
- 
-        // Hide all...
-        GList *children = gtk_container_get_children (GTK_CONTAINER(localItemPopUp));
-        for (GList *child = children; child && child->data; child=child->next){
-            gtk_widget_hide(GTK_WIDGET(child->data));
-        }
-            
-	auto v2 = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "title"));
-        gtk_widget_show(v2);
-	
-        auto fileInfo =(const gchar *)g_object_get_data(G_OBJECT(localItemPopUp), "fileInfo");
-        auto path =(const gchar *)g_object_get_data(G_OBJECT(localItemPopUp), "path");
-        auto mimetype =(const gchar *)g_object_get_data(G_OBJECT(localItemPopUp), "mimetype");
-        if (g_list_length(selection_list) > 1) {
-        } else {
-	    fileInfo = util_c::fileInfo(path);
-            runWithDialog(path);
-            // open with mimetype application
-            setUpMimeTypeApp(mimetype, path, fileInfo);
-            if (g_file_test(path, G_FILE_TEST_IS_DIR)) showDirectoryItems(path);
-        }
-        openWithDialog(path, mimetype, fileInfo);
-    //  Delete/trash/shred
-        const gchar *key[]={
-	    "Delete",
-	    "Cut",
-	    "Copy",
-	    NULL
-	};
-	for (auto k=key; k && *k; k++){
-	    auto w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), *k));
-	    gtk_widget_show(w);
-	    gtk_widget_set_sensitive(w, TRUE);
-	}
-    }
-
-    static GtkMenu *popUp(BaseView<Type> *baseView, const GtkTreePath *tpath){
-        if (!localItemPopUp) localItemPopUp = createLocalItemPopUp();   
-	resetMenuItems(baseView, tpath);
-        return localItemPopUp;
-    }
-    static GtkMenu *popUp(BaseView<Type> *baseView){
-        if (!localPopUp) localPopUp = createLocalPopUp();   
-        resetLocalPopup(baseView);
-        return localPopUp;
-    }
-    static GtkMenu *createLocalPopUp(void){
-         menuItem_t item[]={
-            {N_("Show hidden files"), (void *)toggleItem, 
-                (void *) "ShowHidden", "ShowHidden"},
-            {N_("Show Backup Files"), (void *)toggleItem, 
-                (void *) "ShowBackups", "ShowBackups"},
-	    {N_("New"), (void *)newItem, NULL, NULL},
-            {N_("Open in New Tab"), NULL, NULL, NULL},
-            {N_("Open in New Window"), NULL, NULL, NULL},
-            
-	    {N_("Copy"), (void *)LocalClipBoard<Type>::copy, NULL, NULL},
-	    {N_("Cut"), (void *)LocalClipBoard<Type>::cut, NULL, NULL},
-	    {N_("Paste"), (void *)LocalClipBoard<Type>::paste, NULL, NULL},
-	    {N_("Delete"), (void *)LocalRm<Type>::rm, NULL, NULL},
-             // main menu items
-            //{N_("Home"), NULL, (void *) menu},
-            //{N_("Open terminal"), NULL, (void *) menu},
-            //{N_("About"), NULL, (void *) menu},
-            //
-            //common buttons /(also an iconsize +/- button)
-            //{N_("Sort data in ascending order"), NULL, (void *) menu},
-            //{N_("Sort data in descending order"), NULL, (void *) menu},
-            //{N_("Sort case insensitive"), NULL, (void *) menu},
-            
-            //{N_("Select All"), NULL, (void *) menu},
-            //{N_("Invert Selection"), NULL, (void *) menu},
-            //{N_("Unselect"), NULL, (void *) menu},
-            //{N_("Select Items Matching..."), NULL, (void *) menu},
-            //{N_("Unselect Items Matching..."), NULL, (void *) menu},
-            //{N_("Sort by name"), NULL, (void *) menu},
-            //{N_("Default sort order"), NULL, (void *) menu},
-            //{N_("Sort by date"), NULL, (void *) menu},
-            //{N_("Sort by size"), NULL, (void *) menu},
-            //{N_("View as list""), NULL, (void *) menu},
-            {NULL,NULL,NULL, NULL}};
-	localPopUp = BasePopUp<Type>::createPopup(item); 
-        return localPopUp;        
-    }  
 
     static gchar *
     defaultMimeTypeApp(const gchar *mimetype, const gchar *fileInfo){
@@ -513,45 +509,6 @@ public:
 	return;
     }
 
-    /*
-     	//fallback if above mimetype application fails...
-	gboolean textMimetype = (mimetype && strncmp(mimetype, "text/", strlen("text/")) == 0);
-	gchar *fileInfo = util_c::fileInfo(path);
-        gboolean textFiletype =(fileInfo && 
-                (strstr(fileInfo, "text")||strstr(fileInfo,"empty")));
-	if (textMimetype || textFiletype) {
-	    // environ EDITOR
-	    gchar *editor = util_c::get_text_editor();
-
-	    auto v = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(localItemPopUp), "mimetypeOpen"));
-	    //gtk_c::menu_item_content(v, "gvim", markup, -24);
-	    gchar *icon = g_strdup(editor);
-	    g_strstrip(icon);
-	    if (strchr(icon, ' ')) *strchr(icon, ' ') = 0;
-	    gchar *g = g_path_get_basename(icon);
-	    g_free(icon);
-	    icon = g;
-	    GdkPixbuf *p = pixbuf_c::get_pixbuf(icon, -24);
-	    gchar *markup = g_strdup_printf("<b>%s %s</b>", editor, displayName);
-	    
-	    gboolean iconOK = pixbuf_icons_c::iconThemeHasIcon(icon);
-	    gtk_c::menu_item_content(v, iconOK?icon:"accessories-text-editor-symbolic", markup, -24);
-	    
-	    auto command = (gchar *)g_object_get_data(G_OBJECT(v), "command");
-	    g_free(command);
-
-	    command = g_strdup_printf("%s \"%s\"", editor, path);
-	    g_object_set_data(G_OBJECT(v), "command", command);
-                   
-	    gtk_widget_show(GTK_WIDGET(v));
-	    gtk_widget_set_sensitive(GTK_WIDGET(v), TRUE);
-	    
-	    g_free(icon);
-	    g_free(markup);
-	    g_free(fileInfo);
-	    return;
-	} 
-*/
 public:
     static void
     toggleItem(GtkCheckMenuItem *menuItem, gpointer data)
