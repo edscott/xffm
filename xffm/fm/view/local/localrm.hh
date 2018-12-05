@@ -320,8 +320,21 @@ private:
             case SHRED_YES:
                 DBG( "**single shred: %s\n", (gchar *)list->data);
                  // Shred operation
+                if (!Gio<Type>::doIt(rmDialog, (gchar *)list->data, MODE_SHRED)){
+
+                    DBG("Cannot shred %s\n", (gchar *)list->data);
+                   break;
+                }
                 removeItemFromList(rmDialog, list->data);
                break;
+            case SHRED_YES_ALL:
+                DBG( "shred all\n");
+                if (!Gio<Type>::multiDoIt(rmDialog, _("Shred"), "edit-delete/NE/edit-delete-symbolic/2.0/150", list, MODE_SHRED)){
+                    DBG("Cannot multishred %s\n", (gchar *)list->data);
+                    break;
+                }
+                removeAllFromList(rmDialog);
+                break;
             case RM_NO:
             {
                 DBG( "remove cancelled: %s\n", (gchar *)list->data);
@@ -329,10 +342,6 @@ private:
                 break;
             }
             ////////////////////////////////
-            case SHRED_YES_ALL:
-                DBG( "shred all\n");
-                removeAllFromList(rmDialog);
-                break;
             case RM_CANCEL:
                 DBG( "**cancel remove\n");
                 removeAllFromList(rmDialog);

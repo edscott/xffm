@@ -21,35 +21,62 @@ template <class Type> class BaseProgressResponse;
 template <class Type> 
 class Gio {
 
+static void
+GNUrm(const gchar *path){
+    const gchar *arg[] = {
+	"rm",
+	"-f",
+	"--one-file-system",
+	"--preserve-root",
+	"-R",
+	(const gchar *)path,
+	NULL
+    };
+    Run<Type>::thread_run(NULL, arg, 
+	    Run<Type>::run_operate_stdout, 
+	    Run<Type>::run_operate_stderr, 
+	    NULL);
+
+}
+
+static void
+GNUshred(const gchar *path){
+    const gchar *arg[] = {
+	"shred",
+	"-f",
+//	"-u",
+	"-v",
+	"-z",
+	(const gchar *)path,
+	NULL
+    };
+    Run<Type>::thread_run(NULL, arg, 
+	    Run<Type>::run_operate_stdout, 
+	    Run<Type>::run_operate_stderr, 
+			    NULL);
+}
+
 public:
     
     static gboolean doIt(GtkDialog *rmDialog, const gchar *path, gint mode){
-        if (mode != MODE_RM && mode != MODE_TRASH) return FALSE;
+        if (mode != MODE_RM && mode != MODE_TRASH && mode != MODE_SHRED) 
+	    return FALSE;
         GFile *file = g_file_new_for_path(path);
         GError *error=NULL;
         gboolean retval;
         switch (mode) {
             case MODE_RM:
                if (g_file_test(path, G_FILE_TEST_IS_DIR)){
-                    const gchar *arg[] = {
-                        "rm",
-                        "-f",
-                        "--one-file-system",
-                        "--preserve-root",
-                        "-R",
-                        (const gchar *)path,
-                        NULL
-                    };
-                    Run<Type>::thread_run(NULL, arg, 
-                            Run<Type>::run_operate_stdout, 
-                            Run<Type>::run_operate_stderr, 
-                            NULL);
+		   GNUrm(path);
                } else {
                     retval = g_file_delete (file, NULL, &error);
                }
                break;
             case MODE_TRASH:
                retval = g_file_trash (file, NULL, &error);
+               break;
+            case MODE_SHRED:
+	       GNUshred (path);
                break;
         }
         if (error){
@@ -71,7 +98,8 @@ public:
     static gboolean
     multiDoIt(GtkDialog *rmDialog, const gchar *message, const gchar *icon, GList *fileList, gint mode)
     {
-        if (mode != MODE_RM && mode != MODE_TRASH) return FALSE;
+        if (mode != MODE_RM && mode != MODE_TRASH && mode != MODE_SHRED)
+	    return FALSE;
 	gint items = g_list_length(fileList);
 	if (!items) return FALSE;
 
@@ -93,9 +121,6 @@ public:
 	    while (gtk_events_pending()) gtk_main_iteration(); 
 	    auto path = (const gchar *)l->data;
             // Try first item in foreground.
-            // FIXME: if it is a directory, pipe to rm recursive
-            //  basically a threadrun with no little button
-            //  FIXME: define stderr function...
             if (!count) {
                 retval = doIt(rmDialog, path, mode);
                 if (!retval)break;
@@ -104,17 +129,8 @@ public:
                 GFile *file = g_file_new_for_path(path);
                 if (mode == MODE_RM) {
                     if (g_file_test(path, G_FILE_TEST_IS_DIR)){
-                        const gchar *arg[] = {
-                            "rm",
-                            "-f",
-                            "--one-file-system",
-                            "--preserve-root",
-                            "-R",
-                            (const gchar *)path,
-                            NULL
-                        };
-                        Run<Type>::thread_run(NULL, arg, NULL, NULL, NULL);
-                        continue;
+		         GNUrm(path);
+                         continue;
                     } else {
                         g_file_delete_async (file, G_PRIORITY_LOW, 
                             NULL,   // GCancellable *cancellable,
@@ -128,8 +144,10 @@ public:
                         GINT_TO_POINTER(mode));
 
                 }
-            }
-                // or send with progress bar and cancel option.
+		else if (mode == MODE_SHRED){
+                    GNUshred(path);
+                }            
+	    }
 	    count++;
 	}
 	gtk_widget_destroy(GTK_WIDGET(dialog));
