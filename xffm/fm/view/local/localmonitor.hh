@@ -178,8 +178,13 @@ private:
             case G_FILE_MONITOR_EVENT_CREATED:
             case G_FILE_MONITOR_EVENT_MOVED_IN:
                 TRACE("Received  CREATED (%d): \"%s\", \"%s\"\n", event, f, s);
-                p->add_new_item(first);
-                p->updateFileCountLabel();
+                /*if (g_file_test(f, G_FILE_TEST_EXISTS)){
+                    p->restat_item(first);
+                } else */
+                {
+                    p->add_new_item(first);
+                    p->updateFileCountLabel();
+                }
                 break;
 
             case G_FILE_MONITOR_EVENT_CHANGED:

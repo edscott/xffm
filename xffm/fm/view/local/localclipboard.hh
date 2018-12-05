@@ -1,5 +1,7 @@
 #ifndef XF_LOCALCLIPBOARD__HH
 # define XF_LOCALCLIPBOARD__HH
+#include "common/gio.hh"
+
 static GtkClipboard *clipBoard;
 gboolean validClipBoard = FALSE;
 gint clipBoardSemaphore = 1;
@@ -22,17 +24,20 @@ public:
             auto message = _("Copying files locally");
             auto command = "cp -R -b -f";
             DBG("execute(%s, %s, files, %s)\n", message, command, target);
-            if (!LocalDnd<Type>::execute(message, command, files, target)){
+
+            Gio<Type>::execute(message, "edit-copy", files, target, MODE_COPY);
+            /*if (!LocalDnd<Type>::execute(message, command, files, target)){
 		    DBG("pasteClip: failed \"%s\"\n", command);
-	    }
+	    }*/
             clearClipBoard();
         } else if (strncmp(text, "move\n", strlen("move\n")) == 0){
             auto message = _("Moving files");
             auto command = "mv -b -f";
             DBG("execute(%s, %s, files, %s)\n", message, command, target);
-            if (!LocalDnd<Type>::execute(message, command, files, target)){
+            Gio<Type>::execute(message, "edit-copy/NE/edit-cut/2.0/220", files, target, MODE_MOVE);
+            /*if (!LocalDnd<Type>::execute(message, command, files, target)){
 		    DBG("pasteClip: failed \"%s\"\n", command);
-	    }
+	    }*/
             clearClipBoard();
         } else {
             DBG("LocalClipBoard::pasteClip: Invalid clipboard contents.\n");
@@ -104,7 +109,7 @@ public:
             GtkTreeIter iter;
             gtk_tree_model_get_iter (baseView->treeModel(), &iter, tpath);
             gtk_tree_model_get (baseView->treeModel(), &iter, PATH, &path, -1);
-            if (!data) data = g_strconcat(URIFILE, path, NULL);
+            if (!data) data = g_strconcat(URIFILE, path, "\n", NULL);
             else {
                 gchar *e = g_strconcat(data, URIFILE, path, "\n", NULL);
                 g_free(data);

@@ -21,42 +21,215 @@ template <class Type> class BaseProgressResponse;
 template <class Type> 
 class Gio {
 
-static void
-GNUrm(const gchar *path){
-    const gchar *arg[] = {
-	"rm",
-	"-f",
-	"--one-file-system",
-	"--preserve-root",
-	"-R",
-	(const gchar *)path,
-	NULL
-    };
-    Run<Type>::thread_run(NULL, arg, 
-	    Run<Type>::run_operate_stdout, 
-	    Run<Type>::run_operate_stderr, 
-	    NULL);
+    static void
+    GNUln(const gchar *path, const gchar *target){
+        const gchar *arg[] = {
+            "ln",
+            "-s",
+            "-b",
+            "-f",
+            path,
+            target,
+            NULL
+        };
+        Run<Type>::thread_run(NULL, arg, 
+                Run<Type>::run_operate_stdout, 
+                Run<Type>::run_operate_stderr, 
+                NULL);
 
-}
+    }
 
-static void
-GNUshred(const gchar *path){
-    const gchar *arg[] = {
-	"shred",
-	"-f",
-//	"-u",
-	"-v",
-	"-z",
-	(const gchar *)path,
-	NULL
-    };
-    Run<Type>::thread_run(NULL, arg, 
-	    Run<Type>::run_operate_stdout, 
-	    Run<Type>::run_operate_stderr, 
-			    NULL);
-}
+    static void
+    GNUmv(const gchar *path, const gchar *target){
+        const gchar *arg[] = {
+            "mv",
+            "-f",
+            "-b",
+            path,
+            target,
+            NULL
+        };
+        Run<Type>::thread_run(NULL, arg, 
+                Run<Type>::run_operate_stdout, 
+                Run<Type>::run_operate_stderr, 
+                NULL);
 
+    }
+
+    static void
+    GNUcp(const gchar *path, const gchar *target){
+        const gchar *arg[] = {
+            "cp",
+            "-R",
+            "-b",
+            "-f",
+            path,
+            target,
+            NULL
+        };
+        Run<Type>::thread_run(NULL, arg, 
+                Run<Type>::run_operate_stdout, 
+                Run<Type>::run_operate_stderr, 
+                NULL);
+
+    }
+
+    static void
+    GNUrm(const gchar *path){
+        const gchar *arg[] = {
+            "rm",
+            "-f",
+            "--one-file-system",
+            "--preserve-root",
+            "-R",
+            (const gchar *)path,
+            NULL
+        };
+        Run<Type>::thread_run(NULL, arg, 
+                Run<Type>::run_operate_stdout, 
+                Run<Type>::run_operate_stderr, 
+                NULL);
+
+    }
+
+    static void
+    GNUshred(const gchar *path){
+        const gchar *arg[] = {
+            "shred",
+            "-f",
+    //	"-u",
+            "-v",
+            "-z",
+            (const gchar *)path,
+            NULL
+        };
+        Run<Type>::thread_run(NULL, arg, 
+                Run<Type>::run_operate_stdout, 
+                Run<Type>::run_operate_stderr, 
+                                NULL);
+    }
+    static GList *
+    removeUriFormat(gchar **files) {
+        GList *fileList = NULL;
+        for (auto f=files; f && *f; f++){
+            gchar *file = *f;
+            if (!strstr(file, URIFILE)) continue;
+            if (strlen(file) > strlen(URIFILE)){
+                if (strncmp(file, URIFILE, strlen(URIFILE))==0){
+                    file = *f + strlen(URIFILE);
+                }
+            }
+            fileList = g_list_prepend(fileList, g_strdup(file));
+        }
+        fileList = g_list_reverse(fileList);
+        return fileList;
+    }
 public:
+    static gboolean 
+    execute(const gchar *message, const gchar *icon, gchar **files, const gchar *target, gint mode){
+        if (!files) {
+            WARN("!files\n");
+            return FALSE;
+        }
+        if (*files==NULL) {
+            WARN("files==NULL\n");
+            return FALSE;
+        }
+            
+        gchar *source = g_path_get_dirname(*files);
+	if (strncmp(source, URIFILE, strlen(URIFILE))==0){
+	    gchar *g = g_strdup(source + strlen(URIFILE));
+	    g_free(source);
+	    source=g;
+	}
+        if (!target){
+	    ERROR("LocalDnd::execute: target cannot be NULL\n");
+            return FALSE;
+        }
+        WARN("LocalDnd::execute: source=%s target=%s command=%s\n", source, target, 
+                mode==MODE_COPY?"copy":mode==MODE_MOVE?"move":"link");
+        gboolean result = FALSE;
+        if (strcmp(source, target) ) result = TRUE;
+        else {
+	    g_free(source);
+            WARN("LocalDnd::execute: source and target are the same\n");
+            return FALSE;
+        }
+	g_free(source);
+
+        GList *fileList = removeUriFormat(files);
+        multiDoIt(message, icon, fileList, target, mode);
+
+        for (auto l=fileList; l && l->data; l= l->next) g_free(l->data);
+        g_list_free(fileList);
+        return result;
+    }
+    
+    
+    static gboolean doIt(const gchar *path, const gchar *target, gint mode){
+        if (mode != MODE_COPY && mode != MODE_LINK && mode != MODE_MOVE) 
+	    return FALSE;
+        GFile *file = g_file_new_for_path(path);
+        GError *error=NULL;
+        gboolean retval;
+        switch (mode) {
+            case MODE_COPY:
+               if (g_file_test(path, G_FILE_TEST_IS_DIR)){
+		   GNUcp(path, target);
+               } else {
+                    auto flags = (guint)G_FILE_COPY_OVERWRITE | (guint)G_FILE_COPY_BACKUP | (guint) G_FILE_COPY_NOFOLLOW_SYMLINKS;
+                    gchar *base = g_path_get_basename(path);
+                    GFile *tgt = g_file_new_build_filename(target, base, NULL);
+                    g_free(base);
+                    retval = g_file_copy (file, tgt, (GFileCopyFlags) flags,
+                        NULL, // GCancellable *cancellable,
+                        NULL,
+                        NULL,
+                        &error);
+                    g_object_unref(tgt);
+               }
+               break;
+            case MODE_MOVE:
+               if (g_file_test(path, G_FILE_TEST_IS_DIR)){
+		   GNUmv(path, target);
+               } else {
+                    auto flags = (guint)G_FILE_COPY_OVERWRITE | (guint)G_FILE_COPY_BACKUP | (guint) G_FILE_COPY_NOFOLLOW_SYMLINKS;
+                    gchar *base = g_path_get_basename(path);
+                    GFile *tgt = g_file_new_build_filename(target, base, NULL);
+                    g_free(base);
+
+                    retval = g_file_move (file, tgt, (GFileCopyFlags) flags,
+                        NULL, // GCancellable *cancellable,
+                        NULL,
+                        NULL,
+                        &error);
+                    g_object_unref(tgt);
+               }
+               break;
+            case MODE_LINK:
+               if (g_file_test(path, G_FILE_TEST_IS_DIR)){
+		   GNUln(path, target);
+               } else {
+		   GNUln(path, target);
+                   // retval = g_file_create_symbolic_link (file, NULL, &error);
+               }
+               break;
+        }
+        if (error){
+            gchar *m;
+            if (mode == MODE_COPY) 
+                m = g_strdup_printf("%s %s", _("Could not copy item:"), path);
+            else if (mode == MODE_MOVE) 
+                m = g_strdup_printf("%s %s", _("Could not move item:"), path);
+            gchar *message = g_strdup_printf("<span color=\"red\">%s</span>\n(%s)", m, error->message);
+            TimeoutResponse<Type>::dialog(GTK_WINDOW(mainWindow), message, "dialog-error");
+            g_free(m);
+            g_free(message);
+            DBG("doIt(%s): %s\n", path, error->message);
+            g_error_free(error);
+        }
+        return retval;
+    }
     
     static gboolean doIt(GtkDialog *rmDialog, const gchar *path, gint mode){
         if (mode != MODE_RM && mode != MODE_TRASH && mode != MODE_SHRED) 
@@ -94,6 +267,54 @@ public:
         }
         return retval;
     }
+
+    static gboolean
+    multiDoIt(const gchar *message, const gchar *icon, GList *fileList, const gchar *target, gint mode)
+    {
+        if (mode != MODE_COPY && mode != MODE_LINK && mode != MODE_MOVE) 
+	    return FALSE;
+	gint items = g_list_length(fileList);
+	if (!items) return FALSE;
+
+	auto dialog = BaseProgressResponse<Type>::dialog(message, icon);
+	auto progress = GTK_PROGRESS_BAR(g_object_get_data(G_OBJECT(dialog), "progress"));
+
+        gtk_window_set_title(dialog, message);
+	gtk_widget_show_all (GTK_WIDGET(dialog));
+
+	
+	gint count = 0;
+        gboolean retval;
+        for (auto l = fileList; l && l->data; l=l->next) {
+	    gchar *text = g_strdup_printf("%s %d/%d", _("Items:"), count+1, items); 
+	    gtk_progress_bar_set_text (progress, text);
+	    g_free(text);
+	    gtk_progress_bar_set_show_text (progress, TRUE);
+	    gtk_progress_bar_set_fraction(progress, (double)count/items);
+	    while (gtk_events_pending()) gtk_main_iteration(); 
+	    auto path = (const gchar *)l->data;
+            // Try first item in foreground.
+            if (!count) {
+                retval = doIt(path, target, mode);
+                if (!retval)break;
+            } else {
+                // send the rest in background
+                GFile *file = g_file_new_for_path(path);
+                if (mode == MODE_COPY) {
+		    GNUcp(path, target);
+                } else if (mode == MODE_LINK){
+		    GNUln(path, target);
+                }
+		else if (mode == MODE_MOVE){
+                    GNUmv(path, target);
+                }            
+	    }
+	    count++;
+	}
+	gtk_widget_destroy(GTK_WIDGET(dialog));
+	return retval;
+    }
+
 
     static gboolean
     multiDoIt(GtkDialog *rmDialog, const gchar *message, const gchar *icon, GList *fileList, gint mode)
