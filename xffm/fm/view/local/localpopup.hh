@@ -61,8 +61,8 @@ public:
     static GtkMenu *createLocalPopUp(void){
          menuItem_t item[]={
 	    {N_("New"), (void *)newItem, NULL, NULL},
-            {N_("Open in New Tab"), NULL, NULL, NULL},
-            {N_("Open in New Window"), NULL, NULL, NULL},
+            // deprecated {N_("Open in New Tab"), NULL, NULL, NULL},
+            // deprecated {N_("Open in New Window"), NULL, NULL, NULL},
             
 	    {N_("Copy"), (void *)LocalClipBoard<Type>::copy, NULL, NULL},
 	    {N_("Cut"), (void *)LocalClipBoard<Type>::cut, NULL, NULL},
@@ -151,6 +151,7 @@ public:
     static void
     decorateEditItems(GtkMenu *menu){
         const gchar *key[]={
+            "New",
             "Cut",
             "Copy",
             "Paste",
@@ -158,6 +159,7 @@ public:
             NULL
         };
         const gchar *keyIcon[]={
+            "document-new",
             "edit-cut",
             "edit-copy",
             "edit-paste",
@@ -212,14 +214,16 @@ public:
 
     static void
     resetMenuItems(BaseView<Type> *baseView, const GtkTreePath *tpath) {
-	GtkTreeIter iter;
-	GtkTreePath *ttpath = gtk_tree_path_copy(tpath);
-	if (!gtk_tree_model_get_iter (baseView->treeModel(), &iter, ttpath)) {
-	    gtk_tree_path_free(ttpath);
-	    return;
-	}
+        if (tpath) {
+            GtkTreeIter iter;
+            GtkTreePath *ttpath = gtk_tree_path_copy(tpath);
+            if (!gtk_tree_model_get_iter (baseView->treeModel(), &iter, ttpath)) {
+                gtk_tree_path_free(ttpath);
+                return;
+            }
 
-	gtk_tree_path_free(ttpath);
+            gtk_tree_path_free(ttpath);
+        }
 
         //  single or multiple item selected?
         GList *selection_list = gtk_icon_view_get_selected_items (baseView->iconView());
@@ -421,6 +425,8 @@ private:
             g_object_set_data(G_OBJECT(localItemPopUp), "mimetype", g_strdup(""));
             return;
         }
+
+        if (!tpath) tpath = (const GtkTreePath *)selection_list->data;
 	struct stat st;
         gchar *path;
         gchar *iconName;

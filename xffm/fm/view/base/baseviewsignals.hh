@@ -313,7 +313,12 @@ public:
                     gtk_icon_view_select_path (baseView->iconView(), tpath);
 		    menu = LocalView<Type>::popUp(baseView, tpath);
 		} else {
-		    menu = LocalView<Type>::popUp(baseView);
+                    GList *selection_list = gtk_icon_view_get_selected_items (baseView->iconView());
+                    if (selection_list) {
+		        menu = LocalView<Type>::popUp(baseView, NULL);
+                    } else {
+                       menu = LocalView<Type>::popUp(baseView);
+                    }
 		    /*auto p = g_object_get_data(G_OBJECT(menu), "path");
 		    g_free(p);
 
