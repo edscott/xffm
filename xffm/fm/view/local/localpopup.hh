@@ -107,9 +107,9 @@ public:
 	    {N_("Cut"), (void *)LocalClipBoard<Type>::cut, NULL, NULL},
 	    {N_("Paste"), (void *)LocalClipBoard<Type>::paste, NULL, NULL},
 	    {N_("Delete"), (void *)LocalRm<Type>::rm, NULL, NULL},
-	    {N_("Rename"), NULL, NULL, NULL},
-	    {N_("Duplicate"), NULL, NULL, NULL}, 
-	    {N_("Link"), NULL, NULL, NULL},
+	    {N_("Rename"), (void *)rename, NULL, NULL},
+	    {N_("Duplicate"), (void *)duplicate, NULL, NULL}, 
+	    {N_("Link"), (void *)symlink, NULL, NULL},
 	    {N_("Properties"), NULL, NULL, NULL},
 	     {NULL,NULL,NULL,NULL}
         };
@@ -130,10 +130,18 @@ public:
             "Properties",
             NULL
         };
-        for (auto k=smallKey; k && *k; k++){
+        const gchar *smallIcon[]={
+            "view-refresh-symbolic",
+            "edit-copy",
+            "emblem-symbolic-link",
+            "view-refresh-symbolic",
+            NULL
+        };
+        gint i=0;
+        for (auto k=smallKey; k && *k; k++, i++){
             mItem = (GtkMenuItem *)g_object_get_data(G_OBJECT(localItemPopUp), *k);
             markup = g_strdup_printf("<span size=\"small\">%s</span>", _(*k));
-	    gtk_c::menu_item_content(mItem, "view-refresh-symbolic", markup, -16);
+	    gtk_c::menu_item_content(mItem, smallIcon[i], markup, -16);
 	    g_free(markup);
         }
 
@@ -743,6 +751,70 @@ public:
 	g_free(command);
     }
 
+    static gchar *
+    getNewPath(const gchar *path, const gchar *icon, const gchar *text){
+        auto entryResponse = new(EntryResponse<Type>)(GTK_WINDOW(mainWindow), text, icon);
+        entryResponse->setEntryLabel(_("New Name:"));
+        auto response = entryResponse->runResponse();
+        delete entryResponse;
+	if (response){
+            gchar *newName;
+            if (g_path_is_absolute(response)){
+                newName = g_strdup(response);
+            } else {
+                gchar *dirname = g_path_get_dirname(path);
+                newName = g_strconcat(dirname, G_DIR_SEPARATOR_S, response, NULL);
+                g_free(dirname);
+            }
+            g_free(response);
+            return newName;
+        }
+        return NULL;
+   }
+
+
+    static void
+    symlink(GtkMenuItem *menuItem, gpointer data)
+    {	
+	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
+        auto newName = getNewPath(path, "emblem-symbolic-link", _("Link"));
+        if (!newName) return;
+         g_strstrip(newName);
+        if (strlen(newName)){
+            DBG("*** symlink %s to %s\n", path, newName);
+            Gio<Type>::doIt(path, newName, MODE_LINK);
+        }
+        g_free(newName);
+    }
+
+    static void
+    duplicate(GtkMenuItem *menuItem, gpointer data)
+    {	
+	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
+        auto newName = getNewPath(path, "edit-copy", _("Duplicate"));
+        if (!newName) return;
+        g_strstrip(newName);
+        if (strlen(newName)){
+            DBG("*** duplicate %s to %s\n", path, newName);
+            Gio<Type>::doIt(path, newName, MODE_COPY);
+        }
+        g_free(newName);
+    }
+
+    static void
+    rename(GtkMenuItem *menuItem, gpointer data)
+    {	
+	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
+        auto newName = getNewPath(path, "view-refresh-symbolic", _("Rename"));
+        if (!newName) return;
+        g_strstrip(newName);
+        if (strlen(newName)){
+            DBG("*** rename %s to %s\n", path, newName);
+            Gio<Type>::doIt(path, newName, MODE_MOVE);
+        }
+        g_free(newName);
+    }
+    
     static void
     openWith(GtkMenuItem *menuItem, gpointer data)
     {	

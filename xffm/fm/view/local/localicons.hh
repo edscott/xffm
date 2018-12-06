@@ -386,7 +386,13 @@ private:
         is_lnk = (xd_p->d_type == DT_LNK);
 #endif
         // Symlinks:
-        if (is_lnk) return g_strdup("/SW/emblem-symbolic-link/2.0/220");       
+        if (is_lnk) {
+            if (g_file_test(xd_p->path, G_FILE_TEST_EXISTS))
+                return g_strdup("/SW/emblem-symbolic-link/2.0/220");
+            else
+                return g_strdup("/SW/emblem-unreadable/2.0/220");
+        }
+
 
         if (RootView<Type>::isBookmarked(xd_p->path)){
             emblem = g_strdup("/SE/bookmark-new/2.0/220");
@@ -432,7 +438,10 @@ private:
         }
         gchar *emblem = NULL;
         if ((st->st_mode & S_IFMT) == S_IFLNK){
-            return g_strdup("/SW/emblem-symbolic-link/2.0/220");
+            if (g_file_test(path, G_FILE_TEST_EXISTS))
+                return g_strdup("/SW/emblem-symbolic-link/2.0/220");
+            else
+                return g_strdup("/SW/emblem-unreadable/2.0/220");
         }
         if (RootView<Type>::isBookmarked(path)){
             emblem = g_strdup("/SE/bookmark-new/2.0/220");

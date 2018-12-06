@@ -164,6 +164,17 @@ public:
         g_list_free(fileList);
         return result;
     }
+    static GFile *
+    getTargetGfile(const gchar *path, const gchar *target){
+    GFile *tgt;
+        if (g_file_test(target, G_FILE_TEST_IS_DIR)) {
+            gchar *base = g_path_get_basename(path);
+            GFile *tgt = g_file_new_build_filename(target, base, NULL);
+            g_free(base);
+            return tgt;
+        } 
+        return g_file_new_for_path(target);
+    }
     
     
     static gboolean doIt(const gchar *path, const gchar *target, gint mode){
@@ -178,9 +189,7 @@ public:
 		   GNUcp(path, target);
                } else {
                     auto flags = (guint)G_FILE_COPY_OVERWRITE | (guint)G_FILE_COPY_BACKUP | (guint) G_FILE_COPY_NOFOLLOW_SYMLINKS;
-                    gchar *base = g_path_get_basename(path);
-                    GFile *tgt = g_file_new_build_filename(target, base, NULL);
-                    g_free(base);
+                    GFile *tgt = getTargetGfile(path, target);
                     retval = g_file_copy (file, tgt, (GFileCopyFlags) flags,
                         NULL, // GCancellable *cancellable,
                         NULL,
@@ -194,10 +203,8 @@ public:
 		   GNUmv(path, target);
                } else {
                     auto flags = (guint)G_FILE_COPY_OVERWRITE | (guint)G_FILE_COPY_BACKUP | (guint) G_FILE_COPY_NOFOLLOW_SYMLINKS;
-                    gchar *base = g_path_get_basename(path);
-                    GFile *tgt = g_file_new_build_filename(target, base, NULL);
-                    g_free(base);
-
+                    GFile *tgt = getTargetGfile(path, target);
+ 
                     retval = g_file_move (file, tgt, (GFileCopyFlags) flags,
                         NULL, // GCancellable *cancellable,
                         NULL,
@@ -209,10 +216,8 @@ public:
             case MODE_LINK:
             {   
                //GNUln(path, target);
-               gchar *base = g_path_get_basename(path);
-               GFile *link = g_file_new_build_filename(target, base, NULL);
-               WARN("*** %s --> %s\n", link, path);
-               g_free(base);
+               GFile *link = getTargetGfile(path, target);
+
                retval = g_file_make_symbolic_link (link, 
                            path,
                            NULL,
