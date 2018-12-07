@@ -1107,6 +1107,7 @@ private:
                           "[] Match any character within the [] \n"
                           "^  Match at beginning of string\n" 
 			  "$  Match at end of string \n");
+public:
     static constexpr const gchar *
     grep_text_help=
 		N_("Reserved characters for extended regexp are "

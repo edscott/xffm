@@ -215,6 +215,7 @@ public:
 		    dragMode_ = -1; // move
 		    gtk_icon_view_select_path (baseView->iconView(), tpath);
 		    auto items = gtk_icon_view_get_selected_items (baseView->iconView());
+                    baseView->setSelectionList(items);
 
 		    gchar *item = gtk_tree_path_to_string (tpath);
 		    gchar *startItem;
@@ -314,6 +315,7 @@ public:
 		    menu = LocalView<Type>::popUp(baseView, tpath);
 		} else {
                     GList *selection_list = gtk_icon_view_get_selected_items (baseView->iconView());
+                    baseView->setSelectionList(selection_list);
                     if (selection_list) {
 		        menu = LocalView<Type>::popUp(baseView, NULL);
                     } else {
@@ -381,10 +383,10 @@ public:
 	    if (sqrt(pow(e->x - buttonPressX,2) + pow(e->y - buttonPressY, 2)) > 10){
                 baseView->selectables();
                 GList *selection_list = gtk_icon_view_get_selected_items (baseView->iconView());
+                baseView->setSelectionList(selection_list);
                 if (selection_list==NULL) {
                     return FALSE;
                 }
-                baseView->setSelectionList(NULL);
 	        // start DnD (multiple selection)
 		WARN("dragOn_ = TRUE\n");
 		dragOn_ = TRUE;

@@ -298,18 +298,20 @@ public:
 			       dialog);
 
      // Add the label, and show everything we have added
-     auto hbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
-     gtk_container_add (GTK_CONTAINER (content_area), GTK_WIDGET(hbox));
+     auto vbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
+     gtk_container_add (GTK_CONTAINER (content_area), GTK_WIDGET(vbox));
      if (icon){
-	auto pixbuf = Pixbuf<Type>::get_pixbuf(icon, GTK_ICON_SIZE_LARGE_TOOLBAR);
+	auto pixbuf = Pixbuf<Type>::get_pixbuf(icon, -48);
         if (pixbuf) {
             auto image = gtk_image_new_from_pixbuf(pixbuf);
 	    if (image) {
-	        gtk_box_pack_start(hbox, image, FALSE, FALSE,0);
+	        gtk_box_pack_start(vbox, image, FALSE, FALSE,0);
 	        gtk_widget_show (image);
             }
 	}
      }
+     auto hbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+     gtk_box_pack_start(vbox, GTK_WIDGET(hbox), FALSE, FALSE,0);
      gtk_box_pack_start(hbox, GTK_WIDGET(label), FALSE, FALSE,0);
      gtk_widget_show_all (dialog);
     }

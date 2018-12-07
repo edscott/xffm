@@ -73,8 +73,8 @@ public:
             //only for listview: {N_("Sort by size"), NULL, (void *) menu},
             //only for listview: {N_("Sort by date"), NULL, (void *) menu},
             
-            {N_("Select All"), NULL, NULL, NULL},
-            {N_("Select Items Matching..."), NULL, NULL, NULL},
+            {N_("Select All"), (void *)selectAll, NULL, NULL},
+            {N_("Select Items Matching..."), (void *)selectMatch, NULL, NULL},
             {N_("View as list"), NULL, NULL, NULL},
             {N_("Show hidden files"), (void *)toggleItem, 
                 (void *) "ShowHidden", "ShowHidden"},
@@ -522,6 +522,92 @@ private:
 	}
 	return;
     }
+
+private:
+    static gboolean
+    selectAll_(GtkTreeModel *treeModel, GtkTreePath *tpath, GtkTreeIter *iter, gpointer data){
+        auto localView = (LocalView<Type> *)data;
+        auto baseView = (BaseView<Type> *)data;
+        if (localView->isSelectable(treeModel, iter)){
+            gtk_icon_view_select_path(baseView->iconView(), tpath);
+        }
+        return FALSE;        
+    }
+
+    static void 
+    selectAll(GtkMenuItem *menuItem, gpointer data)
+    {
+	auto baseView =  (BaseView<Type> *)g_object_get_data(G_OBJECT(data), "baseView");
+        gtk_tree_model_foreach (baseView->treeModel(), selectAll_, (void *)baseView);
+    }
+
+    static gboolean
+    selectMatch_(GtkTreeModel *treeModel, GtkTreePath *tpath, GtkTreeIter *iter, gpointer data){
+        auto arg = (void **)data;
+        auto baseView = (BaseView<Type> *)(arg[0]);
+        auto regex = (const GRegex *)arg[1];
+        gchar *path;
+        gtk_tree_model_get(treeModel, iter, PATH, &path, -1);
+        auto basename = g_path_get_basename(path);
+        g_free(path);
+        gboolean match = g_regex_match (regex, basename, (GRegexMatchFlags)0, NULL);
+        if (match){
+            TRACE("match: %s\n", basename);
+            gtk_icon_view_select_path(baseView->iconView(), tpath);
+        }
+        g_free(basename);
+        return FALSE;
+    }
+
+    static void 
+    selectMatch(GtkMenuItem *menuItem, gpointer data)
+    {
+	auto baseView =  (BaseView<Type> *)g_object_get_data(G_OBJECT(data), "baseView");
+        auto entryResponse = new(EntryResponse<Type>)(GTK_WINDOW(mainWindow), _("Select items"), NULL);
+	auto markup = 
+	    g_strdup_printf("<span color=\"blue\" size=\"larger\"><b>%s</b></span>", _("Select Items Matching"));  
+  	
+        entryResponse->setResponseLabel(markup);
+        g_free(markup);
+        entryResponse->setEntryLabel(_("Regular expression"));
+        auto response = entryResponse->runResponse();
+        delete entryResponse;
+	WARN("response=%s\n", response);
+        if (!response) return;
+        g_strstrip(response);
+	if (strlen(response)){
+            auto cflags = (GRegexCompileFlags)((guint)G_REGEX_CASELESS | (guint)G_REGEX_OPTIMIZE);
+            GError *error=NULL;
+            GRegex *regex = g_regex_new (response, cflags,(GRegexMatchFlags) 0, &error);
+            if (!regex) {
+                gchar *markup = g_strdup_printf("<span size=\"larger\" color=\"blue\">%s\n<span color=\"red\">%s</span></span>\n%s\n",
+                        _("Regular Expression syntax is incorrect"), error->message,
+                        FindDialog<Type>::grep_text_help);
+                Gtk<Type>::quickHelp(GTK_WINDOW(mainWindow), markup, "dialog-error");
+                g_free(markup);
+                g_error_free(error);
+                return;
+            }
+            void *arg[]={
+                (void *)baseView, 
+                (void *)regex
+            };
+            // unselect all
+            gtk_icon_view_unselect_all(baseView->iconView());
+            gtk_tree_model_foreach (baseView->treeModel(), selectMatch_, (void *)arg);
+            GList *selection_list = gtk_icon_view_get_selected_items (baseView->iconView());
+            baseView->setSelectionList(selection_list);
+            if (!selection_list) {
+                gchar *markup = g_strdup_printf("<span size=\"larger\" color=\"blue\">%s\n<span color=\"red\">%s</span></span>\n", _("Nothing selected"),_("No matches."));
+                Gtk<Type>::quickHelp(GTK_WINDOW(mainWindow),markup, "dialog-error"); 
+                g_free(markup);
+            }
+
+            g_free(response);
+            g_regex_unref(regex);
+        }
+    }
+
 
 public:
     static void

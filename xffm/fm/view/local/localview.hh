@@ -61,6 +61,16 @@ class LocalView: public LocalPopUp<Type> {
 
 public:
 
+    static gboolean
+    isSelectable(GtkTreeModel *treeModel, GtkTreeIter *iter){
+        gchar *name;
+	gtk_tree_model_get (treeModel, iter, ACTUAL_NAME, &name, -1);
+        gboolean retval = TRUE;
+        if (strcmp(name, "..")==0 )retval = FALSE;
+        g_free(name);
+        return retval;
+    }
+
     static void selectables(GtkIconView *iconview){
         GtkTreePath *tpath = gtk_tree_path_new_first ();
 	GtkTreeModel *treeModel = gtk_icon_view_get_model (iconview);
@@ -69,16 +79,11 @@ public:
             gtk_tree_path_free(tpath);
             return ;
         }
-        gchar *name;
-	gtk_tree_model_get (treeModel, &iter, ACTUAL_NAME, &name, -1);
-        gboolean retval = TRUE;
-        if (strcmp(name, "..")==0 )retval = FALSE;
-        g_free(name);
+        gboolean retval = isSelectable(treeModel, &iter);
         if (!retval) {
             gtk_icon_view_unselect_path (iconview,tpath);
         }
         gtk_tree_path_free(tpath);
-            
         return ;
     }
 
@@ -461,7 +466,14 @@ private:
         xd_b->d_name = name;
         xd_b->d_type = type;
         TRACE("compare %s with iconview item \"%s\"\n", xd_p->d_name, name);
-        if (compare_by_name((void *)xd_p, (void *)(xd_b)) < 0){
+        gint sortResult;
+        if (Settings<Type>::getSettingInteger("LocalView", "Descending") <= 0) {
+            sortResult = compare_by_name((void *)xd_p, (void *)(xd_b));
+        } else {
+            sortResult = compare_by_name2((void *)xd_p, (void *)(xd_b));
+        }
+
+        if (sortResult < 0){
             GtkTreeIter newIter;
             gtk_list_store_insert_before (GTK_LIST_STORE(treeModel), &newIter, iter);
             add_local_item(GTK_LIST_STORE(treeModel), &newIter, xd_p);
