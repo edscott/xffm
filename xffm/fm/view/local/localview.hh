@@ -334,6 +334,34 @@ public:
         g_free(xd_p->st);
         g_free(xd_p);
     }
+    static gint
+    compare_by_name2 (const void *a, const void *b) {
+       // compare by name, directories or symlinks to directories on top
+        const xd_t *xd_a = (const xd_t *)a;
+        const xd_t *xd_b = (const xd_t *)b;
+
+        if (strcmp(xd_a->d_name, "..")==0) return -1;
+        if (strcmp(xd_b->d_name, "..")==0) return 1;
+
+        gboolean a_cond = FALSE;
+        gboolean b_cond = FALSE;
+
+#ifdef HAVE_STRUCT_DIRENT_D_TYPE
+        a_cond = ((xd_a->d_type == DT_DIR )||(xd_a->st && S_ISDIR(xd_a->st->st_mode)));
+        b_cond = ((xd_b->d_type == DT_DIR )||(xd_b->st && S_ISDIR(xd_b->st->st_mode)));
+#else
+        if (xd_a->st && xd_b->st && 
+                (S_ISDIR(xd_a->st->st_mode) || S_ISDIR(xd_b->st->st_mode))) {
+            a_cond = (S_ISDIR(xd_a->st->st_mode)|| S_ISDIR(xd_a->st->st_mode));
+            b_cond = (S_ISDIR(xd_b->st->st_mode)|| S_ISDIR(xd_b->st->st_mode));
+        } 
+#endif
+
+        if (a_cond && !b_cond) return -1; 
+        if (!a_cond && b_cond) return 1;
+        
+        return -strcasecmp(xd_a->d_name, xd_b->d_name);
+    }
     
     static gint
     compare_by_name (const void *a, const void *b) {
@@ -386,7 +414,11 @@ private:
         }
 #endif        
         // Default sort order:
-        return g_list_sort (list,compare_by_name);
+        if (Settings<Type>::getSettingInteger("LocalView", "Descending") <= 0) {
+            return g_list_sort (list,compare_by_name);
+        } else {
+            return g_list_sort (list,compare_by_name2);
+        }
     }
 
     static gint
