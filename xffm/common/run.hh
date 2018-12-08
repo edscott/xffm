@@ -241,6 +241,7 @@ public:
             textview = page->output();
             
         } else {
+	   if (!Notebook<Type>::isValidTextView(data)) return;
            textview = GTK_TEXT_VIEW(data);
         }
         if (!gtk_widget_is_visible(GTK_WIDGET(textview))) return;

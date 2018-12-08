@@ -12,7 +12,7 @@ namespace xf {
 template <class Type>
 class PageBase :
     public HButtonBox<double>,
-    public VButtonBox<double>,
+//    public VButtonBox<double>,
     public Vpane<double>,
     public ThreadControl<double>,
     public Pathbar<double>,

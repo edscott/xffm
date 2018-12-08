@@ -55,6 +55,7 @@ class RunButton {
     using run_c = Run<double>;
 private:
     Page<Type> *page_; 
+    Dialog<Type> *parent_;
     GtkTextView *textview_;
     GtkBox *button_space_;
 
@@ -76,8 +77,9 @@ public:
     void setup(void *data, const gchar * exec_command, pid_t child, gboolean shellIcon)
     {
 	page_ = (Page<Type> *)data;
+	parent_ = page_->parent();
 	textview_ = page_->output();
-	button_space_ = page_->vButtonBox();
+	button_space_ = page_->parent()->vButtonBox();
 	
 	in_shell_ = shellIcon;
 	pid_ = child;
@@ -298,11 +300,15 @@ public:
 	return NULL;
     }
 
+    Notebook<Type> *
+    parent(void){return parent_;}
+    
     static void *
     zap_run_button(void * data){
 	TRACE("zap_run_button...\n");
 	auto run_button_p = (RunButton<Type> *)data;
-	run_button_p->page()->unreference_run_button(run_button_p);
+	//run_button_p->page()->unreference_run_button(run_button_p);
+	run_button_p->parent()->unreference_run_button(run_button_p);
 	return NULL;
     }
 

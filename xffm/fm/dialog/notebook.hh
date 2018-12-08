@@ -3,19 +3,47 @@
 #include "fm/dialog/menupopover.hh"
 #include "fm/page/page.hh"
 #include "fm/dialog/notebooksignals.hh"
+    
+static GList *textview_list=NULL;
 
 namespace xf {
 template <class Type> class Dialog;
 
 template <class Type>
-class Notebook : public MenuPopover<Type>{
+class Notebook : 
+    public VButtonBox<double>,
+    public MenuPopover<Type>
+{
     using gtk_c = Gtk<double>;
     using pixbuf_c = Pixbuf<double>;
     using util_c = Util<double>;
     using print_c = Print<double>;
+    GList *run_button_list=NULL;
+    pthread_mutex_t *rbl_mutex;
 public:
+
+    ~Notebook(void){
+	GList *l = run_button_list;
+	pthread_mutex_lock(rbl_mutex);
+	for (; l && l->data; l=l->next){
+	    unreference_run_button(l->data);
+	}
+	g_list_free(run_button_list);
+	run_button_list=NULL;
+	pthread_mutex_unlock(rbl_mutex);
+	pthread_mutex_destroy(rbl_mutex);
+	g_free(rbl_mutex);
+    }
+
     Notebook(void){
-        notebook_ = GTK_NOTEBOOK(gtk_notebook_new());
+	pthread_mutexattr_t r_attr;
+	pthread_mutexattr_init(&r_attr);
+	pthread_mutexattr_settype(&r_attr, PTHREAD_MUTEX_RECURSIVE);
+	rbl_mutex = (pthread_mutex_t *)calloc(1, sizeof(pthread_mutex_t));
+	pthread_mutex_init(rbl_mutex, &r_attr);
+	run_button_list = NULL;
+
+	notebook_ = GTK_NOTEBOOK(gtk_notebook_new());
         g_object_set_data(G_OBJECT(this->menuButton_), "notebook_p", (void *)this);
         pageHash_ =g_hash_table_new_full(g_direct_hash, g_direct_equal, NULL, NULL);
         gtk_notebook_set_scrollable (notebook_, TRUE);
@@ -57,7 +85,50 @@ public:
 	while (gtk_events_pending())gtk_main_iteration();
         return baseView;
     }
-    
+
+//    void reference_run_button(run_button_c *rb_p){
+    void *reference_run_button(void *rb_p){
+	DBG("reference_run_button(%p)\n", rb_p);
+	pthread_mutex_lock(rbl_mutex);
+	run_button_list = g_list_prepend(run_button_list, rb_p);
+	pthread_mutex_unlock(rbl_mutex);
+	return NULL;
+    }
+
+    void
+    unreference_run_button(void *rb_p){
+	DBG("unreference_run_button(%p)\n", rb_p);
+	pthread_mutex_lock(rbl_mutex);
+	void *p = g_list_find(run_button_list, rb_p);
+	if (p){
+	    run_button_list = g_list_remove(run_button_list, rb_p);
+	    delete ((RunButton<Type> *)rb_p);
+	}
+	pthread_mutex_unlock(rbl_mutex);
+    }
+
+    static gboolean isValidTextView(void *textView){
+	gboolean retval = FALSE;
+	void *p = g_list_find(textview_list, textView);
+	if (p) retval = TRUE;
+	return retval;
+    }
+
+    static void *reference_textview(GtkTextView *textView){
+	DBG("reference_run_button(%p)\n", (void *)textView);
+	textview_list = g_list_prepend(textview_list, (void *)textView);
+	return NULL;
+    }
+
+    static void
+    unreference_textview(GtkTextView *textView){
+	DBG("unreference_run_button(%p)\n", (void *)textView);
+	void *p = g_list_find(textview_list, (void *)textView);
+	if (p){
+	    textview_list = g_list_remove(textview_list, (void *)textView);
+	}
+    }
+
     Page<double> *addPage(const gchar *path){
 	gchar *workdir;
 	if (!path) {
@@ -250,7 +321,12 @@ public:
     void insertNotebook(GtkWindow *window){
         if (!window) return;
         g_object_set_data(G_OBJECT(window), "notebook", (void *)notebook_);
-        gtk_container_add (GTK_CONTAINER (window), GTK_WIDGET(notebook_));
+        auto box = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
+        gtk_container_add (GTK_CONTAINER (window), GTK_WIDGET(box));
+	gtk_box_pack_start (box, GTK_WIDGET(notebook_), TRUE, TRUE, 0);
+	gtk_box_pack_end (box, GTK_WIDGET(this->vButtonBox()), FALSE, FALSE, 0);
+	gtk_widget_show(GTK_WIDGET(box));
+	
     }
 private:
     GtkNotebook *notebook_;

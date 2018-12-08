@@ -24,8 +24,6 @@ class Page : public PageBase<double>
     using settings_c = Settings<double>;
     using completion_c = Completion<double>;
 
-    GList *run_button_list;
-    pthread_mutex_t *rbl_mutex;
     dialog_c *parent_;
     baseview_c *baseView_;
     
@@ -55,6 +53,7 @@ public:
 
     Page(dialog_c *parent, const gchar *workdir){
 	parent_ = parent;
+	Notebook<Type>::reference_textview(this->output());
 	pageChild_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
 	pageLabel_ = GTK_LABEL(gtk_label_new ("foobar"));
 	pageLabelBox_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
@@ -80,7 +79,7 @@ public:
         GtkBox *hViewBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
 
 	gtk_box_pack_start (hViewBox, GTK_WIDGET(this->vpane()), TRUE, TRUE, 0);
-	gtk_box_pack_start (hViewBox, GTK_WIDGET(this->vButtonBox()), FALSE, FALSE, 0);
+	//gtk_box_pack_start (hViewBox, GTK_WIDGET(this->vButtonBox()), FALSE, FALSE, 0);
 	gtk_box_pack_start (pageChild_, GTK_WIDGET(hViewBox), TRUE, TRUE, 0);
 	gtk_box_pack_start (pageChild_, GTK_WIDGET(this->hButtonBox()), FALSE, FALSE, 0);
         g_signal_connect(G_OBJECT(this->toggleToIconview()), "clicked", 
@@ -108,15 +107,6 @@ public:
         this->setCompletionInput(this->input());
         this->setLPTermPage(this);
 
-	pthread_mutexattr_t r_attr;
-	pthread_mutexattr_init(&r_attr);
-	pthread_mutexattr_settype(&r_attr, PTHREAD_MUTEX_RECURSIVE);
-	rbl_mutex = (pthread_mutex_t *)calloc(1, sizeof(pthread_mutex_t));
-	pthread_mutex_init(rbl_mutex, &r_attr);
-	run_button_list = NULL;
-
-
-
 	//gtk_widget_realize(GTK_WIDGET(pageChild_));
 	gtk_widget_show_all(GTK_WIDGET(pageLabelBox_));
 	gtk_widget_show_all(GTK_WIDGET(pageChild_));
@@ -124,16 +114,7 @@ public:
     }
     
     ~Page(void){
-	GList *l = run_button_list;
-	pthread_mutex_lock(rbl_mutex);
-	for (; l && l->data; l=l->next){
-	    unreference_run_button(l->data);
-	}
-	g_list_free(run_button_list);
-	run_button_list=NULL;
-	pthread_mutex_unlock(rbl_mutex);
-	pthread_mutex_destroy(rbl_mutex);
-	g_free(rbl_mutex);
+	Notebook<Type>::unreference_textview(this->output());
 	auto baseView = (baseview_c *)
 	    g_object_get_data(G_OBJECT(this->topScrolledWindow()), "baseView");
     	if (baseView){
@@ -169,27 +150,6 @@ public:
 	    g_free(command);
     }
 
-//    void reference_run_button(run_button_c *rb_p){
-    void *reference_run_button(void *rb_p){
-	DBG("reference_run_button(%p)\n", rb_p);
-	pthread_mutex_lock(rbl_mutex);
-	run_button_list = g_list_prepend(run_button_list, rb_p);
-	pthread_mutex_unlock(rbl_mutex);
-	return NULL;
-    }
-
-    void
-    unreference_run_button(void *rb_p){
-	DBG("unreference_run_button(%p)\n", rb_p);
-	pthread_mutex_lock(rbl_mutex);
-	void *p = g_list_find(run_button_list, rb_p);
-	if (p){
-	    run_button_list = g_list_remove(run_button_list, rb_p);
-	    delete ((runbutton_c *)rb_p);
-	}
-	pthread_mutex_unlock(rbl_mutex);
-    }
-
     void 
     newRunButton(const gchar * command, pid_t child){
 	TRACE("page->newRunButton\n");
@@ -198,7 +158,7 @@ public:
 	runButton->setup((void *)this, command, child, shellIcon);
 	//runButton->make_run_data_button(runButton);
 	//auto runButton = (runbutton_c *)new(runbutton_c(this, command, child, shellIcon));
-	reference_run_button((void *)runButton);
+	parent()->reference_run_button((void *)runButton);
 	// final creation will occur with context function.
     }
     
