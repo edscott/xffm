@@ -169,7 +169,9 @@ public:
     GFile *tgt;
         if (g_file_test(target, G_FILE_TEST_IS_DIR)) {
             gchar *base = g_path_get_basename(path);
-            GFile *tgt = g_file_new_build_filename(target, base, NULL);
+	    gchar *newPath = g_strconcat(target, G_DIR_SEPARATOR_S, base, NULL);
+            GFile *tgt = g_file_new_for_path(newPath);
+	    g_free(newPath);
             g_free(base);
             return tgt;
         } 
