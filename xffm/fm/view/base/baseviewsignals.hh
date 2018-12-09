@@ -17,7 +17,6 @@ static gboolean dragOn_=FALSE;
 static gboolean rubberBand_=FALSE;
 static gint buttonPressX=-1;
 static gint buttonPressY=-1;
-static gint dragMode_=0;
 
 static GtkTargetList *targets=NULL;
 static GdkDragContext *context=NULL;
@@ -94,16 +93,6 @@ public:
 
 
     static gboolean
-    button_click_f (GtkWidget *widget,
-                   GdkEventButton  *event,
-                   gpointer   data)
-    {
-	//auto baseView = (BaseView<Type> *)data;
-	WARN("no action on button_click_f\n");
-        return FALSE;
-    }
-
-    static gboolean
     button_release_f (GtkWidget *widget,
                    GdkEventButton  *event,
                    gpointer   data)
@@ -127,7 +116,7 @@ public:
 	    //Cancel DnD prequel.
 	    buttonPressX = buttonPressY = -1;
 	    dragOn_ = FALSE;
-	    if (dragMode_ ) { // copy/move/link mode
+	    if (dragMode) { // copy/move/link mode
 		return TRUE;
 	    }
 	    // default mode:
@@ -145,7 +134,7 @@ public:
 	buttonPressX = buttonPressY = -1;
         dragOn_ = FALSE;
 	
-        dragMode_ = 0;
+        dragMode = 0;
         return FALSE;
     }
 
@@ -172,10 +161,10 @@ public:
 		buttonPressY = event->y;
 		rubberBand_ = FALSE;
                 if (CONTROL_MODE && SHIFT_MODE) {
-		    dragMode_ = -3; // link mode
+		    dragMode = -3; // link mode
 		} else if (CONTROL_MODE) {
 		    controlMode = TRUE;
-		    dragMode_ = -2; // copy
+		    dragMode = -2; // copy
 		    // select item and add to selection list
 		    if (gtk_icon_view_path_is_selected (baseView->iconView(), tpath)) {
 			// if selected
@@ -187,7 +176,7 @@ public:
 		    }
 		} else if (SHIFT_MODE) {
 		    // select all items in interval
-		    dragMode_ = -1; // move
+		    dragMode = -1; // move
 		    gtk_icon_view_select_path (baseView->iconView(), tpath);
 		    auto items = gtk_icon_view_get_selected_items (baseView->iconView());
                     baseView->setSelectionList(items);
@@ -252,14 +241,14 @@ public:
 		    gtk_icon_view_unselect_all (baseView->iconView());
 		    // select single item
 		    gtk_icon_view_select_path (baseView->iconView(), tpath);
-		    dragMode_ = 0; // default (move)
+		    dragMode = 0; // default (move)
 		}
                 retval = TRUE; 
 		gtk_tree_path_free(tpath);
 		tpath = NULL; // just in case.
             } else { 
                 tpath=NULL;
-		dragMode_ = 0;
+		dragMode = 0;
 		rubberBand_ = TRUE;
             }
 
@@ -495,7 +484,7 @@ public:
             GdkDragContext * dc, gint drag_x, gint drag_y, 
             guint t, gpointer data) {
 	auto baseView = (BaseView<Type> *)data;
-        TRACE("signal_drag_motion\n");
+        WARN("signal_drag_motion\n");
 
         GtkTreePath *tpath;
                                         
@@ -530,51 +519,6 @@ public:
             BaseModel<Type>::highlight(NULL, baseView);
         }
         return FALSE;
-    }
-
-    // sender:
-    static void
-    signal_drag_end (GtkWidget * widget, GdkDragContext * context, gpointer data) {
-        WARN("signal_drag_end\n");
-        
-	auto baseView = (BaseView<Type> *)data;
-
-        dragMode_ = 0;
-        //while (gtk_events_pending())gtk_main_iteration();
-        //gtk_drag_source_unset(GTK_WIDGET(baseView->iconView()));
-        //baseView->freeSelectionList();
-      
-    }
-
-    static gboolean
-    signal_drag_failed (GtkWidget      *widget,
-                   GdkDragContext *context,
-                   GtkDragResult   result,
-                   gpointer        user_data){
-        const gchar *message;
-        switch (result) {
-            case GTK_DRAG_RESULT_SUCCESS:
-                message="The drag operation was successful.";
-                break;
-            case GTK_DRAG_RESULT_NO_TARGET:
-                message="No suitable drag target.";
-                break;
-            case GTK_DRAG_RESULT_USER_CANCELLED:
-                message="The user cancelled the drag operation.";
-                break;
-            case GTK_DRAG_RESULT_TIMEOUT_EXPIRED:
-                message="The drag operation timed out.";
-                break;
-            case GTK_DRAG_RESULT_GRAB_BROKEN:
-                message="The pointer or keyboard grab used for the drag operation was broken.";
-                break;
-            case GTK_DRAG_RESULT_ERROR:
-                message="The drag operation failed due to some unspecified error.";
-                break;
-        }
-        ERROR("Drag was not accepted: %s\n", message);
-        return TRUE;
-
     }
 
     static void
@@ -669,17 +613,6 @@ public:
                 8, (const guchar *)dndData, strlen(dndData)+1);
         }
                     
-    }
-
-    static void
-    signal_drag_leave (GtkWidget * widget, GdkDragContext * drag_context, guint time, gpointer data) {
-        DBG("signal_drag_leave\n");
-
-    }
-
-    static void
-    signal_drag_delete (GtkWidget * widget, GdkDragContext * context, gpointer data) {
-        ERROR("signal_drag_delete\n");
     }
 };
 }

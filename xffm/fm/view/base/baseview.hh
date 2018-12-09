@@ -68,12 +68,13 @@ public:
                 ICONVIEW_CALLBACK (BaseViewSignals<Type>::motion_notify_event), (void *)this);
          //g_signal_connect (this->iconView_, "query-tooltip", 
            //     G_CALLBACK (query_tooltip_f), (void *)this);
-
+ 
          // Why not "clicked" signal? 
          // Because this is to filter cancelled dnd event from
          // actual activated events.
          g_signal_connect (this->iconView_, "button-release-event",
-                G_CALLBACK(BaseViewSignals<Type>::button_click_f), (void *)this);
+                G_CALLBACK(BaseModel<Type>::button_click_f), (void *)this);
+
          g_signal_connect (this->iconView_, "button-release-event",
                 G_CALLBACK(BaseViewSignals<Type>::button_release_f), (void *)this);
          g_signal_connect (this->iconView_, "button-press-event",
@@ -85,13 +86,13 @@ public:
         g_signal_connect (G_OBJECT (this->source()), 
                 "drag-data-get", G_CALLBACK (BaseViewSignals<Type>::signal_drag_data_send), (void *)this);
         g_signal_connect (G_OBJECT (this->source()), 
-                "drag-end", DRAG_CALLBACK (BaseViewSignals<Type>::signal_drag_end), (void *)this);
+                "drag-end", DRAG_CALLBACK (BaseModel<Type>::signal_drag_end), (void *)this);
       
         // destination widget
         g_signal_connect (G_OBJECT (this->destination()), 
                 "drag-data-received", G_CALLBACK (BaseViewSignals<Type>::signal_drag_data_receive), (void *)this);
         g_signal_connect (G_OBJECT (this->destination()), 
-                "drag-leave", G_CALLBACK (BaseViewSignals<Type>::signal_drag_leave), (void *)this);
+                "drag-leave", G_CALLBACK (BaseModel<Type>::signal_drag_leave), (void *)this);
 
         // Not necessary with GTK_DEST_DEFAULT_MOTION
 	// while using default iconview dnd, but this is not
@@ -108,9 +109,9 @@ public:
         // Overkill?
         /*g_signal_connect (G_OBJECT (this->source()), 
                 "drag-data-delete", G_CALLBACK (BaseViewSignals<Type>::signal_drag_delete), (void *)this);
-
+*/
         g_signal_connect (G_OBJECT (this->source()), 
-                "drag-failed", DRAG_CALLBACK (BaseViewSignals<Type>::signal_drag_failed), (void *)this);*/
+                "drag-failed", DRAG_CALLBACK (BaseModel<Type>::signal_drag_failed), (void *)this);
 
         //loadModel(path);
             
