@@ -103,9 +103,9 @@ public:
 
 	auto page = (Page<Type> *)data;
         auto dialog = page->parent();
-	auto baseView = (BaseView<Type> *)g_object_get_data(G_OBJECT(page->topScrolledWindow()),"baseView");
-	if (baseView) {
-	    baseView->clear_highlights();
+	auto baseModel = (BaseModel<Type> *)g_object_get_data(G_OBJECT(page->topScrolledWindow()),"baseModel");
+	if (baseModel) {
+	    baseModel->clear_highlights(baseModel);
 	}
 	//FIXME:
         //if (!view_p->all_set_up) return FALSE;

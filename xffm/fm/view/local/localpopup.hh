@@ -845,8 +845,9 @@ public:
 	}
         g_free(response);
 	// get baseView
-	auto baseView =  (BaseView<Type> *)g_object_get_data(G_OBJECT(data), "baseView");
-	auto page = baseView->page();
+	//auto baseView =  (BaseView<Type> *)g_object_get_data(G_OBJECT(data), "baseView");
+	auto baseModel =  (BaseModel<Type> *)g_object_get_data(G_OBJECT(data), "baseModel");
+	auto page = baseModel->page();
 	page->command(command);
 	TRACE("2)command = %s\n", command);
 	g_free(command);

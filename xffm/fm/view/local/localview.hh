@@ -88,6 +88,7 @@ public:
 	LocalPopUp<Type>::resetMenuItems(baseView, tpath);
 	// Set to non static object BaseView:
 	g_object_set_data(G_OBJECT(localItemPopUp), "baseView",(void *) baseView);
+	g_object_set_data(G_OBJECT(localItemPopUp), "baseModel",(void *) baseView);
 	// get corresponding menuitem
 	auto menuItem = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(localItemPopUp), "Run Executable..."));
 	// openwith dialog.
@@ -105,6 +106,7 @@ public:
 	    LocalPopUp<Type>::resetMenuItems(baseView, tpath);
 	    // Set to non static object BaseView:
 	    g_object_set_data(G_OBJECT(localItemPopUp), "baseView",(void *) baseView);
+	    g_object_set_data(G_OBJECT(localItemPopUp), "baseModel",(void *) baseView);
 	    // get corresponding menuitem
 	    auto menuItem = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(localItemPopUp), "Open with"));
 	    // openwith dialog.

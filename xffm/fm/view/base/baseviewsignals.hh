@@ -13,29 +13,6 @@
 #define IS_DIR (x&0x01)
 #define CONTROL_MODE (event->state & GDK_CONTROL_MASK)
 #define SHIFT_MODE (event->state & GDK_SHIFT_MASK)
-/* Overkill... Simple target list in baseview.hh
- * enum {
-    TARGET_URI_LIST,
-    TARGET_MOZ_URL,
-    TARGET_PLAIN,
-    TARGET_UTF8,
-    TARGET_STRING,
-    TARGETS
-};
-
-static GtkTargetEntry targetTable[] = {
-    {(gchar *)"text/uri-list", 0, TARGET_URI_LIST},
-    {(gchar *)"text/x-moz-url", 0, TARGET_MOZ_URL},
-    {(gchar *)"text/plain", 0, TARGET_PLAIN},
-    {(gchar *)"UTF8_STRING", 0, TARGET_UTF8},
-    {(gchar *)"STRING", 0, TARGET_STRING}
-};*/
-
-static GtkTargetEntry targetTable[] = {
-    {(gchar *)"text/uri-list", 0, TARGET_URI_LIST},
-};
-
-#define NUM_TARGETS (sizeof(targetTable)/sizeof(GtkTargetEntry))
 static gboolean dragOn_=FALSE;
 static gboolean rubberBand_=FALSE;
 static gint buttonPressX=-1;
@@ -45,9 +22,7 @@ static gint dragMode_=0;
 static GtkTargetList *targets=NULL;
 static GdkDragContext *context=NULL;
 
-static GHashTable *validBaseViewHash = NULL;
 static gboolean controlMode = FALSE;
-static GHashTable *highlight_hash=NULL;
 
 namespace xf
 {
@@ -546,13 +521,13 @@ public:
             // drop into?
             // must be a directory (XXX this is quite local stuff...)
             if (g_file_test(g, G_FILE_TEST_IS_DIR)){
-                baseView->highlight(tpath);
+                BaseModel<Type>::highlight(tpath, baseView);
             } else {
-                baseView->highlight(NULL);
+                BaseModel<Type>::highlight(NULL, baseView);
             }
 	    g_free(g);
         } else {
-            baseView->highlight(NULL);
+            BaseModel<Type>::highlight(NULL, baseView);
         }
         return FALSE;
     }

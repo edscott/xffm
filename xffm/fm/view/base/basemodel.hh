@@ -40,7 +40,32 @@ enum {
     TARGETS
 };
 
+static GtkTargetEntry targetTable[] = {
+    {(gchar *)"text/uri-list", 0, TARGET_URI_LIST},
+};
+
+#define NUM_TARGETS (sizeof(targetTable)/sizeof(GtkTargetEntry))
+/* Overkill... Simple target list in baseview.hh
+ * enum {
+    TARGET_URI_LIST,
+    TARGET_MOZ_URL,
+    TARGET_PLAIN,
+    TARGET_UTF8,
+    TARGET_STRING,
+    TARGETS
+};
+
+static GtkTargetEntry targetTable[] = {
+    {(gchar *)"text/uri-list", 0, TARGET_URI_LIST},
+    {(gchar *)"text/x-moz-url", 0, TARGET_MOZ_URL},
+    {(gchar *)"text/plain", 0, TARGET_PLAIN},
+    {(gchar *)"UTF8_STRING", 0, TARGET_UTF8},
+    {(gchar *)"STRING", 0, TARGET_STRING}
+};*/
+
 #define URIFILE "file://"
+static GHashTable *highlight_hash=NULL;
+static GHashTable *validBaseViewHash = NULL;
 
 namespace xf
 {
@@ -60,6 +85,9 @@ class BaseModel
     
     Page<Type> *page_;
     gchar *path_;
+    GtkWidget *source_;
+    GtkWidget *destination_;
+
 protected:
     GList *selectionList_;
     LocalMonitor<Type> *localMonitor_;
@@ -74,16 +102,40 @@ public:
         localMonitor_ = NULL;
         fstabMonitor_ = NULL;
 	treeModel_ = mkTreeModel();
-
-	
+        if (!highlight_hash) highlight_hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
+        if (!validBaseViewHash) {
+	    validBaseViewHash = g_hash_table_new(g_direct_hash, g_direct_equal); 
+	}
+	g_hash_table_replace(validBaseViewHash,
+		(void *)this, GINT_TO_POINTER(1));
+        source_ = GTK_WIDGET(this->page()->pageChild());
+        destination_ = GTK_WIDGET(this->page()->pageChild());
+        // Enable dnd by default.
+        // Local object will disable if not required.
+         createSourceTargetList(source_);
+        // 
+        // Only enable destination drops.
+        createDestTargetList(destination_);
     }
     ~BaseModel(void){
         TRACE("BaseModel destructor.\n");
-	
+	g_hash_table_remove(validBaseViewHash, (void *)this);
         g_free(path_); 
         g_object_unref(treeModel_);
     }
 
+    GtkWidget *source(){ return source_;}
+    GtkWidget *destination(){ return destination_;}
+    
+    void disableDnD(void){
+        gtk_drag_source_unset(source_);
+        gtk_drag_dest_unset(destination_);
+    }
+    
+    void enableDnD(void){
+        createSourceTargetList(source_);
+        createDestTargetList(destination_);
+    }
 
     Page<Type> *page(void){return page_;}
     const gchar *path(){return path_;}
@@ -142,6 +194,85 @@ public:
         return (iconname);
     }
 
+    //////////////////////   static   ////////////////////////////
+
+    static void
+    highlight(GtkTreePath *tpath, gpointer data){
+            //TRACE("highlight %d, %d\n", highlight_x, highlight_y);
+        gchar *tree_path_string = NULL;
+        
+        if (tpath == NULL){
+            // No item at position?
+            // Do we need to clear hash table?
+            clear_highlights(data);
+            return;
+        }
+
+        // Already highlighted?
+        tree_path_string = gtk_tree_path_to_string (tpath);
+        if (g_hash_table_lookup(highlight_hash, tree_path_string)) {
+            //TRACE("%s already in hash\n", tree_path_string);
+            g_free (tree_path_string);
+            gtk_tree_path_free (tpath);
+            return;
+        }
+
+	auto baseModel = (BaseModel<Type> *)data;
+        // Not highlighted. First clear any other item which highlight remains.
+        clear_highlights(data);
+        // Now do highlight dance. 
+        g_hash_table_insert(highlight_hash, tree_path_string, GINT_TO_POINTER(1));
+        GtkTreeIter iter;
+        gtk_tree_model_get_iter (baseModel->treeModel(), &iter, tpath);
+        
+        GdkPixbuf *highlight_pixbuf;
+        gtk_tree_model_get (baseModel->treeModel(), &iter, 
+                HIGHLIGHT_PIXBUF, &highlight_pixbuf, -1);
+        gtk_list_store_set (GTK_LIST_STORE(baseModel->treeModel()), &iter,
+                DISPLAY_PIXBUF, highlight_pixbuf, 
+                -1);
+        return;
+    }
+
+    static void
+    clear_highlights(gpointer data){
+        if (!highlight_hash || g_hash_table_size(highlight_hash) == 0) return;
+        g_hash_table_foreach_remove (highlight_hash, BaseViewSignals<Type>::unhighlight, data);
+    }
+
+    static void
+    createSourceTargetList (GtkWidget *widget) {
+        TRACE("createSourceTargetList..\n");
+        gtk_drag_source_set (widget,
+                     (GdkModifierType) 0, //GdkModifierType start_button_mask,
+                     targetTable,
+                     NUM_TARGETS,
+                     (GdkDragAction)
+                                    ((gint)GDK_ACTION_MOVE|
+                                     (gint)GDK_ACTION_COPY|
+                                     (gint)GDK_ACTION_LINK));
+        return;
+    }
+
+    static void
+    createDestTargetList (GtkWidget *widget) {
+        TRACE("createDestTargetList..\n");
+        gtk_drag_dest_set (widget,
+                     (GtkDestDefaults)
+                                   ((gint)GTK_DEST_DEFAULT_DROP|
+                                    (gint)GTK_DEST_DEFAULT_MOTION),
+                     targetTable,
+                     NUM_TARGETS,
+                     (GdkDragAction)
+                                    ((gint)GDK_ACTION_MOVE|
+                                     (gint)GDK_ACTION_COPY|
+                                     (gint)GDK_ACTION_LINK));
+        return;
+   }
+    
+    static gboolean validBaseView(BaseModel<Type> *baseModel) {
+	return GPOINTER_TO_INT(g_hash_table_lookup(validBaseViewHash, (void *)baseModel));
+    }
     
     // This mkTreeModel should be static...
     static GtkTreeModel *

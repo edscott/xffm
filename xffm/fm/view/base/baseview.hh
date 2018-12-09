@@ -23,9 +23,6 @@ class BaseView:
     gint dirCount_; 
     GtkIconView *iconView_;
     
-    GtkWidget *source_;
-    GtkWidget *destination_;
-
     gint viewType_;
 public:
     void setViewType(gint value){viewType_ = value;}
@@ -51,38 +48,12 @@ public:
     }
 
     
-    void disableDnD(void){
-        gtk_drag_source_unset(source_);
-        gtk_drag_dest_unset(destination_);
-    }
-    
-    void enableDnD(void){
-        createSourceTargetList(source_);
-        createDestTargetList(destination_);
-    }
-    
     BaseView(page_c *page):BaseModel<Type>(page)
     {
     //BaseView(page_c *page, const gchar *path){
-        if (!validBaseViewHash) validBaseViewHash = g_hash_table_new(g_direct_hash, g_direct_equal); 
-	g_hash_table_replace(validBaseViewHash, (void *)this, GINT_TO_POINTER(1));
         iconView_=createIconview();
 
-        source_ = GTK_WIDGET(this->page()->pageChild());
-        //source_ = GTK_WIDGET(this->page()->top_scrolled_window());
-        //source_ = GTK_WIDGET(iconView_);
-        //destination_ = GTK_WIDGET(iconView_);
-        destination_ = GTK_WIDGET(this->page()->pageChild());
 	
-        // Enable dnd by default.
-        // Local object will disable if not required.
-         createSourceTargetList(source_);
-         //createSourceTargetList();
-        // 
-        // Only enable destination drops.
-        //createDestTargetList();
-        createDestTargetList(destination_);
-        
 	g_object_set_data(G_OBJECT(this->treeModel()), "iconview", iconView_);
 	gtk_icon_view_set_model(iconView_, this->treeModel());
 
@@ -91,7 +62,6 @@ public:
 	gtk_icon_view_set_selection_mode (iconView_, GTK_SELECTION_SINGLE);
 
 
-        if (!highlight_hash) highlight_hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
         g_signal_connect (this->iconView_, "item-activated", 
             ICONVIEW_CALLBACK (BaseViewSignals<Type>::item_activated), (void *)this);
         g_signal_connect (this->iconView_, "motion-notify-event", 
@@ -110,36 +80,36 @@ public:
                 G_CALLBACK(BaseViewSignals<Type>::button_press_f), (void *)this);
 
         // source widget
-        g_signal_connect (G_OBJECT (source_), 
+        g_signal_connect (G_OBJECT (this->source()), 
                 "drag-begin", DRAG_CALLBACK (BaseViewSignals<Type>::signal_drag_begin), (void *)this);
-        g_signal_connect (G_OBJECT (source_), 
+        g_signal_connect (G_OBJECT (this->source()), 
                 "drag-data-get", G_CALLBACK (BaseViewSignals<Type>::signal_drag_data_send), (void *)this);
-        g_signal_connect (G_OBJECT (source_), 
+        g_signal_connect (G_OBJECT (this->source()), 
                 "drag-end", DRAG_CALLBACK (BaseViewSignals<Type>::signal_drag_end), (void *)this);
       
         // destination widget
-        g_signal_connect (G_OBJECT (destination_), 
+        g_signal_connect (G_OBJECT (this->destination()), 
                 "drag-data-received", G_CALLBACK (BaseViewSignals<Type>::signal_drag_data_receive), (void *)this);
-        g_signal_connect (G_OBJECT (destination_), 
+        g_signal_connect (G_OBJECT (this->destination()), 
                 "drag-leave", G_CALLBACK (BaseViewSignals<Type>::signal_drag_leave), (void *)this);
 
         // Not necessary with GTK_DEST_DEFAULT_MOTION
 	// while using default iconview dnd, but this is not
 	// our case.
-        g_signal_connect (G_OBJECT (destination_), 
+        g_signal_connect (G_OBJECT (this->destination()), 
               "drag-motion", 
 	      G_CALLBACK (BaseViewSignals<Type>::signal_drag_motion),
 	      (void *)this);
         // Not necessary with GTK_DEST_DEFAULT_DROP
         //
-        //g_signal_connect (G_OBJECT (destination_), 
+        //g_signal_connect (G_OBJECT (this->destination()), 
         //        "drag-drop", G_CALLBACK (BaseViewSignals<Type>::signal_drag_drop), (void *)this);
         
         // Overkill?
-        /*g_signal_connect (G_OBJECT (source_), 
+        /*g_signal_connect (G_OBJECT (this->source()), 
                 "drag-data-delete", G_CALLBACK (BaseViewSignals<Type>::signal_drag_delete), (void *)this);
 
-        g_signal_connect (G_OBJECT (source_), 
+        g_signal_connect (G_OBJECT (this->source()), 
                 "drag-failed", DRAG_CALLBACK (BaseViewSignals<Type>::signal_drag_failed), (void *)this);*/
 
         //loadModel(path);
@@ -148,7 +118,6 @@ public:
 
     ~BaseView(void){
         TRACE("BaseView destructor.\n");
-	g_hash_table_remove(validBaseViewHash, (void *)this);
 	
 
     }
@@ -158,12 +127,7 @@ public:
         g_object_set_data(G_OBJECT(iconView_), "path", g_strdup(this->path()));
 	BaseModel<Type>::setPath(path);
     }
-    
-    static gboolean validBaseView(BaseView<Type> *baseView) {
-	return GPOINTER_TO_INT(g_hash_table_lookup(validBaseViewHash, (void *)baseView));
-    }
 
-    GtkWidget *source(){ return source_;}
     
     void selectables(void){
         switch (this->viewType()){
@@ -284,12 +248,6 @@ public:
         this->selectionList_ = NULL;
     }
 
-    void
-    clear_highlights(void){
-        if (!highlight_hash || g_hash_table_size(highlight_hash) == 0) return;
-        g_hash_table_foreach_remove (highlight_hash, BaseViewSignals<Type>::unhighlight, (void *)this);
-    }
-
     void 
     highlight(gdouble X, gdouble Y){
         //if (!xfdir_p) return; // avoid race condition here.
@@ -298,10 +256,10 @@ public:
         
         GtkTreePath *tpath = gtk_icon_view_get_path_at_pos (iconView_, X, Y); 
         if (tpath) {
-            highlight(tpath);
+            BaseModel<Type>::highlight(tpath, this);
             //xfdir_p->tooltip(iconview_, gtk_tree_path_copy(tpath));
         }
-        else clear_highlights();
+        else BaseModel<Type>::clear_highlights(this);
     }
 
     
@@ -316,43 +274,6 @@ public:
 
 
 
-
-    void
-    highlight(GtkTreePath *tpath){
-            //TRACE("highlight %d, %d\n", highlight_x, highlight_y);
-        gchar *tree_path_string = NULL;
-        
-        if (tpath == NULL){
-            // No item at position?
-            // Do we need to clear hash table?
-            clear_highlights();
-            return;
-        }
-
-        // Already highlighted?
-        tree_path_string = gtk_tree_path_to_string (tpath);
-        if (g_hash_table_lookup(highlight_hash, tree_path_string)) {
-            //TRACE("%s already in hash\n", tree_path_string);
-            g_free (tree_path_string);
-            gtk_tree_path_free (tpath);
-            return;
-        }
-
-        // Not highlighted. First clear any other item which highlight remains.
-        clear_highlights();
-        // Now do highlight dance. 
-        g_hash_table_insert(highlight_hash, tree_path_string, GINT_TO_POINTER(1));
-        GtkTreeIter iter;
-        gtk_tree_model_get_iter (this->treeModel(), &iter, tpath);
-        
-        GdkPixbuf *highlight_pixbuf;
-        gtk_tree_model_get (this->treeModel(), &iter, 
-                HIGHLIGHT_PIXBUF, &highlight_pixbuf, -1);
-        gtk_list_store_set (GTK_LIST_STORE(this->treeModel()), &iter,
-                DISPLAY_PIXBUF, highlight_pixbuf, 
-                -1);
-        return;
-    }
 
 
     guint
@@ -456,68 +377,6 @@ private:
         return GTK_ICON_SIZE_DIALOG;
     }
 
-
-    void
-    createSourceTargetList (void) {
-        DBG("createSourceTargetList..\n");
-        gtk_icon_view_enable_model_drag_source
-                                   (iconView_,
-                                    (GdkModifierType) 0,
-                                    targetTable,
-                                    NUM_TARGETS,
-                                    (GdkDragAction)
-                                    ((gint)GDK_ACTION_MOVE|
-                                     (gint)GDK_ACTION_COPY|
-                                     (gint)GDK_ACTION_LINK));
-        return;
-    }
-
-    void
-    createSourceTargetList (GtkWidget *widget) {
-        DBG("createSourceTargetList..\n");
-        gtk_drag_source_set (widget,
-                     (GdkModifierType) 0, //GdkModifierType start_button_mask,
-                     targetTable,
-                     NUM_TARGETS,
-                     (GdkDragAction)
-                                    ((gint)GDK_ACTION_MOVE|
-                                     (gint)GDK_ACTION_COPY|
-                                     (gint)GDK_ACTION_LINK));
-        return;
-    }
-
-    void
-    createDestTargetList (GtkWidget *widget) {
-        DBG("createDestTargetList..\n");
-        gtk_drag_dest_set (widget,
-                     (GtkDestDefaults)
-                                   ((gint)GTK_DEST_DEFAULT_DROP|
-                                    (gint)GTK_DEST_DEFAULT_MOTION),
-                     targetTable,
-                     NUM_TARGETS,
-                     (GdkDragAction)
-                                    ((gint)GDK_ACTION_MOVE|
-                                     (gint)GDK_ACTION_COPY|
-                                     (gint)GDK_ACTION_LINK));
-        return;
-   }
-
-    void
-    createDestTargetList (void) {
-        DBG("createDestTargetList..\n");
-        //if(target_list) return;
-        //targetList_ = gtk_target_list_new (targetTable, NUM_TARGETS);
-        // The default dnd action: move.
-
-        gtk_icon_view_enable_model_drag_dest (iconView_,
-                                          targetTable, 
-                                          NUM_TARGETS,
-                                          (GdkDragAction)
-                                    ((gint)GDK_ACTION_MOVE|
-                                     (gint)GDK_ACTION_COPY|
-                                     (gint)GDK_ACTION_LINK));
-        return;
-    }
  
     static GtkIconView *createIconview(void){
         auto icon_view = GTK_ICON_VIEW(gtk_icon_view_new());

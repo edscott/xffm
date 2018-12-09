@@ -35,6 +35,8 @@ public:
 	TRACE("fm.hh::adding page: %s\n", workdir);
 	// Create BaseView object.
         auto baseView =  new BaseView<Type>(page, workdir);
+        g_object_set_data(G_OBJECT(page->topScrolledWindow()), "baseModel", baseView);
+	
         g_object_set_data(G_OBJECT(page->topScrolledWindow()), "baseView", baseView);
         // Add the iconview into the scrolled window.
 	gtk_container_add (GTK_CONTAINER (page->topScrolledWindow()),

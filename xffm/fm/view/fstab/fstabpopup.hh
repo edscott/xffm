@@ -157,6 +157,7 @@ class FstabPopUp {
     mount(GtkMenuItem *menuItem, gpointer data)
     {
         auto baseView = (BaseView<Type> *)g_object_get_data(G_OBJECT(data), "baseView");
+        auto baseModel = (BaseModel<Type> *)g_object_get_data(G_OBJECT(data), "baseModel");
 	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
 
 	WARN("FstabPopup::mount %s\n", path);
