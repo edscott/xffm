@@ -56,9 +56,9 @@ public:
         // XXX: Probably should retrieve path the same way from
         //      menu item in both cases... But that would use
         //      more memory and CPU unnecessarily...
-	auto baseModel = (BaseModel<Type> *)g_object_get_data(G_OBJECT(data), "baseModel");
+	auto baseView = (BaseView<Type> *)g_object_get_data(G_OBJECT(data), "baseView");
         auto path = (const gchar *)g_object_get_data(G_OBJECT(menuItem), "path");
-        if (!path) path = baseModel->path();
+        if (!path) path = baseView->path();
         gtk_clipboard_request_text (clipBoard, pasteClip, (void *)path);
     }
 
