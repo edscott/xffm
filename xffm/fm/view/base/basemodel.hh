@@ -194,6 +194,22 @@ public:
         return (iconname);
     }
 
+    void
+    freeSelectionList(void){
+        if (selectionList_) 
+            g_list_free_full (selectionList_, (GDestroyNotify) gtk_tree_path_free);
+        selectionList_ = NULL;
+    }
+    
+    void
+    setSelectionList(GList *list){
+        if (selectionList_) freeSelectionList();
+        selectionList_ = list;
+    }
+
+    GList *
+    selectionList(void){return selectionList_;}
+
     //////////////////////   static   ////////////////////////////
 
     static void

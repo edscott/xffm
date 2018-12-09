@@ -241,13 +241,6 @@ public:
    GtkTreeModel *
     get_tree_model (void){return this->treeModel();}
 
-    void
-    freeSelectionList(void){
-        if (this->selectionList_) 
-            g_list_free_full (this->selectionList_, (GDestroyNotify) gtk_tree_path_free);
-        this->selectionList_ = NULL;
-    }
-
     void 
     highlight(gdouble X, gdouble Y){
         //if (!xfdir_p) return; // avoid race condition here.
@@ -261,20 +254,6 @@ public:
         }
         else BaseModel<Type>::clear_highlights(this);
     }
-
-    
-    void
-    setSelectionList(GList *list){
-        if (this->selectionList_) freeSelectionList();
-        this->selectionList_ = list;
-    }
-
-    GList *
-    selectionList(void){return this->selectionList_;}
-
-
-
-
 
     guint
     setSelectable(gchar *name, guint flags){
