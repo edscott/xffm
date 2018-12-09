@@ -117,13 +117,17 @@ public:
         // Customize most important menu items
         GtkMenuItem *mItem;
         gchar *markup;
-        decorateEditItems(localItemPopUp);
         mItem = (GtkMenuItem *)g_object_get_data(G_OBJECT(localItemPopUp), "Open with");
         markup = g_strdup_printf("<b>%s</b>", _("Open with"));
         gtk_c::menu_item_content(mItem, "system-run", markup, -24);
         g_free(markup);
 
         const gchar *smallKey[]={
+            "Cut",
+            "Copy",
+            "Paste",
+            "Delete",
+
             "Rename",
             "Duplicate",
             "Link",
@@ -131,7 +135,12 @@ public:
             NULL
         };
         const gchar *smallIcon[]={
-            "view-refresh-symbolic",
+            "edit-cut",
+            "edit-copy",
+            "edit-paste",
+            "edit-delete",
+
+	    "view-refresh-symbolic",
             "edit-copy",
             "emblem-symbolic-link",
             "view-refresh-symbolic",
@@ -151,7 +160,7 @@ public:
     static void
     decorateEditItems(GtkMenu *menu){
         const gchar *key[]={
-            "New",
+            "New",// this menuitem is only for nonitem popup
             "Cut",
             "Copy",
             "Paste",

@@ -1,64 +1,24 @@
 #ifndef XF_BASEVIEW__HH
 # define XF_BASEVIEW__HH
 
-
-enum
-{
-    ROOTVIEW_TYPE,
-    LOCALVIEW_TYPE,
-    FSTAB_TYPE,
-    NFS_TYPE,
-    SSHFS_TYPE,
-    ECRYPTFS_TYPE,
-    CIFS_TYPE,
-    PKG_TYPE
-};
-
-enum
-{
-  FLAGS,
-  DISPLAY_PIXBUF,
-  NORMAL_PIXBUF,
-  HIGHLIGHT_PIXBUF,
-  TOOLTIP_PIXBUF,
-  DISPLAY_NAME,
-  ACTUAL_NAME,
-  PATH,
-  SIZE,
-  DATE,
-  TOOLTIP_TEXT,
-  ICON_NAME,
-  TYPE,
-  MIMETYPE, 
-  PREVIEW_PATH,
-  PREVIEW_TIME,
-  PREVIEW_PIXBUF,
-  NUM_COLS
-};
-
-enum {
-    TARGET_URI_LIST,
-    TARGETS
-};
-
-#define URIFILE "file://"
+#include "basemodel.hh"
 #include "baseviewsignals.hh"
 
 namespace xf
 {
 
 template <class Type>
-class BaseView{
+class BaseView:
+    public BaseModel<Type>
+{
     using util_c = Util<Type>;
     using page_c = Page<Type>;
-    GList *selectionList_;
     
     gint display_pixbuf_column_;
     gint normal_pixbuf_column_;
     gint actual_name_column_;
 
 
-    GtkTreeModel *treeModel_;
     //GtkTreeModelSort *sortModel_;
     gint dirCount_; 
     GtkIconView *iconView_;
@@ -66,47 +26,30 @@ class BaseView{
     GtkWidget *source_;
     GtkWidget *destination_;
 
-    gchar *path_;
-    page_c *page_;
-
-    LocalMonitor<Type> *localMonitor_;
-    FstabMonitor<Type> *fstabMonitor_;
     gint viewType_;
 public:
     void setViewType(gint value){viewType_ = value;}
     gint viewType(void){ return viewType_;}
 private:
 
-    // This mkTreeModel should be static...
-    static GtkTreeModel *
-    mkTreeModel (void)
-    {
-
-	GtkTreeIter iter;
-	GtkListStore *list_store = gtk_list_store_new (NUM_COLS, 
-	    G_TYPE_UINT,      // flags
-	    GDK_TYPE_PIXBUF, // icon in display
-	    GDK_TYPE_PIXBUF, // normal icon reference
-	    GDK_TYPE_PIXBUF, // highlight icon reference
-	    GDK_TYPE_PIXBUF, // preview, tooltip image (cache)
-	    G_TYPE_STRING,   // name in display (UTF-8)
-	    G_TYPE_STRING,   // name from filesystem (verbatim)
-	    G_TYPE_STRING,   // path (verbatim)
-            G_TYPE_UINT,     // date
-            G_TYPE_UINT,     // size
-	    G_TYPE_STRING,   // tooltip text (cache)
-	    G_TYPE_STRING,   // icon identifier (name or composite key)
-	    G_TYPE_INT,      // mode (to identify directories)
-	    G_TYPE_STRING,   // mimetype (further identification of files)
-	    G_TYPE_STRING,   // Preview path
-	    G_TYPE_UINT,      // Preview time
-	    GDK_TYPE_PIXBUF  // Preview pixbuf
-            ); // 
-	return GTK_TREE_MODEL (list_store);
-    }
 
 public:
-    page_c *page(void){return page_;}
+
+    gboolean loadModel(GtkTreeModel *treeModel, const GtkTreePath *tpath, 
+	    const gchar *path){
+        if (g_file_test(path, G_FILE_TEST_EXISTS)){
+	    TRACE("%s is  valid path\n", path);
+	    if (!g_file_test(path, G_FILE_TEST_IS_DIR)){
+                // Not a directory, but valid path: activate item.
+		DBG("%s is not dir\n", path);
+		return LocalView<Type>::item_activated(this, treeModel, tpath, path);
+	    }
+	} else {
+	    DBG("%s is not valid path\n", path);
+        }
+	return loadModel(path);
+    }
+
     
     void disableDnD(void){
         gtk_drag_source_unset(source_);
@@ -118,26 +61,19 @@ public:
         createDestTargetList(destination_);
     }
     
-    BaseView(page_c *page){
+    BaseView(page_c *page):BaseModel<Type>(page)
+    {
     //BaseView(page_c *page, const gchar *path){
-	page_ = page; 
-        path_ = NULL;
-        selectionList_ = NULL;
-        localMonitor_ = NULL;
-        fstabMonitor_ = NULL;
         if (!validBaseViewHash) validBaseViewHash = g_hash_table_new(g_direct_hash, g_direct_equal); 
 	g_hash_table_replace(validBaseViewHash, (void *)this, GINT_TO_POINTER(1));
         iconView_=createIconview();
 
-        source_ = GTK_WIDGET(page_->pageChild());
-        //source_ = GTK_WIDGET(page_->top_scrolled_window());
+        source_ = GTK_WIDGET(this->page()->pageChild());
+        //source_ = GTK_WIDGET(this->page()->top_scrolled_window());
         //source_ = GTK_WIDGET(iconView_);
         //destination_ = GTK_WIDGET(iconView_);
-        destination_ = GTK_WIDGET(page_->pageChild());
+        destination_ = GTK_WIDGET(this->page()->pageChild());
 	
-        //sortModel_ = GTK_TREE_MODEL_SORT(mkTreeModel());
-	//treeModel_ = gtk_tree_model_sort_get_model(sortModel_);
-	treeModel_ = mkTreeModel();
         // Enable dnd by default.
         // Local object will disable if not required.
          createSourceTargetList(source_);
@@ -147,8 +83,8 @@ public:
         //createDestTargetList();
         createDestTargetList(destination_);
         
-	g_object_set_data(G_OBJECT(treeModel_), "iconview", iconView_);
-	gtk_icon_view_set_model(iconView_, treeModel_);
+	g_object_set_data(G_OBJECT(this->treeModel()), "iconview", iconView_);
+	gtk_icon_view_set_model(iconView_, this->treeModel());
 
 	gtk_icon_view_set_text_column (iconView_, DISPLAY_NAME);
 	gtk_icon_view_set_pixbuf_column (iconView_,  DISPLAY_PIXBUF);
@@ -214,11 +150,15 @@ public:
         TRACE("BaseView destructor.\n");
 	g_hash_table_remove(validBaseViewHash, (void *)this);
 	
-        g_free(path_); 
-        g_object_unref(treeModel_);
 
     }
-
+    void setPath(const gchar *path){
+        auto lastPath =  g_object_get_data(G_OBJECT(iconView_), "path");
+        g_free(lastPath); 
+        g_object_set_data(G_OBJECT(iconView_), "path", g_strdup(this->path()));
+	BaseModel<Type>::setPath(path);
+    }
+    
     static gboolean validBaseView(BaseView<Type> *baseView) {
 	return GPOINTER_TO_INT(g_hash_table_lookup(validBaseViewHash, (void *)baseView));
     }
@@ -237,69 +177,37 @@ public:
         return;
     }
 
-    const gchar *path(){return path_;}
-
-    gboolean loadModel(GtkTreeModel *treeModel, const GtkTreePath *tpath, 
-	    const gchar *path){
-        if (g_file_test(path, G_FILE_TEST_EXISTS)){
-	    TRACE("%s is  valid path\n", path);
-	    if (!g_file_test(path, G_FILE_TEST_IS_DIR)){
-                // Not a directory, but valid path: activate item.
-		DBG("%s is not dir\n", path);
-		return LocalView<Type>::item_activated(this, treeModel, tpath, path);
-	    }
-	} else {
-	    DBG("%s is not valid path\n", path);
-        }
-	return loadModel(path);
-    }
-
-    static gint
-    getViewType(const gchar *path){
-        if (!path) return ROOTVIEW_TYPE;
-        if (g_file_test(path, G_FILE_TEST_EXISTS)) return (LOCALVIEW_TYPE);
-        if (strcmp(path, "xffm:local")==0) return (LOCALVIEW_TYPE);
-        if (strcmp(path, "xffm:root")==0) return (ROOTVIEW_TYPE);
-        if (strcmp(path, "xffm:fstab")==0) return (FSTAB_TYPE);
-        if (strcmp(path, "xffm:nfs")==0) return (NFS_TYPE);
-        if (strcmp(path, "xffm:sshfs")==0) return (SSHFS_TYPE);
-        if (strcmp(path, "xffm:ecryptfs")==0) return (ECRYPTFS_TYPE);
-        if (strcmp(path, "xffm:cifs")==0) return (CIFS_TYPE);
-        if (strcmp(path, "xffm:pkg")==0) return (PKG_TYPE);
-        ERROR("BaseView::loadModel() %s not defined.\n", path);
-        return (ROOTVIEW_TYPE);
-    }
     
 
     gboolean loadModel(const gchar *path){
-        setViewType(getViewType(path));
+        setViewType(BaseModel<Type>::getViewType(path));
         setPath(path);
         // stop current monitor
-        if (localMonitor_) {
-            localMonitorList = g_list_remove(localMonitorList, (void *)localMonitor_->monitor());
-            delete (localMonitor_);
-            localMonitor_ = NULL;
+        if (this->localMonitor_) {
+            localMonitorList = g_list_remove(localMonitorList, (void *)this->localMonitor_->monitor());
+            delete (this->localMonitor_);
+            this->localMonitor_ = NULL;
         }
-        if (fstabMonitor_) {
-            delete (fstabMonitor_);
-            fstabMonitor_ = NULL;
+        if (this->fstabMonitor_) {
+            delete (this->fstabMonitor_);
+            this->fstabMonitor_ = NULL;
         }
 
         switch (viewType_){
             case (ROOTVIEW_TYPE):
                 RootView<Type>::loadModel(this);
-                page_->updateStatusLabel(NULL);
+                this->page()->updateStatusLabel(NULL);
                 break;
             case (LOCALVIEW_TYPE):
 		if (strcmp(path, "xffm:local")==0) {
-		    localMonitor_ = LocalView<Type>::loadModel(this, g_get_home_dir());
+		    this->localMonitor_ = LocalView<Type>::loadModel(this, g_get_home_dir());
 		} else {
-		    localMonitor_ = LocalView<Type>::loadModel(this, path);
+		    this->localMonitor_ = LocalView<Type>::loadModel(this, path);
 		}
                 break;
             case (FSTAB_TYPE):
-                fstabMonitor_ = Fstab<Type>::loadModel(this);
-	        page_->updateStatusLabel(NULL);
+                this->fstabMonitor_ = Fstab<Type>::loadModel(this);
+	        this->page()->updateStatusLabel(NULL);
                 break;
             default:
                 ERROR("ViewType %d not defined.\n", viewType_);
@@ -316,24 +224,24 @@ public:
 		    // start new monitor
                     gint items = 0;
                     GtkTreeIter iter;
-                    if (gtk_tree_model_get_iter_first (treeModel_, &iter)) {
-                        while (gtk_tree_model_iter_next(treeModel_, &iter)) items++;
+                    if (gtk_tree_model_get_iter_first (this->treeModel(), &iter)) {
+                        while (gtk_tree_model_iter_next(this->treeModel(), &iter)) items++;
                     }
                     auto fileCount = g_strdup_printf("%0d", items);
                     // We do not count "../"
                     auto text = g_strdup_printf(_("Files: %s"), fileCount); 
                     g_free(fileCount);
-                    page_->updateStatusLabel(text);
+                    this->page()->updateStatusLabel(text);
                     g_free(text);
                     TRACE("FIXME: Set filecount %d message in status button...\n", items);
 
                     
 
                     if (items <= 500) {
-		        localMonitor_ = new(LocalMonitor<Type>)(treeModel_, this);
-		        localMonitor_->start_monitor(treeModel_, path);
+		        this->localMonitor_ = new(LocalMonitor<Type>)(this->treeModel(), this);
+		        this->localMonitor_->start_monitor(this->treeModel(), path);
                     } else {
-                        localMonitor_ = NULL;
+                        this->localMonitor_ = NULL;
                     }
 		}
 	    } else {
@@ -343,9 +251,9 @@ public:
         } else  
         if (strcmp(path, "xffm:fstab")==0) {
 	    result = Fstab<Type>::loadModel(iconView_);
-	    page_->updateStatusLabel(NULL);
-            fstabMonitor_ = new(FstabMonitor<Type>)(treeModel_, this);
-            fstabMonitor_->start_monitor(treeModel_, "/dev/disk/by-partuuid");
+	    this->page()->updateStatusLabel(NULL);
+            this->fstabMonitor_ = new(FstabMonitor<Type>)(this->treeModel(), this);
+            this->fstabMonitor_->start_monitor(this->treeModel(), "/dev/disk/by-partuuid");
 	    return result;
 
         } else if (!strcmp(path, "xffm:root")==0) {
@@ -353,7 +261,7 @@ public:
         }
         setPath("xffm:root");
         result = RootView<Type>::loadModel(iconView_);
-        page_->updateStatusLabel(NULL);
+        this->page()->updateStatusLabel(NULL);
 */
         return TRUE;
     }
@@ -365,16 +273,15 @@ public:
     }
 
     GtkIconView *iconView(void){return iconView_;}
-    GtkTreeModel *treeModel(void){return treeModel_;}
     //GtkTargetList *getTargetList(void){return targetList_;}
    GtkTreeModel *
-    get_tree_model (void){return treeModel_;}
+    get_tree_model (void){return this->treeModel();}
 
     void
     freeSelectionList(void){
-        if (selectionList_) 
-            g_list_free_full (selectionList_, (GDestroyNotify) gtk_tree_path_free);
-        selectionList_ = NULL;
+        if (this->selectionList_) 
+            g_list_free_full (this->selectionList_, (GDestroyNotify) gtk_tree_path_free);
+        this->selectionList_ = NULL;
     }
 
     void
@@ -400,12 +307,12 @@ public:
     
     void
     setSelectionList(GList *list){
-        if (selectionList_) freeSelectionList();
-        selectionList_ = list;
+        if (this->selectionList_) freeSelectionList();
+        this->selectionList_ = list;
     }
 
     GList *
-    selectionList(void){return selectionList_;}
+    selectionList(void){return this->selectionList_;}
 
 
 
@@ -436,12 +343,12 @@ public:
         // Now do highlight dance. 
         g_hash_table_insert(highlight_hash, tree_path_string, GINT_TO_POINTER(1));
         GtkTreeIter iter;
-        gtk_tree_model_get_iter (treeModel_, &iter, tpath);
+        gtk_tree_model_get_iter (this->treeModel(), &iter, tpath);
         
         GdkPixbuf *highlight_pixbuf;
-        gtk_tree_model_get (treeModel_, &iter, 
+        gtk_tree_model_get (this->treeModel(), &iter, 
                 HIGHLIGHT_PIXBUF, &highlight_pixbuf, -1);
-        gtk_list_store_set (GTK_LIST_STORE(treeModel_), &iter,
+        gtk_list_store_set (GTK_LIST_STORE(this->treeModel()), &iter,
                 DISPLAY_PIXBUF, highlight_pixbuf, 
                 -1);
         return;
@@ -458,33 +365,14 @@ public:
     isSelectable(GtkTreePath *tpath ) {
         GtkTreeIter iter;
 	guint flags;
-        gtk_tree_model_get_iter (treeModel_, &iter, tpath);
-        gtk_tree_model_get (treeModel_, &iter, 
+        gtk_tree_model_get_iter (this->treeModel(), &iter, tpath);
+        gtk_tree_model_get (this->treeModel(), &iter, 
                 FLAGS , &flags, -1);
         return !IS_NOTSELECTABLE(flags);
     }
 
 
 private:
-
-    void setPath(const gchar *path){
-        g_free(path_);
-        if (path) path_ = g_strdup(path);
-        else {
-            ERROR("baseView::setPath(NULL)\n");
-            exit(1);
-        }
-        auto lastPath =  g_object_get_data(G_OBJECT(iconView_), "path");
-        g_free(lastPath); 
-        g_object_set_data(G_OBJECT(iconView_), "path", g_strdup(path_));
-
-        TRACE("Baseview:: setPath()\n");
-        if (g_file_test(path_, G_FILE_TEST_IS_DIR)){
-            page_->setPageWorkdir(path_);
-        } else {
-            page_->setPageWorkdir(g_get_home_dir());
-        }
-    }
     gint get_dir_count(void){ return dirCount_;}
 
 
@@ -498,8 +386,8 @@ private:
     get_verbatim_name (GtkTreePath *tpath ) {
         GtkTreeIter iter;
         gchar *verbatim_name=NULL;
-        gtk_tree_model_get_iter (treeModel_, &iter, tpath);
-        gtk_tree_model_get (treeModel_, &iter, 
+        gtk_tree_model_get_iter (this->treeModel(), &iter, tpath);
+        gtk_tree_model_get (this->treeModel(), &iter, 
                 ACTUAL_NAME, &verbatim_name, -1);
         return verbatim_name;
     }
@@ -508,8 +396,8 @@ private:
     get_normal_pixbuf (GtkTreePath *tpath ) {
         GtkTreeIter iter;
         GdkPixbuf *pixbuf=NULL;
-        gtk_tree_model_get_iter (treeModel_, &iter, tpath);
-        gtk_tree_model_get (treeModel_, &iter, 
+        gtk_tree_model_get_iter (this->treeModel(), &iter, tpath);
+        gtk_tree_model_get (this->treeModel(), &iter, 
                 NORMAL_PIXBUF , &pixbuf, -1);
         return pixbuf;
     }
@@ -518,8 +406,8 @@ private:
     get_tooltip_pixbuf (GtkTreePath *tpath ) {
         GtkTreeIter iter;
         GdkPixbuf *pixbuf=NULL;
-        gtk_tree_model_get_iter (treeModel_, &iter, tpath);
-        gtk_tree_model_get (treeModel_, &iter, 
+        gtk_tree_model_get_iter (this->treeModel(), &iter, tpath);
+        gtk_tree_model_get (this->treeModel(), &iter, 
                 TOOLTIP_PIXBUF, &pixbuf, -1);
         return pixbuf;
     }
@@ -528,8 +416,8 @@ private:
     get_tooltip_text (GtkTreePath *tpath ) {
         GtkTreeIter iter;
         gchar *text=NULL;
-        gtk_tree_model_get_iter (treeModel_, &iter, tpath);
-        gtk_tree_model_get (treeModel_, &iter, 
+        gtk_tree_model_get_iter (this->treeModel(), &iter, tpath);
+        gtk_tree_model_get (this->treeModel(), &iter, 
                 TOOLTIP_TEXT, &text, -1);
         return text;
     }
@@ -539,8 +427,8 @@ private:
     void
     set_tooltip_pixbuf (GtkTreePath *tpath, GdkPixbuf *pixbuf ) {
         GtkTreeIter iter;
-        gtk_tree_model_get_iter (treeModel_, &iter, tpath);
-        gtk_list_store_set (GTK_LIST_STORE(treeModel_), &iter,
+        gtk_tree_model_get_iter (this->treeModel(), &iter, tpath);
+        gtk_list_store_set (GTK_LIST_STORE(this->treeModel()), &iter,
                 TOOLTIP_PIXBUF, pixbuf, 
             -1);
 
@@ -551,8 +439,8 @@ private:
     void
     set_tooltip_text (GtkTreePath *tpath, const gchar *text ) {
         GtkTreeIter iter;
-        gtk_tree_model_get_iter (treeModel_, &iter, tpath);
-        gtk_list_store_set (GTK_LIST_STORE(treeModel_), &iter,
+        gtk_tree_model_get_iter (this->treeModel(), &iter, tpath);
+        gtk_list_store_set (GTK_LIST_STORE(this->treeModel()), &iter,
                 TOOLTIP_TEXT, text, 
             -1);
 
@@ -560,7 +448,7 @@ private:
     }
     const gchar *
     get_label(void){
-        return path();
+        return this->path();
     }
 
     gint 
@@ -568,44 +456,6 @@ private:
         return GTK_ICON_SIZE_DIALOG;
     }
 
-
-    gchar *
-    get_window_name (void) {
-        gchar *iconname;
-        if(!path_) {
-            iconname = util_c::utf_string (g_get_host_name());
-        } else if(g_path_is_absolute(path_) &&
-                g_file_test (path_, G_FILE_TEST_EXISTS)) {
-            gchar *basename = g_path_get_basename (path_);
-            gchar *pathname = g_strdup (path_);
-            gchar *b = util_c::utf_string (basename);   // non chopped
-            util_c::chop_excess (pathname);
-            gchar *q = util_c::utf_string (pathname);   // non chopped
-
-            g_free (basename);
-            g_free (pathname);
-            //iconname = g_strconcat (display_host, ":  ", b, " (", q, ")", NULL);
-            iconname = g_strconcat (b, " (", q, ")", NULL);
-            g_free (q);
-            g_free (b);
-        } else {
-            iconname = util_c::utf_string (path_);
-            util_c::chop_excess (iconname);
-        }
-
-#ifdef DEBUG
-        gchar *gg = g_strdup_printf("%s-%d-D", iconname, getpid());
-        g_free(iconname);
-        iconname = gg;
-#else
-#ifdef CORE
-        gchar *gg = g_strdup_printf("%s-%d-C", iconname, getpid());
-        g_free(iconname);
-        iconname = gg;
-#endif
-#endif
-        return (iconname);
-    }
 
     void
     createSourceTargetList (void) {
