@@ -1,6 +1,10 @@
 #ifndef  XF_BASEMODEL__HH
 # define XF_BASEMODEL__HH
 
+// Flag bits:
+#define IS_NOTSELECTABLE(F) ((0x01<<1)&F)
+#define SET_NOTSELECTABLE(F) (F|=(0x01<<1))
+
 enum
 {
     ROOTVIEW_TYPE,
@@ -67,6 +71,7 @@ static GtkTargetEntry targetTable[] = {
 static GHashTable *highlight_hash=NULL;
 static GHashTable *validBaseViewHash = NULL;
 static gint dragMode=0;
+static GList *localMonitorList = NULL;
 
 namespace xf
 {
@@ -88,6 +93,7 @@ class BaseModel
     gchar *path_;
     GtkWidget *source_;
     GtkWidget *destination_;
+    gint viewType_;
 
 protected:
     GList *selectionList_;
@@ -117,6 +123,18 @@ public:
         // 
         // Only enable destination drops.
         createDestTargetList(destination_);
+        // Overkill?
+        /*g_signal_connect (G_OBJECT (this->source()), 
+                "drag-data-delete", G_CALLBACK (BaseViewSignals<Type>::signal_drag_delete), (void *)this);
+*/
+        g_signal_connect (G_OBJECT (this->source()), 
+                "drag-failed", DRAG_CALLBACK (signal_drag_failed), (void *)this);
+        g_signal_connect (G_OBJECT (this->destination()), 
+                "drag-leave", G_CALLBACK (signal_drag_leave), (void *)this);
+        g_signal_connect (G_OBJECT (this->source()), 
+                "drag-end", DRAG_CALLBACK (signal_drag_end), (void *)this);
+
+        
     }
     ~BaseModel(void){
         TRACE("BaseModel destructor.\n");
@@ -125,8 +143,37 @@ public:
         g_object_unref(treeModel_);
     }
 
+    
+
+    void setViewType(gint value){viewType_ = value;}
+    gint viewType(void){ return viewType_;}
     GtkWidget *source(){ return source_;}
     GtkWidget *destination(){ return destination_;}
+
+
+    gint
+    keyboardEvent( GdkEventKey * event) {
+        DBG("baseModel key\n");
+        return TRUE;
+    }
+
+    guint
+    setSelectable(gchar *name, guint flags){
+	if (strcmp(name, "..")==0) return SET_NOTSELECTABLE(flags);
+	return flags;
+    }
+
+    guint
+    isSelectable(GtkTreePath *tpath ) {
+        GtkTreeIter iter;
+	guint flags;
+        gtk_tree_model_get_iter (this->treeModel(), &iter, tpath);
+        gtk_tree_model_get (this->treeModel(), &iter, 
+                FLAGS , &flags, -1);
+        return !IS_NOTSELECTABLE(flags);
+    }
+
+    
     
     void disableDnD(void){
         gtk_drag_source_unset(source_);
@@ -336,16 +383,6 @@ public:
     }
 
     /////////////////////   gsignals  /////////////////////////
-
-    static gboolean
-    button_click_f (GtkWidget *widget,
-                   GdkEventButton  *event,
-                   gpointer   data)
-    {
-	//auto baseView = (BaseView<Type> *)data;
-	WARN("no action on button_click_f\n");
-        return FALSE;
-    }
 
     // sender:
     static void

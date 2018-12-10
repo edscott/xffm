@@ -14,7 +14,6 @@ typedef struct xd_t{
 }xd_t;
 static pthread_mutex_t readdir_mutex=PTHREAD_MUTEX_INITIALIZER;
 static gboolean inserted_;
-static GList *localMonitorList = NULL;
 
 #define MAX_AUTO_STAT 500
 

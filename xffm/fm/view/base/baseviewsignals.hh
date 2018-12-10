@@ -5,10 +5,6 @@
 #include "common/pixbuf.hh"
 #include "fm/view/local/localview.hh"
 
-// Flag bits:
-#define IS_NOTSELECTABLE(F) ((0x01<<1)&F)
-#define SET_NOTSELECTABLE(F) (F|=(0x01<<1))
-
 #define SET_DIR(x) x|=0x01
 #define IS_DIR (x&0x01)
 #define CONTROL_MODE (event->state & GDK_CONTROL_MASK)
@@ -70,7 +66,7 @@ public:
         auto baseView = (BaseView<Type> *)data;
         if (!baseView)  return FALSE;
         TRACE("unhighlight %s\n", (gchar *)key);
-        GtkTreeModel *model =baseView->get_tree_model();
+        GtkTreeModel *model =baseView->treeModel();
                 
         GtkTreePath *tpath = gtk_tree_path_new_from_string ((gchar *)key);
         if (!tpath) return FALSE;
