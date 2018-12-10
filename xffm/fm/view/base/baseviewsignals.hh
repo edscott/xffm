@@ -171,67 +171,8 @@ public:
                         baseView->selectables();
 		    }
 		} else if (SHIFT_MODE) {
-		    // select all items in interval
 		    dragMode = -1; // move
-		    gtk_icon_view_select_path (baseView->iconView(), tpath);
-		    auto items = gtk_icon_view_get_selected_items (baseView->iconView());
-                    baseView->setSelectionList(items);
-
-		    gchar *item = gtk_tree_path_to_string (tpath);
-		    gchar *startItem;
-		    if (strrchr(item, ':')) startItem = g_strdup(strrchr(startItem, ':')+1);
-		    else startItem = g_strdup(item);
-		    g_free(item);
-
-		    WARN("Starting from %s\n", startItem);
-
-		    void *startPath;
-
-		    for (GList *l=items; l && l->data; l=l->next){
-			gchar *item = gtk_tree_path_to_string ((GtkTreePath *)l->data);
-			if (strcmp(item, startItem)==0){
-			    startPath = l->data;
-			    g_free(item);
-			    break;
-			}
-			g_free(item);
-		    }
-
-		    GList *s = g_list_find(items, startPath);
-		    gint start, end;
-
-		    if (s->prev == NULL) {
-			gchar *lastitem = gtk_tree_path_to_string ((GtkTreePath *)g_list_last(items)->data);
-			end = atoi(startItem);
-			start = atoi(lastitem);
-			WARN("lastitem %s\n", lastitem);
-			g_free(lastitem);
-
-		    } else {
-			gchar *firstitem = gtk_tree_path_to_string ((GtkTreePath *)g_list_first(items)->data);
-			end = atoi(firstitem);
-			start = atoi(startItem);
-			WARN("firstitem %s\n", firstitem);
-			g_free(firstitem);
-		    }
-		    g_free(startItem);
-		    // To free the return value, use:
-		    g_list_free_full (items, (GDestroyNotify) gtk_tree_path_free);
-		    WARN("loop %d -> %d\n", start, end);
-		    gtk_icon_view_unselect_all (baseView->iconView());
-                    GtkTreePath *tp;
-		    for (int i=start; i<=end; i++){
-			    gchar *item = g_strdup_printf("%0d", i);
-			    WARN("selecting %s(%d)\n", item, i);
-			    tp = gtk_tree_path_new_from_string(item);
-			    g_free(item);
-			    //if (baseView->isSelectable(tpath)) 
-                                
-                            gtk_icon_view_select_path (baseView->iconView(), tp);
-			    gtk_tree_path_free(tp);
-		    }
-                    baseView->selectables();
-                    
+                    viewShiftSelect(baseView, tpath);
 		} else {
 		    // unselect all
 		    gtk_icon_view_unselect_all (baseView->iconView());
@@ -253,76 +194,171 @@ public:
 
         // long press or button 3 should do popup menu...
         if (event->button != 3) return FALSE;
+        return viewPopUp(baseView, event);
+    }
 
-        WARN("button press event: button 3 should do popup, as well as longpress...\n");
+    static void
+    viewShiftSelect(BaseView<Type> *baseView, GtkTreePath *tpath){
+        // select all items in interval
+        gtk_icon_view_select_path (baseView->iconView(), tpath);
+        auto items = gtk_icon_view_get_selected_items (baseView->iconView());
+        baseView->setSelectionList(items);
+
+        gchar *item = gtk_tree_path_to_string (tpath);
+        gchar *startItem;
+        if (strrchr(item, ':')) startItem = g_strdup(strrchr(startItem, ':')+1);
+        else startItem = g_strdup(item);
+        g_free(item);
+
+        WARN("Starting from %s\n", startItem);
+
+        void *startPath;
+
+        for (GList *l=items; l && l->data; l=l->next){
+            gchar *item = gtk_tree_path_to_string ((GtkTreePath *)l->data);
+            if (strcmp(item, startItem)==0){
+                startPath = l->data;
+                g_free(item);
+                break;
+            }
+            g_free(item);
+        }
+
+        GList *s = g_list_find(items, startPath);
+        gint start, end;
+
+        if (s->prev == NULL) {
+            gchar *lastitem = gtk_tree_path_to_string ((GtkTreePath *)g_list_last(items)->data);
+            end = atoi(startItem);
+            start = atoi(lastitem);
+            WARN("lastitem %s\n", lastitem);
+            g_free(lastitem);
+
+        } else {
+            gchar *firstitem = gtk_tree_path_to_string ((GtkTreePath *)g_list_first(items)->data);
+            end = atoi(firstitem);
+            start = atoi(startItem);
+            WARN("firstitem %s\n", firstitem);
+            g_free(firstitem);
+        }
+        g_free(startItem);
+        // To free the return value, use:
+        g_list_free_full (items, (GDestroyNotify) gtk_tree_path_free);
+        WARN("loop %d -> %d\n", start, end);
+        gtk_icon_view_unselect_all (baseView->iconView());
+        GtkTreePath *tp;
+        for (int i=start; i<=end; i++){
+                gchar *item = g_strdup_printf("%0d", i);
+                WARN("selecting %s(%d)\n", item, i);
+                tp = gtk_tree_path_new_from_string(item);
+                g_free(item);
+                //if (baseView->isSelectable(tpath)) 
+                    
+                gtk_icon_view_select_path (baseView->iconView(), tp);
+            gtk_tree_path_free(tp);
+        }
+        baseView->selectables();
+    }
+
+    static gboolean 
+    viewPopUp(BaseView<Type> *baseView, GdkEventButton  *event){
+        TRACE("button press event: button 3 should do popup, as well as longpress...\n");
+        GtkTreePath *tpath;
         gboolean retval = FALSE;
         GtkMenu *menu = NULL;
-        gboolean itemMenu = gtk_icon_view_get_item_at_pos (GTK_ICON_VIEW(widget),
+        if (gtk_icon_view_get_item_at_pos (baseView->iconView(),
                                    event->x,
                                    event->y,
-                                   &tpath, NULL);
+                                   &tpath, NULL))
+        {
+           if (!CONTROL_MODE){
+                // unselect all
+                gtk_icon_view_unselect_all (baseView->iconView());
+            }
+            gtk_icon_view_select_path (baseView->iconView(), tpath);
+            gtk_tree_path_free(tpath);
+        }
+       
+        gchar *path = NULL;
+        GList *selection_list = gtk_icon_view_get_selected_items (baseView->iconView());
+        baseView->setSelectionList(selection_list);
+        if (selection_list && g_list_length(selection_list) == 1) {
+            GtkTreeIter iter;
+            gtk_tree_model_get_iter(baseView->treeModel(), &iter, 
+                    (GtkTreePath *)selection_list->data);
+            gtk_tree_model_get(baseView->treeModel(), &iter, PATH, &path, -1);
+        }
+        setMenuData(baseView, path);
+        menu = configureMenu(baseView);
+        if (menu) {
+            gtk_menu_popup_at_pointer (menu, (const GdkEvent *)event);
+        }   
+        return retval;
+    }
+
+    static void
+    setMenuData(BaseView<Type> * baseView, gchar *path){
+        GtkMenu *menu = NULL;
         switch (baseView->viewType()){
             case (ROOTVIEW_TYPE):
                 WARN("ROOTVIEW_TYPE menu here...\n");
                 break;
             case (LOCALVIEW_TYPE):
-                if (itemMenu) {
-                    if (!CONTROL_MODE){
-                        // unselect all
-		        gtk_icon_view_unselect_all (baseView->iconView());
-                    }
-                    gtk_icon_view_select_path (baseView->iconView(), tpath);
-		    menu = LocalView<Type>::popUp(baseView, tpath);
-		} else {
-                    GList *selection_list = gtk_icon_view_get_selected_items (baseView->iconView());
-                    baseView->setSelectionList(selection_list);
-                    if (selection_list) {
-		        menu = LocalView<Type>::popUp(baseView, NULL);
-                    } else {
-                       menu = LocalView<Type>::popUp(baseView);
-                    }
-		    /*auto p = g_object_get_data(G_OBJECT(menu), "path");
-		    g_free(p);
-
-		    g_object_set_data(G_OBJECT(menu), "path", (void *)g_strdup(baseView->path()));*/
-		}
+                menu = (baseView->selectionList())?
+                    LocalView<Type>::popUpItem():
+                    LocalView<Type>::popUp();
                 break;
             case (FSTAB_TYPE):
-                if (itemMenu) menu = Fstab<Type>::popUp(baseView, tpath);
-                //else menu = Fstab<Type>::popUp(baseView->treeModel(), tpath);
-
-
+                 menu = (baseView->selectionList())?
+                    Fstab<Type>::popUpItem():
+                    Fstab<Type>::popUp();
                 break;
             default:
                 ERROR("ViewType %d not defined.\n", baseView->viewType());
                 break;
         }
         if (menu) {
+           auto oldPath = (gchar *)g_object_get_data(G_OBJECT(menu),"path");
+            g_free(oldPath);
+            g_object_set_data(G_OBJECT(menu),"path", path);
             g_object_set_data(G_OBJECT(menu),"baseView", (void *)baseView);
-            if (itemMenu) {
-                gtk_tree_path_free(tpath);
-            } 
-            /*else {
-                auto oldPath = (gchar *)g_object_get_data(G_OBJECT(menu),"path");
-                g_free(oldPath);
-                g_object_set_data(G_OBJECT(menu),"path", g_strdup(baseView->path()));
-                switch(baseView->viewType()) {
-                    case (LOCALVIEW_TYPE):
-			//g_object_set_data(G_OBJECT(menu),"path", (void *)baseView->path());
-
-                        LocalView<Type>::resetLocalPopup(baseView->path());
-                        break;
-                    case (FSTAB_TYPE):
-                        Fstab<Type>::resetLocalPopup();
-                        break;
-                }
-            }*/
-            gtk_menu_popup_at_pointer (menu, (const GdkEvent *)event);
-        }   
-        return retval;
+        }
     }
-
     
+    static GtkMenu *
+    configureMenu(BaseView<Type> * baseView){
+        GtkMenu *menu = NULL;
+        switch (baseView->viewType()){
+            case (ROOTVIEW_TYPE):
+                WARN("configureMenu(): ROOTVIEW_TYPE menu here...\n");
+                break;
+            case (LOCALVIEW_TYPE):
+                if (baseView->selectionList()) {
+                    menu = localItemPopUp;
+                    LocalView<Type>::resetMenuItems();
+                } else {
+                    menu = localPopUp;
+                    LocalView<Type>::resetLocalPopup();
+                }
+                break;
+            case (FSTAB_TYPE):
+                if (baseView->selectionList()) {
+                    menu = fstabItemPopUp;
+                    Fstab<Type>::resetMenuItems();
+                } else {
+                    menu = fstabPopUp;
+                    Fstab<Type>::resetLocalPopup();
+                }
+                if (baseView->selectionList()) 
+                    menu = Fstab<Type>::popUpItem();
+                    else menu = Fstab<Type>::popUp();
+                break;
+            default:
+                ERROR("ViewType %d not defined.\n", baseView->viewType());
+                break;
+        }
+        return menu;
+    }
 
     static gboolean
     motion_notify_event (GtkWidget *widget,

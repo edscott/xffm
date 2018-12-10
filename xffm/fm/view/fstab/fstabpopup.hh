@@ -67,15 +67,15 @@ class FstabPopUp {
     }
 
     static void 
-    resetLocalItemPopup(BaseView<Type> *baseView, const GtkTreePath *tpath) {
+    resetLocalItemPopup(BaseView<Type> *baseView) {
         BasePopUp<Type>::clearKeys(fstabItemPopUp);
         GtkTreeIter iter;
-	GtkTreePath *ttpath = gtk_tree_path_copy(tpath);
-	if (!gtk_tree_model_get_iter (baseView->treeModel(), &iter, ttpath)) {
-	    gtk_tree_path_free(ttpath);
+	if (!gtk_tree_model_get_iter (baseView->treeModel(), &iter, 
+                    (GtkTreePath *)baseView->selectionList()->data)) 
+        {
+	    ERROR("fstabItemPopup: tpath is invalid\n");
 	    return;
 	}
-	gtk_tree_path_free(ttpath);
 	gchar *partuuid;
 	gchar *iconName;
 	gchar *tooltipText;
@@ -102,55 +102,12 @@ class FstabPopUp {
 
 	g_object_set_data(G_OBJECT(fstabItemPopUp), "iconName", iconName);
 	g_object_set_data(G_OBJECT(fstabItemPopUp), "displayName", displayName);
-	g_object_set_data(G_OBJECT(fstabItemPopUp), "path", g_strdup(path));
+	g_object_set_data(G_OBJECT(fstabItemPopUp), "path", path);
 	g_object_set_data(G_OBJECT(fstabItemPopUp), "mimetype", partuuid);
 	g_object_set_data(G_OBJECT(fstabItemPopUp), "fileInfo", util_c::fileInfo(path));
 	g_object_set_data(G_OBJECT(fstabItemPopUp), "tooltipText", tooltipText);
  	// Set title element
         BasePopUp<Type>::changeTitle(fstabItemPopUp);
-    }
-
-    static void
-    resetMenuItems(BaseView<Type> *baseView, const GtkTreePath *tpath) {
-        resetLocalItemPopup(baseView, tpath);
-        GtkTreeIter iter;
-	GtkTreePath *ttpath = gtk_tree_path_copy(tpath);
-	if (!gtk_tree_model_get_iter (baseView->treeModel(), &iter, ttpath)) {
-	    gtk_tree_path_free(ttpath);
-	    return;
-	}
-
-	gtk_tree_path_free(ttpath);
-
-	gchar *path;
-        path = (gchar *)g_object_get_data(G_OBJECT(fstabItemPopUp), "path");
-        g_free(path);
-	gtk_tree_model_get (baseView->treeModel(), &iter, 
-		PATH, &path,
-	    -1);
-        g_object_set_data(G_OBJECT(fstabItemPopUp), "path", path);
-	struct stat st;
-        // Hide all...
-        GList *children = gtk_container_get_children (GTK_CONTAINER(fstabItemPopUp));
-        for (GList *child = children; child && child->data; child=child->next){
-            gtk_widget_hide(GTK_WIDGET(child->data));
-        }
-            
-	auto v2 = GTK_WIDGET(g_object_get_data(G_OBJECT(fstabItemPopUp), "title"));
-        gtk_widget_show(v2);
-        // mount options
-        GtkWidget *w;
-        if (Fstab<Type>::isMounted(path)){
-            w = GTK_WIDGET(g_object_get_data(G_OBJECT(fstabItemPopUp), "Unmount the volume associated with this folder"));
-            gtk_widget_set_sensitive(w, TRUE);
-            gtk_widget_show(w);
-        } else {
-            w = GTK_WIDGET(g_object_get_data(G_OBJECT(fstabItemPopUp), "Unmount the volume associated with this folder"));
-            gtk_widget_set_sensitive(w, FALSE);
-            w = GTK_WIDGET(g_object_get_data(G_OBJECT(fstabItemPopUp), "Mount the volume associated with this folder"));
-            gtk_widget_set_sensitive(w, TRUE);
-            gtk_widget_show(w);
-        }
     }
 
     static void
@@ -259,12 +216,50 @@ public:
 	BasePopUp<Type>::changeTitle(fstabPopUp,(gchar *)"folder-remote", _("Mount Helper"), NULL, NULL, "xffm:fstab");
     }
 */
-    static GtkMenu *popUp(BaseView<Type> *baseView, const GtkTreePath *tpath){
+    static GtkMenu *popUp(void){
+        if (!fstabItemPopUp) fstabItemPopUp = createLocalPopUp();   
+        return fstabPopUp;
+    }
+    static GtkMenu *popUpItem(void){
         if (!fstabItemPopUp) fstabItemPopUp = createLocalItemPopUp();   
-	resetMenuItems(baseView, tpath);
         return fstabItemPopUp;
     }
 
+
+    static void
+    resetLocalPopup(void){
+        DBG("FIXME: add fstab localpopup\n");
+    }
+    
+    static void
+    resetMenuItems(void) {
+        auto baseView = (BaseView<Type> *)g_object_get_data(G_OBJECT(fstabItemPopUp), "baseView");
+        auto path = (const gchar *)g_object_get_data(G_OBJECT(fstabItemPopUp), "path");
+        resetLocalItemPopup(baseView);
+
+	struct stat st;
+        // Hide all...
+        GList *children = gtk_container_get_children (GTK_CONTAINER(fstabItemPopUp));
+        for (GList *child = children; child && child->data; child=child->next){
+            gtk_widget_hide(GTK_WIDGET(child->data));
+        }
+            
+	auto v2 = GTK_WIDGET(g_object_get_data(G_OBJECT(fstabItemPopUp), "title"));
+        gtk_widget_show(v2);
+        // mount options
+        GtkWidget *w;
+        if (Fstab<Type>::isMounted(path)){
+            w = GTK_WIDGET(g_object_get_data(G_OBJECT(fstabItemPopUp), "Unmount the volume associated with this folder"));
+            gtk_widget_set_sensitive(w, TRUE);
+            gtk_widget_show(w);
+        } else {
+            w = GTK_WIDGET(g_object_get_data(G_OBJECT(fstabItemPopUp), "Unmount the volume associated with this folder"));
+            gtk_widget_set_sensitive(w, FALSE);
+            w = GTK_WIDGET(g_object_get_data(G_OBJECT(fstabItemPopUp), "Mount the volume associated with this folder"));
+            gtk_widget_set_sensitive(w, TRUE);
+            gtk_widget_show(w);
+        }
+    }
     
 
 

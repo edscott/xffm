@@ -184,7 +184,8 @@ public:
         }
     }
     static void
-    resetLocalPopup(BaseView<Type> *baseView) {
+    resetLocalPopup(void) {
+        auto baseView = (BaseView<Type> *)g_object_get_data(G_OBJECT(localPopUp), "baseView");
         BasePopUp<Type>::clearKeys(localPopUp);
 
         // Path is set on buttonpress signal...
@@ -198,17 +199,15 @@ public:
         auto w = GTK_WIDGET(g_object_get_data(G_OBJECT(localPopUp), "Paste"));
         if (w) gtk_widget_set_sensitive(w, LocalClipBoard<Type>::clipBoardIsValid());
         
-        GList *selection_list = gtk_icon_view_get_selected_items (baseView->iconView());
-        baseView->setSelectionList(selection_list);
         w = GTK_WIDGET(g_object_get_data(G_OBJECT(localPopUp), "Copy"));
-        if (w) gtk_widget_set_sensitive(w, g_list_length(selection_list) > 0);
+        if (w) gtk_widget_set_sensitive(w, g_list_length(baseView->selectionList()) > 0);
         w = GTK_WIDGET(g_object_get_data(G_OBJECT(localPopUp), "Cut"));
-        if (w) gtk_widget_set_sensitive(w, g_list_length(selection_list) > 0);
+        if (w) gtk_widget_set_sensitive(w, g_list_length(baseView->selectionList()) > 0);
         w = GTK_WIDGET(g_object_get_data(G_OBJECT(localPopUp), "Delete"));
         if (w) {
-	    if (g_list_length(selection_list) > 0) gtk_widget_show(w);
+	    if (g_list_length(baseView->selectionList()) > 0) gtk_widget_show(w);
 	    else gtk_widget_hide(w);
-	    gtk_widget_set_sensitive(w, g_list_length(selection_list) > 0);
+	    gtk_widget_set_sensitive(w, g_list_length(baseView->selectionList()) > 0);
 	} else ERROR(" no widget for Delete\n");
 
 
@@ -222,25 +221,13 @@ public:
     }
 
     static void
-    resetMenuItems(BaseView<Type> *baseView, const GtkTreePath *tpath) {
-        if (tpath) {
-            GtkTreeIter iter;
-            GtkTreePath *ttpath = gtk_tree_path_copy(tpath);
-            if (!gtk_tree_model_get_iter (baseView->treeModel(), &iter, ttpath)) {
-                gtk_tree_path_free(ttpath);
-                return;
-            }
-
-            gtk_tree_path_free(ttpath);
-        }
+    resetMenuItems(void) {
+        auto baseView = (BaseView<Type> *)g_object_get_data(G_OBJECT(localItemPopUp), "baseView");
 
         //  single or multiple item selected?
-        GList *selection_list = gtk_icon_view_get_selected_items (baseView->iconView());
-        baseView->setSelectionList(selection_list);
-        setPath(baseView, selection_list, tpath);
- 	// Set title element
+        setPath(baseView);
+        // Set title element
         BasePopUp<Type>::changeTitle(localItemPopUp);
-
  
         // Hide all...
         GList *children = gtk_container_get_children (GTK_CONTAINER(localItemPopUp));
@@ -254,7 +241,7 @@ public:
         auto fileInfo =(const gchar *)g_object_get_data(G_OBJECT(localItemPopUp), "fileInfo");
         auto path =(const gchar *)g_object_get_data(G_OBJECT(localItemPopUp), "path");
         auto mimetype =(const gchar *)g_object_get_data(G_OBJECT(localItemPopUp), "mimetype");
-        if (g_list_length(selection_list) > 1) {
+        if (g_list_length(baseView->selectionList()) > 1) {
         } else {
 	    fileInfo = util_c::fileInfo(path);
             runWithDialog(path);
@@ -267,18 +254,16 @@ public:
 	for (auto k=commonItems; k && *k; k++){
 	    auto w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), *k));
 	    gtk_widget_show(w);
-            gtk_widget_set_sensitive(w, g_list_length(selection_list) > 0);
+            gtk_widget_set_sensitive(w, g_list_length(baseView->selectionList()) > 0);
 	}
     }
 
-    static GtkMenu *popUp(BaseView<Type> *baseView, const GtkTreePath *tpath){
+    static GtkMenu *popUpItem(void){
         if (!localItemPopUp) localItemPopUp = createLocalItemPopUp();   
-	resetMenuItems(baseView, tpath);
         return localItemPopUp;
     }
-    static GtkMenu *popUp(BaseView<Type> *baseView){
+    static GtkMenu *popUp(void){
         if (!localPopUp) localPopUp = createLocalPopUp();   
-        resetLocalPopup(baseView);
         return localPopUp;
     }
 
@@ -409,13 +394,13 @@ private:
     }
 
     static void 
-    setPath(BaseView<Type> * baseView, GList *selection_list, const GtkTreePath *tpath){
+    setPath(BaseView<Type> * baseView){
         BasePopUp<Type>::clearKeys(localItemPopUp);
 
         GtkTreeIter iter;
-        if (g_list_length(selection_list) > 1) {
+        if (g_list_length(baseView->selectionList()) > 1) {
             gchar *paths = g_strdup("");
-            for (GList *l = selection_list; l && l->data; l=l->next){
+            for (GList *l = baseView->selectionList(); l && l->data; l=l->next){
                 if (!gtk_tree_model_get_iter (baseView->treeModel(), &iter, (GtkTreePath *)l->data)){
                     continue;
                 }
@@ -426,7 +411,7 @@ private:
                 g_free(path);
                 paths = g;
             }
-            gchar *fileInfo = g_strdup_printf("%s %d", _("Files:"), g_list_length(selection_list));
+            gchar *fileInfo = g_strdup_printf("%s %d", _("Files:"), g_list_length(baseView->selectionList()));
             g_object_set_data(G_OBJECT(localItemPopUp), "fileInfo", fileInfo);
             g_object_set_data(G_OBJECT(localItemPopUp), "iconName", g_strdup("edit-copy"));
             g_object_set_data(G_OBJECT(localItemPopUp), "displayName", g_strdup(_("Multiple selections")));
@@ -435,18 +420,15 @@ private:
             return;
         }
 
-        if (!tpath) tpath = (const GtkTreePath *)selection_list->data;
+        auto tpath = (GtkTreePath *)baseView->selectionList()->data;
 	struct stat st;
         gchar *path;
         gchar *iconName;
         gchar *mimetype;
         gchar *displayName;
-	GtkTreePath *ttpath = gtk_tree_path_copy(tpath);
-	if (!gtk_tree_model_get_iter (baseView->treeModel(), &iter, ttpath)) {
-	    gtk_tree_path_free(ttpath);
+	if (!gtk_tree_model_get_iter (baseView->treeModel(), &iter, tpath)) {
 	    return ;
 	}
-	gtk_tree_path_free(ttpath);
 	gtk_tree_model_get (baseView->treeModel(), &iter, 
 		//ACTUAL_NAME, &aname,
 		DISPLAY_NAME, &displayName,
@@ -696,7 +678,7 @@ public:
         auto entryResponse = new(EntryFolderResponse<Type>)(GTK_WINDOW(mainWindow), _("Create a compressed archive with the selected objects"), NULL);
 
         
-	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "PATH");
+	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
 	auto displayPath = util_c::valid_utf_pathstring(path);
 	auto markup = 
 	    g_strdup_printf("<span color=\"blue\" size=\"larger\"><b>%s</b></span>", displayPath);  

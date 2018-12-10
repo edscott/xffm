@@ -85,7 +85,7 @@ public:
         TRACE("%s is executable file\n", path);
 	if (!localItemPopUp) LocalPopUp<Type>::createLocalItemPopUp();
 	//LocalPopUp<Type>::resetLocalItemPopup(baseView, tpath);
-	LocalPopUp<Type>::resetMenuItems(baseView, tpath);
+	//LocalPopUp<Type>::resetMenuItems(baseView, tpath);
 	// Set to non static object BaseView:
 	g_object_set_data(G_OBJECT(localItemPopUp), "baseView",(void *) baseView);
 	g_object_set_data(G_OBJECT(localItemPopUp), "baseModel",(void *) baseView);
@@ -103,7 +103,7 @@ public:
 	    // if popup menu is not created, then create
 	    if (!localItemPopUp) LocalPopUp<Type>::createLocalItemPopUp();
 	    //LocalPopUp<Type>::resetLocalItemPopup(baseView, tpath);
-	    LocalPopUp<Type>::resetMenuItems(baseView, tpath);
+	    //LocalPopUp<Type>::resetMenuItems(baseView, tpath);
 	    // Set to non static object BaseView:
 	    g_object_set_data(G_OBJECT(localItemPopUp), "baseView",(void *) baseView);
 	    g_object_set_data(G_OBJECT(localItemPopUp), "baseModel",(void *) baseView);
