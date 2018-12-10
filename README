@@ -1,3 +1,4 @@
+bug: if littlebutton process button menu is open, and process finishes, well menu is half destroyed and focus does not return to mainWindow.
 
 
 TODO

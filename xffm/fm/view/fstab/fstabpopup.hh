@@ -67,7 +67,7 @@ class FstabPopUp {
     }
 
     static void 
-    resetLocalItemPopup(BaseView<Type> *baseView) {
+    resetLocalItemPopup(BaseView<Type> *baseView, const gchar *path) {
         BasePopUp<Type>::clearKeys(fstabItemPopUp);
         GtkTreeIter iter;
 	if (!gtk_tree_model_get_iter (baseView->treeModel(), &iter, 
@@ -79,14 +79,12 @@ class FstabPopUp {
 	gchar *partuuid;
 	gchar *iconName;
 	gchar *tooltipText;
-	gchar *path;
 	gchar *displayName;
         gtk_tree_model_get (baseView->treeModel(), &iter, 
                 PARTUUID, &partuuid,
 		//MIMETYPE, &partuuid,
 		DISK_LABEL, &displayName,
 		ICON_NAME, &iconName,
-		PATH, &path,
                 TOOLTIP_TEXT,&tooltipText,
 		-1);
 	if (!path){
@@ -102,7 +100,6 @@ class FstabPopUp {
 
 	g_object_set_data(G_OBJECT(fstabItemPopUp), "iconName", iconName);
 	g_object_set_data(G_OBJECT(fstabItemPopUp), "displayName", displayName);
-	g_object_set_data(G_OBJECT(fstabItemPopUp), "path", path);
 	g_object_set_data(G_OBJECT(fstabItemPopUp), "mimetype", partuuid);
 	g_object_set_data(G_OBJECT(fstabItemPopUp), "fileInfo", util_c::fileInfo(path));
 	g_object_set_data(G_OBJECT(fstabItemPopUp), "tooltipText", tooltipText);
@@ -117,9 +114,9 @@ class FstabPopUp {
         auto baseModel = (BaseModel<Type> *)g_object_get_data(G_OBJECT(data), "baseModel");
 	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
 
-	WARN("FstabPopup::mount %s\n", path);
+	TRACE("FstabPopup::mount %s\n", path);
         if (Fstab<Type>::isInFstab(path) || Fstab<Type>::isMounted(path)) {
-	    WARN("mount: %s\n", path);
+	    TRACE("mount: %s\n", path);
             Fstab<Type>::mountPath(baseView, path, NULL);
             return;            
         }
@@ -127,7 +124,7 @@ class FstabPopUp {
         auto label = g_strdup_printf("LABEL=%s", dname);
         if (Fstab<Type>::isInFstab(label)) {
 	    gchar *mountTarget = Fstab<Type>::mountTarget(label);
-	    WARN("mount: %s --> %s\n", label, mountTarget);
+	    TRACE("mount: %s --> %s\n", label, mountTarget);
             if (mountTarget){
 		Fstab<Type>::mountPath(baseView, mountTarget, NULL);
 	    }
@@ -166,7 +163,7 @@ class FstabPopUp {
         
         auto response = entryResponse->runResponse();
         delete entryResponse;
-	WARN("response=%s\n", response);
+	TRACE("response=%s\n", response);
 	if (response){
 	    g_strstrip(response);
 	    Settings<Type>::setSettingString("MountPoints", basename, response);
@@ -235,7 +232,7 @@ public:
     resetMenuItems(void) {
         auto baseView = (BaseView<Type> *)g_object_get_data(G_OBJECT(fstabItemPopUp), "baseView");
         auto path = (const gchar *)g_object_get_data(G_OBJECT(fstabItemPopUp), "path");
-        resetLocalItemPopup(baseView);
+        resetLocalItemPopup(baseView, path);
 
 	struct stat st;
         // Hide all...

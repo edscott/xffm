@@ -479,7 +479,7 @@ public:
 	} else {
 	    mnt_point = g_strdup(mnt_fsname);
 	}
-
+        TRACE("*** is mounted: %s\n", mnt_point);
         
         struct mntent *m;
         //const gchar *mnttab;
@@ -508,7 +508,7 @@ public:
                 TRACE(".isMounted():%s:  %s  or  %s\n", mnt_point, m->mnt_dir, m->mnt_fsname);
                 if((mnt_point && strcmp (m->mnt_dir, mnt_point) == 0) || 
                    (mnt_fsname && strcmp (m->mnt_fsname, mnt_fsname) == 0)) {
-                    TRACE("..isMounted(): GOTCHA  %s  %s:%s\n", m->mnt_dir, m->mnt_fsname, mnt_point);
+                    TRACE("..isMounted(): GOTCHA  mnt_dir=%s  mnt_fsname=%s mnt_point=%s\n", m->mnt_dir, m->mnt_fsname, mnt_point);
                     endmntent (tab_file);
                     g_free(mnt_point);
                     return TRUE;
@@ -632,7 +632,7 @@ public:
     static gboolean
     mountPath (BaseView<Type> *baseView, const gchar *path, const gchar *mountPoint) 
     {
-        WARN("Fstab<Type>::mountPath(%s, %s)\n", path, mountPoint);
+        DBG("Fstab<Type>::mountPath(%s, %s)\n", path, mountPoint);
 	if (!g_path_is_absolute(path)){
 	    ERROR("mountPath: %s is not absolute.\n", path);
 	    return FALSE;
@@ -655,13 +655,11 @@ public:
 	arg[i++] = NULL;
 
 
-	pid_t controller = Run<Type>::thread_run(
-		(void *)baseView, // data to fork_finished_function
-		arg,
-		run_operate_stdout,
-		run_operate_stderr,
-		fork_finished_function);
+	auto message = g_strdup_printf((mounted)?
+		    _("Unmounting %s"):_("Mounting %s"), path);
+        CommandResponse<Type>::dialog(message, "system-run", arg);
 
+/*
 	// open follow dialog for long commands...
 	auto command = g_strdup_printf((mounted)?
 		    _("Unmounting %s"):_("Mounting %s"), path);
@@ -669,7 +667,7 @@ public:
 	WARN("%s %s\n", command, mountPoint);
 	g_free(command);
 
-        TRACE ("fstab_mount %s done \n",path);
+        TRACE ("fstab_mount %s done \n",path);*/
         return TRUE;
     }
 

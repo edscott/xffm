@@ -11,8 +11,8 @@ public:
     dialog(const gchar *message, const gchar *icon){
          // Create the widgets
          auto dialog = GTK_WINDOW(gtk_window_new (GTK_WINDOW_TOPLEVEL));
-         gtk_window_set_transient_for (dialog,GTK_WINDOW(mainWindow));
-
+         //gtk_window_set_transient_for (dialog,GTK_WINDOW(mainWindow));
+         gtk_window_set_type_hint (dialog,GDK_WINDOW_TYPE_HINT_DIALOG);
          auto vbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
          gtk_container_add (GTK_CONTAINER (dialog), GTK_WIDGET(vbox));
          auto label = GTK_LABEL(gtk_label_new (""));
@@ -128,32 +128,48 @@ class CommandResponse {
 public:
     
     static GtkWindow *
-    dialog(const gchar *message, const gchar *icon, gint pid)
+    dialog(const gchar *message, const gchar *icon, const gchar **arg)
     {
-        if (pid == 0 || !isPidAlive(pid)) {
+        if (!arg || arg[0] == NULL) {
 	    return NULL ;
 	}
 	auto dialog = BaseProgressResponse<Type>::dialog(message, icon);
 	auto progress = GTK_PROGRESS_BAR(g_object_get_data(G_OBJECT(dialog), "progress"));
 
         gtk_window_set_title(dialog, _("Running"));
-        auto text = g_strdup_printf("%s (pid: %d)", 
+        /*auto text = g_strdup_printf("%s (pid: %d)", 
                  _("Waiting for operation to finish..."),
-                 Tubo<Type>::getChild (pid));
+                 Tubo<Type>::getChild (pid));*/
+
+        auto text = g_strdup(_("Waiting for operation to finish..."));
 	gtk_progress_bar_set_text (progress, text);
 	g_free(text);
 	gtk_progress_bar_set_show_text (progress, TRUE);
         gtk_progress_bar_pulse(progress);
-        auto arg = (void **)calloc(3, sizeof (void *));
-        arg[0]=(void *)progress;
-        arg[1]=(void *)dialog;
-        arg[2]=GINT_TO_POINTER(pid);
-        g_timeout_add(250, pulse_f, (void *)arg);
 	 
 	gtk_widget_show_all (GTK_WIDGET(dialog));
+	pid_t controller = Run<Type>::thread_run(
+		NULL, //(void *)dialog, // data to fork_finished_function
+		arg,
+		Run<Type>::run_operate_stdout,
+		Run<Type>::run_operate_stderr,
+		NULL); //commandDone);
+        auto arg2 = (void **)calloc(3, sizeof (void *));
+        arg2[0]=(void *)progress;
+        arg2[1]=(void *)dialog;
+        arg2[2]=GINT_TO_POINTER(Tubo<Type>::getChild(controller));
+        g_timeout_add(250, pulse_f, (void *)arg2);
 	return dialog;
 	
     }
+
+   /* static void commandDone(void *data){
+       auto dialog = GTK_WIDGET(data);
+       gtk_widget_hide(dialog);
+       gtk_widget_destroy(dialog);
+       return;
+    }*/
+       
 
     static gboolean
     isPidAlive(pid_t pid){

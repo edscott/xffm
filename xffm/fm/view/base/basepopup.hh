@@ -10,9 +10,9 @@ class BasePopUp {
     using pixbuf_icons_c = Icons<double>;
     
 public: 
-    static void
+    static void // clearKeys should not include path.
     clearKeys(GtkMenu *menu){
-      const gchar *keys[] = {"tooltipText", "displayName",  "path", "mimetype", "fileInfo", "iconName", NULL};
+      const gchar *keys[] = {"tooltipText", "displayName",  "mimetype", "fileInfo", "iconName", NULL};
 	const gchar **q;
 	for (q=keys; q && *q; q++){
 	    auto cleanup = g_object_get_data(G_OBJECT(menu), *q);

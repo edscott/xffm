@@ -712,6 +712,8 @@ public:
 	    if (!g_file_test(response, G_FILE_TEST_IS_DIR)){
 		// FIXME dialog 
 	    } else {
+                
+
 		gchar *basename = g_path_get_basename(path);
 		gchar *fmt = g_strdup_printf("tar -cjf \"%s/%s.tar.bz2\"", response, basename);
 		gchar *command = Mime<Type>::mkCommandLine(fmt, basename);
@@ -724,10 +726,19 @@ public:
 
                 // open follow dialog for long commands...
 		WARN("command= %s\n", command);
-                CommandResponse<Type>::dialog(command,"system-run", pid );
+                auto target = g_strdup_printf("%s/%s.tar.bz2", response, basename);
+                const gchar *arg[] = {
+                    "tar",
+                    "-cjf",
+                    (const gchar *)target,
+                    (const gchar *)basename,
+                    NULL
+                };
+                CommandResponse<Type>::dialog(command,"system-run", arg);
 		g_free(basename);
 		g_free(fmt);
 		g_free(command);
+                g_free(target);
 		//FIXME chdir basename and run command in shell
 	    }
 	    g_free(response);

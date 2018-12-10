@@ -320,6 +320,7 @@ public:
         if (menu) {
            auto oldPath = (gchar *)g_object_get_data(G_OBJECT(menu),"path");
             g_free(oldPath);
+            DBG("*** set menu data path=%s\n", path);
             g_object_set_data(G_OBJECT(menu),"path", path);
             g_object_set_data(G_OBJECT(menu),"baseView", (void *)baseView);
         }
@@ -349,9 +350,6 @@ public:
                     menu = fstabPopUp;
                     Fstab<Type>::resetLocalPopup();
                 }
-                if (baseView->selectionList()) 
-                    menu = Fstab<Type>::popUpItem();
-                    else menu = Fstab<Type>::popUp();
                 break;
             default:
                 ERROR("ViewType %d not defined.\n", baseView->viewType());
