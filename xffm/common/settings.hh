@@ -18,9 +18,10 @@ public:
                (GKeyFileFlags) (G_KEY_FILE_KEEP_COMMENTS |  G_KEY_FILE_KEEP_TRANSLATIONS),
                 NULL);
         if (!loaded) {
-            gchar *text = g_strdup_printf(_("Creating a new file (%s)"), settingsfile);
+            gchar *text = g_strdup_printf(_("Creating a new file (%s)\n"), settingsfile);
             DBG("%s", text);
             g_free(text);
+            writeSettings();
         }
         struct stat st;
         if (stat(settingsfile, &st) < 0){
@@ -60,7 +61,10 @@ private:
 	    gchar *config_directory = g_path_get_dirname(settingsfile);
 	    if (!g_file_test(config_directory, G_FILE_TEST_IS_DIR)){
 		TRACE( "creating directory %s\n", config_directory);
-		g_mkdir_with_parents(config_directory, 0700);
+		if (g_mkdir_with_parents(config_directory, 0700) < 0){
+                    ERROR("Cannot create %s: %s\n", config_directory, strerror(errno));
+                    exit(1);
+                }
 	    }
 	    g_free(config_directory);
 	    fd = creat(settingsfile, O_WRONLY | S_IRWXU);
