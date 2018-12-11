@@ -16,6 +16,7 @@ class BaseView:
     
     gint dirCount_; 
     GtkIconView *iconView_;
+    GtkTreeView *treeView_;
     
 public:
 private:
@@ -81,10 +82,12 @@ public:
     {
     //BaseView(page_c *page, const gchar *path){
         iconView_=createIconview();
+        treeView_=createTreeview();
 
 	
 	g_object_set_data(G_OBJECT(this->treeModel()), "iconview", iconView_);
 	gtk_icon_view_set_model(iconView_, this->treeModel());
+	gtk_tree_view_set_model(treeView_, this->treeModel());
 
 	gtk_icon_view_set_text_column (iconView_, DISPLAY_NAME);
 	gtk_icon_view_set_pixbuf_column (iconView_,  DISPLAY_PIXBUF);
@@ -165,6 +168,7 @@ public:
 
     
 
+    GtkTreeView *treeView(void){return treeView_;}
     GtkIconView *iconView(void){return iconView_;}
    
     void 
@@ -266,6 +270,42 @@ private:
         return GTK_ICON_SIZE_DIALOG;
     }
 
+    static void
+    appendColumn(GtkTreeView *treeView, const gchar *title, gint columnID, GtkCellRenderer *cell){
+        auto column = gtk_tree_view_column_new ();
+        gtk_tree_view_column_set_sizing(column, GTK_TREE_VIEW_COLUMN_AUTOSIZE);
+        gtk_tree_view_column_set_resizable(column, FALSE);
+        gtk_tree_view_column_set_reorderable(column, TRUE);
+        gtk_tree_view_column_set_spacing(column,2);
+        
+        /*g_object_set (G_OBJECT (cell), "editable",TRUE,NULL); */
+        gtk_tree_view_column_pack_start(column, cell, FALSE);
+        gtk_tree_view_column_set_attributes(column, cell, 
+                        "text", columnID, 
+                        NULL);
+        //gtk_tree_view_column_pack_start (column, GtkCellRenderer *cell, FALSE);
+        gtk_tree_view_insert_column (treeView,column,-1);
+
+	if (title) gtk_tree_view_column_set_title(column,title);
+
+    }
+
+ 
+    static GtkTreeView *createTreeview(void){
+        auto treeView = GTK_TREE_VIEW(gtk_tree_view_new());
+        g_object_set(G_OBJECT(treeView), "has-tooltip", TRUE, NULL);
+        //gtk_icon_view_set_item_width (icon_view, 60);
+        gtk_tree_view_set_activate_on_single_click(treeView, TRUE);
+        appendColumn(treeView, NULL, DISPLAY_PIXBUF, gtk_cell_renderer_pixbuf_new());
+        appendColumn(treeView, _("Name"), DISPLAY_NAME, gtk_cell_renderer_text_new());
+        appendColumn(treeView, _("Size"), SIZE, gtk_cell_renderer_text_new());
+        appendColumn(treeView, _("Date"), DATE, gtk_cell_renderer_text_new());
+        appendColumn(treeView, _("Mimetype"), MIMETYPE, gtk_cell_renderer_text_new());
+        appendColumn(treeView, _("ICON_NAME"), ICON_NAME, gtk_cell_renderer_text_new());
+        appendColumn(treeView, _("TYPE"), TYPE, gtk_cell_renderer_text_new());
+        appendColumn(treeView, _("TOOLTIP_TEXT"), TOOLTIP_TEXT, gtk_cell_renderer_text_new());
+        return treeView;
+    }
  
     static GtkIconView *createIconview(void){
         auto icon_view = GTK_ICON_VIEW(gtk_icon_view_new());

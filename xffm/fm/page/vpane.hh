@@ -8,10 +8,12 @@ class Vpane{
     GtkPaned *vpane_;
     GtkTextView *output_;
     GtkScrolledWindow *topScrolledWindow_;
+    GtkScrolledWindow *treeScrolledWindow_;
     GtkScrolledWindow *bottomScrolledWindow_;
 public:
     GtkPaned *vpane(void){return vpane_;}
     GtkTextView *output(void){return output_;}
+    GtkScrolledWindow *treeScrolledWindow(void){return treeScrolledWindow_;}
     GtkScrolledWindow *topScrolledWindow(void){return topScrolledWindow_;}
     GtkScrolledWindow *bottomScrolledWindow(void){return bottomScrolledWindow_;}
 public:
@@ -20,14 +22,22 @@ public:
 	//gtk_paned_set_wide_handle (vpane_, TRUE);
 	gtk_paned_set_wide_handle (vpane_, FALSE);
 	topScrolledWindow_ = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new (NULL, NULL));
-	bottomScrolledWindow_ = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new (NULL, NULL));
+	treeScrolledWindow_ = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new (NULL, NULL));
+	
+        bottomScrolledWindow_ = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new (NULL, NULL));
 	output_ = newTextView();
 
 	 g_object_set_data(G_OBJECT(vpane_), "diagnostics", output_);
 	 g_object_set_data(G_OBJECT(output_), "vpane", vpane_);
 
-	gtk_paned_pack1 (vpane_, GTK_WIDGET(topScrolledWindow_), FALSE, TRUE);
-	gtk_paned_pack2 (vpane_, GTK_WIDGET(bottomScrolledWindow_), TRUE, TRUE);
+        auto vbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0)); 
+        gtk_box_pack_start (vbox, GTK_WIDGET(topScrolledWindow_), TRUE, TRUE, 0);
+        gtk_box_pack_start (vbox, GTK_WIDGET(treeScrolledWindow_), TRUE, TRUE, 0);
+        gtk_paned_pack1 (vpane_, GTK_WIDGET(vbox), FALSE, TRUE);
+       
+	//gtk_paned_pack1 (vpane_, GTK_WIDGET(topScrolledWindow_), FALSE, TRUE);
+	
+        gtk_paned_pack2 (vpane_, GTK_WIDGET(bottomScrolledWindow_), TRUE, TRUE);
 	g_object_set(G_OBJECT(vpane_), "position-set", TRUE, NULL);
         gtk_container_add (GTK_CONTAINER(bottomScrolledWindow_), GTK_WIDGET(output_));
         

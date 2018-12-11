@@ -75,11 +75,15 @@ public:
 	// Create BaseView object.
         auto baseView =  new BaseView<Type>(page);
         g_object_set_data(G_OBJECT(page->topScrolledWindow()), "baseView", baseView);
-        g_object_set_data(G_OBJECT(page->topScrolledWindow()), "baseModel", baseView);
         // Add the iconview into the scrolled window.
-	gtk_container_add (GTK_CONTAINER (page->topScrolledWindow()),
+	
+        gtk_container_add (GTK_CONTAINER (page->topScrolledWindow()),
 		GTK_WIDGET(baseView->iconView()));
 	gtk_widget_show (GTK_WIDGET(baseView->iconView()));
+
+	gtk_container_add (GTK_CONTAINER (page->treeScrolledWindow()),
+		GTK_WIDGET(baseView->treeView()));
+	gtk_widget_show (GTK_WIDGET(baseView->treeView()));
 
         // Load contents, depending on what path specifies.
 	baseView->loadModel(path);
