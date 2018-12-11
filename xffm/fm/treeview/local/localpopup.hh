@@ -1,9 +1,9 @@
 #ifndef XF_LOCALITEMPOPUP__HH
 # define XF_LOCALITEMPOPUP__HH
-#include "fm/view/base/basepopup.hh"
+#include "fm/model/base/basepopup.hh"
 #include "response/comboresponse.hh"
 #include "response/commandresponse.hh"
-#include "fm/view/fstab/fstab.hh"
+#include "fm/treeview/fstab/fstab.hh"
 #include "localclipboard.hh"
 
 static const gchar *directoryItems[] ={

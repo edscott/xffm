@@ -1,7 +1,7 @@
 #ifndef XF_FSTABMONITOR__HH
 # define XF_FSTABMONITOR__HH
 #include "response/timeoutresponse.hh"
-#include "fm/view/base/basemonitor.hh"
+#include "fm/model/base/basemonitor.hh"
 namespace xf
 {
 template <class Type> class LocalView;

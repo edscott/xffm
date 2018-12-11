@@ -21,10 +21,6 @@ public:
 	if (gtk_tree_model_get_iter_first (treeModel, &iter)){
 	    while (gtk_list_store_remove (GTK_LIST_STORE(treeModel),&iter));
 	}
-        // Disable DnD
-        //gtk_icon_view_unset_model_drag_source (iconView);
-        //gtk_icon_view_unset_model_drag_dest (iconView);
-
 	addRootItem(treeModel);
 	addHomeItem(treeModel);
 	addFstabItem(treeModel);

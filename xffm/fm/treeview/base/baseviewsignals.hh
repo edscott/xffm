@@ -1,9 +1,9 @@
 #ifndef XF_BASEVIEWSIGNALS__HH
 # define XF_BASEVIEWSIGNALS__HH
 
-#include "fm/view/root/rootview.hh"
+#include "fm/treeview/root/rootview.hh"
 #include "common/pixbuf.hh"
-#include "fm/view/local/localview.hh"
+#include "fm/treeview/local/localview.hh"
 
 #define SET_DIR(x) x|=0x01
 #define IS_DIR (x&0x01)
@@ -33,7 +33,6 @@ class BaseViewSignals {
     using cairo_c = Cairo<double>;
 public:
     static void
-    //item_activated (GtkIconView *iconview,
     item_activated (
                     const GtkTreePath *tpath,
                     gpointer     data)
@@ -43,7 +42,7 @@ public:
 
 	gchar *path;
         GtkTreeIter iter;
-        auto treeModel = gtk_icon_view_get_model(baseView->iconView());
+        auto treeModel = baseView->treeModel();
         gtk_tree_model_get_iter (treeModel, &iter, (GtkTreePath *)tpath);
         //this is wrong here: gtk_tree_path_free (tpath);
         GdkPixbuf *normal_pixbuf;

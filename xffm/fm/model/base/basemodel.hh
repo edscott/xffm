@@ -392,9 +392,6 @@ public:
 	auto baseView = (BaseView<Type> *)data;
 
         dragMode = 0;
-        //while (gtk_events_pending())gtk_main_iteration();
-        //gtk_drag_source_unset(GTK_WIDGET(baseView->iconView()));
-        //baseView->freeSelectionList();
       
     }
 

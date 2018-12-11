@@ -1,6 +1,6 @@
 #ifndef XF_ROOTVIEW__HH
 # define XF_ROOTVIEW__HH
-#include "rootmodel.hh"
+#include "fm/model/rootmodel.hh"
 
 namespace xf
 {

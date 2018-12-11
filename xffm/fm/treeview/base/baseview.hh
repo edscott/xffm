@@ -1,7 +1,7 @@
 #ifndef XF_BASEVIEW__HH
 # define XF_BASEVIEW__HH
 
-#include "basemodel.hh"
+#include "fm/model/base/basemodel.hh"
 #include "baseviewsignals.hh"
 
 namespace xf
