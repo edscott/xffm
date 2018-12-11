@@ -67,7 +67,7 @@ public:
 	    TRACE("%s is  valid path\n", path);
 	    if (!g_file_test(path, G_FILE_TEST_IS_DIR)){
                 // Not a directory, but valid path: activate item.
-		DBG("%s is not dir\n", path);
+		DBG("%s is not dir, will activate.\n", path);
 		return LocalView<Type>::item_activated(this, treeModel, tpath, path);
 	    }
 	} else {

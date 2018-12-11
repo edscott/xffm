@@ -806,6 +806,7 @@ public:
     static void
     runWith(GtkMenuItem *menuItem, gpointer data){
 	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
+        WARN("runWith: path = %s\n", path);
 	auto displayPath = util_c::valid_utf_pathstring(path);
 	auto markup = 
 	    g_strdup_printf("<span color=\"blue\" size=\"larger\"><b>%s</b></span>\n<span color=\"red\">(%s)</span>", displayPath, 

@@ -82,18 +82,18 @@ public:
 
     static void
     runWith(BaseView<Type> *baseView, const GtkTreePath *tpath, const gchar *path){
-        TRACE("%s is executable file\n", path);
+        DBG("%s is executable file\n", path);
 	if (!localItemPopUp) LocalPopUp<Type>::createLocalItemPopUp();
-	//LocalPopUp<Type>::resetLocalItemPopup(baseView, tpath);
-	//LocalPopUp<Type>::resetMenuItems(baseView, tpath);
-	// Set to non static object BaseView:
-	g_object_set_data(G_OBJECT(localItemPopUp), "baseView",(void *) baseView);
-	g_object_set_data(G_OBJECT(localItemPopUp), "baseModel",(void *) baseView);
+
+        g_object_set_data(G_OBJECT(localItemPopUp), "baseView", baseView);
+        auto lastPath =  g_object_get_data(G_OBJECT(localItemPopUp), "path");
+        g_free(lastPath);
+        g_object_set_data(G_OBJECT(localItemPopUp), "path", g_strdup(path));
+
 	// get corresponding menuitem
 	auto menuItem = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(localItemPopUp), "Run Executable..."));
 	// openwith dialog.
 	LocalPopUp<Type>::runWith(menuItem, localItemPopUp);
-	//LocalPopUp<Type>::runWithX(treeModel, tpath, path);
     }
 
     static void
@@ -102,11 +102,12 @@ public:
 	    // setup for dialog
 	    // if popup menu is not created, then create
 	    if (!localItemPopUp) LocalPopUp<Type>::createLocalItemPopUp();
-	    //LocalPopUp<Type>::resetLocalItemPopup(baseView, tpath);
-	    //LocalPopUp<Type>::resetMenuItems(baseView, tpath);
-	    // Set to non static object BaseView:
-	    g_object_set_data(G_OBJECT(localItemPopUp), "baseView",(void *) baseView);
-	    g_object_set_data(G_OBJECT(localItemPopUp), "baseModel",(void *) baseView);
+
+            g_object_set_data(G_OBJECT(localItemPopUp), "baseView", baseView);
+            auto lastPath =  g_object_get_data(G_OBJECT(localItemPopUp), "path");
+            g_free(lastPath);
+            g_object_set_data(G_OBJECT(localItemPopUp), "path", g_strdup(path));
+
 	    // get corresponding menuitem
 	    auto menuItem = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(localItemPopUp), "Open with"));
 	    // openwith dialog.
