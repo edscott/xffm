@@ -1,9 +1,9 @@
 #ifndef XF_BASEVIEWSIGNALS__HH
 # define XF_BASEVIEWSIGNALS__HH
 
-#include "fm/treeview/root/rootview.hh"
+#include "fm/iconview/root/rootview.hh"
 #include "common/pixbuf.hh"
-#include "fm/treeview/local/localview.hh"
+#include "fm/iconview/local/localview.hh"
 
 #define SET_DIR(x) x|=0x01
 #define IS_DIR (x&0x01)

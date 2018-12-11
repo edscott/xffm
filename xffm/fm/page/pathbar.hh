@@ -1,7 +1,7 @@
 #ifndef PATHBAR_HH
 #define PATHBAR_HH
 #ifdef XFFM_CC
-# include "fm/treeview/base/baseview.hh"
+# include "fm/iconview/base/baseview.hh"
 #endif
 
 namespace xf {
