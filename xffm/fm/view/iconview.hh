@@ -552,7 +552,7 @@ private:
         }   
         return retval;
     }
-
+public:
     static void
     setMenuData(BaseView<Type> * baseView, gchar *path){
         GtkMenu *menu = NULL;
