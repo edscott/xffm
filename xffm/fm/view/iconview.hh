@@ -60,10 +60,12 @@ private:
         // "drag-motion" is not necessary with GTK_DEST_DEFAULT_MOTION
 	// while using default iconview dnd, but this is not
 	// our case. But seems to make no difference qith gtk+-3.24
-        /*g_signal_connect (G_OBJECT (baseView->destination()), 
+        // Nonetheless, Drop targets will not be highlighted if
+        // this is not set.
+        g_signal_connect (G_OBJECT (baseView->destination()), 
              "drag-motion", 
 	     G_CALLBACK (DragMotion),
-	     (void *)baseView);*/
+	     (void *)baseView);
         
         // source widget
         g_signal_connect (G_OBJECT (baseView->source()), 
@@ -353,7 +355,7 @@ private:
 
     } 
 
-    /*static gboolean
+    static gboolean
     DragMotion (GtkWidget * widget, 
             GdkDragContext * dc, gint drag_x, gint drag_y, 
             guint t, gpointer data) {
@@ -393,7 +395,7 @@ private:
             BaseModel<Type>::highlight(NULL, baseView);
         }
         return FALSE;
-    }*/
+    }
 
 
     static void
