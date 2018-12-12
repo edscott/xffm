@@ -3,7 +3,7 @@
 #include "fm/model/base/basepopup.hh"
 #include "response/comboresponse.hh"
 #include "response/commandresponse.hh"
-#include "fm/iconview/fstab/fstab.hh"
+#include "fm/view/fstab/fstab.hh"
 #include "localclipboard.hh"
 
 static const gchar *directoryItems[] ={
