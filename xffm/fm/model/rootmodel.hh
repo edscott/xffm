@@ -50,14 +50,16 @@ public:
 	auto utf_name = util_c::utf_string(".");
 	auto icon_name = "go-up";
 	auto highlight_name = "go-up/NW/go-up-symbolic/2.0/225";
-	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
-	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);   
+        auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
+	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
+	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
 	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
 	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
 		DISPLAY_NAME, utf_name,
 		ACTUAL_NAME, name,
 		ICON_NAME, icon_name,
                 PATH, name,
+                TREEVIEW_PIXBUF, treeViewPixbuf, 
 		DISPLAY_PIXBUF, normal_pixbuf,
 		NORMAL_PIXBUF, normal_pixbuf,
 		HIGHLIGHT_PIXBUF, highlight_pixbuf,
@@ -75,15 +77,16 @@ public:
 	auto utf_name = util_c::utf_string(_("Root Directory"));
 	auto icon_name = "system-file-manager";
 	auto highlight_name = "system-file-manager/SE/document-open/2.0/225";
-	//const gchar *highlight_name = "document-open/NE/system-file-manager-symbolic/3.0/180";
-	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
-	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);   
+        auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
+	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
+	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
 	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
 	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
 		DISPLAY_NAME, utf_name,
 		ACTUAL_NAME, name,
 		ICON_NAME, icon_name,
                 PATH, name,
+                TREEVIEW_PIXBUF, treeViewPixbuf, 
 		DISPLAY_PIXBUF, normal_pixbuf,
 		NORMAL_PIXBUF, normal_pixbuf,
 		HIGHLIGHT_PIXBUF, highlight_pixbuf,
@@ -101,8 +104,9 @@ public:
 	auto utf_name = util_c::utf_string(_("Home Directory"));
 	auto icon_name = "user-home";
 	auto highlight_name = "user-home/NE/document-open/2.0/225";
-	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
-	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);   
+        auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
+	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
+	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
 
 	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
 	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
@@ -110,6 +114,7 @@ public:
 		ACTUAL_NAME, name,
                 PATH, name,
 		ICON_NAME, icon_name,
+                TREEVIEW_PIXBUF, treeViewPixbuf, 
 		DISPLAY_PIXBUF, normal_pixbuf,
 		NORMAL_PIXBUF, normal_pixbuf,
 		HIGHLIGHT_PIXBUF, highlight_pixbuf,
@@ -125,6 +130,7 @@ public:
 	auto utf_name = util_c::utf_string(_("Mount Helper"));
 	auto icon_name = "folder-remote";
 	auto highlight_name = "folder-remote/NE/document-open/2.0/225";
+        auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
 	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
 	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG); 
 	auto tooltipText = g_strdup_printf("%s\n%s\n%s\n%s",
@@ -140,6 +146,7 @@ public:
 		ACTUAL_NAME, name,
                 PATH, name,
 		ICON_NAME, icon_name,
+                TREEVIEW_PIXBUF, treeViewPixbuf, 
 		DISPLAY_PIXBUF, normal_pixbuf,
 		NORMAL_PIXBUF, normal_pixbuf,
 		HIGHLIGHT_PIXBUF, highlight_pixbuf,
@@ -168,8 +175,9 @@ public:
 
 #  endif
 #endif
-	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
-	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG); 
+        auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
+	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
+	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48); 
 	auto tooltipText = g_strdup_printf("%s",
 		_("Add or remove software installed on the system"));
 
@@ -179,6 +187,7 @@ public:
 		ACTUAL_NAME, name,
                 PATH, name,
 		ICON_NAME, icon_name,
+                TREEVIEW_PIXBUF, treeViewPixbuf, 
 		DISPLAY_PIXBUF, normal_pixbuf,
 		NORMAL_PIXBUF, normal_pixbuf,
 		HIGHLIGHT_PIXBUF, highlight_pixbuf,
@@ -209,8 +218,9 @@ public:
              
                 const gchar *icon_name = "emblem-documents/SE/bookmark-new/2.0/220";
                 const gchar *highlight_name = "emblem-documents/SE/bookmark-new/2.0/220/NE/document-open/2.0/220";
-                GdkPixbuf *normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
-                GdkPixbuf *highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);   
+                auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
+                GdkPixbuf *normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
+                GdkPixbuf *highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,-48);   
                 
                 gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
                 gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
@@ -218,6 +228,7 @@ public:
                         ACTUAL_NAME, basename,
                         PATH, *p,
                         ICON_NAME, icon_name,
+                        TREEVIEW_PIXBUF, treeViewPixbuf, 
                         DISPLAY_PIXBUF, normal_pixbuf,
                         NORMAL_PIXBUF, normal_pixbuf,
                         HIGHLIGHT_PIXBUF, highlight_pixbuf,

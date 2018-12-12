@@ -415,12 +415,9 @@ private:
             g_free(h_name);
         }
        
-        GdkPixbuf *normal_pixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
-        // XXX: what's with function Gtk<Type>::get_icon_size()
-	// probably to get a smaller up arrow. Too nerdy...
-	//GdkPixbuf *normal_pixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  Gtk<Type>::get_icon_size(xd_p->d_name));
-        //GdkPixbuf *highlight_pixbuf = Pixbuf<Type>::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);
-        GdkPixbuf *highlight_pixbuf = Pixbuf<Type>::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);
+        auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
+        auto normal_pixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -48);
+        auto highlight_pixbuf = Pixbuf<Type>::get_pixbuf(highlight_name,  -48);
 	guint flags=0;
         guint size = (xd_p->st)?xd_p->st->st_size:0;
         guint date = (xd_p->st)?xd_p->st->st_mtim.tv_sec:0;
@@ -431,6 +428,7 @@ private:
                 ACTUAL_NAME, xd_p->d_name,
                 PATH, xd_p->path,
                 ICON_NAME, icon_name,
+                TREEVIEW_PIXBUF, treeViewPixbuf, 
                 DISPLAY_PIXBUF, normal_pixbuf, 
                 NORMAL_PIXBUF, normal_pixbuf, 
                 HIGHLIGHT_PIXBUF, highlight_pixbuf, 

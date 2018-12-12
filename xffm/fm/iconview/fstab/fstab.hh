@@ -320,8 +320,9 @@ public:
         auto icon_name = (mounted)?"drive-harddisk/NW/greenball/3.0/180":
             "drive-harddisk/NW/grayball/3.0/180";
         auto highlight_name = "drive-harddisk/NW/edit-select-symbolic/2.0/225";
-        auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
-        auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);   
+        auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
+        auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
+        auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
         auto uuid = partition2uuid(path);
         gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
         gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
@@ -330,6 +331,7 @@ public:
                 PARTUUID, uuid, // partition-basename
                 ICON_NAME, icon_name,
                 PATH, path, // absolute
+                TREEVIEW_PIXBUF, treeViewPixbuf, 
                 DISPLAY_PIXBUF, normal_pixbuf,
                 NORMAL_PIXBUF, normal_pixbuf,
                 HIGHLIGHT_PIXBUF, highlight_pixbuf,
@@ -377,14 +379,16 @@ public:
 	auto utf_name = util_c::utf_string(_("NFS Network Volume"));
 	auto icon_name = "video-display/SE/emblem-nfs/2.0/225";
 	auto highlight_name = "video-display/SE/emblem-nfs/2.0/225/NE/document-open/2.0/225";
-	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
-	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);   
+        auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
+	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
+	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
 	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
 	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
 		DISK_LABEL, utf_name,
 		PARTUUID, name,
 		ICON_NAME, icon_name,
                 PATH, name,
+                TREEVIEW_PIXBUF, treeViewPixbuf, 
 		DISPLAY_PIXBUF, normal_pixbuf,
 		NORMAL_PIXBUF, normal_pixbuf,
 		HIGHLIGHT_PIXBUF, highlight_pixbuf,
@@ -401,14 +405,16 @@ public:
 	auto utf_name = util_c::utf_string(_("SFTP (via SSH)"));
 	auto icon_name = "video-display/SE/emblem-ssh/2.0/225";
 	auto highlight_name = "video-display/SE/emblem-ssh/2.0/225/NE/document-open/2.0/225";
-	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
-	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);   
+        auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
+	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
+	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
 	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
 	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
 		DISK_LABEL, utf_name,
 		PARTUUID, name,
 		ICON_NAME, icon_name,
                 PATH, name,
+                TREEVIEW_PIXBUF, treeViewPixbuf, 
 		DISPLAY_PIXBUF, normal_pixbuf,
 		NORMAL_PIXBUF, normal_pixbuf,
 		HIGHLIGHT_PIXBUF, highlight_pixbuf,
@@ -425,14 +431,16 @@ public:
 	auto utf_name = util_c::utf_string(_("eCryptfs Volume"));
 	auto icon_name = "video-display/SE/emblem-lock/2.0/225";
 	auto highlight_name = "video-display/SE/emblem-lock/2.0/225/NE/document-open/2.0/225";
-	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
-	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);   
+        auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
+	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
+	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
 	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
 	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
 		DISK_LABEL, utf_name,
 		PARTUUID, name,
 		ICON_NAME, icon_name,
                 PATH, name,
+                TREEVIEW_PIXBUF, treeViewPixbuf, 
 		DISPLAY_PIXBUF, normal_pixbuf,
 		NORMAL_PIXBUF, normal_pixbuf,
 		HIGHLIGHT_PIXBUF, highlight_pixbuf,
@@ -449,14 +457,16 @@ public:
 	auto utf_name = util_c::utf_string(_("CIFS Volume"));
 	auto icon_name = "video-display/SE/emblem-smb/2.0/225";
 	auto highlight_name = "video-display/SE/emblem-smb/2.0/225/NE/document-open/2.0/225";
-	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
-	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG);   
+        auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
+	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
+	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
 	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
 	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
 		DISK_LABEL, utf_name,
 		PARTUUID, name,
 		ICON_NAME, icon_name,
                 PATH, name,
+                TREEVIEW_PIXBUF, treeViewPixbuf, 
 		DISPLAY_PIXBUF, normal_pixbuf,
 		NORMAL_PIXBUF, normal_pixbuf,
 		HIGHLIGHT_PIXBUF, highlight_pixbuf,

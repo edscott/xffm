@@ -20,6 +20,7 @@ enum
 enum
 {
   FLAGS,
+  TREEVIEW_PIXBUF,
   DISPLAY_PIXBUF,
   NORMAL_PIXBUF,
   HIGHLIGHT_PIXBUF,
@@ -346,6 +347,7 @@ public:
 	GtkTreeIter iter;
 	GtkListStore *list_store = gtk_list_store_new (NUM_COLS, 
 	    G_TYPE_UINT,      // flags
+	    GDK_TYPE_PIXBUF, // icon in treeView display
 	    GDK_TYPE_PIXBUF, // icon in display
 	    GDK_TYPE_PIXBUF, // normal icon reference
 	    GDK_TYPE_PIXBUF, // highlight icon reference
