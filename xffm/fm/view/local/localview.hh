@@ -129,6 +129,10 @@ public:
 	    if (g_file_test(path, G_FILE_TEST_IS_EXECUTABLE)) {
 		runWith(baseView, tpath, path);
 	    } else {
+#if 0
+                // XXX This has a problem if the user clicks repeatedly on the
+                //     icon, since the command will be issued several times
+                //     in a row. 
 		auto mimetype = Mime<Type>::mimeType(path);
 		gchar *response = Settings<Type>::getSettingString("MimeTypeApplications", mimetype);
 		if (response) {
@@ -153,6 +157,7 @@ public:
 		    g_free(command);
 		    return FALSE;
 		}
+#endif
 		openWith(baseView, tpath, path);
 	    }
 	} else{

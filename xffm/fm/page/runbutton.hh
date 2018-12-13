@@ -97,10 +97,10 @@ public:
 
     ~RunButton(void){
 	TRACE("RunButton::~RunButton... button_ %p\n", (void *)button_);
-	if(button_ && GTK_IS_WIDGET(button_)){
-	    gtk_widget_hide(GTK_WIDGET (button_));
-	    gtk_widget_destroy (GTK_WIDGET (button_));
-	}
+        gtk_widget_hide(GTK_WIDGET(menu_));
+        gtk_widget_destroy(GTK_WIDGET(menu_));
+	gtk_widget_hide(GTK_WIDGET (button_));
+	gtk_widget_destroy (GTK_WIDGET (button_));
 	g_free (tip_);
 	g_free (command_);
 	g_free (icon_id_);

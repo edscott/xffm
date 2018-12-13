@@ -1,5 +1,3 @@
-crash: if littlebutton process button menu is open, and process finishes, well menu is half destroyed and focus does not return to mainWindow.
-crash: Also, do consecutive double click on automenu tar -xzf item, leads to crash (treeview and iconview)
 
 bug: treeview does not have method to not select .. (local only)
 bug: treeview menu only is working for local
