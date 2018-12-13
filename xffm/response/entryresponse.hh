@@ -47,8 +47,10 @@ class EntryResponse {
     GtkEntry *entry_;
     GtkCheckButton *checkbutton_;
     GtkEntryCompletion *bashCompletion_;
+    GtkButton *no_;
 
 protected:
+    GtkButton *yes_;
     GtkDialog *response_;
     GtkBox *hbox_;
     GtkListStore *bashCompletionStore_;
@@ -138,7 +140,9 @@ public:
 	}
 
 	g_signal_connect (G_OBJECT (response_), "delete-event", G_CALLBACK (response_delete), response_);
-
+        gtk_widget_grab_focus(GTK_WIDGET(entry_));
+        gtk_widget_set_can_default (GTK_WIDGET(yes_), TRUE);
+        gtk_widget_grab_default(GTK_WIDGET(yes_));
         return;
     }
 
@@ -295,18 +299,16 @@ private:
 	return TRUE;
     }
 
-    static void add_cancel_ok(GtkDialog *dialog){
+    void add_cancel_ok(GtkDialog *dialog){
 	// button no
-	auto button =
-	    gtk_c::dialog_button ("window-close-symbolic", _("Cancel"));
-	gtk_widget_show (GTK_WIDGET(button));
-	gtk_dialog_add_action_widget (GTK_DIALOG (dialog), GTK_WIDGET(button), GTK_RESPONSE_NO);
-	g_object_set_data (G_OBJECT (dialog), "action_false_button", button);
-	// button yes
-	button = gtk_c::dialog_button ("system-run-symbolic", _("Ok"));
-	gtk_widget_show (GTK_WIDGET(button));
-	g_object_set_data (G_OBJECT (dialog), "action_true_button", button);
-	gtk_dialog_add_action_widget (GTK_DIALOG (dialog), GTK_WIDGET(button), GTK_RESPONSE_YES);
+	no_ = gtk_c::dialog_button ("window-close-symbolic", _("Cancel"));
+	gtk_widget_show (GTK_WIDGET(no_));
+	gtk_dialog_add_action_widget (GTK_DIALOG (dialog), GTK_WIDGET(no_), GTK_RESPONSE_NO);
+	g_object_set_data (G_OBJECT (dialog), "action_false_button", no_);
+	yes_ = gtk_c::dialog_button ("system-run-symbolic", _("Ok"));
+	gtk_widget_show (GTK_WIDGET(yes_));
+	g_object_set_data (G_OBJECT (dialog), "action_true_button", yes_);
+	gtk_dialog_add_action_widget (GTK_DIALOG (dialog), GTK_WIDGET(yes_), GTK_RESPONSE_YES);
     }
   
 };
