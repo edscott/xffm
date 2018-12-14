@@ -197,7 +197,7 @@ private:
                 gtk_tree_selection_select_path (selection, tpath);     
             }
 	    gtk_tree_path_free(tpath);
-            DBG("(%d,%d) -> %d,%d\n", event->x, event->y, cellX, cellY);
+            DBG("(%lf,%lf) -> %d,%d\n", event->x, event->y, cellX, cellY);
 
         return viewPopUp(baseView, event);
     }
