@@ -146,11 +146,24 @@ public:
     }
 
     static void
+    set_bin_label(GtkBin *bin, const char *text){
+	auto child = gtk_bin_get_child(bin);
+	if (child) gtk_container_remove(GTK_CONTAINER(bin), child);
+	auto label = GTK_LABEL(gtk_label_new(""));
+	//g_object_set_data(G_OBJECT(bin), "label", label);
+	g_object_set_data(G_OBJECT(bin), "name", text?g_strdup(text):g_strdup("RFM_ROOT"));
+	gtk_container_add(GTK_CONTAINER(bin), GTK_WIDGET(label));
+	set_bin_markup(bin, text);
+	gtk_widget_show_all (GTK_WIDGET(bin));
+    }
+
+    static void
     set_bin_contents(GtkBin *bin, const char *icon_id, const char *text, gint size){
 	auto child = gtk_bin_get_child(bin);
 	if (child) gtk_container_remove(GTK_CONTAINER(bin), child);
 	child = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-	gtk_widget_set_size_request (child, -1, size);
+    
+        gtk_widget_set_size_request (child, -1, size);
 	gtk_container_add(GTK_CONTAINER(bin), child);
 				
 	auto label = GTK_LABEL(gtk_label_new(""));
@@ -158,9 +171,9 @@ public:
 	gtk_box_pack_end(GTK_BOX(child), GTK_WIDGET(label), TRUE, FALSE,0);
 	
 	set_bin_markup(bin, text);
-	set_bin_image(bin, icon_id, size);
+	if (icon_id) set_bin_image(bin, icon_id, size);
 	gtk_widget_show_all (GTK_WIDGET(bin));
-    }
+  }
 
     static void 
     menu_item_content(GtkMenuItem *menuItem, const gchar *icon_id, const gchar *text, gint size){

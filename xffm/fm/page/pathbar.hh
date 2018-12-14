@@ -21,11 +21,16 @@ public:
 
 	g_object_set_data(G_OBJECT(pathbar_), "callback", (void *)pathbar_go);
         // xffm:root button:
-	auto pb_button = pathbar_button( NULL, ".");       
+        auto pb_button = pathbarLabelButton(".");
+        
+	//auto pb_button = pathbar_button( NULL, ".");       
 	gtk_box_pack_start (GTK_BOX (pathbar_), GTK_WIDGET(pb_button), FALSE, FALSE, 0);
 	g_object_set_data(G_OBJECT(pb_button), "name", g_strdup("RFM_ROOT"));
-	g_signal_connect (G_OBJECT(pb_button) , "clicked", BUTTON_CALLBACK (pathbar_go), (void *)this);
+	g_object_set_data(G_OBJECT(pb_button), "path", g_strdup("xffm:root"));
+	//g_signal_connect (G_OBJECT(pb_button) , "clicked", BUTTON_CALLBACK (pathbar_go), (void *)this);
+	g_signal_connect (G_OBJECT(pb_button) , "button-press-event", EVENT_CALLBACK (pathbar_go), (void *)this);
 	TRACE("showing pathbar pb_button\n" );
+        
 	gtk_widget_show(GTK_WIDGET(pb_button));
 
 #if 0
@@ -70,12 +75,40 @@ public:
 private:
     GtkWidget *pathbar_;
 
+    GtkEventBox *
+    pathbarLabelButton (const char *text) {
+	auto label = GTK_LABEL(gtk_label_new(""));
+        auto eventBox = GTK_EVENT_BOX(gtk_event_box_new());
+	if (text) {
+	    auto v = util_c::utf_string(text);
+	    auto g = g_markup_escape_text(v, -1);
+	    g_free(v);
+	    auto markup = g_strdup_printf("   <span size=\"small\">  %s  </span>   ", g);
+	    g_free(g);
+	    gtk_label_set_markup(label, markup);
+	    g_free(markup);
+	} else {
+            gtk_label_set_markup(label, "");
+        }
+        gtk_container_add(GTK_CONTAINER(eventBox), GTK_WIDGET(label));
+	g_object_set_data(G_OBJECT(eventBox), "label", label);
+	g_object_set_data(G_OBJECT(eventBox), "name", text?g_strdup(text):g_strdup("RFM_ROOT"));
+	//g_object_set_data(G_OBJECT(label), "name", text?g_strdup(text):g_strdup("RFM_ROOT"));
+	return eventBox;
+    }
+#if 0
     GtkButton *
     pathbar_button (const char *icon_id, const char *text) {
 	GtkButton  *pb_button = GTK_BUTTON( gtk_button_new ());
         TRACE("pathbar_button():: text=%s\n", text);
-
- /*       GError *error=NULL;
+        GtkRequisition minimum_size;
+        GtkAllocation allocation;
+        GtkRequisition natural_size;
+                gtk_widget_get_preferred_size (GTK_WIDGET(pb_button),
+                               &minimum_size,
+                               &natural_size);
+            DBG("*** 1 minimum_size w,h= %d,%d\n", minimum_size.width, minimum_size.height);
+            DBG("*** 1 natural_size w,h= %d,%d\n", natural_size.width, natural_size.height); /*       GError *error=NULL;
 	GtkStyleContext *style_context = gtk_widget_get_style_context (GTK_WIDGET(pb_button));
 	gtk_style_context_add_class(style_context, GTK_STYLE_CLASS_BUTTON );
 	GtkCssProvider *css_provider = gtk_css_provider_new();
@@ -103,11 +136,26 @@ private:
 	    markup = g_strdup_printf("<span size=\"x-small\">%s</span>", g);
 	    g_free(g);
 	}
-	gtk_c::set_bin_contents(GTK_BIN(pb_button), icon_id, markup, 12);
+	//gtk_c::set_bin_contents(GTK_BIN(pb_button), icon_id, markup, 12);
+	gtk_c::set_bin_label(GTK_BIN(pb_button), markup);
 	g_free(markup);
+        DBG("*** border width=%d\n",gtk_container_get_border_width (GTK_CONTAINER(pb_button)));
+        int baseline;
+                gtk_widget_get_preferred_size (GTK_WIDGET(pb_button),
+                               &minimum_size,
+                               &natural_size);
+                //gtk_widget_size_allocate (GtkWidget *widget,
+                  //        GtkAllocation *allocation);
+                gtk_widget_get_allocated_size (GTK_WIDGET(pb_button),
+                               &allocation,
+                               &baseline);
+            DBG("*** minimum_size w,h= %d,%d\n", minimum_size.width, minimum_size.height);
+            DBG("*** natural_size w,h= %d,%d\n", natural_size.width, natural_size.height);
+            DBG("*** allocation w,h= %d,%d\n", allocation.width, allocation.height);
 	return pb_button;
     }
-
+#endif
+#if 0
     void 
     pathbar_ok(GtkButton * button){
         TRACE("pathbar_ok\n");
@@ -120,6 +168,32 @@ private:
                 if (!path){
 		    path="xffm:root";
                     TRACE("path is null at pathbar.hh::pathbar_ok\n");
+                }
+                auto baseView = (BaseView<Type> *)
+                    g_object_get_data(G_OBJECT(page->topScrolledWindow()), "baseView");
+                baseView->loadModel(path);
+		/*
+		view_c *view_p = (view_c *)g_object_get_data(G_OBJECT(pathbar_), "view_p");
+		if (!view_p) g_error("view_p data not set for g_object pathbar!\n");
+		TRACE("pathbar_ok: path=%s\n", path);
+		view_p->reload(path);*/
+	    } 
+	}
+    }
+#endif
+
+    void 
+    pathbar_ok(GtkLabel *button){
+        TRACE("pathbar_ok\n");
+	GList *children_list = gtk_container_get_children(GTK_CONTAINER(pathbar_));
+	GList *children = children_list;
+        auto page = (Page<Type> *)this;
+	for (;children && children->data; children=children->next){
+	    if (button == children->data){
+		const gchar *path = (gchar *)g_object_get_data(G_OBJECT(button), "path");
+                if (!path){
+		    path="xffm:root";
+                    DBG("path is null at pathbar.hh::pathbar_ok\n");
                 }
                 auto baseView = (BaseView<Type> *)
                     g_object_get_data(G_OBJECT(page->topScrolledWindow()), "baseView");
@@ -172,7 +246,7 @@ private:
 	    }
 	}
  	// Show active button
-	gtk_widget_show(GTK_WIDGET(active->data));
+	gtk_widget_show_all(GTK_WIDGET(active->data));
 
 	gtk_widget_get_preferred_size(GTK_WIDGET(active->data), &minimum, NULL);
 	    TRACE("#### width, minimum.width %d %d\n",width,  minimum.width);
@@ -187,7 +261,7 @@ private:
 	    TRACE("#### width, allocaltion.width %d %d\n",width,  allocation.width);
 	    width -= allocation.width;
 	    if (width < 0) break;
-	    gtk_widget_show(GTK_WIDGET(children->data));
+	    gtk_widget_show_all(GTK_WIDGET(children->data));
 	}
 
 	// Now we work forwards, showing buttons that fit.
@@ -198,7 +272,7 @@ private:
 	    gtk_widget_get_allocation(GTK_WIDGET(children->data), &allocation);
 	    width -= allocation.width;
 	    if (width < 0) break;
-	    gtk_widget_show(GTK_WIDGET(children->data));
+	    gtk_widget_show_all(GTK_WIDGET(children->data));
 	}
     }
 
@@ -225,9 +299,11 @@ private:
 		gchar *v = util_c::utf_string(name);
 		gchar *g = g_markup_escape_text(v, -1);
 		g_free(v);
-		gchar *markup = g_strdup_printf("<span size=\"x-small\" color=\"blue\" bgcolor=\"#dcdad5\">%s</span>", g);
-		gtk_c::set_bin_markup(GTK_BIN(children->data), markup);
-		g_free(g);
+		gchar *markup = g_strdup_printf("<span size=\"small\" color=\"blue\" bgcolor=\"#dcdad5\">  %s  </span>", g);
+		//gtk_c::set_bin_markup(GTK_BIN(children->data), markup);
+                auto label = GTK_LABEL(g_object_get_data(G_OBJECT(children->data), "label"));
+		gtk_label_set_markup(label, markup);
+                g_free(g);
 		g_free(markup);
 		continue;
 	    } 
@@ -242,8 +318,11 @@ private:
 		gchar *v = util_c::utf_string(name);
 		gchar *g = g_markup_escape_text(v, -1);
 		g_free(v);
-		gchar *markup = g_strdup_printf("<span size=\"x-small\" color=\"red\"bgcolor=\"#dcdad5\">%s</span>", g);
-		gtk_c::set_bin_markup(GTK_BIN(children->data), markup);
+		gchar *markup = g_strdup_printf("<span size=\"small\" color=\"red\"bgcolor=\"#dcdad5\">  %s  </span>", g);
+		//gtk_c::set_bin_markup(GTK_BIN(children->data), markup);
+                auto label = GTK_LABEL(g_object_get_data(G_OBJECT(children->data), "label"));
+		gtk_label_set_markup(label, markup);
+
 		g_free(g);
 		g_free(markup);
 	    }
@@ -251,8 +330,11 @@ private:
 		gchar *v = util_c::utf_string(name);
 		gchar *g = g_markup_escape_text(v, -1);
 		g_free(v);
-		gchar *markup = g_strdup_printf("<span size=\"x-small\" color=\"blue\"bgcolor=\"#dcdad5\">%s</span>", g);
-		gtk_c::set_bin_markup(GTK_BIN(children->data), markup);
+		gchar *markup = g_strdup_printf("<span size=\"small\" color=\"blue\"bgcolor=\"#dcdad5\">  %s  </span>", g);
+		//gtk_c::set_bin_markup(GTK_BIN(children->data), markup);
+                auto label = GTK_LABEL(g_object_get_data(G_OBJECT(children->data), "label"));
+		gtk_label_set_markup(label, markup);
+
 		g_free(g);
 		g_free(markup);
 	    }
@@ -281,14 +363,25 @@ private:
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    static gboolean
+    pathbar_go (GtkWidget *label,
+               GdkEvent  *event,
+               gpointer   data)
+    {
+        DBG("pathbar_go...\n");
+	Pathbar *pathbar_p = (Pathbar *)data;
+	pathbar_p->pathbar_ok(GTK_LABEL(label));
+        return FALSE;
 
+    }
+/*
     static void
     pathbar_go(GtkButton * button, gpointer data){
 	Pathbar *pathbar_p = (Pathbar *)data;
 	pathbar_p->pathbar_ok(button);
 
     }
-
+*/
     static void *
     update_pathbar_f(void *data){
 	void **arg = (void **)data;
@@ -350,9 +443,10 @@ private:
 
 	// Add new tail
 	gpointer callback = (gpointer)g_object_get_data(G_OBJECT(pathbar), "callback");
-	if (strcmp(path, "RFM_MODULE")) for (;paths[i]; i++){
-	    GtkButton *pb_button = pathbar_p->pathbar_button(NULL, 
-		    strlen(paths[i])?paths[i]:G_DIR_SEPARATOR_S);
+	for (;paths[i]; i++){
+//	    GtkButton *pb_button = pathbar_p->pathbar_button(NULL, 
+	    auto pb_button = 
+                pathbar_p->pathbarLabelButton(strlen(paths[i])?paths[i]:G_DIR_SEPARATOR_S);
 	    gtk_container_add(GTK_CONTAINER(pathbar), GTK_WIDGET(pb_button));
 
 	    gchar *g = (pb_path!=NULL)?
@@ -364,7 +458,10 @@ private:
 	    pb_path = g;
 	    TRACE( "+++***** setting pbpath --> %s\n", pb_path);
 	    g_object_set_data(G_OBJECT(pb_button), "path", g_strdup(pb_path));
+	    g_signal_connect (G_OBJECT(pb_button) , "button-press-event", EVENT_CALLBACK (callback), (void *)pathbar_p);
+            /*
 	    g_signal_connect (G_OBJECT(pb_button) , "clicked", G_CALLBACK (callback), (void *)pathbar_p);
+             */
 	    gtk_widget_show(GTK_WIDGET(pb_button));
 	}
 	g_free(pb_path);
