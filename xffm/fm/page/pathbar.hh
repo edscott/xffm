@@ -13,21 +13,39 @@ class Pathbar
     using gtk_c = Gtk<double>;
     using util_c = Util<double>;
     using print_c = Print<double>;
+
+    gchar *path_;
     
 public:
     Pathbar(void) {
+	path_ = NULL;
 	pathbar_ = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
         setStyle();
 
-	g_object_set_data(G_OBJECT(pathbar_), "callback", (void *)pathbar_go);
+	auto eb = gtk_event_box_new();
+	g_object_set_data(G_OBJECT(eb), "name", g_strdup("RFM_GOTO"));
+	g_object_set_data(G_OBJECT(eb), "path", g_strdup("xffm:goto"));
+
+	auto pixbuf = Pixbuf<Type>::get_pixbuf("go-jump", -24);
+        auto image = gtk_image_new_from_pixbuf(pixbuf);
+	gtk_container_add (GTK_CONTAINER(eb), GTK_WIDGET(image));
+
+	gtk_box_pack_start (GTK_BOX (pathbar_), GTK_WIDGET(eb), FALSE, FALSE, 0);
+	gtk_widget_show_all(GTK_WIDGET(eb));
+	g_signal_connect (G_OBJECT(eb) , "button-press-event", EVENT_CALLBACK (go_jump), (void *)this);
+	
+
         // xffm:root button:
         auto pb_button = pathbarLabelButton(".");
+
         
 	gtk_box_pack_start (GTK_BOX (pathbar_), GTK_WIDGET(pb_button), FALSE, FALSE, 0);
 	g_object_set_data(G_OBJECT(pb_button), "name", g_strdup("RFM_ROOT"));
 	g_object_set_data(G_OBJECT(pb_button), "path", g_strdup("xffm:root"));
     
 	g_signal_connect (G_OBJECT(pb_button) , "button-press-event", EVENT_CALLBACK (pathbar_go), (void *)this);
+	g_signal_connect (G_OBJECT(pb_button) , "enter-notify-event", EVENT_CALLBACK (pathbar_green), (void *)this);
+	g_signal_connect (G_OBJECT(pb_button) , "leave-notify-event", EVENT_CALLBACK (pathbar_blue), (void *)this);
 	TRACE("showing pathbar pb_button\n" );
         
 	gtk_widget_show(GTK_WIDGET(pb_button));
@@ -37,9 +55,13 @@ public:
     GtkWidget *
     pathbar(void){ return pathbar_;}
 
+    const gchar *path(void){ return path_;}
+
     void 
     update_pathbar(const gchar *path){
 	TRACE( "update pathbar to %s\n", path);
+	g_free(path_);
+	path_ = g_strdup(path);
 	void *arg[]={(void *)this, (void *)(path?g_strdup(path):NULL)};
 	util_c::context_function(update_pathbar_f, arg);
     }
@@ -69,14 +91,14 @@ private:
     }
 
     void 
-    pathbar_ok(GtkLabel *button){
+    pathbar_ok(GtkWidget *eventBox){
         TRACE("pathbar_ok\n");
 	GList *children_list = gtk_container_get_children(GTK_CONTAINER(pathbar_));
 	GList *children = children_list;
         auto page = (Page<Type> *)this;
 	for (;children && children->data; children=children->next){
-	    if (button == children->data){
-		const gchar *path = (gchar *)g_object_get_data(G_OBJECT(button), "path");
+	    if (eventBox == children->data){
+		const gchar *path = (gchar *)g_object_get_data(G_OBJECT(eventBox), "path");
                 if (!path){
 		    path="xffm:root";
                     DBG("path is null at pathbar.hh::pathbar_ok\n");
@@ -172,54 +194,62 @@ private:
 	// Finally, we differentiate active button.
 	GList *children = g_list_first(children_list);
 	for (;children && children->data; children=children->next){
-	    gchar *name = (gchar *)g_object_get_data(G_OBJECT(children->data), "name");
-	    if (strcmp(name, "RFM_ROOT")==0) continue;
-	    if (!path) {
-		// no path means none is differentiated.
-		gchar *v = util_c::utf_string(name);
-		gchar *g = g_markup_escape_text(v, -1);
-		g_free(v);
-		gchar *markup = g_strdup_printf("<span size=\"small\" color=\"blue\" bgcolor=\"#dcdad5\">  %s  </span>", g);
-                auto label = GTK_LABEL(g_object_get_data(G_OBJECT(children->data), "label"));
-		gtk_label_set_markup(label, markup);
-                g_free(g);
-		g_free(markup);
-		continue;
-	    } 
-	    const gchar *pb_path = 
-		(const gchar *)g_object_get_data(G_OBJECT(children->data), "path");
-	    if (!pb_path){
-		g_warning("rfm_update_pathbar(): pb_path is null\n");
-		continue;
-	    }
-	    if (!strlen(pb_path)) pb_path=G_DIR_SEPARATOR_S;//?
-	    if (strcmp(pb_path, path)==0) {
-		gchar *v = util_c::utf_string(name);
-		gchar *g = g_markup_escape_text(v, -1);
-		g_free(v);
-		gchar *markup = g_strdup_printf("<span size=\"small\" color=\"red\"bgcolor=\"#dcdad5\">  %s  </span>", g);
-                auto label = GTK_LABEL(g_object_get_data(G_OBJECT(children->data), "label"));
-		gtk_label_set_markup(label, markup);
 
-		g_free(g);
-		g_free(markup);
-	    }
-	    else {
-		gchar *v = util_c::utf_string(name);
-		gchar *g = g_markup_escape_text(v, -1);
-		g_free(v);
-		gchar *markup = g_strdup_printf("<span size=\"small\" color=\"blue\"bgcolor=\"#dcdad5\">  %s  </span>", g);
-                auto label = GTK_LABEL(g_object_get_data(G_OBJECT(children->data), "label"));
-		gtk_label_set_markup(label, markup);
+	    setPathButtonText(GTK_WIDGET(children->data), path, "blue", NULL);
 
-		g_free(g);
-		g_free(markup);
-	    }
 	}
 	g_list_free(children_list);
     }
 
 private:
+    static void 
+    setPathButtonText(GtkWidget *eventBox, const gchar *path, const gchar *color, const gchar *bgcolor){
+	//const gchar *fontSize = "size=\"small\"";
+	const gchar *fontSize = "";
+	gchar *name = (gchar *)g_object_get_data(G_OBJECT(eventBox), "name");
+	if (strcmp(name, "RFM_ROOT")==0) {
+	    // no path means none is differentiated.
+	    gchar *markup = g_strdup_printf("<span %s color=\"%s\" bgcolor=\"%s\">  %s  </span>", fontSize, color, bgcolor?bgcolor:"#dcdad5", ".");
+	    auto label = GTK_LABEL(g_object_get_data(G_OBJECT(eventBox), "label"));
+	    gtk_label_set_markup(label, markup);
+	    g_free(markup);
+	    return;
+	} 
+	if (strcmp(name, "RFM_GOTO")==0) {
+	    return;
+	} 
+	const gchar *pb_path = 
+	    (const gchar *)g_object_get_data(G_OBJECT(eventBox), "path");
+	if (!pb_path){
+	    g_warning("rfm_update_pathbar(): pb_path is null\n");
+	    return;
+	}
+	if (!strlen(pb_path)) pb_path=G_DIR_SEPARATOR_S;//?
+	if (strcmp(pb_path, path)==0) {
+	    gchar *v = util_c::utf_string(name);
+	    gchar *g = g_markup_escape_text(v, -1);
+	    g_free(v);
+	    gchar *markup = g_strdup_printf("<span %s color=\"%s\" bgcolor=\"%s\">  %s  </span>", fontSize, bgcolor?"white":"red", bgcolor?bgcolor:"#dcdad5", g);
+	    auto label = GTK_LABEL(g_object_get_data(G_OBJECT(eventBox), "label"));
+	    gtk_label_set_markup(label, markup);
+
+	    g_free(g);
+	    g_free(markup);
+	}
+	else {
+	    gchar *v = util_c::utf_string(name);
+	    gchar *g = g_markup_escape_text(v, -1);
+	    g_free(v);
+	    gchar *markup = g_strdup_printf("<span %s color=\"%s\" bgcolor=\"%s\">  %s  </span>", fontSize, color, bgcolor?bgcolor:"#dcdad5", g);
+	    auto label = GTK_LABEL(g_object_get_data(G_OBJECT(eventBox), "label"));
+	    gtk_label_set_markup(label, markup);
+
+	    g_free(g);
+	    g_free(markup);
+	}
+	return;
+    }
+
     void setStyle(void){
         GError *error=NULL;
 	GtkStyleContext *style_context = gtk_widget_get_style_context (GTK_WIDGET(pathbar_));
@@ -240,17 +270,80 @@ private:
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
     static gboolean
-    pathbar_go (GtkWidget *label,
+    pathbar_green (GtkWidget *eventBox,
                GdkEvent  *event,
-               gpointer   data)
-    {
-        DBG("pathbar_go...\n");
+               gpointer   data) {
 	Pathbar *pathbar_p = (Pathbar *)data;
-	pathbar_p->pathbar_ok(GTK_LABEL(label));
+	setPathButtonText(eventBox, pathbar_p->path(), "white", "#acaaa5");
+        return FALSE;
+    }
+
+    static gboolean
+    pathbar_blue (GtkWidget *eventBox,
+               GdkEvent  *event,
+               gpointer   data) {
+	Pathbar *pathbar_p = (Pathbar *)data;
+	setPathButtonText(eventBox, pathbar_p->path(), "blue", NULL);
         return FALSE;
 
     }
+
+    static gboolean
+    pathbar_go (GtkWidget *eventBox,
+               GdkEvent  *event,
+               gpointer   data) {
+	Pathbar *pathbar_p = (Pathbar *)data;
+	pathbar_p->pathbar_ok(eventBox);
+        return FALSE;
+
+    }
+
+    static gboolean
+    go_jump (GtkWidget *eventBox,
+               GdkEvent  *event,
+               gpointer   data) {
+	Pathbar *pathbar_p = (Pathbar *)data;
+        // File chooser
+        auto entryResponse = new(EntryResponse<Type>)(GTK_WINDOW(mainWindow), _("Go to"), NULL);
+	auto markup = 
+	    g_strdup_printf("<span color=\"blue\" size=\"larger\"><b>%s</b></span>", _("Go to"));  
+	
+        entryResponse->setResponseLabel(markup);
+        g_free(markup);
+
+        entryResponse->setEntryLabel(_("Specify Output Directory..."));
+        // get last used arguments...
+        gchar *dirname = NULL;
+	if (Settings<Type>::keyFileHasGroupKey("GoTo", "Default")){
+	    dirname = Settings<Type>::getSettingString("GoTo", "Default");
+	} 
+	if (!dirname || !g_file_test(dirname, G_FILE_TEST_IS_DIR) ) {
+	    g_free(dirname);
+	    dirname = g_strdup("");
+	}
+        entryResponse->setEntryDefault(dirname);
+        g_free(dirname);
+        
+        auto response = entryResponse->runResponse();
+	
+        delete entryResponse;
+	if (!g_file_test(response, G_FILE_TEST_IS_DIR)){
+	    gchar *message = g_strdup_printf("\n  %s:  \n  %s  \n", response, _("Not a directory"));
+	    Gtk<Type>::quickHelp(GTK_WINDOW(mainWindow), message, "dialog-error");
+	    g_free(message);
+	} else {
+	    auto page = (Page<Type> *)pathbar_p;
+	    auto baseView = (BaseView<Type> *)
+		g_object_get_data(G_OBJECT(page->topScrolledWindow()), "baseView");
+	    baseView->loadModel(response);
+	}
+	g_free(response);
+        return FALSE;
+
+    }
+
     static void *
     update_pathbar_f(void *data){
 	void **arg = (void **)data;
@@ -287,7 +380,7 @@ private:
 	gchar *pb_path = NULL;
 	for (;children && children->data; children=children->next){
 	    gchar *name = (gchar *)g_object_get_data(G_OBJECT(children->data), "name");
-	    if (strcmp(name, "RFM_ROOT")==0 || strcmp(name, "<")==0) continue;
+	    if (strcmp(name, "RFM_ROOT")==0 || strcmp(name, "RFM_GOTO")==0) continue;
 	    //gchar *p = g_strdup_printf("%s%c", paths[i], G_DIR_SEPARATOR);
 	    TRACE( "(%d) comparing %s <--> %s\n", i, name, paths[i]);
 	    if (paths[i] && strcmp(name, paths[i]) == 0){
@@ -303,6 +396,7 @@ private:
 	    GList *tail = children;
 	    for (;tail && tail->data; tail = tail->next){
 		gchar *name  = (gchar *)g_object_get_data(G_OBJECT(tail->data), "name");
+		DBG( "Zapping tail item: \"%s\"\n", name);
 		g_free(name);
 		gtk_container_remove(GTK_CONTAINER(pathbar), GTK_WIDGET(tail->data));
 	    }
@@ -311,7 +405,6 @@ private:
 	g_list_free(children_list);
 
 	// Add new tail
-	gpointer callback = (gpointer)g_object_get_data(G_OBJECT(pathbar), "callback");
 	for (;paths[i]; i++){
 	    auto pb_button = 
                 pathbar_p->pathbarLabelButton(strlen(paths[i])?paths[i]:G_DIR_SEPARATOR_S);
@@ -326,7 +419,9 @@ private:
 	    pb_path = g;
 	    TRACE( "+++***** setting pbpath --> %s\n", pb_path);
 	    g_object_set_data(G_OBJECT(pb_button), "path", g_strdup(pb_path));
-	    g_signal_connect (G_OBJECT(pb_button) , "button-press-event", EVENT_CALLBACK (callback), (void *)pathbar_p);
+	    g_signal_connect (G_OBJECT(pb_button) , "button-press-event", EVENT_CALLBACK (pathbar_go), (void *)pathbar_p);
+	    g_signal_connect (G_OBJECT(pb_button) , "enter-notify-event", EVENT_CALLBACK (pathbar_green), (void *)pathbar_p);
+	    g_signal_connect (G_OBJECT(pb_button) , "leave-notify-event", EVENT_CALLBACK (pathbar_blue), (void *)pathbar_p);
 	    gtk_widget_show(GTK_WIDGET(pb_button));
 	}
 	g_free(pb_path);
