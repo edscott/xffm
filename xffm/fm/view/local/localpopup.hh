@@ -211,6 +211,9 @@ public:
 	    gtk_widget_set_sensitive(w, g_list_length(baseView->selectionList()) > 0);
 	} else ERROR(" no widget for Delete\n");
 
+        gboolean isTreeView = (Settings<Type>::getSettingInteger("window", "TreeView") > 0);
+        w = GTK_WIDGET(g_object_get_data(G_OBJECT(localPopUp), "View as list"));
+        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(w), isTreeView);
 
 
 	g_object_set_data(G_OBJECT(localPopUp), "iconName", g_strdup("folder"));

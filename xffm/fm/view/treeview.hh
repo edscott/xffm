@@ -33,19 +33,92 @@ private:
     static void
     setUpSignals(BaseView<Type> *baseView, GObject * treeView){
         g_signal_connect (treeView, "row-activated", 
-            G_CALLBACK (rowActivated), 
+            G_CALLBACK (TreeView<Type>::rowActivated), 
             (void *)baseView);
          g_signal_connect (treeView, "button-release-event",
-             G_CALLBACK(buttonRelease), 
+             G_CALLBACK(TreeView<Type>::buttonRelease), 
              (void *)baseView);
          g_signal_connect (treeView, "button-press-event",
-             G_CALLBACK(buttonPress), 
+             G_CALLBACK(TreeView<Type>::buttonPress), 
              (void *)baseView);
+        
+        // source widget
+        g_signal_connect (treeView, "motion-notify-event", 
+            G_CALLBACK (TreeView<Type>::motionNotifyEvent), 
+            (void *)baseView);
+
     }
 
     
 
     //////////////////////////////////   signal handlers ///////////////////////////////////////
+
+    static gboolean
+    motionNotifyEvent (GtkWidget *widget,
+                   GdkEvent  *ev,
+                   gpointer   data)
+    {
+        auto e = (GdkEventMotion *)ev;
+        auto event = (GdkEventButton  *)ev;
+	auto baseView = (BaseView<Type> *)data;
+        if (!data) {
+            DBG("BaseView::motion_notify_event: data cannot be NULL\n");
+            return FALSE;
+        }
+	TRACE("motion_notify_event, dragOn= %d\n", dragOn_);
+
+        if (buttonPressX >= 0 && buttonPressY >= 0){
+	    TRACE("buttonPressX >= 0 && buttonPressY >= 0\n");
+	    if (sqrt(pow(e->x - buttonPressX,2) + pow(e->y - buttonPressY, 2)) > 10){
+                baseView->selectables();
+                
+                auto selection = gtk_tree_view_get_selection (baseView->treeView());
+                auto treeModel = baseView->treeModel();
+                GList *selectionList = gtk_tree_selection_get_selected_rows (selection, &treeModel);
+                baseView->setSelectionList(selectionList);
+                if (selectionList==NULL) {
+                    return FALSE;
+                }
+	        // start DnD (multiple selection)
+		TRACE("dragOn_ = TRUE\n");
+		dragOn_ = TRUE;
+		// in control mode, reselect item at x,y
+		/*if(controlMode) {
+		    GtkTreePath * tpath;
+		    if (gtk_icon_view_get_item_at_pos (GTK_ICON_VIEW(widget),
+                                   buttonPressX, buttonPressY,
+                                   &tpath, NULL)) {
+		    gtk_icon_view_select_path (baseView->iconView(), tpath);
+		    gtk_tree_path_free(tpath);
+		    }
+
+		}*/
+
+                if (!targets) targets= gtk_target_list_new (targetTable,TARGETS);
+
+		context =
+		    gtk_drag_begin_with_coordinates (baseView->source(),
+			     targets,
+			     (GdkDragAction)(((gint)GDK_ACTION_MOVE)|
+                   ((gint)GDK_ACTION_COPY)|
+                   ((gint)GDK_ACTION_LINK)), //GdkDragAction actions,
+			     1, //gint button,
+			     (GdkEvent *)event, //GdkEvent *event,
+			     event->x, event->y);
+                             
+		buttonPressX = buttonPressY = -1;
+                //g_object_ref(G_OBJECT(context)); 
+	    }
+        }
+
+	// XXX: Why this limitation?
+        // if (view_p->get_dir_count() > 500) return FALSE;
+        baseView->highlight(e->x, e->y);
+
+    
+        return FALSE;
+    }
+
 
     static void
     rowActivated (GtkTreeView     *treeView,

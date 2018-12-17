@@ -135,6 +135,36 @@ public:
         g_signal_connect (G_OBJECT (this->source()), 
                 "drag-end", DRAG_CALLBACK (signal_drag_end), (void *)this);
 
+        // source widget
+        g_signal_connect (G_OBJECT (this->source()), 
+             "drag-begin", DRAG_CALLBACK (DragBegin),
+             (void *)this);
+        
+        g_signal_connect (G_OBJECT (this->source()), 
+             "drag-data-get", G_CALLBACK (DragDataSend), 
+             (void *)this);
+        // destination widget
+        g_signal_connect (G_OBJECT (this->destination()), 
+             "drag-data-received", G_CALLBACK (DragDataReceive),
+             (void *)this);
+
+        // "drag-motion" is not necessary with GTK_DEST_DEFAULT_MOTION
+	// while using default iconview dnd, but this is not
+	// our case. But seems to make no difference qith gtk+-3.24
+        // Nonetheless, Drop targets will not be highlighted if
+        // this is not set.
+        g_signal_connect (G_OBJECT (this->destination()), 
+             "drag-motion", 
+	     G_CALLBACK (DragMotion),
+	     (void *)this);
+        
+        // Not necessary with GTK_DEST_DEFAULT_DROP
+        //
+        //g_signal_connect (G_OBJECT (baseView->destination()), 
+        //    "drag-drop", G_CALLBACK (DragDrop),
+        //    (void *)baseView);
+        
+
         
     }
     ~BaseModel(void){
@@ -385,8 +415,206 @@ public:
     }
 
     /////////////////////   gsignals  /////////////////////////
+/////////////////////////////////  DnD   ///////////////////////////
+    static gboolean
+    DragMotion (GtkWidget * widget, 
+            GdkDragContext * dc, gint drag_x, gint drag_y, 
+            guint t, gpointer data) {
+	auto baseView = (BaseView<Type> *)data;
+        TRACE("signal_drag_motion\n");
+
+        GtkTreePath *tpath;
+                                        
+        gint actions = gdk_drag_context_get_actions(dc);
+        if(actions == GDK_ACTION_MOVE)
+            gdk_drag_status (dc, GDK_ACTION_MOVE, t);
+        else if(actions == GDK_ACTION_COPY)
+            gdk_drag_status (dc, GDK_ACTION_COPY, t);
+        else if(actions == GDK_ACTION_LINK)
+            gdk_drag_status (dc, GDK_ACTION_LINK, t);
+        else
+            gdk_drag_status (dc, GDK_ACTION_MOVE, t);
+            
+       // Treeview or iconview?
+        gboolean isTreeView = (Settings<Type>::getSettingInteger("window", "TreeView") > 0);
+        if (isTreeView) return FALSE;
+        
+        GtkIconViewDropPosition pos;
+        if (gtk_icon_view_get_dest_item_at_pos (baseView->iconView(),
+                                        drag_x, drag_y,
+                                        &tpath,
+                                        &pos)){
+            GtkTreeIter iter;
+            gtk_tree_model_get_iter (baseView->treeModel(), &iter, tpath);
+            gchar *g;
+            gtk_tree_model_get (baseView->treeModel(), &iter, PATH, &g, -1);
+            // drop into?
+            // must be a directory (XXX this is quite local stuff...)
+            if (g_file_test(g, G_FILE_TEST_IS_DIR)){
+                BaseModel<Type>::highlight(tpath, baseView);
+            } else {
+                BaseModel<Type>::highlight(NULL, baseView);
+            }
+	    g_free(g);
+        } else {
+            BaseModel<Type>::highlight(NULL, baseView);
+        }
+        return FALSE;
+    }
+
+    static void
+    DragDataSend (GtkWidget * widget,
+                       GdkDragContext * context, 
+                       GtkSelectionData * selection_data, 
+                       guint info, 
+                       guint time,
+                       gpointer data) {
+        WARN("signal_drag_data_send\n");
+        //g_free(files);
+        
+        //int drag_type;
+
+	auto baseView = (BaseView<Type> *)data;
+        /* prepare data for the receiver */
+        if (info != TARGET_URI_LIST) {
+            ERROR("signal_drag_data_send: invalid target");
+        }
+        DBG( ">>> DND send, TARGET_URI_LIST\n"); 
+        gchar *dndData = NULL;
+        switch (baseView->viewType()) {
+            case (LOCALVIEW_TYPE):
+            {
+                dndData = LocalDnd<Type>::sendDndData(baseView);
+                TRACE("drag finish result=%d\n", result);
+                break;
+            }
+
+            default :
+                DBG("BaseViewSignals:: sendDndData not defined for view type %d\n", baseView->viewType());
+                break;
+        }
+
+        if (dndData){
+            gtk_selection_data_set (selection_data, 
+                gtk_selection_data_get_selection(selection_data),
+                8, (const guchar *)dndData, strlen(dndData)+1);
+        }
+                    
+    }
 
     // sender:
+
+    static void
+    DragBegin (GtkWidget * widget, GdkDragContext * context, gpointer data) {
+        WARN("signal_drag_begin\n");
+	auto baseView = (BaseView<Type> *)data;
+        auto treeModel = baseView->treeModel();
+        // Treeview or iconview?
+        gboolean isTreeView = (Settings<Type>::getSettingInteger("window", "TreeView") > 0);
+        //  single or multiple item selected?
+        GList *selectionList;
+        if (isTreeView){
+            auto selection = gtk_tree_view_get_selection (baseView->treeView());
+            selectionList = gtk_tree_selection_get_selected_rows (selection, &treeModel);
+        } else {
+            selectionList = gtk_icon_view_get_selected_items (baseView->iconView());
+        }
+        baseView->setSelectionList(selectionList);
+        if (g_list_length(selectionList) > 1) {
+            GdkPixbuf *pixbuf = Pixbuf<Type>::get_pixbuf("edit-copy", -48);
+            gtk_drag_set_icon_pixbuf (context, pixbuf,10,10);
+        } else {
+            auto tpath = (GtkTreePath *)selectionList->data;
+            GtkTreeIter iter;
+            GdkPixbuf *pixbuf;
+            gtk_tree_model_get_iter (baseView->treeModel(), &iter, tpath);
+            gtk_tree_model_get (baseView->treeModel(), &iter, NORMAL_PIXBUF, &pixbuf, -1);
+            gtk_drag_set_icon_pixbuf (context, pixbuf,10,10);
+        }
+    }
+//receiver:
+
+    static void
+    DragDataReceive (GtkWidget * widget,
+                      GdkDragContext * context,
+                      gint x, gint y, 
+                      GtkSelectionData * selection_data, 
+                      guint info, 
+                      guint time, 
+                      gpointer data){
+        DBG( "DND>> signal_drag_data\n");
+	auto baseView = (BaseView<Type> *)data;
+
+        // Treeview or iconview?
+        gboolean isTreeView = (Settings<Type>::getSettingInteger("window", "TreeView") > 0);
+        GdkDragAction action = gdk_drag_context_get_selected_action(context);
+        
+        TRACE("rodent_mouse: DND receive, info=%d (%d,%d)\n", info, TARGET_STRING, TARGET_URI_LIST);
+        if(info != TARGET_URI_LIST) {
+            ERROR("signal_drag_data_receive: info != TARGET_URI_LIST\n");
+            // not needed with GTK_DEST_DEFAULT_DROP
+            // gtk_drag_finish(context, FALSE, FALSE, time);
+            return;
+        }
+        if(action != GDK_ACTION_MOVE && 
+           action != GDK_ACTION_COPY &&
+           action != GDK_ACTION_LINK) {
+            ERROR("Drag drop mode is not GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK\n");
+            // not needed with GTK_DEST_DEFAULT_DROP
+            // gtk_drag_finish(context, FALSE, FALSE, time);
+            return;
+        }
+
+        gchar *target = NULL;
+        GtkTreePath *tpath=NULL;
+        if (isTreeView) {
+            // Simple drop for now since xy coordinates differ from treeview coordinates...
+            target = g_strdup(baseView->path());
+        } else {
+            if (gtk_icon_view_get_item_at_pos (baseView->iconView(),
+                                       x, y, &tpath, NULL))
+            {
+                GtkTreeIter iter;
+                gtk_tree_model_get_iter (baseView->treeModel(), &iter, tpath);
+                gtk_tree_model_get (baseView->treeModel(), &iter, PATH, &target, -1);	
+                TRACE("target1=%s\n", target);
+                if (!g_file_test(target, G_FILE_TEST_IS_DIR)){
+                    g_free(target);
+                    target=NULL;
+                }
+                TRACE("target2=%s\n", target);
+            } else {
+                TRACE("target3=%s\n", target);
+                tpath=NULL;
+            }
+        }
+        
+        if (tpath) gtk_tree_path_free(tpath);
+        auto dndData = (const char *)gtk_selection_data_get_data (selection_data);
+	DBG("dndData = \"\n%s\"\n", dndData);
+        
+        switch (baseView->viewType()) {
+            case (LOCALVIEW_TYPE):
+            {
+                auto result = LocalDnd<Type>::receiveDndData(baseView, target, selection_data, action);
+                TRACE("drag finish result=%d\n", result);
+                break;
+            }
+
+            default :
+                DBG("BaseViewSignals:: receiveDndData not defined for view type %d\n", baseView->viewType());
+                break;
+        }
+        g_free(target);
+
+     /*   gtk_drag_finish (context, result, 
+                (action == GDK_ACTION_MOVE) ? result : FALSE, 
+                time); */
+        TRACE("DND receive, drag_over\n");
+        return;
+    }
+
+
     static void
     signal_drag_end (GtkWidget * widget, GdkDragContext * context, gpointer data) {
         WARN("signal_drag_end\n");

@@ -80,46 +80,6 @@ public:
     }
 
 
-/////////////////////////////////  DnD   ///////////////////////////
-    static void
-    DragDataSend (GtkWidget * widget,
-                       GdkDragContext * context, 
-                       GtkSelectionData * selection_data, 
-                       guint info, 
-                       guint time,
-                       gpointer data) {
-        WARN("signal_drag_data_send\n");
-        //g_free(files);
-        
-        //int drag_type;
-
-	auto baseView = (BaseView<Type> *)data;
-        /* prepare data for the receiver */
-        if (info != TARGET_URI_LIST) {
-            ERROR("signal_drag_data_send: invalid target");
-        }
-        DBG( ">>> DND send, TARGET_URI_LIST\n"); 
-        gchar *dndData = NULL;
-        switch (baseView->viewType()) {
-            case (LOCALVIEW_TYPE):
-            {
-                dndData = LocalDnd<Type>::sendDndData(baseView);
-                TRACE("drag finish result=%d\n", result);
-                break;
-            }
-
-            default :
-                DBG("BaseViewSignals:: sendDndData not defined for view type %d\n", baseView->viewType());
-                break;
-        }
-
-        if (dndData){
-            gtk_selection_data_set (selection_data, 
-                gtk_selection_data_get_selection(selection_data),
-                8, (const guchar *)dndData, strlen(dndData)+1);
-        }
-                    
-    }
 };
 }
 #endif
