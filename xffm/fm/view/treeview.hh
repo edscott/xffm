@@ -185,17 +185,15 @@ private:
                               NULL, // &column,
                                &cellX, &cellY);
             selection = gtk_tree_view_get_selection (baseView->treeView());
-            gtk_tree_selection_select_path (selection, tpath);     
-            if (CONTROL_MODE) {
-                //gtk_tree_selection_unselect_all (selection);
-                GList *list = baseView->selectionList();
+            if (CONTROL_MODE) gtk_tree_selection_unselect_all (selection);
+	    else {
+		gtk_tree_selection_select_path (selection, tpath);
+		//FIXME: treeview selection should probably be rowreference
+                /*GList *list = baseView->selectionList();
                 for (;list && list->data; list = list->next){
                     gtk_tree_selection_select_path (selection, (GtkTreePath *)list->data);
-                }     
-            } else {
-                gtk_tree_selection_unselect_all (selection);
-                gtk_tree_selection_select_path (selection, tpath);     
-            }
+                }   */
+            } 
 	    gtk_tree_path_free(tpath);
             DBG("(%lf,%lf) -> %d,%d\n", event->x, event->y, cellX, cellY);
 
@@ -206,7 +204,7 @@ private:
     viewPopUp(BaseView<Type> *baseView, GdkEventButton  *event){
         TRACE("button press event: button 3 should do popup, as well as longpress...\n");
         GtkTreePath *tpath;
-        gboolean retval = FALSE;
+        gboolean retval = TRUE;
         GtkMenu *menu = NULL;
         auto selection = gtk_tree_view_get_selection (baseView->treeView());
         auto treeModel = baseView->treeModel();
@@ -236,9 +234,9 @@ private:
             gtk_tree_model_get(baseView->treeModel(), &iter, PATH, &path, -1);
             DBG("selected path is %s\n", path);
         }
-        
-        IconView<Type>::setMenuData(baseView, path);
-        menu = IconView<Type>::configureMenu(baseView);
+        gboolean items = (g_list_length(selectionList) >0);
+        IconView<Type>::setMenuData(baseView, path, items);
+        menu = IconView<Type>::configureMenu(baseView, items);
         if (menu) {
             gtk_menu_popup_at_pointer (menu, (const GdkEvent *)event);
         }   

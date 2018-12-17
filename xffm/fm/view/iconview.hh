@@ -527,14 +527,13 @@ private:
                                    event->x,
                                    event->y,
                                    &tpath, NULL))
-        {
-           if (!CONTROL_MODE){
-                // unselect all
-                gtk_icon_view_unselect_all (baseView->iconView());
-            }
+        if (CONTROL_MODE) {
+           gtk_icon_view_unselect_all (baseView->iconView());
+        } else {
             gtk_icon_view_select_path (baseView->iconView(), tpath);
-            gtk_tree_path_free(tpath);
-        }
+	}
+        gtk_tree_path_free(tpath);
+           
        
         gchar *path = NULL;
         GList *selection_list = gtk_icon_view_get_selected_items (baseView->iconView());
@@ -545,8 +544,13 @@ private:
                     (GtkTreePath *)selection_list->data);
             gtk_tree_model_get(baseView->treeModel(), &iter, PATH, &path, -1);
         }
-        setMenuData(baseView, path);
-        menu = configureMenu(baseView);
+	if ((CONTROL_MODE) || g_list_length(selection_list) == 0) {
+	    setMenuData(baseView, path, FALSE);
+	    menu = configureMenu(baseView, FALSE);
+	} else {
+	    setMenuData(baseView, path,TRUE);
+	    menu = configureMenu(baseView,TRUE);
+	} 
         if (menu) {
             gtk_menu_popup_at_pointer (menu, (const GdkEvent *)event);
         }   
@@ -554,19 +558,19 @@ private:
     }
 public:
     static void
-    setMenuData(BaseView<Type> * baseView, gchar *path){
+    setMenuData(BaseView<Type> * baseView, gchar *path, gboolean  items){
         GtkMenu *menu = NULL;
         switch (baseView->viewType()){
             case (ROOTVIEW_TYPE):
                 WARN("ROOTVIEW_TYPE menu here...\n");
                 break;
             case (LOCALVIEW_TYPE):
-                menu = (baseView->selectionList())?
+                menu = (items)?
                     LocalView<Type>::popUpItem():
                     LocalView<Type>::popUp();
                 break;
             case (FSTAB_TYPE):
-                 menu = (baseView->selectionList())?
+                 menu = (items)?
                     Fstab<Type>::popUpItem():
                     Fstab<Type>::popUp();
                 break;
@@ -584,14 +588,14 @@ public:
     }
     
     static GtkMenu *
-    configureMenu(BaseView<Type> * baseView){
+    configureMenu(BaseView<Type> * baseView, gboolean items){
         GtkMenu *menu = NULL;
         switch (baseView->viewType()){
             case (ROOTVIEW_TYPE):
                 WARN("configureMenu(): ROOTVIEW_TYPE menu here...\n");
                 break;
             case (LOCALVIEW_TYPE):
-                if (baseView->selectionList()) {
+                if (items) {
                     menu = localItemPopUp;
                     LocalView<Type>::resetMenuItems();
                 } else {
@@ -600,7 +604,7 @@ public:
                 }
                 break;
             case (FSTAB_TYPE):
-                if (baseView->selectionList()) {
+                if (items) {
                     menu = fstabItemPopUp;
                     Fstab<Type>::resetMenuItems();
                 } else {

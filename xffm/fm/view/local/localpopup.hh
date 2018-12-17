@@ -75,7 +75,8 @@ public:
             
             {N_("Select All"), (void *)selectAll, NULL, NULL},
             {N_("Select Items Matching..."), (void *)selectMatch, NULL, NULL},
-            {N_("View as list"), NULL, NULL, NULL},
+            {N_("View as list"), (void *)toggleItem, 
+		(void *)"TreeView", "TreeView"},
             {N_("Show hidden files"), (void *)toggleItem, 
                 (void *) "ShowHidden", "ShowHidden"},
             {N_("Show Backup Files"), (void *)toggleItem, 
@@ -601,7 +602,8 @@ private:
 
 
 public:
-    static void
+
+   static void
     toggleItem(GtkCheckMenuItem *menuItem, gpointer data)
     {
         auto item = (const gchar *)data;
