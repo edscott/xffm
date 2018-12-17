@@ -22,6 +22,20 @@ public:
 	}
     }
 
+    static void changeTitle(GtkMenu *menu, const gchar *text, const gchar *iconName)
+    {
+	// change title
+	auto title = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(menu), "title"));
+        if (!title) {
+            ERROR("BasePopUp::changeTitle(): menu has no data object \"title\"\n");
+            return;
+        }
+	TRACE("changeTitle, title = %p\n",(void *)title);
+	gchar *markup = g_strdup_printf("<span color=\"blue\" size=\"large\">%s</span>", text);
+	Gtk<Type>::menu_item_content(title, iconName, markup, -48);
+	g_free(markup);
+        gtk_widget_show(GTK_WIDGET(title));
+    }
     static void changeTitle(GtkMenu *menu)
     {
 	// change title

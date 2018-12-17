@@ -91,12 +91,12 @@ class BaseModel
     using page_c = Page<Type>;
     
     Page<Type> *page_;
-    gchar *path_;
     GtkWidget *source_;
     GtkWidget *destination_;
     gint viewType_;
 
 protected:
+    gchar *path_;
     GList *selectionList_;
     LocalMonitor<Type> *localMonitor_;
     FstabMonitor<Type> *fstabMonitor_;

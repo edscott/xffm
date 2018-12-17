@@ -562,7 +562,9 @@ public:
         GtkMenu *menu = NULL;
         switch (baseView->viewType()){
             case (ROOTVIEW_TYPE):
-                WARN("ROOTVIEW_TYPE menu here...\n");
+                 menu = (items)?
+                    RootView<Type>::popUpItem():
+                    RootView<Type>::popUp();
                 break;
             case (LOCALVIEW_TYPE):
                 menu = (items)?
@@ -592,7 +594,13 @@ public:
         GtkMenu *menu = NULL;
         switch (baseView->viewType()){
             case (ROOTVIEW_TYPE):
-                WARN("configureMenu(): ROOTVIEW_TYPE menu here...\n");
+                if (items) {
+                    menu = rootItemPopUp;
+                    RootView<Type>::resetMenuItems();
+                } else {
+                    menu = rootPopUp;
+                    RootView<Type>::resetLocalPopup();
+                }
                 break;
             case (LOCALVIEW_TYPE):
                 if (items) {
@@ -609,7 +617,7 @@ public:
                     Fstab<Type>::resetMenuItems();
                 } else {
                     menu = fstabPopUp;
-                    Fstab<Type>::resetLocalPopup();
+                    Fstab<Type>::resetPopup();
                 }
                 break;
             default:

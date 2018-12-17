@@ -603,22 +603,25 @@ private:
 
 public:
 
-   static void
+   static gboolean
     toggleGroupItem(GtkCheckMenuItem *menuItem, const gchar *group, const gchar *item)
     {
-        gint value; 
+        gboolean value; 
         if (Settings<Type>::getSettingInteger(group, item) > 0){
-            value = 0;
-            gtk_check_menu_item_set_active(menuItem, FALSE);
+            value = FALSE;
         } else {
-            value = 1;
-            gtk_check_menu_item_set_active(menuItem, TRUE);
+            value = TRUE;
         }
-        auto baseView = (BaseView<Type> *)g_object_get_data(G_OBJECT(localPopUp), "baseView");
-        auto path = (const gchar *)g_object_get_data(G_OBJECT(localPopUp), "path");
-        
+        gtk_check_menu_item_set_active(menuItem, value);
         Settings<Type>::setSettingInteger(group, item, value);
-        baseView->loadModel(path);
+        auto notebook_p = (Notebook<Type> *)g_object_get_data(G_OBJECT(mainWindow), "xffm");
+	gint pages = gtk_notebook_get_n_pages (notebook_p->notebook());
+	for (int i=0; i<pages; i++){
+            auto page = notebook_p->currentPageObject(i);
+            auto baseView = page->baseView();
+            baseView->reloadModel();
+	}
+        return value;
     }
 
    static void
@@ -627,6 +630,7 @@ public:
 
         auto item = (const gchar *)data;
 	toggleGroupItem(menuItem, "LocalView", item);
+
     }
 
    static void

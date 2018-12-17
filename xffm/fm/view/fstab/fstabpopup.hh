@@ -18,38 +18,23 @@ class FstabPopUp {
     using util_c = Util<double>;
     using pixbuf_icons_c = Icons<double>;
     using page_c = Page<Type>;
-    static GtkMenu *createLocalPopUp(void){
+    static GtkMenu *createPopUp(void){
          menuItem_t item[]={
-            {N_("Open in New Tab"), NULL, NULL, NULL},
-            {N_("Open in New Window"), NULL, NULL, NULL},
-            
-             // main menu items
-            //{N_("Home"), NULL, (void *) menu},
-            //{N_("Open terminal"), NULL, (void *) menu},
-            //{N_("About"), NULL, (void *) menu},
-            //
-            //common buttons /(also an iconsize +/- button)
-            //{N_("Paste"), NULL, (void *) menu},
-            //{N_("Sort data in ascending order"), NULL, (void *) menu},
-            //{N_("Sort data in descending order"), NULL, (void *) menu},
-            //{N_("Sort case insensitive"), NULL, (void *) menu},
-            
-            //{N_("Select All"), NULL, (void *) menu},
-            //{N_("Invert Selection"), NULL, (void *) menu},
-            //{N_("Unselect"), NULL, (void *) menu},
-            //{N_("Select Items Matching..."), NULL, (void *) menu},
-            //{N_("Unselect Items Matching..."), NULL, (void *) menu},
-            //{N_("Sort by name"), NULL, (void *) menu},
-            //{N_("Default sort order"), NULL, (void *) menu},
-            //{N_("Sort by date"), NULL, (void *) menu},
-            //{N_("Sort by size"), NULL, (void *) menu},
-            //{N_("View as list"), NULL, (void *) menu},
+	    {N_("Open in New Tab"), (void *)LocalPopUp<Type>::newTab, NULL, NULL},
+            {N_("View as list"), (void *)LocalPopUp<Type>::toggleView,  
+		(void *)"TreeView", "window"},
+            {N_("NFS Network Volume"), (void *)BasePopUp<Type>::noop, NULL, NULL},
+            {N_("SSHFS Remote Synchronization Folder"), (void *)BasePopUp<Type>::noop, NULL, NULL},
+            {N_("eCryptfs Volume"), (void *)BasePopUp<Type>::noop, NULL, NULL},
+            {N_("CIFS Volume"), (void *)BasePopUp<Type>::noop, NULL, NULL},
             {NULL,NULL,NULL, FALSE}};
 	fstabPopUp = BasePopUp<Type>::createPopup(item); 
+        BasePopUp<Type>::changeTitle(fstabPopUp, _("Mount Helper"), NULL);
+
         return fstabPopUp;        
     }  
 
-    static GtkMenu *createLocalItemPopUp(void){
+    static GtkMenu *createItemPopUp(void){
 	menuItem_t item[]=
         {
 	    {N_("Mount the volume associated with this folder"), (void *)mount, NULL, NULL},
@@ -67,7 +52,7 @@ class FstabPopUp {
     }
 
     static void 
-    resetLocalItemPopup(BaseView<Type> *baseView, const gchar *path) {
+    resetItemPopup(BaseView<Type> *baseView, const gchar *path) {
         BasePopUp<Type>::clearKeys(fstabItemPopUp);
         GtkTreeIter iter;
 	if (!gtk_tree_model_get_iter (baseView->treeModel(), &iter, 
@@ -214,25 +199,26 @@ public:
     }
 */
     static GtkMenu *popUp(void){
-        if (!fstabItemPopUp) fstabItemPopUp = createLocalPopUp();   
+        if (!fstabPopUp) fstabPopUp = createPopUp();   
         return fstabPopUp;
     }
     static GtkMenu *popUpItem(void){
-        if (!fstabItemPopUp) fstabItemPopUp = createLocalItemPopUp();   
+        if (!fstabItemPopUp) fstabItemPopUp = createItemPopUp();   
         return fstabItemPopUp;
     }
 
 
     static void
-    resetLocalPopup(void){
-        DBG("FIXME: add fstab localpopup\n");
+    resetPopup(void){
+        auto path = g_object_get_data(G_OBJECT(fstabPopUp), "path");
+        if (!path) g_object_set_data(G_OBJECT(fstabPopUp), "path", (void *)g_strdup("xffm:fstab"));
     }
     
     static void
     resetMenuItems(void) {
         auto baseView = (BaseView<Type> *)g_object_get_data(G_OBJECT(fstabItemPopUp), "baseView");
         auto path = (const gchar *)g_object_get_data(G_OBJECT(fstabItemPopUp), "path");
-        resetLocalItemPopup(baseView, path);
+        resetItemPopup(baseView, path);
 
 	struct stat st;
         // Hide all...

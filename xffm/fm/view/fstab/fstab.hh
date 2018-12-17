@@ -82,17 +82,16 @@ public:
         gtk_icon_view_set_selection_mode (iconView,GTK_SELECTION_SINGLE); 
 
 	RootView<Type>::addXffmItem(treeModel);
-	addNFSItem(treeModel);
-	addEcryptFSItem(treeModel);
-	addSSHItem(treeModel);
-	addCIFSItem(treeModel);
+	//addNFSItem(treeModel);
+	//addEcryptFSItem(treeModel);
+	//addSSHItem(treeModel);
+	//addCIFSItem(treeModel);
         addPartitionItems(treeModel);
 
         FstabMonitor<Type> *p = new(FstabMonitor<Type>)(treeModel, baseView);
         p->start_monitor(treeModel, "/dev/disk/by-partuuid");
         return p;
     }
-
 
     static gchar *
     fsType(const gchar *partitionPath){

@@ -306,7 +306,7 @@ private:
                gpointer   data) {
 	Pathbar *pathbar_p = (Pathbar *)data;
         // File chooser
-        auto entryResponse = new(EntryResponse<Type>)(GTK_WINDOW(mainWindow), _("Go to"), NULL);
+        auto entryResponse = new(EntryResponse<Type>)(GTK_WINDOW(mainWindow), _("Go to"), "go-jump");
 	auto markup = 
 	    g_strdup_printf("<span color=\"blue\" size=\"larger\"><b>%s</b></span>", _("Go to"));  
 	
@@ -329,6 +329,7 @@ private:
         auto response = entryResponse->runResponse();
 	
         delete entryResponse;
+        if (!response) return FALSE;
 	if (!g_file_test(response, G_FILE_TEST_IS_DIR)){
 	    gchar *message = g_strdup_printf("\n  %s:  \n  %s  \n", response, _("Not a directory"));
 	    Gtk<Type>::quickHelp(GTK_WINDOW(mainWindow), message, "dialog-error");

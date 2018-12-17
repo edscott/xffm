@@ -92,12 +92,23 @@ public:
 	    if (!g_file_test(path, G_FILE_TEST_IS_DIR)){
                 // Not a directory, but valid path: activate item.
 		DBG("%s is not dir, will activate.\n", path);
+                if (Fstab<Type>::isMounted(path)){
+                    auto mntDir = Fstab<Type>::getMntDir(path);
+                    auto retval = this->loadModel(mntDir);
+                    g_free(mntDir);
+                    return retval;
+                }
 		return LocalView<Type>::item_activated(this, treeModel, tpath, path);
 	    }
 	} else {
 	    DBG("%s is not valid path\n", path);
         }
 	return this->loadModel(path);
+    }
+
+    void reloadModel(void){
+        auto path = g_strdup(this->path_);
+        loadModel(path);
     }
 
     
