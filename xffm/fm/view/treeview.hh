@@ -90,19 +90,20 @@ private:
                                event->x, event->y, &tpath,
                               NULL, // &column,
                               NULL, NULL);
+	    if (tpath) {
+		// unselect everything
+		gtk_tree_selection_unselect_all (selection);
 
-	    // unselect everything
-            gtk_tree_selection_unselect_all (selection);
+		// reselect item to activate
+		gtk_tree_selection_select_path (selection, tpath);
 
-	    // reselect item to activate
-	    gtk_tree_selection_select_path (selection, tpath);
+		WARN("Here we do a call to activate item.\n");
+		BaseViewSignals<Type>::activate(tpath, data);
+		gtk_tree_path_free(tpath);
 
-	    WARN("Here we do a call to activate item.\n");
-	    BaseViewSignals<Type>::activate(tpath, data);
-	    gtk_tree_path_free(tpath);
-
-            // FIXME: maybe we have to do the same clear selectionlist for iconview
-            baseView->setSelectionList(NULL);
+		// FIXME: maybe we have to do the same clear selectionlist for iconview
+	    }
+	    baseView->setSelectionList(NULL);
             
 	    return TRUE;
         }
@@ -187,7 +188,7 @@ private:
             selection = gtk_tree_view_get_selection (baseView->treeView());
             if (CONTROL_MODE) gtk_tree_selection_unselect_all (selection);
 	    else {
-		gtk_tree_selection_select_path (selection, tpath);
+		if (tpath) gtk_tree_selection_select_path (selection, tpath);
 		//FIXME: treeview selection should probably be rowreference
                 /*GList *list = baseView->selectionList();
                 for (;list && list->data; list = list->next){

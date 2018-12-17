@@ -130,10 +130,10 @@ public:
 		runWith(baseView, tpath, path);
 	    } else {
 #if 0
+		auto mimetype = Mime<Type>::mimeType(path);
                 // XXX This has a problem if the user clicks repeatedly on the
                 //     icon, since the command will be issued several times
                 //     in a row. 
-		auto mimetype = Mime<Type>::mimeType(path);
 		gchar *response = Settings<Type>::getSettingString("MimeTypeApplications", mimetype);
 		if (response) {
 		    gchar *command;

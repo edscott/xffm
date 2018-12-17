@@ -37,6 +37,17 @@ public:
     GtkIconView *iconView(void){return iconView_;}
     
     gboolean loadModel(const gchar *path){
+
+        if (Settings<Type>::getSettingInteger("window", "TreeView") > 0){
+	    // hide iconview, show treeview
+	    gtk_widget_hide(GTK_WIDGET(this->page()->topScrolledWindow()));
+	    gtk_widget_show(GTK_WIDGET(this->page()->treeScrolledWindow()));
+	} else {
+	    // hide treeview, show iconview
+	    gtk_widget_hide(GTK_WIDGET(this->page()->treeScrolledWindow()));
+	    gtk_widget_show(GTK_WIDGET(this->page()->topScrolledWindow()));
+	}
+
         this->setViewType(this->getViewType(path));
         this->setPath(path);
         // stop current monitor

@@ -72,7 +72,7 @@ public:
             GtkWidget *v;
             if (p->toggleID){
                 v = gtk_check_menu_item_new_with_label(_(p->label));
-                if (Settings<Type>::getSettingInteger("LocalView", p->toggleID) > 0){
+                if (Settings<Type>::getSettingInteger(p->toggleID, (const gchar *)p->callbackData) > 0){
                    gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(v), TRUE);
                 } 
             } else {
