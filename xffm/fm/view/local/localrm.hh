@@ -47,12 +47,21 @@ public:
         
 	DBG("LocalRm:: rm\n");
 	auto baseView =  (BaseView<Type> *)g_object_get_data(G_OBJECT(data), "baseView");
-        auto selection_list = gtk_icon_view_get_selected_items (baseView->iconView());
-        if (!selection_list){
+        gboolean isTreeView = (Settings<Type>::getSettingInteger("window", "TreeView") > 0);
+        //  single or multiple item selected?
+        GList *selectionList;
+        if (isTreeView){
+            auto treeModel = baseView->treeModel();
+            auto selection = gtk_tree_view_get_selection (baseView->treeView());
+            selectionList = gtk_tree_selection_get_selected_rows (selection, &treeModel);
+        } else {
+            selectionList = gtk_icon_view_get_selected_items (baseView->iconView());
+        }
+        if (!selectionList){
             DBG("rm(): nothing selected\n");
         }
         GList *list = NULL;
-        for (auto tmp=selection_list; tmp && tmp->data; tmp = tmp->next){
+        for (auto tmp=selectionList; tmp && tmp->data; tmp = tmp->next){
             gchar *path;
             GtkTreeIter iter;
             auto tpath = (GtkTreePath *)tmp->data;

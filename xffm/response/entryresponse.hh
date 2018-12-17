@@ -161,6 +161,7 @@ public:
     void setEntryDefault(const gchar *value){
         if (!value) return;
         gtk_entry_set_text(entry_, value);
+        gtk_editable_select_region (GTK_EDITABLE(entry_), 0, strlen(value));
         gtk_widget_show(GTK_WIDGET(entry_));
     }
 			      

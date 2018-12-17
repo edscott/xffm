@@ -874,6 +874,9 @@ public:
     static gchar *
     getNewPath(const gchar *path, const gchar *icon, const gchar *text){
         auto entryResponse = new(EntryResponse<Type>)(GTK_WINDOW(mainWindow), text, icon);
+        auto basename = g_path_get_basename(path);
+        entryResponse->setEntryDefault(basename);
+        g_free(basename);
         entryResponse->setEntryLabel(_("New Name:"));
         auto response = entryResponse->runResponse();
         delete entryResponse;

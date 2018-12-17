@@ -1,9 +1,7 @@
 
-bug: treeview does not have method to not select .. (local only)
-bug: treeview menu only is working for local
-bug : treeview null item menu cannot be shown
-crash: on button 3 empty area treeview at rootview
-
+Important: must reload all windows when settings.ini window:TreeView changes 
+           because menu callbacks depend on correct value. Otherwise
+           hack menu items to ensure correct value (not working right...)
 
 
 TODO

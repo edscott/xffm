@@ -76,8 +76,17 @@ public:
             exit(1);
         }
         DBG("%s\n", instruction); 
-        GList *selection_list = gtk_icon_view_get_selected_items (baseView->iconView());
-        baseView->setSelectionList(selection_list);
+        gboolean isTreeView = (Settings<Type>::getSettingInteger("window", "TreeView") > 0);
+        //  single or multiple item selected?
+        GList *selectionList;
+        if (isTreeView){
+            auto treeModel = baseView->treeModel();
+            auto selection = gtk_tree_view_get_selection (baseView->treeView());
+            selectionList = gtk_tree_selection_get_selected_rows (selection, &treeModel);
+        } else {
+            selectionList = gtk_icon_view_get_selected_items (baseView->iconView());
+        }
+        baseView->setSelectionList(selectionList);
         gchar *clipData = getSelectionData(baseView,instruction );
         if (!g_utf8_validate (clipData, -1, NULL)){
             ERROR("LocalClipBoard::putInClipBoard(): Not a valid utf8 string: %s\n", clipData);
