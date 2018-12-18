@@ -150,7 +150,7 @@ public:
 		DISPLAY_PIXBUF, normal_pixbuf,
 		NORMAL_PIXBUF, normal_pixbuf,
 		HIGHLIGHT_PIXBUF, highlight_pixbuf,
-		TOOLTIP_TEXT,_("This is the user's home directory"),
+		TOOLTIP_TEXT,_("Mount local disks and devices"),
 		-1);
 	g_free(utf_name);
     }
@@ -191,7 +191,7 @@ public:
 		DISPLAY_PIXBUF, normal_pixbuf,
 		NORMAL_PIXBUF, normal_pixbuf,
 		HIGHLIGHT_PIXBUF, highlight_pixbuf,
-		TOOLTIP_TEXT,_("This is the user's home directory"),
+		TOOLTIP_TEXT,_("Add or remove software installed on the system"),
 		-1);
 	g_free(utf_name);
     }
@@ -232,7 +232,7 @@ public:
                         DISPLAY_PIXBUF, normal_pixbuf,
                         NORMAL_PIXBUF, normal_pixbuf,
                         HIGHLIGHT_PIXBUF, highlight_pixbuf,
-                        TOOLTIP_TEXT,_("Open Bookmark"),
+                        TOOLTIP_TEXT,_("Go to the location specified by this bookmark"),
                         -1);
                 g_free(basename);
                 g_free(utf_name);
