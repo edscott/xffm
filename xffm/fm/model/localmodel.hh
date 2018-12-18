@@ -115,7 +115,7 @@ public:
             TRACE( "%p  %s\n", d, d->d_name);
             if(strcmp (d->d_name, ".") == 0) continue;
             if (strcmp(path,"/")==0 && strcmp (d->d_name, "..") == 0) continue;
-            xd_t *xd_p = get_xd_p(path, d);
+            xd_t *xd_p = get_xd_p(path, d, FALSE);
             directory_list = g_list_prepend(directory_list, xd_p);
             if (heartbeat) {
                 (*heartbeat)++;
@@ -138,12 +138,19 @@ public:
             DBG("read_files_local(): Count failed! Directory not read!\n");
         }
         directory_list = sort_directory_list (directory_list);
+        // stat first 104 items.
+        gint i=0;
+        for (auto p = directory_list; p && p->data && i<104; p= p->next, i++) {
+            auto xd_p = (xd_t *)p->data;
+            xd_p->st = (struct stat *)calloc(1, sizeof(struct stat));
+            stat(xd_p->path, xd_p->st);
+        }
         return (directory_list);
     }
 
     // Convert a dirent entry into a xd_t structure.
     static xd_t *
-    get_xd_p(const gchar *directory, struct dirent *d){
+    get_xd_p(const gchar *directory, struct dirent *d, gboolean withStat){
         xd_t *xd_p = (xd_t *)calloc(1,sizeof(xd_t));
         xd_p->d_name = g_strdup(d->d_name);
         if (strcmp(d->d_name, "..")==0){
@@ -168,7 +175,7 @@ public:
             xd_p->mimetype = Mime<Type>::mimeType(xd_p->path, xd_p->st);
             //xd_p->mimetype = Mime<Type>::locate_mime_t(xd_p->path);
         } else {
-            if (TRUE){
+            if (withStat){
                 xd_p->st = (struct stat *)calloc(1, sizeof(struct stat));
                 stat(xd_p->path, xd_p->st);
             }
@@ -421,6 +428,19 @@ private:
 	guint flags=0;
         guint size = (xd_p->st)?xd_p->st->st_size:0;
         guint date = (xd_p->st)?xd_p->st->st_mtim.tv_sec:0;
+        gchar *statInfo = (xd_p->st)?Util<Type>::statInfo(xd_p->path):NULL;
+        gchar **p = NULL;
+       /* if (statInfo){
+            p = g_strsplit(statInfo, " ", 6);
+            if (p) {
+                g_free(statInfo);
+                statInfo = g_strdup_printf("%s %s %s", p[5], p[4], p[0]);
+            } else {
+                g_free(statInfo);
+                statInfo = NULL;
+            }
+        }*/
+        if (!statInfo) statInfo = g_strdup("");
 	//setSelectable(xd_p->d_name, flags);
         gtk_list_store_set (list_store, iter, 
 		FLAGS, flags,
@@ -436,7 +456,9 @@ private:
                 SIZE,size, 
                 DATE,date, 
                 MIMETYPE, xd_p->mimetype,
+                TOOLTIP_TEXT, statInfo,
                 -1);
+        g_free(statInfo);
         g_free(icon_name);
         g_free(highlight_name);
         g_free(utf_name);

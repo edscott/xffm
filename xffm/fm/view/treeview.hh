@@ -15,12 +15,12 @@ public:
         gtk_tree_view_set_activate_on_single_click(treeView, TRUE);
         appendColumnPixbuf(treeView, TREEVIEW_PIXBUF);
         appendColumnText(treeView, _("Name"), DISPLAY_NAME);
+        appendColumnText(treeView, _("Details"), TOOLTIP_TEXT);
         appendColumnText(treeView, _("Size"), SIZE);
         appendColumnText(treeView, _("Date"), DATE);
         appendColumnText(treeView, _("Mimetype"), MIMETYPE);
         appendColumnText(treeView, _("ICON_NAME"), ICON_NAME);
         appendColumnText(treeView, _("TYPE"), TYPE);
-        appendColumnText(treeView, _("TOOLTIP_TEXT"), TOOLTIP_TEXT);
         setUpSignals(baseView, G_OBJECT(treeView));
         auto selection = gtk_tree_view_get_selection (treeView);
         gtk_tree_selection_set_mode (selection,  GTK_SELECTION_MULTIPLE);

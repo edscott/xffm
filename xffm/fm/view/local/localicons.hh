@@ -295,7 +295,7 @@ private:
     static gchar *
     statEmblem( const gchar *path, struct stat *st){
         if (!st){
-            DBG("statEmblem: no stat for st==NULL\n");
+            TRACE("statEmblem: no stat for st==NULL\n");
             return NULL;
         }
         if ((st->st_mode & S_IFMT) == S_IFDIR) {

@@ -75,7 +75,7 @@ public:
 	if (directory) {
 	  while ((d = readdir(directory))  != NULL) {
 	    if(strcmp (d->d_name, basename)) continue;
-	    xd_p = LocalView<Type>::get_xd_p(path, d);
+	    xd_p = LocalView<Type>::get_xd_p(path, d, TRUE);
 	    break;
 	  }
 	  closedir (directory);
