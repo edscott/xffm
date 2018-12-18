@@ -212,7 +212,6 @@ public:
     resetPopup(void){
         auto path = g_object_get_data(G_OBJECT(fstabPopUp), "path");
         if (!path) g_object_set_data(G_OBJECT(fstabPopUp), "path", (void *)g_strdup("xffm:fstab"));
-        gboolean isTreeView = (Settings<Type>::getSettingInteger("window", "TreeView") > 0);
         auto w = GTK_WIDGET(g_object_get_data(G_OBJECT(fstabPopUp), "View as list"));
         gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(w), isTreeView);
     }

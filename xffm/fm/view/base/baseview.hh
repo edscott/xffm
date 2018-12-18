@@ -38,7 +38,7 @@ public:
     
     gboolean loadModel(const gchar *path){
 
-        if (Settings<Type>::getSettingInteger("window", "TreeView") > 0){
+        if (isTreeView){
 	    // hide iconview, show treeview
 	    gtk_widget_hide(GTK_WIDGET(this->page()->topScrolledWindow()));
 	    gtk_widget_show(GTK_WIDGET(this->page()->treeScrolledWindow()));

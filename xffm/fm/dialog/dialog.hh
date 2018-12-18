@@ -36,22 +36,22 @@ public:
 
     void init(const gchar *path){
 	Settings<Type>::readSettings();
-	dialog_ = GTK_WINDOW(gtk_window_new (GTK_WINDOW_TOPLEVEL));
-        mainWindow = GTK_WIDGET(dialog_);
+        isTreeView = (Settings<Type>::getSettingInteger("window", "TreeView") > 0);
+	mainWindow = GTK_WINDOW(gtk_window_new (GTK_WINDOW_TOPLEVEL));
         g_object_set_data(G_OBJECT(mainWindow), "dialogObject", (void *)this);
-        g_signal_connect (G_OBJECT (dialog_), "delete-event", EVENT_CALLBACK (dialogSignals<Type>::delete_event), NULL);
+        g_signal_connect (G_OBJECT (mainWindow), "delete-event", EVENT_CALLBACK (dialogSignals<Type>::delete_event), NULL);
 
-        gtk_widget_set_has_tooltip (GTK_WIDGET(dialog_), TRUE);
+        gtk_widget_set_has_tooltip (GTK_WIDGET(mainWindow), TRUE);
         // FIXME: enable tooltip
-        //g_signal_connect (G_OBJECT (dialog_), "query-tooltip", G_CALLBACK (window_tooltip_f), (void *)this);
-        g_signal_connect (G_OBJECT (dialog_), "key-press-event", KEY_EVENT_CALLBACK (dialogSignals<Type>::window_keyboard_event), (void *)this);
+        //g_signal_connect (G_OBJECT (mainWindow), "query-tooltip", G_CALLBACK (window_tooltip_f), (void *)this);
+        g_signal_connect (G_OBJECT (mainWindow), "key-press-event", KEY_EVENT_CALLBACK (dialogSignals<Type>::window_keyboard_event), (void *)this);
 
-	gtk_widget_get_preferred_width (GTK_WIDGET(dialog_), &dialogMinW_, &dialogNatW_);
-	gtk_widget_get_preferred_height (GTK_WIDGET(dialog_), &dialogMinH_, &dialogNatH_);
-	gtk_window_set_type_hint(dialog_, GDK_WINDOW_TYPE_HINT_DIALOG);
-	//setWindowMaxSize(dialog_);
-	gtk_window_set_position (dialog_, GTK_WIN_POS_MOUSE);
-        this->insertNotebook(dialog_);     
+	gtk_widget_get_preferred_width (GTK_WIDGET(mainWindow), &dialogMinW_, &dialogNatW_);
+	gtk_widget_get_preferred_height (GTK_WIDGET(mainWindow), &dialogMinH_, &dialogNatH_);
+	gtk_window_set_type_hint(mainWindow, GDK_WINDOW_TYPE_HINT_DIALOG);
+	//setWindowMaxSize(mainWindow);
+	gtk_window_set_position (mainWindow, GTK_WIN_POS_MOUSE);
+        this->insertNotebook(mainWindow);     
 
         this->addPage(path); 
         TRACE("dialog this=%p\n", (void *)this);
@@ -65,11 +65,11 @@ public:
 	g_object_set_data(G_OBJECT(vpane), "oldCurrent", GINT_TO_POINTER(current));
 	g_object_set_data(G_OBJECT(vpane), "oldMax", GINT_TO_POINTER(max));
         
-	g_signal_connect (G_OBJECT (dialog_), "size-allocate", 
+	g_signal_connect (G_OBJECT (mainWindow), "size-allocate", 
 		SIZE_CALLBACK(dialogSignals<Type>::onSizeAllocate), (void *)this);
         setDefaultSize();
         setDefaultFixedFontSize();
-        gtk_window_present (dialog_);
+        gtk_window_present (mainWindow);
         while (gtk_events_pending()) gtk_main_iteration();
 	return;
     }
@@ -141,11 +141,11 @@ public:
    
 
     void setDialogTitle(const gchar *title){
-	gtk_window_set_title (dialog_, title);
+	gtk_window_set_title (mainWindow, title);
     }
     void setDialogIcon(const gchar *icon){
 	auto pixbuf = pixbuf_c::get_pixbuf(icon, SIZE_ICON);
-	gtk_window_set_icon (dialog_, pixbuf);
+	gtk_window_set_icon (mainWindow, pixbuf);
 	g_object_unref(pixbuf);
     }
 
@@ -156,7 +156,7 @@ public:
         }
         if (naturalSize_.width == 0 ||
                 naturalSize_.height == 0){
-            gtk_widget_get_preferred_size (GTK_WIDGET(dialog_),
+            gtk_widget_get_preferred_size (GTK_WIDGET(mainWindow),
                                &minimumSize_,
                                &naturalSize_);
         }
@@ -164,7 +164,7 @@ public:
         gint width = Settings<Type>::getSettingInteger("window", "width");
         gint height = Settings<Type>::getSettingInteger("window", "height");
         if (width >= naturalSize_.width && height >= naturalSize_.height){
-            gtk_window_resize (GTK_WINDOW(dialog_), width, height);
+            gtk_window_resize (GTK_WINDOW(mainWindow), width, height);
             return;
         }
         // Now adapt a window size to the selected font
@@ -179,14 +179,12 @@ public:
                fontSize, fraction, w, h,
                naturalSize_.width,
                naturalSize_.height);
-        gtk_window_resize (GTK_WINDOW(dialog_), w, h);
+        gtk_window_resize (GTK_WINDOW(mainWindow), w, h);
         
     } 
 
 protected:
-    GtkWindow *dialog(){
-	return dialog_;
-    }
+
 
 
     void setDefaultFixedFontSize(void){
@@ -204,7 +202,7 @@ private:
         GtkRequisition chosenSize_;
         GtkRequisition maximumSize_;
     void setDefaultSize(void){
-        gtk_widget_get_preferred_size (GTK_WIDGET(dialog_),
+        gtk_widget_get_preferred_size (GTK_WIDGET(mainWindow),
                                &minimumSize_,
                                &naturalSize_);
         setWindowMaxSize();
@@ -235,11 +233,10 @@ private:
 	geometry.max_height = h_return -25;
         maximumSize_.width = geometry.max_width;
         maximumSize_.height = geometry.max_height;
-	gtk_window_set_geometry_hints (GTK_WINDOW(dialog_), GTK_WIDGET(dialog_), &geometry, GDK_HINT_MAX_SIZE);
+	gtk_window_set_geometry_hints (GTK_WINDOW(mainWindow), GTK_WIDGET(mainWindow), &geometry, GDK_HINT_MAX_SIZE);
     }
 
 private:
-    GtkWindow *dialog_;
     gint dialogMinW_, dialogNatW_, dialogMinH_, dialogNatH_;
 };
 }

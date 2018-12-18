@@ -436,7 +436,6 @@ public:
             gdk_drag_status (dc, GDK_ACTION_MOVE, t);
             
        // Treeview or iconview?
-        gboolean isTreeView = (Settings<Type>::getSettingInteger("window", "TreeView") > 0);
         if (isTreeView) return FALSE;
         
         GtkIconViewDropPosition pos;
@@ -510,7 +509,6 @@ public:
 	auto baseView = (BaseView<Type> *)data;
         auto treeModel = baseView->treeModel();
         // Treeview or iconview?
-        gboolean isTreeView = (Settings<Type>::getSettingInteger("window", "TreeView") > 0);
         //  single or multiple item selected?
         GList *selectionList;
         if (isTreeView){
@@ -546,7 +544,6 @@ public:
 	auto baseView = (BaseView<Type> *)data;
 
         // Treeview or iconview?
-        gboolean isTreeView = (Settings<Type>::getSettingInteger("window", "TreeView") > 0);
         GdkDragAction action = gdk_drag_context_get_selected_action(context);
         
         TRACE("rodent_mouse: DND receive, info=%d (%d,%d)\n", info, TARGET_STRING, TARGET_URI_LIST);

@@ -12,9 +12,45 @@ template <class Type> class Fstab;
 // 
 template <class Type>
 class FstabMonitor: public BaseMonitor<Type> {
-    void **mountArg_; // Needs to exist until destructor is called.
+
+    void *mountArg_[5]; // Needs to exist until destructor is called.
     // Please note, sending signal to monitor avoid race condition if
     // this thread tries to do more than this...
+public:    
+    FstabMonitor(GtkTreeModel *treeModel, BaseView<Type> *baseView):
+        BaseMonitor<Type>(treeModel, baseView)
+    {   
+        
+    }
+    ~FstabMonitor(void){
+        TRACE("Destructor:~local_monitor_c()\n");
+        // stop mountThread
+        mountArg_[1] = NULL;
+        while (mountArg_[2]){
+            TRACE("***Waiting for mountThread to exit\n");
+            sleep(1);
+        }
+        g_hash_table_destroy(this->itemsHash());
+        TRACE("***Destructor:~local_monitor_c() complete\n");
+    }
+
+    void
+    start_monitor(GtkTreeModel *treeModel, const gchar *path){
+        this->startMonitor(treeModel, path, (void *)monitor_f);
+        // start mountThread
+        pthread_t mountThread;
+        mountArg_[0] = (void *)this;
+        mountArg_[1] = GINT_TO_POINTER(TRUE);
+        mountArg_[2] = GINT_TO_POINTER(TRUE);
+	gint retval = pthread_create(&mountThread, NULL, FstabMonitor<Type>::mountThreadF, (void *)mountArg_);
+	if (retval){
+	    ERROR("thread_create(): %s\n", strerror(retval));
+	    //return retval;
+	}
+    }
+
+private:
+
     static void *sendChangeSignal(void *data){
        auto arg = (void **)data;
        auto baseMonitor = (BaseMonitor<Type> *)arg[0];
@@ -76,46 +112,12 @@ class FstabMonitor: public BaseMonitor<Type> {
         return retval;
     }
 
-public:    
-    FstabMonitor(GtkTreeModel *treeModel, BaseView<Type> *baseView):
-        BaseMonitor<Type>(treeModel, baseView)
-    {       
-    }
-    ~FstabMonitor(void){
-        TRACE("Destructor:~local_monitor_c()\n");
-        // stop mountThread
-        mountArg_[1] = NULL;
-        while (mountArg_[3]){
-            TRACE("***Waiting for mountThread to exit\n");
-        }
-        g_hash_table_destroy(this->itemsHash());
-        g_free(mountArg_);
-        TRACE("***Destructor:~local_monitor_c() complete\n");
-    }
-    void
-    start_monitor(GtkTreeModel *treeModel, const gchar *path){
-        this->startMonitor(treeModel, path, (void *)monitor_f);
-        // start mountThread
-        pthread_t mountThread;
-                DBG("LocalMonitor thread itemshash=%p\n", this->itemsHash());
-        mountArg_ = (void **)calloc(4, sizeof(void *));
-        mountArg_[0] = (void *)this;
-        mountArg_[1] = GINT_TO_POINTER(TRUE);
-        mountArg_[2] = (void *)this->itemsHash();
-        mountArg_[3] = GINT_TO_POINTER(TRUE);
-	gint retval = pthread_create(&mountThread, NULL, FstabMonitor<Type>::mountThreadF, (void *)this->mountArg_);
-	if (retval){
-	    ERROR("thread_create(): %s\n", strerror(retval));
-	    //return retval;
-	}
-    }
-
+public:
     static void *
     mountThreadF(void *data){
         void **arg = (void **)data;
         auto baseMonitor = (BaseMonitor<Type> *)arg[0];
         g_object_set_data(G_OBJECT(baseMonitor->treeModel()), "baseMonitor", (void *)baseMonitor);
-        auto itemsH = (GHashTable *)arg[2];
         // get initial md5sum
         gchar *sum = Util<Type>::md5sum("/proc/mounts");
         if (!sum) {
@@ -126,8 +128,6 @@ public:
         DBG("FstabMonitor::mountThreadF(): initial md5sum=%s", sum);
         
 	auto hash = getMountHash(NULL);
-
-
         while (arg[1]){// arg[1] is semaphore to thread
             usleep(250000);
             //sleep(1);
@@ -149,9 +149,8 @@ public:
                 // if (isMounted() and not in hash)
                 // if so, then send change signal for gfile path. 
                 // This should set the greenball.
-                DBG("thread itemshash=%p\n", itemsH);
+                //DBG("thread itemshash=%p\n", itemsH);
                 gtk_tree_model_foreach(baseMonitor->treeModel(), checkIfMounted, (void *)hash);
-                //g_hash_table_foreach(itemsH, checkIfMounted_f, (void *)hash);
                 //
                 // Any new umounts?
                 // Foreach item in hash, check if 
@@ -159,7 +158,6 @@ public:
                 // then
                 //     sendSignal change for gfile(item)
                 gtk_tree_model_foreach(baseMonitor->treeModel(), checkIfNotMounted, (void *)hash);
-                //g_hash_table_foreach(hash, checkIfNotMounted_f, (void *)itemsH);
                 //
                 // Update hash.
                 hash = getMountHash(hash);
@@ -168,100 +166,14 @@ public:
         g_free(sum);
         DBG("***now exiting mountThreadF()\n");
         g_hash_table_destroy(hash);
-        // g_free(data);
-        arg[3] = NULL; // arg[3] is semaphore to calling thread.
+        arg[2] = NULL; // arg[2] is semaphore to calling thread.
         return NULL;
     }
-/*
-    static void *
-    deviceThreadF(void *data){
-        void **arg = (void **)data;
-        // get initial md5sum
-        gchar *sum = Util<Type>::md5sum("/proc/mounts");
-        if (!sum) {
-            DBG("Exiting deviceThreadF() on md5sum error (sum)\n");
-            g_free(data);
-            return NULL;
-        }
-        DBG("FstabMonitor::deviceThreadF(): initial md5sum=%s", sum);
-        
-	auto deviceList = getDeviceList();
-        while (arg[1]){// arg[1] is semaphore to thread
-            usleep(250000);
-            TRACE("deviceThreadF loop for arg=%p\n", data);
-            gchar *newSum = Util<Type>::md5sum("/proc/mounts");
-            if (!newSum){
-                DBG("deviceThreadF: Exiting mountThreadF() on md5sum error (newSum)\n");
-                g_hash_table_destroy(hash);
-                g_free(sum);
-                return NULL;
-            }
-            if (strcmp(newSum, sum)){
-                WARN("deviceThreadF: new md5sum /proc/mounts = %s (%s)\n", newSum, sum);
-                WARN("deviceThreadF: now we test whether icon update is necessary...\n");
-                g_free(sum);
-                sum = newSum;
-                // Change in devices?
-                GList *devices = getDeviceList();
-                for (auto l = devices; l && l->data; l=l->next){
-                    if (!g_list_find_custom (deviceList, l->data, strcmp)){
-                        // device has been added
-                    }
-                }
-                for (auto l=deviceList, l && l->data; l= l->next)
-                    if (!g_list_find_custom (deviceList, l->data, strcmp)){
-                        // device has been removed
-                    }
-                 }
-                for (auto l=deviceList, l && l->data; l= l->next) g_free(l->data);
-                g_list_free(deviceList);
-                deviceList = devices;
-            }
-        }
-        g_free(sum);
-        DBG("***now exiting deviceThreadF()\n");
-        g_hash_table_destroy(hash);
-        // g_free(data);
-        arg[3] = NULL; // arg[3] is semaphore to calling thread.
-        return NULL;
-    }
-    */
+
 private:
     
     
-/*
-    static gchar *
-    getDeviceList(void){
-        GList *list = NULL;
-        const gchar *command = "ls -l /dev/disk/by-path";
-	FILE *pipe = popen (command, "r");
-	if(pipe == NULL) {
-	    ERROR("Cannot pipe from %s\n", command);
-	    return NULL;
-	}
-        gchar line[256];
-        memset(line, 0, 256);
-        gchar *label = NULL;
-	while (fgets (line, 255, pipe) && !feof(pipe)) {
-            if (strstr(line, "->")) {
-                const gchar *d = strstr(line, "->") + 1;
-                if (strchr(d, '\n')) *strchr(d, '\n') = 0;
-                g_strstrip(d);
-                device = g_path_get_basename(d);
-                if (strlen(device) < 3) {g_free(device) ; continue;}
-                if (!strncmp(d,"sd", strlen("sd")) && !strncmp(d,"hd", strlen("hd"))){
-                    g_free(device) ; continue;
-                }
-                if (d[3] > 0) {g_free(device) ; continue;}; 
-                list = g_list_prepend(list, g_strdup_printf("/dev/%s", device));
-                g_free(device);
-            }
-	}
-        pclose (pipe);
-	return list;
 
-    }
-*/
      static GHashTable *getMountHash(GHashTable *oldHash){
          if (oldHash) g_hash_table_destroy(oldHash);
 	// Get first two items per line of /proc/mounts
@@ -289,30 +201,7 @@ private:
         fclose(mounts);
 	return hash;
      }
-/*
-     static GList *getMountPaths(void){
-	// Get first two items per line of /proc/mounts
-	// and add both to list.
-        GList *list = NULL;
-        FILE *mounts = fopen("/proc/mounts", "r");
-        if (!mounts) return NULL;
-        gchar buffer[2048];
-        memset(buffer, 0, 2048);
-        while (fgets(buffer, 2047, mounts) && !feof(mounts)){
-            gchar **items = g_strsplit(buffer, " ", 3);
-            if (!items) continue;
-            if (!items[0] || !items[1]) {
-                g_strfreev(items);
-                continue;
-            }
-            if (g_path_is_absolute(items[0]) && g_path_is_absolute(items[1])){
-                for (gint i=0; i<2; i++) list = g_list_prepend(list, items[i]);
-            }
-        }
-        fclose(mounts);
-	return list;
-    }
- */   
+   
     static gchar *
     uuid2Partition(const gchar *partuuidPath){
         const gchar *command = "ls -l /dev/disk/by-partuuid";

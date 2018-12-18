@@ -211,7 +211,6 @@ public:
 	    gtk_widget_set_sensitive(w, g_list_length(baseView->selectionList()) > 0);
 	} else ERROR(" no widget for Delete\n");
 
-        gboolean isTreeView = (Settings<Type>::getSettingInteger("window", "TreeView") > 0);
         w = GTK_WIDGET(g_object_get_data(G_OBJECT(localPopUp), "View as list"));
         gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(w), isTreeView);
 
@@ -636,12 +635,20 @@ public:
 
     }
 
-   static void
+    static void
     toggleView(GtkCheckMenuItem *menuItem, gpointer data)
     {
-
         auto item = (const gchar *)data;
-	toggleGroupItem(menuItem, "window", item);
+        isTreeView = !isTreeView;
+        gtk_check_menu_item_set_active(menuItem, isTreeView);
+        Settings<Type>::setSettingInteger("window", "TreeView", isTreeView);
+        auto notebook_p = (Notebook<Type> *)g_object_get_data(G_OBJECT(mainWindow), "xffm");
+	gint pages = gtk_notebook_get_n_pages (notebook_p->notebook());
+	for (int i=0; i<pages; i++){
+            auto page = notebook_p->currentPageObject(i);
+            auto baseView = page->baseView();
+            baseView->reloadModel();
+	}
     }
 
     static void

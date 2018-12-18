@@ -39,7 +39,6 @@ class RootView  :
 
     static void
     resetPopup(void) {
-        gboolean isTreeView = (Settings<Type>::getSettingInteger("window", "TreeView") > 0);
         DBG("reset root popup, is TreeView=%d\n", isTreeView);
         auto w = GTK_WIDGET(g_object_get_data(G_OBJECT(rootPopUp), "View as list"));
         gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(w), isTreeView);

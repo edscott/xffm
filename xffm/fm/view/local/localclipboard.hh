@@ -76,7 +76,6 @@ public:
             exit(1);
         }
         DBG("%s\n", instruction); 
-        gboolean isTreeView = (Settings<Type>::getSettingInteger("window", "TreeView") > 0);
         //  single or multiple item selected?
         GList *selectionList;
         if (isTreeView){

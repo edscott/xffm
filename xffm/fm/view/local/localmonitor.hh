@@ -7,7 +7,7 @@ namespace xf
 template <class Type>
 class LocalMonitor: public BaseMonitor<Type>
 {
-    void **mountArg_; // Needs to exist until destructor is called.
+    void *mountArg_[5]; // Needs to exist until destructor is called.
     static gboolean findInModel (GtkTreeModel *treeModel,
                             GtkTreePath *tpath,
                             GtkTreeIter *iter,
@@ -42,11 +42,10 @@ public:
         TRACE("***Destructor:~local_monitor_c()\n");
         // stop mountThread
         mountArg_[1] = NULL;
-        while (mountArg_[3]){
+        while (mountArg_[2]){
             TRACE("***Waiting for mountThread to exit\n");
         }
         g_hash_table_destroy(this->itemsHash());
-        g_free(mountArg_);
         TRACE("***Destructor:~local_monitor_c() complete\n");
     }
     void
@@ -55,12 +54,10 @@ public:
         // start mountThread
         pthread_t mountThread;
         TRACE("LocalMonitor thread itemshash=%p\n", this->itemsHash());
-        mountArg_ = (void **)calloc(4, sizeof(void *));
         mountArg_[0] = (void *)this;
         mountArg_[1] = GINT_TO_POINTER(TRUE);
-        mountArg_[2] = (void *)this->itemsHash();
-        mountArg_[3] = GINT_TO_POINTER(TRUE);
-	gint retval = pthread_create(&mountThread, NULL, FstabMonitor<Type>::mountThreadF, (void *)this->mountArg_);
+        mountArg_[2] = GINT_TO_POINTER(TRUE);
+	gint retval = pthread_create(&mountThread, NULL, FstabMonitor<Type>::mountThreadF, (void *)mountArg_);
 	if (retval){
 	    ERROR("thread_create(): %s\n", strerror(retval));
 	    //return retval;

@@ -18,7 +18,8 @@
 
 static const gchar *xffmProgram;
 static const gchar *xffindProgram;
-static GtkWidget *mainWindow = NULL;
+static GtkWindow *mainWindow = NULL;
+static gboolean isTreeView;
 
 #include "common/tubo.hh"
 #include "common/print.hh"

@@ -95,7 +95,7 @@ public:
         // add all initial items to hash
         if (itemsHash_) gtk_tree_model_foreach (treeModel, add2hash, (void *)itemsHash_);
         store_ = GTK_LIST_STORE(treeModel);
-        TRACE( "*** start_monitor: %s\n", path);
+        WARN( "*** start_monitor: %s\n", path);
         if (gfile_) g_object_unref(gfile_);
         gfile_ = g_file_new_for_path (path);
         GError *error=NULL;
@@ -120,7 +120,7 @@ public:
         }
         if (gfile_) {
 	    gchar *p = g_file_get_path(gfile_);
-	    TRACE("*** stop_monitor at: %s\n", p);
+	    WARN("*** stop_monitor at: %s\n", p);
 	    g_free(p);
         }
 	g_file_monitor_cancel(monitor_);

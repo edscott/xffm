@@ -187,7 +187,7 @@ private:
 	GList *children_list = 
 	    gtk_container_get_children(GTK_CONTAINER(pathbar_));
 
-        if (gtk_widget_is_visible(mainWindow)) showWhatFits(pathbar_, path, children_list);
+        if (gtk_widget_is_visible(GTK_WIDGET(mainWindow))) showWhatFits(pathbar_, path, children_list);
         else gtk_widget_show_all(GTK_WIDGET(pathbar_));
 
 

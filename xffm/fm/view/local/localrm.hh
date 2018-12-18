@@ -47,7 +47,6 @@ public:
         
 	DBG("LocalRm:: rm\n");
 	auto baseView =  (BaseView<Type> *)g_object_get_data(G_OBJECT(data), "baseView");
-        gboolean isTreeView = (Settings<Type>::getSettingInteger("window", "TreeView") > 0);
         //  single or multiple item selected?
         GList *selectionList;
         if (isTreeView){
