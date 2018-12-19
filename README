@@ -1,7 +1,6 @@
 
-Important: must reload all windows when settings.ini window:TreeView changes 
-           because menu callbacks depend on correct value. Otherwise
-           hack menu items to ensure correct value (not working right...)
+Important: Save and restore size of find dialog if user resizes it, but
+           also set a minimum size the user may resize to.
 
 
 TODO

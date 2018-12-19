@@ -44,6 +44,10 @@ static gboolean isTreeView;
 
 int
 main (int argc, char *argv[]) {
+    if (chdir(g_get_home_dir()) < 0){
+        ERROR("Cannot chdir to %s (%s)\n", g_get_home_dir(), strerror(errno));
+        exit(1);
+    }
     xffindProgram = argv[0];
     xffmProgram = argv[0];
     // common stuff
