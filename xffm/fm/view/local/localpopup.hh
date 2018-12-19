@@ -804,6 +804,8 @@ public:
         g_free(markup);
 
         entryResponse->setCheckButton(_("Directory"));
+        entryResponse->setCheckButton(TRUE);
+        
         entryResponse->setEntryLabel(_("New Name:"));
         // get last used arguments...
         entryResponse->setEntryDefault("");
