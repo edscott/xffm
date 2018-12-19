@@ -91,7 +91,26 @@ private:
 
 public:
     static pid_t 
+    thread_runReap(gpointer data, const gchar **arguments, 
+            void (*stdout_f)(void *, void *, int),
+            void (*stderr_f)(void *, void *, int),
+            void (*finish_f)(void *)){
+        return thread_run(TUBO_EXIT_TEXT|TUBO_VALID_ANSI|TUBO_CONTROLLER_PID|TUBO_REAP_CHILD,
+                data, arguments,stdout_f, stderr_f, finish_f);
+    }
+    
+    static pid_t 
     thread_run(gpointer data, const gchar **arguments, 
+            void (*stdout_f)(void *, void *, int),
+            void (*stderr_f)(void *, void *, int),
+            void (*finish_f)(void *)){
+        return thread_run(TUBO_EXIT_TEXT|TUBO_VALID_ANSI|TUBO_CONTROLLER_PID,
+                data, arguments,stdout_f, stderr_f, finish_f);
+    }
+
+private:
+    static pid_t 
+    thread_run(gint flags, gpointer data, const gchar **arguments, 
             void (*stdout_f)(void *, void *, int),
             void (*stderr_f)(void *, void *, int),
             void (*finish_f)(void *)){
@@ -103,7 +122,6 @@ public:
             command = g;
         }
         TRACE("thread_run command = %s\n", command);
-        int flags = TUBO_EXIT_TEXT|TUBO_VALID_ANSI|TUBO_CONTROLLER_PID;
         /* FIXME: workdir must be set in constructor
         if (chdir(get_workdir())<0){
             printc::print_error(textview, g_strdup_printf("chdir(%s): %s\n", get_workdir(), strerror(errno)));
@@ -127,7 +145,7 @@ public:
         push_hash(grandchild, command);
         return pid;
     }
-
+public:
     static pid_t 
     thread_run(GtkTextView *textview, const gchar **arguments, gboolean scrollUp){
         auto command = g_strdup("");

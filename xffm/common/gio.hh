@@ -1,7 +1,7 @@
 #ifndef XF_GIO_HH
 #define XF_GIO_HH
 
-# define MODE_RM                1 // If directories not empty, does a thread_run to rm.
+# define MODE_RM                1 // If directories not empty, does a thread_runReap to rm.
 # define MODE_SHRED             2
 # define MODE_TRASH             3
 // These are not good for directories...
@@ -32,7 +32,7 @@ class Gio {
             target,
             NULL
         };
-        Run<Type>::thread_run(NULL, arg, 
+        Run<Type>::thread_runReap(NULL, arg, 
                 Run<Type>::run_operate_stdout, 
                 Run<Type>::run_operate_stderr, 
                 NULL);
@@ -49,7 +49,7 @@ class Gio {
             target,
             NULL
         };
-        Run<Type>::thread_run(NULL, arg, 
+        Run<Type>::thread_runReap(NULL, arg, 
                 Run<Type>::run_operate_stdout, 
                 Run<Type>::run_operate_stderr, 
                 NULL);
@@ -67,7 +67,7 @@ class Gio {
             target,
             NULL
         };
-        Run<Type>::thread_run(NULL, arg, 
+        Run<Type>::thread_runReap(NULL, arg, 
                 Run<Type>::run_operate_stdout, 
                 Run<Type>::run_operate_stderr, 
                 NULL);
@@ -85,7 +85,7 @@ class Gio {
             (const gchar *)path,
             NULL
         };
-        Run<Type>::thread_run(NULL, arg, 
+        Run<Type>::thread_runReap(NULL, arg, 
                 Run<Type>::run_operate_stdout, 
                 Run<Type>::run_operate_stderr, 
                 NULL);
@@ -104,7 +104,7 @@ class Gio {
             (const gchar *)path,
             NULL
         };
-        Run<Type>::thread_run(NULL, arg, 
+        Run<Type>::thread_runReap(NULL, arg, 
                 Run<Type>::run_operate_stdout, 
                 Run<Type>::run_operate_stderr, 
                                 NULL);
