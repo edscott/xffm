@@ -98,7 +98,7 @@ class Gio {
         const gchar *arg[] = {
             "shred",
             "-f",
-    //	"-u",
+            "-u",
             "-v",
             "-z",
             (const gchar *)path,
@@ -266,6 +266,7 @@ public:
                break;
             case MODE_SHRED:
 	       GNUshred (path);
+	       retval = TRUE;
                break;
         }
         if (error){

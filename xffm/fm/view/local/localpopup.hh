@@ -5,6 +5,7 @@
 #include "response/commandresponse.hh"
 #include "fm/view/fstab/fstab.hh"
 #include "localclipboard.hh"
+#include "localproperties.hh"
 
 static const gchar *directoryItems[] ={
     "Open in New Tab",
@@ -111,7 +112,7 @@ public:
 	    {N_("Rename"), (void *)rename, NULL, NULL},
 	    {N_("Duplicate"), (void *)duplicate, NULL, NULL}, 
 	    {N_("Link"), (void *)symlink, NULL, NULL},
-	    {N_("Properties"), NULL, NULL, NULL},
+	    {N_("Properties"), (void *)properties, NULL, NULL},
 	     {NULL,NULL,NULL,NULL}
         };
 	localItemPopUp = BasePopUp<Type>::createPopup(item); 
@@ -904,6 +905,30 @@ public:
         return NULL;
    }
 
+
+    static void 
+    properties(GtkMenuItem *menuItem, gpointer data)
+    {	
+	auto baseView =  (BaseView<Type> *)g_object_get_data(G_OBJECT(localItemPopUp), "baseView");
+        auto treeModel = baseView->treeModel();
+	GList *selectionList;
+	// get selection list
+        if (isTreeView){
+            auto selection = gtk_tree_view_get_selection (baseView->treeView());
+            selectionList = gtk_tree_selection_get_selected_rows (selection, &treeModel);
+        } else {
+            selectionList = gtk_icon_view_get_selected_items (baseView->iconView());
+        }
+	if (!selectionList) return;
+
+	//
+	//
+	// fire up a properties dialog
+	//
+	new(Properties<Type>)(treeModel, selectionList);
+
+	g_list_free_full (selectionList, (GDestroyNotify) gtk_tree_path_free);
+    }
 
     static void
     symlink(GtkMenuItem *menuItem, gpointer data)

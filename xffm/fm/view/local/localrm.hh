@@ -15,31 +15,6 @@ namespace xf
 template <class Type>
 class LocalRm {
 
-/*static void * 
-create_remove_f(gpointer data){
-    void **arg = data;
-    widgets_t *widgets_p = arg[0];
-    gchar *text  = arg[1];
-    gchar *message  = arg[2];
-    GSList *list = arg[3];
-    gboolean always = GPOINTER_TO_INT(arg[4]);
-    g_free(arg);
-    
-    GtkWidget *dialog = create_remove (widgets_p, text, message, always);
-    
-    g_object_set_data(G_OBJECT(dialog), "widgets_p", widgets_p);
-    g_object_set_data(G_OBJECT(dialog), "list", list);
-    g_free(message);
-    g_free(text);
-    // dialog specifics 
-    GtkWidget *togglebutton=g_object_get_data(G_OBJECT(dialog), "togglebutton");
-
-    if(g_slist_length (list) < 2) {
-	gtk_widget_hide(togglebutton);
-    }
-    gtk_main();
-    return FALSE;
-}*/
 
 public:
     static void
@@ -83,9 +58,9 @@ private:
         }
         auto text = g_strdup_printf(_("Delete %s"), (gchar *)list->data);
         auto message = g_list_length(list) > 1 ? 
-        g_strdup_printf("<span color=\"red\">%s (%d)</span>", _("Multiple selections"), g_list_length(list)):
+        g_strdup_printf("<span color=\"red\" size=\"larger\">%s\n%s (%d)</span>",_("Warning: "), _("Multiple selections"), g_list_length(list)):
         "";
-        auto rmDialog = createRemove(baseView, text, message, TRUE);
+        auto rmDialog = createRemove(baseView, text, message, FALSE, g_list_length(list)>1);
         g_object_set_data(G_OBJECT(rmDialog), "list", list);
         /* dialog specifics */
         auto togglebutton=GTK_WIDGET(g_object_get_data(G_OBJECT(rmDialog), "togglebutton"));
@@ -94,10 +69,8 @@ private:
         }
 	gtk_widget_show (GTK_WIDGET(rmDialog));
 	gint response = gtk_dialog_run(GTK_DIALOG(rmDialog));
-        //list = (GList *)g_object_get_data(G_OBJECT(rmDialog), "list");
 
-	apply_action(rmDialog, response);
-        list = (GList *)g_object_get_data(G_OBJECT(rmDialog), "list");
+	list = apply_action(rmDialog, response, list);
 	
         gtk_widget_hide(GTK_WIDGET(rmDialog));
         gtk_widget_destroy(GTK_WIDGET(rmDialog));
@@ -107,7 +80,7 @@ private:
 
     static
     GtkDialog *
-    createRemove (BaseView<Type> *baseView, const gchar *text, const gchar *message, gboolean always) {
+    createRemove (BaseView<Type> *baseView, const gchar *text, const gchar *message, gboolean always, gboolean multiple) {
 	DBG("createRemove: rm\n");
 	//auto rmDialog = GTK_DIALOG(gtk_window_new (GTK_WINDOW_TOPLEVEL));
 	auto rmDialog = GTK_DIALOG(gtk_dialog_new ());
@@ -126,10 +99,17 @@ private:
 	gtk_widget_show (GTK_WIDGET(vbox2));
 	gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area(rmDialog)), GTK_WIDGET(vbox2));
 
-	pb = Pixbuf<Type>::get_pixbuf ("edit-delete", -96);
-	auto q = gtk_image_new_from_pixbuf (pb);
-	gtk_widget_show (GTK_WIDGET(q));
-	gtk_box_pack_start (vbox2, GTK_WIDGET(q), TRUE, TRUE, 5);
+	if (multiple){
+	    pb = Pixbuf<Type>::get_pixbuf ("dialog-warning", -96);
+	    auto q = gtk_image_new_from_pixbuf (pb);
+	    gtk_widget_show (GTK_WIDGET(q));
+	    gtk_box_pack_start (vbox2, GTK_WIDGET(q), TRUE, TRUE, 5);
+        } else {
+	    pb = Pixbuf<Type>::get_pixbuf ("edit-delete", -48);
+	    auto q = gtk_image_new_from_pixbuf (pb);
+	    gtk_widget_show (GTK_WIDGET(q));
+	    gtk_box_pack_start (vbox2, GTK_WIDGET(q), TRUE, TRUE, 5);
+	}
 
 	auto hbox26 = Gtk<Type>::hboxNew (FALSE, 0);
 	gtk_widget_show (GTK_WIDGET(hbox26));
@@ -185,6 +165,9 @@ private:
 	g_signal_connect (G_OBJECT (button), "clicked", 
 		G_CALLBACK (responseAction), GINT_TO_POINTER(SHRED_YES));
 	g_object_set_data(G_OBJECT(button), "rmDialog", rmDialog);
+	gchar *shred = g_find_program_in_path("shred");
+	gtk_widget_set_sensitive(GTK_WIDGET(button), shred != NULL);
+	g_free(shred);
 
     /****************/
 
@@ -227,36 +210,30 @@ private:
 	return TRUE;
     }
 
-    static void
-    removeAllFromList(GtkDialog *dialog){
-        auto list = (GList *)g_object_get_data(G_OBJECT(dialog), "list");
+    static GList *
+    removeAllFromList(GList *list){
         if (!list){
             DBG("removeAllFromList(): list is NULL\n");
-            return;
+            return NULL;
         }
         for (auto tmp = list; tmp && tmp->data; tmp=tmp->next){
             g_free(tmp->data);
         }
         g_list_free(list);
-        g_object_set_data(G_OBJECT(dialog), "list", NULL);
+	return NULL;
     }
         
-    static void
-    removeItemFromList(GtkDialog *dialog, void *path){
-        auto list = (GList *)g_object_get_data(G_OBJECT(dialog), "list");
+    static GList *
+    removeItemFromList(GList *list){
         if (!list){
             DBG("removeItemFromList(): list is NULL\n");
-            return;
+            return NULL;
         }
+	void *path = list->data;
+	DBG("*** removing %s from list\n", (gchar *)path);
         list = g_list_remove (list, path);
         g_free(path);
-        g_object_set_data(G_OBJECT(dialog), "list", list);
-       /* if (g_list_length(list)==0) {
-            g_list_free(list);
-            g_object_set_data(G_OBJECT(dialog), "list", NULL);
-        } else {
-            g_object_set_data(G_OBJECT(dialog), "list", NULL);
-        }*/
+	return list;
     }
 
 
@@ -277,10 +254,8 @@ private:
 
     }
 
-    static void
-    //apply_action(GtkWidget * button, gpointer data){
-    apply_action(GtkDialog *rmDialog, gint result){
-        auto list = (GList *)g_object_get_data(G_OBJECT(rmDialog), "list");
+    static GList *
+    apply_action(GtkDialog *rmDialog, gint result, GList *list){
        
         DBG( "**apply_action: 0x%x\n", result);
 
@@ -292,7 +267,7 @@ private:
                     DBG("Cannot trash %s\n", (gchar *)list->data);
                    break;
                 }
-                removeItemFromList(rmDialog, list->data);
+                list = removeItemFromList(list);
 
                 break;
             case TRASH_YES_ALL:
@@ -303,7 +278,7 @@ private:
                     break;
                 }
 
-                removeAllFromList(rmDialog);
+                list = removeAllFromList(list);
                 break;
             case RM_YES:
             {
@@ -313,7 +288,8 @@ private:
                     DBG("Cannot delete %s\n", (gchar *)list->data);
                    break;
                 }
-                removeItemFromList(rmDialog, list->data);
+                list = removeItemFromList(list);
+
                 break;
             }
             case RM_YES_ALL:
@@ -322,7 +298,7 @@ private:
                     DBG("Cannot multiDelete %s\n", (gchar *)list->data);
                     break;
                 }
-                removeAllFromList(rmDialog);
+                list = removeAllFromList(list);
                 break;
             }
 
@@ -334,7 +310,8 @@ private:
                     DBG("Cannot shred %s\n", (gchar *)list->data);
                    break;
                 }
-                removeItemFromList(rmDialog, list->data);
+                list = removeItemFromList(list);
+
                break;
             case SHRED_YES_ALL:
                 DBG( "shred all\n");
@@ -342,34 +319,29 @@ private:
                     DBG("Cannot multishred %s\n", (gchar *)list->data);
                     break;
                 }
-                removeAllFromList(rmDialog);
+                list = removeAllFromList(list);
                 break;
             case RM_NO:
             {
                 DBG( "remove cancelled: %s\n", (gchar *)list->data);
-                removeItemFromList(rmDialog, list->data);
+                list = removeItemFromList(list);
+
                 break;
             }
             ////////////////////////////////
             case RM_CANCEL:
                 DBG( "**cancel remove\n");
-                removeAllFromList(rmDialog);
+                list = removeAllFromList(list);
                 break;
             default:
             {
                 DBG( "**default : cancel remove all\n");
-                removeAllFromList(rmDialog);
+               list = removeAllFromList(list);
                break;
             }
         }
         gtk_widget_hide(GTK_WIDGET(rmDialog));
-        //gtk_main_quit();
-
-        // We are already in a thread environment here, so there is no need to
-        // spawn another thread.
-    /*
-        if (list) rm(widgets_p, list);
-        */
+	return list;
     }
 
 #if 0
