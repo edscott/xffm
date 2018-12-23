@@ -82,6 +82,86 @@ public:
 	GdkPixbuf *pixels = get_pixel_size(size);
 	return pixbuf_hash_c::find_in_pixbuf_hash(icon_name, pixels);
     }
+
+
+    static
+    GdkPixbuf *
+    fix_pixbuf_scale(GdkPixbuf *in_pixbuf, gint size){
+	if (!in_pixbuf || !GDK_IS_PIXBUF(in_pixbuf)) return NULL;
+	GdkPixbuf *out_pixbuf=NULL;
+	gint height = gdk_pixbuf_get_height (in_pixbuf);
+	gint width = gdk_pixbuf_get_width (in_pixbuf);
+
+	// this is to fix paper size previews for text files and pdfs
+	if((width < height && height != size) || 
+	    (width >= height && width != size)) 
+	{
+	    out_pixbuf = gdk_pixbuf_scale_simple (in_pixbuf, 5*size/7,size,
+		     GDK_INTERP_HYPER);
+	    g_object_ref(out_pixbuf);
+	    g_object_unref(in_pixbuf);
+	    return out_pixbuf;
+	} 
+	return in_pixbuf;
+    }
+
+
+    static GdkPixbuf *
+    pixbuf_from_file(const gchar *path, gint width, gint height){
+	GError *error = NULL;
+	GdkPixbuf *pixbuf = NULL;
+	if (width < 0) {
+	    pixbuf = gdk_pixbuf_new_from_file (path, &error);
+	} else {
+	    pixbuf = gdk_pixbuf_new_from_file_at_size (path, width, height, &error);
+	}
+	// hmmm... from the scale_simple line below, it seems that the above two
+	//         functions will do a g_object_ref on the returned pixbuf...
+
+
+	// Gdkpixbuf Bug workaround 
+	// (necessary for GTK-2, still necessary in GTK-3.8)
+	// xpm icons not resized. Need the extra scale_simple. 
+
+
+	//if (pixbuf && width > 0 && gdk_pixbuf_get_width(pixbuf) != width){
+	//if (pixbuf && strstr(path, ".xpm")){
+	if (pixbuf && width > 0 && strstr(path, ".xpm")) {
+	    TRACE(stderr, "** resizing %s\n", path);
+	    GdkPixbuf *pix = gdk_pixbuf_scale_simple (pixbuf, width, height, GDK_INTERP_HYPER);
+	    g_object_unref(pixbuf);
+	    pixbuf = pix;
+
+	}  
+	
+	if(error && !strstr(path, ".cache/rfm/thumbnails")) {
+		DBG ("pixbuf_from_file() %s:%s\n", error->message, path);
+		g_error_free (error);
+	}
+	return pixbuf;
+    }
+
+
+    static void 
+    pixbuf_save(GdkPixbuf *tgt, const gchar *path){
+	if (!tgt || !path || !GDK_IS_PIXBUF(tgt)) {
+	    DBG("pixbuf_save_f(%s): !tgt || !path || !GDK_IS_PIXBUF(tgt)\n", 
+		    path);
+	    return ;
+	}
+
+	if (tgt && GDK_IS_PIXBUF(tgt)) {
+	    GError *error = NULL;
+	    gdk_pixbuf_save (tgt, path, "png", &error,
+			     "tEXt::Software", "Rodent", NULL);
+	    if (error){
+		DBG("pixbuf_save_f(%s): %s\n", path, error->message);
+		g_error_free(error);
+	    }
+	}
+	return ;
+    }
+
 };
 }
 ///////////////////////////////////////////////////////////////////////

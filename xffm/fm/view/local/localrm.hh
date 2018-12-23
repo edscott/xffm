@@ -265,19 +265,15 @@ private:
                 // Trash operation
                 if (!Gio<Type>::doIt(rmDialog, (gchar *)list->data, MODE_TRASH)){
                     DBG("Cannot trash %s\n", (gchar *)list->data);
-                   break;
                 }
                 list = removeItemFromList(list);
-
                 break;
             case TRASH_YES_ALL:
                 DBG( "trash all\n");
                 if (!Gio<Type>::multiDoIt(rmDialog, list, MODE_TRASH)){
                 //if (!Gio<Type>::multiDoIt(rmDialog, _("Trash"), "user-trash", list, MODE_TRASH)){
                     DBG("Cannot multiTrash %s\n", (gchar *)list->data);
-                    break;
                 }
-
                 list = removeAllFromList(list);
                 break;
             case RM_YES:
@@ -286,17 +282,14 @@ private:
                  // rm operation
                 if (!Gio<Type>::doIt(rmDialog, (gchar *)list->data, MODE_RM)){
                     DBG("Cannot delete %s\n", (gchar *)list->data);
-                   break;
                 }
                 list = removeItemFromList(list);
-
                 break;
             }
             case RM_YES_ALL:
             {
                 if (!Gio<Type>::multiDoIt(rmDialog, list, MODE_RM)){
                     DBG("Cannot multiDelete %s\n", (gchar *)list->data);
-                    break;
                 }
                 list = removeAllFromList(list);
                 break;
@@ -308,16 +301,13 @@ private:
                 if (!Gio<Type>::doIt(rmDialog, (gchar *)list->data, MODE_SHRED)){
 
                     DBG("Cannot shred %s\n", (gchar *)list->data);
-                   break;
                 }
                 list = removeItemFromList(list);
-
                break;
             case SHRED_YES_ALL:
                 DBG( "shred all\n");
                 if (!Gio<Type>::multiDoIt(rmDialog, list, MODE_SHRED)){
                     DBG("Cannot multishred %s\n", (gchar *)list->data);
-                    break;
                 }
                 list = removeAllFromList(list);
                 break;
@@ -325,7 +315,6 @@ private:
             {
                 DBG( "remove cancelled: %s\n", (gchar *)list->data);
                 list = removeItemFromList(list);
-
                 break;
             }
             ////////////////////////////////

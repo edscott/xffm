@@ -146,15 +146,15 @@ else()
 endif()
 
 # mimeinfo is now replaced by dev-perl/File-MimeInfo
-#message(STATUS "Checking for libmagic...")
-#find_library(LIBMAGIC NAMES libmagic.so)
-#if(NOT LIBMAGIC)
-#    set(LIBMAGIC ${LIBMAGIC})
-#    message( WARNING "*** libmagic is not found: Look for it in \"file\" package." )
-#else()
-#    set(LIBMAGIC "HAVE_LIBMAGIC 1")
-#    message(STATUS "libmagic was found." )
-#endif()
+message(STATUS "Checking for libmagic...")
+find_library(LIBMAGIC NAMES libmagic.so)
+if(NOT LIBMAGIC)
+    set(LIBMAGIC ${LIBMAGIC})
+    message( WARNING "*** libmagic is not found: Look for it in \"file\" package." )
+else()
+    set(LIBMAGIC "HAVE_LIBMAGIC 1")
+    message(STATUS "libmagic was found." )
+endif()
 
 # configure header file
 configure_file(
