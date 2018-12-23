@@ -79,11 +79,15 @@ public:
 	}
 
 	auto pixbuf = loadFromHash(filePath);
-	if (pixbuf) return pixbuf;
-
-	pixbuf = loadFromThumbnails(filePath, st_p);
 	if (pixbuf) {
-	    TRACE("%s loaded from thumbnails...\n", filePath);
+	    DBG("*** %s loaded from hash...\n", filePath);
+	    return pixbuf;
+	}
+
+	//FIXME: tempoary disabled
+	//pixbuf = loadFromThumbnails(filePath, st_p);
+	if (pixbuf) {
+	    DBG("*** %s loaded from thumbnails...\n", filePath);
 	    return pixbuf;
 	}
 
@@ -109,16 +113,164 @@ public:
 		return pixbuf;
 	    }
 	    ERROR("previewAtSize: text preview of some sort should be available here\n");
-	    return Pixbuf<Type>::get_pixbuf("image-missing", PREVIEW_IMAGE_SIZE);
+	    return Pixbuf<Type>::get_pixbuf("text-x-generic", -96);
 	}
 	    
 	// pdf previews...
+	gboolean useGhostScript = (strstr (mimetype, "pdf")
+		    || strstr (mimetype, "postscript") 
+		    || strstr (mimetype, "eps")
+		    );
+        if(useGhostScript) {  
+	    // decode delegate is ghostscript
+	    pixbuf = gsPreview (filePath);// refs
+	    if (pixbuf) return pixbuf;
+	    else Pixbuf<Type>::get_pixbuf("image-x-generic-template", -96);
+	}
 	// image previews...
-	return Pixbuf<Type>::get_pixbuf("image-missing", PREVIEW_IMAGE_SIZE);
+	if (strstr (mimetype, "image")) {   
+	    pixbuf = Icons<Type>::pixbuf_new_from_file(filePath, 3*PREVIEW_IMAGE_SIZE/4, -1);
+	    if (pixbuf) return pixbuf; else 
+		return Pixbuf<Type>::get_pixbuf("image-x-generic", -96);
+
+	}
+	if (strstr (mimetype, "video")) 
+		return Pixbuf<Type>::get_pixbuf("video-x-generic", -96);
+	if (strstr (mimetype, "audio")) 
+		return Pixbuf<Type>::get_pixbuf("audio-x-generic", -96);
+
+	return Pixbuf<Type>::get_pixbuf("preferences-system", -96);
+	//return Pixbuf<Type>::get_pixbuf("image-missing", PREVIEW_IMAGE_SIZE);
     }
 
 
 private:
+static GdkPixbuf *
+gsPreview (const gchar *path) {
+    gchar *ghostscript = g_find_program_in_path ("gs");
+    static gboolean warned = FALSE;
+    if(!ghostscript) {
+	if(!warned) {
+	    g_warning
+		("\n*** Please install ghostscript for ps and pdf previews\n*** Make sure ghostscript fonts are installed too!\n*** You have been warned.\n");
+	    fflush (NULL);
+	    warned = TRUE;
+	}
+	return NULL;
+    }
+
+    gint fd = open (path, O_RDONLY);
+    if(fd < 0) {
+        return NULL;
+    }
+    close (fd);
+
+// options for pdf/ps previews:
+// 
+// plain ghostscript is muuch faster than imagemagick: (for ps/pdf)
+// gs -dSAFER -dBATCH -dNOPAUSE -sDEVICE=png256 -dFirstPage=1 -dLastPage=1 -dPDFFitPage -r100 -sOutputFile=out.png input.pdf
+//
+//
+
+    gchar *src, *tgt;
+    gchar *arg[13];
+    gint i = 0;
+    auto thumbnail = Hash<Type>::get_thumbnail_path (path, PREVIEW_IMAGE_SIZE);
+
+    //pdf and ps ghostscript conversion
+    src = g_strdup (path);
+    tgt = g_strdup_printf ("-sOutputFile=%s", thumbnail);
+    arg[i++] = ghostscript;
+    arg[i++] = (gchar *)"-dSAFER";
+    arg[i++] = (gchar *)"-dBATCH";
+    arg[i++] = (gchar *)"-dNOPAUSE";
+    arg[i++] = (gchar *)"-sPAPERSIZE=letter";    // or a4...
+    arg[i++] = (gchar *)"-sDEVICE=png256";
+    arg[i++] = (gchar *)"-dFirstPage=1";
+    arg[i++] = (gchar *)"-dLastPage=1";
+    arg[i++] = (gchar *)"-dPDFFitPage";
+    arg[i++] = (gchar *)"-r100";
+    arg[i++] = tgt;
+    arg[i++] = src;
+    arg[i++] = NULL;
+
+    TRACE ("SHOW_TIPx: %s(%s)\n", arg[0], arg[3]);
+    GdkPixbuf * retval=NULL;
+    // this fork is ok from thread, I guess.
+    TRACE( "--> creating thumbnail %s\n", thumbnail);
+    pid_t pid = fork ();
+    if(!pid) {
+	DBG( "***--> child is creating thumbnail %s\n", thumbnail);
+        execv (arg[0], arg);
+        _exit (123);
+    } else {
+	// Create wait thread.
+	void **arg = (void **)calloc(3, sizeof(void *));
+	if (!arg) g_error("gsPreview(): malloc: %s\n", strerror(errno));
+	pthread_mutex_t waitMutex = PTHREAD_MUTEX_INITIALIZER;
+	//GMutex *wait_mutex;
+
+	//GCond *wait_signal;
+	pthread_cond_t waitSignal = PTHREAD_COND_INITIALIZER;
+
+
+	//rfm_mutex_init(wait_mutex);
+	//rfm_cond_init(wait_signal);
+	
+	arg[0] = &waitMutex;
+	arg[1] = &waitSignal;
+	arg[2] = GINT_TO_POINTER(pid);
+
+	pthread_mutex_lock(&waitMutex);
+	//g_mutex_lock(wait_mutex);
+	pthread_t thread;
+	pthread_create(&thread, NULL, gs_wait_f, arg);
+	const struct timespec abstime={
+	    time(NULL) + 4, 0
+	};
+	//if (!pthread_cond_timedwait(&waitSignal, &waitMutex, &abstime)){
+	if (pthread_cond_wait(&waitSignal, &waitMutex) != 0){
+	//if (!rfm_cond_timed_wait(wait_signal, wait_mutex, 4)){
+	    DBG("Aborting runaway ghostscript preview for %s (pid %d)\n",
+		    src, (int)pid);
+	    kill(pid, SIGKILL);
+	} else {
+	    DBG("condition wait complete for file %s\n", thumbnail);
+	    // this function refs retval
+	    retval = loadFromThumbnails(path, NULL);
+	    //retval = Pixbuf<Type>::pixbuf_from_file (thumbnail, 3*PREVIEW_IMAGE_SIZE/4, PREVIEW_IMAGE_SIZE);
+	    //retval = load_preview_pixbuf_from_disk (thumbnail); // refs
+	}
+	pthread_mutex_unlock(&waitMutex);
+	//g_mutex_unlock(wait_mutex);
+	pthread_mutex_destroy(&waitMutex);
+	//rfm_mutex_free(wait_mutex);
+        TRACE ("SHOW_TIPx: preview created by convert\n");
+    }
+    g_free (ghostscript);       //arg[0]
+    g_free (src);
+    g_free (tgt);
+    return retval; 
+}
+
+
+static void *
+gs_wait_f(void *data){
+    auto arg = (void **)data;
+    auto waitMutex = (pthread_mutex_t *)arg[0];
+    auto waitSignal = (pthread_cond_t *)arg[1];
+    pid_t pid = GPOINTER_TO_INT(arg[2]);
+    g_free(arg);
+    gint status;
+    DBG("*** waiting for %d\n", pid);
+    waitpid (pid, &status, WUNTRACED);
+    DBG("*** wait for %d complete\n", pid);
+    //pthread_mutex_unlock(waitMutex); 
+    pthread_cond_signal(waitSignal); 
+    return NULL;
+}
+
+
    
     static gint
     x_strcmp(gconstpointer a, gconstpointer b){
@@ -414,20 +566,32 @@ private:
 	auto thumbnailPath = Hash<Type>::get_thumbnail_path (filePath, PREVIEW_IMAGE_SIZE);
 	if (g_file_test(thumbnailPath,G_FILE_TEST_EXISTS)){
 	    struct stat st;
-	    if (stat(thumbnailPath, &st)<0 || st.st_mtime < st_p->st_mtime){
+	    if (st_p && (stat(thumbnailPath, &st)<0 || st.st_mtime < st_p->st_mtime)){
 		unlink(thumbnailPath);
 	    } else {
 		GError *error=NULL;
+		DBG("Now loading pixbuf from %s\n",  thumbnailPath);
 		auto pixbuf = gdk_pixbuf_new_from_file (thumbnailPath, &error);
 		if (error){
 		    DBG("previewAtSize: %s (%s)\n", thumbnailPath, error->message);
 		    g_error_free(error);
 		} else {
 		    g_free(thumbnailPath);
+		    //resize
+		    gint h = gdk_pixbuf_get_height(pixbuf);
+		    if (h != PREVIEW_IMAGE_SIZE){
+			auto newPixbuf = 
+			    gdk_pixbuf_scale_simple (pixbuf, 
+				3*PREVIEW_IMAGE_SIZE/4,
+				PREVIEW_IMAGE_SIZE, GDK_INTERP_HYPER);
+			g_object_unref(pixbuf);
+			pixbuf = newPixbuf; 
+		    }
 		    return pixbuf;
 		}
 	    }
 	}
+	else DBG("%s does not exist\n", thumbnailPath);
 	g_free(thumbnailPath);
 	return NULL;
     }

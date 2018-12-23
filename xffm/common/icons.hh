@@ -135,8 +135,6 @@ public:
 	return pixbuf;
     }
 
-
-
     static void *
     pixbuf_new_from_file_f(void *data){
 	if (!icon_theme) init();

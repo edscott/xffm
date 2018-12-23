@@ -30,6 +30,15 @@ public:
     }
 
     static gchar *
+    get_iconname(const gchar *path, const gchar *mimetype){
+	if (!mimetype) return get_iconname(path);
+	if (strstr(mimetype, "image")){
+	    if (isTreeView) return g_strdup("image-x-generic");
+	    return path;
+	}
+    }
+
+    static gchar *
     get_iconname(xd_t *xd_p){
         gchar *name;
         if (xd_p->icon) name = g_strdup(xd_p->icon);
