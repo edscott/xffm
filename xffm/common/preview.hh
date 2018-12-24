@@ -100,6 +100,7 @@ public:
 	}
 	gboolean textType =(
 		strstr(mimetype, "text")
+		|| strstr(mimetype, "shellscript")
 		|| strcmp(filePath, "empty-file")==0
 		|| g_file_test(filePath, G_FILE_TEST_IS_DIR)
 		);
