@@ -66,9 +66,12 @@ class Properties {
 
 public:
     GtkBox *imageBox;
+    GtkBox *modeBox;
+    GtkButton *apply;
+    GHashTable *hash;
 
     Properties(GtkTreeModel *treeModel, GList *selectionList) {
-	
+	hash = g_hash_table_new(g_direct_hash, g_direct_equal);
 	// copy selection list to private thread safe selection_list... 
 	if (!selectionList || g_list_length(selectionList) < 0) {
 	    DBG("propertiesDialog: nothing in selectionList\n");
@@ -107,6 +110,7 @@ public:
 
     ~Properties(void){
 	removePathList(entryList);
+	g_hash_table_destroy(hash);
     }
     
 private:
@@ -209,50 +213,6 @@ private:
 	str[10] = 0;
 	return (str);
     }
-
-    static void
-    setUpMode(GtkBox *box, entry_t *entry, mode_t newMode){
-	GList *list = gtk_container_get_children (GTK_CONTAINER(box));
-	if (!list || !list->next) return;
-	auto modeLabel = GTK_LABEL(list->data); 
-	auto modeEntry = GTK_ENTRY(list->next->data); 
-	// changed in red, unchanged in blue...
-	auto mode = entry->st.st_mode;
-	auto modeOctal = g_strdup_printf("%0o", mode);
-	auto modeText = modeString(newMode);
-//	auto modeText = modeString(entry->st.st_mode);
-	const gchar *color = (newMode == entry->st.st_mode)?"blue":"red";
-	auto modeMarkup = g_strdup_printf("<span size=\"xx-large\" color=\"%s\">%s</span>", color, modeText);
-	gtk_label_set_markup(modeLabel, modeMarkup);
-	gtk_entry_set_text(modeEntry, modeOctal+3);
-
-	g_free(modeMarkup);
-	g_free(modeOctal);
-    }
-
-    static void
-    setUpMode(GtkBox *box, entry_t *entry){
-	setUpMode(box, entry, entry->st.st_mode);
-    }
-
-    static void
-    setUpImage(GtkBox *box, entry_t *entry){
-	auto pixbuf = 
-	    Preview<Type>::previewDefault(entry->path, entry->mimetype, &(entry->st));
-	auto image = gtk_image_new_from_pixbuf(pixbuf);
-	GList *list = gtk_container_get_children (GTK_CONTAINER(box));
-	if (list && list->data){
-	    gtk_container_remove(GTK_CONTAINER(box), GTK_WIDGET(list->data));
-	    g_list_free(list);
-	}
-	gtk_container_add(GTK_CONTAINER(box), image);
-	gtk_widget_show(GTK_WIDGET(image));
-	auto modeBox = GTK_BOX(g_object_get_data(G_OBJECT(box), "modeBox"));
-	setUpMode(modeBox, entry);
-
-
-    }
-
     static void
     removePathList(GList *list){
 	for (auto l = list; l && l->data; l = l->next){
@@ -284,6 +244,8 @@ private:
 	auto contentBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 1));
 	gtk_box_pack_start(mainBox, GTK_WIDGET(contentBox), TRUE, FALSE, 0);
 	properties_p->imageBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_VERTICAL, 2));
+	gtk_widget_set_size_request (GTK_WIDGET(properties_p->imageBox),
+		PREVIEW_IMAGE_SIZE, PREVIEW_IMAGE_SIZE);
 	auto infoBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_VERTICAL, 2));
 	gtk_box_pack_start(contentBox, GTK_WIDGET(properties_p->imageBox), TRUE, FALSE, 0);
 	gtk_box_pack_start(contentBox, GTK_WIDGET(infoBox), TRUE, FALSE, 0);
@@ -305,18 +267,19 @@ private:
 		_("File Mode:"));
 	gtk_label_set_markup(label, markup);
 	g_free(markup);
-	gtk_box_pack_start(infoBox, GTK_WIDGET(label), TRUE, FALSE, 0);
+	gtk_box_pack_start(infoBox, GTK_WIDGET(label), FALSE, FALSE, 0);
 
 
-	auto modeBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_VERTICAL, 1));
-	g_object_set_data(G_OBJECT(modeBox), "modeList", NULL);
+	properties_p->modeBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_VERTICAL, 1));
+	g_object_set_data(G_OBJECT(properties_p->modeBox), "properties_p", properties_p);
+	g_object_set_data(G_OBJECT(properties_p->modeBox), "modeList", NULL);
 	auto modeLabel = GTK_LABEL(gtk_label_new(""));
 	auto modeEntry = GTK_ENTRY(gtk_entry_new());
-	gtk_box_pack_start(modeBox, GTK_WIDGET(modeLabel), TRUE, FALSE, 0);
-	gtk_box_pack_start(modeBox, GTK_WIDGET(modeEntry), TRUE, FALSE, 0);
-	gtk_box_pack_start(infoBox, GTK_WIDGET(modeBox), TRUE, FALSE, 0);
-	g_object_set_data(G_OBJECT(properties_p->imageBox), "modeBox", modeBox);
-	g_object_set_data(G_OBJECT(modeEntry), "modeBox", modeBox);
+	gtk_box_pack_start(properties_p->modeBox, GTK_WIDGET(modeLabel), FALSE, FALSE, 0);
+	gtk_box_pack_start(properties_p->modeBox, GTK_WIDGET(modeEntry), FALSE, FALSE, 0);
+	gtk_box_pack_start(infoBox, GTK_WIDGET(properties_p->modeBox), FALSE, FALSE, 0);
+	g_object_set_data(G_OBJECT(properties_p->imageBox), "modeBox", properties_p->modeBox);
+	g_object_set_data(G_OBJECT(modeEntry), "modeBox", properties_p->modeBox);
 	g_object_set_data(G_OBJECT(modeEntry), "modeLabel", modeLabel);
 	g_object_set_data(G_OBJECT(modeEntry), "combo", combo);
 	g_signal_connect (G_OBJECT (modeEntry), "key-release-event", G_CALLBACK (changeMode), properties_p);
@@ -326,8 +289,8 @@ private:
 		_("Source File:"));
 	gtk_label_set_markup(label, markup);
 	g_free(markup);
-	gtk_box_pack_start(infoBox, GTK_WIDGET(label), TRUE, FALSE, 0);
-	gtk_box_pack_start(infoBox, GTK_WIDGET(combo), TRUE, FALSE, 0);
+	gtk_box_pack_start(infoBox, GTK_WIDGET(label), FALSE, FALSE, 0);
+	gtk_box_pack_start(infoBox, GTK_WIDGET(combo), FALSE, FALSE, 0);
 	
 	// Add file info stuff
 	// set info stuff data according to combo box
@@ -335,22 +298,24 @@ private:
 
 	// Add process buttons
 	//
-	auto apply = Gtk<Type>::dialog_button(NULL, _("Apply changes"));
+	properties_p->apply = Gtk<Type>::dialog_button(NULL, _("Apply changes"));
+	gtk_widget_set_sensitive(GTK_WIDGET(properties_p->apply), FALSE);
 	auto cancel = Gtk<Type>::dialog_button(NULL, _("Cancel"));
-	gtk_box_pack_end(buttonBox, GTK_WIDGET(apply), FALSE, FALSE, 0);
+	gtk_box_pack_end(buttonBox, GTK_WIDGET(properties_p->apply), FALSE, FALSE, 0);
 	gtk_box_pack_end(buttonBox, GTK_WIDGET(cancel), FALSE, FALSE, 0);
 	
 	//
 	// Add handlers for buttons and destroy/delete
 	g_signal_connect (G_OBJECT (properties_p->dialog), "delete-event", G_CALLBACK (deleteEvent), properties_p);
 	g_signal_connect (G_OBJECT (cancel), "clicked", G_CALLBACK (cancelAction), properties_p);
-	g_signal_connect (G_OBJECT (apply), "clicked", G_CALLBACK (applyAction), properties_p);
+	g_signal_connect (G_OBJECT (properties_p->apply), "clicked", G_CALLBACK (applyAction), properties_p);
 	//
 	// Create and add image for initial selected file in dialog
 	//
 	//auto pixbuf = Pixbuf<Type>::get_pixbuf("accessories-calculator", -256);
 	entry = (entry_t *)properties_p->entryList->data;
 	setUpImage(properties_p->imageBox, entry);
+	setUpMode(properties_p->modeBox, entry);
 
 	g_signal_connect (G_OBJECT (combo), "changed", G_CALLBACK (changeCombo), properties_p);
 	
@@ -368,21 +333,99 @@ private:
 	// get entry mode
 	const gchar *text = gtk_entry_get_text(modeEntry);
 	// switch to octal
-	
+	auto entry = (entry_t *)list->data;
+	mode_t oldMode =  entry->st.st_mode & 0777;
 	mode_t mode;
 	sscanf(text, "%o", &mode);
 	mode &= 0777;
+	DBG("changeMode event old = %o new = %o\n", oldMode, mode);
 
 	// update label
 	auto label = GTK_LABEL(g_object_get_data(G_OBJECT(modeEntry), "modeLabel"));
 	auto box = GTK_BOX(g_object_get_data(G_OBJECT(modeEntry), "modeBox"));
-	setUpMode(box, (entry_t *)list->data, mode);
-    
+
 	// compare with entry_t mode for color
 	// if equal, remove from list/hash
 	// if different replace in list/hash
-	setUpImage(properties_p->imageBox, (entry_t *)list->data);
+	if (mode == oldMode){
+	    g_hash_table_remove(properties_p->hash, entry->path);
+	} else {
+	    g_hash_table_replace(properties_p->hash, entry->path, GINT_TO_POINTER(mode));
+	}
+	
+	setUpModeLabel(box, entry, mode);
+
+    
 	return FALSE;
+    }
+
+    static void
+    setUpModeEntry(GtkBox *box, entry_t *entry){
+	auto properties_p = 
+	    (Properties<Type> *)g_object_get_data(G_OBJECT(box), 
+		    "properties_p");
+	GList *list = gtk_container_get_children (GTK_CONTAINER(box));
+	if (!list || !list->next) return;
+	auto modeEntry = GTK_ENTRY(list->next->data); 
+	auto mode = entry->st.st_mode & 0777;
+	void *setMode = 
+	    g_hash_table_lookup(properties_p->hash, entry->path);
+	if (setMode) mode = GPOINTER_TO_INT(setMode);
+
+	auto modeOctal = g_strdup_printf("%0o", mode);
+	gtk_entry_set_text(modeEntry, modeOctal);
+	g_free(modeOctal);
+    }
+
+    static void
+    setUpModeLabel(GtkBox *box, entry_t *entry, mode_t newMode){
+	auto properties_p = 
+	    (Properties<Type> *)g_object_get_data(G_OBJECT(box), 
+		    "properties_p");
+	GList *list = gtk_container_get_children (GTK_CONTAINER(box));
+	if (!list || !list->next) return;
+	auto modeLabel = GTK_LABEL(list->data); 
+	// changed in red, unchanged in blue...
+	auto mode1 = entry->st.st_mode & 0777000;
+	auto mode2 = entry->st.st_mode & 0777;
+	auto modeText = modeString(newMode | mode1);
+	const gchar *color = (newMode == mode2)?"blue":"red";
+	auto modeMarkup = g_strdup_printf("<span size=\"xx-large\" color=\"%s\">%s</span> <span color=\"blue\" size=\"x-large\">(%0o)</span>", 
+		color, modeText, mode2);
+	gboolean apply = FALSE;
+	if (g_hash_table_size(properties_p->hash) > 0) apply = TRUE;
+	gtk_widget_set_sensitive(GTK_WIDGET(properties_p->apply),g_hash_table_size(properties_p->hash));
+
+	gtk_label_set_markup(modeLabel, modeMarkup);
+	g_free(modeMarkup);
+    }
+
+    static void
+    setUpMode(GtkBox *box, entry_t *entry){
+	auto properties_p = 
+	    (Properties<Type> *)g_object_get_data(G_OBJECT(box), 
+		    "properties_p");
+	mode_t mode = entry->st.st_mode & 0777;
+	void *setMode = 
+	    g_hash_table_lookup(properties_p->hash, entry->path);
+	if (setMode) mode = GPOINTER_TO_INT(setMode);
+	
+	setUpModeLabel(box, entry, mode);
+	setUpModeEntry(box, entry);
+    }
+
+    static void
+    setUpImage(GtkBox *box, entry_t *entry){
+	auto pixbuf = 
+	    Preview<Type>::previewDefault(entry->path, entry->mimetype, &(entry->st));
+	auto image = gtk_image_new_from_pixbuf(pixbuf);
+	GList *list = gtk_container_get_children (GTK_CONTAINER(box));
+	if (list && list->data){
+	    gtk_container_remove(GTK_CONTAINER(box), GTK_WIDGET(list->data));
+	    g_list_free(list);
+	}
+	gtk_container_add(GTK_CONTAINER(box), image);
+	gtk_widget_show(GTK_WIDGET(image));
     }
 
     static void
@@ -391,8 +434,10 @@ private:
 	gint index = gtk_combo_box_get_active(combo);
 	GList *list = g_list_nth (properties_p->entryList,index);
 	setUpImage(properties_p->imageBox, (entry_t *)list->data);
+	setUpMode(properties_p->modeBox, (entry_t *)list->data);
 
     }
+
 
     static gboolean 
     deleteEvent(GtkWidget *dialog, GdkEvent *event, gpointer data){
@@ -410,8 +455,21 @@ private:
     }
 
     static void
+    setFileMode (gpointer key,
+	       gpointer value,
+	       gpointer data){
+	auto path = (const gchar *)key;
+	auto mode = (mode_t)GPOINTER_TO_INT(value);
+	if (chmod(path, mode) < 0){
+	    ERROR("setFileMode(): chmod(%s) %s\n", path, strerror(errno));
+	}
+    }    
+    
+    static void
     applyAction(GtkButton *button, void *data){
 	DBG("applyAction\n");
+	auto properties_p = (Properties<Type> *)data;
+	g_hash_table_foreach(properties_p->hash, setFileMode, NULL);
 	// Apply changes to all changed items
 	deleteEvent(NULL, NULL, data);
     }
