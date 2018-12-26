@@ -1,6 +1,6 @@
 #ifndef XF_LOCALMONITOR__HH
 # define XF_LOCALMONITOR__HH
-#include "fm/model/base/basemonitor.hh"
+#include "fm/base/monitor.hh"
 namespace xf
 {
 

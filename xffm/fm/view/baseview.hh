@@ -1,8 +1,8 @@
 #ifndef XF_BASEVIEW__HH
 # define XF_BASEVIEW__HH
 
-#include "fm/model/base/basemodel.hh"
-#include "fm/model/base/basesignals.hh"
+#include "fm/base/model.hh"
+#include "fm/base/signals.hh"
 
 #include "fm/view/iconview.hh"
 #include "fm/view/treeview.hh"

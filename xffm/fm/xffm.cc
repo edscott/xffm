@@ -90,8 +90,8 @@ namespace xf {
 #include "response/comboresponse.hh"
 #include "response/commandresponse.hh"
 
-#include "fm/model/base/basesignals.hh"
-#include "fm/model/base/basemodel.hh"
+#include "fm/base/signals.hh"
+#include "fm/base/model.hh"
 
 #include "find/fgr.hh"
 #include "find/find.hh"

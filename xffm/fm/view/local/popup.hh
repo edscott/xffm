@@ -1,6 +1,6 @@
 #ifndef XF_LOCALITEMPOPUP__HH
 # define XF_LOCALITEMPOPUP__HH
-#include "fm/model/base/basepopup.hh"
+#include "fm/base/popup.hh"
 
 #include "fm/view/fstab/view.hh"
 #include "properties.hh"

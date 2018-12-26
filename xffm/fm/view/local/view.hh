@@ -1,7 +1,7 @@
 #ifndef XF_LOCALVIEW__HH
 # define XF_LOCALVIEW__HH
 
-#include "fm/model/localmodel.hh"
+#include "fm/view/local/model.hh"
 
 #include "rm.hh"
 #include "icons.hh"
