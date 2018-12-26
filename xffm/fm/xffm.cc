@@ -21,6 +21,28 @@ static const gchar *xffindProgram;
 static GtkWindow *mainWindow = NULL;
 static gboolean isTreeView;
 
+
+namespace xf
+{
+    template <class Type> class BaseModel;
+    template <class Type> class BaseView;
+    template <class Type> class Dialog;
+    template <class Type> class LocalRm;
+    template <class Type> class LocalRm;
+    template <class Type> class Page;
+    template <class Type> class LocalView;
+    template <class Type> class EntryResponse;
+    template <class Type> class EntryFolderResponse;
+    template <class Type> class ComboResponse;
+    template <class Type> class FstabMonitor;
+    template <class Type> class FindDialog;
+    template <class Type> class CommandResponse;
+    template <class Type> class Properties;
+    template <class Type> class BaseCompletion;
+}
+
+
+
 #include "common/tubo.hh"
 #include "common/print.hh"
 #include "common/run.hh"
@@ -32,16 +54,28 @@ static gboolean isTreeView;
 #include "common/settings.hh"
 #include "common/mime.hh"
 
+#include "model/base/basepopup.hh"
+
+#include "view/baseview.hh"
+#include "view/fstab/fstab.hh"
+#include "view/fstab/fstabpopup.hh"
+#include "view/fstab/fstabmonitor.hh"
+#include "view/local/localclipboard.hh"
+#include "view/local/localproperties.hh"
 
 #include "find/fgr.hh"
 #include "find/find.hh"
 #include "find/signals.hh"
 
 #include "response/passwdresponse.hh"
+#include "response/comboresponse.hh"
+#include "response/commandresponse.hh"
+
+
+
+#include "dialog/notebook.hh"
+#include "dialog/dialogsignals.hh"
 #include "dialog/dialog.hh"
-
-
-
 int
 main (int argc, char *argv[]) {
     if (chdir(g_get_home_dir()) < 0){
