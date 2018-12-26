@@ -7,7 +7,7 @@ template <class Type>
 class IconView {
 
 public: 
-    static GtkIconView *createIconview(BaseModel<Type> *baseView){
+    static GtkIconView *createIconview(BaseView<Type> *baseView){
         auto iconView = GTK_ICON_VIEW(gtk_icon_view_new());
         g_object_set(G_OBJECT(iconView), "has-tooltip", TRUE, NULL);
         gtk_icon_view_set_item_width (iconView, 60);
@@ -27,9 +27,9 @@ public:
 
 private:
     static void
-    setUpSignals(BaseModel<Type> *baseView, GObject * iconView){
+    setUpSignals(BaseView<Type> *baseView, GObject * iconView){
         g_signal_connect (iconView, "item-activated", 
-            ICONVIEW_CALLBACK (BaseModel<Type>::activate), 
+            ICONVIEW_CALLBACK (BaseViewSignals<Type>::activate), 
             (void *)baseView);
         g_signal_connect (iconView, "motion-notify-event", 
             ICONVIEW_CALLBACK (IconView<Type>::motionNotifyEvent), 
@@ -64,9 +64,9 @@ private:
     {
         auto e = (GdkEventMotion *)ev;
         auto event = (GdkEventButton  *)ev;
-	auto baseView = (BaseModel<Type> *)data;
+	auto baseView = (BaseView<Type> *)data;
         if (!data) {
-            DBG("BaseModel::motion_notify_event: data cannot be NULL\n");
+            DBG("BaseView::motion_notify_event: data cannot be NULL\n");
             return FALSE;
         }
 	TRACE("motion_notify_event, dragmode= %d\n", baseView->dragMode());
@@ -111,7 +111,12 @@ private:
                 //g_object_ref(G_OBJECT(context)); 
 	    }
         }
+
+	// XXX: Why this limitation?
+        // if (view_p->get_dir_count() > 500) return FALSE;
         baseView->highlight(e->x, e->y);
+
+    
         return FALSE;
     }
 
@@ -121,7 +126,7 @@ private:
                    gpointer   data)
     {
         //GdkEventButton *event_button = (GdkEventButton *)event;
-	auto baseView = (BaseModel<Type> *)data;
+	auto baseView = (BaseView<Type> *)data;
         if (!dragOn_){
 	    GtkTreePath *tpath;
 
@@ -149,7 +154,7 @@ private:
 	    // reselect item to activate
 	    gtk_icon_view_select_path (baseView->iconView(),tpath);
 	    WARN("Here we do a call to activate item.\n");
-	    BaseModel<Type>::activate(tpath, data);
+	    BaseViewSignals<Type>::activate(tpath, data);
 	    gtk_tree_path_free(tpath);
 	    return TRUE;
         }
@@ -166,7 +171,7 @@ private:
                    GdkEventButton  *event,
                    gpointer   data)
     {
-        auto baseView = (BaseModel<Type> *)data;
+        auto baseView = (BaseView<Type> *)data;
         buttonPressX = buttonPressY = -1;
         dragOn_ = FALSE;
 
@@ -229,7 +234,7 @@ private:
                    GdkEventButton  *event,
                    gpointer   data)
     {
-	//auto baseView = (BaseModel<Type> *)data;
+	//auto baseView = (BaseView<Type> *)data;
 	WARN("no action on button_click_f\n");
         return FALSE;
     }
@@ -241,7 +246,7 @@ private:
 
     
     static void
-    viewShiftSelect(BaseModel<Type> *baseView, GtkTreePath *tpath){
+    viewShiftSelect(BaseView<Type> *baseView, GtkTreePath *tpath){
         // select all items in interval
         gtk_icon_view_select_path (baseView->iconView(), tpath);
         auto items = gtk_icon_view_get_selected_items (baseView->iconView());
@@ -304,7 +309,7 @@ private:
     }
 
     static gboolean 
-    viewPopUp(BaseModel<Type> *baseView, GdkEventButton  *event){
+    viewPopUp(BaseView<Type> *baseView, GdkEventButton  *event){
         TRACE("button press event: button 3 should do popup, as well as longpress...\n");
         GtkTreePath *tpath;
         gboolean retval = FALSE;
@@ -344,7 +349,7 @@ private:
     }
 public:
     static void
-    setMenuData(BaseModel<Type> * baseView, gchar *path, gboolean  items){
+    setMenuData(BaseView<Type> * baseView, gchar *path, gboolean  items){
         GtkMenu *menu = NULL;
         switch (baseView->viewType()){
             case (ROOTVIEW_TYPE):
@@ -376,7 +381,7 @@ public:
     }
     
     static GtkMenu *
-    configureMenu(BaseModel<Type> * baseView, gboolean items){
+    configureMenu(BaseView<Type> * baseView, gboolean items){
         GtkMenu *menu = NULL;
         switch (baseView->viewType()){
             case (ROOTVIEW_TYPE):

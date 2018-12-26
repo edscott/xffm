@@ -40,7 +40,6 @@ public:
 	input_ = createStatus(); // Status textview
 	sizeScale_ = newSizeScale(_("Terminal font"));
 	statusLabel_ = GTK_LABEL(gtk_label_new (""));
-	g_object_ref(statusLabel_);
 	auto statusButton = createStatusButton(statusLabel_);
 
 
@@ -64,11 +63,6 @@ public:
         return;  
     }
 
-    ~HButtonBox(void){
-	statusLabel_ = NULL;
-	g_object_unref(statusLabel_);
-    }
-
     GtkBox *hButtonBox(void){return hButtonBox_;}
     
     void showFmBox(void){
@@ -82,13 +76,15 @@ public:
     }
 
     void setStatusLabel(const gchar *text){
-	if (!statusLabel_) return;
-        gchar *gg = g_strdup_printf("xffm+-%s", VERSION);
-        gchar *g = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", 
-		text?text:gg);
-        g_free(gg);
+        gchar *gg = NULL;
+        if (!text) {
+            gg = g_strdup_printf("xffm+-%s", VERSION);
+            text=gg;
+        }
+        gchar *g = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", text);
         gtk_label_set_markup(statusLabel_,g);
         g_free(g); 
+        g_free(gg);
     }
 
 

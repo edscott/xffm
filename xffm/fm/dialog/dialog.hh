@@ -1,6 +1,10 @@
 #ifndef XF_DIALOG
 #define XF_DIALOG
 
+#include "notebook.hh"
+#include "dialogsignals.hh"
+#include <memory>
+
 namespace xf {
 
 template <class Type>

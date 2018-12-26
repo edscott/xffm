@@ -1,5 +1,6 @@
 #ifndef XF_DIALOG_SIGNALS
 #define XF_DIALOG_SIGNALS
+#include "fm/dialog/notebook.hh"
 
 namespace xf {
 template <class Type> class Dialog;

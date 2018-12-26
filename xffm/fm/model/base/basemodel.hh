@@ -1,11 +1,6 @@
 #ifndef  XF_BASEMODEL__HH
 # define XF_BASEMODEL__HH
 
-#define SET_DIR(x) x|=0x01
-#define IS_DIR (x&0x01)
-#define CONTROL_MODE (event->state & GDK_CONTROL_MASK)
-#define SHIFT_MODE (event->state & GDK_SHIFT_MASK)
-
 // Flag bits:
 #define IS_NOTSELECTABLE(F) ((0x01<<1)&F)
 #define SET_NOTSELECTABLE(F) (F|=(0x01<<1))
@@ -79,34 +74,15 @@ static GHashTable *validBaseViewHash = NULL;
 static gint dragMode=0;
 static GList *localMonitorList = NULL;
 
-static gboolean dragOn_=FALSE;
-static gboolean rubberBand_=FALSE;
-static gint buttonPressX=-1;
-static gint buttonPressY=-1;
-
-static GtkTargetList *targets=NULL;
-static GdkDragContext *context=NULL;
-
-static gboolean controlMode = FALSE;
-
-#include "fm/view/root/rootview.hh"
-#include "fm/view/local/localview.hh"
-
-
-
 namespace xf
 {
-template <class Type> class IconView;
-template <class Type> class TreeView;
 template <class Type> class LocalMonitor;
 template <class Type> class LocalView;
 template <class Type> class LocalDnd;
 template <class Type> class FstabMonitor;
 template <class Type> class BaseViewSignals;
-template <class Type> class BaseView;
 template <class Type> class RootView;
 template <class Type> class Fstab;
-template <class Type> class LocalClipboard;
 
 template <class Type>
 class BaseModel
@@ -118,8 +94,6 @@ class BaseModel
     GtkWidget *source_;
     GtkWidget *destination_;
     gint viewType_;
-    GtkIconView *iconView_;
-    GtkTreeView *treeView_;
 
 protected:
     gchar *path_;
@@ -136,10 +110,6 @@ public:
         localMonitor_ = NULL;
         fstabMonitor_ = NULL;
 	treeModel_ = mkTreeModel();
-	
-        iconView_ = IconView<Type>::createIconview(this);
-        treeView_ = TreeView<Type>::createTreeview(this);
-	
         if (!highlight_hash) highlight_hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
         if (!validBaseViewHash) {
 	    validBaseViewHash = g_hash_table_new(g_direct_hash, g_direct_equal); 
@@ -204,85 +174,6 @@ public:
         g_object_unref(treeModel_);
     }
 
-    gboolean loadModel(const gchar *path){
-
-        if (isTreeView){
-	    // hide iconview, show treeview
-	    gtk_widget_hide(GTK_WIDGET(this->page()->topScrolledWindow()));
-	    gtk_widget_show(GTK_WIDGET(this->page()->treeScrolledWindow()));
-	} else {
-	    // hide treeview, show iconview
-	    gtk_widget_hide(GTK_WIDGET(this->page()->treeScrolledWindow()));
-	    gtk_widget_show(GTK_WIDGET(this->page()->topScrolledWindow()));
-	}
-
-        this->setViewType(this->getViewType(path));
-        this->setPath(path);
-        // stop current monitor
-        if (this->localMonitor_) {
-            localMonitorList = g_list_remove(localMonitorList, (void *)this->localMonitor_->monitor());
-            delete (this->localMonitor_);
-            this->localMonitor_ = NULL;
-        }
-        if (this->fstabMonitor_) {
-            delete (this->fstabMonitor_);
-            this->fstabMonitor_ = NULL;
-        }
-
-        switch (this->viewType()){
-            case (ROOTVIEW_TYPE):
-                RootView<Type>::loadModel(this);
-                this->page()->updateStatusLabel(NULL);
-                break;
-            case (LOCALVIEW_TYPE):
-		if (strcmp(path, "xffm:local")==0) {
-		    this->localMonitor_ = LocalView<Type>::loadModel(this, g_get_home_dir());
-		} else {
-		    this->localMonitor_ = LocalView<Type>::loadModel(this, path);
-		}
-                break;
-            case (FSTAB_TYPE):
-                this->fstabMonitor_ = Fstab<Type>::loadModel(this);
-	        this->page()->updateStatusLabel(NULL);
-                break;
-            default:
-                ERROR("ViewType %d not defined.\n", this->viewType());
-                break;
-        }
-    
-        return TRUE;
-    }
-
-    gboolean loadModel(GtkTreeModel *treeModel, const GtkTreePath *tpath, 
-	    const gchar *path){
-        if (g_file_test(path, G_FILE_TEST_EXISTS)){
-	    TRACE("%s is  valid path\n", path);
-	    if (!g_file_test(path, G_FILE_TEST_IS_DIR)){
-                // Not a directory, but valid path: activate item.
-		DBG("%s is not dir, will activate.\n", path);
-                if (Fstab<Type>::isMounted(path)){
-                    auto mntDir = Fstab<Type>::getMntDir(path);
-                    auto retval = this->loadModel(mntDir);
-                    g_free(mntDir);
-                    return retval;
-                }
-		return LocalView<Type>::item_activated(this, treeModel, tpath, path);
-	    }
-	} else {
-	    DBG("%s is not valid path\n", path);
-        }
-	return this->loadModel(path);
-    }
-
-    void reloadModel(void){
-        auto path = g_strdup(this->path_);
-        loadModel(path);
-    }
-
-
-
-    GtkTreeView *treeView(void){return treeView_;}
-    GtkIconView *iconView(void){return iconView_;}
     
 
     void setViewType(gint value){viewType_ = value;}
@@ -290,28 +181,6 @@ public:
     GtkWidget *source(){ return source_;}
     GtkWidget *destination(){ return destination_;}
 
-   
-    void 
-    highlight(gdouble X, gdouble Y){
-        if (isTreeView) return ;
-        GtkTreeIter iter;
-        GtkTreePath *tpath = 
-	    gtk_icon_view_get_path_at_pos (this->iconView(), X, Y); 
-        if (tpath) BaseModel<Type>::highlight(tpath, this);
-        else BaseModel<Type>::clear_highlights(this);
-    }
-    
-    void selectables(void){
-        switch (this->viewType()){
-            case (LOCALVIEW_TYPE):
-                LocalView<Type>::selectables(this->iconView());        
-                break;
-            default:
-                DBG("BaseView::selectables(): All icons are selectable for viewType: %d\n",
-                        this->viewType());
-        }
-        return;
-    }
 
     gint
     keyboardEvent( GdkEventKey * event) {
@@ -421,29 +290,6 @@ public:
     selectionList(void){return selectionList_;}
 
     //////////////////////   static   ////////////////////////////
-    static void
-    activate (GtkTreePath *tpath, gpointer data)
-    {
-        // Get activated path.
-        auto baseView = (BaseView<Type> *)data;
-
-	gchar *path;
-        GtkTreeIter iter;
-        auto treeModel = baseView->treeModel();
-        gtk_tree_model_get_iter (treeModel, &iter, (GtkTreePath *)tpath);
-        GdkPixbuf *normal_pixbuf;
-
-        gtk_tree_model_get (treeModel, &iter, PATH, &path, -1);
-	
-        DBG("BaseView::activate: %s\n", path);
-        auto lastPath = g_strdup(baseView->path());
-	if (!baseView->loadModel(treeModel, tpath, path)){
-            WARN("reloading %s\n", lastPath);
-            baseView->loadModel(lastPath);
-        }
-	g_free(path);
-	g_free(lastPath);
-    }
 
     static void
     highlight(GtkTreePath *tpath, gpointer data){
@@ -486,7 +332,7 @@ public:
     static void
     clear_highlights(gpointer data){
         if (!highlight_hash || g_hash_table_size(highlight_hash) == 0) return;
-        g_hash_table_foreach_remove (highlight_hash, unhighlight, data);
+        g_hash_table_foreach_remove (highlight_hash, BaseViewSignals<Type>::unhighlight, data);
     }
 
     static void
@@ -818,120 +664,6 @@ public:
     signal_drag_delete (GtkWidget * widget, GdkDragContext * context, gpointer data) {
         ERROR("signal_drag_delete\n");
     }
-
-    static gboolean
-    unhighlight (gpointer key, gpointer value, gpointer data){
-        auto baseView = (BaseView<Type> *)data;
-        if (!baseView)  return FALSE;
-        TRACE("unhighlight %s\n", (gchar *)key);
-        GtkTreeModel *model =baseView->treeModel();
-                
-        GtkTreePath *tpath = gtk_tree_path_new_from_string ((gchar *)key);
-        if (!tpath) return FALSE;
-
-        GtkTreeIter iter;
-        gboolean result = gtk_tree_model_get_iter (model, &iter, tpath);
-        gtk_tree_path_free (tpath);
-
-        if (!result) return TRUE;
-        GdkPixbuf *normal_pixbuf;
-
-        gtk_tree_model_get (model, &iter, 
-                NORMAL_PIXBUF, &normal_pixbuf, -1);
-        gtk_list_store_set (GTK_LIST_STORE(model), &iter,
-                DISPLAY_PIXBUF, normal_pixbuf, 
-            -1);
-       return TRUE;
-
-    }
-
-////////////////////////////////////////////////////////////
-    
-
-
-protected:
-    
-    static gchar *
-    make_tooltip_text (GtkTreePath *tpath ) {
-        return g_strdup("tooltip_text not defined in treeModel_!\n");
-    }
-
-    gchar *
-    get_verbatim_name (GtkTreePath *tpath ) {
-        GtkTreeIter iter;
-        gchar *verbatim_name=NULL;
-        gtk_tree_model_get_iter (this->treeModel(), &iter, tpath);
-        gtk_tree_model_get (this->treeModel(), &iter, 
-                ACTUAL_NAME, &verbatim_name, -1);
-        return verbatim_name;
-    }
-
-    GdkPixbuf *
-    get_normal_pixbuf (GtkTreePath *tpath ) {
-        GtkTreeIter iter;
-        GdkPixbuf *pixbuf=NULL;
-        gtk_tree_model_get_iter (this->treeModel(), &iter, tpath);
-        gtk_tree_model_get (this->treeModel(), &iter, 
-                NORMAL_PIXBUF , &pixbuf, -1);
-        return pixbuf;
-    }
-
-    GdkPixbuf *
-    get_tooltip_pixbuf (GtkTreePath *tpath ) {
-        GtkTreeIter iter;
-        GdkPixbuf *pixbuf=NULL;
-        gtk_tree_model_get_iter (this->treeModel(), &iter, tpath);
-        gtk_tree_model_get (this->treeModel(), &iter, 
-                TOOLTIP_PIXBUF, &pixbuf, -1);
-        return pixbuf;
-    }
-
-    gchar *
-    get_tooltip_text (GtkTreePath *tpath ) {
-        GtkTreeIter iter;
-        gchar *text=NULL;
-        gtk_tree_model_get_iter (this->treeModel(), &iter, tpath);
-        gtk_tree_model_get (this->treeModel(), &iter, 
-                TOOLTIP_TEXT, &text, -1);
-        return text;
-    }
-
-
-
-    void
-    set_tooltip_pixbuf (GtkTreePath *tpath, GdkPixbuf *pixbuf ) {
-        GtkTreeIter iter;
-        gtk_tree_model_get_iter (this->treeModel(), &iter, tpath);
-        gtk_list_store_set (GTK_LIST_STORE(this->treeModel()), &iter,
-                TOOLTIP_PIXBUF, pixbuf, 
-            -1);
-
-        return ;
-    }
-
-
-    void
-    set_tooltip_text (GtkTreePath *tpath, const gchar *text ) {
-        GtkTreeIter iter;
-        gtk_tree_model_get_iter (this->treeModel(), &iter, tpath);
-        gtk_list_store_set (GTK_LIST_STORE(this->treeModel()), &iter,
-                TOOLTIP_TEXT, text, 
-            -1);
-
-        return ;
-    }
-    const gchar *
-    get_label(void){
-        return this->path();
-    }
-
-    static gint 
-    get_icon_highlight_size(const gchar *name){
-        return GTK_ICON_SIZE_DIALOG;
-    }
-
-
-
     
 };
 }

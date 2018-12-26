@@ -1,12 +1,14 @@
 #ifndef XF_FSTABPOPUP__HH
 # define XF_FSTABPOPUP__HH
+#include "response/comboresponse.hh"
+#include "response/commandresponse.hh"
+#include "fm/view/fstab/fstab.hh"
 namespace xf
 {
 
 static GtkMenu *fstabPopUp=NULL;
 static GtkMenu *fstabItemPopUp=NULL;
 template <class Type> class BaseView;
-template <class Type> class BaseModel;
 template <class Type> class Fstab;
 template <class Type>
 class FstabPopUp {

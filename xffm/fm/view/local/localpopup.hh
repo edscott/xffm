@@ -1,5 +1,11 @@
 #ifndef XF_LOCALITEMPOPUP__HH
 # define XF_LOCALITEMPOPUP__HH
+#include "fm/model/base/basepopup.hh"
+#include "response/comboresponse.hh"
+#include "response/commandresponse.hh"
+#include "fm/view/fstab/fstab.hh"
+#include "localclipboard.hh"
+#include "localproperties.hh"
 
 static const gchar *directoryItems[] ={
     "Open in New Tab",
@@ -32,12 +38,16 @@ static const gchar *commonItems[]={
 static const gchar *generalItems[]={
     "title",
 };
-static GtkMenu *localPopUp=NULL;
-static GtkMenu *localItemPopUp=NULL;
 
 namespace xf
 {
 
+static GtkMenu *localPopUp=NULL;
+static GtkMenu *localItemPopUp=NULL;
+template <class Type> class BaseView;
+template <class Type> class BaseViewSignals;
+template <class Type> class Dialog;
+template <class Type> class LocalRm;
 template <class Type>
 class LocalPopUp {
     
