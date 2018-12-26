@@ -2,7 +2,6 @@
 # define XF_FSTABPOPUP__HH
 #include "response/comboresponse.hh"
 #include "response/commandresponse.hh"
-#include "fm/view/fstab/fstab.hh"
 namespace xf
 {
 

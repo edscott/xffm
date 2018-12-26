@@ -4,7 +4,7 @@
 namespace xf
 {
 template <class Type> class Fstab;
-template <class Type> class LocalClipBoard;
+template <class Type> class ClipBoard;
 template <class Type>
 class LocalIcons {
     using gtk_c = Gtk<Type>;
@@ -407,7 +407,7 @@ private:
             emblem = g_strdup("/SE/bookmark-new/2.0/220");
         }
 
-	gchar *clipEmblem = LocalClipBoard<Type>::clipBoardEmblem(xd_p->path);
+	gchar *clipEmblem = ClipBoard<Type>::clipBoardEmblem(xd_p->path);
         emblem = addEmblem(emblem, clipEmblem);
         g_free(clipEmblem);
 
@@ -456,7 +456,7 @@ private:
             emblem = g_strdup("/SE/bookmark-new/2.0/220");
         }
 
-	gchar *clipEmblem = LocalClipBoard<Type>::clipBoardEmblem(path);
+	gchar *clipEmblem = ClipBoard<Type>::clipBoardEmblem(path);
         emblem = addEmblem(emblem, clipEmblem);
         g_free(clipEmblem);
 

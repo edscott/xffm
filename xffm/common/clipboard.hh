@@ -1,17 +1,16 @@
 #ifndef XF_LOCALCLIPBOARD__HH
 # define XF_LOCALCLIPBOARD__HH
-#include "common/gio.hh"
 
+
+namespace xf
+{
 static GtkClipboard *clipBoard;
 gboolean validClipBoard = FALSE;
 gint clipBoardSemaphore = 1;
 gchar *clipBoardCache = NULL;
 
-namespace xf
-{
-template <class Type> class LocalDnd;
 template <class Type>
-class LocalClipBoard {
+class ClipBoard {
 
 public:
     static void
@@ -26,21 +25,15 @@ public:
             DBG("execute(%s, %s, files, %s)\n", message, command, target);
 
             Gio<Type>::execute(files, target, MODE_COPY);
-            /*if (!LocalDnd<Type>::execute(message, command, files, target)){
-		    DBG("pasteClip: failed \"%s\"\n", command);
-	    }*/
             clearClipBoard();
         } else if (strncmp(text, "move\n", strlen("move\n")) == 0){
             auto message = _("Moving files");
             auto command = "mv -b -f";
             DBG("execute(%s, %s, files, %s)\n", message, command, target);
             Gio<Type>::execute(files, target, MODE_MOVE);
-            /*if (!LocalDnd<Type>::execute(message, command, files, target)){
-		    DBG("pasteClip: failed \"%s\"\n", command);
-	    }*/
             clearClipBoard();
         } else {
-            DBG("LocalClipBoard::pasteClip: Invalid clipboard contents.\n");
+            DBG("ClipBoard::pasteClip: Invalid clipboard contents.\n");
         }
         if (files) g_strfreev(files);
     }
@@ -88,7 +81,7 @@ public:
         baseView->setSelectionList(selectionList);
         gchar *clipData = getSelectionData(baseView,instruction );
         if (!g_utf8_validate (clipData, -1, NULL)){
-            ERROR("LocalClipBoard::putInClipBoard(): Not a valid utf8 string: %s\n", clipData);
+            ERROR("ClipBoard::putInClipBoard(): Not a valid utf8 string: %s\n", clipData);
             gtk_clipboard_set_text (clipBoard, "", 1);
         } else gtk_clipboard_set_text (clipBoard, clipData, strlen(clipData)+1);
 	gtk_icon_view_unselect_all (baseView->iconView());
@@ -123,7 +116,7 @@ public:
                 g_free(data);
                 data = e;
             }
-            TRACE("BaseViewSignals::getSelectionData(): append: %s -> \"%s\"\n", path, data);
+            TRACE("getSelectionData(): append: %s -> \"%s\"\n", path, data);
             g_free(path);
         }
         return data;
@@ -264,7 +257,7 @@ public:
         clipBoard = gtk_clipboard_get_for_display (gdk_display_get_default(), GDK_SELECTION_CLIPBOARD);
         clipBoardSemaphore = TRUE;
         pthread_t clipBoardThread;
-        gint retval = pthread_create(&clipBoardThread, NULL, LocalClipBoard<Type>::clipboardThreadF, NULL);
+        gint retval = pthread_create(&clipBoardThread, NULL, ClipBoard<Type>::clipboardThreadF, NULL);
         if (retval){
             ERROR("thread_create(): clipBoardThread %s\n", strerror(retval));
             //return retval;

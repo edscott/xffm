@@ -130,7 +130,7 @@ private:
     {
         // XXX Do different things depending on which column has been clicked
         //     (allow rename on editable colums)
-        BaseViewSignals<Type>::activate(tpath, data);
+        BaseSignals<Type>::activate(tpath, data);
     }
      static gboolean
     buttonRelease (GtkWidget *widget,
@@ -173,7 +173,7 @@ private:
 		gtk_tree_selection_select_path (selection, tpath);
 
 		WARN("Here we do a call to activate item.\n");
-		BaseViewSignals<Type>::activate(tpath, data);
+		BaseSignals<Type>::activate(tpath, data);
 		gtk_tree_path_free(tpath);
 
 		// FIXME: maybe we have to do the same clear selectionlist for iconview

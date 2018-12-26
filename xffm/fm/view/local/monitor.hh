@@ -189,6 +189,8 @@ private:
 
         TRACE("*** monitor_f call...\n");
         auto p = (LocalMonitor<Type> *)data;
+        if (!BaseSignals<Type>::validBaseView(p->baseView())) 
+            return;
 
         switch (event){
             case G_FILE_MONITOR_EVENT_DELETED:

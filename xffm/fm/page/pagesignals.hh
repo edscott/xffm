@@ -105,7 +105,7 @@ public:
         auto dialog = page->parent();
 	auto baseModel = (BaseModel<Type> *)g_object_get_data(G_OBJECT(page->topScrolledWindow()),"baseModel");
 	if (baseModel) {
-	    baseModel->clear_highlights(baseModel);
+	    BaseSignals<Type>::clear_highlights(baseModel);
 	}
 	//FIXME:
         //if (!view_p->all_set_up) return FALSE;

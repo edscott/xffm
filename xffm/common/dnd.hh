@@ -2,13 +2,14 @@
 # define XF_LOCALDND__HH
 namespace xf
 {
+template <class Type> class ClipBoard;
 template <class Type>
-class LocalDnd {
+class Dnd {
 
 public:
     static gchar *
     sendDndData(BaseView<Type> *baseView){
-        return LocalClipBoard<Type>::getSelectionData(baseView, NULL);
+        return ClipBoard<Type>::getSelectionData(baseView, NULL);
     }
                 
     static gboolean

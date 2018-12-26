@@ -1,11 +1,9 @@
 #ifndef XF_LOCALITEMPOPUP__HH
 # define XF_LOCALITEMPOPUP__HH
 #include "fm/model/base/basepopup.hh"
-#include "response/comboresponse.hh"
-#include "response/commandresponse.hh"
-#include "fm/view/fstab/fstab.hh"
-#include "localclipboard.hh"
-#include "localproperties.hh"
+
+#include "fm/view/fstab/view.hh"
+#include "properties.hh"
 
 static const gchar *directoryItems[] ={
     "Open in New Tab",
@@ -65,9 +63,9 @@ public:
             // deprecated {N_("Open in New Tab"), NULL, NULL, NULL},
             // deprecated {N_("Open in New Window"), NULL, NULL, NULL},
             
-	    {N_("Copy"), (void *)LocalClipBoard<Type>::copy, NULL, NULL},
-	    {N_("Cut"), (void *)LocalClipBoard<Type>::cut, NULL, NULL},
-	    {N_("Paste"), (void *)LocalClipBoard<Type>::paste, NULL, NULL},
+	    {N_("Copy"), (void *)ClipBoard<Type>::copy, NULL, NULL},
+	    {N_("Cut"), (void *)ClipBoard<Type>::cut, NULL, NULL},
+	    {N_("Paste"), (void *)ClipBoard<Type>::paste, NULL, NULL},
 	    {N_("Delete"), (void *)LocalRm<Type>::rm, NULL, NULL},
             //{N_("About"), NULL, (void *) menu},
             //
@@ -105,9 +103,9 @@ public:
             {N_("Remove bookmark"), (void *)removeBookmark, NULL, NULL},
 	    
 	    //common buttons /(also an iconsize +/- button)
-	    {N_("Copy"), (void *)LocalClipBoard<Type>::copy, NULL, NULL},
-	    {N_("Cut"), (void *)LocalClipBoard<Type>::cut, NULL, NULL},
-	    {N_("Paste"), (void *)LocalClipBoard<Type>::paste, NULL, NULL},
+	    {N_("Copy"), (void *)ClipBoard<Type>::copy, NULL, NULL},
+	    {N_("Cut"), (void *)ClipBoard<Type>::cut, NULL, NULL},
+	    {N_("Paste"), (void *)ClipBoard<Type>::paste, NULL, NULL},
 	    {N_("Delete"), (void *)LocalRm<Type>::rm, NULL, NULL},
 	    {N_("Rename"), (void *)rename, NULL, NULL},
 	    {N_("Duplicate"), (void *)duplicate, NULL, NULL}, 
@@ -199,7 +197,7 @@ public:
 	}
         // unsensitivize "Paste" only if valid pasteboard...
         auto w = GTK_WIDGET(g_object_get_data(G_OBJECT(localPopUp), "Paste"));
-        if (w) gtk_widget_set_sensitive(w, LocalClipBoard<Type>::clipBoardIsValid());
+        if (w) gtk_widget_set_sensitive(w, ClipBoard<Type>::clipBoardIsValid());
         
         w = GTK_WIDGET(g_object_get_data(G_OBJECT(localPopUp), "Copy"));
         if (w) gtk_widget_set_sensitive(w, g_list_length(baseView->selectionList()) > 0);
@@ -358,7 +356,7 @@ private:
         // unsensitivize "Paste" only if valid pasteboard...
         {
             auto w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Paste"));
-            if (w) gtk_widget_set_sensitive(w, LocalClipBoard<Type>::clipBoardIsValid());
+            if (w) gtk_widget_set_sensitive(w, ClipBoard<Type>::clipBoardIsValid());
         }
 
         //////  Directory options
@@ -664,7 +662,7 @@ public:
 
     static void
     reloadIcons(BaseView<Type> *baseView){
-	if (!BaseView<Type>::validBaseView(baseView)) return;
+	if (!BaseSignals<Type>::validBaseView(baseView)) return;
         auto page = baseView->page();
         auto viewPath = page->workDir();            
         baseView->loadModel(viewPath);

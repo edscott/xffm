@@ -3,12 +3,10 @@
 
 #include "fm/model/localmodel.hh"
 
-#include "localrm.hh"
-#include "localicons.hh"
-#include "localpopup.hh"
-#include "localdnd.hh"
-#include "localclipboard.hh"
-#include "localmonitor.hh"
+#include "rm.hh"
+#include "icons.hh"
+#include "popup.hh"
+#include "monitor.hh"
 
 
 namespace xf

@@ -27,6 +27,7 @@ protected:
     GtkButton *scriptButton(void){return scriptButton_;}
     GtkScale *sizeScale(void){return sizeScale_;}
 public:
+
     HButtonBox(void){
 	// The box
 	hButtonBox_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));

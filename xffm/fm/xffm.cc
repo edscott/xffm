@@ -16,11 +16,65 @@
 #endif
 #include <memory>
 
-static const gchar *xffmProgram;
-static const gchar *xffindProgram;
-static GtkWindow *mainWindow = NULL;
-static gboolean isTreeView;
+#define URIFILE "file://"
+enum
+{
+    ROOTVIEW_TYPE,
+    LOCALVIEW_TYPE,
+    FSTAB_TYPE,
+    NFS_TYPE,
+    SSHFS_TYPE,
+    ECRYPTFS_TYPE,
+    CIFS_TYPE,
+    PKG_TYPE
+};
 
+enum
+{
+  FLAGS,
+  TREEVIEW_PIXBUF,
+  DISPLAY_PIXBUF,
+  NORMAL_PIXBUF,
+  HIGHLIGHT_PIXBUF,
+  TOOLTIP_PIXBUF,
+  DISPLAY_NAME,
+  ACTUAL_NAME,
+  PATH,
+  SIZE,
+  DATE,
+  TOOLTIP_TEXT,
+  ICON_NAME,
+  TYPE,
+  MIMETYPE, 
+  PREVIEW_PATH,
+  PREVIEW_TIME,
+  PREVIEW_PIXBUF,
+  NUM_COLS
+};
+    static const gchar *xffmProgram;
+    static const gchar *xffindProgram;
+    static GtkWindow *mainWindow = NULL;
+
+
+namespace xf {
+    static gboolean isTreeView;
+    static GList *localMonitorList = NULL;
+
+    template <class Type> class Page;
+    template <class Type> class Pixbuf;
+    template <class Type> class LocalClipboard;
+    template <class Type> class BaseModel;
+    template <class Type> class BaseView;
+    template <class Type> class LocalMonitor;
+    template <class Type> class FstabMonitor;
+}
+
+    
+#include "common/util.hh"
+#include "common/run.hh"
+#include "common/gio.hh"
+#include "common/dnd.hh"
+#include "common/clipboard.hh"
 #include "common/tubo.hh"
 #include "common/print.hh"
 #include "common/run.hh"
@@ -32,15 +86,23 @@ static gboolean isTreeView;
 #include "common/settings.hh"
 #include "common/mime.hh"
 
+#include "response/passwdresponse.hh"
+#include "response/comboresponse.hh"
+#include "response/commandresponse.hh"
+
+#include "fm/model/base/basesignals.hh"
+#include "fm/model/base/basemodel.hh"
 
 #include "find/fgr.hh"
 #include "find/find.hh"
 #include "find/signals.hh"
 
-#include "response/passwdresponse.hh"
+#include "fm/view/root/view.hh"
+#include "fm/view/local/view.hh"
+#include "fm/view/fstab/view.hh"
 #include "dialog/dialog.hh"
 
-
+#if 10
 
 int
 main (int argc, char *argv[]) {
@@ -59,8 +121,9 @@ main (int argc, char *argv[]) {
     //xffm->setDialogTitle("Fm");
     xffm->setDialogIcon("system-file-manager");
 
-    xf::LocalClipBoard<double>::startClipBoard();  
+    xf::ClipBoard<double>::startClipBoard();  
     gtk_main();
-    xf::LocalClipBoard<double>::stopClipBoard();  
+    xf::ClipBoard<double>::stopClipBoard();  
     return 0;
 }
+#endif

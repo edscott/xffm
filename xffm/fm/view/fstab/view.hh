@@ -51,8 +51,8 @@ msgid "NFS remote directory"
 #define DISK_LABEL      DISPLAY_NAME
 #define FSTYPE          MIMETYPE
 
-#include "fstabpopup.hh"
-#include "fstabmonitor.hh"
+#include "popup.hh"
+#include "monitor.hh"
 
 
     // XXX this is Linux Version. FreeBSD differs (see fstab module)

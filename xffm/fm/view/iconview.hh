@@ -29,7 +29,7 @@ private:
     static void
     setUpSignals(BaseView<Type> *baseView, GObject * iconView){
         g_signal_connect (iconView, "item-activated", 
-            ICONVIEW_CALLBACK (BaseViewSignals<Type>::activate), 
+            ICONVIEW_CALLBACK (BaseSignals<Type>::activate), 
             (void *)baseView);
         g_signal_connect (iconView, "motion-notify-event", 
             ICONVIEW_CALLBACK (IconView<Type>::motionNotifyEvent), 
@@ -154,7 +154,7 @@ private:
 	    // reselect item to activate
 	    gtk_icon_view_select_path (baseView->iconView(),tpath);
 	    WARN("Here we do a call to activate item.\n");
-	    BaseViewSignals<Type>::activate(tpath, data);
+	    BaseSignals<Type>::activate(tpath, data);
 	    gtk_tree_path_free(tpath);
 	    return TRUE;
         }

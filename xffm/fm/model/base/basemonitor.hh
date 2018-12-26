@@ -22,7 +22,7 @@ protected:
         return items;
     }
     void updateFileCountLabel(void){
-        if (!BaseView<Type>::validBaseView(baseView())) return;
+        if (!BaseSignals<Type>::validBaseView(baseView())) return;
         auto items = countItems();
         auto fileCount = g_strdup_printf("%0d", items);
         auto text = g_strdup_printf(_("Files: %s"), fileCount); 
