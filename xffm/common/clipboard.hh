@@ -49,9 +49,9 @@ public:
         // XXX: Probably should retrieve path the same way from
         //      menu item in both cases... But that would use
         //      more memory and CPU unnecessarily...
-	auto baseView = (BaseView<Type> *)g_object_get_data(G_OBJECT(data), "baseView");
+	auto view = (View<Type> *)g_object_get_data(G_OBJECT(data), "view");
         auto path = (const gchar *)g_object_get_data(G_OBJECT(menuItem), "path");
-        if (!path) path = baseView->path();
+        if (!path) path = view->path();
         gtk_clipboard_request_text (clipBoard, pasteClip, (void *)path);
     }
 
@@ -63,53 +63,53 @@ public:
     }
 
     static void 
-    putInClipBoard(BaseView<Type> *baseView, const gchar *instruction){
-         if (!baseView || ! instruction){
-            ERROR("baseView||instruction is null\n");
+    putInClipBoard(View<Type> *view, const gchar *instruction){
+         if (!view || ! instruction){
+            ERROR("view||instruction is null\n");
             exit(1);
         }
         DBG("%s\n", instruction); 
         //  single or multiple item selected?
         GList *selectionList;
         if (isTreeView){
-            auto treeModel = baseView->treeModel();
-            auto selection = gtk_tree_view_get_selection (baseView->treeView());
+            auto treeModel = view->treeModel();
+            auto selection = gtk_tree_view_get_selection (view->treeView());
             selectionList = gtk_tree_selection_get_selected_rows (selection, &treeModel);
         } else {
-            selectionList = gtk_icon_view_get_selected_items (baseView->iconView());
+            selectionList = gtk_icon_view_get_selected_items (view->iconView());
         }
-        baseView->setSelectionList(selectionList);
-        gchar *clipData = getSelectionData(baseView,instruction );
+        view->setSelectionList(selectionList);
+        gchar *clipData = getSelectionData(view,instruction );
         if (!g_utf8_validate (clipData, -1, NULL)){
             ERROR("ClipBoard::putInClipBoard(): Not a valid utf8 string: %s\n", clipData);
             gtk_clipboard_set_text (clipBoard, "", 1);
         } else gtk_clipboard_set_text (clipBoard, clipData, strlen(clipData)+1);
-	gtk_icon_view_unselect_all (baseView->iconView());
+	gtk_icon_view_unselect_all (view->iconView());
     }
 
     static void
     copy(GtkMenuItem *menuItem, gpointer data) { 
-	auto baseView = (BaseView<Type> *)g_object_get_data(G_OBJECT(data), "baseView");
-        putInClipBoard(baseView, "copy");
+	auto view = (View<Type> *)g_object_get_data(G_OBJECT(data), "view");
+        putInClipBoard(view, "copy");
     }
 
     static void
     cut(GtkMenuItem *menuItem, gpointer data) { 
-	auto baseView = (BaseView<Type> *)g_object_get_data(G_OBJECT(data), "baseView");
-        putInClipBoard(baseView, "move");
+	auto view = (View<Type> *)g_object_get_data(G_OBJECT(data), "view");
+        putInClipBoard(view, "move");
     }
 
     static gchar *
-    getSelectionData(BaseView<Type> *baseView, const gchar *instruction){
-        GList *selection_list = baseView->selectionList();
+    getSelectionData(View<Type> *view, const gchar *instruction){
+        GList *selection_list = view->selectionList();
         gchar *data = (instruction)?g_strdup_printf("%s\n", instruction): NULL;
         
         for(GList *tmp = selection_list; tmp && tmp->data; tmp = tmp->next) {
             GtkTreePath *tpath = (GtkTreePath *)tmp->data;
             gchar *path;
             GtkTreeIter iter;
-            gtk_tree_model_get_iter (baseView->treeModel(), &iter, tpath);
-            gtk_tree_model_get (baseView->treeModel(), &iter, PATH, &path, -1);
+            gtk_tree_model_get_iter (view->treeModel(), &iter, tpath);
+            gtk_tree_model_get (view->treeModel(), &iter, PATH, &path, -1);
             if (!data) data = g_strconcat(URIFILE, path, "\n", NULL);
             else {
                 gchar *e = g_strconcat(data, URIFILE, path, "\n", NULL);

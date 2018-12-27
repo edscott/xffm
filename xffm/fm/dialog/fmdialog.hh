@@ -21,31 +21,31 @@ public:
         TRACE("loading iconview page %s\n", workdir);
         auto notebook = (Notebook<Type> *)this;
         auto page = notebook->addPage(workdir);
-        auto baseView = load(page->workDir());
+        auto view = load(page->workDir());
 	page->showIconview(1);
         if (workdir == NULL){
-            baseView->loadModel(workdir);
+            view->loadModel(workdir);
         }
     }
 
    
-    BaseView<Type> *load(const gchar *workdir){
+    View<Type> *load(const gchar *workdir){
         auto notebook = (Notebook<Type> *)this;
 	auto page = notebook->currentPageObject();
 	TRACE("fm.hh::adding page: %s\n", workdir);
-	// Create BaseView object.
-        auto baseView =  new BaseView<Type>(page, workdir);
-        g_object_set_data(G_OBJECT(page->topScrolledWindow()), "baseModel", baseView);
+	// Create View object.
+        auto view =  new View<Type>(page, workdir);
+        g_object_set_data(G_OBJECT(page->topScrolledWindow()), "baseModel", view);
 	
-        g_object_set_data(G_OBJECT(page->topScrolledWindow()), "baseView", baseView);
+        g_object_set_data(G_OBJECT(page->topScrolledWindow()), "view", view);
         // Add the iconview into the scrolled window.
 	gtk_container_add (GTK_CONTAINER (page->topScrolledWindow()),
-		GTK_WIDGET(baseView->iconView()));
-	gtk_widget_show (GTK_WIDGET(baseView->iconView()));
+		GTK_WIDGET(view->iconView()));
+	gtk_widget_show (GTK_WIDGET(view->iconView()));
         // Load contents, depending on what path specifies.
-	baseView->loadModel(workdir);
+	view->loadModel(workdir);
 	while (gtk_events_pending())gtk_main_iteration();
-        return baseView;
+        return view;
     }
 };
 } // namespace xf

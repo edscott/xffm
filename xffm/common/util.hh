@@ -5,6 +5,8 @@
 #include <sys/stat.h>
 #include <errno.h>
 
+
+
 namespace xf
 {
 
@@ -1257,6 +1259,7 @@ open_with (const gchar *path) {
 #endif
 
 } // namespace xf
+
 #endif
 
 

@@ -138,13 +138,13 @@ public:
     on_new_page(GtkButton *button, void *data){
         auto notebook = (Notebook<Type> *)data;
 	auto page = notebook->currentPageObject();
-	auto baseView = page->baseView();
+	auto view = page->view();
 	
         //const gchar *workdir = notebook->workdir();
         TRACE("on_new_page this: %p (%s)\n", data, workdir);
         //auto dialog = (Dialog<Type> *) data;
         //dialog->addPage(notebook->workdir());
-        notebook->addPage(baseView->path());
+        notebook->addPage(view->path());
     }
 
     static void

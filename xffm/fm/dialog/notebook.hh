@@ -69,26 +69,26 @@ public:
 
     }
 
-    BaseView<Type> *loadIconview(Page<Type> *page, const gchar *path){
+    View<Type> *loadIconview(Page<Type> *page, const gchar *path){
 	if (!path) path = "xffm:root";
 	WARN("loadIconview::adding path: %s\n", path);
-	// Create BaseView object.
-        auto baseView =  new BaseView<Type>(page);
-        g_object_set_data(G_OBJECT(page->topScrolledWindow()), "baseView", baseView);
+	// Create View object.
+        auto view =  new View<Type>(page);
+        g_object_set_data(G_OBJECT(page->topScrolledWindow()), "view", view);
         // Add the iconview into the scrolled window.
 	
         gtk_container_add (GTK_CONTAINER (page->topScrolledWindow()),
-		GTK_WIDGET(baseView->iconView()));
-	gtk_widget_show (GTK_WIDGET(baseView->iconView()));
+		GTK_WIDGET(view->iconView()));
+	gtk_widget_show (GTK_WIDGET(view->iconView()));
 
 	gtk_container_add (GTK_CONTAINER (page->treeScrolledWindow()),
-		GTK_WIDGET(baseView->treeView()));
-	gtk_widget_show (GTK_WIDGET(baseView->treeView()));
+		GTK_WIDGET(view->treeView()));
+	gtk_widget_show (GTK_WIDGET(view->treeView()));
 
         // Load contents, depending on what path specifies.
-	baseView->loadModel(path);
+	view->loadModel(path);
 	while (gtk_events_pending())gtk_main_iteration();
-        return baseView;
+        return view;
     }
 
 //    void reference_run_button(run_button_c *rb_p){
@@ -165,13 +165,13 @@ public:
 	
         g_signal_connect(G_OBJECT(page->pageLabelButton()), "clicked", 
                 BUTTON_CALLBACK(notebookSignals<Type>::on_remove_page), (void *)page); 
-	auto baseView = loadIconview(page, path);
-	page->setBaseView(baseView);
+	auto view = loadIconview(page, path);
+	page->setBaseView(view);
         page->setPageWorkdir(workdir); 
 	g_free(workdir);
 	/*if (!g_file_test(path, G_FILE_TEST_IS_DIR) 
 		    || strcmp(path, "xffm:local")!=0) {
-	    page->setPageLabel(baseView->path());
+	    page->setPageLabel(view->path());
 	}*/
         return page;
     }

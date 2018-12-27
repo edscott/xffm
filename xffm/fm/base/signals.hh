@@ -1,10 +1,6 @@
 #ifndef XF_BASEVIEWSIGNALS__HH
 # define XF_BASEVIEWSIGNALS__HH
 
-//#include "fm/view/root/rootview.hh"
-//#include "common/pixbuf.hh"
-//#include "fm/view/local/localview.hh"
-
 #define SET_DIR(x) x|=0x01
 #define IS_DIR (x&0x01)
 #define CONTROL_MODE (event->state & GDK_CONTROL_MASK)
@@ -24,29 +20,12 @@ static GtkTargetEntry targetTable[] = {
 };
 
 #define NUM_TARGETS (sizeof(targetTable)/sizeof(GtkTargetEntry))
-/* Overkill... Simple target list in baseview.hh
- * enum {
-    TARGET_URI_LIST,
-    TARGET_MOZ_URL,
-    TARGET_PLAIN,
-    TARGET_UTF8,
-    TARGET_STRING,
-    TARGETS
-};
-
-static GtkTargetEntry targetTable[] = {
-    {(gchar *)"text/uri-list", 0, TARGET_URI_LIST},
-    {(gchar *)"text/x-moz-url", 0, TARGET_MOZ_URL},
-    {(gchar *)"text/plain", 0, TARGET_PLAIN},
-    {(gchar *)"UTF8_STRING", 0, TARGET_UTF8},
-    {(gchar *)"STRING", 0, TARGET_STRING}
-};*/
-
-
 
 namespace xf
 {
 
+template <class Type> class View;
+template <class Type> class BaseModel;
 
 static gboolean dragOn_=FALSE;
 static gboolean rubberBand_=FALSE;
@@ -69,10 +48,10 @@ public:
 
     static gboolean
     unhighlight (gpointer key, gpointer value, gpointer data){
-        auto baseView = (BaseView<Type> *)data;
-        if (!baseView)  return FALSE;
+        auto view = (View<Type> *)data;
+        if (!view)  return FALSE;
         TRACE("unhighlight %s\n", (gchar *)key);
-        GtkTreeModel *model =baseView->treeModel();
+        GtkTreeModel *model =view->treeModel();
                 
         GtkTreePath *tpath = gtk_tree_path_new_from_string ((gchar *)key);
         if (!tpath) return FALSE;
@@ -96,21 +75,21 @@ public:
     activate (GtkTreePath *tpath, gpointer data)
     {
         // Get activated path.
-        auto baseView = (BaseView<Type> *)data;
+        auto view = (View<Type> *)data;
 
 	gchar *path;
         GtkTreeIter iter;
-        auto treeModel = baseView->treeModel();
+        auto treeModel = view->treeModel();
         gtk_tree_model_get_iter (treeModel, &iter, (GtkTreePath *)tpath);
         GdkPixbuf *normal_pixbuf;
 
         gtk_tree_model_get (treeModel, &iter, PATH, &path, -1);
 	
-        DBG("BaseView::activate: %s\n", path);
-        auto lastPath = g_strdup(baseView->path());
-	if (!baseView->loadModel(treeModel, tpath, path)){
+        DBG("View::activate: %s\n", path);
+        auto lastPath = g_strdup(view->path());
+	if (!view->loadModel(treeModel, tpath, path)){
             WARN("reloading %s\n", lastPath);
-            baseView->loadModel(lastPath);
+            view->loadModel(lastPath);
         }
 	g_free(path);
 	g_free(lastPath);
@@ -235,7 +214,7 @@ public:
         if (strcmp(path, "xffm:ecryptfs")==0) return (ECRYPTFS_TYPE);
         if (strcmp(path, "xffm:cifs")==0) return (CIFS_TYPE);
         if (strcmp(path, "xffm:pkg")==0) return (PKG_TYPE);
-        ERROR("BaseView::loadModel() %s not defined.\n", path);
+        ERROR("View::loadModel() %s not defined.\n", path);
         return (ROOTVIEW_TYPE);
     }
 
@@ -245,7 +224,7 @@ public:
     DragMotion (GtkWidget * widget, 
             GdkDragContext * dc, gint drag_x, gint drag_y, 
             guint t, gpointer data) {
-	auto baseView = (BaseView<Type> *)data;
+	auto view = (View<Type> *)data;
         TRACE("signal_drag_motion\n");
 
         GtkTreePath *tpath;
@@ -264,24 +243,24 @@ public:
         if (isTreeView) return FALSE;
         
         GtkIconViewDropPosition pos;
-        if (gtk_icon_view_get_dest_item_at_pos (baseView->iconView(),
+        if (gtk_icon_view_get_dest_item_at_pos (view->iconView(),
                                         drag_x, drag_y,
                                         &tpath,
                                         &pos)){
             GtkTreeIter iter;
-            gtk_tree_model_get_iter (baseView->treeModel(), &iter, tpath);
+            gtk_tree_model_get_iter (view->treeModel(), &iter, tpath);
             gchar *g;
-            gtk_tree_model_get (baseView->treeModel(), &iter, PATH, &g, -1);
+            gtk_tree_model_get (view->treeModel(), &iter, PATH, &g, -1);
             // drop into?
             // must be a directory (XXX this is quite local stuff...)
             if (g_file_test(g, G_FILE_TEST_IS_DIR)){
-                highlight(tpath, baseView);
+                highlight(tpath, view);
             } else {
-                highlight(NULL, baseView);
+                highlight(NULL, view);
             }
 	    g_free(g);
         } else {
-            highlight(NULL, baseView);
+            highlight(NULL, view);
         }
         return FALSE;
     }
@@ -298,23 +277,23 @@ public:
         
         //int drag_type;
 
-	auto baseView = (BaseView<Type> *)data;
+	auto view = (View<Type> *)data;
         /* prepare data for the receiver */
         if (info != TARGET_URI_LIST) {
             ERROR("signal_drag_data_send: invalid target");
         }
         DBG( ">>> DND send, TARGET_URI_LIST\n"); 
         gchar *dndData = NULL;
-        switch (baseView->viewType()) {
+        switch (view->viewType()) {
             case (LOCALVIEW_TYPE):
             {
-                dndData = Dnd<Type>::sendDndData(baseView);
+                dndData = Dnd<Type>::sendDndData(view);
                 TRACE("drag finish result=%d\n", result);
                 break;
             }
 
             default :
-                DBG("BaseSignals:: sendDndData not defined for view type %d\n", baseView->viewType());
+                DBG("BaseSignals:: sendDndData not defined for view type %d\n", view->viewType());
                 break;
         }
 
@@ -331,18 +310,18 @@ public:
     static void
     DragBegin (GtkWidget * widget, GdkDragContext * context, gpointer data) {
         WARN("signal_drag_begin\n");
-	auto baseView = (BaseView<Type> *)data;
-        auto treeModel = baseView->treeModel();
+	auto view = (View<Type> *)data;
+        auto treeModel = view->treeModel();
         // Treeview or iconview?
         //  single or multiple item selected?
         GList *selectionList;
         if (isTreeView){
-            auto selection = gtk_tree_view_get_selection (baseView->treeView());
+            auto selection = gtk_tree_view_get_selection (view->treeView());
             selectionList = gtk_tree_selection_get_selected_rows (selection, &treeModel);
         } else {
-            selectionList = gtk_icon_view_get_selected_items (baseView->iconView());
+            selectionList = gtk_icon_view_get_selected_items (view->iconView());
         }
-        baseView->setSelectionList(selectionList);
+        view->setSelectionList(selectionList);
         if (g_list_length(selectionList) > 1) {
             GdkPixbuf *pixbuf = Pixbuf<Type>::get_pixbuf("edit-copy", -48);
             gtk_drag_set_icon_pixbuf (context, pixbuf,10,10);
@@ -350,8 +329,8 @@ public:
             auto tpath = (GtkTreePath *)selectionList->data;
             GtkTreeIter iter;
             GdkPixbuf *pixbuf;
-            gtk_tree_model_get_iter (baseView->treeModel(), &iter, tpath);
-            gtk_tree_model_get (baseView->treeModel(), &iter, NORMAL_PIXBUF, &pixbuf, -1);
+            gtk_tree_model_get_iter (view->treeModel(), &iter, tpath);
+            gtk_tree_model_get (view->treeModel(), &iter, NORMAL_PIXBUF, &pixbuf, -1);
             gtk_drag_set_icon_pixbuf (context, pixbuf,10,10);
         }
     }
@@ -366,7 +345,7 @@ public:
                       guint time, 
                       gpointer data){
         DBG( "DND>> signal_drag_data\n");
-	auto baseView = (BaseView<Type> *)data;
+	auto view = (View<Type> *)data;
 
         // Treeview or iconview?
         GdkDragAction action = gdk_drag_context_get_selected_action(context);
@@ -391,14 +370,14 @@ public:
         GtkTreePath *tpath=NULL;
         if (isTreeView) {
             // Simple drop for now since xy coordinates differ from treeview coordinates...
-            target = g_strdup(baseView->path());
+            target = g_strdup(view->path());
         } else {
-            if (gtk_icon_view_get_item_at_pos (baseView->iconView(),
+            if (gtk_icon_view_get_item_at_pos (view->iconView(),
                                        x, y, &tpath, NULL))
             {
                 GtkTreeIter iter;
-                gtk_tree_model_get_iter (baseView->treeModel(), &iter, tpath);
-                gtk_tree_model_get (baseView->treeModel(), &iter, PATH, &target, -1);	
+                gtk_tree_model_get_iter (view->treeModel(), &iter, tpath);
+                gtk_tree_model_get (view->treeModel(), &iter, PATH, &target, -1);	
                 TRACE("target1=%s\n", target);
                 if (!g_file_test(target, G_FILE_TEST_IS_DIR)){
                     g_free(target);
@@ -415,16 +394,16 @@ public:
         auto dndData = (const char *)gtk_selection_data_get_data (selection_data);
 	DBG("dndData = \"\n%s\"\n", dndData);
         
-        switch (baseView->viewType()) {
+        switch (view->viewType()) {
             case (LOCALVIEW_TYPE):
             {
-                auto result = Dnd<Type>::receiveDndData(baseView, target, selection_data, action);
+                auto result = Dnd<Type>::receiveDndData(view, target, selection_data, action);
                 TRACE("drag finish result=%d\n", result);
                 break;
             }
 
             default :
-                DBG("BaseSignals:: receiveDndData not defined for view type %d\n", baseView->viewType());
+                DBG("BaseSignals:: receiveDndData not defined for view type %d\n", view->viewType());
                 break;
         }
         g_free(target);
@@ -441,7 +420,7 @@ public:
     signal_drag_end (GtkWidget * widget, GdkDragContext * context, gpointer data) {
         WARN("signal_drag_end\n");
         
-	auto baseView = (BaseView<Type> *)data;
+	auto view = (View<Type> *)data;
 
         dragMode = 0;
       

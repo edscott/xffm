@@ -1,5 +1,11 @@
 #ifndef XF_SETTINGS_HH
 #define XF_SETTINGS_HH
+
+
+#include "tubo.hh"
+#include "print.hh"
+
+
 static GKeyFile *keyFile = NULL;
 static const gchar *settingsfile = NULL;
 gsize mTime;

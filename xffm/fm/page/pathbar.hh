@@ -1,8 +1,5 @@
 #ifndef PATHBAR_HH
 #define PATHBAR_HH
-#ifdef XFFM_CC
-# include "fm/view/baseview.hh"
-#endif
 
 namespace xf {
 template <class Type> class Page;
@@ -103,9 +100,9 @@ private:
 		    path="xffm:root";
                     DBG("path is null at pathbar.hh::pathbar_ok\n");
                 }
-                auto baseView = (BaseView<Type> *)
-                    g_object_get_data(G_OBJECT(page->topScrolledWindow()), "baseView");
-                baseView->loadModel(path);
+                auto view = (View<Type> *)
+                    g_object_get_data(G_OBJECT(page->topScrolledWindow()), "view");
+                view->loadModel(path);
 
 	    } 
 	}
@@ -336,9 +333,9 @@ private:
 	    g_free(message);
 	} else {
 	    auto page = (Page<Type> *)pathbar_p;
-	    auto baseView = (BaseView<Type> *)
-		g_object_get_data(G_OBJECT(page->topScrolledWindow()), "baseView");
-	    baseView->loadModel(response);
+	    auto view = (View<Type> *)
+		g_object_get_data(G_OBJECT(page->topScrolledWindow()), "view");
+	    view->loadModel(response);
 	}
 	g_free(response);
         return FALSE;

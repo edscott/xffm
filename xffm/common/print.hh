@@ -9,9 +9,6 @@
 #include <pwd.h>
 #include <gtk/gtk.h>
 
-#include "types.h"
-#include "util.hh"
-#include "pixbuf.hh"
 
 static gint defaultFixedFontSize=12;
 #define MAX_LINES_IN_BUFFER 10000    

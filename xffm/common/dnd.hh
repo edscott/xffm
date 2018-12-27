@@ -3,23 +3,24 @@
 namespace xf
 {
 template <class Type> class ClipBoard;
+template <class Type> class View;
 template <class Type>
 class Dnd {
 
 public:
     static gchar *
-    sendDndData(BaseView<Type> *baseView){
-        return ClipBoard<Type>::getSelectionData(baseView, NULL);
+    sendDndData(View<Type> *view){
+        return ClipBoard<Type>::getSelectionData(view, NULL);
     }
                 
     static gboolean
     receiveDndData(
-            BaseView<Type> *baseView,
+            View<Type> *view,
             const gchar *target, 
             const GtkSelectionData *selection_data, 
             GdkDragAction action)
     {
-        WARN("BaseView::receiveDndData\n");
+        WARN("View::receiveDndData\n");
         if (!selection_data) {
             WARN("!selection_data\n");
             return FALSE;
@@ -53,7 +54,7 @@ public:
         auto dndData = (const char *)gtk_selection_data_get_data (selection_data);
 
         gchar **files = g_strsplit(dndData, "\n", -1);
-        auto result = Gio<Type>::execute(files, target? target: baseView->path(), mode);
+        auto result = Gio<Type>::execute(files, target? target: view->path(), mode);
         if (files) g_strfreev(files);
         return result;
     }

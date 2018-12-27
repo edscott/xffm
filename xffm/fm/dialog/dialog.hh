@@ -111,7 +111,7 @@ public:
             case G_FILE_MONITOR_EVENT_DELETED:
             case G_FILE_MONITOR_EVENT_MOVED_OUT:
             if (!strstr(f, "part")){
-                gchar *path = Fstab<Type>::id2Partition(f);
+                gchar *path = FstabView<Type>::id2Partition(f);
                 gchar *markup = g_strdup_printf("%s %s", _("Removed"), base);
                 TimeoutResponse<Type>::dialog(NULL, markup, "drive-harddisk/SE/go-down/3.0/180");
                 g_free(markup);
@@ -123,8 +123,8 @@ public:
             case G_FILE_MONITOR_EVENT_MOVED_IN:
             if (!strstr(f, "part")){
                 gchar *g = g_strdup_printf(_("Inserted %s"), "" );
-                gchar *path = Fstab<Type>::id2Partition(f);
-                gchar *label = Fstab<Type>::e2Label(path);
+                gchar *path = FstabView<Type>::id2Partition(f);
+                gchar *label = FstabView<Type>::e2Label(path);
                 gchar *markup = g_strdup_printf("%s    <span color=\"red\">%s</span>    <span color=\"green\">%s</span>\n%s\n", g, path, label?label:"", base );
                 TimeoutResponse<Type>::dialog(NULL, markup, "drive-harddisk/SE/go-up/3.0/180");
                 g_free(markup);

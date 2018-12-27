@@ -1,11 +1,16 @@
 #ifndef  XF_BASEMODEL__HH
 # define XF_BASEMODEL__HH
+#include "signals.hh"
+#include "popup.hh"
 
 
 namespace xf
 {
+template <class Type> class View;
+template <class Type> class LocalMonitor;
+template <class Type> class FstabMonitor;
 
-template <class Type>
+template <class Type> 
 class BaseModel
 {
     using util_c = Util<Type>;

@@ -10,7 +10,7 @@ protected:
     GFile *gfile_;
     GFileMonitor *monitor_;
     GtkListStore *store_;
-    BaseView<Type> *baseView_;
+    View<Type> *baseView_;
         
     gint
     countItems(void){
@@ -22,11 +22,11 @@ protected:
         return items;
     }
     void updateFileCountLabel(void){
-        if (!BaseSignals<Type>::validBaseView(baseView())) return;
+        if (!BaseSignals<Type>::validBaseView(view())) return;
         auto items = countItems();
         auto fileCount = g_strdup_printf("%0d", items);
         auto text = g_strdup_printf(_("Files: %s"), fileCount); 
-        baseView()->page()->updateStatusLabel(text);
+        view()->page()->updateStatusLabel(text);
         g_free(text);
         g_free(fileCount);
     }
@@ -36,10 +36,10 @@ public:
     GFileMonitor *monitor(void) {return monitor_;}
     GtkTreeModel *treeModel(void){return GTK_TREE_MODEL(store_);}
     
-    BaseMonitor(GtkTreeModel *treeModel, BaseView<Type> *baseView){
+    BaseMonitor(GtkTreeModel *treeModel, View<Type> *view){
         itemsHash_ = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_free);
                 DBG("BaseMonitor thread itemshash=%p\n", itemsHash_);
-        baseView_ = baseView;
+        baseView_ = view;
         gboolean showHidden = (Settings<Type>::getSettingInteger("LocalView", "ShowHidden") > 0);
         cancellable_ = g_cancellable_new ();
         gfile_ = NULL;
@@ -58,7 +58,7 @@ public:
         if (gfile_) g_object_unref(gfile_);
     }
     
-    BaseView<Type> *baseView(void) { return baseView_;}
+    View<Type> *view(void) { return baseView_;}
 
 private:
     static gboolean

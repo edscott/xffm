@@ -8,9 +8,6 @@
 
 #include <unistd.h>
 #include <gtk/gtk.h>
-#include "util.hh"
-#include "print.hh"
-#include "tubo.hh"
         
 
 static pthread_mutex_t fork_mutex_=PTHREAD_MUTEX_INITIALIZER;       
@@ -21,10 +18,6 @@ namespace xf
 template <class Type> class Dialog;
 template <class Type>
 class Run {
-    using print_c = Print<double>;
-    using util_c = Util<double>;
-    using tubo_c = Tubo<double>;
-private:
 
     static void
     push_hash(pid_t controller, gchar *string){
@@ -72,7 +65,7 @@ private:
             errno = 0;
             id = strtol(s, NULL, 10);
             if (!errno){
-                pid = tubo_c::getChild((pid_t) id);
+                pid = Tubo<Type>::getChild((pid_t) id);
             }
         }
 #ifdef DEBUG_TRACE
@@ -129,7 +122,7 @@ private:
         }
         */
 
-        pid_t pid = tubo_c::Fork (fork_function,(gchar **)arguments,
+        pid_t pid = Tubo<Type>::Fork (fork_function,(gchar **)arguments,
                                     NULL, // stdin
                                     stdout_f,
                                     stderr_f,
@@ -140,7 +133,7 @@ private:
 	    g_free(command);
 	    return 0;
 	}
-        pid_t grandchild=tubo_c::getChild (pid);
+        pid_t grandchild=Tubo<Type>::getChild (pid);
 	// Reference to command now belongs to the hashtable.
         push_hash(grandchild, command);
         return pid;
@@ -163,18 +156,18 @@ public:
         }
         */
 
-        pid_t pid = tubo_c::Fork (fork_function,(gchar **)arguments,
+        pid_t pid = Tubo<Type>::Fork (fork_function,(gchar **)arguments,
                                     NULL, // stdin
                                     run_operate_stdout, //stdout_f,
                                     run_operate_stderr, //stderr_f
                                     (scrollUp)?scrollToTop:fork_finished_function,
                                     textview, // XXX view_v,
                                     flags);
-        pid_t grandchild=tubo_c::getChild (pid);
+        pid_t grandchild=Tubo<Type>::getChild (pid);
 #if 0       
-        print_c::print(textview, "Green", g_strdup_printf("%d:%s\n", grandchild, command));
+        Print<Type>::print(textview, "Green", g_strdup_printf("%d:%s\n", grandchild, command));
 #else
-        print_c::print_icon(textview, "greenball", "Green", g_strdup_printf("%d:%s\n", grandchild, command));
+        Print<Type>::print_icon(textview, "greenball", "Green", g_strdup_printf("%d:%s\n", grandchild, command));
 #endif
         push_hash(grandchild, g_strdup(command));
         g_free(command);
@@ -218,13 +211,13 @@ public:
 
         gchar *ncommand;
         if (run_in_shell(command)){
-            ncommand = g_strdup_printf("%s -c \"%s\"", util_c::u_shell(), command);
+            ncommand = g_strdup_printf("%s -c \"%s\"", Util<Type>::u_shell(), command);
         } else {
             ncommand = g_strdup(command);
         }
         if(!g_shell_parse_argv (ncommand, &argc, &argv, &error)) {
             auto msg = g_strcompress (error->message);
-            print_c::print_error(textview, g_strdup_printf("%s: %s\n", msg, ncommand));
+            Print<Type>::print_error(textview, g_strdup_printf("%s: %s\n", msg, ncommand));
             g_free(ncommand);
             g_error_free (error);
             g_free (msg);
@@ -303,12 +296,12 @@ public:
         if(strncmp (line, exit_token, strlen (exit_token)) == 0) {
 //#ifdef DEBUG
             gchar *string = exit_string(line);
-	    print_c::print_icon(textview, "redball", "Red", g_strdup(string));
-            //print_c::print_icon(textview, "process-stop", g_strdup(string));
+	    Print<Type>::print_icon(textview, "redball", "Red", g_strdup(string));
+            //Print<Type>::print_icon(textview, "process-stop", g_strdup(string));
             g_free(string);
 //#endif
         } else {
-            print_c::print(textview, g_strdup(outline));
+            Print<Type>::print(textview, g_strdup(outline));
         }
         g_free(outline);
 
@@ -349,15 +342,15 @@ public:
         line = (char *)stream;
         if(line[0] != '\n') {
             if (strstr(line, "error")||strstr(line,_("error"))) {
-                print_c::print(textview, "Cyan", g_strdup(line));
+                Print<Type>::print(textview, "Cyan", g_strdup(line));
             } else if (strstr(line, "***")) {
-                print_c::print(textview, "red/white_bg", g_strdup(line));
+                Print<Type>::print(textview, "red/white_bg", g_strdup(line));
             } else if (strstr(line, "warning")||strstr(line, _("warning"))) {
-                print_c::print(textview, "yellow", g_strdup(line));
+                Print<Type>::print(textview, "yellow", g_strdup(line));
             } else {                
-                print_c::print(textview, "bold", g_strdup(line));
+                Print<Type>::print(textview, "bold", g_strdup(line));
             }
-                //print_c::print(textview, g_strdup(line));
+                //Print<Type>::print(textview, g_strdup(line));
         }
 
         // With this, this thread will not do a DOS attack
@@ -374,7 +367,7 @@ public:
         auto textview = GTK_TEXT_VIEW(data);
         auto line = (gchar *)stream;
 
-        print_c::print(textview, "green",  g_strdup(line));
+        Print<Type>::print(textview, "green",  g_strdup(line));
         // This is a bit hacky, to keep runaway output from hogging
         // up the gtk event loop.
         static gint count = 1;
@@ -391,7 +384,7 @@ public:
         auto textview = GTK_TEXT_VIEW(data);
         auto line = (gchar *)stream;
 
-        print_c::print(textview, "red",  g_strdup(line));
+        Print<Type>::print(textview, "red",  g_strdup(line));
         // This is a bit hacky, to keep runaway output from hogging
         // up the gtk event loop.
         static gint count = 1;
@@ -407,8 +400,8 @@ public:
         //view_c *view_p = (view_c *)data;
         //view_p->get_lpterm_p()->print("bold", g_strdup_printf("%s\n", "run complete."));
         auto textview = GTK_TEXT_VIEW(data);
-        print_c::show_text(textview);
-        print_c::scroll_to_top(textview);
+        Print<Type>::show_text(textview);
+        Print<Type>::scroll_to_top(textview);
         return FALSE;
     }
 

@@ -14,7 +14,7 @@ class Page : public PageBase<double>
     // so you cannot use a static Type, like double.
     using dialog_c = Dialog<Type>;
 
-    using baseview_c = BaseView<double>;
+    using baseview_c = View<double>;
     using gtk_c = Gtk<double>;
     using util_c = Util<double>;
     using run_c = Run<double>;
@@ -40,8 +40,8 @@ class Page : public PageBase<double>
 
 public:
 
-    baseview_c *baseView(void){ return baseView_;}
-    void setBaseView(baseview_c *baseView){baseView_ = baseView;}
+    baseview_c *view(void){ return baseView_;}
+    void setBaseView(baseview_c *view){baseView_ = view;}
     dialog_c *parent(void){return parent_;}
     GtkBox *pageChild(void){ return pageChild_;}
     GtkLabel *pageLabel(void){ return pageLabel_;}
@@ -118,10 +118,10 @@ public:
 	auto baseModel = (BaseModel<Type> *)
 	    g_object_get_data(G_OBJECT(this->topScrolledWindow()), "baseModel");
     	if (baseModel){
-            TRACE("now deleting BaseView...\n");
+            TRACE("now deleting View...\n");
             delete baseModel;
         } else {
-            ERROR("not deleting BaseView object\n");
+            ERROR("not deleting View object\n");
         }
     }
 
@@ -332,7 +332,7 @@ public:
             for (int i=0; navigationKeys[i] > 0; i++){
                 if (event->keyval == navigationKeys[i]) {
                     TRACE("navigation key\n");
-                    return baseView()->keyboardEvent(event);
+                    return view()->keyboardEvent(event);
                 }
             }
             // Any other key activates terminal (partial output).
