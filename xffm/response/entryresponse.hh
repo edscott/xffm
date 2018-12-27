@@ -85,14 +85,14 @@ public:
 	gtk_window_set_resizable (GTK_WINDOW (response_), TRUE);
 	gtk_container_set_border_width (GTK_CONTAINER (response_), 6);
 
-	auto vbox = gtk_c::vboxNew (TRUE, 6);
+	auto vbox = gtk_c::vboxNew (FALSE, 6);
         gtk_widget_show(GTK_WIDGET(vbox));
 	gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area(GTK_DIALOG (response_))), GTK_WIDGET(vbox), FALSE, FALSE, 0);
 
 	hbox_ = gtk_c::hboxNew (FALSE, 6);
 
 	responseLabel_ = GTK_LABEL(gtk_label_new (""));
-	gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET(responseLabel_), TRUE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET(responseLabel_), FALSE, FALSE, 0);
 
 	gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET(hbox_), FALSE, FALSE, 0);
 
@@ -126,7 +126,7 @@ public:
         gtk_entry_completion_set_model (bashCompletion_, GTK_TREE_MODEL(bashCompletionStore_));
 
 	checkbutton_ = GTK_CHECK_BUTTON(gtk_check_button_new_with_label(""));
-	gtk_box_pack_start (GTK_BOX (vbox),GTK_WIDGET(checkbutton_), TRUE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (vbox),GTK_WIDGET(checkbutton_), FALSE, FALSE, 0);
         // not needed yet:
         // g_object_set_data(G_OBJECT(checkbutton), "entryResponse", this);
 	add_cancel_ok(GTK_DIALOG (response_));
