@@ -40,6 +40,12 @@ enum
 namespace xf {
     static gboolean isTreeView;
     static GList *localMonitorList = NULL;
+    static GtkMenu *fstabPopUp=NULL;
+    static GtkMenu *fstabItemPopUp=NULL;
+    static GtkMenu *localPopUp=NULL;
+    static GtkMenu *localItemPopUp=NULL;
+    static GtkMenu *rootPopUp=NULL;
+    static GtkMenu *rootItemPopUp=NULL;
 }
 #include "types.h"
 

@@ -4,8 +4,6 @@
 
 namespace xf
 {
-static GtkMenu *rootPopUp=NULL;
-static GtkMenu *rootItemPopUp=NULL;
 
 template <class Type> class View;
 template <class Type> class LocalPopUp;

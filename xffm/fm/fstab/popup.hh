@@ -5,8 +5,6 @@
 namespace xf
 {
 
-static GtkMenu *fstabPopUp=NULL;
-static GtkMenu *fstabItemPopUp=NULL;
 template <class Type> class View;
 template <class Type> class FstabView;
 template <class Type>

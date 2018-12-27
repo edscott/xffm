@@ -25,6 +25,9 @@ namespace xf
 {
 
 template <class Type> class View;
+template <class Type> class RootView;
+template <class Type> class FstabView;
+template <class Type> class LocalView;
 template <class Type> class BaseModel;
 
 static gboolean dragOn_=FALSE;
@@ -45,6 +48,435 @@ static gint dragMode=0;
 template <class Type> 
 class BaseSignals {
 public:
+
+    static gboolean
+    motionNotifyEvent (GtkWidget *widget,
+                   GdkEvent  *ev,
+                   gpointer   data)
+    {
+        auto e = (GdkEventMotion *)ev;
+        auto event = (GdkEventButton  *)ev;
+	auto view = (View<Type> *)data;
+        if (!data) {
+            DBG("View::motion_notify_event: data cannot be NULL\n");
+            return FALSE;
+        }
+	TRACE("motion_notify_event, dragmode= %d\n", view->dragMode());
+
+        if (buttonPressX >= 0 && buttonPressY >= 0){
+	    TRACE("buttonPressX >= 0 && buttonPressY >= 0\n");
+	    if (sqrt(pow(e->x - buttonPressX,2) + pow(e->y - buttonPressY, 2)) > 10){
+		GList *selectionList;
+                view->selectables();
+		if (isTreeView) {
+		    auto selection = gtk_tree_view_get_selection (view->treeView());
+		    auto treeModel = view->treeModel();
+		    selectionList = gtk_tree_selection_get_selected_rows (selection, &treeModel);
+		} else {
+		    selectionList = gtk_icon_view_get_selected_items (view->iconView());
+		}
+                view->setSelectionList(selectionList);
+                if (selectionList==NULL) {
+                    return FALSE;
+                }
+	        // start DnD (multiple selection)
+		WARN("dragOn_ = TRUE\n");
+		dragOn_ = TRUE;
+		// in control mode, reselect item at x,y
+		if(!isTreeView && controlMode) {
+		    GtkTreePath * tpath;
+		    if (gtk_icon_view_get_item_at_pos (GTK_ICON_VIEW(widget),
+                                   buttonPressX, buttonPressY,
+                                   &tpath, NULL)) {
+		    gtk_icon_view_select_path (view->iconView(), tpath);
+		    gtk_tree_path_free(tpath);
+		    }
+
+		}
+
+                if (!targets) targets= gtk_target_list_new (targetTable,TARGETS);
+
+		context =
+		    gtk_drag_begin_with_coordinates (view->source(),
+			     targets,
+			     (GdkDragAction)(((gint)GDK_ACTION_MOVE)|
+                   ((gint)GDK_ACTION_COPY)|
+                   ((gint)GDK_ACTION_LINK)), //GdkDragAction actions,
+			     1, //gint button,
+			     (GdkEvent *)event, //GdkEvent *event,
+			     event->x, event->y);
+                             
+		buttonPressX = buttonPressY = -1;
+                //g_object_ref(G_OBJECT(context)); 
+	    }
+        }
+
+	// XXX: Why this limitation?
+        // if (view_p->get_dir_count() > 500) return FALSE;
+        view->highlight(e->x, e->y);
+
+    
+        return FALSE;
+    }
+
+    static gboolean
+    buttonRelease (GtkWidget *widget,
+                   GdkEventButton  *event,
+                   gpointer   data)
+    {
+        //GdkEventButton *event_button = (GdkEventButton *)event;
+	auto view = (View<Type> *)data;
+        if (!dragOn_){
+	    GtkTreePath *tpath;
+
+	    if (rubberBand_) {
+                view->selectables();
+		return FALSE;
+	    }
+	    if (!isTreeView && !gtk_icon_view_get_item_at_pos (view->iconView(),
+                                   event->x, event->y,
+                                   &tpath,NULL)){
+		WARN("button down cancelled.\n");
+		return TRUE;
+	    }
+
+	    //Cancel DnD prequel.
+	    buttonPressX = buttonPressY = -1;
+	    dragOn_ = FALSE;
+	    if (dragMode) { // copy/move/link mode
+		return TRUE;
+	    }
+	    // default mode:
+	    if (isTreeView){
+		auto selection = 
+		    gtk_tree_view_get_selection (view->treeView());
+		gtk_tree_view_get_path_at_pos (view->treeView(), 
+				   event->x, event->y, &tpath,
+				  NULL, // &column,
+				  NULL, NULL);
+		if (tpath) {
+		    // unselect everything
+		    gtk_tree_selection_unselect_all (selection);
+
+		    // reselect item to activate
+		    gtk_tree_selection_select_path (selection, tpath);
+		}
+	    } else {
+		// unselect everything
+		gtk_icon_view_unselect_all (view->iconView());
+		// reselect item to activate
+		gtk_icon_view_select_path (view->iconView(),tpath);
+	    }
+	    if (tpath) {
+		WARN("Here we do a call to activate item.\n");
+		BaseSignals<Type>::activate(tpath, data);
+		gtk_tree_path_free(tpath);
+	    }
+	    return TRUE;
+        }
+
+	buttonPressX = buttonPressY = -1;
+        dragOn_ = FALSE;
+	
+        dragMode = 0;
+        return FALSE;
+    }
+
+
+    static gboolean
+    buttonPress (GtkWidget *widget,
+                   GdkEventButton  *event,
+                   gpointer   data)
+    {
+        auto view = (View<Type> *)data;
+        buttonPressX = buttonPressY = -1;
+        dragOn_ = FALSE;
+
+        GtkTreePath *tpath;
+        if (event->button == 1) {
+	    controlMode = FALSE;
+            gboolean retval = FALSE;
+            gint mode = 0;
+	    if (isTreeView){
+	       if (!gtk_tree_view_get_path_at_pos (view->treeView(), 
+		   event->x, event->y, &tpath,
+		  NULL, // &column,
+		  NULL, NULL)) tpath = NULL;
+		   // &cellX, &cellY))
+	    } else {
+		if (!gtk_icon_view_get_item_at_pos (view->iconView(),
+                                   event->x, event->y,
+                                   &tpath,NULL)) tpath = NULL;
+	    }
+            if (tpath) {
+                
+		DBG("button press %d mode %d\n", event->button, mode);
+		buttonPressX = event->x;
+		buttonPressY = event->y;
+		rubberBand_ = FALSE;
+                if (CONTROL_MODE && SHIFT_MODE) {
+		    dragMode = -3; // link mode
+		} else if (CONTROL_MODE) {
+		    controlMode = TRUE;
+		    dragMode = -2; // copy
+		    if (isTreeView){
+			auto selection = gtk_tree_view_get_selection (view->treeView());
+			// select item and add to selection list
+			if (gtk_tree_selection_path_is_selected (selection, tpath)) {
+			    gtk_tree_selection_unselect_path (selection, tpath);
+			} else { // not selected
+			    gtk_tree_selection_select_path (selection, tpath);
+			    view->selectables();
+			}	   
+		    } else {
+			// select item and add to selection list
+			if (gtk_icon_view_path_is_selected (view->iconView(), tpath)) {
+			    // if selected
+			    gtk_icon_view_unselect_path (view->iconView(), tpath);
+			} else { // not selected
+			    //if (view->isSelectable(tpath)) 
+			    gtk_icon_view_select_path (view->iconView(), tpath);
+			    view->selectables();
+			}
+		    }
+		} else if (SHIFT_MODE) {
+		    dragMode = -1; // move
+                    if (!isTreeView) viewShiftSelect(view, tpath);
+		} else {
+                    if (isTreeView) {
+			auto selection = gtk_tree_view_get_selection (view->treeView());
+			// unselect all
+			gtk_tree_selection_unselect_all (selection);
+			// select single item
+			gtk_tree_selection_select_path (selection, tpath);
+		    } else{
+			// unselect all
+			gtk_icon_view_unselect_all (view->iconView());
+			// select single item
+			gtk_icon_view_select_path (view->iconView(), tpath);
+		    }
+
+		    dragMode = 0; // default (move)
+		}
+                retval = TRUE; 
+		gtk_tree_path_free(tpath);
+            } else { 
+		dragMode = 0;
+		rubberBand_ = TRUE;
+            }
+
+            return retval;
+        }
+
+        // long press or button 3 should do popup menu...
+        if (event->button != 3) return FALSE;
+	if (isTreeView){
+            GtkTreeViewColumn *column;
+            gint cellX, cellY;
+            gtk_tree_view_get_path_at_pos (view->treeView(), 
+                               event->x, event->y, &tpath,
+                              NULL, // &column,
+                               &cellX, &cellY);
+            auto selection = gtk_tree_view_get_selection (view->treeView());
+            if (CONTROL_MODE) gtk_tree_selection_unselect_all (selection);
+	    else {
+		if (tpath) gtk_tree_selection_select_path (selection, tpath);
+		//FIXME: treeview selection should probably be rowreference
+                /*GList *list = view->selectionList();
+                for (;list && list->data; list = list->next){
+                    gtk_tree_selection_select_path (selection, (GtkTreePath *)list->data);
+                }   */
+            } 
+	    gtk_tree_path_free(tpath);
+            DBG("(%lf,%lf) -> %d,%d\n", event->x, event->y, cellX, cellY);
+	} else {
+	    if (gtk_icon_view_get_item_at_pos (view->iconView(),
+				       event->x,
+				       event->y,
+				       &tpath, NULL))
+	    if (CONTROL_MODE) {
+	       gtk_icon_view_unselect_all (view->iconView());
+	    } else {
+		gtk_icon_view_select_path (view->iconView(), tpath);
+	    }
+	    gtk_tree_path_free(tpath);
+	}
+        return viewPopUp(view, event);
+    }
+    
+    static void
+    viewShiftSelect(View<Type> *view, GtkTreePath *tpath){
+	if (isTreeView) return;
+        // select all items in interval
+        gtk_icon_view_select_path (view->iconView(), tpath);
+        auto items = gtk_icon_view_get_selected_items (view->iconView());
+        view->setSelectionList(items);
+
+        gchar *item = gtk_tree_path_to_string (tpath);
+        gchar *startItem;
+        if (strrchr(item, ':')) startItem = g_strdup(strrchr(startItem, ':')+1);
+        else startItem = g_strdup(item);
+        g_free(item);
+
+        WARN("Starting from %s\n", startItem);
+
+        void *startPath;
+
+        for (GList *l=items; l && l->data; l=l->next){
+            gchar *item = gtk_tree_path_to_string ((GtkTreePath *)l->data);
+            if (strcmp(item, startItem)==0){
+                startPath = l->data;
+                g_free(item);
+                break;
+            }
+            g_free(item);
+        }
+
+        GList *s = g_list_find(items, startPath);
+        gint start, end;
+
+        if (s->prev == NULL) {
+            gchar *lastitem = gtk_tree_path_to_string ((GtkTreePath *)g_list_last(items)->data);
+            end = atoi(startItem);
+            start = atoi(lastitem);
+            WARN("lastitem %s\n", lastitem);
+            g_free(lastitem);
+
+        } else {
+            gchar *firstitem = gtk_tree_path_to_string ((GtkTreePath *)g_list_first(items)->data);
+            end = atoi(firstitem);
+            start = atoi(startItem);
+            WARN("firstitem %s\n", firstitem);
+            g_free(firstitem);
+        }
+        g_free(startItem);
+        // To free the return value, use:
+        g_list_free_full (items, (GDestroyNotify) gtk_tree_path_free);
+        WARN("loop %d -> %d\n", start, end);
+        gtk_icon_view_unselect_all (view->iconView());
+        GtkTreePath *tp;
+        for (int i=start; i<=end; i++){
+                gchar *item = g_strdup_printf("%0d", i);
+                WARN("selecting %s(%d)\n", item, i);
+                tp = gtk_tree_path_new_from_string(item);
+                g_free(item);
+                //if (view->isSelectable(tpath)) 
+                    
+                gtk_icon_view_select_path (view->iconView(), tp);
+            gtk_tree_path_free(tp);
+        }
+        view->selectables();
+    }
+
+    static gboolean 
+    viewPopUp(View<Type> *view, GdkEventButton  *event){
+        TRACE("button press event: button 3 should do popup, as well as longpress...\n");
+        gboolean retval = FALSE;
+        GtkMenu *menu = NULL;
+        gchar *path = NULL;
+        GList *selectionList;
+	if (isTreeView) {
+	    auto selection = gtk_tree_view_get_selection (view->treeView());
+	    auto treeModel = view->treeModel();
+	    selectionList = gtk_tree_selection_get_selected_rows (selection, &treeModel);
+	} else {
+	    selectionList = gtk_icon_view_get_selected_items (view->iconView());
+	}
+        view->setSelectionList(selectionList);
+        if (selectionList && g_list_length(selectionList) == 1) {
+            GtkTreeIter iter;
+            gtk_tree_model_get_iter(view->treeModel(), &iter, 
+                    (GtkTreePath *)selectionList->data);
+            gtk_tree_model_get(view->treeModel(), &iter, PATH, &path, -1);
+            DBG("selected path is %s\n", path);
+        }
+        gboolean items = (g_list_length(selectionList) >0);
+        setMenuData(view, path, items);
+        menu = configureMenu(view, items);
+/*	if ((CONTROL_MODE) || g_list_length(selectionList) == 0) {
+	    setMenuData(view, path, FALSE);
+	    menu = configureMenu(view, FALSE);
+	} else {
+	    setMenuData(view, path,TRUE);
+	    menu = configureMenu(view,TRUE);
+	} */
+        if (menu) {
+            gtk_menu_popup_at_pointer (menu, (const GdkEvent *)event);
+        }   
+        return retval;
+    }
+    
+public:
+    static void
+    setMenuData(View<Type> * view, gchar *path, gboolean  items){
+        GtkMenu *menu = NULL;
+        switch (view->viewType()){
+            case (ROOTVIEW_TYPE):
+                 menu = (items)?
+                    RootView<Type>::popUpItem():
+                    RootView<Type>::popUp();
+                break;
+            case (LOCALVIEW_TYPE):
+                menu = (items)?
+                    LocalView<Type>::popUpItem():
+                    LocalView<Type>::popUp();
+                break;
+            case (FSTAB_TYPE):
+                 menu = (items)?
+                    FstabView<Type>::popUpItem():
+                    FstabView<Type>::popUp();
+                break;
+            default:
+                ERROR("ViewType %d not defined.\n", view->viewType());
+                break;
+        }
+        if (menu) {
+           auto oldPath = (gchar *)g_object_get_data(G_OBJECT(menu),"path");
+            g_free(oldPath);
+            DBG("*** set menu data path=%s\n", path);
+            g_object_set_data(G_OBJECT(menu),"path", path);
+            g_object_set_data(G_OBJECT(menu),"view", (void *)view);
+        }
+    }
+    
+    static GtkMenu *
+    configureMenu(View<Type> * view, gboolean items){
+        GtkMenu *menu = NULL;
+        switch (view->viewType()){
+            case (ROOTVIEW_TYPE):
+                if (items) {
+                    menu = rootItemPopUp;
+                    RootView<Type>::resetMenuItems();
+                } else {
+                    menu = rootPopUp;
+                    RootView<Type>::resetPopup();
+                }
+                break;
+            case (LOCALVIEW_TYPE):
+                if (items) {
+                    menu = localItemPopUp;
+                    LocalView<Type>::resetMenuItems();
+                } else {
+                    menu = localPopUp;
+                    LocalView<Type>::resetLocalPopup();
+                }
+                break;
+            case (FSTAB_TYPE):
+                if (items) {
+                    menu = fstabItemPopUp;
+                    FstabView<Type>::resetMenuItems();
+                } else {
+                    menu = fstabPopUp;
+                    FstabView<Type>::resetPopup();
+                }
+                break;
+            default:
+                ERROR("ViewType %d not defined.\n", view->viewType());
+                break;
+        }
+        return menu;
+    }
+
 
     static gboolean
     unhighlight (gpointer key, gpointer value, gpointer data){
@@ -469,6 +901,17 @@ public:
         ERROR("signal_drag_delete\n");
     }
     
+public:
+
+    static gboolean
+    buttonClick (GtkWidget *widget,
+                   GdkEventButton  *event,
+                   gpointer   data)
+    {
+	//auto view = (View<Type> *)data;
+	WARN("no action on button_click_f\n");
+        return FALSE;
+    }
 
 
 };

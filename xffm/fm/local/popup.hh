@@ -38,8 +38,6 @@ static const gchar *generalItems[]={
 namespace xf
 {
 
-static GtkMenu *localPopUp=NULL;
-static GtkMenu *localItemPopUp=NULL;
 template <class Type> class FstabView;
 template <class Type> class View;
 template <class Type> class BaseViewSignals;
