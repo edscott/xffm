@@ -232,14 +232,11 @@ private:
 	auto properties_p = (Properties<Type> *)data;
 	properties_p->dialog = GTK_WINDOW(gtk_window_new (GTK_WINDOW_TOPLEVEL));
 	gtk_window_set_type_hint(properties_p->dialog, GDK_WINDOW_TYPE_HINT_DIALOG);
+	gtk_window_set_title(properties_p->dialog, _("Properties management"));
 	auto mainBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_VERTICAL, 2));
 	gtk_container_add(GTK_CONTAINER(properties_p->dialog), GTK_WIDGET(mainBox));
-	auto title = GTK_LABEL(gtk_label_new(""));
-	auto markup = g_strdup_printf("<span color=\"blue\" size=\"larger\">%s</span>",
-		_("Properties management"));
-	gtk_label_set_markup(title, markup);
-	g_free(markup);
-	gtk_box_pack_start(mainBox, GTK_WIDGET(title), TRUE, FALSE, 0);
+	auto titlePath = GTK_LABEL(gtk_label_new(""));
+	gtk_box_pack_start(mainBox, GTK_WIDGET(titlePath), TRUE, FALSE, 0);
 
 	auto contentBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 1));
 	gtk_box_pack_start(mainBox, GTK_WIDGET(contentBox), TRUE, FALSE, 0);
@@ -263,7 +260,7 @@ private:
 	gtk_combo_box_set_active (GTK_COMBO_BOX(combo), 0);
 
 	auto label = GTK_LABEL(gtk_label_new(""));
-	markup = g_strdup_printf("<span size=\"xx-large\">%s</span>", 
+	auto markup = g_strdup_printf("<span size=\"xx-large\">%s</span>", 
 		_("File Mode:"));
 	gtk_label_set_markup(label, markup);
 	g_free(markup);
@@ -276,6 +273,7 @@ private:
 	auto modeLabel = GTK_LABEL(gtk_label_new(""));  //child 1
 	auto modeEntry = GTK_ENTRY(gtk_entry_new());  //child 2
 	auto modeInfo = GTK_LABEL(gtk_label_new(""));  //child 3
+	g_object_set_data(G_OBJECT(properties_p->modeBox), "titlePath", titlePath);
 	
 	gtk_box_pack_start(properties_p->modeBox, GTK_WIDGET(modeLabel), FALSE, FALSE, 0);
 	gtk_box_pack_start(properties_p->modeBox, GTK_WIDGET(modeEntry), FALSE, FALSE, 0);
@@ -289,7 +287,7 @@ private:
 
 	label = GTK_LABEL(gtk_label_new(""));
 	markup = g_strdup_printf("<span size=\"xx-large\">%s</span>", 
-		_("Source File:"));
+		_("File:"));
 	gtk_label_set_markup(label, markup);
 	g_free(markup);
 	gtk_box_pack_start(infoBox, GTK_WIDGET(label), FALSE, FALSE, 0);
@@ -383,8 +381,12 @@ private:
     static void
     setUpModeLabel(GtkBox *box, entry_t *entry, mode_t newMode){
 	auto properties_p = 
-	    (Properties<Type> *)g_object_get_data(G_OBJECT(box), 
-		    "properties_p");
+	    (Properties<Type> *)g_object_get_data(G_OBJECT(box), "properties_p");
+	auto titlePath = GTK_LABEL(g_object_get_data(G_OBJECT(box), "titlePath"));
+	auto markup = g_strdup_printf("<span color=\"blue\" size=\"larger\">%s</span>", entry->path);
+	gtk_label_set_markup(titlePath, markup);
+	g_free(markup);
+
 	GList *list = gtk_container_get_children (GTK_CONTAINER(box));
 	if (!list || !list->next) return;
 	auto modeLabel = GTK_LABEL(list->data); 
@@ -401,36 +403,79 @@ private:
 
 	gtk_label_set_markup(modeLabel, modeMarkup);
 	g_free(modeMarkup);
-	if (!setTrashInfo(entry->path, GTK_LABEL(list->next->next->data))) 
+	if (setFileInfo(entry->path, GTK_LABEL(list->next->next->data))) 
+	    gtk_widget_show(GTK_WIDGET(list->next->next->data));
+	else
 	    gtk_widget_hide(GTK_WIDGET(list->next->next->data));
 
 	g_list_free(list);
 
     }
 
+    static gchar *
+    trashInfo(const gchar *path, const gchar *item){
+	auto basename = g_path_get_basename(path);
+	auto keyPath =  g_strconcat(g_get_home_dir(),"/.local/share/Trash/info/", basename, ".trashinfo", NULL);
+	auto keyInfo = g_key_file_new();
+	auto loaded = 
+	    g_key_file_load_from_file(keyInfo, keyPath, (GKeyFileFlags)0, NULL);
+	g_free(basename);
+	if (!loaded) {
+	    DBG("*** unable to load %s\n", keyPath);
+	    g_free(keyPath);
+	    return NULL;
+	}
+	g_free(keyPath);
+	GError *error = NULL;
+	gchar **p = g_key_file_get_groups (keyInfo, NULL);
+	DBG("Reading from group %s\n", *p);
+	//auto value = g_key_file_get_string (keyInfo, "Trash Info", item, &error);
+	auto value = g_key_file_get_string (keyInfo, *p, item, &error);
+	g_strfreev(p);
+	if (error){
+	    DBG("trashInfo(%s): %s\n", item, error->message);
+	    g_error_free(error);
+	    value = NULL;
+        } 
+        g_key_file_free(keyInfo);
+        return value;
+	
+    }
+
     static gboolean 
-    setTrashInfo(const gchar *path, GtkLabel *label){
-	gboolean retval = FALSE;
+    setFileInfo(const gchar *path, GtkLabel *label){
+	gboolean retval = TRUE;
 	auto h = g_get_home_dir();
-	gchar *m = NULL;
+	//gchar *m = g_strdup("xxx fileinfo");
+	gchar *m1 = Util<Type>::statInfo(path);
+	gchar *m2 = Util<Type>::fileInfo(path);
+	gchar *m = g_strconcat(m1, "\n\n", m2, "\n",NULL);
+	g_free(m1);
+	g_free(m2);
 	gchar *dir = g_path_get_dirname(path);
 	if (strncmp(path, h, strlen(h))==0){
 	    if (strcmp(dir+strlen(h), "/.local/share/Trash/files")==0){
-		m = g_strdup_printf("<span size=\"large\" color=\"red\">%s: %s\n%s \n%s</span>", 
-		    _("Trashed"), "xxxxxxxx",
-		    _("Source Directory:"), "yyyyyy"
-			);
-		gtk_label_set_markup(label, m);
-		gtk_widget_show(GTK_WIDGET(label));
-		retval = TRUE;
+		auto trashDate = trashInfo(path, "DeletionDate");
+		if (strchr(trashDate, 'T'))*strchr(trashDate, 'T')=' ';
+		auto trashSource = trashInfo(path, "Path");
+		auto mt = g_strdup_printf("<span size=\"large\" color=\"red\">%s:\n<span color=\"blue\">%s</span>\n%s\n<span color=\"blue\">%s</span></span>", 
+		    _("Trashed"), trashDate?trashDate:_("service unavailable"),
+		    _("Source file:"), trashSource?trashSource:_("service unavailable"));
+		g_free(trashDate);
+		g_free(trashSource);
+		auto *g = g_strconcat(m,"\n", mt, NULL);
+		g_free(mt);
+		g_free(m);
+		m = g;
 
-	    } else {
-		DBG("not trash:\"%s\"\n", dir+strlen(h));
-	    }
+	    } else TRACE("not trash:\"%s\"\n", dir+strlen(h));
 
-	} else {
-	    DBG("not in %s\n", h);
-	}
+	} else TRACE("not in %s\n", h);
+
+	if (!m) retval = FALSE;
+	gtk_label_set_markup(label, m);
+	gtk_widget_show(GTK_WIDGET(label));
+
 	g_free(m);
 	g_free(dir);
 	return retval;

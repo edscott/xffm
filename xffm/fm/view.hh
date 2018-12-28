@@ -61,48 +61,51 @@ public:
     GtkIconView *iconView(void){return iconView_;}
     
     gboolean loadModel(const gchar *path){
+	return loadModel(path, this);
+    }
+    gboolean loadModel(const gchar *path, View<Type> *view){
 
         if (isTreeView){
 	    // hide iconview, show treeview
-	    gtk_widget_hide(GTK_WIDGET(this->page()->topScrolledWindow()));
-	    gtk_widget_show(GTK_WIDGET(this->page()->treeScrolledWindow()));
+	    gtk_widget_hide(GTK_WIDGET(view->page()->topScrolledWindow()));
+	    gtk_widget_show(GTK_WIDGET(view->page()->treeScrolledWindow()));
 	} else {
 	    // hide treeview, show iconview
-	    gtk_widget_hide(GTK_WIDGET(this->page()->treeScrolledWindow()));
-	    gtk_widget_show(GTK_WIDGET(this->page()->topScrolledWindow()));
+	    gtk_widget_hide(GTK_WIDGET(view->page()->treeScrolledWindow()));
+	    gtk_widget_show(GTK_WIDGET(view->page()->topScrolledWindow()));
 	}
 
-        this->setViewType(BaseSignals<Type>::getViewType(path));
-        this->setPath(path);
+        view->setViewType(BaseSignals<Type>::getViewType(path));
+        view->setPath(path);
         // stop current monitor
-        if (this->localMonitor_) {
+        if (view->localMonitor_) {
             localMonitorList = g_list_remove(localMonitorList, (void *)this->localMonitor_->monitor());
-            delete (this->localMonitor_);
-            this->localMonitor_ = NULL;
+            delete (view->localMonitor_);
+            view->localMonitor_ = NULL;
         }
-        if (this->fstabMonitor_) {
-            delete (this->fstabMonitor_);
-            this->fstabMonitor_ = NULL;
+        if (view->fstabMonitor_) {
+            delete (view->fstabMonitor_);
+            view->fstabMonitor_ = NULL;
         }
 
-        switch (this->viewType()){
+        switch (view->viewType()){
             case (ROOTVIEW_TYPE):
-                RootView<Type>::loadModel(this);
-                this->page()->updateStatusLabel(NULL);
+                RootView<Type>::loadModel(view);
+                view->page()->updateStatusLabel(NULL);
                 break;
             case (LOCALVIEW_TYPE):
 		if (strcmp(path, "xffm:local")==0) {
-		    this->localMonitor_ = LocalView<Type>::loadModel(this, g_get_home_dir());
+		    view->localMonitor_ = LocalView<Type>::loadModel(view, g_get_home_dir());
 		} else {
-		    this->localMonitor_ = LocalView<Type>::loadModel(this, path);
+		    view->localMonitor_ = LocalView<Type>::loadModel(view, path);
 		}
                 break;
             case (FSTAB_TYPE):
-                this->fstabMonitor_ = FstabView<Type>::loadModel(this);
-	        this->page()->updateStatusLabel(NULL);
+                view->fstabMonitor_ = FstabView<Type>::loadModel(view);
+	        view->page()->updateStatusLabel(NULL);
                 break;
             default:
-                ERROR("ViewType %d not defined.\n", this->viewType());
+                ERROR("ViewType %d not defined.\n", view->viewType());
                 break;
         }
     

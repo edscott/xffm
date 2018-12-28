@@ -166,7 +166,7 @@ public:
         g_signal_connect(G_OBJECT(page->pageLabelButton()), "clicked", 
                 BUTTON_CALLBACK(notebookSignals<Type>::on_remove_page), (void *)page); 
 	auto view = loadIconview(page, path);
-	page->setBaseView(view);
+	page->setView(view);
         page->setPageWorkdir(workdir); 
 	g_free(workdir);
 	/*if (!g_file_test(path, G_FILE_TEST_IS_DIR) 

@@ -72,6 +72,10 @@ public:
 	    DBG("activated with %s\n", command);
             this->csh_clean_start();
             const gchar *workdir = ((Page<Type> *)this)->workDir();
+	    if (!workdir || !g_file_test(workdir, G_FILE_TEST_IS_DIR)){
+		DBG("completionKeyboardEvent(): invalid workdir: %s\n", workdir);
+		return TRUE;
+	    }
             DBG("command at %s\n", workdir);
 	    this->run_lp_command(completionOutput_, workdir, command);
 	    this->csh_save_history(command);

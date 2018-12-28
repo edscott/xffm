@@ -14,18 +14,18 @@ class Page : public PageBase<double>
     // so you cannot use a static Type, like double.
     using dialog_c = Dialog<Type>;
 
-    using baseview_c = View<double>;
-    using gtk_c = Gtk<double>;
-    using util_c = Util<double>;
-    using run_c = Run<double>;
-    using runbutton_c = RunButton<double>;
-    using print_c = Print<double>;
-    using pagesignals_c = PageSignals<double>;
-    using settings_c = Settings<double>;
-    using completion_c = Completion<double>;
+    using baseview_c = View<Type>;
+    using gtk_c = Gtk<Type>;
+    using util_c = Util<Type>;
+    using run_c = Run<Type>;
+    using runbutton_c = RunButton<Type>;
+    using print_c = Print<Type>;
+    using pagesignals_c = PageSignals<Type>;
+    using settings_c = Settings<Type>;
+    using completion_c = Completion<Type>;
 
     dialog_c *parent_;
-    baseview_c *baseView_;
+    baseview_c *view_;
     
     GtkBox *pageChild_;
     GtkLabel *pageLabel_;
@@ -40,8 +40,8 @@ class Page : public PageBase<double>
 
 public:
 
-    baseview_c *view(void){ return baseView_;}
-    void setBaseView(baseview_c *view){baseView_ = view;}
+    View<Type> *view(void){ return view_;}
+    void setView(View<Type> *view){view_ = view;}
     dialog_c *parent(void){return parent_;}
     GtkBox *pageChild(void){ return pageChild_;}
     GtkLabel *pageLabel(void){ return pageLabel_;}

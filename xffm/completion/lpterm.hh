@@ -270,7 +270,7 @@ public:
 		    page_->setPageWorkdir(gg);
                 auto view = (View<Type> *)
                     g_object_get_data(G_OBJECT(page_->topScrolledWindow()), "baseView");
-                view->loadModel(gg);
+                view->loadModel(gg, page_->view());
 		    g_free(gg);
 		}
 		return TRUE;

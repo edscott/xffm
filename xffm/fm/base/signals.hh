@@ -638,6 +638,13 @@ public:
     getViewType(const gchar *path){
         if (!path) return ROOTVIEW_TYPE;
         if (g_file_test(path, G_FILE_TEST_EXISTS)) return (LOCALVIEW_TYPE);
+	if (g_path_is_absolute(path)){
+	    const gchar *m = _("This directory does not exist.");
+	    if (strstr(path,"/.local/share/Trash")) {
+		m = _("Trash is empty");
+	    }
+	    Gtk<Type>::quickHelp(mainWindow, _("Trash is empty"), "dialog-information");
+	}
         if (strcmp(path, "xffm:local")==0) return (LOCALVIEW_TYPE);
         if (strcmp(path, "xffm:root")==0) return (ROOTVIEW_TYPE);
         if (strcmp(path, "xffm:fstab")==0) return (FSTAB_TYPE);
@@ -646,6 +653,7 @@ public:
         if (strcmp(path, "xffm:ecryptfs")==0) return (ECRYPTFS_TYPE);
         if (strcmp(path, "xffm:cifs")==0) return (CIFS_TYPE);
         if (strcmp(path, "xffm:pkg")==0) return (PKG_TYPE);
+	
         ERROR("View::loadModel() %s not defined.\n", path);
         return (ROOTVIEW_TYPE);
     }
