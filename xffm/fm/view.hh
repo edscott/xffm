@@ -79,7 +79,7 @@ public:
         view->setPath(path);
         // stop current monitor
         if (view->localMonitor_) {
-            localMonitorList = g_list_remove(localMonitorList, (void *)this->localMonitor_->monitor());
+            localMonitorList = g_list_remove(localMonitorList, (void *)view->localMonitor_->monitor());
             delete (view->localMonitor_);
             view->localMonitor_ = NULL;
         }
