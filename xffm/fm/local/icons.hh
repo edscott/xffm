@@ -31,18 +31,23 @@ public:
 
     static gchar *
     get_iconname(const gchar *path, const gchar *mimetype){
-	if (!mimetype) return get_iconname(path);
+	if (!mimetype) return NULL; //return get_iconname(path);
 	if (strstr(mimetype, "image")){
 	    if (isTreeView) return g_strdup("image-x-generic");
-	    return path;
+	    return g_strdup(path);
 	}
+	return NULL;
     }
 
     static gchar *
     get_iconname(xd_t *xd_p){
         gchar *name;
         if (xd_p->icon) name = g_strdup(xd_p->icon);
-        else name = get_basic_iconname(xd_p);
+        else {
+	    name = get_iconname(xd_p->path, xd_p->mimetype);
+	    if (name) return name; 
+	    name = get_basic_iconname(xd_p);
+	}
 	TRACE("basic iconname: %s --> %s\n", xd_p->d_name, name);
         gchar *emblem = getEmblem(xd_p);
         TRACE("emblem=%s\n", emblem);

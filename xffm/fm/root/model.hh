@@ -196,14 +196,18 @@ public:
 #ifdef HAVE_PACMAN
 	auto icon_name = "package-x-generic/SE/emblem-archlinux/2.0/225";
 	auto highlight_name = "package-x-generic/NE/document-open/2.0/225/SE/emblem-archlinux/2.0/225";
+	auto pkg = "pacman";
+
 #else 
 #  ifdef HAVE_EMERGE
 	auto icon_name = "package-x-generic/SE/emblem-gentoo/2.0/225";
 	auto highlight_name = "package-x-generic/NE/document-open/2.0/225/SE/emblem-gentoo/2.0/225";
+	auto pkg = "emerge";
 
 #  else 
 	auto icon_name = "package-x-generic/SE/x-package-repository/2.0/225";
 	auto highlight_name = "package-x-generic/NE/document-open/2.0/225/SE/x-package-repository/2.0/225";
+	auto pkg = "pkg";
 
 #  endif
 #endif
@@ -215,7 +219,7 @@ public:
 
 	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
 	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
-		DISPLAY_NAME, utf_name,
+		DISPLAY_NAME, pkg, //utf_name,
 		ACTUAL_NAME, name,
                 PATH, name,
 		ICON_NAME, icon_name,

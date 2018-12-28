@@ -379,6 +379,7 @@ private:
 
         
         gchar *utf_name = Util<Type>::utf_string(xd_p->d_name);
+        //gchar *icon_name = LocalIcons<Type>::get_iconname(xd_p->path, xd_p->mimetype);
         gchar *icon_name = LocalIcons<Type>::get_iconname(xd_p);
 	TRACE("icon name for %s is %s\n", xd_p->d_name, icon_name);
         
@@ -405,7 +406,7 @@ private:
                 g_free(t);
             }
         }
-        gchar *highlight_name;
+        gchar *highlight_name=NULL;
         if (is_dir){
             if (strcmp(xd_p->d_name, "..")==0) {
                 highlight_name = g_strdup("go-up/NW/go-up-symbolic/2.0/225");
@@ -421,6 +422,7 @@ private:
             }
             g_free(h_name);
         }
+	if (!highlight_name) highlight_name = LocalIcons<Type>::get_iconname(xd_p);;
        
         auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
         auto normal_pixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -48);

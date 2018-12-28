@@ -34,6 +34,11 @@ class RootView  :
     
     static void
     resetMenuItems(void) {
+        auto path = (const gchar *)g_object_get_data(G_OBJECT(rootItemPopUp), "path");
+	gboolean isBookMark = RootView<Type>::isBookmarked(path);
+	auto menuitem = GTK_WIDGET(g_object_get_data(G_OBJECT(rootItemPopUp), "Remove bookmark"));
+	gtk_widget_set_sensitive(menuitem, isBookMark);
+
     }
 
     static void
@@ -52,7 +57,7 @@ private:
          menuItem_t item[]={
             {N_("View as list"), (void *)LocalPopUp<Type>::toggleView,  
 		(void *)"TreeView", "window"},
-            {N_("Add bookmark"), (void *)BasePopUp<Type>::noop, NULL, NULL},
+            //{N_("Add bookmark"), (void *)BasePopUp<Type>::noop, NULL, NULL},
             {N_("Empty trash bin"), (void *)emptyTrash, NULL, NULL},
             {NULL,NULL,NULL, NULL}};
 	rootPopUp = BasePopUp<Type>::createPopup(item); 
@@ -66,11 +71,24 @@ private:
 	menuItem_t item[]=
         {
 	    {N_("Open in New Tab"), (void *)LocalPopUp<Type>::newTab, NULL, NULL},
-            {N_("Remove bookmark"), (void *)BasePopUp<Type>::noop, NULL, NULL},
+            {N_("Remove bookmark"), (void *)removeBookmarkItem, NULL, NULL},
 	     {NULL,NULL,NULL,NULL}
         };
 	rootItemPopUp = BasePopUp<Type>::createPopup(item); 
+        auto text = g_strdup_printf("Xffm+-%s", VERSION);
+        BasePopUp<Type>::changeTitle(rootItemPopUp, text, NULL);
+        g_free(text);
         return rootItemPopUp;
+    }
+
+    static void
+    removeBookmarkItem(GtkMenuItem *menuItem, gpointer data)
+    {
+        DBG("Remove bookmark\n");
+	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
+        if (!RootView<Type>::removeBookmark(path)) return;
+	auto view =  (View<Type> *)g_object_get_data(G_OBJECT(data), "view");
+	view->reloadModel();
     }
 
     static void

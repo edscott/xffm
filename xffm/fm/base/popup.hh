@@ -77,7 +77,7 @@ public:
         auto menu = GTK_MENU(gtk_menu_new());
 	// Create title element
 	GtkWidget *title = gtk_c::menu_item_new(NULL, ""); 
-	gtk_widget_set_sensitive(title, FALSE);
+	gtk_widget_set_sensitive(title, TRUE);
 	gtk_widget_show (title);
 	g_object_set_data(G_OBJECT(menu), "title", title);
 	gtk_container_add (GTK_CONTAINER (menu), title);
