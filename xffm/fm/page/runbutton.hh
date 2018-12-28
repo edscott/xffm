@@ -149,7 +149,16 @@ public:
 	gtk_widget_set_sensitive(GTK_WIDGET(title), FALSE);
 	gtk_widget_show (GTK_WIDGET(title));
 	gtk_container_add (GTK_CONTAINER (menu_), GTK_WIDGET(title));
-	gchar *markup = g_strdup_printf("<span color=\"blue\" size=\"larger\">%s\n</span><span color=\"red\" size=\"larger\">pid: %d</span>", command_, grandchild_);
+	// No good for commands with && or >
+	gchar *markup1 = g_strdup( command_);
+	for (auto p = markup1; p && *p; p++){
+	    if (*p == '&') *p='^';
+	    if (*p == '>') *p='!';
+	    if (*p == '<') *p='!';
+	}
+	
+	gchar *markup = g_strdup_printf("<span color=\"blue\" size=\"larger\">%s\n</span><span color=\"red\" size=\"larger\">pid: %d</span>", markup1, grandchild_);
+	g_free(markup1);	
 	gtk_c::menu_item_content(title, NULL, markup, -48);
         g_free(markup);
 

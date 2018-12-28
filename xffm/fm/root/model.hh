@@ -131,6 +131,9 @@ public:
 	auto name = g_strdup_printf("%s/.local/share/Trash/files", g_get_home_dir());
 	auto utf_name = util_c::utf_string(_("Trash bin"));
 	auto icon_name = "user-trash";
+	auto trash = g_build_filename(g_get_home_dir(), ".local/share/Trash", NULL);
+	if (g_file_test(trash, G_FILE_TEST_EXISTS))icon_name = "user-trash-full";
+	    
 	auto highlight_name = "user-trash/NE/document-open/2.0/225";
         auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
 	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);

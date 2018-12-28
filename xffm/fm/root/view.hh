@@ -53,6 +53,7 @@ private:
             {N_("View as list"), (void *)LocalPopUp<Type>::toggleView,  
 		(void *)"TreeView", "window"},
             {N_("Add bookmark"), (void *)BasePopUp<Type>::noop, NULL, NULL},
+            {N_("Empty trash bin"), (void *)emptyTrash, NULL, NULL},
             {NULL,NULL,NULL, NULL}};
 	rootPopUp = BasePopUp<Type>::createPopup(item); 
         auto text = g_strdup_printf("Xffm+-%s", VERSION);
@@ -71,6 +72,17 @@ private:
 	rootItemPopUp = BasePopUp<Type>::createPopup(item); 
         return rootItemPopUp;
     }
+
+    static void
+    emptyTrash(GtkMenuItem *menuItem, gpointer data) {
+	auto trash = g_build_filename(g_get_home_dir(), ".local/share/Trash", NULL);
+	Gio<Type>::doIt((GtkDialog *)NULL, trash, MODE_RM);
+	auto view = (View<Type> *)g_object_get_data(G_OBJECT(data), "view");
+	g_free(trash);
+	view->reloadModel();
+
+    }
+	
 
 };
 }
