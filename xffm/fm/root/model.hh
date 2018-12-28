@@ -27,6 +27,7 @@ public:
 #ifdef HAVE_LIBXML2
 	addPkgItem(treeModel);
 #endif
+	addTrashItem(treeModel);
         addLocalBookmarks(treeModel);
 
 	return TRUE;
@@ -120,6 +121,34 @@ public:
 		HIGHLIGHT_PIXBUF, highlight_pixbuf,
 		TOOLTIP_TEXT,_("This is the user's home directory"),
 		-1);
+	g_free(utf_name);
+    }
+
+    static void
+    addTrashItem(GtkTreeModel *treeModel){
+ 	GtkTreeIter iter;
+	// Home
+	auto name = g_strdup_printf("%s/.local/share/Trash/files", g_get_home_dir());
+	auto utf_name = util_c::utf_string(_("Trash bin"));
+	auto icon_name = "user-trash";
+	auto highlight_name = "user-trash/NE/document-open/2.0/225";
+        auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
+	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
+	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
+
+	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
+	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
+		DISPLAY_NAME, utf_name,
+		ACTUAL_NAME, name,
+                PATH, name,
+		ICON_NAME, icon_name,
+                TREEVIEW_PIXBUF, treeViewPixbuf, 
+		DISPLAY_PIXBUF, normal_pixbuf,
+		NORMAL_PIXBUF, normal_pixbuf,
+		HIGHLIGHT_PIXBUF, highlight_pixbuf,
+		TOOLTIP_TEXT,_("This is the user's home directory"),
+		-1);
+	g_free(name);
 	g_free(utf_name);
     }
 

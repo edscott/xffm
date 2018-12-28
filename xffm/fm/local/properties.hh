@@ -273,10 +273,13 @@ private:
 	properties_p->modeBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_VERTICAL, 1));
 	g_object_set_data(G_OBJECT(properties_p->modeBox), "properties_p", properties_p);
 	g_object_set_data(G_OBJECT(properties_p->modeBox), "modeList", NULL);
-	auto modeLabel = GTK_LABEL(gtk_label_new(""));
-	auto modeEntry = GTK_ENTRY(gtk_entry_new());
+	auto modeLabel = GTK_LABEL(gtk_label_new(""));  //child 1
+	auto modeEntry = GTK_ENTRY(gtk_entry_new());  //child 2
+	auto modeInfo = GTK_LABEL(gtk_label_new(""));  //child 3
+	
 	gtk_box_pack_start(properties_p->modeBox, GTK_WIDGET(modeLabel), FALSE, FALSE, 0);
 	gtk_box_pack_start(properties_p->modeBox, GTK_WIDGET(modeEntry), FALSE, FALSE, 0);
+	gtk_box_pack_start(properties_p->modeBox, GTK_WIDGET(modeInfo), FALSE, FALSE, 0);
 	gtk_box_pack_start(infoBox, GTK_WIDGET(properties_p->modeBox), FALSE, FALSE, 0);
 	g_object_set_data(G_OBJECT(properties_p->imageBox), "modeBox", properties_p->modeBox);
 	g_object_set_data(G_OBJECT(modeEntry), "modeBox", properties_p->modeBox);
@@ -398,6 +401,39 @@ private:
 
 	gtk_label_set_markup(modeLabel, modeMarkup);
 	g_free(modeMarkup);
+	if (!setTrashInfo(entry->path, GTK_LABEL(list->next->next->data))) 
+	    gtk_widget_hide(GTK_WIDGET(list->next->next->data));
+
+	g_list_free(list);
+
+    }
+
+    static gboolean 
+    setTrashInfo(const gchar *path, GtkLabel *label){
+	gboolean retval = FALSE;
+	auto h = g_get_home_dir();
+	gchar *m = NULL;
+	gchar *dir = g_path_get_dirname(path);
+	if (strncmp(path, h, strlen(h))==0){
+	    if (strcmp(dir+strlen(h), "/.local/share/Trash/files")==0){
+		m = g_strdup_printf("<span size=\"large\" color=\"red\">%s: %s\n%s \n%s</span>", 
+		    _("Trashed"), "xxxxxxxx",
+		    _("Source Directory:"), "yyyyyy"
+			);
+		gtk_label_set_markup(label, m);
+		gtk_widget_show(GTK_WIDGET(label));
+		retval = TRUE;
+
+	    } else {
+		DBG("not trash:\"%s\"\n", dir+strlen(h));
+	    }
+
+	} else {
+	    DBG("not in %s\n", h);
+	}
+	g_free(m);
+	g_free(dir);
+	return retval;
     }
 
     static void
