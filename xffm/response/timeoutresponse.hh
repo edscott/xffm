@@ -11,12 +11,13 @@ class TimeoutResponse {
     using gtk_c = Gtk<double>;
     using util_c = Util<double>;
 public:
+
     static void
     dialog(GtkWindow *parent, const gchar *message, const gchar *icon){
-	dialog(parent, message, icon, 3);
+	dialogFull(parent, message, icon, -48, 3);
     }
     static void
-    dialog(GtkWindow *parent, const gchar *message, const gchar *icon, gint delay){
+    dialogFull(GtkWindow *parent, const gchar *message, const gchar *icon, gint iconSize, gint delay){
         if (!icon) icon = "emblem-important";
         if (!message) message = "<span size=\"larger\" color=\"blue\">Custom message markup appears <span color=\"red\">here</span></span>";
          // Create the widgets
@@ -36,7 +37,7 @@ public:
          g_free(markup);
          
          // Add the label, and show everything we have added
-        auto pixbuf = Pixbuf<Type>::get_pixbuf(icon, -48);
+        auto pixbuf = Pixbuf<Type>::get_pixbuf(icon, iconSize);
         if (pixbuf) {
             auto image = gtk_image_new_from_pixbuf(pixbuf);
             if (image) {

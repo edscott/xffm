@@ -1,4 +1,10 @@
 bug: 
+ > save and restore size for xffind
+ > add is image function to preview functinality
+ > bug: .cpp is resolving as image type (by magic?)
+ > use libmagic preferably instead of perl if available
+ > printout optional and required libraries found in configure step.
+ 
  . multiple windows will trigger multiple timeout dialogs on mount items.
    (maybe define an xatom for first one, value = 1 and -1 when none is defined)
  . timeout dialog requires a progress bar on timeout

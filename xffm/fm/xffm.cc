@@ -32,7 +32,7 @@ main (int argc, char *argv[]) {
     xffmProgram = argv[0];
 
     auto fm = new(xf::Fm<double>)(argc, argv);
-    xf::TimeoutResponse<double>::dialog(NULL, "Xffm+", "rodent_logo", 5);
+   // xf::TimeoutResponse<double>::dialogFull(NULL, "Xffm+", "rodent_logo", -96, 5);
     gtk_main();
     delete(fm);
     return 0;

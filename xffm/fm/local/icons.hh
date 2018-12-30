@@ -34,7 +34,9 @@ public:
 	if (!mimetype) return NULL; //return get_iconname(path);
 	if (strstr(mimetype, "image")){
 	    if (isTreeView) return g_strdup("image-x-generic");
-	    return g_strdup(path);
+	    if (Gtk<Type>::isImage(mimetype)) return g_strdup(path);
+	    return g_strdup("image-x-generic");
+
 	}
 	return NULL;
     }
@@ -45,10 +47,12 @@ public:
         if (xd_p->icon) name = g_strdup(xd_p->icon);
         else {
 	    name = get_iconname(xd_p->path, xd_p->mimetype);
-	    if (name) return name; 
-	    name = get_basic_iconname(xd_p);
+	    if (!name) {
+		name = get_basic_iconname(xd_p);
+	    }
 	}
-	TRACE("basic iconname: %s --> %s\n", xd_p->d_name, name);
+	if (g_path_is_absolute(name)) return name; 
+	WARN("basic iconname: %s --> %s\n", xd_p->d_name, name);
         gchar *emblem = getEmblem(xd_p);
         TRACE("emblem=%s\n", emblem);
 	if (!name) name = g_strdup("image-missing");

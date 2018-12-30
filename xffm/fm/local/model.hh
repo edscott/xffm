@@ -412,11 +412,12 @@ private:
             }
         }
         gchar *highlight_name=NULL;
-        if (is_dir){
+	if (g_path_is_absolute(icon_name)) highlight_name = g_strdup(icon_name);
+        if (!highlight_name && is_dir){
             if (strcmp(xd_p->d_name, "..")==0) {
                 highlight_name = g_strdup("go-up/NW/go-up-symbolic/2.0/225");
             } else highlight_name = g_strdup("document-open");
-        } else {
+        } else if (!highlight_name){
             gchar *h_name = LocalIcons<Type>::get_iconname(xd_p);
             if (xd_p->st && U_RX(xd_p->st->st_mode)) {
                 highlight_name = 
@@ -427,7 +428,6 @@ private:
             }
             g_free(h_name);
         }
-	if (!highlight_name) highlight_name = LocalIcons<Type>::get_iconname(xd_p);;
        
         auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
         auto normal_pixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -48);

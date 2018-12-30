@@ -12,6 +12,39 @@ template <class Type>
 class Gtk{
     typedef Pixbuf<double> pixbuf_c;
 public:
+    static gboolean
+    isImage(const gchar *mimetype){
+	static GSList *pix_mimetypes = NULL;
+	static gsize initialized = 0;
+	if (g_once_init_enter(&initialized)){
+	    // This gdk call is thread safe. 
+	    GSList *pix_formats = gdk_pixbuf_get_formats ();// check OK
+	    GSList *list = pix_formats;
+	    for(; list && list->data; list = list->next) {
+		gchar **pix_mimetypes_p;
+		GdkPixbufFormat *fmt = (GdkPixbufFormat *)list->data;
+		// This gdk call is thread safe.
+		pix_mimetypes_p = gdk_pixbuf_format_get_mime_types (fmt);// check OK
+		pix_mimetypes = g_slist_prepend(pix_mimetypes, pix_mimetypes_p);
+	    }
+	    g_slist_free(pix_formats);
+	    g_once_init_leave(&initialized, 1);
+	}
+	/* check for image support types */
+	GSList *list = pix_mimetypes;
+	for(; list && list->data; list = list->next) {
+	    gchar **pix_mimetypes_p = (gchar **)list->data;
+	    for(; pix_mimetypes_p && *pix_mimetypes_p; pix_mimetypes_p++) {
+		TRACE("allowable pix_format=%s --> %s\n", *pix_mimetypes_p, mimetype);
+		if(g_ascii_strcasecmp (*pix_mimetypes_p, mimetype) == 0) {
+		    TRACE("gotcha: allowable pix_format=%s --> %s\n", *pix_mimetypes_p, mimetype);
+		    return TRUE;
+		}
+	    }
+	}
+	return FALSE;
+    }
+
     static gint 
     get_icon_size(const gchar *name){
 	if (strcmp(name, "..")==0) return GTK_ICON_SIZE_DND;
