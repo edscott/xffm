@@ -1,21 +1,8 @@
-\#0  0x00007fc81b40f41b in gtk_label_set_markup () at /usr/lib/libgtk-3.so.0
-#1  0x0000563a27debe99 in xf::HButtonBox<double>::setStatusLabel(char const*) (this=0x563a29a4ae40, text=0x7fc8
-#2  0x0000563a27de6147 in xf::Page<double>::updateStatusLabel(char const*) (this=0x563a29a4ae40, text=0x7fc8000
-#3  0x0000563a27df8334 in xf::BaseMonitor<double>::updateFileCountLabel() (this=0x563a2a193a00) at /home/edscot
-#4  0x0000563a27df28a2 in xf::LocalMonitor<double>::monitor_f(_GFileMonitor*, _GFile*, _GFile*, GFileMonitorEve
-    (mon=0x563a2a132860, first=0x7fc7c8043a80, second=0x0, event=G_FILE_MONITOR_EVENT_CREATED, data=0x563a2a193
-#5  0x00007fc817c161c8 in ffi_call_unix64 () at /usr/lib/libffi.so.6
-#6  0x00007fc817c15c2a in ffi_call () at /usr/lib/libffi.so.6
-#7  0x00007fc81ad4ee08 in g_cclosure_marshal_generic_va () at /usr/lib/libgobject-2.0.so.0
-#8  0x00007fc81ad3616e in g_signal_emit_valist () at /usr/lib/libgobject-2.0.so.0
-#9  0x00007fc81ad36a80 in g_signal_emit () at /usr/lib/libgobject-2.0.so.0
-#10 0x00007fc81adac8ba in  () at /usr/lib/libgio-2.0.so.0
-#11 0x00007fc81ac5e3cf in g_main_context_dispatch () at /usr/lib/libglib-2.0.so.0
-#12 0x00007fc81ac5ff89 in  () at /usr/lib/libglib-2.0.so.0
-#13 0x00007fc81ac60f62 in g_main_loop_run () at /usr/lib/libglib-2.0.so.0
-#14 0x00007fc81b4231af in gtk_main () at /usr/lib/libgtk-3.so.0
-#15 0x0000563a27dcbfe4 in main(int, char**) (argc=1, argv=0x7fff2e5bd118) at /home/edscott/xffm+/xffm/fm/xffm.c
-
+bug: 
+ . multiple windows will trigger multiple timeout dialogs on mount items.
+   (maybe define an xatom for first one, value = 1 and -1 when none is defined)
+ . timeout dialog requires a progress bar on timeout
+ . timeout dialog requires a "Dismiss" button.
 
 
 Important: Save and restore size of find dialog if user resizes it, but

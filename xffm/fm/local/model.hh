@@ -169,7 +169,11 @@ public:
 #ifdef HAVE_STRUCT_DIRENT_D_TYPE
         xd_p->d_type = d->d_type;
         // stat symbolic links now...
-        if (xd_p->d_type == DT_LNK){
+	
+        if (xd_p->d_type == DT_DIR){
+            xd_p->mimetype = "inode/directory";
+	}
+	else if (xd_p->d_type == DT_LNK){
             xd_p->st = (struct stat *)calloc(1, sizeof(struct stat));
             stat(xd_p->path, xd_p->st);
             xd_p->mimetype = Mime<Type>::mimeType(xd_p->path, xd_p->st);
@@ -183,6 +187,7 @@ public:
         }
 
 #else
+#warning "FIXME: undefined HAVE_STRUCT_DIRENT_D_TYPE
         xd_p->d_type = 0;
 #endif
         return xd_p;

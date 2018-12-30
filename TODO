@@ -1,3 +1,6 @@
+Xffm+ is a gtk3 application. Not entirely compatible with gtk2 linked apps (and maybe even other X apps, YMMV). In particular, drag and drop operations may not work correctly, since gtk3 protocols have been altered. This is most noticeable if you use gvim and are use to open files by drag and drop. The first file may open correctly, but subsequent files will not. This is not an xffm+ bug, but rather a gtk3 detail. The fix for gvim is to compile with gtk3. This is the current default (december 2018) for ArchLinux and for Gentoo will require compilation with the gtk3 USE flag set (see /etc/portage/make.conf).
+
+
 1. History of xffm
    xftree, gtk1.x
    xffm gtk2.x

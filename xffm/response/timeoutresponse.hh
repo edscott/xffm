@@ -13,6 +13,10 @@ class TimeoutResponse {
 public:
     static void
     dialog(GtkWindow *parent, const gchar *message, const gchar *icon){
+	dialog(parent, message, icon, 3);
+    }
+    static void
+    dialog(GtkWindow *parent, const gchar *message, const gchar *icon, gint delay){
         if (!icon) icon = "emblem-important";
         if (!message) message = "<span size=\"larger\" color=\"blue\">Custom message markup appears <span color=\"red\">here</span></span>";
          // Create the widgets
@@ -51,7 +55,7 @@ public:
 	 gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER_ON_PARENT);
          gtk_widget_show_all(GTK_WIDGET(dialog));
          time_t now = time(NULL);
-         while (time(NULL) < now + 3) {
+         while (time(NULL) < now + delay) {
             while (gtk_events_pending()) gtk_main_iteration();
           //  usleep(100000);
          }
