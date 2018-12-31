@@ -188,7 +188,7 @@ public:
 
         // Path is set on buttonpress signal...
         //auto path = (const gchar *)g_object_get_data(G_OBJECT(localPopUp), "path");
-	DBG("resetLocalPopup path=%s\n", view->path());
+	TRACE("resetLocalPopup path=%s\n", view->path());
         if (!view->path()){
 	    ERROR("resetLocalPopup: path is NULL\n");
 	    return;
@@ -282,12 +282,12 @@ private:
 
     static void
     openWithDialog(const gchar *path, const gchar *mimetype, const gchar *fileInfo){
-        WARN("openWithDialog(): path=%s\n", path);
+        TRACE("openWithDialog(): path=%s\n", path);
         gboolean state;
         if (strchr(path, '\'')){
             gchar **f = g_strsplit(path,"\'", 2);
             state = g_file_test(f[0], G_FILE_TEST_IS_REGULAR);
-            WARN("%s is regular: %d\n", f[0], state);
+            TRACE("%s is regular: %d\n", f[0], state);
             g_strfreev(f);
         } else {
             state = g_file_test(path, G_FILE_TEST_IS_REGULAR);
@@ -305,7 +305,7 @@ private:
 
     static void
     showDirectoryItems(const gchar *path){
-	WARN("showDirectoryItems: %s\n", path);
+	TRACE("showDirectoryItems: %s\n", path);
         // Directory items...
         const gchar *directoryItems[] ={
             "title",
@@ -563,7 +563,7 @@ private:
         entryResponse->setEntryLabel(_("Regular expression"));
         auto response = entryResponse->runResponse();
         delete entryResponse;
-	WARN("response=%s\n", response);
+	TRACE("response=%s\n", response);
         if (!response) return;
         g_strstrip(response);
 	if (strlen(response)){
@@ -654,7 +654,7 @@ public:
 	auto view =  (View<Type> *)g_object_get_data(G_OBJECT(data), "view");
         auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
         if (!FstabView<Type>::mountPath(view, path, NULL)){
-            DBG("localpopup.hh:: mount command failed\n");
+            ERROR("localpopup.hh:: mount command failed\n");
         } 
     }
 
@@ -679,7 +679,7 @@ public:
     static void
     removeBookmark(GtkMenuItem *menuItem, gpointer data)
     {
-        DBG("Remove bookmark\n");
+        TRACE("Remove bookmark\n");
 	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
         if (!RootView<Type>::removeBookmark(path)) return;
 	auto view =  (View<Type> *)g_object_get_data(G_OBJECT(data), "view");
@@ -733,7 +733,7 @@ public:
         
         auto response = entryResponse->runResponse();
         delete entryResponse;
-	WARN("response=%s\n", response);
+	TRACE("response=%s\n", response);
 	if (response){
 	    g_strstrip(response);
 	    Settings<Type>::setSettingString("Tarballs", "Default", response);
@@ -753,7 +753,7 @@ public:
                 pid_t pid = page->command(command);
 
                 // open follow dialog for long commands...
-		WARN("command= %s\n", command);
+		TRACE("command= %s\n", command);
                 auto target = g_strdup_printf("%s/%s.tar.bz2", response, basename);
                 const gchar *arg[] = {
                     "tar",
@@ -778,7 +778,7 @@ public:
     {
 	auto command = (gchar *)g_object_get_data(G_OBJECT(menuItem), "command");
 	// execute command...
-        DBG("command %s\n", command);
+        TRACE("command %s\n", command);
 	// get view
 	auto view =  (View<Type> *)g_object_get_data(G_OBJECT(data), "view");
 	// get page
@@ -836,7 +836,7 @@ public:
     static void
     runWith(GtkMenuItem *menuItem, gpointer data){
 	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
-        WARN("runWith: path = %s\n", path);
+        TRACE("runWith: path = %s\n", path);
 	auto displayPath = util_c::valid_utf_pathstring(path);
 	auto markup = 
 	    g_strdup_printf("<span color=\"blue\" size=\"larger\"><b>%s</b></span>\n<span color=\"red\">(%s)</span>", displayPath, 
@@ -934,7 +934,7 @@ public:
         if (!newName) return;
          g_strstrip(newName);
         if (strlen(newName)){
-            DBG("*** symlink %s to %s\n", path, newName);
+            TRACE("*** symlink %s to %s\n", path, newName);
             Gio<Type>::doIt(path, newName, MODE_LINK);
         }
         g_free(newName);
@@ -948,7 +948,7 @@ public:
         if (!newName) return;
         g_strstrip(newName);
         if (strlen(newName)){
-            DBG("*** duplicate %s to %s\n", path, newName);
+            TRACE("*** duplicate %s to %s\n", path, newName);
             Gio<Type>::doIt(path, newName, MODE_COPY);
         }
         g_free(newName);
@@ -962,7 +962,7 @@ public:
         if (!newName) return;
         g_strstrip(newName);
         if (strlen(newName)){
-            DBG("*** rename %s to %s\n", path, newName);
+            TRACE("*** rename %s to %s\n", path, newName);
             Gio<Type>::doIt(path, newName, MODE_MOVE);
         }
         g_free(newName);

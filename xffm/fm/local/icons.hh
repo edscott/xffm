@@ -339,7 +339,7 @@ private:
             }
             else {
                 // no access:
-                DBG("no access: %s\n", path); 
+                TRACE("no access: %s\n", path); 
                 return g_strdup("/NW/dialog-error/3.0/180");
             }
         }

@@ -74,7 +74,7 @@ public:
             }
             pclose(pipe);
         }
-	WARN("%s alive=%d\n", c, alive);
+	TRACE("%s alive=%d\n", c, alive);
         g_free(c);
         g_free(s);
         return (alive);

@@ -225,9 +225,9 @@ public:
     void setPageWorkdir(const gchar *dir){
         // Avoid multiple resets...
         //if (this->workDir() && strcmp(dir, this->workDir())==0) return;
-	WARN("setPageWorkdir: %s\n", dir);
+	TRACE("setPageWorkdir: %s\n", dir);
 	this->setWorkDir(dir);
-	WARN("update_pathbar: %s\n", dir);
+	TRACE("update_pathbar: %s\n", dir);
 	this->update_pathbar(dir);
         if (g_file_test(dir, G_FILE_TEST_IS_DIR)){
 	    print_c::print(this->output(), "green", g_strdup_printf("cd %s\n", dir));

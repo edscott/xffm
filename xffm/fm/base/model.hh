@@ -110,7 +110,7 @@ public:
 
     gint
     keyboardEvent( GdkEventKey * event) {
-        DBG("baseModel key\n");
+        TRACE("baseModel key\n");
         return TRUE;
     }
 

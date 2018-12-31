@@ -69,14 +69,14 @@ public:
         // On activate, run the lpcommand.
         if((event->keyval == GDK_KEY_Return) || (event->keyval == GDK_KEY_KP_Enter)) {
 	    gchar *command = print_c::get_current_text(completionInput_);
-	    DBG("activated with %s\n", command);
+	    TRACE("activated with %s\n", command);
             this->csh_clean_start();
             const gchar *workdir = ((Page<Type> *)this)->workDir();
 	    if (!workdir || !g_file_test(workdir, G_FILE_TEST_IS_DIR)){
-		DBG("completionKeyboardEvent(): invalid workdir: %s\n", workdir);
+		ERROR("completionKeyboardEvent(): invalid workdir: %s\n", workdir);
 		return TRUE;
 	    }
-            DBG("command at %s\n", workdir);
+            TRACE("command at %s\n", workdir);
 	    this->run_lp_command(completionOutput_, workdir, command);
 	    this->csh_save_history(command);
 	    print_c::clear_text(completionInput_);
@@ -91,7 +91,7 @@ public:
         }
         // tab for bash completion.
         if(event->keyval == GDK_KEY_Tab) {
-            WARN("event->keyval == GDK_KEY_Tab\n");
+            TRACE("event->keyval == GDK_KEY_Tab\n");
             BashCompletion<Type>::bash_completion(completionInput_, completionOutput_, ((Page<Type> *)this)->workDir());
             return TRUE;
         }

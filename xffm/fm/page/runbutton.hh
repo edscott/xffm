@@ -28,7 +28,7 @@ public:
 	    return;
 	}
 
-        DBG("apply data: (%p) -> %p\n", (void *)menuitem, (void *)run_button_p);
+        TRACE("apply data: (%p) -> %p\n", (void *)menuitem, (void *)run_button_p);
 	run_button_p->sendSignal(signal_id);
     }
 	
@@ -87,7 +87,7 @@ public:
 	command_ = g_strdup (exec_command);
 	icon_id_ = NULL;
 	tip_ = NULL;
-	DBG ("RunButton::setup_run_button_thread: controller/process=%d/%d\n", (int)child, (gint)grandchild_);
+	TRACE ("RunButton::setup_run_button_thread: controller/process=%d/%d\n", (int)child, (gint)grandchild_);
 
 	create_menu();
 	page_->thread_create("RunButton::RunButton: run_wait_f", 
@@ -186,7 +186,7 @@ public:
 	using pixbuf_icons_c = Icons<Type>;
 	
 	/*if (run_button_p->inShell()) {
-	    WARN("run_button_p->inShell\n");
+	    TRACE("run_button_p->inShell\n");
 	    run_button_p->set_icon_id("utilities-terminal");
 	} else */
 	{
@@ -195,7 +195,7 @@ public:
 	    gchar *icon_id = NULL;
 	    if (args && args[0]) {
 		icon_id = g_path_get_basename(args[0]);
-		WARN("RunButton::run_button_setup: attempting icon for \"%s\"\n", icon_id);
+		TRACE("RunButton::run_button_setup: attempting icon for \"%s\"\n", icon_id);
 		// xterm exception
 		if (strcmp(icon_id, "xterm")==0){
 		    g_free(icon_id);
@@ -231,7 +231,7 @@ public:
 	run_button_p->set_tip(tip);
 	g_free(tip);
 	g_free(command);
-	DBG("RunButton::new_run_button: icon_id_=%s  command_=%s pid_=%d grandchild_=%d tip_=%s\n", run_button_p->icon_id(), run_button_p->command(), run_button_p->pid(), run_button_p->grandchild(), run_button_p->tip());
+	TRACE("RunButton::new_run_button: icon_id_=%s  command_=%s pid_=%d grandchild_=%d tip_=%s\n", run_button_p->icon_id(), run_button_p->command(), run_button_p->pid(), run_button_p->grandchild(), run_button_p->tip());
 	return ;
     }
 ////////////////////////////////////////////////////////////////////
@@ -258,7 +258,7 @@ public:
 	gtk_widget_show (GTK_WIDGET(button));
 	// flush gtk
 	while (gtk_events_pending()) gtk_main_iteration();
-	DBG ("make_run_data_button: button made for grandchildPID=%d\n", (int)run_button_p->pid());
+	TRACE ("make_run_data_button: button made for grandchildPID=%d\n", (int)run_button_p->pid());
 	return NULL;
     }
 
@@ -272,7 +272,7 @@ public:
 	// before gtk has fully created the little run button.
 	//
 	util_c::context_function(make_run_data_button, data);
-	DBG("run_wait_f: thread waitpid for %d on (%s/%s)\n", 
+	TRACE("run_wait_f: thread waitpid for %d on (%s/%s)\n", 
 		run_button_p->pid(), 
 		run_button_p->command(), 
 		run_button_p->page()->pageWorkdir());
@@ -336,7 +336,7 @@ public:
 	} 
 	g_free(pcommand);
 
-	DBG("** looking for shell child of %ld\n", pid);
+	TRACE("** looking for shell child of %ld\n", pid);
 	glong cpid = -1;
 	gchar *spid = g_strdup_printf("%ld", pid);
 	gchar buffer[64];
@@ -346,7 +346,7 @@ public:
 	    if (!strstr(buffer, spid)) continue;
 	    g_strstrip(buffer);
 	    if (strncmp(buffer, spid, strlen(spid))==0){
-		DBG("** shell_child_pid(): gotcha shell pid: \"%s\"\n", buffer);
+		TRACE("** shell_child_pid(): gotcha shell pid: \"%s\"\n", buffer);
 		memset(buffer, ' ', strlen(spid));
 		g_strstrip(buffer);
 		errno = 0;
@@ -385,7 +385,7 @@ public:
 
     static void send_signal(GtkWidget *w, void *data){
 	auto run_button_p = (RunButton<Type> *)data;
-	DBG("send_signal %d to %d\n", 
+	TRACE("send_signal %d to %d\n", 
 		GPOINTER_TO_INT(g_object_get_data(G_OBJECT(w),"signal_id")), 
 		run_button_p->grandchild());
 
@@ -410,11 +410,11 @@ public:
 	if (strncmp(command(), "sudo", strlen("sudo"))==0) sudoize = TRUE;
 	// Are we running in a shell?
 	if (inShell() || sudoize){
-	    DBG("shell child pid required...\n");
+	    TRACE("shell child pid required...\n");
 	    pid = shell_child_pid(pid);
 	}
 	    
-	DBG("signal to pid: %ld (inShell()=%d sudo=%d)\n", pid, inShell(), sudoize);
+	TRACE("signal to pid: %ld (inShell()=%d sudo=%d)\n", pid, inShell(), sudoize);
 	if (sudoize) {
 	    //        1.undetached child will remain as zombie
 	    //        2.sudo will remain in wait state and button will not disappear
@@ -437,7 +437,7 @@ public:
 	    g_free(command);
 	    g_free(sudo);
 	} else {
-	    DBG("normal ps_signal to %d...\n", (int)pid);
+	    TRACE("normal ps_signal to %d...\n", (int)pid);
 	    print_c::print_icon(textview_, "emblem-important", "blue", g_strdup_printf("kill -%d %ld\n",
 		    signal_id, pid));
 	    kill((pid_t)pid, signal_id);

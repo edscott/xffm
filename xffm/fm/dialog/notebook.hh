@@ -71,7 +71,7 @@ public:
 
     View<Type> *loadIconview(Page<Type> *page, const gchar *path){
 	if (!path) path = "xffm:root";
-	WARN("loadIconview::adding path: %s\n", path);
+	TRACE("loadIconview::adding path: %s\n", path);
 	// Create View object.
         auto view =  new View<Type>(page);
         g_object_set_data(G_OBJECT(page->topScrolledWindow()), "view", view);
@@ -93,7 +93,7 @@ public:
 
 //    void reference_run_button(run_button_c *rb_p){
     void *reference_run_button(void *rb_p){
-	DBG("reference_run_button(%p)\n", rb_p);
+	TRACE("reference_run_button(%p)\n", rb_p);
 	pthread_mutex_lock(rbl_mutex);
 	run_button_list = g_list_prepend(run_button_list, rb_p);
 	pthread_mutex_unlock(rbl_mutex);
@@ -102,7 +102,7 @@ public:
 
     void
     unreference_run_button(void *rb_p){
-	DBG("unreference_run_button(%p)\n", rb_p);
+	TRACE("unreference_run_button(%p)\n", rb_p);
 	pthread_mutex_lock(rbl_mutex);
 	void *p = g_list_find(run_button_list, rb_p);
 	if (p){
@@ -120,14 +120,14 @@ public:
     }
 
     static void *reference_textview(GtkTextView *textView){
-	DBG("reference_run_button(%p)\n", (void *)textView);
+	TRACE("reference_run_button(%p)\n", (void *)textView);
 	textview_list = g_list_prepend(textview_list, (void *)textView);
 	return NULL;
     }
 
     static void
     unreference_textview(GtkTextView *textView){
-	DBG("unreference_run_button(%p)\n", (void *)textView);
+	TRACE("unreference_run_button(%p)\n", (void *)textView);
 	void *p = g_list_find(textview_list, (void *)textView);
 	if (p){
 	    textview_list = g_list_remove(textview_list, (void *)textView);

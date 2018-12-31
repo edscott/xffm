@@ -43,7 +43,7 @@ class RootView  :
 
     static void
     resetPopup(void) {
-        DBG("reset root popup, is TreeView=%d\n", isTreeView);
+        TRACE("reset root popup, is TreeView=%d\n", isTreeView);
         auto w = GTK_WIDGET(g_object_get_data(G_OBJECT(rootPopUp), "View as list"));
         gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(w), isTreeView);
 
@@ -84,7 +84,7 @@ private:
     static void
     removeBookmarkItem(GtkMenuItem *menuItem, gpointer data)
     {
-        DBG("Remove bookmark\n");
+        TRACE("Remove bookmark\n");
 	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
         if (!RootView<Type>::removeBookmark(path)) return;
 	auto view =  (View<Type> *)g_object_get_data(G_OBJECT(data), "view");

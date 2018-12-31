@@ -228,7 +228,7 @@ private:
             //msg_too_many_matches();
             //*match_count_p = -1;
         } else if (stack_glob_v.gl_pathc == 0){
-            DBG("NO MATCHES\n");
+            TRACE("NO MATCHES\n");
             globfree(&stack_glob_v);
             g_free(token);
             return NULL;
@@ -395,7 +395,7 @@ private:
         else if (which == MATCH_COMMAND)
             suggest = base_exec_completion(output, workdir, in_file_token);
         else {
-            DBG( "unknown match type: %d\n", which);
+            TRACE( "unknown match type: %d\n", which);
             return NULL;
         }
 

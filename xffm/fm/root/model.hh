@@ -246,7 +246,7 @@ public:
         for (p=bookMarks; p && *p; p++){
             // Bookmarks in settings.ini
             // local bookmarks:
-            DBG("adding bookmark %p -> %s\n", p, *p);
+            TRACE("adding bookmark %p -> %s\n", p, *p);
              if (g_path_is_absolute(*p)) {
                 if (!g_file_test(*p, G_FILE_TEST_EXISTS)) continue;
                 auto basename = g_path_get_basename(*p);
@@ -302,7 +302,7 @@ public:
     {
         gchar *item = findBookmarkKey(path);
 	if (item){
-            DBG("%s is already bookmarked (%s)\n", path, item);
+            TRACE("%s is already bookmarked (%s)\n", path, item);
             g_free(item);
             return FALSE;
         }

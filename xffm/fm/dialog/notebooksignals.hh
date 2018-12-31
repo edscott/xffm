@@ -15,14 +15,15 @@ public:
                    guint        new_page,
                    gpointer     data)
     {
+	static gboolean startup = TRUE;
         TRACE("switch_page: new page=%d\n", new_page);
         auto notebook_p = (Notebook<Type> *)data;
         auto page_p = (Page<Type> *)notebook_p->currentPageObject(new_page);
         if (!page_p){
-            WARN("page_p is null\n");
+            if (!startup) ERROR("page_p is null\n");
             return;
         }
-
+	startup = FALSE;
         page_p->setDialogTitle();
 
 

@@ -56,7 +56,7 @@ public:
                GdkEvent  *event,
                gpointer   data){
         auto page = (Page<Type> *)data;
-        WARN("range off\n");
+        TRACE("range off\n");
         auto size = page->fontSize();
         page->parent()->resizeWindow(size);
 	Settings<Type>::setSettingInteger("xfterm", "fontSize",size);
@@ -96,7 +96,7 @@ public:
                    GdkEvent  *event,
                    gpointer   data){
         if (!data) {
-            DBG("leave_notify_event: data cannot be NULL\n");
+            TRACE("leave_notify_event: data cannot be NULL\n");
             return FALSE;
         }
 	TRACE("leave_notify_event\n");

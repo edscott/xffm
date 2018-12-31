@@ -207,7 +207,7 @@ public:
                 if (access(absolute_suggest, X_OK) != 0){
                     g_free(suggest);
                     suggest=NULL;
-                    WARN("access \"%s\": %s\n", absolute_suggest, strerror(errno));
+                    ERROR("access \"%s\": %s\n", absolute_suggest, strerror(errno));
                 } 
                 g_free(absolute_suggest);
             }

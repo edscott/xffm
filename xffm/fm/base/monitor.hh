@@ -38,7 +38,7 @@ public:
     
     BaseMonitor(GtkTreeModel *treeModel, View<Type> *view){
         itemsHash_ = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_free);
-                DBG("BaseMonitor thread itemshash=%p\n", itemsHash_);
+                TRACE("BaseMonitor thread itemshash=%p\n", itemsHash_);
         baseView_ = view;
         gboolean showHidden = (Settings<Type>::getSettingInteger("LocalView", "ShowHidden") > 0);
         cancellable_ = g_cancellable_new ();
@@ -83,7 +83,7 @@ public:
 	gchar *key = Hash<Type>::get_hash_key(path, 10);
         TRACE("looking for %s (%s) in hash: %p\n", path, key, hash);
 	if(hash && g_hash_table_lookup(hash,key)) {
-            WARN("found %s (%s) in hash: %p\n", path, key, hash);
+            TRACE("found %s (%s) in hash: %p\n", path, key, hash);
             retval = TRUE;
         }
         g_free(key);
@@ -95,7 +95,7 @@ public:
         // add all initial items to hash
         if (itemsHash_) gtk_tree_model_foreach (treeModel, add2hash, (void *)itemsHash_);
         store_ = GTK_LIST_STORE(treeModel);
-        WARN( "*** start_monitor: %s\n", path);
+        TRACE( "*** start_monitor: %s\n", path);
         if (gfile_) g_object_unref(gfile_);
         gfile_ = g_file_new_for_path (path);
         GError *error=NULL;
@@ -115,12 +115,12 @@ public:
     void 
     stop_monitor(void){
         if (!monitor_) {
-            WARN("no monitor to stop\n");
+            TRACE("no monitor to stop\n");
             return;
         }
         if (gfile_) {
 	    gchar *p = g_file_get_path(gfile_);
-	    WARN("*** stop_monitor at: %s\n", p);
+	    TRACE("*** stop_monitor at: %s\n", p);
 	    g_free(p);
         }
 	g_file_monitor_cancel(monitor_);

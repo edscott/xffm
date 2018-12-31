@@ -98,7 +98,7 @@ private:
 		const gchar *path = (gchar *)g_object_get_data(G_OBJECT(eventBox), "path");
                 if (!path){
 		    path="xffm:root";
-                    DBG("path is null at pathbar.hh::pathbar_ok\n");
+                    TRACE("path is null at pathbar.hh::pathbar_ok\n");
                 }
                 auto view = (View<Type> *)
                     g_object_get_data(G_OBJECT(page->topScrolledWindow()), "view");
@@ -394,7 +394,7 @@ private:
 	    GList *tail = children;
 	    for (;tail && tail->data; tail = tail->next){
 		gchar *name  = (gchar *)g_object_get_data(G_OBJECT(tail->data), "name");
-		DBG( "Zapping tail item: \"%s\"\n", name);
+		TRACE( "Zapping tail item: \"%s\"\n", name);
 		g_free(name);
 		gtk_container_remove(GTK_CONTAINER(pathbar), GTK_WIDGET(tail->data));
 	    }

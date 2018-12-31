@@ -20,7 +20,7 @@ public:
     static void
     rm(GtkMenuItem *menuItem, gpointer data){
         
-	DBG("LocalRm:: rm\n");
+	TRACE("LocalRm:: rm\n");
 	auto view =  (View<Type> *)g_object_get_data(G_OBJECT(data), "view");
         //  single or multiple item selected?
         GList *selectionList;
@@ -32,7 +32,7 @@ public:
             selectionList = gtk_icon_view_get_selected_items (view->iconView());
         }
         if (!selectionList){
-            DBG("rm(): nothing selected\n");
+            ERROR("rm(): nothing selected\n");
         }
         GList *list = NULL;
         for (auto tmp=selectionList; tmp && tmp->data; tmp = tmp->next){
@@ -51,7 +51,7 @@ public:
 private:
     static GList *
     rmQuery(View<Type> *view, GList *list){
-	DBG("rmQuery: rm\n");
+	TRACE("rmQuery: rm\n");
         if (!list || !g_list_length(list)) {
             g_list_free(list);
             return NULL;
@@ -81,7 +81,7 @@ private:
     static
     GtkDialog *
     createRemove (View<Type> *view, const gchar *text, const gchar *message, gboolean always, gboolean multiple) {
-	DBG("createRemove: rm\n");
+	TRACE("createRemove: rm\n");
 	//auto rmDialog = GTK_DIALOG(gtk_window_new (GTK_WINDOW_TOPLEVEL));
 	auto rmDialog = GTK_DIALOG(gtk_dialog_new ());
 	//gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
@@ -213,7 +213,7 @@ private:
     static GList *
     removeAllFromList(GList *list){
         if (!list){
-            DBG("removeAllFromList(): list is NULL\n");
+            ERROR("removeAllFromList(): list is NULL\n");
             return NULL;
         }
         for (auto tmp = list; tmp && tmp->data; tmp=tmp->next){
@@ -226,11 +226,11 @@ private:
     static GList *
     removeItemFromList(GList *list){
         if (!list){
-            DBG("removeItemFromList(): list is NULL\n");
+            ERROR("removeItemFromList(): list is NULL\n");
             return NULL;
         }
 	void *path = list->data;
-	DBG("*** removing %s from list\n", (gchar *)path);
+	TRACE("*** removing %s from list\n", (gchar *)path);
         list = g_list_remove (list, path);
         g_free(path);
 	return list;
@@ -257,31 +257,31 @@ private:
     static GList *
     apply_action(GtkDialog *rmDialog, gint result, GList *list){
        
-        DBG( "**apply_action: 0x%x\n", result);
+        TRACE( "**apply_action: 0x%x\n", result);
 
         switch (result) {
             case TRASH_YES:
-                DBG( "**single trash: %s\n", (gchar *)list->data);
+                TRACE( "**single trash: %s\n", (gchar *)list->data);
                 // Trash operation
                 if (!Gio<Type>::doIt(rmDialog, (gchar *)list->data, MODE_TRASH)){
-                    DBG("Cannot trash %s\n", (gchar *)list->data);
+                    ERROR("Cannot trash %s\n", (gchar *)list->data);
                 }
                 list = removeItemFromList(list);
                 break;
             case TRASH_YES_ALL:
-                DBG( "trash all\n");
+                TRACE( "trash all\n");
                 if (!Gio<Type>::multiDoIt(rmDialog, list, MODE_TRASH)){
                 //if (!Gio<Type>::multiDoIt(rmDialog, _("Trash"), "user-trash", list, MODE_TRASH)){
-                    DBG("Cannot multiTrash %s\n", (gchar *)list->data);
+                    ERROR("Cannot multiTrash %s\n", (gchar *)list->data);
                 }
                 list = removeAllFromList(list);
                 break;
             case RM_YES:
             {
-                DBG( "**single remove: %s\n", (gchar *)list->data);
+                TRACE( "**single remove: %s\n", (gchar *)list->data);
                  // rm operation
                 if (!Gio<Type>::doIt(rmDialog, (gchar *)list->data, MODE_RM)){
-                    DBG("Cannot delete %s\n", (gchar *)list->data);
+                    ERROR("Cannot delete %s\n", (gchar *)list->data);
                 }
                 list = removeItemFromList(list);
                 break;
@@ -289,42 +289,42 @@ private:
             case RM_YES_ALL:
             {
                 if (!Gio<Type>::multiDoIt(rmDialog, list, MODE_RM)){
-                    DBG("Cannot multiDelete %s\n", (gchar *)list->data);
+                    ERROR("Cannot multiDelete %s\n", (gchar *)list->data);
                 }
                 list = removeAllFromList(list);
                 break;
             }
 
             case SHRED_YES:
-                DBG( "**single shred: %s\n", (gchar *)list->data);
+                TRACE( "**single shred: %s\n", (gchar *)list->data);
                  // Shred operation
                 if (!Gio<Type>::doIt(rmDialog, (gchar *)list->data, MODE_SHRED)){
 
-                    DBG("Cannot shred %s\n", (gchar *)list->data);
+                    ERROR("Cannot shred %s\n", (gchar *)list->data);
                 }
                 list = removeItemFromList(list);
                break;
             case SHRED_YES_ALL:
-                DBG( "shred all\n");
+                TRACE( "shred all\n");
                 if (!Gio<Type>::multiDoIt(rmDialog, list, MODE_SHRED)){
-                    DBG("Cannot multishred %s\n", (gchar *)list->data);
+                    ERROR("Cannot multishred %s\n", (gchar *)list->data);
                 }
                 list = removeAllFromList(list);
                 break;
             case RM_NO:
             {
-                DBG( "remove cancelled: %s\n", (gchar *)list->data);
+                TRACE( "remove cancelled: %s\n", (gchar *)list->data);
                 list = removeItemFromList(list);
                 break;
             }
             ////////////////////////////////
             case RM_CANCEL:
-                DBG( "**cancel remove\n");
+                TRACE( "**cancel remove\n");
                 list = removeAllFromList(list);
                 break;
             default:
             {
-                DBG( "**default : cancel remove all\n");
+                TRACE( "**default : cancel remove all\n");
                list = removeAllFromList(list);
                break;
             }

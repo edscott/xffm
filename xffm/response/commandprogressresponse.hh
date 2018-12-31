@@ -66,7 +66,7 @@ public:
 	    gchar line[256];
 	    memset(line, 0, 256);
 	    while (fgets (line, 255, pipe) && !feof(pipe)) {
-                if (line[0] != '\n') DBG("CommandProgressResponse:: %s", line);
+                if (line[0] != '\n') TRACE("CommandProgressResponse:: %s", line);
 	    }
 	    pclose (pipe);
             */

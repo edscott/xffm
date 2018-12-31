@@ -80,7 +80,7 @@ public:
 	  }
 	  closedir (directory);
 	} else {
-	  DBG("monitor_f(): opendir %s: %s\n", path, strerror(errno));
+	  ERROR("monitor_f(): opendir %s: %s\n", path, strerror(errno));
 	}
 	g_free(basename); 
 	g_free(path); 
@@ -127,7 +127,7 @@ public:
 	GtkListStore *store = GTK_LIST_STORE(model);
 	struct stat st;
 	if (stat(inPath, &st) != 0){
-	    DBG( "localmonitor stat_func(%s) stat: %s\n", inPath, strerror(errno));
+	    ERROR( "localmonitor stat_func(%s) stat: %s\n", inPath, strerror(errno));
 	    return FALSE;
 	}
 
@@ -229,7 +229,7 @@ private:
                 break;
             case G_FILE_MONITOR_EVENT_MOVED:
             case G_FILE_MONITOR_EVENT_RENAMED:
-                WARN("Received  MOVED (%d): \"%s\", \"%s\"\n", event, f, s);
+                TRACE("Received  MOVED (%d): \"%s\", \"%s\"\n", event, f, s);
                 p->remove_item(first);
                 if (isInModel(p->treeModel(), s))
                 {

@@ -477,7 +477,7 @@ public:
     static gboolean
     isMounted (const gchar *mnt_fsname) {
         if(!mnt_fsname) {
-            DBG ("isMounted() mnt_point != NULL not met!\n");
+            ERROR ("isMounted() mnt_point != NULL not met!\n");
             return FALSE;
         }
         gchar *mnt_point;
@@ -537,7 +537,7 @@ public:
         FILE *fstab_fd;
         gchar *result = NULL;
         if((fstab_fd = setmntent ("/etc/fstab", "r")) == NULL) {
-            DBG ("mountTarget(): Unable to open %s\n", "/etc/fstab");
+            ERROR ("mountTarget(): Unable to open %s\n", "/etc/fstab");
             return result;
         }
 
@@ -574,7 +574,7 @@ public:
         FILE *fstab_fd;
         gboolean result = FALSE;
         if((fstab_fd = setmntent ("/etc/fstab", "r")) == NULL) {
-            DBG ("isInFstab(): Unable to open %s\n", "/etc/fstab");
+            ERROR ("isInFstab(): Unable to open %s\n", "/etc/fstab");
             return result;
         }
 
@@ -639,7 +639,7 @@ public:
     static gboolean
     mountPath (View<Type> *view, const gchar *path, const gchar *mountPoint) 
     {
-        DBG("FstabView<Type>::mountPath(%s, %s)\n", path, mountPoint);
+        TRACE("FstabView<Type>::mountPath(%s, %s)\n", path, mountPoint);
 	if (!g_path_is_absolute(path)){
 	    ERROR("mountPath: %s is not absolute.\n", path);
 	    return FALSE;
@@ -671,7 +671,7 @@ public:
 	auto command = g_strdup_printf((mounted)?
 		    _("Unmounting %s"):_("Mounting %s"), path);
 	CommandResponse<Type>::dialog(command,"system-run", Tubo<Type>::getChild(controller) );
-	WARN("%s %s\n", command, mountPoint);
+	TRACE("%s %s\n", command, mountPoint);
 	g_free(command);
 
         TRACE ("fstab_mount %s done \n",path);*/

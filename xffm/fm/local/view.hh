@@ -80,7 +80,7 @@ public:
 
     static void
     runWith(View<Type> *view, const GtkTreePath *tpath, const gchar *path){
-        DBG("%s is executable file\n", path);
+        TRACE("%s is executable file\n", path);
 	if (!localItemPopUp) LocalPopUp<Type>::createLocalItemPopUp();
 
         g_object_set_data(G_OBJECT(localItemPopUp), "view", view);
@@ -159,7 +159,7 @@ public:
 		openWith(view, tpath, path);
 	    }
 	} else{
-	    DBG("%s NOT a regular file\n", path);
+	    ERROR("%s NOT a regular file\n", path);
 	}
 	
 	TRACE("LocalView::item activated: %s\n", path);

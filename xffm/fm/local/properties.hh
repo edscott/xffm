@@ -74,7 +74,7 @@ public:
 	hash = g_hash_table_new(g_direct_hash, g_direct_equal);
 	// copy selection list to private thread safe selection_list... 
 	if (!selectionList || g_list_length(selectionList) < 0) {
-	    DBG("propertiesDialog: nothing in selectionList\n");
+	    ERROR("propertiesDialog: nothing in selectionList\n");
 	    return;
 	}
 	entryList = NULL;
@@ -339,7 +339,7 @@ private:
 	mode_t mode;
 	sscanf(text, "%o", &mode);
 	mode &= 0777;
-	DBG("changeMode event old = %o new = %o\n", oldMode, mode);
+	TRACE("changeMode event old = %o new = %o\n", oldMode, mode);
 
 	// update label
 	auto label = GTK_LABEL(g_object_get_data(G_OBJECT(modeEntry), "modeLabel"));
@@ -421,19 +421,19 @@ private:
 	    g_key_file_load_from_file(keyInfo, keyPath, (GKeyFileFlags)0, NULL);
 	g_free(basename);
 	if (!loaded) {
-	    DBG("*** unable to load %s\n", keyPath);
+	    ERROR("*** unable to load %s\n", keyPath);
 	    g_free(keyPath);
 	    return NULL;
 	}
 	g_free(keyPath);
 	GError *error = NULL;
 	gchar **p = g_key_file_get_groups (keyInfo, NULL);
-	DBG("Reading from group %s\n", *p);
+	TRACE("Reading from group %s\n", *p);
 	//auto value = g_key_file_get_string (keyInfo, "Trash Info", item, &error);
 	auto value = g_key_file_get_string (keyInfo, *p, item, &error);
 	g_strfreev(p);
 	if (error){
-	    DBG("trashInfo(%s): %s\n", item, error->message);
+	    ERROR("trashInfo(%s): %s\n", item, error->message);
 	    g_error_free(error);
 	    value = NULL;
         } 
@@ -531,7 +531,7 @@ private:
 
     static void
     cancelAction(GtkButton *button, void *data){
-	DBG("cancelAction\n");
+	TRACE("cancelAction\n");
 	deleteEvent(NULL, NULL, data);
     }
 
@@ -548,7 +548,7 @@ private:
     
     static void
     applyAction(GtkButton *button, void *data){
-	DBG("applyAction\n");
+	TRACE("applyAction\n");
 	auto properties_p = (Properties<Type> *)data;
 	g_hash_table_foreach(properties_p->hash, setFileMode, NULL);
 	// Apply changes to all changed items

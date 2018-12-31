@@ -108,7 +108,7 @@ public:
                 ncommand = g_strjoinv ("\\\'", g);
                 g_strfreev(g);
             }
-            DBG("ncommand is %s\n", ncommand);
+            TRACE("ncommand is %s\n", ncommand);
         } else ncommand = g_strdup(command);
         command = ncommand;
 
@@ -122,7 +122,7 @@ public:
 	gchar **c;
 	for (c=commands; c && *c; c++){
 	    if (process_internal_command (output, workdir, *c)) {
-		DBG("internal command=%s\n", command);
+		TRACE("internal command=%s\n", command);
 		continue;
 	    }
 	    // automatic shell determination:
@@ -264,8 +264,8 @@ public:
 	    gchar *gg = internal_cd (output, workdir, argvp);
 	    g_strfreev (argvp);
 	    if (gg) {
-		DBG("newWorkdir-gg = %s\n", gg);
-		DBG("page_ = %p\n", (void *)page_);
+		TRACE("newWorkdir-gg = %s\n", gg);
+		TRACE("page_ = %p\n", (void *)page_);
 		if (page_) {
 		    page_->setPageWorkdir(gg);
                 auto view = (View<Type> *)

@@ -128,7 +128,7 @@ public:
 		return LocalView<Type>::item_activated(this, treeModel, tpath, path);
 	    }
 	} else {
-	    DBG("%s is not valid path\n", path);
+	    ERROR("%s is not valid path\n", path);
         }
 	return this->loadModel(path);
     }

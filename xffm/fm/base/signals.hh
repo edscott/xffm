@@ -58,7 +58,7 @@ public:
         auto event = (GdkEventButton  *)ev;
 	auto view = (View<Type> *)data;
         if (!data) {
-            DBG("View::motion_notify_event: data cannot be NULL\n");
+            ERROR("View::motion_notify_event: data cannot be NULL\n");
             return FALSE;
         }
 	TRACE("motion_notify_event, dragmode= %d\n", view->dragMode());
@@ -80,7 +80,7 @@ public:
                     return FALSE;
                 }
 	        // start DnD (multiple selection)
-		WARN("dragOn_ = TRUE\n");
+		TRACE("dragOn_ = TRUE\n");
 		dragOn_ = TRUE;
 		// in control mode, reselect item at x,y
 		if(!isTreeView && controlMode) {
@@ -136,7 +136,7 @@ public:
 	    if (!isTreeView && !gtk_icon_view_get_item_at_pos (view->iconView(),
                                    event->x, event->y,
                                    &tpath,NULL)){
-		WARN("button down cancelled.\n");
+		TRACE("button down cancelled.\n");
 		return TRUE;
 	    }
 
@@ -168,7 +168,7 @@ public:
 		gtk_icon_view_select_path (view->iconView(),tpath);
 	    }
 	    if (tpath) {
-		WARN("Here we do a call to activate item.\n");
+		TRACE("Here we do a call to activate item.\n");
 		BaseSignals<Type>::activate(tpath, data);
 		gtk_tree_path_free(tpath);
 	    }
@@ -210,7 +210,7 @@ public:
 	    }
             if (tpath) {
                 
-		DBG("button press %d mode %d\n", event->button, mode);
+		TRACE("button press %d mode %d\n", event->button, mode);
 		buttonPressX = event->x;
 		buttonPressY = event->y;
 		rubberBand_ = FALSE;
@@ -288,7 +288,7 @@ public:
                 }   */
             } 
 	    gtk_tree_path_free(tpath);
-            DBG("(%lf,%lf) -> %d,%d\n", event->x, event->y, cellX, cellY);
+            TRACE("(%lf,%lf) -> %d,%d\n", event->x, event->y, cellX, cellY);
 	} else {
 	    if (gtk_icon_view_get_item_at_pos (view->iconView(),
 				       event->x,
@@ -318,7 +318,7 @@ public:
         else startItem = g_strdup(item);
         g_free(item);
 
-        WARN("Starting from %s\n", startItem);
+        TRACE("Starting from %s\n", startItem);
 
         void *startPath;
 
@@ -339,25 +339,25 @@ public:
             gchar *lastitem = gtk_tree_path_to_string ((GtkTreePath *)g_list_last(items)->data);
             end = atoi(startItem);
             start = atoi(lastitem);
-            WARN("lastitem %s\n", lastitem);
+            TRACE("lastitem %s\n", lastitem);
             g_free(lastitem);
 
         } else {
             gchar *firstitem = gtk_tree_path_to_string ((GtkTreePath *)g_list_first(items)->data);
             end = atoi(firstitem);
             start = atoi(startItem);
-            WARN("firstitem %s\n", firstitem);
+            TRACE("firstitem %s\n", firstitem);
             g_free(firstitem);
         }
         g_free(startItem);
         // To free the return value, use:
         g_list_free_full (items, (GDestroyNotify) gtk_tree_path_free);
-        WARN("loop %d -> %d\n", start, end);
+        TRACE("loop %d -> %d\n", start, end);
         gtk_icon_view_unselect_all (view->iconView());
         GtkTreePath *tp;
         for (int i=start; i<=end; i++){
                 gchar *item = g_strdup_printf("%0d", i);
-                WARN("selecting %s(%d)\n", item, i);
+                TRACE("selecting %s(%d)\n", item, i);
                 tp = gtk_tree_path_new_from_string(item);
                 g_free(item);
                 //if (view->isSelectable(tpath)) 
@@ -388,7 +388,7 @@ public:
             gtk_tree_model_get_iter(view->treeModel(), &iter, 
                     (GtkTreePath *)selectionList->data);
             gtk_tree_model_get(view->treeModel(), &iter, PATH, &path, -1);
-            DBG("selected path is %s\n", path);
+            TRACE("selected path is %s\n", path);
         }
         gboolean items = (g_list_length(selectionList) >0);
         setMenuData(view, path, items);
@@ -433,7 +433,7 @@ public:
         if (menu) {
            auto oldPath = (gchar *)g_object_get_data(G_OBJECT(menu),"path");
             g_free(oldPath);
-            DBG("*** set menu data path=%s\n", path);
+            TRACE("*** set menu data path=%s\n", path);
             g_object_set_data(G_OBJECT(menu),"path", path);
             g_object_set_data(G_OBJECT(menu),"view", (void *)view);
         }
@@ -517,10 +517,10 @@ public:
 
         gtk_tree_model_get (treeModel, &iter, PATH, &path, -1);
 	
-        DBG("View::activate: %s\n", path);
+        TRACE("View::activate: %s\n", path);
         auto lastPath = g_strdup(view->path());
 	if (!view->loadModel(treeModel, tpath, path)){
-            WARN("reloading %s\n", lastPath);
+            TRACE("reloading %s\n", lastPath);
             view->loadModel(lastPath);
         }
 	g_free(path);
@@ -712,7 +712,7 @@ public:
                        guint info, 
                        guint time,
                        gpointer data) {
-        WARN("signal_drag_data_send\n");
+        TRACE("signal_drag_data_send\n");
         //g_free(files);
         
         //int drag_type;
@@ -722,7 +722,7 @@ public:
         if (info != TARGET_URI_LIST) {
             ERROR("signal_drag_data_send: invalid target");
         }
-        DBG( ">>> DND send, TARGET_URI_LIST\n"); 
+        TRACE( ">>> DND send, TARGET_URI_LIST\n"); 
         gchar *dndData = NULL;
         switch (view->viewType()) {
             case (LOCALVIEW_TYPE):
@@ -733,7 +733,7 @@ public:
             }
 
             default :
-                DBG("BaseSignals:: sendDndData not defined for view type %d\n", view->viewType());
+                ERROR("BaseSignals:: sendDndData not defined for view type %d\n", view->viewType());
                 break;
         }
 
@@ -749,7 +749,7 @@ public:
 
     static void
     DragBegin (GtkWidget * widget, GdkDragContext * context, gpointer data) {
-        WARN("signal_drag_begin\n");
+        TRACE("signal_drag_begin\n");
 	auto view = (View<Type> *)data;
         auto treeModel = view->treeModel();
         // Treeview or iconview?
@@ -784,7 +784,7 @@ public:
                       guint info, 
                       guint time, 
                       gpointer data){
-        DBG( "DND>> signal_drag_data\n");
+        TRACE( "DND>> signal_drag_data\n");
 	auto view = (View<Type> *)data;
 
         // Treeview or iconview?
@@ -832,7 +832,7 @@ public:
         
         if (tpath) gtk_tree_path_free(tpath);
         auto dndData = (const char *)gtk_selection_data_get_data (selection_data);
-	DBG("dndData = \"\n%s\"\n", dndData);
+	TRACE("dndData = \"\n%s\"\n", dndData);
         
         switch (view->viewType()) {
             case (LOCALVIEW_TYPE):
@@ -843,7 +843,7 @@ public:
             }
 
             default :
-                DBG("BaseSignals:: receiveDndData not defined for view type %d\n", view->viewType());
+                ERROR("BaseSignals:: receiveDndData not defined for view type %d\n", view->viewType());
                 break;
         }
         g_free(target);
@@ -858,7 +858,7 @@ public:
 
     static void
     signal_drag_end (GtkWidget * widget, GdkDragContext * context, gpointer data) {
-        WARN("signal_drag_end\n");
+        TRACE("signal_drag_end\n");
         
 	auto view = (View<Type> *)data;
 
@@ -900,7 +900,7 @@ public:
 
     static void
     signal_drag_leave (GtkWidget * widget, GdkDragContext * drag_context, guint time, gpointer data) {
-        DBG("signal_drag_leave\n");
+        TRACE("signal_drag_leave\n");
 
     }
 
@@ -917,7 +917,7 @@ public:
                    gpointer   data)
     {
 	//auto view = (View<Type> *)data;
-	WARN("no action on button_click_f\n");
+	TRACE("no action on button_click_f\n");
         return FALSE;
     }
 

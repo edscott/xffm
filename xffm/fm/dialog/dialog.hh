@@ -116,7 +116,7 @@ public:
                 TimeoutResponse<Type>::dialog(NULL, markup, "drive-harddisk/SE/go-down/3.0/180");
                 g_free(markup);
                 g_free(path);
-                DBG("*** Device has been removed: %s\n", f);
+                TRACE("*** Device has been removed: %s\n", f);
             }
             break;
             case G_FILE_MONITOR_EVENT_CREATED:
@@ -130,7 +130,7 @@ public:
                 g_free(markup);
                 g_free(path);
                 g_free(label);
-                DBG("*** Device has been added: %s\n", f);
+                TRACE("*** Device has been added: %s\n", f);
             }
             break;
         }
@@ -175,7 +175,7 @@ public:
         double fraction = (double)(fontSize - 6)/(24 - 6);
         gint w = (fraction * Dw) + naturalSize_.width;
         gint h = (fraction * Dh) + naturalSize_.height;
-        WARN("resize window %d: %lf --> %d,%d (min: %d, %d)\n",
+        TRACE("resize window %d: %lf --> %d,%d (min: %d, %d)\n",
                fontSize, fraction, w, h,
                naturalSize_.width,
                naturalSize_.height);

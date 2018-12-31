@@ -33,7 +33,7 @@ public:
         if(!cmd_fmt) return FALSE;
         if(!g_shell_parse_argv (cmd_fmt, &argc, &argv, &error)) {
             gchar *msg = g_strcompress (error->message);
-            DBG ("csh.hh:: %s: %s\n", msg, cmd_fmt);
+            ERROR ("csh.hh:: %s: %s\n", msg, cmd_fmt);
             g_error_free (error);
             g_free (msg);
             return (FALSE);
@@ -158,7 +158,7 @@ protected:
         // don't save to file if invalid command (cd counts as invalid).
         if(!csh_is_valid_command (command_p)) {
             if(strcmp (command_p, "cd") != 0 && strncmp (command_p, "cd ", strlen ("cd ")) != 0) {
-                DBG ("not saving %s\n", command_p);
+                TRACE ("not saving %s\n", command_p);
                 g_free(command_p);
                 return;
             }

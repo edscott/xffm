@@ -47,7 +47,7 @@ public:
 
         for (const gchar **p=comboOptions; p && *p; p++){
             gtk_combo_box_text_append_text (combo_,*p);
-            DBG("setting combo value: %s\n" , *p);
+            TRACE("setting combo value: %s\n" , *p);
         }
         gtk_combo_box_set_active (GTK_COMBO_BOX(combo_),0);
         gtk_widget_show(GTK_WIDGET(combo_));
