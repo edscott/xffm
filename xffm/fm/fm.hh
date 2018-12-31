@@ -170,7 +170,7 @@ public:
 	if (!getpass) {
 	    std::cerr<<"*** Warning: Xffm not correctly installed. Cannot find xfgetpass in path\n";
 	} else {
-	    DBG("get pass at %s\n", getpass);
+	    TRACE("get pass at %s\n", getpass);
 	    setenv("SUDO_ASKPASS", getpass, 1);
 	    setenv("SSH_ASKPASS", getpass, 1);
 	}

@@ -118,7 +118,7 @@ public:
 	    TRACE("%s is  valid path\n", path);
 	    if (!g_file_test(path, G_FILE_TEST_IS_DIR)){
                 // Not a directory, but valid path: activate item.
-		DBG("%s is not dir, will activate.\n", path);
+		TRACE("%s is not dir, will activate.\n", path);
                 if (FstabView<Type>::isMounted(path)){
                     auto mntDir = FstabView<Type>::getMntDir(path);
                     auto retval = this->loadModel(mntDir);
