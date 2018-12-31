@@ -40,6 +40,7 @@ static gboolean inserted_;
 namespace xf
 {
 template <class Type> class LocalIcons;
+template <class Type> class Preview;
 template <class Type>
 class LocalModel
 {
@@ -95,13 +96,13 @@ public:
     {
         GList *directory_list = NULL;
         if (!g_file_test(path, G_FILE_TEST_IS_DIR)){
-            DBG("read_items(): g_file_test(%s, G_FILE_TEST_IS_DIR) failed\n", path);
+            ERROR("read_items(): g_file_test(%s, G_FILE_TEST_IS_DIR) failed\n", path);
             return NULL;
         }
         TRACE( "readfiles: %s\n", path);
         DIR *directory = opendir(path);
         if (!directory) {
-            DBG("xfdir_local_c::read_items(): opendir %s: %s\n", path, strerror(errno));
+            ERROR("xfdir_local_c::read_items(): opendir %s: %s\n", path, strerror(errno));
             return NULL;
         }
     //  mutex protect...
@@ -123,7 +124,7 @@ public:
             }
         }
         if (errno) {
-            DBG("read_files_local: %s: %s\n", strerror(errno), path);
+            ERROR("read_files_local: %s: %s\n", strerror(errno), path);
         }
     // unlock mutex
         pthread_mutex_unlock(&readdir_mutex);
@@ -135,7 +136,7 @@ public:
         // is not so, then a read error occurred.
         // (not uncommon in bluetoothed obexfs)
         if (!directory_list) {
-            DBG("read_files_local(): Count failed! Directory not read!\n");
+            ERROR("read_files_local(): Count failed! Directory not read!\n");
         }
         directory_list = sort_directory_list (directory_list);
         // stat first 104 items.
@@ -428,10 +429,32 @@ private:
             }
             g_free(h_name);
         }
-       
-        auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
-        auto normal_pixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -48);
-        auto highlight_pixbuf = Pixbuf<Type>::get_pixbuf(highlight_name,  -48);
+        GdkPixbuf *treeViewPixbuf = NULL;
+        GdkPixbuf *normal_pixbuf = NULL;
+        GdkPixbuf *highlight_pixbuf = NULL;
+
+	if (g_path_is_absolute(icon_name))
+	    normal_pixbuf = Preview<Type>::loadFromThumbnails(icon_name, xd_p->st, 48, 48);
+	if (g_path_is_absolute(highlight_name)){
+	    if (strcmp(highlight_name, icon_name)==0) highlight_pixbuf = normal_pixbuf;
+	    else highlight_pixbuf = Preview<Type>::loadFromThumbnails(highlight_name, xd_p->st, 48, 48);
+	}
+      
+        if (!treeViewPixbuf) 
+	    treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name, -24);
+        if (!normal_pixbuf) {
+	    auto thumbnail = Hash<Type>::get_thumbnail_path (icon_name, 48);
+	    normal_pixbuf = Pixbuf<Type>::get_pixbuf(icon_name, -48);
+	    Pixbuf<Type>::pixbuf_save(normal_pixbuf, thumbnail);
+	}
+        if (!highlight_pixbuf) {
+	    if (strcmp(highlight_name, icon_name)==0) highlight_pixbuf = normal_pixbuf;
+	    else {
+		auto thumbnail = Hash<Type>::get_thumbnail_path (highlight_name, 48);
+		highlight_pixbuf = Pixbuf<Type>::get_pixbuf(highlight_name, -48);
+		Pixbuf<Type>::pixbuf_save(highlight_pixbuf, thumbnail);
+	    }
+	}
 	guint flags=0;
         guint size = (xd_p->st)?xd_p->st->st_size:0;
         guint date = (xd_p->st)?xd_p->st->st_mtim.tv_sec:0;

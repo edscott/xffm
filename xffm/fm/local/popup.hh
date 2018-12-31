@@ -71,7 +71,7 @@ public:
             //only for listview: {N_("Sort by date"), NULL, (void *) menu},
             
             {N_("Select All"), (void *)selectAll, NULL, NULL},
-            {N_("Select Items Matching..."), (void *)selectMatch, NULL, NULL},
+            {N_("Match regular expression"), (void *)selectMatch, NULL, NULL},
             {N_("View as list"), (void *)toggleView, 
 		(void *)"TreeView", "window"},
             {N_("Show hidden files"), (void *)toggleItem, 
@@ -556,7 +556,7 @@ private:
 	auto view =  (View<Type> *)g_object_get_data(G_OBJECT(data), "view");
         auto entryResponse = new(EntryResponse<Type>)(GTK_WINDOW(mainWindow), _("Select items"), NULL);
 	auto markup = 
-	    g_strdup_printf("<span color=\"blue\" size=\"larger\"><b>%s</b></span>", _("Select Items Matching"));  
+	    g_strdup_printf("<span color=\"blue\" size=\"larger\"><b>%s</b></span>", _("Match regular expression"));  
   	
         entryResponse->setResponseLabel(markup);
         g_free(markup);
