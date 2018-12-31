@@ -7,7 +7,7 @@
 #include <time.h>
 #include <iostream>
 
-#define USER_CACHE_DIR      g_get_user_cache_dir(),"xf+"
+#define USER_CACHE_DIR      g_get_user_cache_dir(),"xffm+"
 #define XFTHUMBNAIL_DIR 	USER_CACHE_DIR,"thumbnails"
 
 //#include "pixbuf_hash_c.hpp"

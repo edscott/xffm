@@ -257,6 +257,7 @@ public:
             case MODE_RM:
                if (g_file_test(path, G_FILE_TEST_IS_DIR)){
 		   GNUrm(path);
+		    retval = TRUE;
                } else {
                     retval = g_file_delete (file, NULL, &error);
                }

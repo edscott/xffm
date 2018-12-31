@@ -1,7 +1,6 @@
 bug: 
+ > is thumbnail cache being used? Nothing in .cache/xffm
  > save and restore size for xffind
- > add is image function to preview functinality
- > bug: .cpp is resolving as image type (by magic?)
  > use libmagic preferably instead of perl if available
  > printout optional and required libraries found in configure step.
  
@@ -23,17 +22,8 @@ TODO
   * add bookmarks to rootview: 
     - put localviewpopup basics into rootview, popup menu to remove bookmark... maybe
     
-    
-  * enable localview popup
-     - duplicate/symlink/rename
-     - cutnpaste
-     - properties
-  * enable previews
-  * enable DnD
-     - iconview need not use internal DnD. Use special DnD to enable multiple selections
        Ctl selection was necessary in treeview and to avoid selection of somthing off screen
        keep it that way.
-  * enable listview
   * enable sort modes 
      - Type
      - Name
@@ -49,8 +39,6 @@ Bugs:
        GTK_IS_WIDGET (widget)' failed
 
 Cleanups:  
-
-  * transform start.hh into a class template: affects xfterm.cc and xffm.cc
   * 20+ files with FIXMEs
 
 
