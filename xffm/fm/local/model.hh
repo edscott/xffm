@@ -9,7 +9,7 @@ typedef struct xd_t{
     gchar *path;
     unsigned char d_type;
     struct stat *st;
-    const gchar *mimetype;
+    gchar *mimetype;
     const gchar *icon;
 }xd_t;
 static pthread_mutex_t readdir_mutex=PTHREAD_MUTEX_INITIALIZER;
@@ -171,7 +171,7 @@ public:
         // stat symbolic links now...
 	
         if (xd_p->d_type == DT_DIR){
-            xd_p->mimetype = "inode/directory";
+            xd_p->mimetype = g_strdup("inode/directory");
 	}
 	else if (xd_p->d_type == DT_LNK){
             xd_p->st = (struct stat *)calloc(1, sizeof(struct stat));
@@ -195,9 +195,9 @@ public:
 
     static void
     free_xd_p(xd_t *xd_p){
-	// The following 2 must be "const gchar *"
+	// The following must be "const gchar *"
         //g_free(xd_p->icon);
-        //g_free(xd_p->mimetype);
+        g_free(xd_p->mimetype);
         g_free(xd_p->d_name);
         g_free(xd_p->path);
         g_free(xd_p->st);

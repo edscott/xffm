@@ -52,7 +52,7 @@ public:
 	    }
 	}
 	if (g_path_is_absolute(name)) return name; 
-	WARN("basic iconname: %s --> %s\n", xd_p->d_name, name);
+	TRACE("basic iconname: %s --> %s\n", xd_p->d_name, name);
         gchar *emblem = getEmblem(xd_p);
         TRACE("emblem=%s\n", emblem);
 	if (!name) name = g_strdup("image-missing");

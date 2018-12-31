@@ -215,7 +215,7 @@ public:
 	g_object_set_data(G_OBJECT(localPopUp), "iconName", g_strdup("folder"));
 	g_object_set_data(G_OBJECT(localPopUp), "displayName", util_c::valid_utf_pathstring(view->path()));
 	g_object_set_data(G_OBJECT(localPopUp), "path", g_strdup(view->path()));
-	g_object_set_data(G_OBJECT(localPopUp), "mimetype", g_strdup(Mime<Type>::mimeType(view->path())));
+	g_object_set_data(G_OBJECT(localPopUp), "mimetype", Mime<Type>::mimeType(view->path()));
 	g_object_set_data(G_OBJECT(localPopUp), "fileInfo", util_c::fileInfo(view->path()));
 	BasePopUp<Type>::changeTitle(localPopUp);
     }
