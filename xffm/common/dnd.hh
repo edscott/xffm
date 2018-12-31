@@ -20,9 +20,9 @@ public:
             const GtkSelectionData *selection_data, 
             GdkDragAction action)
     {
-        WARN("View::receiveDndData\n");
+        TRACE("View::receiveDndData\n");
         if (!selection_data) {
-            WARN("!selection_data\n");
+            ERROR("!selection_data\n");
             return FALSE;
         }
 	const gchar *command;

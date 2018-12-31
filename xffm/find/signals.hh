@@ -51,6 +51,22 @@ class findSignals: public Run<Type>{
     using run_c = Run<double>;
     using util_c = Util<double>;
 public:
+    static void onSizeAllocate (GtkWidget    *widget,
+		   GdkRectangle *allocation,
+		   gpointer      data){
+        static gint lastX=-1;
+        static gint lastY=-1;
+        if (allocation->width == lastX && allocation->height == lastY) return;
+	TRACE("dialog.hh::onSizeAllocate():SIZE allocate\n");
+        lastX = allocation->width;
+        lastY = allocation->height;
+
+        // Save selection width and height to .ini
+	Settings<Type>::setSettingInteger( "xffind", "width", lastX);
+	Settings<Type>::setSettingInteger( "xffind", "height", lastY);
+
+    }
+
     static void 
     sensitivize (GtkToggleButton *togglebutton, gpointer data){
 	GtkWidget *widget = GTK_WIDGET(data);
@@ -706,7 +722,7 @@ private:
                         _("No editor component found."), editor));
             return;
         }
-        DBG("editor = %s\n", editor);
+        TRACE("editor = %s\n", editor);
         gchar *command;
 	if (Mime<Type>::runInTerminal(editor)){
 	    command = Mime<Type>::mkTerminalLine(editor, "");
@@ -714,14 +730,14 @@ private:
 	    command = g_strdup(editor);
 	}
       
-        DBG("command = %s\n", command);
+        TRACE("command = %s\n", command);
 
         for (; list && list->data; list=list->next){
             gchar *g = g_strconcat(command, " \"", (gchar *)list->data, "\"", NULL);
             g_free(command);
             command = g;
         }
-        DBG("command args = %s\n", command);
+        TRACE("command args = %s\n", command);
 
         // Hack: for nano or vi, run in terminal
         gboolean in_terminal = FALSE;
@@ -731,7 +747,7 @@ private:
             in_terminal = TRUE;
         }
 
-        DBG("thread_run %s\n", command);
+        TRACE("thread_run %s\n", command);
         run_c::thread_run(diagnostics, command, FALSE);
         //RFM_THREAD_RUN2ARGV(widgets_p, command, in_terminal);
         

@@ -25,7 +25,7 @@ public:
                 NULL);
         if (!loaded) {
             gchar *text = g_strdup_printf(_("Creating a new file (%s)\n"), settingsfile);
-            DBG("%s", text);
+            TRACE("%s", text);
             g_free(text);
             writeSettings();
         }
@@ -48,7 +48,7 @@ private:
             return;
 
         }
-        DBG("%s reload %ld -> %ld \n", settingsfile, mTime, st.st_mtime);
+        TRACE("%s reload %ld -> %ld \n", settingsfile, mTime, st.st_mtime);
         g_key_file_free(keyFile);
         readSettings();
     }
@@ -63,7 +63,7 @@ private:
         gint fd;
 
 	if (!g_file_test(settingsfile, G_FILE_TEST_EXISTS)) {
-	    WARN("!g_file_test(settingsfile, G_FILE_TEST_EXISTS)\n");
+	    TRACE("!g_file_test(settingsfile, G_FILE_TEST_EXISTS)\n");
 	    gchar *config_directory = g_path_get_dirname(settingsfile);
 	    if (!g_file_test(config_directory, G_FILE_TEST_IS_DIR)){
 		TRACE( "creating directory %s\n", config_directory);
@@ -75,7 +75,7 @@ private:
 	    g_free(config_directory);
 	    fd = creat(settingsfile, O_WRONLY | S_IRWXU);
 	} else {
-	    WARN("open(settingsfile, O_WRONLY | S_IRWXU)\n");
+	    TRACE("open(settingsfile, O_WRONLY | S_IRWXU)\n");
 	    fd = open(settingsfile, O_WRONLY|O_TRUNC);
 	}
         if (fd >= 0){

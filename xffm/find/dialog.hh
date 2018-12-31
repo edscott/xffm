@@ -116,7 +116,7 @@ private:
 	gtk_widget_show (GTK_WIDGET(vpane));
 	gtk_box_pack_start (mainVbox, GTK_WIDGET(vpane), TRUE, TRUE, 0);
 	// hack: widgets_p->paper = dialog_;
-	auto topPaneVbox = gtk_c::vboxNew(FALSE, 6);
+	auto topPaneVbox = gtk_c::vboxNew(FALSE, 2);
 	g_object_set_data(G_OBJECT(dialog_), "topPaneVbox", topPaneVbox);
 	gtk_container_set_border_width (GTK_CONTAINER (topPaneVbox), 5);
 
@@ -133,7 +133,8 @@ private:
 	auto scrolledwindow = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new (NULL, NULL));
 	gtk_widget_show (GTK_WIDGET(scrolledwindow));
 	gtk_widget_show (GTK_WIDGET(diagnostics));
-	gtk_paned_pack2 (GTK_PANED (vpane), GTK_WIDGET(scrolledwindow), TRUE, TRUE);
+	gtk_paned_pack2 (GTK_PANED (vpane), GTK_WIDGET(scrolledwindow), FALSE, TRUE);
+	//gtk_paned_pack2 (GTK_PANED (vpane), GTK_WIDGET(scrolledwindow), TRUE, TRUE);
 	gtk_scrolled_window_set_policy (scrolledwindow, GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 
 	gtk_container_add (GTK_CONTAINER (scrolledwindow), GTK_WIDGET(diagnostics));
@@ -369,7 +370,8 @@ private:
         auto advancedButton = gtk_c::toggle_button(NULL, _("Details"));
         g_object_set_data(G_OBJECT(dialog_), "advancedButton", advancedButton);
         g_object_set_data(G_OBJECT(dialog_), "advancedDialog", advancedDialog);
-	gtk_box_pack_start (vbox7a, GTK_WIDGET(advancedButton), TRUE, FALSE, 5);
+	gtk_box_pack_start (topPaneHbox, GTK_WIDGET(advancedButton), FALSE, FALSE, 5);
+	//gtk_box_pack_start (vbox7a, GTK_WIDGET(advancedButton), TRUE, FALSE, 5);
 	g_signal_connect (advancedButton,
 			  "clicked", WIDGET_CALLBACK(Type::onDetails), 
 			  (gpointer)dialog_);
@@ -691,7 +693,7 @@ private:
 	// This will be constrained to the maximum width set by geometry_ hints:
 	gtk_window_set_default_size(GTK_WINDOW (dialog_),  allocation.width+50,  allocation.height+75);
  	
-	gtk_paned_set_position (vpane, 1000);
+	//gtk_paned_set_position (vpane, 1000);
 
         g_signal_connect (path_entry,
 			  "activate", BUTTON_CALLBACK(Type::onFindButton), 
@@ -706,6 +708,8 @@ private:
                 "destroy_event",  EVENT_CALLBACK(Type::onCloseEvent), NULL);
         g_signal_connect (G_OBJECT (dialog_), 
                 "delete_event",  EVENT_CALLBACK(Type::onCloseEvent), NULL);
+	g_signal_connect (G_OBJECT (dialog_), 
+		"size-allocate", EVENT_CALLBACK(Type::onSizeAllocate), (void *)this);
 
         if(gtk_entry_get_text(grep_entry) && strlen(gtk_entry_get_text(grep_entry))){
             gtk_editable_set_position (GTK_EDITABLE(grep_entry), 0);
@@ -718,13 +722,11 @@ private:
             gtk_editable_set_position (GTK_EDITABLE(path_entry), 0);
             gtk_widget_grab_focus (GTK_WIDGET(path_entry));
         }
+	gint height = setFindSize(dialog_);
 
-	gtk_widget_show(GTK_WIDGET(dialog_));
-        // XXX: line count option is not correctly processed: 
-        //        needs alternate processing method.
-        //gtk_widget_hide(GTK_WIDGET(line_count));
-        //gtk_widget_show(GTK_WIDGET(advancedBox));
-	
+	TRACE("height at %d\n", height);
+	gtk_paned_set_position (vpane,height);
+
 	return;
     }
 
@@ -1138,6 +1140,34 @@ public:
                           "Two regular expressions may be concatenated.\n" "\n"
                           "More information is available by typing \"man grep\"\n");
 private:
+    static gint
+    setFindSize(GtkWindow *dialog){
+	gint width = Settings<Type>::getSettingInteger("xffind", "width");
+        gint height = Settings<Type>::getSettingInteger("xffind", "height");
+	gtk_widget_realize(GTK_WIDGET(dialog));
+	
+	gtk_widget_set_size_request (GTK_WIDGET(dialog), 450, 440);
+	gtk_widget_realize(GTK_WIDGET(dialog));
+        GtkRequisition minimumSize;
+        GtkRequisition naturalSize;
+        gtk_widget_get_preferred_size (GTK_WIDGET(dialog),
+                               &minimumSize,
+                               &naturalSize);
+        TRACE("xffind Size: minimum=%d,%d, natural=%d,%d, settings=%d,%d\n",
+                minimumSize.width, minimumSize.height,
+                naturalSize.width, naturalSize.height,
+                width, height);
+        if (width >= naturalSize.width && height >= naturalSize.height){
+            gtk_window_resize (GTK_WINDOW(dialog), width, height);
+        }
+
+	gtk_widget_show(GTK_WIDGET(dialog));
+	GtkAllocation allocation;
+	gtk_widget_get_allocation(GTK_WIDGET(dialog), &allocation);
+        TRACE("xffind Size: allocation=%d,%d\n",
+		allocation.width, allocation.height);
+	return (height >= naturalSize.height)? height: naturalSize.height;
+    }
 
     GtkEntry *mkCompletionEntry(const gchar *history){
 	auto entry = GTK_ENTRY(gtk_entry_new());

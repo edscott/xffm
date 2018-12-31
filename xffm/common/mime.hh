@@ -391,7 +391,7 @@ public:
 		auto y = (gchar *)g_hash_table_lookup(application_hash_sfx, key);
 		if (y && strcmp(y,x[0])){
 		    g_hash_table_replace (application_hash_sfx_duplicates,  g_strdup(key), GINT_TO_POINTER(1));
-		    WARN("GLOB collision: mime-module,replacing hash element with key %s : %s--> %s\n", key, y, x[0]);
+		    TRACE("GLOB collision: mime-module,replacing hash element with key %s : %s--> %s\n", key, y, x[0]);
 		} else {
 		    g_hash_table_replace (application_hash_sfx,  g_strdup(key), g_strdup(x[0]));
 		}
@@ -681,7 +681,7 @@ public:
             return  (FALSE);
         if(!g_shell_parse_argv (cmd_fmt, &argc, &argv, &error)) {
             gchar *msg = g_strcompress (error->message);
-            DBG ("%s: %s\n", msg, cmd_fmt);
+            ERROR ("%s: %s\n", msg, cmd_fmt);
             g_error_free (error);
             g_free (msg);
             return  (FALSE);

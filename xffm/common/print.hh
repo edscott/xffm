@@ -630,7 +630,7 @@ private:
                             g_strfreev(ss);
                             goto endloop;
                         } else {
-			    WARN("no ansiTag for \"%s\"\n", *t);
+			    DBG("no ansiTag for \"%s\"\n", *t);
 			}
                         continue;
                     } else {

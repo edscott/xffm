@@ -206,7 +206,7 @@ private:
                                &minimumSize_,
                                &naturalSize_);
         setWindowMaxSize();
-        WARN("Size: minimum=%d,%d, natural=%d,%d, max=%d,%d\n",
+        TRACE("Size: minimum=%d,%d, natural=%d,%d, max=%d,%d\n",
                 minimumSize_.width, minimumSize_.height,
                 naturalSize_.width, naturalSize_.height,
                 maximumSize_.width, maximumSize_.height);

@@ -22,18 +22,18 @@ public:
         if (strncmp(text, "copy\n", strlen("copy\n")) == 0){
             auto message = _("Copying files locally");
             auto command = "cp -R -b -f";
-            DBG("execute(%s, %s, files, %s)\n", message, command, target);
+            TRACE("execute(%s, %s, files, %s)\n", message, command, target);
 
             Gio<Type>::execute(files, target, MODE_COPY);
             clearClipBoard();
         } else if (strncmp(text, "move\n", strlen("move\n")) == 0){
             auto message = _("Moving files");
             auto command = "mv -b -f";
-            DBG("execute(%s, %s, files, %s)\n", message, command, target);
+            TRACE("execute(%s, %s, files, %s)\n", message, command, target);
             Gio<Type>::execute(files, target, MODE_MOVE);
             clearClipBoard();
         } else {
-            DBG("ClipBoard::pasteClip: Invalid clipboard contents.\n");
+            TRACE("ClipBoard::pasteClip: Invalid clipboard contents.\n");
         }
         if (files) g_strfreev(files);
     }
@@ -68,7 +68,7 @@ public:
             ERROR("view||instruction is null\n");
             exit(1);
         }
-        DBG("%s\n", instruction); 
+        TRACE("%s\n", instruction); 
         //  single or multiple item selected?
         GList *selectionList;
         if (isTreeView){
@@ -244,7 +244,7 @@ public:
             usleep(250000);
             Util<Type>::context_function(clipboardContextF, NULL);
         }
-        DBG("*** clipboard thread exited.\n")
+        TRACE("*** clipboard thread exited.\n")
         return NULL;
     }
 
@@ -262,7 +262,7 @@ public:
             ERROR("thread_create(): clipBoardThread %s\n", strerror(retval));
             //return retval;
         }
-        DBG("*** clipboard thread started.\n")
+        TRACE("*** clipboard thread started.\n")
     }
 
     static void

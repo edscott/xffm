@@ -95,7 +95,11 @@ public:
 	    gtk_widget_show (image);
 	}
 	// Elaborate tooltip
-	DBG("gtk_c.cpp:: custom_tooltip not working right in Wayland\n");
+	static gboolean waylandWarn = TRUE;
+	if (waylandWarn) {
+	    DBG("gtk_c.cpp:: custom_tooltip not working right in Wayland\n");
+	    waylandWarn = FALSE;
+	}
 	//custom_tooltip(button, pixbuf, icon_tip);
 	// Simple tooltip:
 	 gtk_widget_set_tooltip_text (GTK_WIDGET(button), icon_tip);

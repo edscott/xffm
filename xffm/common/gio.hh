@@ -129,11 +129,11 @@ public:
     static gboolean 
     execute(gchar **files, const gchar *target, gint mode){
         if (!files) {
-            WARN("!files\n");
+            ERROR("!files\n");
             return FALSE;
         }
         if (*files==NULL) {
-            WARN("files==NULL\n");
+            ERROR("files==NULL\n");
             return FALSE;
         }
             
@@ -147,13 +147,13 @@ public:
 	    ERROR("LocalDnd::execute: target cannot be NULL\n");
             return FALSE;
         }
-        WARN("execute: source=%s target=%s command=%s\n", source, target, 
+        TRACE("execute: source=%s target=%s command=%s\n", source, target, 
                 mode==MODE_COPY?"copy":mode==MODE_MOVE?"move":"link");
         gboolean result = FALSE;
         if (strcmp(source, target) ) result = TRUE;
         else {
 	    g_free(source);
-            WARN("LocalDnd::execute: source and target are the same\n");
+            DBG("LocalDnd::execute: source and target are the same\n");
             return FALSE;
         }
 	g_free(source);
@@ -241,7 +241,7 @@ public:
             TimeoutResponse<Type>::dialog(GTK_WINDOW(mainWindow), message, "dialog-error");
             g_free(m);
             g_free(message);
-            DBG("doIt(%s): %s\n", path, error->message);
+            TRACE("doIt(%s): %s\n", path, error->message);
             g_error_free(error);
         }
         return retval;
@@ -280,7 +280,7 @@ public:
             TimeoutResponse<Type>::dialog(GTK_WINDOW(rmDialog), message, "dialog-error");
             g_free(m);
             g_free(message);
-            DBG("doIt(%s): %s\n", path, error->message);
+            TRACE("doIt(%s): %s\n", path, error->message);
             g_error_free(error);
         }
         return retval;
@@ -370,7 +370,7 @@ public:
                         GAsyncResult *res,
                         gpointer data){
         auto file = (GFile *)obj;
-        DBG("asyncCallback: mode %d\n", GPOINTER_TO_INT(data));
+        TRACE("asyncCallback: mode %d\n", GPOINTER_TO_INT(data));
 
         gchar errorMsg;
         gboolean success;

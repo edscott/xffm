@@ -15,7 +15,7 @@ public:
     static void
     init_tooltip_c(void){
 	tooltip_text_hash = g_hash_table_new_full(g_direct_hash, g_direct_equal, NULL, g_free);
-        DBG("Created tooltip_text_hash: %p\n", tooltip_text_hash);
+        TRACE("Created tooltip_text_hash: %p\n", tooltip_text_hash);
     }
 
 
@@ -308,7 +308,7 @@ public:
 	//void *object = arg[3];
 	//tooltip_c *tooltip_p = (tooltip_c *)object;
 
-	DBG("custom_tooltip_f for %s\n", text);
+	TRACE("custom_tooltip_f for %s\n", text);
 
 	gchar *t = g_strdup(text);
 	g_object_set_data(G_OBJECT(widget), "tooltip_text", t);

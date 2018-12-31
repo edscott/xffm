@@ -69,7 +69,7 @@ public:
     {
 	
 	if(!filePath || !st_p) {
-	    DBG ("previewAtSize: !file_path || !st_p\n");
+	    ERROR ("previewAtSize: !file_path || !st_p\n");
 	    return NULL;
 	}
 	// First of all, are we dealing with an empty file?
@@ -80,14 +80,14 @@ public:
 
 	auto pixbuf = loadFromHash(filePath);
 	if (pixbuf) {
-	    DBG("*** %s loaded from hash...\n", filePath);
+	    DBG("%s loaded from hash...\n", filePath);
 	    return pixbuf;
 	}
 
 	//FIXME: tempoary disabled
 	//pixbuf = loadFromThumbnails(filePath, st_p);
 	if (pixbuf) {
-	    DBG("*** %s loaded from thumbnails...\n", filePath);
+	    DBG("%s loaded from thumbnails...\n", filePath);
 	    return pixbuf;
 	}
 
@@ -201,7 +201,7 @@ gsPreview (const gchar *path) {
     TRACE( "--> creating thumbnail %s\n", thumbnail);
     pid_t pid = fork ();
     if(!pid) {
-	DBG( "***--> child is creating thumbnail %s\n", thumbnail);
+	DBG( "--> child is creating thumbnail %s\n", thumbnail);
         execv (arg[0], arg);
         _exit (123);
     } else {
@@ -232,11 +232,11 @@ gsPreview (const gchar *path) {
 	//if (!pthread_cond_timedwait(&waitSignal, &waitMutex, &abstime)){
 	if (pthread_cond_wait(&waitSignal, &waitMutex) != 0){
 	//if (!rfm_cond_timed_wait(wait_signal, wait_mutex, 4)){
-	    DBG("Aborting runaway ghostscript preview for %s (pid %d)\n",
+	    ERROR("Aborting runaway ghostscript preview for %s (pid %d)\n",
 		    src, (int)pid);
 	    kill(pid, SIGKILL);
 	} else {
-	    DBG("condition wait complete for file %s\n", thumbnail);
+	    TRACE("condition wait complete for file %s\n", thumbnail);
 	    // this function refs retval
 	    retval = loadFromThumbnails(path, NULL);
 	    //retval = Pixbuf<Type>::pixbuf_from_file (thumbnail, 3*PREVIEW_IMAGE_SIZE/4, PREVIEW_IMAGE_SIZE);
@@ -263,9 +263,9 @@ gs_wait_f(void *data){
     pid_t pid = GPOINTER_TO_INT(arg[2]);
     g_free(arg);
     gint status;
-    DBG("*** waiting for %d\n", pid);
+    TRACE("waiting for %d\n", pid);
     waitpid (pid, &status, WUNTRACED);
-    DBG("*** wait for %d complete\n", pid);
+    TRACE("wait for %d complete\n", pid);
     //pthread_mutex_unlock(waitMutex); 
     pthread_cond_signal(waitSignal); 
     return NULL;
@@ -410,7 +410,7 @@ gs_wait_f(void *data){
 	    wc = g_utf8_get_char (p);
 	    next = g_utf8_next_char (p);
 	    if(wc == (gunichar) - 1) {
-		DBG ("%s: Invalid character in input\n", g_get_prgname ());
+		ERROR("%s: Invalid character in input\n", g_get_prgname ());
 		wc = 0;
 	    }
 	    if(!*p || !wc || wc == '\n' || wc == '\f') {
@@ -473,7 +473,7 @@ gs_wait_f(void *data){
 	gint count=0;
 	DIR *directory = opendir(path);
 	if (!directory) {
-	    DBG("directoryText(): Cannot open %s\n", path);
+	    ERROR("directoryText(): Cannot open %s\n", path);
 	    return g_strdup_printf("%s: %s\n", path, strerror(errno));
 	}
     // http://womble.decadent.org.uk/readdir_r-advisory.html
@@ -574,7 +574,7 @@ gs_wait_f(void *data){
 		DBG("Now loading pixbuf from %s\n",  thumbnailPath);
 		auto pixbuf = gdk_pixbuf_new_from_file (thumbnailPath, &error);
 		if (error){
-		    DBG("previewAtSize: %s (%s)\n", thumbnailPath, error->message);
+		    ERROR("previewAtSize: %s (%s)\n", thumbnailPath, error->message);
 		    g_error_free(error);
 		} else {
 		    g_free(thumbnailPath);
@@ -592,7 +592,7 @@ gs_wait_f(void *data){
 		}
 	    }
 	}
-	else DBG("%s does not exist\n", thumbnailPath);
+	else ERROR("%s does not exist\n", thumbnailPath);
 	g_free(thumbnailPath);
 	return NULL;
     }
@@ -643,14 +643,14 @@ gs_wait_f(void *data){
 	    gboolean success = TRUE;
 	    if(error) {
 		success = FALSE;
-		DBG ("g_convert_with_fallback() to UTF8: %s\n", error->message);
+		ERROR("g_convert_with_fallback() to UTF8: %s\n", error->message);
 		g_error_free (error);
 		error=NULL;
 		outputText = 
 		    g_convert_with_fallback (inputText, -1, "UTF-8", "iso8859-15",
 					     NULL, &bytes_read, &bytes_written, &error);
 		if (error) {
-		    DBG ("b.g_convert_with_fallback() to iso8859-15: %s\n", error->message);
+		    ERROR("b.g_convert_with_fallback() to iso8859-15: %s\n", error->message);
 		    g_error_free (error);
 		} else success = TRUE;
 
@@ -676,7 +676,7 @@ gs_wait_f(void *data){
 
     static gchar *
     readFileHead(const gchar *path) {
-	DBG("*** readFileHead: %s\n", path);
+	TRACE("readFileHead: %s\n", path);
 	if (g_file_test(path, G_FILE_TEST_IS_DIR)){
 	    gchar *head = directoryText(path);
 	    if (strlen(head) >= BUFSIZE) head[BUFSIZE-1] = 0;
@@ -684,7 +684,7 @@ gs_wait_f(void *data){
 	}
 	gint fd = open (path, O_RDONLY);
 	if(fd < 0) {
-	    DBG ("readFileHead(): open(%s): %s\n", path, strerror (errno));
+	    ERROR("readFileHead(): open(%s): %s\n", path, strerror (errno));
 	    return errorText(path);
 	}
 	gchar buffer[BUFSIZE];
@@ -697,7 +697,7 @@ gs_wait_f(void *data){
 	close (fd);
 
 	if(bytes < 0) {
-	    DBG ("readFileHead():read %s (%s).\n", path, strerror (errno));
+	    ERROR("readFileHead():read %s (%s).\n", path, strerror (errno));
 	    return errorText(path);
 	}
 	gint i;
@@ -796,7 +796,7 @@ gs_wait_f(void *data){
 	cairo_destroy (page_layout.cr);
 	TRACE ("// write thumbnail\n");
 	if(cairo_surface_write_to_png (page_layout.surface, thumbnail) != CAIRO_STATUS_SUCCESS) {
-	    DBG ("cairo_surface_write_to_png(surface,) != CAIRO_STATUS_SUCCESS");
+	    ERROR("cairo_surface_write_to_png(surface,) != CAIRO_STATUS_SUCCESS");
 	}
 	cairo_surface_destroy (page_layout.surface);
 	// destroy GLists

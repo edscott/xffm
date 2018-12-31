@@ -1,6 +1,5 @@
 bug: 
  > is thumbnail cache being used? Nothing in .cache/xffm
- > save and restore size for xffind
  > use libmagic preferably instead of perl if available
  > printout optional and required libraries found in configure step.
  
@@ -8,10 +7,6 @@ bug:
    (maybe define an xatom for first one, value = 1 and -1 when none is defined)
  . timeout dialog requires a progress bar on timeout
  . timeout dialog requires a "Dismiss" button.
-
-
-Important: Save and restore size of find dialog if user resizes it, but
-           also set a minimum size the user may resize to.
 
 
 TODO

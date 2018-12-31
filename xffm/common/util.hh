@@ -846,7 +846,7 @@ public:
         GtkTreeStore *store = gtk_tree_store_new (1, G_TYPE_STRING);
 	FILE *historyFile = fopen (history, "r");
 	if(!historyFile) {
-            DBG("util_c::loadHistory(): creating new history: \"%s\"\n", history);
+            TRACE("util_c::loadHistory(): creating new history: \"%s\"\n", history);
             return GTK_TREE_MODEL(store);
         }
         gchar line[2048];

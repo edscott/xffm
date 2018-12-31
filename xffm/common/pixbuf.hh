@@ -73,7 +73,7 @@ public:
 	if (pixbuf) return pixbuf;
 	pixbuf = pixbuf_icons_c::get_theme_pixbuf("image-missing", pixels);
 	if (pixbuf) pixbuf_hash_c::put_in_pixbuf_hash(icon_name, pixels, pixbuf);
-	WARN("xf::Pixbuf::get_pixbuf(): image-missing. Please install icon \"%s\"\n", icon_name);
+	DBG("xf::Pixbuf::get_pixbuf(): image-missing. Please install icon \"%s\"\n", icon_name);
 	return pixbuf;
      }
 
@@ -135,7 +135,7 @@ public:
 	}  
 	
 	if(error && !strstr(path, ".cache/rfm/thumbnails")) {
-		DBG ("pixbuf_from_file() %s:%s\n", error->message, path);
+		ERROR ("pixbuf_from_file() %s:%s\n", error->message, path);
 		g_error_free (error);
 	}
 	return pixbuf;
@@ -145,7 +145,7 @@ public:
     static void 
     pixbuf_save(GdkPixbuf *tgt, const gchar *path){
 	if (!tgt || !path || !GDK_IS_PIXBUF(tgt)) {
-	    DBG("pixbuf_save_f(%s): !tgt || !path || !GDK_IS_PIXBUF(tgt)\n", 
+	    ERROR("pixbuf_save_f(%s): !tgt || !path || !GDK_IS_PIXBUF(tgt)\n", 
 		    path);
 	    return ;
 	}
@@ -155,7 +155,7 @@ public:
 	    gdk_pixbuf_save (tgt, path, "png", &error,
 			     "tEXt::Software", "Rodent", NULL);
 	    if (error){
-		DBG("pixbuf_save_f(%s): %s\n", path, error->message);
+		ERROR("pixbuf_save_f(%s): %s\n", path, error->message);
 		g_error_free(error);
 	    }
 	}
