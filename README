@@ -1,5 +1,4 @@
 bug: 
- > is thumbnail cache being used? Nothing in .cache/xffm
  > use libmagic preferably instead of perl if available
  > printout optional and required libraries found in configure step.
  
