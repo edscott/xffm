@@ -147,6 +147,7 @@ public:
 
     static gchar *
     e2Label(const gchar *partitionPath){
+	if (!partitionPath) return NULL;
         const gchar *command = "ls -l /dev/disk/by-label";
 	FILE *pipe = popen (command, "r");
 	if(pipe == NULL) {

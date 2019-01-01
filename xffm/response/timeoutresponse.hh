@@ -5,6 +5,8 @@
        time_t time(time_t *tloc);
        
 namespace xf {
+    gboolean zap = FALSE;
+    GtkWindow *timeoutDialog = NULL;
 template <class Type>
 class TimeoutResponse {
     using pixbuf_c = Pixbuf<double>;
@@ -18,6 +20,9 @@ public:
     }
     static void
     dialogFull(GtkWindow *parent, const gchar *message, const gchar *icon, gint iconSize, gint delay){
+	// only one of these dialogs at a time...
+	if (timeoutDialog) return;
+	
         if (!icon) icon = "emblem-important";
         if (!message) message = "<span size=\"larger\" color=\"blue\">Custom message markup appears <span color=\"red\">here</span></span>";
          // Create the widgets
@@ -48,6 +53,10 @@ public:
          gtk_box_pack_start(vbox, GTK_WIDGET(label), FALSE, FALSE,0);
          g_signal_connect (G_OBJECT (dialog), "delete-event", 
                  EVENT_CALLBACK (delete_event), NULL);
+	 auto button = Gtk<Type>::dialog_button("window-close", _("Dismiss"));
+         gtk_box_pack_start(vbox, GTK_WIDGET(button), FALSE, FALSE,0);
+         g_signal_connect (G_OBJECT (button), "button-press-event", 
+                 EVENT_CALLBACK (dismiss_event), dialog);
 
 	 gtk_window_set_type_hint(dialog, GDK_WINDOW_TYPE_HINT_DIALOG);
          gtk_window_set_modal(dialog, TRUE);
@@ -56,15 +65,19 @@ public:
 	 gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER_ON_PARENT);
          gtk_widget_show_all(GTK_WIDGET(dialog));
          time_t now = time(NULL);
-         while (time(NULL) < now + delay) {
+	 zap = FALSE;
+	 timeoutDialog = dialog;
+         while (time(NULL) < now + delay && !zap) {
             while (gtk_events_pending()) gtk_main_iteration();
           //  usleep(100000);
          }
+	 
 
 
          //void **arg = (void **)calloc(2, sizeof(void *));
          //g_timeout_add_seconds (4, zapit, (void *) dialog);
-         zapit((void *)dialog);   
+         zapit((void *)dialog);  
+	 timeoutDialog = NULL;
 
          return;
     }
@@ -77,10 +90,18 @@ private:
         return FALSE;
     }
 
-        
+         
+    static gboolean dismiss_event (GtkWidget *widget,
+               GdkEvent  *event,
+               gpointer   data){
+	gtk_widget_hide(GTK_WIDGET(data));
+	zap = TRUE;
+        //gtk_widget_destroy(GTK_WIDGET(dialog));
+ 	return TRUE;
+    }       
     static gboolean delete_event (GtkWidget *widget,
                GdkEvent  *event,
-               gpointer   user_data){
+               gpointer   data){
 	gtk_widget_hide(widget);
         //gtk_widget_destroy(GTK_WIDGET(dialog));
  	return TRUE;
