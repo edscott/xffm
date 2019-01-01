@@ -1,10 +1,12 @@
 #ifndef LPTERM_HH
 #define LPTERM_HH
 
-#warning "add cmake test for HAVE_READLINE_HISTORY_H"
-//#ifdef HAVE_READLINE_HISTORY_H
+// TODO, if readline/history.h is available in BSD, simplify with this
+//#warning "add cmake test for HAVE_READLINE_HISTORY_H"
+#ifdef HAVE_READLINE_HISTORY_H
 # include <readline/history.h>
-//#endif
+#endif
+
 namespace xf {
 template <class Type> class LpTerm;
 template <class Type> class Page;

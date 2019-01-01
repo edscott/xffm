@@ -148,7 +148,6 @@ private:
         // Directories:
         if (strcmp(xd_p->d_name, "..")==0) return  g_strdup("go-up");
 #ifdef HAVE_STRUCT_DIRENT_D_TYPE
-#warning "HAVE_STRUCT_DIRENT_D_TYPE defined"
         // Symlinks:
     /*    if (xd_p->d_type == DT_LNK) {
             return  g_strdup("text-x-generic-template/SW/emblem-symbolic-link/2.0/220");

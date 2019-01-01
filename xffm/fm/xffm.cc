@@ -14,6 +14,11 @@
 # include <sys/time.h>
 # include <sys/resource.h>
 #endif
+
+#ifdef HAVE_LIBMAGIC
+# include <magic.h>
+#endif
+
 #include <memory>
 
 static const gchar *xffmProgram;

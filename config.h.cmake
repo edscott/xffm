@@ -5,13 +5,20 @@
 #define PACKAGE_LOCALE_DIR "@CMAKE_INSTALL_PREFIX@/@CMAKE_INSTALL_LOCALEDIR@"
 
 #define @SIGNAL_H@
+#define @READLINE_HISTORY_H@
 #define @HAVE_GREP@
 #define @HAVE_EMERGE@
 #define @HAVE_PACMAN@
 #define @HAVE_PKG@
 #define @HAVE_LIBXML2@
+#define @LIBMAGIC@
 #define @MIMETYPE_PROGRAM@
 #define @FREEDESKTOP_GLOBS@
 #define @FREEDESKTOP_ALIAS@
 #define @FREEDESKTOP_ICONS@
+
+// FIXME: determine whether these are valid:
+#define HAVE_STRUCT_DIRENT_D_TYPE 1
+#define HAVE_FPATHCONF
+#define HAVE_DIRFD
 

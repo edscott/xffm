@@ -1,7 +1,5 @@
 #ifndef XF_LOCALMODEL__HH
 # define XF_LOCALMODEL__HH
-// FIXME: determine HAVE_STRUCT_DIRENT_D_TYPE on configure (for freebsd)
-#define HAVE_STRUCT_DIRENT_D_TYPE 1
 #include "common/util.hh"
 
 typedef struct xd_t{
@@ -188,7 +186,6 @@ public:
         }
 
 #else
-#warning "FIXME: undefined HAVE_STRUCT_DIRENT_D_TYPE
         xd_p->d_type = 0;
 #endif
         return xd_p;
@@ -393,7 +390,6 @@ private:
         gboolean is_dir;
         gboolean is_reg_not_link;
 
-// FIXME: get HAVE_STRUCT_DIRENT_D_TYPE from cmake...
 #ifdef HAVE_STRUCT_DIRENT_D_TYPE
         is_dir = (xd_p->d_type == DT_DIR);
         is_reg_not_link = (xd_p->d_type == DT_REG && !(xd_p->d_type == DT_LNK));
