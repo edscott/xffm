@@ -1,0 +1,7 @@
+SUBDIRS = po 
+DIST_SUBDIRS = po  
+
+ACLOCAL_AMFLAGS=-I m4
+
+
+	

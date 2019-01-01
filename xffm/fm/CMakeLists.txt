@@ -1,10 +1,12 @@
     
 add_executable(xffm xffm.cc)
 include_directories(
-    "./xffm"
+    "./"
+    "../"
     "${PROJECT_BINARY_DIR}" 
     "${GTK3_INCLUDE_DIRS}" 
     "${LIBXML2_INCLUDE_DIR}")
+
 target_link_libraries(xffm 
     ${GTK3_LIBRARIES}
     ${X11_LIBRARIES}
@@ -12,6 +14,7 @@ target_link_libraries(xffm
     ${LIBXML2_LIBRARIES}
     ${LIBMAGIC_LIBRARIES}
     ${FOO_LIBRARIES})
+
 install(TARGETS xffm RUNTIME DESTINATION bin)
 INSTALL(CODE "execute_process( \
     COMMAND ${CMAKE_COMMAND} -E create_symlink \
