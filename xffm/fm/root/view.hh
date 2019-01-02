@@ -58,7 +58,7 @@ private:
             {N_("View as list"), (void *)LocalPopUp<Type>::toggleView,  
 		(void *)"TreeView", "window"},
             //{N_("Add bookmark"), (void *)BasePopUp<Type>::noop, NULL, NULL},
-            {N_("Empty trash bin"), (void *)emptyTrash, NULL, NULL},
+            {N_("Empty trash"), (void *)emptyTrash, NULL, NULL},
             {NULL,NULL,NULL, NULL}};
 	rootPopUp = BasePopUp<Type>::createPopup(item); 
         auto text = g_strdup_printf("Xffm+-%s", VERSION);

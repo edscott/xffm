@@ -390,7 +390,7 @@ public:
 		DISPLAY_PIXBUF, normal_pixbuf,
 		NORMAL_PIXBUF, normal_pixbuf,
 		HIGHLIGHT_PIXBUF, highlight_pixbuf,
-		TOOLTIP_TEXT,_("xffm:nfs"),
+		TOOLTIP_TEXT,"xffm:nfs",
 
 		-1);
 	g_free(utf_name);
@@ -416,7 +416,7 @@ public:
 		DISPLAY_PIXBUF, normal_pixbuf,
 		NORMAL_PIXBUF, normal_pixbuf,
 		HIGHLIGHT_PIXBUF, highlight_pixbuf,
-		TOOLTIP_TEXT,_("xffm:sshfs"),
+		TOOLTIP_TEXT,"xffm:sshfs",
 
 		-1);
 	g_free(utf_name);
@@ -442,7 +442,7 @@ public:
 		DISPLAY_PIXBUF, normal_pixbuf,
 		NORMAL_PIXBUF, normal_pixbuf,
 		HIGHLIGHT_PIXBUF, highlight_pixbuf,
-		TOOLTIP_TEXT,_("xffm:ecryptfs"),
+		TOOLTIP_TEXT,"xffm:ecryptfs",
 
 		-1);
 	g_free(utf_name);
@@ -468,7 +468,7 @@ public:
 		DISPLAY_PIXBUF, normal_pixbuf,
 		NORMAL_PIXBUF, normal_pixbuf,
 		HIGHLIGHT_PIXBUF, highlight_pixbuf,
-		TOOLTIP_TEXT,_("xffm:cifs"),
+		TOOLTIP_TEXT,"xffm:cifs",
 
 		-1);
 	g_free(utf_name);

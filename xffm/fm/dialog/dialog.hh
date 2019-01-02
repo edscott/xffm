@@ -124,12 +124,13 @@ public:
             case G_FILE_MONITOR_EVENT_CREATED:
             case G_FILE_MONITOR_EVENT_MOVED_IN:
             if (!strstr(f, "part")){
-                gchar *g = g_strdup_printf(_("Inserted %s"), "" );
                 gchar *path = FstabView<Type>::id2Partition(f);
 		gchar *label = NULL;
 		if (path) label = FstabView<Type>::e2Label(path);
 		if (path && label){
-		    gchar *markup = g_strdup_printf("%s    <span color=\"red\">%s</span>    <span color=\"green\">%s</span>\n%s\n", g, path, label?label:"", base );
+		    gchar *markup = g_strdup_printf("%s    <span color=\"red\">%s</span>    <span color=\"green\">%s</span>\n%s\n",
+			    _("You have just inserted a medium."), 
+			    path, label?label:"", base );
 		    TimeoutResponse<Type>::dialog(NULL, markup, "drive-harddisk/SE/go-up/3.0/180");
 		    g_free(markup);
 		}

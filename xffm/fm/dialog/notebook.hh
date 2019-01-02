@@ -49,8 +49,8 @@ public:
         gtk_notebook_set_scrollable (notebook_, TRUE);
 
         auto new_tab_button = GTK_BUTTON(gtk_button_new ());
-        gtk_c::setup_image_button(new_tab_button, "tab-new-symbolic", _("Open a new tab (Ctrl+T)"));
-//        gtk_c::setup_image_button(new_tab_button, "list-add", _("Open a new tab (Ctrl+T)"));
+        gtk_c::setup_image_button(new_tab_button, "tab-new-symbolic", _("Open in New Tab"));
+//        gtk_c::setup_image_button(new_tab_button, "list-add", _("New Tab"));
         gtk_widget_show(GTK_WIDGET(new_tab_button));
 
         auto button_box = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));

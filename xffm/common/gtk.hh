@@ -74,7 +74,7 @@ public:
 	g_hash_table_insert(iconname_hash, _("Copy"), (void *)"copy");
 	g_hash_table_insert(iconname_hash, _("Delete"), (void *)"delete");
 	g_hash_table_insert(iconname_hash, _("Shred"), (void *)"dialog-warning");
-	g_hash_table_insert(iconname_hash, _("bcrypt"), (void *)"emblem-keyhole");
+	//g_hash_table_insert(iconname_hash, "bcrypt", (void *)"emblem-keyhole");
 	g_hash_table_insert(iconname_hash, _("Open in New Tab"), (void *)"open");
     }
 
@@ -120,7 +120,7 @@ public:
                 GTK_WIDGET(page_child_box), GTK_WIDGET(page_label_box));
 	gtk_notebook_set_tab_reorderable (GTK_NOTEBOOK(notebook), 
                 GTK_WIDGET(page_child_box), FALSE);
-	setup_image_button(page_label_button, "list-add", _("Open a new tab (Ctrl+T)"));
+	setup_image_button(page_label_button, "list-add", _("New Tab"));
 	if (new_button_p) *new_button_p = page_label_button;
 	return page_child_box;
     }
@@ -332,7 +332,7 @@ public:
      dialog = gtk_dialog_new_with_buttons (_("Help"),
 					   parent,
 					   flags,
-					   _("_OK"),
+					   _("OK"),
 					   GTK_RESPONSE_NONE,
 					   NULL);
      auto content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));

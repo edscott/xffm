@@ -232,7 +232,7 @@ private:
 	auto properties_p = (Properties<Type> *)data;
 	properties_p->dialog = GTK_WINDOW(gtk_window_new (GTK_WINDOW_TOPLEVEL));
 	gtk_window_set_type_hint(properties_p->dialog, GDK_WINDOW_TYPE_HINT_DIALOG);
-	gtk_window_set_title(properties_p->dialog, _("Properties management"));
+	gtk_window_set_title(properties_p->dialog, _("Properties and Attributes"));
 	auto mainBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_VERTICAL, 2));
 	gtk_container_add(GTK_CONTAINER(properties_p->dialog), GTK_WIDGET(mainBox));
 	auto titlePath = GTK_LABEL(gtk_label_new(""));
@@ -458,9 +458,9 @@ private:
 		auto trashDate = trashInfo(path, "DeletionDate");
 		if (strchr(trashDate, 'T'))*strchr(trashDate, 'T')=' ';
 		auto trashSource = trashInfo(path, "Path");
-		auto mt = g_strdup_printf("<span size=\"large\" color=\"red\">%s:\n<span color=\"blue\">%s</span>\n%s\n<span color=\"blue\">%s</span></span>", 
-		    _("Trashed"), trashDate?trashDate:_("service unavailable"),
-		    _("Source file:"), trashSource?trashSource:_("service unavailable"));
+		auto mt = g_strdup_printf("<span size=\"large\" color=\"red\">%s\n<span color=\"blue\">%s</span>\n%s\n<span color=\"blue\">%s</span></span>", 
+		    _("Successfully moved to trash."), trashDate?trashDate:_("service unavailable"),
+		    _("Source:"), trashSource?trashSource:_("service unavailable"));
 		g_free(trashDate);
 		g_free(trashSource);
 		auto *g = g_strconcat(m,"\n", mt, NULL);

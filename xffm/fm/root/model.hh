@@ -64,7 +64,7 @@ public:
 		DISPLAY_PIXBUF, normal_pixbuf,
 		NORMAL_PIXBUF, normal_pixbuf,
 		HIGHLIGHT_PIXBUF, highlight_pixbuf,
-		TOOLTIP_TEXT,_("xffm:root"),
+		TOOLTIP_TEXT,"xffm:root",
 
 		-1);
 	g_free(utf_name);
@@ -119,7 +119,7 @@ public:
 		DISPLAY_PIXBUF, normal_pixbuf,
 		NORMAL_PIXBUF, normal_pixbuf,
 		HIGHLIGHT_PIXBUF, highlight_pixbuf,
-		TOOLTIP_TEXT,_("This is the user's home directory"),
+		TOOLTIP_TEXT,g_get_home_dir(),
 		-1);
 	g_free(utf_name);
     }
@@ -149,7 +149,7 @@ public:
 		DISPLAY_PIXBUF, normal_pixbuf,
 		NORMAL_PIXBUF, normal_pixbuf,
 		HIGHLIGHT_PIXBUF, highlight_pixbuf,
-		TOOLTIP_TEXT,_("This is the user's home directory"),
+		TOOLTIP_TEXT,g_get_home_dir(),
 		-1);
 	g_free(name);
 	g_free(utf_name);

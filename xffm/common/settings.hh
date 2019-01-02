@@ -24,7 +24,7 @@ public:
                (GKeyFileFlags) (G_KEY_FILE_KEEP_COMMENTS |  G_KEY_FILE_KEEP_TRANSLATIONS),
                 NULL);
         if (!loaded) {
-            gchar *text = g_strdup_printf(_("Creating a new file (%s)\n"), settingsfile);
+            gchar *text = g_strdup_printf("%s %s\n", _("New File:"), settingsfile);
             TRACE("%s", text);
             g_free(text);
             writeSettings();

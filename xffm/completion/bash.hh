@@ -157,7 +157,7 @@ private:
 	if (!output) return;
         print_c::show_text(output);
         gchar *message1=g_strdup_printf("%s (> %ld)",
-                _("Too many matches"), base_c::maxOptions());
+                _("Too many matches, not all have been retrieved"), base_c::maxOptions());
         print_c::print_icon(output, "dialog-info", "red", g_strdup_printf("%s\n", message1));
         g_free(message1);
         print_c::scroll_to_bottom(output);

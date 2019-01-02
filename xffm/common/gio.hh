@@ -273,7 +273,7 @@ public:
         if (error){
             gchar *m;
             if (mode == MODE_RM) 
-                m = g_strdup_printf(_("Could not delete %s"), path);
+                m = g_strdup_printf(_("Could not delete:\n%s"), path);
             else if (mode == MODE_TRASH) 
                 m = g_strdup_printf(_("Could not move %s to trash"), path);
             gchar *message = g_strdup_printf("<span color=\"red\">%s</span>\n(%s)", m, error->message);

@@ -18,8 +18,3 @@
 #define @FREEDESKTOP_ALIAS@
 #define @FREEDESKTOP_ICONS@
 
-// FIXME: determine whether these are valid:
-#define HAVE_STRUCT_DIRENT_D_TYPE 1
-#define HAVE_FPATHCONF
-#define HAVE_DIRFD
-

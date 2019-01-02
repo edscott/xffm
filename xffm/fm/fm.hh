@@ -87,14 +87,12 @@ public:
 	/* this binds rfm domain: */
 	bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
 
-	bindtextdomain ("librfm", PACKAGE_LOCALE_DIR);
-	bindtextdomain ("rodent", PACKAGE_LOCALE_DIR);
+	bindtextdomain ("xffm+", PACKAGE_LOCALE_DIR);
 # ifdef HAVE_BIND_TEXTDOMAIN_CODESET
-	bind_textdomain_codeset ("librfm", "UTF-8");
-	bind_textdomain_codeset ("rodent", "UTF-8");
+	bind_textdomain_codeset ("xffm+", "UTF-8");
 # endif
 # ifdef HAVE_BIND_TEXTDOMAIN_CODESET
-	TRACE ("binding %s, at %s", GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
+	TRACE ("binding %s, at %s\n", GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 # endif
 #endif

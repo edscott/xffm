@@ -128,7 +128,7 @@ public:
 		return LocalView<Type>::item_activated(this, treeModel, tpath, path);
 	    }
 	} else {
-	    ERROR("%s is not valid path\n", path);
+	    TRACE("%s is not valid path\n", path);
         }
 	return this->loadModel(path);
     }

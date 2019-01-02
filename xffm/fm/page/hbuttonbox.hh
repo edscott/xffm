@@ -35,9 +35,9 @@ public:
 	termButtonBox_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
 	
         toggleToTerminal_ =  newButton("utilities-terminal-symbolic",_("Embedded Terminal"));
-	toggleToIconview_ = newButton("system-file-manager-symbolic", _("Iconview"));
+	toggleToIconview_ = newButton("system-file-manager-symbolic", _("All items in the iconview."));
 	scriptButton_ =  newButton("document-revert-symbolic", _("Script Recorder"));
-	clearButton_ =  newButton("edit-clear-all", _("Clear log view"));
+	clearButton_ =  newButton("edit-clear-all", _("Clear Log"));
 	input_ = createStatus(); // Status textview
 	sizeScale_ = newSizeScale(_("Terminal font"));
 	statusLabel_ = GTK_LABEL(gtk_label_new (""));

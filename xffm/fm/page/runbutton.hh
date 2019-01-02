@@ -134,14 +134,13 @@ public:
     void create_menu(void){
 	const gchar *items[]={N_("Renice Process"),N_("Suspend"),N_("Continue"),
 	    N_("Interrupt"),N_("Hangup"),N_("User 1 (USR1)"),
-	    N_("User 2 (USR2)"),N_("Terminate"),N_("Abort"),
+	    N_("User 2 (USR2)"),N_("Terminate Task"),N_("Abort"),
             N_("Kill"),
 	    N_("Segmentation fault"),NULL};
 	gint signals[] = {
 	    -1,
 	    SIGSTOP, SIGCONT, SIGINT, SIGHUP, SIGUSR1, 
 	    SIGUSR2, SIGTERM, SIGABRT, SIGKILL, SIGSEGV};
-
 
 	
 	menu_ = GTK_MENU(gtk_menu_new());

@@ -139,7 +139,7 @@ private:
         if(ptext){
             gtk_label_set_markup  (label, ptext);
         } else {
-            gtk_label_set_markup  (label, _("response:"));
+            gtk_label_set_markup  (label, _("Response Requested"));
         }
 
         gtk_box_pack_start (hbox, GTK_WIDGET(label), TRUE, TRUE, 0);

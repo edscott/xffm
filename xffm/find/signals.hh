@@ -290,7 +290,7 @@ private:
             if (!editor || strlen(editor)==0){
                 GtkTextView *diagnostics = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(dialog), "diagnostics"));
                 print_c::print_icon(diagnostics, "dialog-warning", 
-                        g_strdup_printf("%s (EDITOR=\"\")\n", _("No editor component found.")));
+                        g_strdup_printf("%s (EDITOR=\"\")\n", _("No editor for current action.")));
                 return FALSE;
             }
 	    gtk_widget_set_sensitive(GTK_WIDGET(edit_button), TRUE);
@@ -719,7 +719,7 @@ private:
         const gchar *editor = getenv("EDITOR");
         if (!editor || strlen(editor)==0){
             print_c::print_error(diagnostics, g_strdup_printf("%s (EDITOR=\"%s\")\n",
-                        _("No editor component found."), editor));
+                        _("No editor for current action."), editor));
             return;
         }
         TRACE("editor = %s\n", editor);

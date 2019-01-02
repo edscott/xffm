@@ -104,7 +104,8 @@ dnl Check for additional packages
 
 #XDT_I18N([af am  an ar as ast  az  be@latin  be bg bn_IN bn bo br  bs ca ca@valencia crh csb cs cy da de  dz el en_AU en_CA en_GB  en_US eo es et eu fa fi  fr fur fy ga gl  gu gv  he hi hne hr hsb hu hy ia id ig io is it ja ka kg  kk km kn ko  ks ku ky  lb lg li lt lv mai mg mi mk ml mn mr ms  my nb nds ne  nl nn nso oc or  pa pl ps pt_BR pt pt_PT ro ru rw se si sk sl  sq sr@ijekavianlatin sr@ijekavian sr@ije sr@latin  sr sv   ta te tg th tk  tr tt ug uk  ur uz@cyrillic uz vi wa xh yi yo zh_CN zh_HK zh zh_TW.Big5 zh_TW zu])
 #XDT_I18N([es zh_CN de fr ru])
-XDT_I18N([es])
+XDT_I18N([es zh_CN])
+#XDT_I18N([es])
 
 dnl final checks
 #AC_CHECK_FILES([/usr/share/pixmaps /usr/local/share/pixmaps /usr/share/icons /usr/local/share/icons],[],[])

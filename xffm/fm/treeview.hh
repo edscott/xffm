@@ -20,7 +20,7 @@ public:
         appendColumnText(treeView, _("Size"), SIZE);
         appendColumnText(treeView, _("Date"), DATE);
         appendColumnText(treeView, _("Mimetype"), MIMETYPE);
-        appendColumnText(treeView, _("ICON_NAME"), ICON_NAME);
+        appendColumnText(treeView, "ICON_NAME", ICON_NAME);
         appendColumnText(treeView, _("TYPE"), TYPE);
 #endif
         setUpSignals(view, G_OBJECT(treeView));

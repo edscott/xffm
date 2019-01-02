@@ -1197,8 +1197,7 @@ open_with (const gchar *path) {
 	    rfm_threaded_diagnostics(widgets_p, "xffm/stock_dialog-warning", 
 		    g_strconcat(en->path, "\n", NULL));
 	    rfm_threaded_diagnostics(widgets_p, "xffm_tag/stderr",
-		    g_strconcat(_("The program exists, but is not executable.\nPlease check your installation and/or install the binary properly."), 
-		    "\n", NULL));
+		    g_strdup_printf(_("Scriptfile \"%s\" is not executable. Please set the executable-attribute on that file.", en->path));
 	    rfm_threaded_diagnostics(widgets_p, "xffm/stock_dialog-info", NULL);
 	    gchar *text=g_strdup_printf (_("Open with %s"), _("Text Editor"));
 	    gchar *base=g_path_get_basename(en->path);

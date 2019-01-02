@@ -4,6 +4,7 @@
  */
 
 #define XFFM_CC
+#include "autotools.h"
 #include "config.h"
 #include "types.h"
 #include "intl.h"

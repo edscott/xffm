@@ -812,7 +812,7 @@ public:
         delete entryResponse;
 
 	if (!response || !strlen(response)){
-            gtk_c::quick_help(NULL, _("No name specified!")); 
+            gtk_c::quick_help(NULL, _("No name")); 
             return;
         }
         // XXX: Will character code set of response match that of path?
@@ -850,7 +850,7 @@ public:
         entryResponse->setCheckButton(_("Run in Terminal"));
         entryResponse->setCheckButton(Mime<Type>::runInTerminal(path));
 
-        entryResponse->setEntryLabel(_("Custom arguments:"));
+        entryResponse->setEntryLabel(_("Arguments for the Command"));
         // get last used arguments...
         entryResponse->setEntryDefault("");
         

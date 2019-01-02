@@ -256,7 +256,7 @@ private:
         gchar *base = g_path_get_basename(path);
         const gchar *dir[]={N_("Documents"), N_("Downloads"),N_("Music"),N_("Pictures"),
                     N_("Templates"),N_("Videos"),N_("Desktop"),N_("Bookmarks"),
-                    N_(".Trash"),NULL};
+                    N_("Trash"),NULL};
         const gchar *icon[]={"folder-documents", "folder-download","folder-music","folder-pictures",
                       "folder-templates","folder-videos","user-desktop","user-bookmarks",
                       "user-trash",NULL};

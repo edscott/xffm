@@ -129,7 +129,9 @@ private:
 
         if (stack_glob_v.gl_pathc > maxOptions()){
             print_c::print(output, "blue/white_bg",g_strdup_printf("%s ", file_token));
-            print_c::print_error(output, g_strdup_printf(_("More than %ld matches\n"), maxOptions()));
+
+            print_c::print_error(output, g_strdup_printf(_("Matches: %d"), (gint)maxOptions()));
+            print_c::print_error(output, g_strdup_printf(_("Too many matches, not all have been retrieved")));
             globfree(&stack_glob_v);
             g_free(file_token);
             return NULL;

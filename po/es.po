@@ -1,27 +1,27 @@
 # Translations for Rodent package.
 # Copyright (C) 2004-2012 FSF.
 # This file is distributed under the same license as the Rodent package.
-#   --- jue may  2 20:11:18 CDT 2013 ---
+#   --- vie may  3 10:45:03 CDT 2013 ---
 #
 # Copyright (C) 2004 Alexander Reinholdt <dustpuppy@mail.berlios.de>.
 # Miguel Angel Quesada <kesadalive@gmail.com>, 2009.
-# Ramón Rey Vicente <ramon.rey@hispalinux.es>, 2003-2004.
-# Jorge González <jorgegonz@svn.gnome.org>, 2004-2012.
+# Ram�n Rey Vicente <ramon.rey@hispalinux.es>, 2003-2004.
+# Jorge Gonz�lez <jorgegonz@svn.gnome.org>, 2004-2012.
 # Albert Abril <albert.abril@gmail.com>, 2006.
 # Juan Percy Rojas Cruz <juanperojas@gmail.com>, 2008-2009.
 # Copyright (C) 2003 Dario Abatianni <eisfuchs@tigress.com>.
-# Adolfo González Blázquez <code@infinicode.org>, 2007.
-# Miguel Rodríguez Núñez <bokerones.fritos@gmail.com>, 2012-2013.
+# Adolfo Gonz�lez Bl�zquez <code@infinicode.org>, 2007.
+# Miguel Rodr�guez N��ez <bokerones.fritos@gmail.com>, 2012-2013.
 # Jean Pierre Mazuelos Saavedra <apuyaya@gmail.com>, 2010.
 # Mario Teijeiro Otero <mteijeiro@escomposlinux.org>, 2001-2002.
-# José Antonio Salgueiro <joseantsa@eresmas.net>, 2001.
+# Jos� Antonio Salgueiro <joseantsa@eresmas.net>, 2001.
 # Bryan Alberto Baron Chinchilla <bachinchi@gmail.com>, 2010.
-# Santiago FernÃ¡ndez Sancho <santi@kde-es.org>, 2007-2008.
+# Santiago Fernández Sancho <santi@kde-es.org>, 2007-2008.
 # Copyright (C) 2009 Daniel Campos <dcamposf@gmail.com>.
 # Carlos Mayo <carlos.mayo@hispalinux.es>, 2003.
 # Ulrik Sverdrup <ulrik.sverdrup@gmail.com>, 2009.
 # Copyright (C) 2005 Joris Guisson <joris.guisson@gmail.com>.
-# Carlos Mayo HernÃ¡ndez <carlos.mayo@hispalinux.es>, 2003-2005.
+# Carlos Mayo Hernández <carlos.mayo@hispalinux.es>, 2003-2005.
 # Nacho Hermoso de Mendoza <gnacho@gmail.com>, 2008.
 # Eneko Lacunza <enlar@iname.com>, 2001-2003.
 # Rafael Munoz Rodriguez <rafaluco@netscape.net>, 2003-2004.
@@ -33,52 +33,52 @@
 # Santiago Erquicia <erqu0001@d.umn.edu>, 2004-2005.
 # Christian Neumair <chris@gnome-de.org>, 2002-2009.
 # Diego Sevilla Ruiz <dsevilla@um.es>, 2000.
-# QA por Carlos Perelló Marín <carlos@gnome-db.org>, 2002.
-# Salvador Gimeno Zanón <salgiza@jazzfree.com>, 2002-2005.
-# Carlos Perelló Marín <carlos@gnome-db.org>, 2000-2003.
-# José Sánchez Moreno <jose@oxigenow.com>, 2007.
+# QA por Carlos Perell� Mar�n <carlos@gnome-db.org>, 2002.
+# Salvador Gimeno Zan�n <salgiza@jazzfree.com>, 2002-2005.
+# Carlos Perell� Mar�n <carlos@gnome-db.org>, 2000-2003.
+# Jos� S�nchez Moreno <jose@oxigenow.com>, 2007.
 # Juan Manuel Garcia Molina <juanma@superiodico.net>, 2001-2007.
 # Pablo de Vicente <pablo.devicente@gmail.com>, 2000-2008.
-# Lucas Vieites Fariña <lucas@asixinformatica.com>, 2001-2007.
+# Lucas Vieites Fari�a <lucas@asixinformatica.com>, 2001-2007.
 # Rocio Gallego <traducciones@rociogallego.com>, 2010-2013.
 # Juan Luis Montore Parera <jlm@NOSPAMmontore.net>, 2003-2005.
 # Gustavo Jasso Ahuja <gjasso@gmail.com>, 2012.
 # miguel angel quesada fernandez <kesadalive@gmail.com>, 2008.
-# Kira J. Fernández <kirajfdez@gmail.com>, 2011-2012.
+# Kira J. Fern�ndez <kirajfdez@gmail.com>, 2011-2012.
 # Francisco Javier F. Serrador <serrador@cvs.gnome.org>, 2002-2010.
 # Juan Pablo Puerta <ews@madridwireless.net>, 1999.
 # Cherny D. C. Berbesi I. <cberbesi@onuva.com>, 2009.
 # Edited by Krzysztof Luks <kluks@iq.pl>.
-# Héctor García Álvarez <hector@scouts-es.org>, 1999-2002.
-# Sylvia Sánchez <LailahFSF@gmail.com>, 2010-2011.
-# David Paul Peña <eodos0@gmail.com>, 2009-2010.
-# Raúl Miró <cotin@geocities.com>, 2001.
+# H�ctor Garc�a �lvarez <hector@scouts-es.org>, 1999-2002.
+# Sylvia S�nchez <LailahFSF@gmail.com>, 2010-2011.
+# David Paul Pe�a <eodos0@gmail.com>, 2009-2010.
+# Ra�l Mir� <cotin@geocities.com>, 2001.
 # Copyright (C) 2004 Jernej Kos <kostko@jweb-network.net>.
 # Mario Young <mayeco@kdemail.net>, 2008.
 # Lucas Garcia <tanke@escomposlinux.org>, 2003.
-# Ernesto Manríquez Mendoza <alejandronova@gmail.com>, 2011.
+# Ernesto Manr�quez Mendoza <alejandronova@gmail.com>, 2011.
 # Anthony Vital <anthony.vital@gmail.com>, 2010.
 # Carlos Davila <carluti@users.sourceforge.net>, 2007-2008.
 # Raul Jover Baison <cain@akrata.org>, 2003.
-# Raúl Alexis Betancort Santana <a2363@correo.dis.ulpgc.es>, 1999.
-# Ana María García Molina <ana_gm@eresmas.com>, 2001.
+# Ra�l Alexis Betancort Santana <a2363@correo.dis.ulpgc.es>, 1999.
+# Ana Mar�a Garc�a Molina <ana_gm@eresmas.com>, 2001.
 # Miguel Revilla <yo@miguelrevilla.com>, 2001.
 # Javier Gomez sierras <jgomsi@apolo.umh.es>, 2000.
 # Javier Moreno <javier.moreno@alufis35.uv.es>, 2000.
-# Leandro Machacón <leandroman@gemail.com>, 2010.
+# Leandro Machac�n <leandroman@gemail.com>, 2010.
 # Copyright (C) 2008 Alejandro Valdes Jimenez <avaldes@gnome.org>.
 # Danilo Vasquez Simonetti <danilo.vasquez@gmail.com>, 2008.
 # Jose Antonio Salgueiro Aquino <developer@telefonica.net>, 2003.
 # Carlos Higuera <higuera.carlos@gmail.com>, 2006.
 # Ignacio Bezanilla Diaz <coder@telefonica.net>, 2004.
-# Ãlvaro PeÃ±a <alvaropg@mac.com>, 2001.
+# Álvaro Peña <alvaropg@mac.com>, 2001.
 # Alberto Garcia <info@trebol-a.com>, 2007-2008.
 # Miguel de Icaza,computo,622-4680 <miguel@metropolis.nuclecu.unam.mx>, 1998.
 # Miguel A. Arevalo <marevalo@marevalo.net>, 2002.
 # Copyright (C) 2009 Ulrik Sverdrup <ulrik.sverdrup@gmail.com>.
 # Tomas Moreno <tomas@info.ne.udo.edu.ve>, 2001.
 # Mario Carrion <mario@carrion.mx>, 2010.
-# Q&A, Germán Poo-Caamaño <gpoo@ubiobio.cl>, 2003.
+# Q&A, Germ�n Poo-Caama�o <gpoo@ubiobio.cl>, 2003.
 # Mauricio Araya Polo <mauricio@eazel.com>, 2001.
 # Ignacio A. Poggi <ignaciop.3@gmail.com>, 2008-2009.
 # Claudio Saavedra <csaavedra@alumnos.utalca.cl>, 2004-2009.
@@ -88,14 +88,14 @@
 # David Prieto <frandavid100@gmail.com>, 2008.
 # Alberto Caso <alberto.caso@adaptia.es>, 2007-2008.
 # Jacinto Capote Robles <fastangel@gmail.com>, 2007-2009.
-# Eduardo García Cebollero <kiwnix@yahoo.es>, 2002.
+# Eduardo Garc�a Cebollero <kiwnix@yahoo.es>, 2002.
 # Alberto Pintado <apintado@lycos.es>, 2003.
 # Juan Alfredo Salas Santillana <jsantillana@aqpglug.org.pe>, 2009.
 # David Paul <eodos0@gmail.com>, 2011.
 # Jordi Mallach <jordi@sindominio.net>, 2000-2012.
 # Yonathan Moreno <yonathan@yonathanmoreno.com>, 2012.
-# Miguel Menéndez <mimecar@innerzaurus.com>, 2007.
-# Rafael Rodríguez <apt-drink@gulic.org>, 2005.
+# Miguel Men�ndez <mimecar@innerzaurus.com>, 2007.
+# Rafael Rodr�guez <apt-drink@gulic.org>, 2005.
 # Rafael Belmonte <eaglescreen@gmail.com>, 2013.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2002-2012.
 # Hector Wilvert Ivan Valdez Reza <ranmaru.hibikiya@gmail.com>, 2013.
@@ -103,29 +103,29 @@
 # Copyright (C) 2003, 2004 Unai Garro <ugarro@users.sourceforge.net>.
 # Milagros Alessandra Infante Montero <maim92@gmail.com>, 2012.
 # Leticia Martin <leticia.martin@gmail.com>, 2009.
-# Saúl Ortega <sortega4444@gmail.com>, 2010-2011.
+# Sa�l Ortega <sortega4444@gmail.com>, 2010-2011.
 # Markus Slopianka <kamikazow@fishmouth.net>, 2009-2013.
 # eodos <eodos0@gmail.com>, 2010.
 # Unai Garro <ugarro@users.sourceforge.net>, 2003.
-# Miguel Rodríguez Pérez <miguelrp@gmail.com>, 2002.
+# Miguel Rodr�guez P�rez <miguelrp@gmail.com>, 2002.
 # Copyright (C) 2005 Antonio Ognio <gnrfan@gnrfan.org>, 2005.
 # Sun G11n <gnome_int_l10n@ireland.sun.com>, 2002-2003.
 # Carlos Albornoz <carlos@debianchile.cl>, 2009.
-# QA: Carlos Perelló Marín <carlos@gnome-db.org>.
+# QA: Carlos Perell� Mar�n <carlos@gnome-db.org>.
 # javier Vinal <fjvinal@gmail.com>, 2009-2012.
 # Francisco Javier Fernandez Serrador <fserrador@gmail.com>, 2009.
 # Nestor Diaz <nestordiaz@equusdigital.com>, 2006.
-# José Carlos García Sogo <jsogo@arrakis.es>, 2001-2003.
+# Jos� Carlos Garc�a Sogo <jsogo@arrakis.es>, 2001-2003.
 # Roby Sottini <rsottini@yahoo.com>, 2009.
 # Leticia Martin Hernandez <leticia.martin@gmail.com>, 2009.
 # Lucas Vieites <lucas@codexion.com>, 2002-2008.
-# Germán Poó Caamaño <gpoo@ubiobio.cl>, 2004.
+# Germ�n Po� Caama�o <gpoo@ubiobio.cl>, 2004.
 # Alejandro Valdes Jimenez <avaldes@gnome.org>, 2007-2011.
-# Rafael Muñoz Cárdenas <bymenda@gmail.com>, 2008.
+# Rafael Mu�oz C�rdenas <bymenda@gmail.com>, 2008.
 # Eloy Cuadra <ecuadra@eloihr.net>, 2003-2013.
-# Javier Viñal <fjvinal@gmail.com>, 2009-2013.
+# Javier Vi�al <fjvinal@gmail.com>, 2009-2013.
 # cyphra <cyphra@hal9000.eui.upm.es>, 2004.
-# Javier Mazorra Rodríguez <mazi.debian@gmail.com>, 2007-2013.
+# Javier Mazorra Rodr�guez <mazi.debian@gmail.com>, 2007-2013.
 # Rafael Beccar <rafael.beccar@kdemail.net>, 2004-2006.
 # Felipe Barros S. <felipeb@gnome.cl>, 2007.
 # Chihau Chau <chihau@gmail.com>, 2008-2009.
@@ -140,34 +140,34 @@
 # jeffrey steve borbon sanabria <jeffto@aclibre.org>, 2008.
 # Alex Fiestas <alex@eyeos.org>, 2009.
 # santi <santi@kde-es.org>, 2005-2009.
-# Andrés Gómez <agomez@igalia.com>, 2009.
+# Andr�s G�mez <agomez@igalia.com>, 2009.
 # Enrique Rodriguez <krm@futurnet.es>, 2003.
-# Alejandro Sáchez Acosta <asanchez@gnu.org>, 2002.
+# Alejandro S�chez Acosta <asanchez@gnu.org>, 2002.
 # Kramer Garay <kramergaray@hotmail.com>, 2010.
 # Copyright (C) 2003 Eric Bischoff <e.bischoff@noos.fr>.
 # sito <soler.sito@gmail.com>, 2008.
-# Adrián Martínez <sfxgt3@gmail.com>, 2009-2010.
+# Adri�n Mart�nez <sfxgt3@gmail.com>, 2009-2010.
 # Miguel de Icaza <miguel@metropolis.nuclecu.unam.mx>, 1998.
 # Antonio Ognio <gnrfan@gnrfan.org>, 2003-2006.
-# Héctor Enríquez Díaz <henrique@alumnos.ubiobio.cl>, 2005.
+# H�ctor Enr�quez D�az <henrique@alumnos.ubiobio.cl>, 2005.
 # Gary Castillo <elhumano@hotmail.com>, 2001.
 # Miguel Angel Nieto <correo@miguelangelnieto.net>, 2005.
 # Marcos Fouces Lago <mfouces@yahoo.es>, 2004.
 # Francisco Vila Doncel <fravd@wanadoo.es>, 2003.
 # Xavier Corredor Llano <xavier.corredor.llano@gmail.com>, 2010-2012.
 # Gabriel Felipe Cornejo Salas <gnomeusr@gmail.com>, 2008.
-# David Martínez Moreno <ender@debian.org>, 2005.
-# Jesse Avilés <jesseaviles@gmail.com>, 2008-2011.
-# Rafael Bermúdez <rafaelbermudez@gmail.com>, 2006.
-# Benjamín Valero Espinosa <benjavalero@gmail.com>, 2008-2012.
+# David Mart�nez Moreno <ender@debian.org>, 2005.
+# Jesse Avil�s <jesseaviles@gmail.com>, 2008-2011.
+# Rafael Berm�dez <rafaelbermudez@gmail.com>, 2006.
+# Benjam�n Valero Espinosa <benjavalero@gmail.com>, 2008-2012.
 # Aitor Moreno <aitormoreno@gmail.com>, 2008.
 # Ignacio Casal Quinteiro <icq@cvs.gnome.org>, 2004-2010.
 # Santiago Vila Doncel <sanvila@unex.es>, 2001-2011.
-# Rafael Rodríguez Martín <apt-drink@gulic.org>, 2005.
-# Daniel Calviño Sánchez <danxuliu@gmail.com>, 2008-2012.
+# Rafael Rodr�guez Mart�n <apt-drink@gulic.org>, 2005.
+# Daniel Calvi�o S�nchez <danxuliu@gmail.com>, 2008-2012.
 # Alvaro Soliverez <asoliverez@gmail.com>, 2008-2010.
 # Carlos Mayo Hernandez <carlos.mayo@hispalinux.es>, 2007.
-# Nicolás Satragno <nsatragno@gmail.com>, 2011-2013.
+# Nicol�s Satragno <nsatragno@gmail.com>, 2011-2013.
 # Jean Pierre MAZUELOS SAAVEDRA <apuyaya@gmail.com>, 2010.
 # Carlos Garnacho <carlosg@gnome.org>, 2007.
 # Vicente Herrera Cobo <vicente.herrera@hispalinux.es>, 2003-2004.
@@ -175,9 +175,9 @@
 # Enrique Matias Sanchez (Quique) <cronopios@gmail.com>, 2004-2010.
 # JulioBorjaBarra <juboba@gmail.com>, 2010.
 # Israel Garcia Garcia <israelgarcia86@gmail.com>, 2007-2011.
-# María Majadas <alixis82@gmail.com>, 2008-2013.
-# Javier Fernández-Sanguino Peña <jfs@computer.org>, 2002.
-# Germán Poo-Caamaño <gpoo@ubiobio.cl>, 2002-2003.
+# Mar�a Majadas <alixis82@gmail.com>, 2008-2013.
+# Javier Fern�ndez-Sanguino Pe�a <jfs@computer.org>, 2002.
+# Germ�n Poo-Caama�o <gpoo@ubiobio.cl>, 2002-2003.
 # Pablo Pita Leira <pablo.pita@kdemail.net>, 2004-2011.
 # Gabriel Leonardo Ruiz Manzano <debianmaster@gmail.com>, 2008-2009.
 # Juan-Pablo Scaletti <juanpablo@jpscaletti.com>, 2009.
@@ -188,30 +188,30 @@
 # Eduardo Sanchez <kde@sombragris.org>, 2003-2010.
 # Lucas Di Pentima <lucas@lunix.com.ar>, 2001-2002.
 # Ismael Rubio Rojas <ismael_rubio_rojas@hotmail.com>, 2003.
-# Francisco Javier Fernández <serrador@arrakis.es>, 2003.
-# Antonio J. Soler Sánchez <redtony@telefonica.net>, 2004.
+# Francisco Javier Fern�ndez <serrador@arrakis.es>, 2003.
+# Antonio J. Soler S�nchez <redtony@telefonica.net>, 2004.
 # Maria Majadas <maria.majadas@hispalinux.es>, 2005-2011.
 # Raul Moratalla <raul.moratalla@ono.com>, 2004.
 # Antonio Crevillen <antonio.crevillen@hispalinux.es>, 2003.
-# Miguel Revilla RodrÃ­guez <yo@miguelrevilla.com>, 2002-2004.
+# Miguel Revilla Rodríguez <yo@miguelrevilla.com>, 2002-2004.
 # Ignacio Poggi <ignaciop.3@gmail.com>, 2008-2012.
 # Copyright (C) 2007 daniel g. siegel <dgsiegel@gnome.org>.
 # By Nicols Lichtmaier <nick@technisys.com.ar>.
 # Mauricio Araya P. <mauricio@eazel.com>, 2001.
 # Francisco Javier Fernandez <serrador@arrakis.es>, 2003.
 # Juan Jesus Ojeda Croissier <juanjesus.ojeda@hispalinux.es>, 2002.
-# José Antonio Salgueiro A. <joseantsa@eresmas.net>, 2001.
+# Jos� Antonio Salgueiro A. <joseantsa@eresmas.net>, 2001.
 # Cristina Yenyxe Gonzalez Garcia <the.blue.valkyrie@gmail.com>, 2009-2012.
 # Pedro Jurado Maqueda <pjmelenas@biwemail.com>, 2003-2005.
 # Dominik Neumeister <neudob06@edvhtl.at>, 2009.
 # Luis F. Lopez M. <luis.lopez@ubuntu.com>, 2010.
 # Adolfo Jayme Barrientos <fitoschido@gmail.com>, 2012.
 # Havoc Pennington <hp@pobox.com>, 1999.
-# Tatiana Gutiérrez Bunster <tgutierr@ubiobio.cl>, 2003.
+# Tatiana Guti�rrez Bunster <tgutierr@ubiobio.cl>, 2003.
 # Jorge Gonzalez <jorgegonz@svn.gnome.org>, 2005-2007.
 # Andres Herrera <andres@usr.cl>, 2008.
 # sergio rivadero <sergiorivadero@argentina.com>, 2005.
-# Jacobo Tarrío Barreiro <jtarrio@trasno.net>, 2000-2002.
+# Jacobo Tarr�o Barreiro <jtarrio@trasno.net>, 2000-2002.
 # Ferro01 <ferro01@wanadoo.es>, 2011.
 # Alejandro Araiza Alvarado <mebrelith@gmail.com>, 2005-2006.
 # Daniel Garcia <dani@danigm.net>, 2010.
@@ -219,8 +219,8 @@
 # Danilo Vasquez <danilo.vasquez@gmail.com>, 2007-2008.
 # Jaime Robles <jaime@kde.org>, 2003-2009.
 # Rafael Osuna <rosuna@wol.es>, 2003-2004.
-# Ricardo Fernández Pascual <ric@users.sourceforge.net>, 2000-2001.
-# Carlos Ernesto López Natarén <natorro@themis.fciencias.unam.mx>, 2000.
+# Ricardo Fern�ndez Pascual <ric@users.sourceforge.net>, 2000-2001.
+# Carlos Ernesto L�pez Natar�n <natorro@themis.fciencias.unam.mx>, 2000.
 # Miguel <migueldeblas@gmail.com>, 2010.
 # Miguel Mingo <miguelmingo@terra.es>, 2002.
 # maria <maria.majadas@hispalinux.es>, 2006-2007.
@@ -228,15 +228,15 @@
 # Juan Emilio Drault <juan@drault.com>, 2004.
 # Jorge Carrasquilla Soares <jorge@conectiva.com.br>, 2000.
 # Gerardo Jose Bueno Jimenez <gerardo@abser-t.com>, 2010.
-# Germán Poo Caamaño, <gpoo@ubiobio.cl>, 2002.
+# Germ�n Poo Caama�o, <gpoo@ubiobio.cl>, 2002.
 # Rodrigo Marcos Fombellida <rmarcos@cvs.gnome.org>, 2005-2008.
 # Andrea Mara Pimenta Alonso <pimenta@conectiva.com.br>, 2000.
 # Mikel Olasagasti <hey_neken@mundurat.net>, 2003-2005.
-# Matías Costa <mcc3@alu.um.es>, 2004-2007.
-# Jaime Iniesta Alemán <capitanplaneta@gmail.com>, 2005-2006.
-# Miguel Revilla Rodríguez <yo@miguelrevilla.com>, 2002-2004.
+# Mat�as Costa <mcc3@alu.um.es>, 2004-2007.
+# Jaime Iniesta Alem�n <capitanplaneta@gmail.com>, 2005-2006.
+# Miguel Revilla Rodr�guez <yo@miguelrevilla.com>, 2002-2004.
 # Lorenzo nunez <lorenzo.nunez@gmail.com>, 2007.
-# J. Félix Ontañón <fontanon@emergya.es>, 2009.
+# J. F�lix Onta��n <fontanon@emergya.es>, 2009.
 # Adrian Soto <adrianmatematico@yahoo.com.mx>, 2003-2004.
 # Paulino Padial <devnull.tst@gmail.com>, 2007.
 # Manue Tortosa <manutortosa@chakra-project.org>, 2011.
@@ -248,23 +248,23 @@
 # Copyright (C) 2004-2005 Johan Svedberg <johan@svedberg.com>.
 # Pablo Gonzalo del Campo <pablodc@bigfoot.com>, 2000-2004.
 # Itxaka Serrano <itxakaserrano@gmail.com>, 2010.
-# Adrián Chaves Fernández (Gallaecio) <adriyetichaves@gmail.com>, 2010-2013.
+# Adri�n Chaves Fern�ndez (Gallaecio) <adriyetichaves@gmail.com>, 2010-2013.
 # Jesse Aviles <jesseaviles@gmail.com>, 2008-2010.
 # Lucas 'Basurero' Vieites <lucas@asixinformatica.com>, 2001-2007.
-# Martín Carr <tincarr@gmail.com>, 2005-2008.
+# Mart�n Carr <tincarr@gmail.com>, 2005-2008.
 # Mauricio Jose Adonis Carrasco <mike.alfa.2007@gmail.com>, 2008.
-# QA - Germán Poo Caamaño <gpoo@ubiobio.cl>, 2002.
-# Marco César Gloria <mgloria@campus.gda.itesm.mx>, 2000.
-# Germán Poo Caamaño <gpoo@ubiobio.cl>, 2001-2003.
+# QA - Germ�n Poo Caama�o <gpoo@ubiobio.cl>, 2002.
+# Marco C�sar Gloria <mgloria@campus.gda.itesm.mx>, 2000.
+# Germ�n Poo Caama�o <gpoo@ubiobio.cl>, 2001-2003.
 # Raul Gonzalez <raulgf83@gmail.com>, 2010-2013.
-# Javier Jardón <jjardon@gnome.org>, 2002-2010.
+# Javier Jard�n <jjardon@gnome.org>, 2002-2010.
 # Gabriel Ruiz <debianmaster@gmail.com>, 2008.
-# Pablo Iranzo Gómez <Pablo.Iranzo@uv.es>, 2000.
+# Pablo Iranzo G�mez <Pablo.Iranzo@uv.es>, 2000.
 # Pablo G. del Campo <pablodc@bigfoot.com>, 2003-2004.
 # Andreu Correa Casablanca <castarco@gmail.com>, 2009.
 # Miguel Perez Ibars <mpi79470@alu.um.es>, 2006.
-# Carlos Mayo Hernández <carlos.mayo@hispalinux.es>, 2003-2005.
-# Juan Manuel García Molina <juanma_gm@wanadoo.es>, 2000-2007.
+# Carlos Mayo Hern�ndez <carlos.mayo@hispalinux.es>, 2003-2005.
+# Juan Manuel Garc�a Molina <juanma_gm@wanadoo.es>, 2000-2007.
 # Manuel de Vega Barreiro <barreiro@arrakis.es>, 2000-2002.
 # Luis Lopez <luis@loxi.ca>, 2010-2011.
 # Jordi Jaen Pallares <jordi@suse.de>, 1999-2001.
@@ -288,20 +288,20 @@
 # Jorge Bustos <jorge@gnome.cl>, 2003.
 # Urizev <urizev@gmail.com>, 2007.
 # Federico Mena Quintero,Pregonero <federico@casiopea.quartic.org>, 1998.
-# Ricardo González Castro <rick@jinlabs.com>, 2007.
+# Ricardo Gonz�lez Castro <rick@jinlabs.com>, 2007.
 # MIguel Angel Quesada Fernandez <kesadalive@gmail.com>, 2008.
-# Andrés Herrera <andres@usr.cl>, 2008.
-# Nicolás Alvarez <nicolas.alvarez@gmail.com>, 2010.
+# Andr�s Herrera <andres@usr.cl>, 2008.
+# Nicol�s Alvarez <nicolas.alvarez@gmail.com>, 2010.
 # Javier Vinal <fjvinal@gmail.com>, 2009-2013.
-# miguel rodriguez nuñez <bokerones.fritos@gmail.com>, 2012-2013.
-# Ayoze Hernández Díaz <ayoze12@gmail.com>, 2013.
-# Jesús Bravo Álvarez <suso@trasno.net>, 1999-2004.
-# Ibán josé García Castillo <Iban.Garcia@alufis35.uv.es>, 2000.
+# miguel rodriguez nu�ez <bokerones.fritos@gmail.com>, 2012-2013.
+# Ayoze Hern�ndez D�az <ayoze12@gmail.com>, 2013.
+# Jes�s Bravo �lvarez <suso@trasno.net>, 1999-2004.
+# Ib�n jos� Garc�a Castillo <Iban.Garcia@alufis35.uv.es>, 2000.
 # Sergio Rivadero <sergiorivadero@argentina.com>, 2006.
 # Rodrigo Sancho Senosiain <ruy_ikari@bigfoot.com>.
-# Susana González <sgonzalez@igalia.com>, 2007.
-# Javier Gómez <jgomsi@apolo.umh.es>, 2000.
-# Cristina Yenyxe González García <the.blue.valkyrie@gmail.com>, 2009-2013.
+# Susana Gonz�lez <sgonzalez@igalia.com>, 2007.
+# Javier G�mez <jgomsi@apolo.umh.es>, 2000.
+# Cristina Yenyxe Gonz�lez Garc�a <the.blue.valkyrie@gmail.com>, 2009-2013.
 # Rolando Espinoza La Fuente <darkrho@gmail.com>, 2007.
 # Javier Conde Rueda <f3285740@est.fib.upc.es>, 2003.
 # Franco Mariluis <fmariluis@gmail.com>, 2008-2009.
@@ -318,9 +318,9 @@
 # Ricardo Varas Santana <ricardoivaras@gmail.com>, 2009-2013.
 # Israel Campoy <churritzu@yahoo.com>, 2012.
 # Baltasar Perez Diaz <baltasar.perez@hispalinux.es>, 2002.
-# Xan López <xan@dimensis.com>, 2002.
+# Xan L�pez <xan@dimensis.com>, 2002.
 # Tambet Ingo <tambet@novell.com>, 2009.
-# Iñaky Pérez González <inaky@peloncho.fis.ucm.es>, 1996.
+# I�aky P�rez Gonz�lez <inaky@peloncho.fis.ucm.es>, 1996.
 # Rodrigo Moya <rmoya@chez.com>, 1999.
 # Salvador Gimeno <salgiza@jazzfree.com>, 2001.
 # Enrique Matias Sanchez (aka Quique) <cronopios@gmail.com>, 2003-2012.
@@ -331,12 +331,12 @@
 # Pablo Saratxaga <pablo@walon.org>, 1998-2007.
 # Gustavo D. Vranjes <gvranjes@abaconet.com.ar>, 2002.
 # Aitor Morant <fromhell091@gmail.com>, 2013.
-# Joaquín Ignacio Aramendía <samsagax@gmail.com>, 2011.
+# Joaqu�n Ignacio Aramend�a <samsagax@gmail.com>, 2011.
 # Sebi Kul <sebikul@gmail.com>, 2011.
 # Pedro Villavicencio Garrido <pvillavi@gnome.org>, 2005.
-# José María Pongilioni <ponghy@ono.com>, 2001.
-# Edgardo García Hoeffler <edybsd@yahoo.com.ar>, 2002.
-# Edscott Wilson Garcia <edscott@users.sf.net>, 2002-2011.
+# Jos� Mar�a Pongilioni <ponghy@ono.com>, 2001.
+# Edgardo Garc�a Hoeffler <edybsd@yahoo.com.ar>, 2002.
+# Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
 # Pablo del Campo <pablodc@bigfoot.com>, 2003.
 # Ricardo Mones Lastra <mones@users.sourceforge.net>, 2002.
 # Copyright (C) Wouter Bolsterlee <wbolster@gnome.org>.
@@ -349,27 +349,27 @@
 # philippe Rouquier <brasero-app@wanadoo.fr>, 2005.
 # <srtxg@chanae.alphanet.ch>, 2001-2011.
 # Dario Andres Rodriguez <andresbajotierra@gmail.com>, 2008-2009.
-# Juan Matías Olmos <colonizare@yahoo.com.ar>, 2012.
+# Juan Mat�as Olmos <colonizare@yahoo.com.ar>, 2012.
 # Jorge Bernal <koke@amedias.org>, 2004-2006.
 # Juanje Ojeda <jojeda@emergya.es>, 2008.
-# Enrique Matías Sánchez (Quique) <cronopios@gmail.com>, 2009.
+# Enrique Mat�as S�nchez (Quique) <cronopios@gmail.com>, 2009.
 # Chema Celorio <chema@celorio.com>, 2000.
-# Ernesto Manríquez <alejandronova@gmail.com>, 2011.
+# Ernesto Manr�quez <alejandronova@gmail.com>, 2011.
 # Gilberto Miralla <xyhthyx@gmail.com>, 2007-2008.
 # Daniel Campos <dcamposf@gmail.com>, 2009.
-# Ezequiel Pérez <eazel7@yahoo.com.ar>, 2003.
-# Oscar Cebellán Ramos <cebaman@bigfoot.com>, 2001.
+# Ezequiel P�rez <eazel7@yahoo.com.ar>, 2003.
+# Oscar Cebell�n Ramos <cebaman@bigfoot.com>, 2001.
 # Yelitza Louze <ylouze@redhat.com>, 2003.
 # Mvillarino <mvillarino@dubmail.net>, 2005-2008.
 # Stephen Denham <stephen.denham@gmail.com>, 2007.
 # Miguel Navarrete Hernandez <recados.akka@gmail.com>, 2013.
 # Juanje Ojeda Croissier <jojeda@emergya.es>, 2008-2010.
-# Santiago Fernández Sancho <santi@kde-es.org>, 2007-2010.
-# Jesús Espino García <jespino@imap.cc>, 2004.
+# Santiago Fern�ndez Sancho <santi@kde-es.org>, 2007-2010.
+# Jes�s Espino Garc�a <jespino@imap.cc>, 2004.
 # Alberto Serrano <apserrano@bbvnet.com>, 2001.
 # Israel Garcia <israelgarcia86@gmail.com>, 2007-2008.
 # Omar Campagne <ocampagne@gmail.com>, 2009.
-# Francisco Javier Dorado Martínez <javier@tiflolinux.org>, 2007-2011.
+# Francisco Javier Dorado Mart�nez <javier@tiflolinux.org>, 2007-2011.
 # First author: Quique <quique@sindominio.net>, 2003.
 # Matias Costa <mcc3@alu.um.es>, 2005.
 # Pablo Saratxga <srtxg@chanae.alphanet.ch>, 1999.
@@ -378,7 +378,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-19 10:45-0500\n"
+"POT-Creation-Date: 2019-01-01 21:35-0600\n"
 "PO-Revision-Date: 2011-10-18 15:26+0200\n"
 "Last-Translator: Santiago Vila Doncel <sanvila@unex.es>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -388,2611 +388,1328 @@ msgstr ""
 "Content-Transfer-Encoding: 8-bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../src/gtk_c.cpp:35 ../src/window_c.cpp:25
-msgid "Open a new tab (Ctrl+T)"
+#: ../../xffm/completion/base.hh:28
+msgid "Command"
+msgstr "Comando"
+
+#: ../../xffm/completion/base.hh:31
+msgid "File"
+msgstr "Archivo"
+
+#: ../../xffm/completion/base.hh:34
+msgid "Command history"
+msgstr "Historial de �rdenes"
+
+#. option -u uid "uid" "uid_combo"
+#: ../../xffm/completion/base.hh:37 ../../xffm/find/dialog.hh:199
+msgid "User"
+msgstr "Usuario"
+
+#: ../../xffm/completion/base.hh:40
+msgid "Variable"
+msgstr "Variable"
+
+#: ../../xffm/completion/base.hh:43
+msgid "Host"
+msgstr "Host"
+
+#: ../../xffm/completion/base.hh:55
+msgid "Found no match"
+msgstr "No se ha encontrado ninguna coincidencia"
+
+#: ../../xffm/completion/base.hh:133
+#, c-format
+msgid "Matches: %d"
+msgstr "Resultado: %d"
+
+#: ../../xffm/completion/base.hh:134 ../../xffm/completion/bash.hh:160
+#, fuzzy, c-format
+msgid "Too many matches, not all have been retrieved"
+msgstr "Guardar el archivo tras su obtenci�n"
+
+#: ../../xffm/completion/base.hh:325 ../../xffm/find/fgr.hh:124
+msgid "Options:"
+msgstr "Opciones:"
+
+#: ../../xffm/completion/bash.hh:133
+msgid "Completion mode:"
+msgstr "Modo de terminaci�n:"
+
+#: ../../xffm/completion/bash.hh:134
+msgid "command"
+msgstr "comando"
+
+#: ../../xffm/completion/bash.hh:135
+msgid "file"
+msgstr "fichero"
+
+#: ../../xffm/completion/bash.hh:145 ../../xffm/completion/bash.hh:149
+msgid "Options >>"
+msgstr "Opciones >>"
+
+#: ../../xffm/find/fgr.hh:124 ../../xffm/find/dialog.hh:308
+msgid "Path"
+msgstr "Ruta"
+
+#: ../../xffm/find/fgr.hh:125
+msgid "Locate documents and folders on this computer by name or content"
+msgstr "Localice documentos y carpetas por nombre o contenido en este equipo"
+
+#: ../../xffm/find/fgr.hh:126 ../../xffm/find/dialog.hh:341
+msgid "Filter:"
+msgstr "Filtro:"
+
+#: ../../xffm/find/fgr.hh:126
+msgid "Search for files"
+msgstr "Buscar archivos"
+
+#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
+#: ../../xffm/find/fgr.hh:128
+msgid "Contents:"
+msgstr "Contenido:"
+
+#: ../../xffm/find/fgr.hh:128
+msgid "File's contents filtered as plain text."
+msgstr "Contenido del archivo filtrado como texto plano."
+
+#: ../../xffm/find/fgr.hh:131
+msgid "Verbose output debugging mode."
+msgstr "Modo detallado de depuraci�n de salida."
+
+#: ../../xffm/find/fgr.hh:133
+msgid "Show version information"
+msgstr "Muestra la informaci�n de la versi�n"
+
+#: ../../xffm/find/fgr.hh:135
+msgid "Filter Details"
+msgstr "Detalles del filtro"
+
+#. / option -a "xdev"
+#: ../../xffm/find/fgr.hh:138 ../../xffm/find/dialog.hh:180
+msgid "Stay on single filesystem"
+msgstr "Permanecer en este sistema de archivos"
+
+#: ../../xffm/find/fgr.hh:140
+msgid "Print..."
+msgstr "Imprimir�"
+
+#: ../../xffm/find/fgr.hh:140
+msgid "The unique Process ID that identifies this process."
+msgstr "El Id �nico del proceso que identifica este proceso."
+
+#. / option -D "recursiveH"
+#: ../../xffm/find/fgr.hh:142 ../../xffm/find/dialog.hh:177
+msgid "Find hidden files and directories"
+msgstr "Buscar archivos y directorios ocultos"
+
+#: ../../xffm/find/fgr.hh:143
+msgid "Filter"
+msgstr "Filtro"
+
+#: ../../xffm/find/fgr.hh:144
+msgid ""
+"To display files which pass the filter (stars and regexps will be processed)"
 msgstr ""
 
-#: ../src/pixbuf_c.cpp:619
-msgid "Icon theme:"
-msgstr "Tema de iconos:"
+#. / option -r "recursive"
+#: ../../xffm/find/fgr.hh:146 ../../xffm/find/dialog.hh:174
+msgid "Recursive"
+msgstr "Recursiva"
 
-#: ../src/pixbuf_c.cpp:619
-msgid "None"
-msgstr "Ninguno"
+#: ../../xffm/find/fgr.hh:147 ../../xffm/find/fgr.hh:148
+#: ../../xffm/find/fgr.hh:149 ../../xffm/find/fgr.hh:150
+msgid "KByte"
+msgstr "KByte"
 
-#: ../src/pixbuf_c.cpp:620
-msgid "Note: Some changes will not take effect until restart"
-msgstr "Nota: Algunos cambios no tendrán efecto hasta que reinicie"
+#: ../../xffm/find/fgr.hh:148
+msgid "is greater than or equal to"
+msgstr "es mayor o igual que"
 
-#. Only in the event that a valid mime type is not found,
-#. and magic option is set, do magic.
-#. Resolve icon id from mimetype or mimemagic.
-#. Override of particular mimetypes
-#: ../src/pixbuf_c.cpp:1205 ../src/pixbuf_c.cpp:1210 ../src/pixbuf_c.cpp:1218
-#: ../src/pixbuf_c.cpp:1225 ../src/pixbuf_c.cpp:1232
-#: ../src/pixbuf_icons_c.cpp:1103
-msgid "unknown"
-msgstr "desconocido"
+#: ../../xffm/find/fgr.hh:150
+msgid "is less than or equal to"
+msgstr "es menor que o igual que"
 
-#: ../src/pixbuf_c.cpp:1220 ../src/pixbuf_c.cpp:1235
-msgid "No Read Permission"
-msgstr "Sin permiso de lectura"
+#: ../../xffm/find/fgr.hh:152
+msgid "Set UID"
+msgstr "Establecer el UID"
 
-#: ../src/pixbuf_icons_c.cpp:369
-msgid "image"
-msgstr "imagen"
+#: ../../xffm/find/fgr.hh:152
+msgid "Executable Text Files"
+msgstr "Archivos de texto ejecutables"
 
-#: ../src/pixbuf_icons_c.cpp:370
-msgid "Audio"
-msgstr "Sonido"
+#: ../../xffm/find/fgr.hh:154
+msgid "The permissions of the file, in octal notation."
+msgstr "Los permisos del archivo, en notaci�n octal."
 
-#: ../src/pixbuf_icons_c.cpp:371
-msgid "Video"
-msgstr "Vídeo"
+#: ../../xffm/find/fgr.hh:155
+msgid "Type"
+msgstr "Tipo"
 
-#: ../src/pixbuf_icons_c.cpp:372
-msgid "office"
-msgstr "Oficina"
+#: ../../xffm/find/fgr.hh:157 ../../xffm/find/signals.hh:17
+msgid "Any"
+msgstr "Cualquiera"
 
-#: ../src/pixbuf_icons_c.cpp:373
-msgid "chemical"
-msgstr "Químico"
+#: ../../xffm/find/fgr.hh:157
+msgid "Default type"
+msgstr "Tipo predeterminado"
 
-#: ../src/pixbuf_icons_c.cpp:374
-msgid "lyx"
+#: ../../xffm/find/fgr.hh:158 ../../xffm/common/preview.hh:497
+msgid "Regular file"
+msgstr "Archivo regular"
+
+#: ../../xffm/find/fgr.hh:159 ../../xffm/find/signals.hh:11
+#: ../../xffm/fm/local/popup.hh:803 ../../xffm/common/preview.hh:488
+msgid "Directory"
+msgstr "Directorio"
+
+#: ../../xffm/find/fgr.hh:160 ../../xffm/find/signals.hh:12
+#: ../../xffm/common/preview.hh:494
+msgid "Symbolic Link"
+msgstr "Enlace simb�lico"
+
+#: ../../xffm/find/fgr.hh:161
+msgid "UNIX Socket"
+msgstr "Socket UNIX"
+
+#: ../../xffm/find/fgr.hh:162 ../../xffm/find/signals.hh:14
+#: ../../xffm/common/preview.hh:482
+msgid "Block device"
+msgstr "Dispositivo de bloques"
+
+#: ../../xffm/find/fgr.hh:163 ../../xffm/find/signals.hh:15
+#: ../../xffm/common/preview.hh:485
+msgid "Character device"
+msgstr "Dispositivo caracteres"
+
+#: ../../xffm/find/fgr.hh:164 ../../xffm/find/signals.hh:16
+#: ../../xffm/common/preview.hh:491
+msgid "FIFO"
+msgstr "FIFO"
+
+#. radio_p freed on destroy event for dialog_.
+#. option -k minutes "last_minutes", "last_minutes_spin"
+#: ../../xffm/find/fgr.hh:166 ../../xffm/find/fgr.hh:168
+#: ../../xffm/find/dialog.hh:221
+msgid "Minutes"
+msgstr "Minutos"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/dialog.hh:270 ../../xffm/find/dialog.hh:370
+#: ../../xffm/fm/treeview.hh:18
+msgid "Details"
+msgstr "Detalles"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/fgr.hh:179 ../../xffm/find/fgr.hh:180
+#: ../../xffm/find/fgr.hh:183 ../../xffm/find/fgr.hh:184
+#: ../../xffm/find/fgr.hh:187 ../../xffm/find/fgr.hh:188
+msgid "TIME"
+msgstr "TIEMPO"
+
+#: ../../xffm/find/fgr.hh:168 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/fgr.hh:174 ../../xffm/find/fgr.hh:177
+msgid "Previous"
+msgstr "Anterior"
+
+#. option -h hours "last_hours", "last_hours_spin"
+#: ../../xffm/find/fgr.hh:169 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/dialog.hh:226
+msgid "Hours"
+msgstr "Horas"
+
+#. option -d days "last_days", "last_days_spin"
+#: ../../xffm/find/fgr.hh:172 ../../xffm/find/fgr.hh:174
+#: ../../xffm/find/dialog.hh:231
+msgid "Days"
+msgstr "D�as"
+
+#: ../../xffm/find/fgr.hh:175
+msgid "Month"
+msgstr "Mes"
+
+#: ../../xffm/find/fgr.hh:177
+msgid "Month(s)"
+msgstr "Mes(es)"
+
+#: ../../xffm/find/fgr.hh:180
+msgid "Modification Time :"
+msgstr "Hora de modificaci�n :"
+
+#: ../../xffm/find/fgr.hh:184
+msgid "Access Time :"
+msgstr "�ltimo acceso :"
+
+#: ../../xffm/find/fgr.hh:188
+msgid "Creation Time :"
+msgstr "Hora de creaci�n :"
+
+#: ../../xffm/find/fgr.hh:191 ../../xffm/find/fgr.hh:192
+msgid "uid"
+msgstr "uid"
+
+#: ../../xffm/find/fgr.hh:192
+msgid "User:"
+msgstr "Usuario:"
+
+#: ../../xffm/find/fgr.hh:194 ../../xffm/find/fgr.hh:195
+msgid "gid"
+msgstr "gid"
+
+#: ../../xffm/find/fgr.hh:195
+msgid "Group:"
+msgstr "Grupo:"
+
+#: ../../xffm/find/fgr.hh:198
+msgid ""
+"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+"character that  normally  follows  a file  name"
 msgstr ""
 
-#: ../src/pixbuf_icons_c.cpp:375
-#, fuzzy
-msgid "tex"
-msgstr "texto"
+#: ../../xffm/find/fgr.hh:200
+msgid "Content View"
+msgstr "Vista del contenido"
 
-#: ../src/pixbuf_icons_c.cpp:376
-msgid "text"
-msgstr "texto"
+#: ../../xffm/find/fgr.hh:201 ../../xffm/find/fgr.hh:202
+#: ../../xffm/find/fgr.hh:203 ../../xffm/find/fgr.hh:204
+msgid "STRING"
+msgstr "CADENA"
 
-#: ../src/pixbuf_icons_c.cpp:377
-msgid "log"
-msgstr "log"
+#: ../../xffm/find/fgr.hh:202 ../../xffm/find/fgr.hh:204
+#: ../../xffm/fm/local/popup.hh:563
+msgid "Regular expression"
+msgstr "Expresi�n regular"
 
-#: ../src/pixbuf_icons_c.cpp:378
-msgid "readme"
-msgstr "léeme"
+#: ../../xffm/find/fgr.hh:204
+msgid "Extended"
+msgstr "Extendido"
 
-#: ../src/pixbuf_icons_c.cpp:379
-msgid "credits"
-msgstr "Créditos"
+#: ../../xffm/find/fgr.hh:206
+msgid "Ignore case"
+msgstr "Ignorar capitalizaci�n"
 
-#: ../src/pixbuf_icons_c.cpp:380
-msgid "authors"
-msgstr "autores"
+#: ../../xffm/find/fgr.hh:208
+msgid "Text Files"
+msgstr "Archivos de texto"
 
-#: ../src/pixbuf_icons_c.cpp:381
-msgid "install"
-msgstr "instalar"
+#: ../../xffm/find/fgr.hh:210 ../../xffm/find/dialog.hh:552
+msgid "No match"
+msgstr "No hay ninguna coincidencia"
 
-#: ../src/pixbuf_icons_c.cpp:382
-msgid "info"
-msgstr "información"
+#: ../../xffm/find/fgr.hh:212 ../../xffm/find/dialog.hh:470
+msgid "Line Count"
+msgstr "Cuenta de l�neas"
 
-#: ../src/pixbuf_icons_c.cpp:383
-msgid "html"
-msgstr "html"
+#: ../../xffm/find/fgr.hh:214 ../../xffm/find/dialog.hh:523
+msgid "Whole words only"
+msgstr "Solo palabras completas"
 
-#: ../src/pixbuf_icons_c.cpp:384
-msgid "chdr"
-msgstr ""
+#: ../../xffm/find/fgr.hh:216
+msgid "Match whole lines only"
+msgstr "Coincidencias s�lo con l�neas completas."
 
-#: ../src/pixbuf_icons_c.cpp:385
-msgid "c++hdr"
-msgstr ""
+#: ../../xffm/find/fgr.hh:368
+#, c-format
+msgid "Usage : %s [OPTIONS]\n"
+msgstr "Uso : %s [OPTIONS]\n"
 
-#: ../src/pixbuf_icons_c.cpp:386
-msgid "csrc"
-msgstr ""
+#: ../../xffm/find/signals.hh:10
+msgid "Regular"
+msgstr "Habitual"
 
-#: ../src/pixbuf_icons_c.cpp:387
-msgid "c++"
-msgstr "C++"
+#: ../../xffm/find/signals.hh:13 ../../xffm/common/preview.hh:500
+msgid "Socket"
+msgstr "Socket"
 
-#: ../src/pixbuf_icons_c.cpp:388
-msgid "App"
-msgstr "Apl"
+#: ../../xffm/find/signals.hh:209
+msgid "Select folder to search in"
+msgstr "Seleccione la carpeta en la que buscar"
 
-#: ../src/pixbuf_icons_c.cpp:389
-msgid "graphics"
-msgstr "gráficos"
+#. button no
+#: ../../xffm/find/signals.hh:265 ../../xffm/find/dialog.hh:584
+#: ../../xffm/response/entryfileresponse.hh:18
+#: ../../xffm/response/entryresponse.hh:305
+#: ../../xffm/response/passwdresponse.hh:558
+#: ../../xffm/fm/local/properties.hh:304 ../../xffm/fm/local/rm.hh:155
+msgid "Cancel"
+msgstr "Cancelar"
 
-#: ../src/pixbuf_icons_c.cpp:390
-#, fuzzy
-msgid "pgp"
-msgstr "pg"
+#: ../../xffm/find/signals.hh:293 ../../xffm/find/signals.hh:722
+msgid "No editor for current action."
+msgstr "No hay ning�n editor para la acci�n actual."
 
-#: ../src/pixbuf_icons_c.cpp:391
-msgid "trash"
-msgstr "papelera"
+#. / option "upper_limit_spin" (only in gtk dialog_)
+#: ../../xffm/find/signals.hh:351 ../../xffm/find/dialog.hh:183
+msgid "Results"
+msgstr "Resultados"
 
-#: ../src/pixbuf_icons_c.cpp:392
-msgid "pdf"
-msgstr "pdf"
+#: ../../xffm/find/signals.hh:351
+msgid "Upper limit:"
+msgstr "L�mite superior:"
 
-#: ../src/pixbuf_icons_c.cpp:393
-msgid "ps"
-msgstr "ps"
+#: ../../xffm/find/signals.hh:353
+msgid "Counting files..."
+msgstr "Contando archivos..."
 
-#: ../src/pixbuf_icons_c.cpp:394
-#, fuzzy
-msgid "msoffice"
-msgstr "soffice.bin"
+#: ../../xffm/find/signals.hh:368
+#, c-format
+msgid "Found %d match"
+msgid_plural "Found %d matches"
+msgstr[0] "Se encontr� %d coincidencia"
+msgstr[1] "Se encontraron %d coincidencias"
 
-#: ../src/pixbuf_icons_c.cpp:395
-msgid "package"
-msgstr "paquete"
+#: ../../xffm/find/signals.hh:370
+#, c-format
+msgid "%s Finished : %s"
+msgstr "%s Terminado: %s"
 
-#: ../src/pixbuf_icons_c.cpp:396
-msgid "executable"
+#: ../../xffm/find/signals.hh:488 ../../xffm/find/signals.hh:490
+msgid "Searching..."
+msgstr "Buscando�"
+
+#. g_object_set_data(G_OBJECT(dialog_), "window", dialog_);
+#: ../../xffm/find/dialog.hh:98 ../../xffm/find/dialog.hh:150
+#: ../../xffm/find/dialog.hh:611
+msgid "Find"
+msgstr "Buscar"
+
+#: ../../xffm/find/dialog.hh:183
+msgid "Upper limit"
+msgstr "L�mite superior"
+
+#. option -s +KByte "size_greater", "size_greater_spin"
+#: ../../xffm/find/dialog.hh:188
+msgid "At Least"
+msgstr "Al menos"
+
+#: ../../xffm/find/dialog.hh:188 ../../xffm/find/dialog.hh:193
+msgid "kBytes"
+msgstr "kBytes"
+
+#. option -s -KByte "size_smaller", "size_smaller_spin"
+#: ../../xffm/find/dialog.hh:193
+msgid "At Most"
+msgstr "Como m�ximo"
+
+#: ../../xffm/find/dialog.hh:204
+msgid "Group"
+msgstr "Grupo"
+
+#. option -o octal "octal_p" "permissions_entry"
+#: ../../xffm/find/dialog.hh:208
+msgid "Octal Permissions"
+msgstr "Permisos octales"
+
+#. option -p suid | exe
+#: ../../xffm/find/dialog.hh:213
+msgid "SUID"
+msgstr "SUID"
+
+#: ../../xffm/find/dialog.hh:213
+msgid "Executable"
 msgstr "Ejecutable"
 
-#: ../src/pixbuf_icons_c.cpp:397
-msgid "script"
-msgstr "guión"
+#. option -m months "last_months", "last_months_spin"
+#: ../../xffm/find/dialog.hh:237
+msgid "Months"
+msgstr "Meses"
 
-#: ../src/pixbuf_icons_c.cpp:398
-msgid "core"
-msgstr "core"
+#: ../../xffm/find/dialog.hh:248
+msgid "File type : "
+msgstr "Tipo de archivo : "
 
-#: ../src/widgets_c.cpp:18
+#. gtk_widget_show (GTK_WIDGET(right_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(center_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(left_options_vbox));
+#: ../../xffm/find/dialog.hh:262 ../../xffm/find/dialog.hh:602
+#: ../../xffm/fm/page/page.hh:70 ../../xffm/common/gtk.hh:70
+msgid "Close"
+msgstr "Cerrar"
+
+#. gtk_box_pack_start (vbox7a, GTK_WIDGET(advancedBox), TRUE, FALSE, 5);
+#. gtk_widget_show(GTK_WIDGET(advancedBox));
+#. //////////////  grep options.... /////////////////////////
+#: ../../xffm/find/dialog.hh:384
+msgid "Contains"
+msgstr "Contiene"
+
+#: ../../xffm/find/dialog.hh:404
+msgid "Contains the text"
+msgstr "Contiene el texto"
+
+#: ../../xffm/find/dialog.hh:437
+msgid "Case Sensitive"
+msgstr "Sensible a capitalizacio�n"
+
+#: ../../xffm/find/dialog.hh:449
+msgid "Extended regexp"
+msgstr "Expreg extendida"
+
+#: ../../xffm/find/dialog.hh:460
+msgid "Include binary files"
+msgstr "Incluir archivos binarios"
+
+#: ../../xffm/find/dialog.hh:496
+msgid "Match"
+msgstr "Coincidencia"
+
+#: ../../xffm/find/dialog.hh:508
+msgid "Anywhere"
+msgstr "En cualquier sitio"
+
+#: ../../xffm/find/dialog.hh:538
+msgid "lines"
+msgstr "l�neas"
+
+#: ../../xffm/find/dialog.hh:594
 msgid "Clear"
 msgstr "Limpiar"
 
-#: ../src/widgets_c.cpp:19
+#: ../../xffm/find/dialog.hh:636
+msgid "Edit"
+msgstr "Editar"
+
+#: ../../xffm/find/dialog.hh:751 ../../xffm/find/dialog.hh:766
+#: ../../xffm/common/util.hh:1150 ../../xffm/common/util.hh:1152
+#: ../../xffm/common/util.hh:1158 ../../xffm/common/util.hh:1160
+#: ../../xffm/common/preview.hh:479
+msgid "unknown"
+msgstr "desconocido"
+
+#: ../../xffm/find/dialog.hh:780
+msgid "Modified"
+msgstr "Modificado"
+
+#: ../../xffm/find/dialog.hh:784
+msgid "Created"
+msgstr "Creado"
+
+#: ../../xffm/find/dialog.hh:788
+msgid "Accessed"
+msgstr "Accedido"
+
+#: ../../xffm/find/dialog.hh:1106
+msgid ""
+"Basic rules:\n"
+"\n"
+"*  Will match any character zero or more times.\n"
+"?  Will match any character exactly one time\n"
+"[] Match any character within the [] \n"
+"^  Match at beginning of string\n"
+"$  Match at end of string \n"
+msgstr ""
+"Reglas b�sicas:\n"
+"\n"
+"*  Coincidir� con cualquier car�cter cero o m�s veces.\n"
+"?  Coincidir� con cualquier car�cter ex�ctamente una vez.\n"
+"[] Coincidir� con cualquier car�cter dentro del []\n"
+"^  Coincidir� al comienzo de la cadena\n"
+"$  Coincidir� al final de la cadena\n"
+
+#: ../../xffm/find/dialog.hh:1115
 #, fuzzy
-msgid "Close Tab"
-msgstr "Cerrar"
+msgid ""
+"Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"In  basic regular expressions the metacharacters ?, +, {, |, (, and ) \n"
+"  lose their special meaning.\n"
+"\n"
+"The  period . matches  any  single  character.\n"
+"The caret ^ matches at the start of line.\n"
+"The dollar $ matches at the end of line.\n"
+"\n"
+"Characters within [ ] matches any single character in the list.\n"
+"Characters within [^ ] matches any single character *not* in the list.\n"
+"Characters inside [ - ] matches a range of characters (ie [0-9] or [a-z]).\n"
+"\n"
+"A regular expression may be followed by one of several repetition "
+"operators:\n"
+"?      The preceding item is optional and matched\n"
+"       at most once.\n"
+"*      The preceding item will be matched zero\n"
+"       or more times.\n"
+"+      The preceding item will be matched one or\n"
+"       more times.\n"
+"{n}    The preceding item is matched exactly n times.\n"
+"{n,}   The preceding item is matched n or more times.\n"
+"{n,m}  The preceding item is matched at least n times,\n"
+"       but not more than m times.\n"
+"\n"
+"To match any reserved character, precede it with \\. \n"
+"\n"
+"Two regular expressions may be joined by the logical or operator |.\n"
+"Two regular expressions may be concatenated.\n"
+"\n"
+"More information is available by typing \"man grep\"\n"
+msgstr ""
+"Los caracteres reservados para expresiones regulares extendidas son\n"
+". ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"En expresiones regulares b�sicas los metacaracteres\n"
+"?, +, {, |, (, y ) pierden su significado especial.\n"
+"\n"
+"El punto  .  se asocia a cualquier car�cter.\n"
+"El acento circunflejo ^ busca coincidencias al principio de la l�nea.\n"
+"El d�lar $ busca coincidencias al final de la l�nea.\n"
+"\n"
+"Caracteres dentro de [ ] coinciden con cualquier car�cter en la lista.\n"
+"Caracteres dentro de [^ ] coinciden con cualquier car�cter *no* en la "
+"lista.\n"
+"Caracteres dentro de [ - ] coinciden con un rango de caracteres (pe [0-9] � "
+"[a-z]).\n"
+"\n"
+"Una expresi�n regular puede ser seguida por uno o varios operadores de "
+"repetici�n\n"
+"?      El elemento anterior es opcional y coincidir� como m�ximo una vez.\n"
+"*      El elemento anterior coincidir� cero o m�s veces.\n"
+"+      El elemento anterior coincidir� una o m�s veces.\n"
+"{n}    El elemento anterior coincidir� exactamente n veces.\n"
+"{n,}   El elemento anterior coincidir� n o m�s veces.\n"
+"{n,m}  El elemento anterior coincidir� al menos n veces, pero no m�s de m "
+"veces\n"
+" \n"
+"Para buscar coincidencia con cualquier car�cter reservado, prec�dalo con "
+"\\. \n"
+"\n"
+"Dos expresiones regulares se pueden unir con el operador | (o l�gico).\n"
+"Dos expresiones regulares se pueden concatenar.\n"
+"\n"
+"M�s inform�ci�n disponible con \"man grep\" en la l�nea de �rdenes.\n"
 
-#: ../src/widgets_c.cpp:81
-msgid "Loading folder..."
-msgstr "Cargando la carpeta..."
+#: ../../xffm/response/entryfileresponse.hh:20
+msgid "Open"
+msgstr "Abrir"
 
-#: ../src/window_c.cpp:29
+#: ../../xffm/response/entryresponse.hh:29
+#: ../../xffm/response/entryfolderresponse.hh:28
+msgid "Choose directory"
+msgstr "Elegir una carpeta"
+
+#. this button is redundant since hands are on keyboard for password
+#: ../../xffm/response/entryresponse.hh:309
+#: ../../xffm/response/passwdresponse.hh:189
+#: ../../xffm/response/passwdresponse.hh:559
+msgid "Ok"
+msgstr "Aceptar"
+
+#: ../../xffm/response/commandprogressresponse.hh:32
+msgid "Items:"
+msgstr "Elementos:"
+
+#: ../../xffm/response/passwdresponse.hh:21
+msgid "Enter password"
+msgstr "Introduzca la contrase�a"
+
+#. gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+#: ../../xffm/response/passwdresponse.hh:125
+msgid "User Input"
+msgstr "Entrada de usuario"
+
+#: ../../xffm/response/passwdresponse.hh:142
+msgid "Response Requested"
+msgstr "Pedida respuesta"
+
+#: ../../xffm/response/passwdresponse.hh:264
+msgid "Preparing"
+msgstr "Preparando"
+
+#: ../../xffm/response/passwdresponse.hh:352
+msgid "sudo"
+msgstr "sudo"
+
+#: ../../xffm/response/passwdresponse.hh:354
+msgid "Command:"
+msgstr "Comando:"
+
+#: ../../xffm/response/passwdresponse.hh:357
+msgid "Permission denied"
+msgstr "Permiso denegado"
+
+#: ../../xffm/response/passwdresponse.hh:358
+msgid "Try to approach a problem from different angles."
+msgstr "Intenta enfocar los problemas desde �ngulos diferentes."
+
+#: ../../xffm/response/passwdresponse.hh:359
+msgid "Do you want to retry?"
+msgstr "�Desea volver a intentarlo?"
+
+#: ../../xffm/response/passwdresponse.hh:360
+msgid "Alternate:"
+msgstr "Alternativo:"
+
+#: ../../xffm/response/passwdresponse.hh:365
+msgid "No"
+msgstr "No"
+
+#: ../../xffm/response/passwdresponse.hh:401
+msgid "Install"
+msgstr "Instalar"
+
+#: ../../xffm/response/passwdresponse.hh:402
+#, c-format
+msgid "%s does not exist."
+msgstr "%s no existe."
+
+#: ../../xffm/response/passwdresponse.hh:467
+msgid "Blowfish"
+msgstr "Blowfish"
+
+#: ../../xffm/response/passwdresponse.hh:468
+msgid "Encryption Key Approval"
+msgstr "Aprobaci�n de la clave de cifrado"
+
+#: ../../xffm/response/passwdresponse.hh:502
+msgid "-o     print output to standard out. Implies -r."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:506
+msgid "-c     DO NOT compress files before encryption."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:510
+msgid "-r     DO NOT remove input files after processing"
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:517
+msgid "Encryption key: "
+msgstr "Clave de cifrado: "
+
+#: ../../xffm/response/passwdresponse.hh:529
+msgid "Confirm:"
+msgstr "Confirmar:"
+
+#: ../../xffm/response/passwdresponse.hh:542
+msgid "Sorry, passwords do not match"
+msgstr "Las contrase�as no coinciden"
+
+#: ../../xffm/response/passwdresponse.hh:550
+msgid "Minimum length:"
+msgstr "Longitud m�nima:"
+
+#: ../../xffm/response/timeoutresponse.hh:56
+msgid "Dismiss"
+msgstr "Descartar"
+
+#: ../../xffm/response/commandresponse.hh:23
+msgid "Running"
+msgstr "Ejecut�ndose"
+
+#. auto text = g_strdup_printf("%s (pid: %d)",
+#. _("Waiting for operation to finish..."),
+#. Tubo<Type>::getChild (pid));
+#: ../../xffm/response/commandresponse.hh:28
+msgid "Waiting for operation to finish..."
+msgstr "Esperando a que finalice la operaci�n..."
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Documents"
+msgstr "Documentos"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Downloads"
+msgstr "Descargas"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Music"
+msgstr "M�sica"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Pictures"
+msgstr "Ima�genes"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Templates"
+msgstr "Plantillas"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Videos"
+msgstr "V�deos"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Desktop"
+msgstr "Escritorio"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Bookmarks"
+msgstr "Marcadores"
+
+#: ../../xffm/fm/local/icons.hh:259 ../../xffm/fm/local/rm.hh:181
+msgid "Trash"
+msgstr "Papelera"
+
+#: ../../xffm/fm/local/popup.hh:60
+msgid "New"
+msgstr "Nuevo"
+
+#. deprecated {N_("Open in New Tab"), NULL, NULL, NULL},
+#. deprecated {N_("Open in New Window"), NULL, NULL, NULL},
+#. common buttons /(also an iconsize +/- button)
+#: ../../xffm/fm/local/popup.hh:64 ../../xffm/fm/local/popup.hh:104
+#: ../../xffm/common/gtk.hh:74
+msgid "Copy"
+msgstr "Copiar"
+
+#: ../../xffm/fm/local/popup.hh:65 ../../xffm/fm/local/popup.hh:105
+#: ../../xffm/common/gtk.hh:73
+msgid "Cut"
+msgstr "Cortar"
+
+#: ../../xffm/fm/local/popup.hh:66 ../../xffm/fm/local/popup.hh:106
+#: ../../xffm/common/gtk.hh:66
+msgid "Paste"
+msgstr "Pegar"
+
+#. **************
+#: ../../xffm/fm/local/popup.hh:67 ../../xffm/fm/local/popup.hh:107
+#: ../../xffm/fm/local/rm.hh:174 ../../xffm/common/gtk.hh:75
+msgid "Delete"
+msgstr "Borrar"
+
+#. {N_("About"), NULL, (void *) menu},
+#.
+#. only for listview: {N_("Sort by size"), NULL, (void *) menu},
+#. only for listview: {N_("Sort by date"), NULL, (void *) menu},
+#: ../../xffm/fm/local/popup.hh:73
+msgid "Select All"
+msgstr "Seleccionar todo"
+
+#: ../../xffm/fm/local/popup.hh:74 ../../xffm/fm/local/popup.hh:559
+msgid "Match regular expression"
+msgstr "Satisfacer expresi�n regular"
+
+#: ../../xffm/fm/local/popup.hh:75 ../../xffm/fm/root/view.hh:58
+#: ../../xffm/fm/fstab/popup.hh:21
+msgid "View as list"
+msgstr "Ver como lista"
+
+#: ../../xffm/fm/local/popup.hh:77
+msgid "Show hidden files"
+msgstr "Mostrar archivos ocultos"
+
+#: ../../xffm/fm/local/popup.hh:79
+msgid "Show Backup Files"
+msgstr "Mostrar archivos de respaldo"
+
+#: ../../xffm/fm/local/popup.hh:81
+msgid "Sort data in descending order"
+msgstr "Ordenar los datos descendentemente"
+
+#: ../../xffm/fm/local/popup.hh:93 ../../xffm/fm/local/popup.hh:119
+#: ../../xffm/fm/local/popup.hh:1006 ../../xffm/fm/local/popup.hh:1013
+#: ../../xffm/fm/local/popup.hh:1022 ../../xffm/fm/local/popup.hh:1029
+#: ../../xffm/common/gtk.hh:72
+msgid "Open with"
+msgstr "Abrir con"
+
+#: ../../xffm/fm/local/popup.hh:94 ../../xffm/fm/local/popup.hh:846
+msgid "Run Executable..."
+msgstr "Ejecutar..."
+
+#: ../../xffm/fm/local/popup.hh:95
+msgid "Extract files from the archive"
+msgstr "Extraer archivos del archivador"
+
+#. g_hash_table_insert(iconname_hash, "bcrypt", (void *)"emblem-keyhole");
+#: ../../xffm/fm/local/popup.hh:96 ../../xffm/fm/root/view.hh:73
+#: ../../xffm/fm/fstab/popup.hh:20 ../../xffm/fm/dialog/notebook.hh:52
+#: ../../xffm/common/gtk.hh:78
+msgid "Open in New Tab"
+msgstr "Abrir en solapa nueva"
+
+#. File chooser
+#: ../../xffm/fm/local/popup.hh:97 ../../xffm/fm/local/popup.hh:706
+msgid "Create a compressed archive with the selected objects"
+msgstr "Crear un archivador comprimido con los objetos seleccionados"
+
+#: ../../xffm/fm/local/popup.hh:98 ../../xffm/fm/fstab/popup.hh:37
+msgid "Mount the volume associated with this folder"
+msgstr "Montar el volumen asociado con esta carpeta"
+
+#: ../../xffm/fm/local/popup.hh:99 ../../xffm/fm/fstab/popup.hh:38
+msgid "Unmount the volume associated with this folder"
+msgstr "Desmontar el volumen asociado con esta carpeta"
+
+#: ../../xffm/fm/local/popup.hh:100 ../../xffm/common/gtk.hh:67
+msgid "Add bookmark"
+msgstr "A�adir marcador"
+
+#: ../../xffm/fm/local/popup.hh:101 ../../xffm/fm/root/view.hh:74
+#: ../../xffm/common/gtk.hh:68
+msgid "Remove bookmark"
+msgstr "Quitar marcador"
+
+#: ../../xffm/fm/local/popup.hh:108 ../../xffm/fm/local/popup.hh:961
+msgid "Rename"
+msgstr "Renombrar"
+
+#: ../../xffm/fm/local/popup.hh:109 ../../xffm/fm/local/popup.hh:947
+msgid "Duplicate"
+msgstr "Duplicar"
+
+#: ../../xffm/fm/local/popup.hh:110 ../../xffm/fm/local/popup.hh:933
+msgid "Link"
+msgstr "Enlace"
+
+#: ../../xffm/fm/local/popup.hh:111
+msgid "Properties"
+msgstr "Propiedades"
+
+#: ../../xffm/fm/local/popup.hh:414
+msgid "Files:"
+msgstr "Archivos:"
+
+#: ../../xffm/fm/local/popup.hh:417 ../../xffm/fm/local/rm.hh:61
+msgid "Multiple selections"
+msgstr "Selecci�n m�ltiple"
+
+#: ../../xffm/fm/local/popup.hh:557
+msgid "Select items"
+msgstr "Seleccionar elementos"
+
+#: ../../xffm/fm/local/popup.hh:575
+msgid "Regular Expression syntax is incorrect"
+msgstr "La sintaxis de la expresi�n regular es incorrecta"
+
+#: ../../xffm/fm/local/popup.hh:592
+msgid "Nothing selected"
+msgstr "Nada seleccionado"
+
+#: ../../xffm/fm/local/popup.hh:592
+msgid "No matches."
+msgstr "No hay coincidencias."
+
+#. entryResponse->setCheckButton(_("Run in Terminal"));
+#. entryResponse->setCheckButton(Mime<Type>::runInTerminal(path));
+#: ../../xffm/fm/local/popup.hh:721 ../../xffm/fm/page/pathbar.hh:313
+msgid "Specify Output Directory..."
+msgstr "Especificar directorio de salida..."
+
+#: ../../xffm/fm/local/popup.hh:799
+msgid "Create new..."
+msgstr "Crear nueva..."
+
+#: ../../xffm/fm/local/popup.hh:806 ../../xffm/fm/local/popup.hh:886
+msgid "New Name:"
+msgstr "Nombre nuevo:"
+
+#: ../../xffm/fm/local/popup.hh:815
+msgid "No name"
+msgstr "Sin nombre"
+
+#: ../../xffm/fm/local/popup.hh:828
+#, c-format
+msgid "Another file with the same name already exists in �%s�."
+msgstr "Ya existe otro archivo con el mismo nombre en �%s�."
+
+#: ../../xffm/fm/local/popup.hh:843
+msgid "Item is executable by the user"
+msgstr "El usuario puede ejecutar el elemento"
+
+#: ../../xffm/fm/local/popup.hh:850 ../../xffm/fm/local/popup.hh:1010
+#: ../../xffm/fm/local/popup.hh:1026 ../../xffm/common/util.hh:1248
+msgid "Run in Terminal"
+msgstr "Ejecutar en un terminal"
+
+#: ../../xffm/fm/local/popup.hh:853
+msgid "Arguments for the Command"
+msgstr "Argumentos para el comando"
+
+#: ../../xffm/fm/local/popup.hh:1047 ../../xffm/fm/local/view.hh:141
+msgid "Invalid entry"
+msgstr "Entrada no v�lida"
+
+#: ../../xffm/fm/local/properties.hh:235
+msgid "Properties and Attributes"
+msgstr "Propiedades y atributos"
+
+#: ../../xffm/fm/local/properties.hh:264
+msgid "File Mode:"
+msgstr "Modo archivo:"
+
+#: ../../xffm/fm/local/properties.hh:290
+msgid "File:"
+msgstr "Archivo:"
+
+#. Add file info stuff
+#. set info stuff data according to combo box
+#. add signal handler to changed signal for combo box
+#. Add process buttons
+#.
+#: ../../xffm/fm/local/properties.hh:302
+msgid "Apply changes"
+msgstr "Aplicar cambios"
+
+#: ../../xffm/fm/local/properties.hh:462
+msgid "Successfully moved to trash."
+msgstr "Movido a la papelera con �xito."
+
+#: ../../xffm/fm/local/properties.hh:462 ../../xffm/fm/local/properties.hh:463
+msgid "service unavailable"
+msgstr "servicio no disponible"
+
+#: ../../xffm/fm/local/properties.hh:463
+msgid "Source:"
+msgstr "Origen:"
+
+#: ../../xffm/fm/local/rm.hh:59
+#, c-format
+msgid "Delete %s"
+msgstr "Eliminar %s"
+
+#: ../../xffm/fm/local/rm.hh:61
+msgid "Warning: "
+msgstr "Atenci�n: "
+
+#. gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
+#. title
+#: ../../xffm/fm/local/rm.hh:90
+msgid "Remove"
+msgstr "Quitar"
+
+#: ../../xffm/fm/local/rm.hh:140
+msgid "Apply to all"
+msgstr "Aplicar a todos"
+
+#. **************
+#. This is now available to BSD with rm -P option
+#: ../../xffm/fm/local/rm.hh:163 ../../xffm/common/gtk.hh:76
+msgid "Shred"
+msgstr "Triturar"
+
+#. We do not count "../"
+#: ../../xffm/fm/local/view.hh:48 ../../xffm/fm/base/monitor.hh:28
+#, c-format
+msgid "Files: %s"
+msgstr "Archivos: %s"
+
+#: ../../xffm/fm/root/model.hh:78
+msgid "Root Directory"
+msgstr "Directorio ra�z"
+
+#: ../../xffm/fm/root/model.hh:94
+msgid "This is the root of the filesystem"
+msgstr "Esta es la ra�z del sistema de archivos"
+
+#: ../../xffm/fm/root/model.hh:105
+msgid "Home Directory"
+msgstr "Directorio personal"
+
+#: ../../xffm/fm/root/model.hh:132
+msgid "Trash bin"
+msgstr "Papelera"
+
+#: ../../xffm/fm/root/model.hh:162 ../../xffm/fm/fstab/popup.hh:29
+msgid "Mount Helper"
+msgstr "Ayudante de montado"
+
+#: ../../xffm/fm/root/model.hh:169 ../../xffm/fm/root/model.hh:185
+msgid "Mount local disks and devices"
+msgstr "Monta dispositivos y discos locales"
+
+#: ../../xffm/fm/root/model.hh:170 ../../xffm/fm/fstab/popup.hh:25
+#: ../../xffm/fm/fstab/view.hh:429
+msgid "eCryptfs Volume"
+msgstr "Volumen eCryptfs"
+
+#: ../../xffm/fm/root/model.hh:171 ../../xffm/fm/fstab/popup.hh:24
+msgid "SSHFS Remote Synchronization Folder"
+msgstr "Carpeta de sincronizaci�n remota SSHFS"
+
+#: ../../xffm/fm/root/model.hh:172 ../../xffm/fm/fstab/popup.hh:23
+#: ../../xffm/fm/fstab/view.hh:377
+msgid "NFS Network Volume"
+msgstr "Volumen de red NFS"
+
+#: ../../xffm/fm/root/model.hh:173 ../../xffm/fm/fstab/popup.hh:26
+#: ../../xffm/fm/fstab/view.hh:455
+msgid "CIFS Volume"
+msgstr "Volumen CIFS"
+
+#: ../../xffm/fm/root/model.hh:195
+msgid "Software Updater"
+msgstr "Actualizador de software"
+
+#: ../../xffm/fm/root/model.hh:218 ../../xffm/fm/root/model.hh:230
+msgid "Add or remove software installed on the system"
+msgstr "A�adir o quitar software instalado en el sistema"
+
+#: ../../xffm/fm/root/model.hh:271
+msgid "Go to the location specified by this bookmark"
+msgstr "Ir al lugar especificado por este marcador"
+
+#. {N_("Add bookmark"), (void *)BasePopUp<Type>::noop, NULL, NULL},
+#: ../../xffm/fm/root/view.hh:61
+msgid "Empty trash"
+msgstr "Vaciar la papelera"
+
+#. File chooser
+#: ../../xffm/fm/fstab/popup.hh:121
+msgid "Mount Device"
+msgstr "Montar dispositivo"
+
+#: ../../xffm/fm/fstab/popup.hh:133
+msgid "Mount point:"
+msgstr "Punto de montaje:"
+
+#: ../../xffm/fm/fstab/view.hh:301
+msgid "Mounted on:"
+msgstr "Montado en:"
+
+#: ../../xffm/fm/fstab/view.hh:302
+msgid "Mount on"
+msgstr "Montar en"
+
+#: ../../xffm/fm/fstab/view.hh:310 ../../xffm/fm/fstab/view.hh:312
+msgid "Not mounted"
+msgstr "Sin montar"
+
+#: ../../xffm/fm/fstab/view.hh:403
+msgid "SFTP (via SSH)"
+msgstr "SFTP (sobre SSH)"
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, c-format
+msgid "Unmounting %s"
+msgstr "Desmontando %s"
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, c-format
+msgid "Mounting %s"
+msgstr "Montando %s"
+
+#: ../../xffm/fm/dialog/menupopover.hh:128
 msgid "Home"
 msgstr "Casa"
 
-#~ msgid "Directory"
-#~ msgstr "Directorio"
-
-#~ msgid "binary"
-#~ msgstr "binary"
-
-#~ msgid "Character device"
-#~ msgstr "Dispositivo caracteres"
-
-#~ msgid "C"
-#~ msgstr "C"
-
-#~ msgid "Block device"
-#~ msgstr "Dispositivo de bloques"
-
-#~ msgid "FIFO"
-#~ msgstr "FIFO"
-
-#~ msgid "Socket"
-#~ msgstr "Socket"
-
-#~ msgid "%b %e  %Y"
-#~ msgstr "%b %e  %Y"
-
-#~ msgid "%b %e %H:%M"
-#~ msgstr "%b %e %H:%M"
-
-#~ msgid "Console Message Viewer"
-#~ msgstr "Visor de mensajes de consola"
-
-#~ msgid "Iconify"
-#~ msgstr "Iconizar"
-
-#~ msgid "%'d item selected"
-#~ msgid_plural "%'d items selected"
-#~ msgstr[0] "%'d elemento seleccionado"
-#~ msgstr[1] "%'d elementos seleccionados"
-
-#~ msgid " (containing %'d item)"
-#~ msgid_plural " (containing %'d items)"
-#~ msgstr[0] " (contiene %'d elemento)"
-#~ msgstr[1] " (contiene %'d elementos)"
-
-#~ msgid "sudo"
-#~ msgstr "sudo"
-
-#~ msgid "Command:"
-#~ msgstr "Comando:"
-
-#~ msgid "Permission denied"
-#~ msgstr "Permiso denegado"
-
-#~ msgid "Try to approach a problem from different angles."
-#~ msgstr "Intenta enfocar los problemas desde ángulos diferentes."
-
-#~ msgid "Do you want to retry?"
-#~ msgstr "¿Desea volver a intentarlo?"
-
-#~ msgid "Alternate:"
-#~ msgstr "Alternativo:"
-
-#~ msgid "No"
-#~ msgstr "No"
-
-#~ msgid "Huge (%sx%s)"
-#~ msgstr "Muy grande (%sx%s)"
-
-#~ msgid "Large (%sx%s)"
-#~ msgstr "Grande (%sx%s)"
-
-#~ msgid "Medium (%sx%s)"
-#~ msgstr "Mediano (%sx%s)"
-
-#~ msgid "Small (%sx%s)"
-#~ msgstr "Pequeño (%sx%s)"
-
-#~ msgid "List View"
-#~ msgstr "Vista de lista"
-
-#~ msgid "Icon size:"
-#~ msgstr "Tamaño de los iconos:"
-
-#~ msgid "Icon size: %s pixels (standard size)"
-#~ msgstr "Tamaño del icono: %s píxeles (tamaño estándar)"
-
-#~ msgid "Icon size: %s pixels"
-#~ msgstr "Tamaño del icono: %s píxeles"
-
-#~ msgid "User Input"
-#~ msgstr "Entrada de usuario"
-
-#~ msgid "Please enter a passphrase to use."
-#~ msgstr "Introduzca la frase de paso que usará."
-
-#~ msgid "Password associated to the user"
-#~ msgstr "Contraseña asociada al usuario"
-
-#~ msgid "Username for authentication"
-#~ msgstr "Nombre de usuario para la autenticación"
-
-#~ msgid "Enter passphrase:"
-#~ msgstr "Introduzca la frase de paso:"
-
-#~ msgid "User Password:"
-#~ msgstr "Contraseña de usuario:"
-
-#~ msgid "Username:"
-#~ msgstr "Nombre de usuario:"
-
-#~ msgid "Ok"
-#~ msgstr "Aceptar"
-
-#~ msgid "Cancel"
-#~ msgstr "Cancelar"
-
-#~ msgid "response:"
-#~ msgstr "Respuesta:"
-
-#~ msgid "bytes"
-#~ msgstr "bytes"
-
-#~ msgid "Gigabytes"
-#~ msgstr "Gigabytes"
-
-#~ msgid "Megabytes"
-#~ msgstr "Megabytes"
-
-#~ msgid "Kilobytes"
-#~ msgstr "Kilobytes"
-
-#~ msgid "%'u item"
-#~ msgid_plural "%'u items"
-#~ msgstr[0] "%u elemento"
-#~ msgstr[1] "%u elementos"
-
-#~ msgid "The location is empty."
-#~ msgstr "La ubicación está vacía."
-
-#~ msgid "Ask the user to get additional parameters"
-#~ msgstr "Preguntar al usuario para obtener parámetros adicionales"
-
-#~ msgid "-A, --almost-all           do not list implied . and .."
-#~ msgstr ""
-#~ "-A, --almost-all           no muestra las entradas . y .. implícitas"
-
-#~ msgid "-C                         list entries by columns"
-#~ msgstr "-C                         muestra las entradas por columnas"
-
-#~ msgid ""
-#~ "-D, --dired                generate output designed for Emacs' dired mode"
-#~ msgstr ""
-#~ "-D, --dired                genera el resultado para el modo `dired' de "
-#~ "Emacs"
-
-#~ msgid ""
-#~ "-F, --classify             append indicator (one of */=>@|) to entries"
-#~ msgstr ""
-#~ "-F, --classify             añade un indicador (uno de */=@|) a las "
-#~ "entradas"
-
-#~ msgid ""
-#~ "-G, --no-group             in a long listing, don't print group names"
-#~ msgstr ""
-#~ "-G, --no-group             en un listado largo, no muestra nombres de "
-#~ "grupo"
-
-#~ msgid ""
-#~ "-H, --dereference-command-line\n"
-#~ "follow symbolic links listed on the command line"
-#~ msgstr ""
-#~ "-H, --dereference-command-line\n"
-#~ "sigue los enlaces simbólicos en la línea de\n"
-#~ "órdenes"
-
-#~ msgid ""
-#~ "-I, --ignore=PATTERN       do not list implied entries matching shell "
-#~ "PATTERN"
-#~ msgstr ""
-#~ "-I, --ignore=PATRÓN        no lista las entradas que coincidan (encajen)\n"
-#~ "con PATRÓN de shell"
-
-#~ msgid ""
-#~ "-L, --dereference          when showing file information for a symbolic\n"
-#~ "link, show information for the file the link\n"
-#~ "references rather than for the link itself"
-#~ msgstr ""
-#~ "-L, --dereference          al mostrar la información de un fichero para "
-#~ "un\n"
-#~ "enlace simbólico, muestra la información del\n"
-#~ "fichero al que apunta el enlace en lugar de la\n"
-#~ "del propio enlace"
-
-#~ msgid ""
-#~ "-N, --literal              print raw entry names (don't treat e.g. "
-#~ "control\n"
-#~ "characters specially)"
-#~ msgstr ""
-#~ "-N, --literal              muestra los nombres literalmente (no trata p. "
-#~ "ej.\n"
-#~ "los caracteres de control de forma especial)"
-
-#~ msgid "-Q, --quote-name           enclose entry names in double quotes"
-#~ msgstr ""
-#~ "-Q, --quote-name           encierra los nombres de las entradas entre\n"
-#~ "comillas"
-
-#~ msgid "-R, --recursive            list subdirectories recursively"
-#~ msgstr ""
-#~ "-R, --recursive            muestra los subdirectorios recursivamente"
-
-#~ msgid "-S                         sort by file size"
-#~ msgstr "-S                         ordena los ficheros por tamaño"
-
-#~ msgid ""
-#~ "-T, --tabsize=COLS         assume tab stops at each COLS instead of 8"
-#~ msgstr ""
-#~ "-T, --tabsize=COLS         establece los topes de tabulación a cada COLS\n"
-#~ "en lugar de 8"
-
-#~ msgid ""
-#~ "-U                         do not sort; list entries in directory order"
-#~ msgstr ""
-#~ "-U                         no ordena; muestra las entradas en el orden "
-#~ "del\n"
-#~ "directorio"
-
-#~ msgid "-X                         sort alphabetically by entry extension"
-#~ msgstr ""
-#~ "-X                         ordena alfabéticamente por la extensión de la\n"
-#~ "entrada"
-
-#~ msgid ""
-#~ "-Z, --context              print any SELinux security context of each file"
-#~ msgstr ""
-#~ "-Z, --context              muestra el contexto de seguridad SELinux de "
-#~ "cada\n"
-#~ "fichero"
-
-#~ msgid "-a, --all                  do not ignore entries starting with ."
-#~ msgstr ""
-#~ "-a, --all                  no oculta las entradas que comienzan con ."
-
-#~ msgid "--author               with -l, print the author of each file"
-#~ msgstr "--author               con -l, imprime el autor de cada fichero"
-
-#~ msgid ""
-#~ "-b, --escape               print C-style escapes for nongraphic characters"
-#~ msgstr ""
-#~ "-b, --escape               imprime escapes en estilo C para los "
-#~ "caracteres no\n"
-#~ "gráficos"
-
-#~ msgid ""
-#~ "-c                         with -lt: sort by, and show, ctime (time of "
-#~ "last\n"
-#~ "modification of file status information)\n"
-#~ "with -l: show ctime and sort by name\n"
-#~ "otherwise: sort by ctime, newest first"
-#~ msgstr ""
-#~ "-c                         con -lt: ordena por ctime y muestra ctime "
-#~ "(fecha\n"
-#~ "de última modificación del fichero)\n"
-#~ "con -l: muestra ctime y ordena por nombre\n"
-#~ "en cualquier otro caso: ordena por ctime, el\n"
-#~ "más reciente primero"
-
-#~ msgid ""
-#~ "--color[=WHEN]         colorize the output.  WHEN defaults to 'always'\n"
-#~ "or can be 'never' or 'auto'.  More info below"
-#~ msgstr ""
-#~ "--color[=CUÁNDO]       colorea la salida. Por omisión CUÁNDO es `always'\n"
-#~ "y puede ser también `never' o `auto'.\n"
-#~ "Más información abajo."
-
-#~ msgid ""
-#~ "-d, --directory            list directory entries instead of contents,\n"
-#~ "and do not dereference symbolic links"
-#~ msgstr ""
-#~ "-d, --directory            muestra las entradas de los directorios en "
-#~ "lugar\n"
-#~ "de sus contenidos, y no sigue los enlaces\n"
-#~ "simbólicos"
-
-#~ msgid ""
-#~ "-f                         do not sort, enable -aU, disable -ls --color"
-#~ msgstr ""
-#~ "-f                         no ordena, utiliza -aU, no utiliza -ls --color"
-
-#~ msgid "--file-type            likewise, except do not append '*'"
-#~ msgstr "--file-type            similar, pero no añade `*'"
-
-#~ msgid ""
-#~ "--format=WORD          across -x, commas -m, horizontal -x, long -l,\n"
-#~ "single-column -1, verbose -l, vertical -C"
-#~ msgstr ""
-#~ "--format=PALABRA       across -x, commas -m, horizontal -x, long -l,\n"
-#~ "single-column -1, verbose -l, vertical -C"
-
-#~ msgid "--full-time            like -l --time-style=full-iso"
-#~ msgstr "--full-time            como -l --time-style=full-iso"
-
-#~ msgid "-g     like -l, but do not list owner"
-#~ msgstr "  -g     como -l, pero no lista el propietario"
-
-#~ msgid "group directories before files."
-#~ msgstr "agrupa carpetas antes de los archivos."
-
-#~ msgid ""
-#~ "-h, --human-readable       with -l, print sizes in human readable format\n"
-#~ "(e.g., 1K 234M 2G)"
-#~ msgstr ""
-#~ "-h, --human-readable       con -l, imprime los tamaños en formato "
-#~ "legible\n"
-#~ "(p. ej. 1K 234M 2G)"
-
-#~ msgid "--si                   likewise, but use powers of 1000 not 1024"
-#~ msgstr ""
-#~ "-H, --si                   análogo, pero utiliza potencias de 1000 y no "
-#~ "de 1024"
-
-#~ msgid ""
-#~ "--dereference-command-line-symlink-to-dir\n"
-#~ "follow each command line symbolic link\n"
-#~ "that points to a directory"
-#~ msgstr ""
-#~ "--dereference-command-line-symlink-to-dir\n"
-#~ "sigue cada enlace simbólico en la línea de\n"
-#~ "órdenes que apunte a un directorio"
-
-#~ msgid ""
-#~ "--hide=PATTERN         do not list implied entries matching shell "
-#~ "PATTERN\n"
-#~ "(overridden by -a or -A)"
-#~ msgstr ""
-#~ "--hide=PATRÓN          no lista las entradas implícitas que coinciden\n"
-#~ "con el patrón de shell PATRÓN\n"
-#~ "(las opciones -a o -A tienen prioridad)"
-
-#~ msgid ""
-#~ "--indicator-style=WORD  append indicator with style WORD to entry names:\n"
-#~ "none (default), slash (-p),\n"
-#~ "file-type (--file-type), classify (-F)"
-#~ msgstr ""
-#~ "--indicator-style=PALABRA  añade un indicador con estilo PALABRA a los\n"
-#~ "nombres de las entradas: none (predeterminado),\n"
-#~ "slash (-p), file-type (--file-type), classify (-F)"
-
-#~ msgid "-i, --inode                print the index number of each file"
-#~ msgstr ""
-#~ "-i, --inode                muestra el número de índice de cada fichero"
-
-#~ msgid "-k, --kibibytes            use 1024-byte blocks"
-#~ msgstr "-k                         como --block-size=1K"
-
-#~ msgid "-l                         use a long listing format"
-#~ msgstr "-l                         utiliza un formato de listado largo"
-
-#~ msgid ""
-#~ "-m                         fill width with a comma separated list of "
-#~ "entries"
-#~ msgstr ""
-#~ "-m                         rellena el ancho con una lista de entradas\n"
-#~ "separadas por comas"
-
-#~ msgid ""
-#~ "-n, --numeric-uid-gid      like -l, but list numeric user and group IDs"
-#~ msgstr ""
-#~ "-n, --numeric-uid-gid      como -l, pero muestra los IDs de usuario y "
-#~ "grupo\n"
-#~ "numéricos"
-
-#~ msgid ""
-#~ "-o                         like -l, but do not list group information"
-#~ msgstr "-o                         como -l, pero no muestra el grupo"
-
-#~ msgid ""
-#~ "-p, --indicator-style=slash\n"
-#~ "append / indicator to directories"
-#~ msgstr "-p  --indicator-style=slash añade el indicador / a los directorios"
-
-#~ msgid "-q, --hide-control-chars   print ? instead of non graphic characters"
-#~ msgstr ""
-#~ "-q, --hide-control-chars   imprime ? en lugar de los caracteres no "
-#~ "gráficos"
-
-#~ msgid ""
-#~ "--show-control-chars   show non graphic characters as-is (default\n"
-#~ "unless program is 'ls' and output is a terminal)"
-#~ msgstr ""
-#~ "--show-control-chars   muestra los caracteres no gráficos tal y como\n"
-#~ "son (predeterminado a menos que el programa sea\n"
-#~ "`ls' y la salida sea un terminal)"
-
-#~ msgid ""
-#~ "--quoting-style=WORD   use quoting style WORD for entry names:\n"
-#~ "literal, locale, shell, shell-always, c, escape"
-#~ msgstr ""
-#~ "--quoting-style=PALABRA  utiliza el estilo de cita PALABRA para los\n"
-#~ "nombres de las entradas:\n"
-#~ "literal, locale, shell, shell-always, c, escape"
-
-#~ msgid "-r, --reverse              reverse order while sorting"
-#~ msgstr "-r, --reverse              invierte el orden, en su caso"
-
-#~ msgid ""
-#~ "-s, --size                 print the allocated size of each file, in "
-#~ "blocks"
-#~ msgstr ""
-#~ "-s, --size                 muestra el tamaño de cada fichero, en bloques"
-
-#~ msgid ""
-#~ "--sort=WORD            sort by WORD instead of name: none -U,\n"
-#~ "extension -X, size -S, time -t, version -v"
-#~ msgstr ""
-#~ "--sort=PALABRA         ordena por PALABRA en vez de por nombre: none -U,\n"
-#~ "extension -X, size -S, time -t, version -v"
-
-#, fuzzy
-#~ msgid ""
-#~ "--time=WORD            with -l, show time as WORD instead of "
-#~ "modification\n"
-#~ "time: atime -u, access -u, use -u, ctime -c,\n"
-#~ "or status -c; use specified time as sort key\n"
-#~ "if --sort=time--time=WORD            with -l, show time as WORD instead "
-#~ "of modification\n"
-#~ "time: atime -u, access -u, use -u, ctime -c,\n"
-#~ "or status -c; use specified time as sort key\n"
-#~ "if --sort=time--time=WORD            with -l, show time as WORD instead "
-#~ "of modification\n"
-#~ "time: atime -u, access -u, use -u, ctime -c,\n"
-#~ "or status -c; use specified time as sort key\n"
-#~ "if --sort=time"
-#~ msgstr ""
-#~ "  -S                         ordena los ficheros por tamaño\n"
-#~ "      --sort=PALABRA         ordena por PALABRA en vez de por nombre: "
-#~ "none -U,\n"
-#~ "                             extension -X, size -S, time -t, version -v\n"
-#~ "      --time=PALABRA         con -l, muestra la fecha según PALABRA, en "
-#~ "lugar\n"
-#~ "                               de la fecha de modificación:\n"
-#~ "                               atime -u, access -u, use -u, ctime -c, ó "
-#~ "status -c;\n"
-#~ "                               utiliza la fecha especificada como clave "
-#~ "de\n"
-#~ "                               ordenación si --sort=time\n"
-
-#~ msgid ""
-#~ "--time-style=STYLE  show times using style STYLE:\n"
-#~ "full-iso, long-iso, iso, +FORMAT\n"
-#~ "FORMAT is interpreted like 'date'"
-#~ msgstr ""
-#~ "--time-style=ESTILO muestra las fechas/horas usando el estilo ESTILO:\n"
-#~ "full-iso, long-iso, iso, +FORMATO\n"
-#~ "FORMATO se intepreta como `date'"
-
-#~ msgid "-t                         sort by modification time, newest first"
-#~ msgstr ""
-#~ "-t                         ordena por la fecha de modificación, el más\n"
-#~ "reciente primero"
-
-#~ msgid ""
-#~ "-u                         with -lt: sort by, and show, access time\n"
-#~ "with -l: show access time and sort by name\n"
-#~ "otherwise: sort by access time"
-#~ msgstr ""
-#~ "-u                         con -lt: ordena por atime y muestra atime "
-#~ "(fecha\n"
-#~ "de último acceso al fichero)\n"
-#~ "con -l: muestra atime y ordena por nombre\n"
-#~ "en cualquier otro caso: ordena por atime"
-
-#~ msgid ""
-#~ "-v                         natural sort of (version) numbers within text"
-#~ msgstr ""
-#~ "-v                         orden natural de números (de versión) dentro\n"
-#~ "del texto"
-
-#~ msgid ""
-#~ "-w, --width=COLS           assume screen width instead of current value"
-#~ msgstr ""
-#~ "-w, --width=COLS           establece el ancho de la pantalla en lugar "
-#~ "del\n"
-#~ "valor actual"
-
-#~ msgid ""
-#~ "-x                         list entries by lines instead of by columns"
-#~ msgstr ""
-#~ "-x                         muestra las entradas por líneas en vez de por\n"
-#~ "columnas"
-
-#~ msgid "-1                         list one file per line"
-#~ msgstr "-1                         muestra un fichero por cada línea"
-
-#, fuzzy
-#~ msgid "Force printing of non-printable characters"
-#~ msgstr ""
-#~ "-i, --ignore-nonprinting    considera solamente caracteres imprimibles"
-
-#~ msgid "Columns"
-#~ msgstr "Columnas"
-
-#~ msgid "Colorize"
-#~ msgstr "Colorear"
-
-#~ msgid "Follow links"
-#~ msgstr "Seguir enlaces"
-
-#, fuzzy
-#~ msgid "prevent -A"
-#~ msgstr "Prevenir"
-
-#~ msgid "Always follow links"
-#~ msgstr "Seguir siempre enlaces"
-
-#~ msgid "Don't follow symbolic links"
-#~ msgstr "No seguir enlaces simbólicos"
-
-#~ msgid "recursive"
-#~ msgstr "recursivo"
-
-#~ msgid "Sort by Size"
-#~ msgstr "Ordenar por tamaño"
-
-#, fuzzy
-#~ msgid "With -l, display complete time"
-#~ msgstr "Mostrar/ocultar imágenes de planetas"
-
-#~ msgid "Sort by Date"
-#~ msgstr "Ordenar por fecha"
-
-#, fuzzy
-#~ msgid "Display whiteouts"
-#~ msgstr "Mostrar texto"
-
-#, fuzzy
-#~ msgid "Display maclabel"
-#~ msgstr "Modelo de la pantalla"
-
-#, fuzzy
-#~ msgid "Sort by ctime"
-#~ msgstr "Ordenar por tiempo de fin"
-
-#, fuzzy
-#~ msgid "list directory entries"
-#~ msgstr "Todas las carpetas"
-
-#~ msgid "Do Not Sort"
-#~ msgstr "No ordenar"
-
-#, fuzzy
-#~ msgid "like -l, but do not list owner"
-#~ msgstr ""
-#~ "  -g                         como -l, pero no lista el propietario\n"
-
-#, fuzzy
-#~ msgid "human-readable"
-#~ msgstr "ilegible"
-
-#~ msgid "Inode"
-#~ msgstr "Nodo-i"
-
-#, fuzzy
-#~ msgid "block-size=1K"
-#~ msgstr "Tamaño de bloque"
-
-#~ msgid "Details"
-#~ msgstr "Detalles"
-
-#~ msgid "Comma separated values (CSV)"
-#~ msgstr "Valores separados por comas (CSV)"
-
-#, fuzzy
-#~ msgid "numeric-uid-gid"
-#~ msgstr "Gnumeric"
-
-#, fuzzy
-#~ msgid "include file flags"
-#~ msgstr "Incluir archivos:"
-
-#, fuzzy
-#~ msgid "indicator-style=slash"
-#~ msgstr "estilo de indicación"
-
-#, fuzzy
-#~ msgid "hide control characters"
-#~ msgstr "Insertar un carácter de control Unicode"
-
-#, fuzzy
-#~ msgid "reverse"
-#~ msgstr "Invertido"
-
-#, fuzzy
-#~ msgid "show size"
-#~ msgstr "Mostrar tamaño"
-
-#, fuzzy
-#~ msgid "Sort by atime"
-#~ msgstr "Ordenar por nombre"
-
-#, fuzzy
-#~ msgid "Force raw printing"
-#~ msgstr "Imprimiendo pie de página"
-
-#, fuzzy
-#~ msgid "Sort across"
-#~ msgstr "Ordenar iconos"
-
-#, fuzzy
-#~ msgid "1 file per line"
-#~ msgstr "1 archivo en el índice"
-
-#~ msgid "-L, --dereference            always follow symbolic links in SOURCE"
-#~ msgstr ""
-#~ "-L, --dereference            siempre sigue los enlaces simbólicos en "
-#~ "ORIGEN"
-
-#~ msgid "-P, --no-dereference         never follow symbolic links in SOURCE"
-#~ msgstr ""
-#~ "-P, --no-dereference         nunca sigue los enlaces simbólicos en ORIGEN"
-
-#, fuzzy
-#~ msgid "-R, -r, --recursive          copy directories recursively"
-#~ msgstr ""
-#~ "-R, --recursive            muestra los subdirectorios recursivamente"
-
-#~ msgid "-a, --archive                same as -dR --preserve=all"
-#~ msgstr "-a, --archive                lo mismo que -dR --preserve=all"
-
-#~ msgid ""
-#~ "--attributes-only        don't copy the file data, just the attributes"
-#~ msgstr ""
-#~ "--attributes-only        no copia los datos del fichero, solamente los\n"
-#~ "atributos"
-
-#~ msgid "-b                  like --backup but does not accept an argument"
-#~ msgstr ""
-#~ "-b                      como --backup pero no acepta ningún argumento"
-
-#~ msgid "--backup[=CONTROL]  make a backup of each existing destination file"
-#~ msgstr ""
-#~ "--backup[=CONTROL]  crea una copia de seguridad de cada fichero de\n"
-#~ "destino que exista"
-
-#~ msgid ""
-#~ "--copy-contents          copy contents of special files when recursive"
-#~ msgstr ""
-#~ "--copy-contents          copia el contenido de los ficheros especiales\n"
-#~ "cuando opera recursivamente"
-
-#~ msgid ""
-#~ "-d                           same as --no-dereference --preserve=links"
-#~ msgstr ""
-#~ "-d                           lo mismo que --no-dereference --preserve=link"
-
-#~ msgid "-f, --force                 remove existing destination files"
-#~ msgstr ""
-#~ "-f, --force                 borra los ficheros destino que ya existan"
-
-#~ msgid "Interactive"
-#~ msgstr "Interactivo"
-
-#~ msgid "-l, --link                   hard link files instead of copying"
-#~ msgstr ""
-#~ "-l, --link                   crea enlaces duros de los ficheros en vez de "
-#~ "copiarlos"
-
-#, fuzzy
-#~ msgid ""
-#~ "n, --no-clobber             do not overwrite an existing file (overrides\n"
-#~ "a previous -i option)"
-#~ msgstr ""
-#~ "-n, --no-clobber             no sobreescribe un fichero que exista\n"
-#~ "(tiene prioridad sobre una opción -i anterior)"
-
-#~ msgid ""
-#~ "-p                           same as --preserve=mode,ownership,timestamps"
-#~ msgstr ""
-#~ "-p                            igual que --preserve=mode,ownership,"
-#~ "timestamps"
-
-#, fuzzy
-#~ msgid ""
-#~ "--preserve[=ATTR_LIST]   preserve the specified attributes (default:\n"
-#~ "mode,ownership,timestamps), if possible\n"
-#~ "additional attributes: context, links, xattr,\n"
-#~ "all"
-#~ msgstr ""
-#~ "--preserve[=LISTAATTR]   conserva si puede los atributos especificados,\n"
-#~ "(por omisión: mode,ownership,timestamps)\n"
-#~ "atributos adicionales: context, links, xattr,\n"
-#~ "all"
-
-#, fuzzy
-#~ msgid "--no-preserve=ATTR_LIST  don't preserve the specified attributes"
-#~ msgstr "--no-preserve=LISTAATTR  no conserva los atributos especificados"
-
-#~ msgid "--parents                use full source file name under DIRECTORY"
-#~ msgstr ""
-#~ "--parents                 utiliza el nombre de fichero de origen "
-#~ "completo\n"
-#~ "bajo DIRECTORIO"
-
-#~ msgid "--reflink[=WHEN]         control clone/CoW copies. See below"
-#~ msgstr ""
-#~ "--reflink[=CUÁNDO]       controla copias clonadas/CoW. Ver más abajo."
-
-#~ msgid ""
-#~ "--remove-destination     remove each existing destination file before\n"
-#~ "attempting to open it (contrast with --force)"
-#~ msgstr ""
-#~ "--remove-destination     borra cada fichero de destino que exista antes\n"
-#~ "de intentar abrirlo (compárese con --force)."
-
-#~ msgid "--sparse=WHEN            control creation of sparse files. See below"
-#~ msgstr ""
-#~ "--sparse=CUÁNDO           controla la creación de ficheros dispersos.\n"
-#~ "Véase más abajo."
-
-#~ msgid ""
-#~ "--strip-trailing-slashes  remove any trailing slashes from each SOURCE\n"
-#~ "argument"
-#~ msgstr ""
-#~ "--strip-trailing-slashes  elimina todas las barras finales de cada\n"
-#~ "argumento ORIGEN"
-
-#~ msgid "-s, --symbolic-link          make symbolic links instead of copying"
-#~ msgstr ""
-#~ "-s, --symbolic-link           crea enlaces simbólicos en lugar de "
-#~ "copiarlos"
-
-#~ msgid "-S, --suffix=SUFFIX          override the usual backup suffix"
-#~ msgstr ""
-#~ "-S, --suffix=SUFIJO           reemplaza el sufijo de respaldo habitual"
-
-#~ msgid ""
-#~ "-t, --target-directory=DIRECTORY  copy all SOURCE arguments into DIRECTORY"
-#~ msgstr ""
-#~ "--target-directory=DIRECTORIO  mueve todos los argumentos ORIGEN al\n"
-#~ "directorio DIRECTORIO"
-
-#~ msgid ""
-#~ "-u, --update                 copy only when the SOURCE file is newer\n"
-#~ "than the destination file or when the\n"
-#~ "destination file is missing"
-#~ msgstr ""
-#~ "-u, --update                 copia solamente cuando el fichero ORIGEN es\n"
-#~ "más moderno que el fichero de destino,\n"
-#~ "o cuando falta el fichero de destino"
-
-#~ msgid "-v, --verbose                explain what is being done"
-#~ msgstr ""
-#~ "-v, --verbose                da detalles sobre lo que se va haciendo"
-
-#~ msgid "-x, --one-file-system        stay on this file system"
-#~ msgstr "-x, --one-file-system        permanece en este sistema de ficheros"
-
-#~ msgid "Help"
-#~ msgstr "Ayuda"
-
-#~ msgid "Version"
-#~ msgstr "Versión"
-
-#~ msgid "archive"
-#~ msgstr "archivo"
-
-#~ msgid "force"
-#~ msgstr "forzar"
-
-#~ msgid "-i                    prompt before every removal"
-#~ msgstr "-i                    pregunta antes de cada borrado"
-
-#, fuzzy
-#~ msgid "hard link files instead of copying"
-#~ msgstr ""
-#~ "-l, --link                   crea enlaces duros de los ficheros en vez de "
-#~ "copiarlos"
-
-#~ msgid "Do not overwrite any file"
-#~ msgstr "No sobreescribir ningún archivo"
-
-#~ msgid "Preserve all attributes"
-#~ msgstr "Conservar todos los atributos"
-
-#~ msgid "Verbose"
-#~ msgstr "Extendida"
-
-#~ msgid "Stay on single filesystem"
-#~ msgstr "Permanecer en este sistema de archivos"
-
-#~ msgid ""
-#~ "-t, --target-directory=DIRECTORY  move all SOURCE arguments into DIRECTORY"
-#~ msgstr ""
-#~ "--target-directory=DIRECTORIO  mueve todos los argumentos ORIGEN al\n"
-#~ "directorio DIRECTORIO"
-
-#~ msgid "-T, --no-target-directory    treat DEST as a normal file"
-#~ msgstr "-T, --no-target-directory     considera DEST como un fichero normal"
-
-#~ msgid ""
-#~ "-u, --update                 move only when the SOURCE file is newer\n"
-#~ "than the destination file or when the\n"
-#~ "destination file is missing"
-#~ msgstr ""
-#~ "-u, --update                       mueve solamente cuando el fichero "
-#~ "ORIGEN\n"
-#~ "es más moderno que el fichero de destino,\n"
-#~ "o cuando falta el fichero de destino"
-
-#, fuzzy
-#~ msgid ""
-#~ "-L, --logical               dereference TARGETs that are symbolic links"
-#~ msgstr "-L, --dereference     desreferencia todos los enlaces simbólicos"
-
-#, fuzzy
-#~ msgid ""
-#~ "-n, --no-dereference        treat LINK_NAME as a normal file if\n"
-#~ "it is a symbolic link to a directory"
-#~ msgstr ""
-#~ "-T, --no-target-directory   trata NOMBREDELENLACE como un fichero normal"
-
-#, fuzzy
-#~ msgid ""
-#~ "-P, --physical              make hard links directly to symbolic links"
-#~ msgstr ""
-#~ "no se puede crear un enlace que sea duro y simbólico al mismo tiempo"
-
-#, fuzzy
-#~ msgid ""
-#~ "-s, --symbolic              make symbolic links instead of hard links"
-#~ msgstr ""
-#~ "-s, --symbolic-link           crea enlaces simbólicos en lugar de "
-#~ "copiarlos"
-
-#~ msgid "-S, --suffix=SUFFIX         override the usual backup suffix"
-#~ msgstr ""
-#~ "-S, --suffix=SUFIJO         reemplaza el sufijo de respaldo habitual"
-
-#~ msgid ""
-#~ "-t, --target-directory=DIRECTORY  specify the DIRECTORY in which to "
-#~ "create\n"
-#~ "the links"
-#~ msgstr ""
-#~ "-t, --target-directory=DIRECTORIO  especifica el DIRECTORIO en el que se\n"
-#~ "crearán los enlaces"
-
-#, fuzzy
-#~ msgid "-T, --no-target-directory   treat LINK_NAME as a normal file always"
-#~ msgstr ""
-#~ "-T, --no-target-directory   trata NOMBREDELENLACE como un fichero normal"
-
-#, fuzzy
-#~ msgid "make hard links to symbolic link references"
-#~ msgstr "referencia simbólica de longitud cero"
-
-#, fuzzy
-#~ msgid "make hard links directly to symbolic links"
-#~ msgstr ""
-#~ "no se puede crear un enlace que sea duro y simbólico al mismo tiempo"
-
-#~ msgid "Create Symbolic Link"
-#~ msgstr "Crear un enlace simbólico"
-
-#, fuzzy
-#~ msgid "Warn if error in documents"
-#~ msgstr "Advertir si el macro intenta firmar el documento"
-
-#~ msgid ""
-#~ "-f, --force           ignore nonexistent files and arguments, never prompt"
-#~ msgstr ""
-#~ "-f, --force           descarta los ficheros que no existan, sin preguntar"
-
-#~ msgid ""
-#~ "-I                    prompt once before removing more than three files, "
-#~ "or\n"
-#~ "when removing recursively.  Less intrusive than -i,\n"
-#~ "while still giving protection against most mistakes"
-#~ msgstr ""
-#~ "-I                     pregunta una vez antes de borrar más de tres "
-#~ "ficheros,\n"
-#~ "o cuando se borra recursivamente. Menos intrusivo\n"
-#~ "que -i, pero todavía protege contra la mayoría de\n"
-#~ "las equivocaciones"
-
-#~ msgid ""
-#~ "--interactive[=WHEN]  prompt according to WHEN: never, once (-I), or\n"
-#~ "always (-i).  Without WHEN, prompt always"
-#~ msgstr ""
-#~ "--interactive[=CUÁNDO]  pregunta de acuerdo con CUÁNDO: never (nunca),\n"
-#~ "once (una vez, -I), o always (siempre, -i).\n"
-#~ "Sin CUÁNDO, pregunta siempre"
-
-#, fuzzy
-#~ msgid "--no-preserve-root  do not treat '/' specially"
-#~ msgstr "--no-preserve-root  no trata `/' de forma especial (predeterminado)"
-
-#, fuzzy
-#~ msgid "--preserve-root   do not remove '/' (default)"
-#~ msgstr "--no-preserve-root  no trata `/' de forma especial (predeterminado)"
-
-#, fuzzy
-#~ msgid ""
-#~ "-r, -R, --recursive   remove directories and their contents recursively"
-#~ msgstr "-R, -r, --recursive          copia directorios recursivamente"
-
-#, fuzzy
-#~ msgid "-v, --verbose         explain what is being done"
-#~ msgstr ""
-#~ "-v, --verbose                da detalles sobre lo que se va haciendo"
-
-#~ msgid "Remove directory"
-#~ msgstr "Eliminar directorio"
-
-#~ msgid "Overwrite all files"
-#~ msgstr "Sobreescribir todos los archivos"
-
-#~ msgid "Undelete"
-#~ msgstr "Recuperar"
-
-#~ msgid "-n, --iterations=N  overwrite N times instead of the default (%d)"
-#~ msgstr ""
-#~ "-n, --iterations=N  sobreescribe N veces en vez de lo predeterminado (%d)"
-
-#~ msgid "--random-source=FILE  get random bytes from FILE"
-#~ msgstr "--random-source=FICHERO obtiene bytes aleatorios de FICHERO"
-
-#~ msgid ""
-#~ "-s, --size=N   shred this many bytes (suffixes like K, M, G accepted)"
-#~ msgstr ""
-#~ "-s, --size=N   efectúa el `shred' sobre este número de bytes\n"
-#~ "(se permiten los sufijos K, M y G)"
-
-#~ msgid "-u, --remove   truncate and remove file after overwriting"
-#~ msgstr "-u, --remove   trunca y borra el fichero después de sobreescribirlo"
-
-#~ msgid "-v, --verbose  show progress"
-#~ msgstr "-v, --verbose  muestra el progreso"
-
-#~ msgid ""
-#~ "-x, --exact    do not round file sizes up to the next full block;\n"
-#~ "this is the default for non-regular files"
-#~ msgstr ""
-#~ "-x, --exact    no redondea hacia arriba los tamaños de los ficheros hasta "
-#~ "el\n"
-#~ "siguiente bloque completo; este es el comportamiento\n"
-#~ "predeterminado para los ficheros no regulares"
-
-#~ msgid "-z, --zero     add a final overwrite with zeros to hide shredding"
-#~ msgstr ""
-#~ "-z, --zero     añade una sobreescritura final con ceros para ocultar la\n"
-#~ "acción de esta orden"
-
-#~ msgid "Mount local disks and devices"
-#~ msgstr "Monta dispositivos y discos locales"
-
-#~ msgid "View current processes and monitor system state"
-#~ msgstr "Vea los procesos actuales y monitorizar el estado del sistema"
-
-#~ msgid "Next-generation application launcher."
-#~ msgstr "Lanzador de aplicaciones de nueva generación."
-
-#~ msgid "Windows networks (SMB)"
-#~ msgstr "Redes Windows (SMB)"
-
-#~ msgid "SMB Browser"
-#~ msgstr "Navegador SMB"
-
-#~ msgid "Windows workgroup"
-#~ msgstr "Grupo de trabajo de Windows"
-
-#~ msgid "Windows Shares"
-#~ msgstr "Comparticiones Windows"
-
-#~ msgid "FUSE Volume"
-#~ msgstr "Volumen FUSE"
-
-#~ msgid "Mount user-space filesystems (FUSE)"
-#~ msgstr "Montar sistemas de archivo de espacio de usuario (FUSE)"
-
-#~ msgid "NFS Network Volume"
-#~ msgstr "Volumen de red NFS"
-
-#, fuzzy
-#~ msgid "Secure FTP (SSH)"
-#~ msgstr "FTP seguro (SFTP)"
-
-#, fuzzy
-#~ msgid "Encrypted filesystem"
-#~ msgstr "Cifrar archivos"
-
-#~ msgid "Bluetooth Transfer"
-#~ msgstr "Transferencia Bluetooth"
-
-#~ msgid "FTP Client"
-#~ msgstr "Cliente FTP"
-
-#~ msgid "CIFS Volume"
-#~ msgstr "Volumen CIFS"
-
-#, fuzzy
-#~ msgid "Callbacks"
-#~ msgstr "Retorno de llamada"
-
-#~ msgid "Blowfish"
-#~ msgstr "Blowfish"
-
-#~ msgid "Settings"
-#~ msgstr "Configuración"
-
-#~ msgid "Run program and return its output"
-#~ msgstr "Ejecutar un programa y obtener su salida"
-
-#~ msgid "Properties"
-#~ msgstr "Propiedades"
-
-#, fuzzy
-#~ msgid "Text completion"
-#~ msgstr "Terminación de texto"
-
-#~ msgid "History of combo url."
-#~ msgstr "Historial de la lista de URL."
-
-#~ msgid "Mime Type"
-#~ msgstr "Tipo MIME"
-
-#~ msgid "Use MIME type magic"
-#~ msgstr "Usar tipo MIME magic"
-
-#~ msgid "ZIP archive plugin"
-#~ msgstr "Complemento de archivo comprimido ZIP"
-
-#~ msgid "Icon Themes"
-#~ msgstr "Seleccionar un tema de iconos"
-
-#~ msgid "Activate items with a double click"
-#~ msgstr "Activar elementos con una pulsación doble"
-
-#~ msgid "Icon Theme Specification"
-#~ msgstr "Especificación del tema de iconos"
-
-#~ msgid "Drag: move"
-#~ msgstr "Arrastrar: mover"
-
-#~ msgid "Yes"
-#~ msgstr "Sí"
-
-#~ msgid "Emblems"
-#~ msgstr "Emblemas"
-
-#~ msgid "Enable tooltips"
-#~ msgstr "Activar sugerencias"
-
-#~ msgid "The font size"
-#~ msgstr "El tamaño de tipografía"
-
-#~ msgid "The font family"
-#~ msgstr "La familia tipográfica"
-
-#~ msgid "Icon size"
-#~ msgstr "Tamaño del icono"
-
-#~ msgid "Terminal Emulator"
-#~ msgstr "Emulador de terminal"
-
-#~ msgid "Text Editor"
-#~ msgstr "Editor de textos"
-
-#, fuzzy
-#~ msgid "Maximum completion options displayed"
-#~ msgstr "Máximo de líneas a mostrar:"
-
-#, fuzzy
-#~ msgid "Maximum time (seconds) to wait for a load directory"
-#~ msgstr "No se puede mover un sharepoint a una carpeta compartida"
-
-#, fuzzy
-#~ msgid "Maximum lines in lp terminal buffer"
-#~ msgstr "Búfer máximo para el jitter"
-
-#~ msgid "Show Desktop Grid"
-#~ msgstr "Mostrar la rejilla del escritorio"
-
-#~ msgid "Navigation Window"
-#~ msgstr "Ventana de navegación"
-
-#~ msgid "Top Margin"
-#~ msgstr "Margen superior"
-
-#~ msgid "Bottom Margin"
-#~ msgstr "Margen inferior"
-
-#~ msgid "Right margin"
-#~ msgstr "Margen derecho"
-
-#~ msgid "Left Margin"
-#~ msgstr "Margen izquierdo"
-
-#~ msgid "Desktop path:"
-#~ msgstr "Ruta del escritorio:"
-
-#~ msgid "Background image"
-#~ msgstr "Imagen de fondo"
-
-#~ msgid "Background color"
-#~ msgstr "Color de fondo"
-
-#~ msgid "Background transparency:"
-#~ msgstr "Transparencia del fondo:"
-
-#, fuzzy
-#~ msgid "Toolbar configuration"
-#~ msgstr "Barra de herramientas de configuración."
-
-#, fuzzy
-#~ msgid "Pasteboard serial control"
-#~ msgstr "Controlador serie multipuerto"
-
-#, fuzzy
-#~ msgid "Bookmark serial control"
-#~ msgstr "Serializador de marcadores"
-
-#, fuzzy
-#~ msgid "Samba default remote user"
-#~ msgstr "Establecer ruta predeterminada"
-
-#, fuzzy
-#~ msgid "Sudo ask password program"
-#~ msgstr "Establecer una contraseña ahora"
-
-#, fuzzy
-#~ msgid "Ssh ask passphrase program"
-#~ msgstr "Mostrar contraseña"
-
-#~ msgid "List of disabled plugins"
-#~ msgstr "Lista de complementos desactivados"
-
-#~ msgid "Disabled"
-#~ msgstr "Desactivado"
-
-#~ msgid "Normal"
-#~ msgstr "Normal"
-
-#~ msgid "Compact"
-#~ msgstr "Compactar"
-
-#~ msgid "Big"
-#~ msgstr "Grande"
-
-#~ msgid "Huge"
-#~ msgstr "Enorme"
-
-#~ msgid "Please be patient"
-#~ msgstr "Por favor, sea paciente"
-
-#~ msgid "Reload All Tabs in All Windows"
-#~ msgstr "Recargar todas las pestañas en todas las ventanas"
-
-#~ msgid "Default Size"
-#~ msgstr "Tamaño por defecto"
-
-#~ msgid "Select Folder"
-#~ msgstr "Seleccione la carpeta"
-
-#~ msgid "Toolbar Settings"
-#~ msgstr "Preferencias de la barra de herramientas"
-
-#~ msgid "Configure which items should appear in the toolbar(s)."
-#~ msgstr ""
-#~ "Configurar los elementos que deben aparecer en las barras de herramientas."
-
-#~ msgid "default"
-#~ msgstr "predeterminado"
-
-#~ msgid "Select a folder"
-#~ msgstr "Selecciona una carpeta"
-
-#~ msgid "Select Files..."
-#~ msgstr "Seleccionar archivos..."
-
-#~ msgid "Creating a new file (%s)"
-#~ msgstr "Crear un archivo nuevo (%s)"
-
-#~ msgid "example"
-#~ msgstr "ejemplo"
-
-#~ msgid "Rebuild Thumbnails"
-#~ msgstr "Reconstruir las miniaturas"
-
-#~ msgid "Icons"
-#~ msgstr "Iconos"
-
-#~ msgid "General"
-#~ msgstr "General"
-
-#~ msgid "General Options"
-#~ msgstr "Opciones generales"
-
-#~ msgid "Configuration of keybindings"
-#~ msgstr "Configuración de las asociaciones de las teclas"
-
-#~ msgid "Content Type"
-#~ msgstr "Tipo de contenido"
-
-#~ msgid "Labels"
-#~ msgstr "Etiquetas"
-
-#~ msgid "Fixed width font"
-#~ msgstr "Tipo de letra de anchura fija"
-
-#~ msgid "Variable width font"
-#~ msgstr "Tipografía de anchura variable"
-
-#~ msgid "Options"
-#~ msgstr "Opciones"
-
-#~ msgid "Desktop"
-#~ msgstr "Escritorio"
-
-#~ msgid "Allow"
-#~ msgstr "Permitir"
-
-#~ msgid "localhost"
-#~ msgstr "localhost"
-
-#~ msgid "File Information..."
-#~ msgstr "Información sobre el archivo..."
-
-#~ msgid "Copy"
-#~ msgstr "Copiar"
-
-#~ msgid "Move"
-#~ msgstr "Mover"
-
-#~ msgid "Symbolic Link"
-#~ msgstr "Enlace simbólico"
-
-#~ msgid "Delete"
-#~ msgstr "Borrar"
-
-#~ msgid "Shred"
-#~ msgstr "Triturar"
-
-#~ msgid "Plugins"
-#~ msgstr "Complementos"
-
-#, fuzzy
-#~ msgid "Rodent"
-#~ msgstr "Identificación"
-
-#~ msgid "Modules"
-#~ msgstr "Módulos"
-
-#~ msgid "Environment Variables"
-#~ msgstr "Variables de entorno"
-
-#~ msgid "Edit the list of environment variables and associated values"
-#~ msgstr "Editar la lista de variables de entorno y valores asociados"
-
-#~ msgid "Variable"
-#~ msgstr "Variable"
-
-#~ msgid "Value"
-#~ msgstr "Valor"
-
-#~ msgid "Personal settings"
-#~ msgstr "Preferencias personales"
-
-#~ msgid "Options: %s"
-#~ msgstr "Opciones: %s"
-
-#~ msgid "Apply"
-#~ msgstr "Aplicar"
-
-#~ msgid "Information"
-#~ msgstr "Información"
-
-#~ msgid "Permissions"
-#~ msgstr "Permisos"
-
-#~ msgid "Apply changes"
-#~ msgstr "Aplicar cambios"
-
-#~ msgid "Owner:"
-#~ msgstr "Propietario:"
-
-#~ msgid "Read"
-#~ msgstr "Leído"
-
-#~ msgid "Write"
-#~ msgstr "Escribir"
-
-#~ msgid "Execute"
-#~ msgstr "Ejecutar"
-
-#~ msgid "Set UID"
-#~ msgstr "Establecer el UID"
-
-#~ msgid "Group:"
-#~ msgstr "Grupo:"
-
-#~ msgid "Set GID"
-#~ msgstr "Establecer el GID"
-
-#~ msgid "Others:"
-#~ msgstr "Otros:"
-
-#~ msgid "Sticky"
-#~ msgstr "Persistente"
-
-#~ msgid "Paths"
-#~ msgstr "Rutas"
-
-#~ msgid "Path"
-#~ msgstr "Ruta"
-
-#~ msgid "More..."
-#~ msgstr "Más…"
-
-#~ msgid "Owner"
-#~ msgstr "Propietario"
-
-#~ msgid "Preview"
-#~ msgstr "Previsualizar"
-
-#~ msgid "Kill (KILL)"
-#~ msgstr "Matar (KILL)"
-
-#~ msgid "Kill"
-#~ msgstr "Matar"
-
-#~ msgid ""
-#~ "Left click once to follow this link.\n"
-#~ "Middle click once to select this cell"
-#~ msgstr ""
-#~ "Pulsar una vez con el botón izquierdo para seguir este enlace.\n"
-#~ "Pulsar una vez con el botón central para seleccionar esta celda"
-
-#~ msgid "PID"
-#~ msgstr "PID"
-
-#~ msgid "Right clicking pops context menu immediately"
-#~ msgstr "Clic derecho muestra el menú contextual inmediatamente"
-
-#~ msgid "%s: overwrite %s? "
-#~ msgstr "%s: ¿sobreescribir %s? (s/n) "
-
-#~ msgid "Target location: "
-#~ msgstr "Dirección de destino:"
-
-#~ msgid "Source Location:"
-#~ msgstr "Ubicación del código fuente:"
-
-#~ msgid "Failed to copy file"
-#~ msgstr "Falló al copiar el archivo"
-
-#~ msgid "Error: Rename failed."
-#~ msgstr "Error: Fallo al renombrar."
-
-#~ msgid "Move files"
-#~ msgstr "Mover archivos"
-
-#~ msgid "Failed to link %s to %s"
-#~ msgstr "Falló al enlazar %s con %s"
-
-#~ msgid "File"
-#~ msgstr "Archivo"
-
-#~ msgid "Destination"
-#~ msgstr "Destino"
-
-#~ msgid "History:"
-#~ msgstr "Historial:"
-
-#~ msgid "List files only"
-#~ msgstr "Sólo listar archivos"
-
-#~ msgid "Extract files from the archive"
-#~ msgstr "Extraer archivos del archivador"
-
-#~ msgid "Open in New Window"
-#~ msgstr "Abrir en una ventana nueva"
-
-#~ msgid "Open in New Tab"
-#~ msgstr "Abrir en solapa nueva"
-
-#~ msgid "Create a compressed archive with the selected objects"
-#~ msgstr "Crear un archivador comprimido con los objetos seleccionados"
-
-#~ msgid "Create a new archive"
-#~ msgstr "Crea un archivador nuevo"
-
-#~ msgid "Install"
-#~ msgstr "Instalar"
-
-#~ msgid "Uninstall"
-#~ msgstr "Desinstalar"
-
-#~ msgid "Information about the program"
-#~ msgstr "Información sobre el programa"
-
-#~ msgid "Simulation of data CD burning"
-#~ msgstr "Simulación de grabación de CD de datos"
-
-#~ msgid "Burn CD/DVD"
-#~ msgstr "Grabar CD/DVD"
-
-#~ msgid "Don't follow symlinks"
-#~ msgstr "No seguir enlaces simbólicos"
-
-#~ msgid "Follow symlinks"
-#~ msgstr "Seguir los enlaces simbólicos"
-
-#~ msgid "Delete failed"
-#~ msgstr "Fallo al borrar"
-
-#~ msgid "Unexpected error: %s"
-#~ msgstr "Error inesperado: %s"
-
-#~ msgid "Are you sure you want to continue?"
-#~ msgstr "¿Está seguro de que quiere continuar?"
-
-#~ msgid "Remove"
-#~ msgstr "Quitar"
-
-#~ msgid "Apply to all"
-#~ msgstr "Aplicar a todos"
-
-#~ msgid "Delete Files/Directories"
-#~ msgstr "Borrar archivos/directorios"
-
-#~ msgid "Delete %s"
-#~ msgstr "Eliminar %s"
-
-#~ msgid "Broken symbolic link"
-#~ msgstr "Enlace simbólico roto"
-
-#~ msgid "%d more item"
-#~ msgid_plural "%d more items"
-#~ msgstr[0] "%d elemento más"
-#~ msgstr[1] "%d elementos más"
-
-#~ msgid "Selection:"
-#~ msgstr "Selección:"
-
-#~ msgid "Could not validate the transaction"
-#~ msgstr "No se pudo validar la transacción"
-
-#~ msgid "No selection available"
-#~ msgstr "No hay ninguna selección disponible"
-
-#~ msgid "No group selected"
-#~ msgstr "No se seleccionó ningún grupo"
-
-#~ msgid ""
-#~ "The program exists, but is not executable.\n"
-#~ "Please check your installation and/or install the binary properly."
-#~ msgstr ""
-#~ "El programa existe, pero no es un ejecutable.\n"
-#~ "Por favor compruebe su instalación y/o instale el binario adecuadamente."
-
-#~ msgid "Open with %s"
-#~ msgstr "Abrir con %s"
-
-#~ msgid "Go To"
-#~ msgstr "Ir"
-
-#~ msgid "%s does not exist."
-#~ msgstr "%s no existe."
-
-#~ msgid "Execute Shell Command"
-#~ msgstr "Ejecutar orden del intérprete de órdenes"
-
-#~ msgid ""
-#~ "Console: quickly run single commands -- write a command here and press "
-#~ "enter."
-#~ msgstr ""
-#~ "Consola: ejecutar con rapidez órdenes sencillas (escriba aquí una orden y "
-#~ "pulse «Intro»)."
-
-#~ msgid "Run in Terminal"
-#~ msgstr "Ejecutar en un terminal"
-
-#~ msgid "Select directory"
-#~ msgstr "Seleccionar carpeta"
-
-#~ msgid "Create New Folder"
-#~ msgstr "Crear una carpeta"
-
-#~ msgid "Selection"
-#~ msgstr "Selección"
-
-#~ msgid "Unmounting %s"
-#~ msgstr "Desmontando %s"
-
-#~ msgid "Mounting %s"
-#~ msgstr "Montando %s"
-
-#~ msgid "Uploading file %s"
-#~ msgstr "Enviando el archivo %s"
-
-#~ msgid "Downloading file %s..."
-#~ msgstr "Descargando el archivo %s..."
-
-#~ msgid "Cut"
-#~ msgstr "Cortar"
-
-#~ msgid "Empty history"
-#~ msgstr "Histórico vacío"
-
-#~ msgid "Initial Point"
-#~ msgstr "Punto inicial"
-
-#~ msgid "Name"
-#~ msgstr "Nombre"
-
-#~ msgid "write failed"
-#~ msgstr "error al escribir"
-
-#, fuzzy
-#~ msgid "Don't forget"
-#~ msgstr "No informar"
-
-#~ msgid "New file"
-#~ msgstr "Archivo nuevo"
-
-#~ msgid "Select All"
-#~ msgstr "Seleccionar todo"
-
-#~ msgid "Select Items Matching..."
-#~ msgstr "Seleccionar elementos que coincidan con…"
-
-#~ msgid "Unselect Items Matching..."
-#~ msgstr "Deseleccionar elementos que cumplan..."
-
-#, fuzzy
-#~ msgid "Bookmark added"
-#~ msgstr "Añadido a marcadores"
-
-#~ msgid "The operation was cancelled."
-#~ msgstr "La operación fue cancelada."
-
-#~ msgid "Shift"
-#~ msgstr "Mayús"
-
-#~ msgid "Control"
-#~ msgstr "Control"
-
-#~ msgid "Alt"
-#~ msgstr "Alt"
-
-#~ msgid "Left"
-#~ msgstr "Izquierda"
-
-#~ msgid "Up"
-#~ msgstr "Subir"
-
-#~ msgid "Right"
-#~ msgstr "Derecha"
-
-#~ msgid "Down"
-#~ msgstr "Bajar"
-
-#~ msgid "Page up"
-#~ msgstr "Página arriba"
-
-#~ msgid "Page down"
-#~ msgstr "Página abajo"
-
-#~ msgid "End"
-#~ msgstr "Final"
-
-#~ msgid "Begin"
-#~ msgstr "Inicio"
-
-#~ msgid "Insert"
-#~ msgstr "Insertar"
-
-#~ msgid "Equal"
-#~ msgstr "Iguales"
-
-#~ msgid "Plus"
-#~ msgstr "Más"
-
-#~ msgid "Minus"
-#~ msgstr "Menos"
-
-#~ msgid "Add"
-#~ msgstr "Añadir"
-
-#~ msgid "Subtract"
-#~ msgstr "Restar"
-
-#~ msgid "The location does not exist."
-#~ msgstr "La ubicación no existe."
-
-#~ msgid "Accept"
-#~ msgstr "Aceptar"
-
-#~ msgid "Rename the selected file"
-#~ msgstr "Renombrar el archivo seleccionado"
-
-#~ msgid "Click"
-#~ msgstr "Click"
-
-#~ msgid "Duplicate this path"
-#~ msgstr "Duplicar esta ruta"
-
-#~ msgid "Create Symlink"
-#~ msgstr "Crear enlace simbólico"
-
-#~ msgid "Rename"
-#~ msgstr "Renombrar"
-
-#~ msgid "Copy of %s"
-#~ msgstr "copia de %s"
-
-#~ msgid "Duplicate"
-#~ msgstr "Duplicar"
-
-#~ msgid "Link to %s"
-#~ msgstr "Enlace hacia %s"
-
-#~ msgid "Regular file"
-#~ msgstr "Archivo regular"
-
-#~ msgid "File format not recognized"
-#~ msgstr "No se reconoció el formato de archivo"
-
-#~ msgid "Contents of %s"
-#~ msgstr "Contenido de %s"
-
-#~ msgid "Empty file"
-#~ msgstr "Archivo vacío"
-
-#~ msgid "Encryption Key Approval"
-#~ msgstr "Aprobación de la clave de cifrado"
-
-#~ msgid "Encryption key: "
-#~ msgstr "Clave de cifrado: "
-
-#~ msgid "Confirm:"
-#~ msgstr "Confirmar:"
-
-#~ msgid "Sorry, passwords do not match"
-#~ msgstr "Las contraseñas no coinciden"
-
-#~ msgid "Minimum length:"
-#~ msgstr "Longitud mínima:"
-
-#, fuzzy
-#~ msgid "Too many matches"
-#~ msgstr "demasiadas plantillas"
-
-#~ msgid "Options:"
-#~ msgstr "Opciones:"
-
-#~ msgid "Text Completion"
-#~ msgstr "Terminación de texto"
-
-#~ msgid "Command"
-#~ msgstr "Comando"
-
-#~ msgid "Command history"
-#~ msgstr "Historial de órdenes"
-
-#~ msgid "User"
-#~ msgstr "Usuario"
-
-#~ msgid "Host"
-#~ msgstr "Host"
-
-#~ msgid "Found no match"
-#~ msgstr "No se ha encontrado ninguna coincidencia"
-
-#~ msgid "Completion mode:"
-#~ msgstr "Modo de terminación:"
-
-#~ msgid "command"
-#~ msgstr "comando"
-
-#~ msgid "file"
-#~ msgstr "fichero"
-
-#~ msgid "Options >>"
-#~ msgstr "Opciones >>"
-
-#~ msgid "Keybinding"
-#~ msgstr "Combinación de teclas"
-
-#~ msgid "You may not specify duplicate patterns"
-#~ msgstr "No puede especificar patrones duplicados"
-
-#~ msgid "Modify"
-#~ msgstr "Modificar"
-
-#~ msgid "<choose a key>"
-#~ msgstr "<elija una tecla>"
-
-#, fuzzy
-#~ msgid "XML tag"
-#~ msgstr "Catálogo XML"
-
-#, fuzzy
-#~ msgid "prefix"
-#~ msgstr "[prefijo]"
-
-#~ msgid "Attribute"
-#~ msgstr "Atributo"
-
-#~ msgid "Select A File"
-#~ msgstr "Seleccione un archivo"
-
-#~ msgid "Validate document"
-#~ msgstr "Validar el documento"
-
-#, fuzzy
-#~ msgid "The Document is not valid!"
-#~ msgstr "La consulta no es válida."
-
-#~ msgid "Save"
-#~ msgstr "Guardar"
-
-#~ msgid "Select File"
-#~ msgstr "Seleccionar archivo"
-
-#~ msgid "Preparing"
-#~ msgstr "Preparando"
-
-#~ msgid "Edit mount point for %s"
-#~ msgstr "Editar el punto de montaje de %s"
-
-#~ msgid "Select mount point"
-#~ msgstr "Seleccionar punto de montaje"
-
-#~ msgid "Mount Point"
-#~ msgstr "Punto de montaje"
-
-#~ msgid "Unable to mount location"
-#~ msgstr "No se pudo montar el lugar"
-
-#~ msgid "address already in use"
-#~ msgstr "la dirección ya está en uso"
-
-#~ msgid "Tests"
-#~ msgstr "Pruebas"
-
-#~ msgid "development version"
-#~ msgstr "versión de desarrollo"
-
-#~ msgid "Initial idea, basic architecture, much initial source code"
-#~ msgstr ""
-#~ "Idea inicial, arquitectura básica, gran parte del código fuente inicial"
-
-#~ msgid "Contributors"
-#~ msgstr "Colaboradores"
-
-#, fuzzy
-#~ msgid "Open Source:"
-#~ msgstr "Código abierto"
-
-#~ msgid "Contributors to older versions:"
-#~ msgstr "Colaboradores de versiones anteriores:"
-
-#~ msgid "This is free software with ABSOLUTELY NO WARRANTY."
-#~ msgstr "Esto es software libre sin NINGÚN TIPO DE GARANTÍA."
-
-#~ msgid "Hello World"
-#~ msgstr "Hola mundo"
-
-#~ msgid "Suggestions, bug reports"
-#~ msgstr "Sugerencias, informes de fallos"
-
-#~ msgid "About"
-#~ msgstr "Acerca de"
-
-#~ msgid "Create new file in the given directory"
-#~ msgstr "Crea un archivo nuevo en la carpeta dada"
-
-#~ msgid "Create a new empty folder inside this folder"
-#~ msgstr "Crear una carpeta nueva vacía dentro de esta carpeta"
-
-#, fuzzy
-#~ msgid "bcrypt"
-#~ msgstr "Cifrar"
-
-#~ msgid "Link"
-#~ msgstr "Enlace"
-
-#~ msgid "Touch"
-#~ msgstr "Tocar"
-
-#~ msgid "Show hidden files"
-#~ msgstr "Mostrar archivos ocultos"
-
-#~ msgid "Show Backup Files"
-#~ msgstr "Mostrar archivos de respaldo"
-
-#~ msgid "Show previews of files and directories."
-#~ msgstr "Mostrar previsualización de archivos y carpetas."
-
-#~ msgid "Choose Location"
-#~ msgstr "Elegir ubicación"
-
-#~ msgid "System"
-#~ msgstr "Sistema"
-
-#~ msgid "Go up"
-#~ msgstr "Subir"
-
-#~ msgid "Go back"
-#~ msgstr "Atrás"
-
-#~ msgid "Go forward"
-#~ msgstr "Adelante"
-
-#~ msgid "Paste"
-#~ msgstr "Pegar"
-
-#~ msgid "Open with"
-#~ msgstr "Abrir con"
-
-#~ msgid "Add bookmark"
-#~ msgstr "Añadir marcador"
-
-#~ msgid "Remove bookmark"
-#~ msgstr "Quitar marcador"
-
-#~ msgid "Toggle Bookmark"
-#~ msgstr "Cambiar marcador"
-
-#~ msgid "Mount the volume associated with this folder"
-#~ msgstr "Montar el volumen asociado con esta carpeta"
-
-#~ msgid "Unmount the volume associated with this folder"
-#~ msgstr "Desmontar el volumen asociado con esta carpeta"
-
-#~ msgid "Open terminal"
-#~ msgstr "Abrir terminal"
-
-#~ msgid "Reload"
-#~ msgstr "Recargar"
-
-#~ msgid "Search"
-#~ msgstr "Buscar"
-
-#~ msgid "Compare Files or Folders"
-#~ msgstr "Comparar archivos o directorios"
-
-#~ msgid "Sort case insensitive"
-#~ msgstr "Ordenar sin diferenciar entre mayúsculas y minúsculas"
-
-#~ msgid "Sort data in ascending order"
-#~ msgstr "Ordenar los datos ascendentemente"
-
-#~ msgid "Sort data in descending order"
-#~ msgstr "Ordenar los datos descendentemente"
-
-#~ msgid "Global keybindings support"
-#~ msgstr "Implementación de accesos rápidos globales"
-
-#~ msgid "Invert Selection"
-#~ msgstr "Invertir selección"
-
-#~ msgid "Unselect"
-#~ msgstr "Deseleccionar"
-
-#~ msgid "Sort by name"
-#~ msgstr "Ordenar por nombre"
-
-#~ msgid "Default sort order"
-#~ msgstr "Orden de colocación predeterminado"
-
-#~ msgid "Sort by date"
-#~ msgstr "Ordenar por fecha"
-
-#~ msgid "Sort by size"
-#~ msgstr "Ordenar por tamaño"
-
-#~ msgid "Group"
-#~ msgstr "Grupo"
-
-#~ msgid "By Permissions"
-#~ msgstr "Por permisos"
-
-#~ msgid "Opens the main menu."
-#~ msgstr "Abre el menú principal"
-
-#, fuzzy
-#~ msgid "Enlarge Icons"
-#~ msgstr "Iconos grandes"
-
-#, fuzzy
-#~ msgid "Shrink Icons"
-#~ msgstr "Reducir tipo de letra"
-
-#~ msgid "Default icon zoom level"
-#~ msgstr "Nivel de ampliación predeterminado del icono"
-
-#~ msgid "View as list"
-#~ msgstr "Ver como lista"
-
-#~ msgid "Small Icons"
-#~ msgstr "Iconos pequeños"
-
-#~ msgid "Normal Icons"
-#~ msgstr "Iconos normales"
-
-#~ msgid "Large Icons"
-#~ msgstr "Iconos grandes"
-
-#~ msgid "Very large"
-#~ msgstr "Muy grande"
-
-#~ msgid "Sort options"
-#~ msgstr "Opciones de ordenación"
-
-#~ msgid "There was a network error."
-#~ msgstr "Ha ocurrido un error de red."
-
-#~ msgid "Go"
-#~ msgstr "Ir"
-
-#~ msgid "Applications"
-#~ msgstr "Aplicaciones"
-
-#~ msgid "Sort"
-#~ msgstr "Ordenar"
-
-#~ msgid "View"
-#~ msgstr "Ver"
-
-#~ msgid "Select"
-#~ msgstr "Seleccionar"
-
-#~ msgid "This is the root of the filesystem"
-#~ msgstr "Esta es la raíz del sistema de archivos"
-
-#~ msgid "Root Directory"
-#~ msgstr "Directorio raíz"
-
-#~ msgid "Home Directory"
-#~ msgstr "Directorio personal"
-
-#, fuzzy
-#~ msgid "Unable to load: %s..."
-#~ msgstr "Incapaz de descargar: %s"
-
-#~ msgid "Could not initialize monitoring"
-#~ msgstr "No se pudo inicializar la monitorización"
-
-#~ msgid "Remote Connection..."
-#~ msgstr "Conexión remota..."
-
-#~ msgid "Installed Plugins"
-#~ msgstr "Complementos instalados"
-
-#~ msgid "click"
-#~ msgstr "pulsar"
-
-#~ msgid "Assign"
-#~ msgstr "Asignar"
-
-#~ msgid "Associated command"
-#~ msgstr "Orden asociada"
-
-#~ msgid "Hidden"
-#~ msgstr "Oculto"
-
-#~ msgid "Type"
-#~ msgstr "Tipo"
-
-#~ msgid "Date"
-#~ msgstr "Fecha"
-
-#~ msgid "Size"
-#~ msgstr "Tamaño"
-
-#~ msgid "Mode"
-#~ msgstr "Modo"
-
-#~ msgid "List"
-#~ msgstr "Lista"
-
-#~ msgid "Tiny"
-#~ msgstr "Diminuto"
-
-#~ msgid "Backup file"
-#~ msgstr "Archivo de respaldo"
-
-#~ msgid "File Type"
-#~ msgstr "Tipo de archivo"
-
-#~ msgid "MIME Type"
-#~ msgstr "Tipo MIME"
-
-#~ msgid "Encoding"
-#~ msgstr "Codificación"
-
-#~ msgid "Folder"
-#~ msgstr "Carpeta"
-
-#~ msgid "Status Change"
-#~ msgstr "Cambio de estado"
-
-#~ msgid "Modification Time :"
-#~ msgstr "Hora de modificación :"
-
-#~ msgid "Access Time :"
-#~ msgstr "Último acceso :"
-
-#~ msgid "Links"
-#~ msgstr "Enlaces"
-
-#~ msgid "hard"
-#~ msgstr "duro"
-
-#~ msgid "Local File"
-#~ msgstr "Archivo local"
-
-#~ msgid "Remote File"
-#~ msgstr "Archivo remoto"
-
-#~ msgid "Plugin services"
-#~ msgstr "Servicios del complemento"
-
-#, fuzzy
-#~ msgid "Local Directory"
-#~ msgstr "Directorio Local:"
-
-#~ msgid "Run in terminal window"
-#~ msgstr "Ejecutar en ventana de terminal"
-
-#~ msgid "Is executable"
-#~ msgstr "es ejecutable"
-
-#~ msgid "Run"
-#~ msgstr "Ejecutar"
-
-#~ msgid "Specify Output Directory..."
-#~ msgstr "Especificar directorio de salida..."
-
-#~ msgid "Reset default state"
-#~ msgstr "Reiniciar al estado por omisión"
-
-#~ msgid "Single Instance"
-#~ msgstr "Única instancia"
-
-#~ msgid "All Instances"
-#~ msgstr "Todas las instancias"
-
-#~ msgid "No file selected"
-#~ msgstr "No hay ningún archivo seleccionado"
-
-#~ msgid "Loading %s..."
-#~ msgstr "Cargando %s…"
-
-#~ msgid "rodent-translation-team"
-#~ msgstr ""
-#~ "***  Spanish <es@li.org>\n"
-#~ "\n"
-#~ "-  2004 Alexander Reinholdt <dustpuppy@mail.berlios.de>.\n"
-#~ "-  Miguel Angel Quesada <kesadalive@gmail.com>, 2009.\n"
-#~ "-  Ramón Rey Vicente <ramon.rey@hispalinux.es>, 2003-2004.\n"
-#~ "-  Jorge González <jorgegonz@svn.gnome.org>, 2004-2012.\n"
-#~ "-  Albert Abril <albert.abril@gmail.com>, 2006.\n"
-#~ "-  Juan Percy Rojas Cruz <juanperojas@gmail.com>, 2008-2009.\n"
-#~ "-  2003 Dario Abatianni <eisfuchs@tigress.com>.\n"
-#~ "-  Adolfo González Blázquez <code@infinicode.org>, 2007.\n"
-#~ "-  Miguel Rodríguez Núñez <bokerones.fritos@gmail.com>, 2012-2013.\n"
-#~ "-  Jean Pierre Mazuelos Saavedra <apuyaya@gmail.com>, 2010.\n"
-#~ "-  Mario Teijeiro Otero <mteijeiro@escomposlinux.org>, 2001-2002.\n"
-#~ "-  José Antonio Salgueiro <joseantsa@eresmas.net>, 2001.\n"
-#~ "-  Bryan Alberto Baron Chinchilla <bachinchi@gmail.com>, 2010.\n"
-#~ "-  Santiago FernÃ¡ndez Sancho <santi@kde-es.org>, 2007-2008.\n"
-#~ "-  2009 Daniel Campos <dcamposf@gmail.com>.\n"
-#~ "-  Carlos Mayo <carlos.mayo@hispalinux.es>, 2003.\n"
-#~ "-  Ulrik Sverdrup <ulrik.sverdrup@gmail.com>, 2009.\n"
-#~ "-  2005 Joris Guisson <joris.guisson@gmail.com>.\n"
-#~ "-  Carlos Mayo HernÃ¡ndez <carlos.mayo@hispalinux.es>, 2003-2005.\n"
-#~ "-  Nacho Hermoso de Mendoza <gnacho@gmail.com>, 2008.\n"
-#~ "-  Eneko Lacunza <enlar@iname.com>, 2001-2003.\n"
-#~ "-  Rafael Munoz Rodriguez <rafaluco@netscape.net>, 2003-2004.\n"
-#~ "-  Mario Izquierdo <mariodebian@gmail.com>, 2005.\n"
-#~ "-  Renchi Raju <renchi@pooh.tam.uiuc.edu>.\n"
-#~ "-  Traducido por Jose Antonio Salgueiro <developer@telefonica.net.  "
-#~ "Agradecimientos: zert, softcatala>.\n"
-#~ "-  Miguel Angel Ruiz Manzano <mruiz@openminds.cl>, 2009.\n"
-#~ "-  Juanjo Marin <juanj.marin@juntadeandalucia.es>, 2007.\n"
-#~ "-  Santiago Erquicia <erqu0001@d.umn.edu>, 2004-2005.\n"
-#~ "-  Christian Neumair <chris@gnome-de.org>, 2002-2009.\n"
-#~ "-  Diego Sevilla Ruiz <dsevilla@um.es>, 2000.\n"
-#~ "-  QA por Carlos Perelló Marín <carlos@gnome-db.org>, 2002.\n"
-#~ "-  Salvador Gimeno Zanón <salgiza@jazzfree.com>, 2002-2005.\n"
-#~ "-  Carlos Perelló Marín <carlos@gnome-db.org>, 2000-2003.\n"
-#~ "-  José Sánchez Moreno <jose@oxigenow.com>, 2007.\n"
-#~ "-  Juan Manuel Garcia Molina <juanma@superiodico.net>, 2001-2007.\n"
-#~ "-  Pablo de Vicente <pablo.devicente@gmail.com>, 2000-2008.\n"
-#~ "-  Lucas Vieites Fariña <lucas@asixinformatica.com>, 2001-2007.\n"
-#~ "-  Rocio Gallego <traducciones@rociogallego.com>, 2010-2013.\n"
-#~ "-  Juan Luis Montore Parera <jlm@NOSPAMmontore.net>, 2003-2005.\n"
-#~ "-  Gustavo Jasso Ahuja <gjasso@gmail.com>, 2012.\n"
-#~ "-  miguel angel quesada fernandez <kesadalive@gmail.com>, 2008.\n"
-#~ "-  Kira J. Fernández <kirajfdez@gmail.com>, 2011-2012.\n"
-#~ "-  Francisco Javier F. Serrador <serrador@cvs.gnome.org>, 2002-2010.\n"
-#~ "-  Juan Pablo Puerta <ews@madridwireless.net>, 1999.\n"
-#~ "-  Cherny D. C. Berbesi I. <cberbesi@onuva.com>, 2009.\n"
-#~ "-  Edited by Krzysztof Luks <kluks@iq.pl>.\n"
-#~ "-  Héctor García Álvarez <hector@scouts-es.org>, 1999-2002.\n"
-#~ "-  Sylvia Sánchez <LailahFSF@gmail.com>, 2010-2011.\n"
-#~ "-  David Paul Peña <eodos0@gmail.com>, 2009-2010.\n"
-#~ "-  Raúl Miró <cotin@geocities.com>, 2001.\n"
-#~ "-  2004 Jernej Kos <kostko@jweb-network.net>.\n"
-#~ "-  Mario Young <mayeco@kdemail.net>, 2008.\n"
-#~ "-  Lucas Garcia <tanke@escomposlinux.org>, 2003.\n"
-#~ "-  Ernesto Manríquez Mendoza <alejandronova@gmail.com>, 2011.\n"
-#~ "-  Anthony Vital <anthony.vital@gmail.com>, 2010.\n"
-#~ "-  Carlos Davila <carluti@users.sourceforge.net>, 2007-2008.\n"
-#~ "-  Raul Jover Baison <cain@akrata.org>, 2003.\n"
-#~ "-  Raúl Alexis Betancort Santana <a2363@correo.dis.ulpgc.es>, 1999.\n"
-#~ "-  Ana María García Molina <ana_gm@eresmas.com>, 2001.\n"
-#~ "-  Miguel Revilla <yo@miguelrevilla.com>, 2001.\n"
-#~ "-  Javier Gomez sierras <jgomsi@apolo.umh.es>, 2000.\n"
-#~ "-  Javier Moreno <javier.moreno@alufis35.uv.es>, 2000.\n"
-#~ "-  Leandro Machacón <leandroman@gemail.com>, 2010.\n"
-#~ "-  2008 Alejandro Valdes Jimenez <avaldes@gnome.org>.\n"
-#~ "-  Danilo Vasquez Simonetti <danilo.vasquez@gmail.com>, 2008.\n"
-#~ "-  Jose Antonio Salgueiro Aquino <developer@telefonica.net>, 2003.\n"
-#~ "-  Carlos Higuera <higuera.carlos@gmail.com>, 2006.\n"
-#~ "-  Ignacio Bezanilla Diaz <coder@telefonica.net>, 2004.\n"
-#~ "-  Ãlvaro PeÃ±a <alvaropg@mac.com>, 2001.\n"
-#~ "-  Alberto Garcia <info@trebol-a.com>, 2007-2008.\n"
-#~ "-  Miguel de Icaza,computo,622-4680 <miguel@metropolis.nuclecu.unam.mx>, "
-#~ "1998.\n"
-#~ "-  Miguel A. Arevalo <marevalo@marevalo.net>, 2002.\n"
-#~ "-  2009 Ulrik Sverdrup <ulrik.sverdrup@gmail.com>.\n"
-#~ "-  Tomas Moreno <tomas@info.ne.udo.edu.ve>, 2001.\n"
-#~ "-  Mario Carrion <mario@carrion.mx>, 2010.\n"
-#~ "-  Q&A, Germán Poo-Caamaño <gpoo@ubiobio.cl>, 2003.\n"
-#~ "-  Mauricio Araya Polo <mauricio@eazel.com>, 2001.\n"
-#~ "-  Ignacio A. Poggi <ignaciop.3@gmail.com>, 2008-2009.\n"
-#~ "-  Claudio Saavedra <csaavedra@alumnos.utalca.cl>, 2004-2009.\n"
-#~ "-  Federico Mena-Quintero <federico@gimp.org>, 1999.\n"
-#~ "-  Arturo Espinosa <arturo@ximian.com>, 2001.\n"
-#~ "-  QA by <asan@euskalnet.net>, 2001.\n"
-#~ "-  David Prieto <frandavid100@gmail.com>, 2008.\n"
-#~ "-  Alberto Caso <alberto.caso@adaptia.es>, 2007-2008.\n"
-#~ "-  Jacinto Capote Robles <fastangel@gmail.com>, 2007-2009.\n"
-#~ "-  Eduardo García Cebollero <kiwnix@yahoo.es>, 2002.\n"
-#~ "-  Alberto Pintado <apintado@lycos.es>, 2003.\n"
-#~ "-  Juan Alfredo Salas Santillana <jsantillana@aqpglug.org.pe>, 2009.\n"
-#~ "-  David Paul <eodos0@gmail.com>, 2011.\n"
-#~ "-  Jordi Mallach <jordi@sindominio.net>, 2000-2012.\n"
-#~ "-  Yonathan Moreno <yonathan@yonathanmoreno.com>, 2012.\n"
-#~ "-  Miguel Menéndez <mimecar@innerzaurus.com>, 2007.\n"
-#~ "-  Rafael Rodríguez <apt-drink@gulic.org>, 2005.\n"
-#~ "-  Rafael Belmonte <eaglescreen@gmail.com>, 2013.\n"
-#~ "-  Hector Wilvert Ivan Valdez Reza <ranmaru.hibikiya@gmail.com>, 2013.\n"
-#~ "-  Santiago Fernandez Sancho <santi@kde-es.org>, 2004-2008.\n"
-#~ "-  2003, 2004 Unai Garro <ugarro@users.sourceforge.net>.\n"
-#~ "-  Milagros Alessandra Infante Montero <maim92@gmail.com>, 2012.\n"
-#~ "-  Leticia Martin <leticia.martin@gmail.com>, 2009.\n"
-#~ "-  Saúl Ortega <sortega4444@gmail.com>, 2010-2011.\n"
-#~ "-  Markus Slopianka <kamikazow@fishmouth.net>, 2009-2013.\n"
-#~ "-  eodos <eodos0@gmail.com>, 2010.\n"
-#~ "-  Unai Garro <ugarro@users.sourceforge.net>, 2003.\n"
-#~ "-  Miguel Rodríguez Pérez <miguelrp@gmail.com>, 2002.\n"
-#~ "-  2005 Antonio Ognio <gnrfan@gnrfan.org>, 2005.\n"
-#~ "-  Sun G11n <gnome_int_l10n@ireland.sun.com>, 2002-2003.\n"
-#~ "-  Carlos Albornoz <carlos@debianchile.cl>, 2009.\n"
-#~ "-  QA: Carlos Perelló Marín <carlos@gnome-db.org>.\n"
-#~ "-  javier Vinal <fjvinal@gmail.com>, 2009-2012.\n"
-#~ "-  Francisco Javier Fernandez Serrador <fserrador@gmail.com>, 2009.\n"
-#~ "-  Nestor Diaz <nestordiaz@equusdigital.com>, 2006.\n"
-#~ "-  José Carlos García Sogo <jsogo@arrakis.es>, 2001-2003.\n"
-#~ "-  Roby Sottini <rsottini@yahoo.com>, 2009.\n"
-#~ "-  Leticia Martin Hernandez <leticia.martin@gmail.com>, 2009.\n"
-#~ "-  Lucas Vieites <lucas@codexion.com>, 2002-2008.\n"
-#~ "-  Germán Poó Caamaño <gpoo@ubiobio.cl>, 2004.\n"
-#~ "-  Alejandro Valdes Jimenez <avaldes@gnome.org>, 2007-2011.\n"
-#~ "-  Rafael Muñoz Cárdenas <bymenda@gmail.com>, 2008.\n"
-#~ "-  Eloy Cuadra <ecuadra@eloihr.net>, 2003-2013.\n"
-#~ "-  Javier Viñal <fjvinal@gmail.com>, 2009-2013.\n"
-#~ "-  cyphra <cyphra@hal9000.eui.upm.es>, 2004.\n"
-#~ "-  Javier Mazorra Rodríguez <mazi.debian@gmail.com>, 2007-2013.\n"
-#~ "-  Rafael Beccar <rafael.beccar@kdemail.net>, 2004-2006.\n"
-#~ "-  Felipe Barros S. <felipeb@gnome.cl>, 2007.\n"
-#~ "-  Chihau Chau <chihau@gmail.com>, 2008-2009.\n"
-#~ "-  Cesar Garcia Tapia <tapia@eitig.com>, 2004-2005.\n"
-#~ "-  Ale Hamann <amadeus@bbs.frc.utn.edu.ar>, 2006-2008.\n"
-#~ "-  Edgardo Rossetto <eros@speedy.com.ar>, 2004.\n"
-#~ "-  Daniel Mustieles <daniel.mustieles@gmail.com>, 2007-2013.\n"
-#~ "-  Antonio Pijuan <deinde@ono.com>, 2003-2005.\n"
-#~ "-  Xavier <xavier.corredor.llano@gmail.com>, 2011.\n"
-#~ "-  Isaac Clerencia <isaac@warp.es>, 2005.\n"
-#~ "-  Francisco Vila <francisco.vila@hispalinux.es>, 2003-2013.\n"
-#~ "-  jeffrey steve borbon sanabria <jeffto@aclibre.org>, 2008.\n"
-#~ "-  Alex Fiestas <alex@eyeos.org>, 2009.\n"
-#~ "-  santi <santi@kde-es.org>, 2005-2009.\n"
-#~ "-  Andrés Gómez <agomez@igalia.com>, 2009.\n"
-#~ "-  Enrique Rodriguez <krm@futurnet.es>, 2003.\n"
-#~ "-  Alejandro Sáchez Acosta <asanchez@gnu.org>, 2002.\n"
-#~ "-  Kramer Garay <kramergaray@hotmail.com>, 2010.\n"
-#~ "-  2003 Eric Bischoff <e.bischoff@noos.fr>.\n"
-#~ "-  sito <soler.sito@gmail.com>, 2008.\n"
-#~ "-  Adrián Martínez <sfxgt3@gmail.com>, 2009-2010.\n"
-#~ "-  Miguel de Icaza <miguel@metropolis.nuclecu.unam.mx>, 1998.\n"
-#~ "-  Antonio Ognio <gnrfan@gnrfan.org>, 2003-2006.\n"
-#~ "-  Héctor Enríquez Díaz <henrique@alumnos.ubiobio.cl>, 2005.\n"
-#~ "-  Gary Castillo <elhumano@hotmail.com>, 2001.\n"
-#~ "-  Miguel Angel Nieto <correo@miguelangelnieto.net>, 2005.\n"
-#~ "-  Marcos Fouces Lago <mfouces@yahoo.es>, 2004.\n"
-#~ "-  Francisco Vila Doncel <fravd@wanadoo.es>, 2003.\n"
-#~ "-  Xavier Corredor Llano <xavier.corredor.llano@gmail.com>, 2010-2012.\n"
-#~ "-  Gabriel Felipe Cornejo Salas <gnomeusr@gmail.com>, 2008.\n"
-#~ "-  David Martínez Moreno <ender@debian.org>, 2005.\n"
-#~ "-  Jesse Avilés <jesseaviles@gmail.com>, 2008-2011.\n"
-#~ "-  Rafael Bermúdez <rafaelbermudez@gmail.com>, 2006.\n"
-#~ "-  Benjamín Valero Espinosa <benjavalero@gmail.com>, 2008-2012.\n"
-#~ "-  Aitor Moreno <aitormoreno@gmail.com>, 2008.\n"
-#~ "-  Ignacio Casal Quinteiro <icq@cvs.gnome.org>, 2004-2010.\n"
-#~ "-  Santiago Vila Doncel <sanvila@unex.es>, 2001-2011.\n"
-#~ "-  Rafael Rodríguez Martín <apt-drink@gulic.org>, 2005.\n"
-#~ "-  Daniel Calviño Sánchez <danxuliu@gmail.com>, 2008-2012.\n"
-#~ "-  Alvaro Soliverez <asoliverez@gmail.com>, 2008-2010.\n"
-#~ "-  Carlos Mayo Hernandez <carlos.mayo@hispalinux.es>, 2007.\n"
-#~ "-  Nicolás Satragno <nsatragno@gmail.com>, 2011-2013.\n"
-#~ "-  Jean Pierre MAZUELOS SAAVEDRA <apuyaya@gmail.com>, 2010.\n"
-#~ "-  Carlos Garnacho <carlosg@gnome.org>, 2007.\n"
-#~ "-  Vicente Herrera Cobo <vicente.herrera@hispalinux.es>, 2003-2004.\n"
-#~ "-  Fabian Mandelbaum <fmandelbaum@hotmail.com>, 2003.\n"
-#~ "-  Enrique Matias Sanchez (Quique) <cronopios@gmail.com>, 2004-2010.\n"
-#~ "-  JulioBorjaBarra <juboba@gmail.com>, 2010.\n"
-#~ "-  Israel Garcia Garcia <israelgarcia86@gmail.com>, 2007-2011.\n"
-#~ "-  María Majadas <alixis82@gmail.com>, 2008-2013.\n"
-#~ "-  Javier Fernández-Sanguino Peña <jfs@computer.org>, 2002.\n"
-#~ "-  Germán Poo-Caamaño <gpoo@ubiobio.cl>, 2002-2003.\n"
-#~ "-  Pablo Pita Leira <pablo.pita@kdemail.net>, 2004-2011.\n"
-#~ "-  Gabriel Leonardo Ruiz Manzano <debianmaster@gmail.com>, 2008-2009.\n"
-#~ "-  Juan-Pablo Scaletti <juanpablo@jpscaletti.com>, 2009.\n"
-#~ "-  Gonzalo L. Campos Medina <gcamposm@gmail.com>.\n"
-#~ "-  Miguel Angel Quesada Fernandez <kesadalive@gmail.com>, 2008-2011.\n"
-#~ "-  Chris Leonard <cjl@laptop.org>, 2012.\n"
-#~ "-  2003 Quique <quique@sindominio.net>.\n"
-#~ "-  Eduardo Sanchez <kde@sombragris.org>, 2003-2010.\n"
-#~ "-  Lucas Di Pentima <lucas@lunix.com.ar>, 2001-2002.\n"
-#~ "-  Ismael Rubio Rojas <ismael_rubio_rojas@hotmail.com>, 2003.\n"
-#~ "-  Francisco Javier Fernández <serrador@arrakis.es>, 2003.\n"
-#~ "-  Antonio J. Soler Sánchez <redtony@telefonica.net>, 2004.\n"
-#~ "-  Maria Majadas <maria.majadas@hispalinux.es>, 2005-2011.\n"
-#~ "-  Raul Moratalla <raul.moratalla@ono.com>, 2004.\n"
-#~ "-  Antonio Crevillen <antonio.crevillen@hispalinux.es>, 2003.\n"
-#~ "-  Miguel Revilla RodrÃ­guez <yo@miguelrevilla.com>, 2002-2004.\n"
-#~ "-  Ignacio Poggi <ignaciop.3@gmail.com>, 2008-2012.\n"
-#~ "-  2007 daniel g. siegel <dgsiegel@gnome.org>.\n"
-#~ "-  By Nicols Lichtmaier <nick@technisys.com.ar>.\n"
-#~ "-  Mauricio Araya P. <mauricio@eazel.com>, 2001.\n"
-#~ "-  Francisco Javier Fernandez <serrador@arrakis.es>, 2003.\n"
-#~ "-  Juan Jesus Ojeda Croissier <juanjesus.ojeda@hispalinux.es>, 2002.\n"
-#~ "-  José Antonio Salgueiro A. <joseantsa@eresmas.net>, 2001.\n"
-#~ "-  Cristina Yenyxe Gonzalez Garcia <the.blue.valkyrie@gmail.com>, "
-#~ "2009-2012.\n"
-#~ "-  Pedro Jurado Maqueda <pjmelenas@biwemail.com>, 2003-2005.\n"
-#~ "-  Dominik Neumeister <neudob06@edvhtl.at>, 2009.\n"
-#~ "-  Luis F. Lopez M. <luis.lopez@ubuntu.com>, 2010.\n"
-#~ "-  Adolfo Jayme Barrientos <fitoschido@gmail.com>, 2012.\n"
-#~ "-  Havoc Pennington <hp@pobox.com>, 1999.\n"
-#~ "-  Tatiana Gutiérrez Bunster <tgutierr@ubiobio.cl>, 2003.\n"
-#~ "-  Jorge Gonzalez <jorgegonz@svn.gnome.org>, 2005-2007.\n"
-#~ "-  Andres Herrera <andres@usr.cl>, 2008.\n"
-#~ "-  sergio rivadero <sergiorivadero@argentina.com>, 2005.\n"
-#~ "-  Jacobo Tarrío Barreiro <jtarrio@trasno.net>, 2000-2002.\n"
-#~ "-  Ferro01 <ferro01@wanadoo.es>, 2011.\n"
-#~ "-  Alejandro Araiza Alvarado <mebrelith@gmail.com>, 2005-2006.\n"
-#~ "-  Daniel Garcia <dani@danigm.net>, 2010.\n"
-#~ "-  2004 Waldo Bastian <bastian@kde.org>.\n"
-#~ "-  Danilo Vasquez <danilo.vasquez@gmail.com>, 2007-2008.\n"
-#~ "-  Jaime Robles <jaime@kde.org>, 2003-2009.\n"
-#~ "-  Rafael Osuna <rosuna@wol.es>, 2003-2004.\n"
-#~ "-  Ricardo Fernández Pascual <ric@users.sourceforge.net>, 2000-2001.\n"
-#~ "-  Carlos Ernesto López Natarén <natorro@themis.fciencias.unam.mx>, "
-#~ "2000.\n"
-#~ "-  Miguel <migueldeblas@gmail.com>, 2010.\n"
-#~ "-  Miguel Mingo <miguelmingo@terra.es>, 2002.\n"
-#~ "-  maria <maria.majadas@hispalinux.es>, 2006-2007.\n"
-#~ "-  Miguel Cabrera <mfcabrera@gmail.com>, 2005.\n"
-#~ "-  Juan Emilio Drault <juan@drault.com>, 2004.\n"
-#~ "-  Jorge Carrasquilla Soares <jorge@conectiva.com.br>, 2000.\n"
-#~ "-  Gerardo Jose Bueno Jimenez <gerardo@abser-t.com>, 2010.\n"
-#~ "-  Germán Poo Caamaño, <gpoo@ubiobio.cl>, 2002.\n"
-#~ "-  Rodrigo Marcos Fombellida <rmarcos@cvs.gnome.org>, 2005-2008.\n"
-#~ "-  Andrea Mara Pimenta Alonso <pimenta@conectiva.com.br>, 2000.\n"
-#~ "-  Mikel Olasagasti <hey_neken@mundurat.net>, 2003-2005.\n"
-#~ "-  Matías Costa <mcc3@alu.um.es>, 2004-2007.\n"
-#~ "-  Jaime Iniesta Alemán <capitanplaneta@gmail.com>, 2005-2006.\n"
-#~ "-  Miguel Revilla Rodríguez <yo@miguelrevilla.com>, 2002-2004.\n"
-#~ "-  Lorenzo nunez <lorenzo.nunez@gmail.com>, 2007.\n"
-#~ "-  J. Félix Ontañón <fontanon@emergya.es>, 2009.\n"
-#~ "-  Adrian Soto <adrianmatematico@yahoo.com.mx>, 2003-2004.\n"
-#~ "-  Paulino Padial <devnull.tst@gmail.com>, 2007.\n"
-#~ "-  Manue Tortosa <manutortosa@chakra-project.org>, 2011.\n"
-#~ "-  Gladys Guerrero <gguerrer@redhat.com>, 2010.\n"
-#~ "-  2003 Robby Stephenson <robby@periapsis.org>.\n"
-#~ "-  miguel <bokerones.fritos@gmail.com>, 2012.\n"
-#~ "-  Boris Wesslowski <Boris@Wesslowski.com>, 1999-2001.\n"
-#~ "-  Alonso Lara <keko@khor-ha.net>, 1998-2005.\n"
-#~ "-  2004-2005 Johan Svedberg <johan@svedberg.com>.\n"
-#~ "-  Pablo Gonzalo del Campo <pablodc@bigfoot.com>, 2000-2004.\n"
-#~ "-  Itxaka Serrano <itxakaserrano@gmail.com>, 2010.\n"
-#~ "-  Adrián Chaves Fernández (Gallaecio) <adriyetichaves@gmail.com>, "
-#~ "2010-2013.\n"
-#~ "-  Jesse Aviles <jesseaviles@gmail.com>, 2008-2010.\n"
-#~ "-  Lucas Basurero Vieites <lucas@asixinformatica.com>, 2001-2007.\n"
-#~ "-  Martín Carr <tincarr@gmail.com>, 2005-2008.\n"
-#~ "-  Mauricio Jose Adonis Carrasco <mike.alfa.2007@gmail.com>, 2008.\n"
-#~ "-  QA - Germán Poo Caamaño <gpoo@ubiobio.cl>, 2002.\n"
-#~ "-  Marco César Gloria <mgloria@campus.gda.itesm.mx>, 2000.\n"
-#~ "-  Germán Poo Caamaño <gpoo@ubiobio.cl>, 2001-2003.\n"
-#~ "-  Raul Gonzalez <raulgf83@gmail.com>, 2010-2013.\n"
-#~ "-  Javier Jardón <jjardon@gnome.org>, 2002-2010.\n"
-#~ "-  Gabriel Ruiz <debianmaster@gmail.com>, 2008.\n"
-#~ "-  Pablo Iranzo Gómez <Pablo.Iranzo@uv.es>, 2000.\n"
-#~ "-  Pablo G. del Campo <pablodc@bigfoot.com>, 2003-2004.\n"
-#~ "-  Andreu Correa Casablanca <castarco@gmail.com>, 2009.\n"
-#~ "-  Miguel Perez Ibars <mpi79470@alu.um.es>, 2006.\n"
-#~ "-  Carlos Mayo Hernández <carlos.mayo@hispalinux.es>, 2003-2005.\n"
-#~ "-  Juan Manuel García Molina <juanma_gm@wanadoo.es>, 2000-2007.\n"
-#~ "-  Manuel de Vega Barreiro <barreiro@arrakis.es>, 2000-2002.\n"
-#~ "-  Luis Lopez <luis@loxi.ca>, 2010-2011.\n"
-#~ "-  Jordi Jaen Pallares <jordi@suse.de>, 1999-2001.\n"
-#~ "-  Novell Language <language@novell.com>, 2006-2009.\n"
-#~ "-  Sito Soler <soler.sito@gmail.com>, 2008.\n"
-#~ "-  Daniel Fernandez <dfdez@ya.com>, 2005.\n"
-#~ "-  Neumeister Dominik <neudob06@edvhtl.at>, 2009.\n"
-#~ "-  Vicente Aguilar <vaguilar@retemail.es>, 1999.\n"
-#~ "-  Hector Garcia Alvarez <hector@scouts-es.org>, 2001-2002.\n"
-#~ "-  Zohra Coudoin <zohra.coudoin@free.fr>, 2000.\n"
-#~ "-  Antonio de la Torre <adltorre@terra.es>, 2001.\n"
-#~ "-  First author: Enrique Matias Sanchez (aka Quique) <cronopios@gmail."
-#~ "com>, 2003.\n"
-#~ "-  Alejandro Pinheiro <apinheiro@igalia.com>, 2009.\n"
-#~ "-  Enrique Matias Sanchez <cronopios@gmail.com>, 2004-2011.\n"
-#~ "-  edscott@users.sourceforge.net, 2001-2, 2001-4, 2001-5, 2001-7, 2002-1, "
-#~ "2002-3 <>.\n"
-#~ "-  2003 Martin Grimme <martin@pycage.de>.\n"
-#~ "-  Quique <quique@sindominio.net>, 2003-2011.\n"
-#~ "-  Manuel Tortosa <manutortosa@chakra-project.org>, 2009-2012.\n"
-#~ "-  Daniel Baeyens <danibens@terra.es>, 2002-2007.\n"
-#~ "-  Juan Carlos Vallejo <urizev@gmail.com>, 2007.\n"
-#~ "-  Jorge Bustos <jorge@gnome.cl>, 2003.\n"
-#~ "-  Urizev <urizev@gmail.com>, 2007.\n"
-#~ "-  Federico Mena Quintero,Pregonero <federico@casiopea.quartic.org>, "
-#~ "1998.\n"
-#~ "-  Ricardo González Castro <rick@jinlabs.com>, 2007.\n"
-#~ "-  MIguel Angel Quesada Fernandez <kesadalive@gmail.com>, 2008.\n"
-#~ "-  Andrés Herrera <andres@usr.cl>, 2008.\n"
-#~ "-  Nicolás Alvarez <nicolas.alvarez@gmail.com>, 2010.\n"
-#~ "-  Javier Vinal <fjvinal@gmail.com>, 2009-2013.\n"
-#~ "-  miguel rodriguez nuñez <bokerones.fritos@gmail.com>, 2012-2013.\n"
-#~ "-  Ayoze Hernández Díaz <ayoze12@gmail.com>, 2013.\n"
-#~ "-  Jesús Bravo Álvarez <suso@trasno.net>, 1999-2004.\n"
-#~ "-  Ibán josé García Castillo <Iban.Garcia@alufis35.uv.es>, 2000.\n"
-#~ "-  Sergio Rivadero <sergiorivadero@argentina.com>, 2006.\n"
-#~ "-  Rodrigo Sancho Senosiain <ruy_ikari@bigfoot.com>.\n"
-#~ "-  Susana González <sgonzalez@igalia.com>, 2007.\n"
-#~ "-  Javier Gómez <jgomsi@apolo.umh.es>, 2000.\n"
-#~ "-  Cristina Yenyxe González García <the.blue.valkyrie@gmail.com>, "
-#~ "2009-2013.\n"
-#~ "-  Rolando Espinoza La Fuente <darkrho@gmail.com>, 2007.\n"
-#~ "-  Javier Conde Rueda <f3285740@est.fib.upc.es>, 2003.\n"
-#~ "-  Franco Mariluis <fmariluis@gmail.com>, 2008-2009.\n"
-#~ "-  Xavier de Blas <xaviblas@gmail.com>, 2005-2010.\n"
-#~ "-  2004  Rodney Dawes <dobey@novell.com>.\n"
-#~ "-  Ismael Olea <ismael@olea.org>, 2000-2003.\n"
-#~ "-  Guillermo Largaespada <heresul@gmail.com>, 2008-2010.\n"
-#~ "-  Sergio Rubio <sergio.rubio@hispalinux.es>, 2004.\n"
-#~ "-  Kira J. Fernandez <kirajfdez@gmail.com>, 2009-2013.\n"
-#~ "-  Fco. Javier Fernandez <serrador@arrakis.es>, 2003.\n"
-#~ "-  2004 Percy Leonhardt <percy@eris23.de>.\n"
-#~ "-  Santi <santi@kde-es.org>, 2008-2010.\n"
-#~ "-  Marlon Cisternas Milla <marlitoo@gmail.com>, 2008.\n"
-#~ "-  Ricardo Varas Santana <ricardoivaras@gmail.com>, 2009-2013.\n"
-#~ "-  Israel Campoy <churritzu@yahoo.com>, 2012.\n"
-#~ "-  Baltasar Perez Diaz <baltasar.perez@hispalinux.es>, 2002.\n"
-#~ "-  Xan López <xan@dimensis.com>, 2002.\n"
-#~ "-  Tambet Ingo <tambet@novell.com>, 2009.\n"
-#~ "-  Iñaky Pérez González <inaky@peloncho.fis.ucm.es>, 1996.\n"
-#~ "-  Rodrigo Moya <rmoya@chez.com>, 1999.\n"
-#~ "-  Salvador Gimeno <salgiza@jazzfree.com>, 2001.\n"
-#~ "-  Enrique Matias Sanchez (aka Quique) <cronopios@gmail.com>, 2003-2012.\n"
-#~ "-  Eduardo Retamales <eretamales@gnome.cl>, 2007-2008.\n"
-#~ "-  2003 Jeroen S. Wijnhout <Jeroen.Wijnhout@kdemail.net>.\n"
-#~ "-  2003 Petter E. Stokke <gibreel@project23.no>.\n"
-#~ "-  Spanish message file for YaST2 (@memory@). <>.\n"
-#~ "-  Pablo Saratxaga <pablo@walon.org>, 1998-2007.\n"
-#~ "-  Gustavo D. Vranjes <gvranjes@abaconet.com.ar>, 2002.\n"
-#~ "-  Aitor Morant <fromhell091@gmail.com>, 2013.\n"
-#~ "-  Joaquín Ignacio Aramendía <samsagax@gmail.com>, 2011.\n"
-#~ "-  Sebi Kul <sebikul@gmail.com>, 2011.\n"
-#~ "-  Pedro Villavicencio Garrido <pvillavi@gnome.org>, 2005.\n"
-#~ "-  José María Pongilioni <ponghy@ono.com>, 2001.\n"
-#~ "-  Edgardo García Hoeffler <edybsd@yahoo.com.ar>, 2002.\n"
-#~ "-  Edscott Wilson Garcia <edscott@users.sf.net>, 2002-2011.\n"
-#~ "-  Pablo del Campo <pablodc@bigfoot.com>, 2003.\n"
-#~ "-  Ricardo Mones Lastra <mones@users.sourceforge.net>, 2002.\n"
-#~ "-  Wouter Bolsterlee <wbolster@gnome.org>.\n"
-#~ "-  Ariel Rios <jarios@usa.net>, 1999.\n"
-#~ "-  Alex Araiza <mebrelith@gmail.com>, 2005.\n"
-#~ "-  Ulises Genis <ulises.genis@gmail.com>, 2008-2009.\n"
-#~ "-  Emmanuel Milou <emmanuel.milou@savoirfairelinux.com>, 2008.\n"
-#~ "-  Gabriel Gazzan <gabcorreo@gmail.com>, 2011.\n"
-#~ "-  Thomas Niederreiter <tn@xcdroast.org>, 2002-2003.\n"
-#~ "-  philippe Rouquier <brasero-app@wanadoo.fr>, 2005.\n"
-#~ "-  <srtxg@chanae.alphanet.ch>, 2001-2011.\n"
-#~ "-  Dario Andres Rodriguez <andresbajotierra@gmail.com>, 2008-2009.\n"
-#~ "-  Juan Matías Olmos <colonizare@yahoo.com.ar>, 2012.\n"
-#~ "-  Jorge Bernal <koke@amedias.org>, 2004-2006.\n"
-#~ "-  Juanje Ojeda <jojeda@emergya.es>, 2008.\n"
-#~ "-  Enrique Matías Sánchez (Quique) <cronopios@gmail.com>, 2009.\n"
-#~ "-  Chema Celorio <chema@celorio.com>, 2000.\n"
-#~ "-  Ernesto Manríquez <alejandronova@gmail.com>, 2011.\n"
-#~ "-  Gilberto Miralla <xyhthyx@gmail.com>, 2007-2008.\n"
-#~ "-  Daniel Campos <dcamposf@gmail.com>, 2009.\n"
-#~ "-  Ezequiel Pérez <eazel7@yahoo.com.ar>, 2003.\n"
-#~ "-  Oscar Cebellán Ramos <cebaman@bigfoot.com>, 2001.\n"
-#~ "-  Yelitza Louze <ylouze@redhat.com>, 2003.\n"
-#~ "-  Mvillarino <mvillarino@dubmail.net>, 2005-2008.\n"
-#~ "-  Stephen Denham <stephen.denham@gmail.com>, 2007.\n"
-#~ "-  Miguel Navarrete Hernandez <recados.akka@gmail.com>, 2013.\n"
-#~ "-  Juanje Ojeda Croissier <jojeda@emergya.es>, 2008-2010.\n"
-#~ "-  Santiago Fernández Sancho <santi@kde-es.org>, 2007-2010.\n"
-#~ "-  Jesús Espino García <jespino@imap.cc>, 2004.\n"
-#~ "-  Alberto Serrano <apserrano@bbvnet.com>, 2001.\n"
-#~ "-  Israel Garcia <israelgarcia86@gmail.com>, 2007-2008.\n"
-#~ "-  Omar Campagne <ocampagne@gmail.com>, 2009.\n"
-#~ "-  Francisco Javier Dorado Martínez <javier@tiflolinux.org>, 2007-2011.\n"
-#~ "-  First author: Quique <quique@sindominio.net>, 2003.\n"
-#~ "-  Matias Costa <mcc3@alu.um.es>, 2005.\n"
-#~ "-  Pablo Saratxga <srtxg@chanae.alphanet.ch>, 1999.\n"
-#~ "-------------------------------------"
+#: ../../xffm/fm/dialog/menupopover.hh:129 ../../xffm/common/gtk.hh:64
+msgid "Open terminal"
+msgstr "Abrir terminal"
+
+#: ../../xffm/fm/dialog/menupopover.hh:130
+msgid "Open a New Window"
+msgstr "Abrir una ventana nueva"
+
+#. {N_("Execute Shell Command"), (void *)MenuPopoverSignals<Type>::shell, (void *) menuButton_},
+#: ../../xffm/fm/dialog/menupopover.hh:132 ../../xffm/common/gtk.hh:69
+msgid "Search"
+msgstr "Buscar"
+
+#: ../../xffm/fm/dialog/menupopover.hh:133 ../../xffm/common/gtk.hh:71
+msgid "Exit"
+msgstr "Salir"
+
+#: ../../xffm/fm/dialog/dialog.hh:116
+msgid "Removed"
+msgstr "Eliminado"
+
+#: ../../xffm/fm/dialog/dialog.hh:132
+msgid "You have just inserted a medium."
+msgstr "Ha introducido un soporte."
+
+#. Create the widgets
+#: ../../xffm/fm/page/vbuttonbox.hh:37 ../../xffm/common/gtk.hh:332
+msgid "Help"
+msgstr "Ayuda"
+
+#. File chooser
+#: ../../xffm/fm/page/pathbar.hh:306 ../../xffm/fm/page/pathbar.hh:308
+msgid "Go to"
+msgstr "Ir a"
+
+#: ../../xffm/fm/page/pathbar.hh:331
+msgid "Not a directory"
+msgstr "No es un directorio"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Renice Process"
+msgstr "Cambiar la prioridad del proceso"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Suspend"
+msgstr "Suspender"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Continue"
+msgstr "Continuar"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Interrupt"
+msgstr "Interrupci�n"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Hangup"
+msgstr "Cuelgue (hangup)"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "User 1 (USR1)"
+msgstr "Usuario 1 (USR1)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "User 2 (USR2)"
+msgstr "Usuario 2 (USR2)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "Terminate Task"
+msgstr "Terminar tarea"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "Abort"
+msgstr "Abortar"
+
+#: ../../xffm/fm/page/runbutton.hh:138
+msgid "Kill"
+msgstr "Matar"
+
+#: ../../xffm/fm/page/runbutton.hh:139
+msgid "Segmentation fault"
+msgstr "Fallo de segmentaci�n"
+
+#: ../../xffm/fm/page/runbutton.hh:217
+msgid "PID"
+msgstr "PID"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:37
+msgid "Embedded Terminal"
+msgstr "Terminal empotrado"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:38
+msgid "All items in the iconview."
+msgstr "Todos los elementos de la vista de iconos."
+
+#: ../../xffm/fm/page/hbuttonbox.hh:39
+msgid "Script Recorder"
+msgstr "Script grabador"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:40
+msgid "Clear Log"
+msgstr "Limpiar registro"
+
+#. Status textview
+#: ../../xffm/fm/page/hbuttonbox.hh:42
+msgid "Terminal font"
+msgstr "Tipograf�a del terminal"
+
+#: ../../xffm/fm/treeview.hh:17
+msgid "Name"
+msgstr "Nombre"
+
+#: ../../xffm/fm/treeview.hh:20
+msgid "Size"
+msgstr "Tama�o"
+
+#: ../../xffm/fm/treeview.hh:21
+msgid "Date"
+msgstr "Fecha"
+
+#: ../../xffm/fm/treeview.hh:22
+msgid "Mimetype"
+msgstr "Tipo Mime"
+
+#: ../../xffm/fm/treeview.hh:24
+msgid "TYPE"
+msgstr "TIPO"
+
+#: ../../xffm/fm/base/signals.hh:642
+msgid "This directory does not exist."
+msgstr "Esta carpeta no existe."
+
+#: ../../xffm/fm/base/signals.hh:644 ../../xffm/fm/base/signals.hh:646
+msgid "Trash is empty"
+msgstr "La papelera est� vac�a"
+
+#: ../../xffm/common/settings.hh:27
+msgid "New File:"
+msgstr "Archivo nuevo:"
+
+#: ../../xffm/common/gio.hh:235
+msgid "Could not copy item:"
+msgstr "No se ha podido copiar el objeto:"
+
+#: ../../xffm/common/gio.hh:237
+msgid "Could not move item:"
+msgstr "No se ha podido mover el objeto:"
+
+#: ../../xffm/common/gio.hh:239
+msgid "Create symbolic link"
+msgstr "Crear un enlace simb�lico"
+
+#: ../../xffm/common/gio.hh:276
+#, fuzzy, c-format
+msgid ""
+"Could not delete:\n"
+"%s"
+msgstr "No se pudo eliminar %s"
+
+#: ../../xffm/common/gio.hh:278
+#, c-format
+msgid "Could not move %s to trash"
+msgstr "No se pudo mover %s a la papelera"
+
+#: ../../xffm/common/clipboard.hh:23 ../../xffm/common/dnd.hh:40
+msgid "Copying files locally"
+msgstr "Copiando archivo localmente"
+
+#: ../../xffm/common/clipboard.hh:30 ../../xffm/common/dnd.hh:34
+msgid "Moving files"
+msgstr "Moviendo archivos"
+
+#: ../../xffm/common/dnd.hh:46
+msgid "Create Link"
+msgstr "Crear enlace"
+
+#: ../../xffm/common/util.hh:1200
+#, c-format
+msgid ""
+"Scriptfile \"%s\" is not executable. Please set the executable-attribute on "
+"that file."
+msgstr ""
+"El gui�n �%s� no es ejecutable. Establezca el permiso de ejecuci�n sobre ese "
+"archivo."
+
+#: ../../xffm/common/util.hh:1202 ../../xffm/common/util.hh:1237
+#, c-format
+msgid "Open with %s"
+msgstr "Abrir con %s"
+
+#: ../../xffm/common/util.hh:1202
+msgid "Text Editor"
+msgstr "Editor de textos"
+
+#: ../../xffm/common/util.hh:1239 ../../xffm/common/gtk.hh:65
+msgid "Execute Shell Command"
+msgstr "Ejecutar orden del int�rprete de �rdenes"
+
+#: ../../xffm/common/util.hh:1243
+msgid ""
+"Console: quickly run single commands -- write a command here and press enter."
+msgstr ""
+"Consola: ejecutar con rapidez �rdenes sencillas (escriba aqu� una orden y "
+"pulse �Intro�)."
+
+#: ../../xffm/common/gtk.hh:123
+msgid "New Tab"
+msgstr "Solapa nueva"
+
+#: ../../xffm/common/gtk.hh:335
+msgid "OK"
+msgstr "La suma coincide"
+
+#: ../../xffm/common/run.hh:344
+msgid "error"
+msgstr "error"
+
+#: ../../xffm/common/run.hh:348
+msgid "warning"
+msgstr "atenci�n"
+
+#: ../../xffm/common/mime.hh:101 ../../xffm/common/mime.hh:143
+msgid "No Read Permission"
+msgstr "Sin permiso de lectura"
+
+#: ../../xffm/common/preview.hh:593
+msgid "Empty file"
+msgstr "Archivo vac�o"
+
+#: ../../xffm/common/preview.hh:648
+#, c-format
+msgid "Cannot read from %s"
+msgstr "No se puede leer de %s"

@@ -28,6 +28,7 @@ execute_process(COMMAND rm -rf po)
 execute_process(COMMAND cp -R ../po po)
 execute_process(COMMAND rm -rf m4)
 execute_process(COMMAND ln -f -s ../autotools/m4 m4)
+execute_process(COMMAND cp -f ../COPYING ./)
 execute_process(COMMAND touch README)
 execute_process(COMMAND touch NEWS)
 execute_process(COMMAND touch AUTHORS)
@@ -43,7 +44,9 @@ message(STATUS "execute_process automake...")
 execute_process(COMMAND automake --add-missing --copy)
 execute_process(COMMAND ./configure)
 execute_process(COMMAND make)
+#execute_process(COMMAND make update-po)
 execute_process(COMMAND rm Makefile)
+
 
 
 # configure header file
