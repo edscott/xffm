@@ -43,7 +43,8 @@ execute_process(COMMAND autoconf)
 message(STATUS "execute_process automake...")
 execute_process(COMMAND automake --add-missing --copy)
 execute_process(COMMAND ./configure)
-execute_process(COMMAND make)
+execute_process(COMMAND mv -v po/Makefile po/Makefile.autotools)
+#execute_process(COMMAND po/build)
 #execute_process(COMMAND make update-po)
 execute_process(COMMAND rm Makefile)
 
@@ -54,7 +55,9 @@ configure_file(
     "${PROJECT_SOURCE_DIR}/config.h.cmake"
     "${PROJECT_BINARY_DIR}/config.h"
     )
+add_subdirectory(po)
 
 add_subdirectory(xffm)
+#add_subdirectory(po)
 
 

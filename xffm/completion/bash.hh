@@ -151,39 +151,6 @@ private:
         print_c::scroll_to_bottom(output);
     }
 
-#if 0
-    static void
-    msg_too_many_matches(GtkTextView *output){
-	if (!output) return;
-        print_c::show_text(output);
-        gchar *message1=g_strdup_printf("%s (> %ld)",
-                _("Too many matches, not all have been retrieved"), base_c::maxOptions());
-        print_c::print_icon(output, "dialog-info", "red", g_strdup_printf("%s\n", message1));
-        g_free(message1);
-        print_c::scroll_to_bottom(output);
-    }
-
-    static gchar *
-    msg_output(GtkTextView *output, gint *match_count_p, GSList *matches, gint match_type){
-        TRACE("msg_output\n");
-        if (*match_count_p <= 0) {
-            switch (*match_count_p) {
-                case 0:
-		    TRACE("No match\n");
-                    //msg_show_match(output, match_type, NULL); break;
-                case -1: 
-                    msg_too_many_matches(output); break;
-                default:
-                    ;
-                    // invalid token        
-            }
-            return NULL;
-        }
-        gchar *suggest = complete_it(output, &matches, match_type);
-        return suggest;
-    }
-#endif
-
     static gchar *
     bash_file_completion(GtkTextView *output, const char *workdir, const char *in_file_token){
         gchar *suggest = base_c::base_file_completion(output, workdir, in_file_token);

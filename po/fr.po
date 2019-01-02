@@ -1,0 +1,1840 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:42:16 CDT 2013 ---
+#
+# Benoit Tavernier <benoit.tavernier@gmail.com>, 2007.
+# Renaud de Colombel <renaud.decolombel@free.fr>, 2004-2005.
+# Samuel Mutel <samuel.mutel@free.fr>, 2006.
+# Rémi Peixoto <remi.peixoto@gmail.com>, 2009.
+# MhamedBJ <benjmaamhamed@yahoo.com>, 2008.
+# Alain Lojewski <allomervan@gmail.com>, 2009-2013.
+# Yohann Hamon <yohann_hamon@yahoo.fr>, 2007.
+# Vincent Renardias <vincent@ldsol.com>, 1998-2000.
+# Thévenet Florent <feuloren@free.fr>, 2010.
+# Ludovic grossard <grossard@kde.org>, 2008-2012.
+# Sébastien Bacher <seb128@debian.org>, 2003-2004.
+# Esneault <simon.esneault@gmail.com>, 2009.
+# Phil Cowens <pjc51@srcf.ucam.org>, 2003.
+#   Philippe Thomin <Philippe.Thomin@univ-valenciennes.fr>.
+# Julien Angot <angot.julien@gmail.com>, 2008.
+# Guillaume Pujol <guill.p@gmail.com>, 2007-2011.
+# Damien Sandras <dsandras@acm.org>, 2001.
+# Yannick Tailliez <ytdispatch-libre@yahoo.com>, 2004-2009.
+# Jérôme Warnier <jwarnier@beeznest.net>, 2006.
+# SPORTELLI Felix <luimeme@fsportelli.org>, 2003.
+# Marc Veillet <scouigne@gmail.com>, 2008.
+# Xavier Claude <claude.xavier@gmail.com>, 2008-2013.
+# Philippe Normand <phil@base-art.net>, 2010.
+# Percy Leonhardt <percy@eris23.de>, 2004.
+# Jean-François Fortin Tam <nekohayo@gmail.com>, 2007.
+# Guillaume Savary <guillaume@savary.name>, 2005.
+# Jean-Luc Coulon <jean-luc.coulon@wanadoo.fr>, 2004-2007.
+# Damien Mascré <damienmascre@free.fr>, 2002.
+# Laurent POMAREDE <laurent.pomarede@gmail.com>, 2008.
+# Cédric Rigaud <cedric_rigaud@yahoo.fr>, 2002.
+# Alban Browaeys <albanbrowaeys@oreka.com>, 2004.
+# Francescu GAROBY <windu.2b@gmail.com>, 2007.
+# Quentin "Cygal" Pradet <moi@cygal.info>.
+# Tung Nguyen <ntung@free.fr>, 2005-2006.
+# Cyprien Le Pannérer <cyplp@free.fr>, 2006-2007.
+# Nikias Bassen <nikias@gmx.li>, 2010.
+# Stéphane MANKOWSKI <stephane@mankowski.fr>, 2007-2013.
+# Christophe Bliard <christophe.bliard@trux.info>, 2004-2007.
+# Rémi Le Lijour <remiadore@gmail.com>, 2007.
+# Louis Grandjean <louis@b46.ch>, 2008.
+# Vincent Carriere <carriere_vincent@yahoo.fr>, 2004-2006.
+# Étienne Malandain <etienne.malandain@free.fr>, 2007.
+# Craig Jeffares <cjeffares@novell.com>, 2004.
+# Romain Perier <bambi@kubuntu.org>, 2011.
+# Gérard Delafond <gerard@delafond.org>, 2002-2006.
+# Alain Sacky <nouslesfrancais@yahoo.fr>, 2008-2009.
+# Patrick PETIT <patrick.petit17@orange.fr>, 2006-2009.
+# Gabriel "bluestorm" Scherer <bluestorm.dylc@gmail.com>.
+# Luc Guillemin <luc.guillemin@gmail.com>, 2011.
+# Jean-Marc DUVAL <shadowcatcher@free.fr>, 2003-2004.
+# Charles-Henri d'Adhémar <cdadhemar@gmail.com>, 2009.
+# Jean Luc Coulon <jean.luc.coulon@gmail.com>, 2007.
+# Julien Angelier <piecq@ile.u-psud.fr>, 2004.
+# AlainLojewski <allomervan@gmail.com>, 2011-2012.
+# Sylvain Cresto <scresto@gmail.com>, 2007.
+# Grawok <grawok@gmx.com>, 2012.
+# Christophe Sauthier <christophe.sauthier@gmail.com>, 2005-2006.
+# Jerome Couderc <j.couderc@ifrance.com>, 1999.
+# Cedric Pasteur <cedric.pasteur@free.fr>, 2003-2005.
+# laurent coudeur <laurentc@iol.ie>, 2009.
+# Olivier Delaune <olivier.delaune@wanadoo.fr>, 2008-2013.
+# Claude Paroz <claude@2xlibre.net>, 2006-2013.
+# Alexandre Franke <alexandre.franke@gmail.com>, 2008-2013.
+# Dodji Seketeli <dodji@seketeli.org>, 2002-2007.
+# Arnaud Jambin <a.jambin@free.fr>, 2005.
+# Raphaël JAKSE <raphael.jakse@gmail.com>, 2012.
+# Alexandre Dos Santos <sunnlife@gmail.com>, 2008.
+# Baptise Mille-Mathias <bmm80@free.fr>, 2006.
+# Frédéric Riss <frederic.riss@laposte.net>, 2001-2002.
+# Anthony Vital <anthony.vital@gmail.com>, 2010.
+# Alain Portal <alain.portal@free.fr>, 2010.
+# Stephen Kennedy <steve9000@users.sourceforge.net>, 2003.
+# Stephane Delcroix <stephane@delcroix.org>, 2007.
+# Olivier Fourdan <fourdan@xfce.org>, 1999-2003.
+# SPORTELLI Félix <luimeme@fsportelli.org>, 2003.
+# Francesco Fumanti <francesco.fumanti@gmx.net>, 2007.
+# Jean-Michel Pouré <jmpoure@free.fr>, 2006.
+# Macolu <kde@macolu.org>, 2002.
+# Christophe Benz <christophe.benz@gmail.com>, 2006-2010.
+# Emmanuel Andry <eandry@free.fr>, 2006.
+# Simon Depiets <2df@tuxfamily.org>, 2005-2012.
+# Thomas Vergnaud <thomas.vergnaud@laposte.net>, 2003-2006.
+# Maxime Corteel <maxime.corteel@gadz.org>, 2009-2013.
+# Frédéric Marchal <fmarchal@perso.be>, 2011.
+# Gregory Marfjan <gmarfjan@gmail.com>, 2011-2012.
+# Rui Nibau <rnb2@wanadoo.fr>, 2004.
+# xavier <catala.xavier@gmail.com>, 2011-2013.
+# Didier Raboud <didier@raboud.com>, 2009.
+# cassini <cyril.arnaud@gmail.com>, 2010.
+# Hamon <yohann_hamon@yahoo.fr>, 2005.
+# Baptiste Mille-Mathias, <baptiste.millemathias@gmail.com>, 2006.
+# Sam Friedmann <sam.friedmann@redhat.com>, 2010.
+# Ivan Buresi <err747@free.fr>, 2007-2008.
+# Gaël Chamoulaud (strider) <strider@freespiders.org>, 2003.
+# Yannick TORRES <yannick.torres@keliglia.com>, 2004.
+# Stéphane Blondin <stephane.blondin@caramail.com>, 2003.
+# Laurent Richard <laurent.richard@ael.be>, 2002-2006.
+# Pierre "delroth" Bourdon <delroth@gmail.com>.
+# Raphaël Tournoy <lexpas@free.fr>, 2004.
+# Vincent Moreau <vmoreau@orange.fr>, 2004-2005.
+# Yann Simon <yann.simon.fr@gmail.com>, 2005-2007.
+# Richard Groult <rgroult@jalix.org>, 2004.
+# Martin Bednar <serafean@gmail.com>, 2012.
+# Rémy <remy.greinhofer@gmail.com>, 2007-2009.
+# Frédéric Logier <fred@taonix.net>, 2003.
+# Delannoy Nicolas <nicolas_delannoy@hotmail.fr>, 2007.
+# Laurent Rathle <lrathle@kde-france.org>, 2002-2003.
+# Gael Chamoulaud <strider@gnome.org>, 2003.
+# Pierre Henry <pierrehenry73@yahoo.fr>, 2012.
+# Yann Verley <yann.verley@free.fr>, 2004-2005.
+# Peter Potrowl <peter.potrowl@gmail.com>, 2010-2013.
+# Sebastien Bacher <seb128@debian.org>, 2003-2005.
+# Jordi Mallach <jordi@sindominio.net>, 2000-2012.
+# Florent Le Coz <louizatakk@gmail.com>, 2007.
+# Olivier Lê Thanh Duong <olivier@lethanh.be>, 2005-2009.
+# Frédéric Gobry <gobry@idiap.ch>, 1998.
+# Fabien Gatell-Rica <f.gatell@gmail.com>, 2005.
+# Didier Conchaudron <conchaudron@free.fr>, 2003.
+# Christophe Merlet (RedFox) <redfox@redfoxcenter.org>, 2000-2006.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2002-2012.
+# Cyrille Bieuzent <bieuzent@gmail.com>, 2008-2013.
+# Sebastien Oustric <sebastien.oustric@laposte.net>, 2002.
+# Alvise Cavallari <alvise.cavallari@kdemail.net>, 2010-2013.
+# Vincent Fretin <vincent.fretin@gmail.com>, 2006.
+# Olivier Karquel <olivier.karquel@wanadoo.fr>, 2003.
+# Brice Rothschild <brice.rothschild@gmail.com>, 2005-2007.
+# Adrien Bustany <madcat@mymadcat.com>, 2007.
+# Florian Guillochon <florian.guillochon@gmail.com>, 2009.
+# Serge "sergio" Tellène <tells@mygale.org>.
+# Essodjolo Kahanam <k.essodjolo@gmail.com>, 2012.
+# David Jobet <david.jobet@free.fr>, 2004-2005.
+# Thomas Morin <t0m@free.fr>, 2002-2003.
+# Jean-Louis Berliet <jl.berliet@free.fr>, 2004.
+# Rafaël Carré <wavael@yahoo.fr>, 2006.
+# Stanislas Marquis <roundphi@gmail.com>, 2009.
+# Julien Richard-Foy <julien.rf@no-log.org>, 2007-2010.
+# Bruno Léon <bruno.leon@nividic.org>, 2009.
+# Baptiste MILLE-MATHIAS <bmm80@ifrance.com>, 2002-2003.
+# Benoit Dupasquier <bdupasqu@src.gnome.org>, 2007-2009.
+# G. Baylard <gerard.b@bbox.fr>, 2010.
+# YannUbuntu <yannubuntu@gmail.com>, 2010.
+# Frédérick ANGELIQUE <ti_orion@hotmail.fr>, 2012-2013.
+# Geoffray Levasseur <jeff.levasseur@free.fr>, 2008-2013.
+# Thomas Bordinat (Ultim4T0m) <ulti@lldc.fr>, 2008.
+# Xavier BESNARD <ktranslator31@yahoo.fr>, 2010-2011.
+# Amine Say <aminesay@yahoo.fr>, 2007-2012.
+# Etienne Biardeaud <etienne@cyteen.net>, 2008-2010.
+# Sun G11n <gnome_int_l10n@ireland.sun.com>, 2002-2003.
+# Jeanuel <Jeanuel@gmail.com>, 2006-2008.
+# Vincent PINON <vincent.pinon@laposte.net>, 2012.
+# maintainer: Jean-Michel Ardantz <jmardantz@ifrance.com>, 2002-2003.
+# aminesay <aminesay@yahoo.fr>, 2007-2008.
+# garnier <jc.garnier4@orange.fr>, 2012.
+# Laurent Aguerreche <laurent.aguerreche@free.fr>, 2006.
+# glsfra_Sophie <sophiex.marchese@intel.com>.
+# Cédric Delfosse <cdelfosse@free.fr>, 2002-2003.
+# Ternisien Nicolas <nicolast@libertysurf.fr>, 2004.
+# Frederic Renet <fred@pipo.com>, 2001-2002.
+# Cyrille Chépélov <cyrille@chepelov.org>, 2001-2003.
+# Laurent Richard (Kouran) <laurent.richard@lilit.be>, 2003.
+# Charles de Miramon <cmiramon@kde-france.org>, 2002-2003.
+# Cedric <croussel@navi.local>, 2008.
+# Sébastien Oustric <sebastien.oustric@laposte.net>, 2002.
+# Stephane Roy <sroy@j2n.net>, 2005.
+# Laurent Bigonville <bigon@bigon.be>, 2007.
+# Olivier Jousselin <oj@pcaway.com>, 2000-2003.
+# Robert-André Mauchin <zebob.m@pengzone.org>, 2005-2008.
+# Benoît Dejean <benoit@placenet.org>, 2003-2007.
+# Pablo Martin-Gomez <pablo.martin-gomez@laposte.net>, 2009-2010.
+# Mathieu Schopfer <mat.schopfer@bluewin.ch>, 2008-2011.
+# Cédric Felizard <cedric@felizard.fr>, 2010-2011.
+# Fabrice Bellet <fabrice.bellet@imag.fr>, 1999-2000.
+# Yannick Torrès <yannick.torres@keliglia.com>, 2006-2007.
+# Yoan Blanc <yoan.blanc@gmail.com>, 2007.
+# Jean-Philippe Ayanides <jp.ayanides@free.fr>, 2005-2007.
+# Hervé Brun <herve.brun42@wanadoo.fr>, 2002.
+# Rene-Pierre Lehmann <ripi@lepi.org>, 2002.
+# quevi <qjessye@yahoo.fr>, 2008.
+# Jean-Jacques Finazzi <mrjay01@users.sourceforge.net>, 2007-2012.
+# Alain Laporte <alain_laporte123@yahoo.fr>, 2009.
+# Pierre Slamich <pierre.slamich@gmail.com>, 2006-2007.
+# Gareth Owen <gowen72@yahoo.com>, 2004.
+# Paul Morin <m.paulmorin@gmail.com>, 2008.
+# Marc-Andre Lureau <marcandre.lureau@gmail.com>, 2008.
+# yannick Torres <yannick.torres@keliglia.com>, 2005.
+# Didier Vidal <didier-devel@melix.net>, 2007.
+# Stephane Tranchemer <stephane.tranchemer@devinci.fr>, 2003.
+# Dario Spagnolo <spada@zaup.org>, 2004.
+# Henry-Nicolas Tourneur <henry.nicolas@tourneur.be>, 2007-2009.
+# Guillaume DE BURE <gdebure@yahoo.com>, 2008.
+# P`tit Lu <ptitlu@ptitlu.org>, 2001.
+# Franck Liénard <franck.lienard@wanadoo.fr>, 2006.
+# Thomas Laroche <apocaliptika@free.fr>, 2008.
+# Mickael Albertus <mickael.albertus@gmail.com>, 2012.
+# kant <quentin.bleton@polymtl.ca>, 2005.
+# Anton Deguet <janeton@bellatlantic.net>, 2000.
+# Frederic Ruaudel <grumz@grumz.net>, 2005.
+# Élie Roux <elie.roux@enst-bretagne.fr>, 2007.
+# Yann Neveu <yann@gabuzomeu.fr>, 2008.
+# Robert-André-Mauchin <zebob.m@pengzone.org>, 2007-2008.
+# Mickael Sibelle <kimael@gmail.com>, 2006-2012.
+# Michaël Zakrzewski <mikamika48197646@free.fr>, 2005-2008.
+# Franck Babin <fbabin@recruitsoft.com>, 2004.
+# Daniel Durand <durand.d@9online.fr>, 2007-2012.
+# Anne-Marie Mahfouf <annemarie.mahfouf@free.fr>, 2004-2013.
+# Brigitte Le Grand <brigitte.le.grand@sun.com>, 2003.
+# Christophe Gouyen <christophe.gouyen@free.fr>, 2005.
+# Xavier Guerrin <xavier.guerrin@gmail.com>, 2008-2013.
+# JC <JCF@JC>, 2005-2008.
+# Nicolas Raymond <mail@nicolasraymond.linux-fan.com>, 2003.
+# Jean-François Martin <lokthare@gmail.com>, 2008.
+# Philippe Thomin <Philippe.Thomin@univ-valenciennes.fr>.
+# Jonathan Chauvet <jonathan.chauvet@wanadoo.fr>, 2006.
+# cbenz <christophe.benz@gmail.com>, 2010.
+# Frédéric Brin <duckx@mezimail.com>, 2003.
+# Alexandre Chassignon <axcldd@gmail.com>, 2008-2010.
+# Yannick Le Ny <y-le-ny@ifrance.com>, 2000.
+# Christophe Merlet <redfox@redfoxcenter.org>, 2000-2006.
+# Olivier Banus <sunab@free.fr>, 2010.
+# Cedric Malherbe <ced@tuxfamily.org>, 2003.
+# Philip Withnall <philip@tecnocode.co.uk>, 2007-2012.
+# Gilles CAULIER <caulier.gilles@free.fr>, 2002-2004.
+# Bretin Didier <didier@bretin.net>, 2001.
+# Wolfgang Rohdewald <wolfgang@rohdewald.de>, 2008-2012.
+# Stéphane Raimbault <stephane.raimbault@gmail.com>, 2003-2012.
+# Laurent Belmonte <lolo3d@tuxfamily.org>, 2003.
+# Emmanuel Deloget <logout@free.fr>, 2000.
+# Bieuzent Cyrille <bieuzent@gmail.com>, 2005-2008.
+# Julien Hardelin <jhardlin@orange.fr>, 2011-2013.
+# Philippe Rouquier <brasero-app@wanadoo.fr>, 2005-2006.
+# Florimond Simonklein <florimond@komite.net>, 2007.
+# Jiel Beaumadier <beaumadier@gmail.com>, 2005-2011.
+# Stanislas Zeller <uncensored.assault@gmail.com>, 2008-2012.
+# Philippe Lefevre <ph.l@libertysurf.fr>, 2006.
+# Frederic Gobry <gobry@pybliographer.org>, 2003.
+# Stéphane Démurget <demurgets@free.fr>, 2001-2007.
+# Jean-Philippe Fleury <contact@jpfleury.net>, 2010.
+# Jérôme Soyer <jeromesoyer@yahoo.fr>, 2004.
+# sebo <tetsuo3@free.fr>, 2007.
+# Johan Leuenberger <j.leuenberg@gmail.com>, 2007.
+# Alexandre Bedot <alexandre.bedot@free.fr>, 2007.
+# Gilles Caulier <caulier.gilles@free.fr>, 2002-2004.
+# Saraja Olivier <olivier@linuxgraphic.org>, 2003.
+# Ewald Arnold <ewald@ewald-arnold.de>, 1999-2000.
+# Michael Zakrzewski <mikamika48197646@free.fr>, 2005.
+# kerb <y.kerb@laposte.net>, 2008-2009.
+# Jean-Noël Guiheneuf <jean-noel.guiheneuf@wanadoo.fr>, 2001.
+# Stéphane Maniaci <stephane.maniaci@gmail.com>, 2010.
+# Alexandre Roux <alexroux@src.gnome.org>, 2007-2009.
+# Thomas 'Dark-Side' Refis <refis.thomas@gmail.com>.
+# Mathieu Blondel <mblondel@svn.gnome.org>, 2006.
+# Jean-Jacques FINAZZI <mrjay01@users.sourceforge.net>, 2007-2008.
+# Francois Grange <rumbaya@gmail.com>, 2007-2009.
+# Laurent Monin <gimp@norz.org>, 2007.
+# Benoit Verduyn <benoit.verduyn@videotron.ca>, 2007-2008.
+# maintainer: Raymond Ostertag <r.ostertag@caramail.com>, 2002-2005.
+# Gildas Guillemot <g.guillemot@laposte.net>, 2002-2003.
+# Vincent Untz <vuntz@gnome.org>, 2005-2007.
+# Olivier Cortes <olivier.cortes@ryxeo.com>, 2004.
+# David Joaquim <djoaquim@src.gnome.org>, 2007-2009.
+# David Rousseau <angus@tuxfamily.org>, 2004.
+# Jérôme Couderc <j.couderc@ifrance.com>, 1999-2001.
+# Nicolas Repentin <nicolas@shivaserv.fr>, 2009-2011.
+# Vincent Pinon <vincent.pinon@st.com>, 2011.
+# Christian Marillat <marillat@alpes-net.fr>, 2000-2003.
+# DELAFOND Ines <isdel@free.fr>, 2003.
+# Joaquim Fellmann <joaquim@hrnet.fr>, 2000-2002.
+# Pierre Buard <pierre.buard@gmail.com>, 2007-2013.
+# Mathieu Gaspard <lukeg@altern.org>, 2006.
+# Bruno Coudoin <bruno.coudoin@free.fr>, 2000-2005.
+# Joëlle Cornaviin <jcornavin@laposte.net>, 2010.
+# GUILLOU yves <Yv_guil@club-internet.fr>, 2003.
+# Guillaume <gdebure@yahoo.com>, 2008.
+# maintainer: Christophe Merlet (RedFox) <redfox@redfoxcenter.org>, 2001-2006.
+# Michel Robitaille <robitail@IRO.UMontreal.CA>, 1996-2007.
+# ElGeneralMidi <ElGeneralMidi@jabber.ubuntu-fr.org>, 2007.
+# Mathieu Bridon <bochecha@fedoraproject.org>, 2009.
+# Sébastien Tricaud <stricaud@mwsp.net>, 2003.
+# Davy Defaud <davy.defaud@posteasy.com>, 2005.
+# Nicolas Velin <nsv@fr.st>, 2006.
+# Jeremy Simon <jsimon13@yahoo.fr>, 2001.
+# Fred <duckx@mezimail.cm>, 2003.
+# Joelle Cornavin <jcornavi@kde-france.org>, 2005.
+# Angot Julien <angot.julien@gmail.com>, 2007-2009.
+# Alexandre Patenaude <alexandre.patenaude@gmail.com>, 2006.
+# David Monniaux <monniaux@brick.ens.fr>, 1999-2000.
+# Angeli Matthieu <SirPuffy@Nerim.Net>, 2004.
+# Cedric Roussel <roussel.cedric@gmail.com>, 2008.
+# Sebastien Renard <renard@kde.org>, 2003-2013.
+# Ryan Kavanagh <ryanakca@kubuntu.org>, 2009-2010.
+# Hervé Romano <azuri@free.fr>, 2004-2005.
+# Raphaël Pinson <raphink@ubuntu.com>, 2006.
+# Milan Bouchet-Valat <nalimilan@club.fr>, 2010-2012.
+# GUILLOU <yv_guil@club-internet.fr>, 2003.
+# G11N <gnome_int_l10n@ireland.sun.com>, 2003.
+# Guillerm David <dguillerm@gmail.com>, 2005-2006.
+# Antoine <antoinemottet@orange.fr>, 2009.
+# Éric Seigne <eric.seigne@rycks.com>, 2003.
+# Yannick Torres <yannick.torres@keliglia.com>, 2005-2006.
+# Joëlle Cornavin <jcornavin@laposte.net>, 2003-2013.
+# Guy Clotilde <guy.clotilde@wanadoo.fr>, 2002.
+# Julien Morot <julien@momonux.org>, 2004.
+# Nicolas Ternisien <nicolast@libertysurf.fr>, 2004-2012.
+# Jamie Nadeau <james2432@gmail.com>, 2011.
+# Lionel Montrieux <lionel.montrieux@skynet.be>, 2006.
+# Yann Laviolette <borisgazoo@hotmail.com>, 2003.
+# Audrey Simons <asimons@redhat.com>, 2004.
+# Bruno Brouard <annoa.b@gmail.com>, 2007-2013.
+# Josselin TILLAY-DOLEDEC <josselin.td@gmail.com>, 2012.
+# Guilhem Bonnefille <guilhem.bonnefille@gmail.com>, 2007-2009.
+# Yan Brodeur <yanbrodeur@videotron.ca>, 2007.
+# Quentin Harbulot <kant_120@hotmail.fr>, 2009.
+# Vincent de Phily <vincent.dephily@mobile-devices.fr>, 2010.
+# Regis Maura <draco31.fr@free.Fr>, 2012.
+# Najib Zulon Idrissi Katouni <ZulonZ@gmail.com>.
+# Jonathan Ernst <jonathan@ernstfamily.ch>, 2006-2007.
+# Cédric Bellegarde <gnumdk@gmail.com>, 2010-2011.
+# Laurent RICHARD <laurent.richard@lilit.be>, 2002-2003.
+# Quevi Jessye <qjessye@yahoo.fr>, 2008.
+# Guillaume Desmottes <cass@skynet.be>, 2005-2006.
+# Le Coz Florent <louizatakk@gmail.com>, 2007.
+# Raymond Ostertag <r.ostertag@caramail.com>, 2002-2007.
+# Jean Schurger <yshark@schurger.org>, 2002.
+# Baptiste Mille-Mathias <bmm80@ifrance.com>, 2002-2006.
+# Hervé ROMANO <azuri@free.fr>, 2005.
+# Guillaume Martres <smarter@ubuntu.com>, 2008.
+# Thomas Basset <thomas.basset@netcourrier.com>, 2003-2005.
+# Laurent Pomarede <laurent.pomarede@gmail.com>, 2008.
+# Frederic Bezies <fredbezies@gmail.com>, 2012.
+# maintainer: Hilaire Fernandes <hilaire@ofset.org>, 2000-2004.
+# Christian Iuga <roumano@gmail.com>, 2007.
+# Jean-Christope GARNIER <jc.garnier4@orange.fr>, 2012.
+# Julien Cegarra <julienc@psychologie-fr.org>, 2004.
+# Gérard Baylard <Geodebay@gmail.com>, 2009-2011.
+# Fabrice Alphonso <fabrice@alphonso.dyndns.org>, 2002-2008.
+# Copyright (C) 2001 Jim Evins <evins@snaught.com>.
+# Eric Maeker <eric.maeker@free.fr>, 2005-2006.
+# Nicolas Lécureuil <nlecureuil@mandriva.com>, 2006-2011.
+# Gaël Hermet <linuxzel@gmail.com>, 2005.
+# GLS <tomas.galicia@intel.com>, 2011.
+# Valentin Gatien-Baron <bbaiyfb@gmail.com>, 2007.
+# Cyril Brulebois <cyril.brulebois@enst-bretagne.fr>, 2006-2007.
+# Xavier Delatour <xdelatour@yahoo.fr>, 2001.
+# Simon Manlay <simon@solintech.fr>, 2005.
+# Mathieu Giraud <magiraud@free.fr>, 2003.
+# Luc Rebert <list@rebert.name>, 2009.
+#   Serge "sergio" Tellène <tells@mygale.org>.
+# Kevin "Katen" Soltysiak <nightroad.katen@gmail.com>.
+# Yvan <funyvan@hotmail.com>, 2013.
+# Robert Jacolin <rjacolin@ifrance.com>, 2003-2004.
+# Daniel Egger <Daniel.Egger@suse.de>, 1998-2000.
+# Etienne Malandain <etienne.malandain@free.fr>, 2007-2008.
+# bruno <bruno@victoria.frmug.org>, 2009.
+# Thierry Moisan <thierryn@videotron.ca>, 2004-2005.
+# Christophe Fergeau <teuf@users.sourceforge.net>, 2000-2008.
+# Serge Guibert <sergio.guibert@gmail.com>, 2010-2012.
+# Sylvain Garsault <sylvain.garsault@freesbee.fr>, 2003-2005.
+# Simon DEPIETS <2df@tuxfamily.org>, 2004.
+# Ludovic Grossard <grossard@kde.org>, 2002-2012.
+# Hadrien Blanc <mimidoux.epitech@gmail.com>, 2009.
+# Arnaud <arnaud.bienner@gmail.com>, 2008.
+# Jean-Philippe Moal <jean-philippe.moal@laposte.net>, 2006.
+# Axel Peju <pejuaxel@gmail.com>, 2006.
+# ANGOT Julien <angot.julien@gmail.com>, 2010.
+# Matthieu Robin <kde@macolu.org>, 2002-2011.
+# Fabien <fabien.ubuntu@gmail.com>, 2006-2008.
+# Jeroen Wijnhout <wijnhout@science.uva.nl>, 2003.
+# Mathieu Gauthier-Pilote <mathieu.g.p@videotron.ca>, 2002.
+# Novell Language <language@novell.com>, 2006-2009.
+# Copyright (C) 2010 Emmanuel Pacaud <emmanuel@gnome.org>.
+# Geoffray Brandin <jeff.levasseur@free.fr>, 2008-2009.
+# Regis Boudin <regis@boudin.name>, 2004-2008.
+# Benoit Dejean <TazForEver@dlfp.org>, 2004.
+# Lionel Henry <yoplait@tuxfamily.org>, 2003.
+# Julien Pivotto <roidelapluie@gmail.com>, 2006.
+# Herve Dreau <hdreau@cybercable.fr>, 2000.
+# David Prévot <david@tilapin.org>, 2012.
+# Quentin Delance <quentin.delance@laposte.net>, 2006.
+# Olivier Serve <tifauv@gmail.com>, 2007-2013.
+# Laurent Cheylus <foxy@free.fr>, 2002.
+# Stéphane Genaud <genaud@icps.u-strasbg.fr>, 2002.
+# Frederic Riss <frederic.riss@laposte.net>, 2001-2002.
+# Damien Durand <splinux@fedoraproject.org>, 2005-2007.
+# Alex <sunnlife@gmail.com>, 2008.
+# Roland Baudin <roland65@free.fr>, 2002.
+# David Lodge <dave@cirt.net>, 2004-2009.
+# Christian Persch <chpe+epiphany@stud.uni-saarland.de>, 2003-2004.
+# Emmanuel Sunyer <emmanuel.sunyer@dbmail.com>, 2009.
+# Myriam Malga <mmalga@redhat.com>, 2007.
+# RNB <rnb2@wanadoo.fr>, 2004.
+# Frédéric Boiteux <furgarat@free.fr>, 2001.
+# Stéphane Loeuillet <leroutier@gmail.com>, 2007.
+# Bruno Dusausoy <bdusauso@beeznest.net>, 2004.
+# Benoit Verdytb <benoit.verduyn@videotron.ca>, 2007.
+# jb <jb@kdenlive.org>, 2006-2012.
+# Alain Rpnpif <rpnpif@free.fr>, 2008-2010.
+# Mat Jouan <mat.jouan@gmail.com>, 2011.
+# Grégoire "Metzgermeister" Duchêne <duchene.g@gmail.com>.
+# Irshad Abibouraguimane <irs_ab@hotmail.com>, 2007.
+# Luc Pionchon <pionchon.luc@gmail.com>, 2011-2012.
+# Damien Raude-Morvan <drazzib@drazzib.com>, 2004.
+# Olivier Le Thanh Duong <olivier@lethanh.be>, 2006.
+# Jean-Etienne Poirrier <jepoirrier@gmail.com>, 2006.
+#  Pierre Henry <pierrehenry73@yahoo.fr>, 2012.
+# Bruno Patri <bruno.patri@gmail.com>, 2007-2012.
+# Guillaume COEUGNET <importepeu@free.fr>, 2007.
+# Johann Schaeffer <johann.schaeffer@gmail.com>, 2007-2008.
+# Frederic Peters <fpeters@0d.be>, 2007-2012.
+# Yannick Marchegay <yannick.marchegay@lokanova.com>, 2004.
+# Gissehel <gissehel@vachefolle.com>, 1999.
+# Stéphane Deraco <stephane@deraco.fr>, 2006.
+# Étienne Bersac <bersace03@laposte.net>, 2006.
+# Dupo <Dupop35@yahoo.fr>, 2010.
+# Haïkel Guémar <karlthered@gmail.com>, 2006.
+# Yann Cantin <yann.cantin@laposte.net>, 2009-2010.
+#   Francois-Xavier Duranceau <Francois-Xavier.Duranceau@loria.fr>.
+# Gaël Chamoulaud <strider@freespiders.org>, 2003.
+# packadal <packadal@gmail.com>, 2007.
+# Thomas Boeglin <thomas.boeglin@gmail.com>, 2007-2008.
+# Denis Jasselette <denis.jasselette@yahoo.fr>, 2010.
+# Hervé Dréau <hdreau@cybercable.fr>, 1999.
+# Marc Lorber <linux-lorber@club-internet.fr>, 2006-2007.
+# CAULIER Gilles <caulier.gilles@free.fr>, 2002-2004.
+# Baptiste Mille-Mathias (crevette) <bmm80@free.fr>, 2003-2005.
+# Equipe d'Hennebont <jpmartin@iroise.com>.
+# Jonathan Ernst <jonathan@ernstfamily.ch>, 2006-2009.
+# David Bellot <david.bellot@inrialpes.fr>, 2003.
+# Joëlle Conavin <jcornavi@kde-france.org>, 2004-2005.
+# Alexandre Imache <alexandre.imache@gmail.com>, 2007.
+# Julien Valroff <julien@kirya.net>, 2006.
+# Cedric De Wilde <daique@tiscalinet.be>, 2001.
+# Copyright (C) 2007 Robby Stephenson <robby@periapsis.org>.
+# Michèle Garoche <michele.garoche@easyconnect.fr>, 2004-2005.
+# Simon "asmanur" Castellan <asmanur@gmail.com>.
+# Julien Rabier <julien.rabier@gmail.com>, 2007-2008.
+# Eric Seigne <eric.seigne@rycks.com>, 2003.
+# Sébastien Heckmann <heckmann.svt@ifrance.com>, 2006.
+# Marc-André Lureau <marcandre.lureau@gmail.com>, 2005-2006.
+# Cédric Corazza <cedric.corazza@laposte.net>, 2004.
+# Jérôme Artu <solojay6@gmail.com>, 2010.
+# Laurent Coudeur <laurentc@iol.ie>, 2007-2011.
+# J. Cornavin <jcornavi@club-internet.fr>, 2007.
+# Olivier Berger <oberger@gnu.org>, 2001-2002.
+# Pierre-Luc Beaudoin <pierre-luc.beaudoin@novopia.com>, 2008-2010.
+# Gérald Ouvradou <gerald.ouvradou@no-log.fr>, 2008.
+# Gaël Quéri <gqueri@mail.dotcom.fr>, 2000.
+# Ferdinand de Broich <firebird@chez.com>, 2003.
+# Mickaël Sibelle <kimael@gmail.com>, 2006-2012.
+# Jean-Michel Ardantz <jmardantz@ifrance.com>, 2000-2006.
+# Benjamin Bayart <benjamin@sitadelle.com>, 2002.
+# Pablo Saratxaga <pablo@walon.org>, 1998-2007.
+# Christophe LEFEBVRE <clefebvre@free.fr>, 2009-2010.
+# David Bertho <dbertho@gmail.com>, 2006.
+# Alexandre Daubois <alex.daubois@gmail.com>, 2011.
+# Mathias Monnerville <tellico@monnerville.com>, 2006.
+# Andre Matuch <andre.matuch@videotron.ca>, 2012.
+# Martin Quinson <mquinson@zeppelin-cb.de>, 1999-2002.
+# Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
+# Copyright (C) Wouter Bolsterlee <wbolster@gnome.org>.
+# Frédéric Péters <fpeters@0d.be>, 2008.
+# Francescu Garoby <windu.2b@gmail.com>, 2007-2008.
+# Francois-Xavier Duranceau <Francois-Xavier.Duranceau@loria.fr>.
+# Durand Daniel <durand.d@9online.fr>, 2010-2012.
+# Damien Cola <alliax@mindless.com>, 1998.
+# Frank Schoolmeesters <frank_schoolmeesters@fastmail.fm>, 2003-2010.
+# Christophe Perez <christophe.perez.moure@gmail.com>, 2010.
+# Thomas Niederreiter <tn@xcdroast.org>, 2002-2003.
+# Sebastien Estienne <sebastien.estienne@gmail.com>, 2005.
+# Éric Bischoff <e.bischoff@noos.fr>, 2002-2012.
+# Jean-Marc Duval <shadowcatcher@free.fr>, 2003.
+# Xavier Claessens <x_claessens@skynet.be>, 2005.
+# Sébastien Renard <renard@kde.org>, 2004-2013.
+# Cédric De Wilde <daique@tiscalinet.be>, 2001.
+# Yves Dessertine <kde@yvesd.net>, 2005.
+# Adrien Beaucreux <informancer@afturgurluk.org>, 2004.
+# Antoine Cailliau <a.cailliau@ac-graphic.net>, 2007.
+# Jonathan Chocron <chocronj@hotmail.com>, 2003.
+# Jeff Coquery <jcoquery@gmail.com>, 2006.
+# Gerd Fleischer <gerdfleischer@gmx.de>, 2010-2011.
+# Delafond <gerard@delafond.org>, 2003-2005.
+# Elrik <elrik@tele2.fr>, 2006.
+# Samuel Demers <xrkpwk@gmail.com>, 2005.
+# fred <fred@pipo.com>, 2002.
+# Popolon <popolon@popolon.org>, 2004-2005.
+# Florent Morel <florent@taket.org>, 2001-2004.
+# Christophe Berthelé <berthy@mandriva.org>, 2009.
+# Guy Daniel Clotilde <guy.clotilde@wanadoo.fr>, 2002-2003.
+# Pierre Lemaire <pierre.lemaire@kamick.org>, 2008-2009.
+# François Thierens <francois.thierens@minfin.fed.be>, 2008.
+# David Soulayrol <david.soulayrol.2000@anciens.enib.fr>, 2004-2005.
+# Cyril Mougel <cyril.mougel@gmail.com>, 2007.
+# Thibaut Cousin <cousin@clermont.in2p3.fr>, 1999.
+# FrÃ©dÃ©ric GERMAIN <fgermain01@gmail.com>, 2011-2012.
+# FIRST AUTHOR F�ix SPORTELLI <luimeme@fsportelli.org>, 2003.
+# Etienne <etienne@cyteen.net>, 2009.
+# Gianni Moschini <bobyjoe0@yahoo.fr>, 2006.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-02 12:27-0600\n"
+"PO-Revision-Date: 2012-10-20 11:22-0400\n"
+"Last-Translator: David Prévot <david@tilapin.org>\n"
+"Language-Team: French <traduc@traduc.org>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Lokalize 1.4\n"
+
+#: ../../xffm/completion/base.hh:28
+msgid "Command"
+msgstr "Commande"
+
+#: ../../xffm/completion/base.hh:31
+msgid "File"
+msgstr "Fichier"
+
+#: ../../xffm/completion/base.hh:34
+msgid "Command history"
+msgstr "Historique des commandes"
+
+#. option -u uid "uid" "uid_combo"
+#: ../../xffm/completion/base.hh:37 ../../xffm/find/dialog.hh:199
+msgid "User"
+msgstr "Utilisateur"
+
+#: ../../xffm/completion/base.hh:40
+msgid "Variable"
+msgstr "Variable"
+
+#: ../../xffm/completion/base.hh:43
+msgid "Host"
+msgstr "Hôte"
+
+#: ../../xffm/completion/base.hh:55
+msgid "Found no match"
+msgstr "Trouvé aucune correspondance"
+
+#: ../../xffm/completion/base.hh:133 ../../xffm/completion/base.hh:134
+msgid "Matches"
+msgstr "Correspondances"
+
+#: ../../xffm/completion/base.hh:134
+msgid "Too many files open"
+msgstr "Trop de fichiers ouverts"
+
+#: ../../xffm/completion/base.hh:325 ../../xffm/find/fgr.hh:124
+msgid "Options:"
+msgstr "Options :"
+
+#: ../../xffm/completion/bash.hh:133
+msgid "Completion mode:"
+msgstr "Mode de complètement :"
+
+#: ../../xffm/completion/bash.hh:134
+msgid "command"
+msgstr "commande"
+
+#: ../../xffm/completion/bash.hh:135
+msgid "file"
+msgstr "fichier"
+
+#: ../../xffm/completion/bash.hh:145 ../../xffm/completion/bash.hh:149
+msgid "Options >>"
+msgstr "Options >>"
+
+#: ../../xffm/find/fgr.hh:124 ../../xffm/find/dialog.hh:308
+msgid "Path"
+msgstr "Chemin"
+
+#: ../../xffm/find/fgr.hh:125
+msgid "Locate documents and folders on this computer by name or content"
+msgstr ""
+"Retrouve des documents et des dossiers sur cet ordinateur selon leur nom ou "
+"leur contenu"
+
+#: ../../xffm/find/fgr.hh:126 ../../xffm/find/dialog.hh:341
+msgid "Filter:"
+msgstr "Filtre :"
+
+#: ../../xffm/find/fgr.hh:126
+msgid "Search for files"
+msgstr "Rechercher des fichiers"
+
+#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
+#: ../../xffm/find/fgr.hh:128
+msgid "Contents:"
+msgstr "Contenus :"
+
+#: ../../xffm/find/fgr.hh:128
+msgid "File's contents filtered as plain text."
+msgstr "Contenu du fichier filtré en texte simple."
+
+#: ../../xffm/find/fgr.hh:131
+msgid "Verbose output debugging mode."
+msgstr "Mode de débogage avec sortie verbeuse."
+
+#: ../../xffm/find/fgr.hh:133
+msgid "Show version information"
+msgstr "Afficher les informations de version"
+
+#: ../../xffm/find/fgr.hh:135
+msgid "Filter Details"
+msgstr "Détails du filtre"
+
+#. / option -a "xdev"
+#: ../../xffm/find/fgr.hh:138 ../../xffm/find/dialog.hh:180
+msgid "Stay on single filesystem"
+msgstr "Se limiter à un seul système de fichier"
+
+#: ../../xffm/find/fgr.hh:140
+msgid "Print..."
+msgstr "Imprimer..."
+
+#: ../../xffm/find/fgr.hh:140
+msgid "The unique Process ID that identifies this process."
+msgstr "L'identifiant unique de ce processus."
+
+#. / option -D "recursiveH"
+#: ../../xffm/find/fgr.hh:142 ../../xffm/find/dialog.hh:177
+msgid "Find hidden files and directories"
+msgstr "Chercher les fichiers et les dossiers cachés"
+
+#: ../../xffm/find/fgr.hh:143
+msgid "Filter"
+msgstr "Filtre"
+
+#: ../../xffm/find/fgr.hh:144
+msgid ""
+"To display files which pass the filter (stars and regexps will be processed)"
+msgstr ""
+"Pour afficher les fichiers correspondants au filtre (les étoiles et "
+"expressions régulières seront évaluées)"
+
+#. / option -r "recursive"
+#: ../../xffm/find/fgr.hh:146 ../../xffm/find/dialog.hh:174
+msgid "Recursive"
+msgstr "Récursif"
+
+#: ../../xffm/find/fgr.hh:147 ../../xffm/find/fgr.hh:148
+#: ../../xffm/find/fgr.hh:149 ../../xffm/find/fgr.hh:150
+msgid "KByte"
+msgstr "Kilooctet"
+
+#: ../../xffm/find/fgr.hh:148
+msgid "is greater than or equal to"
+msgstr "est supérieur ou égal à"
+
+#: ../../xffm/find/fgr.hh:150
+msgid "is less than or equal to"
+msgstr "est inférieur ou égal à"
+
+#: ../../xffm/find/fgr.hh:152
+msgid "Set UID"
+msgstr "Donner l'UID"
+
+#: ../../xffm/find/fgr.hh:152
+msgid "Executable Text Files"
+msgstr "Fichiers texte exécutables"
+
+#: ../../xffm/find/fgr.hh:154
+msgid "The permissions of the file, in octal notation."
+msgstr "Les permissions du fichier en notation octale."
+
+#: ../../xffm/find/fgr.hh:155
+msgid "Type"
+msgstr "Type"
+
+#: ../../xffm/find/fgr.hh:157 ../../xffm/find/signals.hh:17
+msgid "Any"
+msgstr "Tous"
+
+#: ../../xffm/find/fgr.hh:157
+msgid "Default type"
+msgstr "Type par défaut"
+
+#: ../../xffm/find/fgr.hh:158 ../../xffm/common/preview.hh:497
+msgid "Regular file"
+msgstr "Fichier normal"
+
+#: ../../xffm/find/fgr.hh:159 ../../xffm/find/signals.hh:11
+#: ../../xffm/fm/local/popup.hh:803 ../../xffm/common/preview.hh:488
+msgid "Directory"
+msgstr "Répertoire"
+
+#: ../../xffm/find/fgr.hh:160 ../../xffm/find/signals.hh:12
+#: ../../xffm/common/preview.hh:494
+msgid "Symbolic Link"
+msgstr "Lien symbolique"
+
+#: ../../xffm/find/fgr.hh:161
+msgid "UNIX Socket"
+msgstr "Connecteur UNIX"
+
+#: ../../xffm/find/fgr.hh:162 ../../xffm/find/signals.hh:14
+#: ../../xffm/common/preview.hh:482
+msgid "Block device"
+msgstr "Périphérique bloc"
+
+#: ../../xffm/find/fgr.hh:163 ../../xffm/find/signals.hh:15
+#: ../../xffm/common/preview.hh:485
+msgid "Character device"
+msgstr "Périphérique caractère"
+
+#: ../../xffm/find/fgr.hh:164 ../../xffm/find/signals.hh:16
+#: ../../xffm/common/preview.hh:491
+msgid "FIFO"
+msgstr "FIFO"
+
+#. radio_p freed on destroy event for dialog_.
+#. option -k minutes "last_minutes", "last_minutes_spin"
+#: ../../xffm/find/fgr.hh:166 ../../xffm/find/fgr.hh:168
+#: ../../xffm/find/dialog.hh:221
+msgid "Minutes"
+msgstr "Minutes"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/dialog.hh:270 ../../xffm/find/dialog.hh:370
+#: ../../xffm/fm/treeview.hh:18
+msgid "Details"
+msgstr "Détails"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/fgr.hh:179 ../../xffm/find/fgr.hh:180
+#: ../../xffm/find/fgr.hh:183 ../../xffm/find/fgr.hh:184
+#: ../../xffm/find/fgr.hh:187 ../../xffm/find/fgr.hh:188
+msgid "TIME"
+msgstr "HEURE"
+
+#: ../../xffm/find/fgr.hh:168 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/fgr.hh:174 ../../xffm/find/fgr.hh:177
+msgid "Previous"
+msgstr "Précédent"
+
+#. option -h hours "last_hours", "last_hours_spin"
+#: ../../xffm/find/fgr.hh:169 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/dialog.hh:226
+msgid "Hours"
+msgstr "Heures"
+
+#. option -d days "last_days", "last_days_spin"
+#: ../../xffm/find/fgr.hh:172 ../../xffm/find/fgr.hh:174
+#: ../../xffm/find/dialog.hh:231
+msgid "Days"
+msgstr "Jours"
+
+#: ../../xffm/find/fgr.hh:175
+msgid "Month"
+msgstr "Mois"
+
+#: ../../xffm/find/fgr.hh:177
+msgid "Month(s)"
+msgstr "Mois"
+
+#: ../../xffm/find/fgr.hh:180
+msgid "Modification Time :"
+msgstr "Date de modification :"
+
+#: ../../xffm/find/fgr.hh:184
+msgid "Access Time :"
+msgstr "Date d'accès :"
+
+#: ../../xffm/find/fgr.hh:188
+msgid "Creation Time :"
+msgstr "Date de création :"
+
+#: ../../xffm/find/fgr.hh:191 ../../xffm/find/fgr.hh:192
+msgid "uid"
+msgstr "uid"
+
+#: ../../xffm/find/fgr.hh:192
+msgid "User:"
+msgstr "Utilisateur :"
+
+#: ../../xffm/find/fgr.hh:194 ../../xffm/find/fgr.hh:195
+msgid "gid"
+msgstr "gid"
+
+#: ../../xffm/find/fgr.hh:195
+msgid "Group:"
+msgstr "Groupe :"
+
+#: ../../xffm/find/fgr.hh:198
+msgid ""
+"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+"character that  normally  follows  a file  name"
+msgstr ""
+
+#: ../../xffm/find/fgr.hh:200
+msgid "Content View"
+msgstr "Vue du contenu"
+
+#: ../../xffm/find/fgr.hh:201 ../../xffm/find/fgr.hh:202
+#: ../../xffm/find/fgr.hh:203 ../../xffm/find/fgr.hh:204
+msgid "STRING"
+msgstr "CHAÎNE"
+
+#: ../../xffm/find/fgr.hh:202 ../../xffm/find/fgr.hh:204
+#: ../../xffm/fm/local/popup.hh:563
+msgid "Regular expression"
+msgstr "Expression régulière"
+
+#: ../../xffm/find/fgr.hh:204
+msgid "Extended"
+msgstr "Étendue"
+
+#: ../../xffm/find/fgr.hh:206
+msgid "Ignore case"
+msgstr "Ignorer la casse"
+
+#: ../../xffm/find/fgr.hh:208
+msgid "Text Files"
+msgstr "Fichiers texte"
+
+#: ../../xffm/find/fgr.hh:210 ../../xffm/find/dialog.hh:552
+msgid "No match"
+msgstr "Aucune correspondance"
+
+#: ../../xffm/find/fgr.hh:212 ../../xffm/find/dialog.hh:470
+msgid "Line Count"
+msgstr "Nombre de lignes"
+
+#: ../../xffm/find/fgr.hh:214
+msgid "Words"
+msgstr "Mots"
+
+#: ../../xffm/find/fgr.hh:216
+msgid "Lines"
+msgstr "Lignes"
+
+#: ../../xffm/find/fgr.hh:368
+#, c-format
+msgid "Usage : %s [OPTIONS]\n"
+msgstr "Usage : %s [OPTIONS]\n"
+
+#: ../../xffm/find/signals.hh:10
+msgid "Regular"
+msgstr "Régulier"
+
+#: ../../xffm/find/signals.hh:13 ../../xffm/common/preview.hh:500
+msgid "Socket"
+msgstr "Socket"
+
+#: ../../xffm/find/signals.hh:209
+msgid "Select folder to search in"
+msgstr "Sélectionnez le dossier dans lequel rechercher"
+
+#. button no
+#: ../../xffm/find/signals.hh:265 ../../xffm/find/dialog.hh:584
+#: ../../xffm/response/entryfileresponse.hh:18
+#: ../../xffm/response/entryresponse.hh:305
+#: ../../xffm/response/passwdresponse.hh:558
+#: ../../xffm/fm/local/properties.hh:304 ../../xffm/fm/local/rm.hh:155
+msgid "Cancel"
+msgstr "Annuler"
+
+#: ../../xffm/find/signals.hh:293 ../../xffm/find/signals.hh:722
+msgid "No editor for current action."
+msgstr "Aucun outil de modification pour l'action actuelle."
+
+#. / option "upper_limit_spin" (only in gtk dialog_)
+#: ../../xffm/find/signals.hh:351 ../../xffm/find/dialog.hh:183
+msgid "Results"
+msgstr "Résultats"
+
+#: ../../xffm/find/signals.hh:351
+msgid "Upper limit:"
+msgstr "Limite supérieure :"
+
+#: ../../xffm/find/signals.hh:353
+msgid "Counting files..."
+msgstr "Décompte des fichiers..."
+
+#: ../../xffm/find/signals.hh:368
+#, c-format
+msgid "Found %d match"
+msgid_plural "Found %d matches"
+msgstr[0] "%d correspondance trouvée"
+msgstr[1] "%d correspondances trouvées"
+
+#: ../../xffm/find/signals.hh:370
+#, c-format
+msgid "%s Finished : %s"
+msgstr "%s fini : %s"
+
+#: ../../xffm/find/signals.hh:488 ../../xffm/find/signals.hh:490
+msgid "Searching..."
+msgstr "Recherche en cours…"
+
+#. g_object_set_data(G_OBJECT(dialog_), "window", dialog_);
+#: ../../xffm/find/dialog.hh:98 ../../xffm/find/dialog.hh:150
+#: ../../xffm/find/dialog.hh:611
+msgid "Find"
+msgstr "Rechercher"
+
+#: ../../xffm/find/dialog.hh:183
+msgid "Upper limit"
+msgstr "Limite supérieure"
+
+#. option -s +KByte "size_greater", "size_greater_spin"
+#: ../../xffm/find/dialog.hh:188
+msgid "At Least"
+msgstr "Au moins"
+
+#: ../../xffm/find/dialog.hh:188 ../../xffm/find/dialog.hh:193
+msgid "kBytes"
+msgstr "Koctets"
+
+#. option -s -KByte "size_smaller", "size_smaller_spin"
+#: ../../xffm/find/dialog.hh:193
+msgid "At Most"
+msgstr "Au plus"
+
+#: ../../xffm/find/dialog.hh:204
+msgid "Group"
+msgstr "Groupe"
+
+#. option -o octal "octal_p" "permissions_entry"
+#: ../../xffm/find/dialog.hh:208
+msgid "Octal Permissions"
+msgstr "Permissions en octal"
+
+#. option -p suid | exe
+#: ../../xffm/find/dialog.hh:213
+msgid "SUID"
+msgstr "SUID"
+
+#: ../../xffm/find/dialog.hh:213 ../../xffm/fm/local/popup.hh:843
+msgid "Executable"
+msgstr "Exécutable"
+
+#. option -m months "last_months", "last_months_spin"
+#: ../../xffm/find/dialog.hh:237
+msgid "Months"
+msgstr "Mois"
+
+#: ../../xffm/find/dialog.hh:248
+msgid "File type : "
+msgstr "Type de fichier : "
+
+#. gtk_widget_show (GTK_WIDGET(right_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(center_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(left_options_vbox));
+#: ../../xffm/find/dialog.hh:262 ../../xffm/find/dialog.hh:602
+#: ../../xffm/fm/page/page.hh:70 ../../xffm/common/gtk.hh:70
+msgid "Close"
+msgstr "Fermer"
+
+#. gtk_box_pack_start (vbox7a, GTK_WIDGET(advancedBox), TRUE, FALSE, 5);
+#. gtk_widget_show(GTK_WIDGET(advancedBox));
+#. //////////////  grep options.... /////////////////////////
+#: ../../xffm/find/dialog.hh:384
+msgid "Contains"
+msgstr "Contient"
+
+#: ../../xffm/find/dialog.hh:404
+msgid "Contains the text"
+msgstr "Contient le texte"
+
+#: ../../xffm/find/dialog.hh:437
+msgid "Case Sensitive"
+msgstr "Sensible à la casse"
+
+#: ../../xffm/find/dialog.hh:449
+msgid "Extended regexp"
+msgstr "regexp étendu"
+
+#: ../../xffm/find/dialog.hh:460
+msgid "Include binary files"
+msgstr "Inclure les fichiers binaires"
+
+#: ../../xffm/find/dialog.hh:496
+msgid "Match"
+msgstr "Rechercher"
+
+#: ../../xffm/find/dialog.hh:508
+msgid "Anywhere"
+msgstr "N'importe où"
+
+#: ../../xffm/find/dialog.hh:523
+msgid "Whole words only"
+msgstr "Mots entiers seulement"
+
+#: ../../xffm/find/dialog.hh:538
+msgid "lines"
+msgstr "lignes"
+
+#: ../../xffm/find/dialog.hh:594
+msgid "Clear"
+msgstr "Effacer"
+
+#: ../../xffm/find/dialog.hh:636
+msgid "Edit"
+msgstr "Édition"
+
+#: ../../xffm/find/dialog.hh:751 ../../xffm/find/dialog.hh:766
+#: ../../xffm/common/util.hh:1150 ../../xffm/common/util.hh:1152
+#: ../../xffm/common/util.hh:1158 ../../xffm/common/util.hh:1160
+#: ../../xffm/common/preview.hh:479
+msgid "unknown"
+msgstr "inconnu"
+
+#: ../../xffm/find/dialog.hh:780
+msgid "Modified"
+msgstr "Modifié"
+
+#: ../../xffm/find/dialog.hh:784
+msgid "Created"
+msgstr "Créé"
+
+#: ../../xffm/find/dialog.hh:788
+msgid "Accessed"
+msgstr "Accédé"
+
+#: ../../xffm/find/dialog.hh:1106
+msgid ""
+"Basic rules:\n"
+"\n"
+"*  Will match any character zero or more times.\n"
+"?  Will match any character exactly one time\n"
+"[] Match any character within the [] \n"
+"^  Match at beginning of string\n"
+"$  Match at end of string \n"
+msgstr ""
+"Règles de base :\n"
+"\n"
+"* Correspond à n'importe quel caractère répété zéro ou plusieurs fois.\n"
+"? Correspond à n'importe quel caractère répété exactement une fois.\n"
+
+#: ../../xffm/find/dialog.hh:1115
+msgid ""
+"Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"In  basic regular expressions the metacharacters ?, +, {, |, (, and ) \n"
+"  lose their special meaning.\n"
+"\n"
+"The  period . matches  any  single  character.\n"
+"The caret ^ matches at the start of line.\n"
+"The dollar $ matches at the end of line.\n"
+"\n"
+"Characters within [ ] matches any single character in the list.\n"
+"Characters within [^ ] matches any single character *not* in the list.\n"
+"Characters inside [ - ] matches a range of characters (ie [0-9] or [a-z]).\n"
+"\n"
+"A regular expression may be followed by one of several repetition "
+"operators:\n"
+"?      The preceding item is optional and matched\n"
+"       at most once.\n"
+"*      The preceding item will be matched zero\n"
+"       or more times.\n"
+"+      The preceding item will be matched one or\n"
+"       more times.\n"
+"{n}    The preceding item is matched exactly n times.\n"
+"{n,}   The preceding item is matched n or more times.\n"
+"{n,m}  The preceding item is matched at least n times,\n"
+"       but not more than m times.\n"
+"\n"
+"To match any reserved character, precede it with \\. \n"
+"\n"
+"Two regular expressions may be joined by the logical or operator |.\n"
+"Two regular expressions may be concatenated.\n"
+"\n"
+"More information is available by typing \"man grep\"\n"
+msgstr ""
+"Les caractères réservés pour regexp étendu sont\n"
+"    . ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"\n"
+"Le point   .   correspond à n'importe quel caractère.\n"
+"Le chapeau ^ correspond au début de la ligne.\n"
+"Le dollar $ correspond à la fin de la ligne.\n"
+"\n"
+"Les caractères entre [ ] correspondent à n'importe quel caractère dans la "
+"liste.\n"
+"Les caractères entre [^ ] correspondent à n'importe quel caractère qui n'est "
+"pas dans la liste.\n"
+"Les caractères dans  [ - ] correspondent à un ensemble (ie [0-9] ou [a-z]).\n"
+"\n"
+"Une expression régulière peut être suivie par un ou plusieurs opérateurs:\n"
+"?      Le bloc précédent est optionnel et correspond au plus une fois.\n"
+"*      Le bloc précédent correspond zéro ou plus de fois..\n"
+"+      Le bloc précédent correspond une fois ou plus.\n"
+"{n}    Le bloc précédent correspond exactement n fois.\n"
+"{n,}   Le bloc précédent correspond n fois ou plus.\n"
+"{n,m}  Le bloc précédent correspond n fois au moins, mais pas plus de m "
+"fois.\n"
+"\n"
+"Pour faire correspondre n'importe quel caractère réservé, le faire précéder "
+"de \\. \n"
+"\n"
+"Deux expressions régulières peuvent être ajoutées par l'opérateur | (ou "
+"logique). \n"
+"Deux expressions régulières peuvent être concaténées.\n"
+"\n"
+"Plus d'informations sont disponibles en tapant \"man grep\" à l'invité de "
+"commande.\n"
+
+#: ../../xffm/response/entryfileresponse.hh:20
+msgid "Open"
+msgstr "Ouvrir"
+
+#: ../../xffm/response/entryresponse.hh:29
+#: ../../xffm/response/entryfolderresponse.hh:28
+msgid "Choose directory"
+msgstr "Choisissez un répertoire"
+
+#. this button is redundant since hands are on keyboard for password
+#: ../../xffm/response/entryresponse.hh:309
+#: ../../xffm/response/passwdresponse.hh:189
+#: ../../xffm/response/passwdresponse.hh:559
+msgid "Ok"
+msgstr "Valider"
+
+#: ../../xffm/response/commandprogressresponse.hh:32
+msgid "Items:"
+msgstr "Éléments :"
+
+#: ../../xffm/response/passwdresponse.hh:21
+msgid "Enter password"
+msgstr "Saisissez le mot de passe"
+
+#. gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+#: ../../xffm/response/passwdresponse.hh:125
+msgid "User Input"
+msgstr "Saisie utilisateur"
+
+#: ../../xffm/response/passwdresponse.hh:142
+msgid "Response Requested"
+msgstr "Réponse demandée"
+
+#: ../../xffm/response/passwdresponse.hh:264
+msgid "Preparing"
+msgstr "Préparation"
+
+#: ../../xffm/response/passwdresponse.hh:352
+msgid "sudo"
+msgstr "sudo"
+
+#: ../../xffm/response/passwdresponse.hh:354
+msgid "Command:"
+msgstr "Commande :"
+
+#: ../../xffm/response/passwdresponse.hh:357
+msgid "Permission denied"
+msgstr "Permission refusée"
+
+#: ../../xffm/response/passwdresponse.hh:358
+msgid "Try to approach a problem from different angles."
+msgstr "Essayez d'aborder un problème sous différents angles."
+
+#: ../../xffm/response/passwdresponse.hh:359
+msgid "Do you want to retry?"
+msgstr "Voulez-vous réessayer ?"
+
+#: ../../xffm/response/passwdresponse.hh:360
+msgid "Alternate:"
+msgstr "Alternatif :"
+
+#: ../../xffm/response/passwdresponse.hh:365
+msgid "No"
+msgstr "Non"
+
+#: ../../xffm/response/passwdresponse.hh:401
+msgid "Install"
+msgstr "Installer"
+
+#: ../../xffm/response/passwdresponse.hh:402
+#, c-format
+msgid "%s does not exist."
+msgstr "%s n'existe pas."
+
+#: ../../xffm/response/passwdresponse.hh:467
+msgid "Blowfish"
+msgstr "Blowfish"
+
+#: ../../xffm/response/passwdresponse.hh:468
+msgid "Encryption Key Approval"
+msgstr "Approbation de la clé de chiffrement"
+
+#: ../../xffm/response/passwdresponse.hh:502
+msgid "-o     print output to standard out. Implies -r."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:506
+msgid "-c     DO NOT compress files before encryption."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:510
+msgid "-r     DO NOT remove input files after processing"
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:517
+msgid "Encryption key: "
+msgstr "Clé de chiffrement : "
+
+#: ../../xffm/response/passwdresponse.hh:529
+msgid "Confirm:"
+msgstr "Confirmer :"
+
+#: ../../xffm/response/passwdresponse.hh:542
+msgid "Sorry, passwords do not match"
+msgstr "Désolé, les mots de passe ne correspondent pas"
+
+#: ../../xffm/response/passwdresponse.hh:550
+msgid "Minimum length:"
+msgstr "Longueur minimale :"
+
+#: ../../xffm/response/timeoutresponse.hh:56
+msgid "Dismiss"
+msgstr "Fermer"
+
+#: ../../xffm/response/commandresponse.hh:23
+msgid "Running"
+msgstr "En marche"
+
+#. auto text = g_strdup_printf("%s (pid: %d)",
+#. _("Waiting for operation to finish..."),
+#. Tubo<Type>::getChild (pid));
+#: ../../xffm/response/commandresponse.hh:28
+msgid "Waiting for operation to finish..."
+msgstr "Patientez jusqu'à ce que l'opération se termine..."
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Documents"
+msgstr "Documents"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Downloads"
+msgstr "Téléchargements"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Music"
+msgstr "Musique"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Pictures"
+msgstr "Images"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Templates"
+msgstr "Modèles"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Videos"
+msgstr "Vidéos"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Desktop"
+msgstr "Bureau"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Bookmarks"
+msgstr "Signets"
+
+#: ../../xffm/fm/local/icons.hh:259 ../../xffm/fm/local/rm.hh:181
+msgid "Trash"
+msgstr "Corbeille"
+
+#: ../../xffm/fm/local/popup.hh:60
+msgid "New"
+msgstr "Nouveau"
+
+#. deprecated {N_("Open in New Tab"), NULL, NULL, NULL},
+#. deprecated {N_("Open in New Window"), NULL, NULL, NULL},
+#. common buttons /(also an iconsize +/- button)
+#: ../../xffm/fm/local/popup.hh:64 ../../xffm/fm/local/popup.hh:104
+#: ../../xffm/common/gtk.hh:74
+msgid "Copy"
+msgstr "Copier"
+
+#: ../../xffm/fm/local/popup.hh:65 ../../xffm/fm/local/popup.hh:105
+#: ../../xffm/common/gtk.hh:73
+msgid "Cut"
+msgstr "Couper"
+
+#: ../../xffm/fm/local/popup.hh:66 ../../xffm/fm/local/popup.hh:106
+#: ../../xffm/common/gtk.hh:66
+msgid "Paste"
+msgstr "Coller"
+
+#. **************
+#: ../../xffm/fm/local/popup.hh:67 ../../xffm/fm/local/popup.hh:107
+#: ../../xffm/fm/local/rm.hh:174 ../../xffm/common/gtk.hh:75
+msgid "Delete"
+msgstr "Supprimer"
+
+#. {N_("About"), NULL, (void *) menu},
+#.
+#. only for listview: {N_("Sort by size"), NULL, (void *) menu},
+#. only for listview: {N_("Sort by date"), NULL, (void *) menu},
+#: ../../xffm/fm/local/popup.hh:73
+msgid "Select All"
+msgstr "Tout sélectionner"
+
+#: ../../xffm/fm/local/popup.hh:74 ../../xffm/fm/local/popup.hh:559
+msgid "Match regular expression"
+msgstr "Correspond à une expression rationnelle"
+
+#: ../../xffm/fm/local/popup.hh:75 ../../xffm/fm/root/view.hh:58
+#: ../../xffm/fm/fstab/popup.hh:21
+msgid "View as list"
+msgstr "Afficher en liste"
+
+#: ../../xffm/fm/local/popup.hh:77
+msgid "Show hidden files"
+msgstr "Afficher les fichiers cachés"
+
+#: ../../xffm/fm/local/popup.hh:79
+msgid "Show Backup Files"
+msgstr "Afficher les fichiers de sauvegarde"
+
+#: ../../xffm/fm/local/popup.hh:81
+msgid "Sort data in descending order"
+msgstr "Trier les données dans l'ordre décroissant"
+
+#: ../../xffm/fm/local/popup.hh:93 ../../xffm/fm/local/popup.hh:119
+#: ../../xffm/fm/local/popup.hh:1006 ../../xffm/fm/local/popup.hh:1013
+#: ../../xffm/fm/local/popup.hh:1022 ../../xffm/fm/local/popup.hh:1029
+#: ../../xffm/common/gtk.hh:72
+msgid "Open with"
+msgstr "Ouvrir avec"
+
+#: ../../xffm/fm/local/popup.hh:94 ../../xffm/fm/local/popup.hh:846
+msgid "Run Executable..."
+msgstr "Lancer l'exécutable..."
+
+#: ../../xffm/fm/local/popup.hh:95
+msgid "Extract files from the archive"
+msgstr "Extrait les fichiers de l'archive"
+
+#. g_hash_table_insert(iconname_hash, "bcrypt", (void *)"emblem-keyhole");
+#: ../../xffm/fm/local/popup.hh:96 ../../xffm/fm/root/view.hh:73
+#: ../../xffm/fm/fstab/popup.hh:20 ../../xffm/fm/dialog/notebook.hh:52
+#: ../../xffm/common/gtk.hh:78
+msgid "Open in New Tab"
+msgstr "Ouvrir dans un nouvel onglet"
+
+#. File chooser
+#: ../../xffm/fm/local/popup.hh:97 ../../xffm/fm/local/popup.hh:706
+msgid "Create a compressed archive with the selected objects"
+msgstr "Créer une archive compressée avec les éléments sélectionnés"
+
+#: ../../xffm/fm/local/popup.hh:98 ../../xffm/fm/fstab/popup.hh:37
+msgid "Mount the volume associated with this folder"
+msgstr "Monte le volume associé à ce dossier"
+
+#: ../../xffm/fm/local/popup.hh:99 ../../xffm/fm/fstab/popup.hh:38
+msgid "Unmount the volume associated with this folder"
+msgstr "Démonte le volume associé à ce dossier"
+
+#: ../../xffm/fm/local/popup.hh:100 ../../xffm/common/gtk.hh:67
+msgid "Add bookmark"
+msgstr "Ajoute un signet"
+
+#: ../../xffm/fm/local/popup.hh:101 ../../xffm/fm/root/view.hh:74
+#: ../../xffm/common/gtk.hh:68
+msgid "Remove bookmark"
+msgstr "Supprime le signet"
+
+#: ../../xffm/fm/local/popup.hh:108 ../../xffm/fm/local/popup.hh:961
+msgid "Rename"
+msgstr "Renommer"
+
+#: ../../xffm/fm/local/popup.hh:109 ../../xffm/fm/local/popup.hh:947
+msgid "Duplicate"
+msgstr "Dupliquer"
+
+#: ../../xffm/fm/local/popup.hh:110 ../../xffm/fm/local/popup.hh:933
+msgid "Link"
+msgstr "Lier"
+
+#: ../../xffm/fm/local/popup.hh:111
+msgid "Properties"
+msgstr "Propriétés"
+
+#: ../../xffm/fm/local/popup.hh:414
+msgid "Files:"
+msgstr "Fichiers :"
+
+#: ../../xffm/fm/local/popup.hh:417 ../../xffm/fm/local/rm.hh:61
+msgid "Multiple selections"
+msgstr "Sélections multiples"
+
+#: ../../xffm/fm/local/popup.hh:557
+msgid "Select items"
+msgstr "Sélectionner des éléments"
+
+#: ../../xffm/fm/local/popup.hh:575
+msgid "Regular Expression syntax is incorrect"
+msgstr "Syntaxe de l'expression rationnelle incorrecte"
+
+#: ../../xffm/fm/local/popup.hh:592
+msgid "No selection"
+msgstr "Aucune sélection"
+
+#: ../../xffm/fm/local/popup.hh:592
+msgid "No matches."
+msgstr "Pas de correspondances."
+
+#. entryResponse->setCheckButton(_("Run in Terminal"));
+#. entryResponse->setCheckButton(Mime<Type>::runInTerminal(path));
+#: ../../xffm/fm/local/popup.hh:721 ../../xffm/fm/page/pathbar.hh:313
+msgid "Specify Output Directory..."
+msgstr "Indiquer le dossier de sortie..."
+
+#: ../../xffm/fm/local/popup.hh:799
+msgid "Create new..."
+msgstr "Créer une nouvelle..."
+
+#: ../../xffm/fm/local/popup.hh:806 ../../xffm/fm/local/popup.hh:886
+msgid "New Name:"
+msgstr "Nouveau nom :"
+
+#: ../../xffm/fm/local/popup.hh:815
+msgid "No name"
+msgstr "Sans nom"
+
+#: ../../xffm/fm/local/popup.hh:828
+#, c-format
+msgid "Another file with the same name already exists in “%s”."
+msgstr "Un autre fichier portant le même nom existe déjà dans « %s »."
+
+#: ../../xffm/fm/local/popup.hh:850 ../../xffm/fm/local/popup.hh:1010
+#: ../../xffm/fm/local/popup.hh:1026 ../../xffm/common/util.hh:1248
+msgid "Run in Terminal"
+msgstr "Exécution dans un terminal"
+
+#: ../../xffm/fm/local/popup.hh:853
+msgid "Arguments for the Command"
+msgstr "Paramètres de la commande"
+
+#: ../../xffm/fm/local/popup.hh:1047 ../../xffm/fm/local/view.hh:141
+msgid "Invalid entry"
+msgstr "Entrée non valide"
+
+#: ../../xffm/fm/local/properties.hh:235
+msgid "Properties and Attributes"
+msgstr "Propriétés et attributs"
+
+#: ../../xffm/fm/local/properties.hh:264
+msgid "File Mode:"
+msgstr "Mode fichier :"
+
+#: ../../xffm/fm/local/properties.hh:290
+msgid "File:"
+msgstr "Fichier :"
+
+#. Add file info stuff
+#. set info stuff data according to combo box
+#. add signal handler to changed signal for combo box
+#. Add process buttons
+#.
+#: ../../xffm/fm/local/properties.hh:302
+msgid "Apply changes"
+msgstr "Appliquer les modifications"
+
+#: ../../xffm/fm/local/properties.hh:462
+msgid "Successfully moved to trash."
+msgstr "La mise à la corbeille a été effectuée avec succès."
+
+#: ../../xffm/fm/local/properties.hh:463
+msgid "Source:"
+msgstr "Source :"
+
+#: ../../xffm/fm/local/rm.hh:59
+#, c-format
+msgid "Delete %s"
+msgstr "Supprimer %s"
+
+#: ../../xffm/fm/local/rm.hh:61
+msgid "Warning: "
+msgstr "Avertissement : "
+
+#. gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
+#. title
+#: ../../xffm/fm/local/rm.hh:90
+msgid "Remove"
+msgstr "Supprimer"
+
+#: ../../xffm/fm/local/rm.hh:140
+msgid "Apply to all"
+msgstr "Appliquer à tous"
+
+#. **************
+#. This is now available to BSD with rm -P option
+#: ../../xffm/fm/local/rm.hh:163 ../../xffm/common/gtk.hh:76
+msgid "Shred"
+msgstr "Supprimer définitivement"
+
+#. We do not count "../"
+#: ../../xffm/fm/local/view.hh:48 ../../xffm/fm/base/monitor.hh:28
+#, c-format
+msgid "Files: %s"
+msgstr "Fichiers : %s"
+
+#: ../../xffm/fm/root/model.hh:78
+msgid "Root Directory"
+msgstr "Dossier racine"
+
+#: ../../xffm/fm/root/model.hh:94
+msgid "This is the root of the filesystem"
+msgstr "Ce dossier est à la racine de votre système de fichiers"
+
+#: ../../xffm/fm/root/model.hh:105
+msgid "Home Directory"
+msgstr "Dossier personnel"
+
+#: ../../xffm/fm/root/model.hh:132
+msgid "Trash bin"
+msgstr "Corbeille"
+
+#: ../../xffm/fm/root/model.hh:162 ../../xffm/fm/fstab/popup.hh:29
+msgid "Disk Image Mounter"
+msgstr "Monteur d'image disque"
+
+#: ../../xffm/fm/root/model.hh:169 ../../xffm/fm/root/model.hh:185
+msgid "Mount local disks and devices"
+msgstr "Monte des disques et périphériques locaux"
+
+#: ../../xffm/fm/root/model.hh:170 ../../xffm/fm/fstab/popup.hh:25
+#: ../../xffm/fm/fstab/view.hh:429
+#, fuzzy
+msgid "eCryptfs Volume"
+msgstr "Volumes TrueCrypt"
+
+#: ../../xffm/fm/root/model.hh:171 ../../xffm/fm/fstab/popup.hh:24
+msgid "SSHFS Remote Synchronization Folder"
+msgstr "Dossier de synchronisation à distance SSHFS"
+
+#: ../../xffm/fm/root/model.hh:172 ../../xffm/fm/fstab/popup.hh:23
+#: ../../xffm/fm/fstab/view.hh:377
+msgid "NFS Network Volume"
+msgstr "Volume réseau NFS"
+
+#: ../../xffm/fm/root/model.hh:173 ../../xffm/fm/fstab/popup.hh:26
+#: ../../xffm/fm/fstab/view.hh:455
+msgid "CIFS Volume"
+msgstr "Volume CIFS"
+
+#: ../../xffm/fm/root/model.hh:195
+msgid "Software Updater"
+msgstr "Application de mise à jour de logiciels"
+
+#: ../../xffm/fm/root/model.hh:218 ../../xffm/fm/root/model.hh:230
+msgid "Add or remove software installed on the system"
+msgstr "Ajouter ou supprimer des logiciels installés sur le système"
+
+#: ../../xffm/fm/root/model.hh:271
+msgid "Go to bookmarked location"
+msgstr "Aller au signet spécifié"
+
+#. {N_("Add bookmark"), (void *)BasePopUp<Type>::noop, NULL, NULL},
+#: ../../xffm/fm/root/view.hh:61
+msgid "Empty trash"
+msgstr "Vider la corbeille"
+
+#. File chooser
+#: ../../xffm/fm/fstab/popup.hh:121
+msgid "Mount Device"
+msgstr "Monter le périphérique"
+
+#: ../../xffm/fm/fstab/popup.hh:133
+msgid "Mount point:"
+msgstr "Point de montage :"
+
+#: ../../xffm/fm/fstab/view.hh:301
+msgid "Mounted on:"
+msgstr "Point de montage :"
+
+#: ../../xffm/fm/fstab/view.hh:302
+msgid "Mount on"
+msgstr "Monter sur"
+
+#: ../../xffm/fm/fstab/view.hh:310 ../../xffm/fm/fstab/view.hh:312
+msgid "Not mounted"
+msgstr "Démontée"
+
+#: ../../xffm/fm/fstab/view.hh:403
+msgid "SFTP (via SSH)"
+msgstr "SFTP (via SSH)"
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, c-format
+msgid "Unmounting %s"
+msgstr "Démontage de %s"
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, c-format
+msgid "Mounting %s"
+msgstr "Montage de %s"
+
+#: ../../xffm/fm/dialog/menupopover.hh:128
+msgid "Home"
+msgstr "Maison"
+
+#: ../../xffm/fm/dialog/menupopover.hh:129 ../../xffm/common/gtk.hh:64
+msgid "Open terminal"
+msgstr "Ouvrir le terminal"
+
+#: ../../xffm/fm/dialog/menupopover.hh:130
+msgid "Open a New Window"
+msgstr "Ouvrir une nouvelle fenêtre"
+
+#. {N_("Execute Shell Command"), (void *)MenuPopoverSignals<Type>::shell, (void *) menuButton_},
+#: ../../xffm/fm/dialog/menupopover.hh:132 ../../xffm/common/gtk.hh:69
+msgid "Search"
+msgstr "Rechercher"
+
+#: ../../xffm/fm/dialog/menupopover.hh:133 ../../xffm/common/gtk.hh:71
+msgid "Exit"
+msgstr "Quitter"
+
+#: ../../xffm/fm/dialog/dialog.hh:116
+msgid "Removed"
+msgstr "Supprimé"
+
+#: ../../xffm/fm/dialog/dialog.hh:132
+msgid "Detected device(s):"
+msgstr "Périphériques détectés :"
+
+#. Create the widgets
+#: ../../xffm/fm/page/vbuttonbox.hh:37 ../../xffm/common/gtk.hh:332
+msgid "Help"
+msgstr "Aide"
+
+#. File chooser
+#: ../../xffm/fm/page/pathbar.hh:306 ../../xffm/fm/page/pathbar.hh:308
+msgid "Go to"
+msgstr "Aller à"
+
+#: ../../xffm/fm/page/pathbar.hh:331
+msgid "Not a directory"
+msgstr "N'est pas un répertoire"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Renice Process"
+msgstr "Processus « Renice »"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Suspend"
+msgstr "Suspendre"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Continue"
+msgstr "Poursuivre"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Interrupt"
+msgstr "Interrompu"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Hangup"
+msgstr "Déconnexion"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "User 1 (USR1)"
+msgstr "Utilisateur 1 (USR1)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "User 2 (USR2)"
+msgstr "Utilisateur 2 (USR2)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "Terminate Task"
+msgstr "Terminer la tâche"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "Abort"
+msgstr "Abandonner"
+
+#: ../../xffm/fm/page/runbutton.hh:138
+msgid "Kill"
+msgstr "Tuer"
+
+#: ../../xffm/fm/page/runbutton.hh:139
+msgid "Segmentation fault"
+msgstr "Erreur de segmentation"
+
+#: ../../xffm/fm/page/runbutton.hh:217
+msgid "PID"
+msgstr "PID"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:37
+msgid "Embedded Terminal"
+msgstr "Terminal intégré"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:38
+msgid "All items in the iconview."
+msgstr "Tous les éléments dans la vue en icônes."
+
+#: ../../xffm/fm/page/hbuttonbox.hh:39
+msgid "Scripting"
+msgstr "Scripts"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:40
+msgid "Clear Log"
+msgstr "Effacer le journal"
+
+#. Status textview
+#: ../../xffm/fm/page/hbuttonbox.hh:42
+msgid "Terminal font"
+msgstr "Police du terminal"
+
+#: ../../xffm/fm/treeview.hh:17
+msgid "Name"
+msgstr "Nom"
+
+#: ../../xffm/fm/treeview.hh:20
+msgid "Size"
+msgstr "Taille"
+
+#: ../../xffm/fm/treeview.hh:21
+msgid "Date"
+msgstr "Date"
+
+#: ../../xffm/fm/treeview.hh:22
+msgid "Mimetype"
+msgstr "Type MIME"
+
+#: ../../xffm/fm/treeview.hh:24
+msgid "TYPE"
+msgstr "TYPE"
+
+#: ../../xffm/fm/base/signals.hh:642
+msgid "Directory does not exist."
+msgstr "Le dossier n'existe pas."
+
+#: ../../xffm/fm/base/signals.hh:644 ../../xffm/fm/base/signals.hh:646
+msgid "Trash is empty"
+msgstr "La corbeille est vide"
+
+#: ../../xffm/common/settings.hh:27
+msgid "New File:"
+msgstr "Nouveau fichier :"
+
+#: ../../xffm/common/gio.hh:235
+msgid "Could not copy item:"
+msgstr "Impossible de copier l'élément :"
+
+#: ../../xffm/common/gio.hh:237
+msgid "Could not move item:"
+msgstr "Impossible déplacer l'élément :"
+
+#: ../../xffm/common/gio.hh:239
+msgid "Create symbolic link"
+msgstr "Créer un lien symbolique"
+
+#: ../../xffm/common/gio.hh:276
+#, c-format
+msgid ""
+"Could not delete:\n"
+"%s"
+msgstr ""
+"Impossible de supprimer :\n"
+"%s"
+
+#: ../../xffm/common/gio.hh:278
+#, c-format
+msgid "Could not move %s to trash"
+msgstr "Impossible de mettre %s à la corbeille"
+
+#: ../../xffm/common/clipboard.hh:23 ../../xffm/common/dnd.hh:40
+msgid "Copying files locally"
+msgstr "Copie locale des fichiers"
+
+#: ../../xffm/common/clipboard.hh:30 ../../xffm/common/dnd.hh:34
+msgid "Moving files"
+msgstr "Déplacement des fichiers"
+
+#: ../../xffm/common/dnd.hh:46
+msgid "Create Link"
+msgstr "Crée un lien"
+
+#: ../../xffm/common/util.hh:1200
+#, c-format
+msgid ""
+"Scriptfile \"%s\" is not executable. Please set the executable-attribute on "
+"that file."
+msgstr ""
+"Le fichier script « %s » n'est pas exécutable. Veuillez rendre chaque "
+"fichier exécutable."
+
+#: ../../xffm/common/util.hh:1202 ../../xffm/common/util.hh:1237
+#, c-format
+msgid "Open with %s"
+msgstr "Ouvrir avec %s"
+
+#: ../../xffm/common/util.hh:1202
+msgid "Text Editor"
+msgstr "Éditeur de texte"
+
+#: ../../xffm/common/util.hh:1239 ../../xffm/common/gtk.hh:65
+msgid "Execute Shell Command"
+msgstr "Exécuter une commande"
+
+#: ../../xffm/common/util.hh:1243
+msgid ""
+"Console: quickly run single commands -- write a command here and press enter."
+msgstr ""
+"Terminal : lancer rapidement des commandes simples -- écrire une commande "
+"ici et appuyez sur « Entrée »."
+
+#: ../../xffm/common/gtk.hh:123
+msgid "New Tab"
+msgstr "Nouvel onglet"
+
+#: ../../xffm/common/gtk.hh:335
+msgid "OK"
+msgstr "OK"
+
+#: ../../xffm/common/run.hh:344
+msgid "error"
+msgstr "erreur"
+
+#: ../../xffm/common/run.hh:348
+msgid "warning"
+msgstr "avertissement"
+
+#: ../../xffm/common/mime.hh:101 ../../xffm/common/mime.hh:143
+msgid "No Read Permission"
+msgstr "Aucun droit en lecture"
+
+#: ../../xffm/common/preview.hh:593
+msgid "Empty file"
+msgstr "Fichier vide"
+
+#: ../../xffm/common/preview.hh:648
+#, c-format
+msgid "Cannot read from %s"
+msgstr "Impossible de lire depuis %s"
+
+#, fuzzy

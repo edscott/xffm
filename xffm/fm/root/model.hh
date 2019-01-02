@@ -159,7 +159,7 @@ public:
     addFstabItem(GtkTreeModel *treeModel){	
  	GtkTreeIter iter;
 	auto name = "xffm:fstab";
-	auto utf_name = util_c::utf_string(_("Mount Helper"));
+	auto utf_name = util_c::utf_string(_("Disk Image Mounter"));
 	auto icon_name = "folder-remote";
 	auto highlight_name = "folder-remote/NE/document-open/2.0/225";
         auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
@@ -268,7 +268,7 @@ public:
                         DISPLAY_PIXBUF, normal_pixbuf,
                         NORMAL_PIXBUF, normal_pixbuf,
                         HIGHLIGHT_PIXBUF, highlight_pixbuf,
-                        TOOLTIP_TEXT,_("Go to the location specified by this bookmark"),
+                        TOOLTIP_TEXT,_("Go to bookmarked location"),
                         -1);
                 g_free(basename);
                 g_free(utf_name);

@@ -5,23 +5,23 @@
 #
 # Copyright (C) 2004 Alexander Reinholdt <dustpuppy@mail.berlios.de>.
 # Miguel Angel Quesada <kesadalive@gmail.com>, 2009.
-# RamÛn Rey Vicente <ramon.rey@hispalinux.es>, 2003-2004.
-# Jorge Gonz·lez <jorgegonz@svn.gnome.org>, 2004-2012.
+# Ram√≥n Rey Vicente <ramon.rey@hispalinux.es>, 2003-2004.
+# Jorge Gonz√°lez <jorgegonz@svn.gnome.org>, 2004-2012.
 # Albert Abril <albert.abril@gmail.com>, 2006.
 # Juan Percy Rojas Cruz <juanperojas@gmail.com>, 2008-2009.
 # Copyright (C) 2003 Dario Abatianni <eisfuchs@tigress.com>.
-# Adolfo Gonz·lez Bl·zquez <code@infinicode.org>, 2007.
-# Miguel RodrÌguez N˙Òez <bokerones.fritos@gmail.com>, 2012-2013.
+# Adolfo Gonz√°lez Bl√°zquez <code@infinicode.org>, 2007.
+# Miguel Rodr√≠guez N√∫√±ez <bokerones.fritos@gmail.com>, 2012-2013.
 # Jean Pierre Mazuelos Saavedra <apuyaya@gmail.com>, 2010.
 # Mario Teijeiro Otero <mteijeiro@escomposlinux.org>, 2001-2002.
-# JosÈ Antonio Salgueiro <joseantsa@eresmas.net>, 2001.
+# Jos√© Antonio Salgueiro <joseantsa@eresmas.net>, 2001.
 # Bryan Alberto Baron Chinchilla <bachinchi@gmail.com>, 2010.
-# Santiago Fern√°ndez Sancho <santi@kde-es.org>, 2007-2008.
+# Santiago Fern√É¬°ndez Sancho <santi@kde-es.org>, 2007-2008.
 # Copyright (C) 2009 Daniel Campos <dcamposf@gmail.com>.
 # Carlos Mayo <carlos.mayo@hispalinux.es>, 2003.
 # Ulrik Sverdrup <ulrik.sverdrup@gmail.com>, 2009.
 # Copyright (C) 2005 Joris Guisson <joris.guisson@gmail.com>.
-# Carlos Mayo Hern√°ndez <carlos.mayo@hispalinux.es>, 2003-2005.
+# Carlos Mayo Hern√É¬°ndez <carlos.mayo@hispalinux.es>, 2003-2005.
 # Nacho Hermoso de Mendoza <gnacho@gmail.com>, 2008.
 # Eneko Lacunza <enlar@iname.com>, 2001-2003.
 # Rafael Munoz Rodriguez <rafaluco@netscape.net>, 2003-2004.
@@ -33,52 +33,52 @@
 # Santiago Erquicia <erqu0001@d.umn.edu>, 2004-2005.
 # Christian Neumair <chris@gnome-de.org>, 2002-2009.
 # Diego Sevilla Ruiz <dsevilla@um.es>, 2000.
-# QA por Carlos PerellÛ MarÌn <carlos@gnome-db.org>, 2002.
-# Salvador Gimeno ZanÛn <salgiza@jazzfree.com>, 2002-2005.
-# Carlos PerellÛ MarÌn <carlos@gnome-db.org>, 2000-2003.
-# JosÈ S·nchez Moreno <jose@oxigenow.com>, 2007.
+# QA por Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>, 2002.
+# Salvador Gimeno Zan√≥n <salgiza@jazzfree.com>, 2002-2005.
+# Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>, 2000-2003.
+# Jos√© S√°nchez Moreno <jose@oxigenow.com>, 2007.
 # Juan Manuel Garcia Molina <juanma@superiodico.net>, 2001-2007.
 # Pablo de Vicente <pablo.devicente@gmail.com>, 2000-2008.
-# Lucas Vieites FariÒa <lucas@asixinformatica.com>, 2001-2007.
+# Lucas Vieites Fari√±a <lucas@asixinformatica.com>, 2001-2007.
 # Rocio Gallego <traducciones@rociogallego.com>, 2010-2013.
 # Juan Luis Montore Parera <jlm@NOSPAMmontore.net>, 2003-2005.
 # Gustavo Jasso Ahuja <gjasso@gmail.com>, 2012.
 # miguel angel quesada fernandez <kesadalive@gmail.com>, 2008.
-# Kira J. Fern·ndez <kirajfdez@gmail.com>, 2011-2012.
+# Kira J. Fern√°ndez <kirajfdez@gmail.com>, 2011-2012.
 # Francisco Javier F. Serrador <serrador@cvs.gnome.org>, 2002-2010.
 # Juan Pablo Puerta <ews@madridwireless.net>, 1999.
 # Cherny D. C. Berbesi I. <cberbesi@onuva.com>, 2009.
 # Edited by Krzysztof Luks <kluks@iq.pl>.
-# HÈctor GarcÌa ¡lvarez <hector@scouts-es.org>, 1999-2002.
-# Sylvia S·nchez <LailahFSF@gmail.com>, 2010-2011.
-# David Paul PeÒa <eodos0@gmail.com>, 2009-2010.
-# Ra˙l MirÛ <cotin@geocities.com>, 2001.
+# H√©ctor Garc√≠a √Ålvarez <hector@scouts-es.org>, 1999-2002.
+# Sylvia S√°nchez <LailahFSF@gmail.com>, 2010-2011.
+# David Paul Pe√±a <eodos0@gmail.com>, 2009-2010.
+# Ra√∫l Mir√≥ <cotin@geocities.com>, 2001.
 # Copyright (C) 2004 Jernej Kos <kostko@jweb-network.net>.
 # Mario Young <mayeco@kdemail.net>, 2008.
 # Lucas Garcia <tanke@escomposlinux.org>, 2003.
-# Ernesto ManrÌquez Mendoza <alejandronova@gmail.com>, 2011.
+# Ernesto Manr√≠quez Mendoza <alejandronova@gmail.com>, 2011.
 # Anthony Vital <anthony.vital@gmail.com>, 2010.
 # Carlos Davila <carluti@users.sourceforge.net>, 2007-2008.
 # Raul Jover Baison <cain@akrata.org>, 2003.
-# Ra˙l Alexis Betancort Santana <a2363@correo.dis.ulpgc.es>, 1999.
-# Ana MarÌa GarcÌa Molina <ana_gm@eresmas.com>, 2001.
+# Ra√∫l Alexis Betancort Santana <a2363@correo.dis.ulpgc.es>, 1999.
+# Ana Mar√≠a Garc√≠a Molina <ana_gm@eresmas.com>, 2001.
 # Miguel Revilla <yo@miguelrevilla.com>, 2001.
 # Javier Gomez sierras <jgomsi@apolo.umh.es>, 2000.
 # Javier Moreno <javier.moreno@alufis35.uv.es>, 2000.
-# Leandro MachacÛn <leandroman@gemail.com>, 2010.
+# Leandro Machac√≥n <leandroman@gemail.com>, 2010.
 # Copyright (C) 2008 Alejandro Valdes Jimenez <avaldes@gnome.org>.
 # Danilo Vasquez Simonetti <danilo.vasquez@gmail.com>, 2008.
 # Jose Antonio Salgueiro Aquino <developer@telefonica.net>, 2003.
 # Carlos Higuera <higuera.carlos@gmail.com>, 2006.
 # Ignacio Bezanilla Diaz <coder@telefonica.net>, 2004.
-# √Ålvaro Pe√±a <alvaropg@mac.com>, 2001.
+# √É¬Ålvaro Pe√É¬±a <alvaropg@mac.com>, 2001.
 # Alberto Garcia <info@trebol-a.com>, 2007-2008.
 # Miguel de Icaza,computo,622-4680 <miguel@metropolis.nuclecu.unam.mx>, 1998.
 # Miguel A. Arevalo <marevalo@marevalo.net>, 2002.
 # Copyright (C) 2009 Ulrik Sverdrup <ulrik.sverdrup@gmail.com>.
 # Tomas Moreno <tomas@info.ne.udo.edu.ve>, 2001.
 # Mario Carrion <mario@carrion.mx>, 2010.
-# Q&A, Germ·n Poo-CaamaÒo <gpoo@ubiobio.cl>, 2003.
+# Q&A, Germ√°n Poo-Caama√±o <gpoo@ubiobio.cl>, 2003.
 # Mauricio Araya Polo <mauricio@eazel.com>, 2001.
 # Ignacio A. Poggi <ignaciop.3@gmail.com>, 2008-2009.
 # Claudio Saavedra <csaavedra@alumnos.utalca.cl>, 2004-2009.
@@ -88,14 +88,14 @@
 # David Prieto <frandavid100@gmail.com>, 2008.
 # Alberto Caso <alberto.caso@adaptia.es>, 2007-2008.
 # Jacinto Capote Robles <fastangel@gmail.com>, 2007-2009.
-# Eduardo GarcÌa Cebollero <kiwnix@yahoo.es>, 2002.
+# Eduardo Garc√≠a Cebollero <kiwnix@yahoo.es>, 2002.
 # Alberto Pintado <apintado@lycos.es>, 2003.
 # Juan Alfredo Salas Santillana <jsantillana@aqpglug.org.pe>, 2009.
 # David Paul <eodos0@gmail.com>, 2011.
 # Jordi Mallach <jordi@sindominio.net>, 2000-2012.
 # Yonathan Moreno <yonathan@yonathanmoreno.com>, 2012.
-# Miguel MenÈndez <mimecar@innerzaurus.com>, 2007.
-# Rafael RodrÌguez <apt-drink@gulic.org>, 2005.
+# Miguel Men√©ndez <mimecar@innerzaurus.com>, 2007.
+# Rafael Rodr√≠guez <apt-drink@gulic.org>, 2005.
 # Rafael Belmonte <eaglescreen@gmail.com>, 2013.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2002-2012.
 # Hector Wilvert Ivan Valdez Reza <ranmaru.hibikiya@gmail.com>, 2013.
@@ -103,29 +103,29 @@
 # Copyright (C) 2003, 2004 Unai Garro <ugarro@users.sourceforge.net>.
 # Milagros Alessandra Infante Montero <maim92@gmail.com>, 2012.
 # Leticia Martin <leticia.martin@gmail.com>, 2009.
-# Sa˙l Ortega <sortega4444@gmail.com>, 2010-2011.
+# Sa√∫l Ortega <sortega4444@gmail.com>, 2010-2011.
 # Markus Slopianka <kamikazow@fishmouth.net>, 2009-2013.
 # eodos <eodos0@gmail.com>, 2010.
 # Unai Garro <ugarro@users.sourceforge.net>, 2003.
-# Miguel RodrÌguez PÈrez <miguelrp@gmail.com>, 2002.
+# Miguel Rodr√≠guez P√©rez <miguelrp@gmail.com>, 2002.
 # Copyright (C) 2005 Antonio Ognio <gnrfan@gnrfan.org>, 2005.
 # Sun G11n <gnome_int_l10n@ireland.sun.com>, 2002-2003.
 # Carlos Albornoz <carlos@debianchile.cl>, 2009.
-# QA: Carlos PerellÛ MarÌn <carlos@gnome-db.org>.
+# QA: Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>.
 # javier Vinal <fjvinal@gmail.com>, 2009-2012.
 # Francisco Javier Fernandez Serrador <fserrador@gmail.com>, 2009.
 # Nestor Diaz <nestordiaz@equusdigital.com>, 2006.
-# JosÈ Carlos GarcÌa Sogo <jsogo@arrakis.es>, 2001-2003.
+# Jos√© Carlos Garc√≠a Sogo <jsogo@arrakis.es>, 2001-2003.
 # Roby Sottini <rsottini@yahoo.com>, 2009.
 # Leticia Martin Hernandez <leticia.martin@gmail.com>, 2009.
 # Lucas Vieites <lucas@codexion.com>, 2002-2008.
-# Germ·n PoÛ CaamaÒo <gpoo@ubiobio.cl>, 2004.
+# Germ√°n Po√≥ Caama√±o <gpoo@ubiobio.cl>, 2004.
 # Alejandro Valdes Jimenez <avaldes@gnome.org>, 2007-2011.
-# Rafael MuÒoz C·rdenas <bymenda@gmail.com>, 2008.
+# Rafael Mu√±oz C√°rdenas <bymenda@gmail.com>, 2008.
 # Eloy Cuadra <ecuadra@eloihr.net>, 2003-2013.
-# Javier ViÒal <fjvinal@gmail.com>, 2009-2013.
+# Javier Vi√±al <fjvinal@gmail.com>, 2009-2013.
 # cyphra <cyphra@hal9000.eui.upm.es>, 2004.
-# Javier Mazorra RodrÌguez <mazi.debian@gmail.com>, 2007-2013.
+# Javier Mazorra Rodr√≠guez <mazi.debian@gmail.com>, 2007-2013.
 # Rafael Beccar <rafael.beccar@kdemail.net>, 2004-2006.
 # Felipe Barros S. <felipeb@gnome.cl>, 2007.
 # Chihau Chau <chihau@gmail.com>, 2008-2009.
@@ -140,34 +140,34 @@
 # jeffrey steve borbon sanabria <jeffto@aclibre.org>, 2008.
 # Alex Fiestas <alex@eyeos.org>, 2009.
 # santi <santi@kde-es.org>, 2005-2009.
-# AndrÈs GÛmez <agomez@igalia.com>, 2009.
+# Andr√©s G√≥mez <agomez@igalia.com>, 2009.
 # Enrique Rodriguez <krm@futurnet.es>, 2003.
-# Alejandro S·chez Acosta <asanchez@gnu.org>, 2002.
+# Alejandro S√°chez Acosta <asanchez@gnu.org>, 2002.
 # Kramer Garay <kramergaray@hotmail.com>, 2010.
 # Copyright (C) 2003 Eric Bischoff <e.bischoff@noos.fr>.
 # sito <soler.sito@gmail.com>, 2008.
-# Adri·n MartÌnez <sfxgt3@gmail.com>, 2009-2010.
+# Adri√°n Mart√≠nez <sfxgt3@gmail.com>, 2009-2010.
 # Miguel de Icaza <miguel@metropolis.nuclecu.unam.mx>, 1998.
 # Antonio Ognio <gnrfan@gnrfan.org>, 2003-2006.
-# HÈctor EnrÌquez DÌaz <henrique@alumnos.ubiobio.cl>, 2005.
+# H√©ctor Enr√≠quez D√≠az <henrique@alumnos.ubiobio.cl>, 2005.
 # Gary Castillo <elhumano@hotmail.com>, 2001.
 # Miguel Angel Nieto <correo@miguelangelnieto.net>, 2005.
 # Marcos Fouces Lago <mfouces@yahoo.es>, 2004.
 # Francisco Vila Doncel <fravd@wanadoo.es>, 2003.
 # Xavier Corredor Llano <xavier.corredor.llano@gmail.com>, 2010-2012.
 # Gabriel Felipe Cornejo Salas <gnomeusr@gmail.com>, 2008.
-# David MartÌnez Moreno <ender@debian.org>, 2005.
-# Jesse AvilÈs <jesseaviles@gmail.com>, 2008-2011.
-# Rafael Berm˙dez <rafaelbermudez@gmail.com>, 2006.
-# BenjamÌn Valero Espinosa <benjavalero@gmail.com>, 2008-2012.
+# David Mart√≠nez Moreno <ender@debian.org>, 2005.
+# Jesse Avil√©s <jesseaviles@gmail.com>, 2008-2011.
+# Rafael Berm√∫dez <rafaelbermudez@gmail.com>, 2006.
+# Benjam√≠n Valero Espinosa <benjavalero@gmail.com>, 2008-2012.
 # Aitor Moreno <aitormoreno@gmail.com>, 2008.
 # Ignacio Casal Quinteiro <icq@cvs.gnome.org>, 2004-2010.
 # Santiago Vila Doncel <sanvila@unex.es>, 2001-2011.
-# Rafael RodrÌguez MartÌn <apt-drink@gulic.org>, 2005.
-# Daniel CalviÒo S·nchez <danxuliu@gmail.com>, 2008-2012.
+# Rafael Rodr√≠guez Mart√≠n <apt-drink@gulic.org>, 2005.
+# Daniel Calvi√±o S√°nchez <danxuliu@gmail.com>, 2008-2012.
 # Alvaro Soliverez <asoliverez@gmail.com>, 2008-2010.
 # Carlos Mayo Hernandez <carlos.mayo@hispalinux.es>, 2007.
-# Nicol·s Satragno <nsatragno@gmail.com>, 2011-2013.
+# Nicol√°s Satragno <nsatragno@gmail.com>, 2011-2013.
 # Jean Pierre MAZUELOS SAAVEDRA <apuyaya@gmail.com>, 2010.
 # Carlos Garnacho <carlosg@gnome.org>, 2007.
 # Vicente Herrera Cobo <vicente.herrera@hispalinux.es>, 2003-2004.
@@ -175,9 +175,9 @@
 # Enrique Matias Sanchez (Quique) <cronopios@gmail.com>, 2004-2010.
 # JulioBorjaBarra <juboba@gmail.com>, 2010.
 # Israel Garcia Garcia <israelgarcia86@gmail.com>, 2007-2011.
-# MarÌa Majadas <alixis82@gmail.com>, 2008-2013.
-# Javier Fern·ndez-Sanguino PeÒa <jfs@computer.org>, 2002.
-# Germ·n Poo-CaamaÒo <gpoo@ubiobio.cl>, 2002-2003.
+# Mar√≠a Majadas <alixis82@gmail.com>, 2008-2013.
+# Javier Fern√°ndez-Sanguino Pe√±a <jfs@computer.org>, 2002.
+# Germ√°n Poo-Caama√±o <gpoo@ubiobio.cl>, 2002-2003.
 # Pablo Pita Leira <pablo.pita@kdemail.net>, 2004-2011.
 # Gabriel Leonardo Ruiz Manzano <debianmaster@gmail.com>, 2008-2009.
 # Juan-Pablo Scaletti <juanpablo@jpscaletti.com>, 2009.
@@ -188,30 +188,30 @@
 # Eduardo Sanchez <kde@sombragris.org>, 2003-2010.
 # Lucas Di Pentima <lucas@lunix.com.ar>, 2001-2002.
 # Ismael Rubio Rojas <ismael_rubio_rojas@hotmail.com>, 2003.
-# Francisco Javier Fern·ndez <serrador@arrakis.es>, 2003.
-# Antonio J. Soler S·nchez <redtony@telefonica.net>, 2004.
+# Francisco Javier Fern√°ndez <serrador@arrakis.es>, 2003.
+# Antonio J. Soler S√°nchez <redtony@telefonica.net>, 2004.
 # Maria Majadas <maria.majadas@hispalinux.es>, 2005-2011.
 # Raul Moratalla <raul.moratalla@ono.com>, 2004.
 # Antonio Crevillen <antonio.crevillen@hispalinux.es>, 2003.
-# Miguel Revilla Rodr√≠guez <yo@miguelrevilla.com>, 2002-2004.
+# Miguel Revilla Rodr√É¬≠guez <yo@miguelrevilla.com>, 2002-2004.
 # Ignacio Poggi <ignaciop.3@gmail.com>, 2008-2012.
 # Copyright (C) 2007 daniel g. siegel <dgsiegel@gnome.org>.
 # By Nicols Lichtmaier <nick@technisys.com.ar>.
 # Mauricio Araya P. <mauricio@eazel.com>, 2001.
 # Francisco Javier Fernandez <serrador@arrakis.es>, 2003.
 # Juan Jesus Ojeda Croissier <juanjesus.ojeda@hispalinux.es>, 2002.
-# JosÈ Antonio Salgueiro A. <joseantsa@eresmas.net>, 2001.
+# Jos√© Antonio Salgueiro A. <joseantsa@eresmas.net>, 2001.
 # Cristina Yenyxe Gonzalez Garcia <the.blue.valkyrie@gmail.com>, 2009-2012.
 # Pedro Jurado Maqueda <pjmelenas@biwemail.com>, 2003-2005.
 # Dominik Neumeister <neudob06@edvhtl.at>, 2009.
 # Luis F. Lopez M. <luis.lopez@ubuntu.com>, 2010.
 # Adolfo Jayme Barrientos <fitoschido@gmail.com>, 2012.
 # Havoc Pennington <hp@pobox.com>, 1999.
-# Tatiana GutiÈrrez Bunster <tgutierr@ubiobio.cl>, 2003.
+# Tatiana Guti√©rrez Bunster <tgutierr@ubiobio.cl>, 2003.
 # Jorge Gonzalez <jorgegonz@svn.gnome.org>, 2005-2007.
 # Andres Herrera <andres@usr.cl>, 2008.
 # sergio rivadero <sergiorivadero@argentina.com>, 2005.
-# Jacobo TarrÌo Barreiro <jtarrio@trasno.net>, 2000-2002.
+# Jacobo Tarr√≠o Barreiro <jtarrio@trasno.net>, 2000-2002.
 # Ferro01 <ferro01@wanadoo.es>, 2011.
 # Alejandro Araiza Alvarado <mebrelith@gmail.com>, 2005-2006.
 # Daniel Garcia <dani@danigm.net>, 2010.
@@ -219,8 +219,8 @@
 # Danilo Vasquez <danilo.vasquez@gmail.com>, 2007-2008.
 # Jaime Robles <jaime@kde.org>, 2003-2009.
 # Rafael Osuna <rosuna@wol.es>, 2003-2004.
-# Ricardo Fern·ndez Pascual <ric@users.sourceforge.net>, 2000-2001.
-# Carlos Ernesto LÛpez NatarÈn <natorro@themis.fciencias.unam.mx>, 2000.
+# Ricardo Fern√°ndez Pascual <ric@users.sourceforge.net>, 2000-2001.
+# Carlos Ernesto L√≥pez Natar√©n <natorro@themis.fciencias.unam.mx>, 2000.
 # Miguel <migueldeblas@gmail.com>, 2010.
 # Miguel Mingo <miguelmingo@terra.es>, 2002.
 # maria <maria.majadas@hispalinux.es>, 2006-2007.
@@ -228,15 +228,15 @@
 # Juan Emilio Drault <juan@drault.com>, 2004.
 # Jorge Carrasquilla Soares <jorge@conectiva.com.br>, 2000.
 # Gerardo Jose Bueno Jimenez <gerardo@abser-t.com>, 2010.
-# Germ·n Poo CaamaÒo, <gpoo@ubiobio.cl>, 2002.
+# Germ√°n Poo Caama√±o, <gpoo@ubiobio.cl>, 2002.
 # Rodrigo Marcos Fombellida <rmarcos@cvs.gnome.org>, 2005-2008.
 # Andrea Mara Pimenta Alonso <pimenta@conectiva.com.br>, 2000.
 # Mikel Olasagasti <hey_neken@mundurat.net>, 2003-2005.
-# MatÌas Costa <mcc3@alu.um.es>, 2004-2007.
-# Jaime Iniesta Alem·n <capitanplaneta@gmail.com>, 2005-2006.
-# Miguel Revilla RodrÌguez <yo@miguelrevilla.com>, 2002-2004.
+# Mat√≠as Costa <mcc3@alu.um.es>, 2004-2007.
+# Jaime Iniesta Alem√°n <capitanplaneta@gmail.com>, 2005-2006.
+# Miguel Revilla Rodr√≠guez <yo@miguelrevilla.com>, 2002-2004.
 # Lorenzo nunez <lorenzo.nunez@gmail.com>, 2007.
-# J. FÈlix OntaÒÛn <fontanon@emergya.es>, 2009.
+# J. F√©lix Onta√±√≥n <fontanon@emergya.es>, 2009.
 # Adrian Soto <adrianmatematico@yahoo.com.mx>, 2003-2004.
 # Paulino Padial <devnull.tst@gmail.com>, 2007.
 # Manue Tortosa <manutortosa@chakra-project.org>, 2011.
@@ -248,23 +248,23 @@
 # Copyright (C) 2004-2005 Johan Svedberg <johan@svedberg.com>.
 # Pablo Gonzalo del Campo <pablodc@bigfoot.com>, 2000-2004.
 # Itxaka Serrano <itxakaserrano@gmail.com>, 2010.
-# Adri·n Chaves Fern·ndez (Gallaecio) <adriyetichaves@gmail.com>, 2010-2013.
+# Adri√°n Chaves Fern√°ndez (Gallaecio) <adriyetichaves@gmail.com>, 2010-2013.
 # Jesse Aviles <jesseaviles@gmail.com>, 2008-2010.
 # Lucas 'Basurero' Vieites <lucas@asixinformatica.com>, 2001-2007.
-# MartÌn Carr <tincarr@gmail.com>, 2005-2008.
+# Mart√≠n Carr <tincarr@gmail.com>, 2005-2008.
 # Mauricio Jose Adonis Carrasco <mike.alfa.2007@gmail.com>, 2008.
-# QA - Germ·n Poo CaamaÒo <gpoo@ubiobio.cl>, 2002.
-# Marco CÈsar Gloria <mgloria@campus.gda.itesm.mx>, 2000.
-# Germ·n Poo CaamaÒo <gpoo@ubiobio.cl>, 2001-2003.
+# QA - Germ√°n Poo Caama√±o <gpoo@ubiobio.cl>, 2002.
+# Marco C√©sar Gloria <mgloria@campus.gda.itesm.mx>, 2000.
+# Germ√°n Poo Caama√±o <gpoo@ubiobio.cl>, 2001-2003.
 # Raul Gonzalez <raulgf83@gmail.com>, 2010-2013.
-# Javier JardÛn <jjardon@gnome.org>, 2002-2010.
+# Javier Jard√≥n <jjardon@gnome.org>, 2002-2010.
 # Gabriel Ruiz <debianmaster@gmail.com>, 2008.
-# Pablo Iranzo GÛmez <Pablo.Iranzo@uv.es>, 2000.
+# Pablo Iranzo G√≥mez <Pablo.Iranzo@uv.es>, 2000.
 # Pablo G. del Campo <pablodc@bigfoot.com>, 2003-2004.
 # Andreu Correa Casablanca <castarco@gmail.com>, 2009.
 # Miguel Perez Ibars <mpi79470@alu.um.es>, 2006.
-# Carlos Mayo Hern·ndez <carlos.mayo@hispalinux.es>, 2003-2005.
-# Juan Manuel GarcÌa Molina <juanma_gm@wanadoo.es>, 2000-2007.
+# Carlos Mayo Hern√°ndez <carlos.mayo@hispalinux.es>, 2003-2005.
+# Juan Manuel Garc√≠a Molina <juanma_gm@wanadoo.es>, 2000-2007.
 # Manuel de Vega Barreiro <barreiro@arrakis.es>, 2000-2002.
 # Luis Lopez <luis@loxi.ca>, 2010-2011.
 # Jordi Jaen Pallares <jordi@suse.de>, 1999-2001.
@@ -288,20 +288,20 @@
 # Jorge Bustos <jorge@gnome.cl>, 2003.
 # Urizev <urizev@gmail.com>, 2007.
 # Federico Mena Quintero,Pregonero <federico@casiopea.quartic.org>, 1998.
-# Ricardo Gonz·lez Castro <rick@jinlabs.com>, 2007.
+# Ricardo Gonz√°lez Castro <rick@jinlabs.com>, 2007.
 # MIguel Angel Quesada Fernandez <kesadalive@gmail.com>, 2008.
-# AndrÈs Herrera <andres@usr.cl>, 2008.
-# Nicol·s Alvarez <nicolas.alvarez@gmail.com>, 2010.
+# Andr√©s Herrera <andres@usr.cl>, 2008.
+# Nicol√°s Alvarez <nicolas.alvarez@gmail.com>, 2010.
 # Javier Vinal <fjvinal@gmail.com>, 2009-2013.
-# miguel rodriguez nuÒez <bokerones.fritos@gmail.com>, 2012-2013.
-# Ayoze Hern·ndez DÌaz <ayoze12@gmail.com>, 2013.
-# Jes˙s Bravo ¡lvarez <suso@trasno.net>, 1999-2004.
-# Ib·n josÈ GarcÌa Castillo <Iban.Garcia@alufis35.uv.es>, 2000.
+# miguel rodriguez nu√±ez <bokerones.fritos@gmail.com>, 2012-2013.
+# Ayoze Hern√°ndez D√≠az <ayoze12@gmail.com>, 2013.
+# Jes√∫s Bravo √Ålvarez <suso@trasno.net>, 1999-2004.
+# Ib√°n jos√© Garc√≠a Castillo <Iban.Garcia@alufis35.uv.es>, 2000.
 # Sergio Rivadero <sergiorivadero@argentina.com>, 2006.
 # Rodrigo Sancho Senosiain <ruy_ikari@bigfoot.com>.
-# Susana Gonz·lez <sgonzalez@igalia.com>, 2007.
-# Javier GÛmez <jgomsi@apolo.umh.es>, 2000.
-# Cristina Yenyxe Gonz·lez GarcÌa <the.blue.valkyrie@gmail.com>, 2009-2013.
+# Susana Gonz√°lez <sgonzalez@igalia.com>, 2007.
+# Javier G√≥mez <jgomsi@apolo.umh.es>, 2000.
+# Cristina Yenyxe Gonz√°lez Garc√≠a <the.blue.valkyrie@gmail.com>, 2009-2013.
 # Rolando Espinoza La Fuente <darkrho@gmail.com>, 2007.
 # Javier Conde Rueda <f3285740@est.fib.upc.es>, 2003.
 # Franco Mariluis <fmariluis@gmail.com>, 2008-2009.
@@ -318,9 +318,9 @@
 # Ricardo Varas Santana <ricardoivaras@gmail.com>, 2009-2013.
 # Israel Campoy <churritzu@yahoo.com>, 2012.
 # Baltasar Perez Diaz <baltasar.perez@hispalinux.es>, 2002.
-# Xan LÛpez <xan@dimensis.com>, 2002.
+# Xan L√≥pez <xan@dimensis.com>, 2002.
 # Tambet Ingo <tambet@novell.com>, 2009.
-# IÒaky PÈrez Gonz·lez <inaky@peloncho.fis.ucm.es>, 1996.
+# I√±aky P√©rez Gonz√°lez <inaky@peloncho.fis.ucm.es>, 1996.
 # Rodrigo Moya <rmoya@chez.com>, 1999.
 # Salvador Gimeno <salgiza@jazzfree.com>, 2001.
 # Enrique Matias Sanchez (aka Quique) <cronopios@gmail.com>, 2003-2012.
@@ -331,11 +331,11 @@
 # Pablo Saratxaga <pablo@walon.org>, 1998-2007.
 # Gustavo D. Vranjes <gvranjes@abaconet.com.ar>, 2002.
 # Aitor Morant <fromhell091@gmail.com>, 2013.
-# JoaquÌn Ignacio AramendÌa <samsagax@gmail.com>, 2011.
+# Joaqu√≠n Ignacio Aramend√≠a <samsagax@gmail.com>, 2011.
 # Sebi Kul <sebikul@gmail.com>, 2011.
 # Pedro Villavicencio Garrido <pvillavi@gnome.org>, 2005.
-# JosÈ MarÌa Pongilioni <ponghy@ono.com>, 2001.
-# Edgardo GarcÌa Hoeffler <edybsd@yahoo.com.ar>, 2002.
+# Jos√© Mar√≠a Pongilioni <ponghy@ono.com>, 2001.
+# Edgardo Garc√≠a Hoeffler <edybsd@yahoo.com.ar>, 2002.
 # Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
 # Pablo del Campo <pablodc@bigfoot.com>, 2003.
 # Ricardo Mones Lastra <mones@users.sourceforge.net>, 2002.
@@ -349,27 +349,27 @@
 # philippe Rouquier <brasero-app@wanadoo.fr>, 2005.
 # <srtxg@chanae.alphanet.ch>, 2001-2011.
 # Dario Andres Rodriguez <andresbajotierra@gmail.com>, 2008-2009.
-# Juan MatÌas Olmos <colonizare@yahoo.com.ar>, 2012.
+# Juan Mat√≠as Olmos <colonizare@yahoo.com.ar>, 2012.
 # Jorge Bernal <koke@amedias.org>, 2004-2006.
 # Juanje Ojeda <jojeda@emergya.es>, 2008.
-# Enrique MatÌas S·nchez (Quique) <cronopios@gmail.com>, 2009.
+# Enrique Mat√≠as S√°nchez (Quique) <cronopios@gmail.com>, 2009.
 # Chema Celorio <chema@celorio.com>, 2000.
-# Ernesto ManrÌquez <alejandronova@gmail.com>, 2011.
+# Ernesto Manr√≠quez <alejandronova@gmail.com>, 2011.
 # Gilberto Miralla <xyhthyx@gmail.com>, 2007-2008.
 # Daniel Campos <dcamposf@gmail.com>, 2009.
-# Ezequiel PÈrez <eazel7@yahoo.com.ar>, 2003.
-# Oscar Cebell·n Ramos <cebaman@bigfoot.com>, 2001.
+# Ezequiel P√©rez <eazel7@yahoo.com.ar>, 2003.
+# Oscar Cebell√°n Ramos <cebaman@bigfoot.com>, 2001.
 # Yelitza Louze <ylouze@redhat.com>, 2003.
 # Mvillarino <mvillarino@dubmail.net>, 2005-2008.
 # Stephen Denham <stephen.denham@gmail.com>, 2007.
 # Miguel Navarrete Hernandez <recados.akka@gmail.com>, 2013.
 # Juanje Ojeda Croissier <jojeda@emergya.es>, 2008-2010.
-# Santiago Fern·ndez Sancho <santi@kde-es.org>, 2007-2010.
-# Jes˙s Espino GarcÌa <jespino@imap.cc>, 2004.
+# Santiago Fern√°ndez Sancho <santi@kde-es.org>, 2007-2010.
+# Jes√∫s Espino Garc√≠a <jespino@imap.cc>, 2004.
 # Alberto Serrano <apserrano@bbvnet.com>, 2001.
 # Israel Garcia <israelgarcia86@gmail.com>, 2007-2008.
 # Omar Campagne <ocampagne@gmail.com>, 2009.
-# Francisco Javier Dorado MartÌnez <javier@tiflolinux.org>, 2007-2011.
+# Francisco Javier Dorado Mart√≠nez <javier@tiflolinux.org>, 2007-2011.
 # First author: Quique <quique@sindominio.net>, 2003.
 # Matias Costa <mcc3@alu.um.es>, 2005.
 # Pablo Saratxga <srtxg@chanae.alphanet.ch>, 1999.
@@ -378,7 +378,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-01 21:35-0600\n"
+"POT-Creation-Date: 2019-01-02 12:27-0600\n"
 "PO-Revision-Date: 2011-10-18 15:26+0200\n"
 "Last-Translator: Santiago Vila Doncel <sanvila@unex.es>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -398,7 +398,7 @@ msgstr "Archivo"
 
 #: ../../xffm/completion/base.hh:34
 msgid "Command history"
-msgstr "Historial de Ûrdenes"
+msgstr "Historial de √≥rdenes"
 
 #. option -u uid "uid" "uid_combo"
 #: ../../xffm/completion/base.hh:37 ../../xffm/find/dialog.hh:199
@@ -417,15 +417,13 @@ msgstr "Host"
 msgid "Found no match"
 msgstr "No se ha encontrado ninguna coincidencia"
 
-#: ../../xffm/completion/base.hh:133
-#, c-format
-msgid "Matches: %d"
-msgstr "Resultado: %d"
+#: ../../xffm/completion/base.hh:133 ../../xffm/completion/base.hh:134
+msgid "Matches"
+msgstr "Coincidencias"
 
-#: ../../xffm/completion/base.hh:134 ../../xffm/completion/bash.hh:160
-#, fuzzy, c-format
-msgid "Too many matches, not all have been retrieved"
-msgstr "Guardar el archivo tras su obtenciÛn"
+#: ../../xffm/completion/base.hh:134
+msgid "Too many files open"
+msgstr "Demasiados archivos abiertos"
 
 #: ../../xffm/completion/base.hh:325 ../../xffm/find/fgr.hh:124
 msgid "Options:"
@@ -433,7 +431,7 @@ msgstr "Opciones:"
 
 #: ../../xffm/completion/bash.hh:133
 msgid "Completion mode:"
-msgstr "Modo de terminaciÛn:"
+msgstr "Modo de terminaci√≥n:"
 
 #: ../../xffm/completion/bash.hh:134
 msgid "command"
@@ -474,11 +472,11 @@ msgstr "Contenido del archivo filtrado como texto plano."
 
 #: ../../xffm/find/fgr.hh:131
 msgid "Verbose output debugging mode."
-msgstr "Modo detallado de depuraciÛn de salida."
+msgstr "Modo detallado de depuraci√≥n de salida."
 
 #: ../../xffm/find/fgr.hh:133
 msgid "Show version information"
-msgstr "Muestra la informaciÛn de la versiÛn"
+msgstr "Muestra la informaci√≥n de la versi√≥n"
 
 #: ../../xffm/find/fgr.hh:135
 msgid "Filter Details"
@@ -491,11 +489,11 @@ msgstr "Permanecer en este sistema de archivos"
 
 #: ../../xffm/find/fgr.hh:140
 msgid "Print..."
-msgstr "Imprimirø"
+msgstr "Imprimir‚Ä¶"
 
 #: ../../xffm/find/fgr.hh:140
 msgid "The unique Process ID that identifies this process."
-msgstr "El Id ˙nico del proceso que identifica este proceso."
+msgstr "El Id √∫nico del proceso que identifica este proceso."
 
 #. / option -D "recursiveH"
 #: ../../xffm/find/fgr.hh:142 ../../xffm/find/dialog.hh:177
@@ -539,7 +537,7 @@ msgstr "Archivos de texto ejecutables"
 
 #: ../../xffm/find/fgr.hh:154
 msgid "The permissions of the file, in octal notation."
-msgstr "Los permisos del archivo, en notaciÛn octal."
+msgstr "Los permisos del archivo, en notaci√≥n octal."
 
 #: ../../xffm/find/fgr.hh:155
 msgid "Type"
@@ -565,7 +563,7 @@ msgstr "Directorio"
 #: ../../xffm/find/fgr.hh:160 ../../xffm/find/signals.hh:12
 #: ../../xffm/common/preview.hh:494
 msgid "Symbolic Link"
-msgstr "Enlace simbÛlico"
+msgstr "Enlace simb√≥lico"
 
 #: ../../xffm/find/fgr.hh:161
 msgid "UNIX Socket"
@@ -623,7 +621,7 @@ msgstr "Horas"
 #: ../../xffm/find/fgr.hh:172 ../../xffm/find/fgr.hh:174
 #: ../../xffm/find/dialog.hh:231
 msgid "Days"
-msgstr "DÌas"
+msgstr "D√≠as"
 
 #: ../../xffm/find/fgr.hh:175
 msgid "Month"
@@ -635,15 +633,15 @@ msgstr "Mes(es)"
 
 #: ../../xffm/find/fgr.hh:180
 msgid "Modification Time :"
-msgstr "Hora de modificaciÛn :"
+msgstr "Hora de modificaci√≥n :"
 
 #: ../../xffm/find/fgr.hh:184
 msgid "Access Time :"
-msgstr "⁄ltimo acceso :"
+msgstr "√öltimo acceso :"
 
 #: ../../xffm/find/fgr.hh:188
 msgid "Creation Time :"
-msgstr "Hora de creaciÛn :"
+msgstr "Hora de creaci√≥n :"
 
 #: ../../xffm/find/fgr.hh:191 ../../xffm/find/fgr.hh:192
 msgid "uid"
@@ -679,7 +677,7 @@ msgstr "CADENA"
 #: ../../xffm/find/fgr.hh:202 ../../xffm/find/fgr.hh:204
 #: ../../xffm/fm/local/popup.hh:563
 msgid "Regular expression"
-msgstr "ExpresiÛn regular"
+msgstr "Expresi√≥n regular"
 
 #: ../../xffm/find/fgr.hh:204
 msgid "Extended"
@@ -687,7 +685,7 @@ msgstr "Extendido"
 
 #: ../../xffm/find/fgr.hh:206
 msgid "Ignore case"
-msgstr "Ignorar capitalizaciÛn"
+msgstr "Ignorar capitalizaci√≥n"
 
 #: ../../xffm/find/fgr.hh:208
 msgid "Text Files"
@@ -699,15 +697,15 @@ msgstr "No hay ninguna coincidencia"
 
 #: ../../xffm/find/fgr.hh:212 ../../xffm/find/dialog.hh:470
 msgid "Line Count"
-msgstr "Cuenta de lÌneas"
+msgstr "Cuenta de l√≠neas"
 
-#: ../../xffm/find/fgr.hh:214 ../../xffm/find/dialog.hh:523
-msgid "Whole words only"
-msgstr "Solo palabras completas"
+#: ../../xffm/find/fgr.hh:214
+msgid "Words"
+msgstr "Palabras"
 
 #: ../../xffm/find/fgr.hh:216
-msgid "Match whole lines only"
-msgstr "Coincidencias sÛlo con lÌneas completas."
+msgid "Lines"
+msgstr "L√≠neas"
 
 #: ../../xffm/find/fgr.hh:368
 #, c-format
@@ -737,7 +735,7 @@ msgstr "Cancelar"
 
 #: ../../xffm/find/signals.hh:293 ../../xffm/find/signals.hh:722
 msgid "No editor for current action."
-msgstr "No hay ning˙n editor para la acciÛn actual."
+msgstr "No hay ning√∫n editor para la acci√≥n actual."
 
 #. / option "upper_limit_spin" (only in gtk dialog_)
 #: ../../xffm/find/signals.hh:351 ../../xffm/find/dialog.hh:183
@@ -746,7 +744,7 @@ msgstr "Resultados"
 
 #: ../../xffm/find/signals.hh:351
 msgid "Upper limit:"
-msgstr "LÌmite superior:"
+msgstr "L√≠mite superior:"
 
 #: ../../xffm/find/signals.hh:353
 msgid "Counting files..."
@@ -756,7 +754,7 @@ msgstr "Contando archivos..."
 #, c-format
 msgid "Found %d match"
 msgid_plural "Found %d matches"
-msgstr[0] "Se encontrÛ %d coincidencia"
+msgstr[0] "Se encontr√≥ %d coincidencia"
 msgstr[1] "Se encontraron %d coincidencias"
 
 #: ../../xffm/find/signals.hh:370
@@ -766,7 +764,7 @@ msgstr "%s Terminado: %s"
 
 #: ../../xffm/find/signals.hh:488 ../../xffm/find/signals.hh:490
 msgid "Searching..."
-msgstr "Buscandoø"
+msgstr "Buscando‚Ä¶"
 
 #. g_object_set_data(G_OBJECT(dialog_), "window", dialog_);
 #: ../../xffm/find/dialog.hh:98 ../../xffm/find/dialog.hh:150
@@ -776,7 +774,7 @@ msgstr "Buscar"
 
 #: ../../xffm/find/dialog.hh:183
 msgid "Upper limit"
-msgstr "LÌmite superior"
+msgstr "L√≠mite superior"
 
 #. option -s +KByte "size_greater", "size_greater_spin"
 #: ../../xffm/find/dialog.hh:188
@@ -790,7 +788,7 @@ msgstr "kBytes"
 #. option -s -KByte "size_smaller", "size_smaller_spin"
 #: ../../xffm/find/dialog.hh:193
 msgid "At Most"
-msgstr "Como m·ximo"
+msgstr "Como m√°ximo"
 
 #: ../../xffm/find/dialog.hh:204
 msgid "Group"
@@ -806,7 +804,7 @@ msgstr "Permisos octales"
 msgid "SUID"
 msgstr "SUID"
 
-#: ../../xffm/find/dialog.hh:213
+#: ../../xffm/find/dialog.hh:213 ../../xffm/fm/local/popup.hh:843
 msgid "Executable"
 msgstr "Ejecutable"
 
@@ -840,7 +838,7 @@ msgstr "Contiene el texto"
 
 #: ../../xffm/find/dialog.hh:437
 msgid "Case Sensitive"
-msgstr "Sensible a capitalizacioøn"
+msgstr "Sensible a capitalizacioÃÅn"
 
 #: ../../xffm/find/dialog.hh:449
 msgid "Extended regexp"
@@ -858,9 +856,13 @@ msgstr "Coincidencia"
 msgid "Anywhere"
 msgstr "En cualquier sitio"
 
+#: ../../xffm/find/dialog.hh:523
+msgid "Whole words only"
+msgstr "Solo palabras completas"
+
 #: ../../xffm/find/dialog.hh:538
 msgid "lines"
-msgstr "lÌneas"
+msgstr "l√≠neas"
 
 #: ../../xffm/find/dialog.hh:594
 msgid "Clear"
@@ -899,16 +901,15 @@ msgid ""
 "^  Match at beginning of string\n"
 "$  Match at end of string \n"
 msgstr ""
-"Reglas b·sicas:\n"
+"Reglas b√°sicas:\n"
 "\n"
-"*  Coincidir· con cualquier car·cter cero o m·s veces.\n"
-"?  Coincidir· con cualquier car·cter ex·ctamente una vez.\n"
-"[] Coincidir· con cualquier car·cter dentro del []\n"
-"^  Coincidir· al comienzo de la cadena\n"
-"$  Coincidir· al final de la cadena\n"
+"*  Coincidir√° con cualquier car√°cter cero o m√°s veces.\n"
+"?  Coincidir√° con cualquier car√°cter ex√°ctamente una vez.\n"
+"[] Coincidir√° con cualquier car√°cter dentro del []\n"
+"^  Coincidir√° al comienzo de la cadena\n"
+"$  Coincidir√° al final de la cadena\n"
 
 #: ../../xffm/find/dialog.hh:1115
-#, fuzzy
 msgid ""
 "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ ( ) : \n"
 "In  basic regular expressions the metacharacters ?, +, {, |, (, and ) \n"
@@ -944,36 +945,36 @@ msgid ""
 msgstr ""
 "Los caracteres reservados para expresiones regulares extendidas son\n"
 ". ^ $ [ ] ? * + { } | \\ ( ) : \n"
-"En expresiones regulares b·sicas los metacaracteres\n"
+"En expresiones regulares b√°sicas los metacaracteres\n"
 "?, +, {, |, (, y ) pierden su significado especial.\n"
 "\n"
-"El punto  .  se asocia a cualquier car·cter.\n"
-"El acento circunflejo ^ busca coincidencias al principio de la lÌnea.\n"
-"El dÛlar $ busca coincidencias al final de la lÌnea.\n"
+"El punto  .  se asocia a cualquier car√°cter.\n"
+"El acento circunflejo ^ busca coincidencias al principio de la l√≠nea.\n"
+"El d√≥lar $ busca coincidencias al final de la l√≠nea.\n"
 "\n"
-"Caracteres dentro de [ ] coinciden con cualquier car·cter en la lista.\n"
-"Caracteres dentro de [^ ] coinciden con cualquier car·cter *no* en la "
+"Caracteres dentro de [ ] coinciden con cualquier car√°cter en la lista.\n"
+"Caracteres dentro de [^ ] coinciden con cualquier car√°cter *no* en la "
 "lista.\n"
-"Caracteres dentro de [ - ] coinciden con un rango de caracteres (pe [0-9] Û "
+"Caracteres dentro de [ - ] coinciden con un rango de caracteres (pe [0-9] √≥ "
 "[a-z]).\n"
 "\n"
-"Una expresiÛn regular puede ser seguida por uno o varios operadores de "
-"repeticiÛn\n"
-"?      El elemento anterior es opcional y coincidir· como m·ximo una vez.\n"
-"*      El elemento anterior coincidir· cero o m·s veces.\n"
-"+      El elemento anterior coincidir· una o m·s veces.\n"
-"{n}    El elemento anterior coincidir· exactamente n veces.\n"
-"{n,}   El elemento anterior coincidir· n o m·s veces.\n"
-"{n,m}  El elemento anterior coincidir· al menos n veces, pero no m·s de m "
+"Una expresi√≥n regular puede ser seguida por uno o varios operadores de "
+"repetici√≥n\n"
+"?      El elemento anterior es opcional y coincidir√° como m√°ximo una vez.\n"
+"*      El elemento anterior coincidir√° cero o m√°s veces.\n"
+"+      El elemento anterior coincidir√° una o m√°s veces.\n"
+"{n}    El elemento anterior coincidir√° exactamente n veces.\n"
+"{n,}   El elemento anterior coincidir√° n o m√°s veces.\n"
+"{n,m}  El elemento anterior coincidir√° al menos n veces, pero no m√°s de m "
 "veces\n"
 " \n"
-"Para buscar coincidencia con cualquier car·cter reservado, precÈdalo con "
+"Para buscar coincidencia con cualquier car√°cter reservado, prec√©dalo con "
 "\\. \n"
 "\n"
-"Dos expresiones regulares se pueden unir con el operador | (o lÛgico).\n"
+"Dos expresiones regulares se pueden unir con el operador | (o l√≥gico).\n"
 "Dos expresiones regulares se pueden concatenar.\n"
 "\n"
-"M·s inform·ciÛn disponible con \"man grep\" en la lÌnea de Ûrdenes.\n"
+"M√°s inform√°ci√≥n disponible con \"man grep\" en la l√≠nea de √≥rdenes.\n"
 
 #: ../../xffm/response/entryfileresponse.hh:20
 msgid "Open"
@@ -997,7 +998,7 @@ msgstr "Elementos:"
 
 #: ../../xffm/response/passwdresponse.hh:21
 msgid "Enter password"
-msgstr "Introduzca la contraseÒa"
+msgstr "Introduzca la contrase√±a"
 
 #. gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
 #: ../../xffm/response/passwdresponse.hh:125
@@ -1026,11 +1027,11 @@ msgstr "Permiso denegado"
 
 #: ../../xffm/response/passwdresponse.hh:358
 msgid "Try to approach a problem from different angles."
-msgstr "Intenta enfocar los problemas desde ·ngulos diferentes."
+msgstr "Intenta enfocar los problemas desde √°ngulos diferentes."
 
 #: ../../xffm/response/passwdresponse.hh:359
 msgid "Do you want to retry?"
-msgstr "øDesea volver a intentarlo?"
+msgstr "¬øDesea volver a intentarlo?"
 
 #: ../../xffm/response/passwdresponse.hh:360
 msgid "Alternate:"
@@ -1055,7 +1056,7 @@ msgstr "Blowfish"
 
 #: ../../xffm/response/passwdresponse.hh:468
 msgid "Encryption Key Approval"
-msgstr "AprobaciÛn de la clave de cifrado"
+msgstr "Aprobaci√≥n de la clave de cifrado"
 
 #: ../../xffm/response/passwdresponse.hh:502
 msgid "-o     print output to standard out. Implies -r."
@@ -1079,11 +1080,11 @@ msgstr "Confirmar:"
 
 #: ../../xffm/response/passwdresponse.hh:542
 msgid "Sorry, passwords do not match"
-msgstr "Las contraseÒas no coinciden"
+msgstr "Las contrase√±as no coinciden"
 
 #: ../../xffm/response/passwdresponse.hh:550
 msgid "Minimum length:"
-msgstr "Longitud mÌnima:"
+msgstr "Longitud m√≠nima:"
 
 #: ../../xffm/response/timeoutresponse.hh:56
 msgid "Dismiss"
@@ -1091,14 +1092,14 @@ msgstr "Descartar"
 
 #: ../../xffm/response/commandresponse.hh:23
 msgid "Running"
-msgstr "Ejecut·ndose"
+msgstr "Ejecut√°ndose"
 
 #. auto text = g_strdup_printf("%s (pid: %d)",
 #. _("Waiting for operation to finish..."),
 #. Tubo<Type>::getChild (pid));
 #: ../../xffm/response/commandresponse.hh:28
 msgid "Waiting for operation to finish..."
-msgstr "Esperando a que finalice la operaciÛn..."
+msgstr "Esperando a que finalice la operaci√≥n..."
 
 #: ../../xffm/fm/local/icons.hh:257
 msgid "Documents"
@@ -1110,11 +1111,11 @@ msgstr "Descargas"
 
 #: ../../xffm/fm/local/icons.hh:257
 msgid "Music"
-msgstr "M˙sica"
+msgstr "M√∫sica"
 
 #: ../../xffm/fm/local/icons.hh:257
 msgid "Pictures"
-msgstr "Imaøgenes"
+msgstr "ImaÃÅgenes"
 
 #: ../../xffm/fm/local/icons.hh:258
 msgid "Templates"
@@ -1122,7 +1123,7 @@ msgstr "Plantillas"
 
 #: ../../xffm/fm/local/icons.hh:258
 msgid "Videos"
-msgstr "VÌdeos"
+msgstr "V√≠deos"
 
 #: ../../xffm/fm/local/icons.hh:258
 msgid "Desktop"
@@ -1174,7 +1175,7 @@ msgstr "Seleccionar todo"
 
 #: ../../xffm/fm/local/popup.hh:74 ../../xffm/fm/local/popup.hh:559
 msgid "Match regular expression"
-msgstr "Satisfacer expresiÛn regular"
+msgstr "Satisfacer expresi√≥n regular"
 
 #: ../../xffm/fm/local/popup.hh:75 ../../xffm/fm/root/view.hh:58
 #: ../../xffm/fm/fstab/popup.hh:21
@@ -1230,7 +1231,7 @@ msgstr "Desmontar el volumen asociado con esta carpeta"
 
 #: ../../xffm/fm/local/popup.hh:100 ../../xffm/common/gtk.hh:67
 msgid "Add bookmark"
-msgstr "AÒadir marcador"
+msgstr "A√±adir marcador"
 
 #: ../../xffm/fm/local/popup.hh:101 ../../xffm/fm/root/view.hh:74
 #: ../../xffm/common/gtk.hh:68
@@ -1259,7 +1260,7 @@ msgstr "Archivos:"
 
 #: ../../xffm/fm/local/popup.hh:417 ../../xffm/fm/local/rm.hh:61
 msgid "Multiple selections"
-msgstr "SelecciÛn m˙ltiple"
+msgstr "Selecci√≥n m√∫ltiple"
 
 #: ../../xffm/fm/local/popup.hh:557
 msgid "Select items"
@@ -1267,11 +1268,11 @@ msgstr "Seleccionar elementos"
 
 #: ../../xffm/fm/local/popup.hh:575
 msgid "Regular Expression syntax is incorrect"
-msgstr "La sintaxis de la expresiÛn regular es incorrecta"
+msgstr "La sintaxis de la expresi√≥n regular es incorrecta"
 
 #: ../../xffm/fm/local/popup.hh:592
-msgid "Nothing selected"
-msgstr "Nada seleccionado"
+msgid "No selection"
+msgstr "No hay selecci√≥n"
 
 #: ../../xffm/fm/local/popup.hh:592
 msgid "No matches."
@@ -1297,12 +1298,8 @@ msgstr "Sin nombre"
 
 #: ../../xffm/fm/local/popup.hh:828
 #, c-format
-msgid "Another file with the same name already exists in ø%sø."
-msgstr "Ya existe otro archivo con el mismo nombre en ´%sª."
-
-#: ../../xffm/fm/local/popup.hh:843
-msgid "Item is executable by the user"
-msgstr "El usuario puede ejecutar el elemento"
+msgid "Another file with the same name already exists in ‚Äú%s‚Äù."
+msgstr "Ya existe otro archivo con el mismo nombre en ¬´%s¬ª."
 
 #: ../../xffm/fm/local/popup.hh:850 ../../xffm/fm/local/popup.hh:1010
 #: ../../xffm/fm/local/popup.hh:1026 ../../xffm/common/util.hh:1248
@@ -1315,7 +1312,7 @@ msgstr "Argumentos para el comando"
 
 #: ../../xffm/fm/local/popup.hh:1047 ../../xffm/fm/local/view.hh:141
 msgid "Invalid entry"
-msgstr "Entrada no v·lida"
+msgstr "Entrada no v√°lida"
 
 #: ../../xffm/fm/local/properties.hh:235
 msgid "Properties and Attributes"
@@ -1340,11 +1337,7 @@ msgstr "Aplicar cambios"
 
 #: ../../xffm/fm/local/properties.hh:462
 msgid "Successfully moved to trash."
-msgstr "Movido a la papelera con Èxito."
-
-#: ../../xffm/fm/local/properties.hh:462 ../../xffm/fm/local/properties.hh:463
-msgid "service unavailable"
-msgstr "servicio no disponible"
+msgstr "Movido a la papelera con √©xito."
 
 #: ../../xffm/fm/local/properties.hh:463
 msgid "Source:"
@@ -1357,7 +1350,7 @@ msgstr "Eliminar %s"
 
 #: ../../xffm/fm/local/rm.hh:61
 msgid "Warning: "
-msgstr "AtenciÛn: "
+msgstr "Atenci√≥n: "
 
 #. gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
 #. title
@@ -1383,11 +1376,11 @@ msgstr "Archivos: %s"
 
 #: ../../xffm/fm/root/model.hh:78
 msgid "Root Directory"
-msgstr "Directorio raÌz"
+msgstr "Directorio ra√≠z"
 
 #: ../../xffm/fm/root/model.hh:94
 msgid "This is the root of the filesystem"
-msgstr "Esta es la raÌz del sistema de archivos"
+msgstr "Esta es la ra√≠z del sistema de archivos"
 
 #: ../../xffm/fm/root/model.hh:105
 msgid "Home Directory"
@@ -1398,8 +1391,8 @@ msgid "Trash bin"
 msgstr "Papelera"
 
 #: ../../xffm/fm/root/model.hh:162 ../../xffm/fm/fstab/popup.hh:29
-msgid "Mount Helper"
-msgstr "Ayudante de montado"
+msgid "Disk Image Mounter"
+msgstr "Montador de im√°genes de discos"
 
 #: ../../xffm/fm/root/model.hh:169 ../../xffm/fm/root/model.hh:185
 msgid "Mount local disks and devices"
@@ -1412,7 +1405,7 @@ msgstr "Volumen eCryptfs"
 
 #: ../../xffm/fm/root/model.hh:171 ../../xffm/fm/fstab/popup.hh:24
 msgid "SSHFS Remote Synchronization Folder"
-msgstr "Carpeta de sincronizaciÛn remota SSHFS"
+msgstr "Carpeta de sincronizaci√≥n remota SSHFS"
 
 #: ../../xffm/fm/root/model.hh:172 ../../xffm/fm/fstab/popup.hh:23
 #: ../../xffm/fm/fstab/view.hh:377
@@ -1430,11 +1423,11 @@ msgstr "Actualizador de software"
 
 #: ../../xffm/fm/root/model.hh:218 ../../xffm/fm/root/model.hh:230
 msgid "Add or remove software installed on the system"
-msgstr "AÒadir o quitar software instalado en el sistema"
+msgstr "A√±adir o quitar software instalado en el sistema"
 
 #: ../../xffm/fm/root/model.hh:271
-msgid "Go to the location specified by this bookmark"
-msgstr "Ir al lugar especificado por este marcador"
+msgid "Go to bookmarked location"
+msgstr "Ir a una ubicaci√≥n marcada"
 
 #. {N_("Add bookmark"), (void *)BasePopUp<Type>::noop, NULL, NULL},
 #: ../../xffm/fm/root/view.hh:61
@@ -1502,8 +1495,8 @@ msgid "Removed"
 msgstr "Eliminado"
 
 #: ../../xffm/fm/dialog/dialog.hh:132
-msgid "You have just inserted a medium."
-msgstr "Ha introducido un soporte."
+msgid "Detected device(s):"
+msgstr "Dispositivo(s) detectado(s):"
 
 #. Create the widgets
 #: ../../xffm/fm/page/vbuttonbox.hh:37 ../../xffm/common/gtk.hh:332
@@ -1533,7 +1526,7 @@ msgstr "Continuar"
 
 #: ../../xffm/fm/page/runbutton.hh:136
 msgid "Interrupt"
-msgstr "InterrupciÛn"
+msgstr "Interrupci√≥n"
 
 #: ../../xffm/fm/page/runbutton.hh:136
 msgid "Hangup"
@@ -1561,7 +1554,7 @@ msgstr "Matar"
 
 #: ../../xffm/fm/page/runbutton.hh:139
 msgid "Segmentation fault"
-msgstr "Fallo de segmentaciÛn"
+msgstr "Fallo de segmentaci√≥n"
 
 #: ../../xffm/fm/page/runbutton.hh:217
 msgid "PID"
@@ -1576,8 +1569,8 @@ msgid "All items in the iconview."
 msgstr "Todos los elementos de la vista de iconos."
 
 #: ../../xffm/fm/page/hbuttonbox.hh:39
-msgid "Script Recorder"
-msgstr "Script grabador"
+msgid "Scripting"
+msgstr "Scripting"
 
 #: ../../xffm/fm/page/hbuttonbox.hh:40
 msgid "Clear Log"
@@ -1586,7 +1579,7 @@ msgstr "Limpiar registro"
 #. Status textview
 #: ../../xffm/fm/page/hbuttonbox.hh:42
 msgid "Terminal font"
-msgstr "TipografÌa del terminal"
+msgstr "Tipograf√≠a del terminal"
 
 #: ../../xffm/fm/treeview.hh:17
 msgid "Name"
@@ -1594,7 +1587,7 @@ msgstr "Nombre"
 
 #: ../../xffm/fm/treeview.hh:20
 msgid "Size"
-msgstr "TamaÒo"
+msgstr "Tama√±o"
 
 #: ../../xffm/fm/treeview.hh:21
 msgid "Date"
@@ -1609,12 +1602,12 @@ msgid "TYPE"
 msgstr "TIPO"
 
 #: ../../xffm/fm/base/signals.hh:642
-msgid "This directory does not exist."
-msgstr "Esta carpeta no existe."
+msgid "Directory does not exist."
+msgstr "La carpeta no existe."
 
 #: ../../xffm/fm/base/signals.hh:644 ../../xffm/fm/base/signals.hh:646
 msgid "Trash is empty"
-msgstr "La papelera est· vacÌa"
+msgstr "La papelera est√° vac√≠a"
 
 #: ../../xffm/common/settings.hh:27
 msgid "New File:"
@@ -1630,7 +1623,7 @@ msgstr "No se ha podido mover el objeto:"
 
 #: ../../xffm/common/gio.hh:239
 msgid "Create symbolic link"
-msgstr "Crear un enlace simbÛlico"
+msgstr "Crear un enlace simb√≥lico"
 
 #: ../../xffm/common/gio.hh:276
 #, fuzzy, c-format
@@ -1662,7 +1655,7 @@ msgid ""
 "Scriptfile \"%s\" is not executable. Please set the executable-attribute on "
 "that file."
 msgstr ""
-"El guiÛn ´%sª no es ejecutable. Establezca el permiso de ejecuciÛn sobre ese "
+"El gui√≥n ¬´%s¬ª no es ejecutable. Establezca el permiso de ejecuci√≥n sobre ese "
 "archivo."
 
 #: ../../xffm/common/util.hh:1202 ../../xffm/common/util.hh:1237
@@ -1676,14 +1669,14 @@ msgstr "Editor de textos"
 
 #: ../../xffm/common/util.hh:1239 ../../xffm/common/gtk.hh:65
 msgid "Execute Shell Command"
-msgstr "Ejecutar orden del intÈrprete de Ûrdenes"
+msgstr "Ejecutar orden del int√©rprete de √≥rdenes"
 
 #: ../../xffm/common/util.hh:1243
 msgid ""
 "Console: quickly run single commands -- write a command here and press enter."
 msgstr ""
-"Consola: ejecutar con rapidez Ûrdenes sencillas (escriba aquÌ una orden y "
-"pulse ´Introª)."
+"Consola: ejecutar con rapidez √≥rdenes sencillas (escriba aqu√≠ una orden y "
+"pulse ¬´Intro¬ª)."
 
 #: ../../xffm/common/gtk.hh:123
 msgid "New Tab"
@@ -1699,7 +1692,7 @@ msgstr "error"
 
 #: ../../xffm/common/run.hh:348
 msgid "warning"
-msgstr "atenciÛn"
+msgstr "atenci√≥n"
 
 #: ../../xffm/common/mime.hh:101 ../../xffm/common/mime.hh:143
 msgid "No Read Permission"
@@ -1707,9 +1700,10 @@ msgstr "Sin permiso de lectura"
 
 #: ../../xffm/common/preview.hh:593
 msgid "Empty file"
-msgstr "Archivo vacÌo"
+msgstr "Archivo vac√≠o"
 
 #: ../../xffm/common/preview.hh:648
 #, c-format
 msgid "Cannot read from %s"
 msgstr "No se puede leer de %s"
+

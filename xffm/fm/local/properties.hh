@@ -459,8 +459,8 @@ private:
 		if (strchr(trashDate, 'T'))*strchr(trashDate, 'T')=' ';
 		auto trashSource = trashInfo(path, "Path");
 		auto mt = g_strdup_printf("<span size=\"large\" color=\"red\">%s\n<span color=\"blue\">%s</span>\n%s\n<span color=\"blue\">%s</span></span>", 
-		    _("Successfully moved to trash."), trashDate?trashDate:_("service unavailable"),
-		    _("Source:"), trashSource?trashSource:_("service unavailable"));
+		    _("Successfully moved to trash."), trashDate?trashDate:"?",
+		    _("Source:"), trashSource?trashSource:"?");
 		g_free(trashDate);
 		g_free(trashSource);
 		auto *g = g_strconcat(m,"\n", mt, NULL);

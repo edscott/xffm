@@ -36,7 +36,7 @@ public:
 	
         toggleToTerminal_ =  newButton("utilities-terminal-symbolic",_("Embedded Terminal"));
 	toggleToIconview_ = newButton("system-file-manager-symbolic", _("All items in the iconview."));
-	scriptButton_ =  newButton("document-revert-symbolic", _("Script Recorder"));
+	scriptButton_ =  newButton("document-revert-symbolic", _("Scripting"));
 	clearButton_ =  newButton("edit-clear-all", _("Clear Log"));
 	input_ = createStatus(); // Status textview
 	sizeScale_ = newSizeScale(_("Terminal font"));
@@ -76,14 +76,26 @@ public:
 	gtk_widget_show_all(GTK_WIDGET(termButtonBox_));
     }
 
+    static void *
+    setStatusLabel_f(void *data){
+	auto arg = (void **)data;
+	auto label = GTK_LABEL(arg[0]);
+	auto markup = (const gchar *)arg[1];
+        gtk_label_set_markup(label,markup);
+	return NULL;
+    }
+
     void setStatusLabel(const gchar *text){
+	// This function may be called by monitor thread,
+	// so it must be put in context of the gtk thread.
         gchar *gg = NULL;
         if (!text) {
             gg = g_strdup_printf("xffm+-%s", VERSION);
             text=gg;
         }
         gchar *g = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", text);
-        gtk_label_set_markup(statusLabel_,g);
+	void *arg[]={(void *)statusLabel_, (void *)g};
+        Util<Type>::context_function(setStatusLabel_f, (void *)arg);
         g_free(g); 
         g_free(gg);
     }

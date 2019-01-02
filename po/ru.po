@@ -1,0 +1,1627 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:43:26 CDT 2013 ---
+#
+# Mikhail Yakshin <yakshin@online.ru>, 2000-2003.
+# Andrey Sharoyko <rabidvan@mail.ru>, 2009.
+# Amon2501 <Amon2501@home.domonet.ru>, 2004.
+# Grigory Bakunov <bobuk@justos.org>, 2003-2005.
+# Roman Kalashnikov <cargo200@gmail.com>, 2006.
+# Marina Kolyucheva <MarinaKL@tajikngo.org>, 2005-2007.
+# Nikita Putko <ktototam98@inbox.ru>, 2010.
+# Denis Koryavov <dkoryavov@yandex.ru>, 2005-2010.
+# Антон Горбачёв <justoff@hotmail.ru>, 2003.
+# Alexsey Nadtochey <irbis4lan@yandex.com>, 2012.
+# Aleksandr Sokolov <saanchos@gmail.com>, 2008.
+# Tim Losev <weagle@euro.ru>, 2000.
+# Dmitry Koroban <dmitry.koroban@gmail.com>, 2009.
+# Алексей Кабанов <ak099@mail.ru>, 2012.
+# Denis Dementiev <denm@asplinux.ru>, 2001.
+# Julia Dronova <juliette.tux@gmail.com>, 2012-2013.
+# Alex Ziranov <estyler@yandex.ru>, 2004.
+# Николай Ерёмин <doktorkster@gmail.com>, 2009.
+# Alexander Potashev <aspotashev@gmail.com>, 2009-2013.
+# Il'ya Mertsalov <a567765@yandex.ru>, 2008.
+# Omiron <faschist_de@list.ru>, 2005.
+# Anatoly A. Yakushin <jaa@altlinux.ru>, 2003-2004.
+# Alexandre Prokoudine <alexandre.prokoudine@gmail.com>, 2003-2009.
+# Dmitry Kostenko <bis0n@mail.ru>, 2004.
+# Valia V. Vaneeva <fattie@altlinux.ru>, 2004.
+# Sergey Al. Safonov <spoof@spoofa.info>, 2008.
+# Konstantin Tokarev <annulen@yandex.ru>, 2010.
+# Yudin Stanislav <decvar@inbox.ru>, 2003.
+# # Maxim Dziumanenko <dziumanenko@gmail.com>, 2009.
+# Sergey Kvyato <kvantos@plotinka.ru>, 2006.
+# Евгений Лежнин <z_lezhnin@mail2000.ru>, 2010.
+# Denis Pershin <dyp@perchine.com>, 1997-1999.
+# Olga Karpov <karpovolga@hotmail.com>, 2001.
+# Andrei Lebedenko <andrew@rostov.net>, 2000.
+# A. L. Klyutchenya <asoneofus@kde.ru>, 2002-2003.
+# Zabuldon <vortexius@gmail.com>, 2011.
+# Roxana Kolosova <mavka@justos.org>, 2003-2006.
+# Victor <victorr2007@yandex.ru>, 2011.
+# Sergei Vavinov <svv@cmc.msu.ru>, 2003.
+# Калимуллин Артур <kalimullin@gmail.com>, 2006.
+# Valek Filippov <frob@df.ru>, 1999-2009.
+# Victor Vislobokov <corochoone@gmail.com>, 2002-2010.
+# Stanislav Karchebny <berkus@users.sourceforge.net>, 2003.
+# Pavel Fleisher <pavel.fleisher@gmail.com>, 2010.
+# Konstantin Volckov <goldhead@linux.ru.net>, 2000-2001.
+# Шмелёв Артемий Геннадьевич <sgartjom@mail.ru>, 2008.
+# Dmitriy Kodanev <dkodanev@gmail.com>, 2009-2011.
+# ad_user <alexey_z@list.ru>, 2010.
+# Vyacheslav Dikonov <sdiconov@mail.ru>, 2002.
+# Alexander Saprykin <xelfium@gmail.com>, 2009-2010.
+# Denis Russkih <denrus-mail@rambler.ru>, 2008.
+# Leonid Kanter <leon@asplinux.ru>, 2001-2011.
+# Alexey Morozov <morozov@gmail.com>, 2011.
+# Artur Čuvašov <artur@sugardas.lt>, 2009.
+# Konstantin Bogdanov <var1able@var1able.ru>, 2011.
+# Yuri Myasoedov <omerta13@yandex.ru>, 2008-2013.
+# Copyright (C) 2005 Nickolay V. Shmyrev <nshmyrev@yandex.ru>.
+# Kuzachenko Diana <dianadea@rambler.ru>, 2010.
+# Pavlo Bohmat <bohm@ukr.net>, 2003-2004.
+# Const Kaplinsky <const@ce.cctpu.edu.ru>, 1998.
+# Valery Inozemtsev <inozemtsev@gmail.com>, 2009.
+# Wizard580 <wizard580@mail.primorye.ru>, 2004.
+# Maxim A Kulkin <theHaPK@yandex.ru>, 2003-2005.
+# Бурая Ксения <ksu.nyaka@gmail.com>, 2010.
+# Nikita V. Youshchenko <yoush@cs.msu.su>, 2000.
+# delpass <delpass@gmail.com>, 2010.
+# Artur Sibagatullin <ArtSib@mail.ru>, 2009-2010.
+# Yury G. Kudryashov <urkud.urkud@gmail.com>, 2009-2012.
+# Theodore Alexandrov <theodore.alexandrov@pobox.spbu.ru>, 2000.
+# inga barinova <ingabarinova83@gmail.com>, 2012.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2002-2012.
+# Andrey <andrey2004@gmail.com>.
+# Sergey Volozhanin <svo@asplinux.ru>, 2001-2002.
+# Maxim Popov <ravemax@hotbox.ru>, 2006-2009.
+# Pesotsky Denis <denis@kde.ru>, 2008.
+# Alex 'mainframe' Z <alex.mainframe@gmail.com>, 2010.
+# Andrew W. Nosenko <awn@bcs.zp.ua>, 2003.
+# Volosenkov Dmitry <_bil_@mail.ru>, 1999.
+# Sergei Acht <sergei@dgap.mipt.ru>, 2001.
+# Elena <mandrake.lena@yandex.ru>, 2011.
+# Alexander Bokovoy <ab@samba.org>, 2001-2007.
+# Kir Kolyshkin <kir@sacred.ru>, 2003.
+# Buharin Vladimir <vovan2482@mail.ru>, 2010.
+# Pavel Maryanov <acid@jack.kiev.ua>, 2010.
+# Sun G11n <gnome_int_l10n@ireland.sun.com>, 2002-2003.
+# Evgeny Cherkashin <eugeneai@icc.ru>, 2000.
+# Андрей Черепанов <cas@altlinux.ru>, 2008-2009.
+# Aleksey Klimov <aleksey@alfey.net>, 2007.
+# Evgeny Bulgakov <bgav@netvision.net.il>, 1999.
+# Slava Zanko <slavazanko@gmail.com>, 2010.
+# Michael Yakhontov <mvy@asplinux.ru>, 2003-2005.
+# Denis Pesotsky <St.MPA3b@gmail.com>, 2008.
+# Alex Miller <asm@som.kiev.ua>, 2000-2001.
+# Anatol Kamynin <anatol@tiflocomp.ru>, 2008.
+# Rinat Bikov <becase@altlinux.org>, 2011.
+# Max Valianskiy <maxcom@vinchi.ru>, 1998-1999.
+# Valery Kharitonov <kharvd@gmail.com>, 2010-2011.
+# Alexander Telenga <telenga@gmail.com>, 2008.
+# Daniel Abramov <ex@vingrad.ru>, 2008.
+# Alexander Alexandrov <sysalex@chat.ru>, 2002.
+# Oleg Tihonov <ost@tatnipi.ru>, 1999-2007.
+# Edwin Veber <edwin0307@gmail.com>, 2011.
+# Oleksandr Natalenko <pfactum@gmail.com>, 2010-2011.
+# Mikhail Zabaluev <mikhail.zabaluev@gmail.com>, 2004-2011.
+# Dmitry Mastrukov <dmitry@taurussoft.org>, 2001-2004.
+# Alexander Kazancev <kazancas@mandriva.ru>, 2010.
+# Sergey V. Kovylov <serejka@gmail.com>, 2009.
+# Alexander Melentiev <alex239@gmail.com>, 2008-2009.
+# Paul Chavard <polo@tchak.net>, 2005-2009.
+# Vitaly Lopatin <vitls@chat.ru>, 2000.
+# Ruslan Budayev <fokses@pisem.net>, 2002.
+# Zhovner Pavel <zhovner@ukr.net>, 2007.
+# Sergey Fedoseev <fedoseev.sergey@gmail.com>, 2006.
+# Dimitiry Ryazantcev <DJm00n@rambler.ru>, 2004-2005.
+# Dmitry G. Mastrukov <dmitry@taurussoft.org>, 2001-2004.
+# Irina Sikach <i.sence.i@gmail.com>, 2012.
+# Dan Korostelev <dan@ats.energo.ru>, 2004.
+# Urmas <davian818@gmail.com>, 2011.
+# Egor S. Orlov <Egor.Orlov@avalon.ru>, 2003.
+# Vitaly Astaforkin <vgimly+ya@gmail.com>, 2008.
+# Sergey Panov <sipan@mit.edu>, 1999-2000.
+# Олег Баталов <olegbatalov@mail.ru>, 2004.
+# Alexandr Andrushchenko <diesel594@gmail.com>, 2009.
+# Peter Astakhov <astakhovp@mail.ru>, 2004-2005.
+# Nikolay Eremin <n.n.eremin@gmail.com>, 2009.
+# Igor Androsov <blace@mail.ru>, 2002.
+# Vitaly Lipatov <lav@altlinux.ru>, 2002-2005.
+# Artem Vorotnikov <skybon@gmail.com>, 2013.
+# Leonid Morgun <morgunl@gmail.com>, 2007.
+# Nickolay V. Shmyrev <nshmyrev@yandex.ru>, 2004-2009.
+# Eugenia Vlasova <jane.vlasova@gmail.com>, 2009.
+# Andrew Grigorev <andrew@ei-grad.ru>, 2009-2010.
+# Иван Бобров <ibobrik@gmail.com>, 2006.
+# Artem Zolochevskiy <artem.zolochevskiy@gmail.com>, 2012.
+# Dmitri Ovechkin <d_ovechkin@hotmail.com>, 2000-2003.
+# Sidlovsky Yaroslav <zawertun@zelnet.ru>, 2005.
+# Олег Атаманенко <dark.schakal@gmail.com>, 2008.
+# Vlad Vasilev <lortwer@gmail.com>, 2010.
+# Dmitry Shachnev <mitya57@ubuntu.com>, 2012.
+# Andrei Darashenka <home@dream.bas-net.by>, 2002.
+# Roustam Ghizdatov <roustam@2-u.ru>, 2009.
+# Yuriy Penkin <yura.penkin@gmail.com>, 2008.
+# Danil Dotsenko <dd@accentsolution.com>, 2006.
+# Dmitry Ilyin <widgetII@mail.ru>, 2001.
+# Tuchinsky Artem <tuchinsky@gmail.com>, 2006.
+# Nikolay Barbariyskiy <barbanik@fel.cvut.cz>, 2012.
+# Александр Прокудин <alexandre.prokoudine@gmail.com>, 2005-2013.
+# Anatoly Kamynin <anatol@tiflocomp.ru>, 2007.
+# Hussein Abdallah <hussein.abdallah@savoirfairelinux.com>.
+# Alexey Potapov <aspotapov@gmail.ru>, 2008.
+# Andreev Sergei <seajey.serg@gmail.com>, 2010-2011.
+# Yulia <ypoyarko@redhat.com>, 2010.
+# Alexander Sigachov <alexander.sigachov@gmail.com>, 2006-2007.
+# Dmitry K. Korzhevin <uni@infomania.com.ua>, 2006.
+# Ilya Petrov <ilya.muromec@gmail.com>, 2006.
+# Sergey Dulko <bccserg@gmail.com>, 2006.
+# Артём Попов <artfwo@gmail.com>, 2008-2011.
+# Alexander Wolf <alex.v.wolf@gmail.com>, 2010-2013.
+# Gregory Matveev <rivole@hotbox.ru>, 2002.
+# Sergey V Turchin <zerg@altlinux.org>, 2004.
+# der_FeniX <kofenix@gmail.com>, 2010.
+# Chris Leonard <cjl@laptop.org>, 2012.
+# Кирилл Шаховцов <kyrill@iea.ras.ru>, 2006.
+# Dmitry Dzhus <dima@sphinx.net.ru>, 2008.
+# Marina Soboleva <marina_soboleva@inbox.ru>, 2003-2004.
+# Oleg Koptev <koptev.oleg@gmail.com>, 2011.
+# Andrei Dubikovsky <andru@bog.msu.ru>, 2000-2001.
+# Anthony Borisow <r2m@mail.ru>, 2002-2003.
+# Domrachev Alexandr <alexandr.domrachev@gmail.com>, 2009.
+# Hermann Zheboldov <Hermann.Zheboldov@shq.ru>, 2000.
+# Andrey Kiselev <a_kissel@eudoramail.com>, 2002.
+# Alexey Subach <alexey.subach@gmail.com>, 2011.
+# FIRST AUTHOR Domrachev Alexandr <alexnadr.domrachev@gmail.com>, 2009.
+# Dmitriy Tantsur <lord.divius@gmail.com>, 2007.
+# Ivlev Denis <ivlevdenis.ru@gmail.com>, 2012.
+# Max Kuchugura <maksvlad@ya.ru>, 2010.
+# Dmitriy Simbiriatin <slpiv@mail.ru>, 2010.
+# NDZ <01@k.st>, 2002.
+# Alexey Rusakov <ktirf@altlinux.org>, 2006.
+# Vladimir Buharin <vovan2482@mail.ru>, 2010.
+# Максим Кучугура <maksvlad@ya.ru>, 2010.
+# Alexander Lakhin <exclusion@gmail.com>, 2013.
+# Pavel Mihaduk <root@eurostream.info>, 2009.
+# Sotnikov Ilya <faschist_de@list.ru>, 2005.
+# Anthony Ivanoff <a-i@bk.ru>, 2003.
+# Svetlana Kolyada <kolyadas89@gmail.com>, 2012.
+# Lebedev Roman <roman@lebedev.com>, 2008-2009.
+# Dmitry A. Bugay <sam@vhnet.ru>, 2006-2007.
+# Misha Shnurapet <zayzayats@yandex.ru>, 2010.
+# Alexey D. <lq07829icatm@rambler.ru>, 2012-2013.
+# Author@Betawiki: Александр Сигачёв <>.
+# Oleg Batalov <batalov@twiga.kz>, 2003-2004.
+# Copyright (c) 2002-2003  Noah Levitt <nlevitt@users.sourceforge.net>.
+# Pavel Maleev <rolland39@gmail.com>, 2009.
+# Ivan Kashukov <dolphin210@yandex.ru>, 2003-2005.
+# Pavel Dmitriev <Kitchenknif@gmail.com>, 2011.
+# Alexander Ilyashov <ilyashov@megabit.com.ua>, 2007.
+# Andrey S. Cherepanov <sibskull@mail.ru>, 2001-2004.
+# Russian translation (c) 2002 Leon Kanter <leon@asplinux.ru>.
+# Albert R. Valiev <darkstar@altlinux.ru>, 2002-2008.
+# Yuri Chornoivan <yurchor@ukr.net>, 2007-2013.
+# Gregory Mokhin <mok@kde.ru>, 2000-2008.
+# ingabarinova <ingabarinova@gmail.com>, 2012.
+# Sergey V. Udaltsov <svu@users.sourceforge.net>, 2003.
+# Alexander Yakovlev <yshurik@kde.org>, 2001.
+# Vladimir Lomov <irk.translator@gmail.com>, 2010-2011.
+# Leon Kanter <leon@asplinux.ru>, 2002-2005.
+# Marina Zhurakhinskaya <marinaz@redhat.com>, 2009-2010.
+# Olga Popova <olenkapopova777@gmail.com>, 2012.
+# Philip Bocharov <rhfphd@mail.ru>, 2009.
+# Alexandre Rostovtsev <tetromino@gmail.com>, 2007.
+# Sergey Kvayto <kvantos@plotinka.ru>, 2005.
+# Diesel <diesel594@gmail.com>, 2009.
+# Ерёмин Николай <doktorkster@gmail.com>, 2009.
+# Oleg S. Tihonov <ost@tatnipi.ru>, 1998-2007.
+# avp <avp@altlinux.ru>, 2003.
+# Max Vorob'jov <vmax0770@gmail.com>, 2011-2013.
+# Alexei Beresnev <Alexey_Beresnev@net-burg.com>, 2002.
+# Azamat H. Hackimov <azamat.hackimov@gmail.com>, 2010.
+# Kvyato Sergey <kvantos@plotinka.ru>, 2005-2006.
+# serg <trans9006@gmail.com>, 2010.
+# Styopa Semenukha <semenukha@gmail.com>, 2009.
+# stmc <whats_up@tut.by>, 2011.
+# Zarubin Pavel aka Gnome <gnome_bin@mail.ru>, 2004.
+# Radist <radist@list.ru>, 2008-2009.
+# Alexander Dymo <cloudtemple@mskat.net>, 2003-2004.
+# Jesper K. Pedersen <blackie@kde.org>, 2001.
+# Yury Kozlov <moreover-box@bk.ru>, 2010.
+# Ural Mullabaev <ural.mullabaev@rosalab.ru>, 2012.
+# Sasha Shveik <sasha.shveik@gmail.com>, 2008.
+# A.L. Klyutchenya <asoneofus@kde.ru>, 2002-2003.
+# Alexey Balmashnov <a.balmashnov@gmail.com>, 2006.
+# Dmitriy Stepanov <demon370@gmail.com>, 2008.
+# Kate Sheveleva <kate@altlinux.ru>, 2004.
+# Razil Sharafutdinov <razil.ra@gmail.com>, 2009.
+# Диконов Вячеслав (Vyacheslav Dikonov) <sdiconov@mail.ru>, 2002.
+# Boris Pek <tehnick-8@mail.ru>, 2012.
+# Evgeni Lezhnin <z_lezhnin@mail2000.ru>, 2011.
+# Inga Barinova <ingabarinova@gmail.com>, 2012.
+# Stas Solovey <whats_up@tut.by>, 2011-2013.
+# Last-Translator: Alexander Potashev <aspotashev@gmail.com>, 2011.
+# Dmitry A. Ashkadov <dmitry.ashkadov@gmail.com>, 2012.
+# Sergey N. Belinsky <sergey_be@mail.ru>, 2003-2004.
+# Alexander Kirillov <kirillov@math.ias.edu>, 1999.
+# Zumus <zumus@mail.ru>, 2004-2005.
+# Nick Shaforostoff <shafff@ukr.net>, 2000-2012.
+# Oleg Kluchkin <oleg.kluchkin@gmail.com>, 2007.
+# Artur G. Sibagatullin <ArtSib@mail.ru>, 2009-2010.
+# Victor Ibragimov <victor.ibragimov@gmail.com>, 2002-2012.
+# Yuri Efremov <yur.arh@gmail.com>, 2010-2013.
+# Max Vorobuov <vmax0770@gmail.com>, 2011.
+# Александр Гороховский <angel@feht.dgtu.donetsk.ua>, 2007.
+# Evgeniy Spitsyn <admin@exgraphics.info>, 2009.
+# Artem Sereda <overmind88@gmail.com>, 2008-2013.
+# Igor Trush <trush@elcat.kg>, 2000.
+# Dubrovskiy Vyacheslav <dubrsl@altlinux.org>, 2005-2010.
+# Nail Abdrahmanov <nail@gella.com.ru>, 2002.
+# Maxim Tsepkov <azrael.com@gmail.com>, 2008.
+# Mihail Kozlov <kmn@obladm.nso.ru>, 2000.
+# Yuri N. Sedunov <aris@altlinux.ru>, 2003.
+# Andrey Fedoseev <andrey.fedoseev@gmail.com>, 2006-2007.
+# Igor Azarniy <azarniy@usa.net>, 2000.
+# Nikolay Rysev <mad.f3ka@gmail.com>, 2011.
+# Anton Shestakov <engored@ya.ru>, 2008.
+# Maxim Petrov <maximpetov@yahoo.com>, 2011.
+# Andrew w. Nosenko <awn@bcs.zp.ua>, 2003.
+# Maxim Dziumanenko <dziumanenko@gmail.com>, 2002-2010.
+# Dmitry V. Chernyak <dvc@mail.ru>, 2003-2005.
+# Максим Павлов <m.a.pavlov.tver@gmail.com>, 2011.
+# Andrey Cherepanov <skull@kde.ru>, 2000-2012.
+# Anisimov Victor <vicanis@gmail.com>, 2009.
+# Артём Середа <overmind88@gmail.com>, 2008-2013.
+# Denis Perchine <dyp@perchine.com>, 1997-2002.
+# Evgeniy Ivanov <powerfox@kde.ru>, 2007-2008.
+# Nick Shafff <linux@l10n.org.ua>, 2003-2004.
+# Copyright (C) 2007 Robby Stephenson <robby@periapsis.org>.
+# Чуплыгин Сергей <neochapay@gmail.com>, 2007.
+# Pavel Vishnevsky <glukator@gmail.com>, 2009.
+# Артем Назаров Алексеевич <nazarov-1990@bk.ru>, 2011.
+# Andrey Korzinev <fellrond@gmail.com>, 2009.
+# Evgeniy Cherkashin <eugeneai@icc.ru>.
+# Alexander Ovcharenko <sarulezzz@inbox.ru>, 2003.
+# Kalimullin Artur <kalimullin@gmail.com>, 2006.
+# Nickolai Shaforostoff <shafff@ukr.net>, 2004-2011.
+# Yuri Kozlov <yuray@komyakino.ru>, 2008-2013.
+# Юрий Козлов <yuray@komyakino.ru>, 2010-2011.
+# Alexey Serebryakoff <overlapped@gmail.com>, 2009-2010.
+# Aleksey Osipov <aliks-os@yandex.ru>, 2005-2008.
+# Uladzinmir Laryoshyn <vitrin@mail.ru>, 2002.
+# Kostya Pityul <pkk2000@mail.ru>, 2001.
+# Pavel Punegov <pavelpngv@gmail.com>, 2011.
+# Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
+# AVL <avl@l14.ru>, 2003.
+# Copyright (C) Wouter Bolsterlee <wbolster@gnome.org>.
+# Lybannikov Denis <denislv96@gmail.com>, 2011.
+# Valek Filppov <frob@df.ru>, 1999-2006.
+# Alekseev Vladimir <compress@linux-online.ru>, 2004.
+# Sergey V. Mironov <sergo@bk.ru>, 2010-2013.
+# Thomas Niederreiter <tn@xcdroast.org>, 2002-2003.
+# LOR Windowser <lorwindowser@mail.ru>, 2002-2003.
+# Andrei V. Smilianets <smile@aval.kiev.ua>, 2000.
+# Kolmagortsev Pavel <fff@1nsk.ru>, 2008.
+# <srtxg@chanae.alphanet.ch>, 2001-2011.
+# Dmitry Sivachenko <dima@Chg.RU>, 2000.
+# Alexey Fomenko <falex@pisem.net>, 2000.
+# Вячеслав Диконов (Vyacheslav Dikonov) <slava@altlinux.ru>.
+# Birukov Kirill <birk@rdi-kvant.ru>, 2002.
+# Anton Gorbachev <justoff@hotmail.ru>, 2003.
+# Sukharev Eduard <kraplax@mail.ru>, 2008.
+# Sergio Kvantos <kvantos@plotinka.ru>, 2006.
+# Ilya Tsindlekht <ilyat@inter.net.il>, 2002.
+# Alexander Shiyan <shc@users.sourceforge.net>, 2004-2006.
+# Vasiliy Faronov <qvvx@yandex.ru>, 2007-2008.
+# Yuriy Movchan <yure@ukr.net>, 2003.
+# Zhitomirsky Sergey <szh@chat.ru>, 2000.
+# Vitaliy V. Sayfullin <vsayfullin@novell.ru>, 2006.
+# Cyril Mosejewskich <cyruran@mail.ru>, 2010.
+# Ilya Mashkin <sorex@softerra.ru>, 2002.
+# Shaynurov Ildar <shir80@mail.ru>, 2003.
+# Sergey Udaltsov <svu@gnome.org>, 2007.
+# Алекс <davian818@gmail.com>, 2010.
+# Diana Kuzachenko <dianadea@rambler.ru>, 2010.
+# Alexander Orlov <alxorlov@pochta.ru>, 2007.
+# Dimitriy Ryazantcev <DJm00n@mail.ru>, 2007-2009.
+# Sergey Davidoff <shnatsel@gmail.com>, 2010.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-02 12:27-0600\n"
+"PO-Revision-Date: 2012-10-21 11:11+0400\n"
+"Last-Translator: Yuri Kozlov <yuray@komyakino.ru>\n"
+"Language-Team: Russian <gnu@mx.ru>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%s0==1  n%s00!=11 ? 0 : n%s0>=2  n%s0<=4  "
+"(n%s00<10 || n%s00>=20) ? 1 : 2);\n"
+"X-Generator: Lokalize 1.4\n"
+
+#: ../../xffm/completion/base.hh:28
+msgid "Command"
+msgstr "Команда"
+
+#: ../../xffm/completion/base.hh:31
+msgid "File"
+msgstr "Файл"
+
+#: ../../xffm/completion/base.hh:34
+msgid "Command history"
+msgstr "История команд"
+
+#. option -u uid "uid" "uid_combo"
+#: ../../xffm/completion/base.hh:37 ../../xffm/find/dialog.hh:199
+msgid "User"
+msgstr "Пользователь"
+
+#: ../../xffm/completion/base.hh:40
+msgid "Variable"
+msgstr "Переменная"
+
+#: ../../xffm/completion/base.hh:43
+msgid "Host"
+msgstr "Узел"
+
+#: ../../xffm/completion/base.hh:55
+msgid "Found no match"
+msgstr "Совпадений не найдено"
+
+#: ../../xffm/completion/base.hh:133 ../../xffm/completion/base.hh:134
+msgid "Matches"
+msgstr "Совпадения"
+
+#: ../../xffm/completion/base.hh:134
+msgid "Too many files open"
+msgstr "Слишком много открытых файлов"
+
+#: ../../xffm/completion/base.hh:325 ../../xffm/find/fgr.hh:124
+msgid "Options:"
+msgstr "Параметры:"
+
+#: ../../xffm/completion/bash.hh:133
+msgid "Completion mode:"
+msgstr "Автодополнение:"
+
+#: ../../xffm/completion/bash.hh:134
+msgid "command"
+msgstr "Команда"
+
+#: ../../xffm/completion/bash.hh:135
+msgid "file"
+msgstr "файл"
+
+#: ../../xffm/completion/bash.hh:145 ../../xffm/completion/bash.hh:149
+msgid "Options >>"
+msgstr "Параметры >>"
+
+#: ../../xffm/find/fgr.hh:124 ../../xffm/find/dialog.hh:308
+msgid "Path"
+msgstr "Путь"
+
+#: ../../xffm/find/fgr.hh:125
+msgid "Locate documents and folders on this computer by name or content"
+msgstr "Найти документы или папки на компьютере по имени или содержанию"
+
+#: ../../xffm/find/fgr.hh:126 ../../xffm/find/dialog.hh:341
+msgid "Filter:"
+msgstr "Фильтр:"
+
+#: ../../xffm/find/fgr.hh:126
+msgid "Search for files"
+msgstr "Поиск файлов"
+
+#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
+#: ../../xffm/find/fgr.hh:128
+msgid "Contents:"
+msgstr "Содержание:"
+
+#: ../../xffm/find/fgr.hh:128
+msgid "File's contents filtered as plain text."
+msgstr "Содержимое файла в виде простого текста."
+
+#: ../../xffm/find/fgr.hh:131
+msgid "Verbose output debugging mode."
+msgstr "Подробный вывод для отладки."
+
+#: ../../xffm/find/fgr.hh:133
+msgid "Show version information"
+msgstr "Показать информацию о версии программы"
+
+#: ../../xffm/find/fgr.hh:135
+msgid "Filter Details"
+msgstr "Параметры фильтра"
+
+#. / option -a "xdev"
+#: ../../xffm/find/fgr.hh:138 ../../xffm/find/dialog.hh:180
+msgid "Stay on single filesystem"
+msgstr "Оставаться на одной файловой системе"
+
+#: ../../xffm/find/fgr.hh:140
+msgid "Print..."
+msgstr "Печать..."
+
+#: ../../xffm/find/fgr.hh:140
+msgid "The unique Process ID that identifies this process."
+msgstr "Уникальный идентификатор процесса, идентифицирующий этот процесс."
+
+#. / option -D "recursiveH"
+#: ../../xffm/find/fgr.hh:142 ../../xffm/find/dialog.hh:177
+msgid "Find hidden files and directories"
+msgstr "Учитывать скрытые файлы и каталоги"
+
+#: ../../xffm/find/fgr.hh:143
+msgid "Filter"
+msgstr "Фильтр"
+
+#: ../../xffm/find/fgr.hh:144
+msgid ""
+"To display files which pass the filter (stars and regexps will be processed)"
+msgstr ""
+
+#. / option -r "recursive"
+#: ../../xffm/find/fgr.hh:146 ../../xffm/find/dialog.hh:174
+msgid "Recursive"
+msgstr "Рекурсивный"
+
+#: ../../xffm/find/fgr.hh:147 ../../xffm/find/fgr.hh:148
+#: ../../xffm/find/fgr.hh:149 ../../xffm/find/fgr.hh:150
+msgid "KByte"
+msgstr "КиБ"
+
+#: ../../xffm/find/fgr.hh:148
+msgid "is greater than or equal to"
+msgstr "больше или равен"
+
+#: ../../xffm/find/fgr.hh:150
+msgid "is less than or equal to"
+msgstr "меньше или равен"
+
+#: ../../xffm/find/fgr.hh:152
+msgid "Set UID"
+msgstr "Бит SUID"
+
+#: ../../xffm/find/fgr.hh:152
+msgid "Executable Text Files"
+msgstr "Исполняемые текстовые файлы"
+
+#: ../../xffm/find/fgr.hh:154
+msgid "The permissions of the file, in octal notation."
+msgstr "Права на файл в восьмеричной форме."
+
+#: ../../xffm/find/fgr.hh:155
+msgid "Type"
+msgstr "Тип"
+
+#: ../../xffm/find/fgr.hh:157 ../../xffm/find/signals.hh:17
+msgid "Any"
+msgstr "Любой вариант"
+
+#: ../../xffm/find/fgr.hh:157
+msgid "Default type"
+msgstr "Тип по умолчанию"
+
+#: ../../xffm/find/fgr.hh:158 ../../xffm/common/preview.hh:497
+msgid "Regular file"
+msgstr "Обычный файл"
+
+#: ../../xffm/find/fgr.hh:159 ../../xffm/find/signals.hh:11
+#: ../../xffm/fm/local/popup.hh:803 ../../xffm/common/preview.hh:488
+msgid "Directory"
+msgstr "Каталог"
+
+#: ../../xffm/find/fgr.hh:160 ../../xffm/find/signals.hh:12
+#: ../../xffm/common/preview.hh:494
+msgid "Symbolic Link"
+msgstr "Символическая ссылка"
+
+#: ../../xffm/find/fgr.hh:161
+msgid "UNIX Socket"
+msgstr "UNIX сокет"
+
+#: ../../xffm/find/fgr.hh:162 ../../xffm/find/signals.hh:14
+#: ../../xffm/common/preview.hh:482
+msgid "Block device"
+msgstr "Блочное устройство"
+
+#: ../../xffm/find/fgr.hh:163 ../../xffm/find/signals.hh:15
+#: ../../xffm/common/preview.hh:485
+msgid "Character device"
+msgstr "Символьное устройство"
+
+#: ../../xffm/find/fgr.hh:164 ../../xffm/find/signals.hh:16
+#: ../../xffm/common/preview.hh:491
+msgid "FIFO"
+msgstr "FIFO"
+
+#. radio_p freed on destroy event for dialog_.
+#. option -k minutes "last_minutes", "last_minutes_spin"
+#: ../../xffm/find/fgr.hh:166 ../../xffm/find/fgr.hh:168
+#: ../../xffm/find/dialog.hh:221
+msgid "Minutes"
+msgstr "Минуты"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/dialog.hh:270 ../../xffm/find/dialog.hh:370
+#: ../../xffm/fm/treeview.hh:18
+msgid "Details"
+msgstr "Подробности"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/fgr.hh:179 ../../xffm/find/fgr.hh:180
+#: ../../xffm/find/fgr.hh:183 ../../xffm/find/fgr.hh:184
+#: ../../xffm/find/fgr.hh:187 ../../xffm/find/fgr.hh:188
+msgid "TIME"
+msgstr "ВРЕМЯ"
+
+#: ../../xffm/find/fgr.hh:168 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/fgr.hh:174 ../../xffm/find/fgr.hh:177
+msgid "Previous"
+msgstr "Пред."
+
+#. option -h hours "last_hours", "last_hours_spin"
+#: ../../xffm/find/fgr.hh:169 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/dialog.hh:226
+msgid "Hours"
+msgstr "Часы"
+
+#. option -d days "last_days", "last_days_spin"
+#: ../../xffm/find/fgr.hh:172 ../../xffm/find/fgr.hh:174
+#: ../../xffm/find/dialog.hh:231
+msgid "Days"
+msgstr "Дни"
+
+#: ../../xffm/find/fgr.hh:175
+msgid "Month"
+msgstr "Месяц"
+
+#: ../../xffm/find/fgr.hh:177
+msgid "Month(s)"
+msgstr "месяцев"
+
+#: ../../xffm/find/fgr.hh:180
+msgid "Modification Time :"
+msgstr "Изменён :"
+
+#: ../../xffm/find/fgr.hh:184
+msgid "Access Time :"
+msgstr "Время доступа :"
+
+#: ../../xffm/find/fgr.hh:188
+msgid "Creation Time :"
+msgstr "Время создания :"
+
+#: ../../xffm/find/fgr.hh:191 ../../xffm/find/fgr.hh:192
+msgid "uid"
+msgstr "Владелец"
+
+#: ../../xffm/find/fgr.hh:192
+msgid "User:"
+msgstr "Пользователь:"
+
+#: ../../xffm/find/fgr.hh:194 ../../xffm/find/fgr.hh:195
+msgid "gid"
+msgstr "Группа"
+
+#: ../../xffm/find/fgr.hh:195
+msgid "Group:"
+msgstr "Группа:"
+
+#: ../../xffm/find/fgr.hh:198
+msgid ""
+"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+"character that  normally  follows  a file  name"
+msgstr ""
+
+#: ../../xffm/find/fgr.hh:200
+msgid "Content View"
+msgstr "Просмотр содержимого"
+
+#: ../../xffm/find/fgr.hh:201 ../../xffm/find/fgr.hh:202
+#: ../../xffm/find/fgr.hh:203 ../../xffm/find/fgr.hh:204
+msgid "STRING"
+msgstr "СТРОКА"
+
+#: ../../xffm/find/fgr.hh:202 ../../xffm/find/fgr.hh:204
+#: ../../xffm/fm/local/popup.hh:563
+msgid "Regular expression"
+msgstr "Регулярное выражение"
+
+#: ../../xffm/find/fgr.hh:204
+msgid "Extended"
+msgstr "Расширенная"
+
+#: ../../xffm/find/fgr.hh:206
+msgid "Ignore case"
+msgstr "Игнорировать регистр"
+
+#: ../../xffm/find/fgr.hh:208
+msgid "Text Files"
+msgstr "Текстовые файлы"
+
+#: ../../xffm/find/fgr.hh:210 ../../xffm/find/dialog.hh:552
+msgid "No match"
+msgstr "Нет соответствия"
+
+#: ../../xffm/find/fgr.hh:212 ../../xffm/find/dialog.hh:470
+msgid "Line Count"
+msgstr "Количество строк"
+
+#: ../../xffm/find/fgr.hh:214
+msgid "Words"
+msgstr "Слов"
+
+#: ../../xffm/find/fgr.hh:216
+msgid "Lines"
+msgstr "Строки"
+
+#: ../../xffm/find/fgr.hh:368
+#, c-format
+msgid "Usage : %s [OPTIONS]\n"
+msgstr "Использование: %s [опции]\n"
+
+#: ../../xffm/find/signals.hh:10
+msgid "Regular"
+msgstr "Обычный"
+
+#: ../../xffm/find/signals.hh:13 ../../xffm/common/preview.hh:500
+msgid "Socket"
+msgstr "сокет"
+
+#: ../../xffm/find/signals.hh:209
+msgid "Select folder to search in"
+msgstr "Выбрать папку для поиска"
+
+#. button no
+#: ../../xffm/find/signals.hh:265 ../../xffm/find/dialog.hh:584
+#: ../../xffm/response/entryfileresponse.hh:18
+#: ../../xffm/response/entryresponse.hh:305
+#: ../../xffm/response/passwdresponse.hh:558
+#: ../../xffm/fm/local/properties.hh:304 ../../xffm/fm/local/rm.hh:155
+msgid "Cancel"
+msgstr "Отменить"
+
+#: ../../xffm/find/signals.hh:293 ../../xffm/find/signals.hh:722
+msgid "No editor for current action."
+msgstr "Нет редактора для текущего действия."
+
+#. / option "upper_limit_spin" (only in gtk dialog_)
+#: ../../xffm/find/signals.hh:351 ../../xffm/find/dialog.hh:183
+msgid "Results"
+msgstr "Результаты"
+
+#: ../../xffm/find/signals.hh:351
+msgid "Upper limit:"
+msgstr "Верхний предел:"
+
+#: ../../xffm/find/signals.hh:353
+msgid "Counting files..."
+msgstr "Подсчёт файлов..."
+
+#: ../../xffm/find/signals.hh:368
+#, c-format
+msgid "Found %d match"
+msgid_plural "Found %d matches"
+msgstr[0] "Найдено %d совпадение"
+msgstr[1] "Найдено %d совпадения"
+msgstr[2] "Найдено %d совпадений"
+
+#: ../../xffm/find/signals.hh:370
+#, c-format
+msgid "%s Finished : %s"
+msgstr "%s: завершено: %s"
+
+#: ../../xffm/find/signals.hh:488 ../../xffm/find/signals.hh:490
+msgid "Searching..."
+msgstr "Поиск…"
+
+#. g_object_set_data(G_OBJECT(dialog_), "window", dialog_);
+#: ../../xffm/find/dialog.hh:98 ../../xffm/find/dialog.hh:150
+#: ../../xffm/find/dialog.hh:611
+msgid "Find"
+msgstr "Найти"
+
+#: ../../xffm/find/dialog.hh:183
+msgid "Upper limit"
+msgstr "Верхний предел"
+
+#. option -s +KByte "size_greater", "size_greater_spin"
+#: ../../xffm/find/dialog.hh:188
+msgid "At Least"
+msgstr "не менее"
+
+#: ../../xffm/find/dialog.hh:188 ../../xffm/find/dialog.hh:193
+msgid "kBytes"
+msgstr "кбайт"
+
+#. option -s -KByte "size_smaller", "size_smaller_spin"
+#: ../../xffm/find/dialog.hh:193
+msgid "At Most"
+msgstr "не более"
+
+#: ../../xffm/find/dialog.hh:204
+msgid "Group"
+msgstr "Группа"
+
+#. option -o octal "octal_p" "permissions_entry"
+#: ../../xffm/find/dialog.hh:208
+msgid "Octal Permissions"
+msgstr "Восьмеричные права"
+
+#. option -p suid | exe
+#: ../../xffm/find/dialog.hh:213
+msgid "SUID"
+msgstr "SUID"
+
+#: ../../xffm/find/dialog.hh:213 ../../xffm/fm/local/popup.hh:843
+msgid "Executable"
+msgstr "Исполняемый файл"
+
+#. option -m months "last_months", "last_months_spin"
+#: ../../xffm/find/dialog.hh:237
+msgid "Months"
+msgstr "месяцев"
+
+#: ../../xffm/find/dialog.hh:248
+msgid "File type : "
+msgstr "Тип файла : "
+
+#. gtk_widget_show (GTK_WIDGET(right_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(center_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(left_options_vbox));
+#: ../../xffm/find/dialog.hh:262 ../../xffm/find/dialog.hh:602
+#: ../../xffm/fm/page/page.hh:70 ../../xffm/common/gtk.hh:70
+msgid "Close"
+msgstr "Закрыть"
+
+#. gtk_box_pack_start (vbox7a, GTK_WIDGET(advancedBox), TRUE, FALSE, 5);
+#. gtk_widget_show(GTK_WIDGET(advancedBox));
+#. //////////////  grep options.... /////////////////////////
+#: ../../xffm/find/dialog.hh:384
+msgid "Contains"
+msgstr "Содержит"
+
+#: ../../xffm/find/dialog.hh:404
+msgid "Contains the text"
+msgstr "Содержит текст"
+
+#: ../../xffm/find/dialog.hh:437
+msgid "Case Sensitive"
+msgstr "Учитывать регистр"
+
+#: ../../xffm/find/dialog.hh:449
+msgid "Extended regexp"
+msgstr "Расширенные регулярные выражения"
+
+#: ../../xffm/find/dialog.hh:460
+msgid "Include binary files"
+msgstr "Искать в двоичных файлах"
+
+#: ../../xffm/find/dialog.hh:496
+msgid "Match"
+msgstr "Сравнение"
+
+#: ../../xffm/find/dialog.hh:508
+msgid "Anywhere"
+msgstr "Где угодно"
+
+#: ../../xffm/find/dialog.hh:523
+msgid "Whole words only"
+msgstr "Только полные слова"
+
+#: ../../xffm/find/dialog.hh:538
+msgid "lines"
+msgstr "Линии"
+
+#: ../../xffm/find/dialog.hh:594
+msgid "Clear"
+msgstr "Очистить"
+
+#: ../../xffm/find/dialog.hh:636
+msgid "Edit"
+msgstr "Правка"
+
+#: ../../xffm/find/dialog.hh:751 ../../xffm/find/dialog.hh:766
+#: ../../xffm/common/util.hh:1150 ../../xffm/common/util.hh:1152
+#: ../../xffm/common/util.hh:1158 ../../xffm/common/util.hh:1160
+#: ../../xffm/common/preview.hh:479
+msgid "unknown"
+msgstr "неизвестно"
+
+#: ../../xffm/find/dialog.hh:780
+msgid "Modified"
+msgstr "Изменён"
+
+#: ../../xffm/find/dialog.hh:784
+msgid "Created"
+msgstr "Создано"
+
+#: ../../xffm/find/dialog.hh:788
+msgid "Accessed"
+msgstr "Последнее открытие"
+
+#: ../../xffm/find/dialog.hh:1106
+msgid ""
+"Basic rules:\n"
+"\n"
+"*  Will match any character zero or more times.\n"
+"?  Will match any character exactly one time\n"
+"[] Match any character within the [] \n"
+"^  Match at beginning of string\n"
+"$  Match at end of string \n"
+msgstr ""
+
+#: ../../xffm/find/dialog.hh:1115
+msgid ""
+"Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"In  basic regular expressions the metacharacters ?, +, {, |, (, and ) \n"
+"  lose their special meaning.\n"
+"\n"
+"The  period . matches  any  single  character.\n"
+"The caret ^ matches at the start of line.\n"
+"The dollar $ matches at the end of line.\n"
+"\n"
+"Characters within [ ] matches any single character in the list.\n"
+"Characters within [^ ] matches any single character *not* in the list.\n"
+"Characters inside [ - ] matches a range of characters (ie [0-9] or [a-z]).\n"
+"\n"
+"A regular expression may be followed by one of several repetition "
+"operators:\n"
+"?      The preceding item is optional and matched\n"
+"       at most once.\n"
+"*      The preceding item will be matched zero\n"
+"       or more times.\n"
+"+      The preceding item will be matched one or\n"
+"       more times.\n"
+"{n}    The preceding item is matched exactly n times.\n"
+"{n,}   The preceding item is matched n or more times.\n"
+"{n,m}  The preceding item is matched at least n times,\n"
+"       but not more than m times.\n"
+"\n"
+"To match any reserved character, precede it with \\. \n"
+"\n"
+"Two regular expressions may be joined by the logical or operator |.\n"
+"Two regular expressions may be concatenated.\n"
+"\n"
+"More information is available by typing \"man grep\"\n"
+msgstr ""
+
+#: ../../xffm/response/entryfileresponse.hh:20
+msgid "Open"
+msgstr "Открыть"
+
+#: ../../xffm/response/entryresponse.hh:29
+#: ../../xffm/response/entryfolderresponse.hh:28
+msgid "Choose directory"
+msgstr "Выбрать каталог"
+
+#. this button is redundant since hands are on keyboard for password
+#: ../../xffm/response/entryresponse.hh:309
+#: ../../xffm/response/passwdresponse.hh:189
+#: ../../xffm/response/passwdresponse.hh:559
+msgid "Ok"
+msgstr "ОК"
+
+#: ../../xffm/response/commandprogressresponse.hh:32
+msgid "Items:"
+msgstr "Элементы:"
+
+#: ../../xffm/response/passwdresponse.hh:21
+msgid "Enter password"
+msgstr "Введите пароль"
+
+#. gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+#: ../../xffm/response/passwdresponse.hh:125
+msgid "User Input"
+msgstr "Поле ввода пользователя"
+
+#: ../../xffm/response/passwdresponse.hh:142
+msgid "Response Requested"
+msgstr "Запрошен ответ"
+
+#: ../../xffm/response/passwdresponse.hh:264
+msgid "Preparing"
+msgstr "Подготовка"
+
+#: ../../xffm/response/passwdresponse.hh:352
+msgid "sudo"
+msgstr "sudo"
+
+#: ../../xffm/response/passwdresponse.hh:354
+msgid "Command:"
+msgstr "Команда:"
+
+#: ../../xffm/response/passwdresponse.hh:357
+msgid "Permission denied"
+msgstr "Отказано в доступе"
+
+#: ../../xffm/response/passwdresponse.hh:358
+msgid "Try to approach a problem from different angles."
+msgstr "Попробуйте подойти к проблеме с разных сторон."
+
+#: ../../xffm/response/passwdresponse.hh:359
+msgid "Do you want to retry?"
+msgstr "Повторить попытку?"
+
+#: ../../xffm/response/passwdresponse.hh:360
+msgid "Alternate:"
+msgstr "Чередование:"
+
+#: ../../xffm/response/passwdresponse.hh:365
+msgid "No"
+msgstr "Нет"
+
+#: ../../xffm/response/passwdresponse.hh:401
+msgid "Install"
+msgstr "Установить"
+
+#: ../../xffm/response/passwdresponse.hh:402
+#, c-format
+msgid "%s does not exist."
+msgstr "%s не существует."
+
+#: ../../xffm/response/passwdresponse.hh:467
+msgid "Blowfish"
+msgstr "Blowfish"
+
+#: ../../xffm/response/passwdresponse.hh:468
+msgid "Encryption Key Approval"
+msgstr "Одобрение ключа шифрования"
+
+#: ../../xffm/response/passwdresponse.hh:502
+msgid "-o     print output to standard out. Implies -r."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:506
+msgid "-c     DO NOT compress files before encryption."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:510
+msgid "-r     DO NOT remove input files after processing"
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:517
+msgid "Encryption key: "
+msgstr "Ключ шифрования: "
+
+#: ../../xffm/response/passwdresponse.hh:529
+msgid "Confirm:"
+msgstr "Подтвердить:"
+
+#: ../../xffm/response/passwdresponse.hh:542
+msgid "Sorry, passwords do not match"
+msgstr "Пароли не совпадают"
+
+#: ../../xffm/response/passwdresponse.hh:550
+msgid "Minimum length:"
+msgstr "Минимальная длина:"
+
+#: ../../xffm/response/timeoutresponse.hh:56
+msgid "Dismiss"
+msgstr "Отменить"
+
+#: ../../xffm/response/commandresponse.hh:23
+msgid "Running"
+msgstr "Выполнение задания"
+
+#. auto text = g_strdup_printf("%s (pid: %d)",
+#. _("Waiting for operation to finish..."),
+#. Tubo<Type>::getChild (pid));
+#: ../../xffm/response/commandresponse.hh:28
+msgid "Waiting for operation to finish..."
+msgstr "Ожидание окончания операции..."
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Documents"
+msgstr "Документы"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Downloads"
+msgstr "Загрузки"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Music"
+msgstr "Музыка"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Pictures"
+msgstr "Изображения"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Templates"
+msgstr "Шаблоны"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Videos"
+msgstr "Видео"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Desktop"
+msgstr "Рабочий стол"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Bookmarks"
+msgstr "Закладки"
+
+#: ../../xffm/fm/local/icons.hh:259 ../../xffm/fm/local/rm.hh:181
+msgid "Trash"
+msgstr "Корзина"
+
+#: ../../xffm/fm/local/popup.hh:60
+msgid "New"
+msgstr "Создать"
+
+#. deprecated {N_("Open in New Tab"), NULL, NULL, NULL},
+#. deprecated {N_("Open in New Window"), NULL, NULL, NULL},
+#. common buttons /(also an iconsize +/- button)
+#: ../../xffm/fm/local/popup.hh:64 ../../xffm/fm/local/popup.hh:104
+#: ../../xffm/common/gtk.hh:74
+msgid "Copy"
+msgstr "Копировать"
+
+#: ../../xffm/fm/local/popup.hh:65 ../../xffm/fm/local/popup.hh:105
+#: ../../xffm/common/gtk.hh:73
+msgid "Cut"
+msgstr "Вырезать"
+
+#: ../../xffm/fm/local/popup.hh:66 ../../xffm/fm/local/popup.hh:106
+#: ../../xffm/common/gtk.hh:66
+msgid "Paste"
+msgstr "Вставить"
+
+#. **************
+#: ../../xffm/fm/local/popup.hh:67 ../../xffm/fm/local/popup.hh:107
+#: ../../xffm/fm/local/rm.hh:174 ../../xffm/common/gtk.hh:75
+msgid "Delete"
+msgstr "Удалить"
+
+#. {N_("About"), NULL, (void *) menu},
+#.
+#. only for listview: {N_("Sort by size"), NULL, (void *) menu},
+#. only for listview: {N_("Sort by date"), NULL, (void *) menu},
+#: ../../xffm/fm/local/popup.hh:73
+msgid "Select All"
+msgstr "Выделить всё"
+
+#: ../../xffm/fm/local/popup.hh:74 ../../xffm/fm/local/popup.hh:559
+msgid "Match regular expression"
+msgstr "Регулярное выражение"
+
+#: ../../xffm/fm/local/popup.hh:75 ../../xffm/fm/root/view.hh:58
+#: ../../xffm/fm/fstab/popup.hh:21
+msgid "View as list"
+msgstr "Просмотр в виде списка"
+
+#: ../../xffm/fm/local/popup.hh:77
+msgid "Show hidden files"
+msgstr "Показывать скрытые файлы"
+
+#: ../../xffm/fm/local/popup.hh:79
+msgid "Show Backup Files"
+msgstr "Показать резервные файлы"
+
+#: ../../xffm/fm/local/popup.hh:81
+msgid "Sort data in descending order"
+msgstr "Упорядочить данные по убыванию"
+
+#: ../../xffm/fm/local/popup.hh:93 ../../xffm/fm/local/popup.hh:119
+#: ../../xffm/fm/local/popup.hh:1006 ../../xffm/fm/local/popup.hh:1013
+#: ../../xffm/fm/local/popup.hh:1022 ../../xffm/fm/local/popup.hh:1029
+#: ../../xffm/common/gtk.hh:72
+msgid "Open with"
+msgstr "Открыть с помощью"
+
+#: ../../xffm/fm/local/popup.hh:94 ../../xffm/fm/local/popup.hh:846
+msgid "Run Executable..."
+msgstr "Запустить исполняемый файл…"
+
+#: ../../xffm/fm/local/popup.hh:95
+msgid "Extract files from the archive"
+msgstr "Распаковать файлы из архива"
+
+#. g_hash_table_insert(iconname_hash, "bcrypt", (void *)"emblem-keyhole");
+#: ../../xffm/fm/local/popup.hh:96 ../../xffm/fm/root/view.hh:73
+#: ../../xffm/fm/fstab/popup.hh:20 ../../xffm/fm/dialog/notebook.hh:52
+#: ../../xffm/common/gtk.hh:78
+msgid "Open in New Tab"
+msgstr "Открыть в новой вкладке"
+
+#. File chooser
+#: ../../xffm/fm/local/popup.hh:97 ../../xffm/fm/local/popup.hh:706
+msgid "Create a compressed archive with the selected objects"
+msgstr "Создать сжатый архив с выделенными объектами"
+
+#: ../../xffm/fm/local/popup.hh:98 ../../xffm/fm/fstab/popup.hh:37
+msgid "Mount the volume associated with this folder"
+msgstr "Присоединить том, связанный с открытой папкой"
+
+#: ../../xffm/fm/local/popup.hh:99 ../../xffm/fm/fstab/popup.hh:38
+msgid "Unmount the volume associated with this folder"
+msgstr "Отсоединить том, связанный с открытой папкой"
+
+#: ../../xffm/fm/local/popup.hh:100 ../../xffm/common/gtk.hh:67
+msgid "Add bookmark"
+msgstr "Добавить закладку"
+
+#: ../../xffm/fm/local/popup.hh:101 ../../xffm/fm/root/view.hh:74
+#: ../../xffm/common/gtk.hh:68
+msgid "Remove bookmark"
+msgstr "Удалить закладку"
+
+#: ../../xffm/fm/local/popup.hh:108 ../../xffm/fm/local/popup.hh:961
+msgid "Rename"
+msgstr "Переименовать"
+
+#: ../../xffm/fm/local/popup.hh:109 ../../xffm/fm/local/popup.hh:947
+msgid "Duplicate"
+msgstr "Продублировать"
+
+#: ../../xffm/fm/local/popup.hh:110 ../../xffm/fm/local/popup.hh:933
+msgid "Link"
+msgstr "Связь"
+
+#: ../../xffm/fm/local/popup.hh:111
+msgid "Properties"
+msgstr "Свойства"
+
+#: ../../xffm/fm/local/popup.hh:414
+msgid "Files:"
+msgstr "Файлы:"
+
+#: ../../xffm/fm/local/popup.hh:417 ../../xffm/fm/local/rm.hh:61
+msgid "Multiple selections"
+msgstr "Выбор нескольких элементов"
+
+#: ../../xffm/fm/local/popup.hh:557
+msgid "Select items"
+msgstr "Выделить элементы"
+
+#: ../../xffm/fm/local/popup.hh:575
+msgid "Regular Expression syntax is incorrect"
+msgstr "Неверный синтаксис регулярного выражения"
+
+#: ../../xffm/fm/local/popup.hh:592
+msgid "No selection"
+msgstr "Ничего не выбрано"
+
+#: ../../xffm/fm/local/popup.hh:592
+msgid "No matches."
+msgstr "Совпадений нет."
+
+#. entryResponse->setCheckButton(_("Run in Terminal"));
+#. entryResponse->setCheckButton(Mime<Type>::runInTerminal(path));
+#: ../../xffm/fm/local/popup.hh:721 ../../xffm/fm/page/pathbar.hh:313
+msgid "Specify Output Directory..."
+msgstr "Укажите каталог вывода..."
+
+#: ../../xffm/fm/local/popup.hh:799
+msgid "Create new..."
+msgstr "Создать новый..."
+
+#: ../../xffm/fm/local/popup.hh:806 ../../xffm/fm/local/popup.hh:886
+msgid "New Name:"
+msgstr "Новое название:"
+
+#: ../../xffm/fm/local/popup.hh:815
+msgid "No name"
+msgstr "Без названия"
+
+#: ../../xffm/fm/local/popup.hh:828
+#, c-format
+msgid "Another file with the same name already exists in “%s”."
+msgstr "Другой файл с таким именем уже существует в «%s»."
+
+#: ../../xffm/fm/local/popup.hh:850 ../../xffm/fm/local/popup.hh:1010
+#: ../../xffm/fm/local/popup.hh:1026 ../../xffm/common/util.hh:1248
+msgid "Run in Terminal"
+msgstr "Запустить в терминале"
+
+#: ../../xffm/fm/local/popup.hh:853
+msgid "Arguments for the Command"
+msgstr "Аргументы команды"
+
+#: ../../xffm/fm/local/popup.hh:1047 ../../xffm/fm/local/view.hh:141
+msgid "Invalid entry"
+msgstr "Некорректный элемент"
+
+#: ../../xffm/fm/local/properties.hh:235
+msgid "Properties and Attributes"
+msgstr "Параметры и атрибуты"
+
+#: ../../xffm/fm/local/properties.hh:264
+msgid "File Mode:"
+msgstr "Режим файла:"
+
+#: ../../xffm/fm/local/properties.hh:290
+msgid "File:"
+msgstr "Файл:"
+
+#. Add file info stuff
+#. set info stuff data according to combo box
+#. add signal handler to changed signal for combo box
+#. Add process buttons
+#.
+#: ../../xffm/fm/local/properties.hh:302
+msgid "Apply changes"
+msgstr "Применить изменения"
+
+#: ../../xffm/fm/local/properties.hh:462
+msgid "Successfully moved to trash."
+msgstr "Успешно удалено в корзину."
+
+#: ../../xffm/fm/local/properties.hh:463
+msgid "Source:"
+msgstr "Источник:"
+
+#: ../../xffm/fm/local/rm.hh:59
+#, c-format
+msgid "Delete %s"
+msgstr "Удалить %s"
+
+#: ../../xffm/fm/local/rm.hh:61
+msgid "Warning: "
+msgstr "Предупреждение: "
+
+#. gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
+#. title
+#: ../../xffm/fm/local/rm.hh:90
+msgid "Remove"
+msgstr "Удалить"
+
+#: ../../xffm/fm/local/rm.hh:140
+msgid "Apply to all"
+msgstr "Применить ко всем"
+
+#. **************
+#. This is now available to BSD with rm -P option
+#: ../../xffm/fm/local/rm.hh:163 ../../xffm/common/gtk.hh:76
+msgid "Shred"
+msgstr "Уничтожить"
+
+#. We do not count "../"
+#: ../../xffm/fm/local/view.hh:48 ../../xffm/fm/base/monitor.hh:28
+#, c-format
+msgid "Files: %s"
+msgstr "Файлы: %s"
+
+#: ../../xffm/fm/root/model.hh:78
+msgid "Root Directory"
+msgstr "Корневой каталог"
+
+#: ../../xffm/fm/root/model.hh:94
+msgid "This is the root of the filesystem"
+msgstr "Файловая система"
+
+#: ../../xffm/fm/root/model.hh:105
+msgid "Home Directory"
+msgstr "Домашний каталог"
+
+#: ../../xffm/fm/root/model.hh:132
+msgid "Trash bin"
+msgstr "Корзина"
+
+#: ../../xffm/fm/root/model.hh:162 ../../xffm/fm/fstab/popup.hh:29
+msgid "Disk Image Mounter"
+msgstr "Монтирование дискового образа"
+
+#: ../../xffm/fm/root/model.hh:169 ../../xffm/fm/root/model.hh:185
+msgid "Mount local disks and devices"
+msgstr "Подключает локальные диски и устройства"
+
+#: ../../xffm/fm/root/model.hh:170 ../../xffm/fm/fstab/popup.hh:25
+#: ../../xffm/fm/fstab/view.hh:429
+#, fuzzy
+msgid "eCryptfs Volume"
+msgstr "Разделы TrueCrypt"
+
+#: ../../xffm/fm/root/model.hh:171 ../../xffm/fm/fstab/popup.hh:24
+msgid "SSHFS Remote Synchronization Folder"
+msgstr "Папка удалённой SSHFS-синхронизации"
+
+#: ../../xffm/fm/root/model.hh:172 ../../xffm/fm/fstab/popup.hh:23
+#: ../../xffm/fm/fstab/view.hh:377
+msgid "NFS Network Volume"
+msgstr "Сетевой том NFS"
+
+#: ../../xffm/fm/root/model.hh:173 ../../xffm/fm/fstab/popup.hh:26
+#: ../../xffm/fm/fstab/view.hh:455
+msgid "CIFS Volume"
+msgstr "Том CIFS"
+
+#: ../../xffm/fm/root/model.hh:195
+msgid "Software Updater"
+msgstr "Обновление программ"
+
+#: ../../xffm/fm/root/model.hh:218 ../../xffm/fm/root/model.hh:230
+msgid "Add or remove software installed on the system"
+msgstr "Установка и удаление программ, установленных в системе"
+
+#: ../../xffm/fm/root/model.hh:271
+msgid "Go to bookmarked location"
+msgstr "Перейти к закладке"
+
+#. {N_("Add bookmark"), (void *)BasePopUp<Type>::noop, NULL, NULL},
+#: ../../xffm/fm/root/view.hh:61
+msgid "Empty trash"
+msgstr "Очистить корзину"
+
+#. File chooser
+#: ../../xffm/fm/fstab/popup.hh:121
+msgid "Mount Device"
+msgstr "Подключить устройство"
+
+#: ../../xffm/fm/fstab/popup.hh:133
+msgid "Mount point:"
+msgstr "Точка монтирования:"
+
+#: ../../xffm/fm/fstab/view.hh:301
+msgid "Mounted on:"
+msgstr "Точка монтирования:"
+
+#: ../../xffm/fm/fstab/view.hh:302
+msgid "Mount on"
+msgstr "Смонтировать"
+
+#: ../../xffm/fm/fstab/view.hh:310 ../../xffm/fm/fstab/view.hh:312
+msgid "Not mounted"
+msgstr "не смонтирован"
+
+#: ../../xffm/fm/fstab/view.hh:403
+msgid "SFTP (via SSH)"
+msgstr "SFTP (через SSH)"
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, c-format
+msgid "Unmounting %s"
+msgstr "Размонтирование %s"
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, c-format
+msgid "Mounting %s"
+msgstr "Монтируется %s"
+
+#: ../../xffm/fm/dialog/menupopover.hh:128
+msgid "Home"
+msgstr "Дом"
+
+#: ../../xffm/fm/dialog/menupopover.hh:129 ../../xffm/common/gtk.hh:64
+msgid "Open terminal"
+msgstr "Открыть терминал"
+
+#: ../../xffm/fm/dialog/menupopover.hh:130
+msgid "Open a New Window"
+msgstr "Открыть новое окно"
+
+#. {N_("Execute Shell Command"), (void *)MenuPopoverSignals<Type>::shell, (void *) menuButton_},
+#: ../../xffm/fm/dialog/menupopover.hh:132 ../../xffm/common/gtk.hh:69
+msgid "Search"
+msgstr "Искать"
+
+#: ../../xffm/fm/dialog/menupopover.hh:133 ../../xffm/common/gtk.hh:71
+msgid "Exit"
+msgstr "Выход"
+
+#: ../../xffm/fm/dialog/dialog.hh:116
+msgid "Removed"
+msgstr "Удалено"
+
+#: ../../xffm/fm/dialog/dialog.hh:132
+msgid "Detected device(s):"
+msgstr "Обнаруженные устройства:"
+
+#. Create the widgets
+#: ../../xffm/fm/page/vbuttonbox.hh:37 ../../xffm/common/gtk.hh:332
+msgid "Help"
+msgstr "Справка"
+
+#. File chooser
+#: ../../xffm/fm/page/pathbar.hh:306 ../../xffm/fm/page/pathbar.hh:308
+msgid "Go to"
+msgstr "Перейти"
+
+#: ../../xffm/fm/page/pathbar.hh:331
+msgid "Not a directory"
+msgstr "Не является каталогом"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Renice Process"
+msgstr "Изменить приоритет процесса"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Suspend"
+msgstr "В ждущий режим"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Continue"
+msgstr "Продолжить"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Interrupt"
+msgstr "Прерывание"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Hangup"
+msgstr "Обрыв терминальной линии"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "User 1 (USR1)"
+msgstr "Пользователь 1 (USR1)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "User 2 (USR2)"
+msgstr "Пользователь 2 (USR2)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "Terminate Task"
+msgstr "Завершить задачу"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "Abort"
+msgstr "Прервать"
+
+#: ../../xffm/fm/page/runbutton.hh:138
+msgid "Kill"
+msgstr "Уничтожить"
+
+#: ../../xffm/fm/page/runbutton.hh:139
+msgid "Segmentation fault"
+msgstr "Нарушение сегментирования"
+
+#: ../../xffm/fm/page/runbutton.hh:217
+msgid "PID"
+msgstr "PID"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:37
+msgid "Embedded Terminal"
+msgstr "Встроенный терминал"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:38
+msgid "All items in the iconview."
+msgstr "Все значки."
+
+#: ../../xffm/fm/page/hbuttonbox.hh:39
+msgid "Scripting"
+msgstr "Скрипты"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:40
+msgid "Clear Log"
+msgstr "Очистить журнал"
+
+#. Status textview
+#: ../../xffm/fm/page/hbuttonbox.hh:42
+msgid "Terminal font"
+msgstr "Шрифт терминала"
+
+#: ../../xffm/fm/treeview.hh:17
+msgid "Name"
+msgstr "Имя"
+
+#: ../../xffm/fm/treeview.hh:20
+msgid "Size"
+msgstr "Размер"
+
+#: ../../xffm/fm/treeview.hh:21
+msgid "Date"
+msgstr "Дата"
+
+#: ../../xffm/fm/treeview.hh:22
+msgid "Mimetype"
+msgstr "Тип MIME"
+
+#: ../../xffm/fm/treeview.hh:24
+msgid "TYPE"
+msgstr "ТИП"
+
+#: ../../xffm/fm/base/signals.hh:642
+msgid "Directory does not exist."
+msgstr "Каталог не существует."
+
+#: ../../xffm/fm/base/signals.hh:644 ../../xffm/fm/base/signals.hh:646
+msgid "Trash is empty"
+msgstr "Мусорная корзина пуста"
+
+#: ../../xffm/common/settings.hh:27
+msgid "New File:"
+msgstr "Новый файл:"
+
+#: ../../xffm/common/gio.hh:235
+msgid "Could not copy item:"
+msgstr "Не удалось скопировать объект:"
+
+#: ../../xffm/common/gio.hh:237
+msgid "Could not move item:"
+msgstr "Не удалось переместить объект:"
+
+#: ../../xffm/common/gio.hh:239
+msgid "Create symbolic link"
+msgstr "Создать символьную ссылку"
+
+#: ../../xffm/common/gio.hh:276
+#, c-format
+msgid ""
+"Could not delete:\n"
+"%s"
+msgstr ""
+"Невозможно удалить:\n"
+"%s"
+
+#: ../../xffm/common/gio.hh:278
+#, c-format
+msgid "Could not move %s to trash"
+msgstr "Не удалось переместить %s в корзину"
+
+#: ../../xffm/common/clipboard.hh:23 ../../xffm/common/dnd.hh:40
+msgid "Copying files locally"
+msgstr "Копирование файлов на локальную систему"
+
+#: ../../xffm/common/clipboard.hh:30 ../../xffm/common/dnd.hh:34
+msgid "Moving files"
+msgstr "Перемещение файлов"
+
+#: ../../xffm/common/dnd.hh:46
+msgid "Create Link"
+msgstr "Создать связку"
+
+#: ../../xffm/common/util.hh:1200
+#, c-format
+msgid ""
+"Scriptfile \"%s\" is not executable. Please set the executable-attribute on "
+"that file."
+msgstr ""
+
+#: ../../xffm/common/util.hh:1202 ../../xffm/common/util.hh:1237
+#, c-format
+msgid "Open with %s"
+msgstr "Открыть с помощью %s"
+
+#: ../../xffm/common/util.hh:1202
+msgid "Text Editor"
+msgstr "Текстовый редактор"
+
+#: ../../xffm/common/util.hh:1239 ../../xffm/common/gtk.hh:65
+msgid "Execute Shell Command"
+msgstr "Выполнить команду оболочки"
+
+#: ../../xffm/common/util.hh:1243
+msgid ""
+"Console: quickly run single commands -- write a command here and press enter."
+msgstr "Выполнение одной команды: введите команду и нажмите Enter."
+
+#: ../../xffm/common/gtk.hh:123
+msgid "New Tab"
+msgstr "Новая вкладка"
+
+#: ../../xffm/common/gtk.hh:335
+msgid "OK"
+msgstr "ЦЕЛ"
+
+#: ../../xffm/common/run.hh:344
+msgid "error"
+msgstr "ошибка"
+
+#: ../../xffm/common/run.hh:348
+msgid "warning"
+msgstr "предупреждение"
+
+#: ../../xffm/common/mime.hh:101 ../../xffm/common/mime.hh:143
+msgid "No Read Permission"
+msgstr "Нет прав на чтение"
+
+#: ../../xffm/common/preview.hh:593
+msgid "Empty file"
+msgstr "Пустой файл"
+
+#: ../../xffm/common/preview.hh:648
+#, c-format
+msgid "Cannot read from %s"
+msgstr "Не удалось прочитать из %s"
+

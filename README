@@ -1,4 +1,6 @@
 bug: 
+
+ . local monitor does not insert new files in sort order
  > use libmagic preferably instead of perl if available
  > printout optional and required libraries found in configure step.
  

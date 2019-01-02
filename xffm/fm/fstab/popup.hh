@@ -26,7 +26,7 @@ class FstabPopUp {
             {N_("CIFS Volume"), (void *)BasePopUp<Type>::noop, NULL, NULL},
             {NULL,NULL,NULL, FALSE}};
 	fstabPopUp = BasePopUp<Type>::createPopup(item); 
-        BasePopUp<Type>::changeTitle(fstabPopUp, _("Mount Helper"), NULL);
+        BasePopUp<Type>::changeTitle(fstabPopUp, _("Disk Image Mounter"), NULL);
 
         return fstabPopUp;        
     }  

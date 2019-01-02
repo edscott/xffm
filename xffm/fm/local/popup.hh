@@ -589,7 +589,7 @@ private:
             GList *selection_list = gtk_icon_view_get_selected_items (view->iconView());
             view->setSelectionList(selection_list);
             if (!selection_list) {
-                gchar *markup = g_strdup_printf("<span size=\"larger\" color=\"blue\">%s\n<span color=\"red\">%s</span></span>\n", _("Nothing selected"),_("No matches."));
+                gchar *markup = g_strdup_printf("<span size=\"larger\" color=\"blue\">%s\n<span color=\"red\">%s</span></span>\n", _("No selection"),_("No matches."));
                 Gtk<Type>::quickHelp(GTK_WINDOW(mainWindow),markup, "dialog-error"); 
                 g_free(markup);
             }
@@ -840,7 +840,7 @@ public:
 	auto displayPath = util_c::valid_utf_pathstring(path);
 	auto markup = 
 	    g_strdup_printf("<span color=\"blue\" size=\"larger\"><b>%s</b></span>\n<span color=\"red\">(%s)</span>", displayPath, 
-		_("Item is executable by the user"));  
+		_("Executable"));  
 	g_free(displayPath);
 	
         auto entryResponse = new(EntryResponse<Type>)(GTK_WINDOW(mainWindow), _("Run Executable..."), "system-run");

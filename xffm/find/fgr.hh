@@ -211,9 +211,9 @@ static const char *fgrMessage[] = {
         "-c", "\t\t",
         N_("Line Count"), "\n",
         "-w", "\t\t",
-        N_("Whole words only"), "\n",
+        N_("Words"), "\n",
         "-x", "\t\t",
-        N_("Match whole lines only"), "\n \n ",
+        N_("Lines"), "\n \n ",
         "xffind-", VERSION, " ", COPYRIGHT, "\n",
         NULL
     };

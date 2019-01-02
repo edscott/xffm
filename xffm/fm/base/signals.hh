@@ -639,7 +639,7 @@ public:
         if (!path) return ROOTVIEW_TYPE;
         if (g_file_test(path, G_FILE_TEST_EXISTS)) return (LOCALVIEW_TYPE);
 	if (g_path_is_absolute(path)){
-	    const gchar *m = _("This directory does not exist.");
+	    const gchar *m = _("Directory does not exist.");
 	    if (strstr(path,"/.local/share/Trash")) {
 		m = _("Trash is empty");
 	    }

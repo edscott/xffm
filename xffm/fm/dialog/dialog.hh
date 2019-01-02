@@ -129,7 +129,7 @@ public:
 		if (path) label = FstabView<Type>::e2Label(path);
 		if (path && label){
 		    gchar *markup = g_strdup_printf("%s    <span color=\"red\">%s</span>    <span color=\"green\">%s</span>\n%s\n",
-			    _("You have just inserted a medium."), 
+			    _("Detected device(s):"), 
 			    path, label?label:"", base );
 		    TimeoutResponse<Type>::dialog(NULL, markup, "drive-harddisk/SE/go-up/3.0/180");
 		    g_free(markup);
