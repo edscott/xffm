@@ -31,6 +31,13 @@ static const gchar *commonItems[]={
     NULL,
 };
 
+static const gchar *singleSelectItems[]={
+    "Rename",
+    "Duplicate",
+    "Link",
+    NULL,
+};
+
 static const gchar *generalItems[]={
     "title",
 };
@@ -234,28 +241,38 @@ public:
         for (GList *child = children; child && child->data; child=child->next){
             gtk_widget_hide(GTK_WIDGET(child->data));
         }
-            
+ 
 	auto v2 = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "title"));
         gtk_widget_show(v2);
 	
         auto fileInfo =(const gchar *)g_object_get_data(G_OBJECT(localItemPopUp), "fileInfo");
         auto path =(const gchar *)g_object_get_data(G_OBJECT(localItemPopUp), "path");
         auto mimetype =(const gchar *)g_object_get_data(G_OBJECT(localItemPopUp), "mimetype");
-        if (g_list_length(view->selectionList()) > 1) {
-        } else {
-	    fileInfo = util_c::fileInfo(path);
-            runWithDialog(path);
-            // open with mimetype application
-            setUpMimeTypeApp(mimetype, path, fileInfo);
-            if (g_file_test(path, G_FILE_TEST_IS_DIR)) showDirectoryItems(path);
-        }
-        openWithDialog(path, mimetype, fileInfo);
- 
 	for (auto k=commonItems; k && *k; k++){
 	    auto w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), *k));
 	    gtk_widget_show(w);
-            gtk_widget_set_sensitive(w, g_list_length(view->selectionList()) > 0);
+	    gtk_widget_set_sensitive(w, g_list_length(view->selectionList()) > 0);
+	    if (strcmp(*k, "Paste")==0) gtk_widget_set_sensitive(w, FALSE);
 	}
+	for (auto k=singleSelectItems; k && *k; k++){
+	    auto w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), *k));
+	    gtk_widget_show(w);
+	    gtk_widget_set_sensitive(w, g_list_length(view->selectionList()) == 1);
+	}
+	if (g_list_length(view->selectionList()) == 1){
+	    runWithDialog(path); // ask for arguments for an executable path.
+	    // open with mimetype application
+	    setUpMimeTypeApp(mimetype, path, fileInfo);
+	    if (g_file_test(path, G_FILE_TEST_IS_DIR)) {
+		showDirectoryItems(path);
+	    }
+	    else openWithDialog(path, mimetype, fileInfo);
+	} else {
+	    openWithDialog();
+	}
+
+
+
     }
 
     static GtkMenu *popUpItem(void){
@@ -278,6 +295,13 @@ private:
 	gtk_widget_set_sensitive(GTK_WIDGET(v1), state);
 	if (state) gtk_widget_show(GTK_WIDGET(v1));
 	else gtk_widget_hide(GTK_WIDGET(v1));
+    }
+
+    static void
+    openWithDialog(void){
+	auto v2 = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(localItemPopUp), "Open with"));
+        gtk_widget_show(GTK_WIDGET(v2));
+	gtk_widget_set_sensitive(GTK_WIDGET(v2), TRUE);
     }
 
     static void
@@ -316,17 +340,7 @@ private:
 	    "Add bookmark",
 	    "Remove bookmark",
         NULL};
-        const gchar *commonItems[]={
-            "Copy",
-            "Cut",
-            "Paste",
-            "Rename",
-            "Duplicate",
-            "Link",
-            "Properties",
-            "Delete",
-            NULL,
-        };
+
         GtkWidget *w;
         // unhide 
         const gchar **p;
@@ -341,16 +355,7 @@ private:
                 gtk_widget_set_sensitive(w, FALSE);
             }
         }
-        for (p=commonItems; p &&*p; p++){
-            w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), *p));
-            if (w) {
-                auto oldPath = (gchar *)g_object_get_data(G_OBJECT(w), "path");
-                g_free(oldPath);
-                g_object_set_data(G_OBJECT(w), "path", g_strdup(path));
-                gtk_widget_show(w);
-                gtk_widget_set_sensitive(w, FALSE); // WIP
-            }
-        }
+
         // unsensitivize "Paste" only if valid pasteboard...
         {
             auto w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Paste"));
@@ -869,9 +874,10 @@ public:
 	}
         g_free(response);
 	// get view
-	//auto view =  (View<Type> *)g_object_get_data(G_OBJECT(data), "view");
-	auto baseModel =  (BaseModel<Type> *)g_object_get_data(G_OBJECT(data), "baseModel");
-	auto page = baseModel->page();
+	auto view =  (View<Type> *)g_object_get_data(G_OBJECT(data), "view");
+	//auto baseModel =  (BaseModel<Type> *)g_object_get_data(G_OBJECT(data), "baseModel");
+	//auto page = baseModel->page();
+	auto page = view->page();
 	page->command(command);
 	TRACE("2)command = %s\n", command);
 	g_free(command);
@@ -983,7 +989,8 @@ public:
             }
         }
 	gchar *responseLabel = g_strdup_printf("<b><span size=\"larger\" color=\"blue\">%s</span></b>\n<span color=\"#880000\">(%s)</span>", 
-		mpath, mimetype);
+		mpath, 
+		multiple?_("You have selected multiple files or folders"):mimetype);
         for (char *p = mpath; p && *p; p++){
             if (*p=='\n') *p = ' ';
         }
@@ -993,7 +1000,7 @@ public:
 	gchar *fileInfo;
         if (multiple) fileInfo = g_strdup("FIXMEfileinfo");
         else fileInfo = util_c::fileInfo(path);	
-	gchar *defaultApp = defaultMimeTypeApp(mimetype, fileInfo);
+	gchar *defaultApp = multiple?g_strdup(""):defaultMimeTypeApp(mimetype, fileInfo);
 	g_free(fileInfo);
         
 	auto view =  (View<Type> *)g_object_get_data(G_OBJECT(localItemPopUp), "view");
@@ -1008,7 +1015,7 @@ public:
             g_free(responseLabel);
 
             entryResponse->setCheckButton(_("Run in Terminal"));
-            entryResponse->setCheckButton(defaultApp && Mime<Type>::runInTerminal(defaultApp));
+            if (!multiple) entryResponse->setCheckButton(defaultApp && Mime<Type>::runInTerminal(defaultApp));
 
             entryResponse->setEntryLabel(_("Open with"));
             entryResponse->setEntryDefault(defaultApp);
@@ -1024,7 +1031,7 @@ public:
             g_free(responseLabel);
 
             comboResponse->setCheckButton(_("Run in Terminal"));
-            comboResponse->setCheckButton(defaultApp && Mime<Type>::runInTerminal(defaultApp));
+            if (!multiple) comboResponse->setCheckButton(defaultApp && Mime<Type>::runInTerminal(defaultApp));
 
             comboResponse->setComboLabel(_("Open with"));
             comboResponse->setComboOptions(apps);

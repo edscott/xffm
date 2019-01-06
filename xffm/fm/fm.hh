@@ -46,6 +46,16 @@ namespace xf {
     static GtkMenu *localItemPopUp=NULL;
     static GtkMenu *rootPopUp=NULL;
     static GtkMenu *rootItemPopUp=NULL;
+
+    GtkMenu *popUpArray[]={
+	fstabPopUp,
+	fstabItemPopUp,
+	localPopUp,
+	localItemPopUp,
+	rootPopUp,
+	rootItemPopUp,
+	NULL
+    };
 }
 #include "types.h"
 

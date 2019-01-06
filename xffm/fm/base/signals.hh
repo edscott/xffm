@@ -169,6 +169,10 @@ public:
 	    }
 	    if (tpath) {
 		TRACE("Here we do a call to activate item.\n");
+		for (auto popup=popUpArray; popup && *popup; popup++){
+		    g_object_set_data(G_OBJECT(*popup), "baseModel", (void *)view);
+		    g_object_set_data(G_OBJECT(*popup), "view", (void *)view);
+		}
 		BaseSignals<Type>::activate(tpath, data);
 		gtk_tree_path_free(tpath);
 	    }

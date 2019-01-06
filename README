@@ -6,6 +6,9 @@ bug:
  
  . multiple windows will trigger multiple timeout dialogs on mount items.
    (maybe define an xatom for first one, value = 1 and -1 when none is defined)
+   --> further bug now, timeout dialog does not appear after changes for 
+       dialog done concerning docker triggers. 
+       
  . timeout dialog requires a progress bar on timeout
  . timeout dialog requires a "Dismiss" button.
 

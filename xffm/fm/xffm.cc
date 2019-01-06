@@ -39,7 +39,7 @@ main (int argc, char *argv[]) {
 
     auto fm = new(xf::Fm<double>)(argc, argv);
     auto text = g_strdup_printf("Xffm+-%s", VERSION);
-    xf::TimeoutResponse<double>::dialogFull(NULL, text, "xffm_logo", -200, 2);
+    xf::TimeoutResponse<double>::dialogFull(NULL, text, "xffm_logo", -200, 1);
     g_free(text);
     gtk_main();
     delete(fm);
