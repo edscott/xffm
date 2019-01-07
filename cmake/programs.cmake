@@ -22,4 +22,3 @@ else()
     message( STATUS "grep was found. Is it GNU grep?" )
 endif()
 
-

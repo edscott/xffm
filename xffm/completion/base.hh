@@ -55,7 +55,7 @@ public:
             match = _("Found no match");
             print_c::print_icon(output, "dialog-warning", "red", g_strdup_printf(" %s\n", match));
         } else {
-            print_c::print(output, ("blue/white_bg", g_strdup_printf(" %s\n", match)));
+            print_c::print(output, "blue/white_bg", g_strdup_printf(" %s\n", match));
         }
         print_c::scroll_to_bottom(output);
     }

@@ -46,6 +46,7 @@ dnl check for standard header files
 ac_uname_s=`uname -s`
 echo "system: $ac_uname_s"
 
+AC_CHECK_HEADERS([mntent.h sys/mount sys/types sys/sysctl sys/param])
 
 dnl check for standard functions
 AC_CHECK_FUNCS([setenv unsetenv])

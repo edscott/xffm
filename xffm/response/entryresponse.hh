@@ -290,8 +290,8 @@ private:
 
     static void
     cancel_entry (GtkEntry * entry, gpointer data) {
-	GtkWidget *dialog = g_object_get_data(G_OBJECT(entry), "dialog");
-	gtk_dialog_response (GTK_DIALOG(dialog),GTK_RESPONSE_CANCEL);
+	auto dialog = GTK_DIALOG(g_object_get_data(G_OBJECT(entry), "dialog"));
+	gtk_dialog_response (dialog,GTK_RESPONSE_CANCEL);
     }
 
     static gboolean 

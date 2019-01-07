@@ -343,7 +343,7 @@ private:
             }
         }
         // The rest is only for regular files (links too?)
-        if (st->st_mode & S_IFMT != S_IFREG) return NULL;
+        if ((st->st_mode & S_IFMT) != S_IFREG) return NULL;
 
 
 	// all access:

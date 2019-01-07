@@ -53,29 +53,44 @@ public:
 
     static void 
     initHash(void){
-	iconname_hash = g_hash_table_new(g_str_hash, g_str_equal);
+	iconname_hash = g_hash_table_new_full(g_str_hash, g_str_equal,NULL, NULL);
 	populate_iconname_hash();
 	//FIXME: init_tooltip_c();
 	TRACE("gtk_c init OK\n");
     }
 // FIXME: iconname_hash should be in a class template for fm
+//        not currently used functionality. Should update iconname ids.
     static void
     populate_iconname_hash(void){
-	g_hash_table_insert(iconname_hash, _("Open terminal"), (void *)"terminal");
-	g_hash_table_insert(iconname_hash, _("Execute Shell Command"), (void *)"execute");
-	g_hash_table_insert(iconname_hash, _("Paste"), (void *)"edit-paste");
-	g_hash_table_insert(iconname_hash, _("Add bookmark"), (void *)"list-add");
-	g_hash_table_insert(iconname_hash, _("Remove bookmark"), (void *)"list-remove");
-	g_hash_table_insert(iconname_hash, _("Search"), (void *)"edit-find");
-	g_hash_table_insert(iconname_hash, _("Close"), (void *)"cancel");
-	g_hash_table_insert(iconname_hash, _("Exit"), (void *)"window-close");
-	g_hash_table_insert(iconname_hash, _("Open with"), (void *)"execute");
-	g_hash_table_insert(iconname_hash, _("Cut"), (void *)"cut");
-	g_hash_table_insert(iconname_hash, _("Copy"), (void *)"copy");
-	g_hash_table_insert(iconname_hash, _("Delete"), (void *)"delete");
-	g_hash_table_insert(iconname_hash, _("Shred"), (void *)"dialog-warning");
+	g_hash_table_insert(iconname_hash, 
+			(void *)_("Open terminal"), (void *)"terminal");
+	g_hash_table_insert(iconname_hash, 
+			(void *)_("Execute Shell Command"), (void *)"execute");
+	g_hash_table_insert(iconname_hash, 
+			(void *)_("Paste"), (void *)"edit-paste");
+	g_hash_table_insert(iconname_hash, 
+			(void *)_("Add bookmark"), (void *)"list-add");
+	g_hash_table_insert(iconname_hash, 
+			(void *)_("Remove bookmark"), (void *)"list-remove");
+	g_hash_table_insert(iconname_hash, 
+			(void *)_("Search"), (void *)"edit-find");
+	g_hash_table_insert(iconname_hash, 
+			(void *)_("Close"), (void *)"cancel");
+	g_hash_table_insert(iconname_hash, 
+			(void *)_("Exit"), (void *)"window-close");
+	g_hash_table_insert(iconname_hash, 
+			(void *)_("Open with"), (void *)"execute");
+	g_hash_table_insert(iconname_hash, 
+			(void *)_("Cut"), (void *)"cut");
+	g_hash_table_insert(iconname_hash, 
+			(void *)_("Copy"), (void *)"copy");
+	g_hash_table_insert(iconname_hash, 
+			(void *)_("Delete"), (void *)"delete");
+	g_hash_table_insert(iconname_hash, 
+			(void *)_("Shred"), (void *)"dialog-warning");
 	//g_hash_table_insert(iconname_hash, "bcrypt", (void *)"emblem-keyhole");
-	g_hash_table_insert(iconname_hash, _("Open in New Tab"), (void *)"open");
+	g_hash_table_insert(iconname_hash, 
+			(void *)_("Open in New Tab"), (void *)"open");
     }
 
     static void

@@ -297,13 +297,14 @@ public:
 	    if (gtk_icon_view_get_item_at_pos (view->iconView(),
 				       event->x,
 				       event->y,
-				       &tpath, NULL))
-	    if (CONTROL_MODE) {
-	       gtk_icon_view_unselect_all (view->iconView());
-	    } else {
-		gtk_icon_view_select_path (view->iconView(), tpath);
+				       &tpath, NULL)){
+		    if (CONTROL_MODE) {
+		       gtk_icon_view_unselect_all (view->iconView());
+		    } else {
+			gtk_icon_view_select_path (view->iconView(), tpath);
+		    }
+		    gtk_tree_path_free(tpath);
 	    }
-	    gtk_tree_path_free(tpath);
 	}
         return viewPopUp(view, event);
     }

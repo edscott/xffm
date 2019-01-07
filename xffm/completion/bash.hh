@@ -144,9 +144,9 @@ private:
 #ifdef DEBUG_TRACE
         print_c::print_icon(output, "dialog-info", "green", g_strdup(_("Options >>")));
         const gchar *option_type = get_match_type_text(match_type);
-        print_c::print(output,  ("red", g_strdup_printf("(%s)\n", option_type));
+        print_c::print(output,  "red", g_strdup_printf("(%s)\n", option_type));
 #else
-        print_c::print(output,  ("green", g_strdup_printf("%s\n", _("Options >>"))));
+        print_c::print(output,  "green", g_strdup_printf("%s\n", _("Options >>")));
 #endif
         print_c::scroll_to_bottom(output);
     }

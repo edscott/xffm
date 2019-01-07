@@ -44,8 +44,25 @@ msgid "NFS Network Volume"
 msgid "NFS remote directory"
 */
 
-
+#ifdef HAVE_MNTENT_H
+// Linux
 # include <mntent.h>
+#endif
+
+// BSD
+#ifdef HAVE_SYS_MOUNT_H
+# include <sys/mount.h>
+#endif
+#ifdef HAVE_SYS_TYPES_H
+# include <sys/types.h>
+#endif
+#ifdef HAVE_sys_sysctl_H
+# include <sys/sysctl.h>
+#endif
+#ifdef HAVE_SYS_PARAM_H
+# include <sys/param.h>
+#endif
+
 
 #define PARTUUID        ACTUAL_NAME
 #define DISK_LABEL      DISPLAY_NAME
