@@ -23,26 +23,27 @@ public:
         
     }
     ~FstabMonitor(void){
-        DBG("Destructor:~local_monitor_c()\n");
+        TRACE("Destructor:~local_monitor_c()\n");
         // stop mountThread
         mountArg_[1] = NULL;
         while (mountArg_[2]){
-            DBG("***Waiting for mountThread to exit\n");
+            TRACE("***Waiting for mountThread to exit\n");
             sleep(1);
         }
         g_hash_table_destroy(this->itemsHash());
-        DBG("***Destructor:~local_monitor_c() complete\n");
+        TRACE("***Destructor:~local_monitor_c() complete\n");
     }
 
     void
     start_monitor(GtkTreeModel *treeModel, const gchar *path){
-	DBG("Starting monitor for path:%s\n", path);
+	TRACE("Starting monitor for path:%s\n", path);
         this->startMonitor(treeModel, path, (void *)monitor_f);
         // start mountThread
         pthread_t mountThread;
         mountArg_[0] = (void *)this;
         mountArg_[1] = GINT_TO_POINTER(TRUE);
         mountArg_[2] = GINT_TO_POINTER(TRUE);
+	// mountThreadF will monitor if items are mounted or unmounted
 	gint retval = pthread_create(&mountThread, NULL, FstabMonitor<Type>::mountThreadF, (void *)mountArg_);
 	if (retval){
 	    ERROR("thread_create(): %s\n", strerror(retval));
@@ -79,7 +80,7 @@ private:
             gchar *key = Hash<Type>::get_hash_key(path, 10);
             if (!g_hash_table_lookup((GHashTable *)data, key)){
                 // update the icon
-                DBG("*** Send change signal for %s (now mounted)\n", (gchar *)path);
+                TRACE("*** Send change signal for %s (now mounted)\n", (gchar *)path);
                 void *arg[] = { 
                     g_object_get_data(G_OBJECT(treeModel), "baseMonitor"),
                     (void *)path };
@@ -102,7 +103,7 @@ private:
             gchar *key = Hash<Type>::get_hash_key(path, 10);
             if (g_hash_table_lookup((GHashTable *)data, key)){
                 // update the icon
-                DBG("*** Send change signal for %s (now unmounted)\n", (gchar *)path);
+                TRACE("*** Send change signal for %s (now unmounted)\n", (gchar *)path);
                 void *arg[] = { 
                     g_object_get_data(G_OBJECT(treeModel), "baseMonitor"),
                     (void *)path };
@@ -121,12 +122,13 @@ public:
         g_object_set_data(G_OBJECT(baseMonitor->treeModel()), "baseMonitor", (void *)baseMonitor);
         // get initial md5sum
         gchar *sum = Util<Type>::md5sum("/proc/mounts");
+        gchar *sumPartitions = Util<Type>::md5sum("/proc/partitions");
         if (!sum) {
-            DBG("Exiting mountThreadF() on md5sum error (sum)\n");
+            ERROR("Exiting mountThreadF() on md5sum error (sum)\n");
             g_free(data);
             return NULL;
         }
-        DBG("FstabMonitor::mountThreadF(): initial md5sum=%s", sum);
+        TRACE("FstabMonitor::mountThreadF(): initial md5sum=%s", sum);
         
 	auto hash = getMountHash(NULL);
         while (arg[1]){// arg[1] is semaphore to thread
@@ -134,15 +136,16 @@ public:
             //sleep(1);
             TRACE("mountThreadF loop for arg=%p\n", data);
             gchar *newSum = Util<Type>::md5sum("/proc/mounts");
+            gchar *newSumPartitions = Util<Type>::md5sum("/proc/partitions");
             if (!newSum){
-                DBG("Exiting mountThreadF() on md5sum error (newSum)\n");
+                ERROR("Exiting mountThreadF() on md5sum error (newSum)\n");
                 g_hash_table_destroy(hash);
                 g_free(sum);
                 return NULL;
             }
             if (strcmp(newSum, sum)){
-                DBG("new md5sum /proc/mounts = %s (%s)\n", newSum, sum);
-                DBG("now we test whether icon update is necessary...\n");
+                TRACE("new md5sum /proc/mounts = %s (%s)\n", newSum, sum);
+                TRACE("now we test whether icon update is necessary...\n");
                 g_free(sum);
                 sum = newSum;
                 // Any new mounts?
@@ -150,7 +153,7 @@ public:
                 // if (isMounted() and not in hash)
                 // if so, then send change signal for gfile path. 
                 // This should set the greenball.
-                //DBG("thread itemshash=%p\n", itemsH);
+                //TRACE("thread itemshash=%p\n", itemsH);
                 gtk_tree_model_foreach(baseMonitor->treeModel(), checkIfMounted, (void *)hash);
                 //
                 // Any new umounts?
@@ -163,9 +166,12 @@ public:
                 // Update hash.
                 hash = getMountHash(hash);
             }
+            if (strcmp(newSumPartitions, sumPartitions)){
+                TRACE("new md5sum /proc/partitions = %s (%s)\n", newSumPartitions, sumPartitions);
+	    }
         }
         g_free(sum);
-        DBG("***now exiting mountThreadF()\n");
+        TRACE("***now exiting mountThreadF()\n");
         g_hash_table_destroy(hash);
         arg[2] = NULL; // arg[2] is semaphore to calling thread.
         return NULL;
@@ -215,17 +221,17 @@ private:
         gchar line[256];
         memset(line, 0, 256);
         gchar *partition = NULL;
-            DBG("uuid2Partition(): looking for : \"%s\"\n", partuuid);
+            TRACE("uuid2Partition(): looking for : \"%s\"\n", partuuid);
 	while (fgets (line, 255, pipe) && !feof(pipe)) {
-            DBG("uuid2Partition(): %s: %s\n", partuuid, line);
+            TRACE("uuid2Partition(): %s: %s\n", partuuid, line);
             if (!strstr(line, "->")) continue;
             if (!strstr(line, partuuid)) continue;
-            DBG("uuid2Partition(): GOTCHA: %s\n", line);
+            TRACE("uuid2Partition(): GOTCHA: %s\n", line);
             gchar **f = g_strsplit(line, "->", 2);
             if (strchr(f[1], '\n')) *strchr(f[1], '\n') = 0;
             g_strstrip(f[1]);
             gchar *basename = g_path_get_basename(f[1]);
-            DBG("uuid2Partition(): GOTCHA: basename=%s\n", basename);
+            TRACE("uuid2Partition(): GOTCHA: basename=%s\n", basename);
             g_strfreev(f);
             partition = g_strconcat ("/dev/", basename, NULL);
             g_free(basename);
@@ -264,7 +270,7 @@ private:
 	    g_free(path);
 	    return FALSE;
 	}
-	DBG("removing %s (%s) from treemodel.\n", path, partuuid);
+	TRACE("removing %s (%s) from treemodel.\n", path, partuuid);
 	GtkListStore *store = GTK_LIST_STORE(model);
 
 	gtk_list_store_remove(store, iter);
@@ -285,15 +291,15 @@ private:
         gchar *s= second? g_file_get_path (second):g_strdup("--");
        
 
-        DBG("*** monitor_f call...\n");
+        TRACE("*** monitor_f call...\n");
         auto p = (FstabMonitor<Type> *)data;
         gchar *fsType;
         switch (event){
             case G_FILE_MONITOR_EVENT_DELETED:
             case G_FILE_MONITOR_EVENT_MOVED_OUT:
             {
-                DBG("Received DELETED  (%d): \"%s\", \"%s\"\n", event, f, s);
-                DBG("*** rm %s \n", f);
+                TRACE("Received DELETED  (%d): \"%s\", \"%s\"\n", event, f, s);
+                TRACE("*** rm %s \n", f);
                 gchar *devicePath = uuid2Partition(f);
                 gchar *baseuuid = g_path_get_basename(f);
 	        gchar *key = Hash<Type>::get_hash_key(devicePath, 10);
@@ -306,9 +312,9 @@ private:
             case G_FILE_MONITOR_EVENT_CREATED:
             case G_FILE_MONITOR_EVENT_MOVED_IN:
             {
-                DBG("Received  CREATED (%d): \"%s\", \"%s\"\n", event, f, s);
+                TRACE("Received  CREATED (%d): \"%s\", \"%s\"\n", event, f, s);
                 gchar *devicePath = uuid2Partition(f);
-                DBG("adding partition %s \n", devicePath);
+                TRACE("adding partition %s \n", devicePath);
 		fsType = FstabView<Type>::fsType(devicePath);
                 FstabView<Type>::addPartition(GTK_TREE_MODEL(p->store_), devicePath, fsType);
                 
@@ -322,24 +328,24 @@ private:
             }
 
             case G_FILE_MONITOR_EVENT_CHANGED:
-                DBG("*** Received  CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
+                TRACE("*** Received  CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
                 p->redoIcon(f);
                 break;
             case G_FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED:
-                DBG("Received  ATTRIBUTE_CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
+                TRACE("Received  ATTRIBUTE_CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
                 break;
             case G_FILE_MONITOR_EVENT_PRE_UNMOUNT:
-                DBG("Received  PRE_UNMOUNT (%d): \"%s\", \"%s\"\n", event, f, s);
+                TRACE("Received  PRE_UNMOUNT (%d): \"%s\", \"%s\"\n", event, f, s);
                 break;
             case G_FILE_MONITOR_EVENT_UNMOUNTED:
-                DBG("Received  UNMOUNTED (%d): \"%s\", \"%s\"\n", event, f, s);
+                TRACE("Received  UNMOUNTED (%d): \"%s\", \"%s\"\n", event, f, s);
                 break;
             case G_FILE_MONITOR_EVENT_MOVED:
             case G_FILE_MONITOR_EVENT_RENAMED:
-                DBG("Received  MOVED (%d): \"%s\", \"%s\"\n", event, f, s);
+                TRACE("Received  MOVED (%d): \"%s\", \"%s\"\n", event, f, s);
                 break;
             case G_FILE_MONITOR_EVENT_CHANGES_DONE_HINT:
-               DBG("Received  CHANGES_DONE_HINT (%d): \"%s\", \"%s\"\n", event, f, s);
+               TRACE("Received  CHANGES_DONE_HINT (%d): \"%s\", \"%s\"\n", event, f, s);
                 break;
         }
 
@@ -348,11 +354,11 @@ private:
     }
     gboolean 
     redoIcon(const gchar *path){
-        DBG("redoIcon %s ...\n", path);
+        TRACE("redoIcon %s ...\n", path);
         gchar *key = Hash<Type>::get_hash_key(path, 10);
         if (!g_hash_table_lookup(this->itemsHash(), key)) {
             g_free(key);
-            DBG("*** %s not in itemsHash\n", path);
+            TRACE("*** %s not in itemsHash\n", path);
             return FALSE; 
         }
         g_free(key);
@@ -368,20 +374,20 @@ private:
         gchar *currentPath;
 	gtk_tree_model_get (model, iter, PATH, &currentPath, -1);  
         
-        DBG("fstabmonitor currentPath \"%s\" == \"%s\"\n", currentPath, path);
+        TRACE("fstabmonitor currentPath \"%s\" == \"%s\"\n", currentPath, path);
         if (strcmp(path, currentPath)){
             g_free(currentPath);
             return FALSE;
         }
         g_free(currentPath);
-        DBG("*** fstabmonitor currentPath %s\n", currentPath, path);
+        TRACE("*** fstabmonitor currentPath %s\n", currentPath, path);
 	
 	GtkListStore *store = GTK_LIST_STORE(model);
 
         gboolean mounted = FstabView<Type>::isMounted(path);
         auto iconName = (mounted)?"drive-harddisk/NW/greenball/3.0/180":
             "drive-harddisk/NW/grayball/3.0/180";
-        DBG("fstabmonitor stat_func(): iconname=%s\n", iconName);
+        TRACE("fstabmonitor stat_func(): iconname=%s\n", iconName);
         GdkPixbuf *pixbuf = Pixbuf<Type>::get_pixbuf(iconName,  GTK_ICON_SIZE_DIALOG);
 	gtk_list_store_set (store, iter, 
                 ICON_NAME, iconName,

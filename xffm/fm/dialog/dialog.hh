@@ -105,38 +105,42 @@ public:
         gchar *s= second? g_file_get_path (second):g_strdup("--");
        
         gchar *base = g_path_get_basename(f);
-        TRACE("*** monitor_f call...\n");
+        TRACE("*** dialog.hh:monitor_f call for %s\n", f);
         gchar *fsType;
         switch (event){
             case G_FILE_MONITOR_EVENT_DELETED:
             case G_FILE_MONITOR_EVENT_MOVED_OUT:
-            if (!strstr(f, "part")){
+		TRACE("moved out: %s\n", f);
+            if (!strstr(f, "part")){ // no partition id when device is removed.
                 gchar *partition = FstabView<Type>::id2Partition(f);
 		if (partition) {
 		    gchar *markup = g_strdup_printf("%s %s", _("Removed"), base);
 		    TimeoutResponse<Type>::dialog(NULL, markup, "drive-harddisk/SE/go-down/3.0/180");
 		    g_free(markup);
 		}
+                DBG("*** Device has been removed: %s (%s)\n", f, partition);
                 g_free(partition);
-                TRACE("*** Device has been removed: %s\n", f);
+
             }
             break;
             case G_FILE_MONITOR_EVENT_CREATED:
             case G_FILE_MONITOR_EVENT_MOVED_IN:
-            if (!strstr(f, "part")){
-                gchar *path = FstabView<Type>::id2Partition(f);
+		TRACE("moved in: %s\n", f);
+            if (strstr(f, "part")){ // When device is added, we have partition id.
+                gchar *path = FstabView<Type>::id2Partition(f); // path to partition
 		gchar *label = NULL;
-		if (path) label = FstabView<Type>::e2Label(path);
-		if (path && label){
+		if (path){
+		    label = FstabView<Type>::e2Label(path);
 		    gchar *markup = g_strdup_printf("%s    <span color=\"red\">%s</span>    <span color=\"green\">%s</span>\n%s\n",
 			    _("Detected device(s):"), 
 			    path, label?label:"", base );
 		    TimeoutResponse<Type>::dialog(NULL, markup, "drive-harddisk/SE/go-up/3.0/180");
 		    g_free(markup);
 		}
+                DBG("*** Device has been added: %s label=%s path=%s \n", 
+			f, label, path);
                 g_free(label);
                 g_free(path);
-                TRACE("*** Device has been added: %s\n", f);
             }
             break;
         }

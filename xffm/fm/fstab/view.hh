@@ -70,15 +70,28 @@ public:
         auto treeModel = gtk_icon_view_get_model (iconView);
 	TRACE("mk_tree_model:: model = %p\n", treeModel);
         while (gtk_events_pending()) gtk_main_iteration();
- 	GtkTreeIter iter;
-	if (gtk_tree_model_get_iter_first (treeModel, &iter)){
-	    while (gtk_list_store_remove (GTK_LIST_STORE(treeModel),&iter));
-	}
+	removeAllItems(treeModel);
         // Disable DnD
         //gtk_icon_view_unset_model_drag_source (iconView);
         //gtk_icon_view_unset_model_drag_dest (iconView);
         gtk_icon_view_set_selection_mode (iconView,GTK_SELECTION_SINGLE); 
 
+	addAllItems(treeModel);
+        FstabMonitor<Type> *p = new(FstabMonitor<Type>)(treeModel, view);
+        p->start_monitor(treeModel, "/dev/disk/by-partuuid");
+        return p;
+    }
+
+    static void
+    removeAllItems(GtkTreeModel *treeModel){
+ 	GtkTreeIter iter;
+	if (gtk_tree_model_get_iter_first (treeModel, &iter)){
+	    while (gtk_list_store_remove (GTK_LIST_STORE(treeModel),&iter));
+	}
+    }
+
+    static void 
+    addAllItems(GtkTreeModel *treeModel){
 	RootView<Type>::addXffmItem(treeModel);
 	//addNFSItem(treeModel);
 	//addEcryptFSItem(treeModel);
@@ -86,9 +99,7 @@ public:
 	//addCIFSItem(treeModel);
         addPartitionItems(treeModel);
 
-        FstabMonitor<Type> *p = new(FstabMonitor<Type>)(treeModel, view);
-        p->start_monitor(treeModel, "/dev/disk/by-partuuid");
-        return p;
+
     }
 
     static gchar *
@@ -127,7 +138,7 @@ public:
         memset(line, 0, 256);
         gchar *partition = NULL;
 	while (fgets (line, 255, pipe) && !feof(pipe)) {
-            if (strstr(line, "-part")) continue;
+            if (!strstr(line, "-part")) continue;
             gchar **f = g_strsplit(line, "->", 2);
             if (!strstr(f[0], baseId)){
                 g_strfreev(f);
