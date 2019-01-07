@@ -37,7 +37,7 @@ dnl check for standard header files
  
 #AC_CHECK_HEADERS([sys/time.h sys/select.h sys/types.h sys/param.h sys/ucred sys/wait.h sys/mman.h])
 
-#AC_CHECK_HEADERS([mntent.h])
+#AC_CHECK_HEADERS([mntent.h])Writing objects: 100% (22/22), 2.29 KiB | 391.00 KiB/s, done.
 
 
 #AC_CHECK_HEADERS([fstab.h sys/param.h sys/ucred.h sys/mount.h])

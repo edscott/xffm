@@ -80,7 +80,7 @@ private:
 	}
         if (fd >= 0){
             if (write(fd, file_string, file_length) < 0){
-                ERROR("writeSettings(): file_string, file_length %s,%ld\n", file_string, file_length);
+                ERROR("writeSettings(): file_string, file_length %s,%ld\n", file_string, (long)file_length);
                 ERROR("writeSettings(): cannot write to %s: %s\n", settingsfile, strerror(errno));
             }
             close(fd);

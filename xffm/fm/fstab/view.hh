@@ -16,12 +16,6 @@
 #define MNTTYPE_KERNFS	"kernfs"        // proc
 #define MNTTYPE_MFS	"mfs"   //proc
 
-#ifdef THIS_IS_BSD
-#include <sys/types.h>
-#include <sys/sysctl.h>
-#include <sys/param.h>
-#include <sys/mount.h>
-#endif
 /*
 msgid "eCryptfs Volume"
 msgid "SSHFS Remote Synchronization Folder"
@@ -161,7 +155,7 @@ public:
                 g_strfreev(f);
                 continue;
             }
-            if (strchr(f[1], '\n')) *strchr(f[1], '\n');
+            if (strchr(f[1], '\n')) *strchr(f[1], '\n') = 0;
             g_strstrip(f[1]);
             gchar *g = g_path_get_basename(f[1]);
             partition = g_strconcat("/dev/", g, NULL);
@@ -198,34 +192,6 @@ public:
         g_free(partition);
 	return label;
 
-    }
-
-
-    static gchar *
-    getMntDir (const gchar * mnt_fsname) {
-        if (!mnt_fsname) return NULL;
-        FILE *fstab_fd = setmntent ("/etc/mtab", "r");
-        if(!fstab_fd)
-            return NULL;
-        struct mntent *mnt_struct;
-        gchar *mnt_dir = NULL;
-        struct mntent mntbuf;
-        gchar buf[2048]; 
-        while ((mnt_struct = getmntent_r (fstab_fd, &mntbuf, buf, 2048)) != NULL) {
-            if(strcmp (mnt_fsname, mnt_struct->mnt_fsname) == 0) {
-                // hit: multiple entries use first listed 
-                // user types have preference and use last listed 
-                if(strstr (mnt_struct->mnt_opts, "user")) {
-                    g_free (mnt_dir);
-                    mnt_dir = g_strdup (mnt_struct->mnt_dir);
-                }
-                if(!mnt_dir) {
-                    mnt_dir = g_strdup (mnt_struct->mnt_dir);
-                }
-            }
-        }
-        (void)endmntent (fstab_fd);
-        return mnt_dir;
     }
 
     static gchar *
@@ -502,7 +468,82 @@ public:
 	g_free(utf_name);
     }
    
-   
+#ifdef HAVE_MNTENT_H
+
+    static guint
+    getMntType (const gchar *path) {
+        struct mntent *mnt_struct;
+        TRACE("FSTAB:  parsing %s\n", "/etc/fstab");
+        FILE *fstab_fd = setmntent ("/etc/fstab", "r");
+
+        guint type=0;
+        struct mntent mntbuf;
+        gchar buf[2048]; 
+        gboolean found = FALSE;
+        while ((mnt_struct = getmntent_r (fstab_fd, &mntbuf, buf, 2048)) != NULL) {
+
+            if (strcmp(path, mnt_struct->mnt_dir) && strcmp(path, mnt_struct->mnt_fsname)) continue;
+            TRACE ("getMntType(): found item %s\n", path);
+            // Flag is as present in fstab
+            SET_FSTAB_TYPE (type);
+            // Flag it as set with "-o user"
+            if(strstr (mnt_struct->mnt_opts, "user")) {
+                SET_USER_TYPE (type);
+            }
+            /* Set fs type */
+            TRACE ("getMntType(): checking %s for fstab type\n", mnt_struct->mnt_type);
+            gint fstabType = getFstabType (mnt_struct->mnt_type);
+            switch (fstabType) {
+            case __NFS_TYPE:
+                SET_NFS_TYPE (type);
+                break;
+            case __CDFS_TYPE:
+                SET_CDFS_TYPE (type);
+                break;
+            case __PROC_TYPE:
+                SET_PROC_TYPE (type);
+                break;
+            case __SMB_TYPE:
+                SET_SMB_TYPE (type);
+                break;
+            default:
+                break;
+            }
+            found = TRUE;
+        }
+        (void)endmntent (fstab_fd);
+        if (!found) ERROR("getMntType (): %s not found in /etc/fstab\n", path);
+        return type;
+    }
+
+    static gchar *
+    getMntDir (const gchar * mnt_fsname) {
+        if (!mnt_fsname) return NULL;
+        FILE *fstab_fd = setmntent ("/etc/mtab", "r");
+        if(!fstab_fd)
+            return NULL;
+        struct mntent *mnt_struct;
+        gchar *mnt_dir = NULL;
+        struct mntent mntbuf;
+        gchar buf[2048]; 
+        while ((mnt_struct = getmntent_r (fstab_fd, &mntbuf, buf, 2048)) != NULL) {
+            if(strcmp (mnt_fsname, mnt_struct->mnt_fsname) == 0) {
+                // hit: multiple entries use first listed 
+                // user types have preference and use last listed 
+                if(strstr (mnt_struct->mnt_opts, "user")) {
+                    g_free (mnt_dir);
+                    mnt_dir = g_strdup (mnt_struct->mnt_dir);
+                }
+                if(!mnt_dir) {
+                    mnt_dir = g_strdup (mnt_struct->mnt_dir);
+                }
+            }
+        }
+        (void)endmntent (fstab_fd);
+        return mnt_dir;
+    }
+
+  
     static gboolean
     isMounted (const gchar *mnt_fsname) {
         if(!mnt_fsname) {
@@ -630,6 +671,19 @@ public:
         (void)endmntent (fstab_fd);
         return result;
     }
+
+#else
+    static guint
+    getMntType (const gchar *path) {return 0;}
+   static gchar *
+    getMntDir (const gchar * mnt_fsname) {return NULL;}
+    static gboolean
+    isMounted (const gchar *mnt_fsname){return FALSE;}  
+    static gchar *
+    mountTarget (const gchar *label) {return NULL;}    
+    static gboolean
+    isInFstab (const gchar *path) {return FALSE;}
+#endif
 
     static gboolean
     sudoMount(const gchar *mnt){
@@ -781,52 +835,6 @@ private:
             return __NFS_TYPE;
 
         return 1;
-    }
-
-    static guint
-    getMntType (const gchar *path) {
-        struct mntent *mnt_struct;
-        TRACE("FSTAB:  parsing %s\n", "/etc/fstab");
-        FILE *fstab_fd = setmntent ("/etc/fstab", "r");
-
-        guint type=0;
-        struct mntent mntbuf;
-        gchar buf[2048]; 
-        gboolean found = FALSE;
-        while ((mnt_struct = getmntent_r (fstab_fd, &mntbuf, buf, 2048)) != NULL) {
-
-            if (strcmp(path, mnt_struct->mnt_dir) && strcmp(path, mnt_struct->mnt_fsname)) continue;
-            TRACE ("getMntType(): found item %s\n", path);
-            // Flag is as present in fstab
-            SET_FSTAB_TYPE (type);
-            // Flag it as set with "-o user"
-            if(strstr (mnt_struct->mnt_opts, "user")) {
-                SET_USER_TYPE (type);
-            }
-            /* Set fs type */
-            TRACE ("getMntType(): checking %s for fstab type\n", mnt_struct->mnt_type);
-            gint fstabType = getFstabType (mnt_struct->mnt_type);
-            switch (fstabType) {
-            case __NFS_TYPE:
-                SET_NFS_TYPE (type);
-                break;
-            case __CDFS_TYPE:
-                SET_CDFS_TYPE (type);
-                break;
-            case __PROC_TYPE:
-                SET_PROC_TYPE (type);
-                break;
-            case __SMB_TYPE:
-                SET_SMB_TYPE (type);
-                break;
-            default:
-                break;
-            }
-            found = TRUE;
-        }
-        (void)endmntent (fstab_fd);
-        if (!found) ERROR("getMntType (): %s not found in /etc/fstab\n", path);
-        return type;
     }
 
 };

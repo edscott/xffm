@@ -1,6 +1,10 @@
 #ifndef XF_LOCALMONITOR__HH
 # define XF_LOCALMONITOR__HH
 #include "fm/base/monitor.hh"
+#ifdef HAVE_MNTENT_H
+#define USE_MOUNTTHREAD
+#endif
+
 namespace xf
 {
 
@@ -40,17 +44,20 @@ public:
     }
     ~LocalMonitor(void){
         TRACE("***Destructor:~local_monitor_c()\n");
+#ifdef USE_MOUNTTHREAD
         // stop mountThread
         mountArg_[1] = NULL;
         while (mountArg_[2]){
             TRACE("***Waiting for mountThread to exit\n");
         }
+#endif
         g_hash_table_destroy(this->itemsHash());
         TRACE("***Destructor:~local_monitor_c() complete\n");
     }
     void
     start_monitor(GtkTreeModel *treeModel, const gchar *path){
         this->startMonitor(treeModel, path, (void *)monitor_f);
+#ifdef USE_MOUNTTHREAD
         // start mountThread
         pthread_t mountThread;
         TRACE("LocalMonitor thread itemshash=%p\n", this->itemsHash());
@@ -62,6 +69,7 @@ public:
 	    ERROR("thread_create(): %s\n", strerror(retval));
 	    //return retval;
 	}
+#endif
     }
 
     xd_t *

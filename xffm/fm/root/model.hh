@@ -165,7 +165,7 @@ public:
         auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
 	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
 	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG); 
-	auto tooltipText = g_strdup_printf("%s\n%s\n%s\n%s",
+	auto tooltipText = g_strdup_printf("%s\n%s\n%s\n%s\n%s",
 		_("Mount local disks and devices"),
 		_("eCryptfs Volume"),
 		_("SSHFS Remote Synchronization Folder"),

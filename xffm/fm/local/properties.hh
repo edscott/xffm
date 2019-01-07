@@ -337,8 +337,9 @@ private:
 	auto entry = (entry_t *)list->data;
 	mode_t oldMode =  entry->st.st_mode & 0777;
 	mode_t mode;
-	sscanf(text, "%o", &mode);
-	mode &= 0777;
+	unsigned int modeInput;
+	sscanf(text, "%o", &modeInput);
+	mode = modeInput & 0777;
 	TRACE("changeMode event old = %o new = %o\n", oldMode, mode);
 
 	// update label

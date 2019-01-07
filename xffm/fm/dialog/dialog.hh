@@ -143,7 +143,15 @@ public:
                 g_free(path);
             }
             break;
-        }
+	    case G_FILE_MONITOR_EVENT_CHANGED:
+	    case G_FILE_MONITOR_EVENT_CHANGES_DONE_HINT:
+	    case G_FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED:
+	    case G_FILE_MONITOR_EVENT_PRE_UNMOUNT:
+	    case G_FILE_MONITOR_EVENT_UNMOUNTED:
+	    case G_FILE_MONITOR_EVENT_MOVED:
+	    case G_FILE_MONITOR_EVENT_RENAMED:
+	    break;
+	}
 
         g_free(f);
         g_free(s);

@@ -2,6 +2,10 @@
 # define XF_FSTABMONITOR__HH
 #include "response/timeoutresponse.hh"
 #include "fm/base/monitor.hh"
+#ifdef HAVE_MNTENT_H
+#define USE_MOUNTTHREAD
+#endif
+
 namespace xf
 {
 template <class Type> class LocalView;
@@ -24,12 +28,14 @@ public:
     }
     ~FstabMonitor(void){
         TRACE("Destructor:~local_monitor_c()\n");
+#ifdef USE_MOUNTTHREAD
         // stop mountThread
         mountArg_[1] = NULL;
         while (mountArg_[2]){
             TRACE("***Waiting for mountThread to exit\n");
             sleep(1);
         }
+#endif
         g_hash_table_destroy(this->itemsHash());
         TRACE("***Destructor:~local_monitor_c() complete\n");
     }
@@ -39,6 +45,7 @@ public:
 	TRACE("Starting monitor for path:%s\n", path);
         this->startMonitor(treeModel, path, (void *)monitor_f);
         // start mountThread
+#ifdef USE_MOUNTTHREAD
         pthread_t mountThread;
         mountArg_[0] = (void *)this;
         mountArg_[1] = GINT_TO_POINTER(TRUE);
@@ -49,6 +56,7 @@ public:
 	    ERROR("thread_create(): %s\n", strerror(retval));
 	    //return retval;
 	}
+#endif
     }
 
 private:

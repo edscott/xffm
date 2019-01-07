@@ -30,6 +30,7 @@ public:
         const gchar *icon;
         gint mode;
 	switch (action){
+	    case GDK_ACTION_DEFAULT: 
 	    case GDK_ACTION_MOVE:
 		message = _("Moving files");
 		command = "mv -b -f";
@@ -48,6 +49,10 @@ public:
                 mode = MODE_LINK;
                 icon = "edit-copy/NE/emblem-symbolic-link/2.0/220";
 		break;
+	    case GDK_ACTION_PRIVATE:
+	    case GDK_ACTION_ASK:
+		ERROR("Not supported GDK_ACTION_PRIVATE || GDK_ACTION_ASK\n");
+		return FALSE;
 
 	}
 

@@ -193,7 +193,7 @@ public:
 	    if (strcmp(g, "vi")==0) g = g_strdup_printf("%s vi", term_cmd); 
 	    if (strcmp(g, "vim")==0) g = g_strdup_printf("%s vim", term_cmd); 
 	    //if (strcmp(g, "emacs")==0) g = g_strdup_printf("%s emacs", term_cmd); 
-	    if (strcmp(g, "gvim")==0) g = g_strdup_printf("gvim -f", term_cmd); 
+	    if (strcmp(g, "gvim")==0) g = g_strdup("gvim -f "); 
 	    e=g;
 	} else {
 	    e = g_find_program_in_path("gvim");

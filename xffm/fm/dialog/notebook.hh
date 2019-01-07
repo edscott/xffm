@@ -254,7 +254,7 @@ public:
 
         if (!page){
             ERROR("setWorkdir:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
-            return NULL;
+            return FALSE;
         }
         return page->setWorkDir(dir);
     }
