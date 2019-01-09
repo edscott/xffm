@@ -16,6 +16,7 @@ public:
     getIconname(const gchar *path){
         struct stat st;
         gchar *name;
+        
         if (stat(path, &st) < 0) {
 	    ERROR("stat(%s): %s\n", path, strerror(errno));
             name = g_strdup("inode/unknown");
@@ -351,7 +352,7 @@ private:
         TRACE("fullEmblem: %s --> %s\n", path, fullEmblem);
 	return fullEmblem;
     }
-
+public:
     static unsigned char
     getDType (struct stat *st_p) {
 	if(S_ISSOCK (st_p->st_mode)) return DT_SOCK;
@@ -363,7 +364,7 @@ private:
 	else if(S_ISREG (st_p->st_mode)) return DT_REG;
 	return  0;
     }
-
+private:
     static gchar *
     getEmblem(const gchar *path, struct stat *st){
 	auto basename = g_path_get_basename(path);

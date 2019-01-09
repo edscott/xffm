@@ -160,9 +160,17 @@ public:
 
 	xd_p->d_type = d->d_type;
 	xd_p->st = NULL;
+        /*
+        if (xd_p->d_type==DT_REG && withStat){
+        if (stat(path, &st) < 0) {
+	    ERROR("stat(%s): %s\n", path, strerror(errno));
+            name = g_strdup("inode/unknown");
+	} 
+        */
 	xd_p->mimetype = getMimeType(xd_p);
 	// symlinks and directories are stat'd in getMimeType()  
-        xd_p->icon = g_strdup(LocalIcons<Type>::getIconname(xd_p->path, xd_p->d_name, xd_p->mimetype, xd_p->d_type, xd_p->st));
+        xd_p->icon = g_strdup(LocalIcons<Type>::getIconname(xd_p));
+        errno=0;
         return xd_p;
     }
 
@@ -178,7 +186,12 @@ public:
 		ERROR("calloc: %s\n", strerror(errno));
 		exit(1);
 	    }
+            errno=0;
 	    stat(xd_p->path, xd_p->st);
+            if (errno){
+                DBG("stat: %s: %s\n", xd_p->path, strerror(errno));
+                errno=0;
+            }
 	    g_free(mimetype);
 	    mimetype = Mime<Type>::statMimeType(xd_p->st);
 	}
@@ -403,6 +416,7 @@ private:
             }
             g_free(h_name);
         }
+        TRACE("iconname, highlight: %s, %s\n", icon_name, highlight_name);
         GdkPixbuf *treeViewPixbuf = NULL;
         GdkPixbuf *normal_pixbuf = NULL;
         GdkPixbuf *highlight_pixbuf = NULL;

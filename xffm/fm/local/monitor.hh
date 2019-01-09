@@ -139,7 +139,14 @@ public:
 	    return FALSE;
 	}
 
-        gchar *iconName = LocalIcons<Type>::getIconname(inPath);
+        //gchar *iconName = LocalIcons<Type>::getIconname(inPath);
+        auto basename = g_path_get_basename(inPath);
+        auto d_type = LocalIcons<Type>::getDType(&st);
+        auto mimetype = Mime<Type>::extensionMimeType(inPath);
+
+        gchar *iconName = LocalIcons<Type>::getIconname(inPath, basename, mimetype, d_type, &st);
+        g_free(basename);
+        g_free(mimetype);
         TRACE("***localmonitor stat_func(): iconname=%s\n", iconName);
         GdkPixbuf *pixbuf = Pixbuf<Type>::get_pixbuf(iconName,  GTK_ICON_SIZE_DIALOG);
 
