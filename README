@@ -1,3 +1,6 @@
+  pending: fix popupmenu for /dev/disks
+             fix monitor and load items (/dev/disk/by_id monitor) in fstab
+             monitor, listed in fstab files FIXME.
 bug: 
  . local monitor does not insert new files in sort order
  > use libmagic preferably instead of perl if available
