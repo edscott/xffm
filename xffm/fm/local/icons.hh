@@ -143,17 +143,32 @@ private:
 	
 	if (strstr(mimetype, "script")) return g_strdup("text-x-script");
 	
-	if (strstr(mimetype, "template")) return g_strdup("text-x-generic-template");
-	
-	if (strstr(mimetype, "text")) return g_strdup("text-x-generic");
-
 	if (strstr(mimetype, "html")) return g_strdup("html-x-generic");
 	
 	if (strstr(mimetype, "package")) return g_strdup("package-x-generic");
 	
-	//if (strstr(mimetype, "")) return g_strdup("-x-generic");
-	
-	//XXX office stuff
+	// office stuff
+	if (strstr(mimetype, "document")){
+            // N.A.:
+            // if (strstr(mimetype, "")) return g_strdup("x-office-address-book");
+            if (strstr(mimetype, "drawing") || strstr(mimetype, "graphics ")|| strstr(mimetype, "image")) {
+                if (strstr(mimetype, "")) return g_strdup("x-office-drawing-template");
+                return g_strdup("x-office-drawing");
+            }
+            if (strstr(mimetype, "presentation")) {
+                if (strstr(mimetype, "")) return g_strdup("x-office-presentation-template");
+                return g_strdup("x-office-presentation");
+            }
+            if (strstr(mimetype, "spreadsheet")) {
+                if (strstr(mimetype, "")) return g_strdup("x-office-spreadsheet-template");
+                return g_strdup("x-office-spreadsheet");
+            }
+            if (strstr(mimetype, "template")) return g_strdup("x-office-document-template");
+            return g_strdup("x-office-document");
+        }
+        if (strstr(mimetype, "calendar")) return g_strdup("x-office-calendar");
+	if (strstr(mimetype, "template")) return g_strdup("text-x-generic-template");
+	if (strstr(mimetype, "text")) return g_strdup("text-x-generic");
 	
 	if (g_file_test(path, G_FILE_TEST_IS_EXECUTABLE)) return g_strdup("application-x-executable");
 	return g_strdup("text-x-preview");;
