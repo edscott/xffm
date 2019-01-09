@@ -53,7 +53,7 @@ public:
             run(notebook_p, userTerminal);
             g_free(userTerminal);
         } else {
-            run(notebook_p, "xterm");
+            run(notebook_p, "xterm -vb");
         }
     }
    

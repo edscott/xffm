@@ -174,7 +174,7 @@ public:
 
 	// XXX xterm is mandatory...
 	
-	setenv("TERMINAL", "xterm -rv", 1);
+	setenv("TERMINAL", "xterm -rv -vb", 1);
 	const gchar *term_cmd = getenv("TERMINAL_CMD");
 	if (!term_cmd || !strlen(term_cmd)) term_cmd = "xterm -e";
 
