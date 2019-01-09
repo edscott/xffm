@@ -13,7 +13,7 @@ class LocalIcons {
     
 public:
     static gchar *
-    get_iconname(const gchar *path){
+    getIconname(const gchar *path){
         struct stat st;
         gchar *name;
         if (stat(path, &st) < 0) {
@@ -30,19 +30,7 @@ public:
         g_free(emblem);
         return iconname;
     }
-/*
-    static gchar *
-    get_iconname(const gchar *path, const gchar *mimetype){
-	if (!mimetype) return NULL; //return get_iconname(path);
-	if (strstr(mimetype, "image")){
-	    if (isTreeView) return g_strdup("image-x-generic");
-	    if (Gtk<Type>::isImage(mimetype)) return g_strdup(path);
-	    return g_strdup("image-x-generic");
 
-	}
-	return NULL;
-    }
-*/
     static gchar *
     getIconname(xd_t *xd_p){
 	return 
@@ -118,49 +106,6 @@ private:
 	return getBasicIconname(path, mimetype);
     }
 
-#if 0
-        // Directories:
-        gchar *base = g_path_get_basename(path);
-        if (strcmp(base, "..")==0){
-            g_free(base);
-            return  g_strdup("go-up");
-        }
-        g_free(base);
-        if ((st && S_ISDIR(st->st_mode))) {
-            if (strcmp(path, g_get_home_dir())==0) {
-                return get_home_iconname(path);
-            }
-            return  g_strdup("folder");
-        }
-
-        // Character device:
-        if ((st && S_ISCHR(st->st_mode))) {
-            return  g_strdup("text-x-generic-template/SW/input-keyboard-symbolic/2.0/220");
-        }
-        // Named pipe (FIFO):
-        if ((st && S_ISFIFO(st->st_mode))) {
-            return  g_strdup("text-x-generic-template/SW/emblem-synchronizing-symbolic/2.0/220");
-        }
-        // UNIX domain socket:
-        if ((st && S_ISSOCK(st->st_mode))) {
-            return  g_strdup("text-x-generic-template/SW/emblem-shared-symbolic/2.0/220");
-        }
-        // Block device
-        if ((st && S_ISBLK(st->st_mode))) {
-            return  g_strdup("text-x-generic-template/SW/drive-harddisk-symbolic/2.0/220");
-        }
-        // Regular file:
-/*
- * FIXME
-        if ((st && S_ISREG(st->st_mode))) {
-            const gchar *basic = get_mime_iconname(xd_p->mimetype);
-            return g_strdup(basic);
-        }
-        */
-        return  g_strdup("text-x-generic");
-    }
-#endif
-
     static gchar *
     getBasicIconname(const gchar *path, const gchar *mimetype){	
 	if (strcmp(path, g_get_home_dir())==0) return g_strdup("user-home");
@@ -214,141 +159,6 @@ private:
 	return g_strdup("text-x-preview");;
      }
 
-#if 0
-    static gchar *
-    get_basic_iconname(xd_t *xd_p){	
-        // Up directory:
-        if (strcmp(xd_p->d_name, "..")==0) return  g_strdup("go-up");
-
-#ifdef HAVE_STRUCT_DIRENT_D_TYPE
-        // Symlinks:
-    /*    if (xd_p->d_type == DT_LNK) {
-            return  g_strdup("text-x-generic-template/SW/emblem-symbolic-link/2.0/220");
-        }
-    */
-	if (xd_p->mimetype){
-	    if (strcmp(xd_p->mimetype, "inode/blockdevice")==0) 
-		return g_strdup("drive-harddisk-symbolic");
-	}
-
-        if ((xd_p->d_type == DT_DIR )||(xd_p->st && S_ISDIR(xd_p->st->st_mode))) {
-            if (strcmp(xd_p->path, g_get_home_dir())==0) {
-                return get_home_iconname(xd_p->path);
-            }
-            return  g_strdup("folder");
-        }
-        // Character device:
-        if (xd_p->d_type == DT_CHR ) {
-            return  g_strdup("text-x-generic-template/SW/input-keyboard-symbolic/2.0/220");
-        }
-        // Named pipe (FIFO):
-        if (xd_p->d_type == DT_FIFO ) {
-            return  g_strdup("text-x-generic-template/SW/emblem-synchronizing-symbolic/2.0/220");
-        }
-        // UNIX domain socket:
-        if (xd_p->d_type == DT_SOCK ) {
-            return  g_strdup("text-x-generic-template/SW/emblem-shared-symbolic/2.0/220");
-        }
-        // Block device
-        if (xd_p->d_type == DT_BLK ) {
-            return  g_strdup("drive-harddisk-symbolic");
-        }
-        // Regular file:
-
-        if (xd_p->d_type == DT_REG ) {
-            const gchar *basic = get_mime_iconname(xd_p->mimetype);
-            return g_strdup(basic);
-        }
-
-        // Unknown:
-        if (xd_p->d_type == DT_UNKNOWN) {
-            return  g_strdup("dialog-question");
-        }
-#else
-        if ((xd_p->st && S_ISDIR(xd_p->st->st_mode))) {
-            if (strcmp(xd_p->path, g_get_home_dir())==0) {
-                return get_home_iconname(xd_p->d_name);
-            }
-            return  g_strdup("folder");
-        }
-
-        // Symlinks:
-    /*    if (xd_p->st && xd_p->d_type == xd_p->d_type == DT_LNK) {
-            return  g_strdup("text-x-generic-template/SW/emblem-symbolic-link/2.0/220");
-        }
-    */
-        // Character device:
-        if ((xd_p->st && S_ISCHR(xd_p->st->st_mode))) {
-            return  g_strdup("text-x-generic-template/SW/input-keyboard-symbolic/2.0/220");
-        }
-        // Named pipe (FIFO):
-        if ((xd_p->st && S_ISFIFO(xd_p->st->st_mode))) {
-            return  g_strdup("text-x-generic-template/SW/emblem-synchronizing-symbolic/2.0/220");
-        }
-        // UNIX domain socket:
-        if ((xd_p->st && S_ISSOCK(xd_p->st->st_mode))) {
-            return  g_strdup("text-x-generic-template/SW/emblem-shared-symbolic/2.0/220");
-        }
-        // Block device
-        if ((xd_p->st && S_ISBLK(xd_p->st->st_mode))) {
-            return  g_strdup("text-x-generic-template/SW/drive-harddisk-symbolic/2.0/220");
-        }
-        // Regular file:
-
-        if ((xd_p->st && S_ISREG(xd_p->st->st_mode))) {
-            const gchar *basic = get_mime_iconname(xd_p->mimetype);
-            return g_strdup(basic);
-        }
-#endif
-        return  g_strdup("text-x-generic");
-    }
-
-    static const gchar *
-    get_mime_iconname(const gchar *mimetype){
-        const gchar *basic = NULL;
-#ifdef USE_MIME
-        if (mimetype) {
-            // here we should get generic-icon from mime-module.xml!
-            basic = Mime<Type>::get_mimetype_iconname(mimetype);
-            TRACE("xfdir_local_c::get_mime_iconname(%s) -> %s\n", mimetype, basic);
-            if (basic) {
-                // check if the pixbuf is actually available
-                GdkPixbuf *pixbuf = pixbuf_c::get_pixbuf(basic,  GTK_ICON_SIZE_DIALOG);
-                if (pixbuf) return basic;
-		else return "text-x-generic";
-            } else {
-                if (strstr(mimetype, "text/html")){
-                    return "text-html";
-                }
-		return "text-x-generic";
-            }
-        }
-#endif
-        return "text-x-generic";
-    }
-
-    static gchar *
-    get_home_iconname(const gchar *path){
-        if (!path) return g_strdup("user-home");
-        gchar *base = g_path_get_basename(path);
-        const gchar *dir[]={N_("Documents"), N_("Downloads"),N_("Music"),N_("Pictures"),
-                    N_("Templates"),N_("Videos"),N_("Desktop"),N_("Bookmarks"),
-                    N_("Trash"),NULL};
-        const gchar *icon[]={"folder-documents", "folder-download","folder-music","folder-pictures",
-                      "folder-templates","folder-videos","user-desktop","user-bookmarks",
-                      "user-trash",NULL};
-        const gchar **p, **i;
-        for (p=dir, i=icon; p && *p ; p++, i++){
-            if (strcasecmp(*p, base) == 0) {
-                g_free(base);
-                return g_strdup(*i);
-            }
-        }
-        g_free(base);
-        return g_strdup("folder");
-    }
-
-#endif
 
     static gchar *
     extension(const gchar *base){
@@ -542,58 +352,6 @@ private:
 	g_free(basename);
 	return emblem;
     }
-
-#if 0
-	TRACE("getEmblem path st\n");
-        // No emblem for go up
-        gchar *base = g_path_get_basename(path);
-        if (strcmp(base, "..")==0){
-            g_free(base);
-            return g_strdup("");
-        }
-        gchar *emblem = NULL;
-        if ((st->st_mode & S_IFMT) == S_IFLNK){
-            if (g_file_test(path, G_FILE_TEST_EXISTS))
-                return g_strdup("/SW/emblem-symbolic-link/2.0/220");
-            else
-                return g_strdup("/SW/emblem-unreadable/2.0/220");
-        }
-        if (RootView<Type>::isBookmarked(path)){
-            emblem = g_strdup("/SE/bookmark-new/2.0/220");
-        }
-
-	gchar *clipEmblem = ClipBoard<Type>::clipBoardEmblem(path);
-        emblem = addEmblem(emblem, clipEmblem);
-        g_free(clipEmblem);
-
-        if (FstabView<Type>::isMounted(path)){
-            emblem = addEmblem(emblem, "/NW/greenball/3.0/180");
-        } else if (FstabView<Type>::isInFstab(path)){
-            emblem = addEmblem(emblem, "/NW/grayball/3.0/180");
-        }
-
-        if (!emblem) emblem = statEmblem(path, st);
-	if (!emblem) emblem = g_strdup("");
-        TRACE("getEmblem: %s --> %s\n", path, emblem);
-
-        gchar *extend;
-        if ((st->st_mode & S_IFMT) == S_IFDIR) extend = g_strdup("");
-        else extend = extension(base);
-        TRACE("extend: %s --> %s\n", path, extend);
-        auto color = getColor(base);
-        TRACE("color: %s --> %s\n", path, color);
-        auto fullEmblem = g_strconcat(extend, color, emblem, NULL);
-
-        //auto fullEmblem = addColors(xd_p, extend, emblem);
-        g_free(color);
-        g_free(emblem);
-        g_free(extend);
-        TRACE("fullEmblem: %s --> %s\n", path, fullEmblem);
-        g_free(base);
-	return fullEmblem;
-    }
-#endif
-
 };
 
 }
