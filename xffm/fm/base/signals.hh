@@ -522,7 +522,7 @@ public:
 
         gtk_tree_model_get (treeModel, &iter, PATH, &path, -1);
 	
-        TRACE("View::activate: %s\n", path);
+        WARN("View::activate: %s\n", path);
         auto lastPath = g_strdup(view->path());
 	if (!view->loadModel(treeModel, tpath, path)){
             TRACE("reloading %s\n", lastPath);
@@ -643,6 +643,7 @@ public:
     getViewType(const gchar *path){
         if (!path) return ROOTVIEW_TYPE;
         if (g_file_test(path, G_FILE_TEST_EXISTS)) return (LOCALVIEW_TYPE);
+        if (strcmp(path, "/dev/disks")==0) return (LOCALVIEW_TYPE);
 	if (g_path_is_absolute(path)){
 	    const gchar *m = _("Directory does not exist.");
 	    if (strstr(path,"/.local/share/Trash")) {
@@ -659,7 +660,7 @@ public:
         if (strcmp(path, "xffm:cifs")==0) return (CIFS_TYPE);
         if (strcmp(path, "xffm:pkg")==0) return (PKG_TYPE);
 	
-        ERROR("View::loadModel() %s not defined.\n", path);
+        ERROR("base/signals.hh::View::loadModel() %s not defined.\n", path);
         return (ROOTVIEW_TYPE);
     }
 

@@ -64,7 +64,6 @@ public:
 	return loadModel(path, this);
     }
     gboolean loadModel(const gchar *path, View<Type> *view){
-
         if (isTreeView){
 	    // hide iconview, show treeview
 	    gtk_widget_hide(GTK_WIDGET(view->page()->topScrolledWindow()));

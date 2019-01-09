@@ -234,7 +234,7 @@ public:
             w = GTK_WIDGET(g_object_get_data(G_OBJECT(fstabItemPopUp), "Unmount the volume associated with this folder"));
             gtk_widget_set_sensitive(w, TRUE);
             gtk_widget_show(w);
-        } else {
+        } else if (strcmp(path,"/dev/disk")) {
             w = GTK_WIDGET(g_object_get_data(G_OBJECT(fstabItemPopUp), "Unmount the volume associated with this folder"));
             gtk_widget_set_sensitive(w, FALSE);
             w = GTK_WIDGET(g_object_get_data(G_OBJECT(fstabItemPopUp), "Mount the volume associated with this folder"));

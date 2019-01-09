@@ -116,7 +116,7 @@ private:
 	if (strcmp(mimetype, "inode/directory")==0) return  g_strdup("folder");
 
 	// Block device
-	if (strcmp(mimetype, "inode/blockdevice")==0) return g_strdup("drive-harddisk-symbolic");
+	if (strcmp(mimetype, "inode/blockdevice")==0) return g_strdup("drive-harddisk");
         
         // Character device:
 	if (strcmp(mimetype, "inode/chardevice")==0) return  g_strdup("input-keyboard-symbolic");
@@ -287,12 +287,13 @@ private:
         gboolean is_lnk = (d_type == DT_LNK);
         // Symlinks:
         if (is_lnk) {
+	    TRACE("link %s --> %s\n", path, realpath(path,NULL));
             if (g_file_test(path, G_FILE_TEST_EXISTS))
                 emblem = g_strdup("/SW/emblem-symbolic-link/2.0/220");
             else
                 emblem = g_strdup("/SW/emblem-unreadable/2.0/220");
 	    if (FstabView<Type>::isMounted(path)){
-		emblem = addEmblem(emblem, "/NW/greenball/3.0/180");
+		emblem = addEmblem(emblem, "/NW/greenball/3.0/220");
 		return emblem;
 	    }
         }
@@ -305,11 +306,14 @@ private:
         emblem = addEmblem(emblem, clipEmblem);
         g_free(clipEmblem);
 
-        if (FstabView<Type>::isMounted(path)){
-            emblem = addEmblem(emblem, "/NW/greenball/3.0/180");
-        } else if (FstabView<Type>::isInFstab(path)){
-            emblem = addEmblem(emblem, "/NW/grayball/3.0/180");
-        }
+	if (d_type == DT_DIR || d_type == DT_BLK){
+
+	    if (FstabView<Type>::isMounted(path)){
+		emblem = addEmblem(emblem, "/NW/greenball/3.0/180");
+	    } else if (FstabView<Type>::isInFstab(path)){
+		emblem = addEmblem(emblem, "/NW/grayball/3.0/180");
+	    }
+	}
 
 	//stat for all emblems? limit to d_types
 	if (!emblem && st_p) {

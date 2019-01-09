@@ -75,7 +75,7 @@ public:
     static FstabMonitor<Type> *
     loadModel (View<Type> *view)
     {
-		
+		TRACE("fstab loadModel()\n");
 	view->disableDnD();	
         auto iconView = view->iconView();
         auto treeModel = gtk_icon_view_get_model (iconView);
@@ -101,9 +101,41 @@ public:
 	}
     }
 
+    static void
+    addDisksItem(GtkTreeModel *treeModel){ 
+ 	GtkTreeIter iter;
+	// Root
+	auto name = "/dev/disk";
+	//Since /dev is not concrete, the following test returns false...
+	//
+	//if (!g_file_test(name, G_FILE_TEST_IS_DIR)) return;
+
+	auto utf_name = util_c::utf_string(_("Disks"));
+	auto icon_name = "drive-multidisk";
+	auto highlight_name = "drive-multidisk/SE/document-open/2.0/225";
+        auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
+	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
+	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
+	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
+	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
+		DISPLAY_NAME, utf_name,
+		ACTUAL_NAME, name,
+		ICON_NAME, icon_name,
+                PATH, name,
+                TREEVIEW_PIXBUF, treeViewPixbuf, 
+		DISPLAY_PIXBUF, normal_pixbuf,
+		NORMAL_PIXBUF, normal_pixbuf,
+		HIGHLIGHT_PIXBUF, highlight_pixbuf,
+		TOOLTIP_TEXT,_("Disks"),
+
+		-1);
+	g_free(utf_name);
+    }
+
     static void 
     addAllItems(GtkTreeModel *treeModel){
 	RootView<Type>::addXffmItem(treeModel);
+	addDisksItem(treeModel);
 	//addNFSItem(treeModel);
 	//addEcryptFSItem(treeModel);
 	//addSSHItem(treeModel);
@@ -580,6 +612,7 @@ public:
   
     static gboolean
     isMounted (const gchar *mnt_fsname) {
+
         if(!mnt_fsname) {
             ERROR ("isMounted() mnt_point != NULL not met!\n");
             return FALSE;
@@ -618,7 +651,8 @@ public:
             while ((m = getmntent_r (tab_file, &mntbuf, buf, 2048)) != NULL) {	
                 TRACE(".isMounted():%s:  %s  or  %s\n", mnt_point, m->mnt_dir, m->mnt_fsname);
                 if((mnt_point && strcmp (m->mnt_dir, mnt_point) == 0) || 
-                   (mnt_fsname && strcmp (m->mnt_fsname, mnt_fsname) == 0)) {
+                   (mnt_point && strcmp (m->mnt_fsname, mnt_point) == 0)) {
+                   //(mnt_fsname && strcmp (m->mnt_fsname, mnt_fsname) == 0)) {
                     TRACE("..isMounted(): GOTCHA  mnt_dir=%s  mnt_fsname=%s mnt_point=%s\n", m->mnt_dir, m->mnt_fsname, mnt_point);
                     endmntent (tab_file);
                     g_free(mnt_point);
