@@ -5,6 +5,24 @@
 #ifdef HAVE_MNTENT_H
 #define USE_MOUNTTHREAD
 #endif
+/* FIXME:
+ * Instead of using partuuid as identifier, use id to obtain
+ * hash for path to block device.
+ *
+ * for each block device (sd*, hd*) save
+ * if partitions are present, then do not show the non-partition
+ * save: 
+ *      partuuid (if present)
+ *      id
+ *      label (if present)
+ *      path
+ *      uuid 
+ *
+ *      Display name will be label or devicepath.
+ *      popup info will have label, devicepath, id
+ *      Properties will also have partuuid, uuid, path
+ *
+ * */
 
 namespace xf
 {

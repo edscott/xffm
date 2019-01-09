@@ -306,7 +306,7 @@ private:
 
 public:
     static gchar *
-    locate_mime_t (const gchar * file) {
+    extensionMimeType (const gchar * file) {
         gchar *type = NULL;
         gchar *p;
         if (!application_hash_sfx) {
@@ -316,7 +316,7 @@ public:
 		return NULL;
 	    }
         }
-        TRACE("mime-module, locate_mime_t looking in sfx hash for \"%s\"\n", file);
+        TRACE("mime-module, extensionMimeType looking in sfx hash for \"%s\"\n", file);
 
 	// if suffix is duplicated, first try magic.
 	
@@ -425,9 +425,9 @@ private:
 public:
     static gchar *
     mimeType (const gchar *file){
-        gchar *retval = locate_mime_t(file);
+        gchar *retval = extensionMimeType(file);
         if (retval) {
-	    TRACE("locate_mime_t: %s --> %s\n", file, retval);
+	    TRACE("mimeType: %s --> %s\n", file, retval);
             return retval;
         }
 #ifdef MIMETYPE_PROGRAM
@@ -447,18 +447,56 @@ public:
 #endif
    } 
 
-public:        
+public: 
+    static gchar *
+    basicMimeType(unsigned char d_type){
+	if (d_type == DT_DIR ) return g_strdup("inode/directory");
+        // Character device:
+        if (d_type == DT_CHR ) return g_strdup("inode/chardevice");   
+        // Named pipe (FIFO):
+        if (d_type == DT_FIFO ) return g_strdup("inode/fifo");
+	// UNIX domain socket:
+        if (d_type == DT_SOCK ) return g_strdup("inode/socket");
+        // Block device
+        if (d_type == DT_BLK ) return g_strdup("inode/blockdevice");
+        // Unknown:
+        if (d_type == DT_UNKNOWN) return g_strdup("inode/unknown");
+        // Regular file:
+        if (d_type == DT_REG ) return g_strdup("inode/regular");
+        if (d_type == DT_LNK ) return g_strdup("inode/symlink");
+	return  g_strdup("inode/unknown");
+    }
+    
+    static gchar *
+    statMimeType (struct stat *st_p) {
+	    if(S_ISSOCK (st_p->st_mode)) return g_strdup("inode/socket");
+	    else if(S_ISBLK (st_p->st_mode)) return g_strdup("inode/blockdevice");
+	    else if(S_ISCHR (st_p->st_mode)) return g_strdup("inode/chardevice");
+	    else if(S_ISFIFO (st_p->st_mode)) return g_strdup("inode/fifo");
+	    else if (S_ISLNK(st_p->st_mode)) return g_strdup("inode/symlink");
+	    else if(S_ISDIR (st_p->st_mode)) return g_strdup("inode/directory");
+	    else if(S_ISREG (st_p->st_mode)) return g_strdup("inode/regular");
+	return  g_strdup("inode/unknown");
+    }
+
     static gchar *
     mimeType (const gchar *file, struct stat *st_p) {
-        if (!file) return NULL;
-        if (st_p){
-            if(S_ISSOCK (st_p->st_mode)) return g_strdup("inode/socket");
-            else if(S_ISBLK (st_p->st_mode)) return g_strdup("inode/blockdevice");
-            else if(S_ISCHR (st_p->st_mode)) return g_strdup("inode/chardevice");
-            else if(S_ISFIFO (st_p->st_mode)) return g_strdup("inode/fifo");
-            else if (S_ISLNK(st_p->st_mode)) return g_strdup("inode/symlink");
-            else if(S_ISDIR (st_p->st_mode)) return g_strdup("inode/directory");
-        }
+        if (!file){
+	    ERROR("mimeType (file, st_p) file cannot be nil\n");
+	    return g_strdup("inode/regular");
+	}
+
+
+
+        if (!st_p){
+	    if(S_ISSOCK (st_p->st_mode)) return g_strdup("inode/socket");
+	    else if(S_ISBLK (st_p->st_mode)) return g_strdup("inode/blockdevice");
+	    else if(S_ISCHR (st_p->st_mode)) return g_strdup("inode/chardevice");
+	    else if(S_ISFIFO (st_p->st_mode)) return g_strdup("inode/fifo");
+	    else if (S_ISLNK(st_p->st_mode)) return g_strdup("inode/symlink");
+	    else if(S_ISDIR (st_p->st_mode)) return g_strdup("inode/directory");
+	}
+
         if(file[strlen (file) - 1] == '~' || file[strlen (file) - 1] == '%') {
             gchar *r_file = g_strdup(file);
             r_file[strlen (r_file) - 1] = 0;
@@ -466,9 +504,10 @@ public:
             g_free(r_file);
             return retval;
         }
-
-        return g_strdup("inode/regular");
-        // mimemagic return value should be const gchar *
+	auto type = extensionMimeType(file);
+	if (!type) type = g_strdup("inode/regular");
+	return type;
+        //return g_strdup("inode/regular");
         //return mimeMagic(file);
     }
 

@@ -1,6 +1,9 @@
 #ifndef XF_LOCALMODEL__HH
 # define XF_LOCALMODEL__HH
 #include "common/util.hh"
+#ifndef HAVE_STRUCT_DIRENT_D_TYPE
+#error "HAVE_STRUCT_DIRENT_D_TYPE not defined"
+#endif
 
 typedef struct xd_t{
     gchar *d_name;
@@ -8,7 +11,7 @@ typedef struct xd_t{
     unsigned char d_type;
     struct stat *st;
     gchar *mimetype;
-    const gchar *icon;
+    gchar *icon;
 }xd_t;
 static pthread_mutex_t readdir_mutex=PTHREAD_MUTEX_INITIALIZER;
 static gboolean inserted_;
@@ -110,11 +113,13 @@ public:
         struct dirent *d; // static pointer
         errno=0;
         TRACE( "shows hidden=%d\n", showHidden);
+	gint count = 0;
         while ((d = readdir(directory))  != NULL){
             TRACE( "%p  %s\n", d, d->d_name);
             if(strcmp (d->d_name, ".") == 0) continue;
             if (strcmp(path,"/")==0 && strcmp (d->d_name, "..") == 0) continue;
-            xd_t *xd_p = get_xd_p(path, d, FALSE);
+	    // stat first 104 items.
+            xd_t *xd_p = get_xd_p(path, d, (count++ < 104));
             directory_list = g_list_prepend(directory_list, xd_p);
             if (heartbeat) {
                 (*heartbeat)++;
@@ -137,13 +142,6 @@ public:
             ERROR("read_files_local(): Count failed! Directory not read!\n");
         }
         directory_list = sort_directory_list (directory_list);
-        // stat first 104 items.
-        gint i=0;
-        for (auto p = directory_list; p && p->data && i<104; p= p->next, i++) {
-            auto xd_p = (xd_t *)p->data;
-            xd_p->st = (struct stat *)calloc(1, sizeof(struct stat));
-            stat(xd_p->path, xd_p->st);
-        }
         return (directory_list);
     }
 
@@ -160,41 +158,43 @@ public:
             xd_p->path = g_strconcat(directory, G_DIR_SEPARATOR_S, d->d_name, NULL);
         }
 
-        // These will be filled in later by thread:
-        xd_p->mimetype = NULL;
-        xd_p->icon = NULL;
-        xd_p->st = NULL;
-        // hash based mimetype
-#ifdef HAVE_STRUCT_DIRENT_D_TYPE
-        xd_p->d_type = d->d_type;
-        // stat symbolic links now...
-	
-        if (xd_p->d_type == DT_DIR){
-            xd_p->mimetype = g_strdup("inode/directory");
-	}
-	else if (xd_p->d_type == DT_LNK){
-            xd_p->st = (struct stat *)calloc(1, sizeof(struct stat));
-            stat(xd_p->path, xd_p->st);
-            xd_p->mimetype = Mime<Type>::mimeType(xd_p->path, xd_p->st);
-            //xd_p->mimetype = Mime<Type>::locate_mime_t(xd_p->path);
-        } else {
-            if (withStat){
-                xd_p->st = (struct stat *)calloc(1, sizeof(struct stat));
-                stat(xd_p->path, xd_p->st);
-            }
-            xd_p->mimetype = Mime<Type>::locate_mime_t(xd_p->path);
-        }
-
-#else
-        xd_p->d_type = 0;
-#endif
+	xd_p->d_type = d->d_type;
+	xd_p->st = NULL;
+	xd_p->mimetype = getMimeType(xd_p);
+	// symlinks and directories are stat'd in getMimeType()  
+        xd_p->icon = g_strdup(LocalIcons<Type>::getIconname(xd_p->path, xd_p->d_name, xd_p->mimetype, xd_p->d_type, xd_p->st));
         return xd_p;
+    }
+
+    static gchar *
+    getMimeType(xd_t *xd_p){
+	auto mimetype = Mime<Type>::basicMimeType(xd_p->d_type);
+	TRACE("%s -> %s\n", xd_p->path, mimetype);
+	if (strcmp(mimetype, "inode/symlink")==0 ||
+	    strcmp(mimetype, "inode/directory")==0 )
+	{
+            xd_p->st = (struct stat *)calloc(1, sizeof(struct stat));
+	    if (!xd_p->st){
+		ERROR("calloc: %s\n", strerror(errno));
+		exit(1);
+	    }
+	    stat(xd_p->path, xd_p->st);
+	    g_free(mimetype);
+	    mimetype = Mime<Type>::statMimeType(xd_p->st);
+	}
+	if (strcmp(mimetype,"inode/regular")==0){
+	    auto type = Mime<Type>::extensionMimeType(xd_p->path);
+	    if (type) {
+		g_free(mimetype);
+		mimetype = type;
+	    }
+	}
+	return mimetype;
     }
 
     static void
     free_xd_p(xd_t *xd_p){
-	// The following must be "const gchar *"
-        //g_free(xd_p->icon);
+        g_free(xd_p->icon);
         g_free(xd_p->mimetype);
         g_free(xd_p->d_name);
         g_free(xd_p->path);
@@ -213,16 +213,8 @@ public:
         gboolean a_cond = FALSE;
         gboolean b_cond = FALSE;
 
-#ifdef HAVE_STRUCT_DIRENT_D_TYPE
         a_cond = ((xd_a->d_type == DT_DIR )||(xd_a->st && S_ISDIR(xd_a->st->st_mode)));
         b_cond = ((xd_b->d_type == DT_DIR )||(xd_b->st && S_ISDIR(xd_b->st->st_mode)));
-#else
-        if (xd_a->st && xd_b->st && 
-                (S_ISDIR(xd_a->st->st_mode) || S_ISDIR(xd_b->st->st_mode))) {
-            a_cond = (S_ISDIR(xd_a->st->st_mode)|| S_ISDIR(xd_a->st->st_mode));
-            b_cond = (S_ISDIR(xd_b->st->st_mode)|| S_ISDIR(xd_b->st->st_mode));
-        } 
-#endif
 
         if (a_cond && !b_cond) return -1; 
         if (!a_cond && b_cond) return 1;
@@ -242,16 +234,8 @@ public:
         gboolean a_cond = FALSE;
         gboolean b_cond = FALSE;
 
-#ifdef HAVE_STRUCT_DIRENT_D_TYPE
         a_cond = ((xd_a->d_type == DT_DIR )||(xd_a->st && S_ISDIR(xd_a->st->st_mode)));
         b_cond = ((xd_b->d_type == DT_DIR )||(xd_b->st && S_ISDIR(xd_b->st->st_mode)));
-#else
-        if (xd_a->st && xd_b->st && 
-                (S_ISDIR(xd_a->st->st_mode) || S_ISDIR(xd_b->st->st_mode))) {
-            a_cond = (S_ISDIR(xd_a->st->st_mode)|| S_ISDIR(xd_a->st->st_mode));
-            b_cond = (S_ISDIR(xd_b->st->st_mode)|| S_ISDIR(xd_b->st->st_mode));
-        } 
-#endif
 
         if (a_cond && !b_cond) return -1; 
         if (!a_cond && b_cond) return 1;
@@ -273,7 +257,7 @@ private:
                 xd_p->st = (struct stat *)calloc(1, sizeof(struct stat));
                 if (!xd_p->st) continue;
                 if (stat(xd_p->path, xd_p->st)){
-                    DBG("xfdir_local_c::sort_directory_list: cannot stat %s (%s)\n", 
+                    TRACE("xfdir_local_c::sort_directory_list: cannot stat %s (%s)\n", 
                             xd_p->path, strerror(errno));
                     continue;
                 }
@@ -382,21 +366,15 @@ private:
 
         
         gchar *utf_name = Util<Type>::utf_string(xd_p->d_name);
-        //gchar *icon_name = LocalIcons<Type>::get_iconname(xd_p->path, xd_p->mimetype);
-        gchar *icon_name = LocalIcons<Type>::get_iconname(xd_p);
+        const gchar *icon_name = xd_p->icon;
 	TRACE("icon name for %s is %s\n", xd_p->d_name, icon_name);
         
         // chop file extension (will now appear on the icon). (XXX only for big icons)
         gboolean is_dir;
         gboolean is_reg_not_link;
 
-#ifdef HAVE_STRUCT_DIRENT_D_TYPE
         is_dir = (xd_p->d_type == DT_DIR);
         is_reg_not_link = (xd_p->d_type == DT_REG && !(xd_p->d_type == DT_LNK));
-#else 
-        is_dir = (xd_p->st && S_ISDIR(xd_p->st->st_mode));
-        is_reg_not_link = (xd_p->st && S_ISREG(xd_p->st->st_mode) && !S_ISLNK(xd_p->st->st_mode));
-#endif
         if (is_reg_not_link) {
             gchar *t = g_strdup(xd_p->d_name);
             if (strchr(t, '.') && strrchr(t, '.') != t){
@@ -415,7 +393,7 @@ private:
                 highlight_name = g_strdup("go-up/NW/go-up-symbolic/2.0/225");
             } else highlight_name = g_strdup("document-open");
         } else if (!highlight_name){
-            gchar *h_name = LocalIcons<Type>::get_iconname(xd_p);
+            gchar *h_name = LocalIcons<Type>::getIconname(xd_p);
             if (xd_p->st && U_RX(xd_p->st->st_mode)) {
                 highlight_name = 
                     g_strdup_printf("%s/NE/application-x-executable-symbolic/2.5/220", h_name);
@@ -485,7 +463,6 @@ private:
                 TOOLTIP_TEXT, statInfo,
                 -1);
         g_free(statInfo);
-        g_free(icon_name);
         g_free(highlight_name);
         g_free(utf_name);
     }

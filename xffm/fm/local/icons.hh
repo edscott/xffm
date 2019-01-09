@@ -42,20 +42,32 @@ public:
     }
 
     static gchar *
-    get_iconname(xd_t *xd_p){
-        gchar *name;
-        if (xd_p->icon) name = g_strdup(xd_p->icon);
-        else {
-	    name = get_iconname(xd_p->path, xd_p->mimetype);
-	    if (!name) {
-		name = get_basic_iconname(xd_p);
-	    }
+    getIconname(xd_t *xd_p){
+	return 
+	    getIconname(xd_p->path, 
+		    xd_p->d_name,
+		    xd_p->mimetype, 
+		    xd_p->d_type, 
+		    xd_p->st);
+    }
+
+    static gchar *
+    getIconname(const gchar *path, const gchar *basename, 
+	    const gchar *mimetype, const unsigned char d_type,
+	    struct stat *st_p){
+        // Up directory:
+        if (strcmp(basename, "..")==0) return  g_strdup("go-up");
+
+	auto name = getBasicIconname(path, mimetype);
+	if (!name){
+	    ERROR("getBasicIconname should not return NULL\n");
+	    return g_strdup("image-missing");
 	}
-	if (g_path_is_absolute(name)) return name; 
-	TRACE("basic iconname: %s --> %s\n", xd_p->d_name, name);
-        gchar *emblem = getEmblem(xd_p);
+
+	if (g_path_is_absolute(name)) return name; // image previews (no emblem)
+	TRACE("basic iconname: %s --> %s\n", basename, name);
+        gchar *emblem = getEmblem(path, basename,  d_type, st_p);
         TRACE("emblem=%s\n", emblem);
-	if (!name) name = g_strdup("image-missing");
         gchar *iconname = g_strconcat(name, emblem, NULL);
         g_free(name);
         g_free(emblem);
@@ -143,16 +155,75 @@ private:
     }
 
     static gchar *
-    get_basic_iconname(xd_t *xd_p){
+    getBasicIconname(const gchar *path, const gchar *mimetype){	
+	if (strcmp(path, g_get_home_dir())==0) return g_strdup("user-home");
+	if (!mimetype) {
+	    ERROR("getBasicIconname mimetype cannot be null\n");
+	    return g_strdup("image-missing");
+	}
+	if (strcmp(mimetype, "inode/directory")==0) return  g_strdup("folder");
 
-        // Directories:
+	// Block device
+	if (strcmp(mimetype, "inode/blockdevice")==0) return g_strdup("drive-harddisk-symbolic");
+        
+        // Character device:
+	if (strcmp(mimetype, "inode/chardevice")==0) return  g_strdup("input-keyboard-symbolic");
+
+        // Named pipe (FIFO):
+	if (strcmp(mimetype, "inode/fifo")==0) return  g_strdup("network-wired-symbolic");
+
+        // UNIX domain socket:
+	if (strcmp(mimetype, "inode/socket")==0) return  g_strdup("network-wired-symbolic");
+        
+        // Regular file:
+	if (strcmp(mimetype, "inode/regular")==0) return  g_strdup("text-x-generic");
+	if (strstr(mimetype, "image")){
+	    if (isTreeView) return g_strdup("image-x-generic");
+	    if (Gtk<Type>::isImage(mimetype)) return g_strdup(path);
+	    return g_strdup("image-x-generic");
+	}
+
+	if (strstr(mimetype, "audio")) return g_strdup("audio-x-generic");
+	
+	if (strstr(mimetype, "font")) return g_strdup("font-x-generic");
+	
+	if (strstr(mimetype, "video")) return g_strdup("video-x-generic");
+	
+	if (strstr(mimetype, "script")) return g_strdup("text-x-script");
+	
+	if (strstr(mimetype, "template")) return g_strdup("text-x-generic-template");
+	
+	if (strstr(mimetype, "text")) return g_strdup("text-x-generic");
+
+	if (strstr(mimetype, "html")) return g_strdup("html-x-generic");
+	
+	if (strstr(mimetype, "package")) return g_strdup("package-x-generic");
+	
+	//if (strstr(mimetype, "")) return g_strdup("-x-generic");
+	
+	//XXX office stuff
+	
+	if (g_file_test(path, G_FILE_TEST_IS_EXECUTABLE)) return g_strdup("application-x-executable");
+	return g_strdup("text-x-preview");;
+     }
+
+
+    static gchar *
+    get_basic_iconname(xd_t *xd_p){	
+        // Up directory:
         if (strcmp(xd_p->d_name, "..")==0) return  g_strdup("go-up");
+
 #ifdef HAVE_STRUCT_DIRENT_D_TYPE
         // Symlinks:
     /*    if (xd_p->d_type == DT_LNK) {
             return  g_strdup("text-x-generic-template/SW/emblem-symbolic-link/2.0/220");
         }
     */
+	if (xd_p->mimetype){
+	    if (strcmp(xd_p->mimetype, "inode/blockdevice")==0) 
+		return g_strdup("drive-harddisk-symbolic");
+	}
+
         if ((xd_p->d_type == DT_DIR )||(xd_p->st && S_ISDIR(xd_p->st->st_mode))) {
             if (strcmp(xd_p->path, g_get_home_dir())==0) {
                 return get_home_iconname(xd_p->path);
@@ -173,7 +244,7 @@ private:
         }
         // Block device
         if (xd_p->d_type == DT_BLK ) {
-            return  g_strdup("text-x-generic-template/SW/drive-harddisk-symbolic/2.0/220");
+            return  g_strdup("drive-harddisk-symbolic");
         }
         // Regular file:
 
@@ -388,59 +459,59 @@ private:
         return emblem;
     }
     static gchar *
-    getEmblem(xd_t *xd_p){
+    getEmblem(const gchar *path, const gchar *basename, 
+	    const unsigned char d_type, struct stat *st_p){
         // No emblem for go up
-        if (strcmp(xd_p->d_name, "..")==0) return g_strdup("");
+        if (strcmp(basename, "..")==0) return g_strdup("");
     
-        //FIXME: first determine the cut/copy emblem, or maybe just
-        //       do the color thing with cut status...
-
-        // First we work on d_type (no stat)
         gchar *emblem = NULL;
 
-        gboolean is_lnk = FALSE;
-#ifdef HAVE_STRUCT_DIRENT_D_TYPE
-        is_lnk = (xd_p->d_type == DT_LNK);
-#endif
+        gboolean is_lnk = (d_type == DT_LNK);
         // Symlinks:
         if (is_lnk) {
-            if (g_file_test(xd_p->path, G_FILE_TEST_EXISTS))
-                return g_strdup("/SW/emblem-symbolic-link/2.0/220");
+            if (g_file_test(path, G_FILE_TEST_EXISTS))
+                emblem = g_strdup("/SW/emblem-symbolic-link/2.0/220");
             else
-                return g_strdup("/SW/emblem-unreadable/2.0/220");
+                emblem = g_strdup("/SW/emblem-unreadable/2.0/220");
+	    if (FstabView<Type>::isMounted(path)){
+		emblem = addEmblem(emblem, "/NW/greenball/3.0/180");
+		return emblem;
+	    }
         }
 
-
-        if (RootView<Type>::isBookmarked(xd_p->path)){
+        if (RootView<Type>::isBookmarked(path)){
             emblem = g_strdup("/SE/bookmark-new/2.0/220");
         }
 
-	gchar *clipEmblem = ClipBoard<Type>::clipBoardEmblem(xd_p->path);
+	gchar *clipEmblem = ClipBoard<Type>::clipBoardEmblem(path);
         emblem = addEmblem(emblem, clipEmblem);
         g_free(clipEmblem);
 
-        if (FstabView<Type>::isMounted(xd_p->path)){
+        if (FstabView<Type>::isMounted(path)){
             emblem = addEmblem(emblem, "/NW/greenball/3.0/180");
-        } else if (FstabView<Type>::isInFstab(xd_p->path)){
+        } else if (FstabView<Type>::isInFstab(path)){
             emblem = addEmblem(emblem, "/NW/grayball/3.0/180");
         }
 
-	if (!emblem) emblem = statEmblem(xd_p->path, xd_p->st);
+	//stat for all emblems? limit to d_types
+	if (!emblem && st_p) {
+	    emblem = statEmblem(path, st_p);
+	}
 	if (!emblem) emblem = g_strdup("");
 
-        TRACE("getEmblem: %s --> %s\n", xd_p->path, emblem);
+        TRACE("getEmblem: %s --> %s\n", path, emblem);
         gchar *extend;
-        if (xd_p->d_type != DT_REG) extend = g_strdup("");
-        else extend = extension(xd_p->d_name);
-        TRACE("extend: %s --> %s\n", xd_p->path, extend);
-        auto color = getColor(xd_p->d_name);
+        if (d_type != DT_REG) extend = g_strdup("");
+        else extend = extension(basename);
+        TRACE("extend: %s --> %s\n", path, extend);
+        auto color = getColor(basename);
         auto fullEmblem = g_strconcat(extend, color, emblem, NULL);
 
         //auto fullEmblem = addColors(xd_p, extend, emblem);
         g_free(color);
         g_free(emblem);
         g_free(extend);
-        TRACE("fullEmblem: %s --> %s\n", xd_p->path, fullEmblem);
+        TRACE("fullEmblem: %s --> %s\n", path, fullEmblem);
 	return fullEmblem;
     }
 
