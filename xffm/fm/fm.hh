@@ -133,7 +133,7 @@ public:
 	gtk_init (&argc, &argv);
         auto gtksettings = gtk_settings_get_default();
         // this is to avoid crashes on remote x connection which want to use audible bell.
-        g_object_set(G_OBJECT(gtksettings), "gtk-error-bell", FALSE);
+        g_object_set(G_OBJECT(gtksettings), "gtk-error-bell", FALSE, NULL);
         
 	if (argv[1] && strcmp(argv[1],"--find")==0){
 	    xf::Find<xf::findSignals<double>> dialog((const gchar *)argv[2]);
