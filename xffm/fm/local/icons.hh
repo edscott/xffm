@@ -16,10 +16,12 @@ public:
     get_iconname(const gchar *path){
         struct stat st;
         gchar *name;
-        if (stat(path, &st) < 0) 
-            name = get_basic_iconname(path, NULL);
-        else 
-            name = get_basic_iconname(path, &st);
+        if (stat(path, &st) < 0) {
+	    ERROR("stat(%s): %s\n", path, strerror(errno));
+            name = g_strdup("inode/unknown");
+	} else { 
+            name = getBasicIconname(path, &st);
+	}
 	if (!name) name = g_strdup("image-missing");
 
         gchar *emblem = getEmblem(path, &st);
@@ -28,7 +30,7 @@ public:
         g_free(emblem);
         return iconname;
     }
-
+/*
     static gchar *
     get_iconname(const gchar *path, const gchar *mimetype){
 	if (!mimetype) return NULL; //return get_iconname(path);
@@ -40,7 +42,7 @@ public:
 	}
 	return NULL;
     }
-
+*/
     static gchar *
     getIconname(xd_t *xd_p){
 	return 
@@ -111,8 +113,12 @@ private:
     }
 
     static gchar *
-    get_basic_iconname(const gchar *path, struct stat *st){
+    getBasicIconname(const gchar *path, struct stat *st){
+	auto mimetype = Mime<Type>::statMimeType(st);
+	return getBasicIconname(path, mimetype);
+    }
 
+#if 0
         // Directories:
         gchar *base = g_path_get_basename(path);
         if (strcmp(base, "..")==0){
@@ -153,6 +159,7 @@ private:
         */
         return  g_strdup("text-x-generic");
     }
+#endif
 
     static gchar *
     getBasicIconname(const gchar *path, const gchar *mimetype){	
@@ -207,7 +214,7 @@ private:
 	return g_strdup("text-x-preview");;
      }
 
-
+#if 0
     static gchar *
     get_basic_iconname(xd_t *xd_p){	
         // Up directory:
@@ -296,7 +303,6 @@ private:
         return  g_strdup("text-x-generic");
     }
 
-
     static const gchar *
     get_mime_iconname(const gchar *mimetype){
         const gchar *basic = NULL;
@@ -342,6 +348,7 @@ private:
         return g_strdup("folder");
     }
 
+#endif
 
     static gchar *
     extension(const gchar *base){
@@ -458,6 +465,7 @@ private:
         }
         return emblem;
     }
+
     static gchar *
     getEmblem(const gchar *path, const gchar *basename, 
 	    const unsigned char d_type, struct stat *st_p){
@@ -515,8 +523,27 @@ private:
 	return fullEmblem;
     }
 
+    static unsigned char
+    getDType (struct stat *st_p) {
+	if(S_ISSOCK (st_p->st_mode)) return DT_SOCK;
+	else if(S_ISBLK (st_p->st_mode)) return DT_BLK;
+	else if(S_ISCHR (st_p->st_mode)) return DT_CHR;
+	else if(S_ISFIFO (st_p->st_mode)) return DT_FIFO;
+	else if (S_ISLNK(st_p->st_mode)) return DT_LNK;
+	else if(S_ISDIR (st_p->st_mode)) return DT_DIR;
+	else if(S_ISREG (st_p->st_mode)) return DT_REG;
+	return  0;
+    }
+
     static gchar *
     getEmblem(const gchar *path, struct stat *st){
+	auto basename = g_path_get_basename(path);
+        gchar *emblem = getEmblem(path, basename,  getDType(st), st);
+	g_free(basename);
+	return emblem;
+    }
+
+#if 0
 	TRACE("getEmblem path st\n");
         // No emblem for go up
         gchar *base = g_path_get_basename(path);
@@ -565,7 +592,7 @@ private:
         g_free(base);
 	return fullEmblem;
     }
-
+#endif
 
 };
 
