@@ -2,7 +2,7 @@
 # define XF_LOCALMODEL__HH
 #include "common/util.hh"
 #ifndef HAVE_STRUCT_DIRENT_D_TYPE
-#error "HAVE_STRUCT_DIRENT_D_TYPE not defined"
+#warning "HAVE_STRUCT_DIRENT_D_TYPE not defined"
 #endif
 
 typedef struct xd_t{
@@ -157,16 +157,28 @@ public:
         } else {
             xd_p->path = g_strconcat(directory, G_DIR_SEPARATOR_S, d->d_name, NULL);
         }
+#ifdef HAVE_STRUCT_DIRENT_D_TYPE
+	if (d->d_type == 0) withStat = TRUE;
+	else xd_p->d_type = d->d_type;
+#else
+	withStat = TRUE;
+#endif
+	if (withStat){
+	    xd_p->st = (struct stat *)calloc( 1, sizeof(struct stat));
+	    if (!xd_p->st){
+		ERROR("calloc(%s): %s\n", xd_p->path, strerror(errno));
+		exit(1);
+	    }
 
-	xd_p->d_type = d->d_type;
-	xd_p->st = NULL;
-        /*
-        if (xd_p->d_type==DT_REG && withStat){
-        if (stat(path, &st) < 0) {
-	    ERROR("stat(%s): %s\n", path, strerror(errno));
-            name = g_strdup("inode/unknown");
-	} 
-        */
+	    if (stat(xd_p->path, xd_p->st) < 0) {
+		ERROR("stat(%s): %s\n", xd_p->path, strerror(errno));
+	    } else {
+		xd_p->d_type = LocalIcons<Type>::getDType(xd_p->st);
+	    }
+	    errno=0;
+	}
+
+	TRACE("d_type: %s -> %d\n", xd_p->path, xd_p->d_type);
 	xd_p->mimetype = getMimeType(xd_p);
 	// symlinks and directories are stat'd in getMimeType()  
         xd_p->icon = g_strdup(LocalIcons<Type>::getIconname(xd_p));

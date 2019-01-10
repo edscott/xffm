@@ -26,6 +26,18 @@
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 
+#ifndef DT_BLK
+enum {
+    DT_BLK=1,
+    DT_CHR=2,
+    DT_DIR=3,
+    DT_FIFO=4,
+    DT_LNK=5,
+    DT_REG=6,
+    DT_SOCK=7
+};
+#endif
+
 namespace xf {
 #ifdef XFFM_CC
 template <class Type> class fmDialog;

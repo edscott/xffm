@@ -133,31 +133,29 @@ public:
 	TRACE("stat_func: gotcha %s\n", inPath);
 
 	GtkListStore *store = GTK_LIST_STORE(model);
-	struct stat st;
-	if (stat(inPath, &st) != 0){
-	    ERROR( "localmonitor stat_func(%s) stat: %s\n", inPath, strerror(errno));
-	    return FALSE;
-	}
 
-        //gchar *iconName = LocalIcons<Type>::getIconname(inPath);
-        auto basename = g_path_get_basename(inPath);
-        auto d_type = LocalIcons<Type>::getDType(&st);
-        auto mimetype = Mime<Type>::extensionMimeType(inPath);
+	auto directory = g_path_get_dirname(inPath);
+	struct dirent d;
+	auto basename = g_path_get_basename(inPath);
+	strncpy(basename, d.d_name, 256);
+	g_free(basename);
+	auto xd_p = LocalModel<Type>::get_xd_p(directory, &d, TRUE);
+	g_free(directory);
 
-        gchar *iconName = LocalIcons<Type>::getIconname(inPath, basename, mimetype, d_type, &st);
-        g_free(basename);
-        g_free(mimetype);
+        gchar *iconName = LocalIcons<Type>::getIconname(xd_p);
+	
         TRACE("***localmonitor stat_func(): iconname=%s\n", iconName);
         GdkPixbuf *pixbuf = Pixbuf<Type>::get_pixbuf(iconName,  GTK_ICON_SIZE_DIALOG);
 
 	gtk_list_store_set (store, iter, 
-                SIZE, st.st_size, 
-                DATE, st.st_mtim.tv_sec ,
+                SIZE, xd_p->st->st_size, 
+                DATE, xd_p->st->st_mtim.tv_sec ,
                 ICON_NAME, iconName,
                 DISPLAY_PIXBUF, pixbuf,
                 NORMAL_PIXBUF, pixbuf,
 		-1);
         g_free(iconName);
+        LocalModel<Type>::free_xd_p(xd_p);
 	return TRUE;
     }
 

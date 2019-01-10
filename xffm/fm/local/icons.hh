@@ -12,25 +12,6 @@ class LocalIcons {
     using util_c = Util<Type>;
     
 public:
-    static gchar *
-    getIconname(const gchar *path){
-        struct stat st;
-        gchar *name;
-        
-        if (stat(path, &st) < 0) {
-	    ERROR("stat(%s): %s\n", path, strerror(errno));
-            name = g_strdup("inode/unknown");
-	} else { 
-            name = getBasicIconname(path, &st);
-	}
-	if (!name) name = g_strdup("image-missing");
-
-        gchar *emblem = getEmblem(path, &st);
-        gchar *iconname = g_strconcat(name, emblem, NULL);
-        g_free(name);
-        g_free(emblem);
-        return iconname;
-    }
 
     static gchar *
     getIconname(xd_t *xd_p){
@@ -41,7 +22,7 @@ public:
 		    xd_p->d_type, 
 		    xd_p->st);
     }
-
+private:
     static gchar *
     getIconname(const gchar *path, const gchar *basename, 
 	    const gchar *mimetype, const unsigned char d_type,
@@ -64,7 +45,7 @@ public:
         g_free(emblem);
         return iconname;
     }
-    
+public:
     static gboolean backupType(const gchar *file){
         if (!file) return FALSE;
         // GNU backup type:

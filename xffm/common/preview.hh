@@ -475,9 +475,9 @@ gs_wait_f(void *data){
         struct dirent *d; // static pointer
         while ((d = readdir(directory))  != NULL){
 	    utf = Util<Type>::utf_string(d->d_name);
-#ifdef HAVE_STRUCT_DIRENT_D_TYPE
+	    auto xd_p = LocalView<Type>::get_xd_p(path, d, TRUE);
 	    const gchar *string=_("unknown");
-	    switch (d->d_type){
+	    switch (xd_p->d_type){
 		case DT_BLK:
 		    string = _("Block device");
 		    break;
@@ -503,9 +503,7 @@ gs_wait_f(void *data){
 		    break;
 	    }
 	    gchar *line = g_strdup_printf("[%s]\t%s", string, utf);
-#else
-	    gchar *line = g_strdup_printf("%s", d->d_name);
-#endif
+
 	    g_free(utf);
 	    list = g_slist_prepend(list, line);
 	    if (count++ >= 100) break;
