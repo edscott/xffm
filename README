@@ -2,6 +2,9 @@
              fix monitor and load items (/dev/disk/by_id monitor) in fstab
              monitor, listed in fstab files FIXME.
 bug: 
+
+ copy/cut emblem icon now broken, a folder appears instead...
+ also, crashes on BSD after that, clicking on pathbar or even icons.
  . local monitor does not insert new files in sort order
  > use libmagic preferably instead of perl if available
  > printout optional and required libraries found in configure step.
