@@ -15,6 +15,7 @@ public:
 
     static gchar *
     getIconname(xd_t *xd_p){
+	TRACE("getIconname(xd_)..\n");
 	return 
 	    getIconname(xd_p->path, 
 		    xd_p->d_name,
@@ -27,6 +28,7 @@ private:
     getIconname(const gchar *path, const gchar *basename, 
 	    const gchar *mimetype, const unsigned char d_type,
 	    struct stat *st_p){
+	TRACE("getIconname(full)..\n");
         // Up directory:
         if (strcmp(basename, "..")==0) return  g_strdup("go-up");
 
@@ -85,11 +87,14 @@ private:
     static gchar *
     getBasicIconname(const gchar *path, struct stat *st){
 	auto mimetype = Mime<Type>::statMimeType(st);
+	TRACE("getBasicIconname(path, st) path=%s\n", path);
+
 	return getBasicIconname(path, mimetype);
     }
 
     static gchar *
     getBasicIconname(const gchar *path, const gchar *mimetype){	
+	TRACE("getBasicIconname(path, mimetype) mimetype=%s\n", mimetype);
 	if (strcmp(path, g_get_home_dir())==0) return g_strdup("user-home");
 	if (!mimetype) {
 	    ERROR("getBasicIconname mimetype cannot be null\n");
@@ -336,6 +341,7 @@ private:
 public:
     static unsigned char
     getDType (struct stat *st_p) {
+	TRACE("getDType mode= 0%o\n",st_p->st_mode); 
 	if(S_ISSOCK (st_p->st_mode)) return DT_SOCK;
 	else if(S_ISBLK (st_p->st_mode)) return DT_BLK;
 	else if(S_ISCHR (st_p->st_mode)) return DT_CHR;

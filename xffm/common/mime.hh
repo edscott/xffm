@@ -450,6 +450,7 @@ public:
 public: 
     static gchar *
     basicMimeType(unsigned char d_type){
+	TRACE("Mime::basicMimeType: %d\n", d_type);
 	if (d_type == DT_DIR ) return g_strdup("inode/directory");
         // Character device:
         if (d_type == DT_CHR ) return g_strdup("inode/chardevice");   

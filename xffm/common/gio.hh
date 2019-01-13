@@ -23,6 +23,16 @@ class Gio {
 
     static void
     GNUln(const gchar *path, const gchar *target){
+#ifdef FREEBSD_FOUND
+        const gchar *arg[] = {
+            "ln",
+            "-s",
+            "-f",
+            path,
+            target,
+            NULL
+        };
+#else
         const gchar *arg[] = {
             "ln",
             "-s",
@@ -32,6 +42,7 @@ class Gio {
             target,
             NULL
         };
+#endif
         Run<Type>::thread_runReap(NULL, arg, 
                 Run<Type>::run_operate_stdout, 
                 Run<Type>::run_operate_stderr, 
@@ -41,6 +52,15 @@ class Gio {
 
     static void
     GNUmv(const gchar *path, const gchar *target){
+#ifdef FREEBSD_FOUND
+        const gchar *arg[] = {
+            "mv",
+            "-f",
+            path,
+            target,
+            NULL
+        };
+#else
         const gchar *arg[] = {
             "mv",
             "-f",
@@ -49,6 +69,7 @@ class Gio {
             target,
             NULL
         };
+#endif
         Run<Type>::thread_runReap(NULL, arg, 
                 Run<Type>::run_operate_stdout, 
                 Run<Type>::run_operate_stderr, 
@@ -58,6 +79,16 @@ class Gio {
 
     static void
     GNUcp(const gchar *path, const gchar *target){
+#ifdef FREEBSD_FOUND
+        const gchar *arg[] = {
+            "cp",
+            "-R",
+            "-f",
+            path,
+            target,
+            NULL
+        };
+#else
         const gchar *arg[] = {
             "cp",
             "-R",
@@ -67,6 +98,7 @@ class Gio {
             target,
             NULL
         };
+#endif
         Run<Type>::thread_runReap(NULL, arg, 
                 Run<Type>::run_operate_stdout, 
                 Run<Type>::run_operate_stderr, 
@@ -76,6 +108,15 @@ class Gio {
 
     static void
     GNUrm(const gchar *path){
+#ifdef FREEBSD_FOUND
+        const gchar *arg[] = {
+            "rm",
+            "-f",
+            "-R",
+            (const gchar *)path,
+            NULL
+        };
+#else
         const gchar *arg[] = {
             "rm",
             "-f",
@@ -85,6 +126,7 @@ class Gio {
             (const gchar *)path,
             NULL
         };
+#endif
         Run<Type>::thread_runReap(NULL, arg, 
                 Run<Type>::run_operate_stdout, 
                 Run<Type>::run_operate_stderr, 
@@ -95,6 +137,16 @@ class Gio {
 
     static void
     GNUshred(const gchar *path){
+#ifdef FREEBSD_FOUND
+        const gchar *arg[] = {
+            "rm",
+            "-f",
+            "-P",
+            "-R",
+            (const gchar *)path,
+            NULL
+        };
+#else
         const gchar *arg[] = {
             "shred",
             "-f",
@@ -104,6 +156,7 @@ class Gio {
             (const gchar *)path,
             NULL
         };
+#endif
         Run<Type>::thread_runReap(NULL, arg, 
                 Run<Type>::run_operate_stdout, 
                 Run<Type>::run_operate_stderr, 

@@ -163,6 +163,7 @@ public:
 #else
 	withStat = TRUE;
 #endif
+	TRACE("model::get_xd_p() path=%s d_type = %d\n",xd_p->path,   xd_p->d_type);
 	if (withStat){
 	    xd_p->st = (struct stat *)calloc( 1, sizeof(struct stat));
 	    if (!xd_p->st){
@@ -174,6 +175,7 @@ public:
 		ERROR("stat(%s): %s\n", xd_p->path, strerror(errno));
 	    } else {
 		xd_p->d_type = LocalIcons<Type>::getDType(xd_p->st);
+		TRACE("From getDType> d_type= %d (DT_DIR is %d)\n", xd_p->d_type, DT_DIR);
 	    }
 	    errno=0;
 	}

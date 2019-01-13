@@ -46,6 +46,12 @@ dnl check for standard header files
 ac_uname_s=`uname -s`
 echo "system: $ac_uname_s"
 
+os=`uname -a | grep FreeBSD`
+if test x"$os" != x ; then
+    AC_MSG_RESULT([****   System is FreeBSD ****])
+    AC_DEFINE_UNQUOTED([FREEBSD_FOUND], [1], [Define if system is FreeBSD ])
+fi
+
 AC_CHECK_HEADERS([mntent.h sys/mount sys/types sys/sysctl sys/param])
 
 dnl check for standard functions

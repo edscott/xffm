@@ -137,7 +137,7 @@ public:
 	auto directory = g_path_get_dirname(inPath);
 	struct dirent d;
 	auto basename = g_path_get_basename(inPath);
-	strncpy(basename, d.d_name, 256);
+	strncpy(d.d_name, basename, 256);
 	g_free(basename);
 	auto xd_p = LocalModel<Type>::get_xd_p(directory, &d, TRUE);
 	g_free(directory);
@@ -161,7 +161,6 @@ public:
 
     gboolean 
     restat_item(GFile *src){
-        TRACE("restat_item ...\n");
         // First we use a hash to check if item is in treemodel.
         // Then, if found, we go on to find the item in the treemodel and update.
         gchar *path = g_file_get_path(src);
