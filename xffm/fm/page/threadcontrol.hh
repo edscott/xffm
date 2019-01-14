@@ -62,7 +62,7 @@ public:
     gint
     thread_create(const gchar *dbg_text, void *(*thread_f)(void *), void *data, gboolean joinable)
     {
-	DBG("thread_create: %s\n", dbg_text);
+	TRACE("thread_create: %s\n", dbg_text);
 	pthread_t thread;
 	gint retval = pthread_create(&thread, NULL, thread_f, data);
 	if (retval){

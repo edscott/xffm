@@ -141,7 +141,7 @@ public:
         TRACE("baseModel key\n");
         return TRUE;
     }
-
+/*
     guint
     setSelectable(gchar *name, guint flags){
 	if (strcmp(name, "..")==0) return SET_NOTSELECTABLE(flags);
@@ -157,7 +157,7 @@ public:
                 FLAGS , &flags, -1);
         return !IS_NOTSELECTABLE(flags);
     }
-
+*/
     
     
     void disableDnD(void){

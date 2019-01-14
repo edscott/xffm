@@ -41,7 +41,7 @@ class Run {
         auto string = (gchar *)g_hash_table_lookup (stringHash, GINT_TO_POINTER(controller));
         if (!string){
             pthread_mutex_unlock(&string_hash_mutex);
-            ERROR("controller %d not found in hashtable\n", controller);
+            DBG("controller %d not found in hashtable (process has completed)\n", controller);
             return g_strdup("");
         }
         g_hash_table_steal(stringHash, GINT_TO_POINTER(controller));

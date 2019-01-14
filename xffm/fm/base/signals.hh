@@ -238,9 +238,10 @@ public:
 			    // if selected
 			    gtk_icon_view_unselect_path (view->iconView(), tpath);
 			} else { // not selected
-			    //if (view->isSelectable(tpath)) 
-			    gtk_icon_view_select_path (view->iconView(), tpath);
-			    view->selectables();
+                            
+			    if (LocalView<Type>::isSelectable(view->treeModel(), tpath)) 
+			      gtk_icon_view_select_path (view->iconView(), tpath);
+			    //view->selectables();
 			}
 		    }
 		} else if (SHIFT_MODE) {
@@ -522,7 +523,7 @@ public:
 
         gtk_tree_model_get (treeModel, &iter, PATH, &path, -1);
 	
-        WARN("View::activate: %s\n", path);
+        TRACE("View::activate: %s\n", path);
         auto lastPath = g_strdup(view->path());
 	if (!view->loadModel(treeModel, tpath, path)){
             TRACE("reloading %s\n", lastPath);

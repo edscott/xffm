@@ -153,8 +153,7 @@ public:
                 LocalView<Type>::selectables(this->iconView());        
                 break;
             default:
-                DBG("View::selectables(): All icons are selectable for viewType: %d\n",
-                        this->viewType());
+                TRACE("View::selectables(): No items are selectable for viewType: %d ()\n", this->viewType());
         }
         return;
     }
