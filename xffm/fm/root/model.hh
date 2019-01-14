@@ -57,7 +57,6 @@ public:
 	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
 	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
 		DISPLAY_NAME, utf_name,
-		ACTUAL_NAME, name,
 		ICON_NAME, icon_name,
                 PATH, name,
                 TREEVIEW_PIXBUF, treeViewPixbuf, 
@@ -84,7 +83,6 @@ public:
 	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
 	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
 		DISPLAY_NAME, utf_name,
-		ACTUAL_NAME, name,
 		ICON_NAME, icon_name,
                 PATH, name,
                 TREEVIEW_PIXBUF, treeViewPixbuf, 
@@ -112,7 +110,6 @@ public:
 	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
 	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
 		DISPLAY_NAME, utf_name,
-		ACTUAL_NAME, name,
                 PATH, name,
 		ICON_NAME, icon_name,
                 TREEVIEW_PIXBUF, treeViewPixbuf, 
@@ -142,7 +139,6 @@ public:
 	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
 	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
 		DISPLAY_NAME, utf_name,
-		ACTUAL_NAME, name,
                 PATH, name,
 		ICON_NAME, icon_name,
                 TREEVIEW_PIXBUF, treeViewPixbuf, 
@@ -175,7 +171,6 @@ public:
 	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
 	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
 		DISPLAY_NAME, utf_name,
-		ACTUAL_NAME, name,
                 PATH, name,
 		ICON_NAME, icon_name,
                 TREEVIEW_PIXBUF, treeViewPixbuf, 
@@ -220,7 +215,6 @@ public:
 	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
 	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
 		DISPLAY_NAME, pkg, //utf_name,
-		ACTUAL_NAME, name,
                 PATH, name,
 		ICON_NAME, icon_name,
                 TREEVIEW_PIXBUF, treeViewPixbuf, 
@@ -261,7 +255,6 @@ public:
                 gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
                 gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
                         DISPLAY_NAME, utf_name,
-                        ACTUAL_NAME, basename,
                         PATH, *p,
                         ICON_NAME, icon_name,
                         TREEVIEW_PIXBUF, treeViewPixbuf, 

@@ -21,7 +21,6 @@ public:
         appendColumnText(treeView, _("Date"), DATE);
         appendColumnText(treeView, _("Mimetype"), MIMETYPE);
         appendColumnText(treeView, "ICON_NAME", ICON_NAME);
-        appendColumnText(treeView, _("TYPE"), TYPE);
 #endif
         setUpSignals(view, G_OBJECT(treeView));
         auto selection = gtk_tree_view_get_selection (treeView);

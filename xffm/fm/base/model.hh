@@ -20,6 +20,34 @@ class BaseModel
     GtkWidget *source_;
     GtkWidget *destination_;
     gint viewType_;
+    
+    // This mkTreeModel should be static...
+    static GtkTreeModel *
+    mkTreeModel (void)
+    {
+
+	GtkTreeIter iter;
+	GtkListStore *list_store = gtk_list_store_new (NUM_COLS, 
+	    G_TYPE_UINT,      // flags
+	    GDK_TYPE_PIXBUF, // icon in treeView display
+	    GDK_TYPE_PIXBUF, // icon in display
+	    GDK_TYPE_PIXBUF, // normal icon reference
+	    GDK_TYPE_PIXBUF, // highlight icon reference
+	    GDK_TYPE_PIXBUF, // preview, tooltip image (cache)
+	    G_TYPE_STRING,   // name in display (UTF-8)
+	    G_TYPE_STRING,   // path from filesystem (verbatim)
+	    G_TYPE_STRING,   // disk id (or other)
+            G_TYPE_UINT,     // date
+            G_TYPE_UINT,     // size
+	    G_TYPE_STRING,   // tooltip text (cache)
+	    G_TYPE_STRING,   // icon identifier (name or composite key)
+	    G_TYPE_STRING,   // mimetype (further identification of files)
+	    G_TYPE_STRING,   // Preview path
+	    G_TYPE_UINT,      // Preview time
+	    GDK_TYPE_PIXBUF  // Preview pixbuf
+            ); // 
+	return GTK_TREE_MODEL (list_store);
+    }
 
 protected:
     gchar *path_;
@@ -35,7 +63,7 @@ public:
         selectionList_ = NULL;
         localMonitor_ = NULL;
         fstabMonitor_ = NULL;
-	treeModel_ = BaseSignals<Type>::mkTreeModel();
+	treeModel_ = mkTreeModel();
         if (!highlight_hash) highlight_hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
         if (!validBaseViewHash) {
 	    validBaseViewHash = g_hash_table_new(g_direct_hash, g_direct_equal); 

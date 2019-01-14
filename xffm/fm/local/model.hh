@@ -78,11 +78,14 @@ public:
     
     static gboolean
     isSelectable(GtkTreeModel *treeModel, GtkTreeIter *iter){
-        gchar *name;
-	gtk_tree_model_get (treeModel, iter, ACTUAL_NAME, &name, -1);
+        gchar *path;
+        gchar *basename;
+	gtk_tree_model_get (treeModel, iter, PATH, &path, -1);
+        basename = g_path_get_basename(path);
         gboolean retval = TRUE;
-        if (strcmp(name, "..")==0 )retval = FALSE;
-        g_free(name);
+        if (strcmp(basename, "..")==0 )retval = FALSE;
+        g_free(basename);
+        g_free(path);
         return retval;
     }
 
@@ -323,22 +326,23 @@ public:
     }
 
     static gboolean
-    insertItem(GtkTreeModel *treeModel, GtkTreePath *path, GtkTreeIter *iter, gpointer data){
+    insertItem(GtkTreeModel *treeModel, GtkTreePath *tpath, GtkTreeIter *iter, gpointer data){
         // get current xd_p
         struct stat *st;
         guint size;
         guint date;
-        gchar *name;
-        guint type;
+        gchar *path;
         gtk_tree_model_get(treeModel, iter, 
-                ACTUAL_NAME, &name, 
+                path, &path, 
                 SIZE, &size,
                 DATE, &date,
-                TYPE, &type, -1);
+                //TYPE, &type, 
+                -1);
         xd_t *xd_p = (xd_t *)data;
         xd_t *xd_b = (xd_t *)calloc(1, sizeof(xd_t));
-        xd_b->d_name = name;
-        xd_b->d_type = type;
+        xd_b->path = path;
+        xd_b->d_name = g_path_get_basename(path);
+        //xd_b->d_type = type;
         TRACE("compare %s with iconview item \"%s\"\n", xd_p->d_name, name);
         gint sortResult;
         if (Settings<Type>::getSettingInteger("LocalView", "Descending") <= 0) {
@@ -363,7 +367,8 @@ public:
     static void
     insertLocalItem(GtkListStore *listStore, xd_t *xd_p){
         inserted_=FALSE;
-        gtk_tree_model_foreach (GTK_TREE_MODEL(listStore), insertItem, (void *)xd_p);
+        // FIXME:
+        //gtk_tree_model_foreach (GTK_TREE_MODEL(listStore), insertItem, (void *)xd_p);
         if (!inserted_) add_local_item(listStore, xd_p);
     }
 
@@ -477,14 +482,13 @@ private:
         gtk_list_store_set (list_store, iter, 
 		FLAGS, flags,
                 DISPLAY_NAME, utf_name,
-                ACTUAL_NAME, xd_p->d_name,
                 PATH, xd_p->path,
                 ICON_NAME, icon_name,
                 TREEVIEW_PIXBUF, treeViewPixbuf, 
                 DISPLAY_PIXBUF, normal_pixbuf, 
                 NORMAL_PIXBUF, normal_pixbuf, 
                 HIGHLIGHT_PIXBUF, highlight_pixbuf, 
-                TYPE,xd_p->d_type, 
+                //TYPE,xd_p->d_type, 
                 SIZE,size, 
                 DATE,date, 
                 MIMETYPE, xd_p->mimetype,

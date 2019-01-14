@@ -186,11 +186,12 @@ private:
     gchar *
     get_verbatim_name (GtkTreePath *tpath ) {
         GtkTreeIter iter;
-        gchar *verbatim_name=NULL;
+        gchar *path;
         gtk_tree_model_get_iter (this->treeModel(), &iter, tpath);
-        gtk_tree_model_get (this->treeModel(), &iter, 
-                ACTUAL_NAME, &verbatim_name, -1);
-        return verbatim_name;
+        gtk_tree_model_get (this->treeModel(), &iter, PATH, &path, -1);
+        auto basename = g_path_get_basename(path);
+        g_free(path);
+        return basename;
     }
 
     GdkPixbuf *

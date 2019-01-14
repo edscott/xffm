@@ -5,24 +5,6 @@
 #ifdef HAVE_MNTENT_H
 #define USE_MOUNTTHREAD
 #endif
-/* FIXME:
- * Instead of using partuuid as identifier, use id to obtain
- * hash for path to block device.
- *
- * for each block device (sd*, hd*) save
- * if partitions are present, then do not show the non-partition
- * save: 
- *      partuuid (if present)
- *      id
- *      label (if present)
- *      path
- *      uuid 
- *
- *      Display name will be label or devicepath.
- *      popup info will have label, devicepath, id
- *      Properties will also have partuuid, uuid, path
- *
- * */
 
 namespace xf
 {
@@ -279,30 +261,76 @@ private:
 	return partition;
 
     }
+    static gchar *
+    id2Partition(const gchar *idPath){
+        const gchar *command = "ls -l /dev/disk/by-id";
+	FILE *pipe = popen (command, "r");
+	if(pipe == NULL) {
+	    ERROR("Cannot pipe from %s\n", command);
+	    return NULL;
+	}
+        gchar *base = g_path_get_basename(idPath);
+        gchar line[256];
+        memset(line, 0, 256);
+        gchar *partition = NULL;
+            TRACE("id2Partition(): looking for : \"%s\"\n", base);
+	while (fgets (line, 255, pipe) && !feof(pipe)) {
+            TRACE("id2Partition(): %s: %s\n", base, line);
+            if (!strstr(line, "->")) continue;
+            if (!strstr(line, base)) continue;
+            TRACE("id2Partition(): GOTCHA: %s\n", line);
+            gchar **f = g_strsplit(line, "->", 2);
+            if (strchr(f[1], '\n')) *strchr(f[1], '\n') = 0;
+            g_strstrip(f[1]);
+            gchar *basename = g_path_get_basename(f[1]);
+            TRACE("id2Partition(): GOTCHA: basename=%s\n", basename);
+            g_strfreev(f);
+            partition = g_strconcat ("/dev/", basename, NULL);
+            g_free(basename);
+            break;
+
+            /*if (strstr(line, "->") && strstr(line, partuuid)) {
+                if (strchr(line, '\n')) *strchr(line, '\n') = 0;
+                partition = g_strdup_printf("/dev/%s", strrchr(line, '/')+1);
+                g_strstrip(partition);
+                if (strcmp("/dev",partition)==0) {
+                    g_free(partition);
+                    partition=NULL;
+                }
+                break;
+            }*/
+	}
+        pclose (pipe);
+        g_free(base);
+	return partition;
+
+    }
     
     static gboolean rm_func (GtkTreeModel *model,
 				GtkTreePath *tpath,
 				GtkTreeIter *iter,
 				gpointer data){
-	gchar *partuuid;
+	gchar *id;
 	gchar *path;
-	gtk_tree_model_get (model, iter, 
-		PATH, &path, 
-		PARTUUID, &partuuid, 
-		-1);  
+	gtk_tree_model_get (model, iter, PATH, &path, DISK_ID, &id, -1);  
+
+	TRACE("%s test for removing %s (%s) from treemodel.\n", path, id, (gchar *)data);
+        if (!id) return FALSE;
 	
-	if (strcmp(partuuid, (gchar *)data)){
-	    g_free(partuuid);
+	if (!strstr(id, (gchar *)data)){
+	    g_free(id);
 	    g_free(path);
 	    return FALSE;
 	}
-	TRACE("removing %s (%s) from treemodel.\n", path, partuuid);
+	TRACE("removing %s (%s) from treemodel.\n", id, (gchar *)data);
 	GtkListStore *store = GTK_LIST_STORE(model);
 
 	gtk_list_store_remove(store, iter);
 	g_free(path);
+        g_free(id);
 	return TRUE;
     }
+    
 
     static void
     monitor_f (GFileMonitor      *mon,
@@ -326,30 +354,29 @@ private:
             {
                 TRACE("Received DELETED  (%d): \"%s\", \"%s\"\n", event, f, s);
                 TRACE("*** rm %s \n", f);
-                gchar *devicePath = uuid2Partition(f);
-                gchar *baseuuid = g_path_get_basename(f);
-	        gchar *key = Hash<Type>::get_hash_key(devicePath, 10);
-                if (p->itemsHash()) g_hash_table_remove(p->itemsHash(), key); 
-                gtk_tree_model_foreach (p->treeModel(), rm_func, (gpointer) baseuuid); 
+                gchar *base = g_path_get_basename(f);
+                gchar *devicePath = id2Partition(f);
+                TRACE("looking in hash for key=%s\n", devicePath);
+                if (p->itemsHash()&& devicePath){
+                    g_hash_table_remove(p->itemsHash(), devicePath); 
+                }
+                gtk_tree_model_foreach (p->treeModel(), rm_func, (gpointer)base); 
+                g_free(base);
                 g_free(devicePath);
-                g_free(baseuuid);
                 break;
             }
             case G_FILE_MONITOR_EVENT_CREATED:
             case G_FILE_MONITOR_EVENT_MOVED_IN:
             {
                 TRACE("Received  CREATED (%d): \"%s\", \"%s\"\n", event, f, s);
-                gchar *devicePath = uuid2Partition(f);
-                TRACE("adding partition %s \n", devicePath);
-		fsType = FstabView<Type>::fsType(devicePath);
-                FstabView<Type>::addPartition(GTK_TREE_MODEL(p->store_), devicePath, fsType);
-                
-		g_hash_table_replace(p->itemsHash(), g_strdup(f), g_path_get_basename(f));
-
-
+                gchar *devicePath = id2Partition(f);
+                TRACE("adding partition %s -> %s \n", f, devicePath);
+                if (!g_hash_table_lookup(p->itemsHash(), devicePath)){
+                    TRACE("not in hash %s \n", devicePath);
+                    FstabView<Type>::addPartition(GTK_TREE_MODEL(p->store_), devicePath);
+                    g_hash_table_replace(p->itemsHash(), g_strdup(devicePath), g_strdup(f));
+                }
                 g_free(devicePath);
-		g_free(fsType);
-
                 break;
             }
 

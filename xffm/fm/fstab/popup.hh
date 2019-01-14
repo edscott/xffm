@@ -58,14 +58,13 @@ class FstabPopUp {
 	    ERROR("fstabItemPopup: tpath is invalid\n");
 	    return;
 	}
-	gchar *partuuid;
 	gchar *iconName;
 	gchar *tooltipText;
 	gchar *displayName;
+        gchar *mimetype;
         gtk_tree_model_get (view->treeModel(), &iter, 
-                PARTUUID, &partuuid,
-		//MIMETYPE, &partuuid,
-		DISK_LABEL, &displayName,
+		MIMETYPE, &mimetype,
+		DISPLAY_NAME, &displayName,
 		ICON_NAME, &iconName,
                 TOOLTIP_TEXT,&tooltipText,
 		-1);
@@ -78,15 +77,13 @@ class FstabPopUp {
 	gchar *fileInfo = g_strconcat(g, ": ", (tooltipText)?tooltipText:"", NULL);
 	g_free(g);
 
-        gchar *mimetype = g_strdup_printf("partuuid: %s", partuuid);
-
 	g_object_set_data(G_OBJECT(fstabItemPopUp), "iconName", iconName);
 	g_object_set_data(G_OBJECT(fstabItemPopUp), "displayName", displayName);
-	g_object_set_data(G_OBJECT(fstabItemPopUp), "mimetype", partuuid);
+	g_object_set_data(G_OBJECT(fstabItemPopUp), "mimetype", mimetype);
 	g_object_set_data(G_OBJECT(fstabItemPopUp), "fileInfo", util_c::fileInfo(path));
 	g_object_set_data(G_OBJECT(fstabItemPopUp), "tooltipText", tooltipText);
  	// Set title element
-        BasePopUp<Type>::changeTitle(fstabItemPopUp);
+        BasePopUp<Type>::changeTitle(fstabItemPopUp, tooltipText);
     }
 
     static void
@@ -97,25 +94,25 @@ class FstabPopUp {
 	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
 
 	TRACE("FstabPopup::mount %s\n", path);
-        if (FstabView<Type>::isInFstab(path) || FstabView<Type>::isMounted(path)) {
+//        if (FstabView<Type>::isInFstab(path) || FstabView<Type>::isMounted(path)) {
+        if (FstabView<Type>::isMounted(path)) {
 	    TRACE("mount: %s\n", path);
             FstabView<Type>::mountPath(view, path, NULL);
             return;            
         }
-	auto dname = (const gchar *)g_object_get_data(G_OBJECT(data), "displayName");
-        auto label = g_strdup_printf("LABEL=%s", dname);
+
+        gchar *shortLabel = FstabView<Type>::e2Label(path);
+        gchar *mountTarget = NULL;
+
+        auto label = g_strdup_printf("LABEL=%s", shortLabel);
+        g_free(shortLabel);
         if (FstabView<Type>::isInFstab(label)) {
-	    gchar *mountTarget = FstabView<Type>::mountTarget(label);
-	    TRACE("mount: %s --> %s\n", label, mountTarget);
-            if (mountTarget){
-		FstabView<Type>::mountPath(view, mountTarget, NULL);
-	    }
-            g_free(label);
-            g_free(mountTarget);
-            return;            
+	    mountTarget = FstabView<Type>::mountTarget(label);
         }
         g_free(label);
-
+        if (!mountTarget && FstabView<Type>::isInFstab(path)) {
+	    mountTarget = FstabView<Type>::mountTarget(path);
+        }
 
        // File chooser
         auto entryResponse = new(EntryFolderResponse<Type>)(GTK_WINDOW(mainWindow), _("Mount Device"), NULL);
@@ -140,8 +137,13 @@ class FstabPopUp {
 	    g_free(dirname);
 	    dirname = g_strdup_printf("/tmp/%s", basename);
 	}
-        entryResponse->setEntryDefault(dirname);
+        if (mountTarget) {
+            entryResponse->setEntryDefault(mountTarget);
+        } else {
+            entryResponse->setEntryDefault(dirname);
+        }
         g_free(dirname);
+        g_free(mountTarget);
         
         auto response = entryResponse->runResponse();
         delete entryResponse;

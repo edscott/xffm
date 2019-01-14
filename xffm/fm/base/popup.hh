@@ -36,6 +36,23 @@ public:
 	g_free(markup);
         gtk_widget_show(GTK_WIDGET(title));
     }
+    static void changeTitle(GtkMenu *menu, const gchar *markup)
+    {
+	// change title
+	auto title = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(menu), "title"));
+        if (!title) {
+            ERROR("BasePopUp::changeTitle(): menu has no data object \"title\"\n");
+            return;
+        }
+        auto iconName = (gchar *)g_object_get_data(G_OBJECT(menu), "iconName");
+
+	TRACE("iconName=%s, markup=%s\n", iconName, markup);
+	gtk_c::menu_item_content(title, iconName, markup, -48);
+        gtk_widget_show(GTK_WIDGET(title));
+    }
+
+
+    // deprecated:
     static void changeTitle(GtkMenu *menu)
     {
 	// change title

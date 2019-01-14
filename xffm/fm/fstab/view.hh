@@ -58,11 +58,6 @@ msgid "NFS remote directory"
 #endif
 
 
-#define PARTUUID        ACTUAL_NAME
-#define DISK_LABEL      DISPLAY_NAME
-#define FSTYPE          MIMETYPE
-
-
     // XXX this is Linux Version. FreeBSD differs (see fstab module)
 namespace xf {
 template <class Type> class FstabPopUp;
@@ -89,7 +84,8 @@ public:
 
 	addAllItems(treeModel);
         FstabMonitor<Type> *p = new(FstabMonitor<Type>)(treeModel, view);
-        p->start_monitor(treeModel, "/dev/disk/by-partuuid");
+        p->start_monitor(treeModel, "/dev/disk/by-id");
+//        p->start_monitor(treeModel, "/dev/disk/by-partuuid");
         return p;
     }
 
@@ -115,11 +111,10 @@ public:
 	auto highlight_name = "drive-multidisk/SE/document-open/2.0/225";
         auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
 	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
-	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
+	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);  
 	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
 	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
 		DISPLAY_NAME, utf_name,
-		ACTUAL_NAME, name,
 		ICON_NAME, icon_name,
                 PATH, name,
                 TREEVIEW_PIXBUF, treeViewPixbuf, 
@@ -169,6 +164,43 @@ public:
     }
 
     static gchar *
+    partition2Id(const gchar *partition){ // disk partition only
+        gchar *base = g_path_get_basename(partition);
+        const gchar *command = "ls -l /dev/disk/by-id";
+	FILE *pipe = popen (command, "r");
+	if(pipe == NULL) {
+	    ERROR("Cannot pipe from %s\n", command);
+	    return NULL;
+	}
+        gchar line[256];
+        memset(line, 0, 256);
+        gchar *id = NULL;
+	while (fgets (line, 255, pipe) && !feof(pipe)) {
+            if (!strstr(line, base)) {
+                TRACE("%s not in %s\n", base, line);
+                continue;
+            }
+            gchar **f = g_strsplit(line, "->", 2);
+            if (!strstr(f[1], base)){
+                TRACE("%s not in %s\n", base, f[1]); 
+                g_strfreev(f);
+                continue;
+            }
+            g_strstrip(f[0]);
+            if (!strrchr(f[0], ' ')){
+                ERROR("partition2Id(): no space-chr in id\n");
+                continue;
+            }
+            id = g_path_get_basename(strrchr(f[0], ' ')+1);
+            g_strfreev(f);
+            break;
+	}
+        pclose (pipe);
+        TRACE("partition2Id() %s->%s\n", partition, id);
+	return id;
+    }
+
+    static gchar *
     id2Partition(const gchar *id){ // disk partition only
         gchar *baseId = g_path_get_basename(id);
         const gchar *command = "ls -l /dev/disk/by-id";
@@ -213,10 +245,22 @@ public:
         memset(line, 0, 256);
         gchar *label = NULL;
 	while (fgets (line, 255, pipe) && !feof(pipe)) {
-            if (strstr(line, "->") && strstr(line, partition)) {
-                *(strstr(line, "->")) = 0;
-                g_strstrip(line);
-                if (strrchr(line, ' ')) label = g_strdup(strrchr(line, ' ')+1);
+            if (strchr(line, '\n')) *strchr(line, '\n')=0;
+            if (!strstr(line, "->")) continue;
+            gchar **f = g_strsplit(line, "->", 2);
+            gchar *base = g_path_get_basename(f[1]);
+            TRACE("looking for %s in %s\n", base, partition);
+            if (!strstr(partition, base)){
+                g_free(base);
+                g_strfreev(f);
+                continue;
+            }
+            else TRACE("found it..\n");
+            g_free(base);
+            g_strstrip(f[0]);
+            if (strrchr(f[0], ' ')){
+                label = g_strdup(strrchr(f[0], ' ')+1);
+                g_strfreev(f);
                 break;
             }
 	}
@@ -234,19 +278,19 @@ public:
         if (!strrchr (line, ' ')) return NULL;
         gchar *p = g_strdup(strrchr (line, ' '));
         g_strstrip (p);
-        TRACE ("partitions add: %s\n", p);
+        TRACE ("partitions add input: %s\n", p);
         if(!strlen (p)) {
-            g_free(p);
+        g_free(p);
             return NULL;
         }
+        gchar *path = NULL;
         if (strncmp(p, "sd", 2) == 0 || strncmp(p, "hd", 2)==0){
-            if (p[3] < '0' || p[3] >'9') return NULL;
-            gchar *path = g_strdup_printf ("/dev/%s", p);
-            g_free(p);
-            return path;
+            //if (p[3] < '0' || p[3] >'9') return NULL;
+            path = g_strdup_printf ("/dev/%s", p);
         }
         g_free(p);
-        return NULL;
+        TRACE ("partitions add output: %s\n", path);
+        return path;
     }
 
  
@@ -305,7 +349,7 @@ public:
     }
 
     static void
-    addPartition(GtkTreeModel *treeModel, const gchar *path, const gchar *fstype){
+    addPartition(GtkTreeModel *treeModel, const gchar *path){
         if (!path){
             ERROR("addPartition: path cannot be null\n");
             return;
@@ -314,29 +358,28 @@ public:
         gchar *basename = g_path_get_basename(path);
         gchar *mntDir = getMntDir(path);
         auto label = e2Label(basename);
+
+
+        gboolean mounted = isMounted(path);
+        gchar *text;
+        auto fstype = fsType(path);        
+        gchar *fileInfo = util_c::fileInfo(path);
+ 	text = g_strdup_printf("<span size=\"large\">%s (%s)</span>\n<span color=\"red\">%s</span>\n%s %s\n%s",
+			basename, 
+                        label?label:_("No Label"),
+                        fstype?fstype:_("There is no file system available (unformatted)"),
+                        _("Mount point:"), mounted?mntDir:_("Not mounted"),
+                        fileInfo);
+        g_free(mntDir);
+        g_free(fstype);
         if (label){
+            gchar *g = g_strdup_printf("%s\n(%s)", basename, label);
+            g_free(label);
+            label = g;
            g_free(basename);
         } else {
            label = basename;
         }
-
-        gboolean mounted = isMounted(path);
-        gchar *text;
-	if (mntDir) { 
-	    gchar *mountedOn = (mounted)?
-		g_strconcat (_("Mounted on:"), " ", mntDir, " <span color=\"red\">(", fstype, ")</span>", NULL):
-		g_strconcat (_("Mount on"), " ", mntDir, " <span color=\"red\">(", fstype, ")</span>", NULL);
-	    text = (label)?	g_strdup_printf("%s (%s)\n<span size=\"large\">%s</span>",
-			label, path, mountedOn):
-		g_strdup_printf("%s\n<span size=\"large\">%s</span>",
-			path, mountedOn);
-	    g_free(mountedOn);
-	} else { // implies not mounted
-	    text = (label)?g_strdup_printf("%s (%s)\n<span size=\"large\">%s <span color=\"red\">(%s)</span></span>",
-			label, path, _("Not mounted"), fstype):
-			g_strdup_printf("%s\n<span size=\"large\">%s <span color=\"red\">(%s)</span></span>",
-			path, _("Not mounted"), fstype);
-	}
 
         auto utf_name = util_c::utf_string(label);
         g_free(label);
@@ -347,12 +390,11 @@ public:
         auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
         auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
         auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
-        auto uuid = partition2uuid(path);
+        //auto uuid = partition2uuid(path);
+        auto id = partition2Id(path);
         gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
         gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
-                DISK_LABEL, utf_name, // path-basename or label
-                FSTYPE, fstype,
-                PARTUUID, uuid, // partition-basename
+                DISPLAY_NAME, utf_name, // path-basename or label
                 ICON_NAME, icon_name,
                 PATH, path, // absolute
                 TREEVIEW_PIXBUF, treeViewPixbuf, 
@@ -360,10 +402,11 @@ public:
                 NORMAL_PIXBUF, normal_pixbuf,
                 HIGHLIGHT_PIXBUF, highlight_pixbuf,
                 TOOLTIP_TEXT,text,
+                DISK_ID, id,
                 -1);
         g_free(utf_name);
         // fstype is constant
-        g_free(uuid);
+        g_free(id);
         // icon_name is constant
         // path is constant
         // pixbufs belong to pixbuf hash
@@ -384,11 +427,11 @@ public:
                 ERROR("partition path should be absolute: %s\n", path);
                 continue;
             }
-            if (!path) continue;
-	    gchar *fstype = fsType(path);
-            if (fstype) addPartition(treeModel, path, fstype);
+	    //gchar *fstype = fsType(path);
+            //if (fstype) 
+                addPartition(treeModel, path);
             g_free(path);
-            g_free(fstype);
+            //g_free(fstype);
             memset (line, 0, 1024);
         }
         fclose (partitions);
@@ -410,7 +453,7 @@ public:
         gchar *id = NULL;
 	while (fgets (line, 255, pipe) && !feof(pipe)) {
             if (strchr(line, '\n')) *strchr(line, '\n') = 0;
-            DBG("addPartitionItems: %s\n", line);
+            TRACE("addPartitionItems: %s\n", line);
             if (strstr(line, "->")==NULL) continue;
 	    auto p = g_strsplit(line, "->", 2);
 
@@ -442,8 +485,8 @@ public:
 	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
 	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
 	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
-		DISK_LABEL, utf_name,
-		PARTUUID, name,
+		//DISK_LABEL, utf_name,
+		//PARTUUID, name,
 		ICON_NAME, icon_name,
                 PATH, name,
                 TREEVIEW_PIXBUF, treeViewPixbuf, 
@@ -468,8 +511,8 @@ public:
 	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
 	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
 	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
-		DISK_LABEL, utf_name,
-		PARTUUID, name,
+		//DISK_LABEL, utf_name,
+		//PARTUUID, name,
 		ICON_NAME, icon_name,
                 PATH, name,
                 TREEVIEW_PIXBUF, treeViewPixbuf, 
@@ -494,8 +537,8 @@ public:
 	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
 	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
 	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
-		DISK_LABEL, utf_name,
-		PARTUUID, name,
+		//DISK_LABEL, utf_name,
+		//PARTUUID, name,
 		ICON_NAME, icon_name,
                 PATH, name,
                 TREEVIEW_PIXBUF, treeViewPixbuf, 
@@ -520,8 +563,8 @@ public:
 	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
 	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
 	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
-		DISK_LABEL, utf_name,
-		PARTUUID, name,
+		//DISK_LABEL, utf_name,
+		//PARTUUID, name,
 		ICON_NAME, icon_name,
                 PATH, name,
                 TREEVIEW_PIXBUF, treeViewPixbuf, 
