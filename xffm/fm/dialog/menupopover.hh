@@ -9,12 +9,56 @@ class MenuPopoverSignals {
     using run_c = Run<Type>;
 public:
     static void
+    root(GtkMenuItem *menuItem, gpointer data)
+    {
+        auto notebook_p = (Notebook<Type> *)g_object_get_data(G_OBJECT(data), "notebook_p");
+        const gchar *path = notebook_p->workdir();
+        auto page = (Page<Type> *)notebook_p->currentPageObject();
+        page->setPageWorkdir("/");
+        page->view()->loadModel("/");
+    }
+
+    static void
     home(GtkMenuItem *menuItem, gpointer data)
     {
         auto notebook_p = (Notebook<Type> *)g_object_get_data(G_OBJECT(data), "notebook_p");
         const gchar *path = notebook_p->workdir();
         auto page = (Page<Type> *)notebook_p->currentPageObject();
         page->setPageWorkdir(g_get_home_dir());
+        page->view()->loadModel(g_get_home_dir());
+    }
+
+    static void
+    fstab(GtkMenuItem *menuItem, gpointer data)
+    {
+        auto notebook_p = (Notebook<Type> *)g_object_get_data(G_OBJECT(data), "notebook_p");
+        const gchar *path = notebook_p->workdir();
+        auto page = (Page<Type> *)notebook_p->currentPageObject();
+        page->setPageWorkdir(g_get_home_dir());
+        page->view()->loadModel("xffm:fstab");
+    }
+
+    static void
+    pkg(GtkMenuItem *menuItem, gpointer data)
+    {
+        auto notebook_p = (Notebook<Type> *)g_object_get_data(G_OBJECT(data), "notebook_p");
+        const gchar *path = notebook_p->workdir();
+        auto page = (Page<Type> *)notebook_p->currentPageObject();
+        page->setPageWorkdir(g_get_home_dir());
+        page->view()->loadModel("xffm:pkg");
+    }
+
+    static void
+    trash(GtkMenuItem *menuItem, gpointer data)
+    {
+        auto notebook_p = (Notebook<Type> *)g_object_get_data(G_OBJECT(data), "notebook_p");
+        const gchar *path = notebook_p->workdir();
+        auto page = (Page<Type> *)notebook_p->currentPageObject();
+        page->setPageWorkdir(g_get_home_dir());
+	auto name = g_strdup_printf("%s/.local/share/Trash/files", g_get_home_dir());
+        page->setPageWorkdir(name);
+        page->view()->loadModel(name);
+        g_free(name);
     }
 
     static void run(Notebook<Type> *notebook_p, const gchar *command){
@@ -125,7 +169,11 @@ public:
 
     GtkMenu *createMenu(void){
         menuItem_t item[]={
-            {N_("Home"), (void *)MenuPopoverSignals<Type>::home, (void *) menuButton_},
+            {N_("Root folder"), (void *)MenuPopoverSignals<Type>::root, (void *) menuButton_},
+            {N_("Home Directory"), (void *)MenuPopoverSignals<Type>::home, (void *) menuButton_},
+            {N_("Disk Image Mounter"), (void *)MenuPopoverSignals<Type>::fstab, (void *) menuButton_},
+            {N_("Software Updater"), (void *)MenuPopoverSignals<Type>::pkg, (void *) menuButton_},
+            {N_("Trash bin"), (void *)MenuPopoverSignals<Type>::trash, (void *) menuButton_},
             {N_("Open terminal"), (void *)MenuPopoverSignals<Type>::terminal, (void *) menuButton_},
             {N_("Open a New Window"), (void *)MenuPopoverSignals<Type>::newWindow, (void *) menuButton_},
             //{N_("Execute Shell Command"), (void *)MenuPopoverSignals<Type>::shell, (void *) menuButton_},
