@@ -169,7 +169,7 @@ public:
 
     GtkMenu *createMenu(void){
         menuItem_t item[]={
-            {N_("Root folder"), (void *)MenuPopoverSignals<Type>::root, (void *) menuButton_},
+            //{N_("Root folder"), (void *)MenuPopoverSignals<Type>::root, (void *) menuButton_},
             {N_("Home Directory"), (void *)MenuPopoverSignals<Type>::home, (void *) menuButton_},
             {N_("Disk Image Mounter"), (void *)MenuPopoverSignals<Type>::fstab, (void *) menuButton_},
             {N_("Software Updater"), (void *)MenuPopoverSignals<Type>::pkg, (void *) menuButton_},
