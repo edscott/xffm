@@ -3,6 +3,7 @@
              monitor, listed in fstab files FIXME.
 bug: 
 
+ - critical: copy large file (say vdi disk), gtk hangs until copy is complete.
  . local monitor does not insert new files in sort order
  > use libmagic preferably instead of perl if available
  > printout optional and required libraries found in configure step.
