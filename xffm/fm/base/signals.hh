@@ -535,12 +535,12 @@ public:
 
     static void
     highlight(GtkTreePath *tpath, gpointer data){
-            //TRACE("highlight %d, %d\n", highlight_x, highlight_y);
         gchar *tree_path_string = NULL;
         
         if (tpath == NULL){
             // No item at position?
             // Do we need to clear hash table?
+            TRACE("highlight clear_highlights\n");
             clear_highlights(data);
             return;
         }
@@ -553,6 +553,7 @@ public:
             gtk_tree_path_free (tpath);
             return;
         }
+        TRACE("highlight \n");
 
 	auto baseModel = (BaseModel<Type> *)data;
         // Not highlighted. First clear any other item which highlight remains.

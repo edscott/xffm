@@ -4,13 +4,17 @@
 
 namespace xf {
 template <class Type> class Dialog;
-template <class Type> class dialogSignals{
+template <class Type> class DialogSignals{
 public:
+    // delete/destroy
     static gboolean delete_event (GtkWidget *widget,
                GdkEvent  *event,
                gpointer   user_data){
 	gtk_widget_hide(widget);
-        while (gtk_events_pending()) gtk_main_iteration();
+        while (asyncReference > 0){
+            DBG("delete/destroy: asyncReference = %d\n", asyncReference);
+            while (gtk_events_pending()) gtk_main_iteration();
+        }
         gtk_main_quit();
         _exit(123);
 	return TRUE;

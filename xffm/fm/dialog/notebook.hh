@@ -199,8 +199,9 @@ public:
         }
         while (gtk_events_pending()) gtk_main_iteration();
         if (g_hash_table_size(pageHash_) == 0){
-            gtk_main_quit();
-            exit(1);
+            DialogSignals<Type>::delete_event(GTK_WIDGET(mainWindow), NULL, NULL);
+            //gtk_main_quit();
+            //exit(1);
         }
         
         delete(page);

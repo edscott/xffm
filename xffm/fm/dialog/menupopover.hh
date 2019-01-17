@@ -1,6 +1,6 @@
 #ifndef MENU_POPOVER_HH
 #define MENU_POPOVER_HH
-
+#include "dialogsignals.hh"
 namespace xf {
 template <class Type> class Notebook;
 template <class Type> class Page;
@@ -131,12 +131,11 @@ public:
     finish(GtkMenuItem *menuItem, gpointer data)
     {
         TRACE("finish\n");
-        // The following does not retrieve the main window...
-        //GtkWidget *window = gtk_widget_get_toplevel(GTK_WIDGET(menuItem));
-        gtk_widget_hide(GTK_WIDGET(mainWindow));
-        while (gtk_events_pending()) gtk_main_iteration();
-        gtk_main_quit();
-        exit(0);
+        DialogSignals<Type>::delete_event(GTK_WIDGET(mainWindow), NULL, NULL);
+        //gtk_widget_hide(GTK_WIDGET(mainWindow));
+        //while (gtk_events_pending()) gtk_main_iteration();
+        //gtk_main_quit();
+        //exit(0);
     }
 
 

@@ -39,12 +39,14 @@ public:
         isTreeView = (Settings<Type>::getSettingInteger("window", "TreeView") > 0);
 	mainWindow = GTK_WINDOW(gtk_window_new (GTK_WINDOW_TOPLEVEL));
         g_object_set_data(G_OBJECT(mainWindow), "dialogObject", (void *)this);
-        g_signal_connect (G_OBJECT (mainWindow), "delete-event", EVENT_CALLBACK (dialogSignals<Type>::delete_event), NULL);
+        g_signal_connect (G_OBJECT (mainWindow), "delete-event", EVENT_CALLBACK (DialogSignals<Type>::delete_event), NULL);
+        // XXX Is it overkill with signal to destroy-event?
+        g_signal_connect (G_OBJECT (mainWindow), "destroy-event", EVENT_CALLBACK (DialogSignals<Type>::delete_event), NULL);
 
         gtk_widget_set_has_tooltip (GTK_WIDGET(mainWindow), TRUE);
         // FIXME: enable tooltip
         //g_signal_connect (G_OBJECT (mainWindow), "query-tooltip", G_CALLBACK (window_tooltip_f), (void *)this);
-        g_signal_connect (G_OBJECT (mainWindow), "key-press-event", KEY_EVENT_CALLBACK (dialogSignals<Type>::window_keyboard_event), (void *)this);
+        g_signal_connect (G_OBJECT (mainWindow), "key-press-event", KEY_EVENT_CALLBACK (DialogSignals<Type>::window_keyboard_event), (void *)this);
 
 	gtk_widget_get_preferred_width (GTK_WIDGET(mainWindow), &dialogMinW_, &dialogNatW_);
 	gtk_widget_get_preferred_height (GTK_WIDGET(mainWindow), &dialogMinH_, &dialogNatH_);
@@ -66,7 +68,7 @@ public:
 	g_object_set_data(G_OBJECT(vpane), "oldMax", GINT_TO_POINTER(max));
         
 	g_signal_connect (G_OBJECT (mainWindow), "size-allocate", 
-		SIZE_CALLBACK(dialogSignals<Type>::onSizeAllocate), (void *)this);
+		SIZE_CALLBACK(DialogSignals<Type>::onSizeAllocate), (void *)this);
         setDefaultSize();
         setDefaultFixedFontSize();
         gtk_window_present (mainWindow);

@@ -58,7 +58,7 @@ public:
 	gchar *file = g_find_program_in_path("file");
 	if (!file) return g_strdup("\"file\" command not in path!");
 	gchar *result = NULL; 
-	gchar *command = g_strdup_printf("%s \"%s\"", file, path);
+	gchar *command = g_strdup_printf("%s \'%s\'", file, path);
 	result = pipeCommand(command);
 	g_free(command);
 	g_free(file);
@@ -83,7 +83,8 @@ public:
 	gchar *ls = g_find_program_in_path("ls");
 	gchar *result = NULL; 
 	if (ls) {
-	    gchar *command = g_strdup_printf("%s -lhdH \"%s\"", ls, path);
+	    // borken links trouble: gchar *command = g_strdup_printf("%s -lhdH \'%s\'", ls, path);
+	    gchar *command = g_strdup_printf("%s -lhd \'%s\'", ls, path);
 	    result = pipeCommand(command);
 	    g_free(command);
 	    g_free(ls);

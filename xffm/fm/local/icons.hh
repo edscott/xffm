@@ -121,6 +121,8 @@ private:
 	    if (Gtk<Type>::isImage(mimetype)) return g_strdup(path);
 	    return g_strdup("image-x-generic");
 	}
+	if (strstr(mimetype, "compressed")) return g_strdup("package-x-generic");
+	if (strstr(mimetype, "x-xz")) return g_strdup("package-x-generic");
 
 	if (strstr(mimetype, "audio")) return g_strdup("audio-x-generic");
 	

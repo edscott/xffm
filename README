@@ -3,6 +3,9 @@
              monitor, listed in fstab files FIXME.
 bug: 
 
+ - ntfs for $RECYCLE.BIN, ls does not work to get file information:
+   $RECYCLE is expanded to the content of the variable instead of
+   verbatim. Use quotes?
  - critical: copy large file (say vdi disk), gtk hangs until copy is complete.
  . local monitor does not insert new files in sort order
  > use libmagic preferably instead of perl if available

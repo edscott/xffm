@@ -14,16 +14,42 @@
 // This is already done otherwise (check and see if advantage in replacement, for freeBSD)
 # define MODE_MOUNT             9     
 # define MODE_UMOUNT            10      
- 
+
+gint asyncReference = 0;
 namespace xf {
+
 template <class Type> class TimeoutResponse;
 template <class Type> class BaseProgressResponse;
 template <class Type> 
 class Gio {
 
+
     static void
-    GNUln(const gchar *path, const gchar *target){
-#ifdef FREEBSD_FOUND
+    backup(const gchar *path, const gchar *target){
+       auto pid=fork();
+       if (pid){
+           gint status;
+           waitpid(pid, &status, 0);
+           return;
+       }
+       auto base = g_path_get_basename(path);
+       auto srcTarget = g_strconcat(target, G_DIR_SEPARATOR_S, base, NULL);
+       auto backup = g_strconcat(srcTarget, "~", NULL);
+       const gchar *arg[] = {
+            "mv",
+            "-f",
+            srcTarget,
+            backup,
+            NULL
+        };
+       DBG("backup: %s -> %s\n", srcTarget, backup); 
+        execvp(arg[0], (gchar * const *)arg);
+        _exit(123);
+    }
+
+    static void
+    link(const gchar *path, const gchar *target){
+        backup(path, target);
         const gchar *arg[] = {
             "ln",
             "-s",
@@ -32,17 +58,6 @@ class Gio {
             target,
             NULL
         };
-#else
-        const gchar *arg[] = {
-            "ln",
-            "-s",
-            "-b",
-            "-f",
-            path,
-            target,
-            NULL
-        };
-#endif
         Run<Type>::thread_runReap(NULL, arg, 
                 Run<Type>::run_operate_stdout, 
                 Run<Type>::run_operate_stderr, 
@@ -50,9 +65,9 @@ class Gio {
 
     }
 
-    static void
-    GNUmv(const gchar *path, const gchar *target){
-#ifdef FREEBSD_FOUND
+    static void 
+    move(const gchar *path, const gchar *target){
+        backup(path, target);
         const gchar *arg[] = {
             "mv",
             "-f",
@@ -60,26 +75,15 @@ class Gio {
             target,
             NULL
         };
-#else
-        const gchar *arg[] = {
-            "mv",
-            "-f",
-            "-b",
-            path,
-            target,
-            NULL
-        };
-#endif
         Run<Type>::thread_runReap(NULL, arg, 
                 Run<Type>::run_operate_stdout, 
                 Run<Type>::run_operate_stderr, 
                 NULL);
-
-    }
-
+    }   
+    
     static void
-    GNUcp(const gchar *path, const gchar *target){
-#ifdef FREEBSD_FOUND
+    copy(const gchar *path, const gchar *target){
+        backup(path, target);
         const gchar *arg[] = {
             "cp",
             "-R",
@@ -88,24 +92,12 @@ class Gio {
             target,
             NULL
         };
-#else
-        const gchar *arg[] = {
-            "cp",
-            "-R",
-            "-b",
-            "-f",
-            path,
-            target,
-            NULL
-        };
-#endif
         Run<Type>::thread_runReap(NULL, arg, 
                 Run<Type>::run_operate_stdout, 
                 Run<Type>::run_operate_stderr, 
                 NULL);
 
-    }
-
+    }   
     static void
     GNUrm(const gchar *path){
 #ifdef FREEBSD_FOUND
@@ -162,6 +154,7 @@ class Gio {
                 Run<Type>::run_operate_stderr, 
                                 NULL);
     }
+
     static GList *
     removeUriFormat(gchar **files) {
         GList *fileList = NULL;
@@ -238,40 +231,40 @@ public:
 	    return FALSE;
         GFile *file = g_file_new_for_path(path);
         GError *error=NULL;
-        gboolean retval;
+        gboolean retval=TRUE;
         switch (mode) {
             case MODE_COPY:
                if (g_file_test(path, G_FILE_TEST_IS_DIR)){
-		   GNUcp(path, target);
-               } else {
+                   copy(path,target);
+                   // g_file_copy is limited with respect to directories.
+               } 
+               else 
+               {
                     auto flags = (guint)G_FILE_COPY_OVERWRITE | (guint)G_FILE_COPY_BACKUP | (guint) G_FILE_COPY_NOFOLLOW_SYMLINKS;
                     GFile *tgt = getTargetGfile(path, target);
-                    retval = g_file_copy (file, tgt, (GFileCopyFlags) flags,
+                    asyncReference++;    
+                    auto arg = (void **)calloc(2, sizeof(void *));
+                    arg[0] = GINT_TO_POINTER(mode);
+                    arg[1] = (void *)g_strdup(path);
+                    g_file_copy_async (file, tgt, (GFileCopyFlags) flags,
+                        G_PRIORITY_HIGH,
                         NULL, // GCancellable *cancellable,
-                        NULL,
-                        NULL,
-                        &error);
+                        progressCallback, // GFileProgressCallback,
+                        (void *)arg, // progress callback data
+                        asyncCallback, // GAsyncReadyCallback
+                        (void *)arg); // user_data for ready callback
                     g_object_unref(tgt);
                }
                break;
             case MODE_MOVE:
-               if (g_file_test(path, G_FILE_TEST_IS_DIR)){
-		   GNUmv(path, target);
-               } else {
-                    auto flags = (guint)G_FILE_COPY_OVERWRITE | (guint)G_FILE_COPY_BACKUP | (guint) G_FILE_COPY_NOFOLLOW_SYMLINKS;
-                    GFile *tgt = getTargetGfile(path, target);
- 
-                    retval = g_file_move (file, tgt, (GFileCopyFlags) flags,
-                        NULL, // GCancellable *cancellable,
-                        NULL,
-                        NULL,
-                        &error);
-                    g_object_unref(tgt);
-               }
+                   move(path,target);
+                   // There is currently no g_file_move_async() in documentation (jan2019)
                break;
             case MODE_LINK:
             {   
-               //GNUln(path, target);
+               // link() has backup option 
+               // link(path, target);
+               // g_file_make_symbolic_link does not have backup option
                GFile *link = getTargetGfile(path, target);
 
                retval = g_file_make_symbolic_link (link, 
@@ -283,13 +276,8 @@ public:
             }
         }
         if (error){
-            gchar *m;
-            if (mode == MODE_COPY) 
-                m = g_strdup_printf("%s %s", _("Could not copy item:"), path);
-            else if (mode == MODE_MOVE) 
-                m = g_strdup_printf("%s %s", _("Could not move item:"), path);
-            else if (mode == MODE_LINK)
-                m = g_strdup_printf("%s --> \"%s\"", _("Create symbolic link"), path);
+            // only applicable to MODE_LINK
+            gchar *m = g_strdup_printf("%s --> \"%s\"", _("Create symbolic link"), path);
             gchar *message = g_strdup_printf("<span color=\"red\">%s</span>\n(%s)", m, error->message);
             TimeoutResponse<Type>::dialog(GTK_WINDOW(mainWindow), message, "dialog-error");
             g_free(m);
@@ -304,39 +292,36 @@ public:
         if (mode != MODE_RM && mode != MODE_TRASH && mode != MODE_SHRED) 
 	    return FALSE;
         GFile *file = g_file_new_for_path(path);
-        GError *error=NULL;
-        gboolean retval;
         switch (mode) {
             case MODE_RM:
                if (g_file_test(path, G_FILE_TEST_IS_DIR)){
 		   GNUrm(path);
-		    retval = TRUE;
                } else {
-                    retval = g_file_delete (file, NULL, &error);
+                   auto arg = (void **)calloc(2, sizeof(void *));
+                   arg[0] = GINT_TO_POINTER(mode);
+                   arg[1] = (void *)g_strdup(path);
+                   asyncReference++;
+                   g_file_delete_async (file, G_PRIORITY_LOW, 
+                            NULL,   // GCancellable *cancellable,
+                            asyncCallback,
+                            (void *)arg);
                }
                break;
             case MODE_TRASH:
-               retval = g_file_trash (file, NULL, &error);
+               {
+                    auto arg = (void **)calloc(2, sizeof(void *));
+                    arg[0] = GINT_TO_POINTER(mode);
+                    arg[1] = (void *)g_strdup(path);
+                    asyncReference++;
+                    g_file_trash_async (file, G_PRIORITY_HIGH, 
+                       NULL, asyncCallback, arg);
+               }
                break;
             case MODE_SHRED:
 	       GNUshred (path);
-	       retval = TRUE;
                break;
         }
-        if (error){
-            gchar *m;
-            if (mode == MODE_RM) 
-                m = g_strdup_printf(_("Could not delete:\n%s"), path);
-            else if (mode == MODE_TRASH) 
-                m = g_strdup_printf(_("Could not move %s to trash"), path);
-            gchar *message = g_strdup_printf("<span color=\"red\">%s</span>\n(%s)", m, error->message);
-            TimeoutResponse<Type>::dialog(GTK_WINDOW(rmDialog), message, "dialog-error");
-            g_free(m);
-            g_free(message);
-            TRACE("doIt(%s): %s\n", path, error->message);
-            g_error_free(error);
-        }
-        return retval;
+        return TRUE;
     }
 
     static gboolean
@@ -351,22 +336,7 @@ public:
         gboolean retval;
         for (auto l = fileList; l && l->data; l=l->next) {
 	    auto path = (const gchar *)l->data;
-            // Try first item in foreground.
-            if (!count) {
-                retval = doIt(path, target, mode);
-                if (!retval)break;
-            } else {
-                // send the rest in background
-                GFile *file = g_file_new_for_path(path);
-                if (mode == MODE_COPY) {
-		    GNUcp(path, target);
-                } else if (mode == MODE_LINK){
-		    GNUln(path, target);
-                }
-		else if (mode == MODE_MOVE){
-                    GNUmv(path, target);
-                }            
-	    }
+            doIt(path, target, mode);
 	    count++;
 	}
 	return retval;
@@ -385,37 +355,21 @@ public:
         gboolean retval;
         for (auto l = fileList; l && l->data; l=l->next) {
 	    auto path = (const gchar *)l->data;
-            // Try first item in foreground.
-            if (!count) {
-                retval = doIt(rmDialog, path, mode);
-                if (!retval)break;
-            } else {
-                // send the rest in background
-                GFile *file = g_file_new_for_path(path);
-                if (mode == MODE_RM) {
-                    if (g_file_test(path, G_FILE_TEST_IS_DIR)){
-		         GNUrm(path);
-                         continue;
-                    } else {
-                        g_file_delete_async (file, G_PRIORITY_LOW, 
-                            NULL,   // GCancellable *cancellable,
-                            asyncCallback,
-                            GINT_TO_POINTER(mode));
-                    }
-                } else if (mode == MODE_TRASH){
-                    g_file_trash_async (file, G_PRIORITY_LOW, 
-                        NULL,   // GCancellable *cancellable,
-                        asyncCallback,
-                        GINT_TO_POINTER(mode));
-
-                }
-		else if (mode == MODE_SHRED){
-                    GNUshred(path);
-                }            
-	    }
+            retval = doIt(rmDialog, path, mode);
 	    count++;
 	}
 	return retval;
+    }
+    
+    static void
+    progressCallback(goffset currentBytes, goffset totalBytes, void *data){
+        auto arg = (void **)data;
+        auto mode = GPOINTER_TO_INT(arg[0]);
+        auto path =(gchar *)arg[1];
+        DBG("progress %s: %ld/%ld\n", path, (long)currentBytes, (long)totalBytes);
+        if (currentBytes == totalBytes) {
+            DBG("progress %s %ld/%ld: complete\n", path, (long)currentBytes, (long)totalBytes);
+        }
     }
 
     static void
@@ -423,25 +377,38 @@ public:
                         GAsyncResult *res,
                         gpointer data){
         auto file = (GFile *)obj;
-        TRACE("asyncCallback: mode %d\n", GPOINTER_TO_INT(data));
 
-        gchar errorMsg;
+        GError *error=NULL;
         gboolean success;
-        switch (GPOINTER_TO_INT(data)){
+        auto arg = (void **)data;
+        auto mode = GPOINTER_TO_INT(arg[0]);
+        auto path = (gchar *)arg[1];
+        TRACE("asyncCallback: mode %d\n", mode);
+        switch (mode){
             case MODE_RM:
-                success = g_file_delete_finish (file, res, NULL);
+                success = g_file_delete_finish (file, res, &error);
                 break;
             case MODE_TRASH:
-                success = g_file_trash_finish (file, res, NULL);
+                success = g_file_trash_finish (file, res, &error);
+                break;
+            case MODE_COPY:
+                success = g_file_copy_finish (file, res, &error);
                 break;
         }
         if (!success){
-            gchar *path = g_file_get_path(file);
-            ERROR("Failed to process \"%s\" in mode %d\n", path, GPOINTER_TO_INT(data));
-            g_free(path);
+            ERROR("Failed to process \"%s\" in mode %d\n", path, mode);
+            if (error){
+                ERROR("GError message: %s\n", error->message);
+                g_error_free(error);
+            }
+        } else{
+            DBG("Success: process \"%s\" in mode %d\n", path, mode);
         }
+        g_free(path);
+        g_free(arg);
         g_object_unref(file);
-
+        // decrement async reference
+        asyncReference--;
     }
 
 };
