@@ -1,13 +1,7 @@
   pending: fix popupmenu for /dev/disks
-             fix monitor and load items (/dev/disk/by_id monitor) in fstab
-             monitor, listed in fstab files FIXME.
+             
 bug: 
 
- - ntfs for $RECYCLE.BIN, ls does not work to get file information:
-   $RECYCLE is expanded to the content of the variable instead of
-   verbatim. Use quotes?
- - critical: copy large file (say vdi disk), gtk hangs until copy is complete.
- . local monitor does not insert new files in sort order
  > use libmagic preferably instead of perl if available
  > printout optional and required libraries found in configure step.
  
@@ -24,7 +18,8 @@ bug:
 TODO
   * history internal lpterm command. Enable use of | grep to filter output...
 
-  * check tarball creation output in lpterm 
+  * check tarball creation output in lpterm (also enable multiple file processing if several compressed files
+    of the same mimetype are selected simultaneously.
 
   * add bookmarks to rootview: 
     - put localviewpopup basics into rootview, popup menu to remove bookmark... maybe
