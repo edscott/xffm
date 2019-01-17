@@ -153,6 +153,7 @@ public:
                 ICON_NAME, iconName,
                 DISPLAY_PIXBUF, pixbuf,
                 NORMAL_PIXBUF, pixbuf,
+                FLAGS, xd_p->d_type,
 		-1);
         g_free(iconName);
         LocalModel<Type>::free_xd_p(xd_p);

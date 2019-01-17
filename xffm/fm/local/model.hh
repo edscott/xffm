@@ -265,7 +265,7 @@ public:
         // compare by name, directories or symlinks to directories on top
         const xd_t *xd_a = (const xd_t *)a;
         const xd_t *xd_b = (const xd_t *)b;
-
+DBG("compare %s --- %s\n", xd_a->d_name, xd_b->d_name);
         if (strcmp(xd_a->d_name, "..")==0) return -1;
         if (strcmp(xd_b->d_name, "..")==0) return 1;
 
@@ -347,12 +347,13 @@ public:
                 DATE, &date,
                 FLAGS, &type, 
                 -1);
+        gboolean up = (type&0x100);
         type &= 0xff;
         
         xd_t *xd_p = (xd_t *)data;
         xd_t *xd_b = (xd_t *)calloc(1, sizeof(xd_t));
         xd_b->path = path;
-        xd_b->d_name = g_path_get_basename(path);
+        xd_b->d_name = up?g_strdup(".."):g_path_get_basename(path);
         xd_b->d_type = type;
         TRACE("compare %s with iconview item \"%s\"\n", xd_p->d_name, name);
         gint sortResult;
@@ -430,6 +431,7 @@ private:
                 g_free(t);
             }
         }
+        gboolean up = (strcmp(xd_p->d_name, "..")==0);
         gchar *highlight_name=NULL;
 	if (g_path_is_absolute(icon_name)) highlight_name = g_strdup(icon_name);
         if (!highlight_name && is_dir){
@@ -490,6 +492,7 @@ private:
             }
         }*/
         if (!statInfo) statInfo = g_strdup("");
+        if (up) flags |= 0x100;
         gtk_list_store_set (list_store, iter, 
 		FLAGS, flags,
                 DISPLAY_NAME, utf_name,
