@@ -457,17 +457,19 @@ private:
 	if (strncmp(path, h, strlen(h))==0){
 	    if (strcmp(dir+strlen(h), "/.local/share/Trash/files")==0){
 		auto trashDate = trashInfo(path, "DeletionDate");
-		if (strchr(trashDate, 'T'))*strchr(trashDate, 'T')=' ';
 		auto trashSource = trashInfo(path, "Path");
-		auto mt = g_strdup_printf("<span size=\"large\" color=\"red\">%s\n<span color=\"blue\">%s</span>\n%s\n<span color=\"blue\">%s</span></span>", 
-		    _("Successfully moved to trash."), trashDate?trashDate:"?",
-		    _("Source:"), trashSource?trashSource:"?");
-		g_free(trashDate);
-		g_free(trashSource);
-		auto *g = g_strconcat(m,"\n", mt, NULL);
-		g_free(mt);
-		g_free(m);
-		m = g;
+                if (trashDate && trashSource){
+		if (strchr(trashDate, 'T'))*strchr(trashDate, 'T')=' ';
+                    auto mt = g_strdup_printf("<span size=\"large\" color=\"red\">%s\n<span color=\"blue\">%s</span>\n%s\n<span color=\"blue\">%s</span></span>", 
+                        _("Successfully moved to trash."), trashDate?trashDate:"?",
+                        _("Source:"), trashSource?trashSource:"?");
+                    auto *g = g_strconcat(m,"\n", mt, NULL);
+                    g_free(mt);
+                    g_free(m);
+                    m = g;
+                }
+                g_free(trashDate);
+                g_free(trashSource);
 
 	    } else TRACE("not trash:\"%s\"\n", dir+strlen(h));
 
