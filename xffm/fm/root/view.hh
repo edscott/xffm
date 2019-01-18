@@ -94,7 +94,7 @@ private:
     static void
     emptyTrash(GtkMenuItem *menuItem, gpointer data) {
 	auto trash = g_build_filename(g_get_home_dir(), ".local/share/Trash", NULL);
-	Gio<Type>::doIt((GtkDialog *)NULL, trash, MODE_RM);
+	Gio<Type>::execute((GtkDialog *)NULL, trash, MODE_RM);
 	auto view = (View<Type> *)g_object_get_data(G_OBJECT(data), "view");
 	g_free(trash);
 	view->reloadModel();

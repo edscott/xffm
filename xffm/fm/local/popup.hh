@@ -941,7 +941,7 @@ public:
          g_strstrip(newName);
         if (strlen(newName)){
             TRACE("*** symlink %s to %s\n", path, newName);
-            Gio<Type>::doIt(path, newName, MODE_LINK);
+            Gio<Type>::execute(path, newName, MODE_LINK);
         }
         g_free(newName);
     }
@@ -955,7 +955,7 @@ public:
         g_strstrip(newName);
         if (strlen(newName)){
             TRACE("*** duplicate %s to %s\n", path, newName);
-            Gio<Type>::doIt(path, newName, MODE_COPY);
+            Gio<Type>::execute(path, newName, MODE_COPY);
         }
         g_free(newName);
     }
@@ -969,7 +969,7 @@ public:
         g_strstrip(newName);
         if (strlen(newName)){
             TRACE("*** rename %s to %s\n", path, newName);
-            Gio<Type>::doIt(path, newName, MODE_MOVE);
+            Gio<Type>::execute(path, newName, MODE_MOVE);
         }
         g_free(newName);
     }

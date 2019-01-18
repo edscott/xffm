@@ -263,15 +263,14 @@ private:
             case TRASH_YES:
                 TRACE( "**single trash: %s\n", (gchar *)list->data);
                 // Trash operation
-                if (!Gio<Type>::doIt(rmDialog, (gchar *)list->data, MODE_TRASH)){
+                if (!Gio<Type>::execute(rmDialog, (gchar *)list->data, MODE_TRASH)){
                     ERROR("Cannot trash %s\n", (gchar *)list->data);
                 }
                 list = removeItemFromList(list);
                 break;
             case TRASH_YES_ALL:
                 TRACE( "trash all\n");
-                if (!Gio<Type>::multiDoIt(rmDialog, list, MODE_TRASH)){
-                //if (!Gio<Type>::multiDoIt(rmDialog, _("Trash"), "user-trash", list, MODE_TRASH)){
+                if (!Gio<Type>::execute(rmDialog, list, MODE_TRASH)){
                     ERROR("Cannot multiTrash %s\n", (gchar *)list->data);
                 }
                 list = removeAllFromList(list);
@@ -280,7 +279,7 @@ private:
             {
                 TRACE( "**single remove: %s\n", (gchar *)list->data);
                  // rm operation
-                if (!Gio<Type>::doIt(rmDialog, (gchar *)list->data, MODE_RM)){
+                if (!Gio<Type>::execute(rmDialog, (gchar *)list->data, MODE_RM)){
                     ERROR("Cannot delete %s\n", (gchar *)list->data);
                 }
                 list = removeItemFromList(list);
@@ -288,7 +287,7 @@ private:
             }
             case RM_YES_ALL:
             {
-                if (!Gio<Type>::multiDoIt(rmDialog, list, MODE_RM)){
+                if (!Gio<Type>::execute(rmDialog, list, MODE_RM)){
                     ERROR("Cannot multiDelete %s\n", (gchar *)list->data);
                 }
                 list = removeAllFromList(list);
@@ -298,7 +297,7 @@ private:
             case SHRED_YES:
                 TRACE( "**single shred: %s\n", (gchar *)list->data);
                  // Shred operation
-                if (!Gio<Type>::doIt(rmDialog, (gchar *)list->data, MODE_SHRED)){
+                if (!Gio<Type>::execute(rmDialog, (gchar *)list->data, MODE_SHRED)){
 
                     ERROR("Cannot shred %s\n", (gchar *)list->data);
                 }
@@ -306,7 +305,7 @@ private:
                break;
             case SHRED_YES_ALL:
                 TRACE( "shred all\n");
-                if (!Gio<Type>::multiDoIt(rmDialog, list, MODE_SHRED)){
+                if (!Gio<Type>::execute(rmDialog, list, MODE_SHRED)){
                     ERROR("Cannot multishred %s\n", (gchar *)list->data);
                 }
                 list = removeAllFromList(list);

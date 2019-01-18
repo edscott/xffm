@@ -24,13 +24,13 @@ public:
             auto command = "cp -R -b -f";
             TRACE("execute(%s, %s, files, %s)\n", message, command, target);
 
-            Gio<Type>::execute(files, target, MODE_COPY);
+            Gio<Type>::executeURL(files, target, MODE_COPY);
             clearClipBoard();
         } else if (strncmp(text, "move\n", strlen("move\n")) == 0){
             auto message = _("Moving files");
             auto command = "mv -b -f";
             TRACE("execute(%s, %s, files, %s)\n", message, command, target);
-            Gio<Type>::execute(files, target, MODE_MOVE);
+            Gio<Type>::executeURL(files, target, MODE_MOVE);
             clearClipBoard();
         } else {
             TRACE("ClipBoard::pasteClip: Invalid clipboard contents.\n");

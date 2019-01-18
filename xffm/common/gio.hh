@@ -22,8 +22,70 @@ template <class Type> class TimeoutResponse;
 template <class Type> class BaseProgressResponse;
 template <class Type> 
 class Gio {
+public:
+    static gboolean 
+    execute(GtkDialog *rmDialog, const gchar *path, gint mode){
+        GList *list = g_list_prepend(NULL,(void *)path);
+        auto retval = multiDoIt(rmDialog, list,mode);
+        g_list_free(list);
+        return retval;
+    }
+    static gboolean 
+    execute(GtkDialog *rmDialog,  GList *list, gint mode){
+        auto retval = multiDoIt(rmDialog, list,mode);
+        return retval;
+    }
+   
+    static gboolean 
+    execute(const gchar *path, const gchar *target, gint mode){
+        DBG("***FIXME enable a standalone progress dialog\n");
+        GList *list = g_list_prepend(NULL,(void *)path);
+        auto retval = multiDoIt(list,target,mode);
+        g_list_free(list);
+        return retval;
+    }
+   
+    static gboolean 
+    executeURL(gchar **files, const gchar *target, gint mode){
+        if (!files) {
+            ERROR("!files\n");
+            return FALSE;
+        }
+        if (*files==NULL) {
+            ERROR("files==NULL\n");
+            return FALSE;
+        }
+            
+        gchar *source = g_path_get_dirname(*files);
+	if (strncmp(source, URIFILE, strlen(URIFILE))==0){
+	    gchar *g = g_strdup(source + strlen(URIFILE));
+	    g_free(source);
+	    source=g;
+	}
+        if (!target){
+	    ERROR("LocalDnd::execute: target cannot be NULL\n");
+            return FALSE;
+        }
+        TRACE("execute: source=%s target=%s command=%s\n", source, target, 
+                mode==MODE_COPY?"copy":mode==MODE_MOVE?"move":"link");
+        gboolean result = FALSE;
+        if (strcmp(source, target) ) result = TRUE;
+        else {
+	    g_free(source);
+            DBG("Gio::execute: source and target are the same\n");
+            return FALSE;
+        }
+	g_free(source);
 
+        GList *fileList = removeUriFormat(files);
+        multiDoIt(fileList, target, mode);
 
+        for (auto l=fileList; l && l->data; l= l->next) g_free(l->data);
+        g_list_free(fileList);
+        return result;
+    }
+    
+private:
     static void
     backup(const gchar *path, const gchar *target){
        auto pid=fork();
@@ -171,46 +233,7 @@ class Gio {
         fileList = g_list_reverse(fileList);
         return fileList;
     }
-public:
-    static gboolean 
-    execute(gchar **files, const gchar *target, gint mode){
-        if (!files) {
-            ERROR("!files\n");
-            return FALSE;
-        }
-        if (*files==NULL) {
-            ERROR("files==NULL\n");
-            return FALSE;
-        }
-            
-        gchar *source = g_path_get_dirname(*files);
-	if (strncmp(source, URIFILE, strlen(URIFILE))==0){
-	    gchar *g = g_strdup(source + strlen(URIFILE));
-	    g_free(source);
-	    source=g;
-	}
-        if (!target){
-	    ERROR("LocalDnd::execute: target cannot be NULL\n");
-            return FALSE;
-        }
-        TRACE("execute: source=%s target=%s command=%s\n", source, target, 
-                mode==MODE_COPY?"copy":mode==MODE_MOVE?"move":"link");
-        gboolean result = FALSE;
-        if (strcmp(source, target) ) result = TRUE;
-        else {
-	    g_free(source);
-            DBG("LocalDnd::execute: source and target are the same\n");
-            return FALSE;
-        }
-	g_free(source);
 
-        GList *fileList = removeUriFormat(files);
-        multiDoIt(fileList, target, mode);
-
-        for (auto l=fileList; l && l->data; l= l->next) g_free(l->data);
-        g_list_free(fileList);
-        return result;
-    }
     static GFile *
     getTargetGfile(const gchar *path, const gchar *target){
     GFile *tgt;
@@ -360,7 +383,7 @@ public:
 	}
 	return retval;
     }
-    
+private:    
     static void
     progressCallback(goffset currentBytes, goffset totalBytes, void *data){
         auto arg = (void **)data;
