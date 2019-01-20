@@ -93,12 +93,20 @@ public:
 		entry->mimetype = 
 		    g_strdup(Mime<Type>::mimeType(entry->path));
 	    }
+	    errno=0;
 	    if (stat(entry->path, &(entry->st)) < 0){
-		ERROR("Cannot stat %s: %s\n", entry->path, strerror(errno));
-		removePathList(entryList);
-		throw(1);
+		DBG("properties.hh::Properties(): stat %s (%s)\n",
+		    entry->path, strerror(errno));
+		errno=0;
+		g_free(entry->basename);
+		g_free(entry->mimetype);
+		g_free(entry->path);
+		g_free(entry);
+		//removePathList(entryList);
+		//throw(1);
+	    } else {
+		entryList = g_list_prepend(entryList, entry);
 	    }
-            entryList = g_list_prepend(entryList, entry);
 	}
 	entryList = g_list_reverse(entryList);
 	//setup_properties_p(this);

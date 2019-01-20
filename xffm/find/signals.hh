@@ -120,7 +120,6 @@ public:
 	TRACE("fixme: signals::onEditButton\n");
         //print_c::print_status(diagnostics, g_strdup("fixme: signals::onEditButton testing run\n"));
         print_c::show_text(diagnostics);        
-        //run_c::thread_run(diagnostics, "ls -l", FALSE);
         edit_command(data);
     }
 

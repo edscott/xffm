@@ -94,10 +94,14 @@ private:
 	arg[3] = g_object_get_data(G_OBJECT(progressDialog), "progress");
 	if (pthread_create(&thread, NULL, thread2,data) != 0){
 	    ERROR("thread1(): Unable to create thread2\n");
-	}
+	} 
+	  
+	asyncReference++;
 	if (pthread_join(thread, &retval)!=0){
 	    ERROR("thread1(): Unable to join thread1\n");
 	}
+	asyncReference--;
+
 	g_object_set_data(G_OBJECT(progressDialog), "stop", GINT_TO_POINTER(TRUE));
         for (auto l=list; l && l->data; l= l->next) g_free(l->data);
 	g_list_free(list);

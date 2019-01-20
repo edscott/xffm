@@ -218,7 +218,6 @@ public:
         auto path = (const gchar *)g_object_get_data(G_OBJECT(fstabItemPopUp), "path");
         resetItemPopup(view, path);
 
-	struct stat st;
         // Hide all...
         GList *children = gtk_container_get_children (GTK_CONTAINER(fstabItemPopUp));
         for (GList *child = children; child && child->data; child=child->next){

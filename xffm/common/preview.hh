@@ -549,8 +549,17 @@ public:
 	// Look into thumbnail cache directory...
 	auto thumbnailPath = Hash<Type>::get_thumbnail_path (filePath, height);
 	if (g_file_test(thumbnailPath,G_FILE_TEST_EXISTS)){
+	    errno=0;
 	    struct stat st;
-	    if (st_p && (stat(thumbnailPath, &st)<0 || st.st_mtime < st_p->st_mtime)){
+	    if (stat(thumbnailPath, &st)<0){
+		DBG("preview.hh::loadFromThumbnails(): stat %s (%s)\n",
+		    thumbnailPath, strerror(errno));
+		errno=0;
+		g_free(thumbnailPath);
+		return NULL;
+	    }
+
+	    if (st_p && (st.st_mtime < st_p->st_mtime)){
 		unlink(thumbnailPath);
 	    } else {
 		GError *error=NULL;

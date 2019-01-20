@@ -50,7 +50,7 @@ public:
 		}
 		p++;
 	    } while (*p);
-	    lineBreaker(remainder, lineLength);
+	    if (*p != 0) lineBreaker(remainder, lineLength);
 	}
     }
 
@@ -82,13 +82,13 @@ public:
     static gchar *statInfo(const gchar *path){
 	gchar *ls = g_find_program_in_path("ls");
 	gchar *result = NULL; 
-	if (ls) {
+	if (ls && g_file_test(path,G_FILE_TEST_EXISTS)) {
 	    // borken links trouble: gchar *command = g_strdup_printf("%s -lhdH \'%s\'", ls, path);
 	    gchar *command = g_strdup_printf("%s -lhd \'%s\'", ls, path);
 	    result = pipeCommand(command);
 	    g_free(command);
-	    g_free(ls);
 	}
+	g_free(ls);
 	if (result){
 	    if (strstr(result, path)) *strstr(result, path) = 0;
 	    return (result);

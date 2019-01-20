@@ -133,11 +133,18 @@ public:
 
 	if(g_path_is_absolute (path) && g_file_test(path, G_FILE_TEST_EXISTS)) {
 	    struct stat st;
+	    errno=0;
 	    if (stat (path, &st)==0){
 		pixbuf_p->mtime = st.st_mtime;
 		pixbuf_p->st_size = st.st_size;
 		pixbuf_p->st_ino = st.st_ino;
-	    } else ERROR("cannot stat %s\n", path);
+	    } else {
+		if (errno){
+		    DBG("base.hh::baseExecCompletionList(): stat %s (%s)\n",
+			path, strerror(errno));
+		    errno=0;
+		}
+	    }
 	} 
 	// Replace or insert item in pixbuf hash
 	gchar *hash_key = get_hash_key (pixbuf_p->path, pixbuf_p->size);
@@ -190,7 +197,8 @@ public:
 	if (g_path_is_absolute (icon_name)) {
 	    // Check for out of date source image files
 	    struct stat st;
-	    stat (icon_name, &st);
+	    errno = 0;
+	    if (stat (icon_name, &st) ==0){
 	    if(pixbuf_p->mtime != st.st_mtime || 
 		    pixbuf_p->st_size != st.st_size||
 		    pixbuf_p->st_ino != st.st_ino)
@@ -202,6 +210,11 @@ public:
 		// this will be done when pixbuf is replaced...
 		//g_mutex_unlock (pixbuf_hash_mutex);
 		return NULL;
+	    }
+	    } else {
+		DBG("hash.hh::lookup_icon(): stat %s (%s)\n",
+		    icon_name, strerror(errno));
+		errno=0;
 	    }
 	}
 	g_free(hash_key);

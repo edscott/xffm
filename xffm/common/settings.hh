@@ -30,19 +30,24 @@ public:
             writeSettings();
         }
         struct stat st;
+	errno=0;
         if (stat(settingsfile, &st) < 0){
-            ERROR("settings.hh:: cannot access %s\n", settingsfile);
-            exit(1);
-        }
-        mTime = st.st_mtime;
+	    DBG("settings.hh::readSettings(): stat %s (%s)\n",
+		settingsfile, strerror(errno));
+	    errno=0;
+	    mTime=time(NULL);
+        } else mTime = st.st_mtime;
     }
 private:
     static void
     reloadSettings(void){
         struct stat st;
+	errno=0;
         if (stat(settingsfile, &st) < 0){
-            ERROR("settings.hh:: cannot access %s\n", settingsfile);
-            exit(1);
+	    DBG("settings.hh::readSettings(): stat %s (%s)\n",
+		settingsfile, strerror(errno));
+	    errno=0;
+            return;
         }
         if (st.st_mtime == mTime){
             return;

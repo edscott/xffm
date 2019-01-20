@@ -11,6 +11,7 @@ public:
                GdkEvent  *event,
                gpointer   user_data){
 	gtk_widget_hide(widget);
+	while (gtk_events_pending()) gtk_main_iteration();
         while (asyncReference > 0){
             DBG("delete/destroy: asyncReference = %d\n", asyncReference);
             while (gtk_events_pending()) gtk_main_iteration();

@@ -439,8 +439,14 @@ public:
 	g_free(command);
 	return retval;
 #else
+	errno=0;
         struct stat st;
-        if (stat(file, &st) < 0) return g_strdup("unknown mimetype");
+        if (stat(file, &st) < 0) {
+	    DBG("mime.hh::mimeType(): stat %s (%s)\n",
+		file, strerror(errno));
+	    errno=0;
+	    return g_strdup("unknown mimetype");
+	}
         gchar *r = mimeType(file, &st);
         return r;
         

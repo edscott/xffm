@@ -845,7 +845,11 @@ private:
         // If file cannot be stat(), assume it is not there (whatever).
         // coverity[fs_check_call : FALSE]
         if(stat (path, &path_st) < 0) {
-            fprintf(stderr, "%s: %s\n", path, strerror (errno));
+	    if (errno){
+		DBG("fgr.hh::globber(): stat %s (%s)\n",
+		    path, strerror(errno));
+		errno=0;
+	    }
             int pass = object->pass;
             if (!address) free(object);
             free(globstring);

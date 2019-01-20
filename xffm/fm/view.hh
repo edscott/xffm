@@ -73,8 +73,9 @@ public:
 	    gtk_widget_hide(GTK_WIDGET(view->page()->treeScrolledWindow()));
 	    gtk_widget_show(GTK_WIDGET(view->page()->topScrolledWindow()));
 	}
-
-        view->setViewType(BaseSignals<Type>::getViewType(path));
+	auto type = BaseSignals<Type>::getViewType(path);
+	if (type < 0) return FALSE;
+        view->setViewType(type);
         view->setPath(path);
         // stop current monitor
         if (view->localMonitor_) {

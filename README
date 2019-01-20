@@ -1,3 +1,5 @@
+ bug: statinfo in the monitor.. file disappears...
+
 recurring bug:
 edscott@FreeBSD12:~/dune2.4 % lldb xffm -c xffm.core                                                                                    
 (lldb) target create "xffm" --core "xffm.core"                                                                                          

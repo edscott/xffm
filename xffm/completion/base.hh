@@ -246,6 +246,7 @@ private:
             TRACE("gl_pathv[%d] = %s\n", i, stack_glob_v.gl_pathv[i]);
             // stack_glob_v.gl_pathv is initialized in the glob() call.
             // coverity[uninit_use : FALSE]
+	    errno=0;
             if (stat (stack_glob_v.gl_pathv[i], &st)==0 && (S_IXOTH & st.st_mode)){
                 gchar *base;
                 if (straight_path) {
@@ -256,6 +257,11 @@ private:
                 matches = g_slist_append (matches, base);
                 TRACE("%d) %s\n", i, base);
             }
+	    if (errno){
+		DBG("base.hh::baseExecCompletionList(): stat %s (%s)\n",
+		    stack_glob_v.gl_pathv[i], strerror(errno));
+		errno=0;
+	    }
         }
         globfree(&stack_glob_v);
         g_free(token);

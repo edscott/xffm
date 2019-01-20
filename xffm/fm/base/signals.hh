@@ -634,7 +634,7 @@ public:
         if (strcmp(path, "xffm:pkg")==0) return (PKG_TYPE);
 	
         ERROR("base/signals.hh::View::loadModel() %s not defined.\n", path);
-        return (ROOTVIEW_TYPE);
+        return (-1);
     }
 
     /////////////////////   gsignals  /////////////////////////

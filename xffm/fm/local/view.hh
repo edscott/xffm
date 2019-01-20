@@ -121,7 +121,13 @@ public:
     {
 	// regular file test (stat)
 	struct stat st;
-	stat(path, &st);
+	errno=0;
+	if (stat(path, &st)<0){
+	    DBG("local/view.hh::item_activated(): stat %s (%s)\n",
+		path, strerror(errno));
+	    errno=0;
+	    return FALSE;
+	}
 	// FIXME: if executable, then dialog to open with null (run) With entry for arguments
 	if ((st.st_mode & S_IFMT) == S_IFREG){
 	    if (g_file_test(path, G_FILE_TEST_IS_EXECUTABLE)) {

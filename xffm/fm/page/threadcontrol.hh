@@ -201,8 +201,11 @@ public:
 	// This function call may block
 	TRACE("heartbeat doing stat %s\n", heartbeat_p->path);
 	struct stat st;
+	errno=0;
 	if (lstat(heartbeat_p->path, &st) < 0) {
-	    ERROR("heartbeat_g_file_test(): cannot lstat %s\n", heartbeat_p->path);
+	    DBG("threadcontrol.hh::heartbeat_g_file_test(): lstat %s (%s)\n",
+		heartbeat_p->path, strerror(errno));
+	    errno=0;
 	    return NULL;
 	}
 	
@@ -212,8 +215,11 @@ public:
 	    if (heartbeat_p->test == G_FILE_TEST_IS_SYMLINK){
 		return GINT_TO_POINTER(TRUE);
 	    }
+	    errno=0;
 	    if (stat(heartbeat_p->path, &st) < 0) {
-		ERROR("heartbeat_g_file_test(): cannot stat %s\n", heartbeat_p->path);
+		DBG("threadcontrol.hh::heartbeat_g_file_test(): lstat %s (%s)\n",
+		    heartbeat_p->path, strerror(errno));
+		errno=0;
 		return NULL;
 	    }
 	}

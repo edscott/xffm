@@ -424,7 +424,6 @@ private:
         }
 
         auto tpath = (GtkTreePath *)view->selectionList()->data;
-	struct stat st;
         gchar *path;
         gchar *iconName;
         gchar *mimetype;
@@ -452,8 +451,11 @@ private:
         g_object_set_data(G_OBJECT(localItemPopUp), "displayName", displayName);
         g_object_set_data(G_OBJECT(localItemPopUp), "path", path);
         g_object_set_data(G_OBJECT(localItemPopUp), "mimetype", mimetype);
+	struct stat st;
+	errno=0;
         if (stat(path, &st)<0){
-            ERROR("resetMenuItems(): cannot stat %s (expect problems)\n", path);
+            ERROR("local/popup.hh::resetMenuItems(): cannot stat %s (expect problems) %s\n", path, strerror(errno));
+	    errno=0;
         }
        return;
     }

@@ -183,8 +183,10 @@ public:
 	    }
 
 	    if (d->d_type == 0){
+		errno=0;
 		if (stat(xd_p->path, xd_p->st) < 0) {
 		    TRACE("get_xd_p() stat(%s): %s (path has disappeared)\n", xd_p->path, strerror(errno));
+		    errno=0;
 		} else {
 		    xd_p->d_type = LocalIcons<Type>::getDType(xd_p->st);
 		}
@@ -213,13 +215,13 @@ public:
 		exit(1);
 	    }
             errno=0;
-	    stat(xd_p->path, xd_p->st);
-            if (errno){
+	    if (stat(xd_p->path, xd_p->st)<0){
                 DBG("getMimeType() stat: %s: %s\n", xd_p->path, strerror(errno));
                 errno=0;
-            }
-	    g_free(mimetype);
-	    mimetype = Mime<Type>::statMimeType(xd_p->st);
+            } else {
+		g_free(mimetype);
+		mimetype = Mime<Type>::statMimeType(xd_p->st);
+	    }
 	}
 	if (strcmp(mimetype,"inode/regular")==0){
 	    auto type = Mime<Type>::extensionMimeType(xd_p->path);
@@ -283,26 +285,6 @@ public:
 private:
     static GList *
     sort_directory_list(GList *list){
-#if 0
-        stat is done in xd_t record creation...
-        // FIXME:  only do a full stat when sort order is date or size
-        
-        gboolean do_stat = (g_list_length(list) <= MAX_AUTO_STAT);
-
-        if (do_stat){
-            GList *l;
-            for (l=list; l && l->data; l=l->next){
-                xd_t *xd_p = (xd_t *)l->data;
-                xd_p->st = (struct stat *)calloc(1, sizeof(struct stat));
-                if (!xd_p->st) continue;
-                if (stat(xd_p->path, xd_p->st)){
-                    TRACE("xfdir_local_c::sort_directory_list: cannot stat %s (%s)\n", 
-                            xd_p->path, strerror(errno));
-                    continue;
-                }
-            }
-        }
-#endif        
         // Default sort order:
         if (Settings<Type>::getSettingInteger("LocalView", "Descending") <= 0) {
             return g_list_sort (list,compare_by_name);
