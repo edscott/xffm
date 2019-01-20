@@ -41,7 +41,7 @@ private:
 	if (g_path_is_absolute(name)) return name; // image previews (no emblem)
 	TRACE("basic iconname: %s --> %s\n", basename, name);
         gchar *emblem = getEmblem(path, basename,  d_type, st_p);
-        TRACE("emblem=%s\n", emblem);
+        TRACE("emblem: %s --> %s\n",  basename, emblem);
         gchar *iconname = g_strconcat(name, emblem, NULL);
         g_free(name);
         g_free(emblem);

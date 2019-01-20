@@ -182,11 +182,12 @@ public:
 		exit(1);
 	    }
 
-	    if (stat(xd_p->path, xd_p->st) < 0) {
-		DBG("get_xd_p() stat(%s): %s (path has disappeared)\n", xd_p->path, strerror(errno));
-	    } else {
-		xd_p->d_type = LocalIcons<Type>::getDType(xd_p->st);
-		TRACE("From getDType> d_type= %d (DT_DIR is %d)\n", xd_p->d_type, DT_DIR);
+	    if (d->d_type == 0){
+		if (stat(xd_p->path, xd_p->st) < 0) {
+		    TRACE("get_xd_p() stat(%s): %s (path has disappeared)\n", xd_p->path, strerror(errno));
+		} else {
+		    xd_p->d_type = LocalIcons<Type>::getDType(xd_p->st);
+		}
 	    }
 	    errno=0;
 	}

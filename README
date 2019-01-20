@@ -1,7 +1,8 @@
   pending: fix popupmenu for /dev/disks
              
 bug: 
- - symbolic link emblem is not being shown
+ - main menu items should be in popover
+ - progress dialog for rm/trash/shred
  > use libmagic preferably instead of perl if available
  > printout optional and required libraries found in configure step.
  
