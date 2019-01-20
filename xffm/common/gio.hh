@@ -18,15 +18,28 @@
 gint asyncReference = 0;
 namespace xf {
 
+template <class Type> class ProgressDialog;
 template <class Type> class TimeoutResponse;
 template <class Type> class BaseProgressResponse;
 template <class Type> 
 class Gio {
+    static void *progress(void *data){
+	auto arg = (void **)data;
+	auto message = (const gchar *)arg[0];
+	auto icon = (const gchar *)arg[1];
+	auto title = (const gchar *)arg[2];
+	auto text = (const gchar *)arg[3];
+	// open follow dialog for long commands...
+	auto dialog = ProgressDialog<Type>::dialogPulse(message, icon, title, text);
+	return (void *)dialog;
+    }
+
 public:
+    // rm/shred/trash (by popup)
     static gboolean 
     execute(GtkDialog *rmDialog, const gchar *path, gint mode){
         GList *list = g_list_prepend(NULL,(void *)path);
-        auto retval = multiDoIt(rmDialog, list,mode);
+        auto retval = execute(rmDialog,  list, mode);
         g_list_free(list);
         return retval;
     }
@@ -35,16 +48,89 @@ public:
         auto retval = multiDoIt(rmDialog, list,mode);
         return retval;
     }
-   
+private:
+    //rename/link/duplicate (by popup)
+    // fireup chain of 2 threads.
+    // thread 1 will fire up thread 2 and wait
+    // thread 2 will do the action
+    static void *thread2(void *data){
+	gboolean retval=FALSE;
+        TRACE("thread2 startup\n");
+	auto arg = (void **)data;
+	auto list = (GList *)arg[0];
+	auto target = (const gchar *)arg[1];
+	auto mode = GPOINTER_TO_INT(arg[2]);
+	auto progressBar = GTK_PROGRESS_BAR(arg[3]);
+        retval = multiDoItFore(list,target,mode,progressBar);
+        TRACE("thread2 done\n");
+        return GINT_TO_POINTER(retval);
+    }
+    static void *thread1(void *data){
+        TRACE("thread1 startup\n");
+	void *retval=NULL;
+	pthread_t thread;
+	auto arg = (void **)data;
+	auto list = (GList *)arg[0];
+	auto target = (gchar *)arg[1];
+	auto mode = GPOINTER_TO_INT(arg[2]);
+
+	const gchar *title;
+	switch (mode) {
+	    case MODE_COPY:
+		title = _("Copying files"); break;
+	    case MODE_MOVE:
+		title = _("Moving files"); break;
+	    case MODE_LINK:
+		title = _("linking"); break;
+	    default:
+		title = "Fxime";
+	}
+
+
+	const gchar *contextArg[]={ (const gchar *)list->data, 
+	    "system-run", title, ""};
+	auto progressDialog = 
+	    GTK_WINDOW(Util<Type>::context_function(progress, (void *)contextArg));
+	arg[3] = g_object_get_data(G_OBJECT(progressDialog), "progress");
+	if (pthread_create(&thread, NULL, thread2,data) != 0){
+	    ERROR("thread1(): Unable to create thread2\n");
+	}
+	if (pthread_join(thread, &retval)!=0){
+	    ERROR("thread1(): Unable to join thread1\n");
+	}
+	g_object_set_data(G_OBJECT(progressDialog), "stop", GINT_TO_POINTER(TRUE));
+        for (auto l=list; l && l->data; l= l->next) g_free(l->data);
+	g_list_free(list);
+	g_free(target);
+	g_free(arg);
+        TRACE("thread1 done: retval= %p\n", retval);
+	//pthread_exit();
+        return GINT_TO_POINTER(retval);
+    }
+public:
     static gboolean 
     execute(const gchar *path, const gchar *target, gint mode){
-        DBG("***FIXME enable a standalone progress dialog\n");
-        GList *list = g_list_prepend(NULL,(void *)path);
-        auto retval = multiDoIt(list,target,mode);
-        g_list_free(list);
-        return retval;
+	TRACE("***execute(%s, %s, %d)\n", path, target, mode);
+	pthread_t thread;
+	auto arg = (void **)calloc(4,sizeof(void *));
+	if (!arg){
+	    ERROR("execute(): calloc: %s\n", strerror(errno));
+	    exit(1);
+	}
+        GList *list = g_list_prepend(NULL,(void *)g_strdup(path));
+	arg[0] = (void *)list;
+	arg[1] = (void *)g_strdup(target);
+	arg[2] = GINT_TO_POINTER(mode);
+        TRACE("thread1 create\n");
+	if (pthread_create(&thread, NULL, thread1, (void *)arg) != 0){
+	    ERROR("execute(): Unable to create thread1\n");
+	}
+        pthread_detach(thread);
+        TRACE("return to event loop\n");
+
+	return TRUE;
     }
-   
+    //copy/move/symlink (by dnd or clipboard)
     static gboolean 
     executeURL(gchar **files, const gchar *target, gint mode){
         if (!files) {
@@ -72,43 +158,79 @@ public:
         if (strcmp(source, target) ) result = TRUE;
         else {
 	    g_free(source);
-            DBG("Gio::execute: source and target are the same\n");
+            TRACE("Gio::execute: source and target are the same\n");
             return FALSE;
         }
 	g_free(source);
 
-        GList *fileList = removeUriFormat(files);
-        multiDoIt(fileList, target, mode);
+	// Proceed...
+	pthread_t thread;
+	auto arg = (void **)calloc(4,sizeof(void *));
+	if (!arg){
+	    ERROR("execute(): calloc: %s\n", strerror(errno));
+	    exit(1);
+	}
+        auto list = removeUriFormat(files);
+	arg[0] = (void *)list;
+	arg[1] = (void *)g_strdup(target);
+	arg[2] = GINT_TO_POINTER(mode);
+        TRACE("dnd thread1 create\n");
+	if (pthread_create(&thread, NULL, thread1, (void *)arg) != 0){
+	    ERROR("execute(): Unable to create thread1\n");
+	}
+        pthread_detach(thread);
+        TRACE("dnd return to event loop\n");
 
-        for (auto l=fileList; l && l->data; l= l->next) g_free(l->data);
-        g_list_free(fileList);
         return result;
     }
     
 private:
-    static void
-    backup(const gchar *path, const gchar *target){
+    static void 
+    fore(const gchar **arg){
        auto pid=fork();
        if (pid){
            gint status;
            waitpid(pid, &status, 0);
            return;
        }
-       auto base = g_path_get_basename(path);
-       auto srcTarget = g_strconcat(target, G_DIR_SEPARATOR_S, base, NULL);
-       auto backup = g_strconcat(srcTarget, "~", NULL);
-       const gchar *arg[] = {
-            "mv",
-            "-f",
-            srcTarget,
-            backup,
-            NULL
-        };
-       DBG("backup: %s -> %s\n", srcTarget, backup); 
         execvp(arg[0], (gchar * const *)arg);
         _exit(123);
     }
 
+    static void
+    backup(const gchar *path, const gchar *target){
+        auto base = g_path_get_basename(path);
+        auto srcTarget = g_strconcat(target, G_DIR_SEPARATOR_S, base, NULL);
+        auto backup = g_strconcat(srcTarget, "~", NULL);
+        const gchar *arg[] = { "mv", "-f", srcTarget, backup, NULL };
+        TRACE("backup: %s -> %s\n", srcTarget, backup); 
+        fore(arg);
+    }
+
+    static void 
+    moveFore(const gchar *path, const gchar *target){
+        backup(path, target);
+        TRACE("moveFore: %s -> %s\n", path, target); 
+        const gchar *arg[] = { "mv", "-f", path, target, NULL };
+        fore(arg);
+    }   
+    
+    static void
+    copyFore(const gchar *path, const gchar *target){
+        backup(path, target);
+        TRACE("copyFore: %s -> %s\n", path, target); 
+        const gchar *arg[] = { "cp", "-R", "-f", path, target, NULL };
+        fore(arg);
+     }   
+
+    static void
+    linkFore(const gchar *path, const gchar *target){
+        backup(path, target);
+        TRACE("linkFore: %s -> %s\n", path, target); 
+        const gchar *arg[] = { "ln", "-s", "-f", path, target, NULL };
+        fore(arg);
+    }
+#if 0
     static void
     link(const gchar *path, const gchar *target){
         backup(path, target);
@@ -160,6 +282,8 @@ private:
                 NULL);
 
     }   
+#endif
+
     static void
     GNUrm(const gchar *path){
 #ifdef FREEBSD_FOUND
@@ -249,68 +373,27 @@ private:
     }
     
     
-    static gboolean doIt(const gchar *path, const gchar *target, gint mode){
+    static gboolean doItFore(const gchar *path, const gchar *target, gint mode){
+	TRACE("doIt...%s --> %s  (%d)\n", path, target, mode);
         if (mode != MODE_COPY && mode != MODE_LINK && mode != MODE_MOVE) 
 	    return FALSE;
-        GFile *file = g_file_new_for_path(path);
-        GError *error=NULL;
         gboolean retval=TRUE;
         switch (mode) {
             case MODE_COPY:
-               if (g_file_test(path, G_FILE_TEST_IS_DIR)){
-                   copy(path,target);
-                   // g_file_copy is limited with respect to directories.
-               } 
-               else 
-               {
-                    auto flags = (guint)G_FILE_COPY_OVERWRITE | (guint)G_FILE_COPY_BACKUP | (guint) G_FILE_COPY_NOFOLLOW_SYMLINKS;
-                    GFile *tgt = getTargetGfile(path, target);
-                    asyncReference++;    
-                    auto arg = (void **)calloc(2, sizeof(void *));
-                    arg[0] = GINT_TO_POINTER(mode);
-                    arg[1] = (void *)g_strdup(path);
-                    g_file_copy_async (file, tgt, (GFileCopyFlags) flags,
-                        G_PRIORITY_HIGH,
-                        NULL, // GCancellable *cancellable,
-                        progressCallback, // GFileProgressCallback,
-                        (void *)arg, // progress callback data
-                        asyncCallback, // GAsyncReadyCallback
-                        (void *)arg); // user_data for ready callback
-                    g_object_unref(tgt);
-               }
+               copyFore(path,target);
                break;
             case MODE_MOVE:
-                   move(path,target);
-                   // There is currently no g_file_move_async() in documentation (jan2019)
+               moveFore(path,target);
                break;
             case MODE_LINK:
             {   
-               // link() has backup option 
-               // link(path, target);
-               // g_file_make_symbolic_link does not have backup option
-               GFile *link = getTargetGfile(path, target);
-
-               retval = g_file_make_symbolic_link (link, 
-                           path,
-                           NULL,
-                        &error);
-               g_object_unref(link);
+               linkFore(path,target);
                break;
             }
         }
-        if (error){
-            // only applicable to MODE_LINK
-            gchar *m = g_strdup_printf("%s --> \"%s\"", _("Create symbolic link"), path);
-            gchar *message = g_strdup_printf("<span color=\"red\">%s</span>\n(%s)", m, error->message);
-            TimeoutResponse<Type>::dialog(GTK_WINDOW(mainWindow), message, "dialog-error");
-            g_free(m);
-            g_free(message);
-            TRACE("doIt(%s): %s\n", path, error->message);
-            g_error_free(error);
-        }
         return retval;
     }
-    
+
     static gboolean doIt(GtkDialog *rmDialog, const gchar *path, gint mode){
         if (mode != MODE_RM && mode != MODE_TRASH && mode != MODE_SHRED) 
 	    return FALSE;
@@ -347,9 +430,62 @@ private:
         return TRUE;
     }
 
+    static void *
+    setProgressText(void *data){
+	auto arg = (void **)data;
+	auto progressBar = (GtkProgressBar *) arg[0];
+	auto item = GPOINTER_TO_INT(arg[1]);
+	auto list = (GList *)arg[2];
+	auto text = g_strdup_printf(_("(%d of %d)"), item, g_list_length(list));
+	    
+	gtk_progress_bar_set_text (progressBar, text);
+	g_free(text);
+	return NULL;
+    }
+
+    static void *
+    setProgressMessage(void *data){
+	auto arg = (void **)data;
+	auto label = GTK_LABEL(arg[0]);
+	auto markup = (const gchar *)arg[1];
+	//TRACE("label(%p) %s\n", label, markup);
+	gtk_label_set_markup(label, markup);
+
+	    
+	return NULL;
+    }
+	
+    static gboolean
+    multiDoItFore(GList *fileList, const gchar *target, gint mode, GtkProgressBar *progressBar)
+    {
+	TRACE("multiDoIt...\n");
+        if (mode != MODE_COPY && mode != MODE_LINK && mode != MODE_MOVE) 
+	    return FALSE;
+	gint items = g_list_length(fileList);
+	if (!items) return FALSE;
+
+	gint count = 1;
+        gboolean retval;
+        for (auto l = fileList; l && l->data; l=l->next) {
+	    // update progress dialog with filecount
+	    void *arg[]={(void *)progressBar, GINT_TO_POINTER(count), (void *)fileList};
+	    Util<Type>::context_function(setProgressText, (void *)arg);
+	    auto path = (const gchar *)l->data;
+	    // update progress dialog with path
+	    void *arg2[]={g_object_get_data(G_OBJECT(progressBar), "label"), (void *)path};
+	    Util<Type>::context_function(setProgressMessage, (void *)arg2);
+            doItFore(path, target, mode);
+	    //sleep(1);
+	    count++;
+	}
+	// destroy progress dialog.
+	return retval;
+    }
+/*
     static gboolean
     multiDoIt(GList *fileList, const gchar *target, gint mode)
     {
+	TRACE("multiDoIt...\n");
         if (mode != MODE_COPY && mode != MODE_LINK && mode != MODE_MOVE) 
 	    return FALSE;
 	gint items = g_list_length(fileList);
@@ -364,7 +500,7 @@ private:
 	}
 	return retval;
     }
-
+*/
 
     static gboolean
     multiDoIt(GtkDialog *rmDialog, GList *fileList, gint mode)
@@ -389,9 +525,9 @@ private:
         auto arg = (void **)data;
         auto mode = GPOINTER_TO_INT(arg[0]);
         auto path =(gchar *)arg[1];
-        DBG("progress %s: %ld/%ld\n", path, (long)currentBytes, (long)totalBytes);
+        TRACE("progress %s: %ld/%ld\n", path, (long)currentBytes, (long)totalBytes);
         if (currentBytes == totalBytes) {
-            DBG("progress %s %ld/%ld: complete\n", path, (long)currentBytes, (long)totalBytes);
+            TRACE("progress %s %ld/%ld: complete\n", path, (long)currentBytes, (long)totalBytes);
         }
     }
 
@@ -425,7 +561,7 @@ private:
                 g_error_free(error);
             }
         } else{
-            DBG("Success: process \"%s\" in mode %d\n", path, mode);
+            TRACE("Success: process \"%s\" in mode %d\n", path, mode);
         }
         g_free(path);
         g_free(arg);

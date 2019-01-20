@@ -2,14 +2,13 @@
 #define XF_COMMANDPROGRESSRESPONSE_HH
 namespace xf {
 template <class Type>
+
 class CommandProgressResponse {
     using pixbuf_c = Pixbuf<double>;
     using gtk_c = Gtk<double>;
     using util_c = Util<double>;
 
 public:
-    // FIXME: operation is too fast to show dialog, operations are
-    //        all queued to background, so the dialog is superfluos
     static GtkWindow *
     dialog(const gchar *message, const gchar *icon, 
 	    const gchar *command,

@@ -16,6 +16,7 @@ public:
          auto vbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
          gtk_container_add (GTK_CONTAINER (dialog), GTK_WIDGET(vbox));
          auto label = GTK_LABEL(gtk_label_new (""));
+	 g_object_set_data(G_OBJECT(dialog), "label", label);
 	 auto markup = 
 	    g_strdup_printf("   <span color=\"blue\" size=\"larger\"><b>%s</b></span>   ", message);           
          gtk_label_set_markup(label, markup);
@@ -35,6 +36,7 @@ public:
          gtk_box_pack_start(vbox, GTK_WIDGET(label), FALSE, FALSE,0);
          auto progress = GTK_PROGRESS_BAR(gtk_progress_bar_new());
 	 g_object_set_data(G_OBJECT(dialog), "progress", progress);
+	 g_object_set_data(G_OBJECT(progress), "label", label);
 
          gtk_box_pack_start(vbox, GTK_WIDGET(progress), FALSE, FALSE,0);
 

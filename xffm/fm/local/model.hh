@@ -80,7 +80,7 @@ public:
     isSelectable(GtkTreeModel *treeModel, GtkTreePath *tpath){
         GtkTreeIter iter;
         if (!gtk_tree_model_get_iter(treeModel, &iter, tpath)) {
-            DBG("cannot get iter\n");
+            DBG("isSelectable() cannot get iter\n");
             return FALSE;
         }
         return isSelectable(treeModel, &iter);
@@ -183,7 +183,7 @@ public:
 	    }
 
 	    if (stat(xd_p->path, xd_p->st) < 0) {
-		DBG("stat(%s): %s (path has disappeared)\n", xd_p->path, strerror(errno));
+		DBG("get_xd_p() stat(%s): %s (path has disappeared)\n", xd_p->path, strerror(errno));
 	    } else {
 		xd_p->d_type = LocalIcons<Type>::getDType(xd_p->st);
 		TRACE("From getDType> d_type= %d (DT_DIR is %d)\n", xd_p->d_type, DT_DIR);
@@ -214,7 +214,7 @@ public:
             errno=0;
 	    stat(xd_p->path, xd_p->st);
             if (errno){
-                DBG("stat: %s: %s\n", xd_p->path, strerror(errno));
+                DBG("getMimeType() stat: %s: %s\n", xd_p->path, strerror(errno));
                 errno=0;
             }
 	    g_free(mimetype);
@@ -265,7 +265,7 @@ public:
         // compare by name, directories or symlinks to directories on top
         const xd_t *xd_a = (const xd_t *)a;
         const xd_t *xd_b = (const xd_t *)b;
-DBG("compare %s --- %s\n", xd_a->d_name, xd_b->d_name);
+	TRACE("compare %s --- %s\n", xd_a->d_name, xd_b->d_name);
         if (strcmp(xd_a->d_name, "..")==0) return -1;
         if (strcmp(xd_b->d_name, "..")==0) return 1;
 
