@@ -79,8 +79,6 @@ public:
             
             {N_("Select All"), (void *)selectAll, NULL, NULL},
             {N_("Match regular expression"), (void *)selectMatch, NULL, NULL},
-            {N_("View as list"), (void *)toggleView, 
-		(void *)"TreeView", "window"},
             {N_("Show hidden files"), (void *)toggleItem, 
                 (void *) "ShowHidden", "LocalView"},
             {N_("Show Backup Files"), (void *)toggleItem, 
@@ -215,8 +213,8 @@ public:
 	    gtk_widget_set_sensitive(w, g_list_length(view->selectionList()) > 0);
 	} else ERROR(" no widget for Delete\n");
 
-        w = GTK_WIDGET(g_object_get_data(G_OBJECT(localPopUp), "View as list"));
-        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(w), isTreeView);
+        //w = GTK_WIDGET(g_object_get_data(G_OBJECT(localPopUp), "View as list"));
+        //gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(w), isTreeView);
 
 
 	g_object_set_data(G_OBJECT(localPopUp), "iconName", g_strdup("folder"));
@@ -635,22 +633,6 @@ public:
         auto item = (const gchar *)data;
 	toggleGroupItem(menuItem, "LocalView", item);
 
-    }
-
-    static void
-    toggleView(GtkCheckMenuItem *menuItem, gpointer data)
-    {
-        auto item = (const gchar *)data;
-        isTreeView = !isTreeView;
-        gtk_check_menu_item_set_active(menuItem, isTreeView);
-        Settings<Type>::setSettingInteger("window", "TreeView", isTreeView);
-        auto notebook_p = (Notebook<Type> *)g_object_get_data(G_OBJECT(mainWindow), "xffm");
-	gint pages = gtk_notebook_get_n_pages (notebook_p->notebook());
-	for (int i=0; i<pages; i++){
-            auto page = notebook_p->currentPageObject(i);
-            auto view = page->view();
-            view->reloadModel();
-	}
     }
 
     static void

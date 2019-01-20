@@ -1,7 +1,6 @@
   pending: fix popupmenu for /dev/disks
              
 bug: 
- - main menu items should be in popover
  - progress dialog for rm/trash/shred
  > use libmagic preferably instead of perl if available
  > printout optional and required libraries found in configure step.

@@ -18,8 +18,6 @@ class FstabPopUp {
     static GtkMenu *createPopUp(void){
          menuItem_t item[]={
 	    {N_("Open in New Tab"), (void *)LocalPopUp<Type>::newTab, NULL, NULL},
-            {N_("View as list"), (void *)LocalPopUp<Type>::toggleView,  
-		(void *)"TreeView", "window"},
             {N_("NFS Network Volume"), (void *)BasePopUp<Type>::noop, NULL, NULL},
             {N_("SSHFS Remote Synchronization Folder"), (void *)BasePopUp<Type>::noop, NULL, NULL},
             {N_("eCryptfs Volume"), (void *)BasePopUp<Type>::noop, NULL, NULL},
@@ -206,15 +204,14 @@ public:
         return fstabItemPopUp;
     }
 
-
     static void
     resetPopup(void){
         auto path = g_object_get_data(G_OBJECT(fstabPopUp), "path");
         if (!path) g_object_set_data(G_OBJECT(fstabPopUp), "path", (void *)g_strdup("xffm:fstab"));
-        auto w = GTK_WIDGET(g_object_get_data(G_OBJECT(fstabPopUp), "View as list"));
-        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(w), isTreeView);
+        //auto w = GTK_WIDGET(g_object_get_data(G_OBJECT(fstabPopUp), "View as list"));
+        //gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(w), isTreeView);
     }
-    
+
     static void
     resetMenuItems(void) {
         auto view = (View<Type> *)g_object_get_data(G_OBJECT(fstabItemPopUp), "view");

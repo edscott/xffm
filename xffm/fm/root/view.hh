@@ -44,19 +44,17 @@ class RootView  :
     static void
     resetPopup(void) {
         TRACE("reset root popup, is TreeView=%d\n", isTreeView);
-        auto w = GTK_WIDGET(g_object_get_data(G_OBJECT(rootPopUp), "View as list"));
-        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(w), isTreeView);
+        //auto w = GTK_WIDGET(g_object_get_data(G_OBJECT(rootPopUp), "View as list"));
+        //gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(w), isTreeView);
 
     }
 
 
-    
+     
 private:
 
     static GtkMenu *createPopUp(void){
          menuItem_t item[]={
-            {N_("View as list"), (void *)LocalPopUp<Type>::toggleView,  
-		(void *)"TreeView", "window"},
             //{N_("Add bookmark"), (void *)BasePopUp<Type>::noop, NULL, NULL},
             {N_("Empty trash"), (void *)emptyTrash, NULL, NULL},
             {NULL,NULL,NULL, NULL}};

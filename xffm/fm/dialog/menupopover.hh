@@ -167,7 +167,9 @@ public:
     private:
 
     GtkMenu *createMenu(void){
+	Settings<Type>::readSettings();
         menuItem_t item[]={
+            {N_("View as list"), (void *)toggleView, (void *)"TreeView", "window"},
             //{N_("Root folder"), (void *)MenuPopoverSignals<Type>::root, (void *) menuButton_},
             {N_("Home Directory"), (void *)MenuPopoverSignals<Type>::home, (void *) menuButton_},
             {N_("Disk Image Mounter"), (void *)MenuPopoverSignals<Type>::fstab, (void *) menuButton_},
@@ -175,11 +177,18 @@ public:
             {N_("Trash bin"), (void *)MenuPopoverSignals<Type>::trash, (void *) menuButton_},
             {N_("Open terminal"), (void *)MenuPopoverSignals<Type>::terminal, (void *) menuButton_},
             {N_("Open a New Window"), (void *)MenuPopoverSignals<Type>::newWindow, (void *) menuButton_},
-            //{N_("Execute Shell Command"), (void *)MenuPopoverSignals<Type>::shell, (void *) menuButton_},
             {N_("Search"), (void *)MenuPopoverSignals<Type>::search, (void *) menuButton_},
             {N_("Exit"), (void *)MenuPopoverSignals<Type>::finish, (void *) menuButton_},
             {NULL}};
-        
+       
+	auto menu =  BasePopUp<Type>::createPopup(item);
+	auto title = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(menu), "title"));
+	gtk_widget_set_sensitive(GTK_WIDGET(title), FALSE);
+	gchar *markup = g_strdup_printf("<span color=\"blue\" size=\"large\">%s</span>", _("Main menu"));
+	Gtk<Type>::menu_item_content(title, NULL, markup, -24);
+	g_free(markup);
+        gtk_widget_show(GTK_WIDGET(title));
+#if 0
         auto menu = GTK_MENU(gtk_menu_new());
         auto p = item;
         gint i;
@@ -189,6 +198,39 @@ public:
             g_signal_connect ((gpointer) v, "activate", MENUITEM_CALLBACK (p->callback), p->callbackData);
             gtk_widget_show (v);
         }
+#endif
+	const gchar *smallKey[]={
+            "Home Directory",
+            "Disk Image Mounter",
+            "Software Updater",
+            "Trash bin",
+            "Open terminal",
+            "Open a New Window",
+            "Search",
+            "Exit",
+            NULL
+        };
+        const gchar *smallIcon[]={
+            "go-home",
+            "folder-remote",
+            "x-package-repository",
+            "user-trash",
+
+	    "utilities-terminal",
+            "window-new",
+            "system-search",
+            "application-exit",
+            NULL
+        };
+        gint i=0;
+        for (auto k=smallKey; k && *k; k++, i++){
+            auto mItem = (GtkMenuItem *)g_object_get_data(G_OBJECT(menu), *k);
+            auto markup = g_strdup_printf("<span size=\"small\">%s</span>", _(*k));
+	    Gtk<Type>::menu_item_content(mItem, smallIcon[i], markup, -16);
+	    g_free(markup);
+        }
+        g_signal_connect (G_OBJECT(menuButton_), "clicked", G_CALLBACK(updateMenu), g_object_get_data(G_OBJECT(menu), "View as list"));
+
         gtk_widget_show (GTK_WIDGET(menu));
         return menu;
     }
@@ -196,6 +238,28 @@ public:
     shell(GtkMenuItem *menuItem, gpointer data)
     {
     }*/
+private:
+    static void
+    toggleView(GtkCheckMenuItem *menuItem, gpointer data)
+    {
+        auto item = (const gchar *)data;
+        isTreeView = !isTreeView;
+        gtk_check_menu_item_set_active(menuItem, isTreeView);
+        Settings<Type>::setSettingInteger("window", "TreeView", isTreeView);
+        auto notebook_p = (Notebook<Type> *)g_object_get_data(G_OBJECT(mainWindow), "xffm");
+	gint pages = gtk_notebook_get_n_pages (notebook_p->notebook());
+	for (int i=0; i<pages; i++){
+            auto page = notebook_p->currentPageObject(i);
+            auto view = page->view();
+            view->reloadModel();
+	}
+    }
+    static void
+    updateMenu(GtkButton *button, void *data){
+        auto state = Settings<Type>::getSettingInteger("window", "TreeView");
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(data), state);
+
+    }
 
 
 
