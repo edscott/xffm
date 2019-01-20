@@ -4,6 +4,7 @@ namespace xf
 {
 template <class Type>
 class BaseMonitor {
+    gboolean active_;
     GHashTable *itemsHash_;
 protected:
     GCancellable *cancellable_;
@@ -35,6 +36,8 @@ public:
     GHashTable *itemsHash(void){return itemsHash_;}
     GFileMonitor *monitor(void) {return monitor_;}
     GtkTreeModel *treeModel(void){return GTK_TREE_MODEL(store_);}
+    gboolean active(void){return active_;}
+    void setActive(gboolean state){active_ = state;}
     
     BaseMonitor(GtkTreeModel *treeModel, View<Type> *view){
         itemsHash_ = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_free);
@@ -45,6 +48,7 @@ public:
         gfile_ = NULL;
         store_ = GTK_LIST_STORE(treeModel);
         monitor_ = NULL;
+	active_ = FALSE;
         
     }
     ~BaseMonitor(void){
@@ -110,10 +114,12 @@ public:
         }
         g_signal_connect (monitor_, "changed", 
                 G_CALLBACK (monitor_f), (void *)this);
+	active_ = TRUE;
     }
 
     void 
     stop_monitor(void){
+	active_ = FALSE;
         if (!monitor_) {
             TRACE("no monitor to stop\n");
             return;

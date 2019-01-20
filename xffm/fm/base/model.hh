@@ -1,5 +1,7 @@
 #ifndef  XF_BASEMODEL__HH
 # define XF_BASEMODEL__HH
+#include <thread>
+
 #include "signals.hh"
 #include "popup.hh"
 
@@ -128,7 +130,12 @@ public:
         g_object_unref(treeModel_);
     }
 
-    
+    void disableMonitor(void){
+	if (localMonitor_) localMonitor_->setActive(FALSE);
+	if (fstabMonitor_) fstabMonitor_->setActive(FALSE);
+	std::this_thread::yield();
+	//if (localMonitor_ || FstabMonitor) usleep(100000);
+    }
 
     void setViewType(gint value){viewType_ = value;}
     gint viewType(void){ return viewType_;}

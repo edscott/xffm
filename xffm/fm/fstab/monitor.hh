@@ -141,6 +141,7 @@ public:
 	auto hash = getMountHash(NULL);
         while (arg[1]){// arg[1] is semaphore to thread
             usleep(250000);
+	    if (!baseMonitor->active())continue;
             //sleep(1);
             TRACE("mountThreadF loop for arg=%p\n", data);
             gchar *newSum = Util<Type>::md5sum("/proc/mounts");

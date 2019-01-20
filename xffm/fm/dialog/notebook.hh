@@ -187,6 +187,10 @@ public:
         TRACE("disconnect page %d\n", pageNumber);
        //gtk_widget_hide(child);
         auto page = (Page<Type> *)g_hash_table_lookup(pageHash_, (void *)child);
+	auto view = page->view();
+	view->disableMonitor();
+	
+	
         if (currentPage == pageNumber) {
             gtk_notebook_set_current_page (notebook_, pageNumber-1);
         } 

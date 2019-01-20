@@ -77,6 +77,7 @@ public:
 	if (type < 0) return FALSE;
         view->setViewType(type);
         view->setPath(path);
+	view->disableMonitor();
         // stop current monitor
         if (view->localMonitor_) {
             localMonitorList = g_list_remove(localMonitorList, (void *)view->localMonitor_->monitor());

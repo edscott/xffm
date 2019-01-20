@@ -202,8 +202,11 @@ private:
 
         TRACE("*** monitor_f call...\n");
         auto p = (LocalMonitor<Type> *)data;
-        if (!BaseSignals<Type>::validBaseView(p->view())) 
-            return;
+	if (!p->active()){
+	    DBG("monitor_f(): monitor not currently active.\n");
+	    return;
+	}
+        if (!BaseSignals<Type>::validBaseView(p->view())) return;
 
         switch (event){
             case G_FILE_MONITOR_EVENT_DELETED:
