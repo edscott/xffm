@@ -187,8 +187,8 @@ public:
             {N_("Open terminal"), (void *)MenuPopoverSignals<Type>::terminal, (void *) menuButton_},
             {N_("Open a New Window"), (void *)MenuPopoverSignals<Type>::newWindow, (void *) menuButton_},
             {N_("Search"), (void *)MenuPopoverSignals<Type>::search, (void *) menuButton_},
-            {N_("Exit"), (void *)MenuPopoverSignals<Type>::finish, (void *) menuButton_},
 #endif
+            {N_("Exit"), (void *)MenuPopoverSignals<Type>::finish, (void *) menuButton_},
             {NULL}};
        
 	auto menu =  BasePopUp<Type>::createPopup(item);
@@ -209,7 +209,7 @@ public:
             gtk_widget_show (v);
         }
 #endif
-#if 0
+#if 10
 	const gchar *smallKey[]={
             "Home Directory",
             "Disk Image Mounter",
@@ -236,6 +236,7 @@ public:
         gint i=0;
         for (auto k=smallKey; k && *k; k++, i++){
             auto mItem = (GtkMenuItem *)g_object_get_data(G_OBJECT(menu), *k);
+	    if (!mItem) continue;
             auto markup = g_strdup_printf("<span size=\"small\">%s</span>", _(*k));
 	    Gtk<Type>::menu_item_content(mItem, smallIcon[i], markup, -16);
 	    g_free(markup);
