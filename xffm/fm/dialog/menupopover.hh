@@ -11,7 +11,8 @@ public:
     static void
     root(GtkMenuItem *menuItem, gpointer data)
     {
-        auto notebook_p = (Notebook<Type> *)g_object_get_data(G_OBJECT(data), "notebook_p");
+	auto notebook_p = (Dialog<Type> *)g_object_get_data(G_OBJECT(mainWindow), "dialogObject");
+
         const gchar *path = notebook_p->workdir();
         auto page = (Page<Type> *)notebook_p->currentPageObject();
         page->setPageWorkdir("/");
@@ -21,7 +22,8 @@ public:
     static void
     home(GtkMenuItem *menuItem, gpointer data)
     {
-        auto notebook_p = (Notebook<Type> *)g_object_get_data(G_OBJECT(data), "notebook_p");
+	auto notebook_p = (Dialog<Type> *)g_object_get_data(G_OBJECT(mainWindow), "dialogObject");
+
         const gchar *path = notebook_p->workdir();
         auto page = (Page<Type> *)notebook_p->currentPageObject();
         page->setPageWorkdir(g_get_home_dir());
@@ -31,7 +33,8 @@ public:
     static void
     fstab(GtkMenuItem *menuItem, gpointer data)
     {
-        auto notebook_p = (Notebook<Type> *)g_object_get_data(G_OBJECT(data), "notebook_p");
+	auto notebook_p = (Dialog<Type> *)g_object_get_data(G_OBJECT(mainWindow), "dialogObject");
+
         const gchar *path = notebook_p->workdir();
         auto page = (Page<Type> *)notebook_p->currentPageObject();
         page->setPageWorkdir(g_get_home_dir());
@@ -41,7 +44,8 @@ public:
     static void
     pkg(GtkMenuItem *menuItem, gpointer data)
     {
-        auto notebook_p = (Notebook<Type> *)g_object_get_data(G_OBJECT(data), "notebook_p");
+	auto notebook_p = (Dialog<Type> *)g_object_get_data(G_OBJECT(mainWindow), "dialogObject");
+
         const gchar *path = notebook_p->workdir();
         auto page = (Page<Type> *)notebook_p->currentPageObject();
         page->setPageWorkdir(g_get_home_dir());
@@ -51,7 +55,8 @@ public:
     static void
     trash(GtkMenuItem *menuItem, gpointer data)
     {
-        auto notebook_p = (Notebook<Type> *)g_object_get_data(G_OBJECT(data), "notebook_p");
+	auto notebook_p = (Dialog<Type> *)g_object_get_data(G_OBJECT(mainWindow), "dialogObject");
+
         const gchar *path = notebook_p->workdir();
         auto page = (Page<Type> *)notebook_p->currentPageObject();
         page->setPageWorkdir(g_get_home_dir());
@@ -92,7 +97,8 @@ public:
                 userTerminal = g_strdup(terminal);
             }
         }
-        auto notebook_p = (Notebook<Type> *)g_object_get_data(G_OBJECT(data), "notebook_p");
+	auto notebook_p = (Dialog<Type> *)g_object_get_data(G_OBJECT(mainWindow), "dialogObject");
+
         if (userTerminal){
             run(notebook_p, userTerminal);
             g_free(userTerminal);
@@ -109,7 +115,8 @@ public:
 	    ERROR("Cannot find xffm in path\n");
 	    return;
 	}
-        auto notebook_p = (Notebook<Type> *)g_object_get_data(G_OBJECT(data), "notebook_p");
+	auto notebook_p = (Dialog<Type> *)g_object_get_data(G_OBJECT(mainWindow), "dialogObject");
+
         auto page = (Page<Type> *)notebook_p->currentPageObject();
 	run(notebook_p, xffm);
 	g_free(xffm);
@@ -119,7 +126,8 @@ public:
     search(GtkMenuItem *menuItem, gpointer data)
     {
         // get current directory
-        auto notebook_p = (Notebook<Type> *)g_object_get_data(G_OBJECT(data), "notebook_p");
+	auto notebook_p = (Dialog<Type> *)g_object_get_data(G_OBJECT(mainWindow), "dialogObject");
+
         const gchar *path = notebook_p->workdir();
         if (!path || !g_file_test(path, G_FILE_TEST_IS_DIR)) path = g_get_home_dir();
 	gchar *find = g_strdup_printf("xffm --find \"%s\"", path);
@@ -170,6 +178,7 @@ public:
 	Settings<Type>::readSettings();
         menuItem_t item[]={
             {N_("View as list"), (void *)toggleView, (void *)"TreeView", "window"},
+#if 0
             //{N_("Root folder"), (void *)MenuPopoverSignals<Type>::root, (void *) menuButton_},
             {N_("Home Directory"), (void *)MenuPopoverSignals<Type>::home, (void *) menuButton_},
             {N_("Disk Image Mounter"), (void *)MenuPopoverSignals<Type>::fstab, (void *) menuButton_},
@@ -179,6 +188,7 @@ public:
             {N_("Open a New Window"), (void *)MenuPopoverSignals<Type>::newWindow, (void *) menuButton_},
             {N_("Search"), (void *)MenuPopoverSignals<Type>::search, (void *) menuButton_},
             {N_("Exit"), (void *)MenuPopoverSignals<Type>::finish, (void *) menuButton_},
+#endif
             {NULL}};
        
 	auto menu =  BasePopUp<Type>::createPopup(item);
@@ -199,6 +209,7 @@ public:
             gtk_widget_show (v);
         }
 #endif
+#if 0
 	const gchar *smallKey[]={
             "Home Directory",
             "Disk Image Mounter",
@@ -229,6 +240,8 @@ public:
 	    Gtk<Type>::menu_item_content(mItem, smallIcon[i], markup, -16);
 	    g_free(markup);
         }
+#endif
+	
         g_signal_connect (G_OBJECT(menuButton_), "clicked", G_CALLBACK(updateMenu), g_object_get_data(G_OBJECT(menu), "View as list"));
 
         gtk_widget_show (GTK_WIDGET(menu));

@@ -347,7 +347,7 @@ public:
      dialog = gtk_dialog_new_with_buttons (_("Help"),
 					   parent,
 					   flags,
-					   _("OK"),
+					   _("Cancel"),
 					   GTK_RESPONSE_NONE,
 					   NULL);
      auto content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));

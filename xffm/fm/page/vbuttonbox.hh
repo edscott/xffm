@@ -37,14 +37,27 @@ public:
 	auto help = HButtonBox<double>::newButton("help-about-symbolic", _("Help"));
 	gtk_box_pack_end (vButtonBox_, GTK_WIDGET(help), FALSE, FALSE, 0);
 
-/*	auto clear_button =  gtk_c::dialog_button("edit-clear", NULL);
-	 g_object_set_data(G_OBJECT(vButtonBox_), "clear_button", clear_button);
-	auto size_scale = newSizeScale();
-	 g_object_set_data(G_OBJECT(vButtonBox_), "size_scale", size_scale);
-
-
-	gtk_box_pack_end (vButtonBox_, GTK_WIDGET(clear_button), FALSE, FALSE, 0);
-	gtk_box_pack_end (vButtonBox_, GTK_WIDGET(size_scale), FALSE, FALSE, 0);*/
+	auto home = HButtonBox<double>::newButton("go-home", _("Home Directory"));
+	gtk_box_pack_start (vButtonBox_, GTK_WIDGET(home), FALSE, FALSE, 0);
+	g_signal_connect(G_OBJECT(home), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::home), NULL);
+	auto fstab = HButtonBox<double>::newButton("folder-remote", _("Disk Image Mounter"));
+	gtk_box_pack_start (vButtonBox_, GTK_WIDGET(fstab), FALSE, FALSE, 0);
+	g_signal_connect(G_OBJECT(fstab), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::fstab), NULL);
+	auto pkg = HButtonBox<double>::newButton("x-package-repository", _("Software Updater"));
+	gtk_box_pack_start (vButtonBox_, GTK_WIDGET(pkg), FALSE, FALSE, 0);
+	g_signal_connect(G_OBJECT(pkg), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::pkg), NULL);
+	auto trash = HButtonBox<double>::newButton("user-trash", _("Trash bin"));
+	gtk_box_pack_start (vButtonBox_, GTK_WIDGET(trash), FALSE, FALSE, 0);
+	g_signal_connect(G_OBJECT(trash), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::trash), NULL);
+	auto terminal = HButtonBox<double>::newButton("utilities-terminal", _("Open terminal"));
+	gtk_box_pack_start (vButtonBox_, GTK_WIDGET(terminal), FALSE, FALSE, 0);
+	g_signal_connect(G_OBJECT(terminal), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::terminal), NULL);
+	auto newWindow = HButtonBox<double>::newButton("window-new", _("Open a New Window"));
+	gtk_box_pack_start (vButtonBox_, GTK_WIDGET(newWindow), FALSE, FALSE, 0);
+	g_signal_connect(G_OBJECT(newWindow), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::newWindow), NULL);
+	auto search = HButtonBox<double>::newButton("system-search", _("Search"));
+	gtk_box_pack_start (vButtonBox_, GTK_WIDGET(search), FALSE, FALSE, 0);
+	g_signal_connect(G_OBJECT(search), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::search), NULL);
 	gtk_widget_show_all(GTK_WIDGET(vButtonBox_));
 	return ;
     }

@@ -112,9 +112,12 @@ public:
             return NULL;
         }
         TRACE( "readfiles: %s\n", path);
+	errno=0;
         DIR *directory = opendir(path);
         if (!directory) {
-            ERROR("xfdir_local_c::read_items(): opendir %s: %s\n", path, strerror(errno));
+	    Gtk<Type>::quickHelp(GTK_WINDOW(mainWindow), strerror(errno), "dialog-error");
+            DBG("xfdir_local_c::read_items(): opendir %s: %s\n", path, strerror(errno));
+	    errno=0;
             return NULL;
         }
     //  mutex protect...
