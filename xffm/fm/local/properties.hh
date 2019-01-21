@@ -63,7 +63,7 @@ class Properties {
     GList *entryList;
     GtkWindow *dialog;
 
-
+    GList *selectionList_;
 public:
     GtkBox *imageBox;
     GtkBox *modeBox;
@@ -77,6 +77,7 @@ public:
 	    ERROR("propertiesDialog: nothing in selectionList\n");
 	    return;
 	}
+	selectionList_ = selectionList;
 	entryList = NULL;
 	for (auto l = selectionList; l && l->data; l = l->next){
 	    auto entry = (entry_t *)calloc(1, sizeof(entry_t));
@@ -119,6 +120,7 @@ public:
     ~Properties(void){
 	removePathList(entryList);
 	g_hash_table_destroy(hash);
+	g_list_free_full (selectionList_, (GDestroyNotify) gtk_tree_path_free);
     }
     
 private:

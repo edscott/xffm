@@ -910,10 +910,11 @@ public:
 	//
 	//
 	// fire up a properties dialog
+	// selection list will be freed by object 
+	// (avoid race)
 	//
 	new(Properties<Type>)(treeModel, selectionList);
 
-	g_list_free_full (selectionList, (GDestroyNotify) gtk_tree_path_free);
     }
 
     static void
