@@ -146,7 +146,7 @@ public:
         gint i=0;
         for (auto k=smallKey; k && *k; k++, i++){
             mItem = (GtkMenuItem *)g_object_get_data(G_OBJECT(localItemPopUp), *k);
-            markup = g_strdup_printf("<span size=\"smallwhat does winbind do\">%s</span>", _(*k));
+            markup = g_strdup_printf("<span size=\"small\">%s</span>", _(*k));
 	    gtk_c::menu_item_content(mItem, smallIcon[i], markup, -16);
 	    g_free(markup);
         }
