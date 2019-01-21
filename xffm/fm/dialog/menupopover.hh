@@ -169,15 +169,48 @@ public:
         gtk_widget_show(GTK_WIDGET(menuButton_));
     }
     GtkMenuButton *menuButton(){ return menuButton_;}
-    protected:
+protected:
     
     GtkMenuButton *menuButton_;
-    private:
+
+public:
+    static gboolean
+    toggleGroupItem(GtkCheckMenuItem *menuItem, const gchar *group, const gchar *item)
+    {
+        gboolean value; 
+        if (Settings<Type>::getSettingInteger(group, item) > 0){
+            value = FALSE;
+        } else {
+            value = TRUE;
+        }
+        gtk_check_menu_item_set_active(menuItem, value);
+        Settings<Type>::setSettingInteger(group, item, value);
+        auto notebook_p = (Notebook<Type> *)g_object_get_data(G_OBJECT(mainWindow), "xffm");
+	gint pages = gtk_notebook_get_n_pages (notebook_p->notebook());
+	for (int i=0; i<pages; i++){
+            auto page = notebook_p->currentPageObject(i);
+            auto view = page->view();
+            view->reloadModel();
+	}
+        return value;
+    }
+
+private:
+
+    static void
+    toggleItem(GtkCheckMenuItem *menuItem, gpointer data)
+    {
+        auto item = (const gchar *)data;
+	toggleGroupItem(menuItem, "LocalView", item);
+    }
 
     GtkMenu *createMenu(void){
 	Settings<Type>::readSettings();
         menuItem_t item[]={
             {N_("View as list"), (void *)toggleView, (void *)"TreeView", "window"},
+            {N_("Show hidden files"), (void *)toggleItem, (void *) "ShowHidden", "LocalView"},
+            {N_("Show Backup Files"), (void *)toggleItem, (void *) "ShowBackups", "LocalView"},
+            {N_("Sort data in descending order"), (void *)toggleItem, (void *) "Descending", "LocalView"},
 #if 0
             //{N_("Root folder"), (void *)MenuPopoverSignals<Type>::root, (void *) menuButton_},
             {N_("Home Directory"), (void *)MenuPopoverSignals<Type>::home, (void *) menuButton_},

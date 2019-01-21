@@ -219,7 +219,9 @@ public:
 	    }
             errno=0;
 	    if (stat(xd_p->path, xd_p->st)<0){
-                DBG("getMimeType() stat: %s: %s\n", xd_p->path, strerror(errno));
+		if (strcmp(mimetype, "inode/symlink")==0 ){
+		   //broken link
+		} else DBG("getMimeType() for d_type:inode/directory stat: %s: %s\n", xd_p->path, strerror(errno));
                 errno=0;
             } else {
 		g_free(mimetype);
