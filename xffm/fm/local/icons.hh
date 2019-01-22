@@ -161,6 +161,14 @@ private:
 	if (strstr(mimetype, "template")) return g_strdup("text-x-generic-template");
 	if (strstr(mimetype, "text")) return g_strdup("text-x-generic");
 	if (g_file_test(path, G_FILE_TEST_IS_EXECUTABLE)) return g_strdup("application-x-executable");
+        auto fileInfo = Util<Type>::fileInfo(path);
+        if (fileInfo){
+            gchar *iconname = NULL;
+            if (strstr(fileInfo, "text") || strstr(fileInfo, "ASCII"))
+                iconname =g_strdup("text-x-generic");
+            g_free(fileInfo);
+            return iconname;
+        }
         return  NULL;
             
     }
