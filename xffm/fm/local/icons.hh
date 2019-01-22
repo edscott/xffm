@@ -84,13 +84,13 @@ private:
         return FALSE;
     }
 
-    static gchar *
+/*    static gchar *
     getBasicIconname(const gchar *path, struct stat *st){
 	auto mimetype = Mime<Type>::statMimeType(st);
 	TRACE("getBasicIconname(path, st) path=%s\n", path);
 
 	return getBasicIconname(path, mimetype);
-    }
+    }*/
 
     static gchar *
     getBasicIconname(const gchar *path, const gchar *mimetype){	
@@ -113,43 +113,45 @@ private:
 
         // UNIX domain socket:
 	if (strcmp(mimetype, "inode/socket")==0) return  g_strdup("network-wired-symbolic");
+
+        auto iconname = specificIconName(path, mimetype);
+        TRACE("specificIconName %s: %s \n", path, mimetype);
+        if (iconname) return iconname;
         
         // Regular file:
-	if (strcmp(mimetype, "inode/regular")==0) return  g_strdup("text-x-generic");
-	if (strstr(mimetype, "image")){
-	    if (isTreeView) return g_strdup("image-x-generic");
-	    if (Gtk<Type>::isImage(mimetype)) return g_strdup(path);
-	    return g_strdup("image-x-generic");
-	}
-	if (strstr(mimetype, "compressed")) return g_strdup("package-x-generic");
-	if (strstr(mimetype, "x-xz")) return g_strdup("package-x-generic");
+	if (strcmp(mimetype, "inode/regular")==0) return g_strdup("text-x-preview");
+ 	return g_strdup("dialog-question");
+     }
 
-	if (strstr(mimetype, "audio")) return g_strdup("audio-x-generic");
-	
-	if (strstr(mimetype, "font")) return g_strdup("font-x-generic");
-	
-	if (strstr(mimetype, "video")) return g_strdup("video-x-generic");
-	
-	if (strstr(mimetype, "script")) return g_strdup("text-x-script");
-	
-	if (strstr(mimetype, "html")) return g_strdup("html-x-generic");
-	
-	if (strstr(mimetype, "package")) return g_strdup("package-x-generic");
-	
+    static gchar *
+    specificIconName(const gchar *path, const gchar *mimetype){
+        if (strstr(mimetype, "image")){
+            if (isTreeView) return g_strdup("image-x-generic");
+            if (Gtk<Type>::isImage(mimetype)) return g_strdup(path);
+            return g_strdup("image-x-generic");
+        }
+        if (strstr(mimetype, "compressed")) return g_strdup("package-x-generic");
+        if (strstr(mimetype, "x-xz")) return g_strdup("package-x-generic");
+        if (strstr(mimetype, "audio")) return g_strdup("audio-x-generic");
+        if (strstr(mimetype, "font")) return g_strdup("font-x-generic");
+        if (strstr(mimetype, "video")) return g_strdup("video-x-generic");
+        if (strstr(mimetype, "script")) return g_strdup("text-x-script");
+        if (strstr(mimetype, "html")) return g_strdup("html-x-generic");
+        if (strstr(mimetype, "package")) return g_strdup("package-x-generic");
 	// office stuff
 	if (strstr(mimetype, "document")){
             // N.A.:
             // if (strstr(mimetype, "")) return g_strdup("x-office-address-book");
             if (strstr(mimetype, "drawing") || strstr(mimetype, "graphics ")|| strstr(mimetype, "image")) {
-                if (strstr(mimetype, "")) return g_strdup("x-office-drawing-template");
+                if (strstr(mimetype, "template")) return g_strdup("x-office-drawing-template");
                 return g_strdup("x-office-drawing");
             }
             if (strstr(mimetype, "presentation")) {
-                if (strstr(mimetype, "")) return g_strdup("x-office-presentation-template");
+                if (strstr(mimetype, "template")) return g_strdup("x-office-presentation-template");
                 return g_strdup("x-office-presentation");
             }
             if (strstr(mimetype, "spreadsheet")) {
-                if (strstr(mimetype, "")) return g_strdup("x-office-spreadsheet-template");
+                if (strstr(mimetype, "template")) return g_strdup("x-office-spreadsheet-template");
                 return g_strdup("x-office-spreadsheet");
             }
             if (strstr(mimetype, "template")) return g_strdup("x-office-document-template");
@@ -158,11 +160,10 @@ private:
         if (strstr(mimetype, "calendar")) return g_strdup("x-office-calendar");
 	if (strstr(mimetype, "template")) return g_strdup("text-x-generic-template");
 	if (strstr(mimetype, "text")) return g_strdup("text-x-generic");
-	
 	if (g_file_test(path, G_FILE_TEST_IS_EXECUTABLE)) return g_strdup("application-x-executable");
-	return g_strdup("text-x-preview");;
-     }
-
+        return  NULL;
+            
+    }
 
     static gchar *
     extension(const gchar *base){

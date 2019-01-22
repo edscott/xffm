@@ -234,7 +234,7 @@ private:
                 //FIXME:  if image, then reload the pixbuf
                 break;
             case G_FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED:
-                TRACE("Received  ATTRIBUTE_CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
+                TRACE("***Received  ATTRIBUTE_CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
                 p->restat_item(first);
                 break;
             case G_FILE_MONITOR_EVENT_PRE_UNMOUNT:
@@ -253,7 +253,7 @@ private:
                 } else p->add_new_item(second);
                 break;
             case G_FILE_MONITOR_EVENT_CHANGES_DONE_HINT:
-               TRACE("Received  CHANGES_DONE_HINT (%d): \"%s\", \"%s\"\n", event, f, s);
+               TRACE("***Received  CHANGES_DONE_HINT (%d): \"%s\", \"%s\"\n", event, f, s);
                 //p->restat_item(first);
                 // if image, then reload the pixbuf
                 break;       

@@ -197,10 +197,12 @@ public:
 	    errno=0;
 	}
 
-	TRACE("d_type: %s -> %d\n", xd_p->path, xd_p->d_type);
-	xd_p->mimetype = getMimeType(xd_p);
 	// symlinks and directories are stat'd in getMimeType()  
+	xd_p->mimetype = getMimeType(xd_p);
+        // the following call uses xd_p->mimetype
         xd_p->icon = g_strdup(LocalIcons<Type>::getIconname(xd_p));
+
+	TRACE("d_type: %s -> %d\n", xd_p->path, xd_p->d_type);
         errno=0;
         return xd_p;
     }
@@ -228,7 +230,8 @@ public:
 		mimetype = Mime<Type>::statMimeType(xd_p->st);
 	    }
 	}
-	if (strcmp(mimetype,"inode/regular")==0){
+        // on asyncronous nfs connections, d_type may resolve to inode/unknown 
+	if (strcmp(mimetype,"inode/regular")==0 || strcmp(mimetype,"inode/unknown")==0){
 	    auto type = Mime<Type>::extensionMimeType(xd_p->path);
 	    if (type) {
 		g_free(mimetype);

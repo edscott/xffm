@@ -90,6 +90,10 @@ private:
     void 
     pathbar_ok(GtkWidget *eventBox){
         TRACE("pathbar_ok\n");
+        static gboolean pathbarBusy = FALSE;
+        if (pathbarBusy) return;
+        pathbarBusy = TRUE;
+        
 	GList *children_list = gtk_container_get_children(GTK_CONTAINER(pathbar_));
 	GList *children = children_list;
         auto page = (Page<Type> *)this;
@@ -106,6 +110,7 @@ private:
 
 	    } 
 	}
+        pathbarBusy = FALSE;
     }
 
     static void         
