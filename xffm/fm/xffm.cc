@@ -38,9 +38,11 @@ main (int argc, char *argv[]) {
     xffmProgram = argv[0];
 
     auto fm = new(xf::Fm<double>)(argc, argv);
+#ifdef FORCE_CORE
     auto text = g_strdup_printf("Xffm+-%s", VERSION);
     xf::TimeoutResponse<double>::dialogFull(NULL, text, "xffm_logo", -200, 1);
     g_free(text);
+#endif
     gtk_main();
     delete(fm);
     return 0;
