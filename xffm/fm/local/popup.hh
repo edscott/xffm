@@ -137,10 +137,10 @@ public:
             "edit-paste",
             "edit-delete",
 
-	    "view-refresh-symbolic",
-            "edit-copy",
+	    "document-save",
+            "document-save-as",
             "emblem-symbolic-link",
-            "view-refresh-symbolic",
+            "document-properties",
             NULL
         };
         gint i=0;
