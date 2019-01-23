@@ -137,8 +137,8 @@ public:
             "edit-paste",
             "edit-delete",
 
-	    "document-save",
-            "document-save-as",
+	    "document-revert",
+            "document-save",
             "emblem-symbolic-link",
             "document-properties",
             NULL
