@@ -1155,7 +1155,7 @@ private:
                                &naturalSize);
         TRACE("xffind Size: minimum=%d,%d, natural=%d,%d, settings=%d,%d\n",
                 minimumSize.width, minimumSize.height,
-                naturalSize.width, naturalSize.height,
+                naturalSize.width, naturalSize.height,gravity
                 width, height);
         if (width >= naturalSize.width && height >= naturalSize.height){
             gtk_window_resize (GTK_WINDOW(dialog), width, height);

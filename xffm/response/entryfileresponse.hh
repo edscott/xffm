@@ -21,9 +21,12 @@ public:
                                                          GTK_RESPONSE_ACCEPT,
                                                          NULL));
         gtk_file_chooser_set_action ((GtkFileChooser *) dialog, action);
-        gchar *current_folder = g_get_current_dir();
+        auto entryValue = gtk_entry_get_text(entry);
+        gchar *current_folder;
+        if (entryValue && g_file_test(entryValue, G_FILE_TEST_IS_DIR)) current_folder = g_strdup(entryValue);
+        else current_folder = g_get_current_dir();
         gtk_file_chooser_set_current_folder ((GtkFileChooser *) dialog, current_folder);
-
+        g_free(current_folder);
         gint response = gtk_dialog_run(dialog);
 
         if(response == GTK_RESPONSE_ACCEPT) {
