@@ -581,7 +581,7 @@ private:
 
 
 	auto cancelButton =  
-	    gtk_c::dialog_button("process-stop", _("Cancel"));
+	    gtk_c::dialog_button("process-stop-symbolic", _("Cancel"));
 	g_object_set_data(G_OBJECT(dialog_), "cancel_button", cancelButton);
 	g_object_set_data(G_OBJECT(cancelButton), "dialog_", dialog_);
 	gtk_widget_set_sensitive(GTK_WIDGET(cancelButton), FALSE);
@@ -591,7 +591,7 @@ private:
 	
 
 	auto clearButton =  
-	    gtk_c::dialog_button("edit-delete-symbolic", _("Clear"));
+	    gtk_c::dialog_button("edit-clear-all-symbolic", _("Clear"));
 	g_object_set_data(G_OBJECT(dialog_), "clear_button", clearButton);
 	g_object_set_data(G_OBJECT(clearButton), "dialog_", dialog_);
 	g_signal_connect (G_OBJECT (clearButton), "clicked",
