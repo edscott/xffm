@@ -21,6 +21,7 @@
 #endif
 
 #include <memory>
+#define FORK
 
 static const gchar *xffmProgram;
 static const gchar *xffindProgram;

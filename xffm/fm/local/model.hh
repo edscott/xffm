@@ -171,13 +171,16 @@ public:
         } else {
             xd_p->path = g_strconcat(directory, G_DIR_SEPARATOR_S, d->d_name, NULL);
         }
-#ifdef HAVE_STRUCT_DIRENT_D_TYPE
+
 	if (d->d_type == 0) withStat = TRUE;
-	else xd_p->d_type = d->d_type;
+#ifdef HAVE_STRUCT_DIRENT_D_TYPE
+	if (d->d_type == DT_UNKNOWN) withStat = TRUE;
 #else
 	withStat = TRUE;
 #endif
-	TRACE("model::get_xd_p() path=%s d_type = %d\n",xd_p->path,   xd_p->d_type);
+
+	TRACE("model::get_xd_p() path=%s d_type = %d\n",
+		xd_p->path,   xd_p->d_type);
 	if (withStat){
 	    xd_p->st = (struct stat *)calloc( 1, sizeof(struct stat));
 	    if (!xd_p->st){
@@ -185,14 +188,10 @@ public:
 		exit(1);
 	    }
 
-	    if (d->d_type == 0){
-		errno=0;
-		if (stat(xd_p->path, xd_p->st) < 0) {
-		    TRACE("get_xd_p() stat(%s): %s (path has disappeared)\n", xd_p->path, strerror(errno));
-		    errno=0;
-		} else {
-		    xd_p->d_type = LocalIcons<Type>::getDType(xd_p->st);
-		}
+	    if (lstat(xd_p->path, xd_p->st) < 0) {
+		ERROR("get_xd_p() stat(%s): %s (path has disappeared)\n", xd_p->path, strerror(errno));
+	    } else {
+		xd_p->d_type = LocalIcons<Type>::getDType(xd_p->path, xd_p->st);
 	    }
 	    errno=0;
 	}

@@ -149,7 +149,6 @@ public:
 	    xf::Response<double>::sendPassword(argv);
 	    exit(1);
 	} else {
-#define FORK
 #ifdef FORK
 	    if(fork ()){
 		sleep(2);

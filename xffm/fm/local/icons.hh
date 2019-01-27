@@ -120,11 +120,21 @@ private:
         
         // Regular file:
 	if (strcmp(mimetype, "inode/regular")==0) return g_strdup("text-x-preview");
+        TRACE("getBasicIconname(): %s mime=%s \n", path, mimetype);
  	return g_strdup("dialog-question");
      }
 
     static gchar *
     specificIconName(const gchar *path, const gchar *mimetype){
+	if (strstr(mimetype, "virtualbox")){
+	    auto item = strrchr(mimetype, '-');
+	    if (item) {
+		auto iconname = g_strconcat("virtualbox", item, NULL);
+		if (Icons<Type>::iconThemeHasIcon(iconname)) return iconname;
+		g_free(iconname);
+	    }
+	}
+	if (strstr(mimetype, "cd-image"))return g_strdup("media-optical");
         if (strstr(mimetype, "image")){
             if (isTreeView) return g_strdup("image-x-generic");
             if (Gtk<Type>::isImage(mimetype)) return g_strdup(path);
@@ -139,7 +149,7 @@ private:
         if (strstr(mimetype, "html")) return g_strdup("html-x-generic");
         if (strstr(mimetype, "package")) return g_strdup("package-x-generic");
 	// office stuff
-	if (strstr(mimetype, "document")){
+	if (strstr(mimetype, "document")||strstr(mimetype, "application")){
             // N.A.:
             // if (strstr(mimetype, "")) return g_strdup("x-office-address-book");
             if (strstr(mimetype, "drawing") || strstr(mimetype, "graphics ")|| strstr(mimetype, "image")) {
@@ -155,20 +165,40 @@ private:
                 return g_strdup("x-office-spreadsheet");
             }
             if (strstr(mimetype, "template")) return g_strdup("x-office-document-template");
-            return g_strdup("x-office-document");
         }
         if (strstr(mimetype, "calendar")) return g_strdup("x-office-calendar");
 	if (strstr(mimetype, "template")) return g_strdup("text-x-generic-template");
 	if (strstr(mimetype, "text")) return g_strdup("text-x-generic");
 	if (g_file_test(path, G_FILE_TEST_IS_EXECUTABLE)) return g_strdup("application-x-executable");
+	if (strstr(mimetype, "application")){
+	    if (strstr(mimetype, "pdf"))return g_strdup("x-office-document");
+	    if (strstr(mimetype, "excell"))return g_strdup("x-office-spreadsheet");
+	    if (strstr(mimetype, "word"))return g_strdup("x-office-document");
+	    if (strstr(mimetype, "writer"))return g_strdup("x-office-document");
+	    if (strstr(mimetype, "calc"))return g_strdup("x-office-spreadsheet");
+	    if (strstr(mimetype, "lotus"))return g_strdup("x-office-spreadsheet");
+	    if (strstr(mimetype, "draw"))return g_strdup("x-office-drawing");
+	    if (strstr(mimetype, "dia"))return g_strdup("x-office-drawing");
+	    if (strstr(mimetype, "presentation"))return g_strdup("x-office-presentation");
+	    if (strstr(mimetype, "math"))return g_strdup("x-office-document-template");
+	    if (strstr(mimetype, "lyx"))return g_strdup("x-office-document-template");
+
+	}
+        if (strstr(mimetype, "document")) return g_strdup("x-office-document");
         auto fileInfo = Util<Type>::fileInfo(path);
         if (fileInfo){
+	    TRACE(" fileinfo: %s -> %s\n", path, fileInfo);
             gchar *iconname = NULL;
             if (strstr(fileInfo, "text") || strstr(fileInfo, "ASCII"))
                 iconname =g_strdup("text-x-generic");
+            if (strstr(fileInfo, "compressed") )
+                iconname =g_strdup("package-x-generic");
             g_free(fileInfo);
             return iconname;
         }
+	if (strstr(mimetype, "application")){
+	    return g_strdup("text-x-generic-template");
+	}
         return  NULL;
             
     }
@@ -351,8 +381,8 @@ private:
     }
 public:
     static unsigned char
-    getDType (struct stat *st_p) {
-	TRACE("getDType mode= 0%o\n",st_p->st_mode); 
+    getDType (const gchar *path, struct stat *st_p) {
+	TRACE("getDType path=%s mode= 0%o\n",path, st_p->st_mode); 
 	if(S_ISSOCK (st_p->st_mode)) return DT_SOCK;
 	else if(S_ISBLK (st_p->st_mode)) return DT_BLK;
 	else if(S_ISCHR (st_p->st_mode)) return DT_CHR;
@@ -360,13 +390,13 @@ public:
 	else if (S_ISLNK(st_p->st_mode)) return DT_LNK;
 	else if(S_ISDIR (st_p->st_mode)) return DT_DIR;
 	else if(S_ISREG (st_p->st_mode)) return DT_REG;
-	return  0;
+	return  DT_UNKNOWN;
     }
 private:
     static gchar *
     getEmblem(const gchar *path, struct stat *st){
 	auto basename = g_path_get_basename(path);
-        gchar *emblem = getEmblem(path, basename,  getDType(st), st);
+        gchar *emblem = getEmblem(path, basename,  getDType(path, st), st);
 	g_free(basename);
 	return emblem;
     }

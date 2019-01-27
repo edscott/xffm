@@ -91,7 +91,7 @@ public:
 	    {("mimetypeOpen"), (void *)command, NULL, NULL},
 	    {N_("Open with"), (void *)openWith, NULL, NULL},
 	    {N_("Run Executable..."), (void *)runWith, NULL, NULL},
-	    {N_("Extract files from the archive"), NULL, NULL, NULL},
+	    {N_("Extract files from the archive"), (void *)untar, NULL, NULL},
 	    {N_("Open in New Tab"), (void *)newTab, NULL, NULL},
 	    {N_("Create a compressed archive with the selected objects"), (void *)tarball, NULL, NULL},
 	    {N_("Mount the volume associated with this folder"), (void *)mount, NULL, NULL},
@@ -251,6 +251,12 @@ public:
 	    gtk_widget_show(w);
 	    gtk_widget_set_sensitive(w, g_list_length(view->selectionList()) == 1);
 	}
+	if (g_list_length(view->selectionList())==1){
+	    auto w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Extract files from the archive"));
+	    if (strstr(mimetype, "compressed-tar")) gtk_widget_show(w);
+	    else gtk_widget_hide(w);
+	}
+
 	if (g_list_length(view->selectionList()) == 1){
 	    runWithDialog(path); // ask for arguments for an executable path.
 	    // open with mimetype application
@@ -648,6 +654,95 @@ public:
 	auto page = view->page();
         auto dialog = (Dialog<Type> *)page->parent();
         dialog->addPage(path);
+    }
+
+    static void
+    untar(GtkMenuItem *menuItem, gpointer data)
+    {
+        // File chooser
+        auto entryResponse = new(EntryFolderResponse<Type>)(GTK_WINDOW(mainWindow), _("Extract files from the archive"), NULL);
+
+        
+	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
+	auto displayPath = util_c::valid_utf_pathstring(path);
+	auto markup = 
+	    g_strdup_printf("<span color=\"blue\" size=\"larger\"><b>%s</b></span>", displayPath);  
+	g_free(displayPath);
+	
+        entryResponse->setResponseLabel(markup);
+        g_free(markup);
+
+        entryResponse->setEntryLabel(_("Specify Output Directory..."));
+        // get last used arguments...
+        gchar *dirname = NULL;
+	if (Settings<Type>::keyFileHasGroupKey("Tarballs", "Default")){
+	    dirname = Settings<Type>::getSettingString("Tarballs", "Default");
+	} 
+	if (!dirname || !g_file_test(dirname, G_FILE_TEST_IS_DIR) ) {
+	    g_free(dirname);
+	    dirname = g_path_get_dirname(path);
+	}
+        entryResponse->setEntryDefault(dirname);
+        g_free(dirname);
+        
+        auto response = entryResponse->runResponse();
+        delete entryResponse;
+	TRACE("response=%s\n", response);
+	if (response){
+	    g_strstrip(response);
+	    Settings<Type>::setSettingString("Tarballs", "Default", response);
+	    if (!g_file_test(response, G_FILE_TEST_IS_DIR)){
+		// FIXME dialog 
+	    } else {
+                auto mimetype = Mime<Type>::mimeType(path);
+		//get currentdir (homedir)
+		//change workdir
+		errno=0;
+		if (g_file_test(response, G_FILE_TEST_IS_DIR) && chdir(response)==0){
+		    DBG("chdir to %s\n", response);   
+		    gchar *format; 
+		    if (strstr(mimetype, "bzip")) format=g_strdup("-xjf");
+		    else if (strstr(mimetype, "xz")) format=g_strdup("-xJf");
+		    else format=g_strdup("-xzf");
+		    gchar *command = g_strdup_printf("tar %s \"%s\"", format, path);
+		    // execute command...
+		    // get view
+		    auto view =  (View<Type> *)g_object_get_data(G_OBJECT(data), "view");
+		    auto page = view->page();
+		    pid_t pid = page->command(command, response);
+
+		    // open follow dialog for long commands...
+		    TRACE("command= %s\n", command);
+		    const gchar *arg[] = {
+			"tar",
+			format,
+			(const gchar *)path,
+			"",
+			NULL
+		    };
+		    CommandResponse<Type>::dialog(command,"system-run", arg);
+		    g_free(format);
+		    g_free(command);
+		    chdir(g_get_home_dir());
+
+		} else {
+		    auto m=g_strdup_printf("\n%s: %s\n", response, strerror(errno?errno:ENOENT));
+		    errno=0;
+		    Gtk<Type>::quickHelp(GTK_WINDOW(mainWindow), "dialog-error", m);
+		    g_free(m);
+		}
+		//execute
+		//restore workdir (homedir)
+
+		gchar *basename = g_path_get_basename(path);
+		gchar *fmt = g_strdup_printf("tar -cjf \"%s/%s.tar.bz2\"", response, basename);
+		gchar *command = Mime<Type>::mkCommandLine(fmt, basename);
+		    
+		//FIXME chdir basename and run command in shell
+	    }
+	    g_free(response);
+	}
+
     }
 
 

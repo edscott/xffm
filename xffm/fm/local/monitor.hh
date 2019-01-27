@@ -141,8 +141,8 @@ public:
 	g_free(basename);
 	auto xd_p = LocalModel<Type>::get_xd_p(directory, &d, TRUE);
 	g_free(directory);
+        gchar *iconName = xd_p->icon;
 
-        gchar *iconName = LocalIcons<Type>::getIconname(xd_p);
 	
         TRACE("***localmonitor stat_func(): iconname=%s\n", iconName);
         GdkPixbuf *pixbuf = Pixbuf<Type>::get_pixbuf(iconName,  GTK_ICON_SIZE_DIALOG);
@@ -155,7 +155,6 @@ public:
                 NORMAL_PIXBUF, pixbuf,
                 FLAGS, xd_p->d_type,
 		-1);
-        g_free(iconName);
         LocalModel<Type>::free_xd_p(xd_p);
 	return TRUE;
     }

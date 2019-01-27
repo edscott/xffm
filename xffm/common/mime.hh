@@ -292,6 +292,11 @@ private:
 	// duplicate suffix?
 	if (g_hash_table_lookup (application_hash_sfx_duplicates, key)){
 	    type = mimeMagic(file);
+	    TRACE("%s is duplicate: magic is \"%s\"\n", sfx, type);
+	    if (!strlen(type)) {
+		g_free(type);
+		type=NULL;
+	    }
 	}
 	if (type) {
             g_free (key);
@@ -329,7 +334,7 @@ public:
 	    type = lookupBySuffix(file, NULL);
             pthread_mutex_unlock(&application_hash_mutex);
             if(type) {
-                TRACE("mime-module(2), FOUND %s: %s\n", file, type);
+                TRACE("mime-module(1), FOUND %s: %s\n", file, type);
                 return type;
             }
             return NULL;
@@ -349,7 +354,7 @@ public:
 	    type = lookupBySuffix(NULL, sfx);
             pthread_mutex_unlock(&application_hash_mutex);
             if(type) {
-                TRACE("mime-module, FOUND %s: %s\n", sfx, type);
+                TRACE("mime-module(2), FOUND %s: %s\n", sfx, type);
                 g_free (sfx);
                 return type;
             } 
@@ -367,7 +372,7 @@ public:
 	    type = lookupBySuffix(NULL, sfx);
             pthread_mutex_unlock(&application_hash_mutex);
             if(type) {
-                TRACE("mime-module(2), FOUND %s: %s\n", sfx, type);
+                TRACE("mime-module(3), FOUND %s: %s\n", sfx, type);
                 g_free (sfx);
                 g_strfreev(q);
                 return type;
@@ -456,21 +461,25 @@ public:
 public: 
     static gchar *
     basicMimeType(unsigned char d_type){
-	TRACE("Mime::basicMimeType: %d\n", d_type);
-	if (d_type == DT_DIR ) return g_strdup("inode/directory");
+	gchar *retval=NULL;
+	if (d_type == DT_DIR ) retval= g_strdup("inode/directory");
         // Character device:
-        if (d_type == DT_CHR ) return g_strdup("inode/chardevice");   
+	else if (d_type == DT_CHR ) retval= g_strdup("inode/chardevice");   
         // Named pipe (FIFO):
-        if (d_type == DT_FIFO ) return g_strdup("inode/fifo");
+        else if (d_type == DT_FIFO ) retval= g_strdup("inode/fifo");
 	// UNIX domain socket:
-        if (d_type == DT_SOCK ) return g_strdup("inode/socket");
+        else if (d_type == DT_SOCK ) retval= g_strdup("inode/socket");
         // Block device
-        if (d_type == DT_BLK ) return g_strdup("inode/blockdevice");
+        else if (d_type == DT_BLK ) retval= g_strdup("inode/blockdevice");
         // Unknown:
-        if (d_type == DT_UNKNOWN) return g_strdup("inode/unknown");
+        else if (d_type == DT_UNKNOWN) retval= g_strdup("inode/unknown");
         // Regular file:
-        if (d_type == DT_REG ) return g_strdup("inode/regular");
-        if (d_type == DT_LNK ) return g_strdup("inode/symlink");
+        else if (d_type == DT_REG ) retval= g_strdup("inode/regular");
+        else if (d_type == DT_LNK ) retval= g_strdup("inode/symlink");
+	if (!d_type || d_type == DT_UNKNOWN) {
+	    TRACE("Mime::basicMimeType: %d: %s\n", d_type, retval);
+	}
+	if (retval) return retval;
 	return  g_strdup("inode/unknown");
     }
     

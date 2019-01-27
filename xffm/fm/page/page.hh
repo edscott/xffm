@@ -133,6 +133,10 @@ public:
     pid_t command(const gchar *command){
         return (this->run_lp_command(this->output(), this->workDir(), command));
     }
+
+    pid_t command(const gchar *command, const gchar *workdir){
+        return (this->run_lp_command(this->output(), workdir, command));
+    }    
     
     void scriptRun(void){
 	    gchar *command = print_c::get_current_text(this->input());
