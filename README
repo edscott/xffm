@@ -2,7 +2,7 @@
   pending: maybe not... make openwith and run with independent and with a timeout if user does not act on them (say 30 seconds).
              
 bug: 
- 
+  
  - progress dialog for rm/trash/shred
  > use libmagic preferably instead of perl if available
  > printout optional and required libraries found in configure step.
