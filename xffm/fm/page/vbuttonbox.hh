@@ -40,7 +40,7 @@ public:
 	auto home = HButtonBox<double>::newButton("go-home", _("Home Directory"));
 	gtk_box_pack_start (vButtonBox_, GTK_WIDGET(home), FALSE, FALSE, 0);
 	g_signal_connect(G_OBJECT(home), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::home), NULL);
-	auto fstab = HButtonBox<double>::newButton("folder-remote", _("Disk Image Mounter"));
+	auto fstab = HButtonBox<double>::newButton("media-eject", _("Disk Image Mounter"));
 	gtk_box_pack_start (vButtonBox_, GTK_WIDGET(fstab), FALSE, FALSE, 0);
 	g_signal_connect(G_OBJECT(fstab), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::fstab), NULL);
 	auto pkg = HButtonBox<double>::newButton("x-package-repository", _("Software Updater"));

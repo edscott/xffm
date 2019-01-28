@@ -156,8 +156,8 @@ public:
  	GtkTreeIter iter;
 	auto name = "xffm:fstab";
 	auto utf_name = util_c::utf_string(_("Disk Image Mounter"));
-	auto icon_name = "folder-remote";
-	auto highlight_name = "folder-remote/NE/document-open/2.0/225";
+	auto icon_name = "media-eject";
+	auto highlight_name = "media-eject/NE/document-open/2.0/225";
         auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
 	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
 	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG); 

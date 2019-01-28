@@ -120,6 +120,14 @@ public:
         g_free(markup);
 
         const gchar *smallKey[]={
+            "Add bookmark",
+            "Remove bookmark",
+            "Open in New Tab",
+            "Create a compressed archive with the selected objects",
+            "Extract files from the archive",
+            
+            "Mount the volume associated with this folder",
+            "Unmount the volume associated with this folder",
             "Cut",
             "Copy",
             "Paste",
@@ -132,6 +140,15 @@ public:
             NULL
         };
         const gchar *smallIcon[]={
+            "bookmark-new",
+            "edit-clear-all",
+            "tab-new-symbolic",
+            "package-x-generic",
+            "insert-object",
+
+            "greenball",
+            "redball",
+
             "edit-cut",
             "edit-copy",
             "edit-paste",
@@ -242,14 +259,17 @@ public:
         auto mimetype =(const gchar *)g_object_get_data(G_OBJECT(localItemPopUp), "mimetype");
 	for (auto k=commonItems; k && *k; k++){
 	    auto w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), *k));
-	    gtk_widget_show(w);
+	    if (g_list_length(view->selectionList()) > 0) gtk_widget_show(w);
+            else gtk_widget_hide(w);
 	    gtk_widget_set_sensitive(w, g_list_length(view->selectionList()) > 0);
 	    if (strcmp(*k, "Paste")==0) gtk_widget_set_sensitive(w, FALSE);
 	}
 	for (auto k=singleSelectItems; k && *k; k++){
 	    auto w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), *k));
-	    gtk_widget_show(w);
+	    if (g_list_length(view->selectionList()) == 1) gtk_widget_show(w);
+            else gtk_widget_hide(w);
 	    gtk_widget_set_sensitive(w, g_list_length(view->selectionList()) == 1);
+            
 	}
 	if (g_list_length(view->selectionList())==1){
 	    auto w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Extract files from the archive"));
@@ -373,23 +393,35 @@ private:
         if (!RootView<Type>::isBookmarked(path)) {
             w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Add bookmark"));
             gtk_widget_set_sensitive(w, TRUE);
+            w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Remove bookmark"));
+            gtk_widget_hide(w);
         } else {
             w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Remove bookmark"));
             gtk_widget_set_sensitive(w, TRUE);
+            w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Add bookmark"));
+            gtk_widget_hide(w);
         }
 	
 
         // mount options
         if (FstabView<Type>::isMounted(path)){
             w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Unmount the volume associated with this folder"));
+            gtk_widget_show(w);
             gtk_widget_set_sensitive(w, TRUE);
+            w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Mount the volume associated with this folder"));
+            gtk_widget_hide(w);
+
         } else {
             w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Unmount the volume associated with this folder"));
             gtk_widget_set_sensitive(w, FALSE);
+            gtk_widget_hide(w);
             w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Mount the volume associated with this folder"));
+            gtk_widget_show(w);
             if (FstabView<Type>::isInFstab(path)){
+                gtk_widget_show(w);
                 gtk_widget_set_sensitive(w, TRUE);
             } else {
+                gtk_widget_hide(w);
                 gtk_widget_set_sensitive(w, FALSE);
             }
         }

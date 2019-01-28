@@ -38,6 +38,14 @@ class RootView  :
 	gboolean isBookMark = RootView<Type>::isBookmarked(path);
 	auto menuitem = GTK_WIDGET(g_object_get_data(G_OBJECT(rootItemPopUp), "Remove bookmark"));
 	gtk_widget_set_sensitive(menuitem, isBookMark);
+        if (isBookMark) gtk_widget_show(menuitem);
+        else gtk_widget_hide(menuitem);
+	menuitem = GTK_WIDGET(g_object_get_data(G_OBJECT(rootItemPopUp), "Empty trash"));
+        auto trashFiles = g_build_filename(g_get_home_dir(), ".local/share/Trash", NULL);
+        if (strstr(path, trashFiles)) gtk_widget_show(menuitem);
+        else gtk_widget_hide(menuitem);
+        gtk_widget_set_sensitive(menuitem, g_file_test(trashFiles, G_FILE_TEST_IS_DIR));
+       g_free(trashFiles); 
 
     }
 
@@ -56,7 +64,6 @@ private:
     static GtkMenu *createPopUp(void){
          menuItem_t item[]={
             //{N_("Add bookmark"), (void *)BasePopUp<Type>::noop, NULL, NULL},
-            {N_("Empty trash"), (void *)emptyTrash, NULL, NULL},
             {NULL,NULL,NULL, NULL}};
 	rootPopUp = BasePopUp<Type>::createPopup(item); 
         auto text = g_strdup_printf("Xffm+-%s", VERSION);
@@ -70,12 +77,33 @@ private:
         {
 	    {N_("Open in New Tab"), (void *)LocalPopUp<Type>::newTab, NULL, NULL},
             {N_("Remove bookmark"), (void *)removeBookmarkItem, NULL, NULL},
+            {N_("Empty trash"), (void *)emptyTrash, NULL, NULL},
 	     {NULL,NULL,NULL,NULL}
         };
 	rootItemPopUp = BasePopUp<Type>::createPopup(item); 
         auto text = g_strdup_printf("Xffm+-%s", VERSION);
         BasePopUp<Type>::changeTitle(rootItemPopUp, text, NULL);
         g_free(text);
+        const gchar *smallKey[]={
+            "Open in New Tab",
+            "Remove bookmark",
+            "Empty trash",
+            NULL
+        };
+        const gchar *smallIcon[]={
+            "tab-new-symbolic",
+            "edit-clear-all",
+            "user-trash-full",
+            NULL
+        };
+        gint i=0;
+        for (auto k=smallKey; k && *k; k++, i++){
+            auto mItem = (GtkMenuItem *)g_object_get_data(G_OBJECT(rootItemPopUp), *k);
+            auto markup = g_strdup_printf("<span size=\"small\">%s</span>", _(*k));
+	    Gtk<Type>::menu_item_content(mItem, smallIcon[i], markup, -16);
+	    g_free(markup);
+        }
+        
         return rootItemPopUp;
     }
 
@@ -96,7 +124,6 @@ private:
 	auto view = (View<Type> *)g_object_get_data(G_OBJECT(data), "view");
 	g_free(trash);
 	view->reloadModel();
-
     }
 	
 

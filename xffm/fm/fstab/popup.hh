@@ -43,6 +43,24 @@ class FstabPopUp {
 	     {NULL,NULL,NULL,NULL}
         };
 	fstabItemPopUp = BasePopUp<Type>::createPopup(item); 
+        const gchar *smallKey[]={
+            "Mount the volume associated with this folder",
+            "Unmount the volume associated with this folder",
+            NULL
+        };
+        const gchar *smallIcon[]={
+            "greenball",
+            "redball",
+            NULL
+        };
+        gint i=0;
+        for (auto k=smallKey; k && *k; k++, i++){
+            auto mItem = (GtkMenuItem *)g_object_get_data(G_OBJECT(fstabItemPopUp), *k);
+            auto markup = g_strdup_printf("<span size=\"small\">%s</span>", _(*k));
+	    gtk_c::menu_item_content(mItem, smallIcon[i], markup, -16);
+	    g_free(markup);
+        }
+        
         return fstabItemPopUp;
     }
 
