@@ -196,21 +196,61 @@ public:
         buttonPressX = buttonPressY = -1;
         dragOn_ = FALSE;
 
-        GtkTreePath *tpath;
+        GtkTreePath *tpath = NULL;
         if (event->button == 1) {
 	    controlMode = FALSE;
             gboolean retval = FALSE;
             gint mode = 0;
 	    if (isTreeView){
-	       if (!gtk_tree_view_get_path_at_pos (view->treeView(), 
+		DBG("FIXME FIXME FIXME FIXME\n");
+		//treview selection in control mode broken...
+	       if (gtk_tree_view_get_path_at_pos (view->treeView(), 
 		   event->x, event->y, &tpath,
 		  NULL, // &column,
-		  NULL, NULL)) tpath = NULL;
+		  NULL, NULL)) {
+		    GtkTreeIter iter;
+		    gtk_tree_model_get_iter(view->treeModel(), &iter, tpath);
+		    auto selection = gtk_tree_view_get_selection (view->treeView());
+		    if (CONTROL_MODE){ 
+			if (!gtk_tree_selection_iter_is_selected (selection, &iter)){
+			    gtk_tree_selection_select_path (selection, tpath);
+			} else {
+			    if (LocalView<Type>::isSelectable(view->treeModel(), tpath)){
+				gtk_tree_selection_select_path (selection, tpath);
+			    }
+			} 
+		    } else {
+			if (!gtk_tree_selection_iter_is_selected (selection, &iter)){
+			    if (LocalView<Type>::isSelectable(view->treeModel(), tpath)){
+			       gtk_tree_selection_unselect_all (selection);
+			       gtk_tree_selection_select_path (selection, tpath);
+			    }
+			} 
+		    } 
+		    retval=TRUE;
+	       } else tpath = NULL;
 		   // &cellX, &cellY))
 	    } else {
-		if (!gtk_icon_view_get_item_at_pos (view->iconView(),
+		if (gtk_icon_view_get_item_at_pos (view->iconView(),
                                    event->x, event->y,
-                                   &tpath,NULL)) tpath = NULL;
+                                   &tpath,NULL)) {
+		    if (CONTROL_MODE){ 
+			if (gtk_icon_view_path_is_selected (view->iconView(), tpath)) {
+			    gtk_icon_view_unselect_path (view->iconView(), tpath);
+			} else {
+			    if (LocalView<Type>::isSelectable(view->treeModel(), tpath)){
+				gtk_icon_view_select_path (view->iconView(), tpath);
+			    }
+			}
+		    } else {
+			if (!gtk_icon_view_path_is_selected (view->iconView(), tpath)) {
+			    if (LocalView<Type>::isSelectable(view->treeModel(), tpath)){
+				gtk_icon_view_unselect_all (view->iconView());
+				gtk_icon_view_select_path (view->iconView(), tpath);
+			    }
+			}
+		    }
+		} else tpath = NULL;
 	    }
             if (tpath) {
                 
@@ -228,22 +268,8 @@ public:
 			// select item and add to selection list
 			if (gtk_tree_selection_path_is_selected (selection, tpath)) {
 			    gtk_tree_selection_unselect_path (selection, tpath);
-			} else { // not selected
-			    gtk_tree_selection_select_path (selection, tpath);
-			    view->selectables();
-			}	   
-		    } else {
-			// select item and add to selection list
-			if (gtk_icon_view_path_is_selected (view->iconView(), tpath)) {
-			    // if selected
-			    gtk_icon_view_unselect_path (view->iconView(), tpath);
-			} else { // not selected
-                            
-			    if (LocalView<Type>::isSelectable(view->treeModel(), tpath)) 
-			      gtk_icon_view_select_path (view->iconView(), tpath);
-			    //view->selectables();
-			}
-		    }
+			} 	   
+		    } 
 		} else if (SHIFT_MODE) {
 		    dragMode = -1; // move
                     if (!isTreeView) viewShiftSelect(view, tpath);
@@ -254,13 +280,7 @@ public:
 			gtk_tree_selection_unselect_all (selection);
 			// select single item
 			gtk_tree_selection_select_path (selection, tpath);
-		    } else{
-			// unselect all
-			gtk_icon_view_unselect_all (view->iconView());
-			// select single item
-			gtk_icon_view_select_path (view->iconView(), tpath);
-		    }
-
+		    } 
 		    dragMode = 0; // default (move)
 		}
                 retval = TRUE; 
@@ -278,33 +298,38 @@ public:
 	if (isTreeView){
             GtkTreeViewColumn *column;
             gint cellX, cellY;
-            gtk_tree_view_get_path_at_pos (view->treeView(), 
+            if (gtk_tree_view_get_path_at_pos (view->treeView(), 
                                event->x, event->y, &tpath,
                               NULL, // &column,
-                               &cellX, &cellY);
-            auto selection = gtk_tree_view_get_selection (view->treeView());
-            if (CONTROL_MODE) gtk_tree_selection_unselect_all (selection);
-	    else {
-		if (tpath) gtk_tree_selection_select_path (selection, tpath);
-		//FIXME: treeview selection should probably be rowreference
-                /*GList *list = view->selectionList();
-                for (;list && list->data; list = list->next){
-                    gtk_tree_selection_select_path (selection, (GtkTreePath *)list->data);
-                }   */
-            } 
-	    gtk_tree_path_free(tpath);
+                               &cellX, &cellY)){
+		GtkTreeIter iter;
+		auto selection = gtk_tree_view_get_selection (view->treeView());
+		gtk_tree_model_get_iter(view->treeModel(), &iter, tpath);
+		if (!gtk_tree_selection_iter_is_selected (selection, &iter)){
+		    // if not selected, 
+		    if (!CONTROL_MODE){
+			gtk_tree_selection_unselect_all (selection);
+		    } 
+		    gtk_tree_selection_select_path (selection, tpath);
+		    gtk_tree_path_free(tpath);
+		}
+	    }
             TRACE("(%lf,%lf) -> %d,%d\n", event->x, event->y, cellX, cellY);
 	} else {
 	    if (gtk_icon_view_get_item_at_pos (view->iconView(),
 				       event->x,
 				       event->y,
 				       &tpath, NULL)){
-		    if (CONTROL_MODE) {
+		if (!gtk_icon_view_path_is_selected (view->iconView(), tpath)) {
+		    // If item is not selected, unselect all and select item.
+		    // Skip unselect all in CONTROL_MODE
+		    if (!CONTROL_MODE) {
 		       gtk_icon_view_unselect_all (view->iconView());
-		    } else {
-			gtk_icon_view_select_path (view->iconView(), tpath);
-		    }
+		    } 
+		    gtk_icon_view_select_path (view->iconView(), tpath);
 		    gtk_tree_path_free(tpath);
+		}
+		// if item is selected, proceed.
 	    }
 	}
         return viewPopUp(view, event);
@@ -385,6 +410,7 @@ public:
 	    auto selection = gtk_tree_view_get_selection (view->treeView());
 	    auto treeModel = view->treeModel();
 	    selectionList = gtk_tree_selection_get_selected_rows (selection, &treeModel);
+	    retval=TRUE;
 	} else {
 	    selectionList = gtk_icon_view_get_selected_items (view->iconView());
 	}
