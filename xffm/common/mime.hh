@@ -293,7 +293,7 @@ private:
 	if (g_hash_table_lookup (application_hash_sfx_duplicates, key)){
 	    type = mimeMagic(file);
 	    TRACE("%s is duplicate: magic is \"%s\"\n", sfx, type);
-	    if (!strlen(type)) {
+	    if (type==NULL || !strlen(type)) {
 		g_free(type);
 		type=NULL;
 	    }
