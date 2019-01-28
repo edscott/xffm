@@ -221,7 +221,9 @@ public:
         /* show response_ and return */
 	gtk_window_set_position(GTK_WINDOW(response_), GTK_WIN_POS_CENTER);
 	gtk_widget_show (GTK_WIDGET(response_));
+        gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
 	gint response  = gtk_dialog_run(GTK_DIALOG(response_));
+        gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
 	//if (checkboxText) g_free(g_object_get_data(G_OBJECT(checkButton), "app"));
         gchar *responseTxt = NULL;
 	if(response == GTK_RESPONSE_YES) {

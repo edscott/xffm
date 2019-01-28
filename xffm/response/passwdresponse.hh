@@ -100,7 +100,9 @@ private:
         gboolean hidden = GPOINTER_TO_INT(arg[2]);
 
         auto dialog = responseDialog (ptext, default_text, hidden);
+        gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
         gint response = gtk_dialog_run (dialog);
+        gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
         gtk_widget_hide (GTK_WIDGET(dialog));
 
         gchar *response_text = NULL;

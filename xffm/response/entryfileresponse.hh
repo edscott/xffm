@@ -27,7 +27,9 @@ public:
         else current_folder = g_get_current_dir();
         gtk_file_chooser_set_current_folder ((GtkFileChooser *) dialog, current_folder);
         g_free(current_folder);
+        gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
         gint response = gtk_dialog_run(dialog);
+        gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
 
         if(response == GTK_RESPONSE_ACCEPT) {
             gchar *filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));

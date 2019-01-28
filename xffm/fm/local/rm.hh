@@ -68,7 +68,9 @@ private:
             gtk_widget_hide(togglebutton);
         }
 	gtk_widget_show (GTK_WIDGET(rmDialog));
+        gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
 	gint response = gtk_dialog_run(GTK_DIALOG(rmDialog));
+        gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
 
 	list = apply_action(rmDialog, response, list);
 	
