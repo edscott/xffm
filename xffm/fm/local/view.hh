@@ -77,6 +77,24 @@ public:
         return ;
     }
 
+    static void selectables(GtkTreeView *treeView){
+        
+        GtkTreePath *tpath = gtk_tree_path_new_first ();
+	GtkTreeModel *treeModel = gtk_tree_view_get_model (treeView);
+	GtkTreeIter iter;
+	if (!gtk_tree_model_get_iter (treeModel, &iter, tpath)) {
+            gtk_tree_path_free(tpath);
+            return ;
+        }
+        gboolean retval = LocalModel<Type>::isSelectable(treeModel, &iter);
+        if (!retval) {
+	    auto selection = gtk_tree_view_get_selection (treeView);
+	    gtk_tree_selection_unselect_path (selection, tpath);
+        }
+        gtk_tree_path_free(tpath);
+        return ;
+    }
+
 
     static void
     runWith(View<Type> *view, const GtkTreePath *tpath, const gchar *path){

@@ -147,17 +147,16 @@ public:
 		return TRUE;
 	    }
 	    // default mode:
+	    if (CONTROL_MODE) return TRUE;
+
 	    if (isTreeView){
 		auto selection = 
 		    gtk_tree_view_get_selection (view->treeView());
 		gtk_tree_view_get_path_at_pos (view->treeView(), 
-				   event->x, event->y, &tpath,
-				  NULL, // &column,
-				  NULL, NULL);
+				   event->x, event->y, &tpath, NULL,  NULL, NULL);
 		if (tpath) {
 		    // unselect everything
 		    gtk_tree_selection_unselect_all (selection);
-
 		    // reselect item to activate
 		    gtk_tree_selection_select_path (selection, tpath);
 		}
@@ -183,9 +182,70 @@ public:
         dragOn_ = FALSE;
 	
         dragMode = 0;
+        view->selectables();
         return FALSE;
     }
 
+    static GtkTreePath * 
+    getTpath(View<Type> *view, GdkEventButton  *event){
+        GtkTreePath *tpath = NULL;
+        if (isTreeView){
+           if (!gtk_tree_view_get_path_at_pos (view->treeView(), event->x, event->y, &tpath, NULL, NULL, NULL)){
+               tpath = NULL;
+           }
+        } else {
+            if (!gtk_icon_view_get_item_at_pos (view->iconView(), event->x, event->y, &tpath,NULL)) {
+               tpath = NULL;
+            }
+        }
+        return tpath;
+    }
+
+    static void 
+    controlSelect(View<Type> *view, GtkTreePath *tpath){
+        if (isTreeView){
+            GtkTreeIter iter;
+            gtk_tree_model_get_iter(view->treeModel(), &iter, tpath);
+            auto selection = gtk_tree_view_get_selection (view->treeView());
+            if (gtk_tree_selection_iter_is_selected (selection, &iter)){
+                gtk_tree_selection_unselect_path (selection, tpath);
+            } else { 
+                if (view->isSelectable(tpath)){
+                    gtk_tree_selection_select_path (selection, tpath);
+                }
+            }   
+        } else {
+            if (gtk_icon_view_path_is_selected (view->iconView(), tpath)) {
+                gtk_icon_view_unselect_path (view->iconView(), tpath);
+            } else {
+                if (view->isSelectable(tpath)){
+                    gtk_icon_view_select_path (view->iconView(), tpath);
+                }
+            }
+        }
+    }
+
+    static void 
+    reSelect(View<Type> *view, GtkTreePath *tpath){
+        if (isTreeView){
+            GtkTreeIter iter;
+            gtk_tree_model_get_iter(view->treeModel(), &iter, tpath);
+            auto selection = gtk_tree_view_get_selection (view->treeView());
+            gtk_tree_selection_unselect_all (selection);
+            if (!gtk_tree_selection_iter_is_selected (selection, &iter)){
+                if (view->isSelectable(tpath)){
+                   gtk_tree_selection_select_path (selection, tpath);
+                } 
+            } 
+        } else {
+            gtk_icon_view_unselect_all (view->iconView());
+            if (!gtk_icon_view_path_is_selected (view->iconView(), tpath)) {
+                if (view->isSelectable(tpath)){
+                    gtk_icon_view_select_path (view->iconView(), tpath);
+                }
+            }
+        }
+    }
 
     static gboolean
     buttonPress (GtkWidget *widget,
@@ -199,98 +259,39 @@ public:
         GtkTreePath *tpath = NULL;
         if (event->button == 1) {
 	    controlMode = FALSE;
-            gboolean retval = FALSE;
             gint mode = 0;
-	    if (isTreeView){
-		DBG("FIXME FIXME FIXME FIXME\n");
-		//treview selection in control mode broken...
-	       if (gtk_tree_view_get_path_at_pos (view->treeView(), 
-		   event->x, event->y, &tpath,
-		  NULL, // &column,
-		  NULL, NULL)) {
-		    GtkTreeIter iter;
-		    gtk_tree_model_get_iter(view->treeModel(), &iter, tpath);
-		    auto selection = gtk_tree_view_get_selection (view->treeView());
-		    if (CONTROL_MODE){ 
-			if (!gtk_tree_selection_iter_is_selected (selection, &iter)){
-			    gtk_tree_selection_select_path (selection, tpath);
-			} else {
-			    if (LocalView<Type>::isSelectable(view->treeModel(), tpath)){
-				gtk_tree_selection_select_path (selection, tpath);
-			    }
-			} 
-		    } else {
-			if (!gtk_tree_selection_iter_is_selected (selection, &iter)){
-			    if (LocalView<Type>::isSelectable(view->treeModel(), tpath)){
-			       gtk_tree_selection_unselect_all (selection);
-			       gtk_tree_selection_select_path (selection, tpath);
-			    }
-			} 
-		    } 
-		    retval=TRUE;
-	       } else tpath = NULL;
-		   // &cellX, &cellY))
-	    } else {
-		if (gtk_icon_view_get_item_at_pos (view->iconView(),
-                                   event->x, event->y,
-                                   &tpath,NULL)) {
-		    if (CONTROL_MODE){ 
-			if (gtk_icon_view_path_is_selected (view->iconView(), tpath)) {
-			    gtk_icon_view_unselect_path (view->iconView(), tpath);
-			} else {
-			    if (LocalView<Type>::isSelectable(view->treeModel(), tpath)){
-				gtk_icon_view_select_path (view->iconView(), tpath);
-			    }
-			}
-		    } else {
-			if (!gtk_icon_view_path_is_selected (view->iconView(), tpath)) {
-			    if (LocalView<Type>::isSelectable(view->treeModel(), tpath)){
-				gtk_icon_view_unselect_all (view->iconView());
-				gtk_icon_view_select_path (view->iconView(), tpath);
-			    }
-			}
-		    }
-		} else tpath = NULL;
-	    }
-            if (tpath) {
-                
+            tpath = getTpath(view, event);
+	    dragMode = 0; // default (move)
+            if (tpath == NULL){ 
+		rubberBand_ = TRUE;
+                return FALSE;
+            } else {
 		TRACE("button press %d mode %d\n", event->button, mode);
 		buttonPressX = event->x;
 		buttonPressY = event->y;
 		rubberBand_ = FALSE;
-                if (CONTROL_MODE && SHIFT_MODE) {
-		    dragMode = -3; // link mode
-		} else if (CONTROL_MODE) {
-		    controlMode = TRUE;
-		    dragMode = -2; // copy
-		    if (isTreeView){
-			auto selection = gtk_tree_view_get_selection (view->treeView());
-			// select item and add to selection list
-			if (gtk_tree_selection_path_is_selected (selection, tpath)) {
-			    gtk_tree_selection_unselect_path (selection, tpath);
-			} 	   
-		    } 
-		} else if (SHIFT_MODE) {
-		    dragMode = -1; // move
-                    if (!isTreeView) viewShiftSelect(view, tpath);
-		} else {
-                    if (isTreeView) {
-			auto selection = gtk_tree_view_get_selection (view->treeView());
-			// unselect all
-			gtk_tree_selection_unselect_all (selection);
-			// select single item
-			gtk_tree_selection_select_path (selection, tpath);
-		    } 
-		    dragMode = 0; // default (move)
+
+                if (CONTROL_MODE && SHIFT_MODE) dragMode = -3; // link mode
+	        else if (CONTROL_MODE) dragMode = -2; // copy
+                else if (SHIFT_MODE)   dragMode = -1; // move
+
+                if (CONTROL_MODE){ 
+	            controlMode = TRUE;
+                    controlSelect(view, tpath);
+                    return TRUE;
+                }
+
+                if (SHIFT_MODE) {
+                    viewShiftSelect(view, tpath);
+                    return TRUE;
+                    // treeview? XXX
 		}
-                retval = TRUE; 
+
+                reSelect(view, tpath);
 		gtk_tree_path_free(tpath);
-            } else { 
-		dragMode = 0;
-		rubberBand_ = TRUE;
             }
 
-            return retval;
+            return TRUE;
         }
 
         // long press or button 3 should do popup menu...
@@ -365,6 +366,7 @@ public:
 
         GList *s = g_list_find(items, startPath);
         gint start, end;
+                //if (LocalView<Type>::isSelectable(view->treeModel(), tpath)){
 
         if (s->prev == NULL) {
             gchar *lastitem = gtk_tree_path_to_string ((GtkTreePath *)g_list_last(items)->data);
@@ -382,7 +384,8 @@ public:
         }
         g_free(startItem);
         // To free the return value, use:
-        g_list_free_full (items, (GDestroyNotify) gtk_tree_path_free);
+        // g_list_free_full (items, (GDestroyNotify) gtk_tree_path_free);
+        // This is done when we reset the view selection list...
         TRACE("loop %d -> %d\n", start, end);
         gtk_icon_view_unselect_all (view->iconView());
         GtkTreePath *tp;

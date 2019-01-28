@@ -152,14 +152,30 @@ public:
     void selectables(void){
         switch (this->viewType()){
             case (LOCALVIEW_TYPE):
-                LocalView<Type>::selectables(this->iconView());        
+                if (isTreeView) LocalView<Type>::selectables(this->treeView());
+                else LocalView<Type>::selectables(this->iconView());        
                 break;
             default:
+                if (isTreeView){
+                    auto selection = gtk_tree_view_get_selection (this->treeView());
+		    gtk_tree_selection_unselect_all (selection);
+                }
                 TRACE("View::selectables(): No items are selectable for viewType: %d ()\n", this->viewType());
         }
         return;
     }
-   
+ 
+    gboolean isSelectable(GtkTreePath *tpath){
+        switch (this->viewType()){
+            case (LOCALVIEW_TYPE):
+                return LocalView<Type>::isSelectable(this->treeModel(), tpath);        
+                break;
+            default:
+                TRACE("View::selectables(): No items are selectable for viewType: %d ()\n", this->viewType());
+        }
+        return FALSE;
+    }
+  
     void 
     highlight(gdouble X, gdouble Y){
         //if (!xfdir_p) return; // avoid race condition here.
