@@ -284,7 +284,6 @@ public:
                 if (SHIFT_MODE) {
                     viewShiftSelect(view, tpath);
                     return TRUE;
-                    // treeview? XXX
 		}
 
                 reSelect(view, tpath);
@@ -338,10 +337,18 @@ public:
     
     static void
     viewShiftSelect(View<Type> *view, GtkTreePath *tpath){
-	if (isTreeView) return;
         // select all items in interval
-        gtk_icon_view_select_path (view->iconView(), tpath);
-        auto items = gtk_icon_view_get_selected_items (view->iconView());
+	GList * items;
+        GtkTreeSelection *selection;
+        if (isTreeView) {
+            selection = gtk_tree_view_get_selection (view->treeView());
+	    gtk_tree_selection_select_path (selection, tpath);
+	    auto treeModel = view->treeModel();
+	    items = gtk_tree_selection_get_selected_rows (selection, &treeModel);
+        } else {
+            gtk_icon_view_select_path (view->iconView(), tpath);
+            items = gtk_icon_view_get_selected_items (view->iconView());
+        }
         view->setSelectionList(items);
 
         gchar *item = gtk_tree_path_to_string (tpath);
@@ -387,16 +394,27 @@ public:
         // g_list_free_full (items, (GDestroyNotify) gtk_tree_path_free);
         // This is done when we reset the view selection list...
         TRACE("loop %d -> %d\n", start, end);
-        gtk_icon_view_unselect_all (view->iconView());
+        
+        if (isTreeView){
+	    gtk_tree_selection_unselect_all (selection);
+        } else {
+            gtk_icon_view_unselect_all (view->iconView());
+        }
         GtkTreePath *tp;
-        for (int i=start; i<=end; i++){
-                gchar *item = g_strdup_printf("%0d", i);
-                TRACE("selecting %s(%d)\n", item, i);
-                tp = gtk_tree_path_new_from_string(item);
-                g_free(item);
-                //if (view->isSelectable(tpath)) 
-                    
+        auto first = (start <= end)?start:end;
+        auto last = (end >= start)?end:start;
+        for (int i=first; i<=last; i++){
+            gchar *item = g_strdup_printf("%0d", i);
+            TRACE("selecting %s(%d)\n", item, i);
+            tp = gtk_tree_path_new_from_string(item);
+            g_free(item);
+            //if (view->isSelectable(tpath)) 
+                
+            if (isTreeView){
+                gtk_tree_selection_select_path (selection, tp);
+            } else {
                 gtk_icon_view_select_path (view->iconView(), tp);
+            }
             gtk_tree_path_free(tp);
         }
         view->selectables();
