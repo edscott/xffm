@@ -23,6 +23,8 @@ class PkgView  :
 	PkgModel<Type>::loadModel(view->treeModel());
 	return TRUE;
     }
+
+
     static GtkMenu *popUpItem(void){
         DBG("PkgView popUpItem\n");
         /*if (!rootItemPopUp) rootItemPopUp = createItemPopUp();   

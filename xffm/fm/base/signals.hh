@@ -570,10 +570,10 @@ public:
 
         gtk_tree_model_get (treeModel, &iter, PATH, &path, -1);
 	
-        TRACE("View::activate: %s\n", path);
+        WARN("base-signals::activate: %s\n", path);
         auto lastPath = g_strdup(view->path());
 	if (!view->loadModel(treeModel, tpath, path)){
-            TRACE("reloading %s\n", lastPath);
+            DBG("base-signals:activate():reloading %s\n", lastPath);
             view->loadModel(lastPath);
         }
 	g_free(path);
@@ -678,7 +678,7 @@ public:
         if (strcmp(path, "xffm:sshfs")==0) return (SSHFS_TYPE);
         if (strcmp(path, "xffm:ecryptfs")==0) return (ECRYPTFS_TYPE);
         if (strcmp(path, "xffm:cifs")==0) return (CIFS_TYPE);
-        if (strcmp(path, "xffm:pkg")==0) return (PKG_TYPE);
+        if (strncmp(path, "xffm:pkg", strlen("xffm:pkg"))==0) return (PKG_TYPE);
 	
         ERROR("base/signals.hh::View::loadModel() %s not defined.\n", path);
         return (-1);

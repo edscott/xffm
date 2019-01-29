@@ -1,0 +1,821 @@
+<?xml version="1.0"?>
+<rodent_pkg xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="rodent-pkg.xsd">
+  <emerge>
+    <environment value="true" string="USE=use_options"/>
+    <confirm string="[Yes/No]"/>
+<!-- **************************************************************** -->       
+        <option loption="pretend">
+Instead  of  actually performing the merge, simply display
+what *would* have  been  installed  if  --pretend  weren't
+used.   Using  --pretend  is  strongly  recommended before
+installing an unfamiliar package.  In the printout:
+
+
+N   new (not yet installed)
+S   new SLOT installation (side-by-side versions)
+U   updating (to another version)
+D   downgrading (best version seems lower)
+r   reinstall (forced for some reason, possibly due to slot or sub-slot)
+R   replacing (remerging same version)
+F   fetch restricted (must be manually downloaded)
+f   fetch restricted (already downloaded)
+I   interactive (requires user input)
+B   blocked by another package (unresolved conflict)
+b   blocked by another package (automatically resolved conflict)        
+        </option>
+        <option loption="changelog">
+Use this in conjunction with the --pretend  option.   This
+will  show the ChangeLog entries for all the packages that
+will be upgraded.        
+        </option>
+        <option loption="columns">
+Used  alongside  --pretend  to cause the package name, new
+version, and old version to be  displayed  in  an  aligned
+format for easy cut-n-paste.        
+        </option>
+        <option loption="fetchonly">
+Instead  of  doing  any  package  building,  just  perform
+fetches  for all packages (fetch things from SRC_URI based
+upon USE setting).        
+        </option>
+        <option loption="fetch-all-uri">
+Instead  of  doing  any  package  building,  just  perform
+fetches  for  all  packages  (fetch  everything in SRC_URI
+regardless of USE setting).        
+        </option>
+        <option loption="color" parameter="y | n" active="y">
+Enable or disable color output.  This option will override
+NOCOLOR  (see  make.conf(5)) and may also be used to force
+color output when stdout is not a tty (by  default,  color
+is disabled unless stdout is a tty).        
+        </option>
+        <option loption="accept-properties" parameter="ACCEPT_PROPERTIES">
+This option temporarily  overrides  the  ACCEPT_PROPERTIES
+variable.  The  ACCEPT_PROPERTIES variable is incremental,
+which means that the specified setting is appended to  the
+existing  value  from  your  configuration. The special -*
+token can be used to discard  the  existing  configuration
+value and start fresh. See the MASKED PACKAGES section and
+make.conf(5) for more information about ACCEPT_PROPERTIES.
+A  typical  usage  example for this option would be to use
+--accept-properties=-interactive   to   temporarily   mask
+interactive  packages.  With  default  configuration, this
+would result in an effective ACCEPT_PROPERTIES value of "*
+-interactive".        
+        </option>
+        <option loption="alphabetical">
+When  displaying  USE  and other flag output, combines the
+enabled and disabled lists into one  list  and  sorts  the
+whole list alphabetically.        
+        </option>
+        <option loption="ask" parameter="[ y | n ]">
+Before performing the action, display what will take place
+(server info for --sync, --pretend output for  merge,  and
+so  forth), then ask whether to proceed with the action or
+abort.  Using --ask is more efficient than using --pretend
+and  then executing the same command without --pretend, as
+dependencies will only need to be calculated once.   WARN‐
+ING:  If the "Enter" key is pressed at the prompt (with no
+other input), it is interpreted as acceptance of the first
+choice.   Note  that the input buffer is not cleared prior
+to the prompt, so an accidental press of the  "Enter"  key
+at  any  time prior to the prompt will be interpreted as a
+choice!  Use the --ask-enter-invalid option if you want  a
+single  "Enter"  key  press  to  be interpreted as invalid
+input.        
+        </option>
+        <option loption="ask-enter-invalid">
+When used together with the --ask option, interpret a sin‐
+gle "Enter" key press as invalid input. This helps prevent
+accidental acceptance of the first choice. This option  is
+intended to be set in the make.conf(5) EMERGE_DEFAULT_OPTS
+variable.        
+        </option>
+        <option loption="autounmask" parameter="[ y | n ]">
+Automatically unmask  packages  and  generate  package.use
+settings as necessary to satisfy dependencies. This option
+is enabled by default. If any  configuration  changes  are
+required, then they will be displayed after the merge list
+and emerge will immediately abort. If the  displayed  con‐
+figuration  changes  are satisfactory, you should copy and
+paste them into the specified  configuration  file(s),  or
+enable      the     --autounmask-write     option.     The
+EMERGE_DEFAULT_OPTS variable may be used to  disable  this
+option by default in make.conf(5).        
+        </option>
+        <option loption="autounmask-unrestricted-atoms" parameter="[ y | n ]">
+If --autounmask is enabled, keyword and mask changes using
+the ´=´ operator will be written. With this  option,  ´>=´
+operators will be used whenever possible.  USE and license
+changes always use the latter behavior.        
+        </option>
+        <option loption="autounmask-keep-masks" parameter="[ y | n ]">
+If --autounmask is enabled, no package.unmask or  **  key‐
+word  changes  will  be created. This leads to unsatisfied
+dependencies if no other solution exists.        
+        </option>
+        <option loption="autounmask-write" parameter="[ y | n ]">
+If --autounmask is enabled, changes are written to  config
+files, respecting CONFIG_PROTECT and --ask.  If the corre‐
+sponding package.* is a file, the changes are appended  to
+it, if it is a directory, changes are written to the lexi‐
+cographically last file. This way  it  is  always  ensured
+that   the  new  changes  take  precedence  over  existing
+changes.        
+        </option>
+        <option loption="backtrack" parameter="COUNT">
+Specifies an integer  number  of  times  to  backtrack  if
+dependency  calculation  fails  due  to  a  conflict or an
+unsatisfied dependency (default: ´10´).        
+        </option>
+        <option loption="binpkg-respect-use" parameter="[ y | n ]">
+Tells emerge to ignore binary packages if their use  flags
+don't match the current configuration. (default: ´n´)        
+        </option>
+        <option loption="buildpkg" parameter="[ y | n ]">
+Tells emerge to build binary packages for all ebuilds pro‐
+cessed in addition to actually merging the packages.  Use‐
+ful for maintainers or if you administrate multiple Gentoo
+Linux systems (build once,  emerge  tbz2s  everywhere)  as
+well  as disaster recovery. The package will be created in
+the PKGDIR directory (see make.conf(5)).   An  alternative
+for  already-merged  packages  is to use quickpkg(1) which
+creates a tbz2 from the live filesystem.        
+        </option>
+        <option loption="buildpkg-exclude" parameter="ATOMS">
+A space separated list  of  package  atoms  for  which  no
+binary packages should be built. This option overrides all
+possible ways to enable building of binary packages.        
+        </option>
+        <option loption="buildpkgonly">
+Creates binary packages for all ebuilds processed  without
+actually merging the packages.  This comes with the caveat
+that all build-time dependencies must already  be  emerged
+on the system.        
+        </option>
+        <option loption="changed-use">
+Tells emerge to include installed packages where USE flags
+have changed since installation. This option also  implies
+the --selective option. Unlike --newuse, the --changed-use
+option does not trigger reinstallation when flags that the
+user has not enabled are added or removed.
+
+NOTE:  This  option  ignores  the  state of the "test" USE
+flag, since that  flag  has  a  special  binding  to  FEA‐
+TURES="test"  (see make.conf(5) for more information about
+FEATURES settings).        
+        </option>
+        <option loption="complete-graph" parameter="[ y | n ]">
+This  causes  emerge  to consider the deep dependencies of
+all packages from the world set. With this option enabled,
+emerge will bail out if it determines that the given oper‐
+ation will break any dependencies  of  the  packages  that
+have  been added to the graph. Like the --deep option, the
+--complete-graph option will  significantly  increase  the
+time  taken for dependency calculations. Note that, unlike
+the --deep option, the --complete-graph  option  does  not
+cause any more packages to be updated than would have oth‐
+erwise been  updated  with  the  option  disabled.   Using
+--with-bdeps=y  together  with  --complete-graph makes the
+graph as complete as possible.        
+        </option>
+        <option loption="complete-graph-if-new-use" parameter="y | n">
+Trigger the --complete-graph behavior if USE or IUSE  will
+change for an installed package. This option is enabled by
+default.        
+        </option>
+        <option loption="complete-graph-if-new-ver" parameter="y | n">
+Trigger the  --complete-graph  behavior  if  an  installed
+package  version  will change (upgrade or downgrade). This
+option is enabled by default.        
+        </option>
+        <option loption="config-root" parameter="DIR">
+Set the PORTAGE_CONFIGROOT environment variable.        
+        </option>
+        <option loption="debug">
+Tells emerge to run the emerge command  in  --debug  mode.
+In  this mode the bash build environment will run with the
+-x option, causing it to output verbose debugging informa‐
+tion  to  stdout.   This  also enables a plethora of other
+output (mostly dependency resolution messages).        
+        </option>
+        <option loption="deep" parameter="[DEPTH]">
+This flag forces emerge to consider the entire  dependency
+tree  of  packages, instead of checking only the immediate
+dependencies of the packages.  As an example, this catches
+updates  in  libraries that are not directly listed in the
+dependencies of a  package.   Also  see  --with-bdeps  for
+behavior  with respect to build time dependencies that are
+not strictly required.        
+        </option>
+        <option loption="depclean-lib-check" parameter="[ y | n ]">
+Account for library link-level dependencies during  --dep‐
+clean  and  --prune  actions.   This option is disabled by
+default.  This  option  is  ignored  when   FEATURES="pre‐
+serve-libs"   is   enabled   in  make.conf(5),  since  any
+libraries that have consumers will simply be preserved.        
+        </option>
+        <option loption="digest">
+Prevent corruption from being noticed. The `repoman  mani‐
+fest`  command  is the preferred way to generate manifests
+and it is capable of doing an entire repository  or  cate‐
+gory at once (see repoman(1)).        
+        </option>
+        <option loption="dynamic-deps" parameter="y | n">
+In dependency calculations, substitute the dependencies of
+installed packages with the dependencies of  corresponding
+unbuilt  ebuilds from source repositories. This causes the
+effective  dependencies  of  installed  packages  to  vary
+dynamically  when source ebuild dependencies are modified.
+This option is enabled by default.
+
+WARNING: If you want to disable  --dynamic-deps,  then  it
+may  be  necessary to first run fixpackages(1) in order to
+get the best results. The fixpackages(1) command  performs
+two  different operations that can also be performed sepa‐
+rately by the `emaint --fix moveinst`  and  `emaint  --fix
+movebin` commands (see emaint(1)).        
+        </option>
+        <option loption="emptytree">
+Reinstalls  target  atoms and their entire deep dependency
+tree, as though no packages are currently  installed.  You
+should  run  this  with  --pretend  first to make sure the
+result is what you expect.        
+        </option>
+        <option loption="exclude" parameter="ATOMS">
+A space separated list of package  names  or  slot  atoms.
+Emerge  won't   install  any ebuild or binary package that
+matches any of the given package atoms.        
+        </option>
+        <option loption="fail-clean" parameter="[ y | n ]">
+Clean up temporary files after a build  failure.  This  is
+particularly  useful  if you have PORTAGE_TMPDIR on tmpfs.
+If this option is  enabled,  you  probably  also  want  to
+enable PORT_LOGDIR (see make.conf(5)) in order to save the
+build log.        
+        </option>
+        <option loption="getbinpkg" parameter="[ y | n ]">
+Using the server and location defined  in  PORTAGE_BINHOST
+(see  make.conf(5)), portage will download the information
+from each binary package found and it will use that infor‐
+mation  to  help  build  the dependency list.  This option
+implies -k.  (Use -gK for binary-only merging.)        
+        </option>
+        <option loption="getbinpkgonly" parameter="[ y | n ]">
+This option is identical to -g, as above, except  binaries
+from  the  remote server are preferred over local packages
+if they are not identical.        
+        </option>
+        <option loption="ignore-default-opts">
+Causes  EMERGE_DEFAULT_OPTS  (see  make.conf(5))   to   be
+ignored.        
+        </option>
+        <option loption="ignore-built-slot-operator-deps" parameter="y | n">
+Ignore the slot/sub-slot := operator parts of dependencies
+that have been recorded when packages  where  built.  This
+option  is  intended  only  for debugging purposes, and it
+only affects built packages that specify slot/sub-slot  :=
+operator  dependencies  which are supported beginning with
+EAPI 5.        
+        </option>
+        <option loption="jobs" parameter="JOBS">
+Specifies the number of packages to build  simultaneously.
+If  this  option is given without an argument, emerge will
+not limit the number of jobs that can run  simultaneously.
+Also  see the related --load-average option.  Similarly to
+the --quiet-build option, the  --jobs  option  causes  all
+build output to be redirected to logs.  Note that interac‐
+tive packages currently force a setting of --jobs=1.  This
+issue   can   be   temporarily   avoided   by   specifying
+--accept-properties=-interactive.        
+        </option>
+        <option loption="keep-going" parameter="[ y | n ]">
+Continue as much as possible after an error. When an error
+occurs,  dependencies are recalculated for remaining pack‐
+ages and any with unsatisfied dependencies  are  automati‐
+cally dropped. Also see the related --skipfirst option.        
+        </option>
+        <option loption="load-average" parameter="[LOAD]">
+Specifies  that  no  new builds should be started if there
+are other builds running and the load average is at  least
+LOAD (a floating-point number).  With no argument, removes
+a previous load limit.  This option is recommended for use
+in  combination with --jobs in order to avoid excess load.
+See make(1) for information about analogous  options  that
+should be configured via MAKEOPTS in make.conf(5).        
+        </option>
+        <option loption="misspell-suggestions" parameter="y | n">
+Enable or disable misspell suggestions. By default, emerge
+will show a list of packages with  similar  names  when  a
+package  doesn't  exist.  The EMERGE_DEFAULT_OPTS variable
+may be used to disable this option by default.        
+        </option>
+        <option loption="newuse">
+Tells emerge to include installed packages where USE flags
+have  changed  since compilation. This option also implies
+the --selective option.  USE flag changes include:
+
+A USE flag was added to a package.  A USE flag was removed
+from  a  package.  A USE flag was turned on for a package.
+A USE flag was turned off for a package.
+
+USE flags may be toggled by your profile as well  as  your
+USE  and  package.use  settings. If you would like to skip
+rebuilds for which disabled flags have been  added  to  or
+removed  from  IUSE, see the related --changed-use option.
+If you would like to skip rebuilds for specific  packages,
+see the --exclude option.
+
+NOTE:  This  option  ignores  the  state of the "test" USE
+flag, since that  flag  has  a  special  binding  to  FEA‐
+TURES="test"  (see make.conf(5) for more information about
+FEATURES settings).        
+        </option>
+        <option loption="noconfmem">
+Causes portage to disregard merge records indicating  that
+a  config  file  inside  of a CONFIG_PROTECT directory has
+been merged already.  Portage will  normally  merge  those
+files  only once to prevent the user from dealing with the
+same config multiple times.  This flag will cause the file
+to always be merged.        
+        </option>
+        <option loption="nodeps">
+Merges  specified  packages  without merging any dependen‐
+cies.  Note that the build may fail  if  the  dependencies
+aren't satisfied.        
+        </option>
+        <option loption="noreplace">
+Skips the packages specified on the command-line that have
+already been installed.  Without this option, any  package
+atoms or package sets you specify on the command-line will
+cause Portage to  remerge  the  package,  even  if  it  is
+already  installed.   Note  that  Portage will not remerge
+dependencies by default.        
+        </option>
+        <option loption="nospinner">
+Disables the spinner for  the  session.   The  spinner  is
+active when the terminal device is determined to be a TTY.
+This flag disables it regardless.        
+        </option>
+        <option loption="usepkg-exclude" parameter="ATOMS">
+A space separated list of package  names  or  slot  atoms.
+Emerge will ignore matching binary packages.        
+        </option>
+        <option loption="rebuild-exclude" parameter="ATOMS">
+A  space  separated  list  of package names or slot atoms.
+Emerge  will  not  rebuild  matching   packages   due   to
+--rebuild.        
+        </option>
+        <option loption="rebuild-ignore" parameter="ATOMS">
+A  space  separated  list  of package names or slot atoms.
+Emerge will not rebuild packages that depend  on  matching
+packages due to --rebuild.        
+        </option>
+        <option loption="oneshot">
+Emerge as normal, but do not add the packages to the world
+file for later updating.        
+        </option>
+        <option loption="onlydeps">
+Only merge (or pretend to merge) the dependencies  of  the
+packages specified, not the packages themselves.        
+        </option>
+        <option loption="package-moves" parameter="[ y | n ]">
+Perform  package  moves  when  necessary.  This  option is
+enabled by default. Package moves  are  typically  applied
+immediately  after a --sync action. They are applied in an
+incremental fashion, using only the subset of the  history
+of  package  moves which have been added or modified since
+the previous application of package moves.
+
+WARNING: This option should remain  enabled  under  normal
+circumstances.  Do not disable it unless you know what you
+are doing.
+
+NOTE: The fixpackages(1) command can be  used  to  exhaus‐
+tively  apply the entire history of package moves, regard‐
+less of whether or not any of the package moves have  been
+previously applied.        
+        </option>
+        <option loption="quiet" parameter="[ y | n ]">
+Results may vary, but the general outcome is a reduced  or
+              condensed output from portage's displays.        
+        </option>
+        <option loption="quiet-build" parameter="[ y | n ]">
+Redirect  all  build output to logs alone, and do not dis‐
+play it on stdout. If a build failure occurs for a  single
+package,  the build log will be automatically displayed on
+stdout (unless the --quiet-fail  option  is  enabled).  If
+there  are  multiple  build  failures (due to options like
+--keep-going or --jobs), then the content of the log files
+will  not  be  displayed, and instead the paths of the log
+files will be displayed together  with  the  corresponding
+die  messages.   Note  that interactive packages currently
+force all build output to be  displayed  on  stdout.  This
+issue   can   be   temporarily   avoided   by   specifying
+--accept-properties=-interactive.        
+        </option>
+        <option loption="quiet-fail" parameter="[ y | n ]">
+Suppresses display of the build log on stdout  when  build
+output  is  hidden due to options such as --jobs, --quiet,
+or --quiet-build. Only the die message and the path of the
+build log will be displayed on stdout.        
+        </option>
+        <option loption="quiet-repo-display">
+In  the  package merge list display, suppress ::repository
+output, and instead use numbers to indicate which  reposi‐
+tories package come from.        
+        </option>
+        <option loption="quiet-unmerge-warn">
+Disable   the   warning  message  that's  shown  prior  to
+--unmerge actions. This option is intended to  be  set  in
+the make.conf(5) EMERGE_DEFAULT_OPTS variable.        
+        </option>
+        <option loption="rebuild-if-new-slot" parameter="[ y | n ]">
+Automatically   rebuild   or   reinstall   packages   when
+slot/sub-slot := operator dependencies can be satisfied by
+a  newer  slot,  so  that older packages slots will become
+eligible for removal by the --depclean action as  soon  as
+possible.  This  option only affects packages that specify
+slot/sub-slot := dependencies which are  supported  begin‐
+ning  with EAPI 5.  Since this option requires checking of
+reverse dependencies,  it  enables  --complete-graph  mode
+whenever  a  new slot is installed. This option is enabled
+by default.        
+        </option>
+        <option loption="rebuild-if-new-rev" parameter="[ y | n ]">
+Rebuild packages when build-time  dependencies  are  built
+from  source,  if  the dependency is not already installed
+with the same version and revision.        
+        </option>
+        <option loption="rebuild-if-new-ver" parameter="[ y | n ]">
+Rebuild packages when build-time  dependencies  are  built
+from  source,  if  the dependency is not already installed
+with the same version. Revision numbers are ignored.        
+        </option>
+        <option loption="rebuild-if-unbuilt" parameter="[ y | n ]">
+Rebuild packages when build-time  dependencies  are  built
+from source.        
+        </option>
+        <option loption="rebuilt-binaries" parameter="[ y | n ]">
+Replace  installed packages with binary packages that have
+been rebuilt.  Rebuilds  are  detected  by  comparison  of
+BUILD_TIME  package metadata. This option is enabled auto‐
+matically when  using  binary  packages  (--usepkgonly  or
+--getbinpkgonly) together with --update and --deep.        
+        </option>
+        <option loption="rebuilt-binaries-timestamp" parameter="TIMESTAMP">
+This   option   modifies   emerge's   behaviour   only  if
+--rebuilt-binaries is given. Only  binaries  that  have  a
+BUILD_TIME  that  is  larger  than the given TIMESTAMP and
+that is larger than that of the installed package will  be
+considered by the rebuilt-binaries logic        
+        </option>
+        <option loption="reinstall-changed-use">
+This is an alias for --changed-use.        
+        </option>
+        <option loption="reinstall-atoms" parameter="ATOMS">
+A  space  separated  list  of package names or slot atoms.
+Emerge will treat matching packages as  if  they  are  not
+installed, and reinstall them if necessary.        
+        </option>
+        <option loption="root" parameter="DIR">
+Set the ROOT environment variable.        
+        </option>
+        <option loption="root-deps" parameter="[rdeps]">
+If  no  argument  is given then build-time dependencies of
+packages for ROOT are installed to ROOT instead of /.   If
+the  rdeps  argument  is given then discard all build-time
+dependencies of packages for ROOT.  This  option  is  only
+meaningful  when used together with ROOT and it should not
+be enabled under normal circumstances!
+
+Does not affect EAPIs that support HDEPEND.   Experimental
+EAPI  5-hdepend  provides HDEPEND as a new means to adjust
+installation into "/" and ROOT.  If  ebuilds  using  EAPIs
+which  do not support HDEPEND are built in the same emerge
+run as those using EAPIs which do  support  HDEPEND,  this
+option affects only the former.        
+        </option>
+        <option loption="select" parameter="[ y | n ]">
+Add  specified  packages  to  the  world  set  (inverse of
+--oneshot).  This  is  useful   if   you   want   to   use
+EMERGE_DEFAULT_OPTS to make --oneshot behavior default.        
+        </option>
+        <option loption="selective" parameter="[ y | n ]">
+This   is  identical  to  the  --noreplace  option.   Some
+options,  such  as  --update,  imply   --selective.    Use
+--selective=n  if  you want to forcefully disable --selec‐
+tive, regardless of options like --changed-use,  --newuse,
+--noreplace, or --update.        
+        </option>
+        <option loption="skipfirst">
+This  option  is  only  valid when used with --resume.  It
+removes the first package in the resume list. Dependencies
+are  recalculated for remaining packages and any that have
+unsatisfied dependencies or are masked will  be  automati‐
+cally dropped. Also see the related --keep-going option.        
+        </option>
+        <option loption="tree">
+Shows  the dependency tree for the given target by indent‐
+ing dependencies.  This is only really useful in  combina‐
+tion with --emptytree or --update and --deep.        
+        </option>
+        <option loption="unordered-display">
+By  default  the  displayed merge list is sorted using the
+order in which the packages will be merged. When --tree is
+used   together  with  this  option,  this  constraint  is
+removed, hopefully leading to a more  readable  dependency
+tree.        
+        </option>
+        <option loption="update">
+Updates  packages to the best version available, which may
+not always be the  highest version number due  to  masking
+for  testing  and  development. Package atoms specified on
+the command line are greedy, meaning that unspecific atoms
+may match multiple versions of slotted packages.        
+        </option>
+        <option loption="use-ebuild-visibility" parameter="[ y | n ]">
+Use unbuilt ebuild metadata for visibility checks on built
+packages        
+        </option>
+        <option loption="useoldpkg-atoms" parameter="ATOMS">
+A space separated list of package  names  or  slot  atoms.
+Emerge  will  prefer  matching  binary packages over newer
+unbuilt packages.        
+        </option>
+        <option loption="usepkg" parameter="[ y | n ]">
+Tells emerge to use binary packages (from $PKGDIR) if they
+are  available, thus possibly avoiding some time-consuming
+compiles.  This option is useful for CD installs; you  can
+export PKGDIR=/mnt/cdrom/packages and then use this option
+to have emerge "pull" binary packages from the CD in order
+to satisfy dependencies.        
+        </option>
+        <option loption="usepkgonly" parameter="[ y | n ]">
+Tells  emerge  to only use binary packages (from $PKGDIR).
+All the binary packages must be available at the  time  of
+dependency   calculation  or  emerge  will  simply  abort.
+Portage does not use $PORTDIR when calculating  dependency
+information so all masking information is ignored.        
+        </option>
+        <option loption="verbose" parameter="[ y | n ]">
+Tell  emerge  to run in verbose mode.  Currently this flag
+causes emerge to print out GNU info errors, if any, and to
+show the USE flags that will be used for each package when
+pretending. The following symbols are affixed to USE flags
+in order to indicate their status:
+
+
+Symbol   Location    Meaning
+──────────────────────────────────────────────────────────────
+
+-        prefix      not enabled (either disabled or removed)
+*        suffix      transition to or from the enabled state
+%        suffix      newly added or removed
+()       circumfix   forced, masked, or removed
+{}       circumfix   state is bound to FEATURES settings        
+        </option>
+        <option loption="verbose-main-repo-display">
+In the package merge list display, print ::repository even
+for main repository.        
+        </option>
+        <option loption="with-bdeps" parameter="y | n">
+In dependency calculations, pull in build  time  dependen‐
+cies  that are not strictly required. This defaults to ´n´
+for  installation  actions,  meaning  they  will  not   be
+installed, and ´y´ for the --depclean action, meaning they
+will not  be  removed.   This  setting  can  be  added  to
+EMERGE_DEFAULT_OPTS  (see make.conf(5)) and later overrid‐
+den via the command line.        
+        </option>         
+<!-- *************************************************************************** -->  
+ <!-- *************************************************************************** -->
+    <action pkg="emerge" argument="[ebuild | tbz2file | file | @set | atom]" 
+    protected="1" local="1" remote="1" no_selection="1"
+    icon="xffm/emblem_gentoo"  command_options="1" actions="1">
+If no action is specified, the action is to merge  in  the
+specified  packages, satisfying any dependencies that they
+may have.  The arguments can  be  atoms,  sets,  installed
+files,  ebuilds,  or tbz2s.  Note that you need to use the
+--usepkg option if you want to install a tbz2.  The  pack‐
+ages  are added to the world file at the end, so that they
+are considered for later updating.
+    </action>
+    <action pkg="emerge" cmd="--fetch" argument="[ebuild | tbz2file | file | @set | atom]" 
+    protected="1" remote="1" no_selection="1"
+    string="Download"
+    icon="xffm/emblem_blueball"  >
+Instead  of  doing  any  package  building,  just  perform
+fetches  for all packages (fetch things from SRC_URI based
+upon USE setting). 
+    </action>
+    <action pkg="emerge" cmd="--update" argument="[ebuild | tbz2file | file | @set | atom]" 
+    protected="1" remote="1" no_selection="1"
+    string="Install/Update"
+    icon="xffm/emblem_greenball" >
+Updates  packages to the best version available, which may
+not always be the  highest version number due  to  masking
+for  testing  and  development. Package atoms specified on
+the command line are greedy, meaning that unspecific atoms
+may match multiple versions of slotted packages. 
+    </action>
+    <action pkg="emerge" cmd="--depclean" string="Depclean"
+    protected="1" no_selection="1" command_options="1"
+     icon="xffm/stock_remove/compositeNE/emblem_grayball">
+Cleans  the system by removing packages that are not asso‐
+ciated with explicitly merged packages. Depclean works  by
+creating  the  full  dependency  tree from the @world set,
+then  comparing  it  to   installed   packages.   Packages
+installed,  but  not  part of the dependency tree, will be
+uninstalled by depclean.  See  --with-bdeps  for  behavior
+with  respect  to  build  time  dependencies  that are not
+strictly required. Packages that are part of the world set
+will  always  be  kept. They can be manually added to this
+set with emerge --noreplace ATOM. As a  safety  measure,
+depclean   will  not  remove  any  packages  unless  *all*
+required dependencies have  been  resolved.  As  a  conse‐
+quence,  it  is  often  necessary  to  run emerge --update
+--newuse --deep @world prior to depclean. Also  note  that
+depclean  may  break  link  level dependencies, especially
+when the --depclean-lib-check option is disabled. Thus, it
+is  recommended to use a tool such as revdep-rebuild(1) in
+order to detect such breakage.
+
+WARNING: Inexperienced users are advised to use  --pretend
+or  --ask  with  this  option in order to see a preview of
+which packages will be uninstalled. Always study the  list
+of  packages  to be cleaned for any obvious mistakes. Note
+that packages listed in package.provided (see  portage(5))
+may  be  removed by depclean, even if they are part of the
+world set.
+
+Depclean  serves  as  a  dependency   aware   version   of
+--unmerge.  When  given one or more atoms, it will unmerge
+matched packages that have no  reverse  dependencies.  Use
+--depclean  together with --verbose to show reverse depen‐
+dencies.    
+    </action>    
+    <action pkg="emerge" cmd="--prune" argument="[@set | atom]"  string="Prune"
+    protected="1" local="1" no_selection="1" command_options="1"
+     icon="xffm/stock_remove/compositeNE/emblem_blueball">
+Removes all but the highest installed version of a package
+from  your  system. Use --prune together with --verbose to
+show reverse dependencies or with --nodeps to  ignore  all
+dependencies.   WARNING:  This  action can remove packages
+from your world file! Check the emerge output of the  next
+--depclean  run  carefully!  Use  --depclean to avoid this
+issue.    
+    </action>   
+    <action pkg="emerge" cmd="--unmerge" argument="[ebuild | tbz2file | file | @set | atom]" 
+    protected="1" local="1" no_selection="1"  command_options="1"
+    string="Unmerge"
+    icon="xffm/stock_remove/compositeNE/emblem_redball"  >
+WARNING:   This  action  can  remove  important  packages!
+Removes all matching packages.  This does no  checking  of
+dependencies,  so it may remove packages necessary for the
+proper operation of your system.   Its  arguments  can  be
+atoms  or  ebuilds.  For  a  dependency  aware  version of
+--unmerge, use --depclean or --prune.    
+    </action>
+
+    <action pkg="emerge" cmd="--info" argument="[atom]"  string="Information"
+    local="1" no_selection="1" command_options="1"
+    scroll_up="1"
+     icon="xffm/stock_dialog-info">
+Produces  a  list of information to include in bug reports
+which aids the developers when fixing the  reported  prob‐
+lem.   Please  include  this information when submitting a
+bug report.  Expanded output  can  be  obtained  with  the
+--verbose option.    
+    </action>
+    <action pkg="emerge" cmd="--check-news" string="News"
+    no_selection="1" icon="xffm/emblem_blueball">
+    
+Scan all repositories for relevant  unread  GLEP  42  news
+items, and display how many are found. See http://www.gen‐
+too.org/proj/en/glep/glep-0042.html.    
+    </action>
+    <action pkg="emerge" cmd="--clean"  string="Clean"
+    argument="[ebuild | tbz2file | file | @set | atom]" 
+    protected="1"  no_selection="1" command_options="1"
+     icon="xffm/stock_edit-clear">
+Cleans up the system by examining the  installed  packages
+and  removing  older  packages.   This  is accomplished by
+looking at  each  installed  package  and  separating  the
+installed versions by slot.  Clean will remove all but the
+most recently  installed  version  in  each  slot.   Clean
+should not remove unslotted packages.  Note: Most recently
+installed means most recent, not highest version.    
+    </action>
+    <action pkg="emerge" cmd="--config" argument="[ebuild | tbz2file | file | @set | atom]" 
+    protected="1" local="1" no_selection="1" command_options="1"
+     icon="xffm/emblem_run">
+Run package specific actions needed to be  executed  after
+the  emerge  process  has completed.  This usually entails
+configuration file setup or other similar setups that  the
+user may wish to run.    
+    </action>
+    <action pkg="emerge" cmd="--deselect" parameter="[y|n]" argument="[@set | atom]" 
+    protected="1" local="1" no_selection="1" command_options="1"
+     icon="xffm/emblem_run">
+Remove atoms and/or sets from the world file. This  action
+is  implied  by  uninstall  actions, including --depclean,
+--prune and --unmerge. Use --deselect=n in order  to  pre‐
+vent  uninstall actions from removing atoms from the world
+file.
+    </action>
+    <action pkg="emerge" cmd="--help" argument="subject"  string="Help"
+    no_selection="1"  icon="xffm/emblem_help">
+Displays help information for emerge.  Adding one  of  the
+additional  arguments listed above will give you more spe‐
+cific help information  on  that  subject.   The  internal
+emerge  help documentation is updated more frequently than
+this man page; check it out if  you  are  having  problems
+that this man page does not help resolve.
+    </action>
+    <action pkg="emerge" cmd="--list-sets"  string="List"
+    no_selection="1" icon="xffm/stock_index">
+Displays a list of available package sets.    
+    </action>
+    <action pkg="emerge" cmd="--metadata" protected="1" command_options="1"
+     icon="xffm/emblem_run">
+Transfers  metadata  cache from ${PORTDIR}/metadata/cache/
+to /var/cache/edb/dep/ as is normally done on the tail end
+of an rsync update using emerge --sync.  This process pop‐
+ulates the cache database that portage uses for pre-parsed
+lookups  of  package data.  It does not populate cache for
+the overlays listed in PORTDIR_OVERLAY.  In order to  gen‐
+erate  cache  for  overlays,  use --regen.  In versions of
+portage >=2.1.5 the --metadata action is totally  unneces‐
+sary unless the user has enabled FEATURES="metadata-trans‐
+fer" in make.conf(5).    
+    </action>
+    <action pkg="emerge" cmd="--regen" protected="1" command_options="1"
+     icon="xffm/emblem_run">
+Causes portage to check and update the dependency cache of
+all  ebuilds  in  the  portage tree.  The cache is used to
+speed up searches and the building  of  dependency  trees.
+This  command  is not recommended for rsync users as rsync
+updates the cache using server-side caches.  If you do not
+know the differences between a 'rsync user' and some other
+user, then you are a 'rsync user' :).  Rsync users  should
+simply run emerge --sync to regenerate the cache.  After a
+portage update, rsync users may find it convenient to  run
+emerge  --metadata to rebuild the cache as portage does at
+the end of a sync operation. In order to specify  parallel
+--regen   behavior,  use  the  --jobs  and  --load-average
+options. If you would  like  to  generate  and  distribute
+cache for use by others, use egencache(1).    
+    </action>
+    <action pkg="emerge" cmd="--resume" protected="1"  string="Resume"
+    icon="xffm/emblem_run">
+Resumes  the  most recent merge list that has been aborted
+due to an error.  This re-uses the options that were given
+with  the  original  command that's being resumed, and the
+user may also  provide  additional  options  when  calling
+--resume.   Please  note  that  this  operation  will only
+return an error on  failure.   If  there  is  nothing  for
+portage to do, then portage will exit with a message and a
+success condition. A resume list will persist until it has
+been  completed in entirety or until another aborted merge
+list replaces it.  The resume history is capable of  stor‐
+ing  two merge lists.  After one resume list completes, it
+is possible to invoke --resume  once  again  in  order  to
+resume an older list.    
+    </action>
+    <action pkg="emerge" cmd="--search" argument="somestring"
+    no_selection="1"
+    icon="xffm/emblem_find" string="Search">
+    
+    </action>
+    <action pkg="emerge" cmd="--searchdesc" argument="somestring" 
+    no_selection="1" icon="xffm/emblem_find">
+Matches the search string against the description field as
+              well  as  the  package name.  Take caution as the descrip‐
+              tions are also matched as regular expressions    
+    </action>
+    <action pkg="emerge" cmd="--sync" protected="1"  string="Update"
+    no_selection="1" icon="xffm/emblem_synchronized">
+This updates the portage  tree  that  is  located  in  the
+directory  that  the  PORTDIR  variable refers to (default
+location is /usr/portage). The SYNC variable specifies the
+remote  URI  from  which  files will be synchronized.  The
+PORTAGE_SYNC_STALE variable configures warnings  that  are
+shown when emerge --sync has not been executed recently.
+
+WARNING:  The  emerge  --sync  action  will  modify and/or
+delete files located inside the directory that the PORTDIR
+variable  refers  to  (default  location is /usr/portage).
+For more information, see the PORTDIR documentation in the
+make.conf(5) man page.
+
+NOTE: The emerge-webrsync program will download the entire
+portage tree as a  tarball,  which  is  much  faster  than
+emerge --sync for first time syncs.    
+    </action>
+    <action pkg="emerge" cmd="--version" no_selection="1"  string="Version"
+    icon="xffm/emblem_about">
+Displays the version number of emerge.
+    </action>
+ </emerge>
+</rodent_pkg>
