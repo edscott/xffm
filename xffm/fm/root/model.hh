@@ -21,7 +21,7 @@ public:
 	if (gtk_tree_model_get_iter_first (treeModel, &iter)){
 	    while (gtk_list_store_remove (GTK_LIST_STORE(treeModel),&iter));
 	}
-	addRootItem(treeModel);
+	// This is always in pathbar:  addRootItem(treeModel);
 	addHomeItem(treeModel);
 	addFstabItem(treeModel);
 #ifdef HAVE_LIBXML2
@@ -76,7 +76,7 @@ public:
 	auto name = "/";
 	auto utf_name = util_c::utf_string(_("Root Directory"));
 	auto icon_name = "system-file-manager";
-	auto highlight_name = "system-file-manager/NE/system-file-manager-symbolic/2.0/225";
+	auto highlight_name = "system-file-manager/NE/system-file-manager/2.0/225";
         auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
 	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
 	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
@@ -102,7 +102,7 @@ public:
 	auto name = g_get_home_dir();
 	auto utf_name = util_c::utf_string(_("Home Directory"));
 	auto icon_name = "user-home";
-	auto highlight_name = "user-home/NE/user-home-symbolic/2.0/225";
+	auto highlight_name = "user-home/NE/go-home/2.0/225";
         auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
 	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
 	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
@@ -131,7 +131,7 @@ public:
 	auto trash = g_build_filename(g_get_home_dir(), ".local/share/Trash", NULL);
 	if (g_file_test(trash, G_FILE_TEST_EXISTS))icon_name = "user-trash-full";
 	    
-	auto highlight_name = "user-trash/NE/user-trash-symbolic/2.0/225";
+	auto highlight_name = "user-trash/NE/user-trash/2.0/225";
         auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
 	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
 	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
@@ -157,7 +157,7 @@ public:
 	auto name = "xffm:fstab";
 	auto utf_name = util_c::utf_string(_("Disk Image Mounter"));
 	auto icon_name = "media-eject";
-	auto highlight_name = "media-eject/NE/drive-harddisk-system-symbolic/2.0/225";
+	auto highlight_name = "media-eject/NE/drive-harddisk/2.0/225";
         auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
 	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
 	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG); 
@@ -189,8 +189,9 @@ public:
 	auto name = "xffm:pkg";
 	auto utf_name = util_c::utf_string(_("Software Updater"));
 
-	auto icon_name = "emblem-downloads/SE/" PKG_EMBLEM "/2.0/225";
-	auto highlight_name = "emblem-downloads/NE/folder-download-symbolic/2.0/225/SE/" PKG_EMBLEM "/2.0/225";
+	//auto icon_name = "emblem-downloads/SE//2.0/225";
+	auto icon_name = "emblem-downloads";
+	auto highlight_name = "emblem-downloads/NE/" PKG_EMBLEM "/2.0/225";
 	auto pkg = PKG_EXEC;
 
         auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
@@ -234,7 +235,7 @@ public:
                 auto utf_name = util_c::utf_string(basename);
              
                 const gchar *icon_name = "emblem-documents/SE/bookmark-new/2.0/220";
-                const gchar *highlight_name = "emblem-documents/SE/bookmark-new/2.0/220/NE/user-bookmarks-symbolic/2.0/220";
+                const gchar *highlight_name = "emblem-documents/SE/bookmark-new/2.0/220/NE/folder-open/2.0/220";
                 auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
                 GdkPixbuf *normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
                 GdkPixbuf *highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,-48);   

@@ -14,7 +14,7 @@
     #define PKG_EXEC "pkg"
 #endif
 #ifndef PKG_EMBLEM
-# define PKG_EMBLEM "x-package-generic"
+# define PKG_EMBLEM "x-package-repository"
 # define PKG_EXEC "pkg"
 #endif
 
