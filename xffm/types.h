@@ -1,6 +1,22 @@
 #ifndef TYPES_H
 # define TYPES_H
 
+#ifdef HAVE_PACMAN
+    #define PKG_EMBLEM "emblem-archlinux"
+    #define PKG_EXEC "pacman"
+#endif 
+#ifdef HAVE_EMERGE 
+    #define PKG_EMBLEM "emblem-gentoo"
+    #define PKG_EXEC "emerge"
+#endif 
+#ifdef HAVE_PKG
+    #define PKG_EMBLEM "emblem-bsd"
+    #define PKG_EXEC "pkg"
+#endif
+#ifndef PKG_EMBLEM
+# define PKG_EMBLEM "x-package-generic"
+# define PKG_EXEC "pkg"
+#endif
 
 #include <sys/types.h>
 #include <sys/stat.h>

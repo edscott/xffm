@@ -6,17 +6,16 @@ namespace xf{
     template <class Type> class LocalView;
     template <class Type> class FstabView;
     template <class Type> class RootView;
-    //template <class Type> class PopUp;
+    template <class Type> class PkgView;
     template <class Type> class LocalPopUp;
     template <class Type> class FstabPopUp;
     template <class Type> class RootPopUp;
-    //template <class Type> class Model;
     template <class Type> class LocalModel;
     template <class Type> class FstabModel;
     template <class Type> class RootModel;
+    template <class Type> class PkgModel;
 }
 
-#include "root/model.hh"
 #include "root/view.hh"
 
 #include "local/model.hh"
@@ -27,6 +26,10 @@ namespace xf{
 #include "fstab/view.hh"
 #include "fstab/popup.hh"
 #include "fstab/monitor.hh"
+
+#include "pkg/view.hh"
+
+
 
 #include "iconview.hh"
 #include "treeview.hh"
@@ -103,6 +106,10 @@ public:
                 break;
             case (FSTAB_TYPE):
                 view->fstabMonitor_ = FstabView<Type>::loadModel(view);
+	        view->page()->updateStatusLabel(NULL);
+                break;
+            case (PKG_TYPE):
+                PkgView<Type>::loadModel(view);
 	        view->page()->updateStatusLabel(NULL);
                 break;
             default:
