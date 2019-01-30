@@ -4,14 +4,21 @@
 #ifdef HAVE_PACMAN
     #define PKG_EMBLEM "emblem-archlinux"
     #define PKG_EXEC "pacman"
+    #define PKG_SEARCH "pacman -Qs"
+    #define PKG_SEARCH_REPO "pacman -Ss"
+    #define PKG_LIST "pacman -Q"
 #endif 
 #ifdef HAVE_EMERGE 
     #define PKG_EMBLEM "emblem-gentoo"
     #define PKG_EXEC "emerge"
+    #define PKG_SEARCH "emerge fixme"
+    #define PKG_LIST "emerge fixme"
 #endif 
 #ifdef HAVE_PKG
     #define PKG_EMBLEM "emblem-bsd"
     #define PKG_EXEC "pkg"
+    #define PKG_SEARCH "pkg fixme"
+    #define PKG_LIST "pkg fixme"
 #endif
 #ifndef PKG_EMBLEM
 # define PKG_EMBLEM "x-package-repository"

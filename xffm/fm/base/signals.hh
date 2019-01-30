@@ -570,10 +570,10 @@ public:
 
         gtk_tree_model_get (treeModel, &iter, PATH, &path, -1);
 	
-        WARN("base-signals::activate: %s\n", path);
+        TRACE("base-signals::activate: %s\n", path);
         auto lastPath = g_strdup(view->path());
 	if (!view->loadModel(treeModel, tpath, path)){
-            DBG("base-signals:activate():reloading %s\n", lastPath);
+            TRACE("base-signals:activate():reloading %s\n", lastPath);
             view->loadModel(lastPath);
         }
 	g_free(path);

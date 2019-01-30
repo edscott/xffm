@@ -17,16 +17,20 @@ class PkgModel  {
     using util_c = Util<double>;
 public:
 
-
-    static gboolean
-    loadModel (GtkTreeModel *treeModel)
-    {
-	WARN("mk_tree_model:: model = %p\n", treeModel);
+    static void
+    clearModel(GtkTreeModel *treeModel){
         while (gtk_events_pending()) gtk_main_iteration();
  	GtkTreeIter iter;
 	if (gtk_tree_model_get_iter_first (treeModel, &iter)){
 	    while (gtk_list_store_remove (GTK_LIST_STORE(treeModel),&iter));
 	}
+    }
+
+    static gboolean
+    loadModel (GtkTreeModel *treeModel)
+    {
+	TRACE("mk_tree_model:: model = %p\n", treeModel);
+        clearModel(treeModel);
 	addXffmItem(treeModel);
 #ifdef HAVE_PKG
         addPortsItem(treeModel);      
@@ -38,53 +42,108 @@ public:
     }
 
     static gboolean
-    loadModel (GtkTreeModel *treeModel, GtkTreePath *tpath, const gchar *path)
+    loadModel (GtkTreeModel *treeModel, const gchar *path)
     {
-        WARN("pkg loadModel...\n");
-        if (!strncmp(path,"xffm:pkg",strlen("xffm:pkg"))) return FALSE;
-        WARN("pkg2 loadModel...\n");
+        if (strncmp(path,"xffm:pkg",strlen("xffm:pkg"))!=0) return FALSE;
         if (strcmp(path,"xffm:pkg")==0) return loadModel(treeModel);
-        WARN("pkg22 loadModel...\n");
         if (strcmp(path,"xffm:pkg:search")==0){
-        WARN("pkg222 loadModel...\n");
-            auto markup = 
-                g_strdup_printf("<span color=\"blue\" size=\"larger\"><b>%s</b></span>", "pacman -Ss");
-
-            auto entryResponse = new(EntryResponse<Type>)(GTK_WINDOW(mainWindow), _("Search"), NULL);
-            entryResponse->setResponseLabel(markup);
-            g_free(markup);
-            entryResponse->setEntryLabel(_("String"));
-            auto response = entryResponse->runResponse();
-            delete entryResponse;
-            TRACE("response=%s\n", response);
-            if (!response) return FALSE;
-            g_strstrip(response);
-            if (strlen(response)){
-                WARN("search string: %s\n", response);
-            }
-	    return TRUE;
+            return loadSearch(treeModel);
         }
 
 	return FALSE;
     }
 
+    static gboolean
+    loadSearch(GtkTreeModel *treeModel){
+        auto markup = 
+            g_strdup_printf("<span color=\"blue\" size=\"larger\"><b>%s %s %s</b></span>", 
+                    PKG_SEARCH, "&amp;&amp;", PKG_SEARCH_REPO);
+//                g_strdup_printf("<span color=\"blue\" size=\"larger\"><b>%s</b></span>", "pacman -Ss");
+
+        auto entryResponse = new(EntryResponse<Type>)(GTK_WINDOW(mainWindow), _("Search"), NULL);
+        entryResponse->setResponseLabel(markup);
+        g_free(markup);
+        entryResponse->setEntryLabel(_("String"));
+        auto response = entryResponse->runResponse();
+        delete entryResponse;
+        TRACE("response=%s\n", response);
+        if (!response) return FALSE;
+        g_strstrip(response);
+        gint count = 0;
+        if (strlen(response)){
+            TRACE("search string: %s\n", response);
+            //auto command = g_strdup_printf("%s", PKG_SEARCH);
+            auto command = g_strdup_printf("%s %s", PKG_SEARCH, response);
+            TRACE("command: %s\n", command);
+            // Installed stuff
+            GHashTable *installedHash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
+            GSList *pkg_list = get_command_listing(command, TRUE);
+            g_free(command);
+            pkg_list = g_slist_reverse(pkg_list);
+            for (auto l=pkg_list; l && l->data; l=l->next){
+                TRACE("installed: %s\n", (gchar *)l->data);
+                g_hash_table_insert(installedHash, l->data, GINT_TO_POINTER(1));
+            }
+            count += g_slist_length(pkg_list);
+            g_slist_free(pkg_list);
+            // Repository stuff
+            command = g_strdup_printf("%s %s", PKG_SEARCH_REPO, response);
+            pkg_list = get_command_listing(command, TRUE);
+            g_free(command);
+            count += g_slist_length(pkg_list);
+            if (count) {
+                clearModel(treeModel);
+                addSearchItem(treeModel);
+                pkg_list = g_slist_reverse(pkg_list);
+                for (auto l=pkg_list; l && l->data; l=l->next){
+                    auto icon_name = "package-x-generic/NW/" PKG_EMBLEM "/2.0/225";
+                    if (g_hash_table_lookup(installedHash,l->data)) {
+                        icon_name = "package-x-generic/NW/" "greenball" "/2.0/225";
+                        TRACE("installed: %s\n", (gchar *)l->data);
+                    } else {
+                        TRACE("repository: %s\n", (gchar *)l->data);
+                    }
+                    auto highlight_name = "package-x-generic/NW/" "dialog-question" "/2.0/225";
+                    auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
+                    auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
+                    auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
+                    GtkTreeIter iter;
+                    gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
+                    gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
+                            DISPLAY_NAME, (const gchar *)l->data,
+                            ICON_NAME, icon_name,
+                            PATH, l->data,
+                            TREEVIEW_PIXBUF, treeViewPixbuf, 
+                            DISPLAY_PIXBUF, normal_pixbuf,
+                            NORMAL_PIXBUF, normal_pixbuf,
+                            HIGHLIGHT_PIXBUF, highlight_pixbuf,
+                            TOOLTIP_TEXT,l->data,
+
+                            -1);
+                   g_free(l->data);
+                }
+                g_slist_free(pkg_list);
+                g_hash_table_destroy(installedHash);
+                return TRUE;
+            }
+            Gtk<Type>::quickHelp(mainWindow, _("No results"), "dialog-warning");
+            return FALSE;
+        } 
+        return FALSE;
+    }
 
     static void 
     addPackages(GtkTreeModel *treeModel){
-        const gchar *command;
-#ifdef HAVE_PACMAN
-        command = "pacman -Q";
-#endif
-        GSList *pkg_list = get_command_listing(command, FALSE);
+        GSList *pkg_list = get_command_listing(PKG_LIST, FALSE);
         pkg_list = g_slist_reverse(pkg_list);
 
-	auto icon_name = "package-x-generic/SE/" PKG_EMBLEM "/2.0/225";
-	auto highlight_name = "package-x-generic/SE/" PKG_EMBLEM "/2.0/225";
+	auto icon_name = "package-x-generic/NW/" "greenball" "/2.0/225";
+	auto highlight_name = "package-x-generic/NW/" "dialog-question" "/2.0/225";
         auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
 	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
 	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
         GtkTreeIter iter;
-            DBG("pacman: %s\n", "reloading pkg icons...");
+            TRACE("pacman: %s\n", "reloading pkg icons...");
         for (auto l=pkg_list; l && l->data; l=l->next){
             TRACE("pacman: %s\n", (gchar *)l->data);
             auto name = g_strconcat("xffm:pkg:",(const gchar *)l->data, NULL);
@@ -218,9 +277,6 @@ public:
 
     static GSList *add_pacman_search_item(GSList *pkg_list, const gchar *line){
         if (!strchr(line,'\n')) return pkg_list;
-     //   fprintf(stderr, "DBG:%s", line);
-    //     rfm_threaded_diagnostics(widgets_p,NULL,g_strdup(line));
-        //*strchr(line,'\n')=0;
         if (*line != ' '){
             gchar **a = g_strsplit(line, " ", -1);
             // check a
@@ -229,19 +285,6 @@ public:
             p++;
             auto path = g_strdup(p);
             pkg_list=g_slist_prepend(pkg_list,path);
-            /*
-            // local or remote?
-            gchar *c = g_strdup_printf("pacman -Q %s", p);
-            FILE *pipe = popen(c, "r");
-            g_free(c);
-            if (pipe){
-                gchar line[256];
-                memset (line, 0, 256);
-                if (fgets(line, 255, pipe)) SET_LOCAL_TYPE(en->type);
-                fclose(pipe);
-            }
-            g_hash_table_replace(installed_hash, g_strdup(en->path), g_strdup(line));
-            */
             g_strfreev(a);
         } else {
             //the rest is tooltip material   
@@ -294,8 +337,7 @@ public:
 
     static void io_search_stdout(void *user_data, void *line, int childFD){
         if (check_exit((const gchar *)line)){
-            //rfm_operate_stdout(user_data, line, childFD);
-                DBG("io_search_stdout(): %s\n", line);
+                TRACE("io_search_stdout(): %s\n", line);
             return;
         }
 #ifdef HAVE_PACMAN
@@ -317,8 +359,7 @@ public:
 
     static void io_thread_stdout(void *user_data, void *line, int childFD){
         if (check_exit((const gchar *)line)){
-            //rfm_operate_stdout(user_data, line, childFD);
-            DBG("io_thread_stdout(): %s\n", line);
+            TRACE("io_thread_stdout(): %s\n", line);
             return;
         }
 #ifdef HAVE_PACMAN
@@ -356,11 +397,6 @@ public:
         }
         //gchar **p=arg;for(;p && *p;p++)TRACE(stderr, "arg=\"%s\"\n", *p);
         l_condition=0;
-        //if (search) 
-          //  rfm_thread_run_argv_full (widgets_p, arg, FALSE, NULL, io_search_stdout, NULL, NULL);
-        //else 
-            //rfm_thread_run_argv_full (widgets_p, arg, FALSE, NULL, io_thread_stdout, NULL, NULL);
-        
         if (search) 
             Run<Type>::thread_runReap(NULL,(const gchar**)arg, io_search_stdout, NULL, NULL);
         else 
