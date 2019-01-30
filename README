@@ -1,3 +1,17 @@
+pending:
+    pkg module now shows packages and search results
+    
+    Pending, activate will simply install or uninstall depending on case.
+    pacman -Syy will run before any install, but not on uninstall.
+    
+    And that will be all
+    We will also remove the libxml2 dependency.
+
+
+When logo appears, if click on window before logo window disappears, we can have
+a glib thread crash
+
+
 remote connection to virtual FreeBSD:
 ** (xffm:69433): WARNING **: 11:32:08.249: AT-SPI: Could not obtain desktop path or name
 
