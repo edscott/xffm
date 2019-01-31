@@ -84,14 +84,6 @@ private:
         return FALSE;
     }
 
-/*    static gchar *
-    getBasicIconname(const gchar *path, struct stat *st){
-	auto mimetype = Mime<Type>::statMimeType(st);
-	TRACE("getBasicIconname(path, st) path=%s\n", path);
-
-	return getBasicIconname(path, mimetype);
-    }*/
-
     static gchar *
     getBasicIconname(const gchar *path, const gchar *mimetype){	
 	TRACE("getBasicIconname(path, mimetype) mimetype=%s\n", mimetype);
@@ -116,6 +108,13 @@ private:
 
         auto iconname = specificIconName(path, mimetype);
         TRACE("specificIconName %s: %s \n", path, mimetype);
+        if (iconname && !g_path_is_absolute(iconname)){
+            if (!Icons<Type>::iconThemeHasIcon(iconname)) {
+                DBG("LocalIcons::specificIconName %s not available\n", iconname);
+                g_free(iconname);
+                iconname=g_strdup("text-x-generic");
+            }
+        }
         if (iconname) return iconname;
         
         // Regular file:
@@ -146,7 +145,7 @@ private:
         if (strstr(mimetype, "font")) return g_strdup("font-x-generic");
         if (strstr(mimetype, "video")) return g_strdup("video-x-generic");
         if (strstr(mimetype, "script")) return g_strdup("text-x-script");
-        if (strstr(mimetype, "html")) return g_strdup("html-x-generic");
+        if (strstr(mimetype, "html")) return g_strdup("text-html");
         if (strstr(mimetype, "package")) return g_strdup("package-x-generic");
 	// office stuff
 	if (strstr(mimetype, "document")||strstr(mimetype, "application")){

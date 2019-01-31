@@ -123,7 +123,7 @@ public:
 		      GTK_ICON_LOOKUP_FORCE_SIZE,  // GtkIconLookupFlags flags,
 		      &error);
 	if (error) {
-	    ERROR("get_theme_pixbuf: %s\n", error->message);
+	    ERROR("icons.hh:get_theme_pixbuf: %s\n", error->message);
 	    g_error_free(error);
 	    return NULL;
 	} else if (theme_pixbuf) {
