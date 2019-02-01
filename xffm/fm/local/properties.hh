@@ -95,8 +95,8 @@ public:
 		    g_strdup(Mime<Type>::mimeType(entry->path));
 	    }
 	    errno=0;
-	    if (stat(entry->path, &(entry->st)) < 0){
-		DBG("properties.hh::Properties(): stat %s (%s)\n",
+	    if (lstat(entry->path, &(entry->st)) < 0){
+		DBG("properties.hh::Properties():  %s (%s)\n",
 		    entry->path, strerror(errno));
 		errno=0;
 		g_free(entry->basename);
@@ -109,7 +109,7 @@ public:
 		entryList = g_list_prepend(entryList, entry);
 	    }
 	}
-	entryList = g_list_reverse(entryList);
+	if (entryList) entryList = g_list_reverse(entryList);
 	//setup_properties_p(this);
 	Util<Type>::context_function(Properties<Type>::doDialog, this);
 

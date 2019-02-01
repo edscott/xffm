@@ -82,7 +82,9 @@ public:
     static gchar *statInfo(const gchar *path){
 	gchar *ls = g_find_program_in_path("ls");
 	gchar *result = NULL; 
-	if (ls && g_file_test(path,G_FILE_TEST_EXISTS)) {
+//	if (ls && (g_file_test(path,G_FILE_TEST_EXISTS)
+	if (ls )
+        {
 	    // borken links trouble: gchar *command = g_strdup_printf("%s -lhdH \'%s\'", ls, path);
 	    gchar *command = g_strdup_printf("%s -lhd \'%s\'", ls, path);
 	    result = pipeCommand(command);
