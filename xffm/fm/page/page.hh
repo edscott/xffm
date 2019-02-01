@@ -55,7 +55,7 @@ public:
 	parent_ = parent;
 	Notebook<Type>::reference_textview(this->output());
 	pageChild_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
-	pageLabel_ = GTK_LABEL(gtk_label_new ("foobar"));
+	pageLabel_ = GTK_LABEL(gtk_label_new (_("loading...")));
 	pageLabelBox_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
 	pageLabelSpinner_ = GTK_SPINNER(gtk_spinner_new());
 	pageLabelSpinnerBox_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));

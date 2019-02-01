@@ -133,7 +133,8 @@ public:
             if(strcmp (d->d_name, ".") == 0) continue;
             if (strcmp(path,"/")==0 && strcmp (d->d_name, "..") == 0) continue;
 	    // stat first 104 items.
-            xd_t *xd_p = get_xd_p(path, d, (count++ < 104));
+            xd_t *xd_p = get_xd_p(path, d, FALSE);
+            //xd_t *xd_p = get_xd_p(path, d, (count++ < 104));
             directory_list = g_list_prepend(directory_list, xd_p);
             if (heartbeat) {
                 (*heartbeat)++;
@@ -171,16 +172,11 @@ public:
         } else {
             xd_p->path = g_strconcat(directory, G_DIR_SEPARATOR_S, d->d_name, NULL);
         }
+        if (d->d_type == 0 || d->d_type == DT_UNKNOWN) withStat = TRUE;
+        else xd_p->d_type = d->d_type;
 
-	if (d->d_type == 0) withStat = TRUE;
-#ifdef HAVE_STRUCT_DIRENT_D_TYPE
-	if (d->d_type == DT_UNKNOWN) withStat = TRUE;
-#else
-	withStat = TRUE;
-#endif
-
-	TRACE("model::get_xd_p() path=%s d_type = %d\n",
-		xd_p->path,   xd_p->d_type);
+	TRACE("model::get_xd_p() path=%s d_type = %d withStat=%d\n",
+		xd_p->path,   xd_p->d_type, withStat);
 	if (withStat){
 	    xd_p->st = (struct stat *)calloc( 1, sizeof(struct stat));
 	    if (!xd_p->st){

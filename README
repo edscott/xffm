@@ -1,4 +1,9 @@
 pending:
+    bug: local Goto entry does not have bash completion, append slash to path, ant pathbar is broken
+    bug: treeview loading of /usr/share/texmf-dist/tex/latex is way too slow:
+         we need a modal dialog and insensitivize mainWindow, at least, with a 
+         update of files loaded in the dialog... This should be fired up at the
+         loadModel() level for all models.
     pkg module now shows packages and search results
     
     Pending, activate will simply install or uninstall depending on case.
