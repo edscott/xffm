@@ -1,8 +1,11 @@
 #ifndef XF_ROOTMODEL__HH
 # define XF_ROOTMODEL__HH
-
 namespace xf
 {
+
+template <class Type> class Emerge;
+template <class Type> class Pacman;
+template <class Type> class Pkg;
 
 template <class Type>
 class RootModel  {
@@ -24,9 +27,7 @@ public:
 	// This is always in pathbar:  addRootItem(treeModel);
 	addHomeItem(treeModel);
 	addFstabItem(treeModel);
-#ifdef HAVE_LIBXML2
-	addPkgItem(treeModel);
-#endif
+	PkgModel<Type>::addPkgItem(treeModel);	
 	addTrashItem(treeModel);
         addLocalBookmarks(treeModel);
 
@@ -101,8 +102,8 @@ public:
 	// Home
 	auto name = g_get_home_dir();
 	auto utf_name = util_c::utf_string(_("Home Directory"));
-	auto icon_name = "user-home";
-	auto highlight_name = "user-home/NE/go-home/2.0/225";
+	auto icon_name = "go-home";
+	auto highlight_name = "go-home/NE/folder-open/2.0/225";
         auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
 	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
 	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
@@ -131,7 +132,7 @@ public:
 	auto trash = g_build_filename(g_get_home_dir(), ".local/share/Trash", NULL);
 	if (g_file_test(trash, G_FILE_TEST_EXISTS))icon_name = "user-trash-full";
 	    
-	auto highlight_name = "user-trash/NE/user-trash/2.0/225";
+	auto highlight_name = g_strconcat(icon_name, "/NE/folder-open/2.0/225", NULL);
         auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
 	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
 	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
@@ -149,6 +150,7 @@ public:
 		-1);
 	g_free(name);
 	g_free(utf_name);
+	g_free(highlight_name);
     }
 
     static void
@@ -156,8 +158,8 @@ public:
  	GtkTreeIter iter;
 	auto name = "xffm:fstab";
 	auto utf_name = util_c::utf_string(_("Disk Image Mounter"));
-	auto icon_name = "media-eject";
-	auto highlight_name = "media-eject/NE/drive-harddisk/2.0/225";
+	auto icon_name = "media-eject/SE/drive-harddisk/2.0/225";
+	auto highlight_name = g_strconcat(icon_name, "/NE/folder-open/2.0/225",NULL);
         auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
 	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
 	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG); 
@@ -180,44 +182,9 @@ public:
 		TOOLTIP_TEXT,_("Mount local disks and devices"),
 		-1);
 	g_free(utf_name);
+	g_free(highlight_name);
     }
 
-#if defined HAVE_PACMAN || defined HAVE_EMERGE || defined HAVE_PKG
-    static void
-    addPkgItem(GtkTreeModel *treeModel){	
- 	GtkTreeIter iter;
-	auto name = "xffm:pkg";
-	auto utf_name = util_c::utf_string(_("Software Updater"));
-
-	//auto icon_name = "emblem-downloads/SE//2.0/225";
-	auto icon_name = "emblem-downloads";
-	auto highlight_name = "emblem-downloads/NE/" PKG_EMBLEM "/2.0/225";
-	auto pkg = PKG_EXEC;
-
-        auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
-	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
-	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48); 
-	auto tooltipText = g_strdup_printf("%s",
-		_("Add or remove software installed on the system"));
-
-	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
-	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
-		DISPLAY_NAME, pkg, //utf_name,
-                PATH, name,
-		ICON_NAME, icon_name,
-                TREEVIEW_PIXBUF, treeViewPixbuf, 
-		DISPLAY_PIXBUF, normal_pixbuf,
-		NORMAL_PIXBUF, normal_pixbuf,
-		HIGHLIGHT_PIXBUF, highlight_pixbuf,
-		TOOLTIP_TEXT,_("Add or remove software installed on the system"),
-		-1);
-	g_free(utf_name);
-    }
-#else
-#warning "Package manager only with pkg, emerge or pacman"
-    static void
-    addPkgItem(GtkTreeModel *treeModel){}
-#endif
 
     static void
     addLocalBookmarks(GtkTreeModel *treeModel){

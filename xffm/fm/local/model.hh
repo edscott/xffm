@@ -156,7 +156,7 @@ public:
         if (!directory_list) {
             ERROR("read_files_local(): Count failed! Directory not read!\n");
         }
-        directory_list = sort_directory_list (directory_list);
+        directory_list = sortList (directory_list);
         return (directory_list);
     }
 
@@ -287,7 +287,7 @@ public:
     }
 private:
     static GList *
-    sort_directory_list(GList *list){
+    sortList(GList *list){
         // Default sort order:
         if (Settings<Type>::getSettingInteger("LocalView", "Descending") <= 0) {
             return g_list_sort (list,compare_by_name);

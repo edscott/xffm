@@ -1,11 +1,20 @@
 #ifndef XF_PKGMODEL__HH
 # define XF_PKGMODEL__HH
-//#ifdef HAVE_LIBXML2
+
+#ifdef HAVE_EMERGE 
+# include "emerge.hh"
+#else
+# ifdef HAVE_PACMAN
+#  include "pacman.hh"
+# else
+#  include "pkg.hh"
+# endif
+#endif
 
 namespace xf
 {
 static pthread_mutex_t db_mutex = PTHREAD_MUTEX_INITIALIZER;
-static GSList *l_list=NULL;
+static GList *l_list=NULL;
 static pthread_cond_t l_signal = PTHREAD_COND_INITIALIZER;
 static pthread_mutex_t l_mutex = PTHREAD_MUTEX_INITIALIZER;
 static int l_condition=0;
@@ -16,6 +25,44 @@ class PkgModel  {
     using pixbuf_c = Pixbuf<double>;
     using util_c = Util<double>;
 public:
+
+    static void
+    addPkgItem(GtkTreeModel *treeModel){
+#if !defined HAVE_PACMAN && !defined HAVE_EMERGE && !defined HAVE_PKG
+# warning "Package manager only with pkg, emerge or pacman"
+	return;
+#endif
+ 	GtkTreeIter iter;
+	auto name = "xffm:pkg";
+	auto utf_name = util_c::utf_string(_("Software Updater"));
+
+	//auto icon_name = "emblem-downloads/SE//2.0/225";
+
+	auto icon_name = g_strconcat("emblem-downloads/SE/", PKG_EMBLEM, "/2.0/225", NULL);
+	auto highlight_name = g_strconcat(icon_name, "/NE/folder-open/2.0/225", NULL);
+
+        auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
+	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
+	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48); 
+	auto tooltipText = g_strdup_printf("%s",
+		_("Add or remove software installed on the system"));
+
+	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
+	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
+		DISPLAY_NAME, PKG_EXEC, //utf_name,
+                PATH, name,
+		ICON_NAME, icon_name,
+                TREEVIEW_PIXBUF, treeViewPixbuf, 
+		DISPLAY_PIXBUF, normal_pixbuf,
+		NORMAL_PIXBUF, normal_pixbuf,
+		HIGHLIGHT_PIXBUF, highlight_pixbuf,
+		TOOLTIP_TEXT,_("Add or remove software installed on the system"),
+		-1);
+	g_free(utf_name);
+	g_free(icon_name);
+	g_free(highlight_name);
+    }
+
 
     static void
     clearModel(GtkTreeModel *treeModel){
@@ -32,9 +79,14 @@ public:
 	TRACE("mk_tree_model:: model = %p\n", treeModel);
         clearModel(treeModel);
 	addXffmItem(treeModel);
-#ifdef HAVE_PKG
-        addPortsItem(treeModel);      
-        addCacheItem(treeModel);      
+#ifdef HAVE_EMERGE
+        Emerge<Type>::addDirectories(treeModel);      
+#else
+# ifdef HAVE_PACMAN
+        Pkg<Type>::addDirectories(treeModel);      
+# else // pkg
+        Pkg<Type>::addDirectories(treeModel);         
+# endif
 #endif
         addSearchItem(treeModel);
         addPackages(treeModel);
@@ -47,6 +99,7 @@ public:
         if (strncmp(path,"xffm:pkg",strlen("xffm:pkg"))!=0) return FALSE;
         if (strcmp(path,"xffm:pkg")==0) return loadModel(treeModel);
         if (strcmp(path,"xffm:pkg:search")==0){
+
             return loadSearch(treeModel);
         }
 
@@ -56,101 +109,129 @@ public:
     static gboolean
     loadSearch(GtkTreeModel *treeModel){
         auto markup = 
-            g_strdup_printf("<span color=\"blue\" size=\"larger\"><b>%s %s %s</b></span>", 
-                    PKG_SEARCH, "&amp;&amp;", PKG_SEARCH_REPO);
-//                g_strdup_printf("<span color=\"blue\" size=\"larger\"><b>%s</b></span>", "pacman -Ss");
+            g_strdup_printf("<span color=\"blue\" size=\"larger\"><b>%s</b></span>", 
+                    PKG_SEARCH);
 
         auto entryResponse = new(EntryResponse<Type>)(GTK_WINDOW(mainWindow), _("Search"), NULL);
         entryResponse->setResponseLabel(markup);
         g_free(markup);
         entryResponse->setEntryLabel(_("String"));
-        auto response = entryResponse->runResponse();
+        auto response = entryResponse->runResponseInsensitive();
         delete entryResponse;
+	auto dialog_p = (Dialog<Type> *)g_object_get_data(G_OBJECT(mainWindow), "xffm");
+	auto page = dialog_p->currentPageObject();
+	page->updateStatusLabel(_("Waiting for search results"));
+
+	while (gtk_events_pending())gtk_main_iteration();	
         TRACE("response=%s\n", response);
-        if (!response) return FALSE;
+        if (!response) {
+	    gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
+	    return FALSE;
+	}
         g_strstrip(response);
         gint count = 0;
         if (strlen(response)){
+
             TRACE("search string: %s\n", response);
-            //auto command = g_strdup_printf("%s", PKG_SEARCH);
-            auto command = g_strdup_printf("%s %s", PKG_SEARCH, response);
+	    gchar *command;
+	    GList *pkg_list;
+            GHashTable *installedHash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
+#ifdef HAVE_PACMAN
+            command = g_strdup_printf("%s %s", PKG_SEARCH_LOCAL, response);
             TRACE("command: %s\n", command);
             // Installed stuff
-            GHashTable *installedHash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
-            GSList *pkg_list = get_command_listing(command, TRUE);
+            pkg_list = get_command_listing(command, TRUE);
             g_free(command);
-            pkg_list = g_slist_reverse(pkg_list);
+            pkg_list = g_list_reverse(pkg_list);
             for (auto l=pkg_list; l && l->data; l=l->next){
                 TRACE("installed: %s\n", (gchar *)l->data);
                 g_hash_table_insert(installedHash, l->data, GINT_TO_POINTER(1));
             }
-            count += g_slist_length(pkg_list);
-            g_slist_free(pkg_list);
+            count += g_list_length(pkg_list);
+            g_list_free(pkg_list);
+#endif
             // Repository stuff
-            command = g_strdup_printf("%s %s", PKG_SEARCH_REPO, response);
+            command = g_strdup_printf("%s %s", PKG_SEARCH, response);
+	    TRACE("command=%s\n",command); 
             pkg_list = get_command_listing(command, TRUE);
             g_free(command);
-            count += g_slist_length(pkg_list);
+            count += g_list_length(pkg_list);
+
             if (count) {
                 clearModel(treeModel);
                 addSearchItem(treeModel);
-                pkg_list = g_slist_reverse(pkg_list);
+                pkg_list = g_list_reverse(pkg_list);
                 for (auto l=pkg_list; l && l->data; l=l->next){
-                    auto icon_name = "package-x-generic/NW/" PKG_EMBLEM "/2.0/225";
-                    if (g_hash_table_lookup(installedHash,l->data)) {
-                        icon_name = "package-x-generic/NW/" "greenball" "/2.0/225";
-                        TRACE("installed: %s\n", (gchar *)l->data);
-                    } else {
-                        TRACE("repository: %s\n", (gchar *)l->data);
-                    }
-                    auto highlight_name = "package-x-generic/NW/" "dialog-question" "/2.0/225";
-                    auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
-                    auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
-                    auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
-                    GtkTreeIter iter;
-                    gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
-                    gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
-                            DISPLAY_NAME, (const gchar *)l->data,
-                            ICON_NAME, icon_name,
-                            PATH, l->data,
-                            TREEVIEW_PIXBUF, treeViewPixbuf, 
-                            DISPLAY_PIXBUF, normal_pixbuf,
-                            NORMAL_PIXBUF, normal_pixbuf,
-                            HIGHLIGHT_PIXBUF, highlight_pixbuf,
-                            TOOLTIP_TEXT,l->data,
-
-                            -1);
-                   g_free(l->data);
+		    addResultPackage(treeModel, (const gchar *)l->data, 
+			    g_hash_table_lookup(installedHash,l->data));
+	            g_free(l->data);
                 }
-                g_slist_free(pkg_list);
-                g_hash_table_destroy(installedHash);
+                g_list_free(pkg_list);
+	    
+		gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
+		auto m = g_strdup_printf("%s %d", "Matching results...", count);
+		page->updateStatusLabel(m);
+		g_free(m);
+		g_hash_table_destroy(installedHash);
+		
                 return TRUE;
             }
+            g_hash_table_destroy(installedHash);
             Gtk<Type>::quickHelp(mainWindow, _("No results"), "dialog-warning");
-            return FALSE;
         } 
+	page->updateStatusLabel(NULL);
+	gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
         return FALSE;
+    }
+
+    static void
+    addResultPackage(GtkTreeModel *treeModel, const gchar *package, void *local){
+	auto icon_name = "package-x-generic/NW/" PKG_EMBLEM "/2.0/225";
+	auto highlight_name = "package-x-generic/NW/" PKG_EMBLEM "/2.0/225";
+	if (local) {
+	    icon_name = "package-x-generic/NW/" "greenball" "/2.0/225";
+	    highlight_name = "package-x-generic/NW/" "greenball" "/2.0/225";
+	}
+	auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
+	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
+	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
+	GtkTreeIter iter;
+	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
+	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
+		DISPLAY_NAME, strchr(package, '/')?
+		    strchr(package, '/')+1:package,
+		ICON_NAME, icon_name,
+		PATH, package,
+		TREEVIEW_PIXBUF, treeViewPixbuf, 
+		DISPLAY_PIXBUF, normal_pixbuf,
+		NORMAL_PIXBUF, normal_pixbuf,
+		HIGHLIGHT_PIXBUF, highlight_pixbuf,
+		TOOLTIP_TEXT,package,
+
+		-1);
     }
 
     static void 
     addPackages(GtkTreeModel *treeModel){
-        GSList *pkg_list = get_command_listing(PKG_LIST, FALSE);
-        pkg_list = g_slist_reverse(pkg_list);
+        GList *pkg_list = get_command_listing(PKG_LIST, FALSE);
+        pkg_list = g_list_reverse(pkg_list);
 
 	auto icon_name = "package-x-generic/NW/" "greenball" "/2.0/225";
-	auto highlight_name = "package-x-generic/NW/" "dialog-question" "/2.0/225";
+	auto highlight_name = "package-x-generic/NW/" "greenball" "/2.0/225";
         auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
 	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
 	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
         GtkTreeIter iter;
             TRACE("pacman: %s\n", "reloading pkg icons...");
         for (auto l=pkg_list; l && l->data; l=l->next){
+	    auto package = (const gchar *)l->data;
             TRACE("pacman: %s\n", (gchar *)l->data);
             auto name = g_strconcat("xffm:pkg:",(const gchar *)l->data, NULL);
 
             gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
             gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
-                    DISPLAY_NAME, (const gchar *)l->data,
+                    DISPLAY_NAME, strchr(package, '/')?
+				strchr(package, '/')+1:package,
                     ICON_NAME, icon_name,
                     PATH, name,
                     TREEVIEW_PIXBUF, treeViewPixbuf, 
@@ -164,7 +245,7 @@ public:
             g_free(l->data);
             g_free(name);
         }
-        g_slist_free(pkg_list);
+        g_list_free(pkg_list);
         
     }
 
@@ -201,54 +282,6 @@ public:
 	g_free(utf_name);
     }
 
-    static void
-    addPortsItem(GtkTreeModel *treeModel){
- 	GtkTreeIter iter;
-	// Home
-	auto name = g_get_home_dir();
-	auto icon_name = "folder/SE/" PKG_EMBLEM;
-	auto highlight_name = "folder/NE/document-open/2.0/225";
-        auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
-	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
-	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
-
-	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
-	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
-		DISPLAY_NAME, "ports",
-                PATH, "/usr/ports",
-                ICON_NAME, icon_name,
-                TREEVIEW_PIXBUF, treeViewPixbuf, 
-		DISPLAY_PIXBUF, normal_pixbuf,
-		NORMAL_PIXBUF, normal_pixbuf,
-		HIGHLIGHT_PIXBUF, highlight_pixbuf,
-		TOOLTIP_TEXT,"/usr/ports",
-		-1);
-    }
-
-
-    static void
-    addCacheItem(GtkTreeModel *treeModel){
- 	GtkTreeIter iter;
-	// Home
-	auto name = g_get_home_dir();
-	auto icon_name = "folder/SE/" PKG_EMBLEM;
-	auto highlight_name = "folder/NE/document-open/2.0/225";
-        auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
-	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
-	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
-
-	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
-	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
-		DISPLAY_NAME, "cache",
-                PATH, "/var/cache/pkg",
-		ICON_NAME, icon_name,
-                TREEVIEW_PIXBUF, treeViewPixbuf, 
-		DISPLAY_PIXBUF, normal_pixbuf,
-		NORMAL_PIXBUF, normal_pixbuf,
-		HIGHLIGHT_PIXBUF, highlight_pixbuf,
-		TOOLTIP_TEXT,"/var/cache/pkg",
-		-1);
-    }
     
    
     static void
@@ -275,47 +308,6 @@ public:
 		-1);
     }
 
-    static GSList *add_pacman_search_item(GSList *pkg_list, const gchar *line){
-        if (!strchr(line,'\n')) return pkg_list;
-        if (*line != ' '){
-            gchar **a = g_strsplit(line, " ", -1);
-            // check a
-            gchar *p = strchr(a[0], '/');
-            // check p
-            p++;
-            auto path = g_strdup(p);
-            pkg_list=g_slist_prepend(pkg_list,path);
-            g_strfreev(a);
-        } else {
-            //the rest is tooltip material   
-         /*   record_entry_t *en = pkg_list->data;
-            gchar *tip = g_hash_table_lookup(installed_hash, en->path);
-            gchar *new_tip = g_strconcat ((tip)?tip:"", line, NULL);
-            g_hash_table_replace(installed_hash, g_strdup(en->path), new_tip);*/
-        }
-        return pkg_list;
-    }
-
-#ifdef HAVE_PACMAN
-    static GSList *add_pacman_item(GSList *pkg_list, gchar *line){
-        if (!strchr(line,'\n')) return pkg_list;
-        TRACE("add_pacman_item(): %s", line);
-        *strchr(line,'\n')=0;
-        gchar **a = g_strsplit(line, " ", -1);
-        if (!a[1]) {
-            TRACE("add_pacman_item(): no vector...\n");
-            g_strfreev(a);
-            return pkg_list;
-        }
-        auto path = g_strdup(a[0]);
-        TRACE("add_pacman_item(): a0=%s, version=%s\n",a[0], a[1]);
-        
-        pkg_list=g_slist_prepend(pkg_list,path);
-        g_strfreev(a);
-        return pkg_list;
-    }
-#endif
-
 
 //	auto name = "xffm:pkg";
 //	auto utf_name = util_c::utf_string(_("Software Updater"));
@@ -340,20 +332,18 @@ public:
                 TRACE("io_search_stdout(): %s\n", line);
             return;
         }
-#ifdef HAVE_PACMAN
-        l_list = add_pacman_search_item(l_list, (const gchar *)line);
+#ifdef HAVE_EMERGE
+        l_list = Emerge<Type>::addSearchItems(l_list, (const gchar *)line);
         return;
+#else
+# ifdef HAVE_PACMAN
+        l_list = Pacman<Type>::addSearchItems(l_list, (const gchar *)line);
+        return;
+# else // pkg
+        l_list = Pkg<Type>::addSearchItems(l_list, (const gchar *)line);
+        return;
+# endif
 #endif
-#if 0
-        if (pkg) l_list = add_search_item(l_list, line, user_data);
-        else if (emerge) l_list = add_emerge_search_item(l_list, line, user_data);
-        else if (zypper) l_list = add_zypper_search_item(l_list, line, user_data);
-        else if (yum) l_list = add_yum_search_item(l_list, line, user_data);
-        else if (apt) l_list = add_apt_search_item(l_list, line, user_data);
-        else if (pacman) l_list = add_pacman_search_item(l_list, line, user_data);
-        else fprintf(stderr, "io_search_stdout(): no command process associated!\n");
-#endif
-        ERROR("io_search_stdout(): no command process associated!\n");
         
     }
 
@@ -362,21 +352,21 @@ public:
             TRACE("io_thread_stdout(): %s\n", line);
             return;
         }
-#ifdef HAVE_PACMAN
-        l_list = add_pacman_item(l_list, (gchar *)line);
+#ifdef HAVE_EMERGE 
+        l_list = Emerge<Type>::addPackage(l_list, (const gchar *)line);
         return;
+#else
+# ifdef HAVE_PACMAN
+        l_list = Pacman<Type>::addPackage(l_list, (const gchar *)line);
+        return;
+# else // pkg
+        l_list = Pacman<Type>::addPackage(l_list, (const gchar *)line);
+        return;
+# endif
 #endif
-#if 0
-        if (pkg) l_list = add_pkg_item(l_list, line);
-        else if (emerge) l_list = add_emerge_item(l_list, line);
-        else if (rpm) l_list = add_rpm_item(l_list, line);
-        else if (dpkg) l_list = add_apt_item(l_list, line);
-        else if (pacman) l_list = add_pacman_item(l_list, line);
-#endif
-        ERROR("io_thread_stdout(): no command process associated!\n");
     }
 
-    static GSList *
+    static GList *
     get_command_listing(const gchar *command, gboolean search){
         if (!command) return NULL;
         if (pthread_mutex_trylock(&db_mutex)!=0){
@@ -412,6 +402,8 @@ public:
         pthread_mutex_unlock(&(l_mutex));
         pthread_mutex_unlock(&db_mutex);
         TRACE("command listing routine is done...\n");
+
+	l_list = Util<Type>::sortList(l_list);
         return l_list;
     }
 

@@ -78,6 +78,13 @@ public:
 	}
 	auto type = BaseSignals<Type>::getViewType(path);
 	if (type < 0) return FALSE;
+
+	gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
+        auto wait = g_strdup_printf(_("Loading %s...%s"), path, _("Please Wait..."));
+	view->page()->updateStatusLabel(wait);
+	g_free(wait);
+	
+	while(gtk_events_pending())gtk_main_iteration();
         view->setViewType(type);
         view->setPath(path);
 	view->disableMonitor();
@@ -116,6 +123,7 @@ public:
                 ERROR("ViewType %d not defined.\n", view->viewType());
                 break;
         }
+	gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
     
         return TRUE;
     }

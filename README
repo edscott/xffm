@@ -1,3 +1,8 @@
+
+Rebuild of pkg system: top level should have groups. next installed packages.
+
+
+
 pending:
     bug: local Goto entry does not have bash completion, append slash to path, ant pathbar is broken
     bug: treeview loading of /usr/share/texmf-dist/tex/latex is way too slow:

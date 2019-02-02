@@ -22,6 +22,7 @@ public:
     dialogFull(GtkWindow *parent, const gchar *message, const gchar *icon, gint iconSize, gint delay){
 	// only one of these dialogs at a time...
 	if (timeoutDialog) return;
+	gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
 	
         if (!icon) icon = "emblem-important";
         if (!message) message = "<span size=\"larger\" color=\"blue\">Custom message markup appears <span color=\"red\">here</span></span>";
@@ -72,6 +73,7 @@ public:
           //  usleep(100000);
          }
 	 
+	 gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
 
 
          //void **arg = (void **)calloc(2, sizeof(void *));

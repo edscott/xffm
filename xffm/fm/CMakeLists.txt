@@ -4,14 +4,12 @@ include_directories(
     "./"
     "../"
     "${PROJECT_BINARY_DIR}" 
-    "${GTK3_INCLUDE_DIRS}" 
-    "${LIBXML2_INCLUDE_DIR}")
+    "${GTK3_INCLUDE_DIRS}")
 
 target_link_libraries(xffm 
     ${GTK3_LIBRARIES}
     ${X11_LIBRARIES}
     -lpthread -lrt 
-    ${LIBXML2_LIBRARIES}
     ${LIBMAGIC_LIBRARIES}
     ${FOO_LIBRARIES})
 

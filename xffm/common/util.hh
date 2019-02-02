@@ -9,10 +9,37 @@
 
 namespace xf
 {
-
+template <class Type> class Settings;
 template <class Type>
 class Util {
+    static gint
+    compareDown (const void *a, const void *b) {
+	auto aa = (const gchar *)a;
+	auto bb = (const gchar *)b;
+	if (strchr(aa,'/')) aa = strchr(aa,'/')+1;
+	if (strchr(bb,'/')) bb = strchr(bb,'/')+1;
+        return -strcasecmp((const gchar *)aa, (const gchar *)bb);
+    }
+    
+    static gint
+    compareUp (const void *a, const void *b) {
+	auto aa = (const gchar *)a;
+	auto bb = (const gchar *)b;
+	if (strchr(aa,'/')) aa = strchr(aa,'/')+1;
+	if (strchr(bb,'/')) bb = strchr(bb,'/')+1;
+        return strcasecmp((const gchar *)aa, (const gchar *)bb);
+    }
+    
 public:
+    static GList *
+    sortList(GList *list){
+        // Default sort order:
+        if (Settings<Type>::getSettingInteger("LocalView", "Descending") <= 0) {
+            return g_list_sort (list,compareDown);
+        } else {
+            return g_list_sort (list,compareUp);
+        }
+    }
 
     static gchar *md5sum(const gchar *file){
         gchar *md5sum = g_find_program_in_path("md5sum");
