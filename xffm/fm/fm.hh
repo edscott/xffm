@@ -45,6 +45,8 @@ namespace xf {
     static GtkMenu *localItemPopUp=NULL;
     static GtkMenu *rootPopUp=NULL;
     static GtkMenu *rootItemPopUp=NULL;
+    static GtkMenu *pkgPopUp=NULL;
+    static GtkMenu *pkgItemPopUp=NULL;
 
     GtkMenu *popUpArray[]={
 	fstabPopUp,
@@ -53,6 +55,8 @@ namespace xf {
 	localItemPopUp,
 	rootPopUp,
 	rootItemPopUp,
+	pkgPopUp,
+	pkgItemPopUp,
 	NULL
     };
 }

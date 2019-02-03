@@ -28,6 +28,7 @@ namespace xf{
 #include "fstab/monitor.hh"
 
 #include "pkg/view.hh"
+#include "pkg/popup.hh"
 
 
 

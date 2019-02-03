@@ -14,6 +14,7 @@
 namespace xf
 {
 static pthread_mutex_t db_mutex = PTHREAD_MUTEX_INITIALIZER;
+static gchar *s_info=NULL;
 static GList *l_list=NULL;
 static pthread_cond_t l_signal = PTHREAD_COND_INITIALIZER;
 static pthread_mutex_t l_mutex = PTHREAD_MUTEX_INITIALIZER;
@@ -83,7 +84,7 @@ public:
         Emerge<Type>::addDirectories(treeModel);      
 #else
 # ifdef HAVE_PACMAN
-        Pkg<Type>::addDirectories(treeModel);      
+        Pacman<Type>::addDirectories(treeModel);      
 # else // pkg
         Pkg<Type>::addDirectories(treeModel);         
 # endif
@@ -97,7 +98,7 @@ public:
     loadModel (GtkTreeModel *treeModel, const gchar *path)
     {
         if (strncmp(path,"xffm:pkg",strlen("xffm:pkg"))!=0) return FALSE;
-        if (strcmp(path,"xffm:pkg")==0) return loadModel(treeModel);
+        if (strcmp(path,"xffm:pkg")==0) return PkgModel<Type>::loadModel(treeModel);
         if (strcmp(path,"xffm:pkg:search")==0){
 
             return loadSearch(treeModel);
@@ -136,7 +137,8 @@ public:
 	    gchar *command;
 	    GList *pkg_list;
             GHashTable *installedHash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
-#ifdef HAVE_PACMAN
+#ifndef HAVE_EMERGE
+	    WARN("looking for installed first\n");
             command = g_strdup_printf("%s %s", PKG_SEARCH_LOCAL, response);
             TRACE("command: %s\n", command);
             // Installed stuff
@@ -144,7 +146,7 @@ public:
             g_free(command);
             pkg_list = g_list_reverse(pkg_list);
             for (auto l=pkg_list; l && l->data; l=l->next){
-                TRACE("installed: %s\n", (gchar *)l->data);
+                DBG("installed: %s\n", (gchar *)l->data);
                 g_hash_table_insert(installedHash, l->data, GINT_TO_POINTER(1));
             }
             count += g_list_length(pkg_list);
@@ -360,10 +362,52 @@ public:
         l_list = Pacman<Type>::addPackage(l_list, (const gchar *)line);
         return;
 # else // pkg
-        l_list = Pacman<Type>::addPackage(l_list, (const gchar *)line);
+        l_list = Pkg<Type>::addPackage(l_list, (const gchar *)line);
         return;
 # endif
 #endif
+    }
+
+
+    static void io_shortInfo(void *user_data, void *line, int childFD){
+        if (check_exit((const gchar *)line)){
+            TRACE("io_thread_stdout(): %s\n", line);
+            return;
+        }
+#ifdef HAVE_EMERGE 
+        s_info = Emerge<Type>::getShortInfo(s_info, (const gchar *)line);
+        return;
+#else
+# ifdef HAVE_PACMAN
+        s_info = Pacman<Type>::getShortInfo((const gchar *)line);
+        return;
+# else // pkg
+        s_info = Pkg<Type>::getShortInfo((const gchar *)line);
+	DBG("s_info = %s\n", s_info);
+        return;
+# endif
+#endif
+    }
+    
+    static gchar *
+    shortInfo(const gchar *package){
+        if (pthread_mutex_trylock(&db_mutex)!=0){
+            DBG(_("Currently busy\n"));
+            return NULL;
+        }
+	g_free(s_info);
+	const gchar *arg[]={"pkg", "rquery", "%c", package, NULL};
+        Run<Type>::thread_runReap(NULL,(const gchar**)arg, io_shortInfo, NULL, NULL);
+        pthread_mutex_lock(&(l_mutex));
+        if (!l_condition){
+            TRACE( "waiting for signal\n");
+            pthread_cond_wait(&(l_signal), &(l_mutex));
+            TRACE("got signal!\n");
+        }
+        pthread_mutex_unlock(&(l_mutex));
+        pthread_mutex_unlock(&db_mutex);
+	DBG("shortInfo, s_info=%s\n", s_info);
+	return s_info;
     }
 
     static GList *

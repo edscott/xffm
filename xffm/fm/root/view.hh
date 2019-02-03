@@ -9,20 +9,9 @@ template <class Type> class View;
 template <class Type> class LocalPopUp;
 template <class Type> class BasePopUp;
 template <class Type>
-class RootView  :
-    public RootModel<Type>
-{
+class RootPopUp  {
     public:
-    static gboolean
-    loadModel (View<Type> * view)
-    {
-        auto iconView = view->iconView();
-        gtk_icon_view_set_selection_mode (iconView,GTK_SELECTION_SINGLE); 
-        g_object_set_data(G_OBJECT(iconView), "iconViewType", (void *)"RootView");
-	view->disableDnD();	
-	RootModel<Type>::loadModel(view->treeModel());
-	return TRUE;
-    }
+	
     static GtkMenu *popUpItem(void){
         if (!rootItemPopUp) rootItemPopUp = createItemPopUp();   
         return rootItemPopUp;
@@ -56,8 +45,6 @@ class RootView  :
         //gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(w), isTreeView);
 
     }
-
-
      
 private:
 
@@ -72,6 +59,7 @@ private:
         //decorateEditItems(localPopUp);
         return rootPopUp;        
     }  
+
     static GtkMenu *createItemPopUp(void){
 	menuItem_t item[]=
         {
@@ -126,6 +114,24 @@ private:
 	view->reloadModel();
     }
 	
+
+
+};
+template <class Type>
+class RootView  :
+    public RootModel<Type>
+{
+    public:
+    static gboolean
+    loadModel (View<Type> * view)
+    {
+        auto iconView = view->iconView();
+        gtk_icon_view_set_selection_mode (iconView,GTK_SELECTION_SINGLE); 
+        g_object_set_data(G_OBJECT(iconView), "iconViewType", (void *)"RootView");
+	view->disableDnD();	
+	RootModel<Type>::loadModel(view->treeModel());
+	return TRUE;
+    }
 
 };
 }

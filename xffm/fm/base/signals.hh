@@ -28,7 +28,13 @@ template <class Type> class View;
 template <class Type> class RootView;
 template <class Type> class FstabView;
 template <class Type> class LocalView;
+template <class Type> class PkgView;
 template <class Type> class BaseModel;
+
+template <class Type> class PkgPopUp;
+template <class Type> class LocalPopUp;
+template <class Type> class RootPopUp;
+template <class Type> class FstabPopUp;
 
 static gboolean dragOn_=FALSE;
 static gboolean rubberBand_=FALSE;
@@ -422,7 +428,7 @@ public:
 
     static gboolean 
     viewPopUp(View<Type> *view, GdkEventButton  *event){
-        TRACE("button press event: button 3 should do popup, as well as longpress...\n");
+        TRACE("Base::signals::button press event: button 3 should do popup, as well as longpress...\n");
         gboolean retval = FALSE;
         GtkMenu *menu = NULL;
         gchar *path = NULL;
@@ -441,8 +447,13 @@ public:
             gtk_tree_model_get_iter(view->treeModel(), &iter, 
                     (GtkTreePath *)selectionList->data);
             gtk_tree_model_get(view->treeModel(), &iter, PATH, &path, -1);
-            TRACE("selected path is %s\n", path);
-        }
+            TRACE("Base::signals::selected path is %s\n", path);
+	    //hack here
+	    //auto t = getViewType(path);
+	    //view->setViewType(t);
+	}
+
+	
         gboolean items = (g_list_length(selectionList) >0);
         setMenuData(view, path, items);
         menu = configureMenu(view, items);
@@ -466,18 +477,23 @@ public:
         switch (view->viewType()){
             case (ROOTVIEW_TYPE):
                  menu = (items)?
-                    RootView<Type>::popUpItem():
-                    RootView<Type>::popUp();
+                    RootPopUp<Type>::popUpItem():
+                    RootPopUp<Type>::popUp();
                 break;
             case (LOCALVIEW_TYPE):
                 menu = (items)?
-                    LocalView<Type>::popUpItem():
-                    LocalView<Type>::popUp();
+                    LocalPopUp<Type>::popUpItem():
+                    LocalPopUp<Type>::popUp();
                 break;
             case (FSTAB_TYPE):
                  menu = (items)?
-                    FstabView<Type>::popUpItem():
-                    FstabView<Type>::popUp();
+                    FstabPopUp<Type>::popUpItem():
+                    FstabPopUp<Type>::popUp();
+                break;
+            case (PKG_TYPE):
+                 menu = (items)?
+                    PkgPopUp<Type>::popUpItem():
+                    PkgPopUp<Type>::popUp();
                 break;
             default:
                 ERROR("ViewType %d not defined.\n", view->viewType());
@@ -499,28 +515,37 @@ public:
             case (ROOTVIEW_TYPE):
                 if (items) {
                     menu = rootItemPopUp;
-                    RootView<Type>::resetMenuItems();
+                    RootPopUp<Type>::resetMenuItems();
                 } else {
                     menu = rootPopUp;
-                    RootView<Type>::resetPopup();
+                    RootPopUp<Type>::resetPopup();
                 }
                 break;
             case (LOCALVIEW_TYPE):
                 if (items) {
                     menu = localItemPopUp;
-                    LocalView<Type>::resetMenuItems();
+                    LocalPopUp<Type>::resetMenuItems();
                 } else {
                     menu = localPopUp;
-                    LocalView<Type>::resetLocalPopup();
+                    LocalPopUp<Type>::resetLocalPopup();
                 }
                 break;
             case (FSTAB_TYPE):
                 if (items) {
                     menu = fstabItemPopUp;
-                    FstabView<Type>::resetMenuItems();
+                    FstabPopUp<Type>::resetMenuItems();
                 } else {
                     menu = fstabPopUp;
-                    FstabView<Type>::resetPopup();
+                    FstabPopUp<Type>::resetPopup();
+                }
+                break;
+            case (PKG_TYPE):
+                if (items) {
+                    menu = pkgItemPopUp;
+                    PkgPopUp<Type>::resetMenuItems();
+                } else {
+                    menu = pkgPopUp;
+                    PkgPopUp<Type>::resetPopup();
                 }
                 break;
             default:

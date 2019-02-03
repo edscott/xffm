@@ -6,7 +6,6 @@ namespace xf
 template <class Type> class Emerge;
 template <class Type> class Pacman;
 template <class Type> class Pkg;
-
 template <class Type>
 class RootModel  {
 

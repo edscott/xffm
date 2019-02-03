@@ -85,7 +85,7 @@ public:
         return pkg_list;
     }
     
-    static GList *addPackage(GList *pkg_list, gchar *line){
+    static GList *addPackage(GList *pkg_list, const gchar *line){
         if (!strchr(line,'\n')) return pkg_list;
         TRACE("add_pacman_item(): %s", line);
         *strchr(line,'\n')=0;

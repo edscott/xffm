@@ -34,6 +34,7 @@ public:
 	gchar *markup = g_strdup_printf("<span color=\"blue\" size=\"large\">%s</span>", text);
 	Gtk<Type>::menu_item_content(title, iconName, markup, -48);
 	g_free(markup);
+        gtk_widget_set_sensitive(GTK_WIDGET(title), FALSE);
         gtk_widget_show(GTK_WIDGET(title));
     }
     static void changeTitle(GtkMenu *menu, const gchar *markup)
@@ -48,6 +49,7 @@ public:
 
 	TRACE("iconName=%s, markup=%s\n", iconName, markup);
 	gtk_c::menu_item_content(title, iconName, markup, -48);
+        gtk_widget_set_sensitive(GTK_WIDGET(title), FALSE);
         gtk_widget_show(GTK_WIDGET(title));
     }
 
@@ -83,6 +85,7 @@ public:
 	gtk_c::menu_item_content(title, iconName, markup, -48);
 	g_free(statLine);
 	g_free(markup);
+        gtk_widget_set_sensitive(GTK_WIDGET(title), FALSE);
         gtk_widget_show(GTK_WIDGET(title));
     }
 
