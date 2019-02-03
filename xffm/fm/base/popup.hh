@@ -10,17 +10,6 @@ class BasePopUp {
     using pixbuf_icons_c = Icons<double>;
     
 public: 
-    static void // clearKeys should not include path.
-    clearKeys(GtkMenu *menu){
-      const gchar *keys[] = {"tooltipText", "displayName",  "mimetype", "fileInfo", "iconName", NULL};
-	const gchar **q;
-	for (q=keys; q && *q; q++){
-	    auto cleanup = g_object_get_data(G_OBJECT(menu), *q);
-            TRACE("g_free:%s --> %p\n", *q, cleanup);
-	    g_free(cleanup);
-            g_object_set_data(G_OBJECT(menu), *q, NULL);
-	}
-    }
 
     static void changeTitle(GtkMenu *menu, const gchar *text, const gchar *iconName)
     {
@@ -69,13 +58,9 @@ public:
         auto mimetype = (gchar *)g_object_get_data(G_OBJECT(menu), "mimetype");
         auto fileInfo = (gchar *)g_object_get_data(G_OBJECT(menu), "fileInfo");
         auto display_name = (gchar *)g_object_get_data(G_OBJECT(menu), "displayName");
-	gchar *statLine=NULL;
-        if (g_file_test(path, G_FILE_TEST_EXISTS)){
-            statLine = util_c::statInfo(path);
-        }
+        auto statLine = (gchar *)g_object_get_data(G_OBJECT(menu), "statLine");
 
-
-	gchar *markup = g_strdup_printf("<span size=\"larger\" color=\"red\"><b><i>%s</i></b></span><span color=\"#aa0000\">%s%s</span>\n<span color=\"blue\">%s</span>\n<span color=\"green\">%s</span>", 
+	gchar *markup = g_strdup_printf("<span color=\"red\"><b><i>%s</i></b></span><span color=\"#aa0000\">%s%s</span>\n<span color=\"blue\">%s</span>\n<span color=\"green\">%s</span>", 
 		display_name, 
 		mimetype?": ":"",
 		mimetype?mimetype:"",
@@ -83,7 +68,6 @@ public:
 		statLine?statLine:"");
 	TRACE("iconName=%s, markup=%s\n", iconName, markup);
 	gtk_c::menu_item_content(title, iconName, markup, -48);
-	g_free(statLine);
 	g_free(markup);
         gtk_widget_set_sensitive(GTK_WIDGET(title), FALSE);
         gtk_widget_show(GTK_WIDGET(title));

@@ -369,47 +369,6 @@ public:
     }
 
 
-    static void io_shortInfo(void *user_data, void *line, int childFD){
-        if (check_exit((const gchar *)line)){
-            TRACE("io_thread_stdout(): %s\n", line);
-            return;
-        }
-#ifdef HAVE_EMERGE 
-        s_info = Emerge<Type>::getShortInfo(s_info, (const gchar *)line);
-        return;
-#else
-# ifdef HAVE_PACMAN
-        s_info = Pacman<Type>::getShortInfo((const gchar *)line);
-        return;
-# else // pkg
-        s_info = Pkg<Type>::getShortInfo((const gchar *)line);
-	DBG("s_info = %s\n", s_info);
-        return;
-# endif
-#endif
-    }
-    
-    static gchar *
-    shortInfo(const gchar *package){
-        if (pthread_mutex_trylock(&db_mutex)!=0){
-            DBG(_("Currently busy\n"));
-            return NULL;
-        }
-	g_free(s_info);
-	const gchar *arg[]={"pkg", "rquery", "%c", package, NULL};
-        Run<Type>::thread_runReap(NULL,(const gchar**)arg, io_shortInfo, NULL, NULL);
-        pthread_mutex_lock(&(l_mutex));
-        if (!l_condition){
-            TRACE( "waiting for signal\n");
-            pthread_cond_wait(&(l_signal), &(l_mutex));
-            TRACE("got signal!\n");
-        }
-        pthread_mutex_unlock(&(l_mutex));
-        pthread_mutex_unlock(&db_mutex);
-	DBG("shortInfo, s_info=%s\n", s_info);
-	return s_info;
-    }
-
     static GList *
     get_command_listing(const gchar *command, gboolean search){
         if (!command) return NULL;

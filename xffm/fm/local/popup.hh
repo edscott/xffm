@@ -200,7 +200,6 @@ public:
     static void
     resetLocalPopup(void) {
         auto view = (View<Type> *)g_object_get_data(G_OBJECT(localPopUp), "view");
-        BasePopUp<Type>::clearKeys(localPopUp);
 
         // Path is set on buttonpress signal...
         //auto path = (const gchar *)g_object_get_data(G_OBJECT(localPopUp), "path");
@@ -227,12 +226,16 @@ public:
         //w = GTK_WIDGET(g_object_get_data(G_OBJECT(localPopUp), "View as list"));
         //gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(w), isTreeView);
 
+	Util<Type>::resetObjectData(G_OBJECT(localPopUp), "iconName", g_strdup("folder"));
+	Util<Type>::resetObjectData(G_OBJECT(localPopUp), "displayName", util_c::valid_utf_pathstring(view->path()));
+	Util<Type>::resetObjectData(G_OBJECT(localPopUp), "path", g_strdup(view->path()));
+	Util<Type>::resetObjectData(G_OBJECT(localPopUp), "mimetype", Mime<Type>::mimeType(view->path()));
+	Util<Type>::resetObjectData(G_OBJECT(localPopUp), "fileInfo", util_c::fileInfo(view->path()));
+	gchar *statLine;
+	if (g_file_test(view->path(), G_FILE_TEST_EXISTS)) statLine  = util_c::statInfo(view->path());
+	else statLine = g_strdup(strerror(ENOENT));
+	Util<Type>::resetObjectData(G_OBJECT(localPopUp), "statLine", statLine);
 
-	g_object_set_data(G_OBJECT(localPopUp), "iconName", g_strdup("folder"));
-	g_object_set_data(G_OBJECT(localPopUp), "displayName", util_c::valid_utf_pathstring(view->path()));
-	g_object_set_data(G_OBJECT(localPopUp), "path", g_strdup(view->path()));
-	g_object_set_data(G_OBJECT(localPopUp), "mimetype", Mime<Type>::mimeType(view->path()));
-	g_object_set_data(G_OBJECT(localPopUp), "fileInfo", util_c::fileInfo(view->path()));
 	BasePopUp<Type>::changeTitle(localPopUp);
     }
 
@@ -430,7 +433,6 @@ private:
 
     static void 
     setPath(View<Type> * view){
-        BasePopUp<Type>::clearKeys(localItemPopUp);
 
         GtkTreeIter iter;
         if (g_list_length(view->selectionList()) > 1) {
@@ -447,11 +449,12 @@ private:
                 paths = g;
             }
             gchar *fileInfo = g_strdup_printf("%s %d", _("Files:"), g_list_length(view->selectionList()));
-            g_object_set_data(G_OBJECT(localItemPopUp), "fileInfo", fileInfo);
-            g_object_set_data(G_OBJECT(localItemPopUp), "iconName", g_strdup("edit-copy"));
-            g_object_set_data(G_OBJECT(localItemPopUp), "displayName", g_strdup(_("Multiple selections")));
-            g_object_set_data(G_OBJECT(localItemPopUp), "path", paths);
-            g_object_set_data(G_OBJECT(localItemPopUp), "mimetype", g_strdup(""));
+	    Util<Type>::resetObjectData(G_OBJECT(localItemPopUp), "fileInfo", fileInfo);
+	    Util<Type>::resetObjectData(G_OBJECT(localItemPopUp), "iconName", g_strdup("edit-copy"));
+	    Util<Type>::resetObjectData(G_OBJECT(localItemPopUp), "displayName", g_strdup(_("Multiple selections")));
+	    Util<Type>::resetObjectData(G_OBJECT(localItemPopUp), "path", paths);
+	    Util<Type>::resetObjectData(G_OBJECT(localItemPopUp), "mimetype", g_strdup(""));
+	    Util<Type>::resetObjectData(G_OBJECT(localItemPopUp), "statLine", g_strdup(""));
             return;
         }
 

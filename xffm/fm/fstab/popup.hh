@@ -66,7 +66,6 @@ class FstabPopUp {
 
     static void 
     resetItemPopup(View<Type> *view, const gchar *path) {
-        BasePopUp<Type>::clearKeys(fstabItemPopUp);
         GtkTreeIter iter;
 	if (!gtk_tree_model_get_iter (view->treeModel(), &iter, 
                     (GtkTreePath *)view->selectionList()->data)) 
@@ -92,12 +91,12 @@ class FstabPopUp {
 	gchar *g = util_c::fileInfo(path);
 	gchar *fileInfo = g_strconcat(g, ": ", (tooltipText)?tooltipText:"", NULL);
 	g_free(g);
+	Util<Type>::resetObjectData(G_OBJECT(fstabItemPopUp), "iconName", iconName);
+	Util<Type>::resetObjectData(G_OBJECT(fstabItemPopUp), "displayName", displayName);
+	Util<Type>::resetObjectData(G_OBJECT(fstabItemPopUp), "mimetype", mimetype);
+	Util<Type>::resetObjectData(G_OBJECT(fstabItemPopUp), "fileInfo", util_c::fileInfo(path));
+	Util<Type>::resetObjectData(G_OBJECT(fstabItemPopUp), "tooltipText", tooltipText);
 
-	g_object_set_data(G_OBJECT(fstabItemPopUp), "iconName", iconName);
-	g_object_set_data(G_OBJECT(fstabItemPopUp), "displayName", displayName);
-	g_object_set_data(G_OBJECT(fstabItemPopUp), "mimetype", mimetype);
-	g_object_set_data(G_OBJECT(fstabItemPopUp), "fileInfo", util_c::fileInfo(path));
-	g_object_set_data(G_OBJECT(fstabItemPopUp), "tooltipText", tooltipText);
  	// Set title element
         BasePopUp<Type>::changeTitle(fstabItemPopUp, tooltipText);
     }

@@ -31,6 +31,14 @@ class Util {
     }
     
 public:
+
+    static void
+    resetObjectData(GObject *object, const gchar *id, gchar *newString){
+	auto oldString = g_object_get_data(object, id);
+	g_free(oldString);
+	g_object_set_data(object, id, (void *) newString);
+    }
+
     static GList *
     sortList(GList *list){
         // Default sort order:
