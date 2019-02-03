@@ -19,6 +19,12 @@
 #define PKG_GROUP "pkg query %o"
 #define PKG_REMOTE_GROUP "pkg query %o"
 
+#define PKG_INSTALL "sudo -A pkg install --yes"
+#define PKG_INSTALL_DRYRUN "sudo -A pkg install --yes --dry-run"
+#define PKG_UNINSTALL "sudo -A pkg delete --yes"
+#define PKG_UNINSTALL_DRYRUN "sudo -A pkg delete --yes --dry-run"
+#define PKG_FETCH "sudo -A pkg install --yes --fetch-only"
+
 namespace xf {
 template <class Type>
 class Pkg {
