@@ -131,7 +131,13 @@ public:
 
     gboolean loadModel(GtkTreeModel *treeModel, const GtkTreePath *tpath, 
 	    const gchar *path){
-        TRACE("generalized view: loadModel\n");
+        TRACE("generalized view: loadModel: %s\n", path);
+	if (strncmp(path, "xffm:pkg", strlen("xffm:pkg"))==0){
+	    if(strcmp(path, "xffm:pkg:search") == 0) return PkgModel<Type>::loadModel(treeModel, path);
+	    if(strcmp(path, "xffm:pkg")==0) return PkgModel<Type>::loadModel(treeModel, "xffm:pkg");
+	    TRACE("fm/view.hh: loadModel: %s item activate?\n", path);
+	    return this->loadModel(path);;
+	}
         if (g_file_test(path, G_FILE_TEST_EXISTS)){
 	    TRACE("%s is  valid path\n", path);
 	    if (!g_file_test(path, G_FILE_TEST_IS_DIR)){
@@ -146,10 +152,9 @@ public:
 		return LocalView<Type>::item_activated(this, treeModel, tpath, path);
 	    }
 	} else {
-            if(strcmp(path, "xffm:pkg:search") == 0) return PkgModel<Type>::loadModel(treeModel, path);
-            if(strcmp(path, "xffm:pkg"))
-                WARN("fm/view.hh: loadModel: %s is not valid path\n", path);
-        }
+	    DBG("fm/view.hh: loadModel: file:%s does not exist\n", path);
+            
+	}
 	return this->loadModel(path);
     }
 

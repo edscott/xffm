@@ -138,7 +138,7 @@ public:
 	    GList *pkg_list;
             GHashTable *installedHash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
 #ifndef HAVE_EMERGE
-	    WARN("looking for installed first\n");
+	    TRACE("looking for installed first\n");
             command = g_strdup_printf("%s %s", PKG_SEARCH_LOCAL, response);
             TRACE("command: %s\n", command);
             // Installed stuff
@@ -146,7 +146,7 @@ public:
             g_free(command);
             pkg_list = g_list_reverse(pkg_list);
             for (auto l=pkg_list; l && l->data; l=l->next){
-                DBG("installed: %s\n", (gchar *)l->data);
+                TRACE("installed: %s\n", (gchar *)l->data);
                 g_hash_table_insert(installedHash, l->data, GINT_TO_POINTER(1));
             }
             count += g_list_length(pkg_list);
@@ -198,12 +198,13 @@ public:
 	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
 	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
 	GtkTreeIter iter;
+	auto path = g_strconcat("xffm:pkg:", package, NULL);
 	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
 	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
 		DISPLAY_NAME, strchr(package, '/')?
 		    strchr(package, '/')+1:package,
 		ICON_NAME, icon_name,
-		PATH, package,
+		PATH, path,
 		TREEVIEW_PIXBUF, treeViewPixbuf, 
 		DISPLAY_PIXBUF, normal_pixbuf,
 		NORMAL_PIXBUF, normal_pixbuf,
@@ -211,6 +212,7 @@ public:
 		TOOLTIP_TEXT,package,
 
 		-1);
+	g_free(path);
     }
 
     static void 
