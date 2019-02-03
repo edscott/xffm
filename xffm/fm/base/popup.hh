@@ -59,6 +59,7 @@ public:
         auto fileInfo = (gchar *)g_object_get_data(G_OBJECT(menu), "fileInfo");
         auto display_name = (gchar *)g_object_get_data(G_OBJECT(menu), "displayName");
         auto statLine = (gchar *)g_object_get_data(G_OBJECT(menu), "statLine");
+	if (fileInfo && strchr(fileInfo, '&')) *(strchr(fileInfo, '&')) = '+';
 
 	gchar *markup = g_strdup_printf("<span color=\"red\"><b><i>%s</i></b></span><span color=\"#aa0000\">%s%s</span>\n<span color=\"blue\">%s</span>\n<span color=\"green\">%s</span>", 
 		display_name, 

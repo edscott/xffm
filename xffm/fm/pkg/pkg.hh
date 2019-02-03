@@ -13,7 +13,7 @@
 #define PKG_VERSION "pkg query %v"
 #define PKG_REMOTE_VERSION "pkg rquery %v"
 #define PKG_TOOLTIPTEXT "pkg query %e"
-#define PKG_REMOTE_TOOLTIPTEXT "pkg query %e"
+#define PKG_REMOTE_TOOLTIPTEXT "pkg rquery %e"
 #define PKG_WEB "pkg query %w"
 #define PKG_REMOTE_WEB "pkg query %w"
 #define PKG_GROUP "pkg query %o"

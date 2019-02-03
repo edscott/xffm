@@ -68,12 +68,12 @@ public:
          time_t now = time(NULL);
 	 zap = FALSE;
 	 timeoutDialog = dialog;
+         while (gtk_events_pending()) gtk_main_iteration();
          while (time(NULL) < now + delay && !zap) {
-            while (gtk_events_pending()) gtk_main_iteration();
+          //  while (gtk_events_pending()) gtk_main_iteration();
           //  usleep(100000);
          }
 	 
-	 gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
 
 
          //void **arg = (void **)calloc(2, sizeof(void *));

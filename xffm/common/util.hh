@@ -132,18 +132,34 @@ public:
 	}
 	return NULL;
     }
+#define PAGE_LINE 256
 
     static gchar *pipeCommand(const gchar *command){
 	FILE *pipe = popen (command, "r");
-	gchar *extract=NULL;
 	if(pipe) {
-#define PAGE_LINE 256
 	    gchar line[PAGE_LINE];
 	    line[PAGE_LINE - 1] = 0;
 	    fgets (line, PAGE_LINE - 1, pipe);
 	    if (strchr(line, '\n'))*(strchr(line, '\n'))=0;
 	    pclose (pipe);
 	    return g_strdup(line);
+	} 
+	return NULL;
+    }
+
+    static gchar *pipeCommandFull(const gchar *command){
+	FILE *pipe = popen (command, "r");
+	if(pipe) {
+	    gchar *result=g_strdup("");
+	    gchar line[PAGE_LINE];
+	    while (fgets (line, PAGE_LINE - 1, pipe) && !feof(pipe)){
+		line[PAGE_LINE - 1] = 0;
+		auto g = g_strconcat(result, line, NULL);
+		g_free(result);
+		result = g;
+	    }
+	    pclose (pipe);
+	    return result;
 	} 
 	return NULL;
     }
