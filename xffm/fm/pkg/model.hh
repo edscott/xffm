@@ -111,7 +111,7 @@ public:
     loadSearch(GtkTreeModel *treeModel){
         auto markup = 
             g_strdup_printf("<span color=\"blue\" size=\"larger\"><b>%s</b></span>", 
-                    PKG_SEARCH);
+                    PKG_SEARCH_LOCAL);
 
         auto entryResponse = new(EntryResponse<Type>)(GTK_WINDOW(mainWindow), _("Search"), NULL);
         entryResponse->setResponseLabel(markup);
@@ -153,7 +153,7 @@ public:
             g_list_free(pkg_list);
 #endif
             // Repository stuff
-            command = g_strdup_printf("%s %s", PKG_SEARCH, response);
+            command = g_strdup_printf("%s %s", PKG_SEARCH_LOCAL, response);
 	    TRACE("command=%s\n",command); 
             pkg_list = get_command_listing(command, TRUE);
             g_free(command);

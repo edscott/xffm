@@ -2,8 +2,28 @@
 #define EMERGE_HH
 #define PKG_EMBLEM "emblem-gentoo"
 #define PKG_EXEC "emerge"
-#define PKG_SEARCH "emerge --search"
 #define PKG_LIST "xffm --fgr -R -i -a -t dir /var/db/pkg"
+
+#define PKG_SEARCH NULL
+#define PKG_SEARCH_LOCAL "emerge --search"
+#define PKG_COMMENT NULL
+#define PKG_REMOTE_COMMENT "pkg rquery %c"
+#define PKG_STATLINE NULL
+#define PKG_REMOTE_STATLINE "pkg rquery %sh"
+#define PKG_VERSION NULL
+#define PKG_REMOTE_VERSION "pkg rquery %v"
+#define PKG_TOOLTIPTEXT NULL
+#define PKG_REMOTE_TOOLTIPTEXT "pkg rquery %e"
+#define PKG_WEB NULL
+#define PKG_REMOTE_WEB "pkg query %w"
+#define PKG_GROUP NULL
+#define PKG_REMOTE_GROUP "pkg query %o"
+
+#define PKG_INSTALL "sudo -A emerge --ask n --color "
+#define PKG_INSTALL_DRYRUN "sudo -A emerge --ask n --color --pretend"
+#define PKG_UNINSTALL "sudo -A emerge --unmerge --ask n --color"
+#define PKG_UNINSTALL_DRYRUN "sudo -A emerge --unmerge --ask n --color --pretend"
+#define PKG_FETCH "sudo -A emerge --ask n --fetch-only"
 
 namespace xf {
 
