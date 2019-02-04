@@ -153,7 +153,7 @@ public:
             g_list_free(pkg_list);
 #endif
             // Repository stuff
-            command = g_strdup_printf("%s %s", PKG_SEARCH_LOCAL, response);
+            command = g_strdup_printf("%s %s", PKG_SEARCH, response);
 	    TRACE("command=%s\n",command); 
             pkg_list = get_command_listing(command, TRUE);
             g_free(command);

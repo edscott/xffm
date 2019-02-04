@@ -513,7 +513,7 @@ public:
         GtkMenu *menu = NULL;
         switch (view->viewType()){
             case (ROOTVIEW_TYPE):
-		DBG("configureMenu  ROOTVIEW_TYPE\n");
+		TRACE("configureMenu  ROOTVIEW_TYPE\n");
                 if (items) {
                     menu = rootItemPopUp;
                     RootPopUp<Type>::resetMenuItems();
@@ -523,7 +523,7 @@ public:
                 }
                 break;
             case (LOCALVIEW_TYPE):
-		DBG("configureMenu  LOCALVIEW_TYPE\n");
+		TRACE("configureMenu  LOCALVIEW_TYPE\n");
                 if (items) {
                     menu = localItemPopUp;
                     LocalPopUp<Type>::resetMenuItems();
@@ -533,7 +533,7 @@ public:
                 }
                 break;
             case (FSTAB_TYPE):
-		DBG("configureMenu  FSTAB_TYPE\n");
+		TRACE("configureMenu  FSTAB_TYPE\n");
                 if (items) {
                     menu = fstabItemPopUp;
                     FstabPopUp<Type>::resetMenuItems();
@@ -543,7 +543,7 @@ public:
                 }
                 break;
             case (PKG_TYPE):
-		DBG("configureMenu  PKG_TYPE\n");
+		TRACE("configureMenu  PKG_TYPE\n");
                 if (items) {
                     menu = pkgItemPopUp;
                     PkgPopUp<Type>::resetMenuItems();
@@ -690,7 +690,7 @@ public:
     
     static gint
     getViewType(const gchar *path){
-	DBG("getViewType: %s\n", path);
+	TRACE("getViewType: %s\n", path);
         if (!path) return ROOTVIEW_TYPE;
         if (g_file_test(path, G_FILE_TEST_EXISTS)) return (LOCALVIEW_TYPE);
         if (strcmp(path, "/dev/disks")==0) return (LOCALVIEW_TYPE);

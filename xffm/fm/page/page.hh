@@ -115,13 +115,13 @@ public:
     
     ~Page(void){
 	Notebook<Type>::unreference_textview(this->output());
-	auto baseModel = (BaseModel<Type> *)
-	    g_object_get_data(G_OBJECT(this->topScrolledWindow()), "baseModel");
-    	if (baseModel){
+	auto view = (View<Type> *)
+	    g_object_get_data(G_OBJECT(this->topScrolledWindow()), "view");
+    	if (view){
             TRACE("now deleting View...\n");
-            delete baseModel;
+            delete view;
         } else {
-            ERROR("not deleting View object\n");
+            DBG("not deleting View object\n");
         }
     }
 

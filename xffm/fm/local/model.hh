@@ -185,7 +185,7 @@ public:
 	    }
 
 	    if (lstat(xd_p->path, xd_p->st) < 0) {
-		ERROR("get_xd_p() stat(%s): %s (path has disappeared)\n", xd_p->path, strerror(errno));
+		TRACE("get_xd_p() stat(%s): %s (path has disappeared)\n", xd_p->path, strerror(errno));
 	    } else {
 		xd_p->d_type = LocalIcons<Type>::getDType(xd_p->path, xd_p->st);
 	    }

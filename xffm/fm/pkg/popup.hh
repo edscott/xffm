@@ -38,8 +38,9 @@ class PkgPopUp {
     static GtkMenu *createItemPopUp(void){
 	menuItem_t item[]=
         {
-#ifdef HAVE_EMERGE
-	    {N_("emerge-websync"), (void *)sync, NULL, NULL},
+#if defined HAVE_EMERGE ||defined HAVE_PACMAN
+
+	    {N_("Update Database"), (void *)sync, NULL, NULL},
 #endif
 	    {N_("Fetch"), (void *)fetch, NULL, NULL},
 	    {N_("Install --dry-run"), (void *)installDry, NULL, NULL},
@@ -51,8 +52,8 @@ class PkgPopUp {
         };
 	pkgItemPopUp = BasePopUp<Type>::createPopup(item); 
         const gchar *smallKey[]={
-#ifdef HAVE_EMERGE
-            "emerge-websync",
+#if defined HAVE_EMERGE || defined HAVE_PACMAN
+            "Update Database",
 #endif
             "Fetch",
             "Install --dry-run",
@@ -63,7 +64,7 @@ class PkgPopUp {
             NULL
         };
         const gchar *smallIcon[]={
-#ifdef HAVE_EMERGE
+#if defined HAVE_EMERGE || defined HAVE_PACMAN
             "view-refresh",
 #endif
             "emblem-downloads",
@@ -118,7 +119,7 @@ class PkgPopUp {
 
     static void 
     resetItemPopup(View<Type> *view, const gchar *path) {
-	WARN("resetItemPopup pkg\n");
+	TRACE("resetItemPopup pkg\n");
         GtkTreeIter iter;
 	if (!gtk_tree_model_get_iter (view->treeModel(), &iter, 
                     (GtkTreePath *)view->selectionList()->data)) 
@@ -170,12 +171,12 @@ class PkgPopUp {
 
 	
  	// Set title element
-	DBG("Set title element for pkgItemPopUp\n");
-	DBG("displayName=%s\n",displayName);
-	DBG("mimetype=%s\n",version);
-	DBG("iconName=%s\n",iconName);
-	DBG("fileInfo=%s\n",comment);
-	DBG("statLine=%s\n",statLine);
+	TRACE("Set title element for pkgItemPopUp\n");
+	TRACE("displayName=%s\n",displayName);
+	TRACE("mimetype=%s\n",version);
+	TRACE("iconName=%s\n",iconName);
+	TRACE("fileInfo=%s\n",comment);
+	TRACE("statLine=%s\n",statLine);
 	BasePopUp<Type>::changeTitle(pkgItemPopUp);
     }
     static void
@@ -192,7 +193,8 @@ class PkgPopUp {
 	Print<Type>::clear_text(view->page()->output());
 	Print<Type>::show_text(view->page()->output());
 	Print<Type>::print(view->page()->output(), text);
-    	//Print<Type>::scroll_to_top(view->page()->output());
+        while(gtk_events_pending())gtk_main_iteration();
+    	Print<Type>::scroll_to_top(view->page()->output());
 	gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
 	view->page()->updateStatusLabel(NULL);
 	
@@ -217,7 +219,7 @@ class PkgPopUp {
 	view->page()->command(command);
 	g_free(command);
     }
-#ifdef HAVE_EMERGE
+#if defined HAVE_EMERGE ||defined HAVE_PACMAN
     static void
     sync(GtkMenuItem *menuItem, gpointer data)
     {
@@ -300,8 +302,9 @@ public:
 	}		
 	auto version = getString(PKG_VERSION, NULL,  displayName);
 	TRACE("menuitems.. %s -> version=\"%s\"\n", displayName, version);
-#ifdef HAVE_EMERGE
-	const gchar *items[]={"Install","Install --dry-run","Uninstall","Uninstall --dry-run","Fetch", "emerge-websync", NULL};
+#if defined HAVE_EMERGE ||defined HAVE_PACMAN
+
+	const gchar *items[]={"Install","Install --dry-run","Uninstall","Uninstall --dry-run","Fetch", "Update Database", NULL};
 	for (auto p=items; p && *p; p++){
             auto w = GTK_WIDGET(g_object_get_data(G_OBJECT(pkgItemPopUp), *p));
 	    gtk_widget_show(w);

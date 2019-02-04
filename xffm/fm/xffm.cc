@@ -39,6 +39,7 @@ main (int argc, char *argv[]) {
     xffmProgram = argv[0];
 
     auto fm = new(xf::Fm<double>)(argc, argv);
+    //xf::Fm<double> *fm = std::make_shared<xf::Fm>(argc, argv);
     gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
     
 #ifdef FORCE_CORE
@@ -48,6 +49,6 @@ main (int argc, char *argv[]) {
 #endif
     gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
     gtk_main();
-    delete(fm);
+    //delete(fm);
     return 0;
 }
