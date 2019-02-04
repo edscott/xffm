@@ -111,7 +111,7 @@ public:
     loadSearch(GtkTreeModel *treeModel){
         auto markup = 
             g_strdup_printf("<span color=\"blue\" size=\"larger\"><b>%s</b></span>", 
-                    PKG_SEARCH_LOCAL);
+                    PKG_SEARCH);
 
         auto entryResponse = new(EntryResponse<Type>)(GTK_WINDOW(mainWindow), _("Search"), NULL);
         entryResponse->setResponseLabel(markup);

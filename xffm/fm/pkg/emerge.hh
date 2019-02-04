@@ -4,8 +4,8 @@
 #define PKG_EXEC "emerge"
 #define PKG_LIST "xffm --fgr -R -i -a -t dir /var/db/pkg"
 
-#define PKG_SEARCH NULL
-#define PKG_SEARCH_LOCAL "emerge --search"
+#define PKG_SEARCH "emerge --search"
+#define PKG_SEARCH_LOCAL NULL
 #define PKG_COMMENT NULL
 #define PKG_REMOTE_COMMENT NULL
 #define PKG_STATLINE NULL
