@@ -33,8 +33,23 @@ public:
 	    -1, &error);
 	gtk_style_context_add_provider (style_context, GTK_STYLE_PROVIDER(css_provider),
 				    GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-
-	auto help = HButtonBox<double>::newButton("help-about-symbolic", _("Help"));
+#ifdef HAVE_PKG
+	auto help = 
+	    HButtonBox<double>::newButton("emblem-bsd", _("Help"));
+#else
+# ifdef HAVE_PACMAN
+	auto help = 
+	    HButtonBox<double>::newButton("emblem-archlinux", _("Help"));
+# else
+#  if HAVE_EMERGE
+	auto help = 
+	    HButtonBox<double>::newButton("emblem-gentoo", _("Help"));
+#  else
+	auto help = 
+	    HButtonBox<double>::newButton("help-about-symbolic", _("Help"));
+#  endif
+# endif
+#endif
 	gtk_box_pack_end (vButtonBox_, GTK_WIDGET(help), FALSE, FALSE, 0);
 
 	auto home = HButtonBox<double>::newButton("go-home", _("Home Directory"));
