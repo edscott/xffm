@@ -513,6 +513,7 @@ public:
         GtkMenu *menu = NULL;
         switch (view->viewType()){
             case (ROOTVIEW_TYPE):
+		DBG("configureMenu  ROOTVIEW_TYPE\n");
                 if (items) {
                     menu = rootItemPopUp;
                     RootPopUp<Type>::resetMenuItems();
@@ -522,6 +523,7 @@ public:
                 }
                 break;
             case (LOCALVIEW_TYPE):
+		DBG("configureMenu  LOCALVIEW_TYPE\n");
                 if (items) {
                     menu = localItemPopUp;
                     LocalPopUp<Type>::resetMenuItems();
@@ -531,6 +533,7 @@ public:
                 }
                 break;
             case (FSTAB_TYPE):
+		DBG("configureMenu  FSTAB_TYPE\n");
                 if (items) {
                     menu = fstabItemPopUp;
                     FstabPopUp<Type>::resetMenuItems();
@@ -540,6 +543,7 @@ public:
                 }
                 break;
             case (PKG_TYPE):
+		DBG("configureMenu  PKG_TYPE\n");
                 if (items) {
                     menu = pkgItemPopUp;
                     PkgPopUp<Type>::resetMenuItems();
@@ -686,15 +690,20 @@ public:
     
     static gint
     getViewType(const gchar *path){
+	DBG("getViewType: %s\n", path);
         if (!path) return ROOTVIEW_TYPE;
         if (g_file_test(path, G_FILE_TEST_EXISTS)) return (LOCALVIEW_TYPE);
         if (strcmp(path, "/dev/disks")==0) return (LOCALVIEW_TYPE);
 	if (g_path_is_absolute(path)){
-	    const gchar *m = _("Directory does not exist.");
+	    gchar *m;
 	    if (strstr(path,"/.local/share/Trash")) {
-		m = _("Trash is empty");
+		m = g_strdup(_("Trash is empty"));
+	    } else {
+		m = g_strdup_printf("%s: %s\n",_("Directory does not exist."), path); 
 	    }
-	    Gtk<Type>::quickHelp(mainWindow, _("Trash is empty"), "dialog-information");
+	    Gtk<Type>::quickHelp(mainWindow, m, "dialog-information");
+	    ERROR("getViewType: %s\n",m);
+	    g_free(m);
 	}
         if (strcmp(path, "xffm:local")==0) return (LOCALVIEW_TYPE);
         if (strcmp(path, "xffm:root")==0) return (ROOTVIEW_TYPE);
@@ -705,7 +714,7 @@ public:
         if (strcmp(path, "xffm:cifs")==0) return (CIFS_TYPE);
         if (strncmp(path, "xffm:pkg", strlen("xffm:pkg"))==0) return (PKG_TYPE);
 	
-        ERROR("base/signals.hh::View::loadModel() %s not defined.\n", path);
+        ERROR("base/signals.hh::getViewType() %s not defined.\n", path);
         return (-1);
     }
 

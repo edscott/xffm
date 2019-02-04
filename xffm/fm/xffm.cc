@@ -42,9 +42,9 @@ main (int argc, char *argv[]) {
     gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
     
 #ifdef FORCE_CORE
-    auto text = g_strdup_printf("Xffm+-%s", VERSION);
-    xf::TimeoutResponse<double>::dialogFull(NULL, text, "xffm_logo", -200, 1);
-    g_free(text);
+    //auto text = g_strdup_printf("Xffm+-%s", VERSION);
+    //xf::TimeoutResponse<double>::dialogFull(NULL, text, "xffm_logo", -200, 1);
+    //g_free(text);
 #endif
     gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
     gtk_main();

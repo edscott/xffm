@@ -65,9 +65,11 @@ public:
     GtkIconView *iconView(void){return iconView_;}
     
     gboolean loadModel(const gchar *path){
+	// This sets viewType
 	return loadModel(path, this);
     }
     gboolean loadModel(const gchar *path, View<Type> *view){
+	// This sets viewType
         if (isTreeView){
 	    // hide iconview, show treeview
 	    gtk_widget_hide(GTK_WIDGET(view->page()->topScrolledWindow()));
@@ -77,6 +79,7 @@ public:
 	    gtk_widget_hide(GTK_WIDGET(view->page()->treeScrolledWindow()));
 	    gtk_widget_show(GTK_WIDGET(view->page()->topScrolledWindow()));
 	}
+
 	auto type = BaseSignals<Type>::getViewType(path);
 	if (type < 0) return FALSE;
 
@@ -129,14 +132,25 @@ public:
         return TRUE;
     }
 
-    gboolean loadModel(GtkTreeModel *treeModel, const GtkTreePath *tpath, 
-	    const gchar *path){
+    gboolean loadModel(GtkTreeModel *treeModel, 
+	    const GtkTreePath *tpath, 
+	    const gchar *path)
+    {
+	// Here viewType must be specified before any
+	// static loadModel call (viz. PkgModel)
         TRACE("generalized view: loadModel: %s\n", path);
 	if (strncmp(path, "xffm:pkg", strlen("xffm:pkg"))==0){
-	    if(strcmp(path, "xffm:pkg:search") == 0) return PkgModel<Type>::loadModel(treeModel, path);
-	    if(strcmp(path, "xffm:pkg")==0) return PkgModel<Type>::loadModel(treeModel, "xffm:pkg");
+	    this->setViewType(PKG_TYPE);
+	    this->setPath(path);
+
+	    if(strcmp(path, "xffm:pkg:search") == 0) {
+		return PkgModel<Type>::loadModel(treeModel, path);
+	    }
+	    if(strcmp(path, "xffm:pkg")==0) {
+		return PkgModel<Type>::loadModel(treeModel, "xffm:pkg");
+	    }
 	    TRACE("fm/view.hh: loadModel: %s item activate?\n", path);
-	    return this->loadModel(path);;
+	    return this->loadModel(path);
 	}
         if (g_file_test(path, G_FILE_TEST_EXISTS)){
 	    TRACE("%s is  valid path\n", path);

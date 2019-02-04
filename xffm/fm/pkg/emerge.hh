@@ -7,23 +7,24 @@
 #define PKG_SEARCH NULL
 #define PKG_SEARCH_LOCAL "emerge --search"
 #define PKG_COMMENT NULL
-#define PKG_REMOTE_COMMENT "pkg rquery %c"
+#define PKG_REMOTE_COMMENT NULL
 #define PKG_STATLINE NULL
-#define PKG_REMOTE_STATLINE "pkg rquery %sh"
+#define PKG_REMOTE_STATLINE NULL
 #define PKG_VERSION NULL
-#define PKG_REMOTE_VERSION "pkg rquery %v"
-#define PKG_TOOLTIPTEXT NULL
-#define PKG_REMOTE_TOOLTIPTEXT "pkg rquery %e"
+#define PKG_REMOTE_VERSION NULL
+#define PKG_TOOLTIPTEXT "emerge --info"
+#define PKG_REMOTE_TOOLTIPTEXT NULL
 #define PKG_WEB NULL
-#define PKG_REMOTE_WEB "pkg query %w"
+#define PKG_REMOTE_WEB NULL
 #define PKG_GROUP NULL
-#define PKG_REMOTE_GROUP "pkg query %o"
+#define PKG_REMOTE_GROUP NULL
 
-#define PKG_INSTALL "sudo -A emerge --ask n --color "
-#define PKG_INSTALL_DRYRUN "sudo -A emerge --ask n --color --pretend"
-#define PKG_UNINSTALL "sudo -A emerge --unmerge --ask n --color"
-#define PKG_UNINSTALL_DRYRUN "sudo -A emerge --unmerge --ask n --color --pretend"
-#define PKG_FETCH "sudo -A emerge --ask n --fetch-only"
+#define PKG_REFRESH "sudo -A emerge-webrsync"
+#define PKG_INSTALL "sudo -A emerge --ask n --color y"
+#define PKG_INSTALL_DRYRUN "sudo -A emerge --ask n --color y --pretend"
+#define PKG_UNINSTALL "sudo -A emerge --unmerge --ask n --color y"
+#define PKG_UNINSTALL_DRYRUN "sudo -A emerge --unmerge --ask n --color y --pretend"
+#define PKG_FETCH "sudo -A emerge --ask n --fetchonly"
 
 namespace xf {
 
