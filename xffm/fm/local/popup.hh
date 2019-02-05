@@ -245,8 +245,6 @@ public:
 
         //  single or multiple item selected?
         setPath(view);
-        // Set title element
-        BasePopUp<Type>::changeTitle(localItemPopUp);
  
         // Hide all...
         GList *children = gtk_container_get_children (GTK_CONTAINER(localItemPopUp));
@@ -254,12 +252,17 @@ public:
             gtk_widget_hide(GTK_WIDGET(child->data));
         }
  
-	auto v2 = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "title"));
-        gtk_widget_show(v2);
-	
         auto fileInfo =(const gchar *)g_object_get_data(G_OBJECT(localItemPopUp), "fileInfo");
         auto path =(const gchar *)g_object_get_data(G_OBJECT(localItemPopUp), "path");
         auto mimetype =(const gchar *)g_object_get_data(G_OBJECT(localItemPopUp), "mimetype");
+        // Set title element
+        auto statLine = Util<Type>::statInfo(path);
+	Util<Type>::resetObjectData(G_OBJECT(localItemPopUp), "statLine", statLine);
+        BasePopUp<Type>::changeTitle(localItemPopUp);
+	auto v2 = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "title"));
+        gtk_widget_show(v2);
+	
+
 	for (auto k=commonItems; k && *k; k++){
 	    auto w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), *k));
 	    if (g_list_length(view->selectionList()) > 0) gtk_widget_show(w);
