@@ -1,8 +1,6 @@
 
 Rebuild of pkg system: top level should have groups. next installed packages.
 
-BUUUGG: in list view file info is not showing
-
 pending:
     bug: local Goto entry does not have bash completion, append slash to path, ant pathbar is broken
     pacman -Syy will run before any install, but not on uninstall.

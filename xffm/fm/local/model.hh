@@ -465,18 +465,8 @@ private:
 	guint flags=(xd_p->d_type & 0xff);
         guint size = (xd_p->st)?xd_p->st->st_size:0;
         guint date = (xd_p->st)?xd_p->st->st_mtim.tv_sec:0;
-        gchar *statInfo = (xd_p->st)?Util<Type>::statInfo(xd_p->path):NULL;
+        gchar *statInfo = Util<Type>::statInfo(xd_p->path);
         gchar **p = NULL;
-       /* if (statInfo){
-            p = g_strsplit(statInfo, " ", 6);
-            if (p) {
-                g_free(statInfo);
-                statInfo = g_strdup_printf("%s %s %s", p[5], p[4], p[0]);
-            } else {
-                g_free(statInfo);
-                statInfo = NULL;
-            }
-        }*/
         if (!statInfo) statInfo = g_strdup("");
         if (up) flags |= 0x100;
         gtk_list_store_set (list_store, iter, 
