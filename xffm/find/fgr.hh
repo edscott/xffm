@@ -628,6 +628,7 @@ private:
         }
         fflush (NULL);
         globber_destroy (object);
+        //sleep(1);
         exit (0);
     }    
 ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -680,7 +681,7 @@ private:
     glob_set_options (void *address, int options) {
         if (!address){
             fprintf(stderr, "broken call to glob_set_options()\n");
-            exit(0);
+            exit(1);
         }
         globber_t *objeto = (globber_t *)address;
         objeto->options |= options;
@@ -691,7 +692,7 @@ private:
     glob_set_type (void *address, int type) {
         if (!address){
             fprintf(stderr, "broken call to glob_set_type()\n");
-            exit(0);
+            exit(1);
         }
         globber_t *objeto = (globber_t *)address;
         objeto->type = type;
@@ -702,7 +703,7 @@ private:
     glob_set_sizeG (void *address, off_t size) {
         if (!address){
             fprintf(stderr, "broken call to glob_set_sizeG()\n");
-            exit(0);
+            exit(1);
         }
         globber_t *objeto = (globber_t *)address;
         glob_set_options (objeto, GLOBBER_SIZE);
@@ -714,7 +715,7 @@ private:
     glob_set_sizeL (void *address, off_t size) {
         if (!address){
             fprintf(stderr, "broken call to glob_set_sizeL()\n");
-            exit(0);
+            exit(1);
         }
         globber_t *objeto = (globber_t *)address;
         glob_set_options (objeto, GLOBBER_SIZE);
@@ -726,7 +727,7 @@ private:
     glob_set_user (void *address, int user) {
         if (!address){
             fprintf(stderr, "broken call to glob_set_user()\n");
-            exit(0);
+            exit(1);
         }
         globber_t *objeto = (globber_t *)address;
         glob_set_options (objeto, GLOBBER_USER);
@@ -738,7 +739,7 @@ private:
     glob_set_group (void *address, int group) {
         if (!address){
             fprintf(stderr, "broken call to glob_set_group()\n");
-            exit(0);
+            exit(1);
         }
         globber_t *objeto = (globber_t *)address;
         ;
@@ -751,7 +752,7 @@ private:
     glob_set_minutes (void *address, long unsigned min_t) {
         if (!address){
             fprintf(stderr, "broken call to glob_set_time()\n");
-            exit(0);
+            exit(1);
         }
         globber_t *objeto = (globber_t *)address;
         objeto->min_t = min_t;
@@ -762,7 +763,7 @@ private:
     glob_set_hours (void *address, long unsigned hour_t) {
         if (!address){
             fprintf(stderr, "broken call to glob_set_time()\n");
-            exit(0);
+            exit(1);
         }
         globber_t *objeto = (globber_t *)address;
         objeto->hour_t = hour_t;
@@ -773,7 +774,7 @@ private:
     glob_set_days (void *address,long unsigned day_t) {
         if (!address){
             fprintf(stderr, "broken call to glob_set_time()\n");
-            exit(0);
+            exit(1);
         }
         globber_t *objeto = (globber_t *)address;
         objeto->day_t = day_t;
@@ -784,7 +785,7 @@ private:
     glob_set_months (void *address, long unsigned month_t) {
         if (!address){
             fprintf(stderr, "broken call to glob_set_time()\n");
-            exit(0);
+            exit(1);
         }
         globber_t *objeto = (globber_t *)address;
         objeto->month_t = month_t;

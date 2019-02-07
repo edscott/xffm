@@ -643,7 +643,7 @@ private:
             Data->argument[i++] = g_strdup("-a");
         } 
         const gchar *token = gtk_entry_get_text(GTK_ENTRY(g_object_get_data(G_OBJECT(dialog), "grep_entry")));
-        if(token) {
+        if(token && strlen(token)) {
               if(gtk_toggle_button_get_active ((GtkToggleButton *)
                         g_object_get_data(G_OBJECT(dialog), "ext_regexp")))
             {
