@@ -132,7 +132,7 @@ public:
         g_strstrip(response);
         gint count = 0;
         if (strlen(response)){
-
+	    auto textView = page->output();
             TRACE("search string: %s\n", response);
 	    gchar *command;
 	    GList *pkg_list;
@@ -142,7 +142,7 @@ public:
             command = g_strdup_printf("%s %s", PKG_SEARCH_LOCAL, response);
             TRACE("command: %s\n", command);
             // Installed stuff
-            pkg_list = get_command_listing(command, TRUE);
+            pkg_list = get_command_listing(textView, command, TRUE);
             g_free(command);
             pkg_list = g_list_reverse(pkg_list);
             for (auto l=pkg_list; l && l->data; l=l->next){
@@ -155,7 +155,7 @@ public:
             // Repository stuff
             command = g_strdup_printf("%s %s", PKG_SEARCH, response);
 	    TRACE("command=%s\n",command); 
-            pkg_list = get_command_listing(command, TRUE);
+            pkg_list = get_command_listing(textView, command, TRUE);
             g_free(command);
             count += g_list_length(pkg_list);
 
@@ -217,7 +217,10 @@ public:
 
     static void 
     addPackages(GtkTreeModel *treeModel){
-        GList *pkg_list = get_command_listing(PKG_LIST, FALSE);
+	auto dialog_p = (Dialog<Type> *)g_object_get_data(G_OBJECT(mainWindow), "xffm");
+	auto page = dialog_p->currentPageObject();
+	auto textView = page->output();
+        GList *pkg_list = get_command_listing(textView, PKG_LIST, FALSE);
         pkg_list = g_list_reverse(pkg_list);
 
 	auto icon_name = "package-x-generic/NW/" "greenball" "/2.0/225";
@@ -372,7 +375,7 @@ public:
 
 
     static GList *
-    get_command_listing(const gchar *command, gboolean search){
+    get_command_listing(GtkTextView *textView, const gchar *command, gboolean search){
         if (!command) return NULL;
         if (pthread_mutex_trylock(&db_mutex)!=0){
             DBG(_("Currently busy\n"));
@@ -392,11 +395,19 @@ public:
         }
         //gchar **p=arg;for(;p && *p;p++)TRACE(stderr, "arg=\"%s\"\n", *p);
         l_condition=0;
+
         if (search) 
-            Run<Type>::thread_runReap(NULL,(const gchar**)arg, io_search_stdout, NULL, NULL);
+            Run<Type>::thread_runReap(NULL,(const gchar**)arg, io_search_stdout,NULL, NULL);
         else 
             Run<Type>::thread_runReap(NULL,(const gchar**)arg, io_thread_stdout, NULL, NULL);
-        g_strfreev(arg);
+	
+	// FIXME> this will crash...
+	//if (search) 
+          //  Run<Type>::thread_runReap((void*)textView,(const gchar**)arg, io_search_stdout, Run<Type>::run_operate_stderr, NULL);
+        //else 
+          //  Run<Type>::thread_runReap((void*)textView,(const gchar**)arg, io_thread_stdout, Run<Type>::run_operate_stderr, NULL);
+        
+	g_strfreev(arg);
         // 3. wait on condition
         pthread_mutex_lock(&(l_mutex));
         if (!l_condition){

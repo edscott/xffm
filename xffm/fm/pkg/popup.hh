@@ -38,10 +38,8 @@ class PkgPopUp {
     static GtkMenu *createItemPopUp(void){
 	menuItem_t item[]=
         {
-#if defined HAVE_EMERGE ||defined HAVE_PACMAN
 
 	    {N_("Update Database"), (void *)sync, NULL, NULL},
-#endif
 	    {N_("Fetch"), (void *)fetch, NULL, NULL},
 	    {N_("Install --dry-run"), (void *)installDry, NULL, NULL},
 	    {N_("Install"), (void *)install, NULL, NULL},
@@ -52,9 +50,7 @@ class PkgPopUp {
         };
 	pkgItemPopUp = BasePopUp<Type>::createPopup(item); 
         const gchar *smallKey[]={
-#if defined HAVE_EMERGE || defined HAVE_PACMAN
             "Update Database",
-#endif
             "Fetch",
             "Install --dry-run",
             "Install",
@@ -64,9 +60,7 @@ class PkgPopUp {
             NULL
         };
         const gchar *smallIcon[]={
-#if defined HAVE_EMERGE || defined HAVE_PACMAN
             "view-refresh",
-#endif
             "emblem-downloads",
             "list-add",
             "list-add",
@@ -219,13 +213,13 @@ class PkgPopUp {
 	view->page()->command(command);
 	g_free(command);
     }
-#if defined HAVE_EMERGE ||defined HAVE_PACMAN
+
     static void
     sync(GtkMenuItem *menuItem, gpointer data)
     {
 	runSimple(menuItem, data,PKG_REFRESH);	
     }
-#endif
+    
 
 
     static void
@@ -304,7 +298,7 @@ public:
 	TRACE("menuitems.. %s -> version=\"%s\"\n", displayName, version);
 #if defined HAVE_EMERGE ||defined HAVE_PACMAN
 
-	const gchar *items[]={"Install","Install --dry-run","Uninstall","Uninstall --dry-run","Fetch", "Update Database", NULL};
+	const gchar *items[]={"Install","Install --dry-run","Uninstall","Uninstall --dry-run","Fetch",  NULL};
 	for (auto p=items; p && *p; p++){
             auto w = GTK_WIDGET(g_object_get_data(G_OBJECT(pkgItemPopUp), *p));
 	    gtk_widget_show(w);
@@ -324,6 +318,8 @@ public:
 	    gtk_widget_show(w);
 	}
 #endif
+        v = GTK_WIDGET(g_object_get_data(G_OBJECT(pkgItemPopUp), "Update Database"));
+	gtk_widget_show(v);
         v = GTK_WIDGET(g_object_get_data(G_OBJECT(pkgItemPopUp), "Information"));
 	gtk_widget_show(v);
     }

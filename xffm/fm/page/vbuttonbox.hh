@@ -34,23 +34,23 @@ public:
 	gtk_style_context_add_provider (style_context, GTK_STYLE_PROVIDER(css_provider),
 				    GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 #ifdef HAVE_PKG
-	auto help = 
-	    HButtonBox<double>::newButton("emblem-bsd", _("Help"));
+	auto pkg = 
+	    HButtonBox<double>::newButton("emblem-bsd", _("Software Updater"));
 #else
 # ifdef HAVE_PACMAN
-	auto help = 
-	    HButtonBox<double>::newButton("emblem-archlinux", _("Help"));
+	auto pkg = 
+	    HButtonBox<double>::newButton("emblem-archlinux", _("Software Updater"));
 # else
 #  if HAVE_EMERGE
-	auto help = 
-	    HButtonBox<double>::newButton("emblem-gentoo", _("Help"));
+	auto pkg = 
+	    HButtonBox<double>::newButton("emblem-gentoo", _("Software Updater"));
 #  else
-	auto help = 
-	    HButtonBox<double>::newButton("help-about-symbolic", _("Help"));
+	auto pkg = 
+	    HButtonBox<double>::newButton("help-about-symbolic", _("Software Updater"));
 #  endif
 # endif
 #endif
-	gtk_box_pack_end (vButtonBox_, GTK_WIDGET(help), FALSE, FALSE, 0);
+	gtk_box_pack_end (vButtonBox_, GTK_WIDGET(pkg), FALSE, FALSE, 0);
 
 	auto home = HButtonBox<double>::newButton("go-home", _("Home Directory"));
 	gtk_box_pack_start (vButtonBox_, GTK_WIDGET(home), FALSE, FALSE, 0);
@@ -58,8 +58,8 @@ public:
 	auto fstab = HButtonBox<double>::newButton("media-eject", _("Disk Image Mounter"));
 	gtk_box_pack_start (vButtonBox_, GTK_WIDGET(fstab), FALSE, FALSE, 0);
 	g_signal_connect(G_OBJECT(fstab), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::fstab), NULL);
-	auto pkg = HButtonBox<double>::newButton("emblem-downloads", _("Software Updater"));
-	gtk_box_pack_start (vButtonBox_, GTK_WIDGET(pkg), FALSE, FALSE, 0);
+//	auto pkg = HButtonBox<double>::newButton("emblem-downloads", _("Software Updater"));
+//	gtk_box_pack_start (vButtonBox_, GTK_WIDGET(pkg), FALSE, FALSE, 0);
 	g_signal_connect(G_OBJECT(pkg), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::pkg), NULL);
 	auto trash = HButtonBox<double>::newButton("user-trash", _("Trash bin"));
 	gtk_box_pack_start (vButtonBox_, GTK_WIDGET(trash), FALSE, FALSE, 0);

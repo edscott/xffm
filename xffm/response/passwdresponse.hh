@@ -203,7 +203,7 @@ private:
         //gtk_dialog_add_action_widget (dialog, GTK_WIDGET(button), GTK_RESPONSE_NO);
 
         
-        gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
+        gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER_ON_PARENT);
         gtk_widget_show (GTK_WIDGET(dialog));
 
         return dialog;

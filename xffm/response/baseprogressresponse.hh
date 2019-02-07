@@ -41,7 +41,7 @@ public:
          gtk_box_pack_start(vbox, GTK_WIDGET(progress), FALSE, FALSE,0);
 
 
-	 gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
+	 gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER_ON_PARENT);
          return dialog;
     }
 };
