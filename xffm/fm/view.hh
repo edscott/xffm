@@ -127,6 +127,7 @@ public:
                 ERROR("ViewType %d not defined.\n", view->viewType());
                 break;
         }
+	while(gtk_events_pending())gtk_main_iteration();
 	gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
 	while(gtk_events_pending())gtk_main_iteration();
     
