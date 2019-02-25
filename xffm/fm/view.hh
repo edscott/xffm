@@ -128,6 +128,7 @@ public:
                 break;
         }
 	gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
+	while(gtk_events_pending())gtk_main_iteration();
     
         return TRUE;
     }
