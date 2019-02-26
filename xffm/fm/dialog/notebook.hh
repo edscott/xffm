@@ -345,23 +345,23 @@ private:
     void signalSetup(void){
         // notebook specific signal bindings:
         g_signal_connect (notebook_, "change-current-page", 
-                NOTEBOOK_4_CALLBACK (notebookSignals<double>::change_current_page), NULL);
+                NOTEBOOK_4_CALLBACK (notebookSignals<double>::change_current_page), (void *)this);
         g_signal_connect (notebook_, "create-window", 
-                NOTEBOOK_5_CALLBACK (notebookSignals<double>::create_window), NULL);
+                NOTEBOOK_5_CALLBACK (notebookSignals<double>::create_window), (void *)this);
         g_signal_connect (notebook_, "focus-tab", 
-                NOTEBOOK_3_CALLBACK (notebookSignals<double>::focus_tab), NULL);
+                NOTEBOOK_3_CALLBACK (notebookSignals<double>::focus_tab), (void *)this);
         g_signal_connect (notebook_, "move-focus-out", 
-                NOTEBOOK_1_CALLBACK (notebookSignals<double>::move_focus_out), NULL);
+                NOTEBOOK_1_CALLBACK (notebookSignals<double>::move_focus_out), (void *)this);
         g_signal_connect (notebook_, "page-added", 
-                NOTEBOOK_CALLBACK (notebookSignals<double>::page_added), NULL);
+                NOTEBOOK_CALLBACK (notebookSignals<double>::page_added), (void *)this);
         g_signal_connect (notebook_, "page-removed", 
-                NOTEBOOK_CALLBACK (notebookSignals<double>::page_removed), NULL);
+                NOTEBOOK_CALLBACK (notebookSignals<double>::page_removed), (void *)this);
         g_signal_connect (notebook_, "page-reordered", 
-                NOTEBOOK_CALLBACK (notebookSignals<double>::page_reordered), NULL);
+                NOTEBOOK_CALLBACK (notebookSignals<double>::page_reordered), (void *)this);
         g_signal_connect (notebook_, "reorder-tab", 
-                NOTEBOOK_2_CALLBACK (notebookSignals<double>::reorder_tab), NULL);
+                NOTEBOOK_2_CALLBACK (notebookSignals<double>::reorder_tab), (void *)this);
         g_signal_connect (notebook_, "select-page", 
-                NOTEBOOK_6_CALLBACK (notebookSignals<double>::select_page), NULL);
+                NOTEBOOK_6_CALLBACK (notebookSignals<double>::select_page), (void *)this);
         g_signal_connect (notebook_, "switch-page", 
                 NOTEBOOK_CALLBACK (notebookSignals<double>::switch_page), (void *)this);
 

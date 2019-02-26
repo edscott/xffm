@@ -1,5 +1,6 @@
 #ifndef XF_NOTEBOOK_SIGNALS
 #define XF_NOTEBOOK_SIGNALS
+static gint lastPage=-1;
 
 namespace xf {
 
@@ -16,7 +17,7 @@ public:
                    gpointer     data)
     {
 	static gboolean startup = TRUE;
-        TRACE("switch_page: new page=%d\n", new_page);
+        DBG("switch_page: new page=%d last page=%d\n", new_page, lastPage);
         auto notebook_p = (Notebook<Type> *)data;
         auto page_p = (Page<Type> *)notebook_p->currentPageObject(new_page);
         if (!page_p){
@@ -25,6 +26,12 @@ public:
         }
 	startup = FALSE;
         page_p->setDialogTitle();
+        gtk_widget_set_sensitive(GTK_WIDGET(page_p->pageLabelButton()), TRUE);
+        if (lastPage >= 0){
+            page_p = (Page<Type> *)notebook_p->currentPageObject(lastPage);
+            gtk_widget_set_sensitive(GTK_WIDGET(page_p->pageLabelButton()), FALSE);
+        }
+        lastPage = new_page;
 
 
         //FIXME: what else?
@@ -51,7 +58,14 @@ public:
                    guint        page_num,
                    gpointer     data)
     {
-        TRACE("page_added\n");
+        DBG("page_added\n");
+        if (lastPage < 0)lastPage=0;
+        /*auto notebook_p = (Notebook<Type> *)data;
+        if (lastPage >= 0){
+            auto page_p = (Page<Type> *)notebook_p->currentPageObject(lastPage);
+            gtk_widget_set_sensitive(GTK_WIDGET(page_p->pageLabelButton()), FALSE);
+        }
+        lastPage=page_num;*/
     }
 
     static void
@@ -60,7 +74,7 @@ public:
                    guint        page_num,
                    gpointer     data)
     {
-        TRACE("page_removed\n");
+        DBG("page_removed\n");
     }
 
     static void
@@ -69,7 +83,8 @@ public:
                    guint        page_num,
                    gpointer     data)
     {
-        TRACE("page_reordered\n");
+        DBG("page_reordered page is %d, lastPage=%d\n", page_num, lastPage);
+        lastPage = page_num;
     }
 #define NOTEBOOK_1_CALLBACK(X)  G_CALLBACK((void (*)(GtkNotebook *,GtkDirectionType *,gpointer)) X)
 
