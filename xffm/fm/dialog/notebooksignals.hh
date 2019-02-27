@@ -31,7 +31,7 @@ public:
 
         if (lastPage >= 0 && lastPage != new_page && lastPage < pages){
             page_p = (Page<Type> *)notebook_p->currentPageObject(lastPage);
-            gtk_widget_set_sensitive(GTK_WIDGET(page_p->pageLabelButton()), FALSE);
+            if(page_p) gtk_widget_set_sensitive(GTK_WIDGET(page_p->pageLabelButton()), FALSE);
         }
         lastPage = new_page;
 
