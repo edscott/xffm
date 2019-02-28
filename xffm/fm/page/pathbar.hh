@@ -327,6 +327,10 @@ private:
 	}
         entryResponse->setEntryDefault(dirname);
         g_free(dirname);
+	auto page = (Page<Type> *)pathbar_p;
+	const gchar *wd = page->workDir();
+	if (!wd) wd = g_get_home_dir();
+        entryResponse->setEntryBashCompletion(wd);
         
         auto response = entryResponse->runResponse();
 	
@@ -337,7 +341,6 @@ private:
 	    Gtk<Type>::quickHelp(GTK_WINDOW(mainWindow), message, "dialog-error");
 	    g_free(message);
 	} else {
-	    auto page = (Page<Type> *)pathbar_p;
 	    auto view = (View<Type> *)
 		g_object_get_data(G_OBJECT(page->topScrolledWindow()), "view");
 	    view->loadModel(response);

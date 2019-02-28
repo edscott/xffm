@@ -51,16 +51,19 @@ public:
 	// Scalable vector graphics dont work, last time I checked...
 	// Icons should be in the "symbolic" internal gtk name format (hack...)
 	// This is mandatory for non icon-themed boxes (which is not the usual setup).
-	auto path = g_build_filename(resource_path, "24x24", NULL);
-	gtk_icon_theme_append_search_path (icon_theme, path);
-	g_free(path);
-	path = g_build_filename(resource_path, "48x48", NULL);
-	gtk_icon_theme_append_search_path (icon_theme, path);
-	g_free(path);
-	path = g_build_filename(resource_path, "scalable", NULL);
-	gtk_icon_theme_append_search_path (icon_theme, path);
-	g_free(path);
-
+        const gchar *subdirs[] = {
+            "scalable",
+            "48x48",
+            "24x24",
+            "16x16",
+            NULL
+        };
+        for (auto p=subdirs; p && *p; p++){
+            auto path = g_build_filename(resource_path, *p, NULL);
+	    gtk_icon_theme_append_search_path (icon_theme, path);
+	    g_free(path);
+        }
+#if 0
 	// xffm+ svg icons are at:
 	path = g_build_filename(PREFIX, "share", "icons", "xffm+", "scalable", "stock", NULL);
 	gtk_icon_theme_prepend_search_path (icon_theme, path);
@@ -68,7 +71,7 @@ public:
 	path = g_build_filename(PREFIX, "share", "icons", "xffm+", "scalable", "emblems", NULL);
 	gtk_icon_theme_prepend_search_path (icon_theme, path);
 	g_free(path);
-
+#endif
 	g_free(resource_path);
     }
 

@@ -63,7 +63,13 @@ public:
 
         auto newWindow = HButtonBox<double>::newButton("window-new", _("Open a New Window"));
 	gtk_box_pack_start (vButtonBox_, GTK_WIDGET(newWindow), FALSE, FALSE, 0);
-	g_signal_connect(G_OBJECT(newWindow), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::newWindow), NULL);
+	g_signal_connect(G_OBJECT(newWindow), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::open), 
+                (void *)"xffm");
+
+        auto differences = HButtonBox<double>::newButton("differences", _("Differences"));
+	gtk_box_pack_start (vButtonBox_, GTK_WIDGET(differences), FALSE, FALSE, 0);
+	g_signal_connect(G_OBJECT(differences), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::open), 
+                (void *)"rodent-diff");
 
         auto home = HButtonBox<double>::newButton("go-home", _("Home Directory"));
 	gtk_box_pack_start (vButtonBox_, GTK_WIDGET(home), FALSE, FALSE, 0);

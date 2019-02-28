@@ -107,19 +107,22 @@ public:
         }
     }
    
+   
     static void
-    newWindow(GtkMenuItem *menuItem, gpointer data)
+    open(GtkMenuItem *menuItem, gpointer data)
     {
-	auto xffm = g_find_program_in_path("xffm");
-	if (!xffm) {
-	    ERROR("Cannot find xffm in path\n");
+        auto diff = (const gchar *) data;
+        "rodent-diff";
+	auto program = g_find_program_in_path(diff);
+	if (!program) {
+	    ERROR("Cannot find % in path\n", diff);
 	    return;
 	}
 	auto notebook_p = (Dialog<Type> *)g_object_get_data(G_OBJECT(mainWindow), "dialogObject");
 
         auto page = (Page<Type> *)notebook_p->currentPageObject();
-	run(notebook_p, xffm);
-	g_free(xffm);
+	run(notebook_p, program);
+	g_free(program);
     }
 
     static void

@@ -1,3 +1,4 @@
+
 bug> in pkg send stderr to output as when pkg fails, database needs manual updat "pkg update", add item to menu...
 
 Rebuild of pkg system: top level should have groups. next installed packages.
