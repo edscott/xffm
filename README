@@ -10,10 +10,7 @@ pending:
 When logo appears, if click on window before logo window disappears, we can have
 a glib thread crash
 
-
-
   pending: fix popupmenu for /dev/disks
-  pending: maybe not... make openwith and run with independent and with a timeout if user does not act on them (say 30 seconds).
              
 bug: 
  ** In treeview, on going to popup with button 3 and multiple selection, multiple selection is working but items are unselected from the treeview.
