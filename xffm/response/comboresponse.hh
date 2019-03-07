@@ -24,10 +24,20 @@ public:
         gtk_box_pack_start (GTK_BOX (this->hbox_), GTK_WIDGET(combo_), TRUE, TRUE, 0);
         g_object_set_data(G_OBJECT(combo_),"response", this->response_);
         auto entry = GTK_ENTRY(gtk_bin_get_child(GTK_BIN(combo_)));
+	g_signal_connect (G_OBJECT (entry), "key-press-event", G_CALLBACK (EntryResponse<Type>::progressReset), this->timeoutProgress_);
+	g_signal_connect (G_OBJECT (entry), "changed", G_CALLBACK (ComboResponse<Type>::progressReset), this->timeoutProgress_);
 
         gtk_widget_set_can_focus (GTK_WIDGET(this->yes_), TRUE);
         gtk_widget_grab_focus(GTK_WIDGET(this->yes_));
         return;
+    }
+
+    static gboolean
+    progressReset(GtkWidget *w, void *data){
+        auto progress = (GtkProgressBar *)data;
+        gtk_progress_bar_set_fraction(progress, 0.0);
+        return FALSE;
+        
     }
 
     void setComboLabel(const gchar *value){
@@ -85,13 +95,30 @@ public:
         return g_strdup (gtk_combo_box_text_get_active_text (combo_));
     }
     
-    gchar * 
+    gchar *
     runResponse(void){
+        return runResponse(10);
+    }
+
+    gchar * 
+    runResponse(gint timeout){
         /* show response_ and return */
 	gtk_window_set_position(GTK_WINDOW(this->response_), GTK_WIN_POS_CENTER_ON_PARENT);
 	gtk_widget_show (GTK_WIDGET(this->response_));
         gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
+
+        endTime = timeout;
+        if (timeout){
+            auto arg = (void **)calloc(3, sizeof(void *));
+            gtk_widget_show(GTK_WIDGET(this->timeoutProgress_));
+            arg[0] = GINT_TO_POINTER(timeout);
+            arg[1] = (void *)this->timeoutProgress_;
+            arg[2] =(void *)this->response_;
+            g_timeout_add(500, EntryResponse<Type>::updateProgress, (void *)arg);
+        } 
 	gint response  = gtk_dialog_run(GTK_DIALOG(this->response_));
+        endTime = 0;
+
         gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
 	//if (checkboxText) g_free(g_object_get_data(G_OBJECT(checkButton), "app"));
         gchar *responseTxt = NULL;
