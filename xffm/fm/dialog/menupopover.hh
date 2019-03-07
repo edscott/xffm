@@ -109,18 +109,37 @@ public:
    
    
     static void
+    newWindow(GtkMenuItem *menuItem, gpointer data)
+    {
+	auto program = g_find_program_in_path((const gchar *) data);
+	if (!program) {
+	    ERROR("Cannot find % in path\n", (const gchar *) data);
+	    return;
+	}
+	auto notebook_p = (Dialog<Type> *)g_object_get_data(G_OBJECT(mainWindow), "dialogObject");
+
+        auto page = (Page<Type> *)notebook_p->currentPageObject();
+	run(notebook_p, program);
+	g_free(program);
+    }
+   
+    static void
     open(GtkMenuItem *menuItem, gpointer data)
     {
         auto diff = (const gchar *) data;
-        "rodent-diff";
 	auto program = g_find_program_in_path(diff);
 	if (!program) {
 	    ERROR("Cannot find % in path\n", diff);
 	    return;
 	}
 	auto notebook_p = (Dialog<Type> *)g_object_get_data(G_OBJECT(mainWindow), "dialogObject");
+        if (strcmp((const gchar *) data, "xffm")==0){
+            const gchar *path = notebook_p->workdir(); 
+            auto g = g_strdup_printf("%s %s", program, path);
+            g_free(program);
+            program = g;
+        }
 
-        auto page = (Page<Type> *)notebook_p->currentPageObject();
 	run(notebook_p, program);
 	g_free(program);
     }
