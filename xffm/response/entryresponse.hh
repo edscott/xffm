@@ -148,6 +148,12 @@ public:
         return;
     }
 
+    void setInLineCompletion(gboolean state){
+        gtk_entry_completion_set_popup_completion(bashCompletion_, !state);
+        gtk_entry_completion_set_inline_completion(bashCompletion_, state);
+        gtk_entry_completion_set_inline_selection(bashCompletion_, state);
+    }
+    
     void setResponseLabel(const gchar *value){
         setLabel(responseLabel_, value);
     }

@@ -331,11 +331,16 @@ private:
 	const gchar *wd = page->workDir();
 	if (!wd) wd = g_get_home_dir();
         entryResponse->setEntryBashCompletion(wd);
+        entryResponse->setInLineCompletion(TRUE);
         
         auto response = entryResponse->runResponse();
+        TRACE("response=%s\n", response);
 	
         delete entryResponse;
         if (!response) return FALSE;
+        if (strlen(response) > 1 && response[strlen(response)-1] == G_DIR_SEPARATOR){
+            response[strlen(response)-1] = 0;
+        }
 	if (!g_file_test(response, G_FILE_TEST_IS_DIR)){
 	    gchar *message = g_strdup_printf("\n  %s:  \n  %s  \n", response, _("Not a directory"));
 	    Gtk<Type>::quickHelp(GTK_WINDOW(mainWindow), message, "dialog-error");
