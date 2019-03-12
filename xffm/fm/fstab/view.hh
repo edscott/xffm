@@ -364,7 +364,8 @@ public:
         gchar *text;
         auto fstype = fsType(path);        
         gchar *fileInfo = util_c::fileInfo(path);
- 	text = g_strdup_printf("<span size=\"large\">%s (%s)</span>\n<span color=\"red\">%s</span>\n%s %s\n%s",
+ 	//text = g_strdup_printf("<span size=\"large\">%s (%s)</span>\n<span color=\"red\">%s</span>\n%s %s\n%s",
+ 	text = g_strdup_printf("** %s (%s):\n%s\n%s %s\n%s",
 			basename, 
                         label?label:_("No Label"),
                         fstype?fstype:_("There is no file system available (unformatted)"),

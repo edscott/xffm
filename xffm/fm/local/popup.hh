@@ -256,7 +256,9 @@ public:
         auto path =(const gchar *)g_object_get_data(G_OBJECT(localItemPopUp), "path");
         auto mimetype =(const gchar *)g_object_get_data(G_OBJECT(localItemPopUp), "mimetype");
         // Set title element
-        auto statLine = Util<Type>::statInfo(path);
+        gchar *statLine;
+        if (g_list_length(view->selectionList()) > 1) statLine = g_strdup("");
+        else statLine = Util<Type>::statInfo(path);
 	Util<Type>::resetObjectData(G_OBJECT(localItemPopUp), "statLine", statLine);
         BasePopUp<Type>::changeTitle(localItemPopUp);
 	auto v2 = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "title"));

@@ -36,7 +36,7 @@ public:
             g_free(token);
             token = newToken;
             print_c::clear_text(input);
-            print_c::print(input, "red", g_strdup(newToken));
+            print_c::print(input, g_strdup(newToken));
             while(gtk_events_pending())gtk_main_iteration();
             return;
         }

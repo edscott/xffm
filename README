@@ -13,7 +13,6 @@ a glib thread crash
   pending: fix popupmenu for /dev/disks
              
 bug: 
- ** In treeview, on going to popup with button 3 and multiple selection, multiple selection is working but items are unselected from the treeview.
  
  - progress dialog for rm/trash/shred
  > use libmagic preferably instead of perl if available
