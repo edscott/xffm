@@ -1,4 +1,4 @@
-
+bug: on new window, only first tab gets set to user config font size, all other new tabs get the default font. (bug or feature?)
 bug> in pkg send stderr to output as when pkg fails, database needs manual updat "pkg update", add item to menu...
 
 Rebuild of pkg system: top level should have groups. next installed packages.
