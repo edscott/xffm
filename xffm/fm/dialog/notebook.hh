@@ -170,6 +170,11 @@ public:
 	page->setView(view);
         page->setPageWorkdir(workdir); 
 	g_free(workdir);
+
+        auto size = Settings<Type>::getSettingInteger("xfterm", "fontSize");
+        print_c::set_font_size(GTK_WIDGET(page->output()), size);
+        print_c::set_font_size(GTK_WIDGET(page->input()), size);
+    
 	/*if (!g_file_test(path, G_FILE_TEST_IS_DIR) 
 		    || strcmp(path, "xffm:local")!=0) {
 	    page->setPageLabel(view->path());

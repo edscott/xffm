@@ -594,7 +594,10 @@ public:
 	gchar *path;
         GtkTreeIter iter;
         auto treeModel = view->treeModel();
-        gtk_tree_model_get_iter (treeModel, &iter, (GtkTreePath *)tpath);
+        if (!gtk_tree_model_get_iter (treeModel, &iter, (GtkTreePath *)tpath)){
+            DBG("tpath does not exist. Aborting activate signal.\n");
+            return;
+        }
         GdkPixbuf *normal_pixbuf;
 
         gtk_tree_model_get (treeModel, &iter, PATH, &path, -1);
