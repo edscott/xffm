@@ -1,3 +1,7 @@
+BUG!: takes too long to load directories, especially with large number of files (Should monitor be disabled until load complete? Where is the bottle neck? monitor? iconview?)
+BUG: open with a mimetype of ascii text will default to single option of last choosen program: should provide list of options, completed by history of previous selections and the last selected option should be the default.
+
+
 bug: when a selected file reloads from the monitor thread because of changed condition, if previously selected, it is then unselected, 
      none changed files will not lose selection status.
 bug> in pkg send stderr to output as when pkg fails, database needs manual updat "pkg update", add item to menu...
