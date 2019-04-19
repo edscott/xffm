@@ -52,6 +52,19 @@ public:
 #endif
 	gtk_box_pack_end (vButtonBox_, GTK_WIDGET(pkg), FALSE, FALSE, 0);
 	g_signal_connect(G_OBJECT(pkg), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::pkg), NULL);
+	
+	auto usercommand = Settings<Type>::getSettingString("userbutton", "command");
+	if (usercommand){
+	    auto icon=Settings<Type>::getSettingString("userbutton", "icon");
+	    if (!icon) icon = g_strdup("system-run");
+	    auto tooltip=Settings<Type>::getSettingString("userbutton", "tooltip");
+	    if (!tooltip) tooltip = g_strdup("User button");
+	    auto userbutton = HButtonBox<double>::newButton(icon, tooltip);
+	    gtk_box_pack_end (vButtonBox_, GTK_WIDGET(userbutton), FALSE, FALSE, 0);
+	    g_free(icon);
+	    g_free(tooltip);
+	    g_signal_connect(G_OBJECT(userbutton), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::plainRun), usercommand);
+	}
 
         auto search = HButtonBox<double>::newButton("system-search", _("Search"));
 	gtk_box_pack_start (vButtonBox_, GTK_WIDGET(search), FALSE, FALSE, 0);

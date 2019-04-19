@@ -41,6 +41,10 @@ public:
 private:
     static void
     reloadSettings(void){
+	if (!settingsfile){
+	    readSettings();
+	    return;
+	}
         struct stat st;
 	errno=0;
         if (stat(settingsfile, &st) < 0){

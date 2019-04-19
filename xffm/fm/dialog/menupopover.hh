@@ -122,7 +122,13 @@ public:
 	run(notebook_p, program);
 	g_free(program);
     }
-   
+
+    static void
+    plainRun(GtkMenuItem *menuItem, gpointer data){
+	auto notebook_p = (Dialog<Type> *)g_object_get_data(G_OBJECT(mainWindow), "dialogObject");
+	run(notebook_p, (const gchar *)data);
+    }
+
     static void
     open(GtkMenuItem *menuItem, gpointer data)
     {
