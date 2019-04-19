@@ -129,7 +129,7 @@ public:
         auto diff = (const gchar *) data;
 	auto program = g_find_program_in_path(diff);
 	if (!program) {
-	    ERROR("Cannot find % in path\n", diff);
+	    ERROR("Cannot find %s in path\n", diff);
 	    return;
 	}
 	auto notebook_p = (Dialog<Type> *)g_object_get_data(G_OBJECT(mainWindow), "dialogObject");
