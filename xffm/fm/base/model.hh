@@ -54,11 +54,15 @@ class BaseModel
 protected:
     gchar *path_;
     GList *selectionList_;
-    LocalMonitor<Type> *localMonitor_;
     FstabMonitor<Type> *fstabMonitor_;
     GtkTreeModel *treeModel_;
+    GtkTreeModel *backTreeModel_;
     
 public:    
+    LocalMonitor<Type> *localMonitor_; // public to switch treemodel...
+    void setTreeModel(GtkTreeModel *model){ treeModel_ = model;}
+    void setBackTreeModel(GtkTreeModel *model){ backTreeModel_ = model;}
+
     BaseModel(Page<Type> *page){
 	page_ = page; 
         path_ = NULL;
@@ -66,6 +70,7 @@ public:
         localMonitor_ = NULL;
         fstabMonitor_ = NULL;
 	treeModel_ = mkTreeModel();
+	backTreeModel_ = mkTreeModel();
         if (!highlight_hash) highlight_hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
         if (!validBaseViewHash) {
 	    validBaseViewHash = g_hash_table_new(g_direct_hash, g_direct_equal); 
@@ -128,6 +133,7 @@ public:
 	g_hash_table_remove(validBaseViewHash, (void *)this);
         g_free(path_); 
         g_object_unref(treeModel_);
+        g_object_unref(backTreeModel_);
     }
 
     void disableMonitor(void){
@@ -180,6 +186,7 @@ public:
     Page<Type> *page(void){return page_;}
     const gchar *path(){return path_;}
     GtkTreeModel *treeModel(void){return treeModel_;}
+    GtkTreeModel *backTreeModel(void){return backTreeModel_;}
 
     void setPath(const gchar *path){
         g_free(path_);

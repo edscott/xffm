@@ -6,6 +6,8 @@ template <class Type>
 class BaseMonitor {
     gboolean active_;
     GHashTable *itemsHash_;
+public:
+    void setMonitorStore(GtkListStore *store){store_ = store;}
 protected:
     GCancellable *cancellable_;
     GFile *gfile_;

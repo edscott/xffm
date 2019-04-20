@@ -49,29 +49,35 @@ public:
 
     // This mkTreeModel should be static...
     static gint
-    loadModel (GtkTreeModel *treeModel, const gchar *path)
+    loadModel (View<Type> *view, const gchar *path)
     {
-        while (gtk_events_pending()) gtk_main_iteration();
- 	GtkTreeIter iter;
+	auto treeModel = view->treeModel();
+ 	/*GtkTreeIter iter;
 	if (gtk_tree_model_get_iter_first (treeModel, &iter)){
 	    while (gtk_list_store_remove (GTK_LIST_STORE(treeModel),&iter));
 	}
         while (gtk_events_pending()) gtk_main_iteration();
-        TRACE("removed old stuff\n");
+        TRACE("removed old stuff\n");*/
 
         int heartbeat = 0;
+
+        auto reading = g_strdup_printf(_("Reading \"%s\""), path);
+	view->page()->updateStatusLabel(reading);
+	g_free(reading);
+	while(gtk_events_pending())gtk_main_iteration();
     
         GList *directory_list = read_items (path, &heartbeat);
-        insert_list_into_model(directory_list, GTK_LIST_STORE(treeModel), path);
-        TRACE("added new stuff\n");
-        // Start the file monitor
-        // count items...
-        gint items = 0;
-        if (gtk_tree_model_get_iter_first (treeModel, &iter)) {
-            while (gtk_tree_model_iter_next(treeModel, &iter)) items++;
-        }
+	// start adding items... (threaded...)
 
-	return items;
+	auto arg = (void **)calloc(3, sizeof(void *));
+	arg[0] = (void *)directory_list;
+	arg[1] = (void *)view;
+	arg[2] = (void *)path;
+	pthread_t thread;
+	pthread_create(&thread, NULL, threadInsert, (void *)arg);
+	// detach
+	pthread_detach(thread);
+	return 0;
     }
 
 
@@ -103,6 +109,7 @@ public:
     }
 
     //FIXME: must be done by non main thread (already mutex protected)
+    //       if this is going to take long (network connection...)
     static GList *
     read_items (const gchar *path,  gint *heartbeat)
     {
@@ -183,7 +190,7 @@ public:
 		ERROR("calloc(%s): %s\n", xd_p->path, strerror(errno));
 		exit(1);
 	    }
-
+	    DBG("get_xd_p:: stat %s\n", xd_p->path);
 	    if (lstat(xd_p->path, xd_p->st) < 0) {
 		TRACE("get_xd_p() stat(%s): %s (path has disappeared)\n", xd_p->path, strerror(errno));
 	    } else {
@@ -215,6 +222,7 @@ public:
 		exit(1);
 	    }
             errno=0;
+	    TRACE("getMimeType:: stat %s (%s)\n", xd_p->path, mimetype);
 	    if (stat(xd_p->path, xd_p->st)<0){
 		if (strcmp(mimetype, "inode/symlink")==0 ){
 		   //broken link
@@ -297,26 +305,96 @@ private:
     }
 
 public:
-    static gint
-    insert_list_into_model(GList *data, GtkListStore *list_store, const gchar *path){
-	if(strcmp(path, "/")==0){
-	    RootView<Type>::addXffmItem(GTK_TREE_MODEL(list_store));
+
+    static void *statusMessage(void *data){
+	auto arg = (void **)data;
+	auto view = (View<Type> *)arg[0]; 
+	auto text = (const gchar *)arg[1]; 
+	view->page()->updateStatusLabel(text);
+	while(gtk_events_pending())gtk_main_iteration();
+	return NULL;
+    }
+	
+    static void *replaceTreeModel(void *data){
+	auto view = (View<Type> *)data; 
+	auto tmp = view->treeModel();
+	// set iconview/treeview treemodel
+	view->setTreeModel(view->backTreeModel());
+	view->setBackTreeModel(tmp);
+	gtk_tree_view_set_model(view->treeView(), view->treeModel());
+	gtk_icon_view_set_model(view->iconView(), view->treeModel());
+
+	view->localMonitor_->setMonitorStore(GTK_LIST_STORE(view->treeModel()));
+	return NULL;
+
+    }
+
+    static void *finishLoad(void *data){
+	gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
+	while(gtk_events_pending())gtk_main_iteration();
+	return NULL;
+    }
+    
+
+    static void statusLoadCount(View<Type> *view, int count, int total){
+	gchar *text;
+	if (count == total){
+	    auto fileCount = g_strdup_printf("%0d", total);
+	    text = g_strdup_printf(_("Files: %s"), fileCount); 
+	    g_free(fileCount);
+	} else {
+	    text = g_strdup_printf(_("Loaded %d of %d articles"), count, total);
 	}
-        GList *directory_list = (GList *)data;
-        gint dir_count = g_list_length(directory_list);
-        GList *l = directory_list;
-        for (; l && l->data; l= l->next){
-            //while (gtk_events_pending()) gtk_main_iteration();
-            xd_t *xd_p = (xd_t *)l->data;
-            add_local_item(list_store, xd_p);
-        }
+
+	void *arg[]={
+	    (void *)view,
+	    (void *)text
+	};
+	Util<Type>::context_function(statusMessage, (void *)arg);
+	g_free(text);
+    }
+
+    static void *threadInsert(void *data){
+	auto arg = (void **)data;
+	auto directory_list = (GList *)arg[0];
+	auto view = (View<Type> *)arg[1];
+	auto path = (const gchar *)arg[2];
+	insert_list_into_model(directory_list, view, path);
+	g_free(arg);
         GList *p = directory_list;
         for (;p && p->data; p=p->next){
             xd_t *xd_p = (xd_t *)p->data;
             free_xd_p(xd_p);
         }
         g_list_free(directory_list);
-        return dir_count;
+	Util<Type>::context_function(replaceTreeModel, (void *)view);
+	// clear out backTreeModel
+	gtk_list_store_clear (GTK_LIST_STORE(view->backTreeModel()));
+	Util<Type>::context_function(finishLoad, NULL);
+
+	return NULL;
+
+    }
+
+    static void
+    insert_list_into_model(GList *data, View<Type> *view, const gchar *path){
+	//auto list_store = GTK_LIST_STORE(view->treeModel());
+	auto list_store = GTK_LIST_STORE(view->backTreeModel());
+	if(strcmp(path, "/")==0){
+	    RootView<Type>::addXffmItem(GTK_TREE_MODEL(list_store));
+	}
+        GList *directory_list = (GList *)data;
+        GList *l = directory_list;
+        gint dir_count = g_list_length(directory_list);
+	int count = 0;
+        for (; l && l->data; l= l->next){
+            xd_t *xd_p = (xd_t *)l->data;
+            add_local_item(list_store, xd_p);
+	    if (++count % 50 == 0){
+		statusLoadCount(view, count, dir_count);
+	    }
+        }
+	statusLoadCount(view, dir_count, dir_count);
     }
 
     static gboolean
@@ -362,6 +440,7 @@ public:
         return inserted_;
     }
 public:
+    // This is for monitor insertion:
     static void
     insertLocalItem(GtkListStore *listStore, xd_t *xd_p){
         if (!xd_p->path) return;
@@ -393,9 +472,6 @@ public:
 private:
     static void
     add_local_item(GtkListStore *list_store, GtkTreeIter *iter, xd_t *xd_p){
-
-
-        
         gchar *utf_name = Util<Type>::utf_string(xd_p->d_name);
         const gchar *icon_name = xd_p->icon;
 	TRACE("icon name for %s is %s\n", xd_p->d_name, icon_name);
@@ -418,6 +494,8 @@ private:
             }
         }
         gboolean up = (strcmp(xd_p->d_name, "..")==0);
+
+
         gchar *highlight_name=NULL;
 	if (g_path_is_absolute(icon_name)) highlight_name = g_strdup(icon_name);
         if (!highlight_name && is_dir){
@@ -462,10 +540,14 @@ private:
 		Pixbuf<Type>::pixbuf_save(highlight_pixbuf, thumbnail);
 	    }
 	}
+	if (xd_p->st){TRACE("xd_p->st is populated: %s\n", utf_name);}
 	guint flags=(xd_p->d_type & 0xff);
         guint size = (xd_p->st)?xd_p->st->st_size:0;
         guint date = (xd_p->st)?xd_p->st->st_mtim.tv_sec:0;
-        gchar *statInfo = Util<Type>::statInfo(xd_p->path);
+        gchar *statInfo = NULL;
+	// statInfo is too long for big directories, and only 
+	// required for treeview...
+	if (isTreeView) statInfo = Util<Type>::statInfo(xd_p->path);
         gchar **p = NULL;
         if (!statInfo) statInfo = g_strdup("");
         if (up) flags |= 0x100;

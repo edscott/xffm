@@ -326,7 +326,19 @@ private:
 	for (int i=0; i<pages; i++){
             auto page = notebook_p->currentPageObject(i);
             auto view = page->view();
-            view->reloadModel();
+#if 1
+	    if (isTreeView){
+		// hide iconview, show treeview
+		gtk_widget_hide(GTK_WIDGET(view->page()->topScrolledWindow()));
+		gtk_widget_show(GTK_WIDGET(view->page()->treeScrolledWindow()));
+	    } else {
+		// hide treeview, show iconview
+		gtk_widget_hide(GTK_WIDGET(view->page()->treeScrolledWindow()));
+		gtk_widget_show(GTK_WIDGET(view->page()->topScrolledWindow()));
+	    }
+#else
+	    view->reloadModel();
+#endif
 	}
     }
     static void

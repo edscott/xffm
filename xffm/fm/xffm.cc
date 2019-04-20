@@ -21,6 +21,7 @@
 #endif
 
 #include <memory>
+#define USE_LOCAL_MONITOR 1
 #define FORK
 
 static const gchar *xffmProgram;

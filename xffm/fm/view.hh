@@ -83,7 +83,6 @@ public:
 	auto type = BaseSignals<Type>::getViewType(path);
 	if (type < 0) return FALSE;
 
-	gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
         auto wait = g_strdup_printf(_("Loading %s...%s"), path, _("Please Wait..."));
 	view->page()->updateStatusLabel(wait);
 	g_free(wait);
@@ -109,6 +108,8 @@ public:
                 view->page()->updateStatusLabel(NULL);
                 break;
             case (LOCALVIEW_TYPE):
+		gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
+		while (gtk_events_pending()) gtk_main_iteration();
 		if (strcmp(path, "xffm:local")==0) {
 		    view->localMonitor_ = LocalView<Type>::loadModel(view, g_get_home_dir());
 		} else {
@@ -120,16 +121,17 @@ public:
 	        view->page()->updateStatusLabel(NULL);
                 break;
             case (PKG_TYPE):
+		gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
+		while(gtk_events_pending())gtk_main_iteration();
                 PkgView<Type>::loadModel(view);
 	        view->page()->updateStatusLabel(NULL);
+		gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
+		while(gtk_events_pending())gtk_main_iteration();
                 break;
             default:
                 ERROR("ViewType %d not defined.\n", view->viewType());
                 break;
         }
-	while(gtk_events_pending())gtk_main_iteration();
-	gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
-	while(gtk_events_pending())gtk_main_iteration();
     
         return TRUE;
     }

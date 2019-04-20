@@ -43,6 +43,9 @@ public:
     {       
     }
     ~LocalMonitor(void){
+#ifndef USE_LOCAL_MONITOR
+	return;
+#endif
         TRACE("***Destructor:~local_monitor_c()\n");
 #ifdef USE_MOUNTTHREAD
         // stop mountThread
@@ -56,8 +59,11 @@ public:
     }
     void
     start_monitor(GtkTreeModel *treeModel, const gchar *path){
+#ifndef USE_LOCAL_MONITOR
+	DBG("*** Local monitor at %s s disabled.\n", path);
+#else 
         this->startMonitor(treeModel, path, (void *)monitor_f);
-#ifdef USE_MOUNTTHREAD
+# ifdef USE_MOUNTTHREAD
         // start mountThread
         pthread_t mountThread;
         TRACE("LocalMonitor thread itemshash=%p\n", this->itemsHash());
@@ -69,6 +75,7 @@ public:
 	    ERROR("thread_create(): %s\n", strerror(retval));
 	    //return retval;
 	}
+# endif
 #endif
     }
 
