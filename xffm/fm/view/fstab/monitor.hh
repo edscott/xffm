@@ -1,7 +1,5 @@
 #ifndef XF_FSTABMONITOR__HH
 # define XF_FSTABMONITOR__HH
-#include "response/timeoutresponse.hh"
-#include "fm/base/monitor.hh"
 #ifdef HAVE_MNTENT_H
 #define USE_MOUNTTHREAD
 #endif

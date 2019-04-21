@@ -1,8 +1,8 @@
 #ifndef XF_PAGE_CHILD
 #define XF_PAGE_CHILD
 #include "runbutton.hh"
-#include "pagebase.hh"
-#include "fm/page/pagesignals.hh"
+#include "signals.hh"
+#include "base.hh"
 
 namespace xf{
 template <class Type> class Dialog;

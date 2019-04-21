@@ -1,11 +1,6 @@
 #ifndef FINDSIGNALS__HH
 # define FINDSIGNALS__HH
 
-#include "types.h"
-#include "common/print.hh"
-#include "common/run.hh"
-#include "common/util.hh"
-#include "response/entryfileresponse.hh"
 static const gchar *ftypes[] = {
     N_("Regular"),
     N_("Directory"),

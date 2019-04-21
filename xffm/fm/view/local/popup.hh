@@ -1,6 +1,7 @@
 #ifndef XF_LOCALITEMPOPUP__HH
 # define XF_LOCALITEMPOPUP__HH
 
+#include "rm.hh"
 #include "properties.hh"
 
 static const gchar *directoryItems[] ={

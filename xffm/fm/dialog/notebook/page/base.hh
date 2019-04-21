@@ -1,10 +1,8 @@
 #ifndef PAGE_BASE
 #define PAGE_BASE
-#include "vbuttonbox.hh"
 #include "hbuttonbox.hh"
 #include "pathbar.hh"
 #include "vpane.hh"
-#include "completion/completion.hh"
 #include "threadcontrol.hh"
 
 namespace xf {

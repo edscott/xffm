@@ -305,6 +305,22 @@ public:
 	return box;
     }
 
+    static GtkButton *newButton(const gchar *icon, const gchar *tooltipText){
+	auto button =  GTK_BUTTON(gtk_button_new());
+        setup_image_button(button, icon, tooltipText);
+	gtk_widget_set_can_focus (GTK_WIDGET(button), FALSE);
+	gtk_button_set_relief (button, GTK_RELIEF_NONE);
+        gtk_widget_set_tooltip_markup (GTK_WIDGET(button),tooltipText);
+	return button;
+    }
+    
+/*    static GtkButton *newButtonL(const gchar *icon, const gchar *tooltipText){
+	auto button =  gtk_c::dialog_button(icon, NULL);
+	gtk_widget_set_can_focus (GTK_WIDGET(button), FALSE);
+	gtk_button_set_relief (button, GTK_RELIEF_NONE);
+        gtk_widget_set_tooltip_markup (GTK_WIDGET(button),tooltipText);
+	return button;
+    }*/
 
     static GtkButton *
     dialog_button (const char *icon_id, const char *text) {

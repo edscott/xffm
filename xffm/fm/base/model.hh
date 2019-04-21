@@ -2,10 +2,6 @@
 # define XF_BASEMODEL__HH
 #include <thread>
 
-#include "signals.hh"
-#include "popup.hh"
-
-
 namespace xf
 {
 template <class Type> class View;

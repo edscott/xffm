@@ -1,15 +1,6 @@
 #ifndef XF_PKGMODEL__HH
 # define XF_PKGMODEL__HH
 
-#ifdef HAVE_EMERGE 
-# include "emerge.hh"
-#else
-# ifdef HAVE_PACMAN
-#  include "pacman.hh"
-# else
-#  include "pkg.hh"
-# endif
-#endif
 
 namespace xf
 {

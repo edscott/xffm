@@ -1,6 +1,5 @@
 #ifndef XFFM_HH
 #define XFFM_HH
-#define URIFILE "file://"
 
 enum
 {
@@ -37,7 +36,6 @@ enum
 };
 
 namespace xf {
-    static gboolean isTreeView;
     static GList *localMonitorList = NULL;
     static GtkMenu *fstabPopUp=NULL;
     static GtkMenu *fstabItemPopUp=NULL;
@@ -60,34 +58,9 @@ namespace xf {
 	NULL
     };
 }
-#include "types.h"
 
-#include "common/tubo.hh"
-#include "common/util.hh"
-#include "common/pixbuf.hh"
-#include "common/print.hh"
-#include "common/settings.hh"
-#include "common/mime.hh"
-#include "common/run.hh"
-#include "common/gio.hh"
-#include "common/dnd.hh"
-#include "common/clipboard.hh"
-#include "common/gtk.hh"
-#include "common/tooltip.hh"
-#include "common/icons.hh"
-
-#include "response/passwdresponse.hh"
-#include "response/comboresponse.hh"
-#include "response/commandresponse.hh"
-
-#include "find/fgr.hh"
-#include "find/find.hh"
-#include "find/signals.hh"
-
-
-#include "base/model.hh"
-#include "view.hh"
-
+#include "base/base.hh"
+#include "view/view.hh"
 #include "dialog/dialog.hh"
 
 namespace xf {

@@ -34,10 +34,10 @@ public:
 	fmButtonBox_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
 	termButtonBox_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
 	
-        toggleToTerminal_ =  newButton("utilities-terminal-symbolic",_("Embedded Terminal"));
-	toggleToIconview_ = newButton("system-file-manager-symbolic", _("All items in the iconview."));
-	scriptButton_ =  newButton("document-revert-symbolic", _("Scripting"));
-	clearButton_ =  newButton("edit-clear-all", _("Clear Log"));
+        toggleToTerminal_ =  gtk_c::newButton("utilities-terminal-symbolic",_("Embedded Terminal"));
+	toggleToIconview_ = gtk_c::newButton("system-file-manager-symbolic", _("All items in the iconview."));
+	scriptButton_ =  gtk_c::newButton("document-revert-symbolic", _("Scripting"));
+	clearButton_ =  gtk_c::newButton("edit-clear-all", _("Clear Log"));
 	input_ = createStatus(); // Status textview
 	sizeScale_ = newSizeScale(_("Terminal font"));
 	statusLabel_ = GTK_LABEL(gtk_label_new (""));
@@ -101,23 +101,8 @@ public:
     }
 
 
-    static GtkButton *newButton(const gchar *icon, const gchar *tooltipText){
-	auto button =  GTK_BUTTON(gtk_button_new());
-        gtk_c::setup_image_button(button, icon, tooltipText);
-	gtk_widget_set_can_focus (GTK_WIDGET(button), FALSE);
-	gtk_button_set_relief (button, GTK_RELIEF_NONE);
-        gtk_widget_set_tooltip_markup (GTK_WIDGET(button),tooltipText);
-	return button;
-    }
 private:
 
-    static GtkButton *newButtonL(const gchar *icon, const gchar *tooltipText){
-	auto button =  gtk_c::dialog_button(icon, NULL);
-	gtk_widget_set_can_focus (GTK_WIDGET(button), FALSE);
-	gtk_button_set_relief (button, GTK_RELIEF_NONE);
-        gtk_widget_set_tooltip_markup (GTK_WIDGET(button),tooltipText);
-	return button;
-    }
     static GtkScale *newSizeScale(const gchar *tooltipText){
 	auto size_scale = GTK_SCALE(gtk_scale_new_with_range(GTK_ORIENTATION_HORIZONTAL, 6.0, 24.0, 6.0));
         // Load saved value fron xffm+/settings.ini file (if any)

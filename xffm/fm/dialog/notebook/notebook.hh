@@ -1,8 +1,10 @@
 #ifndef XF_NOTEBOOK
 #define XF_NOTEBOOK
-#include "fm/dialog/menupopover.hh"
-#include "fm/page/page.hh"
-#include "fm/dialog/notebooksignals.hh"
+#include "signals.hh"
+#include "menupopover.hh"
+#include "vbuttonbox.hh"
+#include "page/page.hh"
+
     
 static GList *textview_list=NULL;
 

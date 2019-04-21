@@ -1,6 +1,5 @@
 #ifndef XF_VBUTTONBOX
 #define XF_VBUTTONBOX
-#include "hbuttonbox.hh"
 namespace xf {
 
 template <class Type>
@@ -35,18 +34,18 @@ public:
 				    GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 #ifdef HAVE_PKG
 	auto pkg = 
-	    HButtonBox<double>::newButton("emblem-bsd", _("Software Updater"));
+	    gtk_c::newButton("emblem-bsd", _("Software Updater"));
 #else
 # ifdef HAVE_PACMAN
 	auto pkg = 
-	    HButtonBox<double>::newButton("emblem-archlinux", _("Software Updater"));
+	    gtk_c::newButton("emblem-archlinux", _("Software Updater"));
 # else
 #  if HAVE_EMERGE
 	auto pkg = 
-	    HButtonBox<double>::newButton("emblem-gentoo", _("Software Updater"));
+	    gtk_c::newButton("emblem-gentoo", _("Software Updater"));
 #  else
 	auto pkg = 
-	    HButtonBox<double>::newButton("help-about-symbolic", _("Software Updater"));
+	    gtk_c::newButton("help-about-symbolic", _("Software Updater"));
 #  endif
 # endif
 #endif
@@ -59,40 +58,40 @@ public:
 	    if (!icon) icon = g_strdup("system-run");
 	    auto tooltip=Settings<Type>::getSettingString("userbutton", "tooltip");
 	    if (!tooltip) tooltip = g_strdup("User button");
-	    auto userbutton = HButtonBox<double>::newButton(icon, tooltip);
+	    auto userbutton = gtk_c::newButton(icon, tooltip);
 	    gtk_box_pack_end (vButtonBox_, GTK_WIDGET(userbutton), FALSE, FALSE, 0);
 	    g_free(icon);
 	    g_free(tooltip);
 	    g_signal_connect(G_OBJECT(userbutton), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::plainRun), usercommand);
 	}
 
-        auto search = HButtonBox<double>::newButton("system-search", _("Search"));
+        auto search = gtk_c::newButton("system-search", _("Search"));
 	gtk_box_pack_start (vButtonBox_, GTK_WIDGET(search), FALSE, FALSE, 0);
 	g_signal_connect(G_OBJECT(search), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::search), NULL);
 
-        auto terminal = HButtonBox<double>::newButton("utilities-terminal", _("Open terminal"));
+        auto terminal = gtk_c::newButton("utilities-terminal", _("Open terminal"));
 	gtk_box_pack_start (vButtonBox_, GTK_WIDGET(terminal), FALSE, FALSE, 0);
 	g_signal_connect(G_OBJECT(terminal), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::terminal), NULL);
 
-        auto newWindow = HButtonBox<double>::newButton("window-new", _("Open a New Window"));
+        auto newWindow = gtk_c::newButton("window-new", _("Open a New Window"));
 	gtk_box_pack_start (vButtonBox_, GTK_WIDGET(newWindow), FALSE, FALSE, 0);
 	g_signal_connect(G_OBJECT(newWindow), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::open), 
                 (void *)"xffm");
 
-        auto differences = HButtonBox<double>::newButton("differences", _("Differences"));
+        auto differences = gtk_c::newButton("differences", _("Differences"));
 	gtk_box_pack_start (vButtonBox_, GTK_WIDGET(differences), FALSE, FALSE, 0);
 	g_signal_connect(G_OBJECT(differences), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::open), 
                 (void *)"rodent-diff");
 
-        auto home = HButtonBox<double>::newButton("go-home", _("Home Directory"));
+        auto home = gtk_c::newButton("go-home", _("Home Directory"));
 	gtk_box_pack_start (vButtonBox_, GTK_WIDGET(home), FALSE, FALSE, 0);
 	g_signal_connect(G_OBJECT(home), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::home), NULL);
 
-        auto fstab = HButtonBox<double>::newButton("media-eject", _("Disk Image Mounter"));
+        auto fstab = gtk_c::newButton("media-eject", _("Disk Image Mounter"));
 	gtk_box_pack_start (vButtonBox_, GTK_WIDGET(fstab), FALSE, FALSE, 0);
 	g_signal_connect(G_OBJECT(fstab), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::fstab), NULL);
 
-	auto trash = HButtonBox<double>::newButton("user-trash", _("Trash bin"));
+	auto trash = gtk_c::newButton("user-trash", _("Trash bin"));
 	gtk_box_pack_start (vButtonBox_, GTK_WIDGET(trash), FALSE, FALSE, 0);
 	g_signal_connect(G_OBJECT(trash), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::trash), NULL);
 

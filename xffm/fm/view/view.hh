@@ -16,24 +16,16 @@ namespace xf{
     template <class Type> class PkgModel;
 }
 
-#include "root/view.hh"
-
-#include "local/model.hh"
-#include "local/popup.hh"
-#include "local/view.hh"
-#include "local/monitor.hh"
-
-#include "fstab/view.hh"
-#include "fstab/popup.hh"
-#include "fstab/monitor.hh"
-
-#include "pkg/view.hh"
-#include "pkg/popup.hh"
-
-
-
 #include "iconview.hh"
 #include "treeview.hh"
+
+#include "root/view.hh"
+#include "local/view.hh"
+#include "fstab/view.hh"
+#include "pkg/view.hh"
+
+
+
 
 namespace xf
 {

@@ -3,7 +3,6 @@
 
 
 #include "model.hh"
-#include "rm.hh"
 #include "icons.hh"
 #include "popup.hh"
 #include "monitor.hh"

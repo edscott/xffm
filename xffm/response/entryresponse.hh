@@ -1,6 +1,5 @@
 #ifndef XF_ENTRYRESPONSE_HH
 # define XF_ENTRYRESPONSE_HH
-#include "completion/completion.hh"
 #include "entryfileresponse.hh"
 namespace xf
 {

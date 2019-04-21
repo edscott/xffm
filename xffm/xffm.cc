@@ -24,10 +24,18 @@
 #define USE_LOCAL_MONITOR 1
 #define FORK
 
+#define URIFILE "file://"
+
 static const gchar *xffmProgram;
 static const gchar *xffindProgram;
 static GtkWindow *mainWindow = NULL;
-#include "fm.hh"
+static gboolean isTreeView;
+#include "common/common.hh"
+#include "completion/completion.hh"
+#include "response/response.hh"
+#include "find/find.hh"
+#include "fm/fm.hh"
+
 
 
 int

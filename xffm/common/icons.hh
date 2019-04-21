@@ -3,18 +3,14 @@
 #include <string.h>
 #include <stdlib.h>
 #include <errno.h>
-//#include "util_c.hpp"
-//#include "pixbuf_icons_c.hpp"
 
 #include "cairo.hh"
 #include "hash.hh"
-#include "util.hh"
 
 #ifndef PREFIX
 # warning "PREFIX not defined: defaulting to /usr/local"
 #define PREFIX "/usr/local"
 #endif
-//static void *insert_decoration_f (void *);
 
 static GThread *self;
 static GtkIconTheme *icon_theme=NULL;

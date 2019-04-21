@@ -1,6 +1,5 @@
 #ifndef XF_LOCALMONITOR__HH
 # define XF_LOCALMONITOR__HH
-#include "fm/base/monitor.hh"
 #ifdef HAVE_MNTENT_H
 #define USE_MOUNTTHREAD
 #endif

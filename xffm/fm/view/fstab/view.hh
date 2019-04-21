@@ -56,6 +56,8 @@ msgid "NFS remote directory"
 #ifdef HAVE_SYS_PARAM_H
 # include <sys/param.h>
 #endif
+#include "popup.hh"
+#include "monitor.hh"
 
 
     // XXX this is Linux Version. FreeBSD differs (see fstab module)

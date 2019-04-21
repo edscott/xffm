@@ -1,6 +1,6 @@
 #ifndef MENU_POPOVER_HH
 #define MENU_POPOVER_HH
-#include "dialogsignals.hh"
+
 namespace xf {
 template <class Type> class Notebook;
 template <class Type> class Page;

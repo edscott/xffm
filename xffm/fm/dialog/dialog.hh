@@ -1,9 +1,10 @@
 #ifndef XF_DIALOG
 #define XF_DIALOG
-
-#include "notebook.hh"
-#include "dialogsignals.hh"
 #include <memory>
+
+#include "clipboard.hh"
+#include "signals.hh"
+#include "notebook/notebook.hh"
 
 namespace xf {
 
