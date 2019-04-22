@@ -21,7 +21,8 @@ public:
         keyFile = g_key_file_new();
         settingsfile = (gchar *)g_build_filename(g_get_user_config_dir(),"xffm+","settings.ini", NULL);
         gboolean loaded = g_key_file_load_from_file(keyFile, settingsfile,
-               (GKeyFileFlags) (G_KEY_FILE_KEEP_COMMENTS |  G_KEY_FILE_KEEP_TRANSLATIONS),
+               //(GKeyFileFlags) (G_KEY_FILE_KEEP_COMMENTS |  G_KEY_FILE_KEEP_TRANSLATIONS),
+               (GKeyFileFlags) (0),
                 NULL);
         if (!loaded) {
             gchar *text = g_strdup_printf("%s %s\n", _("New File:"), settingsfile);

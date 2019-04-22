@@ -152,6 +152,13 @@ public:
 	
         TRACE("***localmonitor stat_func(): iconname=%s\n", iconName);
         GdkPixbuf *pixbuf = Pixbuf<Type>::get_pixbuf(iconName,  GTK_ICON_SIZE_DIALOG);
+        auto highlight_pixbuf = gdk_pixbuf_copy(pixbuf);
+        // Now decorate the pixbuf with emblem (types.h).
+        void *arg[] = {NULL, (void *)highlight_pixbuf, NULL, NULL, (void *)HIGHLIGHT_OPEN_EMBLEM };
+        // Done by main gtk thread:
+        Util<Type>::context_function(Icons<Type>::insert_decoration_f, arg);
+        
+
 
 	gtk_list_store_set (store, iter, 
                 SIZE, xd_p->st->st_size, 
@@ -159,6 +166,7 @@ public:
                 ICON_NAME, iconName,
                 DISPLAY_PIXBUF, pixbuf,
                 NORMAL_PIXBUF, pixbuf,
+                HIGHLIGHT_PIXBUF, highlight_pixbuf, 
                 FLAGS, xd_p->d_type,
 		-1);
         LocalModel<Type>::free_xd_p(xd_p);

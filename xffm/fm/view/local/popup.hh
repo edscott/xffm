@@ -502,7 +502,16 @@ private:
     }
 
     static gchar *
-    defaultMimeTypeApp(const gchar *mimetype, const gchar *fileInfo){
+    defaultExtApp(const gchar *path){
+        auto ext = strrchr(path, '.');
+        if (!ext || strlen(ext)<2) return NULL;
+	gchar *defaultApp = Settings<Type>::getSettingString("MimeTypeApplications", ext+1);
+        TRACE("*** defaultExtApp (%s) --> %s --> %s\n", path, ext+1, defaultApp);
+	return defaultApp;
+    }
+
+    static gchar *
+    defaultMimeTypeApp(const gchar *mimetype){
 	gchar *defaultApp = Settings<Type>::getSettingString("MimeTypeApplications", mimetype);
 	if (!defaultApp) {
 	    const gchar **apps = Mime<Type>::locate_apps(mimetype);
@@ -511,9 +520,7 @@ private:
 
 	if (!defaultApp)  {
 	    gboolean textMimetype = (mimetype && strncmp(mimetype, "text/", strlen("text/")) == 0);
-	    gboolean textFiletype =(fileInfo && 
-		    (strstr(fileInfo, "text")||strstr(fileInfo,"empty")));
-	    if (textMimetype || textFiletype) {
+	    if (textMimetype) {
 		gchar *editor = util_c::get_text_editor();
 		defaultApp =g_strdup_printf("%s %%s", editor);
 		g_free(editor);
@@ -522,10 +529,25 @@ private:
 	return defaultApp;
     }
 
+    static gchar *
+    defaultTextApp(const gchar *fileInfo){
+	gchar *defaultApp = NULL;
+        gboolean textFiletype =(fileInfo && 
+                (strstr(fileInfo, "text")||strstr(fileInfo,"empty")));
+        if (textFiletype) {
+            gchar *editor = util_c::get_text_editor();
+            defaultApp =g_strdup_printf("%s %%s", editor);
+            g_free(editor);
+        }
+	return defaultApp;
+    }
+
     static void 
     setUpMimeTypeApp(const gchar *mimetype, const gchar *path, const gchar *fileInfo)
     {
-	gchar *defaultApp = defaultMimeTypeApp(mimetype, fileInfo);
+        gchar *defaultApp = defaultExtApp(path);
+        if (!defaultApp) defaultApp = defaultMimeTypeApp(mimetype);
+        if (!defaultApp) defaultApp = defaultTextApp(fileInfo);
 
 	auto v = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(localItemPopUp), "mimetypeOpen"));
 	if (defaultApp)  {
@@ -740,7 +762,7 @@ public:
 		//change workdir
 		errno=0;
 		if (g_file_test(response, G_FILE_TEST_IS_DIR) && chdir(response)==0){
-		    DBG("chdir to %s\n", response);   
+		    TRACE("chdir to %s\n", response);   
 		    gchar *format; 
 		    if (strstr(mimetype, "bzip")) format=g_strdup("-xjf");
 		    else if (strstr(mimetype, "xz")) format=g_strdup("-xJf");
@@ -1071,6 +1093,7 @@ public:
                 *p = '\n';
             }
         }
+        TRACE("*** openwith.....\n");
 	gchar *responseLabel = g_strdup_printf("<b><span size=\"larger\" color=\"blue\">%s</span></b>\n<span color=\"#880000\">(%s)</span>", 
 		mpath, 
 		multiple?_("You have selected multiple files or folders"):mimetype);
@@ -1081,10 +1104,19 @@ public:
 	const gchar **apps = Mime<Type>::locate_apps(mimetype);
 
 	gchar *fileInfo;
-        if (multiple) fileInfo = g_strdup("FIXMEfileinfo");
+        if (multiple) fileInfo = g_strdup("FIXME fileinfo");
         else fileInfo = util_c::fileInfo(path);	
-	gchar *defaultApp = multiple?g_strdup(""):defaultMimeTypeApp(mimetype, fileInfo);
+	gchar *defaultApp = multiple?g_strdup(""):defaultExtApp(path);
+
+	gchar *textApp = multiple?g_strdup(""):defaultTextApp(fileInfo);
 	g_free(fileInfo);
+        auto appCount = 0;
+        if (apps && apps[0]) {
+            appCount++;
+            if (apps[1]) appCount++;
+        }
+        if (defaultApp) appCount++;
+        if (textApp) appCount++;
         
 	auto view =  (View<Type> *)g_object_get_data(G_OBJECT(localItemPopUp), "view");
 	// get page
@@ -1092,7 +1124,7 @@ public:
 	const gchar *wd = page->workDir();
 	if (!wd) wd = g_get_home_dir();
         gchar *response = NULL;
-        if (!apps || apps[0] == NULL || apps[1] == NULL) {
+        if (appCount <= 1) {
             auto entryResponse = new(EntryResponse<Type>)(GTK_WINDOW(mainWindow), _("Open with"), NULL);
             entryResponse->setResponseLabel(responseLabel);
             g_free(responseLabel);
@@ -1101,7 +1133,9 @@ public:
             if (!multiple) entryResponse->setCheckButton(defaultApp && Mime<Type>::runInTerminal(defaultApp));
 
             entryResponse->setEntryLabel(_("Open with"));
-            entryResponse->setEntryDefault(defaultApp);
+            if (apps && apps[0]) entryResponse->setEntryDefault(apps[0]);
+            if (textApp) entryResponse->setEntryDefault(textApp);
+            if (defaultApp) entryResponse->setEntryDefault(defaultApp);
             entryResponse->setEntryBashCompletion(wd);
             
             entryResponse->setCheckButtonEntryCallback((void *)toggleTerminal); 
@@ -1117,8 +1151,9 @@ public:
             if (!multiple) comboResponse->setCheckButton(defaultApp && Mime<Type>::runInTerminal(defaultApp));
 
             comboResponse->setComboLabel(_("Open with"));
-            comboResponse->setComboOptions(apps);
-            comboResponse->setComboDefault(defaultApp);
+            if (apps && apps[0]) comboResponse->setComboOptions(apps);
+            if (textApp) comboResponse->setComboDefault(textApp);
+            if (defaultApp) comboResponse->setComboDefault(defaultApp);
             comboResponse->setComboBashCompletion(wd);
 
             comboResponse->setCheckButtonComboCallback((void *)toggleTerminal); 
@@ -1129,6 +1164,7 @@ public:
         }
 
 	g_free(defaultApp);
+	g_free(textApp);
 	if (!response) return;
 
 	// Check whether applicacion is valid.
@@ -1139,9 +1175,16 @@ public:
 	    g_free(message);
 	    return;
 	}
-	// save value as default for mimetype
+	// save value as default for mimetype extension
 	if (strrchr(response,'\n')) *(strrchr(response,'\n')) = 0;
-	Settings<Type>::setSettingString("MimeTypeApplications", mimetype, response);
+        if (strchr(path, '.') && strlen(strchr(path, '.'))>1){
+            auto ext = strrchr(path,'.') + 1; 
+	    Settings<Type>::setSettingString("MimeTypeApplications", ext, response);
+            TRACE("*** saving %s --> response\n", ext, response);
+        } else {
+	    Settings<Type>::setSettingString("MimeTypeApplications", mimetype, response);
+            TRACE("*** saving %s --> response\n", mimetype, response);
+         }
 	gchar *command;
         if (!multiple) {
 	// Is the terminal flag set?

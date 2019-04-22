@@ -145,6 +145,11 @@ public:
             ERROR("files==NULL\n");
             return FALSE;
         }
+        TRACE("*** target=%s, *files%s\n",target, (*files)+strlen(URIFILE));
+        if (strcmp(target, (*files)+strlen(URIFILE))==0){
+            TRACE("gio.hh:: cannot dnd a file unto itself: %s\n", target);
+            return FALSE;
+        }
             
         gchar *source = g_path_get_dirname(*files);
 	if (strncmp(source, URIFILE, strlen(URIFILE))==0){

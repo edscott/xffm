@@ -73,7 +73,9 @@ public:
 	if (pixbuf) return pixbuf;
 	pixbuf = pixbuf_icons_c::get_theme_pixbuf("image-missing", pixels);
 	if (pixbuf) pixbuf_hash_c::put_in_pixbuf_hash(icon_name, pixels, pixbuf);
-	DBG("xf::Pixbuf::get_pixbuf(): image-missing. Please install icon \"%s\"\n", icon_name);
+	if (!g_path_is_absolute(icon_name)){
+            DBG("xf::Pixbuf::get_pixbuf(): image-missing. Please install icon \"%s\"\n", icon_name);
+        }
 	return pixbuf;
      }
 

@@ -17,7 +17,7 @@ public:
                    gpointer     data)
     {
 	static gboolean startup = TRUE;
-        DBG("switch_page: new page=%d last page=%d\n", new_page, lastPage);
+        TRACE("switch_page: new page=%d last page=%d\n", new_page, lastPage);
         auto notebook_p = (Notebook<Type> *)data;
         auto page_p = (Page<Type> *)notebook_p->currentPageObject(new_page);
         if (!page_p){
@@ -60,7 +60,7 @@ public:
                    guint        page_num,
                    gpointer     data)
     {
-        DBG("page_added\n");
+        TRACE("page_added\n");
         if (lastPage < 0)lastPage=0;
         /*auto notebook_p = (Notebook<Type> *)data;
         if (lastPage >= 0){
@@ -76,7 +76,7 @@ public:
                    guint        page_num,
                    gpointer     data)
     {
-        DBG("page_removed\n");
+        TRACE("page_removed\n");
     }
 
     static void
@@ -85,7 +85,7 @@ public:
                    guint        page_num,
                    gpointer     data)
     {
-        DBG("page_reordered page is %d, lastPage=%d\n", page_num, lastPage);
+        TRACE("page_reordered page is %d, lastPage=%d\n", page_num, lastPage);
         lastPage = page_num;
     }
 #define NOTEBOOK_1_CALLBACK(X)  G_CALLBACK((void (*)(GtkNotebook *,GtkDirectionType *,gpointer)) X)

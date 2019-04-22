@@ -95,12 +95,10 @@ public:
 	if (!icon_theme) init();
 	if (!g_path_is_absolute (icon_name)) return NULL;
 	if (!g_file_test (icon_name, G_FILE_TEST_EXISTS)) {
-	    g_warning("*** %s does not exist.\n", icon_name);
+	    ERROR("icons.hh:: absolute_path_icon(): %s does not exist.\n", icon_name);
 	    return NULL;
 	}
-	auto pixbuf = pixbuf_new_from_file(icon_name, size, size); // width,height.
-	if (pixbuf) return pixbuf;
-	return NULL;
+	return pixbuf_new_from_file(icon_name, size, size); // width,height.
     }
 
     static gboolean iconThemeHasIcon(const gchar *icon_name){
@@ -113,6 +111,10 @@ public:
     get_theme_pixbuf(const gchar *icon_name, gint size){
 	if (!icon_theme) init();
 	GdkPixbuf *pixbuf = NULL;
+
+        if (g_path_is_absolute(icon_name) && g_file_test(icon_name, G_FILE_TEST_EXISTS)){
+            return pixbuf_new_from_file(icon_name, size, size);
+        }
 
 	// Load the basic icontheme or backup icon
 	GError *error = NULL;
@@ -148,6 +150,10 @@ public:
 	} else {
 	    pixbuf = gdk_pixbuf_new_from_file_at_size (path, width, height, &error);
 	}
+        if (error){
+            TRACE("%s\n", error->message);
+            g_error_free(error);
+        }
 
 	// hmmm... from the scale_simple line below, it seems that the above two
 	//         functions will do a g_object_ref on the returned pixbuf...

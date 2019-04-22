@@ -190,7 +190,7 @@ public:
 		ERROR("calloc(%s): %s\n", xd_p->path, strerror(errno));
 		exit(1);
 	    }
-	    DBG("get_xd_p:: stat %s\n", xd_p->path);
+	    TRACE("get_xd_p:: stat %s\n", xd_p->path);
 	    if (lstat(xd_p->path, xd_p->st) < 0) {
 		TRACE("get_xd_p() stat(%s): %s (path has disappeared)\n", xd_p->path, strerror(errno));
 	    } else {
@@ -495,24 +495,6 @@ private:
         }
         gboolean up = (strcmp(xd_p->d_name, "..")==0);
 
-
-        gchar *highlight_name=NULL;
-	if (g_path_is_absolute(icon_name)) highlight_name = g_strdup(icon_name);
-        if (!highlight_name && is_dir){
-            if (strcmp(xd_p->d_name, "..")==0) {
-                highlight_name = g_strdup("go-up/NW/go-up-symbolic/2.0/225");
-            } else highlight_name = g_strdup("document-open");
-        } else if (!highlight_name){
-            gchar *h_name = LocalIcons<Type>::getIconname(xd_p);
-            if (xd_p->st && U_RX(xd_p->st->st_mode)) {
-                highlight_name = 
-                    g_strdup_printf("%s/NE/application-x-executable-symbolic/2.5/220", h_name);
-            } else {
-                highlight_name = 
-                    g_strdup_printf("%s/NE/document-open-symbolic/3.0/220", h_name);
-            }
-            g_free(h_name);
-        }
         TRACE("iconname, highlight: %s, %s\n", icon_name, highlight_name);
         GdkPixbuf *treeViewPixbuf = NULL;
         GdkPixbuf *normal_pixbuf = NULL;
@@ -520,25 +502,30 @@ private:
 
 	if (g_path_is_absolute(icon_name))
 	    normal_pixbuf = Preview<Type>::loadFromThumbnails(icon_name, xd_p->st, 48, 48);
-	if (g_path_is_absolute(highlight_name)){
-	    if (strcmp(highlight_name, icon_name)==0) highlight_pixbuf = normal_pixbuf;
-	    else highlight_pixbuf = Preview<Type>::loadFromThumbnails(highlight_name, xd_p->st, 48, 48);
-	}
       
         if (!treeViewPixbuf) 
 	    treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name, -24);
         if (!normal_pixbuf) {
-	    auto thumbnail = Hash<Type>::get_thumbnail_path (icon_name, 48);
-	    normal_pixbuf = Pixbuf<Type>::get_pixbuf(icon_name, -48);
+	    auto thumbnail = Hash<Type>::get_thumbnail_path (icon_name, GTK_ICON_SIZE_DIALOG);
+	    normal_pixbuf = Pixbuf<Type>::get_pixbuf(icon_name, GTK_ICON_SIZE_DIALOG);
 	    Pixbuf<Type>::pixbuf_save(normal_pixbuf, thumbnail);
 	}
+        //Highlight emblem macros are defined in types.h
         if (!highlight_pixbuf) {
-	    if (strcmp(highlight_name, icon_name)==0) highlight_pixbuf = normal_pixbuf;
-	    else {
-		auto thumbnail = Hash<Type>::get_thumbnail_path (highlight_name, 48);
-		highlight_pixbuf = Pixbuf<Type>::get_pixbuf(highlight_name, -48);
-		Pixbuf<Type>::pixbuf_save(highlight_pixbuf, thumbnail);
-	    }
+            highlight_pixbuf = gdk_pixbuf_copy(normal_pixbuf);
+            const gchar *emblem;
+            if (strcmp(xd_p->d_name, "..")==0) emblem = HIGHLIGHT_UP_EMBLEM;
+            else {
+                if (xd_p->st && U_RX(xd_p->st->st_mode)) {
+                    emblem = HIGHLIGHT_EXEC_EMBLEM;
+                } else {
+                    emblem = HIGHLIGHT_OPEN_EMBLEM;
+                }
+            }
+            // Now decorate the pixbuf with emblem (types.h).
+            void *arg[] = {NULL, (void *)highlight_pixbuf, NULL, NULL, (void *)HIGHLIGHT_OPEN_EMBLEM };
+            // Done by main gtk thread:
+            Util<Type>::context_function(Icons<Type>::insert_decoration_f, arg);
 	}
 	if (xd_p->st){TRACE("xd_p->st is populated: %s\n", utf_name);}
 	guint flags=(xd_p->d_type & 0xff);
@@ -567,7 +554,6 @@ private:
                 TOOLTIP_TEXT, statInfo,
                 -1);
         g_free(statInfo);
-        g_free(highlight_name);
         g_free(utf_name);
     }
 

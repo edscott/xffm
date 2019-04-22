@@ -385,14 +385,14 @@ public:
 
 public:
     static const gchar **
-    locate_apps (const gchar * type) {
+    locate_apps (const gchar * mimetype) {
 
         //load_hashes ();
         ///  now look in hash...
-        if (!type) return NULL;
-        gchar *key = get_hash_key (type);
+        if (!mimetype) return NULL;
+        gchar *key = get_hash_key (mimetype);
         pthread_mutex_lock(&application_hash_mutex);
-	TRACE("loading apps for mimetype: %s\n", type);
+	TRACE("loading apps for mimetype: %s\n", mimetype);
         auto apps = (const gchar **)g_hash_table_lookup (application_hash_type, key);
         pthread_mutex_unlock(&application_hash_mutex);
         g_free (key);
@@ -676,7 +676,7 @@ private:
 	GKeyFile *key_file = g_key_file_new();
 	gchar *file = g_build_filename(dir,d->d_name, NULL);
 	gboolean loaded = g_key_file_load_from_file(key_file, file, 
-		(GKeyFileFlags) (G_KEY_FILE_KEEP_COMMENTS |  G_KEY_FILE_KEEP_TRANSLATIONS), NULL);
+		(GKeyFileFlags) (0), NULL);
 	g_free(file);
 	if (!loaded) return;
 	const gchar *group = "Desktop Entry";
