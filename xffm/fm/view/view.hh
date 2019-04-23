@@ -221,18 +221,19 @@ public:
         GtkTreePath *tpath = gtk_icon_view_get_path_at_pos (iconView_, X, Y); 
 	if (!tpath) {
 	    if (!highlightPathString) return;
-		// clear highlight
-		tpath = gtk_tree_path_new_from_string(highlightPathString);
-		gtk_tree_model_get_iter (this->treeModel(), &iter, tpath);
-		gtk_tree_model_get (this->treeModel(), &iter, 
-			NORMAL_PIXBUF, &pixbuf, -1);
-		gtk_list_store_set (GTK_LIST_STORE(this->treeModel()), &iter,
-			DISPLAY_PIXBUF, pixbuf, 
-		    -1);
+	    // clear highlight
+	    DBG("highlight %s\n", highlightPathString);
+	    /*tpath = gtk_tree_path_new_from_string(highlightPathString);
+	    gtk_tree_model_get_iter (this->treeModel(), &iter, tpath);
+	    gtk_tree_model_get (this->treeModel(), &iter, 
+		    NORMAL_PIXBUF, &pixbuf, -1);
+	    gtk_list_store_set (GTK_LIST_STORE(this->treeModel()), &iter,
+		    DISPLAY_PIXBUF, pixbuf, 
+		-1);*/
 	    g_free(highlightPathString);
 	    gtk_tree_path_free(tpath);
 	    highlightPathString = NULL;
-	    DBG("tpath is NULL\n");
+	    TRACE("tpath is NULL\n");
 	    return;
 	}
         auto treePathString = gtk_tree_path_to_string (tpath);
@@ -243,12 +244,12 @@ public:
 	highlightPathString = treePathString;
 	DBG("highlight path=%s\n", highlightPathString);
 	// highlight item
-        gtk_tree_model_get_iter (this->treeModel(), &iter, tpath);
+        /*gtk_tree_model_get_iter (this->treeModel(), &iter, tpath);
         gtk_tree_model_get (this->treeModel(), &iter, 
                 HIGHLIGHT_PIXBUF, &pixbuf, -1);
         gtk_list_store_set (GTK_LIST_STORE(this->treeModel()), &iter,
                 DISPLAY_PIXBUF, pixbuf, 
-                -1);
+                -1);*/
 
         return;
      /*   if (tpath) {
