@@ -1,10 +1,5 @@
 
 
-
-BUG: open with a mimetype of ascii text will default to single option of last choosen program: should provide list of options, completed by history of previous selections and the last selected option should be the default.
-
-
-
 bug> in pkg send stderr to output as when pkg fails, database needs manual updat "pkg update", add item to menu...
 
 Rebuild of pkg system: top level should have groups. next installed packages.

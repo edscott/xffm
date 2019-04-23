@@ -325,7 +325,8 @@ public:
 	gtk_icon_view_set_model(view->iconView(), view->treeModel());
 
 	view->localMonitor_->setMonitorStore(GTK_LIST_STORE(view->treeModel()));
-	return NULL;
+	
+        return NULL;
 
     }
 

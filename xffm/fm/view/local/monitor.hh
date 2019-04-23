@@ -107,7 +107,6 @@ public:
        xd_t *xd_p = get_xd_p(file);
         gboolean showHidden = (Settings<Type>::getSettingInteger("LocalView", "ShowHidden") > 0);
         if (xd_p) {
-	    TRACE("add_new_item ...(%s) shows:hidden=%d\n", xd_p->d_name, showHidden);
 	    if (xd_p->d_name[0] == '.' && !showHidden) return FALSE;
             // here we should insert according to sort order...
             LocalView<Type>::insertLocalItem(this->store_, xd_p);
@@ -115,6 +114,7 @@ public:
             //LocalView<Type>::add_local_item(store_, xd_p);
             // use hashkey
             gchar *key = Hash<Type>::get_hash_key(xd_p->path, 10);
+	    TRACE("add_new_item ...(%s --> %s) shows:hidden=%d\n", key, xd_p->path, showHidden);
             g_hash_table_replace(this->itemsHash(), key, g_strdup(xd_p->path));
             LocalView<Type>::free_xd_p(xd_p);
             return TRUE;
@@ -185,16 +185,18 @@ public:
 	    return FALSE;
 	}
         // use hashkey
-        
+        // FIXME: itemsHash is out of sync because of backing store treemodel
+#if 0        
         gchar *key = Hash<Type>::get_hash_key(path, 10);
 	
         if (!g_hash_table_lookup(this->itemsHash(), key)) {
+  	    DBG("restat_item %s --> %s is not in itemsHash()\n", key, path);
             g_free(path);
             g_free(key);
-	    TRACE("restat_item %s is not in itemsHash()\n", path);
             return FALSE; 
         }
         g_free(key);
+#endif
         gtk_tree_model_foreach (GTK_TREE_MODEL(this->store_), stat_func, (gpointer) path); 
         g_free(path);
         return TRUE;

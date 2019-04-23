@@ -78,6 +78,7 @@ private:
 	// use hashkey
 	gchar *key = Hash<Type>::get_hash_key(path, 10);
         g_hash_table_replace(hash, key, g_strdup(path));
+        TRACE("add2hash: %s -> %s\n", key, path);
 	g_free(path);
         return FALSE;
     }

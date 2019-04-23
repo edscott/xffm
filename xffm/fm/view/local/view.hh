@@ -41,18 +41,10 @@ public:
         gtk_icon_view_set_selection_mode (iconView,GTK_SELECTION_MULTIPLE);      
         gint items = 
 	    LocalModel<Type>::loadModel(view,path);
-//	    LocalModel<Type>::loadModel(view->treeModel(),path);
-	
- /*       auto fileCount = g_strdup_printf("%0d", items);
-        // We do not count "../"
-        auto text = g_strdup_printf(_("Files: %s"), fileCount); 
-        g_free(fileCount);
-        //view->page()->updateStatusLabel(text);
-        g_free(text);
-        TRACE("FIXME: Set filecount %d message in status button...\n", items);*/
 
         // monitor for less than 500 items...
-        if (items <= 500) {
+        //if (items <= 500) 
+        {
             p = new(LocalMonitor<Type>)(view->treeModel(), view);
             p->start_monitor(view->treeModel(), path);
             localMonitorList = g_list_append(localMonitorList, (void *)p->monitor());
