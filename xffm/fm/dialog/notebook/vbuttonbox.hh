@@ -5,11 +5,12 @@ namespace xf {
 template <class Type>
 class VButtonBox {
     using gtk_c = Gtk<double>;
-        // FIXME: hidden_button icon is custom and button should be at tab level.
-        //        this does not belong here
-	/*auto hidden_button =  gtk_c::toggle_button("semi-starred", NULL);
-	 g_object_set_data(G_OBJECT(vButtonBox_), "hidden_button", hidden_button);
-	gtk_box_pack_end (vButtonBox_, GTK_WIDGET(hidden_button), FALSE, FALSE, 0);*/    
+    static void openUserDialog(GtkButton *button, void *data){
+        auto title = (const gchar *) data;
+        auto userResponse = new(UserResponse<Type>)(mainWindow, title, "run");
+        userResponse->runResponse();
+        delete(userResponse);
+    }
 public:
     GtkBox *vButtonBox(void){return vButtonBox_;}
     VButtonBox(void){
@@ -66,8 +67,9 @@ public:
 	    auto userbutton = gtk_c::newButton(icon, tooltip);
 	    gtk_box_pack_end (vButtonBox_, GTK_WIDGET(userbutton), FALSE, FALSE, 0);
 	    g_free(icon);
-	    g_free(tooltip);
-	    g_signal_connect(G_OBJECT(userbutton), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::plainRun), usercommand);
+	    //g_free(tooltip);
+	    g_signal_connect(G_OBJECT(userbutton), "clicked", G_CALLBACK(openUserDialog), tooltip);
+//	    g_signal_connect(G_OBJECT(userbutton), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::plainRun), usercommand);
 	}
 
         auto search = gtk_c::newButton("system-search", _("Search"));
