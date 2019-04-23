@@ -51,7 +51,7 @@ public:
 	// mountThreadF will monitor if items are mounted or unmounted
 	gint retval = pthread_create(&mountThread, NULL, FstabMonitor<Type>::mountThreadF, (void *)mountArg_);
 	if (retval){
-	    ERROR("thread_create(): %s\n", strerror(retval));
+	    ERROR("fm/view/fstab/monitor::thread_create(): %s\n", strerror(retval));
 	    //return retval;
 	}
 #endif
@@ -130,7 +130,7 @@ public:
         gchar *sum = Util<Type>::md5sum("/proc/mounts");
         gchar *sumPartitions = Util<Type>::md5sum("/proc/partitions");
         if (!sum) {
-            ERROR("Exiting mountThreadF() on md5sum error (sum)\n");
+            ERROR("fm/view/fstab/monitor::Exiting mountThreadF() on md5sum error (sum)\n");
             g_free(data);
             return NULL;
         }
@@ -145,7 +145,7 @@ public:
             gchar *newSum = Util<Type>::md5sum("/proc/mounts");
             gchar *newSumPartitions = Util<Type>::md5sum("/proc/partitions");
             if (!newSum){
-                ERROR("Exiting mountThreadF() on md5sum error (newSum)\n");
+                ERROR("fm/view/fstab/monitor::Exiting mountThreadF() on md5sum error (newSum)\n");
                 g_hash_table_destroy(hash);
                 g_free(sum);
                 return NULL;
@@ -221,7 +221,7 @@ private:
         const gchar *command = "ls -l /dev/disk/by-partuuid";
 	FILE *pipe = popen (command, "r");
 	if(pipe == NULL) {
-	    ERROR("Cannot pipe from %s\n", command);
+	    ERROR("fm/view/fstab/monitor::Cannot pipe from %s\n", command);
 	    return NULL;
 	}
         gchar *partuuid = g_path_get_basename(partuuidPath);
@@ -265,7 +265,7 @@ private:
         const gchar *command = "ls -l /dev/disk/by-id";
 	FILE *pipe = popen (command, "r");
 	if(pipe == NULL) {
-	    ERROR("Cannot pipe from %s\n", command);
+	    ERROR("fm/view/fstab/monitor::Cannot pipe from %s\n", command);
 	    return NULL;
 	}
         gchar *base = g_path_get_basename(idPath);

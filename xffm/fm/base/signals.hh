@@ -64,7 +64,7 @@ public:
         auto event = (GdkEventButton  *)ev;
 	auto view = (View<Type> *)data;
         if (!data) {
-            ERROR("View::motion_notify_event: data cannot be NULL\n");
+            ERROR("fm/base/signals.hh::motion_notify_event: data cannot be NULL\n");
             return FALSE;
         }
 	TRACE("motion_notify_event, dragmode= %d\n", view->dragMode());
@@ -497,7 +497,7 @@ public:
                     PkgPopUp<Type>::popUp();
                 break;
             default:
-                ERROR("ViewType %d not defined.\n", view->viewType());
+                ERROR("fm/base/signals.hh::ViewType %d not defined.\n", view->viewType());
                 break;
         }
         if (menu) {
@@ -554,7 +554,7 @@ public:
                 }
                 break;
             default:
-                ERROR("ViewType %d not defined.\n", view->viewType());
+                ERROR("fm/base/signals.hh::ViewType %d not defined.\n", view->viewType());
                 break;
         }
         return menu;
@@ -613,9 +613,31 @@ public:
 	g_free(lastPath);
     }
 
-    // DnD highlight
+    // DnD highlight only:
     static void
     highlight(GtkTreePath *tpath, gpointer data){
+        if (isTreeView) return;
+        GtkTreeIter iter;
+	auto baseModel = (BaseModel<Type> *)data;
+        if (baseModel->items() > 260){ 
+            gtk_icon_view_set_drag_dest_item(baseModel->iconView(), NULL, GTK_ICON_VIEW_DROP_INTO);
+            if (tpath == NULL) {
+                return;
+            } 
+            if (gtk_tree_model_get_iter (baseModel->treeModel(), &iter, tpath)){
+                guint type;
+                gtk_tree_model_get (baseModel->treeModel(), &iter, 
+                    FLAGS, &type, -1);
+                type &= 0xff;
+                if (type == DT_DIR) {
+                    gtk_icon_view_set_drag_dest_item(baseModel->iconView(), tpath, GTK_ICON_VIEW_DROP_INTO);
+                } else {
+                    gtk_icon_view_set_drag_dest_item(baseModel->iconView(), tpath, GTK_ICON_VIEW_NO_DROP);
+                }
+            }
+
+            return; 
+        }     
         gchar *tree_path_string = NULL;
         
         if (tpath == NULL){
@@ -625,8 +647,6 @@ public:
             clear_highlights(data);
             return;
         }
-	auto baseModel = (BaseModel<Type> *)data;
-        GtkTreeIter iter;
         gtk_tree_model_get_iter (baseModel->treeModel(), &iter, tpath);
 
 
@@ -708,7 +728,7 @@ public:
 		m = g_strdup_printf("%s: %s\n",_("Directory does not exist."), path); 
 	    }
 	    Gtk<Type>::quickHelp(mainWindow, m, "dialog-information");
-	    ERROR("getViewType: %s\n",m);
+	    ERROR("fm/base/signals.hh::getViewType: %s\n",m);
 	    g_free(m);
 	}
         if (strcmp(path, "xffm:local")==0) return (LOCALVIEW_TYPE);
@@ -720,7 +740,7 @@ public:
         if (strcmp(path, "xffm:cifs")==0) return (CIFS_TYPE);
         if (strncmp(path, "xffm:pkg", strlen("xffm:pkg"))==0) return (PKG_TYPE);
 	
-        ERROR("base/signals.hh::getViewType() %s not defined.\n", path);
+        ERROR("fm/base/signals.hh::getViewType() %s not defined.\n", path);
         return (-1);
     }
 
@@ -787,7 +807,7 @@ public:
 	auto view = (View<Type> *)data;
         /* prepare data for the receiver */
         if (info != TARGET_URI_LIST) {
-            ERROR("signal_drag_data_send: invalid target");
+            ERROR("fm/base/signals.hh::signal_drag_data_send: invalid target");
         }
         TRACE( ">>> DND send, TARGET_URI_LIST\n"); 
         gchar *dndData = NULL;
@@ -800,7 +820,7 @@ public:
             }
 
             default :
-                ERROR("BaseSignals:: sendDndData not defined for view type %d\n", view->viewType());
+                ERROR("fm/base/signals.hh::sendDndData not defined for view type %d\n", view->viewType());
                 break;
         }
 
@@ -859,7 +879,7 @@ public:
         
         TRACE("rodent_mouse: DND receive, info=%d (%d,%d)\n", info, TARGET_STRING, TARGET_URI_LIST);
         if(info != TARGET_URI_LIST) {
-            ERROR("signal_drag_data_receive: info != TARGET_URI_LIST\n");
+            ERROR("fm/base/signals.hh::signal_drag_data_receive: info != TARGET_URI_LIST\n");
             // not needed with GTK_DEST_DEFAULT_DROP
             // gtk_drag_finish(context, FALSE, FALSE, time);
             return;
@@ -867,7 +887,7 @@ public:
         if(action != GDK_ACTION_MOVE && 
            action != GDK_ACTION_COPY &&
            action != GDK_ACTION_LINK) {
-            ERROR("Drag drop mode is not GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK\n");
+            ERROR("fm/base/signals.hh::Drag drop mode is not GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK\n");
             // not needed with GTK_DEST_DEFAULT_DROP
             // gtk_drag_finish(context, FALSE, FALSE, time);
             return;
@@ -910,7 +930,7 @@ public:
             }
 
             default :
-                ERROR("BaseSignals:: receiveDndData not defined for view type %d\n", view->viewType());
+                ERROR("fm/base/signals.hh::receiveDndData not defined for view type %d\n", view->viewType());
                 break;
         }
         g_free(target);
@@ -959,7 +979,7 @@ public:
                 message="The drag operation failed due to some unspecified error.";
                 break;
         }
-        ERROR("Drag was not accepted: %s\n", message);
+        ERROR("fm/base/signals.hh::Drag was not accepted: %s\n", message);
         return TRUE;
 
     }
@@ -973,7 +993,7 @@ public:
 
     static void
     signal_drag_delete (GtkWidget * widget, GdkDragContext * context, gpointer data) {
-        ERROR("signal_drag_delete\n");
+        ERROR("fm/base/signals.hh::signal_drag_delete\n");
     }
     
 public:

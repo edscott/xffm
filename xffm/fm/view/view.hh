@@ -37,24 +37,22 @@ class View:
     using util_c = Util<Type>;
     using page_c = Page<Type>;
     
-    gint dirCount_; 
-    GtkIconView *iconView_;
-    GtkTreeView *treeView_;
     
 public:
+    /*gint items(void){ 
+        return gtk_tree_model_iter_n_children(this->treeModel(), NULL);
+    }*/
     View(page_c *page):BaseModel<Type>(page)
     {
-        iconView_ = IconView<Type>::createIconview(this);
-        treeView_ = TreeView<Type>::createTreeview(this);
+        this->iconView_ = IconView<Type>::createIconview(this);
+        this->treeView_ = TreeView<Type>::createTreeview(this);
     }
 
     ~View(void){
         TRACE("View destructor.\n");
     }
 
-    GtkTreeView *treeView(void){return treeView_;}
 
-    GtkIconView *iconView(void){return iconView_;}
     
     gboolean loadModel(const gchar *path){
 	// This sets viewType
@@ -121,7 +119,7 @@ public:
 		while(gtk_events_pending())gtk_main_iteration();
                 break;
             default:
-                ERROR("ViewType %d not defined.\n", view->viewType());
+                ERROR("fm/view/view.hh::ViewType %d not defined.\n", view->viewType());
                 break;
         }
     
@@ -177,9 +175,9 @@ public:
     // Methinks this is useless
     /*
     void setPath(const gchar *path){
-        auto lastPath =  g_object_get_data(G_OBJECT(iconView_), "path");
+        auto lastPath =  g_object_get_data(G_OBJECT(this->iconView_), "path");
         g_free(lastPath); 
-        g_object_set_data(G_OBJECT(iconView_), "path", g_strdup(this->path()));
+        g_object_set_data(G_OBJECT(this->iconView_), "path", g_strdup(this->path()));
 	BaseModel<Type>::setPath(path);
     }*/
 
@@ -212,55 +210,29 @@ public:
   
     void 
     highlight(gdouble X, gdouble Y){
-	static gchar  *highlightPathString=NULL;
-        //if (!xfdir_p) return; // avoid race condition here.
-        //highlight_x = X; highlight_y = Y;
 	GdkPixbuf *pixbuf;
         GtkTreeIter iter;
 	TRACE("highlight X,Y=%lf,%lf\n", X,Y);
-        GtkTreePath *tpath = gtk_icon_view_get_path_at_pos (iconView_, X, Y); 
+        GtkTreePath *tpath = gtk_icon_view_get_path_at_pos (this->iconView_, X, Y); 
 	if (!tpath) {
-	    if (!highlightPathString) return;
 	    // clear highlight
-	    DBG("highlight %s\n", highlightPathString);
-	    /*tpath = gtk_tree_path_new_from_string(highlightPathString);
-	    gtk_tree_model_get_iter (this->treeModel(), &iter, tpath);
-	    gtk_tree_model_get (this->treeModel(), &iter, 
-		    NORMAL_PIXBUF, &pixbuf, -1);
-	    gtk_list_store_set (GTK_LIST_STORE(this->treeModel()), &iter,
-		    DISPLAY_PIXBUF, pixbuf, 
-		-1);*/
-	    g_free(highlightPathString);
-	    gtk_tree_path_free(tpath);
-	    highlightPathString = NULL;
-	    TRACE("tpath is NULL\n");
+            if (!isTreeView) gtk_icon_view_set_drag_dest_item(this->iconView(), NULL, GTK_ICON_VIEW_DROP_BELOW);
+            if (this->items() <= 260){
+                BaseSignals<Type>::clear_highlights(this);
+            }
 	    return;
 	}
-        auto treePathString = gtk_tree_path_to_string (tpath);
-	if (highlightPathString && strcmp(highlightPathString, treePathString)==0){
-	    return;
-	}
-	g_free(highlightPathString);
-	highlightPathString = treePathString;
-	DBG("highlight path=%s\n", highlightPathString);
 	// highlight item
-        /*gtk_tree_model_get_iter (this->treeModel(), &iter, tpath);
-        gtk_tree_model_get (this->treeModel(), &iter, 
-                HIGHLIGHT_PIXBUF, &pixbuf, -1);
-        gtk_list_store_set (GTK_LIST_STORE(this->treeModel()), &iter,
-                DISPLAY_PIXBUF, pixbuf, 
-                -1);*/
-
-        return;
-     /*   if (tpath) {
+//            gtk_icon_view_set_drag_dest_item(this->iconView(), tpath, GTK_ICON_VIEW_DROP_INTO);
+        if (this->items() > 260){
+            if (!isTreeView) gtk_icon_view_set_drag_dest_item(this->iconView(), tpath, GTK_ICON_VIEW_DROP_BELOW);
+        } else {
             BaseSignals<Type>::highlight(tpath, this);
-            //xfdir_p->tooltip(iconview_, gtk_tree_path_copy(tpath));
         }
-        else BaseSignals<Type>::clear_highlights(this);*/
+        return;
     }
 
 private:
-    gint get_dir_count(void){ return dirCount_;}
 
 
     

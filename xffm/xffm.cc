@@ -21,7 +21,7 @@
 #endif
 
 #include <memory>
-//#define USE_LOCAL_MONITOR 1
+#define USE_LOCAL_MONITOR 1
 #define FORK
 
 #define URIFILE "file://"
@@ -41,7 +41,7 @@ static gboolean isTreeView;
 int
 main (int argc, char *argv[]) {
     if (chdir(g_get_home_dir()) < 0){
-        ERROR("Cannot chdir to %s (%s)\n", g_get_home_dir(), strerror(errno));
+        ERROR("xffm.cc::Cannot chdir to %s (%s)\n", g_get_home_dir(), strerror(errno));
         exit(1);
     }
     xffindProgram = argv[0];

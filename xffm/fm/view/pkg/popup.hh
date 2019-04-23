@@ -118,7 +118,7 @@ class PkgPopUp {
 	if (!gtk_tree_model_get_iter (view->treeModel(), &iter, 
                     (GtkTreePath *)view->selectionList()->data)) 
         {
-	    ERROR("pkgItemPopup: tpath is invalid\n");
+	    ERROR("pkg/popup.hh::pkgItemPopup: tpath is invalid\n");
 	    return;
 	}
 	gchar *iconName;
@@ -128,7 +128,7 @@ class PkgPopUp {
 		ICON_NAME, &iconName,
 		-1);
 	if (!path){
-	    ERROR("pkgItemPopup: path is NULL\n");
+	    ERROR("pkg/popup.hh::pkgItemPopup: path is NULL\n");
 	    return;
 	}
 

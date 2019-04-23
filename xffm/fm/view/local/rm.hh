@@ -32,7 +32,7 @@ public:
             selectionList = gtk_icon_view_get_selected_items (view->iconView());
         }
         if (!selectionList){
-            ERROR("rm(): nothing selected\n");
+            ERROR("local/rm.hh::rm(): nothing selected\n");
         }
         GList *list = NULL;
         for (auto tmp=selectionList; tmp && tmp->data; tmp = tmp->next){
@@ -215,7 +215,7 @@ private:
     static GList *
     removeAllFromList(GList *list){
         if (!list){
-            ERROR("removeAllFromList(): list is NULL\n");
+            ERROR("local/rm.hh::removeAllFromList(): list is NULL\n");
             return NULL;
         }
         for (auto tmp = list; tmp && tmp->data; tmp=tmp->next){
@@ -228,7 +228,7 @@ private:
     static GList *
     removeItemFromList(GList *list){
         if (!list){
-            ERROR("removeItemFromList(): list is NULL\n");
+            ERROR("local/rm.hh::removeItemFromList(): list is NULL\n");
             return NULL;
         }
 	void *path = list->data;
@@ -266,14 +266,14 @@ private:
                 TRACE( "**single trash: %s\n", (gchar *)list->data);
                 // Trash operation
                 if (!Gio<Type>::execute(rmDialog, (gchar *)list->data, MODE_TRASH)){
-                    ERROR("Cannot trash %s\n", (gchar *)list->data);
+                    ERROR("local/rm.hh::Cannot trash %s\n", (gchar *)list->data);
                 }
                 list = removeItemFromList(list);
                 break;
             case TRASH_YES_ALL:
                 TRACE( "trash all\n");
                 if (!Gio<Type>::execute(rmDialog, list, MODE_TRASH)){
-                    ERROR("Cannot multiTrash %s\n", (gchar *)list->data);
+                    ERROR("local/rm.hh::Cannot multiTrash %s\n", (gchar *)list->data);
                 }
                 list = removeAllFromList(list);
                 break;
@@ -282,7 +282,7 @@ private:
                 TRACE( "**single remove: %s\n", (gchar *)list->data);
                  // rm operation
                 if (!Gio<Type>::execute(rmDialog, (gchar *)list->data, MODE_RM)){
-                    ERROR("Cannot delete %s\n", (gchar *)list->data);
+                    ERROR("local/rm.hh::Cannot delete %s\n", (gchar *)list->data);
                 }
                 list = removeItemFromList(list);
                 break;
@@ -290,7 +290,7 @@ private:
             case RM_YES_ALL:
             {
                 if (!Gio<Type>::execute(rmDialog, list, MODE_RM)){
-                    ERROR("Cannot multiDelete %s\n", (gchar *)list->data);
+                    ERROR("local/rm.hh::Cannot multiDelete %s\n", (gchar *)list->data);
                 }
                 list = removeAllFromList(list);
                 break;
@@ -301,14 +301,14 @@ private:
                  // Shred operation
                 if (!Gio<Type>::execute(rmDialog, (gchar *)list->data, MODE_SHRED)){
 
-                    ERROR("Cannot shred %s\n", (gchar *)list->data);
+                    ERROR("local/rm.hh::Cannot shred %s\n", (gchar *)list->data);
                 }
                 list = removeItemFromList(list);
                break;
             case SHRED_YES_ALL:
                 TRACE( "shred all\n");
                 if (!Gio<Type>::execute(rmDialog, list, MODE_SHRED)){
-                    ERROR("Cannot multishred %s\n", (gchar *)list->data);
+                    ERROR("local/rm.hh::Cannot multishred %s\n", (gchar *)list->data);
                 }
                 list = removeAllFromList(list);
                 break;

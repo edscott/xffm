@@ -272,7 +272,12 @@ public:
     
     void setDefaultIconview(gboolean state){iconviewIsDefault_ = state;}
     gboolean iconviewIsDefault(void){return iconviewIsDefault_;}
-       
+    
+    void showFmButtonBox(){
+        this->showFmBox();
+        terminalMode_ = FALSE;
+   }
+
     void showIconview(gint state){
 	if (!gtk_widget_is_visible(GTK_WIDGET(this->pageChild_))){
 		TRACE("page2.hh:: showIconview() call with invisible parent\n");
@@ -280,10 +285,8 @@ public:
 	}
 
         if (state > 0) {
-	    this->showFmBox();
-	    
+	    showFmButtonBox();
             print_c::hide_text(this->output());
-            terminalMode_ = FALSE;
         } else  {
 	    this->showTermBox();
             while (gtk_events_pending())gtk_main_iteration();
@@ -399,11 +402,12 @@ public:
 	    gtk_css_provider_load_from_data (css_provider, data, -1, &error);
 	    g_free(data);
 	    if (error){
-		fprintf(stderr, "gerror: %s\n", error->message);
+		ERROR("fm/dialog/notebook/page/page.hh:: set_font_family(%s, %d): %s\n", family, fontsize, error->message);
 		g_error_free(error);
-	    }
-	    gtk_style_context_add_provider (style_context, GTK_STYLE_PROVIDER(css_provider),
+	    } else {
+	        gtk_style_context_add_provider (style_context, GTK_STYLE_PROVIDER(css_provider),
 				    GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+            }
 	     
 
 

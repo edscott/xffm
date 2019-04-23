@@ -267,8 +267,13 @@ private:
     }\
     ", 
 	    -1, &error);
-	gtk_style_context_add_provider (style_context, GTK_STYLE_PROVIDER(css_provider),
+        if (error){
+            ERROR("fm/dialog/notebook/page/pathbar.hh::setStyle(): %s\n", error->message);
+            g_error_free(error);
+        } else {
+	    gtk_style_context_add_provider (style_context, GTK_STYLE_PROVIDER(css_provider),
 				    GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+        }
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////

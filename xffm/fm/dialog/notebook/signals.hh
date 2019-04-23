@@ -21,7 +21,7 @@ public:
         auto notebook_p = (Notebook<Type> *)data;
         auto page_p = (Page<Type> *)notebook_p->currentPageObject(new_page);
         if (!page_p){
-            if (!startup) ERROR("page_p is null\n");
+            if (!startup) ERROR("fm/dialog/notebook/signals.hh::page_p is null\n");
             return;
         }
 	startup = FALSE;
@@ -41,7 +41,7 @@ public:
         // This callback may occur after view has been destroyed.
         window_c *window_p = (window_c *)g_object_get_data(G_OBJECT(notebook), "window_p");
         if (!window_p->is_view_in_list(data)) {
-            ERROR("switch_page:: view_p %p no longer exists.\n", data);
+            ERROR("fm/dialog/notebook/signals.hh::switch_page:: view_p %p no longer exists.\n", data);
             return;
         }
 

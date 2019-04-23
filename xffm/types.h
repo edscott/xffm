@@ -92,7 +92,7 @@ template <class Type> class Notebook;
 //# define DBG(...)   { (void)0; }
 # define DBG(...)  {fprintf(stderr, "DBG> "); fprintf(stderr, __VA_ARGS__);}
 # undef ERROR
-# define ERROR(...)  {fprintf(stderr, "*** ERROR> "); fprintf(stderr, __VA_ARGS__);}
+# define ERROR(...)  {fprintf(stderr, "*** Error> "); fprintf(stderr, __VA_ARGS__);}
 # undef WARN
 # define WARN(...)  {fprintf(stderr, "warning> "); fprintf(stderr, __VA_ARGS__);}
 

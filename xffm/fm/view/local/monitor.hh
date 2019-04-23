@@ -71,7 +71,7 @@ public:
         mountArg_[2] = GINT_TO_POINTER(TRUE);
 	gint retval = pthread_create(&mountThread, NULL, FstabMonitor<Type>::mountThreadF, (void *)mountArg_);
 	if (retval){
-	    ERROR("thread_create(): %s\n", strerror(retval));
+	    ERROR("fm/view/local/monitor::thread_create(): %s\n", strerror(retval));
 	    //return retval;
 	}
 # endif
@@ -94,7 +94,7 @@ public:
 	  }
 	  closedir (directory);
 	} else {
-	  ERROR("monitor_f(): opendir %s: %s\n", path, strerror(errno));
+	  ERROR("fm/view/local/monitor::monitor_f(): opendir %s: %s\n", path, strerror(errno));
 	}
 	g_free(basename); 
 	g_free(path); 

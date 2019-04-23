@@ -74,7 +74,7 @@ public:
 	hash = g_hash_table_new(g_direct_hash, g_direct_equal);
 	// copy selection list to private thread safe selection_list... 
 	if (!selectionList || g_list_length(selectionList) < 0) {
-	    ERROR("propertiesDialog: nothing in selectionList\n");
+	    ERROR("fm/view/local/properties.hh::propertiesDialog: nothing in selectionList\n");
 	    return;
 	}
 	selectionList_ = selectionList;
@@ -432,7 +432,7 @@ private:
 	    g_key_file_load_from_file(keyInfo, keyPath, (GKeyFileFlags)0, NULL);
 	g_free(basename);
 	if (!loaded) {
-	    ERROR("*** unable to load %s\n", keyPath);
+	    ERROR("fm/view/local/properties.hh:: *** unable to load %s\n", keyPath);
 	    g_free(keyPath);
 	    return NULL;
 	}
@@ -444,7 +444,7 @@ private:
 	auto value = g_key_file_get_string (keyInfo, *p, item, &error);
 	g_strfreev(p);
 	if (error){
-	    ERROR("trashInfo(%s): %s\n", item, error->message);
+	    ERROR("fm/view/local/properties.hh:: trashInfo(%s): %s\n", item, error->message);
 	    g_error_free(error);
 	    value = NULL;
         } 
@@ -555,7 +555,7 @@ private:
 	auto path = (const gchar *)key;
 	auto mode = (mode_t)GPOINTER_TO_INT(value);
 	if (chmod(path, mode) < 0){
-	    ERROR("setFileMode(): chmod(%s) %s\n", path, strerror(errno));
+	    ERROR("fm/view/local/properties.hh::setFileMode(): chmod(%s) %s\n", path, strerror(errno));
 	}
     }    
     

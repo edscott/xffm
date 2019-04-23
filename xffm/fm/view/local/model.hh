@@ -115,7 +115,7 @@ public:
     {
         GList *directory_list = NULL;
         if (!g_file_test(path, G_FILE_TEST_IS_DIR)){
-            ERROR("read_items(): g_file_test(%s, G_FILE_TEST_IS_DIR) failed\n", path);
+            ERROR("fm/view/local/model.hh::read_items(): g_file_test(%s, G_FILE_TEST_IS_DIR) failed\n", path);
             return NULL;
         }
         TRACE( "readfiles: %s\n", path);
@@ -149,7 +149,7 @@ public:
             }
         }
         if (errno) {
-            ERROR("read_files_local: %s: %s\n", strerror(errno), path);
+            ERROR("fm/view/local/model.hh::read_files_local: %s: %s\n", strerror(errno), path);
         }
     // unlock mutex
         pthread_mutex_unlock(&readdir_mutex);
@@ -161,7 +161,7 @@ public:
         // is not so, then a read error occurred.
         // (not uncommon in bluetoothed obexfs)
         if (!directory_list) {
-            ERROR("read_files_local(): Count failed! Directory not read!\n");
+            ERROR("fm/view/local/model.hh::read_files_local(): Count failed! Directory not read!\n");
         }
         directory_list = sortList (directory_list);
         return (directory_list);
@@ -187,7 +187,7 @@ public:
 	if (withStat){
 	    xd_p->st = (struct stat *)calloc( 1, sizeof(struct stat));
 	    if (!xd_p->st){
-		ERROR("calloc(%s): %s\n", xd_p->path, strerror(errno));
+		ERROR("fm/view/local/model.hh::calloc(%s): %s\n", xd_p->path, strerror(errno));
 		exit(1);
 	    }
 	    TRACE("get_xd_p:: stat %s\n", xd_p->path);
@@ -218,7 +218,7 @@ public:
 	{
             xd_p->st = (struct stat *)calloc(1, sizeof(struct stat));
 	    if (!xd_p->st){
-		ERROR("calloc: %s\n", strerror(errno));
+		ERROR("fm/view/local/model.hh::calloc: %s\n", strerror(errno));
 		exit(1);
 	    }
             errno=0;
@@ -310,6 +310,7 @@ public:
 	auto arg = (void **)data;
 	auto view = (View<Type> *)arg[0]; 
 	auto text = (const gchar *)arg[1]; 
+        view->page()->showFmButtonBox();
 	view->page()->updateStatusLabel(text);
 	while(gtk_events_pending())gtk_main_iteration();
 	return NULL;
@@ -331,7 +332,7 @@ public:
     }
 
     static void *finishLoad(void *data){
-	gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
+	if (mainWindow && GTK_IS_WIDGET(mainWindow)) gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
 	while(gtk_events_pending())gtk_main_iteration();
 	return NULL;
     }
@@ -500,6 +501,17 @@ private:
         GdkPixbuf *treeViewPixbuf = NULL;
         GdkPixbuf *normal_pixbuf = NULL;
         GdkPixbuf *highlight_pixbuf = NULL;
+        if (xd_p->st) {
+            auto type = xd_p->st->st_mode & S_IFMT;
+            if (type == S_IFDIR) {
+                highlight_pixbuf = Preview<Type>::loadFromThumbnails("document-open", xd_p->st, 48, 48);
+                if (!highlight_pixbuf) {
+                    auto thumbnail = Hash<Type>::get_thumbnail_path ("document-open", GTK_ICON_SIZE_DIALOG);
+                    highlight_pixbuf = Pixbuf<Type>::get_pixbuf("document-open", GTK_ICON_SIZE_DIALOG);
+                    Pixbuf<Type>::pixbuf_save(highlight_pixbuf, thumbnail);
+                }
+            }
+	}
 
 	if (g_path_is_absolute(icon_name))
 	    normal_pixbuf = Preview<Type>::loadFromThumbnails(icon_name, xd_p->st, 48, 48);
@@ -524,7 +536,7 @@ private:
                 }
             }
             // Now decorate the pixbuf with emblem (types.h).
-            void *arg[] = {NULL, (void *)highlight_pixbuf, NULL, NULL, (void *)HIGHLIGHT_OPEN_EMBLEM };
+            void *arg[] = {NULL, (void *)highlight_pixbuf, NULL, NULL, (void *)emblem };
             // Done by main gtk thread:
             Util<Type>::context_function(Icons<Type>::insert_decoration_f, arg);
 	}

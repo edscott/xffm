@@ -30,8 +30,13 @@ public:
     }\
     ", 
 	    -1, &error);
-	gtk_style_context_add_provider (style_context, GTK_STYLE_PROVIDER(css_provider),
+        if (error){
+            ERROR("vbuttonbox.hh::VButtonBox(): %s\n", error->message);
+            g_error_free(error);
+        } else {
+	    gtk_style_context_add_provider (style_context, GTK_STYLE_PROVIDER(css_provider),
 				    GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+        }
 #ifdef HAVE_PKG
 	auto pkg = 
 	    gtk_c::newButton("emblem-bsd", _("Software Updater"));

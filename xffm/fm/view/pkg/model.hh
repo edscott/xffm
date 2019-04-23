@@ -117,7 +117,7 @@ public:
 	while (gtk_events_pending())gtk_main_iteration();	
         TRACE("response=%s\n", response);
         if (!response) {
-	    gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
+	    if (mainWindow && GTK_IS_WIDGET(mainWindow)) gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
 	    return FALSE;
 	}
         g_strstrip(response);
@@ -161,7 +161,7 @@ public:
                 }
                 g_list_free(pkg_list);
 	    
-		gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
+		if (mainWindow && GTK_IS_WIDGET(mainWindow)) gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
 		auto m = g_strdup_printf("%s %d", "Matching results...", count);
 		page->updateStatusLabel(m);
 		g_free(m);
@@ -173,7 +173,7 @@ public:
             Gtk<Type>::quickHelp(mainWindow, _("No results"), "dialog-warning");
         } 
 	page->updateStatusLabel(NULL);
-	gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
+	if (mainWindow && GTK_IS_WIDGET(mainWindow)) gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
         return FALSE;
     }
 

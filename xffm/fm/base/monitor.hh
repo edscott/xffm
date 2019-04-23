@@ -109,7 +109,7 @@ public:
         if (monitor_) g_object_unref(monitor_);
         monitor_ = g_file_monitor (gfile_, G_FILE_MONITOR_WATCH_MOVES, cancellable_,&error);
         if (error){
-            ERROR("g_file_monitor_directory(%s) failed: %s\n",
+            ERROR("fm/base/monitor::g_file_monitor_directory(%s) failed: %s\n",
                     path, error->message);
             g_object_unref(gfile_);
             gfile_=NULL;

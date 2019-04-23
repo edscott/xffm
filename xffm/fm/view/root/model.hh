@@ -232,7 +232,7 @@ public:
         if (!keys) return NULL;
         auto bookMarks = (gchar **)calloc(size+1, sizeof(gchar *));
         if (!bookMarks){
-            ERROR("calloc: %s\n", strerror(errno));
+            ERROR("fm/view/root/model.hh::calloc: %s\n", strerror(errno));
             exit(1);
         }
         gchar **p;

@@ -72,11 +72,12 @@ public:
     ", 
 	    -1, &error);
 	if (error){
-	    ERROR("gerror: %s\n", error->message);
+	    ERROR("tooltip.hh::set_box_gradient(): %s\n", error->message);
 	    g_error_free(error);
-	}
-	gtk_style_context_add_provider (style_context, GTK_STYLE_PROVIDER(css_provider),
+	} else {
+	    gtk_style_context_add_provider (style_context, GTK_STYLE_PROVIDER(css_provider),
 				    GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+        }
 	return;
     }
 

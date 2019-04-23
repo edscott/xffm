@@ -206,7 +206,7 @@ public:
         //auto path = (const gchar *)g_object_get_data(G_OBJECT(localPopUp), "path");
 	TRACE("resetLocalPopup path=%s\n", view->path());
         if (!view->path()){
-	    ERROR("resetLocalPopup: path is NULL\n");
+	    ERROR("local/popup.hh::resetLocalPopup: path is NULL\n");
 	    return;
 	}
         // unsensitivize "Paste" only if valid pasteboard...
@@ -222,7 +222,7 @@ public:
 	    if (g_list_length(view->selectionList()) > 0) gtk_widget_show(w);
 	    else gtk_widget_hide(w);
 	    gtk_widget_set_sensitive(w, g_list_length(view->selectionList()) > 0);
-	} else ERROR(" no widget for Delete\n");
+	} else ERROR("local/popup.hh:: no widget for Delete\n");
 
         //w = GTK_WIDGET(g_object_get_data(G_OBJECT(localPopUp), "View as list"));
         //gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(w), isTreeView);

@@ -65,7 +65,7 @@ public:
     static void 
     putInClipBoard(View<Type> *view, const gchar *instruction){
          if (!view || ! instruction){
-            ERROR("view||instruction is null\n");
+            ERROR("clipboard.hh::view||instruction is null\n");
             exit(1);
         }
         TRACE("%s\n", instruction); 
@@ -81,7 +81,7 @@ public:
         view->setSelectionList(selectionList);
         gchar *clipData = getSelectionData(view,instruction );
         if (!g_utf8_validate (clipData, -1, NULL)){
-            ERROR("ClipBoard::putInClipBoard(): Not a valid utf8 string: %s\n", clipData);
+            ERROR("clipboard.hh::::putInClipBoard(): Not a valid utf8 string: %s\n", clipData);
             gtk_clipboard_set_text (clipBoard, "", 1);
         } else gtk_clipboard_set_text (clipBoard, clipData, strlen(clipData)+1);
 	gtk_icon_view_unselect_all (view->iconView());
@@ -259,7 +259,7 @@ public:
         pthread_t clipBoardThread;
         gint retval = pthread_create(&clipBoardThread, NULL, ClipBoard<Type>::clipboardThreadF, NULL);
         if (retval){
-            ERROR("thread_create(): clipBoardThread %s\n", strerror(retval));
+            ERROR("clipboard.hh::thread_create(): clipBoardThread %s\n", strerror(retval));
             //return retval;
         }
         TRACE("*** clipboard thread started.\n")

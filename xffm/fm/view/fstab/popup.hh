@@ -70,7 +70,7 @@ class FstabPopUp {
 	if (!gtk_tree_model_get_iter (view->treeModel(), &iter, 
                     (GtkTreePath *)view->selectionList()->data)) 
         {
-	    ERROR("fstabItemPopup: tpath is invalid\n");
+	    ERROR("fstab/popup.hh::fstabItemPopup: tpath is invalid\n");
 	    return;
 	}
 	gchar *iconName;
@@ -84,7 +84,7 @@ class FstabPopUp {
                 TOOLTIP_TEXT,&tooltipText,
 		-1);
 	if (!path){
-	    ERROR("fstabItemPopup: path is NULL\n");
+	    ERROR("fstab/popup.hh::fstabItemPopup: path is NULL\n");
 	    return;
 	}
 
@@ -195,7 +195,7 @@ public:
         // Path is set on buttonpress signal...
         auto path = (const gchar *)g_object_get_data(G_OBJECT(fstabPopUp), "path");
         if (!path){
-	    ERROR("resetLocalPopup: path is NULL\n");
+	    ERROR("fstab/popup.hh::resetLocalPopup: path is NULL\n");
 	    return;
 	}
 	const gchar *mimetype = Mime<Type>::mimeType(path);

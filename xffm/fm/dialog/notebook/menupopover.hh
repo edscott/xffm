@@ -113,7 +113,7 @@ public:
     {
 	auto program = g_find_program_in_path((const gchar *) data);
 	if (!program) {
-	    ERROR("Cannot find % in path\n", (const gchar *) data);
+	    ERROR("menupopover.hh::Cannot find % in path\n", (const gchar *) data);
 	    return;
 	}
 	auto notebook_p = (Dialog<Type> *)g_object_get_data(G_OBJECT(mainWindow), "dialogObject");
@@ -135,7 +135,7 @@ public:
         auto diff = (const gchar *) data;
 	auto program = g_find_program_in_path(diff);
 	if (!program) {
-	    ERROR("Cannot find %s in path\n", diff);
+	    ERROR("menupopover.hh::Cannot find %s in path\n", diff);
 	    return;
 	}
 	auto notebook_p = (Dialog<Type> *)g_object_get_data(G_OBJECT(mainWindow), "dialogObject");

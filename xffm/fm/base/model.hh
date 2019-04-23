@@ -53,12 +53,20 @@ protected:
     FstabMonitor<Type> *fstabMonitor_;
     GtkTreeModel *treeModel_;
     GtkTreeModel *backTreeModel_;
+    GtkIconView *iconView_;
+    GtkTreeView *treeView_;
     
 public:    
     LocalMonitor<Type> *localMonitor_; // public to switch treemodel...
     void setTreeModel(GtkTreeModel *model){ treeModel_ = model;}
     void setBackTreeModel(GtkTreeModel *model){ backTreeModel_ = model;}
+    gint items(void){ 
+        return gtk_tree_model_iter_n_children(treeModel_, NULL);
+    }
+    GtkTreeView *treeView(void){return treeView_;}
 
+    GtkIconView *iconView(void){return iconView_;}
+    
     BaseModel(Page<Type> *page){
 	page_ = page; 
         path_ = NULL;
@@ -188,7 +196,7 @@ public:
         g_free(path_);
         if (path) path_ = g_strdup(path);
         else {
-            ERROR("baseView::setPath(NULL)\n");
+            ERROR("fm/base/model.hh::baseView::setPath(NULL)\n");
             exit(1);
         }
 

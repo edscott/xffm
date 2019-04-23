@@ -86,7 +86,7 @@ public:
         
         deviceMonitor_ = g_file_monitor (gfile_, G_FILE_MONITOR_WATCH_MOVES, cancellable_,&error);
         if (error){
-            ERROR("g_file_monitor_directory(%s) failed: %s\n",
+            ERROR("fm/dialog.hh::g_file_monitor_directory(%s) failed: %s\n",
                     path, error->message);
             g_object_unref(gfile_);
             return;
@@ -176,7 +176,7 @@ public:
 
     void resizeWindow(gint fontSize){
         if (fontSize == 0){
-            ERROR("fontSize cannot be zero\n");
+            ERROR("fm/dialog.hh::fontSize cannot be zero\n");
             return;
         }
         if (naturalSize_.width == 0 ||

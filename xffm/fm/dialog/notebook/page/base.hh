@@ -34,7 +34,7 @@ public:
 
     gboolean setWorkDir(const gchar *g){
 	if (!g_file_test(g, G_FILE_TEST_IS_DIR)){
-	    ERROR("%s is not a directory\n", g);
+	    ERROR("dialog/notebook/page/base.hh::%s is not a directory\n", g);
 	    return FALSE;
 	}
         g_free(workDir_);

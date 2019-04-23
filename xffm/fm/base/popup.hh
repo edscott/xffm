@@ -16,7 +16,7 @@ public:
 	// change title
 	auto title = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(menu), "title"));
         if (!title) {
-            ERROR("BasePopUp::changeTitle(): menu has no data object \"title\"\n");
+            ERROR("base/popup.hh::changeTitle(): menu has no data object \"title\"\n");
             return;
         }
 	TRACE("changeTitle, title = %p\n",(void *)title);
@@ -31,7 +31,7 @@ public:
 	// change title
 	auto title = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(menu), "title"));
         if (!title) {
-            ERROR("BasePopUp::changeTitle(): menu has no data object \"title\"\n");
+            ERROR("base/popup.hh::changeTitle(): menu has no data object \"title\"\n");
             return;
         }
         auto iconName = (gchar *)g_object_get_data(G_OBJECT(menu), "iconName");
@@ -49,7 +49,7 @@ public:
 	// change title
 	auto title = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(menu), "title"));
         if (!title) {
-            ERROR("BasePopUp::changeTitle(): menu has no data object \"title\"\n");
+            ERROR("base/popup.hh::changeTitle(): menu has no data object \"title\"\n");
             return;
         }
 	TRACE("changeTitle, title = %p\n",(void *)title);

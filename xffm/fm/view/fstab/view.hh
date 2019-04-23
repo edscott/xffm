@@ -147,7 +147,7 @@ public:
         gchar *command = g_strdup_printf("lsblk -no FSTYPE %s", partitionPath);
 	FILE *pipe = popen (command, "r");
 	if(pipe == NULL) {
-	    ERROR("Cannot pipe from %s\n", command);
+	    ERROR("fstab/view.hh::Cannot pipe from %s\n", command);
 	    g_free(command);
 	    return NULL;
 	}
@@ -171,7 +171,7 @@ public:
         const gchar *command = "ls -l /dev/disk/by-id";
 	FILE *pipe = popen (command, "r");
 	if(pipe == NULL) {
-	    ERROR("Cannot pipe from %s\n", command);
+	    ERROR("fstab/view.hh::Cannot pipe from %s\n", command);
 	    return NULL;
 	}
         gchar line[256];
@@ -190,7 +190,7 @@ public:
             }
             g_strstrip(f[0]);
             if (!strrchr(f[0], ' ')){
-                ERROR("partition2Id(): no space-chr in id\n");
+                ERROR("fstab/view.hh::partition2Id(): no space-chr in id\n");
                 continue;
             }
             id = g_path_get_basename(strrchr(f[0], ' ')+1);
@@ -208,7 +208,7 @@ public:
         const gchar *command = "ls -l /dev/disk/by-id";
 	FILE *pipe = popen (command, "r");
 	if(pipe == NULL) {
-	    ERROR("Cannot pipe from %s\n", command);
+	    ERROR("fstab/view.hh::Cannot pipe from %s\n", command);
 	    return NULL;
 	}
         gchar line[256];
@@ -239,7 +239,7 @@ public:
         const gchar *command = "ls -l /dev/disk/by-label";
 	FILE *pipe = popen (command, "r");
 	if(pipe == NULL) {
-	    ERROR("Cannot pipe from %s\n", command);
+	    ERROR("fstab/view.hh::Cannot pipe from %s\n", command);
 	    return NULL;
 	}
         auto partition = g_path_get_basename(partitionPath); 
@@ -325,7 +325,7 @@ public:
         const gchar *command = "ls -l /dev/disk/by-partuuid";
 	FILE *pipe = popen (command, "r");
 	if(pipe == NULL) {
-	    ERROR("Cannot pipe from %s\n", command);
+	    ERROR("fstab/view.hh::Cannot pipe from %s\n", command);
 	    return NULL;
 	}
         gchar *partition = g_path_get_basename(partitionPath);
@@ -353,7 +353,7 @@ public:
     static void
     addPartition(GtkTreeModel *treeModel, const gchar *path){
         if (!path){
-            ERROR("addPartition: path cannot be null\n");
+            ERROR("fstab/view.hh::addPartition: path cannot be null\n");
             return;
         }
  	GtkTreeIter iter;
@@ -427,7 +427,7 @@ public:
             gchar *path = getPartitionPath(line);
             if (!path) continue; // not a partition path line...
             if (!g_path_is_absolute(path)){
-                ERROR("partition path should be absolute: %s\n", path);
+                ERROR("fstab/view.hh::partition path should be absolute: %s\n", path);
                 continue;
             }
 	    //gchar *fstype = fsType(path);
@@ -447,7 +447,7 @@ public:
         const gchar *command = "ls -l /dev/disk/by-id";
 	FILE *pipe = popen (command, "r");
 	if(pipe == NULL) {
-	    ERROR("Cannot pipe from %s\n", command);
+	    ERROR("fstab/view.hh::Cannot pipe from %s\n", command);
 	    return FALSE;
 	}
 
@@ -624,7 +624,7 @@ public:
             found = TRUE;
         }
         (void)endmntent (fstab_fd);
-        if (!found) ERROR("getMntType (): %s not found in /etc/fstab\n", path);
+        if (!found) ERROR("fstab/view.hh::getMntType (): %s not found in /etc/fstab\n", path);
         return type;
     }
 
@@ -660,7 +660,7 @@ public:
     isMounted (const gchar *mnt_fsname) {
 
         if(!mnt_fsname) {
-            ERROR ("isMounted() mnt_point != NULL not met!\n");
+            ERROR ("fstab/view.hh::isMounted() mnt_point != NULL not met!\n");
             return FALSE;
         }
         gchar *mnt_point;
@@ -714,14 +714,14 @@ public:
     static gchar *
     mountTarget (const gchar *label) {
         if (!label){
-            ERROR("mountTarget() label is null\n");
+            ERROR("fstab/view.hh::mountTarget() label is null\n");
             return NULL;
         }
         struct mntent *mnt_struct;
         FILE *fstab_fd;
         gchar *result = NULL;
         if((fstab_fd = setmntent ("/etc/fstab", "r")) == NULL) {
-            ERROR ("mountTarget(): Unable to open %s\n", "/etc/fstab");
+            ERROR ("fstab/view.hh::mountTarget(): Unable to open %s\n", "/etc/fstab");
             return result;
         }
 
@@ -751,14 +751,14 @@ public:
     static gboolean
     isInFstab (const gchar *path) {
         if (!path){
-            ERROR("isInFstab() path is null\n");
+            ERROR("fstab/view.hh::isInFstab() path is null\n");
             return FALSE;
         }
         struct mntent *mnt_struct;
         FILE *fstab_fd;
         gboolean result = FALSE;
         if((fstab_fd = setmntent ("/etc/fstab", "r")) == NULL) {
-            ERROR ("isInFstab(): Unable to open %s\n", "/etc/fstab");
+            ERROR ("fstab/view.hh::isInFstab(): Unable to open %s\n", "/etc/fstab");
             return result;
         }
 
@@ -822,7 +822,7 @@ public:
                 auto markup = g_strdup_printf("\n\n<span size =\"larger\" color=\"red\"%s</span>\n\n",
                        text); 
                 Gtk<Type>::quickHelp(GTK_WINDOW(mainWindow), markup, "face-sick-symbolic");
-                ERROR("%s\n", text);
+                ERROR("fstab/view.hh::%s\n", text);
                 g_free(text);
                 g_free(markup);
                 return FALSE;
@@ -838,7 +838,7 @@ public:
     {
         TRACE("FstabView<Type>::mountPath(%s, %s)\n", path, mountPoint);
 	if (!g_path_is_absolute(path)){
-	    ERROR("mountPath: %s is not absolute.\n", path);
+	    ERROR("fstab/view.hh::mountPath: %s is not absolute.\n", path);
 	    return FALSE;
 	}
         const gchar *umount = "umount";
@@ -880,7 +880,7 @@ private:
     static gboolean done_f(void *data) {
         auto view = (View<Type> *)data;
 	if (!View<Type>::validBaseView(view)) {
-            ERROR("FstabView::done_f(): invalid view: %p\n", view);
+            ERROR("fstab/view.hh::done_f(): invalid view: %p\n", view);
             return FALSE;
         }
         auto page = view->page();

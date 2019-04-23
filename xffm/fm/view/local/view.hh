@@ -28,7 +28,7 @@ public:
         LocalMonitor<Type> *p = NULL;
         auto iconView = view->iconView();
         if (!g_file_test(path, G_FILE_TEST_EXISTS)){
-            ERROR("loadModel. %s does not exist\n", path);
+            ERROR("local/view.hh::loadModel. %s does not exist\n", path);
             return NULL;
         }
         if (!g_file_test(path, G_FILE_TEST_IS_DIR)){
@@ -175,7 +175,7 @@ public:
 		openWith(view, tpath, path);
 	    }
 	} else{
-	    ERROR("%s NOT a regular file\n", path);
+	    ERROR("local/view.hh::%s NOT a regular file\n", path);
 	}
 	
 	TRACE("LocalView::item activated: %s\n", path);

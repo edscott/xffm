@@ -762,7 +762,7 @@ textview text {\
         gtk_css_provider_load_from_data (css_provider, data, -1, &error);
         g_free(data);
         if (error){
-            ERROR("gtk_css_provider_load_from_data: %s\n", error->message);
+            ERROR("print.hh::setColor():gtk_css_provider_load_from_data: %s\n", error->message);
             g_error_free(error);
             return;
         }
@@ -777,6 +777,7 @@ textview text {\
         auto oldfontsize = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(widget),	"fontsize"));
 
         if (oldfontsize == fontsize) return;
+        if (fontsize < 0 ) return;
 
 
         TRACE("fontsize %d --> %d\n", oldfontsize, fontsize);
@@ -792,7 +793,7 @@ font-size: %dpx;\
         gtk_css_provider_load_from_data (css_provider, data, -1, &error);
         g_free(data);
         if (error){
-            ERROR("gtk_css_provider_load_from_data: %s\n", error->message);
+            ERROR("print.hh::set_font_size:gtk_css_provider_load_from_data: %s\n", error->message);
             g_error_free(error);
             return;
         }

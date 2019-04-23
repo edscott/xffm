@@ -34,7 +34,7 @@ private:
 
 	auto name = getBasicIconname(path, mimetype);
 	if (!name){
-	    ERROR("getBasicIconname should not return NULL\n");
+	    ERROR("fm/view/icons.hh/::getBasicIconname should not return NULL\n");
 	    return g_strdup("image-missing");
 	}
 
@@ -89,7 +89,7 @@ private:
 	TRACE("getBasicIconname(path, mimetype) mimetype=%s\n", mimetype);
 	if (strcmp(path, g_get_home_dir())==0) return g_strdup("user-home");
 	if (!mimetype) {
-	    ERROR("getBasicIconname mimetype cannot be null\n");
+	    ERROR("fm/view/icons.hh/::getBasicIconname mimetype cannot be null\n");
 	    return g_strdup("image-missing");
 	}
 	if (strcmp(mimetype, "inode/directory")==0) return  g_strdup("folder");

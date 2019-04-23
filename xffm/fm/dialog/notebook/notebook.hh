@@ -188,7 +188,7 @@ public:
         auto pageNumber = gtk_notebook_page_num (notebook_, child);
         auto currentPage = gtk_notebook_get_current_page (notebook_);
         if (pageNumber < 0){
-            ERROR("child %p is not in notebook\n", (void *)child);
+            ERROR("fm/dialog/notebook/notebook.hh::child %p is not in notebook\n", (void *)child);
             //exit(1);
             return;
         }
@@ -226,7 +226,7 @@ public:
     void setTabIcon(GtkWidget *child, const gchar *icon){
         Page<Type> *page = (Page<Type> *)g_hash_table_lookup(pageHash_, (void *)child);
         if (!page){
-            ERROR("setTabIcon:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
+            ERROR("fm/dialog/notebook/notebook.hh::setTabIcon:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
             return;
         }
         page->setTabIcon(icon);
@@ -239,7 +239,7 @@ public:
     void setVpanePosition(GtkWidget *child, gint position){
         Page<Type> *page = (Page<Type> *)g_hash_table_lookup(pageHash_, (void *)child);
         if (!page){
-            ERROR("setVpanePosition:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
+            ERROR("fm/dialog/notebook/notebook.hh::setVpanePosition:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
             return;
         }
         page->setVpanePosition(position);
@@ -253,7 +253,7 @@ public:
         Page<Type> *page = (Page<Type> *)g_hash_table_lookup(pageHash_, (void *)child);
 
         if (!page){
-            ERROR("workdir:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
+            ERROR("fm/dialog/notebook/notebook.hh::workdir:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
             return NULL;
         }
         return page->workDir();
@@ -266,7 +266,7 @@ public:
         Page<Type> *page = (Page<Type> *)g_hash_table_lookup(pageHash_, (void *)child);
 
         if (!page){
-            ERROR("setWorkdir:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
+            ERROR("fm/dialog/notebook/notebook.hh::setWorkdir:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
             return FALSE;
         }
         return page->setWorkDir(dir);
@@ -279,7 +279,7 @@ public:
         Page<Type> *page = (Page<Type> *)g_hash_table_lookup(pageHash_, (void *)child);
 
         if (!page){
-            ERROR("diagnostics:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
+            ERROR("fm/dialog/notebook/notebook.hh::diagnostics:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
             return NULL;
         }
         return page->diagnostics();
@@ -293,7 +293,7 @@ public:
         Page<Type> *page = (Page<Type> *)g_hash_table_lookup(pageHash_, (void *)child);
 
         if (!page){
-            ERROR("vpane:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
+            ERROR("fm/dialog/notebook/notebook.hh::vpane:: no hash entry for page number %d\n", gtk_notebook_page_num (notebook_, child));
             return NULL;
         }
         return page->vpane();
