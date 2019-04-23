@@ -1,4 +1,4 @@
-
+When view is reloaded, hide lpterm input and show status.
 
 bug> in pkg send stderr to output as when pkg fails, database needs manual updat "pkg update", add item to menu...
 

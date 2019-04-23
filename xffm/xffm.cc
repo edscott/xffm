@@ -21,7 +21,7 @@
 #endif
 
 #include <memory>
-#define USE_LOCAL_MONITOR 1
+//#define USE_LOCAL_MONITOR 1
 #define FORK
 
 #define URIFILE "file://"

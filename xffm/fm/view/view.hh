@@ -212,16 +212,50 @@ public:
   
     void 
     highlight(gdouble X, gdouble Y){
+	static gchar  *highlightPathString=NULL;
         //if (!xfdir_p) return; // avoid race condition here.
         //highlight_x = X; highlight_y = Y;
+	GdkPixbuf *pixbuf;
         GtkTreeIter iter;
-        
+	TRACE("highlight X,Y=%lf,%lf\n", X,Y);
         GtkTreePath *tpath = gtk_icon_view_get_path_at_pos (iconView_, X, Y); 
-        if (tpath) {
+	if (!tpath) {
+	    if (!highlightPathString) return;
+		// clear highlight
+		tpath = gtk_tree_path_new_from_string(highlightPathString);
+		gtk_tree_model_get_iter (this->treeModel(), &iter, tpath);
+		gtk_tree_model_get (this->treeModel(), &iter, 
+			NORMAL_PIXBUF, &pixbuf, -1);
+		gtk_list_store_set (GTK_LIST_STORE(this->treeModel()), &iter,
+			DISPLAY_PIXBUF, pixbuf, 
+		    -1);
+	    g_free(highlightPathString);
+	    gtk_tree_path_free(tpath);
+	    highlightPathString = NULL;
+	    DBG("tpath is NULL\n");
+	    return;
+	}
+        auto treePathString = gtk_tree_path_to_string (tpath);
+	if (highlightPathString && strcmp(highlightPathString, treePathString)==0){
+	    return;
+	}
+	g_free(highlightPathString);
+	highlightPathString = treePathString;
+	DBG("highlight path=%s\n", highlightPathString);
+	// highlight item
+        gtk_tree_model_get_iter (this->treeModel(), &iter, tpath);
+        gtk_tree_model_get (this->treeModel(), &iter, 
+                HIGHLIGHT_PIXBUF, &pixbuf, -1);
+        gtk_list_store_set (GTK_LIST_STORE(this->treeModel()), &iter,
+                DISPLAY_PIXBUF, pixbuf, 
+                -1);
+
+        return;
+     /*   if (tpath) {
             BaseSignals<Type>::highlight(tpath, this);
             //xfdir_p->tooltip(iconview_, gtk_tree_path_copy(tpath));
         }
-        else BaseSignals<Type>::clear_highlights(this);
+        else BaseSignals<Type>::clear_highlights(this);*/
     }
 
 private:

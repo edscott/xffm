@@ -118,6 +118,7 @@ public:
         }
 
 	// XXX: Why this limitation?
+	//      Because it really slows highlight down
         // if (view_p->get_dir_count() > 500) return FALSE;
         view->highlight(e->x, e->y);
 
@@ -612,6 +613,7 @@ public:
 	g_free(lastPath);
     }
 
+    // DnD highlight
     static void
     highlight(GtkTreePath *tpath, gpointer data){
         gchar *tree_path_string = NULL;
@@ -623,10 +625,14 @@ public:
             clear_highlights(data);
             return;
         }
+	auto baseModel = (BaseModel<Type> *)data;
+        GtkTreeIter iter;
+        gtk_tree_model_get_iter (baseModel->treeModel(), &iter, tpath);
+
 
         // Already highlighted?
         tree_path_string = gtk_tree_path_to_string (tpath);
-        if (g_hash_table_lookup(highlight_hash, tree_path_string)) {
+	if (g_hash_table_lookup(highlight_hash, tree_path_string)) {
             //TRACE("%s already in hash\n", tree_path_string);
             g_free (tree_path_string);
             gtk_tree_path_free (tpath);
@@ -634,13 +640,10 @@ public:
         }
         TRACE("highlight \n");
 
-	auto baseModel = (BaseModel<Type> *)data;
         // Not highlighted. First clear any other item which highlight remains.
         clear_highlights(data);
         // Now do highlight dance. 
         g_hash_table_insert(highlight_hash, tree_path_string, GINT_TO_POINTER(1));
-        GtkTreeIter iter;
-        gtk_tree_model_get_iter (baseModel->treeModel(), &iter, tpath);
         
         GdkPixbuf *highlight_pixbuf;
         gtk_tree_model_get (baseModel->treeModel(), &iter, 
@@ -763,6 +766,7 @@ public:
             }
 	    g_free(g);
         } else {
+            highlight(NULL, view);
             highlight(NULL, view);
         }
         return FALSE;
