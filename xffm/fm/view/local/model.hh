@@ -529,11 +529,18 @@ private:
             const gchar *emblem;
             if (strcmp(xd_p->d_name, "..")==0) emblem = HIGHLIGHT_UP_EMBLEM;
             else {
-                if (xd_p->st && U_RX(xd_p->st->st_mode)) {
+                emblem = HIGHLIGHT_EXEC_EMBLEM;
+/*
+                if (xd_p->st && (
+                    (xd_p->st->st_mode & S_IXUSR) ||
+                    (xd_p->st->st_mode & S_IXGRP) ||
+                    (xd_p->st->st_mode & S_IXOTH) ))
+                {
                     emblem = HIGHLIGHT_EXEC_EMBLEM;
                 } else {
                     emblem = HIGHLIGHT_OPEN_EMBLEM;
                 }
+                */
             }
             // Now decorate the pixbuf with emblem (types.h).
             void *arg[] = {NULL, (void *)highlight_pixbuf, NULL, NULL, (void *)emblem };

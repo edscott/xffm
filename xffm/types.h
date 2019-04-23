@@ -47,7 +47,7 @@ template <class Type> class Notebook;
 }
 
 #define HIGHLIGHT_OPEN_EMBLEM "NE/document-open-symbolic/3.0/220"
-#define HIGHLIGHT_EXEC_EMBLEM "NE/application-x-executable-symbolic/2.5/220"
+#define HIGHLIGHT_EXEC_EMBLEM "NE/run/2.5/220"
 #define HIGHLIGHT_UP_EMBLEM "NW/go-up-symbolic/2.0/225"
 
 #define DRAG_CALLBACK(X)  G_CALLBACK((void (*)(GtkWidget *,GdkDragContext *,gpointer)) X)
