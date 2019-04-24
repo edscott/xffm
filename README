@@ -1,4 +1,23 @@
-When view is reloaded, hide lpterm input and show status.
+
+
+pending:
+user box needs options with = (for structure)
+needs file selector box with bash completion at current directory
+needs executable definition for OK button
+needs in terminal (xterm) button (for gccproblem26)
+needs way to set and insenditivize options if in terminal is not selected
+(for gccproblem26)
+
+pending:
+structure in c++ template format
+structure.cc needs dialog to ask for include directory if none specified (with 
+filechoser template response from response templates...
+
+pending: parser/structure Tests on DuMuX-2.12
+pending: parser support for DuMuX-3.0
+
+
+
 
 bug> in pkg send stderr to output as when pkg fails, database needs manual updat "pkg update", add item to menu...
 
