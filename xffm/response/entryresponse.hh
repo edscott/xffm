@@ -30,6 +30,7 @@ protected:
     GtkButton *no_;
     GtkDialog *response_;
     GtkBox *hbox_;
+    GtkBox *vbox2_;
     GtkListStore *bashCompletionStore_;
     GtkProgressBar *timeoutProgress_;
 
@@ -89,13 +90,13 @@ public:
 	    }
 	}
 
-	auto vbox2 = gtk_c::vboxNew (FALSE, 6);
-        gtk_widget_show(GTK_WIDGET(vbox2));
-	gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(vbox2), FALSE, FALSE, 0);
+	vbox2_ = gtk_c::vboxNew (FALSE, 6);
+        gtk_widget_show(GTK_WIDGET(vbox2_));
+	gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(vbox2_), FALSE, FALSE, 0);
 
 	hbox_ = gtk_c::hboxNew (FALSE, 6);
         gtk_widget_show(GTK_WIDGET(hbox));
-	gtk_box_pack_start (GTK_BOX (vbox2), GTK_WIDGET(hbox_), FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (vbox2_), GTK_WIDGET(hbox_), FALSE, FALSE, 0);
         
 	entryLabel_ = GTK_LABEL(gtk_label_new (""));
 	gtk_box_pack_start (GTK_BOX (hbox_), GTK_WIDGET(entryLabel_), FALSE, TRUE, 0);

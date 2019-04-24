@@ -82,5 +82,6 @@ configure_file(
 add_subdirectory(po)
 
 add_subdirectory(xffm)
+add_subdirectory(structure)
 
 

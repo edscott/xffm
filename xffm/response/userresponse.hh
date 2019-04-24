@@ -16,8 +16,28 @@ public:
     {
 
 	g_signal_connect (G_OBJECT (this->no_), "clicked", G_CALLBACK (cancel), this);
-	g_signal_connect (G_OBJECT (response_), "delete-event", G_CALLBACK (response_delete), this);
+	g_signal_connect (G_OBJECT (this->dialog()), "delete-event", G_CALLBACK (response_delete), this);
 
+        this->setEntryBashCompletion("/");
+        this->setEntryLabel(_("Workdir:"));
+        this->setEntryDefault(g_get_home_dir());
+        auto checkboxes = getInt(file, "checkbox", "items");
+        for (int i=0; i<checkboxes; i++){
+            auto item = g_strdup_printf("item%d",i);
+            auto itemValue = getString(file, "checkbox", item);
+            DBG("checkbox %d: %s --> %s\n", i, item, itemValue);
+            auto check = gtk_check_button_new_with_label(itemValue);
+            g_free(item);
+            item = g_strdup_printf("item%dDefault",i);
+            auto active = (getInt(file, "checkbox", item) == 1);
+            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(check), active);
+
+            g_object_set_data(G_OBJECT(check), "option", itemValue);
+	    gtk_box_pack_start (GTK_BOX (this->vbox2_), GTK_WIDGET(check), FALSE, FALSE, 0);
+            gtk_widget_show(GTK_WIDGET(check));
+            
+            g_free(item);
+        }
 
 
 #if 0
@@ -114,7 +134,27 @@ public:
 #endif   
     }
 
-    static gchar *getString(const gchar *file, const gchar *string){
+    static gint getInt(const gchar *file, const gchar *group, const gchar *item){
+        auto keyFile = g_key_file_new();
+        gboolean loaded = g_key_file_load_from_file(keyFile, file,(GKeyFileFlags) (0),NULL);
+        if (!loaded) {
+            ERROR("Cannot load %s\n", file);
+            g_key_file_free(keyFile);
+	    return -1;
+        }
+	GError *error = NULL;
+	auto retval = g_key_file_get_integer (keyFile, group, item, &error);
+	if (error){
+	    //ERROR("userbutton():: %s\n", error->message);
+            g_key_file_free(keyFile);
+            g_error_free(error);
+	    return -1;
+	}
+        g_key_file_free(keyFile);
+        return retval;
+    }
+
+    static gchar *getString(const gchar *file, const gchar *group, const gchar *item){
         auto keyFile = g_key_file_new();
         gboolean loaded = g_key_file_load_from_file(keyFile, file,(GKeyFileFlags) (0),NULL);
         if (!loaded) {
@@ -123,9 +163,9 @@ public:
 	    return NULL;
         }
 	GError *error = NULL;
-	auto retval = g_key_file_get_string (keyFile, "userbutton", string, &error);
+	auto retval = g_key_file_get_string (keyFile, group, item, &error);
 	if (error){
-	    ERROR("userbutton():: %s\n", error->message);
+	    DBG("userbutton():: %s\n", error->message);
             g_key_file_free(keyFile);
             g_error_free(error);
 	    return NULL;
@@ -135,13 +175,13 @@ public:
     }
 
     static gchar *getIcon(const gchar *file){
-        auto icon = getString(file, "icon");
+        auto icon = getString(file, "userbutton", "icon");
         if (!icon) icon = g_strdup("system-run");
         return icon;
     }
 
     static gchar *getTooltip(const gchar *file){
-        auto tooltip = getString(file, "tooltip");
+        auto tooltip = getString(file, "userbutton", "tooltip");
         if (!tooltip) tooltip = g_strdup("User button");
         return tooltip;
     }
