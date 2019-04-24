@@ -1,20 +1,29 @@
 #ifndef XF_USERRESPONSE_HH
 # define XF_USERRESPONSE_HH
+#include "entryfolderresponse.hh"
 
 namespace xf
 {
 template <class Type>
-class UserResponse {
+class UserResponse: public EntryFolderResponse<Type>{
     using gtk_c = Gtk<Type>;
-    GtkListStore *bashCompletionStore_;
-    GtkBox *hbox_;
-    GtkButton *yes_;
-    GtkButton *no_;
-    GtkDialog *response_;
 
 public:
-    UserResponse(GtkWindow *parent, const gchar *windowTitle, const gchar *icon) {
-        bashCompletionStore_ = NULL;
+
+
+    UserResponse(GtkWindow *parent, const gchar *file):
+     EntryFolderResponse<Type>(parent, "title", "run")
+    {
+
+	g_signal_connect (G_OBJECT (this->no_), "clicked", G_CALLBACK (cancel), this);
+	g_signal_connect (G_OBJECT (response_), "delete-event", G_CALLBACK (response_delete), this);
+
+
+
+#if 0
+        gchar *icon = getIcon(file);
+        gchar *title = getTooltip(file);
+
 	response_ = GTK_DIALOG(gtk_dialog_new ());
 	gtk_window_set_type_hint(GTK_WINDOW(response_), GDK_WINDOW_TYPE_HINT_DIALOG);
 	gtk_window_set_modal (GTK_WINDOW (response_), TRUE);
@@ -35,7 +44,7 @@ public:
 
 
 	if (icon){
-	    GdkPixbuf *p = Icons<Type>::get_theme_pixbuf(icon, -48);
+	    GdkPixbuf *p = Icons<Type>::get_theme_pixbuf(icon, 48);
 	    if (p){
 		auto image = GTK_IMAGE(gtk_image_new_from_pixbuf(p));
 		gtk_box_pack_start (GTK_BOX (hbox_), GTK_WIDGET(image), FALSE, FALSE, 0);
@@ -45,13 +54,30 @@ public:
 		TRACE("Cannot load icon %s\n", icon);
 	    }
 	}
-	/*entryLabel_ = GTK_LABEL(gtk_label_new (""));
-	gtk_box_pack_start (GTK_BOX (hbox_), GTK_WIDGET(entryLabel_), FALSE, TRUE, 0);
+	auto vbox2 = gtk_c::vboxNew (FALSE, 6);
+	gtk_box_pack_start (GTK_BOX (hbox_), GTK_WIDGET(vbox2), FALSE, FALSE, 0);
+	gtk_widget_show (GTK_WIDGET(vbox2));
+	auto hbox = gtk_c::hboxNew (FALSE, 1);
+	gtk_box_pack_start (GTK_BOX (vbox2), GTK_WIDGET(hbox), FALSE, FALSE, 0);
+	gtk_widget_show (GTK_WIDGET(hbox));
+        
+	entryLabel_ = GTK_LABEL(gtk_label_new (""));
+	gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(entryLabel_), FALSE, TRUE, 0);
 	
         entry_ = GTK_ENTRY(gtk_entry_new ());
-        gtk_box_pack_start (GTK_BOX (hbox_), GTK_WIDGET(entry_), TRUE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(entry_), TRUE, TRUE, 0);
+	gtk_widget_show (GTK_WIDGET(entry_));
         g_object_set_data(G_OBJECT(entry_),"response", response_);
-        g_signal_connect (G_OBJECT (entry_), "activate", 
+
+	auto button = gtk_c::dialog_button ("folder-symbolic", NULL);
+	gtk_box_pack_start (hbox, GTK_WIDGET(button), FALSE, FALSE, 0);
+	gtk_widget_show (GTK_WIDGET(button));
+        g_signal_connect (G_OBJECT(button), 
+                        "clicked", BUTTON_CALLBACK (folderChooser), 
+                        (gpointer) entry_);
+
+        
+        /*g_signal_connect (G_OBJECT (entry_), "activate", 
                 ENTRY_CALLBACK (EntryResponse<Type>::activate_entry), (void *)response_);
         */
         gtk_widget_show(GTK_WIDGET(hbox_));
@@ -72,8 +98,8 @@ public:
 	add_cancel_ok(GTK_DIALOG (response_));
 
 	gtk_widget_realize (GTK_WIDGET(response_));
-	if(windowTitle){
-	    gtk_window_set_title (GTK_WINDOW (response_), windowTitle);
+	if(title){
+	    gtk_window_set_title (GTK_WINDOW (response_), title);
 	} else {
 	    gdk_window_set_decorations (
                     gtk_widget_get_window(GTK_WIDGET(response_)), GDK_DECOR_BORDER);
@@ -85,51 +111,75 @@ public:
         gtk_widget_set_can_default (GTK_WIDGET(yes_), TRUE);
         gtk_widget_grab_default(GTK_WIDGET(yes_));
         return;
-        
+#endif   
     }
 
-    static GtkButton *userbutton(const gchar *file){
+    static gchar *getString(const gchar *file, const gchar *string){
         auto keyFile = g_key_file_new();
         gboolean loaded = g_key_file_load_from_file(keyFile, file,(GKeyFileFlags) (0),NULL);
         if (!loaded) {
             ERROR("Cannot load %s\n", file);
+            g_key_file_free(keyFile);
 	    return NULL;
         }
 	GError *error = NULL;
-	auto icon = g_key_file_get_string (keyFile, "userbutton", "icon", &error);
+	auto retval = g_key_file_get_string (keyFile, "userbutton", string, &error);
 	if (error){
 	    ERROR("userbutton():: %s\n", error->message);
-	    icon = g_strdup("system-run");
+            g_key_file_free(keyFile);
+            g_error_free(error);
+	    return NULL;
 	}
-	auto tooltip = g_key_file_get_string (keyFile, "userbutton", "tooltip", &error);
-	if (error){
-	    ERROR("userbutton():: %s\n", error->message);
-	    tooltip = g_strdup("User button");
-	}
+        g_key_file_free(keyFile);
+        return retval;
+    }
+
+    static gchar *getIcon(const gchar *file){
+        auto icon = getString(file, "icon");
+        if (!icon) icon = g_strdup("system-run");
+        return icon;
+    }
+
+    static gchar *getTooltip(const gchar *file){
+        auto tooltip = getString(file, "tooltip");
+        if (!tooltip) tooltip = g_strdup("User button");
+        return tooltip;
+    }
+
+    static GtkButton *userbutton(const gchar *file){
+        auto icon = getIcon(file);
+        auto tooltip = getTooltip(file);
 	auto button = Gtk<Type>::newButton(icon, tooltip);
-	g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(openUserDialog), g_strdup(tooltip));
+	g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(openUserDialog), g_strdup(file));
 	g_free(icon);
 	
 	return button;
     }
 private:
+    static void
+    folderChooser (GtkButton * button, gpointer data) {
+        GtkEntry *entry = GTK_ENTRY(data);
+        const gchar *text = _("Choose directory");
+        EntryFileResponse<Type>::folderChooser(entry, text);
+    }
         
     static void openUserDialog(GtkButton *button, void *data){
-        auto title = (const gchar *) data;
-        auto userResponse = new(UserResponse<Type>)(mainWindow, title, "run");
+        auto file = (const gchar *) data;
+        auto userResponse = new(UserResponse<Type>)(mainWindow, file);
         userResponse->runResponse();
-        delete(userResponse);
     }
 
     static void
     cancel (GtkButton *button, gpointer data) {
-        auto dialog = GTK_WIDGET(g_object_get_data(G_OBJECT(button), "dialog"));
+        auto object = (UserResponse<Type> *)data;
+        /* //done automatically when object is destroyed:
+        auto dialog = GTK_WIDGET(object->dialog());
         gtk_widget_hide(dialog);
         gtk_widget_destroy(dialog);
-	// FIXME: cleanup here causes crash on double free or corruption.
-        //delete((UserResponse<Type> *)data);
+        while(gtk_events_pending()) gtk_main_iteration();*/
+        delete(object);
     }
-
+/*
     void add_cancel_ok(GtkDialog *dialog){
 	// button no
 	no_ = gtk_c::dialog_button ("window-close-symbolic", _("Cancel"));
@@ -141,7 +191,7 @@ private:
 	gtk_widget_show (GTK_WIDGET(yes_));
 	gtk_dialog_add_action_widget (GTK_DIALOG (dialog), GTK_WIDGET(yes_), GTK_RESPONSE_YES);
     }
-    
+  */  
     static gboolean 
     response_delete(GtkWidget *dialog, GdkEvent *event, gpointer data){
         cancel(NULL, data);
@@ -157,7 +207,7 @@ private:
 	gtk_window_set_position(GTK_WINDOW(this->response_), GTK_WIN_POS_CENTER_ON_PARENT);
 	gtk_widget_show (GTK_WIDGET(this->response_));
         //gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
-
+        //gtk_main();
 	return;
     }
 

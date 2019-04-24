@@ -53,8 +53,8 @@ public:
 	gtk_box_pack_end (vButtonBox_, GTK_WIDGET(pkg), FALSE, FALSE, 0);
 	g_signal_connect(G_OBJECT(pkg), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::pkg), NULL);
 
-	auto userButtonFile = (gchar *)g_build_filename(g_get_user_config_dir(),"xffm+","userbutton.ini", NULL);
-	if (g_file_test(userButtonFile, G_FILE_TEST_EXISTS)){
+	auto userButtonFile = Settings<Type>::getSettingString("userbutton", "file");
+	if (userButtonFile && g_file_test(userButtonFile, G_FILE_TEST_EXISTS)){
 	    auto userbutton = UserResponse<Type>::userbutton(userButtonFile);
 	    if (userbutton) gtk_box_pack_end (vButtonBox_, GTK_WIDGET(userbutton), FALSE, FALSE, 0);
 	}

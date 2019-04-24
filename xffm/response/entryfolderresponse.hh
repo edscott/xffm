@@ -16,6 +16,7 @@ public:
 	auto button = gtk_c::dialog_button ("folder-symbolic", NULL);
 	auto vbox = gtk_c::vboxNew (FALSE, 6);
 	gtk_box_pack_start (this->hbox_, GTK_WIDGET(button), FALSE, FALSE, 0);
+	gtk_widget_show (GTK_WIDGET(this->entry()));
 	gtk_widget_show (GTK_WIDGET(button));
         g_signal_connect (G_OBJECT(button), 
                         "clicked", BUTTON_CALLBACK (folderChooser), 

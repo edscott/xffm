@@ -5,31 +5,6 @@ namespace xf
 {
 template <class Type> class Response;
 template <class Type> class EntryResponse;
-template <class Type>
-class EntryFolderResponse: public EntryResponse<Type> {
-    using gtk_c = Gtk<Type>;
-public:
-
-    EntryFolderResponse(GtkWindow *parent, const gchar *windowTitle, const gchar *icon):
-        EntryResponse<Type>(parent, windowTitle, icon)
-    {
-	auto button = gtk_c::dialog_button ("folder-symbolic", NULL);
-	auto vbox = gtk_c::vboxNew (FALSE, 6);
-	gtk_box_pack_start (this->hbox_, GTK_WIDGET(button), FALSE, FALSE, 0);
-	gtk_widget_show (GTK_WIDGET(button));
-        g_signal_connect (G_OBJECT(button), 
-                        "clicked", BUTTON_CALLBACK (folderChooser), 
-                        (gpointer) this->entry());
-    }
-    
-    static void
-    folderChooser (GtkButton * button, gpointer data) {
-        GtkEntry *entry = GTK_ENTRY(data);
-        const gchar *text = _("Choose directory");
-        EntryFileResponse<Type>::folderChooser(entry, text);
-    }
-
-};
 
 static time_t endTime = 0;
 
@@ -49,10 +24,10 @@ class EntryResponse {
     GtkEntry *entry_;
     GtkCheckButton *checkbutton_;
     GtkEntryCompletion *bashCompletion_;
-    GtkButton *no_;
 
 protected:
     GtkButton *yes_;
+    GtkButton *no_;
     GtkDialog *response_;
     GtkBox *hbox_;
     GtkListStore *bashCompletionStore_;
@@ -94,25 +69,34 @@ public:
         gtk_widget_show(GTK_WIDGET(vbox));
 	gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area(GTK_DIALOG (response_))), GTK_WIDGET(vbox), FALSE, FALSE, 0);
 
-	hbox_ = gtk_c::hboxNew (FALSE, 6);
+	auto hbox = gtk_c::hboxNew (FALSE, 6);
 
 	responseLabel_ = GTK_LABEL(gtk_label_new (""));
 	gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET(responseLabel_), FALSE, FALSE, 0);
 
-	gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET(hbox_), FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET(hbox), FALSE, FALSE, 0);
 
 
 	if (icon){
 	    GdkPixbuf *p = Icons<Type>::get_theme_pixbuf(icon, -48);
 	    if (p){
 		auto image = GTK_IMAGE(gtk_image_new_from_pixbuf(p));
-		gtk_box_pack_start (GTK_BOX (hbox_), GTK_WIDGET(image), FALSE, FALSE, 0);
+		gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(image), FALSE, FALSE, 0);
 		gtk_widget_show(GTK_WIDGET(image));
 		TRACE("Loaded icon %s\n", icon);
 	    } else {
 		TRACE("Cannot load icon %s\n", icon);
 	    }
 	}
+
+	auto vbox2 = gtk_c::vboxNew (FALSE, 6);
+        gtk_widget_show(GTK_WIDGET(vbox2));
+	gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(vbox2), FALSE, FALSE, 0);
+
+	hbox_ = gtk_c::hboxNew (FALSE, 6);
+        gtk_widget_show(GTK_WIDGET(hbox));
+	gtk_box_pack_start (GTK_BOX (vbox2), GTK_WIDGET(hbox_), FALSE, FALSE, 0);
+        
 	entryLabel_ = GTK_LABEL(gtk_label_new (""));
 	gtk_box_pack_start (GTK_BOX (hbox_), GTK_WIDGET(entryLabel_), FALSE, TRUE, 0);
 	
@@ -185,6 +169,8 @@ public:
     GtkEntry *entry(void){
         return entry_;
     }
+
+    GtkDialog *dialog(void) {return response_;}
 
     void setEntryDefault(const gchar *value){
         if (!value) return;
