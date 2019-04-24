@@ -88,13 +88,46 @@ public:
         
     }
 
- 
+    static GtkButton *userbutton(const gchar *file){
+        auto keyFile = g_key_file_new();
+        gboolean loaded = g_key_file_load_from_file(keyFile, file,(GKeyFileFlags) (0),NULL);
+        if (!loaded) {
+            ERROR("Cannot load %s\n", file);
+	    return NULL;
+        }
+	GError *error = NULL;
+	auto icon = g_key_file_get_string (keyFile, "userbutton", "icon", &error);
+	if (error){
+	    ERROR("userbutton():: %s\n", error->message);
+	    icon = g_strdup("system-run");
+	}
+	auto tooltip = g_key_file_get_string (keyFile, "userbutton", "tooltip", &error);
+	if (error){
+	    ERROR("userbutton():: %s\n", error->message);
+	    tooltip = g_strdup("User button");
+	}
+	auto button = Gtk<Type>::newButton(icon, tooltip);
+	g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(openUserDialog), g_strdup(tooltip));
+	g_free(icon);
+	
+	return button;
+    }
+private:
+        
+    static void openUserDialog(GtkButton *button, void *data){
+        auto title = (const gchar *) data;
+        auto userResponse = new(UserResponse<Type>)(mainWindow, title, "run");
+        userResponse->runResponse();
+        delete(userResponse);
+    }
+
     static void
     cancel (GtkButton *button, gpointer data) {
         auto dialog = GTK_WIDGET(g_object_get_data(G_OBJECT(button), "dialog"));
         gtk_widget_hide(dialog);
         gtk_widget_destroy(dialog);
-        delete((UserResponse<Type> *)data);
+	// FIXME: cleanup here causes crash on double free or corruption.
+        //delete((UserResponse<Type> *)data);
     }
 
     void add_cancel_ok(GtkDialog *dialog){
@@ -123,7 +156,6 @@ public:
 	gtk_window_set_modal (GTK_WINDOW (this->response_), FALSE);
 	gtk_window_set_position(GTK_WINDOW(this->response_), GTK_WIN_POS_CENTER_ON_PARENT);
 	gtk_widget_show (GTK_WIDGET(this->response_));
-        gtk_main();
         //gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
 
 	return;

@@ -134,7 +134,7 @@ public:
 	GError *error = NULL;
 	value = g_key_file_get_string (keyFile, group, item, &error);
 	if (error){
-	    TRACE("%s\n", error->message);
+	    ERROR("%s\n", error->message);
 	    g_error_free(error);
 	    value = NULL;
         } 

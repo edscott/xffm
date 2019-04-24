@@ -1,16 +1,11 @@
 #ifndef XF_VBUTTONBOX
 #define XF_VBUTTONBOX
 namespace xf {
+    
 
 template <class Type>
 class VButtonBox {
     using gtk_c = Gtk<double>;
-    static void openUserDialog(GtkButton *button, void *data){
-        auto title = (const gchar *) data;
-        auto userResponse = new(UserResponse<Type>)(mainWindow, title, "run");
-        userResponse->runResponse();
-        delete(userResponse);
-    }
 public:
     GtkBox *vButtonBox(void){return vButtonBox_;}
     VButtonBox(void){
@@ -57,20 +52,13 @@ public:
 #endif
 	gtk_box_pack_end (vButtonBox_, GTK_WIDGET(pkg), FALSE, FALSE, 0);
 	g_signal_connect(G_OBJECT(pkg), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::pkg), NULL);
-	
-	auto usercommand = Settings<Type>::getSettingString("userbutton", "command");
-	if (usercommand){
-	    auto icon=Settings<Type>::getSettingString("userbutton", "icon");
-	    if (!icon) icon = g_strdup("system-run");
-	    auto tooltip=Settings<Type>::getSettingString("userbutton", "tooltip");
-	    if (!tooltip) tooltip = g_strdup("User button");
-	    auto userbutton = gtk_c::newButton(icon, tooltip);
-	    gtk_box_pack_end (vButtonBox_, GTK_WIDGET(userbutton), FALSE, FALSE, 0);
-	    g_free(icon);
-	    //g_free(tooltip);
-	    g_signal_connect(G_OBJECT(userbutton), "clicked", G_CALLBACK(openUserDialog), tooltip);
-//	    g_signal_connect(G_OBJECT(userbutton), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::plainRun), usercommand);
+
+	auto userButtonFile = (gchar *)g_build_filename(g_get_user_config_dir(),"xffm+","userbutton.ini", NULL);
+	if (g_file_test(userButtonFile, G_FILE_TEST_EXISTS)){
+	    auto userbutton = UserResponse<Type>::userbutton(userButtonFile);
+	    if (userbutton) gtk_box_pack_end (vButtonBox_, GTK_WIDGET(userbutton), FALSE, FALSE, 0);
 	}
+	g_free(userButtonFile);
 
         auto search = gtk_c::newButton("system-search", _("Search"));
 	gtk_box_pack_start (vButtonBox_, GTK_WIDGET(search), FALSE, FALSE, 0);
