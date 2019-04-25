@@ -7,10 +7,9 @@ class EntryFileResponse {
     using pixbuf_c = Pixbuf<double>;
     using gtk_c = Gtk<double>;
     using util_c = Util<double>;
-public:
+
     static void
-    folderChooser(GtkEntry *entry, const gchar *text) {
-         GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER;
+    chooser(GtkEntry *entry, const gchar *text, GtkFileChooserAction action) {
         // GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_OPEN;
         GtkDialog *dialog = GTK_DIALOG(gtk_file_chooser_dialog_new (text,
                                                          GTK_WINDOW (gtk_widget_get_toplevel(GTK_WIDGET(entry))),
@@ -40,6 +39,20 @@ public:
         gtk_widget_hide (GTK_WIDGET(dialog));
         gtk_widget_destroy (GTK_WIDGET(dialog));
 
+    }
+
+public:
+    static void
+    folderChooser(GtkEntry *entry, const gchar *text) {
+         chooser(GTK_ENTRY(entry), text, GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER);
+    }
+    static void
+    folderChooser(GtkButton *button, void *data) {
+         chooser(GTK_ENTRY(data), _("Choose directory"), GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER);
+    }
+    static void
+    fileChooser(GtkButton *button, void *data) {
+         chooser(GTK_ENTRY(data), _("Choose file"), GTK_FILE_CHOOSER_ACTION_OPEN);
     }
 };
 }
