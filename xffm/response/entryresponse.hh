@@ -1,10 +1,7 @@
 #ifndef XF_ENTRYRESPONSE_HH
 # define XF_ENTRYRESPONSE_HH
-#include "entryfileresponse.hh"
 namespace xf
 {
-template <class Type> class Response;
-template <class Type> class EntryResponse;
 
 static time_t endTime = 0;
 
@@ -126,12 +123,7 @@ public:
 	add_cancel_ok(GTK_DIALOG (response_));
 
 	gtk_widget_realize (GTK_WIDGET(response_));
-	if(windowTitle){
-	    gtk_window_set_title (GTK_WINDOW (response_), windowTitle);
-	} else {
-	    gdk_window_set_decorations (
-                    gtk_widget_get_window(GTK_WIDGET(response_)), GDK_DECOR_BORDER);
-	}
+        setTitle(windowTitle);
 
 	g_signal_connect (G_OBJECT (response_), "delete-event", G_CALLBACK (response_delete), response_);
 	g_signal_connect (G_OBJECT (entry_), "key-press-event", G_CALLBACK (progressReset), timeoutProgress_);
@@ -140,6 +132,16 @@ public:
         gtk_widget_grab_default(GTK_WIDGET(yes_));
         return;
     }
+
+    void setTitle(const gchar *windowTitle){
+	if(windowTitle){
+	    gtk_window_set_title (GTK_WINDOW (response_), windowTitle);
+	} else {
+	    gdk_window_set_decorations (
+                    gtk_widget_get_window(GTK_WIDGET(response_)), GDK_DECOR_BORDER);
+	}
+    }
+
 
     static gboolean
     progressReset(GtkWidget *w, GdkEventKey *event, void *data){

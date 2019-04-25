@@ -197,12 +197,6 @@ public:
         gtk_entry_completion_complete (completion);
         return FALSE;
     }
-    static void
-    folderChooser (GtkButton * button, gpointer data) {
-        GtkEntry *entry = GTK_ENTRY(data);
-        const gchar *text = _("Select folder to search in");
-        EntryFileResponse<Type>::folderChooser(entry, text);
-    }
 
 
 private:

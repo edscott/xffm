@@ -325,7 +325,7 @@ private:
 	g_object_set_data(G_OBJECT(dialog_), "fileselector", button);
 	
         g_signal_connect (G_OBJECT(button), 
-                        "clicked", BUTTON_CALLBACK (Type::folderChooser), 
+                        "clicked", BUTTON_CALLBACK (ChooserResponse<Type>::folderChooser), 
                         (gpointer) path_entry);
 
 	auto filter_box = gtk_c::hboxNew (FALSE, 0);

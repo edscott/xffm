@@ -53,24 +53,24 @@ public:
 	gtk_box_pack_end (vButtonBox_, GTK_WIDGET(pkg), FALSE, FALSE, 0);
 	g_signal_connect(G_OBJECT(pkg), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::pkg), NULL);
 
-	auto userButtonFiles = Settings<Type>::getSettingString("userbuttons", "files");
-	if (userButtonFiles){
+	auto customButtonFiles = Settings<Type>::getSettingString("custombuttons", "files");
+	if (customButtonFiles){
             gchar **files;
-            if (strchr(userButtonFiles ,':')) {
-                files = g_strsplit(userButtonFiles, ":",-1);
+            if (strchr(customButtonFiles ,':')) {
+                files = g_strsplit(customButtonFiles, ":",-1);
             } else {
                files = (gchar **)calloc(2, sizeof(gchar *)); 
-               files[0] = g_strdup(userButtonFiles);
+               files[0] = g_strdup(customButtonFiles);
             }
             for (auto p=files; p && *p; p++){
                 if (g_file_test(*p, G_FILE_TEST_EXISTS)){
-                    auto userbutton = UserResponse<Type>::userbutton(*p);
-                    if (userbutton) gtk_box_pack_end (vButtonBox_, GTK_WIDGET(userbutton), FALSE, FALSE, 0);
+                    auto custombutton = CustomResponse<Type>::custombutton(*p);
+                    if (custombutton) gtk_box_pack_end (vButtonBox_, GTK_WIDGET(custombutton), FALSE, FALSE, 0);
                 }
             }
             g_strfreev(files);
 	}
-	g_free(userButtonFiles);
+	g_free(customButtonFiles);
 
         auto search = gtk_c::newButton("system-search", _("Search"));
 	gtk_box_pack_start (vButtonBox_, GTK_WIDGET(search), FALSE, FALSE, 0);

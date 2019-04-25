@@ -1,39 +1,6 @@
 #ifndef XFFM_HH
 #define XFFM_HH
 
-enum
-{
-    ROOTVIEW_TYPE,
-    LOCALVIEW_TYPE,
-    FSTAB_TYPE,
-    NFS_TYPE,
-    SSHFS_TYPE,
-    ECRYPTFS_TYPE,
-    CIFS_TYPE,
-    PKG_TYPE
-};
-
-enum
-{
-  FLAGS,
-  TREEVIEW_PIXBUF,
-  DISPLAY_PIXBUF,
-  NORMAL_PIXBUF,
-  HIGHLIGHT_PIXBUF,
-  TOOLTIP_PIXBUF,
-  DISPLAY_NAME,
-  PATH,
-  DISK_ID,
-  SIZE,
-  DATE,
-  TOOLTIP_TEXT,
-  ICON_NAME,
-  MIMETYPE, 
-  PREVIEW_PATH,
-  PREVIEW_TIME,
-  PREVIEW_PIXBUF,
-  NUM_COLS
-};
 
 namespace xf {
     static GList *localMonitorList = NULL;
