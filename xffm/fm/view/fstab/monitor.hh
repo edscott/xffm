@@ -34,7 +34,7 @@ public:
             sleep(1);
         }
 #endif
-        g_hash_table_destroy(this->itemsHash());
+        //g_hash_table_destroy(this->itemsHash());
         TRACE("***Destructor:~local_monitor_c() complete\n");
     }
 
@@ -356,9 +356,9 @@ private:
                 gchar *base = g_path_get_basename(f);
                 gchar *devicePath = id2Partition(f);
                 TRACE("looking in hash for key=%s\n", devicePath);
-                if (p->itemsHash()&& devicePath){
+                /*if (p->itemsHash()&& devicePath){
                     g_hash_table_remove(p->itemsHash(), devicePath); 
-                }
+                }*/
                 gtk_tree_model_foreach (p->treeModel(), rm_func, (gpointer)base); 
                 g_free(base);
                 g_free(devicePath);
@@ -370,11 +370,13 @@ private:
                 TRACE("Received  CREATED (%d): \"%s\", \"%s\"\n", event, f, s);
                 gchar *devicePath = id2Partition(f);
                 TRACE("adding partition %s -> %s \n", f, devicePath);
-                if (!g_hash_table_lookup(p->itemsHash(), devicePath)){
+                FstabView<Type>::addPartition(GTK_TREE_MODEL(p->store_), devicePath);
+
+                /*if (!g_hash_table_lookup(p->itemsHash(), devicePath)){
                     TRACE("not in hash %s \n", devicePath);
                     FstabView<Type>::addPartition(GTK_TREE_MODEL(p->store_), devicePath);
                     g_hash_table_replace(p->itemsHash(), g_strdup(devicePath), g_strdup(f));
-                }
+                }*/
                 g_free(devicePath);
                 break;
             }
@@ -407,13 +409,13 @@ private:
     gboolean 
     redoIcon(const gchar *path){
         TRACE("redoIcon %s ...\n", path);
-        gchar *key = Hash<Type>::get_hash_key(path, 10);
+        /*gchar *key = Hash<Type>::get_hash_key(path, 10);
         if (!g_hash_table_lookup(this->itemsHash(), key)) {
             g_free(key);
             TRACE("*** %s not in itemsHash\n", path);
             return FALSE; 
         }
-        g_free(key);
+        g_free(key);*/
         gtk_tree_model_foreach (GTK_TREE_MODEL(this->store_), changeIcon, (gpointer) path); 
         return TRUE;
     }

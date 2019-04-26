@@ -10,6 +10,9 @@ public:
                GdkEvent  *event,
                gpointer   user_data){
 	gtk_widget_hide(widget);
+        for (auto p=customDialogs; p && p->data; p=p->next){
+            gtk_widget_hide(GTK_WIDGET(p->data));
+        }
 	while (gtk_events_pending()) gtk_main_iteration();
         while (asyncReference > 0){
             DBG("delete/destroy: asyncReference = %d\n", asyncReference);

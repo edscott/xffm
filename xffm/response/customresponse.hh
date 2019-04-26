@@ -16,11 +16,13 @@ public:
         g_free(exec_);
         g_free(workdir_);
         g_list_free(optionsList);
+        customDialogs = g_list_remove(customDialogs, this->response_);
     }
 
     CustomResponse(GtkWindow *parent, const gchar *file):
      ComboFileResponse<Type>(parent, "title", "run")
     {
+        customDialogs = g_list_prepend(customDialogs, this->response_);
         exec_ = getString(file, "custombutton", "exec");
         workdir_=NULL;
         optionsList = NULL;
@@ -99,9 +101,11 @@ public:
 	    gtk_box_pack_start (GTK_BOX (this->vbox2_), GTK_WIDGET(hbox), FALSE, FALSE, 0);
 	    gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(check), FALSE, FALSE, 0);
 	    gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(label), FALSE, FALSE, 0);
-	    if (strcmp(itemValue, "file")==0 || strcmp(itemValue, "folder")==0) {
+	    if (strcmp(itemValue, "file")==0 || strcmp(itemValue, "folder")==0
+                    || strcmp(itemValue, "text")==0) {
 		auto entry = GTK_ENTRY(gtk_entry_new ());
                 g_object_set_data(G_OBJECT(hbox), "entry", entry);
+                    g_object_set_data(G_OBJECT(entry), "workdir", workdir_);
 
 		gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(entry), FALSE, FALSE, 0);
 		auto button = gtk_c::dialog_button ("folder-symbolic", NULL);
@@ -111,7 +115,7 @@ public:
 			    "clicked", BUTTON_CALLBACK (ChooserResponse<Type>::folderChooser), 
 			    (gpointer) entry);
                    this->setComboBashCompletion("/");
-		} else {
+		} else if (strcmp(itemValue, "file")==0) {
 		    g_signal_connect (G_OBJECT(button), 
 			    "clicked", BUTTON_CALLBACK (ChooserResponse<Type>::fileChooser), 
 			    (gpointer) entry);
@@ -127,6 +131,7 @@ public:
             g_free(itemValue);
         }
         g_object_set_data(G_OBJECT(this->yes_), "optionsList", optionsList);
+        g_object_set_data(G_OBJECT(this->yes_), "pageWorkdir", (void *)page->workDir());
 
     }
     static gchar **getKeys(const gchar *file, const gchar *group){
@@ -256,12 +261,20 @@ private:
                 }
             }
         }
-        auto g = g_strconcat(command," ",workdir,"/",file,NULL);
+        gchar *path;
+        if (g_path_is_absolute(file)) path = g_strdup(file);
+        else if (workdir) path = g_strconcat(workdir,G_DIR_SEPARATOR_S, file, NULL);
+        else {
+            auto w = (const gchar *)g_object_get_data(G_OBJECT(button), "pageWorkdir");
+            path = g_strconcat(w,G_DIR_SEPARATOR_S, file, NULL); 
+        }
+        auto g = g_strconcat(command," \"", path, "\"", NULL);
         g_free(command);
+        g_free(path);
         command = g;
 
         DBG("run \'%s\'\n", command);
-        //MenuPopoverSignals<Type>::plainRun(NULL, command);
+        MenuPopoverSignals<Type>::plainRun(NULL, command);
         g_free(command);
     }
     static void

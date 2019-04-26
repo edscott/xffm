@@ -53,7 +53,7 @@ public:
             TRACE("***Waiting for mountThread to exit\n");
         }
 #endif
-        g_hash_table_destroy(this->itemsHash());
+        //g_hash_table_destroy(this->itemsHash());
         TRACE("***Destructor:~local_monitor_c() complete\n");
     }
     void
@@ -65,7 +65,7 @@ public:
 # ifdef USE_MOUNTTHREAD
         // start mountThread
         pthread_t mountThread;
-        TRACE("LocalMonitor thread itemshash=%p\n", this->itemsHash());
+        //TRACE("LocalMonitor thread itemshash=%p\n", this->itemsHash());
         mountArg_[0] = (void *)this;
         mountArg_[1] = GINT_TO_POINTER(TRUE);
         mountArg_[2] = GINT_TO_POINTER(TRUE);
@@ -115,7 +115,7 @@ public:
             // use hashkey
             gchar *key = Hash<Type>::get_hash_key(xd_p->path, 10);
 	    TRACE("add_new_item ...(%s --> %s) shows:hidden=%d\n", key, xd_p->path, showHidden);
-            g_hash_table_replace(this->itemsHash(), key, g_strdup(xd_p->path));
+            //g_hash_table_replace(this->itemsHash(), key, g_strdup(xd_p->path));
             LocalView<Type>::free_xd_p(xd_p);
             return TRUE;
         } 

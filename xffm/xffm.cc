@@ -30,6 +30,7 @@ static const gchar *xffmProgram;
 static const gchar *xffindProgram;
 static GtkWindow *mainWindow = NULL;
 static gboolean isTreeView;
+GList *customDialogs = NULL;
 #include "common/common.hh"
 #include "completion/completion.hh"
 #include "response/response.hh"

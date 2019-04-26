@@ -5,7 +5,7 @@
 
 #define STRUCTURE_CC
 #define URIFILE "file://"
-#define PARSER "parse7.pl"
+#define PERL_PARSER "parse9b.pl";
 #include <glib.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>
@@ -22,8 +22,7 @@
 # define WARN(...)  {fprintf(stderr, "warning> "); fprintf(stderr, __VA_ARGS__);}
 
 #include <sys/wait.h>
-
-
+#include <iostream>
 enum {
     TARGET_URI_LIST,
     TARGETS
@@ -795,27 +794,73 @@ parseXML (const gchar * file) {
     g_markup_parse_context_free (fileContext);
     g_markup_parse_context_free (mainContext);
 }
+namespace xf {
+template <class Type>
+class Structure {
+    gchar *xmlFile_;
+    gchar *parserPath_;
+public:
+    ~Structure(void){
+        g_free(xmlFile_);
+        g_free(parserPath_);
+    }
+    Structure(gchar **argv){
+        auto parser=PERL_PARSER;
+        parserPath_ = g_find_program_in_path(parser);
+        if (!parserPath_){
+            std::cerr<<"Cannot find "<<parser<<" in path\n";
+            throw 1;
+        }
+        // Get source file, template directory and include directory options
+        auto sourceFile = getSourceFile(argv);
+        int status;
+        auto pid = fork();
+        if (pid) wait(&status);
+        else {
+            gchar *a[10];
+            int i=0;
+            a[i++] = (gchar *)"/usr/bin/perl";
+            a[i++] = (gchar *)parserPath_;
+            a[i++] = (gchar *)sourceFile;
+            for (auto p=argv+1; p && *p && i<9; p++){
+                if (strstr(*p, "--"))a[i++] = (gchar *)*p;
+            }
+            a[i] = NULL;
+            for (auto j=0; j<i; j++)fprintf(stderr,"%s ", a[j]); fprintf(stderr,"\n");
+            execvp("/usr/bin/perl", a);
+        }
+        fprintf(stderr, "OK\n");
 
+        xmlFile_ = g_strdup("structure.xml");
+    }
+
+    const gchar *xmlFile(void){return xmlFile_;}
+private:
+   const gchar *getSourceFile(gchar **argv){
+        const gchar *retval=NULL;
+        for (auto p=argv+1; p && *p; p++){
+            if (strstr(*p, "--"))continue;
+            if (!g_file_test(*p, G_FILE_TEST_IS_REGULAR)){
+                std::cerr<< *p << "is not a regular file\n";
+                throw 2;
+            }
+            retval = *p;
+        }
+        if (!retval) throw 3;
+        return retval;
+    }
+
+};
+}
 
 int
 main (int argc, char *argv[]) {
-    auto parser=g_find_program_in_path("parse9a.pl");
-    if (!parser){
-        fprintf(stderr, "Cannot find perl parser in path\n");
+    xf::Structure<double>  *structure;
+    try {
+        structure = new(xf::Structure<double>)(argv);
+    } catch (int e){
         exit(1);
     }
-    if (!argv[1] || !g_file_test(argv[1], G_FILE_TEST_EXISTS)){
-        fprintf(stderr, "usage: %s source_file\n", argv[0]);
-        exit(1);
-    }
-    int status;
-    auto pid = fork();
-    if (pid) wait(&status);
-    else {
-        execlp("/usr/bin/perl", "/usr/bin/perl", parser, argv[1], NULL);
-    }
-    fprintf(stderr, "OK\n");
-    exit;
  
     treeStore = gtk_tree_store_new(COLUMNS, 
 	    GDK_TYPE_PIXBUF, // icon in treeView display
@@ -839,7 +884,7 @@ main (int argc, char *argv[]) {
     gtk_init(&argc, &argv);
 
 //    parseXML(argv[1]?argv[1]:"structure.xml");
-    parseXML("structure.xml");
+    parseXML(structure->xmlFile());
 	
     
     createWindow();

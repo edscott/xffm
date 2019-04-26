@@ -15,9 +15,11 @@ namespace xf{
     template <class Type> class RootModel;
     template <class Type> class PkgModel;
 }
+#include "base/base.hh"
 
 #include "iconview.hh"
 #include "treeview.hh"
+
 
 #include "root/view.hh"
 #include "local/view.hh"

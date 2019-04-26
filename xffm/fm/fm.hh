@@ -26,7 +26,6 @@ namespace xf {
     };
 }
 
-#include "base/base.hh"
 #include "view/view.hh"
 #include "dialog/dialog.hh"
 

@@ -5,7 +5,7 @@ namespace xf
 template <class Type>
 class BaseMonitor {
     gboolean active_;
-    GHashTable *itemsHash_;
+    //GHashTable *itemsHash_;
 public:
     void setMonitorStore(GtkListStore *store){store_ = store;}
 protected:
@@ -35,15 +35,15 @@ protected:
     }
 
 public:    
-    GHashTable *itemsHash(void){return itemsHash_;}
+    //GHashTable *itemsHash(void){return itemsHash_;}
     GFileMonitor *monitor(void) {return monitor_;}
     GtkTreeModel *treeModel(void){return GTK_TREE_MODEL(store_);}
     gboolean active(void){return active_;}
     void setActive(gboolean state){active_ = state;}
     
     BaseMonitor(GtkTreeModel *treeModel, View<Type> *view){
-        itemsHash_ = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_free);
-                TRACE("BaseMonitor thread itemshash=%p\n", itemsHash_);
+        //itemsHash_ = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_free);
+          //      TRACE("BaseMonitor thread itemshash=%p\n", itemsHash_);
         baseView_ = view;
         gboolean showHidden = (Settings<Type>::getSettingInteger("LocalView", "ShowHidden") > 0);
         cancellable_ = g_cancellable_new ();
@@ -100,7 +100,7 @@ public:
     void
     startMonitor(GtkTreeModel *treeModel, const gchar *path, void *monitor_f){
         // add all initial items to hash
-        if (itemsHash_) gtk_tree_model_foreach (treeModel, add2hash, (void *)itemsHash_);
+        //if (itemsHash_) gtk_tree_model_foreach (treeModel, add2hash, (void *)itemsHash_);
         store_ = GTK_LIST_STORE(treeModel);
         TRACE( "*** start_monitor: %s\n", path);
         if (gfile_) g_object_unref(gfile_);
@@ -145,7 +145,7 @@ protected:
         TRACE("remove item...\n");
 	// use hashkey
 	gchar *key = Hash<Type>::get_hash_key(path, 10);
-        if (itemsHash_) g_hash_table_remove(itemsHash_, key); 
+        //if (itemsHash_) g_hash_table_remove(itemsHash_, key); 
         gtk_tree_model_foreach (GTK_TREE_MODEL(store_), rm_func, (gpointer) path); 
         return TRUE;
     }

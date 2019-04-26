@@ -13,6 +13,6 @@ target_link_libraries(structure
     )
 
 install(TARGETS structure  RUNTIME DESTINATION bin)
-INSTALL(PROGRAMS  parse9a.pl  DESTINATION bin)
+INSTALL(PROGRAMS  parse9b.pl  DESTINATION bin)
 
 

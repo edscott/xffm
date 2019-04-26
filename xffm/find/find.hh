@@ -1,6 +1,6 @@
 #ifndef XFFIND__HH
 # define XFFIND__HH
-#include "find/fgr.hh"
+#include "fgr.hh"
 #include "dialog.hh"
 namespace xf
 {

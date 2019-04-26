@@ -6,13 +6,65 @@ if (not $ARGV[0]) {
     exit 1;
 }
 
+# process arguments...
+foreach $arg (@ARGV){
+    if ($arg =~ m/^--include/g){
+        ($a,$b)=split /=/,$arg,2;
+        if (not -d $b){
+            print "$b is not a directory\n";
+        } else {
+            $includePath = $b;
+        }
+    }
+    elsif ($arg =~ m/^--templates/g){
+        ($a,$b)=split /=/,$arg,2;
+        if (not -d $b){
+            print "$b is not a directory\n";
+        } else {
+            $templatePath = $b;
+        }
+    }
+    elsif ($arg =~ m/^--problemTypeTag/g){
+        ($a,$b)=split /=/,$arg,2;
+        if (not -d $b){
+            print "$b is not a directory\n";
+        } else {
+            $templatePath = $b;
+        }
+    }
+    elsif (-e $arg) {
+        $startFile = $arg;
+        if (not -e $startFile){
+            print "$startFile does not exist\n";
+            exit 1;
+        }
+        print "<!-- Parsing $startFile -->\n";
+    } 
+}
+
+if ($includePath){
+    print "<!-- Additional include directory at $includePath -->\n";
+} else {
+    print "<!-- Additional include directory not specified -->\n";
+}
+if ($templatePath){
+    print "<!-- Installed templates at $templatePath -->\n";
+} else {
+    print "<!-- Installed template location not specified -->\n";
+    print "<!-- Will try to determine location from $startFile -->\n";
+    $templatePath = &getInstallationPath($startFile);
+}
+if ($problemTypeTag){
+    print "<!-- ProblemTypeTag manually specified to $problemTypeTag -->\n";
+} else {
+    print "<!-- Will try to determine ProblemTypeTag from source files -->\n";
+    &getProblemTypeTag($startFile);
+}
 
 
-
-
-$installationPath = &getInstallationPath($ARGV[0]);
+#$templatePath = &getInstallationPath($ARGV[0]);
 # Dumux installation directory may be specified directly:
-#$installationPath= "/home/edscott/GIT/Beck2019a/beck2019a_decoupled";
+#$templatePath= "/home/edscott/GIT/Beck2019a/beck2019a_decoupled";
 
 #extra includes not in dumux installation path nor source directory:
 #$includePath= "/home/edscott/tmp";
@@ -21,23 +73,6 @@ $installationPath = &getInstallationPath($ARGV[0]);
 %files;
 $filecount=0;
 %includes;
-$startFile = $ARGV[0];
-
-if ($ARGV[1] and $ARGV[1] =~ m/^--include=/g){
-    ($a,$includePath)=split /=/,$ARGV[1],2;
-
-}
-if ($includePath){
-    print "<!-- Additional template directory at $includePath -->\n";
-} else {
-    print "<!-- Additional template directory not specified -->\n";
-}
-
-
-if ($ARGV[2]) {$problemTypeTag = $ARGV[2]}
-else {
-    &getProblemTypeTag($ARGV[0]);
-}
 
 
 $currentDir = `pwd`; chop $currentDir;
@@ -45,8 +80,8 @@ $currentDir = `pwd`; chop $currentDir;
 &openFileSub($startFile, dirname($startFile), "-");
 @reversed = reverse @files;
 @files = @reversed;
-#foreach $f (@files){ print "$f\n"; }
-
+foreach $f (@files){ print "$f\n"; }
+print "HALT\n"; exit 1;
 @typeTags;
 %typeTagFiles;
 %typeTagLineNumber;
@@ -98,6 +133,10 @@ sub getProblemTypeTag {
         $line++;
     }
     close IN;
+    if (not $problemTypeTag){
+        print "<!-- *** Warning: Dumux::Problem TypeTag not found-->\n";
+    }
+
 }
 
 # Find Dumux installation path from current file...
@@ -107,11 +146,11 @@ sub getInstallationPath {
     my $realpath = &realpath($currentDir);
     my $test = $realpath . "/dumux";
     if (-d $test) {
-        print "<!-- Assuming Dumux templates at \"$test\" -->\n";
+        print "<!-- Assuming installation templates at \"$test\" -->\n";
         return $realpath
     }
     if ($realpath eq "/") {
-        print "<!-- *** Warning: Dumux template source directory not found-->\n";
+        print "<!-- *** Warning: Dumux installation templates not found-->\n";
         return $realpath
     }
     return &getInstallationPath($realpath);
@@ -138,7 +177,7 @@ sub printFilesXML {
     my $i;
     for ($i=0; $i<$level; $i++) {print OUTPUT " "}
     $oFile = $sFile;
-    $oFile =~ s/$installationPath\///;
+    $oFile =~ s/$templatePath\///;
     if ($includePath) {$oFile =~ s/$includePath\///;}
     my $realpath = `realpath $sFile`;
     chop $realpath;
@@ -153,7 +192,7 @@ sub printFilesXML {
 
 sub openFile {
     my ($path, $dirname) = @_;
-#    print "parsing $path (at $dirname) ...\n";
+    print "parsing $path (at $dirname) ...\n";
     
     if ($includes{$path}) {return}
     $includes{$path} = 1;
@@ -170,12 +209,12 @@ sub openFile {
         if ($comment){next}
         if (not /^#/) {next}
         if (not /#include/) {next}
-    if (/Calcite/){print}
+#    if (/Calcite/){print}
 # allow incorrect include path with "" instead of <>
         if  (/"dumux\//)   {
             ($a, $b, $c) = split /"/, $_, 3;
             $b =~ s/^\s+//;
-            $d = $installationPath . "/" . $b;
+            $d = $templatePath . "/" . $b;
 #                print "d = $d\n";
             $dirname = dirname($d);
             &openFileSub($d, $dirname, $path);          
@@ -187,7 +226,7 @@ sub openFile {
             ($a, $c) = split />/, $b, 2;
 #                print "a c = $a $c\n";
             $a =~ s/^\s+//;
-            $d = $installationPath . "/" . $a;
+            $d = $templatePath . "/" . $a;
 #                print "d = $d\n";
             $dirname = dirname($d);
             &openFileSub($d, $dirname, $path);          
@@ -197,7 +236,7 @@ sub openFile {
 
 #           relative includes...
             ($a, $b, $c) = split /"/, $_, 3;
-#                print "a b c = $a $b $c\n";
+                print "relative includes... a b c = $a $b $c\n";
             $b=~ s/^\s+//;
 
             $dirname = dirname($path);
@@ -215,13 +254,13 @@ sub openFile {
 #            print "relative d = $d (called from $path)\n";
             if (not -e $d){
                 if ($includePath) {$d = $includePath . "/" . $d;}
-                else {$d = $installationPath . "/" . $d;}
+                else {$d = $templatePath . "/" . $d;}
                 if (-e $d) {
                     &openFileSub($d, dirname($d), $path);          
                     next;
                 }
                 else {
-                    print "<!-- *** $d does not exist -->\n";
+#                    print "<!-- *** $d does not exist -->\n";
                     if (-e "/usr/include/$r"){
 # skip incorrect "" includes.
                         print "<!-- skipping header /usr/include/$r -->\n";
@@ -246,9 +285,9 @@ sub openFile {
 sub openFileSub {
     my ($d, $dirname, $path) = @_;
     if ($fileList{$d}){
-#                print "*** $d already included...\n";
+                print "*** $d already included...\n";
     } else {
-#               print "3. $path --> $d\n";
+               print "3. $path --> $d\n";
         $fileList{$d} = 1;
         push(@files, $d);
         push(@{ $files{$path} }, $d);
@@ -264,7 +303,7 @@ sub writeXML {
     print OUTPUT <<EOF;
 <?xml version="1.0"?>
 <dumux-info xmlns:xffm="http://www.imp.mx/">
-<structure source=\"$ARGV[0]\" templates=\"$installationPath/dumux\" $extraIncludes/>
+<structure source=\"$ARGV[0]\" templates=\"$templatePath/dumux\" $extraIncludes/>
 EOF
 &printFilesXML($startFile, 0);
 &printPropertiesXML;
@@ -275,7 +314,7 @@ print OUTPUT "</dumux-info>\n";
 sub realpath{
     my ($inPath) = @_;
     if (not -e $inPath){
-        if (-e $installationPath."/$inPath"){ $inPath = $installationPath."/$inPath"}
+        if (-e $templatePath."/$inPath"){ $inPath = $templatePath."/$inPath"}
         elsif ($includePath){
             if (-e $includePath."/$inPath"){ $inPath = $includePath."/$inPath"}
             else {return $inPath}
@@ -300,7 +339,7 @@ sub printTypeTagsXML{
         my $inheritString = &getInheritString($typetag);
 
         my $oFile = $typeTagFiles{$typetag};
-        $oFile =~ s/$installationPath\///;
+        $oFile =~ s/$templatePath\///;
         if ($includePath) {$oFile =~ s/$includePath\///;}
         if ($focus{$typetag}){ $focusItem = " focus=\"$focus{$typetag}\""}
         else {undef $focusItem;}
@@ -322,7 +361,7 @@ sub printTypeTagsXML{
                     $value =~ s/</&lt;/g;
                     $value =~ s/>/&gt;/g;
                     $oFile = $propertySource{$property};
-                    $oFile =~ s/$installationPath\///;
+                    $oFile =~ s/$templatePath\///;
                     if ($includePath){$oFile =~ s/$includePath\///;}
                     $realpath = &realpath($oFile);
                     print OUTPUT "  <property name=\"$property\" value=\"$propertyValues{$property}\" source=\"$oFile:$propertyLineNumber{$property}\" realpath=\"$realpath\"/>\n";
@@ -343,7 +382,7 @@ sub printPropertiesXML{
         $source = $propertySource{$property};
         my $lineNumber = $propertyLineNumber{$property};
         $oFile = $source;
-        $oFile =~ s/$installationPath\///;
+        $oFile =~ s/$templatePath\///;
         if ($includePath){$oFile =~ s/$includePath\///;}
         $value = $propertyValues{$property};
         $value =~ s/</&lt;/g;
