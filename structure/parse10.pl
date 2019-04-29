@@ -1,198 +1,138 @@
 #!/usr/bin/perl
 use File::Basename;
-
-if (not $ARGV[0]) {
-    print "Please specify target file.\n";
+sub usage {
+    print "Usage: $0 <target file> \n     [--templates=<systemwide template include directory>]\n     [--include=<local include directory>]\n     [--problemTypeTag=<DuMuX problem TypeTag>]\n";
     exit 1;
 }
 
-# process arguments...
-foreach $arg (@ARGV){
-    if ($arg =~ m/^--include/g){
-        ($a,$b)=split /=/,$arg,2;
-        if (not -d $b){
-            print "$b is not a directory\n";
-        } else {
-            $includePath = $b;
-        }
-    }
-    elsif ($arg =~ m/^--templates/g){
-        ($a,$b)=split /=/,$arg,2;
-        if (not -d $b){
-            print "$b is not a directory\n";
-        } else {
-            $templatePath = $b;
-        }
-    }
-    elsif ($arg =~ m/^--problemTypeTag/g){
-        ($a,$b)=split /=/,$arg,2;
-        if (not -d $b){
-            print "$b is not a directory\n";
-        } else {
-            $templatePath = $b;
-        }
-    }
-    elsif (-e $arg) {
-        $startFile = $arg;
-        if (not -e $startFile){
-            print "$startFile does not exist\n";
-            exit 1;
-        }
-        print "<!-- Parsing $startFile -->\n";
-    } 
-}
-
-if ($includePath){
-    print "<!-- Additional include directory at $includePath -->\n";
-} else {
-    print "<!-- Additional include directory not specified -->\n";
-}
-if ($templatePath){
-    print "<!-- Installed templates at $templatePath -->\n";
-} else {
-    print "<!-- Installed template location not specified -->\n";
-    print "<!-- Will try to determine location from $startFile -->\n";
-    $templatePath = &getInstallationPath($startFile);
-}
-if ($problemTypeTag){
-    print "<!-- ProblemTypeTag manually specified to $problemTypeTag -->\n";
-} else {
-    print "<!-- Will try to determine ProblemTypeTag from source files -->\n";
-    &getProblemTypeTag($startFile);
+if (not $ARGV[0]){
+    print "Please specify target file.\n";
+    &usage
 }
 
 
-#$templatePath = &getInstallationPath($ARGV[0]);
-# Dumux installation directory may be specified directly:
-#$templatePath= "/home/edscott/GIT/Beck2019a/beck2019a_decoupled";
 
-#extra includes not in dumux installation path nor source directory:
-#$includePath= "/home/edscott/tmp";
-
+# Global variables:
+$includePath;
+$templatePath;
+$problemTypeTag;
+$startFile;
+$referenceLineCount;
+$count;
+$debug=0;
+$verbose=0;
 @files;
 %files;
-$filecount=0;
+
 %includes;
-
-
-$currentDir = `pwd`; chop $currentDir;
-
-&openFileRecurse($startFile);
-@reversed = reverse @files;
-@files = @reversed;
-foreach $f (@files){ print "$f\n"; }
-print "HALT\n"; exit 1;
 @typeTags;
 %typeTagFiles;
 %typeTagLineNumber;
 %properties;
-%propertyFiles;
 %propertyValues;
 %propertyTypeTag;
 %propertySource;
 %propertyLineNumber;
 %inherits;
 %focus;
-$referenceLineCount;
 
-$debug=0;
-$verbose=0;
-$count = 0;
-if ($debug){print("TYPE_TAGS:\n")}
-foreach $f (@files){&getTypeTags($f)}
-foreach $f (@files){&getTypeInherits($f)}
-&printInherits;
-$count = 0;
-foreach $f (@files){&getProperties($f)}
-if ($verbose) {&printProperties}
-foreach $f (@files){&getPropertyValues($f)}
-if (defined $problemTypeTag){
-    &markFocus($problemTypeTag, 1);
-}
-open OUTPUT, ">./structure.xml" or die "cannot open structure.xml";
-&writeXML;
-close OUTPUT;
-
+&main;
 exit 1;
 
-sub getProblemTypeTag {
-    undef $problemTypeTag;
-    my($inFile) = @_;
-    my $line=1;
-    open IN, "$inFile" or die "getProblemTypeTag:: Cannot open $inFile for processing.\n";
-    while (<IN>){
-        s/^\s+//;
-        if (/^\/\//){next}
-        if (/typedef/ and /TTAG/ and /TypeTag/){
-            ($a,$b) = split /\(/, $_, 2;
-            ($problemTypeTag,$c) = split /\)/, $b, 2;
-            print "<!-- Problem TypeTag = \"$problemTypeTag\" from file $inFile line $line-->\n";
-#chop; print "<!-- $_ -->\n";
-            break;
-        }
-        $line++;
-    }
-    close IN;
-    if (not $problemTypeTag){
-        print "<!-- *** Warning: Dumux::Problem TypeTag not found-->\n";
-    }
+sub main {
+    $debug = 1;
+    my $start = &processArguments;
+    my $currentDir = `pwd`; chop $currentDir;
+    &readFiles($start, "--");
+    my @reversed = reverse @files;
+    @files = @reversed;
 
-}
-
-# Find Dumux installation path from current file...
-sub getInstallationPath {
-    my ($infile) = @_;
-    my $currentDir = dirname($infile);
-    my $realpath = &realpath($currentDir);
-    my $test = $realpath . "/dumux";
-    if (-d $test) {
-        print "<!-- Assuming installation templates at \"$test\" -->\n";
-        return $realpath
+    foreach $f (@files){&getTypeTags($f)}
+    foreach $f (@files){&getTypeInherits($f)}
+    &printInherits;
+    $count = 0;
+    foreach $f (@files){&getProperties($f)}
+    &printProperties;
+    if ($debug){print("getPropertyValues:\n")}
+    foreach $f (@files){&getPropertyValues($f)}
+    if (defined $problemTypeTag){
+        &markFocus($problemTypeTag, 1);
     }
-    if ($realpath eq "/") {
-        print "<!-- *** Warning: Dumux installation templates not found-->\n";
-        return $realpath
-    }
-    return &getInstallationPath($realpath);
-}
-
-sub markFocus {
-    my ($focus, $focusLevel) = @_;
-    if (not $focus{$focus}){$focus{$focus} = $focusLevel}
-
-    if ($debug){print "focus: $focus\n";}
-    my @array = @{ $inherits{$focus} };
-    my $subfocus;
-    foreach $subfocus (@array){
-        &markFocus($subfocus, $focusLevel+1);
-    }
+    
+    &printXML($start);
 }
 
 
-sub printFilesXML {
-    my ($sFile, $level) = @_;
+
+
+sub printXML {
+    my ($start) = @_;
+    open OUTPUT, ">./structure.xml" or die "cannot open structure.xml";
+    print OUTPUT <<EOF;
+<?xml version="1.0"?>
+<structure-info xmlns:xffm="http://www.imp.mx/">
+<structure source=\"$ARGV[0]\" templates=\"$templatePath\" include=\"$includePath\"/>
+EOF
+    if ($debug) {print "printFilesXML $start\n"}
+    &printFile($start, 0);
+    if ($debug) {print "printPropertiesXML\n"}
+    &printPropertiesXML;
+    if ($debug) {print "printTypeTagsXML\n"}
+    &printTypeTagsXML;
+    print OUTPUT "</structure-info>\n";
+    close OUTPUT;
+}
+
+sub printFile {     
+    my ($start, $level) = @_;
+
     my @keys;
     my $file;
     my @array;
-    my $i;
+    $i;
     for ($i=0; $i<$level; $i++) {print OUTPUT " "}
-    $oFile = $sFile;
+
+    $oFile = $start;
     $oFile =~ s/$templatePath\///;
     if ($includePath) {$oFile =~ s/$includePath\///;}
-    my $realpath = `realpath $sFile`;
+
+    my $realpath = `realpath $start`;
     chop $realpath;
     print OUTPUT "<files name=\"$oFile\" realpath=\"$realpath\">\n";
-    my @array = @{ $files{$sFile} };
+
+    my @array = @{ $files{$start} };
+#        print "$level: hash($start) --> $file\n";
+
     foreach $file (@array){
-        &printFilesXML($file, $level+1);
+#        print "$level: hash($start) --> $file\n";
+
+        &printFile($file, $level+1);
     }
     for ($i=0; $i<$level; $i++) {print OUTPUT " "} 
     print OUTPUT "</files>\n";
 }
 
-sub openFile {
+
+
+sub readFiles {
+    my ($path, $parentPath) = @_;
+    if ($pathHash{$path}){
+#                print "*** $path already included...\n";
+    } else {
+#               print "*** $parentPath --> $path\n";
+        $pathHash{$path} = 1;
+#   path hash
+        push(@files, $path);
+#   array of path hashes (contain included files)
+        push(@{ $files{$parentPath} }, $path);
+        print "adding $path to hash($parentPath)\n";
+        &readFile($path);    
+    } 
+}
+
+sub readFile {
     my ($path) = @_;
-#print "parsing $path ...\n";
+#print "parsing $path (at $dirname)...\n";
     
     my $stream;
     $pwd =`pwd`; chop $pwd;
@@ -214,6 +154,8 @@ sub openFile {
                 ($b, $a) = split />/, $c, 2;
 #                print "b a  = $b $a\n";
                 $b =~ s/^\s+//;
+
+#                next
             } else {
 #               relative includes...
                 ($a, $b, $c) = split /"/, $_, 3;
@@ -223,19 +165,18 @@ sub openFile {
 
             $dirname = dirname($path);
             $nextFile = $dirname . "/" . $b;
-
+            if ($includes{$nextFile}) {return}
+            $includes{$nextFile} = 1;
 #           1. if in current or relative directory, use it.
 	    if (-e $nextFile and /"/) {
-                push(@{ $files{$path} }, $nextFile);
-                &openFileRecurse($nextFile);          
+                &readFiles($nextFile, $path);          
                 next;
 	    }
 #           2. try include path (user templates)
             if ($includePath) {
                 $nextFile = $includePath . "/" . $b;
 	        if (-e $nextFile) {
-                    push(@{ $files{$path} }, $nextFile);
-                    &openFileRecurse($nextFile);          
+                    &readFiles($nextFile, $path);          
                     next;
                 }
             }
@@ -243,8 +184,7 @@ sub openFile {
             if ($templatePath) {
                 $nextFile = $templatePath . "/" . $b;
 	        if (-e $nextFile) {
-                    push(@{ $files{$path} }, $nextFile);
-                    &openFileRecurse($nextFile);          
+                    &readFiles($nextFile, $path);          
                     next;
                 }
             }
@@ -256,7 +196,7 @@ sub openFile {
             }  
             if ($b =~ m/^dune/g) {next} # ignore dune 
             if (not $b =~ m/\.h/g) {next} # ignore stdc++
-            print "**** SKIPPING  <$b> referenced in $path\n";          
+            print "<!-- Warning: omitting <$b> referenced in $path -->\n";          
             
         }
        
@@ -266,33 +206,74 @@ sub openFile {
 }
 
 
-sub openFileRecurse {
-    my ($path) = @_;
-    if ($fileList{$path}){
-#                print "*** $path already included...\n";
-    } else {
-#               print "*** $path --> $d\n";
-        $fileList{$path} = 1;
-        push(@files, $path);
-        &openFile($path);    
-    } 
+
+$j=0;
+# Global arrays and hashes:
+
+#&main;
+
+sub getIncludeFileArray {
+    my $currentDir = `pwd`; chop $currentDir;
+    &openFileRecurse($startFile,dirname($startFile), "-" );
+    my @reversed = reverse @files;
+    @files = @reversed;
+    if ($debug) {foreach $f (@files){ print "$f\n"; }}
 }
 
-sub writeXML {
-    my $extraIncludes = "";
-    if ($includePath) {
-        $extraIncludes = " include=\"$includePath\"";
-    } 
-    print OUTPUT <<EOF;
-<?xml version="1.0"?>
-<dumux-info xmlns:xffm="http://www.imp.mx/">
-<structure source=\"$ARGV[0]\" templates=\"$templatePath/dumux\" $extraIncludes/>
-EOF
-&printFilesXML($startFile, 0);
-&printPropertiesXML;
-&printTypeTagsXML;
-print OUTPUT "</dumux-info>\n";
+sub getProblemTypeTag {
+    undef $problemTypeTag;
+    my($inFile) = @_;
+    my $line=1;
+    open IN, "$inFile" or die "getProblemTypeTag:: Cannot open $inFile for processing.\n";
+    while (<IN>){
+        s/^\s+//;
+        if (/^\/\//){next}
+        if (/typedef/ and /TTAG/ and /TypeTag/){
+            ($a,$b) = split /\(/, $_, 2;
+            ($problemTypeTag,$c) = split /\)/, $b, 2;
+            print "<!-- Result: Problem TypeTag = \"$problemTypeTag\" from file $inFile line $line-->\n";
+#chop; print "<!-- $_ -->\n";
+            break;
+        }
+        $line++;
+    }
+    close IN;
+    if (not $problemTypeTag){
+        print "<!-- *** Warning: Dumux::Problem TypeTag not found-->\n";
+    }
+
 }
+
+# Find Dumux installation path from current file...
+sub getInstallationPath {
+    my ($infile) = @_;
+    my $currentDir = dirname($infile);
+    my $realpath = &realpath($currentDir);
+    my $test = $realpath . "/dumux";
+    if (-d $test) {
+        print "<!-- Result: Assuming installation templates at \"$test\" -->\n";
+        return $test
+    }
+    if ($realpath eq "/") {
+        print "<!-- Warning: Warning: Dumux installation templates not found-->\n";
+        return $realpath
+    }
+    return &getInstallationPath($realpath);
+}
+
+sub markFocus {
+    my ($focus, $focusLevel) = @_;
+    if (not $focus{$focus}){$focus{$focus} = $focusLevel}
+
+    if ($debug){print "focus: $focus\n";}
+    my @array = @{ $inherits{$focus} };
+    my $subfocus;
+    foreach $subfocus (@array){
+        &markFocus($subfocus, $focusLevel+1);
+    }
+}
+
+
 
 sub realpath{
     my ($inPath) = @_;
@@ -393,8 +374,8 @@ sub getTypeTags {
     if (@fileTypeTags){ 
         foreach $typetag (@fileTypeTags){
             if ($typetag eq "") {next}
-            if ($debug)
-                {print("$typetag ($file)\n")}
+#if ($debug)
+            {print("Found TypeTag: $typetag ($file)\n")}
             push @typeTags, $typetag;
         }
     }
@@ -508,14 +489,18 @@ sub getInherits {
 }
 
 sub printInherits{
-    if ($debug){print("INHERITS:\n")}
+    if (not $debug) {
+        print "printInherits is a debug function\n";
+        return;
+    }
+    print("INHERITS:\n");
     my $key;
     my @keys = keys(%inherits);
     foreach $key (@keys){
-        if ($debug){print $key}
+        print $key;
         my @array = @{ $inherits{$key} };
         &printFileArray(@array);
-        if ($debug){print "\n"}
+        print "\n";
     }
 
 }
@@ -580,26 +565,35 @@ sub getFileProperties{
 }
 
 sub printProperties {
-    if ($debug){print("PROPERTIES:\n")}
+    if (not $debug) {
+        print "printProperties is a debug function\n";
+        return;
+    }
+    print("PROPERTIES:\n");
     my $property;
     my @keys = keys(%properties);
     foreach $property (@keys){
-        if ($debug){print $property}
+        print "property: $property :\n";
         my @array = @{ $properties{"$property"} };
         &printFileArray(@array);
-        if ($debug){print "\n"}
+        print "\n";
     }
 }
 
 sub printFileArray {
+    if (not $debug) {
+        print "printFileArray is a debug function\n";
+        return;
+    }
     my @a = @_;
-    if ($debug){foreach $a (@a){ print " ($a)"}}
+    foreach $a (@a){ print " ($a)\n"}
 }
 
 ###############  Property values  ########
 sub getPropertyValues {
     my ($file) = @_;
     my $path = "$file";
+    my %overwrite;
 
     open INPUT, "$path" or die "Unable to open $path";
     $comment = 0;
@@ -617,25 +611,30 @@ sub getPropertyValues {
             my $property = &getProperty($line);
             my $propValue = &getValue($line);
 
-if ($debug){
-            if (/SET_BOOL_PROP/ and /Gravity/ ) {
-                print "SET_BOOL_PROP: $file --> \n$_";
-                print "property=$property value=$propValue\n";
-            }
+            if ($debug and $verbose){
+                if (/SET_BOOL_PROP/ and /Gravity/ ) {
+                    print "SET_BOOL_PROP: $file --> \n$_";
+                    print "property=$property value=$propValue\n";
+                }
             
-
-            if ($propertyValues{$property}) {
-                print("*** Warning: overwritting $property: \n");
-                print("*** old value=$propertyValues{$property} new value=$propValue\n");
-                print("*** old typetag=$propertyTypeTag{$property} new typetag=$typetag\n");
-                print("*** old source=$propertySource{$property} new source=$file\n");
-            }}
+                if ($propertyValues{$property}) {
+                    print("*** Warning: overwritting $property: \n");
+                    print("*** old value=$propertyValues{$property} new value=$propValue\n");
+                    print("*** old typetag=$propertyTypeTag{$property} new typetag=$typetag\n");
+                    print("*** old source=$propertySource{$property} new source=$file\n");
+                }
+            }
             $propertyValues{$property} = $propValue;
             $propertyTypeTag{$property} = $typetag;
             $propertySource{$property} = $file;
             $propertyLineNumber{$property} = $referenceLineCount;
-
-            if ($verbose) {print("PROP ($propertySource{$property}) $propertyTypeTag{$property}:$property = $propertyValues{$property}\n")}
+            if ($debug) {
+                my $prop;
+                if ($overwrite{$property}) {$prop = "PROP*"}
+                else {$prop = "PROP*"}
+                print("PROP $propertyTypeTag{$property}:$property = $propertyValues{$property} ($propertySource{$property}) \n")
+            }
+            $overwrite{$property} = 1; 
         }
     }
     close INPUT;
@@ -680,3 +679,68 @@ loop:
     }
     return $line;
 }
+
+sub processArguments {
+# process arguments...
+    foreach $arg (@ARGV){
+        if ($arg =~ m/^--include/g){
+            ($a,$b)=split /=/,$arg,2;
+            if (not -d $b){
+                print "$b is not a directory\n";
+                &usage
+            } else {
+                $includePath = $b;
+#            print "local includes: $includePath\n";
+            }
+            next
+        }
+        elsif ($arg =~ m/^--templates/g){
+            ($a,$b)=split /=/,$arg,2;
+            if (not -d $b){
+                print "$b is not a directory\n";
+                &usage
+            } else {
+                $templatePath = $b;
+            }
+            next
+        }
+        elsif ($arg =~ m/^--problemTypeTag/g){
+            ($a,$problemTypeTag)=split /=/,$arg,2;
+            next
+        }
+        elsif (-e $arg) {
+            $startFile = $arg;
+            if (not -e $startFile){
+                print "$startFile does not exist\n";
+                &usage;
+            }
+#        print "<!-- Parsing $startFile -->\n";
+            next
+        } 
+        print "Invalid option: $arg\n";
+        &usage
+    }
+
+    if ($includePath){
+        print "<!-- Info: Additional include directory at $includePath -->\n";
+    } else {
+        print "<!-- Warning: Additional include directory not specified -->\n";
+    }
+    if ($templatePath){
+        print "<!-- Info: Installed templates at $templatePath -->\n";
+    } else {
+        print "<!-- Warning: Installed template location not specified -->\n";
+        print "<!-- Info: Will try to determine location from $startFile -->\n";
+        $templatePath = &getInstallationPath($startFile);
+    }
+    if ($problemTypeTag){
+        print "<!-- Info: ProblemTypeTag manually specified to $problemTypeTag -->\n";
+    } else {
+        print "<!-- Info: Will try to determine ProblemTypeTag from source files -->\n";
+        &getProblemTypeTag($startFile);
+    }
+    return $startFile;
+
+}
+
+

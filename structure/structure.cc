@@ -5,7 +5,7 @@
 
 #define STRUCTURE_CC
 #define URIFILE "file://"
-#define PERL_PARSER "parse9b.pl";
+#define PERL_PARSER "parse10.pl";
 #include <glib.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>
@@ -683,7 +683,7 @@ mainStart (GMarkupParseContext * context,
             if (strcmp(*name, "source")==0)sourceFile = g_strdup(*value);
             if (strcmp(*name, "templates")==0)templates = g_strdup(*value);
             if (strcmp(*name, "include")==0)
-                extraIncludes = g_strdup_printf("\nExtra include: %s",*value);
+                extraIncludes = g_strdup_printf("\nInclude: %s",*value);
         }
         return;
     }
