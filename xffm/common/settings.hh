@@ -26,7 +26,7 @@ public:
                 NULL);
         if (!loaded) {
             gchar *text = g_strdup_printf("%s %s\n", _("New File:"), settingsfile);
-            TRACE("%s", text);
+            DBG("%s", text);
             g_free(text);
             writeSettings();
         }
@@ -134,7 +134,7 @@ public:
 	GError *error = NULL;
 	value = g_key_file_get_string (keyFile, group, item, &error);
 	if (error){
-	    ERROR("%s\n", error->message);
+	    DBG("%s\n", error->message);
 	    g_error_free(error);
 	    value = NULL;
         } 

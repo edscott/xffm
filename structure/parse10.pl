@@ -21,6 +21,7 @@ $referenceLineCount;
 $count;
 $debug=0;
 $verbose=0;
+$sourceDir;
 @files;
 %files;
 
@@ -40,8 +41,9 @@ $verbose=0;
 exit 1;
 
 sub main {
-    $debug = 1;
+    $debug = 0;
     my $start = &processArguments;
+    $sourceDir = dirname($start)."/";
     my $currentDir = `pwd`; chop $currentDir;
     &readFiles($start, "--");
     my @reversed = reverse @files;
@@ -49,16 +51,15 @@ sub main {
 
     foreach $f (@files){&getTypeTags($f)}
     foreach $f (@files){&getTypeInherits($f)}
-    &printInherits;
+    if ($debug){&printInherits}
     $count = 0;
     foreach $f (@files){&getProperties($f)}
-    &printProperties;
+    if ($debug){&printProperties}
     if ($debug){print("getPropertyValues:\n")}
     foreach $f (@files){&getPropertyValues($f)}
     if (defined $problemTypeTag){
         &markFocus($problemTypeTag, 1);
-    }
-    
+    }    
     &printXML($start);
 }
 
@@ -67,6 +68,7 @@ sub main {
 
 sub printXML {
     my ($start) = @_;
+    # print "printXML($start)\n";
     open OUTPUT, ">./structure.xml" or die "cannot open structure.xml";
     print OUTPUT <<EOF;
 <?xml version="1.0"?>
@@ -98,6 +100,15 @@ sub printFile {
 
     my $realpath = `realpath $start`;
     chop $realpath;
+#        $oFile = "&lt;$oFile&gt;";
+    if ($includes{$start} == 1 ){
+        $oFile = "&lt;$oFile&gt;";
+    } elsif ($includes{$start} ==2 ){
+#        $oFile = "&quot;$oFile&quot;";
+    }
+    if ($sourceDir) {
+        $oFile =~ s/$sourceDir//g;
+    }
     print OUTPUT "<files name=\"$oFile\" realpath=\"$realpath\">\n";
 
     my @array = @{ $files{$start} };
@@ -125,7 +136,7 @@ sub readFiles {
         push(@files, $path);
 #   array of path hashes (contain included files)
         push(@{ $files{$parentPath} }, $path);
-        print "adding $path to hash($parentPath)\n";
+        if ($debug){print "adding $path to hash($parentPath)\n"}
         &readFile($path);    
     } 
 }
@@ -139,6 +150,7 @@ sub readFile {
     open $stream, $path or die "cannot open $path (pwd=$pwd)\n";
     my  $a, $b, $c, $d;
     $comment = 0;
+    my $text;
     while (<$stream>){
         s/^\s+//;
         if (/^\/\//){next}
@@ -149,6 +161,7 @@ sub readFile {
         if (not /#include/) {next}
         if (/"/ or (/</ and />/)) {
             if (/</ and />/)  {
+                $text = 1;
                 ($a, $c) = split /</, $_, 2;
 #                print "a c = $a $c\n";
                 ($b, $a) = split />/, $c, 2;
@@ -157,16 +170,16 @@ sub readFile {
 
 #                next
             } else {
+                $text = 2;
 #               relative includes...
                 ($a, $b, $c) = split /"/, $_, 3;
 #                print "relative includes... a b c = $a $b $c\n";
                 $b=~ s/^\s+//;
             }
-
             $dirname = dirname($path);
             $nextFile = $dirname . "/" . $b;
             if ($includes{$nextFile}) {return}
-            $includes{$nextFile} = 1;
+            $includes{$nextFile} = $text;
 #           1. if in current or relative directory, use it.
 	    if (-e $nextFile and /"/) {
                 &readFiles($nextFile, $path);          
@@ -176,6 +189,7 @@ sub readFile {
             if ($includePath) {
                 $nextFile = $includePath . "/" . $b;
 	        if (-e $nextFile) {
+            $includes{$nextFile} = $text;
                     &readFiles($nextFile, $path);          
                     next;
                 }
@@ -184,6 +198,7 @@ sub readFile {
             if ($templatePath) {
                 $nextFile = $templatePath . "/" . $b;
 	        if (-e $nextFile) {
+            $includes{$nextFile} = $text;
                     &readFiles($nextFile, $path);          
                     next;
                 }
@@ -211,14 +226,6 @@ $j=0;
 # Global arrays and hashes:
 
 #&main;
-
-sub getIncludeFileArray {
-    my $currentDir = `pwd`; chop $currentDir;
-    &openFileRecurse($startFile,dirname($startFile), "-" );
-    my @reversed = reverse @files;
-    @files = @reversed;
-    if ($debug) {foreach $f (@files){ print "$f\n"; }}
-}
 
 sub getProblemTypeTag {
     undef $problemTypeTag;
@@ -374,8 +381,7 @@ sub getTypeTags {
     if (@fileTypeTags){ 
         foreach $typetag (@fileTypeTags){
             if ($typetag eq "") {next}
-#if ($debug)
-            {print("Found TypeTag: $typetag ($file)\n")}
+            if ($debug) {print("Found TypeTag: $typetag ($file)\n")}
             push @typeTags, $typetag;
         }
     }

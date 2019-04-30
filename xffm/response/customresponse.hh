@@ -89,27 +89,29 @@ public:
         for (auto p=options; p && *p; p++){
             auto itemValue = getString(file, "options", *p);
 	    auto hbox = gtk_c::hboxNew (FALSE, 6);
+	    auto innerbox = gtk_c::hboxNew (FALSE, 6);
             auto check = gtk_check_button_new();
             g_object_set_data(G_OBJECT(hbox), "check", check);
-	    auto option = g_strdup_printf("--%s", *p); // FIXME: leak 
+            g_object_set_data(G_OBJECT(hbox), "innerbox", innerbox);
+	    auto option = g_strdup_printf("--%s", *p);  
 	    auto label = gtk_label_new(option);
             g_free(option);
             g_object_set_data(G_OBJECT(hbox), "label", label);
 
             optionsList = g_list_append(optionsList, (void *)hbox);
-            g_object_set_data(G_OBJECT(hbox), "check", check);
 	    gtk_box_pack_start (GTK_BOX (this->vbox2_), GTK_WIDGET(hbox), FALSE, FALSE, 0);
 	    gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(check), FALSE, FALSE, 0);
-	    gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(label), FALSE, FALSE, 0);
+	    gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(innerbox), FALSE, FALSE, 0);
+	    gtk_box_pack_start (GTK_BOX (innerbox), GTK_WIDGET(label), FALSE, FALSE, 0);
 	    if (strcmp(itemValue, "file")==0 || strcmp(itemValue, "folder")==0
                     || strcmp(itemValue, "text")==0) {
 		auto entry = GTK_ENTRY(gtk_entry_new ());
                 g_object_set_data(G_OBJECT(hbox), "entry", entry);
                     g_object_set_data(G_OBJECT(entry), "workdir", workdir_);
 
-		gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(entry), FALSE, FALSE, 0);
+		gtk_box_pack_start (GTK_BOX (innerbox), GTK_WIDGET(entry), FALSE, FALSE, 0);
 		auto button = gtk_c::dialog_button ("folder-symbolic", NULL);
-		gtk_box_pack_start (hbox, GTK_WIDGET(button), FALSE, FALSE, 0);
+		gtk_box_pack_start (innerbox, GTK_WIDGET(button), FALSE, FALSE, 0);
 		if (strcmp(itemValue, "folder")==0){
 		    g_signal_connect (G_OBJECT(button), 
 			    "clicked", BUTTON_CALLBACK (ChooserResponse<Type>::folderChooser), 
@@ -125,6 +127,12 @@ public:
 	    else if (strcmp(itemValue, "on")==0) {
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(check), TRUE);
 	    }
+            g_signal_connect(G_OBJECT(check), 
+			    "clicked", BUTTON_CALLBACK (toggleBox), 
+			    (gpointer) innerbox);
+
+            gtk_widget_set_sensitive(GTK_WIDGET(innerbox), 
+                        gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(check)));
 
             gtk_widget_show_all(GTK_WIDGET(hbox));
             
@@ -210,7 +218,12 @@ public:
 	return button;
     }
 private:
-        
+         
+    static void toggleBox(GtkToggleButton *button, void *data){
+        auto box = GTK_WIDGET(data);
+        gtk_widget_set_sensitive(box, gtk_toggle_button_get_active(button));
+    }
+       
     static void openCustomDialog(GtkButton *button, void *data){
         auto file = (const gchar *) data;
         try {
@@ -226,7 +239,7 @@ private:
                     message = g_strdup_printf("undefined error in file: %s\n", file);
                     break;
             }
-            Gtk<Type>::quickHelp(mainWindow, message, "dialog-warning");
+            Gtk<Type>::quickHelp(mainWindow, message, "dialog-error");
             g_free(message);
             return;
         }

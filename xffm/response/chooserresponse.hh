@@ -73,6 +73,7 @@ class EntryChooser: public EntryResponse<Type> {
 protected:
     GtkButton *chooserButton_;
 public:
+    GtkButton *chooserButton(void) {return chooserButton_;}
     EntryChooser(GtkWindow *parent, const gchar *windowTitle, const gchar *icon):
         EntryResponse<Type>(parent, windowTitle, icon)
     {

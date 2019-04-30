@@ -6,6 +6,60 @@ namespace xf {
 template <class Type>
 class VButtonBox {
     using gtk_c = Gtk<double>;
+
+    static void addCustomButton(GtkButton *button, void *data){
+        auto entryResponse = new(EntryFileResponse<Type>)(mainWindow, _("Add custom content"), "list-add");
+        entryResponse->setEntryLabel(_("Select file to load"));
+
+        auto entry = entryResponse->entry();
+        auto chooserButton = entryResponse->chooserButton();
+        
+        entryResponse->setEntryBashCompletion(g_get_home_dir());
+
+        entryResponse->setEntryDefault("");
+
+        auto response = entryResponse->runResponse(0);
+        delete entryResponse;
+
+
+	if (!response) return;
+        DBG("response = %s\n", response);
+
+        auto keyFile = g_key_file_new();
+        GError *error=NULL;
+        g_key_file_load_from_file(keyFile, response,(GKeyFileFlags) (0), &error);
+        if (error){
+            auto g = g_strdup_printf(_("Cannot load file %s. Reason: %s"), response, error->message);
+            Gtk<Type>::quickHelp(mainWindow, g, "dialog-error");
+            g_free(response);
+            g_free(g);
+            g_key_file_free(keyFile);
+            return;
+        }
+        if (!g_key_file_has_key(keyFile, "custombutton", "exec", &error) && error){
+            auto g = g_strdup_printf("%s: %s", response, error->message);
+            Gtk<Type>::quickHelp(mainWindow, g, "dialog-error");
+            g_free(response);
+            g_free(g);
+            g_key_file_free(keyFile);
+            return;
+           
+        }
+
+        
+
+        auto files = Settings<Type>::getSettingString("custombuttons", "files");
+        if (!files) {
+            Settings<Type>::setSettingString("custombuttons", "files", response);
+        } else { 
+            auto g = g_strconcat(files, ":", response, NULL);
+            Settings<Type>::setSettingString("custombuttons", "files", g);
+            g_free(g);
+        }
+
+        g_free(response);
+        Gtk<Type>::quickHelp(mainWindow, _("You need to restart the application"), "dialog-warning");
+    }
 public:
     GtkBox *vButtonBox(void){return vButtonBox_;}
     VButtonBox(void){
@@ -52,6 +106,12 @@ public:
 #endif
 	gtk_box_pack_end (vButtonBox_, GTK_WIDGET(pkg), FALSE, FALSE, 0);
 	g_signal_connect(G_OBJECT(pkg), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::pkg), NULL);
+
+        auto addCustom = 
+	    gtk_c::newButton("list-add", _("Add custom content"));
+	g_signal_connect(G_OBJECT(addCustom), "clicked", G_CALLBACK(addCustomButton), NULL);
+	gtk_box_pack_end (vButtonBox_, GTK_WIDGET(addCustom), FALSE, FALSE, 0);
+
 
 	auto customButtonFiles = Settings<Type>::getSettingString("custombuttons", "files");
 	if (customButtonFiles){

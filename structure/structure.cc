@@ -658,6 +658,7 @@ startFiles(GMarkupParseContext * context,
             g_free(k);
         }
         if (strcmp(*name, "realpath")==0) {
+            gtk_tree_store_set(treeStore, &fileChild, PROPERTY_SOURCE, *value, -1);
             gtk_tree_store_set(treeStore, &fileChild, REALPATH, *value, -1);
         }
         
