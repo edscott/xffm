@@ -34,6 +34,9 @@ template <class Type>
 class Fm {
     
 public:
+    ~Fm(void){
+	ClipBoard<double>::stopClipBoard();  
+    }
     Fm(int argc, char *argv[]){
 #ifdef ENABLE_NLS
 	/* this binds rfm domain: */
@@ -110,34 +113,66 @@ public:
 	    else path = g_strdup(argv[1]);
 	} else path = g_strdup("xffm:root");
 
-	// FIXME: set these environment variables *only* if they are not already set
-	//        in the environment (allow user override)
 
-	// XXX xterm is mandatory...
+	setEditor(setTerminal());
+	setPasswordPrompt();
+
 	
-	setenv("TERMINAL", "xterm -rv -vb", 1);
-	const gchar *term_cmd = getenv("TERMINAL_CMD");
-	if (!term_cmd || !strlen(term_cmd)) term_cmd = "xterm -e";
+	auto xffm = new(xf::Dialog<double>)(path);
+	g_object_set_data(G_OBJECT(mainWindow), "xffm", xffm);
+	//xffm->setDialogTitle("Fm");
+	xffm->setDialogIcon("system-file-manager");
+	xf::ClipBoard<double>::startClipBoard();  
+    }
 
-	gchar *getpass = g_find_program_in_path("xfgetpass");
-	if (!getpass) {
-	    std::cerr<<"*** Warning: Xffm not correctly installed. Cannot find xfgetpass in path\n";
-	} else {
-	    TRACE("get pass at %s\n", getpass);
-	    setenv("SUDO_ASKPASS", getpass, 1);
-	    setenv("SSH_ASKPASS", getpass, 1);
+private:
+    
+    static const gchar *setTerminalCmd(const gchar *terminal){
+	auto userSetTerminalCmd = getenv("TERMINAL_CMD");
+	if (userSetTerminalCmd && !strlen(userSetTerminalCmd)) 
+	    userSetTerminalCmd = NULL;
+	if (userSetTerminalCmd) return userSetTerminalCmd;
+	auto terminalCmd = g_strconcat(terminal, " -e", NULL);
+	DBG("TERMINAL_CMD not defined, assuming %s\n", terminalCmd);
+	setenv("TERMINAL_CMD", terminalCmd, 1);
+	return terminalCmd;
+    }
+
+    static const gchar *setTerminal(void){
+	auto userSetTerminal = getenv("TERMINAL");
+	if (userSetTerminal && !strlen(userSetTerminal)) 
+	    userSetTerminal = NULL;
+	if (userSetTerminal){
+	    DBG("User set terminal = %s\n", userSetTerminal);
+	    return setTerminalCmd(userSetTerminal);
+	} 
+	auto terminal = g_find_program_in_path("uxterm");
+	if (terminal){
+	    setenv("TERMINAL", "uxterm -rv -vb", 1);
+	    DBG("Using terminal = %s\n", getenv("TERMINAL"));
+	    return setTerminalCmd(terminal);
 	}
-	
+	terminal = g_find_program_in_path("xterm");
+	if (terminal){
+	    setenv("TERMINAL", "xterm -rv -vb", 1);
+	    DBG("Using terminal = %s\n", getenv("TERMINAL"));
+	    return setTerminalCmd(terminal);
+	}
+	ERROR("No terminal command found. Please define environment variable \"TERMINAL\"\n");
+	return "xterm -e";
+    }
+
+    static void setEditor(const gchar *terminalCmd){
 	gchar *e = NULL;
 	if (getenv("EDITOR")) e = g_find_program_in_path(getenv("EDITOR"));
 	if (e) {
 	    gchar *g = g_path_get_basename(e);
 	    g_free(e);
 	    if (strrchr(g, ' ')) *(strrchr(g, ' ')) = 0;
-	    if (strcmp(g, "nano")==0) g = g_strdup_printf("%s nano", term_cmd); 
-	    if (strcmp(g, "vi")==0) g = g_strdup_printf("%s vi", term_cmd); 
-	    if (strcmp(g, "vim")==0) g = g_strdup_printf("%s vim", term_cmd); 
-	    //if (strcmp(g, "emacs")==0) g = g_strdup_printf("%s emacs", term_cmd); 
+	    if (strcmp(g, "nano")==0) g = g_strdup_printf("%s nano", terminalCmd); 
+	    if (strcmp(g, "vi")==0) g = g_strdup_printf("%s vi", terminalCmd); 
+	    if (strcmp(g, "vim")==0) g = g_strdup_printf("%s vim", terminalCmd); 
+	    //if (strcmp(g, "emacs")==0) g = g_strdup_printf("%s emacs", terminalCmd); 
 	    if (strcmp(g, "gvim")==0) g = g_strdup("gvim -f "); 
 	    e=g;
 	} else {
@@ -152,19 +187,23 @@ public:
 		    std::cerr<<"*** Warning: No suitable EDITOR found (tried gvim, nano)\n";
 		} 
 		g_free(e);
-		e = g_strdup_printf("%s nano", term_cmd);
+		e = g_strdup_printf("%s nano", terminalCmd);
 	    }
 	}
 	setenv("EDITOR", e, 1);
-	auto xffm = new(xf::Dialog<double>)(path);
-	g_object_set_data(G_OBJECT(mainWindow), "xffm", xffm);
-	//xffm->setDialogTitle("Fm");
-	xffm->setDialogIcon("system-file-manager");
-	xf::ClipBoard<double>::startClipBoard();  
     }
-    ~Fm(void){
-	ClipBoard<double>::stopClipBoard();  
+
+    static void setPasswordPrompt(void){
+	gchar *getpass = g_find_program_in_path("xfgetpass");
+	if (!getpass) {
+	    ERROR(" Xffm not correctly installed. Cannot find xfgetpass in path\n");
+	} else {
+	    TRACE("get pass at %s\n", getpass);
+	    setenv("SUDO_ASKPASS", getpass, 1);
+	    setenv("SSH_ASKPASS", getpass, 1);
+	}
     }
+
 };
 }
 #endif
