@@ -110,18 +110,25 @@ public:
                     g_object_set_data(G_OBJECT(entry), "workdir", workdir_);
 
 		gtk_box_pack_start (GTK_BOX (innerbox), GTK_WIDGET(entry), FALSE, FALSE, 0);
-		auto button = gtk_c::dialog_button ("folder-symbolic", NULL);
-		gtk_box_pack_start (innerbox, GTK_WIDGET(button), FALSE, FALSE, 0);
-		if (strcmp(itemValue, "folder")==0){
-		    g_signal_connect (G_OBJECT(button), 
-			    "clicked", BUTTON_CALLBACK (ChooserResponse<Type>::folderChooser), 
-			    (gpointer) entry);
-                   this->setComboBashCompletion("/");
-		} else if (strcmp(itemValue, "file")==0) {
-		    g_signal_connect (G_OBJECT(button), 
-			    "clicked", BUTTON_CALLBACK (ChooserResponse<Type>::fileChooser), 
-			    (gpointer) entry);
-                   this->setComboBashCompletion(g_get_home_dir());
+		if (strcmp(itemValue, "file")==0 || strcmp(itemValue, "folder")==0){
+
+		    auto button = gtk_c::dialog_button ((strcmp(itemValue, "file")==0)?
+			    "document-new-symbolic":"folder-symbolic", NULL);
+		    gtk_box_pack_start (innerbox, GTK_WIDGET(button), FALSE, FALSE, 0);
+		    if (strcmp(itemValue, "folder")==0){
+			DBG("setting up exec completion\n");
+			g_signal_connect (G_OBJECT(button), 
+				"clicked", BUTTON_CALLBACK (ChooserResponse<Type>::folderChooser), 
+				(gpointer) entry);
+		       this->setComboBashCompletion("/");
+		    } else if (strcmp(itemValue, "file")==0) {
+			DBG("setting up file completion\n");
+			g_signal_connect (G_OBJECT(button), 
+				"clicked", BUTTON_CALLBACK (ChooserResponse<Type>::fileChooser), 
+				(gpointer) entry);
+		       this->setComboBashFileCompletion(g_get_home_dir());
+		    } 
+		    this->setInLineCompletion(0);
 		}
 	    }
 	    else if (strcmp(itemValue, "on")==0) {

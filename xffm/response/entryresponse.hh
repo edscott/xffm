@@ -38,7 +38,16 @@ protected:
 	gtk_entry_set_completion (entry, bashCompletion_);
 	g_signal_connect (G_OBJECT(entry),
 			      "key_release_event", 
-			      KEY_EVENT_CALLBACK(EntryResponse<Type>::on_completion), 
+			      KEY_EVENT_CALLBACK(EntryResponse<Type>::onExecCompletion), 
+			      (void *)bashCompletionStore_);
+    }
+        
+    void connectBashFileCompletion(const gchar *wd, GtkEntry *entry){
+        g_object_set_data(G_OBJECT(entry), "workDir", (void *)wd);
+	gtk_entry_set_completion (entry, bashCompletion_);
+	g_signal_connect (G_OBJECT(entry),
+			      "key_release_event", 
+			      KEY_EVENT_CALLBACK(EntryResponse<Type>::onFileCompletion), 
 			      (void *)bashCompletionStore_);
     }
 
@@ -185,7 +194,10 @@ public:
     void setEntryBashCompletion(const gchar *wd){
         connectBashCompletion(wd, entry_);
     }
-
+			      
+    void setEntryBashFileCompletion(const gchar *wd){
+        connectBashFileCompletion(wd, entry_);
+    }
 
     GtkCheckButton *checkButton(void){ return checkbutton_;}
 
@@ -327,7 +339,16 @@ public:
 private:
 
     static gint
-    on_completion (GtkWidget * widget, GdkEventKey * event, gpointer data) {
+    onExecCompletion (GtkWidget * widget, GdkEventKey * event, gpointer data) {
+	return on_completion (widget, event, data, FALSE) ;
+    }
+    static gint
+    onFileCompletion (GtkWidget * widget, GdkEventKey * event, gpointer data) {
+	return on_completion (widget, event, data, TRUE);
+    }
+    static gint
+    on_completion (GtkWidget * widget, GdkEventKey * event, gpointer data, gboolean fileCompletion) 
+    {
 	auto store = (GtkListStore *)data;
 	// get entry text
 	auto entry = GTK_ENTRY(widget);
@@ -351,7 +372,12 @@ private:
 	auto wd = (const gchar *)g_object_get_data(G_OBJECT(entry), "workDir");
         if (!wd) wd = g_get_home_dir();
 	
-	auto slist = BaseCompletion<Type>::baseExecCompletionList(wd, text);
+	GSList *slist;
+	if (fileCompletion) {
+	    slist = BaseCompletion<Type>::baseFileCompletionList(wd, text);
+	} else {
+	    slist = BaseCompletion<Type>::baseExecCompletionList(wd, text);
+	}
 	// remove all old model entries
 	gtk_list_store_clear(store);
 	// add new entries from GSList

@@ -994,6 +994,15 @@ public:
         entryResponse->setEntryDefault(basename);
         g_free(basename);
         entryResponse->setEntryLabel(_("New Name:"));
+
+	auto view =  (View<Type> *)g_object_get_data(G_OBJECT(localItemPopUp), "view");
+	// get page
+	auto page = view->page();
+	const gchar *wd = page->workDir();
+	if (!wd) wd = g_get_home_dir();
+	
+        entryResponse->setEntryBashFileCompletion(wd);
+        entryResponse->setInLineCompletion(1);
         auto response = entryResponse->runResponse();
         delete entryResponse;
 	if (response){

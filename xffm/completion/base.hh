@@ -95,6 +95,14 @@ private:
         return token;
     }
 
+    static GSList *
+    baseFileCompletionList(const gchar *workdir, const char *in_token){
+	gchar *string = base_file_completion(NULL, workdir, in_token);
+	GSList *list = NULL;
+	if (string) list = g_slist_prepend(list, string);
+	return list;
+    }
+
     static gchar *
     base_file_completion(GtkTextView *output, const gchar *workdir, const char *in_file_token){
         

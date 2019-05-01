@@ -73,6 +73,11 @@ public:
         auto entry = GTK_ENTRY(gtk_bin_get_child(GTK_BIN(combo_)));
         this->connectBashCompletion(wd, entry);
     }
+    void setComboBashFileCompletion(const gchar *wd){
+        auto entry = GTK_ENTRY(gtk_bin_get_child(GTK_BIN(combo_)));
+        this->connectBashFileCompletion(wd, entry);
+    }
+
 
 
     void setCheckButtonComboCallback(void *clickAction){

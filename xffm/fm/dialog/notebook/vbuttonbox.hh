@@ -14,18 +14,56 @@ class VButtonBox {
         auto entry = entryResponse->entry();
         auto chooserButton = entryResponse->chooserButton();
         
-        entryResponse->setEntryBashCompletion(g_get_home_dir());
 
-        entryResponse->setEntryDefault("");
+	auto object =  (Notebook<Type> *)g_object_get_data(G_OBJECT(mainWindow), "dialogObject");
+	TRACE("dialogObject = %p\n", object);
+	// get page
+	auto page = object->currentPageObject();
+	auto view = page->view();
+	const gchar *wd = page->workDir();
+	if (!wd) wd = g_get_home_dir();
+
+	entryResponse->setEntryBashFileCompletion(wd);
+        entryResponse->setInLineCompletion(1);
+
+	gchar *path = NULL;
+	GList *selectionList;
+        if (isTreeView){
+            auto treeModel = view->treeModel();
+            auto selection = gtk_tree_view_get_selection (view->treeView());
+            selectionList = gtk_tree_selection_get_selected_rows (selection, &treeModel);
+        } else {
+            selectionList = gtk_icon_view_get_selected_items (view->iconView());
+        }
+        view->setSelectionList(selectionList);
+	if (selectionList) {
+	    GtkTreeIter iter;
+	    if (gtk_tree_model_get_iter (view->treeModel(), &iter, (GtkTreePath *)selectionList->data)){
+        	gtk_tree_model_get (view->treeModel(), &iter, PATH, &path, -1);		
+		if (path){
+		    auto g = g_path_get_basename(path);
+		    g_free(path);
+		    path = g;
+		}
+	    }
+	}
+
+        entryResponse->setEntryDefault(path?path:"");
+	g_free(path);
 
         auto response = entryResponse->runResponse(0);
         delete entryResponse;
 
 
 	if (!response) return;
-        DBG("response = %s\n", response);
-
-        auto keyFile = g_key_file_new();
+	if (!g_path_is_absolute(response)){
+	    auto g = g_strconcat(wd, "/", response, NULL);
+	    g_free(response);
+	    response = g;
+	}
+        TRACE("response = %s\n", response);
+        
+	auto keyFile = g_key_file_new();
         GError *error=NULL;
         g_key_file_load_from_file(keyFile, response,(GKeyFileFlags) (0), &error);
         if (error){

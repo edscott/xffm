@@ -67,7 +67,8 @@ public:
         //        NULL);
         signalSetup();
         gtk_widget_show (GTK_WIDGET(notebook_));
-	//g_object_set_data(G_OBJECT(mainWindow), "notebook_p", this);
+	// does not work:
+	// g_object_set_data(G_OBJECT(mainWindow), "notebook_p", this);
         return;
 
     }
