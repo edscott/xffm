@@ -183,8 +183,8 @@ public:
         }
         gtk_check_menu_item_set_active(menuItem, value);
         Settings<Type>::setSettingInteger(group, item, value);
-        auto notebook_p = (Notebook<Type> *)g_object_get_data(G_OBJECT(mainWindow), "xffm");
-	gint pages = gtk_notebook_get_n_pages (notebook_p->notebook());
+        auto notebook_p = Fm<Type>::getCurrentNotebook();
+	gint pages = gtk_notebook_get_n_pages (Fm<Type>::getCurrentNotebook()->notebook());
 	for (int i=0; i<pages; i++){
             auto page = notebook_p->currentPageObject(i);
             auto view = page->view();
@@ -291,7 +291,7 @@ private:
         isTreeView = !isTreeView;
         gtk_check_menu_item_set_active(menuItem, isTreeView);
         Settings<Type>::setSettingInteger("window", "TreeView", isTreeView);
-        auto notebook_p = (Notebook<Type> *)g_object_get_data(G_OBJECT(mainWindow), "xffm");
+        auto notebook_p = Fm<Type>::getCurrentNotebook();
 	gint pages = gtk_notebook_get_n_pages (notebook_p->notebook());
 	for (int i=0; i<pages; i++){
             auto page = notebook_p->currentPageObject(i);
