@@ -206,8 +206,7 @@ public:
 	    }
 	    g_strfreev(args);
 	    if (!icon_id) {
-	    // FIXME: make emblem available 
-	    // icon_id = g_strdup("emblem-run");
+		//icon_id = g_strdup("run");
 		icon_id = g_strdup("system-run");
 	    }
 	    run_button_p->set_icon_id(icon_id);
