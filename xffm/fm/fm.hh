@@ -73,7 +73,7 @@ public:
 	}
 
 
-	
+	XInitThreads();
 	TRACE ("call to gtk_init");
 	gtk_init (&argc, &argv);
         auto gtksettings = gtk_settings_get_default();
@@ -123,6 +123,49 @@ public:
 	//xffm->setDialogTitle("Fm");
 	xffm->setDialogIcon("system-file-manager");
 	xf::ClipBoard<double>::startClipBoard();  
+    }
+
+    static GtkTextView *getCurrentTextview(){
+	return getCurrentPage()->output();
+    }
+
+    static View<Type> *getCurrentView(){
+	return getCurrentPage()->view();
+    }
+
+    static Page<Type> *getCurrentPage(){
+	return getCurrentNotebook()->currentPageObject();
+    }
+ 
+    static Notebook<Type> *getCurrentNotebook(){
+	return (Notebook<Type> *)g_object_get_data(G_OBJECT(mainWindow), "dialogObject");
+    }
+   
+    static const gchar *getCurrentDirectory(GtkEntry *entry=NULL){
+	if (mainWindow){
+	    TRACE("dialogObject = %p\n", object);
+	    const gchar *wd = getCurrentPage()->workDir();
+	    if (!wd) wd = g_get_home_dir();
+	    return wd;
+	}
+	if (entry){
+	    static gchar *currentFolder=NULL;
+	    g_free(currentFolder);
+	    currentFolder=NULL;
+	    auto workdir = (const gchar *)g_object_get_data(G_OBJECT(entry), "workdir");
+	    auto entryValue = gtk_entry_get_text(entry);
+	    if (entryValue && g_file_test(entryValue, G_FILE_TEST_IS_DIR)) {
+		currentFolder = g_strdup(entryValue);
+	    } else if (g_file_test(workdir, G_FILE_TEST_IS_DIR)) {
+		currentFolder = g_strdup(workdir);
+	    } 
+	    if (!currentFolder || !g_file_test(currentFolder, G_FILE_TEST_IS_DIR)) {
+		g_free(currentFolder);
+		currentFolder = g_get_current_dir();
+	    }
+	    return currentFolder;
+	}
+	return g_get_home_dir();
     }
 
 private:

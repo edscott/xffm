@@ -11,70 +11,48 @@ public:
     static void
     root(GtkMenuItem *menuItem, gpointer data)
     {
-	auto notebook_p = (Dialog<Type> *)g_object_get_data(G_OBJECT(mainWindow), "dialogObject");
-
-        const gchar *path = notebook_p->workdir();
-        auto page = (Page<Type> *)notebook_p->currentPageObject();
-        page->setPageWorkdir("/");
-        page->view()->loadModel("/");
+        Fm<Type>::getCurrentPage()->setPageWorkdir("/");
+        Fm<Type>::getCurrentView()->loadModel("/");
     }
 
     static void
     home(GtkMenuItem *menuItem, gpointer data)
     {
-	auto notebook_p = (Dialog<Type> *)g_object_get_data(G_OBJECT(mainWindow), "dialogObject");
-
-        const gchar *path = notebook_p->workdir();
-        auto page = (Page<Type> *)notebook_p->currentPageObject();
-        page->setPageWorkdir(g_get_home_dir());
-        page->view()->loadModel(g_get_home_dir());
+        Fm<Type>::getCurrentPage()->setPageWorkdir(g_get_home_dir());
+        Fm<Type>::getCurrentView()->loadModel(g_get_home_dir());
     }
 
     static void
     fstab(GtkMenuItem *menuItem, gpointer data)
     {
-	auto notebook_p = (Dialog<Type> *)g_object_get_data(G_OBJECT(mainWindow), "dialogObject");
-
-        const gchar *path = notebook_p->workdir();
-        auto page = (Page<Type> *)notebook_p->currentPageObject();
-        page->setPageWorkdir(g_get_home_dir());
-        page->view()->loadModel("xffm:fstab");
+        Fm<Type>::getCurrentPage()->setPageWorkdir(g_get_home_dir());
+        Fm<Type>::getCurrentView()->loadModel("xffm:fstab");
     }
 
     static void
     pkg(GtkMenuItem *menuItem, gpointer data)
     {
-	auto notebook_p = (Dialog<Type> *)g_object_get_data(G_OBJECT(mainWindow), "dialogObject");
-
-        const gchar *path = notebook_p->workdir();
-        auto page = (Page<Type> *)notebook_p->currentPageObject();
-        page->setPageWorkdir(g_get_home_dir());
-        page->view()->loadModel("xffm:pkg");
+        Fm<Type>::getCurrentPage()->setPageWorkdir(g_get_home_dir());
+        Fm<Type>::getCurrentView()->loadModel("xffm:pkg");
     }
 
     static void
     trash(GtkMenuItem *menuItem, gpointer data)
     {
-	auto notebook_p = (Dialog<Type> *)g_object_get_data(G_OBJECT(mainWindow), "dialogObject");
-
-        const gchar *path = notebook_p->workdir();
-        auto page = (Page<Type> *)notebook_p->currentPageObject();
-        page->setPageWorkdir(g_get_home_dir());
 	auto name = g_strdup_printf("%s/.local/share/Trash/files", g_get_home_dir());
-        page->setPageWorkdir(name);
-        page->view()->loadModel(name);
+        Fm<Type>::getCurrentPage()->setPageWorkdir(name);
+        Fm<Type>::getCurrentView()->loadModel(name);
         g_free(name);
     }
 
     static void run(Notebook<Type> *notebook_p, const gchar *command){
         const gchar *path = notebook_p->workdir();
-        auto page = (Page<Type> *)notebook_p->currentPageObject();
         if (!path || !g_file_test(path, G_FILE_TEST_IS_DIR)) path = g_get_home_dir();
 	gchar *c = g_strdup(command);
         gchar *oldDir = g_get_current_dir ();
         chdir(path);
-        pid_t child = run_c::thread_run(page->output(), c, FALSE);
-	page->newRunButton(c, child);
+        pid_t child = run_c::thread_run(Fm<Type>::getCurrentTextview(), c, FALSE);
+	Fm<Type>::getCurrentPage()->newRunButton(c, child);
         g_free(c);
         chdir(oldDir);
         g_free(oldDir);
@@ -97,13 +75,11 @@ public:
                 userTerminal = g_strdup(terminal);
             }
         }
-	auto notebook_p = (Dialog<Type> *)g_object_get_data(G_OBJECT(mainWindow), "dialogObject");
-
         if (userTerminal){
-            run(notebook_p, userTerminal);
+            run(Fm<Type>::getCurrentNotebook(), userTerminal);
             g_free(userTerminal);
         } else {
-            run(notebook_p, "xterm -vb");
+            run(Fm<Type>::getCurrentNotebook(), "xterm -vb");
         }
     }
    
@@ -116,17 +92,13 @@ public:
 	    ERROR("menupopover.hh::Cannot find % in path\n", (const gchar *) data);
 	    return;
 	}
-	auto notebook_p = (Dialog<Type> *)g_object_get_data(G_OBJECT(mainWindow), "dialogObject");
-
-        auto page = (Page<Type> *)notebook_p->currentPageObject();
-	run(notebook_p, program);
+	run(Fm<Type>::getCurrentNotebook(), program);
 	g_free(program);
     }
 
     static void
     plainRun(GtkMenuItem *menuItem, gpointer data){
-	auto notebook_p = (Dialog<Type> *)g_object_get_data(G_OBJECT(mainWindow), "dialogObject");
-	run(notebook_p, (const gchar *)data);
+	run(Fm<Type>::getCurrentNotebook(), (const gchar *)data);
     }
 
     static void
@@ -138,15 +110,14 @@ public:
 	    ERROR("menupopover.hh::Cannot find %s in path\n", diff);
 	    return;
 	}
-	auto notebook_p = (Dialog<Type> *)g_object_get_data(G_OBJECT(mainWindow), "dialogObject");
         if (strcmp((const gchar *) data, "xffm")==0){
-            const gchar *path = notebook_p->workdir(); 
+            const gchar *path = Fm<Type>::getCurrentNotebook()->workdir(); 
             auto g = g_strdup_printf("%s %s", program, path);
             g_free(program);
             program = g;
         }
 
-	run(notebook_p, program);
+	run(Fm<Type>::getCurrentNotebook(), program);
 	g_free(program);
     }
 
@@ -154,12 +125,11 @@ public:
     search(GtkMenuItem *menuItem, gpointer data)
     {
         // get current directory
-	auto notebook_p = (Dialog<Type> *)g_object_get_data(G_OBJECT(mainWindow), "dialogObject");
 
-        const gchar *path = notebook_p->workdir();
+        const gchar *path = Fm<Type>::getCurrentNotebook()->workdir();
         if (!path || !g_file_test(path, G_FILE_TEST_IS_DIR)) path = g_get_home_dir();
 	gchar *find = g_strdup_printf("xffm --find \"%s\"", path);
-        run(notebook_p, find);
+        run(Fm<Type>::getCurrentNotebook(), find);
         g_free(find);
     }
 

@@ -15,6 +15,7 @@ static pthread_mutex_t string_hash_mutex=PTHREAD_MUTEX_INITIALIZER;
 static GHashTable *stringHash = NULL;
 namespace xf 
 {
+template <class Type> class Fm;
 template <class Type> class Dialog;
 template <class Type>
 class Run {
@@ -246,11 +247,7 @@ public:
     run_operate_stdout (void *data, void *stream, int childFD) {
         GtkTextView *textview;
         if (!data){
-            auto dialogObject = (Dialog<Type> *)
-                g_object_get_data(G_OBJECT(mainWindow), "dialogObject");
-            auto page = dialogObject->currentPageObject();
-            textview = page->output();
-            
+            textview = Fm<Type>::getCurrentTextview();
         } else {
 	   if (!Notebook<Type>::isValidTextView(data)) return;
            textview = GTK_TEXT_VIEW(data);
@@ -322,10 +319,7 @@ public:
     run_operate_stderr (void *data, void *stream, int childFD) {
         GtkTextView *textview;
         if (!data){
-            auto dialogObject = (Dialog<Type> *)
-                g_object_get_data(G_OBJECT(mainWindow), "dialogObject");
-            auto page = dialogObject->currentPageObject();
-            textview = page->output();
+            textview = Fm<Type>::getCurrentTextview();
             
         } else {
            textview = GTK_TEXT_VIEW(data);

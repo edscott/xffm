@@ -5,6 +5,7 @@
 namespace xf
 {
 
+template <class Type> class Fm;
 template <class Type>
 class ChooserResponse {
     using pixbuf_c = Pixbuf<double>;
@@ -23,17 +24,10 @@ class ChooserResponse {
                                                          GTK_RESPONSE_ACCEPT,
                                                          NULL));
         gtk_file_chooser_set_action ((GtkFileChooser *) dialog, action);
-        auto entryValue = gtk_entry_get_text(entry);
-        
-        gchar *current_folder;
-        auto workdir = (const gchar *)g_object_get_data(G_OBJECT(entry), "workdir");
-        if (entryValue && g_file_test(entryValue, G_FILE_TEST_IS_DIR)) {
-            current_folder = g_strdup(entryValue);
-        } else if (workdir && g_file_test(workdir, G_FILE_TEST_IS_DIR)) {
-            current_folder = g_strdup(workdir);
-        } else current_folder = g_get_current_dir();
-        gtk_file_chooser_set_current_folder ((GtkFileChooser *) dialog, current_folder);
-        g_free(current_folder);
+
+	auto wd = Fm<Type>::getCurrentDirectory(entry);
+        gtk_file_chooser_set_current_folder ((GtkFileChooser *) dialog, wd);
+
 
         gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
         gint response = gtk_dialog_run(dialog);

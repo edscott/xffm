@@ -57,6 +57,7 @@ protected:
     }
 
 public:
+    GtkBox *vbox2(void) {return vbox2_;}
     ~EntryResponse (void){
         gtk_widget_hide(GTK_WIDGET(response_));
 	while (gtk_events_pending())gtk_main_iteration();	

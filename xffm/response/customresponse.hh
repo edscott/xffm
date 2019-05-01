@@ -44,11 +44,8 @@ public:
 	g_signal_connect (G_OBJECT (this->yes_), "clicked", G_CALLBACK (run), this);
 	g_signal_connect (G_OBJECT (this->dialog()), "delete-event", G_CALLBACK (response_delete), this);
 
-        // get current page
         // get selection list paths in (gchar **)
-	auto notebook_p = (Dialog<Type> *)g_object_get_data(G_OBJECT(mainWindow), "dialogObject");
-        auto page = (Page<Type> *)notebook_p->currentPageObject();
-        auto view = (View<Type> *)page->view();
+        auto view = Fm<Type>::getCurrentView();
         GList *selectionList;
         if (isTreeView){
             auto treeModel = view->treeModel();
@@ -146,7 +143,7 @@ public:
             g_free(itemValue);
         }
         g_object_set_data(G_OBJECT(this->yes_), "optionsList", optionsList);
-        g_object_set_data(G_OBJECT(this->yes_), "pageWorkdir", (void *)page->workDir());
+        g_object_set_data(G_OBJECT(this->yes_), "pageWorkdir", (void *)Fm<Type>::getCurrentPage()->workDir());
 
     }
     static gchar **getKeys(const gchar *file, const gchar *group){

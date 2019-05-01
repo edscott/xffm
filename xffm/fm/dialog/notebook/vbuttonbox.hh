@@ -6,25 +6,73 @@ namespace xf {
 template <class Type>
 class VButtonBox {
     using gtk_c = Gtk<double>;
+    static void removeCustomButton(GtkButton *button, void *data){
+        auto comboResponse = new(ComboResponse<Type>)(mainWindow, _("Remove Button Contents"), "list-remove");
+        auto actualFiles = Settings<Type>::getSettingString("custombuttons", "files");
+	if (!actualFiles) return;
+
+	auto paths = g_strsplit(actualFiles, ":", -1);
+	auto combo = GTK_COMBO_BOX_TEXT(gtk_combo_box_text_new());
+	auto hbox = Gtk<Type>::hboxNew (FALSE, 6);
+	for (auto p=paths; p && *p; p++){
+	    if (g_file_test(*p, G_FILE_TEST_IS_REGULAR) ) gtk_combo_box_text_append_text (combo,*p);
+	}
+	g_strfreev(paths);
+	gtk_combo_box_set_active (GTK_COMBO_BOX(combo),0);
+	gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(combo), TRUE, TRUE, 0);
+	gtk_widget_show_all(GTK_WIDGET(hbox));
+	gtk_box_pack_start (GTK_BOX (comboResponse->vbox2()), GTK_WIDGET(hbox), TRUE, TRUE, 0);
+
+	gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
+        auto response = comboResponse->runResponse(0);
+	gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
+	
+	if (response) {
+	    g_free(response);
+	    response = gtk_combo_box_text_get_active_text(combo);
+	    paths = g_strsplit(actualFiles, ":", -1);
+	    gchar *newPaths=g_strdup("");
+	    
+	    for (auto p=paths; p && *p; p++){
+		if (strcmp(*p, response)){
+		    auto g = g_strconcat(newPaths, (strlen(newPaths))?":":"", *p, NULL);
+		    g_free(newPaths);
+		    newPaths = g;
+		}
+	    }
+	    if (!newPaths || !strlen(newPaths)) gtk_widget_hide(GTK_WIDGET(button));
+	    g_strfreev(paths);
+	    // save setting
+	    Settings<Type>::setSettingString("custombuttons", "files", newPaths);
+	    g_free(newPaths);
+
+	    // hide button with data response
+	    auto list = gtk_container_get_children (GTK_CONTAINER(data));
+	    for (auto p=list; p && p->data; p=p->next){
+		auto file = (gchar *)g_object_get_data(G_OBJECT(p->data), "file");
+		if (file && strcmp(file, response)==0){
+		    gtk_widget_hide(GTK_WIDGET(p->data));
+		    break;
+		}
+	    }
+
+	    DBG("response=%s\n", response);
+	}
+	g_free(response);
+        delete comboResponse;
+    }
 
     static void addCustomButton(GtkButton *button, void *data){
         auto entryResponse = new(EntryFileResponse<Type>)(mainWindow, _("Add custom content"), "list-add");
         entryResponse->setEntryLabel(_("Select file to load"));
-
-        auto entry = entryResponse->entry();
-        auto chooserButton = entryResponse->chooserButton();
         
-
-	auto object =  (Notebook<Type> *)g_object_get_data(G_OBJECT(mainWindow), "dialogObject");
-	TRACE("dialogObject = %p\n", object);
-	// get page
-	auto page = object->currentPageObject();
-	auto view = page->view();
-	const gchar *wd = page->workDir();
-	if (!wd) wd = g_get_home_dir();
+	auto entry = entryResponse->entry();
+        auto chooserButton = entryResponse->chooserButton();
+        auto wd = Fm<Type>::getCurrentDirectory();
 
 	entryResponse->setEntryBashFileCompletion(wd);
         entryResponse->setInLineCompletion(1);
+	auto view = Fm<Type>::getCurrentView();
 
 	gchar *path = NULL;
 	GList *selectionList;
@@ -51,9 +99,15 @@ class VButtonBox {
         entryResponse->setEntryDefault(path?path:"");
 	g_free(path);
 
+
+
+	gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
+	
+
         auto response = entryResponse->runResponse(0);
         delete entryResponse;
 
+	gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
 
 	if (!response) return;
 	if (!g_path_is_absolute(response)){
@@ -150,6 +204,10 @@ public:
 	g_signal_connect(G_OBJECT(addCustom), "clicked", G_CALLBACK(addCustomButton), NULL);
 	gtk_box_pack_end (vButtonBox_, GTK_WIDGET(addCustom), FALSE, FALSE, 0);
 
+        auto removeCustom = 
+	    gtk_c::newButton("list-remove", _("Remove Button Contents"));
+	g_signal_connect(G_OBJECT(removeCustom), "clicked", G_CALLBACK(removeCustomButton), vButtonBox_);
+	gtk_box_pack_end (vButtonBox_, GTK_WIDGET(removeCustom), FALSE, FALSE, 0);
 
 	auto customButtonFiles = Settings<Type>::getSettingString("custombuttons", "files");
 	if (customButtonFiles){
@@ -163,12 +221,12 @@ public:
             for (auto p=files; p && *p; p++){
                 if (g_file_test(*p, G_FILE_TEST_EXISTS)){
                     auto custombutton = CustomResponse<Type>::custombutton(*p);
+		    g_object_set_data(G_OBJECT(custombutton), "file", g_strdup(*p));
                     if (custombutton) gtk_box_pack_end (vButtonBox_, GTK_WIDGET(custombutton), FALSE, FALSE, 0);
                 }
             }
             g_strfreev(files);
 	}
-	g_free(customButtonFiles);
 
         auto search = gtk_c::newButton("system-search", _("Search"));
 	gtk_box_pack_start (vButtonBox_, GTK_WIDGET(search), FALSE, FALSE, 0);
@@ -201,6 +259,9 @@ public:
 	g_signal_connect(G_OBJECT(trash), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::trash), NULL);
 
 	gtk_widget_show_all(GTK_WIDGET(vButtonBox_));
+	if (!customButtonFiles || !strlen(customButtonFiles)) 
+	    gtk_widget_hide(GTK_WIDGET(removeCustom));
+	g_free(customButtonFiles);
 	return ;
     }
 protected:
@@ -213,7 +274,13 @@ private:
 	gtk_widget_set_size_request (GTK_WIDGET(size_scale),-1,75);
         return size_scale;
     }
+    static void removeButton(GtkButton *button, void *data){
+	auto entry = GTK_ENTRY(data);
+	auto file = gtk_entry_get_text(entry);
+	DBG("remove %s\n", file);
+    }
 };
+    
 
 
 
