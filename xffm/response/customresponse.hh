@@ -10,6 +10,7 @@ class CustomResponse: public ComboFileResponse<Type>{
     using gtk_c = Gtk<Type>;
     gchar *exec_;
     gchar *workdir_;
+    gint terminal_;
     GList *optionsList;
 public:
     ~CustomResponse(void){
@@ -24,7 +25,8 @@ public:
     {
         customDialogs = g_list_prepend(customDialogs, this->response_);
         exec_ = getString(file, "custombutton", "exec");
-        workdir_=NULL;
+        workdir_ = getString(file, "custombutton", "workdir");
+        terminal_ = getInt(file, "custombutton", "terminal");
         optionsList = NULL;
         if (!exec_) {
             throw(1);
@@ -40,6 +42,9 @@ public:
         this->setTitle(exec_);
         g_free(title);
         g_object_set_data(G_OBJECT(this->yes_), "exec", exec_);
+        g_object_set_data(G_OBJECT(this->yes_), "workdir", workdir_);
+        if (terminal_ == 1) g_object_set_data(G_OBJECT(this->yes_), "terminal", GINT_TO_POINTER(1));
+        else g_object_set_data(G_OBJECT(this->yes_), "terminal", NULL);
 	g_signal_connect (G_OBJECT (this->no_), "clicked", G_CALLBACK (cancel), this);
 	g_signal_connect (G_OBJECT (this->yes_), "clicked", G_CALLBACK (run), this);
 	g_signal_connect (G_OBJECT (this->dialog()), "delete-event", G_CALLBACK (response_delete), this);
@@ -254,9 +259,16 @@ private:
         auto object = (CustomResponse<Type> *)data;
         auto exec = (const gchar *)g_object_get_data(G_OBJECT(button), "exec");
         auto workdir = (const gchar *)g_object_get_data(G_OBJECT(button), "workdir");
+        auto terminal = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(button), "terminal"));
+
         auto entry = object->comboEntry();
         auto file = gtk_entry_get_text(entry);
         auto command = g_strdup_printf("%s ", exec);
+        if (terminal) {
+            auto g = g_strconcat(getenv("TERMINAL_CMD"), " ", command, NULL);
+            g_free(command);
+            command = g;
+        }
         auto oList = (GList *)g_object_get_data(G_OBJECT(button), "optionsList");
         for (auto p=oList; p && p->data; p=p->next){
             auto hbox = p->data;
@@ -278,20 +290,26 @@ private:
                 }
             }
         }
-        gchar *path;
-        if (g_path_is_absolute(file)) path = g_strdup(file);
-        else if (workdir) path = g_strconcat(workdir,G_DIR_SEPARATOR_S, file, NULL);
-        else {
-            auto w = (const gchar *)g_object_get_data(G_OBJECT(button), "pageWorkdir");
-            path = g_strconcat(w,G_DIR_SEPARATOR_S, file, NULL); 
+        
+        // XXX Hack: do not use combo entry if in terminal XXX
+        if (!terminal) {
+            gchar *path;
+            if (g_path_is_absolute(file)) path = g_strdup(file);
+            else if (workdir) path = g_strconcat(workdir,G_DIR_SEPARATOR_S, file, NULL);
+            else {
+                auto w = (const gchar *)g_object_get_data(G_OBJECT(button), "pageWorkdir");
+                path = g_strconcat(w,G_DIR_SEPARATOR_S, file, NULL); 
+            }
+            auto g = g_strconcat(command," \"", path, "\"", NULL);
+            g_free(command);
+            g_free(path);
+            command = g;
         }
-        auto g = g_strconcat(command," \"", path, "\"", NULL);
-        g_free(command);
-        g_free(path);
-        command = g;
+        
 
         DBG("run \'%s\'\n", command);
-        MenuPopoverSignals<Type>::plainRun(NULL, command);
+        //MenuPopoverSignals<Type>::plainRun(NULL, command);
+        MenuPopoverSignals<Type>::runWd(workdir, command);
         g_free(command);
     }
     static void

@@ -125,6 +125,13 @@ public:
 	xf::ClipBoard<double>::startClipBoard();  
     }
 
+    static const gchar *getCurrentWorkdir(){
+        return getCurrentPage()->workDir();
+	// also: FIXME: clean up :
+        // return getCurrentNotebook()->workdir();
+
+    }
+
     static GtkTextView *getCurrentTextview(){
 	return getCurrentPage()->output();
     }

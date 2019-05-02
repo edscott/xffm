@@ -45,7 +45,22 @@ public:
         g_free(name);
     }
 
+    static void runWd(const gchar *workdir, const gchar *command){
+        if (!workdir) workdir = Fm<Type>::getCurrentWorkdir();
+	gchar *c = g_strdup(command);
+        gchar *oldDir = g_get_current_dir ();
+        chdir(workdir);
+        pid_t child = run_c::thread_run(Fm<Type>::getCurrentTextview(), c, FALSE);
+	Fm<Type>::getCurrentPage()->newRunButton(c, child);
+        g_free(c);
+        chdir(oldDir);
+        g_free(oldDir);
+    }
+
     static void run(Notebook<Type> *notebook_p, const gchar *command){
+        runWd(notebook_p?notebook_p->workdir():NULL, command);
+        return;
+        /*
         const gchar *path = notebook_p->workdir();
         if (!path || !g_file_test(path, G_FILE_TEST_IS_DIR)) path = g_get_home_dir();
 	gchar *c = g_strdup(command);
@@ -56,6 +71,7 @@ public:
         g_free(c);
         chdir(oldDir);
         g_free(oldDir);
+        */
     }
     static void
     terminal(GtkMenuItem *menuItem, gpointer data)
