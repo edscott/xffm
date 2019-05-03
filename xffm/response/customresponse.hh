@@ -23,6 +23,20 @@ public:
     CustomResponse(GtkWindow *parent, const gchar *file):
      ComboFileResponse<Type>(parent, "title", "run")
     {
+        auto showEntry = getInt(file, "custombutton", "entry");
+        if (!showEntry){
+            gtk_widget_hide(GTK_WIDGET(this->hbox_));
+            auto tooltip = getString(file, "custombutton", "tooltip");
+            if (tooltip){
+                auto label = GTK_LABEL(gtk_label_new(""));
+                auto markup = g_strdup_printf("<span color=\"blue\" size=\"larger\">%s</span>", tooltip);
+                gtk_label_set_markup(label, markup);
+                g_free(markup);
+	        gtk_box_pack_start (GTK_BOX (this->vbox2_), GTK_WIDGET(label), FALSE, FALSE, 0);
+                gtk_widget_show(GTK_WIDGET(label));
+                g_free(tooltip);
+            }
+        }
         customDialogs = g_list_prepend(customDialogs, this->response_);
         exec_ = getString(file, "custombutton", "exec");
         workdir_ = getString(file, "custombutton", "workdir");
