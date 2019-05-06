@@ -64,6 +64,24 @@ class CommandResponse {
 public:
     
     static GtkWindow *
+    dialog(const gchar *message, const gchar *icon, const gchar *command)
+    {
+        if (!command) {
+	    return NULL ;
+	}
+	auto dialog = ProgressDialog<Type>::dialog(message, icon, NULL, NULL);
+	pid_t controller = Run<Type>::thread_run(Fm<Type>::getCurrentTextview(),command, FALSE);
+        
+        auto arg2 = (void **)calloc(3, sizeof (void *));
+        arg2[0]=g_object_get_data(G_OBJECT(dialog),"progress");
+        arg2[1]=(void *)dialog;
+        arg2[2]=GINT_TO_POINTER(Tubo<Type>::getChild(controller));
+        g_timeout_add(250, pulse_f, (void *)arg2);
+	return dialog;
+	
+    }
+    
+    static GtkWindow *
     dialog(const gchar *message, const gchar *icon, const gchar **arg)
     {
         if (!arg || arg[0] == NULL) {

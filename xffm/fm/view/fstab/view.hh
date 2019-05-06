@@ -87,6 +87,7 @@ public:
 	addAllItems(treeModel);
         FstabMonitor<Type> *p = new(FstabMonitor<Type>)(treeModel, view);
         p->start_monitor(treeModel, "/dev/disk/by-id");
+        DBG("parallel fstab monitor %p for fstab\n", p); 
 //        p->start_monitor(treeModel, "/dev/disk/by-partuuid");
         return p;
     }
@@ -849,6 +850,8 @@ public:
 
 	const gchar *arg[10];
 	gint i=0;
+
+
 	if (useSudo) {
 	    arg[i++] = "sudo";
 	    arg[i++] = "-A";
@@ -858,20 +861,31 @@ public:
 	arg[i++] = mountPoint;
 	arg[i++] = NULL;
 
-
 	auto message = g_strdup_printf((mounted)?
 		    _("Unmounting %s"):_("Mounting %s"), path);
-        CommandResponse<Type>::dialog(message, "system-run", arg);
-
 /*
-	// open follow dialog for long commands...
-	auto command = g_strdup_printf((mounted)?
-		    _("Unmounting %s"):_("Mounting %s"), path);
-	CommandResponse<Type>::dialog(command,"system-run", Tubo<Type>::getChild(controller) );
-	TRACE("%s %s\n", command, mountPoint);
-	g_free(command);
+ * no good...
+        const gchar *sudo = "";
+	if (useSudo) sudo = "sudo -A";
+        gchar *command = g_strdup(sudo);
+        gchar *g = g_strconcat(command, " ", (mounted)?umount:mount, " ", path, 
+                " ", mountPoint?mountPoint:"" , NULL);
+        g_free(command);
+        command=g;
+        if (mountPoint){
+            g= g_strconcat(command, " && ", sudo, " touch ", mountPoint, NULL);
+        } else {
+            g= g_strconcat(command, " && ", sudo, " touch ", path, NULL);
+        }
+        g_free(command);
+        command=g;
+        CommandResponse<Type>::dialog(message, "system-run", command);
+        g_free(command);
+ */       
+        CommandResponse<Type>::dialog(message, "system-run", arg);
+        g_free(message);
 
-        TRACE ("fstab_mount %s done \n",path);*/
+
         return TRUE;
     }
 

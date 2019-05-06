@@ -1,4 +1,7 @@
-
+BUG: greenball update icon in local is disabled. Using the threaded monitor function
+     from fstab to signal changes causes crash. I believe due to double treeview now
+     used in local view. Maybe put thread within local view. but that complicates things
+     for freebsd version.
 
 pending:
 user box needs options with = (for structure)

@@ -144,7 +144,7 @@ protected:
         // find the iter and remove iteam
         TRACE("remove item...\n");
 	// use hashkey
-	gchar *key = Hash<Type>::get_hash_key(path, 10);
+	//gchar *key = Hash<Type>::get_hash_key(path, 10);
         //if (itemsHash_) g_hash_table_remove(itemsHash_, key); 
         gtk_tree_model_foreach (GTK_TREE_MODEL(store_), rm_func, (gpointer) path); 
         return TRUE;

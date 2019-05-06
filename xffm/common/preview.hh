@@ -334,25 +334,6 @@ gs_wait_f(void *data){
 	return retval;
     }
 
-    static PangoDirection
-    get_direction (const gchar * str) {
-	PangoDirection direction;
-	const gchar *p;
-	if(g_utf8_validate (str, -1, NULL)) {
-	    for(p = str; p != NULL && *p; p = g_utf8_find_next_char (p, NULL)) {
-		gunichar ch = g_utf8_get_char (p);
-		direction = pango_unichar_direction (ch);
-		if(direction == PANGO_DIRECTION_NEUTRAL)
-		    continue;
-		TRACE ("direction found\n");
-		return direction;
-	    }
-	}
-	// default:
-	TRACE ("PANGO_DIRECTION_LTR\n");
-	return PANGO_DIRECTION_LTR;
-    }
-
 
     /* Split a list of paragraphs into a list of lines.
      */
@@ -726,8 +707,8 @@ private:
 	page_layout.right_margin = 36;
 	page_layout.left_margin = 36;
 
-	// determine pango_dir 
-	page_layout.pango_dir = get_direction (text);
+	// determine pango_dir  (XXX deprecated, pango should do this automatically...)
+	//page_layout.pango_dir = pango_find_base_dir (text, -1);
 	page_layout.column_height = page_layout.page_height - page_layout.top_margin - page_layout.bottom_margin;
 	page_layout.column_width = page_layout.page_width - page_layout.left_margin - page_layout.right_margin;
 

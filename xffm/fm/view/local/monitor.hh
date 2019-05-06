@@ -1,7 +1,6 @@
 #ifndef XF_LOCALMONITOR__HH
 # define XF_LOCALMONITOR__HH
 #ifdef HAVE_MNTENT_H
-#define USE_MOUNTTHREAD
 #endif
 
 namespace xf
@@ -46,7 +45,12 @@ public:
 	return;
 #endif
         TRACE("***Destructor:~local_monitor_c()\n");
-#ifdef USE_MOUNTTHREAD
+      
+
+// FIXME:  crashes ...
+//        reason, swiching treemodels...
+//        fstab method does not contemplate switching treemodels.
+#if 0
         // stop mountThread
         mountArg_[1] = NULL;
         while (mountArg_[2]){
@@ -62,7 +66,9 @@ public:
 	DBG("*** Local monitor at %s s disabled.\n", path);
 #else 
         this->startMonitor(treeModel, path, (void *)monitor_f);
-# ifdef USE_MOUNTTHREAD
+        // FIXME: this  crashes ...
+//        reason, swiching treemodels...
+# if 0
         // start mountThread
         pthread_t mountThread;
         //TRACE("LocalMonitor thread itemshash=%p\n", this->itemsHash());

@@ -86,7 +86,8 @@ private:
             gchar *key = Hash<Type>::get_hash_key(path, 10);
             if (!g_hash_table_lookup((GHashTable *)data, key)){
                 // update the icon
-                TRACE("*** Send change signal for %s (now mounted)\n", (gchar *)path);
+                TRACE("*** Send change signal for %s (now mounted, monitor %p)\n", 
+                        (gchar *)path, g_object_get_data(G_OBJECT(treeModel), "baseMonitor"));
                 void *arg[] = { 
                     g_object_get_data(G_OBJECT(treeModel), "baseMonitor"),
                     (void *)path };
@@ -109,10 +110,11 @@ private:
             gchar *key = Hash<Type>::get_hash_key(path, 10);
             if (g_hash_table_lookup((GHashTable *)data, key)){
                 // update the icon
-                TRACE("*** Send change signal for %s (now unmounted)\n", (gchar *)path);
                 void *arg[] = { 
                     g_object_get_data(G_OBJECT(treeModel), "baseMonitor"),
                     (void *)path };
+                TRACE("*** Send change signal for %s (now unmounted, monitor %p)\n", 
+                        (gchar *)path, g_object_get_data(G_OBJECT(treeModel), "baseMonitor"));
                 Util<Type>::context_function(sendChangeSignal, arg);
             }
             g_free(key);
@@ -134,7 +136,7 @@ public:
             g_free(data);
             return NULL;
         }
-        TRACE("FstabMonitor::mountThreadF(): initial md5sum=%s", sum);
+        TRACE("FstabMonitor::mountThreadF(): initial md5sum=%s basemonitor=%p", sum, baseMonitor);
         
 	auto hash = getMountHash(NULL);
         while (arg[1]){// arg[1] is semaphore to thread
@@ -178,7 +180,7 @@ public:
 	    }
         }
         g_free(sum);
-        TRACE("***now exiting mountThreadF()\n");
+        TRACE("***now exiting mountThreadF(), baseMonitor=%p\n", baseMonitor);
         g_hash_table_destroy(hash);
         arg[2] = NULL; // arg[2] is semaphore to calling thread.
         return NULL;
