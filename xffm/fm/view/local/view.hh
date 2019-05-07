@@ -46,8 +46,9 @@ public:
         //if (items <= 500) 
         {
             p = new(LocalMonitor<Type>)(view->treeModel(), view);
-            p->start_monitor(view->treeModel(), path);
-            localMonitorList = g_list_append(localMonitorList, (void *)p->monitor());
+            p->start_monitor(view, path);
+            view->setMonitorObject(p);
+            //localMonitorList = g_list_append(localMonitorList, (void *)p->monitor());
         } 
 	return p;
     }

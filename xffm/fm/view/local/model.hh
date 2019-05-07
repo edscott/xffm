@@ -303,6 +303,24 @@ private:
             return g_list_sort (list,compare_by_name2);
         }
     }
+	
+    static void *replaceTreeModel(void *data){
+	auto view = (View<Type> *)data; 
+	auto tmp = view->treeModel();
+	// set iconview/treeview treemodel
+	view->setTreeModel(view->backTreeModel());
+	view->setBackTreeModel(tmp);
+	gtk_tree_view_set_model(view->treeView(), view->treeModel());
+	gtk_icon_view_set_model(view->iconView(), view->treeModel());
+
+	view->monitorObject()->setMonitorStore(GTK_LIST_STORE(view->treeModel()));
+        DBG("*** localMonitor object= %p\n", view->monitorObject());
+        // XXX FIXME: this here still crashes app.    
+        //((LocalMonitor<Type> *)(view->monitorObject()))->startMountThread();
+	
+        return NULL;
+
+    }
 
 public:
 
@@ -315,23 +333,11 @@ public:
 	while(gtk_events_pending())gtk_main_iteration();
 	return NULL;
     }
-	
-    static void *replaceTreeModel(void *data){
-	auto view = (View<Type> *)data; 
-	auto tmp = view->treeModel();
-	// set iconview/treeview treemodel
-	view->setTreeModel(view->backTreeModel());
-	view->setBackTreeModel(tmp);
-	gtk_tree_view_set_model(view->treeView(), view->treeModel());
-	gtk_icon_view_set_model(view->iconView(), view->treeModel());
-
-	view->localMonitor_->setMonitorStore(GTK_LIST_STORE(view->treeModel()));
-	
-        return NULL;
-
-    }
 
     static void *finishLoad(void *data){
+        
+
+        
 	if (mainWindow && GTK_IS_WIDGET(mainWindow)) gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
 	while(gtk_events_pending())gtk_main_iteration();
 	return NULL;
@@ -369,10 +375,14 @@ public:
             free_xd_p(xd_p);
         }
         g_list_free(directory_list);
+        // replaceTreeModel will fix treeModel used by monitorObject.
 	Util<Type>::context_function(replaceTreeModel, (void *)view);
 	// clear out backTreeModel
 	gtk_list_store_clear (GTK_LIST_STORE(view->backTreeModel()));
-	Util<Type>::context_function(finishLoad, NULL);
+
+        // Now you can fire up mountThread, not any sooner.
+
+	Util<Type>::context_function(finishLoad, (void *)view);
 
 	return NULL;
 

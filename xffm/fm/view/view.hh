@@ -39,6 +39,7 @@ class View:
     using util_c = Util<Type>;
     using page_c = Page<Type>;
     
+    BaseMonitor<Type> *monitorObject_; // public to switch treemodel...
     
 public:
     /*gint items(void){ 
@@ -48,12 +49,26 @@ public:
     {
         this->iconView_ = IconView<Type>::createIconview(this);
         this->treeView_ = TreeView<Type>::createTreeview(this);
+        monitorObject_ = NULL;
     }
 
     ~View(void){
         TRACE("View destructor.\n");
     }
 
+    BaseMonitor<Type> *monitorObject(void){
+        return monitorObject_;
+    }
+
+    void setMonitorObject(BaseMonitor<Type> *monitorObject){
+        monitorObject_ = monitorObject;
+    }
+
+
+    void disableMonitor(void){
+	if (monitorObject_) monitorObject_->setActive(FALSE);
+	std::this_thread::yield();
+    }
 
     
     gboolean loadModel(const gchar *path){
@@ -84,14 +99,10 @@ public:
         view->setPath(path);
 	view->disableMonitor();
         // stop current monitor
-        if (view->localMonitor_) {
-            localMonitorList = g_list_remove(localMonitorList, (void *)view->localMonitor_->monitor());
-            delete (view->localMonitor_);
-            view->localMonitor_ = NULL;
-        }
-        if (view->fstabMonitor_) {
-            delete (view->fstabMonitor_);
-            view->fstabMonitor_ = NULL;
+        if (view->monitorObject_) {
+            localMonitorList = g_list_remove(localMonitorList, (void *)view->monitorObject_->monitor());
+            delete (view->monitorObject_);
+            view->monitorObject_ = NULL;
         }
 
         switch (view->viewType()){
@@ -103,13 +114,16 @@ public:
 		gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
 		while (gtk_events_pending()) gtk_main_iteration();
 		if (strcmp(path, "xffm:local")==0) {
-		    view->localMonitor_ = LocalView<Type>::loadModel(view, g_get_home_dir());
+		    //view->monitor_ = 
+                        LocalView<Type>::loadModel(view, g_get_home_dir());
 		} else {
-		    view->localMonitor_ = LocalView<Type>::loadModel(view, path);
+		    //view->monitor_ = 
+                        LocalView<Type>::loadModel(view, path);
 		}
                 break;
             case (FSTAB_TYPE):
-                view->fstabMonitor_ = FstabView<Type>::loadModel(view);
+                //view->monitor_ = 
+                    FstabView<Type>::loadModel(view);
 	        view->page()->updateStatusLabel(NULL);
                 break;
             case (PKG_TYPE):

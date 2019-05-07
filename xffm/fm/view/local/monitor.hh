@@ -38,7 +38,8 @@ class LocalMonitor: public BaseMonitor<Type>
 public:    
     LocalMonitor(GtkTreeModel *treeModel, View<Type> *view):
         BaseMonitor<Type>(treeModel, view)
-    {       
+    {  
+        mountArg_[2]=NULL;     
     }
     ~LocalMonitor(void){
 #ifndef USE_LOCAL_MONITOR
@@ -47,27 +48,45 @@ public:
         TRACE("***Destructor:~local_monitor_c()\n");
       
 
-// FIXME:  crashes ...
-//        reason, swiching treemodels...
-//        fstab method does not contemplate switching treemodels.
-#if 0
         // stop mountThread
         mountArg_[1] = NULL;
         while (mountArg_[2]){
             TRACE("***Waiting for mountThread to exit\n");
+            usleep(250000);
         }
-#endif
+
         //g_hash_table_destroy(this->itemsHash());
         TRACE("***Destructor:~local_monitor_c() complete\n");
     }
+
+    void startMountThread(void){
+        // start mountThread
+        pthread_t mountThread;
+        //TRACE("LocalMonitor thread itemshash=%p\n", this->itemsHash());
+        mountArg_[0] = (void *)this;
+        mountArg_[1] = GINT_TO_POINTER(TRUE);
+        mountArg_[2] = GINT_TO_POINTER(TRUE);
+	gint retval = pthread_create(&mountThread, NULL, FstabMonitor<Type>::mountThreadF, (void *)mountArg_);
+	if (retval){
+	    ERROR("fm/view/local/model.hh::finishLoad():thread_create(): %s\n", strerror(retval));
+	    //return retval;
+	}
+    }
+
     void
-    start_monitor(GtkTreeModel *treeModel, const gchar *path){
+    start_monitor(View<Type> *view, const gchar *path){
+    //start_monitor(GtkTreeModel *treeModel, const gchar *path){
 #ifndef USE_LOCAL_MONITOR
 	DBG("*** Local monitor at %s s disabled.\n", path);
 #else 
-        this->startMonitor(treeModel, path, (void *)monitor_f);
-        // FIXME: this  crashes ...
-//        reason, swiching treemodels...
+        this->startMonitor(view->treeModel(), path, (void *)monitor_f);
+        view->setMonitorObject(this);
+        localMonitorList = g_list_append(localMonitorList, (void *)this->monitor());
+        // XXX:   Start mountThread...
+        //        this here now crashes ...
+        //        reason, swiching treemodels...
+        //        Now moved to when load thread has completed treemodel switch.
+        //        At local/model.hh
 # if 0
         // start mountThread
         pthread_t mountThread;

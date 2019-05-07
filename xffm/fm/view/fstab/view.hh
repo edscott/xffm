@@ -86,7 +86,9 @@ public:
 
 	addAllItems(treeModel);
         FstabMonitor<Type> *p = new(FstabMonitor<Type>)(treeModel, view);
-        p->start_monitor(treeModel, "/dev/disk/by-id");
+        p->start_monitor(view, "/dev/disk/by-id");
+        // already in start_monitor function:
+        // view->setMonitorObject(p);
         DBG("parallel fstab monitor %p for fstab\n", p); 
 //        p->start_monitor(treeModel, "/dev/disk/by-partuuid");
         return p;

@@ -50,14 +50,12 @@ class BaseModel
 protected:
     gchar *path_;
     GList *selectionList_;
-    FstabMonitor<Type> *fstabMonitor_;
     GtkTreeModel *treeModel_;
     GtkTreeModel *backTreeModel_;
     GtkIconView *iconView_;
     GtkTreeView *treeView_;
     
 public:    
-    LocalMonitor<Type> *localMonitor_; // public to switch treemodel...
     void setTreeModel(GtkTreeModel *model){ treeModel_ = model;}
     void setBackTreeModel(GtkTreeModel *model){ backTreeModel_ = model;}
     gint items(void){ 
@@ -71,8 +69,6 @@ public:
 	page_ = page; 
         path_ = NULL;
         selectionList_ = NULL;
-        localMonitor_ = NULL;
-        fstabMonitor_ = NULL;
 	treeModel_ = mkTreeModel();
 	backTreeModel_ = mkTreeModel();
         if (!highlight_hash) highlight_hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
@@ -138,13 +134,6 @@ public:
         g_free(path_); 
         g_object_unref(treeModel_);
         g_object_unref(backTreeModel_);
-    }
-
-    void disableMonitor(void){
-	if (localMonitor_) localMonitor_->setActive(FALSE);
-	if (fstabMonitor_) fstabMonitor_->setActive(FALSE);
-	std::this_thread::yield();
-	//if (localMonitor_ || FstabMonitor) usleep(100000);
     }
 
     void setViewType(gint value){viewType_ = value;}

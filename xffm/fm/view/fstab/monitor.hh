@@ -39,9 +39,10 @@ public:
     }
 
     void
-    start_monitor(GtkTreeModel *treeModel, const gchar *path){
+    start_monitor(View<Type> *view, const gchar *path){
 	TRACE("Starting monitor for path:%s\n", path);
-        this->startMonitor(treeModel, path, (void *)monitor_f);
+        this->startMonitor(view->treeModel(), path, (void *)monitor_f);
+        view->setMonitorObject(this);
         // start mountThread
 #ifdef USE_MOUNTTHREAD
         pthread_t mountThread;
@@ -127,6 +128,7 @@ public:
     mountThreadF(void *data){
         void **arg = (void **)data;
         auto baseMonitor = (BaseMonitor<Type> *)arg[0];
+        DBG("*** baseMonitor = %p\n", baseMonitor);
         g_object_set_data(G_OBJECT(baseMonitor->treeModel()), "baseMonitor", (void *)baseMonitor);
         // get initial md5sum
         gchar *sum = Util<Type>::md5sum("/proc/mounts");
