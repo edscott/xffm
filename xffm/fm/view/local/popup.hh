@@ -983,7 +983,7 @@ public:
 	//auto page = baseModel->page();
 	auto page = view->page();
 	page->command(command);
-	TRACE("2)command = %s\n", command);
+	DBG("*** runWith command = %s\n", command);
 	g_free(command);
     }
 

@@ -24,6 +24,7 @@ public:
     static LocalMonitor<Type> *
     loadModel (View<Type> *view, const gchar *path)
     {
+        DBG("*** local/view-hh: loadModel()\n");
 	view->enableDnD();	
         LocalMonitor<Type> *p = NULL;
         auto iconView = view->iconView();
@@ -32,10 +33,12 @@ public:
             return NULL;
         }
         if (!g_file_test(path, G_FILE_TEST_IS_DIR)){
-            gchar *dirname = g_path_get_dirname(path);
+            ERROR("local/view.hh::loadModel. %s is not a directory\n", path);
+            return NULL;
+/*            gchar *dirname = g_path_get_dirname(path);
             p = loadModel(view, dirname);
             g_free(dirname);
-            return p;
+            return p;*/
         }
 
         gtk_icon_view_set_selection_mode (iconView,GTK_SELECTION_MULTIPLE);      

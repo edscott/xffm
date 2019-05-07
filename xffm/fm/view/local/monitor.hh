@@ -55,7 +55,6 @@ public:
             usleep(250000);
         }
 
-        //g_hash_table_destroy(this->itemsHash());
         TRACE("***Destructor:~local_monitor_c() complete\n");
     }
 
@@ -140,7 +139,7 @@ public:
             // use hashkey
             gchar *key = Hash<Type>::get_hash_key(xd_p->path, 10);
 	    TRACE("add_new_item ...(%s --> %s) shows:hidden=%d\n", key, xd_p->path, showHidden);
-            //g_hash_table_replace(this->itemsHash(), key, g_strdup(xd_p->path));
+            g_hash_table_replace(this->itemsHash(), key, g_strdup(xd_p->path));
             LocalView<Type>::free_xd_p(xd_p);
             return TRUE;
         } 
@@ -202,6 +201,7 @@ public:
     restat_item(GFile *src){
         // First we use a hash to check if item is in treemodel.
         // Then, if found, we go on to find the item in the treemodel and update.
+        // If not found, we should add item.
         gchar *path = g_file_get_path(src);
 	TRACE("restat_item %s \n", path);
         gboolean showHidden = (Settings<Type>::getSettingInteger("LocalView", "ShowHidden") > 0);
@@ -211,11 +211,14 @@ public:
 	}
         // use hashkey
         // FIXME: itemsHash is out of sync because of backing store treemodel
-#if 0        
+#if 10        
         gchar *key = Hash<Type>::get_hash_key(path, 10);
 	
         if (!g_hash_table_lookup(this->itemsHash(), key)) {
-  	    DBG("restat_item %s --> %s is not in itemsHash()\n", key, path);
+  	    DBG("restat_item %s --> %s is not in itemsHash()... Adding\n", key, path);
+            add_new_item(src);
+            //this->updateFileCountLabel();
+      
             g_free(path);
             g_free(key);
             return FALSE; 
@@ -251,13 +254,15 @@ private:
         switch (event){
             case G_FILE_MONITOR_EVENT_DELETED:
             case G_FILE_MONITOR_EVENT_MOVED_OUT:
-                TRACE("Received DELETED  (%d): \"%s\", \"%s\"\n", event, f, s);
+                DBG("Received DELETED  (%d): \"%s\", \"%s\"\n", event, f, s);
                 p->remove_item(first);
                 p->updateFileCountLabel();
                 break;
             case G_FILE_MONITOR_EVENT_CREATED:
             case G_FILE_MONITOR_EVENT_MOVED_IN:
-                TRACE("Received  CREATED (%d): \"%s\", \"%s\"\n", event, f, s);
+                DBG("Received  CREATED (%d): \"%s\", \"%s\"\n", event, f, s);
+                p->restat_item(first);
+#if 0
                 /*if (isInModel(p->treeModel(), f)){
                     p->restat_item(first);
                 } else*/ 
@@ -265,16 +270,17 @@ private:
                     p->add_new_item(first);
                     p->updateFileCountLabel();
                 }
+#endif
                 break;
-
             case G_FILE_MONITOR_EVENT_CHANGED:
-                TRACE("monitor_f(): Received  CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
+                DBG("monitor_f(): Received  CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
                 p->restat_item(first);
                 // reload icon
-                //FIXME:  if image, then reload the pixbuf
+                //FIXME: check if this is now done:
+                //       if image, then reload the pixbuf
                 break;
             case G_FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED:
-                TRACE("***Received  ATTRIBUTE_CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
+                DBG("***Received  ATTRIBUTE_CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
                 p->restat_item(first);
                 break;
             case G_FILE_MONITOR_EVENT_PRE_UNMOUNT:
@@ -285,7 +291,7 @@ private:
                 break;
             case G_FILE_MONITOR_EVENT_MOVED:
             case G_FILE_MONITOR_EVENT_RENAMED:
-                TRACE("Received  MOVED (%d): \"%s\", \"%s\"\n", event, f, s);
+                DBG("Received  MOVED (%d): \"%s\", \"%s\"\n", event, f, s);
                 p->remove_item(first);
                 if (isInModel(p->treeModel(), s))
                 {
