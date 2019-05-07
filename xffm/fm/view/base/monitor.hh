@@ -9,6 +9,7 @@ class BaseMonitor {
 public:
     void setMonitorStore(GtkListStore *store){store_ = store;}
 protected:
+    void *mountArg_[5]; // Needs to exist until destructor is called.
     GCancellable *cancellable_;
     GFile *gfile_;
     GFileMonitor *monitor_;

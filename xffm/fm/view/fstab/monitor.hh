@@ -15,7 +15,8 @@ template <class Type> class FstabView;
 template <class Type>
 class FstabMonitor: public BaseMonitor<Type> {
 
-    void *mountArg_[5]; // Needs to exist until destructor is called.
+    // moved to basemonitor for use in other monitors (local monitor):
+    //void *mountArg_[5]; // Needs to exist until destructor is called.
     // Please note, sending signal to monitor avoid race condition if
     // this thread tries to do more than this...
 public:    
@@ -28,8 +29,8 @@ public:
         TRACE("Destructor:~local_monitor_c()\n");
 #ifdef USE_MOUNTTHREAD
         // stop mountThread
-        mountArg_[1] = NULL;
-        while (mountArg_[2]){
+        this->mountArg_[1] = NULL;
+        while (this->mountArg_[2]){
             TRACE("***Waiting for mountThread to exit\n");
             sleep(1);
         }
@@ -46,11 +47,11 @@ public:
         // start mountThread
 #ifdef USE_MOUNTTHREAD
         pthread_t mountThread;
-        mountArg_[0] = (void *)this;
-        mountArg_[1] = GINT_TO_POINTER(TRUE);
-        mountArg_[2] = GINT_TO_POINTER(TRUE);
+        this->mountArg_[0] = (void *)this;
+        this->mountArg_[1] = GINT_TO_POINTER(TRUE);
+        this->mountArg_[2] = GINT_TO_POINTER(TRUE);
 	// mountThreadF will monitor if items are mounted or unmounted
-	gint retval = pthread_create(&mountThread, NULL, FstabMonitor<Type>::mountThreadF, (void *)mountArg_);
+	gint retval = pthread_create(&mountThread, NULL, FstabMonitor<Type>::mountThreadF, (void *)this->mountArg_);
 	if (retval){
 	    ERROR("fm/view/fstab/monitor::thread_create(): %s\n", strerror(retval));
 	    //return retval;
