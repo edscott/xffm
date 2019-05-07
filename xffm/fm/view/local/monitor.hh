@@ -46,8 +46,7 @@ public:
 	return;
 #endif
         TRACE("***Destructor:~local_monitor_c()\n");
-      
-
+        localMonitorList = g_list_remove(localMonitorList, (void *)this->monitor());      
         // stop mountThread
         this->mountArg_[1] = NULL;
         while (this->mountArg_[2]){
@@ -81,8 +80,10 @@ public:
         this->startMonitor(view->treeModel(), path, (void *)monitor_f);
         view->setMonitorObject(this);
         localMonitorList = g_list_append(localMonitorList, (void *)this->monitor());
+        startMountThread();
         // XXX:   Start mountThread...
         //        this here now crashes ...
+        //startMountThread();
         //        reason, swiching treemodels...
         //        Now moved to when load thread has completed treemodel switch.
         //        At local/model.hh
@@ -210,12 +211,10 @@ public:
 	    return FALSE;
 	}
         // use hashkey
-        // FIXME: itemsHash is out of sync because of backing store treemodel
-#if 10        
         gchar *key = Hash<Type>::get_hash_key(path, 10);
 	
         if (!g_hash_table_lookup(this->itemsHash(), key)) {
-  	    DBG("restat_item %s --> %s is not in itemsHash()... Adding\n", key, path);
+  	    TRACE("restat_item %s --> %s is not in itemsHash()... Adding\n", key, path);
             add_new_item(src);
             //this->updateFileCountLabel();
       
@@ -224,7 +223,6 @@ public:
             return FALSE; 
         }
         g_free(key);
-#endif
         gtk_tree_model_foreach (GTK_TREE_MODEL(this->store_), stat_func, (gpointer) path); 
         g_free(path);
         return TRUE;
@@ -254,13 +252,13 @@ private:
         switch (event){
             case G_FILE_MONITOR_EVENT_DELETED:
             case G_FILE_MONITOR_EVENT_MOVED_OUT:
-                DBG("Received DELETED  (%d): \"%s\", \"%s\"\n", event, f, s);
+                TRACE("Received DELETED  (%d): \"%s\", \"%s\"\n", event, f, s);
                 p->remove_item(first);
                 p->updateFileCountLabel();
                 break;
             case G_FILE_MONITOR_EVENT_CREATED:
             case G_FILE_MONITOR_EVENT_MOVED_IN:
-                DBG("Received  CREATED (%d): \"%s\", \"%s\"\n", event, f, s);
+                TRACE("Received  CREATED (%d): \"%s\", \"%s\"\n", event, f, s);
                 p->restat_item(first);
 #if 0
                 /*if (isInModel(p->treeModel(), f)){
@@ -273,14 +271,14 @@ private:
 #endif
                 break;
             case G_FILE_MONITOR_EVENT_CHANGED:
-                DBG("monitor_f(): Received  CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
+                TRACE("monitor_f(): Received  CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
                 p->restat_item(first);
                 // reload icon
                 //FIXME: check if this is now done:
                 //       if image, then reload the pixbuf
                 break;
             case G_FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED:
-                DBG("***Received  ATTRIBUTE_CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
+                TRACE("***Received  ATTRIBUTE_CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
                 p->restat_item(first);
                 break;
             case G_FILE_MONITOR_EVENT_PRE_UNMOUNT:
@@ -291,7 +289,7 @@ private:
                 break;
             case G_FILE_MONITOR_EVENT_MOVED:
             case G_FILE_MONITOR_EVENT_RENAMED:
-                DBG("Received  MOVED (%d): \"%s\", \"%s\"\n", event, f, s);
+                TRACE("Received  MOVED (%d): \"%s\", \"%s\"\n", event, f, s);
                 p->remove_item(first);
                 if (isInModel(p->treeModel(), s))
                 {

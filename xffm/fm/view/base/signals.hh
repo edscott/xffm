@@ -604,13 +604,10 @@ public:
         gtk_tree_model_get (treeModel, &iter, PATH, &path, -1);
 	
         TRACE("base-signals::activate: %s\n", path);
-        //auto lastPath = g_strdup(view->path());
 	if (!view->loadModel(treeModel, tpath, path)){
-            ERROR("base-signals:activate():cannot load %s\n", path);
-            //view->loadModel(lastPath);
+            TRACE("base-signals:activate():cannot load %s\n", path);
         }
 	g_free(path);
-	//g_free(lastPath);
     }
 
     // DnD highlight only:

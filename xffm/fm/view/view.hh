@@ -100,7 +100,6 @@ public:
 	view->disableMonitor();
         // stop current monitor
         if (view->monitorObject_) {
-            localMonitorList = g_list_remove(localMonitorList, (void *)view->monitorObject_->monitor());
             delete (view->monitorObject_);
             view->monitorObject_ = NULL;
         }

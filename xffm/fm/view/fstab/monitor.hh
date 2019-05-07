@@ -129,7 +129,7 @@ public:
     mountThreadF(void *data){
         void **arg = (void **)data;
         auto baseMonitor = (BaseMonitor<Type> *)arg[0];
-        DBG("*** baseMonitor = %p\n", baseMonitor);
+        TRACE("*** baseMonitor = %p\n", baseMonitor);
         g_object_set_data(G_OBJECT(baseMonitor->treeModel()), "baseMonitor", (void *)baseMonitor);
         // get initial md5sum
         gchar *sum = Util<Type>::md5sum("/proc/mounts");

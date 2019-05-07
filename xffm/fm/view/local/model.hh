@@ -51,7 +51,7 @@ public:
     static gint
     loadModel (View<Type> *view, const gchar *path)
     {
-        DBG("*** local/model.hh loadModel()\n");
+        TRACE("*** local/model.hh loadModel()\n");
 	auto treeModel = view->treeModel();
  	/*GtkTreeIter iter;
 	if (gtk_tree_model_get_iter_first (treeModel, &iter)){
@@ -315,9 +315,9 @@ private:
 	gtk_icon_view_set_model(view->iconView(), view->treeModel());
 
 	view->monitorObject()->setMonitorStore(GTK_LIST_STORE(view->treeModel()));
-        DBG("replaceTreeModel() *** localMonitor object= %p\n", view->monitorObject());
-        // XXX FIXME: this here still crashes app.    
-        //((LocalMonitor<Type> *)(view->monitorObject()))->startMountThread();
+        TRACE("replaceTreeModel() *** localMonitor object= %p\n", view->monitorObject());
+        // XXX This timing is correct for mountThread :-)    
+        ((LocalMonitor<Type> *)(view->monitorObject()))->startMountThread();
 	
         return NULL;
 
@@ -377,7 +377,7 @@ public:
         }
         g_list_free(directory_list);
         // replaceTreeModel will fix treeModel used by monitorObject.
-        DBG("threadInsert-->replaceTreeModel() \n");
+        TRACE("threadInsert-->replaceTreeModel() \n");
 	Util<Type>::context_function(replaceTreeModel, (void *)view);
 	// clear out backTreeModel
 	gtk_list_store_clear (GTK_LIST_STORE(view->backTreeModel()));
