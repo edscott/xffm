@@ -39,6 +39,17 @@ public:
     }
 
     static void
+    pasteInto(GtkMenuItem *menuItem, gpointer data) { 
+        // paste into:
+         auto path = (const gchar *)g_object_get_data(G_OBJECT(menuItem), "path");
+        if (!path) {
+            DBG("path not in menuitem...\n");
+            return;
+        }
+        gtk_clipboard_request_text (clipBoard, pasteClip, (void *)path);
+    }
+
+    static void
     paste(GtkMenuItem *menuItem, gpointer data) { 
         // Two options here, paste in local view or paste in highlight directory
         TRACE("paste\n");
@@ -50,8 +61,10 @@ public:
         //      menu item in both cases... But that would use
         //      more memory and CPU unnecessarily...
 	auto view = (View<Type> *)g_object_get_data(G_OBJECT(data), "view");
-        auto path = (const gchar *)g_object_get_data(G_OBJECT(menuItem), "path");
-        if (!path) path = view->path();
+        // paste into:
+        // auto path = (const gchar *)g_object_get_data(G_OBJECT(menuItem), "path");
+        // if (!path) path = view->path();
+        auto path = view->path();
         gtk_clipboard_request_text (clipBoard, pasteClip, (void *)path);
     }
 
@@ -175,7 +188,7 @@ public:
 		}
 		else TRACE("sendMonitorSignals: signaling change for %s.\n", *f);
 		const gchar *path = *f + strlen(URIFILE);
-                DBG("*** monitor %p update: %s\n", list->data, path);
+                TRACE("*** monitor %p update: %s\n", list->data, path);
                 GFile *child = g_file_new_for_path (path); 
                 g_file_monitor_emit_event (monitor,
                         child, NULL, G_FILE_MONITOR_EVENT_CHANGED);

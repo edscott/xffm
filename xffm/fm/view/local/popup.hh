@@ -36,6 +36,7 @@ static const gchar *singleSelectItems[]={
     "Rename",
     "Duplicate",
     "Link",
+    "Paste into",
     NULL,
 };
 
@@ -104,6 +105,7 @@ public:
 	    {N_("Copy"), (void *)ClipBoard<Type>::copy, NULL, NULL},
 	    {N_("Cut"), (void *)ClipBoard<Type>::cut, NULL, NULL},
 	    {N_("Paste"), (void *)ClipBoard<Type>::paste, NULL, NULL},
+	    {N_("Paste into"), (void *)ClipBoard<Type>::pasteInto, NULL, NULL},
 	    {N_("Delete"), (void *)LocalRm<Type>::rm, NULL, NULL},
 	    {N_("Rename"), (void *)rename, NULL, NULL},
 	    {N_("Duplicate"), (void *)duplicate, NULL, NULL}, 
@@ -132,6 +134,7 @@ public:
             "Cut",
             "Copy",
             "Paste",
+            "Paste into",
             "Delete",
 
             "Rename",
@@ -153,6 +156,7 @@ public:
             "edit-cut",
             "edit-copy",
             "edit-paste",
+            "edit-paste-symbolic",
             "edit-delete",
 
 	    "document-revert",
@@ -211,6 +215,8 @@ public:
 	}
         // unsensitivize "Paste" only if valid pasteboard...
         auto w = GTK_WIDGET(g_object_get_data(G_OBJECT(localPopUp), "Paste"));
+        if (w) gtk_widget_set_sensitive(w, ClipBoard<Type>::clipBoardIsValid());
+        w = GTK_WIDGET(g_object_get_data(G_OBJECT(localPopUp), "Paste into"));
         if (w) gtk_widget_set_sensitive(w, ClipBoard<Type>::clipBoardIsValid());
         
         w = GTK_WIDGET(g_object_get_data(G_OBJECT(localPopUp), "Copy"));
@@ -271,18 +277,22 @@ public:
 	    if (g_list_length(view->selectionList()) > 0) gtk_widget_show(w);
             else gtk_widget_hide(w);
 	    gtk_widget_set_sensitive(w, g_list_length(view->selectionList()) > 0);
-	    if (strcmp(*k, "Paste")==0) gtk_widget_set_sensitive(w, FALSE);
+	    //if (strcmp(*k, "Paste")==0) gtk_widget_set_sensitive(w, FALSE);
 	}
 	for (auto k=singleSelectItems; k && *k; k++){
 	    auto w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), *k));
 	    if (g_list_length(view->selectionList()) == 1) gtk_widget_show(w);
             else gtk_widget_hide(w);
 	    gtk_widget_set_sensitive(w, g_list_length(view->selectionList()) == 1);
+            //if (strcmp(*k, "Paste into")==0) gtk_widget_set_sensitive(w, FALSE);
             
 	}
 	if (g_list_length(view->selectionList())==1){
 	    auto w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Extract files from the archive"));
 	    if (strstr(mimetype, "compressed-tar")) gtk_widget_show(w);
+	    else gtk_widget_hide(w);
+	    w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Paste into"));
+	    if (strstr(mimetype, "inode/directory")) gtk_widget_show(w);
 	    else gtk_widget_hide(w);
 	}
 
@@ -366,6 +376,7 @@ private:
             "Unmount the volume associated with this folder",
 	    "Add bookmark",
 	    "Remove bookmark",
+	    "Paste into",
         NULL};
 
         GtkWidget *w;
@@ -387,7 +398,9 @@ private:
         {
             auto w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Paste"));
             if (w) gtk_widget_set_sensitive(w, ClipBoard<Type>::clipBoardIsValid());
-        }
+            w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Paste into"));
+            if (w) gtk_widget_set_sensitive(w, ClipBoard<Type>::clipBoardIsValid());
+       }
 
         //////  Directory options
 
