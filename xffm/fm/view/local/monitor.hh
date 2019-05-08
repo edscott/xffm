@@ -179,7 +179,7 @@ public:
         GdkPixbuf *pixbuf = Pixbuf<Type>::get_pixbuf(iconName,  GTK_ICON_SIZE_DIALOG);
         auto highlight_pixbuf = gdk_pixbuf_copy(pixbuf);
         // Now decorate the pixbuf with emblem (types.h).
-        void *arg[] = {NULL, (void *)highlight_pixbuf, NULL, NULL, (void *)HIGHLIGHT_OPEN_EMBLEM };
+        void *arg[] = {NULL, (void *)highlight_pixbuf, NULL, NULL, (void *)HIGHLIGHT_EMBLEM };
         // Done by main gtk thread:
         Util<Type>::context_function(Icons<Type>::insert_decoration_f, arg);
         

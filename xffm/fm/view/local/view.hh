@@ -173,7 +173,11 @@ public:
 #endif
 		openWith(view, tpath, path);
 	    }
-	} else{
+	} else if ((st.st_mode & S_IFMT) == S_IFBLK) {
+            auto msg = g_strdup_printf(_("The volume '%s' is not mounted."), path);
+            Gtk<Type>::quickHelp(mainWindow, msg, "dialog-error");
+            g_free(msg);
+        } else {
 	    ERROR("local/view.hh::%s NOT a regular file\n", path);
 	}
 	

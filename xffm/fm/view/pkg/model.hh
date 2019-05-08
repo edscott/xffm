@@ -31,7 +31,8 @@ public:
 	//auto icon_name = "emblem-downloads/SE//2.0/225";
 
 	auto icon_name = g_strconcat("emblem-downloads/SE/", PKG_EMBLEM, "/2.0/225", NULL);
-	auto highlight_name = g_strconcat(icon_name, "/NE/folder-open/2.0/225", NULL);
+	auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_EMBLEM, NULL);
+
 
         auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
 	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);

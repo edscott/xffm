@@ -49,8 +49,9 @@ public:
 	// Root
 	auto name = "xffm:root";
 	auto utf_name = util_c::utf_string(".");
-	auto icon_name = "go-up";
+	auto icon_name = GO_UP;
 	auto highlight_name = "go-up/NW/go-up-symbolic/2.0/225";
+
         auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
 	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
 	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
@@ -76,7 +77,8 @@ public:
 	auto name = "/";
 	auto utf_name = util_c::utf_string(_("Root Directory"));
 	auto icon_name = "system-file-manager";
-	auto highlight_name = "system-file-manager/NE/system-file-manager/2.0/225";
+	auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_EMBLEM, NULL);
+
         auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
 	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
 	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
@@ -93,6 +95,7 @@ public:
 
 		-1);
 	g_free(utf_name);
+	g_free(highlight_name);
     }
 
     static void
@@ -102,7 +105,7 @@ public:
 	auto name = g_get_home_dir();
 	auto utf_name = util_c::utf_string(_("Home Directory"));
 	auto icon_name = "go-home";
-	auto highlight_name = "go-home/NE/folder-open/2.0/225";
+	auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_EMBLEM, NULL);
         auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
 	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
 	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
@@ -119,6 +122,7 @@ public:
 		TOOLTIP_TEXT,g_get_home_dir(),
 		-1);
 	g_free(utf_name);
+	g_free(highlight_name);
     }
 
     static void
@@ -131,7 +135,8 @@ public:
 	auto trash = g_build_filename(g_get_home_dir(), ".local/share/Trash", NULL);
 	if (g_file_test(trash, G_FILE_TEST_EXISTS))icon_name = "user-trash-full";
 	    
-	auto highlight_name = g_strconcat(icon_name, "/NE/folder-open/2.0/225", NULL);
+	auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_EMBLEM, NULL);
+
         auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
 	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
 	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
@@ -158,7 +163,8 @@ public:
 	auto name = "xffm:fstab";
 	auto utf_name = util_c::utf_string(_("Disk Image Mounter"));
 	auto icon_name = "media-eject/SE/drive-harddisk/2.0/225";
-	auto highlight_name = g_strconcat(icon_name, "/NE/folder-open/2.0/225",NULL);
+	auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_EMBLEM, NULL);
+
         auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
 	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
 	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG); 
@@ -201,7 +207,8 @@ public:
                 auto utf_name = util_c::utf_string(basename);
              
                 const gchar *icon_name = "emblem-documents/SE/bookmark-new/2.0/220";
-                const gchar *highlight_name = "emblem-documents/SE/bookmark-new/2.0/220/NE/folder-open/2.0/220";
+	        auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_EMBLEM, NULL);
+
                 auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
                 GdkPixbuf *normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
                 GdkPixbuf *highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,-48);   
@@ -219,6 +226,7 @@ public:
                         -1);
                 g_free(basename);
                 g_free(utf_name);
+	        g_free(highlight_name);
              }
         }
         g_strfreev(bookMarks);

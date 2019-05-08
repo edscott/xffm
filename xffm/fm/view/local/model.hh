@@ -516,10 +516,10 @@ private:
         if (xd_p->st) {
             auto type = xd_p->st->st_mode & S_IFMT;
             if (type == S_IFDIR) {
-                highlight_pixbuf = Preview<Type>::loadFromThumbnails("document-open", xd_p->st, 48, 48);
+                highlight_pixbuf = Preview<Type>::loadFromThumbnails(up?HIGHLIGHT_UP:"document-open", xd_p->st, 48, 48);
                 if (!highlight_pixbuf) {
-                    auto thumbnail = Hash<Type>::get_thumbnail_path ("document-open", GTK_ICON_SIZE_DIALOG);
-                    highlight_pixbuf = Pixbuf<Type>::get_pixbuf("document-open", GTK_ICON_SIZE_DIALOG);
+                    auto thumbnail = Hash<Type>::get_thumbnail_path (up?HIGHLIGHT_UP:"document-open", GTK_ICON_SIZE_DIALOG);
+                    highlight_pixbuf = Pixbuf<Type>::get_pixbuf(up?HIGHLIGHT_UP:"document-open", GTK_ICON_SIZE_DIALOG);
                     Pixbuf<Type>::pixbuf_save(highlight_pixbuf, thumbnail);
                 }
             }
@@ -538,11 +538,12 @@ private:
         //Highlight emblem macros are defined in types.h
         if (!highlight_pixbuf) {
             highlight_pixbuf = gdk_pixbuf_copy(normal_pixbuf);
-            const gchar *emblem;
-            if (strcmp(xd_p->d_name, "..")==0) emblem = HIGHLIGHT_UP_EMBLEM;
-            else {
-                emblem = HIGHLIGHT_EXEC_EMBLEM;
-/*
+        
+            const gchar *emblem= HIGHLIGHT_EMBLEM;
+#if 0
+            // This no longer works, since items will not be stat'd by default
+            //   (speed load is more important)
+     
                 if (xd_p->st && (
                     (xd_p->st->st_mode & S_IXUSR) ||
                     (xd_p->st->st_mode & S_IXGRP) ||
@@ -552,13 +553,13 @@ private:
                 } else {
                     emblem = HIGHLIGHT_OPEN_EMBLEM;
                 }
-                */
-            }
+#endif
             // Now decorate the pixbuf with emblem (types.h).
             void *arg[] = {NULL, (void *)highlight_pixbuf, NULL, NULL, (void *)emblem };
             // Done by main gtk thread:
             Util<Type>::context_function(Icons<Type>::insert_decoration_f, arg);
-	}
+        }
+	
 	if (xd_p->st){TRACE("xd_p->st is populated: %s\n", utf_name);}
 	guint flags=(xd_p->d_type & 0xff);
         guint size = (xd_p->st)?xd_p->st->st_size:0;

@@ -113,7 +113,8 @@ public:
 
 	auto utf_name = util_c::utf_string(_("Disks"));
 	auto icon_name = "drive-multidisk";
-	auto highlight_name = "drive-multidisk/SE/document-open/2.0/225";
+	auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_EMBLEM, NULL);
+
         auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
 	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
 	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);  
@@ -392,7 +393,7 @@ public:
 
         auto icon_name = (mounted)?"drive-harddisk/NW/greenball/3.0/180":
             "drive-harddisk/NW/grayball/3.0/180";
-        auto highlight_name = "drive-harddisk/NW/edit-select-symbolic/2.0/225";
+        auto highlight_name = "drive-harddisk/NW/blueball/3.0/225";
         auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
         auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
         auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   

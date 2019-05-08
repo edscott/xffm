@@ -79,9 +79,13 @@ template <class Type> class BaseView;
 template <class Type> class Notebook;
 }
 
-#define HIGHLIGHT_OPEN_EMBLEM "NE/document-open-symbolic/3.0/220"
-#define HIGHLIGHT_EXEC_EMBLEM "NE/run/2.5/220"
-#define HIGHLIGHT_UP_EMBLEM "NW/go-up-symbolic/2.0/225"
+//#define HIGHLIGHT_OPEN_EMBLEM "NE/document-open-symbolic/3.0/220"
+//#define HIGHLIGHT_EXEC_EMBLEM "NE/run/2.5/220"
+
+#define HIGHLIGHT_EMBLEM "NE/document-open/2.5/220"
+#define GO_UP "go-up"
+#define HIGHLIGHT_UP "go-up/NW/go-up-symbolic/2.0/225"
+//#define HIGHLIGHT_UP_EMBLEM "NW/go-up-symbolic/2.0/225"
 
 #define DRAG_CALLBACK(X)  G_CALLBACK((void (*)(GtkWidget *,GdkDragContext *,gpointer)) X)
 
