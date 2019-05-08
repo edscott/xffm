@@ -36,6 +36,7 @@ template <class Type> class LocalPopUp;
 template <class Type> class RootPopUp;
 template <class Type> class FstabPopUp;
 
+static gboolean ignoreRelease=FALSE;
 static gboolean dragOn_=FALSE;
 static gboolean rubberBand_=FALSE;
 static gint buttonPressX=-1;
@@ -131,6 +132,10 @@ public:
                    GdkEventButton  *event,
                    gpointer   data)
     {
+        if (ignoreRelease){
+            ignoreRelease=FALSE;
+            return FALSE;
+        }
         //GdkEventButton *event_button = (GdkEventButton *)event;
 	auto view = (View<Type> *)data;
         if (!dragOn_){
@@ -309,6 +314,11 @@ public:
                                event->x, event->y, &tpath,
                               NULL, // &column,
                                &cellX, &cellY)){
+                if (!LocalView<Type>::isSelectable(view->treeModel(),tpath)){
+                    ignoreRelease=TRUE;
+		    gtk_tree_path_free(tpath);
+                    return FALSE;
+                }
 		GtkTreeIter iter;
 		auto selection = gtk_tree_view_get_selection (view->treeView());
 		gtk_tree_model_get_iter(view->treeModel(), &iter, tpath);
@@ -327,6 +337,11 @@ public:
 				       event->x,
 				       event->y,
 				       &tpath, NULL)){
+                if (!LocalView<Type>::isSelectable(view->treeModel(),tpath)){
+                    ignoreRelease=TRUE;
+		    gtk_tree_path_free(tpath);
+                    return FALSE;
+                }
 		if (!gtk_icon_view_path_is_selected (view->iconView(), tpath)) {
 		    // If item is not selected, unselect all and select item.
 		    // Skip unselect all in CONTROL_MODE

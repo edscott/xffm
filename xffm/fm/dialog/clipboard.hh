@@ -175,7 +175,7 @@ public:
 		}
 		else TRACE("sendMonitorSignals: signaling change for %s.\n", *f);
 		const gchar *path = *f + strlen(URIFILE);
-                TRACE("monitor %p update: %s\n", list->data, path);
+                DBG("*** monitor %p update: %s\n", list->data, path);
                 GFile *child = g_file_new_for_path (path); 
                 g_file_monitor_emit_event (monitor,
                         child, NULL, G_FILE_MONITOR_EVENT_CHANGED);

@@ -40,14 +40,14 @@ public:
         gtk_icon_view_set_selection_mode (iconView,GTK_SELECTION_MULTIPLE);      
         gint items = 
 	    LocalModel<Type>::loadModel(view,path);
-
+/*
         // monitor for less than 500 items...
         //if (items <= 500) 
         {
             p = new(LocalMonitor<Type>)(view->treeModel(), view);
             p->start_monitor(view, path);
-            view->setMonitorObject(p);
         } 
+        */
 	return p;
     }
 

@@ -45,8 +45,7 @@ public:
 #ifndef USE_LOCAL_MONITOR
 	return;
 #endif
-        TRACE("***Destructor:~local_monitor_c()\n");
-        localMonitorList = g_list_remove(localMonitorList, (void *)this->monitor());      
+        TRACE("***Destructor:~local_monitor_c(): %p\n", this->monitor());
         // stop mountThread
         this->mountArg_[1] = NULL;
         while (this->mountArg_[2]){
@@ -73,12 +72,12 @@ public:
 
     void
     start_monitor(View<Type> *view, const gchar *path){
-    //start_monitor(GtkTreeModel *treeModel, const gchar *path){
 #ifndef USE_LOCAL_MONITOR
 	DBG("*** Local monitor at %s s disabled.\n", path);
 #else 
         this->startMonitor(view->treeModel(), path, (void *)monitor_f);
         view->setMonitorObject(this);
+	TRACE("*** Local monitor %p starting  %s.\n", this->monitor(), path);
         localMonitorList = g_list_append(localMonitorList, (void *)this->monitor());
         startMountThread();
         // XXX:   Start mountThread...
@@ -213,9 +212,11 @@ public:
         // use hashkey
         gchar *key = Hash<Type>::get_hash_key(path, 10);
 	
-        if (!g_hash_table_lookup(this->itemsHash(), key)) {
-  	    TRACE("restat_item %s --> %s is not in itemsHash()... Adding\n", key, path);
-            add_new_item(src);
+        if (!g_hash_table_lookup(this->itemsHash(), key) 
+                && g_file_test(path, G_FILE_TEST_EXISTS))
+        {
+  	    TRACE("***restat_item %s --> %s is not in itemsHash()... Add?\n", key, path);
+            //add_new_item(src);
             //this->updateFileCountLabel();
       
             g_free(path);
@@ -259,8 +260,8 @@ private:
             case G_FILE_MONITOR_EVENT_CREATED:
             case G_FILE_MONITOR_EVENT_MOVED_IN:
                 TRACE("Received  CREATED (%d): \"%s\", \"%s\"\n", event, f, s);
-                p->restat_item(first);
-#if 0
+                //p->restat_item(first);
+#if 10
                 /*if (isInModel(p->treeModel(), f)){
                     p->restat_item(first);
                 } else*/ 

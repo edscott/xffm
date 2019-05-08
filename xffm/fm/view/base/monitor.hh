@@ -2,6 +2,7 @@
 # define XF_BASEMONITOR__HH
 namespace xf
 {
+static GList *localMonitorList = NULL;
 template <class Type>
 class BaseMonitor {
     gboolean active_;
@@ -55,12 +56,13 @@ public:
         
     }
     ~BaseMonitor(void){
-        TRACE("Destructor:~local_monitor_c()\n");
+        TRACE("***Destructor:~base monitor_c()\n");
         //g_cancellable_cancel (cancellable);
         //g_object_unref(cancellable);
         if (monitor_) {
             stop_monitor();
-            g_object_unref(monitor_);
+            if (G_IS_OBJECT(monitor_)) g_object_unref(monitor_);
+            monitor_ = NULL;
         }
         if (gfile_) g_object_unref(gfile_);
         g_hash_table_destroy(itemsHash_);
@@ -129,12 +131,15 @@ public:
             TRACE("no monitor to stop\n");
             return;
         }
+        TRACE("*** stop monitor %p\n", monitor_);
+        localMonitorList = g_list_remove(localMonitorList, (void *)monitor_);      
         if (gfile_) {
 	    gchar *p = g_file_get_path(gfile_);
 	    TRACE("*** stop_monitor at: %s\n", p);
 	    g_free(p);
         }
 	g_file_monitor_cancel(monitor_);
+        monitor_ = 0;   
 	while (gtk_events_pending())gtk_main_iteration();  
 	// hash table remains alive until mountThread finishes.
     }

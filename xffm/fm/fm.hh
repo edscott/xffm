@@ -3,7 +3,6 @@
 
 
 namespace xf {
-    static GList *localMonitorList = NULL;
     static GtkMenu *fstabPopUp=NULL;
     static GtkMenu *fstabItemPopUp=NULL;
     static GtkMenu *localPopUp=NULL;

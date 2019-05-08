@@ -73,7 +73,7 @@ public:
 	auto arg = (void **)calloc(3, sizeof(void *));
 	arg[0] = (void *)directory_list;
 	arg[1] = (void *)view;
-	arg[2] = (void *)path;
+	arg[2] = (void *)g_strdup(path);
 	pthread_t thread;
 	pthread_create(&thread, NULL, threadInsert, (void *)arg);
 	// detach
@@ -139,7 +139,10 @@ public:
         while ((d = readdir(directory))  != NULL){
             TRACE( "%p  %s\n", d, d->d_name);
             if(strcmp (d->d_name, ".") == 0) continue;
-            if (strcmp(path,"/")==0 && strcmp (d->d_name, "..") == 0) continue;
+            if (strcmp(path,"/")==0 && strcmp (d->d_name, "..") == 0) {
+                TRACE("skipp: %s : %s\n", path, d->d_name);
+                continue;
+            }
 	    // stat first 104 items.
             xd_t *xd_p = get_xd_p(path, d, FALSE);
             //xd_t *xd_p = get_xd_p(path, d, (count++ < 104));
@@ -314,10 +317,13 @@ private:
 	gtk_tree_view_set_model(view->treeView(), view->treeModel());
 	gtk_icon_view_set_model(view->iconView(), view->treeModel());
 
-	view->monitorObject()->setMonitorStore(GTK_LIST_STORE(view->treeModel()));
+        auto p = new(LocalMonitor<Type>)(view->treeModel(), view);
+        p->start_monitor(view, view->path());
+	// deprecated view->monitorObject()->setMonitorStore(GTK_LIST_STORE(view->treeModel()));
         TRACE("replaceTreeModel() *** localMonitor object= %p\n", view->monitorObject());
-        // XXX This timing is correct for mountThread :-)    
-        ((LocalMonitor<Type> *)(view->monitorObject()))->startMountThread();
+        // XXX This timing is correct for mountThread :-)  
+
+        //((LocalMonitor<Type> *)(view->monitorObject()))->startMountThread();
 	
         return NULL;
 
@@ -367,7 +373,7 @@ public:
 	auto arg = (void **)data;
 	auto directory_list = (GList *)arg[0];
 	auto view = (View<Type> *)arg[1];
-	auto path = (const gchar *)arg[2];
+	auto path = (gchar *)arg[2];
 	insert_list_into_model(directory_list, view, path);
 	g_free(arg);
         GList *p = directory_list;
@@ -376,16 +382,15 @@ public:
             free_xd_p(xd_p);
         }
         g_list_free(directory_list);
+        g_free(path);
         // replaceTreeModel will fix treeModel used by monitorObject.
         TRACE("threadInsert-->replaceTreeModel() \n");
 	Util<Type>::context_function(replaceTreeModel, (void *)view);
 	// clear out backTreeModel
 	gtk_list_store_clear (GTK_LIST_STORE(view->backTreeModel()));
 
-        // Now you can fire up mountThread, not any sooner.
-
 	Util<Type>::context_function(finishLoad, (void *)view);
-
+        
 	return NULL;
 
     }
@@ -395,8 +400,12 @@ public:
 	//auto list_store = GTK_LIST_STORE(view->treeModel());
 	auto list_store = GTK_LIST_STORE(view->backTreeModel());
 	if(strcmp(path, "/")==0){
+            TRACE("adding root item to \"%s\"\n", path);
 	    RootView<Type>::addXffmItem(GTK_TREE_MODEL(list_store));
-	}
+	} else {
+            TRACE("not adding root item to \"%s\"\n", path);
+        }
+
         GList *directory_list = (GList *)data;
         GList *l = directory_list;
         gint dir_count = g_list_length(directory_list);
@@ -470,6 +479,7 @@ public:
         //      monitor must reload when showHidden changes...
         gboolean showHidden = (Settings<Type>::getSettingInteger("LocalView", "ShowHidden") > 0);
         if (!showHidden && xd_p->d_name[0] == '.'  && strcmp("..", xd_p->d_name)){
+            TRACE("add local item returns on %s\n", xd_p->d_name);
             return;
         }
         gboolean showBackups = (Settings<Type>::getSettingInteger("LocalView", "ShowBackups") > 0);

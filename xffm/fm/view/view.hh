@@ -99,10 +99,10 @@ public:
         view->setPath(path);
 	view->disableMonitor();
         // stop current monitor
-        if (view->monitorObject_) {
+       /* if (view->monitorObject_) {
             delete (view->monitorObject_);
             view->monitorObject_ = NULL;
-        }
+        }*/
 
         switch (view->viewType()){
             case (ROOTVIEW_TYPE):
@@ -110,6 +110,12 @@ public:
                 view->page()->updateStatusLabel(NULL);
                 break;
             case (LOCALVIEW_TYPE):
+                // stop current monitor
+                if (view->monitorObject_) {
+                    delete ((LocalMonitor<Type> *)view->monitorObject_);
+                    view->monitorObject_ = NULL;
+                }
+
 		gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
 		while (gtk_events_pending()) gtk_main_iteration();
 		if (strcmp(path, "xffm:local")==0) {
@@ -121,7 +127,11 @@ public:
 		}
                 break;
             case (FSTAB_TYPE):
-                //view->monitor_ = 
+                // stop current monitor
+                if (view->monitorObject_) {
+                    delete ((FstabMonitor<Type> *)view->monitorObject_);
+                    view->monitorObject_ = NULL;
+                }                //view->monitor_ = 
                     FstabView<Type>::loadModel(view);
 	        view->page()->updateStatusLabel(NULL);
                 break;
@@ -174,8 +184,8 @@ public:
                 }
 		return LocalView<Type>::item_activated(this, treeModel, tpath, path);
 	    }
-	} else {
-	    DBG("fm/view.hh: loadModel: file:%s does not exist\n", path);
+	} else if (strcmp(path,"xffm:root")){
+	    DBG("fm/view.hh: loadModel: %s does not exist\n", path);
             
 	}
 	return this->loadModel(path);
