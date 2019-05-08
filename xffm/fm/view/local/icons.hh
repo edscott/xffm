@@ -241,8 +241,6 @@ private:
 
     static gchar *
     statEmblem( const gchar *path, struct stat *st){
-        ERROR("statEmblem is deprecated. Only on d_type.\n");
-#if 0
         if (!st){
             TRACE("statEmblem: no stat for st==NULL\n");
             return NULL;
@@ -277,7 +275,9 @@ private:
         // The rest is only for regular files (links too?)
         if ((st->st_mode & S_IFMT) != S_IFREG) return NULL;
 
-
+#if 0
+        ///// deprecated...
+        //
 	// all access:
 	if (O_ALL(st->st_mode) || O_RW(st->st_mode)){
 		return g_strdup("/C/face-surprise-symbolic/2.5/180/NW/application-x-executable-symbolic/3.0/180");
@@ -360,10 +360,10 @@ private:
 	    }
 	}
 
-	//stat for all emblems? limit to d_types
-	//if (!emblem && st_p) {
-	//    emblem = statEmblem(path, st_p);
-	//}
+	if (!emblem && st_p) {
+            // for directories...
+	    emblem = statEmblem(path, st_p);
+	}
 	if (!emblem) emblem = g_strdup("");
 
         TRACE("getEmblem: %s --> %s\n", path, emblem);
