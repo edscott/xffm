@@ -241,6 +241,8 @@ private:
 
     static gchar *
     statEmblem( const gchar *path, struct stat *st){
+        ERROR("statEmblem is deprecated. Only emblem on d_type.\n");
+#if 0
         if (!st){
             TRACE("statEmblem: no stat for st==NULL\n");
             return NULL;
@@ -303,6 +305,7 @@ private:
 	    // no access: (must be have stat info to get this emblem)
 	    return g_strdup("/NW/dialog-error/3.0/180");
 	}
+#endif
         return NULL;
     }
 
@@ -358,9 +361,9 @@ private:
 	}
 
 	//stat for all emblems? limit to d_types
-	if (!emblem && st_p) {
-	    emblem = statEmblem(path, st_p);
-	}
+	//if (!emblem && st_p) {
+	//    emblem = statEmblem(path, st_p);
+	//}
 	if (!emblem) emblem = g_strdup("");
 
         TRACE("getEmblem: %s --> %s\n", path, emblem);
