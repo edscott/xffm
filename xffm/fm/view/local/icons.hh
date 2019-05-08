@@ -241,7 +241,7 @@ private:
 
     static gchar *
     statEmblem( const gchar *path, struct stat *st){
-        ERROR("statEmblem is deprecated. Only emblem on d_type.\n");
+        ERROR("statEmblem is deprecated. Only on d_type.\n");
 #if 0
         if (!st){
             TRACE("statEmblem: no stat for st==NULL\n");
