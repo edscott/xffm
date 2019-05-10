@@ -38,44 +38,8 @@ $sourceDir;
 %focus;
 $printWarnings=0;
 $printDbg=1;
+@namespace;
 
-
-&main;
-exit 1;
-sub fullNamespace {
-    my @ns = @_;
-    my $fullns="";
-    foreach $ns (@ns) {
-        if ($fullns eq ""){ 
-            $fullns = $ns;
-            $fullns =~ s/\s+//; #hack
-        }
-        else {$fullns .= "::$ns"}
-    }
-    return $fullns;
-}
-sub compactTemplate{
-    my ($ttype) = @_;
-    chop $ttype;
-    $ttype =~ s/^\s+//;
-    $ttype =~ s/^template//g;
-    $ttype =~ s/<//g;
-    $ttype =~ s/>//g;
-    $ttype =~ s/class//g;
-    if ($ttype =~ m/{/g){$ttype =~ s/{//g;}
-    $ttype =~ s/\s+//;
-    return $ttype;
-}
-
-sub compactNamespace{
-    my ($namespace) = @_;
-    $namespace =~ s/^\s+//;
-    $namespace =~ s/^namespace//g;
-    chop $namespace;
-    if ($namespace =~ m/{/g){$namespace =~ s/{//g;}
-    $namespace =~ s/\s+//;
-    return $namespace;
-}
      
 sub trace{
     if (not $printDbg){return}
@@ -101,6 +65,108 @@ sub warning{
     print "<!-- Warning: $msg -->\n"
 }
 
+
+&main;
+exit 1;
+sub fullNamespace {
+    my @ns = @_;
+    my $fullns="";
+    foreach $ns (@ns) {
+        if ($fullns eq ""){ 
+            $fullns = $ns;
+        }
+        else {$fullns .= "::$ns"}
+        $fullns =~ s/\s+//; #hack
+    }
+    return $fullns;
+}
+sub compactTemplate{
+    my ($ttype) = @_;
+    chop $ttype;
+    $ttype =~ s/^\s+//;
+    $ttype =~ s/^template//g;
+    $ttype =~ s/<//g;
+    $ttype =~ s/>//g;
+    $ttype =~ s/class//g;
+    if ($ttype =~ m/{/g){$ttype =~ s/{//g;}
+    $ttype =~ s/\s+//;
+    return $ttype;
+}
+
+sub compactNamespace{
+    my ($namespace) = @_;
+    $namespace =~ s/^\s+//;
+    $namespace =~ s/^namespace//g;
+    chop $namespace;
+    if ($namespace =~ m/{/g){$namespace =~ s/{//g;}
+    $namespace =~ s/\s+//;
+    return $namespace;
+}
+
+sub getRawLine {
+# Returns logical line.
+    my $nextLine;
+    $_ = <INPUT>;
+    $referenceLineCount++;
+
+#remove initial whitespace
+    $rawline =~ s/^\s+//;
+
+    trace("getRawLine, line: $referenceLineCount\n");
+
+# zap embedded C comments:
+    if (/\/\*.*\*\//){
+        trace "zap embedded comment: $_";
+        s/\/\*.*\*\///g;
+        my $result = $_;
+        chop $result;
+        trace "zap result: $result";
+    }
+#   If we have a C comment initiator, continue until terminator.
+    my $startComment = 0;
+    if (/\/\*.*/){
+        $startComment = 1;
+        $rawline =~ s/\/\*.*//;
+        while ($startComment == 1){
+            $nextLine = &getRawLine;
+            if (/.*\*\//){
+                $nextLine =~ s/.*\*\///;
+                $startComment = 0;
+                $rawLine .= $nextLine;
+            }
+        }
+    }
+
+# zap full line C++ comments:
+    if (/^\/\/.*/){
+        my $r = $_;
+        chop $r;
+        trace "zapped comment: $r";
+        $_ = "\n";
+    }
+
+# zap trailing C++ comments:
+    if (/\/\/.*$/){
+        my ($a, $b) = split /\/\//, $_, 2;
+        chop $b;
+        trace "zapped trailing comment: $b";
+        $_ = "$a\n";
+    }
+
+    my $rawline=$_;
+    trace("$rawline");
+# join escaped \n lines:
+    if (/\\\n$/) {
+        $rawline =~ s/\\\n$/ /;
+        $nextLine = &getRawLine;
+        $rawline .= $nextLine;
+        trace "join this with previous line: $nextLine";
+        trace "join result: $rawline";
+
+    }
+    return $rawline;
+}
+
 sub main {
     $debug = 0;
     my $start = &processArguments;
@@ -110,10 +176,11 @@ sub main {
     my @reversed = reverse @files;
     @files = @reversed;
 
-
-    &getStructTags($ARGV[0]);
-#    foreach $f (@files){&getStructTags($f)}
+####################
+#    &getStructTags($ARGV[0]); exit 1;
+    foreach $f (@files){&getStructTags($f)}
     exit(1);
+####################
 
     foreach $f (@files){&getTypeTags($f)}
     foreach $f (@files){&getTypeInherits($f)}
@@ -133,21 +200,20 @@ sub getStructTags{
     my $fullns;
     my $level=-1;
     my $nslevel=-1;
-    my @namespace;
     push(@namespace, "");
     my ($file) = @_;
-    dbg("getStructTags($file)");
+    trace("getStructTags($file)");
     open INPUT, "$file" or die "Unable to open $file";
     $comment = 0; # global for multilines
     $referenceLineCount=0; # global for multilines
     my $templateParameter = "Type"; #default
-    while (<INPUT>){
-        $referenceLineCount++;
-        s/^\s+//;
+    my $template;
+
+    while (eof(INPUT) != 1) {
+#       Get next logical line.
+        $_ = &getRawLine;
+#       Skip compiler directives
         if (/^#/ or /^\/\//){next}
-        if (/\/\*/) {$comment = 1}
-        if (/\*\//) {$comment = 0}
-        if ($comment){next}
    
         if (/^template/){
 #get template line
@@ -155,7 +221,13 @@ sub getStructTags{
         }
         if (not /^struct/){
             if (/^template/){
-                my $templateParameter = &compactTemplate($_); #override
+                chop;
+                s/^\s+//;
+                s/\s+$//;
+                $template = $_;
+                next;
+            } else {
+                $template = "";
             }
             if (/^namespace/){
                 my $namespace = &compactNamespace($_);
@@ -184,7 +256,7 @@ sub getStructTags{
         my $line = &getFullStruct;
 #if template, use template 
         trace "line[$referenceLineCount] = $line\n";
-        &parseStruct($fullns, $line, $templateParameter);
+        &parseStruct($file, $line, $template);
     }
     close INPUT;
     return;
@@ -192,36 +264,27 @@ sub getStructTags{
 }
 
 sub parseStruct {
-    my ($fullns, $line, $templateParameter) = @_;
-#if template, use template 
-    if ($line =~ m/<$templateParameter/g and $line =~ m/>/g){
-        dbg "$fullns ----template structure at line $referenceLineCount\n$line\n";
-    } else {
-        dbg "$fullns ----structure at line $referenceLineCount\n$line\n";
-    }
+    my ($file, $line, $template) = @_;
+    my $fullns = &fullNamespace(@namespace);
+    dbg "$fullns ----$template structure at\n$file:$referenceLineCount\n$line\n";
 }
 
-
+sub getStructLevel {
+    my ($line) = @_;
+    my $plus = () = $line =~ /{/g;
+    my $minus = () = $line =~ /}/g;
+    return $plus - $minus;
+}
 
 sub getFullStruct{
-    my $a,$b;
-    my $line;
-    if (/\/\//) {($line, $b) = split /\/\//, $_, 2}
-    else {$line = $_}
-    $line =~ s/\n//g;
-    $line =~ s/^\s+//;
-loop:
-    if (not $line =~ m/};/g){
-        my $nextLine = <INPUT>;
-        $referenceLineCount++;
-        $nextLine =~ s/\n//g;
-        $nextLine =~ s/^\s+//;
-        if ($nextLine =~ m/\/\//g){
-            ($a,$b) = split /\/\//, $nextLine, 2;
-            $nextLine = $a;
-        }
+    my $line = $_;
+    my $start = 0;
+    if (not $line =~ m/{/g){ $start=1}
+    while ($start or &getStructLevel($line)){
+        $start=0;
+        $nextLine = &getRawLine;
+        $line =~ s/\n/ /g;
         $line = $line . $nextLine;
-        goto loop;
     }
     return $line;
 }
@@ -560,6 +623,7 @@ sub getFileTypeTags {
     $referenceLineCount=0;
     while (<INPUT>){
         $referenceLineCount++;
+        $_ = &getRawLine;
         s/^\s+//;
         if (/^#/ or /^\/\//){next}
         if (/\/\*/) {$comment = 1}
@@ -609,6 +673,7 @@ sub getTypeInherits{
     $referenceLineCount=0;
     while (<INPUT>){
         $referenceLineCount++;
+        $_ = &getRawLine;
         s/^\s+//;
         if (/^#/ or /^\/\//){next}
         if (/\/\*/) {$comment = 1}
@@ -711,6 +776,7 @@ sub getFileProperties{
     $referenceLineCount=0;
     while (<INPUT>){
         $referenceLineCount++;
+        $_ = &getRawLine;
         s/^\s+//;
         if (/^#/ or /^\/\//){next}
         if (/\/\*/) {$comment = 1}
@@ -766,6 +832,7 @@ sub getPropertyValues {
     $referenceLineCount=0;
     while (<INPUT>){
         $referenceLineCount++;
+        $_ = &getRawLine;
         s/^\s+//;
         if (/^#/ or /^\/\//){next}
         if (/\/\*/) {$comment = 1}
