@@ -1,4 +1,16 @@
 #!/usr/bin/perl
+# 1. Process arguments
+#    a. problem typetag
+#    b. include dir
+#    c. template dir
+# 2. Get include files in order
+# 3. Get typetags
+# 4. Get typeinherits
+#
+# 5. Get properties
+# 6. Get propertyvalues
+# 7. Mark focus
+# 8. Print XML
 use File::Basename;
 sub usage {
     print "Usage: $0 <target file> \n     [--templates=<systemwide template include directory>]\n     [--include=<local include directory>]\n     [--problemTypeTag=<DuMuX problem TypeTag>]\n";
@@ -13,15 +25,18 @@ if (not $ARGV[0]){
 
 
 # Global variables:
+$startFile;
 $includePath;
 $templatePath;
 $problemTypeTag;
-$startFile;
+
+$sourceDir;
+
+
 $referenceLineCount;
 $count;
 $debug=0;
 $verbose=0;
-$sourceDir;
 @files;
 %files;
 
@@ -167,14 +182,45 @@ sub getRawLine {
     return $rawline;
 }
 
-sub main {
-    $debug = 0;
-    my $start = &processArguments;
+sub resolveMissingArguments{
+    my($start) = @_;
+    
+    if ($problemTypeTag){
+        info("ProblemTypeTag manually specified to $problemTypeTag");
+    } else {
+        info("Will try to determine ProblemTypeTag from source files");
+        &getProblemTypeTag($start);
+    }
+    if ($includePath){
+        info("Additional include directory at $includePath");
+    } else {
+        warning("Additional include directory not specified");
+    }
+    if ($templatePath){
+        info("Installed templates at $templatePath");
+    } else {
+        warning("Installed template location not specified");
+        info("Will try to determine location from $start");
+        $templatePath = &getInstallationPath($start);
+    }
+
+}
+
+sub getIncludeFileArray {
+    my($start) = @_;
     $sourceDir = dirname($start)."/";
     my $currentDir = `pwd`; chop $currentDir;
     &readFiles($start, "--");
     my @reversed = reverse @files;
-    @files = @reversed;
+    return @reversed;
+}
+####################################################################################
+####################################################################################
+sub main {
+    $debug = 0;
+    my $start = &processArguments;
+    resolveMissingArguments($start);
+    @files = getIncludeFileArray($start);
 
 ####################
 #    &getStructTags($ARGV[0]); exit 1;
@@ -195,6 +241,8 @@ sub main {
     }    
     &printXML($start);
 }
+####################################################################################
+####################################################################################
 
 sub getStructTags{
     my $fullns;
@@ -955,24 +1003,6 @@ sub processArguments {
         &usage
     }
 
-    if ($includePath){
-        info("Additional include directory at $includePath");
-    } else {
-        warning("Additional include directory not specified");
-    }
-    if ($templatePath){
-        info("Installed templates at $templatePath");
-    } else {
-        warning("Installed template location not specified");
-        info("Will try to determine location from $startFile");
-        $templatePath = &getInstallationPath($startFile);
-    }
-    if ($problemTypeTag){
-        info("ProblemTypeTag manually specified to $problemTypeTag");
-    } else {
-        info("Will try to determine ProblemTypeTag from source files");
-        &getProblemTypeTag($startFile);
-    }
     return $startFile;
 
 }
