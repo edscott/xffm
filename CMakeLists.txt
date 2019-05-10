@@ -5,7 +5,7 @@ set (CMAKE_CXX_STANDARD 11)
 set(PREFIX_BIN /usr/local/bin)
 # Version info
 set(xffm_VERSION_MAJOR 0)
-set(xffm_VERSION_MINOR 9)
+set(xffm_VERSION_MINOR 91)
 set(CMAKE_CXX_FLAGS "-ggdb")
 set(CMAKE_EXE_LINKER_FLAGS "-L/usr/lib -L/usr/local/lib")
 set(ENV{PKG_CONFIG_PATH}  "/usr/local/lib/pkgconfig")
