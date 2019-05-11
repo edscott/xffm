@@ -28,14 +28,7 @@ use File::Basename;
 
 # Global variables:
 # 1.
-$includePath;
-$templatePath;
-$problemTypeTag;
 # 2.
-$sourceDir;
-@files;
-%pathHash;
-%includes;
 # 3.
 @typeTags;
 %includes;
@@ -100,7 +93,20 @@ sub warning{
 }
 
 ######################## 1. Process arguments
+#
+#  Called with processArguments() 
+#  Creates:
+#    $includePath (if provided with --include=)
+#    $templatePath  (if provided with --templates= or maybe found)
+#    $problemTypeTag; (if provided with --problemTypeTag= or maybe found)
+#
+#    
+#  Returns:
+#    Absolute path of argument provided.
 ####################################################################################
+$includePath;
+$templatePath;
+$problemTypeTag;
 
 sub processArguments {
     my $start="";
@@ -216,16 +222,29 @@ sub resolveMissingArguments{
 
 }
 
-######################## 2. Get include files in order
-####################################################################################
+######################## 2. Get include files in order at @files
+#
+# Called with getIncludeFileArray($file) ($file in absolute path).
+# Creates:
+#   @files: Array or ordered include chain (absolute paths).
+#   %{$file}: Hash of arrays, hashed by $file (absolute path).
+#   %includes: Hash of include lines, hashed by $file (absolute path).
+#
+###################################################################################
+# Recursive read of include chain:
+#   getIncludeFileArray
+#     readFiles  <----------|
+#       readFile            |
+#	  processNextFile   |
+#           readFiles ------|
+#   createFilesArray
+@files;
+%includes;
 
 sub readFiles {
     my ($path, $parentPath) = @_;
-#   path array
-    push(@files, $path);
-#   array of path hashes (contain included files)
+#   array of path hashes (each will contain the included files for $parentPath)
     push(@{ $files{$parentPath} }, $path);
-#dbg "adding $path to hash($parentPath)";
     &readFile($path);    
 }
 
@@ -237,12 +256,14 @@ sub processNextFile {
     if (-e $realNextFile ){ #it exists...
 	if ($includes{$realNextFile}) {return 1}
 	$includes{$realNextFile} = $text;
+#push(@files, $path);
 	readFiles($realNextFile,$path);
 	return 1;
     }
     return 0;
 }
 
+# Recursive read of single file
 sub readFile {
     my ($path) = @_;
     trace "parsing $path...";
@@ -251,6 +272,7 @@ sub readFile {
     my  $a, $b, $c, $d;
     my $comment = 0;
     my $text;
+    my $textType;
     while (<$stream>){
         s/^\s+//;
         if (/^\/\//){next}
@@ -261,21 +283,23 @@ sub readFile {
         if (not /#include/) {next}
         if (/"/ or (/</ and />/)) {
             if (/</ and />/)  {
-                $text = "absolute";
                 ($a, $c) = split /</, $_, 2;
                 trace "a c = $a $c";
                 ($b, $a) = split />/, $c, 2;
                 trace "b a  = $b $a";
                 $b =~ s/^\s+//;
+                $textType = "absolute";
+                $text = "<$b>";
             } else {
-                $text = "relative";
 #               relative includes...
                 ($a, $b, $c) = split /"/, $_, 3;
                 trace "relative includes... a b c = $a $b $c";
                 $b=~ s/^\s+//;
+                $textType = "relative";
+                $text = "\"$b\"";
             }
 #           1. if in current or relative directory, use it.
-	    if ($text eq  "relative"){          
+	    if ($textType eq  "relative"){          
 		my $dirname = dirname($path);	    
 		my $nextFile = $dirname . "/" . $b;
 		if (processNextFile($nextFile, $path, $text)){next}
@@ -308,13 +332,57 @@ sub readFile {
     close $stream;
 }
 
+# Create ordered file array from array of hashes.
+sub createFilesArray {     
+    my ($start, $level) = @_;
+   
+    my @array = @{ $files{$start} };
+    my $file;
+    my $src = basename($start);
+    if ($level == 0){push(@files, $start)} # top item
+    foreach $file (@array){
+	push(@files, $file);
+        createFilesArray($file, $level+1);
+    }
+    return;
+}
+
+sub printFileOut {     
+    my ($out, $start, $level) = @_;
+   
+    my @array = @{ $files{$start} };
+    my $file;
+    my $i;
+    my $src = basename($start);
+    if ($level == 0){# top item
+	print $out  "$src\n";
+    } 
+    foreach $file (@array){
+	my $tgt = $includes{$file};
+	for ($i=0; $i<$level+1; $i++) {print $out  " "} 
+	$tgt =~ s/"/&quot;/g;
+	$tgt =~ s/</&lt;/g;
+	$tgt =~ s/>/&gt;/g;
+	print $out "$tgt\n";
+        printFileOut($out, $file, $level+1);
+	for ($i=0; $i<$level+1; $i++) {print $out  " "} 
+        print $out "</files>\n";
+
+    }
+    if ($level == 0){# top item
+	print $out  "</files>\n";
+    } 
+    return;
+}
 
 sub getIncludeFileArray {
     my($start) = @_;
+    my $level=0;
     readFiles($start, "--");
+    printFileOut(STDOUT, $start, $level);
+    createFilesArray($start);
+#    foreach $f (@files){dbg "file: $f"}
 }
-
-
 ######################## 3. Get typetags
 ####################################################################################
 
@@ -607,7 +675,7 @@ sub printXML {
 <structure source=\"$ARGV[0]\" templates=\"$templatePath\" include=\"$includePath\"/>
 EOF
     if ($debug) {print "printFilesXML $start\n"}
-    &printFile($start, 0);
+    printFileOut(OUTPUT, $start, 0);
     if ($debug) {print "printPropertiesXML\n"}
     &printPropertiesXML;
     if ($debug) {print "printTypeTagsXML\n"}
@@ -615,47 +683,6 @@ EOF
     print OUTPUT "</structure-info>\n";
     close OUTPUT;
 }
-
-sub printFile {     
-    my ($start, $level) = @_;
-
-    my @keys;
-    my $file;
-    my @array;
-    $i;
-    for ($i=0; $i<$level; $i++) {print OUTPUT " "}
-
-    $oFile = $start;
-    $oFile =~ s/$templatePath\///;
-    if ($includePath) {$oFile =~ s/$includePath\///;}
-
-    my $realpath = `realpath $start`;
-    chop $realpath;
-#        $oFile = "&lt;$oFile&gt;";
-    if ($includes{$start} == 1 ){
-        $oFile = "&lt;$oFile&gt;";
-    } elsif ($includes{$start} ==2 ){
-#        $oFile = "&quot;$oFile&quot;";
-    }
-    if ($sourceDir) {
-        $oFile =~ s/$sourceDir//g;
-    }
-    print OUTPUT "<files name=\"$oFile\" realpath=\"$realpath\">\n";
-
-    my @array = @{ $files{$start} };
-#        print "$level: hash($start) --> $file\n";
-
-    foreach $file (@array){
-#        print "$level: hash($start) --> $file\n";
-
-        &printFile($file, $level+1);
-    }
-    for ($i=0; $i<$level; $i++) {print OUTPUT " "} 
-    print OUTPUT "</files>\n";
-}
-
-
-
 
 
 $j=0;
@@ -1007,7 +1034,6 @@ sub main {
     dbg "1 ok";
 # 2.
     getIncludeFileArray($start);
-    foreach $f (@files){dbg "file: $f"}
     dbg "2 ok";
     exit 1;
 
