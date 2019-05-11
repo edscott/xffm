@@ -2,7 +2,7 @@ echo '************************ xffm.org ************************************'
 
 AC_PREREQ([2.63])
 
-AC_INIT([xffm+],[0.9],[http://sourceforge.net/projects/xffm],[xffm+],[http://xffm.org])
+AC_INIT([xffm+],[0.91],[http://sourceforge.net/projects/xffm],[xffm+],[http://xffm.org])
 AC_CONFIG_MACRO_DIR([m4])
 AC_COPYRIGHT([Copyright (c) 2000-2019 Edscott Wilson Garcia. <edscott@users.sf.net>])
 AM_INIT_AUTOMAKE([1.11 -Wall no-dist-gzip dist-bzip2])

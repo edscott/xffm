@@ -5,7 +5,7 @@
 
 #define STRUCTURE_CC
 #define URIFILE "file://"
-#define PERL_PARSER "parse10.pl";
+#define PERL_PARSER "parse11.pl";
 #include <glib.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>

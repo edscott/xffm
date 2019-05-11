@@ -1,47 +1,54 @@
 #!/usr/bin/perl
+use File::Basename;
+#/home/edscott/GIT/xffm+/structure/parse11.pl --include=../../include lswfC.cc --templates=/home/edscott/GIT/dune2.6/dumux/
+#/home/edscott/GIT/xffm+/structure/parse11.pl lswf-chem12.cc --include=../../../include --templates=/home/edscott/GIT/dune/dumux/
+
 # 1. Process arguments
-#    a. problem typetag
-#    b. include dir
-#    c. template dir
+#    a. $startFile
+#    b. $includePath
+#    c. $templatePath
+#    d. $problemTypeTag
+
 # 2. Get include files in order
+#    a. $sourceDir
+#    b. @files
+
 # 3. Get typetags
+#    a. from macros
+#    b. from structures
+
 # 4. Get typeinherits
 #
 # 5. Get properties
 # 6. Get propertyvalues
 # 7. Mark focus
 # 8. Print XML
-use File::Basename;
-sub usage {
-    print "Usage: $0 <target file> \n     [--templates=<systemwide template include directory>]\n     [--include=<local include directory>]\n     [--problemTypeTag=<DuMuX problem TypeTag>]\n";
-    exit 1;
-}
-
-if (not $ARGV[0]){
-    print "Please specify target file.\n";
-    &usage
-}
 
 
 
 # Global variables:
-$startFile;
+# 1.
 $includePath;
 $templatePath;
 $problemTypeTag;
-
+# 2.
 $sourceDir;
-
-
+@files;
+%pathHash;
+%includes;
+# 3.
+@typeTags;
+%includes;
 $referenceLineCount;
+
+
+
 $count;
 $debug=0;
 $verbose=0;
 @files;
 %files;
 
-%includes;
-@typeTags;
 %typeTagFiles;
 %typeTagLineNumber;
 %properties;
@@ -51,13 +58,25 @@ $verbose=0;
 %propertyLineNumber;
 %inherits;
 %focus;
-$printWarnings=0;
-$printDbg=1;
 @namespace;
 
-     
+
+
+######################## 0. General purpose subroutines
+####################################################################################
+# Global variables:
+$printWarnings=1;
+$printDbg=1;
+$printTrace=0;
+$printInfo=1;
+
+sub usage {
+    print "Usage: $0 <target file> \n     [--templates=<systemwide template include directory>]\n     [--include=<local include directory>]\n     [--problemTypeTag=<DuMuX problem TypeTag>]\n";
+    exit 1;
+}
+
 sub trace{
-    if (not $printDbg){return}
+    if (not $printTrace){return}
     my ($msg) = @_;
 #    print "TRACE> *** $msg \n"
 }
@@ -69,20 +88,388 @@ sub dbg{
 }
 
 sub info{
-    if (not $printWarnings){return}
+    if (not $printInfo){return}
     my ($msg) = @_;
-    print "<!-- Info: $msg -->\n"
+    print "Info> $msg\n"
 }
 
 sub warning{
     if (not $printWarnings){return}
     my ($msg) = @_;
-    print "<!-- Warning: $msg -->\n"
+    print "Warn> $msg\n"
+}
+
+######################## 1. Process arguments
+####################################################################################
+
+sub processArguments {
+    my $start="";
+    my $realpath="";
+    foreach $arg (@ARGV){
+        if ($arg =~ m/^--include/g){
+            ($a,$b)=split /=/,$arg,2;
+            if (not -d $b){
+                print "$b is not a directory\n";
+                usage
+            } else {
+                $includePath = $b;
+                trace "local includes: $includePath\n";
+            }
+            next
+        }
+        elsif ($arg =~ m/^--templates/g){
+            ($a,$b)=split /=/,$arg,2;
+            if (not -d $b){
+                print "$b is not a directory\n";
+                usage
+            } else {
+                $templatePath = $b
+            }
+            next
+        }
+        elsif ($arg =~ m/^--problemTypeTag/g){
+            ($a,$problemTypeTag)=split /=/,$arg,2;
+            next
+        }
+        elsif (-e $arg) {
+            $start = $arg;
+	    $realpath = `realpath $start`;
+	    chop $realpath;
+            next
+        } 
+        print "Invalid option: $arg\n";
+        usage
+    }
+    if ($start eq ""){usage}
+    return $realpath;
+}
+
+# Find problem TypeTag from current file...
+sub getProblemTypeTag {
+    undef $problemTypeTag;
+    my($inFile) = @_;
+    my $line=1;
+    my $a, $b, $c;
+    open IN, "$inFile" or die "getProblemTypeTag:: Cannot open $inFile for processing.\n";
+    while (<IN>){
+        s/^\s+//;
+        if (/^\/\//){next}
+        # 2.12 method
+        if (/typedef/ and /TTAG/ and /TypeTag/){
+            ($a,$b) = split /\(/, $_, 2;
+            ($problemTypeTag,$c) = split /\)/, $b, 2;
+            info "2.12: Problem TypeTag = \"$problemTypeTag\" from file $inFile line $line-->\n";
+            break;
+        }
+	# 3.0 method
+        if (/using/ and /TypeTag/ and /TTAG/){
+            ($a,$b) = split /TTAG\(/, $_, 2;
+            ($problemTypeTag,$c) = split /\)/, $b, 2;
+            info "3.0: Problem TypeTag = \"$problemTypeTag\" from file $inFile line $line-->\n";
+            break;
+        }
+        $line++;
+    }
+    close IN;
+    if (not $problemTypeTag){
+        info "Dumux::Problem TypeTag not found.";
+    }
+}
+
+# Find Dumux installation path from current file...
+sub getInstallationPath {
+    my ($infile) = @_;
+    my $currentDir = dirname($infile);
+    my $realpath = &realpath($currentDir);
+    my $test = $realpath . "/dumux";
+    if (-d $test) {
+        info "Assuming installation templates at \"$test\"";
+        return $test
+    }
+    if ($realpath eq "/") {
+        info "Dumux installation templates not found";
+        return $realpath
+    }
+    return getInstallationPath($realpath);
+}
+
+sub resolveMissingArguments{
+    my($start) = @_;
+    if ($problemTypeTag){
+        info("ProblemTypeTag manually specified to $problemTypeTag");
+    } else {
+        warning("Will try to determine ProblemTypeTag from $start");
+        getProblemTypeTag($start);
+    }
+    if ($includePath){
+        info("Additional include directory at $includePath");
+    } else {
+        warning("Additional include directory not specified");
+    }
+    if ($templatePath){
+        info("Installed templates at $templatePath");
+    } else {
+        warning("Installed template location not specified");
+        warning("Will try to determine location from $start");
+        $templatePath = getInstallationPath($start);
+    }
+
+}
+
+######################## 2. Get include files in order
+####################################################################################
+
+sub readFiles {
+    my ($path, $parentPath) = @_;
+#   path array
+    push(@files, $path);
+#   array of path hashes (contain included files)
+    push(@{ $files{$parentPath} }, $path);
+#dbg "adding $path to hash($parentPath)";
+    &readFile($path);    
+}
+
+sub processNextFile {
+    my ($nextFile, $path, $text) = @_;
+    my $realNextFile = `realpath -q $nextFile`;
+    if ($realNextFile =~ m/\n$/) {chop $realNextFile}
+    trace ("realNextFile = \"$realNextFile\"");
+    if (-e $realNextFile ){ #it exists...
+	if ($includes{$realNextFile}) {return 1}
+	$includes{$realNextFile} = $text;
+	readFiles($realNextFile,$path);
+	return 1;
+    }
+    return 0;
+}
+
+sub readFile {
+    my ($path) = @_;
+    trace "parsing $path...";
+    my $stream;
+    open $stream, $path or die "cannot open \"$path\"\n";
+    my  $a, $b, $c, $d;
+    my $comment = 0;
+    my $text;
+    while (<$stream>){
+        s/^\s+//;
+        if (/^\/\//){next}
+        if (/\/\*/) {$comment = 1}
+        if (/\*\//) {$comment = 0}
+        if ($comment){next}
+        if (not /^#/) {next}
+        if (not /#include/) {next}
+        if (/"/ or (/</ and />/)) {
+            if (/</ and />/)  {
+                $text = "absolute";
+                ($a, $c) = split /</, $_, 2;
+                trace "a c = $a $c";
+                ($b, $a) = split />/, $c, 2;
+                trace "b a  = $b $a";
+                $b =~ s/^\s+//;
+            } else {
+                $text = "relative";
+#               relative includes...
+                ($a, $b, $c) = split /"/, $_, 3;
+                trace "relative includes... a b c = $a $b $c";
+                $b=~ s/^\s+//;
+            }
+#           1. if in current or relative directory, use it.
+	    if ($text eq  "relative"){          
+		my $dirname = dirname($path);	    
+		my $nextFile = $dirname . "/" . $b;
+		if (processNextFile($nextFile, $path, $text)){next}
+	    }
+#           2. try include path (user templates)
+            if ($includePath) {
+                $nextFile = $includePath . "/" . $b;
+		my $realNextFile = `realpath -q $nextFile`;
+		if (processNextFile($nextFile, $path, $text)){next}
+            }
+#
+#           3. try templates path (installation templates)
+            if ($templatePath) {
+                $nextFile = $templatePath . "/" . $b;
+		my $realNextFile = `realpath -q $nextFile`;
+		if (processNextFile($nextFile, $path, $text)){next}
+            }
+
+#           4. skip system includes
+            $nextFile = "/usr/include/" . $b;  
+            if (-e $nextFile) {
+                print "<!-- skipping header $nextFile -->\n";
+                next
+            }  
+            if ($b =~ m/^dune/g) {next} # ignore dune 
+            if (not $b =~ m/\.h/g) {next} # ignore stdc++
+            warning "omitting <$b> referenced in $path";          
+        }
+    }
+    close $stream;
 }
 
 
-&main;
-exit 1;
+sub getIncludeFileArray {
+    my($start) = @_;
+    readFiles($start, "--");
+}
+
+
+######################## 3. Get typetags
+####################################################################################
+
+sub getRawLine {
+# Returns logical line.
+    my $nextLine;
+    my $rawline = <INPUT>;
+    $referenceLineCount++;
+
+#remove initial whitespace
+    $rawline =~ s/^\s+//;
+
+    trace("getRawLine, line: $referenceLineCount\n");
+
+# zap embedded C comments:
+    if ($rawline =~ m/\/\*.*\*\//){
+        trace "zap embedded comment: $_";
+        $rawline =~ s/\/\*.*\*\///g;
+        trace "zap result: $rawline";
+    }
+#   If we have a C comment initiator, continue until terminator.
+    my $startComment = 0;
+    if ($rawline =~ /\/\*.*/){
+        $startComment = 1;
+        $rawline =~ s/\/\*.*//;
+        while ($startComment == 1){
+            $nextLine = getRawLine;
+            if ($nextLine =~ m/.*\*\//){
+                $nextLine =~ s/.*\*\///;
+                $startComment = 0;
+                $rawLine .= $nextLine;
+            }
+        }
+    }
+
+# zap full line C++ comments:
+    if ($rawline =~ m/^\/\/.*/){
+        trace "zapped comment: $rawline";
+        $rawline = "\n";
+    }
+
+# zap trailing C++ comments:
+    if ($rawline =~ m/\/\/.*$/){
+        my ($a, $b) = split /\/\//, $rawline, 2;
+        trace "zapped trailing comment: $b";
+        $rawline = "$a\n";
+    }
+
+# join escaped \n lines:
+    if ($rawline =~ m/\\\n$/) {
+        $rawline =~ s/\\\n$/ /;
+        $nextLine = &getRawLine;
+        $rawline .= $nextLine;
+        trace "join this with previous line: $nextLine";
+        trace "join result: $rawline";
+
+    }
+    trace("$rawline");
+    return $rawline;
+}
+
+# get nonescaped multiline command (; token) 
+# FIXME: combine with getRawLine()
+sub getFullLine{
+    my $a,$b;
+    my $line;
+    if (/\/\//) {($line, $b) = split /\/\//, $_, 2}
+    else {$line = $_}
+    $line =~ s/\n/ /g;
+    $line =~ s/^\s+//;
+loop:
+    if (not $line =~ m/;/g){
+        my $nextLine = <INPUT>;
+        $referenceLineCount++;
+        $nextLine =~ s/\n/ /g;
+        $nextLine =~ s/^\s+//;
+        if ($nextLine =~ m/\/\//g){
+            ($a,$b) = split /\/\//, $nextLine, 2;
+            $nextLine = $a;
+        }
+        $line = $line . $nextLine;
+        goto loop;
+    }
+    return $line;
+}
+
+sub getTagName {
+    my $a, $b, $c;
+    my($string) = @_;
+    ($a, $b) = split /\(/,$string,2;
+    if ($b =~ m/,/g){($c, $a) = split /,/,$b,2}
+    else {($c, $a) = split /\)/, $b,2}
+    $c =~ s/^\s+//;
+    return $c;
+}
+
+
+sub getFileMacroTags {
+    my ($file) = @_;
+    open INPUT, "$file" or die "Unable to open $file";
+    my $typeTag;
+    my $found = 0;
+    my $lineNumber=0;
+    my @fileTypeTags;
+    $i=0;
+    $referenceLineCount=0;
+    while (<INPUT>){
+        $referenceLineCount++;
+        $_ = getRawLine;
+	dbg "rawline: $_";
+        if (/^#/){next}
+        if (/NEW_TYPE_TAG/){
+            my $line = getFullLine; 
+            $typeTag = getTagName($line);
+#print "typetag=$typeTag\n";
+            if ($typeTagFiles{$typeTag}) {
+                warning("TypeTag \"$typeTag\"redefined at file $file:$referenceLineCount");
+#                exit(1);
+            } else {
+                $typeTagFiles{$typeTag} = $file; 
+                $typeTagLineNumber{$typeTag} = $referenceLineCount; 
+            }
+#            $fileTypeTags[$i++] = $typeTag;
+            push @fileTypeTags, $typeTag;
+            $found = 1;
+        }
+    }
+    close INPUT;
+    if (not $found) {
+        return undef
+    }
+    return @fileTypeTags;
+}
+
+
+sub getMacroTags {
+    my ($file) = @_;
+    dbg "getMacroTags $file";
+    $count++;
+    my $path = "$file";
+
+    my @macroTags = getFileMacroTags($path);
+    my $tag;
+    if (@macroTags){ 
+        foreach $tag (@macroTags){
+            if ($tag eq "") {next}
+            dbg "Found 2.12 TypeTag: $tag ($file)";
+            push @typeTags, $tag
+        }
+    }
+    return;
+}
+
+
+
 sub fullNamespace {
     my @ns = @_;
     my $fullns="";
@@ -118,132 +505,6 @@ sub compactNamespace{
     return $namespace;
 }
 
-sub getRawLine {
-# Returns logical line.
-    my $nextLine;
-    $_ = <INPUT>;
-    $referenceLineCount++;
-
-#remove initial whitespace
-    $rawline =~ s/^\s+//;
-
-    trace("getRawLine, line: $referenceLineCount\n");
-
-# zap embedded C comments:
-    if (/\/\*.*\*\//){
-        trace "zap embedded comment: $_";
-        s/\/\*.*\*\///g;
-        my $result = $_;
-        chop $result;
-        trace "zap result: $result";
-    }
-#   If we have a C comment initiator, continue until terminator.
-    my $startComment = 0;
-    if (/\/\*.*/){
-        $startComment = 1;
-        $rawline =~ s/\/\*.*//;
-        while ($startComment == 1){
-            $nextLine = &getRawLine;
-            if (/.*\*\//){
-                $nextLine =~ s/.*\*\///;
-                $startComment = 0;
-                $rawLine .= $nextLine;
-            }
-        }
-    }
-
-# zap full line C++ comments:
-    if (/^\/\/.*/){
-        my $r = $_;
-        chop $r;
-        trace "zapped comment: $r";
-        $_ = "\n";
-    }
-
-# zap trailing C++ comments:
-    if (/\/\/.*$/){
-        my ($a, $b) = split /\/\//, $_, 2;
-        chop $b;
-        trace "zapped trailing comment: $b";
-        $_ = "$a\n";
-    }
-
-    my $rawline=$_;
-    trace("$rawline");
-# join escaped \n lines:
-    if (/\\\n$/) {
-        $rawline =~ s/\\\n$/ /;
-        $nextLine = &getRawLine;
-        $rawline .= $nextLine;
-        trace "join this with previous line: $nextLine";
-        trace "join result: $rawline";
-
-    }
-    return $rawline;
-}
-
-sub resolveMissingArguments{
-    my($start) = @_;
-    
-    if ($problemTypeTag){
-        info("ProblemTypeTag manually specified to $problemTypeTag");
-    } else {
-        info("Will try to determine ProblemTypeTag from source files");
-        &getProblemTypeTag($start);
-    }
-    if ($includePath){
-        info("Additional include directory at $includePath");
-    } else {
-        warning("Additional include directory not specified");
-    }
-    if ($templatePath){
-        info("Installed templates at $templatePath");
-    } else {
-        warning("Installed template location not specified");
-        info("Will try to determine location from $start");
-        $templatePath = &getInstallationPath($start);
-    }
-
-}
-
-sub getIncludeFileArray {
-    my($start) = @_;
-    $sourceDir = dirname($start)."/";
-    my $currentDir = `pwd`; chop $currentDir;
-    &readFiles($start, "--");
-    my @reversed = reverse @files;
-    return @reversed;
-}
-####################################################################################
-####################################################################################
-sub main {
-    $debug = 0;
-    my $start = &processArguments;
-    resolveMissingArguments($start);
-    @files = getIncludeFileArray($start);
-
-####################
-#    &getStructTags($ARGV[0]); exit 1;
-    foreach $f (@files){&getStructTags($f)}
-    exit(1);
-####################
-
-    foreach $f (@files){&getTypeTags($f)}
-    foreach $f (@files){&getTypeInherits($f)}
-    if ($debug){&printInherits}
-    $count = 0;
-    foreach $f (@files){&getProperties($f)}
-    if ($debug){&printProperties}
-    if ($debug){print("getPropertyValues:\n")}
-    foreach $f (@files){&getPropertyValues($f)}
-    if (defined $problemTypeTag){
-        &markFocus($problemTypeTag, 1);
-    }    
-    &printXML($start);
-}
-####################################################################################
-####################################################################################
-
 sub getStructTags{
     my $fullns;
     my $level=-1;
@@ -252,7 +513,6 @@ sub getStructTags{
     my ($file) = @_;
     trace("getStructTags($file)");
     open INPUT, "$file" or die "Unable to open $file";
-    $comment = 0; # global for multilines
     $referenceLineCount=0; # global for multilines
     my $templateParameter = "Type"; #default
     my $template;
@@ -396,101 +656,6 @@ sub printFile {
 
 
 
-sub readFiles {
-    my ($path, $parentPath) = @_;
-    if ($pathHash{$path}){
-#                print "*** $path already included...\n";
-    } else {
-#               print "*** $parentPath --> $path\n";
-        $pathHash{$path} = 1;
-#   path hash
-        push(@files, $path);
-#   array of path hashes (contain included files)
-        push(@{ $files{$parentPath} }, $path);
-        if ($debug){print "adding $path to hash($parentPath)\n"}
-        &readFile($path);    
-    } 
-}
-
-sub readFile {
-    my ($path) = @_;
-#print "parsing $path (at $dirname)...\n";
-    
-    my $stream;
-    $pwd =`pwd`; chop $pwd;
-    open $stream, $path or die "cannot open $path (pwd=$pwd)\n";
-    my  $a, $b, $c, $d;
-    $comment = 0;
-    my $text;
-    while (<$stream>){
-        s/^\s+//;
-        if (/^\/\//){next}
-        if (/\/\*/) {$comment = 1}
-        if (/\*\//) {$comment = 0}
-        if ($comment){next}
-        if (not /^#/) {next}
-        if (not /#include/) {next}
-        if (/"/ or (/</ and />/)) {
-            if (/</ and />/)  {
-                $text = 1;
-                ($a, $c) = split /</, $_, 2;
-#                print "a c = $a $c\n";
-                ($b, $a) = split />/, $c, 2;
-#                print "b a  = $b $a\n";
-                $b =~ s/^\s+//;
-
-#                next
-            } else {
-                $text = 2;
-#               relative includes...
-                ($a, $b, $c) = split /"/, $_, 3;
-#                print "relative includes... a b c = $a $b $c\n";
-                $b=~ s/^\s+//;
-            }
-            $dirname = dirname($path);
-            $nextFile = $dirname . "/" . $b;
-            if ($includes{$nextFile}) {return}
-            $includes{$nextFile} = $text;
-#           1. if in current or relative directory, use it.
-	    if (-e $nextFile and /"/) {
-                &readFiles($nextFile, $path);          
-                next;
-	    }
-#           2. try include path (user templates)
-            if ($includePath) {
-                $nextFile = $includePath . "/" . $b;
-	        if (-e $nextFile) {
-            $includes{$nextFile} = $text;
-                    &readFiles($nextFile, $path);          
-                    next;
-                }
-            }
-#           3. try templates path (installation templates)
-            if ($templatePath) {
-                $nextFile = $templatePath . "/" . $b;
-	        if (-e $nextFile) {
-            $includes{$nextFile} = $text;
-                    &readFiles($nextFile, $path);          
-                    next;
-                }
-            }
-#           4. skip system includes
-            $nextFile = "/usr/include/" . $b;  
-            if (-e $nextFile) {
-                print "<!-- skipping header $nextFile -->\n";
-                next;
-            }  
-            if ($b =~ m/^dune/g) {next} # ignore dune 
-            if (not $b =~ m/\.h/g) {next} # ignore stdc++
-            warning "omitting <$b> referenced in $path";          
-            
-        }
-       
-
-    }
-    close $stream;
-}
-
 
 
 $j=0;
@@ -498,46 +663,6 @@ $j=0;
 
 #&main;
 
-sub getProblemTypeTag {
-    undef $problemTypeTag;
-    my($inFile) = @_;
-    my $line=1;
-    open IN, "$inFile" or die "getProblemTypeTag:: Cannot open $inFile for processing.\n";
-    while (<IN>){
-        s/^\s+//;
-        if (/^\/\//){next}
-        if (/typedef/ and /TTAG/ and /TypeTag/){
-            ($a,$b) = split /\(/, $_, 2;
-            ($problemTypeTag,$c) = split /\)/, $b, 2;
-            print "<!-- Result: Problem TypeTag = \"$problemTypeTag\" from file $inFile line $line-->\n";
-#chop; print "<!-- $_ -->\n";
-            break;
-        }
-        $line++;
-    }
-    close IN;
-    if (not $problemTypeTag){
-        warning "Dumux::Problem TypeTag not found-->";
-    }
-
-}
-
-# Find Dumux installation path from current file...
-sub getInstallationPath {
-    my ($infile) = @_;
-    my $currentDir = dirname($infile);
-    my $realpath = &realpath($currentDir);
-    my $test = $realpath . "/dumux";
-    if (-d $test) {
-        info "Result: Assuming installation templates at \"$test\"";
-        return $test
-    }
-    if ($realpath eq "/") {
-        warning "Dumux installation templates not found";
-        return $realpath
-    }
-    return &getInstallationPath($realpath);
-}
 
 sub markFocus {
     my ($focus, $focusLevel) = @_;
@@ -643,73 +768,6 @@ sub printPropertiesXML{
 
 }
 #########   Types  ##########
-sub getTypeTags {
-    my ($file) = @_;
-    $count++;
-    my $path = "$file";
-
-    my @fileTypeTags = &getFileTypeTags($path);
-    if (@fileTypeTags){ 
-        foreach $typetag (@fileTypeTags){
-            if ($typetag eq "") {next}
-            if ($debug) {print("Found TypeTag: $typetag ($file)\n")}
-            push @typeTags, $typetag;
-        }
-    }
-    return;
-}
-
-sub getFileTypeTags {
-    my ($file) = @_;
-    open INPUT, "$file" or die "Unable to open $file";
-    my $typeTag;
-    my $found = 0;
-    my $lineNumber=0;
-    $comment = 0;
-    my @fileTypeTags;
-    $i=0;
-    $referenceLineCount=0;
-    while (<INPUT>){
-        $referenceLineCount++;
-        $_ = &getRawLine;
-        s/^\s+//;
-        if (/^#/ or /^\/\//){next}
-        if (/\/\*/) {$comment = 1}
-        if (/\*\//) {$comment = 0}
-        if ($comment){next}
-        if (/NEW_TYPE_TAG/){
-            my $line = &getFullLine;
-            $typeTag = &getName($line);
-#print "typetag=$typeTag\n";
-            if ($typeTagFiles{$typeTag}) {
-                warning("TypeTag \"$typeTag\"redefined at file $file:$referenceLineCount");
-#                exit(1);
-            } else {
-                $typeTagFiles{$typeTag} = $file; 
-                $typeTagLineNumber{$typeTag} = $referenceLineCount; 
-            }
-#            $fileTypeTags[$i++] = $typeTag;
-            push @fileTypeTags, $typeTag;
-            $found = 1;
-        }
-    }
-    close INPUT;
-    if (not $found) {
-        return undef
-    }
-    return @fileTypeTags;
-}
-
-sub getName {
-    my $a, $b, $c;
-    my($string) = @_;
-    ($a, $b) = split /\(/,$string,2;
-    if ($b =~ m/,/g){($c, $a) = split /,/,$b,2}
-    else {($c, $a) = split /\)/, $b,2}
-    $c =~ s/^\s+//;
-    return $c;
-}
-
 #########   Inherits  ##########
 sub getTypeInherits{
     my($file) = @_;
@@ -717,7 +775,7 @@ sub getTypeInherits{
 
 
     open INPUT, "$path" or die "Unable to open $path";
-    $comment = 0;
+    my $comment = 0;
     $referenceLineCount=0;
     while (<INPUT>){
         $referenceLineCount++;
@@ -729,7 +787,7 @@ sub getTypeInherits{
         if ($comment){next}
         if (/NEW_TYPE_TAG/){
             my $line = &getFullLine;
-            my $typeTag = &getName($line);
+            my $typeTag = getTagName($line);
             if (/INHERITS_FROM/){
                 my @d = &getInherits($typeTag, $line);
                 foreach $a (@d){
@@ -820,7 +878,7 @@ sub getFileProperties{
     open INPUT, "$path" or die "Unable to open $path";
     my @properties;
     my $i=0;
-    $comment = 0;
+    my $comment = 0;
     $referenceLineCount=0;
     while (<INPUT>){
         $referenceLineCount++;
@@ -832,7 +890,7 @@ sub getFileProperties{
         if ($comment){next}
         if (/NEW_PROP_TAG/){
             my $line = &getFullLine;
-            $prop = &getName($line);
+            $prop = getTagName($line);
             $properties[$i++] = $prop;
             $propertyLineNumber{$prop}=$referenceLineCount;
         }
@@ -888,7 +946,7 @@ sub getPropertyValues {
         if ($comment){next}
         if (/SET_TYPE_PROP/ or /SET_INT_PROP/ or /SET_BOOL_PROP/ or /SET_SCALAR_PROP/){
             my $line = &getFullLine;
-            my $typetag = &getName($line);
+            my $typetag = getTagName($line);
             my $property = &getProperty($line);
             my $propValue = &getValue($line);
 
@@ -938,73 +996,55 @@ sub getValue {
     return $a[2];
 }
 
-###############   General stuff ##########
-sub getFullLine{
-    my $a,$b;
-    my $line;
-    if (/\/\//) {($line, $b) = split /\/\//, $_, 2}
-    else {$line = $_}
-    $line =~ s/\n//g;
-    $line =~ s/^\s+//;
-loop:
-    if (not $line =~ m/;/g){
-        my $nextLine = <INPUT>;
-        $referenceLineCount++;
-        $nextLine =~ s/\n//g;
-        $nextLine =~ s/^\s+//;
-        if ($nextLine =~ m/\/\//g){
-            ($a,$b) = split /\/\//, $nextLine, 2;
-            $nextLine = $a;
-        }
-        $line = $line . $nextLine;
-        goto loop;
-    }
-    return $line;
+
+####################################################################################
+####################################################################################
+sub main {
+    $debug = 0;
+# 1.
+    my $start = processArguments;
+    resolveMissingArguments($start);
+    dbg "1 ok";
+# 2.
+    getIncludeFileArray($start);
+    foreach $f (@files){dbg "file: $f"}
+    dbg "2 ok";
+    exit 1;
+
+# 3. 
+#   2.12
+    foreach $f (@files){getMacroTags($f)}
+    foreach $f (@typeTags) {dbg "tag: $f"}
+    
+    dbg "3 ok";
+    exit 1;
+#   3.0
+####################
+#    &getStructTags($ARGV[0]); exit 1;
+    foreach $f (@files){&getStructTags($f)}
+    exit(1);
+####################
+
+    foreach $f (@files){&getTypeInherits($f)}
+    if ($debug){&printInherits}
+    $count = 0;
+    foreach $f (@files){&getProperties($f)}
+    if ($debug){&printProperties}
+    if ($debug){print("getPropertyValues:\n")}
+    foreach $f (@files){&getPropertyValues($f)}
+    if (defined $problemTypeTag){
+        &markFocus($problemTypeTag, 1);
+    }    
+    &printXML($start);
 }
+####################################################################################
+####################################################################################
 
-sub processArguments {
-# process arguments...
-    foreach $arg (@ARGV){
-        if ($arg =~ m/^--include/g){
-            ($a,$b)=split /=/,$arg,2;
-            if (not -d $b){
-                print "$b is not a directory\n";
-                &usage
-            } else {
-                $includePath = $b;
-#            print "local includes: $includePath\n";
-            }
-            next
-        }
-        elsif ($arg =~ m/^--templates/g){
-            ($a,$b)=split /=/,$arg,2;
-            if (not -d $b){
-                print "$b is not a directory\n";
-                &usage
-            } else {
-                $templatePath = $b;
-            }
-            next
-        }
-        elsif ($arg =~ m/^--problemTypeTag/g){
-            ($a,$problemTypeTag)=split /=/,$arg,2;
-            next
-        }
-        elsif (-e $arg) {
-            $startFile = $arg;
-            if (not -e $startFile){
-                print "$startFile does not exist\n";
-                &usage;
-            }
-#        print "<!-- Parsing $startFile -->\n";
-            next
-        } 
-        print "Invalid option: $arg\n";
-        &usage
-    }
 
-    return $startFile;
-
+if (not $ARGV[0]){
+    print "Please specify target file.\n";
+    usage
 }
-
+main;
+exit 1;
 
