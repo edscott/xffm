@@ -1,5 +1,7 @@
 #!/usr/bin/perl
 use File::Basename;
+use IO::Handle;
+
 #/home/edscott/GIT/xffm+/structure/parse11.pl --include=../../include lswfC.cc --templates=/home/edscott/GIT/dune2.6/dumux/
 #/home/edscott/GIT/xffm+/structure/parse11.pl lswf-chem12.cc --include=../../../include --templates=/home/edscott/GIT/dune/dumux/
 
@@ -17,45 +19,27 @@ use File::Basename;
 #    a. from macros
 #    b. from structures
 
-# 4. Get typeinherits
 #
-# 5. Get properties
-# 6. Get propertyvalues
+# 4. Get properties and values
+#    a. from macros
+#    b. from structures
+
 # 7. Mark focus
 # 8. Print XML
 
 
 
-# Global variables:
-# 1.
-# 2.
-# 3.
-@typeTags;
-%includes;
-$referenceLineCount;
 
-
-
-$count;
 $debug=0;
 $verbose=0;
-@files;
 %files;
 
-%typeTagFiles;
-%typeTagLineNumber;
-%properties;
-%propertyValues;
-%propertyTypeTag;
-%propertySource;
-%propertyLineNumber;
-%inherits;
+
 %focus;
-@namespace;
 
 
 
-######################## 0. General purpose subroutines
+######################## 0. General purpose 
 ####################################################################################
 # Global variables:
 $printWarnings=1;
@@ -229,6 +213,8 @@ sub resolveMissingArguments{
 #   @files: Array or ordered include chain (absolute paths).
 #   %{$file}: Hash of arrays, hashed by $file (absolute path).
 #   %includes: Hash of include lines, hashed by $file (absolute path).
+# Uses:
+#   $referenceLineCount
 #
 ###################################################################################
 # Recursive read of include chain:
@@ -239,6 +225,7 @@ sub resolveMissingArguments{
 #           readFiles ------|
 #   createFilesArray
 @files;
+$referenceLineCount;
 %includes;
 
 sub readFiles {
@@ -263,7 +250,7 @@ sub processNextFile {
     return 0;
 }
 
-# Recursive read of single file
+# Recursive read 
 sub readFile {
     my ($path) = @_;
     trace "parsing $path...";
@@ -384,87 +371,35 @@ sub getIncludeFileArray {
 #    foreach $f (@files){dbg "file: $f"}
 }
 ######################## 3. Get typetags
+#
+# Called with getTypeTags().
+# Creates:
+#   @typeTags
+#   @namespace
+#   %typeTagFiles
+#   %typeTagLineNumber
+#   %{$inherits}: Hash of arrays, hashed by $typeTags (member of @typeTags).
+#
+# Uses:
+#   $referenceLineCount
+#   @files
+# 
 ####################################################################################
+@typeTags;
+@namespace;
+%typeTagFiles;
+%typeTagLineNumber;
 
-sub getRawLine {
-# Returns logical line.
-    my $nextLine;
-    my $rawline = <INPUT>;
-    $referenceLineCount++;
 
-#remove initial whitespace
-    $rawline =~ s/^\s+//;
-
-    trace("getRawLine, line: $referenceLineCount\n");
-
-# zap embedded C comments:
-    if ($rawline =~ m/\/\*.*\*\//){
-        trace "zap embedded comment: $_";
-        $rawline =~ s/\/\*.*\*\///g;
-        trace "zap result: $rawline";
-    }
-#   If we have a C comment initiator, continue until terminator.
-    my $startComment = 0;
-    if ($rawline =~ /\/\*.*/){
-        $startComment = 1;
-        $rawline =~ s/\/\*.*//;
-        while ($startComment == 1){
-            $nextLine = getRawLine;
-            if ($nextLine =~ m/.*\*\//){
-                $nextLine =~ s/.*\*\///;
-                $startComment = 0;
-                $rawLine .= $nextLine;
-            }
-        }
-    }
-
-# zap full line C++ comments:
-    if ($rawline =~ m/^\/\/.*/){
-        trace "zapped comment: $rawline";
-        $rawline = "\n";
-    }
-
-# zap trailing C++ comments:
-    if ($rawline =~ m/\/\/.*$/){
-        my ($a, $b) = split /\/\//, $rawline, 2;
-        trace "zapped trailing comment: $b";
-        $rawline = "$a\n";
-    }
-
-# join escaped \n lines:
-    if ($rawline =~ m/\\\n$/) {
-        $rawline =~ s/\\\n$/ /;
-        $nextLine = &getRawLine;
-        $rawline .= $nextLine;
-        trace "join this with previous line: $nextLine";
-        trace "join result: $rawline";
-
-    }
-    trace("$rawline");
-    return $rawline;
-}
-
-# get nonescaped multiline command (; token) 
-# FIXME: combine with getRawLine()
+# Append lines until token ; reached. 
 sub getFullLine{
     my $a,$b;
-    my $line;
-    if (/\/\//) {($line, $b) = split /\/\//, $_, 2}
-    else {$line = $_}
+    my $line = $_;
     $line =~ s/\n/ /g;
-    $line =~ s/^\s+//;
-loop:
-    if (not $line =~ m/;/g){
-        my $nextLine = <INPUT>;
-        $referenceLineCount++;
+    while (not $line =~ m/;/g){
+        my $nextLine = &getRawLine;
         $nextLine =~ s/\n/ /g;
-        $nextLine =~ s/^\s+//;
-        if ($nextLine =~ m/\/\//g){
-            ($a,$b) = split /\/\//, $nextLine, 2;
-            $nextLine = $a;
-        }
         $line = $line . $nextLine;
-        goto loop;
     }
     return $line;
 }
@@ -479,64 +414,15 @@ sub getTagName {
     return $c;
 }
 
-
-sub getFileMacroTags {
-    my ($file) = @_;
-    open INPUT, "$file" or die "Unable to open $file";
-    my $typeTag;
-    my $found = 0;
-    my $lineNumber=0;
-    my @fileTypeTags;
-    $i=0;
-    $referenceLineCount=0;
-    while (<INPUT>){
-        $referenceLineCount++;
-        $_ = getRawLine;
-	dbg "rawline: $_";
-        if (/^#/){next}
-        if (/NEW_TYPE_TAG/){
-            my $line = getFullLine; 
-            $typeTag = getTagName($line);
-#print "typetag=$typeTag\n";
-            if ($typeTagFiles{$typeTag}) {
-                warning("TypeTag \"$typeTag\"redefined at file $file:$referenceLineCount");
-#                exit(1);
-            } else {
-                $typeTagFiles{$typeTag} = $file; 
-                $typeTagLineNumber{$typeTag} = $referenceLineCount; 
-            }
-#            $fileTypeTags[$i++] = $typeTag;
-            push @fileTypeTags, $typeTag;
-            $found = 1;
-        }
-    }
-    close INPUT;
-    if (not $found) {
-        return undef
-    }
-    return @fileTypeTags;
+sub compactNamespace{
+    my ($namespace) = @_;
+    $namespace =~ s/^\s+//;
+    $namespace =~ s/^namespace//g;
+    chop $namespace;
+    if ($namespace =~ m/{/g){$namespace =~ s/{//g;}
+    $namespace =~ s/\s+//;
+    return $namespace;
 }
-
-
-sub getMacroTags {
-    my ($file) = @_;
-    dbg "getMacroTags $file";
-    $count++;
-    my $path = "$file";
-
-    my @macroTags = getFileMacroTags($path);
-    my $tag;
-    if (@macroTags){ 
-        foreach $tag (@macroTags){
-            if ($tag eq "") {next}
-            dbg "Found 2.12 TypeTag: $tag ($file)";
-            push @typeTags, $tag
-        }
-    }
-    return;
-}
-
-
 
 sub fullNamespace {
     my @ns = @_;
@@ -550,27 +436,31 @@ sub fullNamespace {
     }
     return $fullns;
 }
-sub compactTemplate{
-    my ($ttype) = @_;
-    chop $ttype;
-    $ttype =~ s/^\s+//;
-    $ttype =~ s/^template//g;
-    $ttype =~ s/<//g;
-    $ttype =~ s/>//g;
-    $ttype =~ s/class//g;
-    if ($ttype =~ m/{/g){$ttype =~ s/{//g;}
-    $ttype =~ s/\s+//;
-    return $ttype;
+
+sub parseStruct {
+    my ($file, $line, $template) = @_;
+    my $fullns = fullNamespace(@namespace);
+    dbg "$fullns ----$template structure at\n$file:$referenceLineCount\n$line\n";
 }
 
-sub compactNamespace{
-    my ($namespace) = @_;
-    $namespace =~ s/^\s+//;
-    $namespace =~ s/^namespace//g;
-    chop $namespace;
-    if ($namespace =~ m/{/g){$namespace =~ s/{//g;}
-    $namespace =~ s/\s+//;
-    return $namespace;
+sub getStructLevel {
+    my ($line) = @_;
+    my $plus = () = $line =~ /{/g;
+    my $minus = () = $line =~ /}/g;
+    return $plus - $minus;
+}
+
+sub getFullStruct{
+    my $line = $_;
+    my $start = 0;
+    if (not $line =~ m/{/g){ $start=1}
+    while ($start or getStructLevel($line)){
+        $start=0;
+        $nextLine = &getRawLine;
+        $line =~ s/\n/ /g;
+        $line = $line . $nextLine;
+    }
+    return $line;
 }
 
 sub getStructTags{
@@ -606,15 +496,15 @@ sub getStructTags{
                 $template = "";
             }
             if (/^namespace/){
-                my $namespace = &compactNamespace($_);
+                my $namespace = compactNamespace($_);
                 push(@namespace, $namespace);
                 $nslevel = $level+1;
-                $fullns = &fullNamespace(@namespace);
+                $fullns = fullNamespace(@namespace);
                 trace "NS: $fullns\n";
             }    
             if (/{/){
                 $level++; 
-                $fullns = &fullNamespace(@namespace);
+                $fullns = fullNamespace(@namespace);
                 trace "level+=$level $fullns ($namespace[-1])\n";
             }
             if (/}/){
@@ -623,47 +513,222 @@ sub getStructTags{
                     pop(@namespace);
                     $nslevel--;
                 }
-                $fullns = &fullNamespace(@namespace);
+                $fullns = fullNamespace(@namespace);
                 trace "level-=$level $fullns ($namespace[-1])\n";
             }
             next
         }
 
-        my $line = &getFullStruct;
+        my $line = getFullStruct;
 #if template, use template 
         trace "line[$referenceLineCount] = $line\n";
-        &parseStruct($file, $line, $template);
+        parseStruct($file, $line, $template);
     }
     close INPUT;
     return;
 #    return @fileStructs;
 }
 
-sub parseStruct {
-    my ($file, $line, $template) = @_;
-    my $fullns = &fullNamespace(@namespace);
-    dbg "$fullns ----$template structure at\n$file:$referenceLineCount\n$line\n";
-}
+sub getInherits {
+    my $typeTag;
+    my $string;
+    ($typeTag, $string) = @_;
+    my $a, $b, $c, @d;
+    undef @d;
+    ($a, $b) = split /INHERITS_FROM/,$string,2;
+    ($a, $c) = split /\(/, $b,2;
+    ($a, $b) = split /\)/, $c,2;
 
-sub getStructLevel {
-    my ($line) = @_;
-    my $plus = () = $line =~ /{/g;
-    my $minus = () = $line =~ /}/g;
-    return $plus - $minus;
-}
-
-sub getFullStruct{
-    my $line = $_;
-    my $start = 0;
-    if (not $line =~ m/{/g){ $start=1}
-    while ($start or &getStructLevel($line)){
-        $start=0;
-        $nextLine = &getRawLine;
-        $line =~ s/\n/ /g;
-        $line = $line . $nextLine;
+    if ($a =~ m/,/){ @d = split /,/, $a} else {$d[0] = $a}
+    my $i = 0;
+#    print "string=$string";
+    foreach $a (@d){ 
+#        print "$typeTag --> $a\n"; 
+        $d[$i] =~ s/^\s+//;
+        $i++;
     }
-    return $line;
+
+   return @d;
 }
+
+sub getMacroTags {
+    my ($file) = @_;
+    trace "getMacroTags $file";
+    open INPUT, "$file" or die "Unable to open $file";
+    my $typeTag;
+    my $found = 0;
+    my $lineNumber=0;
+    my @fileTypeTags;
+    $referenceLineCount=0;
+    while (eof(INPUT) != 1){
+        $_ = &getRawLine;
+        if (/^#/){next}
+        if (not /NEW_TYPE_TAG/){next}
+	my $line = getFullLine; 
+	dbg "getMacroTags(): full line: $line";
+	$typeTag = getTagName($line);
+	dbg "getMacroTags(): typetag=$typeTag";
+	if ($typeTagFiles{$typeTag}) {
+	    warning("TypeTag \"$typeTag\"redefined at file $file:$referenceLineCount");
+	} else {
+	    $typeTagFiles{$typeTag} = $file; 
+	    $typeTagLineNumber{$typeTag} = $referenceLineCount; 
+	}
+        if (/INHERITS_FROM/){
+	    my @d = getInherits($typeTag, $line);
+	    foreach $a (@d){
+		dbg "  inherits --> \"$a\" ($file:$referenceLineCount";
+		push(@{ $inherits{"$typeTag"} }, "$a");
+	    }
+        }
+	
+#            $fileTypeTags[$i++] = $typeTag;
+#if ($tag ne "") {push @typeTags, $typeTag}
+    }
+    close INPUT;
+    return;
+}
+
+
+
+
+sub getTypeTags {
+#   2.12 Macro tags
+    foreach $f (@files){getMacroTags($f)}
+    foreach $f (@typeTags) {dbg "tag: $f"}
+    
+#   3.0 Structure tags
+####################
+#    &getStructTags($ARGV[0]); exit 1;
+#    foreach $f (@files){&getStructTags($f)}
+}
+
+######################## 4.  Get properties
+#
+# Called with 
+# Creates:
+#   %propertySource;
+#   %propertyValues;
+#   %propertyLineNumber;
+#   %propertyTypeTag;   
+#   %{$property}: Hash of arrays, hashed by $property (arrays of file paths).
+# 
+#  
+####################################################################################
+%propertySource;
+%propertyValues;
+%propertyLineNumber;
+%propertyTypeTag;
+
+# Returns an array filled with the properties defined in the file.
+sub getProperties{
+    my ($path) = @_;
+
+    open INPUT, "$path" or die "Unable to open $path";
+    my @properties;
+    my $i=0;
+    $referenceLineCount=0;
+    my $prop;
+    while (eof(INPUT) != 1){
+        $_ = &getRawLine;
+        s/^\s+//;
+        if (/^#/){next}
+        if (/NEW_PROP_TAG/){
+            my $line = &getFullLine;
+	    trace "$path:$referenceLineCount $line";
+            $prop = getTagName($line);
+            $properties[$i++] = $prop;
+            $propertyLineNumber{$prop}=$referenceLineCount;
+	    $propertySource{$prop}=$path;
+	    $propertyValues{$prop}="undefined";
+        }
+    }
+    close INPUT;
+    if ($i > 0){
+	foreach $prop (@properties){
+	    push(@{ $properties{"$prop"} }, $path);
+	    dbg "  $prop: $propertySource{$prop}:$propertyLineNumber{$prop} \"$propertyValues{$prop}\"";
+	}
+    }
+    return;
+}
+
+
+sub getProperty {
+    my @a;
+    my($string) = @_;
+    @a = split /,/,$string,3;
+    $a[1] =~ s/^\s+//;
+    return $a[1];
+}
+
+sub getValue {
+    my @a, $b, $c;
+    my($string) = @_;
+    @a = split /,/,$string, 3;
+    $a[2] =~ s/^\s+//;
+    chop $a[2]; # \n
+    chop $a[2]; # ;
+    $a[2] =~ s/^\s+//;
+    return $a[2];
+}
+
+
+sub getPropertyValues {
+    my ($file) = @_;
+    my $path = "$file";
+
+    open INPUT, "$path" or die "Unable to open $path";
+    $referenceLineCount=0;
+    while (eof(INPUT) != 1){
+        $_ = &getRawLine;
+        if (/^#/){next}
+        if (/SET_TYPE_PROP/ or /SET_INT_PROP/
+		or /SET_BOOL_PROP/ or /SET_SCALAR_PROP/)
+	{
+            my $line = getFullLine;
+            my $typetag = getTagName($line);
+            my $property = getProperty($line);
+            my $propValue = getValue($line);
+
+            if ($debug and $verbose){
+                if (/SET_BOOL_PROP/ and /Gravity/ ) {
+                    print "SET_BOOL_PROP: $file --> \n$_";
+                    print "property=$property value=$propValue\n";
+                }
+	    }
+            
+	    if ($propertyValues{$property}) {
+		warning("overwritting $property: \nold value=$propertyValues{$property} new value=$propValue\nold typetag=$propertyTypeTag{$property} new typetag=$typetag\nold source=$propertySource{$property} new source=$file");
+	    }
+            
+            $propertyValues{$property} = $propValue;
+            $propertyTypeTag{$property} = $typetag;
+            $propertySource{$property} = $file;
+            $propertyLineNumber{$property} = $referenceLineCount;
+	    dbg("PROP $propertyTypeTag{$property}:$property = $propertyValues{$property} ($propertySource{$property}) \n")
+        }
+    }
+    close INPUT;
+    return;
+}
+
+
+####################################################################################
+####################################################################################
+sub compactTemplate{
+    my ($ttype) = @_;
+    chop $ttype;
+    $ttype =~ s/^\s+//;
+    $ttype =~ s/^template//g;
+    $ttype =~ s/<//g;
+    $ttype =~ s/>//g;
+    $ttype =~ s/class//g;
+    if ($ttype =~ m/{/g){$ttype =~ s/{//g;}
+    $ttype =~ s/\s+//;
+    return $ttype;
+}
+
 
 sub printXML {
     my ($start) = @_;
@@ -795,79 +860,6 @@ sub printPropertiesXML{
 
 }
 #########   Types  ##########
-#########   Inherits  ##########
-sub getTypeInherits{
-    my($file) = @_;
-    my $path = "$file";
-
-
-    open INPUT, "$path" or die "Unable to open $path";
-    my $comment = 0;
-    $referenceLineCount=0;
-    while (<INPUT>){
-        $referenceLineCount++;
-        $_ = &getRawLine;
-        s/^\s+//;
-        if (/^#/ or /^\/\//){next}
-        if (/\/\*/) {$comment = 1}
-        if (/\*\//) {$comment = 0}
-        if ($comment){next}
-        if (/NEW_TYPE_TAG/){
-            my $line = &getFullLine;
-            my $typeTag = getTagName($line);
-            if (/INHERITS_FROM/){
-                my @d = &getInherits($typeTag, $line);
-                foreach $a (@d){
-                    if ($debug)
-                      {print "get inherits $typeTag --> $a ($file:$referenceLineCount\n"}
-                    push(@{ $inherits{"$typeTag"} }, "$a");
-                }
-           }
-            next;
-        }
-    }
-    close INPUT;
-    return;
-}
-
-sub getInherits {
-    my $typeTag;
-    my $string;
-    ($typeTag, $string) = @_;
-    my $a, $b, $c, @d;
-    undef @d;
-    ($a, $b) = split /INHERITS_FROM/,$string,2;
-    ($a, $c) = split /\(/, $b,2;
-    ($a, $b) = split /\)/, $c,2;
-
-    if ($a =~ m/,/){ @d = split /,/, $a} else {$d[0] = $a}
-    my $i = 0;
-#    print "string=$string";
-    foreach $a (@d){ 
-#        print "$typeTag --> $a\n"; 
-        $d[$i] =~ s/^\s+//;
-        $i++;
-    }
-
-   return @d;
-}
-
-sub printInherits{
-    if (not $debug) {
-        print "printInherits is a debug function\n";
-        return;
-    }
-    print("INHERITS:\n");
-    my $key;
-    my @keys = keys(%inherits);
-    foreach $key (@keys){
-        print $key;
-        my @array = @{ $inherits{$key} };
-        &printFileArray(@array);
-        print "\n";
-    }
-
-}
 
 # FIXME: not returning any inheritsString...
 sub getInheritString{
@@ -884,149 +876,74 @@ sub getInheritString{
 
 
 #########   Properties  ##########
-sub getProperties {
-    my ($file) = @_;
-    $count++;
-    my $path = "$file";
-
-
-    my @properties = &getFileProperties($path);
-    foreach $property (@properties){
-        push(@{ $properties{"$property"} }, "$file");
-        $propertySource{$property}=$file;
-        $propertyValues{$property}="undefined";
-    }
-    return;
-}
-
-sub getFileProperties{
-    my ($path) = @_;
-
-    open INPUT, "$path" or die "Unable to open $path";
-    my @properties;
-    my $i=0;
-    my $comment = 0;
-    $referenceLineCount=0;
-    while (<INPUT>){
-        $referenceLineCount++;
-        $_ = &getRawLine;
-        s/^\s+//;
-        if (/^#/ or /^\/\//){next}
-        if (/\/\*/) {$comment = 1}
-        if (/\*\//) {$comment = 0}
-        if ($comment){next}
-        if (/NEW_PROP_TAG/){
-            my $line = &getFullLine;
-            $prop = getTagName($line);
-            $properties[$i++] = $prop;
-            $propertyLineNumber{$prop}=$referenceLineCount;
-        }
-    }
-    close INPUT;
-    if ($i == 0) {
-       $properties[$i++] = "User Class Property";
-    }
-    return @properties;
-}
-
-sub printProperties {
-    if (not $debug) {
-        print "printProperties is a debug function\n";
-        return;
-    }
-    print("PROPERTIES:\n");
-    my $property;
-    my @keys = keys(%properties);
-    foreach $property (@keys){
-        print "property: $property :\n";
-        my @array = @{ $properties{"$property"} };
-        &printFileArray(@array);
-        print "\n";
-    }
-}
-
-sub printFileArray {
-    if (not $debug) {
-        print "printFileArray is a debug function\n";
-        return;
-    }
-    my @a = @_;
-    foreach $a (@a){ print " ($a)\n"}
-}
 
 ###############  Property values  ########
-sub getPropertyValues {
-    my ($file) = @_;
-    my $path = "$file";
-    my %overwrite;
 
-    open INPUT, "$path" or die "Unable to open $path";
-    $comment = 0;
-    $referenceLineCount=0;
-    while (<INPUT>){
-        $referenceLineCount++;
-        $_ = &getRawLine;
-        s/^\s+//;
-        if (/^#/ or /^\/\//){next}
-        if (/\/\*/) {$comment = 1}
-        if (/\*\//) {$comment = 0}
-        if ($comment){next}
-        if (/SET_TYPE_PROP/ or /SET_INT_PROP/ or /SET_BOOL_PROP/ or /SET_SCALAR_PROP/){
-            my $line = &getFullLine;
-            my $typetag = getTagName($line);
-            my $property = &getProperty($line);
-            my $propValue = &getValue($line);
+sub getRawLine {
+# Returns logical line.
+    my $nextLine;
+    my $rawline = <INPUT>;
+    $referenceLineCount++;
 
-            if ($debug and $verbose){
-                if (/SET_BOOL_PROP/ and /Gravity/ ) {
-                    print "SET_BOOL_PROP: $file --> \n$_";
-                    print "property=$property value=$propValue\n";
-                }
-            
-                if ($propertyValues{$property}) {
-                    warning("overwritting $property: \nold value=$propertyValues{$property} new value=$propValue\nold typetag=$propertyTypeTag{$property} new typetag=$typetag\nold source=$propertySource{$property} new source=$file");
-                }
+#remove initial whitespace
+    $rawline =~ s/^\s+//;
+
+    trace("getRawLine, line: $referenceLineCount\n$rawline");
+
+# zap embedded C comments:
+    if ($rawline =~ m/\/\*.*\*\//){
+        trace "zap embedded comment: $_";
+        $rawline =~ s/\/\*.*\*\///g;
+        trace "zap result: $rawline";
+    }
+#   If we have a C comment initiator, continue until terminator.
+    my $startComment = 0;
+    if ($rawline =~ /\/\*.*/){
+	trace("startComment...");
+        $startComment = 1;
+        $rawline =~ s/\/\*.*//;
+	trace("new rawline: $rawline");
+        while ($startComment == 1){
+            $nextLine = &getRawLine;
+	    trace("next line: $nextLine");
+            if ($nextLine =~ m/.*\*\//){
+                $nextLine =~ s/.*\*\///;
+                $startComment = 0;
+                $rawLine .= $nextLine;
             }
-            $propertyValues{$property} = $propValue;
-            $propertyTypeTag{$property} = $typetag;
-            $propertySource{$property} = $file;
-            $propertyLineNumber{$property} = $referenceLineCount;
-            if ($debug) {
-                my $prop;
-                if ($overwrite{$property}) {$prop = "PROP*"}
-                else {$prop = "PROP*"}
-                print("PROP $propertyTypeTag{$property}:$property = $propertyValues{$property} ($propertySource{$property}) \n")
-            }
-            $overwrite{$property} = 1; 
         }
     }
-    close INPUT;
-    return;
-}
 
-sub getProperty {
-    my @a;
-    my($string) = @_;
-    @a = split /,/,$string,3;
-    $a[1] =~ s/^\s+//;
-    return $a[1];
-}
+# zap full line C++ comments:
+    if ($rawline =~ m/^\/\/.*/){
+        trace "zapped comment: $rawline";
+        $rawline = "\n";
+    }
 
-sub getValue {
-    my @a, $b, $c;
-    my($string) = @_;
-    @a = split /,/,$string, 3;
-    $a[2] =~ s/^\s+//;
-    chop $a[2]; # \n
-    chop $a[2]; # ;
-    $a[2] =~ s/^\s+//;
-    return $a[2];
-}
+# zap trailing C++ comments:
+    if ($rawline =~ m/\/\/.*$/){
+        my ($a, $b) = split /\/\//, $rawline, 2;
+        trace "zapped trailing comment: $b";
+        $rawline = "$a\n";
+    }
 
+# join escaped \n lines:
+    if ($rawline =~ m/\\\n$/) {
+        $rawline =~ s/\\\n$/ /;
+        $nextLine = &getRawLine;
+        $rawline .= $nextLine;
+        trace "join this with previous line: $nextLine";
+        trace "join result: $rawline";
+
+    }
+    trace("$rawline");
+    return $rawline;
+}
 
 ####################################################################################
 ####################################################################################
 sub main {
+    STDOUT->autoflush(1);
     $debug = 0;
 # 1.
     my $start = processArguments;
@@ -1035,25 +952,17 @@ sub main {
 # 2.
     getIncludeFileArray($start);
     dbg "2 ok";
-    exit 1;
-
 # 3. 
-#   2.12
-    foreach $f (@files){getMacroTags($f)}
-    foreach $f (@typeTags) {dbg "tag: $f"}
-    
+    getTypeTags;
     dbg "3 ok";
-    exit 1;
-#   3.0
-####################
-#    &getStructTags($ARGV[0]); exit 1;
-    foreach $f (@files){&getStructTags($f)}
+# 4.
+    my $f;
+    foreach $f (@files){&getProperties($f)}
+    foreach $f (@files){&getPropertyValues($f)}
+    dbg "4 ok";
+    
     exit(1);
 ####################
-
-    foreach $f (@files){&getTypeInherits($f)}
-    if ($debug){&printInherits}
-    $count = 0;
     foreach $f (@files){&getProperties($f)}
     if ($debug){&printProperties}
     if ($debug){print("getPropertyValues:\n")}
