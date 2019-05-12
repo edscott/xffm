@@ -24,20 +24,8 @@ use IO::Handle;
 #    a. from macros
 #    b. from structures
 
-# 7. Mark focus
-# 8. Print XML
-
-
-
-
-$debug=0;
-$verbose=0;
-%files;
-
-
-%focus;
-
-
+# 5. Mark focus
+# 6. Print XML
 
 ######################## 0. General purpose 
 ####################################################################################
@@ -211,7 +199,7 @@ sub resolveMissingArguments{
 # Called with getIncludeFileArray($file) ($file in absolute path).
 # Creates:
 #   @files: Array or ordered include chain (absolute paths).
-#   %{$file}: Hash of arrays, hashed by $file (absolute path).
+#   %files: Hash of arrays, hashed by $file (absolute path).
 #   %includes: Hash of include lines, hashed by $file (absolute path).
 # Uses:
 #   $referenceLineCount
@@ -225,6 +213,7 @@ sub resolveMissingArguments{
 #           readFiles ------|
 #   createFilesArray
 @files;
+%files;
 $referenceLineCount;
 %includes;
 
@@ -378,7 +367,7 @@ sub getIncludeFileArray {
 #   @namespace
 #   %typeTagFiles
 #   %typeTagLineNumber
-#   %{$inherits}: Hash of arrays, hashed by $typeTags (member of @typeTags).
+#   %inherits: Hash of arrays, hashed by $typeTags (member of @typeTags).
 #
 # Uses:
 #   $referenceLineCount
@@ -581,6 +570,7 @@ sub getMacroTags {
 		push(@{ $inherits{"$typeTag"} }, "$a");
 	    }
         }
+	if ($typeTag ne "") {push @typeTags, $typeTag}
 	
 #            $fileTypeTags[$i++] = $typeTag;
 #if ($tag ne "") {push @typeTags, $typeTag}
@@ -611,7 +601,7 @@ sub getTypeTags {
 #   %propertyValues;
 #   %propertyLineNumber;
 #   %propertyTypeTag;   
-#   %{$property}: Hash of arrays, hashed by $property (arrays of file paths).
+#   %properties: Hash of arrays, hashed by $property (arrays of file paths).
 # 
 #  
 ####################################################################################
@@ -619,6 +609,7 @@ sub getTypeTags {
 %propertyValues;
 %propertyLineNumber;
 %propertyTypeTag;
+%properties;
 
 # Returns an array filled with the properties defined in the file.
 sub getProperties{
@@ -646,7 +637,7 @@ sub getProperties{
     close INPUT;
     if ($i > 0){
 	foreach $prop (@properties){
-	    push(@{ $properties{"$prop"} }, $path);
+	    push(@{ $properties{$prop} }, $path);
 	    dbg "  $prop: $propertySource{$prop}:$propertyLineNumber{$prop} \"$propertyValues{$prop}\"";
 	}
     }
@@ -665,14 +656,25 @@ sub getProperty {
 sub getValue {
     my @a, $b, $c;
     my($string) = @_;
-    @a = split /,/,$string, 3;
-    $a[2] =~ s/^\s+//;
-    chop $a[2]; # \n
-    chop $a[2]; # ;
+    ($a, $b) = split /\(/,$string, 2;
+    ($a, $c) = split /\)/,$b, 2;
+    @a = split /,/,$a, 3;
     $a[2] =~ s/^\s+//;
     return $a[2];
 }
 
+sub printProperties {
+    dbg("PROPERTIES:\n");
+    my $property;
+    my @keys = keys(%properties);
+    foreach $property (@keys){
+        print "property: $property :\n";
+        my @array = @{ $properties{"$property"} };
+	my $a;
+	foreach $a (@array){ print " ($a)\n"}
+        print "\n";
+    }
+}
 
 sub getPropertyValues {
     my ($file) = @_;
@@ -690,13 +692,6 @@ sub getPropertyValues {
             my $typetag = getTagName($line);
             my $property = getProperty($line);
             my $propValue = getValue($line);
-
-            if ($debug and $verbose){
-                if (/SET_BOOL_PROP/ and /Gravity/ ) {
-                    print "SET_BOOL_PROP: $file --> \n$_";
-                    print "property=$property value=$propValue\n";
-                }
-	    }
             
 	    if ($propertyValues{$property}) {
 		warning("overwritting $property: \nold value=$propertyValues{$property} new value=$propValue\nold typetag=$propertyTypeTag{$property} new typetag=$typetag\nold source=$propertySource{$property} new source=$file");
@@ -714,8 +709,151 @@ sub getPropertyValues {
 }
 
 
+######################## 5. Mark focus 
 ####################################################################################
 ####################################################################################
+%focus;
+
+sub markFocus {
+    my ($focus, $focusLevel) = @_;
+    if (not $focus{$focus}){$focus{$focus} = $focusLevel}
+
+    dbg "focus: $focus\n";
+    my @array = @{ $inherits{$focus} };
+    my $subfocus;
+    foreach $subfocus (@array){
+        &markFocus($subfocus, $focusLevel+1);
+    }
+}
+####################################################################################
+
+######################## 6. Print XML 
+####################################################################################
+####################################################################################
+
+
+sub printPropertiesXML{
+    dbg "printPropertiesXML";
+    my ($out) = @_;
+    my $property;
+    my @keys = keys (%properties);
+    my @properties = sort @keys;
+    foreach $property (@properties){
+        $typetag = $propertyTypeTag{$property};
+        $source = $propertySource{$property};
+        my $lineNumber = $propertyLineNumber{$property};
+        $oFile = basename($source);
+#        $oFile = $source;
+#        $oFile =~ s/$templatePath\///;
+#        if ($includePath){$oFile =~ s/$includePath\///;}
+        $value = $propertyValues{$property};
+        $value =~ s/</&lt;/g;
+	$value =~ s/>/&gt;/g;
+#        my $realpath = &realpath($oFile);
+	dbg "property: $property-->$value";
+        if ($value ne "undefined"){
+            print $out " <property name=\"$property\" typetag=\"$typetag\" value=\"$value\" source=\"$oFile:$lineNumber\" realpath=\"$source\"/>\n";
+        }
+#        print " <property name=\"$property\">\n";
+#        print "  <typetag>$typetag</typetag>\n";
+#        print "  <value>$value</value>\n";
+#        print "  <source>$source</source>\n";
+#        print " </property>\n";
+    }
+
+
+}
+
+sub getInheritString{
+    my ($typetag) = @_;
+    my $key;
+    my $inheritString = "";
+    my @array = @{ $inherits{$typetag} };
+    my $first = 1;
+    foreach $key (@array){
+	if ($first) {$inheritString .= "$key"}
+	else {$inheritString .= ",$key"}
+	undef($first);
+    }
+    return $inheritString;
+
+}
+
+sub printTypeTagsXML{
+    dbg "printTypeTagsXML";
+    my ($out) = @_;
+    my %repeat;
+    my $typetag;
+#    my @keys = sort @typeTags;
+    my @keys = sort {$focus{$a} <=> $focus{$b}} @typeTags;
+    foreach $typetag (@keys){
+        if ($repeat{$typetag}) {
+            print $out "<!-- Repeated typetag name: $typetag -->\n";
+            next;
+        }
+        $repeat{$typetag} = 1;
+	dbg "typetag = $typetag";
+
+        my $inheritString = getInheritString($typetag);
+
+        my $source = $typeTagFiles{$typetag};
+        my $oFile = basename($source);
+        $oFile =~ s/$templatePath\///;
+        if ($includePath) {$oFile =~ s/$includePath\///;}
+        if ($focus{$typetag}){ $focusItem = " focus=\"$focus{$typetag}\""}
+        else {undef $focusItem;}
+        if ($focusItem){
+#            my $spaces = ""; 
+#            my $i;
+#            for ($i=0; $i<$focus{$typetag}; $i++){
+#                $spaces .= "   ";
+#            }
+            print $out " <typetag name=\"$typetag\" inherits=\"$inheritString\" source=\"$oFile:$typeTagLineNumber{$typetag}\" realpath=\"$source\" $focusItem>\n";
+            my @akeys = keys(%propertyTypeTag);
+            my @skeys = sort @akeys;
+            my $property;
+            foreach $property (@skeys){
+                #property info here
+                if ($propertyTypeTag{$property} eq $typetag) {
+                    my $value = $propertyValues{$property};
+                    $value =~ s/</&lt;/g;
+                    $value =~ s/>/&gt;/g;
+                    $value =~ s/"/&quot;/g;
+                    $source = $propertySource{$property};
+                    $oFile = basename($source);
+                    $oFile =~ s/$templatePath\///;
+                    if ($includePath){$oFile =~ s/$includePath\///;}
+                    print $out "  <property name=\"$property\" value=\"$propertyValues{$property}\" source=\"$oFile:$propertyLineNumber{$property}\" realpath=\"$source\"/>\n";
+                }
+            }
+            print $out " </typetag>\n";
+        }
+    }
+
+}
+
+sub printXML {
+    my ($start) = @_;
+    # print "printXML($start)\n";
+    open OUTPUT, ">./structure.xml" or die "cannot open structure.xml";
+    print OUTPUT <<EOF;
+<?xml version="1.0"?>
+<structure-info xmlns:xffm="http://www.imp.mx/">
+<structure source=\"$ARGV[0]\" templates=\"$templatePath\" include=\"$includePath\"/>
+EOF
+    dbg "printFilesXML $start\n";
+    printFileOut(OUTPUT, $start, 0);
+    printPropertiesXML(OUTPUT);
+    printTypeTagsXML(OUTPUT);
+    print OUTPUT "</structure-info>\n";
+    close OUTPUT;
+}
+
+####################################################################################
+
+
+### pending:
+
 sub compactTemplate{
     my ($ttype) = @_;
     chop $ttype;
@@ -729,155 +867,8 @@ sub compactTemplate{
     return $ttype;
 }
 
+####################################################################################
 
-sub printXML {
-    my ($start) = @_;
-    # print "printXML($start)\n";
-    open OUTPUT, ">./structure.xml" or die "cannot open structure.xml";
-    print OUTPUT <<EOF;
-<?xml version="1.0"?>
-<structure-info xmlns:xffm="http://www.imp.mx/">
-<structure source=\"$ARGV[0]\" templates=\"$templatePath\" include=\"$includePath\"/>
-EOF
-    if ($debug) {print "printFilesXML $start\n"}
-    printFileOut(OUTPUT, $start, 0);
-    if ($debug) {print "printPropertiesXML\n"}
-    &printPropertiesXML;
-    if ($debug) {print "printTypeTagsXML\n"}
-    &printTypeTagsXML;
-    print OUTPUT "</structure-info>\n";
-    close OUTPUT;
-}
-
-
-$j=0;
-# Global arrays and hashes:
-
-#&main;
-
-
-sub markFocus {
-    my ($focus, $focusLevel) = @_;
-    if (not $focus{$focus}){$focus{$focus} = $focusLevel}
-
-    if ($debug){print "focus: $focus\n";}
-    my @array = @{ $inherits{$focus} };
-    my $subfocus;
-    foreach $subfocus (@array){
-        &markFocus($subfocus, $focusLevel+1);
-    }
-}
-
-
-
-sub realpath{
-    my ($inPath) = @_;
-    if (not -e $inPath){
-        if (-e $templatePath."/$inPath"){ $inPath = $templatePath."/$inPath"}
-        elsif ($includePath){
-            if (-e $includePath."/$inPath"){ $inPath = $includePath."/$inPath"}
-            else {return $inPath}
-        }
-    } 
-    my $realpath = `realpath $inPath`;
-    chop $realpath;
-    return $realpath;
-}
-
-sub printTypeTagsXML{
-    my %repeat;
-    my $typetag;
-#    my @keys = sort @typeTags;
-    my @keys = sort {$focus{$a} <=> $focus{$b}} @typeTags;
-    foreach $typetag (@keys){
-        if ($repeat{$typetag}) {
-            print OUTPUT "<!-- Repeated typetag name: $typetag -->\n";
-            next;
-        }
-        $repeat{$typetag} = 1;
-        my $inheritString = &getInheritString($typetag);
-
-        my $oFile = $typeTagFiles{$typetag};
-        $oFile =~ s/$templatePath\///;
-        if ($includePath) {$oFile =~ s/$includePath\///;}
-        if ($focus{$typetag}){ $focusItem = " focus=\"$focus{$typetag}\""}
-        else {undef $focusItem;}
-        my $realpath = &realpath($oFile);
-        if ($focusItem){
-            my $spaces = "";
-            my $i;
-            for ($i=0; $i<$focus{$typetag}; $i++){
-                $spaces .= "   ";
-            }
-            print OUTPUT " <typetag name=\"$spaces$typetag\" inherits=\"$inheritString\" source=\"$oFile:$typeTagLineNumber{$typetag}\" realpath=\"$realpath\" $focusItem>\n";
-            my @akeys = keys(%propertyTypeTag);
-            my @skeys = sort @akeys;
-            my $property;
-            foreach $property (@skeys){
-                #property info here
-                if ($propertyTypeTag{$property} eq $typetag) {
-                    my $value = $propertyValues{$property};
-                    $value =~ s/</&lt;/g;
-                    $value =~ s/>/&gt;/g;
-                    $oFile = $propertySource{$property};
-                    $oFile =~ s/$templatePath\///;
-                    if ($includePath){$oFile =~ s/$includePath\///;}
-                    $realpath = &realpath($oFile);
-                    print OUTPUT "  <property name=\"$property\" value=\"$propertyValues{$property}\" source=\"$oFile:$propertyLineNumber{$property}\" realpath=\"$realpath\"/>\n";
-                }
-            }
-            print OUTPUT " </typetag>\n";
-        }
-    }
-
-}
-
-sub printPropertiesXML{
-    my $property;
-    my @keys = keys (%properties);
-    my @properties = sort @keys;
-    foreach $property (@properties){
-        $typetag = $propertyTypeTag{$property};
-        $source = $propertySource{$property};
-        my $lineNumber = $propertyLineNumber{$property};
-        $oFile = $source;
-        $oFile =~ s/$templatePath\///;
-        if ($includePath){$oFile =~ s/$includePath\///;}
-        $value = $propertyValues{$property};
-        $value =~ s/</&lt;/g;
-        $value =~ s/>/&gt;/g;
-        my $realpath = &realpath($oFile);
-        if ($value ne "undefined"){
-            print OUTPUT " <property name=\"$property\" typetag=\"$typetag\" value=\"$value\" source=\"$oFile:$lineNumber\" realpath=\"$realpath\"/>\n";
-        }
-#        print " <property name=\"$property\">\n";
-#        print "  <typetag>$typetag</typetag>\n";
-#        print "  <value>$value</value>\n";
-#        print "  <source>$source</source>\n";
-#        print " </property>\n";
-    }
-
-
-}
-#########   Types  ##########
-
-# FIXME: not returning any inheritsString...
-sub getInheritString{
-    my ($typetag) = @_;
-    my $key;
-    my $inheritString = "";
-    my @array = @{ $inherits{$typetag} };
-    foreach $key (@array){
-        $inheritString .= "$key, ";
-    }
-    return $inheritString;
-
-}
-
-
-#########   Properties  ##########
-
-###############  Property values  ########
 
 sub getRawLine {
 # Returns logical line.
@@ -944,7 +935,6 @@ sub getRawLine {
 ####################################################################################
 sub main {
     STDOUT->autoflush(1);
-    $debug = 0;
 # 1.
     my $start = processArguments;
     resolveMissingArguments($start);
@@ -960,17 +950,19 @@ sub main {
     foreach $f (@files){&getProperties($f)}
     foreach $f (@files){&getPropertyValues($f)}
     dbg "4 ok";
-    
-    exit(1);
-####################
-    foreach $f (@files){&getProperties($f)}
-    if ($debug){&printProperties}
-    if ($debug){print("getPropertyValues:\n")}
-    foreach $f (@files){&getPropertyValues($f)}
+# 5.
     if (defined $problemTypeTag){
         &markFocus($problemTypeTag, 1);
-    }    
-    &printXML($start);
+    } else {
+	dbg "markFocus(): problemTypeTag is not defined";
+    }
+    dbg "5 ok";
+####################
+  
+    printXML($start);
+
+    exit 1;
+
 }
 ####################################################################################
 ####################################################################################
@@ -978,8 +970,9 @@ sub main {
 
 if (not $ARGV[0]){
     print "Please specify target file.\n";
-    usage
+    &usage
 }
-main;
+&main;
 exit 1;
+
 
