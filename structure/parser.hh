@@ -7,6 +7,11 @@ GMarkupParseContext *typetagContext;
 GMarkupParseContext *propertyContext;
 GMarkupParseContext *fileContext;
 FILE *input;
+gchar line[2048];
+
+gchar *sourceFile;
+gchar *templates;
+gchar *extraIncludes=NULL;
 
 GMarkupParser mainParser = {
     mainStart,
@@ -161,7 +166,6 @@ private:
 	    GtkTreeIter parent;
 	    GtkTreeIter sourceiter;
 	    if (strcmp(*name, "name")==0) {
-		//gtk_tree_store_append(treeStore, &fileChild, filesParent);
 		GtkTreePath *tpath = gtk_tree_row_reference_get_path(referenceParent);
 		gtk_tree_model_get_iter(GTK_TREE_MODEL(treeStore), &parent, tpath);
 		gtk_tree_store_append(treeStore, &fileChild, &parent);

@@ -21,14 +21,14 @@ class TreeModel{
     GtkTreeIter fileParent;
 
 protected:
-    GtkTreeStore *treeStore;
+    GtkTreeStore *treeStore_;
     GtkTreeIter propertyParent;
     GtkTreeIter typeTagParent;
     GtkTreeRowReference *referenceParent;
 
 public:
     TreeModel(void){
-	treeStore = gtk_tree_store_new(COLUMNS, 
+	treeStore_ = gtk_tree_store_new(COLUMNS, 
 		GDK_TYPE_PIXBUF, // icon in treeView display
 		GDK_TYPE_PIXBUF, // icon in treeView display
 		G_TYPE_STRING,   // typedef name or all-properties 
@@ -37,18 +37,18 @@ public:
 		G_TYPE_STRING,   // property source
 		G_TYPE_STRING,   // property typetag
 		G_TYPE_STRING);   // realpath (for DND)
-	gtk_tree_store_append(treeStore, &fileParent, NULL);
-	gtk_tree_store_set(treeStore, &fileParent, TYPEDEF_NAME, "Files", -1);
-	auto tpath = gtk_tree_model_get_path(GTK_TREE_MODEL(treeStore), &fileParent);
-	referenceParent = gtk_tree_row_reference_new(GTK_TREE_MODEL(treeStore), tpath);
+	gtk_tree_store_append(treeStore_, &fileParent, NULL);
+	gtk_tree_store_set(treeStore_, &fileParent, TYPEDEF_NAME, "Files", -1);
+	auto tpath = gtk_tree_model_get_path(GTK_TREE_MODEL(treeStore_), &fileParent);
+	referenceParent = gtk_tree_row_reference_new(GTK_TREE_MODEL(treeStore_), tpath);
 	gtk_tree_path_free(tpath);
 	//filesParent = gtk_tree_iter_copy(&fileParent);
-	gtk_tree_store_append(treeStore, &propertyParent, NULL);
-	gtk_tree_store_set(treeStore, &propertyParent, TYPEDEF_NAME, "Properties", -1);
-	gtk_tree_store_append(treeStore, &typeTagParent, NULL);
-	gtk_tree_store_set(treeStore, &typeTagParent, TYPEDEF_NAME, "TypeTags", -1);
+	gtk_tree_store_append(treeStore_, &propertyParent, NULL);
+	gtk_tree_store_set(treeStore_, &propertyParent, TYPEDEF_NAME, "Properties", -1);
+	gtk_tree_store_append(treeStore_, &typeTagParent, NULL);
+	gtk_tree_store_set(treeStore_, &typeTagParent, TYPEDEF_NAME, "TypeTags", -1);
     }
-    GtkTreeStore *treeStore(){return treeStore;}
+    GtkTreeStore *treeStore(){return treeStore_;}
 
 private:
         

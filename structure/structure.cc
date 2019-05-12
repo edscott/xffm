@@ -25,32 +25,20 @@
 #include <iostream>
 
 
-gchar line[2048];
-//static GtkIconTheme *icon_theme=NULL;
-GdkPixbuf *focusPixbuf;
-
-gchar *sourceFile;
-gchar *templates;
-gchar *extraIncludes=NULL;
-
-GtkTreeIter *filesParent;
-GtkTreePath *tpathParent;
-GtkTreeIter fileChild;
-GtkTreeIter *tmpParent=NULL;
 
 
 
 
-
-} // End namespace xf
 #include "treemodel.hh"
-#include "structure.hh"
-#include "signals.hh"
-#include "parser.hh"
+//#include "structure.hh"
+//#include "structurewindow.hh"
+//#include "signals.hh"
+//#include "parser.hh"
 
 
 int
 main (int argc, char *argv[]) {
+#if 0
     xf::Structure<double>  *structure;
     try {
         structure = new(xf::Structure<double>)(argv);
@@ -81,5 +69,6 @@ main (int argc, char *argv[]) {
 
     gtk_widget_show_all(GTK_WIDGET(structureWindow->mainWindow));
     gtk_main();
+#endif
     return 0;
 }

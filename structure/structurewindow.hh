@@ -14,6 +14,15 @@ GtkRequisition maximumSize_;
 GList *selectionList;
 GList *selection_list=NULL;
 
+
+GdkPixbuf *focusPixbuf;
+
+GtkTreeIter *filesParent;
+GtkTreePath *tpathParent;
+GtkTreeIter fileChild;
+GtkTreeIter *tmpParent=NULL;
+
+
 public:
     GtkWindow *mainWindow;
     StructureWindow(Type object){
