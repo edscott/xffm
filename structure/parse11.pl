@@ -1,33 +1,28 @@
 #!/usr/bin/perl
+# GNU public licence Version 3.0
+# (C) 2019
 use File::Basename;
 use IO::Handle;
 
-#/home/edscott/GIT/xffm+/structure/parse11.pl --include=../../include lswfC.cc --templates=/home/edscott/GIT/dune2.6/dumux/
-#/home/edscott/GIT/xffm+/structure/parse11.pl lswf-chem12.cc --include=../../../include --templates=/home/edscott/GIT/dune/dumux/
+# Parser flow:
 
 # 1. Process arguments
-#    a. $startFile
-#    b. $includePath
-#    c. $templatePath
-#    d. $problemTypeTag
 
-# 2. Get include files in order
-#    a. $sourceDir
-#    b. @files
+# 2. Get include files in logical order
 
 # 3. Get typetags
 #    a. from macros
 #    b. from structures
 
-#
 # 4. Get properties and values
 #    a. from macros
 #    b. from structures
 
 # 5. Mark focus
+
 # 6. Print XML
 
-######################## 0. General purpose 
+######################## 0. General purpose subroutines
 ####################################################################################
 # Global variables:
 $printWarnings=1;
@@ -66,15 +61,21 @@ sub warning{
 
 ######################## 1. Process arguments
 #
-#  Called with processArguments() 
+#  Called with processArguments(). 
 #  Creates:
-#    $includePath (if provided with --include=)
-#    $templatePath  (if provided with --templates= or maybe found)
-#    $problemTypeTag; (if provided with --problemTypeTag= or maybe found)
+#    $includePath (if provided with --include=).
+#    $templatePath  (if provided with --templates= or maybe found).
+#    $problemTypeTag (if provided with --problemTypeTag= or maybe found).
 #
+#  Uses:
+#    Value of `realname` of argument provided.
+#    Dirname of above value.
 #    
-#  Returns:
-#    Absolute path of argument provided.
+#  Description:
+#    Sets or tries to guess $includePath, $templatePath, $problemTypeTag.
+#    Returns absolute path of argument provided.
+#
+#
 ####################################################################################
 $includePath;
 $templatePath;
@@ -196,13 +197,18 @@ sub resolveMissingArguments{
 
 ######################## 2. Get include files in order at @files
 #
-# Called with getIncludeFileArray($file) ($file in absolute path).
+# Called with getIncludeFileArray($file) ($file will always be absolute path).
 # Creates:
 #   @files: Array or ordered include chain (absolute paths).
 #   %files: Hash of arrays, hashed by $file (absolute path).
 #   %includes: Hash of include lines, hashed by $file (absolute path).
+# 
 # Uses:
 #   $referenceLineCount
+#
+# Description:
+#   Obtain an ordered array of the files to be included to process
+#   in later steps.
 #
 ###################################################################################
 # Recursive read of include chain:
@@ -372,6 +378,23 @@ sub getIncludeFileArray {
 # Uses:
 #   $referenceLineCount
 #   @files
+#
+# Description:
+#   Obtains arrays:
+#       @typeTags
+#       @namespaces
+#   Obtains hashes:
+#     %typeTagFiles: 
+#       hash key = typeTag 
+#       hash value = last file where typeTag defined.
+#     %typeTagLineNumber
+#       hash key = typeTag 
+#       hash value = line number where typeTag defined.
+#     %inherits 
+#       hash key = typeTag
+#       hash value = array of typetags.
+#     
+
 # 
 ####################################################################################
 @typeTags;
@@ -587,22 +610,55 @@ sub getTypeTags {
     foreach $f (@files){getMacroTags($f)}
     foreach $f (@typeTags) {dbg "tag: $f"}
     
-#   3.0 Structure tags
+
+####################   Structure tags (work in progress)
 ####################
 #    &getStructTags($ARGV[0]); exit 1;
 #    foreach $f (@files){&getStructTags($f)}
 }
 
+
+
+
+
+
+
+
 ######################## 4.  Get properties
+####################################################################################
 #
-# Called with 
+# Called with &createPropertyHashes
 # Creates:
-#   %propertySource;
-#   %propertyValues;
-#   %propertyLineNumber;
-#   %propertyTypeTag;   
-#   %properties: Hash of arrays, hashed by $property (arrays of file paths).
-# 
+#   %propertySource
+#   %propertyValues
+#   %propertyLineNumber
+#   %propertyTypeTag   
+#   %properties: Hash of arrays.
+#
+# Uses:
+#   @files
+#   $referenceLineCount
+#   &getTagName
+#   &getFullLine
+#
+# Description:
+#   Obtains hashes:
+#     %propertySource:
+#       hash key = property 
+#       hash value = last file where property defined.
+#     %propertyValues:
+#       hash key = property 
+#       hash value = last file where property value set.
+#     %propertyLineNumber:
+#       hash key = property 
+#       hash value = line number where property defined.
+#     %propertyTypeTag:   
+#       hash key = property 
+#       hash value = TypeTag where property belongs.
+#     %properties: 
+#       hash key = property 
+#       hash value = array of files where property is defined.
+#             
 #  
 ####################################################################################
 %propertySource;
@@ -663,7 +719,7 @@ sub getValue {
     return $a[2];
 }
 
-sub printProperties {
+sub printProperties { # For debugging purposes, not currently used.
     dbg("PROPERTIES:\n");
     my $property;
     my @keys = keys(%properties);
@@ -708,9 +764,31 @@ sub getPropertyValues {
     return;
 }
 
+sub createPropertyHashes {
+    my $f;
+    foreach $f (@files){&getProperties($f)}
+    foreach $f (@files){&getPropertyValues($f)}
+}
 
 ######################## 5. Mark focus 
 ####################################################################################
+#
+# Called with &processFocus (recursive subroutine).
+# Creates:
+#   %focus
+#
+# Uses:
+#   %inherits
+#
+# Description:
+#   For each array in the %inherits hash, will mark each element of the array
+#   with an integer which indicates how far up the ancestry the element is
+#   located.
+#   Obtains hash:
+#     %focus
+#       hash key = TypeTag 
+#       hash value = Integer characterizing ancestry.
+#
 ####################################################################################
 %focus;
 
@@ -725,10 +803,48 @@ sub markFocus {
         &markFocus($subfocus, $focusLevel+1);
     }
 }
+
+sub processFocus {
+    if (defined $problemTypeTag){
+        markFocus($problemTypeTag, 1);
+    } else {
+	dbg "markFocus(): problemTypeTag is not defined";
+    }
+}
+
 ####################################################################################
 
 ######################## 6. Print XML 
 ####################################################################################
+#
+# Called with &printXML
+#
+# Creates:
+#   structure.xml
+#
+# Uses:
+# 
+#   $templatePath
+#   $includePath
+#   &printFileOut
+#   %properties
+#   @propertyTypeTag
+#   @propertySource
+#   @propertyLineNumber
+#   @propertyValues
+#   %inherits
+#   %focus
+#   @typeTags
+#   %typeTagFiles
+#   $includePath
+#   %typeTagLineNumber
+#
+# Description:
+#   Prints file "structure.xml" with an XML representation of:
+#     * files
+#     * properties
+#     * typetags
+#
 ####################################################################################
 
 
@@ -739,14 +855,14 @@ sub printPropertiesXML{
     my @keys = keys (%properties);
     my @properties = sort @keys;
     foreach $property (@properties){
-        $typetag = $propertyTypeTag{$property};
-        $source = $propertySource{$property};
+        my $typetag = $propertyTypeTag{$property};
+        my $source = $propertySource{$property};
         my $lineNumber = $propertyLineNumber{$property};
-        $oFile = basename($source);
+        my $oFile = basename($source);
 #        $oFile = $source;
 #        $oFile =~ s/$templatePath\///;
 #        if ($includePath){$oFile =~ s/$includePath\///;}
-        $value = $propertyValues{$property};
+        my $value = $propertyValues{$property};
         $value =~ s/</&lt;/g;
 	$value =~ s/>/&gt;/g;
 #        my $realpath = &realpath($oFile);
@@ -800,6 +916,7 @@ sub printTypeTagsXML{
         my $oFile = basename($source);
         $oFile =~ s/$templatePath\///;
         if ($includePath) {$oFile =~ s/$includePath\///;}
+	my $focusItem;
         if ($focus{$typetag}){ $focusItem = " focus=\"$focus{$typetag}\""}
         else {undef $focusItem;}
         if ($focusItem){
@@ -869,7 +986,9 @@ sub compactTemplate{
 
 ####################################################################################
 
-
+# Subroutine &getRawLine:
+#   Recursive reading of lines into a single effective line
+#   eliminating comments and disregarding preprocessor directives.
 sub getRawLine {
 # Returns logical line.
     my $nextLine;
@@ -946,16 +1065,10 @@ sub main {
     getTypeTags;
     dbg "3 ok";
 # 4.
-    my $f;
-    foreach $f (@files){&getProperties($f)}
-    foreach $f (@files){&getPropertyValues($f)}
+    createPropertyHashes;
     dbg "4 ok";
 # 5.
-    if (defined $problemTypeTag){
-        &markFocus($problemTypeTag, 1);
-    } else {
-	dbg "markFocus(): problemTypeTag is not defined";
-    }
+    processFocus;
     dbg "5 ok";
 ####################
   
