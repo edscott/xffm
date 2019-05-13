@@ -26,7 +26,8 @@ use IO::Handle;
 ####################################################################################
 # Global variables:
 $printWarnings=1;
-$printDbg=1;
+$printDbg=0;
+$printDbg2=1;
 $printTrace=0;
 $printInfo=1;
 
@@ -45,6 +46,12 @@ sub dbg{
     if (not $printDbg){return}
     my ($msg) = @_;
     print "DBG> *** $msg \n"
+}
+   
+sub dbg2{
+    if (not $printDbg2){return}
+    my ($msg) = @_;
+    print "DBG2> *** $msg \n"
 }
 
 sub info{
@@ -360,7 +367,8 @@ sub getIncludeFileArray {
     my($start) = @_;
     my $level=0;
     readFiles($start, "--", basename($start));
-    printFileOut(STDOUT, $start, $level);
+#   debug:
+#   printFileOut(STDOUT, $start, $level);
     createFilesArray($start);
 #    foreach $f (@files){dbg "file: $f"}
 }
@@ -449,9 +457,41 @@ sub fullNamespace {
 }
 
 sub parseStruct {
+    my $a, $b, $c;
+    my $typeTag;
     my ($file, $line, $template) = @_;
     my $fullns = fullNamespace(@namespace);
-    dbg "$fullns ----$template structure at\n$file:$referenceLineCount\n$line\n";
+    dbg2 "$fullns ----$template structure at\n$file:$referenceLineCount\n$line\n";
+#  Structures in namespace Dumux::Properties::TTag are typetags.
+    if ($fullns eq "Dumux::Properties::TTag"){
+        dbg2("adding TypeTag: $line");
+        $line =~ s/^\s+//;
+        ($typeTag, $b) = split /\{/, $line, 2;
+        $typeTag =~ s/struct//g;
+        $typeTag =~ s/\s+//g;
+        dbg2(" parseStruct() typetag=$typeTag");
+        if ($line =~ m/using\s+InheritsFrom/g){
+            ($a,$b) = split /InheritsFrom\s+=/, $line, 2;
+            ($a,$c) = split /;/, $b, 2;
+            $a =~ s/std::tuple//g;
+            $a =~ s/<//g;
+            $a =~ s/>//g;
+            if ($a =~ m/,/g){
+                @a = split /,/,$a;
+                foreach $a (@a) {
+                    dbg2 "+ $typeTag inherits from $a";
+                    push(@{ $inherits{"$typeTag"} }, "$a")
+                }
+            } else {
+                dbg2 "  $typeTag inherits from $a";
+		push(@{ $inherits{"$typeTag"} }, "$a");                
+            }
+
+        }
+    }
+        
+
+    
 }
 
 sub getStructLevel {
@@ -480,7 +520,7 @@ sub getStructTags{
     my $nslevel=-1;
     push(@namespace, "");
     my ($file) = @_;
-    trace("getStructTags($file)");
+    dbg2("getStructTags($file)");
     open INPUT, "$file" or die "Unable to open $file";
     $referenceLineCount=0; # global for multilines
     my $templateParameter = "Type"; #default
@@ -611,9 +651,12 @@ sub getTypeTags {
     
 
 ####################   Structure tags (work in progress)
+#
+# Structures defined in namespace Dumux::Properties::TTAG are TypeTags.
 ####################
 #    &getStructTags($ARGV[0]); exit 1;
-#    foreach $f (@files){&getStructTags($f)}
+    foreach $f (@files){&getStructTags($f)}
+    exit 1;
 }
 
 
