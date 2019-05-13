@@ -408,6 +408,7 @@ sub getIncludeFileArray {
 @namespace;
 %typeTagFiles;
 %typeTagLineNumber;
+%inherits;
 # Step 4 variables:
 %propertySource;
 %propertyValues;
@@ -492,17 +493,24 @@ sub parseStruct {
             if ($a =~ m/,/g){
                 @a = split /,/,$a;
                 foreach $a (@a) {
-                    dbg2 "+ $typeTag inherits from $a";
+                    $a =~ s/\s+//g;
+                    dbg2 "+ $typeTag inherits from \"$a\"";
                     push(@{ $inherits{"$typeTag"} }, "$a")
                 }
             } else {
-                dbg2 "  $typeTag inherits from $a";
+                $a =~ s/\s+//g;
+                dbg2 "  $typeTag inherits from \"$a\"";
 		push(@{ $inherits{"$typeTag"} }, "$a");                
             }
 
         }
         trace(" parseStruct() typetag=$typeTag");
         if ($typeTag ne "") {push (@typeTags, $typeTag);}
+#my @array = @{ $inherits{$typeTag} };
+#my $subfocus;
+#foreach $subfocus (@array){
+#    dbg2 "$typeTag --> $subfocus\n";
+#}
     }
 #########   properties
     my $property;
@@ -527,9 +535,9 @@ sub parseStruct {
             ($value, $a) = split /;/, $b, 2;
         }
         $value =~ s/^\s+//;
-        dbg2 "property \"$property\" at $file:$referenceLineCount";
-        dbg2 "typetag=\"$typeTag\"";
-        dbg2 "value=\"$value\"";
+        trace "property \"$property\" at $file:$referenceLineCount";
+        trace "typetag=\"$typeTag\"";
+        trace "value=\"$value\"";
         $propertyLineNumber{$property}=$referenceLineCount;
 	$propertyValues{$property}=$value;
         $propertySource{$property}=$file;
@@ -876,15 +884,16 @@ sub createPropertyHashes {
 ####################################################################################
 %focus;
 
+
 sub markFocus {
     my ($focus, $focusLevel) = @_;
     if (not $focus{$focus}){$focus{$focus} = $focusLevel}
 
-    dbg2 "focus level=$focusLevel: $focus\n";
+    dbg2 "focus level=$focusLevel: getting inherits array for \"$focus\"";
     my @array = @{ $inherits{$focus} };
     my $subfocus;
     foreach $subfocus (@array){
-        dbg2 "subfocus: $subfocus\n";
+        dbg2 "$focus inherits from: $subfocus\n";
         &markFocus($subfocus, $focusLevel+1);
     }
 }
@@ -1005,7 +1014,8 @@ sub printTypeTagsXML{
 	my $focusItem;
         if ($focus{$typetag}){ $focusItem = " focus=\"$focus{$typetag}\""}
         else {undef $focusItem;}
-        if ($focusItem){
+#if ($focusItem)
+        {
 #            my $spaces = ""; 
 #            my $i;
 #            for ($i=0; $i<$focus{$typetag}; $i++){
