@@ -408,6 +408,12 @@ sub getIncludeFileArray {
 @namespace;
 %typeTagFiles;
 %typeTagLineNumber;
+# Step 4 variables:
+%propertySource;
+%propertyValues;
+%propertyLineNumber;
+%propertyTypeTag;
+%properties;
 
 
 # Append lines until token ; reached. 
@@ -461,15 +467,22 @@ sub parseStruct {
     my $typeTag;
     my ($file, $line, $template) = @_;
     my $fullns = fullNamespace(@namespace);
-    dbg2 "$fullns ----$template structure at\n$file:$referenceLineCount\n$line\n";
+    trace "$fullns ----$template structure at\n$file:$referenceLineCount\n$line\n";
 #  Structures in namespace Dumux::Properties::TTag are typetags.
+#
+##########  typetags
     if ($fullns eq "Dumux::Properties::TTag"){
-        dbg2("adding TypeTag: $line");
+        trace("adding TypeTag: $line");
         $line =~ s/^\s+//;
         ($typeTag, $b) = split /\{/, $line, 2;
         $typeTag =~ s/struct//g;
         $typeTag =~ s/\s+//g;
-        dbg2(" parseStruct() typetag=$typeTag");
+	if ($typeTagFiles{$typeTag}) {
+	    warning("TypeTag \"$typeTag\"redefined at file $file:$referenceLineCount");
+	} else {
+	    $typeTagFiles{$typeTag} = $file; 
+	    $typeTagLineNumber{$typeTag} = $referenceLineCount; 
+	}
         if ($line =~ m/using\s+InheritsFrom/g){
             ($a,$b) = split /InheritsFrom\s+=/, $line, 2;
             ($a,$c) = split /;/, $b, 2;
@@ -488,10 +501,42 @@ sub parseStruct {
             }
 
         }
+        trace(" parseStruct() typetag=$typeTag");
+        if ($typeTag ne "") {push (@typeTags, $typeTag);}
     }
-        
+#########   properties
+    my $property;
+    my $value;
+    my $type;
+    if ($fullns eq "Dumux::Properties" and $line =~ m/TypeTag/g and $line =~ m/TTag/g){
+        ($property, $b) = split /</, $line, 2;
+        $property =~ s/struct//g;
+        $property =~ s/\s+//g;
+# get typetag where property belongs
+        ($a, $b) = split /TTag::/, $line, 2;
+        ($typeTag, $a) = split />/, $b, 2;
+        $typeTag =~ s/\s+//g;
+# value...
+        if ($line =~ m/value\s+=/g) {
+            ($a, $b) = split /value\s+=/, $line, 2;
+            ($value, $a) = split /;/, $b, 2;
+        } else { $value = "undefined"}
+# using...
+        if ($line =~ m/using\s+type\s+=/g) {
+            ($a, $b) = split /using\s+type\s+=/, $line, 2;
+            ($value, $a) = split /;/, $b, 2;
+        }
+        $value =~ s/^\s+//;
+        dbg2 "property \"$property\" at $file:$referenceLineCount";
+        dbg2 "typetag=\"$typeTag\"";
+        dbg2 "value=\"$value\"";
+        $propertyLineNumber{$property}=$referenceLineCount;
+	$propertyValues{$property}=$value;
+        $propertySource{$property}=$file;
+        $propertyTypeTag{$property} = $typeTag;
+	push(@{ $properties{$property} }, $file);
 
-    
+    }
 }
 
 sub getStructLevel {
@@ -520,7 +565,7 @@ sub getStructTags{
     my $nslevel=-1;
     push(@namespace, "");
     my ($file) = @_;
-    dbg2("getStructTags($file)");
+    trace("getStructTags($file)");
     open INPUT, "$file" or die "Unable to open $file";
     $referenceLineCount=0; # global for multilines
     my $templateParameter = "Type"; #default
@@ -650,13 +695,14 @@ sub getTypeTags {
     foreach $f (@typeTags) {dbg "tag: $f"}
     
 
-####################   Structure tags (work in progress)
+####################   Structure tags 
 #
 # Structures defined in namespace Dumux::Properties::TTAG are TypeTags.
-####################
+#
 #    &getStructTags($ARGV[0]); exit 1;
     foreach $f (@files){&getStructTags($f)}
-    exit 1;
+    foreach $f (@typeTags) {dbg2 "tag: $f"}
+#    exit 1;
 }
 
 
@@ -702,12 +748,8 @@ sub getTypeTags {
 #       hash value = array of files where property is defined.
 #             
 #  
+#  NOTE: for dumux 3.0 method, variables are defined in step 3 above.
 ####################################################################################
-%propertySource;
-%propertyValues;
-%propertyLineNumber;
-%propertyTypeTag;
-%properties;
 
 # Returns an array filled with the properties defined in the file.
 sub getProperties{
@@ -838,16 +880,18 @@ sub markFocus {
     my ($focus, $focusLevel) = @_;
     if (not $focus{$focus}){$focus{$focus} = $focusLevel}
 
-    dbg "focus: $focus\n";
+    dbg2 "focus level=$focusLevel: $focus\n";
     my @array = @{ $inherits{$focus} };
     my $subfocus;
     foreach $subfocus (@array){
+        dbg2 "subfocus: $subfocus\n";
         &markFocus($subfocus, $focusLevel+1);
     }
 }
 
 sub processFocus {
     if (defined $problemTypeTag){
+        dbg2 "entering processfocus with \"$problemTypeTag\"";
         markFocus($problemTypeTag, 1);
     } else {
 	dbg "markFocus(): problemTypeTag is not defined";
@@ -950,7 +994,7 @@ sub printTypeTagsXML{
             next;
         }
         $repeat{$typetag} = 1;
-	dbg "typetag = $typetag";
+	dbg2 "printTypeTagsXML() typetag = $typetag";
 
         my $inheritString = getInheritString($typetag);
 
@@ -1099,22 +1143,23 @@ sub main {
 # 1.
     my $start = processArguments;
     resolveMissingArguments($start);
-    dbg "1 ok";
+    dbg2 "1 ok";
 # 2.
     getIncludeFileArray($start);
-    dbg "2 ok";
+    dbg2 "2 ok";
 # 3. 
     getTypeTags;
-    dbg "3 ok";
+    dbg2 "3 ok";
 # 4.
     createPropertyHashes;
-    dbg "4 ok";
+    dbg2 "4 ok";
 # 5.
     processFocus;
-    dbg "5 ok";
+    dbg2 "5 ok";
 ####################
   
     printXML($start);
+    dbg2 "6 ok";
 
     exit 1;
 
