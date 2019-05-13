@@ -201,6 +201,7 @@ sub resolveMissingArguments{
 # Creates:
 #   @files: Array or ordered include chain (absolute paths).
 #   %files: Hash of arrays, hashed by $file (absolute path).
+#   @fileText: Array of ordered (include chain : include text)
 #   %includes: Hash of include lines, hashed by $file (absolute path).
 # 
 # Uses:
@@ -231,15 +232,14 @@ sub readFiles {
 }
 
 sub processNextFile {
-    my ($nextFile, $path, $text) = @_;
+    my ($nextFile, $parentPath, $text) = @_;
     my $realNextFile = `realpath -q $nextFile`;
     if ($realNextFile =~ m/\n$/) {chop $realNextFile}
     trace ("realNextFile = \"$realNextFile\"");
     if (-e $realNextFile ){ #it exists...
 	if ($includes{$realNextFile}) {return 1}
 	$includes{$realNextFile} = $text;
-#push(@files, $path);
-	readFiles($realNextFile,$path);
+        readFiles($realNextFile, $parentPath);
 	return 1;
     }
     return 0;
@@ -289,14 +289,12 @@ sub readFile {
 #           2. try include path (user templates)
             if ($includePath) {
                 $nextFile = $includePath . "/" . $b;
-		my $realNextFile = `realpath -q $nextFile`;
 		if (processNextFile($nextFile, $path, $text)){next}
             }
 #
 #           3. try templates path (installation templates)
             if ($templatePath) {
                 $nextFile = $templatePath . "/" . $b;
-		my $realNextFile = `realpath -q $nextFile`;
 		if (processNextFile($nextFile, $path, $text)){next}
             }
 
@@ -337,15 +335,16 @@ sub printFileOut {
     my $i;
     my $src = basename($start);
     if ($level == 0){# top item
-	print $out  "$src\n";
+	print $out  "<files name=\"$src\" realpath=\"$start\">\n";
     } 
     foreach $file (@array){
 	my $tgt = $includes{$file};
+
 	for ($i=0; $i<$level+1; $i++) {print $out  " "} 
 	$tgt =~ s/"/&quot;/g;
 	$tgt =~ s/</&lt;/g;
 	$tgt =~ s/>/&gt;/g;
-	print $out "$tgt\n";
+	print $out "<files name=\"$tgt\" realpath=\"$file\">\n";
         printFileOut($out, $file, $level+1);
 	for ($i=0; $i<$level+1; $i++) {print $out  " "} 
         print $out "</files>\n";
@@ -360,7 +359,7 @@ sub printFileOut {
 sub getIncludeFileArray {
     my($start) = @_;
     my $level=0;
-    readFiles($start, "--");
+    readFiles($start, "--", basename($start));
     printFileOut(STDOUT, $start, $level);
     createFilesArray($start);
 #    foreach $f (@files){dbg "file: $f"}
