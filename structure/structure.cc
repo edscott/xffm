@@ -1,5 +1,6 @@
 /*
- * Copyright 2005-2018 Edscott Wilson Garcia 
+ * Copyright 2019 Edscott Wilson Garcia 
+ * <edscott@imp.mx>
  * license: GPL v.3
  */
 

@@ -1,5 +1,6 @@
 #!/usr/bin/perl
 # GNU public licence Version 3.0
+# Edscott Wilson Garcia <edscott@imp.mx>
 # (C) 2019
 use File::Basename;
 use IO::Handle;
