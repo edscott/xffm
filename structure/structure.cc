@@ -806,6 +806,55 @@ public:
         g_free(parserPath_);
     }
     Structure(gchar **argv){
+        xmlFile_ = g_strdup("structure.xml");
+	if (argv[1] == NULL){
+	    if (!g_file_test("structure.xml", G_FILE_TEST_IS_REGULAR)){
+		std::cerr<<"Cannot find file \"structure.xml\" to open\n";
+		throw 5;
+	    }
+	    return;
+	}
+	if (!checkArguments(argv)){
+	    std::cerr<<"Usage: "<<argv[0]<<" <target file> \n    --templates=<systemwide templates> \n    --include=<override includes> \n    [--problemTypeTag=<DuMuX problem TypeTag>]\n";
+	    throw 6;
+	}
+	createStructureXML(argv);
+    }
+
+    const gchar *xmlFile(void){return xmlFile_;}
+private:
+
+    gboolean checkDir(gchar **argv, const gchar *a){
+	// required directory
+	for (auto p=argv+1; p && *p; p++){
+	    if (strstr(*p, a)){
+		auto g = g_strsplit(*p, "=",2);
+		if (g_file_test(g[1], G_FILE_TEST_IS_DIR)){
+		    return TRUE;
+		} else std::cerr<<g[1]<<" is not a directory\n";
+	    }
+	}
+	std::cerr<<"Missing argument: "<<a<<"\n";
+	return FALSE;
+    }
+
+    gboolean checkArguments(gchar **argv){
+	// source file
+	gboolean OK=FALSE;
+	for (auto p=argv+1; p && *p; p++){
+	    if (g_file_test(*p, G_FILE_TEST_IS_REGULAR)){
+		OK=TRUE;
+		break;
+	    }
+	}
+	if (!OK) return FALSE;
+	// required arguments
+	if (!checkDir(argv, "--templates=")) return FALSE;
+	if (!checkDir(argv, "--include=")) return FALSE;
+	return TRUE;
+    }
+
+    void createStructureXML(gchar **argv){
         auto parser=PERL_PARSER;
         parserPath_ = g_find_program_in_path(parser);
         if (!parserPath_){
@@ -831,12 +880,8 @@ public:
             execvp("/usr/bin/perl", a);
         }
         fprintf(stderr, "OK\n");
+   }
 
-        xmlFile_ = g_strdup("structure.xml");
-    }
-
-    const gchar *xmlFile(void){return xmlFile_;}
-private:
    const gchar *getSourceFile(gchar **argv){
         const gchar *retval=NULL;
         for (auto p=argv+1; p && *p; p++){
@@ -856,6 +901,9 @@ private:
 
 int
 main (int argc, char *argv[]) {
+    // If no argument is specified, then the program will try to read
+    // structure.xml from the current directory
+    // 
     xf::Structure<double>  *structure;
     try {
         structure = new(xf::Structure<double>)(argv);
