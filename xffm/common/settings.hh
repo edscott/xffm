@@ -130,8 +130,12 @@ public:
    static gchar *
    getSettingString(const gchar *group, const gchar *item){
         reloadSettings();
-        gchar *value=NULL;
 	GError *error = NULL;
+        if (!g_key_file_has_key(keyFile, group, item, &error)) {
+            if (error) g_error_free(error);
+            return NULL;
+        }
+        gchar *value=NULL;
 	value = g_key_file_get_string (keyFile, group, item, &error);
 	if (error){
 	    DBG("%s\n", error->message);
@@ -154,6 +158,10 @@ public:
         reloadSettings();
         gint value=-1;
 	GError *error = NULL;
+        if (!g_key_file_has_key(keyFile, group, item, &error)) {
+            if (error) g_error_free(error);
+            return -1;
+        }
 	value = g_key_file_get_integer (keyFile, group, item, &error);
 	if (error){
 	    TRACE("%s\n", error->message);

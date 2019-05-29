@@ -43,6 +43,18 @@ public:
 	exit(0);
     }
 
+    static void
+    placeDialog(GtkWindow *dialog){
+        Display *display = gdk_x11_display_get_xdisplay(gdk_display_get_default());
+        Window w = gdk_x11_window_get_xid(gtk_widget_get_window(GTK_WIDGET(dialog)));
+        Window root;
+        Window child;
+        gint rootX, rootY, childX, childY;
+        guint mask;
+        XQueryPointer(display, w, &root, &child, &rootX, &rootY, &childX, &childY, &mask);
+        gtk_window_move(dialog, rootX, rootY);
+    }
+
 private:
     static gchar *
     getResponse (const gchar * ptext, const gchar *default_value, gboolean hidden) {
@@ -100,9 +112,10 @@ private:
         gboolean hidden = GPOINTER_TO_INT(arg[2]);
 
         auto dialog = responseDialog (ptext, default_text, hidden);
-        gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
+        // No main window...
+        //gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
         gint response = gtk_dialog_run (dialog);
-        gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
+        //gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
         gtk_widget_hide (GTK_WIDGET(dialog));
 
         gchar *response_text = NULL;
@@ -121,7 +134,7 @@ private:
     responseDialog (const gchar * ptext, const gchar *default_value, gboolean hidden) {
 
         auto dialog = GTK_DIALOG(gtk_dialog_new ());
-        gtk_window_set_transient_for(GTK_WINDOW(dialog), GTK_WINDOW(mainWindow));
+        //gtk_window_set_transient_for(GTK_WINDOW(dialog), GTK_WINDOW(mainWindow));
         //gtk_window_set_type_hint(GTK_WINDOW(dialog), GDK_WINDOW_TYPE_HINT_DIALOG);
 
         gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
@@ -131,7 +144,6 @@ private:
         gtk_window_set_keep_above(GTK_WINDOW (dialog), TRUE);
 
         gtk_widget_realize (GTK_WIDGET(dialog));
-
         auto hbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
         gtk_box_set_homogeneous(hbox, FALSE);
         gtk_container_set_border_width (GTK_CONTAINER (hbox), 5);
@@ -203,8 +215,11 @@ private:
         //gtk_dialog_add_action_widget (dialog, GTK_WIDGET(button), GTK_RESPONSE_NO);
 
         
-        gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER_ON_PARENT);
+        // Not honored by fvwm:
+        //gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_MOUSE);
         gtk_widget_show (GTK_WIDGET(dialog));
+        // Instead:
+        Response<Type>::placeDialog(GTK_WINDOW(dialog));
 
         return dialog;
     }

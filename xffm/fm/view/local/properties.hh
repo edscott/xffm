@@ -332,6 +332,7 @@ private:
 	
 	//
 	gtk_widget_show_all(GTK_WIDGET(properties_p->dialog));
+        Response<Type>::placeDialog(GTK_WINDOW(properties_p->dialog));
 	return NULL;
     }
 
