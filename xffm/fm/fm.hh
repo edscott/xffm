@@ -177,13 +177,13 @@ public:
 private:
     
     static const gchar *setTerminalCmd(const gchar *terminal){
-	auto userSetTerminalCmd = getenv("TERMINAL_CMD");
+	auto userSetTerminalCmd = getenv("TERMINAL_EXEC");
 	if (userSetTerminalCmd && !strlen(userSetTerminalCmd)) 
 	    userSetTerminalCmd = NULL;
 	if (userSetTerminalCmd) return userSetTerminalCmd;
 	auto terminalCmd = g_strconcat(terminal, " -e", NULL);
-	DBG("TERMINAL_CMD not defined, assuming %s\n", terminalCmd);
-	setenv("TERMINAL_CMD", terminalCmd, 1);
+	DBG("TERMINAL_EXEC not defined, assuming %s\n", terminalCmd);
+	setenv("TERMINAL_EXEC", terminalCmd, 1);
 	return terminalCmd;
     }
 
