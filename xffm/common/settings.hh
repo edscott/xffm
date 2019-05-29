@@ -7,7 +7,7 @@
 
 
 static GKeyFile *keyFile = NULL;
-static const gchar *settingsfile = NULL;
+static gchar *settingsfile = NULL;
 gsize mTime;
 namespace xf {
 
@@ -18,6 +18,8 @@ public:
 
     static void
     readSettings(void){
+        if (keyFile) g_key_file_free(keyFile);
+        if (settingsfile) g_free(settingsfile); 
         keyFile = g_key_file_new();
         settingsfile = (gchar *)g_build_filename(g_get_user_config_dir(),"xffm+","settings.ini", NULL);
         gboolean loaded = g_key_file_load_from_file(keyFile, settingsfile,
@@ -59,7 +61,6 @@ private:
 
         }
         TRACE("%s reload %ld -> %ld \n", settingsfile, mTime, st.st_mtime);
-        g_key_file_free(keyFile);
         readSettings();
     }
 
