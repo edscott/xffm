@@ -369,9 +369,7 @@ private:
                 for (;list && list->data; list=list->next){
                     TRACE("last find: %s\n", (gchar *)list->data);
                 }
-
-                // Create liststore for DnD
-                auto dialog = GTK_WINDOW(Gtk<Type>::quickHelp(NULL, "foo", NULL, plural_text));
+                Gtk<Type>::openDnDBox(plural_text, lastFind);
                 
 
                 // cleanupmake

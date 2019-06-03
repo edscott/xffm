@@ -78,6 +78,7 @@ private:
         
     }
 
+public:
     static void
     appendColumnText(GtkTreeView *treeView, const gchar *title, gint columnID){
         auto column = mkColumn();
