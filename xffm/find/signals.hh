@@ -355,11 +355,9 @@ private:
                     g_strdup_printf (
                             ngettext ("Found %d match", "Found %d matches", 
                                 Data->resultLimitCounter), Data->resultLimitCounter);
-                gchar *m = g_strdup_printf(_("%s Finished : %s"), xffindProgram, plural_text);
-                g_free(plural_text);
-                gchar *g = g_strdup_printf("%c[31m%s\n",27, m);
+                gchar *message = g_strdup_printf(_("%s Finished : %s"), xffindProgram, plural_text);
+                gchar *g = g_strdup_printf("%c[31m%s\n",27, message);
                 print_c::print_icon (diagnostics, "process-stop", g);
-                g_free(m);
                 // Free last find results
                 GSList *list = lastFind;
                 for(;list; list=list->next) g_free(list->data);
@@ -371,6 +369,15 @@ private:
                 for (;list && list->data; list=list->next){
                     TRACE("last find: %s\n", (gchar *)list->data);
                 }
+
+                // Create liststore for DnD
+                auto dialog = GTK_WINDOW(Gtk<Type>::quickHelp(NULL, "foo", NULL, plural_text));
+                
+
+                // cleanupmake
+                //
+                g_free(plural_text);
+                g_free(message);
         } else {
             if (!gtk_widget_is_visible(GTK_WIDGET(diagnostics))) return;
             gchar *file = g_strdup(line);

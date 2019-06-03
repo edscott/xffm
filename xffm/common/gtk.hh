@@ -336,9 +336,13 @@ public:
         quickHelp(parent, message, NULL);
     }
 
+    static GtkWidget *
+    quickHelp (GtkWindow *parent, const gchar *message, const gchar *icon){
+        return quickHelp(parent, message, icon, _("Help"));
+    }
 
-    static void
-    quickHelp (GtkWindow *parent, const gchar *message, const gchar *icon)
+    static GtkWidget *
+    quickHelp (GtkWindow *parent, const gchar *message, const gchar *icon, const gchar *title)
     {
      static GtkWidget *dialog = NULL;
      static gchar *last_message = NULL;
@@ -351,7 +355,7 @@ public:
              g_free(last_message);
              last_message = NULL;
              dialog = NULL;
-             return;
+             return NULL;
          }
      }
      // Map dialog.
@@ -360,7 +364,7 @@ public:
      GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT;
 
      // Create the widgets
-     dialog = gtk_dialog_new_with_buttons (_("Help"),
+     dialog = gtk_dialog_new_with_buttons (title,
 					   parent,
 					   flags,
 					   _("Cancel"),
@@ -395,6 +399,8 @@ public:
      gtk_box_pack_start(vbox, GTK_WIDGET(hbox), FALSE, FALSE,0);
      gtk_box_pack_start(hbox, GTK_WIDGET(label), FALSE, FALSE,0);
      gtk_widget_show_all (dialog);
+
+     return dialog;
     }
 
     static GtkToggleButton *
