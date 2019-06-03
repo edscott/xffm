@@ -1155,6 +1155,7 @@ private:
         }
 
 	gtk_widget_show(GTK_WIDGET(dialog));
+        Response<Type>::placeDialog(GTK_WINDOW(dialog));
 	GtkAllocation allocation;
 	gtk_widget_get_allocation(GTK_WIDGET(dialog), &allocation);
         TRACE("xffind Size: allocation=%d,%d\n",

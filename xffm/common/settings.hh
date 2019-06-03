@@ -7,7 +7,7 @@
 
 
 static GKeyFile *keyFile = NULL;
-static const gchar *settingsfile = NULL;
+static gchar *settingsfile = NULL;
 gsize mTime;
 namespace xf {
 
@@ -18,6 +18,8 @@ public:
 
     static void
     readSettings(void){
+        if (keyFile) g_key_file_free(keyFile);
+        if (settingsfile) g_free(settingsfile); 
         keyFile = g_key_file_new();
         settingsfile = (gchar *)g_build_filename(g_get_user_config_dir(),"xffm+","settings.ini", NULL);
         gboolean loaded = g_key_file_load_from_file(keyFile, settingsfile,
@@ -59,7 +61,6 @@ private:
 
         }
         TRACE("%s reload %ld -> %ld \n", settingsfile, mTime, st.st_mtime);
-        g_key_file_free(keyFile);
         readSettings();
     }
 
@@ -130,8 +131,12 @@ public:
    static gchar *
    getSettingString(const gchar *group, const gchar *item){
         reloadSettings();
-        gchar *value=NULL;
 	GError *error = NULL;
+        if (!g_key_file_has_key(keyFile, group, item, &error)) {
+            if (error) g_error_free(error);
+            return NULL;
+        }
+        gchar *value=NULL;
 	value = g_key_file_get_string (keyFile, group, item, &error);
 	if (error){
 	    DBG("%s\n", error->message);
@@ -154,6 +159,10 @@ public:
         reloadSettings();
         gint value=-1;
 	GError *error = NULL;
+        if (!g_key_file_has_key(keyFile, group, item, &error)) {
+            if (error) g_error_free(error);
+            return -1;
+        }
 	value = g_key_file_get_integer (keyFile, group, item, &error);
 	if (error){
 	    TRACE("%s\n", error->message);
