@@ -168,7 +168,7 @@ public:
 #if 0       
         Print<Type>::print(textview, "Green", g_strdup_printf("%d:%s\n", grandchild, command));
 #else
-        Print<Type>::print_icon(textview, "greenball", "Green", g_strdup_printf("%d:%s\n", grandchild, command));
+        Print<Type>::print_icon(textview, "greenball", "green", g_strdup_printf("%d:%s\n", grandchild, command));
 #endif
         push_hash(grandchild, g_strdup(command));
         g_free(command);
