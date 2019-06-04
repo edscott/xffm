@@ -38,6 +38,9 @@ static GHashTable *controllerHash = NULL;
 static GSList *lastFind = NULL;
 
 namespace xf {
+
+GtkWindow *findDialog;
+
 template <class Type> class TreeView;
 template <class Type> class LocalModel;
 
@@ -371,7 +374,7 @@ private:
                 for (;list && list->data; list=list->next){
                     TRACE("last find: %s\n", (gchar *)list->data);
                 }
-                openDnDBox(plural_text, lastFind);
+                openDnDBox(findDialog, plural_text, lastFind);
                 
 
                 // cleanupmake
@@ -407,11 +410,11 @@ private:
     }
 
     static void
-    openDnDBox(const gchar *title, GSList *list){
+    openDnDBox(GtkWindow *parent, const gchar *title, GSList *list){
         //if (g_slist_length(list) == 0) return NULL;
         
         // Create liststore for DnD
-        auto dialog = GTK_WINDOW(Gtk<Type>::_quickHelp(NULL, _("Results"), NULL, title));
+        auto dialog = GTK_WINDOW(Gtk<Type>::_quickHelp(parent, _("Results"), NULL, title));
         auto vbox = GTK_BOX(g_object_get_data(G_OBJECT(dialog), "vbox"));
 	auto scrolledWindow = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new (NULL, NULL));
         gtk_scrolled_window_set_policy (scrolledWindow, GTK_POLICY_NEVER,GTK_POLICY_AUTOMATIC);
