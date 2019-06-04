@@ -116,7 +116,7 @@ public:
 	GtkTextView *diagnostics = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(data), "diagnostics"));
 	TRACE("fixme: signals::onEditButton\n");
         //print_c::print_status(diagnostics, g_strdup("fixme: signals::onEditButton testing run\n"));
-        print_c::show_text(diagnostics);        
+        print_c::showTextSmall(diagnostics);        
         edit_command(data);
     }
 
