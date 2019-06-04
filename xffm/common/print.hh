@@ -96,14 +96,20 @@ public:
     static void show_text(GtkTextView *textview){
         if (!textview) return;
         auto vpane = GTK_PANED(g_object_get_data(G_OBJECT(textview), "vpane"));
-	void *arg[]={(void *)vpane, NULL};
+	void *arg[]={(void *)vpane, NULL, NULL, NULL};
         context_function(show_text_buffer_f, arg);
     }
 
+    static void showTextSmall(GtkTextView *textview){
+        if (!textview) return;
+        auto vpane = GTK_PANED(g_object_get_data(G_OBJECT(textview), "vpane"));
+	void *arg[]={(void *)vpane, NULL,GINT_TO_POINTER(1), NULL};
+        context_function(show_text_buffer_f, arg);
+    }
     static void show_textFull(GtkTextView *textview){
         if (!textview) return;
         auto vpane = GTK_PANED(g_object_get_data(G_OBJECT(textview), "vpane"));
-	void *arg[]={(void *)vpane, GINT_TO_POINTER(1),NULL};
+	void *arg[]={(void *)vpane, GINT_TO_POINTER(1),NULL, NULL};
         context_function(show_text_buffer_f, arg);
     }
  /*   static gboolean show_textFull(void *data){
@@ -354,6 +360,7 @@ private:
         auto arg=(void **)data;
         auto vpane = GTK_PANED(arg[0]);
 	auto fullview =arg[1]; 
+        auto small = arg[2];
         if(!vpane) {
             ERROR("vpane is NULL\n");
             return NULL;
@@ -375,8 +382,9 @@ private:
 	//gint height = allocation.height;
 	gtk_widget_get_allocation(GTK_WIDGET(vpane), &allocation);
 	gint vheight = allocation.height;
-        gint height = 2*vheight/4;
-
+        gint height;
+        if (small) height = 9*vheight/10;
+        else height = 2*vheight/4;
         TRACE("vheight = %d, position = %d\n", vheight, gtk_paned_get_position(vpane));
 	if (gtk_paned_get_position(vpane) > height) {
 	    TRACE("setting vpane position to %d\n", height);

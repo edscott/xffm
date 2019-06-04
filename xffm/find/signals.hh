@@ -38,6 +38,8 @@ static GHashTable *controllerHash = NULL;
 static GSList *lastFind = NULL;
 
 namespace xf {
+template <class Type> class TreeView;
+template <class Type> class LocalModel;
 
 template <class Type>
 class findSignals: public Run<Type>{
@@ -160,7 +162,7 @@ public:
 	GtkTextView *diagnostics = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(dialog), "diagnostics"));
         updateCompletions(dialog);
         
-        print_c::show_text(diagnostics);
+        print_c::showTextSmall(diagnostics);
         on_find_clicked_action (GTK_WINDOW(dialog));
     }
 
@@ -369,7 +371,7 @@ private:
                 for (;list && list->data; list=list->next){
                     TRACE("last find: %s\n", (gchar *)list->data);
                 }
-                Gtk<Type>::openDnDBox(plural_text, lastFind);
+                openDnDBox(plural_text, lastFind);
                 
 
                 // cleanupmake
@@ -402,6 +404,51 @@ private:
         } 
         
         return;
+    }
+
+    static void
+    openDnDBox(const gchar *title, GSList *list){
+        //if (g_slist_length(list) == 0) return NULL;
+        
+        // Create liststore for DnD
+        auto dialog = GTK_WINDOW(Gtk<Type>::_quickHelp(NULL, _("Results"), NULL, title));
+        auto vbox = GTK_BOX(g_object_get_data(G_OBJECT(dialog), "vbox"));
+	auto scrolledWindow = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new (NULL, NULL));
+        gtk_scrolled_window_set_policy (scrolledWindow, GTK_POLICY_NEVER,GTK_POLICY_AUTOMATIC);
+        gtk_widget_set_size_request (GTK_WIDGET(scrolledWindow), 200, 200);
+
+        gtk_box_pack_start (vbox, GTK_WIDGET(scrolledWindow), TRUE, TRUE, 0);
+        
+        auto model = gtk_list_store_new(2, GDK_TYPE_PIXBUF, G_TYPE_STRING);
+        GtkTreeIter iter;
+
+        for (auto l=list; l && l->data; l = l->next){
+            auto path = (gchar *)l->data;
+            gtk_list_store_append (model, &iter);
+            gtk_list_store_set (model, &iter, 1, path, -1);
+
+            auto pixbuf = LocalModel<Type>::getIcon(path);
+            gtk_list_store_set (model, &iter, 0, pixbuf, -1);
+            g_object_unref(pixbuf);
+            
+        }
+
+        auto treeView = GTK_TREE_VIEW(gtk_tree_view_new());
+	gtk_tree_view_set_model(treeView, GTK_TREE_MODEL(model));
+        TreeView<Type>::appendColumnPixbuf(treeView, 0);
+        TreeView<Type>::appendColumnText(treeView, _("Path"), 1);
+       
+        auto selection = gtk_tree_view_get_selection (treeView);
+        gtk_tree_selection_set_mode (selection,  GTK_SELECTION_MULTIPLE);
+        gtk_tree_view_set_rubber_banding (treeView, TRUE);        
+        gtk_container_add (GTK_CONTAINER(scrolledWindow), GTK_WIDGET(treeView));
+
+        gtk_widget_show(GTK_WIDGET(scrolledWindow));
+        gtk_widget_show(GTK_WIDGET(treeView));
+
+        gtk_widget_show_all (GTK_WIDGET(dialog));
+        
+        
     }
 
     static gboolean

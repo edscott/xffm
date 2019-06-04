@@ -47,6 +47,28 @@ class LocalModel
 {
 public:
 
+    static GdkPixbuf *
+    getIcon(const gchar *path){
+        auto iconName = getIconName(path);
+        auto pixbuf = Pixbuf<Type>::get_pixbuf(iconName, -24);
+        g_free(iconName);
+        return pixbuf;
+    }
+    
+    static gchar *
+    getIconName(const gchar *path){
+        auto directory = g_path_get_dirname(path);
+        struct dirent d;
+        auto basename = g_path_get_basename(path);
+        strncpy(d.d_name, basename, 256);
+        d.d_type = DT_UNKNOWN;
+        auto xd_p = get_xd_p(directory, &d, TRUE);  
+        auto iconName = LocalIcons<Type>::getIconname(xd_p);
+        g_free(directory);
+        g_free(basename);
+        return iconName;
+    }
+
     // This mkTreeModel should be static...
     static gint
     loadModel (View<Type> *view, const gchar *path)

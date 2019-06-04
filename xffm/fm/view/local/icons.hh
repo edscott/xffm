@@ -8,7 +8,6 @@ template <class Type> class ClipBoard;
 template <class Type>
 class LocalIcons {
     using gtk_c = Gtk<Type>;
-    using pixbuf_c = Pixbuf<Type>;
     using util_c = Util<Type>;
     
 public:
@@ -201,7 +200,7 @@ private:
         return  NULL;
             
     }
-
+private:
     static gchar *
     extension(const gchar *base){
 	auto extension = g_strdup("");
