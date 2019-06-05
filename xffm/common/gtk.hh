@@ -391,6 +391,10 @@ public:
 
      // Ensure that the dialog box is destroyed when the user responds
 
+     if (parent){
+         g_signal_connect_swapped(dialog, "response", G_CALLBACK (gtk_widget_show),
+			       parent);
+     }
      g_signal_connect_swapped (dialog,
 			       "response",
 			       G_CALLBACK (gtk_widget_destroy),
