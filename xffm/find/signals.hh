@@ -43,15 +43,11 @@ GtkWindow *findDialog;
 
 template <class Type> class TreeView;
 template <class Type> class LocalModel;
+template <class Type> class BaseSignals;
 
-template <class Type>
-class findSignals: public Run<Type>{
-    using gtk_c = Gtk<double>;
-    using print_c = Print<double>;
-    using run_c = Run<double>;
-    using util_c = Util<double>;
+template <class Type> class DnDBox{
+
 public:
-
     static void
     openDnDBox(GtkWindow *parent, const gchar *title, GSList *list){
         //if (g_slist_length(list) == 0) return NULL;
@@ -94,12 +90,90 @@ public:
 
         gtk_widget_show(GTK_WIDGET(scrolledWindow));
         gtk_widget_show(GTK_WIDGET(treeView));
+    
+        g_object_set_data(G_OBJECT(dialog), "treeView", treeView);
+        g_object_set_data(G_OBJECT(dialog), "model", model);
+        setUpSignals(G_OBJECT(dialog));
 
         gtk_widget_show_all (GTK_WIDGET(dialog));
         gtk_widget_hide(GTK_WIDGET(parent));
         
         
     }
+private:
+    static void
+    setUpSignals(GObject *dialog){
+        auto treeView = GTK_TREE_VIEW(g_object_get_data(dialog, "treeView"));
+        auto model = GTK_TREE_MODEL(g_object_get_data(dialog, "model"));
+
+         /*g_signal_connect (treeView, "row-activated", 
+            G_CALLBACK (TreeView<Type>::rowActivated), 
+            (void *)view);
+         g_signal_connect (treeView, "button-release-event",
+             G_CALLBACK(BaseSignals<Type>::buttonRelease), 
+             (void *)view);*/
+         g_signal_connect (treeView, "button-press-event",
+             G_CALLBACK(buttonPress), 
+             NULL);
+        
+        // source widget
+        /*g_signal_connect (treeView, "motion-notify-event", 
+            G_CALLBACK (BaseSignals<Type>::motionNotifyEvent), 
+            (void *)view);*/
+
+    }
+    static gboolean
+    buttonPress (GtkWidget *widget,
+                   GdkEventButton  *event,
+                   gpointer   data){
+        auto dialog =G_OBJECT(data); 
+        auto treeView = GTK_TREE_VIEW(g_object_get_data(dialog, "treeView"));
+        auto model = GTK_TREE_MODEL(g_object_get_data(dialog, "model"));
+        if (event->button == 1) {
+            GtkTreePath *tpath;
+            DBG( "button press 1 \n");
+	  //  controlMode = FALSE;
+	  //  dragMode = 0; // default (move)
+           if (!gtk_tree_view_get_path_at_pos (treeView, event->x, event->y, &tpath, NULL, NULL, NULL)){
+               tpath = NULL;
+           }
+           
+            //if (CONTROL_MODE && SHIFT_MODE) dragMode = -3; // link mode
+            //else if (CONTROL_MODE) dragMode = -2; // copy
+            //else if (SHIFT_MODE)   dragMode = -1; // move
+            
+            GtkTreeIter iter;
+            gtk_tree_model_get_iter(model, &iter, tpath);
+            auto selection = gtk_tree_view_get_selection (treeView);
+            gtk_tree_selection_unselect_all (selection);
+            gtk_tree_selection_select_path (selection, tpath); 
+	    
+            gtk_tree_path_free(tpath);
+            return TRUE;
+        }
+        if (event->button != 3) return FALSE;
+
+
+        DBG(" button press 3\n");
+        return TRUE;
+    }
+    static gboolean
+    buttonReleasebuttonPress (GtkWidget *widget,
+                   GdkEventButton  *event,
+                   gpointer   data){
+        return TRUE;
+    }
+
+};
+
+template <class Type>
+class findSignals: public Run<Type>{
+    using gtk_c = Gtk<double>;
+    using print_c = Print<double>;
+    using run_c = Run<double>;
+    using util_c = Util<double>;
+public:
+
 
     static void onSizeAllocate (GtkWidget    *widget,
 		   GdkRectangle *allocation,
@@ -424,7 +498,7 @@ private:
                 for (;list && list->data; list=list->next){
                     TRACE("last find: %s\n", (gchar *)list->data);
                 }
-                openDnDBox(findDialog, plural_text, lastFind);
+                DnDBox<Type>::openDnDBox(findDialog, plural_text, lastFind);
                 
 
                 // cleanupmake
