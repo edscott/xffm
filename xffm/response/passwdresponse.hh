@@ -45,17 +45,63 @@ public:
 
     static void
     placeDialog(GtkWindow *dialog){
+        gtk_widget_realize(GTK_WIDGET(dialog));
         Display *display = gdk_x11_display_get_xdisplay(gdk_display_get_default());
-        Window w = gdk_x11_window_get_xid(gtk_widget_get_window(GTK_WIDGET(dialog)));
+        Drawable w = gdk_x11_window_get_xid(gtk_widget_get_window(GTK_WIDGET(dialog)));
         Window root;
         Window child;
-        gint rootX, rootY, childX, childY;
+        gint mouseX, mouseY, childX, childY;
+        guint rootW, rootH;
         guint mask;
-        XQueryPointer(display, w, &root, &child, &rootX, &rootY, &childX, &childY, &mask);
-        gtk_window_move(dialog, rootX, rootY);
+        XQueryPointer(display, w, &root, &child, &mouseX, &mouseY, &childX, &childY, &mask);
+        guint windowW,windowH;
+        //gtk_window_get_size(dialog, &windowW, &windowH);
+        getWindowDimensions(w, &windowW, &windowH);
+        getRootDimensions(&rootW, &rootH);
+        TRACE("*** rootW,H= (%d,%d) window=(%d,%d) mouse=(%d,%d)\n", 
+                rootW,rootH,windowW,windowH, mouseX,mouseY);
+        if (mouseX+windowW > rootW) mouseX = rootW - windowW;
+        if (mouseY+windowH > rootH) mouseY = rootH - windowH;
+        TRACE("***2 rootW,H= (%d,%d) window=(%d,%d) mouse=(%d,%d)\n", 
+                rootW,rootH,windowW,windowH, mouseX,mouseY);
+
+        gtk_window_move(dialog, mouseX, mouseY);
     }
 
 private:
+
+    static void 
+    getWindowDimensions(Drawable drawable, guint *windowW, guint *windowH){
+        
+        gint x, y;
+        guint d, border;
+        Window root;
+        Display *display = gdk_x11_display_get_xdisplay(gdk_display_get_default());
+
+        XGetGeometry(display, drawable, &root,
+                &x, &y, 
+                windowW, windowH, 
+                &border, &d);
+        return;
+    }
+
+    static void 
+    getRootDimensions(guint *rootW, guint *rootH){
+        
+        Drawable drawable = gdk_x11_get_default_root_xwindow ();
+        gint x, y;
+        guint d, border;
+        Window root;
+        Display *display = gdk_x11_display_get_xdisplay(gdk_display_get_default());
+
+        XGetGeometry(display, drawable, &root,
+                &x, &y, 
+                rootW, rootH, 
+                &border, &d);
+        return;
+    }
+
+
     static gchar *
     getResponse (const gchar * ptext, const gchar *default_value, gboolean hidden) {
         void *arg[]={
