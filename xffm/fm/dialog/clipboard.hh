@@ -123,13 +123,15 @@ public:
             GtkTreeIter iter;
             gtk_tree_model_get_iter (view->treeModel(), &iter, tpath);
             gtk_tree_model_get (view->treeModel(), &iter, PATH, &path, -1);
-            if (!data) data = g_strconcat(URIFILE, path, "\n", NULL);
-            else {
-                gchar *e = g_strconcat(data, URIFILE, path, "\n", NULL);
-                g_free(data);
-                data = e;
+            if (g_file_test(path, G_FILE_TEST_EXISTS)){
+                if (!data) data = g_strconcat(URIFILE, path, "\n", NULL);
+                else {
+                    gchar *e = g_strconcat(data, URIFILE, path, "\n", NULL);
+                    g_free(data);
+                    data = e;
+                }
+                TRACE("getSelectionData(): append: %s -> \"%s\"\n", path, data);
             }
-            TRACE("getSelectionData(): append: %s -> \"%s\"\n", path, data);
             g_free(path);
         }
         return data;

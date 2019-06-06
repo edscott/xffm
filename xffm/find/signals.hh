@@ -1,6 +1,8 @@
 #ifndef FINDSIGNALS__HH
 # define FINDSIGNALS__HH
 
+#include "../structure/dnd.hh"
+
 static const gchar *ftypes[] = {
     N_("Regular"),
     N_("Directory"),
@@ -45,6 +47,7 @@ template <class Type> class TreeView;
 template <class Type> class LocalModel;
 template <class Type> class BaseSignals;
 
+
 template <class Type> class DnDBox{
 
 public:
@@ -64,6 +67,7 @@ public:
 
         gtk_box_pack_start (vbox, GTK_WIDGET(scrolledWindow), TRUE, TRUE, 0);
         
+        //auto model = gtk_tree_store_new(2, GDK_TYPE_PIXBUF, G_TYPE_STRING);
         auto model = gtk_list_store_new(2, GDK_TYPE_PIXBUF, G_TYPE_STRING);
         GtkTreeIter iter;
 
@@ -93,8 +97,10 @@ public:
     
         g_object_set_data(G_OBJECT(dialog), "treeView", treeView);
         g_object_set_data(G_OBJECT(dialog), "model", model);
-        setUpSignals(G_OBJECT(dialog));
-
+        //setUpSignals(G_OBJECT(dialog));
+        
+        auto dnd = new (DnD<double>)(GTK_WIDGET(dialog), treeView, 1, 0);
+        g_object_set_data(G_OBJECT(dialog), "dnd", dnd);
         gtk_widget_show_all (GTK_WIDGET(dialog));
         gtk_widget_hide(GTK_WIDGET(parent));
         
@@ -109,61 +115,9 @@ private:
          /*g_signal_connect (treeView, "row-activated", 
             G_CALLBACK (TreeView<Type>::rowActivated), 
             (void *)view);
-         g_signal_connect (treeView, "button-release-event",
-             G_CALLBACK(BaseSignals<Type>::buttonRelease), 
-             (void *)view);*/
-         g_signal_connect (treeView, "button-press-event",
-             G_CALLBACK(buttonPress), 
-             NULL);
-        
-        // source widget
-        /*g_signal_connect (treeView, "motion-notify-event", 
-            G_CALLBACK (BaseSignals<Type>::motionNotifyEvent), 
-            (void *)view);*/
+         */
 
     }
-    static gboolean
-    buttonPress (GtkWidget *widget,
-                   GdkEventButton  *event,
-                   gpointer   data){
-        auto dialog =G_OBJECT(data); 
-        auto treeView = GTK_TREE_VIEW(g_object_get_data(dialog, "treeView"));
-        auto model = GTK_TREE_MODEL(g_object_get_data(dialog, "model"));
-        if (event->button == 1) {
-            GtkTreePath *tpath;
-            DBG( "button press 1 \n");
-	  //  controlMode = FALSE;
-	  //  dragMode = 0; // default (move)
-           if (!gtk_tree_view_get_path_at_pos (treeView, event->x, event->y, &tpath, NULL, NULL, NULL)){
-               tpath = NULL;
-           }
-           
-            //if (CONTROL_MODE && SHIFT_MODE) dragMode = -3; // link mode
-            //else if (CONTROL_MODE) dragMode = -2; // copy
-            //else if (SHIFT_MODE)   dragMode = -1; // move
-            
-            GtkTreeIter iter;
-            gtk_tree_model_get_iter(model, &iter, tpath);
-            auto selection = gtk_tree_view_get_selection (treeView);
-            gtk_tree_selection_unselect_all (selection);
-            gtk_tree_selection_select_path (selection, tpath); 
-	    
-            gtk_tree_path_free(tpath);
-            return TRUE;
-        }
-        if (event->button != 3) return FALSE;
-
-
-        DBG(" button press 3\n");
-        return TRUE;
-    }
-    static gboolean
-    buttonReleasebuttonPress (GtkWidget *widget,
-                   GdkEventButton  *event,
-                   gpointer   data){
-        return TRUE;
-    }
-
 };
 
 template <class Type>
