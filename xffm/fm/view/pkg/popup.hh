@@ -15,6 +15,7 @@
 namespace xf
 {
 
+template <class Type> class PopUp;
 template <class Type> class View;
 template <class Type> class PkgView;
 template <class Type>
@@ -29,8 +30,9 @@ class PkgPopUp {
          menuItem_t item[]={
 	    //{N_("Open in New Tab"), (void *)LocalPopUp<Type>::newTab, NULL, NULL},
             {NULL,NULL,NULL, FALSE}};
-	pkgPopUp = BasePopUp<Type>::createPopup(item); 
-        BasePopUp<Type>::changeTitle(pkgPopUp, _("Software Updater"), NULL);
+        auto popup = new(Popup<Type>)(item);
+        pkgPopUp = popup->menu();
+        popup->changeTitle( _("Software Updater"), NULL);
 
         return pkgPopUp;        
     }  
@@ -48,8 +50,7 @@ class PkgPopUp {
 	    {N_("Information"), (void *)info, NULL, NULL},
 	     {NULL,NULL,NULL,NULL}
         };
-	pkgItemPopUp = BasePopUp<Type>::createPopup(item); 
-        const gchar *smallKey[]={
+        const gchar *key[]={
             "Update Database",
             "Fetch",
             "Install --dry-run",
@@ -59,7 +60,7 @@ class PkgPopUp {
             "Information",
             NULL
         };
-        const gchar *smallIcon[]={
+        const gchar *keyIcon[]={
             "view-refresh",
             "emblem-downloads",
             "list-add",
@@ -69,13 +70,8 @@ class PkgPopUp {
             "help-faq",
             NULL
         };
-        gint i=0;
-        for (auto k=smallKey; k && *k; k++, i++){
-            auto mItem = (GtkMenuItem *)g_object_get_data(G_OBJECT(pkgItemPopUp), *k);
-            auto markup = g_strdup_printf("<span size=\"small\">%s</span>", _(*k));
-	    gtk_c::menu_item_content(mItem, smallIcon[i], markup, -16);
-	    g_free(markup);
-        }
+        auto popup = new(Popup<Type>)(item, key, keyIcon, TRUE);
+        pkgItemPopUp = popup->menu();
         
         return pkgItemPopUp;
     }
@@ -162,6 +158,7 @@ class PkgPopUp {
 	Util<Type>::resetObjectData(G_OBJECT(pkgItemPopUp), "iconName", iconName);
 	Util<Type>::resetObjectData(G_OBJECT(pkgItemPopUp), "fileInfo", comment);
 	Util<Type>::resetObjectData(G_OBJECT(pkgItemPopUp), "statLine", statLine);
+	if (comment && strchr(comment, '&')) *(strchr(comment, '&')) = '+';
 
 	
  	// Set title element
@@ -171,7 +168,14 @@ class PkgPopUp {
 	TRACE("iconName=%s\n",iconName);
 	TRACE("fileInfo=%s\n",comment);
 	TRACE("statLine=%s\n",statLine);
-	BasePopUp<Type>::changeTitle(pkgItemPopUp);
+        gchar *markup = g_strdup_printf("<span color=\"red\"><b><i>%s</i></b></span><span color=\"#aa0000\">%s%s</span>\n<span color=\"blue\">%s</span>\n<span color=\"green\">%s</span>", 
+                displayName, 
+                version?": ":"",
+                version?version:"",
+                comment?comment:"", 
+                statLine?statLine:"");
+        Popup<Type>::changeTitle(pkgItemPopUp, markup, iconName);
+        g_free(markup);
     }
     static void
     info(GtkMenuItem *menuItem, gpointer data)

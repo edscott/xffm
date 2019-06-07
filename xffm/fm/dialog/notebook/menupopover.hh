@@ -225,39 +225,10 @@ private:
             {N_("Show hidden files"), (void *)toggleItem, (void *) "ShowHidden", "LocalView"},
             {N_("Show Backup Files"), (void *)toggleItem, (void *) "ShowBackups", "LocalView"},
             {N_("Sort data in descending order"), (void *)toggleItem, (void *) "Descending", "LocalView"},
-#if 0
-            //{N_("Root folder"), (void *)MenuPopoverSignals<Type>::root, (void *) menuButton_},
-            {N_("Home Directory"), (void *)MenuPopoverSignals<Type>::home, (void *) menuButton_},
-            {N_("Disk Image Mounter"), (void *)MenuPopoverSignals<Type>::fstab, (void *) menuButton_},
-            {N_("Software Updater"), (void *)MenuPopoverSignals<Type>::pkg, (void *) menuButton_},
-            {N_("Trash bin"), (void *)MenuPopoverSignals<Type>::trash, (void *) menuButton_},
-            {N_("Open terminal"), (void *)MenuPopoverSignals<Type>::terminal, (void *) menuButton_},
-            {N_("Open a New Window"), (void *)MenuPopoverSignals<Type>::newWindow, (void *) menuButton_},
-            {N_("Search"), (void *)MenuPopoverSignals<Type>::search, (void *) menuButton_},
-#endif
+
             {N_("Exit"), (void *)MenuPopoverSignals<Type>::finish, (void *) menuButton_},
             {NULL}};
-       
-	auto menu =  BasePopUp<Type>::createPopup(item);
-	auto title = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(menu), "title"));
-	gtk_widget_set_sensitive(GTK_WIDGET(title), FALSE);
-	gchar *markup = g_strdup_printf("<span color=\"blue\" size=\"large\">%s</span>", _("Main menu"));
-	Gtk<Type>::menu_item_content(title, NULL, markup, -24);
-	g_free(markup);
-        gtk_widget_show(GTK_WIDGET(title));
-#if 0
-        auto menu = GTK_MENU(gtk_menu_new());
-        auto p = item;
-        gint i;
-        for (i=0;p && p->label; p++,i++){
-            GtkWidget *v = gtk_menu_item_new_with_label (_(p->label));
-            gtk_container_add (GTK_CONTAINER (menu), v);
-            g_signal_connect ((gpointer) v, "activate", MENUITEM_CALLBACK (p->callback), p->callbackData);
-            gtk_widget_show (v);
-        }
-#endif
-#if 10
-	const gchar *smallKey[]={
+	const gchar *key[]={
             "Home Directory",
             "Disk Image Mounter",
             "Software Updater",
@@ -268,7 +239,7 @@ private:
             "Exit",
             NULL
         };
-        const gchar *smallIcon[]={
+        const gchar *keyIcon[]={
             "go-home",
             "folder-remote",
             "x-package-repository",
@@ -280,15 +251,18 @@ private:
             "application-exit",
             NULL
         };
-        gint i=0;
-        for (auto k=smallKey; k && *k; k++, i++){
-            auto mItem = (GtkMenuItem *)g_object_get_data(G_OBJECT(menu), *k);
-	    if (!mItem) continue;
-            auto markup = g_strdup_printf("<span size=\"small\">%s</span>", _(*k));
-	    Gtk<Type>::menu_item_content(mItem, smallIcon[i], markup, -16);
-	    g_free(markup);
-        }
-#endif
+       
+        
+        auto popup = new(Popup<Type>)(item, key, keyIcon, TRUE);
+        auto menu = popup->menu();
+
+
+	auto title = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(menu), "title"));
+	gtk_widget_set_sensitive(GTK_WIDGET(title), FALSE);
+	gchar *markup = g_strdup_printf("<span color=\"blue\" size=\"large\">%s</span>", _("Main menu"));
+	Gtk<Type>::menu_item_content(title, NULL, markup, -24);
+	g_free(markup);
+        gtk_widget_show(GTK_WIDGET(title));
 	
         g_signal_connect (G_OBJECT(menuButton_), "clicked", G_CALLBACK(updateMenu), g_object_get_data(G_OBJECT(menu), "View as list"));
 

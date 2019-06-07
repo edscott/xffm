@@ -18,14 +18,16 @@ class FstabPopUp {
     static GtkMenu *createPopUp(void){
          menuItem_t item[]={
 	    {N_("Open in New Tab"), (void *)LocalPopUp<Type>::newTab, NULL, NULL},
-            {N_("NFS Network Volume"), (void *)BasePopUp<Type>::noop, NULL, NULL},
-            {N_("SSHFS Remote Synchronization Folder"), (void *)BasePopUp<Type>::noop, NULL, NULL},
-            {N_("eCryptfs Volume"), (void *)BasePopUp<Type>::noop, NULL, NULL},
-            {N_("CIFS Volume"), (void *)BasePopUp<Type>::noop, NULL, NULL},
+            {N_("NFS Network Volume"), (void *)Popup<Type>::noop, NULL, NULL},
+            {N_("SSHFS Remote Synchronization Folder"), (void *)Popup<Type>::noop, NULL, NULL},
+            {N_("eCryptfs Volume"), (void *)Popup<Type>::noop, NULL, NULL},
+            {N_("CIFS Volume"), (void *)Popup<Type>::noop, NULL, NULL},
             {NULL,NULL,NULL, FALSE}};
-	fstabPopUp = BasePopUp<Type>::createPopup(item); 
-        BasePopUp<Type>::changeTitle(fstabPopUp, _("Disk Image Mounter"), NULL);
 
+        auto popup = new(Popup<Type>)(item);
+        fstabPopUp = popup->menu();
+        popup->changeTitle(_("Disk Image Mounter"), NULL);
+ 
         return fstabPopUp;        
     }  
 
@@ -42,24 +44,18 @@ class FstabPopUp {
 	    //{N_("Properties"), NULL, NULL, NULL},
 	     {NULL,NULL,NULL,NULL}
         };
-	fstabItemPopUp = BasePopUp<Type>::createPopup(item); 
-        const gchar *smallKey[]={
+        const gchar *key[]={
             "Mount the volume associated with this folder",
             "Unmount the volume associated with this folder",
             NULL
         };
-        const gchar *smallIcon[]={
+        const gchar *keyIcon[]={
             "greenball",
             "redball",
             NULL
         };
-        gint i=0;
-        for (auto k=smallKey; k && *k; k++, i++){
-            auto mItem = (GtkMenuItem *)g_object_get_data(G_OBJECT(fstabItemPopUp), *k);
-            auto markup = g_strdup_printf("<span size=\"small\">%s</span>", _(*k));
-	    gtk_c::menu_item_content(mItem, smallIcon[i], markup, -16);
-	    g_free(markup);
-        }
+        auto popup = new(Popup<Type>)(item, key, keyIcon, TRUE);
+        fstabItemPopUp = popup->menu();
         
         return fstabItemPopUp;
     }
@@ -98,7 +94,7 @@ class FstabPopUp {
 	Util<Type>::resetObjectData(G_OBJECT(fstabItemPopUp), "tooltipText", tooltipText);
 
  	// Set title element
-        BasePopUp<Type>::changeTitle(fstabItemPopUp, tooltipText);
+        Popup<Type>::changeTitle(fstabItemPopUp, tooltipText);
     }
 
     static void

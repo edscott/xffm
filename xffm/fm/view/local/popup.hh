@@ -47,6 +47,8 @@ static const gchar *generalItems[]={
 namespace xf
 {
 
+
+
 template <class Type> class FstabView;
 template <class Type> class View;
 template <class Type> class BaseViewSignals;
@@ -56,7 +58,6 @@ template <class Type> class LocalView;
 template <class Type>
 class LocalPopUp {
     
-    using gtk_c = Gtk<Type>;
     using pixbuf_c = Pixbuf<Type>;
     using util_c = Util<Type>;
     using pixbuf_icons_c = Icons<Type>;
@@ -82,8 +83,27 @@ public:
             {N_("Select All"), (void *)selectAll, NULL, NULL},
             {N_("Match regular expression"), (void *)selectMatch, NULL, NULL},
             {NULL,NULL,NULL, NULL}};
-	localPopUp = BasePopUp<Type>::createPopup(item); 
-        decorateEditItems(localPopUp);
+        const gchar *key[]={
+            "New",// this menuitem is only for nonitem popup
+            "Cut",
+            "Copy",
+            "Paste",
+            "Delete",
+            NULL
+        };
+        const gchar *keyIcon[]={
+            "document-new",
+            "edit-cut",
+            "edit-copy",
+            "edit-paste",
+            "edit-delete",
+            NULL
+        };
+
+        auto popup = new(Popup<Type>)(item, key, keyIcon);
+        localPopUp = popup->menu();
+	//localPopUp = BasePopUp<Type>::createPopup(item); 
+        //decorateEditItems(localPopUp);
         return localPopUp;        
     }  
 
@@ -113,16 +133,7 @@ public:
 	    {N_("Properties"), (void *)properties, NULL, NULL},
 	     {NULL,NULL,NULL,NULL}
         };
-	localItemPopUp = BasePopUp<Type>::createPopup(item); 
-        // Customize most important menu items
-        GtkMenuItem *mItem;
-        gchar *markup;
-        mItem = (GtkMenuItem *)g_object_get_data(G_OBJECT(localItemPopUp), "Open with");
-        markup = g_strdup_printf("<b>%s</b>", _("Open with"));
-        gtk_c::menu_item_content(mItem, "system-run", markup, -24);
-        g_free(markup);
-
-        const gchar *smallKey[]={
+        const gchar *key[]={
             "Add bookmark",
             "Remove bookmark",
             "Open in New Tab",
@@ -143,7 +154,7 @@ public:
             "Properties",
             NULL
         };
-        const gchar *smallIcon[]={
+        const gchar *keyIcon[]={
             "bookmark-new",
             "edit-clear-all",
             "tab-new-symbolic",
@@ -165,18 +176,30 @@ public:
             "document-properties",
             NULL
         };
+        auto popup = new(Popup<Type>)(item, key, keyIcon, TRUE);
+        localItemPopUp = popup->menu();
+
+	//localItemPopUp = BasePopUp<Type>::createPopup(item); 
+        // Customize most important menu items
+        GtkMenuItem *mItem;
+        gchar *markup;
+        mItem = (GtkMenuItem *)g_object_get_data(G_OBJECT(localItemPopUp), "Open with");
+        markup = g_strdup_printf("<b>%s</b>", _("Open with"));
+        Gtk<Type>::menu_item_content(mItem, "system-run", markup, -24);
+        g_free(markup);
+/*
         gint i=0;
         for (auto k=smallKey; k && *k; k++, i++){
             mItem = (GtkMenuItem *)g_object_get_data(G_OBJECT(localItemPopUp), *k);
             markup = g_strdup_printf("<span size=\"small\">%s</span>", _(*k));
-	    gtk_c::menu_item_content(mItem, smallIcon[i], markup, -16);
+	    Gtk<Type>::menu_item_content(mItem, smallIcon[i], markup, -16);
 	    g_free(markup);
         }
-
+*/
 
         return localItemPopUp;
     }
-    static void
+ /*   static void
     decorateEditItems(GtkMenu *menu){
         const gchar *key[]={
             "New",// this menuitem is only for nonitem popup
@@ -198,10 +221,11 @@ public:
         for (auto k=key; k && *k; k++, i++){
             auto mItem = (GtkMenuItem *)g_object_get_data(G_OBJECT(menu), *k);
             auto markup = g_strdup_printf("<span color=\"blue\">%s</span>", _(*k));
-	    gtk_c::menu_item_content(mItem, keyIcon[i], markup, -24);
+	    Gtk<Type>::menu_item_content(mItem, keyIcon[i], markup, -24);
 	    g_free(markup);
         }
     }
+    */
     static void
     resetLocalPopup(void) {
         auto view = (View<Type> *)g_object_get_data(G_OBJECT(localPopUp), "view");
@@ -243,7 +267,24 @@ public:
 	else statLine = g_strdup(strerror(ENOENT));
 	Util<Type>::resetObjectData(G_OBJECT(localPopUp), "statLine", statLine);
 
-	BasePopUp<Type>::changeTitle(localPopUp);
+        auto iconName = (gchar *)g_object_get_data(G_OBJECT(localPopUp), "iconName");
+        auto path = (gchar *)g_object_get_data(G_OBJECT(localPopUp), "path");
+        auto mimetype = (gchar *)g_object_get_data(G_OBJECT(localPopUp), "mimetype");
+        auto fileInfo = (gchar *)g_object_get_data(G_OBJECT(localPopUp), "fileInfo");
+        auto display_name = (gchar *)g_object_get_data(G_OBJECT(localPopUp), "displayName");
+	if (fileInfo && strchr(fileInfo, '&')) *(strchr(fileInfo, '&')) = '+';
+        
+        gchar *markup = g_strdup_printf("<span color=\"red\"><b><i>%s</i></b></span><span color=\"#aa0000\">%s%s</span>\n<span color=\"blue\">%s</span>\n<span color=\"green\">%s</span>", 
+		display_name, 
+		mimetype?": ":"",
+		mimetype?mimetype:"",
+		fileInfo?fileInfo:"", 
+		statLine?statLine:"");
+
+
+        Popup<Type>::changeTitle(localPopUp, markup, iconName);
+	g_free(markup);
+
     }
 
     static void
@@ -259,16 +300,28 @@ public:
             gtk_widget_hide(GTK_WIDGET(child->data));
         }
  
-        auto fileInfo =(const gchar *)g_object_get_data(G_OBJECT(localItemPopUp), "fileInfo");
         auto path =(const gchar *)g_object_get_data(G_OBJECT(localItemPopUp), "path");
+
+        auto display_name = (gchar *)g_object_get_data(G_OBJECT(localItemPopUp), "displayName");
         auto mimetype =(const gchar *)g_object_get_data(G_OBJECT(localItemPopUp), "mimetype");
+        auto fileInfo =(const gchar *)g_object_get_data(G_OBJECT(localItemPopUp), "fileInfo");
+        auto iconName = (gchar *)g_object_get_data(G_OBJECT(localItemPopUp), "iconName");
         // Set title element
         gchar *statLine;
         if (g_list_length(view->selectionList()) > 1) statLine = g_strdup("");
         else statLine = Util<Type>::statInfo(path);
 	Util<Type>::resetObjectData(G_OBJECT(localItemPopUp), "statLine", statLine);
-        BasePopUp<Type>::changeTitle(localItemPopUp);
-	auto v2 = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "title"));
+	
+        gchar *markup = g_strdup_printf("<span color=\"red\"><b><i>%s</i></b></span><span color=\"#aa0000\">%s%s</span>\n<span color=\"blue\">%s</span>\n<span color=\"green\">%s</span>", 
+		display_name, 
+		mimetype?": ":"",
+		mimetype?mimetype:"",
+		fileInfo?fileInfo:"", 
+		statLine?statLine:"");
+
+        Popup<Type>::changeTitle(localItemPopUp, markup, iconName);
+	g_free(markup);
+        auto v2 = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "title"));
         gtk_widget_show(v2);
 	
 
@@ -580,7 +633,7 @@ private:
 	    auto icon = Mime<Type>::baseIcon(defaultApp);
 	    //auto p = pixbuf_c::get_pixbuf(icon, -24); 
 	    auto iconOK = pixbuf_icons_c::iconThemeHasIcon(icon);
-	    gtk_c::menu_item_content(v, iconOK?icon:"system-run-symbolic", markup, -24);
+	    Gtk<Type>::menu_item_content(v, iconOK?icon:"system-run-symbolic", markup, -24);
 	    g_free(icon);
 	    g_free(markup);
 	    
@@ -934,7 +987,7 @@ public:
         delete entryResponse;
 
 	if (!response || !strlen(response)){
-            gtk_c::quick_help(NULL, _("No name")); 
+            Gtk<Type>::quick_help(NULL, _("No name")); 
             return;
         }
         // XXX: Will character code set of response match that of path?
@@ -948,7 +1001,7 @@ public:
             }
         } else {
             auto message = g_strdup_printf(_("Another file with the same name already exists in “%s”."), path);
-            gtk_c::quick_help(NULL, message); 
+            Gtk<Type>::quick_help(NULL, message); 
             g_free(message);
             return;
         }
@@ -1193,7 +1246,7 @@ public:
 	gboolean valid = Mime<Type>::isValidCommand(response);
 	if (!valid){
 	    gchar *message = g_strdup_printf("\n<span color=\"#990000\"><b>%s</b></span>:\n <b>%s</b>\n", _("Invalid entry"), response); 
-	    gtk_c::quick_help (GTK_WINDOW(mainWindow), message);
+	    Gtk<Type>::quick_help (GTK_WINDOW(mainWindow), message);
 	    g_free(message);
 	    return;
 	}

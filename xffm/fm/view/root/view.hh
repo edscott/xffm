@@ -5,6 +5,7 @@
 namespace xf
 {
 
+template <class Type> class Popup;
 template <class Type> class View;
 template <class Type> class LocalPopUp;
 template <class Type> class BasePopUp;
@@ -52,11 +53,13 @@ private:
          menuItem_t item[]={
             //{N_("Add bookmark"), (void *)BasePopUp<Type>::noop, NULL, NULL},
             {NULL,NULL,NULL, NULL}};
-	rootPopUp = BasePopUp<Type>::createPopup(item); 
+
+        auto popup = new(Popup<Type>)(item);
+        rootPopUp = popup->menu();
+
         auto text = g_strdup_printf("Xffm+-%s", VERSION);
-        BasePopUp<Type>::changeTitle(rootPopUp, text, NULL);
+        popup->changeTitle(text, NULL);
         g_free(text);
-        //decorateEditItems(localPopUp);
         return rootPopUp;        
     }  
 
@@ -68,29 +71,24 @@ private:
             {N_("Empty trash"), (void *)emptyTrash, NULL, NULL},
 	     {NULL,NULL,NULL,NULL}
         };
-	rootItemPopUp = BasePopUp<Type>::createPopup(item); 
-        auto text = g_strdup_printf("Xffm+-%s", VERSION);
-        BasePopUp<Type>::changeTitle(rootItemPopUp, text, NULL);
-        g_free(text);
-        const gchar *smallKey[]={
+        const gchar *key[]={
             "Open in New Tab",
             "Remove bookmark",
             "Empty trash",
             NULL
         };
-        const gchar *smallIcon[]={
+        const gchar *keyIcon[]={
             "tab-new-symbolic",
             "edit-clear-all",
             "user-trash-full",
             NULL
         };
-        gint i=0;
-        for (auto k=smallKey; k && *k; k++, i++){
-            auto mItem = (GtkMenuItem *)g_object_get_data(G_OBJECT(rootItemPopUp), *k);
-            auto markup = g_strdup_printf("<span size=\"small\">%s</span>", _(*k));
-	    Gtk<Type>::menu_item_content(mItem, smallIcon[i], markup, -16);
-	    g_free(markup);
-        }
+        auto popup = new(Popup<Type>)(item, key, keyIcon, TRUE);
+        rootItemPopUp = popup->menu();
+
+        auto text = g_strdup_printf("Xffm+-%s", VERSION);
+        popup->changeTitle(text, NULL);
+        g_free(text);
         
         return rootItemPopUp;
     }
