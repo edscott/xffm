@@ -66,7 +66,29 @@ class LocalPopUp {
 public:
 
     static GtkMenu *createLocalPopUp(void){
-         menuItem_t item[]={
+        auto popup = new(Popup<Type>)(menuItems(), menuKeys(), menuIcons());
+        localPopUp = popup->menu();
+	//localPopUp = BasePopUp<Type>::createPopup(item); 
+        //decorateEditItems(localPopUp);
+        return localPopUp;        
+    }  
+
+    static GtkMenu *createLocalItemPopUp(void){
+        auto popup = new(Popup<Type>)(localMenuItems(), localMenuItemsKeys(), localMenuItemsIcons(), TRUE);
+        localItemPopUp = popup->menu();
+
+        // Customize most important menu items
+        GtkMenuItem *mItem;
+        gchar *markup;
+        mItem = (GtkMenuItem *)g_object_get_data(G_OBJECT(localItemPopUp), "Open with");
+        markup = g_strdup_printf("<b>%s</b>", _("Open with"));
+        Gtk<Type>::menu_item_content(mItem, "system-run", markup, -24);
+
+        return localItemPopUp;
+    }
+
+    static menuItem_t *menuItems(void){
+         static menuItem_t item[]={
 	    {N_("New"), (void *)newItem, NULL, NULL},
             // deprecated {N_("Open in New Tab"), NULL, NULL, NULL},
             // deprecated {N_("Open in New Window"), NULL, NULL, NULL},
@@ -83,7 +105,10 @@ public:
             {N_("Select All"), (void *)selectAll, NULL, NULL},
             {N_("Match regular expression"), (void *)selectMatch, NULL, NULL},
             {NULL,NULL,NULL, NULL}};
-        const gchar *key[]={
+	 return item;
+    }
+    static const gchar **menuKeys(void){
+        static const gchar *key[]={
             "New",// this menuitem is only for nonitem popup
             "Cut",
             "Copy",
@@ -91,7 +116,10 @@ public:
             "Delete",
             NULL
         };
-        const gchar *keyIcon[]={
+	return key;
+    }
+    static const gchar **menuIcons(void){
+        static const gchar *keyIcon[]={
             "document-new",
             "edit-cut",
             "edit-copy",
@@ -99,16 +127,11 @@ public:
             "edit-delete",
             NULL
         };
+	return keyIcon;
+    }
 
-        auto popup = new(Popup<Type>)(item, key, keyIcon);
-        localPopUp = popup->menu();
-	//localPopUp = BasePopUp<Type>::createPopup(item); 
-        //decorateEditItems(localPopUp);
-        return localPopUp;        
-    }  
-
-    static GtkMenu *createLocalItemPopUp(void){
-	menuItem_t item[]=
+    static menuItem_t *localMenuItems(void){
+	static menuItem_t item[]=
         {
 	    {("mimetypeOpen"), (void *)command, NULL, NULL},
 	    {N_("Open with"), (void *)openWith, NULL, NULL},
@@ -133,7 +156,11 @@ public:
 	    {N_("Properties"), (void *)properties, NULL, NULL},
 	     {NULL,NULL,NULL,NULL}
         };
-        const gchar *key[]={
+	return item;
+    }
+
+    static const gchar **localMenuItemsKeys(void){
+        static const gchar *key[]={
             "Add bookmark",
             "Remove bookmark",
             "Open in New Tab",
@@ -154,7 +181,11 @@ public:
             "Properties",
             NULL
         };
-        const gchar *keyIcon[]={
+	return key;
+    }
+    
+    static const gchar **localMenuItemsIcons(void){
+        static const gchar *keyIcon[]={
             "bookmark-new",
             "edit-clear-all",
             "tab-new-symbolic",
@@ -176,56 +207,10 @@ public:
             "document-properties",
             NULL
         };
-        auto popup = new(Popup<Type>)(item, key, keyIcon, TRUE);
-        localItemPopUp = popup->menu();
-
-	//localItemPopUp = BasePopUp<Type>::createPopup(item); 
-        // Customize most important menu items
-        GtkMenuItem *mItem;
-        gchar *markup;
-        mItem = (GtkMenuItem *)g_object_get_data(G_OBJECT(localItemPopUp), "Open with");
-        markup = g_strdup_printf("<b>%s</b>", _("Open with"));
-        Gtk<Type>::menu_item_content(mItem, "system-run", markup, -24);
-        g_free(markup);
-/*
-        gint i=0;
-        for (auto k=smallKey; k && *k; k++, i++){
-            mItem = (GtkMenuItem *)g_object_get_data(G_OBJECT(localItemPopUp), *k);
-            markup = g_strdup_printf("<span size=\"small\">%s</span>", _(*k));
-	    Gtk<Type>::menu_item_content(mItem, smallIcon[i], markup, -16);
-	    g_free(markup);
-        }
-*/
-
-        return localItemPopUp;
+	return keyIcon;
     }
- /*   static void
-    decorateEditItems(GtkMenu *menu){
-        const gchar *key[]={
-            "New",// this menuitem is only for nonitem popup
-            "Cut",
-            "Copy",
-            "Paste",
-            "Delete",
-            NULL
-        };
-        const gchar *keyIcon[]={
-            "document-new",
-            "edit-cut",
-            "edit-copy",
-            "edit-paste",
-            "edit-delete",
-            NULL
-        };
-        gint i=0;
-        for (auto k=key; k && *k; k++, i++){
-            auto mItem = (GtkMenuItem *)g_object_get_data(G_OBJECT(menu), *k);
-            auto markup = g_strdup_printf("<span color=\"blue\">%s</span>", _(*k));
-	    Gtk<Type>::menu_item_content(mItem, keyIcon[i], markup, -24);
-	    g_free(markup);
-        }
-    }
-    */
+
+
     static void
     resetLocalPopup(void) {
         auto view = (View<Type> *)g_object_get_data(G_OBJECT(localPopUp), "view");

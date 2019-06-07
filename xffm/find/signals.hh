@@ -44,7 +44,9 @@ namespace xf {
 GtkWindow *findDialog;
 
 template <class Type> class TreeView;
+template <class Type> class LocalView;
 template <class Type> class LocalModel;
+template <class Type> class LocalPopUp;
 template <class Type> class BaseSignals;
 
 
@@ -101,6 +103,17 @@ public:
         
         auto dnd = new (DnD<double>)(GTK_WIDGET(dialog), treeView, 1, 0);
         g_object_set_data(G_OBJECT(dialog), "dnd", dnd);
+
+
+        auto popup = new(Popup<Type>)(
+		LocalPopUp<Type>::localMenuItems(),
+		LocalPopUp<Type>::localMenuItemsKeys(),
+		LocalPopUp<Type>::localMenuItemsIcons()
+		);
+	dnd->setMenu(popup->menu());
+	g_object_set_data(G_OBJECT(dialog), "popup", popup);
+
+	
         gtk_widget_show_all (GTK_WIDGET(dialog));
         gtk_widget_hide(GTK_WIDGET(parent));
         

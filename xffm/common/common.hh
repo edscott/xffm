@@ -11,4 +11,5 @@
 #include "common/gtk.hh"
 #include "common/tooltip.hh"
 #include "common/icons.hh"
+#include "common/popup.hh"
 

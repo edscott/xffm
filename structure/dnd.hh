@@ -15,6 +15,8 @@ class DnD {
     GtkTreeView *treeView_;
     GtkWidget *window_;
     gint pathColumn_;
+    GtkMenu *menu_;
+    gboolean ignoreRelease_;
 
     void setUpSignals(void){
         // source widget
@@ -54,8 +56,14 @@ class DnD {
 
 
 public:
+    void setMenu(GtkMenu *menu){menu_ = menu;}
+    GtkMenu *menu(void){return menu_;}
+
+
     DnD(GtkWidget *window, GtkTreeView *treeView, gint pathColumn, gint flag) {
         dragOn_ = FALSE;
+	ignoreRelease_ = FALSE;
+	menu_ = NULL;
         buttonPressX_=-1;
         buttonPressY_=-1;
         selectionList_=NULL;
@@ -75,6 +83,7 @@ public:
         // createSourceTargetListFull(window_);
     }
 
+    void setIgnoreRelease(gboolean state) {dragOn_ = state;}
     void setDragState(gboolean state) {dragOn_ = state;}
     void setButtonPress(gint x, gint y){buttonPressX_ = x, buttonPressY_=y;}
     void setSelectionList(GList *list){selectionList_=list;}
@@ -89,6 +98,7 @@ public:
     GtkTreeView *treeView(void){ return treeView_;}
     gint pathColumn(void){ return pathColumn_;}
     GtkWidget *window(void){ return window_;}
+    gboolean ignoreRelease(void){return ignoreRelease_;}
 
 
     void cancelDragState(void){
@@ -163,15 +173,93 @@ public:
         return;
     }
 
-/////////   static ////////    
+/////////   static ////////  
+private:
+    static gboolean 
+    viewPopUp(DnD<Type> *object, GdkEventButton  *event){
+        TRACE("Base::signals::button press event: button 3 should do popup, as well as longpress...\n");
+	if (!object->menu()) return FALSE;
+
+        gboolean retval = FALSE;
+	/*
+        GtkMenu *menu = NULL;
+        gchar *path = NULL;
+        GList *selectionList;
+	    auto selection = gtk_tree_view_get_selection (view->treeView());
+	    auto treeModel = view->treeModel();
+	    selectionList = gtk_tree_selection_get_selected_rows (selection, &treeModel);
+	    retval=TRUE;
+        view->setSelectionList(selectionList);
+        if (selectionList && g_list_length(selectionList) == 1) {
+            GtkTreeIter iter;
+            gtk_tree_model_get_iter(view->treeModel(), &iter, 
+                    (GtkTreePath *)selectionList->data);
+            gtk_tree_model_get(view->treeModel(), &iter, PATH, &path, -1);
+            TRACE("Base::signals::selected path is %s\n", path);
+
+	}
+
+	
+        gboolean items = (g_list_length(selectionList) >0);
+        setMenuData(view, path, items);
+        menu = configureMenu(view, items);
+
+        if (menu) {
+            gtk_menu_popup_at_pointer (menu, (const GdkEvent *)event);
+        }
+        return retval;
+	*/
+          
+	// FIXME: colosal crash...
+	//gtk_menu_popup_at_pointer (object->menu(), (const GdkEvent *)event);
+
+        return TRUE;
+    }
+public:
+    
+#define XCONTROL_MODE (event->state & GDK_CONTROL_MASK)
+
     static gboolean
     buttonPress (GtkWidget *widget,
                    GdkEventButton  *event,
                    gpointer   data)
     {
+        auto object = (DnD<Type> *)data;
+	
+        if (event->button == 3){
+	    return FALSE;
+  	  // FIXME: colosal crash on doing gtk_menu_popup_at_pointer()...
+            GtkTreeViewColumn *column;
+            gint cellX, cellY;
+	    GtkTreePath *tpath = NULL;
+            if (gtk_tree_view_get_path_at_pos (object->treeView(), 
+                               event->x, event->y, &tpath,
+                              NULL, // &column,
+                               &cellX, &cellY)){
+                /*if (!LocalView<Type>::isSelectable(object->treeModel(),tpath)){
+                    object->setIgnoreRelease(TRUE);
+		    gtk_tree_path_free(tpath);
+                    return FALSE;
+                }*/
+		GtkTreeIter iter;
+		auto selection = gtk_tree_view_get_selection (object->treeView());
+		gtk_tree_model_get_iter(object->treeModel(), &iter, tpath);
+		if (!gtk_tree_selection_iter_is_selected (selection, &iter)){
+		    // if not selected, 
+		    if (!XCONTROL_MODE){
+			gtk_tree_selection_unselect_all (selection);
+		    } 
+		    gtk_tree_selection_select_path (selection, tpath);
+		    gtk_tree_path_free(tpath);
+		}
+	    }
+            TRACE("(%lf,%lf) -> %d,%d\n", event->x, event->y, cellX, cellY);
+	    return viewPopUp(object, event);
+	    
+	}
+	
         if (event->button != 1) return FALSE;
         TRACE("buttonpress 1\n");
-        auto object = (DnD<Type> *)data;
         object->cancelDragState();
         GtkTreePath *tpath = NULL;
         gint mode = 0;
@@ -195,8 +283,12 @@ public:
                    GdkEventButton  *event,
                    gpointer   data)
     {
-        TRACE("buttonRelease\n");
         auto object = (DnD<Type> *)data;
+        TRACE("buttonRelease\n");
+        if (object->ignoreRelease()){
+            object->setIgnoreRelease(FALSE);
+            return FALSE;
+        }
         //GdkEventButton *event_button = (GdkEventButton *)event;
         if (!object->dragState()){
 	    GtkTreePath *tpath;
