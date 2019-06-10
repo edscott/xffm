@@ -1,3 +1,6 @@
+BUG: rename a directory to a directory that already exists will move the source directory into the directory with the desired name. Default move action.
+
+
 BUG: greenball update icon in local is disabled. Using the threaded monitor function
      from fstab to signal changes causes crash. I believe due to double treeview now
      used in local view. Maybe put thread within local view. but that complicates things
