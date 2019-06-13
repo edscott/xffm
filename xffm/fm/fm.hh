@@ -52,7 +52,7 @@ public:
 #endif
 	/* ignore hangups? */
 	(void)signal (SIGHUP, SIG_IGN);
-#define CORE 1
+//#define CORE 1
 #ifdef CORE
 	struct rlimit rlim;
 	if (!strstr(argv[0], "getpass")) {

@@ -295,7 +295,7 @@ public:
             longPressTime++;
             pthread_mutex_unlock(&longPressMutex);
         }
-        Util<Type>::context_function(showImage, (void *)popupImage);
+        if (!dragOn_) Util<Type>::context_function(showImage, (void *)popupImage);
         return NULL;
     }
 
@@ -829,6 +829,7 @@ public:
             guint t, gpointer data) {
 	auto view = (View<Type> *)data;
         TRACE("signal_drag_motion\n");
+        gtk_widget_hide(GTK_WIDGET(xf::popupImage));
 
         GtkTreePath *tpath;
                                         

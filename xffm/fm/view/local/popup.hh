@@ -413,8 +413,10 @@ private:
             "title",
             "Open in New Tab",
             "Create a compressed archive with the selected objects",
+#ifdef ENABLE_FSTAB_MODULE
             "Mount the volume associated with this folder",
             "Unmount the volume associated with this folder",
+#endif
 	    "Add bookmark",
 	    "Remove bookmark",
 	    "Paste into",
@@ -477,14 +479,12 @@ private:
 
         }
         else 
-#endif
         {
             w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Unmount the volume associated with this folder"));
             gtk_widget_set_sensitive(w, FALSE);
             gtk_widget_hide(w);
             w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Mount the volume associated with this folder"));
             gtk_widget_show(w);
-#ifdef ENABLE_FSTAB_MODULE
             if (FstabView<Type>::isInFstab(path)){
                 gtk_widget_show(w);
                 gtk_widget_set_sensitive(w, TRUE);
@@ -492,9 +492,9 @@ private:
                 gtk_widget_hide(w);
                 gtk_widget_set_sensitive(w, FALSE);
             }
-#endif
         }
 
+#endif
     }
 
     static void 
