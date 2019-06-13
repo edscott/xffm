@@ -22,7 +22,7 @@
 #define PKG_REFRESH "sudo -A pacman -Syy && sudo -A pacman -S --noconfirm archlinux-keyring"
 #define PKG_INSTALL "sudo -A pacman --noconfirm --color always --noprogressbar -S"
 #define PKG_INSTALL_DRYRUN "sudo -A pacman  --print -S"
-#define PKG_UNINSTALL "sudo -A pacman --noconfirm --color always --noprogressbar -S"
+#define PKG_UNINSTALL "sudo -A pacman --noconfirm --color always --noprogressbar -R"
 #define PKG_UNINSTALL_DRYRUN "sudo -A pacman --print -R"
 #define PKG_FETCH "sudo -A pacman -Sw"
 
