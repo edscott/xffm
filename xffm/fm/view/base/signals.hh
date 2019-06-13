@@ -23,6 +23,7 @@ static GtkTargetEntry targetTable[] = {
 
 namespace xf
 {
+GtkWidget *popupImage = NULL;
 
 template <class Type> class View;
 template <class Type> class RootView;
@@ -51,6 +52,8 @@ static GHashTable *highlight_hash=NULL;
 static GHashTable *validBaseViewHash = NULL;
 static gint dragMode=0;
 
+static gint longPressTime;
+static pthread_mutex_t longPressMutex=PTHREAD_MUTEX_INITIALIZER;
 
 template <class Type> 
 class BaseSignals {
@@ -132,12 +135,25 @@ public:
                    GdkEventButton  *event,
                    gpointer   data)
     {
+        gint longPressCount;
+	auto view = (View<Type> *)data;
+        pthread_mutex_lock(&longPressMutex);
+            longPressCount = longPressTime;
+            longPressTime = -1;
+        pthread_mutex_unlock(&longPressMutex);
+        
+        if (longPressCount >= 10) {
+            TRACE("Long press detected...\n");
+	    
+            buttonPressX = buttonPressY = -1;
+	    dragOn_ = FALSE;
+            return doPopupMenu(event, view);
+        }
         if (ignoreRelease){
             ignoreRelease=FALSE;
             return FALSE;
         }
         //GdkEventButton *event_button = (GdkEventButton *)event;
-	auto view = (View<Type> *)data;
         if (!dragOn_){
 	    GtkTreePath *tpath;
 
@@ -259,55 +275,34 @@ public:
         }
     }
 
-    static gboolean
-    buttonPress (GtkWidget *widget,
-                   GdkEventButton  *event,
-                   gpointer   data)
-    {
-        auto view = (View<Type> *)data;
-        buttonPressX = buttonPressY = -1;
-        dragOn_ = FALSE;
+    static void *
+    showImage(void *data){
+        gtk_widget_show(GTK_WIDGET(data));
+        return NULL;
+    }
 
-        GtkTreePath *tpath = NULL;
-        if (event->button == 1) {
-	    controlMode = FALSE;
-            gint mode = 0;
-            tpath = getTpath(view, event);
-	    dragMode = 0; // default (move)
-            if (tpath == NULL){ 
-		rubberBand_ = TRUE;
-                return FALSE;
-            } else {
-		TRACE("button press %d mode %d\n", event->button, mode);
-		buttonPressX = event->x;
-		buttonPressY = event->y;
-		rubberBand_ = FALSE;
-
-                if (CONTROL_MODE && SHIFT_MODE) dragMode = -3; // link mode
-	        else if (CONTROL_MODE) dragMode = -2; // copy
-                else if (SHIFT_MODE)   dragMode = -1; // move
-
-                if (CONTROL_MODE){ 
-	            controlMode = TRUE;
-                    controlSelect(view, tpath);
-                    return TRUE;
-                }
-
-                if (SHIFT_MODE) {
-                    viewShiftSelect(view, tpath);
-                    return TRUE;
-		}
-
-                reSelect(view, tpath);
-		gtk_tree_path_free(tpath);
+    static void *longPressCheck_f(void *data){
+        pthread_mutex_lock(&longPressMutex);
+            longPressTime = 0;
+        pthread_mutex_unlock(&longPressMutex);
+        for (gint i=0; i<10; i++){
+            usleep(100000);
+            pthread_mutex_lock(&longPressMutex);
+            if (longPressTime < 0) {
+                pthread_mutex_unlock(&longPressMutex);
+                return NULL;
             }
-
-            return TRUE;
+            longPressTime++;
+            pthread_mutex_unlock(&longPressMutex);
         }
+        Util<Type>::context_function(showImage, (void *)popupImage);
+        return NULL;
+    }
 
-        // long press or button 3 should do popup menu...
-        if (event->button != 3) return FALSE;
-	if (isTreeView){
+    static gboolean doPopupMenu(GdkEventButton  *event, View<Type> *view){
+        gtk_widget_hide(GTK_WIDGET(xf::popupImage));
+        GtkTreePath *tpath = NULL;
+        if (isTreeView){
             GtkTreeViewColumn *column;
             gint cellX, cellY;
             if (gtk_tree_view_get_path_at_pos (view->treeView(), 
@@ -355,6 +350,68 @@ public:
 	    }
 	}
         return viewPopUp(view, event);
+    }
+
+    static gboolean
+    buttonPress (GtkWidget *widget,
+                   GdkEventButton  *event,
+                   gpointer   data)
+    {
+        auto view = (View<Type> *)data;
+        buttonPressX = buttonPressY = -1;
+        dragOn_ = FALSE;
+
+        GtkTreePath *tpath = NULL;
+        if (event->button == 1) {
+            pthread_mutex_lock(&longPressMutex);
+            longPressTime = 0;
+            pthread_mutex_unlock(&longPressMutex);
+	    
+            pthread_t longPressThread; 
+            
+	    pthread_create (&longPressThread, NULL, longPressCheck_f, NULL);
+	    pthread_detach(longPressThread);
+            
+	    controlMode = FALSE;
+            gint mode = 0;
+            tpath = getTpath(view, event);
+	    dragMode = 0; // default (move)
+            if (tpath == NULL){ 
+		rubberBand_ = TRUE;
+                return FALSE;
+            } else {
+		TRACE("button press %d mode %d\n", event->button, mode);
+		buttonPressX = event->x;
+		buttonPressY = event->y;
+		rubberBand_ = FALSE;
+
+                if (CONTROL_MODE && SHIFT_MODE) dragMode = -3; // link mode
+	        else if (CONTROL_MODE) dragMode = -2; // copy
+                else if (SHIFT_MODE)   dragMode = -1; // move
+
+                if (CONTROL_MODE){ 
+	            controlMode = TRUE;
+                    controlSelect(view, tpath);
+                    return TRUE;
+                }
+
+                if (SHIFT_MODE) {
+                    viewShiftSelect(view, tpath);
+                    return TRUE;
+		}
+
+                reSelect(view, tpath);
+		gtk_tree_path_free(tpath);
+            }
+
+            return TRUE;
+        }
+
+        // long press or button 3 should do popup menu...
+        // long press will activate on button release.
+        if (event->button != 3) return FALSE;
+
+	return doPopupMenu(event, view);
     }
     
     static void

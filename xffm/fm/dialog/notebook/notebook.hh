@@ -50,6 +50,14 @@ public:
         pageHash_ =g_hash_table_new_full(g_direct_hash, g_direct_equal, NULL, NULL);
         gtk_notebook_set_scrollable (notebook_, TRUE);
 
+        //auto pb = Pixbuf<Type>::get_pixbuf ("format-justify-fill", TINY_BUTTON);
+	//auto popupImage = gtk_image_new_from_pixbuf (pb);
+        popupImage = gtk_label_new("");
+        auto text = g_strdup_printf("<span color=\"red\">%s</span>",_("Long press time"));
+        gtk_label_set_markup(GTK_LABEL(popupImage),text);
+        g_free(text);
+
+
 /*
         auto newTabPage = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
         gtk_widget_show(newTabPage);
@@ -69,6 +77,7 @@ public:
                 BUTTON_CALLBACK(notebookSignals<Type>::on_new_page), (void *)this);    
         
         gtk_box_pack_start(actionWidget, GTK_WIDGET(tabButtonBox),  TRUE, FALSE, 0);
+        gtk_box_pack_start(tabButtonBox, GTK_WIDGET(popupImage),  TRUE, FALSE, 0);
         gtk_box_pack_start(tabButtonBox, GTK_WIDGET(newTabButton),  TRUE, FALSE, 0);
         gtk_box_pack_start(tabButtonBox, GTK_WIDGET(this->menuButton()),  TRUE, FALSE, 0);
 
@@ -80,6 +89,7 @@ public:
         //        NULL);
         signalSetup();
         gtk_widget_show (GTK_WIDGET(notebook_));
+        gtk_widget_hide(popupImage);
 	// does not work:
 	// g_object_set_data(G_OBJECT(mainWindow), "notebook_p", this);
         return;
