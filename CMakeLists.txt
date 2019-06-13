@@ -74,9 +74,9 @@ execute_process(COMMAND autoconf)
 message(STATUS "execute_process automake...")
 execute_process(COMMAND automake --add-missing --copy)
 execute_process(COMMAND ./configure --prefix=/usr/local)
-execute_process(COMMAND cp -v po/Makefile po/Makefile.autotools)
+execute_process(COMMAND mv -v po/Makefile po/Makefile.autotools)
 execute_process(COMMAND po/build)
-execute_process(COMMAND "cd po && make update-po")
+execute_process(COMMAND make update-po)
 execute_process(COMMAND rm Makefile)
 
 
