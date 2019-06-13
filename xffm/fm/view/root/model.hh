@@ -25,8 +25,12 @@ public:
 	}
 	// This is always in pathbar:  addRootItem(treeModel);
 	addHomeItem(treeModel);
+#ifdef ENABLE_FSTAB_MODULE
 	addFstabItem(treeModel);
-	PkgModel<Type>::addPkgItem(treeModel);	
+#endif
+ #ifdef ENABLE_PKG_MODULE
+	PkgModel<Type>::addPkgItem(treeModel);
+#endif
 	addTrashItem(treeModel);
         addLocalBookmarks(treeModel);
 

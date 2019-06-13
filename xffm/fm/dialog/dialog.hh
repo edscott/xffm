@@ -131,6 +131,7 @@ public:
             case G_FILE_MONITOR_EVENT_CREATED:
             case G_FILE_MONITOR_EVENT_MOVED_IN:
 		TRACE("moved in: %s\n", f);
+#ifdef ENABLE_FSTAB_MODULE
             if (strstr(f, "part")){ // When device is added, we have partition id.
                 gchar *path = FstabView<Type>::id2Partition(f); // path to partition
 		gchar *label = NULL;
@@ -149,6 +150,7 @@ public:
                 g_free(label);
                 g_free(path);
             }
+#endif
             break;
 	    case G_FILE_MONITOR_EVENT_CHANGED:
 	    case G_FILE_MONITOR_EVENT_CHANGES_DONE_HINT:

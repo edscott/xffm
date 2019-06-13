@@ -46,16 +46,20 @@ public:
 	return;
 #endif
         TRACE("***Destructor:~local_monitor_c(): %p\n", this->monitor());
+
+#ifdef ENABLE_FSTAB_MODULE
         // stop mountThread
         this->mountArg_[1] = NULL;
         while (this->mountArg_[2]){
             TRACE("***Waiting for mountThread to exit\n");
             usleep(250000);
         }
+#endif
 
         TRACE("***Destructor:~local_monitor_c() complete\n");
     }
 
+#ifdef ENABLE_FSTAB_MODULE
     void startMountThread(void){
         // start mountThread
         pthread_t mountThread;
@@ -69,6 +73,7 @@ public:
 	    //return retval;
 	}
     }
+#endif
 
     void
     start_monitor(View<Type> *view, const gchar *path){
@@ -79,7 +84,9 @@ public:
         view->setMonitorObject(this);
 	TRACE("*** Local monitor %p starting  %s.\n", this->monitor(), path);
         localMonitorList = g_list_append(localMonitorList, (void *)this->monitor());
+#ifdef ENABLE_FSTAB_MODULE
         startMountThread();
+#endif
         // XXX:   Start mountThread...
         //        this here now crashes ...
         //startMountThread();

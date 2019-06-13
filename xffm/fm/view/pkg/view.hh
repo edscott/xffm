@@ -1,4 +1,5 @@
 #ifndef XF_PKGVIEW__HH
+#ifdef ENABLE_PKG_MODULE
 # define XF_PKGVIEW__HH
 
 #ifdef HAVE_EMERGE 
@@ -39,4 +40,5 @@ class PkgView  :
  
 };
 }
+#endif
 #endif

@@ -1,5 +1,6 @@
 #ifndef XF_FSTAB_HH 
 #define XF_FSTAB_HH
+#ifdef ENABLE_FSTAB_MODULE
 #define MNTTYPE_PROCFS	"proc"
 #define MNTTYPE_SMBFS	"smbfs"
 #define MNTTYPE_DEV	"devpts"
@@ -970,4 +971,5 @@ private:
 
 };
 }
+#endif
 #endif

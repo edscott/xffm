@@ -558,16 +558,20 @@ public:
                     LocalPopUp<Type>::popUpItem():
                     LocalPopUp<Type>::popUp();
                 break;
+#ifdef ENABLE_FSTAB_MODULE
             case (FSTAB_TYPE):
                  menu = (items)?
                     FstabPopUp<Type>::popUpItem():
                     FstabPopUp<Type>::popUp();
                 break;
+#endif
+#ifdef ENABLE_PKG_MODULE
             case (PKG_TYPE):
                  menu = (items)?
                     PkgPopUp<Type>::popUpItem():
                     PkgPopUp<Type>::popUp();
                 break;
+#endif
             default:
                 ERROR("fm/base/signals.hh::ViewType %d not defined.\n", view->viewType());
                 break;
@@ -605,6 +609,7 @@ public:
                     LocalPopUp<Type>::resetLocalPopup();
                 }
                 break;
+#ifdef ENABLE_FSTAB_MODULE
             case (FSTAB_TYPE):
 		TRACE("configureMenu  FSTAB_TYPE\n");
                 if (items) {
@@ -615,6 +620,8 @@ public:
                     FstabPopUp<Type>::resetPopup();
                 }
                 break;
+#endif
+#ifdef ENABLE_PKG_MODULE
             case (PKG_TYPE):
 		TRACE("configureMenu  PKG_TYPE\n");
                 if (items) {
@@ -625,6 +632,7 @@ public:
                     PkgPopUp<Type>::resetPopup();
                 }
                 break;
+#endif
             default:
                 ERROR("fm/base/signals.hh::ViewType %d not defined.\n", view->viewType());
                 break;

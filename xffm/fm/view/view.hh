@@ -126,6 +126,7 @@ public:
                         LocalView<Type>::loadModel(view, path);
 		}
                 break;
+#ifdef ENABLE_FSTAB_MODULE
             case (FSTAB_TYPE):
                 // stop current monitor
                 if (view->monitorObject_) {
@@ -135,6 +136,8 @@ public:
                     FstabView<Type>::loadModel(view);
 	        view->page()->updateStatusLabel(NULL);
                 break;
+#endif
+#ifdef ENABLE_PKG_MODULE
             case (PKG_TYPE):
 		gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
 		while(gtk_events_pending())gtk_main_iteration();
@@ -143,6 +146,7 @@ public:
 		gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
 		while(gtk_events_pending())gtk_main_iteration();
                 break;
+#endif
             default:
                 ERROR("fm/view/view.hh::ViewType %d not defined.\n", view->viewType());
                 break;
@@ -158,6 +162,7 @@ public:
 	// Here viewType must be specified before any
 	// static loadModel call (viz. PkgModel)
         TRACE("generalized view: loadModel: %s\n", path);
+#ifdef ENABLE_PKG_MODULE
 	if (strncmp(path, "xffm:pkg", strlen("xffm:pkg"))==0){
 	    this->setViewType(PKG_TYPE);
 	    this->setPath(path);
@@ -171,17 +176,20 @@ public:
 	    TRACE("fm/view.hh: loadModel: %s item activate?\n", path);
 	    return this->loadModel(path);
 	}
+#endif
         if (g_file_test(path, G_FILE_TEST_EXISTS)){
 	    TRACE("%s is  valid path\n", path);
 	    if (!g_file_test(path, G_FILE_TEST_IS_DIR)){
                 // Not a directory, but valid path: activate item.
 		TRACE("%s is not dir, will activate.\n", path);
+#ifdef ENABLE_FSTAB_MODULE
                 if (FstabView<Type>::isMounted(path)){
                     auto mntDir = FstabView<Type>::getMntDir(path);
                     auto retval = this->loadModel(mntDir);
                     g_free(mntDir);
                     return retval;
                 }
+#endif
 		return LocalView<Type>::item_activated(this, treeModel, tpath, path);
 	    }
 	} else if (strcmp(path,"xffm:root")){

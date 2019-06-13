@@ -139,8 +139,10 @@ public:
 	    {N_("Extract files from the archive"), (void *)untar, NULL, NULL},
 	    {N_("Open in New Tab"), (void *)newTab, NULL, NULL},
 	    {N_("Create a compressed archive with the selected objects"), (void *)tarball, NULL, NULL},
+#ifdef ENABLE_FSTAB_MODULE
 	    {N_("Mount the volume associated with this folder"), (void *)mount, NULL, NULL},
 	    {N_("Unmount the volume associated with this folder"), (void *)mount, NULL, NULL},
+#endif
             {N_("Add bookmark"), (void *)addBookmark, NULL, NULL},
             {N_("Remove bookmark"), (void *)removeBookmark, NULL, NULL},
 	    
@@ -166,9 +168,10 @@ public:
             "Open in New Tab",
             "Create a compressed archive with the selected objects",
             "Extract files from the archive",
-            
+#ifdef ENABLE_FSTAB_MODULE            
             "Mount the volume associated with this folder",
             "Unmount the volume associated with this folder",
+#endif
             "Cut",
             "Copy",
             "Paste",
@@ -191,10 +194,10 @@ public:
             "tab-new-symbolic",
             "package-x-generic",
             "insert-object",
-
+#ifdef ENABLE_FSTAB_MODULE            
             "greenball",
             "redball",
-
+#endif
             "edit-cut",
             "edit-copy",
             "edit-paste",
@@ -463,6 +466,7 @@ private:
         }
 	
 
+#ifdef ENABLE_FSTAB_MODULE
         // mount options
         if (FstabView<Type>::isMounted(path)){
             w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Unmount the volume associated with this folder"));
@@ -471,12 +475,16 @@ private:
             w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Mount the volume associated with this folder"));
             gtk_widget_hide(w);
 
-        } else {
+        }
+        else 
+#endif
+        {
             w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Unmount the volume associated with this folder"));
             gtk_widget_set_sensitive(w, FALSE);
             gtk_widget_hide(w);
             w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Mount the volume associated with this folder"));
             gtk_widget_show(w);
+#ifdef ENABLE_FSTAB_MODULE
             if (FstabView<Type>::isInFstab(path)){
                 gtk_widget_show(w);
                 gtk_widget_set_sensitive(w, TRUE);
@@ -484,6 +492,7 @@ private:
                 gtk_widget_hide(w);
                 gtk_widget_set_sensitive(w, FALSE);
             }
+#endif
         }
 
     }
@@ -720,6 +729,7 @@ private:
 
 
 public:
+#ifdef ENABLE_FSTAB_MODULE
     static void
     mount(GtkMenuItem *menuItem, gpointer data)
     {
@@ -729,6 +739,7 @@ public:
             ERROR("localpopup.hh:: mount command failed\n");
         } 
     }
+#endif
 
     static void
     reloadIcons(View<Type> *view){

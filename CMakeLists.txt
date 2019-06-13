@@ -6,7 +6,14 @@ set(PREFIX_BIN /usr/local/bin)
 # Version info
 set(xffm_VERSION_MAJOR 0)
 set(xffm_VERSION_MINOR 91)
-set(CMAKE_CXX_FLAGS "-ggdb")
+#set(CMAKE_CXX_FLAGS "-ggdb")
+
+# work in alpha phase...
+#add_definitions(-DENABLE_CUSTOM_RESPONSE)
+#add_definitions(-DENABLE_PKG_MODULE)
+#add_definitions(-DENABLE_DIFF_MODULE)
+#add_definitions(-DENABLE_FSTAB_MODULE)
+
 set(CMAKE_EXE_LINKER_FLAGS "-L/usr/lib -L/usr/local/lib")
 set(ENV{PKG_CONFIG_PATH}  "/usr/local/lib/pkgconfig")
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")

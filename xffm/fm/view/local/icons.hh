@@ -336,10 +336,12 @@ private:
                 emblem = g_strdup("/SW/emblem-symbolic-link/2.0/220");
             else
                 emblem = g_strdup("/SW/emblem-unreadable/2.0/220");
+#ifdef ENABLE_FSTAB_MODULE
 	    if (FstabView<Type>::isMounted(path)){
 		emblem = addEmblem(emblem, "/NW/greenball/3.0/220");
 		return emblem;
 	    }
+#endif
         }
 
         if (RootView<Type>::isBookmarked(path)){
@@ -350,6 +352,7 @@ private:
         emblem = addEmblem(emblem, clipEmblem);
         g_free(clipEmblem);
 
+#ifdef ENABLE_FSTAB_MODULE
 	if (d_type == DT_DIR || d_type == DT_BLK){
 
 	    if (FstabView<Type>::isMounted(path)){
@@ -358,6 +361,7 @@ private:
 		emblem = addEmblem(emblem, "/NW/grayball/3.0/180");
 	    }
 	}
+#endif
 
 	if (!emblem && st_p) {
             // for directories...
