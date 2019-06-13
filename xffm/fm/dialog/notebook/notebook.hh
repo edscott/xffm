@@ -50,19 +50,32 @@ public:
         pageHash_ =g_hash_table_new_full(g_direct_hash, g_direct_equal, NULL, NULL);
         gtk_notebook_set_scrollable (notebook_, TRUE);
 
-        auto new_tab_button = GTK_BUTTON(gtk_button_new ());
-        gtk_c::setup_image_button(new_tab_button, "tab-new-symbolic", _("Open in New Tab"));
-//        gtk_c::setup_image_button(new_tab_button, "list-add", _("New Tab"));
-        gtk_widget_show(GTK_WIDGET(new_tab_button));
+/*
+        auto newTabPage = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+        gtk_widget_show(newTabPage);
+        auto newTabButton = gtk_c::newButton("list-add-symbolic", _("New Tab"));
+        
 
-        auto button_box = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
-        gtk_box_pack_start(button_box, GTK_WIDGET(new_tab_button),  FALSE, FALSE, 0);
-        gtk_box_pack_start(button_box, GTK_WIDGET(this->menuButton()),  FALSE, FALSE, 0);
-        gtk_widget_show(GTK_WIDGET(button_box));
-        gtk_notebook_set_action_widget (notebook_, GTK_WIDGET(button_box), GTK_PACK_END);
+        gtk_widget_show(GTK_WIDGET(newTabButton));
+        auto pageNumber = gtk_notebook_append_page (notebook_,
+                          GTK_WIDGET(newTabPage),
+                          GTK_WIDGET(newTabButton));
+        gtk_notebook_set_tab_reorderable (notebook_,GTK_WIDGET(newTabPage), FALSE);        
+*/
+        auto actionWidget = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
+        auto tabButtonBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
+        auto newTabButton = gtk_c::newButton("list-add-symbolic", _("New Tab"));
+        g_signal_connect(G_OBJECT(newTabButton), "clicked", 
+                BUTTON_CALLBACK(notebookSignals<Type>::on_new_page), (void *)this);    
+        
+        gtk_box_pack_start(actionWidget, GTK_WIDGET(tabButtonBox),  TRUE, FALSE, 0);
+        gtk_box_pack_start(tabButtonBox, GTK_WIDGET(newTabButton),  TRUE, FALSE, 0);
+        gtk_box_pack_start(tabButtonBox, GTK_WIDGET(this->menuButton()),  TRUE, FALSE, 0);
+
+        gtk_widget_show_all(GTK_WIDGET(actionWidget));
+        gtk_notebook_set_action_widget (notebook_, GTK_WIDGET(actionWidget), GTK_PACK_END);
     
-        g_signal_connect(G_OBJECT(new_tab_button), "clicked", 
-                BUTTON_CALLBACK(notebookSignals<Type>::on_new_page), (void *)this); 
+
         //g_signal_connect (G_OBJECT(window), "destroy", G_CALLBACK (destroy), 
         //        NULL);
         signalSetup();

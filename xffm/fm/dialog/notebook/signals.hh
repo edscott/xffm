@@ -27,11 +27,15 @@ public:
 	startup = FALSE;
         page_p->setDialogTitle();
         gtk_widget_set_sensitive(GTK_WIDGET(page_p->pageLabelButton()), TRUE);
+        gtk_widget_show(GTK_WIDGET(page_p->pageLabelButton()));
         auto pages = gtk_notebook_get_n_pages(notebook);
 
         if (lastPage >= 0 && lastPage != new_page && lastPage < pages){
             page_p = (Page<Type> *)notebook_p->currentPageObject(lastPage);
-            if(page_p) gtk_widget_set_sensitive(GTK_WIDGET(page_p->pageLabelButton()), FALSE);
+            if(page_p) {
+                gtk_widget_set_sensitive(GTK_WIDGET(page_p->pageLabelButton()), FALSE);
+                gtk_widget_hide(GTK_WIDGET(page_p->pageLabelButton()));
+            }
         }
         lastPage = new_page;
 

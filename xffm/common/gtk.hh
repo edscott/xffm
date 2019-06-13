@@ -314,6 +314,15 @@ public:
         gtk_widget_set_tooltip_markup (GTK_WIDGET(button),tooltipText);
 	return button;
     }
+
+    static GtkMenuButton *newMenuButton(const gchar *icon, const gchar *tooltipText){
+	auto button =  GTK_MENU_BUTTON(gtk_menu_button_new());
+        setup_image_button(GTK_BUTTON(button), icon, tooltipText);
+	gtk_widget_set_can_focus (GTK_WIDGET(button), FALSE);
+	gtk_button_set_relief (GTK_BUTTON(button), GTK_RELIEF_NONE);
+        gtk_widget_set_tooltip_markup (GTK_WIDGET(button),tooltipText);
+	return button;
+    }
     
 /*    static GtkButton *newButtonL(const gchar *icon, const gchar *tooltipText){
 	auto button =  gtk_c::dialog_button(icon, NULL);
