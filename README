@@ -82,5 +82,13 @@ Bugs:
 Cleanups:  
   * 20+ files with FIXMEs
 
-
+XXXXXXXX: for translation construction:
+1. Put full po files in build/po
+2. Do make --makefile=Makefile.autotools check 
+    (verify POTFILE.in from xffm/po is correct)
+3. Do make --makefile=Makefile.autotools distclean
+4. Do make --makefile=Makefile.autotools update-po
+5. Do make --makefile=Makefile.autotools 
+6. Do perl clean.pl [all po files]
+7. copy po and gmo files to xffm/po
 
