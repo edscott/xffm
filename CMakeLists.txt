@@ -12,7 +12,7 @@ set(xffm_VERSION_MINOR 91)
 #add_definitions(-DENABLE_CUSTOM_RESPONSE)
 #add_definitions(-DENABLE_PKG_MODULE)
 #add_definitions(-DENABLE_DIFF_MODULE)
-#add_definitions(-DENABLE_FSTAB_MODULE)
+add_definitions(-DENABLE_FSTAB_MODULE)
 
 set(CMAKE_EXE_LINKER_FLAGS "-L/usr/lib -L/usr/local/lib")
 set(ENV{PKG_CONFIG_PATH}  "/usr/local/lib/pkgconfig")
@@ -76,7 +76,7 @@ execute_process(COMMAND automake --add-missing --copy)
 execute_process(COMMAND ./configure --prefix=/usr/local)
 execute_process(COMMAND mv -v po/Makefile po/Makefile.autotools)
 execute_process(COMMAND po/build)
-execute_process(COMMAND make update-po)
+#execute_process(COMMAND make update-po)
 execute_process(COMMAND rm Makefile)
 
 
