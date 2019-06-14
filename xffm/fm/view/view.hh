@@ -133,7 +133,7 @@ public:
                     delete ((FstabMonitor<Type> *)view->monitorObject_);
                     view->monitorObject_ = NULL;
                 }                //view->monitor_ = 
-                    FstabView<Type>::loadModel(view);
+                FstabView<Type>::loadModel(view);
 	        view->page()->updateStatusLabel(NULL);
                 break;
 #endif

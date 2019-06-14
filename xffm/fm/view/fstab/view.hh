@@ -1,6 +1,9 @@
 #ifndef XF_FSTAB_HH 
 #define XF_FSTAB_HH
 #ifdef ENABLE_FSTAB_MODULE
+
+
+// FIXME: Are these useful any more?
 #define MNTTYPE_PROCFS	"proc"
 #define MNTTYPE_SMBFS	"smbfs"
 #define MNTTYPE_DEV	"devpts"
@@ -39,31 +42,568 @@ msgid "NFS Network Volume"
 msgid "NFS remote directory"
 */
 
-#ifdef HAVE_MNTENT_H
+
+#ifdef FREEBSD_FOUND
+// BSD FIXME conditionals...
+# include <fstab.h>
+# include <sys/ucred.h>
+
+# include <sys/param.h>
+# ifdef HAVE_SYS_PARAM_H
+#  include <sys/param.h>
+# endif
+
+
+# include <sys/mount.h>
+# ifdef HAVE_SYS_MOUNT_H
+#  include <sys/mount.h>
+# endif
+
+# ifdef HAVE_SYS_TYPES_H
+#  include <sys/types.h>
+# endif
+
+# ifdef HAVE_sys_sysctl_H
+#  include <sys/sysctl.h>
+# endif
+
+#else
 // Linux
-# include <mntent.h>
+# ifdef HAVE_MNTENT_H
+#  include <mntent.h>
+# else
+#  error "Linux: <mntent.h> not found"
+# endif
+
 #endif
 
-// BSD
-#ifdef HAVE_SYS_MOUNT_H
-# include <sys/mount.h>
-#endif
-#ifdef HAVE_SYS_TYPES_H
-# include <sys/types.h>
-#endif
-#ifdef HAVE_sys_sysctl_H
-# include <sys/sysctl.h>
-#endif
-#ifdef HAVE_SYS_PARAM_H
-# include <sys/param.h>
-#endif
+
 #include "popup.hh"
 #include "monitor.hh"
-
-
-    // XXX this is Linux Version. FreeBSD differs (see fstab module)
 namespace xf {
 template <class Type> class FstabPopUp;
+
+#ifdef FREEBSD_FOUND
+
+static pthread_mutex_t fsmutex = G_STATIC_MUTEX_INIT;
+static pthread_mutex_t mntmutex = PTHREAD_MUTEX_INITIALIZER;
+static GMutex *infomutex=NULL;
+
+
+template <class Type>
+class FstabView: public FstabPopUp<Type> {
+    using pixbuf_c = Pixbuf<double>;
+    using util_c = Util<double>;
+public:
+    static void
+    loadModel (View<Type> *view)
+    {
+		TRACE("fstab loadModel()\n");
+		view->disableDnD();	
+        auto iconView = view->iconView();
+        auto treeModel = gtk_icon_view_get_model (iconView);
+		TRACE("mk_tree_model:: model = %p\n", treeModel);
+        while (gtk_events_pending()) gtk_main_iteration();
+		removeAllItems(treeModel);
+        // Disable DnD
+        //gtk_icon_view_unset_model_drag_source (iconView);
+        //gtk_icon_view_unset_model_drag_dest (iconView);
+        gtk_icon_view_set_selection_mode (iconView,GTK_SELECTION_SINGLE); 
+
+		addAllItems(treeModel);
+        return ;
+    }
+
+    static void
+    removeAllItems(GtkTreeModel *treeModel){
+		GtkTreeIter iter;
+		if (gtk_tree_model_get_iter_first (treeModel, &iter)){
+			while (gtk_list_store_remove (GTK_LIST_STORE(treeModel),&iter));
+		}
+    }
+    static guint
+    getMntType (const gchar *path) {return 0;}
+    static gchar *
+    getMntDir (const gchar * mnt_fsname) {return NULL;}
+    static gboolean
+    isMounted (const gchar *mnt_fsname){return FALSE;}  
+    static gchar *
+    mountTarget (const gchar *label) {return NULL;}    
+    static gboolean
+    isInFstab (const gchar *path) {return FALSE;}
+    static gboolean
+    mountPath (View<Type> *view, const gchar *path, const gchar *mountPoint)
+     	{return FALSE;}
+	static gchar *
+    e2Label(const gchar *partitionPath){return NULL;}
+	static gchar *
+    id2Partition(const gchar *id){return NULL;}
+
+private:
+//BSD
+
+
+    static void 
+    addAllItems(GtkTreeModel *treeModel){
+		RootView<Type>::addXffmItem(treeModel);
+		addFsentItems(treeModel);
+        //addPartitionItems(treeModel);
+	}
+
+	static void 
+    addFsentItems (GtkTreeModel *treeModel) {
+		auto list = fsentList();
+		for (auto l=list; l && l->data; l=l->next){
+			DBG("BSD fstab item=%s\n", (const gchar *)l->data);
+		}
+		// clear list
+		clearFsentList(list);
+        return;
+    }
+
+	static void
+	clearFsentList(GSList *list){
+		for (auto l=list; l && l->data; l=l->next){
+			g_free(l->data);
+		}
+		g_slist_free(list);
+	}
+
+	static GSList *
+	fsentList (void) {
+		GSList *list=NULL;
+		pthread_mutex_lock(&fsmutex);
+		if(!setfsent ()) {
+			pthread_mutex_unlock(&fsmutex);
+			return NULL;
+		}
+		GSList *elements = NULL;
+		struct fstab *fs;
+		for(fs = getfsent (); fs != NULL; fs = getfsent ()) {
+			if (!g_path_is_absolute(fs->fs_file)) continue;
+			TRACE("elements_list: %s\n", fs->fs_file);
+			elements = g_slist_prepend(elements, g_strdup(fs->fs_file));
+		}
+		endfsent ();
+		return elements;
+	}
+
+
+
+
+#if 0
+	static gchar *
+	getBsdPartition(const gchar *p){
+		TRACE("getBsdPartition: %s\n", p);
+		if (!p) return NULL;
+		gchar *mnt_point = realpath((gchar *)p, NULL);
+		if (!mnt_point) return NULL;
+
+		pthread_mutex_lock(&mntmutex);
+		struct statfs *mnt_buf;
+		size_t mnt_items = getmntinfo(&mnt_buf, MNT_NOWAIT);
+
+		gint i=0;
+		gchar *mnt_partition = NULL;
+		for (;i<mnt_items; i++){
+			if(strcmp (mnt_point, (mnt_buf+i)->f_mntonname) == 0 ||
+			   strcmp (mnt_point, (mnt_buf+i)->f_mntfromname) == 0) {
+				mnt_partition = g_strdup((mnt_buf+i)->f_mntfromname);
+				break;
+			}
+		}
+		pthread_mutex_unlock(&mntmutex);
+		g_free(mnt_point);
+		TRACE("getBsdPartition: %s -> %s\n", p, mnt_partition);
+		return mnt_partition;
+	}
+	static gboolean
+	isMounted (const gchar *p) {
+		if(!p) {
+			DBG ("fstab.i:private_is_mounted() mnt_point != NULL not met!\n");
+			return FALSE;
+		}
+		TRACE("private_is_mounted: %s\n", p);
+		gchar *mnt_partition = getBsdPartition(p);
+		if (mnt_partition){
+			g_free(mnt_partition);
+			return TRUE;
+		}
+		return FALSE;
+
+	}
+	    
+
+	static gboolean
+	isUserType (const gchar * mnt_point) {
+		return FALSE;
+	}
+
+	static gboolean
+	include_in_xfdir (struct fstab *fs) {
+		if(strcmp (MNTTYPE_SWAP, fs->fs_vfstype) == 0)
+			return FALSE;
+		if(!g_file_test (fs->fs_file, G_FILE_TEST_IS_DIR))
+			return FALSE;
+		return TRUE;
+	}
+
+	static void
+	set_fs_type(record_entry_t *en, const gchar *fs_vfstype){
+		SET_FSTAB_TYPE (en->type);
+		if(strcmp (MNTTYPE_CDFS, fs_vfstype) == 0) SET_CDFS_TYPE (en->type);
+		else if(strcmp (MNTTYPE_CODAFS, fs_vfstype) == 0) SET_NFS_TYPE (en->type);
+		else if(strcmp (MNTTYPE_KERNFS, fs_vfstype) == 0) SET_PROC_TYPE (en->type);
+		else if(strcmp (MNTTYPE_MFS, fs_vfstype) == 0) SET_PROC_TYPE (en->type);
+		else if(strcmp (MNTTYPE_NFS, fs_vfstype) == 0) SET_NFS_TYPE (en->type);
+		else if(strcmp (MNTTYPE_PROCFS, fs_vfstype) == 0) SET_PROC_TYPE (en->type);
+		else if(strcmp (MNTTYPE_SMBFS, fs_vfstype) == 0) SET_SMB_TYPE (en->type);
+		return;
+	}
+	static GSList *
+	elements_list (void) {
+		GSList *list=NULL;
+		pthread_mutex_lock(&fsmutex);
+		if(!setfsent ()) {
+			pthread_mutex_unlock(&fsmutex);
+			return (0);
+		}
+		struct fstab *fs;
+		int i;
+		typedef struct fstab_t{
+			gchar *fs_file;
+			gchar *fs_vfstype;
+		}fstab_t;
+
+		GSList *elements = NULL;
+		for(i = 0, fs = getfsent (); fs != NULL; fs = getfsent ()) {
+			if(!include_in_xfdir (fs)) continue;
+			TRACE("elements_list: %s\n", fs->fs_file);
+			fstab_t *f = (fstab_t *)calloc(1,sizeof(fstab_t));
+			if (!f) g_error("calloc: %s \n", strerror(errno));
+			f->fs_file = g_strdup(fs->fs_file);
+			f->fs_vfstype = g_strdup(fs->fs_vfstype);
+			elements = g_slist_prepend(elements, f);
+			i++;
+		}
+		endfsent ();
+
+		for(auto tmp = elements; tmp && tmp->data; tmp = tmp->next) {
+			fstab_t *f = tmp->data;
+			record_entry_t *en = rfm_stat_entry(f->fs_file, 0);
+			set_fs_type(en, f->fs_vfstype);
+			list = g_slist_prepend(list, en); 
+			g_free(f->fs_file);
+			g_free(f->fs_vfstype);
+			g_free(f);
+		}
+		g_slist_free(elements);
+
+		pthread_mutex_unlock(&fsmutex);
+		if (!infomutex) rfm_mutex_init(infomutex);
+		g_mutex_lock(infomutex);
+		struct statfs *mntbuf;
+		gint count = getmntinfo(&mntbuf,  MNT_NOWAIT);
+		if (count){
+			gint j;
+			for (j=0; j<count; j++){
+				for (auto tmp=list; tmp && tmp->data; tmp = tmp->next){
+					record_entry_t *en = tmp->data;
+					if (strcmp(en->path, (mntbuf+j)->f_mntonname)==0) break;
+				}
+				if (!tmp) {
+					record_entry_t *en = rfm_stat_entry((mntbuf+j)->f_mntonname, 0);
+					set_fs_type(en, (mntbuf+j)-> f_fstypename);
+					list=g_slist_prepend(list, en);
+				}
+			}
+		}
+		g_mutex_unlock(infomutex);
+		return list;
+	}
+
+	static void
+	clearSList(GSList **list_p){
+		GSList *tmp;
+		for (tmp=*list_p; tmp && tmp->data; tmp = tmp->next){
+			record_entry_t *en = tmp->data;
+			TRACE("clearing item: %s\n", en->path);
+			rfm_destroy_entry(en);
+		}
+		g_slist_free(*list_p);
+		return;
+	}
+
+	static gint
+	countElements (void) {
+		GSList *list = elements_list();
+		gint count = g_slist_length(list);
+		clear_slist(&list);
+		return count;
+	}
+
+	static int
+	countPartitions (void) {
+		TRACE("count partitions...\n");
+		GSList *list = partitions_list();
+		gint count = g_slist_length(list);
+		clear_slist(&list);
+		return count;
+	}
+
+	static gchar *
+	getMntDir (gchar * mnt_fsname) {
+		struct fstab *fs;
+		pthread_mutex_lock(&fsmutex);
+
+		if(!setfsent ()) {
+			pthread_mutex_unlock(&fsmutex);
+			return (0);
+		}
+
+		gchar *mnt_dir = NULL;
+		for(fs = getfsent (); fs != NULL; fs = getfsent ()) {
+			if(!include_in_xfdir (fs))
+				continue;
+
+			if(strcmp (mnt_fsname, fs->fs_spec) == 0) {
+				//if(strcmp (mnt_fsname, mnt_struct->mnt_fsname) == 0) {
+				// hit: multiple entries use first listed 
+				// user types have preference and use last listed 
+				if(strstr (fs->fs_mntops, "user")) {
+					g_free (mnt_dir);
+					mnt_dir = g_strdup (fs->fs_file);
+				}
+				if(!mnt_dir) {
+					mnt_dir = g_strdup (fs->fs_file);
+				}
+			}
+		}
+
+		endfsent ();
+		pthread_mutex_unlock(&fsmutex);
+		return mnt_dir;
+	}
+
+	static  gchar *
+	getMntFsname (gchar * mnt_dir) {
+		struct fstab *fs;
+		pthread_mutex_lock(&fsmutex);
+
+		if(!setfsent ()) {
+			pthread_mutex_unlock(&fsmutex);
+			return (0);
+		}
+
+
+		gchar *mnt_fsname = NULL;
+
+		for(fs = getfsent (); fs != NULL; fs = getfsent ()) {
+			if(!include_in_xfdir (fs))
+				continue;
+			if(strcmp (mnt_dir, fs->fs_file) == 0) {
+				//if(strcmp (mnt_dir, mnt_struct->mnt_dir) == 0) {
+				// hit: multiple entries use first listed 
+				// user types have preference and use last listed 
+				if(strstr (fs->fs_mntops, "user")) {
+					g_free (mnt_fsname);
+					mnt_fsname = g_strdup (fs->fs_spec);
+				}
+				if(!mnt_fsname) {
+					mnt_fsname = g_strdup (fs->fs_spec);
+				}
+			}
+		}
+		endfsent ();
+		pthread_mutex_unlock(&fsmutex);
+		return mnt_fsname;
+	}
+	static void
+	set_mounts_info (record_entry_t * en) {
+		if (!en || !en->path) return;
+		const gchar *mnt_point = en->path;
+		pthread_mutex_lock(&mntmutex);
+		struct statfs *mnt_buf;
+		size_t mnt_items = getmntinfo(&mnt_buf, MNT_NOWAIT);
+		gchar *mnt_to=NULL;
+		gint i=0; for (;i<mnt_items; i++){
+		TRACE("%s == %s or %s\n", mnt_point,
+			(mnt_buf+i)->f_mntonname, (mnt_buf+i)->f_mntfromname);
+		
+			if(strcmp (mnt_point, (mnt_buf+i)->f_mntonname) == 0 ||
+			   strcmp (mnt_point, (mnt_buf+i)->f_mntfromname) == 0) {
+			TRACE("match\n");
+			mnt_to = g_strdup((mnt_buf+i)->f_mntonname);
+			break;
+		}
+		}
+		pthread_mutex_unlock(&mntmutex);
+		
+		g_free(en->tag);
+		en->tag = mnt_to;
+	}
+	static xfdir_t *
+	private_get_xfdir (xfdir_t * xfdir_p) {
+		struct fstab *fs;
+
+		TRACE("elements_list ()\n");
+		GSList *list = elements_list ();
+		gint elements = g_slist_length(list);
+		TRACE("partitions_list ()\n");
+		
+		GSList *p_list = partitions_list ();
+		gint partitions = g_slist_length(p_list);
+
+	 
+		TRACE("malloc_items %d\n", elements+partitions);
+		gint first = malloc_items(xfdir_p, elements+partitions);
+		// g_error taken care of within function.
+		GSList *tmp=list;
+
+		gint i;
+		for(i = first; tmp && tmp->data; tmp=tmp->next) {
+		record_entry_t *en = tmp->data;
+		xfdir_p->gl[i].en = en;
+			xfdir_p->gl[i].pathv = g_strdup (en->path);
+			TRACE ("fstab element: %d --> %s\n", i, en->path);
+			i++;
+		}
+		tmp=p_list;
+		for(; tmp && tmp->data; tmp=tmp->next) {
+			record_entry_t *en = tmp->data;
+			xfdir_p->gl[i].en = en;
+			xfdir_p->gl[i].pathv = g_strdup (en->path);
+			TRACE ("fstab partition: %d --> %s\n", i, en->path);
+			i++;
+		}
+
+		g_slist_free(list);
+		g_slist_free(p_list);
+		return (xfdir_p);
+	}
+	static void *
+	isInFstab (void *p) {
+		int result = 0;
+		struct fstab *fs;
+		const gchar *path = (const gchar *)p;
+		pthread_mutex_lock(&fsmutex);
+
+		if(!setfsent ()) {
+			pthread_mutex_unlock(&fsmutex);
+			return (0);
+		}
+
+
+		for(fs = getfsent (); fs != NULL; fs = getfsent ()) {
+			if(strcmp (MNTTYPE_SWAP, fs->fs_vfstype) == 0)
+				continue;
+			if(!rfm_g_file_test (fs->fs_file, G_FILE_TEST_IS_DIR))
+				continue;
+
+			if(strcmp (path, fs->fs_file) == 0) {
+				if(strcmp (MNTTYPE_CDFS, fs->fs_vfstype) == 0)
+					result = __CDFS_TYPE;
+				else if(strcmp (MNTTYPE_CODAFS, fs->fs_vfstype) == 0)
+					result = __NFS_TYPE;
+				else if(strcmp (MNTTYPE_KERNFS, fs->fs_vfstype) == 0)
+					result = __PROC_TYPE;
+				else if(strcmp (MNTTYPE_MFS, fs->fs_vfstype) == 0)
+					result = __PROC_TYPE;
+				else if(strcmp (MNTTYPE_NFS, fs->fs_vfstype) == 0)
+					result = __NFS_TYPE;
+				else if(strcmp (MNTTYPE_PROCFS, fs->fs_vfstype) == 0)
+					result = __PROC_TYPE;
+				else if(strcmp (MNTTYPE_SMBFS, fs->fs_vfstype) == 0)
+					result = __SMB_TYPE;
+				else
+					result = -1;
+				break;
+			}
+		}
+		endfsent ();
+		pthread_mutex_unlock(&fsmutex);
+		return GINT_TO_POINTER (result);
+	}
+
+
+	static gchar *
+	df (void) {
+		gchar *df_string = NULL;
+		int line_count = 0;
+		char line[2048];
+		FILE *pipe;
+		memset ((void *)line, 0, 2048);
+		gchar *command = g_find_program_in_path ("df");
+		pipe = popen (command, "r");
+		g_free (command);
+		if(!pipe) {
+			DBG ("unable to pipe df\n");
+			return "";
+		}
+		while(fgets (line, 2047, pipe) && !feof (pipe)) {
+			line_count++;
+		}
+		pclose (pipe);
+		df_string = g_strdup_printf ("line_count=%d", line_count);
+		TRACE ("DF: %s\n", df_string);
+		return df_string;
+	}
+
+
+	static gchar *
+	entryTip (gchar *path) {
+		if(!path) return NULL;
+		gchar *mnt_point = realpath(path, NULL);
+		if (!mnt_point) return NULL;
+		
+		
+
+
+		pthread_mutex_lock(&mntmutex);
+		struct statfs *mnt_buf;
+		size_t mnt_items = getmntinfo(&mnt_buf, MNT_NOWAIT);
+
+		gchar *mnt_to=NULL;
+		gchar *mnt_from=NULL;
+		gint item=-1;
+		gint i=0;
+		for (;i<mnt_items; i++){
+			TRACE("%s == %s or %s\n", mnt_point,
+			(mnt_buf+i)->f_mntonname, (mnt_buf+i)->f_mntfromname);
+		
+			if(strcmp (mnt_point, (mnt_buf+i)->f_mntonname) == 0 ||
+			   strcmp (mnt_point, (mnt_buf+i)->f_mntfromname) == 0) {
+				TRACE("match\n");
+				mnt_to = g_strdup((mnt_buf+i)->f_mntonname);
+				mnt_from = g_strdup((mnt_buf+i)->f_mntfromname);
+				item = i;
+				break;
+			}
+		}
+		pthread_mutex_unlock(&mntmutex);
+		TRACE("item = %d\n", item);
+		if (item < 0){
+			return mnt_point;
+		}
+		
+		gchar *text = g_strdup_printf("%s%s \n%s%s\n",
+			_("Mount point: "), mnt_to?mnt_to:"none",
+			_("Mount device: "), mnt_from?mnt_from:"none");
+		g_free(mnt_point);
+		g_free(mnt_to);
+		g_free(mnt_from);
+		return text;
+	}
+
+#endif
+
+};
+
+#else
+    // XXX work in progress... this is Linux Version. 
+
+
+
 template <class Type>
 class FstabView: public FstabPopUp<Type> {
     using pixbuf_c = Pixbuf<double>;
@@ -86,6 +626,7 @@ public:
         gtk_icon_view_set_selection_mode (iconView,GTK_SELECTION_SINGLE); 
 
 	addAllItems(treeModel);
+	// Linux monitor
         FstabMonitor<Type> *p = new(FstabMonitor<Type>)(treeModel, view);
         p->start_monitor(view, "/dev/disk/by-id");
         // already in start_monitor function:
@@ -97,12 +638,15 @@ public:
 
     static void
     removeAllItems(GtkTreeModel *treeModel){
- 	GtkTreeIter iter;
-	if (gtk_tree_model_get_iter_first (treeModel, &iter)){
-	    while (gtk_list_store_remove (GTK_LIST_STORE(treeModel),&iter));
-	}
+		GtkTreeIter iter;
+		if (gtk_tree_model_get_iter_first (treeModel, &iter)){
+			while (gtk_list_store_remove (GTK_LIST_STORE(treeModel),&iter));
+		}
     }
 
+	// LINUX
+	//
+	//
     static void
     addDisksItem(GtkTreeModel *treeModel){ 
  	GtkTreeIter iter;
@@ -136,12 +680,12 @@ public:
 
     static void 
     addAllItems(GtkTreeModel *treeModel){
-	RootView<Type>::addXffmItem(treeModel);
-	addDisksItem(treeModel);
-	//addNFSItem(treeModel);
-	//addEcryptFSItem(treeModel);
-	//addSSHItem(treeModel);
-	//addCIFSItem(treeModel);
+		RootView<Type>::addXffmItem(treeModel);
+		addDisksItem(treeModel);
+		//addNFSItem(treeModel);
+		//addEcryptFSItem(treeModel);
+		//addSSHItem(treeModel);
+		//addCIFSItem(treeModel);
         addPartitionItems(treeModel);
 
 
@@ -970,6 +1514,7 @@ private:
     }
 
 };
+#endif
 }
 #endif
 #endif

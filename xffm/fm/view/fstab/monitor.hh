@@ -19,6 +19,8 @@ class FstabMonitor: public BaseMonitor<Type> {
     //void *mountArg_[5]; // Needs to exist until destructor is called.
     // Please note, sending signal to monitor avoid race condition if
     // this thread tries to do more than this...
+#ifdef FREEBSD_FOUND
+#else
 public:    
     FstabMonitor(GtkTreeModel *treeModel, View<Type> *view):
         BaseMonitor<Type>(treeModel, view)
@@ -58,6 +60,71 @@ public:
 	}
 #endif
     }
+
+    static void *
+    mountThreadF(void *data){
+        void **arg = (void **)data;
+        auto baseMonitor = (BaseMonitor<Type> *)arg[0];
+        TRACE("*** baseMonitor = %p\n", baseMonitor);
+        g_object_set_data(G_OBJECT(baseMonitor->treeModel()), "baseMonitor", (void *)baseMonitor);
+        // get initial md5sum
+        gchar *sum = Util<Type>::md5sum("/proc/mounts");
+        gchar *sumPartitions = Util<Type>::md5sum("/proc/partitions");
+        if (!sum) {
+            ERROR("fm/view/fstab/monitor::Exiting mountThreadF() on md5sum error (sum)\n");
+            g_free(data);
+            return NULL;
+        }
+        TRACE("FstabMonitor::mountThreadF(): initial md5sum=%s basemonitor=%p", sum, baseMonitor);
+        
+	auto hash = getMountHash(NULL);
+        while (arg[1]){// arg[1] is semaphore to thread
+            usleep(250000);
+	    if (!baseMonitor->active())continue;
+            //sleep(1);
+            TRACE("mountThreadF loop for arg=%p\n", data);
+            gchar *newSum = Util<Type>::md5sum("/proc/mounts");
+            gchar *newSumPartitions = Util<Type>::md5sum("/proc/partitions");
+            if (!newSum){
+                ERROR("fm/view/fstab/monitor::Exiting mountThreadF() on md5sum error (newSum)\n");
+                g_hash_table_destroy(hash);
+                g_free(sum);
+                return NULL;
+            }
+            if (strcmp(newSum, sum)){
+                TRACE("new md5sum /proc/mounts = %s (%s)\n", newSum, sum);
+                TRACE("now we test whether icon update is necessary...\n");
+                g_free(sum);
+                sum = newSum;
+                // Any new mounts?
+                // Foreach item in itemsHash_ check
+                // if (isMounted() and not in hash)
+                // if so, then send change signal for gfile path. 
+                // This should set the greenball.
+                //TRACE("thread itemshash=%p\n", itemsH);
+                gtk_tree_model_foreach(baseMonitor->treeModel(), checkIfMounted, (void *)hash);
+                //
+                // Any new umounts?
+                // Foreach item in hash, check if 
+                // if (!isMounted(item) && in itemsHash_)
+                // then
+                //     sendSignal change for gfile(item)
+                gtk_tree_model_foreach(baseMonitor->treeModel(), checkIfNotMounted, (void *)hash);
+                //
+                // Update hash.
+                hash = getMountHash(hash);
+            }
+            if (strcmp(newSumPartitions, sumPartitions)){
+                TRACE("new md5sum /proc/partitions = %s (%s)\n", newSumPartitions, sumPartitions);
+	    }
+        }
+        g_free(sum);
+        TRACE("***now exiting mountThreadF(), baseMonitor=%p\n", baseMonitor);
+        g_hash_table_destroy(hash);
+        arg[2] = NULL; // arg[2] is semaphore to calling thread.
+        return NULL;
+    }
+
 
 private:
 
@@ -124,72 +191,6 @@ private:
         return retval;
     }
 
-public:
-    static void *
-    mountThreadF(void *data){
-        void **arg = (void **)data;
-        auto baseMonitor = (BaseMonitor<Type> *)arg[0];
-        TRACE("*** baseMonitor = %p\n", baseMonitor);
-        g_object_set_data(G_OBJECT(baseMonitor->treeModel()), "baseMonitor", (void *)baseMonitor);
-        // get initial md5sum
-        gchar *sum = Util<Type>::md5sum("/proc/mounts");
-        gchar *sumPartitions = Util<Type>::md5sum("/proc/partitions");
-        if (!sum) {
-            ERROR("fm/view/fstab/monitor::Exiting mountThreadF() on md5sum error (sum)\n");
-            g_free(data);
-            return NULL;
-        }
-        TRACE("FstabMonitor::mountThreadF(): initial md5sum=%s basemonitor=%p", sum, baseMonitor);
-        
-	auto hash = getMountHash(NULL);
-        while (arg[1]){// arg[1] is semaphore to thread
-            usleep(250000);
-	    if (!baseMonitor->active())continue;
-            //sleep(1);
-            TRACE("mountThreadF loop for arg=%p\n", data);
-            gchar *newSum = Util<Type>::md5sum("/proc/mounts");
-            gchar *newSumPartitions = Util<Type>::md5sum("/proc/partitions");
-            if (!newSum){
-                ERROR("fm/view/fstab/monitor::Exiting mountThreadF() on md5sum error (newSum)\n");
-                g_hash_table_destroy(hash);
-                g_free(sum);
-                return NULL;
-            }
-            if (strcmp(newSum, sum)){
-                TRACE("new md5sum /proc/mounts = %s (%s)\n", newSum, sum);
-                TRACE("now we test whether icon update is necessary...\n");
-                g_free(sum);
-                sum = newSum;
-                // Any new mounts?
-                // Foreach item in itemsHash_ check
-                // if (isMounted() and not in hash)
-                // if so, then send change signal for gfile path. 
-                // This should set the greenball.
-                //TRACE("thread itemshash=%p\n", itemsH);
-                gtk_tree_model_foreach(baseMonitor->treeModel(), checkIfMounted, (void *)hash);
-                //
-                // Any new umounts?
-                // Foreach item in hash, check if 
-                // if (!isMounted(item) && in itemsHash_)
-                // then
-                //     sendSignal change for gfile(item)
-                gtk_tree_model_foreach(baseMonitor->treeModel(), checkIfNotMounted, (void *)hash);
-                //
-                // Update hash.
-                hash = getMountHash(hash);
-            }
-            if (strcmp(newSumPartitions, sumPartitions)){
-                TRACE("new md5sum /proc/partitions = %s (%s)\n", newSumPartitions, sumPartitions);
-	    }
-        }
-        g_free(sum);
-        TRACE("***now exiting mountThreadF(), baseMonitor=%p\n", baseMonitor);
-        g_hash_table_destroy(hash);
-        arg[2] = NULL; // arg[2] is semaphore to calling thread.
-        return NULL;
-    }
-
-private:
     
     
 
@@ -457,6 +458,7 @@ private:
 	return TRUE;
     }
 
+#endif
 
 };
 }

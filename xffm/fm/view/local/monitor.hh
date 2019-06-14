@@ -60,6 +60,10 @@ public:
     }
 
 #ifdef ENABLE_FSTAB_MODULE
+#ifdef FREEBSD_FOUND
+    void startMountThread(void){
+    }
+#else
     void startMountThread(void){
         // start mountThread
         pthread_t mountThread;
@@ -73,6 +77,7 @@ public:
 	    //return retval;
 	}
     }
+#endif
 #endif
 
     void
