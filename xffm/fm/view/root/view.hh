@@ -103,13 +103,43 @@ private:
 	view->reloadModel();
     }
 
+    static gboolean
+    updateTrashIcon(GtkTreeModel *treeModel, GtkTreePath *tpath, GtkTreeIter *iter, void *data){
+	auto path = (const gchar *)data;
+	if (!path) return FALSE;
+	gchar *thisPath;
+        gtk_tree_model_get(treeModel, iter, PATH, &thisPath, -1);
+	TRACE( "%s <__> %s \n", thisPath, path);
+	if (!thisPath) return FALSE;
+	if (!strstr(thisPath, path)){
+	    g_free(thisPath);
+            return FALSE;
+	}
+        g_free(thisPath);	
+	auto icon_name = "user-trash";
+	auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_EMBLEM, NULL);
+	auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
+	auto normal_pixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -48);
+	auto highlight_pixbuf = Pixbuf<Type>::get_pixbuf(highlight_name,  -48);   
+	g_free(highlight_name);
+	
+	gtk_list_store_set (GTK_LIST_STORE(treeModel), iter, 
+		ICON_NAME, icon_name,
+                TREEVIEW_PIXBUF, treeViewPixbuf, 
+		DISPLAY_PIXBUF, normal_pixbuf,
+		NORMAL_PIXBUF, normal_pixbuf,
+		HIGHLIGHT_PIXBUF, highlight_pixbuf,
+		-1);
+	return TRUE;
+    }
+
     static void
     emptyTrash(GtkMenuItem *menuItem, gpointer data) {
 	auto trash = g_build_filename(g_get_home_dir(), ".local/share/Trash", NULL);
 	Gio<Type>::execute((GtkDialog *)NULL, trash, MODE_RM);
 	auto view = (View<Type> *)g_object_get_data(G_OBJECT(data), "view");
+	gtk_tree_model_foreach(view->treeModel(), updateTrashIcon, (void *)trash);
 	g_free(trash);
-	view->reloadModel();
     }
 	
 
