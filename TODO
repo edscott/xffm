@@ -1,88 +1,53 @@
 For 0.91
 
-
-
-///
-
-BUG:
-Need to be able to set evironment variables for proxy on pkg module: have commands run in 
-a custom app window.
-
-
-BUG: rename a directory to a directory that already exists will move the source directory into the directory with the desired name. Default move action.
-
-
-BUG: greenball update icon in local is disabled. Using the threaded monitor function
-     from fstab to signal changes causes crash. I believe due to double treeview now
-     used in local view. Maybe put thread within local view. but that complicates things
-     for freebsd version.
-
-pending:
-needs file selector box with bash completion at current directory
-needs executable definition for OK button
-needs in terminal (xterm) button (for gccproblem26)
-needs way to set and insenditivize options if in terminal is not selected
-(for gccproblem26)
-
-
-
-
-
-bug> in pkg send stderr to output as when pkg fails, database needs manual updat "pkg update", add item to menu...
-
-Rebuild of pkg system: top level should have groups. next installed packages.
-
-pending:
-    pacman -Syy will run before any install, but not on uninstall.
-
-
-When logo appears, if click on window before logo window disappears, we can have
-a glib thread crash
-
-  pending: fix popupmenu for /dev/disks
-             
-bug: 
  
- - progress dialog for rm/trash/shred
- > use libmagic preferably instead of perl if available
  > printout optional and required libraries found in configure step.
- 
- . multiple windows will trigger multiple timeout dialogs on mount items.
-   (maybe define an xatom for first one, value = 1 and -1 when none is defined)
-  ** Seems to be nonissue, since dialogs are placed on top of each other and dissappear
-     at same time. The only issue would be if user dismisses top dialog, it would appear
-     not to go away...
-       
- . timeout dialog requires a progress bar on timeout
- . timeout dialog requires a "Dismiss" button.
-
-
-TODO
-  * history internal lpterm command. Enable use of | grep to filter output...
-
-  * check tarball creation output in lpterm (also enable multiple file processing if several compressed files
-    of the same mimetype are selected simultaneously.
-
-  * add bookmarks to rootview: 
-    - put localviewpopup basics into rootview, popup menu to remove bookmark... maybe
-    
-       Ctl selection was necessary in treeview and to avoid selection of somthing off screen
-       keep it that way.
-  * enable sort modes 
-     - Type
-     - Name
-     - Date
-     - up/down
+  * enable sort modes by date, up/down
 
 Bugs:
   * bug: do a "git branch whatever" in script mode. Script will expect input
          and cannot be terminated by menu signals...
 	 update: on a script command that loops, the kill pid is incorrect.
-  * xffind:
-    - on close/destroy signal gtk_widget_hide failed 
-       GTK_IS_WIDGET (widget)' failed
 
 Cleanups:  
   * 20+ files with FIXMEs
 
+Wishlist:
+  * history internal lpterm command. Enable use of | grep to filter output...
+
+------------------------------------------------------------------------------------------
+Alpha:
+Logo:
+    * When logo appears, if click on window before logo window disappears, 
+       we can have a glib thread crash
+
+FSTAB:
+    * multiple windows will trigger multiple timeout dialogs on mount items.
+      (maybe define an xatom for first one, value = 1 and -1 when none is defined)
+    * BSD mode not working
+    * greenball update icon in local is disabled. Using the threaded monitor function
+      from fstab to signal changes causes crash. I believe due to double treeview now
+      used in local view. Maybe put thread within local view. but that complicates things
+      for freebsd version.
+    * fix popupmenu for /dev/disks
+    * Seems to be nonissue, since dialogs are placed on top of each other and dissappear
+      at same time. The only issue would be if user dismisses top dialog, it would appear
+      not to go away...
+       . timeout dialog requires a progress bar on timeout
+       . timeout dialog requires a "Dismiss" button.
+
+PKG:
+    * Need to be able to set evironment variables for proxy on pkg module: 
+    have commands run in a custom app window.
+    * send stderr to output as when pkg fails, database needs manual update "pkg update",
+       add item to menu...
+    * Rebuild of pkg system: top level should have groups. next installed packages.
+    * pacman -Syy will run before any install, but not on uninstall.
+
+Structure:
+    needs file selector box with bash completion at current directory
+    needs executable definition for OK button
+    needs in terminal (xterm) button (for gccproblem26)
+    needs way to set and insenditivize options if in terminal is not selected
+    (for gccproblem26)
 
