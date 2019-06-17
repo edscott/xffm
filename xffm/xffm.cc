@@ -4,14 +4,30 @@
  */
 
 #define XFFM_CC
+
+#ifdef ALPHA
+# warning "Alpha modules enabled..."
+# undef ENABLE_CUSTOM_RESPONSE 
+# define ENABLE_CUSTOM_RESPONSE 1
+# undef ENABLE_PKG_MODULE 
+# define ENABLE_PKG_MODULE 1
+# undef ENABLE_DIFF_MODULE 
+# define ENABLE_DIFF_MODULE 1
+# undef ENABLE_FSTAB_MODULE 
+# define ENABLE_FSTAB_MODULE 1
+#endif
+
 #include "autotools.h"
 #include "config.h"
 #include "types.h"
 #include "intl.h"
 
 
-#define FORCE_CORE
+#define USE_LOCAL_MONITOR 1
+#define FORK 1
+//#define FORCE_CORE
 #ifdef FORCE_CORE
+#define CORE 1
 # include <sys/time.h>
 # include <sys/resource.h>
 #endif
@@ -21,9 +37,6 @@
 #endif
 
 #include <memory>
-#define USE_LOCAL_MONITOR 1
-//#define FORK 1
-#define CORE 1
 
 #define URIFILE "file://"
 

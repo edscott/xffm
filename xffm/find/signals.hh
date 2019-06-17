@@ -260,10 +260,12 @@ public:
         on_find_clicked_action (GTK_WINDOW(dialog));
     }
 
-    static gint
+    static gboolean
     onCloseEvent (GtkWidget * widget, GdkEventKey * event, gpointer data) {
-        onCloseButton (NULL, data);
-        return FALSE;
+        while (gtk_events_pending()) gtk_main_iteration();
+        gtk_main_quit();
+        exit(1);
+        return TRUE;
     }
 
     static void grepOptions (GtkEntry *widget, gpointer data) {

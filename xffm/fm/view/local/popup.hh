@@ -1145,7 +1145,7 @@ public:
         g_strstrip(newName);
         if (strlen(newName)){
             TRACE("*** rename %s to %s\n", path, newName);
-            Gio<Type>::execute(path, newName, MODE_MOVE);
+            Gio<Type>::execute(path, newName, MODE_RENAME);
         }
         g_free(newName);
     }

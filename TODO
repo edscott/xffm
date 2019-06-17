@@ -1,50 +1,88 @@
-Xffm+ is a gtk3 application. Not entirely compatible with gtk2 linked apps (and maybe even other X apps, YMMV). In particular, drag and drop operations may not work correctly, since gtk3 protocols have been altered. This is most noticeable if you use gvim and are use to open files by drag and drop. The first file may open correctly, but subsequent files will not. This is not an xffm+ bug, but rather a gtk3 detail. The fix for gvim is to compile with gtk3. This is the current default (december 2018) for ArchLinux and for Gentoo will require compilation with the gtk3 USE flag set (see /etc/portage/make.conf).
+For 0.91
 
 
-1. History of xffm
-   xftree, gtk1.x
-   xffm gtk2.x
-   rodent gtk2.24-3.10
-   xffm+ gtk3.24
-What's behind the design of xffm
- Generic C++ programming, inspired by dune/dumux from U of Stutgart
- I am working with the code from UoS, and to better understand the manner 
- in which generic programming is used, I am writing (I wrote) a new version 
- of xffm with generic programming and gtk+-3.24.1 as minimu requirement.
- Dependencies have been reduced to a minimum, although inclusion of all optional
- dependencies provide a much better experience.
 
-reduce bloatware to a minimum
-- uses already installed code (cp, ln, ...)
-What i use it for
-principal functions
- find|grep to find stuff in other people's code, and in my code (which can be very extensive)
- create and unpack tarballs
- run commands in background
- navigate filesystem
+///
 
-Xffm+ functions
- mount/umount
-  - items in fstab
-  - block devices from /dev
-  - ecryptfs
-  - remote nfs 
-  - remote sshfs
- find/install/update packages (gentoo, archlinux, ... freebsd, debian, redhat, suse)
- basic filemanagement
-  - navigate filesystem 
-  - filesystem bookmarks 
-  - cp/mv/ln/rm/touch/mkdir
-  - execute programs
-  - open files with third party applications
-  - view/modify file properties
+BUG:
+Need to be able to set evironment variables for proxy on pkg module: have commands run in 
+a custom app window.
 
-Deprecated stuff (by experience I do not use these any more)
-  - system processed iconview
-  - application launcher iconview 
-  - SMB network navigator
-  - mount/umount remote cifs
-  - mount/umount remote ftpfs
 
+BUG: rename a directory to a directory that already exists will move the source directory into the directory with the desired name. Default move action.
+
+
+BUG: greenball update icon in local is disabled. Using the threaded monitor function
+     from fstab to signal changes causes crash. I believe due to double treeview now
+     used in local view. Maybe put thread within local view. but that complicates things
+     for freebsd version.
+
+pending:
+needs file selector box with bash completion at current directory
+needs executable definition for OK button
+needs in terminal (xterm) button (for gccproblem26)
+needs way to set and insenditivize options if in terminal is not selected
+(for gccproblem26)
+
+
+
+
+
+bug> in pkg send stderr to output as when pkg fails, database needs manual updat "pkg update", add item to menu...
+
+Rebuild of pkg system: top level should have groups. next installed packages.
+
+pending:
+    pacman -Syy will run before any install, but not on uninstall.
+
+
+When logo appears, if click on window before logo window disappears, we can have
+a glib thread crash
+
+  pending: fix popupmenu for /dev/disks
+             
+bug: 
  
+ - progress dialog for rm/trash/shred
+ > use libmagic preferably instead of perl if available
+ > printout optional and required libraries found in configure step.
+ 
+ . multiple windows will trigger multiple timeout dialogs on mount items.
+   (maybe define an xatom for first one, value = 1 and -1 when none is defined)
+  ** Seems to be nonissue, since dialogs are placed on top of each other and dissappear
+     at same time. The only issue would be if user dismisses top dialog, it would appear
+     not to go away...
+       
+ . timeout dialog requires a progress bar on timeout
+ . timeout dialog requires a "Dismiss" button.
+
+
+TODO
+  * history internal lpterm command. Enable use of | grep to filter output...
+
+  * check tarball creation output in lpterm (also enable multiple file processing if several compressed files
+    of the same mimetype are selected simultaneously.
+
+  * add bookmarks to rootview: 
+    - put localviewpopup basics into rootview, popup menu to remove bookmark... maybe
+    
+       Ctl selection was necessary in treeview and to avoid selection of somthing off screen
+       keep it that way.
+  * enable sort modes 
+     - Type
+     - Name
+     - Date
+     - up/down
+
+Bugs:
+  * bug: do a "git branch whatever" in script mode. Script will expect input
+         and cannot be terminated by menu signals...
+	 update: on a script command that loops, the kill pid is incorrect.
+  * xffind:
+    - on close/destroy signal gtk_widget_hide failed 
+       GTK_IS_WIDGET (widget)' failed
+
+Cleanups:  
+  * 20+ files with FIXMEs
+
 

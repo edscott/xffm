@@ -34,7 +34,7 @@ public:
 	pixbuf_mutex = PTHREAD_MUTEX_INITIALIZER;
 	icon_theme = gtk_icon_theme_get_default ();
 	if (!icon_theme){
-	    ERROR("cannot get default icon theme!\n");
+	    TRACE("cannot get default icon theme!\n");
 	    icon_theme = gtk_icon_theme_new();
 	    //throw 1;
 	}
@@ -95,7 +95,7 @@ public:
 	if (!icon_theme) init();
 	if (!g_path_is_absolute (icon_name)) return NULL;
 	if (!g_file_test (icon_name, G_FILE_TEST_EXISTS)) {
-	    ERROR("icons.hh:: absolute_path_icon(): %s does not exist.\n", icon_name);
+	    TRACE("icons.hh:: absolute_path_icon(): %s does not exist.\n", icon_name);
 	    return NULL;
 	}
 	return pixbuf_new_from_file(icon_name, size, size); // width,height.
@@ -124,7 +124,7 @@ public:
 		      GTK_ICON_LOOKUP_FORCE_SIZE,  // GtkIconLookupFlags flags,
 		      &error);
 	if (error) {
-	    ERROR("icons.hh:get_theme_pixbuf: %s\n", error->message);
+	    TRACE("icons.hh:get_theme_pixbuf: %s\n", error->message);
 	    g_error_free(error);
 	    return NULL;
 	} else if (theme_pixbuf) {
@@ -287,7 +287,7 @@ public:
 		if (tag) {
 		    pixbuf_cairo_c::insert_pixbuf_tag (pixbuf_context, tag, base_pixbuf, position, scale, alpha);
 		} else {
-		    ERROR("insert_decoration_f(): Cannot get pixbuf for %s\n", emblem);
+		    TRACE("insert_decoration_f(): Cannot get pixbuf for %s\n", emblem);
 		}
 	    }
 	    g_strfreev(tokens);

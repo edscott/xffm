@@ -7,13 +7,14 @@
 // These are not good for directories...
 # define MODE_COPY              4  // cannot handle recursive copy of directories 
 # define MODE_MOVE              5  // if different device, does copy/delete with directories caveat
+# define MODE_RENAME            6  // 
 // These are too simple...
-# define MODE_LINK              6
-# define MODE_NEW               7   
-# define MODE_MKDIR             8
+# define MODE_LINK              7
+# define MODE_NEW               8   
+# define MODE_MKDIR             9
 // This is already done otherwise (check and see if advantage in replacement, for freeBSD)
-# define MODE_MOUNT             9     
-# define MODE_UMOUNT            10      
+# define MODE_MOUNT             10     
+# define MODE_UMOUNT            11      
 
 gint asyncReference = 0;
 namespace xf {
@@ -82,6 +83,8 @@ private:
 		title = _("Moving files"); break;
 	    case MODE_LINK:
 		title = _("linking"); break;
+	    case MODE_RENAME:
+		title = _("rename"); break;
 	    default:
 		title = "Fxime";
 	}
@@ -214,7 +217,30 @@ private:
         const gchar *arg[] = { "mv", "-f", srcTarget, backup, NULL };
         TRACE("backup: %s -> %s\n", srcTarget, backup); 
         fore(arg);
+        g_free(base);
+        g_free(srcTarget);
+        g_free(backup);
     }
+
+    static void 
+    renameFore(const gchar *path, const gchar *target){
+        if (g_file_test(target, G_FILE_TEST_EXISTS)){
+            auto backupName = g_strconcat(target, "~", NULL);
+            while (g_file_test(backupName, G_FILE_TEST_EXISTS) ){
+                auto g = g_strconcat(backupName,"~",NULL);
+                g_free(backupName);
+                backupName = g;
+            }
+
+            TRACE("backup: %s -> %s\n", target, backupName); 
+            const gchar *arg[] = { "mv", "-f", target, backupName, NULL };
+            fore(arg);
+            g_free(backupName);
+        }
+        TRACE("rename: %s -> %s\n", path, target); 
+        const gchar *arg[] = { "mv", "-f", path, target, NULL };
+        fore(arg);
+    }   
 
     static void 
     moveFore(const gchar *path, const gchar *target){
@@ -239,59 +265,6 @@ private:
         const gchar *arg[] = { "ln", "-s", "-f", path, target, NULL };
         fore(arg);
     }
-#if 0
-    static void
-    link(const gchar *path, const gchar *target){
-        backup(path, target);
-        const gchar *arg[] = {
-            "ln",
-            "-s",
-            "-f",
-            path,
-            target,
-            NULL
-        };
-        Run<Type>::thread_runReap(NULL, arg, 
-                Run<Type>::run_operate_stdout, 
-                Run<Type>::run_operate_stderr, 
-                NULL);
-
-    }
-
-    static void 
-    move(const gchar *path, const gchar *target){
-        backup(path, target);
-        const gchar *arg[] = {
-            "mv",
-            "-f",
-            path,
-            target,
-            NULL
-        };
-        Run<Type>::thread_runReap(NULL, arg, 
-                Run<Type>::run_operate_stdout, 
-                Run<Type>::run_operate_stderr, 
-                NULL);
-    }   
-    
-    static void
-    copy(const gchar *path, const gchar *target){
-        backup(path, target);
-        const gchar *arg[] = {
-            "cp",
-            "-R",
-            "-f",
-            path,
-            target,
-            NULL
-        };
-        Run<Type>::thread_runReap(NULL, arg, 
-                Run<Type>::run_operate_stdout, 
-                Run<Type>::run_operate_stderr, 
-                NULL);
-
-    }   
-#endif
 
     static void
     GNUrm(const gchar *path){
@@ -384,7 +357,7 @@ private:
     
     static gboolean doItFore(const gchar *path, const gchar *target, gint mode){
 	TRACE("doIt...%s --> %s  (%d)\n", path, target, mode);
-        if (mode != MODE_COPY && mode != MODE_LINK && mode != MODE_MOVE) 
+        if (mode != MODE_COPY && mode != MODE_LINK && mode != MODE_MOVE && mode != MODE_RENAME) 
 	    return FALSE;
         gboolean retval=TRUE;
         switch (mode) {
@@ -393,6 +366,9 @@ private:
                break;
             case MODE_MOVE:
                moveFore(path,target);
+               break;
+            case MODE_RENAME:
+               renameFore(path,target);
                break;
             case MODE_LINK:
             {   
@@ -468,7 +444,7 @@ private:
     multiDoItFore(GList *fileList, const gchar *target, gint mode, GtkProgressBar *progressBar)
     {
 	TRACE("multiDoIt...\n");
-        if (mode != MODE_COPY && mode != MODE_LINK && mode != MODE_MOVE) 
+        if (mode != MODE_COPY && mode != MODE_LINK && mode != MODE_MOVE && mode != MODE_RENAME) 
 	    return FALSE;
 	gint items = g_list_length(fileList);
 	if (!items) return FALSE;
@@ -490,26 +466,7 @@ private:
 	// destroy progress dialog.
 	return retval;
     }
-/*
-    static gboolean
-    multiDoIt(GList *fileList, const gchar *target, gint mode)
-    {
-	TRACE("multiDoIt...\n");
-        if (mode != MODE_COPY && mode != MODE_LINK && mode != MODE_MOVE) 
-	    return FALSE;
-	gint items = g_list_length(fileList);
-	if (!items) return FALSE;
 
-	gint count = 0;
-        gboolean retval;
-        for (auto l = fileList; l && l->data; l=l->next) {
-	    auto path = (const gchar *)l->data;
-            doIt(path, target, mode);
-	    count++;
-	}
-	return retval;
-    }
-*/
 
     static gboolean
     multiDoIt(GtkDialog *rmDialog, GList *fileList, gint mode)

@@ -10,7 +10,7 @@ set(xffm_VERSION_MINOR 91)
 
 # work in alpha phase...
 #add_definitions(-DENABLE_CUSTOM_RESPONSE)
-add_definitions(-DENABLE_PKG_MODULE)
+#add_definitions(-DENABLE_PKG_MODULE)
 #add_definitions(-DENABLE_DIFF_MODULE)
 #add_definitions(-DENABLE_FSTAB_MODULE)
 

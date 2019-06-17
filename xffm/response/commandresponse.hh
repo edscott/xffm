@@ -24,6 +24,8 @@ public:
 	gtk_progress_bar_set_text (progress, text?text:_("Waiting for operation to finish..."));
 	gtk_progress_bar_set_show_text (progress, TRUE);
         gtk_progress_bar_pulse(progress);
+	gtk_widget_realize (GTK_WIDGET(dialog));
+        Response<Type>::placeDialog(dialog);
 	 
 	gtk_widget_show_all (GTK_WIDGET(dialog));
 	return dialog;
