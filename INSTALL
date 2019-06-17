@@ -1,0 +1,12 @@
+To install:
+1) create a directory "build"
+2) cd build
+3) cmake ..
+4) make
+5) sudo make install
+
+If necessary dependencies are met, this will install xffm+ in /usr/local.
+If a different installation path is desired, please modify CMakeLists.txt
+
+Enjoy!
+

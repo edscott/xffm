@@ -1,6 +1,5 @@
 #ifndef XF_USERRESPONSE_HH
 # define XF_USERRESPONSE_HH
-#ifdef ENABLE_CUSTOM_RESPONSE
 #include "chooserresponse.hh"
 
 namespace xf
@@ -374,5 +373,4 @@ private:
 }
 
 
-#endif
 #endif

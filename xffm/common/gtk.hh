@@ -365,13 +365,14 @@ public:
     static GtkWidget *
     _quickHelp (GtkWindow *parent, const gchar *message, const gchar *icon, const gchar *title)
     {
+
      static GtkWidget *dialog = NULL;
      static gchar *last_message = NULL;
      // Already mapped? Destroy.
      if (dialog && GTK_IS_WIDGET(dialog)){
          gtk_widget_hide(dialog);
          gtk_widget_destroy(dialog);
-#if 0
+
          // Last mapped is the same? Do not remap.
          if (last_message && strcmp(last_message, message) == 0){
              g_free(last_message);
@@ -379,11 +380,19 @@ public:
              dialog = NULL;
              return NULL;
          }
-#endif
      }
-     // Map dialog.
+     // Map dialog.parent, 
      g_free(last_message);
      last_message = g_strdup(message);
+     dialog = quickDialog(parent, message, icon, title);
+
+      return dialog;
+    }
+
+    static GtkWidget *
+    quickDialog (GtkWindow *parent, const gchar *message, const gchar *icon, const gchar *title)
+    {
+     GtkWidget *dialog = NULL;
      GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT;
 
      // Create the widgets

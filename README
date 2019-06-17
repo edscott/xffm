@@ -1,3 +1,9 @@
+
+BUG:
+Need to be able to set evironment variables for proxy on pkg module: have commands run in 
+a custom app window.
+
+
 BUG: rename a directory to a directory that already exists will move the source directory into the directory with the desired name. Default move action.
 
 

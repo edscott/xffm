@@ -58,7 +58,7 @@ public:
         //if (g_slist_length(list) == 0) return NULL;
         
         // Create liststore for DnD
-        auto dialog = GTK_WINDOW(Gtk<Type>::_quickHelp(parent, _("Results"), NULL, title));
+        auto dialog = GTK_WINDOW(Gtk<Type>::quickDialog(parent, _("Results"), NULL, title));
 	//gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
 	//gtk_window_set_transient_for (GTK_WINDOW (dialog), parent);
         
@@ -105,17 +105,17 @@ public:
         g_object_set_data(G_OBJECT(dialog), "dnd", dnd);
 
 
-        auto popup = new(Popup<Type>)(
+  /*      auto popup = new(Popup<Type>)(
 		LocalPopUp<Type>::localMenuItems(),
 		LocalPopUp<Type>::localMenuItemsKeys(),
 		LocalPopUp<Type>::localMenuItemsIcons()
 		);
 	dnd->setMenu(popup->menu());
-	g_object_set_data(G_OBJECT(dialog), "popup", popup);
+	g_object_set_data(G_OBJECT(dialog), "popup", popup);*/
 
 	
         gtk_widget_show_all (GTK_WIDGET(dialog));
-        gtk_widget_hide(GTK_WIDGET(parent));
+   //     gtk_widget_hide(GTK_WIDGET(parent));
         
         
     }
