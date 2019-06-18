@@ -478,7 +478,7 @@ public:
             argv[MAX_COMMAND_ARGS - 1]=NULL;
         }
 
-        if (sudo_cmd) {
+        if (sudo_cmd) {//RFM_ASKPASS_COMMAND to remain compatibility with Rodent
             auto g = g_strconcat(sudo_cmd,  "\n", NULL);
             g_free(sudo_cmd);
             sudo_cmd = g;
@@ -508,7 +508,7 @@ public:
 	    if (pos){
 		*pos = 0;
 		auto tail=g_strdup(strstr(command, "sudo ")+strlen("sudo "));
-		new_command = g_strconcat(original_head, "sudo -A ", tail, NULL);
+		new_command = g_strconcat(original_head, "sudo -A -p \\\"<b>Sudo</b> ",_("Enter password"), ": \\\" ", tail, NULL);
 		g_free(tail);
 	    }
 	    g_free(original_head);

@@ -17,8 +17,9 @@ public:
 	if (argv[1]) {
             if (strncmp(argv[1], "Password", strlen("Password"))==0) 
                 string = g_strdup_printf("%s:", _("Enter password"));
-            else
+            else{
 	        string = g_strdup(_(argv[1]));
+            }
 
 	} else {
 	    string = g_strdup_printf("%s:", _("Enter password"));

@@ -11,7 +11,6 @@
 #define @HAVE_EMERGE@
 #define @HAVE_PACMAN@
 #define @HAVE_PKG@
-#define @HAVE_LIBXML2@
 #define @LIBMAGIC@
 #define @MIMETYPE_PROGRAM@
 #define @FREEDESKTOP_GLOBS@
