@@ -431,45 +431,13 @@ public:
         auto argv = (gchar **)data;
 
         gint i = 0;
-        static gchar *sudo_cmd=NULL;
         pthread_mutex_lock(&fork_mutex_);
-        g_free(sudo_cmd);
-        sudo_cmd=NULL;
+        const gchar *passwordCommand = NULL;
         for(i=0; argv && argv[i] && i < 5; i++) {
-            if(!sudo_cmd && 
-                    (strstr (argv[i], "sudo") ||
-                     strstr (argv[i], "ssh")  ||
-                     strstr (argv[i], "rsync")  ||
-                     strstr (argv[i], "scp"))) {
-                sudo_cmd=g_strdup_printf("<b>%s</b> ", argv[i]);
-                continue;
-            } 	
-            if (sudo_cmd){
-                if (strchr(argv[i], '&')){
-                    auto a = g_strsplit(argv[i], "&", -1);
-                    auto p=a;
-                    for (;p && *p; p++){
-                        const gchar *space = (strlen(*p))?" ":"";
-                        const gchar *amp = (*(p+1))?"&amp;":"";
-                        gchar *g = g_strconcat(sudo_cmd,  space, "<i>",*p, amp, "</i>", NULL);
-                        g_free(sudo_cmd);
-                        sudo_cmd=g;
-                    }
-                    g_strfreev(a);
-                } else {
-                    auto a = g_strdup(argv[i]);
-                    if (strlen(a) >13) {
-                        a[12] = 0;
-                        a[11] = '.';
-                        a[10] = '.';
-                        a[9] = '.';
-                    }
-                    auto g = g_strconcat(sudo_cmd,  " <i>",a, "</i>", NULL);
-                    g_free(a);
-                    g_free(sudo_cmd);
-                    sudo_cmd=g;
-                }
-            }
+            if (strstr (argv[i],"sudo")) {passwordCommand = "sudo"; break;}
+            if (strstr (argv[i],"ssh")) {passwordCommand = "ssh"; break;} 
+            if (strstr (argv[i],"rsync")) {passwordCommand = "rsync"; break;} 
+            if (strstr (argv[i],"scp")) {passwordCommand = "scp"; break;} 
         }
 
 
@@ -478,14 +446,10 @@ public:
             argv[MAX_COMMAND_ARGS - 1]=NULL;
         }
 
-        if (sudo_cmd) {//RFM_ASKPASS_COMMAND to remain compatibility with Rodent
-            auto g = g_strconcat(sudo_cmd,  "\n", NULL);
-            g_free(sudo_cmd);
-            sudo_cmd = g;
+        if (passwordCommand) {//RFM_ASKPASS_COMMAND to remain compatibility with Rodent
             // This  function makes copies of the strings pointed to by name and value
             // (by contrast with putenv(3))
-            setenv("RFM_ASKPASS_COMMAND", sudo_cmd, 1);
-            g_free(sudo_cmd);
+            setenv("RFM_ASKPASS_COMMAND", passwordCommand, 1);
         } else {
             setenv("RFM_ASKPASS_COMMAND", "", 1);
         }
@@ -508,7 +472,7 @@ public:
 	    if (pos){
 		*pos = 0;
 		auto tail=g_strdup(strstr(command, "sudo ")+strlen("sudo "));
-		new_command = g_strconcat(original_head, "sudo -A -p \\\"<b>Sudo</b> ",_("Enter password"), ": \\\" ", tail, NULL);
+		new_command = g_strconcat(original_head, "sudo -A -p \\\"",_("Enter password"), ": \\\" ", tail, NULL);
 		g_free(tail);
 	    }
 	    g_free(original_head);
