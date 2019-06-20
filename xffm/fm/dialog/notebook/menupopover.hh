@@ -232,8 +232,8 @@ private:
             {N_("Show Backup Files"), (void *)toggleItem, (void *) "ShowBackups", "LocalView"},
             {N_("Sort data in descending order"), (void *)toggleItem, (void *) "Descending", "LocalView"},
 
-            {N_("Sort by date"), (void *)MenuPopoverSignals<Type>::noop, (void *) NULL, NULL},
-            {N_("Sort by size"), (void *)MenuPopoverSignals<Type>::noop, (void *) NULL, NULL},
+            {N_("Sort by date"), (void *)toggleItem, (void *) "ByDate", "LocalView"},
+            {N_("Sort by size"), (void *)toggleItem, (void *) "BySize", "LocalView"},
             {N_("Exit"), (void *)MenuPopoverSignals<Type>::finish, (void *) menuButton_},
             {NULL}};
 	const gchar *key[]={

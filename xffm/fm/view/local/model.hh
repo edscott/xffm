@@ -323,10 +323,20 @@ private:
     static GList *
     sortList(GList *list){
         // Default sort order:
-        if (Settings<Type>::getSettingInteger("LocalView", "Descending") <= 0) {
-            return g_list_sort (list,compare_by_name);
+        gboolean ascending = (Settings<Type>::getSettingInteger("LocalView", "Descending") > 0);
+        gboolean bySize = (Settings<Type>::getSettingInteger("LocalView", "BySize") > 0);
+        gboolean byDate = (Settings<Type>::getSettingInteger("LocalView", "ByDate") > 0);
+        if (ascending && !bySize && !byDate)
+        if (!ascending) {
+       /*     if (byDate && !bySize) return g_list_sort (list,compare_by_name); //XXX FIXME
+            else if (byDate && bySize) return g_list_sort (list,compare_by_name); //XXX FIXME
+            else if (bySize) return g_list_sort (list,compare_by_name); //XXX FIXME
+        */    return g_list_sort (list,compare_by_name);
         } else {
-            return g_list_sort (list,compare_by_name2);
+        /*    if (byDate && !bySize) return g_list_sort (list,compare_by_name); //XXX FIXME
+            else if (byDate && bySize) return g_list_sort (list,compare_by_name); //XXX FIXME
+            else if (bySize) return g_list_sort (list,compare_by_name);
+        */    return g_list_sort (list,compare_by_name2);
         }
     }
 	
