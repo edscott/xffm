@@ -432,27 +432,16 @@ public:
 
         gint i = 0;
         pthread_mutex_lock(&fork_mutex_);
-        const gchar *passwordCommand = NULL;
-        for(i=0; argv && argv[i] && i < 5; i++) {
-            if (strstr (argv[i],"sudo")) {passwordCommand = "sudo"; break;}
-            if (strstr (argv[i],"ssh")) {passwordCommand = "ssh"; break;} 
-            if (strstr (argv[i],"rsync")) {passwordCommand = "rsync"; break;} 
-            if (strstr (argv[i],"scp")) {passwordCommand = "scp"; break;} 
-        }
-
+        gchar *passwordCommand = g_path_get_basename(argv[0]);
+        if (strchr(passwordCommand, ' ')) *strchr(passwordCommand, ' ')=0;
 
         if (i>=MAX_COMMAND_ARGS - 1) {
             TRACE("run.hh::%s: (> %d)\n", strerror(E2BIG), MAX_COMMAND_ARGS);
             argv[MAX_COMMAND_ARGS - 1]=NULL;
         }
+        setenv("RFM_ASKPASS_COMMAND", passwordCommand, 1);
+        g_free(passwordCommand);
 
-        if (passwordCommand) {//RFM_ASKPASS_COMMAND to remain compatibility with Rodent
-            // This  function makes copies of the strings pointed to by name and value
-            // (by contrast with putenv(3))
-            setenv("RFM_ASKPASS_COMMAND", passwordCommand, 1);
-        } else {
-            setenv("RFM_ASKPASS_COMMAND", "", 1);
-        }
         pthread_mutex_unlock(&fork_mutex_);
         execvp (argv[0], argv);
         g_warning ("CHILD could not execvp: this should not happen\n");
