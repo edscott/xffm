@@ -6,6 +6,52 @@
 #include <errno.h>
 
 
+#ifndef PARAMS
+# if defined PROTOTYPES || (defined __STDC__ && __STDC__)
+#  define PARAMS(Args) Args
+# else
+#  define PARAMS(Args) ()
+# endif
+#endif
+
+
+#if ! defined TIMESPEC_H
+# define TIMESPEC_H
+
+# if TIME_WITH_SYS_TIME
+#  include <sys/time.h>
+#  include <time.h>
+# else
+#  if HAVE_SYS_TIME_H
+#   include <sys/time.h>
+#  else
+#   include <time.h>
+#  endif
+# endif
+
+# ifdef ST_MTIM_NSEC
+#  define TIMESPEC_NS(timespec) ((timespec).ST_MTIM_NSEC)
+# else
+#  define TIMESPEC_NS(timespec) 0
+# endif
+
+#endif
+
+
+/* Use this to suppress gcc's `...may be used before initialized' warnings. */
+#ifdef lint
+# define IF_LINT(Code) Code
+#else
+# define IF_LINT(Code)          /* empty */
+#endif
+
+enum {
+    time_ctime,
+    time_mtime,
+    time_atime
+};
+
+
 
 namespace xf
 {
@@ -29,8 +75,111 @@ class Util {
 	if (strchr(bb,'/')) bb = strchr(bb,'/')+1;
         return strcasecmp((const gchar *)aa, (const gchar *)bb);
     }
+
+    /* Return a character indicating the type of file described by
+       file mode BITS:
+       'd' for directories
+       'D' for doors
+       'b' for block special files
+       'c' for character special files
+       'n' for network special files
+       'm' for multiplexor files
+       'M' for an off-line (regular) file
+       'l' for symbolic links
+       's' for sockets
+       'p' for fifos
+       'C' for contigous data files
+       '-' for regular files
+       '?' for any other file type.  */
+
+    static char
+    ftypelet (mode_t bits) {
+#ifdef S_ISBLK
+        if(S_ISBLK (bits))
+            return 'b';
+#endif
+        if(S_ISCHR (bits))
+            return 'c';
+        if(S_ISDIR (bits))
+            return 'd';
+        if(S_ISREG (bits))
+            return '-';
+#ifdef S_ISFIFO
+        if(S_ISFIFO (bits))
+            return 'p';
+#endif
+#ifdef S_ISLNK
+        if(S_ISLNK (bits))
+            return 'l';
+#endif
+#ifdef S_ISSOCK
+        if(S_ISSOCK (bits))
+            return 's';
+#endif
+#ifdef S_ISMPC
+        if(S_ISMPC (bits))
+            return 'm';
+#endif
+#ifdef S_ISNWK
+        if(S_ISNWK (bits))
+            return 'n';
+#endif
+#ifdef S_ISDOOR
+        if(S_ISDOOR (bits))
+            return 'D';
+#endif
+#ifdef S_ISCTG
+        if(S_ISCTG (bits))
+            return 'C';
+#endif
+
+        /* The following two tests are for Cray DMF (Data Migration
+           Facility), which is a HSM file system.  A migrated file has a
+           `st_dm_mode' that is different from the normal `st_mode', so any
+           tests for migrated files should use the former.  */
+
+#ifdef S_ISOFD
+        if(S_ISOFD (bits))
+            /* off line, with data  */
+            return 'M';
+#endif
+#ifdef S_ISOFL
+        /* off line, with no data  */
+        if(S_ISOFL (bits))
+            return 'M';
+#endif
+        return '?';
+    }
     
 public:
+  /* Compute mode string.  On most systems, it's based on st_mode.
+     On systems with migration (via the stat.st_dm_mode field), use
+     the file's migrated status.  */
+
+    static
+    gchar *
+    modeString (mode_t mode) {
+        gchar *str=(gchar *)calloc(1,13);
+        if (!str) g_error("calloc: %s", strerror(errno));
+        str[0] = ftypelet (mode);
+        str[1] = mode & S_IRUSR ? 'r' : '-';
+        str[2] = mode & S_IWUSR ? 'w' : '-';
+        str[3] = mode & S_IXUSR ? 'x' : '-';
+        str[4] = mode & S_IRGRP ? 'r' : '-';
+        str[5] = mode & S_IWGRP ? 'w' : '-';
+        str[6] = mode & S_IXGRP ? 'x' : '-';
+        str[7] = mode & S_IROTH ? 'r' : '-';
+        str[8] = mode & S_IWOTH ? 'w' : '-';
+        str[9] = mode & S_IXOTH ? 'x' : '-';
+        if(mode & S_ISUID)
+            str[3] = mode & S_IXUSR ? 's' : 'S';
+        if(mode & S_ISGID)
+            str[6] = mode & S_IXGRP ? 's' : 'S';
+        if(mode & S_ISVTX)
+            str[9] = mode & S_IXOTH ? 't' : 'T';
+        str[10] = 0;
+        return (str);
+    }
 
     static void
     resetObjectData(GObject *object, const gchar *id, gchar *newString){
@@ -114,23 +263,24 @@ public:
 	return NULL;
     }
 
-    static gchar *statInfo(const gchar *path){
-	gchar *ls = g_find_program_in_path("ls");
-	gchar *result = NULL; 
-//	if (ls && (g_file_test(path,G_FILE_TEST_EXISTS)
-	if (ls )
-        {
-	    // borken links trouble: gchar *command = g_strdup_printf("%s -lhdH \'%s\'", ls, path);
-	    gchar *command = g_strdup_printf("%s -lhd \'%s\'", ls, path);
-	    result = pipeCommand(command);
-	    g_free(command);
-	}
-	g_free(ls);
-	if (result){
-	    if (strstr(result, path)) *strstr(result, path) = 0;
-	    return (result);
-	}
-	return NULL;
+    static gchar *statInfo(const struct stat *st){
+        if (!st){
+            DBG("util::statinfo: st is null\n");
+            return NULL;
+        }
+        auto mode = modeString(st->st_mode);
+	struct passwd *pw = getpwuid (st->st_uid);
+	struct group *gr = getgrgid(st->st_gid);
+        auto links = st->st_nlink;
+
+        auto user = pw ? g_strdup(pw->pw_name) : g_strdup_printf("%d", st->st_uid);
+        auto group = gr ? g_strdup(gr->gr_name) : g_strdup_printf("%d", st->st_gid);
+
+        auto info = g_strdup_printf("%s %ld %s %s", mode, links, user, group);
+        g_free(user);
+        g_free(group);
+        g_free(mode);
+        return info;
     }
 #define PAGE_LINE 256
 

@@ -459,7 +459,9 @@ private:
 	gboolean retval = TRUE;
 	auto h = g_get_home_dir();
 	//gchar *m = g_strdup("xxx fileinfo");
-	gchar *m1 = Util<Type>::statInfo(path);
+        struct stat st;
+        stat(path, &st);
+	gchar *m1 = Util<Type>::statInfo(&st);
 	gchar *m2 = Util<Type>::fileInfo(path);
 	gchar *m = g_strconcat(m1, "\n\n", m2, "\n",NULL);
 	g_free(m1);

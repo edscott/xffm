@@ -251,7 +251,11 @@ public:
 	Util<Type>::resetObjectData(G_OBJECT(localPopUp), "mimetype", Mime<Type>::mimeType(view->path()));
 	Util<Type>::resetObjectData(G_OBJECT(localPopUp), "fileInfo", util_c::fileInfo(view->path()));
 	gchar *statLine;
-	if (g_file_test(view->path(), G_FILE_TEST_EXISTS)) statLine  = util_c::statInfo(view->path());
+	if (g_file_test(view->path(), G_FILE_TEST_EXISTS)) {
+            struct stat st;
+            stat(view->path(), &st);
+            statLine  = Util<Type>::statInfo(&st);
+        }
 	else statLine = g_strdup(strerror(ENOENT));
 	Util<Type>::resetObjectData(G_OBJECT(localPopUp), "statLine", statLine);
 
@@ -297,7 +301,11 @@ public:
         // Set title element
         gchar *statLine;
         if (g_list_length(view->selectionList()) > 1) statLine = g_strdup("");
-        else statLine = Util<Type>::statInfo(path);
+        else {
+            struct stat st;
+            stat(path, &st);
+            statLine  = Util<Type>::statInfo(&st);
+        }
 	Util<Type>::resetObjectData(G_OBJECT(localItemPopUp), "statLine", statLine);
 	
         gchar *markup = g_strdup_printf("<span color=\"red\"><b><i>%s</i></b></span><span color=\"#aa0000\">%s%s</span>\n<span color=\"blue\">%s</span>\n<span color=\"green\">%s</span>", 

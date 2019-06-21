@@ -2,6 +2,8 @@
 # define XF_BASEMODEL__HH
 #include <thread>
 
+
+
 namespace xf
 {
 template <class Type> class View;
@@ -35,8 +37,8 @@ class BaseModel
 	    G_TYPE_STRING,   // name in display (UTF-8)
 	    G_TYPE_STRING,   // path from filesystem (verbatim)
 	    G_TYPE_STRING,   // disk id (or other)
-            G_TYPE_UINT,     // date
-            G_TYPE_UINT,     // size
+            G_TYPE_STRING,     // size
+            G_TYPE_STRING,     // date
 	    G_TYPE_STRING,   // tooltip text (cache)
 	    G_TYPE_STRING,   // icon identifier (name or composite key)
 	    G_TYPE_STRING,   // mimetype (further identification of files)

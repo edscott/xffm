@@ -40,12 +40,47 @@ static gboolean inserted_;
 
 namespace xf
 {
+static pthread_mutex_t dateStringMutex=PTHREAD_MUTEX_INITIALIZER;
 template <class Type> class LocalIcons;
 template <class Type> class Preview;
 template <class Type>
 class LocalModel
 {
 public:
+    static gchar *
+    sizeString (size_t size) {
+        if (size > 1024 * 1024 * 1024){
+            return g_strdup_printf("%ld GB", size/(1024 * 1024 * 1024));
+        }
+        if (size > 1024 * 1024){
+            return g_strdup_printf("%ld MB", size/(1024 * 1024));
+        }
+        if (size > 1024){
+            return g_strdup_printf("%ld KB", size/(1024));
+        }
+        return g_strdup_printf("%ld ", size);
+    }
+    static gchar *
+    dateString (time_t the_time) {
+        pthread_mutex_lock(&dateStringMutex);
+
+#ifdef HAVE_LOCALTIME_R
+            struct tm t_r;
+#endif
+            struct tm *t;
+
+#ifdef HAVE_LOCALTIME_R
+            t = localtime_r (&the_time, &t_r);
+#else
+            t = localtime (&the_time);
+#endif
+            gchar *date_string=
+                g_strdup_printf ("%04d/%02d/%02d  %02d:%02d", t->tm_year + 1900,
+                     t->tm_mon + 1, t->tm_mday, t->tm_hour, t->tm_min);
+        pthread_mutex_unlock(&dateStringMutex);
+
+        return date_string;
+    }
 
     static GdkPixbuf *
     getIcon(const gchar *path){
@@ -237,6 +272,7 @@ public:
 
     static gboolean
     getStat(xd_t *xd_p){
+        if (xd_p->st) return TRUE;
         xd_p->st = (struct stat *)calloc(1, sizeof(struct stat));
         if (!xd_p->st){
             ERROR("fm/view/local/model.hh::calloc: %s\n", strerror(errno));
@@ -438,7 +474,11 @@ public:
     }
 
     static void *finishLoad(void *data){
-        
+ 	auto view = (View<Type> *)data; 
+	if (isTreeView) {
+            gtk_tree_view_columns_autosize(view->treeView());
+        }
+       
 
         
 	if (mainWindow && GTK_IS_WIDGET(mainWindow)) gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
@@ -526,8 +566,6 @@ public:
         guint type;
         gtk_tree_model_get(treeModel, iter, 
                 PATH, &path, 
-                SIZE, &size,
-                DATE, &date,
                 FLAGS, &type, 
                 -1);
         gboolean up = (type&0x100);
@@ -538,7 +576,7 @@ public:
         xd_b->path = path;
         xd_b->d_name = up?g_strdup(".."):g_path_get_basename(path);
         xd_b->d_type = type;
-        TRACE("compare %s with iconview item \"%s\"\n", xd_p->d_name, name);
+        TRACE("compare %s with iconview item \"%s\"\n", xd_p->d_name, xd_b->name);
         gint sortResult;
         gboolean descending = Settings<Type>::getSettingInteger("LocalView", "Descending") > 0;
         gboolean bySize = (Settings<Type>::getSettingInteger("LocalView", "BySize") > 0);
@@ -669,13 +707,17 @@ private:
         }
 	
 	if (xd_p->st){TRACE("xd_p->st is populated: %s\n", utf_name);}
-	guint flags=(xd_p->d_type & 0xff);
-        guint size = (xd_p->st)?xd_p->st->st_size:0;
-        guint date = (xd_p->st)?xd_p->st->st_mtim.tv_sec:0;
         gchar *statInfo = NULL;
 	// statInfo is too long for big directories, and only 
 	// required for treeview...
-	if (isTreeView) statInfo = Util<Type>::statInfo(xd_p->path);
+	if (isTreeView) {
+            getStat(xd_p);
+            TRACE("getstat for %s\n", xd_p->path);
+            statInfo = Util<Type>::statInfo(xd_p->st);
+        }
+ 	guint flags=(xd_p->d_type & 0xff);
+        auto size = sizeString((xd_p->st)?xd_p->st->st_size:0);
+        auto date = dateString((xd_p->st)?xd_p->st->st_mtime:0);
         gchar **p = NULL;
         if (!statInfo) statInfo = g_strdup("");
         if (up) flags |= 0x100;
@@ -696,6 +738,8 @@ private:
                 -1);
         g_free(statInfo);
         g_free(utf_name);
+        g_free(date);
+        g_free(size);
     }
 
 

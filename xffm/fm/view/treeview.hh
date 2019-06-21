@@ -26,7 +26,7 @@ public:
         auto selection = gtk_tree_view_get_selection (treeView);
         gtk_tree_selection_set_mode (selection,  GTK_SELECTION_MULTIPLE);
         gtk_tree_view_set_rubber_banding (treeView, TRUE);        
-        
+        gtk_tree_view_set_headers_visible(treeView, FALSE);
         return treeView;
     }
 
@@ -71,7 +71,7 @@ private:
     mkColumn(void){
         auto column = gtk_tree_view_column_new ();
         gtk_tree_view_column_set_sizing(column, GTK_TREE_VIEW_COLUMN_AUTOSIZE);
-        gtk_tree_view_column_set_resizable(column, FALSE);
+        gtk_tree_view_column_set_resizable(column, TRUE);
         gtk_tree_view_column_set_reorderable(column, TRUE);
         gtk_tree_view_column_set_spacing(column,2);
         return column;

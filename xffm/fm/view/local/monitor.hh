@@ -195,10 +195,12 @@ public:
         Util<Type>::context_function(Icons<Type>::insert_decoration_f, arg);
         
 
+        auto date = LocalModel<Type>::dateString((xd_p->st)?xd_p->st->st_mtime:0);
+        auto size = LocalModel<Type>::sizeString((xd_p->st)?xd_p->st->st_size:0);
 
 	gtk_list_store_set (store, iter, 
                 SIZE, xd_p->st->st_size, 
-                DATE, xd_p->st->st_mtim.tv_sec ,
+                DATE, date,
                 ICON_NAME, iconName,
                 DISPLAY_PIXBUF, pixbuf,
                 NORMAL_PIXBUF, pixbuf,
@@ -206,6 +208,8 @@ public:
                 FLAGS, xd_p->d_type,
 		-1);
         LocalModel<Type>::free_xd_p(xd_p);
+        g_free(date);
+        g_free(size);
 	return TRUE;
     }
 
