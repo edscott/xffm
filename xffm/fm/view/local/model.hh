@@ -235,6 +235,18 @@ public:
         return xd_p;
     }
 
+    static gboolean
+    getStat(xd_t *xd_p){
+        xd_p->st = (struct stat *)calloc(1, sizeof(struct stat));
+        if (!xd_p->st){
+            ERROR("fm/view/local/model.hh::calloc: %s\n", strerror(errno));
+            exit(1);
+        }
+        errno=0;
+	return stat(xd_p->path, xd_p->st)<0;
+            
+    }
+
     static gchar *
     getMimeType(xd_t *xd_p){
 	auto mimetype = Mime<Type>::basicMimeType(xd_p->d_type);
@@ -242,14 +254,7 @@ public:
 	if (strcmp(mimetype, "inode/symlink")==0 ||
 	    strcmp(mimetype, "inode/directory")==0 )
 	{
-            xd_p->st = (struct stat *)calloc(1, sizeof(struct stat));
-	    if (!xd_p->st){
-		ERROR("fm/view/local/model.hh::calloc: %s\n", strerror(errno));
-		exit(1);
-	    }
-            errno=0;
-	    TRACE("getMimeType:: stat %s (%s)\n", xd_p->path, mimetype);
-	    if (stat(xd_p->path, xd_p->st)<0){
+            if (getStat(xd_p)<0){
 		if (strcmp(mimetype, "inode/symlink")==0 ){
 		   //broken link
 		} else DBG("getMimeType() for d_type:inode/directory stat: %s: %s\n", xd_p->path, strerror(errno));
@@ -279,29 +284,10 @@ public:
         g_free(xd_p->st);
         g_free(xd_p);
     }
-    static gint
-    compare_by_name2 (const void *a, const void *b) {
-       // compare by name, directories or symlinks to directories on top
-        const xd_t *xd_a = (const xd_t *)a;
-        const xd_t *xd_b = (const xd_t *)b;
 
-        if (strcmp(xd_a->d_name, "..")==0) return -1;
-        if (strcmp(xd_b->d_name, "..")==0) return 1;
 
-        gboolean a_cond = FALSE;
-        gboolean b_cond = FALSE;
-
-        a_cond = ((xd_a->d_type == DT_DIR )||(xd_a->st && S_ISDIR(xd_a->st->st_mode)));
-        b_cond = ((xd_b->d_type == DT_DIR )||(xd_b->st && S_ISDIR(xd_b->st->st_mode)));
-
-        if (a_cond && !b_cond) return -1; 
-        if (!a_cond && b_cond) return 1;
-        
-        return -strcasecmp(xd_a->d_name, xd_b->d_name);
-    }
-    
-    static gint
-    compare_by_name (const void *a, const void *b) {
+    static gint 
+    directoryTest(const void *a, const void *b, gboolean descending){
         // compare by name, directories or symlinks to directories on top
         const xd_t *xd_a = (const xd_t *)a;
         const xd_t *xd_b = (const xd_t *)b;
@@ -317,26 +303,104 @@ public:
 
         if (a_cond && !b_cond) return -1; 
         if (!a_cond && b_cond) return 1;
-        return strcasecmp(xd_a->d_name, xd_b->d_name);
+        if (a_cond && b_cond) {
+            // directory comparison always by name.
+            if (descending) return -strcasecmp(xd_a->d_name, xd_b->d_name);
+            return strcasecmp(xd_a->d_name, xd_b->d_name);
+        }
+        return 0;
+
+    }
+
+    static gint 
+    compareBySize(const void *a, const void *b, gboolean descending){
+        auto test = directoryTest(a, b, descending);
+        if (test != 0) return test;
+
+        const xd_t *xd_a = (const xd_t *)a;
+        const xd_t *xd_b = (const xd_t *)b;
+
+        auto result = xd_a->st->st_size - xd_b->st->st_size;
+        if (descending) return -result;
+        return result;
+    }
+
+    static gint 
+    compareByDate(const void *a, const void *b, gboolean descending){
+        auto test = directoryTest(a, b, descending);
+        if (test != 0) return test;
+
+        const xd_t *xd_a = (const xd_t *)a;
+        const xd_t *xd_b = (const xd_t *)b;
+
+        auto result = xd_a->st->st_mtime - xd_b->st->st_mtime;
+        if (descending) return -result;
+        return result;
+    }
+
+    static gint 
+    compareByName(const void *a, const void *b, gboolean descending){
+        auto test = directoryTest(a, b, descending);
+        if (test != 0) return test;
+        const xd_t *xd_a = (const xd_t *)a;
+        const xd_t *xd_b = (const xd_t *)b;
+        
+        if (descending) return strcasecmp(xd_a->d_name, xd_b->d_name);
+        return -strcasecmp(xd_a->d_name, xd_b->d_name);
+    }
+
+    static gint
+    compareByNameUp (const void *a, const void *b) {
+        return compareByName(a, b, FALSE);
+    }
+    
+    static gint
+    compareByNameDown (const void *a, const void *b) {
+        return compareByName(a, b, TRUE);
+    }
+
+    static gint
+    compareByDateUp (const void *a, const void *b) {
+        return compareByDate(a, b, FALSE);
+    }
+    
+    static gint
+    compareByDateDown (const void *a, const void *b) {
+        return compareByDate(a, b, TRUE);
+    }
+
+    static gint
+    compareBySizeUp (const void *a, const void *b) {
+        return compareBySize(a, b, FALSE);
+    }
+    
+    static gint
+    compareBySizeDown (const void *a, const void *b) {
+        return compareBySize(a, b, TRUE);
     }
 private:
+
     static GList *
     sortList(GList *list){
         // Default sort order:
-        gboolean ascending = (Settings<Type>::getSettingInteger("LocalView", "Descending") > 0);
+        gboolean descending = Settings<Type>::getSettingInteger("LocalView", "Descending") > 0;
         gboolean bySize = (Settings<Type>::getSettingInteger("LocalView", "BySize") > 0);
         gboolean byDate = (Settings<Type>::getSettingInteger("LocalView", "ByDate") > 0);
-        if (ascending && !bySize && !byDate)
-        if (!ascending) {
-       /*     if (byDate && !bySize) return g_list_sort (list,compare_by_name); //XXX FIXME
-            else if (byDate && bySize) return g_list_sort (list,compare_by_name); //XXX FIXME
-            else if (bySize) return g_list_sort (list,compare_by_name); //XXX FIXME
-        */    return g_list_sort (list,compare_by_name);
+        if (bySize || byDate){
+            for (auto l=list; l && l->data; l=l->next){
+                auto xd_p = (xd_t *) l->data;
+                if (!xd_p->st) getStat(xd_p);
+            }
+        }
+
+        if (descending) { // byDate takes presedence over bySize...
+            if (byDate) return g_list_sort (list,compareByDateDown); 
+            else if (bySize) return g_list_sort (list,compareBySizeDown); 
+            else return g_list_sort (list,compareByNameDown);
         } else {
-        /*    if (byDate && !bySize) return g_list_sort (list,compare_by_name); //XXX FIXME
-            else if (byDate && bySize) return g_list_sort (list,compare_by_name); //XXX FIXME
-            else if (bySize) return g_list_sort (list,compare_by_name);
-        */    return g_list_sort (list,compare_by_name2);
+            if (byDate) return g_list_sort (list,compareByDateUp); 
+            else if (bySize) return g_list_sort (list,compareBySizeUp);
+            else return g_list_sort (list,compareByNameUp);
         }
     }
 	
@@ -476,11 +540,13 @@ public:
         xd_b->d_type = type;
         TRACE("compare %s with iconview item \"%s\"\n", xd_p->d_name, name);
         gint sortResult;
-        if (Settings<Type>::getSettingInteger("LocalView", "Descending") <= 0) {
-            sortResult = compare_by_name((void *)xd_p, (void *)(xd_b));
-        } else {
-            sortResult = compare_by_name2((void *)xd_p, (void *)(xd_b));
-        }
+        gboolean descending = Settings<Type>::getSettingInteger("LocalView", "Descending") > 0;
+        gboolean bySize = (Settings<Type>::getSettingInteger("LocalView", "BySize") > 0);
+        gboolean byDate = (Settings<Type>::getSettingInteger("LocalView", "ByDate") > 0);
+        if ((bySize || byDate) && !xd_b->st) getStat(xd_b);
+        if (byDate) sortResult = compareByDate((void *)xd_p, (void *)(xd_b), descending);
+        else if (bySize) sortResult = compareBySize((void *)xd_p, (void *)(xd_b), descending);
+        else sortResult = compareByName((void *)xd_p, (void *)(xd_b), descending);
 
         if (sortResult < 0){
             GtkTreeIter newIter;
