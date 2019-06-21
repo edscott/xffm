@@ -37,6 +37,7 @@ template <class Type> class LocalPopUp;
 template <class Type> class RootPopUp;
 template <class Type> class FstabPopUp;
 
+static gboolean ignoreClick=FALSE;
 static gboolean ignoreRelease=FALSE;
 static gboolean dragOn_=FALSE;
 static gboolean rubberBand_=FALSE;
@@ -357,6 +358,8 @@ public:
                    GdkEventButton  *event,
                    gpointer   data)
     {
+        if (ignoreClick) return TRUE;
+        ignoreClick = TRUE; // don't process another click until this one is done.
         auto view = (View<Type> *)data;
         buttonPressX = buttonPressY = -1;
         dragOn_ = FALSE;
@@ -378,6 +381,7 @@ public:
 	    dragMode = 0; // default (move)
             if (tpath == NULL){ 
 		rubberBand_ = TRUE;
+                ignoreClick = FALSE;
                 return FALSE;
             } else {
 		TRACE("button press %d mode %d\n", event->button, mode);
@@ -392,26 +396,32 @@ public:
                 if (CONTROL_MODE){ 
 	            controlMode = TRUE;
                     controlSelect(view, tpath);
+                    ignoreClick = FALSE;
                     return TRUE;
                 }
 
                 if (SHIFT_MODE) {
                     viewShiftSelect(view, tpath);
+                    ignoreClick = FALSE;
                     return TRUE;
 		}
 
                 reSelect(view, tpath);
 		gtk_tree_path_free(tpath);
             }
-
+            ignoreClick = FALSE;
             return TRUE;
         }
 
         // long press or button 3 should do popup menu...
         // long press will activate on button release.
-        if (event->button != 3) return FALSE;
-
-	return doPopupMenu(event, view);
+        if (event->button != 3) {
+            ignoreClick = FALSE;
+            return FALSE;
+        }
+        auto result = doPopupMenu(event, view);
+        ignoreClick = FALSE;
+	return result;
     }
     
     static void

@@ -60,9 +60,8 @@ public:
         //g_cancellable_cancel (cancellable);
         //g_object_unref(cancellable);
         if (monitor_) {
+            TRACE("***Destructor:~base monitor_c(): stop_monitor\n");
             stop_monitor();
-            if (G_IS_OBJECT(monitor_)) g_object_unref(monitor_);
-            monitor_ = NULL;
         }
         if (gfile_) g_object_unref(gfile_);
         g_hash_table_destroy(itemsHash_);
@@ -139,8 +138,9 @@ public:
 	    g_free(p);
         }
 	g_file_monitor_cancel(monitor_);
-        monitor_ = 0;   
-	while (gtk_events_pending())gtk_main_iteration();  
+        g_object_unref(monitor_);
+        monitor_ = NULL;   
+	// while (gtk_events_pending())gtk_main_iteration();  
 	// hash table remains alive until mountThread finishes.
     }
 

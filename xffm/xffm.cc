@@ -15,6 +15,9 @@
 # define ENABLE_DIFF_MODULE 1
 # undef ENABLE_FSTAB_MODULE 
 # define ENABLE_FSTAB_MODULE 1
+# define FORCE_CORE
+
+
 #endif
 
 #include "autotools.h"
@@ -25,11 +28,15 @@
 
 #define USE_LOCAL_MONITOR 1
 #define FORK 1
-//#define FORCE_CORE
 #ifdef FORCE_CORE
+# warning "Core dump enabled..."
 #define CORE 1
 # include <sys/time.h>
 # include <sys/resource.h>
+#endif
+
+#ifndef FORK
+# warning "Fork not active..."
 #endif
 
 #ifdef HAVE_LIBMAGIC
