@@ -345,8 +345,8 @@ public:
         const xd_t *xd_a = (const xd_t *)a;
         const xd_t *xd_b = (const xd_t *)b;
         
-        if (descending) return strcasecmp(xd_a->d_name, xd_b->d_name);
-        return -strcasecmp(xd_a->d_name, xd_b->d_name);
+        if (descending) return -strcasecmp(xd_a->d_name, xd_b->d_name);
+        return strcasecmp(xd_a->d_name, xd_b->d_name);
     }
 
     static gint
