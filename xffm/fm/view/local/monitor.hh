@@ -199,7 +199,7 @@ public:
         auto size = LocalModel<Type>::sizeString((xd_p->st)?xd_p->st->st_size:0);
 
 	gtk_list_store_set (store, iter, 
-                SIZE, xd_p->st->st_size, 
+                SIZE, size, 
                 DATE, date,
                 ICON_NAME, iconName,
                 DISPLAY_PIXBUF, pixbuf,

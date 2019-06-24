@@ -375,6 +375,20 @@ public:
     }
 
     static gint 
+    compareByDateSize(const void *a, const void *b, gboolean descending){
+        auto test = directoryTest(a, b, descending);
+        if (test != 0) return test;
+
+        const xd_t *xd_a = (const xd_t *)a;
+        const xd_t *xd_b = (const xd_t *)b;
+
+        auto result = xd_a->st->st_mtime - xd_b->st->st_mtime;
+        if (result == 0) result = xd_a->st->st_size - xd_b->st->st_size;
+        if (descending) return -result;
+        return result;
+    }
+
+    static gint 
     compareByName(const void *a, const void *b, gboolean descending){
         auto test = directoryTest(a, b, descending);
         if (test != 0) return test;
@@ -406,6 +420,16 @@ public:
     }
 
     static gint
+    compareByDateSizeUp (const void *a, const void *b) {
+        return compareByDateSize(a, b, FALSE);
+    }
+    
+    static gint
+    compareByDateSizeDown (const void *a, const void *b) {
+        return compareByDateSize(a, b, TRUE);
+    }
+
+    static gint
     compareBySizeUp (const void *a, const void *b) {
         return compareBySize(a, b, FALSE);
     }
@@ -430,11 +454,13 @@ private:
         }
 
         if (descending) { // byDate takes presedence over bySize...
-            if (byDate) return g_list_sort (list,compareByDateDown); 
+            if (byDate && bySize) return g_list_sort (list,compareByDateSizeDown); 
+            else if (byDate) return g_list_sort (list,compareByDateDown); 
             else if (bySize) return g_list_sort (list,compareBySizeDown); 
             else return g_list_sort (list,compareByNameDown);
         } else {
-            if (byDate) return g_list_sort (list,compareByDateUp); 
+            if (byDate && bySize) return g_list_sort (list,compareByDateSizeUp); 
+            else if (byDate) return g_list_sort (list,compareByDateUp); 
             else if (bySize) return g_list_sort (list,compareBySizeUp);
             else return g_list_sort (list,compareByNameUp);
         }
@@ -582,7 +608,8 @@ public:
         gboolean bySize = (Settings<Type>::getSettingInteger("LocalView", "BySize") > 0);
         gboolean byDate = (Settings<Type>::getSettingInteger("LocalView", "ByDate") > 0);
         if ((bySize || byDate) && !xd_b->st) getStat(xd_b);
-        if (byDate) sortResult = compareByDate((void *)xd_p, (void *)(xd_b), descending);
+        if (byDate && bySize) sortResult = compareByDateSize((void *)xd_p, (void *)(xd_b), descending);
+        else if (byDate) sortResult = compareByDate((void *)xd_p, (void *)(xd_b), descending);
         else if (bySize) sortResult = compareBySize((void *)xd_p, (void *)(xd_b), descending);
         else sortResult = compareByName((void *)xd_p, (void *)(xd_b), descending);
 
