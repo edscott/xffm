@@ -1,5 +1,7 @@
 For 0.91
 
+bug treeview: no dnd accept
+bug treeview: needs updata status on progress on load of long filelist
  
  > printout optional and required libraries found in configure step.
   * enable sort modes by date, up/down

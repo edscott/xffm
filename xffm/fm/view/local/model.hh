@@ -124,11 +124,12 @@ public:
 	g_free(reading);
 	while(gtk_events_pending())gtk_main_iteration();
     
-        GList *directory_list = read_items (path, &heartbeat);
+        GList *directoryList = read_items (path, &heartbeat);
 	// start adding items... (threaded...)
 
+
 	auto arg = (void **)calloc(3, sizeof(void *));
-	arg[0] = (void *)directory_list;
+	arg[0] = (void *)directoryList;
 	arg[1] = (void *)view;
 	arg[2] = (void *)g_strdup(path);
 	pthread_t thread;
@@ -200,9 +201,8 @@ public:
                 TRACE("skipp: %s : %s\n", path, d->d_name);
                 continue;
             }
-	    // stat first 104 items.
+	    // On this pass, stat nothing.
             xd_t *xd_p = get_xd_p(path, d, FALSE);
-            //xd_t *xd_p = get_xd_p(path, d, (count++ < 104));
             directory_list = g_list_prepend(directory_list, xd_p);
             if (heartbeat) {
                 (*heartbeat)++;
@@ -224,7 +224,6 @@ public:
         if (!directory_list) {
             ERROR("fm/view/local/model.hh::read_files_local(): Count failed! Directory not read!\n");
         }
-        directory_list = sortList (directory_list);
         return (directory_list);
     }
 
@@ -260,14 +259,42 @@ public:
 	    errno=0;
 	}
 
-	// symlinks and directories are stat'd in getMimeType()  
-	xd_p->mimetype = getMimeType(xd_p);
-        // the following call uses xd_p->mimetype
-        xd_p->icon = g_strdup(LocalIcons<Type>::getIconname(xd_p));
-
 	TRACE("d_type: %s -> %d\n", xd_p->path, xd_p->d_type);
         errno=0;
         return xd_p;
+    }
+
+    static void 
+    resolveMimetypes(GList *directoryList){
+        for (auto l=directoryList; l && l->data; l=l->next){
+            // symlinks and directories are stat'd in getMimeType()  
+            auto xd_p = (xd_t *)l->data;
+            xd_p->mimetype = getMimeType(xd_p);
+        }
+    }
+
+    static void 
+    resolveIcons(GList *directoryList){
+            TRACE("getIconname\n");
+        for (auto l=directoryList; l && l->data; l=l->next){
+            auto xd_p = (xd_t *)l->data;
+            // the following call uses xd_p->mimetype
+            xd_p->icon = g_strdup(LocalIcons<Type>::getIconname(xd_p));
+        }
+            TRACE("getMimeType\n");
+        for (auto l=directoryList; l && l->data; l=l->next){
+            auto xd_p = (xd_t *)l->data;
+            // the following call uses xd_p->mimetype
+            xd_p->mimetype = getMimeType(xd_p);
+        }
+    }
+
+    static void 
+    statItems(GList *directoryList){
+        for (auto l=directoryList; l && l->data; l=l->next){
+            auto xd_p = (xd_t *)l->data;
+            getStat(xd_p);
+        }
     }
 
     static gboolean
@@ -533,17 +560,37 @@ public:
 
     static void *threadInsert(void *data){
 	auto arg = (void **)data;
-	auto directory_list = (GList *)arg[0];
+	auto directoryList = (GList *)arg[0];
 	auto view = (View<Type> *)arg[1];
 	auto path = (gchar *)arg[2];
-	insert_list_into_model(directory_list, view, path);
+
+        // Resolve Mimetypes
+        TRACE("Resolve Mimetypes\n");
+        resolveMimetypes(directoryList);
+        // Resolve Icons
+        TRACE("Resolve Icons\n");
+        resolveIcons(directoryList);
+        gboolean bySize = (Settings<Type>::getSettingInteger("LocalView", "BySize") > 0);
+        gboolean byDate = (Settings<Type>::getSettingInteger("LocalView", "ByDate") > 0);
+        if (bySize || byDate) {
+            TRACE("stat  items\n");
+           // stat  items
+            statItems(directoryList);
+        }
+        
+        TRACE("Sort list\n");
+        // Sort list
+        directoryList = sortList (directoryList);
+        TRACE("insert_list_into_model\n");
+        
+	insert_list_into_model(directoryList, view, path);
 	g_free(arg);
-        GList *p = directory_list;
+        GList *p = directoryList;
         for (;p && p->data; p=p->next){
             xd_t *xd_p = (xd_t *)p->data;
             free_xd_p(xd_p);
         }
-        g_list_free(directory_list);
+        g_list_free(directoryList);
         g_free(path);
         // replaceTreeModel will fix treeModel used by monitorObject.
         TRACE("threadInsert-->replaceTreeModel() \n");
