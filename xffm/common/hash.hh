@@ -49,6 +49,7 @@ public:
 
     static gchar *
     get_thumbnail_path (const gchar * file, gint size) {
+        if (!file) return NULL;
 	gchar *cache_dir;
 	gchar *thumbnail_path = NULL;
 	GString *gs;
