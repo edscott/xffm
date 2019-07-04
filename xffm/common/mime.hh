@@ -276,7 +276,25 @@ private:
 		g_free(key);
             }
         }
-        return icon;
+        if (icon) return icon;
+ 	if (strncmp(mimetype, "application/", strlen("application/"))==0){
+	    if (strstr(mimetype+strlen("application/"), "pdf"))return ("x-office-document");
+	    if (strstr(mimetype+strlen("application/"), "excell"))return ("x-office-spreadsheet");
+	    if (strstr(mimetype+strlen("application/"), "word"))return ("x-office-document");
+	    if (strstr(mimetype+strlen("application/"), "writer"))return ("x-office-document");
+	    if (strstr(mimetype+strlen("application/"), "calc"))return ("x-office-spreadsheet");
+	    if (strstr(mimetype+strlen("application/"), "lotus"))return ("x-office-spreadsheet");
+	    if (strstr(mimetype+strlen("application/"), "draw"))return ("x-office-drawing");
+	    if (strstr(mimetype+strlen("application/"), "dia"))return ("x-office-drawing");
+	    if (strstr(mimetype+strlen("application/"), "presentation"))return ("x-office-presentation");
+	    if (strstr(mimetype+strlen("application/"), "math"))return ("x-office-document-template");
+	}
+ 	if (strncmp(mimetype, "text/", strlen("text/"))==0){
+	    if (strstr(mimetype+strlen("text/"), "script"))return ("text-x-script");
+	    if (strstr(mimetype+strlen("text/"), "html"))return ("text-html");
+	}
+
+       return icon;
     }
 
     static gchar *
@@ -418,16 +436,16 @@ private:
 #endif
     }
 
+public:
     static const gchar *
-    mimeIcon (const gchar *file){
-        const gchar *retval = locate_icon(file);
+    mimeIcon (const gchar *mimetype){
+        const gchar *retval = locate_icon(mimetype);
         if (retval) {
 	    TRACE("locate_icon: %s --> %s\n", file, retval);
         }
 	return retval;
    } 
 
-public:
     static gchar *
     mimeType (const gchar *file){
         gchar *retval = extensionMimeType(file);
@@ -585,26 +603,7 @@ public:
                 g_free(key);
             }
             fclose(input);
-        }else ERROR("Cannot open %s\n", FREEDESKTOP_GLOBS);
-#endif
-#ifdef FREEDESKTOP_ICONS
-        if ((input = fopen(FREEDESKTOP_ICONS, "r")) != NULL) {
-            gchar buffer[256]; memset(buffer, 0, 256);
-            while (fgets(buffer, 255, input) && !feof(input)){
-                if (!strchr(buffer, ':'))continue;
-                gchar **x = g_strsplit(buffer, ":", -1);
-                if (strchr(x[1], '\n')) *(strchr(x[1], '\n')) = 0;
-                gchar *key = get_hash_key (x[0]);
-                if(key) {
-                     TRACE("ICON mime-module,replacing hash element \"%s\" with key %s --> %s\n", 
-                                    x[0], key, x[1]);
-                     g_hash_table_replace (application_hash_icon,  g_strdup(key), g_strdup(x[1]));
-                }
-                g_strfreev(x);
-                g_free(key);
-            }
-            fclose(input);
-        }else ERROR("Cannot open %s\n", FREEDESKTOP_ICONS);
+        }else DBG("Cannot open %s\n", FREEDESKTOP_GLOBS);
 #endif
 #ifdef FREEDESKTOP_ALIAS
 
@@ -624,7 +623,26 @@ public:
                 g_free(key);
             }
             fclose(input);
-        } else ERROR("Cannot open %s\n", FREEDESKTOP_ALIAS);
+        } else DBG("Cannot open %s\n", FREEDESKTOP_ALIAS);
+#endif
+#ifdef FREEDESKTOP_ICONS
+        if ((input = fopen(FREEDESKTOP_ICONS, "r")) != NULL) {
+            gchar buffer[256]; memset(buffer, 0, 256);
+            while (fgets(buffer, 255, input) && !feof(input)){
+                if (!strchr(buffer, ':'))continue;
+                gchar **x = g_strsplit(buffer, ":", -1);
+                if (strchr(x[1], '\n')) *(strchr(x[1], '\n')) = 0;
+                gchar *key = get_hash_key (x[0]);
+                if(key) {
+                     TRACE("ICON mime-module,replacing hash element \"%s\" with key %s --> %s\n", 
+                                    x[0], key, x[1]);
+                     g_hash_table_replace (application_hash_icon,  g_strdup(key), g_strdup(x[1]));
+                }
+                g_strfreev(x);
+                g_free(key);
+            }
+            fclose(input);
+        }else DBG("Cannot open %s\n", FREEDESKTOP_ICONS);
 #endif
 
 	// FIXME: break the following code into routines...

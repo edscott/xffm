@@ -121,14 +121,26 @@ private:
         // Regular file:
 	if (strcmp(mimetype, "inode/regular")==0) return g_strdup("text-x-preview");
         TRACE("getBasicIconname(): %s mime=%s \n", path, mimetype);
- 	return g_strdup("dialog-question");
+ 	return g_strdup("text-x-preview/C/emblem-system/1.5/220");
      }
+
 
     static gchar *
     specificIconName(const gchar *path, const gchar *mimetype){
 	if (g_file_test(path, G_FILE_TEST_IS_EXECUTABLE)) return g_strdup("application-x-executable");
+        if (strncmp(mimetype, "image", strlen("image"))){
+            if (isTreeView) return g_strdup("image-x-generic");
+            if (Gtk<Type>::isImage(mimetype)) return g_strdup(path);
+            return g_strdup("image-x-generic");
+        } 
+
+	if (g_file_test(path, G_FILE_TEST_IS_EXECUTABLE)) return g_strdup("application-x-executable");
+        auto icon = Mime<Type>::mimeIcon(mimetype);
+        if (icon) return g_strdup(icon);
+
  	// FIXME: strstr is too time consuming...
         return g_strdup("text-x-preview");
+#if 0
 	if (strstr(mimetype, "virtualbox")){
 	    auto item = strrchr(mimetype, '-');
 	    if (item) {
@@ -138,11 +150,6 @@ private:
 	    }
 	}
 	if (strstr(mimetype, "cd-image"))return g_strdup("media-optical");
-        if (strstr(mimetype, "image")){
-            if (isTreeView) return g_strdup("image-x-generic");
-            if (Gtk<Type>::isImage(mimetype)) return g_strdup(path);
-            return g_strdup("image-x-generic");
-        }
         if (strstr(mimetype, "compressed")) return g_strdup("package-x-generic");
         if (strstr(mimetype, "x-xz")) return g_strdup("package-x-generic");
         if (strstr(mimetype, "audio")) return g_strdup("audio-x-generic");
@@ -172,20 +179,6 @@ private:
         if (strstr(mimetype, "calendar")) return g_strdup("x-office-calendar");
 	if (strstr(mimetype, "template")) return g_strdup("text-x-generic-template");
 	if (strstr(mimetype, "text")) return g_strdup("text-x-generic");
-	if (strstr(mimetype, "application")){
-	    if (strstr(mimetype, "pdf"))return g_strdup("x-office-document");
-	    if (strstr(mimetype, "excell"))return g_strdup("x-office-spreadsheet");
-	    if (strstr(mimetype, "word"))return g_strdup("x-office-document");
-	    if (strstr(mimetype, "writer"))return g_strdup("x-office-document");
-	    if (strstr(mimetype, "calc"))return g_strdup("x-office-spreadsheet");
-	    if (strstr(mimetype, "lotus"))return g_strdup("x-office-spreadsheet");
-	    if (strstr(mimetype, "draw"))return g_strdup("x-office-drawing");
-	    if (strstr(mimetype, "dia"))return g_strdup("x-office-drawing");
-	    if (strstr(mimetype, "presentation"))return g_strdup("x-office-presentation");
-	    if (strstr(mimetype, "math"))return g_strdup("x-office-document-template");
-	    if (strstr(mimetype, "lyx"))return g_strdup("x-office-document-template");
-
-	}
         if (strstr(mimetype, "document")) return g_strdup("x-office-document");
         auto fileInfo = Util<Type>::fileInfo(path);
         if (fileInfo){
@@ -202,7 +195,7 @@ private:
 	    return g_strdup("text-x-generic-template");
 	}
         return  NULL;
-            
+#endif     
     }
 private:
     static gchar *
