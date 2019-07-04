@@ -677,22 +677,6 @@ public:
     static void
     insertLocalItem(GtkListStore *listStore, xd_t *xd_p){
         if (!xd_p->path) return;
-        // XXX this hack is time consuming FIXME
-#if 0
-        if (!xd_p->mimetype){
-            xd_p->mimetype = getMimeType(xd_p);
-        }
-        if (!xd_p->icon){
-            xd_p->icon = LocalIcons<Type>::getIconname(xd_p);
-        }
-        if (!xd_p->st){
-            getStat(xd_p);
-        }
-#else
-        if (!xd_p->icon){
-            xd_p->icon = g_strdup("text-x-generic");
-        }
-#endif
         inserted_=FALSE;
         
         gtk_tree_model_foreach (GTK_TREE_MODEL(listStore), insertItem, (void *)xd_p);
@@ -724,7 +708,7 @@ private:
     add_local_item(GtkListStore *list_store, GtkTreeIter *iter, xd_t *xd_p){
         gchar *utf_name = Util<Type>::utf_string(xd_p->d_name);
         const gchar *icon_name = xd_p->icon;
-	TRACE("add_local_item::icon name for %s is %s\n", xd_p->d_name, icon_name);
+	TRACE("icon name for %s is %s\n", xd_p->d_name, icon_name);
         
         // chop file extension (will now appear on the icon). (XXX only for big icons)
         gboolean is_dir;
@@ -756,7 +740,7 @@ private:
                 if (!highlight_pixbuf) {
                     auto thumbnail = Hash<Type>::get_thumbnail_path (up?HIGHLIGHT_UP:"document-open", GTK_ICON_SIZE_DIALOG);
                     highlight_pixbuf = Pixbuf<Type>::get_pixbuf(up?HIGHLIGHT_UP:"document-open", GTK_ICON_SIZE_DIALOG);
-                    if (thumbnail) Pixbuf<Type>::pixbuf_save(highlight_pixbuf, thumbnail);
+                    Pixbuf<Type>::pixbuf_save(highlight_pixbuf, thumbnail);
                 }
             }
 	}
@@ -769,7 +753,7 @@ private:
         if (!normal_pixbuf) {
 	    auto thumbnail = Hash<Type>::get_thumbnail_path (icon_name, GTK_ICON_SIZE_DIALOG);
 	    normal_pixbuf = Pixbuf<Type>::get_pixbuf(icon_name, GTK_ICON_SIZE_DIALOG);
-	    if (thumbnail) Pixbuf<Type>::pixbuf_save(normal_pixbuf, thumbnail);
+	    Pixbuf<Type>::pixbuf_save(normal_pixbuf, thumbnail);
 	}
         //Highlight emblem macros are defined in types.h
         if (!highlight_pixbuf) {
