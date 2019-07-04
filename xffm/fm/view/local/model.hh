@@ -677,6 +677,8 @@ public:
     static void
     insertLocalItem(GtkListStore *listStore, xd_t *xd_p){
         if (!xd_p->path) return;
+        // XXX this hack is time consuming FIXME
+#if 0
         if (!xd_p->mimetype){
             xd_p->mimetype = getMimeType(xd_p);
         }
@@ -686,6 +688,11 @@ public:
         if (!xd_p->st){
             getStat(xd_p);
         }
+#else
+        if (!xd_p->icon){
+            xd_p->icon = g_strdup("text-x-generic");
+        }
+#endif
         inserted_=FALSE;
         
         gtk_tree_model_foreach (GTK_TREE_MODEL(listStore), insertItem, (void *)xd_p);

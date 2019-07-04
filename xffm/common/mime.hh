@@ -277,6 +277,8 @@ private:
             }
         }
         if (icon) return icon;
+
+#if 0
  	if (strncmp(mimetype, "application/", strlen("application/"))==0){
 	    if (strstr(mimetype+strlen("application/"), "pdf"))return ("x-office-document");
 	    if (strstr(mimetype+strlen("application/"), "excell"))return ("x-office-spreadsheet");
@@ -293,7 +295,7 @@ private:
 	    if (strstr(mimetype+strlen("text/"), "script"))return ("text-x-script");
 	    if (strstr(mimetype+strlen("text/"), "html"))return ("text-html");
 	}
-
+#endif
        return icon;
     }
 

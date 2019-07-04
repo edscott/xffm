@@ -135,9 +135,11 @@ private:
         } 
 
 	if (g_file_test(path, G_FILE_TEST_IS_EXECUTABLE)) return g_strdup("application-x-executable");
+        // FIXME This function returns office type icons for all text stuff
+#if 0
         auto icon = Mime<Type>::mimeIcon(mimetype);
         if (icon) return g_strdup(icon);
-
+#endif
  	// FIXME: strstr is too time consuming...
         return g_strdup("text-x-preview");
 #if 0
