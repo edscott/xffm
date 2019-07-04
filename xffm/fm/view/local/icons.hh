@@ -31,7 +31,6 @@ private:
         // Up directory:
         if (strcmp(basename, "..")==0) return  g_strdup("go-up");
 
-            TRACE("getBasicIconname\n");
 	auto name = getBasicIconname(path, mimetype);
 	if (!name){
 	    ERROR("fm/view/icons.hh/::getBasicIconname should not return NULL\n");
@@ -40,7 +39,6 @@ private:
 
 	if (g_path_is_absolute(name)) return name; // image previews (no emblem)
 	TRACE("basic iconname: %s --> %s\n", basename, name);
-            TRACE("getEmblem\n");
         gchar *emblem = getEmblem(path, basename,  d_type, st_p);
         TRACE("emblem: %s --> %s\n",  basename, emblem);
         gchar *iconname = g_strconcat(name, emblem, NULL);
@@ -126,9 +124,6 @@ private:
 
     static gchar *
     specificIconName(const gchar *path, const gchar *mimetype){
-	if (g_file_test(path, G_FILE_TEST_IS_EXECUTABLE)) return g_strdup("application-x-executable");
- 	// FIXME: strstr is too time consuming...
-        return g_strdup("text-x-preview");
 	if (strstr(mimetype, "virtualbox")){
 	    auto item = strrchr(mimetype, '-');
 	    if (item) {
@@ -172,6 +167,7 @@ private:
         if (strstr(mimetype, "calendar")) return g_strdup("x-office-calendar");
 	if (strstr(mimetype, "template")) return g_strdup("text-x-generic-template");
 	if (strstr(mimetype, "text")) return g_strdup("text-x-generic");
+	if (g_file_test(path, G_FILE_TEST_IS_EXECUTABLE)) return g_strdup("application-x-executable");
 	if (strstr(mimetype, "application")){
 	    if (strstr(mimetype, "pdf"))return g_strdup("x-office-document");
 	    if (strstr(mimetype, "excell"))return g_strdup("x-office-spreadsheet");
