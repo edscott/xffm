@@ -333,7 +333,7 @@ public:
     }
 
 
-    static gint 
+ /*   static gint 
     directoryTest(const void *a, const void *b, gboolean descending){
         // compare by name, directories or symlinks to directories on top
         const xd_t *xd_a = (const xd_t *)a;
@@ -357,11 +357,55 @@ public:
         }
         return 0;
 
+    }*/
+
+    static gint 
+    directoryTest(const void *a, const void *b, gboolean descending, int which){
+        // compare by name, directories or symlinks to directories on top
+        const xd_t *xd_a = (const xd_t *)a;
+        const xd_t *xd_b = (const xd_t *)b;
+	TRACE("compare %s --- %s\n", xd_a->d_name, xd_b->d_name);
+        if (strcmp(xd_a->d_name, "..")==0) return -1;
+        if (strcmp(xd_b->d_name, "..")==0) return 1;
+
+        gboolean a_cond = FALSE;
+        gboolean b_cond = FALSE;
+
+        a_cond = ((xd_a->d_type == DT_DIR )||(xd_a->st && S_ISDIR(xd_a->st->st_mode)));
+        b_cond = ((xd_b->d_type == DT_DIR )||(xd_b->st && S_ISDIR(xd_b->st->st_mode)));
+
+        if (a_cond && !b_cond) return -1; 
+        if (!a_cond && b_cond) return 1;
+        if (a_cond && b_cond) {
+            // directory comparison by name is default;
+            switch (which) {
+                case 0: //date
+                {
+                    auto result = xd_a->st->st_mtime - xd_b->st->st_mtime;
+                    if (descending) return -result;
+                    break;
+                }
+                case 1: //size
+                {
+                    auto result = xd_a->st->st_size - xd_b->st->st_size;
+                    if (descending) return -result;
+                    break;
+                }
+                default:
+                {
+                    if (descending) return -strcasecmp(xd_a->d_name, xd_b->d_name);
+                    return strcasecmp(xd_a->d_name, xd_b->d_name);
+                    break;
+                }
+            }
+        }
+        return 0;
+
     }
 
     static gint 
     compareBySize(const void *a, const void *b, gboolean descending){
-        auto test = directoryTest(a, b, descending);
+        auto test = directoryTest(a, b, descending, 1);
         if (test != 0) return test;
 
         const xd_t *xd_a = (const xd_t *)a;
@@ -374,7 +418,7 @@ public:
 
     static gint 
     compareByDate(const void *a, const void *b, gboolean descending){
-        auto test = directoryTest(a, b, descending);
+        auto test = directoryTest(a, b, descending, 0);
         if (test != 0) return test;
 
         const xd_t *xd_a = (const xd_t *)a;
@@ -387,7 +431,7 @@ public:
 
     static gint 
     compareByDateSize(const void *a, const void *b, gboolean descending){
-        auto test = directoryTest(a, b, descending);
+        auto test = directoryTest(a, b, descending, 0);
         if (test != 0) return test;
 
         const xd_t *xd_a = (const xd_t *)a;
@@ -401,7 +445,7 @@ public:
 
     static gint 
     compareByName(const void *a, const void *b, gboolean descending){
-        auto test = directoryTest(a, b, descending);
+        auto test = directoryTest(a, b, descending,2);
         if (test != 0) return test;
         const xd_t *xd_a = (const xd_t *)a;
         const xd_t *xd_b = (const xd_t *)b;
