@@ -104,6 +104,9 @@ private:
 
         // UNIX domain socket:
 	if (strcmp(mimetype, "inode/socket")==0) return  g_strdup("network-wired-symbolic");
+        if (strcmp(mimetype, "inode/regular")==0) {
+            return g_strdup("text-x-generic#a9f7eb");
+        }
 
         auto iconname = specificIconName(path, mimetype);
         TRACE("specificIconName %s: %s \n", path, mimetype);
@@ -116,89 +119,85 @@ private:
         }
         if (iconname) return iconname;
         
-        // Regular file:
-	if (strcmp(mimetype, "inode/regular")==0) return g_strdup("text-x-preview");
         TRACE("getBasicIconname(): %s mime=%s \n", path, mimetype);
  	return g_strdup("dialog-question");
      }
 
     static gchar *
     specificIconName(const gchar *path, const gchar *mimetype){
-	if (strstr(mimetype, "virtualbox")){
-	    auto item = strrchr(mimetype, '-');
-	    if (item) {
-		auto iconname = g_strconcat("virtualbox", item, NULL);
-		if (Icons<Type>::iconThemeHasIcon(iconname)) return iconname;
-		g_free(iconname);
-	    }
-	}
-	if (strstr(mimetype, "cd-image"))return g_strdup("media-optical");
-        if (strstr(mimetype, "image")){
-            if (isTreeView) return g_strdup("image-x-generic");
-            if (Gtk<Type>::isImage(mimetype)) return g_strdup(path);
-            return g_strdup("image-x-generic");
+        if (Gtk<Type>::isImage(mimetype)) {
+            //if (isTreeView) return g_strdup("image-x-generic");
+            return g_strdup(path);
         }
-        if (strstr(mimetype, "compressed")) return g_strdup("package-x-generic");
-        if (strstr(mimetype, "x-xz")) return g_strdup("package-x-generic");
-        if (strstr(mimetype, "audio")) return g_strdup("audio-x-generic");
-        if (strstr(mimetype, "font")) return g_strdup("font-x-generic");
-        if (strstr(mimetype, "video")) return g_strdup("video-x-generic");
-        if (strstr(mimetype, "script")) return g_strdup("text-x-script");
-        if (strstr(mimetype, "html")) return g_strdup("text-html");
-        if (strstr(mimetype, "package")) return g_strdup("package-x-generic");
-	// office stuff
-	if (strstr(mimetype, "document")||strstr(mimetype, "application")){
-            // N.A.:
-            // if (strstr(mimetype, "")) return g_strdup("x-office-address-book");
-            if (strstr(mimetype, "drawing") || strstr(mimetype, "graphics ")|| strstr(mimetype, "image")) {
-                if (strstr(mimetype, "template")) return g_strdup("x-office-drawing-template");
-                return g_strdup("x-office-drawing");
+        static const gchar *type1[] = {"image", "text", "audio", "font", "video", NULL};
+        for (auto p=type1; p && *p; p++){
+            if (strncmp(mimetype, *p, strlen("*p"))==0){
+                return g_strconcat(*p, "-x-generic", NULL);
             }
-            if (strstr(mimetype, "presentation")) {
-                if (strstr(mimetype, "template")) return g_strdup("x-office-presentation-template");
-                return g_strdup("x-office-presentation");
+
+        }
+
+        if (strncmp(mimetype, "model/",strlen("model/")==0)){
+                return g_strdup("applications-science");
+        }
+
+        if (strncmp(mimetype, "application/",strlen("application/"))==0){
+            auto type = mimetype + strlen("application/");
+            if (strstr(type, "cd-image"))return g_strdup("media-optical");
+            if (strstr(type, "audio")) return g_strdup("audio-x-generic");
+            if (strstr(type, "font")) return g_strdup("font-x-generic");
+            if (strstr(type, "video")) return g_strdup("video-x-generic");
+            if (strstr(type, "script")) return g_strdup("text-x-script");
+            if (strstr(type, "html")) return g_strdup("text-html");
+            if (strstr(type, "calendar")) return g_strdup("x-office-calendar");
+
+            if (strstr(type, "compressed") || 
+                    strstr(type, "x-cbr") ||
+                    strstr(type, "zip") ||
+                    strstr(type, "x-xz") ||
+                    strstr(type, "package")
+            ) return g_strdup("package-x-generic");
+	    
+            if (strstr(type, "pdf") ||
+                strstr(type, "word") ||
+                strstr(type, "writer") ||
+                strstr(type, "lyx") ||
+                strstr(type, "math")
+            ) {
+                if (strstr(type, "template")) 
+                    return g_strdup("x-office-document-template");
+                return g_strdup("x-office-document");
             }
-            if (strstr(mimetype, "spreadsheet")) {
-                if (strstr(mimetype, "template")) return g_strdup("x-office-spreadsheet-template");
+            
+	    if (strstr(type, "excell") ||
+                strstr(type, "calc") ||
+                strstr(type, "lotus") ||
+                strstr(type, "spreadsheet")
+            ) {
+                if (strstr(type, "template")) 
+                    return g_strdup("x-office-spreadsheet-template");
                 return g_strdup("x-office-spreadsheet");
             }
-            if (strstr(mimetype, "template")) return g_strdup("x-office-document-template");
-        }
-        if (strstr(mimetype, "calendar")) return g_strdup("x-office-calendar");
-	if (strstr(mimetype, "template")) return g_strdup("text-x-generic-template");
-	if (strstr(mimetype, "text")) return g_strdup("text-x-generic");
-	if (g_file_test(path, G_FILE_TEST_IS_EXECUTABLE)) return g_strdup("application-x-executable");
-	if (strstr(mimetype, "application")){
-	    if (strstr(mimetype, "pdf"))return g_strdup("x-office-document");
-	    if (strstr(mimetype, "excell"))return g_strdup("x-office-spreadsheet");
-	    if (strstr(mimetype, "word"))return g_strdup("x-office-document");
-	    if (strstr(mimetype, "writer"))return g_strdup("x-office-document");
-	    if (strstr(mimetype, "calc"))return g_strdup("x-office-spreadsheet");
-	    if (strstr(mimetype, "lotus"))return g_strdup("x-office-spreadsheet");
-	    if (strstr(mimetype, "draw"))return g_strdup("x-office-drawing");
-	    if (strstr(mimetype, "dia"))return g_strdup("x-office-drawing");
-	    if (strstr(mimetype, "presentation"))return g_strdup("x-office-presentation");
-	    if (strstr(mimetype, "math"))return g_strdup("x-office-document-template");
-	    if (strstr(mimetype, "lyx"))return g_strdup("x-office-document-template");
 
-	}
-        if (strstr(mimetype, "document")) return g_strdup("x-office-document");
-        auto fileInfo = Util<Type>::fileInfo(path);
-        if (fileInfo){
-	    TRACE(" fileinfo: %s -> %s\n", path, fileInfo);
-            gchar *iconname = NULL;
-            if (strstr(fileInfo, "text") || strstr(fileInfo, "ASCII"))
-                iconname =g_strdup("text-x-generic");
-            if (strstr(fileInfo, "compressed") )
-                iconname =g_strdup("package-x-generic");
-            g_free(fileInfo);
-            return iconname;
+	    if (strstr(type, "draw") ||
+                strstr(type, "drawing") || 
+                strstr(type, "graphics ") || 
+                strstr(type, "image") ||
+                strstr(type, "dia")
+            ) {
+                if (strstr(type, "template")) 
+                    return g_strdup("x-office-drawing-template");
+                return g_strdup("x-office-drawing");
+            }
+	    if (strstr(type, "presentation")){
+                if (strstr(type, "template")) 
+                    return g_strdup("x-office-presentation-template");
+                return g_strdup("x-office-presentation");
+            }
+
+            return g_strdup("application-x-executable");
         }
-	if (strstr(mimetype, "application")){
-	    return g_strdup("text-x-generic-template");
-	}
-        return  NULL;
-            
+        return  NULL;            
     }
 private:
     static gchar *

@@ -124,11 +124,11 @@ public:
 	g_free(reading);
 	while(gtk_events_pending())gtk_main_iteration();
     
-        GList *directory_list = read_items (path, &heartbeat);
+        GList *directoryList = read_items (path, &heartbeat);
 	// start adding items... (threaded...)
 
 	auto arg = (void **)calloc(3, sizeof(void *));
-	arg[0] = (void *)directory_list;
+	arg[0] = (void *)directoryList;
 	arg[1] = (void *)view;
 	arg[2] = (void *)g_strdup(path);
 	pthread_t thread;
@@ -193,6 +193,12 @@ public:
         errno=0;
         TRACE( "shows hidden=%d\n", showHidden);
 	gint count = 0;
+        gboolean bySize = 
+            (Settings<Type>::getSettingInteger("LocalView", "BySize") > 0);
+        gboolean byDate = 
+            (Settings<Type>::getSettingInteger("LocalView", "ByDate") > 0);
+
+        auto needStat = bySize || byDate;
         while ((d = readdir(directory))  != NULL){
             TRACE( "%p  %s\n", d, d->d_name);
             if(strcmp (d->d_name, ".") == 0) continue;
@@ -200,9 +206,11 @@ public:
                 TRACE("skipp: %s : %s\n", path, d->d_name);
                 continue;
             }
-	    // stat first 104 items.
-            xd_t *xd_p = get_xd_p(path, d, FALSE);
-            //xd_t *xd_p = get_xd_p(path, d, (count++ < 104));
+            needStat = needStat || (d->d_type==DT_DIR);
+            needStat = needStat || (d->d_type==DT_LNK);
+            needStat = needStat || (d->d_type==DT_UNKNOWN);
+	    // On this pass, stat according to sort order or dt_type.
+            xd_t *xd_p = get_xd_p(path, d, needStat);
             directory_list = g_list_prepend(directory_list, xd_p);
             if (heartbeat) {
                 (*heartbeat)++;
@@ -224,6 +232,7 @@ public:
         if (!directory_list) {
             ERROR("fm/view/local/model.hh::read_files_local(): Count failed! Directory not read!\n");
         }
+
         directory_list = sortList (directory_list);
         return (directory_list);
     }
@@ -231,36 +240,30 @@ public:
     // Convert a dirent entry into a xd_t structure.
     static xd_t *
     get_xd_p(const gchar *directory, struct dirent *d, gboolean withStat){
+        // Allocate memory.
         xd_t *xd_p = (xd_t *)calloc(1,sizeof(xd_t));
+        // Duplicate basename.
         xd_p->d_name = g_strdup(d->d_name);
+        // Duplicate absolute path.
         if (strcmp(d->d_name, "..")==0){
+            // Up item.
 	    xd_p->path = g_path_get_dirname(directory);
         } else if (strcmp(directory, G_DIR_SEPARATOR_S)==0){
+            // Filesystem root.
             xd_p->path = g_strconcat(G_DIR_SEPARATOR_S, d->d_name, NULL);
         } else {
+            // All others.
             xd_p->path = g_strconcat(directory, G_DIR_SEPARATOR_S, d->d_name, NULL);
         }
-        if (d->d_type == 0 || d->d_type == DT_UNKNOWN) withStat = TRUE;
-        else xd_p->d_type = d->d_type;
+        // Assign d_type.
+        xd_p->d_type = d->d_type;
 
 	TRACE("model::get_xd_p() path=%s d_type = %d withStat=%d\n",
 		xd_p->path,   xd_p->d_type, withStat);
+        // Stat necessary items.
 	if (withStat){
-	    xd_p->st = (struct stat *)calloc( 1, sizeof(struct stat));
-	    if (!xd_p->st){
-		ERROR("fm/view/local/model.hh::calloc(%s): %s\n", xd_p->path, strerror(errno));
-		exit(1);
-	    }
-	    TRACE("get_xd_p:: stat %s\n", xd_p->path);
-	    if (lstat(xd_p->path, xd_p->st) < 0) {
-		TRACE("get_xd_p() stat(%s): %s (path has disappeared)\n", xd_p->path, strerror(errno));
-	    } else {
-		xd_p->d_type = LocalIcons<Type>::getDType(xd_p->path, xd_p->st);
-	    }
-	    errno=0;
+            getStat(xd_p);
 	}
-
-	// symlinks and directories are stat'd in getMimeType()  
 	xd_p->mimetype = getMimeType(xd_p);
         // the following call uses xd_p->mimetype
         xd_p->icon = g_strdup(LocalIcons<Type>::getIconname(xd_p));
@@ -270,16 +273,29 @@ public:
         return xd_p;
     }
 
-    static gboolean
+
+    static int
     getStat(xd_t *xd_p){
-        if (xd_p->st) return TRUE;
+        if (xd_p->st) return 0;
+            // Allocate memory.
         xd_p->st = (struct stat *)calloc(1, sizeof(struct stat));
         if (!xd_p->st){
             ERROR("fm/view/local/model.hh::calloc: %s\n", strerror(errno));
             exit(1);
         }
-        errno=0;
-	return stat(xd_p->path, xd_p->st)<0;
+        auto retval = stat(xd_p->path, xd_p->st);
+        if (retval < 0) {
+            // File disappeared or broken link.
+            DBG("getStat() stat(%s): %s\n", xd_p->path, strerror(errno));
+            if (xd_p->d_type == DT_LNK){
+                retval = lstat(xd_p->path, xd_p->st);
+                if (retval < 0) {
+                    DBG("getStat() lstat(%s): %s\n", xd_p->path, strerror(errno));
+                }
+            }
+        } 
+        errno=0;        
+	return retval;
             
     }
 
@@ -287,15 +303,10 @@ public:
     getMimeType(xd_t *xd_p){
 	auto mimetype = Mime<Type>::basicMimeType(xd_p->d_type);
 	TRACE("%s -> %s\n", xd_p->path, mimetype);
-	if (strcmp(mimetype, "inode/symlink")==0 ||
-	    strcmp(mimetype, "inode/directory")==0 )
+	//if (xd_p->st==NULL && (xd_p->d_type == DT_LNK || xd_p->d_type == DT_DIR))
+	if (xd_p->d_type == DT_LNK || xd_p->d_type == DT_DIR)
 	{
-            if (getStat(xd_p)<0){
-		if (strcmp(mimetype, "inode/symlink")==0 ){
-		   //broken link
-		} else DBG("getMimeType() for d_type:inode/directory stat: %s: %s\n", xd_p->path, strerror(errno));
-                errno=0;
-            } else {
+            if (getStat(xd_p)==0){
 		g_free(mimetype);
 		mimetype = Mime<Type>::statMimeType(xd_p->st);
 	    }
@@ -533,17 +544,17 @@ public:
 
     static void *threadInsert(void *data){
 	auto arg = (void **)data;
-	auto directory_list = (GList *)arg[0];
+	auto directoryList = (GList *)arg[0];
 	auto view = (View<Type> *)arg[1];
 	auto path = (gchar *)arg[2];
-	insert_list_into_model(directory_list, view, path);
+	insert_list_into_model(directoryList, view, path);
 	g_free(arg);
-        GList *p = directory_list;
+        GList *p = directoryList;
         for (;p && p->data; p=p->next){
             xd_t *xd_p = (xd_t *)p->data;
             free_xd_p(xd_p);
         }
-        g_list_free(directory_list);
+        g_list_free(directoryList);
         g_free(path);
         // replaceTreeModel will fix treeModel used by monitorObject.
         TRACE("threadInsert-->replaceTreeModel() \n");
@@ -713,20 +724,18 @@ private:
             highlight_pixbuf = gdk_pixbuf_copy(normal_pixbuf);
         
             const gchar *emblem= HIGHLIGHT_EMBLEM;
-#if 0
-            // This no longer works, since items will not be stat'd by default
-            //   (speed load is more important)
-     
-                if (xd_p->st && (
-                    (xd_p->st->st_mode & S_IXUSR) ||
-                    (xd_p->st->st_mode & S_IXGRP) ||
-                    (xd_p->st->st_mode & S_IXOTH) ))
-                {
-                    emblem = HIGHLIGHT_EXEC_EMBLEM;
-                } else {
-                    emblem = HIGHLIGHT_OPEN_EMBLEM;
+            if (xd_p->mimetype){
+                if (strncmp(xd_p->mimetype, "inode/regular", strlen("inode/regular"))==0){
+                    emblem = HIGHLIGHT_TEXT;
                 }
-#endif
+                if (strncmp(xd_p->mimetype, "text", strlen("text"))==0){
+                    emblem = HIGHLIGHT_TEXT;
+                }
+                if (strncmp(xd_p->mimetype, "application", strlen("application"))==0){
+                    emblem = HIGHLIGHT_APP;
+                }
+            }
+
             // Now decorate the pixbuf with emblem (types.h).
             void *arg[] = {NULL, (void *)highlight_pixbuf, NULL, NULL, (void *)emblem };
             // Done by main gtk thread:
