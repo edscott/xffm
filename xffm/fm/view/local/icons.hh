@@ -131,17 +131,17 @@ private:
         }
         static const gchar *type1[] = {"image", "text", "audio", "font", "video", NULL};
         for (auto p=type1; p && *p; p++){
-            if (strncmp(mimetype, *p, strlen("*p"))==0){
+            if (strncmp(mimetype, *p, (size_t)strlen("*p"))==0){
                 return g_strconcat(*p, "-x-generic", NULL);
             }
 
         }
 
-        if (strncmp(mimetype, "model/",strlen("model/")==0)){
+        if (strncmp(mimetype, "model/",(size_t)strlen("model/"))==0){
                 return g_strdup("applications-science");
         }
 
-        if (strncmp(mimetype, "application/",strlen("application/"))==0){
+        if (strncmp(mimetype, "application/",(size_t)strlen("application/"))==0){
             auto type = mimetype + strlen("application/");
             if (strstr(type, "cd-image"))return g_strdup("media-optical");
             if (strstr(type, "audio")) return g_strdup("audio-x-generic");
