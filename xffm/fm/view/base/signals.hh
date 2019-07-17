@@ -148,7 +148,7 @@ public:
 	    
             buttonPressX = buttonPressY = -1;
 	    dragOn_ = FALSE;
-            return doPopupMenu(event, view);
+            return doPopupMenu(event, data);
         }
         if (ignoreRelease){
             ignoreRelease=FALSE;
@@ -156,16 +156,15 @@ public:
         }
         //GdkEventButton *event_button = (GdkEventButton *)event;
         if (!dragOn_){
-	    GtkTreePath *tpath;
 
 	    if (rubberBand_) {
                 view->selectables();
 		return FALSE;
 	    }
-	    if (!isTreeView && !gtk_icon_view_get_item_at_pos (view->iconView(),
-                                   event->x, event->y,
-                                   &tpath,NULL)){
-		TRACE("button down cancelled.\n");
+
+	    auto tpath = getTpath(view, event);
+	    if (!tpath){
+		TRACE("!getTpath(): button down cancelled.\n");
 		return TRUE;
 	    }
 
@@ -177,33 +176,16 @@ public:
 	    }
 	    // default mode:
 	    if (CONTROL_MODE) return TRUE;
+	    unselectAll(data);
+	    reSelect(data, tpath);
 
-	    if (isTreeView){
-		auto selection = 
-		    gtk_tree_view_get_selection (view->treeView());
-		gtk_tree_view_get_path_at_pos (view->treeView(), 
-				   event->x, event->y, &tpath, NULL,  NULL, NULL);
-		if (tpath) {
-		    // unselect everything
-		    gtk_tree_selection_unselect_all (selection);
-		    // reselect item to activate
-		    gtk_tree_selection_select_path (selection, tpath);
-		}
-	    } else {
-		// unselect everything
-		gtk_icon_view_unselect_all (view->iconView());
-		// reselect item to activate
-		gtk_icon_view_select_path (view->iconView(),tpath);
+	    TRACE("Here we do a call to activate item.\n");
+	    for (auto popup=popUpArray; popup && *popup; popup++){
+		g_object_set_data(G_OBJECT(*popup), "baseModel", (void *)view);
+		g_object_set_data(G_OBJECT(*popup), "view", (void *)view);
 	    }
-	    if (tpath) {
-		TRACE("Here we do a call to activate item.\n");
-		for (auto popup=popUpArray; popup && *popup; popup++){
-		    g_object_set_data(G_OBJECT(*popup), "baseModel", (void *)view);
-		    g_object_set_data(G_OBJECT(*popup), "view", (void *)view);
-		}
-		BaseSignals<Type>::activate(tpath, data);
-		gtk_tree_path_free(tpath);
-	    }
+	    activate(tpath, data);
+	    gtk_tree_path_free(tpath);
 	    return TRUE;
         }
 
@@ -215,19 +197,54 @@ public:
         return FALSE;
     }
 
-    static GtkTreePath * 
-    getTpath(View<Type> *view, GdkEventButton  *event){
+    static GtkTreePath *
+    getTpath(gpointer data, GdkEventButton  *event){
+	auto view = (View<Type> *)data;
         GtkTreePath *tpath = NULL;
         if (isTreeView){
-           if (!gtk_tree_view_get_path_at_pos (view->treeView(), event->x, event->y, &tpath, NULL, NULL, NULL)){
+           if (!gtk_tree_view_get_path_at_pos (view->treeView(), 
+		       event->x, event->y, &tpath, NULL, NULL, NULL))
+	   {
                tpath = NULL;
            }
         } else {
-            if (!gtk_icon_view_get_item_at_pos (view->iconView(), event->x, event->y, &tpath,NULL)) {
+            if (!gtk_icon_view_get_item_at_pos (view->iconView(), 
+			event->x, event->y, &tpath,NULL)) 
+	    {
                tpath = NULL;
             }
-        }
+	}
         return tpath;
+    }
+
+    static void 
+    unselectAll(gpointer data){
+	auto view = (View<Type> *)data;
+	// unselect everything
+	if (isTreeView){
+	    auto selection = 
+	    gtk_tree_view_get_selection (view->treeView());
+	    gtk_tree_selection_unselect_all (selection);
+	} else {
+	    gtk_icon_view_unselect_all (view->iconView());
+	    
+	}
+    }
+
+    static void 
+    reSelect(gpointer data, GtkTreePath *tpath){
+	auto view = (View<Type> *)data;
+	if (!tpath) return;
+        if (view->isSelectable(tpath))return;
+	// reselect item to activate
+	;
+	if (isTreeView){
+	    auto selection = 
+		gtk_tree_view_get_selection (view->treeView());
+	    gtk_tree_selection_select_path (selection, tpath);
+	} else {
+	    gtk_icon_view_select_path (view->iconView(),tpath);
+	}
     }
 
     static void 
@@ -247,28 +264,6 @@ public:
             if (gtk_icon_view_path_is_selected (view->iconView(), tpath)) {
                 gtk_icon_view_unselect_path (view->iconView(), tpath);
             } else {
-                if (view->isSelectable(tpath)){
-                    gtk_icon_view_select_path (view->iconView(), tpath);
-                }
-            }
-        }
-    }
-
-    static void 
-    reSelect(View<Type> *view, GtkTreePath *tpath){
-        if (isTreeView){
-            GtkTreeIter iter;
-            gtk_tree_model_get_iter(view->treeModel(), &iter, tpath);
-            auto selection = gtk_tree_view_get_selection (view->treeView());
-            gtk_tree_selection_unselect_all (selection);
-            if (!gtk_tree_selection_iter_is_selected (selection, &iter)){
-                if (view->isSelectable(tpath)){
-                   gtk_tree_selection_select_path (selection, tpath);
-                } 
-            } 
-        } else {
-            gtk_icon_view_unselect_all (view->iconView());
-            if (!gtk_icon_view_path_is_selected (view->iconView(), tpath)) {
                 if (view->isSelectable(tpath)){
                     gtk_icon_view_select_path (view->iconView(), tpath);
                 }
@@ -300,6 +295,51 @@ public:
         return NULL;
     }
 
+
+
+    static void
+    setPopupSelection(GdkEventButton  *event, gpointer data){
+	auto view = (View<Type> *)data;
+        if (SHIFT_MODE) {
+	    TRACE("SHIFT_MODE button 3\n");
+	    unselectAll(data);  
+	    return;
+	}
+        GtkTreePath *tpath = getTpath(data, event);
+	// If item is not selected, unselect all and select item.
+	// Skip unselect all in CONTROL_MODE
+        if (tpath && view->isSelectable(tpath)){
+	    if (isTreeView){
+		auto selection = 
+		    gtk_tree_view_get_selection (view->treeView());
+		    GtkTreeIter iter;
+		    gtk_tree_model_get_iter(view->treeModel(), &iter, tpath);
+		    if (!gtk_tree_selection_iter_is_selected (selection, &iter)
+			    && !CONTROL_MODE){
+			gtk_tree_selection_unselect_all (selection);
+		    }
+		    gtk_tree_selection_select_path (selection, tpath);
+	    } else {
+		if (!gtk_icon_view_path_is_selected (view->iconView(), tpath)
+			&& !CONTROL_MODE ) {
+		   gtk_icon_view_unselect_all (view->iconView());
+		}
+		gtk_icon_view_select_path (view->iconView(), tpath);
+	    }
+	    
+	}
+	if (tpath) gtk_tree_path_free(tpath);
+	return;
+    }
+
+    static gboolean doPopupMenu(GdkEventButton  *event, gpointer data){
+        gtk_widget_hide(GTK_WIDGET(xf::popupImage));
+	setPopupSelection(event, data);
+
+        return viewPopUp(data, event);
+    }
+
+#if 0
     static gboolean doPopupMenu(GdkEventButton  *event, View<Type> *view){
         gtk_widget_hide(GTK_WIDGET(xf::popupImage));
         GtkTreePath *tpath = NULL;
@@ -352,6 +392,7 @@ public:
 	}
         return viewPopUp(view, event);
     }
+#endif
 
     static gboolean
     buttonPress (GtkWidget *widget,
@@ -377,7 +418,7 @@ public:
             
 	    controlMode = FALSE;
             gint mode = 0;
-            tpath = getTpath(view, event);
+            tpath = getTpath(data, event);
 	    dragMode = 0; // default (move)
             if (tpath == NULL){ 
 		rubberBand_ = TRUE;
@@ -406,7 +447,7 @@ public:
                     return TRUE;
 		}
 
-                reSelect(view, tpath);
+                reSelect(data, tpath);
 		gtk_tree_path_free(tpath);
             }
             ignoreClick = FALSE;
@@ -419,7 +460,7 @@ public:
             ignoreClick = FALSE;
             return FALSE;
         }
-        auto result = doPopupMenu(event, view);
+        auto result = doPopupMenu(event, data);
         ignoreClick = FALSE;
 	return result;
     }
@@ -510,7 +551,8 @@ public:
     }
 
     static gboolean 
-    viewPopUp(View<Type> *view, GdkEventButton  *event){
+    viewPopUp(gpointer data, GdkEventButton  *event){
+	auto view = (View<Type> *)data;
         TRACE("Base::signals::button press event: button 3 should do popup, as well as longpress...\n");
         gboolean retval = FALSE;
         GtkMenu *menu = NULL;
@@ -531,22 +573,11 @@ public:
                     (GtkTreePath *)selectionList->data);
             gtk_tree_model_get(view->treeModel(), &iter, PATH, &path, -1);
             TRACE("Base::signals::selected path is %s\n", path);
-	    //hack here
-	    //auto t = getViewType(path);
-	    //view->setViewType(t);
 	}
 
-	
         gboolean items = (g_list_length(selectionList) >0);
         setMenuData(view, path, items);
         menu = configureMenu(view, items);
-/*	if ((CONTROL_MODE) || g_list_length(selectionList) == 0) {
-	    setMenuData(view, path, FALSE);
-	    menu = configureMenu(view, FALSE);
-	} else {
-	    setMenuData(view, path,TRUE);
-	    menu = configureMenu(view,TRUE);
-	} */
         if (menu) {
             gtk_menu_popup_at_pointer (menu, (const GdkEvent *)event);
         }   
