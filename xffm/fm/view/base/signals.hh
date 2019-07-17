@@ -235,7 +235,7 @@ public:
     reSelect(gpointer data, GtkTreePath *tpath){
 	auto view = (View<Type> *)data;
 	if (!tpath) return;
-        if (view->isSelectable(tpath))return;
+        if (!view->isSelectable(tpath))return;
 	// reselect item to activate
 	;
 	if (isTreeView){
@@ -339,60 +339,6 @@ public:
         return viewPopUp(data, event);
     }
 
-#if 0
-    static gboolean doPopupMenu(GdkEventButton  *event, View<Type> *view){
-        gtk_widget_hide(GTK_WIDGET(xf::popupImage));
-        GtkTreePath *tpath = NULL;
-        if (isTreeView){
-            GtkTreeViewColumn *column;
-            gint cellX, cellY;
-            if (gtk_tree_view_get_path_at_pos (view->treeView(), 
-                               event->x, event->y, &tpath,
-                              NULL, // &column,
-                               &cellX, &cellY)){
-                if (!LocalView<Type>::isSelectable(view->treeModel(),tpath)){
-                    ignoreRelease=TRUE;
-		    gtk_tree_path_free(tpath);
-                    return FALSE;
-                }
-		GtkTreeIter iter;
-		auto selection = gtk_tree_view_get_selection (view->treeView());
-		gtk_tree_model_get_iter(view->treeModel(), &iter, tpath);
-		if (!gtk_tree_selection_iter_is_selected (selection, &iter)){
-		    // if not selected, 
-		    if (!CONTROL_MODE){
-			gtk_tree_selection_unselect_all (selection);
-		    } 
-		    gtk_tree_selection_select_path (selection, tpath);
-		    gtk_tree_path_free(tpath);
-		}
-	    }
-            TRACE("(%lf,%lf) -> %d,%d\n", event->x, event->y, cellX, cellY);
-	} else {
-	    if (gtk_icon_view_get_item_at_pos (view->iconView(),
-				       event->x,
-				       event->y,
-				       &tpath, NULL)){
-                if (!LocalView<Type>::isSelectable(view->treeModel(),tpath)){
-                    ignoreRelease=TRUE;
-		    gtk_tree_path_free(tpath);
-                    return FALSE;
-                }
-		if (!gtk_icon_view_path_is_selected (view->iconView(), tpath)) {
-		    // If item is not selected, unselect all and select item.
-		    // Skip unselect all in CONTROL_MODE
-		    if (!CONTROL_MODE) {
-		       gtk_icon_view_unselect_all (view->iconView());
-		    } 
-		    gtk_icon_view_select_path (view->iconView(), tpath);
-		    gtk_tree_path_free(tpath);
-		}
-		// if item is selected, proceed.
-	    }
-	}
-        return viewPopUp(view, event);
-    }
-#endif
 
     static gboolean
     buttonPress (GtkWidget *widget,
