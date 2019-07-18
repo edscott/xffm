@@ -4,6 +4,7 @@
  */
 
 #define XFFM_CC
+#define ALPHA
 
 #ifdef ALPHA
 # warning "Alpha modules enabled..."
@@ -27,7 +28,7 @@
 
 
 #define USE_LOCAL_MONITOR 1
-#define FORK 1
+//#define FORK 1
 #ifdef FORCE_CORE
 # warning "Core dump enabled..."
 #define CORE 1

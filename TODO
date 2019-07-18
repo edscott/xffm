@@ -1,6 +1,4 @@
 For 0.91
-1. OK, code cleanup and control/shift button 3 to unselect all before popup
-1b. bug, button press for drag and drop will not select unless control mode
 
 2. popup from taskbar
 3.dnd treeview

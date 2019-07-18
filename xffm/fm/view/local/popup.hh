@@ -218,12 +218,16 @@ public:
     resetLocalPopup(void) {
         auto view = (View<Type> *)g_object_get_data(G_OBJECT(localPopUp), "view");
 
-        // Path is set on buttonpress signal...
-        //auto path = (const gchar *)g_object_get_data(G_OBJECT(localPopUp), "path");
-	TRACE("resetLocalPopup path=%s\n", view->path());
-        if (!view->path()){
-	    ERROR("local/popup.hh::resetLocalPopup: path is NULL\n");
-	    return;
+        // Path is set on BaseSignals<Type>::setMenuData().
+        auto path = (const gchar *)g_object_get_data(G_OBJECT(localPopUp), "path");
+	TRACE("resetLocalPopup path=%s\n", path);
+        if (!path){
+	    DBG("local/popup.hh::resetLocalPopup: path is NULL, using view->path()\n");
+	    path = view->path();
+	    if (!path){
+		ERROR("local/popup.hh::resetLocalPopup: view->path is NULL\n");
+	        return;
+	    }
 	}
         // unsensitivize "Paste" only if valid pasteboard...
         auto w = GTK_WIDGET(g_object_get_data(G_OBJECT(localPopUp), "Paste"));
@@ -246,21 +250,21 @@ public:
         //gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(w), isTreeView);
 
 	Util<Type>::resetObjectData(G_OBJECT(localPopUp), "iconName", g_strdup("folder"));
-	Util<Type>::resetObjectData(G_OBJECT(localPopUp), "displayName", util_c::valid_utf_pathstring(view->path()));
-	Util<Type>::resetObjectData(G_OBJECT(localPopUp), "path", g_strdup(view->path()));
-	Util<Type>::resetObjectData(G_OBJECT(localPopUp), "mimetype", Mime<Type>::mimeType(view->path()));
-	Util<Type>::resetObjectData(G_OBJECT(localPopUp), "fileInfo", util_c::fileInfo(view->path()));
+	Util<Type>::resetObjectData(G_OBJECT(localPopUp), "displayName", util_c::valid_utf_pathstring(path));
+	//Util<Type>::resetObjectData(G_OBJECT(localPopUp), "path", g_strdup(view->path()));
+	Util<Type>::resetObjectData(G_OBJECT(localPopUp), "mimetype", Mime<Type>::mimeType(path));
+	Util<Type>::resetObjectData(G_OBJECT(localPopUp), "fileInfo", util_c::fileInfo(path));
 	gchar *statLine;
-	if (g_file_test(view->path(), G_FILE_TEST_EXISTS)) {
+	if (g_file_test(path, G_FILE_TEST_EXISTS)) {
             struct stat st;
-            stat(view->path(), &st);
+            stat(path, &st);
             statLine  = Util<Type>::statInfo(&st);
         }
 	else statLine = g_strdup(strerror(ENOENT));
 	Util<Type>::resetObjectData(G_OBJECT(localPopUp), "statLine", statLine);
 
         auto iconName = (gchar *)g_object_get_data(G_OBJECT(localPopUp), "iconName");
-        auto path = (gchar *)g_object_get_data(G_OBJECT(localPopUp), "path");
+        //auto path = (gchar *)g_object_get_data(G_OBJECT(localPopUp), "path");
         auto mimetype = (gchar *)g_object_get_data(G_OBJECT(localPopUp), "mimetype");
         auto fileInfo = (gchar *)g_object_get_data(G_OBJECT(localPopUp), "fileInfo");
         auto display_name = (gchar *)g_object_get_data(G_OBJECT(localPopUp), "displayName");

@@ -523,6 +523,7 @@ public:
 
         gboolean items = (g_list_length(selectionList) >0);
         setMenuData(view, path, items);
+	g_free(path);
         menu = configureMenu(view, items);
         if (menu) {
             gtk_menu_popup_at_pointer (menu, (const GdkEvent *)event);
@@ -531,8 +532,9 @@ public:
     }
     
 public:
+
     static void
-    setMenuData(View<Type> * view, gchar *path, gboolean  items){
+    setMenuData(View<Type> * view, const gchar *path, gboolean  items){
         GtkMenu *menu = NULL;
         switch (view->viewType()){
             case (ROOTVIEW_TYPE):
@@ -567,10 +569,11 @@ public:
            auto oldPath = (gchar *)g_object_get_data(G_OBJECT(menu),"path");
             g_free(oldPath);
             TRACE("*** set menu data path=%s\n", path);
-            g_object_set_data(G_OBJECT(menu),"path", path);
+            g_object_set_data(G_OBJECT(menu),"path", g_strdup(path));
             g_object_set_data(G_OBJECT(menu),"view", (void *)view);
         }
     }
+    
     
     static GtkMenu *
     configureMenu(View<Type> * view, gboolean items){
