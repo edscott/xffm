@@ -437,9 +437,9 @@ public:
         }
 #ifdef MIMETYPE_PROGRAM
 	gchar *command = g_strdup_printf("%s -L --output-format=\"%%m\" \"%s\"", MIMETYPE_PROGRAM, file);
-	TRACE("mimeType command: %s\n", command);
+	DBG("mimeType command: %s\n", command);
  	retval = mime(command);
-	TRACE("mimeType: %s --> %s\n", file, retval);
+	DBG("mimeType: %s --> %s\n", file, retval);
         if (retval) add2sfx_hash(file, retval);
 	g_free(command);
 	return retval;

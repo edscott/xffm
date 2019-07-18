@@ -249,7 +249,7 @@ public:
 
 	gchar *fileInfo = util_c::fileInfo(path);
 	gchar *displayName = util_c::valid_utf_pathstring(path);
-	gchar *mimetype = Mime<Type>::mimeType(path);
+	gchar *mimetype = g_strdup("inode/directory");
 	DBG("local resetPopup mimetype=%s\n",mimetype);
 	gchar *statLine;
 	if (g_file_test(path, G_FILE_TEST_EXISTS)) {
@@ -667,7 +667,12 @@ private:
         auto localView = (LocalView<Type> *)data;
         auto view = (View<Type> *)data;
         if (localView->isSelectable(treeModel, iter)){
-            gtk_icon_view_select_path(view->iconView(), tpath);
+	    if (isTreeView){
+		auto selection = gtk_tree_view_get_selection (view->treeView());
+                gtk_tree_selection_select_path (selection, tpath);
+	    } else {
+		gtk_icon_view_select_path(view->iconView(), tpath);
+	    }
         }
         return FALSE;        
     }
@@ -691,7 +696,12 @@ private:
         gboolean match = g_regex_match (regex, basename, (GRegexMatchFlags)0, NULL);
         if (match){
             TRACE("match: %s\n", basename);
-            gtk_icon_view_select_path(view->iconView(), tpath);
+	    if (isTreeView){
+		auto selection = gtk_tree_view_get_selection (view->treeView());
+                gtk_tree_selection_select_path (selection, tpath);
+	    } else {
+		gtk_icon_view_select_path(view->iconView(), tpath);
+	    }
         }
         g_free(basename);
         return FALSE;
@@ -731,6 +741,7 @@ private:
                 (void *)regex
             };
             // unselect all
+	    // FIXME: need to separate treeview instructions here!
             gtk_icon_view_unselect_all(view->iconView());
             gtk_tree_model_foreach (view->treeModel(), selectMatch_, (void *)arg);
             GList *selection_list = gtk_icon_view_get_selected_items (view->iconView());
