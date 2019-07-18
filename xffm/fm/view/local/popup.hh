@@ -74,6 +74,7 @@ public:
     }  
 
     static GtkMenu *createLocalItemPopUp(void){
+	DBG("createLocalItemPopUp\n" );
         auto popup = new(Popup<Type>)(localMenuItems(), localMenuItemsKeys(), localMenuItemsIcons(), TRUE);
         localItemPopUp = popup->menu();
 
@@ -83,6 +84,7 @@ public:
         mItem = (GtkMenuItem *)g_object_get_data(G_OBJECT(localItemPopUp), "Open with");
         markup = g_strdup_printf("<b>%s</b>", _("Open with"));
         Gtk<Type>::menu_item_content(mItem, "system-run", markup, -24);
+	DBG("createLocalItemPopUp: %p\n" , localItemPopUp);
 
         return localItemPopUp;
     }
@@ -213,47 +215,41 @@ public:
 	return keyIcon;
     }
 
+private:
+    static void 
+	hideOrShow(GtkMenu*menu, const gchar *key, gboolean test, const gchar *path){
+        auto w = GTK_WIDGET(g_object_get_data(G_OBJECT(menu), key));
+        if (w) {
+	    if (test) gtk_widget_show(w);
+	    else gtk_widget_hide(w);
+	    gtk_widget_set_sensitive(w, test);
+	    Popup<Type>::setMenuItemData(localPopUp, "path", path);
+	}
+    }
 
+public:
     static void
-    resetLocalPopup(void) {
+    resetPopup(void) {
         auto view = (View<Type> *)g_object_get_data(G_OBJECT(localPopUp), "view");
+	gint listLength = view?g_list_length(view->selectionList()):0;
 
-        // Path is set on BaseSignals<Type>::setMenuData().
-        auto path = (const gchar *)g_object_get_data(G_OBJECT(localPopUp), "path");
-	TRACE("resetLocalPopup path=%s\n", path);
+        auto path =Popup<Type>::getMenuItemData(localPopUp, "path");
+	TRACE("local resetPopup path=%s\n", path);
         if (!path){
-	    DBG("local/popup.hh::resetLocalPopup: path is NULL, using view->path()\n");
-	    path = view->path();
-	    if (!path){
-		ERROR("local/popup.hh::resetLocalPopup: view->path is NULL\n");
-	        return;
-	    }
+	    ERROR("local/popup.hh::resetPopup: path is NULL\n");
+	    return;
 	}
         // unsensitivize "Paste" only if valid pasteboard...
-        auto w = GTK_WIDGET(g_object_get_data(G_OBJECT(localPopUp), "Paste"));
-        if (w) gtk_widget_set_sensitive(w, ClipBoard<Type>::clipBoardIsValid());
-        w = GTK_WIDGET(g_object_get_data(G_OBJECT(localPopUp), "Paste into"));
-        if (w) gtk_widget_set_sensitive(w, ClipBoard<Type>::clipBoardIsValid());
-        
-        w = GTK_WIDGET(g_object_get_data(G_OBJECT(localPopUp), "Copy"));
-        if (w) gtk_widget_set_sensitive(w, g_list_length(view->selectionList()) > 0);
-        w = GTK_WIDGET(g_object_get_data(G_OBJECT(localPopUp), "Cut"));
-        if (w) gtk_widget_set_sensitive(w, g_list_length(view->selectionList()) > 0);
-        w = GTK_WIDGET(g_object_get_data(G_OBJECT(localPopUp), "Delete"));
-        if (w) {
-	    if (g_list_length(view->selectionList()) > 0) gtk_widget_show(w);
-	    else gtk_widget_hide(w);
-	    gtk_widget_set_sensitive(w, g_list_length(view->selectionList()) > 0);
-	} else ERROR("local/popup.hh:: no widget for Delete\n");
+	hideOrShow(localPopUp, "Paste", ClipBoard<Type>::clipBoardIsValid(), path);
+	hideOrShow(localPopUp, "Paste into", ClipBoard<Type>::clipBoardIsValid(), path);
 
-        //w = GTK_WIDGET(g_object_get_data(G_OBJECT(localPopUp), "View as list"));
-        //gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(w), isTreeView);
+	hideOrShow(localPopUp, "Copy",listLength > 0, path);
+	hideOrShow(localPopUp, "Cut",listLength > 0, path);
+	hideOrShow(localPopUp, "Delete",listLength > 0, path);
 
-	Util<Type>::resetObjectData(G_OBJECT(localPopUp), "iconName", g_strdup("folder"));
-	Util<Type>::resetObjectData(G_OBJECT(localPopUp), "displayName", util_c::valid_utf_pathstring(path));
-	//Util<Type>::resetObjectData(G_OBJECT(localPopUp), "path", g_strdup(view->path()));
-	Util<Type>::resetObjectData(G_OBJECT(localPopUp), "mimetype", Mime<Type>::mimeType(path));
-	Util<Type>::resetObjectData(G_OBJECT(localPopUp), "fileInfo", util_c::fileInfo(path));
+	gchar *fileInfo = util_c::fileInfo(path);
+	gchar *displayName = util_c::valid_utf_pathstring(path);
+	gchar *mimetype = Mime<Type>::mimeType(path);
 	gchar *statLine;
 	if (g_file_test(path, G_FILE_TEST_EXISTS)) {
             struct stat st;
@@ -261,30 +257,43 @@ public:
             statLine  = Util<Type>::statInfo(&st);
         }
 	else statLine = g_strdup(strerror(ENOENT));
-	Util<Type>::resetObjectData(G_OBJECT(localPopUp), "statLine", statLine);
 
-        auto iconName = (gchar *)g_object_get_data(G_OBJECT(localPopUp), "iconName");
+	    Popup<Type>::setMenuItemData(localPopUp, "fileInfo", fileInfo);
+	    Popup<Type>::setMenuItemData(localPopUp, "iconName", "folder");
+	    Popup<Type>::setMenuItemData(localPopUp, "displayName", displayName);
+	    Popup<Type>::setMenuItemData(localPopUp, "mimetype", mimetype);
+	    Popup<Type>::setMenuItemData(localPopUp, "statLine", statLine);
+
+
+        //auto iconName = (gchar *)g_object_get_data(G_OBJECT(localPopUp), "iconName");
         //auto path = (gchar *)g_object_get_data(G_OBJECT(localPopUp), "path");
-        auto mimetype = (gchar *)g_object_get_data(G_OBJECT(localPopUp), "mimetype");
-        auto fileInfo = (gchar *)g_object_get_data(G_OBJECT(localPopUp), "fileInfo");
-        auto display_name = (gchar *)g_object_get_data(G_OBJECT(localPopUp), "displayName");
-	if (fileInfo && strchr(fileInfo, '&')) *(strchr(fileInfo, '&')) = '+';
+
+
+	if (fileInfo) {
+	    while (strchr(fileInfo, '&')){
+		*(strchr(fileInfo, '&')) = '+';
+	    }
+	}
         
         gchar *markup = g_strdup_printf("<span color=\"red\"><b><i>%s</i></b></span><span color=\"#aa0000\">%s%s</span>\n<span color=\"blue\">%s</span>\n<span color=\"green\">%s</span>", 
-		display_name, 
+		displayName, 
 		mimetype?": ":"",
 		mimetype?mimetype:"",
 		fileInfo?fileInfo:"", 
 		statLine?statLine:"");
 
 
-        Popup<Type>::changeTitle(localPopUp, markup, iconName);
+        Popup<Type>::changeTitle(localPopUp, markup, "folder");
 	g_free(markup);
-
+	g_free(fileInfo);
+	g_free(displayName);
+	g_free(mimetype);
+	g_free(statLine);
     }
 
     static void
     resetMenuItems(void) {
+	DBG("resetMenuItems\n" );
         auto view = (View<Type> *)g_object_get_data(G_OBJECT(localItemPopUp), "view");
 
         //  single or multiple item selected?
@@ -296,21 +305,15 @@ public:
             gtk_widget_hide(GTK_WIDGET(child->data));
         }
  
-        auto path =(const gchar *)g_object_get_data(G_OBJECT(localItemPopUp), "path");
+        auto path =Popup<Type>::getMenuItemData(localItemPopUp, "path");
 
-        auto display_name = (gchar *)g_object_get_data(G_OBJECT(localItemPopUp), "displayName");
-        auto mimetype =(const gchar *)g_object_get_data(G_OBJECT(localItemPopUp), "mimetype");
-        auto fileInfo =(const gchar *)g_object_get_data(G_OBJECT(localItemPopUp), "fileInfo");
-        auto iconName = (gchar *)g_object_get_data(G_OBJECT(localItemPopUp), "iconName");
-        // Set title element
-        gchar *statLine;
-        if (g_list_length(view->selectionList()) > 1) statLine = g_strdup("");
-        else {
-            struct stat st;
-            stat(path, &st);
-            statLine  = Util<Type>::statInfo(&st);
-        }
-	Util<Type>::resetObjectData(G_OBJECT(localItemPopUp), "statLine", statLine);
+        auto display_name = Popup<Type>::getMenuItemData(localItemPopUp,  "displayName");
+        auto mimetype =Popup<Type>::getMenuItemData(localItemPopUp,  "mimetype");
+        auto fileInfo =Popup<Type>::getMenuItemData(localItemPopUp,  "fileInfo");
+        auto iconName = Popup<Type>::getMenuItemData(localItemPopUp,  "iconName");
+        auto statLine = Popup<Type>::getMenuItemData(localItemPopUp,  "statLine");
+
+	
 	
         gchar *markup = g_strdup_printf("<span color=\"red\"><b><i>%s</i></b></span><span color=\"#aa0000\">%s%s</span>\n<span color=\"blue\">%s</span>\n<span color=\"green\">%s</span>", 
 		display_name, 
@@ -324,23 +327,14 @@ public:
         auto v2 = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "title"));
         gtk_widget_show(v2);
 	
-
+	gint listLength = g_list_length(view->selectionList());
 	for (auto k=commonItems; k && *k; k++){
-	    auto w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), *k));
-	    if (g_list_length(view->selectionList()) > 0) gtk_widget_show(w);
-            else gtk_widget_hide(w);
-	    gtk_widget_set_sensitive(w, g_list_length(view->selectionList()) > 0);
-	    //if (strcmp(*k, "Paste")==0) gtk_widget_set_sensitive(w, FALSE);
+	    hideOrShow(localItemPopUp, *k, listLength > 0, path);
 	}
 	for (auto k=singleSelectItems; k && *k; k++){
-	    auto w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), *k));
-	    if (g_list_length(view->selectionList()) == 1) gtk_widget_show(w);
-            else gtk_widget_hide(w);
-	    gtk_widget_set_sensitive(w, g_list_length(view->selectionList()) == 1);
-            //if (strcmp(*k, "Paste into")==0) gtk_widget_set_sensitive(w, FALSE);
-            
+	    hideOrShow(localItemPopUp, *k, listLength == 1, path);
 	}
-	if (g_list_length(view->selectionList())==1){
+	if (listLength==1){
 	    auto w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Extract files from the archive"));
 	    if (strstr(mimetype, "compressed-tar")) gtk_widget_show(w);
 	    else gtk_widget_hide(w);
@@ -349,7 +343,7 @@ public:
 	    else gtk_widget_hide(w);
 	}
 
-	if (g_list_length(view->selectionList()) == 1){
+	if (listLength == 1){
 	    runWithDialog(path); // ask for arguments for an executable path.
 	    // open with mimetype application
 	    setUpMimeTypeApp(mimetype, path, fileInfo);
@@ -366,6 +360,7 @@ public:
     }
 
     static GtkMenu *popUpItem(void){
+	DBG("popUpItem\n" );
         if (!localItemPopUp) localItemPopUp = createLocalItemPopUp();   
         return localItemPopUp;
     }
@@ -509,11 +504,19 @@ private:
 #endif
     }
 
+    
+private:
+
     static void 
     setPath(View<Type> * view){
+	if (!view) {
+	    ERROR("local/popup: setPath() view is %p\n", view);
+	    return;
+	}
 
+	gint listLength = g_list_length(view->selectionList());
         GtkTreeIter iter;
-        if (g_list_length(view->selectionList()) > 1) {
+        if (listLength > 1) {
             gchar *paths = g_strdup("");
             for (GList *l = view->selectionList(); l && l->data; l=l->next){
                 if (!gtk_tree_model_get_iter (view->treeModel(), &iter, (GtkTreePath *)l->data)){
@@ -527,12 +530,15 @@ private:
                 paths = g;
             }
             gchar *fileInfo = g_strdup_printf("%s %d", _("Files:"), g_list_length(view->selectionList()));
-	    Util<Type>::resetObjectData(G_OBJECT(localItemPopUp), "fileInfo", fileInfo);
-	    Util<Type>::resetObjectData(G_OBJECT(localItemPopUp), "iconName", g_strdup("edit-copy"));
-	    Util<Type>::resetObjectData(G_OBJECT(localItemPopUp), "displayName", g_strdup(_("Multiple selections")));
-	    Util<Type>::resetObjectData(G_OBJECT(localItemPopUp), "path", paths);
-	    Util<Type>::resetObjectData(G_OBJECT(localItemPopUp), "mimetype", g_strdup(""));
-	    Util<Type>::resetObjectData(G_OBJECT(localItemPopUp), "statLine", g_strdup(""));
+	    Popup<Type>::setMenuItemData(localItemPopUp, "fileInfo", fileInfo);
+	    Popup<Type>::setMenuItemData(localItemPopUp, "iconName", "edit-copy");
+	    Popup<Type>::setMenuItemData(localItemPopUp, "displayName", _("Multiple selections"));
+	    Popup<Type>::setMenuItemData(localItemPopUp, "path", paths);
+	    Popup<Type>::setMenuItemData(localItemPopUp, "mimetype", "");
+	    Popup<Type>::setMenuItemData(localItemPopUp, "statLine", "");
+	    g_free(fileInfo);
+	    g_free(paths);
+
             return;
         }
 
@@ -552,24 +558,34 @@ private:
                 PATH, &path, 
                 -1);
         if (!mimetype){
-            auto m = Mime<Type>::mimeType(path); 
-            mimetype = g_strdup(m); 
+            auto mimetype = g_strdup(Mime<Type>::mimeType(path)); 
             gtk_list_store_set(GTK_LIST_STORE(view->treeModel()), &iter, 
                 MIMETYPE, mimetype, -1);
         }
+        // Set title element
+        gchar *statLine;
+        if (g_list_length(view->selectionList()) > 1) statLine = g_strdup("");
+        else {
+            struct stat st;
+	    if (stat(path, &st)<0){
+		statLine = g_strdup_printf("stat(%s): %s", path, strerror(errno));
+		errno=0;
+	    } else statLine  = Util<Type>::statInfo(&st);
+        }
 
 	gchar *fileInfo = util_c::fileInfo(path);
-        g_object_set_data(G_OBJECT(localItemPopUp), "fileInfo", fileInfo);
-        g_object_set_data(G_OBJECT(localItemPopUp), "iconName", iconName);
-        g_object_set_data(G_OBJECT(localItemPopUp), "displayName", displayName);
-        g_object_set_data(G_OBJECT(localItemPopUp), "path", path);
-        g_object_set_data(G_OBJECT(localItemPopUp), "mimetype", mimetype);
-	struct stat st;
-	errno=0;
-        if (stat(path, &st)<0){
-            ERROR("local/popup.hh::resetMenuItems(): cannot stat %s (expect problems) %s\n", path, strerror(errno));
-	    errno=0;
-        }
+	    Popup<Type>::setMenuItemData(localItemPopUp, "fileInfo", fileInfo);
+	    Popup<Type>::setMenuItemData(localItemPopUp, "iconName", iconName);
+	    Popup<Type>::setMenuItemData(localItemPopUp, "displayName", displayName);
+	    Popup<Type>::setMenuItemData(localItemPopUp, "path", path);
+	    Popup<Type>::setMenuItemData(localItemPopUp, "mimetype", mimetype);
+	    Popup<Type>::setMenuItemData(localItemPopUp, "statLine", statLine);
+	    g_free(fileInfo);
+	    g_free(iconName);
+	    g_free(displayName);
+	    g_free(path);
+	    g_free(mimetype);
+	    g_free(statLine);
        return;
     }
 

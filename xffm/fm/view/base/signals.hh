@@ -501,7 +501,6 @@ public:
 	auto view = (View<Type> *)data;
         TRACE("Base::signals::button press event: button 3 should do popup, as well as longpress...\n");
         gboolean retval = FALSE;
-        GtkMenu *menu = NULL;
         gchar *path = NULL;
         GList *selectionList;
 	if (isTreeView) {
@@ -520,63 +519,157 @@ public:
             gtk_tree_model_get(view->treeModel(), &iter, PATH, &path, -1);
             TRACE("Base::signals::selected path is %s\n", path);
 	}
+	if (!path) path = g_strdup(view->path());
 
-        gboolean items = (g_list_length(selectionList) >0);
-        setMenuData(view, path, items);
+        auto items = (g_list_length(selectionList) >0);
+        auto menu = configureMenu(view, items);
+	DBG("menu is %p\n", menu);
+        g_object_set_data(G_OBJECT(menu),"view", (void *)view);
+	DBG("g_object_set_data %p->%p\n", menu, view);
+	Popup<Type>::setMenuItemData(menu, "path", path);
 	g_free(path);
-        menu = configureMenu(view, items);
-        if (menu) {
-            gtk_menu_popup_at_pointer (menu, (const GdkEvent *)event);
-        }   
+
+	gtk_menu_popup_at_pointer (menu, (const GdkEvent *)event);
         return retval;
     }
     
 public:
+    
+    static GtkMenu *
+    configureMenu(View<Type> *view, gboolean items){
+	DBG("configureMenu\n" );
+	GtkMenu *menu;
+	if (items) {
+	    menu = getItemsMenu(view);
+	    configureItemsMenu(view->viewType());
+	} else {
+	    menu =  getViewMenu(view);
+	    configureViewMenu(view->viewType());
+	}
 
-    static void
-    setMenuData(View<Type> * view, const gchar *path, gboolean  items){
-        GtkMenu *menu = NULL;
-        switch (view->viewType()){
+	return menu;
+    }
+ 
+    static GtkMenu *
+    getItemsMenu(View<Type> *view){
+	gint viewType = view->viewType();
+	DBG("getItemsMenu\n" );
+	GtkMenu *menu;
+        switch (viewType){
             case (ROOTVIEW_TYPE):
-                 menu = (items)?
-                    RootPopUp<Type>::popUpItem():
-                    RootPopUp<Type>::popUp();
+		    menu = RootPopUp<Type>::popUpItem(); 
                 break;
             case (LOCALVIEW_TYPE):
-                menu = (items)?
-                    LocalPopUp<Type>::popUpItem():
-                    LocalPopUp<Type>::popUp();
+		    menu = LocalPopUp<Type>::popUpItem();
                 break;
 #ifdef ENABLE_FSTAB_MODULE
             case (FSTAB_TYPE):
-                 menu = (items)?
-                    FstabPopUp<Type>::popUpItem():
-                    FstabPopUp<Type>::popUp();
+		    menu =  FstabPopUp<Type>::popUpItem();
                 break;
 #endif
 #ifdef ENABLE_PKG_MODULE
             case (PKG_TYPE):
-                 menu = (items)?
-                    PkgPopUp<Type>::popUpItem():
-                    PkgPopUp<Type>::popUp();
+		    menu =  PkgPopUp<Type>::popUpItem(); 
                 break;
 #endif
             default:
-                ERROR("fm/base/signals.hh::ViewType %d not defined.\n", view->viewType());
+                ERROR("fm/base/signals.hh::ViewType %d not defined.\n", viewType);
+		menu = RootPopUp<Type>::popUp(); 
                 break;
         }
-        if (menu) {
-           auto oldPath = (gchar *)g_object_get_data(G_OBJECT(menu),"path");
-            g_free(oldPath);
-            TRACE("*** set menu data path=%s\n", path);
-            g_object_set_data(G_OBJECT(menu),"path", g_strdup(path));
-            g_object_set_data(G_OBJECT(menu),"view", (void *)view);
-        }
+	DBG("menu = %p\n", menu);
+	g_object_set_data(G_OBJECT(menu),"view", view);
+        return menu;
     }
-    
-    
+
+    static void
+    configureItemsMenu(gint viewType){
+	DBG("configureItemsMenu\n" );
+	GtkMenu *menu;
+        switch (viewType){
+            case (ROOTVIEW_TYPE):
+                    RootPopUp<Type>::resetMenuItems();
+                break;
+            case (LOCALVIEW_TYPE):
+                    LocalPopUp<Type>::resetMenuItems();
+                break;
+#ifdef ENABLE_FSTAB_MODULE
+            case (FSTAB_TYPE):
+                    FstabPopUp<Type>::resetMenuItems();
+                break;
+#endif
+#ifdef ENABLE_PKG_MODULE
+            case (PKG_TYPE):
+                    PkgPopUp<Type>::resetMenuItems();
+                break;
+#endif
+            default:
+                ERROR("fm/base/signals.hh::ViewType %d not defined.\n", viewType);
+                break;
+        }
+        return;
+    }
+
     static GtkMenu *
-    configureMenu(View<Type> * view, gboolean items){
+    getViewMenu(View<Type> *view){
+	gint viewType = view->viewType();
+	DBG("getViewMenu\n" );
+	GtkMenu *menu;
+        switch (viewType){
+            case (ROOTVIEW_TYPE):
+		    menu = RootPopUp<Type>::popUp();
+                break;
+            case (LOCALVIEW_TYPE):
+		    menu = LocalPopUp<Type>::popUp();
+                break;
+#ifdef ENABLE_FSTAB_MODULE
+            case (FSTAB_TYPE):
+		    menu = FstabPopUp<Type>::popUp();
+                break;
+#endif
+#ifdef ENABLE_PKG_MODULE
+            case (PKG_TYPE):
+		    menu = PkgPopUp<Type>::popUp();
+                break;
+#endif
+            default:
+		menu = RootPopUp<Type>::popUp(); 
+                ERROR("fm/base/signals.hh::ViewType %d not defined.\n", viewType);
+                break;
+        }
+	g_object_set_data(G_OBJECT(menu),"view", view);
+        return menu;
+    }
+    static void
+    configureViewMenu(gint viewType){
+	DBG("configureViewMenu\n" );
+	GtkMenu *menu;
+        switch (viewType){
+            case (ROOTVIEW_TYPE):
+                    RootPopUp<Type>::resetPopup();
+                break;
+            case (LOCALVIEW_TYPE):
+                    LocalPopUp<Type>::resetPopup();
+                break;
+#ifdef ENABLE_FSTAB_MODULE
+            case (FSTAB_TYPE):
+                    FstabPopUp<Type>::resetPopup();
+                break;
+#endif
+#ifdef ENABLE_PKG_MODULE
+            case (PKG_TYPE):
+                    PkgPopUp<Type>::resetPopup();
+                break;
+#endif
+            default:
+                ERROR("fm/base/signals.hh::ViewType %d not defined.\n", viewType);
+                break;
+        }
+        return ;
+    }
+/*    
+    static GtkMenu *
+    configureMenu(gint viewType, gboolean items){
         GtkMenu *menu = NULL;
         switch (view->viewType()){
             case (ROOTVIEW_TYPE):
@@ -629,7 +722,7 @@ public:
         }
         return menu;
     }
-
+*/
 
     static gboolean
     unhighlight (gpointer key, gpointer value, gpointer data){

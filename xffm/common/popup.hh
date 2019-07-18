@@ -10,6 +10,7 @@ public:
         menu_ = createMenu(item);
         decorateItems(menu_, key, keyIcon, small);
         g_object_set_data(G_OBJECT(menu_), "popup", this);
+	DBG("Popup constructed\n" );
     }
 
     GtkMenu *menu(void){ return menu_;}
@@ -65,14 +66,32 @@ public:
         if (popup) popup->changeTitle(text);
     }
     
-    static void changeTitle(GtkMenu *menu, const gchar *text, gchar *iconName){
+    static void changeTitle(GtkMenu *menu, const gchar *text,const gchar *iconName){
         auto popup = (Popup<Type> *)g_object_get_data(G_OBJECT(menu), "popup");
         if (popup) popup->changeTitle(text, iconName);
+    }
+public:
+
+    static const gchar *
+    setMenuItemData(GtkMenu *menu, const gchar *key, const gchar *data){
+	if (!menu) ERROR("base signals: setMenuItemData() menu is null\n");
+	g_free(g_object_get_data(G_OBJECT(menu), key));
+        g_object_set_data(G_OBJECT(menu), key, g_strdup(data));
+	return data;
+    }
+
+    static const gchar *
+    getMenuItemData(GtkMenu *menu, const gchar *key){
+	if (!menu) ERROR("base signals: getMenuItemData() menu is null\n");
+        auto data =(const gchar *)g_object_get_data(G_OBJECT(menu), key);
+	if (!data) ERROR("base signals: getMenuItemData() data %s is null\n", key);
+	return data;
     }
  
 private:
     static GtkMenu *
     createMenu(menuItem_t *item){
+	DBG("createMenu\n" );
         auto menu = GTK_MENU(gtk_menu_new());
 	// Create title element
 	GtkWidget *title = Gtk<Type>::menu_item_new(NULL, ""); 
@@ -105,6 +124,7 @@ private:
 
     static void
     decorateItems(GtkMenu *menu, const gchar *key[], const gchar *keyIcon[], gboolean small){
+	DBG("decorateItems, menu = %p\n", menu );
         if (!key || !keyIcon) return;
         gint i=0;
         for (auto k=key; k && key[i] && keyIcon[i]; k++, i++){

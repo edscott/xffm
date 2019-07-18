@@ -341,6 +341,7 @@ private:
         if (event->button == 1) {
 	    pathbar_p->pathbar_ok(eventBox);
 	}
+#if 0
         if (event->button == 3) {
 	    auto view = pathbar_p->pathbarView();
 	    const gchar *path = pathbar_p->getClickPath(eventBox);
@@ -363,6 +364,7 @@ private:
 		gtk_menu_popup_at_pointer (menu, (const GdkEvent *)event);
 	    }  	
 	}
+#endif
         return FALSE;
 
     }
