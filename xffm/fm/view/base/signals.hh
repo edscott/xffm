@@ -526,7 +526,7 @@ public:
 	DBG("menu is %p\n", menu);
         g_object_set_data(G_OBJECT(menu),"view", (void *)view);
 	DBG("g_object_set_data %p->%p\n", menu, view);
-	Popup<Type>::setMenuItemData(menu, "path", path);
+	Popup<Type>::setWidgetData(menu, "path", path);
 	g_free(path);
 
 	gtk_menu_popup_at_pointer (menu, (const GdkEvent *)event);
@@ -541,9 +541,11 @@ public:
 	GtkMenu *menu;
 	if (items) {
 	    menu = getItemsMenu(view);
+	    Popup<Type>::setWidgetData(menu, "path", view->path());
 	    configureItemsMenu(view->viewType());
 	} else {
 	    menu =  getViewMenu(view);
+	    Popup<Type>::setWidgetData(menu, "path", view->path());
 	    configureViewMenu(view->viewType());
 	}
 
@@ -643,7 +645,6 @@ public:
     static void
     configureViewMenu(gint viewType){
 	DBG("configureViewMenu\n" );
-	GtkMenu *menu;
         switch (viewType){
             case (ROOTVIEW_TYPE):
                     RootPopUp<Type>::resetPopup();

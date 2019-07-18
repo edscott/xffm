@@ -72,22 +72,31 @@ public:
     }
 public:
 
+
     static const gchar *
-    setMenuItemData(GtkMenu *menu, const gchar *key, const gchar *data){
-	if (!menu) ERROR("base signals: setMenuItemData() menu is null\n");
-	g_free(g_object_get_data(G_OBJECT(menu), key));
-        g_object_set_data(G_OBJECT(menu), key, g_strdup(data));
+    setWidgetData(GtkWidget *w, const gchar *key, const gchar *data){
+	if (!w) ERROR("base signals: setMenuItemData() menu is null\n");
+	g_free(g_object_get_data(G_OBJECT(w), key));
+        g_object_set_data(G_OBJECT(w), key, g_strdup(data));
 	return data;
     }
 
     static const gchar *
-    getMenuItemData(GtkMenu *menu, const gchar *key){
-	if (!menu) ERROR("base signals: getMenuItemData() menu is null\n");
-        auto data =(const gchar *)g_object_get_data(G_OBJECT(menu), key);
-	if (!data) ERROR("base signals: getMenuItemData() data %s is null\n", key);
+    setWidgetData(GtkMenu *w, const gchar *key, const gchar *data){
+	return setWidgetData(GTK_WIDGET(w), key, data);
+    }
+
+    static const gchar *
+    getWidgetData(GtkWidget *w, const gchar *key){
+	if (!w) ERROR("base signals: getWidgetData() menu is null\n");
+        auto data =(const gchar *)g_object_get_data(G_OBJECT(w), key);
+	if (!data) ERROR("base signals: getWidgetData() data %s is null\n", key);
 	return data;
     }
- 
+    static const gchar *
+    getWidgetData(GtkMenu *w, const gchar *key){
+	return getWidgetData(GTK_WIDGET(w), key);
+    }
 private:
     static GtkMenu *
     createMenu(menuItem_t *item){
