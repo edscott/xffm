@@ -742,9 +742,21 @@ private:
             };
             // unselect all
 	    // FIXME: need to separate treeview instructions here!
-            gtk_icon_view_unselect_all(view->iconView());
+            if (isTreeView){
+		auto selection = gtk_tree_view_get_selection (view->treeView());
+		gtk_tree_selection_unselect_all (selection);
+	    } else {
+		gtk_icon_view_unselect_all(view->iconView());
+	    }
             gtk_tree_model_foreach (view->treeModel(), selectMatch_, (void *)arg);
-            GList *selection_list = gtk_icon_view_get_selected_items (view->iconView());
+            GList *selection_list;
+            if (isTreeView){
+		auto selection = gtk_tree_view_get_selection (view->treeView());
+		auto treeModel = view->treeModel();
+		selection_list = gtk_tree_selection_get_selected_rows (selection, &treeModel);
+	    } else {
+		selection_list = gtk_icon_view_get_selected_items (view->iconView());
+	    }
             view->setSelectionList(selection_list);
             if (!selection_list) {
                 gchar *markup = g_strdup_printf("<span size=\"larger\" color=\"blue\">%s\n<span color=\"red\">%s</span></span>\n", _("No selection"),_("No matches."));
