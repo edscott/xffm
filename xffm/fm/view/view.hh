@@ -243,6 +243,7 @@ public:
   
     void 
     highlight(gdouble X, gdouble Y){
+	if (isTreeView) return;
 	GdkPixbuf *pixbuf;
         GtkTreeIter iter;
 	TRACE("highlight X,Y=%lf,%lf\n", X,Y);

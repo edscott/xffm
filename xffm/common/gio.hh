@@ -213,13 +213,15 @@ private:
     backup(const gchar *path, const gchar *target){
         auto base = g_path_get_basename(path);
         auto srcTarget = g_strconcat(target, G_DIR_SEPARATOR_S, base, NULL);
-        auto backup = g_strconcat(srcTarget, "~", NULL);
-        const gchar *arg[] = { "mv", "-f", srcTarget, backup, NULL };
-        TRACE("backup: %s -> %s\n", srcTarget, backup); 
-        fore(arg);
-        g_free(base);
-        g_free(srcTarget);
-        g_free(backup);
+	g_free(base);
+	if (g_file_test(srcTarget, G_FILE_TEST_EXISTS)){
+	    auto backup = g_strconcat(srcTarget, "~", NULL);
+	    const gchar *arg[] = { "mv", "-f", srcTarget, backup, NULL };
+	    TRACE("backup: %s -> %s\n", srcTarget, backup); 
+	    fore(arg);
+	    g_free(backup);
+	}
+	g_free(srcTarget);
     }
 
     static void 
