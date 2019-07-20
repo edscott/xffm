@@ -1,5 +1,4 @@
 For 0.91
-2. add open in new tab for pathbar popup
 5. bug... double click on inode/regular does not do combo for edit, even though popup will show gvim
 
 bug treeview: no dnd accept for drop into specific folders

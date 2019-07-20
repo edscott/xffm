@@ -92,6 +92,7 @@ public:
     static menuItem_t *menuItems(void){
          static menuItem_t item[]={
 	    {N_("New"), (void *)newItem, NULL, NULL},
+	    {N_("Open in New Tab"), (void *)newTab, NULL, NULL},
             // deprecated {N_("Open in New Tab"), NULL, NULL, NULL},
             // deprecated {N_("Open in New Window"), NULL, NULL, NULL},
             
@@ -113,6 +114,7 @@ public:
     static const gchar **menuKeys(void){
         static const gchar *key[]={
             "New",// this menuitem is only for nonitem popup
+            "Open in New Tab",
             "Cut",
             "Copy",
             "Paste into",
@@ -125,6 +127,7 @@ public:
     static const gchar **menuIcons(void){
         static const gchar *keyIcon[]={
             "document-new",
+            "tab-new-symbolic",
             "edit-cut",
             "edit-copy",
             "edit-paste",
@@ -263,6 +266,7 @@ public:
 	auto validView = g_object_get_data(G_OBJECT(localPopUp),"view")!=NULL;
 
 	configureMenuItem(localPopUp, "New", validView, path);
+	configureMenuItem(localPopUp, "Open in New Tab", TRUE, path);
 	configureMenuItem(localPopUp, "Select All", validView, path);
 	configureMenuItem(localPopUp, "Match regular expression",validView, path);
 
@@ -848,11 +852,17 @@ public:
     static void
     newTab(GtkMenuItem *menuItem, gpointer data)
     {
-	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
+        auto dialog = (Dialog<Type> *)g_object_get_data(G_OBJECT(mainWindow), "dialog");
+	auto view =  (View<Type> *)g_object_get_data(G_OBJECT(menuItem), "view");
+	auto path = (const gchar *)g_object_get_data(G_OBJECT(menuItem), "path");
+
+        dialog->addPage(path);
+
+/*	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
 	auto view =  (View<Type> *)g_object_get_data(G_OBJECT(data), "view");
 	auto page = view->page();
         auto dialog = (Dialog<Type> *)page->parent();
-        dialog->addPage(path);
+        dialog->addPage(path);*/
     }
 
     static void

@@ -24,6 +24,7 @@ public:
         page->setDefaultIconview(TRUE);
 	page->showIconview(1);
         startDeviceMonitor();
+	g_object_set_data(G_OBJECT(mainWindow), "dialog",this);
     }
 
  /*   Dialog(const gchar *title, const gchar *icon){
