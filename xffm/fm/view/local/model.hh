@@ -313,7 +313,7 @@ public:
 	}
         // on asyncronous nfs connections, d_type may resolve to inode/unknown 
 	if (strcmp(mimetype,"inode/regular")==0 || strcmp(mimetype,"inode/unknown")==0){
-	    auto type = Mime<Type>::extensionMimeType(xd_p->path);
+	    auto type = MimeSuffix<Type>::mimeType(xd_p->path);
 	    if (type) {
 		g_free(mimetype);
 		mimetype = type;

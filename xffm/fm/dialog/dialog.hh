@@ -18,7 +18,7 @@ class Dialog :public Notebook<Type> {
 public:
     Dialog(const gchar *path){
 	init(path);
-        Mime<Type>::mimeBuildHashes();
+        //Mime<Type>::mimeBuildHashes();
         auto page = this->currentPageObject();
 	// Default into iconview...
         page->setDefaultIconview(TRUE);

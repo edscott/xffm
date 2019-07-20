@@ -1,4 +1,5 @@
 For 0.91
+update  MimeSuffix
 1. bug. empty trash bin not showing in xffm:root popup for trash item.
 2. bug. icon wrong for TODO, after monitor does the update
 2. bug. mimetype also may be wrong for TODO, after monitor does the update
