@@ -1,5 +1,5 @@
 For 0.91
-
+2. add open in new tab for pathbar popup
 3. dnd treeview bug
 5. bug... double click on inode/regular does not do combo for edit, even though popup will show gvim
 6. mv should got g_file_test exist before trying to create backup file

@@ -72,7 +72,6 @@ public:
             ERROR("fm/base/signals.hh::motion_notify_event: data cannot be NULL\n");
             return FALSE;
         }
-	TRACE("motion_notify_event, dragmode= %d\n", view->dragMode());
 
         if (buttonPressX >= 0 && buttonPressY >= 0){
 	    TRACE("buttonPressX >= 0 && buttonPressY >= 0\n");
@@ -915,16 +914,25 @@ public:
         gtk_widget_hide(GTK_WIDGET(xf::popupImage));
 
         GtkTreePath *tpath;
+
                                         
         gint actions = gdk_drag_context_get_actions(dc);
-        if(actions == GDK_ACTION_MOVE)
+	TRACE("motion_notify_event, dragmode= %d\n", actions);
+	const gchar *dragIcon = "text-x-generic/SE/edit-redo/4.0/220";
+	
+        if(actions == GDK_ACTION_MOVE){
             gdk_drag_status (dc, GDK_ACTION_MOVE, t);
-        else if(actions == GDK_ACTION_COPY)
+	} else if(actions == GDK_ACTION_COPY){
             gdk_drag_status (dc, GDK_ACTION_COPY, t);
-        else if(actions == GDK_ACTION_LINK)
+	    dragIcon = "edit-copy/SE/list-add/4.0/220";
+	} else if(actions == GDK_ACTION_LINK){
             gdk_drag_status (dc, GDK_ACTION_LINK, t);
-        else
+	    dragIcon = "edit-copy/SE/emblem-symbolic-link/4.0/220";
+	}else{
             gdk_drag_status (dc, GDK_ACTION_MOVE, t);
+	}
+	GdkPixbuf *pixbuf = Pixbuf<Type>::get_pixbuf(dragIcon, -24);
+	gtk_drag_set_icon_pixbuf (context, pixbuf,1,1);
             
        // Treeview or iconview?
         gboolean folderDND = isTreeView?
@@ -934,6 +942,7 @@ public:
                                         drag_x, drag_y,
                                         &tpath,
                                         NULL);
+	if (!folderDND) return FALSE;
 	GtkTreeIter iter;
 	gtk_tree_model_get_iter (view->treeModel(), &iter, tpath);
 	gchar *g;
@@ -941,13 +950,13 @@ public:
 	// drop into?
 	// must be a directory (XXX this is quite local stuff...)
 	if (g_file_test(g, G_FILE_TEST_IS_DIR)){
-	    DBG("%s is directory\n", g);
+	    TRACE("%s is directory\n", g);
 	    highlight(tpath, view);
 	} else {
 	    highlight(NULL, view);
 	}
 	g_free(g);
-	gtk_tree_path_free(tpath);
+	if(isTreeView) gtk_tree_path_free(tpath);
 	    
 
         return FALSE;
