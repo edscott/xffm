@@ -1,8 +1,6 @@
 For 0.91
 5. bug... double click on inode/regular does not do combo for edit, even though popup will show gvim
 
-bug treeview: no dnd accept for drop into specific folders
-bug: freebsd, copy move link emblem not showing on dnd icon
  
  > printout optional and required libraries found in configure step.
   * enable sort modes by date, up/down
