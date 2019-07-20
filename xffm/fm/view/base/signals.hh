@@ -775,10 +775,9 @@ public:
     // DnD highlight only:
     static void
     highlight(GtkTreePath *tpath, gpointer data){
-        if (isTreeView) return;
         GtkTreeIter iter;
 	auto baseModel = (BaseModel<Type> *)data;
-        if (baseModel->items() > 260){ 
+        if (!isTreeView && baseModel->items() > 260){ 
             gtk_icon_view_set_drag_dest_item(baseModel->iconView(), NULL, GTK_ICON_VIEW_DROP_INTO);
             if (tpath == NULL) {
                 return;
@@ -794,27 +793,31 @@ public:
                     gtk_icon_view_set_drag_dest_item(baseModel->iconView(), tpath, GTK_ICON_VIEW_NO_DROP);
                 }
             }
-
+            gtk_tree_path_free (tpath);
             return; 
         }     
         gchar *tree_path_string = NULL;
-        
+	if (isTreeView) {
+	    gtk_tree_view_set_drag_dest_row (baseModel->treeView(),
+                                 tpath,GTK_TREE_VIEW_DROP_INTO_OR_AFTER);
+	}
         if (tpath == NULL){
+	    //static gint count=0;
             // No item at position?
             // Do we need to clear hash table?
-            TRACE("highlight clear_highlights\n");
+            //DBG("highlight clear_highlights %d\n", count++);
             clear_highlights(data);
             return;
         }
         gtk_tree_model_get_iter (baseModel->treeModel(), &iter, tpath);
 
-
         // Already highlighted?
         tree_path_string = gtk_tree_path_to_string (tpath);
+	// no more use for tpath...
+        gtk_tree_path_free (tpath);
 	if (g_hash_table_lookup(highlight_hash, tree_path_string)) {
             //TRACE("%s already in hash\n", tree_path_string);
             g_free (tree_path_string);
-            gtk_tree_path_free (tpath);
             return;
         }
         TRACE("highlight \n");
@@ -909,6 +912,7 @@ public:
     DragMotion (GtkWidget * widget, 
             GdkDragContext * dc, gint drag_x, gint drag_y, 
             guint t, gpointer data) {
+	static gboolean highlighted = FALSE;
 	auto view = (View<Type> *)data;
         TRACE("signal_drag_motion\n");
         gtk_widget_hide(GTK_WIDGET(xf::popupImage));
@@ -931,18 +935,27 @@ public:
 	}else{
             gdk_drag_status (dc, GDK_ACTION_MOVE, t);
 	}
+#ifdef FREEBSD_FOUND
 	GdkPixbuf *pixbuf = Pixbuf<Type>::get_pixbuf(dragIcon, -24);
 	gtk_drag_set_icon_pixbuf (context, pixbuf,1,1);
+#endif
             
        // Treeview or iconview?
         gboolean folderDND = isTreeView?
 	    gtk_tree_view_get_path_at_pos (view->treeView(),
-                               drag_x, drag_y, &tpath, NULL, NULL, NULL):
+                               drag_x, (drag_y-24 >0)?drag_y-24:0, 
+			       &tpath, NULL, NULL, NULL):
 	    gtk_icon_view_get_dest_item_at_pos (view->iconView(),
                                         drag_x, drag_y,
                                         &tpath,
                                         NULL);
-	if (!folderDND) return FALSE;
+	if (!folderDND) {
+	    if (highlighted) {
+		highlighted=FALSE;
+		highlight(NULL, view);
+	    }
+	    return FALSE;
+	}
 	GtkTreeIter iter;
 	gtk_tree_model_get_iter (view->treeModel(), &iter, tpath);
 	gchar *g;
@@ -952,11 +965,13 @@ public:
 	if (g_file_test(g, G_FILE_TEST_IS_DIR)){
 	    TRACE("%s is directory\n", g);
 	    highlight(tpath, view);
-	} else {
+	    highlighted=TRUE;
+	} else if (highlighted) {
+	    highlighted=FALSE;
 	    highlight(NULL, view);
 	}
 	g_free(g);
-	if(isTreeView) gtk_tree_path_free(tpath);
+	// tree path reference is handled in highlight function...
 	    
 
         return FALSE;
@@ -1065,14 +1080,25 @@ public:
 
         gchar *target = NULL;
         GtkTreePath *tpath=NULL;
+        GtkTreeIter iter;
         if (isTreeView) {
-            // Simple drop for now since xy coordinates differ from treeview coordinates...
-            target = g_strdup(view->path());
+            // hacked for xy coordinates differ from treeview coordinates...
+	    gtk_tree_view_get_path_at_pos (view->treeView(),
+                               x, (y-24 >0)?y-24:0, 
+			       &tpath, NULL, NULL, NULL);
+            gtk_tree_model_get_iter (view->treeModel(), &iter, tpath);
+	    gtk_tree_model_get (view->treeModel(), &iter, PATH, &target, -1);
+	    if (g_file_test(target, G_FILE_TEST_IS_DIR)){
+		gtk_tree_view_set_drag_dest_row (view->treeView(),
+                                 tpath,GTK_TREE_VIEW_DROP_INTO_OR_AFTER);
+	    } else {
+		g_free(target);
+		target = g_strdup(view->path());
+	    }
         } else {
             if (gtk_icon_view_get_item_at_pos (view->iconView(),
                                        x, y, &tpath, NULL))
             {
-                GtkTreeIter iter;
                 gtk_tree_model_get_iter (view->treeModel(), &iter, tpath);
                 gtk_tree_model_get (view->treeModel(), &iter, PATH, &target, -1);	
                 TRACE("target1=%s\n", target);
