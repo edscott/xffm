@@ -927,29 +927,29 @@ public:
             gdk_drag_status (dc, GDK_ACTION_MOVE, t);
             
        // Treeview or iconview?
-        if (isTreeView) return FALSE;
-        
-        GtkIconViewDropPosition pos;
-        if (gtk_icon_view_get_dest_item_at_pos (view->iconView(),
+        gboolean folderDND = isTreeView?
+	    gtk_tree_view_get_path_at_pos (view->treeView(),
+                               drag_x, drag_y, &tpath, NULL, NULL, NULL):
+	    gtk_icon_view_get_dest_item_at_pos (view->iconView(),
                                         drag_x, drag_y,
                                         &tpath,
-                                        &pos)){
-            GtkTreeIter iter;
-            gtk_tree_model_get_iter (view->treeModel(), &iter, tpath);
-            gchar *g;
-            gtk_tree_model_get (view->treeModel(), &iter, PATH, &g, -1);
-            // drop into?
-            // must be a directory (XXX this is quite local stuff...)
-            if (g_file_test(g, G_FILE_TEST_IS_DIR)){
-                highlight(tpath, view);
-            } else {
-                highlight(NULL, view);
-            }
-	    g_free(g);
-        } else {
-            highlight(NULL, view);
-            highlight(NULL, view);
-        }
+                                        NULL);
+	GtkTreeIter iter;
+	gtk_tree_model_get_iter (view->treeModel(), &iter, tpath);
+	gchar *g;
+	gtk_tree_model_get (view->treeModel(), &iter, PATH, &g, -1);
+	// drop into?
+	// must be a directory (XXX this is quite local stuff...)
+	if (g_file_test(g, G_FILE_TEST_IS_DIR)){
+	    DBG("%s is directory\n", g);
+	    highlight(tpath, view);
+	} else {
+	    highlight(NULL, view);
+	}
+	g_free(g);
+	gtk_tree_path_free(tpath);
+	    
+
         return FALSE;
     }
 
@@ -1010,17 +1010,17 @@ public:
             selectionList = gtk_icon_view_get_selected_items (view->iconView());
         }
         view->setSelectionList(selectionList);
-        if (g_list_length(selectionList) > 1) {
-            GdkPixbuf *pixbuf = Pixbuf<Type>::get_pixbuf("edit-copy", -48);
-            gtk_drag_set_icon_pixbuf (context, pixbuf,10,10);
+        /*if (g_list_length(selectionList) > 1) {
+            GdkPixbuf *pixbuf = Pixbuf<Type>::get_pixbuf("edit-copy", isTreeView?-16:-48);
+            gtk_drag_set_icon_pixbuf (context, pixbuf,1,1);
         } else {
             auto tpath = (GtkTreePath *)selectionList->data;
             GtkTreeIter iter;
             GdkPixbuf *pixbuf;
             gtk_tree_model_get_iter (view->treeModel(), &iter, tpath);
             gtk_tree_model_get (view->treeModel(), &iter, NORMAL_PIXBUF, &pixbuf, -1);
-            gtk_drag_set_icon_pixbuf (context, pixbuf,10,10);
-        }
+            gtk_drag_set_icon_pixbuf (context, pixbuf,1,1);
+        }*/
     }
 //receiver:
 
