@@ -97,7 +97,7 @@ private:
                     TRACE("path is null at pathbar.hh::pathbar_ok\n");
 		    break;
                 }
-		DBG("getClickPath(): %s\n", path);
+		TRACE("getClickPath(): %s\n", path);
 		return path;
 	    } 
 	}
@@ -341,20 +341,17 @@ private:
         if (event->button == 1) {
 	    pathbar_p->pathbar_ok(eventBox);
 	}
-#if 0
+
         if (event->button == 3) {
 	    auto view = pathbar_p->pathbarView();
 	    const gchar *path = pathbar_p->getClickPath(eventBox);
+	    TRACE("***clickpath=%s\n", path);
 	    GtkMenu *menu = NULL;
 	    if (g_file_test(path, G_FILE_TEST_IS_DIR)){ 
-		/*menu = localPopUp;
-		g_free(g_object_get_data(G_OBJECT(menu),"path"));
-		TRACE("*** set menu data path=%s\n", path);
-		g_object_set_data(G_OBJECT(menu),"path", g_strdup(path));
-		LocalPopUp<Type>::resetLocalPopup();*/
-
-		BaseSignals<Type>::setMenuData(view, path, FALSE);
-		menu = BaseSignals<Type>::configureMenu(view, FALSE);  
+		menu = LocalPopUp<Type>::popUp();
+		Popup<Type>::setWidgetData(menu, "path", path);
+		g_object_set_data(G_OBJECT(menu),"view", NULL);
+		BaseSignals<Type>::configureViewMenu(LOCALVIEW_TYPE);
 	    } else {
 		// do xffm:root menu
 		RootPopUp<Type>::resetPopup();
@@ -364,7 +361,7 @@ private:
 		gtk_menu_popup_at_pointer (menu, (const GdkEvent *)event);
 	    }  	
 	}
-#endif
+
         return FALSE;
 
     }

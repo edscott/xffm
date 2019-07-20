@@ -74,7 +74,7 @@ public:
     }  
 
     static GtkMenu *createLocalItemPopUp(void){
-	DBG("createLocalItemPopUp\n" );
+	TRACE("createLocalItemPopUp\n" );
         auto popup = new(Popup<Type>)(localMenuItems(), localMenuItemsKeys(), localMenuItemsIcons(), TRUE);
         localItemPopUp = popup->menu();
 
@@ -84,7 +84,7 @@ public:
         mItem = (GtkMenuItem *)g_object_get_data(G_OBJECT(localItemPopUp), "Open with");
         markup = g_strdup_printf("<b>%s</b>", _("Open with"));
         Gtk<Type>::menu_item_content(mItem, "system-run", markup, -24);
-	DBG("createLocalItemPopUp: %p\n" , localItemPopUp);
+	TRACE("createLocalItemPopUp: %p\n" , localItemPopUp);
 
         return localItemPopUp;
     }
@@ -97,7 +97,8 @@ public:
             
 	    {N_("Copy"), (void *)ClipBoard<Type>::copy, NULL, NULL},
 	    {N_("Cut"), (void *)ClipBoard<Type>::cut, NULL, NULL},
-	    {N_("Paste"), (void *)ClipBoard<Type>::paste, NULL, NULL},
+	    {N_("Paste into"), (void *)ClipBoard<Type>::pasteInto, NULL, NULL},
+	    {N_("There is nothing on the clipboard to paste."), NULL, NULL, NULL},
 	    {N_("Delete"), (void *)LocalRm<Type>::rm, NULL, NULL},
             //{N_("About"), NULL, (void *) menu},
             //
@@ -114,7 +115,8 @@ public:
             "New",// this menuitem is only for nonitem popup
             "Cut",
             "Copy",
-            "Paste",
+            "Paste into",
+            "There is nothing on the clipboard to paste.",
             "Delete",
             NULL
         };
@@ -125,6 +127,7 @@ public:
             "document-new",
             "edit-cut",
             "edit-copy",
+            "edit-paste",
             "edit-paste",
             "edit-delete",
             NULL
@@ -152,6 +155,7 @@ public:
 	    {N_("Copy"), (void *)ClipBoard<Type>::copy, NULL, NULL},
 	    {N_("Cut"), (void *)ClipBoard<Type>::cut, NULL, NULL},
 	    {N_("Paste"), (void *)ClipBoard<Type>::paste, NULL, NULL},
+	    {N_("There is nothing on the clipboard to paste."), NULL, NULL, NULL},
 	    {N_("Paste into"), (void *)ClipBoard<Type>::pasteInto, NULL, NULL},
 	    {N_("Delete"), (void *)LocalRm<Type>::rm, NULL, NULL},
 	    {N_("Rename"), (void *)rename, NULL, NULL},
@@ -177,6 +181,7 @@ public:
             "Cut",
             "Copy",
             "Paste",
+            "There is nothing on the clipboard to paste.",
             "Paste into",
             "Delete",
 
@@ -203,7 +208,8 @@ public:
             "edit-cut",
             "edit-copy",
             "edit-paste",
-            "edit-paste-symbolic",
+            "edit-paste",
+            "edit-paste",
             "edit-delete",
 
 	    "document-revert",
@@ -222,9 +228,23 @@ private:
         if (w) {
 	    if (test) gtk_widget_show(w);
 	    else gtk_widget_hide(w);
-	    gtk_widget_set_sensitive(w, test);
+	    gtk_widget_set_sensitive(w, path != NULL);
 	    Popup<Type>::setWidgetData(w, "path", path);
 	}
+    }
+    static void
+    customPasteInto(GtkMenu *menu, const gchar *path, gint size){
+	    // Make menuitem text specific...
+	    gchar *specific;
+	    if (strlen(path)>30){
+		const gchar *p = strchr(path + (strlen(path)-30),'/');
+
+		specific = g_strdup_printf("%s <span color=\"blue\">[...] %s</span>", _("Paste into"), p?p+1:path);
+	    } else
+		specific = g_strdup_printf("%s <span color=\"blue\">%s</span>", _("Paste into"), path);
+	    auto menuItem = (GtkMenuItem *)g_object_get_data(G_OBJECT(menu),"Paste into");
+            Gtk<Type>::menu_item_content(menuItem, "edit-paste", specific, size);	    
+	    g_free(specific);
     }
 
 public:
@@ -234,14 +254,24 @@ public:
 	gint listLength = view?g_list_length(view->selectionList()):0;
 
         auto path =Popup<Type>::getWidgetData(localPopUp, "path");
-	DBG("local resetPopup path=%s\n", path);
+	TRACE("local resetPopup path=%s\n", path);
         if (!path){
 	    ERROR("local/popup.hh::resetPopup: path is NULL\n");
 	    return;
 	}
+
+	auto validView = g_object_get_data(G_OBJECT(localPopUp),"view")!=NULL;
+
+	configureMenuItem(localPopUp, "New", validView, path);
+	configureMenuItem(localPopUp, "Select All", validView, path);
+	configureMenuItem(localPopUp, "Match regular expression",validView, path);
+
         // unsensitivize "Paste" only if valid pasteboard...
-	configureMenuItem(localPopUp, "Paste", ClipBoard<Type>::clipBoardIsValid(), path);
+	//configureMenuItem(localPopUp, "Paste", validView && ClipBoard<Type>::clipBoardIsValid(), path);
+	configureMenuItem(localPopUp, "There is nothing on the clipboard to paste.",!ClipBoard<Type>::clipBoardIsValid(), NULL);
+
 	configureMenuItem(localPopUp, "Paste into", ClipBoard<Type>::clipBoardIsValid(), path);
+	customPasteInto(localPopUp, path, -24);
 
 	configureMenuItem(localPopUp, "Copy",listLength > 0, path);
 	configureMenuItem(localPopUp, "Cut",listLength > 0, path);
@@ -250,7 +280,7 @@ public:
 	gchar *fileInfo = util_c::fileInfo(path);
 	gchar *displayName = util_c::valid_utf_pathstring(path);
 	gchar *mimetype = g_strdup("inode/directory");
-	DBG("local resetPopup mimetype=%s\n",mimetype);
+	TRACE("local resetPopup mimetype=%s\n",mimetype);
 	gchar *statLine;
 	if (g_file_test(path, G_FILE_TEST_EXISTS)) {
             struct stat st;
@@ -293,7 +323,7 @@ public:
 
     static void
     resetMenuItems(void) {
-	DBG("resetMenuItems\n" );
+	TRACE("resetMenuItems\n" );
         auto view = (View<Type> *)g_object_get_data(G_OBJECT(localItemPopUp), "view");
 
         //  single or multiple item selected?
@@ -332,6 +362,7 @@ public:
 	    configureMenuItem(localItemPopUp, *k, listLength > 0, path);
 	}
 	configureMenuItem(localItemPopUp, "Paste", ClipBoard<Type>::clipBoardIsValid(), path);
+	configureMenuItem(localItemPopUp, "There is nothing on the clipboard to paste.", !ClipBoard<Type>::clipBoardIsValid(), NULL);
 	configureMenuItem(localItemPopUp, "Paste into", FALSE, path);
 
 	for (auto k=singleSelectItems; k && *k; k++){
@@ -343,6 +374,7 @@ public:
 	    configureMenuItem(localItemPopUp, "Paste into", 
 			strstr(mimetype, "inode/directory") != NULL &&
 			ClipBoard<Type>::clipBoardIsValid(), path);
+	    customPasteInto(localItemPopUp, path, -16);
 	}
 
 	if (listLength == 1){
@@ -362,7 +394,7 @@ public:
     }
 
     static GtkMenu *popUpItem(void){
-	DBG("popUpItem\n" );
+	TRACE("popUpItem\n" );
         if (!localItemPopUp) localItemPopUp = createLocalItemPopUp();   
         return localItemPopUp;
     }

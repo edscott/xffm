@@ -523,9 +523,9 @@ public:
 
         auto items = (g_list_length(selectionList) >0);
         auto menu = configureMenu(view, items);
-	DBG("menu is %p\n", menu);
+	TRACE("menu is %p\n", menu);
         g_object_set_data(G_OBJECT(menu),"view", (void *)view);
-	DBG("g_object_set_data %p->%p\n", menu, view);
+	TRACE("g_object_set_data %p->%p\n", menu, view);
 	Popup<Type>::setWidgetData(menu, "path", path);
 	g_free(path);
 
@@ -537,7 +537,7 @@ public:
     
     static GtkMenu *
     configureMenu(View<Type> *view, gboolean items){
-	DBG("configureMenu\n" );
+	TRACE("configureMenu\n" );
 	GtkMenu *menu;
 	if (items) {
 	    menu = getItemsMenu(view);
@@ -551,11 +551,10 @@ public:
 
 	return menu;
     }
- 
     static GtkMenu *
     getItemsMenu(View<Type> *view){
 	gint viewType = view->viewType();
-	DBG("getItemsMenu\n" );
+	TRACE("getItemsMenu\n" );
 	GtkMenu *menu;
         switch (viewType){
             case (ROOTVIEW_TYPE):
@@ -579,14 +578,14 @@ public:
 		menu = RootPopUp<Type>::popUp(); 
                 break;
         }
-	DBG("menu = %p\n", menu);
+	TRACE("menu = %p\n", menu);
 	g_object_set_data(G_OBJECT(menu),"view", view);
         return menu;
     }
 
     static void
     configureItemsMenu(gint viewType){
-	DBG("configureItemsMenu\n" );
+	TRACE("configureItemsMenu\n" );
 	GtkMenu *menu;
         switch (viewType){
             case (ROOTVIEW_TYPE):
@@ -615,7 +614,7 @@ public:
     static GtkMenu *
     getViewMenu(View<Type> *view){
 	gint viewType = view->viewType();
-	DBG("getViewMenu\n" );
+	TRACE("getViewMenu\n" );
 	GtkMenu *menu;
         switch (viewType){
             case (ROOTVIEW_TYPE):
@@ -644,7 +643,7 @@ public:
     }
     static void
     configureViewMenu(gint viewType){
-	DBG("configureViewMenu\n" );
+	TRACE("configureViewMenu\n" );
         switch (viewType){
             case (ROOTVIEW_TYPE):
                     RootPopUp<Type>::resetPopup();

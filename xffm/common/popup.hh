@@ -10,7 +10,7 @@ public:
         menu_ = createMenu(item);
         decorateItems(menu_, key, keyIcon, small);
         g_object_set_data(G_OBJECT(menu_), "popup", this);
-	DBG("Popup constructed\n" );
+	TRACE("Popup constructed\n" );
     }
 
     GtkMenu *menu(void){ return menu_;}
@@ -100,7 +100,7 @@ public:
 private:
     static GtkMenu *
     createMenu(menuItem_t *item){
-	DBG("createMenu\n" );
+	TRACE("createMenu\n" );
         auto menu = GTK_MENU(gtk_menu_new());
 	// Create title element
 	GtkWidget *title = Gtk<Type>::menu_item_new(NULL, ""); 
@@ -133,7 +133,7 @@ private:
 
     static void
     decorateItems(GtkMenu *menu, const gchar *key[], const gchar *keyIcon[], gboolean small){
-	DBG("decorateItems, menu = %p\n", menu );
+	TRACE("decorateItems, menu = %p\n", menu );
         if (!key || !keyIcon) return;
         gint i=0;
         for (auto k=key; k && key[i] && keyIcon[i]; k++, i++){
