@@ -204,9 +204,9 @@ public:
 	gchar *emblem = NULL;
         if (isInClipBoard(path)){
             if(isClipBoardCut()) {
-                emblem = g_strdup("/NE/edit-cut/2.0/220");
+                emblem = g_strdup("/NE/edit-cut-symbolic/2.0/220");
             } else {
-                emblem = g_strdup("/NE/edit-copy/2.0/220");
+                emblem = g_strdup("/NE/edit-copy-symbolic/2.0/220");
             }
         }
 	TRACE("clipBoardEmblem for %s %s\n", path, emblem);
