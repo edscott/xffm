@@ -1,208 +1,10 @@
 #ifndef XF_MIME_HH
 #define XF_MIME_HH
 
-//#include <libxml/parser.h>
-//#include <libxml/tree.h>
-#include <string.h>
-#include <errno.h>
-#ifndef FREEDESKTOP_GLOBS
-#define FREEDESKTOP_GLOBS "FREEDESKTOP_GLOBS"
-#endif
-#ifndef FREEDESKTOP_ICONS
-#define FREEDESKTOP_ICONS "FREEDESKTOP_ICONS"
-#endif
-#ifndef FREEDESKTOP_ALIAS
-#define FREEDESKTOP_ALIAS "FREEDESKTOP_ALIAS"
-#endif
+// We can use either libmagic or perl mimetype, depending on configuration
+
+
 namespace xf {
-
-static pthread_mutex_t mimeHashMutex=PTHREAD_MUTEX_INITIALIZER;
-static GHashTable *mimeHashSfx=NULL;
-    
-static GHashTable *mimeHashAlias=NULL;
-static GHashTable *mimeHashIcon=NULL;
-
-static GHashTable *application_hash_type=NULL;
-
-template <class Type>
-class MimeSuffix {
-
-    
-    static void freeStrV(void *data){
-	auto p = (gchar **)data;
-	g_strfreev(p);
-    }
-    
-    static const gchar *
-    lookupBySuffix(const gchar *file, const gchar *sfx){
-        gchar *key;
-	if (sfx) key = g_strdup(sfx);
-	else key = g_path_get_basename (file);
-	// duplicate suffix?
-	auto constantType = (const gchar *)g_hash_table_lookup (mimeHashSfx, key);
-        g_free (key);
-        if (constantType) return constantType;
-	return NULL;
-    }
-
-    static void
-    mimeBuildHashes (void) {
-        mimeHashSfx = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
-
-        mimeHashAlias = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
-        mimeHashIcon = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
-
-        application_hash_type = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, freeStrV);
-        FILE *input;
-        if ((input = fopen(FREEDESKTOP_GLOBS, "r")) != NULL) {
-            gchar buffer[256]; memset(buffer, 0, 256);
-            while (fgets(buffer, 255, input) && !feof(input)){
-                if (!strchr(buffer, ':'))continue;
-                gchar **x = g_strsplit(buffer, ":", -1);
-                gint offset = 0;
-                if (strchr(x[1], '\n')) *(strchr(x[1], '\n')) = 0;
-                if (strncmp(x[1], "*.", strlen("*."))==0) offset = strlen("*.");
-                const gchar *key = x[1]+offset;
-		add2sfx_hash(key, x[0]);
-                g_strfreev(x);
-            }
-            fclose(input);
-        }else ERROR("Cannot open %s\n", FREEDESKTOP_GLOBS);
-
-        if ((input = fopen(FREEDESKTOP_ICONS, "r")) != NULL) {
-            gchar buffer[256]; memset(buffer, 0, 256);
-            while (fgets(buffer, 255, input) && !feof(input)){
-                if (!strchr(buffer, ':'))continue;
-                gchar **x = g_strsplit(buffer, ":", -1);
-                if (strchr(x[1], '\n')) *(strchr(x[1], '\n')) = 0;
-                const gchar *key = x[0];
-                if(key) {
-                     TRACE("ICON mime-module,replacing hash element \"%s\" with key %s --> %s\n", 
-                                    x[0], key, x[1]);
-                     g_hash_table_replace (mimeHashIcon,  g_strdup(key), g_strdup(x[1]));
-                }
-                g_strfreev(x);
-            }
-            fclose(input);
-        }else ERROR("Cannot open %s\n", FREEDESKTOP_ICONS);
-
-        if ((input = fopen(FREEDESKTOP_ALIAS, "r")) != NULL) {
-            gchar buffer[256]; memset(buffer, 0, 256);
-            while (fgets(buffer, 255, input) && !feof(input)){
-                if (!strchr(buffer, ' '))continue;
-                gchar **x = g_strsplit(buffer, " ", -1);
-                if (strchr(x[1], '\n')) *(strchr(x[1], '\n')) = 0;
-                const gchar *key = x[0];
-                if(key) {
-                     TRACE("ALIAS mime-module,replacing hash element \"%s\" with key %s --> %s\n", 
-                                    x[0], key, x[1]);
-                     g_hash_table_replace (mimeHashAlias,  g_strdup(key), g_strdup(x[1]));
-                }
-                g_strfreev(x);
-            }
-            fclose(input);
-        } else ERROR("Cannot open %s\n", FREEDESKTOP_ALIAS);
-/*
-	// FIXME: break the following code into routines...
-	// mimetype registered applications...
-	// /usr/share/applications
-	// /usr/local/share/applications
-	const gchar *directories[] = {
-	    "/usr/share/applications",
-	    "/usr/local/share/applications"
-	};
-	for (int i=0; i<2; i++) {
-	    processApplicationDir(directories[i]);
-	}
-	
- */
-    }
-
-public:
-
-    static void
-    add2sfx_hash (const gchar *key, const gchar *value) {
-        pthread_mutex_lock(&mimeHashMutex);
-        g_hash_table_replace (mimeHashSfx, g_strdup(key), g_strdup(value));
-        pthread_mutex_unlock(&mimeHashMutex);
-    }
-
-    static gchar *
-    mimeType (const gchar * file) {
-    //extensionMimeType (const gchar * file) {
-        const gchar *type = NULL;
-        gchar *p;
-        if (!mimeHashSfx) {
-	    mimeBuildHashes();
-	    if (!mimeHashSfx) {
-		ERROR("!mimeHashSfx\n");
-		return NULL;
-	    }
-        }
-        TRACE("mime-module, extensionMimeType looking in sfx hash for \"%s\"\n", file);
-
-	// if suffix is duplicated, first try magic.
-	
-        ///  look in sfx hash...
-        gchar *basename = g_path_get_basename (file);
-        if (strchr (basename, '.')) p = strchr (basename, '.');
-        else {
-	    // no file extension.
-            pthread_mutex_lock(&mimeHashMutex);
-	    type = lookupBySuffix(file, NULL);
-            pthread_mutex_unlock(&mimeHashMutex);
-            if(type) {
-                TRACE("mime-module(1), FOUND %s: %s\n", file, type);
-                return g_strdup(type);
-            }
-            return NULL;
-        }
-        // Right to left:
-        for (;p && *p; p = strchr (p, '.'))
-        {
-            while (*p=='.') p++;
-            if (*p == 0) break;
-            
-            gchar *sfx;
-            /* try all lower case (hash table keys are set this way) */
-            sfx = g_utf8_strdown (p, -1);
-            TRACE("mime-module, lOOking for \"%s\" with key=%s\n", sfx, key);
-
-            pthread_mutex_lock(&mimeHashMutex);
-	    type = lookupBySuffix(NULL, sfx);
-            pthread_mutex_unlock(&mimeHashMutex);
-            if(type) {
-                TRACE("mime-module(2), FOUND %s: %s\n", sfx, type);
-                g_free (sfx);
-                return g_strdup(type);
-            } 
-            g_free (sfx);
-        }
-        // Left to right, test all extensions.
-        gchar **q = g_strsplit(basename, ".", -1);
-        gchar **q_p = q+1;
-        
-        for (;q_p && *q_p; q_p++){
-            gchar *sfx;
-            /* try all lower case (hash table keys are set this way) */
-            sfx = g_utf8_strdown (*q_p, -1);
-            pthread_mutex_lock(&mimeHashMutex);
-	    type = lookupBySuffix(NULL, sfx);
-            pthread_mutex_unlock(&mimeHashMutex);
-            if(type) {
-                TRACE("mime-module(3), FOUND %s: %s\n", sfx, type);
-                g_free (sfx);
-                g_strfreev(q);
-                return g_strdup(type);
-            }
-            g_free (sfx);
-        }
-        g_strfreev(q);
-        return NULL;
-    }
-
-};
-
 
 // For starters, we need mime_type() and mime_file(), 
 // then type_from_sfx and alias_type and apps and command
@@ -215,11 +17,6 @@ public:
 // 
 // Remake: simplify with now mature shared-mime-info package
 
-#ifdef HAVE_LIBMAGIC
-static pthread_mutex_t magic_mutex = PTHREAD_MUTEX_INITIALIZER;
-static magic_t cookie;
-#endif
-
 
 static GHashTable *application_hash_text=NULL;
 static GHashTable *application_hash_text2=NULL;
@@ -230,148 +27,64 @@ template <class Type>
 class Mime {
     using util_c = Util<Type>;
 public:
+    static gchar *
+    encoding (const gchar *file) { 
 #ifdef HAVE_LIBMAGIC  
-    // Lib magic is available...
-    //
-    // not thread safe: put in a mutex.
-    // This function may obtain a basic or alias mimetype, but will always
-    // return a basic mimetype.
-    static gchar *
-    lib_magic (const gchar * file, int flags) {
-	gchar *type=NULL;
-	pthread_mutex_lock (&magic_mutex);  
-	static gboolean initialized = FALSE;
-	if (!initialized){
-	    cookie = magic_open (MAGIC_NONE);
-	    magic_load (cookie, NULL);
-	    initialized = TRUE;
-	}
-
-	magic_setflags (cookie, flags);
-	const char *ctype = magic_file (cookie, file);
-	if (ctype) type = g_strdup(ctype);
-	pthread_mutex_unlock (&magic_mutex);    
-	return type;
-    }
-
-// see "man libmagic" for explantion of flags
-// Since MAGIC_NO_CHECK_ENCODING is not in file 4.x, we take care
-// of that here.
-#ifndef MAGIC_MIME_TYPE
-#define MAGIC_MIME_TYPE  0
-#endif
-#ifndef MAGIC_NO_CHECK_APPTYPE
-#define MAGIC_NO_CHECK_APPTYPE  0
-#endif
-#ifndef MAGIC_NO_CHECK_ENCODING
-#define MAGIC_NO_CHECK_ENCODING  0
-#endif
-#ifndef MAGIC_SYMLINK
-#define MAGIC_SYMLINK  0
-#endif
-#ifndef MAGIC_NO_CHECK_COMPRESS
-#define MAGIC_NO_CHECK_COMPRESS  0
-#endif
-#ifndef MAGIC_NO_CHECK_TAR
-#define MAGIC_NO_CHECK_TAR  0
-#endif
-#ifndef MAGIC_PRESERVE_ATIME
-#define  MAGIC_PRESERVE_ATIME 0
-#endif
-
-//#define DISABLE_MAGIC
-
-    static gchar *
-    mimeMagicLib (const gchar *file) {
-	TRACE("mime_magic(%s)...\n", 
-		file);
-	// Does the user even have read permission?
-	if (access(file, R_OK) < 0){
-	    const gchar *h_type =
-		_("No Read Permission");
-	    return g_strdup(h_type);
-	}
-	
-	gint flags = MAGIC_MIME_TYPE | MAGIC_SYMLINK | MAGIC_PRESERVE_ATIME;
-	gchar *mimemagic = lib_magic (file, flags);
-	TRACE("mime_magic(%s)...%s\n", file, mimemagic);
-	/*gchar *old_type = mimemagic; 
-	mimemagic = rfm_natural(RFM_MODULE_DIR, "mime", mimemagic, "mime_get_alias_type");
-	g_free(old_type);*/
-	return mimemagic;
-    }
-
-/* 
-    static gchar *
-    mime_file (const gchar *file) {
-	TRACE("mime_file(%s)...\n", file);
-	gint flags =  MAGIC_PRESERVE_ATIME;
-	gchar *f = lib_magic (file, flags);
-	TRACE("mime_file(%s)...%s\n", file, f);
-	if (!f) {
-	    return NULL;
-	}
-	if (rfm_g_file_test(file, G_FILE_TEST_IS_SYMLINK)){
-	    flags |= MAGIC_SYMLINK;
-	    gchar *ff = f;
-	    f = lib_magic (file, flags);
-	    gchar *gf = g_strconcat(ff, "\n", f, NULL);
-	    g_free(f);
-	    g_free(ff);
-	    return gf;
-
-	}
-	return f;
-    }
-*/
-    static gchar *
-    encoding (const gchar *file) {
-	TRACE("mime_encoding(%s)...\n", file);
-	// Does the user even have read permission?
-	if (access(file, R_OK) < 0){
-	    const gchar *h_type =
-		_("No Read Permission");
-	    return g_strdup(h_type);
-	}
-	//int flags = MAGIC_MIME_ENCODING;
-	int flags = MAGIC_MIME_ENCODING | MAGIC_PRESERVE_ATIME | MAGIC_SYMLINK;
-	gchar *encoding = lib_magic (file, flags);
-	if (encoding) {
-	    TRACE("%s --> %s\n", file, encoding);
-	    return encoding;
-	}
-	return NULL;
-    }
+	return  MimeMagic<Type>::encoding(file);
 #else
-    // If not libmagic, assume the encoding is already utf-8...
-    static gchar *
-    encoding (const gchar *file) { return  g_strdup("UTF-8");}
+	// If not libmagic, assume the encoding is already utf-8. (whatever...)
+	return  g_strdup("UTF-8");
 #endif
-
-
-private:
-    static gchar *
-    mime (const gchar *command){
-	FILE *pipe = popen (command, "r");
-	if(pipe == NULL) {
-	    ERROR("Cannot pipe from %s\n", command);
-	    return NULL;
-	}
-#define MIMETYPE_LINE 256
-	gchar *retval = NULL;
-        gchar line[MIMETYPE_LINE];
-        line[MIMETYPE_LINE - 1] = 0;
-	if (!fgets (line, MIMETYPE_LINE - 1, pipe)) {
-	    ERROR("!fgets (line, MIMETYPE_LINE - 1, pipe)\n");
-        } 
-	else 
-	{
-	    retval = g_strdup(line);
-	    if (strchr(retval, '\n')) *strchr(retval, '\n') = 0;
-	}
-        pclose (pipe);
-	return retval;
     }
+
+    static gchar *
+    mimeMagic (const gchar *file){
+#ifdef MIMETYPE_PROGRAM
+	return MimeType<Type>::mimeMagic(file);
+#else
+# if LIBMAGIC
+	return MimeMagic<Type>::mimeMagic(file);
+# else
+        return NULL;
+# endif
+#endif
+    }
+
+    static gchar *
+    mimeType (const gchar *file){
+        gchar *retval = MimeSuffix<Type>::mimeType(file);
+        if (retval) {
+	    TRACE("mimeType: %s --> %s\n", file, retval);
+            return retval;
+        }
+#ifdef MIMETYPE_PROGRAM
+	return MimeType<Type>::mimeType(file);
+#else
+	errno=0;
+        struct stat st;
+        if (stat(file, &st) < 0) {
+	    DBG("mime.hh::mimeType(): stat %s (%s)\n",
+		file, strerror(errno));
+	    errno=0;
+	    return g_strdup("unknown mimetype");
+	}
+        gchar *r = mimeType(file, &st);
+        return r;
+        
+#endif
+   } 
+
+// FIXME: use language code -l code, --language=code 
+    static gchar *
+    mimeFile (const gchar *file){
+#ifdef MIMETYPE_PROGRAM
+	return MimeType<Type>::mimeFile(file);
+#else
+        return NULL;
+#endif
+   } 
+   
+
     static void
     add2ApplicationHash(const gchar *type, const gchar *command, gboolean prepend){
         // Always use basic mimetype: avoid hashing alias mimetypes...
@@ -474,23 +187,6 @@ public:
 
 private:
 
-    static gchar *
-    mimeMagic (const gchar *file){
-#ifdef MIMETYPE_PROGRAM
-	//only magic:
-	gchar *command = g_strdup_printf("%s -L -M --output-format=\"%%m\" \"%s\"", MIMETYPE_PROGRAM, file);
-	gchar *retval = mime(command);
-	g_free(command);
-	return retval;
-#else
-# if LIBMAGIC
-	return mimeMagicLib(file);
-# else
-        return NULL;
-# endif
-#endif
-    }
-
     static const gchar *
     mimeIcon (const gchar *file){
         const gchar *retval = locate_icon(file);
@@ -501,43 +197,6 @@ private:
    } 
 
 public:
-    static gchar *
-    mimeType (const gchar *file){
-        gchar *retval = MimeSuffix<Type>::mimeType(file);
-        if (retval) {
-	    TRACE("mimeType: %s --> %s\n", file, retval);
-            return retval;
-        }
-#ifdef MIMETYPE_PROGRAM
-	gchar *command = g_strdup_printf("%s -L --output-format=\"%%m\" \"%s\"", MIMETYPE_PROGRAM, file);
-	DBG("MIMETYPE_PROGRAM mimeType command: %s\n", command);
- 	retval = mime(command);
-	g_free(command);
-        if (retval){ 
-	    DBG("MIMETYPE_PROGRAM mimeType: %s --> %s\n", file, retval);
-	    if (retval) {
-		if (strchr(file, '.') && strlen(strrchr(file, '.')+1)){
-		    MimeSuffix<Type>::add2sfx_hash(strrchr(file, '.')+1, retval);
-		} else {
-		    MimeSuffix<Type>::add2sfx_hash(file, retval);
-		}
-	    }
-	} else retval = g_strdup("unknown mimetype");
-	return retval;
-#else
-	errno=0;
-        struct stat st;
-        if (stat(file, &st) < 0) {
-	    DBG("mime.hh::mimeType(): stat %s (%s)\n",
-		file, strerror(errno));
-	    errno=0;
-	    return g_strdup("unknown mimetype");
-	}
-        gchar *r = mimeType(file, &st);
-        return r;
-        
-#endif
-   } 
 
 public: 
     static gchar *
@@ -609,20 +268,6 @@ public:
     }
 
 private:
-
-// FIXME: use language code -l code, --language=code 
-    static gchar *
-    mimeFile (const gchar *file){
-#ifdef MIMETYPE_PROGRAM
-	gchar *command = g_strdup_printf("%s -d -L --output-format=\"%%d\" \"%s\"", MIMETYPE_PROGRAM, file);
- 	gchar *retval = mime(command);
-	g_free(command);
-	return retval;
-#else
-        return NULL;
-#endif
-   } 
-   
     static const gchar *
     get_mimetype_iconname(const gchar *mimetype){
 	//FIXME: pull in value built from hash:
