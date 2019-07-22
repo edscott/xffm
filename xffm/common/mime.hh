@@ -424,34 +424,14 @@ public:
     }
 private:       
 //////////////////////////////////////////////////////////////////////////////////////////////
+//
+//
+//  FIXME FIXME FIXME this is Util<Type> stuff...
+//
+//
 
 public:     
 
-    static gboolean
-    fixedInTerminal(const gchar *app){
-	gchar *a = Mime<Type>::baseCommand(app);
-	gchar *b = strrchr(a, G_DIR_SEPARATOR);
-	if (!b) b=a; else b++;
-	gchar const *exceptions[] = {"vi", "vim", "vimdiff", "vimtutor", "nano", NULL};
-	gchar const **q;
-	gboolean retval = FALSE;
-	for (q=exceptions; q && *q; q++){
-	    if (strcmp(a, *q) == 0){
-		retval=TRUE;
-		break;
-	    }
-	}
-	g_free(a);
-	return retval;
-    }
-    static gchar *
-    baseCommand(const gchar *commandFmt){
-	if (!commandFmt) return NULL;
-	gchar *a = g_strdup(commandFmt);
-	g_strstrip(a);
-	if (strchr(a, ' ')) *(strchr(a, ' ')) = 0;
-	return a;
-    }
     static gchar *
     baseIcon(const gchar *iconFmt){
 	if (!iconFmt) return NULL;
@@ -463,7 +443,16 @@ public:
 	a=g;
 	return a;
     }
-
+#if 0
+    static gchar *
+    baseCommand(const gchar *commandFmt){
+	if (!commandFmt) return NULL;
+	gchar *a = g_strdup(commandFmt);
+	g_strstrip(a);
+	if (strchr(a, ' ')) *(strchr(a, ' ')) = 0;
+	return a;
+    }
+    moved to run.hh
     static gboolean
     runInTerminal(const gchar *commandFmt){
 	if (fixedInTerminal(commandFmt)) return TRUE;
@@ -478,6 +467,7 @@ public:
 	g_free(a);
 	return retval;
     }
+#endif
 
     static gchar *
     mkTerminalLine (const gchar *command, const gchar *path) {

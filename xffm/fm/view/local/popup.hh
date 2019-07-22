@@ -670,7 +670,7 @@ private:
 
 	    auto command = (gchar *)g_object_get_data(G_OBJECT(v), "command");
 	    g_free(command);
-	    if (Mime<Type>::runInTerminal(defaultApp)){
+	    if (Run<Type>::runInTerminal(defaultApp)){
 		command = Mime<Type>::mkTerminalLine(defaultApp, path);
 	    } else {
 		command = Mime<Type>::mkCommandLine(defaultApp, path);
@@ -973,7 +973,7 @@ public:
         g_free(markup);
 
         //entryResponse->setCheckButton(_("Run in Terminal"));
-        //entryResponse->setCheckButton(Mime<Type>::runInTerminal(path));
+        //entryResponse->setCheckButton(Run<Type>::runInTerminal(path));
 
         entryResponse->setEntryLabel(_("Specify Output Directory..."));
         // get last used arguments...
@@ -1104,7 +1104,7 @@ public:
         g_free(markup);
 
         entryResponse->setCheckButton(_("Run in Terminal"));
-        entryResponse->setCheckButton(Mime<Type>::runInTerminal(path));
+        entryResponse->setCheckButton(Run<Type>::runInTerminal(path));
 
         entryResponse->setEntryLabel(_("Arguments for the Command"));
         // get last used arguments...
@@ -1118,7 +1118,7 @@ public:
 	if (!response) return;
 	// Is the terminal flag set?
 	gchar *command ;
-	if (Mime<Type>::runInTerminal(path)){
+	if (Run<Type>::runInTerminal(path)){
 	    command = Mime<Type>::mkTerminalLine(path, response);
 	} else {
 	    command = Mime<Type>::mkCommandLine(path, response);
@@ -1286,7 +1286,7 @@ public:
             g_free(responseLabel);
 
             entryResponse->setCheckButton(_("Run in Terminal"));
-            if (!multiple) entryResponse->setCheckButton(defaultApp && Mime<Type>::runInTerminal(defaultApp));
+            if (!multiple) entryResponse->setCheckButton(defaultApp && Run<Type>::runInTerminal(defaultApp));
 
             entryResponse->setEntryLabel(_("Open with"));
             if (apps && apps[0]) entryResponse->setEntryDefault(apps[0]);
@@ -1304,7 +1304,7 @@ public:
             g_free(responseLabel);
 
             comboResponse->setCheckButton(_("Run in Terminal"));
-            if (!multiple) comboResponse->setCheckButton(defaultApp && Mime<Type>::runInTerminal(defaultApp));
+            if (!multiple) comboResponse->setCheckButton(defaultApp && Run<Type>::runInTerminal(defaultApp));
 
             comboResponse->setComboLabel(_("Open with"));
             if (apps && apps[0]) comboResponse->setComboOptions(apps);
@@ -1344,13 +1344,13 @@ public:
 	gchar *command;
         if (!multiple) {
 	// Is the terminal flag set?
-	    if (Mime<Type>::runInTerminal(response)){
+	    if (Run<Type>::runInTerminal(response)){
                 command = Mime<Type>::mkTerminalLine(response, mpath);
             } else {
                 command = Mime<Type>::mkCommandLine(response, mpath);
             }
         } else { // hack
-   	    if (Mime<Type>::runInTerminal(response)){
+   	    if (Run<Type>::runInTerminal(response)){
                 command = Mime<Type>::mkTerminalLine(response, "");
             } else {
                 command = Mime<Type>::mkCommandLine(response, "");
@@ -1377,7 +1377,7 @@ public:
 	auto checkButton = GTK_TOGGLE_BUTTON(comboResponse->checkButton());
         auto entry = comboResponse->comboEntry();
 	const gchar *text = gtk_entry_get_text(entry);
-	gtk_toggle_button_set_active(checkButton, Mime<Type>::runInTerminal(text));
+	gtk_toggle_button_set_active(checkButton, Run<Type>::runInTerminal(text));
     }
 
     static void
@@ -1386,7 +1386,7 @@ public:
 	auto checkButton = GTK_TOGGLE_BUTTON(entryResponse->checkButton());
         auto entry = GTK_ENTRY(widget);
 	const gchar *text = gtk_entry_get_text(entry);
-	gtk_toggle_button_set_active(checkButton, Mime<Type>::runInTerminal(text));
+	gtk_toggle_button_set_active(checkButton, Run<Type>::runInTerminal(text));
     }
 
    static gint
@@ -1399,11 +1399,11 @@ public:
 
 	// Determine if Terminal check button should be depressed
 	auto checkButton = GTK_TOGGLE_BUTTON(g_object_get_data(G_OBJECT(entry), "checkButton"));
-	gtk_toggle_button_set_active(checkButton, Mime<Type>::runInTerminal(text));
+	gtk_toggle_button_set_active(checkButton, Run<Type>::runInTerminal(text));
 	// Hard coded exceptions:
 	// nano vi and others...
-	if (Mime<Type>::fixedInTerminal(text)){
-	    gchar *a = Mime<Type>::baseCommand(text);
+	if (Run<Type>::fixedInTerminal(text)){
+	    gchar *a = Run<Type>::baseCommand(text);
 	    gtk_toggle_button_set_active(checkButton, TRUE);
 	    Settings<Type>::setSettingInteger("Terminal", a, 1);
 	    g_free(a);
@@ -1442,7 +1442,7 @@ private:
 	if (!data) return;
 	const gchar *app = gtk_entry_get_text(GTK_ENTRY(data));
 	// Hard coded exceptions:
-	if (Mime<Type>::fixedInTerminal(app)) {
+	if (Run<Type>::fixedInTerminal(app)) {
 	    gtk_toggle_button_set_active(togglebutton, TRUE);
 	    return;
 	}
@@ -1452,7 +1452,7 @@ private:
 	// Valid command, continue. Get basename 
 	gint value;
 	if (gtk_toggle_button_get_active(togglebutton)) value = 1; else value = 0;
-	gchar *a = Mime<Type>::baseCommand(app);
+	gchar *a = Run<Type>::baseCommand(app);
 	Settings<Type>::setSettingInteger("Terminal", a, value);
 	g_free(a);
     }
@@ -1467,7 +1467,7 @@ private:
 	TRACE("runPath = %s\n", path);
 	gint value;
 	if (gtk_toggle_button_get_active(togglebutton)) value = 1; else value = 0;
-	gchar *a = Mime<Type>::baseCommand(path);
+	gchar *a = Run<Type>::baseCommand(path);
 	Settings<Type>::setSettingInteger("Terminal", a, value);
 	g_free(a);
     }

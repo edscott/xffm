@@ -480,6 +480,43 @@ public:
 	return pid;
     }
 
+    static gboolean
+    runInTerminal(const gchar *commandFmt){
+	if (fixedInTerminal(commandFmt)) return TRUE;
+	gchar *a = baseCommand(commandFmt);
+	gboolean retval = FALSE;
+	if (Settings<Type>::keyFileHasGroupKey("Terminal",  a) &&
+		Settings<Type>::getSettingInteger("Terminal", a))retval = TRUE;
+	g_free(a);
+	return retval;
+    }
+    
+    static gchar *
+    baseCommand(const gchar *commandFmt){
+	if (!commandFmt) return NULL;
+	gchar *a = g_strdup(commandFmt);
+	g_strstrip(a);
+	if (strchr(a, ' ')) *(strchr(a, ' ')) = 0;
+	return a;
+    }
+    static gboolean
+    fixedInTerminal(const gchar *app){
+	gchar *a = baseCommand(app);
+	gchar *b = strrchr(a, G_DIR_SEPARATOR);
+	if (!b) b=a; else b++;
+	gchar const *exceptions[] = {"vi", "vim", "vimdiff", "vimtutor", "nano", NULL};
+	gchar const **q;
+	gboolean retval = FALSE;
+	for (q=exceptions; q && *q; q++){
+	    if (strcmp(a, *q) == 0){
+		retval=TRUE;
+		break;
+	    }
+	}
+	g_free(a);
+	return retval;
+    }
+    
     
 };
 }

@@ -361,8 +361,8 @@ private:
 	// FIXME gtk_toggle_button_set_active(checkButton, Mime<Type>::runInTerminal(text));
 	// Hard coded exceptions:
 	// nano vi and others...
-	if (Mime<Type>::fixedInTerminal(text)){
-	    gchar *a = Mime<Type>::baseCommand(text);
+	if (Run<Type>::fixedInTerminal(text)){
+	    gchar *a = Run<Type>::baseCommand(text);
 	    gtk_toggle_button_set_active(checkButton, TRUE);
 	    Settings<Type>::setSettingInteger("Terminal", a, 1);
 	    g_free(a);
