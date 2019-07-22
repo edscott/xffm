@@ -671,15 +671,15 @@ private:
 	    auto command = (gchar *)g_object_get_data(G_OBJECT(v), "command");
 	    g_free(command);
 	    if (Run<Type>::runInTerminal(defaultApp)){
-		command = Mime<Type>::mkTerminalLine(defaultApp, path);
+		command = Run<Type>::mkTerminalLine(defaultApp, path);
 	    } else {
-		command = Mime<Type>::mkCommandLine(defaultApp, path);
+		command = Run<Type>::mkCommandLine(defaultApp, path);
 	    }
-	    auto displayCommand = Mime<Type>::mkCommandLine(defaultApp, path);
+	    auto displayCommand = Run<Type>::mkCommandLine(defaultApp, path);
 	    auto markup = g_strdup_printf("<b>%s</b>", displayCommand);
 	    g_free(displayCommand);
 
-	    auto icon = Mime<Type>::baseIcon(defaultApp);
+	    auto icon = Run<Type>::baseIcon(defaultApp);
 	    //auto p = pixbuf_c::get_pixbuf(icon, -24); 
 	    auto iconOK = pixbuf_icons_c::iconThemeHasIcon(icon);
 	    Gtk<Type>::menu_item_content(v, iconOK?icon:"system-run-symbolic", markup, -24);
@@ -946,7 +946,7 @@ public:
 /*
 		gchar *basename = g_path_get_basename(path);
 		gchar *fmt = g_strdup_printf("tar -cjf \"%s/%s.tar.bz2\"", response, basename);
-		gchar *command = Mime<Type>::mkCommandLine(fmt, basename);
+		gchar *command = Run<Type>::mkCommandLine(fmt, basename);
 		    */
 		//FIXME chdir basename and run command in shell
 	    }
@@ -1001,7 +1001,7 @@ public:
 
 		gchar *basename = g_path_get_basename(path);
 		gchar *fmt = g_strdup_printf("tar -cjf \"%s/%s.tar.bz2\"", response, basename);
-		gchar *command = Mime<Type>::mkCommandLine(fmt, basename);
+		gchar *command = Run<Type>::mkCommandLine(fmt, basename);
 		    
                 // execute command...
                 // get view
@@ -1119,9 +1119,9 @@ public:
 	// Is the terminal flag set?
 	gchar *command ;
 	if (Run<Type>::runInTerminal(path)){
-	    command = Mime<Type>::mkTerminalLine(path, response);
+	    command = Run<Type>::mkTerminalLine(path, response);
 	} else {
-	    command = Mime<Type>::mkCommandLine(path, response);
+	    command = Run<Type>::mkCommandLine(path, response);
 	}
         g_free(response);
 	// get view
@@ -1324,7 +1324,7 @@ public:
 	if (!response) return;
 
 	// Check whether applicacion is valid.
-	gboolean valid = Mime<Type>::isValidCommand(response);
+	gboolean valid = Run<Type>::isValidCommand(response);
 	if (!valid){
 	    gchar *message = g_strdup_printf("\n<span color=\"#990000\"><b>%s</b></span>:\n <b>%s</b>\n", _("Invalid entry"), response); 
 	    Gtk<Type>::quick_help (GTK_WINDOW(mainWindow), message);
@@ -1345,15 +1345,15 @@ public:
         if (!multiple) {
 	// Is the terminal flag set?
 	    if (Run<Type>::runInTerminal(response)){
-                command = Mime<Type>::mkTerminalLine(response, mpath);
+                command = Run<Type>::mkTerminalLine(response, mpath);
             } else {
-                command = Mime<Type>::mkCommandLine(response, mpath);
+                command = Run<Type>::mkCommandLine(response, mpath);
             }
         } else { // hack
    	    if (Run<Type>::runInTerminal(response)){
-                command = Mime<Type>::mkTerminalLine(response, "");
+                command = Run<Type>::mkTerminalLine(response, "");
             } else {
-                command = Mime<Type>::mkCommandLine(response, "");
+                command = Run<Type>::mkCommandLine(response, "");
             }
             gchar **f = g_strsplit(path, "\'", -1);
             for (gchar **p=f; p&& *p; p++){
@@ -1448,7 +1448,7 @@ private:
 	}
 	
 	// if not valid command, do nothing 
-	if (!Mime<Type>::isValidCommand(app)) return;
+	if (!Run<Type>::isValidCommand(app)) return;
 	// Valid command, continue. Get basename 
 	gint value;
 	if (gtk_toggle_button_get_active(togglebutton)) value = 1; else value = 0;

@@ -490,7 +490,19 @@ public:
 	g_free(a);
 	return retval;
     }
-    
+ 
+    static gchar *
+    baseIcon(const gchar *iconFmt){
+	if (!iconFmt) return NULL;
+	gchar *a = g_strdup(iconFmt);
+	g_strstrip(a);
+	if (strchr(a, ' ')) *(strchr(a, ' ')) = 0;
+	gchar *g = g_path_get_basename(a);
+	g_free(a);
+	a=g;
+	return a;
+    }
+   
     static gchar *
     baseCommand(const gchar *commandFmt){
 	if (!commandFmt) return NULL;
@@ -517,6 +529,117 @@ public:
 	return retval;
     }
     
+    static gchar *
+    mkCommandLine (const gchar *command_fmt, const gchar *path) {
+        TRACE("mime_mk_command_line()...\n");
+
+        TRACE ("MIME: mime_mk_command_line(%s)\n", path);
+        gchar *command_line = NULL;
+        gchar *fmt = NULL;
+
+        if(!command_fmt)
+            return NULL;
+        if(!path)
+            path = "";
+
+        TRACE ("MIME: command_fmt=%s\n", command_fmt);
+
+        /* this is to send path as an argument */
+
+        if(strstr (command_fmt, "%s")) {
+            fmt = g_strdup (command_fmt);
+        } else {
+            fmt = g_strconcat (command_fmt, " %s", NULL);
+        }
+        TRACE ("MIME: command_fmt fmt=%s\n", fmt);
+
+        TRACE ("MIME: path=%s\n", path);
+        gchar *esc_path = Util<Type>::esc_string (path);
+        command_line = g_strdup_printf (fmt, esc_path);
+        g_free (esc_path);
+        TRACE ("MIME2: command_line=%s\n", command_line);
+
+        g_free (fmt);
+        return command_line;
+    }
+ 
+    static gchar *
+    mkTerminalLine (const gchar *command, const gchar *path) {
+        TRACE("mime_mk_terminal_line()...\n");
+        TRACE ("MIME: mime_mk_command_line(%s)\n", command);
+        gchar *command_line = NULL;
+
+        if(!command) return NULL;
+	gchar *a = mkCommandLine(command, path);
+
+        const gchar *term = Util<Type>::what_term ();
+        const gchar *exec_flag = Util<Type>::term_exec_option(term);
+        command_line = g_strdup_printf ("%s %s %s", term, exec_flag, a);
+	g_free(a);
+        return command_line;
+    }
+
+    static gboolean isValidCommand (const char *cmd_fmt) {
+        //return GINT_TO_POINTER(TRUE);
+        TRACE ("MIME: mime_is_valid_command(%s)\n", cmd_fmt);
+        GError *error = NULL;
+        int argc;
+        gchar *path;
+        gchar **argv;
+        if(!cmd_fmt)
+            return  (FALSE);
+        if(!g_shell_parse_argv (cmd_fmt, &argc, &argv, &error)) {
+            gchar *msg = g_strcompress (error->message);
+            ERROR ("%s: %s\n", msg, cmd_fmt);
+            g_error_free (error);
+            g_free (msg);
+            return  (FALSE);
+        }
+        gchar **ap = argv;
+        if (*ap==NULL) {
+            errno = ENOENT;
+            return  (FALSE);
+        }
+
+        // assume command is correct if environment is being set
+        if (strchr(*ap, '=')){
+            g_strfreev (argv);
+            return  (TRUE);
+        }
+
+        path = g_find_program_in_path (*ap);
+        if(!path) {
+            gboolean direct_path = g_file_test (argv[0], G_FILE_TEST_EXISTS) ||
+                strncmp (argv[0], "./", strlen ("./")) == 0 || strncmp (argv[0], "../", strlen ("../")) == 0;
+            TRACE("argv[0]=%s\n",argv[0]);
+            if(direct_path) {
+                path = g_strdup (argv[0]);
+            }
+        }
+        TRACE ("mime_is_valid_command(): g_find_program_in_path(%s)=%s\n", argv[0], path);
+
+        //if (!path || access(path, X_OK) != 0) {
+        if(!path) {
+            g_strfreev (argv);
+            errno = ENOENT;
+            return  (FALSE);
+        }
+        // here we test for execution within sudo
+        // XXX we could also check for commands executed in a terminal, but not today...
+        gboolean retval=(TRUE);
+        if (strcmp(argv[0],"sudo")==0) {
+            int i=1;
+            if (strcmp(argv[i],"-A")==0) i++;
+            retval=isValidCommand(argv[i]);
+        }
+
+        g_strfreev (argv);
+        g_free (path);
+        return retval;
+    }
+
+
+   
     
 };
 }

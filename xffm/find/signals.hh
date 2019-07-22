@@ -816,7 +816,7 @@ private:
         TRACE("editor = %s\n", editor);
         gchar *command;
 	if (Run<Type>::runInTerminal(editor)){
-	    command = Mime<Type>::mkTerminalLine(editor, "");
+	    command = Run<Type>::mkTerminalLine(editor, "");
 	} else {
 	    command = g_strdup(editor);
 	}
