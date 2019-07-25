@@ -70,7 +70,7 @@ public:
 	    DBG("mime.hh::mimeType(): stat %s (%s)\n",
 		file, strerror(errno));
 	    errno=0;
-	    return g_strdup("unknown mimetype");
+	    return g_strdup("inode/unknown");
 	}
         gchar *r = mimeType(file, &st);
         return r;

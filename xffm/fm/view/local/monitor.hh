@@ -183,6 +183,13 @@ public:
 	g_free(basename);
 	auto xd_p = LocalModel<Type>::get_xd_p(directory, &d, TRUE);
 	g_free(directory);
+	TRACE("%s --> %s --> %s\n", xd_p->path, xd_p->mimetype, xd_p->icon);
+	if (strcmp(xd_p->mimetype, "inode/unknown")==0){
+	    g_free(xd_p->mimetype);
+	    xd_p->mimetype = Mime<Type>::mimeType(xd_p->path);
+	    g_free(xd_p->icon);
+	    xd_p->icon = LocalIcons<Type>::getIconname(xd_p);   
+	}
         gchar *iconName = xd_p->icon;
 
 	
@@ -225,21 +232,6 @@ public:
 	    g_free(path);
 	    return FALSE;
 	}
-        // use hashkey
-        gchar *key = Hash<Type>::get_hash_key(path, 10);
-	
-        if (!g_hash_table_lookup(this->itemsHash(), key) 
-                && g_file_test(path, G_FILE_TEST_EXISTS))
-        {
-  	    TRACE("***restat_item %s --> %s is not in itemsHash()... Add?\n", key, path);
-            //add_new_item(src);
-            //this->updateFileCountLabel();
-      
-            g_free(path);
-            g_free(key);
-            return FALSE; 
-        }
-        g_free(key);
         gtk_tree_model_foreach (GTK_TREE_MODEL(this->store_), stat_func, (gpointer) path); 
         g_free(path);
         return TRUE;
@@ -261,7 +253,7 @@ private:
         TRACE("*** monitor_f call...\n");
         auto p = (LocalMonitor<Type> *)data;
 	if (!p->active()){
-	    DBG("monitor_f(): monitor not currently active.\n");
+	    TRACE("monitor_f(): monitor not currently active.\n");
 	    return;
 	}
         if (!BaseSignals<Type>::validBaseView(p->view())) return;

@@ -139,20 +139,13 @@ public:
         }
         TRACE("mime-module, extensionMimeType looking in sfx hash for \"%s\"\n", file);
 
-	// if suffix is duplicated, first try magic.
 	
         ///  look in sfx hash...
         gchar *basename = g_path_get_basename (file);
         if (strchr (basename, '.')) p = strchr (basename, '.');
         else {
 	    // no file extension.
-            pthread_mutex_lock(&mimeHashMutex);
-	    type = lookupBySuffix(file, NULL);
             pthread_mutex_unlock(&mimeHashMutex);
-            if(type) {
-                TRACE("mime-module(1), FOUND %s: %s\n", file, type);
-                return g_strdup(type);
-            }
             return NULL;
         }
         // Right to left:

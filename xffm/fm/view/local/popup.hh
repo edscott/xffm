@@ -347,14 +347,20 @@ public:
         auto iconName = Popup<Type>::getWidgetData(localItemPopUp,  "iconName");
         auto statLine = Popup<Type>::getWidgetData(localItemPopUp,  "statLine");
 
+	auto specificMimeType = Mime<Type>::mimeType(path);
+	gchar *plainMimeType = NULL;
+	if (mimetype && specificMimeType && strcmp(mimetype, specificMimeType)){
+	    plainMimeType = g_strdup_printf("(%s)",mimetype);
+	    // we could update icon here to specific mimetype icon...
+	}
 	
-	
-        gchar *markup = g_strdup_printf("<span color=\"red\"><b><i>%s</i></b></span><span color=\"#aa0000\">%s%s</span>\n<span color=\"blue\">%s</span>\n<span color=\"green\">%s</span>", 
+        gchar *markup = g_strdup_printf("<span color=\"red\"><b><i>%s</i></b></span><span color=\"#aa0000\">: %s %s</span>\n<span color=\"blue\">%s</span>\n<span color=\"green\">%s</span>", 
 		display_name, 
-		mimetype?": ":"",
-		mimetype?mimetype:"",
+		specificMimeType?specificMimeType:"",
+		plainMimeType?plainMimeType:"",
 		fileInfo?fileInfo:"", 
 		statLine?statLine:"");
+	g_free(plainMimeType);
 
         Popup<Type>::changeTitle(localItemPopUp, markup, iconName);
 	g_free(markup);
@@ -384,15 +390,16 @@ public:
 	if (listLength == 1){
 	    runWithDialog(path); // ask for arguments for an executable path.
 	    // open with mimetype application
-	    setUpMimeTypeApp(mimetype, path, fileInfo);
+	    setUpMimeTypeApp(specificMimeType?specificMimeType:mimetype, path, fileInfo);
 	    if (g_file_test(path, G_FILE_TEST_IS_DIR)) {
 		showDirectoryItems(path);
 	    }
-	    else openWithDialog(path, mimetype, fileInfo);
+	    else openWithDialog(path, specificMimeType?specificMimeType:mimetype, fileInfo);
 	} else {
 	    openWithDialog();
 	}
 
+	g_free(specificMimeType);
 
 
     }
