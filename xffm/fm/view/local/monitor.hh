@@ -187,6 +187,7 @@ public:
 	if (strcmp(xd_p->mimetype, "inode/unknown")==0){
 	    g_free(xd_p->mimetype);
 	    xd_p->mimetype = Mime<Type>::mimeType(xd_p->path);
+	    if (!xd_p->mimetype) xd_p->mimetype = g_strdup("inode/unknown");
 	    g_free(xd_p->icon);
 	    xd_p->icon = LocalIcons<Type>::getIconname(xd_p);   
 	}
