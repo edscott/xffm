@@ -195,13 +195,46 @@ public:
 
 	
         TRACE("***localmonitor stat_func(): iconname=%s\n", iconName);
-        GdkPixbuf *pixbuf = Pixbuf<Type>::get_pixbuf(iconName,  GTK_ICON_SIZE_DIALOG);
-        auto highlight_pixbuf = gdk_pixbuf_copy(pixbuf);
+	GdkPixbuf *pixbuf = Pixbuf<Type>::get_pixbuf(iconName,  -48);
+	GdkPixbuf *treepixbuf = Pixbuf<Type>::get_pixbuf(iconName,  -24);
+	auto highlight_pixbuf = gdk_pixbuf_copy(pixbuf);
+        //Highlight emblem macros are defined in types.h
+	//
+	// Decorate highlight pixbuf
+	// (duplicate code in monitor.hh)
+	const gchar *emblem="";
+	if (xd_p->mimetype){
+	    if (strncmp(xd_p->mimetype, "inode/regular", strlen("inode/regular"))==0){
+		emblem = HIGHLIGHT_TEXT;
+	    }
+	    if (strncmp(xd_p->mimetype, "text", strlen("text"))==0){
+		emblem = HIGHLIGHT_TEXT;
+	    }
+	    if (strncmp(xd_p->mimetype, "application", strlen("application"))==0){
+		emblem = HIGHLIGHT_APP;
+	    }
+	}
+
+
         // Now decorate the pixbuf with emblem (types.h).
-        void *arg[] = {NULL, (void *)highlight_pixbuf, NULL, NULL, (void *)HIGHLIGHT_EMBLEM };
+        void *arg[] = {NULL, (void *)highlight_pixbuf, NULL, NULL, (void *)emblem };
         // Done by main gtk thread:
         Util<Type>::context_function(Icons<Type>::insert_decoration_f, arg);
-        
+#if 0
+	// decorate image preview with cut emblem
+	const gchar *clipEmblem=NULL;
+	if (Gtk<Type>::isImage(xd_p->mimetype)){
+	    if (ClipBoard<Type>::isInClipBoard(xd_p->path)){
+		if(ClipBoard<Type>::isClipBoardCut()) clipEmblem="NE/edit-cut/2/220";
+		else clipEmblem="NE/edit-copy/2/220";
+		void *arg2[] = {NULL, (void *)pixbuf, NULL, NULL, (void *)clipEmblem };
+		Util<Type>::context_function(Icons<Type>::insert_decoration_f, arg2);
+
+		void *arg3[] = {NULL, (void *)treepixbuf, NULL, NULL, (void *)clipEmblem };
+		Util<Type>::context_function(Icons<Type>::insert_decoration_f, arg3);
+	    }
+	}
+#endif        
 
         auto date = LocalModel<Type>::dateString((xd_p->st)?xd_p->st->st_mtime:0);
         auto size = LocalModel<Type>::sizeString((xd_p->st)?xd_p->st->st_size:0);
@@ -211,6 +244,7 @@ public:
                 DATE, date,
                 ICON_NAME, iconName,
                 DISPLAY_PIXBUF, pixbuf,
+                TREEVIEW_PIXBUF, treepixbuf,
                 NORMAL_PIXBUF, pixbuf,
                 HIGHLIGHT_PIXBUF, highlight_pixbuf, 
                 FLAGS, xd_p->d_type,
@@ -281,7 +315,7 @@ private:
 #endif
                 break;
             case G_FILE_MONITOR_EVENT_CHANGED:
-                TRACE("monitor_f(): Received  CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
+                DBG("monitor_f(): Received  CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
                 p->restat_item(first);
                 // reload icon
                 //FIXME: check if this is now done:

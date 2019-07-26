@@ -126,7 +126,6 @@ private:
     static gchar *
     specificIconName(const gchar *path, const gchar *mimetype){
         if (Gtk<Type>::isImage(mimetype)) {
-            //if (isTreeView) return g_strdup("image-x-generic");
             return g_strdup(path);
         }
         static const gchar *type1[] = {"image", "text", "audio", "font", "video", NULL};
@@ -350,6 +349,7 @@ private:
 	gchar *clipEmblem = ClipBoard<Type>::clipBoardEmblem(path);
         emblem = addEmblem(emblem, clipEmblem);
         g_free(clipEmblem);
+	TRACE("emblem = %s\n", emblem);
 
 #ifdef ENABLE_FSTAB_MODULE
 	if (d_type == DT_DIR || d_type == DT_BLK){

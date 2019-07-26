@@ -98,6 +98,8 @@ public:
 	    TRACE("icons.hh:: absolute_path_icon(): %s does not exist.\n", icon_name);
 	    return NULL;
 	}
+	auto pixbuf = pixbuf_new_from_file(icon_name, size, size); // width,height.
+	
 	return pixbuf_new_from_file(icon_name, size, size); // width,height.
     }
 

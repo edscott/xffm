@@ -764,6 +764,9 @@ private:
 	    Pixbuf<Type>::pixbuf_save(normal_pixbuf, thumbnail);
 	}
         //Highlight emblem macros are defined in types.h
+	//
+	// Decorate highlight pixbuf
+	// (duplicate code in monitor.hh)
         if (!highlight_pixbuf) {
             highlight_pixbuf = gdk_pixbuf_copy(normal_pixbuf);
         

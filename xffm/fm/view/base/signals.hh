@@ -392,6 +392,12 @@ public:
                     return TRUE;
 		}
 
+		if (isTreeView){
+		    auto selection = gtk_tree_view_get_selection (view->treeView());
+		} else {
+		    
+		}
+		unselectAll(data);
                 reSelect(data, tpath);
 		gtk_tree_path_free(tpath);
             }
@@ -665,63 +671,7 @@ public:
                 break;
         }
         return ;
-    }
-/*    
-    static GtkMenu *
-    configureMenu(gint viewType, gboolean items){
-        GtkMenu *menu = NULL;
-        switch (view->viewType()){
-            case (ROOTVIEW_TYPE):
-		TRACE("configureMenu  ROOTVIEW_TYPE\n");
-                if (items) {
-                    menu = rootItemPopUp;
-                    RootPopUp<Type>::resetMenuItems();
-                } else {
-                    menu = rootPopUp;
-                    RootPopUp<Type>::resetPopup();
-                }
-                break;
-            case (LOCALVIEW_TYPE):
-		TRACE("configureMenu  LOCALVIEW_TYPE\n");
-                if (items) {
-                    menu = localItemPopUp;
-                    LocalPopUp<Type>::resetMenuItems();
-                } else {
-                    menu = localPopUp;
-                    LocalPopUp<Type>::resetLocalPopup();
-                }
-                break;
-#ifdef ENABLE_FSTAB_MODULE
-            case (FSTAB_TYPE):
-		TRACE("configureMenu  FSTAB_TYPE\n");
-                if (items) {
-                    menu = fstabItemPopUp;
-                    FstabPopUp<Type>::resetMenuItems();
-                } else {
-                    menu = fstabPopUp;
-                    FstabPopUp<Type>::resetPopup();
-                }
-                break;
-#endif
-#ifdef ENABLE_PKG_MODULE
-            case (PKG_TYPE):
-		TRACE("configureMenu  PKG_TYPE\n");
-                if (items) {
-                    menu = pkgItemPopUp;
-                    PkgPopUp<Type>::resetMenuItems();
-                } else {
-                    menu = pkgPopUp;
-                    PkgPopUp<Type>::resetPopup();
-                }
-                break;
-#endif
-            default:
-                ERROR("fm/base/signals.hh::ViewType %d not defined.\n", view->viewType());
-                break;
-        }
-        return menu;
-    }
-*/
+    }    
 
     static gboolean
     unhighlight (gpointer key, gpointer value, gpointer data){
@@ -1083,16 +1033,19 @@ public:
         GtkTreeIter iter;
         if (isTreeView) {
             // hacked for xy coordinates differ from treeview coordinates...
-	    gtk_tree_view_get_path_at_pos (view->treeView(),
+	    if (gtk_tree_view_get_path_at_pos (view->treeView(),
                                x, (y-24 >0)?y-24:0, 
-			       &tpath, NULL, NULL, NULL);
-            gtk_tree_model_get_iter (view->treeModel(), &iter, tpath);
-	    gtk_tree_model_get (view->treeModel(), &iter, PATH, &target, -1);
-	    if (g_file_test(target, G_FILE_TEST_IS_DIR)){
-		gtk_tree_view_set_drag_dest_row (view->treeView(),
-                                 tpath,GTK_TREE_VIEW_DROP_INTO_OR_AFTER);
+			       &tpath, NULL, NULL, NULL)){
+		gtk_tree_model_get_iter (view->treeModel(), &iter, tpath);
+		gtk_tree_model_get (view->treeModel(), &iter, PATH, &target, -1);
+		if (g_file_test(target, G_FILE_TEST_IS_DIR)){
+		    gtk_tree_view_set_drag_dest_row (view->treeView(),
+			     tpath,GTK_TREE_VIEW_DROP_INTO_OR_AFTER);
+		} else {
+		    g_free(target);
+		    target = g_strdup(view->path());
+		}
 	    } else {
-		g_free(target);
 		target = g_strdup(view->path());
 	    }
         } else {

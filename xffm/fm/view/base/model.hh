@@ -28,23 +28,23 @@ class BaseModel
 
 	GtkTreeIter iter;
 	GtkListStore *list_store = gtk_list_store_new (NUM_COLS, 
-	    G_TYPE_UINT,      // flags
-	    GDK_TYPE_PIXBUF, // icon in treeView display
-	    GDK_TYPE_PIXBUF, // icon in display
-	    GDK_TYPE_PIXBUF, // normal icon reference
-	    GDK_TYPE_PIXBUF, // highlight icon reference
-	    GDK_TYPE_PIXBUF, // preview, tooltip image (cache)
-	    G_TYPE_STRING,   // name in display (UTF-8)
-	    G_TYPE_STRING,   // path from filesystem (verbatim)
-	    G_TYPE_STRING,   // disk id (or other)
-            G_TYPE_STRING,     // size
-            G_TYPE_STRING,     // date
-	    G_TYPE_STRING,   // tooltip text (cache)
-	    G_TYPE_STRING,   // icon identifier (name or composite key)
-	    G_TYPE_STRING,   // mimetype (further identification of files)
-	    G_TYPE_STRING,   // Preview path
-	    G_TYPE_UINT,      // Preview time
-	    GDK_TYPE_PIXBUF  // Preview pixbuf
+	    G_TYPE_UINT,      // flags FLAGS
+	    GDK_TYPE_PIXBUF, // icon in treeView display TREEVIEW_PIXBUF
+	    GDK_TYPE_PIXBUF, // icon in display DISPLAY_PIXBUF
+	    GDK_TYPE_PIXBUF, // normal icon reference NORMAL_PIXBUF
+	    GDK_TYPE_PIXBUF, // highlight icon reference HIGHLIGHT_PIXBUF
+	    GDK_TYPE_PIXBUF, // preview, tooltip image (cache) TOOLTIP_PIXBUF
+	    G_TYPE_STRING,   // name in display (UTF-8) DISPLAY_NAME
+	    G_TYPE_STRING,   // path from filesystem (verbatim) PATH
+	    G_TYPE_STRING,   // disk id (or other) DISK_ID
+            G_TYPE_STRING,     // size SIZE
+            G_TYPE_STRING,     // date DATE
+	    G_TYPE_STRING,   // tooltip text (cache) TOOLTIP_TEXT
+	    G_TYPE_STRING,   // icon identifier (name or composite key) ICON_NAME
+	    G_TYPE_STRING,   // mimetype (further identification of files) MIMETYPE
+	    G_TYPE_STRING,   // Preview path PREVIEW_PATH
+	    G_TYPE_UINT,      // Preview time PREVIEW_TIME
+	    GDK_TYPE_PIXBUF  // Preview pixbuf PREVIEW_PIXBUF
             ); // 
 	return GTK_TREE_MODEL (list_store);
     }

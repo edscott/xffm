@@ -52,6 +52,8 @@ public:
 	// Pixbuf reference count increases each time a pixbuf is requested from 
 	// hash table. Caller is responsible for unreferencing when no longer used.
 	auto pixels = get_pixel_size(size);
+	// images, in hash
+	
 	GdkPixbuf *pixbuf = pixbuf_hash_c::find_in_pixbuf_hash(icon_name, pixels);
 	if (pixbuf) return pixbuf;
 	// Not found, huh?

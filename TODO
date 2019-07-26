@@ -1,13 +1,7 @@
 For 0.91
 update  MimeSuffix
 1. bug. empty trash bin not showing in xffm:root popup for trash item.
-2. bug. icon wrong for TODO, after monitor does the update
-2. bug. mimetype also may be wrong for TODO, after monitor does the update
-Need to overhaul Mime template, apparently the hashed value is borked with the monitor function...
-
-5. bug... double click on inode/regular does not do combo for edit, even though popup will show gvim
-probably related to item 2.
-
+2. bug. no cut/copy emblem on image previews. see local/monitor.hh:223
  
  > printout optional and required libraries found in configure step.
   * enable sort modes by date, up/down
