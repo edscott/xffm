@@ -140,7 +140,7 @@ public:
 
 
    
-    static gboolean
+/*    static gboolean
     isSelectable(GtkTreeModel *treeModel, GtkTreePath *tpath){
         GtkTreeIter iter;
         if (!gtk_tree_model_get_iter(treeModel, &iter, tpath)) {
@@ -148,7 +148,7 @@ public:
             return FALSE;
         }
         return isSelectable(treeModel, &iter);
-    }
+    }*/
     
     static gboolean
     isSelectable(GtkTreeModel *treeModel, GtkTreeIter *iter){

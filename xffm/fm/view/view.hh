@@ -231,15 +231,36 @@ public:
     }
  
     gboolean isSelectable(GtkTreePath *tpath){
-        switch (this->viewType()){
+	GtkTreeIter iter;
+        if (!gtk_tree_model_get_iter(this->treeModel(), &iter, tpath)) {
+            DBG("isSelectable() cannot get iter\n");
+            return FALSE;
+        }
+	switch (this->viewType()){
             case (LOCALVIEW_TYPE):
-                return LocalView<Type>::isSelectable(this->treeModel(), tpath);        
+                return LocalView<Type>::isSelectable(this->treeModel(),&iter);
+                break;
+            case (ROOTVIEW_TYPE):
+                return RootView<Type>::isSelectable(this->treeModel(),&iter);        
                 break;
             default:
                 TRACE("View::selectables(): No items are selectable for viewType: %d ()\n", this->viewType());
         }
         return FALSE;
     }
+/*    gboolean isSelectable(GtkTreePath *tpath){
+        switch (this->viewType()){
+            case (LOCALVIEW_TYPE):
+                return LocalView<Type>::isSelectable(this->treeModel(), tpath);        
+                break;
+            case (ROOT_TYPE):
+                return RootView<Type>::isSelectable(this->treeModel(), tpath);        
+                break;
+            default:
+                TRACE("View::selectables(): No items are selectable for viewType: %d ()\n", this->viewType());
+        }
+        return FALSE;
+    }*/
   
     void 
     highlight(gdouble X, gdouble Y){

@@ -1,10 +1,9 @@
 For 0.91
-update  MimeSuffix
+ BUG  add bookmark menu item not showing in local view...
 1. bug. empty trash bin not showing in xffm:root popup for trash item.
 2. bug. no cut/copy emblem on image previews. see local/monitor.hh:223
  
  > printout optional and required libraries found in configure step.
-  * enable sort modes by date, up/down
 
 Bugs:
   * bug: do a "git branch whatever" in script mode. Script will expect input
@@ -47,9 +46,9 @@ PKG:
     * pacman -Syy will run before any install, but not on uninstall.
 
 Structure:
-    needs file selector box with bash completion at current directory
-    needs executable definition for OK button
-    needs in terminal (xterm) button (for gccproblem26)
+    needs file selector box with bash completion at current directory (?)
+    needs executable definition for OK button (?)
+    needs in terminal (xterm) button (for gccproblem26)(?)
     needs way to set and insenditivize options if in terminal is not selected
-    (for gccproblem26)
+    (for gccproblem26)(?)
 

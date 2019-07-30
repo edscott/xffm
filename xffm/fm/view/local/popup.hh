@@ -92,7 +92,7 @@ public:
     static menuItem_t *menuItems(void){
          static menuItem_t item[]={
 	    {N_("New"), (void *)newItem, NULL, NULL},
-	    {N_("Open in New Tab"), (void *)newTab, NULL, NULL},
+	    {N_("Open in New Tab"), (void *)newTab, localPopUp, NULL},
             // deprecated {N_("Open in New Tab"), NULL, NULL, NULL},
             // deprecated {N_("Open in New Window"), NULL, NULL, NULL},
             
@@ -145,7 +145,7 @@ public:
 	    {N_("Open with"), (void *)openWith, NULL, NULL},
 	    {N_("Run Executable..."), (void *)runWith, NULL, NULL},
 	    {N_("Extract files from the archive"), (void *)untar, NULL, NULL},
-	    {N_("Open in New Tab"), (void *)newTab, NULL, NULL},
+	    {N_("Open in New Tab"), (void *)newTab, localItemPopUp, NULL},
 	    {N_("Create a compressed archive with the selected objects"), (void *)tarball, NULL, NULL},
 #ifdef ENABLE_FSTAB_MODULE
 	    {N_("Mount the volume associated with this folder"), (void *)mount, NULL, NULL},
@@ -225,16 +225,6 @@ public:
     }
 
 private:
-    static void 
-	configureMenuItem(GtkMenu*menu, const gchar *key, gboolean test, const gchar *path){
-        auto w = GTK_WIDGET(g_object_get_data(G_OBJECT(menu), key));
-        if (w) {
-	    if (test) gtk_widget_show(w);
-	    else gtk_widget_hide(w);
-	    gtk_widget_set_sensitive(w, path != NULL);
-	    Popup<Type>::setWidgetData(w, "path", path);
-	}
-    }
     static void
     customPasteInto(GtkMenu *menu, const gchar *path, gint size){
 	    // Make menuitem text specific...
@@ -265,21 +255,21 @@ public:
 
 	auto validView = g_object_get_data(G_OBJECT(localPopUp),"view")!=NULL;
 
-	configureMenuItem(localPopUp, "New", validView, path);
-	configureMenuItem(localPopUp, "Open in New Tab", TRUE, path);
-	configureMenuItem(localPopUp, "Select All", validView, path);
-	configureMenuItem(localPopUp, "Match regular expression",validView, path);
+	Popup<Type>::configureMenuItem(localPopUp, "New", validView, path);
+	Popup<Type>::configureMenuItem(localPopUp, "Open in New Tab", TRUE, path);
+	Popup<Type>::configureMenuItem(localPopUp, "Select All", validView, path);
+	Popup<Type>::configureMenuItem(localPopUp, "Match regular expression",validView, path);
 
         // unsensitivize "Paste" only if valid pasteboard...
-	//configureMenuItem(localPopUp, "Paste", validView && ClipBoard<Type>::clipBoardIsValid(), path);
-	configureMenuItem(localPopUp, "There is nothing on the clipboard to paste.",!ClipBoard<Type>::clipBoardIsValid(), NULL);
+	//Popup<Type>::configureMenuItem(localPopUp, "Paste", validView && ClipBoard<Type>::clipBoardIsValid(), path);
+	Popup<Type>::configureMenuItem(localPopUp, "There is nothing on the clipboard to paste.",!ClipBoard<Type>::clipBoardIsValid(), NULL);
 
-	configureMenuItem(localPopUp, "Paste into", ClipBoard<Type>::clipBoardIsValid(), path);
+	Popup<Type>::configureMenuItem(localPopUp, "Paste into", ClipBoard<Type>::clipBoardIsValid(), path);
 	customPasteInto(localPopUp, path, -24);
 
-	configureMenuItem(localPopUp, "Copy",listLength > 0, path);
-	configureMenuItem(localPopUp, "Cut",listLength > 0, path);
-	configureMenuItem(localPopUp, "Delete",listLength > 0, path);
+	Popup<Type>::configureMenuItem(localPopUp, "Copy",listLength > 0, path);
+	Popup<Type>::configureMenuItem(localPopUp, "Cut",listLength > 0, path);
+	Popup<Type>::configureMenuItem(localPopUp, "Delete",listLength > 0, path);
 
 	gchar *fileInfo = util_c::fileInfo(path);
 	gchar *displayName = util_c::valid_utf_pathstring(path);
@@ -369,19 +359,19 @@ public:
 	
 	gint listLength = g_list_length(view->selectionList());
 	for (auto k=commonItems; k && *k; k++){
-	    configureMenuItem(localItemPopUp, *k, listLength > 0, path);
+	    Popup<Type>::configureMenuItem(localItemPopUp, *k, listLength > 0, path);
 	}
-	configureMenuItem(localItemPopUp, "Paste", ClipBoard<Type>::clipBoardIsValid(), path);
-	configureMenuItem(localItemPopUp, "There is nothing on the clipboard to paste.", !ClipBoard<Type>::clipBoardIsValid(), NULL);
-	configureMenuItem(localItemPopUp, "Paste into", FALSE, path);
+	Popup<Type>::configureMenuItem(localItemPopUp, "Paste", ClipBoard<Type>::clipBoardIsValid(), path);
+	Popup<Type>::configureMenuItem(localItemPopUp, "There is nothing on the clipboard to paste.", !ClipBoard<Type>::clipBoardIsValid(), NULL);
+	Popup<Type>::configureMenuItem(localItemPopUp, "Paste into", FALSE, path);
 
 	for (auto k=singleSelectItems; k && *k; k++){
-	    configureMenuItem(localItemPopUp, *k, listLength == 1, path);
+	    Popup<Type>::configureMenuItem(localItemPopUp, *k, listLength == 1, path);
 	}
 	if (listLength==1){
-	    configureMenuItem(localItemPopUp, "Extract files from the archive", strstr(mimetype, "compressed-tar") != NULL, path);
+	    Popup<Type>::configureMenuItem(localItemPopUp, "Extract files from the archive", strstr(mimetype, "compressed-tar") != NULL, path);
 
-	    configureMenuItem(localItemPopUp, "Paste into", 
+	    Popup<Type>::configureMenuItem(localItemPopUp, "Paste into", 
 			strstr(mimetype, "inode/directory") != NULL &&
 			ClipBoard<Type>::clipBoardIsValid(), path);
 	    customPasteInto(localItemPopUp, path, -16);
@@ -478,22 +468,22 @@ private:
         // unhide 
         const gchar **p;
         for (p=directoryItems; p &&*p; p++){
-	    configureMenuItem(localItemPopUp, *p, FALSE, path);
+	    Popup<Type>::configureMenuItem(localItemPopUp, *p, FALSE, path);
         }
-	configureMenuItem(localItemPopUp, "title", TRUE, path);
+	Popup<Type>::configureMenuItem(localItemPopUp, "title", TRUE, path);
 
         // unsensitivize "Paste" only if valid pasteboard...
-	configureMenuItem(localItemPopUp, "Paste", ClipBoard<Type>::clipBoardIsValid(), path);
-	configureMenuItem(localItemPopUp, "Paste into", ClipBoard<Type>::clipBoardIsValid(), path);
+	Popup<Type>::configureMenuItem(localItemPopUp, "Paste", ClipBoard<Type>::clipBoardIsValid(), path);
+	Popup<Type>::configureMenuItem(localItemPopUp, "Paste into", ClipBoard<Type>::clipBoardIsValid(), path);
 
         //////  Directory options
 
         // open in new tab
-	configureMenuItem(localItemPopUp, "Open in New Tab", TRUE, path);
+	Popup<Type>::configureMenuItem(localItemPopUp, "Open in New Tab", TRUE, path);
         w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Open in New Tab"));
         gtk_widget_set_sensitive(w, TRUE);
         // Create compressed tarball
-	configureMenuItem(localItemPopUp, "Create a compressed archive with the selected objects", TRUE, path);
+	Popup<Type>::configureMenuItem(localItemPopUp, "Create a compressed archive with the selected objects", TRUE, path);
 
 	// bookmark options
         if (!RootView<Type>::isBookmarked(path)) {
@@ -857,12 +847,12 @@ public:
 
 
     static void
-    newTab(GtkMenuItem *menuItem, gpointer data)
+    newTab(GtkMenu *menu, gpointer data)
     {
         auto dialog = (Dialog<Type> *)g_object_get_data(G_OBJECT(mainWindow), "dialog");
-	auto view =  (View<Type> *)g_object_get_data(G_OBJECT(menuItem), "view");
-	auto path = (const gchar *)g_object_get_data(G_OBJECT(menuItem), "path");
-
+	auto view =  (View<Type> *)g_object_get_data(G_OBJECT(menu), "view");
+	auto path = (const gchar *)g_object_get_data(G_OBJECT(data?data:menu), "path");
+	DBG("localview::newTab path= %s\n", path);
         dialog->addPage(path);
 
 /*	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
