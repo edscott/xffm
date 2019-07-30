@@ -1,9 +1,9 @@
 
 
-#include "response/passwdresponse.hh"
-#include "response/chooserresponse.hh"
-#include "response/comboresponse.hh"
-#include "response/customresponse.hh"
-#include "response/commandresponse.hh"
-#include "response/timeoutresponse.hh"
+#include "passwdresponse.hh"
+#include "chooserresponse.hh"
+#include "comboresponse.hh"
+#include "customresponse.hh"
+#include "commandresponse.hh"
+#include "timeoutresponse.hh"
 
