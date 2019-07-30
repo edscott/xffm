@@ -487,6 +487,15 @@ private:
 
 	// bookmark options
         if (!RootView<Type>::isBookmarked(path)) {
+	    Popup<Type>::configureMenuItem(localItemPopUp, "Add bookmark", TRUE, path);
+	    Popup<Type>::configureMenuItem(localItemPopUp, "Remove bookmark", FALSE, path);
+        } else {
+	    Popup<Type>::configureMenuItem(localItemPopUp, "Add bookmark", FALSE, path);
+	    Popup<Type>::configureMenuItem(localItemPopUp, "Remove bookmark", TRUE, path);
+        }
+	/*
+	// bookmark options
+        if (!RootView<Type>::isBookmarked(path)) {
             w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Add bookmark"));
             gtk_widget_set_sensitive(w, TRUE);
             w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Remove bookmark"));
@@ -496,7 +505,7 @@ private:
             gtk_widget_set_sensitive(w, TRUE);
             w = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Add bookmark"));
             gtk_widget_hide(w);
-        }
+        }*/
 	
 
 #ifdef ENABLE_FSTAB_MODULE
