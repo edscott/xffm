@@ -88,7 +88,7 @@ public:
     setWidgetData(GtkWidget *w, const gchar *key, const gchar *data){
 	if (!w) ERROR("base signals: setMenuItemData() menu is null\n");
 	g_free(g_object_get_data(G_OBJECT(w), key));
-	DBG("setWidgetData(%s) -> %s\n", key, data);
+	TRACE("setWidgetData(%s) -> %s\n", key, data);
         g_object_set_data(G_OBJECT(w), key, g_strdup(data));
 	return data;
     }

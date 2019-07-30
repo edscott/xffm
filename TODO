@@ -1,5 +1,4 @@
 For 0.91
- BUG  add bookmark menu item not showing in local view...
 1. bug. empty trash bin not showing in xffm:root popup for trash item.
 2. bug. no cut/copy emblem on image previews. see local/monitor.hh:223
  

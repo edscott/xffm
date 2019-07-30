@@ -861,7 +861,7 @@ public:
         auto dialog = (Dialog<Type> *)g_object_get_data(G_OBJECT(mainWindow), "dialog");
 	auto view =  (View<Type> *)g_object_get_data(G_OBJECT(menu), "view");
 	auto path = (const gchar *)g_object_get_data(G_OBJECT(data?data:menu), "path");
-	DBG("localview::newTab path= %s\n", path);
+	TRACE("localview::newTab path= %s\n", path);
         dialog->addPage(path);
 
 /*	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
