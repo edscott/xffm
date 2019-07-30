@@ -54,6 +54,7 @@ static GtkWindow *mainWindow = NULL;
 static gboolean isTreeView = FALSE;
 GList *customDialogs = NULL;
 #include "common/common.hh"
+#include "mime/mime.hh"
 #include "completion/completion.hh"
 #include "response/response.hh"
 #include "find/find.hh"
