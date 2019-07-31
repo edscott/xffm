@@ -224,7 +224,12 @@ public:
 	
 	
         if (currentPage == pageNumber) {
-            gtk_notebook_set_current_page (notebook_, pageNumber-1);
+	    auto pages = gtk_notebook_get_n_pages (notebook_);
+	    gint nextPage = currentPage+1;
+	    if (nextPage > pages-1){
+		nextPage = pages-1;
+	    } 
+            gtk_notebook_set_current_page (notebook_, nextPage);
         } 
 
         gtk_widget_hide(child);
