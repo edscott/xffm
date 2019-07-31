@@ -218,13 +218,18 @@ public:
 	}
 
 	GdkPixbuf *highlight_pixbuf;
-	if (strcmp(xd_p->mimetype, "inode/directory")){
+	if (strcmp(xd_p->mimetype, "inode/directory")==0){
 	    //FIXME: this is not working as intended...
 	    //       highlight_pixbuf is also incorrect for images...
 	    //       but works ok for other file types...
-	    highlight_pixbuf = Pixbuf<Type>::get_pixbuf(iconName,  -48);
+	    highlight_pixbuf = Pixbuf<Type>::get_pixbuf("document-open",  -48);
+	    DBG("highlight pixbuf = %s -> document-open\n", xd_p->path);
 	}
-	else highlight_pixbuf = gdk_pixbuf_copy(pixbuf);
+	else {
+	    DBG("local/monitor: mimetype=%s\n", xd_p->mimetype);
+	    DBG("highlight pixbuf = %s->%s\n", xd_p->path, iconName);
+	    highlight_pixbuf = gdk_pixbuf_copy(pixbuf);
+	}
         //Highlight emblem macros are defined in types.h
 	//
 	// Decorate highlight pixbuf
@@ -252,7 +257,7 @@ public:
 
         auto date = LocalModel<Type>::dateString((xd_p->st)?xd_p->st->st_mtime:0);
         auto size = LocalModel<Type>::sizeString((xd_p->st)?xd_p->st->st_size:0);
-
+DBG("local/monitor gtk_list_store_set(%s)\n", iconName);
 	gtk_list_store_set (store, iter, 
                 SIZE, size, 
                 DATE, date,

@@ -804,6 +804,7 @@ private:
         gchar **p = NULL;
         if (!statInfo) statInfo = g_strdup("");
         if (up) flags |= 0x100;
+	TRACE("local/model gtk_list_store_set(%s)\n", icon_name);
         gtk_list_store_set (list_store, iter, 
 		FLAGS, flags,
                 DISPLAY_NAME, utf_name,
