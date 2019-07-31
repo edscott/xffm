@@ -223,11 +223,11 @@ public:
 	    //       highlight_pixbuf is also incorrect for images...
 	    //       but works ok for other file types...
 	    highlight_pixbuf = Pixbuf<Type>::get_pixbuf("document-open",  -48);
-	    DBG("highlight pixbuf = %s -> document-open\n", xd_p->path);
+	    TRACE("highlight pixbuf = %s -> document-open\n", xd_p->path);
 	}
 	else {
-	    DBG("local/monitor: mimetype=%s\n", xd_p->mimetype);
-	    DBG("highlight pixbuf = %s->%s\n", xd_p->path, iconName);
+	    TRACE("local/monitor: mimetype=%s\n", xd_p->mimetype);
+	    TRACE("highlight pixbuf = %s->%s\n", xd_p->path, iconName);
 	    highlight_pixbuf = gdk_pixbuf_copy(pixbuf);
 	}
         //Highlight emblem macros are defined in types.h
@@ -245,14 +245,16 @@ public:
 	    if (strncmp(xd_p->mimetype, "application", strlen("application"))==0){
 		emblem = HIGHLIGHT_APP;
 	    }
-	} else {
-		emblem = HIGHLIGHT_TEXT;
+	    else emblem = HIGHLIGHT_EMBLEM;
 	}
 	if (strlen(emblem)){
 	    // Now decorate the pixbuf with emblem (types.h).
 	    void *arg[] = {NULL, (void *)highlight_pixbuf, NULL, NULL, (void *)emblem };
+	    TRACE("pixbuf emblem = %s->%s\n", xd_p->path, emblem);
 	    // Done by main gtk thread:
 	    Util<Type>::context_function(Icons<Type>::insert_decoration_f, arg);
+	} else {
+	    TRACE("no emblem for %s\n", xd_p->path);
 	}
 
         auto date = LocalModel<Type>::dateString((xd_p->st)?xd_p->st->st_mtime:0);
