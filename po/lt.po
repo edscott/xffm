@@ -1,0 +1,1405 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:41:58 CDT 2013 ---
+#
+# Andrius Štikonas <stikonas@gmail.com>, 2007-2011.
+# Rytis Umbrasas <rytumb@gmail.com>, 2009.
+# Lithuanian message file for YaST2 (@memory@). <>.
+# Darius Žitkevičius <skystis@splius.lt>, 2005.
+# Algimantas Margevičius <gymka@mail.ru>, 2011-2012.
+# Aurimas Fišeras <aurimas@members.fsf.org>, 2005-2011.
+# Tadas Masiulionis <tadzikaz@gmail.com>, 2009.
+# Kęstutis Kružikas <DrKestas@takas.lt>, 2000.
+# Liudas Dmitrijevas <liudacka@xxx.lt>, 2003.
+# Mantas Kriaučiūnas <mantas@akl.lt>, 2001-2013.
+# Giedrius Naudžiūnas <gimpng@gmail.com>, 2004-2005.
+# Gintautas Miselis <gintautas@miselis.lt>, 2008.
+# Vytautas Mickus vmickus@gmail.com>, 2011. <>.
+# Upynas <jonas@vrc.lt>, 2011.
+# Karina Gribanova <buratina@delfi.lt>, 2001-2002.
+# Linas Vasiliauskas <linasv@centras.lt>, 2004.
+# Gediminas Paulauskas <menesis@delfi.lt>, 2000-2007.
+# Gediminas Čičinskas <wooz@parok.lt>, 2004.
+# Eugenijus Paulauskas <filija@klaipeda.omnitel.net>, 2000.
+# Žygimantas Beručka <zygis@gnome.org>, 2003-2013.
+# Remigijus Jarmalavičius <remigijus@jarmalavicius.lt>, 2011-2012.
+# Gintautas Miliauskas <gintas@akl.lt>, 2005-2010.
+# Vaidrius Paulauskas <vaidrius@delfi.lt>, 2003.
+# vt <punktyras@nkm.lt>, 2007.
+# Laumingis Skripkauskas <om@takas.lt>, 2005.
+# Rimas Kudelis <rq@akl.lt>, 2008-2010.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2002-2012.
+# Vaidotas Zemlys <mpiktas@delfi.lt>, 2003.
+# Liudas Ališauskas <liudas.alisauskas@gmail.com>, 2011-2013.
+# first translator Ričardas Čepas <rch@richard.eu.org>, 2004.
+# Andrius Štikoans <stikonas@gmail.com>, 2009.
+# Marius Karnauskas <marius@esga.lt>, 2004-2005.
+# Marius Gedminas <marius@gedmin.as>, 2007-2010.
+# Eglė <egle.alisauskiene@gmail.com>, 2011.
+# Valdas Jankūnas <zmuogs@gmail.com>, 2008-2009.
+# Romas Mazeika <romas@mazeika.lt>, 2007.
+# Donatas Glodenis <dgvirtual@akl.lt>, 2004-2011.
+# Justina Klingaitė <justina.klingaite@gmail.com>, 2005-2008.
+# Lech Jankovski <godgard@gmail.com>, 2004.
+# Jurgis Pralgauskis <jurgis@ljms.lt>, 2007.
+# Kęstutis Biliūnas <kebil@kaunas.init.lt>, 2005.
+# Linas Spraunius <lsprauni@radio.lt>, 2000-2002.
+# Antanas Uršulis <antanas.ursulis@gmail.com>, 2008.
+# Mantas Zapolskas <mantaz@users.sf.net>, 2003.
+# Dovydas Sankauskas <laisve@gmail.com>, 2005-2008.
+# Vytautas Rėkus <v.rekus@gmail.com>, 2009.
+# Mindaugas Baranauskas <embar@micro.lt>, 2007-2011.
+# Artūras Šlajus <x11@h2o.pieva.net>, 2004.
+# Copyright © 2007 Gintautas Miliauskas <gintas@akl.lt>.
+# Nerijus Kislauskas <nierka@splius.lt>, 2005.
+# Darius Žitkevicius <skystis@splius.lt>, 2005.
+# Copyright (C) 2007 Gintautas Miliauskas <gintas@akl.lt>.
+# Matas Brazdeikis <matasbbb@gmail.com>, 2008.
+# Vaidrius Petrauskas <vaidrius@delfi.lt>, 2005.
+# Jonas Česnauskas <upynas@gmail.com>, 2011.
+# Giedrius Slavinskas <giedrius25@gmail.com>, 2009-2010.
+# Eglė Girinaitė <eglyte@centras.lt>, 2001-2003.
+#  Valdas Jankūnas <dskroblas@erdves.lt>, 2008.
+# Vytautas Povilaitis <punktyras@nkm.lt>, 2007.
+# Aivaras Kirejevas <office@smaltija.lt>, 2004-2005.
+# Saulius <saulius.shopaga@gmail.com>, 2008-2009.
+# Aurimas Černius <aurisc4@gmail.com>, 2009-2013.
+# Vytautas Liuolia <vytautas.liuolia@gmail.com>, 2007-2010.
+# Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
+# Ričardas Čepas <rch@richard.eu.org>, 2002-2004.
+# Darius Zitkevicius <skystis@splius.lt>, 2004-2005.
+# Copyright (C) 2005-2009 Alex Graveley <alex@beatniksoftware.com>.
+# Jonas Gocentas <jonasgocentas@florida.usa.com>, 2001.
+# Tomas Straupis <tomasstraupis@gmail.com>, 2009-2012.
+# <srtxg@chanae.alphanet.ch>, 2001-2011.
+# Liudas Alisauskas <liudas@akmc.lt>, 2011-2013.
+# Donatas G. <dgvirtual@akl.lt>, 2010-2012.
+# Eglė Kriaučiūnienė <egle@akl.lt>, 2001-2009.
+# Tomas Kuliavas <tokul@users.sourceforge.net>, 2003-2010.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-02 12:27-0600\n"
+"PO-Revision-Date: 2009-03-25 17:13+0200\n"
+"Last-Translator: Gintautas Miliauskas <gintas@akl.lt>\n"
+"Language-Team: Lithuanian <komplt@konferencijos.lt>\n"
+"Language: lt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%s0==1  n%s00!=11 ? 0 : n%s0>=2  (n%s00<10 "
+"|| n%s00>=20) ? 1 : 2;\n"
+
+#: ../../xffm/completion/base.hh:28
+msgid "Command"
+msgstr "Komanda"
+
+#: ../../xffm/completion/base.hh:31
+msgid "File"
+msgstr "Failas"
+
+#: ../../xffm/completion/base.hh:34
+#, fuzzy
+msgid "Command history"
+msgstr "Vykdytų komandų istorija"
+
+#. option -u uid "uid" "uid_combo"
+#: ../../xffm/completion/base.hh:37 ../../xffm/find/dialog.hh:199
+msgid "User"
+msgstr "Naudotojas"
+
+#: ../../xffm/completion/base.hh:40
+msgid "Variable"
+msgstr "Kintamasis"
+
+#: ../../xffm/completion/base.hh:43
+msgid "Host"
+msgstr "Mazgas"
+
+#: ../../xffm/completion/base.hh:55
+msgid "Found no match"
+msgstr "Atitikmenų nerasta"
+
+#: ../../xffm/completion/base.hh:133 ../../xffm/completion/base.hh:134
+msgid "Matches"
+msgstr "Sutampa"
+
+#: ../../xffm/completion/base.hh:134
+msgid "Too many files open"
+msgstr "Atverta per daug failų"
+
+#: ../../xffm/completion/base.hh:325 ../../xffm/find/fgr.hh:124
+msgid "Options:"
+msgstr "Nustatymai:"
+
+#: ../../xffm/completion/bash.hh:133
+msgid "Completion mode:"
+msgstr "Užbaigimo veiksena:"
+
+#: ../../xffm/completion/bash.hh:134
+msgid "command"
+msgstr "komanda"
+
+#: ../../xffm/completion/bash.hh:135
+msgid "file"
+msgstr "failas"
+
+#: ../../xffm/completion/bash.hh:145 ../../xffm/completion/bash.hh:149
+msgid "Options >>"
+msgstr "Parinktys>>"
+
+#: ../../xffm/find/fgr.hh:124 ../../xffm/find/dialog.hh:308
+msgid "Path"
+msgstr "Kelias"
+
+#: ../../xffm/find/fgr.hh:125
+msgid "Locate documents and folders on this computer by name or content"
+msgstr "Ieškoti dokumentų ir aplankų šiame kompiuteryje pagal vardą ar turinį"
+
+#: ../../xffm/find/fgr.hh:126 ../../xffm/find/dialog.hh:341
+msgid "Filter:"
+msgstr "Filtras:"
+
+#: ../../xffm/find/fgr.hh:126
+msgid "Search for files"
+msgstr "Ieškoti failų"
+
+#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
+#: ../../xffm/find/fgr.hh:128
+msgid "Contents:"
+msgstr "Turinys:"
+
+#: ../../xffm/find/fgr.hh:128
+#, fuzzy
+msgid "File's contents filtered as plain text."
+msgstr "Įrašyti failą kaip grynąjį tekstą?"
+
+#: ../../xffm/find/fgr.hh:131
+#, fuzzy
+msgid "Verbose output debugging mode."
+msgstr "Įjungti lizdo išvesties derinimo žinutes."
+
+#: ../../xffm/find/fgr.hh:133
+msgid "Show version information"
+msgstr "Rodyti versijos informacija"
+
+#: ../../xffm/find/fgr.hh:135
+msgid "Filter Details"
+msgstr "Filtro detalės"
+
+#. / option -a "xdev"
+#: ../../xffm/find/fgr.hh:138 ../../xffm/find/dialog.hh:180
+#, fuzzy
+msgid "Stay on single filesystem"
+msgstr "Skaityti failų sistemą"
+
+#: ../../xffm/find/fgr.hh:140
+msgid "Print..."
+msgstr "Spausdinti..."
+
+#: ../../xffm/find/fgr.hh:140
+msgid "The unique Process ID that identifies this process."
+msgstr "Unikalus proceso ID, identifikuojantis šitą procesą."
+
+#. / option -D "recursiveH"
+#: ../../xffm/find/fgr.hh:142 ../../xffm/find/dialog.hh:177
+#, fuzzy
+msgid "Find hidden files and directories"
+msgstr "Lopo failus ir katalogus"
+
+#: ../../xffm/find/fgr.hh:143
+msgid "Filter"
+msgstr "Filtras"
+
+#: ../../xffm/find/fgr.hh:144
+msgid ""
+"To display files which pass the filter (stars and regexps will be processed)"
+msgstr ""
+
+#. / option -r "recursive"
+#: ../../xffm/find/fgr.hh:146 ../../xffm/find/dialog.hh:174
+msgid "Recursive"
+msgstr "Rekursyvus"
+
+#: ../../xffm/find/fgr.hh:147 ../../xffm/find/fgr.hh:148
+#: ../../xffm/find/fgr.hh:149 ../../xffm/find/fgr.hh:150
+msgid "KByte"
+msgstr "KBaitų"
+
+#: ../../xffm/find/fgr.hh:148
+msgid "is greater than or equal to"
+msgstr "daugiau arba lygu"
+
+#: ../../xffm/find/fgr.hh:150
+msgid "is less than or equal to"
+msgstr "mažiau arba lygu"
+
+#: ../../xffm/find/fgr.hh:152
+msgid "Set UID"
+msgstr "Nustatyti UID"
+
+#: ../../xffm/find/fgr.hh:152
+msgid "Executable Text Files"
+msgstr "Vykdomieji tekstiniai failai"
+
+#: ../../xffm/find/fgr.hh:154
+msgid "The permissions of the file, in octal notation."
+msgstr "Failo prieigos leidimai aštuntainiu pavidalu."
+
+#: ../../xffm/find/fgr.hh:155
+msgid "Type"
+msgstr "Tipas"
+
+#: ../../xffm/find/fgr.hh:157 ../../xffm/find/signals.hh:17
+msgid "Any"
+msgstr "Bet koks"
+
+#: ../../xffm/find/fgr.hh:157
+#, fuzzy
+msgid "Default type"
+msgstr "Numatytas laikas"
+
+#: ../../xffm/find/fgr.hh:158 ../../xffm/common/preview.hh:497
+#, fuzzy
+msgid "Regular file"
+msgstr "paprastas failas"
+
+#: ../../xffm/find/fgr.hh:159 ../../xffm/find/signals.hh:11
+#: ../../xffm/fm/local/popup.hh:803 ../../xffm/common/preview.hh:488
+msgid "Directory"
+msgstr "Katalogas"
+
+#: ../../xffm/find/fgr.hh:160 ../../xffm/find/signals.hh:12
+#: ../../xffm/common/preview.hh:494
+msgid "Symbolic Link"
+msgstr "Simbolinė nuoroda"
+
+#: ../../xffm/find/fgr.hh:161
+msgid "UNIX Socket"
+msgstr "UNIX jungtis"
+
+#: ../../xffm/find/fgr.hh:162 ../../xffm/find/signals.hh:14
+#: ../../xffm/common/preview.hh:482
+msgid "Block device"
+msgstr "Blokinis įrenginys"
+
+#: ../../xffm/find/fgr.hh:163 ../../xffm/find/signals.hh:15
+#: ../../xffm/common/preview.hh:485
+msgid "Character device"
+msgstr "Simbolinis įrenginys"
+
+#: ../../xffm/find/fgr.hh:164 ../../xffm/find/signals.hh:16
+#: ../../xffm/common/preview.hh:491
+msgid "FIFO"
+msgstr "FIFO"
+
+#. radio_p freed on destroy event for dialog_.
+#. option -k minutes "last_minutes", "last_minutes_spin"
+#: ../../xffm/find/fgr.hh:166 ../../xffm/find/fgr.hh:168
+#: ../../xffm/find/dialog.hh:221
+msgid "Minutes"
+msgstr "Minutės"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/dialog.hh:270 ../../xffm/find/dialog.hh:370
+#: ../../xffm/fm/treeview.hh:18
+msgid "Details"
+msgstr "Detalės"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/fgr.hh:179 ../../xffm/find/fgr.hh:180
+#: ../../xffm/find/fgr.hh:183 ../../xffm/find/fgr.hh:184
+#: ../../xffm/find/fgr.hh:187 ../../xffm/find/fgr.hh:188
+msgid "TIME"
+msgstr "LAIKAS"
+
+#: ../../xffm/find/fgr.hh:168 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/fgr.hh:174 ../../xffm/find/fgr.hh:177
+msgid "Previous"
+msgstr "Praeitas"
+
+#. option -h hours "last_hours", "last_hours_spin"
+#: ../../xffm/find/fgr.hh:169 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/dialog.hh:226
+msgid "Hours"
+msgstr "Valandos"
+
+#. option -d days "last_days", "last_days_spin"
+#: ../../xffm/find/fgr.hh:172 ../../xffm/find/fgr.hh:174
+#: ../../xffm/find/dialog.hh:231
+msgid "Days"
+msgstr "Dienos"
+
+#: ../../xffm/find/fgr.hh:175
+msgid "Month"
+msgstr "Mėnuo"
+
+#: ../../xffm/find/fgr.hh:177
+msgid "Month(s)"
+msgstr "Mėnesiai(-uo)"
+
+#: ../../xffm/find/fgr.hh:180
+msgid "Modification Time :"
+msgstr "Modifikavimo Laikas :"
+
+#: ../../xffm/find/fgr.hh:184
+#, fuzzy
+msgid "Access Time :"
+msgstr "Prieigos laikas"
+
+#: ../../xffm/find/fgr.hh:188
+msgid "Creation Time :"
+msgstr "Sukūrimo Laikas :"
+
+#: ../../xffm/find/fgr.hh:191 ../../xffm/find/fgr.hh:192
+msgid "uid"
+msgstr "uid"
+
+#: ../../xffm/find/fgr.hh:192
+msgid "User:"
+msgstr "Naudotojas:"
+
+#: ../../xffm/find/fgr.hh:194 ../../xffm/find/fgr.hh:195
+#, fuzzy
+msgid "gid"
+msgstr "id="
+
+#: ../../xffm/find/fgr.hh:195
+msgid "Group:"
+msgstr "Grupė:"
+
+#: ../../xffm/find/fgr.hh:198
+msgid ""
+"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+"character that  normally  follows  a file  name"
+msgstr ""
+
+#: ../../xffm/find/fgr.hh:200
+msgid "Content View"
+msgstr "Turinio vaizdas"
+
+#: ../../xffm/find/fgr.hh:201 ../../xffm/find/fgr.hh:202
+#: ../../xffm/find/fgr.hh:203 ../../xffm/find/fgr.hh:204
+msgid "STRING"
+msgstr "SEKA"
+
+#: ../../xffm/find/fgr.hh:202 ../../xffm/find/fgr.hh:204
+#: ../../xffm/fm/local/popup.hh:563
+msgid "Regular expression"
+msgstr "Reguliari išraiška"
+
+#: ../../xffm/find/fgr.hh:204
+msgid "Extended"
+msgstr "Išplėstas"
+
+#: ../../xffm/find/fgr.hh:206
+msgid "Ignore case"
+msgstr "Nekreipti dėmesio į raidžių dydį"
+
+#: ../../xffm/find/fgr.hh:208
+msgid "Text Files"
+msgstr "Tekstiniai failai"
+
+#: ../../xffm/find/fgr.hh:210 ../../xffm/find/dialog.hh:552
+msgid "No match"
+msgstr "Atitikmenų nerasta"
+
+#: ../../xffm/find/fgr.hh:212 ../../xffm/find/dialog.hh:470
+msgid "Line Count"
+msgstr "Eilučių skaičius"
+
+#: ../../xffm/find/fgr.hh:214
+msgid "Words"
+msgstr "Žodžių"
+
+#: ../../xffm/find/fgr.hh:216
+msgid "Lines"
+msgstr "Eilutės"
+
+#: ../../xffm/find/fgr.hh:368
+#, fuzzy, c-format
+msgid "Usage : %s [OPTIONS]\n"
+msgstr "Naudojimas: %s [PARAMETRAS]\n"
+
+#: ../../xffm/find/signals.hh:10
+msgid "Regular"
+msgstr "Įprastas"
+
+#: ../../xffm/find/signals.hh:13 ../../xffm/common/preview.hh:500
+msgid "Socket"
+msgstr "Jungtis"
+
+#: ../../xffm/find/signals.hh:209
+msgid "Select folder to search in"
+msgstr "Pasirinkite aplanką, kuriame ieškosite"
+
+#. button no
+#: ../../xffm/find/signals.hh:265 ../../xffm/find/dialog.hh:584
+#: ../../xffm/response/entryfileresponse.hh:18
+#: ../../xffm/response/entryresponse.hh:305
+#: ../../xffm/response/passwdresponse.hh:558
+#: ../../xffm/fm/local/properties.hh:304 ../../xffm/fm/local/rm.hh:155
+msgid "Cancel"
+msgstr "Atšaukti"
+
+#: ../../xffm/find/signals.hh:293 ../../xffm/find/signals.hh:722
+#, fuzzy
+msgid "No editor for current action."
+msgstr "Veiksmų nėra."
+
+#. / option "upper_limit_spin" (only in gtk dialog_)
+#: ../../xffm/find/signals.hh:351 ../../xffm/find/dialog.hh:183
+msgid "Results"
+msgstr "Rezultatai"
+
+#: ../../xffm/find/signals.hh:351
+msgid "Upper limit:"
+msgstr "Viršutinė riba:"
+
+#: ../../xffm/find/signals.hh:353
+msgid "Counting files..."
+msgstr "Skaičiuojami failai..."
+
+#: ../../xffm/find/signals.hh:368
+#, fuzzy, c-format
+msgid "Found %d match"
+msgid_plural "Found %d matches"
+msgstr[0] "Atitikmenų nerasta"
+msgstr[1] "Atitikmenų nerasta"
+
+#: ../../xffm/find/signals.hh:370
+#, c-format
+msgid "%s Finished : %s"
+msgstr "%s pabaigta: %s"
+
+#: ../../xffm/find/signals.hh:488 ../../xffm/find/signals.hh:490
+msgid "Searching..."
+msgstr "Ieškoma..."
+
+#. g_object_set_data(G_OBJECT(dialog_), "window", dialog_);
+#: ../../xffm/find/dialog.hh:98 ../../xffm/find/dialog.hh:150
+#: ../../xffm/find/dialog.hh:611
+msgid "Find"
+msgstr "Rasti"
+
+#: ../../xffm/find/dialog.hh:183
+msgid "Upper limit"
+msgstr "Viršutinis rėžis"
+
+#. option -s +KByte "size_greater", "size_greater_spin"
+#: ../../xffm/find/dialog.hh:188
+msgid "At Least"
+msgstr "mažiausiai"
+
+#: ../../xffm/find/dialog.hh:188 ../../xffm/find/dialog.hh:193
+#, fuzzy
+msgid "kBytes"
+msgstr "Baitų"
+
+#. option -s -KByte "size_smaller", "size_smaller_spin"
+#: ../../xffm/find/dialog.hh:193
+msgid "At Most"
+msgstr "daugiausiai"
+
+#: ../../xffm/find/dialog.hh:204
+msgid "Group"
+msgstr "Grupė"
+
+#. option -o octal "octal_p" "permissions_entry"
+#: ../../xffm/find/dialog.hh:208
+msgid "Octal Permissions"
+msgstr "Aštuntainiai leidimai"
+
+#. option -p suid | exe
+#: ../../xffm/find/dialog.hh:213
+msgid "SUID"
+msgstr "SUID"
+
+#: ../../xffm/find/dialog.hh:213 ../../xffm/fm/local/popup.hh:843
+#, fuzzy
+msgid "Executable"
+msgstr "Programa:"
+
+#. option -m months "last_months", "last_months_spin"
+#: ../../xffm/find/dialog.hh:237
+msgid "Months"
+msgstr "Mėnesiai"
+
+#: ../../xffm/find/dialog.hh:248
+msgid "File type : "
+msgstr "Failo tipas :"
+
+#. gtk_widget_show (GTK_WIDGET(right_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(center_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(left_options_vbox));
+#: ../../xffm/find/dialog.hh:262 ../../xffm/find/dialog.hh:602
+#: ../../xffm/fm/page/page.hh:70 ../../xffm/common/gtk.hh:70
+msgid "Close"
+msgstr "Užverti"
+
+#. gtk_box_pack_start (vbox7a, GTK_WIDGET(advancedBox), TRUE, FALSE, 5);
+#. gtk_widget_show(GTK_WIDGET(advancedBox));
+#. //////////////  grep options.... /////////////////////////
+#: ../../xffm/find/dialog.hh:384
+msgid "Contains"
+msgstr "Turi"
+
+#: ../../xffm/find/dialog.hh:404
+msgid "Contains the text"
+msgstr "Turi tekstą"
+
+#: ../../xffm/find/dialog.hh:437
+msgid "Case Sensitive"
+msgstr "Skirti raidžių dydį"
+
+#: ../../xffm/find/dialog.hh:449
+msgid "Extended regexp"
+msgstr "Išplėstas regexp"
+
+#: ../../xffm/find/dialog.hh:460
+msgid "Include binary files"
+msgstr "Įtraukti dvejetainius failus"
+
+#: ../../xffm/find/dialog.hh:496
+msgid "Match"
+msgstr "Atrinkimas"
+
+#: ../../xffm/find/dialog.hh:508
+#, fuzzy
+msgid "Anywhere"
+msgstr "Atitinka bet kur"
+
+#: ../../xffm/find/dialog.hh:523
+msgid "Whole words only"
+msgstr "Tik pilnus žodžius"
+
+#: ../../xffm/find/dialog.hh:538
+msgid "lines"
+msgstr "linijos"
+
+#: ../../xffm/find/dialog.hh:594
+msgid "Clear"
+msgstr "Išvalyti"
+
+#: ../../xffm/find/dialog.hh:636
+msgid "Edit"
+msgstr "Keisti"
+
+#: ../../xffm/find/dialog.hh:751 ../../xffm/find/dialog.hh:766
+#: ../../xffm/common/util.hh:1150 ../../xffm/common/util.hh:1152
+#: ../../xffm/common/util.hh:1158 ../../xffm/common/util.hh:1160
+#: ../../xffm/common/preview.hh:479
+msgid "unknown"
+msgstr "nežinoma"
+
+#: ../../xffm/find/dialog.hh:780
+msgid "Modified"
+msgstr "Pakeistas"
+
+#: ../../xffm/find/dialog.hh:784
+msgid "Created"
+msgstr "Sukurta"
+
+#: ../../xffm/find/dialog.hh:788
+#, fuzzy
+msgid "Accessed"
+msgstr "Naudota:"
+
+#: ../../xffm/find/dialog.hh:1106
+msgid ""
+"Basic rules:\n"
+"\n"
+"*  Will match any character zero or more times.\n"
+"?  Will match any character exactly one time\n"
+"[] Match any character within the [] \n"
+"^  Match at beginning of string\n"
+"$  Match at end of string \n"
+msgstr ""
+
+#: ../../xffm/find/dialog.hh:1115
+msgid ""
+"Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"In  basic regular expressions the metacharacters ?, +, {, |, (, and ) \n"
+"  lose their special meaning.\n"
+"\n"
+"The  period . matches  any  single  character.\n"
+"The caret ^ matches at the start of line.\n"
+"The dollar $ matches at the end of line.\n"
+"\n"
+"Characters within [ ] matches any single character in the list.\n"
+"Characters within [^ ] matches any single character *not* in the list.\n"
+"Characters inside [ - ] matches a range of characters (ie [0-9] or [a-z]).\n"
+"\n"
+"A regular expression may be followed by one of several repetition "
+"operators:\n"
+"?      The preceding item is optional and matched\n"
+"       at most once.\n"
+"*      The preceding item will be matched zero\n"
+"       or more times.\n"
+"+      The preceding item will be matched one or\n"
+"       more times.\n"
+"{n}    The preceding item is matched exactly n times.\n"
+"{n,}   The preceding item is matched n or more times.\n"
+"{n,m}  The preceding item is matched at least n times,\n"
+"       but not more than m times.\n"
+"\n"
+"To match any reserved character, precede it with \\. \n"
+"\n"
+"Two regular expressions may be joined by the logical or operator |.\n"
+"Two regular expressions may be concatenated.\n"
+"\n"
+"More information is available by typing \"man grep\"\n"
+msgstr ""
+
+#: ../../xffm/response/entryfileresponse.hh:20
+msgid "Open"
+msgstr "Atverti"
+
+#: ../../xffm/response/entryresponse.hh:29
+#: ../../xffm/response/entryfolderresponse.hh:28
+msgid "Choose directory"
+msgstr "Pasirinkite katalogą"
+
+#. this button is redundant since hands are on keyboard for password
+#: ../../xffm/response/entryresponse.hh:309
+#: ../../xffm/response/passwdresponse.hh:189
+#: ../../xffm/response/passwdresponse.hh:559
+msgid "Ok"
+msgstr "Gerai"
+
+#: ../../xffm/response/commandprogressresponse.hh:32
+msgid "Items:"
+msgstr "Objektai:"
+
+#: ../../xffm/response/passwdresponse.hh:21
+msgid "Enter password"
+msgstr "Įveskite slaptažodį"
+
+#. gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+#: ../../xffm/response/passwdresponse.hh:125
+#, fuzzy
+msgid "User Input"
+msgstr "Pelės lizdas"
+
+#: ../../xffm/response/passwdresponse.hh:142
+#, fuzzy
+msgid "Response Requested"
+msgstr "Išeinantis atsakas"
+
+#: ../../xffm/response/passwdresponse.hh:264
+msgid "Preparing"
+msgstr "Ruošiama"
+
+#: ../../xffm/response/passwdresponse.hh:352
+msgid "sudo"
+msgstr "sudo"
+
+#: ../../xffm/response/passwdresponse.hh:354
+msgid "Command:"
+msgstr "Komanda:"
+
+#: ../../xffm/response/passwdresponse.hh:357
+msgid "Permission denied"
+msgstr "Prieiga uždrausta"
+
+#: ../../xffm/response/passwdresponse.hh:358
+msgid "Try to approach a problem from different angles."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:359
+msgid "Do you want to retry?"
+msgstr "Ar norite mėginti vėl?"
+
+#: ../../xffm/response/passwdresponse.hh:360
+msgid "Alternate:"
+msgstr "Alternatyvus:"
+
+#: ../../xffm/response/passwdresponse.hh:365
+msgid "No"
+msgstr "Ne"
+
+#: ../../xffm/response/passwdresponse.hh:401
+msgid "Install"
+msgstr "Įdiegti"
+
+#: ../../xffm/response/passwdresponse.hh:402
+#, c-format
+msgid "%s does not exist."
+msgstr "%s neegzistuoja."
+
+#: ../../xffm/response/passwdresponse.hh:467
+msgid "Blowfish"
+msgstr "Blowfish"
+
+#: ../../xffm/response/passwdresponse.hh:468
+msgid "Encryption Key Approval"
+msgstr "Šifravimo rakto patvirtinimas"
+
+#: ../../xffm/response/passwdresponse.hh:502
+msgid "-o     print output to standard out. Implies -r."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:506
+msgid "-c     DO NOT compress files before encryption."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:510
+msgid "-r     DO NOT remove input files after processing"
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:517
+#, fuzzy
+msgid "Encryption key: "
+msgstr "Šifravimo raktas:"
+
+#: ../../xffm/response/passwdresponse.hh:529
+msgid "Confirm:"
+msgstr "Patvirtink:"
+
+#: ../../xffm/response/passwdresponse.hh:542
+msgid "Sorry, passwords do not match"
+msgstr "Slaptažodžiai nevienodi"
+
+#: ../../xffm/response/passwdresponse.hh:550
+#, fuzzy
+msgid "Minimum length:"
+msgstr "Mažiausias aukštis:"
+
+#: ../../xffm/response/timeoutresponse.hh:56
+msgid "Dismiss"
+msgstr "Atsisakyti"
+
+#: ../../xffm/response/commandresponse.hh:23
+msgid "Running"
+msgstr "Veikia"
+
+#. auto text = g_strdup_printf("%s (pid: %d)",
+#. _("Waiting for operation to finish..."),
+#. Tubo<Type>::getChild (pid));
+#: ../../xffm/response/commandresponse.hh:28
+msgid "Waiting for operation to finish..."
+msgstr "Laukiama, kad operacijos baigtųsi..."
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Documents"
+msgstr "Dokumentai"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Downloads"
+msgstr "Atsiuntimai"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Music"
+msgstr "Muzika"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Pictures"
+msgstr "Paveikslėliai"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Templates"
+msgstr "Šablonai"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Videos"
+msgstr "Vaizdo įrašai"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Desktop"
+msgstr "Darbastalis"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Bookmarks"
+msgstr "Žymelės"
+
+#: ../../xffm/fm/local/icons.hh:259 ../../xffm/fm/local/rm.hh:181
+msgid "Trash"
+msgstr "Šiukšlės"
+
+#: ../../xffm/fm/local/popup.hh:60
+msgid "New"
+msgstr "Naujas"
+
+#. deprecated {N_("Open in New Tab"), NULL, NULL, NULL},
+#. deprecated {N_("Open in New Window"), NULL, NULL, NULL},
+#. common buttons /(also an iconsize +/- button)
+#: ../../xffm/fm/local/popup.hh:64 ../../xffm/fm/local/popup.hh:104
+#: ../../xffm/common/gtk.hh:74
+msgid "Copy"
+msgstr "Kopijuoti"
+
+#: ../../xffm/fm/local/popup.hh:65 ../../xffm/fm/local/popup.hh:105
+#: ../../xffm/common/gtk.hh:73
+msgid "Cut"
+msgstr "Iškirpti"
+
+#: ../../xffm/fm/local/popup.hh:66 ../../xffm/fm/local/popup.hh:106
+#: ../../xffm/common/gtk.hh:66
+msgid "Paste"
+msgstr "Įdėti"
+
+#. **************
+#: ../../xffm/fm/local/popup.hh:67 ../../xffm/fm/local/popup.hh:107
+#: ../../xffm/fm/local/rm.hh:174 ../../xffm/common/gtk.hh:75
+msgid "Delete"
+msgstr "Ištrinti"
+
+#. {N_("About"), NULL, (void *) menu},
+#.
+#. only for listview: {N_("Sort by size"), NULL, (void *) menu},
+#. only for listview: {N_("Sort by date"), NULL, (void *) menu},
+#: ../../xffm/fm/local/popup.hh:73
+msgid "Select All"
+msgstr "Pažymėti viską"
+
+#: ../../xffm/fm/local/popup.hh:74 ../../xffm/fm/local/popup.hh:559
+msgid "Match regular expression"
+msgstr "Ieškoti kaip reguliaraus reiškinio"
+
+#: ../../xffm/fm/local/popup.hh:75 ../../xffm/fm/root/view.hh:58
+#: ../../xffm/fm/fstab/popup.hh:21
+msgid "View as list"
+msgstr "Rodyti kaip sąrašą"
+
+#: ../../xffm/fm/local/popup.hh:77
+msgid "Show hidden files"
+msgstr "Rodyti paslėptas rinkmenas"
+
+#: ../../xffm/fm/local/popup.hh:79
+#, fuzzy
+msgid "Show Backup Files"
+msgstr "Sukurti atsarginių kopijų failus"
+
+#: ../../xffm/fm/local/popup.hh:81
+#, fuzzy
+msgid "Sort data in descending order"
+msgstr "Išrikiuota atvėrimo eilės tvarka"
+
+#: ../../xffm/fm/local/popup.hh:93 ../../xffm/fm/local/popup.hh:119
+#: ../../xffm/fm/local/popup.hh:1006 ../../xffm/fm/local/popup.hh:1013
+#: ../../xffm/fm/local/popup.hh:1022 ../../xffm/fm/local/popup.hh:1029
+#: ../../xffm/common/gtk.hh:72
+msgid "Open with"
+msgstr "Atverti su"
+
+#: ../../xffm/fm/local/popup.hh:94 ../../xffm/fm/local/popup.hh:846
+#, fuzzy
+msgid "Run Executable..."
+msgstr "Įkelti programą..."
+
+#: ../../xffm/fm/local/popup.hh:95
+msgid "Extract files from the archive"
+msgstr "Išskleisti failus iš archyvo"
+
+#. g_hash_table_insert(iconname_hash, "bcrypt", (void *)"emblem-keyhole");
+#: ../../xffm/fm/local/popup.hh:96 ../../xffm/fm/root/view.hh:73
+#: ../../xffm/fm/fstab/popup.hh:20 ../../xffm/fm/dialog/notebook.hh:52
+#: ../../xffm/common/gtk.hh:78
+msgid "Open in New Tab"
+msgstr "Atidaryti naujoje kortelėje"
+
+#. File chooser
+#: ../../xffm/fm/local/popup.hh:97 ../../xffm/fm/local/popup.hh:706
+msgid "Create a compressed archive with the selected objects"
+msgstr "Sukurti suglaudintą archyvą iš pažymėtų objektų"
+
+#: ../../xffm/fm/local/popup.hh:98 ../../xffm/fm/fstab/popup.hh:37
+msgid "Mount the volume associated with this folder"
+msgstr "Prijungti laikmeną, susietą su šiuo aplanku"
+
+#: ../../xffm/fm/local/popup.hh:99 ../../xffm/fm/fstab/popup.hh:38
+msgid "Unmount the volume associated with this folder"
+msgstr "Atjungti laikmeną, susietą su šiuo aplanku"
+
+#: ../../xffm/fm/local/popup.hh:100 ../../xffm/common/gtk.hh:67
+msgid "Add bookmark"
+msgstr "Pridėti žymelę"
+
+#: ../../xffm/fm/local/popup.hh:101 ../../xffm/fm/root/view.hh:74
+#: ../../xffm/common/gtk.hh:68
+msgid "Remove bookmark"
+msgstr "Pašalinti žymelę"
+
+#: ../../xffm/fm/local/popup.hh:108 ../../xffm/fm/local/popup.hh:961
+msgid "Rename"
+msgstr "Pervadinti"
+
+#: ../../xffm/fm/local/popup.hh:109 ../../xffm/fm/local/popup.hh:947
+msgid "Duplicate"
+msgstr "Dubliuoti"
+
+#: ../../xffm/fm/local/popup.hh:110 ../../xffm/fm/local/popup.hh:933
+msgid "Link"
+msgstr "Nuoroda"
+
+#: ../../xffm/fm/local/popup.hh:111
+msgid "Properties"
+msgstr "Savybės"
+
+#: ../../xffm/fm/local/popup.hh:414
+msgid "Files:"
+msgstr "Failai:"
+
+#: ../../xffm/fm/local/popup.hh:417 ../../xffm/fm/local/rm.hh:61
+msgid "Multiple selections"
+msgstr "Pažymėjimai keliose vietose"
+
+#: ../../xffm/fm/local/popup.hh:557
+msgid "Select items"
+msgstr "Pažymėti objektus"
+
+#: ../../xffm/fm/local/popup.hh:575
+msgid "Regular Expression syntax is incorrect"
+msgstr "Neteisinga reguliarios išraiškos sintaksė"
+
+#: ../../xffm/fm/local/popup.hh:592
+msgid "No selection"
+msgstr "Nieko nepažymėta"
+
+#: ../../xffm/fm/local/popup.hh:592
+msgid "No matches."
+msgstr "Atitikmenų nerasta."
+
+#. entryResponse->setCheckButton(_("Run in Terminal"));
+#. entryResponse->setCheckButton(Mime<Type>::runInTerminal(path));
+#: ../../xffm/fm/local/popup.hh:721 ../../xffm/fm/page/pathbar.hh:313
+msgid "Specify Output Directory..."
+msgstr "Nurodyti išvesties aplanką..."
+
+#: ../../xffm/fm/local/popup.hh:799
+#, fuzzy
+msgid "Create new..."
+msgstr "Sukurti naują %s..."
+
+#: ../../xffm/fm/local/popup.hh:806 ../../xffm/fm/local/popup.hh:886
+msgid "New Name:"
+msgstr "Naujas pavadinimas:"
+
+#: ../../xffm/fm/local/popup.hh:815
+msgid "No name"
+msgstr "Be pavadinimo"
+
+#: ../../xffm/fm/local/popup.hh:828
+#, c-format
+msgid "Another file with the same name already exists in “%s”."
+msgstr "Kitas failas tuo pačiu vardu jau yra vietoje „%s“."
+
+#: ../../xffm/fm/local/popup.hh:850 ../../xffm/fm/local/popup.hh:1010
+#: ../../xffm/fm/local/popup.hh:1026 ../../xffm/common/util.hh:1248
+msgid "Run in Terminal"
+msgstr "Vykdyti terminale"
+
+#: ../../xffm/fm/local/popup.hh:853
+msgid "Arguments for the Command"
+msgstr "Komandos argumentai"
+
+#: ../../xffm/fm/local/popup.hh:1047 ../../xffm/fm/local/view.hh:141
+msgid "Invalid entry"
+msgstr "Netinkama įvestis"
+
+#: ../../xffm/fm/local/properties.hh:235
+msgid "Properties and Attributes"
+msgstr "Savybės ir atributai"
+
+#: ../../xffm/fm/local/properties.hh:264
+#, fuzzy
+msgid "File Mode:"
+msgstr "Rodymo būdas:"
+
+#: ../../xffm/fm/local/properties.hh:290
+msgid "File:"
+msgstr "Failas:"
+
+#. Add file info stuff
+#. set info stuff data according to combo box
+#. add signal handler to changed signal for combo box
+#. Add process buttons
+#.
+#: ../../xffm/fm/local/properties.hh:302
+msgid "Apply changes"
+msgstr "Pritaikyti pakeitimus"
+
+#: ../../xffm/fm/local/properties.hh:462
+msgid "Successfully moved to trash."
+msgstr "Sėkmingai perkelta į šiukšliadėžę."
+
+#: ../../xffm/fm/local/properties.hh:463
+msgid "Source:"
+msgstr "Šaltinis:"
+
+#: ../../xffm/fm/local/rm.hh:59
+#, c-format
+msgid "Delete %s"
+msgstr "Ištrinti %s"
+
+#: ../../xffm/fm/local/rm.hh:61
+msgid "Warning: "
+msgstr "Dėmesio: "
+
+#. gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
+#. title
+#: ../../xffm/fm/local/rm.hh:90
+msgid "Remove"
+msgstr "Pašalinti"
+
+#: ../../xffm/fm/local/rm.hh:140
+msgid "Apply to all"
+msgstr "Pritaikyti visiems"
+
+#. **************
+#. This is now available to BSD with rm -P option
+#: ../../xffm/fm/local/rm.hh:163 ../../xffm/common/gtk.hh:76
+msgid "Shred"
+msgstr "Valyti"
+
+#. We do not count "../"
+#: ../../xffm/fm/local/view.hh:48 ../../xffm/fm/base/monitor.hh:28
+#, c-format
+msgid "Files: %s"
+msgstr "Failai: %s"
+
+#: ../../xffm/fm/root/model.hh:78
+msgid "Root Directory"
+msgstr "Šakninis aplankas"
+
+#: ../../xffm/fm/root/model.hh:94
+msgid "This is the root of the filesystem"
+msgstr "Tai yra failų sistemos root"
+
+#: ../../xffm/fm/root/model.hh:105
+msgid "Home Directory"
+msgstr "Namų aplankas"
+
+#: ../../xffm/fm/root/model.hh:132
+msgid "Trash bin"
+msgstr "Šiukšliadėžė"
+
+#: ../../xffm/fm/root/model.hh:162 ../../xffm/fm/fstab/popup.hh:29
+msgid "Disk Image Mounter"
+msgstr "Disko atvaizdžio prijungėjas"
+
+#: ../../xffm/fm/root/model.hh:169 ../../xffm/fm/root/model.hh:185
+msgid "Mount local disks and devices"
+msgstr "Prijungti vietinius diskus ir įrenginius"
+
+#: ../../xffm/fm/root/model.hh:170 ../../xffm/fm/fstab/popup.hh:25
+#: ../../xffm/fm/fstab/view.hh:429
+msgid "eCryptfs Volume"
+msgstr "eCryptfs skirsnis"
+
+#: ../../xffm/fm/root/model.hh:171 ../../xffm/fm/fstab/popup.hh:24
+msgid "SSHFS Remote Synchronization Folder"
+msgstr "SSHFS nuotolinio sinchronizavimo aplankas"
+
+#: ../../xffm/fm/root/model.hh:172 ../../xffm/fm/fstab/popup.hh:23
+#: ../../xffm/fm/fstab/view.hh:377
+msgid "NFS Network Volume"
+msgstr "NFS tinklo skirsnis"
+
+#: ../../xffm/fm/root/model.hh:173 ../../xffm/fm/fstab/popup.hh:26
+#: ../../xffm/fm/fstab/view.hh:455
+msgid "CIFS Volume"
+msgstr "CIFS skirsnis"
+
+#: ../../xffm/fm/root/model.hh:195
+msgid "Software Updater"
+msgstr "Programinės įrangos atnaujinimas"
+
+#: ../../xffm/fm/root/model.hh:218 ../../xffm/fm/root/model.hh:230
+msgid "Add or remove software installed on the system"
+msgstr "Įdiegti ar šalinti sistemoje įdiegtą programinę įrangą"
+
+#: ../../xffm/fm/root/model.hh:271
+#, fuzzy
+msgid "Go to bookmarked location"
+msgstr "Eiti prie sekančio žymeklio vietos."
+
+#. {N_("Add bookmark"), (void *)BasePopUp<Type>::noop, NULL, NULL},
+#: ../../xffm/fm/root/view.hh:61
+msgid "Empty trash"
+msgstr "Šiukšlinės išvalymas"
+
+#. File chooser
+#: ../../xffm/fm/fstab/popup.hh:121
+msgid "Mount Device"
+msgstr "Sumontuoti įrenginį"
+
+#: ../../xffm/fm/fstab/popup.hh:133
+msgid "Mount point:"
+msgstr "Prijungimo vieta:"
+
+#: ../../xffm/fm/fstab/view.hh:301
+msgid "Mounted on:"
+msgstr "Montavimo vieta:"
+
+#: ../../xffm/fm/fstab/view.hh:302
+msgid "Mount on"
+msgstr "Prijungti"
+
+#: ../../xffm/fm/fstab/view.hh:310 ../../xffm/fm/fstab/view.hh:312
+msgid "Not mounted"
+msgstr "Neprijungtas"
+
+#: ../../xffm/fm/fstab/view.hh:403
+msgid "SFTP (via SSH)"
+msgstr ""
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, c-format
+msgid "Unmounting %s"
+msgstr "Atjungiamas %s"
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, c-format
+msgid "Mounting %s"
+msgstr "Montuojama %s"
+
+#: ../../xffm/fm/dialog/menupopover.hh:128
+msgid "Home"
+msgstr "Namai"
+
+#: ../../xffm/fm/dialog/menupopover.hh:129 ../../xffm/common/gtk.hh:64
+#, fuzzy
+msgid "Open terminal"
+msgstr "Atverti terminalą"
+
+#: ../../xffm/fm/dialog/menupopover.hh:130
+msgid "Open a New Window"
+msgstr "Atverti naują langą"
+
+#. {N_("Execute Shell Command"), (void *)MenuPopoverSignals<Type>::shell, (void *) menuButton_},
+#: ../../xffm/fm/dialog/menupopover.hh:132 ../../xffm/common/gtk.hh:69
+msgid "Search"
+msgstr "Ieškoti"
+
+#: ../../xffm/fm/dialog/menupopover.hh:133 ../../xffm/common/gtk.hh:71
+msgid "Exit"
+msgstr "Išeiti"
+
+#: ../../xffm/fm/dialog/dialog.hh:116
+msgid "Removed"
+msgstr "Pašalintas"
+
+#: ../../xffm/fm/dialog/dialog.hh:132
+#, fuzzy
+msgid "Detected device(s):"
+msgstr "Aptikti įrenginius"
+
+#. Create the widgets
+#: ../../xffm/fm/page/vbuttonbox.hh:37 ../../xffm/common/gtk.hh:332
+msgid "Help"
+msgstr "Žinynas"
+
+#. File chooser
+#: ../../xffm/fm/page/pathbar.hh:306 ../../xffm/fm/page/pathbar.hh:308
+msgid "Go to"
+msgstr "Eiti į"
+
+#: ../../xffm/fm/page/pathbar.hh:331
+msgid "Not a directory"
+msgstr "Ne aplankas"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Renice Process"
+msgstr "Pakeisti proceso nice lygį"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Suspend"
+msgstr "Užmigdyti"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Continue"
+msgstr "Tęsti"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Interrupt"
+msgstr "Pertraukti"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Hangup"
+msgstr "Atsijungti"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "User 1 (USR1)"
+msgstr "Naudotojas 1 (USR1)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "User 2 (USR2)"
+msgstr "Naudotojas 2 (USR2)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "Terminate Task"
+msgstr "Nutraukti  užduotį"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "Abort"
+msgstr "Nutraukti"
+
+#: ../../xffm/fm/page/runbutton.hh:138
+msgid "Kill"
+msgstr "Nužudyti"
+
+#: ../../xffm/fm/page/runbutton.hh:139
+#, fuzzy
+msgid "Segmentation fault"
+msgstr "Segmentacijos pažeidimas"
+
+#: ../../xffm/fm/page/runbutton.hh:217
+msgid "PID"
+msgstr "PID"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:37
+msgid "Embedded Terminal"
+msgstr "Įntegruotas terminalas"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:38
+#, fuzzy
+msgid "All items in the iconview."
+msgstr "Pažymėti visus elementus šiame lange"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:39
+msgid "Scripting"
+msgstr "Scenarijai"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:40
+msgid "Clear Log"
+msgstr "Išvalyti žurnalą"
+
+#. Status textview
+#: ../../xffm/fm/page/hbuttonbox.hh:42
+msgid "Terminal font"
+msgstr "Terminalo šriftas"
+
+#: ../../xffm/fm/treeview.hh:17
+msgid "Name"
+msgstr "Vardas"
+
+#: ../../xffm/fm/treeview.hh:20
+msgid "Size"
+msgstr "Dydis"
+
+#: ../../xffm/fm/treeview.hh:21
+msgid "Date"
+msgstr "Data"
+
+#: ../../xffm/fm/treeview.hh:22
+msgid "Mimetype"
+msgstr "Mime tipai"
+
+#: ../../xffm/fm/treeview.hh:24
+msgid "TYPE"
+msgstr "TIPAS"
+
+#: ../../xffm/fm/base/signals.hh:642
+msgid "Directory does not exist."
+msgstr "Aplankas neegzistuoja."
+
+#: ../../xffm/fm/base/signals.hh:644 ../../xffm/fm/base/signals.hh:646
+#, fuzzy
+msgid "Trash is empty"
+msgstr "Planšetinis kompiuteris išsikrovė"
+
+#: ../../xffm/common/settings.hh:27
+msgid "New File:"
+msgstr "Naujasis failas:"
+
+#: ../../xffm/common/gio.hh:235
+msgid "Could not copy item:"
+msgstr "Nepavyko nukopijuoti elemento:"
+
+#: ../../xffm/common/gio.hh:237
+msgid "Could not move item:"
+msgstr "Nepavyko perkelti elemento:"
+
+#: ../../xffm/common/gio.hh:239
+#, fuzzy
+msgid "Create symbolic link"
+msgstr "Pakeisti simbolines nuorodas"
+
+#: ../../xffm/common/gio.hh:276
+#, fuzzy, c-format
+msgid ""
+"Could not delete:\n"
+"%s"
+msgstr "Nepavyko ištrinti „%s“."
+
+#: ../../xffm/common/gio.hh:278
+#, c-format
+msgid "Could not move %s to trash"
+msgstr "Nepavyko perkelti %s į šiukšlinę"
+
+#: ../../xffm/common/clipboard.hh:23 ../../xffm/common/dnd.hh:40
+msgid "Copying files locally"
+msgstr "Kopijuojami failai į kompiuterį"
+
+#: ../../xffm/common/clipboard.hh:30 ../../xffm/common/dnd.hh:34
+msgid "Moving files"
+msgstr "Perkeliami failai"
+
+#: ../../xffm/common/dnd.hh:46
+#, fuzzy
+msgid "Create Link"
+msgstr "Kur sukurti:"
+
+#: ../../xffm/common/util.hh:1200
+#, c-format
+msgid ""
+"Scriptfile \"%s\" is not executable. Please set the executable-attribute on "
+"that file."
+msgstr ""
+
+#: ../../xffm/common/util.hh:1202 ../../xffm/common/util.hh:1237
+#, c-format
+msgid "Open with %s"
+msgstr "Atverti su %s"
+
+#: ../../xffm/common/util.hh:1202
+msgid "Text Editor"
+msgstr "Tekstų redaktorius"
+
+#: ../../xffm/common/util.hh:1239 ../../xffm/common/gtk.hh:65
+msgid "Execute Shell Command"
+msgstr "Vykdyti apvalkalo komandą"
+
+#: ../../xffm/common/util.hh:1243
+msgid ""
+"Console: quickly run single commands -- write a command here and press enter."
+msgstr ""
+"Pultas: skirtas sparčiam komandų paleidimui — įveskite komandą ir "
+"spustelėkite įvedimo klavišą."
+
+#: ../../xffm/common/gtk.hh:123
+msgid "New Tab"
+msgstr "Nauja kortelė"
+
+#: ../../xffm/common/gtk.hh:335
+msgid "OK"
+msgstr "OK"
+
+#: ../../xffm/common/run.hh:344
+msgid "error"
+msgstr "klaida"
+
+#: ../../xffm/common/run.hh:348
+msgid "warning"
+msgstr "perspėjimas"
+
+#: ../../xffm/common/mime.hh:101 ../../xffm/common/mime.hh:143
+#, fuzzy
+msgid "No Read Permission"
+msgstr "Nauji leidimai..."
+
+#: ../../xffm/common/preview.hh:593
+msgid "Empty file"
+msgstr "Tuščias failas"
+
+#: ../../xffm/common/preview.hh:648
+#, c-format
+msgid "Cannot read from %s"
+msgstr "Nepavyko nuskaityti iš %s"
+

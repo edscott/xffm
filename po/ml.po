@@ -1,0 +1,1558 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:39:36 CDT 2013 ---
+#
+# Anish A (Swatantra Malayalam Computing) <aneesh.nl@gmail.com>, 2011.
+# Reviewed by Ani <apeter@redhat.com>, 2010.
+# Rag Sagar.V|രാഗ് സാഗര്‍. വി <ragsagar@gmail.com>, 2008.
+# Hasainar Mankada <mlp.hasainar@itschool.gov.in>, 2011.
+# Pratheesh Prakash <royal.mexian@gmail.com>, 2008.
+# Ashik S <aashiks@gmail.com>, 2008.
+# Santhosh Thottingal <santhosh.thottingal@gmail.com>, 2007-2008.
+# Praveen|പ്രവീണ്‍ A|എ <pravi.a@gmail.com>, 2007-2013.
+# Jaisen Nedumpala <jaisuvyas@gmail.com>, 2009-2010.
+# സ്മിത.ബി.ആര്‍ <smitha.br@gmail.com>, 2008.
+# Manu Madhav <manusmad@gmail.com>, 2008-2009.
+# Anoopan|അനൂപന്‍ <anoop.ind@gmail.com>, 2008.
+# Aslam Muhammad <aslamckra@gmail.com>, 2012.
+# Hrishikesh.KB <hrishi.kb@gmail.com>, 2010.
+# Arun Mohan <candlelightz@gmail.com>, 2010.
+# Mohammed Sadik pk <sadiqpkp@gmail.com>, 2012.
+# Reviewed by Syam Krishnan <syamcr@gmail.com>, 2008.
+# Mohammed Sadiq <sadiqpkp@gmail.com, 2012.>, 2012.
+# Mohamed sajad.N.M <suchsash@gmail.com>, 2010.
+# Joju Joshua <jojujoshua@gmail.com>, 2008.
+# SHIJU ALEX|ഷിജൂ അലക്സ് <shijualexonline@gmail.com>, 2008.
+# FSF-India <locale@gnu.org.in>, 2003.
+# SHIJU ALEX|ഷിജൂ അലക്സ്, <shijualexonline@gmail.com>, 2008.
+# ANI PETER|അനി പീറ്റര്‍ <peter.ani@gmail.com>, 2008.
+# Reviewed by മണിലാല്‍ കെ.എം|Manilal K M <libregeek@gmail.com>, 2008.
+# pR@tz/Pratheesh Prakash/പ്രതീഷ് പ്രകാശ് <royal.mexian@gmail.com>, 2008.
+# Dominic Geevarghese <dominicpg@gmail.com>, 2013.
+# Praveen Arimbrathodyil <pravi.a@gmail.com>, 2010.
+# vps <mvpsuresh@yahoo.com>, 2003.
+# Reviewed by Manilal KM <libregeek@gmail.com>, 2008.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2002-2012.
+# Ani Peter | അനി പീറ്റര്‍ <apeter@redhat.com>, 2009.
+# Sankaranarayanan <snalledam@dataone.in>, 2008.
+# Balasankar C <c.balasankar@gmail.com>, 2013.
+# Sankaranaarayanan <snalledam@dataone.in>, 2008.
+# Sarath Lakshman <sarathlakshman@slynux.org>, 2008.
+# Peter Ani <peter.ani@gmail.com>, 2009.
+# അനൂപന്‍ <anoop.ind@gmail.com>, 2008.
+# ആഷിക് എസ് | Ashik S <aashiks@gmail.com>, 2008.
+# rine joseph <rinejoseph@trystnetworks.com>, 2009.
+# മണിലാല്‍ കെ.എം|Manilal K M <libregeek@gmail.com>, 2008.
+# Maxin B. John <maxinbjohn@gmail.com>, 2007.
+# Manu S Madhav <manusmad@gmail.com>, 2008.
+# Anilkumar KV <anilankv@gmail.com>, 2009.
+# Praveen Arimbrathodiyil <pravi.a@gmail.com>, 2007-2012.
+# Reviewed by Ani Peter|അനി പീറ്റര്‍ <apeter@redhat.com>, 2008.
+# Reviewed By Santhosh Thottingal <santhosh.thottingal@gmail.com>, 2008.
+# root <root@LinuxCSE-36>, 2003-2011.
+# പ്രവീണ്‍ അരിമ്പ്രത്തൊടിയില്‍ <pravi.a@gmail.com>, 2008.
+# Ani Peter|അനി പീറ്റര്‍ <apeter@redhat.com>, 2009.
+# Reviewed by പ്രവീണ്‍ അരിമ്പ്രത്തൊടിയില്‍ <pravi.a@gmail.com>, 2008.
+# Hari|ഹരി  Vishnu | വിഷ്ണു <harivishnu@gmail.com>, 2008-2009.
+# seshagiri <seshagiriprabhu@gmail.com>, 2009.
+# Sankaranarayanan | ശങ്കരനാരായണന്‍ <snalledam@dataone.in>, 2009.
+# Raru Rv <raru.rv@gmail.com>, 2010.
+# SANKARANAARAYANAN |ശങ്കരനാരായണന്‍ <snalledam@dataone.in>, 2009.
+# Reviewed by Praveen|പ്രവീണ്‍ A|എ <pravi.a@gmail.com>, 2007-2008.
+# ragsagar <ragsagar@gmail.com>, 2008.
+# Abdulrasheed TK <mlp.abdulrasheed@itschool.gov.in>, 2011.
+# സന്തോഷ് തോട്ടിങ്ങല്‍ <santhosh.thottingal@gmail.com>, 2008.
+# Akhil Krishnan S <akhilkrishnans@gmail.com>, 2012.
+# pR@tz/പ്രതീഷ് പ്രകാശ്/Pratheesh Prakash <royal.mexian@gmail.com>, 2009.
+# Reviewed by Manilal K M <libregeek@gmail.com>, 2008.
+# Labeeb Elbiem <mmlabeeb@gmail.com>, 2010.
+# pR@tz/Pratheesh Prakash <royal.mexian@gmail.com>, 2008.
+# Vishnu H <hvishnu999@gmail.com>, 2012.
+# Manilal K M|മണിലാല്‍ കെ എം <libregeek@gmail.com>, 2009-2010.
+# Harivishnu VN <harivishnu@gmail.com>, 2008-2009.
+# Sankaranarayan <snalledam@dataone.in>, 2009.
+# Reviewed by  Manilal K M <libregeek@gmail.com>, 2007.
+# Shiju Alex <shijualexonline@gmail.com>, 2008.
+# Anivar Aravind <anivar@movingrepublic.org>, 2007.
+# Reviewed by: സന്തോഷ് തോട്ടിങ്ങല്‍ <santhosh.thottingal@gmail.com>.
+# ANI PETER <apeter@redhat.com>, 2009.
+# Anoop | അനൂപ് Panavalappil | പനവളപ്പില്‍ <gnuanu@gmail.com>, 2008.
+# Jishnu Mohan <jishnu7@gmail.com>, 2012-2013.
+# Copyright (C) 2010 Anish A <aneesh.nl@gmail.com>, 2010-2011.
+# Venugopalan TP <mlp.venugopalan@itschool.gov.in>, 2011.
+# Reviewed by Manu S Madhav <manusmad@gmail.com>, 2008.
+# Reviewed by HARI VISHNU <harivishnu@gmail.com>, 2008.
+# Prasad.S.R <saysprasad@gmail.com>, 2008.
+# V. Sasi Kumar <sasi.fsf@gmail.com>, 2009.
+# Anuraj Parameshwaran <anuraj.p@gmail.com>, 2008.
+# Krishnadas KT <ktkrishnadas@gmail.com>, 2011.
+#  സ്മിത ബി ആര്‍ <smitha.br@gmail.com>, 2009.
+# Ershad K <ershad92@gmail.com>, 2010.
+# Reviewed by  Anivar Aravind <anivar@movingrepublic.org>.
+# Syam Krishnan C.R. <syamcr@gmail.com>, 2008.
+# "Baiju M" <baiju.m.mail@gmail.com>, 2008.
+# ashik salahudeen <aashiks@gmail.com>, 2008.
+# Arjun.K <arjunk1amala@gmail.com>, 2010.
+# Anish A <aneesh.nl@gmail.com>, 2010-2013.
+# Hrishikesh K B <hrishi.kb@gmail.com>, 2010.
+# പ്രവീണ്‍ <pravin.vet@gmail.com>, 2008.
+# Hrishikesh.K B <hrishi.kb@gmail.com>, 2010.
+# Suresh Valiya Parambil <mvpsuresh@yahoo.com>, 2003.
+# Baiju Q <baijuq@gmail.com>, 2010.
+# Kutty Hassan PK <pkkuttyhassan@gmail.com>, 2011.
+# Anoop | അനൂപ് Panavalappil |പനവളപ്പില്‍ <gnuanu@gmail.com>, 2008.
+#  അനില്‍കുമാര്‍ കെ വി <anilankv@gmail.com>, 2009.
+# NIKHIL VISHNU P V <nikhilvishnupv@gmail.com>, 2007.
+# Jesse P Francis <gtalkjesse@gmail.com>, 2008.
+# Nishan Naseer, nishan.naseer@gmail.com, 2008 <>.
+# Santhosh|സന്തോഷ് Thottingal|തോട്ടിങ്ങല്‍ <santhosh00@gmail.com>, 2007.
+# Ashik Salahudeen|ആഷിക് സലാഹുദ്ദീന്‍ <aashiks@gmail.com>, 2008.
+# Arun.K.R|അരുണ്‍.കെ.ആര്‍ <code333@gmail.com>, 2008.
+# Manilal K M <libregeek@gmail.com>, 2009-2012.
+# Abhishek Oommen Jacob <abhishekjacob123@gmail.com>, 2008.
+# SUSHMA.K.S/സൂഷമ.കെ.എസ്സ് <sushmamanuks@gmail.com>, 2008.
+# Arun.K.R <code333@gmail.com>, 2008.
+# tvmanukrishnan <tvmanukrishnan@gmail.com>, 2010.
+# Suresh VP <mvpsuresh@yahoo.com>, 2003.
+# ഹിരണ്‍ വേണുഗോപാലന്‍|Hiran Venugopalan <hiran.v@gmail.com>, 2008.
+# arkarjun <arkarjun@gmail.com>, 2010.
+# Balasankar Chelamattath <c.balasankar@gmail.com>, 2012.
+# Mohammed Sadik <sadiqpkp@gmail.com>, 2011-2012.
+# HITHA VENUGOPALAN|ഹിദാ വേണുഗോപാലന്‍ <hitha.v@gmail.com>, 2008.
+# Mobin M <mobstux@gmail.com>, 2007.
+# Rajeesh K Nambiar <rajeeshknambiar@gmail.com>, 2008.
+# Afsal Askar <afsal21@gmail.com>, 2008.
+# Syam Krishnan <syamcr@gmail.com>, 2008-2010.
+# Sabarish K <ksabarish@gmail.com>, 2011.
+# SANKARANARAYANAN|ശങ്കരനാരായണന്‍ <snalledam@dataone.in>, 2008.
+# Rag Sagar.V | രാഗ് സാഗ്ര്‍.വി <ragsagar@gmail.com>, 2008.
+# Hari Vishnu <harivishnu@gmail.com>, 2007-2009.
+# SANKARANARAYANAN |ശങ്കരനാരായണന്‍ <snaalledam@dataone.in>, 2009.
+# Manoj.K <manojkmohanme03107@gmail.com>, 2010.
+# Reviewed by Ani Peter <apeter@redhat.com>, 2010.
+# Akhilan <akhilkrishnans@gmail.com>.
+# seshagiri prabhu <seshagiriprabhu@gmail.com>, 2009-2010.
+# FAbhishek Jacob <abhishekjacob123@gmail.com>, 2008.
+# CHANDRASEKHARAN NAIR <chandrasekharan.nair@gmail.com>, 2008.
+# Reviewed by Praveen|പ്രവീണ്‍ Arimbrathodiyil|അരിമ്പ്രത്തൊടിയില്‍ <pravi.a@gmail.com>, 2008-2009.
+# Reviewed by Santhosh Thottingal <santhosh00@gmail.com>, 2007.
+# Abhishek Jacob <abhishekjacob123@gmail.com>, 2008-2009.
+# Abdulhakkim CP <mlp.abdulhakkim@itschool.gov.in>, 2011.
+# Sankaranaarayanan.N.M <snalledam@dataone.in>, 2008.
+# ശങ്കരനാരായണന്‍ <snalledam@dataone.in>, 2008.
+# Ashik Salahudeen|ആഷിക് സലാഹുദീന്‍ <aashiks@gmail.com>, 2008.
+# Ani Peter <peter.ani@gmail.com>, 2006-2013.
+# Remya Thottingal <remyaguptha@yahoo.com>, 2008.
+# Reviewed by Unni <kpnunni@gmail.com>.
+# സുജിത് ഹരിദാസന്‍ <sujith.h@gmail.com>, 2008.
+# jasir a <ajasir@gmail.com>, 2010.
+# jeevz <jeevanism@gmail.com>, 2009.
+# Sreerenj B <bsreerenj@gmail.com>, 2008.
+# Jeffrey|ജെഫ്രി  Antony|ആന്റണി <jeffreyantony@gmail.com>, 2008.
+# Krishnadas NP <mlp.krishnadas@itschool.gov.in>, 2011.
+# Reviewed by  Santhosh Thottingal <santhosh00@gmail.com>.
+# REVIEWED <apeter@redhat.com>, 2010.
+# SANKARANARAYANAN | ശങ്കരനാരായണന്‍ <snalledam@dataone.in>, 2009.
+# Krishnan MP <mlp.krishnan@itschool.gov.in>, 2011.
+# Manoj K <manojkmohanme03107@gmail.com>, 2012.
+# Manu S Madhav | മനു എസ് മാധവ് <manusmad@gmail.com>, 2008.
+# Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
+# Afsal <afsal21@gmail.com>, 2012.
+# Reviewed by Praveen Arimbrathodiyil <pravi.a@gmail.com>, 2008-2012.
+# Divya.k <dkrnDivyaNarayanan@gmail.com>, 2010.
+# Jesse Francis <gtalkjesse@gmail.com>, 2008-2009.
+# SANKARANAAARAAYANAN <snalledam@dataone.in>, 2008.
+# SMITHA B R | സ്മിത ബി ആര്‍ <smitha.br@gmail.com>, 2008.
+# HARI VISHNU <harivishnu@gmail.com>, 2008.
+# Anivar Aravind|അനിവര്‍ അരവിന്ദ് <anivar@movingrepublic.org>, 2007.
+# namitha vk <namithavk4u@gmail.com>, 2010.
+# Pradeepkumar Mattara <mlp.pradeepkumar@itschool.gov.in>, 2011.
+# SMITHA B R|സ്മിത ബി ആര്‍ <smitha.br@gmail.com>, 2008.
+# SANKARANARAYANAN <snalledam@dataone.in>, 2008-2009.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-02 12:27-0600\n"
+"PO-Revision-Date: 2013-04-21 23:38+0530\n"
+"Last-Translator: Balasankar C <c.balasankar@gmail.com>\n"
+"Language-Team: Swatantra Malayalam Computing\n"
+"Language: ml\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"product=accerciserkeywords=I18N+L10Ncomponent=general\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Virtaal 0.7.1\n"
+"X-Project-Style: gnome\n"
+
+#: ../../xffm/completion/base.hh:28
+msgid "Command"
+msgstr "ആജ്ഞ"
+
+#: ../../xffm/completion/base.hh:31
+msgid "File"
+msgstr "ഫയല്‍"
+
+#: ../../xffm/completion/base.hh:34
+#, fuzzy
+msgid "Command history"
+msgstr "ഓര്‍മ്മച്ചെപ്പ് ചരിത്രം"
+
+#. option -u uid "uid" "uid_combo"
+#: ../../xffm/completion/base.hh:37 ../../xffm/find/dialog.hh:199
+msgid "User"
+msgstr "ഉപയോക്താവ്"
+
+#: ../../xffm/completion/base.hh:40
+msgid "Variable"
+msgstr "ചരം"
+
+#: ../../xffm/completion/base.hh:43
+msgid "Host"
+msgstr "ഹോസ്റ്റ്"
+
+#: ../../xffm/completion/base.hh:55
+#, fuzzy
+msgid "Found no match"
+msgstr "ചേര്‍ച്ച നോക്കുന്നതിനായുളള വാക്കുകള്‍"
+
+#: ../../xffm/completion/base.hh:133 ../../xffm/completion/base.hh:134
+msgid "Matches"
+msgstr "പൊരുത്തപ്പെട്ടു"
+
+#: ../../xffm/completion/base.hh:134
+msgid "Too many files open"
+msgstr "ഒരുപാടു് ഫയലുകള്‍ തുറന്നിട്ടിരിയ്ക്കുന്നു"
+
+#: ../../xffm/completion/base.hh:325 ../../xffm/find/fgr.hh:124
+msgid "Options:"
+msgstr "ഐച്ഛികങ്ങള്‍:"
+
+#: ../../xffm/completion/bash.hh:133
+#, fuzzy
+msgid "Completion mode:"
+msgstr "പൂര്‍ത്തിയാക്കിയ കോഡ്"
+
+#: ../../xffm/completion/bash.hh:134
+msgid "command"
+msgstr "കമാന്‍ഡ്"
+
+#: ../../xffm/completion/bash.hh:135
+msgid "file"
+msgstr "ഫയല്‍ "
+
+#: ../../xffm/completion/bash.hh:145 ../../xffm/completion/bash.hh:149
+#, fuzzy
+msgid "Options >>"
+msgstr "ഐച്ഛികങ്ങള്‍"
+
+#: ../../xffm/find/fgr.hh:124 ../../xffm/find/dialog.hh:308
+msgid "Path"
+msgstr "പാഥ്"
+
+#: ../../xffm/find/fgr.hh:125
+msgid "Locate documents and folders on this computer by name or content"
+msgstr "പേര് അല്ലെങ്കില്‍ ഉള്ളടക്കം ഉപയോഗിച്ച് ഫയലുകളും അറകളും കണ്ടുപിടിക്കുക"
+
+#: ../../xffm/find/fgr.hh:126 ../../xffm/find/dialog.hh:341
+msgid "Filter:"
+msgstr "അരിപ്പ:"
+
+#: ../../xffm/find/fgr.hh:126
+msgid "Search for files"
+msgstr "ഫയലുകള്‍ക്കായി തിരയുക"
+
+#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
+#: ../../xffm/find/fgr.hh:128
+msgid "Contents:"
+msgstr "ഉള്ളടക്കങ്ങള്‍‌:"
+
+#: ../../xffm/find/fgr.hh:128
+#, fuzzy
+msgid "File's contents filtered as plain text."
+msgstr "സാധാരണ പദാവലിയായി ഈ ഫയല്‍ സൂക്ഷിയ്ക്കണമോ?"
+
+#: ../../xffm/find/fgr.hh:131
+#, fuzzy
+msgid "Verbose output debugging mode."
+msgstr "പ്രശ്നനിര്‍ദ്ധാരണകോഡ് പ്രാവര്‍ത്തികമാക്കുക. "
+
+#: ../../xffm/find/fgr.hh:133
+msgid "Show version information"
+msgstr "ലക്കത്തെക്കുറിച്ചുള്ള വിവരം കാണിയ്ക്കുക"
+
+#: ../../xffm/find/fgr.hh:135
+#, fuzzy
+msgid "Filter Details"
+msgstr "യൂസര്‍ വിവരങ്ങള്‍"
+
+#. / option -a "xdev"
+#: ../../xffm/find/fgr.hh:138 ../../xffm/find/dialog.hh:180
+#, fuzzy
+msgid "Stay on single filesystem"
+msgstr "ഫയല്‍ സിസ്റ്റം പരിശോധിയ്ക്കക"
+
+#: ../../xffm/find/fgr.hh:140
+msgid "Print..."
+msgstr "അച്ചടിക്കുക"
+
+#: ../../xffm/find/fgr.hh:140
+msgid "The unique Process ID that identifies this process."
+msgstr "ഈ പ്രക്രിയയെ തിരിച്ചറിയുന്ന വേറൊന്നും ഉപയോഗിയ്ക്കാത്ത പ്രൊസസ്സ് ഐഡി."
+
+#. / option -D "recursiveH"
+#: ../../xffm/find/fgr.hh:142 ../../xffm/find/dialog.hh:177
+#, fuzzy
+msgid "Find hidden files and directories"
+msgstr "ഫയല്‍, തട്ട് എന്നിവ"
+
+#: ../../xffm/find/fgr.hh:143
+msgid "Filter"
+msgstr "അരിപ്പ"
+
+#: ../../xffm/find/fgr.hh:144
+msgid ""
+"To display files which pass the filter (stars and regexps will be processed)"
+msgstr ""
+
+#. / option -r "recursive"
+#: ../../xffm/find/fgr.hh:146 ../../xffm/find/dialog.hh:174
+#, fuzzy
+msgid "Recursive"
+msgstr "ആവ‌ര്ത്തിച്ചുവരുന്ന"
+
+#: ../../xffm/find/fgr.hh:147 ../../xffm/find/fgr.hh:148
+#: ../../xffm/find/fgr.hh:149 ../../xffm/find/fgr.hh:150
+msgid "KByte"
+msgstr "KByte"
+
+#: ../../xffm/find/fgr.hh:148
+#, fuzzy
+msgid "is greater than or equal to"
+msgstr "ഗ്രേറ്റര്‍ ദാന്‍ ഓര്‍ ഐക്വല്‍ ടു ( '≥' (U+2265)എന്ന അക്ഷരം)"
+
+#: ../../xffm/find/fgr.hh:150
+#, fuzzy
+msgid "is less than or equal to"
+msgstr "ലെസ് ദാന്‍ ഓര്‍ ഐക്വല്‍ ടു ( '≤' (U+2264)എന്ന അക്ഷരം)"
+
+#: ../../xffm/find/fgr.hh:152
+#, fuzzy
+msgid "Set UID"
+msgstr "സജ്ജീകരണം"
+
+#: ../../xffm/find/fgr.hh:152
+msgid "Executable Text Files"
+msgstr "പ്രവര്‍ത്തിപ്പിക്കാവുന്ന രചനകള്‍"
+
+#: ../../xffm/find/fgr.hh:154
+msgid "The permissions of the file, in octal notation."
+msgstr "ഒക്ടല്‍ നോട്ടേഷനില്‍ ഫയലിന്റെ അനുവാദങ്ങള്‍."
+
+#: ../../xffm/find/fgr.hh:155
+msgid "Type"
+msgstr "തരം"
+
+#: ../../xffm/find/fgr.hh:157 ../../xffm/find/signals.hh:17
+msgid "Any"
+msgstr "ഏതെങ്കിലും"
+
+#: ../../xffm/find/fgr.hh:157
+#, fuzzy
+msgid "Default type"
+msgstr "സ്വതവേയുള്ള വസ്തു"
+
+#: ../../xffm/find/fgr.hh:158 ../../xffm/common/preview.hh:497
+#, fuzzy
+msgid "Regular file"
+msgstr "സാധാരണ വലയം (ഗ്രിഡ്)"
+
+#: ../../xffm/find/fgr.hh:159 ../../xffm/find/signals.hh:11
+#: ../../xffm/fm/local/popup.hh:803 ../../xffm/common/preview.hh:488
+msgid "Directory"
+msgstr "നാമസൂചീഗൃഹം(ഡയറക്റ്ററി)"
+
+#: ../../xffm/find/fgr.hh:160 ../../xffm/find/signals.hh:12
+#: ../../xffm/common/preview.hh:494
+msgid "Symbolic Link"
+msgstr "ചിഹ്നിത ബന്ധം"
+
+#: ../../xffm/find/fgr.hh:161
+#, fuzzy
+msgid "UNIX Socket"
+msgstr "യൂണിക്സ് പദ്ധതി"
+
+#: ../../xffm/find/fgr.hh:162 ../../xffm/find/signals.hh:14
+#: ../../xffm/common/preview.hh:482
+#, fuzzy
+msgid "Block device"
+msgstr "ഉപകരണങ്ങളിലേയ്ക്കു് തിരിച്ചു് പോകുക"
+
+#: ../../xffm/find/fgr.hh:163 ../../xffm/find/signals.hh:15
+#: ../../xffm/common/preview.hh:485
+#, fuzzy
+msgid "Character device"
+msgstr "ക്യാരക്ടര്‍ കോഡ്"
+
+#: ../../xffm/find/fgr.hh:164 ../../xffm/find/signals.hh:16
+#: ../../xffm/common/preview.hh:491
+msgid "FIFO"
+msgstr "FIFO"
+
+#. radio_p freed on destroy event for dialog_.
+#. option -k minutes "last_minutes", "last_minutes_spin"
+#: ../../xffm/find/fgr.hh:166 ../../xffm/find/fgr.hh:168
+#: ../../xffm/find/dialog.hh:221
+msgid "Minutes"
+msgstr "മിനിറ്റുകള്‍"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/dialog.hh:270 ../../xffm/find/dialog.hh:370
+#: ../../xffm/fm/treeview.hh:18
+msgid "Details"
+msgstr "വിശദാംശങ്ങള്‍"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/fgr.hh:179 ../../xffm/find/fgr.hh:180
+#: ../../xffm/find/fgr.hh:183 ../../xffm/find/fgr.hh:184
+#: ../../xffm/find/fgr.hh:187 ../../xffm/find/fgr.hh:188
+#, fuzzy
+msgid "TIME"
+msgstr "TIMEOUT"
+
+#: ../../xffm/find/fgr.hh:168 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/fgr.hh:174 ../../xffm/find/fgr.hh:177
+msgid "Previous"
+msgstr "പിന്നോട്ട്"
+
+#. option -h hours "last_hours", "last_hours_spin"
+#: ../../xffm/find/fgr.hh:169 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/dialog.hh:226
+msgid "Hours"
+msgstr "മണിക്കൂറുകള്‍"
+
+#. option -d days "last_days", "last_days_spin"
+#: ../../xffm/find/fgr.hh:172 ../../xffm/find/fgr.hh:174
+#: ../../xffm/find/dialog.hh:231
+msgid "Days"
+msgstr "ദിവസങ്ങള്‍"
+
+#: ../../xffm/find/fgr.hh:175
+msgid "Month"
+msgstr "മാസം"
+
+#: ../../xffm/find/fgr.hh:177
+#, fuzzy
+msgid "Month(s)"
+msgstr "മാസം"
+
+#: ../../xffm/find/fgr.hh:180
+#, fuzzy
+msgid "Modification Time :"
+msgstr "മാറ്റം വരുത്തിയ സമയം"
+
+#: ../../xffm/find/fgr.hh:184
+#, fuzzy
+msgid "Access Time :"
+msgstr "ലഭ്യമാക്കുന്ന സമയം"
+
+#: ../../xffm/find/fgr.hh:188
+#, fuzzy
+msgid "Creation Time :"
+msgstr "നിര്‍മ്മാണ സമയം"
+
+#: ../../xffm/find/fgr.hh:191 ../../xffm/find/fgr.hh:192
+#, fuzzy
+msgid "uid"
+msgstr "യുയുഐഡി"
+
+#: ../../xffm/find/fgr.hh:192
+msgid "User:"
+msgstr "ഉപയോക്താവ്:"
+
+#: ../../xffm/find/fgr.hh:194 ../../xffm/find/fgr.hh:195
+#, fuzzy
+msgid "gid"
+msgstr "പിഡ്"
+
+#: ../../xffm/find/fgr.hh:195
+msgid "Group:"
+msgstr "സംഘം"
+
+#: ../../xffm/find/fgr.hh:198
+msgid ""
+"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+"character that  normally  follows  a file  name"
+msgstr ""
+
+#: ../../xffm/find/fgr.hh:200
+msgid "Content View"
+msgstr "ഉള്ളടക്ക പ്രദര്‍ശനം"
+
+#: ../../xffm/find/fgr.hh:201 ../../xffm/find/fgr.hh:202
+#: ../../xffm/find/fgr.hh:203 ../../xffm/find/fgr.hh:204
+msgid "STRING"
+msgstr "STRING"
+
+#: ../../xffm/find/fgr.hh:202 ../../xffm/find/fgr.hh:204
+#: ../../xffm/fm/local/popup.hh:563
+msgid "Regular expression"
+msgstr "സാധാരണ വ്യംജകം"
+
+#: ../../xffm/find/fgr.hh:204
+msgid "Extended"
+msgstr "എക്സ്റ്റെന്‍ഡട്"
+
+#: ../../xffm/find/fgr.hh:206
+msgid "Ignore case"
+msgstr "വലിയക്ഷരചെറിയക്ഷര വ്യത്യാസം അവഗണിക്കുക"
+
+#: ../../xffm/find/fgr.hh:208
+msgid "Text Files"
+msgstr "ടെക്സ്റ്റ് ഫയലുകള്‍"
+
+#: ../../xffm/find/fgr.hh:210 ../../xffm/find/dialog.hh:552
+msgid "No match"
+msgstr "ചേരുന്നതില്ല"
+
+#: ../../xffm/find/fgr.hh:212 ../../xffm/find/dialog.hh:470
+#, fuzzy
+msgid "Line Count"
+msgstr "à´®àµà´³àµà´³àµà´à´³àµà´àµ à´à´£àµà´£à´"
+
+#: ../../xffm/find/fgr.hh:214
+msgid "Words"
+msgstr "വാക്കുകള്‍"
+
+#: ../../xffm/find/fgr.hh:216
+msgid "Lines"
+msgstr "വരികള്‍"
+
+#: ../../xffm/find/fgr.hh:368
+#, fuzzy, c-format
+msgid "Usage : %s [OPTIONS]\n"
+msgstr "ഉപയോഗിക്കണ്ട വിധം: orca [OPTION...]"
+
+#: ../../xffm/find/signals.hh:10
+msgid "Regular"
+msgstr "സാധാരണ"
+
+#: ../../xffm/find/signals.hh:13 ../../xffm/common/preview.hh:500
+#, fuzzy
+msgid "Socket"
+msgstr "സോക്കറ്റുകള്‍"
+
+#: ../../xffm/find/signals.hh:209
+msgid "Select folder to search in"
+msgstr "തിരയുന്നതിനായി അറ തിരഞ്ഞെടുക്കുക"
+
+#. button no
+#: ../../xffm/find/signals.hh:265 ../../xffm/find/dialog.hh:584
+#: ../../xffm/response/entryfileresponse.hh:18
+#: ../../xffm/response/entryresponse.hh:305
+#: ../../xffm/response/passwdresponse.hh:558
+#: ../../xffm/fm/local/properties.hh:304 ../../xffm/fm/local/rm.hh:155
+msgid "Cancel"
+msgstr "റദ്ദാക്കുക"
+
+#: ../../xffm/find/signals.hh:293 ../../xffm/find/signals.hh:722
+#, fuzzy
+msgid "No editor for current action."
+msgstr "ഇപ്പോഴുള്ള സ്ഥാനത്തു് വച്ചു് പൂട്ടുക"
+
+#. / option "upper_limit_spin" (only in gtk dialog_)
+#: ../../xffm/find/signals.hh:351 ../../xffm/find/dialog.hh:183
+msgid "Results"
+msgstr "ഫലങ്ങള്‍"
+
+#: ../../xffm/find/signals.hh:351
+msgid "Upper limit:"
+msgstr "കൂടിയ‌ പരിധി:"
+
+#: ../../xffm/find/signals.hh:353
+#, fuzzy
+msgid "Counting files..."
+msgstr "ഫയല്‍ അടയ്ക്കുന്നു..."
+
+#: ../../xffm/find/signals.hh:368
+#, fuzzy, c-format
+msgid "Found %d match"
+msgid_plural "Found %d matches"
+msgstr[0] "%d% പൊരുത്തം"
+msgstr[1] "%d% പൊരുത്തങ്ങള്‍"
+
+#: ../../xffm/find/signals.hh:370
+#, fuzzy, c-format
+msgid "%s Finished : %s"
+msgstr "%s, വരി: %s"
+
+#: ../../xffm/find/signals.hh:488 ../../xffm/find/signals.hh:490
+msgid "Searching..."
+msgstr "തിരയുന്നു..."
+
+#. g_object_set_data(G_OBJECT(dialog_), "window", dialog_);
+#: ../../xffm/find/dialog.hh:98 ../../xffm/find/dialog.hh:150
+#: ../../xffm/find/dialog.hh:611
+msgid "Find"
+msgstr "കണ്ടെത്തുക"
+
+#: ../../xffm/find/dialog.hh:183
+#, fuzzy
+msgid "Upper limit"
+msgstr "കൂടിയ‌ പരിധി:"
+
+#. option -s +KByte "size_greater", "size_greater_spin"
+#: ../../xffm/find/dialog.hh:188
+msgid "At Least"
+msgstr "കുറഞ്ഞതു്"
+
+#: ../../xffm/find/dialog.hh:188 ../../xffm/find/dialog.hh:193
+msgid "kBytes"
+msgstr "kBytes"
+
+#. option -s -KByte "size_smaller", "size_smaller_spin"
+#: ../../xffm/find/dialog.hh:193
+msgid "At Most"
+msgstr "കൂടിയതു്"
+
+#: ../../xffm/find/dialog.hh:204
+msgid "Group"
+msgstr "കൂട്ടം"
+
+#. option -o octal "octal_p" "permissions_entry"
+#: ../../xffm/find/dialog.hh:208
+msgid "Octal Permissions"
+msgstr "ഒക്ടല്‍ അനുവാദങ്ങള്‍"
+
+#. option -p suid | exe
+#: ../../xffm/find/dialog.hh:213
+msgid "SUID"
+msgstr ""
+
+#: ../../xffm/find/dialog.hh:213 ../../xffm/fm/local/popup.hh:843
+#, fuzzy
+msgid "Executable"
+msgstr "പ്രവര്‍ത്തിക്കുന്നവ:"
+
+#. option -m months "last_months", "last_months_spin"
+#: ../../xffm/find/dialog.hh:237
+msgid "Months"
+msgstr "മാസങ്ങള്‍"
+
+#: ../../xffm/find/dialog.hh:248
+#, fuzzy
+msgid "File type : "
+msgstr "ഏത് തരം ഫയല്‍: "
+
+#. gtk_widget_show (GTK_WIDGET(right_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(center_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(left_options_vbox));
+#: ../../xffm/find/dialog.hh:262 ../../xffm/find/dialog.hh:602
+#: ../../xffm/fm/page/page.hh:70 ../../xffm/common/gtk.hh:70
+msgid "Close"
+msgstr "അടയ്‍ക്കുക"
+
+#. gtk_box_pack_start (vbox7a, GTK_WIDGET(advancedBox), TRUE, FALSE, 5);
+#. gtk_widget_show(GTK_WIDGET(advancedBox));
+#. //////////////  grep options.... /////////////////////////
+#: ../../xffm/find/dialog.hh:384
+msgid "Contains"
+msgstr "അടങ്ങുന്നത്"
+
+#: ../../xffm/find/dialog.hh:404
+msgid "Contains the text"
+msgstr "പദാവലി അടങ്ങുന്നു"
+
+#: ../../xffm/find/dialog.hh:437
+msgid "Case Sensitive"
+msgstr "കേസ് സെന്‍സിറ്റീവ്"
+
+#: ../../xffm/find/dialog.hh:449
+#, fuzzy
+msgid "Extended regexp"
+msgstr "എക്സ്റ്റെന്‍ഡട്"
+
+#: ../../xffm/find/dialog.hh:460
+msgid "Include binary files"
+msgstr "ബൈനറി ഫയലുകള്‍ ഉള്‍പ്പെടുത്തുക"
+
+#: ../../xffm/find/dialog.hh:496
+msgid "Match"
+msgstr "ചേ‌ര്ച്ച"
+
+#: ../../xffm/find/dialog.hh:508
+#, fuzzy
+msgid "Anywhere"
+msgstr "ഒരിടത്തുമില്ല"
+
+#: ../../xffm/find/dialog.hh:523
+msgid "Whole words only"
+msgstr "മുഴുവന്‍ വാക്കുകള്‍ മാത്രം"
+
+#: ../../xffm/find/dialog.hh:538
+msgid "lines"
+msgstr "വരികള്‍"
+
+#: ../../xffm/find/dialog.hh:594
+msgid "Clear"
+msgstr "വ്യ‌‌ക്തമാക്കുക"
+
+#: ../../xffm/find/dialog.hh:636
+msgid "Edit"
+msgstr "ചിട്ടപ്പെടുത്തുക"
+
+#: ../../xffm/find/dialog.hh:751 ../../xffm/find/dialog.hh:766
+#: ../../xffm/common/util.hh:1150 ../../xffm/common/util.hh:1152
+#: ../../xffm/common/util.hh:1158 ../../xffm/common/util.hh:1160
+#: ../../xffm/common/preview.hh:479
+msgid "unknown"
+msgstr "അറിയാത്ത"
+
+#: ../../xffm/find/dialog.hh:780
+msgid "Modified"
+msgstr "പരിഷ്കരിച്ചു"
+
+#: ../../xffm/find/dialog.hh:784
+msgid "Created"
+msgstr "നിര്‍മ്മിച്ചു"
+
+#: ../../xffm/find/dialog.hh:788
+#, fuzzy
+msgid "Accessed"
+msgstr "സന്ദര്‍ശിച്ചതു്:"
+
+#: ../../xffm/find/dialog.hh:1106
+msgid ""
+"Basic rules:\n"
+"\n"
+"*  Will match any character zero or more times.\n"
+"?  Will match any character exactly one time\n"
+"[] Match any character within the [] \n"
+"^  Match at beginning of string\n"
+"$  Match at end of string \n"
+msgstr ""
+
+#: ../../xffm/find/dialog.hh:1115
+msgid ""
+"Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"In  basic regular expressions the metacharacters ?, +, {, |, (, and ) \n"
+"  lose their special meaning.\n"
+"\n"
+"The  period . matches  any  single  character.\n"
+"The caret ^ matches at the start of line.\n"
+"The dollar $ matches at the end of line.\n"
+"\n"
+"Characters within [ ] matches any single character in the list.\n"
+"Characters within [^ ] matches any single character *not* in the list.\n"
+"Characters inside [ - ] matches a range of characters (ie [0-9] or [a-z]).\n"
+"\n"
+"A regular expression may be followed by one of several repetition "
+"operators:\n"
+"?      The preceding item is optional and matched\n"
+"       at most once.\n"
+"*      The preceding item will be matched zero\n"
+"       or more times.\n"
+"+      The preceding item will be matched one or\n"
+"       more times.\n"
+"{n}    The preceding item is matched exactly n times.\n"
+"{n,}   The preceding item is matched n or more times.\n"
+"{n,m}  The preceding item is matched at least n times,\n"
+"       but not more than m times.\n"
+"\n"
+"To match any reserved character, precede it with \\. \n"
+"\n"
+"Two regular expressions may be joined by the logical or operator |.\n"
+"Two regular expressions may be concatenated.\n"
+"\n"
+"More information is available by typing \"man grep\"\n"
+msgstr ""
+
+#: ../../xffm/response/entryfileresponse.hh:20
+msgid "Open"
+msgstr "തുറക്കുക"
+
+#: ../../xffm/response/entryresponse.hh:29
+#: ../../xffm/response/entryfolderresponse.hh:28
+msgid "Choose directory"
+msgstr "തട്ട് നിര്‍ണ്ണയിക്കുക"
+
+#. this button is redundant since hands are on keyboard for password
+#: ../../xffm/response/entryresponse.hh:309
+#: ../../xffm/response/passwdresponse.hh:189
+#: ../../xffm/response/passwdresponse.hh:559
+msgid "Ok"
+msgstr "ശരി"
+
+#: ../../xffm/response/commandprogressresponse.hh:32
+msgid "Items:"
+msgstr "ഇനങ്ങള്‍:"
+
+#: ../../xffm/response/passwdresponse.hh:21
+msgid "Enter password"
+msgstr "രഹസ്യവാക്ക് നല്‍കുക"
+
+#. gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+#: ../../xffm/response/passwdresponse.hh:125
+#, fuzzy
+msgid "User Input"
+msgstr "മൌസ് ഇന്‍പുട്ട്"
+
+#: ../../xffm/response/passwdresponse.hh:142
+#, fuzzy
+msgid "Response Requested"
+msgstr "മറുപടി ആവശ്യപ്പെട്ടിരിക്കുന്നു "
+
+#: ../../xffm/response/passwdresponse.hh:264
+msgid "Preparing"
+msgstr "തയ്യാറാകുന്നു"
+
+#: ../../xffm/response/passwdresponse.hh:352
+msgid "sudo"
+msgstr "sudo"
+
+#: ../../xffm/response/passwdresponse.hh:354
+msgid "Command:"
+msgstr "ആജ്ഞ:"
+
+#: ../../xffm/response/passwdresponse.hh:357
+msgid "Permission denied"
+msgstr "പ്രവേശനം അനുവദിക്കുന്നതല്ല"
+
+#: ../../xffm/response/passwdresponse.hh:358
+msgid "Try to approach a problem from different angles."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:359
+msgid "Do you want to retry?"
+msgstr "നിങ്ങള്‍ക്ക് വീണ്ടും ശ്രമിക്കണോ?"
+
+#: ../../xffm/response/passwdresponse.hh:360
+msgid "Alternate:"
+msgstr "പകരമായുള്ള:"
+
+#: ../../xffm/response/passwdresponse.hh:365
+msgid "No"
+msgstr ""
+"ഇല്ല/ \n"
+" അല്ല/ \n"
+"വേണ്ട"
+
+#: ../../xffm/response/passwdresponse.hh:401
+msgid "Install"
+msgstr "സ്ഥാപിക്കുക"
+
+#: ../../xffm/response/passwdresponse.hh:402
+#, c-format
+msgid "%s does not exist."
+msgstr "%s നിലവിലില്ല."
+
+#: ../../xffm/response/passwdresponse.hh:467
+#, fuzzy
+msgid "Blowfish"
+msgstr "സോഫിഷ്"
+
+#: ../../xffm/response/passwdresponse.hh:468
+#, fuzzy
+msgid "Encryption Key Approval"
+msgstr "എന്‍ക്രിപ്ഷന്‍ ആപ്ലെറ്റ്"
+
+#: ../../xffm/response/passwdresponse.hh:502
+msgid "-o     print output to standard out. Implies -r."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:506
+msgid "-c     DO NOT compress files before encryption."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:510
+msgid "-r     DO NOT remove input files after processing"
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:517
+#, fuzzy
+msgid "Encryption key: "
+msgstr "എന്‍ക്രിപ്ഷന്‍:"
+
+#: ../../xffm/response/passwdresponse.hh:529
+msgid "Confirm:"
+msgstr "ഉറപ്പാക്കുക:"
+
+#: ../../xffm/response/passwdresponse.hh:542
+msgid "Sorry, passwords do not match"
+msgstr "ക്ഷമിക്കണം, രഹസ്യവാക്കുകള്‍ തമ്മില്‍ പൊരുത്തമില്ല"
+
+#: ../../xffm/response/passwdresponse.hh:550
+#, fuzzy
+msgid "Minimum length:"
+msgstr "ഏറ്റവും കുറഞ്ഞ വില:"
+
+#: ../../xffm/response/timeoutresponse.hh:56
+msgid "Dismiss"
+msgstr "വേണ്ടെന്നു് വയ്ക്കുക"
+
+#: ../../xffm/response/commandresponse.hh:23
+msgid "Running"
+msgstr "പ്രവര്‍ത്തിക്കുന്നു"
+
+#. auto text = g_strdup_printf("%s (pid: %d)",
+#. _("Waiting for operation to finish..."),
+#. Tubo<Type>::getChild (pid));
+#: ../../xffm/response/commandresponse.hh:28
+#, fuzzy
+msgid "Waiting for operation to finish..."
+msgstr "ടക്സ് പെയിന്റ് ആവശ്യമാണ്"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Documents"
+msgstr "പ്രമാണങ്ങള്‍"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Downloads"
+msgstr "ഡൌണ്‍ലോഡുകള്‍"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Music"
+msgstr "സംഗീതം"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Pictures"
+msgstr "ചിത്രങ്ങള്‍"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Templates"
+msgstr "ടെംപ്ലേറ്റുകള്‍"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Videos"
+msgstr "വീഡിയോസ്"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Desktop"
+msgstr "പണിയിടം"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Bookmarks"
+msgstr "അടയാളക്കുറിപ്പുകള്‍"
+
+#: ../../xffm/fm/local/icons.hh:259 ../../xffm/fm/local/rm.hh:181
+msgid "Trash"
+msgstr "ചവറ്റുകുട്ട‌"
+
+#: ../../xffm/fm/local/popup.hh:60
+msgid "New"
+msgstr "പുതിയ"
+
+#. deprecated {N_("Open in New Tab"), NULL, NULL, NULL},
+#. deprecated {N_("Open in New Window"), NULL, NULL, NULL},
+#. common buttons /(also an iconsize +/- button)
+#: ../../xffm/fm/local/popup.hh:64 ../../xffm/fm/local/popup.hh:104
+#: ../../xffm/common/gtk.hh:74
+msgid "Copy"
+msgstr "പക‍ര്പ്പ്"
+
+#: ../../xffm/fm/local/popup.hh:65 ../../xffm/fm/local/popup.hh:105
+#: ../../xffm/common/gtk.hh:73
+msgid "Cut"
+msgstr "മുറിപ്പ്"
+
+#: ../../xffm/fm/local/popup.hh:66 ../../xffm/fm/local/popup.hh:106
+#: ../../xffm/common/gtk.hh:66
+msgid "Paste"
+msgstr "ഒട്ടിപ്പ്"
+
+#. **************
+#: ../../xffm/fm/local/popup.hh:67 ../../xffm/fm/local/popup.hh:107
+#: ../../xffm/fm/local/rm.hh:174 ../../xffm/common/gtk.hh:75
+msgid "Delete"
+msgstr "മായ്‌‌യ്ക്കുക"
+
+#. {N_("About"), NULL, (void *) menu},
+#.
+#. only for listview: {N_("Sort by size"), NULL, (void *) menu},
+#. only for listview: {N_("Sort by date"), NULL, (void *) menu},
+#: ../../xffm/fm/local/popup.hh:73
+msgid "Select All"
+msgstr "എല്ലാം തെരഞ്ഞെടുക്കുക"
+
+#: ../../xffm/fm/local/popup.hh:74 ../../xffm/fm/local/popup.hh:559
+msgid "Match regular expression"
+msgstr "റെഗുലര്‍ എക്സ്‌പ്രഷന്‍ വച്ചു് പൊരുത്തം നോക്കുക"
+
+#: ../../xffm/fm/local/popup.hh:75 ../../xffm/fm/root/view.hh:58
+#: ../../xffm/fm/fstab/popup.hh:21
+#, fuzzy
+msgid "View as list"
+msgstr "പട്ടികയായിട്ട് കാണിക്കുക(L)"
+
+#: ../../xffm/fm/local/popup.hh:77
+msgid "Show hidden files"
+msgstr "അദൃശ്യമായ ഫയലുകള്‍ കാണിക്കുക"
+
+#: ../../xffm/fm/local/popup.hh:79
+#, fuzzy
+msgid "Show Backup Files"
+msgstr "ഫയലുകള്‍ കാണിക്കുക"
+
+#: ../../xffm/fm/local/popup.hh:81
+#, fuzzy
+msgid "Sort data in descending order"
+msgstr "തുറക്കുന്ന ക്രമത്തില്‍ ചിട്ടപ്പെടുത്തിയത്"
+
+#: ../../xffm/fm/local/popup.hh:93 ../../xffm/fm/local/popup.hh:119
+#: ../../xffm/fm/local/popup.hh:1006 ../../xffm/fm/local/popup.hh:1013
+#: ../../xffm/fm/local/popup.hh:1022 ../../xffm/fm/local/popup.hh:1029
+#: ../../xffm/common/gtk.hh:72
+msgid "Open with"
+msgstr "കൊണ്ട് തുറക്കുക"
+
+#: ../../xffm/fm/local/popup.hh:94 ../../xffm/fm/local/popup.hh:846
+#, fuzzy
+msgid "Run Executable..."
+msgstr " പ്രവ‍ര്ത്തനരൂപം ഒാടിക്കുക "
+
+#: ../../xffm/fm/local/popup.hh:95
+msgid "Extract files from the archive"
+msgstr "ശേഖരത്തില്‍ നിന്നും ഫയലുകള്‍ തുറന്നിടുക"
+
+#. g_hash_table_insert(iconname_hash, "bcrypt", (void *)"emblem-keyhole");
+#: ../../xffm/fm/local/popup.hh:96 ../../xffm/fm/root/view.hh:73
+#: ../../xffm/fm/fstab/popup.hh:20 ../../xffm/fm/dialog/notebook.hh:52
+#: ../../xffm/common/gtk.hh:78
+msgid "Open in New Tab"
+msgstr "പുതിയ ജാലകത്തില് തുറക്കുക"
+
+#. File chooser
+#: ../../xffm/fm/local/popup.hh:97 ../../xffm/fm/local/popup.hh:706
+msgid "Create a compressed archive with the selected objects"
+msgstr "തെരഞ്ഞെടുത്ത വസ്തുക്കളുമായി ഒരു കംപ്രസ്സ് ചെയ്ത ആര്‍ക്കൈവ് നിര്‍മ്മിക്കുക"
+
+#: ../../xffm/fm/local/popup.hh:98 ../../xffm/fm/fstab/popup.hh:37
+msgid "Mount the volume associated with this folder"
+msgstr "ഈ അറയുമായി ബന്ധമുളള വോള്യം മൌണ്ടു് ചെയ്യുക"
+
+#: ../../xffm/fm/local/popup.hh:99 ../../xffm/fm/fstab/popup.hh:38
+msgid "Unmount the volume associated with this folder"
+msgstr "ഈ അറയുമായി ബന്ധമുളള വോള്യം അണ്‍മൌണ്ടു് ചെയ്യുക"
+
+#: ../../xffm/fm/local/popup.hh:100 ../../xffm/common/gtk.hh:67
+msgid "Add bookmark"
+msgstr "ഓര്‍മ്മകുറിപ്പായി സൂക്ഷിക്കുക"
+
+#: ../../xffm/fm/local/popup.hh:101 ../../xffm/fm/root/view.hh:74
+#: ../../xffm/common/gtk.hh:68
+msgid "Remove bookmark"
+msgstr "അടയാളം മായ്‍ക്കുക"
+
+#: ../../xffm/fm/local/popup.hh:108 ../../xffm/fm/local/popup.hh:961
+msgid "Rename"
+msgstr "പുനര്‍നാമകരണം"
+
+#: ../../xffm/fm/local/popup.hh:109 ../../xffm/fm/local/popup.hh:947
+msgid "Duplicate"
+msgstr "തനിപ്പക‍ര്പ്പ്"
+
+#: ../../xffm/fm/local/popup.hh:110 ../../xffm/fm/local/popup.hh:933
+msgid "Link"
+msgstr "ലിങ്ക്"
+
+#: ../../xffm/fm/local/popup.hh:111
+msgid "Properties"
+msgstr "ഗുണധര്മ്മങ്ങള്‍"
+
+#: ../../xffm/fm/local/popup.hh:414
+msgid "Files:"
+msgstr "ഫയലുകള്‍:"
+
+#: ../../xffm/fm/local/popup.hh:417 ../../xffm/fm/local/rm.hh:61
+#, fuzzy
+msgid "Multiple selections"
+msgstr "ഫയല്‍ തിരഞ്ഞെടുക്കല്‍"
+
+#: ../../xffm/fm/local/popup.hh:557
+#, fuzzy
+msgid "Select items"
+msgstr "തെരഞ്ഞെടുത്തവ:"
+
+#: ../../xffm/fm/local/popup.hh:575
+#, fuzzy
+msgid "Regular Expression syntax is incorrect"
+msgstr "നിത്യഭാവ പരിശോധകന്‍"
+
+#: ../../xffm/fm/local/popup.hh:592
+#, fuzzy
+msgid "No selection"
+msgstr "തിരഞ്ഞെടുത്തത് പകര്‍ത്തുക"
+
+#: ../../xffm/fm/local/popup.hh:592
+#, fuzzy
+msgid "No matches."
+msgstr "സാമ്യമുള്ളവ ഇല്ല"
+
+#. entryResponse->setCheckButton(_("Run in Terminal"));
+#. entryResponse->setCheckButton(Mime<Type>::runInTerminal(path));
+#: ../../xffm/fm/local/popup.hh:721 ../../xffm/fm/page/pathbar.hh:313
+msgid "Specify Output Directory..."
+msgstr "ഔട്ട്പുട്ടിനുള്ള തട്ട് പ്രസ്ഥാപിയ്ക്കുക..."
+
+#: ../../xffm/fm/local/popup.hh:799
+#, fuzzy
+msgid "Create new..."
+msgstr "പുതിയതു് ഉണ്ടാക്കുക..."
+
+#: ../../xffm/fm/local/popup.hh:806 ../../xffm/fm/local/popup.hh:886
+#, fuzzy
+msgid "New Name:"
+msgstr "പുതിയ പേ‌ര‌്"
+
+#: ../../xffm/fm/local/popup.hh:815
+msgid "No name"
+msgstr "പേരില്ല"
+
+#: ../../xffm/fm/local/popup.hh:828
+#, c-format
+msgid "Another file with the same name already exists in “%s”."
+msgstr "\"%s\" -ല്‍ ഇതേ പേരില്‍ മറ്റൊരു ഫയല്‍ നിലവിലുണ്ടു്."
+
+#: ../../xffm/fm/local/popup.hh:850 ../../xffm/fm/local/popup.hh:1010
+#: ../../xffm/fm/local/popup.hh:1026 ../../xffm/common/util.hh:1248
+msgid "Run in Terminal"
+msgstr "അഗ്രിമത്തില്‍ ഓടിക്കുക"
+
+#: ../../xffm/fm/local/popup.hh:853
+#, fuzzy
+msgid "Arguments for the Command"
+msgstr "ആജ്ഞയ്ക്കായുള്ള ആര്‍ഗ്യുമെന്റുകള്‍"
+
+#: ../../xffm/fm/local/popup.hh:1047 ../../xffm/fm/local/view.hh:141
+msgid "Invalid entry"
+msgstr "ചേര്‍ത്തത് അസാധു"
+
+#: ../../xffm/fm/local/properties.hh:235
+msgid "Properties and Attributes"
+msgstr "സവിശേഷതകളും പ്രതീകങ്ങളും "
+
+#: ../../xffm/fm/local/properties.hh:264
+#, fuzzy
+msgid "File Mode:"
+msgstr "ഫയല്‍ കയറ്റുന്ന സംവിധാനം"
+
+#: ../../xffm/fm/local/properties.hh:290
+msgid "File:"
+msgstr "ഫയല്‍: "
+
+#. Add file info stuff
+#. set info stuff data according to combo box
+#. add signal handler to changed signal for combo box
+#. Add process buttons
+#.
+#: ../../xffm/fm/local/properties.hh:302
+msgid "Apply changes"
+msgstr "മാറ്റങ്ങള്‍ നടപ്പിലാക്കുക"
+
+#: ../../xffm/fm/local/properties.hh:462
+msgid "Successfully moved to trash."
+msgstr "വിജയകരമായി ചവറ്റുകുട്ടയിലേക്ക് നീക്കിയിരിക്കുന്നു."
+
+#: ../../xffm/fm/local/properties.hh:463
+msgid "Source:"
+msgstr "സോഴ്സ്:"
+
+#: ../../xffm/fm/local/rm.hh:59
+#, c-format
+msgid "Delete %s"
+msgstr "%s മായിച്ചു കളയുക (D)"
+
+#: ../../xffm/fm/local/rm.hh:61
+msgid "Warning: "
+msgstr "മുന്നറിയിപ്പ്:"
+
+#. gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
+#. title
+#: ../../xffm/fm/local/rm.hh:90
+msgid "Remove"
+msgstr "നീക്കം ചെയ്യുക"
+
+#: ../../xffm/fm/local/rm.hh:140
+#, fuzzy
+msgid "Apply to all"
+msgstr "പ്രയോഗത്തില്‍വരുത്തുക:"
+
+#. **************
+#. This is now available to BSD with rm -P option
+#: ../../xffm/fm/local/rm.hh:163 ../../xffm/common/gtk.hh:76
+#, fuzzy
+msgid "Shred"
+msgstr "ഷ്രെഡ്ഡര്‍"
+
+#. We do not count "../"
+#: ../../xffm/fm/local/view.hh:48 ../../xffm/fm/base/monitor.hh:28
+#, fuzzy, c-format
+msgid "Files: %s"
+msgstr "ഫയല്‍: %s"
+
+#: ../../xffm/fm/root/model.hh:78
+#, fuzzy
+msgid "Root Directory"
+msgstr "സ്പൂള്‍ ഡയറക്ടറി:"
+
+#: ../../xffm/fm/root/model.hh:94
+msgid "This is the root of the filesystem"
+msgstr "ഫയല്‍സിസ്റ്റത്തിന്റെ മൂലം ഇവിടെയാണു്"
+
+#: ../../xffm/fm/root/model.hh:105
+#, fuzzy
+msgid "Home Directory"
+msgstr "ഹോം ഡയറക്ടറി"
+
+#: ../../xffm/fm/root/model.hh:132
+#, fuzzy
+msgid "Trash bin"
+msgstr "ഫയല്‍ ചവറ്റുകുട്ടയിലിടുക"
+
+#: ../../xffm/fm/root/model.hh:162 ../../xffm/fm/fstab/popup.hh:29
+msgid "Disk Image Mounter"
+msgstr "ഡിസ്ക് ഇമേജ് മൌണ്ടര്‍"
+
+#: ../../xffm/fm/root/model.hh:169 ../../xffm/fm/root/model.hh:185
+msgid "Mount local disks and devices"
+msgstr "പ്രാദേശിക ഡിസ്ക്കുകളും ഉപകരണങ്ങളും മൌണ്ട് ചെയ്യുക"
+
+#: ../../xffm/fm/root/model.hh:170 ../../xffm/fm/fstab/popup.hh:25
+#: ../../xffm/fm/fstab/view.hh:429
+#, fuzzy
+msgid "eCryptfs Volume"
+msgstr "മെമ്മറി വോള്യം"
+
+#: ../../xffm/fm/root/model.hh:171 ../../xffm/fm/fstab/popup.hh:24
+msgid "SSHFS Remote Synchronization Folder"
+msgstr "SSHFS റിമോട്ട് സിന്‍ക്രൊണൈസേഷന്‍ ഫോള്‍ഡര്‍"
+
+#: ../../xffm/fm/root/model.hh:172 ../../xffm/fm/fstab/popup.hh:23
+#: ../../xffm/fm/fstab/view.hh:377
+msgid "NFS Network Volume"
+msgstr "NFS നെറ്റ്‍വര്‍ക്ക് വോള്യം"
+
+#: ../../xffm/fm/root/model.hh:173 ../../xffm/fm/fstab/popup.hh:26
+#: ../../xffm/fm/fstab/view.hh:455
+msgid "CIFS Volume"
+msgstr "CIFS വോള്യം"
+
+#: ../../xffm/fm/root/model.hh:195
+#, fuzzy
+msgid "Software Updater"
+msgstr "സോഫ്റ്റ്‌വെയര്‍ പരിഷ്കാരം"
+
+#: ../../xffm/fm/root/model.hh:218 ../../xffm/fm/root/model.hh:230
+msgid "Add or remove software installed on the system"
+msgstr "സിസ്റ്റത്തില്‍ ഇന്‍സ്റ്റോള്‍ ചെയ്തിരിക്കുന്ന സോഫ്റ്റ്‌വെയര്‍ ചേര്‍ക്കുക അല്ലെങ്കില്‍ നീക്കം ചെയ്യുക"
+
+#: ../../xffm/fm/root/model.hh:271
+#, fuzzy
+msgid "Go to bookmarked location"
+msgstr "ആസ്ഥാനത്തേയ്ക്കു പോകുക"
+
+#. {N_("Add bookmark"), (void *)BasePopUp<Type>::noop, NULL, NULL},
+#: ../../xffm/fm/root/view.hh:61
+msgid "Empty trash"
+msgstr "ചവറ്റുകൊട്ട കാലിയാക്കുക"
+
+#. File chooser
+#: ../../xffm/fm/fstab/popup.hh:121
+#, fuzzy
+msgid "Mount Device"
+msgstr "നിയന്ത്രണ ഉപകരണം"
+
+#: ../../xffm/fm/fstab/popup.hh:133
+#, fuzzy
+msgid "Mount point:"
+msgstr "മൌണ്ട് പോയിന്റ്:"
+
+#: ../../xffm/fm/fstab/view.hh:301
+#, fuzzy
+msgid "Mounted on:"
+msgstr "മൌണ്ട്"
+
+#: ../../xffm/fm/fstab/view.hh:302
+msgid "Mount on"
+msgstr "മൌണ്ട്"
+
+#: ../../xffm/fm/fstab/view.hh:310 ../../xffm/fm/fstab/view.hh:312
+msgid "Not mounted"
+msgstr "മൗണ്ട് ചെയ്തിട്ടില്ല "
+
+#: ../../xffm/fm/fstab/view.hh:403
+msgid "SFTP (via SSH)"
+msgstr ""
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, c-format
+msgid "Unmounting %s"
+msgstr "%s അണ്‍മൌണ്ട് ചെയ്യുന്നു"
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, fuzzy, c-format
+msgid "Mounting %s"
+msgstr "മൌണ്ടു് ചെയ്യുന്നു"
+
+#: ../../xffm/fm/dialog/menupopover.hh:128
+msgid "Home"
+msgstr "തട്ടകം"
+
+#: ../../xffm/fm/dialog/menupopover.hh:129 ../../xffm/common/gtk.hh:64
+#, fuzzy
+msgid "Open terminal"
+msgstr "ഒരു ടെര്‍മിനല്‍ തുറക്കുക"
+
+#: ../../xffm/fm/dialog/menupopover.hh:130
+msgid "Open a New Window"
+msgstr "പുതിയ ജാലകം തുറക്കുക"
+
+#. {N_("Execute Shell Command"), (void *)MenuPopoverSignals<Type>::shell, (void *) menuButton_},
+#: ../../xffm/fm/dialog/menupopover.hh:132 ../../xffm/common/gtk.hh:69
+msgid "Search"
+msgstr "അന്വേഷണം"
+
+#: ../../xffm/fm/dialog/menupopover.hh:133 ../../xffm/common/gtk.hh:71
+msgid "Exit"
+msgstr "പുറത്ത് കടക്കുക"
+
+#: ../../xffm/fm/dialog/dialog.hh:116
+msgid "Removed"
+msgstr "നീക്കം ചെയ്തിരിക്കുന്നു"
+
+#: ../../xffm/fm/dialog/dialog.hh:132
+#, fuzzy
+msgid "Detected device(s):"
+msgstr "ഉപകരണങ്ങള്‍ ലഭ്യമാക്കുക (D)"
+
+#. Create the widgets
+#: ../../xffm/fm/page/vbuttonbox.hh:37 ../../xffm/common/gtk.hh:332
+msgid "Help"
+msgstr "സഹായം"
+
+#. File chooser
+#: ../../xffm/fm/page/pathbar.hh:306 ../../xffm/fm/page/pathbar.hh:308
+msgid "Go to"
+msgstr "പോകുക"
+
+#: ../../xffm/fm/page/pathbar.hh:331
+msgid "Not a directory"
+msgstr "ഒരു ഡയറക്ടറി അല്ല"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Renice Process"
+msgstr "പ്രക്രിയ റീനൈസ് ചെയ്യുക"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Suspend"
+msgstr "സസ്പെന്‍ഡ്"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Continue"
+msgstr "തുടരുക"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Interrupt"
+msgstr "തടസ്സം"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Hangup"
+msgstr "അവസാനിപ്പിക്കുക"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "User 1 (USR1)"
+msgstr "ഉപയോക്താവു് 1 (USR1)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "User 2 (USR2)"
+msgstr "ഉപയോക്താവു് 2 (USR2)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+#, fuzzy
+msgid "Terminate Task"
+msgstr "നിര്‍ത്തലാക്കുക %s "
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "Abort"
+msgstr "ഉപേക്ഷിക്കുക"
+
+#: ../../xffm/fm/page/runbutton.hh:138
+msgid "Kill"
+msgstr "അവസാനിപ്പിക്കുക"
+
+#: ../../xffm/fm/page/runbutton.hh:139
+#, fuzzy
+msgid "Segmentation fault"
+msgstr "സെഗ്മന്‍റേഷനില്‍ തെറ്റ്"
+
+#: ../../xffm/fm/page/runbutton.hh:217
+msgid "PID"
+msgstr "PID"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:37
+#, fuzzy
+msgid "Embedded Terminal"
+msgstr "ടെര്‍മിനല്‍ തുറക്കുക"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:38
+#, fuzzy
+msgid "All items in the iconview."
+msgstr "ഈ ജാലകത്തിലെ‌ ഇനങ്ങള്‍ എല്ലാം തെരഞ്ഞടുക്കുക"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:39
+#, fuzzy
+msgid "Scripting"
+msgstr "ആജ്ഞാലേഖനം"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:40
+#, fuzzy
+msgid "Clear Log"
+msgstr "പട്ടിക വെടിപ്പാക്കുക"
+
+#. Status textview
+#: ../../xffm/fm/page/hbuttonbox.hh:42
+msgid "Terminal font"
+msgstr "ടെര്‍മിനലിന്‍റെ ലിപി"
+
+#: ../../xffm/fm/treeview.hh:17
+msgid "Name"
+msgstr "പേര്"
+
+#: ../../xffm/fm/treeview.hh:20
+msgid "Size"
+msgstr "വ്യാപ്തി"
+
+#: ../../xffm/fm/treeview.hh:21
+msgid "Date"
+msgstr "തിയ്യ‌‌തി"
+
+#: ../../xffm/fm/treeview.hh:22
+#, fuzzy
+msgid "Mimetype"
+msgstr "മൈം തരങ്ങള്‍"
+
+#: ../../xffm/fm/treeview.hh:24
+msgid "TYPE"
+msgstr "തരം"
+
+#: ../../xffm/fm/base/signals.hh:642
+#, fuzzy
+msgid "Directory does not exist."
+msgstr "ഡയറക്ടറി നിലവിലില്ല"
+
+#: ../../xffm/fm/base/signals.hh:644 ../../xffm/fm/base/signals.hh:646
+#, fuzzy
+msgid "Trash is empty"
+msgstr "ഈ ഫയല്‍ ശൂന്യമാണ്"
+
+#: ../../xffm/common/settings.hh:27
+#, fuzzy
+msgid "New File:"
+msgstr "പുതിയ ഫയല്‍"
+
+#: ../../xffm/common/gio.hh:235
+#, fuzzy
+msgid "Could not copy item:"
+msgstr "വസ്തു നീക്കം ചെയ്യുവാന്‍ സാധ്യമായില്ല"
+
+#: ../../xffm/common/gio.hh:237
+#, fuzzy
+msgid "Could not move item:"
+msgstr "വസ്തു നീക്കം ചെയ്യുവാന്‍ സാധ്യമായില്ല"
+
+#: ../../xffm/common/gio.hh:239
+#, fuzzy
+msgid "Create symbolic link"
+msgstr "സിംലിങ്കുകള്‍ മാറ്റിയെഴുതുക"
+
+#: ../../xffm/common/gio.hh:276
+#, c-format
+msgid ""
+"Could not delete:\n"
+"%s"
+msgstr ""
+"വെട്ടിമാറ്റുവാന്‍ സാധ്യമല്ല:\n"
+"%s"
+
+#: ../../xffm/common/gio.hh:278
+#, c-format
+msgid "Could not move %s to trash"
+msgstr "%s ചവറ്റു കൊട്ടയിലേക്ക് നീക്കാന്‍ സാധിക്കുന്നില്ല"
+
+#: ../../xffm/common/clipboard.hh:23 ../../xffm/common/dnd.hh:40
+msgid "Copying files locally"
+msgstr "ഫയലുകള്‍ ലോക്കലായി പകര്‍ത്തുന്നു"
+
+#: ../../xffm/common/clipboard.hh:30 ../../xffm/common/dnd.hh:34
+#, fuzzy
+msgid "Moving files"
+msgstr "ഫയലുകള്‍ നീക്കുന്നു"
+
+#: ../../xffm/common/dnd.hh:46
+#, fuzzy
+msgid "Create Link"
+msgstr "കണ്ണി നിര്‍മ്മിച്ചത് വേണ്ടെന്ന് വയ്ക്കുക"
+
+#: ../../xffm/common/util.hh:1200
+#, c-format
+msgid ""
+"Scriptfile \"%s\" is not executable. Please set the executable-attribute on "
+"that file."
+msgstr ""
+
+#: ../../xffm/common/util.hh:1202 ../../xffm/common/util.hh:1237
+#, c-format
+msgid "Open with %s"
+msgstr "%s തുറക്കുന്നതിനായി"
+
+#: ../../xffm/common/util.hh:1202
+msgid "Text Editor"
+msgstr "എഴുത്തിടം"
+
+#: ../../xffm/common/util.hh:1239 ../../xffm/common/gtk.hh:65
+#, fuzzy
+msgid "Execute Shell Command"
+msgstr "ഷെല്‍ ആജ്ഞകള്‍ നടപ്പിലാക്കുക"
+
+#: ../../xffm/common/util.hh:1243
+msgid ""
+"Console: quickly run single commands -- write a command here and press enter."
+msgstr ""
+
+#: ../../xffm/common/gtk.hh:123
+msgid "New Tab"
+msgstr "പുതിയ ടാബ് (T)"
+
+#: ../../xffm/common/gtk.hh:335
+msgid "OK"
+msgstr "ശരി"
+
+#: ../../xffm/common/run.hh:344
+msgid "error"
+msgstr "പിശക്"
+
+#: ../../xffm/common/run.hh:348
+#, fuzzy
+msgid "warning"
+msgstr "മുന്നറിയിപ്പ്:"
+
+#: ../../xffm/common/mime.hh:101 ../../xffm/common/mime.hh:143
+#, fuzzy
+msgid "No Read Permission"
+msgstr "സൈറ്റിനുള്ള ആനുകൂല്യങ്ങള്‍"
+
+#: ../../xffm/common/preview.hh:593
+#, fuzzy
+msgid "Empty file"
+msgstr "പുതിയ ഒഴിഞ്ഞ ഫയല്‍"
+
+#: ../../xffm/common/preview.hh:648
+#, fuzzy, c-format
+msgid "Cannot read from %s"
+msgstr "സി.ഡി വായിക്കുവാന്‍ സാധ്യമല്ല: %s"
+

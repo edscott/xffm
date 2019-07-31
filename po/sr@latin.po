@@ -1,0 +1,1498 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:44:42 CDT 2013 ---
+#
+# Miroslav Nikolić <miroslavnikolic@rocketmail.com>, 2010-2013.
+# Далибор Ђурић <dalibor.djuric@mozilla-srbija.org>, 2011.
+# Translated on 2006-01-12 by Slobodan D. Sredojević <slobo@akrep.be>.
+# Reviewed on 2004-03-22 by: Slobodan D. Sredojević <ssl@uns.ns.ac.yu>.
+# Maintainer: Predrag Krtolica <predrag_k@optusnet.com.au>.
+# Marko Rosic <roske@kde.org.yu>, 2000-2004.
+# Maintainer: Branko Kokanović <branko.kokanovic@gmail.com>, 2010.
+# Translated on 2010-03-01 by Branko Kokanović <branko.kokanovic@gmail.com>.
+# Maintainer: Igor Miletić <grejigl-gnomeprevod@yahoo.com>.
+# Reviewed on 2011-02-06 by: Miroslav Nikolić <miroslavnikolic@rocketmail.com>.
+# Reviewed on 11.05.2009 by Miloš Popović <gpopac@gmail.com>.
+# Translated on 2009-05-09 by: Branko Kokanović <branko.kokanovic@gmail.com>.
+# Reviewed on 2005-07-17 by: Danilo Šegan <danilo@gnome.org>.
+# Reviewed on 2005-07-29 by: Slobodan D. Sredojević <slobo@akrep.be>.
+# Translated on 2009-09-13 by: Branko Kokanović <branko.kokanovic@gmail.com>.
+# Dalibor Djuric <daliborddjuric@gmail.com>, 2009-2011.
+# Maintainer: Bojan Živanović <bojanz@panet.co.yu>.
+# Reviewed on 2005-09-06 by: Danilo Šegan <danilo@gnome.org>.
+# Translated on 2011-03-19 by: Branko Kokanović <branko.kokanovic@gmail.com>.
+# Slobodan Simić <simicsl@verat.net>, 2007.
+# Reviewed on 2004-02-25 by: Danilo Šegan <danilo@gnome.org>.
+# Zoran Olujic <olujicz@ns-linux.org>, 2009-2010.
+# Maintainer: Milan Skocic <milan.skocic@gmail.com>.
+# Reviewed on 2005-07-11 by: Danilo Šegan <dsegan@gmx.net>.
+# Aleksandar Urosevic <urke@users.sourceforge.net>, 2003-2004.
+# Reviewed on 2005-08-22 by Igor Nestorović <igor@prevod.org>.
+# Slobodan Miskovic <yugoslavia@canada.com>, 1999.
+# Translated on 2009-05-10 by: Miloš Popović <gpopac@gmail.com>.
+# Reviewed on 2004-03-20 by: Slobodan D. Sredojević <slobo@akrep.be>.
+# Reviewed on 2005-07-11 by Danilo Šegan <danilo@gnome.org>.
+# Bojan Jovanovic <bojov@fon.bg.ac.yu>, 2004.
+# Reviewed on 2004-02-14 by Aleksandar Urošević <urke@users.sourceforge.net>.
+# Reviewed on 2005-07-15 by: Igor Nestorović <igor@prevod.org>.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2002-2012.
+# Maintainer: Goran Rakić <gox@devbase.net>.
+# Toplica Tanaskovic <toptan@kde.org.yu>, 2003-2005.
+# Translated on 2009-09-12 by: Branko Kokanović <branko.kokanovic@gmail.com>.
+#   Filip Miletic <f.miletic@ewi.tudelft.nl>, 2004.
+# Mladen Pejakovic <pejakm@gmail.com>, 2008-2012.
+# Slobodan Terzic <githzerai06@gmail.com>, 2009-2010.
+# Translated on 2006-02-01 by: Slobodan D. Sredojević <slobo@akrep.be>.
+# Maintainer: Slobodan D. Sredojević <slobo@akrep.be>.
+# Igor Miletić igor.miletic@rogers.com <>.
+# Predrag Krtolica <predrag_k@optusnet.com.au>.
+# Maintainer: Igor Nestorović <jung@one.ekof.bg.ac.yu>.
+# Translated on 2004-03-26 by: Danilo Šegan <danilo@prevod.org>.
+# Translated on 2010-03-10 by: Branko Kokanović <branko.kokanovic@gmail.com>.
+# Translated on 2010-08-25 by: Branko Kokanović <branko.kokanovic@gmail.com>.
+# Filip Miletic <f.miletic@ewi.tudelft.nl>, 2004.
+#    Ivan Bulatović <combuster@gmail.com>.
+# Saša Petrović <salepetronije@gmail.com>, 2013.
+# Ljubisa Radivojevic <claw@claw.co.yu>, 2000.
+# Zoltan Cala <zolika@sezampro.yu>, 1999.
+# Danilo Šergan <danilo@gnome.org>.
+# Reviewed on 2005-08-03 by: Igor Nestorović <igor@prevod.org>.
+# Translated on 2007-03-12 by: Igor Nestorović <igor@prevod.org>.
+# Nikola Kotur <kotnik@ns-linux.org>, 2004-2006.
+# Translated on 2009-05-10 by Branko Kokanović <branko.kokanovic@gmail.com>.
+# Reviewed on 2005-07-10 by Danilo Šegan <danilo@gnome.org>.
+# Strahinja Radic <rstraxy@sezampro.yu>, 1999-2000.
+# Filip Brcic <brcha@gna.org>, 2008.
+# Maintainer: Branko Ivanović <popeye@one.ekof.bg.ac.yu>.
+# Milan Skočić <milan.skocic@gmail.com>, 2010.
+# Reviewed on 2004-02-02 by: Bojan Suzić <bojans@teol.net>.
+# Translated on 2006-01-31 by Slobodan D. Sredojević <slobo@akrep.be>.
+# Chusslove Illich <caslav.ilic@gmx.net>, 2003-2013.
+# Maintainer: Miloš Popović <gpopac@gmail.com>, 2009.
+# Reviewed on 2004-03-06 by: Danilo Šegan <dsegan@gmx.net>.
+# Bojan Bozovic <bole89@infosky.net>, 2003-2004.
+# Reviewed on 2005-09-05 by: Slobodan D. Sredojević <slobo@akrep.be>.
+# Goran Rakić <grakic@devbase.net>, 2009.
+# Translated on 2010-08-22 by: Branko Kokanović <branko.kokanovic@gmail.com>.
+# Danilo Segan <dsegan@gmx.net>, 2003-2005.
+# Filip Miletić <f.miletic@ewi.tudelft.nl>, 2004-2005.
+# Maintainer: Dušan Marjanović <mdfk@root.co.yu>.
+# #-#-#-#-#  sr@latin.po (gnome-control-center)  #-#-#-#-# <>.
+# Reviewed on 2005-07-09 by: Danilo Šegan <dsegan@gmx.net>.
+#   Aleksandar Urosevic <urke@users.sourceforge.net>, 2003-2004.
+# Reviewed on 2005-08-13 by: Igor Nestorović <igor@prevod.org>.
+# Reviewed on 2005-09-03 by Andrija Zarić <andrija@gmail.com>.
+# Zoltan Čala <zolika@sezampro.yu>, 1999.
+# Slobodan Simic <slsimic@gmail.com>, 2003-2010.
+# Reviewed on 2005-07-18 by: Igor Nestorović <igor@prevod.org>.
+# Đorđe Vasiljević <theranchcowboy@googlemail.com>, 2011.
+# Maintainer: Danilo Šegan <dsegan@gmx.net>, 2004.
+# Aleksandar Dezelin <deza@ptt.yu>, 2001.
+# Reviewed on 2005-08-08 by: Igor Nestorović <igor@prevod.org>.
+# Reviewed on 2005-03-02 by: Aleksandar Urošević <urke@gmx.net>.
+# Branko Ivanović <popeye@one.ekof.bg.ac.yu>.
+# Reviewed on 2005-07-08 by: Danilo Šegan <dsegan@gmx.net>.
+# Translated on 2010-08-21 by: Branko Kokanović <branko.kokanovic@gmail.com>.
+# Translated on 2006-03-11 by: Slobodan D. Sredojević <slobo@akrep.be>.
+# Milos Puzovic <m.puzovic@etoncollege.org.uk>, 2001.
+# Prevous maintainer: Veljko M. Stanojević <veljko@vms.homelinux.net>.
+# Reviewed on 2004-02-01 by: Branko Ivanović <popeye@one.ekof.bg.ac.yu>.
+# Reviewed on 2005-08-20 by: Igor Nestorović <igor@prevod.org>.
+# Translated on 2010-03-07 by: Branko Kokanović <branko.kokanovic@gmail.com>.
+# Translated on 2010-08-27 by: Branko Kokanović <branko.kokanovic@gmail.com>.
+# Translated on 2006-01-31 by: Slobodan D. Sredojević <slobo@akrep.be>.
+# Transalted on 2006-01-31 by: Slobodan D. Sredojević <slobo@akrep.be>.
+# Reviewed on 2004-03-24 by: Danilo Šegan <danilo@prevod.org>.
+# Mirko Spasić <mirkospasic@gmail.com>.
+# Ivan Bulatović <combuster@gmail.com>.
+# Translated on 2006-02-21 by Slobodan D. Sredojević <slobo@akrep.be>.
+# Slobodan Markovic <twiddle@eunet.yu>, 2001.
+# Reviewed on 2005-09-03 by: Igor Nestorović <igor@prevod.org>.
+# Translated on 2010-08-28 by: Branko Kokanović <branko.kokanovic@gmail.com>.
+#   Danilo Segan <dsegan@gmx.net>, 2003-2005.
+# Milos Nikolic <skviki@sezampro.yu>, 2000.
+# Reviewed on 2005-09-04 by: Slobodan D. Sredojević <slobo@akrep.be>.
+# Sasa Tomic <sasa.tomic.forwarded@gmail.com>, 2006-2007.
+# Translated on 2006-01-30 by: Slobodan D. Sredojević <slobo@akrep.be>.
+# Reviewed on 2005-07-24 by: Slobodan D. Sredojević <slobo@akrep.be>.
+# Reviewed on 2004-02-19 by: Danilo Šegan <dsegan@gmx.net>.
+# Reviewed on 2005-08-31 by: Igor Nestorović <igor@prevod.org>.
+# Translated by: Miloš Popović <gpopac@gmail.com>.
+# Reviewed on 2004-08-07 by: Danilo Šegan <danilo@prevod.org>.
+# Maintainer: Saša Marić <sasha_maric@yahoo.com>.
+# slobodan terzić <githzerai06@gmail.com>, 2010.
+# Prevous maintainers: Veljko M. Stanojević <veljko@vms.homelinux.net>.
+# Miloš Popović <gpopac@gmail.com>, 2007-2012.
+# Contributed: Bojan Živanović <bojanz@panet.co.yu>.
+# Reviewed on 2005-09-03 by: Danilo Šegan <danilo@prevod.org>.
+#   Miloš Popović <gpopac@gmail.com>, 2007-2008.
+# Serbian message file for YaST2 (@memory@). <>.
+# Tiron Andric <tiron@beotel.yu>, 2003.
+# Reviewed on 2005-03-02 by: Danilo Šegan <danilo@prevod.org>.
+# Reviewed on 2005-09-22 by: Danilo Šegan <danilo@prevod.org>.
+# urdated by: Miloš Popović <gpopac@gmail.com>, 2009.
+# Reviewed on 2004-02-12 by: Danilo Šegan <dsegan@gmx.net>.
+# Goran Rakić  <grakic@devbase.net>.
+# Maintainer: Aleksandar Urošević <urke@gmx.net>.
+# Reviewed on 2004-03-05 by Aleksandar Urošević <urke@users.sourceforge.net>.
+# Maintainer: Dejan Matijević <dejan@ns.sympatico.ca>.
+# Aleksandar Jelenak <jelenak@netlinkplus.net>, 2004-2005.
+#   Nikola Kotur <kotnik@ns-linux.org>, 2006.
+# Reviewed on 2004-02-14 by: Aleksandar Urošević <urke@users.sourceforge.net>.
+# Rade Radenkovic <rrade@tesla.rcub.bg.ac.yu>, 2004.
+# Igor Miletić igor.miletic@rogers.com <>.
+# Reviewed on 2004-02-01 by: Danilo Šegan <danilo@gnome.org>.
+# Reviewed on 2005-07-16 by: Igor Nestorović <igor@prevod.org>.
+# EX Maintainer: Danilo Šegan <danilo@gnome.org>.
+# Translation updated on 2010-08-21 by Branko Kokanovic <branko.kokanovic@gmail.com>.
+# Maintainer: Slobodan Sredojević <ssl@uns.ns.ac.yu>.
+# Reviewed on 2005-03-06 by: Danilo Šegan <danilo@prevod.org>.
+# Slobodan Terzić <githzerai06@gmail.com>, 2009-2011.
+# Igor Nestorović <igor@prevod.org>, 2005.
+# Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
+# Danilo Šegan <danilo@prevod.org>, 2005-2011.
+# Reviewed on 2004-08-06 by: Danilo Šegan <danilo@prevod.org>.
+# Reviewed on 2005-03-03 by: Danilo Šegan <danilo@gnome.org>.
+# Slobodan D. Sredojević <slobo@akrep.be>, 2010.
+# Branko Kokanović <branko.kokanovic@gmail.com>, 2009-2010.
+# Translate on 2009-21-09 by: Branko Kokanović <branko.kokanovic@gmail.com>.
+# Maintainer: Bojan Suzić <invader@blic.net>.
+# Maintainer: Veljko M. Stanojević <veljko@vms.homelinux.net>.
+# Reviewed on 2004-02-03 by: Danilo Šegan <dsegan@gmx.net>.
+# Translated on 2006-02-01 by Slobodan D. Sredojević <slobo@akrep.be>.
+# Maintainer: Dušan Živojnov <calvin@verat.net>.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-02 12:27-0600\n"
+"PO-Revision-Date: 2013-03-11 10:29+0200\n"
+"Last-Translator: Miroslav Nikolić <miroslavnikolic@rocketmail.com>\n"
+"Language-Team: Serbian <gnom@prevod.org>\n"
+"Language: sr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"iserkeywords=I18N+L10Ncomponent=general\n"
+"Plural-Forms: nplurals=4; plural=n==1? 3 : n%s0==1  n%s00!=11 ? 0 : n%s0>=2  "
+"n%s0<=4  (n%s00<10 || n%s00>=20) ? 1 : 2;\n"
+"X-Project-Style: gnome\n"
+
+#: ../../xffm/completion/base.hh:28
+msgid "Command"
+msgstr "Naredba"
+
+#: ../../xffm/completion/base.hh:31
+msgid "File"
+msgstr "Datoteka"
+
+#: ../../xffm/completion/base.hh:34
+#, fuzzy
+msgid "Command history"
+msgstr "Istorijat naredbi:"
+
+#. option -u uid "uid" "uid_combo"
+#: ../../xffm/completion/base.hh:37 ../../xffm/find/dialog.hh:199
+msgid "User"
+msgstr "Korisnik"
+
+#: ../../xffm/completion/base.hh:40
+msgid "Variable"
+msgstr "Promenljiva"
+
+#: ../../xffm/completion/base.hh:43
+msgid "Host"
+msgstr "Domaćin"
+
+#: ../../xffm/completion/base.hh:55
+#, fuzzy
+msgid "Found no match"
+msgstr "Pronađen %d pogodak."
+
+#: ../../xffm/completion/base.hh:133 ../../xffm/completion/base.hh:134
+msgid "Matches"
+msgstr "Odgovara"
+
+#: ../../xffm/completion/base.hh:134
+msgid "Too many files open"
+msgstr "Previše datoteka je otvoreno"
+
+#: ../../xffm/completion/base.hh:325 ../../xffm/find/fgr.hh:124
+msgid "Options:"
+msgstr "Mogućnosti:"
+
+#: ../../xffm/completion/bash.hh:133
+msgid "Completion mode:"
+msgstr "Režim dovršavanja:"
+
+#: ../../xffm/completion/bash.hh:134
+msgid "command"
+msgstr "naredba"
+
+#: ../../xffm/completion/bash.hh:135
+msgid "file"
+msgstr "file"
+
+#: ../../xffm/completion/bash.hh:145 ../../xffm/completion/bash.hh:149
+msgid "Options >>"
+msgstr "Opcije >>"
+
+#: ../../xffm/find/fgr.hh:124 ../../xffm/find/dialog.hh:308
+msgid "Path"
+msgstr "Putanja"
+
+#: ../../xffm/find/fgr.hh:125
+msgid "Locate documents and folders on this computer by name or content"
+msgstr ""
+"Pronađite dokumente i fascikle na ovom računaru prema nazivu ili sadržaju"
+
+#: ../../xffm/find/fgr.hh:126 ../../xffm/find/dialog.hh:341
+msgid "Filter:"
+msgstr "Propusnik:"
+
+#: ../../xffm/find/fgr.hh:126
+msgid "Search for files"
+msgstr "Tražite datoteke"
+
+#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
+#: ../../xffm/find/fgr.hh:128
+msgid "Contents:"
+msgstr "Sadržaj:"
+
+#: ../../xffm/find/fgr.hh:128
+#, fuzzy
+msgid "File's contents filtered as plain text."
+msgstr "Da sačuvam datoteku kao običan tekst?"
+
+#: ../../xffm/find/fgr.hh:131
+msgid "Verbose output debugging mode."
+msgstr "Ispravljački režim sa opširnim izlazom."
+
+#: ../../xffm/find/fgr.hh:133
+msgid "Show version information"
+msgstr "Ispisuje podatke o izdanju programa"
+
+#: ../../xffm/find/fgr.hh:135
+#, fuzzy
+msgid "Filter Details"
+msgstr "Detalji o korisniku"
+
+#. / option -a "xdev"
+#: ../../xffm/find/fgr.hh:138 ../../xffm/find/dialog.hh:180
+#, fuzzy
+msgid "Stay on single filesystem"
+msgstr "Sistem datoteka"
+
+#: ../../xffm/find/fgr.hh:140
+msgid "Print..."
+msgstr "Štampaj..."
+
+#: ../../xffm/find/fgr.hh:140
+msgid "The unique Process ID that identifies this process."
+msgstr "Jedinstveni ID procesa koji ga jednoznačno predstavlja."
+
+#. / option -D "recursiveH"
+#: ../../xffm/find/fgr.hh:142 ../../xffm/find/dialog.hh:177
+msgid "Find hidden files and directories"
+msgstr "Pronađi skrivene fajlove i fascikle"
+
+#: ../../xffm/find/fgr.hh:143
+msgid "Filter"
+msgstr "Propusnik"
+
+#: ../../xffm/find/fgr.hh:144
+msgid ""
+"To display files which pass the filter (stars and regexps will be processed)"
+msgstr ""
+
+#. / option -r "recursive"
+#: ../../xffm/find/fgr.hh:146 ../../xffm/find/dialog.hh:174
+msgid "Recursive"
+msgstr "Rekurzivno"
+
+#: ../../xffm/find/fgr.hh:147 ../../xffm/find/fgr.hh:148
+#: ../../xffm/find/fgr.hh:149 ../../xffm/find/fgr.hh:150
+msgid "KByte"
+msgstr "kB"
+
+#: ../../xffm/find/fgr.hh:148
+msgid "is greater than or equal to"
+msgstr "je veći ili jednak sa"
+
+#: ../../xffm/find/fgr.hh:150
+msgid "is less than or equal to"
+msgstr "je manji ili jednak sa"
+
+#: ../../xffm/find/fgr.hh:152
+msgid "Set UID"
+msgstr "stavi UID"
+
+#: ../../xffm/find/fgr.hh:152
+msgid "Executable Text Files"
+msgstr "Izvršne tekstualne datoteke"
+
+#: ../../xffm/find/fgr.hh:154
+msgid "The permissions of the file, in octal notation."
+msgstr "Ovlašćenja datoteke, u oktalnom zapisu."
+
+#: ../../xffm/find/fgr.hh:155
+msgid "Type"
+msgstr "Vrsta"
+
+#: ../../xffm/find/fgr.hh:157 ../../xffm/find/signals.hh:17
+msgid "Any"
+msgstr "Bilo koja"
+
+#: ../../xffm/find/fgr.hh:157
+#, fuzzy
+msgid "Default type"
+msgstr "Podrazumevano vreme"
+
+#: ../../xffm/find/fgr.hh:158 ../../xffm/common/preview.hh:497
+#, fuzzy
+msgid "Regular file"
+msgstr "Običan korak"
+
+#: ../../xffm/find/fgr.hh:159 ../../xffm/find/signals.hh:11
+#: ../../xffm/fm/local/popup.hh:803 ../../xffm/common/preview.hh:488
+msgid "Directory"
+msgstr "Direktorijum"
+
+#: ../../xffm/find/fgr.hh:160 ../../xffm/find/signals.hh:12
+#: ../../xffm/common/preview.hh:494
+msgid "Symbolic Link"
+msgstr "simbolička veza"
+
+#: ../../xffm/find/fgr.hh:161
+msgid "UNIX Socket"
+msgstr "Juniks priključnica"
+
+#: ../../xffm/find/fgr.hh:162 ../../xffm/find/signals.hh:14
+#: ../../xffm/common/preview.hh:482
+#, fuzzy
+msgid "Block device"
+msgstr "Uređaj upravljačke palice"
+
+#: ../../xffm/find/fgr.hh:163 ../../xffm/find/signals.hh:15
+#: ../../xffm/common/preview.hh:485
+#, fuzzy
+msgid "Character device"
+msgstr "po znakovnom kodu"
+
+#: ../../xffm/find/fgr.hh:164 ../../xffm/find/signals.hh:16
+#: ../../xffm/common/preview.hh:491
+msgid "FIFO"
+msgstr "FIFO"
+
+#. radio_p freed on destroy event for dialog_.
+#. option -k minutes "last_minutes", "last_minutes_spin"
+#: ../../xffm/find/fgr.hh:166 ../../xffm/find/fgr.hh:168
+#: ../../xffm/find/dialog.hh:221
+msgid "Minutes"
+msgstr "Minuta"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/dialog.hh:270 ../../xffm/find/dialog.hh:370
+#: ../../xffm/fm/treeview.hh:18
+msgid "Details"
+msgstr "Podaci"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/fgr.hh:179 ../../xffm/find/fgr.hh:180
+#: ../../xffm/find/fgr.hh:183 ../../xffm/find/fgr.hh:184
+#: ../../xffm/find/fgr.hh:187 ../../xffm/find/fgr.hh:188
+#, fuzzy
+msgid "TIME"
+msgstr "VREMENSKI ROK"
+
+#: ../../xffm/find/fgr.hh:168 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/fgr.hh:174 ../../xffm/find/fgr.hh:177
+msgid "Previous"
+msgstr "Prethodnu"
+
+#. option -h hours "last_hours", "last_hours_spin"
+#: ../../xffm/find/fgr.hh:169 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/dialog.hh:226
+msgid "Hours"
+msgstr "Sati"
+
+#. option -d days "last_days", "last_days_spin"
+#: ../../xffm/find/fgr.hh:172 ../../xffm/find/fgr.hh:174
+#: ../../xffm/find/dialog.hh:231
+msgid "Days"
+msgstr "Dani"
+
+#: ../../xffm/find/fgr.hh:175
+msgid "Month"
+msgstr "Mesec"
+
+#: ../../xffm/find/fgr.hh:177
+#, fuzzy
+msgid "Month(s)"
+msgstr "mesec(i)"
+
+#: ../../xffm/find/fgr.hh:180
+#, fuzzy
+msgid "Modification Time :"
+msgstr "vreme izmene"
+
+#: ../../xffm/find/fgr.hh:184
+#, fuzzy
+msgid "Access Time :"
+msgstr "Vreme pristupa"
+
+#: ../../xffm/find/fgr.hh:188
+#, fuzzy
+msgid "Creation Time :"
+msgstr "Vreme stvaranja"
+
+#: ../../xffm/find/fgr.hh:191 ../../xffm/find/fgr.hh:192
+msgid "uid"
+msgstr "uid"
+
+#: ../../xffm/find/fgr.hh:192
+msgid "User:"
+msgstr "Korisnik:"
+
+#: ../../xffm/find/fgr.hh:194 ../../xffm/find/fgr.hh:195
+#, fuzzy
+msgid "gid"
+msgstr "Nađi"
+
+#: ../../xffm/find/fgr.hh:195
+msgid "Group:"
+msgstr "Grupa:"
+
+#: ../../xffm/find/fgr.hh:198
+msgid ""
+"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+"character that  normally  follows  a file  name"
+msgstr ""
+
+#: ../../xffm/find/fgr.hh:200
+msgid "Content View"
+msgstr "Pregled sadržaja"
+
+#: ../../xffm/find/fgr.hh:201 ../../xffm/find/fgr.hh:202
+#: ../../xffm/find/fgr.hh:203 ../../xffm/find/fgr.hh:204
+msgid "STRING"
+msgstr "NISKA"
+
+#: ../../xffm/find/fgr.hh:202 ../../xffm/find/fgr.hh:204
+#: ../../xffm/fm/local/popup.hh:563
+msgid "Regular expression"
+msgstr "Regularan izraz"
+
+#: ../../xffm/find/fgr.hh:204
+msgid "Extended"
+msgstr "Prošireno"
+
+#: ../../xffm/find/fgr.hh:206
+msgid "Ignore case"
+msgstr "Zanemari veličinu slova"
+
+#: ../../xffm/find/fgr.hh:208
+msgid "Text Files"
+msgstr "Datoteke teksta"
+
+#: ../../xffm/find/fgr.hh:210 ../../xffm/find/dialog.hh:552
+msgid "No match"
+msgstr "Bez poklapanja"
+
+#: ../../xffm/find/fgr.hh:212 ../../xffm/find/dialog.hh:470
+msgid "Line Count"
+msgstr ""
+"broj redova|/|$[svojstva naredbeno 'detalji:\n"
+"broj redova' spiskovno 'dopunski detalji: broj redova']"
+
+#: ../../xffm/find/fgr.hh:214
+msgid "Words"
+msgstr "Reči"
+
+#: ../../xffm/find/fgr.hh:216
+msgid "Lines"
+msgstr "Redovi"
+
+#: ../../xffm/find/fgr.hh:368
+#, fuzzy, c-format
+msgid "Usage : %s [OPTIONS]\n"
+msgstr "Upotreba: %s [OPCIJA...] %s\n"
+
+#: ../../xffm/find/signals.hh:10
+msgid "Regular"
+msgstr "Redovan"
+
+#: ../../xffm/find/signals.hh:13 ../../xffm/common/preview.hh:500
+msgid "Socket"
+msgstr "Utičnica"
+
+#: ../../xffm/find/signals.hh:209
+msgid "Select folder to search in"
+msgstr "Izaberite fasciklu u kojoj izvršiti pretragu"
+
+#. button no
+#: ../../xffm/find/signals.hh:265 ../../xffm/find/dialog.hh:584
+#: ../../xffm/response/entryfileresponse.hh:18
+#: ../../xffm/response/entryresponse.hh:305
+#: ../../xffm/response/passwdresponse.hh:558
+#: ../../xffm/fm/local/properties.hh:304 ../../xffm/fm/local/rm.hh:155
+msgid "Cancel"
+msgstr "Otkaži"
+
+#: ../../xffm/find/signals.hh:293 ../../xffm/find/signals.hh:722
+#, fuzzy
+msgid "No editor for current action."
+msgstr "Trenutno nema radnji."
+
+#. / option "upper_limit_spin" (only in gtk dialog_)
+#: ../../xffm/find/signals.hh:351 ../../xffm/find/dialog.hh:183
+msgid "Results"
+msgstr "Rezultati"
+
+#: ../../xffm/find/signals.hh:351
+msgid "Upper limit:"
+msgstr "Gornja granica:"
+
+#: ../../xffm/find/signals.hh:353
+msgid "Counting files..."
+msgstr "Brojim fajlove..."
+
+#: ../../xffm/find/signals.hh:368
+#, fuzzy, c-format
+msgid "Found %d match"
+msgid_plural "Found %d matches"
+msgstr[0] "Pronađen %d pogodak."
+msgstr[1] "Pronađena %d pogotka."
+msgstr[2] "Pronađeno %d pogodaka."
+msgstr[3] "Pronađen %d pogodak."
+
+#: ../../xffm/find/signals.hh:370
+#, c-format
+msgid "%s Finished : %s"
+msgstr "Završeno %s : %s"
+
+#: ../../xffm/find/signals.hh:488 ../../xffm/find/signals.hh:490
+msgid "Searching..."
+msgstr "Pretražujem..."
+
+#. g_object_set_data(G_OBJECT(dialog_), "window", dialog_);
+#: ../../xffm/find/dialog.hh:98 ../../xffm/find/dialog.hh:150
+#: ../../xffm/find/dialog.hh:611
+msgid "Find"
+msgstr "Pronađi"
+
+#: ../../xffm/find/dialog.hh:183
+#, fuzzy
+msgid "Upper limit"
+msgstr "Gornja granica:"
+
+#. option -s +KByte "size_greater", "size_greater_spin"
+#: ../../xffm/find/dialog.hh:188
+msgid "At Least"
+msgstr "najmanje"
+
+#: ../../xffm/find/dialog.hh:188 ../../xffm/find/dialog.hh:193
+msgid "kBytes"
+msgstr "KiB"
+
+#. option -s -KByte "size_smaller", "size_smaller_spin"
+#: ../../xffm/find/dialog.hh:193
+msgid "At Most"
+msgstr "najviše"
+
+#: ../../xffm/find/dialog.hh:204
+msgid "Group"
+msgstr "Grupa"
+
+#. option -o octal "octal_p" "permissions_entry"
+#: ../../xffm/find/dialog.hh:208
+msgid "Octal Permissions"
+msgstr "Oktalna ovlašćenja"
+
+#. option -p suid | exe
+#: ../../xffm/find/dialog.hh:213
+msgid "SUID"
+msgstr ""
+
+#: ../../xffm/find/dialog.hh:213 ../../xffm/fm/local/popup.hh:843
+#, fuzzy
+msgid "Executable"
+msgstr "Izvršni:"
+
+#. option -m months "last_months", "last_months_spin"
+#: ../../xffm/find/dialog.hh:237
+msgid "Months"
+msgstr "meseci"
+
+#: ../../xffm/find/dialog.hh:248
+#, fuzzy
+msgid "File type : "
+msgstr "Vrsta datoteke:"
+
+#. gtk_widget_show (GTK_WIDGET(right_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(center_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(left_options_vbox));
+#: ../../xffm/find/dialog.hh:262 ../../xffm/find/dialog.hh:602
+#: ../../xffm/fm/page/page.hh:70 ../../xffm/common/gtk.hh:70
+msgid "Close"
+msgstr "Zatvori"
+
+#. gtk_box_pack_start (vbox7a, GTK_WIDGET(advancedBox), TRUE, FALSE, 5);
+#. gtk_widget_show(GTK_WIDGET(advancedBox));
+#. //////////////  grep options.... /////////////////////////
+#: ../../xffm/find/dialog.hh:384
+msgid "Contains"
+msgstr "sadrži"
+
+#: ../../xffm/find/dialog.hh:404
+msgid "Contains the text"
+msgstr "Sadrži tekst"
+
+#: ../../xffm/find/dialog.hh:437
+msgid "Case Sensitive"
+msgstr "Razlikuj veličinu slova"
+
+#: ../../xffm/find/dialog.hh:449
+#, fuzzy
+msgid "Extended regexp"
+msgstr "Prošireno odstrani"
+
+#: ../../xffm/find/dialog.hh:460
+msgid "Include binary files"
+msgstr "Uključi binarne fajlove"
+
+#: ../../xffm/find/dialog.hh:496
+msgid "Match"
+msgstr "Poklapanje"
+
+#: ../../xffm/find/dialog.hh:508
+#, fuzzy
+msgid "Anywhere"
+msgstr "Svuda"
+
+#: ../../xffm/find/dialog.hh:523
+msgid "Whole words only"
+msgstr "Samo cele reči"
+
+#: ../../xffm/find/dialog.hh:538
+msgid "lines"
+msgstr "redova"
+
+#: ../../xffm/find/dialog.hh:594
+msgid "Clear"
+msgstr "Očisti"
+
+#: ../../xffm/find/dialog.hh:636
+msgid "Edit"
+msgstr "Uređivanje"
+
+#: ../../xffm/find/dialog.hh:751 ../../xffm/find/dialog.hh:766
+#: ../../xffm/common/util.hh:1150 ../../xffm/common/util.hh:1152
+#: ../../xffm/common/util.hh:1158 ../../xffm/common/util.hh:1160
+#: ../../xffm/common/preview.hh:479
+msgid "unknown"
+msgstr "nepoznato"
+
+#: ../../xffm/find/dialog.hh:780
+msgid "Modified"
+msgstr "Izmenjen"
+
+#: ../../xffm/find/dialog.hh:784
+msgid "Created"
+msgstr "Napravljeno"
+
+#: ../../xffm/find/dialog.hh:788
+#, fuzzy
+msgid "Accessed"
+msgstr "Poslednji pristup:"
+
+#: ../../xffm/find/dialog.hh:1106
+msgid ""
+"Basic rules:\n"
+"\n"
+"*  Will match any character zero or more times.\n"
+"?  Will match any character exactly one time\n"
+"[] Match any character within the [] \n"
+"^  Match at beginning of string\n"
+"$  Match at end of string \n"
+msgstr ""
+
+#: ../../xffm/find/dialog.hh:1115
+msgid ""
+"Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"In  basic regular expressions the metacharacters ?, +, {, |, (, and ) \n"
+"  lose their special meaning.\n"
+"\n"
+"The  period . matches  any  single  character.\n"
+"The caret ^ matches at the start of line.\n"
+"The dollar $ matches at the end of line.\n"
+"\n"
+"Characters within [ ] matches any single character in the list.\n"
+"Characters within [^ ] matches any single character *not* in the list.\n"
+"Characters inside [ - ] matches a range of characters (ie [0-9] or [a-z]).\n"
+"\n"
+"A regular expression may be followed by one of several repetition "
+"operators:\n"
+"?      The preceding item is optional and matched\n"
+"       at most once.\n"
+"*      The preceding item will be matched zero\n"
+"       or more times.\n"
+"+      The preceding item will be matched one or\n"
+"       more times.\n"
+"{n}    The preceding item is matched exactly n times.\n"
+"{n,}   The preceding item is matched n or more times.\n"
+"{n,m}  The preceding item is matched at least n times,\n"
+"       but not more than m times.\n"
+"\n"
+"To match any reserved character, precede it with \\. \n"
+"\n"
+"Two regular expressions may be joined by the logical or operator |.\n"
+"Two regular expressions may be concatenated.\n"
+"\n"
+"More information is available by typing \"man grep\"\n"
+msgstr ""
+
+#: ../../xffm/response/entryfileresponse.hh:20
+msgid "Open"
+msgstr "Otvori"
+
+#: ../../xffm/response/entryresponse.hh:29
+#: ../../xffm/response/entryfolderresponse.hh:28
+msgid "Choose directory"
+msgstr "Izaberite direktorijum"
+
+#. this button is redundant since hands are on keyboard for password
+#: ../../xffm/response/entryresponse.hh:309
+#: ../../xffm/response/passwdresponse.hh:189
+#: ../../xffm/response/passwdresponse.hh:559
+msgid "Ok"
+msgstr "U redu"
+
+#: ../../xffm/response/commandprogressresponse.hh:32
+#, fuzzy
+msgid "Items:"
+msgstr "Stavke"
+
+#: ../../xffm/response/passwdresponse.hh:21
+msgid "Enter password"
+msgstr "Upišite lozinku"
+
+#. gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+#: ../../xffm/response/passwdresponse.hh:125
+#, fuzzy
+msgid "User Input"
+msgstr "Unos mišem"
+
+#: ../../xffm/response/passwdresponse.hh:142
+msgid "Response Requested"
+msgstr "zatražen odziv"
+
+#: ../../xffm/response/passwdresponse.hh:264
+msgid "Preparing"
+msgstr "Pripremam"
+
+#: ../../xffm/response/passwdresponse.hh:352
+msgid "sudo"
+msgstr "sudo"
+
+#: ../../xffm/response/passwdresponse.hh:354
+msgid "Command:"
+msgstr "Naredba:"
+
+#: ../../xffm/response/passwdresponse.hh:357
+msgid "Permission denied"
+msgstr "Pristup je odbijen"
+
+#: ../../xffm/response/passwdresponse.hh:358
+msgid "Try to approach a problem from different angles."
+msgstr "Pokušajte da sagledate problem iz različitih uglova."
+
+#: ../../xffm/response/passwdresponse.hh:359
+msgid "Do you want to retry?"
+msgstr "Želite li da pokušate ponovo?"
+
+#: ../../xffm/response/passwdresponse.hh:360
+msgid "Alternate:"
+msgstr "Alternativna:"
+
+#: ../../xffm/response/passwdresponse.hh:365
+msgid "No"
+msgstr "Ne"
+
+#: ../../xffm/response/passwdresponse.hh:401
+msgid "Install"
+msgstr "Instaliraj"
+
+#: ../../xffm/response/passwdresponse.hh:402
+#, c-format
+msgid "%s does not exist."
+msgstr "<html>%s ne postoji.</html>"
+
+#: ../../xffm/response/passwdresponse.hh:467
+msgid "Blowfish"
+msgstr "Blowfish"
+
+#: ../../xffm/response/passwdresponse.hh:468
+msgid "Encryption Key Approval"
+msgstr "Odobrenje ključa za šifrovanje"
+
+#: ../../xffm/response/passwdresponse.hh:502
+msgid "-o     print output to standard out. Implies -r."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:506
+msgid "-c     DO NOT compress files before encryption."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:510
+msgid "-r     DO NOT remove input files after processing"
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:517
+msgid "Encryption key: "
+msgstr "Ključ šifrovanja: "
+
+#: ../../xffm/response/passwdresponse.hh:529
+msgid "Confirm:"
+msgstr "Potvrdi:"
+
+#: ../../xffm/response/passwdresponse.hh:542
+msgid "Sorry, passwords do not match"
+msgstr "Lozinke se ne poklapaju"
+
+#: ../../xffm/response/passwdresponse.hh:550
+msgid "Minimum length:"
+msgstr "Najmanja dužina:"
+
+#: ../../xffm/response/timeoutresponse.hh:56
+msgid "Dismiss"
+msgstr "Zanemari"
+
+#: ../../xffm/response/commandresponse.hh:23
+msgid "Running"
+msgstr "Pokrenut"
+
+#. auto text = g_strdup_printf("%s (pid: %d)",
+#. _("Waiting for operation to finish..."),
+#. Tubo<Type>::getChild (pid));
+#: ../../xffm/response/commandresponse.hh:28
+msgid "Waiting for operation to finish..."
+msgstr "Čekam da se operacija završi..."
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Documents"
+msgstr "Dokumenti"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Downloads"
+msgstr "Preuzimanja"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Music"
+msgstr "Muzika"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Pictures"
+msgstr "Slike"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Templates"
+msgstr "Šablon"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Videos"
+msgstr "Video"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Desktop"
+msgstr "Radna površ"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Bookmarks"
+msgstr "Obeleživači"
+
+#: ../../xffm/fm/local/icons.hh:259 ../../xffm/fm/local/rm.hh:181
+msgid "Trash"
+msgstr "Smeće"
+
+#: ../../xffm/fm/local/popup.hh:60
+msgid "New"
+msgstr "Nova"
+
+#. deprecated {N_("Open in New Tab"), NULL, NULL, NULL},
+#. deprecated {N_("Open in New Window"), NULL, NULL, NULL},
+#. common buttons /(also an iconsize +/- button)
+#: ../../xffm/fm/local/popup.hh:64 ../../xffm/fm/local/popup.hh:104
+#: ../../xffm/common/gtk.hh:74
+msgid "Copy"
+msgstr "Umnoži"
+
+#: ../../xffm/fm/local/popup.hh:65 ../../xffm/fm/local/popup.hh:105
+#: ../../xffm/common/gtk.hh:73
+msgid "Cut"
+msgstr "Iseci"
+
+#: ../../xffm/fm/local/popup.hh:66 ../../xffm/fm/local/popup.hh:106
+#: ../../xffm/common/gtk.hh:66
+msgid "Paste"
+msgstr "Ubaci"
+
+#. **************
+#: ../../xffm/fm/local/popup.hh:67 ../../xffm/fm/local/popup.hh:107
+#: ../../xffm/fm/local/rm.hh:174 ../../xffm/common/gtk.hh:75
+msgid "Delete"
+msgstr "Izbriši"
+
+#. {N_("About"), NULL, (void *) menu},
+#.
+#. only for listview: {N_("Sort by size"), NULL, (void *) menu},
+#. only for listview: {N_("Sort by date"), NULL, (void *) menu},
+#: ../../xffm/fm/local/popup.hh:73
+msgid "Select All"
+msgstr "Izaberi sve"
+
+#: ../../xffm/fm/local/popup.hh:74 ../../xffm/fm/local/popup.hh:559
+msgid "Match regular expression"
+msgstr "Poklopi regularni izraz"
+
+#: ../../xffm/fm/local/popup.hh:75 ../../xffm/fm/root/view.hh:58
+#: ../../xffm/fm/fstab/popup.hh:21
+msgid "View as list"
+msgstr "U vidu liste"
+
+#: ../../xffm/fm/local/popup.hh:77
+msgid "Show hidden files"
+msgstr "Prikazuje skrivene datoteke"
+
+#: ../../xffm/fm/local/popup.hh:79
+#, fuzzy
+msgid "Show Backup Files"
+msgstr "Prikaži datoteke"
+
+#: ../../xffm/fm/local/popup.hh:81
+#, fuzzy
+msgid "Sort data in descending order"
+msgstr "Poređajte stavke u opadajućem redosledu"
+
+#: ../../xffm/fm/local/popup.hh:93 ../../xffm/fm/local/popup.hh:119
+#: ../../xffm/fm/local/popup.hh:1006 ../../xffm/fm/local/popup.hh:1013
+#: ../../xffm/fm/local/popup.hh:1022 ../../xffm/fm/local/popup.hh:1029
+#: ../../xffm/common/gtk.hh:72
+msgid "Open with"
+msgstr "Otvori programom"
+
+#: ../../xffm/fm/local/popup.hh:94 ../../xffm/fm/local/popup.hh:846
+msgid "Run Executable..."
+msgstr "Pokreni izvršnu..."
+
+#: ../../xffm/fm/local/popup.hh:95
+msgid "Extract files from the archive"
+msgstr "Raspakujte datoteke iz arhive"
+
+#. g_hash_table_insert(iconname_hash, "bcrypt", (void *)"emblem-keyhole");
+#: ../../xffm/fm/local/popup.hh:96 ../../xffm/fm/root/view.hh:73
+#: ../../xffm/fm/fstab/popup.hh:20 ../../xffm/fm/dialog/notebook.hh:52
+#: ../../xffm/common/gtk.hh:78
+msgid "Open in New Tab"
+msgstr "Otvori u novom listu"
+
+#. File chooser
+#: ../../xffm/fm/local/popup.hh:97 ../../xffm/fm/local/popup.hh:706
+msgid "Create a compressed archive with the selected objects"
+msgstr "Napravite zapakovanu arhivu od izabranih objekata"
+
+#: ../../xffm/fm/local/popup.hh:98 ../../xffm/fm/fstab/popup.hh:37
+msgid "Mount the volume associated with this folder"
+msgstr "Montirajte disk koji je pridružen ovoj fascikli"
+
+#: ../../xffm/fm/local/popup.hh:99 ../../xffm/fm/fstab/popup.hh:38
+msgid "Unmount the volume associated with this folder"
+msgstr "Demontirajte disk koji je pridružen ovoj fascikli"
+
+#: ../../xffm/fm/local/popup.hh:100 ../../xffm/common/gtk.hh:67
+msgid "Add bookmark"
+msgstr "Dodaj obeleživač"
+
+#: ../../xffm/fm/local/popup.hh:101 ../../xffm/fm/root/view.hh:74
+#: ../../xffm/common/gtk.hh:68
+msgid "Remove bookmark"
+msgstr "Ukloni obeleživač"
+
+#: ../../xffm/fm/local/popup.hh:108 ../../xffm/fm/local/popup.hh:961
+msgid "Rename"
+msgstr "Preimenuj"
+
+#: ../../xffm/fm/local/popup.hh:109 ../../xffm/fm/local/popup.hh:947
+msgid "Duplicate"
+msgstr "Udvostruči"
+
+#: ../../xffm/fm/local/popup.hh:110 ../../xffm/fm/local/popup.hh:933
+msgid "Link"
+msgstr "Veza"
+
+#: ../../xffm/fm/local/popup.hh:111
+msgid "Properties"
+msgstr "Svojstva"
+
+#: ../../xffm/fm/local/popup.hh:414
+msgid "Files:"
+msgstr "Datoteke:"
+
+#: ../../xffm/fm/local/popup.hh:417 ../../xffm/fm/local/rm.hh:61
+#, fuzzy
+msgid "Multiple selections"
+msgstr "Postavljanje više putanja"
+
+#: ../../xffm/fm/local/popup.hh:557
+msgid "Select items"
+msgstr "Izaberi stavke"
+
+#: ../../xffm/fm/local/popup.hh:575
+msgid "Regular Expression syntax is incorrect"
+msgstr "Loša sintaksa regularnog izraza"
+
+#: ../../xffm/fm/local/popup.hh:592
+msgid "No selection"
+msgstr "Nema izbora"
+
+#: ../../xffm/fm/local/popup.hh:592
+msgid "No matches."
+msgstr "Nisam našao ništa."
+
+#. entryResponse->setCheckButton(_("Run in Terminal"));
+#. entryResponse->setCheckButton(Mime<Type>::runInTerminal(path));
+#: ../../xffm/fm/local/popup.hh:721 ../../xffm/fm/page/pathbar.hh:313
+msgid "Specify Output Directory..."
+msgstr "Izlazna fascikla..."
+
+#: ../../xffm/fm/local/popup.hh:799
+msgid "Create new..."
+msgstr "Napravi novi..."
+
+#: ../../xffm/fm/local/popup.hh:806 ../../xffm/fm/local/popup.hh:886
+msgid "New Name:"
+msgstr "Novo ime:"
+
+#: ../../xffm/fm/local/popup.hh:815
+msgid "No name"
+msgstr "Bez naziva"
+
+#: ../../xffm/fm/local/popup.hh:828
+#, c-format
+msgid "Another file with the same name already exists in “%s”."
+msgstr "Druga datoteka sa ovim nazivom već postoji u „%s“."
+
+#: ../../xffm/fm/local/popup.hh:850 ../../xffm/fm/local/popup.hh:1010
+#: ../../xffm/fm/local/popup.hh:1026 ../../xffm/common/util.hh:1248
+msgid "Run in Terminal"
+msgstr "Pokreni u terminalu"
+
+#: ../../xffm/fm/local/popup.hh:853
+msgid "Arguments for the Command"
+msgstr "Argument za naredbu"
+
+#: ../../xffm/fm/local/popup.hh:1047 ../../xffm/fm/local/view.hh:141
+msgid "Invalid entry"
+msgstr "Neispravan unos"
+
+#: ../../xffm/fm/local/properties.hh:235
+msgid "Properties and Attributes"
+msgstr "Svojstva i osobine"
+
+#: ../../xffm/fm/local/properties.hh:264
+msgid "File Mode:"
+msgstr "Režim datoteke:"
+
+#: ../../xffm/fm/local/properties.hh:290
+msgid "File:"
+msgstr "Datoteka:"
+
+#. Add file info stuff
+#. set info stuff data according to combo box
+#. add signal handler to changed signal for combo box
+#. Add process buttons
+#.
+#: ../../xffm/fm/local/properties.hh:302
+msgid "Apply changes"
+msgstr "Primeni izmene"
+
+#: ../../xffm/fm/local/properties.hh:462
+msgid "Successfully moved to trash."
+msgstr "Uspešno premešteno u smeće."
+
+#: ../../xffm/fm/local/properties.hh:463
+msgid "Source:"
+msgstr "Izvor:"
+
+#: ../../xffm/fm/local/rm.hh:59
+#, c-format
+msgid "Delete %s"
+msgstr "Obriši %s"
+
+#: ../../xffm/fm/local/rm.hh:61
+msgid "Warning: "
+msgstr "Upozorenje: "
+
+#. gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
+#. title
+#: ../../xffm/fm/local/rm.hh:90
+msgid "Remove"
+msgstr "Ukloni"
+
+#: ../../xffm/fm/local/rm.hh:140
+msgid "Apply to all"
+msgstr "Primeni na sve"
+
+#. **************
+#. This is now available to BSD with rm -P option
+#: ../../xffm/fm/local/rm.hh:163 ../../xffm/common/gtk.hh:76
+msgid "Shred"
+msgstr "Iseckaj"
+
+#. We do not count "../"
+#: ../../xffm/fm/local/view.hh:48 ../../xffm/fm/base/monitor.hh:28
+#, c-format
+msgid "Files: %s"
+msgstr "Fajlovi: %s"
+
+#: ../../xffm/fm/root/model.hh:78
+msgid "Root Directory"
+msgstr "Korena fascikla"
+
+#: ../../xffm/fm/root/model.hh:94
+msgid "This is the root of the filesystem"
+msgstr "Ovo je koren fajl sistema"
+
+#: ../../xffm/fm/root/model.hh:105
+msgid "Home Directory"
+msgstr "Domaća fascikla"
+
+#: ../../xffm/fm/root/model.hh:132
+msgid "Trash bin"
+msgstr "Smeće"
+
+#: ../../xffm/fm/root/model.hh:162 ../../xffm/fm/fstab/popup.hh:29
+msgid "Disk Image Mounter"
+msgstr "Priključivač odraza diska"
+
+#: ../../xffm/fm/root/model.hh:169 ../../xffm/fm/root/model.hh:185
+msgid "Mount local disks and devices"
+msgstr "Priključite lokalne diskove i uređaje"
+
+#: ../../xffm/fm/root/model.hh:170 ../../xffm/fm/fstab/popup.hh:25
+#: ../../xffm/fm/fstab/view.hh:429
+msgid "eCryptfs Volume"
+msgstr "eCryptfs particija"
+
+#: ../../xffm/fm/root/model.hh:171 ../../xffm/fm/fstab/popup.hh:24
+msgid "SSHFS Remote Synchronization Folder"
+msgstr "SSHFS udaljena fascikla za usklađivanje"
+
+#: ../../xffm/fm/root/model.hh:172 ../../xffm/fm/fstab/popup.hh:23
+#: ../../xffm/fm/fstab/view.hh:377
+msgid "NFS Network Volume"
+msgstr "Linuksova NFS particija"
+
+#: ../../xffm/fm/root/model.hh:173 ../../xffm/fm/fstab/popup.hh:26
+#: ../../xffm/fm/fstab/view.hh:455
+msgid "CIFS Volume"
+msgstr "CIFS particija"
+
+#: ../../xffm/fm/root/model.hh:195
+#, fuzzy
+msgid "Software Updater"
+msgstr "Ažuriranje programa"
+
+#: ../../xffm/fm/root/model.hh:218 ../../xffm/fm/root/model.hh:230
+msgid "Add or remove software installed on the system"
+msgstr "Dodajte ili uklonite programe instalirane na ovom sistemu"
+
+#: ../../xffm/fm/root/model.hh:271
+#, fuzzy
+msgid "Go to bookmarked location"
+msgstr "Ide na sledeće mesto obeleživača."
+
+#. {N_("Add bookmark"), (void *)BasePopUp<Type>::noop, NULL, NULL},
+#: ../../xffm/fm/root/view.hh:61
+msgid "Empty trash"
+msgstr "Izbaci smeće"
+
+#. File chooser
+#: ../../xffm/fm/fstab/popup.hh:121
+msgid "Mount Device"
+msgstr "Montiraj uređaj"
+
+#: ../../xffm/fm/fstab/popup.hh:133
+msgid "Mount point:"
+msgstr "Tačka montiranja:"
+
+#: ../../xffm/fm/fstab/view.hh:301
+msgid "Mounted on:"
+msgstr "Montiranje:"
+
+#: ../../xffm/fm/fstab/view.hh:302
+msgid "Mount on"
+msgstr "Montiraj na"
+
+#: ../../xffm/fm/fstab/view.hh:310 ../../xffm/fm/fstab/view.hh:312
+msgid "Not mounted"
+msgstr "Nije montirana"
+
+#: ../../xffm/fm/fstab/view.hh:403
+#, fuzzy
+msgid "SFTP (via SSH)"
+msgstr "Sigurni FTP (SSH)"
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, c-format
+msgid "Unmounting %s"
+msgstr "Demontiram „%s“"
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, fuzzy, c-format
+msgid "Mounting %s"
+msgstr "Montiranje"
+
+#: ../../xffm/fm/dialog/menupopover.hh:128
+msgid "Home"
+msgstr "Kuća"
+
+#: ../../xffm/fm/dialog/menupopover.hh:129 ../../xffm/common/gtk.hh:64
+msgid "Open terminal"
+msgstr "Otvori terminal"
+
+#: ../../xffm/fm/dialog/menupopover.hh:130
+msgid "Open a New Window"
+msgstr "Otvorite novi prozor"
+
+#. {N_("Execute Shell Command"), (void *)MenuPopoverSignals<Type>::shell, (void *) menuButton_},
+#: ../../xffm/fm/dialog/menupopover.hh:132 ../../xffm/common/gtk.hh:69
+msgid "Search"
+msgstr "Potraži"
+
+#: ../../xffm/fm/dialog/menupopover.hh:133 ../../xffm/common/gtk.hh:71
+msgid "Exit"
+msgstr "Izlaz"
+
+#: ../../xffm/fm/dialog/dialog.hh:116
+msgid "Removed"
+msgstr "Uklonjen"
+
+#: ../../xffm/fm/dialog/dialog.hh:132
+#, fuzzy
+msgid "Detected device(s):"
+msgstr "Pronađi uređaje"
+
+#. Create the widgets
+#: ../../xffm/fm/page/vbuttonbox.hh:37 ../../xffm/common/gtk.hh:332
+msgid "Help"
+msgstr "Pomoć"
+
+#. File chooser
+#: ../../xffm/fm/page/pathbar.hh:306 ../../xffm/fm/page/pathbar.hh:308
+msgid "Go to"
+msgstr "Idi na"
+
+#: ../../xffm/fm/page/pathbar.hh:331
+msgid "Not a directory"
+msgstr "Nije fascikla"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Renice Process"
+msgstr "Profinjavanje procesa"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Suspend"
+msgstr "Privremeno zaustavi"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Continue"
+msgstr "Nastavi"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Interrupt"
+msgstr "Prekini"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Hangup"
+msgstr "Obustavi"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "User 1 (USR1)"
+msgstr "Korisnički 1 (USR1)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "User 2 (USR2)"
+msgstr "Korisnički 2 (USR2)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "Terminate Task"
+msgstr "Obustavi zadatak"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "Abort"
+msgstr "Prekini"
+
+#: ../../xffm/fm/page/runbutton.hh:138
+msgid "Kill"
+msgstr "Ubij"
+
+#: ../../xffm/fm/page/runbutton.hh:139
+#, fuzzy
+msgid "Segmentation fault"
+msgstr "Pogrešan pristup memoriji (segv)"
+
+#: ../../xffm/fm/page/runbutton.hh:217
+msgid "PID"
+msgstr "Proc. IB"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:37
+msgid "Embedded Terminal"
+msgstr "Ugnježdeni terminal"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:38
+#, fuzzy
+msgid "All items in the iconview."
+msgstr "Izaberite sve stavke u ovom prozoru"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:39
+msgid "Scripting"
+msgstr "Skriptovanje"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:40
+msgid "Clear Log"
+msgstr "Očisti dnevnik"
+
+#. Status textview
+#: ../../xffm/fm/page/hbuttonbox.hh:42
+msgid "Terminal font"
+msgstr "Font terminala"
+
+#: ../../xffm/fm/treeview.hh:17
+msgid "Name"
+msgstr "Naziv"
+
+#: ../../xffm/fm/treeview.hh:20
+msgid "Size"
+msgstr "Veličina"
+
+#: ../../xffm/fm/treeview.hh:21
+msgid "Date"
+msgstr "Datum"
+
+#: ../../xffm/fm/treeview.hh:22
+msgid "Mimetype"
+msgstr "MIME tip"
+
+#: ../../xffm/fm/treeview.hh:24
+msgid "TYPE"
+msgstr "VRSTA"
+
+#: ../../xffm/fm/base/signals.hh:642
+msgid "Directory does not exist."
+msgstr "Direktorijum ne postoji."
+
+#: ../../xffm/fm/base/signals.hh:644 ../../xffm/fm/base/signals.hh:646
+#, fuzzy
+msgid "Trash is empty"
+msgstr "Tablica je prazna"
+
+#: ../../xffm/common/settings.hh:27
+msgid "New File:"
+msgstr "Nova datoteka:"
+
+#: ../../xffm/common/gio.hh:235
+msgid "Could not copy item:"
+msgstr "Ne mogu da kopiram stavku:"
+
+#: ../../xffm/common/gio.hh:237
+msgid "Could not move item:"
+msgstr "Ne mogu da premestim stavku:"
+
+#: ../../xffm/common/gio.hh:239
+#, fuzzy
+msgid "Create symbolic link"
+msgstr "Zameni simboličke veze"
+
+#: ../../xffm/common/gio.hh:276
+#, fuzzy, c-format
+msgid ""
+"Could not delete:\n"
+"%s"
+msgstr "Ne mogu da obrišem „%s“."
+
+#: ../../xffm/common/gio.hh:278
+#, c-format
+msgid "Could not move %s to trash"
+msgstr "Ne mogu da premestim „%s“ u korpu"
+
+#: ../../xffm/common/clipboard.hh:23 ../../xffm/common/dnd.hh:40
+msgid "Copying files locally"
+msgstr "Umnožavam datoteke u računar"
+
+#: ../../xffm/common/clipboard.hh:30 ../../xffm/common/dnd.hh:34
+msgid "Moving files"
+msgstr "Premeštanje datoteka"
+
+#: ../../xffm/common/dnd.hh:46
+msgid "Create Link"
+msgstr "Stvaranje veze"
+
+#: ../../xffm/common/util.hh:1200
+#, c-format
+msgid ""
+"Scriptfile \"%s\" is not executable. Please set the executable-attribute on "
+"that file."
+msgstr ""
+
+#: ../../xffm/common/util.hh:1202 ../../xffm/common/util.hh:1237
+#, c-format
+msgid "Open with %s"
+msgstr "Otvori programom „%s“"
+
+#: ../../xffm/common/util.hh:1202
+msgid "Text Editor"
+msgstr "Urednik teksta"
+
+#: ../../xffm/common/util.hh:1239 ../../xffm/common/gtk.hh:65
+msgid "Execute Shell Command"
+msgstr "Izvršavanje naredbe školjke"
+
+#: ../../xffm/common/util.hh:1243
+msgid ""
+"Console: quickly run single commands -- write a command here and press enter."
+msgstr ""
+
+#: ../../xffm/common/gtk.hh:123
+msgid "New Tab"
+msgstr "Novi jezičak"
+
+#: ../../xffm/common/gtk.hh:335
+msgid "OK"
+msgstr "U redu"
+
+#: ../../xffm/common/run.hh:344
+msgid "error"
+msgstr "greška"
+
+#: ../../xffm/common/run.hh:348
+msgid "warning"
+msgstr "upozorenje"
+
+#: ../../xffm/common/mime.hh:101 ../../xffm/common/mime.hh:143
+msgid "No Read Permission"
+msgstr "Nema dozvole za čitanje"
+
+#: ../../xffm/common/preview.hh:593
+msgid "Empty file"
+msgstr "Prazna datoteka"
+
+#: ../../xffm/common/preview.hh:648
+#, c-format
+msgid "Cannot read from %s"
+msgstr "Ne mogu da čitam iz %s"
+

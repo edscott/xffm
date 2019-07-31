@@ -1,0 +1,20 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:43:46 CDT 2013 ---
+#
+# Author@Betawiki: GaiJin <>.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"PO-Revision-Date: 2008-08-22 11:58:31+0000\n"
+"Language-Team: Kazakh (Latin)\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: MediaWiki 1.14alpha (r39820); Translate extension (9 (2008-08-20:1))\n"
+"X-Translation-Project: Betawiki at http://localhost\n"
+"X-Language-Code: kk-latn\n"
+"X-Message-Group: out-mobileassistant\n"
+
+

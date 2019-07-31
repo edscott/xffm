@@ -1,0 +1,1625 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:39:49 CDT 2013 ---
+#
+# Wojciech Milewski <Wojciech.Milewski@wp.pl>, 2002.
+# Pawel Slomski <pawlerson@gmail.com>, 2011.
+# Michał Różański <michal.rozanski@gmail.com>, 2008.
+# Wojciech Szczęsny <wszczesny@aviary.pl>, 2013.
+# Artur Flinta <aflinta@at.kernel.pl>, 2002-2008.
+# Piotr Prędkiewicz <1hero2@wp.pl>, 2008.
+# Piotr Roszatycki <dexter@fnet.pl>, 1997-2000.
+# Frederik Schwarzer <schwarzer@kde.org>, 2006-2013.
+# Sławomir Mikuła <zorba@silesianet.pl>, 2002.
+# 2 format strings: Jakub Bogusz <qboosh@pld-linux.org>, 2007.
+# Michał Smoczyk <msmoczyk@wp.pl>, 2007-2011.
+# Michał Zając <michal.zajac@gmail.com>, 2010.
+# translators@gnomepl.org <>.
+# Andrzej Ostrowski <juhasss@o2.pl>, 2011.
+# Marek Kuziel <fi_corax@op.pl>, 2003.
+# Krzysztof Jasiutowicz <kpjas@box43.gnet.pl>.
+# 23 corrections - Jakub Bogusz <qboosh@pld-linux.org>, 2004.
+# fileutils: Andrzej Krzysztofowicz <ankry@mif.pg.gda.pl>, 2002.
+# Bartosz Mikucewicz <bartosz.mikucewicz@gmail.com>, 2010.
+# Franciszek Janowski <nobange@poczta.onet.pl>, 2008-2009.
+# Paweł Pastuła <pastulap@poczta.onet.pl>, 2003-2004.
+# Aviary.pl <gnomepl@aviary.pl>, 2005-2013.
+# Mikołaj Machowski <mikmach@wp.pl>, 2004-2009.
+# Piotr Eljasiak <epiotr@use.pl>, 2002-2009.
+# Marta Rybczyńska <kde-i18n@rybczynska.net>, 2002-2013.
+# Bartłomiej Niemiec <bniemiec@jawnet.pl>, 2011.
+# Dariusz Halka <monocykl@gmail.com>, 2009.
+# Julian Sikorski <belegdol@gmail.com>, 2008.
+# Paweł Marciniak <pmarciniak@lodz.home.pl>, 2006.
+# Ostatnie poprawki przed 2.0 Jacek Stolarczyk <jstolarz@kde.org>.
+# Michał Bentkowski <mr.ecik@gmail.com>, 2006.
+# Kamil Kaminski <kamil@mrblur.net>, 2005-2007.
+#   Jacek Stolarczyk <jacek@mer.chemia.polsl.gliwice.pl>.
+# Tomasz Grobelny <grotk@poczta.onet.pl>, 2003.
+# Marcin Prejsnar <alex@pronet.pl>, 2006.
+# sh-utils: Paweł Krawczyk <kravietz@ceti.pl>, 1997-1999.
+# Dominik Zabłotny <dominz@wp.pl>, 2004.
+# Marcin Owsiany <porridge@pandora.info.bielsko.pl>, 2000.
+# Piotr Rybaltowski <dekoder@z.pl>, 2004.
+# Ryszard Perkowski <usultis@gmail.com>.
+# Major part translated by Piotr Roszatycki <dexter@fnet.pl>.
+# Marek Stępień <marcoos@aviary.pl>, 2005-2007.
+# Anna Sawicka <ania@kajak.org.pl>, 2004.
+# Latest translation by Daniel Koć <kocio@bigfoot.com>.
+# Pawel Wnuk <p.wnuk@mchtr.pw.edu.pl>, 2004.
+# Łukasz Jernaś <deejay1@srem.org>, 2007-2011.
+# Paweł Krawczyk <kravietz@pipeta.chemia.pk.edu.pl>, 1996.
+# Marcin Kowalski <yoshi314@gmail.com>, 2007.
+# Copyright (C) 2009 Ulrik Sverdrup <ulrik.sverdrup@gmail.com>.
+# Wojtek Jamrozy <matinfo@poczta.onet.pl>, 2005.
+# Marek Lemanczyk <marek@lemanczyk.eu>, 2011.
+# Copyright (C) 2004 GNOME PL Team <translators@gnome.pl>, 2004.
+# gnomepl@aviary.pl <>.
+# Tomasz Lewicki <stalker@poczta.onet.pl>, 2008.
+# Aleksander Łukasiewicz <aleksander@lukasiewicz.org>, 2009.
+# bazowane na tłumaczeniu translators@gnomepl.org <>.
+# Arkadiusz Lipiec <alipiec@elka.pw.edu.pl>, 2002-2003.
+# translated by Krzysztof Jasiutowicz <kpjas@priv.onet.pl>.
+# Pawel Szulczewski <pawel@szukczewski.org>, 2008.
+# Matthias Kiefer <matthias.kiefer@gmx.de>, 1998-2003.
+# Paweł Dąbek <pdabek@onet.pl>, 2006-2007.
+# Michał Prędotka <mpredotka@gmail.com>, 2009.
+#       Anna Wojdeł <ania@kbs.twi.tudelft.nl>.
+# Marek Habersack <grendel@caudium.net>, 2004.
+# (:pserver:anonymous@cvs.gnome.pl:/home/cvs, puste hasło) <>.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2002-2012.
+# M. Jakóbik <cheater1@wp.pl>, 2009.
+# Krzysztof Pawlak <jmnemonic@gazeta.pl>, 2004-2005.
+# Grzegorz Jaskiewicz <gj@pointblue.com.pl>, 2003.
+# Sylvain Archenault <sylvain.archenault@laposte.net>, 2006.
+# Robert Gomułka <carramba@epf.pl>, 2003-2005.
+# translators@gnome.pl <>.
+# Michał Konieczny <majkull@gmail.com>, 2009.
+# Jacek Stolarczyk <jacek@mer.chemia.polsl.gliwice.pl>, 1999-2001.
+# Maciej <maciekw5@gmail.com>, 2010.
+# Karol Będkowski <karol.bedkowski@gmail.com>, 2009-2011.
+# Previous translations Piotr Roszatycki <dexter@debian.org>.
+# Krzysztof Lichota <lichota@mimuw.edu.pl>, 2002-2009.
+# Krzysztof Luks <kluks@iq.pl>, 2003.
+# Adrian Brosz <adriian@wp.pl>, 2005.
+# Marcin Bokszczanin <mboksz@bcig.pl>, 2004-2005.
+# Stanisław Małolepszy <smalolepszy@aviary.pl>, 2005-2007.
+# Damian Kociuba <damkoc1@o2.pl>, 2011.
+# Piotr Sokół <psokol@jabster.pl>, 2012.
+# 4 corrections: jurget@infocoig.pl via garski@poczta.onet.pl, 2004. <>.
+# Michał 'podles' Podlewski <podles@aster.pl>, 2004.
+# Adam Ziolkowski <admin@LinuxZone.pl>, 2009.
+# Marcin Floryan <mfloryan@mm.waw.pl>, 2010.
+# Marcin Zasada <emzeta76@gazeta.pl>, 2005-2006.
+# Mariusz Pluciński <vshader@gmail.com>, 2009.
+# Maciej Jaros <egil@wp.pl>, 2009.
+# Tomasz Waleµczak <tom@w.pl>, 2004.
+# Previous translations: Daniel Koć <kocio@bigfoot.com>.
+# gnomepl@aviary.pl <>.
+# Marcin Sekalski <senkal86@gmail.com>, 2008.
+# Latest updates by Jacek Stolarczyk <jacek@mer.chemia.polsl.gliwice.pl>.
+# Tomasz Sałaciński <tsalacinski@gmail.com>, 2007.
+# Ireneusz Gierlach <irek.gierlach@gmail.com>, 2010-2011.
+# Pierwsze tłumaczenie Norbert Popiołek <kdesktop@enter.net.pl>, 2000.
+# Marcin Szafran <jm_sz@poczta.onet.pl>, 2002-2003.
+# Michał Rudolf <mrudolf@kdewebdev.org>, 2002-2004.
+# Cezary Jackiewicz <cjackiewicz@poczta.onet.pl>, 2000-2001.
+# Pomoc w tłumaczeniu Marcin Giedz <mgiedz@elka.pw.edu.pl>.
+# (:pserver:anonymous@cvs.gnome.pl:/gnomepl, puste hasło) <>.
+# Pierwsze tłumaczenie Jacek Stolarczyk <jacek@mer.chemia.polsl.gliwice.pl>.
+# Tadeusz Hessel <tazdzioch@o2.pl>, 2007.
+# Paweł Dziekoński <pdziekonski@mml.ch.pwr.wroc.pl>, 1999.
+# Daniel Korbel <masterdany88@orange.pl>, 2012.
+# Michał '2M1R' Różański <michal.rozanski@gmail.com>, 2008.
+# minor updates by Jacek Stolarczyk <jacek@mer.chemia.polsl.gliwice.pl>.
+# Mostly translated by Paweł Jabłoński <pawel.jablonski@mail.lze.lodz.pl>.
+# Currently maintained by Jacek Stolarczyk <jacek@mer.chemia.polsl.gliwice.pl>.
+# Paweł Wnuk <czeslavus@tlen.pl>, 2004.
+# Mariusz Kosyl <kosmar@poczta.onet.pl>, 2005.
+# Zbigniew Chyla <chyla@alice.ci.pwr.wroc.pl>, 1998-2003.
+# Daniel Koć <kocio@linuxnews.pl>, 1999-2011.
+# translators@gnomepl.pl <>.
+# Bartosz Bądzelewski <badzelewski@o2.pl>, 2010.
+# translators@gnome.pl <>.
+# (:pserver:anonymous@cvs.gnomepl.org:/gnomepl, puste hasło) <>.
+# Lukasz Janyst <ljan@wp.pl>, 2002-2003.
+# Piotr Predkiewicz <1hero2@wp.pl>, 2008.
+# Zbigniew Braniecki <gandalf@aviary.pl>, 2005-2007.
+# Andrzej Polatyński <andrzej@datatel.net.pl>, 2006-2007.
+# Tomasz Waleńczak <tom@w.pl>, 2004.
+# Chris Leonard <cjl@laptop.org>, 2012.
+# Maciej Kwiatkowski <kfiadeg@gmail.com>, 2009.
+# 3 corrections: Andrzej Krzysztofowicz <ankry@green.mif.pg.gda.pl>, 2006.
+# Wadim Dziedzic <wdziedzic@aviary.pl>, 2005-2009.
+# Andrzej Zaborowski <andrew.zaborowski@intel.com>, 2009.
+# Eike Hein <sho@eikehein.com>, 2006.
+# GNOME PL Team <translators@gnome.pl>, 1999-2005.
+# Marek Kiszkis <m.kiszkis@students.mimuw.edu.pl>, 2008.
+# Translated by Artur Skura <artur@linux.com.pl>.
+# Mateusz Stanisław Włodarski <mateo.max@wp.pl>, 2010.
+# Early translations by Paweł Jabłoński <pawel.jablonski@mail.lze.lodz.pl>.
+# Tomasz Walach <tomasz_rysz@o2.pl>, 2007-2009.
+# Dąbrowski <gdx@poczta.fm>, 2004.
+# Maciej Wikło <maciej.wiklo@wp.pl>, 2008-2010.
+# Tomasz Dominikowski <tdominikowski@aviary.pl>, 2006-2010.
+# Piotr Zaryk (Aviary.pl) <pzaryk@aviary.pl>, 2008.
+# Nikodem Kuźnik <nkuznik@yahoo.com>, 2002.
+# sebastien estienne <sebastien.estienne@gmail.com>, 2005.
+#   Jerzy Skalski <skarzy@elmer.net.pl>.
+# Paweł Potrykus <pegaz@nowyport.pl>, 2003-2005.
+# KonMan <dedalus@o2.pl>, 2005.
+# Michał Lachowski <michal@lachowski.info>, 2010-2011.
+# krzysztof <x-men@mixbox.pl>, 2012.
+# Pawel K. Szulczewski <pawel@szulczewski.org>, 2007-2008.
+# Marcin Raubal <seniore@kk.pl>, 2005-2006.
+# Łukasz Dróżdż <luc.levain@yahoo.co.uk>, 2009.
+# Piotr Leszczyński <piotr@kontury.pl>, 2008-2009.
+# Edwin Jablonski <carmack@vp.pl>, 2008.
+# Marcin Sękalski <senkal86@gmail.com>, 2008-2009.
+# Michal Smoczyk <msmoczyk@wp.pl>, 2009.
+# Tomasz Lorek <tlorek@gmail.com>, 2006.
+# Marcin Giedz <mgiedz@elka.pw.edu.pl>, 2002.
+# Adrian Łubik <adrian5632@gmail.com>, 2007-2008.
+# Szymon Janc <szymon@janc.int.pl>, 2003-2004.
+# Mateusz Kacprzak <mateusz.kacprzak@yandex.ru>, 2011-2012.
+# Norbert Popiołek <norbert@kde.com.pl>.
+# 1 correction: Daniel Janus <dj189395@students.mimuw.edu.pl>, 2007.
+# Paweł Wieczorek <pwiecz@mixbox.pl>, 2008.
+# Artur Polaczyński <artie@kmfms.com>, 1999-2000.
+# (:pserver:anonymous@cvs.gnome.pl:/home/cvs, puste hasło) <>.
+# Early translations by Piotr Roszatycki <dexter@debian.org>, 1998.
+# Michał "Marsjannno" Marcjanik <marsjannno@gmail.com>, 2006.
+# Daniel Wit Preuss <danpre@tlen.pl>, 2004-2005.
+# Bartosz Kosiorek <gang65@poczta.onet.pl>, 2002-2011.
+# pegaz <pegaz@nowyport.pl>, 2003.
+# Marcin Gorycki <mgo@olicom.dk>, 1999.
+# Kuba Winnicki <bw@idc.com.pl>, 1999.
+# Maintained by Jacek Stolarczyk <jacek@mer.chemia.polsl.gliwice.pl>.
+# (:pserver:anonymous@cvs.gnomepl.org:/home/cvs, puste hasło) <>.
+# Michal Milos <krasnall@post.pl>, 2004-2005.
+# Katarzyna Gierlach <gierlach_k@yahoo.pl>, 2011.
+# Igor Klimer <kigro@vp.pl>, 2004-2007.
+# Marcin Garski <mgarski@post.pl>, 2003-2006.
+# Bogdan "bodzi-o" Szczurek <bodzi-o@wp.pl>, 2007.
+# Andrzej Stencel <andrzejstencel@o2.pl>, 2004-2005.
+# Piotr Szymanski <djurban@linuxpl.org>, 2002-2004.
+# Tomasz Zaba <frog4@poczta.onet.pl>, 2008.
+# Paweł Wysocki <pawel_wys@o2.pl>, 2008.
+# Zbigniew Czernik <czernik@tlen.pl>, 2004-2005.
+# Rafał Maszkowski <rzm@icm.edu.pl>, 1996-2012.
+# Robert Gomulka <carramba@epf.pl>, 2005-2009.
+# Mirek Sabiniewicz <m.sabiniewicz@gmail.com>, 2010.
+# Joanna Mazgaj <jmazgaj@aviary.pl>, 2008-2010.
+# Pawel Salawa <boogie@myslenice.one.pl>, 2005.
+# Mikolaj Machowski <mikmach@wp.pl>, 2003-2010.
+# Tomasz Argasiński <targasinski@o2.pl>, 2007.
+# Emil Nowak <emil5@go2.pl>, 2004.
+# Artur Górniak <artur_gorniak@software.pl>, 2000.
+# Artur Chłond <eugenewolfe@o2.pl>, 2010-2011.
+# Michał Klich <majkimajki@wp.pl>, 2007-2008.
+# Aktualne tłumaczenie Norbert Popiołek <norbert@kde.com.pl>, 2001.
+# Maciej Warnecki <maciekw5@gmail.com>, 2009-2010.
+# mekaminX <mariax.e.kaminski@intel.com>, 2009.
+# Konrad Dąbrowski <konraddabrowski@yahoo.co.uk>, 2003-2004.
+# Translated by Arkadiusz Danilecki <szopen@aurora.put.poznan.pl>.
+# M. Jakobik <cheater1@wp.pl>, 2009.
+# Wojciech Kapusta <wkapusta@aviary.pl>, 2005-2011.
+# Cezary Morga <cezarym@pf.pl>, 2004-2005.
+# Kamil Kamiński <mr.blur@wp.pl>, 2004-2005.
+#       Jacek Wojdeł <wojdel@kbs.twi.tudelft.nl>.
+# Marek Walczak <kubdat@onet.eu>, 2009.
+# Jarosław Staniek <js@iidea.pl>, 2005-2007.
+# mateusz stanisław włodarski <mateo.max@wp.pl>, 2010.
+# Michał Mroczek <sagitto@wp.pl>, 2004.
+# Tłumaczenie: Norbert Popiolek <kdesktop@enter.net.pl>.
+# Łukasz Gawroński <gawronskil@wp.pl>, 2009.
+# ptx: Paweł Krawczyk <kravietz@pipeta.chemia.pk.edu.pl>, 1996.
+# Mateusz "Święty" Pogorzelski <vlogical@o2.pl>, 2009.
+# Michał Milos <krasnall@post.pl>, 2004.
+# Dominik Zablotny <dominz@wp.pl>, 2004.
+# Witold Wysota <wysota@wysota.eu.org>, 2004.
+# Konrad Boroń <konradmb@o2.pl>, 2010.
+# Maciej Raczyński <t3rererere@o2.pl>, 2008.
+# Wojciech Świergocki <swiergwo@chello.pl>, 2003.
+# Waldemar Kochaniec <walkoch@polbox.pl>.
+# Adam Kubas <adam.kubas@wp.pl>, 2004-2005.
+# Leszek Cimala <ernierasta@gmail.com>, 2007.
+# Piotr Zaryk <pzaryk@aviary.pl>, 2008-2009.
+# Kamil Dziuba <kamil_dziuba@o2.pl>, 2009-2011.
+# Michał Sawicz <michal@sawicz.net>, 2009.
+# Dariusz Jakoniuk <pipaceliny@gmail.com>, 2008-2009.
+# Lukasz Purgal (Lookanio) <lookanio@gmail.com>, 2011-2013.
+# Jan Stozek <jasio@stozek.waw.pl>, 2013.
+# Michal Rudolf <mrudolf@kdewebdev.org>, 2002-2010.
+# Krzysztof P. Jasiutowicz <kpjas@priv.onet.pl>, 1998-1999.
+# Copyright (C) 2007 Robby Stephenson <robby@periapsis.org>.
+# EuGene Wolfe <eugene@blackwaterczestochowa.pl>, 2010-2011.
+# Piotr Szymański <djurban@linuxpl.org>, 2002-2003.
+# Oskar Lisiecki <oskarlisiecki@gmail.com>, 2007.
+# Marcin Kocur <marcin2006@gmail.com>, 2009.
+# Piotr Drąg <piotrdrag@gmail.com>, 2007-2013.
+# Adam Ziółkowski <admin@LinuxZone.pl>, 2009.
+# Bartlomiej Niemiec <bniemiec@jawnet.pl>, 2011.
+# Piotr Makowski <oponek@gmail.com>, 2007.
+# Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>, 2011-2013.
+# Mateusz Krawczynski <nequitpl@gmail.com>, 2009.
+# Renata Perkowska <rwojcicka@gmail.com>.
+# Grzegorz Kowal <g_kowal@poczta.onet.pl>, 2001.
+# Grzegorz Borek <grzebo@poczta.onet.pl>, 2002.
+# Tomasz Kłoczko <kloczek@rudy.mif.pg.gda.pl>, 1999-2004.
+# Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
+# Michał Kastelik <m.kastelik@wp.pl>, 2005.
+# Łukasz  Sliwa <everth@interia.pl>, 2007.
+# Witek Strzelczyk <witek_strzelczyk@go2.pl>, 2004-2005.
+# Marta Rybczynska <kde-i18n@rybczynska.net>, 2002-2013.
+# tazdzioch <tazdzioch@o2.pl>, 2007.
+# Marek Janukowicz <marek@janukowicz.net>, 2005.
+# Łukasz Derkacz <lukasz@derkacz.eu>, 2005-2009.
+# Thomas Niederreiter <tn@xcdroast.org>, 2002-2003.
+# <srtxg@chanae.alphanet.ch>, 2001-2011.
+# tempB <tempb@o2.pl>, 2008.
+# Thomas Reitelbach <tr@erdfunkstelle.de>, 2004-2010.
+# Tomasz Żaba <frog4@poczta.onet.pl>, 2007-2008.
+# Tomasz Sitek <tsitek@zie.pg.gda.pl>, 2005.
+# Tomek Grzejszczyk <tgrzej@onet.eu>, 2006-2007.
+# Asia Słowik <asiaslowik@gmail.com>, 2011.
+# Rafal Konkolewski <raf_k@wp.pl>, 2006.
+# Jan Stożek <jasio@stozek.waw.pl>, 2007-2010.
+# Cezary Szafron <cszafron@gmail.com>, 2008.
+# Marcin <marcin_g@epf.pl>, 2005.
+# Łukasz Purgal <lookanio@gmail.com>, 2011.
+# Jarosław Świerad <messer@messer.homelinux.org>, 2003.
+# Dominik Granada <dgranada@frks.pl>, 2012.
+# corrections: Paweł Krawczyk <kravietz@pipeta.chemia.pk.edu.pl>, 1996.
+# Jerzy Trzeciak <artusek@wp.pl>, 2007-2010.
+# Konrad Twardowski <kdtonline@poczta.onet.pl>, 2004.
+# Minor latest updates by Jacek Stolarczyk <jacek@mer.chemia.polsl.gliwice.pl>.
+# Krzysztof Krzyżaniak <eloy@venco.com.pl>, 1998.
+# Paweł Dabek <pdabek@onet.pl>, 2007.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-02 12:27-0600\n"
+"PO-Revision-Date: 2012-08-20 20:15+0200\n"
+"Last-Translator: Rafał Maszkowski <rzm@icm.edu.pl>\n"
+"Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8-bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%s0>=2  n%s0<=4  (n%s00<10 || n"
+"%s00>=20) ? 1 : 2);\n"
+
+#: ../../xffm/completion/base.hh:28
+msgid "Command"
+msgstr "Polecenie"
+
+#: ../../xffm/completion/base.hh:31
+msgid "File"
+msgstr "Plik"
+
+#: ../../xffm/completion/base.hh:34
+msgid "Command history"
+msgstr "Historia poleceń"
+
+#. option -u uid "uid" "uid_combo"
+#: ../../xffm/completion/base.hh:37 ../../xffm/find/dialog.hh:199
+msgid "User"
+msgstr "Użytkownik"
+
+#: ../../xffm/completion/base.hh:40
+msgid "Variable"
+msgstr "Zmienna"
+
+#: ../../xffm/completion/base.hh:43
+msgid "Host"
+msgstr "Host"
+
+#: ../../xffm/completion/base.hh:55
+msgid "Found no match"
+msgstr "Nie znaleziono dopasowania"
+
+#: ../../xffm/completion/base.hh:133 ../../xffm/completion/base.hh:134
+msgid "Matches"
+msgstr "Identyczny"
+
+#: ../../xffm/completion/base.hh:134
+msgid "Too many files open"
+msgstr "Otwarto za dużo plików"
+
+#: ../../xffm/completion/base.hh:325 ../../xffm/find/fgr.hh:124
+msgid "Options:"
+msgstr "Opcje:"
+
+#: ../../xffm/completion/bash.hh:133
+msgid "Completion mode:"
+msgstr "Tryb zakończenia zadania:"
+
+#: ../../xffm/completion/bash.hh:134
+msgid "command"
+msgstr "polecenie"
+
+#: ../../xffm/completion/bash.hh:135
+msgid "file"
+msgstr "plik"
+
+#: ../../xffm/completion/bash.hh:145 ../../xffm/completion/bash.hh:149
+msgid "Options >>"
+msgstr "Opcje >>"
+
+#: ../../xffm/find/fgr.hh:124 ../../xffm/find/dialog.hh:308
+msgid "Path"
+msgstr "Ścieżka"
+
+#: ../../xffm/find/fgr.hh:125
+msgid "Locate documents and folders on this computer by name or content"
+msgstr "Wyszukuje dokumenty i katalogi według nazwy lub zawartości"
+
+#: ../../xffm/find/fgr.hh:126 ../../xffm/find/dialog.hh:341
+msgid "Filter:"
+msgstr "Filtr:"
+
+#: ../../xffm/find/fgr.hh:126
+msgid "Search for files"
+msgstr "Wyszukiwanie plików"
+
+#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
+#: ../../xffm/find/fgr.hh:128
+msgid "Contents:"
+msgstr "Zawartość:"
+
+#: ../../xffm/find/fgr.hh:128
+#, fuzzy
+msgid "File's contents filtered as plain text."
+msgstr "Zapisać plik jako zwykły tekst?"
+
+#: ../../xffm/find/fgr.hh:131
+msgid "Verbose output debugging mode."
+msgstr "Tryb pełnej informacji diagnostyczne."
+
+#: ../../xffm/find/fgr.hh:133
+msgid "Show version information"
+msgstr "Wyświetlenie informacji o wersji"
+
+#: ../../xffm/find/fgr.hh:135
+msgid "Filter Details"
+msgstr "Szczegóły filtru"
+
+#. / option -a "xdev"
+#: ../../xffm/find/fgr.hh:138 ../../xffm/find/dialog.hh:180
+msgid "Stay on single filesystem"
+msgstr "Szukaj na jednym systemie plików"
+
+#: ../../xffm/find/fgr.hh:140
+msgid "Print..."
+msgstr "Wydrukuj..."
+
+#: ../../xffm/find/fgr.hh:140
+msgid "The unique Process ID that identifies this process."
+msgstr "Unikalny identyfikator procesu."
+
+#. / option -D "recursiveH"
+#: ../../xffm/find/fgr.hh:142 ../../xffm/find/dialog.hh:177
+msgid "Find hidden files and directories"
+msgstr "Znajdź ukryte pliki i katalogi"
+
+#: ../../xffm/find/fgr.hh:143
+msgid "Filter"
+msgstr "Filtr"
+
+#: ../../xffm/find/fgr.hh:144
+msgid ""
+"To display files which pass the filter (stars and regexps will be processed)"
+msgstr ""
+"Aby wyświetlić pliki, które przejdą przez filtr (gwiazdki i wyrażenia "
+"regularne będą brane pod uwagę)"
+
+#. / option -r "recursive"
+#: ../../xffm/find/fgr.hh:146 ../../xffm/find/dialog.hh:174
+msgid "Recursive"
+msgstr "Rekurencyjny"
+
+#: ../../xffm/find/fgr.hh:147 ../../xffm/find/fgr.hh:148
+#: ../../xffm/find/fgr.hh:149 ../../xffm/find/fgr.hh:150
+msgid "KByte"
+msgstr "KBajt"
+
+#: ../../xffm/find/fgr.hh:148
+msgid "is greater than or equal to"
+msgstr "jest większe od lub równe"
+
+#: ../../xffm/find/fgr.hh:150
+msgid "is less than or equal to"
+msgstr "jest mniejszy lub równy niż"
+
+#: ../../xffm/find/fgr.hh:152
+msgid "Set UID"
+msgstr "Ustaw UID"
+
+#: ../../xffm/find/fgr.hh:152
+msgid "Executable Text Files"
+msgstr "Wykonywalne pliki tekstowe"
+
+#: ../../xffm/find/fgr.hh:154
+msgid "The permissions of the file, in octal notation."
+msgstr "Uprawnienia do pliku w notacji ósemkowej."
+
+#: ../../xffm/find/fgr.hh:155
+msgid "Type"
+msgstr "Typ"
+
+#: ../../xffm/find/fgr.hh:157 ../../xffm/find/signals.hh:17
+msgid "Any"
+msgstr "Dowolny"
+
+#: ../../xffm/find/fgr.hh:157
+msgid "Default type"
+msgstr "Typ domyślny"
+
+#: ../../xffm/find/fgr.hh:158 ../../xffm/common/preview.hh:497
+msgid "Regular file"
+msgstr "Normalny plik"
+
+#: ../../xffm/find/fgr.hh:159 ../../xffm/find/signals.hh:11
+#: ../../xffm/fm/local/popup.hh:803 ../../xffm/common/preview.hh:488
+msgid "Directory"
+msgstr "Katalog"
+
+#: ../../xffm/find/fgr.hh:160 ../../xffm/find/signals.hh:12
+#: ../../xffm/common/preview.hh:494
+msgid "Symbolic Link"
+msgstr "Dowiązanie symboliczne"
+
+#: ../../xffm/find/fgr.hh:161
+msgid "UNIX Socket"
+msgstr "Gniazdo UNIX"
+
+#: ../../xffm/find/fgr.hh:162 ../../xffm/find/signals.hh:14
+#: ../../xffm/common/preview.hh:482
+msgid "Block device"
+msgstr "Urządzenie blokowe"
+
+#: ../../xffm/find/fgr.hh:163 ../../xffm/find/signals.hh:15
+#: ../../xffm/common/preview.hh:485
+msgid "Character device"
+msgstr "Urządzenie znakowe"
+
+#: ../../xffm/find/fgr.hh:164 ../../xffm/find/signals.hh:16
+#: ../../xffm/common/preview.hh:491
+msgid "FIFO"
+msgstr "FIFO"
+
+#. radio_p freed on destroy event for dialog_.
+#. option -k minutes "last_minutes", "last_minutes_spin"
+#: ../../xffm/find/fgr.hh:166 ../../xffm/find/fgr.hh:168
+#: ../../xffm/find/dialog.hh:221
+msgid "Minutes"
+msgstr "Minuty"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/dialog.hh:270 ../../xffm/find/dialog.hh:370
+#: ../../xffm/fm/treeview.hh:18
+msgid "Details"
+msgstr "Szczegóły"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/fgr.hh:179 ../../xffm/find/fgr.hh:180
+#: ../../xffm/find/fgr.hh:183 ../../xffm/find/fgr.hh:184
+#: ../../xffm/find/fgr.hh:187 ../../xffm/find/fgr.hh:188
+msgid "TIME"
+msgstr "CZAS"
+
+#: ../../xffm/find/fgr.hh:168 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/fgr.hh:174 ../../xffm/find/fgr.hh:177
+msgid "Previous"
+msgstr "Poprzedni"
+
+#. option -h hours "last_hours", "last_hours_spin"
+#: ../../xffm/find/fgr.hh:169 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/dialog.hh:226
+msgid "Hours"
+msgstr "Godziny"
+
+#. option -d days "last_days", "last_days_spin"
+#: ../../xffm/find/fgr.hh:172 ../../xffm/find/fgr.hh:174
+#: ../../xffm/find/dialog.hh:231
+msgid "Days"
+msgstr "Dni"
+
+#: ../../xffm/find/fgr.hh:175
+msgid "Month"
+msgstr "Miesiąc"
+
+#: ../../xffm/find/fgr.hh:177
+msgid "Month(s)"
+msgstr "Miesiąc(e)"
+
+#: ../../xffm/find/fgr.hh:180
+msgid "Modification Time :"
+msgstr "Czas modyfikacji :"
+
+#: ../../xffm/find/fgr.hh:184
+msgid "Access Time :"
+msgstr "Czas dostępu :"
+
+#: ../../xffm/find/fgr.hh:188
+msgid "Creation Time :"
+msgstr "Czas utworzenia :"
+
+#: ../../xffm/find/fgr.hh:191 ../../xffm/find/fgr.hh:192
+msgid "uid"
+msgstr "uid"
+
+#: ../../xffm/find/fgr.hh:192
+msgid "User:"
+msgstr "Użytkownik:"
+
+#: ../../xffm/find/fgr.hh:194 ../../xffm/find/fgr.hh:195
+msgid "gid"
+msgstr "gid"
+
+#: ../../xffm/find/fgr.hh:195
+msgid "Group:"
+msgstr "Grupa:"
+
+#: ../../xffm/find/fgr.hh:198
+msgid ""
+"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+"character that  normally  follows  a file  name"
+msgstr ""
+
+#: ../../xffm/find/fgr.hh:200
+msgid "Content View"
+msgstr "Widok zawartości"
+
+#: ../../xffm/find/fgr.hh:201 ../../xffm/find/fgr.hh:202
+#: ../../xffm/find/fgr.hh:203 ../../xffm/find/fgr.hh:204
+msgid "STRING"
+msgstr "CIĄG"
+
+#: ../../xffm/find/fgr.hh:202 ../../xffm/find/fgr.hh:204
+#: ../../xffm/fm/local/popup.hh:563
+msgid "Regular expression"
+msgstr "Wyrażenie regularne"
+
+#: ../../xffm/find/fgr.hh:204
+msgid "Extended"
+msgstr "Rozszerzony"
+
+#: ../../xffm/find/fgr.hh:206
+msgid "Ignore case"
+msgstr "Bez rozróżniania małych i wielkich liter"
+
+#: ../../xffm/find/fgr.hh:208
+msgid "Text Files"
+msgstr "Pliki tekstowe"
+
+#: ../../xffm/find/fgr.hh:210 ../../xffm/find/dialog.hh:552
+msgid "No match"
+msgstr "Brak dopasowania"
+
+#: ../../xffm/find/fgr.hh:212 ../../xffm/find/dialog.hh:470
+msgid "Line Count"
+msgstr "Liczba wierszy"
+
+#: ../../xffm/find/fgr.hh:214
+msgid "Words"
+msgstr "Słowa"
+
+#: ../../xffm/find/fgr.hh:216
+msgid "Lines"
+msgstr "Wiersze"
+
+#: ../../xffm/find/fgr.hh:368
+#, c-format
+msgid "Usage : %s [OPTIONS]\n"
+msgstr "Użycie: %s [OPCJE]\n"
+
+#: ../../xffm/find/signals.hh:10
+msgid "Regular"
+msgstr "Zwykły"
+
+#: ../../xffm/find/signals.hh:13 ../../xffm/common/preview.hh:500
+msgid "Socket"
+msgstr "Gniazdo"
+
+#: ../../xffm/find/signals.hh:209
+msgid "Select folder to search in"
+msgstr "Katalog do przeszukania"
+
+#. button no
+#: ../../xffm/find/signals.hh:265 ../../xffm/find/dialog.hh:584
+#: ../../xffm/response/entryfileresponse.hh:18
+#: ../../xffm/response/entryresponse.hh:305
+#: ../../xffm/response/passwdresponse.hh:558
+#: ../../xffm/fm/local/properties.hh:304 ../../xffm/fm/local/rm.hh:155
+msgid "Cancel"
+msgstr "Anuluj"
+
+#: ../../xffm/find/signals.hh:293 ../../xffm/find/signals.hh:722
+msgid "No editor for current action."
+msgstr "Brak edytora dla obecnego działania."
+
+#. / option "upper_limit_spin" (only in gtk dialog_)
+#: ../../xffm/find/signals.hh:351 ../../xffm/find/dialog.hh:183
+msgid "Results"
+msgstr "Wyniki"
+
+#: ../../xffm/find/signals.hh:351
+msgid "Upper limit:"
+msgstr "Limit górny:"
+
+#: ../../xffm/find/signals.hh:353
+msgid "Counting files..."
+msgstr "Zliczanie plików...."
+
+#: ../../xffm/find/signals.hh:368
+#, c-format
+msgid "Found %d match"
+msgid_plural "Found %d matches"
+msgstr[0] "Znaleziono %d pasujący"
+msgstr[1] "Znaleziono %d pasujące"
+msgstr[2] "Znaleziono %d pasujących"
+
+#: ../../xffm/find/signals.hh:370
+#, c-format
+msgid "%s Finished : %s"
+msgstr "%s Zakończono : %s"
+
+#: ../../xffm/find/signals.hh:488 ../../xffm/find/signals.hh:490
+msgid "Searching..."
+msgstr "Wyszukiwanie..."
+
+#. g_object_set_data(G_OBJECT(dialog_), "window", dialog_);
+#: ../../xffm/find/dialog.hh:98 ../../xffm/find/dialog.hh:150
+#: ../../xffm/find/dialog.hh:611
+msgid "Find"
+msgstr "Szukaj"
+
+#: ../../xffm/find/dialog.hh:183
+msgid "Upper limit"
+msgstr "Granica górna"
+
+#. option -s +KByte "size_greater", "size_greater_spin"
+#: ../../xffm/find/dialog.hh:188
+msgid "At Least"
+msgstr "przynajmniej"
+
+#: ../../xffm/find/dialog.hh:188 ../../xffm/find/dialog.hh:193
+msgid "kBytes"
+msgstr "kBajtów"
+
+#. option -s -KByte "size_smaller", "size_smaller_spin"
+#: ../../xffm/find/dialog.hh:193
+msgid "At Most"
+msgstr "co najwyżej"
+
+#: ../../xffm/find/dialog.hh:204
+msgid "Group"
+msgstr "Grupa"
+
+#. option -o octal "octal_p" "permissions_entry"
+#: ../../xffm/find/dialog.hh:208
+msgid "Octal Permissions"
+msgstr "Uprawnienia w notacji ósemkowej"
+
+#. option -p suid | exe
+#: ../../xffm/find/dialog.hh:213
+msgid "SUID"
+msgstr "SUID"
+
+#: ../../xffm/find/dialog.hh:213 ../../xffm/fm/local/popup.hh:843
+msgid "Executable"
+msgstr "Plik wykonywalny"
+
+#. option -m months "last_months", "last_months_spin"
+#: ../../xffm/find/dialog.hh:237
+msgid "Months"
+msgstr "Miesięcy"
+
+#: ../../xffm/find/dialog.hh:248
+msgid "File type : "
+msgstr "Typ pliku :"
+
+#. gtk_widget_show (GTK_WIDGET(right_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(center_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(left_options_vbox));
+#: ../../xffm/find/dialog.hh:262 ../../xffm/find/dialog.hh:602
+#: ../../xffm/fm/page/page.hh:70 ../../xffm/common/gtk.hh:70
+msgid "Close"
+msgstr "Zamknij"
+
+#. gtk_box_pack_start (vbox7a, GTK_WIDGET(advancedBox), TRUE, FALSE, 5);
+#. gtk_widget_show(GTK_WIDGET(advancedBox));
+#. //////////////  grep options.... /////////////////////////
+#: ../../xffm/find/dialog.hh:384
+msgid "Contains"
+msgstr "Zawiera"
+
+#: ../../xffm/find/dialog.hh:404
+msgid "Contains the text"
+msgstr "Zawiera tekst"
+
+#: ../../xffm/find/dialog.hh:437
+msgid "Case Sensitive"
+msgstr "Rozróżnianie małych i wielkich liter"
+
+#: ../../xffm/find/dialog.hh:449
+msgid "Extended regexp"
+msgstr "Rozszerzone wyrażenia regularne"
+
+#: ../../xffm/find/dialog.hh:460
+msgid "Include binary files"
+msgstr "Uwzględniaj pliki binarne"
+
+#: ../../xffm/find/dialog.hh:496
+msgid "Match"
+msgstr "Przeszukiwanie"
+
+#: ../../xffm/find/dialog.hh:508
+msgid "Anywhere"
+msgstr "Gdziekolwiek"
+
+#: ../../xffm/find/dialog.hh:523
+msgid "Whole words only"
+msgstr "Całe słowa"
+
+#: ../../xffm/find/dialog.hh:538
+msgid "lines"
+msgstr "wierszy"
+
+#: ../../xffm/find/dialog.hh:594
+msgid "Clear"
+msgstr "Wyczyść"
+
+#: ../../xffm/find/dialog.hh:636
+msgid "Edit"
+msgstr "Edycja"
+
+#: ../../xffm/find/dialog.hh:751 ../../xffm/find/dialog.hh:766
+#: ../../xffm/common/util.hh:1150 ../../xffm/common/util.hh:1152
+#: ../../xffm/common/util.hh:1158 ../../xffm/common/util.hh:1160
+#: ../../xffm/common/preview.hh:479
+msgid "unknown"
+msgstr "nieznane"
+
+#: ../../xffm/find/dialog.hh:780
+msgid "Modified"
+msgstr "Zmodyfikowano"
+
+#: ../../xffm/find/dialog.hh:784
+msgid "Created"
+msgstr "Utworzono"
+
+#: ../../xffm/find/dialog.hh:788
+msgid "Accessed"
+msgstr "Czas dostępu"
+
+#: ../../xffm/find/dialog.hh:1106
+msgid ""
+"Basic rules:\n"
+"\n"
+"*  Will match any character zero or more times.\n"
+"?  Will match any character exactly one time\n"
+"[] Match any character within the [] \n"
+"^  Match at beginning of string\n"
+"$  Match at end of string \n"
+msgstr ""
+"Podstawowe zasady:\n"
+"\n"
+"*  Odpowiada jakiemukolwiek znakowi występującemu 0 lub więcej razy.\n"
+"?  Odpowiada jakiemukolwiek znakowi występującemu dokładnie jeden raz\n"
+
+#: ../../xffm/find/dialog.hh:1115
+#, fuzzy
+msgid ""
+"Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"In  basic regular expressions the metacharacters ?, +, {, |, (, and ) \n"
+"  lose their special meaning.\n"
+"\n"
+"The  period . matches  any  single  character.\n"
+"The caret ^ matches at the start of line.\n"
+"The dollar $ matches at the end of line.\n"
+"\n"
+"Characters within [ ] matches any single character in the list.\n"
+"Characters within [^ ] matches any single character *not* in the list.\n"
+"Characters inside [ - ] matches a range of characters (ie [0-9] or [a-z]).\n"
+"\n"
+"A regular expression may be followed by one of several repetition "
+"operators:\n"
+"?      The preceding item is optional and matched\n"
+"       at most once.\n"
+"*      The preceding item will be matched zero\n"
+"       or more times.\n"
+"+      The preceding item will be matched one or\n"
+"       more times.\n"
+"{n}    The preceding item is matched exactly n times.\n"
+"{n,}   The preceding item is matched n or more times.\n"
+"{n,m}  The preceding item is matched at least n times,\n"
+"       but not more than m times.\n"
+"\n"
+"To match any reserved character, precede it with \\. \n"
+"\n"
+"Two regular expressions may be joined by the logical or operator |.\n"
+"Two regular expressions may be concatenated.\n"
+"\n"
+"More information is available by typing \"man grep\"\n"
+msgstr ""
+"Znaki zarezerwowane dla zaawansowanych wyrażeń regularnych to\n"
+". ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"W prostych wyrażeniach regularnych metaznaki\n"
+"?, +, {, |, (, oraz ) tracą ich specjalne znaczenie.\n"
+"\n"
+"Znak kropki .  odpowiada jednemu znakowi.\n"
+"Znak karetki ^ oznacza początek linii.\n"
+"Znak dolara $ oznacza koniec linii.\n"
+"\n"
+"Znaki pomiędzy [ ] oznaczają jakikolwiek pojedynczy\n"
+"       znak występujący w liście.\n"
+"Znaki pomiędzy [^ ] oznaczają jakikolwiek pojedynczy\n"
+"       znak nie występujący w liście.\n"
+"Znaki występujące w [ - ] oznaczają przedział\n"
+"       znaków (np. [0-9] lub [a-z]).\n"
+"\n"
+"Wyrażenie regulatne może być uzupełnione przez\n"
+"       jeden z wielu operatorów powtarzania:\n"
+"?      Poprzedzający element jest opcjonalny i może wystąpić\n"
+"       wyłącznie jeden raz.\n"
+"*      Poprzedzający element może wystąpić zero\n"
+"       lub więcej razy.\n"
+"+      Poprzedzający element może wystąpić jeden raz lub\n"
+"       więcej razy.\n"
+"{n}    Poprzedzający element może wystąpić dokładnie n razy.\n"
+"{n,}   Poprzedzający element może wystąpić dokładnie n lub więcej razy.\n"
+"{n,m}  Poprzedzający element może wystąpić co najmniej n razy,\n"
+"       ale nie więcej niż m razy.\n"
+"\n"
+"Aby wyszukać któryś z zarezerwowanych znaków poprzedź go znakiem \\. \n"
+"\n"
+"Dwa wyrażenia regularne mogę być połączone przy pomocy\n"
+"       logicznego operatora or: |.\n"
+"Dwa wyrażenia regularne mogę być złączone.\n"
+"\n"
+"Po więcej informacji wpisz \"man grep\"\n"
+"       w oknie terminala.\n"
+
+#: ../../xffm/response/entryfileresponse.hh:20
+msgid "Open"
+msgstr "Otwórz"
+
+#: ../../xffm/response/entryresponse.hh:29
+#: ../../xffm/response/entryfolderresponse.hh:28
+msgid "Choose directory"
+msgstr "Wybór katalogu"
+
+#. this button is redundant since hands are on keyboard for password
+#: ../../xffm/response/entryresponse.hh:309
+#: ../../xffm/response/passwdresponse.hh:189
+#: ../../xffm/response/passwdresponse.hh:559
+msgid "Ok"
+msgstr "Ok"
+
+#: ../../xffm/response/commandprogressresponse.hh:32
+msgid "Items:"
+msgstr "Elementy:"
+
+#: ../../xffm/response/passwdresponse.hh:21
+msgid "Enter password"
+msgstr "Proszę wprowadzić hasło"
+
+#. gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+#: ../../xffm/response/passwdresponse.hh:125
+#, fuzzy
+msgid "User Input"
+msgstr "Wejście myszy"
+
+#: ../../xffm/response/passwdresponse.hh:142
+msgid "Response Requested"
+msgstr "Zażądano odpowiedzi"
+
+#: ../../xffm/response/passwdresponse.hh:264
+msgid "Preparing"
+msgstr "Przygotowywanie"
+
+#: ../../xffm/response/passwdresponse.hh:352
+msgid "sudo"
+msgstr "sudo"
+
+#: ../../xffm/response/passwdresponse.hh:354
+msgid "Command:"
+msgstr "Polecenie:"
+
+#: ../../xffm/response/passwdresponse.hh:357
+msgid "Permission denied"
+msgstr "Odmowa dostępu"
+
+#: ../../xffm/response/passwdresponse.hh:358
+msgid "Try to approach a problem from different angles."
+msgstr "Próbuj podchodzić do problemu na różne sposoby."
+
+#: ../../xffm/response/passwdresponse.hh:359
+msgid "Do you want to retry?"
+msgstr "Czy chcesz ponowić?"
+
+#: ../../xffm/response/passwdresponse.hh:360
+msgid "Alternate:"
+msgstr "Alternatywny:"
+
+#: ../../xffm/response/passwdresponse.hh:365
+msgid "No"
+msgstr "Nie"
+
+#: ../../xffm/response/passwdresponse.hh:401
+msgid "Install"
+msgstr "Instalacja"
+
+#: ../../xffm/response/passwdresponse.hh:402
+#, c-format
+msgid "%s does not exist."
+msgstr "%s nie istnieje."
+
+#: ../../xffm/response/passwdresponse.hh:467
+msgid "Blowfish"
+msgstr "Blowfish"
+
+#: ../../xffm/response/passwdresponse.hh:468
+msgid "Encryption Key Approval"
+msgstr "Potwierdzenie klucza szyfrującego"
+
+#: ../../xffm/response/passwdresponse.hh:502
+msgid "-o     print output to standard out. Implies -r."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:506
+msgid "-c     DO NOT compress files before encryption."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:510
+msgid "-r     DO NOT remove input files after processing"
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:517
+msgid "Encryption key: "
+msgstr "Klucz szyfrowania: "
+
+#: ../../xffm/response/passwdresponse.hh:529
+msgid "Confirm:"
+msgstr "Potwierdź:"
+
+#: ../../xffm/response/passwdresponse.hh:542
+msgid "Sorry, passwords do not match"
+msgstr "Hasła nie są zgodne"
+
+#: ../../xffm/response/passwdresponse.hh:550
+msgid "Minimum length:"
+msgstr "Minimalna długość:"
+
+#: ../../xffm/response/timeoutresponse.hh:56
+msgid "Dismiss"
+msgstr "Zamknij"
+
+#: ../../xffm/response/commandresponse.hh:23
+msgid "Running"
+msgstr "Uruchomione"
+
+#. auto text = g_strdup_printf("%s (pid: %d)",
+#. _("Waiting for operation to finish..."),
+#. Tubo<Type>::getChild (pid));
+#: ../../xffm/response/commandresponse.hh:28
+msgid "Waiting for operation to finish..."
+msgstr "Oczekiwanie na zakończenie operacji..."
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Documents"
+msgstr "Dokumenty"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Downloads"
+msgstr "Pobrania"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Music"
+msgstr "Muzyka"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Pictures"
+msgstr "Obrazy"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Templates"
+msgstr "Szablony"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Videos"
+msgstr "Nagrania wideo"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Desktop"
+msgstr "Pulpit"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Bookmarks"
+msgstr "Zakładki"
+
+#: ../../xffm/fm/local/icons.hh:259 ../../xffm/fm/local/rm.hh:181
+msgid "Trash"
+msgstr "Kosz"
+
+#: ../../xffm/fm/local/popup.hh:60
+msgid "New"
+msgstr "Nowy"
+
+#. deprecated {N_("Open in New Tab"), NULL, NULL, NULL},
+#. deprecated {N_("Open in New Window"), NULL, NULL, NULL},
+#. common buttons /(also an iconsize +/- button)
+#: ../../xffm/fm/local/popup.hh:64 ../../xffm/fm/local/popup.hh:104
+#: ../../xffm/common/gtk.hh:74
+msgid "Copy"
+msgstr "Skopiuj"
+
+#: ../../xffm/fm/local/popup.hh:65 ../../xffm/fm/local/popup.hh:105
+#: ../../xffm/common/gtk.hh:73
+msgid "Cut"
+msgstr "Wytnij"
+
+#: ../../xffm/fm/local/popup.hh:66 ../../xffm/fm/local/popup.hh:106
+#: ../../xffm/common/gtk.hh:66
+msgid "Paste"
+msgstr "Wklej"
+
+#. **************
+#: ../../xffm/fm/local/popup.hh:67 ../../xffm/fm/local/popup.hh:107
+#: ../../xffm/fm/local/rm.hh:174 ../../xffm/common/gtk.hh:75
+msgid "Delete"
+msgstr "Usuń"
+
+#. {N_("About"), NULL, (void *) menu},
+#.
+#. only for listview: {N_("Sort by size"), NULL, (void *) menu},
+#. only for listview: {N_("Sort by date"), NULL, (void *) menu},
+#: ../../xffm/fm/local/popup.hh:73
+msgid "Select All"
+msgstr "Zaznacz wszystko"
+
+#: ../../xffm/fm/local/popup.hh:74 ../../xffm/fm/local/popup.hh:559
+msgid "Match regular expression"
+msgstr "Dopasuj do wyrażenia regularnego"
+
+#: ../../xffm/fm/local/popup.hh:75 ../../xffm/fm/root/view.hh:58
+#: ../../xffm/fm/fstab/popup.hh:21
+msgid "View as list"
+msgstr "Wyświetlaj jako listy"
+
+#: ../../xffm/fm/local/popup.hh:77
+msgid "Show hidden files"
+msgstr "Wyświetlanie ukrytych plików"
+
+#: ../../xffm/fm/local/popup.hh:79
+msgid "Show Backup Files"
+msgstr "Pokaż pliki zapasowe"
+
+#: ../../xffm/fm/local/popup.hh:81
+msgid "Sort data in descending order"
+msgstr "Sortuj dane w porządku malejącym"
+
+#: ../../xffm/fm/local/popup.hh:93 ../../xffm/fm/local/popup.hh:119
+#: ../../xffm/fm/local/popup.hh:1006 ../../xffm/fm/local/popup.hh:1013
+#: ../../xffm/fm/local/popup.hh:1022 ../../xffm/fm/local/popup.hh:1029
+#: ../../xffm/common/gtk.hh:72
+msgid "Open with"
+msgstr "Otwórz za pomocą"
+
+#: ../../xffm/fm/local/popup.hh:94 ../../xffm/fm/local/popup.hh:846
+msgid "Run Executable..."
+msgstr "Uruchomienie programu..."
+
+#: ../../xffm/fm/local/popup.hh:95
+msgid "Extract files from the archive"
+msgstr "Rozpakowuje pliki z archiwum"
+
+#. g_hash_table_insert(iconname_hash, "bcrypt", (void *)"emblem-keyhole");
+#: ../../xffm/fm/local/popup.hh:96 ../../xffm/fm/root/view.hh:73
+#: ../../xffm/fm/fstab/popup.hh:20 ../../xffm/fm/dialog/notebook.hh:52
+#: ../../xffm/common/gtk.hh:78
+msgid "Open in New Tab"
+msgstr "Otwórz w nowej karcie"
+
+#. File chooser
+#: ../../xffm/fm/local/popup.hh:97 ../../xffm/fm/local/popup.hh:706
+msgid "Create a compressed archive with the selected objects"
+msgstr "Tworzy skompresowane archiwum z zaznaczonych obiektów"
+
+#: ../../xffm/fm/local/popup.hh:98 ../../xffm/fm/fstab/popup.hh:37
+msgid "Mount the volume associated with this folder"
+msgstr "Montuje wolumin związany z tym katalogiem"
+
+#: ../../xffm/fm/local/popup.hh:99 ../../xffm/fm/fstab/popup.hh:38
+msgid "Unmount the volume associated with this folder"
+msgstr "Odmontowuje wolumin związany z tym katalogiem"
+
+#: ../../xffm/fm/local/popup.hh:100 ../../xffm/common/gtk.hh:67
+msgid "Add bookmark"
+msgstr "Dodaj zakładkę"
+
+#: ../../xffm/fm/local/popup.hh:101 ../../xffm/fm/root/view.hh:74
+#: ../../xffm/common/gtk.hh:68
+msgid "Remove bookmark"
+msgstr "Usuń zakładkę"
+
+#: ../../xffm/fm/local/popup.hh:108 ../../xffm/fm/local/popup.hh:961
+msgid "Rename"
+msgstr "Zmień nazwę"
+
+#: ../../xffm/fm/local/popup.hh:109 ../../xffm/fm/local/popup.hh:947
+msgid "Duplicate"
+msgstr "Zduplikuj"
+
+#: ../../xffm/fm/local/popup.hh:110 ../../xffm/fm/local/popup.hh:933
+msgid "Link"
+msgstr "Odnośnik"
+
+#: ../../xffm/fm/local/popup.hh:111
+msgid "Properties"
+msgstr "Właściwości"
+
+#: ../../xffm/fm/local/popup.hh:414
+msgid "Files:"
+msgstr "Określone pliki:"
+
+#: ../../xffm/fm/local/popup.hh:417 ../../xffm/fm/local/rm.hh:61
+msgid "Multiple selections"
+msgstr "Wielokrotny wybór"
+
+#: ../../xffm/fm/local/popup.hh:557
+msgid "Select items"
+msgstr "Zaznacz elementy"
+
+#: ../../xffm/fm/local/popup.hh:575
+msgid "Regular Expression syntax is incorrect"
+msgstr "Niepoprawna składnia wyrażenia regularnego"
+
+#: ../../xffm/fm/local/popup.hh:592
+msgid "No selection"
+msgstr "Brak zaznaczenia"
+
+#: ../../xffm/fm/local/popup.hh:592
+msgid "No matches."
+msgstr "Brak wyników."
+
+#. entryResponse->setCheckButton(_("Run in Terminal"));
+#. entryResponse->setCheckButton(Mime<Type>::runInTerminal(path));
+#: ../../xffm/fm/local/popup.hh:721 ../../xffm/fm/page/pathbar.hh:313
+msgid "Specify Output Directory..."
+msgstr "Podaj katalog wyjściowy..."
+
+#: ../../xffm/fm/local/popup.hh:799
+msgid "Create new..."
+msgstr "Utwórz nowy..."
+
+#: ../../xffm/fm/local/popup.hh:806 ../../xffm/fm/local/popup.hh:886
+msgid "New Name:"
+msgstr "Nowa nazwa:"
+
+#: ../../xffm/fm/local/popup.hh:815
+msgid "No name"
+msgstr "Bez nazwy"
+
+#: ../../xffm/fm/local/popup.hh:828
+#, c-format
+msgid "Another file with the same name already exists in “%s”."
+msgstr "Inny plik o tej samej nazwie już istnieje w \"%s\"."
+
+#: ../../xffm/fm/local/popup.hh:850 ../../xffm/fm/local/popup.hh:1010
+#: ../../xffm/fm/local/popup.hh:1026 ../../xffm/common/util.hh:1248
+msgid "Run in Terminal"
+msgstr "Uruchamianie w terminalu"
+
+#: ../../xffm/fm/local/popup.hh:853
+msgid "Arguments for the Command"
+msgstr "Parametry dla polecenia"
+
+#: ../../xffm/fm/local/popup.hh:1047 ../../xffm/fm/local/view.hh:141
+msgid "Invalid entry"
+msgstr "Nieprawidłowy wpis"
+
+#: ../../xffm/fm/local/properties.hh:235
+msgid "Properties and Attributes"
+msgstr "Właściwości i atrybuty"
+
+#: ../../xffm/fm/local/properties.hh:264
+#, fuzzy
+msgid "File Mode:"
+msgstr "Tryb pliku"
+
+#: ../../xffm/fm/local/properties.hh:290
+msgid "File:"
+msgstr "Plik:"
+
+#. Add file info stuff
+#. set info stuff data according to combo box
+#. add signal handler to changed signal for combo box
+#. Add process buttons
+#.
+#: ../../xffm/fm/local/properties.hh:302
+msgid "Apply changes"
+msgstr "Zastosuj zmiany"
+
+#: ../../xffm/fm/local/properties.hh:462
+msgid "Successfully moved to trash."
+msgstr "Pomyślnie przeniesiono do kosza."
+
+#: ../../xffm/fm/local/properties.hh:463
+msgid "Source:"
+msgstr "Źródło:"
+
+#: ../../xffm/fm/local/rm.hh:59
+#, c-format
+msgid "Delete %s"
+msgstr "Usuń %s"
+
+#: ../../xffm/fm/local/rm.hh:61
+msgid "Warning: "
+msgstr "Uwaga: "
+
+#. gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
+#. title
+#: ../../xffm/fm/local/rm.hh:90
+msgid "Remove"
+msgstr "Usuń"
+
+#: ../../xffm/fm/local/rm.hh:140
+msgid "Apply to all"
+msgstr "Zastosuj do wszystkich"
+
+#. **************
+#. This is now available to BSD with rm -P option
+#: ../../xffm/fm/local/rm.hh:163 ../../xffm/common/gtk.hh:76
+msgid "Shred"
+msgstr "Usuń dokładnie"
+
+#. We do not count "../"
+#: ../../xffm/fm/local/view.hh:48 ../../xffm/fm/base/monitor.hh:28
+#, c-format
+msgid "Files: %s"
+msgstr "Pliki: %s"
+
+#: ../../xffm/fm/root/model.hh:78
+msgid "Root Directory"
+msgstr "Katalog główny"
+
+#: ../../xffm/fm/root/model.hh:94
+msgid "This is the root of the filesystem"
+msgstr "To jest korzeń systemu plików (czyli katalog główny)"
+
+#: ../../xffm/fm/root/model.hh:105
+msgid "Home Directory"
+msgstr "Katalog domowy"
+
+#: ../../xffm/fm/root/model.hh:132
+msgid "Trash bin"
+msgstr "Kosz"
+
+#: ../../xffm/fm/root/model.hh:162 ../../xffm/fm/fstab/popup.hh:29
+msgid "Disk Image Mounter"
+msgstr "Montowanie obrazu dysku"
+
+#: ../../xffm/fm/root/model.hh:169 ../../xffm/fm/root/model.hh:185
+msgid "Mount local disks and devices"
+msgstr "Narzędzie montujące lokalne dyski i urządzenia"
+
+#: ../../xffm/fm/root/model.hh:170 ../../xffm/fm/fstab/popup.hh:25
+#: ../../xffm/fm/fstab/view.hh:429
+msgid "eCryptfs Volume"
+msgstr "Wolumin eCryptfs"
+
+#: ../../xffm/fm/root/model.hh:171 ../../xffm/fm/fstab/popup.hh:24
+msgid "SSHFS Remote Synchronization Folder"
+msgstr "Katalog synchronizacji zdalnej SSHFS"
+
+#: ../../xffm/fm/root/model.hh:172 ../../xffm/fm/fstab/popup.hh:23
+#: ../../xffm/fm/fstab/view.hh:377
+msgid "NFS Network Volume"
+msgstr "Wolumin sieciowy NFS"
+
+#: ../../xffm/fm/root/model.hh:173 ../../xffm/fm/fstab/popup.hh:26
+#: ../../xffm/fm/fstab/view.hh:455
+msgid "CIFS Volume"
+msgstr "Wolumin CIFS"
+
+#: ../../xffm/fm/root/model.hh:195
+msgid "Software Updater"
+msgstr "Program uaktualniający oprogramowanie"
+
+#: ../../xffm/fm/root/model.hh:218 ../../xffm/fm/root/model.hh:230
+msgid "Add or remove software installed on the system"
+msgstr "Instalowanie lub usuwanie oprogramowania zainstalowanego w systemie"
+
+#: ../../xffm/fm/root/model.hh:271
+msgid "Go to bookmarked location"
+msgstr "Przejdź do zapamiętanego położenia"
+
+#. {N_("Add bookmark"), (void *)BasePopUp<Type>::noop, NULL, NULL},
+#: ../../xffm/fm/root/view.hh:61
+msgid "Empty trash"
+msgstr "Opróżnij śmietnik"
+
+#. File chooser
+#: ../../xffm/fm/fstab/popup.hh:121
+msgid "Mount Device"
+msgstr "Zamontuj urządzenie"
+
+#: ../../xffm/fm/fstab/popup.hh:133
+msgid "Mount point:"
+msgstr "Miejsce montowania:"
+
+#: ../../xffm/fm/fstab/view.hh:301
+msgid "Mounted on:"
+msgstr "Punkt montowania:"
+
+#: ../../xffm/fm/fstab/view.hh:302
+msgid "Mount on"
+msgstr "Zamontuj w"
+
+#: ../../xffm/fm/fstab/view.hh:310 ../../xffm/fm/fstab/view.hh:312
+msgid "Not mounted"
+msgstr "Niezamontowana"
+
+#: ../../xffm/fm/fstab/view.hh:403
+msgid "SFTP (via SSH)"
+msgstr "SFTP (przez SSH)"
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, c-format
+msgid "Unmounting %s"
+msgstr "Odmontowywanie %s"
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, c-format
+msgid "Mounting %s"
+msgstr "Montowanie %s"
+
+#: ../../xffm/fm/dialog/menupopover.hh:128
+msgid "Home"
+msgstr "Folder domowy"
+
+#: ../../xffm/fm/dialog/menupopover.hh:129 ../../xffm/common/gtk.hh:64
+msgid "Open terminal"
+msgstr "Otwórz terminal"
+
+#: ../../xffm/fm/dialog/menupopover.hh:130
+msgid "Open a New Window"
+msgstr "Otwórz w nowym oknie"
+
+#. {N_("Execute Shell Command"), (void *)MenuPopoverSignals<Type>::shell, (void *) menuButton_},
+#: ../../xffm/fm/dialog/menupopover.hh:132 ../../xffm/common/gtk.hh:69
+msgid "Search"
+msgstr "Wyszukaj"
+
+#: ../../xffm/fm/dialog/menupopover.hh:133 ../../xffm/common/gtk.hh:71
+msgid "Exit"
+msgstr "Zakończ"
+
+#: ../../xffm/fm/dialog/dialog.hh:116
+msgid "Removed"
+msgstr "Usunięto"
+
+#: ../../xffm/fm/dialog/dialog.hh:132
+msgid "Detected device(s):"
+msgstr "Wykryto:"
+
+#. Create the widgets
+#: ../../xffm/fm/page/vbuttonbox.hh:37 ../../xffm/common/gtk.hh:332
+msgid "Help"
+msgstr "Pomoc"
+
+#. File chooser
+#: ../../xffm/fm/page/pathbar.hh:306 ../../xffm/fm/page/pathbar.hh:308
+msgid "Go to"
+msgstr "Przejdź do"
+
+#: ../../xffm/fm/page/pathbar.hh:331
+msgid "Not a directory"
+msgstr "To nie katalog"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Renice Process"
+msgstr "Zmień priorytet procesu"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Suspend"
+msgstr "Uśpij"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Continue"
+msgstr "Kontynuuj"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Interrupt"
+msgstr "Przerwanie"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Hangup"
+msgstr "Zawieszenie"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "User 1 (USR1)"
+msgstr "Użytkownika 1 (USR1)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "User 2 (USR2)"
+msgstr "Użytkownika 2 (USR2)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "Terminate Task"
+msgstr "Zakończ zadanie"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "Abort"
+msgstr "Przerwij"
+
+#: ../../xffm/fm/page/runbutton.hh:138
+msgid "Kill"
+msgstr "Zakończ"
+
+#: ../../xffm/fm/page/runbutton.hh:139
+msgid "Segmentation fault"
+msgstr "Błąd segmentacji"
+
+#: ../../xffm/fm/page/runbutton.hh:217
+msgid "PID"
+msgstr "PID"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:37
+msgid "Embedded Terminal"
+msgstr "Osadzony terminal"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:38
+msgid "All items in the iconview."
+msgstr "Wszystkie elementy w widoku ikon."
+
+#: ../../xffm/fm/page/hbuttonbox.hh:39
+msgid "Scripting"
+msgstr "Skrypty"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:40
+msgid "Clear Log"
+msgstr "Wyczyść dziennik"
+
+#. Status textview
+#: ../../xffm/fm/page/hbuttonbox.hh:42
+msgid "Terminal font"
+msgstr "Czcionka terminalowa"
+
+#: ../../xffm/fm/treeview.hh:17
+msgid "Name"
+msgstr "Nazwisko"
+
+#: ../../xffm/fm/treeview.hh:20
+msgid "Size"
+msgstr "rozm."
+
+#: ../../xffm/fm/treeview.hh:21
+msgid "Date"
+msgstr "Data"
+
+#: ../../xffm/fm/treeview.hh:22
+msgid "Mimetype"
+msgstr "Typ MIME"
+
+#: ../../xffm/fm/treeview.hh:24
+msgid "TYPE"
+msgstr "TYP"
+
+#: ../../xffm/fm/base/signals.hh:642
+msgid "Directory does not exist."
+msgstr "Katalog nie istnieje."
+
+#: ../../xffm/fm/base/signals.hh:644 ../../xffm/fm/base/signals.hh:646
+msgid "Trash is empty"
+msgstr "Kosz jest pusty"
+
+#: ../../xffm/common/settings.hh:27
+msgid "New File:"
+msgstr "Nowy plik:"
+
+#: ../../xffm/common/gio.hh:235
+msgid "Could not copy item:"
+msgstr "Nie udało się skopiować pozycji:"
+
+#: ../../xffm/common/gio.hh:237
+msgid "Could not move item:"
+msgstr "Nie udało się przenieść pozycji:"
+
+#: ../../xffm/common/gio.hh:239
+msgid "Create symbolic link"
+msgstr "Utwórz link symboliczny"
+
+#: ../../xffm/common/gio.hh:276
+#, c-format
+msgid ""
+"Could not delete:\n"
+"%s"
+msgstr ""
+"Nie można usunąć:\n"
+"%s"
+
+#: ../../xffm/common/gio.hh:278
+#, c-format
+msgid "Could not move %s to trash"
+msgstr "Nie można przenieść %s do kosza"
+
+#: ../../xffm/common/clipboard.hh:23 ../../xffm/common/dnd.hh:40
+msgid "Copying files locally"
+msgstr "Kopiowanie plików lokalnie"
+
+#: ../../xffm/common/clipboard.hh:30 ../../xffm/common/dnd.hh:34
+msgid "Moving files"
+msgstr "Przenoszenie plików"
+
+#: ../../xffm/common/dnd.hh:46
+msgid "Create Link"
+msgstr "Utwórz odnośnik"
+
+#: ../../xffm/common/util.hh:1200
+#, c-format
+msgid ""
+"Scriptfile \"%s\" is not executable. Please set the executable-attribute on "
+"that file."
+msgstr ""
+"Plik skryptu \"%s\" nie jest wykonywalny. Proszę ustawić atrybut "
+"wykonywalności dla tego pliku."
+
+#: ../../xffm/common/util.hh:1202 ../../xffm/common/util.hh:1237
+#, c-format
+msgid "Open with %s"
+msgstr "Otwórz z %s"
+
+#: ../../xffm/common/util.hh:1202
+msgid "Text Editor"
+msgstr "Edytor tekstu"
+
+#: ../../xffm/common/util.hh:1239 ../../xffm/common/gtk.hh:65
+msgid "Execute Shell Command"
+msgstr "Wykonaj polecenie powłoki"
+
+#: ../../xffm/common/util.hh:1243
+msgid ""
+"Console: quickly run single commands -- write a command here and press enter."
+msgstr ""
+"Konsola: szybkie uruchamianie poleceń -- wpisz tutaj polecenie i naciśnij "
+"enter."
+
+#: ../../xffm/common/gtk.hh:123
+msgid "New Tab"
+msgstr "Nowa karta"
+
+#: ../../xffm/common/gtk.hh:335
+msgid "OK"
+msgstr "DOBRZE"
+
+#: ../../xffm/common/run.hh:344
+msgid "error"
+msgstr "błąd"
+
+#: ../../xffm/common/run.hh:348
+msgid "warning"
+msgstr "ostrzeżenie"
+
+#: ../../xffm/common/mime.hh:101 ../../xffm/common/mime.hh:143
+msgid "No Read Permission"
+msgstr "Brak uprawnień do odczytu"
+
+#: ../../xffm/common/preview.hh:593
+msgid "Empty file"
+msgstr "Pusty plik"
+
+#: ../../xffm/common/preview.hh:648
+#, c-format
+msgid "Cannot read from %s"
+msgstr "Nie można czytać z %s"
+

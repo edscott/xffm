@@ -1,0 +1,26 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:42:43 CDT 2013 ---
+#
+# Jorge Becerril <jrbecster@gmail.com>, 2012.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: http://bugs.xffm.org\n"
+"icon-themekeywords=I18N+L10Ncomponent=general\n"
+"POT-Creation-Date: 2012-09-03 21:16+0000\n"
+"PO-Revision-Date: 2012-09-08 19:35+0200\n"
+"Last-Translator: Jorge Becerril <jrbecster@gmail.com>\n"
+"Language-Team: Central Nahuatl <gnome-nhn-list@gnome.org>\n"
+"Language: nhn\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "GNOME"
+msgstr "GNOME"
+
+

@@ -1,0 +1,65 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:40:10 CDT 2013 ---
+#
+# Sanjib Narzary <alayaran@gmail.com>, 2012.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: http://bugs.xffm.org\n"
+"POT-Creation-Date: 2012-04-01 14:59+0000\n"
+"PO-Revision-Date: 2012-04-29 15:33+0530\n"
+"Last-Translator: Sanjib Narzary <alayaran@gmail.com>\n"
+"Language-Team: Bodo <brx@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Name"
+msgstr "मुं"
+
+msgid "Show"
+msgstr "दिनथि"
+
+msgid "Item"
+msgstr "आइटेम"
+
+msgid "Main Menu"
+msgstr "गुदि मिनु"
+
+msgid "Change which applications are shown on the main menu"
+msgstr "बबे एपलिकेसना गुदि मिनुयाव नुजानांगैौ बेखौ सोलाइ"
+
+msgid "Revert to Original"
+msgstr "असेयाव सोलाइफिन"
+
+msgid "Restore the default menu layout"
+msgstr "डिफलट मिनु लआवटाव रिचटर खालामफिन"
+
+msgid "Menus:"
+msgstr "मिनुफोर:"
+
+msgid "Items:"
+msgstr "आइटेमच:"
+
+msgid "New Menu"
+msgstr "New मिनु"
+
+msgid "New Item"
+msgstr "New आइटेम"
+
+msgid "New Separator"
+msgstr "गोदान Separator"
+
+msgid "Move Up"
+msgstr "गाखो"
+
+msgid "Move Down"
+msgstr "गाखोखलाइ"
+
+msgid "Revert Changes?"
+msgstr "सोलाइनायखौ उलथायफिन?"
+
+

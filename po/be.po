@@ -1,0 +1,1417 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:41:20 CDT 2013 ---
+#
+# Ladyko Andrey <fylh.if@gmail.com>, 2009.
+# Yevgeny Gromov <yevgeny@tut.by>, 2003.
+# Komяpa <symbol@me.by>, 2007.
+# kom <me@komzpa.net>, 2008.
+# Ihar Hrachyshka <ihar.hrachyshka@gmail.com>, 2006-2013.
+# Darafei Praliaskoski <komzpa@gmail.com>, 2007.
+# Valek Filippov <frob@df.ru>, 1999-2009.
+# Ягор Кур'яновіч <me@sontan.name>, 2009.
+# Eugene Zelenko <greendeath@mail.ru>, 2002-2004.
+# Vital Khilko (aka dojlid) <vk@mova.org>, 2004-2005.
+# Мікалай Цэхан <tsekhan@gmail.com>, 2010.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2002-2012.
+# Pavel Piatruk <berserker@neolocation.com>, 2007.
+# Dzimitryj Turaviec <dimitriy.t@tut.by>, 2007.
+# Iryna Nikanchuk <defragbrain@gmail.com>, 2009.
+# Vital Khilko <vk@altlinux.ru>, 2002-2005.
+# Darafei Praliaskouski <komzpa@gmail.com>, 2006-2009.
+# Sviatlana Liasovich <xelj.gjkz@bk.ru>, 2011.
+# Dorofey Proleskovskiy <symbol@akeeri.tk>, 2006.
+# damavik <damaviczok@gmail.com>, 2008.
+# Anton Barycheuski <antofa1@mail.ru>, 2010.
+# Ales Nyakhaychyk <i18n@infonet.by>, 2001-2010.
+# insomnia <defragbrain@gmail.com>, 2009.
+# Mikola Tsekhan <tsekhan@gmail.com>, 2010.
+# Yury Tarasievich <yury.tarasievich@gmail.com>, 2007-2008.
+# Andrey Ladyko <fylh.if@gmail.com>, 2009.
+# Yuri Matsuk <yuri@matsuk.net>, 2011-2012.
+# Symbol <symbol@akeeri.tk>, 2006.
+# Olya Matsuk <olya@matsuk.net>, 2011-2012.
+# Mikoła Cechan <tsekhan@gmail.com>, 2010.
+# Алесь Няхайчык <nab@mail.by>, 2003.
+# Wladzimir Manulenka <vlma@tut.by>, 2010.
+# Alexander Nyakhaychyk <nyakhaychyk@gmail.com>, 2002-2010.
+# Kasia Bondarava <kasia.bondarava@gmail.com>, 2011-2012.
+# Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
+# Siarhei Liantsevich <serzh.by@gmail.com>, 2006-2008.
+# Aliaksandr Shumski <firestorm1983@mail.ru>, 2006.
+# Insomnia <defragbrain@gmail.com>, 2009.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-02 12:27-0600\n"
+"PO-Revision-Date: 2006-08-16 03:27+0300\n"
+"Last-Translator: Alexander Nyakhaychyk <nyakhaychyk@gmail.com>\n"
+"Language-Team: Belarusian <i18n@mova.org>\n"
+"Language: be\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%s0==1  n%s00!=11 ? 0 : n%s0>=2  n%s0<=4  "
+"(n%s00<10 || n%s00>=20) ? 1 : 2);\n"
+
+#: ../../xffm/completion/base.hh:28
+msgid "Command"
+msgstr "Загад"
+
+#: ../../xffm/completion/base.hh:31
+msgid "File"
+msgstr "Файл"
+
+#: ../../xffm/completion/base.hh:34
+#, fuzzy
+msgid "Command history"
+msgstr "Гісторыя запуску каманд"
+
+#. option -u uid "uid" "uid_combo"
+#: ../../xffm/completion/base.hh:37 ../../xffm/find/dialog.hh:199
+msgid "User"
+msgstr "Карыстальнік"
+
+#: ../../xffm/completion/base.hh:40
+msgid "Variable"
+msgstr "Пераменная"
+
+#: ../../xffm/completion/base.hh:43
+msgid "Host"
+msgstr "Хост"
+
+#: ../../xffm/completion/base.hh:55
+#, fuzzy
+msgid "Found no match"
+msgstr "Словы для пошуку адпаведнікаў"
+
+#: ../../xffm/completion/base.hh:133 ../../xffm/completion/base.hh:134
+msgid "Matches"
+msgstr "Адпавядае"
+
+#: ../../xffm/completion/base.hh:134
+msgid "Too many files open"
+msgstr "Надта шмат адкрытых файлаў"
+
+#: ../../xffm/completion/base.hh:325 ../../xffm/find/fgr.hh:124
+msgid "Options:"
+msgstr "Уласьцівасьці:"
+
+#: ../../xffm/completion/bash.hh:133
+#, fuzzy
+msgid "Completion mode:"
+msgstr "Дата выканання"
+
+#: ../../xffm/completion/bash.hh:134
+msgid "command"
+msgstr "загад"
+
+#: ../../xffm/completion/bash.hh:135
+msgid "file"
+msgstr "файл"
+
+#: ../../xffm/completion/bash.hh:145 ../../xffm/completion/bash.hh:149
+msgid "Options >>"
+msgstr "Параметры >>"
+
+#: ../../xffm/find/fgr.hh:124 ../../xffm/find/dialog.hh:308
+msgid "Path"
+msgstr "Шлях"
+
+#: ../../xffm/find/fgr.hh:125
+msgid "Locate documents and folders on this computer by name or content"
+msgstr "Пошук дакументаў і папак паводле назвы ці змесціва"
+
+#: ../../xffm/find/fgr.hh:126 ../../xffm/find/dialog.hh:341
+msgid "Filter:"
+msgstr "Фільтр:"
+
+#: ../../xffm/find/fgr.hh:126
+msgid "Search for files"
+msgstr "Шукаць файлы"
+
+#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
+#: ../../xffm/find/fgr.hh:128
+msgid "Contents:"
+msgstr "Змесціва:"
+
+#: ../../xffm/find/fgr.hh:128
+#, fuzzy
+msgid "File's contents filtered as plain text."
+msgstr "Захаваць файл як звычайны тэкст?"
+
+#: ../../xffm/find/fgr.hh:131
+#, fuzzy
+msgid "Verbose output debugging mode."
+msgstr "уключыць адладачны код"
+
+#: ../../xffm/find/fgr.hh:133
+msgid "Show version information"
+msgstr "Паказаць звесткі пра версію"
+
+#: ../../xffm/find/fgr.hh:135
+#, fuzzy
+msgid "Filter Details"
+msgstr "Настаўленні фільтру"
+
+#. / option -a "xdev"
+#: ../../xffm/find/fgr.hh:138 ../../xffm/find/dialog.hh:180
+#, fuzzy
+msgid "Stay on single filesystem"
+msgstr "Даследаваць файлавую сістэму"
+
+#: ../../xffm/find/fgr.hh:140
+msgid "Print..."
+msgstr "Надрукаваць..."
+
+#: ../../xffm/find/fgr.hh:140
+msgid "The unique Process ID that identifies this process."
+msgstr ""
+
+#. / option -D "recursiveH"
+#: ../../xffm/find/fgr.hh:142 ../../xffm/find/dialog.hh:177
+#, fuzzy
+msgid "Find hidden files and directories"
+msgstr "Паказваць схаваныя файлы і папкі"
+
+#: ../../xffm/find/fgr.hh:143
+msgid "Filter"
+msgstr "Фільтраваць"
+
+#: ../../xffm/find/fgr.hh:144
+msgid ""
+"To display files which pass the filter (stars and regexps will be processed)"
+msgstr ""
+
+#. / option -r "recursive"
+#: ../../xffm/find/fgr.hh:146 ../../xffm/find/dialog.hh:174
+msgid "Recursive"
+msgstr "Рэкурсыўна"
+
+#: ../../xffm/find/fgr.hh:147 ../../xffm/find/fgr.hh:148
+#: ../../xffm/find/fgr.hh:149 ../../xffm/find/fgr.hh:150
+#, fuzzy
+msgid "KByte"
+msgstr "Байт"
+
+#: ../../xffm/find/fgr.hh:148
+msgid "is greater than or equal to"
+msgstr "больш ці роўна"
+
+#: ../../xffm/find/fgr.hh:150
+msgid "is less than or equal to"
+msgstr "менш ці роўна"
+
+#: ../../xffm/find/fgr.hh:152
+msgid "Set UID"
+msgstr "Усталяваць UID"
+
+#: ../../xffm/find/fgr.hh:152
+msgid "Executable Text Files"
+msgstr "Выканальныя тэкставыя файлы"
+
+#: ../../xffm/find/fgr.hh:154
+msgid "The permissions of the file, in octal notation."
+msgstr "Дазволы на працу з файлам у васьмярковай форме."
+
+#: ../../xffm/find/fgr.hh:155
+msgid "Type"
+msgstr "Тып"
+
+#: ../../xffm/find/fgr.hh:157 ../../xffm/find/signals.hh:17
+msgid "Any"
+msgstr "Любы"
+
+#: ../../xffm/find/fgr.hh:157
+#, fuzzy
+msgid "Default type"
+msgstr "Прадвызначаны элемент"
+
+#: ../../xffm/find/fgr.hh:158 ../../xffm/common/preview.hh:497
+#, fuzzy
+msgid "Regular file"
+msgstr "звычайны файл"
+
+#: ../../xffm/find/fgr.hh:159 ../../xffm/find/signals.hh:11
+#: ../../xffm/fm/local/popup.hh:803 ../../xffm/common/preview.hh:488
+msgid "Directory"
+msgstr "Каталог"
+
+#: ../../xffm/find/fgr.hh:160 ../../xffm/find/signals.hh:12
+#: ../../xffm/common/preview.hh:494
+msgid "Symbolic Link"
+msgstr "Сімвалічная спасылка"
+
+#: ../../xffm/find/fgr.hh:161
+#, fuzzy
+msgid "UNIX Socket"
+msgstr "Схема UNIX"
+
+#: ../../xffm/find/fgr.hh:162 ../../xffm/find/signals.hh:14
+#: ../../xffm/common/preview.hh:482
+msgid "Block device"
+msgstr "Блёкавая прылада"
+
+#: ../../xffm/find/fgr.hh:163 ../../xffm/find/signals.hh:15
+#: ../../xffm/common/preview.hh:485
+msgid "Character device"
+msgstr "Знакавая прылада"
+
+#: ../../xffm/find/fgr.hh:164 ../../xffm/find/signals.hh:16
+#: ../../xffm/common/preview.hh:491
+msgid "FIFO"
+msgstr ""
+
+#. radio_p freed on destroy event for dialog_.
+#. option -k minutes "last_minutes", "last_minutes_spin"
+#: ../../xffm/find/fgr.hh:166 ../../xffm/find/fgr.hh:168
+#: ../../xffm/find/dialog.hh:221
+msgid "Minutes"
+msgstr "Хвіліны"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/dialog.hh:270 ../../xffm/find/dialog.hh:370
+#: ../../xffm/fm/treeview.hh:18
+msgid "Details"
+msgstr "Падрабязнасці"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/fgr.hh:179 ../../xffm/find/fgr.hh:180
+#: ../../xffm/find/fgr.hh:183 ../../xffm/find/fgr.hh:184
+#: ../../xffm/find/fgr.hh:187 ../../xffm/find/fgr.hh:188
+msgid "TIME"
+msgstr "TIME"
+
+#: ../../xffm/find/fgr.hh:168 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/fgr.hh:174 ../../xffm/find/fgr.hh:177
+msgid "Previous"
+msgstr "Папярэдні"
+
+#. option -h hours "last_hours", "last_hours_spin"
+#: ../../xffm/find/fgr.hh:169 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/dialog.hh:226
+msgid "Hours"
+msgstr "Гадзіны"
+
+#. option -d days "last_days", "last_days_spin"
+#: ../../xffm/find/fgr.hh:172 ../../xffm/find/fgr.hh:174
+#: ../../xffm/find/dialog.hh:231
+msgid "Days"
+msgstr "Дзён"
+
+#: ../../xffm/find/fgr.hh:175
+msgid "Month"
+msgstr "Месяц"
+
+#: ../../xffm/find/fgr.hh:177
+#, fuzzy
+msgid "Month(s)"
+msgstr "месяц(ы)"
+
+#: ../../xffm/find/fgr.hh:180
+#, fuzzy
+msgid "Modification Time :"
+msgstr "Час апошняй зьмены"
+
+#: ../../xffm/find/fgr.hh:184
+#, fuzzy
+msgid "Access Time :"
+msgstr "Час доступу"
+
+#: ../../xffm/find/fgr.hh:188
+#, fuzzy
+msgid "Creation Time :"
+msgstr "Час стварэньня"
+
+#: ../../xffm/find/fgr.hh:191 ../../xffm/find/fgr.hh:192
+#, fuzzy
+msgid "uid"
+msgstr "Кіраваць"
+
+#: ../../xffm/find/fgr.hh:192
+msgid "User:"
+msgstr "Карыстальнік:"
+
+#: ../../xffm/find/fgr.hh:194 ../../xffm/find/fgr.hh:195
+#, fuzzy
+msgid "gid"
+msgstr "id="
+
+#: ../../xffm/find/fgr.hh:195
+msgid "Group:"
+msgstr "Група:"
+
+#: ../../xffm/find/fgr.hh:198
+msgid ""
+"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+"character that  normally  follows  a file  name"
+msgstr ""
+
+#: ../../xffm/find/fgr.hh:200
+msgid "Content View"
+msgstr "Прагляд змесціва"
+
+#: ../../xffm/find/fgr.hh:201 ../../xffm/find/fgr.hh:202
+#: ../../xffm/find/fgr.hh:203 ../../xffm/find/fgr.hh:204
+msgid "STRING"
+msgstr "ВЫРАЗ"
+
+#: ../../xffm/find/fgr.hh:202 ../../xffm/find/fgr.hh:204
+#: ../../xffm/fm/local/popup.hh:563
+msgid "Regular expression"
+msgstr "Рэгулярны выраз"
+
+#: ../../xffm/find/fgr.hh:204
+msgid "Extended"
+msgstr "Пашыраны"
+
+#: ../../xffm/find/fgr.hh:206
+msgid "Ignore case"
+msgstr "Ігнараваць рэгістр літар"
+
+#: ../../xffm/find/fgr.hh:208
+msgid "Text Files"
+msgstr "Тэкставыя файлы"
+
+#: ../../xffm/find/fgr.hh:210 ../../xffm/find/dialog.hh:552
+msgid "No match"
+msgstr "Нічога не знойдзена"
+
+#: ../../xffm/find/fgr.hh:212 ../../xffm/find/dialog.hh:470
+msgid "Line Count"
+msgstr "Колькасць радкоў"
+
+#: ../../xffm/find/fgr.hh:214
+msgid "Words"
+msgstr "Слоў"
+
+#: ../../xffm/find/fgr.hh:216
+msgid "Lines"
+msgstr "Рысы"
+
+#: ../../xffm/find/fgr.hh:368
+#, fuzzy, c-format
+msgid "Usage : %s [OPTIONS]\n"
+msgstr "Выкарыстаньне: %s [ПАРАМЭТАР]\n"
+
+#: ../../xffm/find/signals.hh:10
+msgid "Regular"
+msgstr "Звычайная"
+
+#: ../../xffm/find/signals.hh:13 ../../xffm/common/preview.hh:500
+msgid "Socket"
+msgstr "Гняздо"
+
+#: ../../xffm/find/signals.hh:209
+msgid "Select folder to search in"
+msgstr "Выберыце папку для пошуку"
+
+#. button no
+#: ../../xffm/find/signals.hh:265 ../../xffm/find/dialog.hh:584
+#: ../../xffm/response/entryfileresponse.hh:18
+#: ../../xffm/response/entryresponse.hh:305
+#: ../../xffm/response/passwdresponse.hh:558
+#: ../../xffm/fm/local/properties.hh:304 ../../xffm/fm/local/rm.hh:155
+msgid "Cancel"
+msgstr "Скасаваць"
+
+#: ../../xffm/find/signals.hh:293 ../../xffm/find/signals.hh:722
+#, fuzzy
+msgid "No editor for current action."
+msgstr "Няма бягучых дзеянняў."
+
+#. / option "upper_limit_spin" (only in gtk dialog_)
+#: ../../xffm/find/signals.hh:351 ../../xffm/find/dialog.hh:183
+msgid "Results"
+msgstr "Результаты"
+
+#: ../../xffm/find/signals.hh:351
+msgid "Upper limit:"
+msgstr "Верхняя мяжа:"
+
+#: ../../xffm/find/signals.hh:353
+#, fuzzy
+msgid "Counting files..."
+msgstr "Закрыццё файла..."
+
+#: ../../xffm/find/signals.hh:368
+#, fuzzy, c-format
+msgid "Found %d match"
+msgid_plural "Found %d matches"
+msgstr[0] "Словы для пошуку адпаведнікаў"
+msgstr[1] "Словы для пошуку адпаведнікаў"
+
+#: ../../xffm/find/signals.hh:370
+#, fuzzy, c-format
+msgid "%s Finished : %s"
+msgstr "Скончаныя заданні"
+
+#: ../../xffm/find/signals.hh:488 ../../xffm/find/signals.hh:490
+msgid "Searching..."
+msgstr "Пошук..."
+
+#. g_object_set_data(G_OBJECT(dialog_), "window", dialog_);
+#: ../../xffm/find/dialog.hh:98 ../../xffm/find/dialog.hh:150
+#: ../../xffm/find/dialog.hh:611
+msgid "Find"
+msgstr "Шукаць"
+
+#: ../../xffm/find/dialog.hh:183
+#, fuzzy
+msgid "Upper limit"
+msgstr "Верхняя мяжа:"
+
+#. option -s +KByte "size_greater", "size_greater_spin"
+#: ../../xffm/find/dialog.hh:188
+msgid "At Least"
+msgstr "Не менш"
+
+#: ../../xffm/find/dialog.hh:188 ../../xffm/find/dialog.hh:193
+msgid "kBytes"
+msgstr "кб"
+
+#. option -s -KByte "size_smaller", "size_smaller_spin"
+#: ../../xffm/find/dialog.hh:193
+msgid "At Most"
+msgstr "Не больш"
+
+#: ../../xffm/find/dialog.hh:204
+msgid "Group"
+msgstr "Згрупаваць"
+
+#. option -o octal "octal_p" "permissions_entry"
+#: ../../xffm/find/dialog.hh:208
+msgid "Octal Permissions"
+msgstr "Дазволы ў васьмярковай форме"
+
+#. option -p suid | exe
+#: ../../xffm/find/dialog.hh:213
+msgid "SUID"
+msgstr ""
+
+#: ../../xffm/find/dialog.hh:213 ../../xffm/fm/local/popup.hh:843
+#, fuzzy
+msgid "Executable"
+msgstr "Выканальны файл:"
+
+#. option -m months "last_months", "last_months_spin"
+#: ../../xffm/find/dialog.hh:237
+#, fuzzy
+msgid "Months"
+msgstr "Месяц"
+
+#: ../../xffm/find/dialog.hh:248
+#, fuzzy
+msgid "File type : "
+msgstr "Тып файла:"
+
+#. gtk_widget_show (GTK_WIDGET(right_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(center_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(left_options_vbox));
+#: ../../xffm/find/dialog.hh:262 ../../xffm/find/dialog.hh:602
+#: ../../xffm/fm/page/page.hh:70 ../../xffm/common/gtk.hh:70
+msgid "Close"
+msgstr "Закрыць"
+
+#. gtk_box_pack_start (vbox7a, GTK_WIDGET(advancedBox), TRUE, FALSE, 5);
+#. gtk_widget_show(GTK_WIDGET(advancedBox));
+#. //////////////  grep options.... /////////////////////////
+#: ../../xffm/find/dialog.hh:384
+msgid "Contains"
+msgstr "Змяшчае"
+
+#: ../../xffm/find/dialog.hh:404
+msgid "Contains the text"
+msgstr "Змяшчае тэкст"
+
+#: ../../xffm/find/dialog.hh:437
+msgid "Case Sensitive"
+msgstr "Улічваць рэгістр літар"
+
+#: ../../xffm/find/dialog.hh:449
+#, fuzzy
+msgid "Extended regexp"
+msgstr "Пашыраная выразка"
+
+#: ../../xffm/find/dialog.hh:460
+msgid "Include binary files"
+msgstr "Дазволіць пошук двайковых файлаў"
+
+#: ../../xffm/find/dialog.hh:496
+msgid "Match"
+msgstr "Параўнаць"
+
+#: ../../xffm/find/dialog.hh:508
+msgid "Anywhere"
+msgstr "Дзе заўгодна"
+
+#: ../../xffm/find/dialog.hh:523
+msgid "Whole words only"
+msgstr "Толькі асобныя словы"
+
+#: ../../xffm/find/dialog.hh:538
+msgid "lines"
+msgstr "радкоў"
+
+#: ../../xffm/find/dialog.hh:594
+msgid "Clear"
+msgstr "Ачысьціць"
+
+#: ../../xffm/find/dialog.hh:636
+msgid "Edit"
+msgstr "Рэдагаваньне"
+
+#: ../../xffm/find/dialog.hh:751 ../../xffm/find/dialog.hh:766
+#: ../../xffm/common/util.hh:1150 ../../xffm/common/util.hh:1152
+#: ../../xffm/common/util.hh:1158 ../../xffm/common/util.hh:1160
+#: ../../xffm/common/preview.hh:479
+msgid "unknown"
+msgstr "невядома"
+
+#: ../../xffm/find/dialog.hh:780
+msgid "Modified"
+msgstr "Зменены"
+
+#: ../../xffm/find/dialog.hh:784
+msgid "Created"
+msgstr "Створана"
+
+#: ../../xffm/find/dialog.hh:788
+#, fuzzy
+msgid "Accessed"
+msgstr "Час апошняга доступу:"
+
+#: ../../xffm/find/dialog.hh:1106
+msgid ""
+"Basic rules:\n"
+"\n"
+"*  Will match any character zero or more times.\n"
+"?  Will match any character exactly one time\n"
+"[] Match any character within the [] \n"
+"^  Match at beginning of string\n"
+"$  Match at end of string \n"
+msgstr ""
+
+#: ../../xffm/find/dialog.hh:1115
+msgid ""
+"Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"In  basic regular expressions the metacharacters ?, +, {, |, (, and ) \n"
+"  lose their special meaning.\n"
+"\n"
+"The  period . matches  any  single  character.\n"
+"The caret ^ matches at the start of line.\n"
+"The dollar $ matches at the end of line.\n"
+"\n"
+"Characters within [ ] matches any single character in the list.\n"
+"Characters within [^ ] matches any single character *not* in the list.\n"
+"Characters inside [ - ] matches a range of characters (ie [0-9] or [a-z]).\n"
+"\n"
+"A regular expression may be followed by one of several repetition "
+"operators:\n"
+"?      The preceding item is optional and matched\n"
+"       at most once.\n"
+"*      The preceding item will be matched zero\n"
+"       or more times.\n"
+"+      The preceding item will be matched one or\n"
+"       more times.\n"
+"{n}    The preceding item is matched exactly n times.\n"
+"{n,}   The preceding item is matched n or more times.\n"
+"{n,m}  The preceding item is matched at least n times,\n"
+"       but not more than m times.\n"
+"\n"
+"To match any reserved character, precede it with \\. \n"
+"\n"
+"Two regular expressions may be joined by the logical or operator |.\n"
+"Two regular expressions may be concatenated.\n"
+"\n"
+"More information is available by typing \"man grep\"\n"
+msgstr ""
+
+#: ../../xffm/response/entryfileresponse.hh:20
+msgid "Open"
+msgstr "Адкрыць"
+
+#: ../../xffm/response/entryresponse.hh:29
+#: ../../xffm/response/entryfolderresponse.hh:28
+#, fuzzy
+msgid "Choose directory"
+msgstr "Хатні каталёг:"
+
+#. this button is redundant since hands are on keyboard for password
+#: ../../xffm/response/entryresponse.hh:309
+#: ../../xffm/response/passwdresponse.hh:189
+#: ../../xffm/response/passwdresponse.hh:559
+msgid "Ok"
+msgstr "Добра"
+
+#: ../../xffm/response/commandprogressresponse.hh:32
+msgid "Items:"
+msgstr "Элемэнты:"
+
+#: ../../xffm/response/passwdresponse.hh:21
+msgid "Enter password"
+msgstr "Увод пароля"
+
+#. gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+#: ../../xffm/response/passwdresponse.hh:125
+#, fuzzy
+msgid "User Input"
+msgstr "Увод мышшу"
+
+#: ../../xffm/response/passwdresponse.hh:142
+#, fuzzy
+msgid "Response Requested"
+msgstr "Запытаны адказ"
+
+#: ../../xffm/response/passwdresponse.hh:264
+msgid "Preparing"
+msgstr "Падрыхтоўка"
+
+#: ../../xffm/response/passwdresponse.hh:352
+msgid "sudo"
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:354
+msgid "Command:"
+msgstr "Загад:"
+
+#: ../../xffm/response/passwdresponse.hh:357
+msgid "Permission denied"
+msgstr "Адмоўлена ў дазволе"
+
+#: ../../xffm/response/passwdresponse.hh:358
+msgid "Try to approach a problem from different angles."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:359
+msgid "Do you want to retry?"
+msgstr "Ці вы хочаце паўтарыць?"
+
+#: ../../xffm/response/passwdresponse.hh:360
+msgid "Alternate:"
+msgstr "Дадатковы:"
+
+#: ../../xffm/response/passwdresponse.hh:365
+msgid "No"
+msgstr "Не"
+
+#: ../../xffm/response/passwdresponse.hh:401
+msgid "Install"
+msgstr "Устанавіць"
+
+#: ../../xffm/response/passwdresponse.hh:402
+#, fuzzy, c-format
+msgid "%s does not exist."
+msgstr "%s не існуe"
+
+#: ../../xffm/response/passwdresponse.hh:467
+#, fuzzy
+msgid "Blowfish"
+msgstr "Sawfish"
+
+#: ../../xffm/response/passwdresponse.hh:468
+#, fuzzy
+msgid "Encryption Key Approval"
+msgstr "Аплет шыфравання"
+
+#: ../../xffm/response/passwdresponse.hh:502
+msgid "-o     print output to standard out. Implies -r."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:506
+msgid "-c     DO NOT compress files before encryption."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:510
+msgid "-r     DO NOT remove input files after processing"
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:517
+#, fuzzy
+msgid "Encryption key: "
+msgstr "Ключ шыфравання:"
+
+#: ../../xffm/response/passwdresponse.hh:529
+msgid "Confirm:"
+msgstr "Пацьверджаньне:"
+
+#: ../../xffm/response/passwdresponse.hh:542
+msgid "Sorry, passwords do not match"
+msgstr "Паролі адрозніваюцца"
+
+#: ../../xffm/response/passwdresponse.hh:550
+#, fuzzy
+msgid "Minimum length:"
+msgstr "Найменшае значэнне:"
+
+#: ../../xffm/response/timeoutresponse.hh:56
+msgid "Dismiss"
+msgstr "Адмяніць"
+
+#: ../../xffm/response/commandresponse.hh:23
+msgid "Running"
+msgstr "Запушчаны"
+
+#. auto text = g_strdup_printf("%s (pid: %d)",
+#. _("Waiting for operation to finish..."),
+#. Tubo<Type>::getChild (pid));
+#: ../../xffm/response/commandresponse.hh:28
+#, fuzzy
+msgid "Waiting for operation to finish..."
+msgstr "Чаканне ідэнтыфікацыі..."
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Documents"
+msgstr "Дакумэнты"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Downloads"
+msgstr "Сцягнутыя файлы"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Music"
+msgstr "Музыка"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Pictures"
+msgstr "Выявы"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Templates"
+msgstr "Шаблоны"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Videos"
+msgstr "Відэа"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Desktop"
+msgstr "Стол"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Bookmarks"
+msgstr "Закладкі"
+
+#: ../../xffm/fm/local/icons.hh:259 ../../xffm/fm/local/rm.hh:181
+msgid "Trash"
+msgstr "У сметніцу"
+
+#: ../../xffm/fm/local/popup.hh:60
+msgid "New"
+msgstr "Новы"
+
+#. deprecated {N_("Open in New Tab"), NULL, NULL, NULL},
+#. deprecated {N_("Open in New Window"), NULL, NULL, NULL},
+#. common buttons /(also an iconsize +/- button)
+#: ../../xffm/fm/local/popup.hh:64 ../../xffm/fm/local/popup.hh:104
+#: ../../xffm/common/gtk.hh:74
+msgid "Copy"
+msgstr "Скапіраваць"
+
+#: ../../xffm/fm/local/popup.hh:65 ../../xffm/fm/local/popup.hh:105
+#: ../../xffm/common/gtk.hh:73
+msgid "Cut"
+msgstr "Выразаць"
+
+#: ../../xffm/fm/local/popup.hh:66 ../../xffm/fm/local/popup.hh:106
+#: ../../xffm/common/gtk.hh:66
+msgid "Paste"
+msgstr "Уставіць"
+
+#. **************
+#: ../../xffm/fm/local/popup.hh:67 ../../xffm/fm/local/popup.hh:107
+#: ../../xffm/fm/local/rm.hh:174 ../../xffm/common/gtk.hh:75
+msgid "Delete"
+msgstr "Выдаліць"
+
+#. {N_("About"), NULL, (void *) menu},
+#.
+#. only for listview: {N_("Sort by size"), NULL, (void *) menu},
+#. only for listview: {N_("Sort by date"), NULL, (void *) menu},
+#: ../../xffm/fm/local/popup.hh:73
+msgid "Select All"
+msgstr "Вылучыць усё"
+
+#: ../../xffm/fm/local/popup.hh:74 ../../xffm/fm/local/popup.hh:559
+#, fuzzy
+msgid "Match regular expression"
+msgstr "Параўноўваць з рэгулярным выразам"
+
+#: ../../xffm/fm/local/popup.hh:75 ../../xffm/fm/root/view.hh:58
+#: ../../xffm/fm/fstab/popup.hh:21
+msgid "View as list"
+msgstr "Паказваць сьпісам"
+
+#: ../../xffm/fm/local/popup.hh:77
+msgid "Show hidden files"
+msgstr "Паказываць схаваныя файлы"
+
+#: ../../xffm/fm/local/popup.hh:79
+#, fuzzy
+msgid "Show Backup Files"
+msgstr "Файл рэзэрвовае копіі"
+
+#: ../../xffm/fm/local/popup.hh:81
+#, fuzzy
+msgid "Sort data in descending order"
+msgstr "ад большага да меншага"
+
+#: ../../xffm/fm/local/popup.hh:93 ../../xffm/fm/local/popup.hh:119
+#: ../../xffm/fm/local/popup.hh:1006 ../../xffm/fm/local/popup.hh:1013
+#: ../../xffm/fm/local/popup.hh:1022 ../../xffm/fm/local/popup.hh:1029
+#: ../../xffm/common/gtk.hh:72
+msgid "Open with"
+msgstr "Адкрыць з дапамогай"
+
+#: ../../xffm/fm/local/popup.hh:94 ../../xffm/fm/local/popup.hh:846
+#, fuzzy
+msgid "Run Executable..."
+msgstr "Запусьціць выкананьне"
+
+#: ../../xffm/fm/local/popup.hh:95
+msgid "Extract files from the archive"
+msgstr "Выняць файлы з архіва"
+
+#. g_hash_table_insert(iconname_hash, "bcrypt", (void *)"emblem-keyhole");
+#: ../../xffm/fm/local/popup.hh:96 ../../xffm/fm/root/view.hh:73
+#: ../../xffm/fm/fstab/popup.hh:20 ../../xffm/fm/dialog/notebook.hh:52
+#: ../../xffm/common/gtk.hh:78
+msgid "Open in New Tab"
+msgstr "Адкрыць у новай картцы"
+
+#. File chooser
+#: ../../xffm/fm/local/popup.hh:97 ../../xffm/fm/local/popup.hh:706
+msgid "Create a compressed archive with the selected objects"
+msgstr "Стварыць сціснуты архіў для вылучаных аб'ектаў"
+
+#: ../../xffm/fm/local/popup.hh:98 ../../xffm/fm/fstab/popup.hh:37
+msgid "Mount the volume associated with this folder"
+msgstr "Прымацаваць дыскавы том, які змяшчае гэтую папку"
+
+#: ../../xffm/fm/local/popup.hh:99 ../../xffm/fm/fstab/popup.hh:38
+msgid "Unmount the volume associated with this folder"
+msgstr "Адмацаваць дыскавы том, які змяшчае гэтую папку"
+
+#: ../../xffm/fm/local/popup.hh:100 ../../xffm/common/gtk.hh:67
+#, fuzzy
+msgid "Add bookmark"
+msgstr "Дадаць закладку."
+
+#: ../../xffm/fm/local/popup.hh:101 ../../xffm/fm/root/view.hh:74
+#: ../../xffm/common/gtk.hh:68
+msgid "Remove bookmark"
+msgstr "Выдаліць закладку"
+
+#: ../../xffm/fm/local/popup.hh:108 ../../xffm/fm/local/popup.hh:961
+msgid "Rename"
+msgstr "Пераназваць"
+
+#: ../../xffm/fm/local/popup.hh:109 ../../xffm/fm/local/popup.hh:947
+msgid "Duplicate"
+msgstr "Выдаліць"
+
+#: ../../xffm/fm/local/popup.hh:110 ../../xffm/fm/local/popup.hh:933
+msgid "Link"
+msgstr "Спасылка"
+
+#: ../../xffm/fm/local/popup.hh:111
+msgid "Properties"
+msgstr "Уласцівасці"
+
+#: ../../xffm/fm/local/popup.hh:414
+msgid "Files:"
+msgstr "Файлы:"
+
+#: ../../xffm/fm/local/popup.hh:417 ../../xffm/fm/local/rm.hh:61
+#, fuzzy
+msgid "Multiple selections"
+msgstr "Вызначана некалькі месцазнаходжанняў"
+
+#: ../../xffm/fm/local/popup.hh:557
+#, fuzzy
+msgid "Select items"
+msgstr "Выбар файлаў"
+
+#: ../../xffm/fm/local/popup.hh:575
+#, fuzzy
+msgid "Regular Expression syntax is incorrect"
+msgstr "Пусты рэгулярны выраз."
+
+#: ../../xffm/fm/local/popup.hh:592
+msgid "No selection"
+msgstr "Няма вылучэньня"
+
+#: ../../xffm/fm/local/popup.hh:592
+#, fuzzy
+msgid "No matches."
+msgstr "Няма адпаведнікаў"
+
+#. entryResponse->setCheckButton(_("Run in Terminal"));
+#. entryResponse->setCheckButton(Mime<Type>::runInTerminal(path));
+#: ../../xffm/fm/local/popup.hh:721 ../../xffm/fm/page/pathbar.hh:313
+msgid "Specify Output Directory..."
+msgstr "Задайце тэчку для вынікаў..."
+
+#: ../../xffm/fm/local/popup.hh:799
+#, fuzzy
+msgid "Create new..."
+msgstr "Стварыць..."
+
+#: ../../xffm/fm/local/popup.hh:806 ../../xffm/fm/local/popup.hh:886
+#, fuzzy
+msgid "New Name:"
+msgstr "Новая назва"
+
+#: ../../xffm/fm/local/popup.hh:815
+msgid "No name"
+msgstr "Без назвы"
+
+#: ../../xffm/fm/local/popup.hh:828
+#, c-format
+msgid "Another file with the same name already exists in “%s”."
+msgstr "Іншы файл з такой самай назвай ужо існуе ў \"%s\"."
+
+#: ../../xffm/fm/local/popup.hh:850 ../../xffm/fm/local/popup.hh:1010
+#: ../../xffm/fm/local/popup.hh:1026 ../../xffm/common/util.hh:1248
+msgid "Run in Terminal"
+msgstr "Запусціць у тэрмінале"
+
+#: ../../xffm/fm/local/popup.hh:853
+msgid "Arguments for the Command"
+msgstr "Аргументы да загаду"
+
+#: ../../xffm/fm/local/popup.hh:1047 ../../xffm/fm/local/view.hh:141
+#, fuzzy
+msgid "Invalid entry"
+msgstr "Недапушчальны запіс"
+
+#: ../../xffm/fm/local/properties.hh:235
+#, fuzzy
+msgid "Properties and Attributes"
+msgstr "Захоўваць усе атрыбуты"
+
+#: ../../xffm/fm/local/properties.hh:264
+#, fuzzy
+msgid "File Mode:"
+msgstr "Бачны як:"
+
+#: ../../xffm/fm/local/properties.hh:290
+msgid "File:"
+msgstr "Файл:"
+
+#. Add file info stuff
+#. set info stuff data according to combo box
+#. add signal handler to changed signal for combo box
+#. Add process buttons
+#.
+#: ../../xffm/fm/local/properties.hh:302
+msgid "Apply changes"
+msgstr "Ужыць змены"
+
+#: ../../xffm/fm/local/properties.hh:462
+#, fuzzy
+msgid "Successfully moved to trash."
+msgstr "Пасьпяхова выдалены(а) %s\n"
+
+#: ../../xffm/fm/local/properties.hh:463
+msgid "Source:"
+msgstr "Крыніца:"
+
+#: ../../xffm/fm/local/rm.hh:59
+#, c-format
+msgid "Delete %s"
+msgstr "Выдаліць %s"
+
+#: ../../xffm/fm/local/rm.hh:61
+msgid "Warning: "
+msgstr "Увага: "
+
+#. gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
+#. title
+#: ../../xffm/fm/local/rm.hh:90
+msgid "Remove"
+msgstr "Выдаліць"
+
+#: ../../xffm/fm/local/rm.hh:140
+#, fuzzy
+msgid "Apply to all"
+msgstr "Адказаць усім:"
+
+#. **************
+#. This is now available to BSD with rm -P option
+#: ../../xffm/fm/local/rm.hh:163 ../../xffm/common/gtk.hh:76
+#, fuzzy
+msgid "Shred"
+msgstr "Знішчыць файлы"
+
+#. We do not count "../"
+#: ../../xffm/fm/local/view.hh:48 ../../xffm/fm/base/monitor.hh:28
+#, fuzzy, c-format
+msgid "Files: %s"
+msgstr "Файл: %s"
+
+#: ../../xffm/fm/root/model.hh:78
+#, fuzzy
+msgid "Root Directory"
+msgstr "Spool-каталог:"
+
+#: ../../xffm/fm/root/model.hh:94
+msgid "This is the root of the filesystem"
+msgstr "Гэта пачатак файлавай сістэмы"
+
+#: ../../xffm/fm/root/model.hh:105
+#, fuzzy
+msgid "Home Directory"
+msgstr "Хатні каталёг:"
+
+#: ../../xffm/fm/root/model.hh:132
+#, fuzzy
+msgid "Trash bin"
+msgstr "Перамяшчэнне ў сметніцу"
+
+#: ../../xffm/fm/root/model.hh:162 ../../xffm/fm/fstab/popup.hh:29
+msgid "Disk Image Mounter"
+msgstr "Памочнік мацавання вобразаў дыскаў"
+
+#: ../../xffm/fm/root/model.hh:169 ../../xffm/fm/root/model.hh:185
+msgid "Mount local disks and devices"
+msgstr "Прымацоўвае мясцовыя дыскі і прылады"
+
+#: ../../xffm/fm/root/model.hh:170 ../../xffm/fm/fstab/popup.hh:25
+#: ../../xffm/fm/fstab/view.hh:429
+#, fuzzy
+msgid "eCryptfs Volume"
+msgstr "Падзел памяці"
+
+#: ../../xffm/fm/root/model.hh:171 ../../xffm/fm/fstab/popup.hh:24
+msgid "SSHFS Remote Synchronization Folder"
+msgstr "Папка аддаленай сінхранізацыі SSHFS"
+
+#: ../../xffm/fm/root/model.hh:172 ../../xffm/fm/fstab/popup.hh:23
+#: ../../xffm/fm/fstab/view.hh:377
+msgid "NFS Network Volume"
+msgstr "Сеткавы падзел NFS"
+
+#: ../../xffm/fm/root/model.hh:173 ../../xffm/fm/fstab/popup.hh:26
+#: ../../xffm/fm/fstab/view.hh:455
+msgid "CIFS Volume"
+msgstr "Падзел CIFS"
+
+#: ../../xffm/fm/root/model.hh:195
+#, fuzzy
+msgid "Software Updater"
+msgstr "Абнаўленне апраграмавання"
+
+#: ../../xffm/fm/root/model.hh:218 ../../xffm/fm/root/model.hh:230
+msgid "Add or remove software installed on the system"
+msgstr "Дадаць ці выдаліць апраграмаванне, усталяванае ў сістэме"
+
+#: ../../xffm/fm/root/model.hh:271
+#, fuzzy
+msgid "Go to bookmarked location"
+msgstr "Перайсці да месцазнаходжання наступнай закладкі."
+
+#. {N_("Add bookmark"), (void *)BasePopUp<Type>::noop, NULL, NULL},
+#: ../../xffm/fm/root/view.hh:61
+#, fuzzy
+msgid "Empty trash"
+msgstr "Спустошыць сметніцу"
+
+#. File chooser
+#: ../../xffm/fm/fstab/popup.hh:121
+#, fuzzy
+msgid "Mount Device"
+msgstr "Кіруючая прылада"
+
+#: ../../xffm/fm/fstab/popup.hh:133
+msgid "Mount point:"
+msgstr "Пункт мацавання:"
+
+#: ../../xffm/fm/fstab/view.hh:301
+msgid "Mounted on:"
+msgstr "Прымацаваны:"
+
+#: ../../xffm/fm/fstab/view.hh:302
+#, fuzzy
+msgid "Mount on"
+msgstr "Пункт мантаваньня"
+
+#: ../../xffm/fm/fstab/view.hh:310 ../../xffm/fm/fstab/view.hh:312
+#, fuzzy
+msgid "Not mounted"
+msgstr "Не прымацавана"
+
+#: ../../xffm/fm/fstab/view.hh:403
+msgid "SFTP (via SSH)"
+msgstr ""
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, fuzzy, c-format
+msgid "Unmounting %s"
+msgstr "Адмацаванне"
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, fuzzy, c-format
+msgid "Mounting %s"
+msgstr "Прымацаванне"
+
+#: ../../xffm/fm/dialog/menupopover.hh:128
+msgid "Home"
+msgstr "Дадому"
+
+#: ../../xffm/fm/dialog/menupopover.hh:129 ../../xffm/common/gtk.hh:64
+#, fuzzy
+msgid "Open terminal"
+msgstr "Адкрыць тэрмінал"
+
+#: ../../xffm/fm/dialog/menupopover.hh:130
+msgid "Open a New Window"
+msgstr "Адкрыць у новым акне"
+
+#. {N_("Execute Shell Command"), (void *)MenuPopoverSignals<Type>::shell, (void *) menuButton_},
+#: ../../xffm/fm/dialog/menupopover.hh:132 ../../xffm/common/gtk.hh:69
+msgid "Search"
+msgstr "Пошук"
+
+#: ../../xffm/fm/dialog/menupopover.hh:133 ../../xffm/common/gtk.hh:71
+msgid "Exit"
+msgstr "Выйсці"
+
+#: ../../xffm/fm/dialog/dialog.hh:116
+msgid "Removed"
+msgstr "Выдалены"
+
+#: ../../xffm/fm/dialog/dialog.hh:132
+#, fuzzy
+msgid "Detected device(s):"
+msgstr "Абраць прыстасаванне"
+
+#. Create the widgets
+#: ../../xffm/fm/page/vbuttonbox.hh:37 ../../xffm/common/gtk.hh:332
+msgid "Help"
+msgstr "Дапамога"
+
+#. File chooser
+#: ../../xffm/fm/page/pathbar.hh:306 ../../xffm/fm/page/pathbar.hh:308
+#, fuzzy
+msgid "Go to"
+msgstr "Ісці да гэтага"
+
+#: ../../xffm/fm/page/pathbar.hh:331
+msgid "Not a directory"
+msgstr "Не каталёг"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Renice Process"
+msgstr "Змяніць прыярытэт працэсу"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Suspend"
+msgstr "Прыпыніць"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Continue"
+msgstr "Працягнуць"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Interrupt"
+msgstr "Перарваць"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Hangup"
+msgstr "Абрыў сувязі (HUP)"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+#, fuzzy
+msgid "User 1 (USR1)"
+msgstr "Карыстальнікі (6)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+#, fuzzy
+msgid "User 2 (USR2)"
+msgstr "Карыстальнікі (6)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+#, fuzzy
+msgid "Terminate Task"
+msgstr "Забіць"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "Abort"
+msgstr "Перарванне (ABRT)"
+
+#: ../../xffm/fm/page/runbutton.hh:138
+msgid "Kill"
+msgstr "Забойства (KILL)"
+
+#: ../../xffm/fm/page/runbutton.hh:139
+#, fuzzy
+msgid "Segmentation fault"
+msgstr "Парушэнне сегментацыі (SEGV)"
+
+#: ../../xffm/fm/page/runbutton.hh:217
+msgid "PID"
+msgstr "PID"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:37
+msgid "Embedded Terminal"
+msgstr "Убудаваны тэрмінал"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:38
+#, fuzzy
+msgid "All items in the iconview."
+msgstr "Вылучыць усе элементы ў гэтым акне"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:39
+#, fuzzy
+msgid "Scripting"
+msgstr "Пісьмо"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:40
+#, fuzzy
+msgid "Clear Log"
+msgstr "Ачысціць спіс"
+
+#. Status textview
+#: ../../xffm/fm/page/hbuttonbox.hh:42
+msgid "Terminal font"
+msgstr "Шрыфт тэрмінала"
+
+#: ../../xffm/fm/treeview.hh:17
+msgid "Name"
+msgstr "Назва"
+
+#: ../../xffm/fm/treeview.hh:20
+msgid "Size"
+msgstr "Памер"
+
+#: ../../xffm/fm/treeview.hh:21
+msgid "Date"
+msgstr "Дата"
+
+#: ../../xffm/fm/treeview.hh:22
+msgid "Mimetype"
+msgstr "Тып MIME"
+
+#: ../../xffm/fm/treeview.hh:24
+msgid "TYPE"
+msgstr "ТЫП"
+
+#: ../../xffm/fm/base/signals.hh:642
+msgid "Directory does not exist."
+msgstr "Тэчка не існуе."
+
+#: ../../xffm/fm/base/signals.hh:644 ../../xffm/fm/base/signals.hh:646
+#, fuzzy
+msgid "Trash is empty"
+msgstr "Батарэя планшэта пустая"
+
+#: ../../xffm/common/settings.hh:27
+#, fuzzy
+msgid "New File:"
+msgstr "Новы файл"
+
+#: ../../xffm/common/gio.hh:235
+#, fuzzy
+msgid "Could not copy item:"
+msgstr "Не ўдалося выдаліць элемент"
+
+#: ../../xffm/common/gio.hh:237
+#, fuzzy
+msgid "Could not move item:"
+msgstr "Не ўдалося выдаліць элемент"
+
+#: ../../xffm/common/gio.hh:239
+#, fuzzy
+msgid "Create symbolic link"
+msgstr "Замяняць сімвальныя спасылкі"
+
+#: ../../xffm/common/gio.hh:276
+#, c-format
+msgid ""
+"Could not delete:\n"
+"%s"
+msgstr ""
+"Немагчыма выдаліць:\n"
+"%s"
+
+#: ../../xffm/common/gio.hh:278
+#, c-format
+msgid "Could not move %s to trash"
+msgstr "Не ўдалося выкінуць %s у сметніцу"
+
+#: ../../xffm/common/clipboard.hh:23 ../../xffm/common/dnd.hh:40
+msgid "Copying files locally"
+msgstr "Капіраванне файлаў на гэты камп'ютар"
+
+#: ../../xffm/common/clipboard.hh:30 ../../xffm/common/dnd.hh:34
+#, fuzzy
+msgid "Moving files"
+msgstr "Перамяшчэнне файлаў"
+
+#: ../../xffm/common/dnd.hh:46
+#, fuzzy
+msgid "Create Link"
+msgstr "Стварыць лучыва"
+
+#: ../../xffm/common/util.hh:1200
+#, c-format
+msgid ""
+"Scriptfile \"%s\" is not executable. Please set the executable-attribute on "
+"that file."
+msgstr ""
+
+#: ../../xffm/common/util.hh:1202 ../../xffm/common/util.hh:1237
+#, c-format
+msgid "Open with %s"
+msgstr "Адкрыць у %s"
+
+#: ../../xffm/common/util.hh:1202
+msgid "Text Editor"
+msgstr "Тэкставы рэдактар"
+
+#: ../../xffm/common/util.hh:1239 ../../xffm/common/gtk.hh:65
+msgid "Execute Shell Command"
+msgstr "Выканаць каманду абалонкі"
+
+#: ../../xffm/common/util.hh:1243
+msgid ""
+"Console: quickly run single commands -- write a command here and press enter."
+msgstr ""
+
+#: ../../xffm/common/gtk.hh:123
+msgid "New Tab"
+msgstr "Новая картка"
+
+#: ../../xffm/common/gtk.hh:335
+msgid "OK"
+msgstr "ДОБРА"
+
+#: ../../xffm/common/run.hh:344
+msgid "error"
+msgstr "памылка"
+
+#: ../../xffm/common/run.hh:348
+#, fuzzy
+msgid "warning"
+msgstr "%d папярэджанне"
+
+#: ../../xffm/common/mime.hh:101 ../../xffm/common/mime.hh:143
+#, fuzzy
+msgid "No Read Permission"
+msgstr "Дадаць правы доступу"
+
+#: ../../xffm/common/preview.hh:593
+msgid "Empty file"
+msgstr "Пусты файл"
+
+#: ../../xffm/common/preview.hh:648
+#, fuzzy, c-format
+msgid "Cannot read from %s"
+msgstr "Не ўдалося прачытаць з \"%s\""
+

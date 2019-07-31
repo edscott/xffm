@@ -1,0 +1,1423 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:40:21 CDT 2013 ---
+#
+# Samia Niamatullah <mailsamia2001@yahoo.com>, 2005.
+# Saugata Ghosh <e_saugata@vsnl.net>, 2003.
+# Runa Bhattacharjee <runabh@gmail.com>, 2003-2012.
+# Sampat Kundu <skk_84@rediffmail.com>, 2004.
+# Sayamindu Dasgupta <unmadindu@Softhome.net>, 2003-2004.
+# Dr Anirban Mitra <mitra_anirban@yahoo.co.in>, 2003.
+# Deepayan Sarkar <deepayan@bengalinux.org>, 2003-2012.
+# Sayak Sarkar <sayak.bugsmith@gmail.com>, 2012.
+# Taneem Ahmed <taneem@eyetap.org>, 2002-2004.
+# Arindam Ghosh <arindam.foss@gmail.com>, 2007-2009.
+# sankarshan mukhopadhyay <sankarshan@randomink.org>, 2009-2010.
+# Khandakar Mujahidul Islam <suzan@bengalinux.org>, 2003-2007.
+# Progga <progga@BengaLinux.Org>, 2003-2006.
+# Mahay Alam Khan <makl10n@yahoo.com>, 2005.
+# Moumita Nandi <rimi19822003@yahoo.co.in>, 2004.
+# Mahay Alam Khan (মাহে আলম খান) <makl10n@yahoo.com>, 2006.
+# Muhammad Mahmudur Rahman Khan <mrk_ju@yahoo.com>, 2003.
+# Rupak Sinha <rupak.sinha@softhome.net>, 2003.
+# INDRANIL DAS GUPTA <indradg@cal.vsnl.net.in>, 2003.
+# Sankarshan Mukhopadhyay <sankarshan.mukhopadhyay@gmail.com>, 2007-2009.
+# Ria Das <mailtoria@gmail.com>, 2008.
+# Jamil Ahmed <jamil@bengalinux.org>, 2003-2006.
+# Semati Ghosh <semanti_84@yahoo.co.in>, 2004.
+# Vat <vatzcar@yahoo.co.in>, 2003.
+# Indranil Das Gupta <indradg@bengalinux.org>, 2003-2004.
+# Muhammad Mahmudur Rahman Khana <mrk_ju@yahoo.com>.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-02 12:27-0600\n"
+"PO-Revision-Date: 2007-08-30 18:15+0530\n"
+"Last-Translator: Runa Bhattacharjee <runabh@gmail.com>\n"
+"Language-Team: Bengali INDIA\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../../xffm/completion/base.hh:28
+msgid "Command"
+msgstr "কমান্ড"
+
+#: ../../xffm/completion/base.hh:31
+msgid "File"
+msgstr "ফাইল (F)"
+
+#: ../../xffm/completion/base.hh:34
+#, fuzzy
+msgid "Command history"
+msgstr "কল সংক্রান্ত পূর্ববর্তী তথ্য"
+
+#. option -u uid "uid" "uid_combo"
+#: ../../xffm/completion/base.hh:37 ../../xffm/find/dialog.hh:199
+msgid "User"
+msgstr "ব্যবহারকারী"
+
+#: ../../xffm/completion/base.hh:40
+msgid "Variable"
+msgstr "ভ্যারিয়েবল"
+
+#: ../../xffm/completion/base.hh:43
+msgid "Host"
+msgstr "হোস্ট"
+
+#: ../../xffm/completion/base.hh:55
+#, fuzzy
+msgid "Found no match"
+msgstr "মেলানোর উদ্দেশ্যে শব্দ"
+
+#: ../../xffm/completion/base.hh:133 ../../xffm/completion/base.hh:134
+msgid "Matches"
+msgstr "মিল পাওয়া গিয়েছে (M)"
+
+#: ../../xffm/completion/base.hh:134
+#, fuzzy
+msgid "Too many files open"
+msgstr "অত্যাধিক সংখ্যক ফাইল খোলা অবস্থায় রয়েছে"
+
+#: ../../xffm/completion/base.hh:325 ../../xffm/find/fgr.hh:124
+msgid "Options:"
+msgstr "বিকল্প:"
+
+#: ../../xffm/completion/bash.hh:133
+#, fuzzy
+msgid "Completion mode:"
+msgstr "সম্পূর্ণকরণের কোড"
+
+#: ../../xffm/completion/bash.hh:134
+msgid "command"
+msgstr "কমান্ড"
+
+#: ../../xffm/completion/bash.hh:135
+msgid "file"
+msgstr "ফাইল"
+
+#: ../../xffm/completion/bash.hh:145 ../../xffm/completion/bash.hh:149
+#, fuzzy
+msgid "Options >>"
+msgstr "বিকল্প"
+
+#: ../../xffm/find/fgr.hh:124 ../../xffm/find/dialog.hh:308
+msgid "Path"
+msgstr "পাথ"
+
+#: ../../xffm/find/fgr.hh:125
+msgid "Locate documents and folders on this computer by name or content"
+msgstr ""
+"নাম অথবা বিষয়বস্তুর তথ্য প্রয়োগ করে এই কম্পিউটারের মধ্যে নথিপত্র অথবা ডকুমেন্ট "
+"অনুসন্ধান করুন"
+
+#: ../../xffm/find/fgr.hh:126 ../../xffm/find/dialog.hh:341
+msgid "Filter:"
+msgstr "ফিল্টার:"
+
+#: ../../xffm/find/fgr.hh:126
+#, fuzzy
+msgid "Search for files"
+msgstr "ফাইল অনুসন্ধান"
+
+#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
+#: ../../xffm/find/fgr.hh:128
+msgid "Contents:"
+msgstr "বিষয়বস্তু:"
+
+#: ../../xffm/find/fgr.hh:128
+#, fuzzy
+msgid "File's contents filtered as plain text."
+msgstr "প্লেইন-টেক্সট রূপে ফাইলটি সংরক্ষণ করা হবে কি?"
+
+#: ../../xffm/find/fgr.hh:131
+#, fuzzy
+msgid "Verbose output debugging mode."
+msgstr "কোড ডিবাগ ব্যবস্থা সক্রিয় করা হবে"
+
+#: ../../xffm/find/fgr.hh:133
+msgid "Show version information"
+msgstr "সংস্করণ সংক্রান্ত তথ্য প্রদর্শন করা হবে"
+
+#: ../../xffm/find/fgr.hh:135
+#, fuzzy
+msgid "Filter Details"
+msgstr "সম্পূর্ণ বিবরণ"
+
+#. / option -a "xdev"
+#: ../../xffm/find/fgr.hh:138 ../../xffm/find/dialog.hh:180
+#, fuzzy
+msgid "Stay on single filesystem"
+msgstr "ফাইল-সিস্টেম স্ক্যান করুন"
+
+#: ../../xffm/find/fgr.hh:140
+msgid "Print..."
+msgstr "প্রিন্ট করুন..."
+
+#: ../../xffm/find/fgr.hh:140
+msgid "The unique Process ID that identifies this process."
+msgstr ""
+
+#. / option -D "recursiveH"
+#: ../../xffm/find/fgr.hh:142 ../../xffm/find/dialog.hh:177
+#, fuzzy
+msgid "Find hidden files and directories"
+msgstr "ফাইল ও ডিরেক্টরি"
+
+#: ../../xffm/find/fgr.hh:143
+msgid "Filter"
+msgstr "ফিল্টার"
+
+#: ../../xffm/find/fgr.hh:144
+msgid ""
+"To display files which pass the filter (stars and regexps will be processed)"
+msgstr ""
+
+#. / option -r "recursive"
+#: ../../xffm/find/fgr.hh:146 ../../xffm/find/dialog.hh:174
+#, fuzzy
+msgid "Recursive"
+msgstr "রিকার্সিভ ক্রমবিন্যাস"
+
+#: ../../xffm/find/fgr.hh:147 ../../xffm/find/fgr.hh:148
+#: ../../xffm/find/fgr.hh:149 ../../xffm/find/fgr.hh:150
+msgid "KByte"
+msgstr "কিলোবাইট"
+
+#: ../../xffm/find/fgr.hh:148
+#, fuzzy
+msgid "is greater than or equal to"
+msgstr "থেকে বেশি"
+
+#: ../../xffm/find/fgr.hh:150
+#, fuzzy
+msgid "is less than or equal to"
+msgstr "থেকে কম"
+
+#: ../../xffm/find/fgr.hh:152
+#, fuzzy
+msgid "Set UID"
+msgstr "প্রস্তুত করুন(S)"
+
+#: ../../xffm/find/fgr.hh:152
+msgid "Executable Text Files"
+msgstr "এক্সিকিউটেবল টেক্সট ফাইল"
+
+#: ../../xffm/find/fgr.hh:154
+msgid "The permissions of the file, in octal notation."
+msgstr "অক্টাল সংখ্যায় প্রকাশিত ফাইলের অনুমতি।"
+
+#: ../../xffm/find/fgr.hh:155
+msgid "Type"
+msgstr "ধরন"
+
+#: ../../xffm/find/fgr.hh:157 ../../xffm/find/signals.hh:17
+msgid "Any"
+msgstr "অনির্দিষ্ট"
+
+#: ../../xffm/find/fgr.hh:157
+#, fuzzy
+msgid "Default type"
+msgstr "ডিফল্ট বস্তু"
+
+#: ../../xffm/find/fgr.hh:158 ../../xffm/common/preview.hh:497
+#, fuzzy
+msgid "Regular file"
+msgstr "সাধারণ"
+
+#: ../../xffm/find/fgr.hh:159 ../../xffm/find/signals.hh:11
+#: ../../xffm/fm/local/popup.hh:803 ../../xffm/common/preview.hh:488
+msgid "Directory"
+msgstr "ডিরেক্টরি (D)"
+
+#: ../../xffm/find/fgr.hh:160 ../../xffm/find/signals.hh:12
+#: ../../xffm/common/preview.hh:494
+msgid "Symbolic Link"
+msgstr "সিম্বলিক লিঙ্ক"
+
+#: ../../xffm/find/fgr.hh:161
+#, fuzzy
+msgid "UNIX Socket"
+msgstr "UNIX স্কিম"
+
+#: ../../xffm/find/fgr.hh:162 ../../xffm/find/signals.hh:14
+#: ../../xffm/common/preview.hh:482
+#, fuzzy
+msgid "Block device"
+msgstr "ব্লক ডিভাইস"
+
+#: ../../xffm/find/fgr.hh:163 ../../xffm/find/signals.hh:15
+#: ../../xffm/common/preview.hh:485
+#, fuzzy
+msgid "Character device"
+msgstr "ক্যারেক্টার ডিভাইস"
+
+#: ../../xffm/find/fgr.hh:164 ../../xffm/find/signals.hh:16
+#: ../../xffm/common/preview.hh:491
+msgid "FIFO"
+msgstr "FIFO"
+
+#. radio_p freed on destroy event for dialog_.
+#. option -k minutes "last_minutes", "last_minutes_spin"
+#: ../../xffm/find/fgr.hh:166 ../../xffm/find/fgr.hh:168
+#: ../../xffm/find/dialog.hh:221
+msgid "Minutes"
+msgstr "মিনিট"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/dialog.hh:270 ../../xffm/find/dialog.hh:370
+#: ../../xffm/fm/treeview.hh:18
+msgid "Details"
+msgstr "বিবরণ"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/fgr.hh:179 ../../xffm/find/fgr.hh:180
+#: ../../xffm/find/fgr.hh:183 ../../xffm/find/fgr.hh:184
+#: ../../xffm/find/fgr.hh:187 ../../xffm/find/fgr.hh:188
+#, fuzzy
+msgid "TIME"
+msgstr "TIMEOUT"
+
+#: ../../xffm/find/fgr.hh:168 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/fgr.hh:174 ../../xffm/find/fgr.hh:177
+msgid "Previous"
+msgstr "পূর্ববর্তী"
+
+#. option -h hours "last_hours", "last_hours_spin"
+#: ../../xffm/find/fgr.hh:169 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/dialog.hh:226
+msgid "Hours"
+msgstr "ঘন্টা"
+
+#. option -d days "last_days", "last_days_spin"
+#: ../../xffm/find/fgr.hh:172 ../../xffm/find/fgr.hh:174
+#: ../../xffm/find/dialog.hh:231
+msgid "Days"
+msgstr "দিন"
+
+#: ../../xffm/find/fgr.hh:175
+msgid "Month"
+msgstr "মাস"
+
+#: ../../xffm/find/fgr.hh:177
+#, fuzzy
+msgid "Month(s)"
+msgstr "মাস"
+
+#: ../../xffm/find/fgr.hh:180
+#, fuzzy
+msgid "Modification Time :"
+msgstr "পরিবর্তনের সময়কাল"
+
+#: ../../xffm/find/fgr.hh:184
+#, fuzzy
+msgid "Access Time :"
+msgstr "সর্বশেষ ব্যবহার:"
+
+#: ../../xffm/find/fgr.hh:188
+#, fuzzy
+msgid "Creation Time :"
+msgstr "সৃষ্টি-র সময়কাল"
+
+#: ../../xffm/find/fgr.hh:191 ../../xffm/find/fgr.hh:192
+#, fuzzy
+msgid "uid"
+msgstr "বিল্ড"
+
+#: ../../xffm/find/fgr.hh:192
+msgid "User:"
+msgstr "ব্যবহারকারী:"
+
+#: ../../xffm/find/fgr.hh:194 ../../xffm/find/fgr.hh:195
+#, fuzzy
+msgid "gid"
+msgstr "ghi"
+
+#: ../../xffm/find/fgr.hh:195
+msgid "Group:"
+msgstr "দল (G):"
+
+#: ../../xffm/find/fgr.hh:198
+msgid ""
+"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+"character that  normally  follows  a file  name"
+msgstr ""
+
+#: ../../xffm/find/fgr.hh:200
+msgid "Content View"
+msgstr "অভ্যন্তরীণ বিষয়বস্তু প্রদর্শন"
+
+#: ../../xffm/find/fgr.hh:201 ../../xffm/find/fgr.hh:202
+#: ../../xffm/find/fgr.hh:203 ../../xffm/find/fgr.hh:204
+msgid "STRING"
+msgstr "STRING"
+
+#: ../../xffm/find/fgr.hh:202 ../../xffm/find/fgr.hh:204
+#: ../../xffm/fm/local/popup.hh:563
+msgid "Regular expression"
+msgstr "রেগুলার এক্সপ্রেশন (R)"
+
+#: ../../xffm/find/fgr.hh:204
+msgid "Extended"
+msgstr "এক্সটেন্ডেড"
+
+#: ../../xffm/find/fgr.hh:206
+msgid "Ignore case"
+msgstr "হরফের ছাঁদ অগ্রাহ্য করা হবে (I)"
+
+#: ../../xffm/find/fgr.hh:208
+msgid "Text Files"
+msgstr "টেক্সট ফাইল"
+
+#: ../../xffm/find/fgr.hh:210 ../../xffm/find/dialog.hh:552
+msgid "No match"
+msgstr "মিল পাওয়া যায়নি"
+
+#: ../../xffm/find/fgr.hh:212 ../../xffm/find/dialog.hh:470
+#, fuzzy
+msgid "Line Count"
+msgstr "Spinup Retry Count (পুনরায় স্পিন-আপ প্রচেষ্টার গণনা)"
+
+#: ../../xffm/find/fgr.hh:214
+msgid "Words"
+msgstr "শব্দ"
+
+#: ../../xffm/find/fgr.hh:216
+msgid "Lines"
+msgstr "পংক্তি"
+
+#: ../../xffm/find/fgr.hh:368
+#, fuzzy, c-format
+msgid "Usage : %s [OPTIONS]\n"
+msgstr "ব্যবহারপ্রণালী: orca [OPTION...]"
+
+#: ../../xffm/find/signals.hh:10
+msgid "Regular"
+msgstr "সাধারণ"
+
+#: ../../xffm/find/signals.hh:13 ../../xffm/common/preview.hh:500
+#, fuzzy
+msgid "Socket"
+msgstr "সকেট"
+
+#: ../../xffm/find/signals.hh:209
+msgid "Select folder to search in"
+msgstr "অনুসন্ধানের জন্য ফোল্ডার নির্বাচন করুন"
+
+#. button no
+#: ../../xffm/find/signals.hh:265 ../../xffm/find/dialog.hh:584
+#: ../../xffm/response/entryfileresponse.hh:18
+#: ../../xffm/response/entryresponse.hh:305
+#: ../../xffm/response/passwdresponse.hh:558
+#: ../../xffm/fm/local/properties.hh:304 ../../xffm/fm/local/rm.hh:155
+msgid "Cancel"
+msgstr "বাতিল করুন"
+
+#: ../../xffm/find/signals.hh:293 ../../xffm/find/signals.hh:722
+#, fuzzy
+msgid "No editor for current action."
+msgstr "বর্তমান অবস্থানে লক করা হবে"
+
+#. / option "upper_limit_spin" (only in gtk dialog_)
+#: ../../xffm/find/signals.hh:351 ../../xffm/find/dialog.hh:183
+msgid "Results"
+msgstr "ফলাফল"
+
+#: ../../xffm/find/signals.hh:351
+#, fuzzy
+msgid "Upper limit:"
+msgstr "দিনের সর্বাধিক মান"
+
+#: ../../xffm/find/signals.hh:353
+#, fuzzy
+msgid "Counting files..."
+msgstr "ভলিউম মাউন্ট করা হচ্ছে..."
+
+#: ../../xffm/find/signals.hh:368
+#, fuzzy, c-format
+msgid "Found %d match"
+msgid_plural "Found %d matches"
+msgstr[0] "%d%-টি মিল"
+msgstr[1] "%d%-টি মিল"
+
+#: ../../xffm/find/signals.hh:370
+#, c-format
+msgid "%s Finished : %s"
+msgstr "%s সম্পন্ন : %s"
+
+#: ../../xffm/find/signals.hh:488 ../../xffm/find/signals.hh:490
+msgid "Searching..."
+msgstr "অনুসন্ধান করা হচ্ছে..."
+
+#. g_object_set_data(G_OBJECT(dialog_), "window", dialog_);
+#: ../../xffm/find/dialog.hh:98 ../../xffm/find/dialog.hh:150
+#: ../../xffm/find/dialog.hh:611
+msgid "Find"
+msgstr "সন্ধান করুন (F)"
+
+#: ../../xffm/find/dialog.hh:183
+#, fuzzy
+msgid "Upper limit"
+msgstr "দিনের সর্বাধিক মান"
+
+#. option -s +KByte "size_greater", "size_greater_spin"
+#: ../../xffm/find/dialog.hh:188
+msgid "At Least"
+msgstr "অন্তত"
+
+#: ../../xffm/find/dialog.hh:188 ../../xffm/find/dialog.hh:193
+msgid "kBytes"
+msgstr "কিলোবাইট"
+
+#. option -s -KByte "size_smaller", "size_smaller_spin"
+#: ../../xffm/find/dialog.hh:193
+msgid "At Most"
+msgstr "সর্বাধিক"
+
+#: ../../xffm/find/dialog.hh:204
+msgid "Group"
+msgstr "দল"
+
+#. option -o octal "octal_p" "permissions_entry"
+#: ../../xffm/find/dialog.hh:208
+msgid "Octal Permissions"
+msgstr "অক্টাল সংখ্যায় প্রকাশিত অনুমতি"
+
+#. option -p suid | exe
+#: ../../xffm/find/dialog.hh:213
+msgid "SUID"
+msgstr "SUID"
+
+#: ../../xffm/find/dialog.hh:213 ../../xffm/fm/local/popup.hh:843
+#, fuzzy
+msgid "Executable"
+msgstr "এক্সেকিউটেবল:"
+
+#. option -m months "last_months", "last_months_spin"
+#: ../../xffm/find/dialog.hh:237
+#, fuzzy
+msgid "Months"
+msgstr "মাস"
+
+#: ../../xffm/find/dialog.hh:248
+#, fuzzy
+msgid "File type : "
+msgstr "ফাইলের ধরন (t):"
+
+#. gtk_widget_show (GTK_WIDGET(right_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(center_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(left_options_vbox));
+#: ../../xffm/find/dialog.hh:262 ../../xffm/find/dialog.hh:602
+#: ../../xffm/fm/page/page.hh:70 ../../xffm/common/gtk.hh:70
+msgid "Close"
+msgstr "বন্ধ করা হবে (C)"
+
+#. gtk_box_pack_start (vbox7a, GTK_WIDGET(advancedBox), TRUE, FALSE, 5);
+#. gtk_widget_show(GTK_WIDGET(advancedBox));
+#. //////////////  grep options.... /////////////////////////
+#: ../../xffm/find/dialog.hh:384
+#, fuzzy
+msgid "Contains"
+msgstr "ধারন করে"
+
+#: ../../xffm/find/dialog.hh:404
+msgid "Contains the text"
+msgstr "চিহ্নিত লেখাসহ(t)"
+
+#: ../../xffm/find/dialog.hh:437
+msgid "Case Sensitive"
+msgstr "হরফের ছাঁদ সম্পর্কে সচেতন"
+
+#: ../../xffm/find/dialog.hh:449
+#, fuzzy
+msgid "Extended regexp"
+msgstr "এক্সটেন্ডেড"
+
+#: ../../xffm/find/dialog.hh:460
+msgid "Include binary files"
+msgstr "বাইনারি ফাইল অন্তর্ভুক্ত করা হবে (b)"
+
+#: ../../xffm/find/dialog.hh:496
+#, fuzzy
+msgid "Match"
+msgstr "মিল পাওয়া গিয়েছে (M)"
+
+#: ../../xffm/find/dialog.hh:508
+msgid "Anywhere"
+msgstr ""
+
+#: ../../xffm/find/dialog.hh:523
+msgid "Whole words only"
+msgstr "শুধুমাত্র সম্পূর্ণ শব্দ (W)"
+
+#: ../../xffm/find/dialog.hh:538
+msgid "lines"
+msgstr "খানি পংক্তির জন্য"
+
+#: ../../xffm/find/dialog.hh:594
+msgid "Clear"
+msgstr "মুছে ফেলুন"
+
+#: ../../xffm/find/dialog.hh:636
+msgid "Edit"
+msgstr "সম্পাদনা (E)"
+
+#: ../../xffm/find/dialog.hh:751 ../../xffm/find/dialog.hh:766
+#: ../../xffm/common/util.hh:1150 ../../xffm/common/util.hh:1152
+#: ../../xffm/common/util.hh:1158 ../../xffm/common/util.hh:1160
+#: ../../xffm/common/preview.hh:479
+msgid "unknown"
+msgstr "অজানা"
+
+#: ../../xffm/find/dialog.hh:780
+msgid "Modified"
+msgstr "পরিবর্তনের সময়"
+
+#: ../../xffm/find/dialog.hh:784
+msgid "Created"
+msgstr "নির্মাণের সময়"
+
+#: ../../xffm/find/dialog.hh:788
+#, fuzzy
+msgid "Accessed"
+msgstr "সর্বশেষ ব্যবহার:"
+
+#: ../../xffm/find/dialog.hh:1106
+msgid ""
+"Basic rules:\n"
+"\n"
+"*  Will match any character zero or more times.\n"
+"?  Will match any character exactly one time\n"
+"[] Match any character within the [] \n"
+"^  Match at beginning of string\n"
+"$  Match at end of string \n"
+msgstr ""
+
+#: ../../xffm/find/dialog.hh:1115
+msgid ""
+"Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"In  basic regular expressions the metacharacters ?, +, {, |, (, and ) \n"
+"  lose their special meaning.\n"
+"\n"
+"The  period . matches  any  single  character.\n"
+"The caret ^ matches at the start of line.\n"
+"The dollar $ matches at the end of line.\n"
+"\n"
+"Characters within [ ] matches any single character in the list.\n"
+"Characters within [^ ] matches any single character *not* in the list.\n"
+"Characters inside [ - ] matches a range of characters (ie [0-9] or [a-z]).\n"
+"\n"
+"A regular expression may be followed by one of several repetition "
+"operators:\n"
+"?      The preceding item is optional and matched\n"
+"       at most once.\n"
+"*      The preceding item will be matched zero\n"
+"       or more times.\n"
+"+      The preceding item will be matched one or\n"
+"       more times.\n"
+"{n}    The preceding item is matched exactly n times.\n"
+"{n,}   The preceding item is matched n or more times.\n"
+"{n,m}  The preceding item is matched at least n times,\n"
+"       but not more than m times.\n"
+"\n"
+"To match any reserved character, precede it with \\. \n"
+"\n"
+"Two regular expressions may be joined by the logical or operator |.\n"
+"Two regular expressions may be concatenated.\n"
+"\n"
+"More information is available by typing \"man grep\"\n"
+msgstr ""
+
+#: ../../xffm/response/entryfileresponse.hh:20
+msgid "Open"
+msgstr "খুলুন (O)"
+
+#: ../../xffm/response/entryresponse.hh:29
+#: ../../xffm/response/entryfolderresponse.hh:28
+#, fuzzy
+msgid "Choose directory"
+msgstr "ব্যক্তিগত ডিরেক্টরি"
+
+#. this button is redundant since hands are on keyboard for password
+#: ../../xffm/response/entryresponse.hh:309
+#: ../../xffm/response/passwdresponse.hh:189
+#: ../../xffm/response/passwdresponse.hh:559
+msgid "Ok"
+msgstr "ঠিক আছে (O)"
+
+#: ../../xffm/response/commandprogressresponse.hh:32
+msgid "Items:"
+msgstr "বস্তু: (e)"
+
+#: ../../xffm/response/passwdresponse.hh:21
+msgid "Enter password"
+msgstr "পাসওয়ার্ড লিখুন"
+
+#. gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+#: ../../xffm/response/passwdresponse.hh:125
+#, fuzzy
+msgid "User Input"
+msgstr "মাউস থেকে প্রাপ্ত ইনপুট"
+
+#: ../../xffm/response/passwdresponse.hh:142
+#, fuzzy
+msgid "Response Requested"
+msgstr "বহিরাগত প্রতিক্রিয়া"
+
+#: ../../xffm/response/passwdresponse.hh:264
+msgid "Preparing"
+msgstr "প্রস্তুতি চলছে"
+
+#: ../../xffm/response/passwdresponse.hh:352
+msgid "sudo"
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:354
+msgid "Command:"
+msgstr "কমান্ড: (o)"
+
+#: ../../xffm/response/passwdresponse.hh:357
+msgid "Permission denied"
+msgstr "অনুমতি পাওয়া যায়নি"
+
+#: ../../xffm/response/passwdresponse.hh:358
+msgid "Try to approach a problem from different angles."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:359
+msgid "Do you want to retry?"
+msgstr "পুনরায় প্রচেষ্টা করতে ইচ্ছুক কি?"
+
+#: ../../xffm/response/passwdresponse.hh:360
+msgid "Alternate:"
+msgstr "বিকল্প:"
+
+#: ../../xffm/response/passwdresponse.hh:365
+msgid "No"
+msgstr "না"
+
+#: ../../xffm/response/passwdresponse.hh:401
+msgid "Install"
+msgstr "ইনস্টল করা হবে (I)"
+
+#: ../../xffm/response/passwdresponse.hh:402
+#, fuzzy, c-format
+msgid "%s does not exist."
+msgstr "%s উপস্থিত নেই"
+
+#: ../../xffm/response/passwdresponse.hh:467
+#, fuzzy
+msgid "Blowfish"
+msgstr "Sawfish"
+
+#: ../../xffm/response/passwdresponse.hh:468
+#, fuzzy
+msgid "Encryption Key Approval"
+msgstr "এনক্রিপশনের অ্যাপ্লেট"
+
+#: ../../xffm/response/passwdresponse.hh:502
+msgid "-o     print output to standard out. Implies -r."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:506
+msgid "-c     DO NOT compress files before encryption."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:510
+msgid "-r     DO NOT remove input files after processing"
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:517
+#, fuzzy
+msgid "Encryption key: "
+msgstr "এনক্রিপশনের ধরন: (T)"
+
+#: ../../xffm/response/passwdresponse.hh:529
+msgid "Confirm:"
+msgstr "নিশ্চিত করুন:"
+
+#: ../../xffm/response/passwdresponse.hh:542
+msgid "Sorry, passwords do not match"
+msgstr "দুঃখিত, পাসওয়ার্ডে গরমিল"
+
+#: ../../xffm/response/passwdresponse.hh:550
+#, fuzzy
+msgid "Minimum length:"
+msgstr "সর্বনিম্ন মান:"
+
+#: ../../xffm/response/timeoutresponse.hh:56
+msgid "Dismiss"
+msgstr "বাতিল করুন (D)"
+
+#: ../../xffm/response/commandresponse.hh:23
+msgid "Running"
+msgstr "চলছে"
+
+#. auto text = g_strdup_printf("%s (pid: %d)",
+#. _("Waiting for operation to finish..."),
+#. Tubo<Type>::getChild (pid));
+#: ../../xffm/response/commandresponse.hh:28
+#, fuzzy
+msgid "Waiting for operation to finish..."
+msgstr "অনুমোদনের অপেক্ষা করা হচ্ছে"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Documents"
+msgstr "ডকুমেন্ট"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Downloads"
+msgstr "ডাউনলোড করা বস্তু"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Music"
+msgstr "সংগীত"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Pictures"
+msgstr "ছবি"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Templates"
+msgstr "টেমপ্লেট"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Videos"
+msgstr "ভিডিও"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Desktop"
+msgstr "ডেস্কটপ (k)"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Bookmarks"
+msgstr "বুকমার্ক (B)"
+
+#: ../../xffm/fm/local/icons.hh:259 ../../xffm/fm/local/rm.hh:181
+msgid "Trash"
+msgstr "বর্জন করুন"
+
+#: ../../xffm/fm/local/popup.hh:60
+msgid "New"
+msgstr "নতুন (N)"
+
+#. deprecated {N_("Open in New Tab"), NULL, NULL, NULL},
+#. deprecated {N_("Open in New Window"), NULL, NULL, NULL},
+#. common buttons /(also an iconsize +/- button)
+#: ../../xffm/fm/local/popup.hh:64 ../../xffm/fm/local/popup.hh:104
+#: ../../xffm/common/gtk.hh:74
+msgid "Copy"
+msgstr "কপি করুন (C)"
+
+#: ../../xffm/fm/local/popup.hh:65 ../../xffm/fm/local/popup.hh:105
+#: ../../xffm/common/gtk.hh:73
+msgid "Cut"
+msgstr "কাট করুন"
+
+#: ../../xffm/fm/local/popup.hh:66 ../../xffm/fm/local/popup.hh:106
+#: ../../xffm/common/gtk.hh:66
+msgid "Paste"
+msgstr "পেস্ট করুন"
+
+#. **************
+#: ../../xffm/fm/local/popup.hh:67 ../../xffm/fm/local/popup.hh:107
+#: ../../xffm/fm/local/rm.hh:174 ../../xffm/common/gtk.hh:75
+msgid "Delete"
+msgstr "মুছে ফেলুন  (D)"
+
+#. {N_("About"), NULL, (void *) menu},
+#.
+#. only for listview: {N_("Sort by size"), NULL, (void *) menu},
+#. only for listview: {N_("Sort by date"), NULL, (void *) menu},
+#: ../../xffm/fm/local/popup.hh:73
+msgid "Select All"
+msgstr "সমগ্র নির্বাচন"
+
+#: ../../xffm/fm/local/popup.hh:74 ../../xffm/fm/local/popup.hh:559
+#, fuzzy
+msgid "Match regular expression"
+msgstr "রেগুলার এক্সপ্রেশন রূপে মেলানো হবে (r)"
+
+#: ../../xffm/fm/local/popup.hh:75 ../../xffm/fm/root/view.hh:58
+#: ../../xffm/fm/fstab/popup.hh:21
+#, fuzzy
+msgid "View as list"
+msgstr "নতুন কার্য তালিকা"
+
+#: ../../xffm/fm/local/popup.hh:77
+msgid "Show hidden files"
+msgstr "আড়াল করা ফাইল প্রদর্শন করা হবে"
+
+#: ../../xffm/fm/local/popup.hh:79
+#, fuzzy
+msgid "Show Backup Files"
+msgstr "ফাইল প্রদর্শিত হবে (S)"
+
+#: ../../xffm/fm/local/popup.hh:81
+#, fuzzy
+msgid "Sort data in descending order"
+msgstr "ছোট থেকে বড় অথবা বিপরীত দিশায় ক্রমবিন্যাস"
+
+#: ../../xffm/fm/local/popup.hh:93 ../../xffm/fm/local/popup.hh:119
+#: ../../xffm/fm/local/popup.hh:1006 ../../xffm/fm/local/popup.hh:1013
+#: ../../xffm/fm/local/popup.hh:1022 ../../xffm/fm/local/popup.hh:1029
+#: ../../xffm/common/gtk.hh:72
+msgid "Open with"
+msgstr "চিহ্নিত অ্যাপ্লিকেশন সহযোগে খুলুন (w)"
+
+#: ../../xffm/fm/local/popup.hh:94 ../../xffm/fm/local/popup.hh:846
+#, fuzzy
+msgid "Run Executable..."
+msgstr "এক্সেকিউটেবল:"
+
+#: ../../xffm/fm/local/popup.hh:95
+msgid "Extract files from the archive"
+msgstr "আর্কাইভ থেকে ফাইল এক্সট্র্যাক্ট করুন"
+
+#. g_hash_table_insert(iconname_hash, "bcrypt", (void *)"emblem-keyhole");
+#: ../../xffm/fm/local/popup.hh:96 ../../xffm/fm/root/view.hh:73
+#: ../../xffm/fm/fstab/popup.hh:20 ../../xffm/fm/dialog/notebook.hh:52
+#: ../../xffm/common/gtk.hh:78
+msgid "Open in New Tab"
+msgstr "নতুন ট্যাবের মধ্যে খোলা হবে (T)"
+
+#. File chooser
+#: ../../xffm/fm/local/popup.hh:97 ../../xffm/fm/local/popup.hh:706
+msgid "Create a compressed archive with the selected objects"
+msgstr "নির্বাচিত বস্তুগুলি সহ একটি সংকুচিত আর্কাইভ নির্মাণ করুন"
+
+#: ../../xffm/fm/local/popup.hh:98 ../../xffm/fm/fstab/popup.hh:37
+msgid "Mount the volume associated with this folder"
+msgstr "চিহ্নিত ফোল্ডারের সাথে যুক্ত ভলিউম মাউন্ট করুন"
+
+#: ../../xffm/fm/local/popup.hh:99 ../../xffm/fm/fstab/popup.hh:38
+msgid "Unmount the volume associated with this folder"
+msgstr "চিহ্নিত ফোল্ডারের সাথে যুক্ত ভলিউম আন-মাউন্ট করুন"
+
+#: ../../xffm/fm/local/popup.hh:100 ../../xffm/common/gtk.hh:67
+msgid "Add bookmark"
+msgstr "বুকমার্ক যোগ করুন (b)"
+
+#: ../../xffm/fm/local/popup.hh:101 ../../xffm/fm/root/view.hh:74
+#: ../../xffm/common/gtk.hh:68
+msgid "Remove bookmark"
+msgstr "বুকমার্ক মুছে ফেলুন"
+
+#: ../../xffm/fm/local/popup.hh:108 ../../xffm/fm/local/popup.hh:961
+msgid "Rename"
+msgstr "নাম পরিবর্তন (R)"
+
+#: ../../xffm/fm/local/popup.hh:109 ../../xffm/fm/local/popup.hh:947
+msgid "Duplicate"
+msgstr "প্রতিলিপি"
+
+#: ../../xffm/fm/local/popup.hh:110 ../../xffm/fm/local/popup.hh:933
+msgid "Link"
+msgstr "লিংক"
+
+#: ../../xffm/fm/local/popup.hh:111
+msgid "Properties"
+msgstr "বৈশিষ্ট্যাবলী (r)"
+
+#: ../../xffm/fm/local/popup.hh:414
+msgid "Files:"
+msgstr "ফাইল: (F)"
+
+#: ../../xffm/fm/local/popup.hh:417 ../../xffm/fm/local/rm.hh:61
+#, fuzzy
+msgid "Multiple selections"
+msgstr "একাধিক অবস্থান নির্ধারণ করা হয়েছে"
+
+#: ../../xffm/fm/local/popup.hh:557
+#, fuzzy
+msgid "Select items"
+msgstr "নির্বাচিত বস্তু: (S)"
+
+#: ../../xffm/fm/local/popup.hh:575
+#, fuzzy
+msgid "Regular Expression syntax is incorrect"
+msgstr "রেগুলার এক্সপ্রেশন ফাঁকা!"
+
+#: ../../xffm/fm/local/popup.hh:592
+#, fuzzy
+msgid "No selection"
+msgstr "নির্বাচিত অংশ কপি করুন"
+
+#: ../../xffm/fm/local/popup.hh:592
+#, fuzzy
+msgid "No matches."
+msgstr "মিল পাওয়া যায়নি"
+
+#. entryResponse->setCheckButton(_("Run in Terminal"));
+#. entryResponse->setCheckButton(Mime<Type>::runInTerminal(path));
+#: ../../xffm/fm/local/popup.hh:721 ../../xffm/fm/page/pathbar.hh:313
+msgid "Specify Output Directory..."
+msgstr "আউটপুট ডিরেক্টরি উল্লেখ করুন..."
+
+#: ../../xffm/fm/local/popup.hh:799
+#, fuzzy
+msgid "Create new..."
+msgstr "নতুন নির্মাণ করুন..."
+
+#: ../../xffm/fm/local/popup.hh:806 ../../xffm/fm/local/popup.hh:886
+#, fuzzy
+msgid "New Name:"
+msgstr "নতুন নাম:"
+
+#: ../../xffm/fm/local/popup.hh:815
+msgid "No name"
+msgstr "নামবিহীন"
+
+#: ../../xffm/fm/local/popup.hh:828
+#, fuzzy, c-format
+msgid "Another file with the same name already exists in “%s”."
+msgstr "একই নামের অন্য একটি ফাইল \"%s\"-র মধ্যে বর্তমানে উপস্থিত রয়েছে।"
+
+#: ../../xffm/fm/local/popup.hh:850 ../../xffm/fm/local/popup.hh:1010
+#: ../../xffm/fm/local/popup.hh:1026 ../../xffm/common/util.hh:1248
+msgid "Run in Terminal"
+msgstr "টার্মিনালে সঞ্চালন (T)"
+
+#: ../../xffm/fm/local/popup.hh:853
+#, fuzzy
+msgid "Arguments for the Command"
+msgstr "কমান্ডের আর্গুমেন্ট"
+
+#: ../../xffm/fm/local/popup.hh:1047 ../../xffm/fm/local/view.hh:141
+#, fuzzy
+msgid "Invalid entry"
+msgstr "অবৈধ কোয়েরি"
+
+#: ../../xffm/fm/local/properties.hh:235
+#, fuzzy
+msgid "Properties and Attributes"
+msgstr "সকল বৈশিষ্ট্য অপরিবর্তিত রাখা হবে"
+
+#: ../../xffm/fm/local/properties.hh:264
+#, fuzzy
+msgid "File Mode:"
+msgstr "এর মধ্যে ফাইল করুন: (F)"
+
+#: ../../xffm/fm/local/properties.hh:290
+msgid "File:"
+msgstr "ফাইল: (F)"
+
+#. Add file info stuff
+#. set info stuff data according to combo box
+#. add signal handler to changed signal for combo box
+#. Add process buttons
+#.
+#: ../../xffm/fm/local/properties.hh:302
+msgid "Apply changes"
+msgstr "পরিবর্তন প্রয়োগ করুন"
+
+#: ../../xffm/fm/local/properties.hh:462
+#, fuzzy
+msgid "Successfully moved to trash."
+msgstr "সাফল্যের সাথে %s অপসারণ করা হয়েছে\n"
+
+#: ../../xffm/fm/local/properties.hh:463
+msgid "Source:"
+msgstr "উৎস:"
+
+#: ../../xffm/fm/local/rm.hh:59
+#, c-format
+msgid "Delete %s"
+msgstr "%s মুছে ফেলুন (D)"
+
+#: ../../xffm/fm/local/rm.hh:61
+msgid "Warning: "
+msgstr "সতর্কবার্তা: "
+
+#. gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
+#. title
+#: ../../xffm/fm/local/rm.hh:90
+msgid "Remove"
+msgstr "সরিয়ে ফেলুন (R)"
+
+#: ../../xffm/fm/local/rm.hh:140
+#, fuzzy
+msgid "Apply to all"
+msgstr "সকলের প্রতি উত্তর (A)"
+
+#. **************
+#. This is now available to BSD with rm -P option
+#: ../../xffm/fm/local/rm.hh:163 ../../xffm/common/gtk.hh:76
+msgid "Shred"
+msgstr ""
+
+#. We do not count "../"
+#: ../../xffm/fm/local/view.hh:48 ../../xffm/fm/base/monitor.hh:28
+#, fuzzy, c-format
+msgid "Files: %s"
+msgstr "ফাইল: %s"
+
+#: ../../xffm/fm/root/model.hh:78
+#, fuzzy
+msgid "Root Directory"
+msgstr "দূরবর্তী ডিরেক্টরি:"
+
+#: ../../xffm/fm/root/model.hh:94
+msgid "This is the root of the filesystem"
+msgstr "এই ফোল্ডারটি ফাইল-সিস্টেমের root অর্থাৎ মূল"
+
+#: ../../xffm/fm/root/model.hh:105
+#, fuzzy
+msgid "Home Directory"
+msgstr "ব্যক্তিগত ডিরেক্টরি"
+
+#: ../../xffm/fm/root/model.hh:132
+#, fuzzy
+msgid "Trash bin"
+msgstr "বর্জন করুন"
+
+#: ../../xffm/fm/root/model.hh:162 ../../xffm/fm/fstab/popup.hh:29
+#, fuzzy
+msgid "Disk Image Mounter"
+msgstr "ডিস্ক মাউন্ট ব্যবস্থা"
+
+#: ../../xffm/fm/root/model.hh:169 ../../xffm/fm/root/model.hh:185
+msgid "Mount local disks and devices"
+msgstr "স্থানীয় ডিস্ক ও ডিভাইস মাউন্ট করুন"
+
+#: ../../xffm/fm/root/model.hh:170 ../../xffm/fm/fstab/popup.hh:25
+#: ../../xffm/fm/fstab/view.hh:429
+msgid "eCryptfs Volume"
+msgstr "eCryptfs ভলিউম"
+
+#: ../../xffm/fm/root/model.hh:171 ../../xffm/fm/fstab/popup.hh:24
+msgid "SSHFS Remote Synchronization Folder"
+msgstr "SSHFS সুসংগতির উদ্দেশ্যে দূরবর্তী ফোল্ডার"
+
+#: ../../xffm/fm/root/model.hh:172 ../../xffm/fm/fstab/popup.hh:23
+#: ../../xffm/fm/fstab/view.hh:377
+msgid "NFS Network Volume"
+msgstr "NFS নেটওয়ার্ক ভলিউম"
+
+#: ../../xffm/fm/root/model.hh:173 ../../xffm/fm/fstab/popup.hh:26
+#: ../../xffm/fm/fstab/view.hh:455
+msgid "CIFS Volume"
+msgstr "CIFS ভলিউম"
+
+#: ../../xffm/fm/root/model.hh:195
+#, fuzzy
+msgid "Software Updater"
+msgstr "সফ্টওয়্যার আপডেট ব্যবস্থা"
+
+#: ../../xffm/fm/root/model.hh:218 ../../xffm/fm/root/model.hh:230
+msgid "Add or remove software installed on the system"
+msgstr "সিস্টেমে সফ্টওয়্যার যোগ করুন অথবা ইনস্টল করা সফ্টওয়্যার সরিয়ে ফেলুন"
+
+#: ../../xffm/fm/root/model.hh:271
+#, fuzzy
+msgid "Go to bookmarked location"
+msgstr "home অবস্থানে চলুন"
+
+#. {N_("Add bookmark"), (void *)BasePopUp<Type>::noop, NULL, NULL},
+#: ../../xffm/fm/root/view.hh:61
+msgid "Empty trash"
+msgstr "আবর্জনার বাক্স ফাঁকা হলে"
+
+#. File chooser
+#: ../../xffm/fm/fstab/popup.hh:121
+#, fuzzy
+msgid "Mount Device"
+msgstr "নিয়ন্ত্রণের ডিভাইস"
+
+#: ../../xffm/fm/fstab/popup.hh:133
+#, fuzzy
+msgid "Mount point:"
+msgstr "মাউন্ট পয়েন্ট:"
+
+#: ../../xffm/fm/fstab/view.hh:301
+#, fuzzy
+msgid "Mounted on:"
+msgstr "মাউন্ট পয়েন্ট:"
+
+#: ../../xffm/fm/fstab/view.hh:302
+#, fuzzy
+msgid "Mount on"
+msgstr "মাউন্ট-পয়েন্ট"
+
+#: ../../xffm/fm/fstab/view.hh:310 ../../xffm/fm/fstab/view.hh:312
+#, fuzzy
+msgid "Not mounted"
+msgstr "মাউন্ট করা হয়নি"
+
+#: ../../xffm/fm/fstab/view.hh:403
+msgid "SFTP (via SSH)"
+msgstr ""
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, fuzzy, c-format
+msgid "Unmounting %s"
+msgstr "%s আন-মাউন্ট করুন (m)"
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, fuzzy, c-format
+msgid "Mounting %s"
+msgstr "%s মাউন্ট করুন (M)"
+
+#: ../../xffm/fm/dialog/menupopover.hh:128
+msgid "Home"
+msgstr "গৃহ"
+
+#: ../../xffm/fm/dialog/menupopover.hh:129 ../../xffm/common/gtk.hh:64
+#, fuzzy
+msgid "Open terminal"
+msgstr "টার্মিনাল আরম্ভ করুন"
+
+#: ../../xffm/fm/dialog/menupopover.hh:130
+msgid "Open a New Window"
+msgstr "একটি নতুন উইন্ডো খুলুন"
+
+#. {N_("Execute Shell Command"), (void *)MenuPopoverSignals<Type>::shell, (void *) menuButton_},
+#: ../../xffm/fm/dialog/menupopover.hh:132 ../../xffm/common/gtk.hh:69
+msgid "Search"
+msgstr "অনুসন্ধান"
+
+#: ../../xffm/fm/dialog/menupopover.hh:133 ../../xffm/common/gtk.hh:71
+msgid "Exit"
+msgstr "প্রস্থান"
+
+#: ../../xffm/fm/dialog/dialog.hh:116
+msgid "Removed"
+msgstr "অপসারণ করা হয়েছে"
+
+#: ../../xffm/fm/dialog/dialog.hh:132
+#, fuzzy
+msgid "Detected device(s):"
+msgstr "ডিভাইস সনাক্ত করা হবে (D)"
+
+#. Create the widgets
+#: ../../xffm/fm/page/vbuttonbox.hh:37 ../../xffm/common/gtk.hh:332
+msgid "Help"
+msgstr "সহায়িকা (S)"
+
+#. File chooser
+#: ../../xffm/fm/page/pathbar.hh:306 ../../xffm/fm/page/pathbar.hh:308
+#, fuzzy
+msgid "Go to"
+msgstr "%s-এ চলুন"
+
+#: ../../xffm/fm/page/pathbar.hh:331
+msgid "Not a directory"
+msgstr "ডিরেক্টরি নয়"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Renice Process"
+msgstr "Renice প্রসেস"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Suspend"
+msgstr "স্থগিত করুন"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Continue"
+msgstr "এগিয়ে চলুন (C)"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Interrupt"
+msgstr "ইন্টারাপ্ট"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Hangup"
+msgstr "কেটে দিন (H)"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "User 1 (USR1)"
+msgstr "ইউসার ১ (USR1)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "User 2 (USR2)"
+msgstr "ইউসার ২ (USR2)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+#, fuzzy
+msgid "Terminate Task"
+msgstr "বন্ধ করুন"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "Abort"
+msgstr "অস্বাভাবিক প্রস্থান"
+
+#: ../../xffm/fm/page/runbutton.hh:138
+msgid "Kill"
+msgstr "Kill করুন"
+
+#: ../../xffm/fm/page/runbutton.hh:139
+#, fuzzy
+msgid "Segmentation fault"
+msgstr "সেগমেন্টেশন সংক্রান্ত সমস্যা"
+
+#: ../../xffm/fm/page/runbutton.hh:217
+msgid "PID"
+msgstr "PID"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:37
+#, fuzzy
+msgid "Embedded Terminal"
+msgstr "টার্মিন্যাল খুলুন (T)"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:38
+#, fuzzy
+msgid "All items in the iconview."
+msgstr "বর্তমান উইন্ডোর মধ্যে উপস্থিত সব বিষয়বস্তু নির্বাচন করুন"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:39
+#, fuzzy
+msgid "Scripting"
+msgstr "স্ক্রিপ্ট"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:40
+#, fuzzy
+msgid "Clear Log"
+msgstr "তালিকা মুছে ফেলুন"
+
+#. Status textview
+#: ../../xffm/fm/page/hbuttonbox.hh:42
+msgid "Terminal font"
+msgstr "টার্মিন্যালের ফন্ট"
+
+#: ../../xffm/fm/treeview.hh:17
+msgid "Name"
+msgstr "নাম"
+
+#: ../../xffm/fm/treeview.hh:20
+msgid "Size"
+msgstr "মাপ"
+
+#: ../../xffm/fm/treeview.hh:21
+msgid "Date"
+msgstr "তারিখ"
+
+#: ../../xffm/fm/treeview.hh:22
+#, fuzzy
+msgid "Mimetype"
+msgstr "মাইমের ধরন:"
+
+#: ../../xffm/fm/treeview.hh:24
+msgid "TYPE"
+msgstr "TYPE"
+
+#: ../../xffm/fm/base/signals.hh:642
+msgid "Directory does not exist."
+msgstr "ডিরেক্টরি উপস্থিত নেই"
+
+#: ../../xffm/fm/base/signals.hh:644 ../../xffm/fm/base/signals.hh:646
+#, fuzzy
+msgid "Trash is empty"
+msgstr "ট্যাবলেট ফাঁকা"
+
+#: ../../xffm/common/settings.hh:27
+#, fuzzy
+msgid "New File:"
+msgstr "নতুন ফাইল (i)"
+
+#: ../../xffm/common/gio.hh:235
+#, fuzzy
+msgid "Could not copy item:"
+msgstr "বস্তু মুছে ফেলতে ব্যর্থ"
+
+#: ../../xffm/common/gio.hh:237
+#, fuzzy
+msgid "Could not move item:"
+msgstr "বস্তু মুছে ফেলতে ব্যর্থ"
+
+#: ../../xffm/common/gio.hh:239
+#, fuzzy
+msgid "Create symbolic link"
+msgstr "সিম্বোলিক লিংক প্রতিস্থাপন করা হবে (p)"
+
+#: ../../xffm/common/gio.hh:276
+#, c-format
+msgid ""
+"Could not delete:\n"
+"%s"
+msgstr ""
+"মুছে ফেলা যায়নি:\n"
+"%s"
+
+#: ../../xffm/common/gio.hh:278
+#, c-format
+msgid "Could not move %s to trash"
+msgstr "%s কে ট্র্যাশে সরানো যায়নি"
+
+#: ../../xffm/common/clipboard.hh:23 ../../xffm/common/dnd.hh:40
+msgid "Copying files locally"
+msgstr "স্থানীয় অবস্থানে ফাইল কপি করা হচ্ছে"
+
+#: ../../xffm/common/clipboard.hh:30 ../../xffm/common/dnd.hh:34
+#, fuzzy
+msgid "Moving files"
+msgstr "ফাইল স্থানান্তর করা হচ্ছে"
+
+#: ../../xffm/common/dnd.hh:46
+#, fuzzy
+msgid "Create Link"
+msgstr "মেইল তৈরি করুন"
+
+#: ../../xffm/common/util.hh:1200
+#, c-format
+msgid ""
+"Scriptfile \"%s\" is not executable. Please set the executable-attribute on "
+"that file."
+msgstr ""
+
+#: ../../xffm/common/util.hh:1202 ../../xffm/common/util.hh:1237
+#, c-format
+msgid "Open with %s"
+msgstr "%s সহযোগে খুলুন (O)"
+
+#: ../../xffm/common/util.hh:1202
+msgid "Text Editor"
+msgstr "টেক্সট সম্পাদন ব্যবস্থা"
+
+#: ../../xffm/common/util.hh:1239 ../../xffm/common/gtk.hh:65
+msgid "Execute Shell Command"
+msgstr "শেল কমান্ড সঞ্চালন করুন"
+
+#: ../../xffm/common/util.hh:1243
+msgid ""
+"Console: quickly run single commands -- write a command here and press enter."
+msgstr ""
+
+#: ../../xffm/common/gtk.hh:123
+msgid "New Tab"
+msgstr "নতুন ট্যাব (T)"
+
+#: ../../xffm/common/gtk.hh:335
+msgid "OK"
+msgstr "ঠিক আছে"
+
+#: ../../xffm/common/run.hh:344
+msgid "error"
+msgstr "ত্রুটি"
+
+#: ../../xffm/common/run.hh:348
+#, fuzzy
+msgid "warning"
+msgstr "সতর্কবার্তা"
+
+#: ../../xffm/common/mime.hh:101 ../../xffm/common/mime.hh:143
+#, fuzzy
+msgid "No Read Permission"
+msgstr "সাইট সংক্রান্ত অনুমতি"
+
+#: ../../xffm/common/preview.hh:593
+msgid "Empty file"
+msgstr "ফাইলটি ফাঁকা"
+
+#: ../../xffm/common/preview.hh:648
+#, fuzzy, c-format
+msgid "Cannot read from %s"
+msgstr "\"%s\" থেকে পড়তে ব্যর্থ"
+

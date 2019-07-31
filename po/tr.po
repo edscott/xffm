@@ -1,0 +1,1546 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:40:33 CDT 2013 ---
+#
+# Adem Alp Yıldız <ademalp@linux-sevenler.org>, 2004-2006.
+# Y. Kürşat Tuncel <kursat@linux.org.tr>, 1999.
+# Sezgin Ege <sezginege.mail@gmail.com>, 2011.
+# Togan Müftüoğlu <toganm@yahoo.com>, 2000.
+# Osman Tosun <rainman.neu@gmail.com>, 2008-2009.
+# Ozgur Dogan GUNES <ozgur@geek.com>, 2001.
+#  Ömer Fadıl USTA <omer_fad@hotmail.com>, 2002.
+# Alper Sen <aalpersen@gmail.com>, 2005.
+# Hasan <hasan@teknoseyir.com>, 2006.
+# Onur Tolga ŞEHİTOĞLU <onur@lcsl.metu.edu.tr>, 1998.
+# Güngör Erseymen <gelurine@gmail.com>, 2007-2008.
+# Onur Kucuk , <okucuk@yahoo.com>, 2000.
+# Serhat Demirkol <serhat_demirkol@yahoo.com>, 2009-2013.
+# Ozan YILMAZ <parduser99@gmail.com>, 2009.
+# Onur Soysal <e116511@ceng.metu.edu.tr>, 2000.
+# Barış Metin <baris@uludag.org.tr>, 2000-2005.
+# İlker DAĞLI <ilker@ilkerdagli.info>, 2011.
+# Yaşar ŞENTÜRK <yasar@dijitaltek.com>, 2004-2005.
+# Yıldız Kardeşler <turkishprogram@xposta.com>, 2003-2004.
+# Abdlkadir KAYA <abdulkadir_kaya@linux-sevenler.org>, 2004.
+# Yaşar Şentürk <yasar@kde.org.tr>, 2005.
+# Rail Aliev <rail@i-rs.ru>, 2008.
+# İsmail Şimşek <simsek@kde.org.tr>, 2004-2005.
+# Serkan Yılmaz <syilmaz13@gmail.com>, 2009.
+# Erol Öz <eroloz@bilgi.edu.tr>, 2000.
+# Rıdvan CAN <ridvan@linuxdeneyimi.com>, 2003-2004.
+# Fatih Ergüven <fatih@erguven.org>, 2006-2009.
+# Ömer Fadıl USTA <omer_fad@hotmail.com>, 1999-2004.
+# E. <e@k.org>, 2009.
+# Osman Karagöz <osmank3@gmail.com>, 2012-2013.
+# YILDIZ KARDEŞLER <turkishprogram@xposta.com>, 2003.
+# Cemal ASLAN <cemalaslan47@gmail.com>, 2007.
+# Onur Can CAKMAK <onur@uzem.itu.edu.tr>, 2004.
+# Tolga BALCI <tolgabalci@ttnet.net.tr>, 2007.
+# Sinan İmamoğlu <sinan@myrealbox.com>, 2002-2003.
+# erkaN <erkaN@linux-sevenler.de>, 2003.
+# ercin <ercin@linux.org.tr>, 2011.
+# Gökçen Eraslan <gokcene@anadolu.edu.tr>, 2005-2013.
+# Nuri Özer <nuri@sevgibilgisayar.com>, 2002-2003.
+# Emre Aladağ <emre@emrealadag.com>, 2006.
+# Mehmet Mıdık <mmidik@setra.net.tr>, 2000.
+# Koray Bostancı <koray@kde.org.tr>, 2006.
+# Fatih Demir <kabalak@gmx.net>, 1999-2003.
+# Serdar Dalgıç <serdar@pardus.org.tr>, 2010.
+# Arman Akssoy <armish@linux-sevenler.de>, 2003.
+# Zerrin Cakmakkaya <zerrin@uludag.org.tr>, 2004-2005.
+# Ali Pakkan <apakkan@hotmail.com>, 2001.
+# Elfun K. <elfun@riseup.net>, 2009.
+# Askin Yollu <askin@askin.ws>, 2009.
+# Server Acim <serveracim@gmail.com>, 2005-2010.
+# Sinan Imamoglu <sinan@myrealbox.com>, 2002-2003.
+# Mark R. Pariente <mark@demar.com.tr>, 2004.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2002-2012.
+# Orçun Göksel <e112362@ceng.metu.edu.tr>.
+# S.Çağlar Onur <caglar@uludag.org.tr>, 2004-2005.
+# Görkem �Getin <gorkem@gelecek.com.tr>, 2002-2003.
+# Mehmet TARIMCI <mehmet@gelecek.com.tr>, 2000.
+# Bülent Bolat <bbolat@yildiz.edu.tr>, 2000-2004.
+# Mufit Eribol <meribol@ere.com.tr>, 2000.
+# Yıldırım Karslıoğlu <ykarslioglu@superonline.com>, 2000-2001.
+# Serdar CICEK <serdar@nerd.com.tr>, 2008-2009.
+# Ayşe Genç <ayse@uludag.org.tr>, 2004-2005.
+# Özer Kavak <ozerkavak@gmail.com>, 2008.
+# Muhammed EKEN <gnome@m-eken.com>, 2011.
+# Atilla ÖNTAŞ <atilla_ontas@mandriva.org>, 2009-2010.
+# Ayan Öztürk <ayanozturk@gmail.com>, 2008.
+# Akın Ömeroğlu <akin@omeroglu.net>, 2007-2013.
+# Gurkan Aslan <gurkan@iaslan.com>, 2004.
+# Ali Isingor <isingor@gmail.com>, 2007.
+# İsmail Dönmez <ismail@pardus.org.tr>, 2006.
+# Ömer Fadıl USTA , <omer_fad@hotmail.com>, 2002.
+# root <root@LinuxCSE-36>, 2003-2011.
+# Kemal Yilmaz <kyilmaz@uekae.tubitak.gov.tr>, 2001.
+# Muhammed Eken <gnome@m-eken.com>, 2011.
+# serdar soytetir <tulliana@gmail.com>, 2007-2012.
+# Engin Çağatay <engincagatay@yahoo.com>, 2004-2007.
+# Sedat Mavuzer <XXIIXV@gmx.net>, 2003.
+# Işıl Poyraz <isil@pardus.org.tr>, 2010.
+# Halil Erensu <halil@superonline.com>, 2003.
+# Deniz Akkuş Kanca <deniz@arayan.com>, 2001.
+# Marc-Andre Lureau <marcandre.lureau@gmail.com>, 2008.
+# Serkan YILMAZ <syilmaz13@gmail.com>, 2010.
+# Serdar SOYTETİR <tulliana@gmail.com>, 2010-2013.
+# Mertcan Mi'ma Bekir <bekirsonat@kde.org.tr>, 2007.
+# Ongun Kanat <ongun.kanat@gmail.com>, 2012-2013.
+# Caner Baydemir <caner.baydemir@gelecek.com.tr>, 2003.
+# Mustafa Günay <mustafagunay@gmail.com>, 2007-2013.
+# Uğur Çetin <jnmbk@users.sourceforge.net>, 2007-2012.
+# Barış Çiçek <baris@teamforce.name.tr>, 2009.
+# Tamer Sezgin <tamer_sezgin@yahoo.com>, 2003-2004.
+# Görkem Çein <gorkem@gelecek.com.tr>, 2002.
+# Ufuk KOCOLU <ukocolu@hotmail.com>, 2000.
+# Burcu Güzel <burcu.guzel@gmail.com>, 2006.
+# Sertaç Ö. YILDIZ <sertacyildiz@gmail.com>, 2004.
+# Arman Aksoy <armish@linux-sevenler.de>, 2003.
+# Barbaros Ulutas <barbaros@ekolojikpolitika.org>, 2002-2003.
+# Ahmet AYGÜN <ahmet@zion.gen.tr>, 2005.
+# Evren Alim <gunesingolgesi@gunesingolgesi.com>, 2004.
+# Serdar Cicek <serdar@nerd.com.tr>, 2006.
+# S. Alp �NYER <ssenyer@linux-sevenler.org>, 2004.
+# Davut Topcan <davuttopcan@yahoo.com>, 2004-2005.
+# Serkan Arıkuşu <kde-l10n-tr@kde.org>, 2004.
+# A.Burak Ilgicioglu <ilgici@turk.net>, 2001.
+# Tuncay YENİAY <tuncayyeniay@mynet.com>, 2002.
+# Murat Sisman <muratsisman@mailcity.com>, 2000.
+# Serdar Cevher <scevher@gsl.gsu.edu.tr>, 2000-2002.
+# Senol Korkmaz <mail@senolkorkmaz.info>, 2011.
+# Erik Vetters <j-o-n-e-s@web.de>.
+# Bilgesu Güngör <bilgesugungor@gmail.com>, 2008-2009.
+# Fethican Coşkuner <fethicanc@gmail.com>, 2007-2008.
+# Ismail Donmez <ismail@uludag.org.tr>, 2006.
+# Nilgün Belma Bugüner <nilgun@superonline.com>, 2001-2003.
+# Yusuf Bolu <yusufbolu@gmail.com>, 2011.
+# Onur Güzel <guzelmu@itu.edu.tr>, 2007-2009.
+# RIDVAN CAN <ridvan@geleceklinux.org>, 2003.
+# İlker Dağlı <ilker@ilkerdagli.info>, 2011.
+# Engin ÇAĞATAY <engincagatay@yahoo.com>, 2003-2008.
+# Bekir Sonat <cortexbs@yahoo.com>, 2005.
+# Adem GUNES <adem@alaeddin.cc.selcuk.edu.tr>, 2000.
+# Fatih Aşıcı <fatih@pardus.org.tr>, 2010.
+# Şenol Korkmaz <mail@senolkorkmaz.info>, 2011.
+# Murat Şenel <muratasenel@gmail.com>, 2006.
+# Ayhan Yalçınsoy <dellpardus@hotmail.com>, 2008.
+# erkaN kaplaN <erkan@linux-sevenler.org>.
+# Engin Cagatay <engincagatay@yahoo.com>, 2005-2006.
+# Görkem Çetin, <gorkem@gelecek.com.tr>, 2000-2004.
+# Baris Cicek <baris@teamforce.name.tr>, 2004-2011.
+# Fırat KÜÇÜK <firat@kucuk.org>, 2005.
+# Emrah Ünal <eunall@gmail.com>, 2005-2007.
+# Özgür Aş <thelegbra@hotmail.com>, 2002.
+# Mustafa Arici <me@mustafaarici.info>, 2011.
+# H. İbrahim Güngör <ibrahim@pardus.org.tr>, 2008-2013.
+# Aydın CAN <aydincan2001@yahoo.com>, 2004.
+# Görkem Cetin <gorkem@gelecek.com.tr>, 2001-2002.
+# Alper Şen <aalpersen@gmail.com>, 2005.
+# Barkın Tanman <barkint@gmail.com>, 2010-2011.
+# Onur Küçük <onur@uludag.org.tr>, 2004-2013.
+# Seha İslam <isla0015@umn.edu>, 2005.
+# Volkan Güney <guneyvolkan@gmail.com>, 2006-2007.
+# Onur Can Çakmak <onur.cakmak@gmail.com>, 2006.
+# Gürkan Gür <seqizz@gmail.com>, 2008-2009.
+# Kunter Kutlu <kunterkutlu@gmail.com>, 2007-2008.
+# Arman Aksoy (Armish) <armish@linux-sevenler.de>, 2003.
+# Can Coşkuner <fethicanc@gmail.com>, 2007.
+# Adem Alp YILDIZ <ademalp@linux-sevenler.org>, 2004-2005.
+# Ozan Eren BILGEN <oebilgen@uekae.tubitak.gov.tr>, 2005.
+# İsmail Şahin <kok@boun.edu.tr>, 2003.
+# Ahmet AYGUN <ahmet@zion.gen.tr>, 2005.
+# Metin Oral <moral@suse.de>, 2001.
+# CigiCigi Çeviri Grubu <ceviri@cigicigi.com>, 2007-2008.
+# Yıldız KARDESLER <turkishprogram@xposta.com>, 2004.
+# Gorkem Cetin <gorkem@kde.org>, 2003-2004.
+# Mevlüt KOÇAK <mevlut_kocak@milliemlak.gov.tr>, 2003-2007.
+# Serdar ÇİÇEK <serdar@nerd.com.tr>, 2007-2008.
+# Barbaros Uluta�_ <tebarul@yahoo.com>, 2003.
+# Ahmet Emre Aladağ <emre@emrealadag.com>, 2007-2008.
+# Emre Kadıoğlu <emrek@gawab.com>, 2005.
+# Adil Yıldız <adil_yildiztr@yahoo.com>, 2004-2005.
+# Anıl Özbek <ozbekanil@gmail.com>, 2009-2013.
+# Sertaç Ö. Yıldız <sertacyildiz@gmail.com>, 2007.
+# Volkan Yalçın <vlyalcin@gmail.com>, 2011-2012.
+# Burçin Dönmez <bdonmez@cisunix.unh.edu>, 2004.
+# Hasan Kiran <sunder67@hotmail.com>, 2013.
+# Mevlüt Koçak <mevlutkocak@hotmail.com>, 2003.
+# Tunahan Uçar <tunahanucar@gmail.com>, 2011.
+# Erçin EKER <ercin.eker@linux.org.tr>, 2003-2011.
+# Murat SULUHAN <murat.suluhan@tesam.com.tr>, 2000-2001.
+# Hasan Yılmaz <iletisim@hasanyilmaz.net>, 2010.
+# Onur Can ÇAKMAK <onur.cakmak@gmail.com>, 2004-2006.
+# Onur Kucuk, <okucuk@yahoo.com>, 2000.
+# Ozan Çağlayan <ozancag@gmail.com>, 2010-2013.
+# Cemil MUTLU <mutlucemil@gmail.com>, 2005.
+# Huseyin Nacak <nacakhuseyin@googlemail.com>, 2009.
+# Deniz Akkus Kanca <deniz@arayan.com>, 2001-2004.
+# Enver ALTIN <enver.altin@frontsite.com.tr>, 2005.
+# Osman Yüksel <yuxel@sonsuzdongu.com>, 2005.
+# KEMAL YILMAZ <kyilmaz@uekae.tubitak.gov.tr>, 2001.
+# Hakan Bekdas <hakanbekdas@yahoo.com>, 2006.
+# ozer kavak <info@nestingo.com>, 2012.
+# Serkan Kenar <serkan@ieee.metu.edu.tr>, 2004-2006.
+# Kemal YILMAZ <kyilmaz@uekae.tubitak.gov.tr>, 2001.
+# Muhammet Kara <muhammet.k@gmail.com>, 2007-2013.
+#  Tuncay YENİAY <tuncayyeniay@mynet.com>, 2002.
+# H.Gökhan SARI <hsa2@difuzyon.net>, 2008.
+# Ayhan YALÇINSOY <dellpardus@hotmail.com>, 2008.
+# Eren Türkay <turkay.eren@gmail.com>, 2007-2010.
+# Koray Löker <loker@pardus.org.tr>, 2006-2011.
+# Meltem Turhan Yondem <mturhan@ceng.metu.edu.tr>, 2006.
+# Aydın Demirel <aydin@kde.org.tr>, 2004-2005.
+# Server ACİM <serveracim@gmail.com>, 2010.
+# Serdar Soytetir <tulliana@gmail.com>, 2006-2013.
+# Bekir SONAT <cortexbs@yahoo.com>, 2005-2006.
+# kaya oğuz <kaya@kuzeykutbu.org>, 2005.
+# Salih Giray <salih.giray@gelecek.com.tr>, 2003.
+# Kaya Oğuz <kaya@kuzeykutbu.org>, 2005.
+# Gökmen Göksel <gokmen@pardus.org.tr>, 2010.
+# Tuyan Özipek <tuyan@4inarow.net>, 2007.
+# Mehmet Tarımcı <mehmet@gelecek.com.tr>, 2002.
+# Gokcen Ogutcu <gokceno@biker.gen.tr>, 2000.
+# Necmettin Begiter <necmettin.begiter@gmail.com>, 2007-2008.
+# Atilla Aktuna <aktuna@gmail.com>, 2007.
+# Volkan <vlyalcin@gmail.com>, 2011.
+# Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
+# Türker SEZER <turkersezer@tsdesign.info>, 2007.
+# atilla <atilla_ontas@mandriva.org>, 2010.
+# Burak Ilgicioglu <ilgici@turk.net>, 2000.
+# Erkan <erkaN@linux-sevenler.de>, 2003.
+# Sami Onur Zaim <onurzaim@hotmail.com>, 2003-2004.
+# Bülent ŞENER <bsener@inonu.edu.tr>, 2005-2006.
+# Muhsin YEŞİLYILMAZ <muhsinyy@hotmail.com>, 2000.
+# Görkem Çetin <gorkem@gelecek.com.tr>, 1999-2005.
+# Thomas Niederreiter <tn@xcdroast.org>, 2002-2003.
+# <srtxg@chanae.alphanet.ch>, 2001-2011.
+# baki incebulut <bakiince@yahhoo.com.tr>, 2006.
+# Enis Cezayirli <Enis.Cezayirli@dialup.ankara.edu.tr>, 2001.
+# Turkish message file for YaST2 (@memory@). <>.
+# Gökmen Görgen <gkmngrgn@gmail.com>, 2008.
+# Ali Devin Sezer <Ali_Sezer@brown.edu>, 2002.
+# Volkan Gezer <volkangezer@gmail.com>, 2013.
+# Bulent SENER <bsener@inonu.edu.tr>, 2005.
+# Oğuz YILMAZ <o.yilmaz@ieee.org>, 2000.
+# Alper Ersoy <aersoy@tfz.net>, 2001.
+# Deniz Koçak <lenduha@gmail.com>, 2005.
+# erkan kadak <erkan@hardhours.com>, 2010.
+# Ozan Eren BİLGEN <oebilgen@uekae.tubitak.gov.tr>, 2005.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-02 12:27-0600\n"
+"PO-Revision-Date: 2005-03-14 04:17+0200\n"
+"Last-Translator: Deniz Akkus Kanca <deniz@arayan.com>\n"
+"Language-Team: Turkish <gnu-tr-u12a@lists.sourceforge.net>\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: KBabel 1.9.1\n"
+
+#: ../../xffm/completion/base.hh:28
+msgid "Command"
+msgstr "Komut"
+
+#: ../../xffm/completion/base.hh:31
+msgid "File"
+msgstr "Dosya"
+
+#: ../../xffm/completion/base.hh:34
+msgid "Command history"
+msgstr "Komut geçmişi"
+
+#. option -u uid "uid" "uid_combo"
+#: ../../xffm/completion/base.hh:37 ../../xffm/find/dialog.hh:199
+msgid "User"
+msgstr "Kullanıcı"
+
+#: ../../xffm/completion/base.hh:40
+msgid "Variable"
+msgstr "Değişken"
+
+#: ../../xffm/completion/base.hh:43
+msgid "Host"
+msgstr "Makine"
+
+#: ../../xffm/completion/base.hh:55
+msgid "Found no match"
+msgstr "Elşeşme bulunamadı"
+
+#: ../../xffm/completion/base.hh:133 ../../xffm/completion/base.hh:134
+msgid "Matches"
+msgstr "Eşleşiyor"
+
+#: ../../xffm/completion/base.hh:134
+msgid "Too many files open"
+msgstr "Çok fazla dosya açık"
+
+#: ../../xffm/completion/base.hh:325 ../../xffm/find/fgr.hh:124
+msgid "Options:"
+msgstr "Seçenekler:"
+
+#: ../../xffm/completion/bash.hh:133
+msgid "Completion mode:"
+msgstr "Tamamlama kipi:"
+
+#: ../../xffm/completion/bash.hh:134
+msgid "command"
+msgstr "komut"
+
+#: ../../xffm/completion/bash.hh:135
+msgid "file"
+msgstr "dosya"
+
+#: ../../xffm/completion/bash.hh:145 ../../xffm/completion/bash.hh:149
+msgid "Options >>"
+msgstr "Seçenekler >>"
+
+#: ../../xffm/find/fgr.hh:124 ../../xffm/find/dialog.hh:308
+msgid "Path"
+msgstr "Yol"
+
+#: ../../xffm/find/fgr.hh:125
+msgid "Locate documents and folders on this computer by name or content"
+msgstr ""
+"Bu bilgisayar üzerindeki belgeleri ve klasörler ismiyle ya da içeriğiyle "
+"konumlandırın"
+
+#: ../../xffm/find/fgr.hh:126 ../../xffm/find/dialog.hh:341
+msgid "Filter:"
+msgstr "Filtre adı:"
+
+#: ../../xffm/find/fgr.hh:126
+msgid "Search for files"
+msgstr "Dosya ara"
+
+#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
+#: ../../xffm/find/fgr.hh:128
+msgid "Contents:"
+msgstr "İçerik:"
+
+#: ../../xffm/find/fgr.hh:128
+#, fuzzy
+msgid "File's contents filtered as plain text."
+msgstr "Düz yazı olarak kaydedilsin mi?"
+
+#: ../../xffm/find/fgr.hh:131
+msgid "Verbose output debugging mode."
+msgstr "Ayrıntılı hata ayıklama çıktısı kipi."
+
+#: ../../xffm/find/fgr.hh:133
+msgid "Show version information"
+msgstr "Sürüm bilgisini göster"
+
+#: ../../xffm/find/fgr.hh:135
+msgid "Filter Details"
+msgstr "Filtre Ayrıntıları"
+
+#. / option -a "xdev"
+#: ../../xffm/find/fgr.hh:138 ../../xffm/find/dialog.hh:180
+msgid "Stay on single filesystem"
+msgstr "Tek dosya sistemi üstünde dur"
+
+#: ../../xffm/find/fgr.hh:140
+msgid "Print..."
+msgstr "Yazdır..."
+
+#: ../../xffm/find/fgr.hh:140
+msgid "The unique Process ID that identifies this process."
+msgstr "Süreci tanımlayan benzersiz Süreç Kimliği."
+
+#. / option -D "recursiveH"
+#: ../../xffm/find/fgr.hh:142 ../../xffm/find/dialog.hh:177
+msgid "Find hidden files and directories"
+msgstr "Gizli dosya ve dizinleri bul"
+
+#: ../../xffm/find/fgr.hh:143
+msgid "Filter"
+msgstr "Filtre"
+
+#: ../../xffm/find/fgr.hh:144
+msgid ""
+"To display files which pass the filter (stars and regexps will be processed)"
+msgstr ""
+"Filtreden geçer dosyaları görüntülemek için (yıldız ve düzenli ifadeler "
+"işlemden geçer)"
+
+#. / option -r "recursive"
+#: ../../xffm/find/fgr.hh:146 ../../xffm/find/dialog.hh:174
+msgid "Recursive"
+msgstr "Tekrarlı"
+
+#: ../../xffm/find/fgr.hh:147 ../../xffm/find/fgr.hh:148
+#: ../../xffm/find/fgr.hh:149 ../../xffm/find/fgr.hh:150
+msgid "KByte"
+msgstr "KBayt"
+
+#: ../../xffm/find/fgr.hh:148
+msgid "is greater than or equal to"
+msgstr "büyük ya da eşit"
+
+#: ../../xffm/find/fgr.hh:150
+msgid "is less than or equal to"
+msgstr "küçük ya da eşit"
+
+#: ../../xffm/find/fgr.hh:152
+msgid "Set UID"
+msgstr "UID Belirle"
+
+#: ../../xffm/find/fgr.hh:152
+msgid "Executable Text Files"
+msgstr "Çalıştırılabilir Metin Dosyaları"
+
+#: ../../xffm/find/fgr.hh:154
+msgid "The permissions of the file, in octal notation."
+msgstr "Dosyanın erişim hakları, sekizlik yazımda."
+
+#: ../../xffm/find/fgr.hh:155
+msgid "Type"
+msgstr "Tür"
+
+#: ../../xffm/find/fgr.hh:157 ../../xffm/find/signals.hh:17
+msgid "Any"
+msgstr "Any"
+
+#: ../../xffm/find/fgr.hh:157
+msgid "Default type"
+msgstr "Hazır olan tip"
+
+#: ../../xffm/find/fgr.hh:158 ../../xffm/common/preview.hh:497
+#, fuzzy
+msgid "Regular file"
+msgstr "normal dosya"
+
+#: ../../xffm/find/fgr.hh:159 ../../xffm/find/signals.hh:11
+#: ../../xffm/fm/local/popup.hh:803 ../../xffm/common/preview.hh:488
+msgid "Directory"
+msgstr "Dizin"
+
+#: ../../xffm/find/fgr.hh:160 ../../xffm/find/signals.hh:12
+#: ../../xffm/common/preview.hh:494
+msgid "Symbolic Link"
+msgstr "Sembolik Bağlantı"
+
+#: ../../xffm/find/fgr.hh:161
+#, fuzzy
+msgid "UNIX Socket"
+msgstr "UNIX Şeması"
+
+#: ../../xffm/find/fgr.hh:162 ../../xffm/find/signals.hh:14
+#: ../../xffm/common/preview.hh:482
+msgid "Block device"
+msgstr "Blok aygıtı"
+
+#: ../../xffm/find/fgr.hh:163 ../../xffm/find/signals.hh:15
+#: ../../xffm/common/preview.hh:485
+msgid "Character device"
+msgstr "Karakter aygıtı"
+
+#: ../../xffm/find/fgr.hh:164 ../../xffm/find/signals.hh:16
+#: ../../xffm/common/preview.hh:491
+msgid "FIFO"
+msgstr "FIFO"
+
+#. radio_p freed on destroy event for dialog_.
+#. option -k minutes "last_minutes", "last_minutes_spin"
+#: ../../xffm/find/fgr.hh:166 ../../xffm/find/fgr.hh:168
+#: ../../xffm/find/dialog.hh:221
+msgid "Minutes"
+msgstr "Dakika"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/dialog.hh:270 ../../xffm/find/dialog.hh:370
+#: ../../xffm/fm/treeview.hh:18
+msgid "Details"
+msgstr "Ayrıntılar"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/fgr.hh:179 ../../xffm/find/fgr.hh:180
+#: ../../xffm/find/fgr.hh:183 ../../xffm/find/fgr.hh:184
+#: ../../xffm/find/fgr.hh:187 ../../xffm/find/fgr.hh:188
+msgid "TIME"
+msgstr "SAAT"
+
+#: ../../xffm/find/fgr.hh:168 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/fgr.hh:174 ../../xffm/find/fgr.hh:177
+msgid "Previous"
+msgstr "Önceki"
+
+#. option -h hours "last_hours", "last_hours_spin"
+#: ../../xffm/find/fgr.hh:169 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/dialog.hh:226
+msgid "Hours"
+msgstr "Saat"
+
+#. option -d days "last_days", "last_days_spin"
+#: ../../xffm/find/fgr.hh:172 ../../xffm/find/fgr.hh:174
+#: ../../xffm/find/dialog.hh:231
+msgid "Days"
+msgstr "Günler"
+
+#: ../../xffm/find/fgr.hh:175
+msgid "Month"
+msgstr "Ay"
+
+#: ../../xffm/find/fgr.hh:177
+msgid "Month(s)"
+msgstr "Ay"
+
+#: ../../xffm/find/fgr.hh:180
+msgid "Modification Time :"
+msgstr "Değiştirme Tarihi :"
+
+#: ../../xffm/find/fgr.hh:184
+msgid "Access Time :"
+msgstr "Erişim Tarihi :"
+
+#: ../../xffm/find/fgr.hh:188
+msgid "Creation Time :"
+msgstr "Oluşturma Tarihi :"
+
+#: ../../xffm/find/fgr.hh:191 ../../xffm/find/fgr.hh:192
+msgid "uid"
+msgstr "uid "
+
+#: ../../xffm/find/fgr.hh:192
+msgid "User:"
+msgstr "Kullanıcı:"
+
+#: ../../xffm/find/fgr.hh:194 ../../xffm/find/fgr.hh:195
+#, fuzzy
+msgid "gid"
+msgstr "kimlik"
+
+#: ../../xffm/find/fgr.hh:195
+msgid "Group:"
+msgstr "Grup:"
+
+#: ../../xffm/find/fgr.hh:198
+msgid ""
+"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+"character that  normally  follows  a file  name"
+msgstr ""
+
+#: ../../xffm/find/fgr.hh:200
+msgid "Content View"
+msgstr "İçerik Görünümü"
+
+#: ../../xffm/find/fgr.hh:201 ../../xffm/find/fgr.hh:202
+#: ../../xffm/find/fgr.hh:203 ../../xffm/find/fgr.hh:204
+msgid "STRING"
+msgstr "DİZGİ"
+
+#: ../../xffm/find/fgr.hh:202 ../../xffm/find/fgr.hh:204
+#: ../../xffm/fm/local/popup.hh:563
+msgid "Regular expression"
+msgstr "Düzenli ifade"
+
+#: ../../xffm/find/fgr.hh:204
+msgid "Extended"
+msgstr "Genişletilmiş"
+
+#: ../../xffm/find/fgr.hh:206
+msgid "Ignore case"
+msgstr "Büyük/küçük harf önemli değil"
+
+#: ../../xffm/find/fgr.hh:208
+msgid "Text Files"
+msgstr "Metin Dosyaları"
+
+#: ../../xffm/find/fgr.hh:210 ../../xffm/find/dialog.hh:552
+msgid "No match"
+msgstr "Eşleme yok"
+
+#: ../../xffm/find/fgr.hh:212 ../../xffm/find/dialog.hh:470
+msgid "Line Count"
+msgstr "Satır Sayısı"
+
+#: ../../xffm/find/fgr.hh:214
+msgid "Words"
+msgstr "Kelimeler"
+
+#: ../../xffm/find/fgr.hh:216
+msgid "Lines"
+msgstr "Çizgiler"
+
+#: ../../xffm/find/fgr.hh:368
+#, fuzzy, c-format
+msgid "Usage : %s [OPTIONS]\n"
+msgstr "Kullanım: %s [SEÇENEK]\n"
+
+#: ../../xffm/find/signals.hh:10
+msgid "Regular"
+msgstr "Sıradan"
+
+#: ../../xffm/find/signals.hh:13 ../../xffm/common/preview.hh:500
+msgid "Socket"
+msgstr "Soket"
+
+#: ../../xffm/find/signals.hh:209
+msgid "Select folder to search in"
+msgstr "Arama yapılacak klasörü seçin"
+
+#. button no
+#: ../../xffm/find/signals.hh:265 ../../xffm/find/dialog.hh:584
+#: ../../xffm/response/entryfileresponse.hh:18
+#: ../../xffm/response/entryresponse.hh:305
+#: ../../xffm/response/passwdresponse.hh:558
+#: ../../xffm/fm/local/properties.hh:304 ../../xffm/fm/local/rm.hh:155
+msgid "Cancel"
+msgstr "İptal Et"
+
+#: ../../xffm/find/signals.hh:293 ../../xffm/find/signals.hh:722
+#, fuzzy
+msgid "No editor for current action."
+msgstr "Hataları düzeltmeye çalışma"
+
+#. / option "upper_limit_spin" (only in gtk dialog_)
+#: ../../xffm/find/signals.hh:351 ../../xffm/find/dialog.hh:183
+msgid "Results"
+msgstr "Sonuçlar"
+
+#: ../../xffm/find/signals.hh:351
+msgid "Upper limit:"
+msgstr "Üst limit:"
+
+#: ../../xffm/find/signals.hh:353
+msgid "Counting files..."
+msgstr "Dosyalar sayılıyor..."
+
+#: ../../xffm/find/signals.hh:368
+#, fuzzy, c-format
+msgid "Found %d match"
+msgid_plural "Found %d matches"
+msgstr[0] "%d eşleşme bulundu"
+
+#: ../../xffm/find/signals.hh:370
+#, fuzzy, c-format
+msgid "%s Finished : %s"
+msgstr "Bitiş: %s"
+
+#: ../../xffm/find/signals.hh:488 ../../xffm/find/signals.hh:490
+msgid "Searching..."
+msgstr "Aranıyor..."
+
+#. g_object_set_data(G_OBJECT(dialog_), "window", dialog_);
+#: ../../xffm/find/dialog.hh:98 ../../xffm/find/dialog.hh:150
+#: ../../xffm/find/dialog.hh:611
+msgid "Find"
+msgstr "Bul"
+
+#: ../../xffm/find/dialog.hh:183
+msgid "Upper limit"
+msgstr "Üst sınır"
+
+#. option -s +KByte "size_greater", "size_greater_spin"
+#: ../../xffm/find/dialog.hh:188
+msgid "At Least"
+msgstr "En Az"
+
+#: ../../xffm/find/dialog.hh:188 ../../xffm/find/dialog.hh:193
+msgid "kBytes"
+msgstr "kBayt"
+
+#. option -s -KByte "size_smaller", "size_smaller_spin"
+#: ../../xffm/find/dialog.hh:193
+msgid "At Most"
+msgstr "En Çok"
+
+#: ../../xffm/find/dialog.hh:204
+msgid "Group"
+msgstr "Grup"
+
+#. option -o octal "octal_p" "permissions_entry"
+#: ../../xffm/find/dialog.hh:208
+msgid "Octal Permissions"
+msgstr "Sekizli Erişim Hakları"
+
+#. option -p suid | exe
+#: ../../xffm/find/dialog.hh:213
+msgid "SUID"
+msgstr "SUID"
+
+#: ../../xffm/find/dialog.hh:213 ../../xffm/fm/local/popup.hh:843
+msgid "Executable"
+msgstr "Çalıştırılabilir dosya"
+
+#. option -m months "last_months", "last_months_spin"
+#: ../../xffm/find/dialog.hh:237
+msgid "Months"
+msgstr "Ay"
+
+#: ../../xffm/find/dialog.hh:248
+msgid "File type : "
+msgstr "Dosya türü : "
+
+#. gtk_widget_show (GTK_WIDGET(right_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(center_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(left_options_vbox));
+#: ../../xffm/find/dialog.hh:262 ../../xffm/find/dialog.hh:602
+#: ../../xffm/fm/page/page.hh:70 ../../xffm/common/gtk.hh:70
+msgid "Close"
+msgstr "Kapat"
+
+#. gtk_box_pack_start (vbox7a, GTK_WIDGET(advancedBox), TRUE, FALSE, 5);
+#. gtk_widget_show(GTK_WIDGET(advancedBox));
+#. //////////////  grep options.... /////////////////////////
+#: ../../xffm/find/dialog.hh:384
+msgid "Contains"
+msgstr "İçeren"
+
+#: ../../xffm/find/dialog.hh:404
+msgid "Contains the text"
+msgstr "Metni içerir"
+
+#: ../../xffm/find/dialog.hh:437
+msgid "Case Sensitive"
+msgstr "Büyük/Küçük Harfe Duyarlı"
+
+#: ../../xffm/find/dialog.hh:449
+msgid "Extended regexp"
+msgstr "Uzatılmış düzenli ifade"
+
+#: ../../xffm/find/dialog.hh:460
+msgid "Include binary files"
+msgstr "İkili dosyaları da içer"
+
+#: ../../xffm/find/dialog.hh:496
+msgid "Match"
+msgstr "Eşleştir"
+
+#: ../../xffm/find/dialog.hh:508
+msgid "Anywhere"
+msgstr "Herhangi bir yer"
+
+#: ../../xffm/find/dialog.hh:523
+msgid "Whole words only"
+msgstr "Sadece tam sözcükler"
+
+#: ../../xffm/find/dialog.hh:538
+msgid "lines"
+msgstr "satır"
+
+#: ../../xffm/find/dialog.hh:594
+msgid "Clear"
+msgstr "Temizle"
+
+#: ../../xffm/find/dialog.hh:636
+msgid "Edit"
+msgstr "Düzenle"
+
+#: ../../xffm/find/dialog.hh:751 ../../xffm/find/dialog.hh:766
+#: ../../xffm/common/util.hh:1150 ../../xffm/common/util.hh:1152
+#: ../../xffm/common/util.hh:1158 ../../xffm/common/util.hh:1160
+#: ../../xffm/common/preview.hh:479
+msgid "unknown"
+msgstr "bilinmiyor"
+
+#: ../../xffm/find/dialog.hh:780
+msgid "Modified"
+msgstr "Değiştirildi"
+
+#: ../../xffm/find/dialog.hh:784
+msgid "Created"
+msgstr "Oluşturulma"
+
+#: ../../xffm/find/dialog.hh:788
+#, fuzzy
+msgid "Accessed"
+msgstr "Erişim:"
+
+#: ../../xffm/find/dialog.hh:1106
+msgid ""
+"Basic rules:\n"
+"\n"
+"*  Will match any character zero or more times.\n"
+"?  Will match any character exactly one time\n"
+"[] Match any character within the [] \n"
+"^  Match at beginning of string\n"
+"$  Match at end of string \n"
+msgstr ""
+
+#: ../../xffm/find/dialog.hh:1115
+msgid ""
+"Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"In  basic regular expressions the metacharacters ?, +, {, |, (, and ) \n"
+"  lose their special meaning.\n"
+"\n"
+"The  period . matches  any  single  character.\n"
+"The caret ^ matches at the start of line.\n"
+"The dollar $ matches at the end of line.\n"
+"\n"
+"Characters within [ ] matches any single character in the list.\n"
+"Characters within [^ ] matches any single character *not* in the list.\n"
+"Characters inside [ - ] matches a range of characters (ie [0-9] or [a-z]).\n"
+"\n"
+"A regular expression may be followed by one of several repetition "
+"operators:\n"
+"?      The preceding item is optional and matched\n"
+"       at most once.\n"
+"*      The preceding item will be matched zero\n"
+"       or more times.\n"
+"+      The preceding item will be matched one or\n"
+"       more times.\n"
+"{n}    The preceding item is matched exactly n times.\n"
+"{n,}   The preceding item is matched n or more times.\n"
+"{n,m}  The preceding item is matched at least n times,\n"
+"       but not more than m times.\n"
+"\n"
+"To match any reserved character, precede it with \\. \n"
+"\n"
+"Two regular expressions may be joined by the logical or operator |.\n"
+"Two regular expressions may be concatenated.\n"
+"\n"
+"More information is available by typing \"man grep\"\n"
+msgstr ""
+
+#: ../../xffm/response/entryfileresponse.hh:20
+msgid "Open"
+msgstr "Aç"
+
+#: ../../xffm/response/entryresponse.hh:29
+#: ../../xffm/response/entryfolderresponse.hh:28
+msgid "Choose directory"
+msgstr "Dizin seç"
+
+#. this button is redundant since hands are on keyboard for password
+#: ../../xffm/response/entryresponse.hh:309
+#: ../../xffm/response/passwdresponse.hh:189
+#: ../../xffm/response/passwdresponse.hh:559
+msgid "Ok"
+msgstr "Tamam"
+
+#: ../../xffm/response/commandprogressresponse.hh:32
+msgid "Items:"
+msgstr "Öğeler:"
+
+#: ../../xffm/response/passwdresponse.hh:21
+msgid "Enter password"
+msgstr "Parola girin"
+
+#. gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+#: ../../xffm/response/passwdresponse.hh:125
+msgid "User Input"
+msgstr "Kullanıcı Girişi"
+
+#: ../../xffm/response/passwdresponse.hh:142
+msgid "Response Requested"
+msgstr "Yanıt İstendi"
+
+#: ../../xffm/response/passwdresponse.hh:264
+msgid "Preparing"
+msgstr "Hazırlanıyor"
+
+#: ../../xffm/response/passwdresponse.hh:352
+msgid "sudo"
+msgstr "sudo"
+
+#: ../../xffm/response/passwdresponse.hh:354
+msgid "Command:"
+msgstr "Komut:"
+
+#: ../../xffm/response/passwdresponse.hh:357
+msgid "Permission denied"
+msgstr "İzin verilmedi"
+
+#: ../../xffm/response/passwdresponse.hh:358
+msgid "Try to approach a problem from different angles."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:359
+msgid "Do you want to retry?"
+msgstr "Yeniden denemek ister misiniz?"
+
+#: ../../xffm/response/passwdresponse.hh:360
+msgid "Alternate:"
+msgstr "Sırala:"
+
+#: ../../xffm/response/passwdresponse.hh:365
+msgid "No"
+msgstr "No"
+
+#: ../../xffm/response/passwdresponse.hh:401
+msgid "Install"
+msgstr "Kur"
+
+#: ../../xffm/response/passwdresponse.hh:402
+#, c-format
+msgid "%s does not exist."
+msgstr "%s yok."
+
+#: ../../xffm/response/passwdresponse.hh:467
+msgid "Blowfish"
+msgstr "Blowfish"
+
+#: ../../xffm/response/passwdresponse.hh:468
+msgid "Encryption Key Approval"
+msgstr "Şifreleme Anahtarı Onama"
+
+#: ../../xffm/response/passwdresponse.hh:502
+msgid "-o     print output to standard out. Implies -r."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:506
+msgid "-c     DO NOT compress files before encryption."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:510
+msgid "-r     DO NOT remove input files after processing"
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:517
+msgid "Encryption key: "
+msgstr "Şifreleme anahtarı: "
+
+#: ../../xffm/response/passwdresponse.hh:529
+msgid "Confirm:"
+msgstr "Onayla:"
+
+#: ../../xffm/response/passwdresponse.hh:542
+msgid "Sorry, passwords do not match"
+msgstr "Üzgünüm, parolalar uyuşmuyor"
+
+#: ../../xffm/response/passwdresponse.hh:550
+msgid "Minimum length:"
+msgstr "En küçük uzunluk:"
+
+#: ../../xffm/response/timeoutresponse.hh:56
+msgid "Dismiss"
+msgstr "İptal Et"
+
+#: ../../xffm/response/commandresponse.hh:23
+msgid "Running"
+msgstr "Çalışıyor"
+
+#. auto text = g_strdup_printf("%s (pid: %d)",
+#. _("Waiting for operation to finish..."),
+#. Tubo<Type>::getChild (pid));
+#: ../../xffm/response/commandresponse.hh:28
+msgid "Waiting for operation to finish..."
+msgstr "İşlemin bitmesi bekleniyor..."
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Documents"
+msgstr "Belgeler"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Downloads"
+msgstr "İndirilenler"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Music"
+msgstr "Müzik"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Pictures"
+msgstr "Resimler"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Templates"
+msgstr "Şablomlar"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Videos"
+msgstr "Videolar"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Desktop"
+msgstr "Masaüstü"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Bookmarks"
+msgstr "Yer İmleri"
+
+#: ../../xffm/fm/local/icons.hh:259 ../../xffm/fm/local/rm.hh:181
+msgid "Trash"
+msgstr "Çöp kutusu"
+
+#: ../../xffm/fm/local/popup.hh:60
+msgid "New"
+msgstr "Yeni"
+
+#. deprecated {N_("Open in New Tab"), NULL, NULL, NULL},
+#. deprecated {N_("Open in New Window"), NULL, NULL, NULL},
+#. common buttons /(also an iconsize +/- button)
+#: ../../xffm/fm/local/popup.hh:64 ../../xffm/fm/local/popup.hh:104
+#: ../../xffm/common/gtk.hh:74
+msgid "Copy"
+msgstr "Kopyala"
+
+#: ../../xffm/fm/local/popup.hh:65 ../../xffm/fm/local/popup.hh:105
+#: ../../xffm/common/gtk.hh:73
+msgid "Cut"
+msgstr "Kes"
+
+#: ../../xffm/fm/local/popup.hh:66 ../../xffm/fm/local/popup.hh:106
+#: ../../xffm/common/gtk.hh:66
+msgid "Paste"
+msgstr "Yapıştır"
+
+#. **************
+#: ../../xffm/fm/local/popup.hh:67 ../../xffm/fm/local/popup.hh:107
+#: ../../xffm/fm/local/rm.hh:174 ../../xffm/common/gtk.hh:75
+msgid "Delete"
+msgstr "Sil"
+
+#. {N_("About"), NULL, (void *) menu},
+#.
+#. only for listview: {N_("Sort by size"), NULL, (void *) menu},
+#. only for listview: {N_("Sort by date"), NULL, (void *) menu},
+#: ../../xffm/fm/local/popup.hh:73
+msgid "Select All"
+msgstr "Hepsini Seç"
+
+#: ../../xffm/fm/local/popup.hh:74 ../../xffm/fm/local/popup.hh:559
+msgid "Match regular expression"
+msgstr "Düzenli ifade eşle"
+
+#: ../../xffm/fm/local/popup.hh:75 ../../xffm/fm/root/view.hh:58
+#: ../../xffm/fm/fstab/popup.hh:21
+msgid "View as list"
+msgstr "Liste olarak görüntüle"
+
+#: ../../xffm/fm/local/popup.hh:77
+msgid "Show hidden files"
+msgstr "Gizli dosyaları göster"
+
+#: ../../xffm/fm/local/popup.hh:79
+#, fuzzy
+msgid "Show Backup Files"
+msgstr "YyedeklemeBbaşarısı Oldu."
+
+#: ../../xffm/fm/local/popup.hh:81
+msgid "Sort data in descending order"
+msgstr "Veriyi azalan şekilde sırala"
+
+#: ../../xffm/fm/local/popup.hh:93 ../../xffm/fm/local/popup.hh:119
+#: ../../xffm/fm/local/popup.hh:1006 ../../xffm/fm/local/popup.hh:1013
+#: ../../xffm/fm/local/popup.hh:1022 ../../xffm/fm/local/popup.hh:1029
+#: ../../xffm/common/gtk.hh:72
+msgid "Open with"
+msgstr "Birlikte aç"
+
+#: ../../xffm/fm/local/popup.hh:94 ../../xffm/fm/local/popup.hh:846
+msgid "Run Executable..."
+msgstr "Çalıştır Yürüt..."
+
+#: ../../xffm/fm/local/popup.hh:95
+msgid "Extract files from the archive"
+msgstr "Arşivden dosyaları aç"
+
+#. g_hash_table_insert(iconname_hash, "bcrypt", (void *)"emblem-keyhole");
+#: ../../xffm/fm/local/popup.hh:96 ../../xffm/fm/root/view.hh:73
+#: ../../xffm/fm/fstab/popup.hh:20 ../../xffm/fm/dialog/notebook.hh:52
+#: ../../xffm/common/gtk.hh:78
+msgid "Open in New Tab"
+msgstr "Yeni Sekmede Aç"
+
+#. File chooser
+#: ../../xffm/fm/local/popup.hh:97 ../../xffm/fm/local/popup.hh:706
+msgid "Create a compressed archive with the selected objects"
+msgstr "Şeçilen nesnelerle sıkıştırılmış bir arşiv oluştur"
+
+#: ../../xffm/fm/local/popup.hh:98 ../../xffm/fm/fstab/popup.hh:37
+msgid "Mount the volume associated with this folder"
+msgstr "Bu klasörle ilişkili birimi bağla"
+
+#: ../../xffm/fm/local/popup.hh:99 ../../xffm/fm/fstab/popup.hh:38
+msgid "Unmount the volume associated with this folder"
+msgstr "Bu klasör ile ilişkili birimin bağını kaldır"
+
+#: ../../xffm/fm/local/popup.hh:100 ../../xffm/common/gtk.hh:67
+msgid "Add bookmark"
+msgstr "Yer imi ekle"
+
+#: ../../xffm/fm/local/popup.hh:101 ../../xffm/fm/root/view.hh:74
+#: ../../xffm/common/gtk.hh:68
+msgid "Remove bookmark"
+msgstr "Yer imlerini temizle"
+
+#: ../../xffm/fm/local/popup.hh:108 ../../xffm/fm/local/popup.hh:961
+msgid "Rename"
+msgstr "Yeniden Adlandır"
+
+#: ../../xffm/fm/local/popup.hh:109 ../../xffm/fm/local/popup.hh:947
+msgid "Duplicate"
+msgstr "Sil"
+
+#: ../../xffm/fm/local/popup.hh:110 ../../xffm/fm/local/popup.hh:933
+msgid "Link"
+msgstr "Bağlantı"
+
+#: ../../xffm/fm/local/popup.hh:111
+msgid "Properties"
+msgstr "Seçenekler"
+
+#: ../../xffm/fm/local/popup.hh:414
+msgid "Files:"
+msgstr "Dosyalar:"
+
+#: ../../xffm/fm/local/popup.hh:417 ../../xffm/fm/local/rm.hh:61
+msgid "Multiple selections"
+msgstr "Çoklu seçimler"
+
+#: ../../xffm/fm/local/popup.hh:557
+msgid "Select items"
+msgstr "Ögeleri seç"
+
+#: ../../xffm/fm/local/popup.hh:575
+msgid "Regular Expression syntax is incorrect"
+msgstr "Düzenli ifade sözdizimi doğru değil"
+
+#: ../../xffm/fm/local/popup.hh:592
+msgid "No selection"
+msgstr "Seçim yok"
+
+#: ../../xffm/fm/local/popup.hh:592
+msgid "No matches."
+msgstr "Eşleme yok."
+
+#. entryResponse->setCheckButton(_("Run in Terminal"));
+#. entryResponse->setCheckButton(Mime<Type>::runInTerminal(path));
+#: ../../xffm/fm/local/popup.hh:721 ../../xffm/fm/page/pathbar.hh:313
+msgid "Specify Output Directory..."
+msgstr "Çıktı Dizinini Belirt..."
+
+#: ../../xffm/fm/local/popup.hh:799
+msgid "Create new..."
+msgstr "Yeni oluştur..."
+
+#: ../../xffm/fm/local/popup.hh:806 ../../xffm/fm/local/popup.hh:886
+msgid "New Name:"
+msgstr "Yeni İsim:"
+
+#: ../../xffm/fm/local/popup.hh:815
+msgid "No name"
+msgstr "İsimsiz"
+
+#: ../../xffm/fm/local/popup.hh:828
+#, fuzzy, c-format
+msgid "Another file with the same name already exists in “%s”."
+msgstr "\"%s\" içinde aynı isimde bir dosya zaten mevcut."
+
+#: ../../xffm/fm/local/popup.hh:850 ../../xffm/fm/local/popup.hh:1010
+#: ../../xffm/fm/local/popup.hh:1026 ../../xffm/common/util.hh:1248
+msgid "Run in Terminal"
+msgstr "Uçbirim İçinde Çalıştır"
+
+#: ../../xffm/fm/local/popup.hh:853
+msgid "Arguments for the Command"
+msgstr "Komut Argümanları"
+
+#: ../../xffm/fm/local/popup.hh:1047 ../../xffm/fm/local/view.hh:141
+msgid "Invalid entry"
+msgstr "Geçersiz giriş"
+
+#: ../../xffm/fm/local/properties.hh:235
+msgid "Properties and Attributes"
+msgstr "Özellikler ve Öznitelikler"
+
+#: ../../xffm/fm/local/properties.hh:264
+#, fuzzy
+msgid "File Mode:"
+msgstr "Dosya türü"
+
+#: ../../xffm/fm/local/properties.hh:290
+msgid "File:"
+msgstr "Dosya:"
+
+#. Add file info stuff
+#. set info stuff data according to combo box
+#. add signal handler to changed signal for combo box
+#. Add process buttons
+#.
+#: ../../xffm/fm/local/properties.hh:302
+msgid "Apply changes"
+msgstr "Değişiklikleri uygula"
+
+#: ../../xffm/fm/local/properties.hh:462
+msgid "Successfully moved to trash."
+msgstr "Başarılı bir şekilde çöpe taşındı."
+
+#: ../../xffm/fm/local/properties.hh:463
+msgid "Source:"
+msgstr "Kaynak:"
+
+#: ../../xffm/fm/local/rm.hh:59
+#, c-format
+msgid "Delete %s"
+msgstr "Sil %s"
+
+#: ../../xffm/fm/local/rm.hh:61
+msgid "Warning: "
+msgstr "Uyarı: "
+
+#. gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
+#. title
+#: ../../xffm/fm/local/rm.hh:90
+msgid "Remove"
+msgstr "Sil"
+
+#: ../../xffm/fm/local/rm.hh:140
+msgid "Apply to all"
+msgstr "Tümüne uygula"
+
+#. **************
+#. This is now available to BSD with rm -P option
+#: ../../xffm/fm/local/rm.hh:163 ../../xffm/common/gtk.hh:76
+msgid "Shred"
+msgstr "Yok-et"
+
+#. We do not count "../"
+#: ../../xffm/fm/local/view.hh:48 ../../xffm/fm/base/monitor.hh:28
+#, c-format
+msgid "Files: %s"
+msgstr "Dosyalar: %s"
+
+#: ../../xffm/fm/root/model.hh:78
+msgid "Root Directory"
+msgstr "Kök Dizin"
+
+#: ../../xffm/fm/root/model.hh:94
+msgid "This is the root of the filesystem"
+msgstr "Bu dosya sisteminin kök dizinidir"
+
+#: ../../xffm/fm/root/model.hh:105
+msgid "Home Directory"
+msgstr "Başlangıç Dizini"
+
+#: ../../xffm/fm/root/model.hh:132
+msgid "Trash bin"
+msgstr "Çöp kutusu"
+
+#: ../../xffm/fm/root/model.hh:162 ../../xffm/fm/fstab/popup.hh:29
+msgid "Disk Image Mounter"
+msgstr "Disk Kalıbı Bağlayıcı"
+
+#: ../../xffm/fm/root/model.hh:169 ../../xffm/fm/root/model.hh:185
+msgid "Mount local disks and devices"
+msgstr "Yerel diskleri ve aygıtları bağla"
+
+#: ../../xffm/fm/root/model.hh:170 ../../xffm/fm/fstab/popup.hh:25
+#: ../../xffm/fm/fstab/view.hh:429
+#, fuzzy
+msgid "eCryptfs Volume"
+msgstr "TrueCrypt Birimleri"
+
+#: ../../xffm/fm/root/model.hh:171 ../../xffm/fm/fstab/popup.hh:24
+msgid "SSHFS Remote Synchronization Folder"
+msgstr "SSHFS Uzak Eşzamanlama Klasörü"
+
+#: ../../xffm/fm/root/model.hh:172 ../../xffm/fm/fstab/popup.hh:23
+#: ../../xffm/fm/fstab/view.hh:377
+msgid "NFS Network Volume"
+msgstr "NFS Ağ Sistemi"
+
+#: ../../xffm/fm/root/model.hh:173 ../../xffm/fm/fstab/popup.hh:26
+#: ../../xffm/fm/fstab/view.hh:455
+msgid "CIFS Volume"
+msgstr "CIFS Sistemi"
+
+#: ../../xffm/fm/root/model.hh:195
+msgid "Software Updater"
+msgstr "Yazılım Güncelleyici"
+
+#: ../../xffm/fm/root/model.hh:218 ../../xffm/fm/root/model.hh:230
+msgid "Add or remove software installed on the system"
+msgstr "Sisteminizde yüklü yazılımları ekleyin veya kaldırın"
+
+#: ../../xffm/fm/root/model.hh:271
+#, fuzzy
+msgid "Go to bookmarked location"
+msgstr "Sonraki yer imi konumuna git."
+
+#. {N_("Add bookmark"), (void *)BasePopUp<Type>::noop, NULL, NULL},
+#: ../../xffm/fm/root/view.hh:61
+msgid "Empty trash"
+msgstr "Çöp kutusunu boşaltıldığında"
+
+#. File chooser
+#: ../../xffm/fm/fstab/popup.hh:121
+msgid "Mount Device"
+msgstr "Aygıtı Bağla"
+
+#: ../../xffm/fm/fstab/popup.hh:133
+msgid "Mount point:"
+msgstr "Bağlama noktası:"
+
+#: ../../xffm/fm/fstab/view.hh:301
+msgid "Mounted on:"
+msgstr "Bağlanma noktası:"
+
+#: ../../xffm/fm/fstab/view.hh:302
+msgid "Mount on"
+msgstr "Bağla"
+
+#: ../../xffm/fm/fstab/view.hh:310 ../../xffm/fm/fstab/view.hh:312
+msgid "Not mounted"
+msgstr "Bağlı değil"
+
+#: ../../xffm/fm/fstab/view.hh:403
+msgid "SFTP (via SSH)"
+msgstr "SFTP (SSH ile)"
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, c-format
+msgid "Unmounting %s"
+msgstr "%s Ayrılıyor"
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, c-format
+msgid "Mounting %s"
+msgstr "Bağlanıyor %s"
+
+#: ../../xffm/fm/dialog/menupopover.hh:128
+msgid "Home"
+msgstr "Ev"
+
+#: ../../xffm/fm/dialog/menupopover.hh:129 ../../xffm/common/gtk.hh:64
+#, fuzzy
+msgid "Open terminal"
+msgstr "Uçbirim Aç"
+
+#: ../../xffm/fm/dialog/menupopover.hh:130
+msgid "Open a New Window"
+msgstr "Yeni Pencere Aç"
+
+#. {N_("Execute Shell Command"), (void *)MenuPopoverSignals<Type>::shell, (void *) menuButton_},
+#: ../../xffm/fm/dialog/menupopover.hh:132 ../../xffm/common/gtk.hh:69
+msgid "Search"
+msgstr "Ara"
+
+#: ../../xffm/fm/dialog/menupopover.hh:133 ../../xffm/common/gtk.hh:71
+msgid "Exit"
+msgstr "Çık"
+
+#: ../../xffm/fm/dialog/dialog.hh:116
+msgid "Removed"
+msgstr "Kaldırıldı"
+
+#: ../../xffm/fm/dialog/dialog.hh:132
+msgid "Detected device(s):"
+msgstr "Bulunan aygıt(lar):"
+
+#. Create the widgets
+#: ../../xffm/fm/page/vbuttonbox.hh:37 ../../xffm/common/gtk.hh:332
+msgid "Help"
+msgstr "Yardım"
+
+#. File chooser
+#: ../../xffm/fm/page/pathbar.hh:306 ../../xffm/fm/page/pathbar.hh:308
+msgid "Go to"
+msgstr "Git"
+
+#: ../../xffm/fm/page/pathbar.hh:331
+msgid "Not a directory"
+msgstr "Dizin değil"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Renice Process"
+msgstr "Sürecin Önceliğini Değiştir"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Suspend"
+msgstr "Askıya Al"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Continue"
+msgstr "Devam"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Interrupt"
+msgstr "Kesme"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Hangup"
+msgstr "Kapat"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "User 1 (USR1)"
+msgstr "Kullanıcı 1 (USR1)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "User 2 (USR2)"
+msgstr "Kullanıcı 2 (USR2)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "Terminate Task"
+msgstr "Görevi Sonlandır"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "Abort"
+msgstr "İptal"
+
+#: ../../xffm/fm/page/runbutton.hh:138
+msgid "Kill"
+msgstr "Öldür"
+
+#: ../../xffm/fm/page/runbutton.hh:139
+#, fuzzy
+msgid "Segmentation fault"
+msgstr "Bölümleme ihlali"
+
+#: ../../xffm/fm/page/runbutton.hh:217
+msgid "PID"
+msgstr "PID"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:37
+#, fuzzy
+msgid "Embedded Terminal"
+msgstr "Gömülü Uçbirim desteği"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:38
+msgid "All items in the iconview."
+msgstr "Simge görünümündeki tüm ögeler."
+
+#: ../../xffm/fm/page/hbuttonbox.hh:39
+msgid "Scripting"
+msgstr "Betik Yazma"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:40
+msgid "Clear Log"
+msgstr "Günlük Kaydını Temizle"
+
+#. Status textview
+#: ../../xffm/fm/page/hbuttonbox.hh:42
+msgid "Terminal font"
+msgstr "Uçbirim yazıtipi"
+
+#: ../../xffm/fm/treeview.hh:17
+msgid "Name"
+msgstr "İsim"
+
+#: ../../xffm/fm/treeview.hh:20
+msgid "Size"
+msgstr "Boy"
+
+#: ../../xffm/fm/treeview.hh:21
+msgid "Date"
+msgstr "Tarih"
+
+#: ../../xffm/fm/treeview.hh:22
+msgid "Mimetype"
+msgstr "Mime tipi"
+
+#: ../../xffm/fm/treeview.hh:24
+msgid "TYPE"
+msgstr "TİP"
+
+#: ../../xffm/fm/base/signals.hh:642
+msgid "Directory does not exist."
+msgstr "Dizin bulunamadı."
+
+#: ../../xffm/fm/base/signals.hh:644 ../../xffm/fm/base/signals.hh:646
+msgid "Trash is empty"
+msgstr "Çöp boş"
+
+#: ../../xffm/common/settings.hh:27
+#, fuzzy
+msgid "New File:"
+msgstr "Yeni Dosya"
+
+#: ../../xffm/common/gio.hh:235
+msgid "Could not copy item:"
+msgstr "Öğe kopyalanamadı:"
+
+#: ../../xffm/common/gio.hh:237
+msgid "Could not move item:"
+msgstr "Öge taşınamadı:"
+
+#: ../../xffm/common/gio.hh:239
+#, fuzzy
+msgid "Create symbolic link"
+msgstr "Sembolik bağları yer değiştir"
+
+#: ../../xffm/common/gio.hh:276
+#, c-format
+msgid ""
+"Could not delete:\n"
+"%s"
+msgstr ""
+"Şu dosyalar silinemedi:\n"
+"%s"
+
+#: ../../xffm/common/gio.hh:278
+#, c-format
+msgid "Could not move %s to trash"
+msgstr "%s, çöpe taşınamadı"
+
+#: ../../xffm/common/clipboard.hh:23 ../../xffm/common/dnd.hh:40
+msgid "Copying files locally"
+msgstr "Dosyalar yerel olarak kopyalanıyor"
+
+#: ../../xffm/common/clipboard.hh:30 ../../xffm/common/dnd.hh:34
+msgid "Moving files"
+msgstr "Dosya taşıma"
+
+#: ../../xffm/common/dnd.hh:46
+#, fuzzy
+msgid "Create Link"
+msgstr "Bağlantı yarat"
+
+#: ../../xffm/common/util.hh:1200
+#, c-format
+msgid ""
+"Scriptfile \"%s\" is not executable. Please set the executable-attribute on "
+"that file."
+msgstr ""
+"Betik dosyası \"%s\" çalıştırılabilir değil. Lütfen bu dosyanın "
+"çalıştırılabilir özniteliğini aktifleştirin."
+
+#: ../../xffm/common/util.hh:1202 ../../xffm/common/util.hh:1237
+#, c-format
+msgid "Open with %s"
+msgstr "%s ile aç"
+
+#: ../../xffm/common/util.hh:1202
+msgid "Text Editor"
+msgstr "Metin Düzenleyici"
+
+#: ../../xffm/common/util.hh:1239 ../../xffm/common/gtk.hh:65
+msgid "Execute Shell Command"
+msgstr "Kabuk Komutu Çalıştır"
+
+#: ../../xffm/common/util.hh:1243
+#, fuzzy
+msgid ""
+"Console: quickly run single commands -- write a command here and press enter."
+msgstr "Buraya bir komut yaz ve enter tuşuna bas..."
+
+#: ../../xffm/common/gtk.hh:123
+msgid "New Tab"
+msgstr "Yeni Sekme"
+
+#: ../../xffm/common/gtk.hh:335
+msgid "OK"
+msgstr "Tamam"
+
+#: ../../xffm/common/run.hh:344
+msgid "error"
+msgstr "hata"
+
+#: ../../xffm/common/run.hh:348
+msgid "warning"
+msgstr "uyarı"
+
+#: ../../xffm/common/mime.hh:101 ../../xffm/common/mime.hh:143
+msgid "No Read Permission"
+msgstr "Okuma İzni Yok"
+
+#: ../../xffm/common/preview.hh:593
+msgid "Empty file"
+msgstr "Boş dosya"
+
+#: ../../xffm/common/preview.hh:648
+#, c-format
+msgid "Cannot read from %s"
+msgstr "%s adresinden okunamıyor"
+

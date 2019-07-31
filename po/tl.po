@@ -1,0 +1,759 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:43:42 CDT 2013 ---
+#
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2002-2012.
+# Eric Pareja <xenos@upm.edu.ph>, 2005.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: http://bugs.xffm.org\n"
+"POT-Creation-Date: 2010-12-13 16:00-0500\n"
+"PO-Revision-Date: 2008-07-02 15:17+0000\n"
+"Last-Translator: Jerome S. Gotangco <jgotangco@ubuntu.com>\n"
+"Language-Team: Tagalog <tl@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Launchpad-Export-Date: 2008-07-12 02:24+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+
+msgid "Mark as not paid"
+msgstr "I-marka na hindi pa bayad"
+
+msgid "Mark as paid"
+msgstr "Markahin na bayad na"
+
+msgid "Don't run as a daemon."
+msgstr "Huwag paandarin bilang daemon"
+
+msgid "Start daemon and launch GUI."
+msgstr "Paandarin ang daemon at buksan ang GUI"
+
+msgid "Stop daemon."
+msgstr "Patigilin ang daemon"
+
+msgid "You have %s outstanding bill to pay!"
+msgid_plural "You have %s outstanding bills to pay!"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Edit"
+msgstr "Baguhin"
+
+msgid "Successfully."
+msgstr "Tagumpay."
+
+msgid "translator-credits"
+msgstr ""
+"Launchpad Contributions:\n"
+"  Jerome S. Gotangco https://launchpad.net/~jgotangco"
+
+msgid "New Category"
+msgstr "Bagong Kategorya"
+
+msgid "Amount"
+msgstr "Halaga"
+
+msgid "Categories"
+msgstr "Mga Kategorya"
+
+msgid "Name:"
+msgstr "Pangalan:"
+
+msgid "Color:"
+msgstr "Kulay:"
+
+msgid "There is %d more bill in this category."
+msgid_plural "There are %d more bills in this category."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Confirmation"
+msgstr "Kumpirmasyon"
+
+msgid "%m/%d"
+msgstr "%m%d"
+
+msgid "day(s)."
+msgstr "(mga) araw."
+
+msgid "About"
+msgstr "Tungkol dito"
+
+msgid "Category"
+msgstr "Kategorya"
+
+msgid "Paid"
+msgstr "Bayad na"
+
+msgid "Question"
+msgstr "Tanong"
+
+msgid "Information"
+msgstr "Impormasyon"
+
+msgid "Monthly"
+msgstr "Buwanan"
+
+msgid "Cancel"
+msgstr "Huwag ituloy"
+
+msgid "Edit a record"
+msgstr "Baguhin ang record"
+
+msgid "Display all unpaid records only"
+msgstr "Ipakita lamang ang mga record na hindi pa nababarayan"
+
+msgid "Display all paid records only"
+msgstr "Ipakita lamang ang mga record na nabayaran na"
+
+msgid "Display all records"
+msgstr "Ipakita lahat ng record"
+
+msgid "Records:"
+msgstr "Records:"
+
+msgid "Add a New Record"
+msgstr "Magdagdag ng bagong Record"
+
+msgid "Edit a Record"
+msgstr "Baguhin ang Record"
+
+msgid "Time:"
+msgstr "Oras:"
+
+msgid "Hour :"
+msgstr "Oras:"
+
+
+msgid "Conversion from character set '%s' to '%s' is not supported"
+msgstr "Pagsalin mula sa character set '%s' patungong '%s' ay hindi suportado"
+
+msgid "Could not open converter from '%s' to '%s'"
+msgstr "Hindi mabuksan ang converter mula '%s' tungong '%s'"
+
+msgid "Invalid byte sequence in conversion input"
+msgstr "Hindi tanggap na byte sequence sa conversion input"
+
+msgid "Error during conversion: %s"
+msgstr "Error habang nagco-convert: %s"
+
+msgid "Partial character sequence at end of input"
+msgstr "Hindi kumpletong karakter sequence sa dulo ng input"
+
+msgid "Cannot convert fallback '%s' to codeset '%s'"
+msgstr "Hindi maka-balik '%s' sa codeset '%s'"
+
+msgid "The URI '%s' is not an absolute URI using the \"file\" scheme"
+msgstr "Ang URI '%s' ay hindi absolute URI na gamit ang paraang \"file\""
+
+msgid "The local file URI '%s' may not include a '#'"
+msgstr "Ang lokal na talaksang URI '%s' ay hindi maaaring maglaman ng '#'"
+
+msgid "The URI '%s' is invalid"
+msgstr "Ang URI '%s' ay hindi tanggap"
+
+msgid "The hostname of the URI '%s' is invalid"
+msgstr "Ang hostname ng URI '%s' ay hindi tanggap"
+
+msgid "The URI '%s' contains invalidly escaped characters"
+msgstr "Ang URI '%s' ay may hindi tanggap na escaped karakter"
+
+msgid "The pathname '%s' is not an absolute path"
+msgstr "Ang pathname '%s' ay hindi absolute path"
+
+msgid "Invalid hostname"
+msgstr "Hindi tanggap na hostname"
+
+msgid "AM"
+msgstr "AM"
+
+msgid "PM"
+msgstr "PM"
+
+msgid "%a %b %e %H:%M:%S %Y"
+msgstr "%a %d %b %Y %r %Z"
+
+msgid "%m/%d/%y"
+msgstr "%m/%d/%y"
+
+msgid "%H:%M:%S"
+msgstr "%r"
+
+msgid "%I:%M:%S %p"
+msgstr "%I:%M:%S %p"
+
+msgid "January"
+msgstr "Enero"
+
+msgid "February"
+msgstr "Pebrero"
+
+msgid "March"
+msgstr "Marso"
+
+msgid "April"
+msgstr "Abril"
+
+msgid "May"
+msgstr "Mayo"
+
+msgid "June"
+msgstr "Hunyo"
+
+msgid "July"
+msgstr "Hulyo"
+
+msgid "Jan"
+msgstr "Ene"
+
+msgid "Feb"
+msgstr "Peb"
+
+msgid "Mar"
+msgstr "Mar"
+
+msgid "Apr"
+msgstr "Abr"
+
+msgid "Jun"
+msgstr "Hun"
+
+msgid "Jul"
+msgstr "Hul"
+
+msgid "Monday"
+msgstr "Lunes"
+
+msgid "Tuesday"
+msgstr "Martes"
+
+msgid "Wednesday"
+msgstr "Miyerkoles"
+
+msgid "Thursday"
+msgstr "Huwebes"
+
+msgid "Friday"
+msgstr "Biyernes"
+
+msgid "Saturday"
+msgstr "Sabado"
+
+msgid "Sunday"
+msgstr "Linggo"
+
+msgid "Mon"
+msgstr "Lun"
+
+msgid "Tue"
+msgstr "Mar"
+
+msgid "Wed"
+msgstr "Miy"
+
+msgid "Thu"
+msgstr "Huw"
+
+msgid "Fri"
+msgstr "Biy"
+
+msgid "Sat"
+msgstr "Sab"
+
+msgid "Sun"
+msgstr "Lin"
+
+msgid "Error opening directory '%s': %s"
+msgstr "Error sa pagbukas ng directory '%s': %s"
+
+msgid "Could not allocate %lu bytes to read file \"%s\""
+msgstr "Hindi makapag-tabi ng %lu byte upang basahin ang talaksang \"%s\""
+
+msgid "Error reading file '%s': %s"
+msgstr "Error sa pagbasa ng talaksang '%s': %s"
+
+msgid "Failed to read from file '%s': %s"
+msgstr "Sawi ang pagbabasa ng talaksang '%s': %s"
+
+msgid "Failed to open file '%s': %s"
+msgstr "Sawi ang pagbukas ng talaksang '%s': %s"
+
+msgid "Failed to get attributes of file '%s': fstat() failed: %s"
+msgstr ""
+"Sawi ang pagkuha ng mga attribute ng talaksang '%s': sawi ang fstat(): %s"
+
+msgid "Failed to open file '%s': fdopen() failed: %s"
+msgstr "Sawi ang pagbukas ng talaksang '%s': sawi ang fdopen(): %s"
+
+msgid "Failed to rename file '%s' to '%s': grename() failed: %s"
+msgstr ""
+"Bigo ang papalit ng pangalan ng talaksang '%s' sa '%s': bigo ang grename(): "
+"%s"
+
+msgid "Failed to create file '%s': %s"
+msgstr "Sawi ang paglikha ng talaksang '%s': %s"
+
+msgid "Failed to open file '%s' for writing: fdopen() failed: %s"
+msgstr ""
+"Bigo ang pagbukas ng talaksang '%s' para sa pagsusulat: bigo ang fdopen(): %s"
+
+msgid "Failed to write file '%s': fwrite() failed: %s"
+msgstr "Bigo sa pagsusulat ng talaksang '%s': bigo ang fwrite(): %s"
+
+msgid "Failed to close file '%s': fclose() failed: %s"
+msgstr "Bigo ang pagsara ng talaksang '%s': bigo ang fclose(): %s"
+
+msgid "Existing file '%s' could not be removed: gunlink() failed: %s"
+msgstr "Hindi matanggal ang talaksang '%s': bigo ang gunlink(): %s"
+
+msgid "Template '%s' invalid, should not contain a '%s'"
+msgstr "Hindi tanggap ang template '%s', wala dapat na '%s'"
+
+msgid "%u byte"
+msgid_plural "%u bytes"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "%s byte"
+msgid_plural "%s bytes"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Failed to read the symbolic link '%s': %s"
+msgstr "Sawi ang pagbasa ng symbolic link '%s': %s"
+
+msgid "Symbolic links not supported"
+msgstr "Hindi suportado ang mga symbolic link"
+
+msgid "Could not open converter from '%s' to '%s': %s"
+msgstr "Hindi mabuksan ang converter mula '%s' patungong '%s': %s"
+
+msgid "Can't do a raw read in giochannelreadlinestring"
+msgstr "Hindi mabasa ng hilaw ang giochannelreadlinestring"
+
+msgid "Leftover unconverted data in read buffer"
+msgstr "May natirang hindi na-convert na datos sa read buffer"
+
+msgid "Channel terminates in a partial character"
+msgstr "Nagwakas sa partial karakter ang channel"
+
+msgid "Can't do a raw read in giochannelreadtoend"
+msgstr "Hindi makapagbasa ng hilaw sa giochannelreadtoend"
+
+msgid "Failed to open file '%s': open() failed: %s"
+msgstr "Bigo ang pagbukas ng talaksang '%s': bigo ang open(): %s"
+
+msgid "Failed to map file '%s': mmap() failed: %s"
+msgstr ""
+"Bigo ang pagreserba ng memory para sa talaksang '%s': bigo ang mmap(): %s"
+
+msgid "Error on line %d: %s"
+msgstr "Error sa linya %d: %s"
+
+msgid ""
+"Failed to parse '%-.*s', which should have been a digit inside a character "
+"reference (#234; for example) - perhaps the digit is too large"
+msgstr ""
+"Sawi sa pag-parse ng '%-.*s', na dapat ay numero sa loob ng reference sa "
+"karakter (halimbawa ay #234;) - maaaring ang numero ay sobra ang laki"
+
+msgid ""
+"Character reference did not end with a semicolon; most likely you used an "
+"ampersand character without intending to start an entity - escape ampersand "
+"as amp;"
+msgstr ""
+"Ang reference sa karakter ay hindi nagtapos sa puntukoma; malamang ay "
+"gumamit kayo ng ampersand na karakter na hindi sinadyang mag-umpisa ng "
+"entity - itaglay ang ampersand bilang amp;"
+
+msgid "Character reference '%-.*s' does not encode a permitted character"
+msgstr ""
+"Reference sa karakter '%-.*s' ay hindi nag-encode ng tanggap na karakter"
+
+msgid ""
+"Empty entity ';' seen; valid entities are: amp; quot; lt; gt; apos;"
+msgstr ""
+"Walang laman na entity '' ay nakita; tanggap na mga entity ay: amp; quot; "
+"lt; gt; apos;"
+
+msgid ""
+"Entity did not end with a semicolon; most likely you used an ampersand "
+"character without intending to start an entity - escape ampersand as amp;"
+msgstr ""
+"Hindi nagtapos ang entity sa puntukoma; malamang ay gumamit kayo ng "
+"ampersand karakter na hindi sinasadyang mag-umpisa ng entity - itaglay ang "
+"ampersand ng amp;"
+
+msgid "Document must begin with an element (e.g. <book>)"
+msgstr "Kailangang mag-umpisa ang dokumento ng elemento (hal. <book>)"
+
+msgid ""
+"'%s' is not a valid character following a '<' character; it may not begin an "
+"element name"
+msgstr ""
+"'%s' ay hindi tanggap na karakter matapos ng '<' na karakter; hindi ito "
+"maaaring mag-umpisa ng pangalang elemento"
+
+msgid ""
+"Odd character '%s', expected a '=' after attribute name '%s' of element '%s'"
+msgstr ""
+"Kakaibang karakter '%s', inasahan na '=' matapos ng pangalang attribute '%s' "
+"ng elementong '%s'"
+
+msgid ""
+"Odd character '%s', expected a '>' or '/' character to end the start tag of "
+"element '%s', or optionally an attribute; perhaps you used an invalid "
+"character in an attribute name"
+msgstr ""
+"Kakaibang karakter '%s', inasahan na '>' o '/' na karakter ang pambungad ng "
+"pangbukas na tag ng elementong '%s' o attribute; maaaring gumamit kayo ng "
+"hindi tanggap na karakter sa pangalang attribute"
+
+msgid ""
+"Odd character '%s', expected an open quote mark after the equals sign when "
+"giving value for attribute '%s' of element '%s'"
+msgstr ""
+"Kakaibang karakter '%s', inasahan na pambukas na quote mark matapos ng "
+"equals sign kapag nagbigay ng halaga para sa attribute '%s' ng elementong "
+"'%s'"
+
+msgid ""
+"'%s' is not a valid character following the characters '</'; '%s' may not "
+"begin an element name"
+msgstr ""
+"Hindi tanggap na karakter ang '%s' matapos ng mga karakter na '</'; Ang '%s' "
+"ay hindi maaaring umpisa ng pangalang elemento"
+
+msgid ""
+"'%s' is not a valid character following the close element name '%s'; the "
+"allowed character is '>'"
+msgstr ""
+"Hindi tanggap na karakter ang '%s' matapos ang pangsara ng pangalang "
+"elemento '%s'; ang tinatanggap na karakter ay '>'"
+
+msgid "Element '%s' was closed, no element is currently open"
+msgstr "Sinarhan ang elementong '%s', walang bukas na elemento."
+
+msgid "Element '%s' was closed, but the currently open element is '%s'"
+msgstr ""
+"Sinarhan ang elementong '%s', ngunit ang kasalukuyang elementong bukas ay "
+"'%s'"
+
+msgid "Document was empty or contained only whitespace"
+msgstr "Walang laman ang dokumento o naglalaman lamang ito ng puwang"
+
+msgid "Document ended unexpectedly just after an open angle bracket '<'"
+msgstr ""
+"Nagwakas ng hindi inaasahan ang dokumento matapos lamang ng pangbukas na "
+"angle bracket '<'"
+
+msgid ""
+"Document ended unexpectedly with elements still open - '%s' was the last "
+"element opened"
+msgstr ""
+"Nagwakas ng hindi inaasahan ang dokumento na may mga bukas na elemento - "
+"'%s' ay ang huling elementong binuksan"
+
+msgid ""
+"Document ended unexpectedly, expected to see a close angle bracket ending "
+"the tag <%s/>"
+msgstr ""
+"Nagwakas ng hindi inaasahan ang dokumento, inasahan na makita ang angle "
+"bracket na pang-sara ng tag <%s/>"
+
+msgid "Document ended unexpectedly inside an element name"
+msgstr ""
+"Nagwakas ng hindi inaasahan ang dokumento sa loob ng pangalan ng elemento"
+
+msgid "Document ended unexpectedly inside an attribute name"
+msgstr ""
+"Nagwakas ng hindi inaasahan ang dokumento sa loob ng pangalan ng attribute"
+
+msgid "Document ended unexpectedly inside an element-opening tag."
+msgstr ""
+"Nagwakas ng hindi inaasahan ang dokumento sa loob ng pagbukas na tag ng "
+"elemento."
+
+msgid ""
+"Document ended unexpectedly after the equals sign following an attribute "
+"name; no attribute value"
+msgstr ""
+"Nagwakas ng hindi inaasahan ang dokumento matapos ang equal sign na sumunod "
+"sa pangalan ng attribute; walang halaga ang attribute"
+
+msgid "Document ended unexpectedly while inside an attribute value"
+msgstr ""
+"Nagwakas ng hindi inaasahan ang dokumento habang nasa loob ng halagang "
+"attribute"
+
+msgid "Document ended unexpectedly inside the close tag for element '%s'"
+msgstr ""
+"Nagwakas ang dokumento ng hindi inaasahan sa loob ng tag ng pagsara para sa "
+"elementong '%s'"
+
+msgid "Document ended unexpectedly inside a comment or processing instruction"
+msgstr ""
+"Nagwakas ang dokumento ng hindi inaasahan sa loob ng komento o utos ng "
+"pagproseso"
+
+msgid "Quoted text doesn't begin with a quotation mark"
+msgstr "Ang binanggit na teksto ay hindi nag-umpisa sa quotation mark"
+
+msgid "Unmatched quotation mark in command line or other shell-quoted text"
+msgstr ""
+"Walang kapares na quotation mark sa command line o ibang shell na teksto."
+
+msgid "Text ended just after a '\\' character. (The text was '%s')"
+msgstr "Nagwakas ang teksto matapos ng karakter na '\\'. (Ang teksto ay '%s')"
+
+msgid "Text ended before matching quote was found for %c. (The text was '%s')"
+msgstr ""
+"Nagwakas ang teksto bago nakahanap ng kapares na quote para sa %c. (Ang "
+"teksto ay '%s')"
+
+msgid "Text was empty (or contained only whitespace)"
+msgstr "Ang teksto ay walang laman (o naglaman lamang ng puwang)"
+
+msgid "Failed to read data from child process"
+msgstr "Sawi sa pagbasa ng datos mula sa prosesong anak"
+
+msgid "Failed to create pipe for communicating with child process (%s)"
+msgstr "Sawi sa paglikha ng pipe para makausap ang prosesong anak (%s)"
+
+msgid "Failed to read from child pipe (%s)"
+msgstr "Sawi sa pagbasa mula sa child pipe (%s)"
+
+msgid "Failed to change to directory '%s' (%s)"
+msgstr "Sawi sa paglipat sa directory '%s' (%s)"
+
+msgid "Failed to execute child process (%s)"
+msgstr "Sawi sa pagtakbo ng prosesong anak (%s)"
+
+msgid "Invalid program name: %s"
+msgstr "Imbalidong pangalan ng programa: %s"
+
+msgid "Invalid string in argument vector at %d: %s"
+msgstr "Imbalidong string sa argument vector sa %d: %s"
+
+msgid "Invalid string in environment: %s"
+msgstr "Imbalidong string sa kapaligiran: %s"
+
+msgid "Invalid working directory: %s"
+msgstr "Imbalidong working directory: %s"
+
+msgid "Failed to execute helper program (%s)"
+msgstr "Bigo sa pagtakbo ng programang katulong (%s)"
+
+msgid ""
+"Unexpected error in giochannelwin32poll() reading data from a child "
+"process"
+msgstr ""
+"Hindi inaasahang error sa giochannelwin32poll() sa pagbasa ng datos mula "
+"sa prosesong anak"
+
+msgid "Failed to read data from child process (%s)"
+msgstr "Sawi sa pagbasa ng datos mula sa prosesong anak (%s)"
+
+msgid "Unexpected error in select() reading data from a child process (%s)"
+msgstr ""
+"Hindi inaasahang error sa select() habang nagbabasa ng datos mula sa "
+"prosesong anak (%s)"
+
+msgid "Unexpected error in waitpid() (%s)"
+msgstr "Hindi inaasahang error sa waitpid() (%s)"
+
+msgid "Failed to fork (%s)"
+msgstr "Sawi sa pag-fork (%s)"
+
+msgid "Failed to execute child process \"%s\" (%s)"
+msgstr "Sawi sa pagtakbo ng prosesong anak \"%s\" (%s)"
+
+msgid "Failed to redirect output or input of child process (%s)"
+msgstr "Sawi sa pag-redirect ng output o input ng prosesong anak (%s)"
+
+msgid "Failed to fork child process (%s)"
+msgstr "Sawi sa pag-fork ng prosesong anak (%s)"
+
+msgid "Unknown error executing child process \"%s\""
+msgstr "Hindi kilalang error sa pagpatakbo ng prosesong anak \"%s\""
+
+msgid "Failed to read enough data from child pid pipe (%s)"
+msgstr "Sawi sa pagbasa ng akmang datos mula sa child pid pipe (%s)"
+
+msgid "Character out of range for UTF-8"
+msgstr "Character wala sa sakop ng UTF-8"
+
+msgid "Invalid sequence in conversion input"
+msgstr "Hindi tanggap na sequence sa conversion input"
+
+msgid "Character out of range for UTF-16"
+msgstr "Character wala sa sakop ng UTF-16"
+
+msgid "Usage:"
+msgstr "Pag-gamit:"
+
+msgid "[OPTION...]"
+msgstr "[OPTION...]"
+
+msgid "Help Options:"
+msgstr "Option ng Tulong:"
+
+msgid "Show help options"
+msgstr "Ipakita ang option ng tulong"
+
+msgid "Show all help options"
+msgstr "Ipakita ang option ng tulong"
+
+msgid "Application Options:"
+msgstr "Option ng Aplikasyon:"
+
+msgid "Cannot parse integer value '%s' for %s"
+msgstr "Hindi mai-parse ang halagang integer '%s' para sa %s"
+
+msgid "Integer value '%s' for %s out of range"
+msgstr "Halagang integer '%s' para sa %s ay wala sa sakop"
+
+msgid "Missing argument for %s"
+msgstr "Kulang na argumento para sa %s"
+
+msgid "Unknown option %s"
+msgstr "Hindi kilalang option %s"
+
+msgid "Not a regular file"
+msgstr "Hindi karaniwang talaksan"
+
+msgid "File is empty"
+msgstr "Walang laman ang talaksan"
+
+msgid ""
+"Key file contains line '%s' which is not a key-value pair, group, or comment"
+msgstr ""
+"Ang talaksang susi ay naglalaman ng linyang '%s' na hindi pares na susi-"
+"halaga, grupo, o komento"
+
+msgid "Key file does not start with a group"
+msgstr "Ang talaksang susi ay hindi naguumpisa sa isang grupo"
+
+msgid "Key file contains unsupported encoding '%s'"
+msgstr "Ang talaksang susi ay naglalaman ng hindi suportadong encoding '%s'"
+
+msgid "Key file does not have group '%s'"
+msgstr "Ang talaksang susi ay walang grupong '%s'"
+
+msgid "Key file does not have key '%s'"
+msgstr "Ang talaksang susi ay walang susing '%s'"
+
+msgid "Key file contains key '%s' with value '%s' which is not UTF-8"
+msgstr ""
+"Ang talaksang susi ay naglalaman ng susing '%s' na may halagang '%s' na "
+"hindi UTF-8"
+
+msgid "Key file contains key '%s' which has value that cannot be interpreted."
+msgstr ""
+"Ang talaksang susi ay naglalaman ng susing '%s' na may halagang hindi mabasa."
+
+msgid ""
+"Key file contains key '%s' in group '%s' which has value that cannot be "
+"interpreted."
+msgstr ""
+"Ang talaksang susi ay naglalaman ng susing '%s' sa grupong '%s' na may "
+"halaga na hindi mabasa."
+
+msgid "Key file does not have key '%s' in group '%s'"
+msgstr "Ang talaksang susi ay walang susing '%s' sa grupong '%s'"
+
+msgid "Key file contains escape character at end of line"
+msgstr "Ang talaksang susi ay may escape karakter sa dulo ng linya"
+
+msgid "Key file contains invalid escape sequence '%s'"
+msgstr "Ang talaksang susi ay may hindi tanggap na escape sequence '%s'"
+
+msgid "Value '%s' cannot be interpreted as a number."
+msgstr "Ang halagang '%s' ay hindi mabasa bilang numero."
+
+msgid "Integer value '%s' out of range"
+msgstr "Halagang integer '%s' ay wala sa sakop"
+
+msgid "Value '%s' cannot be interpreted as a boolean."
+msgstr "Ang halagang '%s' ay hindi mabasa bilang boolean."
+
+msgid "Wanted to read %lu byte but got EOF"
+msgid_plural "Wanted to read %lu bytes but got EOF"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid ""
+"Encountered array of length %u byte. Maximum length is 2<<26 bytes (64 MiB)."
+msgid_plural ""
+"Encountered array of length %u bytes. Maximum length is 2<<26 bytes (64 MiB)."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "No signature header in message but the message body is %u byte"
+msgid_plural "No signature header in message but the message body is %u bytes"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid ""
+"Character '%s' is not valid at the start of an entity name; the  "
+"character begins an entity; if this ampersand isn't supposed to be an "
+"entity, escape it as amp;"
+msgstr ""
+"Hindi tanggap ang karakter '%s' sa umpisa ng pangalan ng entity; ang  "
+"karakter ang nag-uumpisa ng entity; kung ang ampersand ay hindi dapat "
+"maging entity, itaglay ito bilang amp;"
+
+msgid "Empty character reference; should include a digit such as #454;"
+msgstr ""
+"Walang laman na reference sa karakter; dapat may kasamang numero tulad ng "
+"#454;"
+
+msgid "Unfinished entity reference"
+msgstr "Hindi tapos na reference sa entity"
+
+msgid "Unfinished character reference"
+msgstr "Hindi tapos na reference sa karakter"
+
+msgid "Could not change file mode: fork() failed: %s"
+msgstr "Hindi mapalitan ang modo ng talaksan: bigo ang fork(): %s"
+
+msgid "Could not change file mode: chmod() failed: %s"
+msgstr "Hindi mapalitan ang modo ng talaksan: bigo ang chmod(): %s"
+
+msgid "Could not change file mode: Child terminated by signal: %s"
+msgstr ""
+"Hindi mapalitan ang modo ng talaksan: Hininto ang anak ng hudyat: %s"
+
+msgid "Could not change file mode: Child terminated abnormally"
+msgstr ""
+"Hindi mapalitan ang modo ng talaksan: Hininto ng hindi pangkaraniwan ang "
+"anay"
+
+
+msgid "Channel Name"
+msgstr "Pangalan ng Channel"
+
+msgid "Channel Topic"
+msgstr "Pinaguusapan sa Channel"
+
+msgid "Connect"
+msgstr "Kumunekta"
+
+msgid "Servers"
+msgstr "Servers"
+
+msgid ""
+"%s\n"
+"<span weight=\"bold\">Last message:</span> %d minute ago"
+msgid_plural ""
+"%s\n"
+"<span weight=\"bold\">Last message:</span> %d minutes ago"
+msgstr[0] ""
+msgstr[1] ""
+
+

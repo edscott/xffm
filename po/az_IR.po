@@ -1,0 +1,35 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:40:44 CDT 2013 ---
+#
+# Amir Hedayaty <hedayaty@gmail.com>, 2004-2008.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: http://bugs.xffm.org\n"
+"POT-Creation-Date: 2010-10-01 15:41-0400\n"
+"PO-Revision-Date: 2004-09-27 14:58+0330\n"
+"Last-Translator: Amir Hedayaty <amir@bamdad.org>\n"
+"Language-Team: Iranian Azerbaijani <az-ir@lists.sharif.edu>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Opening %d Item"
+msgid_plural "Opening %d Items"
+msgstr[0] ""
+
+msgid "calendar:weekstart:0"
+msgstr "calendar:weekstart:6"
+
+msgid "Pick a Color"
+msgstr "بیر دنه رنگ سچ"
+
+msgid "default:LTR"
+msgstr "default:RTL"
+
+

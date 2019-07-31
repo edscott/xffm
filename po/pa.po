@@ -1,0 +1,1403 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:38:35 CDT 2013 ---
+#
+# Amanpreet Singh <aalam@users.sf.net>, 2008-2013.
+# ਅਮਨਪਰੀਤ ਸਿੰਘ ਆਲਮ <aalam@redhat.com>, 2005.
+# Kanwaljeet Singh Brar <kanwaljeetbrar@yahoo.co.in>.
+# Punjab Linux Technology <punjablinux@netscape.net>, 2004.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2002-2012.
+# jaswindersinghra@yahoo.com <>.
+# KBST Punjab  (kbstpunjab@netscape.net) <>.
+# Jaswinder Singh Phulewala <jaswindersinghra@yahoo.com>, 2004.
+# jaswinder singh <jaswindersinghra@yahoo.com>, 2004.
+# Amanpreet_Singh <amanlinux@netscape.net>, 2004.
+# Gareth Owen <gowen72@yahoo.com>, 2004.
+# jaswinderlinux@netscape.net, 2004. <>.
+# AP S Alam <aalam@users.sf.net>, 2007.
+# Punjabi message file for YaST2 (@memory@). <>.
+# PrithiPal Dhaliwal <d.pirthi@yahoo.com>, 2008.
+# ASB <aalam@users.sf.net>, 2004-2013.
+# A S Alam <aalam@users.sf.net>, 2004-2013.
+# Robert Brady <rwb197@ecs.soton.ac.uk>, 1999-2002.
+# Amanpreet Singh Alam (amanlinux@netscape.net) <>.
+# Amanpreet Singh Brar <amanpreetalam@yahoo.com>, 2005-2008.
+# This file is distributed under the same license as the gimp-script-fu packageJaswinder Singh Phulewala <jaswinderlinux@netscape.net>, 2004.
+# Amanpreet Singh Alam[ਆਲਮ] <amanpreetalam@yahoo.com>, 2005.
+# Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
+# <srtxg@chanae.alphanet.ch>, 2001-2011.
+# Amanpreet Singh Alam <aalam@redhat.com>, 2004-2013.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-02 12:27-0600\n"
+"PO-Revision-Date: 2007-04-21 07:15+0530\n"
+"Last-Translator: A S Alam <aalam@users.sf.net>\n"
+"Language-Team: Punjabi <punjabi-l10n@lists.sf.net>\n"
+"Language: pa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../../xffm/completion/base.hh:28
+msgid "Command"
+msgstr "ਕਮਾਂਡ"
+
+#: ../../xffm/completion/base.hh:31
+msgid "File"
+msgstr "ਫਾਇਲ(F)"
+
+#: ../../xffm/completion/base.hh:34
+#, fuzzy
+msgid "Command history"
+msgstr "ਕਮਾਂਡ ਅਤੀਤ:"
+
+#. option -u uid "uid" "uid_combo"
+#: ../../xffm/completion/base.hh:37 ../../xffm/find/dialog.hh:199
+msgid "User"
+msgstr "ਯੂਜ਼ਰ"
+
+#: ../../xffm/completion/base.hh:40
+msgid "Variable"
+msgstr "ਅਸਥਿਰ"
+
+#: ../../xffm/completion/base.hh:43
+msgid "Host"
+msgstr "ਮੇਜ਼ਬਾਨ"
+
+#: ../../xffm/completion/base.hh:55
+#, fuzzy
+msgid "Found no match"
+msgstr "ਅੱਗੇ ਲੱਭੋ"
+
+#: ../../xffm/completion/base.hh:133 ../../xffm/completion/base.hh:134
+msgid "Matches"
+msgstr "ਮਿਲਦਾ(M)"
+
+#: ../../xffm/completion/base.hh:134
+msgid "Too many files open"
+msgstr "ਬਹੁਤ ਸਾਰੀਆਂ ਫਾਇਲਾਂ ਖੁੱਲ੍ਹੀਆਂ ਹਨ"
+
+#: ../../xffm/completion/base.hh:325 ../../xffm/find/fgr.hh:124
+msgid "Options:"
+msgstr "ਚੋਣਾਂ:"
+
+#: ../../xffm/completion/bash.hh:133
+msgid "Completion mode:"
+msgstr "ਪੂਰਨਤਾ ਢੰਗ(m):"
+
+#: ../../xffm/completion/bash.hh:134
+msgid "command"
+msgstr "ਕਮਾਂਡ"
+
+#: ../../xffm/completion/bash.hh:135
+msgid "file"
+msgstr "ਫਾਇਲ"
+
+#: ../../xffm/completion/bash.hh:145 ../../xffm/completion/bash.hh:149
+msgid "Options >>"
+msgstr "ਚੋਣਾਂ >>"
+
+#: ../../xffm/find/fgr.hh:124 ../../xffm/find/dialog.hh:308
+msgid "Path"
+msgstr "ਮਾਰਗ"
+
+#: ../../xffm/find/fgr.hh:125
+msgid "Locate documents and folders on this computer by name or content"
+msgstr "ਇਸ ਕੰਪਿਊਟਰ ਉੱਤੇ ਡੌਕੂਮੈਂਟ ਅਤੇ ਫੋਲਡਰ ਨਾਂ ਜਾਂ ਭਾਗਾਂ ਮੁਤਾਬਕ ਲੱਭੋ"
+
+#: ../../xffm/find/fgr.hh:126 ../../xffm/find/dialog.hh:341
+msgid "Filter:"
+msgstr "ਫਿਲਟਰ:"
+
+#: ../../xffm/find/fgr.hh:126
+msgid "Search for files"
+msgstr "ਫਾਇਲਾਂ ਵਿੱਚ ਖੋਜ"
+
+#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
+#: ../../xffm/find/fgr.hh:128
+msgid "Contents:"
+msgstr "ਸਮੱਗਰੀ:"
+
+#: ../../xffm/find/fgr.hh:128
+#, fuzzy
+msgid "File's contents filtered as plain text."
+msgstr "ਕੀ ਫਾਇਲ ਨੂੰ ਪਲੇਨ ਟੈਕਸਟ ਵਜੋਂ ਸੰਭਾਲਣਾ ਹੈ?"
+
+#: ../../xffm/find/fgr.hh:131
+msgid "Verbose output debugging mode."
+msgstr "ਵਧੇਰੇ ਆਉਟਪੁੱਟ ਡੀਬੱਗ ਮੋਡ।"
+
+#: ../../xffm/find/fgr.hh:133
+msgid "Show version information"
+msgstr "ਵਰਜਨ ਜਾਣਕਾਰੀ ਵੇਖੋ"
+
+#: ../../xffm/find/fgr.hh:135
+msgid "Filter Details"
+msgstr "ਫਿਲਟਰ ਵੇਰਵਾ"
+
+#. / option -a "xdev"
+#: ../../xffm/find/fgr.hh:138 ../../xffm/find/dialog.hh:180
+msgid "Stay on single filesystem"
+msgstr "ਇਕੱਲੇ ਫਾਇਲ ਸਿਸਟਮ ਉ\tਪਰ ਰੁਕੋ"
+
+#: ../../xffm/find/fgr.hh:140
+msgid "Print..."
+msgstr "ਪਰਿੰਟ ਕਰੋ..."
+
+#: ../../xffm/find/fgr.hh:140
+msgid "The unique Process ID that identifies this process."
+msgstr "ਵਿਲੱਖਣ ਪਰੋਸੈਸ ID, ਜੋ ਕਿ ਇਹ ਪਰੋਸੈਸ ਨੂੰ ਪਛਾਣਦਾ ਹੈ।"
+
+#. / option -D "recursiveH"
+#: ../../xffm/find/fgr.hh:142 ../../xffm/find/dialog.hh:177
+#, fuzzy
+msgid "Find hidden files and directories"
+msgstr "ਫਾਇਲਾਂ ਤੇ ਡਾਇਰੈਕਟਰੀਆਂ ਅਣਡਿੱਠੀਆਂ"
+
+#: ../../xffm/find/fgr.hh:143
+msgid "Filter"
+msgstr "ਫਿਲਟਰ"
+
+#: ../../xffm/find/fgr.hh:144
+msgid ""
+"To display files which pass the filter (stars and regexps will be processed)"
+msgstr "ਫਾਇਲਾਂ ਜੋ ਕਿ ਫਿਲਟਰ ਵਿੱਚੋ ਲੰਘੀਆਂ ਹਨ ਵਿਖਾਓਣ ਲਈ  (ਤਾਰੇ ਅਤੇ regexps ਚੱਲਣਗੇ)"
+
+#. / option -r "recursive"
+#: ../../xffm/find/fgr.hh:146 ../../xffm/find/dialog.hh:174
+msgid "Recursive"
+msgstr "ਲੜੀਵਾਰ"
+
+#: ../../xffm/find/fgr.hh:147 ../../xffm/find/fgr.hh:148
+#: ../../xffm/find/fgr.hh:149 ../../xffm/find/fgr.hh:150
+msgid "KByte"
+msgstr "KByte"
+
+#: ../../xffm/find/fgr.hh:148
+msgid "is greater than or equal to"
+msgstr "ਤੋਂ ਵੱਡਾ ਜਾਂ ਬਰਾਬਰ"
+
+#: ../../xffm/find/fgr.hh:150
+msgid "is less than or equal to"
+msgstr "ਘੱਟ ਜਾਂ ਬਰਾਬਰ"
+
+#: ../../xffm/find/fgr.hh:152
+msgid "Set UID"
+msgstr "UID ਸੈੱਟ"
+
+#: ../../xffm/find/fgr.hh:152
+msgid "Executable Text Files"
+msgstr "ਚੱਲਣਯੋਗ ਟੈਕਸਟ ਫਾਇਲਾਂ"
+
+#: ../../xffm/find/fgr.hh:154
+msgid "The permissions of the file, in octal notation."
+msgstr "ਫਾਇਲ ਦੇ ਅਧਿਕਾਰ ਉਕਟਿਲ ਭਾਸ਼ਾ ਵਿੱਚ ਹਨ।"
+
+#: ../../xffm/find/fgr.hh:155
+msgid "Type"
+msgstr "ਕਿਸਮ"
+
+#: ../../xffm/find/fgr.hh:157 ../../xffm/find/signals.hh:17
+msgid "Any"
+msgstr "ਕੋਈ ਵੀ"
+
+#: ../../xffm/find/fgr.hh:157
+msgid "Default type"
+msgstr "ਮੂਲ ਕਿਸਮ"
+
+#: ../../xffm/find/fgr.hh:158 ../../xffm/common/preview.hh:497
+msgid "Regular file"
+msgstr "ਨਿਯਮਿਤ ਫਾਇਲ"
+
+#: ../../xffm/find/fgr.hh:159 ../../xffm/find/signals.hh:11
+#: ../../xffm/fm/local/popup.hh:803 ../../xffm/common/preview.hh:488
+msgid "Directory"
+msgstr "ਡਾਇਰੈਕਟਰੀ"
+
+#: ../../xffm/find/fgr.hh:160 ../../xffm/find/signals.hh:12
+#: ../../xffm/common/preview.hh:494
+msgid "Symbolic Link"
+msgstr "ਸਿੰਬੋਲਿਕ ਲਿੰਕ"
+
+#: ../../xffm/find/fgr.hh:161
+msgid "UNIX Socket"
+msgstr "UNIX ਸਾਕਟ"
+
+#: ../../xffm/find/fgr.hh:162 ../../xffm/find/signals.hh:14
+#: ../../xffm/common/preview.hh:482
+msgid "Block device"
+msgstr "ਬਲਾੱਕ ਜੰਤਰ"
+
+#: ../../xffm/find/fgr.hh:163 ../../xffm/find/signals.hh:15
+#: ../../xffm/common/preview.hh:485
+msgid "Character device"
+msgstr "ਅੱਖਰ ਜੰਤਰ"
+
+#: ../../xffm/find/fgr.hh:164 ../../xffm/find/signals.hh:16
+#: ../../xffm/common/preview.hh:491
+msgid "FIFO"
+msgstr "FIFO"
+
+#. radio_p freed on destroy event for dialog_.
+#. option -k minutes "last_minutes", "last_minutes_spin"
+#: ../../xffm/find/fgr.hh:166 ../../xffm/find/fgr.hh:168
+#: ../../xffm/find/dialog.hh:221
+msgid "Minutes"
+msgstr "ਮਿੰਟ"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/dialog.hh:270 ../../xffm/find/dialog.hh:370
+#: ../../xffm/fm/treeview.hh:18
+msgid "Details"
+msgstr "ਵੇਰਵਾ"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/fgr.hh:179 ../../xffm/find/fgr.hh:180
+#: ../../xffm/find/fgr.hh:183 ../../xffm/find/fgr.hh:184
+#: ../../xffm/find/fgr.hh:187 ../../xffm/find/fgr.hh:188
+#, fuzzy
+msgid "TIME"
+msgstr "ਟਾਈਮ-ਆਉਟ"
+
+#: ../../xffm/find/fgr.hh:168 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/fgr.hh:174 ../../xffm/find/fgr.hh:177
+msgid "Previous"
+msgstr "ਪਿੱਛੇ"
+
+#. option -h hours "last_hours", "last_hours_spin"
+#: ../../xffm/find/fgr.hh:169 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/dialog.hh:226
+msgid "Hours"
+msgstr "ਘੰਟੇ"
+
+#. option -d days "last_days", "last_days_spin"
+#: ../../xffm/find/fgr.hh:172 ../../xffm/find/fgr.hh:174
+#: ../../xffm/find/dialog.hh:231
+msgid "Days"
+msgstr "ਦਿਨ"
+
+#: ../../xffm/find/fgr.hh:175
+msgid "Month"
+msgstr "ਮਹੀਨਾ"
+
+#: ../../xffm/find/fgr.hh:177
+msgid "Month(s)"
+msgstr "ਮਹੀਨੇ"
+
+#: ../../xffm/find/fgr.hh:180
+msgid "Modification Time :"
+msgstr "ਸੋਧ ਸਮਾਂਃ"
+
+#: ../../xffm/find/fgr.hh:184
+msgid "Access Time :"
+msgstr "ਵਰਤਣ ਦਾ ਸਮਾਂਃ"
+
+#: ../../xffm/find/fgr.hh:188
+msgid "Creation Time :"
+msgstr "ਪੈਦਾ ਕਰਨ ਦਾ ਸਮਾਂਃ"
+
+#: ../../xffm/find/fgr.hh:191 ../../xffm/find/fgr.hh:192
+msgid "uid"
+msgstr "uid"
+
+#: ../../xffm/find/fgr.hh:192
+msgid "User:"
+msgstr "ਯੂਜ਼ਰ:"
+
+#: ../../xffm/find/fgr.hh:194 ../../xffm/find/fgr.hh:195
+msgid "gid"
+msgstr "gid"
+
+#: ../../xffm/find/fgr.hh:195
+msgid "Group:"
+msgstr "ਗਰੁੱਪ(G):"
+
+#: ../../xffm/find/fgr.hh:198
+msgid ""
+"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+"character that  normally  follows  a file  name"
+msgstr ""
+
+#: ../../xffm/find/fgr.hh:200
+msgid "Content View"
+msgstr "ਸਮੱਗਰੀ ਵੇਖੋ"
+
+#: ../../xffm/find/fgr.hh:201 ../../xffm/find/fgr.hh:202
+#: ../../xffm/find/fgr.hh:203 ../../xffm/find/fgr.hh:204
+msgid "STRING"
+msgstr "ਲਾਈਨ"
+
+#: ../../xffm/find/fgr.hh:202 ../../xffm/find/fgr.hh:204
+#: ../../xffm/fm/local/popup.hh:563
+msgid "Regular expression"
+msgstr "ਨਿਯਮਤ ਸਮੀਕਰਨ(R)"
+
+#: ../../xffm/find/fgr.hh:204
+msgid "Extended"
+msgstr "ਐਕਸਟੈਂਡ"
+
+#: ../../xffm/find/fgr.hh:206
+msgid "Ignore case"
+msgstr "ਅੱਖਰ ਅਕਾਰ ਅਣਡਿੱਠਾ(I)"
+
+#: ../../xffm/find/fgr.hh:208
+msgid "Text Files"
+msgstr "ਟੈਕਸਟ ਫਾਇਲਾਂ"
+
+#: ../../xffm/find/fgr.hh:210 ../../xffm/find/dialog.hh:552
+msgid "No match"
+msgstr "ਕੋਈ ਮੇਲ ਨਹੀਂ"
+
+#: ../../xffm/find/fgr.hh:212 ../../xffm/find/dialog.hh:470
+msgid "Line Count"
+msgstr "ਲਾਈਨ ਗਿਣਤੀ"
+
+#: ../../xffm/find/fgr.hh:214
+msgid "Words"
+msgstr "ਸ਼ਬਦ"
+
+#: ../../xffm/find/fgr.hh:216
+msgid "Lines"
+msgstr "ਸਤਰਾਂ"
+
+#: ../../xffm/find/fgr.hh:368
+#, fuzzy, c-format
+msgid "Usage : %s [OPTIONS]\n"
+msgstr "ਵਰਤੋਂ: orca [OPTION...]"
+
+#: ../../xffm/find/signals.hh:10
+msgid "Regular"
+msgstr "ਰੈਗੂਲਰ"
+
+#: ../../xffm/find/signals.hh:13 ../../xffm/common/preview.hh:500
+msgid "Socket"
+msgstr "ਸਾਕਟ"
+
+#: ../../xffm/find/signals.hh:209
+msgid "Select folder to search in"
+msgstr "ਖੋਜ ਕਰਨ ਲਈ ਫੋਲਡਰ ਚੁਣੋ"
+
+#. button no
+#: ../../xffm/find/signals.hh:265 ../../xffm/find/dialog.hh:584
+#: ../../xffm/response/entryfileresponse.hh:18
+#: ../../xffm/response/entryresponse.hh:305
+#: ../../xffm/response/passwdresponse.hh:558
+#: ../../xffm/fm/local/properties.hh:304 ../../xffm/fm/local/rm.hh:155
+msgid "Cancel"
+msgstr "ਰੱਦ ਕਰੋ(C)"
+
+#: ../../xffm/find/signals.hh:293 ../../xffm/find/signals.hh:722
+#, fuzzy
+msgid "No editor for current action."
+msgstr "ਕੋਈ ਮੌਜੂਦਾ ਐਕਸ਼ਨ ਨਹੀਂ ਹੈ।"
+
+#. / option "upper_limit_spin" (only in gtk dialog_)
+#: ../../xffm/find/signals.hh:351 ../../xffm/find/dialog.hh:183
+msgid "Results"
+msgstr "ਨਤੀਜੇ"
+
+#: ../../xffm/find/signals.hh:351
+msgid "Upper limit:"
+msgstr "ਉੱਪਰਲੀ ਲਿਮਟ:"
+
+#: ../../xffm/find/signals.hh:353
+msgid "Counting files..."
+msgstr "ਫਾਇਲਾਂ ਦੀ ਗਿਣਤੀ ਜਾਰੀ ਹੈ..."
+
+#: ../../xffm/find/signals.hh:368
+#, c-format
+msgid "Found %d match"
+msgid_plural "Found %d matches"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../../xffm/find/signals.hh:370
+#, c-format
+msgid "%s Finished : %s"
+msgstr "%s ਨੇ %s ਨੂੰ ਖਤਮ ਕੀਤਾ"
+
+#: ../../xffm/find/signals.hh:488 ../../xffm/find/signals.hh:490
+msgid "Searching..."
+msgstr "ਖੋਜ ਜਾਰੀ ਹੈ…"
+
+#. g_object_set_data(G_OBJECT(dialog_), "window", dialog_);
+#: ../../xffm/find/dialog.hh:98 ../../xffm/find/dialog.hh:150
+#: ../../xffm/find/dialog.hh:611
+msgid "Find"
+msgstr "ਲੱਭੋ"
+
+#: ../../xffm/find/dialog.hh:183
+#, fuzzy
+msgid "Upper limit"
+msgstr "ਉੱਪਰਲੀ ਲਿਮਟ:"
+
+#. option -s +KByte "size_greater", "size_greater_spin"
+#: ../../xffm/find/dialog.hh:188
+msgid "At Least"
+msgstr "ਘੱਟੋ-ਘੱਟ"
+
+#: ../../xffm/find/dialog.hh:188 ../../xffm/find/dialog.hh:193
+msgid "kBytes"
+msgstr "kBytes"
+
+#. option -s -KByte "size_smaller", "size_smaller_spin"
+#: ../../xffm/find/dialog.hh:193
+msgid "At Most"
+msgstr "ਵੱਧੋ-ਵੱਧ"
+
+#: ../../xffm/find/dialog.hh:204
+msgid "Group"
+msgstr "ਗਰੁੱਪ"
+
+#. option -o octal "octal_p" "permissions_entry"
+#: ../../xffm/find/dialog.hh:208
+msgid "Octal Permissions"
+msgstr "ਉਕਟਿਲ ਅਧਿਕਾਰ"
+
+#. option -p suid | exe
+#: ../../xffm/find/dialog.hh:213
+msgid "SUID"
+msgstr "SUID"
+
+#: ../../xffm/find/dialog.hh:213 ../../xffm/fm/local/popup.hh:843
+#, fuzzy
+msgid "Executable"
+msgstr "ਚੱਲਣਯੋਗ:"
+
+#. option -m months "last_months", "last_months_spin"
+#: ../../xffm/find/dialog.hh:237
+msgid "Months"
+msgstr "ਮਹੀਨੇ"
+
+#: ../../xffm/find/dialog.hh:248
+msgid "File type : "
+msgstr "ਫਾਇਲ ਕਿਸਮ ਃ "
+
+#. gtk_widget_show (GTK_WIDGET(right_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(center_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(left_options_vbox));
+#: ../../xffm/find/dialog.hh:262 ../../xffm/find/dialog.hh:602
+#: ../../xffm/fm/page/page.hh:70 ../../xffm/common/gtk.hh:70
+msgid "Close"
+msgstr "ਬੰਦ"
+
+#. gtk_box_pack_start (vbox7a, GTK_WIDGET(advancedBox), TRUE, FALSE, 5);
+#. gtk_widget_show(GTK_WIDGET(advancedBox));
+#. //////////////  grep options.... /////////////////////////
+#: ../../xffm/find/dialog.hh:384
+msgid "Contains"
+msgstr "ਸ਼ਾਮਿਲ"
+
+#: ../../xffm/find/dialog.hh:404
+msgid "Contains the text"
+msgstr "ਟੈਕਸਟ ਰੱਖਦਾ ਹੈ(t)"
+
+#: ../../xffm/find/dialog.hh:437
+msgid "Case Sensitive"
+msgstr "ਅੱਖਰ ਅਕਾਰ 'ਤੇ ਨਿਰਭਰ(a)"
+
+#: ../../xffm/find/dialog.hh:449
+msgid "Extended regexp"
+msgstr "ਵਧਿਆ regexp"
+
+#: ../../xffm/find/dialog.hh:460
+msgid "Include binary files"
+msgstr "ਬਾਈਨਰੀ ਫਾਇਲਾਂ ਸ਼ਾਮਲ(b)"
+
+#: ../../xffm/find/dialog.hh:496
+msgid "Match"
+msgstr "ਮੇਲ(M)"
+
+#: ../../xffm/find/dialog.hh:508
+#, fuzzy
+msgid "Anywhere"
+msgstr "ਹਰ ਥਾਂ"
+
+#: ../../xffm/find/dialog.hh:523
+msgid "Whole words only"
+msgstr "ਪੂਰੇ ਅੱਖਰ ਹੀ(W)"
+
+#: ../../xffm/find/dialog.hh:538
+msgid "lines"
+msgstr "ਸਤਰਾਂ"
+
+#: ../../xffm/find/dialog.hh:594
+msgid "Clear"
+msgstr "ਸਾਫ਼"
+
+#: ../../xffm/find/dialog.hh:636
+msgid "Edit"
+msgstr "ਸੋਧ(E)"
+
+#: ../../xffm/find/dialog.hh:751 ../../xffm/find/dialog.hh:766
+#: ../../xffm/common/util.hh:1150 ../../xffm/common/util.hh:1152
+#: ../../xffm/common/util.hh:1158 ../../xffm/common/util.hh:1160
+#: ../../xffm/common/preview.hh:479
+msgid "unknown"
+msgstr "ਅਣਜਾਣ"
+
+#: ../../xffm/find/dialog.hh:780
+msgid "Modified"
+msgstr "ਸੋਧਿਅਾ"
+
+#: ../../xffm/find/dialog.hh:784
+msgid "Created"
+msgstr "ਬਣਾਇਆ"
+
+#: ../../xffm/find/dialog.hh:788
+#, fuzzy
+msgid "Accessed"
+msgstr "ਵਰਤੋਂ:"
+
+#: ../../xffm/find/dialog.hh:1106
+msgid ""
+"Basic rules:\n"
+"\n"
+"*  Will match any character zero or more times.\n"
+"?  Will match any character exactly one time\n"
+"[] Match any character within the [] \n"
+"^  Match at beginning of string\n"
+"$  Match at end of string \n"
+msgstr ""
+"ਮੁੱਖ ਕਾਨੂੰਨਃ\n"
+"\n"
+"* ਜੀਰੋ ਜਾਂ ਜਿਆਦਾ ਵਾਰ ਕੋਈ ਅੱਖਰ ਮਿਲਾਏਗਾ|\n"
+"? ਇੱਕ ਵਾਰ ਕੋਈ ਅੱਖਰ ਮਿਲਾਏਗਾ \n"
+
+#: ../../xffm/find/dialog.hh:1115
+#, fuzzy
+msgid ""
+"Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"In  basic regular expressions the metacharacters ?, +, {, |, (, and ) \n"
+"  lose their special meaning.\n"
+"\n"
+"The  period . matches  any  single  character.\n"
+"The caret ^ matches at the start of line.\n"
+"The dollar $ matches at the end of line.\n"
+"\n"
+"Characters within [ ] matches any single character in the list.\n"
+"Characters within [^ ] matches any single character *not* in the list.\n"
+"Characters inside [ - ] matches a range of characters (ie [0-9] or [a-z]).\n"
+"\n"
+"A regular expression may be followed by one of several repetition "
+"operators:\n"
+"?      The preceding item is optional and matched\n"
+"       at most once.\n"
+"*      The preceding item will be matched zero\n"
+"       or more times.\n"
+"+      The preceding item will be matched one or\n"
+"       more times.\n"
+"{n}    The preceding item is matched exactly n times.\n"
+"{n,}   The preceding item is matched n or more times.\n"
+"{n,m}  The preceding item is matched at least n times,\n"
+"       but not more than m times.\n"
+"\n"
+"To match any reserved character, precede it with \\. \n"
+"\n"
+"Two regular expressions may be joined by the logical or operator |.\n"
+"Two regular expressions may be concatenated.\n"
+"\n"
+"More information is available by typing \"man grep\"\n"
+msgstr ""
+"ਵਧੇ regexp ਲਈ ਰਾਖਵੇਂ ਅੱਖਰ ਹਨ\n"
+". ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"ਮੁੱਖ ਨਿਰੰਤਰ ਸਮੀਕਰਣਾਂ ਵਿੱਚ ਅੱਖਰਾਂ ਬਾਰੇ ਅੱਖਰ\n"
+"?, +, {, |, (, ਅਤੇ ) ਆਪਣਾ ਖਾਸ ਅਰਥ ਗਵਾ ਦਿੰਦੇ ਹਨ|\n"
+"\n"
+"ਵਿਸ਼ਰਾਮ . ਕੋਈ ਵੀ ਇਕੱਲਾ ਅੱਖਰ ਮਿਲਾਉਦਾ ਹੈ|\n"
+"ਕੈਰੇਟ  ^ ਲਾਈਨ ਦੇ ਸ਼ੁਰੂ ਵਿੱਚ ਮਿਲਾਉਦਾ ਹੈ|\n"
+"ਡੌਲਰ $ ਲਾਈਨ ਦੇ ਅੰਤ ਤੇ ਮਿਲਾਉਦਾ ਹੈ\n"
+"\n"
+" [ ]  ਵਿਚਲਾ ਅੱਖਰ ਕੋਈ ਵੀ ਇਕੱਲਾ\n"
+"          ਲੜੀ ਵਿਚਲਾ ਅੱਖਰ ਮਿਲਾਉਦਾ ਹੈ|\n"
+" [^ ] ਵਿਚਲਾ ਅੱਖਰ ਕੋਈ ਵੀ ਇਕੱਲਾ\n"
+"          ਲੜੀ ਤੋਂ ਬਾਹਰਲਾ ਅੱਖਰ ਮਿਲਾਉਦਾ ਹੈ|\n"
+" [ - ] ਵਿਚਲਾ ਅੱਖਰ ਸੀਮਾ ਵਿਚਲੇ ਅੱਖਰ\n"
+"ੀ         (ਜਿਵੇਂ ਕਿ [0-9] ਜਾਂ [a- z])ਮਿਲਾਉਦਾ ਹੈ|\n"
+"\n"
+"ਇੱਕ ਲਗਾਤਾਰ ਸਮੀਕਰਨ ਕੁਝ ਦੁਹਰਾਈ ਆਪਰੇਟਰਾਂ\n"
+"       ਦੇ ਬਾਅਦ ਹੋ ਸਕਦਾ ਹੈਃ\n"
+"?      ਅਗਲੀ ਇੰਦਰਾਜ ਚੋਣਵੀਂ ਹੈ ਅਤੇ ਇੱਕ ਵਾਰ\n"
+"        ਮਿਲਾਈ ਮਿਲਾਈ ਗਈ|\n"
+"*      ਅਗਲੀ ਇੰਦਰਾਜ ਜ਼ੀਰੋ ਜਾਂ ਜਿਆਦਾ ਵਾਰ\n"
+"        ਮਿਲਾਈ ਗਈ|\n"
+"+      ਅਗਲੀ ਇੰਦਰਾਜ ਇੱਕ ਜਾਂ ਜਿਆਦਾ ਵਾਰ\n"
+"       ਮਿਲਾਈ |\n"
+"{n}    ਅਗਲੀ ਇੰਦਰਾਜ ਪੂਰੀ n ਵਾਰ ਮਿਲਾਈ ਗਈ|\n"
+"{n,}  ਅਗਲੀ ਇੰਦਰਾਜm nਜਾਂ ਜਿਆਦਾ ਵਾਰ ਮਿਲਾਈ ਗਈ|.\n"
+"{n,m} ਅਗਲੀ ਇੰਦਰਾਜ ਘੱਟੋ-ਘੱਟ n ਵਾਰ ਮਿਲਾਈ ਗਈ|,\n"
+"      ਪਰ m ਤੋਂ ਜਿਆਦਾ ਵਾਰ ਨਹੀਂ|\n"
+"\n"
+"ਕੋਈ ਰਾਖਵਾਂ ਅੱਖਰ ਮਿਲਾਉਣ ਲਈr,ਇਸ ਨੂੰ \\ ਨਾਲ ਸ਼ੁਰੂ ਕਰੋ|\n"
+"\n"
+"ਦੋ ਨਿਰੰਤਰ ਸਮੀਕਰਨਾ ਲੌਜੀਕਲ ਜਾਂ | ਆਪਰੇਟਰ ਨਾਲ\n"
+"   ਜੁੜ ਸਕਣਗੀਆਂ|\n"
+"ਦੋ ਨਿਰੰਤਰ ਸਮੀਕਰਨਾ ਜੋੜੀਆਂ ਜਾ ਸਕਦੀਆਂ ਹਨ|\n"
+"\n"
+"ਵਧੇਰੇ ਜਾਣਕਾਰੀ ਕਮਾਂਡ ਪਰੌਂਪਟ ਤੇ \"man grep\" ਟਾਈਪ ਕਰ\n"
+"        ਕੇ ਉਪਲੱਬਧ ਹੋਵੇਗੀ|\n"
+
+#: ../../xffm/response/entryfileresponse.hh:20
+msgid "Open"
+msgstr "ਖੋਲ੍ਹੋ"
+
+#: ../../xffm/response/entryresponse.hh:29
+#: ../../xffm/response/entryfolderresponse.hh:28
+#, fuzzy
+msgid "Choose directory"
+msgstr "ਡਾਇਰੈਕਟਰੀ ਚੁਣੋ"
+
+#. this button is redundant since hands are on keyboard for password
+#: ../../xffm/response/entryresponse.hh:309
+#: ../../xffm/response/passwdresponse.hh:189
+#: ../../xffm/response/passwdresponse.hh:559
+msgid "Ok"
+msgstr "ਠੀਕ ਹੈ"
+
+#: ../../xffm/response/commandprogressresponse.hh:32
+msgid "Items:"
+msgstr "ਆਈਟਮਾਂ(e):"
+
+#: ../../xffm/response/passwdresponse.hh:21
+msgid "Enter password"
+msgstr "ਪਾਸਵਰਡ ਦਿਓ"
+
+#. gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+#: ../../xffm/response/passwdresponse.hh:125
+#, fuzzy
+msgid "User Input"
+msgstr "ਮਾਊਂਸ ਇੰਪੁੱਟ"
+
+#: ../../xffm/response/passwdresponse.hh:142
+#, fuzzy
+msgid "Response Requested"
+msgstr "ਜਵਾਬ ਬੇਨਤੀ"
+
+#: ../../xffm/response/passwdresponse.hh:264
+msgid "Preparing"
+msgstr "ਤਿਆਰ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
+
+#: ../../xffm/response/passwdresponse.hh:352
+msgid "sudo"
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:354
+msgid "Command:"
+msgstr "ਕਮਾਂਡ:"
+
+#: ../../xffm/response/passwdresponse.hh:357
+msgid "Permission denied"
+msgstr "ਅਧਿਕਾਰ ਪਾਬੰਦੀ ਹੈ"
+
+#: ../../xffm/response/passwdresponse.hh:358
+msgid "Try to approach a problem from different angles."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:359
+msgid "Do you want to retry?"
+msgstr "ਕੀ ਤੁਸੀਂ ਮੁੜ ਕੋਸ਼ਿਸ਼ ਕਰਨੀ ਚਾਹੁੰਦੇ ਹੋ?"
+
+#: ../../xffm/response/passwdresponse.hh:360
+msgid "Alternate:"
+msgstr "ਬਦਲਵਾਂ:"
+
+#: ../../xffm/response/passwdresponse.hh:365
+msgid "No"
+msgstr "ਨਹੀਂ"
+
+#: ../../xffm/response/passwdresponse.hh:401
+msgid "Install"
+msgstr "ਇੰਸਟਾਲ"
+
+#: ../../xffm/response/passwdresponse.hh:402
+#, c-format
+msgid "%s does not exist."
+msgstr "%s ਮੌਜੂਦ ਨਹੀਂ ਹੈ।"
+
+#: ../../xffm/response/passwdresponse.hh:467
+msgid "Blowfish"
+msgstr "Blowfish"
+
+#: ../../xffm/response/passwdresponse.hh:468
+msgid "Encryption Key Approval"
+msgstr "ਇੰਕ੍ਰਿਪਸ਼ਨ ਕੁੰਜ ਮੰਨਜ਼ੂਰੀ"
+
+#: ../../xffm/response/passwdresponse.hh:502
+msgid "-o     print output to standard out. Implies -r."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:506
+msgid "-c     DO NOT compress files before encryption."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:510
+msgid "-r     DO NOT remove input files after processing"
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:517
+#, fuzzy
+msgid "Encryption key: "
+msgstr "ਇਕ੍ਰਿਪਸ਼ਨ ਕੁੰਜੀ"
+
+#: ../../xffm/response/passwdresponse.hh:529
+msgid "Confirm:"
+msgstr "ਪੁਸ਼ਟੀ:"
+
+#: ../../xffm/response/passwdresponse.hh:542
+msgid "Sorry, passwords do not match"
+msgstr "ਅਫ਼ਸੋਸ ਹੈ ਕਿ ਪਾਸਵਰਡ ਮਿਲਦਾ ਨਹੀਂ ਹੈ"
+
+#: ../../xffm/response/passwdresponse.hh:550
+#, fuzzy
+msgid "Minimum length:"
+msgstr "ਵੱਧੋ-ਵੱਧ ਲੰਬਾਈ"
+
+#: ../../xffm/response/timeoutresponse.hh:56
+msgid "Dismiss"
+msgstr "ਮਨਸੂਖ(D)"
+
+#: ../../xffm/response/commandresponse.hh:23
+msgid "Running"
+msgstr "ਚੱਲ ਰਹੀ ਹੈ"
+
+#. auto text = g_strdup_printf("%s (pid: %d)",
+#. _("Waiting for operation to finish..."),
+#. Tubo<Type>::getChild (pid));
+#: ../../xffm/response/commandresponse.hh:28
+msgid "Waiting for operation to finish..."
+msgstr "ਓਪਰੇਸ਼ਨ ਦੇ ਪੂਰਾ ਹੋਣ ਦੀ ਉਡੀਕ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ..."
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Documents"
+msgstr "ਦਸਤਾਵੇਜ਼"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Downloads"
+msgstr "ਡਾਊਨਲੋਡ"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Music"
+msgstr "ਸੰਗੀਤ"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Pictures"
+msgstr "ਤਸਵੀਰਾਂ"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Templates"
+msgstr "ਟੈਪਲੇਟ"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Videos"
+msgstr "ਵਿਡੀਓ"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Desktop"
+msgstr "ਡੈਸਕਟਾਪ(k)"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Bookmarks"
+msgstr "ਬੁੱਕਮਾਰਕ(B)"
+
+#: ../../xffm/fm/local/icons.hh:259 ../../xffm/fm/local/rm.hh:181
+msgid "Trash"
+msgstr "ਰੱਦੀ"
+
+#: ../../xffm/fm/local/popup.hh:60
+msgid "New"
+msgstr "ਨਵਾਂ"
+
+#. deprecated {N_("Open in New Tab"), NULL, NULL, NULL},
+#. deprecated {N_("Open in New Window"), NULL, NULL, NULL},
+#. common buttons /(also an iconsize +/- button)
+#: ../../xffm/fm/local/popup.hh:64 ../../xffm/fm/local/popup.hh:104
+#: ../../xffm/common/gtk.hh:74
+msgid "Copy"
+msgstr "ਨਕਲ"
+
+#: ../../xffm/fm/local/popup.hh:65 ../../xffm/fm/local/popup.hh:105
+#: ../../xffm/common/gtk.hh:73
+msgid "Cut"
+msgstr "ਕੱਟੋ"
+
+#: ../../xffm/fm/local/popup.hh:66 ../../xffm/fm/local/popup.hh:106
+#: ../../xffm/common/gtk.hh:66
+msgid "Paste"
+msgstr "ਚਿਪਕਾਉ"
+
+#. **************
+#: ../../xffm/fm/local/popup.hh:67 ../../xffm/fm/local/popup.hh:107
+#: ../../xffm/fm/local/rm.hh:174 ../../xffm/common/gtk.hh:75
+msgid "Delete"
+msgstr "ਹਟਾਓ(D)"
+
+#. {N_("About"), NULL, (void *) menu},
+#.
+#. only for listview: {N_("Sort by size"), NULL, (void *) menu},
+#. only for listview: {N_("Sort by date"), NULL, (void *) menu},
+#: ../../xffm/fm/local/popup.hh:73
+msgid "Select All"
+msgstr "ਸਭ ਚੁਣੋ"
+
+#: ../../xffm/fm/local/popup.hh:74 ../../xffm/fm/local/popup.hh:559
+msgid "Match regular expression"
+msgstr "ਰੈਗੂਲਰ ਸਮੀਕਰਨ ਮੇਲ"
+
+#: ../../xffm/fm/local/popup.hh:75 ../../xffm/fm/root/view.hh:58
+#: ../../xffm/fm/fstab/popup.hh:21
+msgid "View as list"
+msgstr "ਲਿਸਟ ਵਾਂਗ ਵੇਖੋ"
+
+#: ../../xffm/fm/local/popup.hh:77
+msgid "Show hidden files"
+msgstr "ਲੁਕਵੀਆਂ ਫਾਇਲਾਂ ਵੇਖੋ"
+
+#: ../../xffm/fm/local/popup.hh:79
+msgid "Show Backup Files"
+msgstr "ਬੈਕਅੱਪ ਫਾਇਲਾਂ ਵੇਖਾਓ"
+
+#: ../../xffm/fm/local/popup.hh:81
+#, fuzzy
+msgid "Sort data in descending order"
+msgstr "ਵੱਧਦਾ ਕ੍ਰਮ ਜਾਂ ਘੱਟਦਾ"
+
+#: ../../xffm/fm/local/popup.hh:93 ../../xffm/fm/local/popup.hh:119
+#: ../../xffm/fm/local/popup.hh:1006 ../../xffm/fm/local/popup.hh:1013
+#: ../../xffm/fm/local/popup.hh:1022 ../../xffm/fm/local/popup.hh:1029
+#: ../../xffm/common/gtk.hh:72
+msgid "Open with"
+msgstr "ਇਸ ਨਾਲ ਖੋਲ੍ਹੋ(w)"
+
+#: ../../xffm/fm/local/popup.hh:94 ../../xffm/fm/local/popup.hh:846
+msgid "Run Executable..."
+msgstr "ਚੱਲਣਯੋਗ ਚਲਾਓ..."
+
+#: ../../xffm/fm/local/popup.hh:95
+msgid "Extract files from the archive"
+msgstr "ਅਕਾਇਵ ਤੋਂ ਫਾਇਲਾਂ ਨੂੰ ਖਿਲਾਰੋ"
+
+#. g_hash_table_insert(iconname_hash, "bcrypt", (void *)"emblem-keyhole");
+#: ../../xffm/fm/local/popup.hh:96 ../../xffm/fm/root/view.hh:73
+#: ../../xffm/fm/fstab/popup.hh:20 ../../xffm/fm/dialog/notebook.hh:52
+#: ../../xffm/common/gtk.hh:78
+msgid "Open in New Tab"
+msgstr "ਨਵੀਂ ਟੈਬ ਵਿੱਚ ਖੋਲ੍ਹੋ(O)"
+
+#. File chooser
+#: ../../xffm/fm/local/popup.hh:97 ../../xffm/fm/local/popup.hh:706
+msgid "Create a compressed archive with the selected objects"
+msgstr "ਚੁਣੇ ਆਬਜੈਕਟਾਂ ਨਾਲ ਨਵਾਂ ਕੰਪਰੈੱਸ ਅਕਾਇਵ ਬਣਾਓ"
+
+#: ../../xffm/fm/local/popup.hh:98 ../../xffm/fm/fstab/popup.hh:37
+msgid "Mount the volume associated with this folder"
+msgstr "ਇਸ ਫੋਲਡਰ ਨਾਲ ਸਬੰਧਿਤ ਵਾਲੀਅਮ ਮਾਊਂਟ ਕਰੋ"
+
+#: ../../xffm/fm/local/popup.hh:99 ../../xffm/fm/fstab/popup.hh:38
+msgid "Unmount the volume associated with this folder"
+msgstr "ਇਸ ਫੋਲਡਰ ਨਾਲ ਸਬੰਧਿਤ ਵਾਲੀਅਮ ਅਣ-ਮਾਊਂਟ ਕਰੋ"
+
+#: ../../xffm/fm/local/popup.hh:100 ../../xffm/common/gtk.hh:67
+msgid "Add bookmark"
+msgstr "ਬੁੱਕਮਾਰਕ ਵਿਚ ਜੋਡ਼੍ਹੋ"
+
+#: ../../xffm/fm/local/popup.hh:101 ../../xffm/fm/root/view.hh:74
+#: ../../xffm/common/gtk.hh:68
+msgid "Remove bookmark"
+msgstr "ਬੁੱਕਮਾਰਕ ਹਟਾਓ"
+
+#: ../../xffm/fm/local/popup.hh:108 ../../xffm/fm/local/popup.hh:961
+msgid "Rename"
+msgstr "ਨਾਂ ਬਦਲੋ"
+
+#: ../../xffm/fm/local/popup.hh:109 ../../xffm/fm/local/popup.hh:947
+msgid "Duplicate"
+msgstr "ਡੁਪਲੀਕੇਟ(D)"
+
+#: ../../xffm/fm/local/popup.hh:110 ../../xffm/fm/local/popup.hh:933
+msgid "Link"
+msgstr "ਲਿੰਕ"
+
+#: ../../xffm/fm/local/popup.hh:111
+msgid "Properties"
+msgstr "ਵਿਸ਼ੇਸ਼ਤਾ"
+
+#: ../../xffm/fm/local/popup.hh:414
+msgid "Files:"
+msgstr "ਫਾਇਲਾਂ(F):"
+
+#: ../../xffm/fm/local/popup.hh:417 ../../xffm/fm/local/rm.hh:61
+msgid "Multiple selections"
+msgstr "ਕਈ ਭਾਗ"
+
+#: ../../xffm/fm/local/popup.hh:557
+#, fuzzy
+msgid "Select items"
+msgstr "ਚੁਣੀਆਂ ਆਈਟਮਾਂ(S):"
+
+#: ../../xffm/fm/local/popup.hh:575
+#, fuzzy
+msgid "Regular Expression syntax is incorrect"
+msgstr "ਨਿਯਮਤ ਸਮੀਕਰਨ, ਜਿਸ ਨੂੰ ਤਬਦੀਲ ਕੀਤਾ ਜਾਵੇਗਾ।"
+
+#: ../../xffm/fm/local/popup.hh:592
+msgid "No selection"
+msgstr "ਕੋਈ ਚੋਣ ਨਹੀਂ"
+
+#: ../../xffm/fm/local/popup.hh:592
+msgid "No matches."
+msgstr "ਕੋਈ ਮਿਲਦਾ ਨਹੀਂ।"
+
+#. entryResponse->setCheckButton(_("Run in Terminal"));
+#. entryResponse->setCheckButton(Mime<Type>::runInTerminal(path));
+#: ../../xffm/fm/local/popup.hh:721 ../../xffm/fm/page/pathbar.hh:313
+msgid "Specify Output Directory..."
+msgstr "ਆਉਟਪੁੱਟ ਡਾਇਰੈਕਟਰੀ ਦਿਓ..."
+
+#: ../../xffm/fm/local/popup.hh:799
+#, fuzzy
+msgid "Create new..."
+msgstr "ਨਵੀਂ %s ਬਣਾਓ..."
+
+#: ../../xffm/fm/local/popup.hh:806 ../../xffm/fm/local/popup.hh:886
+msgid "New Name:"
+msgstr "ਨਵਾਂ ਨਾਂ:"
+
+#: ../../xffm/fm/local/popup.hh:815
+msgid "No name"
+msgstr "ਕੋਈ ਨਾਂ ਨਹੀਂ"
+
+#: ../../xffm/fm/local/popup.hh:828
+#, c-format
+msgid "Another file with the same name already exists in “%s”."
+msgstr "”%s” ਵਿੱਚ ਇਸੇ ਨਾਂ ਨਾਲ ਹੋਰ ਫਾਇਲ ਪਹਿਲਾਂ ਹੀ ਮੌਜੂਦ ਹੈ।"
+
+#: ../../xffm/fm/local/popup.hh:850 ../../xffm/fm/local/popup.hh:1010
+#: ../../xffm/fm/local/popup.hh:1026 ../../xffm/common/util.hh:1248
+msgid "Run in Terminal"
+msgstr "ਟਰਮੀਨਲ ਵਿੱਚ ਚਲਾਓ"
+
+#: ../../xffm/fm/local/popup.hh:853
+#, fuzzy
+msgid "Arguments for the Command"
+msgstr "ਕਮਾਂਡ ਲਈ ਆਰਗੂਮਿੰਟ"
+
+#: ../../xffm/fm/local/popup.hh:1047 ../../xffm/fm/local/view.hh:141
+#, fuzzy
+msgid "Invalid entry"
+msgstr "ਗਲਤ ਐਂਟਰੀ"
+
+#: ../../xffm/fm/local/properties.hh:235
+#, fuzzy
+msgid "Properties and Attributes"
+msgstr "ਸਭ ਗੁਣ ਸੰਭਾਲੀ ਰੱਖੋ"
+
+#: ../../xffm/fm/local/properties.hh:264
+#, fuzzy
+msgid "File Mode:"
+msgstr "ਫਾਇਲ ਮੋਡ"
+
+#: ../../xffm/fm/local/properties.hh:290
+msgid "File:"
+msgstr "ਫਾਈਲ:"
+
+#. Add file info stuff
+#. set info stuff data according to combo box
+#. add signal handler to changed signal for combo box
+#. Add process buttons
+#.
+#: ../../xffm/fm/local/properties.hh:302
+msgid "Apply changes"
+msgstr "ਤਬਦੀਲੀਆਂ ਲਾਗੂ ਕਰੋ"
+
+#: ../../xffm/fm/local/properties.hh:462
+msgid "Successfully moved to trash."
+msgstr "ਠੀਕ ਤਰ੍ਹਾਂ ਰੱਦੀ ਵਿੱਚ ਭੇਜਿਆ ਗਿਆ।"
+
+#: ../../xffm/fm/local/properties.hh:463
+msgid "Source:"
+msgstr "ਸਰੋਤ:"
+
+#: ../../xffm/fm/local/rm.hh:59
+#, c-format
+msgid "Delete %s"
+msgstr "%s ਹਟਾਓ"
+
+#: ../../xffm/fm/local/rm.hh:61
+msgid "Warning: "
+msgstr "ਚੇਤਾਵਨੀ: "
+
+#. gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
+#. title
+#: ../../xffm/fm/local/rm.hh:90
+msgid "Remove"
+msgstr "ਹਟਾਓ(R)"
+
+#: ../../xffm/fm/local/rm.hh:140
+#, fuzzy
+msgid "Apply to all"
+msgstr "ਸਭ ਉੱਤੇ ਲਾਗੂ ਕਰੋ(y)"
+
+#. **************
+#. This is now available to BSD with rm -P option
+#: ../../xffm/fm/local/rm.hh:163 ../../xffm/common/gtk.hh:76
+#, fuzzy
+msgid "Shred"
+msgstr "ਵੰਡੋ"
+
+#. We do not count "../"
+#: ../../xffm/fm/local/view.hh:48 ../../xffm/fm/base/monitor.hh:28
+#, fuzzy, c-format
+msgid "Files: %s"
+msgstr "ਫਾਇਲ਼: %s"
+
+#: ../../xffm/fm/root/model.hh:78
+msgid "Root Directory"
+msgstr "ਰੂਟ ਡਾਇਰੈਕਟਰੀ"
+
+#: ../../xffm/fm/root/model.hh:94
+msgid "This is the root of the filesystem"
+msgstr "ਇਹ ਫਾਇਲ ਸਿਸਟਮ ਦਾ ਰੂਟ (root) ਹੈ"
+
+#: ../../xffm/fm/root/model.hh:105
+msgid "Home Directory"
+msgstr "ਘਰ ਡਾਇਰੈਕਟਰੀ"
+
+#: ../../xffm/fm/root/model.hh:132
+#, fuzzy
+msgid "Trash bin"
+msgstr "ਫਾਇਲ ਰੱਦੀ 'ਚ"
+
+#: ../../xffm/fm/root/model.hh:162 ../../xffm/fm/fstab/popup.hh:29
+msgid "Disk Image Mounter"
+msgstr "ਡਿਸਕ ਈਮੇਜ਼ ਮਾਊਂਟਰ"
+
+#: ../../xffm/fm/root/model.hh:169 ../../xffm/fm/root/model.hh:185
+msgid "Mount local disks and devices"
+msgstr "ਲੋਕਲ ਡਿਸਕਾਂ ਅਤੇ ਜੰਤਰਾਂ ਮਾਊਟ"
+
+#: ../../xffm/fm/root/model.hh:170 ../../xffm/fm/fstab/popup.hh:25
+#: ../../xffm/fm/fstab/view.hh:429
+msgid "eCryptfs Volume"
+msgstr "eCryptfs ਵਾਲੀਅਮ"
+
+#: ../../xffm/fm/root/model.hh:171 ../../xffm/fm/fstab/popup.hh:24
+msgid "SSHFS Remote Synchronization Folder"
+msgstr "SSHFS ਰਿਮੋਟ ਸਿਕਰੋਨਾਈਜ਼ੇਸ਼ਨ ਫੋਲਡਰ"
+
+#: ../../xffm/fm/root/model.hh:172 ../../xffm/fm/fstab/popup.hh:23
+#: ../../xffm/fm/fstab/view.hh:377
+msgid "NFS Network Volume"
+msgstr "NFS ਨੈੱਟਵਰਕ ਵਾਲੀਅਮ"
+
+#: ../../xffm/fm/root/model.hh:173 ../../xffm/fm/fstab/popup.hh:26
+#: ../../xffm/fm/fstab/view.hh:455
+msgid "CIFS Volume"
+msgstr "CIFS ਵਾਲੀਅਮ"
+
+#: ../../xffm/fm/root/model.hh:195
+msgid "Software Updater"
+msgstr "ਸਾਫਟਵੇਅਰ ਅੱਪਡੇਟਰ"
+
+#: ../../xffm/fm/root/model.hh:218 ../../xffm/fm/root/model.hh:230
+msgid "Add or remove software installed on the system"
+msgstr "ਸਿਸਟਮ ਉੱਤੇ ਸਾਫਟਵੇਅਰ ਇੰਸਟਾਲ ਕਰੋ ਜਾਂ ਇੰਸਟਾਲ ਕੀਤੇ ਹਟਾਓ"
+
+#: ../../xffm/fm/root/model.hh:271
+#, fuzzy
+msgid "Go to bookmarked location"
+msgstr "ਅਗਲੀ ਬੁੱਕਮਾਰਕ ਦਿੱਖ ਤੇ ਜਾਉ।"
+
+#. {N_("Add bookmark"), (void *)BasePopUp<Type>::noop, NULL, NULL},
+#: ../../xffm/fm/root/view.hh:61
+msgid "Empty trash"
+msgstr "ਰੱਦੀ ਖਾਲੀ"
+
+#. File chooser
+#: ../../xffm/fm/fstab/popup.hh:121
+msgid "Mount Device"
+msgstr "ਮਾਊਂਟ ਜੰਤਰ"
+
+#: ../../xffm/fm/fstab/popup.hh:133
+msgid "Mount point:"
+msgstr "ਮਾਊਟ ਸਥਿਤੀ:"
+
+#: ../../xffm/fm/fstab/view.hh:301
+msgid "Mounted on:"
+msgstr "ਇਸ ਉੱਤੇ ਮਾਊਂਟ:"
+
+#: ../../xffm/fm/fstab/view.hh:302
+msgid "Mount on"
+msgstr "ਮਾਊਟ ਹੈ(M)"
+
+#: ../../xffm/fm/fstab/view.hh:310 ../../xffm/fm/fstab/view.hh:312
+msgid "Not mounted"
+msgstr "ਮਾਊਂਟ ਨਹੀਂ"
+
+#: ../../xffm/fm/fstab/view.hh:403
+#, fuzzy
+msgid "SFTP (via SSH)"
+msgstr "Secure FTP (SSH)"
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, c-format
+msgid "Unmounting %s"
+msgstr "%s ਅਣ-ਮਾਊਂਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, fuzzy, c-format
+msgid "Mounting %s"
+msgstr "ਮਾਊਂਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
+
+#: ../../xffm/fm/dialog/menupopover.hh:128
+msgid "Home"
+msgstr "ਘਰ"
+
+#: ../../xffm/fm/dialog/menupopover.hh:129 ../../xffm/common/gtk.hh:64
+#, fuzzy
+msgid "Open terminal"
+msgstr "ਇੱਕ ਟਰਮੀਨਲ ਖੋਲ੍ਹੋ"
+
+#: ../../xffm/fm/dialog/menupopover.hh:130
+msgid "Open a New Window"
+msgstr "ਨਵੀਂ ਵਿੰਡੋ ਖੋਲ੍ਹੋ"
+
+#. {N_("Execute Shell Command"), (void *)MenuPopoverSignals<Type>::shell, (void *) menuButton_},
+#: ../../xffm/fm/dialog/menupopover.hh:132 ../../xffm/common/gtk.hh:69
+msgid "Search"
+msgstr "ਖੋਜ"
+
+#: ../../xffm/fm/dialog/menupopover.hh:133 ../../xffm/common/gtk.hh:71
+msgid "Exit"
+msgstr "ਬੰਦ ਕਰੋ"
+
+#: ../../xffm/fm/dialog/dialog.hh:116
+msgid "Removed"
+msgstr "ਹਟਾਏ"
+
+#: ../../xffm/fm/dialog/dialog.hh:132
+msgid "Detected device(s):"
+msgstr "ਪਤਾ ਲਗਾਏ ਯੰਤਰ(s):"
+
+#. Create the widgets
+#: ../../xffm/fm/page/vbuttonbox.hh:37 ../../xffm/common/gtk.hh:332
+msgid "Help"
+msgstr "ਸਹਾਇਤਾ(H)"
+
+#. File chooser
+#: ../../xffm/fm/page/pathbar.hh:306 ../../xffm/fm/page/pathbar.hh:308
+msgid "Go to"
+msgstr "ਜਾਉ"
+
+#: ../../xffm/fm/page/pathbar.hh:331
+msgid "Not a directory"
+msgstr "ਇੱਕ ਡਾਇਰੈਕਟਰੀ ਨਹੀਂ"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Renice Process"
+msgstr "ਪਰੋਸੈੱਸ ਰੀ-ਨਾਈਸ"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Suspend"
+msgstr "ਸਸਪੈਂਡ"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Continue"
+msgstr "ਜਾਰੀ"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Interrupt"
+msgstr "ਇੰਟਰੱਪਟ"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Hangup"
+msgstr "ਹੈਂਗ ਅੱਪ(H)"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "User 1 (USR1)"
+msgstr "ਯੂਜ਼ਰ 1 (USR1)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "User 2 (USR2)"
+msgstr "ਯੂਜ਼ਰ 2 (USR2)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "Terminate Task"
+msgstr "ਕੰਮ ਖਤਮ ਕਰੋ(T)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "Abort"
+msgstr "ਅਧੂਰਾ ਰਹਿਣ ਦਿਓ"
+
+#: ../../xffm/fm/page/runbutton.hh:138
+msgid "Kill"
+msgstr "ਖਤਮ"
+
+#: ../../xffm/fm/page/runbutton.hh:139
+#, fuzzy
+msgid "Segmentation fault"
+msgstr "ਸਿਗਮੈਂਟੇਸ਼ਨ ਉਲੰਘਣਾ"
+
+#: ../../xffm/fm/page/runbutton.hh:217
+msgid "PID"
+msgstr "PID"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:37
+#, fuzzy
+msgid "Embedded Terminal"
+msgstr "ਇੰਬੈੱਡ ਥੰਬਨੇਲ(T)"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:38
+#, fuzzy
+msgid "All items in the iconview."
+msgstr "ਇਸ ਵਿੰਡੋ ਵਿਚੋਂ ਸਭ ਆਈਟਮਾਂ ਚੁਣੋ"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:39
+msgid "Scripting"
+msgstr "ਸਕ੍ਰਿਪਟਿੰਗ"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:40
+msgid "Clear Log"
+msgstr "ਲਾਗ ਸਾਫ਼ ਕਰੋ"
+
+#. Status textview
+#: ../../xffm/fm/page/hbuttonbox.hh:42
+msgid "Terminal font"
+msgstr "ਟਰਮੀਨਲ ਫੋਂਟ"
+
+#: ../../xffm/fm/treeview.hh:17
+msgid "Name"
+msgstr "ਨਾਂ"
+
+#: ../../xffm/fm/treeview.hh:20
+msgid "Size"
+msgstr "ਆਕਾਰ"
+
+#: ../../xffm/fm/treeview.hh:21
+msgid "Date"
+msgstr "ਮਿਤੀ"
+
+#: ../../xffm/fm/treeview.hh:22
+msgid "Mimetype"
+msgstr "ਮਾਈਮ-ਕਿਸਮ"
+
+#: ../../xffm/fm/treeview.hh:24
+msgid "TYPE"
+msgstr "ਕਿਸਮ"
+
+#: ../../xffm/fm/base/signals.hh:642
+msgid "Directory does not exist."
+msgstr "ਡਾਇਰੈਕਟਰੀ ਮੌਜੂਦ ਨਹੀਂ।"
+
+#: ../../xffm/fm/base/signals.hh:644 ../../xffm/fm/base/signals.hh:646
+#, fuzzy
+msgid "Trash is empty"
+msgstr "ਮਾਰਗ ਖਾਲੀ ਹੈ"
+
+#: ../../xffm/common/settings.hh:27
+msgid "New File:"
+msgstr "ਨਵੀਂ ਫਾਇਲ:"
+
+#: ../../xffm/common/gio.hh:235
+#, fuzzy
+msgid "Could not copy item:"
+msgstr "ਥੀਮ ਕਾਪੀ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕੀ"
+
+#: ../../xffm/common/gio.hh:237
+#, fuzzy
+msgid "Could not move item:"
+msgstr "ਇਕਾਈ ਨੂੰ ਹਟਾਇਆ ਨਹੀਂ ਜਾ ਸਕਿਆ"
+
+#: ../../xffm/common/gio.hh:239
+#, fuzzy
+msgid "Create symbolic link"
+msgstr "ਸਿੰਬੋਲਿਕ ਲਿੰਕ ਬਦਲੋ(p)"
+
+#: ../../xffm/common/gio.hh:276
+#, c-format
+msgid ""
+"Could not delete:\n"
+"%s"
+msgstr ""
+"ਹਟਾਇਆ ਨਹੀਂ ਜਾ ਸਕਿਆ:\n"
+"%s"
+
+#: ../../xffm/common/gio.hh:278
+#, c-format
+msgid "Could not move %s to trash"
+msgstr "\"%s\" ਨੂੰ ਰੱਦੀ ਵਿੱਚ ਨਹੀ ਭੇਜਿਆ ਜਾ ਸਕਿਆ ਹੈ।"
+
+#: ../../xffm/common/clipboard.hh:23 ../../xffm/common/dnd.hh:40
+msgid "Copying files locally"
+msgstr "ਫਾਇਲਾਂ ਲੋਕਲੀ ਕਾਪੀ ਕੀਤੀਆਂ ਜਾ ਰਹੀਆਂ ਹਨ"
+
+#: ../../xffm/common/clipboard.hh:30 ../../xffm/common/dnd.hh:34
+msgid "Moving files"
+msgstr "ਫਾਇਲਾਂ ਭੇਜੀਆਂ ਜਾ ਰਹੀਆਂ ਹਨ।"
+
+#: ../../xffm/common/dnd.hh:46
+#, fuzzy
+msgid "Create Link"
+msgstr "ਸੰਬੰਧ ਬਣਾਓ"
+
+#: ../../xffm/common/util.hh:1200
+#, c-format
+msgid ""
+"Scriptfile \"%s\" is not executable. Please set the executable-attribute on "
+"that file."
+msgstr ""
+
+#: ../../xffm/common/util.hh:1202 ../../xffm/common/util.hh:1237
+#, c-format
+msgid "Open with %s"
+msgstr "%s ਨਾਲ ਖੋਲ੍ਹੋ"
+
+#: ../../xffm/common/util.hh:1202
+msgid "Text Editor"
+msgstr "ਟੈਕਸਟ ਐਡੀਟਰ"
+
+#: ../../xffm/common/util.hh:1239 ../../xffm/common/gtk.hh:65
+msgid "Execute Shell Command"
+msgstr "ਸ਼ੈੱਲ ਕਮਾਂਡ ਚਲਾਓ"
+
+#: ../../xffm/common/util.hh:1243
+msgid ""
+"Console: quickly run single commands -- write a command here and press enter."
+msgstr ""
+
+#: ../../xffm/common/gtk.hh:123
+msgid "New Tab"
+msgstr "ਨਵੀਂ ਟੈਬ"
+
+#: ../../xffm/common/gtk.hh:335
+msgid "OK"
+msgstr "ਠੀਕ ਹੈ"
+
+#: ../../xffm/common/run.hh:344
+msgid "error"
+msgstr "ਗਲਤੀ"
+
+#: ../../xffm/common/run.hh:348
+msgid "warning"
+msgstr "ਚੇਤਾਵਨੀ"
+
+#: ../../xffm/common/mime.hh:101 ../../xffm/common/mime.hh:143
+msgid "No Read Permission"
+msgstr "ਪੜ੍ਹਨ ਅਧਿਕਾਰ ਨਹੀਂ ਹੈ"
+
+#: ../../xffm/common/preview.hh:593
+msgid "Empty file"
+msgstr "ਖਾਲੀ ਫਾਇਲ"
+
+#: ../../xffm/common/preview.hh:648
+#, fuzzy, c-format
+msgid "Cannot read from %s"
+msgstr "\"%s\" ਤੋਂ ਪੜ੍ਹਿਆ ਨਹੀਂ ਜਾ ਸਕਦਾ"
+

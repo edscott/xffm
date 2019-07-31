@@ -1,0 +1,1403 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:40:03 CDT 2013 ---
+#
+# Sapa <sapac@hotmail.com>, 2003-2004.
+# Akom Chotiphantawanon <knight2000@gmail.com>, 2008-2013.
+# Tip <ratiratana@hotmail.com>, 2003.
+# Phondanai Khanti <phondanai@gmail.com>, 2009.
+# Isriya Pairepairit <markpeak@gmail.com>, 2008.
+# K Ratanatharathorn <kratanat@gmail.com>, 2012.
+# Ithipan Methasate <tumm_xx@hotmail.com>, 2003.
+# Pornpimon Pradabsri <kanom7448@hotmail.com>, 2008.
+# Theppitak Karoonboonyanan <thep@linux.thai.net>, 2004-2013.
+# Narachai Sakorn <narachai@gmail.com>, 2004-2009.
+# Ross Golder <ross@golder.org>, 1999-2002.
+# knight2000 <knight2000@gmail.com>, 2012.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2002-2012.
+# Phuwanat Sakornsakolpat <narachai@gmail.com>, 2010-2011.
+# Sira Nokyoongtong <gumaraa@gmail.com>, 2008-2010.
+# Unticha Pramgoed <unticha@gmail.com>, 2011-2012.
+# Sarita Kangkerkkul <saritaoil@hotmail.com>, 2010.
+# Pongpichit Panna <pongpichit@gmail.com>, 2008.
+# aka.ape <aka.ape@gmail.com>, 2007.
+# Tee Tanawatanakul <wallsfantasy@gmail.com>, 2006.
+# Sittichai Makekhuntod <hae_ha@thaimail.com>, 2003.
+# Sirichai Lerdvorawut <chainux@opentle.org>, 2003-2004.
+# Arnon Namsanit <teddy.nams@gmail.com>, 2005-2006.
+# Kittiphong Meesawat <ktphong@yahoo.com>, 2010.
+# Udomsak Chundang <udomsak@swpark.or.th>, 2005.
+# Anuchit Chalothorn <anuchit@redlinesoft.net>, 2010.
+# Akom C. <knight2000@gmail.com>, 2008-2009.
+# Chanin Tanaponvisal <nin_cud42@hotmail.com>, 2008.
+# ถนอมทรัพย์ นพบูรณ์ <donga_n@yahoo.com>, 2005.
+# Manatsawin Hanmongkolchai <manatsawin@gmail.com>, 2008.
+# Ranee Somchaimit <tuktik_friend@hotmail.com>, 2003.
+# Sawit Kasuriya <sawitk@hotmail.com>, 2003.
+# Paisa Seeluangsawat <paisa@users.sf.net>, 2003-2004.
+# Supranee Thirawatthanasuk <supranee@opentle.org>, 2004-2007.
+# This file is distributed under the same license as the PACKAGE package.Phuwanat Sakornsakolpat <narachai@gmail.com>, 2010.
+# Kamthorn Krairaksa <kamthorn@gmail.com>, 2006.
+# Khunti Yeesoon <sc445138@bucc3.buu.ac.th>, 2003.
+# Piya Wanishsujit <wanishsujit@hotmail.com>, 2008.
+# Thummarat Phromphing <emmergv@hotmail.com>, 2011-2012.
+# Arthit Suriyawongkul <art@siit.net>, 2007.
+# Natorn Tuntanggoon <sc442409@angsila.compsci.buu.ac.th>, 2003.
+# Manatsawin <whs@whsgroup.ath.cx>, 2009.
+# Surichat Sumrit <nook@opentle.org>, 2003-2004.
+# Sahachart Anukulkitch <drrider@gmail.com>, 2005-2008.
+# Maetinee <your_friend_mn17@hotmail.com>, 2010.
+# Supakorn Siddhichai <supakorn.siddhichai@nectec.or.th>, 2003-2004.
+# อนุชิต สกุลวิไลเลิศ <sarapaowa_it12@hotmail.com>, 2008.
+# Sira Nokyoongotong <gumaraa@gmail.com>, 2009.
+# Ouychai Chaita <Ae.Freeman@gmail.com>, 2006.
+# Neutron Soutmun <neo.neutron@gmail.com>, 2007-2011.
+# Apiluck Dokkaew <apiluckdokkaew@yahoo.com>, 2003.
+# Chanchai Junlouchai <taz@opentle.org>, 2003-2004.
+# Roys Hengwatanakul <roysheng@msn.com>, 2006.
+# Isriya Paireepairit <markpeak@gmail.com>, 2004-2008.
+# Ridnarong Promya <ridnarongp@yahoo.com>, 2007.
+# Kitt Tientanopajai <kitty@kitty.in.th>, 2006.
+# Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
+# Phakhinee Thangnithirat <sc442535@angsila.compsci.buu.ac.th>, 2003.
+# <srtxg@chanae.alphanet.ch>, 2001-2011.
+# Thanomsub Noppaburana <donga.nb@gmail.com>, 2003-2010.
+# Visal Srivisal <srivisal@yahoo.com>, 2008.
+# Chatchawarn Hansakunbuntheung <chatchawarnh@nectec.or.th>, 2003-2004.
+# Supphachoke Suntiwichaya <mrchoke@opentle.org>, 2003.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-02 12:27-0600\n"
+"PO-Revision-Date: 2011-08-13 17:07+0700\n"
+"Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
+"Language-Team: Thai <thai-l10n@googlegroups.com>\n"
+"Language: th\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"product=accerciserkeywords=I18N+L10Ncomponent=general\n"
+
+#: ../../xffm/completion/base.hh:28
+msgid "Command"
+msgstr "คำสั่ง"
+
+#: ../../xffm/completion/base.hh:31
+msgid "File"
+msgstr "แฟ้ม"
+
+#: ../../xffm/completion/base.hh:34
+#, fuzzy
+msgid "Command history"
+msgstr "ประวัติการเรียกใช้คำสั่ง"
+
+#. option -u uid "uid" "uid_combo"
+#: ../../xffm/completion/base.hh:37 ../../xffm/find/dialog.hh:199
+msgid "User"
+msgstr "ผู้ใช้"
+
+#: ../../xffm/completion/base.hh:40
+msgid "Variable"
+msgstr "ตัวแปร"
+
+#: ../../xffm/completion/base.hh:43
+msgid "Host"
+msgstr "โฮสต์"
+
+#: ../../xffm/completion/base.hh:55
+msgid "Found no match"
+msgstr "ไม่พบที่เข้าเงื่อนไข"
+
+#: ../../xffm/completion/base.hh:133 ../../xffm/completion/base.hh:134
+msgid "Matches"
+msgstr "ตรงกัน"
+
+#: ../../xffm/completion/base.hh:134
+msgid "Too many files open"
+msgstr "เปิดแฟ้มมากเกินไป"
+
+#: ../../xffm/completion/base.hh:325 ../../xffm/find/fgr.hh:124
+msgid "Options:"
+msgstr "ตัวเลือก:"
+
+#: ../../xffm/completion/bash.hh:133
+msgid "Completion mode:"
+msgstr "โหมดการทำให้สมบูรณ์:"
+
+#: ../../xffm/completion/bash.hh:134
+msgid "command"
+msgstr "คำสั่ง"
+
+#: ../../xffm/completion/bash.hh:135
+msgid "file"
+msgstr "แฟ้ม"
+
+#: ../../xffm/completion/bash.hh:145 ../../xffm/completion/bash.hh:149
+msgid "Options >>"
+msgstr "ตัวเลือกต่าง ๆ >>"
+
+#: ../../xffm/find/fgr.hh:124 ../../xffm/find/dialog.hh:308
+msgid "Path"
+msgstr "พาธ"
+
+#: ../../xffm/find/fgr.hh:125
+msgid "Locate documents and folders on this computer by name or content"
+msgstr "ค้นหาเอกสารและโฟลเดอร์ในคอมพิวเตอร์เครื่องนี้ด้วยชื่อหรือเนื้อหา"
+
+#: ../../xffm/find/fgr.hh:126 ../../xffm/find/dialog.hh:341
+msgid "Filter:"
+msgstr "ตัวกรอง:"
+
+#: ../../xffm/find/fgr.hh:126
+msgid "Search for files"
+msgstr "ค้นหาแฟ้ม"
+
+#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
+#: ../../xffm/find/fgr.hh:128
+msgid "Contents:"
+msgstr "เนื้อหา:"
+
+#: ../../xffm/find/fgr.hh:128
+#, fuzzy
+msgid "File's contents filtered as plain text."
+msgstr "บันทึกแฟ้มเป็นข้อความเปล่าหรือไม่?"
+
+#: ../../xffm/find/fgr.hh:131
+msgid "Verbose output debugging mode."
+msgstr "พิมพ์ข้อมูลรายละเอียดการดีบั๊ก"
+
+#: ../../xffm/find/fgr.hh:133
+msgid "Show version information"
+msgstr "แสดงข้อมูลรุ่น"
+
+#: ../../xffm/find/fgr.hh:135
+msgid "Filter Details"
+msgstr "รายละเอียดตัวกรอง"
+
+#. / option -a "xdev"
+#: ../../xffm/find/fgr.hh:138 ../../xffm/find/dialog.hh:180
+#, fuzzy
+msgid "Stay on single filesystem"
+msgstr "ตรวจข้อมูลระบบแฟ้ม"
+
+#: ../../xffm/find/fgr.hh:140
+msgid "Print..."
+msgstr "พิมพ์..."
+
+#: ../../xffm/find/fgr.hh:140
+msgid "The unique Process ID that identifies this process."
+msgstr "หมายเลขโพรเซส (Process ID) ที่ไม่ซ้ำใครที่จะระบุถึงตัวโพรเซสนี้"
+
+#. / option -D "recursiveH"
+#: ../../xffm/find/fgr.hh:142 ../../xffm/find/dialog.hh:177
+#, fuzzy
+msgid "Find hidden files and directories"
+msgstr "แพตช์แฟ้มและไดเรกทอรี"
+
+#: ../../xffm/find/fgr.hh:143
+msgid "Filter"
+msgstr "ตัวกรอง"
+
+#: ../../xffm/find/fgr.hh:144
+msgid ""
+"To display files which pass the filter (stars and regexps will be processed)"
+msgstr ""
+
+#. / option -r "recursive"
+#: ../../xffm/find/fgr.hh:146 ../../xffm/find/dialog.hh:174
+msgid "Recursive"
+msgstr "แบบลงลึก"
+
+#: ../../xffm/find/fgr.hh:147 ../../xffm/find/fgr.hh:148
+#: ../../xffm/find/fgr.hh:149 ../../xffm/find/fgr.hh:150
+msgid "KByte"
+msgstr "กิโลไบต์"
+
+#: ../../xffm/find/fgr.hh:148
+msgid "is greater than or equal to"
+msgstr "มากกว่าหรือเท่ากับ"
+
+#: ../../xffm/find/fgr.hh:150
+msgid "is less than or equal to"
+msgstr "น้อยกว่าหรือเท่ากับ"
+
+#: ../../xffm/find/fgr.hh:152
+msgid "Set UID"
+msgstr "ตั้งหมายเลขผู้ใช้"
+
+#: ../../xffm/find/fgr.hh:152
+msgid "Executable Text Files"
+msgstr "แฟ้มข้อความที่เรียกใช้เป็นโปรแกรมได้"
+
+#: ../../xffm/find/fgr.hh:154
+msgid "The permissions of the file, in octal notation."
+msgstr "สิทธิ์การใช้แฟ้ม ในรูปเลขฐานแปด"
+
+#: ../../xffm/find/fgr.hh:155
+msgid "Type"
+msgstr "ชนิด"
+
+#: ../../xffm/find/fgr.hh:157 ../../xffm/find/signals.hh:17
+msgid "Any"
+msgstr "ทุกเวลา"
+
+#: ../../xffm/find/fgr.hh:157
+msgid "Default type"
+msgstr "ชนิดปริยาย"
+
+#: ../../xffm/find/fgr.hh:158 ../../xffm/common/preview.hh:497
+msgid "Regular file"
+msgstr "แฟ้มธรรมดา"
+
+#: ../../xffm/find/fgr.hh:159 ../../xffm/find/signals.hh:11
+#: ../../xffm/fm/local/popup.hh:803 ../../xffm/common/preview.hh:488
+msgid "Directory"
+msgstr "ไดเรกทอรี"
+
+#: ../../xffm/find/fgr.hh:160 ../../xffm/find/signals.hh:12
+#: ../../xffm/common/preview.hh:494
+msgid "Symbolic Link"
+msgstr "แฟ้มเชื่อมโยงแบบสัญลักษณ์"
+
+#: ../../xffm/find/fgr.hh:161
+msgid "UNIX Socket"
+msgstr "ซ็อกเก็ตของยูนิกซ์"
+
+#: ../../xffm/find/fgr.hh:162 ../../xffm/find/signals.hh:14
+#: ../../xffm/common/preview.hh:482
+msgid "Block device"
+msgstr "อุปกรณ์แบบบล็อค"
+
+#: ../../xffm/find/fgr.hh:163 ../../xffm/find/signals.hh:15
+#: ../../xffm/common/preview.hh:485
+msgid "Character device"
+msgstr "อุปกรณ์แบบอักขระ"
+
+#: ../../xffm/find/fgr.hh:164 ../../xffm/find/signals.hh:16
+#: ../../xffm/common/preview.hh:491
+msgid "FIFO"
+msgstr "FIFO"
+
+#. radio_p freed on destroy event for dialog_.
+#. option -k minutes "last_minutes", "last_minutes_spin"
+#: ../../xffm/find/fgr.hh:166 ../../xffm/find/fgr.hh:168
+#: ../../xffm/find/dialog.hh:221
+msgid "Minutes"
+msgstr "นาที"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/dialog.hh:270 ../../xffm/find/dialog.hh:370
+#: ../../xffm/fm/treeview.hh:18
+msgid "Details"
+msgstr "รายละเอียด"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/fgr.hh:179 ../../xffm/find/fgr.hh:180
+#: ../../xffm/find/fgr.hh:183 ../../xffm/find/fgr.hh:184
+#: ../../xffm/find/fgr.hh:187 ../../xffm/find/fgr.hh:188
+#, fuzzy
+msgid "TIME"
+msgstr "TIMEOUT"
+
+#: ../../xffm/find/fgr.hh:168 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/fgr.hh:174 ../../xffm/find/fgr.hh:177
+msgid "Previous"
+msgstr "ก่อนหน้า"
+
+#. option -h hours "last_hours", "last_hours_spin"
+#: ../../xffm/find/fgr.hh:169 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/dialog.hh:226
+msgid "Hours"
+msgstr "ชั่วโมง"
+
+#. option -d days "last_days", "last_days_spin"
+#: ../../xffm/find/fgr.hh:172 ../../xffm/find/fgr.hh:174
+#: ../../xffm/find/dialog.hh:231
+msgid "Days"
+msgstr "วัน"
+
+#: ../../xffm/find/fgr.hh:175
+msgid "Month"
+msgstr "เดือน"
+
+#: ../../xffm/find/fgr.hh:177
+msgid "Month(s)"
+msgstr "เดือน"
+
+#: ../../xffm/find/fgr.hh:180
+#, fuzzy
+msgid "Modification Time :"
+msgstr "เวลาปรับปรุงล่าสุด"
+
+#: ../../xffm/find/fgr.hh:184
+#, fuzzy
+msgid "Access Time :"
+msgstr "เวลาเข้าถึง"
+
+#: ../../xffm/find/fgr.hh:188
+#, fuzzy
+msgid "Creation Time :"
+msgstr "เวลาที่สร้าง"
+
+#: ../../xffm/find/fgr.hh:191 ../../xffm/find/fgr.hh:192
+msgid "uid"
+msgstr "uid"
+
+#: ../../xffm/find/fgr.hh:192
+msgid "User:"
+msgstr "ผู้ใช้:"
+
+#: ../../xffm/find/fgr.hh:194 ../../xffm/find/fgr.hh:195
+msgid "gid"
+msgstr "gid"
+
+#: ../../xffm/find/fgr.hh:195
+msgid "Group:"
+msgstr "กลุ่ม:"
+
+#: ../../xffm/find/fgr.hh:198
+msgid ""
+"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+"character that  normally  follows  a file  name"
+msgstr ""
+
+#: ../../xffm/find/fgr.hh:200
+msgid "Content View"
+msgstr "มุมมองเนื้อหา"
+
+#: ../../xffm/find/fgr.hh:201 ../../xffm/find/fgr.hh:202
+#: ../../xffm/find/fgr.hh:203 ../../xffm/find/fgr.hh:204
+msgid "STRING"
+msgstr "STRING"
+
+#: ../../xffm/find/fgr.hh:202 ../../xffm/find/fgr.hh:204
+#: ../../xffm/fm/local/popup.hh:563
+msgid "Regular expression"
+msgstr "นิพจน์เรกิวลาร์"
+
+#: ../../xffm/find/fgr.hh:204
+msgid "Extended"
+msgstr "ขยาย"
+
+#: ../../xffm/find/fgr.hh:206
+msgid "Ignore case"
+msgstr "ไม่สนใจตัวพิมพ์ใหญ่-เล็ก"
+
+#: ../../xffm/find/fgr.hh:208
+msgid "Text Files"
+msgstr "แฟ้มข้อความ"
+
+#: ../../xffm/find/fgr.hh:210 ../../xffm/find/dialog.hh:552
+msgid "No match"
+msgstr "ไม่มีรายการที่ตรง"
+
+#: ../../xffm/find/fgr.hh:212 ../../xffm/find/dialog.hh:470
+msgid "Line Count"
+msgstr "จำนวนบรรทัด"
+
+#: ../../xffm/find/fgr.hh:214
+msgid "Words"
+msgstr "คำ"
+
+#: ../../xffm/find/fgr.hh:216
+msgid "Lines"
+msgstr "บรรทัด"
+
+#: ../../xffm/find/fgr.hh:368
+#, fuzzy, c-format
+msgid "Usage : %s [OPTIONS]\n"
+msgstr "วิธีใช้: orca [OPTION...]"
+
+#: ../../xffm/find/signals.hh:10
+msgid "Regular"
+msgstr "ตามตำรับ"
+
+#: ../../xffm/find/signals.hh:13 ../../xffm/common/preview.hh:500
+msgid "Socket"
+msgstr "ซ็อกเก็ต"
+
+#: ../../xffm/find/signals.hh:209
+msgid "Select folder to search in"
+msgstr "เลือกโฟลเดอร์ที่จะค้นหา"
+
+#. button no
+#: ../../xffm/find/signals.hh:265 ../../xffm/find/dialog.hh:584
+#: ../../xffm/response/entryfileresponse.hh:18
+#: ../../xffm/response/entryresponse.hh:305
+#: ../../xffm/response/passwdresponse.hh:558
+#: ../../xffm/fm/local/properties.hh:304 ../../xffm/fm/local/rm.hh:155
+msgid "Cancel"
+msgstr "ยกเลิก"
+
+#: ../../xffm/find/signals.hh:293 ../../xffm/find/signals.hh:722
+#, fuzzy
+msgid "No editor for current action."
+msgstr "ไม่มีการปรับแก้ข้อผิดพลาด"
+
+#. / option "upper_limit_spin" (only in gtk dialog_)
+#: ../../xffm/find/signals.hh:351 ../../xffm/find/dialog.hh:183
+msgid "Results"
+msgstr "ผลลัพธ์"
+
+#: ../../xffm/find/signals.hh:351
+msgid "Upper limit:"
+msgstr "ขีดจำกัดบน:"
+
+#: ../../xffm/find/signals.hh:353
+msgid "Counting files..."
+msgstr "กำลังนับแฟ้ม..."
+
+#: ../../xffm/find/signals.hh:368
+#, c-format
+msgid "Found %d match"
+msgid_plural "Found %d matches"
+msgstr[0] "พบ %d แห่ง"
+
+#: ../../xffm/find/signals.hh:370
+#, fuzzy, c-format
+msgid "%s Finished : %s"
+msgstr "%s [เสร็จสิ้น]"
+
+#: ../../xffm/find/signals.hh:488 ../../xffm/find/signals.hh:490
+msgid "Searching..."
+msgstr "กำลังค้นหา..."
+
+#. g_object_set_data(G_OBJECT(dialog_), "window", dialog_);
+#: ../../xffm/find/dialog.hh:98 ../../xffm/find/dialog.hh:150
+#: ../../xffm/find/dialog.hh:611
+msgid "Find"
+msgstr "หา"
+
+#: ../../xffm/find/dialog.hh:183
+#, fuzzy
+msgid "Upper limit"
+msgstr "ขีดจำกัดบน:"
+
+#. option -s +KByte "size_greater", "size_greater_spin"
+#: ../../xffm/find/dialog.hh:188
+msgid "At Least"
+msgstr "อย่างน้อย"
+
+#: ../../xffm/find/dialog.hh:188 ../../xffm/find/dialog.hh:193
+msgid "kBytes"
+msgstr "กิโลไบต์"
+
+#. option -s -KByte "size_smaller", "size_smaller_spin"
+#: ../../xffm/find/dialog.hh:193
+msgid "At Most"
+msgstr "อย่างมาก"
+
+#: ../../xffm/find/dialog.hh:204
+msgid "Group"
+msgstr "กลุ่ม"
+
+#. option -o octal "octal_p" "permissions_entry"
+#: ../../xffm/find/dialog.hh:208
+msgid "Octal Permissions"
+msgstr "สิทธิ์ในรูปเลขฐานแปด"
+
+#. option -p suid | exe
+#: ../../xffm/find/dialog.hh:213
+msgid "SUID"
+msgstr ""
+
+#: ../../xffm/find/dialog.hh:213 ../../xffm/fm/local/popup.hh:843
+#, fuzzy
+msgid "Executable"
+msgstr "โปรแกรมที่เรียก:"
+
+#. option -m months "last_months", "last_months_spin"
+#: ../../xffm/find/dialog.hh:237
+msgid "Months"
+msgstr "เดือน"
+
+#: ../../xffm/find/dialog.hh:248
+#, fuzzy
+msgid "File type : "
+msgstr "ชนิดแฟ้ม:"
+
+#. gtk_widget_show (GTK_WIDGET(right_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(center_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(left_options_vbox));
+#: ../../xffm/find/dialog.hh:262 ../../xffm/find/dialog.hh:602
+#: ../../xffm/fm/page/page.hh:70 ../../xffm/common/gtk.hh:70
+msgid "Close"
+msgstr "ปิด"
+
+#. gtk_box_pack_start (vbox7a, GTK_WIDGET(advancedBox), TRUE, FALSE, 5);
+#. gtk_widget_show(GTK_WIDGET(advancedBox));
+#. //////////////  grep options.... /////////////////////////
+#: ../../xffm/find/dialog.hh:384
+msgid "Contains"
+msgstr "มีคำว่า"
+
+#: ../../xffm/find/dialog.hh:404
+msgid "Contains the text"
+msgstr "มีข้อความ"
+
+#: ../../xffm/find/dialog.hh:437
+msgid "Case Sensitive"
+msgstr "ตัวพิมพ์ใหญ่-เล็กตรงกัน"
+
+#: ../../xffm/find/dialog.hh:449
+#, fuzzy
+msgid "Extended regexp"
+msgstr "ลบอักขระว่างแบบเพิ่มเติม"
+
+#: ../../xffm/find/dialog.hh:460
+msgid "Include binary files"
+msgstr "รวมแฟ้มภาษาเครื่องด้วย"
+
+#: ../../xffm/find/dialog.hh:496
+msgid "Match"
+msgstr "ตรงกับรายการ"
+
+#: ../../xffm/find/dialog.hh:508
+#, fuzzy
+msgid "Anywhere"
+msgstr "ทุกที่"
+
+#: ../../xffm/find/dialog.hh:523
+msgid "Whole words only"
+msgstr "ตรงกันทุกตัวอักษร"
+
+#: ../../xffm/find/dialog.hh:538
+msgid "lines"
+msgstr "บรรทัด"
+
+#: ../../xffm/find/dialog.hh:594
+msgid "Clear"
+msgstr "ล้าง"
+
+#: ../../xffm/find/dialog.hh:636
+msgid "Edit"
+msgstr "แก้ไข"
+
+#: ../../xffm/find/dialog.hh:751 ../../xffm/find/dialog.hh:766
+#: ../../xffm/common/util.hh:1150 ../../xffm/common/util.hh:1152
+#: ../../xffm/common/util.hh:1158 ../../xffm/common/util.hh:1160
+#: ../../xffm/common/preview.hh:479
+msgid "unknown"
+msgstr "ไม่ทราบ"
+
+#: ../../xffm/find/dialog.hh:780
+msgid "Modified"
+msgstr "มีการเปลี่ยนแปลง"
+
+#: ../../xffm/find/dialog.hh:784
+msgid "Created"
+msgstr "สร้าง"
+
+#: ../../xffm/find/dialog.hh:788
+#, fuzzy
+msgid "Accessed"
+msgstr "เข้าถึงเมื่อ:"
+
+#: ../../xffm/find/dialog.hh:1106
+msgid ""
+"Basic rules:\n"
+"\n"
+"*  Will match any character zero or more times.\n"
+"?  Will match any character exactly one time\n"
+"[] Match any character within the [] \n"
+"^  Match at beginning of string\n"
+"$  Match at end of string \n"
+msgstr ""
+
+#: ../../xffm/find/dialog.hh:1115
+msgid ""
+"Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"In  basic regular expressions the metacharacters ?, +, {, |, (, and ) \n"
+"  lose their special meaning.\n"
+"\n"
+"The  period . matches  any  single  character.\n"
+"The caret ^ matches at the start of line.\n"
+"The dollar $ matches at the end of line.\n"
+"\n"
+"Characters within [ ] matches any single character in the list.\n"
+"Characters within [^ ] matches any single character *not* in the list.\n"
+"Characters inside [ - ] matches a range of characters (ie [0-9] or [a-z]).\n"
+"\n"
+"A regular expression may be followed by one of several repetition "
+"operators:\n"
+"?      The preceding item is optional and matched\n"
+"       at most once.\n"
+"*      The preceding item will be matched zero\n"
+"       or more times.\n"
+"+      The preceding item will be matched one or\n"
+"       more times.\n"
+"{n}    The preceding item is matched exactly n times.\n"
+"{n,}   The preceding item is matched n or more times.\n"
+"{n,m}  The preceding item is matched at least n times,\n"
+"       but not more than m times.\n"
+"\n"
+"To match any reserved character, precede it with \\. \n"
+"\n"
+"Two regular expressions may be joined by the logical or operator |.\n"
+"Two regular expressions may be concatenated.\n"
+"\n"
+"More information is available by typing \"man grep\"\n"
+msgstr ""
+
+#: ../../xffm/response/entryfileresponse.hh:20
+msgid "Open"
+msgstr "เปิด"
+
+#: ../../xffm/response/entryresponse.hh:29
+#: ../../xffm/response/entryfolderresponse.hh:28
+msgid "Choose directory"
+msgstr "เลือกไดเรกทอรี"
+
+#. this button is redundant since hands are on keyboard for password
+#: ../../xffm/response/entryresponse.hh:309
+#: ../../xffm/response/passwdresponse.hh:189
+#: ../../xffm/response/passwdresponse.hh:559
+msgid "Ok"
+msgstr "ตกลง"
+
+#: ../../xffm/response/commandprogressresponse.hh:32
+msgid "Items:"
+msgstr "รายการ:"
+
+#: ../../xffm/response/passwdresponse.hh:21
+msgid "Enter password"
+msgstr "ป้อนรหัสผ่าน"
+
+#. gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+#: ../../xffm/response/passwdresponse.hh:125
+#, fuzzy
+msgid "User Input"
+msgstr "เมาส์"
+
+#: ../../xffm/response/passwdresponse.hh:142
+#, fuzzy
+msgid "Response Requested"
+msgstr "ต้องการการตอบกลับ"
+
+#: ../../xffm/response/passwdresponse.hh:264
+msgid "Preparing"
+msgstr "กำลังเตรียมการ"
+
+#: ../../xffm/response/passwdresponse.hh:352
+msgid "sudo"
+msgstr "sudo"
+
+#: ../../xffm/response/passwdresponse.hh:354
+msgid "Command:"
+msgstr "คำสั่ง:"
+
+#: ../../xffm/response/passwdresponse.hh:357
+msgid "Permission denied"
+msgstr "ไม่ได้รับอนุญาต"
+
+#: ../../xffm/response/passwdresponse.hh:358
+msgid "Try to approach a problem from different angles."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:359
+msgid "Do you want to retry?"
+msgstr "คุณต้องการจะลองใหม่หรือไม่ ?"
+
+#: ../../xffm/response/passwdresponse.hh:360
+msgid "Alternate:"
+msgstr "สลับ:"
+
+#: ../../xffm/response/passwdresponse.hh:365
+msgid "No"
+msgstr "ไม่ใช่"
+
+#: ../../xffm/response/passwdresponse.hh:401
+msgid "Install"
+msgstr "ติดตั้ง"
+
+#: ../../xffm/response/passwdresponse.hh:402
+#, c-format
+msgid "%s does not exist."
+msgstr "ยังไม่มี %s อยู่"
+
+#: ../../xffm/response/passwdresponse.hh:467
+#, fuzzy
+msgid "Blowfish"
+msgstr "Sawfish"
+
+#: ../../xffm/response/passwdresponse.hh:468
+#, fuzzy
+msgid "Encryption Key Approval"
+msgstr "แอพเพล็ตเข้ารหัสลับ"
+
+#: ../../xffm/response/passwdresponse.hh:502
+msgid "-o     print output to standard out. Implies -r."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:506
+msgid "-c     DO NOT compress files before encryption."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:510
+msgid "-r     DO NOT remove input files after processing"
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:517
+#, fuzzy
+msgid "Encryption key: "
+msgstr "กุญแจเข้ารหัส:"
+
+#: ../../xffm/response/passwdresponse.hh:529
+msgid "Confirm:"
+msgstr "ยืนยัน:"
+
+#: ../../xffm/response/passwdresponse.hh:542
+msgid "Sorry, passwords do not match"
+msgstr "ขออภัย รหัสผ่านไม่ตรงกัน"
+
+#: ../../xffm/response/passwdresponse.hh:550
+#, fuzzy
+msgid "Minimum length:"
+msgstr "ความยาวสูงสุด"
+
+#: ../../xffm/response/timeoutresponse.hh:56
+msgid "Dismiss"
+msgstr "ละทิ้ง"
+
+#: ../../xffm/response/commandresponse.hh:23
+msgid "Running"
+msgstr "กำลังทำงาน"
+
+#. auto text = g_strdup_printf("%s (pid: %d)",
+#. _("Waiting for operation to finish..."),
+#. Tubo<Type>::getChild (pid));
+#: ../../xffm/response/commandresponse.hh:28
+msgid "Waiting for operation to finish..."
+msgstr "กำลังรอปฏิบัติการเสร็จสิ้น..."
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Documents"
+msgstr "เอกสาร"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Downloads"
+msgstr "รายการดาวน์โหลด"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Music"
+msgstr "เพลง"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Pictures"
+msgstr "รูปภาพ"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Templates"
+msgstr "แบบจดหมาย"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Videos"
+msgstr "วีดิทัศน์"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Desktop"
+msgstr "พื้นโต๊ะ"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Bookmarks"
+msgstr "ที่คั่นหน้า"
+
+#: ../../xffm/fm/local/icons.hh:259 ../../xffm/fm/local/rm.hh:181
+msgid "Trash"
+msgstr "ทิ้งลงถังขยะ"
+
+#: ../../xffm/fm/local/popup.hh:60
+msgid "New"
+msgstr "ใหม่"
+
+#. deprecated {N_("Open in New Tab"), NULL, NULL, NULL},
+#. deprecated {N_("Open in New Window"), NULL, NULL, NULL},
+#. common buttons /(also an iconsize +/- button)
+#: ../../xffm/fm/local/popup.hh:64 ../../xffm/fm/local/popup.hh:104
+#: ../../xffm/common/gtk.hh:74
+msgid "Copy"
+msgstr "คัดลอก"
+
+#: ../../xffm/fm/local/popup.hh:65 ../../xffm/fm/local/popup.hh:105
+#: ../../xffm/common/gtk.hh:73
+msgid "Cut"
+msgstr "ตัด"
+
+#: ../../xffm/fm/local/popup.hh:66 ../../xffm/fm/local/popup.hh:106
+#: ../../xffm/common/gtk.hh:66
+msgid "Paste"
+msgstr "แปะ"
+
+#. **************
+#: ../../xffm/fm/local/popup.hh:67 ../../xffm/fm/local/popup.hh:107
+#: ../../xffm/fm/local/rm.hh:174 ../../xffm/common/gtk.hh:75
+msgid "Delete"
+msgstr "ลบ"
+
+#. {N_("About"), NULL, (void *) menu},
+#.
+#. only for listview: {N_("Sort by size"), NULL, (void *) menu},
+#. only for listview: {N_("Sort by date"), NULL, (void *) menu},
+#: ../../xffm/fm/local/popup.hh:73
+msgid "Select All"
+msgstr "เลือกทั้งหมด"
+
+#: ../../xffm/fm/local/popup.hh:74 ../../xffm/fm/local/popup.hh:559
+#, fuzzy
+msgid "Match regular expression"
+msgstr "ค้นหาด้วยนิพจน์เรกิวลาร์"
+
+#: ../../xffm/fm/local/popup.hh:75 ../../xffm/fm/root/view.hh:58
+#: ../../xffm/fm/fstab/popup.hh:21
+#, fuzzy
+msgid "View as list"
+msgstr "แสดงเป็นรายการ"
+
+#: ../../xffm/fm/local/popup.hh:77
+msgid "Show hidden files"
+msgstr "แสดงไฟล์ซ่อน"
+
+#: ../../xffm/fm/local/popup.hh:79
+msgid "Show Backup Files"
+msgstr "แสดงแฟ้มสำรอง"
+
+#: ../../xffm/fm/local/popup.hh:81
+#, fuzzy
+msgid "Sort data in descending order"
+msgstr "เรียงตามลำดับการเปิด"
+
+#: ../../xffm/fm/local/popup.hh:93 ../../xffm/fm/local/popup.hh:119
+#: ../../xffm/fm/local/popup.hh:1006 ../../xffm/fm/local/popup.hh:1013
+#: ../../xffm/fm/local/popup.hh:1022 ../../xffm/fm/local/popup.hh:1029
+#: ../../xffm/common/gtk.hh:72
+msgid "Open with"
+msgstr "เปิดด้วย"
+
+#: ../../xffm/fm/local/popup.hh:94 ../../xffm/fm/local/popup.hh:846
+#, fuzzy
+msgid "Run Executable..."
+msgstr "ประมวลผล..."
+
+#: ../../xffm/fm/local/popup.hh:95
+msgid "Extract files from the archive"
+msgstr "แตกแฟ้มออกจากแฟ้มจัดเก็บ"
+
+#. g_hash_table_insert(iconname_hash, "bcrypt", (void *)"emblem-keyhole");
+#: ../../xffm/fm/local/popup.hh:96 ../../xffm/fm/root/view.hh:73
+#: ../../xffm/fm/fstab/popup.hh:20 ../../xffm/fm/dialog/notebook.hh:52
+#: ../../xffm/common/gtk.hh:78
+msgid "Open in New Tab"
+msgstr "เปิดในแท็บใหม่"
+
+#. File chooser
+#: ../../xffm/fm/local/popup.hh:97 ../../xffm/fm/local/popup.hh:706
+msgid "Create a compressed archive with the selected objects"
+msgstr "สร้างแฟ้มจัดเก็บแบบบีบอัดจากแฟ้มที่เลือก"
+
+#: ../../xffm/fm/local/popup.hh:98 ../../xffm/fm/fstab/popup.hh:37
+msgid "Mount the volume associated with this folder"
+msgstr "เมานท์โวลุมที่เชื่อมโยงกับโฟลเดอร์นี้"
+
+#: ../../xffm/fm/local/popup.hh:99 ../../xffm/fm/fstab/popup.hh:38
+msgid "Unmount the volume associated with this folder"
+msgstr "เลิกเมานท์โวลุมที่เชื่อมโยงกับโฟลเดอร์นี้"
+
+#: ../../xffm/fm/local/popup.hh:100 ../../xffm/common/gtk.hh:67
+msgid "Add bookmark"
+msgstr "เพิ่มที่คั่นหน้า"
+
+#: ../../xffm/fm/local/popup.hh:101 ../../xffm/fm/root/view.hh:74
+#: ../../xffm/common/gtk.hh:68
+msgid "Remove bookmark"
+msgstr "ลบที่คั่นหน้า"
+
+#: ../../xffm/fm/local/popup.hh:108 ../../xffm/fm/local/popup.hh:961
+msgid "Rename"
+msgstr "เปลี่ยนชื่อ"
+
+#: ../../xffm/fm/local/popup.hh:109 ../../xffm/fm/local/popup.hh:947
+msgid "Duplicate"
+msgstr "สำเนา"
+
+#: ../../xffm/fm/local/popup.hh:110 ../../xffm/fm/local/popup.hh:933
+msgid "Link"
+msgstr "ลิงก์"
+
+#: ../../xffm/fm/local/popup.hh:111
+msgid "Properties"
+msgstr "คุณสมบัติ"
+
+#: ../../xffm/fm/local/popup.hh:414
+msgid "Files:"
+msgstr "แฟ้ม:"
+
+#: ../../xffm/fm/local/popup.hh:417 ../../xffm/fm/local/rm.hh:61
+#, fuzzy
+msgid "Multiple selections"
+msgstr "ชุดตำแหน่งเพลงหลายเพลง"
+
+#: ../../xffm/fm/local/popup.hh:557
+#, fuzzy
+msgid "Select items"
+msgstr "สิ่งที่เลือก:"
+
+#: ../../xffm/fm/local/popup.hh:575
+msgid "Regular Expression syntax is incorrect"
+msgstr "ไวยากรณ์ของเงื่อนไขการค้นหาไม่ถูกต้อง"
+
+#: ../../xffm/fm/local/popup.hh:592
+msgid "No selection"
+msgstr "ไม่มีการเลือก"
+
+#: ../../xffm/fm/local/popup.hh:592
+msgid "No matches."
+msgstr "ไม่มีรายการที่ตรงกัน"
+
+#. entryResponse->setCheckButton(_("Run in Terminal"));
+#. entryResponse->setCheckButton(Mime<Type>::runInTerminal(path));
+#: ../../xffm/fm/local/popup.hh:721 ../../xffm/fm/page/pathbar.hh:313
+msgid "Specify Output Directory..."
+msgstr "ระบุไดเรกทอรีสำหรับผลส่งออก..."
+
+#: ../../xffm/fm/local/popup.hh:799
+#, fuzzy
+msgid "Create new..."
+msgstr "สร้างรายการใหม่ ..."
+
+#: ../../xffm/fm/local/popup.hh:806 ../../xffm/fm/local/popup.hh:886
+msgid "New Name:"
+msgstr "ชื่อใหม่:"
+
+#: ../../xffm/fm/local/popup.hh:815
+msgid "No name"
+msgstr "ไม่มีชื่อ"
+
+#: ../../xffm/fm/local/popup.hh:828
+#, c-format
+msgid "Another file with the same name already exists in “%s”."
+msgstr "มีอีกแฟ้มหนึ่งที่มีชื่อเดียวกันอยู่แล้วใน “%s”"
+
+#: ../../xffm/fm/local/popup.hh:850 ../../xffm/fm/local/popup.hh:1010
+#: ../../xffm/fm/local/popup.hh:1026 ../../xffm/common/util.hh:1248
+msgid "Run in Terminal"
+msgstr "เรียกในเทอร์มินัล"
+
+#: ../../xffm/fm/local/popup.hh:853
+msgid "Arguments for the Command"
+msgstr "อาร์กิวเมนต์สำหรับคำสั่ง"
+
+#: ../../xffm/fm/local/popup.hh:1047 ../../xffm/fm/local/view.hh:141
+msgid "Invalid entry"
+msgstr "การกรอกข้อมูลไม่ถูกต้อง"
+
+#: ../../xffm/fm/local/properties.hh:235
+msgid "Properties and Attributes"
+msgstr "คุณสมบัติและแอตทริบิวต์"
+
+#: ../../xffm/fm/local/properties.hh:264
+#, fuzzy
+msgid "File Mode:"
+msgstr "โหมดพื้นฐาน"
+
+#: ../../xffm/fm/local/properties.hh:290
+msgid "File:"
+msgstr "แฟ้ม:"
+
+#. Add file info stuff
+#. set info stuff data according to combo box
+#. add signal handler to changed signal for combo box
+#. Add process buttons
+#.
+#: ../../xffm/fm/local/properties.hh:302
+msgid "Apply changes"
+msgstr "ปรับใช้การเปลี่ยนแปลง"
+
+#: ../../xffm/fm/local/properties.hh:462
+msgid "Successfully moved to trash."
+msgstr "ทำการทิ้งลงถังขยะเสร็จสมบูรณ์แล้ว"
+
+#: ../../xffm/fm/local/properties.hh:463
+msgid "Source:"
+msgstr "ต้นทาง:"
+
+#: ../../xffm/fm/local/rm.hh:59
+#, c-format
+msgid "Delete %s"
+msgstr "ลบ %s"
+
+#: ../../xffm/fm/local/rm.hh:61
+msgid "Warning: "
+msgstr "คำเตือน: "
+
+#. gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
+#. title
+#: ../../xffm/fm/local/rm.hh:90
+msgid "Remove"
+msgstr "เอาออก"
+
+#: ../../xffm/fm/local/rm.hh:140
+#, fuzzy
+msgid "Apply to all"
+msgstr "ปรับใช้กับทั้งหมด"
+
+#. **************
+#. This is now available to BSD with rm -P option
+#: ../../xffm/fm/local/rm.hh:163 ../../xffm/common/gtk.hh:76
+msgid "Shred"
+msgstr "ลบแบบทำลายข้อมูล"
+
+#. We do not count "../"
+#: ../../xffm/fm/local/view.hh:48 ../../xffm/fm/base/monitor.hh:28
+#, fuzzy, c-format
+msgid "Files: %s"
+msgstr "แฟ้ม: %s"
+
+#: ../../xffm/fm/root/model.hh:78
+msgid "Root Directory"
+msgstr "ไดเร็กทอรีราก"
+
+#: ../../xffm/fm/root/model.hh:94
+msgid "This is the root of the filesystem"
+msgstr "นี่เป็นรากของระบบแฟ้ม"
+
+#: ../../xffm/fm/root/model.hh:105
+msgid "Home Directory"
+msgstr "ไดเร็กทอรีส่วนตัว"
+
+#: ../../xffm/fm/root/model.hh:132
+#, fuzzy
+msgid "Trash bin"
+msgstr "แฟ้มขยะ"
+
+#: ../../xffm/fm/root/model.hh:162 ../../xffm/fm/fstab/popup.hh:29
+msgid "Disk Image Mounter"
+msgstr "โปรแกรมเมานท์อิมเมจของดิสก์"
+
+#: ../../xffm/fm/root/model.hh:169 ../../xffm/fm/root/model.hh:185
+msgid "Mount local disks and devices"
+msgstr "เมานท์ดิสก์หรืออุปกรณ์บนเครื่อง"
+
+#: ../../xffm/fm/root/model.hh:170 ../../xffm/fm/fstab/popup.hh:25
+#: ../../xffm/fm/fstab/view.hh:429
+msgid "eCryptfs Volume"
+msgstr "โวลุม eCryptfs"
+
+#: ../../xffm/fm/root/model.hh:171 ../../xffm/fm/fstab/popup.hh:24
+msgid "SSHFS Remote Synchronization Folder"
+msgstr "โฟลเดอร์ SSHFS ในเครือข่ายที่จะใช้ปรับข้อมูลให้ตรงกัน"
+
+#: ../../xffm/fm/root/model.hh:172 ../../xffm/fm/fstab/popup.hh:23
+#: ../../xffm/fm/fstab/view.hh:377
+msgid "NFS Network Volume"
+msgstr "โวลุมเครือข่าย NFS"
+
+#: ../../xffm/fm/root/model.hh:173 ../../xffm/fm/fstab/popup.hh:26
+#: ../../xffm/fm/fstab/view.hh:455
+msgid "CIFS Volume"
+msgstr "โวลุม CIFS"
+
+#: ../../xffm/fm/root/model.hh:195
+#, fuzzy
+msgid "Software Updater"
+msgstr "ปรับรุ่นซอฟต์แวร์"
+
+#: ../../xffm/fm/root/model.hh:218 ../../xffm/fm/root/model.hh:230
+msgid "Add or remove software installed on the system"
+msgstr "เพิ่มหรือลบซอฟต์แวร์ที่ติดตั้งในระบบ"
+
+#: ../../xffm/fm/root/model.hh:271
+msgid "Go to bookmarked location"
+msgstr "ไปยังตำแหน่งที่คั่นหน้าไว้"
+
+#. {N_("Add bookmark"), (void *)BasePopUp<Type>::noop, NULL, NULL},
+#: ../../xffm/fm/root/view.hh:61
+msgid "Empty trash"
+msgstr "เทขยะ"
+
+#. File chooser
+#: ../../xffm/fm/fstab/popup.hh:121
+msgid "Mount Device"
+msgstr "เมานท์อุปกรณ์"
+
+#: ../../xffm/fm/fstab/popup.hh:133
+msgid "Mount point:"
+msgstr "จุดเมานท์:"
+
+#: ../../xffm/fm/fstab/view.hh:301
+msgid "Mounted on:"
+msgstr "จุดเมานท์:"
+
+#: ../../xffm/fm/fstab/view.hh:302
+msgid "Mount on"
+msgstr "เมานท์ที่"
+
+#: ../../xffm/fm/fstab/view.hh:310 ../../xffm/fm/fstab/view.hh:312
+msgid "Not mounted"
+msgstr "ไม่ได้เมานท์อยู่"
+
+#: ../../xffm/fm/fstab/view.hh:403
+#, fuzzy
+msgid "SFTP (via SSH)"
+msgstr "FTP นิรภัย (SSH)"
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, c-format
+msgid "Unmounting %s"
+msgstr "กำลังเลิกเมานท์ %s"
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, c-format
+msgid "Mounting %s"
+msgstr "กำลังเมานท์ %s"
+
+#: ../../xffm/fm/dialog/menupopover.hh:128
+msgid "Home"
+msgstr "โฟลเดอร์บ้าน"
+
+#: ../../xffm/fm/dialog/menupopover.hh:129 ../../xffm/common/gtk.hh:64
+msgid "Open terminal"
+msgstr "เปิดเทอร์มินัล"
+
+#: ../../xffm/fm/dialog/menupopover.hh:130
+msgid "Open a New Window"
+msgstr "เปิดหน้าต่างใหม่"
+
+#. {N_("Execute Shell Command"), (void *)MenuPopoverSignals<Type>::shell, (void *) menuButton_},
+#: ../../xffm/fm/dialog/menupopover.hh:132 ../../xffm/common/gtk.hh:69
+msgid "Search"
+msgstr "ค้นหา"
+
+#: ../../xffm/fm/dialog/menupopover.hh:133 ../../xffm/common/gtk.hh:71
+msgid "Exit"
+msgstr "ออก"
+
+#: ../../xffm/fm/dialog/dialog.hh:116
+msgid "Removed"
+msgstr "ถอดถอนแล้ว"
+
+#: ../../xffm/fm/dialog/dialog.hh:132
+msgid "Detected device(s):"
+msgstr "อุปกรณ์ที่ตรวจพบ:"
+
+#. Create the widgets
+#: ../../xffm/fm/page/vbuttonbox.hh:37 ../../xffm/common/gtk.hh:332
+msgid "Help"
+msgstr "วิธีใช้"
+
+#. File chooser
+#: ../../xffm/fm/page/pathbar.hh:306 ../../xffm/fm/page/pathbar.hh:308
+msgid "Go to"
+msgstr "ไปยัง"
+
+#: ../../xffm/fm/page/pathbar.hh:331
+msgid "Not a directory"
+msgstr "ไม่ใช่โฟลเดอร์"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Renice Process"
+msgstr "โพรเซสที่ทำงานเบื้องหลัง"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Suspend"
+msgstr "พักเครื่อง"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Continue"
+msgstr "ทำต่อ"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Interrupt"
+msgstr "การขัดจังหวะ"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Hangup"
+msgstr "ตัดการเชื่อมต่อ"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "User 1 (USR1)"
+msgstr "ผู้ใช้ 1 (USR1)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "User 2 (USR2)"
+msgstr "ผู้ใช้ 2 (USR2)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+#, fuzzy
+msgid "Terminate Task"
+msgstr "ยุติการทำงานของ %s"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "Abort"
+msgstr "เลิกทำ"
+
+#: ../../xffm/fm/page/runbutton.hh:138
+msgid "Kill"
+msgstr "ฆ่า"
+
+#: ../../xffm/fm/page/runbutton.hh:139
+#, fuzzy
+msgid "Segmentation fault"
+msgstr "การละเมิดพื้นที่หน่วยความจำ"
+
+#: ../../xffm/fm/page/runbutton.hh:217
+msgid "PID"
+msgstr "PID"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:37
+#, fuzzy
+msgid "Embedded Terminal"
+msgstr "สนับสนุนการฝังตัวเทอร์มินอล"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:38
+#, fuzzy
+msgid "All items in the iconview."
+msgstr "เลือกรายการทุกรายการในหน้าต่างนี้"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:39
+msgid "Scripting"
+msgstr "สคริปต์"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:40
+#, fuzzy
+msgid "Clear Log"
+msgstr "ล้างปูมบันทึกข้อผิดพลาด"
+
+#. Status textview
+#: ../../xffm/fm/page/hbuttonbox.hh:42
+msgid "Terminal font"
+msgstr "แบบอักษรเทอร์มินัล"
+
+#: ../../xffm/fm/treeview.hh:17
+msgid "Name"
+msgstr "ชื่อ"
+
+#: ../../xffm/fm/treeview.hh:20
+msgid "Size"
+msgstr "ขนาด"
+
+#: ../../xffm/fm/treeview.hh:21
+msgid "Date"
+msgstr "วันที่"
+
+#: ../../xffm/fm/treeview.hh:22
+msgid "Mimetype"
+msgstr "ประเภท Mime ของแฟ้ม"
+
+#: ../../xffm/fm/treeview.hh:24
+msgid "TYPE"
+msgstr "TYPE"
+
+#: ../../xffm/fm/base/signals.hh:642
+msgid "Directory does not exist."
+msgstr "ไม่มีไดเรกทอรีนี้อยู่"
+
+#: ../../xffm/fm/base/signals.hh:644 ../../xffm/fm/base/signals.hh:646
+#, fuzzy
+msgid "Trash is empty"
+msgstr "แท็บเล็ตไม่มีประจุเหลืออยู่"
+
+#: ../../xffm/common/settings.hh:27
+msgid "New File:"
+msgstr "แฟ้มใหม่:"
+
+#: ../../xffm/common/gio.hh:235
+#, fuzzy
+msgid "Could not copy item:"
+msgstr "ไม่สามารถคัดลอกชุดตกแต่งได้"
+
+#: ../../xffm/common/gio.hh:237
+#, fuzzy
+msgid "Could not move item:"
+msgstr "ลบรายการไม่สำเร็จ"
+
+#: ../../xffm/common/gio.hh:239
+msgid "Create symbolic link"
+msgstr "สร้างลิงก์สัญลักษณ์"
+
+#: ../../xffm/common/gio.hh:276
+#, c-format
+msgid ""
+"Could not delete:\n"
+"%s"
+msgstr ""
+"ไม่สามารถลบ:\n"
+"%s ได้"
+
+#: ../../xffm/common/gio.hh:278
+#, c-format
+msgid "Could not move %s to trash"
+msgstr "ไม่สามารถย้าย %s ไปลงถังขยะได้"
+
+#: ../../xffm/common/clipboard.hh:23 ../../xffm/common/dnd.hh:40
+msgid "Copying files locally"
+msgstr "กำลังคัดลอกแฟ้มภายในเครื่อง"
+
+#: ../../xffm/common/clipboard.hh:30 ../../xffm/common/dnd.hh:34
+msgid "Moving files"
+msgstr "กำลังย้ายแฟ้ม"
+
+#: ../../xffm/common/dnd.hh:46
+#, fuzzy
+msgid "Create Link"
+msgstr "เรียกคืนการสร้างจุดเชื่อมโยง"
+
+#: ../../xffm/common/util.hh:1200
+#, c-format
+msgid ""
+"Scriptfile \"%s\" is not executable. Please set the executable-attribute on "
+"that file."
+msgstr ""
+
+#: ../../xffm/common/util.hh:1202 ../../xffm/common/util.hh:1237
+#, c-format
+msgid "Open with %s"
+msgstr "เปิดด้วย %s"
+
+#: ../../xffm/common/util.hh:1202
+msgid "Text Editor"
+msgstr "เครื่องมือแก้ไขข้อความ"
+
+#: ../../xffm/common/util.hh:1239 ../../xffm/common/gtk.hh:65
+msgid "Execute Shell Command"
+msgstr "ประมวลผลคำสั่งเชลล์..."
+
+#: ../../xffm/common/util.hh:1243
+msgid ""
+"Console: quickly run single commands -- write a command here and press enter."
+msgstr ""
+
+#: ../../xffm/common/gtk.hh:123
+msgid "New Tab"
+msgstr "แท็บใหม่"
+
+#: ../../xffm/common/gtk.hh:335
+msgid "OK"
+msgstr "ตกลง"
+
+#: ../../xffm/common/run.hh:344
+msgid "error"
+msgstr "ข้อผิดพลาด"
+
+#: ../../xffm/common/run.hh:348
+#, fuzzy
+msgid "warning"
+msgstr "คำเตือน:"
+
+#: ../../xffm/common/mime.hh:101 ../../xffm/common/mime.hh:143
+msgid "No Read Permission"
+msgstr "ไม่มีสิทธิ์ในการอ่าน"
+
+#: ../../xffm/common/preview.hh:593
+msgid "Empty file"
+msgstr "แฟ้มว่างเปล่า"
+
+#: ../../xffm/common/preview.hh:648
+#, c-format
+msgid "Cannot read from %s"
+msgstr "ไม่สามารถอ่านจาก %s ได้"
+

@@ -1,0 +1,159 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:39:14 CDT 2013 ---
+#
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2002-2012.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: http://bugs.xffm.org\n"
+"POT-Creation-Date: 2009-04-18 18:03-0400\n"
+"PO-Revision-Date: 2009-04-11 17:30+0000\n"
+"Last-Translator: ayoli <ayolinux@gmail.com>\n"
+"Language-Team: French <fr@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2009-04-13 16:16+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+
+msgid "Indicator Size"
+msgstr "Taille de l'indicateur"
+
+msgid "Size of check or radio indicator"
+msgstr "Taille de l'indicateur à cocher ou radio"
+
+msgid "Be verbose"
+msgstr "Mode bavard"
+
+msgid "disable serializing pixbuf"
+msgstr "désactiver la sérialisation pixbuf"
+
+msgid "Disable the Plugin"
+msgstr "Désactiver le Greffon"
+
+msgid "File to save the log, default to ~/.gnomenu.log"
+msgstr "Fichier où enregistrer le journal, par défaut ~/.gnomenu.log"
+
+msgid "- Global Menu plugin Module for GTK"
+msgstr "- Module GTK du greffon Global Menu"
+
+msgid "globalmenu-panel-applet"
+msgstr "globalmenu-panel-applet"
+
+msgid "Preferences"
+msgstr "Préférences"
+
+msgid "Help"
+msgstr "Aide"
+
+msgid "About"
+msgstr "À propos"
+
+msgid "Project Home"
+msgstr "Site Internet du Projet"
+
+msgid "translator-credits"
+msgstr ""
+"Launchpad Contributions:\n"
+"  Pierre Slamich https://launchpad.net/~pierre-slamich"
+
+msgid "On-line help"
+msgstr "Aide en Ligne"
+
+msgid "no windows"
+msgstr "aucune fenêtre"
+
+msgid "no actions"
+msgstr "aucune action"
+
+msgid "Minimize"
+msgstr "Réduire"
+
+msgid "Maximize"
+msgstr "Maximiser"
+
+msgid "Unmaximize"
+msgstr "Restaurer"
+
+msgid "Move"
+msgstr "Déplacer"
+
+msgid "Resize"
+msgstr "Redimensionner"
+
+msgid "Always on Top"
+msgstr "Toujours au premier plan"
+
+msgid "Always on visible Workspace"
+msgstr "Toujours sur l'espace de travail visible"
+
+msgid "Workspace..."
+msgstr "Espace de Travail..."
+
+msgid "Close"
+msgstr "Fermer"
+
+msgid "Show Desktop"
+msgstr "Montrer le Bureau"
+
+msgid "Follow the window"
+msgstr "Suivre la fenêtre"
+
+msgid "Add window action menu entries to active application name menu"
+msgstr ""
+"Ajouter au menu du titre de l'application active un menu d'actions sur la "
+"fenêtre"
+
+msgid "Enable Global Menu For GTK applications"
+msgstr "Activer Global Menu pour les applications GTK"
+
+msgid "Icon"
+msgstr "Icône"
+
+msgid ""
+"If this key is true, libglobalmenu-gnome, the GTK plugin for Global Menu is "
+"loaded."
+msgstr ""
+"Si cette clé est vraie, libglobalmenu-gnome, le greffon GTK de Global Menu "
+"est chargé."
+
+msgid "Label"
+msgstr "Libellé"
+
+msgid "Max title length"
+msgstr "Longueur maximale du titre"
+
+msgid "Show/Hide the icon of the active window"
+msgstr "Afficher/Masquer l'icône de l'application active"
+
+msgid "Show/Hide the name of the active application"
+msgstr "Afficher/Cacher le nom de l'application active"
+
+msgid "The maximum length of name of the active application, in pixels"
+msgstr "La longueur maximale du nom de l'application active, en pixels"
+
+msgid "Window Actions"
+msgstr "Actions de la fênetre"
+
+msgid "Window List"
+msgstr "Liste des fenêtres"
+
+msgid "Global Menu Panel Applet"
+msgstr "Applet Menu Global"
+
+msgid "GlobalMenu.PanelApplet Factory"
+msgstr "GlobalMenu.PanelApplet Factory"
+
+msgid "The factory to build GlobalMenu.PanelApplet objects"
+msgstr "La fabrique de construction d'objets GlobalMenu.PanelApplet"
+
+msgid "Global Menu Plugin for XFCE Panel"
+msgstr "Greffon Menu Global pour le tableau de bord de XFCE"
+
+msgid "The Global Menu Plugin for XFCE Panel"
+msgstr "Le Greffon Menu Global pour le tableau de bord de XFCE"
+
+

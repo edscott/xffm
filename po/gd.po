@@ -1,0 +1,347 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:43:34 CDT 2013 ---
+#
+# Michael Bauer <fios@akerbeltz.org>, 2013.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: http://bugs.xffm.org\n"
+"iskeywords=I18N+L10Ncomponent=general\n"
+"POT-Creation-Date: 2013-03-08 10:40+0000\n"
+"PO-Revision-Date: 2013-03-13 14:12+0100\n"
+"Last-Translator: Michael Bauer <fios@akerbeltz.org>\n"
+"Language-Team: Akerbeltz\n"
+"Language: gd\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
+"(n > 2  n < 20) ? 2 : 3;\n"
+"X-Generator: Virtaal 0.7.1-beta1\n"
+"X-Project-Style: gnome\n"
+
+msgid "Save..."
+msgstr "Sàbhail..."
+
+msgid "Load..."
+msgstr "Luchdaich..."
+
+msgid "Select"
+msgstr "Tagh"
+
+msgid "Rectangle"
+msgstr "Ceart-cheàrnach"
+
+msgid "Filled rectangle"
+msgstr "Ceart-cheàrnach air a lìonadh"
+
+msgid "Circle"
+msgstr "Cearcall"
+
+msgid "Filled circle"
+msgstr "Cearcall air a lìonadh"
+
+msgid "Line"
+msgstr "Loidhne"
+
+msgid "Text"
+msgstr "Teacsa"
+
+msgid "Image..."
+msgstr "Dealbh..."
+
+msgid "Fill"
+msgstr "Lìon"
+
+msgid "Delete"
+msgstr "Sguab às"
+
+msgid "Flip"
+msgstr "Dèan flip"
+
+msgid "Language: your system default"
+msgstr "Cànan: Cànan bunaiteach an t-siostaim agad"
+
+msgid "Afrikaans"
+msgstr "Afraganais"
+
+msgid "Albanian"
+msgstr "Albàinis"
+
+msgid "Amharic"
+msgstr "Amtharais"
+
+msgid "Arabic"
+msgstr "Arabais"
+
+msgid "Asturian"
+msgstr "Asturais"
+
+msgid "Basque"
+msgstr "Basgais"
+
+msgid "Breton"
+msgstr "Breatnais"
+
+msgid "Bulgarian"
+msgstr "Bulgairis"
+
+msgid "Catalan"
+msgstr "Catalanais"
+
+msgid "Chinese (Simplified)"
+msgstr "Sìnis (Shimplichte)"
+
+msgid "Chinese (Traditional)"
+msgstr "Sìnis (Thradaiseanta)"
+
+msgid "Croatian"
+msgstr "Cròthaisis"
+
+msgid "Czech Republic"
+msgstr "Poblachd na Seice"
+
+msgid "Danish"
+msgstr "Danmhairgis"
+
+msgid "Dutch"
+msgstr "Duitsis"
+
+msgid "Dzongkha"
+msgstr "Dzongkha"
+
+msgid "English (Canada)"
+msgstr "Beurla (Canada)"
+
+msgid "English (Great Britain)"
+msgstr "Beurla (na Breatainne Mòire)"
+
+msgid "English (United States)"
+msgstr "Beurla (nan Stàitean Aonaichte)"
+
+msgid "Finnish"
+msgstr "Fionnlainnis"
+
+msgid "French"
+msgstr "Fraingis"
+
+msgid "Georgian"
+msgstr "Cairtbheilis"
+
+msgid "German"
+msgstr "Gearmailtis"
+
+msgid "Greek"
+msgstr "Greugais"
+
+msgid "Gujarati"
+msgstr "Gujarati"
+
+msgid "Hebrew"
+msgstr "Eabhra"
+
+msgid "Hindi"
+msgstr "Hindis"
+
+msgid "Hungarian"
+msgstr "Ungairis"
+
+msgid "Indonesian"
+msgstr "Innd-Innsis"
+
+msgid "Irish (Gaelic)"
+msgstr "Gaeilge"
+
+msgid "Italian"
+msgstr "Eadailtis"
+
+msgid "Japanese"
+msgstr "Seapanais"
+
+msgid "Kinyarwanda"
+msgstr "Kinyarwanda"
+
+msgid "Korean"
+msgstr "Coirèanais"
+
+msgid "Latvian"
+msgstr "Laitbheis"
+
+msgid "Lithuanian"
+msgstr "Liotuainis"
+
+msgid "Macedonian"
+msgstr "Masadoinis"
+
+msgid "Malay"
+msgstr "Malaidhis"
+
+msgid "Malayalam"
+msgstr "Malayalam"
+
+msgid "Marathi"
+msgstr "Marati"
+
+msgid "Nepal"
+msgstr "Neapàl"
+
+msgid "Norwegian Bokmal"
+msgstr "Bokmål na Nirribhidh"
+
+msgid "Norwegian Nynorsk"
+msgstr "Nynorsk na Nirribhidh"
+
+msgid "Persian"
+msgstr "Peirsis"
+
+msgid "Polish"
+msgstr "Pòlainnis"
+
+msgid "Portuguese (Brazil)"
+msgstr "Portagailis (Braisil)"
+
+msgid "Portuguese"
+msgstr "Portagailis"
+
+msgid "Punjabi"
+msgstr "Panjabi"
+
+msgid "Romanian"
+msgstr "Romàinis"
+
+msgid "Russian"
+msgstr "Ruisis"
+
+msgid "Serbian (Latin)"
+msgstr "Sèirbis (Laidinneach)"
+
+msgid "Serbian"
+msgstr "Sèirbis"
+
+msgid "Slovak"
+msgstr "Slòbhacais"
+
+msgid "Slovenian"
+msgstr "Slòbhainis"
+
+msgid "Somali"
+msgstr "Somàilis"
+
+msgid "Spanish"
+msgstr "Spàinntis"
+
+msgid "Swedish"
+msgstr "Suainis"
+
+msgid "Tamil"
+msgstr "Taimilis"
+
+msgid "Thai"
+msgstr "Cànan nan Tàidh"
+
+msgid "Turkish"
+msgstr "Turcais"
+
+msgid "Ukrainian"
+msgstr "Ucràinis"
+
+msgid "Urdu"
+msgstr "Ùrdu"
+
+msgid "Vietnamese"
+msgstr "Bhiet-Nàmais"
+
+msgid "Walloon"
+msgstr "Walloon"
+
+msgid "Zulu"
+msgstr "Zulu"
+
+msgid ""
+"GCompris won't start because the lock file is less than %d second old.\n"
+msgid_plural ""
+"GCompris won't start because the lock file is less than %d seconds old.\n"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "India"
+msgstr "Na h-Innseachan"
+
+msgid "Australia"
+msgstr "Astràilia"
+
+msgid "Continents"
+msgstr "Mòr-thirean"
+
+msgid "Africa"
+msgstr "Afraga"
+
+msgid "America"
+msgstr "Aimeireaga"
+
+msgid "Antarctica"
+msgstr "An Antartaig"
+
+msgid "Asia"
+msgstr "Àisea"
+
+msgid "Europe"
+msgstr "An Roinn-Eòrpa"
+
+msgid "Oceania"
+msgstr "Roinn a' Chuain Sèimh"
+
+msgid "North America"
+msgstr "Aimeireaga a Tuath"
+
+msgid "Bahamas"
+msgstr "Na h-Eileanan Bathama"
+
+msgid "Canada"
+msgstr "Canada"
+
+msgid "Cuba"
+msgstr "Cùba"
+
+msgid "Dominican Republic"
+msgstr "A' Phoblachd Dhoiminiceach"
+
+msgid "Greenland"
+msgstr "A' Ghraonlann"
+
+msgid "Haiti"
+msgstr "Haidhti"
+
+msgid "Iceland"
+msgstr "Innis Tìle"
+
+msgid "Jamaica"
+msgstr "Diameuga"
+
+msgid "Mexico"
+msgstr "Meagsago"
+
+msgid "United States of America"
+msgstr "Stàitean Aonaichte Aimeireaga"
+
+msgid "Alaska"
+msgstr "Alasga"
+
+msgid "South America"
+msgstr "Aimeireaga a Deas"
+
+msgid "Argentina"
+msgstr "An Argantain"
+
+msgid "Bolivia"
+msgstr "Boilibhia"
+
+msgid "Distance to target = %d meter"
+msgid_plural "Distance to target = %d meters"
+msgstr[0] ""
+msgstr[1] ""
+
+

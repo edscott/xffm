@@ -378,7 +378,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-13 16:52-0500\n"
+"POT-Creation-Date: 2019-01-02 12:27-0600\n"
 "PO-Revision-Date: 2011-10-18 15:26+0200\n"
 "Last-Translator: Santiago Vila Doncel <sanvila@unex.es>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -388,213 +388,510 @@ msgstr ""
 "Content-Transfer-Encoding: 8-bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. g_object_set_data(G_OBJECT(findDialog), "window", findDialog);
-#: ../../xffm/find/dialog.hh:91 ../../xffm/find/dialog.hh:143
-#: ../../xffm/find/dialog.hh:604
-msgid "Find"
-msgstr "Buscar"
+#: ../../xffm/completion/base.hh:28
+msgid "Command"
+msgstr "Comando"
 
-#. / option -r "recursive"
-#: ../../xffm/find/dialog.hh:167 ../../xffm/find/fgr.hh:146
-msgid "Recursive"
-msgstr "Recursiva"
+#: ../../xffm/completion/base.hh:31
+msgid "File"
+msgstr "Archivo"
 
-#. / option -D "recursiveH"
-#: ../../xffm/find/dialog.hh:170 ../../xffm/find/fgr.hh:142
-msgid "Find hidden files and directories"
-msgstr "Buscar archivos y directorios ocultos"
-
-#. / option -a "xdev"
-#: ../../xffm/find/dialog.hh:173 ../../xffm/find/fgr.hh:138
-msgid "Stay on single filesystem"
-msgstr "Permanecer en este sistema de archivos"
-
-#. / option "upper_limit_spin" (only in gtk findDialog)
-#. if (g_slist_length(list) == 0) return NULL;
-#. Create liststore for DnD
-#: ../../xffm/find/dialog.hh:176 ../../xffm/find/signals.hh:61
-#: ../../xffm/find/signals.hh:435
-msgid "Results"
-msgstr "Resultados"
-
-#: ../../xffm/find/dialog.hh:176
-msgid "Upper limit"
-msgstr "Límite superior"
-
-#. option -s +KByte "size_greater", "size_greater_spin"
-#: ../../xffm/find/dialog.hh:181
-msgid "At Least"
-msgstr "Al menos"
-
-#: ../../xffm/find/dialog.hh:181 ../../xffm/find/dialog.hh:186
-msgid "kBytes"
-msgstr "kBytes"
-
-#. option -s -KByte "size_smaller", "size_smaller_spin"
-#: ../../xffm/find/dialog.hh:186
-msgid "At Most"
-msgstr "Como máximo"
+#: ../../xffm/completion/base.hh:34
+msgid "Command history"
+msgstr "Historial de órdenes"
 
 #. option -u uid "uid" "uid_combo"
-#: ../../xffm/find/dialog.hh:192 ../../xffm/completion/base.hh:37
+#: ../../xffm/completion/base.hh:37 ../../xffm/find/dialog.hh:199
 msgid "User"
 msgstr "Usuario"
 
-#: ../../xffm/find/dialog.hh:197
-msgid "Group"
-msgstr "Grupo"
+#: ../../xffm/completion/base.hh:40
+msgid "Variable"
+msgstr "Variable"
 
-#. option -o octal "octal_p" "permissions_entry"
-#: ../../xffm/find/dialog.hh:201
-msgid "Octal Permissions"
-msgstr "Permisos octales"
+#: ../../xffm/completion/base.hh:43
+msgid "Host"
+msgstr "Host"
 
-#. option -p suid | exe
-#: ../../xffm/find/dialog.hh:206
-msgid "SUID"
-msgstr "SUID"
+#: ../../xffm/completion/base.hh:55
+msgid "Found no match"
+msgstr "No se ha encontrado ninguna coincidencia"
 
-#: ../../xffm/find/dialog.hh:206 ../../xffm/fm/view/local/popup.hh:1014
-msgid "Executable"
-msgstr "Ejecutable"
+#: ../../xffm/completion/base.hh:133 ../../xffm/completion/base.hh:134
+msgid "Matches"
+msgstr "Coincidencias"
 
-#. radio_p freed on destroy event for findDialog.
+#: ../../xffm/completion/base.hh:134
+msgid "Too many files open"
+msgstr "Demasiados archivos abiertos"
+
+#: ../../xffm/completion/base.hh:325 ../../xffm/find/fgr.hh:124
+msgid "Options:"
+msgstr "Opciones:"
+
+#: ../../xffm/completion/bash.hh:133
+msgid "Completion mode:"
+msgstr "Modo de terminación:"
+
+#: ../../xffm/completion/bash.hh:134
+msgid "command"
+msgstr "comando"
+
+#: ../../xffm/completion/bash.hh:135
+msgid "file"
+msgstr "fichero"
+
+#: ../../xffm/completion/bash.hh:145 ../../xffm/completion/bash.hh:149
+msgid "Options >>"
+msgstr "Opciones >>"
+
+#: ../../xffm/find/fgr.hh:124 ../../xffm/find/dialog.hh:308
+msgid "Path"
+msgstr "Ruta"
+
+#: ../../xffm/find/fgr.hh:125
+msgid "Locate documents and folders on this computer by name or content"
+msgstr "Localice documentos y carpetas por nombre o contenido en este equipo"
+
+#: ../../xffm/find/fgr.hh:126 ../../xffm/find/dialog.hh:341
+msgid "Filter:"
+msgstr "Filtro:"
+
+#: ../../xffm/find/fgr.hh:126
+msgid "Search for files"
+msgstr "Buscar archivos"
+
+#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
+#: ../../xffm/find/fgr.hh:128
+msgid "Contents:"
+msgstr "Contenido:"
+
+#: ../../xffm/find/fgr.hh:128
+msgid "File's contents filtered as plain text."
+msgstr "Contenido del archivo filtrado como texto plano."
+
+#: ../../xffm/find/fgr.hh:131
+msgid "Verbose output debugging mode."
+msgstr "Modo detallado de depuración de salida."
+
+#: ../../xffm/find/fgr.hh:133
+msgid "Show version information"
+msgstr "Muestra la información de la versión"
+
+#: ../../xffm/find/fgr.hh:135
+msgid "Filter Details"
+msgstr "Detalles del filtro"
+
+#. / option -a "xdev"
+#: ../../xffm/find/fgr.hh:138 ../../xffm/find/dialog.hh:180
+msgid "Stay on single filesystem"
+msgstr "Permanecer en este sistema de archivos"
+
+#: ../../xffm/find/fgr.hh:140
+msgid "Print..."
+msgstr "Imprimir…"
+
+#: ../../xffm/find/fgr.hh:140
+msgid "The unique Process ID that identifies this process."
+msgstr "El Id único del proceso que identifica este proceso."
+
+#. / option -D "recursiveH"
+#: ../../xffm/find/fgr.hh:142 ../../xffm/find/dialog.hh:177
+msgid "Find hidden files and directories"
+msgstr "Buscar archivos y directorios ocultos"
+
+#: ../../xffm/find/fgr.hh:143
+msgid "Filter"
+msgstr "Filtro"
+
+#: ../../xffm/find/fgr.hh:144
+msgid ""
+"To display files which pass the filter (stars and regexps will be processed)"
+msgstr ""
+
+#. / option -r "recursive"
+#: ../../xffm/find/fgr.hh:146 ../../xffm/find/dialog.hh:174
+msgid "Recursive"
+msgstr "Recursiva"
+
+#: ../../xffm/find/fgr.hh:147 ../../xffm/find/fgr.hh:148
+#: ../../xffm/find/fgr.hh:149 ../../xffm/find/fgr.hh:150
+msgid "KByte"
+msgstr "KByte"
+
+#: ../../xffm/find/fgr.hh:148
+msgid "is greater than or equal to"
+msgstr "es mayor o igual que"
+
+#: ../../xffm/find/fgr.hh:150
+msgid "is less than or equal to"
+msgstr "es menor que o igual que"
+
+#: ../../xffm/find/fgr.hh:152
+msgid "Set UID"
+msgstr "Establecer el UID"
+
+#: ../../xffm/find/fgr.hh:152
+msgid "Executable Text Files"
+msgstr "Archivos de texto ejecutables"
+
+#: ../../xffm/find/fgr.hh:154
+msgid "The permissions of the file, in octal notation."
+msgstr "Los permisos del archivo, en notación octal."
+
+#: ../../xffm/find/fgr.hh:155
+msgid "Type"
+msgstr "Tipo"
+
+#: ../../xffm/find/fgr.hh:157 ../../xffm/find/signals.hh:17
+msgid "Any"
+msgstr "Cualquiera"
+
+#: ../../xffm/find/fgr.hh:157
+msgid "Default type"
+msgstr "Tipo predeterminado"
+
+#: ../../xffm/find/fgr.hh:158 ../../xffm/common/preview.hh:497
+msgid "Regular file"
+msgstr "Archivo regular"
+
+#: ../../xffm/find/fgr.hh:159 ../../xffm/find/signals.hh:11
+#: ../../xffm/fm/local/popup.hh:803 ../../xffm/common/preview.hh:488
+msgid "Directory"
+msgstr "Directorio"
+
+#: ../../xffm/find/fgr.hh:160 ../../xffm/find/signals.hh:12
+#: ../../xffm/common/preview.hh:494
+msgid "Symbolic Link"
+msgstr "Enlace simbólico"
+
+#: ../../xffm/find/fgr.hh:161
+msgid "UNIX Socket"
+msgstr "Socket UNIX"
+
+#: ../../xffm/find/fgr.hh:162 ../../xffm/find/signals.hh:14
+#: ../../xffm/common/preview.hh:482
+msgid "Block device"
+msgstr "Dispositivo de bloques"
+
+#: ../../xffm/find/fgr.hh:163 ../../xffm/find/signals.hh:15
+#: ../../xffm/common/preview.hh:485
+msgid "Character device"
+msgstr "Dispositivo caracteres"
+
+#: ../../xffm/find/fgr.hh:164 ../../xffm/find/signals.hh:16
+#: ../../xffm/common/preview.hh:491
+msgid "FIFO"
+msgstr "FIFO"
+
+#. radio_p freed on destroy event for dialog_.
 #. option -k minutes "last_minutes", "last_minutes_spin"
-#: ../../xffm/find/dialog.hh:214 ../../xffm/find/fgr.hh:166
-#: ../../xffm/find/fgr.hh:168
+#: ../../xffm/find/fgr.hh:166 ../../xffm/find/fgr.hh:168
+#: ../../xffm/find/dialog.hh:221
 msgid "Minutes"
 msgstr "Minutos"
 
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/dialog.hh:270 ../../xffm/find/dialog.hh:370
+#: ../../xffm/fm/treeview.hh:18
+msgid "Details"
+msgstr "Detalles"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/fgr.hh:179 ../../xffm/find/fgr.hh:180
+#: ../../xffm/find/fgr.hh:183 ../../xffm/find/fgr.hh:184
+#: ../../xffm/find/fgr.hh:187 ../../xffm/find/fgr.hh:188
+msgid "TIME"
+msgstr "TIEMPO"
+
+#: ../../xffm/find/fgr.hh:168 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/fgr.hh:174 ../../xffm/find/fgr.hh:177
+msgid "Previous"
+msgstr "Anterior"
+
 #. option -h hours "last_hours", "last_hours_spin"
-#: ../../xffm/find/dialog.hh:219 ../../xffm/find/fgr.hh:169
-#: ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/fgr.hh:169 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/dialog.hh:226
 msgid "Hours"
 msgstr "Horas"
 
 #. option -d days "last_days", "last_days_spin"
-#: ../../xffm/find/dialog.hh:224 ../../xffm/find/fgr.hh:172
-#: ../../xffm/find/fgr.hh:174
+#: ../../xffm/find/fgr.hh:172 ../../xffm/find/fgr.hh:174
+#: ../../xffm/find/dialog.hh:231
 msgid "Days"
 msgstr "Días"
 
+#: ../../xffm/find/fgr.hh:175
+msgid "Month"
+msgstr "Mes"
+
+#: ../../xffm/find/fgr.hh:177
+msgid "Month(s)"
+msgstr "Mes(es)"
+
+#: ../../xffm/find/fgr.hh:180
+msgid "Modification Time :"
+msgstr "Hora de modificación :"
+
+#: ../../xffm/find/fgr.hh:184
+msgid "Access Time :"
+msgstr "Último acceso :"
+
+#: ../../xffm/find/fgr.hh:188
+msgid "Creation Time :"
+msgstr "Hora de creación :"
+
+#: ../../xffm/find/fgr.hh:191 ../../xffm/find/fgr.hh:192
+msgid "uid"
+msgstr "uid"
+
+#: ../../xffm/find/fgr.hh:192
+msgid "User:"
+msgstr "Usuario:"
+
+#: ../../xffm/find/fgr.hh:194 ../../xffm/find/fgr.hh:195
+msgid "gid"
+msgstr "gid"
+
+#: ../../xffm/find/fgr.hh:195
+msgid "Group:"
+msgstr "Grupo:"
+
+#: ../../xffm/find/fgr.hh:198
+msgid ""
+"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+"character that  normally  follows  a file  name"
+msgstr ""
+
+#: ../../xffm/find/fgr.hh:200
+msgid "Content View"
+msgstr "Vista del contenido"
+
+#: ../../xffm/find/fgr.hh:201 ../../xffm/find/fgr.hh:202
+#: ../../xffm/find/fgr.hh:203 ../../xffm/find/fgr.hh:204
+msgid "STRING"
+msgstr "CADENA"
+
+#: ../../xffm/find/fgr.hh:202 ../../xffm/find/fgr.hh:204
+#: ../../xffm/fm/local/popup.hh:563
+msgid "Regular expression"
+msgstr "Expresión regular"
+
+#: ../../xffm/find/fgr.hh:204
+msgid "Extended"
+msgstr "Extendido"
+
+#: ../../xffm/find/fgr.hh:206
+msgid "Ignore case"
+msgstr "Ignorar capitalización"
+
+#: ../../xffm/find/fgr.hh:208
+msgid "Text Files"
+msgstr "Archivos de texto"
+
+#: ../../xffm/find/fgr.hh:210 ../../xffm/find/dialog.hh:552
+msgid "No match"
+msgstr "No hay ninguna coincidencia"
+
+#: ../../xffm/find/fgr.hh:212 ../../xffm/find/dialog.hh:470
+msgid "Line Count"
+msgstr "Cuenta de líneas"
+
+#: ../../xffm/find/fgr.hh:214
+msgid "Words"
+msgstr "Palabras"
+
+#: ../../xffm/find/fgr.hh:216
+msgid "Lines"
+msgstr "Líneas"
+
+#: ../../xffm/find/fgr.hh:368
+#, c-format
+msgid "Usage : %s [OPTIONS]\n"
+msgstr "Uso : %s [OPTIONS]\n"
+
+#: ../../xffm/find/signals.hh:10
+msgid "Regular"
+msgstr "Habitual"
+
+#: ../../xffm/find/signals.hh:13 ../../xffm/common/preview.hh:500
+msgid "Socket"
+msgstr "Socket"
+
+#: ../../xffm/find/signals.hh:209
+msgid "Select folder to search in"
+msgstr "Seleccione la carpeta en la que buscar"
+
+#. button no
+#: ../../xffm/find/signals.hh:265 ../../xffm/find/dialog.hh:584
+#: ../../xffm/response/entryfileresponse.hh:18
+#: ../../xffm/response/entryresponse.hh:305
+#: ../../xffm/response/passwdresponse.hh:558
+#: ../../xffm/fm/local/properties.hh:304 ../../xffm/fm/local/rm.hh:155
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: ../../xffm/find/signals.hh:293 ../../xffm/find/signals.hh:722
+msgid "No editor for current action."
+msgstr "No hay ningún editor para la acción actual."
+
+#. / option "upper_limit_spin" (only in gtk dialog_)
+#: ../../xffm/find/signals.hh:351 ../../xffm/find/dialog.hh:183
+msgid "Results"
+msgstr "Resultados"
+
+#: ../../xffm/find/signals.hh:351
+msgid "Upper limit:"
+msgstr "Límite superior:"
+
+#: ../../xffm/find/signals.hh:353
+msgid "Counting files..."
+msgstr "Contando archivos..."
+
+#: ../../xffm/find/signals.hh:368
+#, c-format
+msgid "Found %d match"
+msgid_plural "Found %d matches"
+msgstr[0] "Se encontró %d coincidencia"
+msgstr[1] "Se encontraron %d coincidencias"
+
+#: ../../xffm/find/signals.hh:370
+#, c-format
+msgid "%s Finished : %s"
+msgstr "%s Terminado: %s"
+
+#: ../../xffm/find/signals.hh:488 ../../xffm/find/signals.hh:490
+msgid "Searching..."
+msgstr "Buscando…"
+
+#. g_object_set_data(G_OBJECT(dialog_), "window", dialog_);
+#: ../../xffm/find/dialog.hh:98 ../../xffm/find/dialog.hh:150
+#: ../../xffm/find/dialog.hh:611
+msgid "Find"
+msgstr "Buscar"
+
+#: ../../xffm/find/dialog.hh:183
+msgid "Upper limit"
+msgstr "Límite superior"
+
+#. option -s +KByte "size_greater", "size_greater_spin"
+#: ../../xffm/find/dialog.hh:188
+msgid "At Least"
+msgstr "Al menos"
+
+#: ../../xffm/find/dialog.hh:188 ../../xffm/find/dialog.hh:193
+msgid "kBytes"
+msgstr "kBytes"
+
+#. option -s -KByte "size_smaller", "size_smaller_spin"
+#: ../../xffm/find/dialog.hh:193
+msgid "At Most"
+msgstr "Como máximo"
+
+#: ../../xffm/find/dialog.hh:204
+msgid "Group"
+msgstr "Grupo"
+
+#. option -o octal "octal_p" "permissions_entry"
+#: ../../xffm/find/dialog.hh:208
+msgid "Octal Permissions"
+msgstr "Permisos octales"
+
+#. option -p suid | exe
+#: ../../xffm/find/dialog.hh:213
+msgid "SUID"
+msgstr "SUID"
+
+#: ../../xffm/find/dialog.hh:213 ../../xffm/fm/local/popup.hh:843
+msgid "Executable"
+msgstr "Ejecutable"
+
 #. option -m months "last_months", "last_months_spin"
-#: ../../xffm/find/dialog.hh:230
+#: ../../xffm/find/dialog.hh:237
 msgid "Months"
 msgstr "Meses"
 
-#: ../../xffm/find/dialog.hh:241
+#: ../../xffm/find/dialog.hh:248
 msgid "File type : "
 msgstr "Tipo de archivo : "
 
 #. gtk_widget_show (GTK_WIDGET(right_options_vbox));
 #. gtk_widget_show (GTK_WIDGET(center_options_vbox));
 #. gtk_widget_show (GTK_WIDGET(left_options_vbox));
-#: ../../xffm/find/dialog.hh:255 ../../xffm/find/dialog.hh:595
-#: ../../xffm/common/gtk.hh:79 ../../xffm/fm/dialog/notebook/page/page.hh:70
+#: ../../xffm/find/dialog.hh:262 ../../xffm/find/dialog.hh:602
+#: ../../xffm/fm/page/page.hh:70 ../../xffm/common/gtk.hh:70
 msgid "Close"
 msgstr "Cerrar"
-
-#: ../../xffm/find/dialog.hh:263 ../../xffm/find/dialog.hh:363
-#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
-#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
-#: ../../xffm/fm/view/treeview.hh:18
-msgid "Details"
-msgstr "Detalles"
-
-#: ../../xffm/find/dialog.hh:301 ../../xffm/find/fgr.hh:124
-#: ../../xffm/find/signals.hh:90
-msgid "Path"
-msgstr "Ruta"
-
-#: ../../xffm/find/dialog.hh:334 ../../xffm/find/fgr.hh:126
-msgid "Filter:"
-msgstr "Filtro:"
 
 #. gtk_box_pack_start (vbox7a, GTK_WIDGET(advancedBox), TRUE, FALSE, 5);
 #. gtk_widget_show(GTK_WIDGET(advancedBox));
 #. //////////////  grep options.... /////////////////////////
-#: ../../xffm/find/dialog.hh:377
+#: ../../xffm/find/dialog.hh:384
 msgid "Contains"
 msgstr "Contiene"
 
-#: ../../xffm/find/dialog.hh:397
+#: ../../xffm/find/dialog.hh:404
 msgid "Contains the text"
 msgstr "Contiene el texto"
 
-#: ../../xffm/find/dialog.hh:430
+#: ../../xffm/find/dialog.hh:437
 msgid "Case Sensitive"
 msgstr "Sensible a capitalización"
 
-#: ../../xffm/find/dialog.hh:442
+#: ../../xffm/find/dialog.hh:449
 msgid "Extended regexp"
 msgstr "Expreg extendida"
 
-#: ../../xffm/find/dialog.hh:453
+#: ../../xffm/find/dialog.hh:460
 msgid "Include binary files"
 msgstr "Incluir archivos binarios"
 
-#: ../../xffm/find/dialog.hh:463 ../../xffm/find/fgr.hh:212
-msgid "Line Count"
-msgstr "Cuenta de líneas"
-
-#: ../../xffm/find/dialog.hh:489
+#: ../../xffm/find/dialog.hh:496
 msgid "Match"
 msgstr "Coincidencia"
 
-#: ../../xffm/find/dialog.hh:501
+#: ../../xffm/find/dialog.hh:508
 msgid "Anywhere"
 msgstr "En cualquier sitio"
 
-#: ../../xffm/find/dialog.hh:516
+#: ../../xffm/find/dialog.hh:523
 msgid "Whole words only"
 msgstr "Solo palabras completas"
 
-#: ../../xffm/find/dialog.hh:531
+#: ../../xffm/find/dialog.hh:538
 msgid "lines"
 msgstr "líneas"
 
-#: ../../xffm/find/dialog.hh:545 ../../xffm/find/fgr.hh:210
-msgid "No match"
-msgstr "No hay ninguna coincidencia"
-
-#. button no
-#: ../../xffm/find/dialog.hh:577 ../../xffm/find/signals.hh:349
-#: ../../xffm/common/gtk.hh:393 ../../xffm/fm/view/local/rm.hh:157
-#: ../../xffm/fm/view/local/properties.hh:314
-#: ../../xffm/response/passwdresponse.hh:624
-#: ../../xffm/response/entryresponse.hh:420
-#: ../../xffm/response/chooserresponse.hh:21
-msgid "Cancel"
-msgstr "Cancelar"
-
-#: ../../xffm/find/dialog.hh:587
+#: ../../xffm/find/dialog.hh:594
 msgid "Clear"
 msgstr "Limpiar"
 
-#: ../../xffm/find/dialog.hh:629
+#: ../../xffm/find/dialog.hh:636
 msgid "Edit"
 msgstr "Editar"
 
-#: ../../xffm/find/dialog.hh:743 ../../xffm/find/dialog.hh:758
-#: ../../xffm/common/preview.hh:460 ../../xffm/common/util.hh:1204
-#: ../../xffm/common/util.hh:1206 ../../xffm/common/util.hh:1212
-#: ../../xffm/common/util.hh:1214
+#: ../../xffm/find/dialog.hh:751 ../../xffm/find/dialog.hh:766
+#: ../../xffm/common/util.hh:1150 ../../xffm/common/util.hh:1152
+#: ../../xffm/common/util.hh:1158 ../../xffm/common/util.hh:1160
+#: ../../xffm/common/preview.hh:479
 msgid "unknown"
 msgstr "desconocido"
 
-#: ../../xffm/find/dialog.hh:772
+#: ../../xffm/find/dialog.hh:780
 msgid "Modified"
 msgstr "Modificado"
 
-#: ../../xffm/find/dialog.hh:776
+#: ../../xffm/find/dialog.hh:784
 msgid "Created"
 msgstr "Creado"
 
-#: ../../xffm/find/dialog.hh:780
+#: ../../xffm/find/dialog.hh:788
 msgid "Accessed"
 msgstr "Accedido"
 
-#: ../../xffm/find/dialog.hh:1098
+#: ../../xffm/find/dialog.hh:1106
 msgid ""
 "Basic rules:\n"
 "\n"
@@ -612,7 +909,8 @@ msgstr ""
 "^  Coincidirá al comienzo de la cadena\n"
 "$  Coincidirá al final de la cadena\n"
 
-#: ../../xffm/find/dialog.hh:1107
+#: ../../xffm/find/dialog.hh:1115
+#, fuzzy
 msgid ""
 "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ ( ) : \n"
 "In  basic regular expressions the metacharacters ?, +, {, |, (, and ) \n"
@@ -679,667 +977,353 @@ msgstr ""
 "\n"
 "Más információn disponible con \"man grep\" en la línea de órdenes.\n"
 
-#: ../../xffm/find/fgr.hh:124 ../../xffm/completion/base.hh:339
-msgid "Options:"
-msgstr "Opciones:"
+#: ../../xffm/response/entryfileresponse.hh:20
+msgid "Open"
+msgstr "Abrir"
 
-#: ../../xffm/find/fgr.hh:125
-msgid "Locate documents and folders on this computer by name or content"
-msgstr "Localice documentos y carpetas por nombre o contenido en este equipo"
+#: ../../xffm/response/entryresponse.hh:29
+#: ../../xffm/response/entryfolderresponse.hh:28
+msgid "Choose directory"
+msgstr "Elegir una carpeta"
 
-#: ../../xffm/find/fgr.hh:126
-msgid "Search for files"
-msgstr "Buscar archivos"
+#. this button is redundant since hands are on keyboard for password
+#: ../../xffm/response/entryresponse.hh:309
+#: ../../xffm/response/passwdresponse.hh:189
+#: ../../xffm/response/passwdresponse.hh:559
+msgid "Ok"
+msgstr "Aceptar"
 
-#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
-#: ../../xffm/find/fgr.hh:128
-msgid "Contents:"
-msgstr "Contenido:"
+#: ../../xffm/response/commandprogressresponse.hh:32
+msgid "Items:"
+msgstr "Elementos:"
 
-#: ../../xffm/find/fgr.hh:128
-msgid "File's contents filtered as plain text."
-msgstr "Contenido del archivo filtrado como texto plano."
+#: ../../xffm/response/passwdresponse.hh:21
+msgid "Enter password"
+msgstr "Introduzca la contraseña"
 
-#: ../../xffm/find/fgr.hh:131
-msgid "Verbose output debugging mode."
-msgstr "Modo detallado de depuración de salida."
+#. gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+#: ../../xffm/response/passwdresponse.hh:125
+msgid "User Input"
+msgstr "Entrada de usuario"
 
-#: ../../xffm/find/fgr.hh:133
-msgid "Show version information"
-msgstr "Muestra la información de la versión"
+#: ../../xffm/response/passwdresponse.hh:142
+msgid "Response Requested"
+msgstr "Pedida respuesta"
 
-#: ../../xffm/find/fgr.hh:135
-msgid "Filter Details"
-msgstr "Detalles del filtro"
+#: ../../xffm/response/passwdresponse.hh:264
+msgid "Preparing"
+msgstr "Preparando"
 
-#: ../../xffm/find/fgr.hh:140
-msgid "Print..."
-msgstr "Imprimir…"
+#: ../../xffm/response/passwdresponse.hh:352
+msgid "sudo"
+msgstr "sudo"
 
-#: ../../xffm/find/fgr.hh:140
-msgid "The unique Process ID that identifies this process."
-msgstr "El Id único del proceso que identifica este proceso."
+#: ../../xffm/response/passwdresponse.hh:354
+msgid "Command:"
+msgstr "Comando:"
 
-#: ../../xffm/find/fgr.hh:143
-msgid "Filter"
-msgstr "Filtro"
+#: ../../xffm/response/passwdresponse.hh:357
+msgid "Permission denied"
+msgstr "Permiso denegado"
 
-#: ../../xffm/find/fgr.hh:144
-msgid ""
-"To display files which pass the filter (stars and regexps will be processed)"
+#: ../../xffm/response/passwdresponse.hh:358
+msgid "Try to approach a problem from different angles."
+msgstr "Intenta enfocar los problemas desde ángulos diferentes."
+
+#: ../../xffm/response/passwdresponse.hh:359
+msgid "Do you want to retry?"
+msgstr "¿Desea volver a intentarlo?"
+
+#: ../../xffm/response/passwdresponse.hh:360
+msgid "Alternate:"
+msgstr "Alternativo:"
+
+#: ../../xffm/response/passwdresponse.hh:365
+msgid "No"
+msgstr "No"
+
+#: ../../xffm/response/passwdresponse.hh:401
+msgid "Install"
+msgstr "Instalar"
+
+#: ../../xffm/response/passwdresponse.hh:402
+#, c-format
+msgid "%s does not exist."
+msgstr "%s no existe."
+
+#: ../../xffm/response/passwdresponse.hh:467
+msgid "Blowfish"
+msgstr "Blowfish"
+
+#: ../../xffm/response/passwdresponse.hh:468
+msgid "Encryption Key Approval"
+msgstr "Aprobación de la clave de cifrado"
+
+#: ../../xffm/response/passwdresponse.hh:502
+msgid "-o     print output to standard out. Implies -r."
 msgstr ""
 
-#: ../../xffm/find/fgr.hh:147 ../../xffm/find/fgr.hh:148
-#: ../../xffm/find/fgr.hh:149 ../../xffm/find/fgr.hh:150
-msgid "KByte"
-msgstr "KByte"
-
-#: ../../xffm/find/fgr.hh:148
-msgid "is greater than or equal to"
-msgstr "es mayor o igual que"
-
-#: ../../xffm/find/fgr.hh:150
-msgid "is less than or equal to"
-msgstr "es menor que o igual que"
-
-#: ../../xffm/find/fgr.hh:152
-msgid "Set UID"
-msgstr "Establecer el UID"
-
-#: ../../xffm/find/fgr.hh:152
-msgid "Executable Text Files"
-msgstr "Archivos de texto ejecutables"
-
-#: ../../xffm/find/fgr.hh:154
-msgid "The permissions of the file, in octal notation."
-msgstr "Los permisos del archivo, en notación octal."
-
-#: ../../xffm/find/fgr.hh:155
-msgid "Type"
-msgstr "Tipo"
-
-#: ../../xffm/find/fgr.hh:157 ../../xffm/find/signals.hh:14
-msgid "Any"
-msgstr "Cualquiera"
-
-#: ../../xffm/find/fgr.hh:157
-msgid "Default type"
-msgstr "Tipo predeterminado"
-
-#: ../../xffm/find/fgr.hh:158 ../../xffm/common/preview.hh:478
-msgid "Regular file"
-msgstr "Archivo regular"
-
-#: ../../xffm/find/fgr.hh:159 ../../xffm/find/signals.hh:8
-#: ../../xffm/common/preview.hh:469 ../../xffm/fm/view/local/popup.hh:974
-msgid "Directory"
-msgstr "Directorio"
-
-#: ../../xffm/find/fgr.hh:160 ../../xffm/find/signals.hh:9
-#: ../../xffm/common/preview.hh:475
-msgid "Symbolic Link"
-msgstr "Enlace simbólico"
-
-#: ../../xffm/find/fgr.hh:161
-msgid "UNIX Socket"
-msgstr "Socket UNIX"
-
-#: ../../xffm/find/fgr.hh:162 ../../xffm/find/signals.hh:11
-#: ../../xffm/common/preview.hh:463
-msgid "Block device"
-msgstr "Dispositivo de bloques"
-
-#: ../../xffm/find/fgr.hh:163 ../../xffm/find/signals.hh:12
-#: ../../xffm/common/preview.hh:466
-msgid "Character device"
-msgstr "Dispositivo caracteres"
-
-#: ../../xffm/find/fgr.hh:164 ../../xffm/find/signals.hh:13
-#: ../../xffm/common/preview.hh:472
-msgid "FIFO"
-msgstr "FIFO"
-
-#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
-#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
-#: ../../xffm/find/fgr.hh:179 ../../xffm/find/fgr.hh:180
-#: ../../xffm/find/fgr.hh:183 ../../xffm/find/fgr.hh:184
-#: ../../xffm/find/fgr.hh:187 ../../xffm/find/fgr.hh:188
-msgid "TIME"
-msgstr "TIEMPO"
-
-#: ../../xffm/find/fgr.hh:168 ../../xffm/find/fgr.hh:171
-#: ../../xffm/find/fgr.hh:174 ../../xffm/find/fgr.hh:177
-msgid "Previous"
-msgstr "Anterior"
-
-#: ../../xffm/find/fgr.hh:175
-msgid "Month"
-msgstr "Mes"
-
-#: ../../xffm/find/fgr.hh:177
-msgid "Month(s)"
-msgstr "Mes(es)"
-
-#: ../../xffm/find/fgr.hh:180
-msgid "Modification Time :"
-msgstr "Hora de modificación :"
-
-#: ../../xffm/find/fgr.hh:184
-msgid "Access Time :"
-msgstr "Último acceso :"
-
-#: ../../xffm/find/fgr.hh:188
-msgid "Creation Time :"
-msgstr "Hora de creación :"
-
-#: ../../xffm/find/fgr.hh:191 ../../xffm/find/fgr.hh:192
-msgid "uid"
-msgstr "uid"
-
-#: ../../xffm/find/fgr.hh:192
-msgid "User:"
-msgstr "Usuario:"
-
-#: ../../xffm/find/fgr.hh:194 ../../xffm/find/fgr.hh:195
-msgid "gid"
-msgstr "gid"
-
-#: ../../xffm/find/fgr.hh:195
-msgid "Group:"
-msgstr "Grupo:"
-
-#: ../../xffm/find/fgr.hh:198
-msgid ""
-"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
-"character that  normally  follows  a file  name"
+#: ../../xffm/response/passwdresponse.hh:506
+msgid "-c     DO NOT compress files before encryption."
 msgstr ""
 
-#: ../../xffm/find/fgr.hh:200
-msgid "Content View"
-msgstr "Vista del contenido"
+#: ../../xffm/response/passwdresponse.hh:510
+msgid "-r     DO NOT remove input files after processing"
+msgstr ""
 
-#: ../../xffm/find/fgr.hh:201 ../../xffm/find/fgr.hh:202
-#: ../../xffm/find/fgr.hh:203 ../../xffm/find/fgr.hh:204
-msgid "STRING"
-msgstr "CADENA"
+#: ../../xffm/response/passwdresponse.hh:517
+msgid "Encryption key: "
+msgstr "Clave de cifrado: "
 
-#: ../../xffm/find/fgr.hh:202 ../../xffm/find/fgr.hh:204
-#: ../../xffm/fm/view/local/popup.hh:691
-msgid "Regular expression"
-msgstr "Expresión regular"
+#: ../../xffm/response/passwdresponse.hh:529
+msgid "Confirm:"
+msgstr "Confirmar:"
 
-#: ../../xffm/find/fgr.hh:204
-msgid "Extended"
-msgstr "Extendido"
+#: ../../xffm/response/passwdresponse.hh:542
+msgid "Sorry, passwords do not match"
+msgstr "Las contraseñas no coinciden"
 
-#: ../../xffm/find/fgr.hh:206
-msgid "Ignore case"
-msgstr "Ignorar capitalización"
+#: ../../xffm/response/passwdresponse.hh:550
+msgid "Minimum length:"
+msgstr "Longitud mínima:"
 
-#: ../../xffm/find/fgr.hh:208
-msgid "Text Files"
-msgstr "Archivos de texto"
+#: ../../xffm/response/timeoutresponse.hh:56
+msgid "Dismiss"
+msgstr "Descartar"
 
-#: ../../xffm/find/fgr.hh:214
-msgid "Words"
-msgstr "Palabras"
+#: ../../xffm/response/commandresponse.hh:23
+msgid "Running"
+msgstr "Ejecutándose"
 
-#: ../../xffm/find/fgr.hh:216
-msgid "Lines"
-msgstr "Líneas"
+#. auto text = g_strdup_printf("%s (pid: %d)",
+#. _("Waiting for operation to finish..."),
+#. Tubo<Type>::getChild (pid));
+#: ../../xffm/response/commandresponse.hh:28
+msgid "Waiting for operation to finish..."
+msgstr "Esperando a que finalice la operación..."
 
-#: ../../xffm/find/fgr.hh:368
-#, c-format
-msgid "Usage : %s [OPTIONS]\n"
-msgstr "Uso : %s [OPTIONS]\n"
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Documents"
+msgstr "Documentos"
 
-#: ../../xffm/find/signals.hh:7
-msgid "Regular"
-msgstr "Habitual"
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Downloads"
+msgstr "Descargas"
 
-#: ../../xffm/find/signals.hh:10 ../../xffm/common/preview.hh:481
-msgid "Socket"
-msgstr "Socket"
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Music"
+msgstr "Música"
 
-#: ../../xffm/find/signals.hh:377 ../../xffm/find/signals.hh:811
-msgid "No editor for current action."
-msgstr "No hay ningún editor para la acción actual."
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Pictures"
+msgstr "Imágenes"
 
-#: ../../xffm/find/signals.hh:435
-msgid "Upper limit:"
-msgstr "Límite superior:"
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Templates"
+msgstr "Plantillas"
 
-#: ../../xffm/find/signals.hh:437
-msgid "Counting files..."
-msgstr "Contando archivos..."
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Videos"
+msgstr "Vídeos"
 
-#: ../../xffm/find/signals.hh:452
-#, c-format
-msgid "Found %d match"
-msgid_plural "Found %d matches"
-msgstr[0] "Se encontró %d coincidencia"
-msgstr[1] "Se encontraron %d coincidencias"
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Desktop"
+msgstr "Escritorio"
 
-#: ../../xffm/find/signals.hh:454
-#, c-format
-msgid "%s Finished : %s"
-msgstr "%s Terminado: %s"
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Bookmarks"
+msgstr "Marcadores"
 
-#: ../../xffm/find/signals.hh:577 ../../xffm/find/signals.hh:579
-msgid "Searching..."
-msgstr "Buscando…"
+#: ../../xffm/fm/local/icons.hh:259 ../../xffm/fm/local/rm.hh:181
+msgid "Trash"
+msgstr "Papelera"
 
-#: ../../xffm/common/preview.hh:581
-msgid "Empty file"
-msgstr "Archivo vacío"
-
-#: ../../xffm/common/preview.hh:636
-#, c-format
-msgid "Cannot read from %s"
-msgstr "No se puede leer de %s"
-
-#: ../../xffm/common/gtk.hh:67 ../../xffm/fm/dialog/notebook/vbuttonbox.hh:240
-msgid "Open terminal"
-msgstr "Abrir terminal"
-
-#: ../../xffm/common/gtk.hh:69 ../../xffm/common/util.hh:1293
-msgid "Execute Shell Command"
-msgstr "Ejecutar orden del intérprete de órdenes"
-
-#: ../../xffm/common/gtk.hh:71 ../../xffm/fm/view/local/popup.hh:98
-#: ../../xffm/fm/view/local/popup.hh:152
-msgid "Paste"
-msgstr "Pegar"
-
-#: ../../xffm/common/gtk.hh:73 ../../xffm/fm/view/local/popup.hh:146
-msgid "Add bookmark"
-msgstr "Añadir marcador"
-
-#: ../../xffm/common/gtk.hh:75 ../../xffm/fm/view/local/popup.hh:147
-#: ../../xffm/fm/view/root/view.hh:70
-msgid "Remove bookmark"
-msgstr "Quitar marcador"
-
-#: ../../xffm/common/gtk.hh:77 ../../xffm/fm/view/pkg/model.hh:108
-#: ../../xffm/fm/view/pkg/model.hh:299 ../../xffm/fm/view/pkg/model.hh:306
-#: ../../xffm/fm/view/pkg/popup.hh:151
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:236
-msgid "Search"
-msgstr "Buscar"
-
-#: ../../xffm/common/gtk.hh:81 ../../xffm/fm/dialog/notebook/menupopover.hh:229
-msgid "Exit"
-msgstr "Salir"
-
-#: ../../xffm/common/gtk.hh:83 ../../xffm/fm/view/local/popup.hh:84
-#: ../../xffm/fm/view/local/popup.hh:137 ../../xffm/fm/view/local/popup.hh:1199
-#: ../../xffm/fm/view/local/popup.hh:1206
-#: ../../xffm/fm/view/local/popup.hh:1217
-#: ../../xffm/fm/view/local/popup.hh:1224
-msgid "Open with"
-msgstr "Abrir con"
-
-#: ../../xffm/common/gtk.hh:85 ../../xffm/fm/view/local/popup.hh:97
-#: ../../xffm/fm/view/local/popup.hh:151
-msgid "Cut"
-msgstr "Cortar"
+#: ../../xffm/fm/local/popup.hh:60
+msgid "New"
+msgstr "Nuevo"
 
 #. deprecated {N_("Open in New Tab"), NULL, NULL, NULL},
 #. deprecated {N_("Open in New Window"), NULL, NULL, NULL},
 #. common buttons /(also an iconsize +/- button)
-#: ../../xffm/common/gtk.hh:87 ../../xffm/fm/view/local/popup.hh:96
-#: ../../xffm/fm/view/local/popup.hh:150
+#: ../../xffm/fm/local/popup.hh:64 ../../xffm/fm/local/popup.hh:104
+#: ../../xffm/common/gtk.hh:74
 msgid "Copy"
 msgstr "Copiar"
 
+#: ../../xffm/fm/local/popup.hh:65 ../../xffm/fm/local/popup.hh:105
+#: ../../xffm/common/gtk.hh:73
+msgid "Cut"
+msgstr "Cortar"
+
+#: ../../xffm/fm/local/popup.hh:66 ../../xffm/fm/local/popup.hh:106
+#: ../../xffm/common/gtk.hh:66
+msgid "Paste"
+msgstr "Pegar"
+
 #. **************
-#: ../../xffm/common/gtk.hh:89 ../../xffm/fm/view/local/rm.hh:176
-#: ../../xffm/fm/view/local/popup.hh:99 ../../xffm/fm/view/local/popup.hh:154
+#: ../../xffm/fm/local/popup.hh:67 ../../xffm/fm/local/popup.hh:107
+#: ../../xffm/fm/local/rm.hh:174 ../../xffm/common/gtk.hh:75
 msgid "Delete"
 msgstr "Borrar"
-
-#. **************
-#. This is now available to BSD with rm -P option
-#: ../../xffm/common/gtk.hh:91 ../../xffm/fm/view/local/rm.hh:165
-msgid "Shred"
-msgstr "Triturar"
-
-#: ../../xffm/common/gtk.hh:94 ../../xffm/fm/view/local/popup.hh:140
-#: ../../xffm/fm/view/root/view.hh:69 ../../xffm/fm/view/fstab/popup.hh:20
-msgid "Open in New Tab"
-msgstr "Abrir en solapa nueva"
-
-#: ../../xffm/common/gtk.hh:139 ../../xffm/fm/dialog/notebook/notebook.hh:75
-msgid "New Tab"
-msgstr "Solapa nueva"
-
-#: ../../xffm/common/gtk.hh:352 ../../xffm/common/gtk.hh:360
-msgid "Help"
-msgstr "Ayuda"
-
-#: ../../xffm/common/settings.hh:30
-msgid "New File:"
-msgstr "Archivo nuevo:"
-
-#: ../../xffm/common/gio.hh:80
-msgid "Copying files"
-msgstr "Copiando archivos"
-
-#: ../../xffm/common/gio.hh:82 ../../xffm/common/dnd.hh:35
-#: ../../xffm/fm/dialog/clipboard.hh:30
-msgid "Moving files"
-msgstr "Moviendo archivos"
-
-#: ../../xffm/common/gio.hh:84
-msgid "linking"
-msgstr "enlazando"
-
-#: ../../xffm/common/gio.hh:448
-#, c-format
-msgid "(%d of %d)"
-msgstr "(%d de %d)"
-
-#: ../../xffm/common/util.hh:1254
-#, c-format
-msgid ""
-"Scriptfile \"%s\" is not executable. Please set the executable-attribute on "
-"that file."
-msgstr ""
-"El guión «%s» no es ejecutable. Establezca el permiso de ejecución sobre ese "
-"archivo."
-
-#: ../../xffm/common/util.hh:1256 ../../xffm/common/util.hh:1291
-#, c-format
-msgid "Open with %s"
-msgstr "Abrir con %s"
-
-#: ../../xffm/common/util.hh:1256
-msgid "Text Editor"
-msgstr "Editor de textos"
-
-#: ../../xffm/common/util.hh:1297
-msgid ""
-"Console: quickly run single commands -- write a command here and press enter."
-msgstr ""
-"Consola: ejecutar con rapidez órdenes sencillas (escriba aquí una orden y "
-"pulse «Intro»)."
-
-#: ../../xffm/common/util.hh:1302 ../../xffm/fm/view/local/popup.hh:1021
-#: ../../xffm/fm/view/local/popup.hh:1203
-#: ../../xffm/fm/view/local/popup.hh:1221
-msgid "Run in Terminal"
-msgstr "Ejecutar en un terminal"
-
-#: ../../xffm/common/mime.hh:101 ../../xffm/common/mime.hh:143
-msgid "No Read Permission"
-msgstr "Sin permiso de lectura"
-
-#: ../../xffm/common/dnd.hh:41 ../../xffm/fm/dialog/clipboard.hh:23
-msgid "Copying files locally"
-msgstr "Copiando archivo localmente"
-
-#: ../../xffm/common/dnd.hh:47
-msgid "Create Link"
-msgstr "Crear enlace"
-
-#: ../../xffm/common/run.hh:338
-msgid "error"
-msgstr "error"
-
-#: ../../xffm/common/run.hh:342
-msgid "warning"
-msgstr "atención"
-
-#: ../../xffm/fm/view/pkg/model.hh:29 ../../xffm/fm/view/pkg/popup.hh:35
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:187
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:191
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:195
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:198
-msgid "Software Updater"
-msgstr "Actualizador de software"
-
-#: ../../xffm/fm/view/pkg/model.hh:41 ../../xffm/fm/view/pkg/model.hh:52
-msgid "Add or remove software installed on the system"
-msgstr "Añadir o quitar software instalado en el sistema"
-
-#: ../../xffm/fm/view/pkg/model.hh:111
-msgid "String"
-msgstr "Cadena"
-
-#: ../../xffm/fm/view/pkg/model.hh:116
-msgid "Waiting for search results"
-msgstr "Esperando los resultados de la búsqueda"
-
-#: ../../xffm/fm/view/pkg/model.hh:174
-msgid "No results"
-msgstr "No hay resultados"
-
-#: ../../xffm/fm/view/pkg/model.hh:373
-#, fuzzy
-msgid "Currently busy\n"
-msgstr "Álbum actual"
-
-#: ../../xffm/fm/view/pkg/popup.hh:44
-msgid "Update Database"
-msgstr "Actualizar base de datos"
-
-#: ../../xffm/fm/view/pkg/popup.hh:45
-msgid "Fetch"
-msgstr "Obtener"
-
-#: ../../xffm/fm/view/pkg/popup.hh:46
-#, fuzzy
-msgid "Install --dry-run"
-msgstr "Error de instalación"
-
-#: ../../xffm/fm/view/pkg/popup.hh:47 ../../xffm/response/passwdresponse.hh:467
-msgid "Install"
-msgstr "Instalar"
-
-#: ../../xffm/fm/view/pkg/popup.hh:48
-#, fuzzy
-msgid "Uninstall --dry-run"
-msgstr "Desinstalando"
-
-#: ../../xffm/fm/view/pkg/popup.hh:49
-msgid "Uninstall"
-msgstr "Desinstalar"
-
-#: ../../xffm/fm/view/pkg/popup.hh:50
-msgid "Information"
-msgstr "Información"
-
-#: ../../xffm/fm/view/pkg/popup.hh:140
-msgid "Version"
-msgstr "Versión"
-
-#: ../../xffm/fm/view/pkg/popup.hh:149
-msgid "Go up"
-msgstr "Subir"
-
-#: ../../xffm/fm/view/pkg/popup.hh:152
-msgid "Search packages"
-msgstr "Buscar paquetes"
-
-#: ../../xffm/fm/view/pkg/popup.hh:184 ../../xffm/fm/view/view.hh:93
-#, c-format
-msgid "Loading %s...%s"
-msgstr "Cargando %s...%s"
-
-#: ../../xffm/fm/view/pkg/popup.hh:184 ../../xffm/fm/view/view.hh:93
-msgid "Please Wait..."
-msgstr "Por favor espere..."
-
-#: ../../xffm/fm/view/local/model.hh:87
-#, c-format
-msgid "Reading \"%s\""
-msgstr "Leyendo «%s»"
-
-#: ../../xffm/fm/view/local/model.hh:380 ../../xffm/fm/view/base/monitor.hh:33
-#, c-format
-msgid "Files: %s"
-msgstr "Archivos: %s"
-
-#: ../../xffm/fm/view/local/model.hh:383
-#, c-format
-msgid "Loaded %d of %d articles"
-msgstr "Se han cargado %d de %d artículos"
-
-#: ../../xffm/fm/view/local/rm.hh:59
-#, c-format
-msgid "Delete %s"
-msgstr "Eliminar %s"
-
-#: ../../xffm/fm/view/local/rm.hh:61
-msgid "Warning: "
-msgstr "Atención: "
-
-#: ../../xffm/fm/view/local/rm.hh:61 ../../xffm/fm/view/local/popup.hh:520
-msgid "Multiple selections"
-msgstr "Selección múltiple"
-
-#. gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
-#. title
-#: ../../xffm/fm/view/local/rm.hh:92
-msgid "Remove"
-msgstr "Quitar"
-
-#: ../../xffm/fm/view/local/rm.hh:142
-msgid "Apply to all"
-msgstr "Aplicar a todos"
-
-#: ../../xffm/fm/view/local/rm.hh:183
-msgid "Trash"
-msgstr "Papelera"
-
-#: ../../xffm/fm/view/local/popup.hh:92
-msgid "New"
-msgstr "Nuevo"
 
 #. {N_("About"), NULL, (void *) menu},
 #.
 #. only for listview: {N_("Sort by size"), NULL, (void *) menu},
 #. only for listview: {N_("Sort by date"), NULL, (void *) menu},
-#: ../../xffm/fm/view/local/popup.hh:105
+#: ../../xffm/fm/local/popup.hh:73
 msgid "Select All"
 msgstr "Seleccionar todo"
 
-#: ../../xffm/fm/view/local/popup.hh:106 ../../xffm/fm/view/local/popup.hh:687
+#: ../../xffm/fm/local/popup.hh:74 ../../xffm/fm/local/popup.hh:559
 msgid "Match regular expression"
 msgstr "Satisfacer expresión regular"
 
-#: ../../xffm/fm/view/local/popup.hh:138 ../../xffm/fm/view/local/popup.hh:1017
+#: ../../xffm/fm/local/popup.hh:75 ../../xffm/fm/root/view.hh:58
+#: ../../xffm/fm/fstab/popup.hh:21
+msgid "View as list"
+msgstr "Ver como lista"
+
+#: ../../xffm/fm/local/popup.hh:77
+msgid "Show hidden files"
+msgstr "Mostrar archivos ocultos"
+
+#: ../../xffm/fm/local/popup.hh:79
+msgid "Show Backup Files"
+msgstr "Mostrar archivos de respaldo"
+
+#: ../../xffm/fm/local/popup.hh:81
+msgid "Sort data in descending order"
+msgstr "Ordenar los datos descendentemente"
+
+#: ../../xffm/fm/local/popup.hh:93 ../../xffm/fm/local/popup.hh:119
+#: ../../xffm/fm/local/popup.hh:1006 ../../xffm/fm/local/popup.hh:1013
+#: ../../xffm/fm/local/popup.hh:1022 ../../xffm/fm/local/popup.hh:1029
+#: ../../xffm/common/gtk.hh:72
+msgid "Open with"
+msgstr "Abrir con"
+
+#: ../../xffm/fm/local/popup.hh:94 ../../xffm/fm/local/popup.hh:846
 msgid "Run Executable..."
 msgstr "Ejecutar..."
 
-#. File chooser
-#: ../../xffm/fm/view/local/popup.hh:139 ../../xffm/fm/view/local/popup.hh:788
+#: ../../xffm/fm/local/popup.hh:95
 msgid "Extract files from the archive"
 msgstr "Extraer archivos del archivador"
 
+#. g_hash_table_insert(iconname_hash, "bcrypt", (void *)"emblem-keyhole");
+#: ../../xffm/fm/local/popup.hh:96 ../../xffm/fm/root/view.hh:73
+#: ../../xffm/fm/fstab/popup.hh:20 ../../xffm/fm/dialog/notebook.hh:52
+#: ../../xffm/common/gtk.hh:78
+msgid "Open in New Tab"
+msgstr "Abrir en solapa nueva"
+
 #. File chooser
-#: ../../xffm/fm/view/local/popup.hh:141 ../../xffm/fm/view/local/popup.hh:878
+#: ../../xffm/fm/local/popup.hh:97 ../../xffm/fm/local/popup.hh:706
 msgid "Create a compressed archive with the selected objects"
 msgstr "Crear un archivador comprimido con los objetos seleccionados"
 
-#: ../../xffm/fm/view/local/popup.hh:143 ../../xffm/fm/view/fstab/popup.hh:37
+#: ../../xffm/fm/local/popup.hh:98 ../../xffm/fm/fstab/popup.hh:37
 msgid "Mount the volume associated with this folder"
 msgstr "Montar el volumen asociado con esta carpeta"
 
-#: ../../xffm/fm/view/local/popup.hh:144 ../../xffm/fm/view/fstab/popup.hh:38
+#: ../../xffm/fm/local/popup.hh:99 ../../xffm/fm/fstab/popup.hh:38
 msgid "Unmount the volume associated with this folder"
 msgstr "Desmontar el volumen asociado con esta carpeta"
 
-#: ../../xffm/fm/view/local/popup.hh:153
-msgid "Paste into"
-msgstr "Pegar dentro"
+#: ../../xffm/fm/local/popup.hh:100 ../../xffm/common/gtk.hh:67
+msgid "Add bookmark"
+msgstr "Añadir marcador"
 
-#: ../../xffm/fm/view/local/popup.hh:155 ../../xffm/fm/view/local/popup.hh:1143
+#: ../../xffm/fm/local/popup.hh:101 ../../xffm/fm/root/view.hh:74
+#: ../../xffm/common/gtk.hh:68
+msgid "Remove bookmark"
+msgstr "Quitar marcador"
+
+#: ../../xffm/fm/local/popup.hh:108 ../../xffm/fm/local/popup.hh:961
 msgid "Rename"
 msgstr "Renombrar"
 
-#: ../../xffm/fm/view/local/popup.hh:156 ../../xffm/fm/view/local/popup.hh:1129
+#: ../../xffm/fm/local/popup.hh:109 ../../xffm/fm/local/popup.hh:947
 msgid "Duplicate"
 msgstr "Duplicar"
 
-#: ../../xffm/fm/view/local/popup.hh:157 ../../xffm/fm/view/local/popup.hh:1115
+#: ../../xffm/fm/local/popup.hh:110 ../../xffm/fm/local/popup.hh:933
 msgid "Link"
 msgstr "Enlace"
 
-#: ../../xffm/fm/view/local/popup.hh:158
+#: ../../xffm/fm/local/popup.hh:111
 msgid "Properties"
 msgstr "Propiedades"
 
-#: ../../xffm/fm/view/local/popup.hh:517
+#: ../../xffm/fm/local/popup.hh:414
 msgid "Files:"
 msgstr "Archivos:"
 
-#: ../../xffm/fm/view/local/popup.hh:685
+#: ../../xffm/fm/local/popup.hh:417 ../../xffm/fm/local/rm.hh:61
+msgid "Multiple selections"
+msgstr "Selección múltiple"
+
+#: ../../xffm/fm/local/popup.hh:557
 msgid "Select items"
 msgstr "Seleccionar elementos"
 
-#: ../../xffm/fm/view/local/popup.hh:703
+#: ../../xffm/fm/local/popup.hh:575
 msgid "Regular Expression syntax is incorrect"
 msgstr "La sintaxis de la expresión regular es incorrecta"
 
-#: ../../xffm/fm/view/local/popup.hh:720
+#: ../../xffm/fm/local/popup.hh:592
 msgid "No selection"
 msgstr "No hay selección"
 
-#: ../../xffm/fm/view/local/popup.hh:720
+#: ../../xffm/fm/local/popup.hh:592
 msgid "No matches."
 msgstr "No hay coincidencias."
 
 #. entryResponse->setCheckButton(_("Run in Terminal"));
 #. entryResponse->setCheckButton(Mime<Type>::runInTerminal(path));
-#: ../../xffm/fm/view/local/popup.hh:800 ../../xffm/fm/view/local/popup.hh:893
-#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:323
+#: ../../xffm/fm/local/popup.hh:721 ../../xffm/fm/page/pathbar.hh:313
 msgid "Specify Output Directory..."
 msgstr "Especificar directorio de salida..."
 
-#: ../../xffm/fm/view/local/popup.hh:970
+#: ../../xffm/fm/local/popup.hh:799
 msgid "Create new..."
 msgstr "Crear nueva..."
 
-#: ../../xffm/fm/view/local/popup.hh:977 ../../xffm/fm/view/local/popup.hh:1058
+#: ../../xffm/fm/local/popup.hh:806 ../../xffm/fm/local/popup.hh:886
 msgid "New Name:"
 msgstr "Nombre nuevo:"
 
-#: ../../xffm/fm/view/local/popup.hh:986
+#: ../../xffm/fm/local/popup.hh:815
 msgid "No name"
 msgstr "Sin nombre"
 
-#: ../../xffm/fm/view/local/popup.hh:999
+#: ../../xffm/fm/local/popup.hh:828
 #, c-format
 msgid "Another file with the same name already exists in “%s”."
 msgstr "Ya existe otro archivo con el mismo nombre en «%s»."
 
-#: ../../xffm/fm/view/local/popup.hh:1024
+#: ../../xffm/fm/local/popup.hh:850 ../../xffm/fm/local/popup.hh:1010
+#: ../../xffm/fm/local/popup.hh:1026 ../../xffm/common/util.hh:1248
+msgid "Run in Terminal"
+msgstr "Ejecutar en un terminal"
+
+#: ../../xffm/fm/local/popup.hh:853
 msgid "Arguments for the Command"
 msgstr "Argumentos para el comando"
 
-#: ../../xffm/fm/view/local/popup.hh:1170
-msgid "You have selected multiple files or folders"
-msgstr "Ha seleccionado múltiples archivos o carpetas"
-
-#: ../../xffm/fm/view/local/popup.hh:1244 ../../xffm/fm/view/local/view.hh:156
+#: ../../xffm/fm/local/popup.hh:1047 ../../xffm/fm/local/view.hh:141
 msgid "Invalid entry"
 msgstr "Entrada no válida"
 
-#: ../../xffm/fm/view/local/view.hh:177
-#, c-format
-msgid "The volume '%s' is not mounted."
-msgstr "El volumen «%s» no está montado."
-
-#: ../../xffm/fm/view/local/properties.hh:245
+#: ../../xffm/fm/local/properties.hh:235
 msgid "Properties and Attributes"
 msgstr "Propiedades y atributos"
 
-#: ../../xffm/fm/view/local/properties.hh:274
+#: ../../xffm/fm/local/properties.hh:264
 msgid "File Mode:"
 msgstr "Modo archivo:"
 
-#: ../../xffm/fm/view/local/properties.hh:300
+#: ../../xffm/fm/local/properties.hh:290
 msgid "File:"
 msgstr "Archivo:"
 
@@ -1348,467 +1332,379 @@ msgstr "Archivo:"
 #. add signal handler to changed signal for combo box
 #. Add process buttons
 #.
-#: ../../xffm/fm/view/local/properties.hh:312
+#: ../../xffm/fm/local/properties.hh:302
 msgid "Apply changes"
 msgstr "Aplicar cambios"
 
-#: ../../xffm/fm/view/local/properties.hh:475
+#: ../../xffm/fm/local/properties.hh:462
 msgid "Successfully moved to trash."
 msgstr "Movido a la papelera con éxito."
 
-#: ../../xffm/fm/view/local/properties.hh:476
+#: ../../xffm/fm/local/properties.hh:463
 msgid "Source:"
 msgstr "Origen:"
 
-#: ../../xffm/fm/view/root/model.hh:82
+#: ../../xffm/fm/local/rm.hh:59
+#, c-format
+msgid "Delete %s"
+msgstr "Eliminar %s"
+
+#: ../../xffm/fm/local/rm.hh:61
+msgid "Warning: "
+msgstr "Atención: "
+
+#. gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
+#. title
+#: ../../xffm/fm/local/rm.hh:90
+msgid "Remove"
+msgstr "Quitar"
+
+#: ../../xffm/fm/local/rm.hh:140
+msgid "Apply to all"
+msgstr "Aplicar a todos"
+
+#. **************
+#. This is now available to BSD with rm -P option
+#: ../../xffm/fm/local/rm.hh:163 ../../xffm/common/gtk.hh:76
+msgid "Shred"
+msgstr "Triturar"
+
+#. We do not count "../"
+#: ../../xffm/fm/local/view.hh:48 ../../xffm/fm/base/monitor.hh:28
+#, c-format
+msgid "Files: %s"
+msgstr "Archivos: %s"
+
+#: ../../xffm/fm/root/model.hh:78
 msgid "Root Directory"
 msgstr "Directorio raíz"
 
-#: ../../xffm/fm/view/root/model.hh:98
+#: ../../xffm/fm/root/model.hh:94
 msgid "This is the root of the filesystem"
 msgstr "Esta es la raíz del sistema de archivos"
 
-#: ../../xffm/fm/view/root/model.hh:110
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:256
+#: ../../xffm/fm/root/model.hh:105
 msgid "Home Directory"
 msgstr "Directorio personal"
 
-#: ../../xffm/fm/view/root/model.hh:137
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:266
+#: ../../xffm/fm/root/model.hh:132
 msgid "Trash bin"
 msgstr "Papelera"
 
-#: ../../xffm/fm/view/root/model.hh:168 ../../xffm/fm/view/fstab/popup.hh:29
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:261
+#: ../../xffm/fm/root/model.hh:162 ../../xffm/fm/fstab/popup.hh:29
 msgid "Disk Image Mounter"
 msgstr "Montador de imágenes de discos"
 
-#: ../../xffm/fm/view/root/model.hh:176 ../../xffm/fm/view/root/model.hh:191
+#: ../../xffm/fm/root/model.hh:169 ../../xffm/fm/root/model.hh:185
 msgid "Mount local disks and devices"
 msgstr "Monta dispositivos y discos locales"
 
-#: ../../xffm/fm/view/root/model.hh:177 ../../xffm/fm/view/fstab/popup.hh:23
-#: ../../xffm/fm/view/fstab/view.hh:540
+#: ../../xffm/fm/root/model.hh:170 ../../xffm/fm/fstab/popup.hh:25
+#: ../../xffm/fm/fstab/view.hh:429
 msgid "eCryptfs Volume"
 msgstr "Volumen eCryptfs"
 
-#: ../../xffm/fm/view/root/model.hh:178 ../../xffm/fm/view/fstab/popup.hh:22
+#: ../../xffm/fm/root/model.hh:171 ../../xffm/fm/fstab/popup.hh:24
 msgid "SSHFS Remote Synchronization Folder"
 msgstr "Carpeta de sincronización remota SSHFS"
 
-#: ../../xffm/fm/view/root/model.hh:179 ../../xffm/fm/view/fstab/popup.hh:21
-#: ../../xffm/fm/view/fstab/view.hh:488
+#: ../../xffm/fm/root/model.hh:172 ../../xffm/fm/fstab/popup.hh:23
+#: ../../xffm/fm/fstab/view.hh:377
 msgid "NFS Network Volume"
 msgstr "Volumen de red NFS"
 
-#: ../../xffm/fm/view/root/model.hh:180 ../../xffm/fm/view/fstab/popup.hh:24
-#: ../../xffm/fm/view/fstab/view.hh:566
+#: ../../xffm/fm/root/model.hh:173 ../../xffm/fm/fstab/popup.hh:26
+#: ../../xffm/fm/fstab/view.hh:455
 msgid "CIFS Volume"
 msgstr "Volumen CIFS"
 
-#: ../../xffm/fm/view/root/model.hh:229
+#: ../../xffm/fm/root/model.hh:195
+msgid "Software Updater"
+msgstr "Actualizador de software"
+
+#: ../../xffm/fm/root/model.hh:218 ../../xffm/fm/root/model.hh:230
+msgid "Add or remove software installed on the system"
+msgstr "Añadir o quitar software instalado en el sistema"
+
+#: ../../xffm/fm/root/model.hh:271
 msgid "Go to bookmarked location"
 msgstr "Ir a una ubicación marcada"
 
-#: ../../xffm/fm/view/root/view.hh:71
+#. {N_("Add bookmark"), (void *)BasePopUp<Type>::noop, NULL, NULL},
+#: ../../xffm/fm/root/view.hh:61
 msgid "Empty trash"
 msgstr "Vaciar la papelera"
 
 #. File chooser
-#: ../../xffm/fm/view/fstab/popup.hh:129
+#: ../../xffm/fm/fstab/popup.hh:121
 msgid "Mount Device"
 msgstr "Montar dispositivo"
 
-#: ../../xffm/fm/view/fstab/popup.hh:141 ../../xffm/fm/view/fstab/view.hh:379
+#: ../../xffm/fm/fstab/popup.hh:133
 msgid "Mount point:"
 msgstr "Punto de montaje:"
 
-#. Since /dev is not concrete, the following test returns false...
-#.
-#. if (!g_file_test(name, G_FILE_TEST_IS_DIR)) return;
-#: ../../xffm/fm/view/fstab/view.hh:115 ../../xffm/fm/view/fstab/view.hh:131
-msgid "Disks"
-msgstr "Discos"
+#: ../../xffm/fm/fstab/view.hh:301
+msgid "Mounted on:"
+msgstr "Montado en:"
 
-#: ../../xffm/fm/view/fstab/view.hh:377
-msgid "No Label"
-msgstr "Sin etiqueta"
+#: ../../xffm/fm/fstab/view.hh:302
+msgid "Mount on"
+msgstr "Montar en"
 
-#: ../../xffm/fm/view/fstab/view.hh:378
-msgid "There is no file system available (unformatted)"
-msgstr "No hay ningún sistema de archivos disponible (sin formato)"
-
-#: ../../xffm/fm/view/fstab/view.hh:379
+#: ../../xffm/fm/fstab/view.hh:310 ../../xffm/fm/fstab/view.hh:312
 msgid "Not mounted"
 msgstr "Sin montar"
 
-#: ../../xffm/fm/view/fstab/view.hh:514
+#: ../../xffm/fm/fstab/view.hh:403
 msgid "SFTP (via SSH)"
 msgstr "SFTP (sobre SSH)"
 
-#: ../../xffm/fm/view/fstab/view.hh:869
+#: ../../xffm/fm/fstab/view.hh:667
 #, c-format
 msgid "Unmounting %s"
 msgstr "Desmontando %s"
 
-#: ../../xffm/fm/view/fstab/view.hh:869
+#: ../../xffm/fm/fstab/view.hh:667
 #, c-format
 msgid "Mounting %s"
 msgstr "Montando %s"
 
-#: ../../xffm/fm/view/base/signals.hh:803
-msgid "Trash is empty"
-msgstr "La papelera está vacía"
+#: ../../xffm/fm/dialog/menupopover.hh:128
+msgid "Home"
+msgstr "Casa"
 
-#: ../../xffm/fm/view/base/signals.hh:805
-msgid "Directory does not exist."
-msgstr "La carpeta no existe."
+#: ../../xffm/fm/dialog/menupopover.hh:129 ../../xffm/common/gtk.hh:64
+msgid "Open terminal"
+msgstr "Abrir terminal"
 
-#: ../../xffm/fm/view/treeview.hh:17
-msgid "Name"
-msgstr "Nombre"
+#: ../../xffm/fm/dialog/menupopover.hh:130
+msgid "Open a New Window"
+msgstr "Abrir una ventana nueva"
 
-#: ../../xffm/fm/view/treeview.hh:20
-msgid "Size"
-msgstr "Tamaño"
+#. {N_("Execute Shell Command"), (void *)MenuPopoverSignals<Type>::shell, (void *) menuButton_},
+#: ../../xffm/fm/dialog/menupopover.hh:132 ../../xffm/common/gtk.hh:69
+msgid "Search"
+msgstr "Buscar"
 
-#: ../../xffm/fm/view/treeview.hh:21
-msgid "Date"
-msgstr "Fecha"
+#: ../../xffm/fm/dialog/menupopover.hh:133 ../../xffm/common/gtk.hh:71
+msgid "Exit"
+msgstr "Salir"
 
-#: ../../xffm/fm/view/treeview.hh:22
-msgid "Mimetype"
-msgstr "Tipo Mime"
+#: ../../xffm/fm/dialog/dialog.hh:116
+msgid "Removed"
+msgstr "Eliminado"
 
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
+#: ../../xffm/fm/dialog/dialog.hh:132
+msgid "Detected device(s):"
+msgstr "Dispositivo(s) detectado(s):"
+
+#. Create the widgets
+#: ../../xffm/fm/page/vbuttonbox.hh:37 ../../xffm/common/gtk.hh:332
+msgid "Help"
+msgstr "Ayuda"
+
+#. File chooser
+#: ../../xffm/fm/page/pathbar.hh:306 ../../xffm/fm/page/pathbar.hh:308
+msgid "Go to"
+msgstr "Ir a"
+
+#: ../../xffm/fm/page/pathbar.hh:331
+msgid "Not a directory"
+msgstr "No es un directorio"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Renice Process"
+msgstr "Cambiar la prioridad del proceso"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Suspend"
+msgstr "Suspender"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Continue"
+msgstr "Continuar"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Interrupt"
+msgstr "Interrupción"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Hangup"
+msgstr "Cuelgue (hangup)"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "User 1 (USR1)"
+msgstr "Usuario 1 (USR1)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "User 2 (USR2)"
+msgstr "Usuario 2 (USR2)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "Terminate Task"
+msgstr "Terminar tarea"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "Abort"
+msgstr "Abortar"
+
+#: ../../xffm/fm/page/runbutton.hh:138
+msgid "Kill"
+msgstr "Matar"
+
+#: ../../xffm/fm/page/runbutton.hh:139
+msgid "Segmentation fault"
+msgstr "Fallo de segmentación"
+
+#: ../../xffm/fm/page/runbutton.hh:217
+msgid "PID"
+msgstr "PID"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:37
 msgid "Embedded Terminal"
 msgstr "Terminal empotrado"
 
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
+#: ../../xffm/fm/page/hbuttonbox.hh:38
 msgid "All items in the iconview."
 msgstr "Todos los elementos de la vista de iconos."
 
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
+#: ../../xffm/fm/page/hbuttonbox.hh:39
 msgid "Scripting"
 msgstr "Scripting"
 
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
+#: ../../xffm/fm/page/hbuttonbox.hh:40
 msgid "Clear Log"
 msgstr "Limpiar registro"
 
 #. Status textview
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
+#: ../../xffm/fm/page/hbuttonbox.hh:42
 msgid "Terminal font"
 msgstr "Tipografía del terminal"
 
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:135
-msgid "Renice Process"
-msgstr "Cambiar la prioridad del proceso"
+#: ../../xffm/fm/treeview.hh:17
+msgid "Name"
+msgstr "Nombre"
 
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:135
-msgid "Suspend"
-msgstr "Suspender"
+#: ../../xffm/fm/treeview.hh:20
+msgid "Size"
+msgstr "Tamaño"
 
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:135
-msgid "Continue"
-msgstr "Continuar"
+#: ../../xffm/fm/treeview.hh:21
+msgid "Date"
+msgstr "Fecha"
 
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid "Interrupt"
-msgstr "Interrupción"
+#: ../../xffm/fm/treeview.hh:22
+msgid "Mimetype"
+msgstr "Tipo Mime"
 
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid "Hangup"
-msgstr "Cuelgue (hangup)"
+#: ../../xffm/fm/treeview.hh:24
+msgid "TYPE"
+msgstr "TIPO"
 
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid "User 1 (USR1)"
-msgstr "Usuario 1 (USR1)"
+#: ../../xffm/fm/base/signals.hh:642
+msgid "Directory does not exist."
+msgstr "La carpeta no existe."
 
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:137
-msgid "User 2 (USR2)"
-msgstr "Usuario 2 (USR2)"
+#: ../../xffm/fm/base/signals.hh:644 ../../xffm/fm/base/signals.hh:646
+msgid "Trash is empty"
+msgstr "La papelera está vacía"
 
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:137
-msgid "Terminate Task"
-msgstr "Terminar tarea"
+#: ../../xffm/common/settings.hh:27
+msgid "New File:"
+msgstr "Archivo nuevo:"
 
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:137
-msgid "Abort"
-msgstr "Abortar"
+#: ../../xffm/common/gio.hh:235
+msgid "Could not copy item:"
+msgstr "No se ha podido copiar el objeto:"
 
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:138
-msgid "Kill"
-msgstr "Matar"
+#: ../../xffm/common/gio.hh:237
+msgid "Could not move item:"
+msgstr "No se ha podido mover el objeto:"
 
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:139
-msgid "Segmentation fault"
-msgstr "Fallo de segmentación"
+#: ../../xffm/common/gio.hh:239
+msgid "Create symbolic link"
+msgstr "Crear un enlace simbólico"
 
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:216
-msgid "PID"
-msgstr "PID"
+#: ../../xffm/common/gio.hh:276
+#, fuzzy, c-format
+msgid ""
+"Could not delete:\n"
+"%s"
+msgstr "No se pudo eliminar %s"
 
-#. File chooser
-#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:316
-#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:318
-msgid "Go to"
-msgstr "Ir a"
-
-#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:350
-msgid "Not a directory"
-msgstr "No es un directorio"
-
-#: ../../xffm/fm/dialog/notebook/page/page.hh:58
-msgid "loading..."
-msgstr "cargando…"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:11
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:214
-msgid "Remove Button Contents"
-msgstr "Quitar el contenido de los botones"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:67
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:209
-msgid "Add custom content"
-msgstr "Añadir contenido personalizado"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:68
-msgid "Select file to load"
-msgstr "Seleccionar archivo para cargar"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:125
+#: ../../xffm/common/gio.hh:278
 #, c-format
-msgid "Cannot load file %s. Reason: %s"
-msgstr "No se puede cargar el archivo %s. Razón: %s"
+msgid "Could not move %s to trash"
+msgstr "No se pudo mover %s a la papelera"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:154
-msgid "You need to restart the application"
-msgstr "Debe reiniciar la aplicación"
+#: ../../xffm/common/clipboard.hh:23 ../../xffm/common/dnd.hh:40
+msgid "Copying files locally"
+msgstr "Copiando archivo localmente"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:244
-msgid "Open a New Window"
-msgstr "Abrir una ventana nueva"
+#: ../../xffm/common/clipboard.hh:30 ../../xffm/common/dnd.hh:34
+msgid "Moving files"
+msgstr "Moviendo archivos"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:250
-msgid "Differences"
-msgstr "Diferencias"
+#: ../../xffm/common/dnd.hh:46
+msgid "Create Link"
+msgstr "Crear enlace"
 
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:172
-msgid "Open menu"
-msgstr "Abrir menú"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:224
-msgid "View as list"
-msgstr "Ver como lista"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:225
-msgid "Show hidden files"
-msgstr "Mostrar archivos ocultos"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:226
-msgid "Show Backup Files"
-msgstr "Mostrar archivos de respaldo"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:227
-msgid "Sort data in descending order"
-msgstr "Ordenar los datos descendentemente"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:262
-msgid "Main menu"
-msgstr "Menú principal"
-
-#: ../../xffm/fm/dialog/notebook/notebook.hh:56
-msgid "Long press time"
-msgstr "Tiempo de pulsación largo"
-
-#: ../../xffm/fm/dialog/dialog.hh:121
-msgid "Removed"
-msgstr "Eliminado"
-
-#: ../../xffm/fm/dialog/dialog.hh:142
-msgid "Detected device(s):"
-msgstr "Dispositivo(s) detectado(s):"
-
-#: ../../xffm/response/commandresponse.hh:19
-msgid "Running"
-msgstr "Ejecutándose"
-
-#. auto text = g_strdup_printf("%s (pid: %d)",
-#. _("Waiting for operation to finish..."),
-#. Tubo<Type>::getChild (pid));
-#: ../../xffm/response/commandresponse.hh:24
-msgid "Waiting for operation to finish..."
-msgstr "Esperando a que finalice la operación..."
-
-#: ../../xffm/response/passwdresponse.hh:19
-#: ../../xffm/response/passwdresponse.hh:24
-msgid "Enter password"
-msgstr "Introduzca la contraseña"
-
-#. gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
-#: ../../xffm/response/passwdresponse.hh:189
-msgid "User Input"
-msgstr "Entrada de usuario"
-
-#: ../../xffm/response/passwdresponse.hh:205
-msgid "Response Requested"
-msgstr "Pedida respuesta"
-
-#. this button is redundant since hands are on keyboard for password
-#: ../../xffm/response/passwdresponse.hh:252
-#: ../../xffm/response/passwdresponse.hh:625
-#: ../../xffm/response/entryresponse.hh:424
-msgid "Ok"
-msgstr "Aceptar"
-
-#: ../../xffm/response/passwdresponse.hh:330
-msgid "Preparing"
-msgstr "Preparando"
-
-#: ../../xffm/response/passwdresponse.hh:418
-msgid "sudo"
-msgstr "sudo"
-
-#: ../../xffm/response/passwdresponse.hh:420
-msgid "Command:"
-msgstr "Comando:"
-
-#: ../../xffm/response/passwdresponse.hh:423
-msgid "Permission denied"
-msgstr "Permiso denegado"
-
-#: ../../xffm/response/passwdresponse.hh:424
-msgid "Try to approach a problem from different angles."
-msgstr "Intenta enfocar los problemas desde ángulos diferentes."
-
-#: ../../xffm/response/passwdresponse.hh:425
-msgid "Do you want to retry?"
-msgstr "¿Desea volver a intentarlo?"
-
-#: ../../xffm/response/passwdresponse.hh:426
-msgid "Alternate:"
-msgstr "Alternativo:"
-
-#: ../../xffm/response/passwdresponse.hh:431
-msgid "No"
-msgstr "No"
-
-#: ../../xffm/response/passwdresponse.hh:468
+#: ../../xffm/common/util.hh:1200
 #, c-format
-msgid "%s does not exist."
-msgstr "%s no existe."
-
-#: ../../xffm/response/passwdresponse.hh:533
-msgid "Blowfish"
-msgstr "Blowfish"
-
-#: ../../xffm/response/passwdresponse.hh:534
-msgid "Encryption Key Approval"
-msgstr "Aprobación de la clave de cifrado"
-
-#: ../../xffm/response/passwdresponse.hh:568
-msgid "-o     print output to standard out. Implies -r."
+msgid ""
+"Scriptfile \"%s\" is not executable. Please set the executable-attribute on "
+"that file."
 msgstr ""
+"El guión «%s» no es ejecutable. Establezca el permiso de ejecución sobre ese "
+"archivo."
 
-#: ../../xffm/response/passwdresponse.hh:572
-msgid "-c     DO NOT compress files before encryption."
+#: ../../xffm/common/util.hh:1202 ../../xffm/common/util.hh:1237
+#, c-format
+msgid "Open with %s"
+msgstr "Abrir con %s"
+
+#: ../../xffm/common/util.hh:1202
+msgid "Text Editor"
+msgstr "Editor de textos"
+
+#: ../../xffm/common/util.hh:1239 ../../xffm/common/gtk.hh:65
+msgid "Execute Shell Command"
+msgstr "Ejecutar orden del intérprete de órdenes"
+
+#: ../../xffm/common/util.hh:1243
+msgid ""
+"Console: quickly run single commands -- write a command here and press enter."
 msgstr ""
+"Consola: ejecutar con rapidez órdenes sencillas (escriba aquí una orden y "
+"pulse «Intro»)."
 
-#: ../../xffm/response/passwdresponse.hh:576
-msgid "-r     DO NOT remove input files after processing"
-msgstr ""
+#: ../../xffm/common/gtk.hh:123
+msgid "New Tab"
+msgstr "Solapa nueva"
 
-#: ../../xffm/response/passwdresponse.hh:583
-msgid "Encryption key: "
-msgstr "Clave de cifrado: "
+#: ../../xffm/common/gtk.hh:335
+msgid "OK"
+msgstr "La suma coincide"
 
-#: ../../xffm/response/passwdresponse.hh:595
-msgid "Confirm:"
-msgstr "Confirmar:"
+#: ../../xffm/common/run.hh:344
+msgid "error"
+msgstr "error"
 
-#: ../../xffm/response/passwdresponse.hh:608
-msgid "Sorry, passwords do not match"
-msgstr "Las contraseñas no coinciden"
+#: ../../xffm/common/run.hh:348
+msgid "warning"
+msgstr "atención"
 
-#: ../../xffm/response/passwdresponse.hh:616
-msgid "Minimum length:"
-msgstr "Longitud mínima:"
+#: ../../xffm/common/mime.hh:101 ../../xffm/common/mime.hh:143
+msgid "No Read Permission"
+msgstr "Sin permiso de lectura"
 
-#: ../../xffm/response/customresponse.hh:56
-msgid "Execute command"
-msgstr "Ejecutar comando"
+#: ../../xffm/common/preview.hh:593
+msgid "Empty file"
+msgstr "Archivo vacío"
 
-#. XXX folder or file entry should be determined on .ini file (probably just inherit from comboresponse for multiple files options (selected files)...
-#: ../../xffm/response/customresponse.hh:104
-msgid "Source File"
-msgstr "Archivo fuente"
-
-#: ../../xffm/response/timeoutresponse.hh:57
-msgid "Dismiss"
-msgstr "Descartar"
-
-#: ../../xffm/response/commandprogressresponse.hh:31
-msgid "Items:"
-msgstr "Elementos:"
-
-#: ../../xffm/response/chooserresponse.hh:23
-msgid "Open"
-msgstr "Abrir"
-
-#: ../../xffm/response/chooserresponse.hh:56
-msgid "Choose directory"
-msgstr "Elegir una carpeta"
-
-#: ../../xffm/response/chooserresponse.hh:60
-msgid "Choose file"
-msgstr "Elegir un archivo"
-
-#: ../../xffm/completion/bash.hh:133
-msgid "Completion mode:"
-msgstr "Modo de terminación:"
-
-#: ../../xffm/completion/bash.hh:134
-msgid "command"
-msgstr "comando"
-
-#: ../../xffm/completion/bash.hh:135
-msgid "file"
-msgstr "fichero"
-
-#: ../../xffm/completion/bash.hh:145 ../../xffm/completion/bash.hh:149
-msgid "Options >>"
-msgstr "Opciones >>"
-
-#: ../../xffm/completion/base.hh:28
-msgid "Command"
-msgstr "Comando"
-
-#: ../../xffm/completion/base.hh:31
-msgid "File"
-msgstr "Archivo"
-
-#: ../../xffm/completion/base.hh:34
-msgid "Command history"
-msgstr "Historial de órdenes"
-
-#: ../../xffm/completion/base.hh:40
-msgid "Variable"
-msgstr "Variable"
-
-#: ../../xffm/completion/base.hh:43
-msgid "Host"
-msgstr "Host"
-
-#: ../../xffm/completion/base.hh:55
-msgid "Found no match"
-msgstr "No se ha encontrado ninguna coincidencia"
-
-#: ../../xffm/completion/base.hh:141 ../../xffm/completion/base.hh:142
-msgid "Matches"
-msgstr "Coincidencias"
-
-#: ../../xffm/completion/base.hh:142
-msgid "Too many files open"
-msgstr "Demasiados archivos abiertos"
+#: ../../xffm/common/preview.hh:648
+#, c-format
+msgid "Cannot read from %s"
+msgstr "No se puede leer de %s"
 

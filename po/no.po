@@ -1,0 +1,4425 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:42:16 CDT 2013 ---
+#
+# Eskild Hustvedt <i18n@zerodogg.org>, 2004-2012.
+# Gaute Hvoslef Kvalnes <ai98ghk@stud.hib.no>, 1999-2006.
+# Torstein Winterseth <kvikende@fsfe.org>, 2010.
+# Sigurd Gartmann <sigurdga@yahoo-inc.com>, 2003-2008.
+# Author@Betawiki: Hubuntu <>.
+# Håvard Korsvoll <korsvoll@skulelinux.no>, 2003-2008.
+# Roy-Magne Mo <rmo@sunnmore.net>, 2001-2010.
+# Author@Betawiki: Jon Harald Søby <>.
+# Karl Ove Hufthammer <karl@huftis.org>, 2002-2013.
+# Eirik U. Birkeland <eirbir@gmail.com>, 2008-2011.
+# Kjartan Maraas <kmaraas@gnome.org>, 1998-2013.
+# Christian Fredrik Kalager Schaller <Uraeus@linuxrising.org>, 2000-2001.
+# Torstein Adolf Winterseth <kvikende@fsfe.org>, 2009-2011.
+# Eskild Hustvedt, <eskildh@gnome.org>, 2008.
+# Christian Schaller <Uraeus@gnome.org>, 2002.
+# Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
+# Thomas Niederreiter <tn@xcdroast.org>, 2002-2003.
+# Åsmund Skjæveland <aasmunds@ulrik.uio.no>, 2003-2012.
+# Copyright (C) Roy-Magne Mo <rmo@sunnmore.net>, 2001.
+# Monica Gausen <monica@gausen.net>, 2001.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"POT-Creation-Date: 1999-09-12 17:58+0200\n"
+"PO-Revision-Date: 2003-01-22 01:07+0100\n"
+"Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
+"Language-Team: Norwegian <no@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8-bit\n"
+
+msgid "<Image>/Filters/Render/Intensity Landscape"
+msgstr "<Image>/Filtre/Render/Intensitet landskap"
+
+msgid "FATAL: unable to create $tmp: $!\n"
+msgstr "FATAL: kunne ikke opprette $tmp: $!\n"
+
+msgid ""
+"Expected an INT32 but got '%s'. Add '*1' if you really intend to pass in a "
+"string"
+msgstr ""
+"Forventet en INT32 men fikk '%s'. Legg til '*1' hvis du virkelig ønsket å "
+"sende en streng"
+
+msgid "<Image>/Filters/Web/Prepare for GIF..."
+msgstr "<Image>/Filtre/Web/Forbered for GIF..."
+
+msgid "<Image>/Filters/Animation/Animate Cells..."
+msgstr "<Image>/Filtre/Animasjon/Animér celler..."
+
+msgid ""
+"       interface-arguments are\n"
+"           -o | --output <filespec>   write image to disk, don't display\n"
+"           -i | --interact            let the user edit the values first\n"
+"       script-arguments are\n"
+msgstr ""
+"        grensesnitt-argumenter er\n"
+"           -o | --output <filespec>    skriv bilde til disk, ikke vis\n"
+"           -i | --interact             la brukeren redigere verdiene først\n"
+"        skript-argumenter er\n"
+
+msgid "<Toolbox>/Xtns/Render/Font Table..."
+msgstr "<Toolbox>/Utvd/Render/Skrifttypetabell..."
+
+msgid "being called as '%s', but '%s' not registered in the pdb"
+msgstr "blir kalt som '%s', men '%s' er ikke registrert i pdb"
+
+msgid "argument type %s expected (not %s)"
+msgstr "argumenttype %s ventet (ikke %s)"
+
+msgid "Browse"
+msgstr "Bla gjennom"
+
+msgid "Reset all values to their default"
+msgstr "Nullstill alle verdier til sine utgangsverdier"
+
+msgid "WARNING: client tried to unlock without holding a lock"
+msgstr "ADVARSEL: klienten forsøkte å fjerne en lås uten å holde den"
+
+msgid "required callback 'run' not found\n"
+msgstr "nødvendig tilbakekall 'run' ikke funnet\n"
+
+msgid "$: illegal switch, try $0 --help\n"
+msgstr "$: ugyldig flagg, prøv $0 --help\n"
+
+msgid "<Toolbox>/Xtns/Render/Logos/Glowing Steel"
+msgstr "<Toolbox>/Utvd/Render/Logoer/Glødende stål"
+
+msgid "Brush Selection Dialog"
+msgstr "Børstevalg dialog"
+
+msgid "<Image>/Filters/Render/Triangulation Landscape"
+msgstr "<Image>/Filtre/Render/Triangulert landskap"
+
+msgid "gimp procedure '%s' not found"
+msgstr "gimp prosedyre '%s' ikke funnet"
+
+msgid "Pattern Selection Dialog"
+msgstr "Mønstervalg dialog"
+
+msgid "<Image>/Filters/Web/Perl-o-tine..."
+msgstr "<Image>/Filtre/Web/Perl-o-tine..."
+
+msgid "function '$exe' not found in this script (must be one of "
+msgstr "funksjonen '$exe' ikke funnet i dette skriptet (må være en av "
+
+msgid ""
+"pixel size mismatch, pdl has %d channel pixels but %d channels are required"
+msgstr ""
+"pikselstørrelsen stemmer ikke, pdl har %d kanaler med piksler men %d kanaler "
+"behøves"
+
+msgid "Load"
+msgstr "Last"
+
+msgid "/Xtns/Render"
+msgstr "/Utvd/Render"
+
+msgid "<Toolbox>/Xtns/Perl/Control Center..."
+msgstr "<Toolbox>/Utvd/Perl/Kontrollsenter..."
+
+msgid "illegal parasite specification, reference expected"
+msgstr "ugyldig parasitt-spesifikasjon, referanse forventet"
+
+msgid "Date/Version"
+msgstr "Dato/Versjon"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "<Image>/Layers/Center Layer"
+msgstr "<Image>/Lag/Sentrer lag"
+
+msgid "wrong authorization, aborting connection"
+msgstr "feil autorisasjon, avbryter tilkoblingen"
+
+msgid "BG"
+msgstr "BG"
+
+msgid "<Toolbox>/Xtns/Render/Bricks..."
+msgstr "<Toolbox>/Utvd/Render/Murstein..."
+
+msgid "<Toolbox>/Xtns/Animation/Seth Spin..."
+msgstr "<Toolbox>/Utvd/Animasjon/Seth spin..."
+
+msgid "illegal type for colour specification"
+msgstr "ugyldig type for fargespesifikasjon"
+
+msgid "xlfdunpack: unmatched XLFD '$fontname'\n"
+msgstr "xlfdunpack: ikke funnet XLFD '$fontnavn'\n"
+
+msgid "<Toolbox>/Xtns/Render/Povray/Preferences..."
+msgstr "<Toolbox>/Utvd/Render/Povray/Brukervalg..."
+
+msgid "<Image>/Filters/Render/Random Blends..."
+msgstr "<Image>/Filtre/Render/Tilfeldig blanding..."
+
+msgid "Plug-In Path"
+msgstr "Sti til tillegg"
+
+msgid "You can't run this script with an INDEXED image!!"
+msgstr "Du kan ikke kjøre dette skriptet på et INDEKSERT bilde!!"
+
+msgid "<Image>/Guides/Guide Grid..."
+msgstr "<Image>/Guider/Guide rutenett..."
+
+msgid "accepted unix connection"
+msgstr "aksepterte unix forbindelse"
+
+msgid "server going down..."
+msgstr "tjeneren går ned..."
+
+msgid "trying to start gimp with options \"$opt\"\n"
+msgstr "prøver å starte gimp med alternativene \"$opt\"\n"
+
+msgid "expected perl-server at other end of socket, got @r\n"
+msgstr "forventet perl-tjener på andre siden av socketen, fant @r\n"
+
+msgid "pdl height != region height"
+msgstr "pdl høyde != regionhøyde"
+
+msgid "<Toolbox>/Xtns/Gimp::Fu Example..."
+msgstr "<Toolbox>/Utvd/Gimp::Fu eksempel..."
+
+msgid "received QUIT request"
+msgstr "mottok AVSLUTT-forespørsel"
+
+msgid " = [argument error]\n"
+msgstr " = [argumentfeil]\n"
+
+msgid "%s arguments for function '%s'"
+msgstr "%s argumenter for funksjon '%s'"
+
+msgid " matching functions"
+msgstr " like funksjoner"
+
+msgid "<Toolbox>/Xtns/Render/Random Art #1..."
+msgstr "<Toolbox>/Utvd/Render/Tilfeldig kunst #1..."
+
+msgid ""
+"Usage: $0 [gimp-args..] [interface-args..] [script-args..]\n"
+"       gimp-arguments are\n"
+"           -gimp <anything>           used internally only\n"
+"           -h | -help | --help | -?   print some help\n"
+"           -v | --verbose             be more verbose in what you do\n"
+"           --host|--tcp HOST[:PORT]   connect to HOST (optionally using "
+"PORT)\n"
+"                                      (for more info, see Gimp::Net(3))\n"
+msgstr ""
+"Bruk: $0 [gimp-arg..] [grensesnitt-arg..] [skript-arg..]\n"
+"        gimp-argumenter er\n"
+"            -gimp <hva-som-helst>\n"
+"            -h | -help | --help | -?   vis hjelptekst\n"
+"            -v | --verbose             vis mer informasjon\n"
+"            --host|--tcp VERT[:PORT]   koble til VERT (alternativt kan PORT "
+"brukes)\n"
+"                                       (for mer info, se Gimp::Net(3)\n"
+
+msgid ""
+"An even number of frames is needed for spin back.\n"
+"Adjusted frames up to $frames"
+msgstr ""
+"Et likt antall rammer er nødvendig for spin back.\n"
+"Justerte antall rammer opp til $frames"
+
+msgid "<Image>/Image/Alpha/Alpha2Color..."
+msgstr "<Image>/Bilde/Alpha/Alpha-til-farge..."
+
+msgid "<Image>/Filters/Logulator/SOTA Chrome"
+msgstr "<Image>/Filtre/Logulator/SOTA-krom"
+
+msgid "%s: procedural database execution failed"
+msgstr "%s: kjøring av prosedyredatabasen feilet"
+
+msgid "authorization required for tcp connections"
+msgstr "autorisasjon nødvendig for tcp-forbindelser"
+
+msgid "<Toolbox>/Xtns/Perl/Server"
+msgstr "<Toolbox>/Utvd/Perl/Tjener"
+
+msgid "function name contains dashes instead of underscores"
+msgstr "funksjonsnavn inneholder bindestreker i stedet for understreking"
+
+msgid "authorization ok, but: $r[1]\n"
+msgstr "autorisasjon ok, men: %r[1]\n"
+
+msgid "a color must have three components (array elements)"
+msgstr "en farge må ha tre komponenter (matriseelementer)"
+
+msgid "Spin Layer SRC (250ms)"
+msgstr "Spinn lag SRC (250ms)"
+
+msgid "$: unknown/illegal file-save option"
+msgstr "$: ukjent/ugyldig fillagringsalternativ"
+
+msgid "TYPE"
+msgstr "TYPE"
+
+msgid "Gradient Selection Dialog"
+msgstr "Gradientvelger dialog"
+
+msgid "<Image>/Filters/Map/Circular Shape..."
+msgstr "<Image>/Filtre/Kart/Sirkulær form..."
+
+msgid "Function Info"
+msgstr "Funksjonsinfo"
+
+msgid "unable to open $rgbdbpath"
+msgstr "kunne ikke åpne $rgbdbpath"
+
+msgid "<Image>/Filters/Logulator/Imigre-26"
+msgstr "<Image>/Filtre/Logulator/Imigre-26"
+
+msgid "Text"
+msgstr "Tekst"
+
+msgid "<Image>/Filters/Colors/Colour To Alpha..."
+msgstr "<Image>/Filtre/Farger/Farge til alpha..."
+
+msgid ""
+"Your text is too long, and would result in a too big layer! Please, shorten "
+"it and retry"
+msgstr "Teksten er for lang, og ville resultert i et for stort lag! Vennligst gjør den kortere og prøv på nytt"
+
+msgid "/Xtns/Perl"
+msgstr "/Utvd/Perl"
+
+msgid "no additional information available, use --help\n"
+msgstr "ingen tilleggsinformasjon tilgjengelig, bruk --help\n"
+
+msgid "<Toolbox>/Xtns/Parasite Editor..."
+msgstr "<Toolbox>/Utvd/Parasitt editor..."
+
+msgid "gimptilesetdata is not yet implemented\n"
+msgstr "gimptilesetdata er ikke implementert ennå\n"
+
+msgid "Visual Scriptor"
+msgstr "Visuell skripter"
+
+msgid "No horizontal or vertical guides found. Aborted."
+msgstr "Ingen horisontale eller vertikale guider funnet. Avbrutt."
+
+msgid "<Image>/Filters/Map/Image Tile..."
+msgstr "<Image>/Filtre/Kart/Bildeflis..."
+
+msgid "<Image>/Guides/To Selection..."
+msgstr "<Image>/Guider/Til utvalg..."
+
+msgid "<Image>/Guides/Remove Guides"
+msgstr "<Image>/Guider/Fjern guider"
+
+msgid "get current background colour from the gimp"
+msgstr "hent aktiv bakgrunnsfarge fra gimp"
+
+msgid "<Toolbox>/Xtns/PDB Explorer..."
+msgstr "<Toolbox>/Utvd/PDB-leser..."
+
+msgid "WARNING: shared locking requested but not implemented"
+msgstr "ADVARSEL: delt låsing forespurt men ikke implementert"
+
+msgid "parameter '$entry->[1]' is not optional\n"
+msgstr "parameteren '$entry->[1]' er ikke valgfri\n"
+
+msgid "$s: not an integer\n"
+msgstr "$s: ikke et heltall\n"
+
+msgid "unable to read '$fn': $!"
+msgstr "kunne ikke lese '$fn': $!"
+
+msgid "[undefined]"
+msgstr "[udefinert]"
+
+msgid "function/macro \"$name\" not found in $class"
+msgstr "funksjon/makro \"$name\" ikke funnet i $class"
+
+msgid "<Toolbox>/Xtns/Render/Pixelgenerator..."
+msgstr "<Toolbox>/Utvd/Render/Pikselgenerator..."
+
+msgid "Scale factor has not to be 0"
+msgstr "Skaleringsfaktor må være forskjellig fra 0"
+
+msgid "accepted tcp connection from "
+msgstr "aksepterte tcp-forbindelse fra "
+
+msgid "illegal parasite specification, expected three array members"
+msgstr "ulovlig parasitt spesifikasjon, forventet tre tabellmedlemmer"
+
+msgid "unable to read temporary file $tmp: $!"
+msgstr "kunne ikke lese fra midlertidig fil $tmp: $!"
+
+msgid "<Toolbox>/Xtns/Render/Yin-Yang..."
+msgstr "<Toolbox>/Utvd/Render/Yin-Yang..."
+
+msgid "PDB Explorer - the olof edition (yet still an alpha version)"
+msgstr "PDB-leser - olof utgaven (fremdeles en alpha-versjon)"
+
+msgid "Illegal default font description for $function: $val\n"
+msgstr "Ugyldig standard skrifttypebeskrivelse for $function: $val\n"
+
+msgid "<Image>/Select/Round Rectangular Selection..."
+msgstr "<Image>/Velg/Rundt rektangulært utvalg..."
+
+msgid ""
+"BLURB:\n"
+"\n"
+"$blurb\n"
+"\n"
+"HELP:\n"
+"\n"
+"$help"
+msgstr ""
+"BLURB:\n"
+"\n"
+"$blurb\n"
+"\n"
+"HJELP:\n"
+"\n"
+"$help"
+
+msgid "Fileselector for $name"
+msgstr "Filvelger for $name"
+
+msgid "accepting connections on port $port"
+msgstr "aksepterer forbindelser på port $port"
+
+msgid "<Image>/Filters/Logulator/Blended II..."
+msgstr "<Image>/Filtre/Logulator/Blandet II..."
+
+msgid ""
+"$function: function name contains unusual characters, good style is to use "
+"only 0-9, a-z and "
+msgstr ""
+"$function: funksjonsnavnet inneholder uvanlige tegn, god stil er å bruke kun "
+"0-9, a-z og "
+
+msgid ""
+"menupath must start with <Image>, <Toolbox>, <Load>, <Save> or <None>!"
+msgstr ""
+"menystien må starte med <Image>, <Toolbox>, <Load>, <Save> eller <None>!"
+
+msgid "<Image>/Filters/Render/Highlight Edges..."
+msgstr "<Image>/Filtre/Render/Lys opp kanter..."
+
+msgid "Spin Layer DEST (250ms)"
+msgstr "Spinn lag DEST (250ms)"
+
+msgid "register called with too many or wrong arguments\n"
+msgstr "register kalt med for mange eller gale argumenter\n"
+
+msgid "params and returnvals must be array refs (even if empty)!"
+msgstr "params og returnvals må være tabellreferanser (selv om de er tomme)!"
+
+msgid "$ is not a valid import tag for package $pkg"
+msgstr "$ er ikke en gyldig import-tag for pakken $pkg"
+
+msgid "<Image>/Filters/Colors/Map To Gradient..."
+msgstr "<Image>/Filtre/Farger/Tilegne til gradient..."
+
+msgid "<Toolbox>/Xtns/Render/Logos/Firetext..."
+msgstr "<Toolbox>/Utvd/Render/Logoer/Flammetekst"
+
+msgid "unable to accept unix connection: $!\n"
+msgstr "kunne ikke akseptere unix forbindelse: $!\n"
+
+msgid "Save"
+msgstr "Lagre"
+
+msgid ""
+"\n"
+"\n"
+"EMBEDDED POD DOCUMENTATION:\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+"INNEBYGGET POD DOKUMENTASJON:\n"
+
+msgid "/Filters/Logulator"
+msgstr "/Filtre/Logulator"
+
+msgid ""
+"the gtk perl module is required to run\n"
+"this plug-in in interactive mode\n"
+msgstr ""
+"gtk perl modulen er nødvendig for å kjøre\n"
+"dette tillegget i interaktiv modus\n"
+
+msgid "interface '$interfacetype' unsupported."
+msgstr "grensesnitt '$interfacetype' ikke støttet."
+
+msgid "unable to accept tcp connection: $!\n"
+msgstr "kunne ikke akseptere tcp forbindelse: $!\n"
+
+msgid "<Image>/Image/Alpha/Clear Alpha..."
+msgstr "<Image>/Bilde/Alpha/Nullstill alpha..."
+
+msgid ""
+"dimension mismatch, pdl has dimension %d but at least %d dimensions required"
+msgstr ""
+"dimensjonsfeil, pdl har dimensjon %d men minst %d dimensjon er nødvendig"
+
+msgid "[unfinished]\n"
+msgstr "[uferdig]\n"
+
+msgid "could not connect to the gimp server (make sure Perl-Server is running)"
+msgstr ""
+"kunne ikke koble til gimp tjeneren (forsikre deg om at Perl-Server kjører)"
+
+msgid "<Image>/Filters/Logulator/Crystal"
+msgstr "<Image>/Filtre/Logulator/Krystall"
+
+msgid "Cannot call '$AUTOLOAD' at this time"
+msgstr "Kan ikke kalle '$AUTOLOAD' på det nåværende tidspunkt"
+
+msgid "<Toolbox>/Xtns/Render/Povray/Texture..."
+msgstr "<Toolbox>Utvd/Render/Povray/Tekstur..."
+
+msgid "unauthorized command received, aborting connection"
+msgstr "ikke autorisert kommando mottatt, avbryter forbindelsen"
+
+msgid "<Toolbox>/Xtns/Animation/Billboard..."
+msgstr "<Toolbox>/Utvd/Animasjon/Billboard..."
+
+msgid "Defaults"
+msgstr "Standardverdier"
+
+msgid "<Image>/Filters/Render/Add Dust..."
+msgstr "<Image>/Filtre/Render/Legg til støv..."
+
+msgid "text string is empty"
+msgstr "tekststrengen er tom"
+
+msgid "server requests authorization, but no authorization available\n"
+msgstr ""
+"tjeneren forespør autorisasjon, men ingen autorisasjon er tilgjengelig\n"
+
+msgid "<Toolbox>/Xtns/Visual Scriptor..."
+msgstr "<Toolbox>/Utvd/Visuell skripter..."
+
+msgid "All fields were not completed, sorry."
+msgstr "Alle felter ble ikke fylt ut. Beklager."
+
+msgid "/Xtns/Render/Logos"
+msgstr "/Utvd/Render/Logoer"
+
+msgid "Image Types"
+msgstr "Bildetyper"
+
+msgid "Menu Path"
+msgstr "Menysti"
+
+msgid "Unable to grok '%s' as colour specifier"
+msgstr "Kunne ikke forstå '%s' som fargespesifikasjon"
+
+msgid "9x15bold"
+msgstr "9x15uthevet"
+
+msgid "Accelerator"
+msgstr "Aksellerator"
+
+msgid "too many arguments, use --help\n"
+msgstr "for mange argumenter, bruk --help\n"
+
+msgid "gimp-perl-pixel functions require the PDL::Core module"
+msgstr "gimp-perl-pixel funksjonene trenger PDL::Core modulen"
+
+msgid "dunno how to return param type %d"
+msgstr "kan ikke returnere parametertype %d"
+
+msgid "Cancel"
+msgstr "Avbryt"
+
+msgid "only blessed scalars accepted here"
+msgstr "kun velsignede skalarverdier aksepteres her"
+
+msgid ""
+"dimension mismatch, pdl has dimension %d but at most %d dimensions allowed"
+msgstr "dimensjonsfeil, pdl har dimensjon %d men minst %d dimensjoner tillates"
+
+msgid "argument is not of type %s"
+msgstr "argumentet er ikke av type %d"
+
+msgid "WARNING"
+msgstr "ADVARSEL"
+
+msgid "Description"
+msgstr "Beskrivelse"
+
+msgid "Unable to convert a reference to type '%s'"
+msgstr "Kunne ikke konvertere en referanse til type '%s'"
+
+msgid ""
+"conversion from string to type $pftype2string{$type} is not yet "
+"implemented\n"
+msgstr "konvertering fra streng til type $pftype2string{$type} er ikke implementert ennå\n"
+
+msgid "argument incompatible with type IMAGE"
+msgstr "argumentet er ikke kompatibelt med type IMAGE"
+
+msgid "<Image>/Filters/Blur/2x2 Blur"
+msgstr "<Image>/Filtre/Blur/2x2 blur"
+
+msgid "not enough"
+msgstr "ikke nok"
+
+msgid "<Image>/Filters/Render/Burst..."
+msgstr "<Image>/Filtre/Render/Burst..."
+
+msgid "-*-courier-medium-r-normal--*-120-*-*-*-*-*"
+msgstr "-*-courier-medium-r-normal--*-120-*-*-*-*-*"
+
+msgid "Synopsis"
+msgstr "Synopsis"
+
+msgid "<Image>/Filters/Map/Pixelmap..."
+msgstr "<Image>/Filtre/Kart/Pikselkart..."
+
+msgid "Color"
+msgstr "Farge"
+
+msgid "FATAL: canonicalizecolour did not return a value!"
+msgstr "FATAL: canonicalizecolour returnerte ikke en verdi!"
+
+msgid "<Image>/Filters/Apply Perl Expression..."
+msgstr "<Image>/Filtre/Bruk perl-uttrykk..."
+
+msgid "DESCRIPTION"
+msgstr "BESKRIVELSE"
+
+msgid "Unable to open '$filename' for writing: $!\n"
+msgstr "Kunne ikke åpne '$filename' for skriving: $!\n"
+
+msgid "<Image>/Filters/Distorts/MirrorSplit..."
+msgstr "<Image>/Filtre/Forvrengning/MirrorSplit..."
+
+msgid "<Save> plug-in called without the 5 standard arguments!\n"
+msgstr "<Save> tillegg kalt uten de 5 standardargumentene!\n"
+
+msgid "unable to create socketpair for gimp communications: $!"
+msgstr "kunne ikke opprette socketpar for gimp kommunikasjon: $!"
+
+msgid "accepting connections in $host"
+msgstr "aksepterer forbindelser i $host"
+
+msgid "unable to create '$fn': $!"
+msgstr "kunne ikke opprette '$fn': $!"
+
+msgid "Previous"
+msgstr "Forrige"
+
+msgid "WARNING: $function returned something that is not an image: \"$img\"\n"
+msgstr "ADVARSEL: $function returnerte noe som ikke er et bilde: \"$img\"\n"
+
+msgid "Command"
+msgstr "Kommando"
+
+msgid "perl-arrayref required as datatype for a gimp-array"
+msgstr "perl-arraydef behøves som datatype for en gimp-array"
+
+msgid "accepting connections on port $Gimp::Net::defaulttcpport"
+msgstr "aksepterer forbindelser på port $Gimp::Net::defaulttcpport"
+
+msgid "required callback 'query' not found\n"
+msgstr "nødvendig tilbakekall 'query' ikke funnet\n"
+
+msgid "<Toolbox>/Xtns/CreateImages"
+msgstr "<Toolbox>/Utvd/CreateImages"
+
+msgid "Save $name"
+msgstr "Lagre $name"
+
+msgid "runmode must be INTERACTIVE, NONINTERACTIVE or RUNWITHLASTVALS\n"
+msgstr ""
+"runmode må være INTERACTIVE, NONINTERACTIVE eller RUNWITHLASTVALS\n"
+
+msgid "<Image>/Video/VCR Console..."
+msgstr "<Image>/Video/VCR-konsoll..."
+
+msgid "<Image>/Filters/Edge-Detect/2x2 Edge Detect"
+msgstr "<Image>/Filtre/Finn-kant/2x2 kantsøking"
+
+msgid "Copyright"
+msgstr "Copyright"
+
+msgid "interface=... tag is no longer supported\n"
+msgstr "grensesnitt=... tag er ikke støttet lenger\n"
+
+msgid ""
+"Expected an INT32 but got '%s'. Maybe you meant '%s' instead and forgot to "
+"'use strict'"
+msgstr ""
+"Forventet en INT32 men fikk '%s'. Kanskje du mente '%s' i stedet, og glemte "
+"å 'bruk streng'"
+
+msgid "<Image>/Filters/Logulator/Transparent Logo..."
+msgstr "<Image>/Filtre/Logulator/Gjennomsiktig logo..."
+
+msgid ""
+"malformed paramdef, expected [PARAMTYPE,\"NAME\",\"DESCRIPTION\"] or "
+"PARAMTYPE"
+msgstr ""
+"feilformatert paramdef, forventet [PARAMTYPE,\"NAME\",\"DESCRIPTION\"] "
+"eller PARAMTYPE"
+
+msgid "Background"
+msgstr "Bakgrunn"
+
+msgid "last argument to gimppatternselectwidget must be scalar ref"
+msgstr "siste argument til gimppatternselectwidget må være en skalar ref"
+
+msgid "<Toolbox>/Xtns/Render/Stamps..."
+msgstr "<Toolbox>/Utvd/Render/Frimerker..."
+
+msgid "accepting connections on $unixpath"
+msgstr "aksepterer forbindelser $unixpath"
+
+msgid "Load $name"
+msgstr "Last $name"
+
+msgid "<Image>/Filters/Noise/Ditherize..."
+msgstr "<Image>/Filtre/Støy/Ditherize..."
+
+msgid "Saving '$filename' as DATAURL..."
+msgstr "Lagrer '$filname' som DATAURL..."
+
+msgid ", %d bytes data]"
+msgstr ", %d bytes data]"
+
+msgid "unable to create listening tcp socket: $!\n"
+msgstr "kunne ikke opprette lyttende tcp socket: $!\n"
+
+msgid ""
+"gimppixelrgnsregister supports only 1, 2 or 3 arguments, upgrade to gimp-"
+"1.1 and report this error"
+msgstr ""
+"gimppixelrgnsregister støtter kun 1, 2 eller 3 argumenter, oppgrader til "
+"gimp-1.1 og rapporter denne feilen"
+
+msgid "<Image>/Filters/Render/Brushed Metal..."
+msgstr "<Image>/Filtre/Render/Børstet metall..."
+
+msgid "Bumpmap"
+msgstr "Bumpmap"
+
+msgid "<Image>/Filters/Text/TeX String..."
+msgstr "<Image>/Filtre/Tekst/TeX-streng..."
+
+msgid "unable to convert Gimp::Drawable into Gimp::GimpDrawable (id %d)"
+msgstr "kunne ikke konvertere Gimp::Drawable til Gimp::GimpDrawable (id %d)"
+
+msgid "Saving '$filename' as COLORHTML..."
+msgstr "Lagrer '$filname' som COLORHTML..."
+
+msgid "too many"
+msgstr "for mange"
+
+msgid "required callback 'net' not found\n"
+msgstr "nødvendig tilbakekall 'net' ikke funnet\n"
+
+msgid "<Image>/Filters/Render/Add Glow"
+msgstr "<Image>/Filtre/Render/Legg til glød"
+
+msgid "Author"
+msgstr "Forfatter"
+
+msgid "You can't run this script without an ALPHA CHANNEL!!\n"
+msgstr "Du kan ikke kjøre dette skriptet uten en ALPHA KANAL!!\n"
+
+msgid "More..."
+msgstr "Mer..."
+
+msgid "Seth Spin..."
+msgstr "Seth spin..."
+
+msgid "arguments to main not yet supported!"
+msgstr "argumenter til main er ikke støttet ennå!"
+
+msgid "<Image>/Filters/Logulator/Newsprint text"
+msgstr "<Image>/Filtre/Logulator/Newsprint tekst"
+
+msgid "<Image>/Filters/Noise/Xach Vision..."
+msgstr "<Image>/Filtre/Støy/Xach vision..."
+
+msgid "WARNING: client disconnected while holding an active lock\n"
+msgstr "ADVARSEL: klienten koblet fra mens den holdt en aktiv lås\n"
+
+msgid "NAME"
+msgstr "NAVN"
+
+msgid "Help"
+msgstr "Hjelp"
+
+msgid "<Image>/Filters/Logulator/Carved"
+msgstr "<Image>/Filtre/Logulator/Skjært"
+
+msgid "no font specified, using default"
+msgstr "ingen skrifttype spesifisert, bruker standard"
+
+msgid "<Image>/Filters/Map/Xach Shadows..."
+msgstr "<Image>/Filtre/Kart/Xach skygger..."
+
+msgid "<Image>/Filters/Map/Xach Blocks..."
+msgstr "<Image>/Filtre/Kart/Xach blokker..."
+
+msgid "gimptilegetdata is not yet implemented\n"
+msgstr "gimptilegetdata er ikke implementert ennå\n"
+
+msgid "<Image>/Filters/Logulator/Speed text"
+msgstr "<Image>/Filtre/Logulator/Hurtigtekst"
+
+msgid "unable to grok colour specification"
+msgstr "kunne ikke forstå fargespesifikasjonen"
+
+msgid "<Image>/Edit/Repeat  Duplicate..."
+msgstr "<Image>/Rediger/Gjenta  dupliser..."
+
+msgid "You need at least 2 layers to perform prep4gif"
+msgstr "Du må ha minst 2 lag for å utføre prep4gif"
+
+msgid "too many arguments"
+msgstr "for mange argumenter"
+
+msgid "expected protocol version $Gimp::PROTVERSION, but server uses $r[0]\n"
+msgstr ""
+"forventet protokoll versjon $Gimp::PROTVERSION, men tjeneren bruker $r[0]\n"
+
+msgid "-*-helvetica-medium-r-normal-*-34-*-*-*-p-*-iso8859-1"
+msgstr "-*-helvetica-medium-r-normal-*-34-*-*-*-p-*-iso8859-1"
+
+msgid "Restore values to the previous ones"
+msgstr "Gjenopprett verdier til de tidligere"
+
+msgid "<Image> plug-in called without both image and drawable arguments!\n"
+msgstr ""
+"<Image> tillegg kalt uten argumenter for både bilde og tegnbart objekt!\n"
+
+msgid ", authorization required"
+msgstr ", autorisasjon nødvendig"
+
+msgid "<Image>/Filters/Noise/Feedback..."
+msgstr "<Image>/Filtre/Støy/Feedback..."
+
+msgid "unable to create listening unix socket: $!\n"
+msgstr "kunne ikke opprette lyttende unix socket: $!\n"
+
+msgid ""
+"invalid GIMPHOST: 'spawn' is not a valid connection method for the server"
+msgstr ""
+"ugyldig GIMPHOST: 'spawn' er ikke en gyldig forbindelsesmetode for tjeneren"
+
+msgid "<Image>/View/3D Surface..."
+msgstr "<Image>/Vis/3D overflate..."
+
+msgid "Last Modified"
+msgstr "Sist endret"
+
+msgid "Shortcuts"
+msgstr "Snarveier"
+
+msgid ""
+"the gtk perl module is required to open a dialog\n"
+"window, running with default values"
+msgstr ""
+"gtk perl modulen er nødvendig for å åpne et dialog-\n"
+"vindu, under kjøring med standardverdier"
+
+msgid "<Image>/Filters/Logulator/Web title header"
+msgstr "<Image>/Filtre/Logulator/Web titteloverskrift"
+
+msgid "<Image>/Filters/Web/Webify..."
+msgstr "<Image>/Filtre/Web/Webifiser..."
+
+msgid "<Load> plug-in called without the 3 standard arguments!\n"
+msgstr "<Load> tillegg kalt uten de 3 standardargumentene!\n"
+
+msgid "Font Selection Dialog ($desc)"
+msgstr "Skrifttypevalg dialg ($desc)"
+
+msgid "%s: procedural database execution failed on invalid input arguments"
+msgstr ""
+"%s: kjøring av prosedyredatabasen feilet på ugyldig argumenter for inndata"
+
+msgid ""
+"Your gallery ($galleryfile) has been generated through Gallery plug-in with "
+"$totalentries entries"
+msgstr "Ditt galleri ($galleryfile) er generert med $totalentries oppføringer av Galleri-tillegget"
+
+msgid "(UNINITIALIZED)"
+msgstr "(UINITIALISERT)"
+
+msgid "closing connection %d (%d requests in %g seconds)"
+msgstr "lukker forbindelse %d (%d forespørseler på %g sekunder)"
+
+msgid "<Image>/Filters/Text/Fit Text..."
+msgstr "<Image>/Filtre/Tekst/Tilpass tekst..."
+
+msgid "<Toolbox>/Xtns/Render/Golden Mean..."
+msgstr "<Toolbox>/Utvd/Render/Gyllen middelverdi..."
+
+msgid "authorization failed: $r[1]\n"
+msgstr "autorisasjon feilet: $r[1]\n"
+
+msgid "<Image>/Guides/Center Guide..."
+msgstr "<Image>/Guider/Sentreringsguide..."
+
+msgid "server version $Gimp::VERSION started"
+msgstr "tjener versjon $Gimp::VERSION startet"
+
+msgid "authorization unnecessary"
+msgstr "autorisasjon ikke nødvendig"
+
+msgid ""
+"$function: calling $AUTOLOAD without specifying the :auto import tag is "
+"deprecated!\n"
+msgstr ""
+"$function: kall av $AUTOLOAD uten å spesifisere :auto import tag'en er "
+"utdatert!\n"
+
+msgid "<Image>/Filters/Enhance/Warp Sharp..."
+msgstr "<Image>/Filtre/Enhance/Warp sharp..."
+
+msgid "unable to open Gimp::Net communications socket: $!\n"
+msgstr "kunne ikke åpne Gimp::Net kommunikasjonssocket: $!\n"
+
+msgid "<Toolbox>/Xtns/Render/Logos/Inner Bevel..."
+msgstr "<Toolbox>/Utvd/Render/Logoer/Inner bevel..."
+
+msgid "<Image>/Filters/Distorts/Scratches..."
+msgstr "<Image>/Filtre/Forvrengning/Skraping..."
+
+msgid "Close"
+msgstr "Lukk"
+
+msgid "illegal parasite specification, arrayref expected"
+msgstr "ugyldig parasittspesifikasjon, arraydef forventet"
+
+msgid "<Image>/Filters/Misc/Border Average..."
+msgstr "<Image>/Filtre/Forskjellig/Gjennomsnitt for grense..."
+
+msgid "unable to fork: $!"
+msgstr "kunne ikke kjøre fork: $!"
+
+msgid "Unsupported argumenttype $type"
+msgstr "Ikke støttet argumenttype $type"
+
+msgid "get current foreground colour from the gimp"
+msgstr "hent aktiv forgrunnsfarge fra gimp"
+
+msgid "You can't run this script without an ALPHA CHANNEL!!"
+msgstr "Du kan ikke kjøre dette skriptet uten en ALPHA KANAL!!"
+
+msgid "<Toolbox>/Xtns/Perl Example Plug-in"
+msgstr "<Toolbox>/Utvd/Perl eksempel tillegg"
+
+msgid "<Image>/Filters/Misc/Magick..."
+msgstr "<Image>/Filtre/Forskjellig/Magick..."
+
+msgid "<Image>/Filters/Render/Stampify..."
+msgstr "<Image>/Filtre/Render/Frimerke..."
+
+msgid "<Image>/Select/Round..."
+msgstr "<Image>/Velg/Rund..."
+
+msgid "Unable to read temporary image tile $tmp: $!"
+msgstr "Kunne ikke lese midlertidig bildeflis $tmp: $!"
+
+msgid "Help for "
+msgstr "Hjelp om "
+
+msgid "export failed"
+msgstr "eksport feilet"
+
+msgid "<Toolbox>/Xtns/Render/Gallery Maker"
+msgstr "<Toolbox>/Utvd/Render/Gallerimaker"
+
+msgid "<Image>/Filters/Text/Terral Text..."
+msgstr "<Image>/Filtre/Tekst/Terral tekst..."
+
+msgid "dunno how to pass arg type %d"
+msgstr "kan ikke sende argumenttype %d"
+
+msgid "/Xtns/Render/Povray"
+msgstr "/Utvd/Render/Povray"
+
+msgid "<Image>/Filters/Distorts/Windify..."
+msgstr "<Image>/Filtre/Forvrengning/Vind..."
+
+msgid " (press Tab to complete)"
+msgstr " (trykk tab for å fullføre)"
+
+msgid ""
+"Make sure you've got write access to selected path ...\n"
+"Maybe the target path already exist in which case you can simply change the "
+"Gallery title and launch again"
+msgstr ""
+"Sjekk at du har skrivetilgang til valgt sti...\n"
+"Kanskje målet allerede eksisterer. I så fall kan du bare endre tittel på galleriet og starte på nytt"
+
+msgid "This module was built without support for PDL."
+msgstr "Denne modulen ble bygget uten støtte for PDL."
+
+msgid "plug-in returned %d more values than expected"
+msgstr "tillegget returnerte %d flere verdier enn forventet"
+
+msgid "FG"
+msgstr "FG"
+
+msgid "url size is too large ($max > 1024)\n"
+msgstr "url størrelse er for stor ($max > 1024)\n"
+
+msgid "$function: argument/return value '$p->[1]' has illegal type '$p->[0]'"
+msgstr "$function: argument/returverdi '$p->[1]' har ugyldig type 'p->[0]'"
+
+msgid "Edit"
+msgstr "Rediger"
+
+msgid "<Image>/Select/Triangle..."
+msgstr "<Image>/Velg/Triangel..."
+
+msgid "<Image>/Filters/Animation/BlowInOut..."
+msgstr "<Image>/Filtre/Animasjon/Blåsinnut..."
+
+msgid "<Image>/Layers/Stack/Reorder Layers..."
+msgstr "<Image>/Lag/Stable/Omorganiser lagene..."
+
+msgid "<Image>/Filters/Enhance/2x2 Contrast Enhance"
+msgstr "<Image>/Filtre/Enhance/2x2 kontrast enhance"
+
+msgid ""
+"$function: argument name '$p->[1]' contains illegal characters, only 0-9, a-"
+"z and  allowed"
+msgstr ""
+"$function: argumentnavn 'p->[1]' inneholder ugyldige tegn, kun 0-9, a-z og  "
+"er tillatt"
+
+msgid "<Image>/Filters/Colors/Fire..."
+msgstr "<Image>/Filtre/Farger/Flamme..."
+
+msgid "OK"
+msgstr "OK"
+
+msgid "illegal command received, aborting connection"
+msgstr "ugyldig kommando mottatt, avbryter forbindelsen"
+
+
+msgid "%s:"
+msgstr "%s"
+
+msgid "Font"
+msgstr "Skrifttype"
+
+msgid "Pattern"
+msgstr "Mønster"
+
+msgid "Supersample"
+msgstr "Supersample"
+
+msgid "Thickness"
+msgstr "Tykkhet"
+
+msgid "Down"
+msgstr "Ned"
+
+msgid "Left"
+msgstr "Venstre"
+
+msgid "Orientation"
+msgstr "Orientering"
+
+msgid "Right"
+msgstr "Høyre"
+
+msgid "Size"
+msgstr "Størrelse"
+
+msgid "Up"
+msgstr "Opp"
+
+msgid "Radius"
+msgstr "Radius"
+
+msgid "Padding"
+msgstr "Fyll"
+
+msgid "Pressed"
+msgstr "Presset"
+
+msgid "Diameter"
+msgstr "Diameter"
+
+msgid "Height"
+msgstr "Høyde"
+
+msgid "Width"
+msgstr "Bredde"
+
+msgid "Looped"
+msgstr "Løkke"
+
+msgid "Custom Gradient"
+msgstr "Egendefinert gradient"
+
+msgid "FG-BG-HSV"
+msgstr "FG-BG-HSV"
+
+msgid "FG-BG-RGB"
+msgstr "FG-BG-RGB"
+
+msgid "FG-Transparent"
+msgstr "FG-gjennomsiktig"
+
+msgid "Gradient"
+msgstr "Gradient"
+
+msgid "Offset (pixels)"
+msgstr "Avstand (piksler)"
+
+msgid "Background Color"
+msgstr "Bakgrunnsfarge"
+
+msgid "Spots density X"
+msgstr "Punkttetthet X"
+
+msgid "Spots density Y"
+msgstr "Punkttetthet Y"
+
+msgid "Fadeout"
+msgstr "Fadeut"
+
+msgid "Prepare for GIF"
+msgstr "Forbered for GIF"
+
+msgid "Speed (pixels/frame)"
+msgstr "Hastighet (piksler/ramme)"
+
+msgid "Color 1"
+msgstr "Farge 1"
+
+msgid "Color 2"
+msgstr "Farge 2"
+
+msgid "Color 3"
+msgstr "Farge 3"
+
+msgid "Granularity"
+msgstr "Granularitet"
+
+msgid "Smooth"
+msgstr "Myk"
+
+msgid "Background Image"
+msgstr "Bakgrunnsbilde"
+
+msgid "Invert"
+msgstr "Inverter"
+
+msgid "Offsets (pixels * 2)"
+msgstr "Avstander (piksler * 2)"
+
+msgid "Azimuth"
+msgstr "Azimuth"
+
+msgid "Blur X"
+msgstr "Blur X"
+
+msgid "Blur Y"
+msgstr "Blur Y"
+
+msgid "Depth"
+msgstr "Dybde"
+
+msgid "Elevation"
+msgstr "Forhøyning"
+
+msgid "Stains"
+msgstr "Flekker"
+
+msgid "Spread"
+msgstr "Spredning"
+
+msgid "Offset X"
+msgstr "Avstand X"
+
+msgid "Offset Y"
+msgstr "Avstand Y"
+
+msgid "Opacity"
+msgstr "Ugjennomsiktighet"
+
+msgid "Columns"
+msgstr "Kolonner"
+
+msgid "Erase"
+msgstr "Slett"
+
+msgid "Even"
+msgstr "Lik"
+
+msgid "Fill with BG"
+msgstr "Fyll med BG"
+
+msgid "Odd"
+msgstr "Odde"
+
+msgid "Rows"
+msgstr "Rader"
+
+msgid "Scale X"
+msgstr "Skala X"
+
+msgid "Scale Y"
+msgstr "Skala Y"
+
+msgid "Granularity (1 is Low)"
+msgstr "Granularitet (1 er lav)"
+
+msgid "Shadow"
+msgstr "Skygge"
+
+msgid "End X"
+msgstr "Slutt X"
+
+msgid "End Y"
+msgstr "Slutt Y"
+
+msgid "Start X"
+msgstr "Startverdi for X"
+
+msgid "Start Y"
+msgstr "Startverdi for Y"
+
+msgid "Roughness"
+msgstr "Røffhet"
+
+msgid "Seed"
+msgstr "Utgangsverdi"
+
+msgid "Randomness"
+msgstr "Tilfeldighet"
+
+msgid "Sharpness (degrees)"
+msgstr "Skarphet (grader)"
+
+msgid "Feathering"
+msgstr "Fjær"
+
+msgid "Spacing"
+msgstr "Mellomrom"
+
+msgid "Density (%)"
+msgstr "Tetthet (%)"
+
+msgid "Defocus"
+msgstr "Fjern fokus"
+
+msgid "Mottle"
+msgstr "Flekklegg"
+
+msgid "Sepia"
+msgstr "Bruntone"
+
+msgid "Angle"
+msgstr "Vinkel"
+
+msgid "Pixelize"
+msgstr "Lag til piksler"
+
+msgid "Padding X"
+msgstr "Fyll X"
+
+msgid "Padding Y"
+msgstr "Fyll Y"
+
+msgid "Detail in Middle"
+msgstr "Detalj i midten"
+
+msgid "Tile"
+msgstr "Flis"
+
+msgid "Black"
+msgstr "Sort"
+
+msgid "Smear"
+msgstr "Smør"
+
+msgid "Number"
+msgstr "Antall"
+
+msgid "Lighting (degrees)"
+msgstr "Lyssetting (grader)"
+
+msgid "Radius (pixels)"
+msgstr "Radius (piksler)"
+
+msgid "Frames"
+msgstr "Rammer"
+
+msgid "Antialias"
+msgstr "Antialias"
+
+msgid "Hexagons"
+msgstr "Heksagoner"
+
+msgid "Octagons"
+msgstr "Oktagoner"
+
+msgid "Squares"
+msgstr "Ruter"
+
+msgid "IIR"
+msgstr "IIR"
+
+msgid "RLE"
+msgstr "RLE"
+
+msgid "Amplitude"
+msgstr "Amplityde"
+
+msgid "Invert direction"
+msgstr "Inverter retning"
+
+msgid "Wavelength"
+msgstr "Bølgelengde"
+
+msgid "Tiny-Fu console mode allows only interactive invocation"
+msgstr "Tiny-Fu konsollmodus tillater bare interaktiv kjøring"
+
+msgid "/Tiny-Fu/"
+msgstr "/Tiny-Fu/"
+
+msgid "Current Command"
+msgstr "Aktiv kommando"
+
+msgid "Script Arguments"
+msgstr "Skriptargumenter"
+
+msgid "Author:"
+msgstr "Forfatter:"
+
+msgid "Copyright:"
+msgstr "Kopirettighet:"
+
+msgid "Date:"
+msgstr "Dato:"
+
+msgid "Image Types:"
+msgstr "Bildetyper:"
+
+msgid "Filename"
+msgstr "Filnavn"
+
+msgid "Search by Name"
+msgstr "Søk etter navn"
+
+msgid "Search by Blurb"
+msgstr "Søk etter blurb"
+
+msgid "Search:"
+msgstr "Søk:"
+
+msgid "Searching by name - please wait"
+msgstr "Søker etter navn - vennligst vent"
+
+msgid "Searching by blurb - please wait"
+msgstr "Søker etter blurb - vennligst vent"
+
+msgid "Searching - please wait"
+msgstr "Søker - vennligst vent"
+
+msgid "No matches"
+msgstr "Ingen treff"
+
+msgid "<Toolbox>/Xtns/Tiny-Fu/Logos/Carved..."
+msgstr "<Toolbox>/Utvd/Tiny-Fu/Logoer/Carved..."
+
+msgid "<Toolbox>/Xtns/Tiny-Fu/Logos/Crystal..."
+msgstr "<Toolbox>/Utvd/Tiny-Fu/Logoer/Krystall..."
+
+msgid "<Toolbox>/Xtns/Tiny-Fu/Logos/Imigre-26..."
+msgstr "<Toolbox>/Utvd/Tiny-Fu/Logoer/Imigre-26..."
+
+msgid "<Toolbox>/Xtns/Tiny-Fu/Logos/Newsprint Text..."
+msgstr "<Toolbox>/Utvd/Tiny-Fu/Logoer/Nyhetstekst..."
+
+msgid "<Toolbox>/Xtns/Tiny-Fu/Logos/SOTA Chrome..."
+msgstr "<Toolbox>/Utvd/Tiny-Fu/Logoer/SOTA krom..."
+
+msgid "<Toolbox>/Xtns/Tiny-Fu/Logos/Speed Text..."
+msgstr "<Toolbox>/Utvd/Tiny-Fu/Logoer/Hurtigtekst..."
+
+msgid "<Toolbox>/Xtns/Tiny-Fu/Logos/Text Circle..."
+msgstr "<Toolbox>/Utvd/Tiny-Fu/Logoer/Tekstsirkel..."
+
+msgid "<Toolbox>/Xtns/Tiny-Fu/Logos/Web Title Header..."
+msgstr "<Toolbox>/Utvd/Tiny-Fu/Logoer/Web titteltopptekst..."
+
+msgid "DB Browser"
+msgstr "DB-leser"
+
+msgid "Blurb:"
+msgstr "Blurb:"
+
+msgid "In:"
+msgstr "Inn:"
+
+msgid "Out:"
+msgstr "Ut:"
+
+msgid "Help:"
+msgstr "Hjelp:"
+
+msgid "Font Size (pixels)"
+msgstr "Tekststørrelse (piksler)"
+
+msgid "Transparent Background"
+msgstr "Gjennomsiktig bakgrunn"
+
+msgid "Unable to open a stream on the SIOD output pipe"
+msgstr "Kunne ikke åpne en strøm på SIOD utskriftsrøret"
+
+msgid "<Toolbox>/Xtns/Web Browser/Developer FAQ"
+msgstr "<Toolbox>/Utvd/Nettleser/Utvikler OBS"
+
+msgid "<Toolbox>/Xtns/Web Browser/GIMP Bugs"
+msgstr "<Toolbox>/Utvd/Nettleser/GIMP feilrapporter"
+
+msgid "<Toolbox>/Xtns/Web Browser/GIMP Manual"
+msgstr "<Toolbox>/Utvd/Nettleser/GIMP brukerhåndbok"
+
+msgid "<Toolbox>/Xtns/Web Browser/GIMP News"
+msgstr "<Toolbox>/Utvd/Nettleser/GIMP nyheter"
+
+msgid "<Toolbox>/Xtns/Web Browser/GIMP Tutorials"
+msgstr "<Toolbox>/Utvd/Nettleser/GIMP veiledere"
+
+msgid "<Toolbox>/Xtns/Web Browser/GIMP.ORG/Documenation"
+msgstr "<Toolbox>/Utvd/Nettleser/GIMP.ORG/Dokumentasjon"
+
+msgid "<Toolbox>/Xtns/Web Browser/GIMP.ORG/Download"
+msgstr "<Toolbox>/Utvd/Nettleser/GIMP.ORG/Nedlasting"
+
+msgid "<Toolbox>/Xtns/Web Browser/GIMP.ORG/GIMP Art"
+msgstr "<Toolbox>/Utvd/Nettleser/GIMP.ORG/GIMP kunst"
+
+msgid "<Toolbox>/Xtns/Web Browser/GIMP.ORG/GTK"
+msgstr "<Toolbox>/Utvd/Nettleser/GIMP.ORG/GTK"
+
+msgid "<Toolbox>/Xtns/Web Browser/GIMP.ORG/Links"
+msgstr "<Toolbox>/Utvd/Nettleser/GIMP.ORG/Lenker"
+
+msgid "<Toolbox>/Xtns/Web Browser/GIMP.ORG/Mailing Lists"
+msgstr "<Toolbox>/Utvd/Nettleser/GIMP.ORG/E-post lister"
+
+msgid "<Toolbox>/Xtns/Web Browser/GIMP.ORG/Resources"
+msgstr "<Toolbox>/Utvd/Nettleser/GIMP.ORG/Ressurser"
+
+msgid "<Toolbox>/Xtns/Web Browser/GIMP.ORG/The GIMP"
+msgstr "<Toolbox>/Utvd/Nettleser/GIMP.ORG/GIMP"
+
+msgid "<Toolbox>/Xtns/Web Browser/Gimp-Savvy.com"
+msgstr "<Toolbox>/Utvd/Nettleser/Gimp-Savvy.com"
+
+msgid "<Toolbox>/Xtns/Web Browser/Grokking the GIMP"
+msgstr "<Toolbox>/Utvd/Nettleser/\"Grokking the GIMP\""
+
+msgid "<Toolbox>/Xtns/Web Browser/User FAQ"
+msgstr "<Toolbox>/Utvd/Nettleser/Bruker OBS"
+
+msgid "Fonts"
+msgstr "Skrifttyper"
+
+msgid "<Image>/Tiny-Fu/Render/Make Grid System..."
+msgstr "<Image>/Tiny-Fu/Render/Lag rutenett..."
+
+msgid "Grids X"
+msgstr "Rutenett X"
+
+msgid "Grids Y"
+msgstr "Rutenett Y"
+
+msgid "<Toolbox>/Xtns/Tiny-Fu/Patterns/Trochoid..."
+msgstr "<Toolbox>/Utvd/Tiny-Fu/Mønstre/Trochoid..."
+
+msgid "Base Radius (pixels)"
+msgstr "Basisradius (piksler)"
+
+msgid "Erase before Draw"
+msgstr "Slett før tegning"
+
+msgid "Pen Rad. / Wheel Rad. [0.0:1.0]"
+msgstr "Penneradius / hjulradius [0.0:1.0]"
+
+msgid "Wheel Radius (hypo < 0 < epi)"
+msgstr "Hjulradius (hypo < 0 < epi)"
+
+msgid ""
+"At least one font you've choosen is invalid.\n"
+"Please check your settings.\n"
+msgstr ""
+"Minst en skrifttype du har valgt er ugyldig.\n"
+"Vennligst sjekk dine instillinger.\n"
+
+msgid "<Image>/Tiny-Fu/Animators/Selection to AnimImage..."
+msgstr "<Image>/Tiny-Fu/Animatorer/Utvalg til AnimImage..."
+
+msgid "Anim-Filter for all Copies"
+msgstr "Anim-filter for alle kopier"
+
+msgid "Fill with BG Color"
+msgstr "Fyll med BG-farge"
+
+
+msgid "No comment for this program."
+msgstr "Ingen kommentar for dette programmet."
+
+msgid "States must be numbers. Move can only be 'r' or 'l'."
+msgstr "Tilstander må være tall. Flytt kan kun være 'r' eller 'l'."
+
+msgid "State"
+msgstr "Tilstand"
+
+msgid "Read"
+msgstr "Les"
+
+msgid "Write"
+msgstr "Skriv"
+
+msgid "Move"
+msgstr "Flytt"
+
+msgid "New State"
+msgstr "Ny tilstand"
+
+msgid "Editing is still alpha. Come back later or hack."
+msgstr "Redigering er fremdeles alpha. Kom tilbake senere eller hack."
+
+msgid "Edit Or Create Row"
+msgstr "Rediger eller lag rad"
+
+msgid "Set"
+msgstr "Sett"
+
+msgid "State: %d"
+msgstr "Tilstand: %d"
+
+msgid "Stopped"
+msgstr "Stanset"
+
+msgid "Save gTuring Program File"
+msgstr "Lagre gTuring programfil"
+
+msgid "Comment"
+msgstr "Kommentar"
+
+msgid "Open gTuring Program File"
+msgstr "Åpne gTuring programfilen"
+
+msgid "Tape Setting"
+msgstr "Instillinger for bånd"
+
+msgid "Please enter the tape:"
+msgstr "Vær snill å sette inn båndet:"
+
+msgid "Machine's states"
+msgstr "Maskinens tilstander"
+
+msgid "Animation Speed"
+msgstr "Animasjonshastighet"
+
+msgid "Miliseconds between steps:"
+msgstr "Millisekunder mellom steg:"
+
+msgid "gturing"
+msgstr "gturing"
+
+msgid "A Turing Machine for GNOME"
+msgstr "En turing maskin for GNOME"
+
+msgid "Comment..."
+msgstr "Kommentar..."
+
+msgid "View the program's comment."
+msgstr "Vis programmets kommentar."
+
+msgid "States..."
+msgstr "Tilstander..."
+
+msgid "Open a table with the machine's states."
+msgstr "Åpne en tabell med maskinens tilstander."
+
+msgid "Play Speed..."
+msgstr "Spillhastighet..."
+
+msgid "Set playing speed."
+msgstr "Sett spillhastighet."
+
+msgid "Tape..."
+msgstr "Bånd..."
+
+msgid "Set the machine's tape."
+msgstr "Sett maskinens bånd."
+
+msgid "Reset"
+msgstr "Tilbakesett"
+
+msgid "Stop"
+msgstr "Stopp"
+
+msgid "Run"
+msgstr "Kjør"
+
+msgid "Step"
+msgstr "Steg"
+
+msgid "Welcome to gTuring."
+msgstr "Velkommen til gTuring."
+
+msgid "^                   "
+msgstr "^                     "
+
+msgid "Nothing dropped.\n"
+msgstr "Ingenting sluppet.\n"
+
+msgid "What ? "
+msgstr "Hva ?"
+
+msgid "It's beyond your power to do that.\n"
+msgstr "Det er hinsides din makt å gjøre dette.\n"
+
+msgid "It's beyond my power to do that.\n"
+msgstr "Det er hinsides min makt å gjøre dette.\n"
+
+msgid "You use word(s) I don't know! "
+msgstr "Du bruker ord jeg ikke forstår! "
+
+msgid "I don't understand your command. "
+msgstr "Jeg forstår ikke kommandoen din. "
+
+msgid "I can't do that yet. "
+msgstr "Jeg kan ikke gjøre det ennå. "
+
+msgid "Light has run out! "
+msgstr "Lyset har gått ut! "
+
+msgid "Your light has run out. "
+msgstr "Lyset ditt har gått ut. "
+
+msgid "Light runs out in "
+msgstr "Lyset går ut om "
+
+msgid " turns. "
+msgstr " trekk. "
+
+msgid "Your light is growing dim. "
+msgstr "Lyset blir svakere. "
+
+msgid "Copyright (C) 1997 Alan Cox"
+msgstr "Copyright (C) 1997 Alan Cox"
+
+msgid "North"
+msgstr "Nord"
+
+msgid "East"
+msgstr "Øst"
+
+msgid "South"
+msgstr "Sør"
+
+msgid "West"
+msgstr "Vest"
+
+msgid "List"
+msgstr "Liste"
+
+msgid "What am I carrying"
+msgstr "Hva jeg bærer"
+
+msgid "New"
+msgstr "Nytt"
+
+msgid "Agnes"
+msgstr "Agnes"
+
+msgid "Auld lang syne"
+msgstr "Auld lang syne"
+
+msgid "Bakers dozen"
+msgstr "Bakerens dusin"
+
+msgid "Bakers game"
+msgstr "Bakerens spill"
+
+msgid "Beleaguered castle"
+msgstr "Beleiret slott"
+
+msgid "Block ten"
+msgstr "Blokk ti"
+
+msgid "Bristol"
+msgstr "Bristol"
+
+msgid "Camelot"
+msgstr "Camelot"
+
+msgid "Canfield"
+msgstr "Canfield"
+
+msgid "Clock"
+msgstr "Klokke"
+
+msgid "Cover"
+msgstr "Dekke"
+
+msgid "Diamond mine"
+msgstr "Diamantgruve"
+
+msgid "Doublets"
+msgstr "Dubletter"
+
+msgid "Eagle wing"
+msgstr "Ørnevinge"
+
+msgid "Easthaven"
+msgstr "Easthaven"
+
+msgid "Eight off"
+msgstr "Åtte av"
+
+msgid "Elevator"
+msgstr "Heis"
+
+msgid "Escalator"
+msgstr "Eskalator"
+
+msgid "First law"
+msgstr "Første lov"
+
+msgid "Fortress"
+msgstr "Fort"
+
+msgid "Fortunes"
+msgstr "Fortunes"
+
+msgid "Fourteen"
+msgstr "Fjorten"
+
+msgid "Freecell"
+msgstr "Freecell"
+
+msgid "Gay gordons"
+msgstr "Gay gordons"
+
+msgid "Glenwood"
+msgstr "Glenwood"
+
+msgid "Golf"
+msgstr "Golf"
+
+msgid "Gypsy"
+msgstr "Sigøyner"
+
+msgid "Helsinki"
+msgstr "Helsinki"
+
+msgid "Hopscotch"
+msgstr "Hopscotch"
+
+msgid "Isabel"
+msgstr "Isabel"
+
+msgid "Jamestown"
+msgstr "Jamestown"
+
+msgid "Jumbo"
+msgstr "Jumbo"
+
+msgid "Kansas"
+msgstr "Kansas"
+
+msgid "King albert"
+msgstr "Kong Albert"
+
+msgid "Klondike"
+msgstr "Klondike"
+
+msgid "Labyrinth"
+msgstr "Labyrint"
+
+msgid "Lady jane"
+msgstr "Lady Jane"
+
+msgid "Maze"
+msgstr "Maze"
+
+msgid "Monte carlo"
+msgstr "Monte Carlo"
+
+msgid "Neighbor"
+msgstr "Nabo"
+
+msgid "Odessa"
+msgstr "Odessa"
+
+msgid "Osmosis"
+msgstr "Osmose"
+
+msgid "Peek"
+msgstr "Peek"
+
+msgid "Pileon"
+msgstr "Pileon"
+
+msgid "Plait"
+msgstr "Plait"
+
+msgid "Poker"
+msgstr "Poker"
+
+msgid "Quatorze"
+msgstr "Quatorze"
+
+msgid "Royal east"
+msgstr "Royal east"
+
+msgid "Scorpion"
+msgstr "Skorpion"
+
+msgid "Scuffle"
+msgstr "Scuffle"
+
+msgid "Seahaven"
+msgstr "Seahaven"
+
+msgid "Sir tommy"
+msgstr "Sir Tommy"
+
+msgid "Sol"
+msgstr "Sol"
+
+msgid "Spiderette"
+msgstr "Spiderette"
+
+msgid "Spider"
+msgstr "Edderkopp"
+
+msgid "Straight up"
+msgstr "Straight up"
+
+msgid "Streets and alleys"
+msgstr "Gater og alléer"
+
+msgid "Template"
+msgstr "Mal"
+
+msgid "Thieves"
+msgstr "Tyver"
+
+msgid "Thirteen"
+msgstr "Tretten"
+
+msgid "Thumb and pouch"
+msgstr "Tommel og pung"
+
+msgid "Treize"
+msgstr "Treize"
+
+msgid "Union square"
+msgstr "Union square"
+
+msgid "Valentine"
+msgstr "Valentine"
+
+msgid "Westhaven"
+msgstr "Westhaven"
+
+msgid "Whitehead"
+msgstr "Whitehead"
+
+msgid "Will o the wisp"
+msgstr "Will o the wisp"
+
+msgid "Yield"
+msgstr "Yield"
+
+msgid "Yukon"
+msgstr "Yukon"
+
+msgid "Zebra"
+msgstr "Sebra"
+
+msgid ""
+"Congratulations\n"
+"\n"
+"You Won!!!"
+msgstr ""
+"Gratulerer\n"
+"\n"
+"Du vant!!!"
+
+msgid ""
+"\n"
+"Game Over.\n"
+msgstr ""
+"\n"
+"Spillet er over.\n"
+
+msgid "New Game"
+msgstr "Nytt spill"
+
+msgid "Select Game"
+msgstr "Velg spill"
+
+msgid "Rules"
+msgstr "Regler"
+
+msgid ""
+"The game is over.\n"
+"No hints are available"
+msgstr ""
+"Spillet er over.\n"
+"Ingen hint tilgjengelig"
+
+msgid "This game does not have hint support yet."
+msgstr "Dette spillet støtter ikke hint ennå"
+
+msgid "Move the %s on the %s."
+msgstr "Flytt %s på %s."
+
+msgid "Move the %s on %s."
+msgstr "Flytt %s på %s."
+
+msgid "Move the %s %s."
+msgstr "Flytt %s %s."
+
+msgid "You are searching for a %s."
+msgstr "Du søker etter en %s."
+
+msgid "This game is unable to provide a hint."
+msgstr "Dette spillet kan ikke gi deg et hint."
+
+msgid "Main program:  Jonathan Blandford (jrb@redhat.com)"
+msgstr "Hovedprogram:  Jonathan Blandford (jrb@redhat.com)"
+
+msgid "                      Felix Bellaby (felix@pooh.u-net.com)"
+msgstr "                      Felix Bellaby (felix@pooh.u-net.com)"
+
+msgid "                      Rosanna Yuen (zana@webwynk.net)"
+msgstr "                      Rosanna Yuen (zana@webwynk.net)"
+
+msgid "Card Games:    Jonathan Blandford (jrb@redhat.com)"
+msgstr "Kortspill:     Jonathan Blandford (jrb@redhat.com)"
+
+msgid "                      W. Borgert (debacle@debian.org)"
+msgstr "                      W. Borgert (debacle@debian.org)"
+
+msgid "                      Robert Brady (rwb197@ecs.soton.ac.uk)"
+msgstr "                      Robert Brady (rwb197@ecs.soton.ac.uk)"
+
+msgid "                      Nick Lamb (njl195@zepler.org.uk)"
+msgstr "                      Nick Lamb (njl195@zepler.org.uk)"
+
+msgid "                      Changwoo Ryu (cwryu@adam.kaist.ac.kr)"
+msgstr "                      Changwoo Ryu (cwryu@adam.kaist.ac.kr)"
+
+msgid "                      Matthew Wilcox (matthew@wil.cx)"
+msgstr "                      Matthew Wilcox (matthew@wil.cx)"
+
+msgid "AisleRiot"
+msgstr "AisleRiot"
+
+msgid "(C) 1998 Jonathan Blandford (jrb@redhat.com)"
+msgstr "(C) 1998 Jonathan Blandford (jrb@redhat.com)"
+
+msgid ""
+"AisleRiot provides a rule-based solitaire card engine that allows many "
+"different games to be played"
+msgstr ""
+"AislerRiot gir deg en regel-basert, solitaire, kabalmotor som tillater en "
+"å spille mange forskjellige spill"
+
+msgid "Game options..."
+msgstr "Alternativer for spill..."
+
+msgid "Modify the options for this game"
+msgstr "Modifiser alternativene for dette spillet"
+
+msgid "New game of..."
+msgstr "Nytt spill med..."
+
+msgid "Start a new game of a different variation"
+msgstr "Start et nytt spill av en annen variant"
+
+msgid "Select..."
+msgstr "Velg..."
+
+msgid "Select a new game variation"
+msgstr "Velg et nytt spillvariant"
+
+msgid "Deal a new game"
+msgstr "Del ut til et nytt spill"
+
+msgid "Restart"
+msgstr "Start på nytt"
+
+msgid "Start this game over"
+msgstr "Start dette spillet på nytt"
+
+msgid "Select"
+msgstr "Velg"
+
+msgid "Select a new game"
+msgstr "Velg et nytt spill"
+
+msgid "Hint"
+msgstr "Hint"
+
+msgid "Suggest a move"
+msgstr "Foreslå et trekk"
+
+msgid "Undo"
+msgstr "Angre"
+
+msgid "Undo the last move"
+msgstr "Angre forrige trekk"
+
+msgid "Redo"
+msgstr "Gjenta"
+
+msgid "Redo the last move"
+msgstr "Gjenta forrige trekk"
+
+msgid "Exit"
+msgstr "Avslutt"
+
+msgid "Quit Aisleriot"
+msgstr "Avslutt Aisleriot"
+
+msgid "Aisleriot"
+msgstr "Aisleriot"
+
+msgid "Loading images..."
+msgstr "Laster bilder..."
+
+msgid "Dealing game..."
+msgstr "Deler ut spillet"
+
+msgid "Score: "
+msgstr "Poeng:"
+
+msgid "Time: "
+msgstr "Tid: "
+
+msgid "Variation on game rules"
+msgstr "Variasjon av spillreglene"
+
+msgid "Initializing scheme..."
+msgstr "Initialiserer planen..."
+
+msgid " of "
+msgstr " på "
+
+msgid "'s"
+msgstr "'s"
+
+msgid "Base Card:  "
+msgstr "Basiskort:  "
+
+msgid "Base Card:  Ace"
+msgstr "Basiskort:  Ess"
+
+msgid "Base Card:  Jack"
+msgstr "Basiskort: Knekt"
+
+msgid "Base Card:  King"
+msgstr "Basiskort: Konge"
+
+msgid "Base Card:  Queen"
+msgstr "Basiskort: Dronning"
+
+msgid "Consider moving something into an empty slot"
+msgstr "Tenk på å flytte noe til en tom rad"
+
+msgid "Consistency is key"
+msgstr "Konsistens er nøkkelen"
+
+msgid "Deal a card"
+msgstr "Del ut et kort"
+
+msgid "Deal a card from the deck"
+msgstr "Del ut et kort fra stokken"
+
+msgid "Deal a new card from the deck"
+msgstr "Del ut et nytt kort fra stokken"
+
+msgid "Deal another card"
+msgstr "Del ut et nytt kort"
+
+msgid "Deal another round"
+msgstr "Del ut en ny runde"
+
+msgid "Deal the cards"
+msgstr "Del ut kortene"
+
+msgid "Fishing wire makes bad dental floss"
+msgstr "Fiskeline er dårlig tanntråd"
+
+msgid "Have you read the help file?"
+msgstr "Har du lest hjelpfilen?"
+
+msgid "I could sure use a backrub right about now..."
+msgstr "Jeg kunne virkelig trengt en ryggmassasje nå..."
+
+msgid "If you're ever lost and alone in the woods, hug a tree"
+msgstr "Hvis du noen gang har gått deg vill alene i skogen, klem et tre"
+
+msgid ""
+"Just because a crosswalk looks like a hopscotch board doesn't mean it is "
+"one"
+msgstr ""
+"Bare fordi en kryssgange ser ut som et hopscotch brett betyr ikke det at "
+"det er et"
+
+msgid "Look both ways before you cross the street"
+msgstr "Se begge veier før du krysser veien"
+
+msgid "Monitors won't give you Vitamin E -- but sunlight will..."
+msgstr "Monitorer gir deg ikke E-vitamin -- men sollys gjør det..."
+
+msgid "Move card from Waste"
+msgstr "Flytt kort fra kastet"
+
+msgid "Move waste back to stock"
+msgstr "Flytt kast tilbake til stokken"
+
+msgid "Never blow in a dog's ear"
+msgstr "Aldri blås en hund i øret"
+
+msgid "Odessa is a better game.  Really."
+msgstr "Odessa er et bedre spill. Virkelig."
+
+msgid "Place something on empty slot"
+msgstr "Plasser noe på den tomme plassen"
+
+msgid "Please fill in empty pile first."
+msgstr "Vennligst fyll ut den tomme haugen først."
+
+msgid "Redeals left:  "
+msgstr "Omdelinger igjen:  "
+
+msgid "Remove the "
+msgstr "Flytt "
+
+msgid "Reserve left:  "
+msgstr "Reserver venstre:  "
+
+msgid "Return cards to Stock"
+msgstr "Returner kortene til stokken"
+
+msgid "Stock left:  "
+msgstr "Stokker igjen:  "
+
+msgid "Stock left:  0"
+msgstr "Stokk igjen:  0"
+
+msgid "Three card deals"
+msgstr "Del tre kort om gangen"
+
+msgid "Tourniquets are not recommended unless in the direst emergency"
+msgstr "Turnikeer er ikke å anbefale foruten i værste nødstilfelle"
+
+msgid "Try moving cards down from the foundation"
+msgstr "Prøv å flytte kort ned fra fundamentet"
+
+msgid "Try rearranging the cards"
+msgstr "Prøv å omarrangere kortene"
+
+msgid "Unknown color"
+msgstr "Ukjent farge"
+
+msgid "Unknown suit"
+msgstr "Ukjent stokk"
+
+msgid "Unknown value"
+msgstr "Ukjent verdi"
+
+msgid "When without a stapler, a staple and a ruler will work"
+msgstr ""
+"Når du ikke har en stiftemaskin vil en stift og en linjal gjøre nytten"
+
+msgid "ace"
+msgstr "ess"
+
+msgid "aces"
+msgstr "ess"
+
+msgid "an empty Foundation"
+msgstr "et tomt fundament"
+
+msgid "an empty Foundation pile"
+msgstr "en tom fundamenthaug"
+
+msgid "an empty Tableau pile"
+msgstr "en tom tablåhaug"
+
+msgid "an empty Tableau slot"
+msgstr "en tom tablåplass"
+
+msgid "an empty bottom slot"
+msgstr "en tom bunnplass"
+
+msgid "an empty corner slot"
+msgstr "en tom hjørneplass"
+
+msgid "an empty left slot"
+msgstr "en tom venstre plass"
+
+msgid "an empty right slot"
+msgstr "en tom høyre plass"
+
+msgid "an empty slot"
+msgstr "en tom plass"
+
+msgid "an empty slot on tableau"
+msgstr "en tom plass på tablået"
+
+msgid "an empty top slot"
+msgstr "en tom topp plass"
+
+msgid "appropriate Foundation pile"
+msgstr "riktig fundamenthaug"
+
+msgid "black joker"
+msgstr "sort joker"
+
+msgid "borp"
+msgstr "borp"
+
+msgid "clubs"
+msgstr "kløver"
+
+msgid "diamonds"
+msgstr "ruter"
+
+msgid "eight"
+msgstr "åtte"
+
+msgid "empty slot on foundation"
+msgstr "tom plass på fundamentet"
+
+msgid "empty space on tableau"
+msgstr "tom plass på tablået"
+
+msgid "five"
+msgstr "fem"
+
+msgid "four"
+msgstr "fire"
+
+msgid "hearts"
+msgstr "hjerter"
+
+msgid "itself"
+msgstr "selv"
+
+msgid "jack"
+msgstr "knekt"
+
+msgid "jacks"
+msgstr "knekter"
+
+msgid "king"
+msgstr "konge"
+
+msgid "kings"
+msgstr "konger"
+
+msgid "nine"
+msgstr "ni"
+
+msgid "off the board"
+msgstr "av bordet"
+
+msgid "queen"
+msgstr "dronning"
+
+msgid "queens"
+msgstr "dronninger"
+
+msgid "seven"
+msgstr "sju"
+
+msgid "six"
+msgstr "seks"
+
+msgid "something"
+msgstr "noe"
+
+msgid "spades"
+msgstr "spar"
+
+msgid "ten"
+msgstr "ti"
+
+msgid "the appropriate Foundation pile"
+msgstr "riktig fundamenthaug"
+
+msgid "three"
+msgstr "tre"
+
+msgid "to an empty foundation"
+msgstr "til et tomt fundament"
+
+msgid "two"
+msgstr "to"
+
+msgid "Card back:"
+msgstr "Kortrygg"
+
+msgid "Honor pictures:"
+msgstr "Æresbilder"
+
+msgid "Joker icon:"
+msgstr "Joker-ikon:"
+
+msgid "Rank font:"
+msgstr "Skrifttype for verdi:"
+
+msgid "Suit font (small):"
+msgstr "Skrifttype for sort (liten):"
+
+msgid "Suit font (medium):"
+msgstr "Skrifttype for sort (middels):"
+
+msgid "Suit font (large):"
+msgstr "Skrifttype for sort (stor):"
+
+msgid "Cards"
+msgstr "Kort"
+
+msgid "Exit this game?"
+msgstr "Avslutt dette spillet?"
+
+msgid "Freecell #%d"
+msgstr "Freecell #%d"
+
+msgid "Seed value:"
+msgstr "Seed verdi:"
+
+msgid "Sorry, this feature is not (yet) implemented."
+msgstr "Beklager, denne funksjonen er ikke implementert (ennå)."
+
+msgid "Changwoo Ryu."
+msgstr "Changwoo Ryu."
+
+msgid "Reimplement the popular solitaire card game."
+msgstr "Reimplementering av den populære kabalen."
+
+msgid "That move is invalid."
+msgstr "Dette trekket er ugyldig."
+
+msgid "Sorry, there are no more valid moves."
+msgstr "Beklager, ingen flere gyldige trekk."
+
+msgid ""
+"Congratulations.  You won.\n"
+"Do you want to play again?"
+msgstr ""
+"Gratulerer. Du vant.\n"
+"Vil du spille en gang til?"
+
+msgid "New game with seed..."
+msgstr "Nytt spill med seed..."
+
+msgid "Start a new game with a different seed"
+msgstr "Start et nytt spill med forskjellig seed"
+
+msgid "Score"
+msgstr "Poeng"
+
+msgid "View the scores"
+msgstr "Vis poengene"
+
+msgid "Props"
+msgstr "Egenskaper"
+
+msgid "Configure Freecell"
+msgstr "Konfigurer Freecell"
+
+msgid "Quit Freecell"
+msgstr "Avslutt Freecell"
+
+msgid "Freecell Properties"
+msgstr "Frecell egenskaper"
+
+msgid "Warn on invalid moves"
+msgstr "Informer ved ugyldige trekk"
+
+msgid "Move stacks one by one"
+msgstr "Flytt stokkene en og en"
+
+msgid "Options"
+msgstr "Alternativer"
+
+msgid "This session: %d%%"
+msgstr "Denne omgangen: %d%%"
+
+msgid "won: %d, lost: %d"
+msgstr "vunnet: %d, tapt: %d"
+
+msgid "Total: %d%%"
+msgstr "Totalt: %d%%"
+
+msgid "Streaks"
+msgstr "På rad"
+
+msgid "wins: %d, losses: %d"
+msgstr "seire: %d, tap: %d"
+
+msgid "current: %d wins"
+msgstr "hittil: %d seire"
+
+msgid "current: %d losses"
+msgstr "hittil: %d tap"
+
+msgid "Clear"
+msgstr "Slett"
+
+msgid "Dark's move"
+msgstr "Mørkt trekk"
+
+msgid "Light's move"
+msgstr "Lyst trekk"
+
+msgid "Light player wins!"
+msgstr "Lys spiller vinner!"
+
+msgid "Dark player wins!"
+msgstr "Mørk spiller vinner!"
+
+msgid "The game was a draw."
+msgstr "Spillet endte uavgjort."
+
+msgid "Light must pass, Dark's move"
+msgstr "Lys må stå over...mørkt trekk..."
+
+msgid "Dark must pass, Light's move"
+msgstr "Mørk må stå over...lyst trekk..."
+
+msgid "Do you really want to quit?"
+msgstr "Vil du virkelig avslutte?"
+
+msgid "Do you really want to end this game?"
+msgstr "Vil du virkelig avslutte dette spillet?"
+
+msgid "gataxx"
+msgstr "gataxx"
+
+msgid ""
+"gataxx is a Gnome port of the old game ataxx.  It is derived from Ian "
+"Peters' iagno code."
+msgstr ""
+"gataxx er en Gnome versjon av det gamle spillet ataxx. Det er bygget på "
+"Ian Petters'  iagno kode."
+
+msgid "Could not find '%s' pixmap file for gataxx\n"
+msgstr "Kunne ikke finne bildefilen '%s' for gataxx\n"
+
+msgid "Dark:"
+msgstr "Mørk:"
+
+msgid "Light:"
+msgstr "Lys:"
+
+msgid "Welcome to gataxx!"
+msgstr "Velkommen til gataxx!"
+
+msgid "%.2d"
+msgstr "%.2d"
+
+msgid "Players"
+msgstr "Spillere"
+
+msgid "Quick Moves (cut computer delay in half)"
+msgstr "Raske trekk (halver datamaskinens ventetid)"
+
+msgid "Dark"
+msgstr "Mørk"
+
+msgid "Human"
+msgstr "Menneske"
+
+msgid "Level one"
+msgstr "Nivå en"
+
+msgid "Level two"
+msgstr "Nivå to"
+
+msgid "Level three"
+msgstr "Nivå tre"
+
+msgid "Light"
+msgstr "Lys"
+
+msgid "Animation"
+msgstr "Animasjon"
+
+msgid "None"
+msgstr "Ingen"
+
+msgid "Partial"
+msgstr "Delvis"
+
+msgid "Complete"
+msgstr "Fullstendig"
+
+msgid "Flip final results"
+msgstr "Snu om på de endelige resultatene"
+
+msgid "Tile set:"
+msgstr "Steinsett:"
+
+msgid "Game Over!"
+msgstr "Spillet over!"
+
+msgid "Glines"
+msgstr "Glines"
+
+msgid "Can't move there!"
+msgstr "Kan ikke gå dit!"
+
+msgid "Robert Szokovacs <szo@appaloosacorp.hu>"
+msgstr "Robert Szokovacs <szo@appaloosacorp.hu>"
+
+msgid "Szabolcs Ban <shooby@gnome.hu>"
+msgstr "Szabolcs Ban <shooby@gnome.hu>"
+
+msgid "(C) 1997-2000 the Free Software Foundation"
+msgstr "(C) 1997-2000 the Free Software Foundation"
+
+msgid "Gnome port of the once-popular Color Lines game"
+msgstr "GNOME port av det tidligere populære Color Lines spillet"
+
+msgid "Preferences"
+msgstr "Innstillinger"
+
+msgid "Theme"
+msgstr "Tema"
+
+msgid "Select theme:"
+msgstr "Velg tema:"
+
+msgid "Select background:"
+msgstr "Velg bakgrunn:"
+
+msgid "Fast moves"
+msgstr "Raske trekk"
+
+msgid "Ask confirmation when quitting"
+msgstr "Spør etter bekreftelse når spillet avsluttes"
+
+msgid "Welcome to Glines!"
+msgstr "Velkommen til Glines!"
+
+msgid "Next Balls"
+msgstr "Neste baller"
+
+msgid "Gnibbles"
+msgstr "Gnibbles"
+
+msgid "Send comments and bug reports to: sjm@acm.org, itp@gnu.org"
+msgstr "Send kommentarer og feilrapporter til: sjm@acm.org, itp@gnu.org"
+
+msgid "Gnibbles Preferences"
+msgstr "Instillinger for Gnibbles"
+
+msgid "Game"
+msgstr "Spill"
+
+msgid "Speed"
+msgstr "Hastighet"
+
+msgid "Nibbles newbie"
+msgstr "Nibbles nybegynner"
+
+msgid "My second day"
+msgstr "Min andre dag"
+
+msgid "Not too shabby"
+msgstr "Ikke for værst"
+
+msgid "Finger-twitching good"
+msgstr "Fingerbrekkende god"
+
+msgid "Starting level: "
+msgstr "Startnivå: "
+
+msgid "Levels in random order"
+msgstr "Nivåer i tilfeldig rekkefølge"
+
+msgid "Fake bonuses"
+msgstr "Falske bonuser"
+
+msgid "Sounds"
+msgstr "Lyder"
+
+msgid "Number of players: "
+msgstr "Antall spillere: "
+
+msgid "Graphics"
+msgstr "Grafikk"
+
+msgid "Board size"
+msgstr "Størrelse på brettet"
+
+msgid "Tiny (184x132)"
+msgstr "Lite (184x132)"
+
+msgid "Small (368x264)"
+msgstr "Lite (368x264)"
+
+msgid "Medium (460x330)"
+msgstr "Middels (460x330)"
+
+msgid "Large (736x528)"
+msgstr "Stor (736x528)"
+
+msgid "Extra large (920x660)"
+msgstr "Ekstra stor (920x660)"
+
+msgid "Huge (1840x1320)"
+msgstr "Enorm (1840x1320)"
+
+msgid "Worm %d"
+msgstr "Orm %d"
+
+msgid "Up:"
+msgstr "Opp:"
+
+msgid "Down:"
+msgstr "Ned:"
+
+msgid "Left:"
+msgstr "Venstre:"
+
+msgid "Right:"
+msgstr "Høyre:"
+
+msgid "Color:"
+msgstr "Farge:"
+
+msgid "Red"
+msgstr "Rød"
+
+msgid "Green"
+msgstr "Grønn"
+
+msgid "Blue"
+msgstr "Blå"
+
+msgid "Yellow"
+msgstr "Gul"
+
+msgid "Cyan"
+msgstr "Turkis"
+
+msgid "Purple"
+msgstr "Lilla"
+
+msgid "Gray"
+msgstr "Grå"
+
+msgid "Relative movement"
+msgstr "Relativ bevegelse"
+
+msgid "Worm %d:"
+msgstr "Orm %d:"
+
+msgid "'%s' with super-safe moves"
+msgstr "'%s' med super-trygge trekk"
+
+msgid "'%s' with safe moves"
+msgstr "'%s' med trygge trekk"
+
+msgid ""
+"Congratulations, You Have Defeated the Robots!! \n"
+"But Can You do it Again?"
+msgstr ""
+"Gratulerer, du har overvunnet robotene!! \n"
+"Men kan du klare det igjen?"
+
+msgid "There are no teleport locations left!!"
+msgstr "Ingen steder igjen å teleportere til!!"
+
+msgid "There are no safe locations to teleport to!!"
+msgstr "Ingen trygge steder å teleportere til!!"
+
+msgid "Set game scenario"
+msgstr "Sett spillscenario"
+
+msgid "Set game configuration"
+msgstr "Sett spillscenario"
+
+msgid "X"
+msgstr "X"
+
+msgid "Y"
+msgstr "Y"
+
+msgid "Gnome Robots II"
+msgstr "Gnome Roboter II"
+
+msgid "Could not find '%s' pixmap file for Gnome Robots\n"
+msgstr "Kunne ikke finne bildefilen '%s' for Gnome Roboter\n"
+
+msgid "Do you really want to start a new game?"
+msgstr "Vil du virkelig starte et nytt spill?"
+
+msgid "Do you really want to quit the game?"
+msgstr "Vil du virkelig avslutte dette spillet?"
+
+msgid "Gnobots II"
+msgstr "Gnobots II"
+
+msgid "Gnome Robots Game"
+msgstr "Gnome Robot spill"
+
+msgid "Initial Number of Type 1 Robots"
+msgstr "Antall type 1 roboter ved start"
+
+msgid "Initial Number of Robots"
+msgstr "Antall roboter i ved start"
+
+msgid "Initial Number of Type 2 Robots"
+msgstr "Antall type 2 roboter ved start"
+
+msgid "Increasing Number of Type 1 Robots per Level"
+msgstr "Økende antall type 1 roboter for hvert nivå"
+
+msgid "Increasing Number of Robots per Level"
+msgstr "Økende antall roboter for hvert nivå"
+
+msgid "Increasing Number of Type 2 Robots per Level"
+msgstr "Økende antall type 2 roboter for hvert nivå"
+
+msgid "Maximum Number of Type 1 Robots"
+msgstr "Maksimalt antall type 1 roboter"
+
+msgid "Maximum Number of Robots"
+msgstr "Maksimalt antall roboter"
+
+msgid "Fill Screen"
+msgstr "Fyll skjermen"
+
+msgid "Maximum Number of Type 2 Robots"
+msgstr "Maksimalt antall type 2 roboter"
+
+msgid "Type 1 Robot Score"
+msgstr "Poengsum for type 1 roboter"
+
+msgid "Robot Score"
+msgstr "Robot poengsum"
+
+msgid "Type 2 Robot Score"
+msgstr "Poengsum for type 2 roboter"
+
+msgid "Type 1 Robot Score When Waiting"
+msgstr "Poengsum for type 1 robot ved venting"
+
+msgid "Robot Score When Waiting"
+msgstr "Poengsum for robot ved venting"
+
+msgid "Type 2 Robot Score When Waiting"
+msgstr "Poengsum for type 2 robot ved venting"
+
+msgid "Type 1 Robot Score When Splatted"
+msgstr "Poengsum for type 1 robot ved knusing"
+
+msgid "Robot Score When Splatted"
+msgstr "Poengsum for robot ved knusing"
+
+msgid "Type 2 Robot Score When Splatted"
+msgstr "Poengsum for type 2 robot ved knusing"
+
+msgid "Initial Number of Safe Teleports"
+msgstr "Trygge teleporteringer ved start"
+
+msgid "Number of Free Safe Teleports per Level"
+msgstr "Antall utdelte trygge teleporteringer per nivå"
+
+msgid "Kills Required While Waiting to Get A Safe Teleport"
+msgstr "Antall drap som trengs for å få en trygg teleportering ved venting"
+
+msgid "Score Required To Get A Safe Teleport"
+msgstr "Poengsum som trengs for å få en trygg teleportering"
+
+msgid "Maximum Number of Safe Teleports"
+msgstr "Maksimalt antall trygge teleporteringer"
+
+msgid "Moveable Junkheaps"
+msgstr "Flyttbare søppelhauger"
+
+msgid "Yes"
+msgstr "Ja"
+
+msgid "No"
+msgstr "Nei"
+
+msgid "classic robots"
+msgstr "roboter klassisk"
+
+msgid "robots2"
+msgstr "roboter2"
+
+msgid "robots2 easy"
+msgstr "roboter2 lett"
+
+msgid "robots with safe teleport"
+msgstr "roboter med trygg teleportering"
+
+msgid "nightmare"
+msgstr "mareritt"
+
+msgid "robots"
+msgstr "roboter"
+
+msgid "cows"
+msgstr "kuer"
+
+msgid "eggs"
+msgstr "egg"
+
+msgid "gnomes"
+msgstr "nisser"
+
+msgid "mice"
+msgstr "mus"
+
+msgid "windows"
+msgstr "vinduer"
+
+msgid "GnobotsII Preferences"
+msgstr "Instillinger for GnobotsII"
+
+msgid "Game Type:"
+msgstr "Spilltype:"
+
+msgid "Property"
+msgstr "Egenskap"
+
+msgid "Value"
+msgstr "Verdi"
+
+msgid "Safe Moves"
+msgstr "Trygg flytting"
+
+msgid "Super Safe Moves"
+msgstr "Super-trygge trekk"
+
+msgid "Sound"
+msgstr "Lyd"
+
+msgid "Splats"
+msgstr "Splats"
+
+msgid "You Cannot Change the Game Type When Playing"
+msgstr "Du kan ikke skifte spilltype under et spill"
+
+msgid "Configuration"
+msgstr "Konfigurasjon"
+
+msgid "Graphics:"
+msgstr "Grafikk:"
+
+msgid "NW"
+msgstr "NV"
+
+msgid "N"
+msgstr "N"
+
+msgid "NE"
+msgstr "NØ"
+
+msgid "W"
+msgstr "V"
+
+msgid "E"
+msgstr "Ø"
+
+msgid "SW"
+msgstr "SV"
+
+msgid "S"
+msgstr "S"
+
+msgid "SE"
+msgstr "SØ"
+
+msgid "Teleport:"
+msgstr "Teleport:"
+
+msgid "Random Teleport:"
+msgstr "Vilkårlig teleportering:"
+
+msgid "Wait:"
+msgstr "Vent:"
+
+msgid "Standard Robots Keys"
+msgstr "Standard robottaster"
+
+msgid "Predefined Set 1"
+msgstr "Predefinert sett 1"
+
+msgid "Predefined Set 2"
+msgstr "Predefinert sett 2"
+
+msgid "Keyboard"
+msgstr "Tastatur"
+
+msgid "Score:"
+msgstr "Poeng:"
+
+msgid "Safe Teleports:"
+msgstr "Tryggr teleporteringer:"
+
+msgid "Level:"
+msgstr "Nivå:"
+
+msgid "Remaining:"
+msgstr "Gjenværende:"
+
+msgid "The cave you are trying to load it to big for this game."
+msgstr "Hulen du prøver å laste er for stor for dette spillet."
+
+msgid ""
+"The cave you are trying to load includes an object, that wasn't declared."
+msgstr ""
+"Hulen du prøver å laste inneholder et objekt som ikke var deklarert."
+
+msgid "Gnome-Stones (c) 1998 Carsten Schaar"
+msgstr "Gnome-Stones (c) 1998 Carsten Schaar"
+
+msgid "Game to play"
+msgstr "Spill som skal spilles"
+
+msgid "FILENAME"
+msgstr "FILNAVN"
+
+msgid ""
+"An error occured while loading the image file \"%s\".\n"
+"Please make sure, that Gnome-Stones is correctly installed!"
+msgstr ""
+"En feil oppsto under lasting av bildefilen \"%s\".\n"
+"Vær vennlig å forsikre deg om at Gnome-steiner er riktig installert!"
+
+msgid "Game title:"
+msgstr "Tittel på spill:"
+
+msgid "Start cave:"
+msgstr "Starthule:"
+
+msgid "Pause"
+msgstr "Pause"
+
+msgid "Congratulations, you win!"
+msgstr "Gratulerer, du vant!"
+
+msgid "Game over!"
+msgstr "Spillet over!"
+
+msgid "Gnome-Stones"
+msgstr "Gnome-steiner"
+
+msgid "A game."
+msgstr "Et spill."
+
+msgid "Scanning private object directory..."
+msgstr "Gjennomsøker privat objektkatalog..."
+
+msgid "Scanning public object directory..."
+msgstr "Gjennomsøker offentlig objektkatalog..."
+
+msgid "Filling game widget..."
+msgstr "Fyller ut spillets widget..."
+
+msgid "Scanning private game directory..."
+msgstr "Gjennomsøker privat spillkatalog..."
+
+msgid "Scanning public game directory..."
+msgstr "Gjennomsøker offentlig spillkatalog..."
+
+msgid "Restoring preferences..."
+msgstr "Gjeninnfører instillinger..."
+
+msgid "You gained an extra life!"
+msgstr "Du fikk et ekstra liv!"
+
+msgid "Seconds left: %d"
+msgstr "Sekunder igjen: %d"
+
+msgid "Gnome-Stones Preferences"
+msgstr "Instillinger for Gnome-steiner"
+
+msgid "Game title"
+msgstr "Tittel på spill"
+
+msgid "Caves"
+msgstr "Huler"
+
+msgid "Device"
+msgstr "Enhet"
+
+msgid "Joystick device:"
+msgstr "Joystick-enhet:"
+
+msgid "disabled"
+msgstr "avslått"
+
+msgid "Digital joystick emulation"
+msgstr "Digital joystick emulering"
+
+msgid "Switch level:"
+msgstr "Bytt nivå:"
+
+msgid "Joystick"
+msgstr "Joystick"
+
+msgid "Not yet implemented!"
+msgstr "Ennå ikke implementert!"
+
+msgid "Diamonds:"
+msgstr "Diamanter:"
+
+msgid "Cave:"
+msgstr "Hule:"
+
+msgid "Lives:"
+msgstr "Liv:"
+
+msgid "Set starting level (1-10)"
+msgstr "Sett startnivå (1-10)"
+
+msgid "LEVEL"
+msgstr "NIVÅ"
+
+msgid "Game Status"
+msgstr "Spillstatus"
+
+msgid "Lines: "
+msgstr "Linjer: "
+
+msgid "Level: "
+msgstr "Nivå: "
+
+msgid "Gnometris"
+msgstr "Gnometris"
+
+msgid "Gnometris setup"
+msgstr "Gnometris oppsett"
+
+msgid "Number of pre-filled rows:"
+msgstr "Antall forhåndsutfylte rader:"
+
+msgid "Density of blocks in a pre-filled row:"
+msgstr "Tetthet av blokker i forhåndsutfylt rad:"
+
+msgid "Starting Level:"
+msgstr "Startnivå:"
+
+msgid "Preview next block"
+msgstr "Forhåndsvis neste blokk"
+
+msgid "Random block colors"
+msgstr "Tilfeldige farger på blokker"
+
+msgid "Rotate counterclockwise"
+msgstr "Roter mot klokken"
+
+msgid "Block Pixmap: "
+msgstr "Bilde for blokk: "
+
+msgid "Background Pixmap: "
+msgstr "Bilde for bakgrunn: "
+
+msgid ""
+"Written for my wife, Matylda\n"
+"Send comments and bug reports to: janusz.gorycki@intel.com"
+msgstr ""
+"Skrevet til min kone, Matylda\n"
+"Send kommentarer og feilrapporter til: janusz.gorycki@intel.com"
+
+msgid "Tiny"
+msgstr "Smått"
+
+msgid "Medium"
+msgstr "Middels"
+
+msgid "Biiiig"
+msgstr "Stoort"
+
+msgid "Custom"
+msgstr "Egendefinert"
+
+msgid "Gnome Mines"
+msgstr "Gnome miner"
+
+msgid "Code: Pista"
+msgstr "Kode: Pista"
+
+msgid "Faces: tigert"
+msgstr "Ansikter: tigert"
+
+msgid "Score: HoraPe"
+msgstr "Poeng: HoraPe"
+
+msgid "(C) 1997-1999 the Free Software Foundation"
+msgstr "(C) 1997-1999 the Free Software Foundation"
+
+msgid "Minesweeper clone"
+msgstr "Minesveiperklone"
+
+msgid "Field size"
+msgstr "Størrelse på feltet"
+
+msgid "Custom size"
+msgstr "Egendefinert størrelse"
+
+msgid "Horizontal:"
+msgstr "Horisontal:"
+
+msgid "Vertical:"
+msgstr "Vertikal:"
+
+msgid "Number of mines:"
+msgstr "Antall miner:"
+
+msgid "Mine size:"
+msgstr "Minestørrelse:"
+
+msgid "Gnome Mine Preferences"
+msgstr "Instillinger for Gnome-miner"
+
+msgid "Width of grid"
+msgstr "Gitterstørrelse"
+
+msgid "Height of grid"
+msgstr "Gitterhøyde"
+
+msgid "Size of mines"
+msgstr "Størrelse på minene"
+
+msgid "SIZE"
+msgstr "STØRRELSE"
+
+msgid "Number of mines"
+msgstr "Antall miner"
+
+msgid "NUMBER"
+msgstr "ANTALL"
+
+msgid "Flags:"
+msgstr "Flagg:"
+
+msgid "Time:"
+msgstr "Tid:"
+
+msgid "Solve"
+msgstr "Løs"
+
+msgid "Solve the game"
+msgstr "Løs spillet"
+
+msgid "2x2"
+msgstr "2x2"
+
+msgid "Play on a 2x2 board"
+msgstr "Spill på et 2x2 brett"
+
+msgid "3x3"
+msgstr "3x3"
+
+msgid "Play on a 3x3 board"
+msgstr "Spill på et 3x3 brett"
+
+msgid "4x4"
+msgstr "4x4"
+
+msgid "Play on a 4x4 board"
+msgstr "Spill på et 4x4 brett"
+
+msgid "5x5"
+msgstr "5x5"
+
+msgid "Play on a 5x5 board"
+msgstr "Spill på et 5x5 brett"
+
+msgid "6x6"
+msgstr "6x6"
+
+msgid "Play on a 6x6 board"
+msgstr "Spill på et 6x6 brett"
+
+msgid "Move the selected piece up"
+msgstr "Flytt den valgte brikken opp"
+
+msgid "Move the selected piece left"
+msgstr "Flytt den valgte brikken til venstre"
+
+msgid "Move the selected piece right"
+msgstr "Flytt den valgte brikken til høyre"
+
+msgid "Move the selected piece down"
+msgstr "Flytt den valgte briken ned"
+
+msgid "Size of board (2-6)"
+msgstr "Størrensen på brettet (2-6)"
+
+msgid "Puzzle solved! Well done!"
+msgstr "Puslespillet løst! Godt gjort!"
+
+msgid "Puzzle solved!"
+msgstr "Puslespillet løst!"
+
+msgid "Could not find '%s' pixmap file\n"
+msgstr "Kunne ikke finne bildefilen '%s'\n"
+
+msgid "... Game paused ..."
+msgstr "... Spillet er pauset ..."
+
+msgid "Playing %dx%d board"
+msgstr "Spiller på %dx%d brett"
+
+msgid ""
+"Tetravex clone\n"
+"(Comments to: Lars.Rydlinge@HIG.SE)"
+msgstr ""
+"Tetravex klone\n"
+"(Kommetarer til: Lars.Rydlinge@HIG.SE)"
+
+msgid "1"
+msgstr "1"
+
+msgid "2"
+msgstr "2"
+
+msgid "3"
+msgstr "3"
+
+msgid "4"
+msgstr "4"
+
+msgid "5"
+msgstr "5"
+
+msgid "6"
+msgstr "6"
+
+msgid "7"
+msgstr "7"
+
+msgid "Novice"
+msgstr "Begynner"
+
+msgid "Advanced"
+msgstr "Avansert"
+
+msgid "Level completed. Well done."
+msgstr "Nivå fullført! Godt gjort."
+
+msgid "Moves:"
+msgstr "Trekk:"
+
+msgid "Welcome to Gnome Klotski"
+msgstr "Velkommen til Gnome Klotski"
+
+msgid "Playing level %s"
+msgstr "Spiller nivå %s"
+
+msgid ""
+"Klotski clone\n"
+"(Comments to: Lars.Rydlinge@HIG.SE)"
+msgstr ""
+"Klotski klone\n"
+"(Kommetarer til: Lars.Rydlinge@HIG.SE)"
+
+msgid "Already used! Where do you want to put that?"
+msgstr "Allerede brukt! Hvor vil du plassere det?"
+
+msgid "Not enough lines on the terminal"
+msgstr "Ikke nok linjer på terminalen"
+
+msgid "What dice to roll again (<RETURN> for none)? "
+msgstr "Hvilken terning skal kastes igjen (<LINJESKIFT> for ingen)? "
+
+msgid "Where do you want to put that? "
+msgstr "Hvor vil du legge den?"
+
+msgid "No good! Where do you want to put that? "
+msgstr "Hjelper ikke! Hvor vil du legge den?"
+
+msgid "Already used! Where do you want to put that? "
+msgstr "Allerede brukt! Hvor vil du plassere det?"
+
+msgid "Rolling for %s"
+msgstr "Kaster for %s"
+
+msgid "%s wins the game with %d points"
+msgstr "%s vinner spillet med %d poeng"
+
+msgid "Tali top scores"
+msgstr "Tali beste poengsummer"
+
+msgid "Can't get at score file."
+msgstr "Kan ikke finne poengfilen."
+
+msgid "Hit Return"
+msgstr "Trykk linjeskift"
+
+msgid "obsolete function - delay turned off by default)"
+msgstr "utgått funksjon - (forsinkelse av som standard)"
+
+msgid "Welcome to the game of Tali"
+msgstr "Velkommen til et spillet Tali"
+
+msgid "How many wish to play (max of %d)? "
+msgstr "Hvor mange vil spille (maks %d)? "
+
+msgid "What is the name of player #%d ? "
+msgstr "Hva er navnet på spiller #%d ? "
+
+msgid "Boo hoo... I can't play...\n"
+msgstr "Buhuu... Jeg får ikke spille...\n"
+
+msgid "How many computers to play (max of %d) ? "
+msgstr "Hvor mange datamaskiner skal spille (maks %d) ? "
+
+msgid ""
+"Well, why did you run this anyways???\n"
+"\n"
+msgstr ""
+"Vel, hvorfor startet du dette i det hele tatt???\n"
+"\n"
+
+msgid "Gnome Tali"
+msgstr "Gnome Tali"
+
+msgid "Computer playing for %s"
+msgstr "Datamaskinen spiller for %s"
+
+msgid "%s! -- You're up."
+msgstr "%s! -- Din tur."
+
+msgid "You're only allowed three rolls! Select a score box."
+msgstr "Du får bare tre kast! Velg hvor du vil bruke det."
+
+msgid "Scott Heavner"
+msgstr "Scott Heavner"
+
+msgid "Orest Zborowski - Curses Version (C) 1992"
+msgstr "Orest Zborowski - Curses Versjon (C) 1992"
+
+msgid "(C) 1998 the Free Software Fundation"
+msgstr "(C) 1998 the Free Software Fundation"
+
+msgid "Cheater! Any high scores will not be recorded."
+msgstr "Juksepave! Poengsummen vil ikke bli lagret."
+
+msgid "Select dice to re-roll, press Roll!, or select score slot."
+msgstr "Velg terning som skal kastes om igjen, trykk kast!, eller velg."
+
+msgid " Roll ! "
+msgstr " Kast ! "
+
+msgid "Calculate random die throws (debug)"
+msgstr "Kalkuler vilkårlige terningkast (debug)"
+
+msgid "Delay computer moves"
+msgstr "Forsink datamaskinens trekk"
+
+msgid "Show high scores and exit"
+msgstr "Vis poengene og avslutt"
+
+msgid "Display computer thoughts"
+msgstr "Vis datamaskinens tanker"
+
+msgid "Number of computer opponents"
+msgstr "Antall datamaskinmotstandere"
+
+msgid "Number of human opponents"
+msgstr "Antall menneskelige motstandere"
+
+msgid "Current game will complete with original number of players."
+msgstr ""
+"Pågående spill vil spilles ferdig med det opprinnelige antall spillere."
+
+msgid "GTali setup"
+msgstr "GTali oppsett"
+
+msgid "Computer Opponents"
+msgstr "Datamaskinmotstandere"
+
+msgid "Delay between rolls"
+msgstr "Pause mellom omganger"
+
+msgid "Show thoughts during turn"
+msgstr "Vis tenking under tur"
+
+msgid "Number of opponents:"
+msgstr "Antall motstandere:"
+
+msgid "Human Players"
+msgstr "Menneskelige spillere"
+
+msgid "Number of players:"
+msgstr "Antall spillere:"
+
+msgid "Optional Rules"
+msgstr "Alternative regler"
+
+msgid "Extra Yahtzee Bonus"
+msgstr "Ekstra bonus for Yatzy"
+
+msgid "Enforce Joker Rules"
+msgstr "Tvungen bruke av joker-regler"
+
+msgid "Player Names"
+msgstr "Navn på spillere"
+
+msgid "1's [total of 1s]"
+msgstr "Enere [total av enere]"
+
+msgid "2's [total of 2s]"
+msgstr "Toere [total av toere]"
+
+msgid "3's [total of 3s]"
+msgstr "Trere [total av trere]"
+
+msgid "4's [total of 4s]"
+msgstr "Firere [total av firere]"
+
+msgid "5's [total of 5s]"
+msgstr "Femmere [total av femmere]"
+
+msgid "6's [total of 6s]"
+msgstr "Seksere [total av seksere]"
+
+msgid "3 of a Kind [total]"
+msgstr "3 like [total]"
+
+msgid "4 of a Kind [total]"
+msgstr "4 like [total]"
+
+msgid "Full House [25]"
+msgstr "Hus [25]"
+
+msgid "Small Straight [30]"
+msgstr "Liten straight [30]"
+
+msgid "Large Straight [40]"
+msgstr "Stor straight [40]"
+
+msgid "Yahtzee [50]"
+msgstr "Yahtzee [50]"
+
+msgid "Chance [total]"
+msgstr "Sjanse [total]"
+
+msgid "Lower Total"
+msgstr "Under streken"
+
+msgid "Grand Total"
+msgstr "Sum"
+
+msgid "Upper total"
+msgstr "Over streken"
+
+msgid "Bonus"
+msgstr "Bonus"
+
+msgid "How many times to you wish to roll? "
+msgstr "Hvor mange ganger ønsker du å trille? "
+
+msgid "Generating"
+msgstr "Genererer"
+
+msgid "Results"
+msgstr "Resultat"
+
+msgid "Num Rolls"
+msgstr "Ganger trillet"
+
+msgid "Total"
+msgstr "Totalt"
+
+msgid "IOR of remote Iagno server"
+msgstr "Iagno fjernvertens IOR"
+
+msgid "IOR"
+msgstr "IOR"
+
+msgid "Iagno"
+msgstr "Iagno"
+
+msgid "(C) 1998 Ian Peters"
+msgstr "(C) 1998 Ian Peters"
+
+msgid ""
+"Send comments and bug reports to: itp@gnu.org\n"
+"Tiles under the General Public License."
+msgstr ""
+"Send kommentarer og feilrapporter til: itp@gnu.org\n"
+"Tiles er under General Public License."
+
+msgid "Could not find '%s' pixmap file for Iagno\n"
+msgstr "Kunne ikke finne bildefilen '%s' for Iagno\n"
+
+msgid "Welcome to Iagno!"
+msgstr "Velkommen til Iagno!"
+
+msgid "Quick Moves"
+msgstr "Hurtige trekk"
+
+msgid "Stagger flips"
+msgstr "Snublende vending"
+
+msgid "Show grid"
+msgstr "Vis rutenett"
+
+msgid "Start a new game giving a seed number..."
+msgstr "Start et nytt spill og oppgi utgangsnummer..."
+
+msgid "Shuffle tiles"
+msgstr "Stokk steinene"
+
+msgid "Show Tool Bar"
+msgstr "Vis verktøylinje"
+
+msgid "Toggle display of the toolbar"
+msgstr "Slå av/på visning av verktøylinjen"
+
+msgid "Shuffle"
+msgstr "Stokk"
+
+msgid "Prefs"
+msgstr "Innstillinger"
+
+msgid "Tiles don't match!"
+msgstr "Steinene er ikke like!"
+
+msgid "No more moves"
+msgstr "Ingen flere trekk"
+
+msgid "Tiles"
+msgstr "Steiner"
+
+msgid "Select Tiles:"
+msgstr "Velg steiner:"
+
+msgid "Make it the default"
+msgstr "Sett som standard"
+
+msgid "Tile Background:"
+msgstr "Bakgrunn for stein:"
+
+msgid "Select Background Tiles:"
+msgstr "Velg bakgrunn for steiner:"
+
+msgid "Maps"
+msgstr "Kart"
+
+msgid "Select Map:"
+msgstr "Velg kart:"
+
+msgid "Colours"
+msgstr "Farger"
+
+msgid "Background:"
+msgstr "Bakgrunn:"
+
+msgid "Tile Background"
+msgstr "Bakgrunn for stein:"
+
+msgid "Select Tile Background:"
+msgstr "Velg bakgrunn for steiner:"
+
+msgid "Warnings"
+msgstr "Advarsler"
+
+msgid "Warn when tiles don't match"
+msgstr "Advar når steinene ikke er like!"
+
+msgid "Confirm before quitting game"
+msgstr "Bekreft før spillet avsluttes"
+
+msgid "Gnome Mahjongg"
+msgstr "Gnome Mahjongg"
+
+msgid ""
+"Send comments and bug reports to:\n"
+"        pancho@nuclecu.unam.mx or\n"
+"        mmeeks@gnu.org\n"
+"\n"
+"Tiles under the General Public License."
+msgstr ""
+"Send kommentarer og feilrapporter til:\n"
+"        pancho@nuclecu.unam.mx eller\n"
+"        mmeeks@gnu.org\n"
+"\n"
+"Tiles er under General Public License."
+
+msgid "Game Number:"
+msgstr "Spill nummer:"
+
+msgid "Could not find file %s"
+msgstr "Kunne ikke finne filen %s"
+
+msgid ""
+"Sorry, I can't find\n"
+"a playable configuration."
+msgstr ""
+"Beklager, kan ikke finne\n"
+"en spillbar konfigurasjon."
+
+msgid "Tiles Left: "
+msgstr "Steiner igjen:"
+
+msgid "Moves Left: "
+msgstr "Trekk igjen:"
+
+msgid "The Same Gnome"
+msgstr "The Same Gnome"
+
+msgid ""
+"Could not find the theme:\n"
+"%s\n"
+"\n"
+"Please check you Same Gnome instalation"
+msgstr ""
+"Kunne ikke finne tema:\n"
+"%s\n"
+"\n"
+"Vennligst sjekk din Same Gnome installasjon"
+
+msgid "Scenario"
+msgstr "Scenario"
+
+msgid "Select scenario:"
+msgstr "Velg scenario"
+
+msgid "Make it the default scenario"
+msgstr "Sett som standard scenario"
+
+msgid "Original idea from KDE's same game program."
+msgstr "Original ide fra KDE's same game program"
+
+msgid "Debugging mode"
+msgstr "Avlusingsmodus"
+
+msgid "Same Gnome"
+msgstr "Same Gnome"
+
+msgid "Welcome to Same Gnome!"
+msgstr "Velkommen til Same Gnome!"
+
+msgid "Marked: "
+msgstr "Markert: "
+
+msgid "Could not find the '%s' theme for Glines\n"
+msgstr "Kunne ikke finne temaet '%s' for Glines\n"
+
+msgid "Couldn't find pixmap file!\n"
+msgstr "Kunne ikke finne bildefilen!\n"
+
+msgid "Ack!  Couldn't load level file %s\n"
+msgstr "Akk! Kunne ikke laste nivåfilen %s\n"
+
+msgid "Could not find the '%s' theme for gnometris\n"
+msgstr "Kunne ikke finne temaet '%s' for gnometris\n"
+
+msgid "Deal more cards"
+msgstr "Del ut flere kort"
+
+msgid "an empty foundation pile"
+msgstr "en tom fundamenthaug"
+
+msgid "an empty foundation"
+msgstr "et tomt fundament"
+
+msgid ""
+"Aim to place the suits in the order which fits the current layout most "
+"naturally."
+msgstr ""
+"Prøv å plassere stokkene i rekkefølgn som er mest naturlig i forhold til "
+"nåværende utformingen."
+
+msgid "Move something on to an empty reserve"
+msgstr "Flytt noe til en tom reserve"
+
+msgid "an empty Tableau"
+msgstr "et tomt tablå"
+
+msgid "Try a new game"
+msgstr "Prøv et nytt spill"
+
+msgid "to an empty field"
+msgstr "til et tomt felt"
+
+msgid "Place cards on to the Tableau to form poker hands"
+msgstr "Plasser kort på tablået for å lage pokerhender"
+
+msgid "the foundation pile"
+msgstr "fundamenthaugen"
+
+msgid "Move a King on to the empty Tableau slot"
+msgstr "Flytt en konge til den tomme tablåplassen"
+
+msgid "Reshuffle cards"
+msgstr "Stokk om kortene"
+
+msgid "Move waste on to a reserve slot"
+msgstr "Flytt kast til en reserveplass"
+
+msgid "empty foundation"
+msgstr "tomt fundament"
+
+msgid "red joker"
+msgstr "rød joker"
+
+msgid "Try moving card piles around"
+msgstr "Prøv å flytte korthauger rundt"
+
+msgid "Move something into the empty Tableau slot"
+msgstr "Flytt noe til den tomme tablå-plassen"
+
+msgid "Place something on to the empty Tableau slot"
+msgstr "Plasser noe på den tomme tablå-plassen"
+
+msgid "Auto move to homecell"
+msgstr "Flytt automatisk til hjemmecellen"
+
+msgid "Move one by one"
+msgstr "Flytt en og en"
+
+msgid "fields"
+msgstr "felter"
+
+msgid "freecells"
+msgstr "freeceller"
+
+msgid "homecells"
+msgstr "hjemmeceller"
+
+msgid "Move a card from the reserve on to the empty tableau slot"
+msgstr "Flytt et kort fra reserven til den tomme tablåplassen"
+
+msgid "Select a card from the reserve for first foundation pile"
+msgstr "Velg et kort fra reserven for den første fundamenthaugen"
+
+msgid "on to the empty tableau slot"
+msgstr "til den tomme tablåplassen"
+
+msgid "bdc\n"
+msgstr "bdc\n"
+
+msgid "Deal another hand"
+msgstr "Del ut et kort til"
+
+msgid "Move a card or build of cards on to the empty slot"
+msgstr "Flytt et kort eller bygg med kort til den tomme plassen"
+
+msgid "Move a build of cards on to the empty Tableau slot"
+msgstr "Flytt et bygg med kort til den tomme tablåplassen"
+
+msgid "Move waste to stock"
+msgstr "Flytt kast til stokken"
+
+
+msgid "Country"
+msgstr "Land"
+
+msgid "Provider"
+msgstr "Leverandør"
+
+msgid "Product"
+msgstr "Produkt"
+
+msgid "Vendor"
+msgstr "Leverandør"
+
+msgid "Port"
+msgstr "Port"
+
+msgid "Baud Rate"
+msgstr "Baud-hastighet"
+
+msgid "Built-in"
+msgstr "Integrert"
+
+msgid "Select the built-in device from the list"
+msgstr "Velg den integrerte enheten fra listen"
+
+msgid "Make sure the device is not disabled by a manual switch or button on the side of the computer."
+msgstr "Vær sikker på at enheten ikke er inaktiv på grunn av en manuell bryter eller en knapp på siden av maskinen."
+
+msgid "PC Card, PCMCIA, or ExpressCard"
+msgstr "PC Card, PCMCIA eller ExpressCard"
+
+msgid "Select the correct device from the list"
+msgstr "Velg riktig enhet fra listen"
+
+msgid "Make sure the SIM card is in place"
+msgstr "Vær sikker på at SIM-kortet er på riktig sted"
+
+msgid "USB"
+msgstr "USB"
+
+msgid "Select the USB device from the list"
+msgstr "Velg USB-enheten fra listen"
+
+msgid "The device must be plugged in and must be switched on. Make sure that the mobile phone has no security lock active. Make sure the SIM card is in place"
+msgstr "Enheten må være plugget inn og slått på. Vær sikker på at sikkerhetslås ikke er aktiv. Sjekk at SIM-kortet er på plass"
+
+msgid "Country:"
+msgstr "Land:"
+
+msgid "You can search the list by entering text on your keyboard"
+msgstr "Du kan søke i listen ved å skrive tekst på din tastatur"
+
+msgid "The country code as defined by ISO 3166 standard"
+msgstr "Landskoden er definert av ISO 3166"
+
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
+msgid "Serial cable"
+msgstr "Seriell kabel"
+
+msgid "New Mobile Broadband Connection"
+msgstr "Ny mobil bredbåndstilkobling"
+
+msgid "This assistant will guide you through setting up a new mobile broadband connection. The connection can be established using a mobile phone or a dedicated data modem."
+msgstr "Denne veiviseren vil hjelpe deg med å sette opp en ny mobil bredbåndstilkobling. Du kan bruke en mobiltelefon eller et modem for å sette opp denne tilkoblingen."
+
+msgid "Welcome"
+msgstr "Velkommen"
+
+msgid "How is your mobile phone or data modem connected to your computer?"
+msgstr "Hvordan er mobiltelefonen eller modemet tilkoblet datamaskinen?"
+
+msgid "Connection Method"
+msgstr "Tilkoblingsmetode"
+
+msgid "Select the Bluetooth device from the list"
+msgstr "Velg Bluetooth-enheten fra listen"
+
+msgid "Bluetooth address in form 01:23:45:67:89:AB"
+msgstr "Bluetooth-adressen er i format 01:23:45:67:89:AB"
+
+msgid "Bluetooth address:"
+msgstr "Bluetooth-adresse:"
+
+msgid "Specify Manually:"
+msgstr "Spesifiser manuelt"
+
+msgid "Select the serial port and baud rate from the list"
+msgstr "Velg en seriell port og baud-hastighet fra listen"
+
+msgid "Path:"
+msgstr "Sti:"
+
+msgid "Baud:"
+msgstr "Baud:"
+
+msgid "Serial Cable"
+msgstr "Seriell kabel"
+
+msgid "Select the country and the service provider"
+msgstr "Velg land og leverandør"
+
+msgid "Click to show or hide a list of countries"
+msgstr "Klikk til å vise eller skjule en liste over land"
+
+msgid "Service Provider"
+msgstr "Leverandør"
+
+msgid "Verify the information you have provided"
+msgstr "Bekreft informasjonen du har gitt"
+
+msgid "Connection method:"
+msgstr "Tilkoblingsmetode:"
+
+msgid "Device:"
+msgstr "Enhet:"
+
+msgid "Service Provider:"
+msgstr "Leverandør:"
+
+msgid "Name:"
+msgstr "Navn:"
+
+
+msgid "Audio"
+msgstr "Lyd"
+
+msgid "Audio Properties content view component"
+msgstr "Inneholdsviser komponent för lydegenskaper"
+
+msgid "Nautilus Audio Properties view"
+msgstr "Nautilus lyd egenskaper viser"
+
+msgid "*"
+msgstr "*"
+
+msgid "<span weight=\"bold\">Album:</span>"
+msgstr "<span weight=\"bold\">Album:</span>"
+
+msgid "<span weight=\"bold\">Artist:</span>"
+msgstr "<span weight=\"bold\">Artist:</span>"
+
+msgid "<span weight=\"bold\">Bit rate:</span>"
+msgstr "<span weight=\"bold\">Bithastighet:</span>"
+
+msgid "<span weight=\"bold\">Comments:</span>"
+msgstr "<span weight=\"bold\">Kommentarer:</span>"
+
+msgid "<span weight=\"bold\">Format:</span>"
+msgstr "<span weight=\"bold\">Format:</span>"
+
+msgid "<span weight=\"bold\">Length:</span>"
+msgstr "<span weight=\"bold\">Lengde:</span>"
+
+msgid "<span weight=\"bold\">Title:</span>"
+msgstr "<span weight=\"bold\">Titel:</span>"
+
+msgid "<span weight=\"bold\">Track:</span>"
+msgstr "<span weight=\"bold\">Spor:</span>"
+
+msgid "Audio Properties"
+msgstr "Lydegenskaper"
+
+msgid "loading..."
+msgstr "laster in..."
+
+msgid "URI currently displayed"
+msgstr "URI som vises for nå"
+
+msgid "mono"
+msgstr "mono"
+
+msgid "stereo"
+msgstr "stereo"
+
+msgid "unknown"
+msgstr "ukjent"
+
+msgid "%d channel"
+msgid_plural "%d channels"
+msgstr[0] "%d kanal"
+msgstr[1] "%d kanaler"
+
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] "%d minutt"
+msgstr[1] "%d minutter"
+
+msgid "%02d.%03d seconds"
+msgid_plural "%02d.%03d seconds"
+msgstr[0] "%02d.%03d sekund"
+msgstr[1] "%02d.%03d sekunder"
+
+msgid "%s$s %s$s"
+msgstr "%s$s %s$s"
+
+msgid "Unknown"
+msgstr "Ukjent"
+
+msgid "Audio Viewer"
+msgstr "Lydviser"
+
+msgid "Audio view component"
+msgstr "Lydvisningskomponent"
+
+msgid "Audio view component's factory"
+msgstr "Fabrikk for lydvisningskomponent"
+
+msgid "Audio view factory"
+msgstr "Fabrikk for lydvisning"
+
+msgid "Nautilus Audio view"
+msgstr "Lydviser for Nautilus"
+
+msgid "View as Audio"
+msgstr "Vis som lyd"
+
+msgid "Ogg/Vorbis"
+msgstr "Ogg/Vorbis"
+
+msgid "FLAC"
+msgstr "FLAC"
+
+msgid "MPEG"
+msgstr "MPEG"
+
+msgid "WAVE"
+msgstr "WAVE"
+
+msgid "Amiga mod"
+msgstr "Amiga mod"
+
+msgid "Apple AIFF"
+msgstr "Apple AIFF"
+
+msgid "MIDI"
+msgstr "MIDI"
+
+msgid "ulaw audio"
+msgstr "ulaw-lyd"
+
+msgid "Artist: "
+msgstr "Artist: "
+
+msgid "Title: "
+msgstr "Tittel: "
+
+msgid "Make a selection first !"
+msgstr "Velg noe først!"
+
+msgid "<span size=\"larger\">Unknown</span>"
+msgstr "<span size=\"larger\">Ukjent</span>"
+
+msgid "ERROR: no information yet"
+msgstr "FEIL: ingen informasjon ennå"
+
+msgid "ERROR: %s"
+msgstr "FEIL: %s"
+
+msgid "Playing %s"
+msgstr "Spiller %s"
+
+msgid "Stopped."
+msgstr "Stoppet."
+
+msgid "Sorry, but there was an error reading %s."
+msgstr "En feil oppstod desverre ved lesing av %s."
+
+msgid "File"
+msgstr "Fil"
+
+msgid "Type"
+msgstr "Type"
+
+msgid "Length"
+msgstr "Lengde"
+
+msgid "Bitrate"
+msgstr "Bithastighet"
+
+msgid "Metadata"
+msgstr "Metadata"
+
+msgid "Not playing"
+msgstr "Spiller ikke"
+
+msgid "Sample"
+msgstr "Utdrag"
+
+msgid "This is a sample merged menu item"
+msgstr "Dette er et sammenslått prøvemenyobjekt"
+
+msgid "This is a sample merged toolbar button"
+msgstr "Dette er en sammenslått prøveverktøylinjeknapp"
+
+msgid "Nautilus Test view"
+msgstr "Testvisning för Nautilus"
+
+msgid "Nautilus Test view factory"
+msgstr "Fabrikk for Nautilus-testvisning"
+
+msgid "Test"
+msgstr "Test"
+
+msgid "Test Viewer"
+msgstr "Testviser"
+
+msgid "Test view component"
+msgstr "Testvisningskomponent"
+
+msgid "Test view component's factory"
+msgstr "Fabrikk for testvisningskomponent"
+
+msgid "View as Test"
+msgstr "Vise som test"
+
+msgid "This is a test merged menu item"
+msgstr "Dette er et sammenslått testmenyalternativ"
+
+msgid "This is a test merged toolbar button"
+msgstr "Dette er en sammenslått testverktøylinjeknapp"
+
+msgid ""
+"%s\n"
+"\n"
+"This is a test Nautilus content view component."
+msgstr ""
+"%s\n"
+"\n"
+"Dette er en testinneholdsviser för Nautilus."
+
+msgid ""
+"%s\n"
+"\n"
+"You selected the Test menu item."
+msgstr ""
+"%s\n"
+"\n"
+"Du valgte testmenyobjektet."
+
+msgid ""
+"%s\n"
+"\n"
+"You clicked the Test toolbar button."
+msgstr ""
+"%s\n"
+"\n"
+"Du klicket på testverktøyslinjeknappen."
+
+msgid "(none)"
+msgstr "(ingen)"
+
+
+msgid "Mount Point"
+msgstr "Monteringspunkt"
+
+msgid "Clear History"
+msgstr "Tøm historie"
+
+msgid "Disk"
+msgstr "Harddisk"
+
+msgid "Loading folder..."
+msgstr "Lastar mappe …"
+
+msgid "Gigabytes"
+msgstr "Gigabyte"
+
+msgid "Megabytes"
+msgstr "Megabyte"
+
+msgid "Kilobytes"
+msgstr "Kilobyte"
+
+msgid "%'u item"
+msgid_plural "%'u items"
+msgstr[0] "%'u oppføring"
+msgstr[1] "%'u oppføringar"
+
+msgid "The location is empty."
+msgstr "Adressa er tom."
+
+msgid "FIFO"
+msgstr "FIFO"
+
+msgid "Socket"
+msgstr "Sokkel"
+
+msgid "Create new file in the given directory"
+msgstr "Opprett ei ny fil i gjeven mappe"
+
+msgid "Create a new empty folder inside this folder"
+msgstr "Lag ei ny tom mappe inni denne mappa"
+
+msgid "Rename"
+msgstr "Gje nytt namn"
+
+msgid "Duplicate"
+msgstr "Lag kopi"
+
+msgid "Properties"
+msgstr "Eigenskapar"
+
+msgid "Open in New Window"
+msgstr "Opna i nytt vindauge"
+
+msgid "Open in New Tab"
+msgstr "Opna i ny fane"
+
+msgid "Show hidden files"
+msgstr "Vis gøymde filer"
+
+msgid "About"
+msgstr "Om"
+
+msgid "Home"
+msgstr "Heim"
+
+msgid "Go back"
+msgstr "Gå tilbake"
+
+msgid "Cut"
+msgstr "Klipp ut"
+
+msgid "Copy"
+msgstr "Kopier"
+
+msgid "Paste"
+msgstr "Lim inn"
+
+msgid "Mount the volume associated with this folder"
+msgstr "Monter volum som er assosiert med denne mappa"
+
+msgid "Unmount the volume associated with this folder"
+msgstr "Avmonter volum som er assosiert med denne mappa"
+
+msgid "Personal settings"
+msgstr "Personlege innstillingar"
+
+msgid "Reload"
+msgstr "Les på nytt"
+
+msgid "Execute Shell Command"
+msgstr "Køyr skalkommando"
+
+msgid "Select All"
+msgstr "Merk alle"
+
+msgid "Unselect"
+msgstr "Fjern merking"
+
+msgid "Select Items Matching..."
+msgstr "Vel mapper i samsvar med …"
+
+msgid "Group"
+msgstr "Gruppe"
+
+msgid "By Permissions"
+msgstr "Etter løyve"
+
+msgid "Activate items with a double click"
+msgstr "Aktiver oppføringar med dobbeltklikk"
+
+msgid "Background image"
+msgstr "Bakgrunnsbilete"
+
+msgid "Background color"
+msgstr "Bakgrunnsfarge"
+
+msgid "Background transparency:"
+msgstr "Gjennomsiktig bakgrunn:"
+
+msgid "Name"
+msgstr "Namn"
+
+msgid "Owner"
+msgstr "Eigar"
+
+msgid "Normal"
+msgstr "Normal"
+
+msgid "All"
+msgstr "Alle"
+
+msgid "Verbose"
+msgstr "Rikt"
+
+msgid "%'d item selected"
+msgid_plural "%'d items selected"
+msgstr[0] "%'d oppføring vald"
+msgstr[1] "%'d oppføringar vald"
+
+msgid " (containing %'d item)"
+msgid_plural " (containing %'d items)"
+msgstr[0] " (inneheld %'d oppføring)"
+msgstr[1] " (inneheld %'d oppføringar)"
+
+msgid "Username:"
+msgstr "Brukarnamn:"
+
+msgid "Ok"
+msgstr "Ok"
+
+msgid "Selection"
+msgstr "Utval"
+
+msgid "Link to %s"
+msgstr "Lenkja til %s"
+
+msgid "Installed Plugins"
+msgstr "Installerte programtillegg"
+
+msgid "File Type"
+msgstr "Filtype"
+
+msgid "MIME Type"
+msgstr "MIME-type"
+
+msgid "Encoding"
+msgstr "Teiknkoding"
+
+msgid "Permissions"
+msgstr "Løyve"
+
+msgid "Folder"
+msgstr "Mappe"
+
+msgid "Hidden"
+msgstr "Gøymd"
+
+msgid "Go"
+msgstr "Slå opp"
+
+msgid "Remove"
+msgstr "Fjern"
+
+msgid "Preparing"
+msgstr "Forbereder"
+
+msgid "address already in use"
+msgstr "adressa er i bruk"
+
+msgid "Open with %s"
+msgstr "Opna med %s"
+
+msgid "Go To"
+msgstr "Gå til"
+
+msgid "Path"
+msgstr "Stig"
+
+msgid "Run in Terminal"
+msgstr "Køyr i Terminal"
+
+msgid "Create New Folder"
+msgstr "Lag ny mappe"
+
+msgid "Add"
+msgstr "Legg til"
+
+msgid "Text Completion"
+msgstr "Tekstfullføring"
+
+msgid "Variable"
+msgstr "Variabel"
+
+msgid "Find"
+msgstr "Finn"
+
+msgid "Filter:"
+msgstr "Filter:"
+
+msgid "Contains the text"
+msgstr "Inneheld teksten"
+
+msgid "Any"
+msgstr "Kva som helst"
+
+msgid "Regular"
+msgstr "Vanleg"
+
+msgid "Select Files..."
+msgstr "Vel filer …"
+
+msgid "Select folder to search in"
+msgstr "Vel mappa du vil søkja i"
+
+msgid "Searching..."
+msgstr "Søker ..."
+
+msgid "List files only"
+msgstr "Vis berre filer"
+
+msgid "Create a compressed archive with the selected objects"
+msgstr "Lag eit komprimert arkiv med dei merka objekta"
+
+msgid "Create a new archive"
+msgstr "Lag nytt arkiv"
+
+msgid "Install"
+msgstr "Installer"
+
+msgid "Uninstall"
+msgstr "Avinstaller"
+
+msgid "Information about the program"
+msgstr "Informasjon om programmet"
+
+msgid "Information"
+msgstr "Informasjon"
+
+msgid "Apply changes"
+msgstr "Bruk innstillingane"
+
+msgid "Owner:"
+msgstr "Eigar:"
+
+msgid "Execute"
+msgstr "Køyr"
+
+msgid "Set UID"
+msgstr "Set UID"
+
+msgid "Group:"
+msgstr "Gruppe:"
+
+msgid "Set GID"
+msgstr "Set GID"
+
+msgid "Others:"
+msgstr "Andre:"
+
+msgid "Sticky"
+msgstr "Fast"
+
+msgid "Preview"
+msgstr "Førehandsvising"
+
+msgid "Kill (KILL)"
+msgstr "Drep (KILL)"
+
+msgid "Select a folder"
+msgstr "Vel ei mappe"
+
+msgid "Icons"
+msgstr "Ikon"
+
+msgid "General"
+msgstr "Allment"
+
+msgid "General Options"
+msgstr "Generelle val"
+
+msgid "Desktop"
+msgstr "Skrivebord"
+
+msgid "Edit the list of environment variables and associated values"
+msgstr "Endra lista over miljøvariablar og tilhøyrande verdiar"
+
+msgid "Terminate (TERM)"
+msgstr "Avslutt (TERM)"
+
+msgid "%d difference"
+msgid_plural "%d differences"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Verbose output debugging mode."
+msgstr "Utvida meldingar i feilsøkingsmodus."
+
+msgid "Show version information"
+msgstr "Vis versjonsinformasjon"
+
+msgid "Extended"
+msgstr "Utvidet"
+
+msgid "Select Custom Icon"
+msgstr "Vel sjølvvald ikon"
+
+msgid "Please drag just one image to set a custom icon."
+msgstr "Dra berre eitt bilete for å setja sjølvvald ikon."
+
+

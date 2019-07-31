@@ -1,0 +1,1442 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:43:42 CDT 2013 ---
+#
+# Russell Kyaw <rkyaw@yahoo.com>, 2009-2010.
+# BurmaIT Team <burmait@burmait.net>, 2009-2010.
+# Hpone Myint Khaing <phonemyintkhaing@gmail.com>, 2011.
+# ယဉ်မေဦး (Yin May Oo) <yinmayoo@gmail.com>, 2011.
+# Thura Hlaing <trhura@gmail.com>, 2011.
+# Mg Okka Mg <trhura@gmail.com>, 2011.
+# ye`monkyaw <yemonkyaw007@gmail.com>, 2011.
+# Zaw Myo Htet <hackforpeace01@gmail.com>, 2011.
+# Yemonkyaw <yemonkyaw007@gmail.com>, 2011.
+# KYAW MYAT THU <MYANMARNE0@GMAIL.COM>, 2011.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-02 12:27-0600\n"
+"PO-Revision-Date: 2011-10-11 12:10+0630\n"
+"Last-Translator: Thura Hlaing <trhura@gmail.com>\n"
+"Language-Team: Burmese <my-l10n-team@googlegroups.com>\n"
+"Language: my\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"product=braserokeywords=I18N+L10Ncomponent=general\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-Language: Burmese\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Country: MYANMAR\n"
+"X-Generator: Narro 0.9.4 on http://translate.libreworks.info\n"
+
+#: ../../xffm/completion/base.hh:28
+#, fuzzy
+msgid "Command"
+msgstr "O ကွန်မန်း"
+
+#: ../../xffm/completion/base.hh:31
+msgid "File"
+msgstr "ဖိုင်"
+
+#: ../../xffm/completion/base.hh:34
+#, fuzzy
+msgid "Command history"
+msgstr "O ကွန်မန့် အရောင်"
+
+#. option -u uid "uid" "uid_combo"
+#: ../../xffm/completion/base.hh:37 ../../xffm/find/dialog.hh:199
+#, fuzzy
+msgid "User"
+msgstr "အသုံးပြုသူများ"
+
+#: ../../xffm/completion/base.hh:40
+#, fuzzy
+msgid "Variable"
+msgstr "အဆင်ပြေ"
+
+#: ../../xffm/completion/base.hh:43
+msgid "Host"
+msgstr ""
+
+#: ../../xffm/completion/base.hh:55
+#, fuzzy
+msgid "Found no match"
+msgstr "မကိုက်ညီဘူး"
+
+#: ../../xffm/completion/base.hh:133 ../../xffm/completion/base.hh:134
+#, fuzzy
+msgid "Matches"
+msgstr "တူညီသော ကိစ္စ"
+
+#: ../../xffm/completion/base.hh:134
+msgid "Too many files open"
+msgstr ""
+
+#: ../../xffm/completion/base.hh:325 ../../xffm/find/fgr.hh:124
+#, fuzzy
+msgid "Options:"
+msgstr "ရွေးချယ်စရာများ"
+
+#: ../../xffm/completion/bash.hh:133
+#, fuzzy
+msgid "Completion mode:"
+msgstr "ဖိသိပ်ခြင်းအချိုး"
+
+#: ../../xffm/completion/bash.hh:134
+#, fuzzy
+msgid "command"
+msgstr "O ကွန်မန်း"
+
+#: ../../xffm/completion/bash.hh:135
+msgid "file"
+msgstr "ဖိုင်"
+
+#: ../../xffm/completion/bash.hh:145 ../../xffm/completion/bash.hh:149
+#, fuzzy
+msgid "Options >>"
+msgstr "ရွေးချယ်စရာများ"
+
+#: ../../xffm/find/fgr.hh:124 ../../xffm/find/dialog.hh:308
+msgid "Path"
+msgstr "လမ်း​ကြောင်း"
+
+#: ../../xffm/find/fgr.hh:125
+#, fuzzy
+msgid "Locate documents and folders on this computer by name or content"
+msgstr "စာရွက်စာတမ်းနှင့် ဖိုင်တွဲများကို အမည်ဖြင့်ရှာရန်"
+
+#: ../../xffm/find/fgr.hh:126 ../../xffm/find/dialog.hh:341
+#, fuzzy
+msgid "Filter:"
+msgstr "F စီစစ်"
+
+#: ../../xffm/find/fgr.hh:126
+#, fuzzy
+msgid "Search for files"
+msgstr "ဖိုင်များရှာဖွေရန်..."
+
+#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
+#: ../../xffm/find/fgr.hh:128
+#, fuzzy
+msgid "Contents:"
+msgstr "C မာတိကာ"
+
+#: ../../xffm/find/fgr.hh:128
+msgid "File's contents filtered as plain text."
+msgstr ""
+
+#: ../../xffm/find/fgr.hh:131
+msgid "Verbose output debugging mode."
+msgstr ""
+
+#: ../../xffm/find/fgr.hh:133
+#, fuzzy
+msgid "Show version information"
+msgstr "မူအဆင့် အချက်အလက်ကို ပြသပြီး ထွက်ခွာပါ"
+
+#: ../../xffm/find/fgr.hh:135
+#, fuzzy
+msgid "Filter Details"
+msgstr "စစ်ထုတ်ရန်ရွေးချယ်မှုများ"
+
+#. / option -a "xdev"
+#: ../../xffm/find/fgr.hh:138 ../../xffm/find/dialog.hh:180
+#, fuzzy
+msgid "Stay on single filesystem"
+msgstr "ဖိုင်များကို ဆန်းစစ်နေသည်"
+
+#: ../../xffm/find/fgr.hh:140
+msgid "Print..."
+msgstr "P စာထုတ်"
+
+#: ../../xffm/find/fgr.hh:140
+msgid "The unique Process ID that identifies this process."
+msgstr ""
+
+#. / option -D "recursiveH"
+#: ../../xffm/find/fgr.hh:142 ../../xffm/find/dialog.hh:177
+#, fuzzy
+msgid "Find hidden files and directories"
+msgstr "ဝှက်ထားသော ဖိုင် နှင့် ဖိုလ်ဒါများကို ဖော်ပြ"
+
+#: ../../xffm/find/fgr.hh:143
+msgid "Filter"
+msgstr "F စီစစ်"
+
+#: ../../xffm/find/fgr.hh:144
+msgid ""
+"To display files which pass the filter (stars and regexps will be processed)"
+msgstr ""
+
+#. / option -r "recursive"
+#: ../../xffm/find/fgr.hh:146 ../../xffm/find/dialog.hh:174
+msgid "Recursive"
+msgstr ""
+
+#: ../../xffm/find/fgr.hh:147 ../../xffm/find/fgr.hh:148
+#: ../../xffm/find/fgr.hh:149 ../../xffm/find/fgr.hh:150
+#, fuzzy
+msgid "KByte"
+msgstr "ဘိုက်"
+
+#: ../../xffm/find/fgr.hh:148
+msgid "is greater than or equal to"
+msgstr ""
+
+#: ../../xffm/find/fgr.hh:150
+msgid "is less than or equal to"
+msgstr ""
+
+#: ../../xffm/find/fgr.hh:152
+msgid "Set UID"
+msgstr ""
+
+#: ../../xffm/find/fgr.hh:152
+#, fuzzy
+msgid "Executable Text Files"
+msgstr "စာသားဖိုင်အားလုံး"
+
+#: ../../xffm/find/fgr.hh:154
+msgid "The permissions of the file, in octal notation."
+msgstr ""
+
+#: ../../xffm/find/fgr.hh:155
+msgid "Type"
+msgstr "အမျိုးအစား"
+
+#: ../../xffm/find/fgr.hh:157 ../../xffm/find/signals.hh:17
+#, fuzzy
+msgid "Any"
+msgstr "အတိုကောက်"
+
+#: ../../xffm/find/fgr.hh:157
+#, fuzzy
+msgid "Default type"
+msgstr "မူရင်းအတိုင်း"
+
+#: ../../xffm/find/fgr.hh:158 ../../xffm/common/preview.hh:497
+#, fuzzy
+msgid "Regular file"
+msgstr "ပုံမှန် ဖိုင်တခု မဟုတ်ဘူး"
+
+#: ../../xffm/find/fgr.hh:159 ../../xffm/find/signals.hh:11
+#: ../../xffm/fm/local/popup.hh:803 ../../xffm/common/preview.hh:488
+#, fuzzy
+msgid "Directory"
+msgstr "ဖိုင်လမ်းကြောင်း"
+
+#: ../../xffm/find/fgr.hh:160 ../../xffm/find/signals.hh:12
+#: ../../xffm/common/preview.hh:494
+#, fuzzy
+msgid "Symbolic Link"
+msgstr "သကေင်္တ နှင့်"
+
+#: ../../xffm/find/fgr.hh:161
+msgid "UNIX Socket"
+msgstr ""
+
+#: ../../xffm/find/fgr.hh:162 ../../xffm/find/signals.hh:14
+#: ../../xffm/common/preview.hh:482
+msgid "Block device"
+msgstr ""
+
+#: ../../xffm/find/fgr.hh:163 ../../xffm/find/signals.hh:15
+#: ../../xffm/common/preview.hh:485
+#, fuzzy
+msgid "Character device"
+msgstr "A  သင်္ကေတ သတ်မှတ်ချက် -"
+
+#: ../../xffm/find/fgr.hh:164 ../../xffm/find/signals.hh:16
+#: ../../xffm/common/preview.hh:491
+msgid "FIFO"
+msgstr ""
+
+#. radio_p freed on destroy event for dialog_.
+#. option -k minutes "last_minutes", "last_minutes_spin"
+#: ../../xffm/find/fgr.hh:166 ../../xffm/find/fgr.hh:168
+#: ../../xffm/find/dialog.hh:221
+msgid "Minutes"
+msgstr "မိနစ်"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/dialog.hh:270 ../../xffm/find/dialog.hh:370
+#: ../../xffm/fm/treeview.hh:18
+msgid "Details"
+msgstr "အသေးစိတ်များ"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/fgr.hh:179 ../../xffm/find/fgr.hh:180
+#: ../../xffm/find/fgr.hh:183 ../../xffm/find/fgr.hh:184
+#: ../../xffm/find/fgr.hh:187 ../../xffm/find/fgr.hh:188
+msgid "TIME"
+msgstr ""
+
+#: ../../xffm/find/fgr.hh:168 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/fgr.hh:174 ../../xffm/find/fgr.hh:177
+msgid "Previous"
+msgstr "P နောက်သို့"
+
+#. option -h hours "last_hours", "last_hours_spin"
+#: ../../xffm/find/fgr.hh:169 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/dialog.hh:226
+msgid "Hours"
+msgstr "နာရီ"
+
+#. option -d days "last_days", "last_days_spin"
+#: ../../xffm/find/fgr.hh:172 ../../xffm/find/fgr.hh:174
+#: ../../xffm/find/dialog.hh:231
+msgid "Days"
+msgstr ""
+
+#: ../../xffm/find/fgr.hh:175
+msgid "Month"
+msgstr ""
+
+#: ../../xffm/find/fgr.hh:177
+msgid "Month(s)"
+msgstr ""
+
+#: ../../xffm/find/fgr.hh:180
+#, fuzzy
+msgid "Modification Time :"
+msgstr "ပြုပြင်သောရက်စွဲဖြင့်"
+
+#: ../../xffm/find/fgr.hh:184
+#, fuzzy
+msgid "Access Time :"
+msgstr "Access Point အမည် - "
+
+#: ../../xffm/find/fgr.hh:188
+#, fuzzy
+msgid "Creation Time :"
+msgstr "ပုံရိပ်ဖိုင် တည်ဆောက်ခြင်း"
+
+#: ../../xffm/find/fgr.hh:191 ../../xffm/find/fgr.hh:192
+#, fuzzy
+msgid "uid"
+msgstr "တည်ဆောက်"
+
+#: ../../xffm/find/fgr.hh:192
+#, fuzzy
+msgid "User:"
+msgstr "အသုံးပြုသူများ"
+
+#: ../../xffm/find/fgr.hh:194 ../../xffm/find/fgr.hh:195
+msgid "gid"
+msgstr ""
+
+#: ../../xffm/find/fgr.hh:195
+#, fuzzy
+msgid "Group:"
+msgstr "အဖွဲ့"
+
+#: ../../xffm/find/fgr.hh:198
+msgid ""
+"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+"character that  normally  follows  a file  name"
+msgstr ""
+
+#: ../../xffm/find/fgr.hh:200
+#, fuzzy
+msgid "Content View"
+msgstr "ပါဝင်မှုအရွယ်အစားပမာဏ"
+
+#: ../../xffm/find/fgr.hh:201 ../../xffm/find/fgr.hh:202
+#: ../../xffm/find/fgr.hh:203 ../../xffm/find/fgr.hh:204
+msgid "STRING"
+msgstr "အတွဲ"
+
+#: ../../xffm/find/fgr.hh:202 ../../xffm/find/fgr.hh:204
+#: ../../xffm/fm/local/popup.hh:563
+#, fuzzy
+msgid "Regular expression"
+msgstr "ပုံစံမကျသောဖြည့်သွင်းချက်"
+
+#: ../../xffm/find/fgr.hh:204
+msgid "Extended"
+msgstr ""
+
+#: ../../xffm/find/fgr.hh:206
+msgid "Ignore case"
+msgstr "I အကြီးသေး လစ်လျူရှု"
+
+#: ../../xffm/find/fgr.hh:208
+#, fuzzy
+msgid "Text Files"
+msgstr "စာသားဖိုင်"
+
+#: ../../xffm/find/fgr.hh:210 ../../xffm/find/dialog.hh:552
+msgid "No match"
+msgstr "မကိုက်ညီဘူး"
+
+#: ../../xffm/find/fgr.hh:212 ../../xffm/find/dialog.hh:470
+#, fuzzy
+msgid "Line Count"
+msgstr "ရေတွက်ပါ -"
+
+#: ../../xffm/find/fgr.hh:214
+msgid "Words"
+msgstr "စာလုံးများ"
+
+#: ../../xffm/find/fgr.hh:216
+msgid "Lines"
+msgstr "လိုင်းများ"
+
+#: ../../xffm/find/fgr.hh:368
+#, fuzzy, c-format
+msgid "Usage : %s [OPTIONS]\n"
+msgstr "သုံးစွဲမှု: %s"
+
+#: ../../xffm/find/signals.hh:10
+msgid "Regular"
+msgstr ""
+
+#: ../../xffm/find/signals.hh:13 ../../xffm/common/preview.hh:500
+msgid "Socket"
+msgstr ""
+
+#: ../../xffm/find/signals.hh:209
+#, fuzzy
+msgid "Select folder to search in"
+msgstr "ယာယီ ဖိုင်များအတွက် ဖိုင်တွဲကို ရွေးပါ"
+
+#. button no
+#: ../../xffm/find/signals.hh:265 ../../xffm/find/dialog.hh:584
+#: ../../xffm/response/entryfileresponse.hh:18
+#: ../../xffm/response/entryresponse.hh:305
+#: ../../xffm/response/passwdresponse.hh:558
+#: ../../xffm/fm/local/properties.hh:304 ../../xffm/fm/local/rm.hh:155
+msgid "Cancel"
+msgstr "N  နေတော့"
+
+#: ../../xffm/find/signals.hh:293 ../../xffm/find/signals.hh:722
+#, fuzzy
+msgid "No editor for current action."
+msgstr "လက်ရှိလုပ်ဆောင်နေသောလုပ်ဆောင်ချက်ကိုရပ်တန့်ပါ"
+
+#. / option "upper_limit_spin" (only in gtk dialog_)
+#: ../../xffm/find/signals.hh:351 ../../xffm/find/dialog.hh:183
+#, fuzzy
+msgid "Results"
+msgstr "နောက်ရလဒ်များ"
+
+#: ../../xffm/find/signals.hh:351
+#, fuzzy
+msgid "Upper limit:"
+msgstr "မိုင်တာ အကန့်အသတ် -"
+
+#: ../../xffm/find/signals.hh:353
+#, fuzzy
+msgid "Counting files..."
+msgstr "ဖိုင်များကိုကူးယူခြင်း"
+
+#: ../../xffm/find/signals.hh:368
+#, fuzzy, c-format
+msgid "Found %d match"
+msgid_plural "Found %d matches"
+msgstr[0] "မကိုက်ညီဘူး"
+
+#: ../../xffm/find/signals.hh:370
+#, fuzzy, c-format
+msgid "%s Finished : %s"
+msgstr "ပြီးသွားပြီ"
+
+#: ../../xffm/find/signals.hh:488 ../../xffm/find/signals.hh:490
+#, fuzzy
+msgid "Searching..."
+msgstr "မေးမြန်းနေတယ်..."
+
+#. g_object_set_data(G_OBJECT(dialog_), "window", dialog_);
+#: ../../xffm/find/dialog.hh:98 ../../xffm/find/dialog.hh:150
+#: ../../xffm/find/dialog.hh:611
+msgid "Find"
+msgstr "ရှာဖွေ"
+
+#: ../../xffm/find/dialog.hh:183
+#, fuzzy
+msgid "Upper limit"
+msgstr "မိုင်တာ အကန့်အသတ် -"
+
+#. option -s +KByte "size_greater", "size_greater_spin"
+#: ../../xffm/find/dialog.hh:188
+msgid "At Least"
+msgstr ""
+
+#: ../../xffm/find/dialog.hh:188 ../../xffm/find/dialog.hh:193
+#, fuzzy
+msgid "kBytes"
+msgstr "ဘိုက်"
+
+#. option -s -KByte "size_smaller", "size_smaller_spin"
+#: ../../xffm/find/dialog.hh:193
+msgid "At Most"
+msgstr ""
+
+#: ../../xffm/find/dialog.hh:204
+msgid "Group"
+msgstr "အဖွဲ့"
+
+#. option -o octal "octal_p" "permissions_entry"
+#: ../../xffm/find/dialog.hh:208
+msgid "Octal Permissions"
+msgstr ""
+
+#. option -p suid | exe
+#: ../../xffm/find/dialog.hh:213
+msgid "SUID"
+msgstr ""
+
+#: ../../xffm/find/dialog.hh:213 ../../xffm/fm/local/popup.hh:843
+#, fuzzy
+msgid "Executable"
+msgstr "ဆောင်ရွတ်ပါ"
+
+#. option -m months "last_months", "last_months_spin"
+#: ../../xffm/find/dialog.hh:237
+msgid "Months"
+msgstr ""
+
+#: ../../xffm/find/dialog.hh:248
+#, fuzzy
+msgid "File type : "
+msgstr "ဖိုင် အမျိုးအစား -"
+
+#. gtk_widget_show (GTK_WIDGET(right_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(center_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(left_options_vbox));
+#: ../../xffm/find/dialog.hh:262 ../../xffm/find/dialog.hh:602
+#: ../../xffm/fm/page/page.hh:70 ../../xffm/common/gtk.hh:70
+msgid "Close"
+msgstr "ပိတ်သိမ်း"
+
+#. gtk_box_pack_start (vbox7a, GTK_WIDGET(advancedBox), TRUE, FALSE, 5);
+#. gtk_widget_show(GTK_WIDGET(advancedBox));
+#. //////////////  grep options.... /////////////////////////
+#: ../../xffm/find/dialog.hh:384
+#, fuzzy
+msgid "Contains"
+msgstr "C ဆက်တိုက်"
+
+#: ../../xffm/find/dialog.hh:404
+#, fuzzy
+msgid "Contains the text"
+msgstr "အနေအထား  စာသား"
+
+#: ../../xffm/find/dialog.hh:437
+msgid "Case Sensitive"
+msgstr "A စာလုံးပေါင်း သတိပြုပါ"
+
+#: ../../xffm/find/dialog.hh:449
+msgid "Extended regexp"
+msgstr ""
+
+#: ../../xffm/find/dialog.hh:460
+#, fuzzy
+msgid "Include binary files"
+msgstr "F ဖိုင်တွေ ပါရှိပါသည်"
+
+#: ../../xffm/find/dialog.hh:496
+#, fuzzy
+msgid "Match"
+msgstr "တူညီသော ကိစ္စ"
+
+#: ../../xffm/find/dialog.hh:508
+msgid "Anywhere"
+msgstr ""
+
+#: ../../xffm/find/dialog.hh:523
+msgid "Whole words only"
+msgstr ""
+
+#: ../../xffm/find/dialog.hh:538
+#, fuzzy
+msgid "lines"
+msgstr "လိုင်းများ"
+
+#: ../../xffm/find/dialog.hh:594
+msgid "Clear"
+msgstr "L  ရှင်းလင်း"
+
+#: ../../xffm/find/dialog.hh:636
+msgid "Edit"
+msgstr "E တည်းဖြတ်"
+
+#: ../../xffm/find/dialog.hh:751 ../../xffm/find/dialog.hh:766
+#: ../../xffm/common/util.hh:1150 ../../xffm/common/util.hh:1152
+#: ../../xffm/common/util.hh:1158 ../../xffm/common/util.hh:1160
+#: ../../xffm/common/preview.hh:479
+msgid "unknown"
+msgstr "အမျိုးအမည်မသိ"
+
+#: ../../xffm/find/dialog.hh:780
+msgid "Modified"
+msgstr "ပြုပြင်ချက်"
+
+#: ../../xffm/find/dialog.hh:784
+#, fuzzy
+msgid "Created"
+msgstr "ဖန်တီးခဲ့သည်-"
+
+#: ../../xffm/find/dialog.hh:788
+#, fuzzy
+msgid "Accessed"
+msgstr "ပြီးဆုံးပြီ"
+
+#: ../../xffm/find/dialog.hh:1106
+msgid ""
+"Basic rules:\n"
+"\n"
+"*  Will match any character zero or more times.\n"
+"?  Will match any character exactly one time\n"
+"[] Match any character within the [] \n"
+"^  Match at beginning of string\n"
+"$  Match at end of string \n"
+msgstr ""
+
+#: ../../xffm/find/dialog.hh:1115
+msgid ""
+"Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"In  basic regular expressions the metacharacters ?, +, {, |, (, and ) \n"
+"  lose their special meaning.\n"
+"\n"
+"The  period . matches  any  single  character.\n"
+"The caret ^ matches at the start of line.\n"
+"The dollar $ matches at the end of line.\n"
+"\n"
+"Characters within [ ] matches any single character in the list.\n"
+"Characters within [^ ] matches any single character *not* in the list.\n"
+"Characters inside [ - ] matches a range of characters (ie [0-9] or [a-z]).\n"
+"\n"
+"A regular expression may be followed by one of several repetition "
+"operators:\n"
+"?      The preceding item is optional and matched\n"
+"       at most once.\n"
+"*      The preceding item will be matched zero\n"
+"       or more times.\n"
+"+      The preceding item will be matched one or\n"
+"       more times.\n"
+"{n}    The preceding item is matched exactly n times.\n"
+"{n,}   The preceding item is matched n or more times.\n"
+"{n,m}  The preceding item is matched at least n times,\n"
+"       but not more than m times.\n"
+"\n"
+"To match any reserved character, precede it with \\. \n"
+"\n"
+"Two regular expressions may be joined by the logical or operator |.\n"
+"Two regular expressions may be concatenated.\n"
+"\n"
+"More information is available by typing \"man grep\"\n"
+msgstr ""
+
+#: ../../xffm/response/entryfileresponse.hh:20
+msgid "Open"
+msgstr "O ဖွင့်ရန်"
+
+#: ../../xffm/response/entryresponse.hh:29
+#: ../../xffm/response/entryfolderresponse.hh:28
+#, fuzzy
+msgid "Choose directory"
+msgstr "H ပင်မဖိုင်လမ်းညွှန်-"
+
+#. this button is redundant since hands are on keyboard for password
+#: ../../xffm/response/entryresponse.hh:309
+#: ../../xffm/response/passwdresponse.hh:189
+#: ../../xffm/response/passwdresponse.hh:559
+msgid "Ok"
+msgstr ""
+
+#: ../../xffm/response/commandprogressresponse.hh:32
+msgid "Items:"
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:21
+msgid "Enter password"
+msgstr "စကားဝှက် ထည့်သွင်းပါ"
+
+#. gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+#: ../../xffm/response/passwdresponse.hh:125
+#, fuzzy
+msgid "User Input"
+msgstr "သုံးစွဲသူ ကြားခံမြင်ကွင်း"
+
+#: ../../xffm/response/passwdresponse.hh:142
+#, fuzzy
+msgid "Response Requested"
+msgstr "စာရင်းဝင်ရန် တောင်းဆို"
+
+#: ../../xffm/response/passwdresponse.hh:264
+msgid "Preparing"
+msgstr "ပြင်ဆင်နေတယ်"
+
+#: ../../xffm/response/passwdresponse.hh:352
+msgid "sudo"
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:354
+msgid "Command:"
+msgstr "O ကွန်မန်း"
+
+#: ../../xffm/response/passwdresponse.hh:357
+#, fuzzy
+msgid "Permission denied"
+msgstr "ခွင့်ပြုရင် ငြင်းပယ်သည်"
+
+#: ../../xffm/response/passwdresponse.hh:358
+msgid "Try to approach a problem from different angles."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:359
+#, fuzzy
+msgid "Do you want to retry?"
+msgstr " \"%s\" ကိုအစားထိုးမလား"
+
+#: ../../xffm/response/passwdresponse.hh:360
+#, fuzzy
+msgid "Alternate:"
+msgstr "သုံးစွဲသူအမည် -"
+
+#: ../../xffm/response/passwdresponse.hh:365
+msgid "No"
+msgstr "ဟင့်အင်း"
+
+#: ../../xffm/response/passwdresponse.hh:401
+#, fuzzy
+msgid "Install"
+msgstr "သွင်းယူမှုပြီးဆုံးပြီ"
+
+#: ../../xffm/response/passwdresponse.hh:402
+#, fuzzy, c-format
+msgid "%s does not exist."
+msgstr "လမ်းကြောင်း မရှိဘူး"
+
+#: ../../xffm/response/passwdresponse.hh:467
+msgid "Blowfish"
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:468
+#, fuzzy
+msgid "Encryption Key Approval"
+msgstr "သိမ်းဆည်းမှု ချို့ယွင်း"
+
+#: ../../xffm/response/passwdresponse.hh:502
+msgid "-o     print output to standard out. Implies -r."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:506
+msgid "-c     DO NOT compress files before encryption."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:510
+msgid "-r     DO NOT remove input files after processing"
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:517
+#, fuzzy
+msgid "Encryption key: "
+msgstr "သိမ်းဆည်းမှု ချို့ယွင်း"
+
+#: ../../xffm/response/passwdresponse.hh:529
+#, fuzzy
+msgid "Confirm:"
+msgstr "F အတည်ပြုချက် - "
+
+#: ../../xffm/response/passwdresponse.hh:542
+msgid "Sorry, passwords do not match"
+msgstr "စကားဝှက်နှစ်ခု မတူကြပါ"
+
+#: ../../xffm/response/passwdresponse.hh:550
+#, fuzzy
+msgid "Minimum length:"
+msgstr "ရပ်မှတ် ကြာချိန်:"
+
+#: ../../xffm/response/timeoutresponse.hh:56
+msgid "Dismiss"
+msgstr ""
+
+#: ../../xffm/response/commandresponse.hh:23
+#, fuzzy
+msgid "Running"
+msgstr "ကျန်ရှိသည်များ"
+
+#. auto text = g_strdup_printf("%s (pid: %d)",
+#. _("Waiting for operation to finish..."),
+#. Tubo<Type>::getChild (pid));
+#: ../../xffm/response/commandresponse.hh:28
+msgid "Waiting for operation to finish..."
+msgstr ""
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Documents"
+msgstr "စာရွက်စာတမ်းများ"
+
+#: ../../xffm/fm/local/icons.hh:257
+#, fuzzy
+msgid "Downloads"
+msgstr "D ဒေါင်းလုပ်ဆွဲချပါ"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Music"
+msgstr "သီချင်း"
+
+#: ../../xffm/fm/local/icons.hh:257
+#, fuzzy
+msgid "Pictures"
+msgstr "ရုပ်ပုံ"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Templates"
+msgstr "ပုံစံခွက်များ"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Videos"
+msgstr "ဗီဒီယိုများ"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Desktop"
+msgstr "အလုပ်ခုံ"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Bookmarks"
+msgstr "မှတ်သားချက်"
+
+#: ../../xffm/fm/local/icons.hh:259 ../../xffm/fm/local/rm.hh:181
+msgid "Trash"
+msgstr "အမှိုက်ပုံး"
+
+#: ../../xffm/fm/local/popup.hh:60
+msgid "New"
+msgstr "N အသစ်"
+
+#. deprecated {N_("Open in New Tab"), NULL, NULL, NULL},
+#. deprecated {N_("Open in New Window"), NULL, NULL, NULL},
+#. common buttons /(also an iconsize +/- button)
+#: ../../xffm/fm/local/popup.hh:64 ../../xffm/fm/local/popup.hh:104
+#: ../../xffm/common/gtk.hh:74
+msgid "Copy"
+msgstr "C ကူးယူပါ"
+
+#: ../../xffm/fm/local/popup.hh:65 ../../xffm/fm/local/popup.hh:105
+#: ../../xffm/common/gtk.hh:73
+msgid "Cut"
+msgstr "ဖြတ်ယူပါ"
+
+#: ../../xffm/fm/local/popup.hh:66 ../../xffm/fm/local/popup.hh:106
+#: ../../xffm/common/gtk.hh:66
+msgid "Paste"
+msgstr "ပွားယူပါ"
+
+#. **************
+#: ../../xffm/fm/local/popup.hh:67 ../../xffm/fm/local/popup.hh:107
+#: ../../xffm/fm/local/rm.hh:174 ../../xffm/common/gtk.hh:75
+msgid "Delete"
+msgstr "ပယ်ဖျက်ပါ"
+
+#. {N_("About"), NULL, (void *) menu},
+#.
+#. only for listview: {N_("Sort by size"), NULL, (void *) menu},
+#. only for listview: {N_("Sort by date"), NULL, (void *) menu},
+#: ../../xffm/fm/local/popup.hh:73
+msgid "Select All"
+msgstr "A အားလုံးမှတ်"
+
+#: ../../xffm/fm/local/popup.hh:74 ../../xffm/fm/local/popup.hh:559
+#, fuzzy
+msgid "Match regular expression"
+msgstr "ပုံစံမကျသောဖြည့်သွင်းချက်"
+
+#: ../../xffm/fm/local/popup.hh:75 ../../xffm/fm/root/view.hh:58
+#: ../../xffm/fm/fstab/popup.hh:21
+msgid "View as list"
+msgstr "စာရင်း ပုံစံနဲ့ ရှုမြင်ပါ"
+
+#: ../../xffm/fm/local/popup.hh:77
+#, fuzzy
+msgid "Show hidden files"
+msgstr "ဖျောက်ထားတဲံ ဖိုင်များကို ဖေါ်ပြပါ"
+
+#: ../../xffm/fm/local/popup.hh:79
+#, fuzzy
+msgid "Show Backup Files"
+msgstr "S ဖိုင်တွေကိုပြသပါ"
+
+#: ../../xffm/fm/local/popup.hh:81
+msgid "Sort data in descending order"
+msgstr ""
+
+#: ../../xffm/fm/local/popup.hh:93 ../../xffm/fm/local/popup.hh:119
+#: ../../xffm/fm/local/popup.hh:1006 ../../xffm/fm/local/popup.hh:1013
+#: ../../xffm/fm/local/popup.hh:1022 ../../xffm/fm/local/popup.hh:1029
+#: ../../xffm/common/gtk.hh:72
+msgid "Open with"
+msgstr "W အခြားအက်ပလီကေးရှင်းများဖြင့် ဖွင့်ရန်"
+
+#: ../../xffm/fm/local/popup.hh:94 ../../xffm/fm/local/popup.hh:846
+#, fuzzy
+msgid "Run Executable..."
+msgstr "F ဖိုင်ရွေးရန်"
+
+#: ../../xffm/fm/local/popup.hh:95
+msgid "Extract files from the archive"
+msgstr "ဖိုင်ထုပ်ထဲမှဖိုင်တွေကိုထုတ်ယူပါ"
+
+#. g_hash_table_insert(iconname_hash, "bcrypt", (void *)"emblem-keyhole");
+#: ../../xffm/fm/local/popup.hh:96 ../../xffm/fm/root/view.hh:73
+#: ../../xffm/fm/fstab/popup.hh:20 ../../xffm/fm/dialog/notebook.hh:52
+#: ../../xffm/common/gtk.hh:78
+msgid "Open in New Tab"
+msgstr "T မျက်နှာစာအသစ်တွင်ဖွင့်ပါ"
+
+#. File chooser
+#: ../../xffm/fm/local/popup.hh:97 ../../xffm/fm/local/popup.hh:706
+msgid "Create a compressed archive with the selected objects"
+msgstr "ရွေးချယ်ထားသောအရာနဲ့ဖိသိပ်ထားသောဖိုင်ထုပ်ကိုဖန်တီးပါ"
+
+#: ../../xffm/fm/local/popup.hh:98 ../../xffm/fm/fstab/popup.hh:37
+#, fuzzy
+msgid "Mount the volume associated with this folder"
+msgstr "ပြောင်ပြန်လုပ်တာ မအောင်မြင်ဘူး။ ဒီရုပ်ပုံနဲ့ ဘယ်ဖိုင်အမည်နဲ့မှ မသက်ဆိုင်ဘူး။"
+
+#: ../../xffm/fm/local/popup.hh:99 ../../xffm/fm/fstab/popup.hh:38
+#, fuzzy
+msgid "Unmount the volume associated with this folder"
+msgstr "ပြောင်ပြန်လုပ်တာ မအောင်မြင်ဘူး။ ဒီရုပ်ပုံနဲ့ ဘယ်ဖိုင်အမည်နဲ့မှ မသက်ဆိုင်ဘူး။"
+
+#: ../../xffm/fm/local/popup.hh:100 ../../xffm/common/gtk.hh:67
+#, fuzzy
+msgid "Add bookmark"
+msgstr "A မှတ်သားချက်ပေါင်းထည့်"
+
+#: ../../xffm/fm/local/popup.hh:101 ../../xffm/fm/root/view.hh:74
+#: ../../xffm/common/gtk.hh:68
+#, fuzzy
+msgid "Remove bookmark"
+msgstr "R မှတ်သားချက် ပယ်ဖျက်ရန်"
+
+#: ../../xffm/fm/local/popup.hh:108 ../../xffm/fm/local/popup.hh:961
+msgid "Rename"
+msgstr "R အမည်ပြောင်း"
+
+#: ../../xffm/fm/local/popup.hh:109 ../../xffm/fm/local/popup.hh:947
+msgid "Duplicate"
+msgstr "ပုံတူပွားပါ"
+
+#: ../../xffm/fm/local/popup.hh:110 ../../xffm/fm/local/popup.hh:933
+msgid "Link"
+msgstr "L လင့်ချိတ်"
+
+#: ../../xffm/fm/local/popup.hh:111
+msgid "Properties"
+msgstr "R ဂုဏ်သတ္တိများ"
+
+#: ../../xffm/fm/local/popup.hh:414
+msgid "Files:"
+msgstr "F ဖိုင်များ"
+
+#: ../../xffm/fm/local/popup.hh:417 ../../xffm/fm/local/rm.hh:61
+#, fuzzy
+msgid "Multiple selections"
+msgstr "ရွေးချယ်မှုကို ရွှေ့ပါ"
+
+#: ../../xffm/fm/local/popup.hh:557
+#, fuzzy
+msgid "Select items"
+msgstr "ဖိုင်များကိုရွေးချယ်ပါ"
+
+#: ../../xffm/fm/local/popup.hh:575
+msgid "Regular Expression syntax is incorrect"
+msgstr ""
+
+#: ../../xffm/fm/local/popup.hh:592
+msgid "No selection"
+msgstr "ရွေးချယ်ချက် မရှိဘူး"
+
+#: ../../xffm/fm/local/popup.hh:592
+#, fuzzy
+msgid "No matches."
+msgstr "မကိုက်ညီဘူး"
+
+#. entryResponse->setCheckButton(_("Run in Terminal"));
+#. entryResponse->setCheckButton(Mime<Type>::runInTerminal(path));
+#: ../../xffm/fm/local/popup.hh:721 ../../xffm/fm/page/pathbar.hh:313
+#, fuzzy
+msgid "Specify Output Directory..."
+msgstr "D ဖိုင်တွဲတည်နေရာရှာ"
+
+#: ../../xffm/fm/local/popup.hh:799
+#, fuzzy
+msgid "Create new..."
+msgstr "လမ်းကြောင်း အသစ်တခုကို ဖန်တီးပါ..."
+
+#: ../../xffm/fm/local/popup.hh:806 ../../xffm/fm/local/popup.hh:886
+#, fuzzy
+msgid "New Name:"
+msgstr "ဖိုင် အမည် -"
+
+#: ../../xffm/fm/local/popup.hh:815
+msgid "No name"
+msgstr "အမည်မရှိ"
+
+#: ../../xffm/fm/local/popup.hh:828
+#, fuzzy, c-format
+msgid "Another file with the same name already exists in “%s”."
+msgstr "\"%s\" ထဲမှာ အမည်တူသော အခြားဖိုင်တစ်ခု ရှိနှင့်နေပါတယ်"
+
+#: ../../xffm/fm/local/popup.hh:850 ../../xffm/fm/local/popup.hh:1010
+#: ../../xffm/fm/local/popup.hh:1026 ../../xffm/common/util.hh:1248
+msgid "Run in Terminal"
+msgstr "T တာမီနယ်တွင် ဆောင်ရွက်ပါ"
+
+#: ../../xffm/fm/local/popup.hh:853
+msgid "Arguments for the Command"
+msgstr ""
+
+#: ../../xffm/fm/local/popup.hh:1047 ../../xffm/fm/local/view.hh:141
+#, fuzzy
+msgid "Invalid entry"
+msgstr "မအောင်မြင်သော ဖိုင်"
+
+#: ../../xffm/fm/local/properties.hh:235
+#, fuzzy
+msgid "Properties and Attributes"
+msgstr "လမ်းကြောင်း အရည်အသွေးများ"
+
+#: ../../xffm/fm/local/properties.hh:264
+#, fuzzy
+msgid "File Mode:"
+msgstr "ဖိုင် အမည် -"
+
+#: ../../xffm/fm/local/properties.hh:290
+#, fuzzy
+msgid "File:"
+msgstr "F ဖိုင်များ"
+
+#. Add file info stuff
+#. set info stuff data according to combo box
+#. add signal handler to changed signal for combo box
+#. Add process buttons
+#.
+#: ../../xffm/fm/local/properties.hh:302
+#, fuzzy
+msgid "Apply changes"
+msgstr "အတိုင်းအတာကို အသုံးချပါ"
+
+#: ../../xffm/fm/local/properties.hh:462
+#, fuzzy
+msgid "Successfully moved to trash."
+msgstr "စီဒီဖိုင်သို့ ပုံရိပ်ရိုက်ယူမှုကို ကောင်းမွန်စွာ ပြီးပြီ"
+
+#: ../../xffm/fm/local/properties.hh:463
+#, fuzzy
+msgid "Source:"
+msgstr "ပင်ရင်း"
+
+#: ../../xffm/fm/local/rm.hh:59
+#, fuzzy, c-format
+msgid "Delete %s"
+msgstr "'%s' ကို ပယ်ဖျက်မလား။"
+
+#: ../../xffm/fm/local/rm.hh:61
+#, fuzzy
+msgid "Warning: "
+msgstr "သတိပြုရန်"
+
+#. gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
+#. title
+#: ../../xffm/fm/local/rm.hh:90
+msgid "Remove"
+msgstr "R ဖယ်ပစ်ပါ"
+
+#: ../../xffm/fm/local/rm.hh:140
+#, fuzzy
+msgid "Apply to all"
+msgstr "ဖောင့်ကိုသုံးပါ"
+
+#. **************
+#. This is now available to BSD with rm -P option
+#: ../../xffm/fm/local/rm.hh:163 ../../xffm/common/gtk.hh:76
+msgid "Shred"
+msgstr ""
+
+#. We do not count "../"
+#: ../../xffm/fm/local/view.hh:48 ../../xffm/fm/base/monitor.hh:28
+#, fuzzy, c-format
+msgid "Files: %s"
+msgstr "F ဖိုင်များ"
+
+#: ../../xffm/fm/root/model.hh:78
+#, fuzzy
+msgid "Root Directory"
+msgstr "ဖိုင်လမ်းကြောင်း"
+
+#: ../../xffm/fm/root/model.hh:94
+#, fuzzy
+msgid "This is the root of the filesystem"
+msgstr "\"%s\" ကဖိုင်စနစ်မှဖယ်ထုတ်ထားသည်"
+
+#: ../../xffm/fm/root/model.hh:105
+#, fuzzy
+msgid "Home Directory"
+msgstr "H ပင်မဖိုင်လမ်းညွှန်-"
+
+#: ../../xffm/fm/root/model.hh:132
+#, fuzzy
+msgid "Trash bin"
+msgstr "အမှိုက်ပုံး"
+
+#: ../../xffm/fm/root/model.hh:162 ../../xffm/fm/fstab/popup.hh:29
+#, fuzzy
+msgid "Disk Image Mounter"
+msgstr "ခွေပုံရိပ်ဖိုင်အမျိုးအစား"
+
+#: ../../xffm/fm/root/model.hh:169 ../../xffm/fm/root/model.hh:185
+msgid "Mount local disks and devices"
+msgstr ""
+
+#: ../../xffm/fm/root/model.hh:170 ../../xffm/fm/fstab/popup.hh:25
+#: ../../xffm/fm/fstab/view.hh:429
+#, fuzzy
+msgid "eCryptfs Volume"
+msgstr "အသံလျှော့ပါ"
+
+#: ../../xffm/fm/root/model.hh:171 ../../xffm/fm/fstab/popup.hh:24
+msgid "SSHFS Remote Synchronization Folder"
+msgstr ""
+
+#: ../../xffm/fm/root/model.hh:172 ../../xffm/fm/fstab/popup.hh:23
+#: ../../xffm/fm/fstab/view.hh:377
+#, fuzzy
+msgid "NFS Network Volume"
+msgstr "ကွန်ယက် အသစ်"
+
+#: ../../xffm/fm/root/model.hh:173 ../../xffm/fm/fstab/popup.hh:26
+#: ../../xffm/fm/fstab/view.hh:455
+#, fuzzy
+msgid "CIFS Volume"
+msgstr "အသံပမာဏ အပြည့်"
+
+#: ../../xffm/fm/root/model.hh:195
+msgid "Software Updater"
+msgstr ""
+
+#: ../../xffm/fm/root/model.hh:218 ../../xffm/fm/root/model.hh:230
+msgid "Add or remove software installed on the system"
+msgstr ""
+
+#: ../../xffm/fm/root/model.hh:271
+#, fuzzy
+msgid "Go to bookmarked location"
+msgstr "ပင်မဖိုင်တွဲသို့သွားပါ"
+
+#. {N_("Add bookmark"), (void *)BasePopUp<Type>::noop, NULL, NULL},
+#: ../../xffm/fm/root/view.hh:61
+#, fuzzy
+msgid "Empty trash"
+msgstr "T အမှိုက်ပုံးရှင်းပါ"
+
+#. File chooser
+#: ../../xffm/fm/fstab/popup.hh:121
+#, fuzzy
+msgid "Mount Device"
+msgstr "ထည့်သွင်းမှု ကိရိယာများ"
+
+#: ../../xffm/fm/fstab/popup.hh:133
+#, fuzzy
+msgid "Mount point:"
+msgstr "ကြွက်ခလုတ် ညွှန်တံများ"
+
+#: ../../xffm/fm/fstab/view.hh:301
+#, fuzzy
+msgid "Mounted on:"
+msgstr "ပြုပြင်ပါ"
+
+#: ../../xffm/fm/fstab/view.hh:302
+msgid "Mount on"
+msgstr ""
+
+#: ../../xffm/fm/fstab/view.hh:310 ../../xffm/fm/fstab/view.hh:312
+#, fuzzy
+msgid "Not mounted"
+msgstr "မတွေ့ပါ"
+
+#: ../../xffm/fm/fstab/view.hh:403
+msgid "SFTP (via SSH)"
+msgstr ""
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, fuzzy, c-format
+msgid "Unmounting %s"
+msgstr "ဖွင့်နေတယ် %s"
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, fuzzy, c-format
+msgid "Mounting %s"
+msgstr "ဖွင့်နေတယ် %s"
+
+#: ../../xffm/fm/dialog/menupopover.hh:128
+msgid "Home"
+msgstr "အိမ်လိပ်စာ"
+
+#: ../../xffm/fm/dialog/menupopover.hh:129 ../../xffm/common/gtk.hh:64
+#, fuzzy
+msgid "Open terminal"
+msgstr "တာမီနယ်ဖွင့်ပါ"
+
+#: ../../xffm/fm/dialog/menupopover.hh:130
+#, fuzzy
+msgid "Open a New Window"
+msgstr "W ဝင်းဒိုးအသစ်တွင် ဖွင့်"
+
+#. {N_("Execute Shell Command"), (void *)MenuPopoverSignals<Type>::shell, (void *) menuButton_},
+#: ../../xffm/fm/dialog/menupopover.hh:132 ../../xffm/common/gtk.hh:69
+msgid "Search"
+msgstr "ရှာဖွေ"
+
+#: ../../xffm/fm/dialog/menupopover.hh:133 ../../xffm/common/gtk.hh:71
+msgid "Exit"
+msgstr ""
+
+#: ../../xffm/fm/dialog/dialog.hh:116
+#, fuzzy
+msgid "Removed"
+msgstr "R ဖယ်ပစ်ပါ"
+
+#: ../../xffm/fm/dialog/dialog.hh:132
+#, fuzzy
+msgid "Detected device(s):"
+msgstr "S ရွေးချယ်ထားသောဖိုင်များ"
+
+#. Create the widgets
+#: ../../xffm/fm/page/vbuttonbox.hh:37 ../../xffm/common/gtk.hh:332
+msgid "Help"
+msgstr "H အကူအညီ"
+
+#. File chooser
+#: ../../xffm/fm/page/pathbar.hh:306 ../../xffm/fm/page/pathbar.hh:308
+msgid "Go to"
+msgstr "G သွားရန်"
+
+#: ../../xffm/fm/page/pathbar.hh:331
+#, fuzzy
+msgid "Not a directory"
+msgstr "ဖိုင်လမ်းကြောင်း"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+#, fuzzy
+msgid "Renice Process"
+msgstr "R လုပ်ဆဲ/ပြီးဆုံး ပရောဂျက်"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Suspend"
+msgstr ""
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Continue"
+msgstr "C ဆက်လုပ်"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+#, fuzzy
+msgid "Interrupt"
+msgstr "အင်တာနက်"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+#, fuzzy
+msgid "Hangup"
+msgstr "ရပ်နား"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "User 1 (USR1)"
+msgstr ""
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "User 2 (USR2)"
+msgstr ""
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "Terminate Task"
+msgstr ""
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "Abort"
+msgstr ""
+
+#: ../../xffm/fm/page/runbutton.hh:138
+msgid "Kill"
+msgstr ""
+
+#: ../../xffm/fm/page/runbutton.hh:139
+#, fuzzy
+msgid "Segmentation fault"
+msgstr "F မူလတိုင်းပြန်သတ်မှတ်"
+
+#: ../../xffm/fm/page/runbutton.hh:217
+#, fuzzy
+msgid "PID"
+msgstr "အိုင်ဒီ"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:37
+#, fuzzy
+msgid "Embedded Terminal"
+msgstr "E တာမီနယ်ဖွင့်ပါ"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:38
+msgid "All items in the iconview."
+msgstr ""
+
+#: ../../xffm/fm/page/hbuttonbox.hh:39
+#, fuzzy
+msgid "Scripting"
+msgstr "စခရစ်များ"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:40
+#, fuzzy
+msgid "Clear Log"
+msgstr "စာရင်းကို ရှင်းလင်းပါ"
+
+#. Status textview
+#: ../../xffm/fm/page/hbuttonbox.hh:42
+#, fuzzy
+msgid "Terminal font"
+msgstr "E တာမီနယ်ဖွင့်ပါ"
+
+#: ../../xffm/fm/treeview.hh:17
+msgid "Name"
+msgstr "အမည်"
+
+#: ../../xffm/fm/treeview.hh:20
+msgid "Size"
+msgstr "အရွယ်အစား"
+
+#: ../../xffm/fm/treeview.hh:21
+msgid "Date"
+msgstr "နေ့စွဲ"
+
+#: ../../xffm/fm/treeview.hh:22
+#, fuzzy
+msgid "Mimetype"
+msgstr "ရုပ်ပုံ အမျိုးအစား"
+
+#: ../../xffm/fm/treeview.hh:24
+msgid "TYPE"
+msgstr "အမျိုးအစား"
+
+#: ../../xffm/fm/base/signals.hh:642
+#, fuzzy
+msgid "Directory does not exist."
+msgstr "ရည်ညွှန်းရာ ဖိုင်လမ်းကြောင်း \"%s\" မရှိပါ"
+
+#: ../../xffm/fm/base/signals.hh:644 ../../xffm/fm/base/signals.hh:646
+#, fuzzy
+msgid "Trash is empty"
+msgstr "ဖိုင်အလွတ်ဖြစ်သည်"
+
+#: ../../xffm/common/settings.hh:27
+#, fuzzy
+msgid "New File:"
+msgstr "I ဖိုင်အသစ်"
+
+#: ../../xffm/common/gio.hh:235
+#, fuzzy
+msgid "Could not copy item:"
+msgstr "အချက်အလက်ကို မဖယ်ရှားနိုင်ဘူး"
+
+#: ../../xffm/common/gio.hh:237
+#, fuzzy
+msgid "Could not move item:"
+msgstr "အချက်အလက်ကို မဖယ်ရှားနိုင်ဘူး"
+
+#: ../../xffm/common/gio.hh:239
+#, fuzzy
+msgid "Create symbolic link"
+msgstr "P ချိတ်ဆက်မှုသကင်္တများကိုအစားထိုးပါ"
+
+#: ../../xffm/common/gio.hh:276
+#, fuzzy, c-format
+msgid ""
+"Could not delete:\n"
+"%s"
+msgstr "'%s' ကို မပယ်ဖျက်နိုင်ဘူး - %s"
+
+#: ../../xffm/common/gio.hh:278
+#, fuzzy, c-format
+msgid "Could not move %s to trash"
+msgstr "%s to %s: %s အမည်ပြောင်းမရပါ\n"
+
+#: ../../xffm/common/clipboard.hh:23 ../../xffm/common/dnd.hh:40
+msgid "Copying files locally"
+msgstr "အတွင်းပိုင်း ကူးယူခြင်း"
+
+#: ../../xffm/common/clipboard.hh:30 ../../xffm/common/dnd.hh:34
+#, fuzzy
+msgid "Moving files"
+msgstr "ဖိုင်များကိုကူးယူခြင်း"
+
+#: ../../xffm/common/dnd.hh:46
+#, fuzzy
+msgid "Create Link"
+msgstr "R ဖန်တီးပါ"
+
+#: ../../xffm/common/util.hh:1200
+#, c-format
+msgid ""
+"Scriptfile \"%s\" is not executable. Please set the executable-attribute on "
+"that file."
+msgstr ""
+
+#: ../../xffm/common/util.hh:1202 ../../xffm/common/util.hh:1237
+#, fuzzy, c-format
+msgid "Open with %s"
+msgstr "\"%s\" နှင့်ဖွင့်ရန်"
+
+#: ../../xffm/common/util.hh:1202
+msgid "Text Editor"
+msgstr "စာသားအယ်ဒီတာ"
+
+#: ../../xffm/common/util.hh:1239 ../../xffm/common/gtk.hh:65
+#, fuzzy
+msgid "Execute Shell Command"
+msgstr "S ရှာဖွေခြင်းအမိန့်ပေးမှု"
+
+#: ../../xffm/common/util.hh:1243
+msgid ""
+"Console: quickly run single commands -- write a command here and press enter."
+msgstr ""
+
+#: ../../xffm/common/gtk.hh:123
+msgid "New Tab"
+msgstr "T မျက်နှာစာအသစ်"
+
+#: ../../xffm/common/gtk.hh:335
+msgid "OK"
+msgstr "ကောင်းပြိ"
+
+#: ../../xffm/common/run.hh:344
+#, fuzzy
+msgid "error"
+msgstr "ချို့ယွင်းချက်"
+
+#: ../../xffm/common/run.hh:348
+#, fuzzy
+msgid "warning"
+msgstr "သတိပြုရန်"
+
+#: ../../xffm/common/mime.hh:101 ../../xffm/common/mime.hh:143
+#, fuzzy
+msgid "No Read Permission"
+msgstr "အသံပေးပို့မှု စတင်/ ရပ်နား ရန်"
+
+#: ../../xffm/common/preview.hh:593
+#, fuzzy
+msgid "Empty file"
+msgstr "နေရာလွတ်တဲ့ အလွှာ"
+
+#: ../../xffm/common/preview.hh:648
+#, fuzzy, c-format
+msgid "Cannot read from %s"
+msgstr "စီးကြောင်းထဲမှာ မဖတ်နိုင်ဘူး - %s"
+

@@ -1,0 +1,202 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:39:33 CDT 2013 ---
+#
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2002-2012.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: http://bugs.xffm.org\n"
+"POT-Creation-Date: 2009-03-17 15:27+0000\n"
+"PO-Revision-Date: 2009-05-05 21:16+0000\n"
+"Last-Translator: Huxain <hussain@maldicore.com>\n"
+"Language-Team: Divehi <dv@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2009-05-23 10:44+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+
+msgid "Multimedia menu"
+msgstr "މަލްޓިމީޑިއާ މެނޫ"
+
+msgid "Sound  Video"
+msgstr "އަޑު އަދި ވީޑިއޯ"
+
+msgid "Programming"
+msgstr "ޕްރޮގްރާމިންގް"
+
+msgid "Tools for software development"
+msgstr "ސޮފްޓްވެޔާރ ޑެވެލޮޕް ކުރުމުގެ ޓޫލްސްތައް"
+
+msgid "Education"
+msgstr "ތައުލީމު"
+
+msgid "Games"
+msgstr "ގޭމްސް"
+
+msgid "Games and amusements"
+msgstr "ގޭމުތަކާއި މުނިފޫހިފިލުވުންތައް"
+
+msgid "Graphics"
+msgstr "ގްރެފިކްސް"
+
+msgid "Graphics applications"
+msgstr "ގްރެފިކްސް އެޕްލިކޭޝަންތައް"
+
+msgid "Hardware"
+msgstr "ހާރޑްވެއަރ"
+
+msgid "Settings for several hardware devices"
+msgstr "ހާރޑުވެއަރ ޑިވައިސްތަކުގެ ސެޓިންގްތައް"
+
+msgid "Internet and Network"
+msgstr "އިންޓަރނެޓް އަދި ނެޓްވޯރކް"
+
+msgid "Network-related settings"
+msgstr "ނެޓްވޯރކާގުޅޭ ސެޓިންގްތައް"
+
+msgid "Look and Feel"
+msgstr "ބަލާބެލުން"
+
+msgid "Settings controlling the desktop appearance and behavior"
+msgstr "ޑެސްކްޓޮޕް ބަލާބެލުމާއި ހަރަކާތްތައް ކޮންޓްރޯލްކުރާ ސެޓިންގްސް"
+
+msgid "Internet"
+msgstr "އިންޓަނެޓް"
+
+msgid "Programs for Internet access such as web and email"
+msgstr "ވެބް އަދި އީމެއިލް ފަދަ އިންޓާނެޓްގެ ބޭނުންހިފާ ޕްރޮގްރާމުތައް"
+
+msgid "Office"
+msgstr "އޮފީސް"
+
+msgid "Office Applications"
+msgstr "އޮފީސް އެޕްލިކޭޝަންސް"
+
+msgid "Personal"
+msgstr "އަމިއްލަަ"
+
+msgid "Personal settings"
+msgstr "އަމިއްލަ ސެޓިންތައް"
+
+msgid "Administration"
+msgstr "އިދާރީ"
+
+msgid "Change system-wide settings (affects all users)"
+msgstr "މުޅި ސިސްޓަމް ގެ ސެޓިންގްސް ބަދަލު ކުރައްވާ - ޔޫޒާޒްއެކުލެވޭގޮތަށް"
+
+msgid "Personal preferences"
+msgstr "އަމިއްލަ ގޮތްތައްަ"
+
+msgid "Preferences"
+msgstr "ބޭނުންވާ ގޮތްތަށް"
+
+msgid "System"
+msgstr "ސިސްޓަމް"
+
+msgid "System settings"
+msgstr "ސިސްޓަމް ސެޓިންގްސް"
+
+msgid "System Tools"
+msgstr "ސިސްޓަމް ޓޫލްތައް"
+
+msgid "System configuration and monitoring"
+msgstr "ސިސްޓަމް ކޮންފިގަރ ކުރުމާއި މޮނިޓަރ ކުރުން"
+
+msgid "Universal Access"
+msgstr "ހުރިހާދިމލަކުން ވަދެވޭ"
+
+msgid "Universal Access Settings"
+msgstr "ވަނުމުގެ ސެޓިން ހެދުން"
+
+msgid "Accessories"
+msgstr "އެކްސެސަރީސް"
+
+msgid "Desktop accessories"
+msgstr "ޑެސްކްޓޮޕް އެކްސެސަރީސް"
+
+msgid "Applications"
+msgstr "އެޕްލިކޭޝަންސް"
+
+msgid "Personal preferences and administration settings"
+msgstr "އަމިއްލަ ޕުރިފަރަންސް އަދި އެޑުމިނިސްޓުރެޓަރ ސެޓިން"
+
+msgid "Applications that did not fit in other categories"
+msgstr "އެހެން ކެޓަގަރީތަކާ ނުގުޅޭ އެޕްލިކޭޝަންތަށް"
+
+msgid "Other"
+msgstr "އެހެނިހެން"
+
+msgid "Menu Editor"
+msgstr "މެނޫއެޑިޓްކުރާ"
+
+msgid "Edit Menus"
+msgstr "މެނޫތައް އެޑިތްކުރުން"
+
+msgid "Applications:"
+msgstr "އެޕްލިކޭޝަންސް"
+
+msgid "Defaults"
+msgstr "ޑިފޯލްޓްސް"
+
+msgid "Menus:"
+msgstr "މެނޫތަށް"
+
+msgid "Name"
+msgstr "ނަން"
+
+msgid "Show"
+msgstr "ދެއްކުން"
+
+msgid ""
+"Cannot find home directory: not set in /etc/passwd and no value for $HOME in "
+"environment"
+msgstr ""
+"ހޯމް ޑައިރޭކްޓަރީއެއް ނުފެނުނު -  $HOME ނުވަތަ /etc/password މައުލޫމާތުމަދު"
+
+msgid "Menu file"
+msgstr "މެނޫފައިލް"
+
+msgid "MENUFILE"
+msgstr "މެނޫފައިލް"
+
+msgid "Monitor for menu changes"
+msgstr "މެނޫ ބަދަލުވޭތޯ ބަލާ"
+
+msgid "Include <Exclude>d entries"
+msgstr "އެންޓްރީސްތައް ހިމެނޭ <Exclude>d"
+
+msgid "Include NoDisplay=true entries"
+msgstr "އެންޓްރީސްތައް ހިމެނޭ NoDisplay=true"
+
+msgid "Invalid desktop file ID"
+msgstr "ި ޑެސްކުޓޮޕް ފައިލް އައިޑީ ނުބައި"
+
+msgid "[Invalid Filename]"
+msgstr "[ނުބައި ފައިލްނަމެއް]"
+
+msgid " <excluded>"
+msgstr " <ނުހިމެނޭ>"
+
+msgid ""
+"\n"
+"\n"
+"\n"
+"==== Menu changed, reloading ====\n"
+"\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+"\n"
+"==== މެނޫބަދަލުވެފައި، އަލުންލޯޑްވަނީ ====\n"
+"\n"
+"\n"
+
+msgid "Menu tree is empty"
+msgstr "މެނޫ ޓްރީގައި އެއްޗެއްނެތް"
+
+

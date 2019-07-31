@@ -1,0 +1,129 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:43:16 CDT 2013 ---
+#
+# Przemysław Buczkowski <przemub@yahoo.pl>, 2012.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: http://bugs.xffm.org\n"
+"POT-Creation-Date: 2012-07-26 19:29+0200\n"
+"PO-Revision-Date: 2012-07-26 16:33+0000\n"
+"Last-Translator: Przemysław Buczkowski <przemub@yahoo.pl>\n"
+"Language-Team: Silesian <szl@li.org>\n"
+"Language: szl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Sound  Video"
+msgstr "Dźwiynk a wideo"
+
+msgid "Multimedia menu"
+msgstr "Myni multimedyjōw"
+
+msgid "Programming"
+msgstr "Richtowaniy softwara"
+
+msgid "Tools for software development"
+msgstr "Werkcojg dlŏ riychtowania softwara"
+
+msgid "Education"
+msgstr "Edukacyjŏ"
+
+msgid "Games"
+msgstr "Szpile"
+
+msgid "Games and amusements"
+msgstr "Szpile a inksze atrakce"
+
+msgid "Graphics"
+msgstr "Grafika"
+
+msgid "Graphics applications"
+msgstr "Graficzny softwar"
+
+msgid "Hardware"
+msgstr "Hardwar"
+
+msgid "Settings for several hardware devices"
+msgstr "Nŏstŏwiynia lo roztōmajtych urzōndzyń"
+
+msgid "Internet"
+msgstr "Internec"
+
+msgid "Programs for Internet access such as web and email"
+msgstr "Softwar lo Interneca"
+
+msgid "Office"
+msgstr "Biyrowe"
+
+msgid "Office Applications"
+msgstr "Biyrowy softwar"
+
+msgid "Personal"
+msgstr "Włosne"
+
+msgid "Personal settings"
+msgstr "Włosne nŏstŏwiynia"
+
+msgid "System"
+msgstr "Systyma"
+
+msgid "System settings"
+msgstr "Nŏstŏwiynia systymy"
+
+msgid "System Tools"
+msgstr "Werkcojg systymowy"
+
+msgid "System configuration and monitoring"
+msgstr "Nŏstŏwiynia systymy"
+
+msgid "Universal Access"
+msgstr "Ôniywersalny dostymp"
+
+msgid "Universal Access Settings"
+msgstr "Nŏstowiynia ôniwersalnygo dostympa"
+
+msgid "Accessories"
+msgstr "Dodatki"
+
+msgid "Desktop accessories"
+msgstr "Dodatki pulpita"
+
+msgid "Applications"
+msgstr "Softwar"
+
+msgid "Other"
+msgstr "Inksze"
+
+msgid "Applications that did not fit in other categories"
+msgstr "Softwar kery niy wkludza siã dlŏ inkszych kategoryji"
+
+msgid "Menu Editor"
+msgstr "Sprowjor myni"
+
+msgid "Edit Menus"
+msgstr "Sprŏwjaj mynia"
+
+msgid "Defaults"
+msgstr "Domyślne"
+
+msgid "Menus:"
+msgstr "Mynia:"
+
+msgid "Applications:"
+msgstr "Softwar:"
+
+msgid "Simple Menu Editor %s"
+msgstr "Prosty sprowjar myni %s"
+
+msgid "Name"
+msgstr "Miano"
+
+msgid "Show"
+msgstr "Pokŏż"
+
+

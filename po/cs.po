@@ -1,0 +1,1496 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:44:29 CDT 2013 ---
+#
+# Adam Purkrt <adampurkrt@yahoo.com>, 2001.
+# Petr Pulc <petrpulc@gmail.com>, 2009-2010.
+# Michael Gangolf <miga@migaweb.de>, 2010.
+# Miloslav Trmac <mitr@volny.cz>, 2002-2009.
+# Copyright (C) 2006 Petr Tomeš <ptomes@gmail.com>.
+# Stanislav Brabec <utx@k332.feld.cvut.cz>, 1998-2002.
+# ZOiD <sp.pok@seznam.cz>, 2007.
+# Copyright (C) 2003, 2004, 2005, 2006 Miloslav Trmac <mitr@volny.cz>.
+# Copyright (C) 2007 Martin Picek <picek.martin@gmail.com>.
+# Marek Kriz <mcross@email.cz>, 2000-2001.
+# Petr Messner <petr.messner@gmail.com>, 2007.
+# Copyrigtt (C) 2004, 2005 Miloslav Trmac <mitr@volny.cz>.
+# Tomas Kyjovsky <tomas.kyjovsky@mail.muni.cz>, 2006.
+# JardaK <krejci@zstenis.com>, 2009.
+# Jozef Riha <jose1711@gmail.com>, 2005-2009.
+# Copyright (C) 2005 Miloslav Trmac <mitr@volny.cz>.
+# Kamil Páral <ripper42@gmail.com>, 2008-2009.
+# Ondra 'Kepi' Kudlik <kepi@cacwa.cz>, 2003.
+# Jiří Eischmann <jiri@eischmann.cz>, 2008-2010.
+# Copyright (C) 2002 Michal Bukovjan <bukm@centrum.cz>.
+# Minor fixes by Michal Bukovjan <bukm@centrum.cz>, 2002-2003.
+# Radka Soukupova <Radka.Soukupova@centrum.cz>, 2000-2002.
+# Eva Mikulcikova <evmi@seznam.cz>, 2005.
+# Vít Pelčák <vit@pelcak.org>, 2008-2013.
+# Jan Dobrovolný <dobrovolnyh@seznam.cz>, 2008.
+# Alois Nespor <Alois.Nespor@seznam.cz>, 2004.
+# Ondra Kudlik <kepi@orthank.net>, 2004.
+# Copyright (C) 2003, 2004 Miloslav Trmac <mitr@volny.cz>.
+# pohlondrej <pohlondrej@seznam.cz>, 2010.
+# Jiri Lebl <jirka@5z.com>, 1998-2010.
+# Copyright (C) 2006 Lukas Novotny <lukasnov@cvs.gnome.org>.
+# Copyright (C) 2007, 2008, 2009, 2010 daniel g. siegel <dgsiegel@gnome.org>.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2002-2012.
+# Dusan Hokuv <dusan@mirc.cz>, 2007-2010.
+# Jachym Simak <xsimi@xsimi.cz>, 2010.
+# Used Slovak translation from Marcel Telka <marcel@telka.sk>, 2000-2001.
+# Václav Švejcar <xwinus@gmail.com>, 2009.
+# Original translation Petr Cech <cech@debian.org>, 2000.
+# Copyright (C) 2004, 2006 Miloslav Trmac <mitr@volny.cz>.
+# Vit Pelcak <vit@pelcak.org>, 2008-2013.
+# Vitezslav Kotrla <vitko@post.cz>, 2007-2009.
+# Copyrigyt (C) 2004, 2005 Miloslav Trmac <mitr@volny.cz>.
+# Michal Bukovjan <bukm@centrum.cz>, 2002-2004.
+# David Makovský (Yakeen) <yakeen@sannyas-on.net>, 2005.
+# Tomas Bzatek <tbzatek@redhat.com>, 2009.
+# Adam Přibyl <covex@io.pinknet.cz>, 2003.
+# Petr Pytelka <pyta@lightcomp.cz>, 2002.
+# Copyright (C) 2009 Jiri Eischmann <jiri@eischmann.cz>.
+# Pavel Šefránek <ps@pjoul.cz>, 2008-2011.
+# Copyright (C) 2004, 2005 Miloslav Trmac <mitr@volny.cz>.
+# Lukáš Tinkl <ltinkl@redhat.com>, 2005-2012.
+# Tomas Chvatal <tomas.chvatal@gmail.com>, 2011-2013.
+# Jan Šimek <jsimek.cz@gmail.com>, 2010.
+# Milan Knížek <knizek@volny.cz>, 2010-2013.
+# Lukas Lommer <llommer@svn.gnome.org>, 2008-2011.
+# Martin Picek <picek.martin@gnome-cesko.cz>, 2007-2009.
+# Luboš Staněk <lubek@users.sourceforge.net>, 2008-2009.
+# Copyright (C) 2004 Miloslav Trmac, <mitr@volny.cz>.
+# Copyright (C) 2009 Martin Picek <picek.martin@gnome-cesko.cz>.
+# Jan Parkman <parkmaj@users.sourceforge.net>, 2008.
+# David Kolibac <david@kolibac.cz>, 2008-2010.
+# Ondrej Kopka <ondrej.kopka@gmail.com>, 2010.
+# Ondřej Kopka <ondrej.kopka@gmail.com>, 2010-2011.
+# Copyright (C) 2003, 2004, 2005 Miloslav Trmac <mitr@volny.cz>.
+# Updated by Stanislav Brabec <utx@penguin.cz>, 2001-2002.
+# Vítězslav Kotrla <vitko@post.cz>, 2007.
+# Adam Matoušek <adamatousek@gmail.com>, 2012-2013.
+# Radka Doulíková <doulikova@centrum.cz>, 2002.
+# Michal Čihař <michal@cihar.com>, 2009.
+# Pavel Mlčoch <pavkamlc@centrum.cz>, 2006-2009.
+# David Sauer <davids@penguin.cz>, 1999.
+# Vladimir Michl <Vladimir.Michl@seznam.cz>, 1996.
+# Chris Leonard <cjl@laptop.org>, 2012.
+# Zbyněk Mrkvička <zbynek@mrkvicka.eu>, 2007.
+# Zdeněk Pech <dom.toretto@seznam.cz>, 2009-2010.
+# Miroslav Šulc <fordfrog@fordfrog.name>, 2010-2012.
+# Copyright (C) 2006, 2007 Jakub Friedl <jfriedl@suse.cz>.
+# Rinu <rinu@seznam.cz>, 2009.
+# Jakub Friedl <jfriedl@suse.cz>, 2005-2012.
+# Petr Vokac <vokac@linux.fjfi.cvut.cz>, 2001.
+# Jaroslav Ryník <jrynik@yahoo.co.uk>, 2009-2013.
+# Marek Černocký <marek@manet.cz>, 2009-2013.
+# Lukáš Novotný <lukasnov@cvs.gnome.org>, 2005-2006.
+# Jiří Pavlovský <pavlovsk@ff.cuni.cz>, 1998.
+# Copyright (C) 2009, 2010 Jiri Eischmann <jiri@eischmann.cz>.
+# Andre Klapper <ak-47@gmx.net>, 2007-2011.
+# Honza Steuer <honza.steuer@gmail.com>, 2008.
+# Copyright (C) 2007, 2009 Wouter Bolsterlee <wbolster@gnome.org>.
+# Petr Kovar <pknbe@volny.cz>, 2007-2013.
+# Lukas Novotny <lukasnov@cvs.gnome.org>, 2006.
+# Partially based on Slovak translation by Stanislav Visnovsky <visnovsky@nenya.ms.mff.cuni.cz>, 2002.
+# David Šauer <davids@penguin.cz>, 1999.
+# Lukáš Konarovský <daeltar@daeltar.org>, 2003.
+# Zbynek Mrkvicka <zbynek@oachot.cz>, 2005.
+# Updated by Michal Bukovjan <bukm@centrum.cz>, 2002-2003.
+# Klara Cihlarova <koty@seznam.cz>, 2005-2008.
+# GIS <gis@academy.cas.cz>, 1999.
+# Copyright (C) 2004-2005 Johan Svedberg <johan@svedberg.com>.
+# Ondra 'Kepi' Kudlík <kepi@cacwa.cz>, 2003.
+# Copyright (C) 2004 Miloslav Trmac <mitr@volny.cz>.
+# Petr Pisar <petr.pisar@atlas.cz>, 2006-2012.
+# Copyright (C) 2008 Petr Kovar <pknbe@volny.cz>.
+# Klára Cihlářová <koty@seznam.cz>, 2007.
+# Patrik Šíma <patrik@ovx.cz>, 2007.
+# Manfred Scheucher <scheucher@student.tugraz.at>, 2011.
+# George (Jirka) Lebl <jirka@5z.com>, 2000.
+# Copyright (C) 2008, 2009 Zdeněk Hataš <zdenek.hatas@gmail.com>.
+# Adrian Guniš <andygun696@gmail.com>, 2008-2011.
+# Jan Holíček <jan.holicek@gmail.com>, 2010-2011.
+# Jaroslav Jiricka <jiricka@mujbox.cz>, 2003.
+# Jan Drábek <repli2dev@gmail.com>, 2009.
+# George Lebl <jirka@5z.com>, 2000-2001.
+# Marco Nelles <marco@maniatek.de>, 2009.
+# Copyright (C) 2004, 2005, 2006 Miloslav Trmac <mitr@volny.cz>.
+# Jiří Lebl <jirka@5z.cz>, 2002.
+# Marek Lisy <marek.lisy@centrum.cz>, 2008.
+# Copyright (C) 2003, 2004, 2006 Miloslav Trmac <mitr@volny.cz>.
+# Copyright (C) 2008 Pavel Šefránek <ps@pjoul.cz>.
+# Petr Bravenec <petr@bravenec.org>, 2010.
+# Otakar Jašek <jasek.ota@gmail.com>, 2011.
+# Martin Večeřa <ja@marvec.org>, 2006.
+# Petr Vyhnalek <petr.vyhnalek@email.cz>, 1999.
+# Petr Domansky <doman@atlas.cz>, 2000.
+# Lucas Lommer <llommer@svn.gnome.org>, 2007-2012.
+# Pavel Fric <pavelfric@seznam.cz>, 2009-2011.
+# Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
+# Pavel Bárta <BartyCok@email.cz>, 2009.
+# Copyright (C) 2002, 2003 Miloslav Trmac <mitr@volny.cz>.
+# Marketa Nykrynova <m.nykrynova@gmail.com>, 2011-2012.
+# Thomas Niederreiter <tn@xcdroast.org>, 2002-2003.
+# <srtxg@chanae.alphanet.ch>, 2001-2011.
+# Copyright (C) 2005, 2006 Miloslav Trmac <mitr@volny.cz>.
+# Michal Pěnka <michal@penka.name>, 2008-2009.
+# Tomas Novak <kuvaly@seznam.cz>, 2010.
+# Jiri Eischmann <jiri@eischmann.cz>, 2008-2013.
+# Petr Tomeš <ptomes@gmail.com>, 2003-2006.
+# Lukáš Ručka <lukassoftwares.backup@gmail.com>, 2008-2010.
+# Martin Sukany <sukany@braillnet.cz>, 2008.
+# Copyright (C) 2008, 2009, 2010, 2011, 2012 Zdeněk Hataš <zdenek.hatas@gmail.com>.
+# Tomáš Chvátal <tomas.chvatal@gmail.com>, 2010-2013.
+# Petr Kočvara <petr.kocvara@nemfm.cz>, 1998-2010.
+# Peter Grasch <me@bedahr.org>, 2008-2012.
+# Vladimír Burian <vladimir.burian@email.cz>, 2010.
+# Zdeněk Hataš <zdenek.hatas@gmail.com>, 2008-2013.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-02 12:27-0600\n"
+"PO-Revision-Date: 2012-10-21 22:20+0200\n"
+"Last-Translator: Petr Pisar <petr.pisar@atlas.cz>\n"
+"Language-Team: Czech <translation-team-cs@lists.sourceforge.net>\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8-bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2  n<=4) ? 1 : 2;\n"
+
+#: ../../xffm/completion/base.hh:28
+msgid "Command"
+msgstr "Příkaz"
+
+#: ../../xffm/completion/base.hh:31
+msgid "File"
+msgstr "Soubor"
+
+#: ../../xffm/completion/base.hh:34
+#, fuzzy
+msgid "Command history"
+msgstr "Historie spouštění příkazů"
+
+#. option -u uid "uid" "uid_combo"
+#: ../../xffm/completion/base.hh:37 ../../xffm/find/dialog.hh:199
+msgid "User"
+msgstr "Uživatel"
+
+#: ../../xffm/completion/base.hh:40
+msgid "Variable"
+msgstr "Proměnná"
+
+#: ../../xffm/completion/base.hh:43
+msgid "Host"
+msgstr "Počítač"
+
+#: ../../xffm/completion/base.hh:55
+msgid "Found no match"
+msgstr "Nenalezena shoda"
+
+#: ../../xffm/completion/base.hh:133 ../../xffm/completion/base.hh:134
+msgid "Matches"
+msgstr "Shodná slova"
+
+#: ../../xffm/completion/base.hh:134
+msgid "Too many files open"
+msgstr "Je otevřeno příliš mnoho souborů"
+
+#: ../../xffm/completion/base.hh:325 ../../xffm/find/fgr.hh:124
+msgid "Options:"
+msgstr "Možnosti:"
+
+#: ../../xffm/completion/bash.hh:133
+msgid "Completion mode:"
+msgstr "Režim doplňování:"
+
+#: ../../xffm/completion/bash.hh:134
+msgid "command"
+msgstr "příkaz"
+
+#: ../../xffm/completion/bash.hh:135
+msgid "file"
+msgstr "soubor"
+
+#: ../../xffm/completion/bash.hh:145 ../../xffm/completion/bash.hh:149
+msgid "Options >>"
+msgstr "Možnosti rozhraní >>"
+
+#: ../../xffm/find/fgr.hh:124 ../../xffm/find/dialog.hh:308
+msgid "Path"
+msgstr "Cesta"
+
+#: ../../xffm/find/fgr.hh:125
+msgid "Locate documents and folders on this computer by name or content"
+msgstr "Hledá dokumenty a složky v tomto počítači podle názvu či obsahu"
+
+#: ../../xffm/find/fgr.hh:126 ../../xffm/find/dialog.hh:341
+msgid "Filter:"
+msgstr "Filtr:"
+
+#: ../../xffm/find/fgr.hh:126
+msgid "Search for files"
+msgstr "Hledat soubory"
+
+#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
+#: ../../xffm/find/fgr.hh:128
+msgid "Contents:"
+msgstr "Obsah:"
+
+#: ../../xffm/find/fgr.hh:128
+msgid "File's contents filtered as plain text."
+msgstr "Obsah souboru filtrovaný jako prostý text."
+
+#: ../../xffm/find/fgr.hh:131
+msgid "Verbose output debugging mode."
+msgstr "\"Ukecaný\" režim ladicího výstupu"
+
+#: ../../xffm/find/fgr.hh:133
+msgid "Show version information"
+msgstr "Zobrazit informace o verzi"
+
+#: ../../xffm/find/fgr.hh:135
+msgid "Filter Details"
+msgstr "Podrobnosti filtru"
+
+#. / option -a "xdev"
+#: ../../xffm/find/fgr.hh:138 ../../xffm/find/dialog.hh:180
+msgid "Stay on single filesystem"
+msgstr "Prohledat pouze jeden souborový systém"
+
+#: ../../xffm/find/fgr.hh:140
+msgid "Print..."
+msgstr "Tisk…"
+
+#: ../../xffm/find/fgr.hh:140
+#, fuzzy
+msgid "The unique Process ID that identifies this process."
+msgstr "Uživatel, který tento proces vlastní."
+
+#. / option -D "recursiveH"
+#: ../../xffm/find/fgr.hh:142 ../../xffm/find/dialog.hh:177
+msgid "Find hidden files and directories"
+msgstr "Prohledat skryté soubory a adresáře"
+
+#: ../../xffm/find/fgr.hh:143
+msgid "Filter"
+msgstr "Filtr"
+
+#: ../../xffm/find/fgr.hh:144
+msgid ""
+"To display files which pass the filter (stars and regexps will be processed)"
+msgstr ""
+"Zobrazit soubory, které odpovídají zadání filtru (hvězdička bude zpracována)"
+
+#. / option -r "recursive"
+#: ../../xffm/find/fgr.hh:146 ../../xffm/find/dialog.hh:174
+msgid "Recursive"
+msgstr "Rekurze"
+
+#: ../../xffm/find/fgr.hh:147 ../../xffm/find/fgr.hh:148
+#: ../../xffm/find/fgr.hh:149 ../../xffm/find/fgr.hh:150
+msgid "KByte"
+msgstr "KByte"
+
+#: ../../xffm/find/fgr.hh:148
+msgid "is greater than or equal to"
+msgstr "je větší nebo rovno"
+
+#: ../../xffm/find/fgr.hh:150
+msgid "is less than or equal to"
+msgstr "je menší nebo rovno"
+
+#: ../../xffm/find/fgr.hh:152
+msgid "Set UID"
+msgstr "Nastavit UID"
+
+#: ../../xffm/find/fgr.hh:152
+msgid "Executable Text Files"
+msgstr "Spustitelné textové soubory"
+
+#: ../../xffm/find/fgr.hh:154
+msgid "The permissions of the file, in octal notation."
+msgstr "Oprávnění souboru v osmičkovém zápisu."
+
+#: ../../xffm/find/fgr.hh:155
+msgid "Type"
+msgstr "Typ"
+
+#: ../../xffm/find/fgr.hh:157 ../../xffm/find/signals.hh:17
+msgid "Any"
+msgstr "Libovolný"
+
+#: ../../xffm/find/fgr.hh:157
+msgid "Default type"
+msgstr "Výchozí typ"
+
+#: ../../xffm/find/fgr.hh:158 ../../xffm/common/preview.hh:497
+msgid "Regular file"
+msgstr "Obyčejný soubor"
+
+#: ../../xffm/find/fgr.hh:159 ../../xffm/find/signals.hh:11
+#: ../../xffm/fm/local/popup.hh:803 ../../xffm/common/preview.hh:488
+msgid "Directory"
+msgstr "Adresář"
+
+#: ../../xffm/find/fgr.hh:160 ../../xffm/find/signals.hh:12
+#: ../../xffm/common/preview.hh:494
+msgid "Symbolic Link"
+msgstr "Symbolický odkaz"
+
+#: ../../xffm/find/fgr.hh:161
+msgid "UNIX Socket"
+msgstr "Unixový soket"
+
+#: ../../xffm/find/fgr.hh:162 ../../xffm/find/signals.hh:14
+#: ../../xffm/common/preview.hh:482
+msgid "Block device"
+msgstr "Blokové zařízení"
+
+#: ../../xffm/find/fgr.hh:163 ../../xffm/find/signals.hh:15
+#: ../../xffm/common/preview.hh:485
+msgid "Character device"
+msgstr "Znakové zařízení"
+
+#: ../../xffm/find/fgr.hh:164 ../../xffm/find/signals.hh:16
+#: ../../xffm/common/preview.hh:491
+msgid "FIFO"
+msgstr "Fronta FIFO"
+
+#. radio_p freed on destroy event for dialog_.
+#. option -k minutes "last_minutes", "last_minutes_spin"
+#: ../../xffm/find/fgr.hh:166 ../../xffm/find/fgr.hh:168
+#: ../../xffm/find/dialog.hh:221
+msgid "Minutes"
+msgstr "Minuty"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/dialog.hh:270 ../../xffm/find/dialog.hh:370
+#: ../../xffm/fm/treeview.hh:18
+msgid "Details"
+msgstr "Podrobnosti"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/fgr.hh:179 ../../xffm/find/fgr.hh:180
+#: ../../xffm/find/fgr.hh:183 ../../xffm/find/fgr.hh:184
+#: ../../xffm/find/fgr.hh:187 ../../xffm/find/fgr.hh:188
+msgid "TIME"
+msgstr "CAS"
+
+#: ../../xffm/find/fgr.hh:168 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/fgr.hh:174 ../../xffm/find/fgr.hh:177
+msgid "Previous"
+msgstr "Předchozí"
+
+#. option -h hours "last_hours", "last_hours_spin"
+#: ../../xffm/find/fgr.hh:169 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/dialog.hh:226
+msgid "Hours"
+msgstr "Hodiny"
+
+#. option -d days "last_days", "last_days_spin"
+#: ../../xffm/find/fgr.hh:172 ../../xffm/find/fgr.hh:174
+#: ../../xffm/find/dialog.hh:231
+msgid "Days"
+msgstr "dnů"
+
+#: ../../xffm/find/fgr.hh:175
+msgid "Month"
+msgstr "Měsíc"
+
+#: ../../xffm/find/fgr.hh:177
+msgid "Month(s)"
+msgstr "Týdny"
+
+#: ../../xffm/find/fgr.hh:180
+msgid "Modification Time :"
+msgstr "Čas změny :"
+
+#: ../../xffm/find/fgr.hh:184
+msgid "Access Time :"
+msgstr "Čas přístupu :"
+
+#: ../../xffm/find/fgr.hh:188
+msgid "Creation Time :"
+msgstr "Čas vytvoření :"
+
+#: ../../xffm/find/fgr.hh:191 ../../xffm/find/fgr.hh:192
+msgid "uid"
+msgstr "id uživatele (uid)"
+
+#: ../../xffm/find/fgr.hh:192
+msgid "User:"
+msgstr "Uživatel:"
+
+#: ../../xffm/find/fgr.hh:194 ../../xffm/find/fgr.hh:195
+msgid "gid"
+msgstr "id skupiny (gid)"
+
+#: ../../xffm/find/fgr.hh:195
+msgid "Group:"
+msgstr "Skupina:"
+
+#: ../../xffm/find/fgr.hh:198
+msgid ""
+"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+"character that  normally  follows  a file  name"
+msgstr ""
+
+#: ../../xffm/find/fgr.hh:200
+msgid "Content View"
+msgstr "Zobrazení obsahu"
+
+#: ../../xffm/find/fgr.hh:201 ../../xffm/find/fgr.hh:202
+#: ../../xffm/find/fgr.hh:203 ../../xffm/find/fgr.hh:204
+msgid "STRING"
+msgstr "ŘETĚZEC"
+
+#: ../../xffm/find/fgr.hh:202 ../../xffm/find/fgr.hh:204
+#: ../../xffm/fm/local/popup.hh:563
+msgid "Regular expression"
+msgstr "Regulární výraz"
+
+#: ../../xffm/find/fgr.hh:204
+msgid "Extended"
+msgstr "Rozšířená"
+
+#: ../../xffm/find/fgr.hh:206
+msgid "Ignore case"
+msgstr "Ignorovat velikost písmen"
+
+#: ../../xffm/find/fgr.hh:208
+msgid "Text Files"
+msgstr "Textové soubory"
+
+#: ../../xffm/find/fgr.hh:210 ../../xffm/find/dialog.hh:552
+msgid "No match"
+msgstr "Žádná shoda"
+
+#: ../../xffm/find/fgr.hh:212 ../../xffm/find/dialog.hh:470
+msgid "Line Count"
+msgstr "Počet řádků"
+
+#: ../../xffm/find/fgr.hh:214
+msgid "Words"
+msgstr "Slov"
+
+#: ../../xffm/find/fgr.hh:216
+msgid "Lines"
+msgstr "Řádek"
+
+#: ../../xffm/find/fgr.hh:368
+#, c-format
+msgid "Usage : %s [OPTIONS]\n"
+msgstr "Použití : %s [Volby]\n"
+
+#: ../../xffm/find/signals.hh:10
+msgid "Regular"
+msgstr "regulární"
+
+#: ../../xffm/find/signals.hh:13 ../../xffm/common/preview.hh:500
+msgid "Socket"
+msgstr "Soket"
+
+#: ../../xffm/find/signals.hh:209
+msgid "Select folder to search in"
+msgstr "Výběr složky pro hledání"
+
+#. button no
+#: ../../xffm/find/signals.hh:265 ../../xffm/find/dialog.hh:584
+#: ../../xffm/response/entryfileresponse.hh:18
+#: ../../xffm/response/entryresponse.hh:305
+#: ../../xffm/response/passwdresponse.hh:558
+#: ../../xffm/fm/local/properties.hh:304 ../../xffm/fm/local/rm.hh:155
+msgid "Cancel"
+msgstr "Zrušit"
+
+#: ../../xffm/find/signals.hh:293 ../../xffm/find/signals.hh:722
+#, fuzzy
+msgid "No editor for current action."
+msgstr "Bez aktuálních kroků."
+
+#. / option "upper_limit_spin" (only in gtk dialog_)
+#: ../../xffm/find/signals.hh:351 ../../xffm/find/dialog.hh:183
+msgid "Results"
+msgstr "Výsledky"
+
+#: ../../xffm/find/signals.hh:351
+msgid "Upper limit:"
+msgstr "Horní mez:"
+
+#: ../../xffm/find/signals.hh:353
+msgid "Counting files..."
+msgstr "Jsou počítány soubory ..."
+
+#: ../../xffm/find/signals.hh:368
+#, c-format
+msgid "Found %d match"
+msgid_plural "Found %d matches"
+msgstr[0] "Nalezen %d výskyt"
+msgstr[1] "Nalezeny %d výskyty"
+msgstr[2] "Nalezeno %d výskytů"
+
+#: ../../xffm/find/signals.hh:370
+#, c-format
+msgid "%s Finished : %s"
+msgstr "%s dokončeno: %s"
+
+#: ../../xffm/find/signals.hh:488 ../../xffm/find/signals.hh:490
+msgid "Searching..."
+msgstr "Vyhledává se…"
+
+#. g_object_set_data(G_OBJECT(dialog_), "window", dialog_);
+#: ../../xffm/find/dialog.hh:98 ../../xffm/find/dialog.hh:150
+#: ../../xffm/find/dialog.hh:611
+msgid "Find"
+msgstr "Hledat"
+
+#: ../../xffm/find/dialog.hh:183
+msgid "Upper limit"
+msgstr "Horní limit"
+
+#. option -s +KByte "size_greater", "size_greater_spin"
+#: ../../xffm/find/dialog.hh:188
+msgid "At Least"
+msgstr "přinejmenším"
+
+#: ../../xffm/find/dialog.hh:188 ../../xffm/find/dialog.hh:193
+msgid "kBytes"
+msgstr "kBytes"
+
+#. option -s -KByte "size_smaller", "size_smaller_spin"
+#: ../../xffm/find/dialog.hh:193
+msgid "At Most"
+msgstr "nejvíce"
+
+#: ../../xffm/find/dialog.hh:204
+msgid "Group"
+msgstr "Skupina"
+
+#. option -o octal "octal_p" "permissions_entry"
+#: ../../xffm/find/dialog.hh:208
+msgid "Octal Permissions"
+msgstr "Oprávnění osmičkově"
+
+#. option -p suid | exe
+#: ../../xffm/find/dialog.hh:213
+msgid "SUID"
+msgstr "SUID"
+
+#: ../../xffm/find/dialog.hh:213 ../../xffm/fm/local/popup.hh:843
+msgid "Executable"
+msgstr "Program"
+
+#. option -m months "last_months", "last_months_spin"
+#: ../../xffm/find/dialog.hh:237
+msgid "Months"
+msgstr "Měsíců"
+
+#: ../../xffm/find/dialog.hh:248
+msgid "File type : "
+msgstr "Typ souboru : "
+
+#. gtk_widget_show (GTK_WIDGET(right_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(center_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(left_options_vbox));
+#: ../../xffm/find/dialog.hh:262 ../../xffm/find/dialog.hh:602
+#: ../../xffm/fm/page/page.hh:70 ../../xffm/common/gtk.hh:70
+msgid "Close"
+msgstr "Zavřít"
+
+#. gtk_box_pack_start (vbox7a, GTK_WIDGET(advancedBox), TRUE, FALSE, 5);
+#. gtk_widget_show(GTK_WIDGET(advancedBox));
+#. //////////////  grep options.... /////////////////////////
+#: ../../xffm/find/dialog.hh:384
+msgid "Contains"
+msgstr "Obsahuje"
+
+#: ../../xffm/find/dialog.hh:404
+msgid "Contains the text"
+msgstr "Obsahuje text"
+
+#: ../../xffm/find/dialog.hh:437
+msgid "Case Sensitive"
+msgstr "Rozlišovát velikost písmen"
+
+#: ../../xffm/find/dialog.hh:449
+msgid "Extended regexp"
+msgstr "Rozšířený regulární výraz"
+
+#: ../../xffm/find/dialog.hh:460
+msgid "Include binary files"
+msgstr "Včetně binárních souborů"
+
+#: ../../xffm/find/dialog.hh:496
+msgid "Match"
+msgstr "Shoda"
+
+#: ../../xffm/find/dialog.hh:508
+msgid "Anywhere"
+msgstr "Kdekoliv"
+
+#: ../../xffm/find/dialog.hh:523
+msgid "Whole words only"
+msgstr "Pouze celá slova"
+
+#: ../../xffm/find/dialog.hh:538
+msgid "lines"
+msgstr "řádků"
+
+#: ../../xffm/find/dialog.hh:594
+msgid "Clear"
+msgstr "Vymazat"
+
+#: ../../xffm/find/dialog.hh:636
+msgid "Edit"
+msgstr "Upravit"
+
+#: ../../xffm/find/dialog.hh:751 ../../xffm/find/dialog.hh:766
+#: ../../xffm/common/util.hh:1150 ../../xffm/common/util.hh:1152
+#: ../../xffm/common/util.hh:1158 ../../xffm/common/util.hh:1160
+#: ../../xffm/common/preview.hh:479
+msgid "unknown"
+msgstr "neznámý"
+
+#: ../../xffm/find/dialog.hh:780
+msgid "Modified"
+msgstr "Upraveno"
+
+#: ../../xffm/find/dialog.hh:784
+msgid "Created"
+msgstr "Vytvořeno"
+
+#: ../../xffm/find/dialog.hh:788
+msgid "Accessed"
+msgstr "Přistoupeno"
+
+#: ../../xffm/find/dialog.hh:1106
+msgid ""
+"Basic rules:\n"
+"\n"
+"*  Will match any character zero or more times.\n"
+"?  Will match any character exactly one time\n"
+"[] Match any character within the [] \n"
+"^  Match at beginning of string\n"
+"$  Match at end of string \n"
+msgstr ""
+"Základní pravidla:\n"
+"\n"
+"* Zastupuje žádný nebo více libovolných znaků.\n"
+"? Zastupuje jeden libovolný znak.\n"
+
+#: ../../xffm/find/dialog.hh:1115
+#, fuzzy
+msgid ""
+"Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"In  basic regular expressions the metacharacters ?, +, {, |, (, and ) \n"
+"  lose their special meaning.\n"
+"\n"
+"The  period . matches  any  single  character.\n"
+"The caret ^ matches at the start of line.\n"
+"The dollar $ matches at the end of line.\n"
+"\n"
+"Characters within [ ] matches any single character in the list.\n"
+"Characters within [^ ] matches any single character *not* in the list.\n"
+"Characters inside [ - ] matches a range of characters (ie [0-9] or [a-z]).\n"
+"\n"
+"A regular expression may be followed by one of several repetition "
+"operators:\n"
+"?      The preceding item is optional and matched\n"
+"       at most once.\n"
+"*      The preceding item will be matched zero\n"
+"       or more times.\n"
+"+      The preceding item will be matched one or\n"
+"       more times.\n"
+"{n}    The preceding item is matched exactly n times.\n"
+"{n,}   The preceding item is matched n or more times.\n"
+"{n,m}  The preceding item is matched at least n times,\n"
+"       but not more than m times.\n"
+"\n"
+"To match any reserved character, precede it with \\. \n"
+"\n"
+"Two regular expressions may be joined by the logical or operator |.\n"
+"Two regular expressions may be concatenated.\n"
+"\n"
+"More information is available by typing \"man grep\"\n"
+msgstr ""
+"Vyhrazené znaky pro regulární výrazy jsou\n"
+"     . ^ $ [ ] ? * + { } | \\ ( ) :\n"
+"V základních regulárních výrazech ztrácejí metaznaky\n"
+"?, +, {, |, (, and ) své speciální významy.\n"
+"\n"
+"Tečka    .  zastupuje libovolný znak.\n"
+"Stříška  ^  zastupuje začátek řádku.\n"
+"Dolar    $  zastupuje konec řádku.\n"
+"\n"
+"Znaky uvnitř [ ]   zastupují jeden libovolný\n"
+"      znak ze seznamu.\n"
+"Znaky uvnitř [^ ]  zastupují jeden libovolný\n"
+"      znak, který není na seznamu.\n"
+"Znaky uvnitř [ - ] zastupují jeden znak\n"
+"      z rozsahu znaků (např.[0-9] nebo [a-z]).\n"
+"\n"
+"Regulární výraz může následovat jeden\n"
+"       nebo několik opakovacích operátorů:\n"
+"?      Zastupuje jeden nebo žádný výskyt\n"
+"       předchozího výrazu.\n"
+"*      Zastupuje žádný nebo více výskytů\n"
+"       předchozího výrazu.\n"
+"+      Zastupuje jeden nebo více výskytů\n"
+"       předchozího výrazu.\n"
+"{n}    Zastupuje přesně n násobný výskyt\n"
+"       předchozího výrazu.\n"
+"{n,}   Zastupuje alepoň n násobný výskyt\n"
+"       předchozího výrazu.\n"
+"{n,m}  Zastupuje alespoň n a méně než m\n"
+"       výskytů předchozího výrazu.\n"
+"\n"
+"Vyhrazené znaky pro použití ve výrazech se uvozují \\.\n"
+"\n"
+"Dva regulární výrazy mohou být spojeny operátorem |\n"
+"       (logický součet or).\n"
+"Dva regulární výrazy mohou být zřetězené.\n"
+"\n"
+"Více informací je dostupné po zadání man grep\n"
+"       v příkazové rádce.\n"
+
+#: ../../xffm/response/entryfileresponse.hh:20
+msgid "Open"
+msgstr "Otevřít"
+
+#: ../../xffm/response/entryresponse.hh:29
+#: ../../xffm/response/entryfolderresponse.hh:28
+msgid "Choose directory"
+msgstr "Zvolte složku"
+
+#. this button is redundant since hands are on keyboard for password
+#: ../../xffm/response/entryresponse.hh:309
+#: ../../xffm/response/passwdresponse.hh:189
+#: ../../xffm/response/passwdresponse.hh:559
+msgid "Ok"
+msgstr "Budiž"
+
+#: ../../xffm/response/commandprogressresponse.hh:32
+msgid "Items:"
+msgstr "Položky:"
+
+#: ../../xffm/response/passwdresponse.hh:21
+msgid "Enter password"
+msgstr "Zadejte heslo"
+
+#. gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+#: ../../xffm/response/passwdresponse.hh:125
+msgid "User Input"
+msgstr "Uživatelský vstup"
+
+#: ../../xffm/response/passwdresponse.hh:142
+msgid "Response Requested"
+msgstr "Odpověď vyžádána"
+
+#: ../../xffm/response/passwdresponse.hh:264
+msgid "Preparing"
+msgstr "Připravuje se"
+
+#: ../../xffm/response/passwdresponse.hh:352
+msgid "sudo"
+msgstr "sudo"
+
+#: ../../xffm/response/passwdresponse.hh:354
+msgid "Command:"
+msgstr "Příkaz:"
+
+#: ../../xffm/response/passwdresponse.hh:357
+msgid "Permission denied"
+msgstr "Oprávnění odepřeno"
+
+#: ../../xffm/response/passwdresponse.hh:358
+msgid "Try to approach a problem from different angles."
+msgstr "Zkuste se na problém podívat z různých úhlů."
+
+#: ../../xffm/response/passwdresponse.hh:359
+msgid "Do you want to retry?"
+msgstr "Zkusit znovu?"
+
+#: ../../xffm/response/passwdresponse.hh:360
+msgid "Alternate:"
+msgstr "Střídající:"
+
+#: ../../xffm/response/passwdresponse.hh:365
+msgid "No"
+msgstr "Ne"
+
+#: ../../xffm/response/passwdresponse.hh:401
+msgid "Install"
+msgstr "Instalovat"
+
+#: ../../xffm/response/passwdresponse.hh:402
+#, c-format
+msgid "%s does not exist."
+msgstr "%s neexistuje."
+
+#: ../../xffm/response/passwdresponse.hh:467
+msgid "Blowfish"
+msgstr "Blowfish"
+
+#: ../../xffm/response/passwdresponse.hh:468
+msgid "Encryption Key Approval"
+msgstr "Schválení šifrovacího klíče"
+
+#: ../../xffm/response/passwdresponse.hh:502
+msgid "-o     print output to standard out. Implies -r."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:506
+msgid "-c     DO NOT compress files before encryption."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:510
+msgid "-r     DO NOT remove input files after processing"
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:517
+msgid "Encryption key: "
+msgstr "Šifrovací klíč:"
+
+#: ../../xffm/response/passwdresponse.hh:529
+msgid "Confirm:"
+msgstr "Potvrdit:"
+
+#: ../../xffm/response/passwdresponse.hh:542
+msgid "Sorry, passwords do not match"
+msgstr "Hesla bohužel nesouhlasí"
+
+#: ../../xffm/response/passwdresponse.hh:550
+#, fuzzy
+msgid "Minimum length:"
+msgstr "Maximální délka"
+
+#: ../../xffm/response/timeoutresponse.hh:56
+msgid "Dismiss"
+msgstr "Zahodit"
+
+#: ../../xffm/response/commandresponse.hh:23
+msgid "Running"
+msgstr "Běží"
+
+#. auto text = g_strdup_printf("%s (pid: %d)",
+#. _("Waiting for operation to finish..."),
+#. Tubo<Type>::getChild (pid));
+#: ../../xffm/response/commandresponse.hh:28
+msgid "Waiting for operation to finish..."
+msgstr "Čekám na dokončení operace..."
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Documents"
+msgstr "Dokumenty"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Downloads"
+msgstr "Stažení"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Music"
+msgstr "Hudba"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Pictures"
+msgstr "Obrázky"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Templates"
+msgstr "Šablony"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Videos"
+msgstr "Videa"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Desktop"
+msgstr "Pracovní plocha"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Bookmarks"
+msgstr "Záložky"
+
+#: ../../xffm/fm/local/icons.hh:259 ../../xffm/fm/local/rm.hh:181
+msgid "Trash"
+msgstr "Koš"
+
+#: ../../xffm/fm/local/popup.hh:60
+msgid "New"
+msgstr "Nový"
+
+#. deprecated {N_("Open in New Tab"), NULL, NULL, NULL},
+#. deprecated {N_("Open in New Window"), NULL, NULL, NULL},
+#. common buttons /(also an iconsize +/- button)
+#: ../../xffm/fm/local/popup.hh:64 ../../xffm/fm/local/popup.hh:104
+#: ../../xffm/common/gtk.hh:74
+msgid "Copy"
+msgstr "Kopírovat"
+
+#: ../../xffm/fm/local/popup.hh:65 ../../xffm/fm/local/popup.hh:105
+#: ../../xffm/common/gtk.hh:73
+msgid "Cut"
+msgstr "Vyjmout"
+
+#: ../../xffm/fm/local/popup.hh:66 ../../xffm/fm/local/popup.hh:106
+#: ../../xffm/common/gtk.hh:66
+msgid "Paste"
+msgstr "Vložit"
+
+#. **************
+#: ../../xffm/fm/local/popup.hh:67 ../../xffm/fm/local/popup.hh:107
+#: ../../xffm/fm/local/rm.hh:174 ../../xffm/common/gtk.hh:75
+msgid "Delete"
+msgstr "Smazat"
+
+#. {N_("About"), NULL, (void *) menu},
+#.
+#. only for listview: {N_("Sort by size"), NULL, (void *) menu},
+#. only for listview: {N_("Sort by date"), NULL, (void *) menu},
+#: ../../xffm/fm/local/popup.hh:73
+msgid "Select All"
+msgstr "Vybrat vše"
+
+#: ../../xffm/fm/local/popup.hh:74 ../../xffm/fm/local/popup.hh:559
+#, fuzzy
+msgid "Match regular expression"
+msgstr "Srovnávat jako regulární výraz"
+
+#: ../../xffm/fm/local/popup.hh:75 ../../xffm/fm/root/view.hh:58
+#: ../../xffm/fm/fstab/popup.hh:21
+msgid "View as list"
+msgstr "Zobrazit jako seznam"
+
+#: ../../xffm/fm/local/popup.hh:77
+msgid "Show hidden files"
+msgstr "Zobrazovat skryté soubory"
+
+#: ../../xffm/fm/local/popup.hh:79
+msgid "Show Backup Files"
+msgstr "Zobrazovat záložní soubory"
+
+#: ../../xffm/fm/local/popup.hh:81
+msgid "Sort data in descending order"
+msgstr "Seřadit data sestupně"
+
+#: ../../xffm/fm/local/popup.hh:93 ../../xffm/fm/local/popup.hh:119
+#: ../../xffm/fm/local/popup.hh:1006 ../../xffm/fm/local/popup.hh:1013
+#: ../../xffm/fm/local/popup.hh:1022 ../../xffm/fm/local/popup.hh:1029
+#: ../../xffm/common/gtk.hh:72
+msgid "Open with"
+msgstr "Otevřít s"
+
+#: ../../xffm/fm/local/popup.hh:94 ../../xffm/fm/local/popup.hh:846
+msgid "Run Executable..."
+msgstr "Spustit program…"
+
+#: ../../xffm/fm/local/popup.hh:95
+msgid "Extract files from the archive"
+msgstr "Rozbalit soubory z archivu"
+
+#. g_hash_table_insert(iconname_hash, "bcrypt", (void *)"emblem-keyhole");
+#: ../../xffm/fm/local/popup.hh:96 ../../xffm/fm/root/view.hh:73
+#: ../../xffm/fm/fstab/popup.hh:20 ../../xffm/fm/dialog/notebook.hh:52
+#: ../../xffm/common/gtk.hh:78
+msgid "Open in New Tab"
+msgstr "Otevřít v nové kartě"
+
+#. File chooser
+#: ../../xffm/fm/local/popup.hh:97 ../../xffm/fm/local/popup.hh:706
+msgid "Create a compressed archive with the selected objects"
+msgstr "Vytvořit komprimovaný archiv s vybranými objekty"
+
+#: ../../xffm/fm/local/popup.hh:98 ../../xffm/fm/fstab/popup.hh:37
+msgid "Mount the volume associated with this folder"
+msgstr "Připojit svazek asociovaný s touto složkou"
+
+#: ../../xffm/fm/local/popup.hh:99 ../../xffm/fm/fstab/popup.hh:38
+msgid "Unmount the volume associated with this folder"
+msgstr "Odpojit svazek asociovaný s touto složkou"
+
+#: ../../xffm/fm/local/popup.hh:100 ../../xffm/common/gtk.hh:67
+msgid "Add bookmark"
+msgstr "Přidat záložku"
+
+#: ../../xffm/fm/local/popup.hh:101 ../../xffm/fm/root/view.hh:74
+#: ../../xffm/common/gtk.hh:68
+msgid "Remove bookmark"
+msgstr "Odstranit záložku"
+
+#: ../../xffm/fm/local/popup.hh:108 ../../xffm/fm/local/popup.hh:961
+msgid "Rename"
+msgstr "Přejmenovat"
+
+#: ../../xffm/fm/local/popup.hh:109 ../../xffm/fm/local/popup.hh:947
+msgid "Duplicate"
+msgstr "Duplikovat"
+
+#: ../../xffm/fm/local/popup.hh:110 ../../xffm/fm/local/popup.hh:933
+msgid "Link"
+msgstr "Spojit"
+
+#: ../../xffm/fm/local/popup.hh:111
+msgid "Properties"
+msgstr "Vlastnosti"
+
+#: ../../xffm/fm/local/popup.hh:414
+msgid "Files:"
+msgstr "Soubory:"
+
+#: ../../xffm/fm/local/popup.hh:417 ../../xffm/fm/local/rm.hh:61
+msgid "Multiple selections"
+msgstr "Více výběrů"
+
+#: ../../xffm/fm/local/popup.hh:557
+msgid "Select items"
+msgstr "Označit položky"
+
+#: ../../xffm/fm/local/popup.hh:575
+msgid "Regular Expression syntax is incorrect"
+msgstr "Syntaxe regulárního výrazu je nesprávná"
+
+#: ../../xffm/fm/local/popup.hh:592
+msgid "No selection"
+msgstr "Nic nevybráno"
+
+#: ../../xffm/fm/local/popup.hh:592
+msgid "No matches."
+msgstr "Žádné shody."
+
+#. entryResponse->setCheckButton(_("Run in Terminal"));
+#. entryResponse->setCheckButton(Mime<Type>::runInTerminal(path));
+#: ../../xffm/fm/local/popup.hh:721 ../../xffm/fm/page/pathbar.hh:313
+msgid "Specify Output Directory..."
+msgstr "Zadejte výstupní složku..."
+
+#: ../../xffm/fm/local/popup.hh:799
+msgid "Create new..."
+msgstr "Přidat novou…"
+
+#: ../../xffm/fm/local/popup.hh:806 ../../xffm/fm/local/popup.hh:886
+msgid "New Name:"
+msgstr "Nové jméno:"
+
+#: ../../xffm/fm/local/popup.hh:815
+msgid "No name"
+msgstr "Žádný název"
+
+#: ../../xffm/fm/local/popup.hh:828
+#, c-format
+msgid "Another file with the same name already exists in “%s”."
+msgstr "Jiný soubor se stejným názvem již existuje v „%s“."
+
+#: ../../xffm/fm/local/popup.hh:850 ../../xffm/fm/local/popup.hh:1010
+#: ../../xffm/fm/local/popup.hh:1026 ../../xffm/common/util.hh:1248
+msgid "Run in Terminal"
+msgstr "Spustit v terminálu"
+
+#: ../../xffm/fm/local/popup.hh:853
+msgid "Arguments for the Command"
+msgstr "Argumenty pro příkaz"
+
+#: ../../xffm/fm/local/popup.hh:1047 ../../xffm/fm/local/view.hh:141
+msgid "Invalid entry"
+msgstr "Neplatný vstup"
+
+#: ../../xffm/fm/local/properties.hh:235
+msgid "Properties and Attributes"
+msgstr "Vlastnosti a atributy"
+
+#: ../../xffm/fm/local/properties.hh:264
+msgid "File Mode:"
+msgstr "Režim souboru:"
+
+#: ../../xffm/fm/local/properties.hh:290
+msgid "File:"
+msgstr "Soubor:"
+
+#. Add file info stuff
+#. set info stuff data according to combo box
+#. add signal handler to changed signal for combo box
+#. Add process buttons
+#.
+#: ../../xffm/fm/local/properties.hh:302
+msgid "Apply changes"
+msgstr "Provést změny"
+
+#: ../../xffm/fm/local/properties.hh:462
+msgid "Successfully moved to trash."
+msgstr "Úspěšně přesunuto do koše."
+
+#: ../../xffm/fm/local/properties.hh:463
+msgid "Source:"
+msgstr "Zdroj:"
+
+#: ../../xffm/fm/local/rm.hh:59
+#, c-format
+msgid "Delete %s"
+msgstr "Odstranit %s"
+
+#: ../../xffm/fm/local/rm.hh:61
+msgid "Warning: "
+msgstr "Pozor: "
+
+#. gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
+#. title
+#: ../../xffm/fm/local/rm.hh:90
+msgid "Remove"
+msgstr "Odstranit"
+
+#: ../../xffm/fm/local/rm.hh:140
+msgid "Apply to all"
+msgstr "Použít na všechny"
+
+#. **************
+#. This is now available to BSD with rm -P option
+#: ../../xffm/fm/local/rm.hh:163 ../../xffm/common/gtk.hh:76
+msgid "Shred"
+msgstr "Zničit"
+
+#. We do not count "../"
+#: ../../xffm/fm/local/view.hh:48 ../../xffm/fm/base/monitor.hh:28
+#, c-format
+msgid "Files: %s"
+msgstr "Souborů: %s"
+
+#: ../../xffm/fm/root/model.hh:78
+msgid "Root Directory"
+msgstr "Kořenový adresář"
+
+#: ../../xffm/fm/root/model.hh:94
+msgid "This is the root of the filesystem"
+msgstr "Toto je kořen souborového systému"
+
+#: ../../xffm/fm/root/model.hh:105
+msgid "Home Directory"
+msgstr "Domovský adresář"
+
+#: ../../xffm/fm/root/model.hh:132
+msgid "Trash bin"
+msgstr "Odpadkový koš"
+
+#: ../../xffm/fm/root/model.hh:162 ../../xffm/fm/fstab/popup.hh:29
+msgid "Disk Image Mounter"
+msgstr "Připojování obrazů disků"
+
+#: ../../xffm/fm/root/model.hh:169 ../../xffm/fm/root/model.hh:185
+msgid "Mount local disks and devices"
+msgstr "Připojování lokálních disků a zařízení"
+
+#: ../../xffm/fm/root/model.hh:170 ../../xffm/fm/fstab/popup.hh:25
+#: ../../xffm/fm/fstab/view.hh:429
+msgid "eCryptfs Volume"
+msgstr "Svazek eCryptfs"
+
+#: ../../xffm/fm/root/model.hh:171 ../../xffm/fm/fstab/popup.hh:24
+msgid "SSHFS Remote Synchronization Folder"
+msgstr "Složka vzdálené synchronizace pomocí SSHFS"
+
+#: ../../xffm/fm/root/model.hh:172 ../../xffm/fm/fstab/popup.hh:23
+#: ../../xffm/fm/fstab/view.hh:377
+msgid "NFS Network Volume"
+msgstr "Síťový svazek NFS"
+
+#: ../../xffm/fm/root/model.hh:173 ../../xffm/fm/fstab/popup.hh:26
+#: ../../xffm/fm/fstab/view.hh:455
+msgid "CIFS Volume"
+msgstr "Svazek CIFS"
+
+#: ../../xffm/fm/root/model.hh:195
+msgid "Software Updater"
+msgstr "Aktualizace softwaru"
+
+#: ../../xffm/fm/root/model.hh:218 ../../xffm/fm/root/model.hh:230
+msgid "Add or remove software installed on the system"
+msgstr "Přidat nebo odebrat software instalovaný v systému"
+
+#: ../../xffm/fm/root/model.hh:271
+msgid "Go to bookmarked location"
+msgstr "Přejít na uložené umístění"
+
+#. {N_("Add bookmark"), (void *)BasePopUp<Type>::noop, NULL, NULL},
+#: ../../xffm/fm/root/view.hh:61
+msgid "Empty trash"
+msgstr "Vysypat koš"
+
+#. File chooser
+#: ../../xffm/fm/fstab/popup.hh:121
+msgid "Mount Device"
+msgstr "Připojit zařízení"
+
+#: ../../xffm/fm/fstab/popup.hh:133
+msgid "Mount point:"
+msgstr "Přípojný bod:"
+
+#: ../../xffm/fm/fstab/view.hh:301
+msgid "Mounted on:"
+msgstr "Místo připojení:"
+
+#: ../../xffm/fm/fstab/view.hh:302
+msgid "Mount on"
+msgstr "Připojit na"
+
+#: ../../xffm/fm/fstab/view.hh:310 ../../xffm/fm/fstab/view.hh:312
+msgid "Not mounted"
+msgstr "Nepřipojen"
+
+#: ../../xffm/fm/fstab/view.hh:403
+msgid "SFTP (via SSH)"
+msgstr "SFTP (přes SSH)"
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, c-format
+msgid "Unmounting %s"
+msgstr "Odpojuje se %s"
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, c-format
+msgid "Mounting %s"
+msgstr "Připojuje se %s"
+
+#: ../../xffm/fm/dialog/menupopover.hh:128
+msgid "Home"
+msgstr "Domácnost"
+
+#: ../../xffm/fm/dialog/menupopover.hh:129 ../../xffm/common/gtk.hh:64
+msgid "Open terminal"
+msgstr "Otevřít terminál"
+
+#: ../../xffm/fm/dialog/menupopover.hh:130
+msgid "Open a New Window"
+msgstr "Otevřít nové okno"
+
+#. {N_("Execute Shell Command"), (void *)MenuPopoverSignals<Type>::shell, (void *) menuButton_},
+#: ../../xffm/fm/dialog/menupopover.hh:132 ../../xffm/common/gtk.hh:69
+msgid "Search"
+msgstr "Hledat"
+
+#: ../../xffm/fm/dialog/menupopover.hh:133 ../../xffm/common/gtk.hh:71
+msgid "Exit"
+msgstr "Konec"
+
+#: ../../xffm/fm/dialog/dialog.hh:116
+msgid "Removed"
+msgstr "Odstraněno"
+
+#: ../../xffm/fm/dialog/dialog.hh:132
+msgid "Detected device(s):"
+msgstr "Detekovaná zařízení:"
+
+#. Create the widgets
+#: ../../xffm/fm/page/vbuttonbox.hh:37 ../../xffm/common/gtk.hh:332
+msgid "Help"
+msgstr "Nápověda"
+
+#. File chooser
+#: ../../xffm/fm/page/pathbar.hh:306 ../../xffm/fm/page/pathbar.hh:308
+msgid "Go to"
+msgstr "Přejít na"
+
+#: ../../xffm/fm/page/pathbar.hh:331
+msgid "Not a directory"
+msgstr "Není adresář"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Renice Process"
+msgstr "Přeplánovat proces"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Suspend"
+msgstr "Uspat do paměti"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Continue"
+msgstr "Pokračovat"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Interrupt"
+msgstr "Přerušení (SIGINT)"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Hangup"
+msgstr "Odpojen terminál (SIGHUP)"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "User 1 (USR1)"
+msgstr "Uživatel 1 (USR1)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "User 2 (USR2)"
+msgstr "Uživatel 2 (USR2)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "Terminate Task"
+msgstr "Přerušit úlohu"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "Abort"
+msgstr "Zrušit"
+
+#: ../../xffm/fm/page/runbutton.hh:138
+msgid "Kill"
+msgstr "Zabít"
+
+#: ../../xffm/fm/page/runbutton.hh:139
+msgid "Segmentation fault"
+msgstr "Neoprávněný přístup do paměti (SIGSEGV)"
+
+#: ../../xffm/fm/page/runbutton.hh:217
+msgid "PID"
+msgstr "PID"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:37
+msgid "Embedded Terminal"
+msgstr "Vestavěný terminál"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:38
+#, fuzzy
+msgid "All items in the iconview."
+msgstr "Vybere všechny položky na plátně."
+
+#: ../../xffm/fm/page/hbuttonbox.hh:39
+msgid "Scripting"
+msgstr "Skriptování"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:40
+msgid "Clear Log"
+msgstr "Vyprázdnit záznam"
+
+#. Status textview
+#: ../../xffm/fm/page/hbuttonbox.hh:42
+msgid "Terminal font"
+msgstr "Písmo terminálu"
+
+#: ../../xffm/fm/treeview.hh:17
+msgid "Name"
+msgstr "Jméno"
+
+#: ../../xffm/fm/treeview.hh:20
+msgid "Size"
+msgstr "Velikost"
+
+#: ../../xffm/fm/treeview.hh:21
+msgid "Date"
+msgstr "Datum"
+
+#: ../../xffm/fm/treeview.hh:22
+msgid "Mimetype"
+msgstr "Typ souboru"
+
+#: ../../xffm/fm/treeview.hh:24
+msgid "TYPE"
+msgstr "TYP"
+
+#: ../../xffm/fm/base/signals.hh:642
+msgid "Directory does not exist."
+msgstr "Adresář neexistuje."
+
+#: ../../xffm/fm/base/signals.hh:644 ../../xffm/fm/base/signals.hh:646
+msgid "Trash is empty"
+msgstr "Koš je prázdný"
+
+#: ../../xffm/common/settings.hh:27
+msgid "New File:"
+msgstr "Nový soubor:"
+
+#: ../../xffm/common/gio.hh:235
+msgid "Could not copy item:"
+msgstr "Nelze kopírovat položku:"
+
+#: ../../xffm/common/gio.hh:237
+msgid "Could not move item:"
+msgstr "Nelze přesunout položku:"
+
+#: ../../xffm/common/gio.hh:239
+msgid "Create symbolic link"
+msgstr "Vytvořit symbolický odkaz"
+
+#: ../../xffm/common/gio.hh:276
+#, fuzzy, c-format
+msgid ""
+"Could not delete:\n"
+"%s"
+msgstr ""
+"Nelze vymazat soubor:\n"
+"%s"
+
+#: ../../xffm/common/gio.hh:278
+#, c-format
+msgid "Could not move %s to trash"
+msgstr "Položku %s nelze přesunout do koše"
+
+#: ../../xffm/common/clipboard.hh:23 ../../xffm/common/dnd.hh:40
+msgid "Copying files locally"
+msgstr "Kopírují se soubory místně"
+
+#: ../../xffm/common/clipboard.hh:30 ../../xffm/common/dnd.hh:34
+msgid "Moving files"
+msgstr "Přesouvají se soubory"
+
+#: ../../xffm/common/dnd.hh:46
+msgid "Create Link"
+msgstr "Vytvořit spojení"
+
+#: ../../xffm/common/util.hh:1200
+#, c-format
+msgid ""
+"Scriptfile \"%s\" is not executable. Please set the executable-attribute on "
+"that file."
+msgstr ""
+
+#: ../../xffm/common/util.hh:1202 ../../xffm/common/util.hh:1237
+#, c-format
+msgid "Open with %s"
+msgstr "Otevřít pomocí %s"
+
+#: ../../xffm/common/util.hh:1202
+msgid "Text Editor"
+msgstr "Textový editor"
+
+#: ../../xffm/common/util.hh:1239 ../../xffm/common/gtk.hh:65
+msgid "Execute Shell Command"
+msgstr "Spustit shellový příkaz"
+
+#: ../../xffm/common/util.hh:1243
+msgid ""
+"Console: quickly run single commands -- write a command here and press enter."
+msgstr ""
+"Konzole: pro rychlé spuštění jednoduchých příkazů -- zde napište příkaz a "
+"potvrďte."
+
+#: ../../xffm/common/gtk.hh:123
+msgid "New Tab"
+msgstr "Nová karta"
+
+#: ../../xffm/common/gtk.hh:335
+msgid "OK"
+msgstr "V POŘÁDKU"
+
+#: ../../xffm/common/run.hh:344
+msgid "error"
+msgstr "chyba"
+
+#: ../../xffm/common/run.hh:348
+msgid "warning"
+msgstr "varování"
+
+#: ../../xffm/common/mime.hh:101 ../../xffm/common/mime.hh:143
+msgid "No Read Permission"
+msgstr "Žádná oprávnění ke čtení"
+
+#: ../../xffm/common/preview.hh:593
+msgid "Empty file"
+msgstr "Prázdný soubor"
+
+#: ../../xffm/common/preview.hh:648
+#, c-format
+msgid "Cannot read from %s"
+msgstr "Nelze číst z %s"
+

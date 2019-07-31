@@ -1,0 +1,330 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:40:59 CDT 2013 ---
+#
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2002-2012.
+# Copyright (C) 2012 Ulrik Sverdrup <ulrik.sverdrup@gmail.com>.
+# Matthias Clasen <mclasen@redhat.com>, 2011.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: http://bugs.xffm.org\n"
+"POT-Creation-Date: 2011-01-25 23:52-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: English\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "%u byte"
+msgid_plural "%u bytes"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "audio DVD"
+msgstr "Audio DVD"
+
+msgid "blank Blu-ray disc"
+msgstr "Blank Blu-ray disc"
+
+msgid "blank CD disc"
+msgstr "Blank CD disc"
+
+msgid "blank DVD disc"
+msgstr "Blank DVD disc"
+
+msgid "blank HD DVD disc"
+msgstr "Blank HD DVD disc"
+
+msgid "e-book reader"
+msgstr "E-book reader"
+
+msgid "%i minute"
+msgid_plural "%i minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "%i hour"
+msgid_plural "%i hours"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "%u Output"
+msgid_plural "%u Outputs"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "%u Input"
+msgid_plural "%u Inputs"
+msgstr[0] ""
+msgstr[1] ""
+
+
+msgid "%a %b %e, %R:%S"
+msgstr "%a %e %b, %H∶%M∶%S"
+
+msgid "%a %b %e, %R"
+msgstr "%a %e %b, %H∶%M"
+
+msgid "%a %R:%S"
+msgstr "%a %H∶%M∶%S"
+
+msgid "%a %R"
+msgstr "%a %H∶%M"
+
+msgid "%R:%S"
+msgstr "%H∶%M∶%S"
+
+msgid "%R"
+msgstr "%H∶%M"
+
+msgid "%a %b %e, %l:%M:%S %p"
+msgstr "%a %e %b, %l∶%M∶%S %p"
+
+msgid "%a %b %e, %l:%M %p"
+msgstr "%a %e %b, %l∶%M %p"
+
+msgid "%a %l:%M:%S %p"
+msgstr "%a %l∶%M∶%S %p"
+
+msgid "%a %l:%M %p"
+msgstr "%a %l∶%M %p"
+
+msgid "%l:%M:%S %p"
+msgstr "%l∶%M∶%S %p"
+
+
+msgid "BackSpace"
+msgstr "Backspace"
+
+msgid "ScrollLock"
+msgstr "Scroll Lock"
+
+msgid "SysReq"
+msgstr "Sys Req"
+
+msgid "Multikey"
+msgstr "Multikey"
+
+msgid "PageUp"
+msgstr "Page up"
+
+msgid "PageDown"
+msgstr "Page down"
+
+msgid "NumLock"
+msgstr "Num Lock"
+
+msgid "KPSpace"
+msgstr "Space (keypad)"
+
+msgid "KPTab"
+msgstr "Tab (keypad)"
+
+msgid "KPEnter"
+msgstr "Enter (keypad)"
+
+msgid "KPHome"
+msgstr "Home (keypad)"
+
+msgid "KPLeft"
+msgstr "Left (keypad)"
+
+msgid "KPUp"
+msgstr "Up (keypad)"
+
+msgid "KPRight"
+msgstr "Right (keypad)"
+
+msgid "KPDown"
+msgstr "Down (keypad)"
+
+msgid "KPPageUp"
+msgstr "Page up (keypad)"
+
+msgid "KPPrior"
+msgstr "Prior (keypad)"
+
+msgid "KPPageDown"
+msgstr "Page down (keypad)"
+
+msgid "KPNext"
+msgstr "Next (keypad)"
+
+msgid "KPEnd"
+msgstr "End (keypad)"
+
+msgid "KPBegin"
+msgstr "Begin (keypad)"
+
+msgid "KPInsert"
+msgstr "Insert (keypad)"
+
+msgid "KPDelete"
+msgstr "Delete (keypad)"
+
+msgid "MonBrightnessUp"
+msgstr "Monitor brightness up"
+
+msgid "MonBrightnessDown"
+msgstr "Monitor brightness down"
+
+msgid "AudioMute"
+msgstr "Audio mute"
+
+msgid "AudioLowerVolume"
+msgstr "Audio lower volume"
+
+msgid "AudioRaiseVolume"
+msgstr "Audio raise volume"
+
+msgid "AudioPlay"
+msgstr "Audio play"
+
+msgid "AudioStop"
+msgstr "Audio stop"
+
+msgid "AudioNext"
+msgstr "Audio next"
+
+msgid "AudioPrev"
+msgstr "Audio previous"
+
+msgid "AudioRecord"
+msgstr "Audio record"
+
+msgid "AudioPause"
+msgstr "Audio pause"
+
+msgid "AudioRewind"
+msgstr "Audio rewind"
+
+msgid "AudioMedia"
+msgstr "Audio media"
+
+msgid "ScreenSaver"
+msgstr "Screensaver"
+
+msgid "Battery"
+msgstr "Battery"
+
+msgid "Launch1"
+msgstr "Launch1"
+
+msgid "Forward"
+msgstr "Forward"
+
+msgid "Back"
+msgstr "Back"
+
+msgid "Sleep"
+msgstr "Sleep"
+
+msgid "Hibernate"
+msgstr "Hibernate"
+
+msgid "WLAN"
+msgstr "WLAN"
+
+msgid "WebCam"
+msgstr "Web Cam"
+
+msgid "Display"
+msgstr "Display"
+
+msgid "TouchpadToggle"
+msgstr "Touchpad toggle"
+
+msgid "WakeUp"
+msgstr "Wake up"
+
+msgid "Suspend"
+msgstr "Suspend"
+
+msgid "Opening %d Item"
+msgid_plural "Opening %d Items"
+msgstr[0] ""
+msgstr[1] ""
+
+
+msgid "Could not to carry out '%s'"
+msgstr "Could not carry out ‘%s’"
+
+msgid "\"%s\" produced a result"
+msgstr "“%s” produced a result"
+
+msgid "No permission to run \"%s\" (not executable)"
+msgstr "No permission to run “%s” (not executable)"
+
+msgid "Command in \"%s\" is not available"
+msgstr "Command in “%s” is not available"
+
+msgid "No matches in %(src)s for \"%(query)s\""
+msgstr "No matches in %(src)s for “%(query)s”"
+
+msgid "Make \"%(action)s\" Default for \"%(object)s\""
+msgstr "Make “%(action)s” Default for “%(object)s”"
+
+msgid "Forget About \"%s\""
+msgstr "Forget About “%s”"
+
+msgid "Python module '%s' is needed"
+msgstr "Python module ‘%s’ is needed"
+
+msgid "translator-credits"
+msgstr "Ulrik Sverdrup <ulrik.sverdrup@gmail.com>"
+
+msgid "Please use \"%s\""
+msgstr "Please use “%s”"
+
+msgid "\"%(text)s\""
+msgid_plural "(%(num)d lines) \"%(text)s\""
+msgstr[0] "“%(text)s”"
+msgstr[1] "(%(num)d lines) “%(text)s”"
+
+msgid "Compressed archive type for 'Create Archive In'"
+msgstr "Compressed archive type for ‘Create Archive In’"
+
+msgid "Calculate expressions starting with '='"
+msgstr "Calculate expressions starting with ‘=’"
+
+msgid "Clipboard \"%(desc)s\""
+msgid_plural "Clipboard with %(num)d lines \"%(desc)s\""
+msgstr[0] "Clipboard “%(desc)s”"
+msgstr[1] "Clipboard with %(num)d lines “%(desc)s”"
+
+msgid "Shelf of \"Favorite\" items"
+msgstr "Shelf of “Favorite” items"
+
+msgid "Selected File \"%s\""
+msgstr "Selected File “%s”"
+
+msgid ""
+"Assign global keybindings (triggers) to objects created with 'Compose "
+"Command'."
+msgstr ""
+"Assign global keybindings (triggers) to objects created with ‘Compose "
+"Command’."
+
+msgid "Packages matching \"%s\""
+msgstr "Packages matching “%s”"
+
+msgid "Results for \"%s\""
+msgstr "Results for “%s”"
+
+

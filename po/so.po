@@ -1,0 +1,1952 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:39:28 CDT 2013 ---
+#
+# (C) M. I. Mursal <mimursal@mimfi-tech.com>, 2006.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: http://bugs.xffm.org\n"
+"POT-Creation-Date: 2006-10-16 13:37+0100\n"
+"PO-Revision-Date: 2006-10-27 15:27+0200\n"
+"Last-Translator: M.I. Mursal <mimursal@mimfi-tech.com>\n"
+"Language-Team: Somali <mimursal@mimfi-tech.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-Country: SOMALIA\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: d:/gcompris-8.1\n"
+
+msgid "GCompris Administration Menu"
+msgstr "Liisamarka Maamulka Gcompris"
+
+msgid "Advanced colors"
+msgstr "Midabo horumarsan"
+
+msgid "Can read"
+msgstr "Waa in uu aqrinkaro"
+
+msgid "Click on the correct color"
+msgstr "Dhagsii midibka saxda eh"
+
+msgid "greyish-brown"
+msgstr "Kafeyga-Dameeri"
+
+msgid "greyish blue"
+msgstr "Buluug-Dameeri"
+
+msgid "dark purple"
+msgstr "Basali-mugdi"
+
+msgid "Practice the multiplication operation"
+msgstr "Ku tababaro sida wax la isugudhufto"
+
+msgid "Go to Algebra activities"
+msgstr "Aad shaqooyinka Algabrada"
+
+msgid "Practice the subtraction operation"
+msgstr "Ku tababaro sida wax loo kalajaro"
+
+msgid "Simple subtraction"
+msgstr "Wax kalajarid sahlan"
+
+msgid "An addition problem with two numbers is displayed. At the right of the equals sign, give the answer, the sum. Use the left and right arrows to modify your answer and press the Enter key to check if you've got it right. If not, just try again."
+msgstr "Layliska iskudarka waxaa lagu siinayaa laba lambar. Dhinaca midig ee calaamada islaegta waxaad ku qortaa jawaabtaada oo ah wadarta. Isticmaal falaarta midig ama bidix si aad wax uga bedesho jawaabtaada ka dibna riix furaha galaha (Enter) si aad u ogaato in aad saxday iyo inkale. Hadii aadan sixin isku dey markale. "
+
+msgid "In a limited time, find the sum of of two numbers. Introduction to simple in-line addition."
+msgstr "Waan in aad waqti kooban, ku heshaa iskudarka labo lambar. Hordhaca xisaabta isku darka."
+
+msgid "Practice the addition operation"
+msgstr "Ku tababaro sida wax la isugudaro"
+
+msgid "Simple addition. Can recognize written numbers"
+msgstr "Iskudarid sahlan. Waan in uu kala saarikaraa lambara qoran"
+
+msgid "Go to calculation activities"
+msgstr "Aad shaqooyinka xisaabitaanka"
+
+msgid "Various calculation activities."
+msgstr "Shaqooyin kalagedisan oo la'xiriira xisaabitaanka"
+
+msgid "Complete a list of symbols"
+msgstr "Liis xarfo oo dhameytiran"
+
+msgid "Find the next symbol in a list."
+msgstr "Raadi calaamad xigta ee liiska."
+
+msgid "Logic training activity"
+msgstr "Shaqo la'xiriirta macquulnimada (logic)"
+
+msgid "Move and click the mouse"
+msgstr "Daqaaji kadibna dhag ku sii dooliga"
+
+msgid "Matching Items"
+msgstr "Raadi labada is leh"
+
+msgid "Complete the puzzle"
+msgstr "Dhamaystir xujadaan"
+
+msgid "Good mouse-control"
+msgstr "Si fiican dooliga u xukun"
+
+msgid "Lock on the grass."
+msgstr "Kuxir cooska"
+
+msgid "Logic-training activity"
+msgstr "Shaqo la'xiriirta macquulnimada (logic)"
+
+msgid "Mouse-manipulation"
+msgstr "Xukumida dooliga (mouse)"
+
+msgid "The football game"
+msgstr "Ciyaarta kubada cagta"
+
+msgid "Operate a canal lock"
+msgstr "Baro sida uu biyoxireenka u shaqeeyo"
+
+msgid "Practice chess"
+msgstr "Ku tababar qaado ciyaarta Jeeska"
+
+msgid "Learning chess"
+msgstr "Barasahda ciyaarta Jeeska"
+
+msgid "Tell a short story"
+msgstr "Sheek sheekosheeko"
+
+msgid "Cars"
+msgstr "Baabuuro"
+
+msgid "A letter is spoken. Click on the matching letter in the main area. You can listen to the letter again, by clicking on the mouth icon in the bottom box."
+msgstr "Waxaad maqlaysaa xaraf. Dhagsii xarafkaas. Hadii aad rabtid in aad marlabaad dhagaysatid, dhagsii sawirka afka hoos ku yaalo."
+
+msgid "Click on a letter"
+msgstr "Dhagsii xarafka"
+
+msgid "Letter-name recognition"
+msgstr "Aqoonsiga xarfaha-magacyadooda"
+
+msgid "Listen to a letter and click on the right one"
+msgstr "Dhagayso xarafka kadibna dhagsii kan saxda eh."
+
+msgid "Visual letter-recognition. Can move the mouse."
+msgstr "Kasitaanka muuqaalka xarafaha. Waa inuu dhaqaajinkaraa dooliga."
+
+msgid "Click On Me"
+msgstr "Dhag isii"
+
+msgid "Distinguish between time-units (hour, minute and second). Set and display time on a clock."
+msgstr "Kala sooc halbeegyada-saacada (Saac, dakhiiqo iyo ilbiriqsi).  Sax soona saar waqtiga saacada"
+
+msgid "Learn how to tell the time"
+msgstr "Baro sida waqtiga loo sheego"
+
+msgid "Learning Clock"
+msgstr "Saacad baro"
+
+msgid "The concept of time. Reading the time."
+msgstr "Fikrada waqtiga. Aqrinta saacada."
+
+msgid "Can move the mouse."
+msgstr "Wuu dhaqaajinkaraa dooliga"
+
+msgid "Click on the right color"
+msgstr "Dhagsii midibka saxda eh"
+
+msgid "Colors"
+msgstr "Midibo"
+
+msgid "Listen to the color and click on the matching duck."
+msgstr "Dhageyso midibka kadibna dhagsii  boolonboolada midibkaas leh."
+
+msgid "This board teaches you to recognize different colors. When you hear the name of the color, click on the duck wearing it."
+msgstr "Miiskaan wuxuu ku barayaa sidii aad u baranlahad midibada kala duwan. Markii aan maqashid magaca midibka, dhagsii  boolonboolada midibkaas leh."
+
+msgid "Colors based activities."
+msgstr "Shaqooyin ku saabsan midabada."
+
+msgid "Go to Color activities"
+msgstr "Aad shaqooyinka midabada"
+
+msgid "Discover the Computer"
+msgstr "Baro kumbuyuutarka"
+
+msgid "Play with computer peripherals."
+msgstr "Ku cayaar qeybaha kumbuyiitar ka mid ah."
+
+msgid "Arrange four coins in a row"
+msgstr "Afar shilin saf isugu aadi"
+
+msgid "Connect 4"
+msgstr "Kuxir 4"
+
+msgid ""
+"Create a line of 4 pieces either horizontally (lying down)\n"
+"or vertically (standing up)"
+msgstr ""
+"Samee saf ay ku jiraan 4 jiijiifa (horizontally)\n"
+"ama taagtaagan (vertically)"
+
+msgid "Build the same model"
+msgstr "Dhis tusaale la'mid eh"
+
+msgid "Drive the crane and copy the model"
+msgstr "Wiish wadis iyo tusaale koobiyeyn "
+
+msgid "Motor-coordination"
+msgstr "Iskudubaridka motoriga"
+
+msgid "Mouse manipulation"
+msgstr "Xukumida dooliga (mouse)"
+
+msgid "Colors, sounds, memory..."
+msgstr "Midabo, codad, xasuus..."
+
+msgid "Go to discovery activities"
+msgstr "Aad shaqooyinka baaritaanka (Discovery)"
+
+msgid "Basic counting skills"
+msgstr "Xirfad xisaabitaan aasaasi eh"
+
+msgid "Basic enumeration"
+msgstr "Xisaabitaan aasaasi eh"
+
+msgid "Count the items"
+msgstr "Xisaab dhamaan sheyaasha"
+
+msgid "Numeration training"
+msgstr "Tababarka lambarada"
+
+msgid "Move the mouse"
+msgstr "Dhaqaaji dooliga"
+
+msgid "Click the mouse"
+msgstr "Dhagsii dooliga (mouse)"
+
+msgid "Double-click the mouse"
+msgstr "Dhag-dhagsii dooliga (mouse)"
+
+msgid "Go to experiential activities"
+msgstr "Aad shaqooyinka kusaabsan tijaabooyinka"
+
+msgid "Go to Experimental activities"
+msgstr "Aad shaqooyinka kusaabsan Tijaabooyinka"
+
+msgid "The fifteen game"
+msgstr "Ciyaarta toban iyo shata"
+
+msgid "move"
+msgstr "Dhaqaaji"
+
+msgid "puzzle"
+msgstr "Xuju"
+
+msgid "Control the hose-pipe"
+msgstr "Xukun tubada biyo waraabinta"
+
+msgid "Move the mouse over the red part of the hose-pipe. This will move it, bringing it, part by part, up to the flowers. Be careful, if you move off the hose, the red part will go back down."
+msgstr "Dooliga gey qeybta gaduudan ee tubada. Taas waa kuu dhaqaajinaysaa, ku keeneysaa, qeybqeyb, ilaa iyo ubaxyada. Iskajir, hadii aad aad uga dhaqaaqdid, qeybta gaduudan waxay ku noqonaysaa meesheeda."
+
+msgid "Tux needs to water the flowers, but the hose is blocked."
+msgstr "Tux wuxuu rabaa in uu waraabiyo ubaxa, lakiin tubada waa xirantahay."
+
+msgid "Go to Amusement activities"
+msgstr "Aad shaqooyinka madadaalada ah"
+
+msgid "Various fun activities."
+msgstr "Shaqooyin kaladuwan oo farxad leh."
+
+msgid "gcompris animation"
+msgstr "gcompris animeeshan"
+
+msgid "gcompris drawing"
+msgstr "gcompris sawiraad"
+
+msgid "svg drawing"
+msgstr "svg sawiraad"
+
+msgid "svg mozilla animation"
+msgstr "sawir-nool svg mozilla"
+
+msgid "Drag and Drop the items to redraw the whole map"
+msgstr "Jiid oo ku rid sheyaasha is aad u sawirto qariirada oo dhan"
+
+msgid "Locate the countries"
+msgstr "Raadi wadamada"
+
+msgid "Mouse manipulation: movement, drag and drop"
+msgstr "Xukumida dooliga: dhaqdhaqaajin, Jiid oo ku rid"
+
+msgid "The map of Germany comes from Wikipedia and is released under the GNU Free Documentation License. Olaf Ronneberger and his children Lina and Julia Ronneberger created the German level."
+msgstr "Qariirada Jarmalka waxaa laga soo qaaday Wikipedia waxaa lagu soo saaray shatiga GNU Free Documatation License. Olaf Ronneberger iyo caruurtiisa Lina and Julia Ronneberger ayaa sameeyay darajada Jarmalka."
+
+msgid "Africa"
+msgstr "Afrika"
+
+msgid "America"
+msgstr "Ameerika"
+
+msgid "Antartica"
+msgstr "Antartik"
+
+msgid "Asia"
+msgstr "Aasia"
+
+msgid "Continents"
+msgstr "Qaarado"
+
+msgid "Europe"
+msgstr "Yurub"
+
+msgid "Oceania"
+msgstr "Badleyda"
+
+msgid "Alaska"
+msgstr "Alaska"
+
+msgid "Bahamas"
+msgstr "Bahamas"
+
+msgid "Canada"
+msgstr "Kanada"
+
+msgid "Cuba"
+msgstr "Kuuba"
+
+msgid "Dominican Republic"
+msgstr "Jamhuuriyada Domenikaanka"
+
+msgid "Greenland"
+msgstr "Greenland"
+
+msgid "Haiti"
+msgstr "Haiti"
+
+msgid "Iceland"
+msgstr "Iceland"
+
+msgid "Jamaica"
+msgstr "Jamaika"
+
+msgid "Mexico"
+msgstr "Meksiko"
+
+msgid "North America"
+msgstr "Woqooyiga ameerika"
+
+msgid "United States of America"
+msgstr "Dalka mareykanka"
+
+msgid "Argentina"
+msgstr "Argentina"
+
+msgid "Bolivia"
+msgstr "Bolivia"
+
+msgid "Brazil"
+msgstr "Brazil"
+
+msgid "Chile"
+msgstr "Chile"
+
+msgid "Colombia"
+msgstr "Colombia"
+
+msgid "Ecuador"
+msgstr "Ecuador"
+
+msgid "French Guiana"
+msgstr "French Guiana"
+
+msgid "Guyana"
+msgstr "Guyana"
+
+msgid "Panama"
+msgstr "Panama"
+
+msgid "Paraguay"
+msgstr "Paraguay"
+
+msgid "Peru"
+msgstr "Peru"
+
+msgid "South America"
+msgstr "Koonfurta ameerika (Latin amerika)"
+
+msgid "Suriname"
+msgstr "Suriname"
+
+msgid "Uruguay"
+msgstr "Uruguay"
+
+msgid "Venezuela"
+msgstr "Venezuela"
+
+msgid "Austria"
+msgstr "Austria"
+
+msgid "Belgium"
+msgstr "Belgium"
+
+msgid "Denmark"
+msgstr "Denmark"
+
+msgid "Finland"
+msgstr "Finland"
+
+msgid "France"
+msgstr "Faransiiska"
+
+msgid "Germany"
+msgstr "Jarmalka"
+
+msgid "Ireland"
+msgstr "Ireland"
+
+msgid "Italy"
+msgstr "Taliyaaniga"
+
+msgid "Luxembourg"
+msgstr "Luxembourg"
+
+msgid "Norway"
+msgstr "Norway"
+
+msgid "Portugal"
+msgstr "Bortuqiiska"
+
+msgid "Spain"
+msgstr "Spain"
+
+msgid "Sweden"
+msgstr "Sweden"
+
+msgid "Switzerland"
+msgstr "Switzerland"
+
+msgid "The Netherlands"
+msgstr "Holland"
+
+msgid "United Kingdom"
+msgstr "Ingiriiska (Boqortooyada midowdey)"
+
+msgid "Western Europe"
+msgstr "Yurubta Galbeed"
+
+msgid "Albania"
+msgstr "Albania"
+
+msgid "Belarus"
+msgstr "Belarus"
+
+msgid "Bosnia Herzegovina"
+msgstr "Bosnia Herzegovina"
+
+msgid "Bulgaria"
+msgstr "Bulgaria"
+
+msgid "Croatia"
+msgstr "Croatia"
+
+msgid "Cyprus"
+msgstr "Cyprus"
+
+msgid "Czech Republic"
+msgstr "Czech Republic"
+
+msgid "Eastern Europe"
+msgstr "Yurubta Bari"
+
+msgid "Estonia"
+msgstr "Estonia"
+
+msgid "Greece"
+msgstr "Greece"
+
+msgid "Hungary"
+msgstr "Hungary"
+
+msgid "Latvia"
+msgstr "Latvia"
+
+msgid "Lithuania"
+msgstr "Lithuania"
+
+msgid "Macedonia"
+msgstr "Macedonia"
+
+msgid "Moldova"
+msgstr "Moldova"
+
+msgid "Poland"
+msgstr "Poland"
+
+msgid "Romania"
+msgstr "Romania"
+
+msgid "Russia"
+msgstr "Ruushka"
+
+msgid "Serbia Montenegro"
+msgstr "Serbia Montenegro"
+
+msgid "Slovak Republic"
+msgstr "Slovak Republic"
+
+msgid "Slovenia"
+msgstr "Slovenia"
+
+msgid "Turkey"
+msgstr "Turki"
+
+msgid "Ukraine"
+msgstr "Ukraine"
+
+msgid "Algeria"
+msgstr "Algeria"
+
+msgid "Benin"
+msgstr "Benin"
+
+msgid "Burkina Faso"
+msgstr "Burkina Faso"
+
+msgid "Cameroon"
+msgstr "Cameroon"
+
+msgid "Central African Republic"
+msgstr "Jamhuuriyada afrikada Dhexe"
+
+msgid "Chad"
+msgstr "Chad"
+
+msgid "Djibouti"
+msgstr "Jabuuti"
+
+msgid "Egypt"
+msgstr "Masar"
+
+msgid "Equatorial Guinea"
+msgstr "Equatorial Guinea"
+
+msgid "Eritrea"
+msgstr "Eritrea"
+
+msgid "Ethiopia"
+msgstr "Itoobia"
+
+msgid "Gabon"
+msgstr "Gabon"
+
+msgid "Gambia"
+msgstr "Gambia"
+
+msgid "Ghana"
+msgstr "Ghana"
+
+msgid "Guinea"
+msgstr "Guinea"
+
+msgid "Guinea Bissau"
+msgstr "Guinea Bissau"
+
+msgid "Ivory Coast"
+msgstr "Ivory Coast"
+
+msgid "Liberia"
+msgstr "Liberia"
+
+msgid "Libya"
+msgstr "Libya"
+
+msgid "Mali"
+msgstr "Mali"
+
+msgid "Mauritania"
+msgstr "Mauritania"
+
+msgid "Morocco"
+msgstr "Marokko"
+
+msgid "Niger"
+msgstr "Niger"
+
+msgid "Nigeria"
+msgstr "Nigeria"
+
+msgid "Northern Africa"
+msgstr "Afrikada Waqooyi"
+
+msgid "Rwanda"
+msgstr "Rwanda"
+
+msgid "Senegal"
+msgstr "Senegal"
+
+msgid "Sierra Leone"
+msgstr "Sierra Leone"
+
+msgid "Somalia"
+msgstr "Soomaaliya"
+
+msgid "Sudan"
+msgstr "Sudan"
+
+msgid "Togo"
+msgstr "Togo"
+
+msgid "Tunisia"
+msgstr "Tunisia"
+
+msgid "Uganda"
+msgstr "Uganda"
+
+msgid "Western Sahara"
+msgstr "Western Sahara"
+
+msgid "Angola"
+msgstr "Angola"
+
+msgid "Botswana"
+msgstr "Botswana"
+
+msgid "Burundi"
+msgstr "Burundi"
+
+msgid "Democratic Republic of Congo"
+msgstr "Jamhuuriyada dimuquraadiga Kongo"
+
+msgid "Kenya"
+msgstr "Kenya"
+
+msgid "Lesotho"
+msgstr "Lesotho"
+
+msgid "Madagascar"
+msgstr "Madagascar"
+
+msgid "Malawi"
+msgstr "Malawi"
+
+msgid "Mozambique"
+msgstr "Mozambique"
+
+msgid "Namibia"
+msgstr "Namibia"
+
+msgid "Republic of Congo"
+msgstr "Republic of Congo"
+
+msgid "South Africa"
+msgstr "Koonfur Afrika"
+
+msgid "Southern Africa"
+msgstr "Afrikada Koonfureed"
+
+msgid "Swaziland"
+msgstr "Swaziland"
+
+msgid "Tanzania"
+msgstr "Tanzania"
+
+msgid "Zambia"
+msgstr "Zambia"
+
+msgid "Zimbabwe"
+msgstr "Zimbabwe"
+
+msgid "Soudan"
+msgstr "Soudan"
+
+msgid "Regions of France"
+msgstr "Gobolada Faransiiska"
+
+msgid "Deutschland BundeslÃ¤nder"
+msgstr "Gobolada Jarmalka"
+
+msgid "Geometry"
+msgstr "Joomitir"
+
+msgid "Geometry activities."
+msgstr "Shaqooyin joomitiri ah."
+
+msgid "Keyboard manipulation"
+msgstr "Isticmaalida Alwaaxa-furayaasha (Keyboard)"
+
+msgid "Letter association between the screen and the keyboard"
+msgstr "Xaraf xiriirin ka dhaxaysa shaashada iyo alwaaxa-furayaasha (Keyboard)"
+
+msgid "Simple Letters"
+msgstr "Xarfo fudfudud"
+
+msgid "Type the falling letters before they reach the ground"
+msgstr "Qor xarafka soo dhacaayo intii uusan dhulka gaarin"
+
+msgid "Equality Number Munchers"
+msgstr "Lambarada isla eg Munchers"
+
+msgid "Guide the Number Muncher to the expressions that equal the number at the top of the screen."
+msgstr "Ku hogaami lambarada Muncher isla egta la eg lambarada ku qoran shaashada qaybteeda kore."
+
+msgid "Practice addition, multiplication, division and subtraction."
+msgstr "Ku tababaro iskudarka, iskudhufashada, iskuqeybinta iyo kalajarida."
+
+msgid "Use the arrow keys to navigate around the board and to avoid the Troggles. Press the spacebar to eat a number."
+msgstr "Isticmaal falaaraha si aad ugu socsocoto miiska oo aad iskaga ilaalisid Troggles. Riix baneeyaha si aad u cunto lambarada"
+
+msgid "Factor Number Munchers"
+msgstr "Isirka lambarada Munchers"
+
+msgid "Guide the Number Muncher to all the factors of the number at the top of the screen."
+msgstr "Ku hogaamin Lambar Munhers dhamaan dhufsameyaasha uu leeyahay lambarka kor ku qoran"
+
+msgid "Learn about factors and multiples."
+msgstr "Wax ka baro isirada iyo ku dhufsamayaasha "
+
+msgid "The factors of a number are all the numbers that divide that number evenly. For example, the factors of 6 are 1, 2, 3 and 6. 4 is not a factor of 6 because 6 cannot be divided into 4 equal pieces. If one number is a multiple of a second number, then the second number is a factor of the first number. You can think of multiples as families, and factors are the people in those families. So 1, 2, 3 and 6 all fit into the 6 family, but 4 belongs to another family. Use the arrow keys to navigate around the board and to avoid the Troggles. Press the spacebar to eat a number."
+msgstr "Isir waxaa la dhahaa dhamaan lambarada u qaybsama lambarkaas si iskumid ah.Tusaalo ahaan, isirka 6 waa 1, 2, 3 iyo 6. 4 ma aha isirka 6 sababtoo ah 6 looma qeybinkaro 4 qeybood oo isku mid eh. Hadii lambar uu yahay dhufsamaha lambarkale waxaa cad in lambarka dambe uu yahay isirka kan hore. Waxaad ku xasuusnaankartaa in dhufsamayaasha ay yihiin reer iyo in isirka uu yahay dadka reerkaas ka tirsan. Sida 1, 2, 3 iyo 6 waxay wada galikaraan reerka 6:da, lakiin 4 waxay ka midtahay reer kale. Isticmaal falaaraha si aad ugu socsocoto miiska oo aad iskaga ilaalisid Troggles. Riix baneeyaha si aad u cunto lambarada"
+
+msgid "Guide the Number Muncher to the all the expressions that do not equal the number at the top of the screen."
+msgstr "Ku hogaami lambarada Muncher isla egta aan la ekeyn lambarka ku qoran shaashada qaybteeda kore."
+
+msgid "Inequality Number Munchers"
+msgstr "Lambar Muchers aan isla ekeyn"
+
+msgid "Practice addition, subtraction, multiplication and division."
+msgstr "Ku tababaro iskudarka, kalajarida, iskudhufashada iyo iskuqaybinta."
+
+msgid "Guide the Number Muncher to all the multiples of the number at the top of the screen."
+msgstr "Ku hogaami lambarada Muncher dhamaan dhufsaneyaasha lambarka ku qoran shaashada qaybteeda kore."
+
+msgid "Guide the Number Muncher to all the prime numbers."
+msgstr "Ku hogaamin Lambar Munhers dhamaan lambarada asalka ah."
+
+msgid "Prime Number Munchers"
+msgstr "Lambar Asal Munchers"
+
+msgid "The Tower of Hanoi"
+msgstr "Taalada Hanoi"
+
+msgid "Reading"
+msgstr "Aqris"
+
+msgid "Reading practice"
+msgstr "Tababar aqris"
+
+msgid "apple"
+msgstr "Tufaax"
+
+msgid "back"
+msgstr "Gadaal u noqo"
+
+msgid "bag"
+msgstr "Boorso"
+
+msgid "ball"
+msgstr "Banooni"
+
+msgid "banana"
+msgstr "Moos"
+
+msgid "bed"
+msgstr "Sariir"
+
+msgid "boat"
+msgstr "Doon"
+
+msgid "book"
+msgstr "Buug"
+
+msgid "bottle"
+msgstr "Dahalo"
+
+msgid "cake"
+msgstr "Doolsho"
+
+msgid "camel"
+msgstr "Geel"
+
+msgid "car"
+msgstr "Baabuur"
+
+msgid "cat"
+msgstr "Mukulaal (Bisad)"
+
+msgid "catch"
+msgstr "Qabasho"
+
+msgid "cheese"
+msgstr "Farmaajo"
+
+msgid "cow"
+msgstr "Lo' (Sac)"
+
+msgid "dog"
+msgstr "ey"
+
+msgid "finish"
+msgstr "Dhameey"
+
+msgid "fish"
+msgstr "Malaay"
+
+msgid "house"
+msgstr "Guri"
+
+msgid "pear"
+msgstr "seytuun qoor"
+
+msgid "plane"
+msgstr "Diyaarad"
+
+msgid "satchel"
+msgstr "Boorso buug"
+
+msgid "Drag and Drop each item onto its name"
+msgstr "Jiid oo kurid shay walba magaciisa korkiisa"
+
+msgid "Drag each image from the (vertical) box on the left to its (corresponding) name on the right. Click the OK button to check your answer."
+msgstr "Sawirka ka jiid sandiiqa bidix waxaadna geysaa magaciisa korkiisa oo ku yaala dhianaca midig. Dhagsii botoonka OK si'aad u ogaatid jawaabta."
+
+msgid "Image Name"
+msgstr "Magaca sawirka"
+
+msgid "Vocabulary and reading"
+msgstr "Ereyo iyo aqrin"
+
+msgid "bulb"
+msgstr "Nalkuus"
+
+msgid "fishing boat"
+msgstr "Doonta malaaydabashada"
+
+msgid "lamp"
+msgstr "Faynuus (Nal)"
+
+msgid "mail box"
+msgstr "Sanduuqa boostada"
+
+msgid "postcard"
+msgstr "Kaarkaboostada"
+
+msgid "sailing boat"
+msgstr "Doonta Darbaaley"
+
+msgid "egg"
+msgstr "Ukun"
+
+msgid "eggcup"
+msgstr "Koobka ukunta"
+
+msgid "flower"
+msgstr "Ubax"
+
+msgid "glass"
+msgstr "Koob"
+
+msgid "vase"
+msgstr "Weelka ubaxa"
+
+msgid "light house"
+msgstr "Musawac (Guriga nalka)"
+
+msgid "rocket"
+msgstr "Gantaal"
+
+msgid "sofa"
+msgstr "fadi"
+
+msgid "star"
+msgstr "xidig"
+
+msgid "bicycle"
+msgstr "bushkuleeti"
+
+msgid "carrot"
+msgstr "karooto"
+
+msgid "grater"
+msgstr "Faraajo xoqe"
+
+msgid "tree"
+msgstr "Geed"
+
+msgid "pencil"
+msgstr "Qalin qori"
+
+msgid "truck"
+msgstr "Baabuur xamuul"
+
+msgid "van"
+msgstr "Caasi"
+
+msgid "flag"
+msgstr "Calan"
+
+msgid "racket"
+msgstr "Usha teeniska"
+
+msgid "Discover the keyboard."
+msgstr "Baro Alwaaxa-furayaasha."
+
+msgid "Keyboard-manipulation boards"
+msgstr "Miisaska xukumida alwaaxa-furayaasha "
+
+msgid "GCompris login screen"
+msgstr "Dariishada gudagalka Gcompris"
+
+msgid "Addition"
+msgstr "Iskudar"
+
+msgid "Learn addition"
+msgstr "Baro iskudar"
+
+msgid "Learn subtraction"
+msgstr "Baro kalajar"
+
+msgid "Subtraction"
+msgstr "Kalajar"
+
+msgid "Mathematical activities."
+msgstr "Shaqooyin xisaabaad ah"
+
+msgid "3D Maze"
+msgstr "Muuqaal 3D Maze"
+
+msgid "Go to Maze activities"
+msgstr "Aad shaqooyinka Maze"
+
+msgid "Ear-training activity"
+msgstr "Shaqo dababarida dhegaha ah"
+
+msgid "Addition memory game"
+msgstr "Ciyaar xasuus iskudar ah"
+
+msgid "Addition, subtraction, multiplication, division"
+msgstr "iskudarka, kalajarida, iskudhufashada iyo iskuqeybinta, "
+
+msgid "Division memory game"
+msgstr "Ciyaar xasuus iskuqaybis"
+
+msgid "Go to Memory activities"
+msgstr "Aad shaqooyinka xasuusta"
+
+msgid "Subtraction memory game"
+msgstr "Ciyaar xasuuskalajarid"
+
+msgid "Multiplication memory game"
+msgstr "Ciyaar xasuus iskudhufasho"
+
+msgid "Audio memory game"
+msgstr "Ciyaarta xasuusashada codka"
+
+msgid "Mouse manipulation, Brain."
+msgstr "Xukumida dooliga, Maskax."
+
+msgid "GCompris Main Menu"
+msgstr "Liisamarka guud ee Gcompris"
+
+msgid "Miscellaneous activities"
+msgstr "Shaqooyin kalagedisan"
+
+msgid "Time, Geography, ..."
+msgstr "Waqti, Juquraafi, ..."
+
+msgid "Missing Letter"
+msgstr "Xaraf maqan"
+
+msgid "Training reading skills"
+msgstr "Tababarid xirfadaha aqrinta"
+
+msgid "Word reading"
+msgstr "Eray aqris"
+
+msgid "ball/all/b/p/d"
+msgstr "Banooni/Baooni/t/n/m"
+
+msgid "ball/bll/a/u/o"
+msgstr "Banooni/Banoni/n/i/o"
+
+msgid "ball/bal/l/h/s"
+msgstr "Banooni/Baooni/t/n/m"
+
+msgid "dog/og/d/p/q"
+msgstr "ey/e/i/y/e"
+
+msgid "dog/dg/o/g/a"
+msgstr "ey/y/d/i/e"
+
+msgid "dog/do/g/p/q"
+msgstr "ey/e/i/y/e"
+
+msgid "Can count"
+msgstr "Waa in uu xisaabikaraa"
+
+msgid "Mouse-manipulation activities."
+msgstr "Shaqooyin ku saabsan isticmaalka dooliga (mouse)"
+
+msgid "Numeration"
+msgstr "Lambaro"
+
+msgid "Numeration activities."
+msgstr "Shaqooyin kusaabsan lambarada"
+
+msgid "reading"
+msgstr "aqris"
+
+msgid "Mouse-manipulation: movement, drag and drop"
+msgstr "Xukumida dooliga: dhaqdhaqaajin, Jiid oo ku rid"
+
+msgid "Number"
+msgstr "Lambaro"
+
+msgid "Numbers in Order"
+msgstr "Lambaro sidabataxan"
+
+msgid "Puzzles"
+msgstr "Xujoyaal"
+
+msgid "Various puzzles."
+msgstr "Xujooyin kaladuwan"
+
+msgid "Python Test"
+msgstr "Imtixaanka Python"
+
+msgid "Memory-training"
+msgstr "Xasuus dababarid"
+
+msgid "Railway"
+msgstr "Tareen"
+
+msgid "Click on the correct colored object."
+msgstr "Dhagsii sheyga leh midibka saxda eh."
+
+msgid "Click on the matching color"
+msgstr "Dhagsii midibka isleh"
+
+msgid "Read the names of colors"
+msgstr "Aqri magacyada midibada"
+
+msgid "This board teaches basic colors."
+msgstr "Miiskaan waxaa lagubartaa midibada asalka ah."
+
+msgid "black"
+msgstr "Madow"
+
+msgid "blue"
+msgstr "Buluug"
+
+msgid "brown"
+msgstr "Kafeey"
+
+msgid "green"
+msgstr "Cagaar"
+
+msgid "grey"
+msgstr "Midib dameer (Dameeri)"
+
+msgid "orange"
+msgstr "Huruud"
+
+msgid "pink"
+msgstr "Gaduud biyobiyo"
+
+msgid "red"
+msgstr "Gaduud"
+
+msgid "violet"
+msgstr "Basali"
+
+msgid "white"
+msgstr "Cadaan"
+
+msgid "yellow"
+msgstr "Jaallo"
+
+msgid "Go to the Reading activities"
+msgstr "Aad casharada aqriska"
+
+msgid "Reading activities."
+msgstr "Shaqooyin kusaabsan aqriska"
+
+msgid "A word is shown at the top right of the board. A list of words will appear and disappear on the left. Does the given word belong to the list?"
+msgstr "Miiska dhiniciisa midig ee kore waxaa ka soo baxaaya erey. Dhinaca bidix, liis ereyo ka kooban ayaa kuu muuqanaayo waana kaa qarsoomaayaan. Ereyga lagusiiyay ma'kamidyahay ereyada liiska ku jira?"
+
+msgid "Horizontal reading practice"
+msgstr "Tababarka aqrinta jiijifta"
+
+msgid "Read a list of words and work out if a given word is in it"
+msgstr "Aqri liiska ereyada kana fiiri in ereyga lagusiiyay uu ku jiro"
+
+msgid "Reading training in a limited time"
+msgstr "Tababarka aqrinta oo waqti xaddidan leh"
+
+msgid "Read a vertical list of words and work out if a given word is in it"
+msgstr "Aqri liiska toosan ee ereyada kana fiiri in ereyga lagusiiyay uu ku jiro"
+
+msgid "Read training in a limited time"
+msgstr "Tababarka aqrinta oo waqti xaddidan leh"
+
+msgid "Vertical-reading practice"
+msgstr "Tababarka aqrinta taagtaagan"
+
+msgid "Copy a drawing from the box on the right into the box on the left."
+msgstr "Sawirka dhinaca midig kuyaalo ku guuri dhinaca bidix"
+
+msgid "Redraw the given item"
+msgstr "Marlabaad sawir sheyga lagusiisyay"
+
+msgid "Numbers With Dice"
+msgstr "Lambaro iyo laadhuu"
+
+msgid "Go to Sound activities"
+msgstr "Aad shaqooyinkacodka"
+
+msgid "Sound based activities."
+msgstr "Waxbarasho codka ku salaysan"
+
+msgid "Learn how a submarine works"
+msgstr "Baro sida markabka gujiska u shaqeeyo"
+
+msgid "Pilot a submarine"
+msgstr "Hogaami markabka gujiska"
+
+msgid "Drawing activity (pixmap)"
+msgstr "Shaqooyin sawiraada (pixmap)"
+
+msgid "mouse and keyboard manipulation"
+msgstr "Xukumida dooliga iyo alwaaxa-furayaasha"
+
+msgid "Learn the water cycle"
+msgstr "Baro sida biyowareega u shaqeeyo"
+
+msgid "Keyboard training"
+msgstr "Dababarida alwaaxa-furayaasha"
+
+msgid "Administration for gcompris"
+msgstr "Maamulida Gcompris"
+
+msgid "Educational game for ages 2 to 10"
+msgstr "Cayaaro waxbarasho oo loogu talagalay 2 ilaa iyo 10 jir"
+
+msgid "Educational suite GCompris"
+msgstr "Cutub barashadeedka Gcompris"
+
+msgid "Multi-activity educational game"
+msgstr "Cayaaro waxbarasho kala gedisan"
+
+msgid "NORTH"
+msgstr "WAQOOYI"
+
+msgid "SOUTH"
+msgstr "KOONFUR"
+
+msgid "Choose a house"
+msgstr "Dalbo guri"
+
+msgid "Your turn to play ..."
+msgstr "Cayaarta waxay joogtaa tookadaada"
+
+msgid "Not allowed! Try again !"
+msgstr "Lama ogola! Markale iskudey"
+
+msgid "White's Turn"
+msgstr "Tookada Cadaanka"
+
+msgid "Black's Turn"
+msgstr "Tookada Madowga"
+
+msgid "White checks"
+msgstr "Cadaanka waa weerar"
+
+msgid "Black checks"
+msgstr "Madowga waa diyaar"
+
+msgid "Black mates"
+msgstr "Madowga waa qabsaday"
+
+msgid "White mates"
+msgstr "Cadaanka waa qabsaday"
+
+msgid "Drawn game"
+msgstr "Ciyaar barbaro ah"
+
+msgid "abcdefghijklmnopqrstuvwxyz"
+msgstr "btjxdrscgfqklmnwhyaeiou"
+
+msgid "Uppercase only text"
+msgstr "Far waaweyn oo kaliya"
+
+msgid "Set the watch to:"
+msgstr "Saacada sax:"
+
+msgid "Click on the blue duck"
+msgstr "Dhagsii boolonboolada buluuga eh"
+
+msgid "Click on the brown duck"
+msgstr "Dhagsii  boolonboolada kafeyga eh"
+
+msgid "Click on the green duck"
+msgstr "Dhagsii  boolonboolada cagaarka eh"
+
+msgid "Click on the grey duck"
+msgstr "Dhagsii  boolonboolada dameeriga eh"
+
+msgid "Click on the orange duck"
+msgstr "Dhagsii  boolonboolada huruudka eh"
+
+msgid "Click on the purple duck"
+msgstr "Dhagsii  boolonboolada basaliga eh"
+
+msgid "Click on the red duck"
+msgstr "Dhagsii  boolonboolada gaduudka eh"
+
+msgid "Click on the yellow duck"
+msgstr "Dhagsii  boolonboolada jaallaha eh"
+
+msgid "Click on the black duck"
+msgstr "Dhagsii  boolonboolada madowga eh"
+
+msgid "Click on the white duck"
+msgstr "Dhagsii boolonboolada cad"
+
+msgid "0123456789"
+msgstr "0123456789"
+
+msgid "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+msgstr "BTJXDRSCGFQKLMNWHYAEIOU"
+
+msgid "Build the same tower in the empty area as the one you see on the right-hand side."
+msgstr "Dhis taalo la mid ah mida ku taalo dhinaca midig."
+
+msgid "Tower of Hanoi"
+msgstr "Taalada Hanoi"
+
+msgid "Move the entire stack to the right peg, one disc at a time"
+msgstr "U guuri rasdada oo dhan meesheeda saxda ah, adigoo qaadaya saxankiiba mar"
+
+msgid "Learn how to read"
+msgstr "Baro sida wax loo akhriyo"
+
+msgid "left"
+msgstr "Bidix"
+
+msgid "right"
+msgstr "Midig"
+
+msgid "Look at your position, then switch back to invisible mode to continue your moves"
+msgstr "Fiiri meesha aad joogto, kadibna u bedelo dhinaca aragti la aanta ah si aad dhaqaajintaada u sii wadato"
+
+msgid "Look at your position, then switch back to 3D mode to continue your moves"
+msgstr "Fiiri meesha aad joogto, kadibna u bedelo muqaalka 3D ah si aad dhaqaajintaada u sii wadato"
+
+msgid "Memory"
+msgstr "Xasuus"
+
+msgid "Find the matching pair"
+msgstr "Raadi labada is leh"
+
+msgid "+-Ã—Ã·"
+msgstr "+-Ã—Ã·"
+
+msgid "Main Menu Second Version"
+msgstr "Liisamarka guud Qeybtiisa Labaad"
+
+msgid "Select a Board"
+msgstr "Dalbo miis"
+
+msgid "$ %.2f"
+msgstr "sh %.2f"
+
+msgid "$ %.0f"
+msgstr "sh %.0f"
+
+msgid "Move the plane to catch the clouds in the correct order"
+msgstr "Dhaqaaji diyuurada si aad u qabato caadadka sida ay isugu xigaan"
+
+msgid "Python Board"
+msgstr "MiiskaPython"
+
+msgid "Special board that embeds python into gcompris."
+msgstr "Miis qaas ah oo ku lifaaqa python gcompris:ga"
+
+msgid "Select a profile:"
+msgstr "Dalbo borofayl"
+
+msgid "Filter"
+msgstr "Kalasooc"
+
+msgid "Select all"
+msgstr "Dalbo dhamaantooda"
+
+msgid "Unselect all"
+msgstr "Dhig dalbashola'aan dhamaantood"
+
+msgid "Locales sound"
+msgstr "Codad degaameed"
+
+msgid "Wordlist"
+msgstr "Liiska ereyada"
+
+msgid "Login"
+msgstr "Gudogal"
+
+msgid "Main menu"
+msgstr "Liisamarka guud"
+
+msgid "Active"
+msgstr "Shaqeyn diyaar u ah"
+
+msgid "Board title"
+msgstr "Cinwaanka miiska"
+
+msgid "Filter Boards difficulty for profile %s"
+msgstr "Wuxuu kalasoocaayaa misaska borofaylyadooda %s  iyadoo loo fiirinaayo dhibkooda "
+
+msgid ""
+"<span size='x-large'> Select the difficulty range \n"
+"for profile %s</span>"
+msgstr ""
+"<span size='x-large'> Dalbo darajada adeegnibo \n"
+"ee borofayl %s</span>"
+
+msgid ""
+"%s configuration\n"
+" for profile %s"
+msgstr ""
+"%swaxkabedel\n"
+" kusaabsan borofaylka %s"
+
+msgid "Select sound locale"
+msgstr "Dalbo cod deegaaneed"
+
+msgid "Editing a Class"
+msgstr "Waxkabedel fasalka"
+
+msgid "Editing class: "
+msgstr "Waxkabedel fasalka:"
+
+msgid "Editing a new class"
+msgstr "Waxkabedel fasalka cusub"
+
+msgid "Class:"
+msgstr "Fasal"
+
+msgid "Teacher:"
+msgstr "Macalin:"
+
+msgid "Assign all the users belonging to this class"
+msgstr "Isticmaalayaasha oo dhan ku dar fasalkaan"
+
+msgid "First Name"
+msgstr "Magaca hore"
+
+msgid "Last Name"
+msgstr "Magaca dambe"
+
+msgid "You need to provide at least a name for your class"
+msgstr "Waa in aad macag u bixisaa fasalka"
+
+msgid "There is already a class with this name"
+msgstr "Waxaa jira fasal ay isku magac yihiin"
+
+msgid "Class"
+msgstr "Fasal"
+
+msgid "Teacher"
+msgstr "Macalin"
+
+msgid "Editing a Group"
+msgstr "Waxkabedelaada koox"
+
+msgid "Editing group: "
+msgstr "Bedelaada koox"
+
+msgid " for class: "
+msgstr "Ujeeda fasakla:"
+
+msgid "Editing a new group"
+msgstr "Bedelaada koox cusub"
+
+msgid "Group:"
+msgstr "Koox:"
+
+msgid "Description:"
+msgstr "Faahfaahin:"
+
+msgid "Assign all the users belonging to this group"
+msgstr "Isticmaalayaasha oo dhan ku dar kooxdaan"
+
+msgid "You need to provide at least a name for your group"
+msgstr "Waa in aad macag u bixisaa kooxda"
+
+msgid "There is already a group with this name"
+msgstr "Waxaa jirta koox ay isku magac yihiin"
+
+msgid "Select a class:"
+msgstr "Dalbo galaas"
+
+msgid "Group"
+msgstr "Koox"
+
+msgid "Description"
+msgstr "Faahfaahin"
+
+msgid "You must first select a group in the list"
+msgstr "Marka ugu horeysa waa inaad koox ka dalbataa liiska"
+
+msgid "Birth Date"
+msgstr "Taariikhda dhalashada"
+
+msgid "Boards"
+msgstr "Miisas"
+
+msgid "Groups"
+msgstr "Kooxo"
+
+msgid "Profiles"
+msgstr "Borofaylyaal"
+
+msgid "Classes"
+msgstr "Galaasyaal"
+
+msgid "Users"
+msgstr "Isticmaalayaal"
+
+msgid "Editing a Profile"
+msgstr "Waxka bedelaada borofayl"
+
+msgid "Editing profile: "
+msgstr "Bedelaada borofayl:"
+
+msgid "Editing a new profile"
+msgstr "Bedelaada borofayl cusub"
+
+msgid "Profile:"
+msgstr "Borofayl"
+
+msgid "Assign all the groups belonging to this profile"
+msgstr "Kooxyaasha oo dhan ku dar borofaylkaan "
+
+msgid "You need to provide at least a name for your profile"
+msgstr "Waa in aad macag u bixisaa borofaylka"
+
+msgid "There is already a profile with this name"
+msgstr "Waxaa jirta borofayl ay isku magac yihiin"
+
+msgid "Default"
+msgstr "La'sku ogyahay"
+
+msgid "Profile"
+msgstr "Borofayl"
+
+msgid "[Default]"
+msgstr "[La'sku ogyahay]"
+
+msgid "Editing a User"
+msgstr "Bedelaada isticmaale"
+
+msgid "Editing a User "
+msgstr "Bedelaada isticmaale"
+
+msgid "Editing a new user"
+msgstr "Bedelaada isticmaalaha cusub"
+
+msgid "Login:"
+msgstr "Gudagal:"
+
+msgid "First name:"
+msgstr "Magaca hore:"
+
+msgid "Last name:"
+msgstr "Magaca dambe:"
+
+msgid "Birth date:"
+msgstr "Taariikhda dhalashada"
+
+msgid "You need to provide at least a login, first name and last name for your users"
+msgstr "Waan in aad ugu yaraan keentaa magacgal, magac hore iyo macag dambe oo uu leeyahay/dahay isticmaalaha/shada"
+
+msgid "There is already a user with this login"
+msgstr "Waxaa jirta isticmaale ay isku magac yihiin"
+
+msgid ""
+"One or more logins are not unique !\n"
+"You need to change them: %s !"
+msgstr ""
+"Kudagalyaasha hal ama in kabadal ma'aha qaas !\n"
+"Waa in aad bedeshaa: %s !"
+
+msgid "SVG is disabled. Install python xml module to enable it"
+msgstr "SVG waa la'curyaamiyey. Si aad curyaanimda uga bixisid xaree barnaamij-yare (Module) python xml "
+
+msgid "Warning: the following images cannot be accessed on your system.\n"
+msgstr "Digniin: falyka soo socdo laguma furikaro sistamkaada.\n"
+
+msgid "The corresponding items have been skipped."
+msgstr "Sheyaasha u dhigma waa laga booday."
+
+msgid ", %d"
+msgstr ", %d"
+
+msgid " and %d"
+msgstr " iyo %d"
+
+msgid "%d is divisible by %s."
+msgstr "%d waxaa loo qaybinkaraa %s"
+
+msgid "1 is not a prime number."
+msgstr "1 ma aha lambar asal ah."
+
+msgid "Primes less than %d"
+msgstr "Lambar asal ka yar %d"
+
+msgid ""
+"Multiples of %d include %s,\n"
+"but %d is not a multiple of %d."
+msgstr ""
+"Ku jibaaraneyaalka %d waxaa ka mid ah %s, \n"
+"lakiin %d ma'aha ku jibaarane %d."
+
+msgid "Factors of %d"
+msgstr "Isirada %d"
+
+msgid "%s are the factors of %d."
+msgstr "%s waa isirada %d"
+
+msgid "Multiples of %d"
+msgstr "Ku dhufsamayaal %d"
+
+msgid "%s = %d"
+msgstr "%s = %d"
+
+msgid "%d + %d"
+msgstr "%d + %d"
+
+msgid "%d âˆ’ %d"
+msgstr "%d âˆ’ %d"
+
+msgid "%d Ã— %d"
+msgstr "%d Ã— %d"
+
+msgid "%d Ã· %d"
+msgstr "%d Ã· %d"
+
+msgid "Equal to %d"
+msgstr "Laeg %d"
+
+msgid "Not equal to %d"
+msgstr "Lma eka %d"
+
+msgid ""
+"You were eaten by a Troggle.\n"
+"Press <Return> to continue."
+msgstr ""
+"Waxaa ku cunay Troggle.\n"
+"Riix <Return> si aad u sii socoto."
+
+msgid "You ate a wrong number.\n"
+msgstr "Waxaad cuntay lambar khaldan.\n"
+
+msgid "Out of range"
+msgstr "Waa xadkabax"
+
+msgid "Profile: "
+msgstr "Borofayl:"
+
+msgid "Login: "
+msgstr "Gudagalka:"
+
+msgid "Color of the line"
+msgstr "Midabka leenka"
+
+msgid "Distance between circles"
+msgstr "Masaafada u dhaxaysa wareegyada"
+
+msgid "COMMANDS ARE"
+msgstr "AMARADA WAA"
+
+msgid "This is a draw"
+msgstr "Kani waa sawirid"
+
+msgid "Disable shape rotation"
+msgstr "Naafo ka dhig shayb-wareejinta"
+
+msgid "Disable stamps"
+msgstr "Naafo ka dhig tiimbareyaasha"
+
+msgid "Memory game"
+msgstr "Ciyaarta xasuusta"
+
+msgid ""
+"Error: We can't find\n"
+"a list of words to play this game.\n"
+msgstr ""
+"Qalad: Ma'aanan helin\n"
+"liiska eeyada si loogu ciyaaro ciyaartaan.\n"
+
+msgid "Please, check if the word"
+msgstr "Fadlan, hubi in ereyga"
+
+msgid "is being displayed"
+msgstr "ayaa la'soo saarayaa"
+
+msgid "I am Ready"
+msgstr "Waxaa ahay diyaar"
+
+msgid "Yes, I saw it"
+msgstr "Haa, Waan arkay"
+
+msgid "No, it was not there"
+msgstr "Maya, meesha kumajirin"
+
+msgid "The word to find was '%s'"
+msgstr "Ereyga larabay in la'raadidyo wuxuu ahaa '%s'"
+
+msgid "But it was not displayed"
+msgstr "Lakiin lama soo saarin"
+
+msgid "And it was displayed"
+msgstr "Waana la' soo saaray"
+
+msgid ""
+"You have entered Edit mode\n"
+"Move the puzzle items;\n"
+"type 's' to save, and\n"
+"'d' to display all the shapes"
+msgstr ""
+"Waxaad soo gashay habkii waxkabedelka\n"
+"Dhaqaaji sheyaasha xujada;\n"
+"qor 's' si'aad u kaydiso, iyo\n"
+"'d' si'aad u aragto dhamaan sheyaasha"
+
+msgid "Submarine"
+msgstr "Markab gujis"
+
+msgid "Control the depth of a submarine"
+msgstr "Xukun quusida markabka gujiska"
+
+msgid "Points = %s"
+msgstr "Dhibco = %s"
+
+msgid ""
+"Wind speed = %d\n"
+"kilometers/hour"
+msgstr ""
+"Xawaaraha dabaysha = %d\n"
+"kiiloomitir/saacadiiba"
+
+msgid "Distance to target = %d meters"
+msgstr "Masaafada bartilmaameedka = %d mitir"
+
+msgid ""
+"Author: Bruno Coudoin\n"
+"Contribution: Pascal Georges, Jose Jorge\n"
+"Graphics: Renaud Blanchard, Franck Doucet\n"
+"Intro Music: Djilali Sebihi\n"
+"Background Music: Rico Da Halvarez\n"
+msgstr ""
+"Qoraa: Bruno Coudoin\n"
+"Tabaruce: Pascal Georges, Jose Jorge\n"
+"Farshaxanka: Renaud Blanchard, Franck Doucet\n"
+"Muusiga hordhaca: Djilali Sebihi\n"
+"Muusiga gadaaleedka: Rico Da Halvarez\n"
+
+msgid "translatorcredits"
+msgstr "Mohamed I. Mursal 2006"
+
+msgid "About GCompris"
+msgstr "Warbixin Gcompris"
+
+msgid "Translators:"
+msgstr "Tarjumayaasha:"
+
+msgid ""
+"GCompris Home Page\n"
+"http://gcompris.net"
+msgstr ""
+"Guriga-Boga GCopmris\n"
+"http://gcompris.net"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "GCompris confirmation"
+msgstr "Hubinta Gcompris"
+
+msgid "Are you sure you want to quit?"
+msgstr "Ma'hubtaa in aad rabtid in aad iskawada xirto?"
+
+msgid "Yes, I am sure!"
+msgstr "Haa, Waan hubaa!"
+
+msgid "No, I want to keep going"
+msgstr "Maya, Waxaan rabaa in aan sii wato"
+
+msgid "Your system default"
+msgstr "Inta la'isku ogyahay ee sistamkaada"
+
+msgid "Amharic"
+msgstr "Axmaari"
+
+msgid "Arabic"
+msgstr "Carabi"
+
+msgid "Turkish (Azerbaijan)"
+msgstr "Turkish (Asarbajan)"
+
+msgid "Bulgarian"
+msgstr "Bulgarian"
+
+msgid "Catalan"
+msgstr "Katalan"
+
+msgid "Danish"
+msgstr "Dhanish"
+
+msgid "German"
+msgstr "Jarmal"
+
+msgid "Greek"
+msgstr "Giriig"
+
+msgid "English (Canada)"
+msgstr "Ingiriis (Kanada)"
+
+msgid "English (Great Britain)"
+msgstr "Ingiriis (Ingiriiska)"
+
+msgid "Spanish"
+msgstr "Ispanish"
+
+msgid "Basque"
+msgstr "Baski"
+
+msgid "Finnish"
+msgstr "Finnish"
+
+msgid "French"
+msgstr "Faransiis"
+
+msgid "Irish (Gaelic)"
+msgstr "Ayrish (Gaelik)"
+
+msgid "Hebrew"
+msgstr "Yuhuud"
+
+msgid "Hindi"
+msgstr "Hindi"
+
+msgid "Gujarati"
+msgstr "Gujarati"
+
+msgid "Punjabi"
+msgstr "Bunjabi"
+
+msgid "Hungarian"
+msgstr "Hungerian"
+
+msgid "Croatian"
+msgstr "Korowaati"
+
+msgid "Italian"
+msgstr "Itaali"
+
+msgid "Georgian"
+msgstr "Gieorgian"
+
+msgid "Lithuanian"
+msgstr "Lithuanian"
+
+msgid "Macedonian"
+msgstr "Makedhonian"
+
+msgid "Malayalam"
+msgstr "Malayalam"
+
+msgid "Marathi"
+msgstr "Marthi"
+
+msgid "Malay"
+msgstr "Malay"
+
+msgid "Nepal"
+msgstr "Nebal"
+
+msgid "Dutch"
+msgstr "Hollandees"
+
+msgid "Norwegian Bokmal"
+msgstr "Norweey Bokmal"
+
+msgid "Norwegian Nynorsk"
+msgstr "Norweey Nynorsk"
+
+msgid "Polish"
+msgstr "Poland"
+
+msgid "Portuguese"
+msgstr "Boortuqiis"
+
+msgid "Portuguese (Brazil)"
+msgstr "Boortuqiis (Barasiil)"
+
+msgid "Romanian"
+msgstr "Romanian"
+
+msgid "Russian"
+msgstr "Ruush"
+
+msgid "Kinyarwanda"
+msgstr "Kenyaruanda"
+
+msgid "Slovak"
+msgstr "Islofak"
+
+msgid "Slovenian"
+msgstr "Islofeenia"
+
+msgid "Albanian"
+msgstr "Albaania"
+
+msgid "Serbian (Latin)"
+msgstr "Serbian (Latin)"
+
+msgid "Serbian"
+msgstr "Serbian"
+
+msgid "Swedish"
+msgstr "Iswidish"
+
+msgid "Thai"
+msgstr "Tai"
+
+msgid "Turkish"
+msgstr "Turkish"
+
+msgid "Vietnamese"
+msgstr "Fiyednaam"
+
+msgid "Walloon"
+msgstr "Walloon"
+
+msgid "Chinese (Simplified)"
+msgstr "Shiinees (la fududeeyey)"
+
+msgid "Chinese (Traditional)"
+msgstr "Shiinees (Asal)"
+
+msgid "No time limit"
+msgstr "Waqti aan xad lahayn"
+
+msgid "Slow timer"
+msgstr "Waqti daahdaah"
+
+msgid "Normal timer"
+msgstr "Waqti dhexdhexaad"
+
+msgid "Fast timer"
+msgstr "Waqti boobsiis"
+
+msgid "GCompris Configuration"
+msgstr "Maamulida gcompris"
+
+msgid "Fullscreen"
+msgstr "Dariishadweyn"
+
+msgid "Music"
+msgstr "Muusig"
+
+msgid "Effect"
+msgstr "Saameyn"
+
+msgid "Couldn't open skin dir: %s"
+msgstr "Waan furiwaayey galka maqaarka %s"
+
+msgid "Skin : %s"
+msgstr "Maqaar :%s"
+
+msgid "SKINS NOT FOUND"
+msgstr "MAQAAR LAMA HELIN"
+
+msgid "English (United State)"
+msgstr "Ingiriis (Mareykanka)"
+
+msgid "CANCEL"
+msgstr "KA NOQO"
+
+msgid "LOAD"
+msgstr "XAMAAL"
+
+msgid "SAVE"
+msgstr "XAREE"
+
+msgid "run gcompris in fullscreen mode."
+msgstr "Shid gcompris si dariishadweyn ah."
+
+msgid "run gcompris in window mode."
+msgstr "Shid gcompris si dariishad yar ah."
+
+msgid "run gcompris with sound enabled."
+msgstr "Shid gcompris oo cod leh."
+
+msgid "run gcompris without sound."
+msgstr "Shid gcompris oo cod la'aan ah."
+
+msgid "Print the version of "
+msgstr "Daabac qeybta"
+
+msgid "Run the experimental activities"
+msgstr "Shid shaqooyinka kusaabsan tijaabooyinka"
+
+msgid "Disable the quit button"
+msgstr "Naafo ka dhig batoonka xiritaanka "
+
+msgid "Disable the config button"
+msgstr "Naafo ka dhig batoonka waxkabedelka "
+
+msgid ""
+"GCompris\n"
+"Version: %s\n"
+"Licence: GPL\n"
+"More info at http://gcompris.net\n"
+msgstr ""
+"Gcompris\n"
+"Cadad: %s\n"
+"Shati: GPL\n"
+"Wixii dheeraad ah http://gcompris.net\n"
+
+msgid "Use -l to access an activity directly.\n"
+msgstr "Isticmaal -l si aad u gashid galka shaqooyinka.\n"
+
+msgid "The list of available activities is :\n"
+msgstr "Liiska shaqooyinka la'isticmaalikaro waa:\n"
+
+msgid "The list of available profiles is:\n"
+msgstr "Liiska brofaylyada la'isticmaalikaro waa:\n"
+
+msgid "Unaffected"
+msgstr "Wax ma'yeeleyso"
+
+msgid "Users without a class"
+msgstr "Istecmaalayaal aan fasal lahayn"
+
+msgid "Prerequisite"
+msgstr "Shardi u ah"
+
+msgid "Goal"
+msgstr "muraad (Qasdi)"
+
+msgid "Manual"
+msgstr "Talosiiye"
+
+msgid "Credit"
+msgstr "Mahadcelin"
+
+msgid "Time Elapsed"
+msgstr "Waqtiga waa dhamaaday"
+
+

@@ -1,0 +1,4400 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:39:13 CDT 2013 ---
+#
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2002-2012.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: http://bugs.xffm.org\n"
+"POT-Creation-Date: 2010-12-06 20:37+0000\n"
+"PO-Revision-Date: 2011-01-25 00:37+0100\n"
+"Last-Translator: \n"
+"Language-Team: Montenegro Consulting Company <savjetujme@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Serbian\n"
+"X-Poedit-Country: YUGOSLAVIA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+msgid "Go to Algebra activities"
+msgstr "Idi na aktivnosti iz algebre"
+
+msgid "Left-click the mouse on an activity to select it."
+msgstr "Lijevi klik, kako bi izabrao-la odgovarajuću aktivnost"
+
+msgid "Go to calculation activities"
+msgstr "Idi na aktivnost računanja"
+
+msgid "Various calculation activities."
+msgstr "Razne aktivnosti računanja."
+
+msgid "Play chess against the computer in a learning mode"
+msgstr "Igraj šah protiv kompjutera učeći "
+
+msgid "Practice chess"
+msgstr "Vježbaj šah"
+
+msgid "Colors based activities."
+msgstr "Aktivnosti sa bojama."
+
+msgid "Go to Color activities"
+msgstr "Idi na aktivnosti sa bojama"
+
+msgid "Discover the Computer"
+msgstr "Otkrij računar"
+
+msgid "Play with computer peripherals."
+msgstr "Igraj sa računarskim periferijama."
+
+msgid "Colors, sounds, memory..."
+msgstr "Boje, muzika, memorija..."
+
+msgid "Go to discovery activities"
+msgstr "Idi na aktivnosti otkrivanja"
+
+msgid "Go to experiential activities"
+msgstr "Idi na eksperimentalne aktivnosti"
+
+msgid "Various activities based on physical movement."
+msgstr "Razne aktivnosti koje se zasnivaju na fizičkim pokretima."
+
+msgid "Go to Experimental activities"
+msgstr "Idi na eksperimentalne aktivnosti"
+
+msgid "Run gcompris --experimental to see this menu."
+msgstr "Pokreni gcompris --experimental kako bi vidio-la meni."
+
+msgid "Go to Amusement activities"
+msgstr "Idi na zabavne aktivnosti"
+
+msgid "Various fun activities."
+msgstr "Razne zabavne aktivnosti."
+
+msgid "Geometry"
+msgstr "Geometrija"
+
+msgid "Geometry activities."
+msgstr "Aktivnosti iz geometrije."
+
+msgid "Go to Number Munchers activities"
+msgstr "Idi na aktivnosti sa stvorenjima koja jedu brojeve"
+
+msgid "Number Munchers are games to play with arithmetic."
+msgstr "Stvorenja koja jedu brojeve su igre u kojoj se igrate sa aritmetikom."
+
+msgid "Discover the keyboard."
+msgstr "Istraži tastaturu."
+
+msgid "Keyboard-manipulation boards"
+msgstr "Table za upotrebu tastature"
+
+msgid "Mathematical activities."
+msgstr "Matematičke aktivnosti."
+
+msgid "Mathematics"
+msgstr "Matematika"
+
+msgid "Find your way out of different types of mazes"
+msgstr "Pronaži put iz različitih vrsta lavirinta"
+
+msgid "Go to Maze activities"
+msgstr "Idi na aktivnosti sa lavirintom"
+
+msgid "Go to Memory activities"
+msgstr "Idi na aktivnosti sa igrom memorije"
+
+msgid "Various memory activities (images, letters, sounds)."
+msgstr "Razne aktivnosti sa igrom memorije (sa slikama, slovima, zvucima)."
+
+msgid "Go to mathematics memory activities"
+msgstr "Idi na igru memorije iz polja matematike"
+
+msgid "Memory activities based on operations"
+msgstr "Igre memorije zasnovane na matematičkim operacijama"
+
+msgid "Go to mathematics memory activities against Tux"
+msgstr "Idi na igre memorije iz polja matematike protiv Tuksa"
+
+msgid ""
+"A simple click on an icon brings you to an activity or a menu of activities.\n"
+"At the bottom of the screen is the GCompris control bar.\n"
+"The following icons are displayed from right to left.\n"
+"(note that each icon is displayed only if available in the current activity)\n"
+"    Home - Exit an activity, go back to menu\n"
+"    Thumb - OK. Confirm your answer\n"
+"    Dice - Display the current level. Click to select another level\n"
+"    Lips - Repeat the question\n"
+"    Question Mark - Help\n"
+"    Tool - The configuration menu\n"
+"    Tux Plane - About GCompris\n"
+"    Night - Quit GCompris\n"
+"The stars show suitable age groups for each game:\n"
+"    1, 2 or 3 simple stars  - from 2 to 6 years old\n"
+"    1, 2 or 3 complex stars - 7 years and up"
+msgstr ""
+"Samo klikni na ikonicu i vidjećeš meni koji prikazuje razne aktivnosti.\n"
+"Na dnu ekrana se nalazi kontrolna traka Gcompris-a.\n"
+"Date sličice su prikazane s desna na lijevo .\n"
+"(imajte na umu da se ove sličice prikazuju samo ako su dostupne u vježbi)\n"
+"    Kuća – izađi iz aktivnosti, vrati se na glavni meni \n"
+"    Palac - OK. Potvrdi svoj odgovor\n"
+"    Kockica – Prikazuje na kojem ste nivou trenutno. Klikni kako bi odabrao/la sljedeći nivo. \n"
+"    Usne – Ponovi pitanje\n"
+"    Znak pitanja - Pomoć\n"
+"    Alat - Postavke\n"
+"    Tuxov avion – O programu - GCompris\n"
+"    Noć – Izađi iz  Gcompris-a \n"
+" Zvijezdice prikazuju koje igrice su namjenjene za djecu određenog uzrasta.\n"
+"   1, 2 ili 3 obične zvjezdice - od 2 do 6 godina\n"
+"   1, 2 ili 3 složene zvjezdice - od 7 godina na više "
+
+msgid "GCompris Main Menu"
+msgstr "Glavnimeni GCompris-a"
+
+msgid "GCompris is a collection of educational games that provides different activities for children aged 2 and up."
+msgstr "GCompris je skup edukativnih igara sa različitim aktivnostima predviđenim za djecu stariju od 2 godine."
+
+msgid "The goal of GCompris is to provide a free alternative to popular proprietary edutainment software"
+msgstr "Cilj Gcomprisa je da obezbijedi besplatnu alternativu popularnim obrazovnim programima"
+
+msgid "Miscellaneous activities"
+msgstr "Ostale aktivnosti"
+
+msgid "Time, Geography, ..."
+msgstr "Vrijeme, geografija,..."
+
+msgid "Mouse-manipulation activities."
+msgstr "Aktivnosti gdje se koristi miš"
+
+msgid "Various mouse-based activities (clicking, moving)"
+msgstr "Razne aktivnosti gdje se koristi miš (kliktanje, kretanje )"
+
+msgid "Numeration"
+msgstr "Numerisanje"
+
+msgid "Numeration activities."
+msgstr "Aktivnosti sa numerisanjem."
+
+msgid "Puzzles"
+msgstr "Slagalice"
+
+msgid "Various puzzles."
+msgstr "Razne slagalice."
+
+msgid "Go to the Reading activities"
+msgstr "Idi na aktivnosti sa čitanjem"
+
+msgid "Reading activities."
+msgstr "Aktivnosti sa čitanjem."
+
+msgid "Go to Sound activities"
+msgstr "Idi na zvučne aktivnosti"
+
+msgid "Sound based activities."
+msgstr "Aktivnosti sa zvucima."
+
+msgid "Strategy games"
+msgstr "Strateške igre"
+
+msgid "Strategy games like chess, connect4, ..."
+msgstr "Strateške igre poput čaha, poveži 4,.."
+
+msgid "Administration for gcompris"
+msgstr "Administracija za gcompris"
+
+msgid "GCompris Administration"
+msgstr "GCompris Administracija"
+
+msgid "Educational game for ages 2 to 10"
+msgstr "Edukativna igra (za djecu od  2 do 10 godina )"
+
+msgid "Educational suite GCompris"
+msgstr "Kolekcija edukativnih programa Gcompris-a "
+
+msgid "Multi-activity educational game"
+msgstr "Obrazovna igra s više aktivnosti"
+
+msgid "An instance of GCompris is currently running. Exit GCompris and then try again."
+msgstr "Igra Gcompris-a je trenutno aktivna. Napusti GCompris i onda pokušaj ponovo ."
+
+msgid "The installer is already running."
+msgstr "Instalacioni program je već pokrenut."
+
+msgid "Visit the GCompris Web Site"
+msgstr "Posjetite internet sajt Gcompris-a "
+
+msgid "You do not have permission to uninstall this application."
+msgstr "Nemate dozvolu da deinstalirate ovu aplikaciju."
+
+msgid "Your old GCompris directory is about to be deleted. Would you like to continue?$\\r$\\rNote: Any non-standard plugins that you may have installed will be deleted.$\\rGCompris user settings will not be affected."
+msgstr "Tvoj stari GCompris profil će uskoro biti obrisan. Da li želiš da nastaviš? $\\r$\\r Napomena: Bilo koji nesvakidašnji dodaci koje ste možda instalirali biće izbrisani. $\\rPodešavanja GCompris  korisnika neće biti ugrožena."
+
+msgid "the uninstaller could not find registry entries for GCompris.$\\rIt is likely that another user installed this application."
+msgstr "Deinstaler ne možete pronaći stavke registry baze za GCompris. $\\rVjerovatno je drugi korisnik instalirao ovu aplikaciju. "
+
+msgid "Select a profile:"
+msgstr "Odaberi profil:"
+
+msgid "Filter"
+msgstr "Pročisti"
+
+msgid "Select all"
+msgstr "Selektuj sve"
+
+msgid "Unselect all"
+msgstr "Deselektuj sve"
+
+msgid "Locales"
+msgstr "Lokalizacije"
+
+msgid "Locales sound"
+msgstr "Lokalizacije zvuka"
+
+msgid "Login"
+msgstr "Prijavljivanje"
+
+msgid "Main menu"
+msgstr "Glavni meni"
+
+msgid "Active"
+msgstr "Aktivno"
+
+msgid "Board title"
+msgstr "Naziv igre"
+
+msgid "Filter Boards difficulty for profile %s"
+msgstr "Filtriranje poteškoće za profil %s"
+
+msgid ""
+"<span size='x-large'> Select the difficulty range \n"
+"for profile %s</span>"
+msgstr ""
+"<span size='x-large'> Odaberi nivo težine\n"
+"za profil %s</span>"
+
+msgid ""
+"{config} configuration\n"
+" for profile {profile}"
+msgstr ""
+"{config} konfiguracija\n"
+"za profil {profile}"
+
+msgid "Select sound locale"
+msgstr "Odaberi zvučni lokalitet"
+
+msgid "Editing a Class"
+msgstr "Uređivanje odjeljenja"
+
+msgid "Editing class: "
+msgstr "Uređivanje odjeljenja:"
+
+msgid "Editing a new class"
+msgstr "Uređivanje novog odjeljenja"
+
+msgid "Class:"
+msgstr "Odjeljenje:"
+
+msgid "Teacher:"
+msgstr "Nastavnik:"
+
+msgid "Assign all the users belonging to this class"
+msgstr "Prijavi sve korisnike koji pripadaju ovom odjeljenju"
+
+msgid "First Name"
+msgstr "Ime"
+
+msgid "Last Name"
+msgstr "Prezime"
+
+msgid "You need to provide at least a name for your class"
+msgstr "Moraš upisati makar jedan naziv odjeljenja"
+
+msgid "There is already a class with this name"
+msgstr "Već postoji odjeljenje pod ovim imenom"
+
+msgid "Class"
+msgstr "Odjeljenje"
+
+msgid "Teacher"
+msgstr "Nastavnik"
+
+msgid "Editing a Group"
+msgstr "Uređivanje grupe"
+
+msgid "Editing group: "
+msgstr " Uređivanje grupe:"
+
+msgid " for class: "
+msgstr "za odjeljenje:"
+
+msgid "Editing a new group"
+msgstr "Uređivanje nove grupe"
+
+msgid "Group:"
+msgstr "Grupa:"
+
+msgid "Description:"
+msgstr "Opis:"
+
+msgid "Assign all the users belonging to this group"
+msgstr "Prijavi sve korisnike koji pripadaju ovoj grupi"
+
+msgid "You need to provide at least a name for your group"
+msgstr "Moraš da upišeš barem jedno ime grupe"
+
+msgid "There is already a group with this name"
+msgstr "Već postoji grupa pod ovim imenom"
+
+msgid "Select a class:"
+msgstr "Odaberi odeljenje:"
+
+msgid "Group"
+msgstr "Grupa"
+
+msgid "Description"
+msgstr "Opis"
+
+msgid "You must first select a group in the list"
+msgstr "Prvo moraš da označiš grupu na popisu"
+
+msgid "Birth Date"
+msgstr "Datum rođenja"
+
+msgid "Select a user:"
+msgstr "Odaberi korisnika:"
+
+msgid "All users"
+msgstr "Svi korisnici"
+
+msgid "Default"
+msgstr "Podrazumijevani način"
+
+msgid "Reset"
+msgstr "Resetuj"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "User"
+msgstr "Korisnik"
+
+msgid "Board"
+msgstr "Igra"
+
+msgid "Level"
+msgstr "Nivo"
+
+msgid "Sublevel"
+msgstr "Podnivo"
+
+msgid "Duration"
+msgstr "Trajanje"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Boards"
+msgstr "Igre"
+
+msgid "Groups"
+msgstr "Grupe"
+
+msgid "Profiles"
+msgstr "Profili"
+
+msgid "Reports"
+msgstr "Izvještaji"
+
+msgid "Users"
+msgstr "Korisnici"
+
+msgid "Classes"
+msgstr "Odjeljenja"
+
+msgid "Editing a Profile"
+msgstr "Uređivanje profila"
+
+msgid "Editing profile: "
+msgstr "Uređivanje profila: "
+
+msgid "Editing a new profile"
+msgstr "Uređivanje novog profila "
+
+msgid "Profile:"
+msgstr "Profil:"
+
+msgid "Assign all the groups belonging to this profile"
+msgstr "Prijavi sve grupe koje pripadaju ovom profilu"
+
+msgid "You need to provide at least a name for your profile"
+msgstr "Moraš dati ime makar jednom profilu "
+
+msgid "There is already a profile with this name"
+msgstr "Već postoji profil sa ovim imenom"
+
+msgid "Profile"
+msgstr "Profil"
+
+msgid "[Default]"
+msgstr "[Pretpostavljeni način]"
+
+msgid "Editing a User"
+msgstr "Uređivanje korisnika"
+
+msgid "Editing a User "
+msgstr "Uređivanje korisnika"
+
+msgid "Editing a new user"
+msgstr "Uređivanje novog korisnika"
+
+msgid "Login:"
+msgstr "Prijavljivanje:"
+
+msgid "First name:"
+msgstr "Ime:"
+
+msgid "Last name:"
+msgstr "Prezime:"
+
+msgid "Birth date:"
+msgstr "Datum rođenja:"
+
+msgid "You need to provide at least a login, first name and last name for your users"
+msgstr "Morate upisati barem korisničko ime, ime i prezime vaših korisnika"
+
+msgid "There is already a user with this login"
+msgstr "Već se prijavio korisnik s tim imenom"
+
+msgid ""
+"To import a user list from a file, first select a class.\n"
+"FILE FORMAT: Your file must be formatted like this:\n"
+"login;First name;Last name;Date of birth\n"
+"The separator is autodetected and can be one of ',', ';' or ':'"
+msgstr ""
+"Kako bi unio listu korisnika iz fajla, prvo selektuj klasu.\n"
+"FILE FORMAT: Tvoj fajl mora biti ovako formiran:\n"
+"prijavljivanje;Ime;Prezime;Datum rodjenja.\n"
+"Odvajač može biti jedan od sljedećih oznaka ',', ';' ili ':'"
+
+msgid ""
+"One or more logins are not unique !\n"
+"You need to change them: %s !"
+msgstr ""
+"Jedno ili više prijavljivanja nisu jedinstvena!\n"
+"Moraš ih promijeniti: %s !"
+
+msgid ""
+"- In the 'Boards' section you can change the list of activities. Just untoggle them in the treeview. You can change the language used for reading, for example, then the language used for saying the names of colors.\n"
+"- You can save multiple configurations, and switch between them easily. In the 'Profile' section add a profile, then in the 'Board' section select the profile in the combobox, then select the boards you want to be active. You can add multiple profiles, with different lists of boards, and different languages. You set the default profile in the 'Profile' section, by choosing the profile you want, then clicking on the 'Default' button. You can also choose a profile from the command line.\n"
+"- You can add users, classes and for each class, you can create groups of users. Note that you can import users from a comma-separated file. Assign one or more groups to a profile, after which those new logins will appear after restarting GCompris. Being able to identify individual children in GCompris means we can provide individual reports. It also recognizes the children as individuals; they can learn to type in and recognize their own usernames (login is configurable)."
+msgstr ""
+"- U dijelu \"aktivnosti\" možeš promijenili niz aktivnosti. Samo je potrebno da ih prebaciš u  upravljački meni gdje su opcije predstavljene hijerarhijski. Takođe, možeš promijeniti jezik za čitanje instrukcija, kao i jezik kojiim biraš odgovarajuće boje.\n"
+"- Možeš imati višestruke konfiguracije koje  na veoma lak način možeš mijenjati. U dijelu \"profil\" dodaj profil, a u dijelu \"aktivnosti\" izaberit profil u tabeli , a zatim odaberi tastere koje želiš da  aktiviraš. Takođe, možeš imati više profila, sa različitim odabirom tastera i jezika. Profil se aktivira tako što, nakon što izabereš profil koji želiš,  klikneš na dugme \"default\"-tj  \"aktivan\" . Takođe možeš odabrati profil iz komandne linije.\n"
+"- Možeš dodati korisnike, klase i za svaku klasu postoji mogućnost formiranja grupe korisnika. Imaj na umu da možeš uvesti korisnike iz fajla odvojenog zarezom. Postavi jednu ili više grupa na profil, nakon čega će se nove prijave pojaviti , posle ponovnog pokretanja Gcompris-a. Djeca se mogu identifikovati kao pojedinici u Gcompris-u, što  znači da mi možemo da pružimo pojedinačne izvještaje o njihovim postignutim rezultatima. Gcompris takođe prepoznaje  djecu kao pojedince , koji  mogu da nauče da kucaju i prepoznaju sopstvenu šifru ( prijavljivanje se može konfigurisati). "
+
+msgid "GCompris Administration Menu"
+msgstr "Administrativni meni GComprisa"
+
+msgid "If you want to fine tune GCompris to your needs, you can use the administration module here. The ultimate goal is to provide child-specific reporting for parents and teacher who want to monitor the progress, strengths and needs of their children."
+msgstr "Ukoliko želiš da podesiš GCompris u skladu sa svojim potrebama, možeš koristiti administrativni program. Naš krajnji cilj je da obezbijedimo  pojedinačne izvještaje o djetetu čiji  roditelji i nastavnici žele da prate njegov napredak, talente i potrebe. "
+
+msgid "Left-Click with the mouse to select an activity"
+msgstr "Lijevi klik, kako bi izabrali odgovarajuću aktivnost"
+
+msgid "Advanced colors"
+msgstr "Napredne boje"
+
+msgid "Can read"
+msgstr "Znaš da čitaš "
+
+msgid "Click on the correct color"
+msgstr "Klikni na traženu boju "
+
+msgid "Click on the correct colored box."
+msgstr "Klikni na odgovarajuću obojenu kutiju."
+
+msgid "Learn to recognize unusual colors."
+msgstr "Nauči da prepoznaš nesvakidašnje boje."
+
+msgid "almond"
+msgstr "badem"
+
+msgid "chestnut"
+msgstr "kesten"
+
+msgid "claret"
+msgstr "crvenkasta "
+
+msgid "cobalt"
+msgstr "plava"
+
+msgid "coral"
+msgstr "koral"
+
+msgid "corn"
+msgstr "kukuruz"
+
+msgid "cyan"
+msgstr "cijan"
+
+msgid "sienna"
+msgstr "žuta"
+
+msgid "lime"
+msgstr "limun"
+
+msgid "sage"
+msgstr "žalfija"
+
+msgid "salmon"
+msgstr "Blijedo crvena"
+
+msgid "sapphire"
+msgstr "safir"
+
+msgid "sepia"
+msgstr "crveno smeđa"
+
+msgid "sulphur"
+msgstr "sumpor"
+
+msgid "tea"
+msgstr "čaj"
+
+msgid "turquoise"
+msgstr "tirkizna "
+
+msgid "absinthe"
+msgstr "zelena"
+
+msgid "alabaster"
+msgstr "alabaster"
+
+msgid "amber"
+msgstr "ćilibar"
+
+msgid "amethyst"
+msgstr "ametist"
+
+msgid "anise"
+msgstr "onajz"
+
+msgid "aquamarine"
+msgstr "akvamarin"
+
+msgid "mahogany"
+msgstr "mahagoni"
+
+msgid "vermilion"
+msgstr "cinober"
+
+msgid "aubergine"
+msgstr "plavi patlidzan"
+
+msgid "ceruse"
+msgstr "olovni karbonat"
+
+msgid "chartreuse"
+msgstr "šartrez (francusko piće- žutozelena boja)"
+
+msgid "emerald"
+msgstr "smaragd"
+
+msgid "fawn"
+msgstr "srneća boja"
+
+msgid "fuchsia"
+msgstr "cvijet fuksija"
+
+msgid "glaucous"
+msgstr "zelenkastoplava"
+
+msgid "ruby"
+msgstr "rubin"
+
+msgid "auburn"
+msgstr "kestenjast"
+
+msgid "azure"
+msgstr "azurno"
+
+msgid "bistre"
+msgstr "sivo braon "
+
+msgid "celadon"
+msgstr "celadon"
+
+msgid "cerulean"
+msgstr "plavetno"
+
+msgid "crimson"
+msgstr "boja karmina, tamno crvena "
+
+msgid "greyish-brown"
+msgstr "sivkastobraon"
+
+msgid "dove"
+msgstr "golubica"
+
+msgid "garnet"
+msgstr "granat"
+
+msgid "indigo"
+msgstr "indigo"
+
+msgid "ivory"
+msgstr "slonovača"
+
+msgid "jade"
+msgstr "žad"
+
+msgid "lavender"
+msgstr "lavanda"
+
+msgid "lichen"
+msgstr "lišaj"
+
+msgid "wine"
+msgstr "vino"
+
+msgid "larch"
+msgstr "ariš"
+
+msgid "lilac"
+msgstr "jorgovan"
+
+msgid "magenta"
+msgstr "purpurnocrvena"
+
+msgid "malachite"
+msgstr "malahit"
+
+msgid "mimosa"
+msgstr "mimoza"
+
+msgid "navy"
+msgstr "mornarica"
+
+msgid "ochre"
+msgstr "oker"
+
+msgid "olive"
+msgstr "maslinasta"
+
+msgid "greyish blue"
+msgstr "sivkastoplava"
+
+msgid "mauve"
+msgstr "boja sleza"
+
+msgid "opaline"
+msgstr "opalescentna boja"
+
+msgid "pistachio"
+msgstr "boja pistaća"
+
+msgid "platinum"
+msgstr "platina"
+
+msgid "purple"
+msgstr "ljubičasta"
+
+msgid "ultramarine"
+msgstr "ultramarin plava"
+
+msgid "dark purple"
+msgstr "tamno ljubičasta"
+
+msgid "plum"
+msgstr "boja šljive"
+
+msgid "prussian blue"
+msgstr "pruški plava"
+
+msgid "rust"
+msgstr "boja rđe"
+
+msgid "saffron"
+msgstr "šafran"
+
+msgid "vanilla"
+msgstr "boja vanile"
+
+msgid "verdigris"
+msgstr "bakarni oksid"
+
+msgid "veronese"
+msgstr "veronska "
+
+msgid "+-×÷"
+msgstr "+-×÷"
+
+msgid "I am Ready"
+msgstr "Spreman sam"
+
+msgid "A multiplication of two numbers is displayed. At the right of the equals sign, give the answer, the product. Use the left and right arrows to modify your answer and press the Enter key to check if you've got it right. If not, just try again."
+msgstr "Prikazano je množenje dva broja. Na kraju znaka jednakosti unesi odgovor, tj dobijeni proizvod. Koristi strelice lijevo i desno da modifikuješ  svoj odgovor i pritisni dugme „ enter „ kako bi provjerio/la da li si dobio/la pravo rješenje. Ukoliko je odgovor negativan, pokušaj ponovo."
+
+msgid "Answer some algebra questions"
+msgstr "Odgovori na pitanja iz algebre "
+
+msgid "In a limited time, give the product of two numbers"
+msgstr "U ograničenom vremenu, izračunaj proizvod dva broja"
+
+msgid "Multiplication table"
+msgstr "Tablica množenja"
+
+msgid "Practice the multiplication operation"
+msgstr "Vježbaj operaciju množenja "
+
+msgid "Animal pictures come from the Animal Photography Page of Ralf Schmode (http://schmode.net/). Ralf has kindly permitted Gcompris to include his pictures. Thanks a lot, Ralf."
+msgstr "Slike životinja su preuzete sa stranice the Animal Photography- Ralf Schmode (http://schmode.net/). Ralf je ljubazno dozvolio Gcompris-u  da iskoristi njegove slike u svrhe  projekata. Hvala puno Ralfu. "
+
+msgid "At the top of the board area, choose the numbers and arithmetic operators that give the specified result. You can deselect a number or operator by clicking on it again."
+msgstr "Na vrhu ploče odaberi brojeve i aritmetičke operatore koji daju zadati rezultat. Možeš da poništiš oznaku broja ili operatora tako što ćeš ponovo kliknuti na njega."
+
+msgid "Deploy a strategy to arrange a set of arithmetic operations to match a given value."
+msgstr "Pronađi način da upotrijebiš niz aritmetičkih operacija tako da dobiješ pravi rezultat."
+
+msgid "Find the series of correct operations that matches the given answer"
+msgstr "Pronađi niz ispravnih operacija koje će odgovarati datom rezultatu"
+
+msgid "The four arithmetic operations. Combine several arithmetic operations."
+msgstr "Četri aritmetičke operacije. Kombinuj nekoliko aritmetičkih operacija. "
+
+msgid "Work out the right combination of numbers and operations to match the given value"
+msgstr "Pronađi pravu kombinaciju brojeva i operacija kako bi se dobila tražena vrijednost"
+
+msgid "A subtraction problem with two numbers is displayed. At the right of the equals sign, give the answer, the difference. Use the left and right arrows to modify your answer and press the Enter key to check if you've got it right. If not, just try again."
+msgstr "Prikazana je razlika dva broja.  Na desnoj strani znaka jednakosti upiši odgovor tj. razliku brojeva. Koristi lijevu i desnu strelicu da izmjeniš odgovor, zatim pritisni dugme „ Enter“ da provjeriš da li si dobio/la tačan odgovor. Ukoliko nisi, pokušaj ponovo"
+
+msgid "In a limited time, find the difference between two numbers"
+msgstr "U ograničenom vremenu pronađi razliku između dva broja"
+
+msgid "Practice the subtraction operation"
+msgstr "Vježbaj oduzimanje"
+
+msgid "Simple subtraction"
+msgstr "Oduzimanje"
+
+msgid "An addition problem with two numbers is displayed. At the right of the equals sign, give the answer, the sum. Use the left and right arrows to modify your answer and press the Enter key to check if you've got it right. If not, just try again."
+msgstr "Prikazan je zbir dva broja. Na desnoj strani znaka jednakosti upiši odgovor tj. zbir. Koristi lijevu i desnu strelicu da promjeniš odgovor, zatim pritisni dugme „ Enter“ da provjeriš da li si dobio/la tačan odgovor. Ukoliko nisi, pokušaj ponovo. "
+
+msgid "In a limited time, find the sum of of two numbers. Introduction to simple in-line addition."
+msgstr "U ograničenom vremenu, pronađi zbir dva broja.  Uvod u sabiranje. "
+
+msgid "Practice the addition operation"
+msgstr "Vježbaj operaciju sabiranja"
+
+msgid "Simple addition. Can recognize written numbers"
+msgstr "Sabiranje. Znaš da prepoznaš napisane brojeve"
+
+msgid "Complete a list of symbols"
+msgstr "Ispuni listu simbola"
+
+msgid "Find the next symbol in a list."
+msgstr "Pronađi sljedeći simbol na listi."
+
+msgid "Logic training activity"
+msgstr "Logična aktivnost"
+
+msgid "Move and click the mouse"
+msgstr "Pomjeraj i klikći uz pomoć miša"
+
+msgid "algorithm"
+msgstr "algoritam"
+
+msgid "Fill color..."
+msgstr "Ispuni bojom..."
+
+msgid "Stroke color..."
+msgstr "Poravnaj boju..."
+
+msgid "Save..."
+msgstr "Sačuvaj..."
+
+msgid "Load..."
+msgstr "Učitati..."
+
+msgid "Run the animation"
+msgstr "Poreni animaciju "
+
+msgid "Select"
+msgstr "Odaberi"
+
+msgid "Rectangle"
+msgstr "Pravougaonik"
+
+msgid "Filled rectangle"
+msgstr "Ispunjen pravougaonik"
+
+msgid "Circle"
+msgstr "Krug"
+
+msgid "Filled circle"
+msgstr "Puni krug"
+
+msgid "Line"
+msgstr "Linija"
+
+msgid "Text"
+msgstr "Tekst"
+
+msgid "Image..."
+msgstr "Slika..."
+
+msgid "Fill"
+msgstr "Popuniti"
+
+msgid "Delete"
+msgstr "Obristi"
+
+msgid "Flip"
+msgstr "Okrenuti"
+
+msgid "Raise"
+msgstr "Podići"
+
+msgid "Lower"
+msgstr "Spustiti"
+
+msgid "Current frame"
+msgstr "Trenutni okvir"
+
+msgid "Create a drawing or an animation"
+msgstr "Napravi crtež ili animaciju "
+
+msgid "Free drawing and animation tool."
+msgstr "Besplatan pribor za crtanje i animaciju."
+
+msgid "In this game, children can draw freely. The goal is to discover how to create attractive drawings based on basic shapes: rectangles, ellipses and lines. To give children a wider range of choices, a set of images can also be used."
+msgstr "U ovoj igri djeca mogu crtati po želji. Cilj je da otkriju kako mogu nacrtati zanimljive crteže uz pomoć osnovnih oblika: pravougaonika, elipsa i linija. Kako bi djeca imala veći izbor, moguće je ubaciti neke druge oblike. "
+
+msgid "Needs to be capable of moving and clicking the mouse easily"
+msgstr "Potrebno je da si u mogućnosti da lako klikćeš i pokrećeš miša"
+
+msgid "Select a drawing tool on the left, and a color down the bottom. Then click and drag in the white area to create a new shape. Once you've completed a drawing, you can select a new frame to work on by selecting one of the small rectangles on the bottom. Each frame contains the same content as its previous one. You can then edit it by moving objects a little bit or adding/deleting objects. When you create several frames and then click on the 'film' button, you will see all your images in a continuous slide-show (an infinite loop pattern). You can change the last image in your film by right clicking on a time frame. You can also change the viewing speed in this mode. In viewing mode, click on the 'drawing' button to return to drawing mode. You can also save and reload your animations with the 'floppy disk' and 'folder' buttons."
+msgstr "Izaberi predmet za crtanje na lijevoj strani, a boju na dnu ekrana. Zatim klikni i vuci u bijelu površinu kako bi napravio/la novi oblik. Kada završiš crtanje, možeš napraviti fotografiju  tvog crteža uz pomoć dugmeta \"kamera\". Dobićeš novu sliku sa istim sadržajem tj. kopiju tvog nacrta. Možeš izmjeniti sliku, pomijerati , brisati i dodavati predmete. Kada napraviš nekoliko crteža, klikni na dugme \"film\" i vidjećeš sve tvoje crteže u neprekidnom slajd šou. Takođe  možeš promijeniti brzinu gledanja.  Klikni dugme \"drawing\" (crtanje) kako bi se iz programa za gledanje vratio/la u onaj za crtanje. Tada možeš promjeniti svaku sliku tvoje animacije uz pomoć birača za slike koji se nalazi u donjem lijevom uglu ekrana. Takođe možeš da sačuvaš tvoje animacije na disketi ili folderu. "
+
+msgid ""
+"File '%s' is not found.\n"
+"You cannot play this activity."
+msgstr ""
+"Fajl '%s' nije pronađen.\n"
+"Ne možeš igrati ovu aktivnost."
+
+msgid "NORTH"
+msgstr "SJEVER"
+
+msgid "SOUTH"
+msgstr "JUG"
+
+msgid "Choose a house"
+msgstr "Odaberi kuću"
+
+msgid "Your turn to play ..."
+msgstr "Na tebe je red..."
+
+msgid "Not allowed! Try again !"
+msgstr "Nije dostupno! Pokušaj ponovo!"
+
+msgid "At the beginning of the game four seeds are placed in each house. Players take turns moving the seeds. In each turn, a player chooses one of the six houses under his or her control. The player removes all seeds from this house, and distributes them, dropping one in each house counter-clockwise from the original house, in a process called sowing. Seeds are not distributed into the end scoring houses, nor into the house drawn from. That is, the starting house is left empty; if it contained 12 seeds, it is skipped, and the twelfth seed is placed in the next house. After a turn, if the last seed was placed into an opponent's house and brought its total to two or three, all the seeds in that house are captured and placed in the player's scoring house (or set aside if the board has no scoring houses). If the previous-to-last seed also brought the total seeds in an opponent's house to two or three, these are captured as well, and so on. However, if a move would capture all an opponent's seeds, the capture is forfeited, and the seeds are instead left on the board, since this would prevent the opponent from continuing the game. The proscription against capturing all an opponent's seeds is related to a more general idea, that one ought to make a move that allows the opponent to continue playing. If an opponent's houses are all empty, the current player must make a move that gives the opponent seeds. If no such move is possible, the current player captures all seeds in his/her own territory, ending the game. (Source Wikipedia lt;http://en.wikipedia.org/wiki/Owaregt;)"
+msgstr "Na početku igre, četri zrna se nalaze u svakoj kućici. Smjenjujući se, igrači pomijeraju zrna. Redom igrači biraju jednu od šest kuća koja će biti njegova / njena teritorija. Igrač, u procesu koji se naziva žetva, uklanja sva zrna iz svoje kuće i raspoređuje ih , ispuštajući po jedan u svaku sljedeću kućicu u pravcu suprotnom od smjera kazaljke na satu . Zrna se ne ostavljaju u kućici za sabiranje poena i u kućicu iz koje se igra. To jest, početna kućica ostaje prazna; ukoliko je u kućici 12 zrna, ona se preskače, a dvanaesto zrno ide u sljedeću kućicu . Nakon kruga, ukoliko je posljednje sjeme smješteno u kući protivnika , a u njoj  je ostalo svega dva ili tri zrna, sva zrna iz te kuće su osvojena i prebacena u igračevu rezultatsku kuću (ili su smještena sa strane, ukoliko ne postoji rezultatska kućica ). Ukoliko je predzadnje zrno stiglo u protivnikovu kućicu i gdje su 2 ili 3 zrna ta su zrna takođe osvojena, i tako dalje.. Međutim, ukoliko bi igaračev potez zarobio sva protivnikova zrna , taj potez je izgubljen i zrna ostaju na ploči , jer bi takva situacija spriječila protivnika da nastavi sa igrom. Zabrana osvajanja svih zrna protivnika je u vezi sa glavnom idejom tj. da igrač mora praviti poteze koji će omogućiti protivniku da nastavi sa igrom. Ukoliko su kuće svih protivnika prazne, igrač mora napraviti potez kojim će obezbijediti protivniku zrna. Ukoliko takav potez nije moguć, igrač će zarobiti sva zrna u sopstvenoj teritoriji i završiti igru. (Izvor  lt;http://en.wikipedia.org/wiki/Owaregt;)"
+
+msgid "Oware"
+msgstr "Ovare"
+
+msgid "Play the Oware strategy game against Tux"
+msgstr "Igraj strategiju Ovare protiv Tux-a"
+
+msgid "The object of the game is to capture more seeds than one's opponent. Since the game has only 48 seeds, capturing 25 is sufficient to accomplish this. Since there are an even number of seeds, it is possible for the game to end in a draw, where each player has captured 24. The game is over when one player has captured 25 or more stones, or both players have taken 24 stones each (draw). If both players agree that the game has been reduced to an endless cycle, each player captures the stones on their side of the board."
+msgstr "Cilj igre je da sakupite više zrna od protivnika. S obzirom na to da su u igri samo 48 zrna , dovoljno je da sakupite 25 za pobjedu.  U igri je paran broj zrna, tako da je moguće završiti igru neriješeno  kada svaki od igrača sakupi po 24 zrna. Igra je završena kada jedan od takmičara sakupi najmanje 25 zrna ili kada oba takmičara imaju po 24. Ako se oba igrača usuglase da nema smisla nastaviti igru, zbog beskrajnog kruženja, svaki igrač osvaja zrna s njegove strane."
+
+msgid "Drag and Drop the items to make them match"
+msgstr "Povuci i spusti stavke da napraviš parove"
+
+msgid "In the main board area, a set of objects is displayed. In the vertical box (at the left of the main board) another set of objects is shown, each object in the group on the left matching exactly one object in the main board area. This game challenges you to find the logical link between these objects. How do they fit together? Drag each object to the correct red space in the main area."
+msgstr "Na glavnoj površini  prikazano je par predmeta.  U vertikalnom okviru koji se nalazi lijevo od glavne površine prikazan je još jedan niz predmeta.  Svakom od predmeta iz tabele sa lijeve strane odgovara samo jedan od predmeta iz niza u glavnoj površini . U ovoj igri, potrebno je pronaći logičnu povezanost između datih predmeta. Kako ih povezati? Potrebno je da povučeš predmete s lijeva na crvene tačke na glavnoj površini."
+
+msgid "Matching Items"
+msgstr "Upareni predmeti"
+
+msgid "Motor coordination. Conceptual matching."
+msgstr "Motorna koordinacija. Uskljađenost pojmova."
+
+msgid "Mouse manipulation: movement, drag and drop. Cultural references."
+msgstr "Upotreba miša: pokreti, prevlačenje i spuštanje. Kulturne reference. "
+
+msgid ""
+"%s$s configuration\n"
+" for profile %s$s"
+msgstr "%s$s konfiguracija za profil %s$s"
+
+msgid "Complete the puzzle"
+msgstr "Složi slagalicu"
+
+msgid "Complete the puzzle by dragging each piece from the set of pieces on the left, to the matching space in the puzzle."
+msgstr "Završi slagalicu tako što ćeš spustiti svaki dio iz grupe puzli sa lijeve strane na odgovarajuće mjesto.  "
+
+msgid "Drag and Drop the shapes on their respective targets"
+msgstr "Povuci i spusti oblike na odgovarajuća mjesta"
+
+msgid "Good mouse-control"
+msgstr "Dobra kontrola miša"
+
+msgid "The dog is provided by Andre Connes and released under the GPL"
+msgstr "Slika psa je obezbijeđena od strane Andrea Konsa i izdat pod  GPL"
+
+msgid "Hello ! My name is Lock."
+msgstr "Zdravo! Moje ime je Lok."
+
+msgid "Lock on the grass."
+msgstr "Lok na travi."
+
+msgid "Lock with colored shapes."
+msgstr "Lok sa obojenim oblicima."
+
+msgid "Paul Gauguin, Arearea - 1892"
+msgstr "Pol Gogen , Arearea - 1892"
+
+msgid "Pieter Bruegel the Elder, The peasants wedding - 1568"
+msgstr "Piter Brojgel stariji, Seljačko vjenačanje - 1568"
+
+msgid "The Lady and the Unicorn - XVe century"
+msgstr "Dama i jednorog – XV-i vijek"
+
+msgid "Vincent van Gogh, Bedroom in Arles - 1888"
+msgstr "Vinsent van Gog. Spavaća soba u Arlu 1888"
+
+msgid "Ambrosius Bosschaert the Elder, Flower Still Life - 1614"
+msgstr "Ambrosius Boshart stariji, Cvijet mrtva priroda - 1614"
+
+msgid "Press the two shift keys at the same time, to make the ball go in a straight line."
+msgstr "Pritisni dva shift dugmeta u isto vrijeme, da bi se loptak kretala pravolinijski."
+
+msgid "Make the ball go to Tux"
+msgstr "Usmjeri loptu do Tux-a"
+
+msgid "Brain"
+msgstr "Mozak"
+
+msgid "Don't use the last ball"
+msgstr "Ne koristi posljednju loptu"
+
+msgid "Logic-training activity"
+msgstr "Logične aktivnosti"
+
+msgid "Place balls in the holes. You win if the computer has to place the last ball. If you want Tux to begin, just click on him."
+msgstr "Smjesti lopte u rupe. Ukoliko kompjuter mora da smjesti posljednju loptu, ti si pobjednik. Ukoliko želiš da Tux počne samo klikni na njega."
+
+msgid "bar game"
+msgstr "igra traka"
+
+msgid "Move the mouse"
+msgstr "Pomjeri miš"
+
+msgid "Kick the ball into the black hole on the right"
+msgstr "Udari loptu u crnu rupu sa desne strane "
+
+msgid "Kick the ball into the goal"
+msgstr "Šutni loptu u gol"
+
+msgid "Mouse-manipulation"
+msgstr "Upravljanje mišom"
+
+msgid "Point the mouse and click on the ball, to set the speed and direction of the ball. The closer you click to the centre, the slower the ball moves."
+msgstr "Usmjeri miša i klikni na loptu da podesiš brzinu i pravac lopte. Što bliže klikneš centru to će se lopta kretati sporije."
+
+msgid "The football game"
+msgstr "Igra fudbal"
+
+msgid "Main Menu Second Version"
+msgstr "Glavni meni, druga verzija"
+
+msgid "Select a Board"
+msgstr "Odaberi tablu"
+
+msgid "Number of activities: %d"
+msgstr "Broj aktivnosti: %d"
+
+msgid "Python Board"
+msgstr "Pajton tabla"
+
+msgid "Special board that embeds python into GCompris."
+msgstr "Specijalna tabla koja omogućava ugradnju Pajton-a u GCompris"
+
+msgid "Special board that embeds python into gcompris."
+msgstr "Specijalna tabla koja omogućava korišćenje pajtona u gcompris"
+
+msgid "Drawing by Stephane Cabaraux."
+msgstr "Crtež Stivena Kabaruksa"
+
+msgid "Operate a canal lock"
+msgstr "Upravljaj branom na kanalu"
+
+msgid "Tux is in trouble, and needs to take his boat through a lock. Help Tux and find out how a canal lock works."
+msgstr "Tuks je u nevolji, potrebno je da preveze svoj brod kroz branu. Pomognite Tuksu i saznajte kako da savladate branu na  kanalu."
+
+msgid "You are in charge of the canal lock. Open the gates and the locks in the right order, so Tux can travel through the gates in both directions."
+msgstr "Zaduženi ste za branu kanala, Otvorite kapiju i branu ispravnim redosljedom, kako bi Tuks mogao da prolazi kroz kapiju u oba pravca. "
+
+msgid "All messages will be displayed here.\n"
+msgstr "Sve poruke će biti prikazane ovdje.\n"
+
+msgid "Your Friends"
+msgstr "Tvoji prijatelji"
+
+msgid "Your Channel"
+msgstr "Tvoj kanal"
+
+msgid "Type your message here, to send to other GCompris users on your local network."
+msgstr "Iskucaj poruku ovdje kako bi je poslao drugim korisnicima GCompris u sklopu lokalne mreže."
+
+msgid "color"
+msgstr "boja"
+
+msgid "ERROR: Failed to initialize the network interface. You cannot communicate."
+msgstr "GREŠKA: Niste uspjeli da započnete međusobnu mrežu. Ne možete da komunicirate."
+
+msgid "Has left the chat."
+msgstr "Nije više dostupan"
+
+msgid "You must set a channel in your channel entry box first.\n"
+msgstr "Moraš podesiti kanal u tvom polju za unos kanala. \n"
+
+msgid "Your friends must set the same channel in order to communicate with you"
+msgstr "Tvoji prijatelji moraju uraditi isto da bi mogli da komunicirate"
+
+msgid "Chat and draw with your friends"
+msgstr "Ćaskaj i crtaj sa prijateljima"
+
+msgid "This chat activity only works on the local network"
+msgstr "Ova aktivnost (čatovanje) radi samo u okviru lokalne mreže "
+
+msgid "This chat activity will only work with other GCompris users on your local network, not on the Internet. To use it, just type in your message and hit Enter. Your message is then broadcasted on the local network, and any GCompris program running the chat activity on that local network will receive and display your message."
+msgstr "Ova aktivnost, ćaskanje, je moguća samo sa ostalim korisnicima Gcompris na lokalnoj mreži, a ne na internetu. Možeš ga koristiti tako što ćeš ukucati poruku i pritisnuti „Enter“ . Tvoja poruka je vidljiva i biće prikazana drugim korisnicima Gcompris-a u lokalnoj mreži."
+
+msgid "Error: The external program gnuchess died unexpectedly"
+msgstr "Greška: Spoljnji program gnuchess je izneneda otkazao"
+
+msgid ""
+"Error: The external program gnuchess is mandatory\n"
+"to play chess in gcompris.\n"
+"First install it, and check it is in "
+msgstr ""
+"Greška: Spoljnji program gnuchess je obavezan\n"
+"za igranje šaha u gcomprisu.\n"
+"Prvo ga instaliraj i provjeri da li j u funkciji."
+
+msgid "White's Turn"
+msgstr "Red je na Bijelog"
+
+msgid "Black's Turn"
+msgstr "Red je na Crnog"
+
+msgid "White checks"
+msgstr "Bijeli provjerava"
+
+msgid "Black checks"
+msgstr "Crni provjerava"
+
+msgid "Black mates"
+msgstr "Crni matira"
+
+msgid "White mates"
+msgstr "Bijeli matira"
+
+msgid "Drawn game"
+msgstr "Neriješana igra"
+
+msgid "Error: The external program gnuchess died unexpectingly"
+msgstr "Greška: Spoljnji program gnuchess je izneneda otkazao"
+
+msgid "Learning chess"
+msgstr "Nauči šah"
+
+msgid "The chess engine is from gnuchess."
+msgstr "Sastav šaha je iz posebnog kompjuterskog programa za igranje šaha."
+
+msgid "Chess training. Catch the computer's pawns."
+msgstr "Treniranje šaha. Uzmi pione koji pripadaju kompjuteru."
+
+msgid "Play the end of the chess game against the computer"
+msgstr "Igraj kraj šahovske igre protiv kompjutera"
+
+msgid "Chronos"
+msgstr "Chronos"
+
+msgid "Drag and Drop the items to organize the story"
+msgstr "Povuci i spusti stavke kako bi složio/la priču"
+
+msgid "Moon photo is copyright NASA. The space sounds come from Tuxpaint and Vegastrike which are released under the GPL license. The transportation images are copyright Franck Doucet. Dates of Transportation are based on those found in lt;http://www.wikipedia.orggt;."
+msgstr "Prava na fotografiju Mjeseca su u vlasništvu NASAe. Zvuci svemira su preuzeti iz Tuxpaint i Vegastrike, koji su izdani pod GPL licencom. Slike transporta su u vlasništvu Franka Douceta. Datumi transporta se temelje na datumima pronađenim na lt;http://www.wikipedia.orggt;."
+
+msgid "Pick from the pictures on the left and put them on the red dots"
+msgstr "Uhvati sličice s lijeve strane i stavi ih na crvene tačke"
+
+msgid "Sort the pictures into the order that tells the story"
+msgstr "Nasloži slike po redu kako bi dobio/la priču "
+
+msgid "Tell a short story"
+msgstr "Ispričaj kratku priču"
+
+msgid "Moonwalker"
+msgstr "Šetač po mjesecu"
+
+msgid "Autumn"
+msgstr "Jesen"
+
+msgid "Spring"
+msgstr "Proljeće"
+
+msgid "Summer"
+msgstr "Ljeto"
+
+msgid "The 4 Seasons"
+msgstr "4 godišnja doba"
+
+msgid "Winter"
+msgstr "Zima"
+
+msgid "Gardening"
+msgstr "Vrtarstvo"
+
+msgid "Tux and the apple tree"
+msgstr "Tuks i drvo jabuke"
+
+msgid "1769 Cugnot's fardier"
+msgstr "1769 Cugnotovo parno vozilo "
+
+msgid ""
+"1829 Stephenson's Rocket\n"
+"Steam locomotive"
+msgstr ""
+"1829 Stivensonova Raketa\n"
+"parna lokomotiva"
+
+msgid ""
+"Place each image in the order and\n"
+"on the date it was invented.\n"
+"If not sure, research online at wikipedia:\n"
+"http://www.wikipedia.org"
+msgstr ""
+"Posloži slike prema redosljedu i\n"
+" i datumu kada je otkrivena.\n"
+"Ako nisi siguran, istraži na vikipediji:\n"
+"http://www.wikipedia.org"
+
+msgid "Transportation"
+msgstr "Transport"
+
+msgid ""
+"1783 Montgolfier brothers'\n"
+"hot air balloon"
+msgstr ""
+"1783 Braća Mongolfje\n"
+"balon napunjen toplim vazduhom "
+
+msgid "1880 Clement Ader's Eole"
+msgstr "1880 letjelica Clement Ader"
+
+msgid ""
+"1906 Paul Cornu\n"
+"First helicopter flight"
+msgstr ""
+"1906 Paul Cornu\n"
+"Prvi let helikopterom"
+
+msgid ""
+"1791 Comte de Sivrac's\n"
+"Celerifere"
+msgstr ""
+"1791 Comte de Sivrac's\n"
+"preteča bicikla"
+
+msgid "1903 The Wright brothers' Flyer III"
+msgstr "1903 Avion braće Wright"
+
+msgid ""
+"1909 Louis Bleriot crosses\n"
+"the English Channel"
+msgstr ""
+"1909 Luj Blerio\n"
+"prvi let preko kanala Lamanš"
+
+msgid "Aviation"
+msgstr "Avijacija"
+
+msgid ""
+"1927 Charles Lindbergh\n"
+"crosses the Atlantic Ocean"
+msgstr ""
+"1927 Čarls Lindberg\n"
+"prvi let preko Atlanskog okeana "
+
+msgid ""
+"1934 Hélène Boucher's\n"
+"speed record of 444km/h"
+msgstr ""
+"1934 Hélène Boucher's\n"
+"Rekord u brzini 444km/h"
+
+msgid ""
+"1947 Chuck Yeager\n"
+"breaks the sound-barrier"
+msgstr ""
+"1947 Čarls Jeger\n"
+"probijanje zvučnog zida "
+
+msgid "1878 Léon Bollé's \"La Mancelle\""
+msgstr "1878 Léon Bollé's \"La Mancelle\"( Karavan) "
+
+msgid ""
+"1885 The first petrol\n"
+"car by Benz"
+msgstr ""
+"1885 Prvi benzinski\n"
+"automobil Benz "
+
+msgid "The car"
+msgstr "Automobil"
+
+msgid "1899 Renault \"voiturette\""
+msgstr "1899 Reno  \"voiturette\" (prvi automobil fabrike Reno)"
+
+msgid "1923 Lancia Lambda"
+msgstr "1923 Lanča Lambda"
+
+msgid "1955 Citroën ds 19"
+msgstr "1955 Citroen ds 19"
+
+msgid "Cars"
+msgstr "Automobili"
+
+msgid ""
+"Error: this activity cannot be played with the\n"
+"sound effects disabled.\n"
+"Go to the configuration dialog to\n"
+"enable the sound"
+msgstr ""
+"Greška: ova aktivnost se ne može igrati\n"
+"ukoliko su zvučni efekti isključeni. \n"
+"Idi na dijalog konfiguracije\n"
+"da bi aktivirao zvuk."
+
+msgid "abcdefghijklmnopqrstuvwxyz"
+msgstr "abcdefghijklmnopqrstuvwxyz"
+
+msgid ""
+"Error: this activity requires that you first install\n"
+"the packages with GCompris voices for the locale '%s' or '%s'"
+msgstr ""
+"Greška: ova aktivnost zahtjeva da instaliraš\n"
+"pakete sa GCompris glasovima za '%s' ili '%s'"
+
+msgid ""
+"Error: this activity requires that you first install\n"
+"the packages with GCompris voices for the locale '%s' ! Fallback to english, sorry!"
+msgstr ""
+"Greška: ova aktivnost zahtjeva da prvo instalira\n"
+"pakete sa GCompris za glas  '%s' ! Vrati se na engleski, izvini!"
+
+msgid "Uppercase only text"
+msgstr "Samo tekst ispisan velikim slovima"
+
+msgid "A letter is spoken. Click on the matching letter in the main area. You can listen to the letter again, by clicking on the mouth icon in the bottom box."
+msgstr "Čuje se slovo. Pronađi njegov par u  glavnom okviru i klikni mišem na njega. Slovo možeš ponovo čuti ako klikneš na usta."
+
+msgid "Click on a letter"
+msgstr "Klikni na slovo"
+
+msgid "Letter-name recognition"
+msgstr "Prepoznavanje slova "
+
+msgid "Listen to a letter and click on the right one"
+msgstr "Poslušaj i pritisni pravo slovo "
+
+msgid "Visual letter-recognition. Can move the mouse."
+msgstr "Vizuelno prepoznavanje slova. Možeš pomijerati miša."
+
+msgid "Click and draw"
+msgstr "Klikni i crtaj"
+
+msgid "Draw the picture by clicking on each blue point in sequence."
+msgstr "Nacrtaj sliku tako što ćeš kliknuti na svaku plavu tačku u nizu."
+
+msgid "Draw the picture by clicking on the blue points."
+msgstr "Nacrtaj sliku klikćući na plave tačke."
+
+msgid "Click On Me"
+msgstr "Klikni na mene"
+
+msgid "Fish are taken from the Unix utility xfishtank. All image credits belong to Guillaume Rousse."
+msgstr "Ribe su preuzete sa Unix utility xfishtank. Slike su u vlasništvu Guillaume Rousse."
+
+msgid "Left-Click with the mouse on all the swimming fish before they leave the fishtank"
+msgstr "Klikni mišem na ribu prije nego izađe iz akvarijuma. "
+
+msgid "Motor coordination: moving and clicking the mouse."
+msgstr "Motorna koordinacija: klikćanje i pomijeranje miša."
+
+msgid "Use the left mouse button to click on the moving fish."
+msgstr "Kako bi pogodio/la ribu koja se pomijera klikni na nju  lijevom tipkom miša."
+
+msgid "Set the watch to:"
+msgstr "Podesi kazaljke na satu:"
+
+msgid "Distinguish between time-units (hour, minute and second). Set and display time on a clock."
+msgstr "Razlikuj  vremenske jedinice (sate, minute i sekunde). Podesi kazaljke na satu."
+
+msgid "Learn how to tell the time"
+msgstr "Nauči da gledaš na sat"
+
+msgid "Learning Clock"
+msgstr "Nauči da da gledaš na sat "
+
+msgid "Set the clock to the time given, in the time-units shown (hours:minutes or hours:minutes:seconds). Click on the different arrows, and move the mouse, to make the numbers go up or down."
+msgstr "Podesi kazaljke na satu prema zadanom vremenu (sati:minute ili sati:minute:sekunde). Klikni na kazaljke i pomijeraj miša do tražene vrijednosti."
+
+msgid "The concept of time. Reading the time."
+msgstr "Koncept vremena. Čitanje vremena."
+
+msgid "Click on the blue duck"
+msgstr "Klikni na plavu patku"
+
+msgid "Click on the brown duck"
+msgstr "Klikni na braon patku"
+
+msgid "Click on the green duck"
+msgstr "Klikni na zelenu patku"
+
+msgid "Click on the grey duck"
+msgstr "Klikni na sivu patku"
+
+msgid "Click on the orange duck"
+msgstr "Klikni na narandzastu patku"
+
+msgid "Click on the purple duck"
+msgstr "Klikni na ljubičastu patku"
+
+msgid "Click on the red duck"
+msgstr "Klikni na crvenu patku"
+
+msgid "Click on the yellow duck"
+msgstr "Klikni na žutu patku"
+
+msgid "Click on the black duck"
+msgstr "Klikni na crnu patku"
+
+msgid "Click on the white duck"
+msgstr "Klikni na bijelu patku"
+
+msgid "Can move the mouse."
+msgstr "Možeš pomijerati miša."
+
+msgid "Click on the right color"
+msgstr "Klikni na odgovarajuću boju"
+
+msgid "Colors"
+msgstr "Boje"
+
+msgid "Listen to the color and click on the matching duck."
+msgstr "Poslušaj i prepoznaj boju, zatim klikni na odgovarajuću patku."
+
+msgid "This board teaches you to recognize different colors. When you hear the name of the color, click on the duck wearing it."
+msgstr "Ova igra uči kako da prepoznaš različite boje. Kada čuješ ime određene boje, klikni na patku te boje."
+
+msgid "Arrange four coins in a row"
+msgstr "Poređaj četri novčića u red"
+
+msgid "Click the position in the line where you want to drop a piece. You can also use the arrow keys to move the piece left or right, and the down or space key to drop a piece."
+msgstr "Klikni bilo gdje na crti, gdje želiš da spustiš dio. Takođe, možeš koristiti dugme sa strelicama da pomijeraš taj dio desno, lijevo , dolje ili dugme razmaka da spustiš taj dio."
+
+msgid "Connect 4 (2 Players)"
+msgstr "Povezivanje 4 (2 igrača)"
+
+msgid "Create a line of 4 pieces either horizontally (lying down) or vertically (standing up) or diagonally."
+msgstr "Napravi liniju od 4 dijela horitontalno ( položi ih ), vertikalno (uspravno) ili dijagonalno."
+
+msgid "The original code was written in 2005 by Laurent Lacheny. In 2006, Miguel de Izarra made the two players game. Images and Artificial Intelligence taken from project 4stattack by Jeroen Vloothuis. The original project can be found on lt;http://forcedattack.sourceforge.netgt;"
+msgstr "Originalni kod je osmislio Laurent Lacheny 2005. godine, a Miguel de Izarra je dodao dva igrača u igru. Slike i vještačka inteligencija su preuzeti iz projekta  4-ti napad Jeroena Vloothuisa. Orginalni projekat može se pronaći na lt;http://forcedattack.sourceforge.netgt;"
+
+msgid "Connect 4"
+msgstr "Poveži 4"
+
+msgid "Create a line of 4 pieces either horizontally (lying down), vertically (standing up) or diagonally."
+msgstr "Napravi liniju od 4 dijela, horizontalno, vertikalno ili dijagonalno. "
+
+msgid "Laurent Lacheny. Images and Artificial Intelligence taken from project 4stattack by Jeroen Vloothuis. The original project can be found on lt;http://forcedattack.sourceforge.netgt;"
+msgstr "Laurent Lacheny. Slike i vještačka inteligencija su preuzete iz projekta „4-ti napad“ Joroena Vloothuisa. Orginalni projekt se može viđeti  na lt;http://forcedattack.sourceforge.netgt;"
+
+msgid "Build the same model"
+msgstr "Napravi identičan model "
+
+msgid "Drive the crane and copy the model"
+msgstr "Upravljaj dizalicom i kopiraj model "
+
+msgid "Motor-coordination"
+msgstr "Motorna koordinacija"
+
+msgid "Mouse manipulation"
+msgstr "Upravljanjem mišem"
+
+msgid "Move the items in the bottom left frame to copy their position in the top right model. Below the crane itself, you will find four arrows that let you move items. To select the item to move, just click on it. If you prefer, you can use the arrow keys and the space or tab key instead."
+msgstr "Pomjeri predmete u donjem lijevom okviru i napravi identičan raspored kao u gornjem desnom okviru. Ispod dizalice naći češ strelice uz pomoć kojih ćeš pomijerati stvari. Da bi odabrao predmet koji češ pomjeriti, samo klikni na predmet."
+
+msgid "Find the details"
+msgstr "Pronađi detalje"
+
+msgid "The images are from wiki commons"
+msgstr "Slike su preuzete iz vikip"
+
+msgid "Vincent van Gogh, Entrance Hall of Saint-Paul Hospital - 1889"
+msgstr "Vincent van Gogh, Entrance Hall of Saint-Paul Hospital - 1889"
+
+msgid "Vincent van Gogh, The Bridge of Langlois at Arles with a lady with umbrella - 1888"
+msgstr "Vincent van Gogh, The Bridge of Langlois at Arles with a lady with umbrella - 1888"
+
+msgid "Vincent van Gogh, The Church at Auvers-sur-Oise - 1890"
+msgstr "Vincent van Gogh, The Church at Auvers-sur-Oise - 1890"
+
+msgid "Vincent van Gogh, Painter on His Way to Work - 1888"
+msgstr "Vincent van Gogh, Painter on His Way to Work - 1888"
+
+msgid "Vincent van Gogh, The Harvest - 1888"
+msgstr "Vincent van Gogh, The Harvest - 1888"
+
+msgid "Vincent van Gogh, Cafe Terrace at Night - 1888"
+msgstr "Vincent van Gogh, Cafe Terrace at Night - 1888"
+
+msgid "Vincent van Gogh, Entrance Hall of Saint-Paul Hospital - 1888"
+msgstr "Vincent van Gogh, Entrance Hall of Saint-Paul Hospital - 1888"
+
+msgid "Vincent van Gogh, Portrait of Pere Tanguy 1887-8"
+msgstr "Vincent van Gogh, Portrait of Pere Tanguy 1887-8"
+
+msgid "Eilean Donan castle"
+msgstr "Eilean Donan dvorac"
+
+msgid "Eiffel Tower, seen from the champ de Mars, Paris, France"
+msgstr "Ajfelov toranj, Pariz, Francuska"
+
+msgid "Gizah Pyramids, Egypt"
+msgstr "Keopsova piramida, Egipat"
+
+msgid "Sydney Opera House, Australia"
+msgstr "Sidnejska opera, Australija"
+
+msgid "Tower Bridge in London"
+msgstr "Tauerbridz u Londonu"
+
+msgid "Courtyard of the Museum of Louvre, and its pyramid"
+msgstr "Dvorište muzeja Luvr i piramida"
+
+msgid "Panorama of Château de Chenonceau, Indre-et-Loire, France."
+msgstr "Panorama of Château de Chenonceau, Indre-et-Loire, Francuska."
+
+msgid "Notre Dame de Paris cathedral on the Île de la Cité island in Paris, France."
+msgstr "Notre Dame de Paris cathedral on the Île de la Cité island in Paris, France."
+
+msgid "Nagoya Castle, Aichi Prefecture, Japan."
+msgstr "Nagoya Castle, Aichi Prefecture, Japan."
+
+msgid "Taj Mahal, Agra, India"
+msgstr "Taj Mahal, Agra, India"
+
+msgid "Castle Neuschwanstein at Schwangau, Bavaria, Germany"
+msgstr "Castle Neuschwanstein at Schwangau, Bavaria, Njemačka"
+
+msgid "Egeskov Castle, Denmark"
+msgstr "Zamak Egeskov, Danska"
+
+msgid "Windmill in Sønderho, Fanø, Denmark"
+msgstr "Windmill in Sønderho, Fanø, Danska"
+
+msgid "Basic counting skills"
+msgstr "Osnovne vještine računanja"
+
+msgid "Double-entry table"
+msgstr "Dvojne tabele"
+
+msgid "Drag and Drop each proposed item on its destination"
+msgstr "Postavi svaki predmet na njegovo mjesto"
+
+msgid "Drag and Drop the items in the double-entry table"
+msgstr "Povuci i spusti predmet u dvojnu tabelu"
+
+msgid "Move the items on the left to their proper position in the double-entry table."
+msgstr "Smjesti predmete s lijeve strane na pravo mjesto u dvojnoj tablici. "
+
+msgid "Click on an item and listen to its target position"
+msgstr "Klikni na predmet i poslušaj njegovo odredište"
+
+msgid "A creative board where you can draw freely"
+msgstr "Kreativna ploča za crtanje"
+
+msgid "A simple vector-drawing tool"
+msgstr "Alat za jednostavno vektorsko crtanje"
+
+msgid "In this game, children can draw freely. The goal is to discover how to create attractive drawings based on basic shapes: rectangles, ellipses and lines."
+msgstr "U ovoj igri djeca mogu crtati po želji . Cilj je da otkriju kako mogu nacrtati zanimljive crteže uz pomoć osnovnih oblika: trougla, elipse i linija. "
+
+msgid "Select a drawing tool on the left, and a color down the bottom, then click and drag in the white area to create a new shape. To save time, you can click with the middle mouse button to delete an object."
+msgstr "Izaberi pribor za crtanje na lijevoj strani  i boju na dnu, tada klikni i povuci ga u bijelu podlogu i nacrtaj novi oblik. Možeš kliknuti na srednju tipku miša da obrišeš predmet. "
+
+msgid "Can count from 1 to 50."
+msgstr "Možeš da brojiš od 1 do 50."
+
+msgid "Draw Number"
+msgstr "Napiši broj"
+
+msgid "Draw the picture by clicking on each numbers in the right order."
+msgstr "Napravi sliku tako što ćeš poređati brojeve po redu."
+
+msgid "Draw the picture by following numbers"
+msgstr "Nacrtaj sliku sa datim brojevima"
+
+msgid ""
+"Cannot find the 'gnucap' electric simulator.\n"
+"You can download and install it from:\n"
+"<http://geda.seul.org/tools/gnucap/>\n"
+"To be detected, it must be installed in\n"
+"/usr/bin/gnucap or /usr/local/bin/gnucap.\n"
+"You can still use this activity to draw schematics without computer simulation."
+msgstr ""
+"Ne može pronaći gnucap električni simulator.\n"
+"Možeš ga skinuti i instalirati sa sajta:\n"
+"<http://geda.seul.org/tools/gnucap/>\n"
+"kako bi ga pronašao, moraš ga prvo instalirati u\n"
+"/usr/bin/gnucap ili /usr/local/bin/gnucap.\n"
+"I dalje možeš da koristiš aktivnost da nacrtate šemu bez kompjuterske simulacije. "
+
+msgid "Create and simulate an electric schema"
+msgstr "Napravi i predstavi električnu šemu"
+
+msgid "Drag electrical components from the selector and drop them in the working area. Create wires by clicking on a connection spot, dragging the mouse to the next connection spot, and letting go. You can also move components by dragging them. You can delete wires by clicking on them. To delete a component, select the deletion tool on top of the component selector. You can click on the switch to open and close it. You can change the rheostat value by dragging its wiper. In order to simulate what happens when a bulb is blown, you can blown it by right-clicking on it. The simulation is updated in real time by any user action."
+msgstr "Povuci električne komponente iz okvira s lijeve strane i spusti ih u radni dio. Napravi žice  tako što ćeš kliknuti  mišem na mjesto spajanja  (držiš tipku na mišu do sljedećeg mjesta spajanja  i onda pustiš tipku na mišu. Takođe možeš pomjerati dijelove tako da ih uhvatiš, klikom na miša, preneseš na željeno mjesto i pustiš tipku na mišu. Žice možeš ukloniti tako što ćeš kliknuti na njih. Kako bi uklonio/la određeni  dio, klikni na gumicu u gornjem lijevom uglu, a zatim klikni na dio koji želiš obrisati. Možeš da klikneš na prekidač kako bi ga otvorio ili zatvorio. Snagu otpornika možeš da promijeniš tako što ćeš povući njegov brisač. Ukoliko želiš da vidiš šta se dešava kada sijalica pregori klikni desnom tipkom miša na nju."
+
+msgid "Electricity"
+msgstr "Elektricitet"
+
+msgid "Freely create an electric schema with a real time simulation of it."
+msgstr "Napravi šemu strujnog kruga sa simulacijom u stvarnom vremenu."
+
+msgid "GCompris uses the Gnucap electric simulator as a backend. You can get more information on gnucap at lt;http://geda.seul.org/tools/gnucap/gt;."
+msgstr "GCompris koristi električni simulator Gnucap kao osnovu. Više informacija o Gnucap-u možeš potražiti na  lt;http://geda.seul.org/tools/gnucap/gt;."
+
+msgid "Requires some basic understanding of the concept of electricity."
+msgstr "Potrebno je osnovno razumjevanje koncepta elektriciteta."
+
+msgid "Numeration training"
+msgstr "Osnovno brojanje"
+
+msgid "Place the items in the best way to count them"
+msgstr "Poredjaj predmete kako ćeš ih najbolje izbrojati"
+
+msgid "Basic enumeration"
+msgstr "Osnovno brojanje"
+
+msgid "Count the items"
+msgstr "Prebroji stavke"
+
+msgid "First, properly organize the items so that you can count them. Then, select the item you want to answer in the bottom right area. Enter the answer with the keyboard and press the OK button or the 'Enter' key."
+msgstr "Prvo, rasporedi predmete kako bi mogao da ih izbrojiš. Zatim selektuj predmet  koji želiš u donjem desnom uglu. Unesi odgovor i pritisni 'Enter'."
+
+msgid "Move the mouse to erase the area and discover the background"
+msgstr "Pomjeraj miša da obrišeš površinu i otkriješ pozadinu"
+
+msgid "Animal pictures are taken from the Animal Photography Page of Ralf Schmode (lt;http://schmode.net/gt;) and from LE BERRE Daniel. These people kindly gave GCompris the authorization to include their pictures. Thanks a lot, both of you."
+msgstr "Slike životinja su preuzete sa internet stranica Životinjske fotografije Ralfa Schmodea (lt;http://schmode.net/gt;) i LE BERRE Daniela. Oni su ljubazno odobrili Gcomprisu da koristi njihove slike "
+
+msgid "Move the mouse until all the blocks disappear."
+msgstr "Pomijeraj miša dok ne nestanu sva polja."
+
+msgid "Double click the mouse"
+msgstr "Dvostruki pritisak na tipku miša"
+
+msgid "Double click the mouse on rectangles until all the blocks disappear."
+msgstr "Dvostruki pritisak na tipku miša na trouglove dok polja ne nestanu."
+
+msgid "Double click the mouse to erase the area and discover the background"
+msgstr "Dvostruki pritisak na tipku miša kako bi obrisao/la površinu i otkrila pozadinu"
+
+msgid "Click the mouse"
+msgstr "Klikni mišem"
+
+msgid "Click the mouse on rectangles until all the blocks disappear."
+msgstr "Klikni mišem na trouglove dok polja ne nestanu."
+
+msgid "Click the mouse to erase the area and discover the background"
+msgstr "Klikni mišem kako bi obrisao/la površinu i otkrio/la pozadinu "
+
+msgid "Click on any item that has a free block beside it, and it will be swapped with the empty block."
+msgstr "Klikni na bilo koji broj pored kojeg se nalazi prazno polje. Broj koji si izabrao/la će  zauzeti  mjesto praznog polja."
+
+msgid "Move each item to make an increasing series: from the smallest to the largest"
+msgstr "\"Pomjeri svaki predmet i napravi niz: od najmanjeg do najvećeg"
+
+msgid "Original code taken from the libgnomecanvas demo"
+msgstr "Originalni programski kod je preuzet iz demo programa libgnomecanvas"
+
+msgid "The fifteen game"
+msgstr "Petnaest igara"
+
+msgid "Control the hose-pipe"
+msgstr "Kontroliši crijevo "
+
+msgid "Fine motor coordination"
+msgstr "Precizna motorna koordinacija "
+
+msgid "Move the mouse over the red part of the hose-pipe. This will move it, bringing it, part by part, up to the flowers. Be careful, if you move off the hose, the red part will go back down."
+msgstr "Pomijeraj mišem crveni dio na crijevu. Tako će voda, dio po dio, doći do cvijeća. Budi pažljiv, ako pomakneš strelicu izvan crijeva, crveni dio će se vratiti na početak."
+
+msgid "Tux needs to water the flowers, but the hose is blocked."
+msgstr "Tux bi trebao da  zalije cvijeće, ali crijevo je blokirano."
+
+msgid ""
+"Author: Bruno Coudoin\n"
+"Contribution: Pascal Georges, Jose Jorge, Yves Combe\n"
+"Graphics: Renaud Blanchard, Franck Doucet\n"
+"Intro Music: Djilali Sebihi\n"
+"Background Music: Rico Da Halvarez\n"
+msgstr ""
+"Autor:Bruno Coudoin\n"
+"Saradnici:Pascal Georges, Jose Jorge, Yves Combe\n"
+"Grafika: Renaud Blanchard, Franck Doucet\n"
+"Intro muzika: Djilali Sebihi\n"
+"Muzika u pozadini: Rico Da Halvarez\n"
+
+msgid "translatorcredits"
+msgstr "prevodilac"
+
+msgid "About GCompris"
+msgstr "O GComprisu"
+
+msgid "GCompris Home Page: http://gcompris.net"
+msgstr "GCompris Home Page: http://gcompris.net"
+
+msgid "Translators:"
+msgstr "Prevodioci:"
+
+msgid "This software is a GNU Package and is released under the GNU General Public License"
+msgstr "This software is a GNU Package and is released under the GNU General Public License"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "GCompris confirmation"
+msgstr "GCompris potvrda"
+
+msgid "Are you sure you want to quit?"
+msgstr "Da li si siguran da želiš da odustaneš?"
+
+msgid "Yes, I am sure!"
+msgstr "DA, siguran sam!"
+
+msgid "No, I want to keep going"
+msgstr "Ne, želim da nastavim"
+
+msgid "Dynamic module loading is not supported. GCompris cannot load.\n"
+msgstr "Očitavanje dinamičkog modula nije moguće. GCompris ne može da očita.\n"
+
+msgid ""
+"Select the language\n"
+" to use in the board"
+msgstr ""
+"Selektuj jezik\n"
+" za igru"
+
+msgid "Global GCompris mode"
+msgstr "Opšti GCompris način"
+
+msgid "Normal"
+msgstr "Normalni"
+
+msgid "2 clicks"
+msgstr "2 klika"
+
+msgid "both modes"
+msgstr "oba načina"
+
+msgid ""
+"Select the drag and drop mode\n"
+" to use in the board"
+msgstr ""
+"Označi način\n"
+" koji želiš da koristiš u igri"
+
+msgid "%d (New level)"
+msgstr "%d (Novi nivo)"
+
+msgid "Configure the list of words"
+msgstr "Potvrdi listu riječi"
+
+msgid "Choice of the language"
+msgstr "Izbor jezika"
+
+msgid "Choice of the level"
+msgstr "Izbor nivoa"
+
+msgid "Back to default"
+msgstr "Nazad na pretpostavljeni"
+
+msgid "Your system default"
+msgstr "Tvoj sistem pretpostavljeni"
+
+msgid "Afrikaans"
+msgstr "Afrički"
+
+msgid "Amharic"
+msgstr "Amharski"
+
+msgid "Arabic"
+msgstr "Arapski"
+
+msgid "Asturian"
+msgstr "Asturijski"
+
+msgid "Turkish (Azerbaijan)"
+msgstr "Turski (Azerbedžajn)"
+
+msgid "Bulgarian"
+msgstr "Bugarski"
+
+msgid "Breton"
+msgstr "Bretonski"
+
+msgid "Catalan"
+msgstr "Katalonski"
+
+msgid "Czech Republic"
+msgstr "Češka republika"
+
+msgid "Danish"
+msgstr "Danski"
+
+msgid "German"
+msgstr "Njemački"
+
+msgid "Dzongkha"
+msgstr "Dzongka"
+
+msgid "Greek"
+msgstr "Grčki"
+
+msgid "English (Canada)"
+msgstr "Engleski (Kanada)"
+
+msgid "English (Great Britain)"
+msgstr "Engleski (Velika Britanija)"
+
+msgid "English (United States)"
+msgstr "Engleski (SAD)"
+
+msgid "Spanish"
+msgstr "Španski"
+
+msgid "Basque"
+msgstr "Baskijski"
+
+msgid "Persian"
+msgstr "Persijski"
+
+msgid "Finnish"
+msgstr "Finski"
+
+msgid "French"
+msgstr "Francuski"
+
+msgid "Irish (Gaelic)"
+msgstr "Irski "
+
+msgid "Gujarati"
+msgstr "Gudžarati"
+
+msgid "Hebrew"
+msgstr "Hebrejski"
+
+msgid "Hindi"
+msgstr "Hindi"
+
+msgid "Croatian"
+msgstr "Hrvatski"
+
+msgid "Hungarian"
+msgstr "Mađarski"
+
+msgid "Indonesian"
+msgstr "Indonezijski"
+
+msgid "Italian"
+msgstr "Italijanski"
+
+msgid "Japanese"
+msgstr "Japanski"
+
+msgid "Georgian"
+msgstr "Gruzijski"
+
+msgid "Korean"
+msgstr "Koreanski"
+
+msgid "Lithuanian"
+msgstr "Litvanski"
+
+msgid "Macedonian"
+msgstr "Makedonski"
+
+msgid "Malayalam"
+msgstr "Malajalam"
+
+msgid "Marathi"
+msgstr "Marati"
+
+msgid "Malay"
+msgstr "Malajski"
+
+msgid "Norwegian Bokmal"
+msgstr "Bokmal, jedan od služb.jez. Norveške"
+
+msgid "Nepal"
+msgstr "Nepalski"
+
+msgid "Dutch"
+msgstr "Holandski"
+
+msgid "Norwegian Nynorsk"
+msgstr "Ninorsk, narodni norveški jezik"
+
+msgid "Occitan (languedocien)"
+msgstr "Oksitanski"
+
+msgid "Punjabi"
+msgstr "Pandžabi"
+
+msgid "Polish"
+msgstr "Poljski"
+
+msgid "Portuguese (Brazil)"
+msgstr "Portugalski (Brazil)"
+
+msgid "Portuguese"
+msgstr "Portugalski"
+
+msgid "Romanian"
+msgstr "Rumunski"
+
+msgid "Russian"
+msgstr "Ruski"
+
+msgid "Kinyarwanda"
+msgstr "Kiniarvanda"
+
+msgid "Slovak"
+msgstr "Slovački"
+
+msgid "Slovenian"
+msgstr "Slovenski"
+
+msgid "Somali"
+msgstr "Somali"
+
+msgid "Albanian"
+msgstr "Albanski"
+
+msgid "Serbian (Latin)"
+msgstr "Srpski (latinica)"
+
+msgid "Serbian"
+msgstr "Srpski"
+
+msgid "Swedish"
+msgstr "Švedski"
+
+msgid "Tamil"
+msgstr "Tamilski "
+
+msgid "Thai"
+msgstr "Tajlandski"
+
+msgid "Turkish"
+msgstr "Turski"
+
+msgid "Ukrainian"
+msgstr "Ukrajinski"
+
+msgid "Urdu"
+msgstr "Urdu"
+
+msgid "Vietnamese"
+msgstr "Vijetnamski"
+
+msgid "Walloon"
+msgstr "Valonski"
+
+msgid "Chinese (Simplified)"
+msgstr "Kineski (pojednostavljeni)"
+
+msgid "Chinese (Traditional)"
+msgstr "Kineski  (tradicionalni)"
+
+msgid "No time limit"
+msgstr "Bez vremenskog ograničenja "
+
+msgid "Slow timer"
+msgstr "Usporeni tajmer "
+
+msgid "Normal timer"
+msgstr "Noramlni tajmer "
+
+msgid "Fast timer"
+msgstr "Brzi tok vremena"
+
+msgid "Use Gcompris administration module to filter boards"
+msgstr "Koristi GCompris-ov administratorski modul za čišćenje aktivnosti"
+
+msgid "GCompris Configuration"
+msgstr "GCompris konfiguracije"
+
+msgid "Fullscreen"
+msgstr "Ekran"
+
+msgid "Music"
+msgstr "Muzika"
+
+msgid "Effect"
+msgstr "Efekti"
+
+msgid "Zoom"
+msgstr "Zumiraj"
+
+msgid "Couldn't open skin dir: %s"
+msgstr "Ne može da otvori imenik: %s"
+
+msgid "Skin : %s"
+msgstr "Koža: %s"
+
+msgid "SKINS NOT FOUND"
+msgstr "KOŽA NIJE PRONAĐENA"
+
+msgid "English (United State)"
+msgstr "Engleski (SAD)"
+
+msgid "CANCEL"
+msgstr "OTKAŽI"
+
+msgid "LOAD"
+msgstr "UČITAJ"
+
+msgid "SAVE"
+msgstr "SAČUVAJ"
+
+msgid "Couldn't find or load the file"
+msgstr "Nisam mogao/la da  pronađem ili učitam fajl"
+
+msgid "This activity is incomplete."
+msgstr "Ova aktivnost nije završena."
+
+msgid ""
+"Exit it and report\n"
+"the problem to the authors."
+msgstr ""
+"Izađi iz programa\n"
+"i prijavi problem autorima"
+
+msgid "run GCompris in fullscreen mode."
+msgstr "Pokreni gcompris preko cijelog ekrana."
+
+msgid "run GCompris in window mode."
+msgstr "Pokreni gcompris u prozor- modu."
+
+msgid "run GCompris with sound enabled."
+msgstr "Pokreni Gcompris s uključenim zvukom."
+
+msgid "run GCompris without sound."
+msgstr "Pokreni gcompris bez zvuka."
+
+msgid "run GCompris with the default system cursor."
+msgstr "Pokreni gcompris sa pokazivačem podrazumljevanog sistema."
+
+msgid "run GCompris without cursor (touch screen mode)."
+msgstr "Pokreni GCompris bez pokazivača."
+
+msgid "display only activities with this difficulty level."
+msgstr "prikaži samo aktivnosti ove težine."
+
+msgid "display debug informations on the console."
+msgstr "Prikaži informacije o otklanjanju grešaka na konzoli."
+
+msgid "Print the version of "
+msgstr "Odštampaj verziju "
+
+msgid "Run GCompris with local menu (e.g -l /reading will let you play only activities in the reading directory, -l /strategy/connect4 only the connect4 activity). Use '-l list' to list all the availaible activities and their descriptions."
+msgstr "Pokreni gcompris s lokalnim menijem (npr. -l /reading će ti omogućiti igranje aktivnosti samo iz dijela čitanje, -l /strategy/connect4 će omogućiti igranje 4 povezane aktivnosti) Koristi '-l list' da sortiraš sve ponuđene akrivnosti i njihove opise."
+
+msgid "GCompris will find the data dir in this directory"
+msgstr "GCompris će pronaći podatke u ovom imeniku"
+
+msgid "GCompris will find the skins in this directory"
+msgstr "GCompris će pronaći kože u ovom imeniku"
+
+msgid "GCompris will find the activity plugins in this directory"
+msgstr "GCompris će pronaći dodatke aktivnosti u ovom imeniku"
+
+msgid "GCompris will find the python activity in this directory"
+msgstr "GCompris će pronaći pajton aktivnosti uovom imeniku"
+
+msgid "GCompris will find the locale file (.mo translation) in this directory"
+msgstr "GCompris će pronaći lokalni fajl (prevod) u ovo imeniku"
+
+msgid "GCompris will find the activities menu in this directory"
+msgstr "GCompris će pronaći meni sa aktivnostima u ovom imeniku "
+
+msgid "Run GCompris in administration and user-management mode"
+msgstr "Pokreni GCompris u administratorskom i korisničko-upravljačkom modu"
+
+msgid "Use alternate database for profiles [$HOME/.config/gcompris/gcomprissqlite.db]"
+msgstr "Koristi alternativnu bazu za profile [$HOME/.config/gcompris/gcomprissqlite.db]"
+
+msgid "Create the alternate database for profiles"
+msgstr "Napravi alternativnu bazu profila"
+
+msgid "Re-read XML Menus and store them in the database"
+msgstr "Ponovno pročitaj XML menije i spremi ih u bazu podataka"
+
+msgid "Set the profile to use. Use 'gcompris -a' to create profiles"
+msgstr "Odaberi profil. S komandom 'gcompris -a' možeš kreirati profile"
+
+msgid "List all available profiles. Use 'gcompris -a' to create profiles"
+msgstr "Poređaj sve profile koji su na raspolaganju. Koristi 'gcompris -a' da napraviš profile "
+
+msgid "Config directory location: [$HOME/.config/gcompris]. Alternate is to set $XDGCONFIGHOME."
+msgstr "Lokacija konfig imenika: [$HOME/.config/gcompris]. Alternativa je podešavanje $XDGCONFIGHOME"
+
+msgid "The location of user directories: [$HOME/My GCompris]"
+msgstr "Lokacija korisničkog imenika je: [$HOME/My GCompris]"
+
+msgid "Run the experimental activities"
+msgstr "Pokreni eksperimentalne aktivnosti"
+
+msgid "Disable the quit button"
+msgstr "Isključi dugme za odustajanje"
+
+msgid "Disable the config button"
+msgstr "Isključi dugme za konfiguraciju"
+
+msgid "Disable the level button"
+msgstr "Isključi dugme za odabir nivoa"
+
+msgid "GCompris will get images, sounds and activity data from this server if not found locally."
+msgstr "Ako ne budu pronađene na lokalnom nivou, GCompris će preuzeti slike, zvukove i podatke aktivnosti sa ovog servera."
+
+msgid "Only when --server is provided, disable check for local resource first. Data are always taken from the web server."
+msgstr "Onda kada je omogućen --server, prvo isključi provjere lokalnih resursa. Podaci se uvijek preuzimaju sa interneta."
+
+msgid "In server mode, specify the cache directory used to avoid useless downloads."
+msgstr "U server modu,  izdvojite mapu kako  bi izbjegli bespotrebna preuzimanja "
+
+msgid "Global drag and drop mode: normal, 2clicks, both. Default mode is normal."
+msgstr "Opšti „provuci i spusti“ mod: normalno, 2 klika, oba. Podrazumjevani način je normalno."
+
+msgid "Do not avoid the execution of multiple instances of GCompris."
+msgstr "Ne izbjegavaj izvršenje brojnih primjera  Gcompris-a."
+
+msgid ""
+"GCompris is free software released under the GPL License. In order to support its development, this version provides only %d of the %d activities. You can get the full version for a small fee at\n"
+"<http://gcompris.net>\n"
+"The GNU/Linux version does not have this restriction. If you also believe that we should teach freedom to children, please consider using GNU/Linux. Get more information at FSF:\n"
+"<http://www.fsf.org/philosophy>"
+msgstr ""
+"GCompris je slobodan softver izdat pod GPL licencom. Kako bi se pružila podrška za njegov razvoj,  Windows verzija omogućava samo %d od %d aktivnosti. Verziju sa svim aktivnostima moguće je dobiti za malu naknadu na sajtu:\n"
+"<http://gcompris.net>\n"
+"Verzija GNU/Linux nema ovo ograničenje. GCompris je razvijen kako bi se škole oslobodilo od monopolista, prodavača softvera. Ukoliko i vi vjerujete kao bi djecu trebali učiti o slobodi, molim da razmislite o korištenju GNU Linux-a. Više informacija o možete pronaći ovdje:\n"
+"<http://www.fsf.org/ philosophy>"
+
+msgid "Failed to load the skin '%s' (Check the file exists and is readable)"
+msgstr "Nije očitan skin  '%s' (provjeri da li fajlpostoji i da li je čitljiv)"
+
+msgid "GCompris won't start because the lock file is less than %d seconds old.\n"
+msgstr "GCompris neće početi sa radom jer je fajl za zaključavanje star manje od %d sekundi .\n"
+
+msgid "The lock file is: %s\n"
+msgstr "Fajl za zaključavanje je: %s\n"
+
+msgid ""
+"GCompris\n"
+"Version: %s\n"
+"Licence: GPL\n"
+"More info at http://gcompris.net\n"
+msgstr ""
+"GCompris\n"
+"Verzija: %s\n"
+"Licenca: GPL\n"
+"Više informacija: http://gcompris.net\n"
+
+msgid "Use -l to access an activity directly.\n"
+msgstr "Koristi -l za direktno pristupanje aktivnosti.\n"
+
+msgid "The list of available activities is :\n"
+msgstr "Lista aktivnosti koje su na raspolaganju :\n"
+
+msgid "Number of activities: %d\n"
+msgstr "Broj aktivnosti: %d\n"
+
+msgid "%s exists but is not readable or writable"
+msgstr "%s postoji ali se ne može čitati ili pisati "
+
+msgid "The --server option cannot be used because GCompris has been compiled without network support!"
+msgstr "--server opcija se ne može koristiti jer je GCompris kompajliran bez podrške mreže!"
+
+msgid "ERROR: Profile '%s' is not found. Run 'gcompris --profile-list' to list available ones\n"
+msgstr "GREŠKA: Profil '%s' nije pronađen. Pokreni 'gcompris --profile-list' da izlista one koje su na raspolaganju \n"
+
+msgid "The list of available profiles is:\n"
+msgstr "Lista profila na raspolaganju is:\n"
+
+msgid "Unaffected"
+msgstr "Nepromijenjen"
+
+msgid "Users without a class"
+msgstr "Korisnici bez odjeljenja"
+
+msgid ""
+"Loading activity from database:\n"
+"%s"
+msgstr ""
+"Uitavanje aktivnosti iz baze podataka:\n"
+"%s"
+
+msgid "Prerequisite"
+msgstr "Preduslovi"
+
+msgid "Goal"
+msgstr "Cilj"
+
+msgid "Manual"
+msgstr "Upustvo"
+
+msgid "Credit"
+msgstr "Zasluge"
+
+msgid ""
+"Loading activity from file:\n"
+"%s"
+msgstr ""
+"Učitavanje aktivnosri sa fajla:\n"
+"%s"
+
+msgid "readme"
+msgstr "pročitaj me"
+
+msgid "This directory contains the files you create with the GCompris educational suite\n"
+msgstr "Ovaj program sadrži fajlove koje si ti napravio zajedno sa grupom igara obrazovne prirode  GCompris-a\n"
+
+msgid ""
+"Put any number of images in this directory.\n"
+"You can include these images in your drawings and animations.\n"
+"The image formats supported are jpeg, png and svg.\n"
+msgstr ""
+"Ubaci  koliko želiš slika u ovaj program.\n"
+"Možeš da uključiš te slike u sopstvene crteže i animacije.\n"
+"Formati slika su jpeg, png i svg.\n"
+
+msgid "Help"
+msgstr "Pomoć"
+
+msgid "About"
+msgstr "O "
+
+msgid "Previous level"
+msgstr "Prethodni nivo"
+
+msgid "Next level"
+msgstr "Sljedeći nivo"
+
+msgid "Refresh"
+msgstr "Refresh"
+
+msgid "Settings"
+msgstr "Podešavanja"
+
+msgid "Back"
+msgstr "Nazad"
+
+msgid "Stop"
+msgstr "Stop"
+
+msgid "Time Elapsed"
+msgstr "Proteklo vrijeme"
+
+msgid "Remaining Time = %d"
+msgstr "Preostalo vrijeme = %d"
+
+msgid "Drag and Drop the regions to redraw the whole country"
+msgstr "Povuci i spusti regije kako bi nacrtao cijelu zemlju"
+
+msgid "Locate the region"
+msgstr "Pronađi zemlju"
+
+msgid "Mouse manipulation: movement, drag and drop"
+msgstr "Korišćenje miša: kretanje, povlačenje i spustanje"
+
+msgid "The map of Germany comes from Wikipedia and is released under the GNU Free Documentation License. Olaf Ronneberger and his children Lina and Julia Ronneberger created the German level."
+msgstr "Karta Njemačke je preuzeta iz Wikipedia-je i izdata je pod „GNU Free Documentation“ dozvolom. Olaf Roneberger i njegova djeca Lina i Džulija Roneberger su tvorci  nivoa Njemačka"
+
+msgid "Regions of France"
+msgstr "Regije Francuske"
+
+msgid "Deutschland Bundesländer"
+msgstr "Njemačke savezne države"
+
+msgid "Provincias Argentinas"
+msgstr "Provincije Argentine"
+
+msgid "Polish Voivodship"
+msgstr "Poljske provincije"
+
+msgid "Districts of Turkey"
+msgstr "Oblasti Turske"
+
+msgid "Eastern Districts of Turkey"
+msgstr "Istočne oblasti Turske "
+
+msgid "Counties of Norway"
+msgstr "Zemlje Norveške"
+
+msgid "Counties of Brazil"
+msgstr "Zemlje Brazila"
+
+msgid "Drag and Drop the items to redraw the whole map"
+msgstr "Povuci i spusti da ponovo nacrtaš kartu"
+
+msgid "Locate the countries"
+msgstr "Lociraj zemlje"
+
+msgid "Africa"
+msgstr "Afrika"
+
+msgid "America"
+msgstr "Amerika"
+
+msgid "Antartica"
+msgstr "Antartik"
+
+msgid "Asia"
+msgstr "Azija"
+
+msgid "Continents"
+msgstr "Kontinenti"
+
+msgid "Europe"
+msgstr "Evropa"
+
+msgid "Oceania"
+msgstr "Okeanija "
+
+msgid "Alaska"
+msgstr "Aljaska"
+
+msgid "Bahamas"
+msgstr "Bahami"
+
+msgid "Canada"
+msgstr "Kanada"
+
+msgid "Cuba"
+msgstr "Kuba"
+
+msgid "Dominican Republic"
+msgstr "Dominikanska Republika"
+
+msgid "Greenland"
+msgstr "Grenland"
+
+msgid "Haiti"
+msgstr "Haiti"
+
+msgid "Iceland"
+msgstr "Island"
+
+msgid "Jamaica"
+msgstr "Jamajka"
+
+msgid "Mexico"
+msgstr "Meksiko"
+
+msgid "North America"
+msgstr "Sjeverna Amerika"
+
+msgid "United States of America"
+msgstr "Sjedinjene Američke Države"
+
+msgid "Argentina"
+msgstr "Argentina"
+
+msgid "Bolivia"
+msgstr "Bolivija"
+
+msgid "Brazil"
+msgstr "Brazil"
+
+msgid "Chile"
+msgstr "Čile"
+
+msgid "Colombia"
+msgstr "Kolumbija"
+
+msgid "Ecuador"
+msgstr "Ekvador"
+
+msgid "French Guiana"
+msgstr "Francuska Gvajana"
+
+msgid "Guyana"
+msgstr "Gvajana"
+
+msgid "Panama"
+msgstr "Panama"
+
+msgid "Paraguay"
+msgstr "Paragvaj"
+
+msgid "Peru"
+msgstr "Peru"
+
+msgid "South America"
+msgstr "Južna Amerika"
+
+msgid "Suriname"
+msgstr "Surinam"
+
+msgid "Uruguay"
+msgstr "Urugvaj"
+
+msgid "Venezuela"
+msgstr "Venecuela"
+
+msgid "Austria"
+msgstr "Austrija"
+
+msgid "Belgium"
+msgstr "Belgija"
+
+msgid "Denmark"
+msgstr "Danska"
+
+msgid "Finland"
+msgstr "Finska"
+
+msgid "France"
+msgstr "Francuska"
+
+msgid "Germany"
+msgstr "Njemačka"
+
+msgid "Ireland"
+msgstr "Irska"
+
+msgid "Italy"
+msgstr "Italija"
+
+msgid "Luxembourg"
+msgstr "Luksemburg"
+
+msgid "Norway"
+msgstr "Norveška"
+
+msgid "Portugal"
+msgstr "Portugal"
+
+msgid "Spain"
+msgstr "Španija"
+
+msgid "Sweden"
+msgstr "Švedska"
+
+msgid "Switzerland"
+msgstr "Švajcarska"
+
+msgid "The Netherlands"
+msgstr "Holandija"
+
+msgid "United Kingdom"
+msgstr "Ujedinjeno Kraljevstvo"
+
+msgid "Western Europe"
+msgstr "Zapadna Evropa"
+
+msgid "Albania"
+msgstr "Albanija"
+
+msgid "Belarus"
+msgstr "Bjelorusija"
+
+msgid "Bosnia Herzegovina"
+msgstr "Bosna i Hercegovina  "
+
+msgid "Bulgaria"
+msgstr "Bugarska"
+
+msgid "Croatia"
+msgstr "Hrvatska"
+
+msgid "Cyprus"
+msgstr "Kipar"
+
+msgid "Eastern Europe"
+msgstr "Istočna Evropa"
+
+msgid "Estonia"
+msgstr "Estonija"
+
+msgid "Greece"
+msgstr "Grčka"
+
+msgid "Hungary"
+msgstr "Mađarska"
+
+msgid "Latvia"
+msgstr "Latvija"
+
+msgid "Lithuania"
+msgstr "Litvanija "
+
+msgid "Macedonia"
+msgstr "Makedonija"
+
+msgid "Moldova"
+msgstr "Moldavija"
+
+msgid "Poland"
+msgstr "Poljska"
+
+msgid "Romania"
+msgstr "Rumunija"
+
+msgid "Russia"
+msgstr "Rusija"
+
+msgid "Serbia Montenegro"
+msgstr "Srbija i Crna Gora "
+
+msgid "Slovak Republic"
+msgstr "Slovačka  Republika"
+
+msgid "Slovenia"
+msgstr "Slovenija"
+
+msgid "Turkey"
+msgstr "Turska"
+
+msgid "Ukraine"
+msgstr "Ukrajina"
+
+msgid "Algeria"
+msgstr "Alžir"
+
+msgid "Benin"
+msgstr "Republika Benin"
+
+msgid "Burkina Faso"
+msgstr "Burkina Faso"
+
+msgid "Cameroon"
+msgstr "Kamerun"
+
+msgid "Central African Republic"
+msgstr "Centralna Afrička Republika"
+
+msgid "Chad"
+msgstr "Čad"
+
+msgid "Djibouti"
+msgstr "Džibuti"
+
+msgid "Egypt"
+msgstr "Egipat"
+
+msgid "Equatorial Guinea"
+msgstr "Ekvatorijalna Gvineja"
+
+msgid "Eritrea"
+msgstr "Eritreja"
+
+msgid "Ethiopia"
+msgstr "Etiopija"
+
+msgid "Gabon"
+msgstr "Gabon"
+
+msgid "Gambia"
+msgstr "Gambija"
+
+msgid "Ghana"
+msgstr "Gana"
+
+msgid "Guinea"
+msgstr "Gvineja"
+
+msgid "Guinea Bissau"
+msgstr "Gvineja Bisao"
+
+msgid "Ivory Coast"
+msgstr "Obala slonovače"
+
+msgid "Liberia"
+msgstr "Liberija"
+
+msgid "Libya"
+msgstr "Libija"
+
+msgid "Mali"
+msgstr "Mali"
+
+msgid "Mauritania"
+msgstr "Mauritania"
+
+msgid "Morocco"
+msgstr "Maroko"
+
+msgid "Niger"
+msgstr "Niger"
+
+msgid "Nigeria"
+msgstr "Nigerija"
+
+msgid "Northern Africa"
+msgstr "Sjeverna Afrika"
+
+msgid "Rwanda"
+msgstr "Ruanda"
+
+msgid "Senegal"
+msgstr "Senegal"
+
+msgid "Sierra Leone"
+msgstr "Sijera Leone"
+
+msgid "Somalia"
+msgstr "Somalija"
+
+msgid "Sudan"
+msgstr "Sudan"
+
+msgid "Togo"
+msgstr "Togo"
+
+msgid "Tunisia"
+msgstr "Tunis"
+
+msgid "Uganda"
+msgstr "Uganda"
+
+msgid "Western Sahara"
+msgstr "Zapadna Sahara"
+
+msgid "Angola"
+msgstr "Angola"
+
+msgid "Botswana"
+msgstr "Bocvana"
+
+msgid "Burundi"
+msgstr "Burundi"
+
+msgid "Democratic Republic of Congo"
+msgstr "Demokratska Republika Kongo"
+
+msgid "Kenya"
+msgstr "Kenija"
+
+msgid "Lesotho"
+msgstr "Lesoto"
+
+msgid "Madagascar"
+msgstr "Madagaskar"
+
+msgid "Malawi"
+msgstr "Malavi"
+
+msgid "Mozambique"
+msgstr "Mozambik"
+
+msgid "Namibia"
+msgstr "Namibija"
+
+msgid "Republic of Congo"
+msgstr "Republika Kongo"
+
+msgid "South Africa"
+msgstr "Južna Africa"
+
+msgid "Southern Africa"
+msgstr "Južna Afrika"
+
+msgid "Swaziland"
+msgstr "Svazilend"
+
+msgid "Tanzania"
+msgstr "Tanzanija"
+
+msgid "Zambia"
+msgstr "Zambija"
+
+msgid "Zimbabwe"
+msgstr "Republika Zimbabve"
+
+msgid "Simple Letters"
+msgstr "Prosta slova"
+
+msgid "Type the falling letters before they reach the ground"
+msgstr "Ukucaj slova koja padaju prije nego što padnu na dno"
+
+msgid "0123456789"
+msgstr "0123456789"
+
+msgid "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+msgstr "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+msgid ""
+"%s configuration\n"
+" for profile %s"
+msgstr ""
+"%s konfiguracija\n"
+"za profil %s"
+
+msgid "Enable sounds"
+msgstr "Uključi zvuk"
+
+msgid "Keyboard manipulation"
+msgstr "Upotreba tastature"
+
+msgid "Letter association between the screen and the keyboard"
+msgstr "Povezanost slova između ekrana i tastature"
+
+msgid "Equality Number Munchers"
+msgstr "Jednakost Stvorenja koja jedu brojeve "
+
+msgid "Guide the Number Muncher to the expressions that equal the number at the top of the screen."
+msgstr "Usmjeravaj stvorenje koje jede brojeve do svih izraza koji su  jednaki broju koji se nalazi na vrhu zaslona."
+
+msgid "Practice addition, multiplication, division and subtraction."
+msgstr "Vježbaj sabiranje, množenje, djeljenje i oduzimanje."
+
+msgid "Use the arrow keys to navigate around the board and to avoid the Troggles. Press the spacebar to eat a number."
+msgstr "Koristi tipke sa strelicama za navigaciju po ploči kako bi izbjegao Trogglove. Pritisni tipku “space“ da pojedeš broj."
+
+msgid ", %d"
+msgstr ", %d"
+
+msgid " and %d"
+msgstr " i %d"
+
+msgid "%d is divisible by %s."
+msgstr "%d je djeljiv sa %s."
+
+msgid "1 is not a prime number."
+msgstr "1 nije prost broj."
+
+msgid "Primes less than %d"
+msgstr "Prosti brojevi manji od %d"
+
+msgid ""
+"Multiples of %(d1)d include %(s)s,\n"
+"but %(d2)d is not a multiple of %(d3)d."
+msgstr ""
+"Proizvodi %(d1)d uključuju %(s)s,\n"
+"ali %(d2)d nije proizvod %(d3)d"
+
+msgid "Factors of %d"
+msgstr "Činioci %d"
+
+msgid "%s are the factors of %d."
+msgstr "%s su činioci  %d."
+
+msgid "Multiples of %d"
+msgstr "Proizvodi of %d"
+
+msgid "%s = %d"
+msgstr "%s = %d"
+
+msgid "%d + %d"
+msgstr "%d + %d"
+
+msgid "%d − %d"
+msgstr "%d + %d"
+
+msgid "%d × %d"
+msgstr "%d × %d"
+
+msgid "%d ÷ %d"
+msgstr "%d ÷ %d"
+
+msgid "Equal to %d"
+msgstr "Jednako je %d"
+
+msgid "Not equal to %d"
+msgstr "Nije jednako %d"
+
+msgid ""
+"You were eaten by a Troggle.\n"
+"Press <Return> to continue."
+msgstr ""
+"Trogl te pojeo. \n"
+"Pritisni <Enter> da nastaviš."
+
+msgid "You ate a wrong number.\n"
+msgstr "Pojeo-la si pogrešan broj. \n"
+
+msgid ""
+"\n"
+"Press <Return> to continue."
+msgstr ""
+"\n"
+"Pritisni <Enter> da nastaviš."
+
+msgid ""
+"T\n"
+"R\n"
+"O\n"
+"G\n"
+"G\n"
+"L\n"
+"E"
+msgstr ""
+"T\n"
+"R\n"
+"O\n"
+"G\n"
+"G\n"
+"L\n"
+"E"
+
+msgid "Factor Number Munchers"
+msgstr "Činilac, stvorenja koja jedu brojeve"
+
+msgid "Guide the Number Muncher to all the factors of the number at the top of the screen."
+msgstr "Usmjeri Stvorenja koja jedu brojeve do svih činilaca koji se nalaze na vrhu ekrana."
+
+msgid "Learn about factors and multiples."
+msgstr "Nauči o činiocima i proizvodima."
+
+msgid "The factors of a number are all the numbers that divide that number evenly. For example, the factors of 6 are 1, 2, 3 and 6. 4 is not a factor of 6 because 6 cannot be divided into 4 equal pieces. If one number is a multiple of a second number, then the second number is a factor of the first number. You can think of multiples as families, and factors are the people in those families. So 1, 2, 3 and 6 all fit into the 6 family, but 4 belongs to another family. Use the arrow keys to navigate around the board and to avoid the Troggles. Press the spacebar to eat a number."
+msgstr "Činioci jednog broja su svi brojevi s kojima je broj djeljiv bez ostatka.  Na primjer, faktori broja 6 su 1, 2 i 3.  4 nije činilac broja 6 jer 6 ne možemo podijeliti na 4 jednaka dijela. Ako je jedan broj proizvod drugog broja onda je drugi broj činilac prvog broja. Proizvode možemo da zamislimo kao porodice a činioci su članovi te porodice. Dakle 1, 2, 3 i 6 su članovi porodice 6 ali 4 je član druge porodice. Koristi tastere sa strelicama da izbegavaš Troglove. Pritisni tipku „space“ da pojedeš broj."
+
+msgid "Guide the Number Muncher to the all the expressions that do not equal the number at the top of the screen."
+msgstr "Usmjeri  stvorenje  do svih djielova koji nisu jednaki broju koji se nalazi na vrhu ekrana."
+
+msgid "Inequality Number Munchers"
+msgstr "Nejednakost, stvorenje "
+
+msgid "Practice addition, subtraction, multiplication and division."
+msgstr "Vježbaj sabiranje, oduzimanje, množenje i dijeljenje."
+
+msgid "Guide the Number Muncher to all the multiples of the number at the top of the screen."
+msgstr "Usmijeravaj stvorenje koje jede brojeve do proizvoda na vrhu ekrana."
+
+msgid "Learn about multiples and factors."
+msgstr "Nauči o o faktorima i množiteljima."
+
+msgid "Multiple Number Munchers"
+msgstr "Proizvod stvorenje koje jede brojeve"
+
+msgid "The multiples of a number are all the numbers that are equal to the original number times another number. For example, 24, 36, 48 and 60 are all multiples of 12. 25 is not a multiple of 12 because there isn't any number that can be multiplied by 12 to get 25. If one number is a factor of a second number, then the second number is a multiple of the first number. Again, you can think of multiples as families, and factors are the people who belong to those families. The factor 5, has parents 10, grandparents 15, great-grandparents 20, great-great-grandparents 25, and every extra step of 5 is another great- in front! But the number 5 does not belong in the 8 or 23 families. You can't fit any number of 5s into 8 or 23 with nothing left over. So '8 isn't a multiple of 5, nor is 23. Only 5, 10, 15, 20, 25 ... are multiples (or families or steps) of 5. Use the arrow keys to navigate around the board and to avoid the Troggles. Press the spacebar to eat a number."
+msgstr "Proizvodi nekog broja su svi brojevi koji se mogu dobiti kada se dati broj pomnoži sa nekim brojem. Na primer, 24, 36, 48 i 60 su svi proizvodi broja 12. Broj 25 nije proizvod broja 12 jer ne postoji cijeli broj kojim se broj 12 može pomnožiti da se dobije 25. Ako je jedan broj činilac drugog broja onda je taj drugi broj proizvod prvog broja. Proizvode možemo zamisliti kao porodice a činioce kao osobe koje pripadaju toj porodici. Činilac 5 ima tatu 10, djeda 15, pradjeda 20, čukundjedu 25 i svaki sljedeći za 5 veći broj. Ali broj 5 ne pripada porodici  8 ili 23. Ne možete staviti broj 5 u 8 ili 23 a da nemate ostatak. Dakle 8 nije proizvod broja 5 a nije ni 23. Samo 5, 10, 15, 20, 25 ... su proizvodi (ili porodice ili umnošci) broja 5. Koristi tastere sa strelicama da izbjegavaš Troglove. Pritisni taster za razmak da pojedeš broj.  "
+
+msgid "Guide the Number Muncher to all the prime numbers."
+msgstr "Usmjeri stvorenje do svih prostih brojeva."
+
+msgid "Learn about prime numbers"
+msgstr "Nauči o prostim brojevima"
+
+msgid "Prime Number Munchers"
+msgstr "Prosti brojevi stvorenje koje jede brojeve"
+
+msgid "Prime numbers are numbers that are only divisible by themselves and 1. For example, 3 is a prime number, but 4 isn't (because 4 is divisible by 2). You can think of prime numbers as very small families: they only ever have two people in them! Only themselves and 1. You can't fit any other numbers into them with nothing left over. 5 is one of these lonely numbers (only 5 × 1 = 5), but you can see that 6 has 2 and 3 in its family as well (6 × 1 = 6, 2 × 3 = 6). So 6 is not a prime number. Use the arrow keys to navigate around the board and to avoid the Troggles. Press the spacebar to eat a number."
+msgstr "Prosti brojevi su oni brojevi koji su djeljivi sa sobom i 1. Na primjer, 3 je prost broj, ali 4 nije (jer 4 je djeljivo i sa 2). Prosti brojevi su kao male porodice: one imaju samo dvoje ljudi u njima! Njih same i 1. Ne možete ih podijeliti sa još nekim brojem da nemate ostatak. 5 je jedan od usamljenih brojeva (samo 5 × 1 = 5), ali vidite da 6 ima i 2 i 3 u svojoj porodici (6 × 1 = 6, 2 × 3 = 6). Dakle 6 nije prost broj. Koristite tastere sa strelicama za kretanje po tabli i izbjegavanje Troglova. Pritisni taster za razmak da pojedeš broj. "
+
+msgid "Guess a number between %d and %d"
+msgstr "Pogodi broj između %d i %d"
+
+msgid "Please enter a number between %d and %d"
+msgstr "Molim unesi broj između %d i %d"
+
+msgid "Out of range"
+msgstr "Izvan domena"
+
+msgid "Too high"
+msgstr "Previše visoko"
+
+msgid "Too low"
+msgstr "Previše nisko"
+
+msgid "Guess a number"
+msgstr "Pogodi broj"
+
+msgid "Help Tux escape the cave. Tux hides a number for you to find."
+msgstr "Pomozi Tuxu da prođe kroz prolaz. Tux je sakrio broj koji trebaš da pronađeš."
+
+msgid "Numbers from 1 to 1000 for the last level."
+msgstr "Brojevi od 1 do 1000, posljednji nivo. "
+
+msgid "Read the instructions that give you the range of the number to find. Enter a number in the top right blue entry box. Tux will tell you if your number is higher or lower. Then enter another number. The distance between Tux and the escape area on the right represents how far you are from the correct number. If Tux is over or under the escape area, it means your number is over or under the correct number."
+msgstr "Pročitaj upustvo u kojem je naveden niz brojeva koje moraš da pronađeš. Unesi broj u plavo polje u desnom gornjem uglu. Tux će ti reći da li je skriveni broj veći ili manji . Onda unesi drugi broj. Udaljenost između Tuxa i izlaza na desnoj strani pokazuje koliko si blizu skrivenom broju. Ako je Tux iznad ili ispod izlaza onda je tvoj broj veći ili manji od skrivenog broja.  "
+
+msgid "Simplified Tower of Hanoi"
+msgstr "Uprošćena kula Hanoj"
+
+msgid "Reproduce the given tower"
+msgstr "Iskopiraj datu kulu"
+
+msgid "Build the same tower in the empty area as the one you see on the right-hand side."
+msgstr "Napravi kulu u prazni prostor istu kao što vidiš na desnoj strani."
+
+msgid "Concept taken from EPI games."
+msgstr "Ideja je preuzeta sa EPI igricama."
+
+msgid "Drag and Drop one top piece at a time, from one peg to another, to reproduce the tower on the right in the empty space on the left."
+msgstr "Povuci i spusti gornje djelove jedan po jedan, sa jednog klina na drugi kako bi napravio istu kulu sa desne strane u praznom prostoru na lijevoj strani."
+
+msgid "Reproduce the tower on the right in the empty space on the left"
+msgstr "Napravi kulu na lijevoj strani istu kao što je ona na desnoj strani"
+
+msgid "Tower of Hanoi"
+msgstr "Kula Hanoj"
+
+msgid "Move the entire stack to the right peg, one disc at a time"
+msgstr "Pomijei cijelu gomilu na desnu stranu , jedan po jedan disk"
+
+msgid "Drag and Drop the top pieces only from one peg to another, to reproduce the tower on the right in the empty space on the left."
+msgstr "Povuci i spusti dio sa jednog stuba na drugi,kako bi napravio-la kulu sa desne strane u prazni prostor koji se nalazi na lijevoj strani."
+
+msgid "Reproduce the tower on the right side"
+msgstr "Složi kulu na desnoj strani"
+
+msgid "The Tower of Hanoi"
+msgstr "Kula Hanoi"
+
+msgid ""
+"The object of the game is to move the entire stack to another peg, obeying the following rules:\n"
+"* only one disc may be moved at a time\n"
+"* no disc may be placed atop a smaller disc"
+msgstr ""
+"Cilj igre je Premještanje čitavog niza na drugi štap prateći  sljedeća pravila:\n"
+"* samo jedan disk može biti istovremeno premješten\n"
+"* veći disk ne smije biti stavljen na manji disk"
+
+msgid "The puzzle was invented by the French mathematician Edouard Lucas in 1883. There is a legend about a Hindu temple whose priests were constantly engaged in moving a set of 64 discs according to the rules of the Tower of Hanoi puzzle. According to the legend, the world would end when the priests finished their work. The puzzle is therefore also known as the Tower of Brahma puzzle. It is not clear whether Lucas invented this legend or was inspired by it. (source Wikipedia lt;http://en.wikipedia.org/wiki/Towerofhanoigt;)"
+msgstr "Slagalicu je izumio francuski matematičar Edouard Lucas1883. godine.Postoji legenda o Hindu hramu u kojem su sveštenici čitavo vrijeme bili zaokupljeni pomijeranjem 64 diska prema pravilima slagalica „Kule iz Hanoia“. Prema legendi, kada sveštenici završe s slaganjem slagalice desiće će se smak svijeta. Zbog toga je ta slagalica nazvana Kula Brahme. Nije poznato da li  je Lucas izmislio tu legendu ili je samo  bio inspirisan njom. (Izvor: Wikipedia lt;http://en.wikipedia.org/wiki/Towerofhanoigt;)"
+
+msgid "Find the strawberry by clicking on the blue fields"
+msgstr "Pronađi jagodu tako što ćeš kliknuti na plava polja "
+
+msgid "Try to find the strawberry under the blue fields. The fields become redder as you get closer."
+msgstr "Pokušaj da pronađeš jagodu ispod plavih polja. Polja postaju crvenija što si bliži/a skrivenoj jagodi."
+
+msgid "hexagon"
+msgstr "šestougao"
+
+msgid "Reading"
+msgstr "Čitanje "
+
+msgid "Learn how to read"
+msgstr "Nauči da čitaš"
+
+msgid "Data file for this level is not properly formatted. Too many choices are proposed."
+msgstr "Fajl sa podacima za ovaj nivo nije ispravno formirana. Previše opcija je ponuđeno."
+
+msgid "Data file for this level is not properly formatted."
+msgstr "Fajl sa podacima za ovaj nivo nije ispravno formirana."
+
+msgid "Click on the word corresponding to the printed image."
+msgstr "Klikni na riječ koja odgovara ispisanoj slici."
+
+msgid "Practice reading by finding the word matching an image"
+msgstr "Vježbaj  čitanje tako što ćeš  pronaći  riječ koja odgovara slici"
+
+msgid "Reading practice"
+msgstr "Vježba čitanja"
+
+msgid "apple"
+msgstr "jabuka"
+
+msgid "bag"
+msgstr "torba"
+
+msgid "banana"
+msgstr "banana"
+
+msgid "book"
+msgstr "knjiga"
+
+msgid "cheese"
+msgstr "sir"
+
+msgid "cow"
+msgstr "krava"
+
+msgid "house"
+msgstr "kuća"
+
+msgid "pear"
+msgstr "kruška"
+
+msgid "satchel"
+msgstr "torba"
+
+msgid "back"
+msgstr "nazad"
+
+msgid "ball"
+msgstr "lopta"
+
+msgid "bed"
+msgstr "krevet"
+
+msgid "boat"
+msgstr "brod"
+
+msgid "bottle"
+msgstr "boca"
+
+msgid "cake"
+msgstr "torta"
+
+msgid "camel"
+msgstr "kamila"
+
+msgid "car"
+msgstr "kola"
+
+msgid "cat"
+msgstr "mačka"
+
+msgid "catch"
+msgstr "kvaka"
+
+msgid "dog"
+msgstr "pas"
+
+msgid "finish"
+msgstr "kraj"
+
+msgid "fish"
+msgstr "riba"
+
+msgid "plane"
+msgstr "avion"
+
+msgid "Drag and Drop each item above its name"
+msgstr "Povuci i spusti  svaki predmet iznad njegovog naziva"
+
+msgid "Drag each image from the (vertical) box on the left to its (corresponding) name on the right. Click the OK button to check your answer."
+msgstr "Stavi  svaku sličicu iz kutije koja se nalazi na lijevoj strani ekrana na njen naziv na desnoj strani. Klikni  Ok dugme da provjeriš svoj odgovor."
+
+msgid "Image Name"
+msgstr "Naziv slike"
+
+msgid "Vocabulary and reading"
+msgstr "Vokabular i čitanje"
+
+msgid "Drag and Drop each item onto its name"
+msgstr "Povuci i spusti  svaki predmet na njegov naziv"
+
+msgid "bulb"
+msgstr "sijalica"
+
+msgid "fishing boat"
+msgstr "ribarski čamac "
+
+msgid "lamp"
+msgstr "lampa"
+
+msgid "mail box"
+msgstr "poštansko sanduče"
+
+msgid "postcard"
+msgstr "razglednica"
+
+msgid "sailing boat"
+msgstr "jedrenjak"
+
+msgid "egg"
+msgstr "jaje"
+
+msgid "eggcup"
+msgstr "stalak za jaje"
+
+msgid "flower"
+msgstr "cvijet"
+
+msgid "glass"
+msgstr "čaša"
+
+msgid "vase"
+msgstr "vaza"
+
+msgid "light house"
+msgstr "svetionik"
+
+msgid "rocket"
+msgstr "raketa"
+
+msgid "sofa"
+msgstr "sofa"
+
+msgid "star"
+msgstr "zvjezda"
+
+msgid "bicycle"
+msgstr "biciklo"
+
+msgid "carrot"
+msgstr "šargarepa"
+
+msgid "grater"
+msgstr "renda"
+
+msgid "tree"
+msgstr "drvo"
+
+msgid "pencil"
+msgstr "olovka"
+
+msgid "truck"
+msgstr "kamion"
+
+msgid "van"
+msgstr "kombi"
+
+msgid "castle"
+msgstr "zamak"
+
+msgid "crown"
+msgstr "kruna"
+
+msgid "flag"
+msgstr "zastava"
+
+msgid "racket"
+msgstr "raketa"
+
+msgid "left"
+msgstr "lijevo"
+
+msgid "right"
+msgstr "desno"
+
+msgid "Determine if a hand is a right or a left hand"
+msgstr "Odluči da li je lijeva ili desna ruka."
+
+msgid "Distinguish right and left hands from different points of view. Spatial representation"
+msgstr "Uočite razliku između lijeve i desne ruke posmatranjem iz raznih uglova. Prostorni prikaz"
+
+msgid "Find your left and right hands"
+msgstr "Pronađi svoju lijevu i desnu šaku"
+
+msgid "None"
+msgstr "Nijedna"
+
+msgid "You can see a hand: is it a left hand or a right hand? Click on the red button on the left, or the green button on the right."
+msgstr "Vidiš ruku: odredi da li je  to lijeva ili desna ruka? Pritisni na crvenu tipku za lijevu ruku ili zelenu tipku za desnu ruku."
+
+msgid ""
+"Switch off all the lights, I have to go to sleep.\n"
+"If you need help, click on me."
+msgstr ""
+"Izgasi sva svijetla, moram da spavam.\n"
+"Ako ti je potrabna pomoć, klikni na meni. "
+
+msgid "Lights Off"
+msgstr "Svijetla ugašena"
+
+msgid "The aim is to switch off all the lights."
+msgstr "Cilj je da izgasiš sva svijetla."
+
+msgid "The effect of pressing a button is to toggle the state of that button, and of its immediate vertical and horizontal neighbours. The sun and the color of the sky depend on the number of clicks needed to solve the puzzle. If you click on Tux, the solution is shown."
+msgstr "Efekat pritiskanja dugmeta je da prebaci u drugo stanje to dugme i neposredne susjede vertikalno ili horizontalno. Sunce i boje neba zavise od broja klikova potrebnih da se slahgalica razriješi. Ako likneš na Tuksa prikaza će se rješenje."
+
+msgid "The solver algorithm described on haar.clara.co.uk is a valuable resource to know more about the Lights Off game: lt;http://www.haar.clara.co.uk/Lights/solving.htmlgt;"
+msgstr "Da biste riješili algoritam  haar.clara.co.uk je pravo mjesto gdje možete pronaći dodatne informacije o ugasi svijetla igri: lt;http://www.haar.clara.co.uk/Lights/solving.htmlgt;"
+
+msgid "Profile: "
+msgstr "Profil:"
+
+msgid "Login: "
+msgstr "Prijavljivanje:"
+
+msgid "Enter login to log in"
+msgstr "Unesi podatke za prijavljivanje da se prijaviš"
+
+msgid "GCompris identifies each child, so we can provide child-specific reports."
+msgstr "GCompris razlikuje  svako dijete, tako da mi pružamo izvještaje za svako dijete pojedinačno. "
+
+msgid "GCompris login screen"
+msgstr "GCompris dio za prijavljivanje"
+
+msgid ""
+"In order to activate the login screen, you must\n"
+"first add users in the administration part of GCompris.\n"
+"You access Administration by running 'gcompris -a'.\n"
+"In Administration, you can create different profiles. In each profile,\n"
+"you can have a different set of users and select which activities are available to them.\n"
+"To run GCompris for a specific profile, you use 'gcompris -p profile' where 'profile'\n"
+"is the name of a profile as you created it in Administration."
+msgstr ""
+"Kako bi ste aktivirali ekran za prijavljivanje , moraš prvo\n"
+"dodati korisnike u administratorskon dijelu GCompris-a.\n"
+"Administratorskom dijelu možete prići uz pomoć 'gcompris -a'.\n"
+"U tom dijelu možeš napraviti različite profile. U svakom profili \n"
+"možeš imati različite korisnike stoga odaberi aktivnosti koje su namjenjene tom tipu korisnika.\n"
+"Kako bi pokrenuli GCompris za određeni profil, upišite ovu naredbu iz terminala: 'gcompris -p ImeProfila'.\n"
+"ImeProfila ste dodijelili određenom profilu u Administratorskom dijelu.   "
+
+msgid "Select or enter your name to log in to GCompris"
+msgstr "Označi ili upiši svoje ime za prijavljivanje u GCompris"
+
+msgid "Count how many items are under the magic hat after some have got away"
+msgstr "Izračunaj koliko je zvijezdica ostalo pod šeširom nakon što su neke nestale "
+
+msgid "Learn subtraction"
+msgstr "Nauči oduzimanje"
+
+msgid "Look at the magician, he tells the number of stars that are under his magic hat. Then, click on the hat to open it. A few stars escape. Click again on the hat to close it. You have to count how many are still under the hat. Click on the bottom right area to answer."
+msgstr "Gledaj u  mađioničara, on će ti reći koliko je zvijezdica ostalo ispod magičnog šešira. Zatim klikni na šešir i on će se otvoriti. Nekoliko zvjezdica će pobijeći. Zatim klikni opet na šešir da bi ga zatvorio/la. Sada treba da izbrojiš koliko je zvijezdica ostalo u šeširu. Klikni na polje u donjem desnom uglu da uneseš svoj  odgovor. "
+
+msgid "Subtraction"
+msgstr "Oduzimanje"
+
+msgid "The magician hat"
+msgstr "Magični šešir"
+
+msgid "Addition"
+msgstr "Sabiranje"
+
+msgid "Click on the hat to open or close it. Under the hat, how many stars can you see moving around? Count carefully. :) Click in the bottom-right area to input your answer."
+msgstr "Klikni na šešir da ga otvoriš i zatvoriš. Koliko zvijezda možeš da vidiš ispod šešira. Izbroj pažljivo. :) Klikni na polje u donjem desnom uglu da uneseš svoj  odgovor. "
+
+msgid "Count how many items are under the magic hat"
+msgstr "Izbroj koliko se stvari nalazi ispod čarobnog šešira"
+
+msgid "Learn addition"
+msgstr "Nauči sabiranje"
+
+msgid "Maze"
+msgstr "Lavirint"
+
+msgid "Find your way out of the maze"
+msgstr "Pronađi izlaz iz lavirinta "
+
+msgid "Look at your position, then switch back to invisible mode to continue your moves"
+msgstr "Pogledaj svoju poziciju, onda se vrati u vidljivi mod kako bi nastavio sa igrom"
+
+msgid "Look at your position, then switch back to 3D mode to continue your moves"
+msgstr "Pogledaj gdje si, onda se vrati u 3 d mod da nastaviš sa igranjem"
+
+msgid "Can use the keyboard arrow to move an object."
+msgstr "Koristi tipke sa strelicama da pomijeriš  Tuxa do vrata."
+
+msgid "Help Tux get out of this maze."
+msgstr "Pomogni Tux-u da izađe iz lavirinta."
+
+msgid "Use the keyboard arrows to move Tux up to the door."
+msgstr "Koristi tipke sa strelicama da pomijeriš  Tuxa do vrata."
+
+msgid "Find your way out of the maze (Move is relative)"
+msgstr "Pronađi izlaz iz lavirinta (pokret je relativan)"
+
+msgid "Use the keyboard arrows to move Tux up to the door. In this maze, the move is relative (first person). Use the up arrow to go forward. The other arrow let you turn Tux in another direction."
+msgstr "Koristi tipke sa strelicama da pomijeriš  Tuxa do vrata. U ovom lavirintu pokret je relativan (prva osoba). Koristi srelicu na gore za kretanje naprijed. Ostale strelice će pomijerati Tuxa u drugom smjeru."
+
+msgid "3D Maze"
+msgstr "3D Lavirint"
+
+msgid "Find your way out of the 3D maze"
+msgstr "Pronađi izlaz iz  3D lavirinta"
+
+msgid "Use the keyboard arrows to move Tux up to the door. Use the spacebar to switch between 2D and 3D modes. 2D mode just gives you an indication of your position, like a map. You cannot move Tux in 2D mode."
+msgstr "Strelicama vodi Tuxa do vrata. Dugmetom „space“  se prebacuj u 2D i 3D modu. 2D mod ti daje položaj gdje se nalaziš, kao karta. U 2D modu Tux se ne može kretati."
+
+msgid "Find your way out of the invisible maze"
+msgstr "Pronađi izlaz iz nevidljivog lavirinta "
+
+msgid "Use the keyboard arrows to move Tux up to the door. Use the spacebar to switch between invisible and visible modes. Visible mode just gives you an indication of your position, like a map. You cannot move Tux in visible mode."
+msgstr "Strelicama na tastaturi dovedi Tuxa do vrata. Koristi dugme „space“ da prebaciš u  vidljivi i nevidljivi mod. Vidljivi mod ti nagovještava gdje je tvoj položaj, nešto poput mape.  Ne možeš da pokrećeš Tuxa dok si u vidljivom modu."
+
+msgid ""
+"Error: this activity cannot be played with the\n"
+"sound effects disabled.\n"
+"Go to the configuration dialogue to\n"
+"enable the sound"
+msgstr ""
+"Greška: Ova aktivnost se ne može pustiti sa\n"
+"isključenim zvučnim efektima.\n"
+"Idi na dio sa konfiguracijama \n"
+"ukljući zvuk"
+
+msgid "Ear-training activity"
+msgstr "Vježbe slušanja "
+
+msgid "Listen to the sound sequence played, and repeat it by clicking on the elements. You can listen again by clicking on the repeat button."
+msgstr "Poslušaj zvučni zapis. Zatim pokušaj da ga ponoviš pritiskom na elemente. Možeš ga  ponovno poslušati pritiskom na dugme za ponavljanje."
+
+msgid "Melody"
+msgstr "Melodija"
+
+msgid "Repeat a melody"
+msgstr "Ponovi melodiju"
+
+msgid "zero"
+msgstr "nula"
+
+msgid "one"
+msgstr "jedan"
+
+msgid "two"
+msgstr "dva"
+
+msgid "three"
+msgstr "tri"
+
+msgid "four"
+msgstr "četri"
+
+msgid "five"
+msgstr "pet"
+
+msgid "six"
+msgstr "šest"
+
+msgid "seven"
+msgstr "sedam"
+
+msgid "eight"
+msgstr "osam"
+
+msgid "nine"
+msgstr "devet"
+
+msgid "Memory"
+msgstr "Igra memorije "
+
+msgid "Find the matching pair"
+msgstr "Pronađi odgovarajuće parove"
+
+msgid "A set of blank cards is shown. Each card has a picture on the other side, and each picture card has a twin exactly the same. Click on a card to see its hidden picture, and try to match the twins. You can only turn over two cards at once, so you need to remember where a picture is, while you look for its twin. When you turn over the twins, they both disappear."
+msgstr "Prikazane su prazne karte. Svaka karta ima sliku sa druge strane, a svaka slika ima svoj par. Odjednom možeš otkriti samo dvije karte, ti trebaš zapamtiti gdje se koja slika nalazi dok joj ne pronađeš par. Kada otkriješ par, obje karte nestanu."
+
+msgid "Flip the cards to find the matching pairs"
+msgstr "Okreći karte kako bi našao odgovarajuće parove"
+
+msgid "Memory Game with images"
+msgstr "Igra memorije sa slikama"
+
+msgid "Train your memory and remove all the cards"
+msgstr "Vježbaj pamćenje i ukloni sve karte"
+
+msgid "Addition memory game"
+msgstr "Sabiranje, igra memorije "
+
+msgid "Practise adding up, until all the cards are gone."
+msgstr "Vježbaj sabiranje dok ne nestanu sve karte."
+
+msgid "Turn the cards over to find two numbers which add up the same, until all the cards are gone."
+msgstr "Okreni karte i pronađi dva broja čije oduzimanje daje zadani rezultat sve dok ne nestanu sve karte."
+
+msgid ""
+"You can see some cards, but you can't see what's on the other side of them. Each card is hiding an adding-up sum, or the answer to the sum.\n"
+"An adding-up sum looks like this: 2 + 2 = 4\n"
+"The numbers on one side of the equals sign (=) have to be the same as the number on the other side. So 2 (1, 2) and 2 more (3, 4) makes 4. Count aloud when you work this out, and count on your fingers, because the more ways you do something, the better you remember it. You can also use blocks, or buttons, or anything you can count. If you have lots of brothers and sisters, you can count them! Or the kids in your class at school. Sing counting songs. Count lots of things, for practice, and you'll be very good at adding-up!\n"
+"\n"
+"In this game, these cards are hiding the two parts of an adding-up sum (also called an addition sum). You need to find the two parts of the sum, and bring them together again. Click on a card to see what number it's hiding, then try to find the other card that goes with it, to make a whole sum. You can only turn over two cards in one go, so you need to remember where the numbers are hiding, then you can match them when you find their other half. You're doing the job of the equals sign, and the numbers need you to put them together and make a proper sum. When you do that, both those cards disappear! When you've made them all disappear, found all the sums, you've won the game! :)"
+msgstr ""
+"Prikazane su karte, ali ne možeš vidjeti šta se nalazi s njihove druge strane. Svaka karta krije sabirnika ili rezultat.\n"
+"Zbir sabirnika  izgleda ovako 2+ 2 = 4\n"
+"Brojevi s jedna strane znaka jednakosti (=) moraju biti jednaki broju s druge strane. Dakle 2 (1, 2, ) plus 1 (3,4) daje 4. Dok igraš ovu igru broji naglas i na prste, jer na što više načina učiniš nešto, bolje češ razumjeti i zapamtiti. Isto tako možeš koristiti žetone ili bojice ili bilo što drugo. Ako imaš puno braće i sestara možeš brojati njima! Ili drugarima iy odjeljenja. Pjevaj brojalice.  Stalno nešto broji da bi što više brojao i postat ćeš odličan u sabiranju!\n"
+"Prikazane su karte, ali ne možeš vidjeti šta se nalazi s njihove druge strane. Svaka karta krije sabirnika ili rezultat.\n"
+"\n"
+"U ovoj igri karte kriju dva sabirnika. Potrebno je da pronađeš dva broja koja čine zbir sabiranja i da ih ponovo spojiš. Klikni na kartu da vidiš koji se broj krije, a zatim pokušaj da pronađeš drugu kartu koja krije odgovarajući broj da bi se dobila tražena suma. Odjednom možeš otkriti samo dvije karte, tako da moraš  zapamtiti gdje se brojevi skrivaju i onda ih možeš otkriti obje. U stvari,  ti trebaš da obaviš  zadatak znaka jednakosti, dakle brojevima je potrebna  tvoja pomoć da ih složiš u  ispravnu jednakost. Kada to napraviš obje karte će nestati. Kada sve karte nestanu, kada pronađeš sve zbireve, pobjedio/la si! :o)"
+
+msgid "Addition and subtraction memory game"
+msgstr "Igra memorije, sabiranje i oduzimanje "
+
+msgid "Practise addition, subtraction, until all the cards are gone."
+msgstr "Vježbaj sabiranje, oduzimanje sve dok sve karte ne nestanu."
+
+msgid "Turn the cards over to find two numbers which add or subtract the same, until all the cards are gone."
+msgstr "Okreći karte dok ne pronađeš dva broja koja sabiranjem ili oduzimanjem daju traženu sumu, sve dok karte ne nestanu. "
+
+msgid ""
+"You can see some cards, but you can't see what's on the other side of them. Each card is hiding an operation, or the answer to it.\n"
+"\n"
+"In this game, these cards are hiding the two parts of an operation. You need to find the two parts of the operation, and bring them together again. Click on a card to see what number it's hiding, then try to find the other card that goes with it, to make a whole operation. You can only turn over two cards in one go, so you need to remember where the numbers are hiding, then you can match them when you find their other half. You're doing the job of the equals sign, and the numbers need you to put them together and make a proper equality. When you do that, both those cards disappear! When you've made them all disappear, found all the operations, you've won the game! :)"
+msgstr ""
+"Prikazane su karte, ali ne naš štase nalazi s druge strane karata. Svaka karta krije neku operaciju ili rezultat.\n"
+"\n"
+"U ovoj igri karte skrivaju dva dijela operacije. Tvoj zadatak je da pronađeš oba dijela operacije i da ih ponovo spojiš . Klikni na kartu da vidiš koji broj(eve)  skriva, a zatim pokušaj da pronađeš  kartu koja ide zajedno s prvom i čini cijelu operaciju. Odjednom možeš otkriti samo dvije karte, tako da moraš da  zapamtiš dje se brojevi skrivaju i onda ih možeš otkriti obje. U stvari,  ti trebaš da obaviš  zadatak znaka jednakosti, dakle brojevima je potrebna  tvoja pomoć da ih složiš u  ispravnu jednakost. Kada to napraviš obje karte će nestati! Kada sve karte nestanu, kada pronađeš sve operacije, pobjedio/la si! :o)"
+
+msgid "Addition, subtraction, multiplication, division"
+msgstr "Sabiranje, oduzimanje, množenje i dijeljenje"
+
+msgid "All operations memory game"
+msgstr "Igra memorije, sve operacije"
+
+msgid "Practise addition, subtraction, multiplication, division, until all the cards are gone."
+msgstr "Vježbaj sabiranje, oduzimanje, množenje i dijeljenje, dok sve karte ne nestanu."
+
+msgid "Turn the cards over to find a matching operation, until all the cards are gone."
+msgstr "Okreći karte i pronađi odgovarajuću operaciju sve dok ne nestanu sve karte."
+
+msgid "All operations memory game against Tux"
+msgstr "Igra memorije protiv Tuxa, sve operacije"
+
+msgid "Addition and subtraction memory game against Tux"
+msgstr "Igra memorije protiv Tuxa, sabiranje i oduzimanje "
+
+msgid "Addition memory game against Tux"
+msgstr "Igra memorije protiv Tuxa, sabiranje "
+
+msgid "Additions"
+msgstr "Sabiranje"
+
+msgid "Division"
+msgstr "Djeljenje"
+
+msgid "Division memory game"
+msgstr "Igra memorije, djeljenje "
+
+msgid "Practise division, until all the cards are gone."
+msgstr "Vježbaj djeljenje sve dok sve karte nestanu."
+
+msgid "Division memory game against Tux"
+msgstr "Igra memorije protiv Tuxa, djeljenje "
+
+msgid "Enumeration memory game"
+msgstr "Brojanje igra memorije"
+
+msgid "Numeration training, memory."
+msgstr "Vježbaj brojanje, memorija."
+
+msgid "Turn the cards over to match the number with the drawn picture."
+msgstr "Okreći karte kako bi povezao-la broj sa crtežom."
+
+msgid "You can see some cards, but you can't see what's on the other side of them. Each card is hiding a number of pictures, or the written number."
+msgstr "Možeš vidjeti neke karte, ali ne možeš da im vidiš poležinu. Svaka karta krije nekoliko slika ili i napian broj."
+
+msgid "Practise subtraction, until all the cards are gone."
+msgstr "Vježbaj oduzimanje dok sve karte ne nestanu."
+
+msgid "Subtraction memory game"
+msgstr "Igra memorije, oduzimanje"
+
+msgid "Turn the cards over to find two numbers which subtract the same, until all the cards are gone."
+msgstr "Okreći karte i pronađi dva broja čije oduzimanje daje dati rezultat sve dok ne nestanu sve karte."
+
+msgid ""
+"You can see some cards, but you can't see what's on the other side of them. Each card is hiding a subtraction, or the answer to it.\n"
+"A subtraction looks like this: 3 - 1 = 2\n"
+"The numbers on one side of the equals sign (=) have to be the same as the number on the other side. So 3 (1, 2, 3) less 1 (1) makes 2. Count aloud when you work this out, and count on your fingers, because the more ways you do something, the better you remember it. You can also use blocks, or buttons, or anything you can count. If you have lots of brothers and sisters, you can count them! Or the kids in your class at school. Sing counting songs. Count lots of things, for practice, and you'll be very good at adding-up!\n"
+"\n"
+"In this game, these cards are hiding the two parts of a subtraction. You need to find the two parts of the subraction, and bring them together again. Click on a card to see what number it's hiding, then try to find the other card that goes with it, to make a whole sum. You can only turn over two cards in one go, so you need to remember where the numbers are hiding, then you can match them when you find their other half. You're doing the job of the equals sign, and the numbers need you to put them together and make a proper sum. When you do that, both those cards disappear! When you've made them all disappear, found all the subtracts, you've won the game! :)"
+msgstr ""
+"Prikazane su karte, ali ne možeš vidjeti šta se nalazi s njihove druge strane. Svaka karta krije razliku brojeva ili rezultat.\n"
+"Razlika npr. izgleda ovako 3 - 1 = 2\n"
+"Brojevi s jedne strane znaka jednakosti (=) moraju biti jednaki broju s druge strane. Dakle 3 (broji 1, 2, 3) manje 1 ( oduzmi 1) daje 2. Dok igraš  ovu igru broji naglas i broji na prste, jer na što više načina učiniš nešto, bolje češ razumjeti i zapamtiti. Isto tako možeš koristiti žetone ili bojice ili bilo što drugo. Ako imaš puno braće i sestara možeš brojati njima! Ili drugarima iz odjeljenja. Pjevaj brojalice.  Broji puno stvari i vidjećeš da ćeš biti odličan u sabiranju.  \n"
+"\n"
+"U ovoj igri karte skrivaju dva dijela razlike brojeva. Trebaš da pronađeš dva dijela razlike i ponovo ih spojš. Klikni na kartu i vidi koji broj(eve) skriva, zatim pokušaj da pronađeš  drugu kartu koja skriva drugi dio jednakosti. Odjednom možeš otkriti samo dvije karte, tako da trebaš zapamtiti gdje se brojevi skrivaju i onda ih možeš otkriti obje. U stvari,  ti trebaš da obaviš  zadatak znaka jednakosti, dakle brojevima je potrebna  tvoja pomoć da ih složiš u  ispravnu jednakost. Kada to napraviš obje karte će nestati! Kada sve karte nestanu, kada pronađeš sve razlike brojeva , pobjedio/la si! :o)"
+
+msgid "Subtraction memory game against Tux"
+msgstr "Igra memorije protiv Tuxa, oduzimanje. Tux"
+
+msgid "Multiplication"
+msgstr "Množenje"
+
+msgid "Multiplication memory game"
+msgstr "Igra memorije, množenje"
+
+msgid "Practise multiplication, until all the cards are gone."
+msgstr "Vježbaj množenje dok sve karte ne nestanu."
+
+msgid "Turn the cards over to find two numbers which multiply the same, until all the cards are gone."
+msgstr "Okreni karte i pronađi dva broja koji nakon množenja  daju dati rezultat sve dok ne nestanu sve karte."
+
+msgid "Multiplication and division memory game"
+msgstr "Igra memorije , množenje i djeljenje "
+
+msgid "Multiplication, division"
+msgstr "Množenje i dijeljenje "
+
+msgid "Practise multiplication, division, until all the cards are gone."
+msgstr "Vježbaj množenje i djeljenje, dok sve karte ne nestanu."
+
+msgid "Multiplication and division memory game against Tux"
+msgstr "Igra memorije protiv Tuxa , množenje i dijeljenje "
+
+msgid "Multiplication memory game against Tux"
+msgstr "Igra memorije protiv Tuxa, množenje "
+
+msgid "Practise multiplication until all the cards are gone."
+msgstr "Vježbaj množenje dok sve karte ne nestanu."
+
+msgid "A set of violinist Tux is shown. Each Tux has an associated sound, and each sound has a twin exactly the same. Click on a Tux to see its hidden sound, and try to match the twins. You can only activate two Tux at once, so you need to remember where a sound is, while you listen to its twin. When you turn over the twins, they both disappear."
+msgstr "Prikazano je nekoliko Tuxa violinista. Kada klikneš na Tuxa čut ćeš neki zvuk, a svaki zvuk ima svoj par, koji je identičan . Zapamtiti gdje se taj zvuk nalazi i pokušaj da pronađeš isti takav zvuk .Pošto možeš da otkriiješ  samo dva Tuxa odjednom, moraš zapamtiti gdje se zvuk nalazi. Kada odjednom čuješ dva ista zvuka, ta dva Tuxa će nestati."
+
+msgid "Audio memory game"
+msgstr "Igra pamćenja zvukova"
+
+msgid "Click on Tux the violinist and listen to find the matching sounds"
+msgstr "Klikni na violinista Tuxa i slušaj kako bi pronašao isti zvuk"
+
+msgid "Mouse manipulation, Brain."
+msgstr "Korišćenje miša. Razmišljanje."
+
+msgid "Train your audio memory and remove all the violonists Tux."
+msgstr "Vježbaj tvoju audio memoriju i otkloni sve violiniste."
+
+msgid "Audio memory game against Tux"
+msgstr "Igraj igru  pamćenja protiv Tuxa"
+
+msgid "Play the audio memory game against Tux"
+msgstr "Igraj igru  pamćenja zvukova protiv Tuksa"
+
+msgid "Have a memory competition with Tux."
+msgstr "Učestvuj takmičenju u memoriji protiv Tuksa."
+
+msgid "Memory Game with images, against Tux"
+msgstr "Igra memorije sa sličicama protiv Tuksa"
+
+msgid "You can see a set of cards that all look the same. Each card has a picture on the other side, and each picture has a twin somewhere in the set. You can only turn over two cards at once, so you need to remember where the pictures are until you can find the twin. When you turn over twins, they disappear! You take turns with Tux, and to win the game, you have to find more pairs of twins than he does."
+msgstr "Prikazane su prazne karte, istog izgleda. Svaka karta ima sliku sa druge strane, a svaka slika ima svoj par. Odjednom možeš otkriti samo dvije karte, ti trebaš da zapamtiš gdje se koja slika nalazi dok joj ne pronađeš par. Kada otkriješ par, obje karte nestanu! Ovu igraš protiv Tuxa, a kako bi pobijedio moraš da pronađeč  više parova od Tuksa."
+
+msgid "Reading numbers, memory."
+msgstr "Čitanje brojeva, memorija. "
+
+msgid "Turn the cards over to match the number with the word matching it."
+msgstr "Okreči karte kako bi povezao-la broj sa odgovarajućom rječju."
+
+msgid "Wordnumber memory game"
+msgstr "Riječbroj igra memorije"
+
+msgid "You can see some cards, but you can't see what's on the other side of them. Each card is hiding a number of number, or the word of the number."
+msgstr "Prikazane su karte ali ne možeš vidjeti poležinu karti. Svaka karta krije broj broja ili riječ broja. "
+
+msgid "An object is displayed in the main area, and an incomplete word is printed under the picture. Select the missing letter to complete the word."
+msgstr "Na glavnoj površini je prikazan objekat. Ispod slike je ispisana  nepotpuna riječ . Odaberi slovo koje nedostaje kako bi dopunio/la riječ."
+
+msgid "Fill in the missing letter"
+msgstr "Ukucaj slovo koje nedostaje"
+
+msgid "Missing Letter"
+msgstr "Slovo koje nedostaje"
+
+msgid "Training reading skills"
+msgstr "Vježbaj čitanje"
+
+msgid "Word reading"
+msgstr "Čitanje riječi"
+
+msgid "Please select an image."
+msgstr "Molim, odaberi sliku."
+
+msgid "Choice cannot be empty."
+msgstr "Izbor ne može da bude prazan."
+
+msgid "Question cannot be empty."
+msgstr "Pitanje ne može da bude prazno."
+
+msgid "Question must include the character ''. It represent the letter to search."
+msgstr "Pitanje mora uključiti ''. To predstavlja slovo koje se traži. "
+
+msgid "Pixmap cannot be empty"
+msgstr "Mapa ne smije biti prazna"
+
+msgid "There must be at least 2 choices."
+msgstr "Moraju postojati najmanje dva izbora."
+
+msgid "The answer and question must be the same except for the character ''."
+msgstr "Pitanje i odgovor moraju biti isti osim za oznaku  ''."
+
+msgid "The first choice must be the solution that replaces the character ''."
+msgstr "Prvi izbormora biti rješenje koje zamjenjuje oznaku  ''."
+
+msgid ""
+"Invalid entry:\n"
+"Question '%s' / Answer '%s'\n"
+"%s"
+msgstr ""
+"Nevažeći unos:\n"
+"Pitanje '%s' / Odgovor '%s'\n"
+"%s"
+
+msgid "Picture"
+msgstr "Slika"
+
+msgid "Answer"
+msgstr "Odgovor"
+
+msgid "Question"
+msgstr "Pitanje"
+
+msgid "Choice"
+msgstr "Izbor"
+
+msgid "Level:"
+msgstr "Nivo:"
+
+msgid "Level %d"
+msgstr "Nivo %d"
+
+msgid "Filename:"
+msgstr "Naziv fajla:"
+
+msgid "Replace the letter to guess by the character ''."
+msgstr "Zamjeni slovo koje treba da pogodiš oznakom ''."
+
+msgid "Enter here the letter that will be proposed. The first letter here must be the solution"
+msgstr "Ovdje ukucaj slovo od onih koja su ponužena. Prvo slovo mora biti rješenje"
+
+msgid "car/cr/a/k/o"
+msgstr "automobil/utomobil/a/k/o"
+
+msgid "dog/og/d/p/q"
+msgstr "pas/as/p/d/q"
+
+msgid "fish/fsh/i/u/l"
+msgstr "riba/rba/i/u/l"
+
+msgid "plane/lane/p/g/d"
+msgstr "avion/avon/i/g/d"
+
+msgid "apple/pple/a/i/o"
+msgstr "jabuka/abuka/j/i/o"
+
+msgid "banana/bnana/a/o/i"
+msgstr "banana/bnana/a/o/i"
+
+msgid "house/hous/e/a/i"
+msgstr "kuća/kća/u/a/i"
+
+msgid "satchel/stchel/a/o/i"
+msgstr "torba/toba/r/o/i"
+
+msgid "ball/all/b/p/d/m"
+msgstr "lopta/opta/l/p/d/m"
+
+msgid "bed/ed/b/l/f/t"
+msgstr "krevet/kreet/v/l/f/t"
+
+msgid "bottle/ottle/b/t/p/l"
+msgstr "boca/oca/b/t/p/l"
+
+msgid "cake/ake/c/p/d/k"
+msgstr "torta/orta/t/p/d"
+
+msgid "apple/appl/e/h/a/i/o/u"
+msgstr "jabuka/jabua/k/h/a/i/o/u"
+
+msgid "banana/anana/b/p/d/m"
+msgstr "banana/anana/b/p/d/m"
+
+msgid "car/ar/c/k/b/u"
+msgstr "automobil/utomobil/a/k/b/u"
+
+msgid "dog/dg/o/g/a/u"
+msgstr "pas/pa/s/g/a/u"
+
+msgid "fish/ish/f/h/l/j"
+msgstr "riba/rba/i/h/l/j"
+
+msgid "house/huse/o/f/u/i"
+msgstr "kuća/uća/k/f/u/i"
+
+msgid "plane/pane/l/j/i/t"
+msgstr "avion/aion/v/j/i/t"
+
+msgid "satchel/atchel/s/c/l/z"
+msgstr "torba/tora/b/c/l/z"
+
+msgid "apple/appe/l/h/n/i/t"
+msgstr "jabuka/jabua/k/h/n/i/t"
+
+msgid "ball/bll/a/u/o/e/i/y"
+msgstr "lopta/lota/p/u/o/e/i/y"
+
+msgid "ball/bal/l/h/s/z/t"
+msgstr "lopta/lopa/p/u/o/e/i/y"
+
+msgid "banana/baana/n/m/b/z/q"
+msgstr "banana/baana/n/m/b/z/q"
+
+msgid "bed/bd/e/a/i/o/u/s"
+msgstr "krevet/kevet/r/a/i/o/u/s"
+
+msgid "bed/be/d/p/b/c/v/n"
+msgstr "krevet/krvet/e/p/b/c/v/n"
+
+msgid "bottle/bttle/o/u/d/a/t/i"
+msgstr "boca/boa/c/u/d/a/t/i"
+
+msgid "bottle/botte/l/y/r/s/g"
+msgstr "boca/bca/o/u/d/a/t/i"
+
+msgid "cake/cke/a/o/e/i/u/y"
+msgstr "torta/tora/t/o/e/i/u/y"
+
+msgid "cake/cae/k/q/c/r/z"
+msgstr "torta/tort/a/o/e/i/u/y"
+
+msgid "car/ca/r/w/k/c/a"
+msgstr "automobil/automobi/l/w/k/c/a"
+
+msgid "dog/do/g/p/q/q/k"
+msgstr "pas/ps/a/p/q/q/k"
+
+msgid "fish/fis/h/o/i/y/z"
+msgstr "riba/iba/r/o/i/y/z"
+
+msgid "house/ouse/h/e/j/z/p/s"
+msgstr "kuća/uća/k/e/j/z/p/s"
+
+msgid "plane/plne/a/o/s/e/i/u/y"
+msgstr "avion/avio/n/o/s/e/i/u/y"
+
+msgid "satchel/sachel/t/p/c/z/s/l"
+msgstr "torba/orba/t/p/c/z/s/l"
+
+msgid "$ %.2f"
+msgstr "$ %.2f"
+
+msgid "$ %.0f"
+msgstr "$ %.0f"
+
+msgid "Can count"
+msgstr "Znaš da računaš"
+
+msgid "Click on the coins or paper money at the bottom of the screen to pay. If you want to remove a coin or note, click on it on the upper screen area."
+msgstr "Kako bi platio/la iznos koji se traži klikni na novčiće ili papirni novac u dnu ekrana. Ukoliko želiš da ukloniti novčić ili novčanicu, klikni na njih u gornjem djelu ekrana."
+
+msgid "Money"
+msgstr "Novac"
+
+msgid "Practice money usage"
+msgstr "Vježbaj da koristiš novac"
+
+msgid "You must buy the different items and give the exact price. At higher levels, several items are displayed, and you must first calculate the total price."
+msgstr "Moraš da kupiš različite stvari i da daš tačan iznos. Na većim nivoima više stvari su u ponudi i ti moraš  da izračunaš njihovu ukupnu cijenu."
+
+msgid "Practice money usage including cents"
+msgstr "Vježbaj da koristiš novac, uključujući i cente"
+
+msgid "Rebuild the same mosaic on the right area"
+msgstr "Napravi isti mozaik kao onaj koji se nalazi lijevoj strani"
+
+msgid "Rebuild the mosaic"
+msgstr "Napravi mozaik"
+
+msgid "Assemble the puzzle"
+msgstr "Sakupi slagalicu"
+
+msgid "Drag and Drop the items to rebuild the original paintings"
+msgstr "Povuci i ispusti dijelove kako napravio orginalne slike"
+
+msgid "Drag the image parts from the box on the left to create a painting on the main board."
+msgstr "Uzmi djelove crteža iz kutije  s lijeve strane i kreiraj crtež u glanoj tabeli."
+
+msgid "Mouse-manipulation: movement, drag and drop"
+msgstr "Korišćenje miša: kretanje miša, povlačenje i spustanje"
+
+msgid "Spatial representation"
+msgstr "Prostorni prikaz"
+
+msgid "Edgar Degas, The Dancing Class - 1873-75"
+msgstr "Edgar Dega, \" Čas baleta “ - 1873-75"
+
+msgid "Pierre-Auguste Renoir, Le Moulin de la Galette - 1876"
+msgstr "Pjer Ogist Renoar, Mulen de la Galet - 1876"
+
+msgid "Giuseppe Arcimboldo, Spring - 1573"
+msgstr "Giuseppe Arcimboldo, Proljeće - 1573"
+
+msgid "Giuseppe Arcimboldo, The Librarian - 1566)"
+msgstr "Giuseppe Arcimboldo, Bibliotekar- 1573)"
+
+msgid "Woman holding a fan"
+msgstr "Žena koja drži lepezu"
+
+msgid "Mona Lisa"
+msgstr "Mona Liza"
+
+msgid "Bellini : Pala di pesaro"
+msgstr "Belini : Pala di pesaro"
+
+msgid "Dürer : Lion"
+msgstr "Dürer : Lion"
+
+msgid "Pieter Brugel : Harvest"
+msgstr "Pieter Brugel : Žetva"
+
+msgid "Pierre-Auguste Renoir, Girls At The Piano - 1892"
+msgstr "Pjer Ogist Renoar, Djevojke za klavirom - 1892"
+
+msgid "Kandinsky, Wassily, Composition VIII - 1923"
+msgstr "Vasilij Vasiljevič Kandinski, Kompozicija VIII - 1923"
+
+msgid "Oil on canvas, 140 x 201 cm; Solomon R. Guggenheim Museum, New York"
+msgstr "Ulje na platnu, 140 x 201 cm; Gugenhaj muzej u Njujorku "
+
+msgid "Bazille, The Ramparts at Aigues-Mortes - 1867"
+msgstr "Bazij, The Ramparts at Aigues-Mortes - 1867"
+
+msgid "Cassatt, Mary - Summertime - 1894"
+msgstr "Meri Kasat - „Summertime - 1894"
+
+msgid "Vincent Van Gogh, Village Street in Auvers - 1890"
+msgstr "Vinsent Van Gog, Seoska ulica u Auversu - 1890"
+
+msgid "Control fall speed with up and down arrow keys."
+msgstr "Kontroliši brzinu pada sa dugmadima sa strelicama."
+
+msgid "Help Tux the parachutist land safely"
+msgstr "Pomognu Tuxu da se sigurno spusti padobranom"
+
+msgid "Hit any key or click on the plane to make Tux jump. Hit another key or click on Tux to open the parachute."
+msgstr "Pritisni bilo koju tipku ili klikni na avion da Tux skoči. Pritisni drugu tipku ili klikni na Tuxa da bi se padobran otvorio."
+
+msgid "In this game, Tux the parachutist needs help to land safely on the fishing boat. He needs to allow for the wind direction and speed."
+msgstr "U ovoj igri, Tuxu padobranacu je potrebna pomoć kako bi sigurno sletio na brod. Moraš da paziš na brzinu i smjer vjetra. "
+
+msgid "Parachutist"
+msgstr "Padobranac"
+
+msgid "This board is game-oriented. No specific skills are needed to play."
+msgstr "Za igranje ove igre nisu potrebne posebne vještine."
+
+msgid "Click on the balloon to place it again."
+msgstr "Klikni na balon da ga ponovo smjestiš."
+
+msgid "Click twice on the balloon to shoot it."
+msgstr "Klikni na balon dva puta da ga pogodiš."
+
+msgid "Double click the mouse on the ball to kick it. You can double click the left right or middle mouse button. If you lose, Tux catches the ball. You must click on it to bring it back to its former position"
+msgstr "Da udariš loptu klikni dva puta. Možeš kliknuti dva puta na desni, lijevi i srednji dio miša. Ako izgubiš Tux će uhvatiti loptu. Moraš i dalje klikćati kako bi je vratio na staro mjesto"
+
+msgid "Double click the mouse on the ball to score a goal."
+msgstr "Klikni dva puta na loptu kako bi postigao gol."
+
+msgid "Penalty kick"
+msgstr "Jedanaesterac"
+
+msgid "Error: Absolutely no photo found in the data directory"
+msgstr "Greška: Nijedna slka nije pronađena u bazi podataka"
+
+msgid "Click on the differences between the two images."
+msgstr "Klikni na razlike koje pronađeš između dvije slike. "
+
+msgid "Find the differences between two pictures"
+msgstr "Pronađi razlike imeđu dvije slike"
+
+msgid "Observe the two pictures carefully. There are some slight differences. When you find a difference you must click on it."
+msgstr "Pažljivo posmatraj slike. Postoje neke sitne razlike. Kada pronađeš razliku klikni na nju."
+
+msgid "Photo hunter"
+msgstr "Foto lovac"
+
+msgid "Visual discrimination."
+msgstr "Vizuelna diskriminacija."
+
+msgid "Numbers in Order"
+msgstr "Brojevi, redom"
+
+msgid "Move the plane to catch the clouds in the correct order"
+msgstr "Pomjeri helikopter kako bi uhvatio/la oblake pravilnim redoslijedom"
+
+msgid "Catch the numbers in increasing order, using the up, down, right and left arrows on the keyboard to move the helicopter."
+msgstr "Uhvati brojeve u rastećem redoslijedu  koristeći tipke sa strelicama (na gore, na dolje, lijevo i desno ) kako bi pomijerao/la helikopter."
+
+msgid "Move the helicopter to catch the clouds in the correct order"
+msgstr "Upravljaj helikopterom kako bi uhvatio/la oblake pravilnim redosljedom"
+
+msgid "Number"
+msgstr "Broj"
+
+msgid ""
+"This is the first plugin in GCompris coded in the Python\n"
+"Programming language."
+msgstr ""
+"Ovo je prvo uključivanje u Gcompris kodiranom u Pajonu \n"
+"Programski jezik."
+
+msgid "Add a language-binding to GCompris."
+msgstr "Dodaj jezik u Gcompris."
+
+msgid "Advanced Python Programmer :)"
+msgstr "Savremeni Pajton programer :)"
+
+msgid "An empty python activity to use as a starting point"
+msgstr "Koristi praznu pajton aktivnost kao polaznu tačku"
+
+msgid "Python Template"
+msgstr "Pajton šablon"
+
+msgid "Thanks to Guido van Rossum and the python team for this powerful language!"
+msgstr "Hvala Gvidu van Rosumu i „pajton“ timu za ovaj moćan jezik!"
+
+msgid ""
+"It is now possible to develop GCompris activities in C or in Python.\n"
+"Thanks to Olivier Samys who makes this possible."
+msgstr ""
+"Sada je moguće razviti GCompris aktivnosti u C-u ili Pajtonu. \n"
+"Hvala Oliveru Samys-u što nam je to omogućio."
+
+msgid "This activity is not playable, just a test"
+msgstr "Ova aktivnost se ne može igrati, samo testirati"
+
+msgid "Disable line drawing in circle"
+msgstr "Onesposobi liniju tako što ćeš crtati u krugu"
+
+msgid "Color of the line"
+msgstr "Boja linije"
+
+msgid "Distance between circles"
+msgstr "Udaljenost između krugova"
+
+msgid "Use circles"
+msgstr "Koristi krugove"
+
+msgid "Use rectangles"
+msgstr "Koristi troglove"
+
+msgid "Choice of pattern"
+msgstr "Odabir šara"
+
+msgid "Python Test"
+msgstr "Pajton  Test"
+
+msgid "Test board for the python plugin"
+msgstr "Ispitni dio za dodatak Pajtona"
+
+msgid "Memory game"
+msgstr "Igra memorije "
+
+msgid "Build a train according to the model"
+msgstr "Napravi voz po ugledu na model"
+
+msgid "A memory game based on trains"
+msgstr "Igra memorije sa  vozovima"
+
+msgid "A train - a locomotive and carriage(s) - is displayed at the top of the main area for a few seconds. Rebuild it at the top of the screen by selecting the appropriate carriages and locomotive. Deselect an item by clicking on it again. Check your construction by clicking on the hand at the bottom."
+msgstr "Voz - lokomotiva i vagon(i) - prikazani su pri vrhu glavne površine za igranje nekoliko sekundi. Složi istu takvu konstrukcijuvrhu ekrana tako što ćeš odabrati prave vagon(e) i lokomotivu. Možeš ih vratiti tako što ćeš kliknuti na njih ponovo. Provjeri svoju konstrukciju tako što ćeš kliknuti na podignuti palac u donjem dijelu ekrana."
+
+msgid "Memory-training"
+msgstr "Vježbe pamćenja"
+
+msgid "Railway"
+msgstr "Željeznička pruga"
+
+msgid "blue"
+msgstr "plava"
+
+msgid "brown"
+msgstr "braon"
+
+msgid "green"
+msgstr "zelena"
+
+msgid "grey"
+msgstr "siva"
+
+msgid "orange"
+msgstr "narandžasta"
+
+msgid "violet"
+msgstr "ljubičasta "
+
+msgid "red"
+msgstr "crvena"
+
+msgid "yellow"
+msgstr "žuta"
+
+msgid "black"
+msgstr "crna"
+
+msgid "white"
+msgstr "bijela"
+
+msgid "pink"
+msgstr "roza"
+
+msgid "Click on the correct colored object."
+msgstr "Klikni na predmet odgovarajuće boje ."
+
+msgid "Click on the matching color"
+msgstr "Klikni na odgovarajuću boju "
+
+msgid "Read the names of colors"
+msgstr "Čitaj imena boja"
+
+msgid "This board teaches basic colors."
+msgstr "Ova igra te uči osnovnim bojama."
+
+msgid ""
+"Error: We can't find\n"
+"a list of words to play this game.\n"
+msgstr ""
+"Greška: Ne možemo da pronađemo\n"
+"listu sa riječima kako bi igrali ovu igru. \n"
+
+msgid "Please, check if the word"
+msgstr "Molim, provjeri da li je riječ"
+
+msgid "is being displayed"
+msgstr "prikazana"
+
+msgid "We skip this level because there are not enough words in the list!"
+msgstr "Preskočićemo ovaj nivo jer nema dovoljno riječi na listi!"
+
+msgid "Yes, I saw it"
+msgstr "Da, vidim je"
+
+msgid "No, it was not there"
+msgstr "Ne, nije bila tu"
+
+msgid "The word to find was '%s'"
+msgstr "Riječ koju je trebalo pronaći je '%s'"
+
+msgid "But it was not displayed"
+msgstr "Ali nije prikazana"
+
+msgid "And it was displayed"
+msgstr "I bila je prikazana"
+
+msgid "A word is shown at the top right of the board. A list of words will appear and disappear on the left. Does the given word belong to the list?"
+msgstr "U gornjem desnom djelu prikazana je riječ. S lijeve strane pojaviće se i nestati lista riječi. Tvoj zadatak je da otkriješ da li se tražena riječ nalazi na listi? "
+
+msgid "Horizontal reading practice"
+msgstr "Vježba čitanja vodoravno"
+
+msgid "Read a list of words and work out if a given word is in it"
+msgstr "Pročitaj listu riječi i kaži da li je data riječ na listi"
+
+msgid "Reading training in a limited time"
+msgstr "Vježbanje čitanja u ograničenom vremenskom periodu"
+
+msgid "Read a vertical list of words and work out if a given word is in it"
+msgstr "Čitaj vertikalnu  listu riječi i odluči da li je zadata riječ na listi"
+
+msgid "Read training in a limited time"
+msgstr "Vježbanje čitanja u ograničenom vremenskom periodu"
+
+msgid "Vertical-reading practice"
+msgstr "Vježbanje čitanja riječi napisanih  vertikalno"
+
+msgid "Coordinate"
+msgstr "Koordiniraj"
+
+msgid "Copy a drawing from the box on the right into the box on the left."
+msgstr "Kopiraj crtež iz kutije  s desne strane u kutiju na lijevoj strani."
+
+msgid "First, select the proper tool from the toolbar. Then drag the mouse to create objects. When you are done, click on the OK button. Errors will be marked with a little red cross. The order of objects (above/under) is not important but be careful not to end up with unwanted objects under others."
+msgstr "Prvo odaberi adekvatan alat a zatim povuci miša kako bi pravio/la predmete. Kada završiš klikni na Ok dugme. Greške koje si napravio/la biće označene crvenim krstićem. Redoslijed predmeta nije važan, samo vodi računa da ne postaviš neki neželjeni predmet ispod drugih predmeta."
+
+msgid "Redraw the given item"
+msgstr "Nacrtaj kopiju  datog predmeta"
+
+msgid "Copy the mirror image of an object from the box on the right into the box on the left."
+msgstr "Iskopiraj sliku u ogledalu jednog od predmeta iz kutije na desnoj strani u kutiju na lijevoj strani. "
+
+msgid "First, select the proper tool from the toolbar. Then drag the mouse to create objects. When you are done, click on the OK button. A little red cross will show you where something isn't right yet. The order of objects (above/under) is not important but be careful not to end up with unwanted objects under others."
+msgstr "Prvo odaberi alat a zatim povuci miša kako bi pravio/la predmete. Kada završiš klikni na Ok dugme. Ono što nije u redu biće označeno crvenim krstićem. Redoslijed predmeta nije važan, samo vodi računa da ne postaviš neki neželjeni predmet ispot drugih predmeta."
+
+msgid "Mirror the given item"
+msgstr "Ogledaj dati predmet"
+
+msgid "Can move the mouse, can read numbers and subtract numbers up to 10 for the first level"
+msgstr "Znaš da pomijeraš miša , čitaš brojeve i da oduzimaš do 10 u prvom nivou"
+
+msgid "Click on the dice to show how many ice spots there are between Tux and the fish. Click the dice with the right mouse button to count backwards. When done, click on the OK button or hit the Enter key."
+msgstr "Klikni na kockicu da ti pokaže koliko ima ledenih tačaka između Tuksa i ribe. Zatim desni klik, kako bi brojao/la unazad. Kada završiš klikni dugme Ok ili Enter."
+
+msgid "Practice subtraction with a fun game"
+msgstr "Vježbaj oduzimanje na zabavan način"
+
+msgid "Tux is hungry. Help him find fish by counting to the correct ice spot."
+msgstr "Tuks je gladan. Pomozite mu da nađe ribe brojanjem ledenih točaka."
+
+msgid "Weight in g = %s"
+msgstr "Težina u gr = %s"
+
+msgid "Weight = %s"
+msgstr "Težina = %s"
+
+msgid "Take care, you can drop masses on both sides of the scale."
+msgstr "Obrati pažnju, možeš spustiti tegove  na obje strane vage."
+
+msgid "Balance the scales properly"
+msgstr "Pravilno ujednači vagu"
+
+msgid "Drag and Drop masses to balance the scales"
+msgstr "Povuci i spusti tegove kako bi podesio vagu"
+
+msgid "Mental calculation, arithmetic equality"
+msgstr "Računanje napamet, aritmetička jednakost"
+
+msgid "The painting is an original painting created by Virginie MOREAU (virginie.moreau@free.fr) in 2001. Its name is 'Spices Seller in Egypt'. It is released under the GPL licence."
+msgstr "Sliku je naslikao Virginie MOREAU (virginie.moreau@free.fr) 2001. Naziv slike je 'Trgovac začinima u Egiptu'. Slika je izdata pod GPL licencom"
+
+msgid "To balance the scales, move the masses on the left or the right side. The masses can be arranged in any order."
+msgstr "Da bi ujednačio/la strane, premjesti tegove na lijevu tacnu vage. Tegove možeš slagati kako god želiš."
+
+msgid "Drag and Drop masses to balance the scales and calculate the weight"
+msgstr "Povuci i spusti tekove kako bi izračunao-la težinu"
+
+msgid "Mental calculation, arithmetic equality, unit conversion"
+msgstr "Računanje napamet, aritmetička jednakost, pretvaranje jedinica"
+
+msgid "To balance the scales, move the masses on the left or the right side. Take care of the weight and the unit of the masses, remember that a kilogram (kg) is 1000 grams (g). They can be arranged in any order."
+msgstr "Kako bi balansirao-la vagu, pomjeraj tegove sa lijeve i desne strane. Obrati pažnju na težinu i na jedinicu tegova, imaj na umu da je jedan kilogram(kg) 100 grama(g).Tegovi mogu biti poređani po želji. "
+
+msgid "The race is already being run"
+msgstr "Trka je već počela"
+
+msgid "forward"
+msgstr "naprijed"
+
+msgid "COMMANDS ARE"
+msgstr "KOMANDE SU"
+
+msgid "This is a draw"
+msgstr "Ovo je nacrt"
+
+msgid "The Red boat has won"
+msgstr "Crveni brod je pobjedio"
+
+msgid "The Green boat has won"
+msgstr "Zeleni brod je pobjedio"
+
+msgid "Angle:"
+msgstr "Ugao:"
+
+msgid "Wind:"
+msgstr "Vjetar"
+
+msgid "Syntax error at line"
+msgstr "Sintaksna greška na liniju"
+
+msgid "The command"
+msgstr "Komanda"
+
+msgid "Unknown command at line"
+msgstr "Nepoznata komanda na liniji"
+
+msgid "Distance:"
+msgstr "Udaljenost:"
+
+msgid "Direct your boat accurately to win the race."
+msgstr "Precizno upravljaj brodom da bi pobijedio/la u trci."
+
+msgid ""
+"In the text entry, enter one command per line, to control your boat.\n"
+"Commands supported are displayed between the two entry areas. The 'left' and 'right' commands must be followed by an angle in degrees. The angle value is also called a 'parameter' to the left or right command. By default 45 degrees is used. The 'forward' command accepts a distance parameter. By default 1 is used.\n"
+"For example:\n"
+"- left 90: Make a perpendicular left turn\n"
+"- forward 10: Go forward for 10 units (as displayed on the ruler).\n"
+"The goal is to reach the right of the screen (the red line). When done, you can try to improve your program and start a new race with the same weather conditions by using the retry button. You can click and drag your mouse anywhere on the map to get a measurement in distance and angle. Going to the next level will give you more complex weather conditions."
+msgstr ""
+"Kako bi upravljao/la brodom u polju za tekst upiši jednu komandu u jednom redu .Moguće komande su prikazane između dva polja za unos. Iza komande 'lijevo'\"ili  'desno' moraš upisati ugao u stepenima. Veličina ugla zove se još i \"'parametar' komande 'lijevo' i 'desno'. Standarni ugao je od 45 stepeni. Komanda 'pravo' ima udaljenost za parametar. Standarna vrijednost za udaljenost je 1.\n"
+"Na primjer: \n"
+"- lijevo 90 => skreni  na lijevo \n"
+"- pravo 10 => Idi pravo 10 jedinica (kako je prikazano na lenjiru )\n"
+"Cilj je dostići desni kraj ekrana (crvena crta). Kada završiš, možeš da pokušaš da  poboljšaš  program i započeš novu borbu sa istim vremenskim uslovima koristeći dugme za ponavljanje. Ako klikneš i povučeš (mišem) bilo gdje na karti da dobiješ informacije o udaljenosti ili uglu. Svaki slijedeći nivo donosi sve teže vremenske uslove. "
+
+msgid "In this activity, you will learn how to enter commands into a computer. Even if the language is extremely basic, you learn here how to think ahead and construct a program. This activity can be used to introduce the programming concept to children."
+msgstr "U ovoj aktivnosti ćeš naučiti kao se unose komande u kompjuter. Iako je ovaj jezik veoma pojednostavljen ovdje ćeš naučiti kako da razmišljaš unaprijed i  kako da napraviš  program. Ova aktivnost se može koristiti kao uvod u koncept kompjuterskog  programiranja za djecu"
+
+msgid "Sea race (2 Players)"
+msgstr "Trka na moru (2 igrača)"
+
+msgid "Give good instructions to your ship in order to be first in the race."
+msgstr "Precizno usmjeravaj brod kako bi pobijedio/la u trci."
+
+msgid ""
+"In the text entry, enter one command per line, to control your boat. Commands supported are displayed between the two entry areas. The 'left' and 'right' commands must be followed by an angle in degrees. The angle value is also called a 'parameter' to the left or right command. By default 45 degrees is used. The 'forward' command accepts a distance parameter. By default 1 is used.\n"
+"For example:\n"
+"- left 90: Make a perpendicular left turn\n"
+"- forward 10: Go forward for 10 units (as displayed on the ruler).\n"
+"The goal is to reach the right of the screen (the red line). When done, you can try to improve your program and start a new race with the same weather conditions by using the retry button. You can click and drag your mouse anywhere on the map to get a measurement in distance and angle. Going to the next level will give you more complex weather conditions."
+msgstr ""
+"Kako bi upravljao/la brodom u polju za tekst upiši jednu komandu u jednom redu .Moguće komande su prikazane između dva polja za unos. Iza komande 'lijevo'\"ili  'desno' moraš upisati ugao u stepenima. Veličina ugla zove se još i \"'parametar' komande 'lijevo' i 'desno'. Standarni ugao je od 45 stepeni. Komanda 'ravno' ima udaljenost za parametar. Standarna vrijednost za udaljenost je 1.  \n"
+"Na primjer: \n"
+"- lijevo 90 => skreni  na lijevo\n"
+"- pravo 10 => Idi pravo 10 jedinica (kako je prikazano na lenjiru ). \n"
+"Cilj je dostići desni kraj ekrana (crvena crta). Kada završiš, možeš da pokušaš da  poboljšaš  program i započeš novu borbu sa istim vremenskim uslovima koristeći dugme za ponavljanje. Ako klikneš i povučeš (mišem) bilo gdje na karti da dobiješ informacije o udaljenosti ili uglu. Svaki slijedeći nivo donosi sve teže vremenske uslove. "
+
+msgid "Sea race (Single Player)"
+msgstr "Trka na moru (Jedan igrač)"
+
+msgid "Count the number of dots on dice before they reach the ground"
+msgstr "Prebroji tačkice na kockicama prije nego što dotaknu pod"
+
+msgid "Counting skills"
+msgstr "Vještine brojanja"
+
+msgid "In a limited time, count the number of dots"
+msgstr "Prebroj tačke u ograničenom vremenskom periodu"
+
+msgid "Numbers With Dice"
+msgstr "Brojevi s kockicama"
+
+msgid "With the keyboard, type the number of dots you see on the falling dice."
+msgstr "Pritisni na tastaturi broj koji označava broj  tačkica na kockici koja pada."
+
+msgid "Numbers with pairs of dice"
+msgstr "Brojevi s parovima kockica "
+
+msgid "Click on different active elements : engine, rudders and air tanks, in order to navigate to the required depth. There is a close gate on the right. Catch the jewel to open it, then pass through it to reach the next level."
+msgstr "Klikni na različite aktivne elemente: motor,kormilo, boce sa kiseonikom , kako bi postigao/la traženu dubinu. S desne strane se nalaze vrata. Uhvati dragulj da ih otvoriš i pređeš na sljedeći nivo. "
+
+msgid "Learn how a submarine works"
+msgstr "Nauči kako radi podmornica"
+
+msgid "Physics basics"
+msgstr "Osnove fizike"
+
+msgid "Pilot a submarine"
+msgstr "Upravljaj podmornicom "
+
+msgid "Pilot a submarine using air tanks and dive rudders"
+msgstr "Upravljaj podmornicom pomoću boca sa kiseonikom  i propelerom"
+
+msgid "Completing the puzzle requires patience and logical ability"
+msgstr "Rješavanje slagalica zahtjeva strpljenje i logiku"
+
+msgid "For the first level with colored symbols, select a symbol on the left and click on its target position. For the higher levels, click on an empty square to give it the keyboard focus. Then enter a possible letter or number. GCompris will not let you enter invalid data."
+msgstr "Za prvi nivo  sa obojenim simbolima,prenesi obojene simbole sa lijeve strane na njihovo mjesto s desne strane . Za veće nivoe, klikni mišem na polje gdje želiš da upišeš slovo ili broj. Gcompris ti neće dozvoliti da uneseš podatke koji nisu validni."
+
+msgid "Sudoku, place unique symbols in a square."
+msgstr "Sudoku, upiši jedinstvene oznake u kvadrat."
+
+msgid "Symbols must be unique in a row, in a column, and (if defined) each region."
+msgstr "Oznake moraju biti jedinstvene u redu, u koloni i (ako je naznačeno) u svakom području."
+
+msgid "The aim of the puzzle is to enter a symbol or numeral from 1 through 9 in each cell of a grid, most frequently a 9x9 grid made up of 3x3 subgrids (called 'regions'), starting with various symbols or numerals given in some cells (the 'givens'). Each row, column and region must contain only one instance of each symbol or numeral (Source lt;http://en.wikipedia.org/wiki/Sudokugt;)."
+msgstr "Cilj slagalice je upisati u svaku ćeliju polja simbol ili broj od 1 do 9. Polja su najčešće veličine 9x9 ćelija, sastavljena od 3x3 podpolja (zvana \"regije\"). Za početak su postavljeni simboli ili brojevi u nekim ćelijama. Svaki red, kolona  i regija moraju sadržati samo jedan od svakog simbola ili broja(Izvor lt;http://en.wikipedia.org/wiki/Sudokugt;)."
+
+msgid "Super Brain"
+msgstr "Super mozak"
+
+msgid "Tux has hidden several items. Find them again in the correct order"
+msgstr "Tux je sakrio nekoliko stvari. Nađi ih u pravom redoslijedu"
+
+msgid "This item is well placed"
+msgstr "Ovaj predmet je na pravom mjestu"
+
+msgid "This item is misplaced"
+msgstr "Ovaj predmet nije na pravom mjestu"
+
+msgid "One item is well placed"
+msgstr "Jedan predmet je na pravom mjestu"
+
+msgid "One item is misplaced"
+msgstr "Jedan predmet nije na pravom mjestu"
+
+msgid "Click on the items until you find what you think is the correct answer. Then, click on the OK button in the control bar. In the lower levels, Tux gives you an indication if you found a hiding place by marking the item with a black box. You can use the right mouse button to flip the colors in the opposite order."
+msgstr "Klikni na predmete dok ne pronađeš ono što misliš da je ispravni odgovor. Zatim, klikni na dugme 'OK“ u kontrolnoj traci. Na nižim nivoima,Tux ti pokazuje ukoliko si se postavio/la na dobru poziciju tako što označi stvari  crnim okvirom. Možeš koristiti desni klik miša da zamjeniš boje."
+
+msgid ""
+"From Wikipedia, the free encyclopedia. Tangram (Chinese: literally \"seven boards of cunning\") is a Chinese puzzle. While the tangram is often said to be ancient, its existence has only been verified as far back as 1800. It consists of 7 pieces, called tans, which fit together to form a square; taking the square as the unit:\n"
+"\t* 5 right isosceles triangles\n"
+"\t\to 2 small (legs of 1)\n"
+"\t\to 1 medium size (legs of square root of 2)\n"
+"\t\to 2 large size (legs of 2)\n"
+"\t* 1 square (side of 1)\n"
+"\t* 1 parallelogram (sides of 1 and square root of 2)"
+msgstr ""
+"Iz Vikipedije, besplatne enciklopedije. Tangram (kineski: bukvalno \"vještina sedam likova\") je kineska slagalica. Za tangram se često kaže da je prastara igra, dokazano je da postoji  zadnjih 1800 godina. Igra se sastoji od 7 geometrijskih tijela, koji se zovu tan-ovi koji zajedno daju kvadrat;\n"
+"\t* 5 pravouglih trouglova\n"
+"\t\to 2 mala \n"
+"\t\to 1 srednji\n"
+"\t\to 2 velika\n"
+"\t* 1 kvadrat\n"
+"\t* 1 paralelogram"
+
+msgid "Select the tangram to form. Move a piece by dragging it. Right-click on it to create a symmetrical item. Select an item and drag around it to show the rotation you want. Once you've shown what shape you want, the computer will create it. If you need help, click on the shape button, and the border of the shape will be drawn."
+msgstr "Izaberi tangram koji ćeš da napraviš. Pomijerii tanove (dijelove slagalice) tako što ćeš ih povući mišem. Odaberi predmet i vuci ga mišem da vidiš koju rotaciju želiš. Kada se pojavi oblik koji  želiš kompjuter će ga napraviti. Ako ti je potrebna pomoć klikni na dugme za pravljenje oblika i okvir tog oblika će biti nacrtan. "
+
+msgid "The objective is to form a given shape with seven pieces"
+msgstr "Cilj je napravitii zadati oblik od sedam dijelova"
+
+msgid "The original code was written by Philippe Banwarth in 1999. It was ported to GCompris by Yves Combe in 2005."
+msgstr "Orginalni kod je napisao Phillipe Banwarth 1999. Yves Combe je 2005 uključio u GCompris."
+
+msgid "The tangram puzzle game"
+msgstr "Slagalica, tangram "
+
+msgid "Points = %s"
+msgstr "Poeni = %s"
+
+msgid ""
+"Wind speed = %d\n"
+"kilometers/hour"
+msgstr ""
+"Brzina vjetra= %d\n"
+"kilometara na čas"
+
+msgid "Distance to target = %d meters"
+msgstr "Udaljenost do mete = %d metara"
+
+msgid "Can move the mouse, can read numbers and count up to 15 for the first level"
+msgstr "Za prvi nivo moraš da znaš da pomijeraš miša, čitaš brojeve i brojiš do 15. "
+
+msgid "Check the wind speed and direction, and then click on the target to launch a dart. When you all your darts are thrown, a window appears asking you to count your score. Enter the score with the keyboard then press the Enter key or the OK button."
+msgstr "Provjeri brzinu i smjer vjetra, a zatim klikni na metu kako bi usmijerio  strijelu. Kada ispucaš sve svoje strijele, pojavit će se prozor u kojem trebaš uneseš svoje pogotke. Kada upišeš rezultat pritisni \"Enter\" ili Ok "
+
+msgid "Hit the target and count your points"
+msgstr "Pogodi metu i prebroji svoje bodove"
+
+msgid "Practice addition with a target game"
+msgstr "Vježbaj sabiranje s igrom gađanja"
+
+msgid "Throw darts at a target and count your score."
+msgstr "Bacaj strelice i izbroj rezultat."
+
+msgid "A sliding-block puzzle game"
+msgstr "Slagalica sa blokovima koji klize"
+
+msgid "Each car can only move either horizontally or vertically. You must make some room in order to let the red car move through the gate on the right."
+msgstr "Svaki automobil  se može pomijeriti  vodoravno ili vertikalno. Moraš da napraviš mjesta da crveni auto prođe kroz vrata na desnoj strani."
+
+msgid "Remove the red car from the parking lot through the gate on the right"
+msgstr "Pomjeri crveni auto sa parkinga kroz prolaz na desnoj strani"
+
+msgid ""
+"Cannot find Tuxpaint.\n"
+"Install it to use this activity !"
+msgstr ""
+"Ne možeš pronaći Tuks-boju.\n"
+"Instaliraj ga kako bi mogao da igraš ovu igru!"
+
+msgid "Waiting for Tuxpaint to finish"
+msgstr "Sačekaj da Tuksboja završi"
+
+msgid "Inherit fullscreen setting from GCompris"
+msgstr "Preuzmi  postavke za ekran iz GComprisa"
+
+msgid "Inherit size setting from GCompris (800x600, 640x480)"
+msgstr "Preuzmi postavke za veličinu iz GComprisa (800x600, 640x480)"
+
+msgid "Disable shape rotation"
+msgstr "Isključi rotaciju oblika"
+
+msgid "Show Uppercase text only"
+msgstr "Pokazi samo tekst sa velikim slovima"
+
+msgid "Disable stamps"
+msgstr "Onemogući pečate"
+
+msgid "Drawing activity (pixmap)"
+msgstr "Aktivnost bojanja (pixmap)"
+
+msgid "Launch Tuxpaint"
+msgstr "Pokteni Tuksboju"
+
+msgid "Tuxpaint"
+msgstr "Tuksboja"
+
+msgid "Use Tuxpaint to draw. When Tuxpaint is finished this board will end."
+msgstr "Koristi Tuxboju za  crtanje. Kada ponestane sa Tuxbojom završio/la  si i sa ovom igrom."
+
+msgid "mouse and keyboard manipulation"
+msgstr "korišćenje miša i tastature"
+
+msgid "Click on different active elements : sun, cloud, water pump station, and water cleanup station, in order to reactivate the entire water system. When the system is back up and Tux is in the shower, push the shower button for him."
+msgstr "Klikni na razne aktivne elemente: sunce, oblak, pumpu za vodu, stanicu za prečišćavanje vode, kako bi pokrenuo/la čitav vodovodni sistem. Kada pokreneš sistem ,vidjećeš Tuxa ispod tuša, pritisni dugme za tuš umjesto njega."
+
+msgid "Learn about the water cycle"
+msgstr "Nauči o kruženju vode "
+
+msgid "Learn the water cycle"
+msgstr "Nauči o kruženju vode "
+
+msgid "Tux has come back from a long fishing party on his boat. Bring the water system back up so he can take a shower."
+msgstr "Tux se upravo vratio sa duge zabave sa ribolovcima na svom brodu. Ti trebaš da mu osposobiš vodni sistem kako bi mogao da se istušira."
+
+msgid "Research"
+msgstr "Istraži"
+
+msgid "Sentimental"
+msgstr "Sentimentalno"
+
+msgid "Official"
+msgstr "Zvanično"
+
+msgid "Flyer"
+msgstr "Letač"
+
+msgid "Title"
+msgstr "Naslov"
+
+msgid "Heading 1"
+msgstr "Naslov 1"
+
+msgid "Heading 2"
+msgstr "Naslov 2"
+
+msgid "A simple word processor to enter and save any text"
+msgstr "Jednostavan program za pisanje i čuvanje teksta"
+
+msgid "In this wordprocessor you can type the text you want, save and get it back later. You can add some style to your text by using the buttons on the left. The first 4 buttons let you select the style of the line on which your insert cursor is. The 2 others buttons with multiple choices let you select from a predefined document and color theme."
+msgstr "U ovom word procesoru možeš da ukucaš tekst koji želiš ,da ga sačuvaš i kasnije ponovo otvoriš.  Možeš da izabereš neki stil kojim ćeš da kucaš teks, uz pomoć tipki na lijevoj strani. Uz pomoć prvih 4 tipki možeš da odabereš linije vašeg kursera. Druge dvije tipke služe za odabir unaprijed definisanih dokumenata, tema i boja."
+
+msgid "Learn how to enter text in a wordprocessor. This wordprocessor is special in that it enforces the use of styles. This way, the children will understand their benefit when moving to more feature full wordprocessor like OpenOffice.org."
+msgstr "Nauči da uneseš tekst u procesor. Ovaj word procesor je poseban jer podstiče upotrebu stilova. Na taj način djeca će naučiti osnovno,prije nego što počnu da koriste složenije procesore poput OpenOffice-a."
+
+msgid "The children can type their own text or copy one given by the teacher."
+msgstr "Nakon što iskucaju tekst, djeca mogu da ga iskopijaju i odštampaju kako bi ga pokazali njihovoj učiteljici. "
+
+msgid "Your word processor"
+msgstr "Tvoj program za obradu teksta"
+
+msgid "Falling Words"
+msgstr "Riječi koje padaju"
+
+msgid "Type the falling words before they reach the ground"
+msgstr "Ukucaj čitavu riječ  tokom padanja, a prije nego što pane na dno"
+
+msgid "Keyboard training"
+msgstr "Vježbaj da koristiš tastaturu"
+
+msgid "Type the complete word as it falls, before it reachs the ground"
+msgstr "Ukucaj riječi koje padaju, prije nego što dohvate tlo"
+
+msgid "A word is hidden, you must discover it letter by letter"
+msgstr "Riječ je sakrivena,otkrij je, slovo po slovo"
+
+msgid "Reading skill"
+msgstr "Vještina čitanja"
+
+msgid "The classic hangman game"
+msgstr "Klasična igra vješala"
+
+msgid "This is a good exercise to improve reading and spelling skills."
+msgstr "Ovo je dobra vježba da poboljšašvještine čitanja i pisanja."
+
+msgid "You can enter the letters using the virtual keyboard on the screen or with the real keyboard."
+msgstr "Možeš da ukucaš slovo uz pomoć virtuelne tastature na ekranu ili uz pomoć prave tastature."
+
+msgid "aeiouy"
+msgstr "aeiouy"
+
+msgid "bcdfghjklmnpqrstvwxz"
+msgstr "bcdfghjklmnpqrstvwxz"
+
+msgid "NONE"
+msgstr "NIJEDAN"
+
+

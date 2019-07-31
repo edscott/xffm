@@ -1,0 +1,1433 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:38:51 CDT 2013 ---
+#
+# Dario Abatianni <eisfuchs@tigress.com>, 2002-2005.
+# Ulrik Sverdrup <ulrik.sverdrup@gmail.com>, 2009.
+# Johan Svedberg <johan@svedberg.com>, 2004-2008.
+# Johan Dahlin <zilch.am@home.se>, 2001-2006.
+# Niklas Grahn <terra.unknown@yahoo.com>, 2009.
+# Mattias Dahlberg <voz@home.se>, 2003.
+# Martin Norbäck <d95mback@dtek.chalmers.se>, 1999-2003.
+# Copyright (C) 1999, 2000, 2001 Joakim Andreasson <joakim.andreasson@gmx.net>.
+# Bo Rosén <bo.rosen@home.se>, 2001.
+# Isak Savo <iso01001@student.mdh.se>, 2004.
+# Göran Uddeborg <goeran@uddeborg.se>, 1996-2012.
+# Kalle Persson <kalle@kallepersson.se>, 2008.
+# Johan Hammar <johan.hammar@swipnet.se>, 2003.
+# Mattias Newzella <newzella@linux.nu>, 2000-2005.
+# Copyright (C) 2009 Ulrik Sverdrup <ulrik.sverdrup@gmail.com>.
+# Anders Widell <awl@hem.passagen.se>, 1998-2001.
+# Christian Rose <menthos@menthos.com>, 2000-2006.
+# Gudmund Areskoug <fta@algonet.se>, 2001.
+# Andreas Hyden <a.hyden@cyberpoint.se>, 2000.
+# Stefan Asserhall <stefan.asserhall@comhem.se>, 2005-2013.
+# Andreas Henriksson <andreas@fatal.se>, 2007.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2002-2012.
+# Daniel Resare <daniel@resare.com>, 1999-2000.
+# Thomas Backlund <tmb@mandriva.org>, 2010.
+# Arve Eriksson <031299870@telia.com>, 2010-2012.
+# Alexander Reinholdt <alexander.reinholdt@t-online.de>, 2003-2011.
+# Konrad Skeri <konrad@skeri.com>, 2008.
+# Jimmy Carlson <sanaya@telia.com>, 2002.
+# Robin Ericsson <robin@localhost.nu>, 2000-2003.
+# translation of @PACKAGE.po to @LANGUAGE <>.
+# Per Lindström <per.lindstrom@osd.privataccess.nu>, 2000.
+# Daniel Nylander <po@danielnylander.se>, 2006-2012.
+# Karl Backström <backstrom@kde.org, 1998.>, 1998-2000.
+# Fredrik Tuomas <fredrik@jpl.se>, 2005-2007.
+# Inge Wallin <inge@lysator.liu.se>, 2008.
+# Magnus Reftel <d96reftl@dtek.chalmers.se>, 1997-1998.
+# Erik Johansson <erre@telia.com>, 2001.
+# Gunnar Lindholm <gunix@telia.com>, 2000.
+# Anders Carlsson <anders.carlsson@tordata.se>, 1999.
+# Kalle Pettersson <d99kalle@dtek.chalmers.se>, 2000.
+# Stefan Nilsen <stefan.nilsen@millnet.se>, 2007.
+# Peter Landgren <peter.talken@telia.com>, 2005-2008.
+# Joakim Lundborg <jl@kth.se>, 2004.
+# Peter Antman <peter.antman@abc.se>, 1997.
+# Bengt Thuree <bengt@thuree.com>, 2005.
+# Patrik Wallström <pawal@blipp.com>, 2002.
+# Leslie Jensen <leslie@eskk.nu>, 2008.
+# Thomas Olsson <cid95tho@lustudat.student.lu.se>, 1997.
+# Martin Wahlen <mva@sslug.dk>, 1998-1999.
+# Dennis Persson <dennis@linux.nu>, 2000.
+# Jakob Nylin <jakob.nylin@gmail.com>, 2009.
+# Annika <AnnikaNbpt@gmail.com>, 2010.
+# Christer Gustavsson <f93-cgn@sm.luth.se>, 1998-2000.
+# Magnus Stålnacke <jemamo@telia.com>, 2006.
+# Jörgen Tegnér <jorgen.tegner@telia.com>, 2001.
+# Sergej Kotliar <sigge@hystrix.se>, 2006.
+# Tomas Junnonen <majix@sci.fi>, 2000.
+# Tomas Ögren <stric@ing.umu.se>, 1999-2001.
+# Karolina Lindqvist <karolinl@tiscali.se>, 2003.
+# Daniel Karlsson <chaotica@home.se>, 2001.
+# Anders Eurenius <c96aes@cs.umu.se>, 1999.
+# Göran Martinson <gmartinson@gmail.com>, 2009.
+# Anders Bengtsson <d96-abe@nada.kth.se>, 1998.
+# Marc Hansen <marcgie@mail.berlios.de>, 2003-2005.
+# Göran Weinholt <weinholt@linux.nu>, 2001.
+# Previously translated by Sun <gnome_int_l10n@ireland.sun.com>, 2003.
+# Anders Lindén <connyosis@gmx.net>, 2004.
+# Last-Translator: Stefan Asserhall <stefan.asserhall@comhem.se>, 2011-2013.
+# Andreas Persenius <ndap@swipnet.se>, 1999.
+# Jan Morén <jan.moren@lucs.lu.se>, 2002-2003.
+# Bo Serrander <bserrander@atr.se>, 1999.
+# Copyright (C) 2007 Robby Stephenson <robby@periapsis.org>.
+# Jonas Borgström <jonas_b@bitsmart.com>, 1999.
+# Mikael Hallendal <micke@codefactory.se>, 2002.
+# Stefan Asserhäll <stefan.asserhall@comhem.se>, 2002-2013.
+# Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
+# Marcus Bjurman <marbj499@student.liu.se>, 2003.
+# Thomas Niederreiter <tn@xcdroast.org>, 2002-2003.
+# Erik Piehl <erik.piehl@gmail.com>, 2008.
+# Fredrik Hallenberg <hallon@lysator.liu.se>, 1999.
+# Richard Hult <rhult@codefactory.se>, 1999-2007.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-02 12:27-0600\n"
+"PO-Revision-Date: 2012-10-21 21:40+0200\n"
+"Last-Translator: Göran Uddeborg <goeran@uddeborg.se>\n"
+"Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../../xffm/completion/base.hh:28
+msgid "Command"
+msgstr "Kommando"
+
+#: ../../xffm/completion/base.hh:31
+msgid "File"
+msgstr "Arkiv"
+
+#: ../../xffm/completion/base.hh:34
+msgid "Command history"
+msgstr "Kommandohistorik"
+
+#. option -u uid "uid" "uid_combo"
+#: ../../xffm/completion/base.hh:37 ../../xffm/find/dialog.hh:199
+msgid "User"
+msgstr "Användare"
+
+#: ../../xffm/completion/base.hh:40
+msgid "Variable"
+msgstr "Variabel"
+
+#: ../../xffm/completion/base.hh:43
+msgid "Host"
+msgstr "Värd"
+
+#: ../../xffm/completion/base.hh:55
+msgid "Found no match"
+msgstr "Hittade inga träffar"
+
+#: ../../xffm/completion/base.hh:133 ../../xffm/completion/base.hh:134
+msgid "Matches"
+msgstr "Träffar"
+
+#: ../../xffm/completion/base.hh:134
+msgid "Too many files open"
+msgstr "För många filer öppnade"
+
+#: ../../xffm/completion/base.hh:325 ../../xffm/find/fgr.hh:124
+msgid "Options:"
+msgstr "Alternativ:"
+
+#: ../../xffm/completion/bash.hh:133
+msgid "Completion mode:"
+msgstr "Kompletteringsläge:"
+
+#: ../../xffm/completion/bash.hh:134
+msgid "command"
+msgstr "kommando"
+
+#: ../../xffm/completion/bash.hh:135
+msgid "file"
+msgstr "fil"
+
+#: ../../xffm/completion/bash.hh:145 ../../xffm/completion/bash.hh:149
+msgid "Options >>"
+msgstr "Alternativ >>"
+
+#: ../../xffm/find/fgr.hh:124 ../../xffm/find/dialog.hh:308
+msgid "Path"
+msgstr "Sökväg"
+
+#: ../../xffm/find/fgr.hh:125
+msgid "Locate documents and folders on this computer by name or content"
+msgstr ""
+"Sök efter dokument och mappar på den här datorn efter namn eller innehåll"
+
+#: ../../xffm/find/fgr.hh:126 ../../xffm/find/dialog.hh:341
+msgid "Filter:"
+msgstr "Filter:"
+
+#: ../../xffm/find/fgr.hh:126
+msgid "Search for files"
+msgstr "Sök efter filer"
+
+#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
+#: ../../xffm/find/fgr.hh:128
+msgid "Contents:"
+msgstr "Innehåll:"
+
+#: ../../xffm/find/fgr.hh:128
+#, fuzzy
+msgid "File's contents filtered as plain text."
+msgstr "Spara filen som vanlig text?"
+
+#: ../../xffm/find/fgr.hh:131
+msgid "Verbose output debugging mode."
+msgstr "Felsökningsläge med detaljerad utmatning."
+
+#: ../../xffm/find/fgr.hh:133
+msgid "Show version information"
+msgstr "Visa versionsinformation"
+
+#: ../../xffm/find/fgr.hh:135
+msgid "Filter Details"
+msgstr "Filterinformation"
+
+#. / option -a "xdev"
+#: ../../xffm/find/fgr.hh:138 ../../xffm/find/dialog.hh:180
+msgid "Stay on single filesystem"
+msgstr "Stanna inom ett enda filsystem"
+
+#: ../../xffm/find/fgr.hh:140
+msgid "Print..."
+msgstr "Skriv ut..."
+
+#: ../../xffm/find/fgr.hh:140
+msgid "The unique Process ID that identifies this process."
+msgstr "Den unika processidentifieraren som identifierar processen."
+
+#. / option -D "recursiveH"
+#: ../../xffm/find/fgr.hh:142 ../../xffm/find/dialog.hh:177
+msgid "Find hidden files and directories"
+msgstr "Sök efter gömda filer och kataloger"
+
+#: ../../xffm/find/fgr.hh:143
+msgid "Filter"
+msgstr "Filter"
+
+#: ../../xffm/find/fgr.hh:144
+msgid ""
+"To display files which pass the filter (stars and regexps will be processed)"
+msgstr ""
+"Att visa filer som passerar filtret (stjärnor och regexps kommer att "
+"bearbetas)"
+
+#. / option -r "recursive"
+#: ../../xffm/find/fgr.hh:146 ../../xffm/find/dialog.hh:174
+msgid "Recursive"
+msgstr "Rekursivt"
+
+#: ../../xffm/find/fgr.hh:147 ../../xffm/find/fgr.hh:148
+#: ../../xffm/find/fgr.hh:149 ../../xffm/find/fgr.hh:150
+msgid "KByte"
+msgstr "Kibyte"
+
+#: ../../xffm/find/fgr.hh:148
+msgid "is greater than or equal to"
+msgstr "är större än eller lika med"
+
+#: ../../xffm/find/fgr.hh:150
+msgid "is less than or equal to"
+msgstr "är mindre än eller lika med"
+
+#: ../../xffm/find/fgr.hh:152
+msgid "Set UID"
+msgstr "Sätt UID"
+
+#: ../../xffm/find/fgr.hh:152
+msgid "Executable Text Files"
+msgstr "Körbara textfiler"
+
+#: ../../xffm/find/fgr.hh:154
+msgid "The permissions of the file, in octal notation."
+msgstr "Rättigheterna för filen med oktal notation."
+
+#: ../../xffm/find/fgr.hh:155
+msgid "Type"
+msgstr "Typ"
+
+#: ../../xffm/find/fgr.hh:157 ../../xffm/find/signals.hh:17
+msgid "Any"
+msgstr "Alla"
+
+#: ../../xffm/find/fgr.hh:157
+msgid "Default type"
+msgstr "Standardtyp"
+
+#: ../../xffm/find/fgr.hh:158 ../../xffm/common/preview.hh:497
+msgid "Regular file"
+msgstr "Vanlig fil"
+
+#: ../../xffm/find/fgr.hh:159 ../../xffm/find/signals.hh:11
+#: ../../xffm/fm/local/popup.hh:803 ../../xffm/common/preview.hh:488
+msgid "Directory"
+msgstr "Katalog"
+
+#: ../../xffm/find/fgr.hh:160 ../../xffm/find/signals.hh:12
+#: ../../xffm/common/preview.hh:494
+msgid "Symbolic Link"
+msgstr "Symbolisk länk"
+
+#: ../../xffm/find/fgr.hh:161
+msgid "UNIX Socket"
+msgstr "UNIX-uttag"
+
+#: ../../xffm/find/fgr.hh:162 ../../xffm/find/signals.hh:14
+#: ../../xffm/common/preview.hh:482
+msgid "Block device"
+msgstr "Blockenhet"
+
+#: ../../xffm/find/fgr.hh:163 ../../xffm/find/signals.hh:15
+#: ../../xffm/common/preview.hh:485
+msgid "Character device"
+msgstr "Teckenenhet"
+
+#: ../../xffm/find/fgr.hh:164 ../../xffm/find/signals.hh:16
+#: ../../xffm/common/preview.hh:491
+msgid "FIFO"
+msgstr "FIFO"
+
+#. radio_p freed on destroy event for dialog_.
+#. option -k minutes "last_minutes", "last_minutes_spin"
+#: ../../xffm/find/fgr.hh:166 ../../xffm/find/fgr.hh:168
+#: ../../xffm/find/dialog.hh:221
+msgid "Minutes"
+msgstr "Minuter"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/dialog.hh:270 ../../xffm/find/dialog.hh:370
+#: ../../xffm/fm/treeview.hh:18
+msgid "Details"
+msgstr "Detaljer"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/fgr.hh:179 ../../xffm/find/fgr.hh:180
+#: ../../xffm/find/fgr.hh:183 ../../xffm/find/fgr.hh:184
+#: ../../xffm/find/fgr.hh:187 ../../xffm/find/fgr.hh:188
+msgid "TIME"
+msgstr "TID"
+
+#: ../../xffm/find/fgr.hh:168 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/fgr.hh:174 ../../xffm/find/fgr.hh:177
+msgid "Previous"
+msgstr "Föregående"
+
+#. option -h hours "last_hours", "last_hours_spin"
+#: ../../xffm/find/fgr.hh:169 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/dialog.hh:226
+msgid "Hours"
+msgstr "Timmar"
+
+#. option -d days "last_days", "last_days_spin"
+#: ../../xffm/find/fgr.hh:172 ../../xffm/find/fgr.hh:174
+#: ../../xffm/find/dialog.hh:231
+msgid "Days"
+msgstr "Dygn"
+
+#: ../../xffm/find/fgr.hh:175
+msgid "Month"
+msgstr "Månad"
+
+#: ../../xffm/find/fgr.hh:177
+msgid "Month(s)"
+msgstr "Månad(er)"
+
+#: ../../xffm/find/fgr.hh:180
+msgid "Modification Time :"
+msgstr "Modifieringstid:"
+
+#: ../../xffm/find/fgr.hh:184
+msgid "Access Time :"
+msgstr "Accesstid:"
+
+#: ../../xffm/find/fgr.hh:188
+msgid "Creation Time :"
+msgstr "Skapelsetid:"
+
+#: ../../xffm/find/fgr.hh:191 ../../xffm/find/fgr.hh:192
+msgid "uid"
+msgstr "uid"
+
+#: ../../xffm/find/fgr.hh:192
+msgid "User:"
+msgstr "Användare:"
+
+#: ../../xffm/find/fgr.hh:194 ../../xffm/find/fgr.hh:195
+msgid "gid"
+msgstr "gid"
+
+#: ../../xffm/find/fgr.hh:195
+msgid "Group:"
+msgstr "Grupp:"
+
+#: ../../xffm/find/fgr.hh:198
+msgid ""
+"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+"character that  normally  follows  a file  name"
+msgstr ""
+
+#: ../../xffm/find/fgr.hh:200
+msgid "Content View"
+msgstr "Innehållsvy"
+
+#: ../../xffm/find/fgr.hh:201 ../../xffm/find/fgr.hh:202
+#: ../../xffm/find/fgr.hh:203 ../../xffm/find/fgr.hh:204
+msgid "STRING"
+msgstr "STRÄNG"
+
+#: ../../xffm/find/fgr.hh:202 ../../xffm/find/fgr.hh:204
+#: ../../xffm/fm/local/popup.hh:563
+msgid "Regular expression"
+msgstr "Reguljärt uttryck"
+
+#: ../../xffm/find/fgr.hh:204
+msgid "Extended"
+msgstr "Utökad"
+
+#: ../../xffm/find/fgr.hh:206
+msgid "Ignore case"
+msgstr "Gör ingen skillnad på gemener/VERSALER"
+
+#: ../../xffm/find/fgr.hh:208
+msgid "Text Files"
+msgstr "Textfiler"
+
+#: ../../xffm/find/fgr.hh:210 ../../xffm/find/dialog.hh:552
+msgid "No match"
+msgstr "Ingen matchning"
+
+#: ../../xffm/find/fgr.hh:212 ../../xffm/find/dialog.hh:470
+msgid "Line Count"
+msgstr "Radantal"
+
+#: ../../xffm/find/fgr.hh:214
+msgid "Words"
+msgstr "Ord"
+
+#: ../../xffm/find/fgr.hh:216
+msgid "Lines"
+msgstr "Rader"
+
+#: ../../xffm/find/fgr.hh:368
+#, c-format
+msgid "Usage : %s [OPTIONS]\n"
+msgstr "Användning: %s [VAL]\n"
+
+#: ../../xffm/find/signals.hh:10
+msgid "Regular"
+msgstr "Vanlig"
+
+#: ../../xffm/find/signals.hh:13 ../../xffm/common/preview.hh:500
+msgid "Socket"
+msgstr "Uttag"
+
+#: ../../xffm/find/signals.hh:209
+msgid "Select folder to search in"
+msgstr "Välj mapp att söka i"
+
+#. button no
+#: ../../xffm/find/signals.hh:265 ../../xffm/find/dialog.hh:584
+#: ../../xffm/response/entryfileresponse.hh:18
+#: ../../xffm/response/entryresponse.hh:305
+#: ../../xffm/response/passwdresponse.hh:558
+#: ../../xffm/fm/local/properties.hh:304 ../../xffm/fm/local/rm.hh:155
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: ../../xffm/find/signals.hh:293 ../../xffm/find/signals.hh:722
+msgid "No editor for current action."
+msgstr "Ingen editor för aktuell åtgärd."
+
+#. / option "upper_limit_spin" (only in gtk dialog_)
+#: ../../xffm/find/signals.hh:351 ../../xffm/find/dialog.hh:183
+msgid "Results"
+msgstr "Resultat"
+
+#: ../../xffm/find/signals.hh:351
+msgid "Upper limit:"
+msgstr "Övre gräns:"
+
+#: ../../xffm/find/signals.hh:353
+msgid "Counting files..."
+msgstr "Räknar filer..."
+
+#: ../../xffm/find/signals.hh:368
+#, c-format
+msgid "Found %d match"
+msgid_plural "Found %d matches"
+msgstr[0] "Hittade en träff"
+msgstr[1] "Hittade %d träffar"
+
+#: ../../xffm/find/signals.hh:370
+#, c-format
+msgid "%s Finished : %s"
+msgstr "%s klar: %s"
+
+#: ../../xffm/find/signals.hh:488 ../../xffm/find/signals.hh:490
+msgid "Searching..."
+msgstr "Söker..."
+
+#. g_object_set_data(G_OBJECT(dialog_), "window", dialog_);
+#: ../../xffm/find/dialog.hh:98 ../../xffm/find/dialog.hh:150
+#: ../../xffm/find/dialog.hh:611
+msgid "Find"
+msgstr "Sök"
+
+#: ../../xffm/find/dialog.hh:183
+msgid "Upper limit"
+msgstr "Övre gräns"
+
+#. option -s +KByte "size_greater", "size_greater_spin"
+#: ../../xffm/find/dialog.hh:188
+msgid "At Least"
+msgstr "Åtminstone"
+
+#: ../../xffm/find/dialog.hh:188 ../../xffm/find/dialog.hh:193
+msgid "kBytes"
+msgstr "Kibyte"
+
+#. option -s -KByte "size_smaller", "size_smaller_spin"
+#: ../../xffm/find/dialog.hh:193
+msgid "At Most"
+msgstr "Inte mer än"
+
+#: ../../xffm/find/dialog.hh:204
+msgid "Group"
+msgstr "Grupp"
+
+#. option -o octal "octal_p" "permissions_entry"
+#: ../../xffm/find/dialog.hh:208
+msgid "Octal Permissions"
+msgstr "Rättigheter på oktal form"
+
+#. option -p suid | exe
+#: ../../xffm/find/dialog.hh:213
+msgid "SUID"
+msgstr "SUID"
+
+#: ../../xffm/find/dialog.hh:213 ../../xffm/fm/local/popup.hh:843
+msgid "Executable"
+msgstr "Körbart program"
+
+#. option -m months "last_months", "last_months_spin"
+#: ../../xffm/find/dialog.hh:237
+msgid "Months"
+msgstr "Månader"
+
+#: ../../xffm/find/dialog.hh:248
+msgid "File type : "
+msgstr "Filtyp: "
+
+#. gtk_widget_show (GTK_WIDGET(right_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(center_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(left_options_vbox));
+#: ../../xffm/find/dialog.hh:262 ../../xffm/find/dialog.hh:602
+#: ../../xffm/fm/page/page.hh:70 ../../xffm/common/gtk.hh:70
+msgid "Close"
+msgstr "Stäng"
+
+#. gtk_box_pack_start (vbox7a, GTK_WIDGET(advancedBox), TRUE, FALSE, 5);
+#. gtk_widget_show(GTK_WIDGET(advancedBox));
+#. //////////////  grep options.... /////////////////////////
+#: ../../xffm/find/dialog.hh:384
+msgid "Contains"
+msgstr "Innehåller"
+
+#: ../../xffm/find/dialog.hh:404
+msgid "Contains the text"
+msgstr "Innehåller texten"
+
+#: ../../xffm/find/dialog.hh:437
+msgid "Case Sensitive"
+msgstr "Skiftlägeskänslig"
+
+#: ../../xffm/find/dialog.hh:449
+msgid "Extended regexp"
+msgstr "Utökad regexp"
+
+#: ../../xffm/find/dialog.hh:460
+msgid "Include binary files"
+msgstr "Sök även i binärfiler"
+
+#: ../../xffm/find/dialog.hh:496
+msgid "Match"
+msgstr "Matcha"
+
+#: ../../xffm/find/dialog.hh:508
+msgid "Anywhere"
+msgstr "Var som helst"
+
+#: ../../xffm/find/dialog.hh:523
+msgid "Whole words only"
+msgstr "Endast hela ord"
+
+#: ../../xffm/find/dialog.hh:538
+msgid "lines"
+msgstr "rader"
+
+#: ../../xffm/find/dialog.hh:594
+msgid "Clear"
+msgstr "Töm"
+
+#: ../../xffm/find/dialog.hh:636
+msgid "Edit"
+msgstr "Redigera"
+
+#: ../../xffm/find/dialog.hh:751 ../../xffm/find/dialog.hh:766
+#: ../../xffm/common/util.hh:1150 ../../xffm/common/util.hh:1152
+#: ../../xffm/common/util.hh:1158 ../../xffm/common/util.hh:1160
+#: ../../xffm/common/preview.hh:479
+msgid "unknown"
+msgstr "okänd"
+
+#: ../../xffm/find/dialog.hh:780
+msgid "Modified"
+msgstr "Ändrades"
+
+#: ../../xffm/find/dialog.hh:784
+msgid "Created"
+msgstr "Skapad"
+
+#: ../../xffm/find/dialog.hh:788
+#, fuzzy
+msgid "Accessed"
+msgstr "Använd:"
+
+#: ../../xffm/find/dialog.hh:1106
+msgid ""
+"Basic rules:\n"
+"\n"
+"*  Will match any character zero or more times.\n"
+"?  Will match any character exactly one time\n"
+"[] Match any character within the [] \n"
+"^  Match at beginning of string\n"
+"$  Match at end of string \n"
+msgstr ""
+"Grundregler:\n"
+"\n"
+"*  Motsvarar vilket tecken som helst ingen eller fler gånger.\n"
+"?  Motsvarar vilket tecken som helst exakt en gång.\n"
+
+#: ../../xffm/find/dialog.hh:1115
+#, fuzzy
+msgid ""
+"Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"In  basic regular expressions the metacharacters ?, +, {, |, (, and ) \n"
+"  lose their special meaning.\n"
+"\n"
+"The  period . matches  any  single  character.\n"
+"The caret ^ matches at the start of line.\n"
+"The dollar $ matches at the end of line.\n"
+"\n"
+"Characters within [ ] matches any single character in the list.\n"
+"Characters within [^ ] matches any single character *not* in the list.\n"
+"Characters inside [ - ] matches a range of characters (ie [0-9] or [a-z]).\n"
+"\n"
+"A regular expression may be followed by one of several repetition "
+"operators:\n"
+"?      The preceding item is optional and matched\n"
+"       at most once.\n"
+"*      The preceding item will be matched zero\n"
+"       or more times.\n"
+"+      The preceding item will be matched one or\n"
+"       more times.\n"
+"{n}    The preceding item is matched exactly n times.\n"
+"{n,}   The preceding item is matched n or more times.\n"
+"{n,m}  The preceding item is matched at least n times,\n"
+"       but not more than m times.\n"
+"\n"
+"To match any reserved character, precede it with \\. \n"
+"\n"
+"Two regular expressions may be joined by the logical or operator |.\n"
+"Two regular expressions may be concatenated.\n"
+"\n"
+"More information is available by typing \"man grep\"\n"
+msgstr ""
+"Reserverade tecken för utökad regexp är\n"
+". ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"Vid grundläggande regular expression förlorar metatecknen\n"
+"?, +, {, |, ( och ) sin speciella betydelse.\n"
+"\n"
+"Punkten . motsvarar vilken enda bokstav som helst.\n"
+"Utelämningstecknet ^ söker överensstämmelse i början av raden.\n"
+"Dollartecknet $ söker överensstämmelse i slutet av raden.\n"
+"\n"
+"Tecken inom [ ] motsvarar vilket enda tecken \n"
+"     \t\tsom helst i listan.\n"
+"Tecken inom [^ ] motsvarar vilket tecken som helst\n"
+"       som *inte* finns i listan.\n"
+"Tecken inom [ - ] motsvarar en uppsättning\n"
+"       tecken (ie [0-9] eller [a-z]).\n"
+"\n"
+"Ett reguljärt uttryck kan åtföljas av en\n"
+"       av flera repetitions-operatorer:\n"
+"?      Föregående fält är valfritt och överensstämmer\n"
+"       som mest en gång.\n"
+"*      Föregående fält kommer att överensstämma noll\n"
+"       eller fler gånger.\n"
+"+      Föregående fält kommer att överensstämma en eller\n"
+"       fler gånger.\n"
+"{n}    Föregående fält överensstämmer exakt n gånger.\n"
+"{n,}   Föregående fält överensstämmer n eller fler gånger.\n"
+"{n,m}  Föregående fält överensstämmer åtminsten n gånger,\n"
+"       men inte fler än m gånger.\n"
+"\n"
+"För att matcha ett reserverat tecken, låt det föregås av \\. \n"
+"\n"
+"Två reguljära uttryck kan kopplas ihop genom den logiska OR-\n"
+"       operatorn |.\n"
+"Två reguljära uttryck kan kedjakopplas.\n"
+"\n"
+"Mer information är tillgänglig genom \"man grep\"\n"
+"       på en kommandorad.\n"
+
+#: ../../xffm/response/entryfileresponse.hh:20
+msgid "Open"
+msgstr "Öppna"
+
+#: ../../xffm/response/entryresponse.hh:29
+#: ../../xffm/response/entryfolderresponse.hh:28
+msgid "Choose directory"
+msgstr "Välj katalog"
+
+#. this button is redundant since hands are on keyboard for password
+#: ../../xffm/response/entryresponse.hh:309
+#: ../../xffm/response/passwdresponse.hh:189
+#: ../../xffm/response/passwdresponse.hh:559
+msgid "Ok"
+msgstr "OK"
+
+#: ../../xffm/response/commandprogressresponse.hh:32
+msgid "Items:"
+msgstr "Objekt:"
+
+#: ../../xffm/response/passwdresponse.hh:21
+msgid "Enter password"
+msgstr "Ange lösenord"
+
+#. gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+#: ../../xffm/response/passwdresponse.hh:125
+#, fuzzy
+msgid "User Input"
+msgstr "Musinmatning"
+
+#: ../../xffm/response/passwdresponse.hh:142
+msgid "Response Requested"
+msgstr "Reaktion begärd"
+
+#: ../../xffm/response/passwdresponse.hh:264
+msgid "Preparing"
+msgstr "Förbereder"
+
+#: ../../xffm/response/passwdresponse.hh:352
+msgid "sudo"
+msgstr "sudo"
+
+#: ../../xffm/response/passwdresponse.hh:354
+msgid "Command:"
+msgstr "Kommando:"
+
+#: ../../xffm/response/passwdresponse.hh:357
+msgid "Permission denied"
+msgstr "Åtkomst nekad"
+
+#: ../../xffm/response/passwdresponse.hh:358
+msgid "Try to approach a problem from different angles."
+msgstr "Prova att närma dig problemet från olika vinklar."
+
+#: ../../xffm/response/passwdresponse.hh:359
+msgid "Do you want to retry?"
+msgstr "Vill du försöka igen?"
+
+#: ../../xffm/response/passwdresponse.hh:360
+msgid "Alternate:"
+msgstr "Alternativ:"
+
+#: ../../xffm/response/passwdresponse.hh:365
+msgid "No"
+msgstr "Nej"
+
+#: ../../xffm/response/passwdresponse.hh:401
+msgid "Install"
+msgstr "Installera"
+
+#: ../../xffm/response/passwdresponse.hh:402
+#, c-format
+msgid "%s does not exist."
+msgstr "%s finns inte."
+
+#: ../../xffm/response/passwdresponse.hh:467
+msgid "Blowfish"
+msgstr "Blowfish"
+
+#: ../../xffm/response/passwdresponse.hh:468
+msgid "Encryption Key Approval"
+msgstr "Godkänn krypteringsnyckel"
+
+#: ../../xffm/response/passwdresponse.hh:502
+msgid "-o     print output to standard out. Implies -r."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:506
+msgid "-c     DO NOT compress files before encryption."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:510
+msgid "-r     DO NOT remove input files after processing"
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:517
+msgid "Encryption key: "
+msgstr "Krypteringsnyckel: "
+
+#: ../../xffm/response/passwdresponse.hh:529
+msgid "Confirm:"
+msgstr "Bekräfta:"
+
+#: ../../xffm/response/passwdresponse.hh:542
+msgid "Sorry, passwords do not match"
+msgstr "Tyvärr, lösenorden stämmer inte överens"
+
+#: ../../xffm/response/passwdresponse.hh:550
+msgid "Minimum length:"
+msgstr "Minimal längd:"
+
+#: ../../xffm/response/timeoutresponse.hh:56
+msgid "Dismiss"
+msgstr "Stäng"
+
+#: ../../xffm/response/commandresponse.hh:23
+msgid "Running"
+msgstr "Kör"
+
+#. auto text = g_strdup_printf("%s (pid: %d)",
+#. _("Waiting for operation to finish..."),
+#. Tubo<Type>::getChild (pid));
+#: ../../xffm/response/commandresponse.hh:28
+msgid "Waiting for operation to finish..."
+msgstr "Väntar på att åtgärden ska avslutas..."
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Documents"
+msgstr "Dokument"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Downloads"
+msgstr "Hämtningar"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Music"
+msgstr "Musik"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Pictures"
+msgstr "Bilder"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Templates"
+msgstr "Mallar"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Videos"
+msgstr "Videor"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Desktop"
+msgstr "Skrivbord"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Bookmarks"
+msgstr "Bokmärken"
+
+#: ../../xffm/fm/local/icons.hh:259 ../../xffm/fm/local/rm.hh:181
+msgid "Trash"
+msgstr "Papperskorg"
+
+#: ../../xffm/fm/local/popup.hh:60
+msgid "New"
+msgstr "Ny"
+
+#. deprecated {N_("Open in New Tab"), NULL, NULL, NULL},
+#. deprecated {N_("Open in New Window"), NULL, NULL, NULL},
+#. common buttons /(also an iconsize +/- button)
+#: ../../xffm/fm/local/popup.hh:64 ../../xffm/fm/local/popup.hh:104
+#: ../../xffm/common/gtk.hh:74
+msgid "Copy"
+msgstr "Kopiera"
+
+#: ../../xffm/fm/local/popup.hh:65 ../../xffm/fm/local/popup.hh:105
+#: ../../xffm/common/gtk.hh:73
+msgid "Cut"
+msgstr "Klipp ut"
+
+#: ../../xffm/fm/local/popup.hh:66 ../../xffm/fm/local/popup.hh:106
+#: ../../xffm/common/gtk.hh:66
+msgid "Paste"
+msgstr "Klistra in"
+
+#. **************
+#: ../../xffm/fm/local/popup.hh:67 ../../xffm/fm/local/popup.hh:107
+#: ../../xffm/fm/local/rm.hh:174 ../../xffm/common/gtk.hh:75
+msgid "Delete"
+msgstr "Ta bort"
+
+#. {N_("About"), NULL, (void *) menu},
+#.
+#. only for listview: {N_("Sort by size"), NULL, (void *) menu},
+#. only for listview: {N_("Sort by date"), NULL, (void *) menu},
+#: ../../xffm/fm/local/popup.hh:73
+msgid "Select All"
+msgstr "Markera allt"
+
+#: ../../xffm/fm/local/popup.hh:74 ../../xffm/fm/local/popup.hh:559
+msgid "Match regular expression"
+msgstr "Matcha reguljärt uttryck"
+
+#: ../../xffm/fm/local/popup.hh:75 ../../xffm/fm/root/view.hh:58
+#: ../../xffm/fm/fstab/popup.hh:21
+msgid "View as list"
+msgstr "Visa som lista"
+
+#: ../../xffm/fm/local/popup.hh:77
+msgid "Show hidden files"
+msgstr "Visa dolda filer"
+
+#: ../../xffm/fm/local/popup.hh:79
+msgid "Show Backup Files"
+msgstr "Visa säkerhetskopior"
+
+#: ../../xffm/fm/local/popup.hh:81
+msgid "Sort data in descending order"
+msgstr "Sortera data i fallande ordning"
+
+#: ../../xffm/fm/local/popup.hh:93 ../../xffm/fm/local/popup.hh:119
+#: ../../xffm/fm/local/popup.hh:1006 ../../xffm/fm/local/popup.hh:1013
+#: ../../xffm/fm/local/popup.hh:1022 ../../xffm/fm/local/popup.hh:1029
+#: ../../xffm/common/gtk.hh:72
+msgid "Open with"
+msgstr "Öppna med"
+
+#: ../../xffm/fm/local/popup.hh:94 ../../xffm/fm/local/popup.hh:846
+msgid "Run Executable..."
+msgstr "Kör körbar fil..."
+
+#: ../../xffm/fm/local/popup.hh:95
+msgid "Extract files from the archive"
+msgstr "Extrahera filer från arkivet"
+
+#. g_hash_table_insert(iconname_hash, "bcrypt", (void *)"emblem-keyhole");
+#: ../../xffm/fm/local/popup.hh:96 ../../xffm/fm/root/view.hh:73
+#: ../../xffm/fm/fstab/popup.hh:20 ../../xffm/fm/dialog/notebook.hh:52
+#: ../../xffm/common/gtk.hh:78
+msgid "Open in New Tab"
+msgstr "Öppna i ny flik"
+
+#. File chooser
+#: ../../xffm/fm/local/popup.hh:97 ../../xffm/fm/local/popup.hh:706
+msgid "Create a compressed archive with the selected objects"
+msgstr "Skapa ett komprimerat arkiv med de markerade objekten"
+
+#: ../../xffm/fm/local/popup.hh:98 ../../xffm/fm/fstab/popup.hh:37
+msgid "Mount the volume associated with this folder"
+msgstr "Montera volymen associerad med denna mapp"
+
+#: ../../xffm/fm/local/popup.hh:99 ../../xffm/fm/fstab/popup.hh:38
+msgid "Unmount the volume associated with this folder"
+msgstr "Avmontera volymen associerad med denna mapp"
+
+#: ../../xffm/fm/local/popup.hh:100 ../../xffm/common/gtk.hh:67
+msgid "Add bookmark"
+msgstr "Lägg till bokmärke"
+
+#: ../../xffm/fm/local/popup.hh:101 ../../xffm/fm/root/view.hh:74
+#: ../../xffm/common/gtk.hh:68
+msgid "Remove bookmark"
+msgstr "Ta bort bokmärke"
+
+#: ../../xffm/fm/local/popup.hh:108 ../../xffm/fm/local/popup.hh:961
+msgid "Rename"
+msgstr "Byt namn"
+
+#: ../../xffm/fm/local/popup.hh:109 ../../xffm/fm/local/popup.hh:947
+msgid "Duplicate"
+msgstr "Duplicera"
+
+#: ../../xffm/fm/local/popup.hh:110 ../../xffm/fm/local/popup.hh:933
+msgid "Link"
+msgstr "Länka"
+
+#: ../../xffm/fm/local/popup.hh:111
+msgid "Properties"
+msgstr "Egenskaper"
+
+#: ../../xffm/fm/local/popup.hh:414
+msgid "Files:"
+msgstr "Filer:"
+
+#: ../../xffm/fm/local/popup.hh:417 ../../xffm/fm/local/rm.hh:61
+msgid "Multiple selections"
+msgstr "Flera markeringar"
+
+#: ../../xffm/fm/local/popup.hh:557
+msgid "Select items"
+msgstr "Markera objekt"
+
+#: ../../xffm/fm/local/popup.hh:575
+msgid "Regular Expression syntax is incorrect"
+msgstr "Syntaxen för det reguljära uttrycket är felaktig"
+
+#: ../../xffm/fm/local/popup.hh:592
+msgid "No selection"
+msgstr "Ingen markering"
+
+#: ../../xffm/fm/local/popup.hh:592
+msgid "No matches."
+msgstr "Inga sökträffar."
+
+#. entryResponse->setCheckButton(_("Run in Terminal"));
+#. entryResponse->setCheckButton(Mime<Type>::runInTerminal(path));
+#: ../../xffm/fm/local/popup.hh:721 ../../xffm/fm/page/pathbar.hh:313
+msgid "Specify Output Directory..."
+msgstr "Ange utmatningskatalog..."
+
+#: ../../xffm/fm/local/popup.hh:799
+msgid "Create new..."
+msgstr "Skapa ny..."
+
+#: ../../xffm/fm/local/popup.hh:806 ../../xffm/fm/local/popup.hh:886
+msgid "New Name:"
+msgstr "Nytt namn:"
+
+#: ../../xffm/fm/local/popup.hh:815
+msgid "No name"
+msgstr "Inget namn"
+
+#: ../../xffm/fm/local/popup.hh:828
+#, fuzzy, c-format
+msgid "Another file with the same name already exists in “%s”."
+msgstr "Det finns redan en fil med samma namn i \"%s\"."
+
+#: ../../xffm/fm/local/popup.hh:850 ../../xffm/fm/local/popup.hh:1010
+#: ../../xffm/fm/local/popup.hh:1026 ../../xffm/common/util.hh:1248
+msgid "Run in Terminal"
+msgstr "Kör i terminal"
+
+#: ../../xffm/fm/local/popup.hh:853
+msgid "Arguments for the Command"
+msgstr "Argument för kommandot"
+
+#: ../../xffm/fm/local/popup.hh:1047 ../../xffm/fm/local/view.hh:141
+msgid "Invalid entry"
+msgstr "Ogiltig post"
+
+#: ../../xffm/fm/local/properties.hh:235
+msgid "Properties and Attributes"
+msgstr "Egenskaper och attribut"
+
+#: ../../xffm/fm/local/properties.hh:264
+msgid "File Mode:"
+msgstr "Filrättigheter:"
+
+#: ../../xffm/fm/local/properties.hh:290
+msgid "File:"
+msgstr "Fil:"
+
+#. Add file info stuff
+#. set info stuff data according to combo box
+#. add signal handler to changed signal for combo box
+#. Add process buttons
+#.
+#: ../../xffm/fm/local/properties.hh:302
+msgid "Apply changes"
+msgstr "Verkställ ändringar"
+
+#: ../../xffm/fm/local/properties.hh:462
+msgid "Successfully moved to trash."
+msgstr "Flyttade till papperskorgen med lyckat resultat."
+
+#: ../../xffm/fm/local/properties.hh:463
+msgid "Source:"
+msgstr "Källa:"
+
+#: ../../xffm/fm/local/rm.hh:59
+#, c-format
+msgid "Delete %s"
+msgstr "Ta bort %s"
+
+#: ../../xffm/fm/local/rm.hh:61
+msgid "Warning: "
+msgstr "Varning: "
+
+#. gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
+#. title
+#: ../../xffm/fm/local/rm.hh:90
+msgid "Remove"
+msgstr "Ta bort"
+
+#: ../../xffm/fm/local/rm.hh:140
+msgid "Apply to all"
+msgstr "Verkställ för alla"
+
+#. **************
+#. This is now available to BSD with rm -P option
+#: ../../xffm/fm/local/rm.hh:163 ../../xffm/common/gtk.hh:76
+msgid "Shred"
+msgstr "Förstör"
+
+#. We do not count "../"
+#: ../../xffm/fm/local/view.hh:48 ../../xffm/fm/base/monitor.hh:28
+#, c-format
+msgid "Files: %s"
+msgstr "Filer: %s"
+
+#: ../../xffm/fm/root/model.hh:78
+msgid "Root Directory"
+msgstr "Rotkatalog"
+
+#: ../../xffm/fm/root/model.hh:94
+msgid "This is the root of the filesystem"
+msgstr "Det här är roten på filsystemet"
+
+#: ../../xffm/fm/root/model.hh:105
+msgid "Home Directory"
+msgstr "Hemkatalog"
+
+#: ../../xffm/fm/root/model.hh:132
+msgid "Trash bin"
+msgstr "Papperskorg"
+
+#: ../../xffm/fm/root/model.hh:162 ../../xffm/fm/fstab/popup.hh:29
+#, fuzzy
+msgid "Disk Image Mounter"
+msgstr "Diskmonterare"
+
+#: ../../xffm/fm/root/model.hh:169 ../../xffm/fm/root/model.hh:185
+msgid "Mount local disks and devices"
+msgstr "Montera lokala hårddiskar och enheter"
+
+#: ../../xffm/fm/root/model.hh:170 ../../xffm/fm/fstab/popup.hh:25
+#: ../../xffm/fm/fstab/view.hh:429
+msgid "eCryptfs Volume"
+msgstr "eCryptfs-volym"
+
+#: ../../xffm/fm/root/model.hh:171 ../../xffm/fm/fstab/popup.hh:24
+msgid "SSHFS Remote Synchronization Folder"
+msgstr "Mapp för SSHFS-fjärrsynkronisering"
+
+#: ../../xffm/fm/root/model.hh:172 ../../xffm/fm/fstab/popup.hh:23
+#: ../../xffm/fm/fstab/view.hh:377
+msgid "NFS Network Volume"
+msgstr "NFS-nätverksvolym"
+
+#: ../../xffm/fm/root/model.hh:173 ../../xffm/fm/fstab/popup.hh:26
+#: ../../xffm/fm/fstab/view.hh:455
+msgid "CIFS Volume"
+msgstr "CIFS-volym"
+
+#: ../../xffm/fm/root/model.hh:195
+msgid "Software Updater"
+msgstr "Uppdatering av programvara"
+
+#: ../../xffm/fm/root/model.hh:218 ../../xffm/fm/root/model.hh:230
+msgid "Add or remove software installed on the system"
+msgstr "Lägg till eller ta bort programvara installerad på systemet"
+
+#: ../../xffm/fm/root/model.hh:271
+msgid "Go to bookmarked location"
+msgstr "Gå till bokmärkt plats"
+
+#. {N_("Add bookmark"), (void *)BasePopUp<Type>::noop, NULL, NULL},
+#: ../../xffm/fm/root/view.hh:61
+msgid "Empty trash"
+msgstr "Töm papperskorgen"
+
+#. File chooser
+#: ../../xffm/fm/fstab/popup.hh:121
+msgid "Mount Device"
+msgstr "Montera enhet"
+
+#: ../../xffm/fm/fstab/popup.hh:133
+msgid "Mount point:"
+msgstr "Monteringspunkt:"
+
+#: ../../xffm/fm/fstab/view.hh:301
+msgid "Mounted on:"
+msgstr "Monteringspunkt:"
+
+#: ../../xffm/fm/fstab/view.hh:302
+msgid "Mount on"
+msgstr "Montera på"
+
+#: ../../xffm/fm/fstab/view.hh:310 ../../xffm/fm/fstab/view.hh:312
+msgid "Not mounted"
+msgstr "Inte monterad"
+
+#: ../../xffm/fm/fstab/view.hh:403
+msgid "SFTP (via SSH)"
+msgstr "SFTP (via SSH)"
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, c-format
+msgid "Unmounting %s"
+msgstr "Avmonterar %s"
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, c-format
+msgid "Mounting %s"
+msgstr "Monterar %s"
+
+#: ../../xffm/fm/dialog/menupopover.hh:128
+msgid "Home"
+msgstr "Hem"
+
+#: ../../xffm/fm/dialog/menupopover.hh:129 ../../xffm/common/gtk.hh:64
+msgid "Open terminal"
+msgstr "Öppna terminalfönster"
+
+#: ../../xffm/fm/dialog/menupopover.hh:130
+msgid "Open a New Window"
+msgstr "Öppna ett nytt fönster"
+
+#. {N_("Execute Shell Command"), (void *)MenuPopoverSignals<Type>::shell, (void *) menuButton_},
+#: ../../xffm/fm/dialog/menupopover.hh:132 ../../xffm/common/gtk.hh:69
+msgid "Search"
+msgstr "Sök"
+
+#: ../../xffm/fm/dialog/menupopover.hh:133 ../../xffm/common/gtk.hh:71
+msgid "Exit"
+msgstr "Avsluta"
+
+#: ../../xffm/fm/dialog/dialog.hh:116
+msgid "Removed"
+msgstr "Borttagen"
+
+#: ../../xffm/fm/dialog/dialog.hh:132
+msgid "Detected device(s):"
+msgstr "Upptäckta enheter:"
+
+#. Create the widgets
+#: ../../xffm/fm/page/vbuttonbox.hh:37 ../../xffm/common/gtk.hh:332
+msgid "Help"
+msgstr "Hjälp"
+
+#. File chooser
+#: ../../xffm/fm/page/pathbar.hh:306 ../../xffm/fm/page/pathbar.hh:308
+msgid "Go to"
+msgstr "Gå till"
+
+#: ../../xffm/fm/page/pathbar.hh:331
+msgid "Not a directory"
+msgstr "Inte en katalog"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Renice Process"
+msgstr "Ändra prioritet för process"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Suspend"
+msgstr "Vänteläge"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Continue"
+msgstr "Fortsätt"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Interrupt"
+msgstr "Avbruten"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Hangup"
+msgstr "Avringd"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "User 1 (USR1)"
+msgstr "Användarsignal 1 (USR1)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "User 2 (USR2)"
+msgstr "Användarsignal 2 (USR2)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "Terminate Task"
+msgstr "Terminera aktivitet"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "Abort"
+msgstr "Avbryt"
+
+#: ../../xffm/fm/page/runbutton.hh:138
+msgid "Kill"
+msgstr "Döda"
+
+#: ../../xffm/fm/page/runbutton.hh:139
+msgid "Segmentation fault"
+msgstr "Segmenteringsfel"
+
+#: ../../xffm/fm/page/runbutton.hh:217
+msgid "PID"
+msgstr "PID"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:37
+#, fuzzy
+msgid "Embedded Terminal"
+msgstr "Stöd för inbäddad terminal"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:38
+msgid "All items in the iconview."
+msgstr "Alla objekt i ikonvyn."
+
+#: ../../xffm/fm/page/hbuttonbox.hh:39
+msgid "Scripting"
+msgstr "Skriptspråk"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:40
+msgid "Clear Log"
+msgstr "Rensa logg"
+
+#. Status textview
+#: ../../xffm/fm/page/hbuttonbox.hh:42
+msgid "Terminal font"
+msgstr "Terminaltypsnitt"
+
+#: ../../xffm/fm/treeview.hh:17
+msgid "Name"
+msgstr "Namn"
+
+#: ../../xffm/fm/treeview.hh:20
+msgid "Size"
+msgstr "Storlek"
+
+#: ../../xffm/fm/treeview.hh:21
+msgid "Date"
+msgstr "Datum"
+
+#: ../../xffm/fm/treeview.hh:22
+msgid "Mimetype"
+msgstr "Mime-typ"
+
+#: ../../xffm/fm/treeview.hh:24
+msgid "TYPE"
+msgstr "TYP"
+
+#: ../../xffm/fm/base/signals.hh:642
+msgid "Directory does not exist."
+msgstr "Katalogen finns inte."
+
+#: ../../xffm/fm/base/signals.hh:644 ../../xffm/fm/base/signals.hh:646
+msgid "Trash is empty"
+msgstr "Papperskorgen är tom"
+
+#: ../../xffm/common/settings.hh:27
+msgid "New File:"
+msgstr "Ny fil:"
+
+#: ../../xffm/common/gio.hh:235
+msgid "Could not copy item:"
+msgstr "Kunde inte kopiera objekt:"
+
+#: ../../xffm/common/gio.hh:237
+msgid "Could not move item:"
+msgstr "Kunde inte flytta objekt:"
+
+#: ../../xffm/common/gio.hh:239
+msgid "Create symbolic link"
+msgstr "Skapa symbolisk länk"
+
+#: ../../xffm/common/gio.hh:276
+#, c-format
+msgid ""
+"Could not delete:\n"
+"%s"
+msgstr ""
+"Kunde inte ta bort:\n"
+"%s"
+
+#: ../../xffm/common/gio.hh:278
+#, c-format
+msgid "Could not move %s to trash"
+msgstr "Kunde inte flytta %s till papperskorgen"
+
+#: ../../xffm/common/clipboard.hh:23 ../../xffm/common/dnd.hh:40
+msgid "Copying files locally"
+msgstr "Kopierar filer lokalt"
+
+#: ../../xffm/common/clipboard.hh:30 ../../xffm/common/dnd.hh:34
+msgid "Moving files"
+msgstr "Flyttar filer"
+
+#: ../../xffm/common/dnd.hh:46
+msgid "Create Link"
+msgstr "Skapa länk"
+
+#: ../../xffm/common/util.hh:1200
+#, c-format
+msgid ""
+"Scriptfile \"%s\" is not executable. Please set the executable-attribute on "
+"that file."
+msgstr ""
+"Skriptfilen \"%s\" är inte körbar. Ställ in filens egenskaper så att den "
+"blir körbar."
+
+#: ../../xffm/common/util.hh:1202 ../../xffm/common/util.hh:1237
+#, c-format
+msgid "Open with %s"
+msgstr "Öppna med %s"
+
+#: ../../xffm/common/util.hh:1202
+msgid "Text Editor"
+msgstr "Textredigerare"
+
+#: ../../xffm/common/util.hh:1239 ../../xffm/common/gtk.hh:65
+msgid "Execute Shell Command"
+msgstr "Kör skalkommando"
+
+#: ../../xffm/common/util.hh:1243
+msgid ""
+"Console: quickly run single commands -- write a command here and press enter."
+msgstr ""
+"Terminal: Kör enstaka kommandon snabbt. Skriv in ett kommando här och tryck "
+"på returtangenten."
+
+#: ../../xffm/common/gtk.hh:123
+msgid "New Tab"
+msgstr "Ny flik"
+
+#: ../../xffm/common/gtk.hh:335
+msgid "OK"
+msgstr "OK"
+
+#: ../../xffm/common/run.hh:344
+msgid "error"
+msgstr "fel"
+
+#: ../../xffm/common/run.hh:348
+msgid "warning"
+msgstr "varning"
+
+#: ../../xffm/common/mime.hh:101 ../../xffm/common/mime.hh:143
+msgid "No Read Permission"
+msgstr "Ingen läsrättighet"
+
+#: ../../xffm/common/preview.hh:593
+msgid "Empty file"
+msgstr "Tom fil"
+
+#: ../../xffm/common/preview.hh:648
+#, c-format
+msgid "Cannot read from %s"
+msgstr "Kan inte läsa från %s"
+

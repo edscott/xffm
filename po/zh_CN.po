@@ -352,7 +352,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-13 16:52-0500\n"
+"POT-Creation-Date: 2019-01-02 12:27-0600\n"
 "PO-Revision-Date: 2011-03-28 00:26+0800\n"
 "Last-Translator: Aron Xu <happyaron.xu@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -362,269 +362,74 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#. g_object_set_data(G_OBJECT(findDialog), "window", findDialog);
-#: ../../xffm/find/dialog.hh:91 ../../xffm/find/dialog.hh:143
-#: ../../xffm/find/dialog.hh:604
-msgid "Find"
-msgstr "查找(F)"
+#: ../../xffm/completion/base.hh:28
+msgid "Command"
+msgstr "命令"
 
-#. / option -r "recursive"
-#: ../../xffm/find/dialog.hh:167 ../../xffm/find/fgr.hh:146
-msgid "Recursive"
-msgstr "递归"
+#: ../../xffm/completion/base.hh:31
+msgid "File"
+msgstr "文件(F)"
 
-#. / option -D "recursiveH"
-#: ../../xffm/find/dialog.hh:170 ../../xffm/find/fgr.hh:142
-msgid "Find hidden files and directories"
-msgstr "查找隐藏目录和文件"
-
-#. / option -a "xdev"
-#: ../../xffm/find/dialog.hh:173 ../../xffm/find/fgr.hh:138
-msgid "Stay on single filesystem"
-msgstr "局限于单文件系统"
-
-#. / option "upper_limit_spin" (only in gtk findDialog)
-#. if (g_slist_length(list) == 0) return NULL;
-#. Create liststore for DnD
-#: ../../xffm/find/dialog.hh:176 ../../xffm/find/signals.hh:61
-#: ../../xffm/find/signals.hh:435
-msgid "Results"
-msgstr "结果"
-
-#: ../../xffm/find/dialog.hh:176
-msgid "Upper limit"
-msgstr "上限"
-
-#. option -s +KByte "size_greater", "size_greater_spin"
-#: ../../xffm/find/dialog.hh:181
-msgid "At Least"
-msgstr "至少"
-
-#: ../../xffm/find/dialog.hh:181 ../../xffm/find/dialog.hh:186
-msgid "kBytes"
-msgstr "千字节"
-
-#. option -s -KByte "size_smaller", "size_smaller_spin"
-#: ../../xffm/find/dialog.hh:186
-msgid "At Most"
-msgstr "最多"
+#: ../../xffm/completion/base.hh:34
+msgid "Command history"
+msgstr "命令历史(M)"
 
 #. option -u uid "uid" "uid_combo"
-#: ../../xffm/find/dialog.hh:192 ../../xffm/completion/base.hh:37
+#: ../../xffm/completion/base.hh:37 ../../xffm/find/dialog.hh:199
 msgid "User"
 msgstr "用户"
 
-#: ../../xffm/find/dialog.hh:197
-msgid "Group"
-msgstr "组"
+#: ../../xffm/completion/base.hh:40
+msgid "Variable"
+msgstr "变量"
 
-#. option -o octal "octal_p" "permissions_entry"
-#: ../../xffm/find/dialog.hh:201
-msgid "Octal Permissions"
-msgstr "八进制权限"
+#: ../../xffm/completion/base.hh:43
+msgid "Host"
+msgstr "主机"
 
-#. option -p suid | exe
-#: ../../xffm/find/dialog.hh:206
-msgid "SUID"
-msgstr "SUID"
+#: ../../xffm/completion/base.hh:55
+msgid "Found no match"
+msgstr "未找到匹配"
 
-#: ../../xffm/find/dialog.hh:206 ../../xffm/fm/view/local/popup.hh:1014
-msgid "Executable"
-msgstr "可执行文件"
+#: ../../xffm/completion/base.hh:133 ../../xffm/completion/base.hh:134
+msgid "Matches"
+msgstr "匹配项"
 
-#. radio_p freed on destroy event for findDialog.
-#. option -k minutes "last_minutes", "last_minutes_spin"
-#: ../../xffm/find/dialog.hh:214 ../../xffm/find/fgr.hh:166
-#: ../../xffm/find/fgr.hh:168
-msgid "Minutes"
-msgstr "分钟"
+#: ../../xffm/completion/base.hh:134
+msgid "Too many files open"
+msgstr "打开的文件过多"
 
-#. option -h hours "last_hours", "last_hours_spin"
-#: ../../xffm/find/dialog.hh:219 ../../xffm/find/fgr.hh:169
-#: ../../xffm/find/fgr.hh:171
-msgid "Hours"
-msgstr "小时"
-
-#. option -d days "last_days", "last_days_spin"
-#: ../../xffm/find/dialog.hh:224 ../../xffm/find/fgr.hh:172
-#: ../../xffm/find/fgr.hh:174
-msgid "Days"
-msgstr "天"
-
-#. option -m months "last_months", "last_months_spin"
-#: ../../xffm/find/dialog.hh:230
-msgid "Months"
-msgstr "月"
-
-#: ../../xffm/find/dialog.hh:241
-msgid "File type : "
-msgstr "文件类型 : "
-
-#. gtk_widget_show (GTK_WIDGET(right_options_vbox));
-#. gtk_widget_show (GTK_WIDGET(center_options_vbox));
-#. gtk_widget_show (GTK_WIDGET(left_options_vbox));
-#: ../../xffm/find/dialog.hh:255 ../../xffm/find/dialog.hh:595
-#: ../../xffm/common/gtk.hh:79 ../../xffm/fm/dialog/notebook/page/page.hh:70
-msgid "Close"
-msgstr "关闭"
-
-#: ../../xffm/find/dialog.hh:263 ../../xffm/find/dialog.hh:363
-#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
-#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
-#: ../../xffm/fm/view/treeview.hh:18
-msgid "Details"
-msgstr "详细信息"
-
-#: ../../xffm/find/dialog.hh:301 ../../xffm/find/fgr.hh:124
-#: ../../xffm/find/signals.hh:90
-msgid "Path"
-msgstr "路径"
-
-#: ../../xffm/find/dialog.hh:334 ../../xffm/find/fgr.hh:126
-msgid "Filter:"
-msgstr "过滤规则(I)："
-
-#. gtk_box_pack_start (vbox7a, GTK_WIDGET(advancedBox), TRUE, FALSE, 5);
-#. gtk_widget_show(GTK_WIDGET(advancedBox));
-#. //////////////  grep options.... /////////////////////////
-#: ../../xffm/find/dialog.hh:377
-msgid "Contains"
-msgstr "包含"
-
-#: ../../xffm/find/dialog.hh:397
-msgid "Contains the text"
-msgstr "含有文本(T)"
-
-#: ../../xffm/find/dialog.hh:430
-msgid "Case Sensitive"
-msgstr "区分大小写"
-
-#: ../../xffm/find/dialog.hh:442
-msgid "Extended regexp"
-msgstr "扩展的正则表达式"
-
-#: ../../xffm/find/dialog.hh:453
-msgid "Include binary files"
-msgstr "包含二进制文件"
-
-#: ../../xffm/find/dialog.hh:463 ../../xffm/find/fgr.hh:212
-msgid "Line Count"
-msgstr "行数"
-
-#: ../../xffm/find/dialog.hh:489
-msgid "Match"
-msgstr "匹配"
-
-#: ../../xffm/find/dialog.hh:501
-msgid "Anywhere"
-msgstr "任何地方"
-
-#: ../../xffm/find/dialog.hh:516
-msgid "Whole words only"
-msgstr "匹配整个单词(W)"
-
-#: ../../xffm/find/dialog.hh:531
-msgid "lines"
-msgstr "行"
-
-#: ../../xffm/find/dialog.hh:545 ../../xffm/find/fgr.hh:210
-msgid "No match"
-msgstr "无匹配"
-
-#. button no
-#: ../../xffm/find/dialog.hh:577 ../../xffm/find/signals.hh:349
-#: ../../xffm/common/gtk.hh:393 ../../xffm/fm/view/local/rm.hh:157
-#: ../../xffm/fm/view/local/properties.hh:314
-#: ../../xffm/response/passwdresponse.hh:624
-#: ../../xffm/response/entryresponse.hh:420
-#: ../../xffm/response/chooserresponse.hh:21
-msgid "Cancel"
-msgstr "取消(C)"
-
-#: ../../xffm/find/dialog.hh:587
-msgid "Clear"
-msgstr "清除(C)"
-
-#: ../../xffm/find/dialog.hh:629
-msgid "Edit"
-msgstr "编辑(E)"
-
-#: ../../xffm/find/dialog.hh:743 ../../xffm/find/dialog.hh:758
-#: ../../xffm/common/preview.hh:460 ../../xffm/common/util.hh:1204
-#: ../../xffm/common/util.hh:1206 ../../xffm/common/util.hh:1212
-#: ../../xffm/common/util.hh:1214
-msgid "unknown"
-msgstr "未知"
-
-#: ../../xffm/find/dialog.hh:772
-msgid "Modified"
-msgstr "已修改"
-
-#: ../../xffm/find/dialog.hh:776
-msgid "Created"
-msgstr "已创建"
-
-#: ../../xffm/find/dialog.hh:780
-msgid "Accessed"
-msgstr "已访问过"
-
-#: ../../xffm/find/dialog.hh:1098
-msgid ""
-"Basic rules:\n"
-"\n"
-"*  Will match any character zero or more times.\n"
-"?  Will match any character exactly one time\n"
-"[] Match any character within the [] \n"
-"^  Match at beginning of string\n"
-"$  Match at end of string \n"
-msgstr ""
-"基本规则:\n"
-"\n"
-"*  匹配任何字符 0 或任意次.\n"
-"?  匹配任何字符 1 次.\n"
-
-#: ../../xffm/find/dialog.hh:1107
-msgid ""
-"Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ ( ) : \n"
-"In  basic regular expressions the metacharacters ?, +, {, |, (, and ) \n"
-"  lose their special meaning.\n"
-"\n"
-"The  period . matches  any  single  character.\n"
-"The caret ^ matches at the start of line.\n"
-"The dollar $ matches at the end of line.\n"
-"\n"
-"Characters within [ ] matches any single character in the list.\n"
-"Characters within [^ ] matches any single character *not* in the list.\n"
-"Characters inside [ - ] matches a range of characters (ie [0-9] or [a-z]).\n"
-"\n"
-"A regular expression may be followed by one of several repetition "
-"operators:\n"
-"?      The preceding item is optional and matched\n"
-"       at most once.\n"
-"*      The preceding item will be matched zero\n"
-"       or more times.\n"
-"+      The preceding item will be matched one or\n"
-"       more times.\n"
-"{n}    The preceding item is matched exactly n times.\n"
-"{n,}   The preceding item is matched n or more times.\n"
-"{n,m}  The preceding item is matched at least n times,\n"
-"       but not more than m times.\n"
-"\n"
-"To match any reserved character, precede it with \\. \n"
-"\n"
-"Two regular expressions may be joined by the logical or operator |.\n"
-"Two regular expressions may be concatenated.\n"
-"\n"
-"More information is available by typing \"man grep\"\n"
-msgstr ""
-
-#: ../../xffm/find/fgr.hh:124 ../../xffm/completion/base.hh:339
+#: ../../xffm/completion/base.hh:325 ../../xffm/find/fgr.hh:124
 msgid "Options:"
 msgstr "选项："
+
+#: ../../xffm/completion/bash.hh:133
+msgid "Completion mode:"
+msgstr "自动补齐模式(C)："
+
+#: ../../xffm/completion/bash.hh:134
+msgid "command"
+msgstr "命令"
+
+#: ../../xffm/completion/bash.hh:135
+msgid "file"
+msgstr "文件"
+
+#: ../../xffm/completion/bash.hh:145 ../../xffm/completion/bash.hh:149
+msgid "Options >>"
+msgstr "选项 >>"
+
+#: ../../xffm/find/fgr.hh:124 ../../xffm/find/dialog.hh:308
+msgid "Path"
+msgstr "路径"
 
 #: ../../xffm/find/fgr.hh:125
 msgid "Locate documents and folders on this computer by name or content"
 msgstr "按名称或内容定位此计算机上的文档和文件夹"
+
+#: ../../xffm/find/fgr.hh:126 ../../xffm/find/dialog.hh:341
+msgid "Filter:"
+msgstr "过滤规则(I)："
 
 #: ../../xffm/find/fgr.hh:126
 msgid "Search for files"
@@ -651,6 +456,11 @@ msgstr "显示版本信息"
 msgid "Filter Details"
 msgstr "过滤器细节"
 
+#. / option -a "xdev"
+#: ../../xffm/find/fgr.hh:138 ../../xffm/find/dialog.hh:180
+msgid "Stay on single filesystem"
+msgstr "局限于单文件系统"
+
 #: ../../xffm/find/fgr.hh:140
 msgid "Print..."
 msgstr "打印(P)"
@@ -658,6 +468,11 @@ msgstr "打印(P)"
 #: ../../xffm/find/fgr.hh:140
 msgid "The unique Process ID that identifies this process."
 msgstr "标识此进程的唯一进程号(UID)。"
+
+#. / option -D "recursiveH"
+#: ../../xffm/find/fgr.hh:142 ../../xffm/find/dialog.hh:177
+msgid "Find hidden files and directories"
+msgstr "查找隐藏目录和文件"
 
 #: ../../xffm/find/fgr.hh:143
 msgid "Filter"
@@ -667,6 +482,11 @@ msgstr "过滤器"
 msgid ""
 "To display files which pass the filter (stars and regexps will be processed)"
 msgstr "显示通过过滤器的文件(星号和正则表达式将被处理)"
+
+#. / option -r "recursive"
+#: ../../xffm/find/fgr.hh:146 ../../xffm/find/dialog.hh:174
+msgid "Recursive"
+msgstr "递归"
 
 #: ../../xffm/find/fgr.hh:147 ../../xffm/find/fgr.hh:148
 #: ../../xffm/find/fgr.hh:149 ../../xffm/find/fgr.hh:150
@@ -697,7 +517,7 @@ msgstr "文件的权限，以八进制显示。"
 msgid "Type"
 msgstr "类型"
 
-#: ../../xffm/find/fgr.hh:157 ../../xffm/find/signals.hh:14
+#: ../../xffm/find/fgr.hh:157 ../../xffm/find/signals.hh:17
 msgid "Any"
 msgstr "任意的"
 
@@ -705,17 +525,17 @@ msgstr "任意的"
 msgid "Default type"
 msgstr "默认类型"
 
-#: ../../xffm/find/fgr.hh:158 ../../xffm/common/preview.hh:478
+#: ../../xffm/find/fgr.hh:158 ../../xffm/common/preview.hh:497
 msgid "Regular file"
 msgstr "常规文件"
 
-#: ../../xffm/find/fgr.hh:159 ../../xffm/find/signals.hh:8
-#: ../../xffm/common/preview.hh:469 ../../xffm/fm/view/local/popup.hh:974
+#: ../../xffm/find/fgr.hh:159 ../../xffm/find/signals.hh:11
+#: ../../xffm/fm/local/popup.hh:803 ../../xffm/common/preview.hh:488
 msgid "Directory"
 msgstr "目录"
 
-#: ../../xffm/find/fgr.hh:160 ../../xffm/find/signals.hh:9
-#: ../../xffm/common/preview.hh:475
+#: ../../xffm/find/fgr.hh:160 ../../xffm/find/signals.hh:12
+#: ../../xffm/common/preview.hh:494
 msgid "Symbolic Link"
 msgstr "符号链接"
 
@@ -723,20 +543,34 @@ msgstr "符号链接"
 msgid "UNIX Socket"
 msgstr "UNIX 套接字"
 
-#: ../../xffm/find/fgr.hh:162 ../../xffm/find/signals.hh:11
-#: ../../xffm/common/preview.hh:463
+#: ../../xffm/find/fgr.hh:162 ../../xffm/find/signals.hh:14
+#: ../../xffm/common/preview.hh:482
 msgid "Block device"
 msgstr "块设备"
 
-#: ../../xffm/find/fgr.hh:163 ../../xffm/find/signals.hh:12
-#: ../../xffm/common/preview.hh:466
+#: ../../xffm/find/fgr.hh:163 ../../xffm/find/signals.hh:15
+#: ../../xffm/common/preview.hh:485
 msgid "Character device"
 msgstr "字符设备"
 
-#: ../../xffm/find/fgr.hh:164 ../../xffm/find/signals.hh:13
-#: ../../xffm/common/preview.hh:472
+#: ../../xffm/find/fgr.hh:164 ../../xffm/find/signals.hh:16
+#: ../../xffm/common/preview.hh:491
 msgid "FIFO"
 msgstr "先进先出文件(FIFO)"
+
+#. radio_p freed on destroy event for dialog_.
+#. option -k minutes "last_minutes", "last_minutes_spin"
+#: ../../xffm/find/fgr.hh:166 ../../xffm/find/fgr.hh:168
+#: ../../xffm/find/dialog.hh:221
+msgid "Minutes"
+msgstr "分钟"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/dialog.hh:270 ../../xffm/find/dialog.hh:370
+#: ../../xffm/fm/treeview.hh:18
+msgid "Details"
+msgstr "详细信息"
 
 #: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
 #: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
@@ -750,6 +584,18 @@ msgstr "时间"
 #: ../../xffm/find/fgr.hh:174 ../../xffm/find/fgr.hh:177
 msgid "Previous"
 msgstr "前一个(P)"
+
+#. option -h hours "last_hours", "last_hours_spin"
+#: ../../xffm/find/fgr.hh:169 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/dialog.hh:226
+msgid "Hours"
+msgstr "小时"
+
+#. option -d days "last_days", "last_days_spin"
+#: ../../xffm/find/fgr.hh:172 ../../xffm/find/fgr.hh:174
+#: ../../xffm/find/dialog.hh:231
+msgid "Days"
+msgstr "天"
 
 #: ../../xffm/find/fgr.hh:175
 msgid "Month"
@@ -803,7 +649,7 @@ msgid "STRING"
 msgstr "字符串"
 
 #: ../../xffm/find/fgr.hh:202 ../../xffm/find/fgr.hh:204
-#: ../../xffm/fm/view/local/popup.hh:691
+#: ../../xffm/fm/local/popup.hh:563
 msgid "Regular expression"
 msgstr "正则表达式"
 
@@ -819,6 +665,14 @@ msgstr "忽略大小写(I)"
 msgid "Text Files"
 msgstr "文本文件"
 
+#: ../../xffm/find/fgr.hh:210 ../../xffm/find/dialog.hh:552
+msgid "No match"
+msgstr "无匹配"
+
+#: ../../xffm/find/fgr.hh:212 ../../xffm/find/dialog.hh:470
+msgid "Line Count"
+msgstr "行数"
+
 #: ../../xffm/find/fgr.hh:214
 msgid "Words"
 msgstr "单词数"
@@ -832,448 +686,581 @@ msgstr "行"
 msgid "Usage : %s [OPTIONS]\n"
 msgstr "运用选择 : %s [OPTIONS]\n"
 
-#: ../../xffm/find/signals.hh:7
+#: ../../xffm/find/signals.hh:10
 msgid "Regular"
 msgstr "常规"
 
-#: ../../xffm/find/signals.hh:10 ../../xffm/common/preview.hh:481
+#: ../../xffm/find/signals.hh:13 ../../xffm/common/preview.hh:500
 msgid "Socket"
 msgstr "套接字"
 
-#: ../../xffm/find/signals.hh:377 ../../xffm/find/signals.hh:811
+#: ../../xffm/find/signals.hh:209
+msgid "Select folder to search in"
+msgstr "选择进行搜索的文件夹"
+
+#. button no
+#: ../../xffm/find/signals.hh:265 ../../xffm/find/dialog.hh:584
+#: ../../xffm/response/entryfileresponse.hh:18
+#: ../../xffm/response/entryresponse.hh:305
+#: ../../xffm/response/passwdresponse.hh:558
+#: ../../xffm/fm/local/properties.hh:304 ../../xffm/fm/local/rm.hh:155
+msgid "Cancel"
+msgstr "取消(C)"
+
+#: ../../xffm/find/signals.hh:293 ../../xffm/find/signals.hh:722
 msgid "No editor for current action."
 msgstr "当前操作无编辑器。"
 
-#: ../../xffm/find/signals.hh:435
+#. / option "upper_limit_spin" (only in gtk dialog_)
+#: ../../xffm/find/signals.hh:351 ../../xffm/find/dialog.hh:183
+msgid "Results"
+msgstr "结果"
+
+#: ../../xffm/find/signals.hh:351
 msgid "Upper limit:"
 msgstr "上限："
 
-#: ../../xffm/find/signals.hh:437
+#: ../../xffm/find/signals.hh:353
 msgid "Counting files..."
 msgstr "正在统计文件..."
 
-#: ../../xffm/find/signals.hh:452
+#: ../../xffm/find/signals.hh:368
 #, c-format
 msgid "Found %d match"
 msgid_plural "Found %d matches"
 msgstr[0] "找到 %d 项匹配"
 
-#: ../../xffm/find/signals.hh:454
+#: ../../xffm/find/signals.hh:370
 #, c-format
 msgid "%s Finished : %s"
 msgstr "%s 已完成：%s"
 
-#: ../../xffm/find/signals.hh:577 ../../xffm/find/signals.hh:579
+#: ../../xffm/find/signals.hh:488 ../../xffm/find/signals.hh:490
 msgid "Searching..."
 msgstr "搜索中..."
 
-#: ../../xffm/common/preview.hh:581
-msgid "Empty file"
-msgstr "空文件"
+#. g_object_set_data(G_OBJECT(dialog_), "window", dialog_);
+#: ../../xffm/find/dialog.hh:98 ../../xffm/find/dialog.hh:150
+#: ../../xffm/find/dialog.hh:611
+msgid "Find"
+msgstr "查找(F)"
 
-#: ../../xffm/common/preview.hh:636
+#: ../../xffm/find/dialog.hh:183
+msgid "Upper limit"
+msgstr "上限"
+
+#. option -s +KByte "size_greater", "size_greater_spin"
+#: ../../xffm/find/dialog.hh:188
+msgid "At Least"
+msgstr "至少"
+
+#: ../../xffm/find/dialog.hh:188 ../../xffm/find/dialog.hh:193
+msgid "kBytes"
+msgstr "千字节"
+
+#. option -s -KByte "size_smaller", "size_smaller_spin"
+#: ../../xffm/find/dialog.hh:193
+msgid "At Most"
+msgstr "最多"
+
+#: ../../xffm/find/dialog.hh:204
+msgid "Group"
+msgstr "组"
+
+#. option -o octal "octal_p" "permissions_entry"
+#: ../../xffm/find/dialog.hh:208
+msgid "Octal Permissions"
+msgstr "八进制权限"
+
+#. option -p suid | exe
+#: ../../xffm/find/dialog.hh:213
+msgid "SUID"
+msgstr "SUID"
+
+#: ../../xffm/find/dialog.hh:213 ../../xffm/fm/local/popup.hh:843
+msgid "Executable"
+msgstr "可执行文件"
+
+#. option -m months "last_months", "last_months_spin"
+#: ../../xffm/find/dialog.hh:237
+msgid "Months"
+msgstr "月"
+
+#: ../../xffm/find/dialog.hh:248
+msgid "File type : "
+msgstr "文件类型 : "
+
+#. gtk_widget_show (GTK_WIDGET(right_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(center_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(left_options_vbox));
+#: ../../xffm/find/dialog.hh:262 ../../xffm/find/dialog.hh:602
+#: ../../xffm/fm/page/page.hh:70 ../../xffm/common/gtk.hh:70
+msgid "Close"
+msgstr "关闭"
+
+#. gtk_box_pack_start (vbox7a, GTK_WIDGET(advancedBox), TRUE, FALSE, 5);
+#. gtk_widget_show(GTK_WIDGET(advancedBox));
+#. //////////////  grep options.... /////////////////////////
+#: ../../xffm/find/dialog.hh:384
+msgid "Contains"
+msgstr "包含"
+
+#: ../../xffm/find/dialog.hh:404
+msgid "Contains the text"
+msgstr "含有文本(T)"
+
+#: ../../xffm/find/dialog.hh:437
+msgid "Case Sensitive"
+msgstr "区分大小写"
+
+#: ../../xffm/find/dialog.hh:449
+msgid "Extended regexp"
+msgstr "扩展的正则表达式"
+
+#: ../../xffm/find/dialog.hh:460
+msgid "Include binary files"
+msgstr "包含二进制文件"
+
+#: ../../xffm/find/dialog.hh:496
+msgid "Match"
+msgstr "匹配"
+
+#: ../../xffm/find/dialog.hh:508
+msgid "Anywhere"
+msgstr "任何地方"
+
+#: ../../xffm/find/dialog.hh:523
+msgid "Whole words only"
+msgstr "匹配整个单词(W)"
+
+#: ../../xffm/find/dialog.hh:538
+msgid "lines"
+msgstr "行"
+
+#: ../../xffm/find/dialog.hh:594
+msgid "Clear"
+msgstr "清除(C)"
+
+#: ../../xffm/find/dialog.hh:636
+msgid "Edit"
+msgstr "编辑(E)"
+
+#: ../../xffm/find/dialog.hh:751 ../../xffm/find/dialog.hh:766
+#: ../../xffm/common/util.hh:1150 ../../xffm/common/util.hh:1152
+#: ../../xffm/common/util.hh:1158 ../../xffm/common/util.hh:1160
+#: ../../xffm/common/preview.hh:479
+msgid "unknown"
+msgstr "未知"
+
+#: ../../xffm/find/dialog.hh:780
+msgid "Modified"
+msgstr "已修改"
+
+#: ../../xffm/find/dialog.hh:784
+msgid "Created"
+msgstr "已创建"
+
+#: ../../xffm/find/dialog.hh:788
+msgid "Accessed"
+msgstr "已访问过"
+
+#: ../../xffm/find/dialog.hh:1106
+msgid ""
+"Basic rules:\n"
+"\n"
+"*  Will match any character zero or more times.\n"
+"?  Will match any character exactly one time\n"
+"[] Match any character within the [] \n"
+"^  Match at beginning of string\n"
+"$  Match at end of string \n"
+msgstr ""
+"基本规则:\n"
+"\n"
+"*  匹配任何字符 0 或任意次.\n"
+"?  匹配任何字符 1 次.\n"
+
+#: ../../xffm/find/dialog.hh:1115
+msgid ""
+"Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"In  basic regular expressions the metacharacters ?, +, {, |, (, and ) \n"
+"  lose their special meaning.\n"
+"\n"
+"The  period . matches  any  single  character.\n"
+"The caret ^ matches at the start of line.\n"
+"The dollar $ matches at the end of line.\n"
+"\n"
+"Characters within [ ] matches any single character in the list.\n"
+"Characters within [^ ] matches any single character *not* in the list.\n"
+"Characters inside [ - ] matches a range of characters (ie [0-9] or [a-z]).\n"
+"\n"
+"A regular expression may be followed by one of several repetition "
+"operators:\n"
+"?      The preceding item is optional and matched\n"
+"       at most once.\n"
+"*      The preceding item will be matched zero\n"
+"       or more times.\n"
+"+      The preceding item will be matched one or\n"
+"       more times.\n"
+"{n}    The preceding item is matched exactly n times.\n"
+"{n,}   The preceding item is matched n or more times.\n"
+"{n,m}  The preceding item is matched at least n times,\n"
+"       but not more than m times.\n"
+"\n"
+"To match any reserved character, precede it with \\. \n"
+"\n"
+"Two regular expressions may be joined by the logical or operator |.\n"
+"Two regular expressions may be concatenated.\n"
+"\n"
+"More information is available by typing \"man grep\"\n"
+msgstr ""
+
+#: ../../xffm/response/entryfileresponse.hh:20
+msgid "Open"
+msgstr "打开"
+
+#: ../../xffm/response/entryresponse.hh:29
+#: ../../xffm/response/entryfolderresponse.hh:28
+msgid "Choose directory"
+msgstr "选择目录"
+
+#. this button is redundant since hands are on keyboard for password
+#: ../../xffm/response/entryresponse.hh:309
+#: ../../xffm/response/passwdresponse.hh:189
+#: ../../xffm/response/passwdresponse.hh:559
+msgid "Ok"
+msgstr "确定"
+
+#: ../../xffm/response/commandprogressresponse.hh:32
+msgid "Items:"
+msgstr "项数(E)："
+
+#: ../../xffm/response/passwdresponse.hh:21
+msgid "Enter password"
+msgstr "输入密码"
+
+#. gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+#: ../../xffm/response/passwdresponse.hh:125
+msgid "User Input"
+msgstr "用户输入"
+
+#: ../../xffm/response/passwdresponse.hh:142
+msgid "Response Requested"
+msgstr "请求响应"
+
+#: ../../xffm/response/passwdresponse.hh:264
+msgid "Preparing"
+msgstr "正在准备"
+
+#: ../../xffm/response/passwdresponse.hh:352
+msgid "sudo"
+msgstr "sudo"
+
+#: ../../xffm/response/passwdresponse.hh:354
+msgid "Command:"
+msgstr "命令："
+
+#: ../../xffm/response/passwdresponse.hh:357
+msgid "Permission denied"
+msgstr "拒绝访问"
+
+#: ../../xffm/response/passwdresponse.hh:358
+msgid "Try to approach a problem from different angles."
+msgstr "尝试从不同角度思考问题。"
+
+#: ../../xffm/response/passwdresponse.hh:359
+msgid "Do you want to retry?"
+msgstr "您想要再试一次吗？"
+
+#: ../../xffm/response/passwdresponse.hh:360
+msgid "Alternate:"
+msgstr "备选："
+
+#: ../../xffm/response/passwdresponse.hh:365
+msgid "No"
+msgstr "否"
+
+#: ../../xffm/response/passwdresponse.hh:401
+msgid "Install"
+msgstr "安装"
+
+#: ../../xffm/response/passwdresponse.hh:402
 #, c-format
-msgid "Cannot read from %s"
-msgstr "无法读取 %s"
+msgid "%s does not exist."
+msgstr "%s 不存在。"
 
-#: ../../xffm/common/gtk.hh:67 ../../xffm/fm/dialog/notebook/vbuttonbox.hh:240
-msgid "Open terminal"
-msgstr "打开终端"
+#: ../../xffm/response/passwdresponse.hh:467
+msgid "Blowfish"
+msgstr "Blowfish"
 
-#: ../../xffm/common/gtk.hh:69 ../../xffm/common/util.hh:1293
-msgid "Execute Shell Command"
-msgstr "执行 Shell 命令"
+#: ../../xffm/response/passwdresponse.hh:468
+msgid "Encryption Key Approval"
+msgstr "加密密钥认可"
 
-#: ../../xffm/common/gtk.hh:71 ../../xffm/fm/view/local/popup.hh:98
-#: ../../xffm/fm/view/local/popup.hh:152
-msgid "Paste"
-msgstr "粘贴(P)"
+#: ../../xffm/response/passwdresponse.hh:502
+msgid "-o     print output to standard out. Implies -r."
+msgstr ""
 
-#: ../../xffm/common/gtk.hh:73 ../../xffm/fm/view/local/popup.hh:146
-msgid "Add bookmark"
-msgstr "添加书签(A)"
+#: ../../xffm/response/passwdresponse.hh:506
+msgid "-c     DO NOT compress files before encryption."
+msgstr ""
 
-#: ../../xffm/common/gtk.hh:75 ../../xffm/fm/view/local/popup.hh:147
-#: ../../xffm/fm/view/root/view.hh:70
-msgid "Remove bookmark"
-msgstr "清除书签"
+#: ../../xffm/response/passwdresponse.hh:510
+msgid "-r     DO NOT remove input files after processing"
+msgstr ""
 
-#: ../../xffm/common/gtk.hh:77 ../../xffm/fm/view/pkg/model.hh:108
-#: ../../xffm/fm/view/pkg/model.hh:299 ../../xffm/fm/view/pkg/model.hh:306
-#: ../../xffm/fm/view/pkg/popup.hh:151
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:236
-msgid "Search"
-msgstr "搜索"
+#: ../../xffm/response/passwdresponse.hh:517
+msgid "Encryption key: "
+msgstr "加密密钥："
 
-#: ../../xffm/common/gtk.hh:81 ../../xffm/fm/dialog/notebook/menupopover.hh:229
-msgid "Exit"
-msgstr "退出(X)"
+#: ../../xffm/response/passwdresponse.hh:529
+msgid "Confirm:"
+msgstr "确认："
 
-#: ../../xffm/common/gtk.hh:83 ../../xffm/fm/view/local/popup.hh:84
-#: ../../xffm/fm/view/local/popup.hh:137 ../../xffm/fm/view/local/popup.hh:1199
-#: ../../xffm/fm/view/local/popup.hh:1206
-#: ../../xffm/fm/view/local/popup.hh:1217
-#: ../../xffm/fm/view/local/popup.hh:1224
-msgid "Open with"
-msgstr "打开方式"
+#: ../../xffm/response/passwdresponse.hh:542
+msgid "Sorry, passwords do not match"
+msgstr "对不起，密码不匹配"
 
-#: ../../xffm/common/gtk.hh:85 ../../xffm/fm/view/local/popup.hh:97
-#: ../../xffm/fm/view/local/popup.hh:151
-msgid "Cut"
-msgstr "剪切(T)"
+#: ../../xffm/response/passwdresponse.hh:550
+msgid "Minimum length:"
+msgstr "最小长度："
+
+#: ../../xffm/response/timeoutresponse.hh:56
+msgid "Dismiss"
+msgstr "错过(D)"
+
+#: ../../xffm/response/commandresponse.hh:23
+msgid "Running"
+msgstr "正在运行"
+
+#. auto text = g_strdup_printf("%s (pid: %d)",
+#. _("Waiting for operation to finish..."),
+#. Tubo<Type>::getChild (pid));
+#: ../../xffm/response/commandresponse.hh:28
+msgid "Waiting for operation to finish..."
+msgstr "正在等待操作结束..."
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Documents"
+msgstr "文档(D)"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Downloads"
+msgstr "下载"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Music"
+msgstr "音乐"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Pictures"
+msgstr "图片"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Templates"
+msgstr "模板"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Videos"
+msgstr "视频"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Desktop"
+msgstr "桌面(K)"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Bookmarks"
+msgstr "书签(B)"
+
+#: ../../xffm/fm/local/icons.hh:259 ../../xffm/fm/local/rm.hh:181
+msgid "Trash"
+msgstr "垃圾"
+
+#: ../../xffm/fm/local/popup.hh:60
+msgid "New"
+msgstr "新建(N)"
 
 #. deprecated {N_("Open in New Tab"), NULL, NULL, NULL},
 #. deprecated {N_("Open in New Window"), NULL, NULL, NULL},
 #. common buttons /(also an iconsize +/- button)
-#: ../../xffm/common/gtk.hh:87 ../../xffm/fm/view/local/popup.hh:96
-#: ../../xffm/fm/view/local/popup.hh:150
+#: ../../xffm/fm/local/popup.hh:64 ../../xffm/fm/local/popup.hh:104
+#: ../../xffm/common/gtk.hh:74
 msgid "Copy"
 msgstr "复制(C)"
 
+#: ../../xffm/fm/local/popup.hh:65 ../../xffm/fm/local/popup.hh:105
+#: ../../xffm/common/gtk.hh:73
+msgid "Cut"
+msgstr "剪切(T)"
+
+#: ../../xffm/fm/local/popup.hh:66 ../../xffm/fm/local/popup.hh:106
+#: ../../xffm/common/gtk.hh:66
+msgid "Paste"
+msgstr "粘贴(P)"
+
 #. **************
-#: ../../xffm/common/gtk.hh:89 ../../xffm/fm/view/local/rm.hh:176
-#: ../../xffm/fm/view/local/popup.hh:99 ../../xffm/fm/view/local/popup.hh:154
+#: ../../xffm/fm/local/popup.hh:67 ../../xffm/fm/local/popup.hh:107
+#: ../../xffm/fm/local/rm.hh:174 ../../xffm/common/gtk.hh:75
 msgid "Delete"
 msgstr "删除"
-
-#. **************
-#. This is now available to BSD with rm -P option
-#: ../../xffm/common/gtk.hh:91 ../../xffm/fm/view/local/rm.hh:165
-msgid "Shred"
-msgstr "粉碎"
-
-#: ../../xffm/common/gtk.hh:94 ../../xffm/fm/view/local/popup.hh:140
-#: ../../xffm/fm/view/root/view.hh:69 ../../xffm/fm/view/fstab/popup.hh:20
-msgid "Open in New Tab"
-msgstr "在新标签中打开"
-
-#: ../../xffm/common/gtk.hh:139 ../../xffm/fm/dialog/notebook/notebook.hh:75
-msgid "New Tab"
-msgstr "新标签"
-
-#: ../../xffm/common/gtk.hh:352 ../../xffm/common/gtk.hh:360
-msgid "Help"
-msgstr "帮助(H)"
-
-#: ../../xffm/common/settings.hh:30
-msgid "New File:"
-msgstr "新建文件："
-
-#: ../../xffm/common/gio.hh:80
-msgid "Copying files"
-msgstr "正在复制文件"
-
-#: ../../xffm/common/gio.hh:82 ../../xffm/common/dnd.hh:35
-#: ../../xffm/fm/dialog/clipboard.hh:30
-msgid "Moving files"
-msgstr "正在移动文件"
-
-#: ../../xffm/common/gio.hh:84
-msgid "linking"
-msgstr "正在连接"
-
-#: ../../xffm/common/gio.hh:448
-#, c-format
-msgid "(%d of %d)"
-msgstr "(第 %d 页，共 %d 页)"
-
-#: ../../xffm/common/util.hh:1254
-#, c-format
-msgid ""
-"Scriptfile \"%s\" is not executable. Please set the executable-attribute on "
-"that file."
-msgstr "脚本文件“%s”不能运行。请对文件设定可执行属性。"
-
-#: ../../xffm/common/util.hh:1256 ../../xffm/common/util.hh:1291
-#, c-format
-msgid "Open with %s"
-msgstr "用 %s 打开"
-
-#: ../../xffm/common/util.hh:1256
-msgid "Text Editor"
-msgstr "文本编辑器"
-
-#: ../../xffm/common/util.hh:1297
-msgid ""
-"Console: quickly run single commands -- write a command here and press enter."
-msgstr "控制台：快速运行单一命令--在此撰写命令，按回车键执行。"
-
-#: ../../xffm/common/util.hh:1302 ../../xffm/fm/view/local/popup.hh:1021
-#: ../../xffm/fm/view/local/popup.hh:1203
-#: ../../xffm/fm/view/local/popup.hh:1221
-msgid "Run in Terminal"
-msgstr "在终端中运行"
-
-#: ../../xffm/common/mime.hh:101 ../../xffm/common/mime.hh:143
-msgid "No Read Permission"
-msgstr "没有读取权限"
-
-#: ../../xffm/common/dnd.hh:41 ../../xffm/fm/dialog/clipboard.hh:23
-msgid "Copying files locally"
-msgstr "正在本地复制文件"
-
-#: ../../xffm/common/dnd.hh:47
-msgid "Create Link"
-msgstr "创建链接"
-
-#: ../../xffm/common/run.hh:338
-msgid "error"
-msgstr "错误"
-
-#: ../../xffm/common/run.hh:342
-msgid "warning"
-msgstr "警告"
-
-#: ../../xffm/fm/view/pkg/model.hh:29 ../../xffm/fm/view/pkg/popup.hh:35
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:187
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:191
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:195
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:198
-msgid "Software Updater"
-msgstr "软件更新程序"
-
-#: ../../xffm/fm/view/pkg/model.hh:41 ../../xffm/fm/view/pkg/model.hh:52
-msgid "Add or remove software installed on the system"
-msgstr "添加或删除系统中安装的软件"
-
-#: ../../xffm/fm/view/pkg/model.hh:111
-msgid "String"
-msgstr "字符串"
-
-#: ../../xffm/fm/view/pkg/model.hh:116
-msgid "Waiting for search results"
-msgstr "正在等待搜索结果"
-
-#: ../../xffm/fm/view/pkg/model.hh:174
-msgid "No results"
-msgstr "无结果"
-
-#: ../../xffm/fm/view/pkg/model.hh:373
-#, fuzzy
-msgid "Currently busy\n"
-msgstr "当前专辑"
-
-#: ../../xffm/fm/view/pkg/popup.hh:44
-msgid "Update Database"
-msgstr "更新数据库"
-
-#: ../../xffm/fm/view/pkg/popup.hh:45
-msgid "Fetch"
-msgstr "获取"
-
-#: ../../xffm/fm/view/pkg/popup.hh:46
-#, fuzzy
-msgid "Install --dry-run"
-msgstr "安装模块(I)"
-
-#: ../../xffm/fm/view/pkg/popup.hh:47 ../../xffm/response/passwdresponse.hh:467
-msgid "Install"
-msgstr "安装"
-
-#: ../../xffm/fm/view/pkg/popup.hh:48
-#, fuzzy
-msgid "Uninstall --dry-run"
-msgstr "正在卸载"
-
-#: ../../xffm/fm/view/pkg/popup.hh:49
-msgid "Uninstall"
-msgstr "卸装"
-
-#: ../../xffm/fm/view/pkg/popup.hh:50
-msgid "Information"
-msgstr "信息"
-
-#: ../../xffm/fm/view/pkg/popup.hh:140
-msgid "Version"
-msgstr "版本"
-
-#: ../../xffm/fm/view/pkg/popup.hh:149
-msgid "Go up"
-msgstr "向上"
-
-#: ../../xffm/fm/view/pkg/popup.hh:152
-msgid "Search packages"
-msgstr "搜索软件包"
-
-#: ../../xffm/fm/view/pkg/popup.hh:184 ../../xffm/fm/view/view.hh:93
-#, c-format
-msgid "Loading %s...%s"
-msgstr "正在加载 %s...%s"
-
-#: ../../xffm/fm/view/pkg/popup.hh:184 ../../xffm/fm/view/view.hh:93
-msgid "Please Wait..."
-msgstr "请稍候..."
-
-#: ../../xffm/fm/view/local/model.hh:87
-#, c-format
-msgid "Reading \"%s\""
-msgstr "正在读取“%s”"
-
-#: ../../xffm/fm/view/local/model.hh:380 ../../xffm/fm/view/base/monitor.hh:33
-#, c-format
-msgid "Files: %s"
-msgstr "文件：%s"
-
-#: ../../xffm/fm/view/local/model.hh:383
-#, fuzzy, c-format
-msgid "Loaded %d of %d articles"
-msgstr "加载了%s$d篇文章中的%s$d篇"
-
-#: ../../xffm/fm/view/local/rm.hh:59
-#, c-format
-msgid "Delete %s"
-msgstr "删除 %s(D)"
-
-#: ../../xffm/fm/view/local/rm.hh:61
-msgid "Warning: "
-msgstr "警告："
-
-#: ../../xffm/fm/view/local/rm.hh:61 ../../xffm/fm/view/local/popup.hh:520
-msgid "Multiple selections"
-msgstr "多选"
-
-#. gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
-#. title
-#: ../../xffm/fm/view/local/rm.hh:92
-msgid "Remove"
-msgstr "删除(R)"
-
-#: ../../xffm/fm/view/local/rm.hh:142
-msgid "Apply to all"
-msgstr "应用于全体(Y)"
-
-#: ../../xffm/fm/view/local/rm.hh:183
-msgid "Trash"
-msgstr "垃圾"
-
-#: ../../xffm/fm/view/local/popup.hh:92
-msgid "New"
-msgstr "新建(N)"
 
 #. {N_("About"), NULL, (void *) menu},
 #.
 #. only for listview: {N_("Sort by size"), NULL, (void *) menu},
 #. only for listview: {N_("Sort by date"), NULL, (void *) menu},
-#: ../../xffm/fm/view/local/popup.hh:105
+#: ../../xffm/fm/local/popup.hh:73
 msgid "Select All"
 msgstr "全部选中"
 
-#: ../../xffm/fm/view/local/popup.hh:106 ../../xffm/fm/view/local/popup.hh:687
+#: ../../xffm/fm/local/popup.hh:74 ../../xffm/fm/local/popup.hh:559
 msgid "Match regular expression"
 msgstr "匹配正则表达式"
 
-#: ../../xffm/fm/view/local/popup.hh:138 ../../xffm/fm/view/local/popup.hh:1017
+#: ../../xffm/fm/local/popup.hh:75 ../../xffm/fm/root/view.hh:58
+#: ../../xffm/fm/fstab/popup.hh:21
+msgid "View as list"
+msgstr "以列表方式查看"
+
+#: ../../xffm/fm/local/popup.hh:77
+msgid "Show hidden files"
+msgstr "显示隐藏文件"
+
+#: ../../xffm/fm/local/popup.hh:79
+msgid "Show Backup Files"
+msgstr "显示备份文件"
+
+#: ../../xffm/fm/local/popup.hh:81
+msgid "Sort data in descending order"
+msgstr "以降序排序数据"
+
+#: ../../xffm/fm/local/popup.hh:93 ../../xffm/fm/local/popup.hh:119
+#: ../../xffm/fm/local/popup.hh:1006 ../../xffm/fm/local/popup.hh:1013
+#: ../../xffm/fm/local/popup.hh:1022 ../../xffm/fm/local/popup.hh:1029
+#: ../../xffm/common/gtk.hh:72
+msgid "Open with"
+msgstr "打开方式"
+
+#: ../../xffm/fm/local/popup.hh:94 ../../xffm/fm/local/popup.hh:846
 msgid "Run Executable..."
 msgstr "运行可执行程序..."
 
-#. File chooser
-#: ../../xffm/fm/view/local/popup.hh:139 ../../xffm/fm/view/local/popup.hh:788
+#: ../../xffm/fm/local/popup.hh:95
 msgid "Extract files from the archive"
 msgstr "从归档文件中提取文件"
 
+#. g_hash_table_insert(iconname_hash, "bcrypt", (void *)"emblem-keyhole");
+#: ../../xffm/fm/local/popup.hh:96 ../../xffm/fm/root/view.hh:73
+#: ../../xffm/fm/fstab/popup.hh:20 ../../xffm/fm/dialog/notebook.hh:52
+#: ../../xffm/common/gtk.hh:78
+msgid "Open in New Tab"
+msgstr "在新标签中打开"
+
 #. File chooser
-#: ../../xffm/fm/view/local/popup.hh:141 ../../xffm/fm/view/local/popup.hh:878
+#: ../../xffm/fm/local/popup.hh:97 ../../xffm/fm/local/popup.hh:706
 msgid "Create a compressed archive with the selected objects"
 msgstr "使用选择的对象创建一个压缩的归档"
 
-#: ../../xffm/fm/view/local/popup.hh:143 ../../xffm/fm/view/fstab/popup.hh:37
+#: ../../xffm/fm/local/popup.hh:98 ../../xffm/fm/fstab/popup.hh:37
 msgid "Mount the volume associated with this folder"
 msgstr "挂载与此文件夹关联的卷"
 
-#: ../../xffm/fm/view/local/popup.hh:144 ../../xffm/fm/view/fstab/popup.hh:38
+#: ../../xffm/fm/local/popup.hh:99 ../../xffm/fm/fstab/popup.hh:38
 msgid "Unmount the volume associated with this folder"
 msgstr "卸载与此文件夹关联的卷"
 
-#: ../../xffm/fm/view/local/popup.hh:153
-msgid "Paste into"
-msgstr "粘于里面"
+#: ../../xffm/fm/local/popup.hh:100 ../../xffm/common/gtk.hh:67
+msgid "Add bookmark"
+msgstr "添加书签(A)"
 
-#: ../../xffm/fm/view/local/popup.hh:155 ../../xffm/fm/view/local/popup.hh:1143
+#: ../../xffm/fm/local/popup.hh:101 ../../xffm/fm/root/view.hh:74
+#: ../../xffm/common/gtk.hh:68
+msgid "Remove bookmark"
+msgstr "清除书签"
+
+#: ../../xffm/fm/local/popup.hh:108 ../../xffm/fm/local/popup.hh:961
 msgid "Rename"
 msgstr "重命名(R)"
 
-#: ../../xffm/fm/view/local/popup.hh:156 ../../xffm/fm/view/local/popup.hh:1129
+#: ../../xffm/fm/local/popup.hh:109 ../../xffm/fm/local/popup.hh:947
 msgid "Duplicate"
 msgstr "复制"
 
-#: ../../xffm/fm/view/local/popup.hh:157 ../../xffm/fm/view/local/popup.hh:1115
+#: ../../xffm/fm/local/popup.hh:110 ../../xffm/fm/local/popup.hh:933
 msgid "Link"
 msgstr "链接"
 
-#: ../../xffm/fm/view/local/popup.hh:158
+#: ../../xffm/fm/local/popup.hh:111
 msgid "Properties"
 msgstr "属性"
 
-#: ../../xffm/fm/view/local/popup.hh:517
+#: ../../xffm/fm/local/popup.hh:414
 msgid "Files:"
 msgstr "文件(F)："
 
-#: ../../xffm/fm/view/local/popup.hh:685
+#: ../../xffm/fm/local/popup.hh:417 ../../xffm/fm/local/rm.hh:61
+msgid "Multiple selections"
+msgstr "多选"
+
+#: ../../xffm/fm/local/popup.hh:557
 msgid "Select items"
 msgstr "选择项目(S)"
 
-#: ../../xffm/fm/view/local/popup.hh:703
+#: ../../xffm/fm/local/popup.hh:575
 msgid "Regular Expression syntax is incorrect"
 msgstr "正则表达式语法错误"
 
-#: ../../xffm/fm/view/local/popup.hh:720
+#: ../../xffm/fm/local/popup.hh:592
 msgid "No selection"
 msgstr "未选择"
 
-#: ../../xffm/fm/view/local/popup.hh:720
+#: ../../xffm/fm/local/popup.hh:592
 msgid "No matches."
 msgstr "没有符合的。"
 
 #. entryResponse->setCheckButton(_("Run in Terminal"));
 #. entryResponse->setCheckButton(Mime<Type>::runInTerminal(path));
-#: ../../xffm/fm/view/local/popup.hh:800 ../../xffm/fm/view/local/popup.hh:893
-#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:323
+#: ../../xffm/fm/local/popup.hh:721 ../../xffm/fm/page/pathbar.hh:313
 msgid "Specify Output Directory..."
 msgstr "指定输出目录..."
 
-#: ../../xffm/fm/view/local/popup.hh:970
+#: ../../xffm/fm/local/popup.hh:799
 msgid "Create new..."
 msgstr "新建..."
 
-#: ../../xffm/fm/view/local/popup.hh:977 ../../xffm/fm/view/local/popup.hh:1058
+#: ../../xffm/fm/local/popup.hh:806 ../../xffm/fm/local/popup.hh:886
 msgid "New Name:"
 msgstr "新名称："
 
-#: ../../xffm/fm/view/local/popup.hh:986
+#: ../../xffm/fm/local/popup.hh:815
 msgid "No name"
 msgstr "无名称"
 
-#: ../../xffm/fm/view/local/popup.hh:999
+#: ../../xffm/fm/local/popup.hh:828
 #, c-format
 msgid "Another file with the same name already exists in “%s”."
 msgstr "在“%s”中存在相同名称的文件。"
 
-#: ../../xffm/fm/view/local/popup.hh:1024
+#: ../../xffm/fm/local/popup.hh:850 ../../xffm/fm/local/popup.hh:1010
+#: ../../xffm/fm/local/popup.hh:1026 ../../xffm/common/util.hh:1248
+msgid "Run in Terminal"
+msgstr "在终端中运行"
+
+#: ../../xffm/fm/local/popup.hh:853
 msgid "Arguments for the Command"
 msgstr "命令参数"
 
-#: ../../xffm/fm/view/local/popup.hh:1170
-msgid "You have selected multiple files or folders"
-msgstr "您选择了多个文件或文件夹"
-
-#: ../../xffm/fm/view/local/popup.hh:1244 ../../xffm/fm/view/local/view.hh:156
+#: ../../xffm/fm/local/popup.hh:1047 ../../xffm/fm/local/view.hh:141
 msgid "Invalid entry"
 msgstr "无效的条目"
 
-#: ../../xffm/fm/view/local/view.hh:177
-#, c-format
-msgid "The volume '%s' is not mounted."
-msgstr "卷“%s”未挂载。"
-
-#: ../../xffm/fm/view/local/properties.hh:245
+#: ../../xffm/fm/local/properties.hh:235
 msgid "Properties and Attributes"
 msgstr "属性和特性"
 
-#: ../../xffm/fm/view/local/properties.hh:274
+#: ../../xffm/fm/local/properties.hh:264
 msgid "File Mode:"
 msgstr "文件模式："
 
-#: ../../xffm/fm/view/local/properties.hh:300
+#: ../../xffm/fm/local/properties.hh:290
 msgid "File:"
 msgstr "文件："
 
@@ -1282,471 +1269,377 @@ msgstr "文件："
 #. add signal handler to changed signal for combo box
 #. Add process buttons
 #.
-#: ../../xffm/fm/view/local/properties.hh:312
+#: ../../xffm/fm/local/properties.hh:302
 msgid "Apply changes"
 msgstr "应用更改"
 
-#: ../../xffm/fm/view/local/properties.hh:475
+#: ../../xffm/fm/local/properties.hh:462
 msgid "Successfully moved to trash."
 msgstr "成功移入回收站。"
 
-#: ../../xffm/fm/view/local/properties.hh:476
+#: ../../xffm/fm/local/properties.hh:463
 msgid "Source:"
 msgstr "来源："
 
-#: ../../xffm/fm/view/root/model.hh:82
+#: ../../xffm/fm/local/rm.hh:59
+#, c-format
+msgid "Delete %s"
+msgstr "删除 %s(D)"
+
+#: ../../xffm/fm/local/rm.hh:61
+msgid "Warning: "
+msgstr "警告："
+
+#. gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
+#. title
+#: ../../xffm/fm/local/rm.hh:90
+msgid "Remove"
+msgstr "删除(R)"
+
+#: ../../xffm/fm/local/rm.hh:140
+msgid "Apply to all"
+msgstr "应用于全体(Y)"
+
+#. **************
+#. This is now available to BSD with rm -P option
+#: ../../xffm/fm/local/rm.hh:163 ../../xffm/common/gtk.hh:76
+msgid "Shred"
+msgstr "粉碎"
+
+#. We do not count "../"
+#: ../../xffm/fm/local/view.hh:48 ../../xffm/fm/base/monitor.hh:28
+#, c-format
+msgid "Files: %s"
+msgstr "文件：%s"
+
+#: ../../xffm/fm/root/model.hh:78
 msgid "Root Directory"
 msgstr "根目录"
 
-#: ../../xffm/fm/view/root/model.hh:98
+#: ../../xffm/fm/root/model.hh:94
 msgid "This is the root of the filesystem"
 msgstr "这是文件系统的根"
 
-#: ../../xffm/fm/view/root/model.hh:110
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:256
+#: ../../xffm/fm/root/model.hh:105
 msgid "Home Directory"
 msgstr "主目录"
 
-#: ../../xffm/fm/view/root/model.hh:137
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:266
+#: ../../xffm/fm/root/model.hh:132
 msgid "Trash bin"
 msgstr "回收站"
 
-#: ../../xffm/fm/view/root/model.hh:168 ../../xffm/fm/view/fstab/popup.hh:29
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:261
+#: ../../xffm/fm/root/model.hh:162 ../../xffm/fm/fstab/popup.hh:29
 msgid "Disk Image Mounter"
 msgstr "磁盘映像挂载器"
 
-#: ../../xffm/fm/view/root/model.hh:176 ../../xffm/fm/view/root/model.hh:191
+#: ../../xffm/fm/root/model.hh:169 ../../xffm/fm/root/model.hh:185
 msgid "Mount local disks and devices"
 msgstr "加载本地磁盘和设备"
 
-#: ../../xffm/fm/view/root/model.hh:177 ../../xffm/fm/view/fstab/popup.hh:23
-#: ../../xffm/fm/view/fstab/view.hh:540
-#, fuzzy
+#: ../../xffm/fm/root/model.hh:170 ../../xffm/fm/fstab/popup.hh:25
+#: ../../xffm/fm/fstab/view.hh:429
 msgid "eCryptfs Volume"
-msgstr "%(file)s 分区"
+msgstr "eCryptfs 卷"
 
-#: ../../xffm/fm/view/root/model.hh:178 ../../xffm/fm/view/fstab/popup.hh:22
+#: ../../xffm/fm/root/model.hh:171 ../../xffm/fm/fstab/popup.hh:24
 msgid "SSHFS Remote Synchronization Folder"
 msgstr "SSHFS 远程同步文件夹"
 
-#: ../../xffm/fm/view/root/model.hh:179 ../../xffm/fm/view/fstab/popup.hh:21
-#: ../../xffm/fm/view/fstab/view.hh:488
+#: ../../xffm/fm/root/model.hh:172 ../../xffm/fm/fstab/popup.hh:23
+#: ../../xffm/fm/fstab/view.hh:377
 msgid "NFS Network Volume"
 msgstr "NFS 网络卷"
 
-#: ../../xffm/fm/view/root/model.hh:180 ../../xffm/fm/view/fstab/popup.hh:24
-#: ../../xffm/fm/view/fstab/view.hh:566
+#: ../../xffm/fm/root/model.hh:173 ../../xffm/fm/fstab/popup.hh:26
+#: ../../xffm/fm/fstab/view.hh:455
 msgid "CIFS Volume"
 msgstr "CIFS 卷"
 
-#: ../../xffm/fm/view/root/model.hh:229
+#: ../../xffm/fm/root/model.hh:195
+msgid "Software Updater"
+msgstr "软件更新程序"
+
+#: ../../xffm/fm/root/model.hh:218 ../../xffm/fm/root/model.hh:230
+msgid "Add or remove software installed on the system"
+msgstr "添加或删除系统中安装的软件"
+
+#: ../../xffm/fm/root/model.hh:271
 msgid "Go to bookmarked location"
 msgstr "转到加书签的位置"
 
-#: ../../xffm/fm/view/root/view.hh:71
+#. {N_("Add bookmark"), (void *)BasePopUp<Type>::noop, NULL, NULL},
+#: ../../xffm/fm/root/view.hh:61
 msgid "Empty trash"
 msgstr "清空废件箱(E)"
 
 #. File chooser
-#: ../../xffm/fm/view/fstab/popup.hh:129
+#: ../../xffm/fm/fstab/popup.hh:121
 msgid "Mount Device"
 msgstr "挂载设备"
 
-#: ../../xffm/fm/view/fstab/popup.hh:141 ../../xffm/fm/view/fstab/view.hh:379
+#: ../../xffm/fm/fstab/popup.hh:133
 msgid "Mount point:"
 msgstr "挂载点："
 
-#. Since /dev is not concrete, the following test returns false...
-#.
-#. if (!g_file_test(name, G_FILE_TEST_IS_DIR)) return;
-#: ../../xffm/fm/view/fstab/view.hh:115 ../../xffm/fm/view/fstab/view.hh:131
-msgid "Disks"
-msgstr "磁盘"
+#: ../../xffm/fm/fstab/view.hh:301
+msgid "Mounted on:"
+msgstr "挂载点："
 
-#: ../../xffm/fm/view/fstab/view.hh:377
-msgid "No Label"
-msgstr "无标签"
+#: ../../xffm/fm/fstab/view.hh:302
+msgid "Mount on"
+msgstr "挂载于(M)"
 
-#: ../../xffm/fm/view/fstab/view.hh:378
-msgid "There is no file system available (unformatted)"
-msgstr "无可用的文件系统(未格式化)"
-
-#: ../../xffm/fm/view/fstab/view.hh:379
+#: ../../xffm/fm/fstab/view.hh:310 ../../xffm/fm/fstab/view.hh:312
 msgid "Not mounted"
 msgstr "未挂载"
 
-#: ../../xffm/fm/view/fstab/view.hh:514
+#: ../../xffm/fm/fstab/view.hh:403
 msgid "SFTP (via SSH)"
 msgstr "SFTP(通过 SSH)"
 
-#: ../../xffm/fm/view/fstab/view.hh:869
+#: ../../xffm/fm/fstab/view.hh:667
 #, c-format
 msgid "Unmounting %s"
 msgstr "正在卸载 %s"
 
-#: ../../xffm/fm/view/fstab/view.hh:869
+#: ../../xffm/fm/fstab/view.hh:667
 #, c-format
 msgid "Mounting %s"
 msgstr "正在挂载 %s"
 
-#: ../../xffm/fm/view/base/signals.hh:803
-msgid "Trash is empty"
-msgstr "回收站为空"
+#: ../../xffm/fm/dialog/menupopover.hh:128
+msgid "Home"
+msgstr "主文件夹"
 
-#: ../../xffm/fm/view/base/signals.hh:805
-msgid "Directory does not exist."
-msgstr "目录不存在。"
+#: ../../xffm/fm/dialog/menupopover.hh:129 ../../xffm/common/gtk.hh:64
+msgid "Open terminal"
+msgstr "打开终端"
 
-#: ../../xffm/fm/view/treeview.hh:17
-msgid "Name"
-msgstr "名字"
+#: ../../xffm/fm/dialog/menupopover.hh:130
+msgid "Open a New Window"
+msgstr "打开新窗口"
 
-#: ../../xffm/fm/view/treeview.hh:20
-msgid "Size"
-msgstr "容量"
+#. {N_("Execute Shell Command"), (void *)MenuPopoverSignals<Type>::shell, (void *) menuButton_},
+#: ../../xffm/fm/dialog/menupopover.hh:132 ../../xffm/common/gtk.hh:69
+msgid "Search"
+msgstr "搜索"
 
-#: ../../xffm/fm/view/treeview.hh:21
-msgid "Date"
-msgstr "日期"
+#: ../../xffm/fm/dialog/menupopover.hh:133 ../../xffm/common/gtk.hh:71
+msgid "Exit"
+msgstr "退出(X)"
 
-#: ../../xffm/fm/view/treeview.hh:22
-msgid "Mimetype"
-msgstr "MIME 类型"
+#: ../../xffm/fm/dialog/dialog.hh:116
+msgid "Removed"
+msgstr "已删除"
 
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
+#: ../../xffm/fm/dialog/dialog.hh:132
+msgid "Detected device(s):"
+msgstr "检测到的设备："
+
+#. Create the widgets
+#: ../../xffm/fm/page/vbuttonbox.hh:37 ../../xffm/common/gtk.hh:332
+msgid "Help"
+msgstr "帮助(H)"
+
+#. File chooser
+#: ../../xffm/fm/page/pathbar.hh:306 ../../xffm/fm/page/pathbar.hh:308
+msgid "Go to"
+msgstr "转到(G)"
+
+#: ../../xffm/fm/page/pathbar.hh:331
+msgid "Not a directory"
+msgstr "不是一个目录"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Renice Process"
+msgstr "调整进程 nice 值"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Suspend"
+msgstr "挂起"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Continue"
+msgstr "继续"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Interrupt"
+msgstr "中断"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Hangup"
+msgstr "挂起"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "User 1 (USR1)"
+msgstr "用户 1(USR1)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "User 2 (USR2)"
+msgstr "用户 2(USR2)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "Terminate Task"
+msgstr "终止任务(T)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "Abort"
+msgstr "中止"
+
+#: ../../xffm/fm/page/runbutton.hh:138
+msgid "Kill"
+msgstr "杀死(K)"
+
+#: ../../xffm/fm/page/runbutton.hh:139
+msgid "Segmentation fault"
+msgstr "段错误"
+
+#: ../../xffm/fm/page/runbutton.hh:217
+msgid "PID"
+msgstr "进程号"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:37
 msgid "Embedded Terminal"
 msgstr "嵌入终端"
 
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
+#: ../../xffm/fm/page/hbuttonbox.hh:38
 msgid "All items in the iconview."
 msgstr "图标视图中的所有项目。"
 
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
+#: ../../xffm/fm/page/hbuttonbox.hh:39
 msgid "Scripting"
 msgstr "脚本"
 
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
+#: ../../xffm/fm/page/hbuttonbox.hh:40
 msgid "Clear Log"
 msgstr "清除日志"
 
 #. Status textview
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
+#: ../../xffm/fm/page/hbuttonbox.hh:42
 msgid "Terminal font"
 msgstr "终端字体"
 
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:135
-msgid "Renice Process"
-msgstr "调整进程 nice 值"
+#: ../../xffm/fm/treeview.hh:17
+msgid "Name"
+msgstr "名字"
 
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:135
-msgid "Suspend"
-msgstr "挂起"
+#: ../../xffm/fm/treeview.hh:20
+msgid "Size"
+msgstr "容量"
 
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:135
-msgid "Continue"
-msgstr "继续"
+#: ../../xffm/fm/treeview.hh:21
+msgid "Date"
+msgstr "日期"
 
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid "Interrupt"
-msgstr "中断"
+#: ../../xffm/fm/treeview.hh:22
+msgid "Mimetype"
+msgstr "MIME 类型"
 
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid "Hangup"
-msgstr "挂起"
+#: ../../xffm/fm/treeview.hh:24
+msgid "TYPE"
+msgstr "类型"
 
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid "User 1 (USR1)"
-msgstr "用户 1(USR1)"
+#: ../../xffm/fm/base/signals.hh:642
+msgid "Directory does not exist."
+msgstr "目录不存在。"
 
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:137
-msgid "User 2 (USR2)"
-msgstr "用户 2(USR2)"
+#: ../../xffm/fm/base/signals.hh:644 ../../xffm/fm/base/signals.hh:646
+msgid "Trash is empty"
+msgstr "回收站为空"
 
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:137
-msgid "Terminate Task"
-msgstr "终止任务(T)"
+#: ../../xffm/common/settings.hh:27
+msgid "New File:"
+msgstr "新建文件："
 
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:137
-msgid "Abort"
-msgstr "中止"
+#: ../../xffm/common/gio.hh:235
+msgid "Could not copy item:"
+msgstr "无法复制项目："
 
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:138
-msgid "Kill"
-msgstr "杀死(K)"
+#: ../../xffm/common/gio.hh:237
+msgid "Could not move item:"
+msgstr "无法移动项目："
 
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:139
-msgid "Segmentation fault"
-msgstr "段错误"
+#: ../../xffm/common/gio.hh:239
+msgid "Create symbolic link"
+msgstr "创建符号连接"
 
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:216
-msgid "PID"
-msgstr "进程号"
-
-#. File chooser
-#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:316
-#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:318
-msgid "Go to"
-msgstr "转到(G)"
-
-#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:350
-msgid "Not a directory"
-msgstr "不是一个目录"
-
-#: ../../xffm/fm/dialog/notebook/page/page.hh:58
-msgid "loading..."
-msgstr "正在载入..."
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:11
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:214
-#, fuzzy
-msgid "Remove Button Contents"
-msgstr "删除按钮"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:67
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:209
-#, fuzzy
-msgid "Add custom content"
-msgstr "添加自定义按钮内容"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:68
-msgid "Select file to load"
-msgstr "选择要加载的文件"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:125
+#: ../../xffm/common/gio.hh:276
 #, c-format
-msgid "Cannot load file %s. Reason: %s"
-msgstr "无法载入文件%s。原因：%s"
+msgid ""
+"Could not delete:\n"
+"%s"
+msgstr ""
+"无法删除：\n"
+"%s"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:154
-msgid "You need to restart the application"
-msgstr "您需要重启应用程序"
+#: ../../xffm/common/gio.hh:278
+#, c-format
+msgid "Could not move %s to trash"
+msgstr "无法将 %s 移到回收站"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:244
-msgid "Open a New Window"
-msgstr "打开新窗口"
+#: ../../xffm/common/clipboard.hh:23 ../../xffm/common/dnd.hh:40
+msgid "Copying files locally"
+msgstr "正在本地复制文件"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:250
-msgid "Differences"
-msgstr "文件比较"
+#: ../../xffm/common/clipboard.hh:30 ../../xffm/common/dnd.hh:34
+msgid "Moving files"
+msgstr "正在移动文件"
 
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:172
-#, fuzzy
-msgid "Open menu"
-msgstr "打开菜单(O)"
+#: ../../xffm/common/dnd.hh:46
+msgid "Create Link"
+msgstr "创建链接"
 
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:224
-msgid "View as list"
-msgstr "以列表方式查看"
+#: ../../xffm/common/util.hh:1200
+#, c-format
+msgid ""
+"Scriptfile \"%s\" is not executable. Please set the executable-attribute on "
+"that file."
+msgstr "脚本文件“%s”不能运行。请对文件设定可执行属性。"
 
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:225
-msgid "Show hidden files"
-msgstr "显示隐藏文件"
+#: ../../xffm/common/util.hh:1202 ../../xffm/common/util.hh:1237
+#, c-format
+msgid "Open with %s"
+msgstr "用 %s 打开"
 
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:226
-msgid "Show Backup Files"
-msgstr "显示备份文件"
+#: ../../xffm/common/util.hh:1202
+msgid "Text Editor"
+msgstr "文本编辑器"
 
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:227
-msgid "Sort data in descending order"
-msgstr "以降序排序数据"
+#: ../../xffm/common/util.hh:1239 ../../xffm/common/gtk.hh:65
+msgid "Execute Shell Command"
+msgstr "执行 Shell 命令"
 
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:262
-msgid "Main menu"
-msgstr "主菜单"
+#: ../../xffm/common/util.hh:1243
+msgid ""
+"Console: quickly run single commands -- write a command here and press enter."
+msgstr "控制台：快速运行单一命令--在此撰写命令，按回车键执行。"
 
-#: ../../xffm/fm/dialog/notebook/notebook.hh:56
-msgid "Long press time"
-msgstr "长按时限"
+#: ../../xffm/common/gtk.hh:123
+msgid "New Tab"
+msgstr "新标签"
 
-#: ../../xffm/fm/dialog/dialog.hh:121
-msgid "Removed"
-msgstr "已删除"
-
-#: ../../xffm/fm/dialog/dialog.hh:142
-msgid "Detected device(s):"
-msgstr "检测到的设备："
-
-#: ../../xffm/response/commandresponse.hh:19
-msgid "Running"
-msgstr "正在运行"
-
-#. auto text = g_strdup_printf("%s (pid: %d)",
-#. _("Waiting for operation to finish..."),
-#. Tubo<Type>::getChild (pid));
-#: ../../xffm/response/commandresponse.hh:24
-msgid "Waiting for operation to finish..."
-msgstr "正在等待操作结束..."
-
-#: ../../xffm/response/passwdresponse.hh:19
-#: ../../xffm/response/passwdresponse.hh:24
-msgid "Enter password"
-msgstr "输入密码"
-
-#. gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
-#: ../../xffm/response/passwdresponse.hh:189
-msgid "User Input"
-msgstr "用户输入"
-
-#: ../../xffm/response/passwdresponse.hh:205
-msgid "Response Requested"
-msgstr "请求响应"
-
-#. this button is redundant since hands are on keyboard for password
-#: ../../xffm/response/passwdresponse.hh:252
-#: ../../xffm/response/passwdresponse.hh:625
-#: ../../xffm/response/entryresponse.hh:424
-msgid "Ok"
+#: ../../xffm/common/gtk.hh:335
+msgid "OK"
 msgstr "确定"
 
-#: ../../xffm/response/passwdresponse.hh:330
-msgid "Preparing"
-msgstr "正在准备"
+#: ../../xffm/common/run.hh:344
+msgid "error"
+msgstr "错误"
 
-#: ../../xffm/response/passwdresponse.hh:418
-msgid "sudo"
-msgstr "sudo"
+#: ../../xffm/common/run.hh:348
+msgid "warning"
+msgstr "警告"
 
-#: ../../xffm/response/passwdresponse.hh:420
-msgid "Command:"
-msgstr "命令："
+#: ../../xffm/common/mime.hh:101 ../../xffm/common/mime.hh:143
+msgid "No Read Permission"
+msgstr "没有读取权限"
 
-#: ../../xffm/response/passwdresponse.hh:423
-msgid "Permission denied"
-msgstr "拒绝访问"
+#: ../../xffm/common/preview.hh:593
+msgid "Empty file"
+msgstr "空文件"
 
-#: ../../xffm/response/passwdresponse.hh:424
-msgid "Try to approach a problem from different angles."
-msgstr "尝试从不同角度思考问题。"
-
-#: ../../xffm/response/passwdresponse.hh:425
-msgid "Do you want to retry?"
-msgstr "您想要再试一次吗？"
-
-#: ../../xffm/response/passwdresponse.hh:426
-msgid "Alternate:"
-msgstr "备选："
-
-#: ../../xffm/response/passwdresponse.hh:431
-msgid "No"
-msgstr "否"
-
-#: ../../xffm/response/passwdresponse.hh:468
+#: ../../xffm/common/preview.hh:648
 #, c-format
-msgid "%s does not exist."
-msgstr "%s 不存在。"
-
-#: ../../xffm/response/passwdresponse.hh:533
-msgid "Blowfish"
-msgstr "Blowfish"
-
-#: ../../xffm/response/passwdresponse.hh:534
-msgid "Encryption Key Approval"
-msgstr "加密密钥认可"
-
-#: ../../xffm/response/passwdresponse.hh:568
-msgid "-o     print output to standard out. Implies -r."
-msgstr ""
-
-#: ../../xffm/response/passwdresponse.hh:572
-msgid "-c     DO NOT compress files before encryption."
-msgstr ""
-
-#: ../../xffm/response/passwdresponse.hh:576
-msgid "-r     DO NOT remove input files after processing"
-msgstr ""
-
-#: ../../xffm/response/passwdresponse.hh:583
-msgid "Encryption key: "
-msgstr "加密密钥："
-
-#: ../../xffm/response/passwdresponse.hh:595
-msgid "Confirm:"
-msgstr "确认："
-
-#: ../../xffm/response/passwdresponse.hh:608
-msgid "Sorry, passwords do not match"
-msgstr "对不起，密码不匹配"
-
-#: ../../xffm/response/passwdresponse.hh:616
-msgid "Minimum length:"
-msgstr "最小长度："
-
-#: ../../xffm/response/customresponse.hh:56
-msgid "Execute command"
-msgstr "执行命令"
-
-#. XXX folder or file entry should be determined on .ini file (probably just inherit from comboresponse for multiple files options (selected files)...
-#: ../../xffm/response/customresponse.hh:104
-msgid "Source File"
-msgstr "源文件"
-
-#: ../../xffm/response/timeoutresponse.hh:57
-msgid "Dismiss"
-msgstr "错过(D)"
-
-#: ../../xffm/response/commandprogressresponse.hh:31
-msgid "Items:"
-msgstr "项数(E)："
-
-#: ../../xffm/response/chooserresponse.hh:23
-msgid "Open"
-msgstr "打开"
-
-#: ../../xffm/response/chooserresponse.hh:56
-msgid "Choose directory"
-msgstr "选择目录"
-
-#: ../../xffm/response/chooserresponse.hh:60
-msgid "Choose file"
-msgstr "选择文件"
-
-#: ../../xffm/completion/bash.hh:133
-msgid "Completion mode:"
-msgstr "自动补齐模式(C)："
-
-#: ../../xffm/completion/bash.hh:134
-msgid "command"
-msgstr "命令"
-
-#: ../../xffm/completion/bash.hh:135
-msgid "file"
-msgstr "文件"
-
-#: ../../xffm/completion/bash.hh:145 ../../xffm/completion/bash.hh:149
-msgid "Options >>"
-msgstr "选项 >>"
-
-#: ../../xffm/completion/base.hh:28
-msgid "Command"
-msgstr "命令"
-
-#: ../../xffm/completion/base.hh:31
-msgid "File"
-msgstr "文件(F)"
-
-#: ../../xffm/completion/base.hh:34
-msgid "Command history"
-msgstr "命令历史(M)"
-
-#: ../../xffm/completion/base.hh:40
-msgid "Variable"
-msgstr "变量"
-
-#: ../../xffm/completion/base.hh:43
-msgid "Host"
-msgstr "主机"
-
-#: ../../xffm/completion/base.hh:55
-msgid "Found no match"
-msgstr "未找到匹配"
-
-#: ../../xffm/completion/base.hh:141 ../../xffm/completion/base.hh:142
-msgid "Matches"
-msgstr "匹配项"
-
-#: ../../xffm/completion/base.hh:142
-msgid "Too many files open"
-msgstr "打开的文件过多"
+msgid "Cannot read from %s"
+msgstr "无法读取 %s"
 

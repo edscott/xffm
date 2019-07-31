@@ -1,0 +1,160 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:41:00 CDT 2013 ---
+#
+# Soslan Khubulov <soslanx@gmail.com>, 2011.
+# <srtxg@chanae.alphanet.ch>, 2001-2011.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: http://bugs.xffm.org\n"
+"hellokeywords=I18N+L10Ncomponent=general\n"
+"POT-Creation-Date: 2011-04-30 17:20+0000\n"
+"PO-Revision-Date: 2011-05-15 20:05+0400\n"
+"Last-Translator: Soslan Khubulov <soslanx@gmail.com>\n"
+"Language-Team: Ossetian <>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+msgid "GNOME Hello Demo"
+msgstr "GNOME Hello Æвдисæн"
+
+msgid "Sample application using GNOME technologies"
+msgstr "Æвдисæн программæ, кæцы пайда кæны GNOME технологитæй"
+
+msgid "GNOME Hello"
+msgstr "GNOME Hello"
+
+msgid "Hello, World!"
+msgstr "Байрай, Дуне!"
+
+msgid "Could not parse geometry string `%s'"
+msgstr "Нæ уайы равзарын геометрион фыст `%s'"
+
+msgid "Special Greetings to:\n"
+msgstr "Сæрмагонд арфæтæ адонæн:\n"
+
+msgid "Say hello to specific people listed on the command line"
+msgstr "Салам радт командæты рæнхъы нымад сæрмагонд адæмæн"
+
+msgid "Specify a message other than \"Hello, World!\""
+msgstr "Равзар уац, кæцы \"Байрай, Дуне!\" уацы хуызæн нæу"
+
+msgid "MESSAGE"
+msgstr "УАЦ"
+
+msgid "Specify the geometry of the main window"
+msgstr "Равзар сæйраг рудзынгы геометри"
+
+msgid "GEOMETRY"
+msgstr "ГЕОМЕТРИ"
+
+msgid "- GNOME Hello"
+msgstr "- GNOME Hello"
+
+msgid ""
+"%s\n"
+"Run '%s --help' to see a full list of available command line options.\n"
+msgstr ""
+"%s\n"
+"Суадз '%s --help' цæмæй фенай командон рæнхъы фæндæттæ\n"
+
+msgid "You must specify someone to greet.\n"
+msgstr "Ды хъуамæ равзарай кæмæн зæгъай \"Байрай\"\n"
+
+msgid "Command line arguments are only allowed with --greet.\n"
+msgstr "Командон рæнхъы аргументтæ уагъд кæнынц æрмæсттæр --greet фыстимæ.\n"
+
+msgid "File"
+msgstr "Файл"
+
+msgid "Edit"
+msgstr "Ив"
+
+msgid "Help"
+msgstr "Æххуыс"
+
+msgid "New"
+msgstr "Нæуæг"
+
+msgid "Open"
+msgstr "Гом кæн"
+
+msgid "Save"
+msgstr "Бавæр"
+
+msgid "Save As"
+msgstr "Бавæр куыд"
+
+msgid "Close"
+msgstr "Хкъæн"
+
+msgid "Quit"
+msgstr "Æттæмæ хиз"
+
+msgid "Cut"
+msgstr "Лыг кæн"
+
+msgid "Copy"
+msgstr "Скъопи кæн"
+
+msgid "Paste"
+msgstr "Батысс"
+
+msgid "Select All"
+msgstr "Равзар Алкæцыдæр"
+
+msgid "Clear"
+msgstr "Схаф"
+
+msgid "Undo"
+msgstr "Раздæх"
+
+msgid "Redo"
+msgstr "Баздæх"
+
+msgid "Find"
+msgstr "Агур"
+
+msgid "Find Next"
+msgstr "Агур дарддæр"
+
+msgid "Replace"
+msgstr "Бынат ив"
+
+msgid "Properties"
+msgstr "Миниуджытæ"
+
+msgid "Contents"
+msgstr "Сæргæндтæ"
+
+msgid "About"
+msgstr "Афыст"
+
+msgid "Previous"
+msgstr "Фæстæмæ"
+
+msgid "Next"
+msgstr "Размæ"
+
+msgid "This does nothing; it is only a demonstration."
+msgstr "Ацы программæ ницы нæ аразы; ай у æрмæстдæр æвдисæн."
+
+msgid "Unable to open help file"
+msgstr "Нæ уайы æххуысы файл бакæнын"
+
+msgid ""
+"Copyright © 1999 Havoc Pennington\n"
+"Copyright © 1999 - 2010 GNOME Hello Contributors"
+msgstr ""
+"Copyright © 1999 Havoc Pennington\n"
+"Copyright © 1999 - 2010 GNOME Hello Кусджытæ"
+
+msgid "About GNOME Hello"
+msgstr "GNOME Hello программæйы тыххæй"
+
+

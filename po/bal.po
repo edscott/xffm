@@ -1,0 +1,108 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:39:03 CDT 2013 ---
+#
+# Mostafa Daneshvar <mostafa@daneshvar.org.uk>, 2008.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: http://bugs.xffm.org\n"
+"POT-Creation-Date: 2008-04-15 19:57+0200\n"
+"PO-Revision-Date: 2008-04-15 19:33+0430\n"
+"Last-Translator: Mostafa Daneshvar <mostafa@daneshvar.org.uk>\n"
+"Language-Team: Balochi <mostafa@daneshvar.org.uk>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+
+msgid "Configure the lockdown policy"
+msgstr "تنظیم کتن سیاست کبل"
+
+msgid "Lockdown Editor"
+msgstr "اصلاح کنوک کبل"
+
+msgid "Disabled Applets"
+msgstr "اپلتان غیر فعال"
+
+msgid "Safe Protocols"
+msgstr "پروتوکلان امن"
+
+msgid "Disable unsafe protocols"
+msgstr "غیر فعال کتن پروتوکلان ـناامن"
+
+msgid "Click to make this setting not mandatory"
+msgstr "کلیک کنیت تا ای تنظیماتا اجباری مکنیت"
+
+msgid "Click to make this setting mandatory"
+msgstr "کلیک کنیت تا ای تنظیماتا اجباری کنیت"
+
+msgid "General"
+msgstr "کلی"
+
+msgid "Panel"
+msgstr "پنل"
+
+msgid "Epiphany Web Browser"
+msgstr "وب گرودک Epiphany "
+
+msgid "GNOME Screensaver"
+msgstr "محافظ صفحه گنوم"
+
+msgid "Disable command line"
+msgstr "غیر فعال کتن ـخط دستور"
+
+msgid "Disable printing"
+msgstr "غیر فعال کتن ـچهاب کنگ"
+
+msgid "Disable print setup"
+msgstr "غیر فعال کتن تنظیم ـچهاپ"
+
+msgid "Disable save to disk"
+msgstr "غیر فعال کتن ذخیره په ـدیسک"
+
+msgid "Lock down the panels"
+msgstr "ـکبل کتن پنل"
+
+msgid "Disable force quit"
+msgstr "غیر فعال کتن اجبار ـدربیگ"
+
+msgid "Disable lock screen"
+msgstr "غیر فعال کتن کبل ـصفحه"
+
+msgid "Disable log out"
+msgstr "غیر فعال کتن ـبندگ"
+
+msgid "Disable quit"
+msgstr "غیر فعال کتن ـدربیگ"
+
+msgid "Disable arbitrary URL"
+msgstr "غیر فعال کتن ـاختیاری URL"
+
+msgid "Disable bookmark editing"
+msgstr "غیر فعال کتن ـاصلاح نشان هلگ"
+
+msgid "Disable history"
+msgstr "غیر فعال کتن ـتاریح"
+
+msgid "Disable javascript chrome"
+msgstr "غیر فعال کتن javascript chromeـ"
+
+msgid "Disable toolbar editing"
+msgstr "غیر فعال کتن ـمیله ابزار اصلاح"
+
+msgid "Force fullscreen mode"
+msgstr "مجبور کتن حالت ـکل صفحه "
+
+msgid "Hide menubar"
+msgstr "پناه کتن ـشماره"
+
+msgid "Lock on activation"
+msgstr "ـکبل اور کار"
+
+msgid "Allow log out"
+msgstr "اجازت داتن په ـدر بیگ"
+
+

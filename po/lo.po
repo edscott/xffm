@@ -1,0 +1,384 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:38:31 CDT 2013 ---
+#
+# Anousak Souphavanh <anousak@gmail.ocm>, 2008-2010.
+# Lao message file for YaST2 (@memory@). <>.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: http://bugs.xffm.org\n"
+"POT-Creation-Date: 2010-11-16 08:38+0000\n"
+"PO-Revision-Date: 2010-11-17 15:59+0700\n"
+"Last-Translator: Anousak Souphavanh <anousak@gmail.com>\n"
+"Language-Team: Lao <lo@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+
+msgid "About GNOME"
+msgstr "ກ່ຽວກັບ ກາໂນມ"
+
+msgid "Learn more about GNOME"
+msgstr "ຮຽນຮູ້ເພີ້ມ ກ່ຽວກັບ GNOME"
+
+msgid "News"
+msgstr "ຂ່າວ"
+
+msgid "GNOME Library"
+msgstr "ຫໍສະຫມຸດ ກາໂນມ"
+
+msgid "Friends of GNOME"
+msgstr "ເພື່ອນຂອງ ກາໂນມ"
+
+msgid "Contact"
+msgstr "ຕິດຕໍ່"
+
+msgid "The Mysterious GEGL"
+msgstr "GEGL ອັນລຶບລັບ"
+
+msgid "The Squeaky Rubber GNOME"
+msgstr "ກາໂນມ ຢ່າງອຽດອາດ"
+
+msgid "Wanda The GNOME Fish"
+msgstr "ວັນນາ ປາ ກາໂນມ"
+
+msgid "Open URL"
+msgstr "ເປີດ URL"
+
+msgid "Copy URL"
+msgstr "ສໍາເນົາ URL"
+
+msgid "About the GNOME Desktop"
+msgstr "ກ່ຽວກັບ ກາໂນມ"
+
+msgid "%(name)s: %(value)s"
+msgstr "%(name)s: %(value)s"
+
+msgid "Welcome to the GNOME Desktop"
+msgstr "ຍີນດີເຂັ້າຊູ່ເດດທ໋ອບ ກາໂນມ"
+
+msgid "Brought to you by:"
+msgstr "ນໍາສະເຫນີທ່ານໂດຍ:"
+
+msgid "Version"
+msgstr "ລູ້ນ"
+
+msgid "Distributor"
+msgstr "ຜູ້ຈັດເເຈກ"
+
+msgid "Build Date"
+msgstr "ວັນສ້າງ"
+
+msgid "Display information on this GNOME version"
+msgstr "ສະເເດງຂໍ້ມູນລຸ້  ກາໂນມ ລຸ້ນນີ້"
+
+msgid ""
+"GNOME also includes a complete development platform for applications "
+"programmers, allowing the creation of powerful and complex applications."
+msgstr ""
+"ນອກຈາກນີ້ ກາໂນມ ຍັງມີລະບົບຮອງຮັບ ທີ່ຊ່ວຍໃຫ້ຂຽນໂປຣເເກຣມ ສາມາດພັດທະນາໂປຣເເກຣມທີມີພະລັງສູງ "
+"ເເລະ ມີຄວາມອາດສາມາດ."
+
+msgid ""
+"GNOME includes most of what you see on your computer, including the file "
+"manager, web browser, menus, and many applications."
+msgstr ""
+"ກາໂນມ ປະກອບໄປດ້ວຍສີ່ງທີ່ທ່ານເຫັນຢູ່ຫນ້າຈໍເກີອບທັງຫມົດ ເປັນຕົ້ນ ຕົວຈັດການເເຟ້ມ ເເວບບາວເຊີ້ ຫລາຍການ "
+"ເມນູ ເເລະ ໂປຣເເກຣມ ອື່ນ ຯ ອີກຫລາຍ ຯ "
+
+msgid ""
+"GNOME is a Free, usable, stable, accessible desktop environment for the Unix-"
+"like family of operating systems."
+msgstr ""
+"ກາໂນມ ເປັນລະບົບເເດສະທອບທ໌ ທີ່ໃຫ້ເສລິພາບ ສະດວກໃຊ້ ເເລະ ມີໍີສີ່ງອໍານ່ວນຄວາມສະດວກຜູ້ໃຊ້ປະເພດຕ່າງ ຯ "
+"ສໍາລັບລະບົບປະທິບັດການຕະກູນຢູນິກຊ໌"
+
+msgid ""
+"GNOME's focus on usability and accessibility, regular release cycle, and "
+"strong corporate backing make it unique among Free Software desktops."
+msgstr ""
+"ກາໂນມ ເນັ້ນຄວາມງ່າຍໃນການໃຊ້ ພັດທະນາລູ້ນໃຫ່ມສະມໍ່າສະເມີ ເເລະ "
+"ໃດ້ຮັບການອຸບປະຖໍາຈາກກອງທຸລະກິດຢ່າງຕໍ່ເນື່ອງ ທັ້ງຫມົດທີ່ນໍາໃຫ້  ກາໂນມ "
+"ເປັນລະບົບເເດດຊ໌ທອບ໌ທີ່ບໍ່ຄືໃຜໃນກຸ່ມເເດດຊ໌ທອບ໌ທີ່ເປັນສອບເເວຣ໌ເເຟຣ໌"
+
+msgid ""
+"GNOME's greatest strength is our strong community. Virtually anyone, with or "
+"without coding skills, can contribute to making GNOME better."
+msgstr ""
+"ຈຸດທີ່ດີເດັນທີ່ສູດຂອງ ກາໂນມ ກໍ່ຄືຊູມຊົນທີ່ເຂົ້ມເເຂງ ທຸກ ຯ ຄົນ ບໍ່ວ່າຈະເປັນໃຜ ຫນັກຂຽນໂປຣເເກຣມຫລືບໍ່ "
+"ກໍ່ສານາດຮວມກັນພັດທະນາ ກາໂນມ ໃຫ້ດີຂື້ນໃດ້"
+
+msgid ""
+"Hundreds of people have contributed code to GNOME since it was started in "
+"1997; many more have contributed in other important ways, including "
+"translations, documentation, and quality assurance."
+msgstr ""
+"ຜູ່ຄົນຫລາຍຮ້ອຍໄດ້ຮ່ວມກັນພັດທະນາ ໂປຣເເກຣມ ສໍາລັບ ກາໂນມ ຕັ້ງເເຕ່ເລີ້ມໂຄງການຕອນປີ 2540 ຫລື 1998 "
+"ເເລະຍັງມີອີດຫລາຍ ຯ ທີ່ຊ່ວຍສົ່ງເສີມໃນທາງອື່ນ ຯ ເປັນຕົ້ນ ການເເປ ຂຽນຄູ່ມື ເເລະ ກວດສອບຄຸນນະພາບ"
+
+msgid "Error reading file '%s': %s"
+msgstr "ເກີດຜິດພາດເວລາອ່ານເເຟ້ມ '%s': %s"
+
+msgid "Error rewinding file '%s': %s"
+msgstr "ເກີດຜິດພາດເວລາການກໍ້ເເຟ້ມກັບ '%s': %s"
+
+msgid "No name"
+msgstr "ບໍ່ມີຊື"
+
+msgid "File '%s' is not a regular file or directory."
+msgstr "ເເຟ້ມ '%s' ບໍ່ເເມ່ນເເຟ້ມ ຫລື ໂຟລເດີຮ໌ ປົກກະຕິ"
+
+msgid "No filename to save to"
+msgstr "ບໍ່ມີຊື່ເເຟ້ມສໍາລັບໃຊ້ໃນການບັນທືກ"
+
+msgid "Starting %s"
+msgstr "ກໍາລັງເລີ້ມ %s"
+
+msgid "No URL to launch"
+msgstr "ບໍ່ມີ URL ຈະເປີດ"
+
+msgid "Not a launchable item"
+msgstr "ຮ້ອງໃຊ້ບໍ່ໃດ້"
+
+msgid "No command (Exec) to launch"
+msgstr "ບໍ່ມີຄໍາສັ່ງ (Exec) ຈະຮ້ອງ"
+
+msgid "Bad command (Exec) to launch"
+msgstr "ຄໍາສັ່ງທີ່ຈະຮ້ອງ(Exec) ມັນໃຊ້ບໍ່ໃດ້"
+
+msgid "Unknown encoding of: %s"
+msgstr "ບໍ່ຮູ້ຈັກລະຫັດເເອນໂຄດຂອງ: %s"
+
+msgid "Cannot find a terminal, using xterm, even if it may not work"
+msgstr "ບໍ່ສາມາດຫາຈໍ, ໄຊ້ Xterm ເເທນ, ເຖີງມັນຈະບໍ່ທໍາງານກໍ່ຕາມ"
+
+msgid "could not get the screen resources (CRTCs, outputs, modes)"
+msgstr "ບໍ່ສາມາດເອົາອຸປະກອນຈໍ (CRTCs, outputs, modes)"
+
+msgid "unhandled X error while getting the range of screen sizes"
+msgstr "ພິດພາດ ກັບ X ໃນເວລາປັບປູງຂະນານຈໍ "
+
+msgid "could not get the range of screen sizes"
+msgstr "ພິດພາດ ກັບ X ໃນເວລາປັບປູງຂະນານຈໍ "
+
+msgid "RANDR extension is not present"
+msgstr "ບໍ່ມີ RAND ໂປຣເເກຣມ"
+
+msgid "could not get information about output %d"
+msgstr "ບໍ່ສາມາດ ເອົາຂໍ້ມູນກ່ຽວກັບ %d"
+
+msgid ""
+"requested position/size for CRTC %d is outside the allowed limit: position=(%"
+"d, %d), size=(%d, %d), maximum=(%d, %d)"
+msgstr ""
+"ຮ້ອງຂໍ ທີ່/ຂະນານ ສະເພາະ CRTC %d ເເມ່ນ ທີ່ໃດ້is outside the allowed limit: position=(%"
+"d, %d), size=(%d, %d), maximum=(%d, %d)"
+
+msgid "could not set the configuration for CRTC %d"
+msgstr "ບໍ່ສາມາດ ຕັ້ງຄ່າສະເພາະ CRTC %d"
+
+msgid "could not get information about CRTC %d"
+msgstr "ບໍ່ສາມາດ ເອົາຂໍ້ມູນກ່ຽວກັບ CRTC %d"
+
+msgid "Laptop"
+msgstr "ເເລບທອບ"
+
+msgid "none of the saved display configurations matched the active configuration"
+msgstr "ບໍ່ມີຕັ້ງຄ່າທີ່ຖຶກບັນທຶກ ທີ່ກົງກັບ ຕັ້ງຄ່າທີ່ທໍາງານຢູ່"
+
+msgid "CRTC %d cannot drive output %s"
+msgstr "CRTC %d ບໍ່ສາມາດຜົນອອກສະເເດງອອກ %s"
+
+msgid "output %s does not support mode %dx%d@%dHz"
+msgstr "ຜົນສະເເດງອອກ %s ບໍ່ສາມາດສະນົບສະໜູນເເບບ %dx%d@%dHz"
+
+msgid "CRTC %d does not support rotation=%s"
+msgstr "CRTC %d ບໍ່ສາມາດສະນົບສະໜູນມຸນວຽນ=%s"
+
+msgid ""
+"output %s does not have the same parameters as another cloned output:\n"
+"existing mode = %d, new mode = %d\n"
+"existing coordinates = (%d, %d), new coordinates = (%d, %d)\n"
+"existing rotation = %s, new rotation = %s"
+msgstr ""
+"ຜົນອອກ %s ບໍ່ມີຕົວປ່ຽນເສີມທີ່ເທົ່າກັບຜົນອອກທີ່ທຶກລອອກເເບ:\n"
+"ເເບບມີເເລ້ວ = %d, ເເບບໄໝ່ = %d\n"
+"ຕົວປະສານມີເເລ້ວ= (%d, %d), ຕົວປະສາບໄໝ່ = (%d, %d)\n"
+"ການມຸນວຽນມີເເລ້ວ = %s, ການມຸນວຽນໄໝ່= %s"
+
+msgid "cannot clone to output %s"
+msgstr "ບໍ່ສາມາດລອອກເເບບໃສ່ ຜົນອອກ %s"
+
+msgid "Trying modes for CRTC %d\n"
+msgstr "ທົດລອງເເບບສະເພາະ CRTC %d\n"
+
+msgid "CRTC %d: trying mode %dx%d@%dHz with output at %dx%d@%dHz (pass %d)\n"
+msgstr "CRTC %d: ທົດລອງເເບບ %dx%d@%dHz ກັບຜົນອອກທີ່ %dx%d@%dHz (ພ່ານ %d)\n"
+
+msgid ""
+"could not assign CRTCs to outputs:\n"
+"%s"
+msgstr ""
+"ບໍ່ສາມາດເເຕ່ງຕັ້ງໃຫ້ CRTCs ຕໍ່ຜົນອອກ:\n"
+"%s"
+
+msgid ""
+"none of the selected modes were compatible with the possible modes:\n"
+"%s"
+msgstr ""
+"ບໍ່ມີເເບບໃດທີຖຶກເລືອຈະເຂົ້າກັບເເບບທີ່ເປັນໄປໃດ້:\n"
+"%s"
+
+msgid ""
+"required virtual size does not fit available size: requested=(%d, %d), "
+"minimum=(%d, %d), maximum=(%d, %d)"
+msgstr ""
+"ຂະໜາດທີ້ຈໍາເປັນບໍ່ສາມາດເຂົ້າກັບຂະໜາດທີ່ມີ: ຖຶກຮ້ອງຂໍ=(%d, %d), "
+"ຕໍາສຸດ=(%d, %d), ສູງສຸດ=(%d, %d)"
+
+
+msgid "Multimedia menu"
+msgstr "ລາຍການສືປະສົມ"
+
+msgid "Sound  Video"
+msgstr "ສຽງ ເເລະ ວີດີໂອ"
+
+msgid "Programming"
+msgstr "ຂງນໂປຣແກຣມ"
+
+msgid "Tools for software development"
+msgstr "ເຄື່ອງມືພັດທະນາຊອບແວຣ"
+
+msgid "Education"
+msgstr "ການສຶກສາ"
+
+msgid "Games"
+msgstr "ເກມ"
+
+msgid "Games and amusements"
+msgstr "ເກມ ແລະ ລາ້ເລີງ"
+
+msgid "Graphics"
+msgstr "ຮູບພາບ"
+
+msgid "Graphics applications"
+msgstr "ໂປຣແກຣມຮູບພາບ"
+
+msgid "Hardware"
+msgstr "ຮາດແວຣ໌"
+
+msgid "Settings for several hardware devices"
+msgstr "ຕັ້ງຄ່າອຸປະກອນຮາດແວຣ໌ຕ່າງໆ"
+
+msgid "Internet"
+msgstr "ອິນເຕີເນັດ"
+
+msgid "Programs for Internet access such as web and email"
+msgstr "ໂປຣແກຣມສຳລັບເຂົ້າອິນເຕີເນັດຕົວຢ່າງ ເວັບ ເເລະ ອີເມວລ໌"
+
+msgid "Office"
+msgstr "ໂປຣເເກຣມຫ້ອງການ"
+
+msgid "Office Applications"
+msgstr "ໂປຣມແກຣມສຳລັບຫ້ອງການ"
+
+msgid "Personal"
+msgstr "ສ່ວນຕົວ"
+
+msgid "Personal settings"
+msgstr "ຕັ້ງຄ່າສ່ວນຕົວ"
+
+msgid "System"
+msgstr "ລະບົບ"
+
+msgid "System settings"
+msgstr "ຕັ້ງຄ່າລະບົບ"
+
+msgid "System Tools"
+msgstr "ເຄື່ອງມືລະບົບ"
+
+msgid "System configuration and monitoring"
+msgstr "ຕັ້ງຄ່າ ແລະ ເບີ່ງເເຍງລະບົບ"
+
+msgid "Universal Access"
+msgstr "ສິ່ງອຳນວຍຄວາມສະດວກ"
+
+msgid "Universal Access Settings"
+msgstr "ຕັ້ງຄ່າສິ່ງອຳນວຍຄວາມສະດວກ"
+
+msgid "Accessories"
+msgstr "ເຄື່ອງອຸປະກອນເພີ້ມ"
+
+msgid "Desktop accessories"
+msgstr "ໂປຣມແກຣມເຄື່ອງໃຊ້ສອຍເດັດທອບ"
+
+msgid "Applications"
+msgstr "ໂປຣເເກຣມທົວໄປ"
+
+msgid "Applications that did not fit in other categories"
+msgstr "ໂປຣເເກຣມ ບໍ່ຢູ່ໃນໝວດອື່ນໆ"
+
+msgid "Other"
+msgstr "ອື່ນ ໆ"
+
+msgid "Menu Editor"
+msgstr "ຕົວແກ້ໄຂ ລາຍການ"
+
+msgid "Edit Menus"
+msgstr "ແກ້ໄຂ ລາຍການ"
+
+msgid "Applications:"
+msgstr "ໂປຣເເກຣມ:"
+
+msgid "Defaults"
+msgstr "ຄ່າເດີມ"
+
+msgid "Menus:"
+msgstr "ລາຍການ:"
+
+msgid "Simple Menu Editor %s"
+msgstr "ເຄື່ອງມືແກ້ໄຂລາຍການແບບງ່າຍ%s"
+
+msgid "Name"
+msgstr "ຊື່"
+
+msgid "Show"
+msgstr "ສະແດງ"
+
+msgid ""
+"Cannot find home directory: not set in /etc/passwd and no value for $HOME in "
+"environment"
+msgstr ""
+"ຫາດາຍເລັກໂຕລີທີ່ບ້ານບໍ່ພໍ້: ບໍ່ໄດ້ຕັ້ງຄ່າໄວ້ໃນ /etc/passwd ເເລະ ບໍ່ໄດ້ກໍານົດຄ່າສະເພາະ $HOME ໃນ "
+"ເເວດລ້ອມ"
+
+msgid "Internet and Network"
+msgstr "ອິນເຕີເນັດ ແລະ ເຄືອຂ່າຍ"
+
+msgid "Network-related settings"
+msgstr "ຕັ້ງຄ່າກ່ຽວກັບເຄືອຂ່າຍ"
+
+msgid "Look and Feel"
+msgstr "ຮູບລັກສະນະແລະການໃຊ້ງານ"
+
+msgid "Settings controlling the desktop appearance and behavior"
+msgstr "ການຕັ້ງຄ່າຄວບຄຸມຮູບແບບແລະພຶດຕິກຳຂອງເດັດທອບ"
+
+msgid "Administration"
+msgstr "ເບີ່ງເເຍງລະບົບ"
+
+msgid "Change system-wide settings (affects all users)"
+msgstr "ການຕັ້ງຄ່າທີ່ມີຜົນທັງລະບົບ (ມີຜົນຕໍ່ຜູ້ໃຊ້ຕໍ່ທຸກຄົນ)"
+
+msgid "Personal preferences"
+msgstr "ປັບແຕ່ງພື້ນໂຕະສ່ວນຕົວ"
+
+msgid "Preferences"
+msgstr "ປັບແຕ່ງພື້ນໂຕະ"
+
+
+

@@ -1,0 +1,1483 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:45:20 CDT 2013 ---
+#
+# Dragos <pasdragos@yahoo.com>, 2011.
+# Jeanina Ivan <jeanina.ivan@gmail.com>, 2005.
+# BluMan <mantheblu@yahoo.com>, 2010-2011.
+# Eugen Hoanca <eugenh@urban-grafx.ro>, 2003.
+# Cătălin Bălan <laserbeam333@gmail.com>, 2010.
+# eu93 <spoiala.marian@yahoo.com>, 2010.
+# Nichita Utiu <nikita.utiu@gmail.com>, 2010.
+# Florin Catalin RUSSEN <cfrussen@yahoo.co.uk>, 2009-2011.
+# devill08 <moto.devill@gmail.com>, 2010.
+# Tabita Dolean <dtabita21@gmail.com>, 2010.
+# Cristian Vat <deathgeneral@gmail.com>, 2005.
+# Nita Sorin-Nicolae <viper.rls@gmail.com>, 2010.
+# Claudia Cotună <special4ti@gmail.com>, 2010.
+# Popa Razvan <razvan.popa2010@gmail.com>, 2010.
+#  Florin Cătălin RUSSEN <cfrussen@yahoo.co.uk>, 2010.
+# Eddy Petrișor (review) <eddy.petrisor@gmail.com>, 2005.
+# Claudiu Costin <claudiuc@kde.org>, 2002-2010.
+# Lupescu Mircea <mircea.crazy@gmail.com>, 2010-2011.
+# Marius Voilă <marius.voila@gmail.com>, 2010.
+# Claudiu Covaci <claudiu.covaci@gmail.com>, 2008.
+# opengl <mihai_opengl@yahoo.com>, 2011.
+# Tudor Vio <tudor_dude93@yahoo.com>, 2010-2011.
+# Andu Morie <andu.qq@gmail.com>, 2010.
+# Tiberiu Micu <tibimicu@gmx.net>, 2001.
+# Badea Andrei <kenzy.bratianu@gmail.com>, 2010.
+# Eugen Dedu <Eugen.Dedu@pu-pm.univ-fcomte.fr>, 2008-2009.
+# Cristofor Ochinca <chrisochinca@yahoo.com>, 2010.
+# Cosmin Bordeianu <elloxar@gmail.com>, 2009.
+# Alexandru Szasz <alexxed@gmail.com>, 2006-2009.
+# Master <cristy_hereg93@yahoo.com>, 2010.
+# Daniel Statescu <Daniel.Statescu@bigfoot.com>, 2000.
+# Laurențiu Cristian Ion <ionlaurentiucristian@gmail.com>, 2011.
+# Cristian Buzduga <cristianbzdg@gmail.com>, 2011.
+# Daniela Oneţ <daniela.madarasan@gmail.com>, 2010.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2002-2012.
+# Spoiala Marian <spoiala.marian@yahoo.com>, 2010.
+# Marius Dumitru <marius2677@yahoo.com>, 2003.
+# Cristian Iacobescu <cristy_hereg93@yahoo.com>, 2010.
+# Eddy Petrișor <eddy.petrisor@gmail.com>, 2006.
+# Vlad Ungureanu <ungureanuvladvictor@gmail.com>, 2010.
+# Laurențiu Buzdugan <lbuz@rolix.org>, 2008.
+# Anastase Valentin <dk.vali@gmail.com>, 2007.
+# Laurentiu Buzdugan <lbuz@rolix.org>, 2007-2009.
+# George <cntv.george@yahoo.com>, 2010.
+# Live session user <baicoianu_alexandru@gmail.com>, 2010.
+# Devill <moto.devill@gmail.com>, 2011.
+# Nandor Licker <licker.nandor@gmail.com>, 2010.
+# Tudor Vioreanu <tudor_dude93@yahoo.com>, 2011.
+# Florin Cătălin RUSSEN <frussen@yahoo.co.uk>, 2009-2011.
+# Mişu Moldovan <dumol@gnome.ro>, 2000-2005.
+# krig <krigenator@gmail.com>.
+# Nicolae Antonio <anto.nicolae@gmail.com>, 2010.
+# Mugurel Tudor <mugurelu@gnome.ro>, 2002-2007.
+# Militaru Cristian <cristipiticul@yahoo.com>, 2010.
+# George Roman <georgeroman@gmail.com>, 2005.
+# Iustin Pop <iusty@geocities.com>.
+# Ionut <shadow_hunter_xtreme@yahoo.com>, 2010.
+# Toma Tabacu <toma.tabacu@gmail.com>, 2010.
+# Ionuț Jula <ionutjula@gmail.com>, 2008.
+# translation of @PACKAGE.po to @LANGUAGE <>.
+# Szabo Roland <rolisz@gmail.com>, 2010.
+# Florescu Alexandru Marian <show_some_originality@yahoo.com>, 2010.
+# Aoi_hana <kuchiki14@yahoo.com>, 2010.
+# Florentina Mușat <kuchiki14@yahoo.com>, 2010-2011.
+# Robert Roventa <rov_93@yahoo.com>, 2010.
+# Cristian Oneț <onet.cristian@gmail.com>, 2009-2013.
+# neb1 <mircea.crazy@gmail.com>, 2011.
+# (sponsored by Marius Andreiana <mandreiana@yahoo.com>.
+# Marian Vasile <marianvasile@upcmail.ro>, 2010.
+# Robert Claudiu Gheorghe <rgheorghe@writeme.com>, 2001.
+# costin22 <muraru.costin@gmail.com>, 2010.
+# Paul-Dan Oprişa-Stănescu <oprisa@mec.utt.ro>, 2001.
+# Mugurel  Tudor <mugurelu@gnome.ro>, 2006.
+# Mircea MITU <mmitu@bitdefender.com>, 2006.
+# Spoială Marian <spoiala.marian@yahoo.com>, 2010.
+# Copyright (C) 2007 daniel g. siegel <dgsiegel@gnome.org>.
+# Romanian message file for YaST2 (@memory@). <>.
+# Alexandru Florescu <show_some_originality@yahoo.com>, 2010-2011.
+# Lucian Adrian Grijincu <lucian.grijincu@gmail.com>, 2009-2011.
+# Daniel Șerbănescu <cyber19rider@gmail.com>, 2010-2013.
+# Laurenţiu Buzdugan <lbuz@rolix.org>, 2008-2009.
+# cyberrider <cyber19rider@gmail.com>, 2010.
+# Simion Ruxandra <ruxy.simion@gmail.com>, 2010.
+# Florentina Musat <kuchiki14@yahoo.com >, 2010-2011.
+# Victor Cărbune <victor.carbune@kdemail.net>, 2010.
+# Alexandru Palcuie <palcuiealex@yahoo.com>, 2010.
+# Cristian Tarsoaga <cristian.tarsoaga@gmail.com>, 2008.
+# Sebastian Ivan <sebastian.ivan@ubuntu.ro>, 2005-2007.
+# Nichita Uțiu <nikita.utiu@gmail.com>, 2010.
+# Mișu Moldovan <dumol@gnome.ro>, 2000-2012.
+# Iacobescu Cristian <cristy_hereg93@yahoo.com>, 2010.
+# Ungureanu Vlad Victor <ungureanuvladvictor@gmail.com>, 2010.
+# Alexandru Florescu Marian <show_some_originality@yahoo.com>, 2011.
+# Laurențiu Ion <me_lawr@yahoo.com>, 2010.
+# Stirbu Ciprian <stirbuciprian@gmail.com>, 2012.
+# breathe <cntv.george@yahoo.com>, 2010.
+# Laurentiu Andrei <ex3cution1337@gmail.com>, 2010.
+# ruxy <ruxy.simion@gmail.com>, 2011.
+# Mihai Varzaru <mihaiv@gmail.com>, 2008.
+# Ciprian Popovici <ciprian@zuavra.net>, 2006.
+# Mișu Moldovan dumol@gnome.ro, 2003 - 2009. <>.
+# Ion Laurențiu Cristian <me_lawr@yahoo.com>, 2010-2011.
+# Alexandru Baicoianu <baicoianu.alexandru@gmail.com>, 2010.
+# Iulian Cutui <itph@k.ro>.
+# Roland <rolisz@gmail.com>, 2010.
+# Remus Boara <rem@eclipsedesign.net>, 2006.
+# kuchiki14 <kuchiki14@yahoo.com>, 2010.
+# Cristian Buzdugă <cristianbzdg@gmail.com>, 2010.
+# Chris <chrisochinca@yahoo.com>, 2010.
+# Pascariu Dragoș <pasdragos@yahoo.com>, 2011.
+# Licker Nandor <lickernandor@yahoo.com>, 2010.
+# Paul-Dan Oprisa-Stanescu <dan_oprisa@hotmail.com>.
+# cosminx2003 <cosminx2003@yahoo.com>, 2010.
+# Rușeț Zeno <rzeno@cwazy.co.uk>, 2005.
+# Dobre Alin <dobre.inter@yahoo.com>, 2010-2011.
+# Cristian Oneţ <onet.cristian@gmail.com>, 2009-2012.
+# Raul Malea <raul.malea@gmail.com>, 2011.
+# Eugen Paiuc <eug_paiuc@bluewin.ch>, 2005.
+# Alina Valea <avalea@home.ro>, 2003.
+# Gabriel Șerbănescu <gabi_ro@ymail.com>, 2010.
+# Daniel Butum <megabyttes@gmail.com>, 2010.
+# Lucian Adrian Grijncu <lucian.grijincu@gmail.com>, 2009.
+# laurion <me_lawr@yahoo.com>, 2010-2011.
+# cristy_hereg93 <cristy_hereg93@yahoo.com>, 2010.
+# Spoială Cristian <s_cristian@ezrs.com>, 2005.
+# lnandor <lickernandor@yahoo.com>, 2010.
+# Copyright (C) 2007 Robby Stephenson <robby@periapsis.org>.
+# Cristian Onet <onet.cristian@gmail.com>, 2008-2009.
+# Grigore Moldovan <GrigoreMoldovan@netscape.net>, 2004-2011.
+# Eddy Petrisor <eddy.petrisor@gmail.com>, 2007.
+# Adi Roiban <adiroiban@gmail.com>, 2008-2010.
+# Dobre Alin Mihai <dobre.inter@gmail.com>, 2010.
+# maiertheodor <maiertheodor@yahoo.com>, 2010.
+# laur <ionlaurentiucristian@gmail.com>, 2011.
+# Marius Andreiana <mandreiana@yahoo.com>, 2000-2001.
+# Eugen Paiuc (review) <eug_paiuc@bluewin.ch>, 2005.
+# Veaceslav Grecea <slavutich@grecea.net>, 2008.
+# Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
+# Eu93 <spoiala.marian@yahoo.com>, 2010.
+# Iulian Ursache <iulianu@cs.tuiasi.ro>, 2002.
+# Bogdan Alexandru Constantin <bogdan.alexandru@linuxmail.org>, 2004.
+# Andrei <cristy_hereg93@yahoo.com>, 2010.
+# Carla Boczor <wasp719@yahoo.com>, 2010.
+# tudordude <tudor_dude93@yahoo.com>, 2010.
+# Damian Petrișor Alin <aalin.damian@yahoo.com>, 2011.
+# george roman <georgeroman@gmail.com>, 2005.
+# Morie Daniel Alexandru <andu.qq@gmail.com>, 2010.
+# Sergiu Bivol <sergiu@ase.md>, 2000-2013.
+# crenguta bacaoanu <crengutamirela@gmail.com>, 2010.
+# Cosmin Clapon <cosminx2003@yahoo.com>, 2010.
+# Dan Damian <dand@gnome.ro>, 1999-2007.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-02 12:27-0600\n"
+"PO-Revision-Date: 2010-01-24 17:20+0200\n"
+"Last-Translator: Sergiu Bivol <sergiu@ase.md>\n"
+"Language-Team: Romanian <translation-team-ro@lists.sourceforge.net>\n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%s00 > 0  n%s00 "
+"<20)) ? 1 : 2;\n"
+"X-Generator: Lokalize 1.0\n"
+
+#: ../../xffm/completion/base.hh:28
+msgid "Command"
+msgstr "Comandă"
+
+#: ../../xffm/completion/base.hh:31
+msgid "File"
+msgstr "Fișier"
+
+#: ../../xffm/completion/base.hh:34
+#, fuzzy
+msgid "Command history"
+msgstr "Istoric executare comenzi"
+
+#. option -u uid "uid" "uid_combo"
+#: ../../xffm/completion/base.hh:37 ../../xffm/find/dialog.hh:199
+msgid "User"
+msgstr "Utilizator"
+
+#: ../../xffm/completion/base.hh:40
+msgid "Variable"
+msgstr "Variabilă"
+
+#: ../../xffm/completion/base.hh:43
+msgid "Host"
+msgstr "Gazdă"
+
+#: ../../xffm/completion/base.hh:55
+msgid "Found no match"
+msgstr "Nu s-a găsit nicio potrivire"
+
+#: ../../xffm/completion/base.hh:133 ../../xffm/completion/base.hh:134
+msgid "Matches"
+msgstr "Potriviri"
+
+#: ../../xffm/completion/base.hh:134
+#, fuzzy
+msgid "Too many files open"
+msgstr "Prea multe dosare"
+
+#: ../../xffm/completion/base.hh:325 ../../xffm/find/fgr.hh:124
+msgid "Options:"
+msgstr "Opțiuni:"
+
+#: ../../xffm/completion/bash.hh:133
+#, fuzzy
+msgid "Completion mode:"
+msgstr "Cod de completare"
+
+#: ../../xffm/completion/bash.hh:134
+msgid "command"
+msgstr "comandă"
+
+#: ../../xffm/completion/bash.hh:135
+msgid "file"
+msgstr "fișier"
+
+#: ../../xffm/completion/bash.hh:145 ../../xffm/completion/bash.hh:149
+msgid "Options >>"
+msgstr "Opțiuni >>"
+
+#: ../../xffm/find/fgr.hh:124 ../../xffm/find/dialog.hh:308
+msgid "Path"
+msgstr "Cale"
+
+#: ../../xffm/find/fgr.hh:125
+msgid "Locate documents and folders on this computer by name or content"
+msgstr ""
+"Localizează documente și dosare din acest calculator după nume sau conținut"
+
+#: ../../xffm/find/fgr.hh:126 ../../xffm/find/dialog.hh:341
+msgid "Filter:"
+msgstr "Filtru:"
+
+#: ../../xffm/find/fgr.hh:126
+msgid "Search for files"
+msgstr "Caută fișiere"
+
+#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
+#: ../../xffm/find/fgr.hh:128
+msgid "Contents:"
+msgstr "Conținut:"
+
+#: ../../xffm/find/fgr.hh:128
+msgid "File's contents filtered as plain text."
+msgstr "Conținutul fișierului în mod text."
+
+#: ../../xffm/find/fgr.hh:131
+msgid "Verbose output debugging mode."
+msgstr "Mod de depanare detaliat."
+
+#: ../../xffm/find/fgr.hh:133
+msgid "Show version information"
+msgstr "Arată informații despre versiune"
+
+#: ../../xffm/find/fgr.hh:135
+#, fuzzy
+msgid "Filter Details"
+msgstr "Detalii jucător"
+
+#. / option -a "xdev"
+#: ../../xffm/find/fgr.hh:138 ../../xffm/find/dialog.hh:180
+#, fuzzy
+msgid "Stay on single filesystem"
+msgstr "Scanează un sistem de fișiere"
+
+#: ../../xffm/find/fgr.hh:140
+msgid "Print..."
+msgstr "Tipărire..."
+
+#: ../../xffm/find/fgr.hh:140
+msgid "The unique Process ID that identifies this process."
+msgstr "ID-ul unic care identifică acest proces."
+
+#. / option -D "recursiveH"
+#: ../../xffm/find/fgr.hh:142 ../../xffm/find/dialog.hh:177
+#, fuzzy
+msgid "Find hidden files and directories"
+msgstr "Arată fișierele și directoarele ascunse"
+
+#: ../../xffm/find/fgr.hh:143
+msgid "Filter"
+msgstr "Filtru"
+
+#: ../../xffm/find/fgr.hh:144
+msgid ""
+"To display files which pass the filter (stars and regexps will be processed)"
+msgstr ""
+
+#. / option -r "recursive"
+#: ../../xffm/find/fgr.hh:146 ../../xffm/find/dialog.hh:174
+msgid "Recursive"
+msgstr "Recursiv"
+
+#: ../../xffm/find/fgr.hh:147 ../../xffm/find/fgr.hh:148
+#: ../../xffm/find/fgr.hh:149 ../../xffm/find/fgr.hh:150
+msgid "KByte"
+msgstr "KOctet"
+
+#: ../../xffm/find/fgr.hh:148
+msgid "is greater than or equal to"
+msgstr "este mai mare sau egal cu"
+
+#: ../../xffm/find/fgr.hh:150
+msgid "is less than or equal to"
+msgstr "este mai mic sau egal cu"
+
+#: ../../xffm/find/fgr.hh:152
+msgid "Set UID"
+msgstr "Setat UID"
+
+#: ../../xffm/find/fgr.hh:152
+msgid "Executable Text Files"
+msgstr "Fișier text executabil"
+
+#: ../../xffm/find/fgr.hh:154
+msgid "The permissions of the file, in octal notation."
+msgstr "Permisiunile fișierului, în notație octală."
+
+#: ../../xffm/find/fgr.hh:155
+msgid "Type"
+msgstr "Tip"
+
+#: ../../xffm/find/fgr.hh:157 ../../xffm/find/signals.hh:17
+msgid "Any"
+msgstr "Oricare"
+
+#: ../../xffm/find/fgr.hh:157
+msgid "Default type"
+msgstr "Tip implicit"
+
+#: ../../xffm/find/fgr.hh:158 ../../xffm/common/preview.hh:497
+msgid "Regular file"
+msgstr "Fișier obișnuit"
+
+#: ../../xffm/find/fgr.hh:159 ../../xffm/find/signals.hh:11
+#: ../../xffm/fm/local/popup.hh:803 ../../xffm/common/preview.hh:488
+msgid "Directory"
+msgstr "Dosar"
+
+#: ../../xffm/find/fgr.hh:160 ../../xffm/find/signals.hh:12
+#: ../../xffm/common/preview.hh:494
+msgid "Symbolic Link"
+msgstr "Legătură simbolică"
+
+#: ../../xffm/find/fgr.hh:161
+msgid "UNIX Socket"
+msgstr "Socket UNIX"
+
+#: ../../xffm/find/fgr.hh:162 ../../xffm/find/signals.hh:14
+#: ../../xffm/common/preview.hh:482
+msgid "Block device"
+msgstr "Dispozitiv bloc"
+
+#: ../../xffm/find/fgr.hh:163 ../../xffm/find/signals.hh:15
+#: ../../xffm/common/preview.hh:485
+msgid "Character device"
+msgstr "Dispozitiv caracter"
+
+#: ../../xffm/find/fgr.hh:164 ../../xffm/find/signals.hh:16
+#: ../../xffm/common/preview.hh:491
+msgid "FIFO"
+msgstr "FIFO"
+
+#. radio_p freed on destroy event for dialog_.
+#. option -k minutes "last_minutes", "last_minutes_spin"
+#: ../../xffm/find/fgr.hh:166 ../../xffm/find/fgr.hh:168
+#: ../../xffm/find/dialog.hh:221
+msgid "Minutes"
+msgstr "Minute"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/dialog.hh:270 ../../xffm/find/dialog.hh:370
+#: ../../xffm/fm/treeview.hh:18
+msgid "Details"
+msgstr "Detalii"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/fgr.hh:179 ../../xffm/find/fgr.hh:180
+#: ../../xffm/find/fgr.hh:183 ../../xffm/find/fgr.hh:184
+#: ../../xffm/find/fgr.hh:187 ../../xffm/find/fgr.hh:188
+#, fuzzy
+msgid "TIME"
+msgstr "LIMITĂDETIMP"
+
+#: ../../xffm/find/fgr.hh:168 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/fgr.hh:174 ../../xffm/find/fgr.hh:177
+msgid "Previous"
+msgstr "Înapoi"
+
+#. option -h hours "last_hours", "last_hours_spin"
+#: ../../xffm/find/fgr.hh:169 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/dialog.hh:226
+msgid "Hours"
+msgstr "Ore"
+
+#. option -d days "last_days", "last_days_spin"
+#: ../../xffm/find/fgr.hh:172 ../../xffm/find/fgr.hh:174
+#: ../../xffm/find/dialog.hh:231
+msgid "Days"
+msgstr "Zile"
+
+#: ../../xffm/find/fgr.hh:175
+msgid "Month"
+msgstr "Lună"
+
+#: ../../xffm/find/fgr.hh:177
+msgid "Month(s)"
+msgstr "Luni"
+
+#: ../../xffm/find/fgr.hh:180
+msgid "Modification Time :"
+msgstr "Ora Modificrii :"
+
+#: ../../xffm/find/fgr.hh:184
+msgid "Access Time :"
+msgstr "Ora Accesrii :"
+
+#: ../../xffm/find/fgr.hh:188
+msgid "Creation Time :"
+msgstr "Ora Crerii :"
+
+#: ../../xffm/find/fgr.hh:191 ../../xffm/find/fgr.hh:192
+msgid "uid"
+msgstr "uid"
+
+#: ../../xffm/find/fgr.hh:192
+msgid "User:"
+msgstr "Utilizator:"
+
+#: ../../xffm/find/fgr.hh:194 ../../xffm/find/fgr.hh:195
+msgid "gid"
+msgstr "gid"
+
+#: ../../xffm/find/fgr.hh:195
+msgid "Group:"
+msgstr "Grup:"
+
+#: ../../xffm/find/fgr.hh:198
+msgid ""
+"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+"character that  normally  follows  a file  name"
+msgstr ""
+
+#: ../../xffm/find/fgr.hh:200
+msgid "Content View"
+msgstr "Vizualizare conținut"
+
+#: ../../xffm/find/fgr.hh:201 ../../xffm/find/fgr.hh:202
+#: ../../xffm/find/fgr.hh:203 ../../xffm/find/fgr.hh:204
+msgid "STRING"
+msgstr "ȘIR"
+
+#: ../../xffm/find/fgr.hh:202 ../../xffm/find/fgr.hh:204
+#: ../../xffm/fm/local/popup.hh:563
+msgid "Regular expression"
+msgstr "Expresie regulată"
+
+#: ../../xffm/find/fgr.hh:204
+msgid "Extended"
+msgstr "Extinsă"
+
+#: ../../xffm/find/fgr.hh:206
+msgid "Ignore case"
+msgstr "Ignoră majusculele"
+
+#: ../../xffm/find/fgr.hh:208
+msgid "Text Files"
+msgstr "Fișiere text"
+
+#: ../../xffm/find/fgr.hh:210 ../../xffm/find/dialog.hh:552
+msgid "No match"
+msgstr "Nicio potrivire"
+
+#: ../../xffm/find/fgr.hh:212 ../../xffm/find/dialog.hh:470
+msgid "Line Count"
+msgstr "Număr de linii"
+
+#: ../../xffm/find/fgr.hh:214
+msgid "Words"
+msgstr "Cuvinte"
+
+#: ../../xffm/find/fgr.hh:216
+msgid "Lines"
+msgstr "Linii"
+
+#: ../../xffm/find/fgr.hh:368
+#, c-format
+msgid "Usage : %s [OPTIONS]\n"
+msgstr "Folosire : %s [OPTIUNI]\n"
+
+#: ../../xffm/find/signals.hh:10
+msgid "Regular"
+msgstr "Obișnuit"
+
+#: ../../xffm/find/signals.hh:13 ../../xffm/common/preview.hh:500
+msgid "Socket"
+msgstr "Socket"
+
+#: ../../xffm/find/signals.hh:209
+msgid "Select folder to search in"
+msgstr "Alegeți dosarele în care să se caute"
+
+#. button no
+#: ../../xffm/find/signals.hh:265 ../../xffm/find/dialog.hh:584
+#: ../../xffm/response/entryfileresponse.hh:18
+#: ../../xffm/response/entryresponse.hh:305
+#: ../../xffm/response/passwdresponse.hh:558
+#: ../../xffm/fm/local/properties.hh:304 ../../xffm/fm/local/rm.hh:155
+msgid "Cancel"
+msgstr "Renunță"
+
+#: ../../xffm/find/signals.hh:293 ../../xffm/find/signals.hh:722
+#, fuzzy
+msgid "No editor for current action."
+msgstr "Nu există acțiuni curente."
+
+#. / option "upper_limit_spin" (only in gtk dialog_)
+#: ../../xffm/find/signals.hh:351 ../../xffm/find/dialog.hh:183
+msgid "Results"
+msgstr "Rezultate"
+
+#: ../../xffm/find/signals.hh:351
+msgid "Upper limit:"
+msgstr "Limita de sus:"
+
+#: ../../xffm/find/signals.hh:353
+msgid "Counting files..."
+msgstr "Numărare fișiere..."
+
+#: ../../xffm/find/signals.hh:368
+#, c-format
+msgid "Found %d match"
+msgid_plural "Found %d matches"
+msgstr[0] "A fost găsit %d potrivire"
+msgstr[1] "Au fost găsite %d potriviri"
+msgstr[2] "Au fost găsite %d de potriviri"
+
+#: ../../xffm/find/signals.hh:370
+#, c-format
+msgid "%s Finished : %s"
+msgstr "%s Finalizat : %s"
+
+#: ../../xffm/find/signals.hh:488 ../../xffm/find/signals.hh:490
+msgid "Searching..."
+msgstr "Se caută..."
+
+#. g_object_set_data(G_OBJECT(dialog_), "window", dialog_);
+#: ../../xffm/find/dialog.hh:98 ../../xffm/find/dialog.hh:150
+#: ../../xffm/find/dialog.hh:611
+msgid "Find"
+msgstr "Caută"
+
+#: ../../xffm/find/dialog.hh:183
+#, fuzzy
+msgid "Upper limit"
+msgstr "Limita de sus:"
+
+#. option -s +KByte "size_greater", "size_greater_spin"
+#: ../../xffm/find/dialog.hh:188
+msgid "At Least"
+msgstr "Cel puțin"
+
+#: ../../xffm/find/dialog.hh:188 ../../xffm/find/dialog.hh:193
+msgid "kBytes"
+msgstr "kocteți"
+
+#. option -s -KByte "size_smaller", "size_smaller_spin"
+#: ../../xffm/find/dialog.hh:193
+msgid "At Most"
+msgstr "Cel mult"
+
+#: ../../xffm/find/dialog.hh:204
+msgid "Group"
+msgstr "Grup"
+
+#. option -o octal "octal_p" "permissions_entry"
+#: ../../xffm/find/dialog.hh:208
+msgid "Octal Permissions"
+msgstr "Permisiuni octale"
+
+#. option -p suid | exe
+#: ../../xffm/find/dialog.hh:213
+msgid "SUID"
+msgstr "SUID"
+
+#: ../../xffm/find/dialog.hh:213 ../../xffm/fm/local/popup.hh:843
+msgid "Executable"
+msgstr "Executabil"
+
+#. option -m months "last_months", "last_months_spin"
+#: ../../xffm/find/dialog.hh:237
+msgid "Months"
+msgstr "Luni"
+
+#: ../../xffm/find/dialog.hh:248
+#, fuzzy
+msgid "File type : "
+msgstr "Tip fișier:"
+
+#. gtk_widget_show (GTK_WIDGET(right_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(center_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(left_options_vbox));
+#: ../../xffm/find/dialog.hh:262 ../../xffm/find/dialog.hh:602
+#: ../../xffm/fm/page/page.hh:70 ../../xffm/common/gtk.hh:70
+msgid "Close"
+msgstr "Închide"
+
+#. gtk_box_pack_start (vbox7a, GTK_WIDGET(advancedBox), TRUE, FALSE, 5);
+#. gtk_widget_show(GTK_WIDGET(advancedBox));
+#. //////////////  grep options.... /////////////////////////
+#: ../../xffm/find/dialog.hh:384
+msgid "Contains"
+msgstr "Conține"
+
+#: ../../xffm/find/dialog.hh:404
+msgid "Contains the text"
+msgstr "Conține textul"
+
+#: ../../xffm/find/dialog.hh:437
+msgid "Case Sensitive"
+msgstr "Sensibil la majuscule"
+
+#: ../../xffm/find/dialog.hh:449
+#, fuzzy
+msgid "Extended regexp"
+msgstr "Scoate extins"
+
+#: ../../xffm/find/dialog.hh:460
+msgid "Include binary files"
+msgstr "Include fișierele binare"
+
+#: ../../xffm/find/dialog.hh:496
+msgid "Match"
+msgstr "Potrivire"
+
+#: ../../xffm/find/dialog.hh:508
+#, fuzzy
+msgid "Anywhere"
+msgstr "Potrivește oriunde"
+
+#: ../../xffm/find/dialog.hh:523
+msgid "Whole words only"
+msgstr "Numai cuvinte întregi"
+
+#: ../../xffm/find/dialog.hh:538
+msgid "lines"
+msgstr "linii"
+
+#: ../../xffm/find/dialog.hh:594
+msgid "Clear"
+msgstr "Curăță"
+
+#: ../../xffm/find/dialog.hh:636
+msgid "Edit"
+msgstr "Editare"
+
+#: ../../xffm/find/dialog.hh:751 ../../xffm/find/dialog.hh:766
+#: ../../xffm/common/util.hh:1150 ../../xffm/common/util.hh:1152
+#: ../../xffm/common/util.hh:1158 ../../xffm/common/util.hh:1160
+#: ../../xffm/common/preview.hh:479
+msgid "unknown"
+msgstr "necunoscut"
+
+#: ../../xffm/find/dialog.hh:780
+msgid "Modified"
+msgstr "Modificate"
+
+#: ../../xffm/find/dialog.hh:784
+msgid "Created"
+msgstr "Creat"
+
+#: ../../xffm/find/dialog.hh:788
+msgid "Accessed"
+msgstr "Accesat"
+
+#: ../../xffm/find/dialog.hh:1106
+msgid ""
+"Basic rules:\n"
+"\n"
+"*  Will match any character zero or more times.\n"
+"?  Will match any character exactly one time\n"
+"[] Match any character within the [] \n"
+"^  Match at beginning of string\n"
+"$  Match at end of string \n"
+msgstr ""
+
+#: ../../xffm/find/dialog.hh:1115
+msgid ""
+"Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"In  basic regular expressions the metacharacters ?, +, {, |, (, and ) \n"
+"  lose their special meaning.\n"
+"\n"
+"The  period . matches  any  single  character.\n"
+"The caret ^ matches at the start of line.\n"
+"The dollar $ matches at the end of line.\n"
+"\n"
+"Characters within [ ] matches any single character in the list.\n"
+"Characters within [^ ] matches any single character *not* in the list.\n"
+"Characters inside [ - ] matches a range of characters (ie [0-9] or [a-z]).\n"
+"\n"
+"A regular expression may be followed by one of several repetition "
+"operators:\n"
+"?      The preceding item is optional and matched\n"
+"       at most once.\n"
+"*      The preceding item will be matched zero\n"
+"       or more times.\n"
+"+      The preceding item will be matched one or\n"
+"       more times.\n"
+"{n}    The preceding item is matched exactly n times.\n"
+"{n,}   The preceding item is matched n or more times.\n"
+"{n,m}  The preceding item is matched at least n times,\n"
+"       but not more than m times.\n"
+"\n"
+"To match any reserved character, precede it with \\. \n"
+"\n"
+"Two regular expressions may be joined by the logical or operator |.\n"
+"Two regular expressions may be concatenated.\n"
+"\n"
+"More information is available by typing \"man grep\"\n"
+msgstr ""
+
+#: ../../xffm/response/entryfileresponse.hh:20
+msgid "Open"
+msgstr "Deschide"
+
+#: ../../xffm/response/entryresponse.hh:29
+#: ../../xffm/response/entryfolderresponse.hh:28
+msgid "Choose directory"
+msgstr "Alege dosar"
+
+#. this button is redundant since hands are on keyboard for password
+#: ../../xffm/response/entryresponse.hh:309
+#: ../../xffm/response/passwdresponse.hh:189
+#: ../../xffm/response/passwdresponse.hh:559
+msgid "Ok"
+msgstr "Ok"
+
+#: ../../xffm/response/commandprogressresponse.hh:32
+msgid "Items:"
+msgstr "Elemente:"
+
+#: ../../xffm/response/passwdresponse.hh:21
+msgid "Enter password"
+msgstr "Introduceți parola"
+
+#. gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+#: ../../xffm/response/passwdresponse.hh:125
+#, fuzzy
+msgid "User Input"
+msgstr "Intrare maus"
+
+#: ../../xffm/response/passwdresponse.hh:142
+msgid "Response Requested"
+msgstr "Răspuns cerut"
+
+#: ../../xffm/response/passwdresponse.hh:264
+msgid "Preparing"
+msgstr "Pregătire"
+
+#: ../../xffm/response/passwdresponse.hh:352
+msgid "sudo"
+msgstr "sudo"
+
+#: ../../xffm/response/passwdresponse.hh:354
+msgid "Command:"
+msgstr "Comandă:"
+
+#: ../../xffm/response/passwdresponse.hh:357
+msgid "Permission denied"
+msgstr "Permisiune respinsă"
+
+#: ../../xffm/response/passwdresponse.hh:358
+msgid "Try to approach a problem from different angles."
+msgstr "Încercați să abordați o problemă din unghiuri diferite."
+
+#: ../../xffm/response/passwdresponse.hh:359
+msgid "Do you want to retry?"
+msgstr "Doriți să reîncercați?"
+
+#: ../../xffm/response/passwdresponse.hh:360
+msgid "Alternate:"
+msgstr "Alternativ:"
+
+#: ../../xffm/response/passwdresponse.hh:365
+msgid "No"
+msgstr "Nu"
+
+#: ../../xffm/response/passwdresponse.hh:401
+msgid "Install"
+msgstr "Instalează"
+
+#: ../../xffm/response/passwdresponse.hh:402
+#, c-format
+msgid "%s does not exist."
+msgstr "%s nu există."
+
+#: ../../xffm/response/passwdresponse.hh:467
+#, fuzzy
+msgid "Blowfish"
+msgstr "Sawfish"
+
+#: ../../xffm/response/passwdresponse.hh:468
+#, fuzzy
+msgid "Encryption Key Approval"
+msgstr "Miniaplicație criptare"
+
+#: ../../xffm/response/passwdresponse.hh:502
+msgid "-o     print output to standard out. Implies -r."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:506
+msgid "-c     DO NOT compress files before encryption."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:510
+msgid "-r     DO NOT remove input files after processing"
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:517
+msgid "Encryption key: "
+msgstr "Cheie de criptare:"
+
+#: ../../xffm/response/passwdresponse.hh:529
+msgid "Confirm:"
+msgstr "Confirmă:"
+
+#: ../../xffm/response/passwdresponse.hh:542
+msgid "Sorry, passwords do not match"
+msgstr "Parolele nu se potrivesc"
+
+#: ../../xffm/response/passwdresponse.hh:550
+msgid "Minimum length:"
+msgstr "Lungime minimă:"
+
+#: ../../xffm/response/timeoutresponse.hh:56
+msgid "Dismiss"
+msgstr "Anulează"
+
+#: ../../xffm/response/commandresponse.hh:23
+msgid "Running"
+msgstr "Funcțional"
+
+#. auto text = g_strdup_printf("%s (pid: %d)",
+#. _("Waiting for operation to finish..."),
+#. Tubo<Type>::getChild (pid));
+#: ../../xffm/response/commandresponse.hh:28
+msgid "Waiting for operation to finish..."
+msgstr "Aștept încheierea operației..."
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Documents"
+msgstr "Documente"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Downloads"
+msgstr "Descărcări"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Music"
+msgstr "Muzică"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Pictures"
+msgstr "Imagini"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Templates"
+msgstr "Șabloane"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Videos"
+msgstr "Videoclipuri"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Desktop"
+msgstr "Desktop"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Bookmarks"
+msgstr "Favorite"
+
+#: ../../xffm/fm/local/icons.hh:259 ../../xffm/fm/local/rm.hh:181
+msgid "Trash"
+msgstr "Coș"
+
+#: ../../xffm/fm/local/popup.hh:60
+msgid "New"
+msgstr "Nou"
+
+#. deprecated {N_("Open in New Tab"), NULL, NULL, NULL},
+#. deprecated {N_("Open in New Window"), NULL, NULL, NULL},
+#. common buttons /(also an iconsize +/- button)
+#: ../../xffm/fm/local/popup.hh:64 ../../xffm/fm/local/popup.hh:104
+#: ../../xffm/common/gtk.hh:74
+msgid "Copy"
+msgstr "Copiază"
+
+#: ../../xffm/fm/local/popup.hh:65 ../../xffm/fm/local/popup.hh:105
+#: ../../xffm/common/gtk.hh:73
+msgid "Cut"
+msgstr "Taie"
+
+#: ../../xffm/fm/local/popup.hh:66 ../../xffm/fm/local/popup.hh:106
+#: ../../xffm/common/gtk.hh:66
+msgid "Paste"
+msgstr "Lipește"
+
+#. **************
+#: ../../xffm/fm/local/popup.hh:67 ../../xffm/fm/local/popup.hh:107
+#: ../../xffm/fm/local/rm.hh:174 ../../xffm/common/gtk.hh:75
+msgid "Delete"
+msgstr "Șterge"
+
+#. {N_("About"), NULL, (void *) menu},
+#.
+#. only for listview: {N_("Sort by size"), NULL, (void *) menu},
+#. only for listview: {N_("Sort by date"), NULL, (void *) menu},
+#: ../../xffm/fm/local/popup.hh:73
+msgid "Select All"
+msgstr "Alege tot"
+
+#: ../../xffm/fm/local/popup.hh:74 ../../xffm/fm/local/popup.hh:559
+msgid "Match regular expression"
+msgstr "Potrivire expresie regulată"
+
+#: ../../xffm/fm/local/popup.hh:75 ../../xffm/fm/root/view.hh:58
+#: ../../xffm/fm/fstab/popup.hh:21
+msgid "View as list"
+msgstr "Vizualizează ca listă"
+
+#: ../../xffm/fm/local/popup.hh:77
+msgid "Show hidden files"
+msgstr "Arată fișierele ascunse"
+
+#: ../../xffm/fm/local/popup.hh:79
+msgid "Show Backup Files"
+msgstr "Arată fișierele copii de siguranța"
+
+#: ../../xffm/fm/local/popup.hh:81
+#, fuzzy
+msgid "Sort data in descending order"
+msgstr "Sortează într-o ordine descrescătoare"
+
+#: ../../xffm/fm/local/popup.hh:93 ../../xffm/fm/local/popup.hh:119
+#: ../../xffm/fm/local/popup.hh:1006 ../../xffm/fm/local/popup.hh:1013
+#: ../../xffm/fm/local/popup.hh:1022 ../../xffm/fm/local/popup.hh:1029
+#: ../../xffm/common/gtk.hh:72
+msgid "Open with"
+msgstr "Deschide cu"
+
+#: ../../xffm/fm/local/popup.hh:94 ../../xffm/fm/local/popup.hh:846
+msgid "Run Executable..."
+msgstr "Rulează executabilul..."
+
+#: ../../xffm/fm/local/popup.hh:95
+msgid "Extract files from the archive"
+msgstr "Dezarhivează fișiere din arhivă"
+
+#. g_hash_table_insert(iconname_hash, "bcrypt", (void *)"emblem-keyhole");
+#: ../../xffm/fm/local/popup.hh:96 ../../xffm/fm/root/view.hh:73
+#: ../../xffm/fm/fstab/popup.hh:20 ../../xffm/fm/dialog/notebook.hh:52
+#: ../../xffm/common/gtk.hh:78
+msgid "Open in New Tab"
+msgstr "Deschide într-un nou tab"
+
+#. File chooser
+#: ../../xffm/fm/local/popup.hh:97 ../../xffm/fm/local/popup.hh:706
+msgid "Create a compressed archive with the selected objects"
+msgstr "Creează o arhivă comprimată din obiectele selectate"
+
+#: ../../xffm/fm/local/popup.hh:98 ../../xffm/fm/fstab/popup.hh:37
+msgid "Mount the volume associated with this folder"
+msgstr "Montează volumul asociat cu acest dosar"
+
+#: ../../xffm/fm/local/popup.hh:99 ../../xffm/fm/fstab/popup.hh:38
+msgid "Unmount the volume associated with this folder"
+msgstr "Demontează volumul asociat cu acest dosar"
+
+#: ../../xffm/fm/local/popup.hh:100 ../../xffm/common/gtk.hh:67
+msgid "Add bookmark"
+msgstr "Adaugă un semn de carte"
+
+#: ../../xffm/fm/local/popup.hh:101 ../../xffm/fm/root/view.hh:74
+#: ../../xffm/common/gtk.hh:68
+msgid "Remove bookmark"
+msgstr "Elimină un semn de carte"
+
+#: ../../xffm/fm/local/popup.hh:108 ../../xffm/fm/local/popup.hh:961
+msgid "Rename"
+msgstr "Redenumește"
+
+#: ../../xffm/fm/local/popup.hh:109 ../../xffm/fm/local/popup.hh:947
+msgid "Duplicate"
+msgstr "Duplică"
+
+#: ../../xffm/fm/local/popup.hh:110 ../../xffm/fm/local/popup.hh:933
+msgid "Link"
+msgstr "Legătură"
+
+#: ../../xffm/fm/local/popup.hh:111
+msgid "Properties"
+msgstr "Proprietăți"
+
+#: ../../xffm/fm/local/popup.hh:414
+msgid "Files:"
+msgstr "Fișierele:"
+
+#: ../../xffm/fm/local/popup.hh:417 ../../xffm/fm/local/rm.hh:61
+msgid "Multiple selections"
+msgstr "Selecții multiple"
+
+#: ../../xffm/fm/local/popup.hh:557
+msgid "Select items"
+msgstr "Selectează elemente"
+
+#: ../../xffm/fm/local/popup.hh:575
+msgid "Regular Expression syntax is incorrect"
+msgstr "Sintaxa Expresiei Regulare nu este corectă"
+
+#: ../../xffm/fm/local/popup.hh:592
+msgid "No selection"
+msgstr "Nicio selecție"
+
+#: ../../xffm/fm/local/popup.hh:592
+msgid "No matches."
+msgstr "Niciun rezultat."
+
+#. entryResponse->setCheckButton(_("Run in Terminal"));
+#. entryResponse->setCheckButton(Mime<Type>::runInTerminal(path));
+#: ../../xffm/fm/local/popup.hh:721 ../../xffm/fm/page/pathbar.hh:313
+msgid "Specify Output Directory..."
+msgstr "Specifică directorul de ieșire..."
+
+#: ../../xffm/fm/local/popup.hh:799
+#, fuzzy
+msgid "Create new..."
+msgstr "Crează o nouă..."
+
+#: ../../xffm/fm/local/popup.hh:806 ../../xffm/fm/local/popup.hh:886
+#, fuzzy
+msgid "New Name:"
+msgstr "Denumire nouă: "
+
+#: ../../xffm/fm/local/popup.hh:815
+msgid "No name"
+msgstr "Fără nume"
+
+#: ../../xffm/fm/local/popup.hh:828
+#, fuzzy, c-format
+msgid "Another file with the same name already exists in “%s”."
+msgstr "Există deja un fișier cu același nume în „%s”."
+
+#: ../../xffm/fm/local/popup.hh:850 ../../xffm/fm/local/popup.hh:1010
+#: ../../xffm/fm/local/popup.hh:1026 ../../xffm/common/util.hh:1248
+msgid "Run in Terminal"
+msgstr "Rulează în Terminal"
+
+#: ../../xffm/fm/local/popup.hh:853
+#, fuzzy
+msgid "Arguments for the Command"
+msgstr "Argumente pentru comandă"
+
+#: ../../xffm/fm/local/popup.hh:1047 ../../xffm/fm/local/view.hh:141
+msgid "Invalid entry"
+msgstr "Intrare nevalidă"
+
+#: ../../xffm/fm/local/properties.hh:235
+msgid "Properties and Attributes"
+msgstr "Proprietăți și atribute"
+
+#: ../../xffm/fm/local/properties.hh:264
+msgid "File Mode:"
+msgstr "Mod Fişier:"
+
+#: ../../xffm/fm/local/properties.hh:290
+msgid "File:"
+msgstr "Fișier:"
+
+#. Add file info stuff
+#. set info stuff data according to combo box
+#. add signal handler to changed signal for combo box
+#. Add process buttons
+#.
+#: ../../xffm/fm/local/properties.hh:302
+msgid "Apply changes"
+msgstr "Aplică modificările"
+
+#: ../../xffm/fm/local/properties.hh:462
+msgid "Successfully moved to trash."
+msgstr "Mutare la gunoi reușită."
+
+#: ../../xffm/fm/local/properties.hh:463
+msgid "Source:"
+msgstr "Sursa:"
+
+#: ../../xffm/fm/local/rm.hh:59
+#, c-format
+msgid "Delete %s"
+msgstr "Șterge %s"
+
+#: ../../xffm/fm/local/rm.hh:61
+msgid "Warning: "
+msgstr "Atenție: "
+
+#. gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
+#. title
+#: ../../xffm/fm/local/rm.hh:90
+msgid "Remove"
+msgstr "Elimină"
+
+#: ../../xffm/fm/local/rm.hh:140
+#, fuzzy
+msgid "Apply to all"
+msgstr "Aplică la toate"
+
+#. **************
+#. This is now available to BSD with rm -P option
+#: ../../xffm/fm/local/rm.hh:163 ../../xffm/common/gtk.hh:76
+msgid "Shred"
+msgstr "Forfecare"
+
+#. We do not count "../"
+#: ../../xffm/fm/local/view.hh:48 ../../xffm/fm/base/monitor.hh:28
+#, c-format
+msgid "Files: %s"
+msgstr "Fișiere: %s"
+
+#: ../../xffm/fm/root/model.hh:78
+msgid "Root Directory"
+msgstr "Director rădăcină"
+
+#: ../../xffm/fm/root/model.hh:94
+msgid "This is the root of the filesystem"
+msgstr "Aceasta este rădăcina sistemului de fișiere"
+
+#: ../../xffm/fm/root/model.hh:105
+msgid "Home Directory"
+msgstr "Director Acasă"
+
+#: ../../xffm/fm/root/model.hh:132
+msgid "Trash bin"
+msgstr "Coșul de gunoi"
+
+#: ../../xffm/fm/root/model.hh:162 ../../xffm/fm/fstab/popup.hh:29
+#, fuzzy
+msgid "Disk Image Mounter"
+msgstr "Montare dispozitiv"
+
+#: ../../xffm/fm/root/model.hh:169 ../../xffm/fm/root/model.hh:185
+msgid "Mount local disks and devices"
+msgstr "Montează discurile și dispozitivele locale"
+
+#: ../../xffm/fm/root/model.hh:170 ../../xffm/fm/fstab/popup.hh:25
+#: ../../xffm/fm/fstab/view.hh:429
+msgid "eCryptfs Volume"
+msgstr "Volum eCryptfs"
+
+#: ../../xffm/fm/root/model.hh:171 ../../xffm/fm/fstab/popup.hh:24
+msgid "SSHFS Remote Synchronization Folder"
+msgstr "Dosar sincronizare la distanță SSHFS"
+
+#: ../../xffm/fm/root/model.hh:172 ../../xffm/fm/fstab/popup.hh:23
+#: ../../xffm/fm/fstab/view.hh:377
+msgid "NFS Network Volume"
+msgstr "Volum rețea NFS"
+
+#: ../../xffm/fm/root/model.hh:173 ../../xffm/fm/fstab/popup.hh:26
+#: ../../xffm/fm/fstab/view.hh:455
+msgid "CIFS Volume"
+msgstr "Volum CIFS"
+
+#: ../../xffm/fm/root/model.hh:195
+msgid "Software Updater"
+msgstr "Actualizator de programe"
+
+#: ../../xffm/fm/root/model.hh:218 ../../xffm/fm/root/model.hh:230
+msgid "Add or remove software installed on the system"
+msgstr "Adăugați sau ștergeți programe instalate pe sistem"
+
+#: ../../xffm/fm/root/model.hh:271
+msgid "Go to bookmarked location"
+msgstr "Du-te la locul semnului de carte"
+
+#. {N_("Add bookmark"), (void *)BasePopUp<Type>::noop, NULL, NULL},
+#: ../../xffm/fm/root/view.hh:61
+msgid "Empty trash"
+msgstr "Golește coșul"
+
+#. File chooser
+#: ../../xffm/fm/fstab/popup.hh:121
+msgid "Mount Device"
+msgstr "Montează dispozitiv"
+
+#: ../../xffm/fm/fstab/popup.hh:133
+msgid "Mount point:"
+msgstr "Punct de montare:"
+
+#: ../../xffm/fm/fstab/view.hh:301
+msgid "Mounted on:"
+msgstr "Montat în:"
+
+#: ../../xffm/fm/fstab/view.hh:302
+msgid "Mount on"
+msgstr "Montează în"
+
+#: ../../xffm/fm/fstab/view.hh:310 ../../xffm/fm/fstab/view.hh:312
+msgid "Not mounted"
+msgstr "Nemontat"
+
+#: ../../xffm/fm/fstab/view.hh:403
+msgid "SFTP (via SSH)"
+msgstr "SFTP (prin SSH)"
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, c-format
+msgid "Unmounting %s"
+msgstr "Se demontează %s"
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, c-format
+msgid "Mounting %s"
+msgstr "Montez %s"
+
+#: ../../xffm/fm/dialog/menupopover.hh:128
+msgid "Home"
+msgstr "Acasă"
+
+#: ../../xffm/fm/dialog/menupopover.hh:129 ../../xffm/common/gtk.hh:64
+msgid "Open terminal"
+msgstr "Deschide terminal"
+
+#: ../../xffm/fm/dialog/menupopover.hh:130
+#, fuzzy
+msgid "Open a New Window"
+msgstr "Deschide într-o nouă fereastră"
+
+#. {N_("Execute Shell Command"), (void *)MenuPopoverSignals<Type>::shell, (void *) menuButton_},
+#: ../../xffm/fm/dialog/menupopover.hh:132 ../../xffm/common/gtk.hh:69
+msgid "Search"
+msgstr "Căutare"
+
+#: ../../xffm/fm/dialog/menupopover.hh:133 ../../xffm/common/gtk.hh:71
+msgid "Exit"
+msgstr "Ieșire"
+
+#: ../../xffm/fm/dialog/dialog.hh:116
+msgid "Removed"
+msgstr "Șters"
+
+#: ../../xffm/fm/dialog/dialog.hh:132
+msgid "Detected device(s):"
+msgstr "Dispozitiv(e) detectate:"
+
+#. Create the widgets
+#: ../../xffm/fm/page/vbuttonbox.hh:37 ../../xffm/common/gtk.hh:332
+msgid "Help"
+msgstr "Ajutor"
+
+#. File chooser
+#: ../../xffm/fm/page/pathbar.hh:306 ../../xffm/fm/page/pathbar.hh:308
+msgid "Go to"
+msgstr "Du-te la"
+
+#: ../../xffm/fm/page/pathbar.hh:331
+msgid "Not a directory"
+msgstr "Nu e un director"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Renice Process"
+msgstr "Replanificare proces"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Suspend"
+msgstr "Suspendare"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Continue"
+msgstr "Continuă"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Interrupt"
+msgstr "Întrerupe"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Hangup"
+msgstr "Terminare"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "User 1 (USR1)"
+msgstr "User 1 (USR1)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "User 2 (USR2)"
+msgstr "User 2 (USR2)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "Terminate Task"
+msgstr "Termină sarcina"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "Abort"
+msgstr "Abandonează"
+
+#: ../../xffm/fm/page/runbutton.hh:138
+msgid "Kill"
+msgstr "Omoară"
+
+#: ../../xffm/fm/page/runbutton.hh:139
+#, fuzzy
+msgid "Segmentation fault"
+msgstr "Violare a segmentului"
+
+#: ../../xffm/fm/page/runbutton.hh:217
+msgid "PID"
+msgstr "PID"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:37
+msgid "Embedded Terminal"
+msgstr "Terminal înglobat"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:38
+#, fuzzy
+msgid "All items in the iconview."
+msgstr "Alege toate elementele de pe canava."
+
+#: ../../xffm/fm/page/hbuttonbox.hh:39
+msgid "Scripting"
+msgstr "Script-are"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:40
+msgid "Clear Log"
+msgstr "Curăță jurnalul"
+
+#. Status textview
+#: ../../xffm/fm/page/hbuttonbox.hh:42
+msgid "Terminal font"
+msgstr "Fontul pentru terminal"
+
+#: ../../xffm/fm/treeview.hh:17
+msgid "Name"
+msgstr "Nume"
+
+#: ../../xffm/fm/treeview.hh:20
+msgid "Size"
+msgstr "Dimens"
+
+#: ../../xffm/fm/treeview.hh:21
+msgid "Date"
+msgstr "Data"
+
+#: ../../xffm/fm/treeview.hh:22
+msgid "Mimetype"
+msgstr "Tip MIME"
+
+#: ../../xffm/fm/treeview.hh:24
+msgid "TYPE"
+msgstr "TIP"
+
+#: ../../xffm/fm/base/signals.hh:642
+msgid "Directory does not exist."
+msgstr "Dosarul nu există."
+
+#: ../../xffm/fm/base/signals.hh:644 ../../xffm/fm/base/signals.hh:646
+#, fuzzy
+msgid "Trash is empty"
+msgstr "Tableta este descărcată complet"
+
+#: ../../xffm/common/settings.hh:27
+#, fuzzy
+msgid "New File:"
+msgstr "Fișier nou"
+
+#: ../../xffm/common/gio.hh:235
+msgid "Could not copy item:"
+msgstr "Elementul nu poate fi copiat:"
+
+#: ../../xffm/common/gio.hh:237
+msgid "Could not move item:"
+msgstr "Elementul nu poate fi mutat:"
+
+#: ../../xffm/common/gio.hh:239
+msgid "Create symbolic link"
+msgstr "Creează legătură simbolică"
+
+#: ../../xffm/common/gio.hh:276
+#, c-format
+msgid ""
+"Could not delete:\n"
+"%s"
+msgstr ""
+"Nu s-a putut șterge:\n"
+"„%s”"
+
+#: ../../xffm/common/gio.hh:278
+#, fuzzy, c-format
+msgid "Could not move %s to trash"
+msgstr "Nu s-a putut muta „%s“ la coșul de gunoi."
+
+#: ../../xffm/common/clipboard.hh:23 ../../xffm/common/dnd.hh:40
+msgid "Copying files locally"
+msgstr "Se copiază fișiere local"
+
+#: ../../xffm/common/clipboard.hh:30 ../../xffm/common/dnd.hh:34
+msgid "Moving files"
+msgstr "Mutarea fișierelor"
+
+#: ../../xffm/common/dnd.hh:46
+msgid "Create Link"
+msgstr "Creează legătură"
+
+#: ../../xffm/common/util.hh:1200
+#, c-format
+msgid ""
+"Scriptfile \"%s\" is not executable. Please set the executable-attribute on "
+"that file."
+msgstr ""
+"Fișierul „%s” nu este executabil. Stabiliți atributul executabil asupra "
+"acelui fișier."
+
+#: ../../xffm/common/util.hh:1202 ../../xffm/common/util.hh:1237
+#, c-format
+msgid "Open with %s"
+msgstr "Deschide cu %s"
+
+#: ../../xffm/common/util.hh:1202
+msgid "Text Editor"
+msgstr "Editor de text"
+
+#: ../../xffm/common/util.hh:1239 ../../xffm/common/gtk.hh:65
+msgid "Execute Shell Command"
+msgstr "Execută o comandă de interpretor"
+
+#: ../../xffm/common/util.hh:1243
+msgid ""
+"Console: quickly run single commands -- write a command here and press enter."
+msgstr ""
+"Consolă: rulează rapid comenzile singulare - scrieți o comandă aici și "
+"apăsați tasta enter."
+
+#: ../../xffm/common/gtk.hh:123
+msgid "New Tab"
+msgstr "Tab nou"
+
+#: ../../xffm/common/gtk.hh:335
+msgid "OK"
+msgstr "OK"
+
+#: ../../xffm/common/run.hh:344
+msgid "error"
+msgstr "eroare"
+
+#: ../../xffm/common/run.hh:348
+msgid "warning"
+msgstr "avertizare"
+
+#: ../../xffm/common/mime.hh:101 ../../xffm/common/mime.hh:143
+msgid "No Read Permission"
+msgstr "Lipsește permisiunea de a citi"
+
+#: ../../xffm/common/preview.hh:593
+msgid "Empty file"
+msgstr "Fișier gol"
+
+#: ../../xffm/common/preview.hh:648
+#, c-format
+msgid "Cannot read from %s"
+msgstr "Nu am putut citi din %s"
+

@@ -1,0 +1,1423 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:42:29 CDT 2013 ---
+#
+# B.Senthil Kumar <senthilb@cdac.in>, 2007.
+# Vasee Vaseeharan <vasee@ieee.org>, 2004-2008.
+# Dinesh Nadarajah, 2001 <n_dinesh@yahoo.com>.
+#  FIRST AUTHOR <EMAIL@ADDRESS>.
+# B Muthukumar <kulirnila@yahoo.com>, 2002.
+# Dr.T.vasudevan <agnihot3@gmail.com>, 2008-2011.
+# ramadas <amachu@yavarkkum.org>, 2012.
+# V. Venkataramanan <venkat@tamillinux.org>, 2000-2004.
+# ம ஸ்ரீ ராமதாஸ் <shriramadhas@gmail.com>, 2007.
+# Jayaradha N <jaya@pune.redhat.com>, 2004-2006.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2002-2012.
+# ஸ்ரீராமதாஸ் <shriramadhas@gmail.com>, 2007-2008.
+# Shakthi Kannan <shakthimaan@gmail.com>, 2006-2008.
+# I felix <ifelix@redhat.com>, 2007.
+# vivek <vivekananthan_s@rediffmail.com>.
+# Sri Ramadoss M <amachu@yavarkkum.org>, 2012.
+# KDE Thamizaakka Kuzu <amachu@ubuntu.com>, 2007-2008.
+# I. Felix <ifelix@redhat.com>, 2008-2011.
+# Dr,T,Vasudevan <agnihot3@gmail.com>, 2009-2011.
+# root <root@LinuxCSE-36>, 2003-2011.
+# Balaji Narayanan <balaji.narayanan@wipro.com>, 2001.
+# ஆமாச்சு <amachu@ubuntu.com>, 2007-2009.
+# Zhakanini <tamilpc@ambalam.com>, 2004.
+# C.Annamalai,M.S.Ramya,Bannari Amman Institute,Tamilnadu,India <msramya@rediffmail.com>.
+# தங்கமணி அருண் <thangam.arunx@gmail.com>, 2008.
+# Shantha kumar <shkumar@redhat.com>, 2012-2013.
+# ifelix <ifelix25@gmail.com>, 2009.
+# Shantha <shantha.thamizh@gmail.com>, 2012.
+# sriramadasan <ramadasan@gmail.com>, 2010.
+# Ma Siva Kumar <tamil@leatherlink.net>.
+# Jayaradha <njayaradha@yahoo.com>, 2005-2006.
+# தங்கம் அருண் <thangam.arunx@gmail.com>, 2007-2008.
+# Elango Sundaram <esundara@yahoo.com>, 2002.
+# amachu <amachu@amachu.com>, 2010.
+# Dr.T.Vaasudevan <agnihot3@gmail.com>, 2009.
+#  தங்கம் அருண் <thangam.arunx@gmail.com>, 2007.
+# Manjushree Thandu <manjushree_c@yahoo.com>, 2001.
+# ?Sivakumar Shanmugasundaram <sshanmu@yahoo.com>, 2000-2004.
+# Kannan Subramanian <skmessage@gmail.com>, 2008.
+# prabu <prabu_anand2000@yahoo.com>, 2002.
+# Dinesh Nadarajah <n_dinesh@yahoo.com>, 2001-2004.
+# Ambalam <tamilpc@ambalam.com>, 2004.
+# S.Vivekananthan,C.Annamalai,M.S.Ramya,R.Sivaranjani,M.Yamuna <vivekananthan@gmail.com>.
+# ம. ஸ்ரீ ராமதாஸ் | Sri Ramadoss M <amachu@yavarkkum.org>, 2007-2012.
+# Tamil message file for YaST2 (@memory@). <>.
+# R.Sivaranjani, Bannari Amman Institute, TamilNadu, India. <vivekananthan@gmail.com>.
+# I Felix <ifelix@redhat.com>, 2010-2011.
+# Prabu Anand <prabu_anand2000@yahoo.com>.
+# Dr.T.Vasudevan <agnihot3@gmail.com>, 2007-2013.
+# Priyadharsini <priyafelix@gmail.com>, 2008-2009.
+# Sivakumar Shanmugasundaram <sshanmu@yahoo.com>, 2000.
+# Felix <ifelix@redhat.com>, 2006-2007.
+# FIRST AUTHOR  V. Venkataramanan <venkat@tamillinux.org>, 2000-2004.
+# drtvasudevan <agnihot3@gmail.com>, 2006.
+# B. Manimaran <bmmaran@yahoo.com>, 2001.
+# naveenkumar palaniswamy(கெம்ளின்) <naveenmtp@gmail.com>, 2011.
+# Ma SivaKumar <tamil@leatherlink.net>, 2004.
+# Murugapandian <barathee@sancharnet.in>, 2004.
+# Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
+# Thuraiappah Vaseeharan <t_vasee@yahoo.com>, 2000-2004.
+# ElangoSundaram <esundara@yahoo.com>, 2002.
+# Dinesh Nadarajah, 2004 <dinesh_list@sbcglobal.net>.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-02 12:27-0600\n"
+"PO-Revision-Date: 2007-06-03 05:06+0530\n"
+"Last-Translator: Dr.T.Vasudevan <agnihot3@gmail.com>\n"
+"Language-Team: TAMIL <ubuntu-l10n-tam@lists.ubuntu.com>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"\n"
+
+#: ../../xffm/completion/base.hh:28
+msgid "Command"
+msgstr "கட்டளை"
+
+#: ../../xffm/completion/base.hh:31
+msgid "File"
+msgstr "கோப்பு"
+
+#: ../../xffm/completion/base.hh:34
+#, fuzzy
+msgid "Command history"
+msgstr "கட்டளை வரலாறை இயக்கு"
+
+#. option -u uid "uid" "uid_combo"
+#: ../../xffm/completion/base.hh:37 ../../xffm/find/dialog.hh:199
+msgid "User"
+msgstr "பயனர்"
+
+#: ../../xffm/completion/base.hh:40
+msgid "Variable"
+msgstr "மாறிலிகள்"
+
+#: ../../xffm/completion/base.hh:43
+msgid "Host"
+msgstr "வழங்கி"
+
+#: ../../xffm/completion/base.hh:55
+#, fuzzy
+msgid "Found no match"
+msgstr "பொருந்த சொற்கள்"
+
+#: ../../xffm/completion/base.hh:133 ../../xffm/completion/base.hh:134
+msgid "Matches"
+msgstr "பொருத்தங்கள் (M)"
+
+#: ../../xffm/completion/base.hh:134
+msgid "Too many files open"
+msgstr "மிக அதிக கோப்புகள் திறந்துள்ளன."
+
+#: ../../xffm/completion/base.hh:325 ../../xffm/find/fgr.hh:124
+msgid "Options:"
+msgstr "விருப்பங்கள்:"
+
+#: ../../xffm/completion/bash.hh:133
+msgid "Completion mode:"
+msgstr "முடிவுறும் வகை:"
+
+#: ../../xffm/completion/bash.hh:134
+msgid "command"
+msgstr "கட்டளை"
+
+#: ../../xffm/completion/bash.hh:135
+msgid "file"
+msgstr "கோப்பு"
+
+#: ../../xffm/completion/bash.hh:145 ../../xffm/completion/bash.hh:149
+msgid "Options >>"
+msgstr "விருப்பத்தேர்வுகள் >>"
+
+#: ../../xffm/find/fgr.hh:124 ../../xffm/find/dialog.hh:308
+msgid "Path"
+msgstr "பாதை"
+
+#: ../../xffm/find/fgr.hh:125
+msgid "Locate documents and folders on this computer by name or content"
+msgstr ""
+"இந்த கணினியில் உள்ள ஆவணங்கள் அல்லது அடைவுகளை பெயராலோ உள்ளடக்கத்தாலோ கண்டுபிடிக்கவும்"
+
+#: ../../xffm/find/fgr.hh:126 ../../xffm/find/dialog.hh:341
+msgid "Filter:"
+msgstr "வடிப்பி:"
+
+#: ../../xffm/find/fgr.hh:126
+msgid "Search for files"
+msgstr "கோப்புகளை தேடுக"
+
+#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
+#: ../../xffm/find/fgr.hh:128
+msgid "Contents:"
+msgstr "உள்ளடக்கம்:"
+
+#: ../../xffm/find/fgr.hh:128
+#, fuzzy
+msgid "File's contents filtered as plain text."
+msgstr "வெற்று உரை பட்டியலாக சேமிக்கவா?"
+
+#: ../../xffm/find/fgr.hh:131
+msgid "Verbose output debugging mode."
+msgstr "உரை வெளிப்பாட்டு பிழைத்தோண்டு முறை."
+
+#: ../../xffm/find/fgr.hh:133
+msgid "Show version information"
+msgstr "பதிப்பு தகவலைக் காட்டு"
+
+#: ../../xffm/find/fgr.hh:135
+#, fuzzy
+msgid "Filter Details"
+msgstr "பயனர் விவரங்கள்"
+
+#. / option -a "xdev"
+#: ../../xffm/find/fgr.hh:138 ../../xffm/find/dialog.hh:180
+#, fuzzy
+msgid "Stay on single filesystem"
+msgstr "கோப்பு முறைமையை வருடவும்"
+
+#: ../../xffm/find/fgr.hh:140
+msgid "Print..."
+msgstr "அச்சிடு..."
+
+#: ../../xffm/find/fgr.hh:140
+msgid "The unique Process ID that identifies this process."
+msgstr ""
+
+#. / option -D "recursiveH"
+#: ../../xffm/find/fgr.hh:142 ../../xffm/find/dialog.hh:177
+msgid "Find hidden files and directories"
+msgstr "மறைந்த கோப்புகளையும் அடைவுகளையும் தேடு"
+
+#: ../../xffm/find/fgr.hh:143
+msgid "Filter"
+msgstr "வடிகட்டி"
+
+#: ../../xffm/find/fgr.hh:144
+msgid ""
+"To display files which pass the filter (stars and regexps will be processed)"
+msgstr ""
+
+#. / option -r "recursive"
+#: ../../xffm/find/fgr.hh:146 ../../xffm/find/dialog.hh:174
+msgid "Recursive"
+msgstr "மறுச்சுழல் "
+
+#: ../../xffm/find/fgr.hh:147 ../../xffm/find/fgr.hh:148
+#: ../../xffm/find/fgr.hh:149 ../../xffm/find/fgr.hh:150
+#, fuzzy
+msgid "KByte"
+msgstr "பைட்"
+
+#: ../../xffm/find/fgr.hh:148
+msgid "is greater than or equal to"
+msgstr "அதிகமான அல்லது சமமான"
+
+#: ../../xffm/find/fgr.hh:150
+msgid "is less than or equal to"
+msgstr "குறைவான அல்லது சமமான"
+
+#: ../../xffm/find/fgr.hh:152
+msgid "Set UID"
+msgstr "UIDஐ அமை"
+
+#: ../../xffm/find/fgr.hh:152
+msgid "Executable Text Files"
+msgstr " செயலாக்க உரை கோப்புகள்"
+
+#: ../../xffm/find/fgr.hh:154
+msgid "The permissions of the file, in octal notation."
+msgstr "எண்ம நிலையில் கோப்பின் அனுமதி."
+
+#: ../../xffm/find/fgr.hh:155
+msgid "Type"
+msgstr "வகை"
+
+#: ../../xffm/find/fgr.hh:157 ../../xffm/find/signals.hh:17
+msgid "Any"
+msgstr "ஏதாவது"
+
+#: ../../xffm/find/fgr.hh:157
+#, fuzzy
+msgid "Default type"
+msgstr "முன்னிருப்பு உருப்படி"
+
+#: ../../xffm/find/fgr.hh:158 ../../xffm/common/preview.hh:497
+#, fuzzy
+msgid "Regular file"
+msgstr "வழக்கமான"
+
+#: ../../xffm/find/fgr.hh:159 ../../xffm/find/signals.hh:11
+#: ../../xffm/fm/local/popup.hh:803 ../../xffm/common/preview.hh:488
+msgid "Directory"
+msgstr "i அடைவு"
+
+#: ../../xffm/find/fgr.hh:160 ../../xffm/find/signals.hh:12
+#: ../../xffm/common/preview.hh:494
+msgid "Symbolic Link"
+msgstr "உருவக இணைப்பு"
+
+#: ../../xffm/find/fgr.hh:161
+#, fuzzy
+msgid "UNIX Socket"
+msgstr "UNIX முறைமை"
+
+#: ../../xffm/find/fgr.hh:162 ../../xffm/find/signals.hh:14
+#: ../../xffm/common/preview.hh:482
+msgid "Block device"
+msgstr "கட்டம் சாதனம்"
+
+#: ../../xffm/find/fgr.hh:163 ../../xffm/find/signals.hh:15
+#: ../../xffm/common/preview.hh:485
+msgid "Character device"
+msgstr "எழுத்துரு சாதனம்"
+
+#: ../../xffm/find/fgr.hh:164 ../../xffm/find/signals.hh:16
+#: ../../xffm/common/preview.hh:491
+msgid "FIFO"
+msgstr "எப்ஐஎப்ஓ"
+
+#. radio_p freed on destroy event for dialog_.
+#. option -k minutes "last_minutes", "last_minutes_spin"
+#: ../../xffm/find/fgr.hh:166 ../../xffm/find/fgr.hh:168
+#: ../../xffm/find/dialog.hh:221
+msgid "Minutes"
+msgstr "நிமிடங்கள்"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/dialog.hh:270 ../../xffm/find/dialog.hh:370
+#: ../../xffm/fm/treeview.hh:18
+msgid "Details"
+msgstr "விவரங்கள்"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/fgr.hh:179 ../../xffm/find/fgr.hh:180
+#: ../../xffm/find/fgr.hh:183 ../../xffm/find/fgr.hh:184
+#: ../../xffm/find/fgr.hh:187 ../../xffm/find/fgr.hh:188
+#, fuzzy
+msgid "TIME"
+msgstr "TIMEOUT"
+
+#: ../../xffm/find/fgr.hh:168 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/fgr.hh:174 ../../xffm/find/fgr.hh:177
+msgid "Previous"
+msgstr "முந்தைய"
+
+#. option -h hours "last_hours", "last_hours_spin"
+#: ../../xffm/find/fgr.hh:169 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/dialog.hh:226
+msgid "Hours"
+msgstr "மணிகள்"
+
+#. option -d days "last_days", "last_days_spin"
+#: ../../xffm/find/fgr.hh:172 ../../xffm/find/fgr.hh:174
+#: ../../xffm/find/dialog.hh:231
+msgid "Days"
+msgstr "நாட்கள்"
+
+#: ../../xffm/find/fgr.hh:175
+msgid "Month"
+msgstr "மாதம்"
+
+#: ../../xffm/find/fgr.hh:177
+msgid "Month(s)"
+msgstr "மாதம்(கள்)"
+
+#: ../../xffm/find/fgr.hh:180
+msgid "Modification Time :"
+msgstr "மாற்றிய நேரம் :"
+
+#: ../../xffm/find/fgr.hh:184
+msgid "Access Time :"
+msgstr "அணுகல் நேரம் :"
+
+#: ../../xffm/find/fgr.hh:188
+msgid "Creation Time :"
+msgstr "படைத்த நேரம் :"
+
+#: ../../xffm/find/fgr.hh:191 ../../xffm/find/fgr.hh:192
+msgid "uid"
+msgstr " uid"
+
+#: ../../xffm/find/fgr.hh:192
+msgid "User:"
+msgstr "பயனர்:"
+
+#: ../../xffm/find/fgr.hh:194 ../../xffm/find/fgr.hh:195
+#, fuzzy
+msgid "gid"
+msgstr "id"
+
+#: ../../xffm/find/fgr.hh:195
+msgid "Group:"
+msgstr "குழு (G):"
+
+#: ../../xffm/find/fgr.hh:198
+msgid ""
+"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+"character that  normally  follows  a file  name"
+msgstr ""
+
+#: ../../xffm/find/fgr.hh:200
+msgid "Content View"
+msgstr "உள்ளடக்க காட்சி"
+
+#: ../../xffm/find/fgr.hh:201 ../../xffm/find/fgr.hh:202
+#: ../../xffm/find/fgr.hh:203 ../../xffm/find/fgr.hh:204
+msgid "STRING"
+msgstr "STRING"
+
+#: ../../xffm/find/fgr.hh:202 ../../xffm/find/fgr.hh:204
+#: ../../xffm/fm/local/popup.hh:563
+msgid "Regular expression"
+msgstr "(R) இயல்பான கூற்று"
+
+#: ../../xffm/find/fgr.hh:204
+msgid "Extended"
+msgstr "விரிவாக்கிய"
+
+#: ../../xffm/find/fgr.hh:206
+msgid "Ignore case"
+msgstr "I மேல் கீழ் நிலைகளை உதாசீனம் செய்க"
+
+#: ../../xffm/find/fgr.hh:208
+msgid "Text Files"
+msgstr " உரை கோப்புகள்"
+
+#: ../../xffm/find/fgr.hh:210 ../../xffm/find/dialog.hh:552
+msgid "No match"
+msgstr "ஒத்து போகவில்லை"
+
+#: ../../xffm/find/fgr.hh:212 ../../xffm/find/dialog.hh:470
+msgid "Line Count"
+msgstr "வரி எண்ணிக்கை"
+
+#: ../../xffm/find/fgr.hh:214
+msgid "Words"
+msgstr "சொற்கள்"
+
+#: ../../xffm/find/fgr.hh:216
+msgid "Lines"
+msgstr "கோடுகள்"
+
+#: ../../xffm/find/fgr.hh:368
+#, fuzzy, c-format
+msgid "Usage : %s [OPTIONS]\n"
+msgstr "Usage: orca [OPTION...]"
+
+#: ../../xffm/find/signals.hh:10
+msgid "Regular"
+msgstr "வழக்கமான"
+
+#: ../../xffm/find/signals.hh:13 ../../xffm/common/preview.hh:500
+msgid "Socket"
+msgstr "துளை"
+
+#: ../../xffm/find/signals.hh:209
+msgid "Select folder to search in"
+msgstr "தேட வேண்டிய அடைவினை தேர்ந்தெடு"
+
+#. button no
+#: ../../xffm/find/signals.hh:265 ../../xffm/find/dialog.hh:584
+#: ../../xffm/response/entryfileresponse.hh:18
+#: ../../xffm/response/entryresponse.hh:305
+#: ../../xffm/response/passwdresponse.hh:558
+#: ../../xffm/fm/local/properties.hh:304 ../../xffm/fm/local/rm.hh:155
+msgid "Cancel"
+msgstr "n ரத்துசெய்க"
+
+#: ../../xffm/find/signals.hh:293 ../../xffm/find/signals.hh:722
+#, fuzzy
+msgid "No editor for current action."
+msgstr "தற்போதைய செயலை இணை"
+
+#. / option "upper_limit_spin" (only in gtk dialog_)
+#: ../../xffm/find/signals.hh:351 ../../xffm/find/dialog.hh:183
+msgid "Results"
+msgstr "விளைவுகள்"
+
+#: ../../xffm/find/signals.hh:351
+msgid "Upper limit:"
+msgstr "மேல் எல்லை:"
+
+#: ../../xffm/find/signals.hh:353
+msgid "Counting files..."
+msgstr "கணக்கிடுகின்ற கோப்புகள்..."
+
+#: ../../xffm/find/signals.hh:368
+#, fuzzy, c-format
+msgid "Found %d match"
+msgid_plural "Found %d matches"
+msgstr[0] "%d பொருத்தம்"
+msgstr[1] "%d பொருத்தங்கள்"
+
+#: ../../xffm/find/signals.hh:370
+#, c-format
+msgid "%s Finished : %s"
+msgstr "%s முடிவடைந்தது : %s"
+
+#: ../../xffm/find/signals.hh:488 ../../xffm/find/signals.hh:490
+msgid "Searching..."
+msgstr "தேடுகிறது..."
+
+#. g_object_set_data(G_OBJECT(dialog_), "window", dialog_);
+#: ../../xffm/find/dialog.hh:98 ../../xffm/find/dialog.hh:150
+#: ../../xffm/find/dialog.hh:611
+msgid "Find"
+msgstr "(F) தேடு"
+
+#: ../../xffm/find/dialog.hh:183
+msgid "Upper limit"
+msgstr "மேல் வரம்பு"
+
+#. option -s +KByte "size_greater", "size_greater_spin"
+#: ../../xffm/find/dialog.hh:188
+msgid "At Least"
+msgstr "ஆகக்குறைந்த "
+
+#: ../../xffm/find/dialog.hh:188 ../../xffm/find/dialog.hh:193
+msgid "kBytes"
+msgstr "கேபைட்ஸ்"
+
+#. option -s -KByte "size_smaller", "size_smaller_spin"
+#: ../../xffm/find/dialog.hh:193
+msgid "At Most"
+msgstr "ஆகக்கூடிய "
+
+#: ../../xffm/find/dialog.hh:204
+msgid "Group"
+msgstr "குழு"
+
+#. option -o octal "octal_p" "permissions_entry"
+#: ../../xffm/find/dialog.hh:208
+msgid "Octal Permissions"
+msgstr "எண்ம அனுமதி"
+
+#. option -p suid | exe
+#: ../../xffm/find/dialog.hh:213
+msgid "SUID"
+msgstr "SUID"
+
+#: ../../xffm/find/dialog.hh:213 ../../xffm/fm/local/popup.hh:843
+#, fuzzy
+msgid "Executable"
+msgstr "செயல்படுத்தகூடியவை:"
+
+#. option -m months "last_months", "last_months_spin"
+#: ../../xffm/find/dialog.hh:237
+msgid "Months"
+msgstr "மாதங்கள்"
+
+#: ../../xffm/find/dialog.hh:248
+msgid "File type : "
+msgstr "கோப்பு வகை :"
+
+#. gtk_widget_show (GTK_WIDGET(right_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(center_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(left_options_vbox));
+#: ../../xffm/find/dialog.hh:262 ../../xffm/find/dialog.hh:602
+#: ../../xffm/fm/page/page.hh:70 ../../xffm/common/gtk.hh:70
+msgid "Close"
+msgstr "மூடு"
+
+#. gtk_box_pack_start (vbox7a, GTK_WIDGET(advancedBox), TRUE, FALSE, 5);
+#. gtk_widget_show(GTK_WIDGET(advancedBox));
+#. //////////////  grep options.... /////////////////////////
+#: ../../xffm/find/dialog.hh:384
+msgid "Contains"
+msgstr "கொண்டுள்ளது"
+
+#: ../../xffm/find/dialog.hh:404
+msgid "Contains the text"
+msgstr "(t)உரையில்"
+
+#: ../../xffm/find/dialog.hh:437
+msgid "Case Sensitive"
+msgstr "உணர்வுள்ள உறை மூடி"
+
+#: ../../xffm/find/dialog.hh:449
+#, fuzzy
+msgid "Extended regexp"
+msgstr "விரிவாக்கிய"
+
+#: ../../xffm/find/dialog.hh:460
+msgid "Include binary files"
+msgstr "உள்ளடக்குஇரும கோப்புகள்"
+
+#: ../../xffm/find/dialog.hh:496
+msgid "Match"
+msgstr "(M) பொருத்தம்"
+
+#: ../../xffm/find/dialog.hh:508
+#, fuzzy
+msgid "Anywhere"
+msgstr "எங்கும் இல்லை"
+
+#: ../../xffm/find/dialog.hh:523
+msgid "Whole words only"
+msgstr "முழுவார்த்தைகள் மட்டும்"
+
+#: ../../xffm/find/dialog.hh:538
+msgid "lines"
+msgstr "வரிகள்"
+
+#: ../../xffm/find/dialog.hh:594
+msgid "Clear"
+msgstr "துடை"
+
+#: ../../xffm/find/dialog.hh:636
+msgid "Edit"
+msgstr "தொகு"
+
+#: ../../xffm/find/dialog.hh:751 ../../xffm/find/dialog.hh:766
+#: ../../xffm/common/util.hh:1150 ../../xffm/common/util.hh:1152
+#: ../../xffm/common/util.hh:1158 ../../xffm/common/util.hh:1160
+#: ../../xffm/common/preview.hh:479
+msgid "unknown"
+msgstr "தெரியாதது"
+
+#: ../../xffm/find/dialog.hh:780
+msgid "Modified"
+msgstr "மாற்றப்பட்ட"
+
+#: ../../xffm/find/dialog.hh:784
+msgid "Created"
+msgstr "உருவாக்கப்பட்டது"
+
+#: ../../xffm/find/dialog.hh:788
+msgid "Accessed"
+msgstr "அணுகிய"
+
+#: ../../xffm/find/dialog.hh:1106
+msgid ""
+"Basic rules:\n"
+"\n"
+"*  Will match any character zero or more times.\n"
+"?  Will match any character exactly one time\n"
+"[] Match any character within the [] \n"
+"^  Match at beginning of string\n"
+"$  Match at end of string \n"
+msgstr ""
+
+#: ../../xffm/find/dialog.hh:1115
+msgid ""
+"Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"In  basic regular expressions the metacharacters ?, +, {, |, (, and ) \n"
+"  lose their special meaning.\n"
+"\n"
+"The  period . matches  any  single  character.\n"
+"The caret ^ matches at the start of line.\n"
+"The dollar $ matches at the end of line.\n"
+"\n"
+"Characters within [ ] matches any single character in the list.\n"
+"Characters within [^ ] matches any single character *not* in the list.\n"
+"Characters inside [ - ] matches a range of characters (ie [0-9] or [a-z]).\n"
+"\n"
+"A regular expression may be followed by one of several repetition "
+"operators:\n"
+"?      The preceding item is optional and matched\n"
+"       at most once.\n"
+"*      The preceding item will be matched zero\n"
+"       or more times.\n"
+"+      The preceding item will be matched one or\n"
+"       more times.\n"
+"{n}    The preceding item is matched exactly n times.\n"
+"{n,}   The preceding item is matched n or more times.\n"
+"{n,m}  The preceding item is matched at least n times,\n"
+"       but not more than m times.\n"
+"\n"
+"To match any reserved character, precede it with \\. \n"
+"\n"
+"Two regular expressions may be joined by the logical or operator |.\n"
+"Two regular expressions may be concatenated.\n"
+"\n"
+"More information is available by typing \"man grep\"\n"
+msgstr ""
+
+#: ../../xffm/response/entryfileresponse.hh:20
+msgid "Open"
+msgstr "(O) திற"
+
+#: ../../xffm/response/entryresponse.hh:29
+#: ../../xffm/response/entryfolderresponse.hh:28
+#, fuzzy
+msgid "Choose directory"
+msgstr "ஆரம்ப அடைவு"
+
+#. this button is redundant since hands are on keyboard for password
+#: ../../xffm/response/entryresponse.hh:309
+#: ../../xffm/response/passwdresponse.hh:189
+#: ../../xffm/response/passwdresponse.hh:559
+msgid "Ok"
+msgstr "சரி (O)"
+
+#: ../../xffm/response/commandprogressresponse.hh:32
+msgid "Items:"
+msgstr "உருப்படிகள்:"
+
+#: ../../xffm/response/passwdresponse.hh:21
+msgid "Enter password"
+msgstr "கடவுச்சொல்லை உள்ளிடவும்"
+
+#. gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+#: ../../xffm/response/passwdresponse.hh:125
+#, fuzzy
+msgid "User Input"
+msgstr "சொடுக்கி உள்ளீடு"
+
+#: ../../xffm/response/passwdresponse.hh:142
+#, fuzzy
+msgid "Response Requested"
+msgstr "வெளி பதிலளிப்பு"
+
+#: ../../xffm/response/passwdresponse.hh:264
+msgid "Preparing"
+msgstr "தயாராகுதல்"
+
+#: ../../xffm/response/passwdresponse.hh:352
+msgid "sudo"
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:354
+msgid "Command:"
+msgstr "(o) கட்டளை:"
+
+#: ../../xffm/response/passwdresponse.hh:357
+msgid "Permission denied"
+msgstr "அனுமதி மறுக்கப்பட்டது"
+
+#: ../../xffm/response/passwdresponse.hh:358
+msgid "Try to approach a problem from different angles."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:359
+msgid "Do you want to retry?"
+msgstr "மீண்டும் முயற்சிக்க விரும்புகிறீர்களா"
+
+#: ../../xffm/response/passwdresponse.hh:360
+msgid "Alternate:"
+msgstr "மாற்று:"
+
+#: ../../xffm/response/passwdresponse.hh:365
+msgid "No"
+msgstr "இல்லை"
+
+#: ../../xffm/response/passwdresponse.hh:401
+msgid "Install"
+msgstr "ற நிறுவல்"
+
+#: ../../xffm/response/passwdresponse.hh:402
+#, c-format
+msgid "%s does not exist."
+msgstr "%s காணப்படவில்லை."
+
+#: ../../xffm/response/passwdresponse.hh:467
+#, fuzzy
+msgid "Blowfish"
+msgstr "Sawfish"
+
+#: ../../xffm/response/passwdresponse.hh:468
+msgid "Encryption Key Approval"
+msgstr "மறையாக்கு விசை அங்கீகரிக்கப்படுதல்"
+
+#: ../../xffm/response/passwdresponse.hh:502
+msgid "-o     print output to standard out. Implies -r."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:506
+msgid "-c     DO NOT compress files before encryption."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:510
+msgid "-r     DO NOT remove input files after processing"
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:517
+#, fuzzy
+msgid "Encryption key: "
+msgstr "குறிமுறை சாவி:"
+
+#: ../../xffm/response/passwdresponse.hh:529
+msgid "Confirm:"
+msgstr "உறுதியாக்கம்:"
+
+#: ../../xffm/response/passwdresponse.hh:542
+msgid "Sorry, passwords do not match"
+msgstr "கடவுச்சொல் பொருத்தமானதாக இல்லை"
+
+#: ../../xffm/response/passwdresponse.hh:550
+#, fuzzy
+msgid "Minimum length:"
+msgstr "குறைந்தபட்ச மதிப்பு:"
+
+#: ../../xffm/response/timeoutresponse.hh:56
+msgid "Dismiss"
+msgstr "பணிநீக்கு (D)"
+
+#: ../../xffm/response/commandresponse.hh:23
+msgid "Running"
+msgstr "இயங்குகிறது"
+
+#. auto text = g_strdup_printf("%s (pid: %d)",
+#. _("Waiting for operation to finish..."),
+#. Tubo<Type>::getChild (pid));
+#: ../../xffm/response/commandresponse.hh:28
+#, fuzzy
+msgid "Waiting for operation to finish..."
+msgstr "டக்ஸ் பெயின்ட் முடியும் வரை காத்திருக்கிறது"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Documents"
+msgstr "ஆவணங்கள்"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Downloads"
+msgstr "பதிவிறக்கம்"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Music"
+msgstr "இசை"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Pictures"
+msgstr "படங்கள் "
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Templates"
+msgstr "வார்ப்புகள்"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Videos"
+msgstr "வீடியோக்கள்"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Desktop"
+msgstr "மேசைச்சூழல்"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Bookmarks"
+msgstr "புத்தகக்குறிகள்"
+
+#: ../../xffm/fm/local/icons.hh:259 ../../xffm/fm/local/rm.hh:181
+msgid "Trash"
+msgstr "குப்பை"
+
+#: ../../xffm/fm/local/popup.hh:60
+msgid "New"
+msgstr "(N) புதிய"
+
+#. deprecated {N_("Open in New Tab"), NULL, NULL, NULL},
+#. deprecated {N_("Open in New Window"), NULL, NULL, NULL},
+#. common buttons /(also an iconsize +/- button)
+#: ../../xffm/fm/local/popup.hh:64 ../../xffm/fm/local/popup.hh:104
+#: ../../xffm/common/gtk.hh:74
+msgid "Copy"
+msgstr "(C) நகலெடு"
+
+#: ../../xffm/fm/local/popup.hh:65 ../../xffm/fm/local/popup.hh:105
+#: ../../xffm/common/gtk.hh:73
+msgid "Cut"
+msgstr "வெட்டு"
+
+#: ../../xffm/fm/local/popup.hh:66 ../../xffm/fm/local/popup.hh:106
+#: ../../xffm/common/gtk.hh:66
+msgid "Paste"
+msgstr "ஒட்டு"
+
+#. **************
+#: ../../xffm/fm/local/popup.hh:67 ../../xffm/fm/local/popup.hh:107
+#: ../../xffm/fm/local/rm.hh:174 ../../xffm/common/gtk.hh:75
+msgid "Delete"
+msgstr "D அழி"
+
+#. {N_("About"), NULL, (void *) menu},
+#.
+#. only for listview: {N_("Sort by size"), NULL, (void *) menu},
+#. only for listview: {N_("Sort by date"), NULL, (void *) menu},
+#: ../../xffm/fm/local/popup.hh:73
+msgid "Select All"
+msgstr "அனைத்தையும் தேர்வு செய்"
+
+#: ../../xffm/fm/local/popup.hh:74 ../../xffm/fm/local/popup.hh:559
+#, fuzzy
+msgid "Match regular expression"
+msgstr "(r) இயல்பான கூற்று ஆக பொருத்துக"
+
+#: ../../xffm/fm/local/popup.hh:75 ../../xffm/fm/root/view.hh:58
+#: ../../xffm/fm/fstab/popup.hh:21
+msgid "View as list"
+msgstr "பட்டியலாக பார்"
+
+#: ../../xffm/fm/local/popup.hh:77
+msgid "Show hidden files"
+msgstr "ஒளித்த கோப்புகளையும் காட்டு"
+
+#: ../../xffm/fm/local/popup.hh:79
+#, fuzzy
+msgid "Show Backup Files"
+msgstr "பின்காப்பு கோப்புகளை உருவாக்கு"
+
+#: ../../xffm/fm/local/popup.hh:81
+msgid "Sort data in descending order"
+msgstr "தலைகீழ் வரிசையில் தரவை அடுக்கு"
+
+#: ../../xffm/fm/local/popup.hh:93 ../../xffm/fm/local/popup.hh:119
+#: ../../xffm/fm/local/popup.hh:1006 ../../xffm/fm/local/popup.hh:1013
+#: ../../xffm/fm/local/popup.hh:1022 ../../xffm/fm/local/popup.hh:1029
+#: ../../xffm/common/gtk.hh:72
+msgid "Open with"
+msgstr "w இதனுடன் திறக்க"
+
+#: ../../xffm/fm/local/popup.hh:94 ../../xffm/fm/local/popup.hh:846
+#, fuzzy
+msgid "Run Executable..."
+msgstr "செயல்கட்டை ஓட்டுக"
+
+#: ../../xffm/fm/local/popup.hh:95
+msgid "Extract files from the archive"
+msgstr "காப்பகத்திலிருந்து கோப்புகளை பிரித்தல்"
+
+#. g_hash_table_insert(iconname_hash, "bcrypt", (void *)"emblem-keyhole");
+#: ../../xffm/fm/local/popup.hh:96 ../../xffm/fm/root/view.hh:73
+#: ../../xffm/fm/fstab/popup.hh:20 ../../xffm/fm/dialog/notebook.hh:52
+#: ../../xffm/common/gtk.hh:78
+msgid "Open in New Tab"
+msgstr "O புதிய கீற்றில் திற"
+
+#. File chooser
+#: ../../xffm/fm/local/popup.hh:97 ../../xffm/fm/local/popup.hh:706
+msgid "Create a compressed archive with the selected objects"
+msgstr "தேர்ந்தெடுக்கப்பட்ட பொருட்களுடன் ஒரு குறுக்கப்பட்ட காப்பகத்தை உருவாக்கவும்"
+
+#: ../../xffm/fm/local/popup.hh:98 ../../xffm/fm/fstab/popup.hh:37
+msgid "Mount the volume associated with this folder"
+msgstr "இந்த அடைவுடன் தொடர்புடைய தொகுதியை ஏற்றவும்"
+
+#: ../../xffm/fm/local/popup.hh:99 ../../xffm/fm/fstab/popup.hh:38
+msgid "Unmount the volume associated with this folder"
+msgstr "இந்த அடைவில் தொடர்புடைய தொகுதியை ஏற்றம் நீக்கவும்"
+
+#: ../../xffm/fm/local/popup.hh:100 ../../xffm/common/gtk.hh:67
+msgid "Add bookmark"
+msgstr "b புத்தககுறி சேர்"
+
+#: ../../xffm/fm/local/popup.hh:101 ../../xffm/fm/root/view.hh:74
+#: ../../xffm/common/gtk.hh:68
+msgid "Remove bookmark"
+msgstr "புத்தகக்குறியை நீக்கு"
+
+#: ../../xffm/fm/local/popup.hh:108 ../../xffm/fm/local/popup.hh:961
+msgid "Rename"
+msgstr "மறுபெயரிடு (R)"
+
+#: ../../xffm/fm/local/popup.hh:109 ../../xffm/fm/local/popup.hh:947
+msgid "Duplicate"
+msgstr "(D) படியெடு"
+
+#: ../../xffm/fm/local/popup.hh:110 ../../xffm/fm/local/popup.hh:933
+msgid "Link"
+msgstr "L தொடுப்பு"
+
+#: ../../xffm/fm/local/popup.hh:111
+msgid "Properties"
+msgstr "r பண்புகள்"
+
+#: ../../xffm/fm/local/popup.hh:414
+msgid "Files:"
+msgstr "கோப்புகள் (F):"
+
+#: ../../xffm/fm/local/popup.hh:417 ../../xffm/fm/local/rm.hh:61
+#, fuzzy
+msgid "Multiple selections"
+msgstr "பலவித செயல்பாடுகள்"
+
+#: ../../xffm/fm/local/popup.hh:557
+#, fuzzy
+msgid "Select items"
+msgstr "(S) தேர்வுசெய்த உருப்படிகள்:"
+
+#: ../../xffm/fm/local/popup.hh:575
+#, fuzzy
+msgid "Regular Expression syntax is incorrect"
+msgstr "வாடிக்கையான தொடர்களை பரிசோதிப்பவர்."
+
+#: ../../xffm/fm/local/popup.hh:592
+msgid "No selection"
+msgstr "எந்த தேர்வுமில்லை"
+
+#: ../../xffm/fm/local/popup.hh:592
+#, fuzzy
+msgid "No matches."
+msgstr "பொருத்தங்கள் இல்லை"
+
+#. entryResponse->setCheckButton(_("Run in Terminal"));
+#. entryResponse->setCheckButton(Mime<Type>::runInTerminal(path));
+#: ../../xffm/fm/local/popup.hh:721 ../../xffm/fm/page/pathbar.hh:313
+msgid "Specify Output Directory..."
+msgstr "வெளியீட்டுக்கான அடைவினைக் குறிப்பிடுக..."
+
+#: ../../xffm/fm/local/popup.hh:799
+#, fuzzy
+msgid "Create new..."
+msgstr "உருவாக்கு (r)..."
+
+#: ../../xffm/fm/local/popup.hh:806 ../../xffm/fm/local/popup.hh:886
+#, fuzzy
+msgid "New Name:"
+msgstr "புதுப்பெயர்"
+
+#: ../../xffm/fm/local/popup.hh:815
+msgid "No name"
+msgstr "பெயர் இல்லை"
+
+#: ../../xffm/fm/local/popup.hh:828
+#, c-format
+msgid "Another file with the same name already exists in “%s”."
+msgstr "\"%s\" இல் இதே  பெயரில்  வேறு கோப்பு ஏற்கெனவே உள்ளது."
+
+#: ../../xffm/fm/local/popup.hh:850 ../../xffm/fm/local/popup.hh:1010
+#: ../../xffm/fm/local/popup.hh:1026 ../../xffm/common/util.hh:1248
+msgid "Run in Terminal"
+msgstr "(T) முனையத்தில் இயக்கு"
+
+#: ../../xffm/fm/local/popup.hh:853
+#, fuzzy
+msgid "Arguments for the Command"
+msgstr "கட்டளைகளுக்கான இணைமாறிகள்"
+
+#: ../../xffm/fm/local/popup.hh:1047 ../../xffm/fm/local/view.hh:141
+#, fuzzy
+msgid "Invalid entry"
+msgstr "செல்லுபடியாகாத வினவல்"
+
+#: ../../xffm/fm/local/properties.hh:235
+#, fuzzy
+msgid "Properties and Attributes"
+msgstr "அனைத்து பண்புகளை பாதுகாக்கவும்"
+
+#: ../../xffm/fm/local/properties.hh:264
+#, fuzzy
+msgid "File Mode:"
+msgstr "கோப்பின் கீழ் (F):"
+
+#: ../../xffm/fm/local/properties.hh:290
+msgid "File:"
+msgstr "கோப்பு:"
+
+#. Add file info stuff
+#. set info stuff data according to combo box
+#. add signal handler to changed signal for combo box
+#. Add process buttons
+#.
+#: ../../xffm/fm/local/properties.hh:302
+msgid "Apply changes"
+msgstr "மாற்றங்களை செயற்படுத்து"
+
+#: ../../xffm/fm/local/properties.hh:462
+#, fuzzy
+msgid "Successfully moved to trash."
+msgstr "%s அகற்றப்பட்டது"
+
+#: ../../xffm/fm/local/properties.hh:463
+msgid "Source:"
+msgstr "மூலம்:"
+
+#: ../../xffm/fm/local/rm.hh:59
+#, c-format
+msgid "Delete %s"
+msgstr "%s ஐ அழி (D)"
+
+#: ../../xffm/fm/local/rm.hh:61
+msgid "Warning: "
+msgstr "எச்சரிக்கை: "
+
+#. gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
+#. title
+#: ../../xffm/fm/local/rm.hh:90
+msgid "Remove"
+msgstr "நீக்கவும் (R)"
+
+#: ../../xffm/fm/local/rm.hh:140
+#, fuzzy
+msgid "Apply to all"
+msgstr "அனைவருக்கும் பதிலனுப்பு:"
+
+#. **************
+#. This is now available to BSD with rm -P option
+#: ../../xffm/fm/local/rm.hh:163 ../../xffm/common/gtk.hh:76
+#, fuzzy
+msgid "Shred"
+msgstr "சிதைப்பி"
+
+#. We do not count "../"
+#: ../../xffm/fm/local/view.hh:48 ../../xffm/fm/base/monitor.hh:28
+#, fuzzy, c-format
+msgid "Files: %s"
+msgstr "கோப்பு: %s"
+
+#: ../../xffm/fm/root/model.hh:78
+#, fuzzy
+msgid "Root Directory"
+msgstr "மூல அடைவு:"
+
+#: ../../xffm/fm/root/model.hh:94
+msgid "This is the root of the filesystem"
+msgstr "கோப்பு முறைமையின் மூலம் இது"
+
+#: ../../xffm/fm/root/model.hh:105
+msgid "Home Directory"
+msgstr "இல்ல அடைவு"
+
+#: ../../xffm/fm/root/model.hh:132
+#, fuzzy
+msgid "Trash bin"
+msgstr "தொட்டியில் உள்ள கோப்பு"
+
+#: ../../xffm/fm/root/model.hh:162 ../../xffm/fm/fstab/popup.hh:29
+msgid "Disk Image Mounter"
+msgstr "வட்டு பிம்ப ஏற்றி"
+
+#: ../../xffm/fm/root/model.hh:169 ../../xffm/fm/root/model.hh:185
+msgid "Mount local disks and devices"
+msgstr "உண்ணிலை தகடு, சாதனத்தில் ஆகியவற்றை ஏற்று"
+
+#: ../../xffm/fm/root/model.hh:170 ../../xffm/fm/fstab/popup.hh:25
+#: ../../xffm/fm/fstab/view.hh:429
+#, fuzzy
+msgid "eCryptfs Volume"
+msgstr "நினைவிடம் பிரிவு"
+
+#: ../../xffm/fm/root/model.hh:171 ../../xffm/fm/fstab/popup.hh:24
+msgid "SSHFS Remote Synchronization Folder"
+msgstr "SSHFS தொலை ஒத்திசைக்கப்பட்ட கோப்புறை"
+
+#: ../../xffm/fm/root/model.hh:172 ../../xffm/fm/fstab/popup.hh:23
+#: ../../xffm/fm/fstab/view.hh:377
+msgid "NFS Network Volume"
+msgstr "NFS வலைப்பின்னல் பிரிவு"
+
+#: ../../xffm/fm/root/model.hh:173 ../../xffm/fm/fstab/popup.hh:26
+#: ../../xffm/fm/fstab/view.hh:455
+msgid "CIFS Volume"
+msgstr "CIFS தொகுதி"
+
+#: ../../xffm/fm/root/model.hh:195
+#, fuzzy
+msgid "Software Updater"
+msgstr "மென்பொருள் மேம்படுத்தல்"
+
+#: ../../xffm/fm/root/model.hh:218 ../../xffm/fm/root/model.hh:230
+msgid "Add or remove software installed on the system"
+msgstr "கணினியில் நிறுவப்பட்ட மென்பொருளை சேர்க்கவும் அல்லது நீக்கவும்"
+
+#: ../../xffm/fm/root/model.hh:271
+#, fuzzy
+msgid "Go to bookmarked location"
+msgstr "அடுத்த புத்தகக்குறி இடத்துக்கு செல்க"
+
+#. {N_("Add bookmark"), (void *)BasePopUp<Type>::noop, NULL, NULL},
+#: ../../xffm/fm/root/view.hh:61
+msgid "Empty trash"
+msgstr "குப்பையை வெற்றுப்படுத்து"
+
+#. File chooser
+#: ../../xffm/fm/fstab/popup.hh:121
+msgid "Mount Device"
+msgstr "சாதனத்தை மேலேற்று"
+
+#: ../../xffm/fm/fstab/popup.hh:133
+msgid "Mount point:"
+msgstr "மேலேற்ற முனை:"
+
+#: ../../xffm/fm/fstab/view.hh:301
+msgid "Mounted on:"
+msgstr "மேலேற்ற முனை:"
+
+#: ../../xffm/fm/fstab/view.hh:302
+#, fuzzy
+msgid "Mount on"
+msgstr "P ஏற்ற தேர்வுகள்"
+
+#: ../../xffm/fm/fstab/view.hh:310 ../../xffm/fm/fstab/view.hh:312
+#, fuzzy
+msgid "Not mounted"
+msgstr "மவுன்ட் செய்யப்படவில்லை"
+
+#: ../../xffm/fm/fstab/view.hh:403
+#, fuzzy
+msgid "SFTP (via SSH)"
+msgstr "பாதுகாப்பான எஃப்டிபி (எஸ்எஸ்ஹெச்)"
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, fuzzy, c-format
+msgid "Unmounting %s"
+msgstr "இறக்கப்படுகிறது"
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, fuzzy, c-format
+msgid "Mounting %s"
+msgstr "ஏற்றப்படுகிறது"
+
+#: ../../xffm/fm/dialog/menupopover.hh:128
+msgid "Home"
+msgstr "இல்லம்"
+
+#: ../../xffm/fm/dialog/menupopover.hh:129 ../../xffm/common/gtk.hh:64
+#, fuzzy
+msgid "Open terminal"
+msgstr "ஒரு முனையத்தை திற"
+
+#: ../../xffm/fm/dialog/menupopover.hh:130
+msgid "Open a New Window"
+msgstr "புதிய சாளரத்தைத் திறக்கவும்"
+
+#. {N_("Execute Shell Command"), (void *)MenuPopoverSignals<Type>::shell, (void *) menuButton_},
+#: ../../xffm/fm/dialog/menupopover.hh:132 ../../xffm/common/gtk.hh:69
+msgid "Search"
+msgstr "தெடு"
+
+#: ../../xffm/fm/dialog/menupopover.hh:133 ../../xffm/common/gtk.hh:71
+msgid "Exit"
+msgstr "வெளியேறுக"
+
+#: ../../xffm/fm/dialog/dialog.hh:116
+msgid "Removed"
+msgstr "நீக்கப்பட்டது"
+
+#: ../../xffm/fm/dialog/dialog.hh:132
+#, fuzzy
+msgid "Detected device(s):"
+msgstr "(D)சாதனங்களை கண்டுபிடி"
+
+#. Create the widgets
+#: ../../xffm/fm/page/vbuttonbox.hh:37 ../../xffm/common/gtk.hh:332
+msgid "Help"
+msgstr "உதவி"
+
+#. File chooser
+#: ../../xffm/fm/page/pathbar.hh:306 ../../xffm/fm/page/pathbar.hh:308
+msgid "Go to"
+msgstr "போ"
+
+#: ../../xffm/fm/page/pathbar.hh:331
+msgid "Not a directory"
+msgstr "அடைவு இல்லை"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Renice Process"
+msgstr "ரினைஸ் செயல்"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Suspend"
+msgstr "செயல் நிறுத்து"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Continue"
+msgstr "தொடர்"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Interrupt"
+msgstr "தடை"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Hangup"
+msgstr "தொங்கியது"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "User 1 (USR1)"
+msgstr "பயனர் 1(USR1)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "User 2 (USR2)"
+msgstr "பயனர் 2(USR2)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+#, fuzzy
+msgid "Terminate Task"
+msgstr "நிறைவுசெய்ள(TERM)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "Abort"
+msgstr "தடைசெய்"
+
+#: ../../xffm/fm/page/runbutton.hh:138
+msgid "Kill"
+msgstr "கொலை செய்"
+
+#: ../../xffm/fm/page/runbutton.hh:139
+#, fuzzy
+msgid "Segmentation fault"
+msgstr "செக்மன்டேஷன் மீறல்"
+
+#: ../../xffm/fm/page/runbutton.hh:217
+msgid "PID"
+msgstr "பிஐடி(PID)"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:37
+#, fuzzy
+msgid "Embedded Terminal"
+msgstr "(e) முனையத்தை திற"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:38
+msgid "All items in the iconview."
+msgstr "சின்ன காட்சியில் உள்ள அனைத்து பொருள்களும்."
+
+#: ../../xffm/fm/page/hbuttonbox.hh:39
+#, fuzzy
+msgid "Scripting"
+msgstr "சிறுநிரல்"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:40
+msgid "Clear Log"
+msgstr "லாக்கை நீக்கு"
+
+#. Status textview
+#: ../../xffm/fm/page/hbuttonbox.hh:42
+msgid "Terminal font"
+msgstr "முனைய எழுத்துரு"
+
+#: ../../xffm/fm/treeview.hh:17
+msgid "Name"
+msgstr "பெயர்"
+
+#: ../../xffm/fm/treeview.hh:20
+msgid "Size"
+msgstr "அளவு"
+
+#: ../../xffm/fm/treeview.hh:21
+msgid "Date"
+msgstr "தேதி"
+
+#: ../../xffm/fm/treeview.hh:22
+msgid "Mimetype"
+msgstr "மைம்வகைகள்"
+
+#: ../../xffm/fm/treeview.hh:24
+msgid "TYPE"
+msgstr "TYPE"
+
+#: ../../xffm/fm/base/signals.hh:642
+msgid "Directory does not exist."
+msgstr "அடைவு இல்லை."
+
+#: ../../xffm/fm/base/signals.hh:644 ../../xffm/fm/base/signals.hh:646
+#, fuzzy
+msgid "Trash is empty"
+msgstr "தொடுபலகை காலியாக உள்ளது"
+
+#: ../../xffm/common/settings.hh:27
+#, fuzzy
+msgid "New File:"
+msgstr "i புதிய கோப்பு "
+
+#: ../../xffm/common/gio.hh:235
+#, fuzzy
+msgid "Could not copy item:"
+msgstr "உருப்படியை நீக்க முடியாது"
+
+#: ../../xffm/common/gio.hh:237
+#, fuzzy
+msgid "Could not move item:"
+msgstr "உருப்படியை நீக்க முடியாது"
+
+#: ../../xffm/common/gio.hh:239
+#, fuzzy
+msgid "Create symbolic link"
+msgstr "குறியீட்டு இணைப்புகளை உருவாக்கவும்"
+
+#: ../../xffm/common/gio.hh:276
+#, c-format
+msgid ""
+"Could not delete:\n"
+"%s"
+msgstr ""
+"அகற்ற இயலவில்லை:\n"
+"%s"
+
+#: ../../xffm/common/gio.hh:278
+#, c-format
+msgid "Could not move %s to trash"
+msgstr "%s ஐ குப்பைக்கு நகர்த்த முடியவில்லை "
+
+#: ../../xffm/common/clipboard.hh:23 ../../xffm/common/dnd.hh:40
+msgid "Copying files locally"
+msgstr "உள்ளமை கோப்பு நகலெடுப்பு"
+
+#: ../../xffm/common/clipboard.hh:30 ../../xffm/common/dnd.hh:34
+#, fuzzy
+msgid "Moving files"
+msgstr "நகரும் கோப்புகள்"
+
+#: ../../xffm/common/dnd.hh:46
+#, fuzzy
+msgid "Create Link"
+msgstr "U தொடுப்பு உருவாக்கத்தை மீள்"
+
+#: ../../xffm/common/util.hh:1200
+#, c-format
+msgid ""
+"Scriptfile \"%s\" is not executable. Please set the executable-attribute on "
+"that file."
+msgstr ""
+
+#: ../../xffm/common/util.hh:1202 ../../xffm/common/util.hh:1237
+#, c-format
+msgid "Open with %s"
+msgstr "%s ஆல் திற"
+
+#: ../../xffm/common/util.hh:1202
+msgid "Text Editor"
+msgstr "உரை தொகுப்பி"
+
+#: ../../xffm/common/util.hh:1239 ../../xffm/common/gtk.hh:65
+msgid "Execute Shell Command"
+msgstr "முனைய ஆணையை செயற்படுத்துக"
+
+#: ../../xffm/common/util.hh:1243
+msgid ""
+"Console: quickly run single commands -- write a command here and press enter."
+msgstr ""
+
+#: ../../xffm/common/gtk.hh:123
+msgid "New Tab"
+msgstr "புதிய கீற்று"
+
+#: ../../xffm/common/gtk.hh:335
+msgid "OK"
+msgstr "சரி"
+
+#: ../../xffm/common/run.hh:344
+msgid "error"
+msgstr "பிழை"
+
+#: ../../xffm/common/run.hh:348
+msgid "warning"
+msgstr "எச்சரிக்கை"
+
+#: ../../xffm/common/mime.hh:101 ../../xffm/common/mime.hh:143
+#, fuzzy
+msgid "No Read Permission"
+msgstr "அனுமதிகளை சேர்"
+
+#: ../../xffm/common/preview.hh:593
+msgid "Empty file"
+msgstr "கோப்பை காலியாக்கவும்"
+
+#: ../../xffm/common/preview.hh:648
+#, fuzzy, c-format
+msgid "Cannot read from %s"
+msgstr " \"%s\" -லிருந்து படிக்க முடியவில்லை"
+

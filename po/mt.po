@@ -1,0 +1,443 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:44:42 CDT 2013 ---
+#
+# Kevin Attard Compagno <kac_comp@webhostmalta.com>, 2004-2005.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: http://bugs.xffm.org\n"
+"POT-Creation-Date: 2013-02-07 03:08+0000\n"
+"PO-Revision-Date: 2004-11-08 03:39+0100\n"
+"Last-Translator: Kevin Attard Compagno <kaccomp@webhostmalta.com>\n"
+"Language-Team:  <en@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"#-#-#-#-#  desktopkdeextragear-2.po (desktopkdeextragear-2)  #-#-#-#-#\n"
+"X-Generator: KBabel 1.9.1\n"
+"#-#-#-#-#  desktopkdeextragear-3.po (desktopkdeextragear-3)  #-#-#-#-#\n"
+"X-Generator: KBabel 1.9.1\n"
+
+msgid "Comment=A small network usage meter for Kicker"
+msgstr "Comment= مقياس استهلاك الشبكة لشريط كيدي"
+
+msgid "Name=kpartscleanappPart"
+msgstr "Name=kpartscleanappPart"
+
+msgid "Comment=KDE Fish Applet"
+msgstr "Comment=Applet de Fish per a KDE"
+
+msgid "Name=MLDonkey Applet"
+msgstr "Name=Applet de MLDonkey"
+
+msgid "Comment=MLDonkey Remote Control Applet"
+msgstr "Comment=Applet per al control remot de MLDonkey"
+
+msgid "Comment=Plugin for compiling KMFGenericDoc to an iptables scriptfile"
+msgstr ""
+"Comment=Connector per compilar KMFGenericDoc a un fitxer script iptables"
+
+msgid "Comment=asdasd"
+msgstr "Comment=asdasd"
+
+msgid "Name=MobileMule Server"
+msgstr "Name=Εξυπηρετητής MobileMule"
+
+
+msgid " byte"
+msgid_plural " bytes"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid " line"
+msgid_plural " lines"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid ""
+"You have selected %d file to execute, are you sure you want to continue?"
+msgid_plural ""
+"You have selected %d files to execute, are you sure you want to continue?"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Execute %d file"
+msgid_plural "Execute %d files"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid ""
+"A partial file exists:%dSize of the partial file: 1 byte."
+""
+msgid_plural ""
+"A partial file exists:%dSize of the partial file: %d bytes."
+""
+msgstr[0] ""
+msgstr[1] ""
+
+msgid " minute"
+msgid_plural " minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid " (%d op)"
+msgid_plural " (%d ops)"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "1 day"
+msgid_plural "%d days"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "1 hour"
+msgid_plural "%d hours"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "1 minute"
+msgid_plural "%d minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "No such ignore: %d"
+msgid_plural "No such ignores: %d"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid ""
+"You cannot delete the selected server.\n"
+"\n"
+"The network %d needs to have at least one server."
+msgid_plural ""
+"You cannot delete the selected servers.\n"
+"\n"
+"The network %d needs to have at least one server."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Address Book Association"
+msgid_plural "Address Book Associations"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Edit Contact..."
+msgid_plural "Edit Contacts..."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Choose/Change Association..."
+msgid_plural "Choose/Change Associations..."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Choose Contact..."
+msgid_plural "Choose Contacts..."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Change Association..."
+msgid_plural "Change Associations..."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Create New Contact..."
+msgid_plural "Create New Contacts..."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Delete Association"
+msgid_plural "Delete Associations"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "1 byte"
+msgid_plural "%d bytes"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "1 line"
+msgid_plural "%d lines"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Version"
+msgstr "Doare"
+
+msgid "DCC chat ports:"
+msgstr "DCC-chat-porte:"
+
+msgid "Stay in system tray all the time"
+msgstr "Forbliv i statusfeltet hele tiden"
+
+msgid "Choose..."
+msgstr "Dewis..."
+
+msgid "Show timestamps"
+msgstr "Vis tidsstempler"
+
+msgid "Browse..."
+msgstr "Pori..."
+
+msgid ""
+"This is the default identity used for all servers where no separate "
+"identity was selected."
+msgstr ""
+"Ésta es la identidad por omisión que se usa para todos los servidores "
+"para los que no se haya seleccionado una identidad aparte."
+
+msgid "Could not retrieve \"%s\"."
+msgstr "No se ha podido recibir «%s»."
+
+msgid "Rollback:"
+msgstr "Restaurar:"
+
+msgid "Op"
+msgstr "Op"
+
+msgid "Ops"
+msgstr "Ops"
+
+msgid "Error: \"%s\" is not a regular file."
+msgstr "Error: «%s» no es un archivo normal."
+
+msgid "Cannot create received files directory '%s'."
+msgstr "No se ha podido crear el directorio de archivos recibidos «%s»."
+
+msgid "Stalled"
+msgstr "In stallo"
+
+msgid "Size"
+msgstr "Dimensione"
+
+msgid "CPS"
+msgstr "CPS"
+
+msgid "Show"
+msgstr "Mostra"
+
+msgid "Auto rejoin"
+msgstr "Liity takaisin kanavalle automaattisesti"
+
+msgid "When URL is Clicked"
+msgstr "Quando si fa clic su una URL"
+
+msgid "Margin:"
+msgstr "Marginaali:"
+
+msgid "Pixel"
+msgstr "Pikseli"
+
+msgid "Use paragraph spacing:"
+msgstr "Usa spaziatura dei paragrafi:"
+
+msgid "Sorting Order"
+msgstr "Ordinamento"
+
+msgid "Web Browser"
+msgstr "Browser Web"
+
+msgid "Dark cyan:"
+msgstr "Ciano scuro:"
+
+msgid "Blue:"
+msgstr "Blu:"
+
+msgid "Dark gray:"
+msgstr "Grigio scuro:"
+
+msgid "Orange:"
+msgstr "Arancione:"
+
+msgid "White:"
+msgstr "Bianco:"
+
+msgid "Dark green:"
+msgstr "Verde scuro:"
+
+msgid "Light gray:"
+msgstr "Grigio chiaro:"
+
+msgid "Brown:"
+msgstr "Marrone:"
+
+msgid "Dark blue:"
+msgstr "Blu scuro:"
+
+msgid "Magenta:"
+msgstr "Magenta:"
+
+msgid "Yellow:"
+msgstr "Giallo:"
+
+msgid "Purple:"
+msgstr "Porpora:"
+
+msgid "Characters to add on nick completion"
+msgstr "Caratteri da aggiungere al completamento del nick"
+
+msgid "Search Text..."
+msgstr "Etsi tekstiä..."
+
+msgid "PrefsPageIRCColorsUI"
+msgstr "PrefsPageIRCColorsUI"
+
+
+msgid "Viki"
+msgstr "Viki"
+
+msgid ""
+"Visual Keyboard - Multilingual and assistive technology for your fingertips"
+msgstr "Tastiera Virtwali - Teknoloġija Multilingwali u Assistiva għal subajk"
+
+msgid "Original Developer/Maintainer"
+msgstr "Awtur/Mantenitur Oriġinali"
+
+msgid "XKB wizard"
+msgstr "Saħħar XKB"
+
+msgid "Backspace"
+msgstr "Backspace"
+
+msgid "Tab"
+msgstr "Tab"
+
+msgid "Left Tab"
+msgstr "Tab tax-xellug"
+
+msgid "Return"
+msgstr "Return"
+
+msgid "Pause"
+msgstr "Pause"
+
+msgid ""
+"Scroll\n"
+"Lock"
+msgstr ""
+"Scroll\n"
+"Lock"
+
+msgid ""
+"Sys\n"
+"Req"
+msgstr ""
+"Sys\n"
+"Req"
+
+msgid "Escape"
+msgstr "Escape"
+
+msgid "Shift"
+msgstr "Shift"
+
+msgid "Ctrl"
+msgstr "Ctrl"
+
+msgid "Caps Lock"
+msgstr "Caps Lock"
+
+msgid ""
+"Shift\n"
+"Lock"
+msgstr ""
+"Shift\n"
+"Lock"
+
+msgid "Meta"
+msgstr "Meta"
+
+msgid "Alt"
+msgstr "Alt"
+
+msgid "Super"
+msgstr "Super"
+
+msgid "Hyper"
+msgstr "Hyper"
+
+msgid ""
+"Group\n"
+"Shift"
+msgstr ""
+"Group\n"
+"Shift"
+
+msgid "Compose"
+msgstr "Ikkomponi"
+
+msgid "Home"
+msgstr "Bidu"
+
+msgid "End"
+msgstr "Tmiem"
+
+msgid "Up"
+msgstr "Fuq"
+
+msgid "Begin"
+msgstr "Ibda"
+
+msgid "Down"
+msgstr "Isfel"
+
+msgid "Page Up"
+msgstr "Paġna 'l-fuq"
+
+msgid "Page Down"
+msgstr "Paġna l-isfel"
+
+msgid "Select"
+msgstr "Agħżel"
+
+msgid "Print Screen"
+msgstr "Ipprintja l-iskrin"
+
+msgid "Execute"
+msgstr "Eżegwi"
+
+msgid "Menu"
+msgstr "Menu"
+
+msgid "Find"
+msgstr "Sib"
+
+msgid "Help "
+msgstr "Għinuna"
+
+msgid "Break"
+msgstr "Break"
+
+msgid "Num Lock"
+msgstr "Num Lock"
+
+msgid "%s"
+msgstr "%s"
+
+msgid "Font size:"
+msgstr "Daqs tat-tipa:"
+
+msgid "Zoom:"
+msgstr "Żum:"
+
+msgid "Size of the main window."
+msgstr "Daqs tat-tieqa ewlenija."
+
+msgid "Font size adjustment for unusual fonts."
+msgstr "Settjar tad-daqs tat-tipi għal tipi strambi."
+
+msgid ""
+": NAME OF TRANSLATORS\n"
+"Your names"
+msgstr "Kevin Attard Compagno"
+
+msgid ""
+": EMAIL OF TRANSLATORS\n"
+"Your emails"
+msgstr "kaccomp@webhostmalta.com"
+
+

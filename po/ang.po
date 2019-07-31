@@ -1,0 +1,466 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:45:20 CDT 2013 ---
+#
+# David Lodge <dave@cirt.net>, 2004-2009.
+# James Johnson <modean52@comcast.net>, 2004.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: http://bugs.xffm.org\n"
+"POT-Creation-Date: 2004-08-09 21:09+0100\n"
+"PO-Revision-Date: 2004-08-09 21:10+0100\n"
+"Last-Translator: James Johnson <modean52@comcast.net>\n"
+"Language-Team: Old English <modean52@comcast.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit"
+
+msgid "AT-SPI Registry"
+msgstr "AT-SPI Nambóc"
+
+
+msgid "X"
+msgstr "X"
+
+msgid "Y"
+msgstr "Y"
+
+msgid "Text"
+msgstr "Gaderung"
+
+msgid ""
+"GConf error:\n"
+"  %s"
+msgstr ""
+"GConf gemearr:\n"
+" %s"
+
+msgid "GConf error: %s"
+msgstr "GConf gemearr: %s"
+
+msgid "01/01/00, 01:00 AM"
+msgstr "01/01/00, 01:00 AM"
+
+msgid "1/1/00, 1:00 AM"
+msgstr "1/1/00, 1:00 AM"
+
+msgid " 1/ 1/00,  1:00 AM"
+msgstr " 1/ 1/00,  1:00 AM"
+
+msgid "No image was selected."
+msgstr "Nán onlícnes wearþ gecoren."
+
+msgid "Name"
+msgstr "Nama"
+
+msgid "No applications selected"
+msgstr "Náne applicationas gecoren"
+
+msgid "%s document"
+msgstr "%s traht"
+
+msgid "Unknown"
+msgstr "Ungecnáwen"
+
+msgid "Could not find '%s'"
+msgstr "Ne cúðe findan '%s'"
+
+msgid "Could not find application"
+msgstr "Ne cúðe findan application"
+
+msgid "Open With"
+msgstr "Openian Mid"
+
+msgid "Open %s and other files of type \"%s\" with:"
+msgstr "Openian %s and óðre d?las cynnes \"%s\" mid:"
+
+msgid "You can stop this operation by clicking cancel."
+msgstr "Þu canst healdan þis"
+
+msgid "GConf Error"
+msgstr "GConf gemearr"
+
+msgid "No Selection Made"
+msgstr "Nánne Cyre Gemacod"
+
+msgid "Warning"
+msgstr "Warnung"
+
+msgid "Error"
+msgstr "Gemearr"
+
+
+msgid "Failed to open file '%s': %s"
+msgstr "Tósǽlde tó openienne dǽles '%s': %s"
+
+msgid "Image file '%s' contains no data"
+msgstr "Onlícnescranic '%s' næfþ giefa"
+
+msgid ""
+"Failed to load image '%s': reason not known, probably a corrupt image file"
+msgstr "Tósǽlde tó hládenne onlícnesse '%s': "
+
+msgid "Image type '%s' is not supported"
+msgstr "Onlícnescynn '%s' nis gewreðod"
+
+msgid "Unrecognized image file format"
+msgstr "Unrecognized onlícnescranicgesceap"
+
+msgid "Failed to load image '%s': %s"
+msgstr "Tósǽlde tó hládenne onlícnesse '%s': %s"
+
+msgid "Error writing to image file: %s"
+msgstr "Gesweðrung in wrítung þǽm onlícnescranic: %s"
+
+msgid "Failed to open temporary file"
+msgstr "Tósǽlde tó openienne hwílwendne cranic"
+
+msgid "Failed to read from temporary file"
+msgstr "Tósǽlde tó rǽdenne fram hwílwendne cranic"
+
+msgid "Failed to open '%s' for writing: %s"
+msgstr "Tósǽlde tó openienne '%s' for wrítunge: %s"
+
+msgid "Image format unknown"
+msgstr "Onlícnesgesceap ungecnáwen"
+
+msgid "failed to allocate image buffer of %u byte"
+msgid_plural "failed to allocate image buffer of %u bytes"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "The ANI image format"
+msgstr "Þæt ANI onlícnesgesceap"
+
+msgid "Not enough memory to load bitmap image"
+msgstr "Nis genóg gemynd tó hládenne bitmap-onlícnesse"
+
+msgid "BMP image has unsupported header size"
+msgstr "BMP onlícnes hæfþ ungewreðode xxxxx micelnessa"
+
+msgid "The BMP image format"
+msgstr "Þæt BMP onlícnesgesceap"
+
+msgid "The GIF image format"
+msgstr "Þæt GIF onlícnesgesceap"
+
+msgid "The ICO image format"
+msgstr "Þæt ICO onlícnesgesceap"
+
+msgid "The JPEG image format"
+msgstr "Þæt JPEG onlícnesgesceap"
+
+msgid "Failure reading GIF: %s"
+msgstr "Gesweðrung in rǽdunge GIF: %s"
+
+msgid "Internal error in the GIF loader (%s)"
+msgstr "Inweardlicu gesweðrung in þǽm GIF-hládere (%s)"
+
+msgid "Not enough memory to load icon"
+msgstr "Ne genóg gemynd tó hládenne segn"
+
+msgid "Unsupported icon type"
+msgstr "Ungewreðod segncynn"
+
+msgid "Not enough memory to load ICO file"
+msgstr "Ne genóg gemynd tó hládenne ICO-cranic"
+
+msgid "Image has invalid width and/or height"
+msgstr "Onlícnes hæfþ ungóde wíde and/oþþe híehþe"
+
+msgid "Image has unsupported bpp"
+msgstr "Onlícnes hæfþ ungewreðod bpp"
+
+msgid "The PCX image format"
+msgstr "Þæt PCX onlícnesgesceap"
+
+msgid "The PNG image format"
+msgstr "Þæt PNG onlícnesgesceap"
+
+msgid "The PNM/PBM/PGM/PPM image format family"
+msgstr "Séo PNM/PBM/PGM/PPM onlícnesgesceapmǽgscír"
+
+msgid "QTIF atom size too large (%d byte)"
+msgid_plural "QTIF atom size too large (%d bytes)"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Failed to allocate %d byte for file read buffer"
+msgid_plural "Failed to allocate %d bytes for file read buffer"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Failed to skip the next %d byte with seek()."
+msgid_plural "Failed to skip the next %d bytes with seek()."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "RAS image has unknown type"
+msgstr "RAS onlícnes hæfþ uncúþ cynn"
+
+msgid "The Sun raster image format"
+msgstr "Þæt Sunnanrastere onlícnescynn"
+
+msgid "The Targa image format"
+msgstr "Þæt Targa onlícnesgesceap"
+
+msgid "Width or height of TIFF image is zero"
+msgstr "Wídu oþþe híehþu TIFF-onlícnesse is náht"
+
+msgid "The TIFF image format"
+msgstr "Þæt TIFF onlícnesgesceap"
+
+msgid "Image has zero width"
+msgstr "Onlícnes hæfþ náhtwídu"
+
+msgid "Not enough memory to load image"
+msgstr "Ne genóg gemynd tó hládenne onlícnesse"
+
+msgid "The WBMP image format"
+msgstr "Þæt WBMP onlícnessgesceap"
+
+msgid "Invalid XBM file"
+msgstr "Ungód XBM cranic"
+
+msgid "The XBM image format"
+msgstr "Þæt XBM onlícnesgesceap"
+
+msgid "XPM file has image width <= 0"
+msgstr "XPM cranic hæfþ onlícneswíde <= 0"
+
+msgid "XPM file has image height <= 0"
+msgstr "XPM cranic hæfþ onlícneshíehþe <= 0"
+
+msgid "XPM file has invalid number of colors"
+msgstr "XPM cranic hæfþ ungódne híwa rím"
+
+
+msgid "Magnifier"
+msgstr "Íecere"
+
+
+msgid "CD play command"
+msgstr "CD lácan gebann"
+
+msgid "DVD play command"
+msgstr "DVD lácan gebann"
+
+msgid "*"
+msgstr "*"
+
+
+msgid "(100s of a second)"
+msgstr "(100u pricincles)"
+
+msgid "Auto Repeat On"
+msgstr "Self Edlǽcung On"
+
+msgid "Auto Repeat Rate:"
+msgstr "Self Edlǽcung Mǽþ:"
+
+msgid "Bottom/Top"
+msgstr "Botm/Top"
+
+msgid "Left/Right"
+msgstr "Wyn/Riht"
+
+msgid "Right/Left"
+msgstr "Riht/Wyn"
+
+msgid "Top/Bottom"
+msgstr "Top/Botm"
+
+msgid "Select:"
+msgstr "Céosan:"
+
+msgid "About"
+msgstr "Ábtúan"
+
+msgid "Help"
+msgstr "Helpan"
+
+msgid "Quit GOK"
+msgstr "Gewítan GOK"
+
+
+msgid "Opening %d Item"
+msgid_plural "Opening %d Items"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Pick a Color"
+msgstr "Céos híwe"
+
+msgid "Hue:"
+msgstr "Híw:"
+
+msgid "Green:"
+msgstr "Gréne:"
+
+msgid "Color Wheel"
+msgstr "Híw Hwéol"
+
+msgid "Size"
+msgstr "Micelnes"
+
+msgid "Name:"
+msgstr "Nama:"
+
+msgid "Browse for other folders"
+msgstr "Scéawian for óðrum sciftendum"
+
+msgid "Create Folder"
+msgstr "Scieppan Sciftend"
+
+msgid "Location:"
+msgstr "Stede:"
+
+msgid "Create in folder:"
+msgstr "Scieppan in sciftende:"
+
+msgid "Pick a Font"
+msgstr "Céos Stæfgecynd"
+
+msgid "Font"
+msgstr "Stæfgecynd"
+
+msgid "Family:"
+msgstr "Híred:"
+
+msgid "Font Selection"
+msgstr "Stæfgecynd Cyre"
+
+msgid "Error loading icon: %s"
+msgstr "Gemearr in hládunge segnes: %s"
+
+msgid "Icon '%s' not present in theme"
+msgstr "Segn '%s' nis andweard in forþsetennesse"
+
+msgid "Page %u"
+msgstr "Tramet %u"
+
+msgid "LRM Left-to-right mark"
+msgstr "LRM Winstre-tó-swíðre mearc"
+
+msgid "RLM Right-to-left mark"
+msgstr "RLM Swíðre-tó-winstre mearc"
+
+msgid "ZWS Zero width space"
+msgstr "ZWS Náht wídu rúm"
+
+msgid "Empty"
+msgstr "Ǽmtig"
+
+msgid "IPA"
+msgstr "IPA"
+
+msgid "Could not get information for file '%s': %s"
+msgstr "Ne cúðe gietan information for þissum file '%s': %s"
+
+msgid "The XPM image format"
+msgstr "Þæt XPM onlícnesgesceap"
+
+msgid "Folders"
+msgstr "Sciftendas"
+
+msgid "Folder unreadable: %s"
+msgstr "Sciftere unrǽdlic: %s"
+
+msgid "New Folder"
+msgstr "Níwe Sciftend"
+
+msgid ""
+"The folder name \"%s\" contains symbols that are not allowed in filenames"
+msgstr "Se sciftendnama \"%s\" hæfþ tácnu þá þe né sind álíefed in dǽlnamum"
+
+msgid "Folder name:"
+msgstr "Sciftendnama:"
+
+msgid "Create"
+msgstr "Scieppan"
+
+msgid "Name too long"
+msgstr "Nama is tó lang"
+
+msgid "Window"
+msgstr "Éagþyrel"
+
+msgid "(unknown)"
+msgstr "(ungecnáwen)"
+
+msgid "(Empty)"
+msgstr "(Ǽmtig)"
+
+msgid "%d byte"
+msgid_plural "%d bytes"
+msgstr[0] "%d bite"
+msgstr[1] "%d bitas"
+
+msgid "Today"
+msgstr "Tódæg"
+
+msgid ""
+"Could not change the current folder to %s:\n"
+"%s"
+msgstr ""
+"Ne cúe wendan þone andweardne sciftere tó %s:\n"
+"%s"
+
+msgid ""
+"Error creating folder \"%s\": %s\n"
+"%s"
+msgstr ""
+"Gemearr in scieppunge sciftendes \"%s\": %s\n"
+"%s"
+
+msgid "This file system does not support icons for everything"
+msgstr "Þéos dǽlendebyrdnes ne wreðaþ eallum segnas"
+
+
+msgid "Font family"
+msgstr "Fantmǽgscír"
+
+msgid "Font size"
+msgstr "Stæfgecyndmicelnes"
+
+msgid "Color"
+msgstr "Bléo"
+
+msgid "Width"
+msgstr "Wídu"
+
+msgid "Height"
+msgstr "Híehþu"
+
+msgid "Editable"
+msgstr "Ádihtendlic"
+
+msgid "Visible"
+msgstr "Gesíenelic"
+
+msgid "Anchor"
+msgstr "Ancor"
+
+
+msgid "can not run %s"
+msgstr "ne cúðe iernan %s"
+
+msgid "Error creating signal pipe."
+msgstr "Gemearr in scieppunge x pípan"
+
+msgid "Duplicate (%s/%s)!"
+msgstr "Twifeald (%s/%s)!"
+
+msgid "Error reading from child: %s."
+msgstr "Gemearr in rǽdunge fram cilde: %s."
+
+msgid "Error (%s) converting data for child, dropping."
+msgstr "Gemearr (%s) in wendunge giefa cilde, wearð gefeallen"
+
+msgid "Error setting PTY size: %s."
+msgstr "Gemearr in settunge PTY micelnesse: %s."
+
+

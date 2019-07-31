@@ -1,0 +1,65 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:41:00 CDT 2013 ---
+#
+# Katongo Musaluke <goof@coppernet.zm>, 2009.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: http://bugs.xffm.org\n"
+"POT-Creation-Date: 2009-04-04 12:17+0200\n"
+"PO-Revision-Date: 2009-03-18 16:10+0100\n"
+"Last-Translator: Katongo Musaluke <goof@coppernet.zm>\n"
+"Language-Team: Bemba Team <bem@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Name"
+msgstr "Ishina"
+
+msgid "Show"
+msgstr "Ukulanga"
+
+msgid "Item"
+msgstr "Ichintu"
+
+msgid "Change which applications are shown on the main menu"
+msgstr "Ukuchinja ama applications ya kulanga mu menu ikalamba"
+
+msgid "Main Menu"
+msgstr "Menu Ikalamba"
+
+msgid "Items:"
+msgstr "Ifintu"
+
+msgid "Move Down"
+msgstr "Ukuya Panshi"
+
+msgid "Move Up"
+msgstr "Ukuya Pamulu"
+
+msgid "New Item"
+msgstr "Ichintu Cha New"
+
+msgid "New Separator"
+msgstr "Separator Ya New"
+
+msgid "Restore the default menu layout"
+msgstr "Bushe tubwekeshemo menu kuli filya yalemoneka pakwamba"
+
+msgid "Revert Changes?"
+msgstr "Bushe Tukanse ifya Chinja?"
+
+msgid "Revert all menus to original settings?"
+msgstr "Bushe Tubwekeshemo ama menu yonse kufyo yali pakwamba?"
+
+msgid "Menus:"
+msgstr "Ama Menu"
+
+msgid "New Menu"
+msgstr "Menu ya New"
+
+

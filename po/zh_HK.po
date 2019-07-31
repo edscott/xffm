@@ -1,0 +1,1490 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:39:33 CDT 2013 ---
+#
+# Yuan-Chung Cheng <platin@linux.org.tw>, 1999.
+# (Based on galeon translation from Joe Man <trmetal@yahoo.com.hk>, 2001.
+# Peter Chen <petercpg@gmail.com>, 2007.
+# Ying-Chieh Chen <yinjieh@csie.nctu.edu.tw>, 2002.
+# dneif <dnextstep@gmail.com>, 2008.
+#   Sun G11n <gnome_int_l10n@ireland.sun.com>, 2003.
+# ChaoHsiung Liao <pesder@seed.net.tw>, 2002-2005.
+# Cheng-Chia Tseng <pswo10680@gmail.com>, 2009-2012.
+# Feng-Shiang Wen <fswen@mail2000.com.tw>, 2001.
+# Youchen Lee <copyleft@ubuntu.org.tw>, 2005.
+# Kevin Kee <kevin@oaka.org>, 2004.
+#   Sarah Smith <sarahs@redhat.com>, 2002.
+# Craig Jeffares <cjeffares@novell.com>, 2004.
+# Element Cheng <np2-cks@np2.hkcampus.net>, 2004.
+# Yi-Shun Wang <dnextstep@gmail.com>, 2008.
+# Hialan Liu <hialan.liu@gmail.com>, 2007-2008.
+# Woodman Tuen <wmtuen@gmail.com>, 2004-2008.
+# tonniewalker <tonniewalker@hotmail.com>, 2002.
+# Roy Chan <roy.chan@linux.org.hk>, 2004-2011.
+# Fernando <bv1al@journalist.com.tw>, 1999.
+# Chung-Yen Chang <candyz@linux.org.tw>, 2002-2003.
+# (thanks to beos@turbolinux.com.cn> and <suzhe@turbolinux.com.cn>.
+# Abel Cheung <maddog@linux.org.hk>, 2001-2007.
+# Chi-Wei Chen <michelin@seed.net.tw>, 2004.
+# ericsun <eric629@gmail.com>, 2011.
+# H45 <jimah45abmw@hotmail.com>, 2008.
+# 陳英傑 <r5224205@ms.cc.ntu.edu.tw>, 2001.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2002-2012.
+# Shell Hung <shell@debian.org>, 2001-2002.
+# Kevin Tse <kevinkit@netvigator.com>, 2005-2006.
+# Zong Yaotang <zong@cosix.com.cn>, 2002-2004.
+# Ching-Hung Lin <2billlin@yahoo.com.tw>, 2004-2007.
+# Hsin-lin Cheng <lancetw@gmail.com>, 2006.
+# Jouston Huang (Huang, Jiun-Jeng) <jouston@housediy.com>, 2001-2002.
+#  Chao-Hsiung Liao <j_h_liau@yahoo.com.tw>, 2008.
+# Funda Wang <fundawang@linux.net.cn>, 2002-2011.
+# Michelle H.Y. Yu <Michelle_H.Y._Yu@wistron.com.tw>, 2001.
+# Lin-Chieh Shangkuan <r93066@csie.ntu.edu.tw>, 2006.
+# FIHialan Liu <hialan.liu@gmail.com>, 2008.
+# yjwork <yjwork@189.cn>, 2010.
+# Terry Chuang <tchuang@redhat.com>, 2010.
+# taijuin <taijuin@gmail.com>, 2010.
+# Stanley Wong <stanley18fan0k@yahoo.com.hk>, 2005-2007.
+# Yuan-Chen Cheng <ycheng@slat.org>, 2002.
+# I-Yuan Chiang (江易原) <iychiang1809@gmail.com>, 2010.
+#   Wang Jian <lark@linux.net.cn>, 1998.
+# Roy Hiu-yeung Chan <roy.chan@debian.org.hk>, 2004.
+# Shao-Wen Young <b00507031@ntu.edu.tw>, 2013.
+# Lawrence Leung <hksarhong@yahoo.com>, 2004.
+# Chao-Hsiung Liao <j_h_liau@yahoo.com.tw>, 2002-2012.
+# Ben Wu <hpwu@redhat.com>, 2002-2003.
+# Dalin <ayi880@hotmail.com>, 2003.
+# Walter Cheuk <wwycheuk@gmail.com>, 2005-2012.
+# Joe Man <trmetal@yahoo.com.hk>, 2001-2002.
+# Walte <webmaster@www.linuxfans.org>, 2003.
+# Jing-Jong Shyue <shyue@sonoma.com.tw>, 2000-2003.
+# S.J. Luo <crystal@mickey.ee.nctu.edu.tw>, 1999.
+# elleryq <elleryq@gmail.com>, 2006.
+# BlueT <BlueT@Ubuntu.org.tw>, 2005.
+# EvLaw <tyuuuu2001@yahoo.com.hk>, 2006.
+# AceLan <acelan@kde.linux.org.tw>, 2001-2005.
+# Keanu <keanu@ms50.url.com.tw>, 2002.
+# 林佳宏 <object@mis.mgt.ncu.edu.tw>, 2001.
+# Zhu Dingjie <alastor@alastor.ath.cx>, 2002.
+# Kevin Peng <kevpeng@ihug.co.nz>, 2000.
+# chainsaw <chainsawtiney@gmail.com>, 2008.
+# Sarah Smith <sarahs@redhat.com>, 2002-2005.
+# G11N <gnome_int_l10n@ireland.sun.com>, 2003.
+# Tse-Chun Ho <saviro.tw@yahoo.com.tw>, 2002.
+# kentxchang <kentxchang@gmail.com>, 2011.
+# Jing-Jong SHYUE <shyue@sonoma.com.tw>, 2000.
+# Kevin_Wei_2 <kevin_wei3@yahoo.com.tw>, 2010.
+# Chun-Chung Chen (陳俊仲) <cjj@u.washington.edu>, 2001.
+# Anthony Fok <anthony@thizlinux.com>, 2001-2002.
+# missmomo0911 <missmomo0911@gmail.com>, 2008.
+# Fang Chun-Chih <ccfang1@ms21.hinet.net>, 1999.
+# Kenduest Lee <kenduest@i18n.linux.org.tw>, 2001-2003.
+# Pin-hsien Li <pspeter9931@gmail.com>, 2011-2012.
+#   Funda Wang <fundawang@linux.net.cn>, 2002-2006.
+# Shiva Huang <blueshiva@giga.net.tw>, 2004.
+# Sonyu Chen <sonyu@micro.ee.nthu.edu.tw>, 2005.
+# Jupiter K.T. Ou <jupiter@ocool.org>, 2002.
+# Ming-Yen Hsu <myhsu@cyberdude.com>, 1999.
+# Novell Language <language@novell.com>, 2006-2009.
+# Li-Jen Hsin <hsin@med.cgu.edu.tw>, 2004.
+# Pofeng Lee <Pofeng.Lee@ms7.url.com.tw>, 1999.
+# ialan Liu <hialan.liu@gmail.com>, 2008.
+# Chia-Lin, Kao <acelan@linux.org.tw>, 2003-2004.
+# Zerng07 <pswo10680@gmail.com>, 2010.
+#   Xiong Jiang <jxiong@offtopic.org>, 2002.
+# Chao-Kuei Hung <ckhung@cyut.edu.tw>, 2004.
+# Wang Jian <lark@linux.net.cn>, 1998-2005.
+# Franklin Huang <hcy@outpost.twbbs.org>, 2001.
+# "Last-Translator: Abel Cheung <maddog@linux.org.hk>.
+# Gong Yi LIAO <granziliao@sinamail.com>, 2000.
+# Edward G.J. Lee <edt1023@speedymail.org>, 2002-2003.
+# Eric Cheng <ericc@shinewave.com.tw>, 2001.
+# hialan <hialan.liu@gmail.com>, 2008.
+# Chih-Wei Huang <cwhuang@linux.org.tw>, 2000-2001.
+# Jau-Shiung Liau <pesder@seed.net.tw>, 2001-2002.
+#   Wei-Lun Chao <chaoweilun@pcmail.com.tw>, 2005.
+# Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
+# ID5 <id5id5@tcts1.seed.net.tw>, 2000.
+# Rongjun Mu <elanmu@sina.com>, 2003-2004.
+# Anthony Tang <tkyanthony@yahoo.com.hk>, 2004.
+# Calvin Lin <armin.lin@msa.hinet.net>, 2002.
+# Pui Lam Wong <pplwong@openoffice.org>, 2005.
+# Chester Cheng <ccheng@redhat.com>, 2010.
+# Yun Liu <yun.liu@savoirfairelinux.com>, 2008.
+# Wei-Lun Chao <chaoweilun@gmail.com>, 2004-2013.
+# "Last-Translator: Chao-Kuei Hung <ckhung@cyut.edu.tw>.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-02 12:27-0600\n"
+"PO-Revision-Date: 2013-02-04 19:33+0800\n"
+"Last-Translator: Chao-Hsiung Liao <jhliau@yahoo.com.tw>\n"
+"Language-Team: Chinese (Hong Kong) <community@linuxhall.org>\n"
+"Language: zh_HK\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"product=accerciserkeywords=I18N+L10Ncomponent=general\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: ../../xffm/completion/base.hh:28
+msgid "Command"
+msgstr "指令"
+
+#: ../../xffm/completion/base.hh:31
+msgid "File"
+msgstr "檔案(F)"
+
+#: ../../xffm/completion/base.hh:34
+#, fuzzy
+msgid "Command history"
+msgstr "要運行的命令"
+
+#. option -u uid "uid" "uid_combo"
+#: ../../xffm/completion/base.hh:37 ../../xffm/find/dialog.hh:199
+msgid "User"
+msgstr "使用者"
+
+#: ../../xffm/completion/base.hh:40
+msgid "Variable"
+msgstr "變數"
+
+#: ../../xffm/completion/base.hh:43
+msgid "Host"
+msgstr "主機"
+
+#: ../../xffm/completion/base.hh:55
+#, fuzzy
+msgid "Found no match"
+msgstr "比對的字詞"
+
+#: ../../xffm/completion/base.hh:133 ../../xffm/completion/base.hh:134
+msgid "Matches"
+msgstr "相符(M)"
+
+#: ../../xffm/completion/base.hh:134
+msgid "Too many files open"
+msgstr "開啟了太多檔案"
+
+#: ../../xffm/completion/base.hh:325 ../../xffm/find/fgr.hh:124
+msgid "Options:"
+msgstr "選項："
+
+#: ../../xffm/completion/bash.hh:133
+#, fuzzy
+msgid "Completion mode:"
+msgstr "完成日期"
+
+#: ../../xffm/completion/bash.hh:134
+msgid "command"
+msgstr "指令"
+
+#: ../../xffm/completion/bash.hh:135
+msgid "file"
+msgstr "檔案"
+
+#: ../../xffm/completion/bash.hh:145 ../../xffm/completion/bash.hh:149
+#, fuzzy
+msgid "Options >>"
+msgstr "選項"
+
+#: ../../xffm/find/fgr.hh:124 ../../xffm/find/dialog.hh:308
+msgid "Path"
+msgstr "路徑"
+
+#: ../../xffm/find/fgr.hh:125
+msgid "Locate documents and folders on this computer by name or content"
+msgstr "以名稱或內容尋找此電腦中的文件及資料夾"
+
+#: ../../xffm/find/fgr.hh:126 ../../xffm/find/dialog.hh:341
+msgid "Filter:"
+msgstr "過濾條件(I):"
+
+#: ../../xffm/find/fgr.hh:126
+msgid "Search for files"
+msgstr "搜尋檔案"
+
+#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
+#: ../../xffm/find/fgr.hh:128
+msgid "Contents:"
+msgstr "內容："
+
+#: ../../xffm/find/fgr.hh:128
+#, fuzzy
+msgid "File's contents filtered as plain text."
+msgstr "是否使用純文字儲存檔案？"
+
+#: ../../xffm/find/fgr.hh:131
+#, fuzzy
+msgid "Verbose output debugging mode."
+msgstr "啟用除錯碼"
+
+#: ../../xffm/find/fgr.hh:133
+msgid "Show version information"
+msgstr "顯示版本資訊"
+
+#: ../../xffm/find/fgr.hh:135
+#, fuzzy
+msgid "Filter Details"
+msgstr "使用者詳細資料"
+
+#. / option -a "xdev"
+#: ../../xffm/find/fgr.hh:138 ../../xffm/find/dialog.hh:180
+#, fuzzy
+msgid "Stay on single filesystem"
+msgstr "掃描檔案系統"
+
+#: ../../xffm/find/fgr.hh:140
+msgid "Print..."
+msgstr "打印(P)..."
+
+#: ../../xffm/find/fgr.hh:140
+msgid "The unique Process ID that identifies this process."
+msgstr ""
+
+#. / option -D "recursiveH"
+#: ../../xffm/find/fgr.hh:142 ../../xffm/find/dialog.hh:177
+#, fuzzy
+msgid "Find hidden files and directories"
+msgstr "忽略檔案及目錄"
+
+#: ../../xffm/find/fgr.hh:143
+msgid "Filter"
+msgstr "過濾條件"
+
+#: ../../xffm/find/fgr.hh:144
+msgid ""
+"To display files which pass the filter (stars and regexps will be processed)"
+msgstr ""
+
+#. / option -r "recursive"
+#: ../../xffm/find/fgr.hh:146 ../../xffm/find/dialog.hh:174
+msgid "Recursive"
+msgstr "循環"
+
+#: ../../xffm/find/fgr.hh:147 ../../xffm/find/fgr.hh:148
+#: ../../xffm/find/fgr.hh:149 ../../xffm/find/fgr.hh:150
+#, fuzzy
+msgid "KByte"
+msgstr "位元組"
+
+#: ../../xffm/find/fgr.hh:148
+msgid "is greater than or equal to"
+msgstr "大於或等於"
+
+#: ../../xffm/find/fgr.hh:150
+msgid "is less than or equal to"
+msgstr "小於或等於"
+
+#: ../../xffm/find/fgr.hh:152
+#, fuzzy
+msgid "Set UID"
+msgstr "設定(S)"
+
+#: ../../xffm/find/fgr.hh:152
+msgid "Executable Text Files"
+msgstr "可執行的文字檔"
+
+#: ../../xffm/find/fgr.hh:154
+msgid "The permissions of the file, in octal notation."
+msgstr "以 8 進位數字表示的檔案權限。"
+
+#: ../../xffm/find/fgr.hh:155
+msgid "Type"
+msgstr "類型"
+
+#: ../../xffm/find/fgr.hh:157 ../../xffm/find/signals.hh:17
+msgid "Any"
+msgstr "任何品牌"
+
+#: ../../xffm/find/fgr.hh:157
+#, fuzzy
+msgid "Default type"
+msgstr "預設的項目"
+
+#: ../../xffm/find/fgr.hh:158 ../../xffm/common/preview.hh:497
+#, fuzzy
+msgid "Regular file"
+msgstr "標準步驟"
+
+#: ../../xffm/find/fgr.hh:159 ../../xffm/find/signals.hh:11
+#: ../../xffm/fm/local/popup.hh:803 ../../xffm/common/preview.hh:488
+msgid "Directory"
+msgstr "目錄"
+
+#: ../../xffm/find/fgr.hh:160 ../../xffm/find/signals.hh:12
+#: ../../xffm/common/preview.hh:494
+msgid "Symbolic Link"
+msgstr "符號連結"
+
+#: ../../xffm/find/fgr.hh:161
+#, fuzzy
+msgid "UNIX Socket"
+msgstr "Socket"
+
+#: ../../xffm/find/fgr.hh:162 ../../xffm/find/signals.hh:14
+#: ../../xffm/common/preview.hh:482
+#, fuzzy
+msgid "Block device"
+msgstr "區塊設備"
+
+#: ../../xffm/find/fgr.hh:163 ../../xffm/find/signals.hh:15
+#: ../../xffm/common/preview.hh:485
+#, fuzzy
+msgid "Character device"
+msgstr "字元設備"
+
+#: ../../xffm/find/fgr.hh:164 ../../xffm/find/signals.hh:16
+#: ../../xffm/common/preview.hh:491
+msgid "FIFO"
+msgstr ""
+
+#. radio_p freed on destroy event for dialog_.
+#. option -k minutes "last_minutes", "last_minutes_spin"
+#: ../../xffm/find/fgr.hh:166 ../../xffm/find/fgr.hh:168
+#: ../../xffm/find/dialog.hh:221
+msgid "Minutes"
+msgstr "分"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/dialog.hh:270 ../../xffm/find/dialog.hh:370
+#: ../../xffm/fm/treeview.hh:18
+msgid "Details"
+msgstr "詳細資料"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/fgr.hh:179 ../../xffm/find/fgr.hh:180
+#: ../../xffm/find/fgr.hh:183 ../../xffm/find/fgr.hh:184
+#: ../../xffm/find/fgr.hh:187 ../../xffm/find/fgr.hh:188
+#, fuzzy
+msgid "TIME"
+msgstr "逾時"
+
+#: ../../xffm/find/fgr.hh:168 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/fgr.hh:174 ../../xffm/find/fgr.hh:177
+msgid "Previous"
+msgstr "上一步 (P)"
+
+#. option -h hours "last_hours", "last_hours_spin"
+#: ../../xffm/find/fgr.hh:169 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/dialog.hh:226
+msgid "Hours"
+msgstr "時"
+
+#. option -d days "last_days", "last_days_spin"
+#: ../../xffm/find/fgr.hh:172 ../../xffm/find/fgr.hh:174
+#: ../../xffm/find/dialog.hh:231
+msgid "Days"
+msgstr "天"
+
+#: ../../xffm/find/fgr.hh:175
+msgid "Month"
+msgstr "月"
+
+#: ../../xffm/find/fgr.hh:177
+#, fuzzy
+msgid "Month(s)"
+msgstr "個月"
+
+#: ../../xffm/find/fgr.hh:180
+#, fuzzy
+msgid "Modification Time :"
+msgstr "修改時間"
+
+#: ../../xffm/find/fgr.hh:184
+#, fuzzy
+msgid "Access Time :"
+msgstr "存取時間"
+
+#: ../../xffm/find/fgr.hh:188
+#, fuzzy
+msgid "Creation Time :"
+msgstr "建立時間"
+
+#: ../../xffm/find/fgr.hh:191 ../../xffm/find/fgr.hh:192
+msgid "uid"
+msgstr "uid"
+
+#: ../../xffm/find/fgr.hh:192
+msgid "User:"
+msgstr "使用者:"
+
+#: ../../xffm/find/fgr.hh:194 ../../xffm/find/fgr.hh:195
+#, fuzzy
+msgid "gid"
+msgstr "id"
+
+#: ../../xffm/find/fgr.hh:195
+msgid "Group:"
+msgstr "羣組："
+
+#: ../../xffm/find/fgr.hh:198
+msgid ""
+"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+"character that  normally  follows  a file  name"
+msgstr ""
+
+#: ../../xffm/find/fgr.hh:200
+msgid "Content View"
+msgstr "內容顯示模式"
+
+#: ../../xffm/find/fgr.hh:201 ../../xffm/find/fgr.hh:202
+#: ../../xffm/find/fgr.hh:203 ../../xffm/find/fgr.hh:204
+msgid "STRING"
+msgstr "字串"
+
+#: ../../xffm/find/fgr.hh:202 ../../xffm/find/fgr.hh:204
+#: ../../xffm/fm/local/popup.hh:563
+msgid "Regular expression"
+msgstr "正規表示式"
+
+#: ../../xffm/find/fgr.hh:204
+msgid "Extended"
+msgstr "延伸的"
+
+#: ../../xffm/find/fgr.hh:206
+msgid "Ignore case"
+msgstr "忽略大小寫(I)"
+
+#: ../../xffm/find/fgr.hh:208
+msgid "Text Files"
+msgstr "文字檔"
+
+#: ../../xffm/find/fgr.hh:210 ../../xffm/find/dialog.hh:552
+msgid "No match"
+msgstr "沒有相符"
+
+#: ../../xffm/find/fgr.hh:212 ../../xffm/find/dialog.hh:470
+#, fuzzy
+msgid "Line Count"
+msgstr "Line Out"
+
+#: ../../xffm/find/fgr.hh:214
+msgid "Words"
+msgstr "字詞"
+
+#: ../../xffm/find/fgr.hh:216
+msgid "Lines"
+msgstr "列"
+
+#: ../../xffm/find/fgr.hh:368
+#, fuzzy, c-format
+msgid "Usage : %s [OPTIONS]\n"
+msgstr "用法：%s [選項...] %s\n"
+
+#: ../../xffm/find/signals.hh:10
+msgid "Regular"
+msgstr "正規"
+
+#: ../../xffm/find/signals.hh:13 ../../xffm/common/preview.hh:500
+msgid "Socket"
+msgstr "Socket"
+
+#: ../../xffm/find/signals.hh:209
+msgid "Select folder to search in"
+msgstr "選取在哪個資料夾中搜尋"
+
+#. button no
+#: ../../xffm/find/signals.hh:265 ../../xffm/find/dialog.hh:584
+#: ../../xffm/response/entryfileresponse.hh:18
+#: ../../xffm/response/entryresponse.hh:305
+#: ../../xffm/response/passwdresponse.hh:558
+#: ../../xffm/fm/local/properties.hh:304 ../../xffm/fm/local/rm.hh:155
+msgid "Cancel"
+msgstr "取消"
+
+#: ../../xffm/find/signals.hh:293 ../../xffm/find/signals.hh:722
+#, fuzzy
+msgid "No editor for current action."
+msgstr "沒有目前的動作。"
+
+#. / option "upper_limit_spin" (only in gtk dialog_)
+#: ../../xffm/find/signals.hh:351 ../../xffm/find/dialog.hh:183
+msgid "Results"
+msgstr "結果"
+
+#: ../../xffm/find/signals.hh:351
+#, fuzzy
+msgid "Upper limit:"
+msgstr "上限 (日)"
+
+#: ../../xffm/find/signals.hh:353
+#, fuzzy
+msgid "Counting files..."
+msgstr "載入檔案…"
+
+#: ../../xffm/find/signals.hh:368
+#, fuzzy, c-format
+msgid "Found %d match"
+msgid_plural "Found %d matches"
+msgstr[0] "%d%個結果"
+
+#: ../../xffm/find/signals.hh:370
+#, c-format
+msgid "%s Finished : %s"
+msgstr "%s 結束：%s"
+
+#: ../../xffm/find/signals.hh:488 ../../xffm/find/signals.hh:490
+msgid "Searching..."
+msgstr "搜尋..."
+
+#. g_object_set_data(G_OBJECT(dialog_), "window", dialog_);
+#: ../../xffm/find/dialog.hh:98 ../../xffm/find/dialog.hh:150
+#: ../../xffm/find/dialog.hh:611
+msgid "Find"
+msgstr "搜尋"
+
+#: ../../xffm/find/dialog.hh:183
+#, fuzzy
+msgid "Upper limit"
+msgstr "上限 (日)"
+
+#. option -s +KByte "size_greater", "size_greater_spin"
+#: ../../xffm/find/dialog.hh:188
+#, fuzzy
+msgid "At Least"
+msgstr "至少"
+
+#: ../../xffm/find/dialog.hh:188 ../../xffm/find/dialog.hh:193
+#, fuzzy
+msgid "kBytes"
+msgstr "位元組"
+
+#. option -s -KByte "size_smaller", "size_smaller_spin"
+#: ../../xffm/find/dialog.hh:193
+#, fuzzy
+msgid "At Most"
+msgstr "大部份(O)"
+
+#: ../../xffm/find/dialog.hh:204
+msgid "Group"
+msgstr "羣組"
+
+#. option -o octal "octal_p" "permissions_entry"
+#: ../../xffm/find/dialog.hh:208
+msgid "Octal Permissions"
+msgstr "8 進位權限"
+
+#. option -p suid | exe
+#: ../../xffm/find/dialog.hh:213
+msgid "SUID"
+msgstr "SUID"
+
+#: ../../xffm/find/dialog.hh:213 ../../xffm/fm/local/popup.hh:843
+#, fuzzy
+msgid "Executable"
+msgstr "可執行檔："
+
+#. option -m months "last_months", "last_months_spin"
+#: ../../xffm/find/dialog.hh:237
+msgid "Months"
+msgstr "個月"
+
+#: ../../xffm/find/dialog.hh:248
+#, fuzzy
+msgid "File type : "
+msgstr "檔案類型(T):"
+
+#. gtk_widget_show (GTK_WIDGET(right_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(center_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(left_options_vbox));
+#: ../../xffm/find/dialog.hh:262 ../../xffm/find/dialog.hh:602
+#: ../../xffm/fm/page/page.hh:70 ../../xffm/common/gtk.hh:70
+msgid "Close"
+msgstr "關閉"
+
+#. gtk_box_pack_start (vbox7a, GTK_WIDGET(advancedBox), TRUE, FALSE, 5);
+#. gtk_widget_show(GTK_WIDGET(advancedBox));
+#. //////////////  grep options.... /////////////////////////
+#: ../../xffm/find/dialog.hh:384
+#, fuzzy
+msgid "Contains"
+msgstr "包含"
+
+#: ../../xffm/find/dialog.hh:404
+msgid "Contains the text"
+msgstr "包含指定的文字(T)"
+
+#: ../../xffm/find/dialog.hh:437
+msgid "Case Sensitive"
+msgstr "區分大小寫"
+
+#: ../../xffm/find/dialog.hh:449
+#, fuzzy
+msgid "Extended regexp"
+msgstr "延伸的"
+
+#: ../../xffm/find/dialog.hh:460
+#, fuzzy
+msgid "Include binary files"
+msgstr "包含檔案(F):"
+
+#: ../../xffm/find/dialog.hh:496
+msgid "Match"
+msgstr "符合"
+
+#: ../../xffm/find/dialog.hh:508
+msgid "Anywhere"
+msgstr ""
+
+#: ../../xffm/find/dialog.hh:523
+msgid "Whole words only"
+msgstr "全字拼寫須相符(W)"
+
+#: ../../xffm/find/dialog.hh:538
+msgid "lines"
+msgstr "行"
+
+#: ../../xffm/find/dialog.hh:594
+msgid "Clear"
+msgstr "清除(C)"
+
+#: ../../xffm/find/dialog.hh:636
+msgid "Edit"
+msgstr "編輯(E)"
+
+#: ../../xffm/find/dialog.hh:751 ../../xffm/find/dialog.hh:766
+#: ../../xffm/common/util.hh:1150 ../../xffm/common/util.hh:1152
+#: ../../xffm/common/util.hh:1158 ../../xffm/common/util.hh:1160
+#: ../../xffm/common/preview.hh:479
+msgid "unknown"
+msgstr "不明"
+
+#: ../../xffm/find/dialog.hh:780
+msgid "Modified"
+msgstr "已修改"
+
+#: ../../xffm/find/dialog.hh:784
+msgid "Created"
+msgstr "建立"
+
+#: ../../xffm/find/dialog.hh:788
+msgid "Accessed"
+msgstr "存取時間"
+
+#: ../../xffm/find/dialog.hh:1106
+msgid ""
+"Basic rules:\n"
+"\n"
+"*  Will match any character zero or more times.\n"
+"?  Will match any character exactly one time\n"
+"[] Match any character within the [] \n"
+"^  Match at beginning of string\n"
+"$  Match at end of string \n"
+msgstr ""
+
+#: ../../xffm/find/dialog.hh:1115
+msgid ""
+"Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"In  basic regular expressions the metacharacters ?, +, {, |, (, and ) \n"
+"  lose their special meaning.\n"
+"\n"
+"The  period . matches  any  single  character.\n"
+"The caret ^ matches at the start of line.\n"
+"The dollar $ matches at the end of line.\n"
+"\n"
+"Characters within [ ] matches any single character in the list.\n"
+"Characters within [^ ] matches any single character *not* in the list.\n"
+"Characters inside [ - ] matches a range of characters (ie [0-9] or [a-z]).\n"
+"\n"
+"A regular expression may be followed by one of several repetition "
+"operators:\n"
+"?      The preceding item is optional and matched\n"
+"       at most once.\n"
+"*      The preceding item will be matched zero\n"
+"       or more times.\n"
+"+      The preceding item will be matched one or\n"
+"       more times.\n"
+"{n}    The preceding item is matched exactly n times.\n"
+"{n,}   The preceding item is matched n or more times.\n"
+"{n,m}  The preceding item is matched at least n times,\n"
+"       but not more than m times.\n"
+"\n"
+"To match any reserved character, precede it with \\. \n"
+"\n"
+"Two regular expressions may be joined by the logical or operator |.\n"
+"Two regular expressions may be concatenated.\n"
+"\n"
+"More information is available by typing \"man grep\"\n"
+msgstr ""
+
+#: ../../xffm/response/entryfileresponse.hh:20
+msgid "Open"
+msgstr "開啟(O)"
+
+#: ../../xffm/response/entryresponse.hh:29
+#: ../../xffm/response/entryfolderresponse.hh:28
+msgid "Choose directory"
+msgstr "選取目錄"
+
+#. this button is redundant since hands are on keyboard for password
+#: ../../xffm/response/entryresponse.hh:309
+#: ../../xffm/response/passwdresponse.hh:189
+#: ../../xffm/response/passwdresponse.hh:559
+msgid "Ok"
+msgstr "確定"
+
+#: ../../xffm/response/commandprogressresponse.hh:32
+msgid "Items:"
+msgstr "項目(E):"
+
+#: ../../xffm/response/passwdresponse.hh:21
+msgid "Enter password"
+msgstr "輸入密碼"
+
+#. gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+#: ../../xffm/response/passwdresponse.hh:125
+#, fuzzy
+msgid "User Input"
+msgstr "滑鼠輸入"
+
+#: ../../xffm/response/passwdresponse.hh:142
+#, fuzzy
+msgid "Response Requested"
+msgstr "反應輸出"
+
+#: ../../xffm/response/passwdresponse.hh:264
+msgid "Preparing"
+msgstr "正在準備"
+
+#: ../../xffm/response/passwdresponse.hh:352
+msgid "sudo"
+msgstr "sudo"
+
+#: ../../xffm/response/passwdresponse.hh:354
+msgid "Command:"
+msgstr "指令："
+
+#: ../../xffm/response/passwdresponse.hh:357
+msgid "Permission denied"
+msgstr "許可被拒絕"
+
+#: ../../xffm/response/passwdresponse.hh:358
+msgid "Try to approach a problem from different angles."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:359
+#, fuzzy
+msgid "Do you want to retry?"
+msgstr "你要撥號連線嗎？"
+
+#: ../../xffm/response/passwdresponse.hh:360
+#, fuzzy
+msgid "Alternate:"
+msgstr "備選"
+
+#: ../../xffm/response/passwdresponse.hh:365
+msgid "No"
+msgstr "否"
+
+#: ../../xffm/response/passwdresponse.hh:401
+msgid "Install"
+msgstr "安裝"
+
+#: ../../xffm/response/passwdresponse.hh:402
+#, fuzzy, c-format
+msgid "%s does not exist."
+msgstr "檔案 %s 不存在。"
+
+#: ../../xffm/response/passwdresponse.hh:467
+#, fuzzy
+msgid "Blowfish"
+msgstr "魚"
+
+#: ../../xffm/response/passwdresponse.hh:468
+#, fuzzy
+msgid "Encryption Key Approval"
+msgstr "加密面板程式"
+
+#: ../../xffm/response/passwdresponse.hh:502
+msgid "-o     print output to standard out. Implies -r."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:506
+msgid "-c     DO NOT compress files before encryption."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:510
+msgid "-r     DO NOT remove input files after processing"
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:517
+#, fuzzy
+msgid "Encryption key: "
+msgstr "加密："
+
+#: ../../xffm/response/passwdresponse.hh:529
+msgid "Confirm:"
+msgstr "確認："
+
+#: ../../xffm/response/passwdresponse.hh:542
+msgid "Sorry, passwords do not match"
+msgstr "對不起，密碼不符"
+
+#: ../../xffm/response/passwdresponse.hh:550
+#, fuzzy
+msgid "Minimum length:"
+msgstr "最大長度"
+
+#: ../../xffm/response/timeoutresponse.hh:56
+msgid "Dismiss"
+msgstr "解除(D)"
+
+#: ../../xffm/response/commandresponse.hh:23
+msgid "Running"
+msgstr "運作中"
+
+#. auto text = g_strdup_printf("%s (pid: %d)",
+#. _("Waiting for operation to finish..."),
+#. Tubo<Type>::getChild (pid));
+#: ../../xffm/response/commandresponse.hh:28
+#, fuzzy
+msgid "Waiting for operation to finish..."
+msgstr "等待小企鵝畫家結束……"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Documents"
+msgstr "文件(D)"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Downloads"
+msgstr "下載"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Music"
+msgstr "音樂"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Pictures"
+msgstr "圖片"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Templates"
+msgstr "樣板"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Videos"
+msgstr "視像"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Desktop"
+msgstr "桌面(K)"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Bookmarks"
+msgstr "書籤(B)"
+
+#: ../../xffm/fm/local/icons.hh:259 ../../xffm/fm/local/rm.hh:181
+msgid "Trash"
+msgstr "垃圾桶"
+
+#: ../../xffm/fm/local/popup.hh:60
+msgid "New"
+msgstr "新增(N)"
+
+#. deprecated {N_("Open in New Tab"), NULL, NULL, NULL},
+#. deprecated {N_("Open in New Window"), NULL, NULL, NULL},
+#. common buttons /(also an iconsize +/- button)
+#: ../../xffm/fm/local/popup.hh:64 ../../xffm/fm/local/popup.hh:104
+#: ../../xffm/common/gtk.hh:74
+msgid "Copy"
+msgstr "複製(C)"
+
+#: ../../xffm/fm/local/popup.hh:65 ../../xffm/fm/local/popup.hh:105
+#: ../../xffm/common/gtk.hh:73
+msgid "Cut"
+msgstr "剪下(U)"
+
+#: ../../xffm/fm/local/popup.hh:66 ../../xffm/fm/local/popup.hh:106
+#: ../../xffm/common/gtk.hh:66
+msgid "Paste"
+msgstr "貼上(P)"
+
+#. **************
+#: ../../xffm/fm/local/popup.hh:67 ../../xffm/fm/local/popup.hh:107
+#: ../../xffm/fm/local/rm.hh:174 ../../xffm/common/gtk.hh:75
+msgid "Delete"
+msgstr "刪除 (D)"
+
+#. {N_("About"), NULL, (void *) menu},
+#.
+#. only for listview: {N_("Sort by size"), NULL, (void *) menu},
+#. only for listview: {N_("Sort by date"), NULL, (void *) menu},
+#: ../../xffm/fm/local/popup.hh:73
+msgid "Select All"
+msgstr "全選"
+
+#: ../../xffm/fm/local/popup.hh:74 ../../xffm/fm/local/popup.hh:559
+#, fuzzy
+msgid "Match regular expression"
+msgstr "以正規表示式比對(R)"
+
+#: ../../xffm/fm/local/popup.hh:75 ../../xffm/fm/root/view.hh:58
+#: ../../xffm/fm/fstab/popup.hh:21
+msgid "View as list"
+msgstr "以清單方式顯示"
+
+#: ../../xffm/fm/local/popup.hh:77
+msgid "Show hidden files"
+msgstr "顯示隱藏檔案"
+
+#: ../../xffm/fm/local/popup.hh:79
+#, fuzzy
+msgid "Show Backup Files"
+msgstr "備份檔"
+
+#: ../../xffm/fm/local/popup.hh:81
+#, fuzzy
+msgid "Sort data in descending order"
+msgstr "以遞減順序排序"
+
+#: ../../xffm/fm/local/popup.hh:93 ../../xffm/fm/local/popup.hh:119
+#: ../../xffm/fm/local/popup.hh:1006 ../../xffm/fm/local/popup.hh:1013
+#: ../../xffm/fm/local/popup.hh:1022 ../../xffm/fm/local/popup.hh:1029
+#: ../../xffm/common/gtk.hh:72
+msgid "Open with"
+msgstr "開啟以"
+
+#: ../../xffm/fm/local/popup.hh:94 ../../xffm/fm/local/popup.hh:846
+#, fuzzy
+msgid "Run Executable..."
+msgstr "載入可執行檔(E)..."
+
+#: ../../xffm/fm/local/popup.hh:95
+msgid "Extract files from the archive"
+msgstr "從壓縮檔中解開檔案"
+
+#. g_hash_table_insert(iconname_hash, "bcrypt", (void *)"emblem-keyhole");
+#: ../../xffm/fm/local/popup.hh:96 ../../xffm/fm/root/view.hh:73
+#: ../../xffm/fm/fstab/popup.hh:20 ../../xffm/fm/dialog/notebook.hh:52
+#: ../../xffm/common/gtk.hh:78
+msgid "Open in New Tab"
+msgstr "在新分頁中開啟 (O)"
+
+#. File chooser
+#: ../../xffm/fm/local/popup.hh:97 ../../xffm/fm/local/popup.hh:706
+msgid "Create a compressed archive with the selected objects"
+msgstr "以選取的物件建立一個新的壓縮檔"
+
+#: ../../xffm/fm/local/popup.hh:98 ../../xffm/fm/fstab/popup.hh:37
+msgid "Mount the volume associated with this folder"
+msgstr "掛載與這個資料夾相關聯的儲存區"
+
+#: ../../xffm/fm/local/popup.hh:99 ../../xffm/fm/fstab/popup.hh:38
+msgid "Unmount the volume associated with this folder"
+msgstr "卸載與這個資料夾相關聯的儲存區"
+
+#: ../../xffm/fm/local/popup.hh:100 ../../xffm/common/gtk.hh:67
+msgid "Add bookmark"
+msgstr "加入書籤"
+
+#: ../../xffm/fm/local/popup.hh:101 ../../xffm/fm/root/view.hh:74
+#: ../../xffm/common/gtk.hh:68
+msgid "Remove bookmark"
+msgstr "移除書籤"
+
+#: ../../xffm/fm/local/popup.hh:108 ../../xffm/fm/local/popup.hh:961
+msgid "Rename"
+msgstr "重新命名"
+
+#: ../../xffm/fm/local/popup.hh:109 ../../xffm/fm/local/popup.hh:947
+msgid "Duplicate"
+msgstr "製作複本(D)"
+
+#: ../../xffm/fm/local/popup.hh:110 ../../xffm/fm/local/popup.hh:933
+msgid "Link"
+msgstr "鏈結"
+
+#: ../../xffm/fm/local/popup.hh:111
+msgid "Properties"
+msgstr "屬性"
+
+#: ../../xffm/fm/local/popup.hh:414
+msgid "Files:"
+msgstr "檔案(F):"
+
+#: ../../xffm/fm/local/popup.hh:417 ../../xffm/fm/local/rm.hh:61
+#, fuzzy
+msgid "Multiple selections"
+msgstr "已設定多個樂庫位置"
+
+#: ../../xffm/fm/local/popup.hh:557
+#, fuzzy
+msgid "Select items"
+msgstr "已選項目(S):"
+
+#: ../../xffm/fm/local/popup.hh:575
+#, fuzzy
+msgid "Regular Expression syntax is incorrect"
+msgstr "正規表示式是空的！"
+
+#: ../../xffm/fm/local/popup.hh:592
+msgid "No selection"
+msgstr "未選擇檔案"
+
+#: ../../xffm/fm/local/popup.hh:592
+msgid "No matches."
+msgstr "無符合結果。"
+
+#. entryResponse->setCheckButton(_("Run in Terminal"));
+#. entryResponse->setCheckButton(Mime<Type>::runInTerminal(path));
+#: ../../xffm/fm/local/popup.hh:721 ../../xffm/fm/page/pathbar.hh:313
+#, fuzzy
+msgid "Specify Output Directory..."
+msgstr "選擇輸出目錄"
+
+#: ../../xffm/fm/local/popup.hh:799
+#, fuzzy
+msgid "Create new..."
+msgstr "建立新標籤..."
+
+#: ../../xffm/fm/local/popup.hh:806 ../../xffm/fm/local/popup.hh:886
+msgid "New Name:"
+msgstr "新的名稱："
+
+#: ../../xffm/fm/local/popup.hh:815
+msgid "No name"
+msgstr "沒有名稱"
+
+#: ../../xffm/fm/local/popup.hh:828
+#, c-format
+msgid "Another file with the same name already exists in “%s”."
+msgstr "同樣名稱的另一個檔案已經存在於「%s」中。"
+
+#: ../../xffm/fm/local/popup.hh:850 ../../xffm/fm/local/popup.hh:1010
+#: ../../xffm/fm/local/popup.hh:1026 ../../xffm/common/util.hh:1248
+msgid "Run in Terminal"
+msgstr "在終端機內執行"
+
+#: ../../xffm/fm/local/popup.hh:853
+#, fuzzy
+msgid "Arguments for the Command"
+msgstr "指令的參數"
+
+#: ../../xffm/fm/local/popup.hh:1047 ../../xffm/fm/local/view.hh:141
+msgid "Invalid entry"
+msgstr "無效的項目"
+
+#: ../../xffm/fm/local/properties.hh:235
+msgid "Properties and Attributes"
+msgstr "內容與屬性"
+
+#: ../../xffm/fm/local/properties.hh:264
+msgid "File Mode:"
+msgstr "檔案模式:"
+
+#: ../../xffm/fm/local/properties.hh:290
+msgid "File:"
+msgstr "檔案："
+
+#. Add file info stuff
+#. set info stuff data according to combo box
+#. add signal handler to changed signal for combo box
+#. Add process buttons
+#.
+#: ../../xffm/fm/local/properties.hh:302
+msgid "Apply changes"
+msgstr "套用更改(A)"
+
+#: ../../xffm/fm/local/properties.hh:462
+#, fuzzy
+msgid "Successfully moved to trash."
+msgstr "成功移除 %s\n"
+
+#: ../../xffm/fm/local/properties.hh:463
+msgid "Source:"
+msgstr "來源："
+
+#: ../../xffm/fm/local/rm.hh:59
+#, c-format
+msgid "Delete %s"
+msgstr "刪除(D) %s"
+
+#: ../../xffm/fm/local/rm.hh:61
+msgid "Warning: "
+msgstr "警告："
+
+#. gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
+#. title
+#: ../../xffm/fm/local/rm.hh:90
+msgid "Remove"
+msgstr "Remove"
+
+#: ../../xffm/fm/local/rm.hh:140
+#, fuzzy
+msgid "Apply to all"
+msgstr "適用於"
+
+#. **************
+#. This is now available to BSD with rm -P option
+#: ../../xffm/fm/local/rm.hh:163 ../../xffm/common/gtk.hh:76
+msgid "Shred"
+msgstr ""
+
+#. We do not count "../"
+#: ../../xffm/fm/local/view.hh:48 ../../xffm/fm/base/monitor.hh:28
+#, fuzzy, c-format
+msgid "Files: %s"
+msgstr "檔案： %s"
+
+#: ../../xffm/fm/root/model.hh:78
+#, fuzzy
+msgid "Root Directory"
+msgstr "Name=根目錄"
+
+#: ../../xffm/fm/root/model.hh:94
+#, fuzzy
+msgid "This is the root of the filesystem"
+msgstr "Comment=這是檔案系統的根目錄"
+
+#: ../../xffm/fm/root/model.hh:105
+msgid "Home Directory"
+msgstr "家目錄"
+
+#: ../../xffm/fm/root/model.hh:132
+#, fuzzy
+msgid "Trash bin"
+msgstr "放進回收筒於"
+
+#: ../../xffm/fm/root/model.hh:162 ../../xffm/fm/fstab/popup.hh:29
+msgid "Disk Image Mounter"
+msgstr "磁碟映像檔掛載器"
+
+#: ../../xffm/fm/root/model.hh:169 ../../xffm/fm/root/model.hh:185
+msgid "Mount local disks and devices"
+msgstr "掛載本機磁碟及裝置"
+
+#: ../../xffm/fm/root/model.hh:170 ../../xffm/fm/fstab/popup.hh:25
+#: ../../xffm/fm/fstab/view.hh:429
+msgid "eCryptfs Volume"
+msgstr "eCryptfs 檔案系統"
+
+#: ../../xffm/fm/root/model.hh:171 ../../xffm/fm/fstab/popup.hh:24
+msgid "SSHFS Remote Synchronization Folder"
+msgstr "SSHFS遠端同步資料夾"
+
+#: ../../xffm/fm/root/model.hh:172 ../../xffm/fm/fstab/popup.hh:23
+#: ../../xffm/fm/fstab/view.hh:377
+msgid "NFS Network Volume"
+msgstr "NFS 網絡檔案系統"
+
+#: ../../xffm/fm/root/model.hh:173 ../../xffm/fm/fstab/popup.hh:26
+#: ../../xffm/fm/fstab/view.hh:455
+msgid "CIFS Volume"
+msgstr "CIFS 檔案系統"
+
+#: ../../xffm/fm/root/model.hh:195
+#, fuzzy
+msgid "Software Updater"
+msgstr "軟件更新"
+
+#: ../../xffm/fm/root/model.hh:218 ../../xffm/fm/root/model.hh:230
+msgid "Add or remove software installed on the system"
+msgstr "加入或移除系統上安裝的軟件"
+
+#: ../../xffm/fm/root/model.hh:271
+#, fuzzy
+msgid "Go to bookmarked location"
+msgstr "移至下一個書籤位置。"
+
+#. {N_("Add bookmark"), (void *)BasePopUp<Type>::noop, NULL, NULL},
+#: ../../xffm/fm/root/view.hh:61
+msgid "Empty trash"
+msgstr "清空垃圾桶(E)"
+
+#. File chooser
+#: ../../xffm/fm/fstab/popup.hh:121
+#, fuzzy
+msgid "Mount Device"
+msgstr "輸入裝置"
+
+#: ../../xffm/fm/fstab/popup.hh:133
+msgid "Mount point:"
+msgstr "掛載點："
+
+#: ../../xffm/fm/fstab/view.hh:301
+#, fuzzy
+msgid "Mounted on:"
+msgstr "掛載於(M)"
+
+#: ../../xffm/fm/fstab/view.hh:302
+msgid "Mount on"
+msgstr "掛載於(M)"
+
+#: ../../xffm/fm/fstab/view.hh:310 ../../xffm/fm/fstab/view.hh:312
+msgid "Not mounted"
+msgstr "沒有掛載"
+
+#: ../../xffm/fm/fstab/view.hh:403
+#, fuzzy
+msgid "SFTP (via SSH)"
+msgstr "安全式 FTP (SSH)"
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, c-format
+msgid "Unmounting %s"
+msgstr "御載 %s 中"
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, fuzzy, c-format
+msgid "Mounting %s"
+msgstr "掛載 %s(M)"
+
+#: ../../xffm/fm/dialog/menupopover.hh:128
+msgid "Home"
+msgstr "主頁"
+
+#: ../../xffm/fm/dialog/menupopover.hh:129 ../../xffm/common/gtk.hh:64
+#, fuzzy
+msgid "Open terminal"
+msgstr "開啟終端機"
+
+#: ../../xffm/fm/dialog/menupopover.hh:130
+msgid "Open a New Window"
+msgstr "開啟新的視窗"
+
+#. {N_("Execute Shell Command"), (void *)MenuPopoverSignals<Type>::shell, (void *) menuButton_},
+#: ../../xffm/fm/dialog/menupopover.hh:132 ../../xffm/common/gtk.hh:69
+msgid "Search"
+msgstr "搜尋"
+
+#: ../../xffm/fm/dialog/menupopover.hh:133 ../../xffm/common/gtk.hh:71
+msgid "Exit"
+msgstr "結束(E)"
+
+#: ../../xffm/fm/dialog/dialog.hh:116
+msgid "Removed"
+msgstr "已移除"
+
+#: ../../xffm/fm/dialog/dialog.hh:132
+msgid "Detected device(s):"
+msgstr "偵測到的裝置:"
+
+#. Create the widgets
+#: ../../xffm/fm/page/vbuttonbox.hh:37 ../../xffm/common/gtk.hh:332
+msgid "Help"
+msgstr "求助(H)"
+
+#. File chooser
+#: ../../xffm/fm/page/pathbar.hh:306 ../../xffm/fm/page/pathbar.hh:308
+msgid "Go to"
+msgstr "移至(G)"
+
+#: ../../xffm/fm/page/pathbar.hh:331
+msgid "Not a directory"
+msgstr "不是一個目錄"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+#, fuzzy
+msgid "Renice Process"
+msgstr "重設程序 nice 值"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Suspend"
+msgstr "暫停"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Continue"
+msgstr "Continue"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Interrupt"
+msgstr "中斷"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Hangup"
+msgstr "掛斷(H)"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+#, fuzzy
+msgid "User 1 (USR1)"
+msgstr "用戶資料 (WHOIS)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+#, fuzzy
+msgid "User 2 (USR2)"
+msgstr "用戶資料 (WHOIS)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+#, fuzzy
+msgid "Terminate Task"
+msgstr "中止"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "Abort"
+msgstr "Abort"
+
+#: ../../xffm/fm/page/runbutton.hh:138
+msgid "Kill"
+msgstr "強行中止 (Kill)"
+
+#: ../../xffm/fm/page/runbutton.hh:139
+#, fuzzy
+msgid "Segmentation fault"
+msgstr "記憶體區段錯誤"
+
+#: ../../xffm/fm/page/runbutton.hh:217
+msgid "PID"
+msgstr "PID"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:37
+#, fuzzy
+msgid "Embedded Terminal"
+msgstr "Gnome 終端機"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:38
+#, fuzzy
+msgid "All items in the iconview."
+msgstr "選取本視窗中所有項目"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:39
+#, fuzzy
+msgid "Scripting"
+msgstr "Boo 指令稿"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:40
+#, fuzzy
+msgid "Clear Log"
+msgstr "清除清單"
+
+#. Status textview
+#: ../../xffm/fm/page/hbuttonbox.hh:42
+msgid "Terminal font"
+msgstr "終端機字型"
+
+#: ../../xffm/fm/treeview.hh:17
+msgid "Name"
+msgstr "名稱"
+
+#: ../../xffm/fm/treeview.hh:20
+msgid "Size"
+msgstr "大小"
+
+#: ../../xffm/fm/treeview.hh:21
+msgid "Date"
+msgstr "日期"
+
+#: ../../xffm/fm/treeview.hh:22
+#, fuzzy
+msgid "Mimetype"
+msgstr "Mime 類型"
+
+#: ../../xffm/fm/treeview.hh:24
+msgid "TYPE"
+msgstr "類型"
+
+#: ../../xffm/fm/base/signals.hh:642
+msgid "Directory does not exist."
+msgstr "目錄不存在。"
+
+#: ../../xffm/fm/base/signals.hh:644 ../../xffm/fm/base/signals.hh:646
+#, fuzzy
+msgid "Trash is empty"
+msgstr "手寫板電池已用盡"
+
+#: ../../xffm/common/settings.hh:27
+msgid "New File:"
+msgstr "新檔案："
+
+#: ../../xffm/common/gio.hh:235
+#, fuzzy
+msgid "Could not copy item:"
+msgstr "無法移除項目"
+
+#: ../../xffm/common/gio.hh:237
+#, fuzzy
+msgid "Could not move item:"
+msgstr "無法移除項目"
+
+#: ../../xffm/common/gio.hh:239
+#, fuzzy
+msgid "Create symbolic link"
+msgstr "取代符號連結(P)"
+
+#: ../../xffm/common/gio.hh:276
+#, fuzzy, c-format
+msgid ""
+"Could not delete:\n"
+"%s"
+msgstr "無法刪除“%s”。"
+
+#: ../../xffm/common/gio.hh:278
+#, c-format
+msgid "Could not move %s to trash"
+msgstr "無法將 %s 丟進回收筒"
+
+#: ../../xffm/common/clipboard.hh:23 ../../xffm/common/dnd.hh:40
+msgid "Copying files locally"
+msgstr "正在本地複製檔案"
+
+#: ../../xffm/common/clipboard.hh:30 ../../xffm/common/dnd.hh:34
+#, fuzzy
+msgid "Moving files"
+msgstr "正在移動檔案"
+
+#: ../../xffm/common/dnd.hh:46
+#, fuzzy
+msgid "Create Link"
+msgstr "建立於(R):"
+
+#: ../../xffm/common/util.hh:1200
+#, c-format
+msgid ""
+"Scriptfile \"%s\" is not executable. Please set the executable-attribute on "
+"that file."
+msgstr ""
+
+#: ../../xffm/common/util.hh:1202 ../../xffm/common/util.hh:1237
+#, c-format
+msgid "Open with %s"
+msgstr "以 %s 顯示"
+
+#: ../../xffm/common/util.hh:1202
+msgid "Text Editor"
+msgstr "文字編輯器"
+
+#: ../../xffm/common/util.hh:1239 ../../xffm/common/gtk.hh:65
+#, fuzzy
+msgid "Execute Shell Command"
+msgstr "執行 xchat 命令"
+
+#: ../../xffm/common/util.hh:1243
+msgid ""
+"Console: quickly run single commands -- write a command here and press enter."
+msgstr ""
+
+#: ../../xffm/common/gtk.hh:123
+msgid "New Tab"
+msgstr "新分頁"
+
+#: ../../xffm/common/gtk.hh:335
+msgid "OK"
+msgstr "確定"
+
+#: ../../xffm/common/run.hh:344
+msgid "error"
+msgstr "錯誤"
+
+#: ../../xffm/common/run.hh:348
+msgid "warning"
+msgstr "警告"
+
+#: ../../xffm/common/mime.hh:101 ../../xffm/common/mime.hh:143
+#, fuzzy
+msgid "No Read Permission"
+msgstr "沒有閱讀權限：%s"
+
+#: ../../xffm/common/preview.hh:593
+msgid "Empty file"
+msgstr "空白檔案"
+
+#: ../../xffm/common/preview.hh:648
+#, fuzzy, c-format
+msgid "Cannot read from %s"
+msgstr "不能從「%s」讀取"
+

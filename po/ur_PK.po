@@ -1,0 +1,803 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:45:23 CDT 2013 ---
+#
+# Muhammad Ali Makki <makki.ma@gmail.com>, 2008.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: http://bugs.xffm.org\n"
+"POT-Creation-Date: 2008-02-29 15:35+0000\n"
+"PO-Revision-Date: 2008-03-02 18:07+0500\n"
+"Last-Translator: Muhammad Ali Makki <makki.ma@gmail.com>\n"
+"Language-Team: Urdu <makki.ma@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: Urdu\n"
+"X-Poedit-Country: PAKISTAN\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Generator: KBabel 1.11.4\n"
+
+msgid "Load Options"
+msgstr "اختیارات لوڈ کریں"
+
+msgid "Create"
+msgstr "بنائیں"
+
+msgid "Create Archive"
+msgstr "محفوظہ بنائیں"
+
+msgid "Location"
+msgstr "مقام"
+
+msgid "Location:"
+msgstr "مقام:"
+
+msgid "Archive:"
+msgstr "محفوظہ:"
+
+msgid "<span weight=\"bold\" size=\"larger\">Password required</span>"
+msgstr "<span weight=\"bold\" size=\"larger\">پاس ورڈ مطلوب ہے</span>"
+
+msgid "Password:"
+msgstr "پاس ورڈ:"
+
+msgid "Delete"
+msgstr "حذف"
+
+msgid "All files"
+msgstr "تمام فائلیں"
+
+msgid "Files:"
+msgstr "فائلیں:"
+
+msgid "Selected files"
+msgstr "منتخب کردہ فائلیں"
+
+msgid "example: *.txt; *.doc"
+msgstr "مثال: *.txt; *.doc"
+
+msgid "Available application:"
+msgstr "دستیاب اطلاقیے:"
+
+msgid "Open Files"
+msgstr "فائلیں کھولیں"
+
+msgid "Recent applications:"
+msgstr "حالیہ اطلاقیے:"
+
+msgid "Application:"
+msgstr "اطلاقیہ:"
+
+msgid "Note: the password will be used to encrypt files you add to the current archive, and to decrypt files you extract from the current archive. When the archive is closed the password will be deleted."
+msgstr "نوٹ: پاس ورڈ حالیہ محفوظہ میں شامل کی گئی فائل کو انکرپٹ کرنے اور حالیہ محفوظہ سے فائلیں نکالنے پر انہیں ڈکرپٹ کرنے کے لیے ہے. جب محفوظہ بند ہوگی تو پاس ورڈ حذف کردیا جائے گا."
+
+msgid "Password"
+msgstr "پاس ورڈ"
+
+msgid "Select the files you want to update:"
+msgstr "فائل منتخب کریں جس کی آپ تجدید کرنا چاہتے ہیں:"
+
+msgid "The file has been modified with an external application. If you don't update the version in the archive, all of your changes will be lost."
+msgid_plural "There are %d files that have been modified with an external application. If you don't update the files in the archive, all of your changes will be lost."
+msgstr[0] "فائل میں کسی خارجی  اطلاقیے سے تبدیلی کی گئی ہے، اگر آپ محفوظہ میں موجود فائل کے ورژن کو اپڈیٹ نہیں کریں گے تو آپ کی تمام تبدیلیاں ضائع ہوجائیں گی."
+msgstr[1] "%d فائلوں میں کسی خارجی  اطلاقیے سے تبدیلی کی گئی ہے، اگر آپ محفوظہ میں موجود فائلوں کے ورژن کو اپڈیٹ نہیں کریں گے تو آپ کی تمام تبدیلیاں ضائع ہوجائیں گی."
+
+msgid "Update"
+msgstr "تجدید"
+
+msgid "Archive Manager"
+msgstr "محفوظہ منیجر"
+
+msgid "Create and modify an archive"
+msgstr "محفوظہ بنائیں اور تبدیل کریں"
+
+msgid "Extract Here"
+msgstr "یہیں نکالیں"
+
+msgid "Extract the selected archive in the current position"
+msgstr "منتخب کردہ محفوظہ اسی مقام پر نکالیں"
+
+msgid "Extract To..."
+msgstr "نکالیں تا..."
+
+msgid "Extract the selected archive"
+msgstr "منتخب کردہ محفوظہ نکالیں"
+
+msgid "Create Archive..."
+msgstr "محفوظہ بنائیں..."
+
+msgid "Create an archive with the selected objects"
+msgstr "منتخب عناصر سے محفوظہ بنائیں"
+
+msgid "Could not create the archive"
+msgstr "محفوظہ نہیں بنائی جاسکتی"
+
+msgid "You have to specify an archive name."
+msgstr "آپ کو محفوظہ کا نام متعین کرنا ہوگا."
+
+msgid "You don't have permission to create an archive in this folder"
+msgstr "آپ کے پاس اس فولڈر میں محفوظہ بنانے کا اجازہ نہیں ہے"
+
+msgid "Archive type not supported."
+msgstr "محفوظہ کی قسم کی معاونت نہیں ہے."
+
+msgid "The archive already exists.  Do you want to overwrite it?"
+msgstr "محفوظہ پہلے ہی موجود ہے. کیا آپ اس کے اوپر لکھنا چاہتے ہیں؟"
+
+msgid "Overwrite"
+msgstr "اوپر لکھیں"
+
+msgid "Could not delete the old archive."
+msgstr "پرانی محفوظہ حذف نہیں کی جاسکتی"
+
+msgid "New"
+msgstr "نیا"
+
+msgid "All archives"
+msgstr "تمام محفوظات"
+
+msgid "Archive type:"
+msgstr "محفوظہ قسم:"
+
+msgid "Automatic"
+msgstr "خودکار"
+
+msgid "Open"
+msgstr "کھولیں"
+
+msgid "Save"
+msgstr "محفوظ کریں"
+
+msgid "Last Output"
+msgstr "آخری ما حاصل"
+
+msgid "File Roller is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version."
+msgstr "فائل رولر ایک مفت سوفٹ ویئر ہے، آپ اسے فری سوفٹ ویئر فاونڈیشن کی طرف سے جاری کردہ گنو جنرل پبلک لائسنس ورژن 2 یا (اپنی مرضی سے) بعد کے کسی ورژن کی شرائط کے تحت تقسیم / یا تبدیل کرسکتے ہیں."
+
+msgid "File Roller is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details."
+msgstr "فائل رولر اس امید کے ساتھ تقسیم کیا جاتا ہے کہ یہ مفید اور کارآمد ثابت ہوگا تاہم کسی بھی وارنٹی کے بغیر؛ تجارت یا کسی مخصوص کام کے  قابل ہونے کی ایسی وارنٹی کے بھی بغیر جس کی طرف یہ دلالت کرتا ہو۔ مزید تفصیلات کے لیے گنو کا عمومی عوامی اجازہ GNU GPL دیکھیں۔"
+
+msgid "You should have received a copy of the GNU General Public License along with File Roller; if not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA"
+msgstr "فائل رولر کے ساتھ آب کو جنرل پبلک لائسنس کی ایک کاپی ضرور ملی ہوگی، اگر نہیں ملی تو اس پتہ پر لکھیے: Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA"
+
+msgid "Copyright © 2001-2007 Free Software Foundation, Inc."
+msgstr "کاپی رائٹ © 2001-2007 فری سوفٹ ویئر فاؤنڈیشن، Inc."
+
+msgid "An archive manager for GNOME."
+msgstr "محفوظہ منیجر برائے گنوم"
+
+msgid "translator-credits"
+msgstr ""
+"محمد علی مکی\n"
+"makki.ma@gmail.com\n"
+"اردو کوڈر لینکس فورم\n"
+"www.urducoder.com"
+
+msgid "Could not add the files to the archive"
+msgstr "محفوظہ میں فائلیں شامل نہیں کی جاسکتیں"
+
+msgid "You don't have the right permissions to read files from folder \"%s\""
+msgstr "آپ کے پاس فولڈر \"%s\" سے فائلیں پڑھنے کا اجازہ نہیں ہے"
+
+msgid "Add Files"
+msgstr "فائلیں شامل کریں"
+
+msgid "Add only if newer"
+msgstr "اگر نئی ہوں تو شامل کریں"
+
+msgid "Add a Folder"
+msgstr "فولڈر شامل کریں"
+
+msgid "Include subfolders"
+msgstr "بشمول ذیلی فولڈرز"
+
+msgid "Exclude folders that are symbolic links"
+msgstr "وہ فولڈر مستثنی کریں جو رمزی روابط ہیں"
+
+msgid "example: *.o; *.bak"
+msgstr "مثال: *.o; *.bak"
+
+msgid "Include files:"
+msgstr "شامل فائلیں:"
+
+msgid "Exclude files:"
+msgstr "مستثنی فائلیں:"
+
+msgid "Save Options"
+msgstr "اختیارات محفوظ کریں"
+
+msgid "Options Name:"
+msgstr "اختیارات نام:"
+
+msgid "Enter the password for the archive '%s'."
+msgstr "محفوظہ '%s' کے لیے پاس ورڈ لکھیں."
+
+msgid ""
+"The name \"%s\" is not valid because it cannot contain the characters: %s\n"
+"\n"
+"%s"
+msgstr ""
+"نام \"%s\" موزوں نہیں ہے کیونکہ اس میں یہ رموز نہیں ہونے چاہئیں: %s\n"
+"\n"
+"%s"
+
+msgid "Please use a different name."
+msgstr "برائے مہربانی مختلف نام استعمال کریں."
+
+msgid "You don't have the right permissions to create an archive in the destination folder."
+msgstr "آپ کے پاس سمت فولڈر میں محفوظہ بنانے کا درست اجازہ نہیں ہے."
+
+msgid ""
+"Destination folder \"%s\" does not exist.\n"
+"\n"
+"Do you want to create it?"
+msgstr ""
+"سمت فولڈر \"%s\" موجود نہیں ہے.\n"
+"\n"
+"کیا آپ اسے بنانا چاہتے ہیں؟"
+
+msgid "Create Folder"
+msgstr "فولڈر بنائیں"
+
+msgid "Could not create the destination folder: %s."
+msgstr "سمت فولڈر %s نہیں بنایا جاسکتا."
+
+msgid "Archive not created"
+msgstr "محفوظہ نہیں بنائی گئی"
+
+msgid "The archive is already present.  Do you want to overwrite it?"
+msgstr "محفوظہ پہلے ہی موجود ہے. کیا آپ اس کے اوپر لکھنا چاہتے ہیں؟"
+
+msgid "Extraction not performed"
+msgstr "نکالنا عمل میں نہیں لایا گیا"
+
+msgid "You don't have the right permissions to extract archives in the folder \"%s\""
+msgstr "آپ کے پاس محفوظات کو فولڈر \"%s\" میں نکالنے کے درست اجازے نہیں ہیں"
+
+msgid "Files"
+msgstr "فائلیں"
+
+msgid "Actions"
+msgstr "عمل"
+
+msgid "Re-create folders"
+msgstr "فولڈرز پھر بنائیں"
+
+msgid "Overwrite existing files"
+msgstr "سابقہ فائلوں پر لکھیں"
+
+msgid "Do not extract older files"
+msgstr "پرانی فائلیں مت نکالیں"
+
+msgid "Open destination folder after extraction"
+msgstr "نکالنے کے بعد سمت فولڈر کھولیں"
+
+msgid "Extract"
+msgstr "نکالیں"
+
+msgid "Path:"
+msgstr "پاتھ:"
+
+msgid "Name:"
+msgstr "نام:"
+
+msgid "%s Properties"
+msgstr "%s خصوصیات"
+
+msgid "Modified on:"
+msgstr "تبدیل شدہ:"
+
+msgid "Archive size:"
+msgstr "محفوظہ حجم:"
+
+msgid "Content size:"
+msgstr "مواد حجم:"
+
+msgid "Compression ratio:"
+msgstr "دباؤ کا ریشو:"
+
+msgid "Number of files:"
+msgstr "فائلوں کی تعداد:"
+
+msgid "Update the file \"%s\" in the archive \"%s\"?"
+msgstr "فائل \"%s\" کو محفوظہ \"%s\" میں تجدید کریں؟"
+
+msgid "Update the files in the archive \"%s\"?"
+msgstr "محفوظہ \"%s\" میں فائلوں کی تجدید کریں؟"
+
+msgid "Unknown type"
+msgstr "نامعلوم قسم"
+
+msgid "Symbolic link"
+msgstr "رمزی ربط"
+
+msgid "You don't have the right permissions."
+msgstr "آپ کے پاس درست اجازہ نہیں ہے."
+
+msgid "You can't add an archive to itself."
+msgstr "آپ محفوظہ کو اپنے آپ میں شامل نہیں کرسکتے."
+
+msgid "Adding file: "
+msgstr "فائلیں شامل کریں:"
+
+msgid "Removing file: "
+msgstr "فائل حذف کی جارہی ہے:"
+
+msgid "Deleting files from archive"
+msgstr "محفوظہ سے فائلیں حذف کی جارہی ہیں"
+
+msgid "Extracting file: "
+msgstr "فائل نکالی جارہی ہے:"
+
+msgid "Recompressing archive"
+msgstr "محفوظہ پھر دبائی جارہی ہے"
+
+msgid "Decompressing archive"
+msgstr "محفوظہ پھر نکالی جارہی ہے"
+
+msgid "Add"
+msgstr "شامل کریں"
+
+msgid "View File"
+msgstr "فائل دیکھیں"
+
+msgid "%d object (%s)"
+msgid_plural "%d objects (%s)"
+msgstr[0] "%d عنصر (%s)"
+msgstr[1] "%d عناصر (%s)"
+
+msgid "%d object selected (%s)"
+msgid_plural "%d objects selected (%s)"
+msgstr[0] "%d عنصر منتخب کردہ (%s)"
+msgstr[1] "%d عناصر منتخب کردہ (%s)"
+
+msgid "Folder"
+msgstr "فولڈر"
+
+msgid "[read only]"
+msgstr "[صرف پڑھنے کے لیے]"
+
+msgid "Creating archive"
+msgstr "محفوظہ بنائی جارہی ہے"
+
+msgid "Loading archive"
+msgstr "محفوظہ لوڈ کی جارہی ہے"
+
+msgid "Reading archive"
+msgstr "محفوظہ پڑھی جارہی ہے"
+
+msgid "Testing archive"
+msgstr "محفوظہ ٹیسٹ کی جارہی ہے"
+
+msgid "Getting the file list"
+msgstr "فائل فہرست حاصل کی جارہی ہے"
+
+msgid "Copying the file list"
+msgstr "فائل فہرست کاپی کی جارہی ہے"
+
+msgid "Adding files to archive"
+msgstr "محفوظہ میں فائلیں شامل کی جارہی ہیں"
+
+msgid "Extracting files from archive"
+msgstr "محفوظہ سے فائلیں نکالی جارہی ہیں"
+
+msgid "Saving archive"
+msgstr "محفوظہ محفوظ کی جارہی ہے"
+
+msgid "wait please..."
+msgstr "انتظار فرمائیں..."
+
+msgid "Could not display the folder \"%s\""
+msgstr "فولڈر \"%s\" نہیں دکھایا جاسکتا"
+
+msgid "An error occurred while extracting files."
+msgstr "فائلیں نکالتے وقت غلطی."
+
+msgid "Could not open \"%s\""
+msgstr "\"%s\" نہیں کھولی جاسکتی"
+
+msgid "An error occurred while loading the archive."
+msgstr "محفوظہ لوڈ کرنے کے دوران غلطی."
+
+msgid "An error occurred while deleting files from the archive."
+msgstr "محفوظہ سے فائلیں حذف کرنے کے دوران غلطی."
+
+msgid "An error occurred while adding files to the archive."
+msgstr "محفوظہ میں فائلیں شامل کرنے کے دوران غلطی."
+
+msgid "An error occurred while testing archive."
+msgstr "محفوظہ کو ٹیسٹ کرنے کے دوران غلطی."
+
+msgid "Command not found."
+msgstr "کمانڈ نہیں پائی گئی."
+
+msgid "Command exited abnormally."
+msgstr "کمانڈ غیر متوقع طور پر برخاست ہوگئی."
+
+msgid "Test Result"
+msgstr "ٹیسٹ کا نتیجہ"
+
+msgid "Could not perform the operation"
+msgstr "عمل ادا نہیں کیا جاسکتا"
+
+msgid "Do you want to add this file to the current archive or open it as a new archive?"
+msgstr "کیا آپ یہ فائل حالیہ محفوظہ میں شامل کرنا چاہتے ہیں یا اسے بطور نیا محفوظہ کھولنا چاہتے ہیں؟"
+
+msgid "Do you want to create a new archive with these files?"
+msgstr "کیا آپ ان فائلوں سے محفوظہ بنانا چاہتے ہیں؟"
+
+msgid "Folders"
+msgstr "فولڈرز"
+
+msgid "Size"
+msgstr "حجم"
+
+msgid "Type"
+msgstr "قسم"
+
+msgid "Date Modified"
+msgstr "تاریخِ تبدیلی"
+
+msgid "Name"
+msgstr "نام"
+
+msgid "Go to the previous visited location"
+msgstr "سابقہ دیکھے گئے مقام پر جائیں"
+
+msgid "Go to the next visited location"
+msgstr "اگلے دیکھے گئے مقام پر جائیں"
+
+msgid "Go up one level"
+msgstr "ایک درجہ اوپر جائیں"
+
+msgid "Go to the home location"
+msgstr "مرکزی مقام پر جائیں"
+
+msgid "Find:"
+msgstr "تلاش:"
+
+msgid "Close the folders pane"
+msgstr "بغلی پٹی بند کریں"
+
+msgid "Open archive"
+msgstr "محفوظہ کھولیں"
+
+msgid "Open a recently used archive"
+msgstr "حالیہ استعمال شدہ محفوظہ کھولیں"
+
+msgid "Could not save the archive \"%s\""
+msgstr "محفوظہ \"%s\" محفوظ نہیں کی جاسکتی"
+
+msgid "The new name is void."
+msgstr "نیا نام خالی ہے."
+
+msgid "The new name is equal to the old one."
+msgstr "نیا نام پرانے سے مشابہ ہے."
+
+msgid ""
+"A folder named \"%s\" already exists.\n"
+"\n"
+"%s"
+msgstr ""
+"فولڈر بنام \"%s\" پہلے ہی موجود ہے.\n"
+"\n"
+"%s"
+
+msgid ""
+"A file named \"%s\" already exists.\n"
+"\n"
+"%s"
+msgstr ""
+"فائل بنام \"%s\" پہلے ہی موجود ہے.\n"
+"\n"
+"%s"
+
+msgid "Rename"
+msgstr "نام بدلیں"
+
+msgid "New folder name"
+msgstr "فولڈر کا نیا نام"
+
+msgid "New file name"
+msgstr "فائل کا نیا نام"
+
+msgid "Could not rename the folder"
+msgstr "فولڈر کا نام نہیں بدلا جاسکتا"
+
+msgid "Could not rename the file"
+msgstr "فائل کا نام نہیں بدلا جاسکتا"
+
+msgid "Paste Selection"
+msgstr "انتخاب پیسٹ کریں"
+
+msgid "Destination folder"
+msgstr "سمت فولڈر"
+
+msgid "Add files to an archive"
+msgstr "محفوظہ میں فائلیں شامل کریں"
+
+msgid "Extract archive"
+msgstr "محفوظہ نکالیں (کھولی)"
+
+msgid "%d %B %Y, %H:%M"
+msgstr "%d %B %Y, %H:%M"
+
+msgid "Command Line Output"
+msgstr "کمانڈ لائن ما حاصل"
+
+msgid "Could not display help"
+msgstr "ہدایات نہیں دکھائی جاسکتی"
+
+msgid "Ace (.ace)"
+msgstr "Ace (.ace)"
+
+msgid "Ar (.ar)"
+msgstr "Ar (.ar)"
+
+msgid "Arj (.arj)"
+msgstr "Arj (.arj)"
+
+msgid "Ear (.ear)"
+msgstr "Ear (.ear)"
+
+msgid "Self-extracting zip (.exe)"
+msgstr "خوکار کھلنے والا zip محفوظہ (exe.)"
+
+msgid "Jar (.jar)"
+msgstr "Jar (.jar)"
+
+msgid "Lha (.lzh)"
+msgstr "Lha (.lzh)"
+
+msgid "Rar (.rar)"
+msgstr "Rar (.rar)"
+
+msgid "Tar uncompressed (.tar)"
+msgstr "Tar نکالی ہوئی (.tar)"
+
+msgid "Tar compressed with bzip (.tar.bz)"
+msgstr "Tar دبا ہوا بمع bzip (.tar.bz)"
+
+msgid "Tar compressed with bzip2 (.tar.bz2)"
+msgstr "Tar دبا ہوا بمع bzip2 (.tar.bz2)"
+
+msgid "Tar compressed with gzip (.tar.gz)"
+msgstr "Tar دبا ہوا بمع gzip (.tar.gz)"
+
+msgid "Tar compressed with lzma (.tar.lzma)"
+msgstr "Tar دبا ہوا بمع lzma (.tar.lzma)"
+
+msgid "Tar compressed with lzop (.tar.lzo)"
+msgstr "Tar دبا ہوا بمع lzop (.tar.lzo)"
+
+msgid "Tar compressed with compress (.tar.Z)"
+msgstr "Tar دبا ہوا بمع دباؤ (.tar.Z)"
+
+msgid "War (.war)"
+msgstr "War (.war)"
+
+msgid "Zip (.zip)"
+msgstr "Zip (.zip)"
+
+msgid "Zoo (.zoo)"
+msgstr "Zoo (.zoo)"
+
+msgid "7-Zip (.7z)"
+msgstr "7-Zip (.7z)"
+
+msgid "Add files to the specified archive and quit the program"
+msgstr "معین کردہ محفوظہ میں فائلیں شامل کرکے پروگرام بند کریں"
+
+msgid "ARCHIVE"
+msgstr "محفوظہ"
+
+msgid "Add files asking the name of the archive and quit the program"
+msgstr "محفوظہ کا نام پوچھتے ہوئے فائلیں شامل کریں اور پروگرام برخاست کریں"
+
+msgid "Extract archives to the specified folder and quit the program"
+msgstr "محفوظہ متعین کردہ فولڈر میں نکالیں اور پروگرام برخاست کریں"
+
+msgid "FOLDER"
+msgstr "فولڈر"
+
+msgid "Extract archives asking the destination folder and quit the program"
+msgstr "سمت فولڈر کا پوچھتے ہوئے محفوظہ نکالیں اور پروگرام برخاست کریں"
+
+msgid "Extract archives using the archive name as destination folder and quit the program"
+msgstr "محفوظہ کا نام بطور سمت فولڈر استعمال کرتے ہوئے محفوظہ نکالیں اور پروگرام برخاست کریں"
+
+msgid "Default folder to use for the '--add' and '--extract' commands"
+msgstr "طے شدہ فولڈر برائے '--add' اور '--extract' کمانڈز کے استعمال کے لیے"
+
+msgid "Create destination folder without asking confirmation"
+msgstr "تصدیق کا پوچھے بغیر سمت فولڈر بنائیں"
+
+msgid "- Create and modify an archive"
+msgstr "- محفوظہ بنائیں اور مدون کریں"
+
+msgid "File Roller"
+msgstr "فائل رولر"
+
+msgid "Archive"
+msgstr "محفوظہ"
+
+msgid "Edit"
+msgstr "تدوین"
+
+msgid "View"
+msgstr "منظر"
+
+msgid "Help"
+msgstr "ہدایات"
+
+msgid "Arrange Files"
+msgstr "فائلیں مرتب کریں"
+
+msgid "Open Recent"
+msgstr "حالیہ کھولیں"
+
+msgid "Information about the program"
+msgstr "پروگرام کے بارے میں معلومات"
+
+msgid "Add Files..."
+msgstr "فائلیں شامل کریں..."
+
+msgid "Add files to the archive"
+msgstr "محفوظہ میں فائلیں شامل کریں"
+
+msgid "Add a Folder..."
+msgstr "فولڈر شامل کریں..."
+
+msgid "Add a folder to the archive"
+msgstr "محفوظہ میں فولڈر شامل کریں"
+
+msgid "Add Folder"
+msgstr "فولڈر شامل کریں"
+
+msgid "Close the current archive"
+msgstr "حالیہ محفوظہ بند کریں"
+
+msgid "Contents"
+msgstr "ہدایات کے موضوعات"
+
+msgid "Display the File Roller Manual"
+msgstr "فائل رولر کی ہدایات کھولیں"
+
+msgid "Copy the selection"
+msgstr "انتخاب کاپی کریں"
+
+msgid "Cut the selection"
+msgstr "انتخاب کٹ کریں"
+
+msgid "Paste the clipboard"
+msgstr "کلپ بورڈ پیسٹ کریں"
+
+msgid "Rename..."
+msgstr "نام بدلیں..."
+
+msgid "Rename the selection"
+msgstr "انتخاب کا نام بدلیں"
+
+msgid "Delete the selection from the archive"
+msgstr "انتخاب محفوظہ سے حذف کریں"
+
+msgid "Deselect All"
+msgstr "نا منتخب تمام"
+
+msgid "Deselect all files"
+msgstr "تمام فائلیں نا منتخب کریں"
+
+msgid "Extract..."
+msgstr "نکالیں..."
+
+msgid "Extract files from the archive"
+msgstr "محفوظہ سے فائلیں نکالیں"
+
+msgid "View the output produced by the last executed command"
+msgstr "آخری چلائی گئی کمانڈ کا ما حاصل دیکھیں"
+
+msgid "Create a new archive"
+msgstr "نیا محفوظہ بنائیں"
+
+msgid "Open With..."
+msgstr "کھولیں بذریعہ..."
+
+msgid "Open selected files with an application"
+msgstr "منتخب فائلیں کسی اطلاقیہ سے کھولیں"
+
+msgid "Password..."
+msgstr "پاس ورڈ..."
+
+msgid "Specify a password for this archive"
+msgstr "اس محفوظہ کے لیے پاس ورڈ متعین کریں"
+
+msgid "Show archive properties"
+msgstr "محفوظہ کی خصوصیات دیکھیں"
+
+msgid "Reload current archive"
+msgstr "حالیہ محفوظہ پھر لوڈ کریں"
+
+msgid "Save the current archive with a different name"
+msgstr "حالیہ محفوظہ دوسرے نام سے محفوظ کریں"
+
+msgid "Select All"
+msgstr "منتخب تمام"
+
+msgid "Select all files"
+msgstr "تمام فائلیں منتخب کریں"
+
+msgid "Stop current operation"
+msgstr "حالیہ عمل کاری روکیں"
+
+msgid "Test Integrity"
+msgstr "درستگی ٹیسٹ کریں"
+
+msgid "Test whether the archive contains errors"
+msgstr "دیکھیں کہ کیا محفوظہ میں کوئی غلطیاں تو نہیں"
+
+msgid "View the selected file"
+msgstr "منتخب فائل دیکھیں"
+
+msgid "Open the selected folder"
+msgstr "منتخب کردہ فولڈر کھولیں"
+
+msgid "Toolbar"
+msgstr "اوزار پٹی"
+
+msgid "View the main toolbar"
+msgstr "مین اوزار پٹی دیکھیں"
+
+msgid "Statusbar"
+msgstr "حالت پٹی"
+
+msgid "View the statusbar"
+msgstr "حالت پٹی دیکھیں"
+
+msgid "Reversed Order"
+msgstr "عکسی ترتیب"
+
+msgid "Reverse the list order"
+msgstr "فہرست کی ترتیب عکسی کریں"
+
+msgid "View the folders pane"
+msgstr "بغلی پٹی دیکھیں"
+
+msgid "View All Files"
+msgstr "تمام فائلیں دیکھیں"
+
+msgid "View as a Folder"
+msgstr "دکھائیں بطور فولڈر"
+
+msgid "by Name"
+msgstr "نام سے"
+
+msgid "Sort file list by name"
+msgstr "فائلیں نام کے حساب سے ترتیب دیں"
+
+msgid "by Size"
+msgstr "حجم سے"
+
+msgid "Sort file list by file size"
+msgstr "فائیں حجم کے حساب سے ترتیب دیں"
+
+msgid "by Type"
+msgstr "قسم سے"
+
+msgid "Sort file list by type"
+msgstr "فائلیں قسم کے حساب سے ترتیب دیں"
+
+msgid "by Date modified"
+msgstr "تاریخِ تبدیلی سے"
+
+msgid "Sort file list by modification time"
+msgstr "فائلیں تاریخِ تبدیلی سے ترتیب دیں"
+
+msgid "by Location"
+msgstr "مقام سے"
+
+

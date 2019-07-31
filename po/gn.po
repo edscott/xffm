@@ -1,0 +1,118 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:41:31 CDT 2013 ---
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: http://bugs.xffm.org\n"
+"POT-Creation-Date: 2005-11-01 21:12+0100\n"
+"PO-Revision-Date: 2006-04-25 10:14-0300\n"
+"Last-Translator: Boca <boca@riseup.net>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Accessibility"
+msgstr "Omboparaa Regua"
+
+msgid "Accessibility Settings"
+msgstr "Omboporaa Rerowa Rowaa"
+
+msgid "Accessories"
+msgstr "Nhamba'eapoa Pygua"
+
+msgid "Desktop accessories"
+msgstr "Nhamba'eapoa Regua"
+
+msgid "Applications"
+msgstr "Enhepynru Apy"
+
+msgid "Desktop"
+msgstr "Nhamba'eapoa"
+
+msgid "Personal preferences and administration settings"
+msgstr "Mba'emon Nhamoia"
+
+msgid "Programming"
+msgstr "Jaja Poa"
+
+msgid "Tools for software development"
+msgstr "Jaja Poa"
+
+msgid "Education"
+msgstr "Arandu"
+
+msgid "Games"
+msgstr "Jaugaa"
+
+msgid "Games and amusements"
+msgstr "Jaugaty"
+
+msgid "Graphics"
+msgstr "Baemo Ra'angaa Jajapoa"
+
+msgid "Graphics applications"
+msgstr "Baemo Ra'angaa Jajapoa Oia"
+
+msgid "Internet"
+msgstr "Kya"
+
+msgid "Programs for Internet access such as web and email"
+msgstr "Kya Py Reike Awã Regua"
+
+msgid "Multimedia menu"
+msgstr "Baemo Jaexaa, Nhaendua"
+
+msgid "Sound  Video"
+msgstr "Jaexaa, Porai Nhaendua"
+
+msgid "Office"
+msgstr "Nhamboparaa Regua"
+
+msgid "Office Applications"
+msgstr "Jaekaa Omboparaa"
+
+msgid "Applications that did not fit in other categories"
+msgstr "Amboae Regua Jaekaa"
+
+msgid "Other"
+msgstr "Amboae"
+
+msgid "Personal preferences"
+msgstr "Rowapy Jarowa Rowaa"
+
+msgid "Preferences"
+msgstr "Maranmi Reipota"
+
+msgid "Accessibility related preferences"
+msgstr "Preferências relativas à acessibilidade"
+
+msgid "Personal preferences and settings"
+msgstr "Preferências e configurações pessoais"
+
+msgid "Administration"
+msgstr "Nhambotea Regua"
+
+msgid "Applications:"
+msgstr "Enhepynru Apy:"
+
+msgid "Menus:"
+msgstr "Eka Apy:"
+
+msgid "Name"
+msgstr "Derery"
+
+msgid "Show"
+msgstr "Oexaukaa"
+
+msgid "Menu file"
+msgstr "Oekaa Regua Omoin Porãa"
+
+msgid "MENUFILE"
+msgstr "OEKAA REGUA OMOIN PORÃA"
+
+

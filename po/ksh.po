@@ -1,0 +1,161 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:44:42 CDT 2013 ---
+#
+# Author@Betawiki: Purodha <>.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"PO-Revision-Date: 2008-08-22 11:58:31+0000\n"
+"Language-Team: Ripoarisch\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: MediaWiki 1.14alpha (r39820); Translate extension (9 (2008-08-20:1))\n"
+"X-Translation-Project: Betawiki at http://localhost\n"
+"X-Language-Code: ksh\n"
+"X-Message-Group: out-mobileassistant\n"
+
+msgid "Country"
+msgstr "Land"
+
+msgid "Provider"
+msgstr "Provider"
+
+msgid "Product"
+msgstr "Produk"
+
+msgid "Vendor"
+msgstr "Aanbeeder"
+
+msgid "Port"
+msgstr "Port (Pooz)"
+
+msgid "Baud Rate"
+msgstr "Baud-Raht"
+
+msgid "Built-in"
+msgstr "Ennjebout"
+
+msgid "Select the built-in device from the list"
+msgstr "Sök der en enjebout Jerät uß dä Liß uß"
+
+msgid "Make sure the device is not disabled by a manual switch or button on the side of the computer."
+msgstr "Beß sescher, dat dat Jerät nit övver ene Schallder odder Knopp aan de Sigg fun däm Kompjutor ußjeschalldt wode es."
+
+msgid "PC Card, PCMCIA, or ExpressCard"
+msgstr "PC Kaat, PCMCIA, udder ExpressCard"
+
+msgid "Select the correct device from the list"
+msgstr "Sök der et reschtijje Jerät uß dä Liß uß"
+
+msgid "Make sure the SIM card is in place"
+msgstr "Beß sescher, de SIM-Kaat es ennjelaat"
+
+msgid "USB"
+msgstr "USB"
+
+msgid "Select the USB device from the list"
+msgstr "Sök e USB-Jerät uß dä Liß uß"
+
+msgid "The device must be plugged in and must be switched on. Make sure that the mobile phone has no security lock active. Make sure the SIM card is in place"
+msgstr "Dat jerät moß enjeschalldt sin un et Kabel enjeshtëk. De SIM-Kaat moß dren sin. Beß sescher, dat dat Händi këj Shperr hät un der Sescherhëjtskood ald enjejovve es."
+
+msgid "Country:"
+msgstr "Land:"
+
+msgid "You can search the list by entering text on your keyboard"
+msgstr "Do kannß en dä Leß sööke, wann De op de Taßte jët entippß"
+
+msgid "The country code as defined by ISO 3166 standard"
+msgstr "Dä zwei-Boochstave-Kood för dat Land noh de Norrem ISO 3166"
+
+msgid "missing from libgweather"
+msgstr "dat fäählt en <code lang=\"en\">libgweather</code>"
+
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
+msgid "Serial cable"
+msgstr "Serijell Kabel"
+
+msgid "New Mobile Broadband Connection"
+msgstr "Neu mobil Bëjdband-Fobendong"
+
+msgid "This assistant will guide you through setting up a new mobile broadband connection. The connection can be established using a mobile phone or a dedicated data modem."
+msgstr "Dä Aßißtënt hee brengk Dish doh dorjen neu Mobil Brëjdband-Fobendong opzesäze. Di Fobendong kann med ennem Händi un med ennem extra Date-Modëm jemaat wäde."
+
+msgid "Welcome"
+msgstr "Wellkumme"
+
+msgid "How is your mobile phone or data modem connected to your computer?"
+msgstr "Wi es Ding Händi, odder Ding Moodäm, met Dingem Kompjutor fo'bonge?"
+
+msgid "note:"
+msgstr "Pass op:"
+
+msgid "Connection Method"
+msgstr "Fobendongsaat"
+
+msgid "Select the Bluetooth device from the list"
+msgstr "Sök der e Bluetooth Jerät uß dä Liß uß"
+
+msgid "Make sure your computer and mobile phone have Bluetooth enabled and your mobile phone is discoverable by other Bluetooth devices. Consult your mobile phone's instruction manual if necessary"
+msgstr "Beß sesher, dat Dinge Kompjutor un Ding Händi och Bluetooth enjeschalldt han, un dat Ding Händi fun ander Blootooth-Jeräte jefonge wääde kann. Wann nüdesch, do loor en de Bedeenongsaanlëijdong fun Dingem Händi noh, wi mer dat määt."
+
+msgid "Bluetooth address in form 01:23:45:67:89:AB"
+msgstr "en Bluetooth Adress en dä Aat wie 01:23:45:67:89:AB"
+
+msgid "Bluetooth address:"
+msgstr "Bluetooth Adress:"
+
+msgid "Specify Manually:"
+msgstr "Fun Hand aanjevve:"
+
+msgid "Select the serial port and baud rate from the list"
+msgstr "Sök Der ene serijelle Port (Pooz) un de Baud-Rate us dä Liß uß"
+
+msgid "The leftmost column indicates which subsystem the port belongs to. pnp usually means serial ports that are in the side of the computer, usb and pci are mobile phones, data modems, or serial port adapters.\n\nYou must make sure that the device is always found from the port you select here in order to use the configuration you are now creating"
+msgstr "\nDe Lenke Spalt zeich dat Ungersystem, wo ene Schnettstelle zo jehüürt.\npnp bedück nomaalerwieß ene serijelle Schnettstell aan de Sick fum Kompjutor, usb un pci sin för Händies, Date-Modems odde för Addaptere för serijell Schnettstelle.\n\nDo moß doför sorrje, dat dat Jerät emmer aan dä Schnettstell jefonge weede kann, die De hee enstells, domet De die Enstellunge bruche kanns, die De hee am maacher bes."
+
+msgid "Path:"
+msgstr "Pahd:"
+
+msgid "Baud:"
+msgstr "Baud:"
+
+msgid "Serial Cable"
+msgstr "Serijell Kabel"
+
+msgid "Select the country and the service provider"
+msgstr "Sök e Land unn enne Provider för dä Deens us"
+
+msgid "Service providers may have multiple subscription models. Make sure you select the correct one"
+msgstr "De Deens-Provider han föjewööhnlesh en Aanzahl Tarife. Beß sescher, dat De hee der reschtijje Tarif enjedraare häß."
+
+msgid "Click to show or hide a list of countries"
+msgstr "Aanklicke zeish un vershtish en Leß med Ländere"
+
+msgid "Service Provider"
+msgstr "Provider för dä Deens"
+
+msgid "Verify the information you have provided"
+msgstr "Donn de Enfommazjohne prööfe un beshtätejje, di De aanjejovve häß"
+
+msgid "If necessary go back and change the details. When you are done give the configuration a name which will be easy to identify later"
+msgstr "Wann nüdesch, jangk zerök un don de Ëjnzelhëjte ändere. Wann De domet fädesh beß, jiv dä Enshtellong enne schöne Name, domet de se shpääder widder fenge kannß."
+
+msgid "Connection method:"
+msgstr "Fobendongsaat:"
+
+msgid "Device:"
+msgstr "Jerät:"
+
+msgid "Service Provider:"
+msgstr "Land:"
+
+msgid "Name:"
+msgstr "Nam:"
+
+

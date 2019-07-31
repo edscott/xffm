@@ -1,0 +1,1482 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:42:33 CDT 2013 ---
+#
+# Teemu Rytilahti <teemu.rytilahti@d5k.net>, 2003-2012.
+# Tor Lillqvist <tml@iki.fi>, 1999-2000.
+# Jari Rahkonen <jari.rahkonen@pp1.inet.fi>, 2005.
+# Jyri-Petteri Paloposki <jyri-petteri.paloposki@iki.fi>, 2007.
+# Antti Sokero <antti.sokero@opinsys.fi>, 2007-2010.
+# Mikko Piippo <piippo@cc.helsinki.fi>, 2007-2008.
+# Pauli Virtanen <pauli.virtanen@hut.fi>, 2000-2005.
+# Juuso Helmijoki <juuso.helmijoki@nettihemi.net>, 2007-2008.
+# Jussi Aalto <jta_l10n@dnainternet.net>, 2010.
+# Sini Ruohomaa <sini.ruohomaa@iki.fi>, 2004-2005.
+# Ville Heikkilä <tehomail@gmail.com>, 2010.
+# Kalle Vahlman <zuh@iki.fi>, 2006-2007.
+# Jarmo Kielosto <jarmoki@kolumbus.fi>, 2000-2001.
+# Janne Peltonen <peltzi@gimp-suomi.org>, 2012.
+# Ilkka Tuohela <hile@iki.fi>, 2002-2009.
+# Lasse Liehu <lasse.liehu@gmail.com>, 2005-2013.
+# Copyright @ 2011, 2012 This_file_is_part_of_KDE <>.
+# Mika Laari <laari@iki.fi>, 2005.
+# Marko Grnroos <magi@iki.fi>, 2001.
+# Jiri Grönroos <jiri.gronroos@iki.fi>, 2009-2013.
+# Tapio Lehtonen <tale@debian.org>, 2004.
+# Mikko Ikola <ikola@iki.fi>, 2003-2006.
+# Kim Enkovaara <kim.enkovaara@iki.fi>, 2002-2010.
+# Antti Nykänen <troopperi_81@hotmail.com>.
+# Sami Gerdt <sgerdt@cs.joensuu.fi>, 2000.
+# Timo Jyrinki <timo.jyrinki@iki.fi>, 2007-2013.
+# Joona Kannisto <joona.kannisto@tut.fi>.
+# Miika Turkia <miika.turkia@gmail.com>, 2012.
+# Jyrki Kuoppala <jkp@kaapeli.fi>, 2001.
+# Felix Heinonen fheinonen@gmail.com>, 2006. <>.
+# Jaakko H Kyro <jkyro@pp.htv.fi>, 2004.
+# Elias Julkunen <vililikku@gmail.com>, 2006-2010.
+# Antti Kajander <antti.kajander@gmail.com>.
+# Jukka-Pekka Sillanpää <jpsill@utu.fi>, 2006.
+# Kimmo Merikivi <kimmo.merikivi@pp1.inet.fi>, 2004-2005.
+# Marko Gronroos <magi@iki.fi>, 2003-2005.
+# Flammie Pirinen <flammie@gnome.fi>, 2004-2007.
+# Copyright (C) 1999 Brian Masney <masneyb@gftp.org>.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2002-2012.
+# Jani Välimaa <jani.valimaa@gmail.com>, 2009.
+# Mari Saarinen <saarinen.mari@gmail.com>, 2006.
+# Michael Hintsala <mhintsa@fi.ibm.com>, 2001-2003.
+# Jesse Janhonen <jesse.janhonen@gmail.com>, 2010.
+# Johanna Makkonen <johanna.makkonen@iki.fi>, 2003.
+# Markku Borén <mobemu@gmail.com>, 2008.
+# Ville Hautamäki <villeh@cs.joensuu.fi>, 1998-2000.
+# Mikko Rauhala <mjr@iki.fi>, 1999-2000.
+# Teuvo Eloranta <teuvo@piketa.fi>, 2009.
+# Miika Laaksonen <miika@jeele.com>, 2010.
+# Jouni Rinne <l33tmmx@sci.fi>, 2005.
+# Maria Peltokangas <trithduras@msn.com>, 2006.
+# KDevelop, original translator Sami Kuhmonen <sami@iqs.fi>.
+# Jan Åkerblom <jou@sci.fi>, 2002-2004.
+# Mikael Kujanpää <mikael.kujanpaa@iki.fi>, 2007-2012.
+# Tommi Nieminen <translator@legisign.org>, 2009-2013.
+# Maria Peltokangas, Mari Saarinen <trithduras@msn.com, saarinen.mari@gmail.com>, 2006.
+# Hile Tuohela <hile@iki.fi>, 2002-2005.
+# Juha Kautto <juha@xfce.org>, 2004.
+# Jyri Palokangas <jmp@netti.fi>, 2006-2008.
+# Ilkka tuohela <hile@iki.fi>, 2005.
+# Mikko Paananen <mikko@ipi.fi>, 2004.
+# Juri Pakaste <juri@iki.fi>, 2002.
+# Anu McDougall <anu.mcdougall@ptiglobal.net>, 2009.
+# Tarmo Toikkanen <tarmo@iki.fi>, 2002.
+# Tapio Mattila <tapio.mattila@mbnet.fi>, 2003-2004.
+# Ilkka Pirskanen <ilkka.pirskanen@kolumbus.fi>, 2005-2006.
+# Tuomas Nurmi <iltunu@utu.fi>, 2006.
+# Finnish message file for YaST2 (@memory@). <>.
+# Copyright (C) 2001 Tor Lillqvist <tml@iki.fi>.
+# sebastien estienne <sebastien.estienne@gmail.com>, 2005.
+# Markus Hietaranta <markus.hietaranta@gmail.com>, 2007.
+# Raimo Ikonen <raimo.ikonen@innotronics.fi>, 2008-2010.
+# artnay <jiri.gronroos@iki.fi>, 2012.
+# Petri Damsten <petri.damsten@iki.fi>, 2005.
+# Mikael Lammentausta <mikael.lammentausta+kdetrans@gmail.com>, 2006-2010.
+# Sami Pesonen <sampeson@iki.fi>, 2000-2005.
+# Marek Laane <bald@smail.ee>, 2002-2012.
+# Kjartan Maraas <kmaraas@gnome.org>, 1998-2013.
+# Lauri Nurmi <lanurmi@iki.fi>, 2002-2010.
+# Ilpo Kantonen <ilpo@iki.fi>, 2004-2007.
+# Tuomas Lukka <lukka@iki.fi>, 1998-1999.
+# Risto Jääskeläinen <risto.i.j@jippii.fi>, 2010.
+# Sakari Montonen <sakari.montonen@helsinki.fi>, 2005.
+# Tomi Mäkelä <soulweaver@hotmail.fi>, 2013.
+# Ville Pohjanheimo <vpohjanheimo@hotmail.com>, 2004.
+# Matti Kainulainen <matkain@pp.inet.fi>.
+# Samuli Seppänen & Henna Nykänen <sjsepp@utu.fi>, 2006.
+# Matti Koskimies <matti@apulanta.fi>, 2002.
+# Antti Ahvensalmi <aahven@mbnet.fi>, 2000-2001.
+# Ari Torhamo <ari.torhamo@gmail.com>, 2008.
+# Author@Betawiki: Nike <>.
+# Markku Verkkoniemi <myv@iki.fi>, 2000.
+# Tommi Vainikaine <thv@iki.fi>, 2009.
+# Matti Viljanen <matti.viljanen@wippies.com>.
+# Jarkko Ranta <jjranta@cc.joensuu.fi>, 2000-2004.
+# Ilkka Tuohela, <hile@iki.fi>, 2004-2009.
+# Heikki Mäntysaari <heikki.mantysaari@linux.fi>.
+# Marko Myllynen <myllynen@redhat.com>, 2011.
+# Jorma Karvonen <karvonen.jorma@gmail.com>, 2009-2012.
+# Sasu Karttunen <sasu.karttunen@tpnet.fi>, 2010-2011.
+# Jussi Lehtinen <jtleht@utu.fi>, 2006.
+# Tuomas Merilä <tuomas@merila.org>, 1999.
+# Santtu Pajukanta <japsu@iki.fi>, 2005-2006.
+# Sami Kuhmonen <sami@iqs.fi>, 1999.
+# Joonas Niilola <juippis@roskakori.org>, 2006.
+# Copyright (C) 2008 Ville-Pekka Vainio <vpvainio@iki.fi>.
+# Tuomas J. Lukka <lukka@iki.fi>, 1998.
+# Copyright @ 2011 This_file_is_part_of_KDE <>.
+# Matti Simoska <matti.simoska@gmail.com>, 2011-2012.
+# Author@Betawiki: AnttiKaijanmaki <>.
+# Juha Kari <Juha.J.Kari@uta.fi>, 2004.
+# Marko Suvila <marko.suvila@gmail.com>, 2008-2009.
+# Copyright (C) 2007 Robby Stephenson <robby@periapsis.org>.
+# Ville-Pekka Vainio <vpivaini@cs.helsinki.fi>, 2007-2013.
+# Copyright (C) 2008 Timo Jyrinki <timo.jyrinki@iki.fi>.
+# Henri Mannerberg <henkka@ur-quan.org>, 2002-2003.
+# Mika Mononen <mejm@futis.net>, 2003.
+# Tapio Kautto <eleknader@phnet.fi>, 2002-2004.
+# Tommi Vainikainen <thv@iki.fi>, 2003-2012.
+# Risto H. Kurppa <risto@kurppa.fi>, 2012.
+# Eero Häkkinen <eero.hakkinen@iki.fi>, 2003.
+# Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
+# Laura Turpeinen & Susanna Reunanen <lperttu@utu.fi, sadreu@utu.fi>, 2006.
+# Copyright (C) Wouter Bolsterlee <wbolster@gnome.org>.
+# Thomas Niederreiter <tn@xcdroast.org>, 2002-2003.
+# Joonas Sarajärvi <muep@iki.fi>, 2010.
+# Ilari Oras <happo1472583@gmail.com>.
+# Niklas Laxström <niklas.laxstrom+kdetrans@gmail.com>, 2005-2012.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-02 12:27-0600\n"
+"PO-Revision-Date: 2010-07-18 00:17+0300\n"
+"Last-Translator: Lauri Nurmi <lanurmi@iki.fi>\n"
+"Language-Team: Finnish <translation-team-fi@lists.sourceforge.net>\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../../xffm/completion/base.hh:28
+msgid "Command"
+msgstr "Komento"
+
+#: ../../xffm/completion/base.hh:31
+msgid "File"
+msgstr "Tiedosto"
+
+#: ../../xffm/completion/base.hh:34
+msgid "Command history"
+msgstr "Komentohistoria"
+
+#. option -u uid "uid" "uid_combo"
+#: ../../xffm/completion/base.hh:37 ../../xffm/find/dialog.hh:199
+msgid "User"
+msgstr "Käyttäjä"
+
+#: ../../xffm/completion/base.hh:40
+msgid "Variable"
+msgstr "Muuttuja"
+
+#: ../../xffm/completion/base.hh:43
+msgid "Host"
+msgstr "Isäntä"
+
+#: ../../xffm/completion/base.hh:55
+msgid "Found no match"
+msgstr "Osumia ei löytynyt"
+
+#: ../../xffm/completion/base.hh:133 ../../xffm/completion/base.hh:134
+msgid "Matches"
+msgstr "Osumat"
+
+#: ../../xffm/completion/base.hh:134
+msgid "Too many files open"
+msgstr "Liian monta tiedostoa avoinna"
+
+#: ../../xffm/completion/base.hh:325 ../../xffm/find/fgr.hh:124
+msgid "Options:"
+msgstr "Valinnat:"
+
+#: ../../xffm/completion/bash.hh:133
+msgid "Completion mode:"
+msgstr "Täydennystila:"
+
+#: ../../xffm/completion/bash.hh:134
+msgid "command"
+msgstr "komento"
+
+#: ../../xffm/completion/bash.hh:135
+msgid "file"
+msgstr "tiedosto"
+
+#: ../../xffm/completion/bash.hh:145 ../../xffm/completion/bash.hh:149
+msgid "Options >>"
+msgstr "⟵ Lisää valintoja"
+
+#: ../../xffm/find/fgr.hh:124 ../../xffm/find/dialog.hh:308
+msgid "Path"
+msgstr "Polku"
+
+#: ../../xffm/find/fgr.hh:125
+msgid "Locate documents and folders on this computer by name or content"
+msgstr ""
+"Etsi asiakirjoja ja kansioita tietokoneelta nimen tai sisällön perusteella"
+
+#: ../../xffm/find/fgr.hh:126 ../../xffm/find/dialog.hh:341
+msgid "Filter:"
+msgstr "Suodatin:"
+
+#: ../../xffm/find/fgr.hh:126
+msgid "Search for files"
+msgstr "Etsi tiedostoja"
+
+#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
+#: ../../xffm/find/fgr.hh:128
+msgid "Contents:"
+msgstr "Sisältö:"
+
+#: ../../xffm/find/fgr.hh:128
+msgid "File's contents filtered as plain text."
+msgstr "Tiedoston sisältö suodatettuna selväkieliseksi tekstiksi."
+
+#: ../../xffm/find/fgr.hh:131
+msgid "Verbose output debugging mode."
+msgstr "Lavea tulostevianjäljitystila."
+
+#: ../../xffm/find/fgr.hh:133
+msgid "Show version information"
+msgstr "Näytä versiotiedot"
+
+#: ../../xffm/find/fgr.hh:135
+msgid "Filter Details"
+msgstr "Suodattimen yksityiskohdat"
+
+#. / option -a "xdev"
+#: ../../xffm/find/fgr.hh:138 ../../xffm/find/dialog.hh:180
+msgid "Stay on single filesystem"
+msgstr "Etsi vain tästä tiedostojärjestelmästä"
+
+#: ../../xffm/find/fgr.hh:140
+msgid "Print..."
+msgstr "Tulosta..."
+
+#: ../../xffm/find/fgr.hh:140
+msgid "The unique Process ID that identifies this process."
+msgstr "Prosessin ainutkertainen tunniste (PID)."
+
+#. / option -D "recursiveH"
+#: ../../xffm/find/fgr.hh:142 ../../xffm/find/dialog.hh:177
+#, fuzzy
+msgid "Find hidden files and directories"
+msgstr "Näytä piilotiedostot ja -kansiot"
+
+#: ../../xffm/find/fgr.hh:143
+msgid "Filter"
+msgstr "Suodatin"
+
+#: ../../xffm/find/fgr.hh:144
+msgid ""
+"To display files which pass the filter (stars and regexps will be processed)"
+msgstr ""
+"Näytä tiedostot, jotka läpäisevät suodattimen (* ja säännölliset lausekkeet "
+"suoritetaan)"
+
+#. / option -r "recursive"
+#: ../../xffm/find/fgr.hh:146 ../../xffm/find/dialog.hh:174
+msgid "Recursive"
+msgstr "Rekursiivinen"
+
+#: ../../xffm/find/fgr.hh:147 ../../xffm/find/fgr.hh:148
+#: ../../xffm/find/fgr.hh:149 ../../xffm/find/fgr.hh:150
+msgid "KByte"
+msgstr "kilotavu"
+
+#: ../../xffm/find/fgr.hh:148
+msgid "is greater than or equal to"
+msgstr "on suurempi tai yhtäsuuri kuin"
+
+#: ../../xffm/find/fgr.hh:150
+msgid "is less than or equal to"
+msgstr "on pienempi tai yhtäsuuri kuin"
+
+#: ../../xffm/find/fgr.hh:152
+msgid "Set UID"
+msgstr "Määrittele UID"
+
+#: ../../xffm/find/fgr.hh:152
+msgid "Executable Text Files"
+msgstr "Suoritettavat tekstitiedostot"
+
+#: ../../xffm/find/fgr.hh:154
+msgid "The permissions of the file, in octal notation."
+msgstr "Tiedoston oikeudet oktaalilukumuodossa."
+
+#: ../../xffm/find/fgr.hh:155
+msgid "Type"
+msgstr "Tyyppi"
+
+#: ../../xffm/find/fgr.hh:157 ../../xffm/find/signals.hh:17
+msgid "Any"
+msgstr "Mikä vain"
+
+#: ../../xffm/find/fgr.hh:157
+msgid "Default type"
+msgstr "Oletustyyppi"
+
+#: ../../xffm/find/fgr.hh:158 ../../xffm/common/preview.hh:497
+msgid "Regular file"
+msgstr "Tavallinen tiedosto"
+
+#: ../../xffm/find/fgr.hh:159 ../../xffm/find/signals.hh:11
+#: ../../xffm/fm/local/popup.hh:803 ../../xffm/common/preview.hh:488
+msgid "Directory"
+msgstr "Kansio"
+
+#: ../../xffm/find/fgr.hh:160 ../../xffm/find/signals.hh:12
+#: ../../xffm/common/preview.hh:494
+msgid "Symbolic Link"
+msgstr "Symbolinen linkki"
+
+#: ../../xffm/find/fgr.hh:161
+msgid "UNIX Socket"
+msgstr "UNIX-pistoke"
+
+#: ../../xffm/find/fgr.hh:162 ../../xffm/find/signals.hh:14
+#: ../../xffm/common/preview.hh:482
+msgid "Block device"
+msgstr "Lohkolaite"
+
+#: ../../xffm/find/fgr.hh:163 ../../xffm/find/signals.hh:15
+#: ../../xffm/common/preview.hh:485
+msgid "Character device"
+msgstr "Merkkilaite"
+
+#: ../../xffm/find/fgr.hh:164 ../../xffm/find/signals.hh:16
+#: ../../xffm/common/preview.hh:491
+msgid "FIFO"
+msgstr "FIFO"
+
+#. radio_p freed on destroy event for dialog_.
+#. option -k minutes "last_minutes", "last_minutes_spin"
+#: ../../xffm/find/fgr.hh:166 ../../xffm/find/fgr.hh:168
+#: ../../xffm/find/dialog.hh:221
+msgid "Minutes"
+msgstr "Minuuttia"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/dialog.hh:270 ../../xffm/find/dialog.hh:370
+#: ../../xffm/fm/treeview.hh:18
+msgid "Details"
+msgstr "Yksityiskohdat"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/fgr.hh:179 ../../xffm/find/fgr.hh:180
+#: ../../xffm/find/fgr.hh:183 ../../xffm/find/fgr.hh:184
+#: ../../xffm/find/fgr.hh:187 ../../xffm/find/fgr.hh:188
+msgid "TIME"
+msgstr "AIKA"
+
+#: ../../xffm/find/fgr.hh:168 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/fgr.hh:174 ../../xffm/find/fgr.hh:177
+msgid "Previous"
+msgstr "Edellinen"
+
+#. option -h hours "last_hours", "last_hours_spin"
+#: ../../xffm/find/fgr.hh:169 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/dialog.hh:226
+msgid "Hours"
+msgstr "Tuntia"
+
+#. option -d days "last_days", "last_days_spin"
+#: ../../xffm/find/fgr.hh:172 ../../xffm/find/fgr.hh:174
+#: ../../xffm/find/dialog.hh:231
+msgid "Days"
+msgstr "Päivää"
+
+#: ../../xffm/find/fgr.hh:175
+msgid "Month"
+msgstr "Kuukausi"
+
+#: ../../xffm/find/fgr.hh:177
+msgid "Month(s)"
+msgstr "kuukautta"
+
+#: ../../xffm/find/fgr.hh:180
+msgid "Modification Time :"
+msgstr "Viimeksi muokattu:"
+
+#: ../../xffm/find/fgr.hh:184
+msgid "Access Time :"
+msgstr "Viimeksi luettu:"
+
+#: ../../xffm/find/fgr.hh:188
+msgid "Creation Time :"
+msgstr "Luomisaika:"
+
+#: ../../xffm/find/fgr.hh:191 ../../xffm/find/fgr.hh:192
+msgid "uid"
+msgstr "uid"
+
+#: ../../xffm/find/fgr.hh:192
+msgid "User:"
+msgstr "Käyttäjä:"
+
+#: ../../xffm/find/fgr.hh:194 ../../xffm/find/fgr.hh:195
+msgid "gid"
+msgstr "gid"
+
+#: ../../xffm/find/fgr.hh:195
+msgid "Group:"
+msgstr "Ryhmä:"
+
+#: ../../xffm/find/fgr.hh:198
+msgid ""
+"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+"character that  normally  follows  a file  name"
+msgstr ""
+
+#: ../../xffm/find/fgr.hh:200
+msgid "Content View"
+msgstr "Sisältönäkymä"
+
+#: ../../xffm/find/fgr.hh:201 ../../xffm/find/fgr.hh:202
+#: ../../xffm/find/fgr.hh:203 ../../xffm/find/fgr.hh:204
+msgid "STRING"
+msgstr "MERKKIJONO"
+
+#: ../../xffm/find/fgr.hh:202 ../../xffm/find/fgr.hh:204
+#: ../../xffm/fm/local/popup.hh:563
+msgid "Regular expression"
+msgstr "Säännöllinen lauseke"
+
+#: ../../xffm/find/fgr.hh:204
+msgid "Extended"
+msgstr "Laajennettu"
+
+#: ../../xffm/find/fgr.hh:206
+msgid "Ignore case"
+msgstr "Jätä kirjainkoko huomiotta"
+
+#: ../../xffm/find/fgr.hh:208
+msgid "Text Files"
+msgstr "Tekstitiedostot"
+
+#: ../../xffm/find/fgr.hh:210 ../../xffm/find/dialog.hh:552
+msgid "No match"
+msgstr "Ei vastaavuutta"
+
+#: ../../xffm/find/fgr.hh:212 ../../xffm/find/dialog.hh:470
+msgid "Line Count"
+msgstr "Rivimäärä"
+
+#: ../../xffm/find/fgr.hh:214
+msgid "Words"
+msgstr "Sanoja"
+
+#: ../../xffm/find/fgr.hh:216
+msgid "Lines"
+msgstr "Rivejä"
+
+#: ../../xffm/find/fgr.hh:368
+#, c-format
+msgid "Usage : %s [OPTIONS]\n"
+msgstr "Käytä : %s [OPTIONS]\n"
+
+#: ../../xffm/find/signals.hh:10
+msgid "Regular"
+msgstr "Tavallinen"
+
+#: ../../xffm/find/signals.hh:13 ../../xffm/common/preview.hh:500
+msgid "Socket"
+msgstr "Pistoke"
+
+#: ../../xffm/find/signals.hh:209
+msgid "Select folder to search in"
+msgstr "Valitse kansio, johon haku kohdistetaan"
+
+#. button no
+#: ../../xffm/find/signals.hh:265 ../../xffm/find/dialog.hh:584
+#: ../../xffm/response/entryfileresponse.hh:18
+#: ../../xffm/response/entryresponse.hh:305
+#: ../../xffm/response/passwdresponse.hh:558
+#: ../../xffm/fm/local/properties.hh:304 ../../xffm/fm/local/rm.hh:155
+msgid "Cancel"
+msgstr "Peruuta"
+
+#: ../../xffm/find/signals.hh:293 ../../xffm/find/signals.hh:722
+msgid "No editor for current action."
+msgstr "Nykyiselle toiminnolle ei ole muokkainta."
+
+#. / option "upper_limit_spin" (only in gtk dialog_)
+#: ../../xffm/find/signals.hh:351 ../../xffm/find/dialog.hh:183
+msgid "Results"
+msgstr "Tulokset"
+
+#: ../../xffm/find/signals.hh:351
+msgid "Upper limit:"
+msgstr "Yläraja:"
+
+#: ../../xffm/find/signals.hh:353
+msgid "Counting files..."
+msgstr "Lasketaan tiedostoja..."
+
+#: ../../xffm/find/signals.hh:368
+#, c-format
+msgid "Found %d match"
+msgid_plural "Found %d matches"
+msgstr[0] "Löytyi %d osuma"
+msgstr[1] "Löytyi %d osumaa"
+
+#: ../../xffm/find/signals.hh:370
+#, c-format
+msgid "%s Finished : %s"
+msgstr "%s valmis: %s"
+
+#: ../../xffm/find/signals.hh:488 ../../xffm/find/signals.hh:490
+msgid "Searching..."
+msgstr "Etsitään..."
+
+#. g_object_set_data(G_OBJECT(dialog_), "window", dialog_);
+#: ../../xffm/find/dialog.hh:98 ../../xffm/find/dialog.hh:150
+#: ../../xffm/find/dialog.hh:611
+msgid "Find"
+msgstr "Etsi"
+
+#: ../../xffm/find/dialog.hh:183
+msgid "Upper limit"
+msgstr "Yläraja"
+
+#. option -s +KByte "size_greater", "size_greater_spin"
+#: ../../xffm/find/dialog.hh:188
+msgid "At Least"
+msgstr "Vähintään"
+
+#: ../../xffm/find/dialog.hh:188 ../../xffm/find/dialog.hh:193
+msgid "kBytes"
+msgstr "kt/s"
+
+#. option -s -KByte "size_smaller", "size_smaller_spin"
+#: ../../xffm/find/dialog.hh:193
+msgid "At Most"
+msgstr "Enintään"
+
+#: ../../xffm/find/dialog.hh:204
+msgid "Group"
+msgstr "Ryhmä"
+
+#. option -o octal "octal_p" "permissions_entry"
+#: ../../xffm/find/dialog.hh:208
+msgid "Octal Permissions"
+msgstr "Oikeudet oktaalilukuna"
+
+#. option -p suid | exe
+#: ../../xffm/find/dialog.hh:213
+msgid "SUID"
+msgstr "SUID"
+
+#: ../../xffm/find/dialog.hh:213 ../../xffm/fm/local/popup.hh:843
+msgid "Executable"
+msgstr "Suoritettava tiedosto"
+
+#. option -m months "last_months", "last_months_spin"
+#: ../../xffm/find/dialog.hh:237
+msgid "Months"
+msgstr "kuukausi"
+
+#: ../../xffm/find/dialog.hh:248
+msgid "File type : "
+msgstr "Tiedostotyyppi: "
+
+#. gtk_widget_show (GTK_WIDGET(right_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(center_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(left_options_vbox));
+#: ../../xffm/find/dialog.hh:262 ../../xffm/find/dialog.hh:602
+#: ../../xffm/fm/page/page.hh:70 ../../xffm/common/gtk.hh:70
+msgid "Close"
+msgstr "Sulje"
+
+#. gtk_box_pack_start (vbox7a, GTK_WIDGET(advancedBox), TRUE, FALSE, 5);
+#. gtk_widget_show(GTK_WIDGET(advancedBox));
+#. //////////////  grep options.... /////////////////////////
+#: ../../xffm/find/dialog.hh:384
+msgid "Contains"
+msgstr "Sisältää"
+
+#: ../../xffm/find/dialog.hh:404
+msgid "Contains the text"
+msgstr "Sisältää tekstin"
+
+#: ../../xffm/find/dialog.hh:437
+msgid "Case Sensitive"
+msgstr "Huomioi kirjainkoko"
+
+#: ../../xffm/find/dialog.hh:449
+msgid "Extended regexp"
+msgstr "Laajennettu säännöllinen lauseke"
+
+#: ../../xffm/find/dialog.hh:460
+msgid "Include binary files"
+msgstr "Sisällytä binääritiedostot"
+
+#: ../../xffm/find/dialog.hh:496
+msgid "Match"
+msgstr "Täsmää"
+
+#: ../../xffm/find/dialog.hh:508
+msgid "Anywhere"
+msgstr "Missä tahansa"
+
+#: ../../xffm/find/dialog.hh:523
+msgid "Whole words only"
+msgstr "Vain kokonaiset sanat"
+
+#: ../../xffm/find/dialog.hh:538
+msgid "lines"
+msgstr "riviä"
+
+#: ../../xffm/find/dialog.hh:594
+msgid "Clear"
+msgstr "Tyhjennä"
+
+#: ../../xffm/find/dialog.hh:636
+msgid "Edit"
+msgstr "Muokkaa"
+
+#: ../../xffm/find/dialog.hh:751 ../../xffm/find/dialog.hh:766
+#: ../../xffm/common/util.hh:1150 ../../xffm/common/util.hh:1152
+#: ../../xffm/common/util.hh:1158 ../../xffm/common/util.hh:1160
+#: ../../xffm/common/preview.hh:479
+msgid "unknown"
+msgstr "tuntematon"
+
+#: ../../xffm/find/dialog.hh:780
+msgid "Modified"
+msgstr "Muokattu"
+
+#: ../../xffm/find/dialog.hh:784
+msgid "Created"
+msgstr "Luotu"
+
+#: ../../xffm/find/dialog.hh:788
+#, fuzzy
+msgid "Accessed"
+msgstr "Käsitelty:"
+
+#: ../../xffm/find/dialog.hh:1106
+msgid ""
+"Basic rules:\n"
+"\n"
+"*  Will match any character zero or more times.\n"
+"?  Will match any character exactly one time\n"
+"[] Match any character within the [] \n"
+"^  Match at beginning of string\n"
+"$  Match at end of string \n"
+msgstr ""
+"Perussäännöt:\n"
+"\n"
+"*=mikä tahansa merkki ei yhtään tai useita kertoja\n"
+"?=mikä tahansa merkki tarkalleen yhden kerran\n"
+
+#: ../../xffm/find/dialog.hh:1115
+#, fuzzy
+msgid ""
+"Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"In  basic regular expressions the metacharacters ?, +, {, |, (, and ) \n"
+"  lose their special meaning.\n"
+"\n"
+"The  period . matches  any  single  character.\n"
+"The caret ^ matches at the start of line.\n"
+"The dollar $ matches at the end of line.\n"
+"\n"
+"Characters within [ ] matches any single character in the list.\n"
+"Characters within [^ ] matches any single character *not* in the list.\n"
+"Characters inside [ - ] matches a range of characters (ie [0-9] or [a-z]).\n"
+"\n"
+"A regular expression may be followed by one of several repetition "
+"operators:\n"
+"?      The preceding item is optional and matched\n"
+"       at most once.\n"
+"*      The preceding item will be matched zero\n"
+"       or more times.\n"
+"+      The preceding item will be matched one or\n"
+"       more times.\n"
+"{n}    The preceding item is matched exactly n times.\n"
+"{n,}   The preceding item is matched n or more times.\n"
+"{n,m}  The preceding item is matched at least n times,\n"
+"       but not more than m times.\n"
+"\n"
+"To match any reserved character, precede it with \\. \n"
+"\n"
+"Two regular expressions may be joined by the logical or operator |.\n"
+"Two regular expressions may be concatenated.\n"
+"\n"
+"More information is available by typing \"man grep\"\n"
+msgstr ""
+"Varatut erikoismerkit laajennetuille säännöllisille lausekkeille \n"
+"(regexp) ovat: . ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"Yksinkertaisissa säännöllisissä lausekkeissa merkit:\n"
+"?, +, {, |, (, ja ) menettävät erityismerkityksensä.\n"
+"\n"
+" . tarkoittaa mitä tahansa yhtä merkkiä.\n"
+" ^ tarkoittaa rivin alkua.\n"
+" $ tarkoittaa rivin loppua.\n"
+"\n"
+"Hakasulkujen [] sisällä olevat merkit tarkoittavat, että mikä \n"
+"     tahansa näistä merkeistä kelpaa.\n"
+"[^ ] tarkoittaa, että lueteltuja merkkejä lukuunottamatta\n"
+"     kaikki merkit kelpaavat.\n"
+"[ - ] määrittää merkkialueen, jonka jokainen jäsen kelpaa.\n"
+"     Esimerkiksi [0-9] tai [a-z].\n"
+"\n"
+"Säännöllistä lauseketta voi seurata toistoa osoittava merkki:\n"
+"?     tarkoittaa, että em. lauseke saa toistua korkeintaan\n"
+"      yhden kerran.\n"
+"*     lauseke voi esiintyä nolla tai useampia kertoja.\n"
+"+     lauseke voi esiintyä yhden tai useampia kertoja.\n"
+"{n}   lauseke hyväksytään täsmälleen n kertaa.\n"
+"{n,}  lauseke hyväksytään n tai useampia kertoja \n"
+"{n,m} lauseke esiintyy vähintään n kertaa ja enintään m kertaa.\n"
+"\n"
+"Jos haluat etsiä varattua erikoismerkkiä, voit poistaa sen\n"
+"erikoismerkityksen laittamalla \\ merkin eteen. Esim. \\*\n"
+"\n"
+"Kaksi säännöllistä lauseketta voidaan yhdistää loogisella\n"
+"       tai-operaattorilla |.\n"
+"Säännöllisiä lausekkeita voidaan kirjoittaa peräkkäin\n"
+"\n"
+"Lisäää tietoa saat komentorivillä komennoilla \"man grep\"\n"
+"       tai \"man regexp\"\n"
+
+#: ../../xffm/response/entryfileresponse.hh:20
+msgid "Open"
+msgstr "Avaa"
+
+#: ../../xffm/response/entryresponse.hh:29
+#: ../../xffm/response/entryfolderresponse.hh:28
+msgid "Choose directory"
+msgstr "Valitse kansio"
+
+#. this button is redundant since hands are on keyboard for password
+#: ../../xffm/response/entryresponse.hh:309
+#: ../../xffm/response/passwdresponse.hh:189
+#: ../../xffm/response/passwdresponse.hh:559
+msgid "Ok"
+msgstr "OK"
+
+#: ../../xffm/response/commandprogressresponse.hh:32
+msgid "Items:"
+msgstr "Toiminnot:"
+
+#: ../../xffm/response/passwdresponse.hh:21
+msgid "Enter password"
+msgstr "Syötä salasana"
+
+#. gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+#: ../../xffm/response/passwdresponse.hh:125
+#, fuzzy
+msgid "User Input"
+msgstr "Hiirisyöte"
+
+#: ../../xffm/response/passwdresponse.hh:142
+msgid "Response Requested"
+msgstr "Vastausta pyydetty"
+
+#: ../../xffm/response/passwdresponse.hh:264
+msgid "Preparing"
+msgstr "Valmistellaan"
+
+#: ../../xffm/response/passwdresponse.hh:352
+msgid "sudo"
+msgstr "sudo"
+
+#: ../../xffm/response/passwdresponse.hh:354
+msgid "Command:"
+msgstr "Komento:"
+
+#: ../../xffm/response/passwdresponse.hh:357
+msgid "Permission denied"
+msgstr "Lupa evätty"
+
+#: ../../xffm/response/passwdresponse.hh:358
+msgid "Try to approach a problem from different angles."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:359
+msgid "Do you want to retry?"
+msgstr "Yritetäänkö uudelleen?"
+
+#: ../../xffm/response/passwdresponse.hh:360
+msgid "Alternate:"
+msgstr "Vaihtoehtoinen:"
+
+#: ../../xffm/response/passwdresponse.hh:365
+msgid "No"
+msgstr "Ei"
+
+#: ../../xffm/response/passwdresponse.hh:401
+msgid "Install"
+msgstr "Asenna"
+
+#: ../../xffm/response/passwdresponse.hh:402
+#, c-format
+msgid "%s does not exist."
+msgstr "%s ei ole olemassa."
+
+#: ../../xffm/response/passwdresponse.hh:467
+msgid "Blowfish"
+msgstr "Blowfish"
+
+#: ../../xffm/response/passwdresponse.hh:468
+msgid "Encryption Key Approval"
+msgstr "Salausavaimen vahvistus"
+
+#: ../../xffm/response/passwdresponse.hh:502
+msgid "-o     print output to standard out. Implies -r."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:506
+msgid "-c     DO NOT compress files before encryption."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:510
+msgid "-r     DO NOT remove input files after processing"
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:517
+#, fuzzy
+msgid "Encryption key: "
+msgstr "Salausavain:"
+
+#: ../../xffm/response/passwdresponse.hh:529
+msgid "Confirm:"
+msgstr "Vahvista:"
+
+#: ../../xffm/response/passwdresponse.hh:542
+msgid "Sorry, passwords do not match"
+msgstr "Salasanat eivät vastaa toisiaan"
+
+#: ../../xffm/response/passwdresponse.hh:550
+msgid "Minimum length:"
+msgstr "Vähimmäispituus:"
+
+#: ../../xffm/response/timeoutresponse.hh:56
+msgid "Dismiss"
+msgstr "Hylkää"
+
+#: ../../xffm/response/commandresponse.hh:23
+msgid "Running"
+msgstr "Käynnissä"
+
+#. auto text = g_strdup_printf("%s (pid: %d)",
+#. _("Waiting for operation to finish..."),
+#. Tubo<Type>::getChild (pid));
+#: ../../xffm/response/commandresponse.hh:28
+msgid "Waiting for operation to finish..."
+msgstr "Odotetaan toimien valmistumista..."
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Documents"
+msgstr "Asiakirjat"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Downloads"
+msgstr "Lataukset"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Music"
+msgstr "Musiikki"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Pictures"
+msgstr "Kuvat"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Templates"
+msgstr "Pohjat"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Videos"
+msgstr "Videot"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Desktop"
+msgstr "Työpöytä"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Bookmarks"
+msgstr "Kirjanmerkit"
+
+#: ../../xffm/fm/local/icons.hh:259 ../../xffm/fm/local/rm.hh:181
+msgid "Trash"
+msgstr "Roskakori"
+
+#: ../../xffm/fm/local/popup.hh:60
+msgid "New"
+msgstr "Uusi"
+
+#. deprecated {N_("Open in New Tab"), NULL, NULL, NULL},
+#. deprecated {N_("Open in New Window"), NULL, NULL, NULL},
+#. common buttons /(also an iconsize +/- button)
+#: ../../xffm/fm/local/popup.hh:64 ../../xffm/fm/local/popup.hh:104
+#: ../../xffm/common/gtk.hh:74
+msgid "Copy"
+msgstr "Kopioi"
+
+#: ../../xffm/fm/local/popup.hh:65 ../../xffm/fm/local/popup.hh:105
+#: ../../xffm/common/gtk.hh:73
+msgid "Cut"
+msgstr "Leikkaa"
+
+#: ../../xffm/fm/local/popup.hh:66 ../../xffm/fm/local/popup.hh:106
+#: ../../xffm/common/gtk.hh:66
+msgid "Paste"
+msgstr "Liitä"
+
+#. **************
+#: ../../xffm/fm/local/popup.hh:67 ../../xffm/fm/local/popup.hh:107
+#: ../../xffm/fm/local/rm.hh:174 ../../xffm/common/gtk.hh:75
+msgid "Delete"
+msgstr "Poista"
+
+#. {N_("About"), NULL, (void *) menu},
+#.
+#. only for listview: {N_("Sort by size"), NULL, (void *) menu},
+#. only for listview: {N_("Sort by date"), NULL, (void *) menu},
+#: ../../xffm/fm/local/popup.hh:73
+msgid "Select All"
+msgstr "Valitse kaikki"
+
+#: ../../xffm/fm/local/popup.hh:74 ../../xffm/fm/local/popup.hh:559
+msgid "Match regular expression"
+msgstr "Säännöllinen lauseke"
+
+#: ../../xffm/fm/local/popup.hh:75 ../../xffm/fm/root/view.hh:58
+#: ../../xffm/fm/fstab/popup.hh:21
+msgid "View as list"
+msgstr "Näytä luettelona"
+
+#: ../../xffm/fm/local/popup.hh:77
+msgid "Show hidden files"
+msgstr "Näytä piilotetut tiedostot"
+
+#: ../../xffm/fm/local/popup.hh:79
+msgid "Show Backup Files"
+msgstr "Näytä varmuuskopiotiedostot"
+
+#: ../../xffm/fm/local/popup.hh:81
+msgid "Sort data in descending order"
+msgstr "Lajittele tiedot laskevaan järjestykseen"
+
+#: ../../xffm/fm/local/popup.hh:93 ../../xffm/fm/local/popup.hh:119
+#: ../../xffm/fm/local/popup.hh:1006 ../../xffm/fm/local/popup.hh:1013
+#: ../../xffm/fm/local/popup.hh:1022 ../../xffm/fm/local/popup.hh:1029
+#: ../../xffm/common/gtk.hh:72
+msgid "Open with"
+msgstr "Avaa ohjelmalla"
+
+#: ../../xffm/fm/local/popup.hh:94 ../../xffm/fm/local/popup.hh:846
+msgid "Run Executable..."
+msgstr "Suorita tiedosto..."
+
+#: ../../xffm/fm/local/popup.hh:95
+msgid "Extract files from the archive"
+msgstr "Pura tiedostot arkistosta"
+
+#. g_hash_table_insert(iconname_hash, "bcrypt", (void *)"emblem-keyhole");
+#: ../../xffm/fm/local/popup.hh:96 ../../xffm/fm/root/view.hh:73
+#: ../../xffm/fm/fstab/popup.hh:20 ../../xffm/fm/dialog/notebook.hh:52
+#: ../../xffm/common/gtk.hh:78
+msgid "Open in New Tab"
+msgstr "Avaa uudessa välilehdessä"
+
+#. File chooser
+#: ../../xffm/fm/local/popup.hh:97 ../../xffm/fm/local/popup.hh:706
+msgid "Create a compressed archive with the selected objects"
+msgstr "Luo tiivistetty arkisto valituista tiedostoista"
+
+#: ../../xffm/fm/local/popup.hh:98 ../../xffm/fm/fstab/popup.hh:37
+msgid "Mount the volume associated with this folder"
+msgstr "Liitä tähän kansioon liittyvä asema"
+
+#: ../../xffm/fm/local/popup.hh:99 ../../xffm/fm/fstab/popup.hh:38
+msgid "Unmount the volume associated with this folder"
+msgstr "Irrota tähän kansioon liittyvä asema"
+
+#: ../../xffm/fm/local/popup.hh:100 ../../xffm/common/gtk.hh:67
+msgid "Add bookmark"
+msgstr "Lisää kirjanmerkki"
+
+#: ../../xffm/fm/local/popup.hh:101 ../../xffm/fm/root/view.hh:74
+#: ../../xffm/common/gtk.hh:68
+msgid "Remove bookmark"
+msgstr "Poista kirjanmerkki"
+
+#: ../../xffm/fm/local/popup.hh:108 ../../xffm/fm/local/popup.hh:961
+msgid "Rename"
+msgstr "Nimeä uudestaan"
+
+#: ../../xffm/fm/local/popup.hh:109 ../../xffm/fm/local/popup.hh:947
+msgid "Duplicate"
+msgstr "Kahdenna"
+
+#: ../../xffm/fm/local/popup.hh:110 ../../xffm/fm/local/popup.hh:933
+msgid "Link"
+msgstr "Linkki"
+
+#: ../../xffm/fm/local/popup.hh:111
+msgid "Properties"
+msgstr "Ominaisuudet"
+
+#: ../../xffm/fm/local/popup.hh:414
+msgid "Files:"
+msgstr "Tiedostot:"
+
+#: ../../xffm/fm/local/popup.hh:417 ../../xffm/fm/local/rm.hh:61
+msgid "Multiple selections"
+msgstr "Useita valintoja"
+
+#: ../../xffm/fm/local/popup.hh:557
+msgid "Select items"
+msgstr "Valitse kohteita"
+
+#: ../../xffm/fm/local/popup.hh:575
+msgid "Regular Expression syntax is incorrect"
+msgstr "Säännöllisen lausekkeen syntaksi on virheellinen"
+
+#: ../../xffm/fm/local/popup.hh:592
+msgid "No selection"
+msgstr "Ei valintaa"
+
+#: ../../xffm/fm/local/popup.hh:592
+msgid "No matches."
+msgstr "Ei hakutuloksia."
+
+#. entryResponse->setCheckButton(_("Run in Terminal"));
+#. entryResponse->setCheckButton(Mime<Type>::runInTerminal(path));
+#: ../../xffm/fm/local/popup.hh:721 ../../xffm/fm/page/pathbar.hh:313
+msgid "Specify Output Directory..."
+msgstr "Määritä tuloshakemisto..."
+
+#: ../../xffm/fm/local/popup.hh:799
+msgid "Create new..."
+msgstr "Luo uusi..."
+
+#: ../../xffm/fm/local/popup.hh:806 ../../xffm/fm/local/popup.hh:886
+msgid "New Name:"
+msgstr "Uusi nimi:"
+
+#: ../../xffm/fm/local/popup.hh:815
+msgid "No name"
+msgstr "Ei nimeä"
+
+#: ../../xffm/fm/local/popup.hh:828
+#, c-format
+msgid "Another file with the same name already exists in “%s”."
+msgstr "Toinen tiedosto samalla nimellä on jo olemassa kohteessa ”%s”."
+
+#: ../../xffm/fm/local/popup.hh:850 ../../xffm/fm/local/popup.hh:1010
+#: ../../xffm/fm/local/popup.hh:1026 ../../xffm/common/util.hh:1248
+msgid "Run in Terminal"
+msgstr "Aja päätteessä"
+
+#: ../../xffm/fm/local/popup.hh:853
+#, fuzzy
+msgid "Arguments for the Command"
+msgstr "Komennon argumentit"
+
+#: ../../xffm/fm/local/popup.hh:1047 ../../xffm/fm/local/view.hh:141
+msgid "Invalid entry"
+msgstr "Virheellinen syöte"
+
+#: ../../xffm/fm/local/properties.hh:235
+msgid "Properties and Attributes"
+msgstr "Ominaisuudet ja määreet"
+
+#: ../../xffm/fm/local/properties.hh:264
+msgid "File Mode:"
+msgstr "Tiedoston oikeudet:"
+
+#: ../../xffm/fm/local/properties.hh:290
+msgid "File:"
+msgstr "Tiedosto:"
+
+#. Add file info stuff
+#. set info stuff data according to combo box
+#. add signal handler to changed signal for combo box
+#. Add process buttons
+#.
+#: ../../xffm/fm/local/properties.hh:302
+msgid "Apply changes"
+msgstr "Ota muutokset käyttöön"
+
+#: ../../xffm/fm/local/properties.hh:462
+msgid "Successfully moved to trash."
+msgstr "Roskakoriin vienti onnistui."
+
+#: ../../xffm/fm/local/properties.hh:463
+msgid "Source:"
+msgstr "Lähde:"
+
+#: ../../xffm/fm/local/rm.hh:59
+#, c-format
+msgid "Delete %s"
+msgstr "Poista %s"
+
+#: ../../xffm/fm/local/rm.hh:61
+msgid "Warning: "
+msgstr "Varoitus: "
+
+#. gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
+#. title
+#: ../../xffm/fm/local/rm.hh:90
+msgid "Remove"
+msgstr "Poista"
+
+#: ../../xffm/fm/local/rm.hh:140
+msgid "Apply to all"
+msgstr "Käytä kaikkiin"
+
+#. **************
+#. This is now available to BSD with rm -P option
+#: ../../xffm/fm/local/rm.hh:163 ../../xffm/common/gtk.hh:76
+msgid "Shred"
+msgstr "Hävitä"
+
+#. We do not count "../"
+#: ../../xffm/fm/local/view.hh:48 ../../xffm/fm/base/monitor.hh:28
+#, c-format
+msgid "Files: %s"
+msgstr "Tiedostoja: %s"
+
+#: ../../xffm/fm/root/model.hh:78
+msgid "Root Directory"
+msgstr "Juurikansio"
+
+#: ../../xffm/fm/root/model.hh:94
+msgid "This is the root of the filesystem"
+msgstr "Tämä on tiedostojärjestelmän juuri"
+
+#: ../../xffm/fm/root/model.hh:105
+msgid "Home Directory"
+msgstr "Kotihakemisto"
+
+#: ../../xffm/fm/root/model.hh:132
+msgid "Trash bin"
+msgstr "Roskakori"
+
+#: ../../xffm/fm/root/model.hh:162 ../../xffm/fm/fstab/popup.hh:29
+msgid "Disk Image Mounter"
+msgstr "Levykuvan liittäjä"
+
+#: ../../xffm/fm/root/model.hh:169 ../../xffm/fm/root/model.hh:185
+msgid "Mount local disks and devices"
+msgstr "Liitä paikallisia levyjä ja asemia"
+
+#: ../../xffm/fm/root/model.hh:170 ../../xffm/fm/fstab/popup.hh:25
+#: ../../xffm/fm/fstab/view.hh:429
+msgid "eCryptfs Volume"
+msgstr "eCryptfs-taltio"
+
+#: ../../xffm/fm/root/model.hh:171 ../../xffm/fm/fstab/popup.hh:24
+msgid "SSHFS Remote Synchronization Folder"
+msgstr "SSHFS-synkronoinnin kansio"
+
+#: ../../xffm/fm/root/model.hh:172 ../../xffm/fm/fstab/popup.hh:23
+#: ../../xffm/fm/fstab/view.hh:377
+msgid "NFS Network Volume"
+msgstr "NFS-verkkotaltio"
+
+#: ../../xffm/fm/root/model.hh:173 ../../xffm/fm/fstab/popup.hh:26
+#: ../../xffm/fm/fstab/view.hh:455
+msgid "CIFS Volume"
+msgstr "CIFS-taltio"
+
+#: ../../xffm/fm/root/model.hh:195
+msgid "Software Updater"
+msgstr "Ohjelmapäivitys"
+
+#: ../../xffm/fm/root/model.hh:218 ../../xffm/fm/root/model.hh:230
+msgid "Add or remove software installed on the system"
+msgstr "Lisää tai poista järjestelmään asennettuja ohjelmistoja"
+
+#: ../../xffm/fm/root/model.hh:271
+#, fuzzy
+msgid "Go to bookmarked location"
+msgstr "Siirry seuraavaan kirjanmerkkiin."
+
+#. {N_("Add bookmark"), (void *)BasePopUp<Type>::noop, NULL, NULL},
+#: ../../xffm/fm/root/view.hh:61
+msgid "Empty trash"
+msgstr "Tyhjennä roskakori"
+
+#. File chooser
+#: ../../xffm/fm/fstab/popup.hh:121
+msgid "Mount Device"
+msgstr "Liitä laite"
+
+#: ../../xffm/fm/fstab/popup.hh:133
+msgid "Mount point:"
+msgstr "Liitospiste:"
+
+#: ../../xffm/fm/fstab/view.hh:301
+msgid "Mounted on:"
+msgstr "Liitospiste:"
+
+#: ../../xffm/fm/fstab/view.hh:302
+msgid "Mount on"
+msgstr "Liitä kohtaan"
+
+#: ../../xffm/fm/fstab/view.hh:310 ../../xffm/fm/fstab/view.hh:312
+msgid "Not mounted"
+msgstr "Ei liitetty"
+
+#: ../../xffm/fm/fstab/view.hh:403
+msgid "SFTP (via SSH)"
+msgstr "SFTP (SSH:n avulla)"
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, c-format
+msgid "Unmounting %s"
+msgstr "Irrotetaan osio %s"
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, c-format
+msgid "Mounting %s"
+msgstr "Liitetään %s"
+
+#: ../../xffm/fm/dialog/menupopover.hh:128
+msgid "Home"
+msgstr "Koti"
+
+#: ../../xffm/fm/dialog/menupopover.hh:129 ../../xffm/common/gtk.hh:64
+msgid "Open terminal"
+msgstr "Avaa pääte"
+
+#: ../../xffm/fm/dialog/menupopover.hh:130
+msgid "Open a New Window"
+msgstr "Avaa uusi ikkuna"
+
+#. {N_("Execute Shell Command"), (void *)MenuPopoverSignals<Type>::shell, (void *) menuButton_},
+#: ../../xffm/fm/dialog/menupopover.hh:132 ../../xffm/common/gtk.hh:69
+msgid "Search"
+msgstr "Etsi"
+
+#: ../../xffm/fm/dialog/menupopover.hh:133 ../../xffm/common/gtk.hh:71
+msgid "Exit"
+msgstr "Poistu"
+
+#: ../../xffm/fm/dialog/dialog.hh:116
+msgid "Removed"
+msgstr "Poistettu"
+
+#: ../../xffm/fm/dialog/dialog.hh:132
+msgid "Detected device(s):"
+msgstr "Löydetyt laitteet:"
+
+#. Create the widgets
+#: ../../xffm/fm/page/vbuttonbox.hh:37 ../../xffm/common/gtk.hh:332
+msgid "Help"
+msgstr "Ohje"
+
+#. File chooser
+#: ../../xffm/fm/page/pathbar.hh:306 ../../xffm/fm/page/pathbar.hh:308
+msgid "Go to"
+msgstr "Siirry"
+
+#: ../../xffm/fm/page/pathbar.hh:331
+msgid "Not a directory"
+msgstr "Ei ole kansio"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Renice Process"
+msgstr "Muuta projektin prioriteettia"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Suspend"
+msgstr "Keskeytystila"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Continue"
+msgstr "Jatka"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Interrupt"
+msgstr "Keskeytä"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Hangup"
+msgstr "Katkaise"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "User 1 (USR1)"
+msgstr "Käyttäjä 1 (USR1)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "User 2 (USR2)"
+msgstr "Käyttäjä 2 (USR2)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "Terminate Task"
+msgstr "Pysäytä tehtävä"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "Abort"
+msgstr "Keskeytä"
+
+#: ../../xffm/fm/page/runbutton.hh:138
+msgid "Kill"
+msgstr "Tapa"
+
+#: ../../xffm/fm/page/runbutton.hh:139
+#, fuzzy
+msgid "Segmentation fault"
+msgstr "Muistinkäsittelyvirhe"
+
+#: ../../xffm/fm/page/runbutton.hh:217
+msgid "PID"
+msgstr "PID"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:37
+#, fuzzy
+msgid "Embedded Terminal"
+msgstr "Sisäinen päätetuki"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:38
+msgid "All items in the iconview."
+msgstr "Kaikki kuvakenäkymän kohteet."
+
+#: ../../xffm/fm/page/hbuttonbox.hh:39
+msgid "Scripting"
+msgstr "Komentojonot"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:40
+msgid "Clear Log"
+msgstr "Tyhjennä loki"
+
+#. Status textview
+#: ../../xffm/fm/page/hbuttonbox.hh:42
+msgid "Terminal font"
+msgstr "Päätteen kirjasin"
+
+#: ../../xffm/fm/treeview.hh:17
+msgid "Name"
+msgstr "Nimi"
+
+#: ../../xffm/fm/treeview.hh:20
+msgid "Size"
+msgstr "Koko"
+
+#: ../../xffm/fm/treeview.hh:21
+msgid "Date"
+msgstr "Päiväys"
+
+#: ../../xffm/fm/treeview.hh:22
+msgid "Mimetype"
+msgstr "MIME-tyyppi"
+
+#: ../../xffm/fm/treeview.hh:24
+msgid "TYPE"
+msgstr "TYYPPI"
+
+#: ../../xffm/fm/base/signals.hh:642
+msgid "Directory does not exist."
+msgstr "Kansiota ei ole olemassa."
+
+#: ../../xffm/fm/base/signals.hh:644 ../../xffm/fm/base/signals.hh:646
+#, fuzzy
+msgid "Trash is empty"
+msgstr "PSK on tyhjä"
+
+#: ../../xffm/common/settings.hh:27
+msgid "New File:"
+msgstr "Uusi tiedosto:"
+
+#: ../../xffm/common/gio.hh:235
+msgid "Could not copy item:"
+msgstr "Kohdetta ei voitu kopioida:"
+
+#: ../../xffm/common/gio.hh:237
+msgid "Could not move item:"
+msgstr "Kohdetta ei voitu siirtää:"
+
+#: ../../xffm/common/gio.hh:239
+#, fuzzy
+msgid "Create symbolic link"
+msgstr "Luo symbolinen linkki"
+
+#: ../../xffm/common/gio.hh:276
+#, c-format
+msgid ""
+"Could not delete:\n"
+"%s"
+msgstr ""
+"Tiedostoa ei voi poistaa:\n"
+"%s "
+
+#: ../../xffm/common/gio.hh:278
+#, c-format
+msgid "Could not move %s to trash"
+msgstr "Kohteen %s siirto roskakoriin epäonnistui"
+
+#: ../../xffm/common/clipboard.hh:23 ../../xffm/common/dnd.hh:40
+msgid "Copying files locally"
+msgstr "Kopioidaan tiedostoja paikallisesti"
+
+#: ../../xffm/common/clipboard.hh:30 ../../xffm/common/dnd.hh:34
+msgid "Moving files"
+msgstr "Siirretään tiedostoja"
+
+#: ../../xffm/common/dnd.hh:46
+msgid "Create Link"
+msgstr "Luo linkki"
+
+#: ../../xffm/common/util.hh:1200
+#, c-format
+msgid ""
+"Scriptfile \"%s\" is not executable. Please set the executable-attribute on "
+"that file."
+msgstr ""
+"Komentojono \"%s\" ei ole suoritettava tiedosto. Muuta tiedosto "
+"suoritettavaksi tiedoston ominaisuuksista."
+
+#: ../../xffm/common/util.hh:1202 ../../xffm/common/util.hh:1237
+#, c-format
+msgid "Open with %s"
+msgstr "Avaa ohjelmalla %s"
+
+#: ../../xffm/common/util.hh:1202
+msgid "Text Editor"
+msgstr "Tekstieditori"
+
+#: ../../xffm/common/util.hh:1239 ../../xffm/common/gtk.hh:65
+msgid "Execute Shell Command"
+msgstr "Suorita komento"
+
+#: ../../xffm/common/util.hh:1243
+msgid ""
+"Console: quickly run single commands -- write a command here and press enter."
+msgstr ""
+"Konsoli: Suorita nopeasti yksittäisiä komentoa – kirjoita komento tähän ja "
+"paina Enter."
+
+#: ../../xffm/common/gtk.hh:123
+msgid "New Tab"
+msgstr "Uusi välilehti"
+
+#: ../../xffm/common/gtk.hh:335
+msgid "OK"
+msgstr "OK"
+
+#: ../../xffm/common/run.hh:344
+msgid "error"
+msgstr "virhe"
+
+#: ../../xffm/common/run.hh:348
+msgid "warning"
+msgstr "varoitus"
+
+#: ../../xffm/common/mime.hh:101 ../../xffm/common/mime.hh:143
+msgid "No Read Permission"
+msgstr "Ei lukuoikeuksia"
+
+#: ../../xffm/common/preview.hh:593
+msgid "Empty file"
+msgstr "Tyhjä tiedosto"
+
+#: ../../xffm/common/preview.hh:648
+#, c-format
+msgid "Cannot read from %s"
+msgstr "Ei voi lukea %s"
+

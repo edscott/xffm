@@ -1,0 +1,1446 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:41:31 CDT 2013 ---
+#
+# Nguyen Hung Vu <Vu.Hung@techviet.com>, 2002.
+# Trinh Minh THANH <tmthanh@yahoo.com>, 2003.
+# Bùi Xuân Dương <buixuanduong1983@gmail.com>, 2009.
+# Larry Nguyen <larry@vnlinux.org>, 2002.
+# Nguyen Hung Vu (Nguyễn Vũ Hưng) <vuhung@fedu.uec.ac.jp>, 2002.
+# Nguyen Thai Ngoc Duy <pclouds@vnlinux.org>, 2003-2012.
+# Phạm Thành Long <lngt@ngonngu.net>, 2007-2010.
+# Ngô Chin <ndtrung4419@gmail.com>, 2011.
+# Ngô Huy Hoàng <hoang.ngo.h@gmail.com>, 2010.
+# Phan Vĩnh Thịnh <teppi@vnlinux.org>, 2005-2012.
+# Nguyen Vu Hung <vuhung16plus@gmail.com>, 2011.
+# PHAN VINH THINH <teppi@vnlinux.org>, 2005.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2002-2012.
+# Pham Thanh Long <lngt@ngonngu.net>, 2007.
+# Ngô Trung <ndtrung4419@gmail.com>, 2012.
+# Lê Kiến Trúc <afterlastangel@gmail.com>, 2009.
+# Trần Thế Trung <tttrung@hotmail.com>, 2006.
+# Nguyễn Vũ Hưng <vuhung16plus@gmail.com>, 2002-2012.
+# Nguyen Hung Vu( Nguyễn Vũ Hưng) <vuhung@fedu.uec.ac.jp>, 2002.
+# Trần Ngọc Quân <vnwildman@gmail.com>, 2012-2013.
+# pclouds <pclouds@gmx.net>, 2002.
+# Nguyen Hung Vu(Nguyễn Hưng Vũ) <vuhung@fedu.uec.ac.jp>, 2002.
+# Nguyn Thái Ngc Duy <pclouds@gmail.com>, 2003-2009.
+# Nguyễn Hưng Vũ <Vu.Hung@techviet.com>, 2002.
+# Nguyễn Tran Thuat <tran-thuat.nguyen@polytechnique.org>, 2003.
+# Hieu Duc Hoang <hieu.d.hoang@gmail.com>, 2008.
+# Nguyen Hung Vu, <vuhung@fedu.uec.ac.jp>, 2002.
+# Nguyễn Đình Trung <nguyendinhtrung141@gmail.com>, 2008.
+# HeroP <herophuong93@gmail.com>, 2012.
+# Truong Anh Tuan <tuanta@iwayvietnam.com>, 2010.
+# Trương Ứng Minh <truongungminh@gmail.com>, 2012.
+# Phan Vinh Thinh <teppi82@gmail.com>, 2005-2012.
+# Joern v. Kattchee <kattchee@cs.tu-berlin.de>, 2000-2002.
+# T.M.Thanh <tmthanh@yahoo.com>, 2002-2003.
+# Nguyen Hung.Vu <Vu.Hung@techviet.com>, 2002.
+# T. M. Thanh <tmthanh@yahoo.com>, 2002.
+# Hoàng Đức Hiếu <hieu.d.hoang@gmail.com>, 2007-2011.
+# Lê Hoàng Phương <herophuong93@gmail.com>, 2011-2013.
+# Nguyen Hung Vu (Nguyen Hung Vu) <vuhung@fedu.uec.ac.jp>, 2002.
+# Clytie Siddall <clytie@riverland.net.au>, 2005-2010.
+# Hoang Ngoc Tu <hntu@gmx.de>, 2000-2002.
+# Hiếu Đức Hoàng <hieu.d.hoang@gmail.com>, 2007.
+# Nguyễn Thái Ngọc Duy <pclouds@gmail.com>, 2002-2013.
+# Trinh Minh Thanh <tmthanh@yahoo.com>, 2002-2005.
+# Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
+# Copyright (C) Wouter Bolsterlee <wbolster@gnome.org>.
+# Nguyễn Ngọc Tuấn <scorpionfirevn@operamail.com>, 2002.
+# Clytie Siddall, <clytie@riverland.net.au>, 2007.
+# Lê Trường An <xinemdungkhoc1@gmail.com>, 2011.
+# Lâm Vĩnh Niên <nienvl@yahoo.ca>, 2004.
+#  Phạm Thành Long <lngt@ngonngu.net>, 2007.
+# Ly Trong Van <ltvan_vn@yahoo.fr>, 2003.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-02 12:27-0600\n"
+"PO-Revision-Date: 2012-09-28 14:31+0700\n"
+"Last-Translator: Trần Ngọc Quân <vnwildman@gmail.com>\n"
+"Language-Team: Vietnamese <translation-team-vi@lists.sourceforge.net>\n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: LocFactoryEditor 1.8\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: ../../xffm/completion/base.hh:28
+msgid "Command"
+msgstr "Lệnh"
+
+#: ../../xffm/completion/base.hh:31
+msgid "File"
+msgstr "Tập tin"
+
+#: ../../xffm/completion/base.hh:34
+#, fuzzy
+msgid "Command history"
+msgstr "Lược sử lệnh:"
+
+#. option -u uid "uid" "uid_combo"
+#: ../../xffm/completion/base.hh:37 ../../xffm/find/dialog.hh:199
+msgid "User"
+msgstr "Người dùng"
+
+#: ../../xffm/completion/base.hh:40
+msgid "Variable"
+msgstr "Biến"
+
+#: ../../xffm/completion/base.hh:43
+msgid "Host"
+msgstr "Máy"
+
+#: ../../xffm/completion/base.hh:55
+#, fuzzy
+msgid "Found no match"
+msgstr "Tìm thấy %d điều khớp"
+
+#: ../../xffm/completion/base.hh:133 ../../xffm/completion/base.hh:134
+msgid "Matches"
+msgstr "Kết quả"
+
+#: ../../xffm/completion/base.hh:134
+msgid "Too many files open"
+msgstr "Mở quá nhiều tập tin"
+
+#: ../../xffm/completion/base.hh:325 ../../xffm/find/fgr.hh:124
+msgid "Options:"
+msgstr "Tùy chọn"
+
+#: ../../xffm/completion/bash.hh:133
+#, fuzzy
+msgid "Completion mode:"
+msgstr "Ngày hoàn tất"
+
+#: ../../xffm/completion/bash.hh:134
+msgid "command"
+msgstr "lệnh"
+
+#: ../../xffm/completion/bash.hh:135
+msgid "file"
+msgstr "tập tin"
+
+#: ../../xffm/completion/bash.hh:145 ../../xffm/completion/bash.hh:149
+msgid "Options >>"
+msgstr "Tùy chọn →"
+
+#: ../../xffm/find/fgr.hh:124 ../../xffm/find/dialog.hh:308
+msgid "Path"
+msgstr "Đường dẫn"
+
+#: ../../xffm/find/fgr.hh:125
+msgid "Locate documents and folders on this computer by name or content"
+msgstr "Định vị tài liệu và thư mục trên máy này theo tên hoặc nội dung"
+
+#: ../../xffm/find/fgr.hh:126 ../../xffm/find/dialog.hh:341
+msgid "Filter:"
+msgstr "Lọc:"
+
+#: ../../xffm/find/fgr.hh:126
+msgid "Search for files"
+msgstr "Tìm tập tin"
+
+#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
+#: ../../xffm/find/fgr.hh:128
+msgid "Contents:"
+msgstr "Nội dung:"
+
+#: ../../xffm/find/fgr.hh:128
+#, fuzzy
+msgid "File's contents filtered as plain text."
+msgstr "Lưu dạng văn bản thô chứ?"
+
+#: ../../xffm/find/fgr.hh:131
+msgid "Verbose output debugging mode."
+msgstr "Chế độ gỡ lỗi và kết xuất chi tiết."
+
+#: ../../xffm/find/fgr.hh:133
+msgid "Show version information"
+msgstr "Hiện thông tin phiên bản"
+
+#: ../../xffm/find/fgr.hh:135
+#, fuzzy
+msgid "Filter Details"
+msgstr "Chi tiết máy in"
+
+#. / option -a "xdev"
+#: ../../xffm/find/fgr.hh:138 ../../xffm/find/dialog.hh:180
+msgid "Stay on single filesystem"
+msgstr "Tìm kiếm trên chỉ một hệ thông tập tin"
+
+#: ../../xffm/find/fgr.hh:140
+msgid "Print..."
+msgstr "In..."
+
+#: ../../xffm/find/fgr.hh:140
+msgid "The unique Process ID that identifies this process."
+msgstr ""
+
+#. / option -D "recursiveH"
+#: ../../xffm/find/fgr.hh:142 ../../xffm/find/dialog.hh:177
+#, fuzzy
+msgid "Find hidden files and directories"
+msgstr "Vá lỗi tập tin và thư mục."
+
+#: ../../xffm/find/fgr.hh:143
+msgid "Filter"
+msgstr "Lọc"
+
+#: ../../xffm/find/fgr.hh:144
+msgid ""
+"To display files which pass the filter (stars and regexps will be processed)"
+msgstr ""
+"Để hiển thị tập tin đã được lọc (dấu sao và diễn đạt thông thường sẽ được "
+"dùng)"
+
+#. / option -r "recursive"
+#: ../../xffm/find/fgr.hh:146 ../../xffm/find/dialog.hh:174
+msgid "Recursive"
+msgstr "Đệ quy"
+
+#: ../../xffm/find/fgr.hh:147 ../../xffm/find/fgr.hh:148
+#: ../../xffm/find/fgr.hh:149 ../../xffm/find/fgr.hh:150
+#, fuzzy
+msgid "KByte"
+msgstr "Byte"
+
+#: ../../xffm/find/fgr.hh:148
+#, fuzzy
+msgid "is greater than or equal to"
+msgstr "lớn hơn hay bằng"
+
+#: ../../xffm/find/fgr.hh:150
+#, fuzzy
+msgid "is less than or equal to"
+msgstr "ít hơn hay bằng"
+
+#: ../../xffm/find/fgr.hh:152
+msgid "Set UID"
+msgstr "Đặt UID"
+
+#: ../../xffm/find/fgr.hh:152
+msgid "Executable Text Files"
+msgstr "Tập tin văn bản thực thi được"
+
+#: ../../xffm/find/fgr.hh:154
+msgid "The permissions of the file, in octal notation."
+msgstr "Quyền truy cập tập tin, theo dạng số bát phân."
+
+#: ../../xffm/find/fgr.hh:155
+msgid "Type"
+msgstr "Kiểu"
+
+#: ../../xffm/find/fgr.hh:157 ../../xffm/find/signals.hh:17
+msgid "Any"
+msgstr "Bất kỳ"
+
+#: ../../xffm/find/fgr.hh:157
+msgid "Default type"
+msgstr "Kiểu mặc định"
+
+#: ../../xffm/find/fgr.hh:158 ../../xffm/common/preview.hh:497
+msgid "Regular file"
+msgstr "Tập tin chuẩn"
+
+#: ../../xffm/find/fgr.hh:159 ../../xffm/find/signals.hh:11
+#: ../../xffm/fm/local/popup.hh:803 ../../xffm/common/preview.hh:488
+msgid "Directory"
+msgstr "Thư mục"
+
+#: ../../xffm/find/fgr.hh:160 ../../xffm/find/signals.hh:12
+#: ../../xffm/common/preview.hh:494
+msgid "Symbolic Link"
+msgstr "Liên kết tượng trưng"
+
+#: ../../xffm/find/fgr.hh:161
+msgid "UNIX Socket"
+msgstr "Ổ cắm UNIX"
+
+#: ../../xffm/find/fgr.hh:162 ../../xffm/find/signals.hh:14
+#: ../../xffm/common/preview.hh:482
+msgid "Block device"
+msgstr "Thiết bị khối"
+
+#: ../../xffm/find/fgr.hh:163 ../../xffm/find/signals.hh:15
+#: ../../xffm/common/preview.hh:485
+msgid "Character device"
+msgstr "Thiết bị ký tự"
+
+#: ../../xffm/find/fgr.hh:164 ../../xffm/find/signals.hh:16
+#: ../../xffm/common/preview.hh:491
+msgid "FIFO"
+msgstr "FIFO"
+
+#. radio_p freed on destroy event for dialog_.
+#. option -k minutes "last_minutes", "last_minutes_spin"
+#: ../../xffm/find/fgr.hh:166 ../../xffm/find/fgr.hh:168
+#: ../../xffm/find/dialog.hh:221
+msgid "Minutes"
+msgstr "Phút"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/dialog.hh:270 ../../xffm/find/dialog.hh:370
+#: ../../xffm/fm/treeview.hh:18
+msgid "Details"
+msgstr "Chi tiết"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/fgr.hh:179 ../../xffm/find/fgr.hh:180
+#: ../../xffm/find/fgr.hh:183 ../../xffm/find/fgr.hh:184
+#: ../../xffm/find/fgr.hh:187 ../../xffm/find/fgr.hh:188
+msgid "TIME"
+msgstr "GIỜ"
+
+#: ../../xffm/find/fgr.hh:168 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/fgr.hh:174 ../../xffm/find/fgr.hh:177
+msgid "Previous"
+msgstr "Trước"
+
+#. option -h hours "last_hours", "last_hours_spin"
+#: ../../xffm/find/fgr.hh:169 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/dialog.hh:226
+msgid "Hours"
+msgstr "Giờ"
+
+#. option -d days "last_days", "last_days_spin"
+#: ../../xffm/find/fgr.hh:172 ../../xffm/find/fgr.hh:174
+#: ../../xffm/find/dialog.hh:231
+msgid "Days"
+msgstr "Ngày"
+
+#: ../../xffm/find/fgr.hh:175
+msgid "Month"
+msgstr "Tháng"
+
+#: ../../xffm/find/fgr.hh:177
+#, fuzzy
+msgid "Month(s)"
+msgstr "tháng"
+
+#: ../../xffm/find/fgr.hh:180
+msgid "Modification Time :"
+msgstr "Thời điểm thay đổi :"
+
+#: ../../xffm/find/fgr.hh:184
+msgid "Access Time :"
+msgstr "Thời điểm truy nhập :"
+
+#: ../../xffm/find/fgr.hh:188
+msgid "Creation Time :"
+msgstr "Thời điểm tạo :"
+
+#: ../../xffm/find/fgr.hh:191 ../../xffm/find/fgr.hh:192
+msgid "uid"
+msgstr "uid"
+
+#: ../../xffm/find/fgr.hh:192
+msgid "User:"
+msgstr "Người dùng:"
+
+#: ../../xffm/find/fgr.hh:194 ../../xffm/find/fgr.hh:195
+msgid "gid"
+msgstr "gid"
+
+#: ../../xffm/find/fgr.hh:195
+msgid "Group:"
+msgstr "Nhóm:"
+
+#: ../../xffm/find/fgr.hh:198
+msgid ""
+"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+"character that  normally  follows  a file  name"
+msgstr ""
+
+#: ../../xffm/find/fgr.hh:200
+msgid "Content View"
+msgstr "Xem nội dung"
+
+#: ../../xffm/find/fgr.hh:201 ../../xffm/find/fgr.hh:202
+#: ../../xffm/find/fgr.hh:203 ../../xffm/find/fgr.hh:204
+msgid "STRING"
+msgstr "CHUỖI"
+
+#: ../../xffm/find/fgr.hh:202 ../../xffm/find/fgr.hh:204
+#: ../../xffm/fm/local/popup.hh:563
+msgid "Regular expression"
+msgstr "Biểu thức chính quy"
+
+#: ../../xffm/find/fgr.hh:204
+msgid "Extended"
+msgstr "Đã mở rộng"
+
+#: ../../xffm/find/fgr.hh:206
+msgid "Ignore case"
+msgstr "Bỏ qua hoa/thường"
+
+#: ../../xffm/find/fgr.hh:208
+msgid "Text Files"
+msgstr "Tập tin văn bản"
+
+#: ../../xffm/find/fgr.hh:210 ../../xffm/find/dialog.hh:552
+msgid "No match"
+msgstr "Không tìm thấy"
+
+#: ../../xffm/find/fgr.hh:212 ../../xffm/find/dialog.hh:470
+msgid "Line Count"
+msgstr "Tổng số dòng"
+
+#: ../../xffm/find/fgr.hh:214
+msgid "Words"
+msgstr "Từ"
+
+#: ../../xffm/find/fgr.hh:216
+msgid "Lines"
+msgstr "Dòng"
+
+#: ../../xffm/find/fgr.hh:368
+#, fuzzy, c-format
+msgid "Usage : %s [OPTIONS]\n"
+msgstr "Cách dùng: %s [TÙYCHỌN]\n"
+
+#: ../../xffm/find/signals.hh:10
+msgid "Regular"
+msgstr "Chuẩn"
+
+#: ../../xffm/find/signals.hh:13 ../../xffm/common/preview.hh:500
+msgid "Socket"
+msgstr "Socket"
+
+#: ../../xffm/find/signals.hh:209
+msgid "Select folder to search in"
+msgstr "Chọn thư mục nơi cần tìm kiếm"
+
+#. button no
+#: ../../xffm/find/signals.hh:265 ../../xffm/find/dialog.hh:584
+#: ../../xffm/response/entryfileresponse.hh:18
+#: ../../xffm/response/entryresponse.hh:305
+#: ../../xffm/response/passwdresponse.hh:558
+#: ../../xffm/fm/local/properties.hh:304 ../../xffm/fm/local/rm.hh:155
+msgid "Cancel"
+msgstr "Thôi"
+
+#: ../../xffm/find/signals.hh:293 ../../xffm/find/signals.hh:722
+#, fuzzy
+msgid "No editor for current action."
+msgstr "Dừng tác vụ hiện tại"
+
+#. / option "upper_limit_spin" (only in gtk dialog_)
+#: ../../xffm/find/signals.hh:351 ../../xffm/find/dialog.hh:183
+msgid "Results"
+msgstr "Kết quả"
+
+#: ../../xffm/find/signals.hh:351
+msgid "Upper limit:"
+msgstr "Giới hạn trên:"
+
+#: ../../xffm/find/signals.hh:353
+#, fuzzy
+msgid "Counting files..."
+msgstr "Đang in tập tin..."
+
+#: ../../xffm/find/signals.hh:368
+#, c-format
+msgid "Found %d match"
+msgid_plural "Found %d matches"
+msgstr[0] "Tìm thấy %d điều khớp"
+
+#: ../../xffm/find/signals.hh:370
+#, c-format
+msgid "%s Finished : %s"
+msgstr "%s Đã kết thúc : %s"
+
+#: ../../xffm/find/signals.hh:488 ../../xffm/find/signals.hh:490
+msgid "Searching..."
+msgstr "Đang tìm kiếm..."
+
+#. g_object_set_data(G_OBJECT(dialog_), "window", dialog_);
+#: ../../xffm/find/dialog.hh:98 ../../xffm/find/dialog.hh:150
+#: ../../xffm/find/dialog.hh:611
+msgid "Find"
+msgstr "Tìm"
+
+#: ../../xffm/find/dialog.hh:183
+#, fuzzy
+msgid "Upper limit"
+msgstr "Giới hạn trên:"
+
+#. option -s +KByte "size_greater", "size_greater_spin"
+#: ../../xffm/find/dialog.hh:188
+msgid "At Least"
+msgstr "Ít nhất"
+
+#: ../../xffm/find/dialog.hh:188 ../../xffm/find/dialog.hh:193
+msgid "kBytes"
+msgstr "kByte"
+
+#. option -s -KByte "size_smaller", "size_smaller_spin"
+#: ../../xffm/find/dialog.hh:193
+msgid "At Most"
+msgstr "Nhiều nhất"
+
+#: ../../xffm/find/dialog.hh:204
+msgid "Group"
+msgstr "Nhóm"
+
+#. option -o octal "octal_p" "permissions_entry"
+#: ../../xffm/find/dialog.hh:208
+msgid "Octal Permissions"
+msgstr "Quyền (bát phân)"
+
+#. option -p suid | exe
+#: ../../xffm/find/dialog.hh:213
+msgid "SUID"
+msgstr ""
+
+#: ../../xffm/find/dialog.hh:213 ../../xffm/fm/local/popup.hh:843
+#, fuzzy
+msgid "Executable"
+msgstr "Chạy được:"
+
+#. option -m months "last_months", "last_months_spin"
+#: ../../xffm/find/dialog.hh:237
+msgid "Months"
+msgstr "Tháng"
+
+#: ../../xffm/find/dialog.hh:248
+msgid "File type : "
+msgstr "Loại tập tin : "
+
+#. gtk_widget_show (GTK_WIDGET(right_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(center_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(left_options_vbox));
+#: ../../xffm/find/dialog.hh:262 ../../xffm/find/dialog.hh:602
+#: ../../xffm/fm/page/page.hh:70 ../../xffm/common/gtk.hh:70
+msgid "Close"
+msgstr "Đóng"
+
+#. gtk_box_pack_start (vbox7a, GTK_WIDGET(advancedBox), TRUE, FALSE, 5);
+#. gtk_widget_show(GTK_WIDGET(advancedBox));
+#. //////////////  grep options.... /////////////////////////
+#: ../../xffm/find/dialog.hh:384
+msgid "Contains"
+msgstr "chứa"
+
+#: ../../xffm/find/dialog.hh:404
+msgid "Contains the text"
+msgstr "Chứa chữ"
+
+#: ../../xffm/find/dialog.hh:437
+msgid "Case Sensitive"
+msgstr "Phân biệt chữ hoa/thường"
+
+#: ../../xffm/find/dialog.hh:449
+msgid "Extended regexp"
+msgstr "Diễn đạt thông thường mở rộng"
+
+#: ../../xffm/find/dialog.hh:460
+msgid "Include binary files"
+msgstr "Gồm tập tin nhị phân"
+
+#: ../../xffm/find/dialog.hh:496
+msgid "Match"
+msgstr "Khớp"
+
+#: ../../xffm/find/dialog.hh:508
+#, fuzzy
+msgid "Anywhere"
+msgstr "Mọi nơi"
+
+#: ../../xffm/find/dialog.hh:523
+msgid "Whole words only"
+msgstr "Chỉ nguyên từ"
+
+#: ../../xffm/find/dialog.hh:538
+msgid "lines"
+msgstr "dòng"
+
+#: ../../xffm/find/dialog.hh:594
+msgid "Clear"
+msgstr "Xoá"
+
+#: ../../xffm/find/dialog.hh:636
+msgid "Edit"
+msgstr "Sửa"
+
+#: ../../xffm/find/dialog.hh:751 ../../xffm/find/dialog.hh:766
+#: ../../xffm/common/util.hh:1150 ../../xffm/common/util.hh:1152
+#: ../../xffm/common/util.hh:1158 ../../xffm/common/util.hh:1160
+#: ../../xffm/common/preview.hh:479
+msgid "unknown"
+msgstr "không rõ"
+
+#: ../../xffm/find/dialog.hh:780
+msgid "Modified"
+msgstr "Bị sửa đổi"
+
+#: ../../xffm/find/dialog.hh:784
+msgid "Created"
+msgstr "Đã tạo"
+
+#: ../../xffm/find/dialog.hh:788
+msgid "Accessed"
+msgstr "Truy cập"
+
+#: ../../xffm/find/dialog.hh:1106
+msgid ""
+"Basic rules:\n"
+"\n"
+"*  Will match any character zero or more times.\n"
+"?  Will match any character exactly one time\n"
+"[] Match any character within the [] \n"
+"^  Match at beginning of string\n"
+"$  Match at end of string \n"
+msgstr ""
+"Các quy tắc cơ bản:\n"
+"\n"
+"* Tương ứng với bất cứ kí tự nào không hoặc nhiều lần.\n"
+"? Tương ứng với bất cứ kí tự nào đúng một lần\n"
+
+#: ../../xffm/find/dialog.hh:1115
+#, fuzzy
+msgid ""
+"Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"In  basic regular expressions the metacharacters ?, +, {, |, (, and ) \n"
+"  lose their special meaning.\n"
+"\n"
+"The  period . matches  any  single  character.\n"
+"The caret ^ matches at the start of line.\n"
+"The dollar $ matches at the end of line.\n"
+"\n"
+"Characters within [ ] matches any single character in the list.\n"
+"Characters within [^ ] matches any single character *not* in the list.\n"
+"Characters inside [ - ] matches a range of characters (ie [0-9] or [a-z]).\n"
+"\n"
+"A regular expression may be followed by one of several repetition "
+"operators:\n"
+"?      The preceding item is optional and matched\n"
+"       at most once.\n"
+"*      The preceding item will be matched zero\n"
+"       or more times.\n"
+"+      The preceding item will be matched one or\n"
+"       more times.\n"
+"{n}    The preceding item is matched exactly n times.\n"
+"{n,}   The preceding item is matched n or more times.\n"
+"{n,m}  The preceding item is matched at least n times,\n"
+"       but not more than m times.\n"
+"\n"
+"To match any reserved character, precede it with \\. \n"
+"\n"
+"Two regular expressions may be joined by the logical or operator |.\n"
+"Two regular expressions may be concatenated.\n"
+"\n"
+"More information is available by typing \"man grep\"\n"
+msgstr ""
+"Các kí tự dành cho diễn đạt thông thường mở rộng là\n"
+". ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"Trong các diễn đạt thông thường cơ bản các kí tự meta\n"
+"?, +, {, |, (, và ) mất ý nghĩa đặc biệt của chúng.\n"
+"\n"
+"Dấu chấm . ứng với bất cứ kí tự đơn nào.\n"
+"Dấu mũ ^ ứng với đầu dòng.\n"
+"Dấu đô-la $ ứng với cuối dòng.\n"
+"\n"
+"Các kí tự bên trong [ ] ứng với bất cứ kí tự\n"
+"       đơn nào trong danh sách.\n"
+"Các kí tự bên trong [^ ] ứng với bất cứ kí tự\n"
+"       đơn nào *không* có trong danh sách.\n"
+"Các kí tự bên trong [ - ] ứng với một khoảng\n"
+"       kí tự (thí dụ [0-9] hoặc [a-z]).\n"
+"\n"
+"Một diễn đạt thông thường có thể theo sau bởi một\n"
+"       trong số các toán tử:\n"
+"?      Mục đi trước là tuỳ chọn và tương ứng\n"
+"       tối đa một lần.\n"
+"*      Mục đi trước ứng không hoặc nhiều lần.\n"
+"+      Mục đi trước tương ứng một hoặc nhiều lần.\n"
+"{n}    Mục đi trước tương ứng chính xác n lần\n"
+"{n,}   Mục đi trước tương ứng n lần hoặc nhiều hơn.\n"
+"{n,m}  Mục đi trước tương ứng ít nhất n lần,\n"
+"       nhưng không nhiều hơn m lần.\n"
+"\n"
+"Để tương ứng với kí tự dành riêng, đặt trước nó dấu \\. \n"
+"\n"
+"Hai diễn đạt thông thường có thể kết hợp nhau bằng\n"
+"       toán tử luận lí OR |.\n"
+"Hai diễn đạt thông thường có thể được gắn với nhau.\n"
+"\n"
+"Xem thêm bằng cách gõ \"man grep\"\n"
+"       tại dấu nhắc dòng lệnh.\n"
+
+#: ../../xffm/response/entryfileresponse.hh:20
+msgid "Open"
+msgstr "Mở"
+
+#: ../../xffm/response/entryresponse.hh:29
+#: ../../xffm/response/entryfolderresponse.hh:28
+msgid "Choose directory"
+msgstr "Chọn thư mục"
+
+#. this button is redundant since hands are on keyboard for password
+#: ../../xffm/response/entryresponse.hh:309
+#: ../../xffm/response/passwdresponse.hh:189
+#: ../../xffm/response/passwdresponse.hh:559
+msgid "Ok"
+msgstr "OK"
+
+#: ../../xffm/response/commandprogressresponse.hh:32
+msgid "Items:"
+msgstr "Mục:"
+
+#: ../../xffm/response/passwdresponse.hh:21
+msgid "Enter password"
+msgstr "Nhập mật khẩu"
+
+#. gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+#: ../../xffm/response/passwdresponse.hh:125
+#, fuzzy
+msgid "User Input"
+msgstr "Chuột nhập vào"
+
+#: ../../xffm/response/passwdresponse.hh:142
+#, fuzzy
+msgid "Response Requested"
+msgstr "Yêu cầu trả lời"
+
+#: ../../xffm/response/passwdresponse.hh:264
+msgid "Preparing"
+msgstr "Đang chuẩn bị"
+
+#: ../../xffm/response/passwdresponse.hh:352
+msgid "sudo"
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:354
+msgid "Command:"
+msgstr "Lệnh:"
+
+#: ../../xffm/response/passwdresponse.hh:357
+msgid "Permission denied"
+msgstr "Không đủ quyền truy cập"
+
+#: ../../xffm/response/passwdresponse.hh:358
+msgid "Try to approach a problem from different angles."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:359
+msgid "Do you want to retry?"
+msgstr "Bạn có muốn thử lại không?"
+
+#: ../../xffm/response/passwdresponse.hh:360
+msgid "Alternate:"
+msgstr "Xen kẽ:"
+
+#: ../../xffm/response/passwdresponse.hh:365
+msgid "No"
+msgstr "Không"
+
+#: ../../xffm/response/passwdresponse.hh:401
+msgid "Install"
+msgstr "Cài đặt"
+
+#: ../../xffm/response/passwdresponse.hh:402
+#, fuzzy, c-format
+msgid "%s does not exist."
+msgstr "%s không tồn tại"
+
+#: ../../xffm/response/passwdresponse.hh:467
+#, fuzzy
+msgid "Blowfish"
+msgstr "Sawfish"
+
+#: ../../xffm/response/passwdresponse.hh:468
+#, fuzzy
+msgid "Encryption Key Approval"
+msgstr "Lỗi mật mã"
+
+#: ../../xffm/response/passwdresponse.hh:502
+msgid "-o     print output to standard out. Implies -r."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:506
+msgid "-c     DO NOT compress files before encryption."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:510
+msgid "-r     DO NOT remove input files after processing"
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:517
+#, fuzzy
+msgid "Encryption key: "
+msgstr "Khoá mật mã:"
+
+#: ../../xffm/response/passwdresponse.hh:529
+msgid "Confirm:"
+msgstr "Xác định:"
+
+#: ../../xffm/response/passwdresponse.hh:542
+msgid "Sorry, passwords do not match"
+msgstr "Tiếc là hai mật khẩu không khớp"
+
+#: ../../xffm/response/passwdresponse.hh:550
+#, fuzzy
+msgid "Minimum length:"
+msgstr "Độ dài tối đa:"
+
+#: ../../xffm/response/timeoutresponse.hh:56
+msgid "Dismiss"
+msgstr "Hủy"
+
+#: ../../xffm/response/commandresponse.hh:23
+msgid "Running"
+msgstr "Đang chạy"
+
+#. auto text = g_strdup_printf("%s (pid: %d)",
+#. _("Waiting for operation to finish..."),
+#. Tubo<Type>::getChild (pid));
+#: ../../xffm/response/commandresponse.hh:28
+#, fuzzy
+msgid "Waiting for operation to finish..."
+msgstr "Đang đợi Sơn Thâch-x chạy xong"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Documents"
+msgstr "Tài liệu"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Downloads"
+msgstr "Tải về"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Music"
+msgstr "Nhạc"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Pictures"
+msgstr "Hình"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Templates"
+msgstr "Mẫu"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Videos"
+msgstr "Video"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Desktop"
+msgstr "Màn hình nền"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Bookmarks"
+msgstr "Liên kết lưu"
+
+#: ../../xffm/fm/local/icons.hh:259 ../../xffm/fm/local/rm.hh:181
+msgid "Trash"
+msgstr "Rác"
+
+#: ../../xffm/fm/local/popup.hh:60
+msgid "New"
+msgstr "Mới"
+
+#. deprecated {N_("Open in New Tab"), NULL, NULL, NULL},
+#. deprecated {N_("Open in New Window"), NULL, NULL, NULL},
+#. common buttons /(also an iconsize +/- button)
+#: ../../xffm/fm/local/popup.hh:64 ../../xffm/fm/local/popup.hh:104
+#: ../../xffm/common/gtk.hh:74
+msgid "Copy"
+msgstr "Chép"
+
+#: ../../xffm/fm/local/popup.hh:65 ../../xffm/fm/local/popup.hh:105
+#: ../../xffm/common/gtk.hh:73
+msgid "Cut"
+msgstr "Cắt"
+
+#: ../../xffm/fm/local/popup.hh:66 ../../xffm/fm/local/popup.hh:106
+#: ../../xffm/common/gtk.hh:66
+msgid "Paste"
+msgstr "Dán"
+
+#. **************
+#: ../../xffm/fm/local/popup.hh:67 ../../xffm/fm/local/popup.hh:107
+#: ../../xffm/fm/local/rm.hh:174 ../../xffm/common/gtk.hh:75
+msgid "Delete"
+msgstr "Xoá"
+
+#. {N_("About"), NULL, (void *) menu},
+#.
+#. only for listview: {N_("Sort by size"), NULL, (void *) menu},
+#. only for listview: {N_("Sort by date"), NULL, (void *) menu},
+#: ../../xffm/fm/local/popup.hh:73
+msgid "Select All"
+msgstr "Chọn tất cả"
+
+#: ../../xffm/fm/local/popup.hh:74 ../../xffm/fm/local/popup.hh:559
+#, fuzzy
+msgid "Match regular expression"
+msgstr "Khớp bằng biểu thức chính quy"
+
+#: ../../xffm/fm/local/popup.hh:75 ../../xffm/fm/root/view.hh:58
+#: ../../xffm/fm/fstab/popup.hh:21
+msgid "View as list"
+msgstr "Xem kiểu danh sách"
+
+#: ../../xffm/fm/local/popup.hh:77
+msgid "Show hidden files"
+msgstr "Hiện tập tin ẩn"
+
+#: ../../xffm/fm/local/popup.hh:79
+msgid "Show Backup Files"
+msgstr "Hiện tập tin sao lưu"
+
+#: ../../xffm/fm/local/popup.hh:81
+#, fuzzy
+msgid "Sort data in descending order"
+msgstr "Sắp xếp giảm dần"
+
+#: ../../xffm/fm/local/popup.hh:93 ../../xffm/fm/local/popup.hh:119
+#: ../../xffm/fm/local/popup.hh:1006 ../../xffm/fm/local/popup.hh:1013
+#: ../../xffm/fm/local/popup.hh:1022 ../../xffm/fm/local/popup.hh:1029
+#: ../../xffm/common/gtk.hh:72
+msgid "Open with"
+msgstr "Mở bằng"
+
+#: ../../xffm/fm/local/popup.hh:94 ../../xffm/fm/local/popup.hh:846
+msgid "Run Executable..."
+msgstr "Chạy tập tin có thể thực hiện..."
+
+#: ../../xffm/fm/local/popup.hh:95
+msgid "Extract files from the archive"
+msgstr "Giải nén tập tin khỏi kho"
+
+#. g_hash_table_insert(iconname_hash, "bcrypt", (void *)"emblem-keyhole");
+#: ../../xffm/fm/local/popup.hh:96 ../../xffm/fm/root/view.hh:73
+#: ../../xffm/fm/fstab/popup.hh:20 ../../xffm/fm/dialog/notebook.hh:52
+#: ../../xffm/common/gtk.hh:78
+msgid "Open in New Tab"
+msgstr "Mở trong Tab Mới"
+
+#. File chooser
+#: ../../xffm/fm/local/popup.hh:97 ../../xffm/fm/local/popup.hh:706
+msgid "Create a compressed archive with the selected objects"
+msgstr "Tạo một kho nén chứa những đối tượng được chọn"
+
+#: ../../xffm/fm/local/popup.hh:98 ../../xffm/fm/fstab/popup.hh:37
+msgid "Mount the volume associated with this folder"
+msgstr "Gắn kết khối tin tương ứng với thư mục này"
+
+#: ../../xffm/fm/local/popup.hh:99 ../../xffm/fm/fstab/popup.hh:38
+msgid "Unmount the volume associated with this folder"
+msgstr "Tháo gắn kết khối tin tương ứng với thư mục này"
+
+#: ../../xffm/fm/local/popup.hh:100 ../../xffm/common/gtk.hh:67
+msgid "Add bookmark"
+msgstr "Thêm đánh dấu"
+
+#: ../../xffm/fm/local/popup.hh:101 ../../xffm/fm/root/view.hh:74
+#: ../../xffm/common/gtk.hh:68
+msgid "Remove bookmark"
+msgstr "Gỡ bỏ đánh dấu"
+
+#: ../../xffm/fm/local/popup.hh:108 ../../xffm/fm/local/popup.hh:961
+msgid "Rename"
+msgstr "Thay tên"
+
+#: ../../xffm/fm/local/popup.hh:109 ../../xffm/fm/local/popup.hh:947
+msgid "Duplicate"
+msgstr "Nhân đôi"
+
+#: ../../xffm/fm/local/popup.hh:110 ../../xffm/fm/local/popup.hh:933
+msgid "Link"
+msgstr "Liên kết"
+
+#: ../../xffm/fm/local/popup.hh:111
+msgid "Properties"
+msgstr "Thuộc tính"
+
+#: ../../xffm/fm/local/popup.hh:414
+msgid "Files:"
+msgstr "Tập tin:"
+
+#: ../../xffm/fm/local/popup.hh:417 ../../xffm/fm/local/rm.hh:61
+#, fuzzy
+msgid "Multiple selections"
+msgstr "Câm phần chọn"
+
+#: ../../xffm/fm/local/popup.hh:557
+#, fuzzy
+msgid "Select items"
+msgstr "Mục được chọn:"
+
+#: ../../xffm/fm/local/popup.hh:575
+#, fuzzy
+msgid "Regular Expression syntax is incorrect"
+msgstr "Công Cụ Sửa Biểu Thức Chính Quy"
+
+#: ../../xffm/fm/local/popup.hh:592
+msgid "No selection"
+msgstr "Chưa chọn gì"
+
+#: ../../xffm/fm/local/popup.hh:592
+msgid "No matches."
+msgstr "Không có kết quả khớp."
+
+#. entryResponse->setCheckButton(_("Run in Terminal"));
+#. entryResponse->setCheckButton(Mime<Type>::runInTerminal(path));
+#: ../../xffm/fm/local/popup.hh:721 ../../xffm/fm/page/pathbar.hh:313
+msgid "Specify Output Directory..."
+msgstr "Chỉ định thư mục xuất..."
+
+#: ../../xffm/fm/local/popup.hh:799
+#, fuzzy
+msgid "Create new..."
+msgstr "Tạo mục mới..."
+
+#: ../../xffm/fm/local/popup.hh:806 ../../xffm/fm/local/popup.hh:886
+msgid "New Name:"
+msgstr "Tên mới :"
+
+#: ../../xffm/fm/local/popup.hh:815
+msgid "No name"
+msgstr "Không tên"
+
+#: ../../xffm/fm/local/popup.hh:828
+#, c-format
+msgid "Another file with the same name already exists in “%s”."
+msgstr "Đã có tập tin khác cùng tên “%s”."
+
+#: ../../xffm/fm/local/popup.hh:850 ../../xffm/fm/local/popup.hh:1010
+#: ../../xffm/fm/local/popup.hh:1026 ../../xffm/common/util.hh:1248
+msgid "Run in Terminal"
+msgstr "Chạy trên dòng lệnh"
+
+#: ../../xffm/fm/local/popup.hh:853
+#, fuzzy
+msgid "Arguments for the Command"
+msgstr "Đối số cho lệnh"
+
+#: ../../xffm/fm/local/popup.hh:1047 ../../xffm/fm/local/view.hh:141
+msgid "Invalid entry"
+msgstr "Mục nhập không hợp lệ"
+
+#: ../../xffm/fm/local/properties.hh:235
+msgid "Properties and Attributes"
+msgstr "Thuộc tính"
+
+#: ../../xffm/fm/local/properties.hh:264
+msgid "File Mode:"
+msgstr "Chế độ tập tin:"
+
+#: ../../xffm/fm/local/properties.hh:290
+msgid "File:"
+msgstr "Tập tin:"
+
+#. Add file info stuff
+#. set info stuff data according to combo box
+#. add signal handler to changed signal for combo box
+#. Add process buttons
+#.
+#: ../../xffm/fm/local/properties.hh:302
+msgid "Apply changes"
+msgstr "Áp dụng thay đổi"
+
+#: ../../xffm/fm/local/properties.hh:462
+msgid "Successfully moved to trash."
+msgstr "Chuyển vào thùng rác thành công."
+
+#: ../../xffm/fm/local/properties.hh:463
+msgid "Source:"
+msgstr "Nguồn:"
+
+#: ../../xffm/fm/local/rm.hh:59
+#, c-format
+msgid "Delete %s"
+msgstr "Xoá bỏ %s"
+
+#: ../../xffm/fm/local/rm.hh:61
+msgid "Warning: "
+msgstr "Cảnh báo: "
+
+#. gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
+#. title
+#: ../../xffm/fm/local/rm.hh:90
+msgid "Remove"
+msgstr "Bỏ"
+
+#: ../../xffm/fm/local/rm.hh:140
+#, fuzzy
+msgid "Apply to all"
+msgstr "Áp dụng cho"
+
+#. **************
+#. This is now available to BSD with rm -P option
+#: ../../xffm/fm/local/rm.hh:163 ../../xffm/common/gtk.hh:76
+#, fuzzy
+msgid "Shred"
+msgstr "Huỷ tập tin"
+
+#. We do not count "../"
+#: ../../xffm/fm/local/view.hh:48 ../../xffm/fm/base/monitor.hh:28
+#, fuzzy, c-format
+msgid "Files: %s"
+msgstr "Tập tin: %s"
+
+#: ../../xffm/fm/root/model.hh:78
+#, fuzzy
+msgid "Root Directory"
+msgstr "Thư mục gốc..."
+
+#: ../../xffm/fm/root/model.hh:94
+msgid "This is the root of the filesystem"
+msgstr "Đây là gốc của hệ thống tập tin"
+
+#: ../../xffm/fm/root/model.hh:105
+msgid "Home Directory"
+msgstr "Thư mục chính"
+
+#: ../../xffm/fm/root/model.hh:132
+#, fuzzy
+msgid "Trash bin"
+msgstr "Kéo tập tin vào Rác"
+
+#: ../../xffm/fm/root/model.hh:162 ../../xffm/fm/fstab/popup.hh:29
+msgid "Disk Image Mounter"
+msgstr "Trình gắn ảnh đĩa"
+
+#: ../../xffm/fm/root/model.hh:169 ../../xffm/fm/root/model.hh:185
+msgid "Mount local disks and devices"
+msgstr "Lắp đĩa và thiết bị nội bộ"
+
+#: ../../xffm/fm/root/model.hh:170 ../../xffm/fm/fstab/popup.hh:25
+#: ../../xffm/fm/fstab/view.hh:429
+msgid "eCryptfs Volume"
+msgstr "Khối tin eCryptfs"
+
+#: ../../xffm/fm/root/model.hh:171 ../../xffm/fm/fstab/popup.hh:24
+msgid "SSHFS Remote Synchronization Folder"
+msgstr "Thư mục đồng bộ trên SSHFS với máy khác"
+
+#: ../../xffm/fm/root/model.hh:172 ../../xffm/fm/fstab/popup.hh:23
+#: ../../xffm/fm/fstab/view.hh:377
+msgid "NFS Network Volume"
+msgstr "Khối tin mạng NFS"
+
+#: ../../xffm/fm/root/model.hh:173 ../../xffm/fm/fstab/popup.hh:26
+#: ../../xffm/fm/fstab/view.hh:455
+msgid "CIFS Volume"
+msgstr "Khối tin CIFS"
+
+#: ../../xffm/fm/root/model.hh:195
+#, fuzzy
+msgid "Software Updater"
+msgstr "Bản cập nhật phần mềm"
+
+#: ../../xffm/fm/root/model.hh:218 ../../xffm/fm/root/model.hh:230
+msgid "Add or remove software installed on the system"
+msgstr "Thêm hoặc gỡ phần mềm cài đặt trên hệ thống"
+
+#: ../../xffm/fm/root/model.hh:271
+#, fuzzy
+msgid "Go to bookmarked location"
+msgstr "Đi tới địa chỉ liên kết kế tiếp."
+
+#. {N_("Add bookmark"), (void *)BasePopUp<Type>::noop, NULL, NULL},
+#: ../../xffm/fm/root/view.hh:61
+msgid "Empty trash"
+msgstr "Đổ Rác"
+
+#. File chooser
+#: ../../xffm/fm/fstab/popup.hh:121
+#, fuzzy
+msgid "Mount Device"
+msgstr "Thiết bị âm thanh"
+
+#: ../../xffm/fm/fstab/popup.hh:133
+msgid "Mount point:"
+msgstr "Điểm lắp:"
+
+#: ../../xffm/fm/fstab/view.hh:301
+msgid "Mounted on:"
+msgstr "Đã gắn kết vào :"
+
+#: ../../xffm/fm/fstab/view.hh:302
+msgid "Mount on"
+msgstr "Lắp vào"
+
+#: ../../xffm/fm/fstab/view.hh:310 ../../xffm/fm/fstab/view.hh:312
+msgid "Not mounted"
+msgstr "Chưa lắp"
+
+#: ../../xffm/fm/fstab/view.hh:403
+#, fuzzy
+msgid "SFTP (via SSH)"
+msgstr "FTP An toàn (SSH)"
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, c-format
+msgid "Unmounting %s"
+msgstr "Đang tháo lắp %s"
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, c-format
+msgid "Mounting %s"
+msgstr "Đang gắn kết %s..."
+
+#: ../../xffm/fm/dialog/menupopover.hh:128
+msgid "Home"
+msgstr "Thư mục chính"
+
+#: ../../xffm/fm/dialog/menupopover.hh:129 ../../xffm/common/gtk.hh:64
+#, fuzzy
+msgid "Open terminal"
+msgstr "Mở thiết bị cuối"
+
+#: ../../xffm/fm/dialog/menupopover.hh:130
+msgid "Open a New Window"
+msgstr "Mở cửa sổ mới"
+
+#. {N_("Execute Shell Command"), (void *)MenuPopoverSignals<Type>::shell, (void *) menuButton_},
+#: ../../xffm/fm/dialog/menupopover.hh:132 ../../xffm/common/gtk.hh:69
+msgid "Search"
+msgstr "Tìm kiếm"
+
+#: ../../xffm/fm/dialog/menupopover.hh:133 ../../xffm/common/gtk.hh:71
+msgid "Exit"
+msgstr "Thoát ra"
+
+#: ../../xffm/fm/dialog/dialog.hh:116
+msgid "Removed"
+msgstr "Đã gỡ bỏ"
+
+#: ../../xffm/fm/dialog/dialog.hh:132
+msgid "Detected device(s):"
+msgstr "Thiết bị dò tìm được:"
+
+#. Create the widgets
+#: ../../xffm/fm/page/vbuttonbox.hh:37 ../../xffm/common/gtk.hh:332
+msgid "Help"
+msgstr "Trợ giúp"
+
+#. File chooser
+#: ../../xffm/fm/page/pathbar.hh:306 ../../xffm/fm/page/pathbar.hh:308
+msgid "Go to"
+msgstr "Đi tới"
+
+#: ../../xffm/fm/page/pathbar.hh:331
+msgid "Not a directory"
+msgstr "Không phải là một thư mục"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+#, fuzzy
+msgid "Renice Process"
+msgstr "Bộ xử lý chung"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Suspend"
+msgstr "Ngưng"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Continue"
+msgstr "Tiếp tục"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Interrupt"
+msgstr "Ngắt"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Hangup"
+msgstr "Ngừng nói"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+#, fuzzy
+msgid "User 1 (USR1)"
+msgstr "Người dùng (6)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+#, fuzzy
+msgid "User 2 (USR2)"
+msgstr "Người dùng (6)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+#, fuzzy
+msgid "Terminate Task"
+msgstr "Dừng"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "Abort"
+msgstr "Hủy bỏ"
+
+#: ../../xffm/fm/page/runbutton.hh:138
+msgid "Kill"
+msgstr "Buộc kết thúc"
+
+#: ../../xffm/fm/page/runbutton.hh:139
+msgid "Segmentation fault"
+msgstr "Lỗi phân đoạn"
+
+#: ../../xffm/fm/page/runbutton.hh:217
+msgid "PID"
+msgstr "PID"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:37
+#, fuzzy
+msgid "Embedded Terminal"
+msgstr "Hình thu nhỏ nhúng"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:38
+#, fuzzy
+msgid "All items in the iconview."
+msgstr "Chọn tất cả các mục trong cửa sổ này"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:39
+msgid "Scripting"
+msgstr "Tạo tập lệnh"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:40
+#, fuzzy
+msgid "Clear Log"
+msgstr "Gột danh sách"
+
+#. Status textview
+#: ../../xffm/fm/page/hbuttonbox.hh:42
+msgid "Terminal font"
+msgstr "Phông chữ thiết bị cuối"
+
+#: ../../xffm/fm/treeview.hh:17
+msgid "Name"
+msgstr "Tên"
+
+#: ../../xffm/fm/treeview.hh:20
+msgid "Size"
+msgstr "Cỡ"
+
+#: ../../xffm/fm/treeview.hh:21
+msgid "Date"
+msgstr "Ngày"
+
+#: ../../xffm/fm/treeview.hh:22
+msgid "Mimetype"
+msgstr "Kiểu MIME"
+
+#: ../../xffm/fm/treeview.hh:24
+msgid "TYPE"
+msgstr "KIỂU"
+
+#: ../../xffm/fm/base/signals.hh:642
+msgid "Directory does not exist."
+msgstr "Không có thư mục này."
+
+#: ../../xffm/fm/base/signals.hh:644 ../../xffm/fm/base/signals.hh:646
+#, fuzzy
+msgid "Trash is empty"
+msgstr "Máy tính bảng hết pin"
+
+#: ../../xffm/common/settings.hh:27
+#, fuzzy
+msgid "New File:"
+msgstr "Tập tin mới"
+
+#: ../../xffm/common/gio.hh:235
+#, fuzzy
+msgid "Could not copy item:"
+msgstr "Không thể sao chép ảnh:"
+
+#: ../../xffm/common/gio.hh:237
+#, fuzzy
+msgid "Could not move item:"
+msgstr "Không thể gỡ bỏ mục"
+
+#: ../../xffm/common/gio.hh:239
+#, fuzzy
+msgid "Create symbolic link"
+msgstr "Tạo liên kết tượng trưng"
+
+#: ../../xffm/common/gio.hh:276
+#, c-format
+msgid ""
+"Could not delete:\n"
+"%s"
+msgstr ""
+"Không thể xoá:\n"
+"%s"
+
+#: ../../xffm/common/gio.hh:278
+#, c-format
+msgid "Could not move %s to trash"
+msgstr "Không thể chuyển %s vào sọt rác"
+
+#: ../../xffm/common/clipboard.hh:23 ../../xffm/common/dnd.hh:40
+msgid "Copying files locally"
+msgstr "Đang sao chép cục bộ các tập tin"
+
+#: ../../xffm/common/clipboard.hh:30 ../../xffm/common/dnd.hh:34
+#, fuzzy
+msgid "Moving files"
+msgstr "Đang di chuyển các tập tin"
+
+#: ../../xffm/common/dnd.hh:46
+#, fuzzy
+msgid "Create Link"
+msgstr "Tạo liên kết"
+
+#: ../../xffm/common/util.hh:1200
+#, c-format
+msgid ""
+"Scriptfile \"%s\" is not executable. Please set the executable-attribute on "
+"that file."
+msgstr ""
+
+#: ../../xffm/common/util.hh:1202 ../../xffm/common/util.hh:1237
+#, c-format
+msgid "Open with %s"
+msgstr "Mở bằng %s"
+
+#: ../../xffm/common/util.hh:1202
+msgid "Text Editor"
+msgstr "Bộ soạn thảo văn bản"
+
+#: ../../xffm/common/util.hh:1239 ../../xffm/common/gtk.hh:65
+msgid "Execute Shell Command"
+msgstr "Thực thi lệnh hệ vỏ"
+
+#: ../../xffm/common/util.hh:1243
+msgid ""
+"Console: quickly run single commands -- write a command here and press enter."
+msgstr ""
+
+#: ../../xffm/common/gtk.hh:123
+msgid "New Tab"
+msgstr "Thanh mới"
+
+#: ../../xffm/common/gtk.hh:335
+msgid "OK"
+msgstr "OK"
+
+#: ../../xffm/common/run.hh:344
+msgid "error"
+msgstr "lỗi"
+
+#: ../../xffm/common/run.hh:348
+msgid "warning"
+msgstr "cảnh báo"
+
+#: ../../xffm/common/mime.hh:101 ../../xffm/common/mime.hh:143
+#, fuzzy
+msgid "No Read Permission"
+msgstr "Quyền hạn địa chỉ"
+
+#: ../../xffm/common/preview.hh:593
+msgid "Empty file"
+msgstr "Tập tin rỗng"
+
+#: ../../xffm/common/preview.hh:648
+#, fuzzy, c-format
+msgid "Cannot read from %s"
+msgstr "Không thể đọc từ \"%s\""
+

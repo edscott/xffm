@@ -1,0 +1,1470 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:42:05 CDT 2013 ---
+#
+# Peter Dobrev <p.dobrev@softhome.net>, 2001.
+# Vladimira Girginova <missing@here.is>, 2004.
+# Ilia Penev <picholicho@gmail.com>, 2007.
+# Copyright (C) 2009 Krasimir "Bfaf" Chonov <mk2616@abv.bg>.
+# Damyan Ivanov <dam+gnome@ktnx.net>, 2010-2012.
+# Copyright (C) Krasimir Chonov <mk2616@abv.bg>, 2009-2010.
+# Atanas Kosharov <webcrusader@gmail.com>, 2005.
+# minor updates for completeness, Yanko Kaneti <yaneti@declera.com>, 2002.
+# Nikolay Hristov <geroy@stemo.bg>.
+# Copyright (C) 2010, 201 Krasimir Chonov <mk2616@abv.bg>.
+# Copyright (C) 2009 Krasimir Chonov <mk2616@abv.bg>.
+# Copyright (C) 2011 Krasimir "Bfaf" Chonov <mk2616@abv.bg>.
+# Stanimir Djevelekov <kori.mendocino@gmail.com>, 2005.
+# Atanas atan Pyuskyulev <atan@cacad.com>, 2005.
+# Krasimir Aranudov <krasi.arnaudov@gmail.com>, 2007.
+# Vladimir Petkov <kaladan@gmail.com>, 2004-2007.
+# Valeriy Voutov <valeriy.voutov@gmail.com>, 2009.
+# Updated by Peter "Peshka" Slavov <pslavov@i-space.org>, 2004.
+# Philip Dimitrov <philip.dimitrov@gmail.com>, 2005.
+# Pavel Cholakov <pavel@linux.zonebg.com>, 2001.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2002-2012.
+# Copyright (C) 2009, 2010 Krasimir Chonov <mk2616@abv.bg>.
+# Peter Tahchiev <peter@bianor.net>, 2006.
+# Evgeni Boevski <linkej@yahoo.com>, 2002-2004.
+# Copyright (C) 2010, 2012 Krasimir Chonov <mk2616@abv.bg>.
+# Златко Попов <zlatkopopov@fsa-bg.org>, 2005.
+# Borislav Aleksandrov <B.Aleksandrov@cnsys.bg>, 2001-2002.
+# Филип Андонов <demercel@netbg.com>, 2003.
+# root <root@LinuxCSE-36>, 2003-2011.
+# Copyright (C) 2010, 2012, 2013 Krasimir Chonov <mk2616@abv.bg>.
+# small updates for completeness, Vladimir Petkov <vpetkov@i-space.org>, 2004.
+# Milen Ivanov <milen.kerat@gmail.com>, 2004-2012.
+# Vladimir "kaladan" Petkov <kaladan@gmail.com>, 2005-2007.
+# Ivaylo Valkov <ivaylo@e-valkov.org>, 2009-2013.
+# Copyright (C) 2009, 2010, 2011 Krasimir Chonov <mk2616@abv.bg>.
+# This file should be sent to translation@iro.umontreal.ca with the <>.
+# Copyright (C) 2010, 2011, 2012 Krasimir Chonov <mk2616@abv.bg>.
+# Copyright (C) 2011 Krasimir Chonov <mk2616@abv.bg>.
+# Rostislav "zbrox" Raykov <zbrox@i-space.org>, 2004-2006.
+# Yavor Doganov <yavor@gnu.org>, 2005-2010.
+# Vladimir Gerdjikov <gerdjikov@gerdjikovs.net>, 2005.
+# Atanas Mavrov <bugar@developer.bg>, 2005-2008.
+# Copyright (C) 2010, 2011 Krasimir Chonov <mk2616@abv.bg>.
+# Vladimir \"Kaladan"\ Petkov <vpetkov@i-space.org>, 2004.
+# Copyright (C) 2003 Evgeni Boevski <linkej@yahoo.com>.
+# Rosi Dimova <pocu@bk.ru>, 2010.
+# Bulgarian message file for YaST2 (@memory@). <>.
+# Y Gonch <gonch@mail.bulgaria.com>, 2000.
+# Sava Chankov <sava.chankov@gmail.com>, 2005.
+# Miroslav Yordanov <miordanov@i-space.org>, 2004.
+# Victor Dachev <vdachev@gmail.com>, 2005-2007.
+# Ясен Праматаров <yasen@lindeas.com>, 2009.
+# Copyright (C) 2010 Krasimir Chonov <mk2616@abv.bg>.
+# Dimitar Boin <cyclonetc@mail.bulgaria.com>, 2000.
+# Copyright (C) 2011Krasimir Chonov <mk2616@abv.bg>.
+# Stoycho Stanchev <sstanchev@i-space.org>, 2004.
+# Krasimir Arnaudov <texas_kia@yahoo.com>, 2005.
+# Todor Tsankov <tushe@visdigita.net>, 2011.
+# Peter "Peshka" Slavov <pslavov@i-space.org>, 2004.
+# Атанас Мавров <bugar@developer.bg>, 2004.
+# Copyright (C) 2009, 2011, 2012, 2013 Krasimir Chonov <mk2616@abv.bg>.
+# Svetoslav Alexandrov AKA Zvezdichko <saturn@gbg.bg>, 2008.
+# Владимир Петков <vpetkov@i-space.org>, 2004.
+# Krasimir Chonov <mk2616@abv.bg>, 2009-2013.
+# Vasil Vasilev <Ekspert@mbox.contact.bg>, 2006.
+# Copyright (C) 2009, 2011 Krasimir "Bfaf" Chonov <mk2616@abv.bg>.
+# Rostislav Raikov <zbrox@dir.bg>, 2004.
+# Peter Slavov <pslavov@i-space.org>, 2004-2005.
+# Yanko Kaneti <yaneti@declera.com>, 2001-2003.
+# Anton Zinoviev <zinoviev@debian.org>, 2003-2006.
+# Rostislav Raykov <zbrox@i-space.org>, 2004-2006.
+# Author@Betawiki: DCLXVI <>.
+# Copyright (C) 2010, 2011, 2012, 2013 Krasimir Chonov <mk2616@abv.bg>.
+# Yasen Pramatar <yasen@lindeas.com>, 2009.
+# Petar Toushkov <pt.launchpad@gmail.com>, 2009-2010.
+# Dimitar Popov <insane@fmi.uni-sofia.bg>, 2011.
+# Zlatko Popov <zlatkopopov@fsa-bg.org>, 2005-2012.
+# Boyan Ivanov <boyan17@bulgaria.com>, 2003.
+# Vasil Stoev <vs24000@gmail.com>, 2009.
+# Copyright (C) 2009, 2011, 2012 Krasimir Chonov <mk2616@abv.bg>.
+# Alexander Shopov <ash@kambanaria.org>, 2001-2013.
+# Copyright (C) 2007 Robby Stephenson <robby@periapsis.org>.
+# Filip Andonov <demercel@c4.com>, 2002-2003.
+# Jordan Miladinov <jordanmiladinov@gmail.com>, 2011.
+# Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
+# Svetoslav Stefanov <svetlisashkov@yahoo.com>, 2008-2010.
+# Krasimir "Bfaf" Chonov <mk2616@abv.bg>, 2009-2010.
+# Copyright (C) 2010 Rosi Dimova <pocu@bk.ru>.
+# Vladimir "Kaladan" Petkov <kaladan@gmail.com>, 2004-2009.
+# Thomas Niederreiter <tn@xcdroast.org>, 2002-2003.
+# Iassen Pramatarov <turin@fsa-bg.org>, 2004-2005.
+# Julia Velkova <konfeta@gmail.com>, 2004-2005.
+# Боян Валентинов Тодоров <boian_valentinov@abv.bg>, 2006.
+# Aleksandar Yordanov <punkin.drublik@gmail.com>, 2007.
+# Copyright (C) 2009, 2010, 2011, 2012 Krasimir Chonov <mk2616@abv.bg>.
+# Yasen Pramatarov <yasen@lindeas.com>, 2004-2012.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-02 12:27-0600\n"
+"PO-Revision-Date: 2006-11-23 22:41+0200\n"
+"Last-Translator: Anton Zinoviev <zinoviev@debian.org>\n"
+"Language-Team: Bulgarian <dict@fsa-bg.org>\n"
+"Language: bg\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../../xffm/completion/base.hh:28
+msgid "Command"
+msgstr "Команда"
+
+#: ../../xffm/completion/base.hh:31
+msgid "File"
+msgstr "Файл"
+
+#: ../../xffm/completion/base.hh:34
+#, fuzzy
+msgid "Command history"
+msgstr "История на зарежданите програми"
+
+#. option -u uid "uid" "uid_combo"
+#: ../../xffm/completion/base.hh:37 ../../xffm/find/dialog.hh:199
+msgid "User"
+msgstr "Потребител"
+
+#: ../../xffm/completion/base.hh:40
+msgid "Variable"
+msgstr "Променлива"
+
+#: ../../xffm/completion/base.hh:43
+msgid "Host"
+msgstr "Хост"
+
+#: ../../xffm/completion/base.hh:55
+msgid "Found no match"
+msgstr "Не е открито съвпадение"
+
+#: ../../xffm/completion/base.hh:133 ../../xffm/completion/base.hh:134
+msgid "Matches"
+msgstr "Съвпада"
+
+#: ../../xffm/completion/base.hh:134
+msgid "Too many files open"
+msgstr "Твърде много отворени файлове"
+
+#: ../../xffm/completion/base.hh:325 ../../xffm/find/fgr.hh:124
+msgid "Options:"
+msgstr "Опции:"
+
+#: ../../xffm/completion/bash.hh:133
+msgid "Completion mode:"
+msgstr "Режим \"автозавършване\":"
+
+#: ../../xffm/completion/bash.hh:134
+msgid "command"
+msgstr "команда"
+
+#: ../../xffm/completion/bash.hh:135
+msgid "file"
+msgstr "файл"
+
+#: ../../xffm/completion/bash.hh:145 ../../xffm/completion/bash.hh:149
+msgid "Options >>"
+msgstr "Настройки >>"
+
+#: ../../xffm/find/fgr.hh:124 ../../xffm/find/dialog.hh:308
+msgid "Path"
+msgstr "Път"
+
+#: ../../xffm/find/fgr.hh:125
+msgid "Locate documents and folders on this computer by name or content"
+msgstr "Търсене за документи и папки на този компютър по име или съдържание"
+
+#: ../../xffm/find/fgr.hh:126 ../../xffm/find/dialog.hh:341
+msgid "Filter:"
+msgstr "Филтър:"
+
+#: ../../xffm/find/fgr.hh:126
+msgid "Search for files"
+msgstr "Търсене за файлове"
+
+#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
+#: ../../xffm/find/fgr.hh:128
+msgid "Contents:"
+msgstr "Съдържание:"
+
+#: ../../xffm/find/fgr.hh:128
+msgid "File's contents filtered as plain text."
+msgstr "Съдържание на файла, показано в словесен вид."
+
+#: ../../xffm/find/fgr.hh:131
+#, fuzzy
+msgid "Verbose output debugging mode."
+msgstr "включване кода за изчистване на грешки"
+
+#: ../../xffm/find/fgr.hh:133
+msgid "Show version information"
+msgstr "Показване на информация за версията"
+
+#: ../../xffm/find/fgr.hh:135
+msgid "Filter Details"
+msgstr "Подробности"
+
+#. / option -a "xdev"
+#: ../../xffm/find/fgr.hh:138 ../../xffm/find/dialog.hh:180
+msgid "Stay on single filesystem"
+msgstr "Остани в текущата файлова система"
+
+#: ../../xffm/find/fgr.hh:140
+msgid "Print..."
+msgstr "Печат…"
+
+#: ../../xffm/find/fgr.hh:140
+msgid "The unique Process ID that identifies this process."
+msgstr "Уникалният ИД на процеса."
+
+#. / option -D "recursiveH"
+#: ../../xffm/find/fgr.hh:142 ../../xffm/find/dialog.hh:177
+msgid "Find hidden files and directories"
+msgstr "Откриване на скрити файлове и директории"
+
+#: ../../xffm/find/fgr.hh:143
+msgid "Filter"
+msgstr "Филтър"
+
+#: ../../xffm/find/fgr.hh:144
+msgid ""
+"To display files which pass the filter (stars and regexps will be processed)"
+msgstr ""
+"За да показва файловете които преминават филтъра (звездички и регулярни "
+"изрази ще бъдат обработени)"
+
+#. / option -r "recursive"
+#: ../../xffm/find/fgr.hh:146 ../../xffm/find/dialog.hh:174
+msgid "Recursive"
+msgstr "Рекурсивно"
+
+#: ../../xffm/find/fgr.hh:147 ../../xffm/find/fgr.hh:148
+#: ../../xffm/find/fgr.hh:149 ../../xffm/find/fgr.hh:150
+msgid "KByte"
+msgstr "KByte"
+
+#: ../../xffm/find/fgr.hh:148
+msgid "is greater than or equal to"
+msgstr "е по-голямо или равно на"
+
+#: ../../xffm/find/fgr.hh:150
+msgid "is less than or equal to"
+msgstr "е по-малко или равно на"
+
+#: ../../xffm/find/fgr.hh:152
+msgid "Set UID"
+msgstr "Задаване на UID"
+
+#: ../../xffm/find/fgr.hh:152
+msgid "Executable Text Files"
+msgstr "При отваряне на изпълними текстови файлове"
+
+#: ../../xffm/find/fgr.hh:154
+msgid "The permissions of the file, in octal notation."
+msgstr "Правата за достъп до файла, в осмичен вид."
+
+#: ../../xffm/find/fgr.hh:155
+msgid "Type"
+msgstr "Тип"
+
+#: ../../xffm/find/fgr.hh:157 ../../xffm/find/signals.hh:17
+msgid "Any"
+msgstr "Всеки"
+
+#: ../../xffm/find/fgr.hh:157
+msgid "Default type"
+msgstr "Подразбран вид"
+
+#: ../../xffm/find/fgr.hh:158 ../../xffm/common/preview.hh:497
+msgid "Regular file"
+msgstr "Обикновен файл"
+
+#: ../../xffm/find/fgr.hh:159 ../../xffm/find/signals.hh:11
+#: ../../xffm/fm/local/popup.hh:803 ../../xffm/common/preview.hh:488
+msgid "Directory"
+msgstr "Папка"
+
+#: ../../xffm/find/fgr.hh:160 ../../xffm/find/signals.hh:12
+#: ../../xffm/common/preview.hh:494
+msgid "Symbolic Link"
+msgstr "Символна връзка"
+
+#: ../../xffm/find/fgr.hh:161
+msgid "UNIX Socket"
+msgstr "Юникс гнездо"
+
+#: ../../xffm/find/fgr.hh:162 ../../xffm/find/signals.hh:14
+#: ../../xffm/common/preview.hh:482
+msgid "Block device"
+msgstr "Блоково устройство"
+
+#: ../../xffm/find/fgr.hh:163 ../../xffm/find/signals.hh:15
+#: ../../xffm/common/preview.hh:485
+msgid "Character device"
+msgstr "Знаково устройство"
+
+#: ../../xffm/find/fgr.hh:164 ../../xffm/find/signals.hh:16
+#: ../../xffm/common/preview.hh:491
+msgid "FIFO"
+msgstr "Куп (стек)"
+
+#. radio_p freed on destroy event for dialog_.
+#. option -k minutes "last_minutes", "last_minutes_spin"
+#: ../../xffm/find/fgr.hh:166 ../../xffm/find/fgr.hh:168
+#: ../../xffm/find/dialog.hh:221
+msgid "Minutes"
+msgstr "Минути"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/dialog.hh:270 ../../xffm/find/dialog.hh:370
+#: ../../xffm/fm/treeview.hh:18
+msgid "Details"
+msgstr "Подробности"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/fgr.hh:179 ../../xffm/find/fgr.hh:180
+#: ../../xffm/find/fgr.hh:183 ../../xffm/find/fgr.hh:184
+#: ../../xffm/find/fgr.hh:187 ../../xffm/find/fgr.hh:188
+msgid "TIME"
+msgstr "ВРЕМЕ"
+
+#: ../../xffm/find/fgr.hh:168 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/fgr.hh:174 ../../xffm/find/fgr.hh:177
+msgid "Previous"
+msgstr "Предишно"
+
+#. option -h hours "last_hours", "last_hours_spin"
+#: ../../xffm/find/fgr.hh:169 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/dialog.hh:226
+msgid "Hours"
+msgstr "Часове"
+
+#. option -d days "last_days", "last_days_spin"
+#: ../../xffm/find/fgr.hh:172 ../../xffm/find/fgr.hh:174
+#: ../../xffm/find/dialog.hh:231
+msgid "Days"
+msgstr "Дни"
+
+#: ../../xffm/find/fgr.hh:175
+msgid "Month"
+msgstr "Месец"
+
+#: ../../xffm/find/fgr.hh:177
+#, fuzzy
+msgid "Month(s)"
+msgstr "месец(и)"
+
+#: ../../xffm/find/fgr.hh:180
+msgid "Modification Time :"
+msgstr "Време на промяна :"
+
+#: ../../xffm/find/fgr.hh:184
+msgid "Access Time :"
+msgstr "Време на достъп :"
+
+#: ../../xffm/find/fgr.hh:188
+msgid "Creation Time :"
+msgstr "Време на създаване :"
+
+#: ../../xffm/find/fgr.hh:191 ../../xffm/find/fgr.hh:192
+msgid "uid"
+msgstr "собственик"
+
+#: ../../xffm/find/fgr.hh:192
+msgid "User:"
+msgstr "Потребителско име:"
+
+#: ../../xffm/find/fgr.hh:194 ../../xffm/find/fgr.hh:195
+msgid "gid"
+msgstr "група"
+
+#: ../../xffm/find/fgr.hh:195
+msgid "Group:"
+msgstr "Група:"
+
+#: ../../xffm/find/fgr.hh:198
+msgid ""
+"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+"character that  normally  follows  a file  name"
+msgstr ""
+
+#: ../../xffm/find/fgr.hh:200
+msgid "Content View"
+msgstr "Преглед на съдържанието"
+
+#: ../../xffm/find/fgr.hh:201 ../../xffm/find/fgr.hh:202
+#: ../../xffm/find/fgr.hh:203 ../../xffm/find/fgr.hh:204
+msgid "STRING"
+msgstr "НИЗ"
+
+#: ../../xffm/find/fgr.hh:202 ../../xffm/find/fgr.hh:204
+#: ../../xffm/fm/local/popup.hh:563
+msgid "Regular expression"
+msgstr "Регулярен израз"
+
+#: ../../xffm/find/fgr.hh:204
+msgid "Extended"
+msgstr "Разширен дял"
+
+#: ../../xffm/find/fgr.hh:206
+msgid "Ignore case"
+msgstr "Игнориране на главни/малки"
+
+#: ../../xffm/find/fgr.hh:208
+msgid "Text Files"
+msgstr "Текстови файлове"
+
+#: ../../xffm/find/fgr.hh:210 ../../xffm/find/dialog.hh:552
+msgid "No match"
+msgstr "Няма съответствие"
+
+#: ../../xffm/find/fgr.hh:212 ../../xffm/find/dialog.hh:470
+msgid "Line Count"
+msgstr "Брой редове"
+
+#: ../../xffm/find/fgr.hh:214
+msgid "Words"
+msgstr "Думи"
+
+#: ../../xffm/find/fgr.hh:216
+msgid "Lines"
+msgstr "Редове"
+
+#: ../../xffm/find/fgr.hh:368
+#, c-format
+msgid "Usage : %s [OPTIONS]\n"
+msgstr "Употреба : %s [опции]\n"
+
+#: ../../xffm/find/signals.hh:10
+msgid "Regular"
+msgstr "Обикновена"
+
+#: ../../xffm/find/signals.hh:13 ../../xffm/common/preview.hh:500
+msgid "Socket"
+msgstr "Сокет"
+
+#: ../../xffm/find/signals.hh:209
+msgid "Select folder to search in"
+msgstr "Избор на папка, в която да търсите"
+
+#. button no
+#: ../../xffm/find/signals.hh:265 ../../xffm/find/dialog.hh:584
+#: ../../xffm/response/entryfileresponse.hh:18
+#: ../../xffm/response/entryresponse.hh:305
+#: ../../xffm/response/passwdresponse.hh:558
+#: ../../xffm/fm/local/properties.hh:304 ../../xffm/fm/local/rm.hh:155
+msgid "Cancel"
+msgstr "Отказ"
+
+#: ../../xffm/find/signals.hh:293 ../../xffm/find/signals.hh:722
+#, fuzzy
+msgid "No editor for current action."
+msgstr "Без поправяне на грешките"
+
+#. / option "upper_limit_spin" (only in gtk dialog_)
+#: ../../xffm/find/signals.hh:351 ../../xffm/find/dialog.hh:183
+msgid "Results"
+msgstr "Резултати"
+
+#: ../../xffm/find/signals.hh:351
+msgid "Upper limit:"
+msgstr "Горен предел:"
+
+#: ../../xffm/find/signals.hh:353
+msgid "Counting files..."
+msgstr "Преброяване на файловете..."
+
+#: ../../xffm/find/signals.hh:368
+#, c-format
+msgid "Found %d match"
+msgid_plural "Found %d matches"
+msgstr[0] "Намерени %d съвпадения"
+msgstr[1] "Намерени %d съвпадения"
+
+#: ../../xffm/find/signals.hh:370
+#, fuzzy, c-format
+msgid "%s Finished : %s"
+msgstr "Завършено:"
+
+#: ../../xffm/find/signals.hh:488 ../../xffm/find/signals.hh:490
+msgid "Searching..."
+msgstr "Търсене…"
+
+#. g_object_set_data(G_OBJECT(dialog_), "window", dialog_);
+#: ../../xffm/find/dialog.hh:98 ../../xffm/find/dialog.hh:150
+#: ../../xffm/find/dialog.hh:611
+msgid "Find"
+msgstr "Търсене"
+
+#: ../../xffm/find/dialog.hh:183
+msgid "Upper limit"
+msgstr "Горна граница"
+
+#. option -s +KByte "size_greater", "size_greater_spin"
+#: ../../xffm/find/dialog.hh:188
+msgid "At Least"
+msgstr "най-малко"
+
+#: ../../xffm/find/dialog.hh:188 ../../xffm/find/dialog.hh:193
+msgid "kBytes"
+msgstr "кБ"
+
+#. option -s -KByte "size_smaller", "size_smaller_spin"
+#: ../../xffm/find/dialog.hh:193
+msgid "At Most"
+msgstr "най-много"
+
+#: ../../xffm/find/dialog.hh:204
+msgid "Group"
+msgstr "Група"
+
+#. option -o octal "octal_p" "permissions_entry"
+#: ../../xffm/find/dialog.hh:208
+msgid "Octal Permissions"
+msgstr "Осмични права"
+
+#. option -p suid | exe
+#: ../../xffm/find/dialog.hh:213
+msgid "SUID"
+msgstr "SUID"
+
+#: ../../xffm/find/dialog.hh:213 ../../xffm/fm/local/popup.hh:843
+#, fuzzy
+msgid "Executable"
+msgstr "Изпълним файл:"
+
+#. option -m months "last_months", "last_months_spin"
+#: ../../xffm/find/dialog.hh:237
+msgid "Months"
+msgstr "Месеци"
+
+#: ../../xffm/find/dialog.hh:248
+msgid "File type : "
+msgstr "Тип на файла : "
+
+#. gtk_widget_show (GTK_WIDGET(right_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(center_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(left_options_vbox));
+#: ../../xffm/find/dialog.hh:262 ../../xffm/find/dialog.hh:602
+#: ../../xffm/fm/page/page.hh:70 ../../xffm/common/gtk.hh:70
+msgid "Close"
+msgstr "Затваряне"
+
+#. gtk_box_pack_start (vbox7a, GTK_WIDGET(advancedBox), TRUE, FALSE, 5);
+#. gtk_widget_show(GTK_WIDGET(advancedBox));
+#. //////////////  grep options.... /////////////////////////
+#: ../../xffm/find/dialog.hh:384
+msgid "Contains"
+msgstr "Съдържа"
+
+#: ../../xffm/find/dialog.hh:404
+msgid "Contains the text"
+msgstr "Съдържа текста"
+
+#: ../../xffm/find/dialog.hh:437
+msgid "Case Sensitive"
+msgstr "Зачитане на главни/малки"
+
+#: ../../xffm/find/dialog.hh:449
+msgid "Extended regexp"
+msgstr "Регулярен израз"
+
+#: ../../xffm/find/dialog.hh:460
+msgid "Include binary files"
+msgstr "Търсене във всички файлове"
+
+#: ../../xffm/find/dialog.hh:496
+msgid "Match"
+msgstr "Съвпадение"
+
+#: ../../xffm/find/dialog.hh:508
+#, fuzzy
+msgid "Anywhere"
+msgstr "Съвпадение където и да е"
+
+#: ../../xffm/find/dialog.hh:523
+msgid "Whole words only"
+msgstr "Търсене само на цели думи"
+
+#: ../../xffm/find/dialog.hh:538
+msgid "lines"
+msgstr "реда"
+
+#: ../../xffm/find/dialog.hh:594
+msgid "Clear"
+msgstr "Изчистване"
+
+#: ../../xffm/find/dialog.hh:636
+msgid "Edit"
+msgstr "Редактиране"
+
+#: ../../xffm/find/dialog.hh:751 ../../xffm/find/dialog.hh:766
+#: ../../xffm/common/util.hh:1150 ../../xffm/common/util.hh:1152
+#: ../../xffm/common/util.hh:1158 ../../xffm/common/util.hh:1160
+#: ../../xffm/common/preview.hh:479
+msgid "unknown"
+msgstr "непознато"
+
+#: ../../xffm/find/dialog.hh:780
+msgid "Modified"
+msgstr "Променен"
+
+#: ../../xffm/find/dialog.hh:784
+msgid "Created"
+msgstr "Създадено"
+
+#: ../../xffm/find/dialog.hh:788
+msgid "Accessed"
+msgstr "Използван"
+
+#: ../../xffm/find/dialog.hh:1106
+msgid ""
+"Basic rules:\n"
+"\n"
+"*  Will match any character zero or more times.\n"
+"?  Will match any character exactly one time\n"
+"[] Match any character within the [] \n"
+"^  Match at beginning of string\n"
+"$  Match at end of string \n"
+msgstr ""
+"Основни правила:\n"
+"\n"
+"*  Съвпада с всеки символ повтарящ се нула или повече пъти.\n"
+"?  Съвпада с всеки символ точно един път.\n"
+
+#: ../../xffm/find/dialog.hh:1115
+#, fuzzy
+msgid ""
+"Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"In  basic regular expressions the metacharacters ?, +, {, |, (, and ) \n"
+"  lose their special meaning.\n"
+"\n"
+"The  period . matches  any  single  character.\n"
+"The caret ^ matches at the start of line.\n"
+"The dollar $ matches at the end of line.\n"
+"\n"
+"Characters within [ ] matches any single character in the list.\n"
+"Characters within [^ ] matches any single character *not* in the list.\n"
+"Characters inside [ - ] matches a range of characters (ie [0-9] or [a-z]).\n"
+"\n"
+"A regular expression may be followed by one of several repetition "
+"operators:\n"
+"?      The preceding item is optional and matched\n"
+"       at most once.\n"
+"*      The preceding item will be matched zero\n"
+"       or more times.\n"
+"+      The preceding item will be matched one or\n"
+"       more times.\n"
+"{n}    The preceding item is matched exactly n times.\n"
+"{n,}   The preceding item is matched n or more times.\n"
+"{n,m}  The preceding item is matched at least n times,\n"
+"       but not more than m times.\n"
+"\n"
+"To match any reserved character, precede it with \\. \n"
+"\n"
+"Two regular expressions may be joined by the logical or operator |.\n"
+"Two regular expressions may be concatenated.\n"
+"\n"
+"More information is available by typing \"man grep\"\n"
+msgstr ""
+"Запазени знаци за regexp са\n"
+".·^·$·[·]·?·*·+·{·}·|·\\·(·)·:·\n"
+"В основните регулярни изрази метазнаците\n"
+"?,·+,·{,·|,·(,·и·)·губят техните специални значения.\n"
+"\n"
+"Периода··.···съвпада с всеки един знак.\n"
+"Каретката·^·съвпада с началото на реда.\n"
+"Долара·$·съвпада с края на реда.\n"
+"\n"
+"Знаците оградени с·[·]·съвпадат с всеки един знак·\n"
+"·······в списъка.\n"
+"Знаците·оградени·с [^·]·съвпадат с всеки един знак\n"
+"·······който *не е* в списъка.\n"
+"Знаците в·[·-·]·съвпадат с обхват от\n"
+"·······знаци·(например·[0-9]·или·[a-z]).\n"
+"\n"
+"Регулярен израз може да бъде следван от един\n"
+"·······от няколко повтарящи се оператори:\n"
+"?······Предишния знак е опционален и съвпада\n"
+"·······ведъж.\n"
+"*······Предипния знак съвпада нула\n"
+"·······или повече пъти.\n"
+"+······Предишния знак съвпада един или\n"
+"·······повече пъти.\n"
+"{n}····Предишния знак съвпада точно n пъти.\n"
+"{n,}···Предишния знак съвпада n или повече пъти.\n"
+"{n,m}··Предишния знак съвпада най-малко n,\n"
+"·······и най-много m пъти.\n"
+"\n"
+"За съвпадане с някой запазен знак,·предшествайте с·\\.·\n"
+"\n"
+"Два регулярни израза могат да бъдат съединени с логическия ИЛИ\n"
+"·······оператор·|.\n"
+"Два регулярни израза могат да бъдат свързани.\n"
+"\n"
+"Повече информация ще научите като напишете \"man·grep\"\n"
+"·······в конадния ред.\n"
+
+#: ../../xffm/response/entryfileresponse.hh:20
+msgid "Open"
+msgstr "Отваряне"
+
+#: ../../xffm/response/entryresponse.hh:29
+#: ../../xffm/response/entryfolderresponse.hh:28
+msgid "Choose directory"
+msgstr "Избор на папка"
+
+#. this button is redundant since hands are on keyboard for password
+#: ../../xffm/response/entryresponse.hh:309
+#: ../../xffm/response/passwdresponse.hh:189
+#: ../../xffm/response/passwdresponse.hh:559
+msgid "Ok"
+msgstr "Да"
+
+#: ../../xffm/response/commandprogressresponse.hh:32
+msgid "Items:"
+msgstr "Стартери:"
+
+#: ../../xffm/response/passwdresponse.hh:21
+msgid "Enter password"
+msgstr "Въведете парола"
+
+#. gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+#: ../../xffm/response/passwdresponse.hh:125
+msgid "User Input"
+msgstr "Вход от потребителя"
+
+#: ../../xffm/response/passwdresponse.hh:142
+#, fuzzy
+msgid "Response Requested"
+msgstr "Характеристика на изхода"
+
+#: ../../xffm/response/passwdresponse.hh:264
+msgid "Preparing"
+msgstr "Подготовка"
+
+#: ../../xffm/response/passwdresponse.hh:352
+msgid "sudo"
+msgstr "sudo"
+
+#: ../../xffm/response/passwdresponse.hh:354
+msgid "Command:"
+msgstr "Команда:"
+
+#: ../../xffm/response/passwdresponse.hh:357
+msgid "Permission denied"
+msgstr "Достъпът е отказан"
+
+#: ../../xffm/response/passwdresponse.hh:358
+msgid "Try to approach a problem from different angles."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:359
+msgid "Do you want to retry?"
+msgstr "Искате ли да опитате отново?"
+
+#: ../../xffm/response/passwdresponse.hh:360
+msgid "Alternate:"
+msgstr "Алтернативна:"
+
+#: ../../xffm/response/passwdresponse.hh:365
+msgid "No"
+msgstr "Не"
+
+#: ../../xffm/response/passwdresponse.hh:401
+msgid "Install"
+msgstr "Инсталиране"
+
+#: ../../xffm/response/passwdresponse.hh:402
+#, c-format
+msgid "%s does not exist."
+msgstr "%s не съществува."
+
+#: ../../xffm/response/passwdresponse.hh:467
+#, fuzzy
+msgid "Blowfish"
+msgstr "Sawfish"
+
+#: ../../xffm/response/passwdresponse.hh:468
+msgid "Encryption Key Approval"
+msgstr "Потвърждение на ключовете"
+
+#: ../../xffm/response/passwdresponse.hh:502
+msgid "-o     print output to standard out. Implies -r."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:506
+msgid "-c     DO NOT compress files before encryption."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:510
+msgid "-r     DO NOT remove input files after processing"
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:517
+#, fuzzy
+msgid "Encryption key: "
+msgstr "Ключ за шифроване:"
+
+#: ../../xffm/response/passwdresponse.hh:529
+msgid "Confirm:"
+msgstr "Потвърждение:"
+
+#: ../../xffm/response/passwdresponse.hh:542
+msgid "Sorry, passwords do not match"
+msgstr "Паролите не съвпадат."
+
+#: ../../xffm/response/passwdresponse.hh:550
+#, fuzzy
+msgid "Minimum length:"
+msgstr "Минимална стойност:"
+
+#: ../../xffm/response/timeoutresponse.hh:56
+msgid "Dismiss"
+msgstr "Отказване"
+
+#: ../../xffm/response/commandresponse.hh:23
+msgid "Running"
+msgstr "Изпълнение"
+
+#. auto text = g_strdup_printf("%s (pid: %d)",
+#. _("Waiting for operation to finish..."),
+#. Tubo<Type>::getChild (pid));
+#: ../../xffm/response/commandresponse.hh:28
+msgid "Waiting for operation to finish..."
+msgstr "Изчакване приключването на действието..."
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Documents"
+msgstr "Документи"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Downloads"
+msgstr "Свалени"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Music"
+msgstr "Музика"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Pictures"
+msgstr "Изображения"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Templates"
+msgstr "Шаблони"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Videos"
+msgstr "Видео"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Desktop"
+msgstr "Работен плот"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Bookmarks"
+msgstr "Отметки"
+
+#: ../../xffm/fm/local/icons.hh:259 ../../xffm/fm/local/rm.hh:181
+msgid "Trash"
+msgstr "Кошче"
+
+#: ../../xffm/fm/local/popup.hh:60
+msgid "New"
+msgstr "Нов"
+
+#. deprecated {N_("Open in New Tab"), NULL, NULL, NULL},
+#. deprecated {N_("Open in New Window"), NULL, NULL, NULL},
+#. common buttons /(also an iconsize +/- button)
+#: ../../xffm/fm/local/popup.hh:64 ../../xffm/fm/local/popup.hh:104
+#: ../../xffm/common/gtk.hh:74
+msgid "Copy"
+msgstr "Копиране"
+
+#: ../../xffm/fm/local/popup.hh:65 ../../xffm/fm/local/popup.hh:105
+#: ../../xffm/common/gtk.hh:73
+msgid "Cut"
+msgstr "Отрязване"
+
+#: ../../xffm/fm/local/popup.hh:66 ../../xffm/fm/local/popup.hh:106
+#: ../../xffm/common/gtk.hh:66
+msgid "Paste"
+msgstr "Поставяне"
+
+#. **************
+#: ../../xffm/fm/local/popup.hh:67 ../../xffm/fm/local/popup.hh:107
+#: ../../xffm/fm/local/rm.hh:174 ../../xffm/common/gtk.hh:75
+msgid "Delete"
+msgstr "Изтриване"
+
+#. {N_("About"), NULL, (void *) menu},
+#.
+#. only for listview: {N_("Sort by size"), NULL, (void *) menu},
+#. only for listview: {N_("Sort by date"), NULL, (void *) menu},
+#: ../../xffm/fm/local/popup.hh:73
+msgid "Select All"
+msgstr "Избиране на всичко"
+
+#: ../../xffm/fm/local/popup.hh:74 ../../xffm/fm/local/popup.hh:559
+#, fuzzy
+msgid "Match regular expression"
+msgstr "Ако съвпада с регулярен израз"
+
+#: ../../xffm/fm/local/popup.hh:75 ../../xffm/fm/root/view.hh:58
+#: ../../xffm/fm/fstab/popup.hh:21
+#, fuzzy
+msgid "View as list"
+msgstr "Преглед като Тест"
+
+#: ../../xffm/fm/local/popup.hh:77
+msgid "Show hidden files"
+msgstr "Показване на скритите файлове"
+
+#: ../../xffm/fm/local/popup.hh:79
+msgid "Show Backup Files"
+msgstr "Показвай запасните файлове"
+
+#: ../../xffm/fm/local/popup.hh:81
+msgid "Sort data in descending order"
+msgstr "Сортиране на данните в низходящ ред"
+
+#: ../../xffm/fm/local/popup.hh:93 ../../xffm/fm/local/popup.hh:119
+#: ../../xffm/fm/local/popup.hh:1006 ../../xffm/fm/local/popup.hh:1013
+#: ../../xffm/fm/local/popup.hh:1022 ../../xffm/fm/local/popup.hh:1029
+#: ../../xffm/common/gtk.hh:72
+msgid "Open with"
+msgstr "Отваряне с"
+
+#: ../../xffm/fm/local/popup.hh:94 ../../xffm/fm/local/popup.hh:846
+#, fuzzy
+msgid "Run Executable..."
+msgstr "Изпълнение..."
+
+#: ../../xffm/fm/local/popup.hh:95
+msgid "Extract files from the archive"
+msgstr "Разархивиране на файлове от архива"
+
+#. g_hash_table_insert(iconname_hash, "bcrypt", (void *)"emblem-keyhole");
+#: ../../xffm/fm/local/popup.hh:96 ../../xffm/fm/root/view.hh:73
+#: ../../xffm/fm/fstab/popup.hh:20 ../../xffm/fm/dialog/notebook.hh:52
+#: ../../xffm/common/gtk.hh:78
+msgid "Open in New Tab"
+msgstr "Отваряне в нова страница"
+
+#. File chooser
+#: ../../xffm/fm/local/popup.hh:97 ../../xffm/fm/local/popup.hh:706
+msgid "Create a compressed archive with the selected objects"
+msgstr "Създаване на компресиран архив с избраните обекти"
+
+#: ../../xffm/fm/local/popup.hh:98 ../../xffm/fm/fstab/popup.hh:37
+msgid "Mount the volume associated with this folder"
+msgstr "Монтиране на файловата система, отговаряща на тази папка"
+
+#: ../../xffm/fm/local/popup.hh:99 ../../xffm/fm/fstab/popup.hh:38
+msgid "Unmount the volume associated with this folder"
+msgstr "Демонтиране на файловата система, отговаряща на тази папка"
+
+#: ../../xffm/fm/local/popup.hh:100 ../../xffm/common/gtk.hh:67
+msgid "Add bookmark"
+msgstr "Добавяне на отметка"
+
+#: ../../xffm/fm/local/popup.hh:101 ../../xffm/fm/root/view.hh:74
+#: ../../xffm/common/gtk.hh:68
+msgid "Remove bookmark"
+msgstr "Премахване на отметка"
+
+#: ../../xffm/fm/local/popup.hh:108 ../../xffm/fm/local/popup.hh:961
+msgid "Rename"
+msgstr "Преименуване"
+
+#: ../../xffm/fm/local/popup.hh:109 ../../xffm/fm/local/popup.hh:947
+msgid "Duplicate"
+msgstr "Копие"
+
+#: ../../xffm/fm/local/popup.hh:110 ../../xffm/fm/local/popup.hh:933
+msgid "Link"
+msgstr "Връзка"
+
+#: ../../xffm/fm/local/popup.hh:111
+msgid "Properties"
+msgstr "Свойства"
+
+#: ../../xffm/fm/local/popup.hh:414
+msgid "Files:"
+msgstr "Файлове:"
+
+#: ../../xffm/fm/local/popup.hh:417 ../../xffm/fm/local/rm.hh:61
+#, fuzzy
+msgid "Multiple selections"
+msgstr "Множество транзакции"
+
+#: ../../xffm/fm/local/popup.hh:557
+msgid "Select items"
+msgstr "Избор на обекти"
+
+#: ../../xffm/fm/local/popup.hh:575
+msgid "Regular Expression syntax is incorrect"
+msgstr "Регулярният израз е синтактично неправилен"
+
+#: ../../xffm/fm/local/popup.hh:592
+msgid "No selection"
+msgstr "Няма избрано"
+
+#: ../../xffm/fm/local/popup.hh:592
+#, fuzzy
+msgid "No matches."
+msgstr "Няма съвпадения"
+
+#. entryResponse->setCheckButton(_("Run in Terminal"));
+#. entryResponse->setCheckButton(Mime<Type>::runInTerminal(path));
+#: ../../xffm/fm/local/popup.hh:721 ../../xffm/fm/page/pathbar.hh:313
+msgid "Specify Output Directory..."
+msgstr "Посочете директория за изходните данни..."
+
+#: ../../xffm/fm/local/popup.hh:799
+#, fuzzy
+msgid "Create new..."
+msgstr "Създаване на нов"
+
+#: ../../xffm/fm/local/popup.hh:806 ../../xffm/fm/local/popup.hh:886
+msgid "New Name:"
+msgstr "Ново име:"
+
+#: ../../xffm/fm/local/popup.hh:815
+msgid "No name"
+msgstr "Без име"
+
+#: ../../xffm/fm/local/popup.hh:828
+#, c-format
+msgid "Another file with the same name already exists in “%s”."
+msgstr "Вече съществува друг файл с това име  в „%s“."
+
+#: ../../xffm/fm/local/popup.hh:850 ../../xffm/fm/local/popup.hh:1010
+#: ../../xffm/fm/local/popup.hh:1026 ../../xffm/common/util.hh:1248
+msgid "Run in Terminal"
+msgstr "Стартиране в терминал"
+
+#: ../../xffm/fm/local/popup.hh:853
+#, fuzzy
+msgid "Arguments for the Command"
+msgstr "Параметри на командата"
+
+#: ../../xffm/fm/local/popup.hh:1047 ../../xffm/fm/local/view.hh:141
+msgid "Invalid entry"
+msgstr "Невалиден запис"
+
+#: ../../xffm/fm/local/properties.hh:235
+msgid "Properties and Attributes"
+msgstr "Свойства и атрибути"
+
+#: ../../xffm/fm/local/properties.hh:264
+#, fuzzy
+msgid "File Mode:"
+msgstr "Режим на файловете"
+
+#: ../../xffm/fm/local/properties.hh:290
+msgid "File:"
+msgstr "Файл:"
+
+#. Add file info stuff
+#. set info stuff data according to combo box
+#. add signal handler to changed signal for combo box
+#. Add process buttons
+#.
+#: ../../xffm/fm/local/properties.hh:302
+msgid "Apply changes"
+msgstr "Прилагане на промените"
+
+#: ../../xffm/fm/local/properties.hh:462
+msgid "Successfully moved to trash."
+msgstr "Успешно преместване в кошчето."
+
+#: ../../xffm/fm/local/properties.hh:463
+msgid "Source:"
+msgstr "Източник:"
+
+#: ../../xffm/fm/local/rm.hh:59
+#, c-format
+msgid "Delete %s"
+msgstr "Изтриване на %s"
+
+#: ../../xffm/fm/local/rm.hh:61
+msgid "Warning: "
+msgstr "Внимание: "
+
+#. gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
+#. title
+#: ../../xffm/fm/local/rm.hh:90
+msgid "Remove"
+msgstr "Премахване"
+
+#: ../../xffm/fm/local/rm.hh:140
+#, fuzzy
+msgid "Apply to all"
+msgstr "Отговор до всички"
+
+#. **************
+#. This is now available to BSD with rm -P option
+#: ../../xffm/fm/local/rm.hh:163 ../../xffm/common/gtk.hh:76
+msgid "Shred"
+msgstr "Изчистване"
+
+#. We do not count "../"
+#: ../../xffm/fm/local/view.hh:48 ../../xffm/fm/base/monitor.hh:28
+#, c-format
+msgid "Files: %s"
+msgstr "Файлове: %s"
+
+#: ../../xffm/fm/root/model.hh:78
+msgid "Root Directory"
+msgstr "Главна директория"
+
+#: ../../xffm/fm/root/model.hh:94
+msgid "This is the root of the filesystem"
+msgstr "Основната папка на файловата система"
+
+#: ../../xffm/fm/root/model.hh:105
+msgid "Home Directory"
+msgstr "Домашна директория"
+
+#: ../../xffm/fm/root/model.hh:132
+msgid "Trash bin"
+msgstr "Кошче"
+
+#: ../../xffm/fm/root/model.hh:162 ../../xffm/fm/fstab/popup.hh:29
+msgid "Disk Image Mounter"
+msgstr "Монтиране на файлове с образи"
+
+#: ../../xffm/fm/root/model.hh:169 ../../xffm/fm/root/model.hh:185
+msgid "Mount local disks and devices"
+msgstr "Монтиране на локални дискове и устройства"
+
+#: ../../xffm/fm/root/model.hh:170 ../../xffm/fm/fstab/popup.hh:25
+#: ../../xffm/fm/fstab/view.hh:429
+msgid "eCryptfs Volume"
+msgstr "Дял eCryptfs"
+
+#: ../../xffm/fm/root/model.hh:171 ../../xffm/fm/fstab/popup.hh:24
+msgid "SSHFS Remote Synchronization Folder"
+msgstr "Папка за синхронизация чрез SSHFS"
+
+#: ../../xffm/fm/root/model.hh:172 ../../xffm/fm/fstab/popup.hh:23
+#: ../../xffm/fm/fstab/view.hh:377
+msgid "NFS Network Volume"
+msgstr "Мрежови диск NFS"
+
+#: ../../xffm/fm/root/model.hh:173 ../../xffm/fm/fstab/popup.hh:26
+#: ../../xffm/fm/fstab/view.hh:455
+msgid "CIFS Volume"
+msgstr "Мрежови диск CIFS"
+
+#: ../../xffm/fm/root/model.hh:195
+#, fuzzy
+msgid "Software Updater"
+msgstr "Обновление на софтуера"
+
+#: ../../xffm/fm/root/model.hh:218 ../../xffm/fm/root/model.hh:230
+msgid "Add or remove software installed on the system"
+msgstr "Инсталиране и деинсталиране на софтуер към системата"
+
+#: ../../xffm/fm/root/model.hh:271
+#, fuzzy
+msgid "Go to bookmarked location"
+msgstr "Към адреса на следващата отметка."
+
+#. {N_("Add bookmark"), (void *)BasePopUp<Type>::noop, NULL, NULL},
+#: ../../xffm/fm/root/view.hh:61
+msgid "Empty trash"
+msgstr "Изхвърляне на кошчето"
+
+#. File chooser
+#: ../../xffm/fm/fstab/popup.hh:121
+msgid "Mount Device"
+msgstr "Монтиране на устройство"
+
+#: ../../xffm/fm/fstab/popup.hh:133
+msgid "Mount point:"
+msgstr "Прикачна точка:"
+
+#: ../../xffm/fm/fstab/view.hh:301
+msgid "Mounted on:"
+msgstr "Точка на монтиране:"
+
+#: ../../xffm/fm/fstab/view.hh:302
+msgid "Mount on"
+msgstr "Монтиране в"
+
+#: ../../xffm/fm/fstab/view.hh:310 ../../xffm/fm/fstab/view.hh:312
+msgid "Not mounted"
+msgstr "немонтиран"
+
+#: ../../xffm/fm/fstab/view.hh:403
+#, fuzzy
+msgid "SFTP (via SSH)"
+msgstr "SFTP през SSH2"
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, c-format
+msgid "Unmounting %s"
+msgstr "Демонтиране на %s"
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, c-format
+msgid "Mounting %s"
+msgstr "Прикачам %s"
+
+#: ../../xffm/fm/dialog/menupopover.hh:128
+msgid "Home"
+msgstr "Домашна папка"
+
+#: ../../xffm/fm/dialog/menupopover.hh:129 ../../xffm/common/gtk.hh:64
+msgid "Open terminal"
+msgstr "Отваряне на терминал"
+
+#: ../../xffm/fm/dialog/menupopover.hh:130
+msgid "Open a New Window"
+msgstr "Отваряне на нов прозорец"
+
+#. {N_("Execute Shell Command"), (void *)MenuPopoverSignals<Type>::shell, (void *) menuButton_},
+#: ../../xffm/fm/dialog/menupopover.hh:132 ../../xffm/common/gtk.hh:69
+msgid "Search"
+msgstr "Търсене"
+
+#: ../../xffm/fm/dialog/menupopover.hh:133 ../../xffm/common/gtk.hh:71
+msgid "Exit"
+msgstr "Спиране на програмата"
+
+#: ../../xffm/fm/dialog/dialog.hh:116
+msgid "Removed"
+msgstr "Деинсталиран"
+
+#: ../../xffm/fm/dialog/dialog.hh:132
+msgid "Detected device(s):"
+msgstr "Засечени устройства:"
+
+#. Create the widgets
+#: ../../xffm/fm/page/vbuttonbox.hh:37 ../../xffm/common/gtk.hh:332
+msgid "Help"
+msgstr "Помощ"
+
+#. File chooser
+#: ../../xffm/fm/page/pathbar.hh:306 ../../xffm/fm/page/pathbar.hh:308
+msgid "Go to"
+msgstr "Отиване до"
+
+#: ../../xffm/fm/page/pathbar.hh:331
+msgid "Not a directory"
+msgstr "не е папка"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+#, fuzzy
+msgid "Renice Process"
+msgstr "Общ процесор"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Suspend"
+msgstr "Приспиване"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Continue"
+msgstr "Продължаване"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Interrupt"
+msgstr "Прекъсване"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Hangup"
+msgstr "Затваряне на връзката"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "User 1 (USR1)"
+msgstr "Потребител 1 (USR1)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "User 2 (USR2)"
+msgstr "Потребител 2 (USR2)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+#, fuzzy
+msgid "Terminate Task"
+msgstr "Унищожаване (TERM)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "Abort"
+msgstr "Отмяна"
+
+#: ../../xffm/fm/page/runbutton.hh:138
+msgid "Kill"
+msgstr "Убиване"
+
+#: ../../xffm/fm/page/runbutton.hh:139
+#, fuzzy
+msgid "Segmentation fault"
+msgstr "Надхвърляне на сегмента"
+
+#: ../../xffm/fm/page/runbutton.hh:217
+msgid "PID"
+msgstr "PID"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:37
+#, fuzzy
+msgid "Embedded Terminal"
+msgstr "Поддръжка на вграден терминал"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:38
+msgid "All items in the iconview."
+msgstr "Всички елементи в списъка с изображения/"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:39
+msgid "Scripting"
+msgstr "Скриптове"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:40
+msgid "Clear Log"
+msgstr "Изчистване на дневника"
+
+#. Status textview
+#: ../../xffm/fm/page/hbuttonbox.hh:42
+msgid "Terminal font"
+msgstr "Терминален шрифт"
+
+#: ../../xffm/fm/treeview.hh:17
+msgid "Name"
+msgstr "Име "
+
+#: ../../xffm/fm/treeview.hh:20
+msgid "Size"
+msgstr "Размер"
+
+#: ../../xffm/fm/treeview.hh:21
+msgid "Date"
+msgstr "Дата"
+
+#: ../../xffm/fm/treeview.hh:22
+msgid "Mimetype"
+msgstr "Програмни типове (MIME)"
+
+#: ../../xffm/fm/treeview.hh:24
+msgid "TYPE"
+msgstr "ФОРМАТ"
+
+#: ../../xffm/fm/base/signals.hh:642
+msgid "Directory does not exist."
+msgstr "Директорията не съществува."
+
+#: ../../xffm/fm/base/signals.hh:644 ../../xffm/fm/base/signals.hh:646
+#, fuzzy
+msgid "Trash is empty"
+msgstr "пътят е празен"
+
+#: ../../xffm/common/settings.hh:27
+#, fuzzy
+msgid "New File:"
+msgstr "Нов файл"
+
+#: ../../xffm/common/gio.hh:235
+#, fuzzy
+msgid "Could not copy item:"
+msgstr "Изображението не беше копирано:"
+
+#: ../../xffm/common/gio.hh:237
+#, fuzzy
+msgid "Could not move item:"
+msgstr "Елементът не може да бъде премахнат"
+
+#: ../../xffm/common/gio.hh:239
+#, fuzzy
+msgid "Create symbolic link"
+msgstr "Създай мека връзка"
+
+#: ../../xffm/common/gio.hh:276
+#, c-format
+msgid ""
+"Could not delete:\n"
+"%s"
+msgstr ""
+"Невъзможно изтриване:\n"
+"%s"
+
+#: ../../xffm/common/gio.hh:278
+#, c-format
+msgid "Could not move %s to trash"
+msgstr "„%s“ не може да бъде преместен в кошчето"
+
+#: ../../xffm/common/clipboard.hh:23 ../../xffm/common/dnd.hh:40
+msgid "Copying files locally"
+msgstr "Копиране на файловете локално"
+
+#: ../../xffm/common/clipboard.hh:30 ../../xffm/common/dnd.hh:34
+msgid "Moving files"
+msgstr "Преместване на файлове"
+
+#: ../../xffm/common/dnd.hh:46
+#, fuzzy
+msgid "Create Link"
+msgstr "Създаване в:"
+
+#: ../../xffm/common/util.hh:1200
+#, c-format
+msgid ""
+"Scriptfile \"%s\" is not executable. Please set the executable-attribute on "
+"that file."
+msgstr ""
+
+#: ../../xffm/common/util.hh:1202 ../../xffm/common/util.hh:1237
+#, c-format
+msgid "Open with %s"
+msgstr "Отваряне с %s"
+
+#: ../../xffm/common/util.hh:1202
+msgid "Text Editor"
+msgstr "Текстов редактор"
+
+#: ../../xffm/common/util.hh:1239 ../../xffm/common/gtk.hh:65
+msgid "Execute Shell Command"
+msgstr "Изпълнение на конзолна команда"
+
+#: ../../xffm/common/util.hh:1243
+msgid ""
+"Console: quickly run single commands -- write a command here and press enter."
+msgstr ""
+
+#: ../../xffm/common/gtk.hh:123
+msgid "New Tab"
+msgstr "Нов подпрозорец"
+
+#: ../../xffm/common/gtk.hh:335
+msgid "OK"
+msgstr "ОК"
+
+#: ../../xffm/common/run.hh:344
+msgid "error"
+msgstr "грешка"
+
+#: ../../xffm/common/run.hh:348
+msgid "warning"
+msgstr "предупреждение"
+
+#: ../../xffm/common/mime.hh:101 ../../xffm/common/mime.hh:143
+msgid "No Read Permission"
+msgstr "Нямате права за четене"
+
+#: ../../xffm/common/preview.hh:593
+msgid "Empty file"
+msgstr "Празен файл"
+
+#: ../../xffm/common/preview.hh:648
+#, c-format
+msgid "Cannot read from %s"
+msgstr "Не може да се чете от %s"
+

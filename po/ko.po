@@ -1,0 +1,1448 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:45:23 CDT 2013 ---
+#
+# Kang Bundo <bundo@bundo.biz>, 2010.
+# Michelle Jiyeen KIM <mkim@redhat.com>, 2002.
+# Kang, JeongHee <Keizi@mail.co.kr>, 2000-2002.
+# Eungkyu Song <eungkyu@sparcs.org>, 2001.
+# Kyuhyong Yoo <master@aerobuster.com>, 2004.
+# update by ChiDeok, Hwang <hwang@mizi.co.kr>, 2001.
+# Sang-kyun Noh <freesky80@nate.com>, 2007-2008.
+# Park Shinjo <peremen@gmail.com>, 2006-2013.
+# Jae-kyun Lee <kida@power.yeungnam.ac.kr>, 2002.
+# Cedna <sptcedna@gmail.com>, 2010.
+# ByungHyun Choi <byunghyun.choi@gmail.com>, 2005.
+# sinsh <sinsh29a@yahoo.co.kr>, 2003.
+# fedoracat <fedoracat@fedoraproject.org>, 2011.
+# DongCheon Park <dcpark@kaist.ac.kr>, 2003.
+# jhsim <jhsim@haansoft.com>, 2010.
+# Sung-Hyun Nam <namsh@lgic.co.kr>, 1998-2004.
+# Kim jaehwan <myri7@yahoo.co.kr>, 2000-2001.
+# Hyunseok Hwang <fr.hwang@gmail.com>, 2007-2008.
+# Young-Ho, Cha <ganadist@mizi.com>, 2000-2008.
+# KIM HyoungSuk <mire@mizi.com>, 2001.
+# Chideok, Hwang <hwang@mizi.co.kr>, 2001.
+# Yu-Chan, Park <super@susekorea.net>, 2001-2004.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2002-2012.
+# Hongsoo Byun <hsbyun@haansoft.com>, 2005.
+# Huyn-jin Kim <bbangya@mizi.com>, 2001.
+# Bang Jun-Young <bangjy@nownuri.nowcom.co.kr>, 1996-1997.
+# Sung-Jae, Cho <jachin@hanafos.com>, 2005.
+# Hwang, Chideok <hwang@mizi.co.kr>, 2000-2001.
+# root <root@LinuxCSE-36>, 2003-2011.
+# Myong-sung Kim <xfuncrushx@gmail.com>, 2007-2009.
+# eukim <eukim@redhat.com>, 2012.
+# Updated by Young-Ho, Cha <ganadist@chollian.net>, 2000-2007.
+# Ji-Hui Choi <like.a.dust@gmail.com>, 2007-2012.
+# Kwonwoo Nam <kwnam@haansoft.com>, 2004.
+# Gareth Owen <gowen72@yahoo.com>, 2004.
+# Byeong-Chan Kim <redhands@linux.sarang.net>, 1999-2004.
+# Chideok Hwang <hwang@mizi.co.kr>, 2000-2001.
+#           by Takeshi Aihana <aihana@gnome.gr.jp>, 2001-2003.
+# sangu <sangu.gnome@gmail.com>, 2011.
+# Sebul <sebuls@gmail.com>, 2012.
+# Seongchong Park, <lostinu@kaist.ac.kr>, 2004.
+# Young-Ho Cha, <ganadist@mizi.com>, 2004-2007.
+# Namhyung Kim <namhyung@gmail.com>, 2007-2011.
+# Sung-Du Hong <hkde@hancom.com>, 2003-2004.
+# KIM KyungHeon <tody@teoal.net>, 2001-2004.
+# Louis JANG <louis@mizi.com>, 2001.
+# Jang,Jae-Man <jacojang@korea.com>, 2003.
+# update by Chideok Hwang <hwang@mizi.co.kr>, 2000.
+# SiO4, Yong Hwan <sio4@linuxkorea.co.kr>, 1999.
+# Myong-sung, Kim <xfuncrushx@gmail.com>, 2007-2008.
+# Hwang, Sang-Jin <violiet@suse.de>.
+# LinuxKorea Co. <kde@linuxkorea.co.kr>, 1999-2000.
+# Seung Soo, Ha <sungsuha@gmail.com>, 2010.
+# Hyunsok Oh <hoh@redhat.com>, 2010.
+# hyunsuk shim <hsshim@hancom.com>, 2001.
+# Hye-Shik Chang <perky@FreeBSD.org>, 2003.
+# 유규형 <khyu@haansoft.com>, 2004.
+# Young-Ho,Cha <ganadist@dacome.co.kr>, 2000.
+# Seong-ho, Cho <darkcircle.0426@gmail.com>, 2011.
+# Mr.Dust <like.a.dust@gmail.com>, 2008.
+# Kyuhyong <root@localhost.localdomain>, 2004-2005.
+# Cho Sangjin <sangjin3901@chol.com>, 2007.
+# sebul <sebuls@gmail.com>, 2012.
+# Based on Japanese po file written by Mitsuru Oka <oka326@parkcity.ne.jp>.
+# Updated by Sung-Hyun Nam <namsh@kldp.org>, 2000-2001.
+# Park Sinjo <kde@peremen.name>, 2007-2009.
+# Youngbin Park <shrike@nate.com>, 2005.
+# Kang Joeng-Hee <Keizi@mail.co.kr>, 2001.
+# Kang Jeong-Hee <Keizi@mail.co.kr>, 2003.
+# bluekyu <bluekyu.dev@gmail.com>, 2010.
+# Updated by Young-Ho Cha <ganadist@chollian.net>, 2000-2007.
+# Park J. K. <segfault@byus.net>, 2004.
+# ChiDeok Hwang <hwang@mizi.co.kr>, 2001.
+# Seong-ho Cho <darkcircle.0426@gmail.com>, 2011-2013.
+# Choe Hwanjin <hkde@hancom.com>, 2003-2004.
+# Eunju Kim <eukim@redhat.com>, 2007.
+# Jeon Byeong Sik <jn1654@hanmail.net>, 2004.
+# nayajinseok <nayajinseok@gmail.com>, 2010.
+# Choi, Ji-Hui <like.a.dust@gmail.com>, 2007.
+# Kim HyoYoung <ruready7@mizi.com>, 2001.
+# Young-bin Park <shrike@nate.com>, 2005.
+# Seong-ho, cho <darkcircle.0426@gmail.com>, 2011.
+# Seok Lee <ddoman@kde.or.kr>, 2004.
+# Nam SungHyun <namsh@kldp.org>, 2001-2003.
+# Kang JeongHee <Keizi@orgio.net>, 1999-2000.
+# Dongsu Jang <iolo@hellocity.net>, 2004-2007.
+# kyuhyong Yoo <root@localhost.localdomain>, 2004.
+# Novell Language <language@novell.com>, 2006-2009.
+# Michelle J Kim <mkim@redhat.com>, 2004.
+# Young-ho, Cha <ganadist@dacome.co.kr>, 2000-2001.
+# Changwoo Ryu <cwryu@debian.org>, 1998-2013.
+# Homin Lee <ff4500@gmail.com>, 2010.
+# Jong O, Park <cyc-x-1@hanmail.net>, 2001.
+# Updated by Hwang, Chideok <hwang@mizi.co.kr>, 2001.
+# LINUXKOREA, Co. <kde@linuxkorea.co.kr>, 1999.
+# update by Young-Ho, Cha <ganadist@chollian.net>, 2001-2006.
+# Myoung-sung Kim <xfuncrushx@gmail.com>, 2008.
+# Kang bundo <bundo@bundo.biz>, 2009.
+# Michael Kim <lavnrose@e.sarang.net>, 1999-2005.
+# Jin-Hwan Jeong <yongdoria@gmail.com>, 2009.
+# Seongchong Park <lostinu@kaist.ac.kr>, 2004.
+# Young-Ho Cha <ganadist@gmail.com>, 2000-2010.
+# Linux Korea, Co. <kde@linuxkorea.co.kr>, 1999.
+# Son Kyung-uk <vvs740@chol.com>, 2003.
+# Jin-Hwan, Jeong <yongdoria@gmail.con>, 2008-2009.
+# Young Chol Song <nskystars_goo@yahoo.co.kr>, 2003.
+# Sae-keun Kim <segni@susekorea.net>, 2001.
+# Seung Soo Ha <sungsuha@gmail.com>, 2010.
+# Kyungho Lee <leedos@hanmail.net>, 2004.
+# KOREAN message file for YaST2 (@memory@). <>.
+# Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
+# Namhyung Kim, <namhyung@gmail.com>, 2007.
+# Yeo SunHwa <sunwt@mizi.com>, 2001.
+# Cho Sung Jae <cho.sungjae@gmail.com>, 2006-2007.
+# Jee, Seongnam <snjee@intellicam.com>, 2008.
+# GwanSun Back <backiss@kornet.net>, 2001.
+# 우분투 한국어 번역팀 <ubuntu-ko@lists.ubuntu.com>, 2006.
+# Ju Byoungkuk <jbkdd@hanmail.net>, 2002.
+# Homin Lee (Suapapa) <ff4500@gmail.com>, 2009.
+# BANG, Jaesung <jaesung@liberotown.com>, 2010.
+# Lee Seok <ddoman@kde.or.kr>, 2004.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-02 12:27-0600\n"
+"PO-Revision-Date: 2002-07-22 20:02+0900\n"
+"Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
+"Language-Team: Korean <translation-team-ko@lists.sourceforge.net>\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../xffm/completion/base.hh:28
+msgid "Command"
+msgstr "명령"
+
+#: ../../xffm/completion/base.hh:31
+msgid "File"
+msgstr "파일(F)"
+
+#: ../../xffm/completion/base.hh:34
+#, fuzzy
+msgid "Command history"
+msgstr "실행 명령 기록"
+
+#. option -u uid "uid" "uid_combo"
+#: ../../xffm/completion/base.hh:37 ../../xffm/find/dialog.hh:199
+msgid "User"
+msgstr "사용자"
+
+#: ../../xffm/completion/base.hh:40
+msgid "Variable"
+msgstr "변수"
+
+#: ../../xffm/completion/base.hh:43
+msgid "Host"
+msgstr "호스트"
+
+#: ../../xffm/completion/base.hh:55
+#, fuzzy
+msgid "Found no match"
+msgstr "%d개의 매치 발견"
+
+#: ../../xffm/completion/base.hh:133 ../../xffm/completion/base.hh:134
+msgid "Matches"
+msgstr "일치(M)"
+
+#: ../../xffm/completion/base.hh:134
+msgid "Too many files open"
+msgstr "너무 많은 파일이 열려있습니다"
+
+#: ../../xffm/completion/base.hh:325 ../../xffm/find/fgr.hh:124
+msgid "Options:"
+msgstr "옵션:"
+
+#: ../../xffm/completion/bash.hh:133
+msgid "Completion mode:"
+msgstr "완성 모드(M):"
+
+#: ../../xffm/completion/bash.hh:134
+msgid "command"
+msgstr "명령어"
+
+#: ../../xffm/completion/bash.hh:135
+msgid "file"
+msgstr "파일"
+
+#: ../../xffm/completion/bash.hh:145 ../../xffm/completion/bash.hh:149
+msgid "Options >>"
+msgstr "설정(O) >>"
+
+#: ../../xffm/find/fgr.hh:124 ../../xffm/find/dialog.hh:308
+msgid "Path"
+msgstr "경로"
+
+#: ../../xffm/find/fgr.hh:125
+msgid "Locate documents and folders on this computer by name or content"
+msgstr "컴퓨터의 문서나 폴더를 이름이나 내용으로 찾습니다"
+
+#: ../../xffm/find/fgr.hh:126 ../../xffm/find/dialog.hh:341
+msgid "Filter:"
+msgstr "필터:"
+
+#: ../../xffm/find/fgr.hh:126
+msgid "Search for files"
+msgstr "파일 검색"
+
+#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
+#: ../../xffm/find/fgr.hh:128
+msgid "Contents:"
+msgstr "내용:"
+
+#: ../../xffm/find/fgr.hh:128
+msgid "File's contents filtered as plain text."
+msgstr "파일 내용이 평문 텍스트로 필터됩니다."
+
+#: ../../xffm/find/fgr.hh:131
+msgid "Verbose output debugging mode."
+msgstr "자세한 출력 디버깅 모드."
+
+#: ../../xffm/find/fgr.hh:133
+msgid "Show version information"
+msgstr "버전 정보 표시"
+
+#: ../../xffm/find/fgr.hh:135
+msgid "Filter Details"
+msgstr "필터 세부 사항"
+
+#. / option -a "xdev"
+#: ../../xffm/find/fgr.hh:138 ../../xffm/find/dialog.hh:180
+msgid "Stay on single filesystem"
+msgstr "화일 시스템 하나만"
+
+#: ../../xffm/find/fgr.hh:140
+msgid "Print..."
+msgstr "인쇄(P)..."
+
+#: ../../xffm/find/fgr.hh:140
+msgid "The unique Process ID that identifies this process."
+msgstr "이 프로세스를 구분하는 유일한 프로세스 ID입니다."
+
+#. / option -D "recursiveH"
+#: ../../xffm/find/fgr.hh:142 ../../xffm/find/dialog.hh:177
+#, fuzzy
+msgid "Find hidden files and directories"
+msgstr "파일 및 디렉터리를 패치합니다."
+
+#: ../../xffm/find/fgr.hh:143
+msgid "Filter"
+msgstr "검색 조건"
+
+#: ../../xffm/find/fgr.hh:144
+msgid ""
+"To display files which pass the filter (stars and regexps will be processed)"
+msgstr "거르개로 걸러낸 화일만 보여줍니다( * 와 정규표현식이 처리됩니다)."
+
+#. / option -r "recursive"
+#: ../../xffm/find/fgr.hh:146 ../../xffm/find/dialog.hh:174
+msgid "Recursive"
+msgstr "순환"
+
+#: ../../xffm/find/fgr.hh:147 ../../xffm/find/fgr.hh:148
+#: ../../xffm/find/fgr.hh:149 ../../xffm/find/fgr.hh:150
+msgid "KByte"
+msgstr "KB"
+
+#: ../../xffm/find/fgr.hh:148
+msgid "is greater than or equal to"
+msgstr "크거나 같음"
+
+#: ../../xffm/find/fgr.hh:150
+msgid "is less than or equal to"
+msgstr "작거나 같음"
+
+#: ../../xffm/find/fgr.hh:152
+msgid "Set UID"
+msgstr "UID 설정"
+
+#: ../../xffm/find/fgr.hh:152
+msgid "Executable Text Files"
+msgstr "실행할 수 있는 텍스트 파일"
+
+#: ../../xffm/find/fgr.hh:154
+msgid "The permissions of the file, in octal notation."
+msgstr "파일의 권한 (8진수 표기)."
+
+#: ../../xffm/find/fgr.hh:155
+msgid "Type"
+msgstr "형식"
+
+#: ../../xffm/find/fgr.hh:157 ../../xffm/find/signals.hh:17
+msgid "Any"
+msgstr "어떤"
+
+#: ../../xffm/find/fgr.hh:157
+msgid "Default type"
+msgstr "디폴트 타입"
+
+#: ../../xffm/find/fgr.hh:158 ../../xffm/common/preview.hh:497
+msgid "Regular file"
+msgstr "정규 파일"
+
+#: ../../xffm/find/fgr.hh:159 ../../xffm/find/signals.hh:11
+#: ../../xffm/fm/local/popup.hh:803 ../../xffm/common/preview.hh:488
+msgid "Directory"
+msgstr "디렉토리"
+
+#: ../../xffm/find/fgr.hh:160 ../../xffm/find/signals.hh:12
+#: ../../xffm/common/preview.hh:494
+msgid "Symbolic Link"
+msgstr "심볼릭 링크"
+
+#: ../../xffm/find/fgr.hh:161
+msgid "UNIX Socket"
+msgstr "유닉스 소켓"
+
+#: ../../xffm/find/fgr.hh:162 ../../xffm/find/signals.hh:14
+#: ../../xffm/common/preview.hh:482
+msgid "Block device"
+msgstr "블럭 디바이스"
+
+#: ../../xffm/find/fgr.hh:163 ../../xffm/find/signals.hh:15
+#: ../../xffm/common/preview.hh:485
+msgid "Character device"
+msgstr "문자 디바이스"
+
+#: ../../xffm/find/fgr.hh:164 ../../xffm/find/signals.hh:16
+#: ../../xffm/common/preview.hh:491
+msgid "FIFO"
+msgstr "FIFO"
+
+#. radio_p freed on destroy event for dialog_.
+#. option -k minutes "last_minutes", "last_minutes_spin"
+#: ../../xffm/find/fgr.hh:166 ../../xffm/find/fgr.hh:168
+#: ../../xffm/find/dialog.hh:221
+msgid "Minutes"
+msgstr "분"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/dialog.hh:270 ../../xffm/find/dialog.hh:370
+#: ../../xffm/fm/treeview.hh:18
+msgid "Details"
+msgstr "자세히"
+
+#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
+#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
+#: ../../xffm/find/fgr.hh:179 ../../xffm/find/fgr.hh:180
+#: ../../xffm/find/fgr.hh:183 ../../xffm/find/fgr.hh:184
+#: ../../xffm/find/fgr.hh:187 ../../xffm/find/fgr.hh:188
+#, fuzzy
+msgid "TIME"
+msgstr "<제한시간>"
+
+#: ../../xffm/find/fgr.hh:168 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/fgr.hh:174 ../../xffm/find/fgr.hh:177
+msgid "Previous"
+msgstr "이전"
+
+#. option -h hours "last_hours", "last_hours_spin"
+#: ../../xffm/find/fgr.hh:169 ../../xffm/find/fgr.hh:171
+#: ../../xffm/find/dialog.hh:226
+msgid "Hours"
+msgstr "시간"
+
+#. option -d days "last_days", "last_days_spin"
+#: ../../xffm/find/fgr.hh:172 ../../xffm/find/fgr.hh:174
+#: ../../xffm/find/dialog.hh:231
+msgid "Days"
+msgstr "일"
+
+#: ../../xffm/find/fgr.hh:175
+msgid "Month"
+msgstr "한 달"
+
+#: ../../xffm/find/fgr.hh:177
+msgid "Month(s)"
+msgstr "달"
+
+#: ../../xffm/find/fgr.hh:180
+msgid "Modification Time :"
+msgstr "고친 시간 :"
+
+#: ../../xffm/find/fgr.hh:184
+msgid "Access Time :"
+msgstr "마지막 사용 시간 :"
+
+#: ../../xffm/find/fgr.hh:188
+msgid "Creation Time :"
+msgstr "만든 시간 :"
+
+#: ../../xffm/find/fgr.hh:191 ../../xffm/find/fgr.hh:192
+msgid "uid"
+msgstr "uid"
+
+#: ../../xffm/find/fgr.hh:192
+msgid "User:"
+msgstr "사용자:"
+
+#: ../../xffm/find/fgr.hh:194 ../../xffm/find/fgr.hh:195
+msgid "gid"
+msgstr "gid"
+
+#: ../../xffm/find/fgr.hh:195
+msgid "Group:"
+msgstr "그룹:"
+
+#: ../../xffm/find/fgr.hh:198
+msgid ""
+"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+"character that  normally  follows  a file  name"
+msgstr ""
+
+#: ../../xffm/find/fgr.hh:200
+msgid "Content View"
+msgstr "내용 보기 프로그램"
+
+#: ../../xffm/find/fgr.hh:201 ../../xffm/find/fgr.hh:202
+#: ../../xffm/find/fgr.hh:203 ../../xffm/find/fgr.hh:204
+msgid "STRING"
+msgstr "<문자열>"
+
+#: ../../xffm/find/fgr.hh:202 ../../xffm/find/fgr.hh:204
+#: ../../xffm/fm/local/popup.hh:563
+msgid "Regular expression"
+msgstr "정규 표현식"
+
+#: ../../xffm/find/fgr.hh:204
+msgid "Extended"
+msgstr "확장"
+
+#: ../../xffm/find/fgr.hh:206
+msgid "Ignore case"
+msgstr "대소문자 무시(I)"
+
+#: ../../xffm/find/fgr.hh:208
+msgid "Text Files"
+msgstr "텍스트 파일"
+
+#: ../../xffm/find/fgr.hh:210 ../../xffm/find/dialog.hh:552
+msgid "No match"
+msgstr "해당 사항 없음"
+
+#: ../../xffm/find/fgr.hh:212 ../../xffm/find/dialog.hh:470
+msgid "Line Count"
+msgstr "줄 수"
+
+#: ../../xffm/find/fgr.hh:214
+msgid "Words"
+msgstr "단어"
+
+#: ../../xffm/find/fgr.hh:216
+msgid "Lines"
+msgstr "행"
+
+#: ../../xffm/find/fgr.hh:368
+#, fuzzy, c-format
+msgid "Usage : %s [OPTIONS]\n"
+msgstr "사용법: %s [<옵션>] [<파일>]...\n"
+
+#: ../../xffm/find/signals.hh:10
+msgid "Regular"
+msgstr "일반"
+
+#: ../../xffm/find/signals.hh:13 ../../xffm/common/preview.hh:500
+msgid "Socket"
+msgstr "소켓"
+
+#: ../../xffm/find/signals.hh:209
+msgid "Select folder to search in"
+msgstr "찾아 볼 폴더 선택"
+
+#. button no
+#: ../../xffm/find/signals.hh:265 ../../xffm/find/dialog.hh:584
+#: ../../xffm/response/entryfileresponse.hh:18
+#: ../../xffm/response/entryresponse.hh:305
+#: ../../xffm/response/passwdresponse.hh:558
+#: ../../xffm/fm/local/properties.hh:304 ../../xffm/fm/local/rm.hh:155
+msgid "Cancel"
+msgstr "취소"
+
+#: ../../xffm/find/signals.hh:293 ../../xffm/find/signals.hh:722
+#, fuzzy
+msgid "No editor for current action."
+msgstr "현재 활동이 없습니다."
+
+#. / option "upper_limit_spin" (only in gtk dialog_)
+#: ../../xffm/find/signals.hh:351 ../../xffm/find/dialog.hh:183
+msgid "Results"
+msgstr "기본값"
+
+#: ../../xffm/find/signals.hh:351
+msgid "Upper limit:"
+msgstr "최댓값:"
+
+#: ../../xffm/find/signals.hh:353
+msgid "Counting files..."
+msgstr "파일 개수 세는 중..."
+
+#: ../../xffm/find/signals.hh:368
+#, c-format
+msgid "Found %d match"
+msgid_plural "Found %d matches"
+msgstr[0] "%d개의 매치 발견"
+msgstr[1] "%d개의 매치 발견"
+
+#: ../../xffm/find/signals.hh:370
+#, fuzzy, c-format
+msgid "%s Finished : %s"
+msgstr "%s [완료됨]"
+
+#: ../../xffm/find/signals.hh:488 ../../xffm/find/signals.hh:490
+msgid "Searching..."
+msgstr "찾는 중입니다..."
+
+#. g_object_set_data(G_OBJECT(dialog_), "window", dialog_);
+#: ../../xffm/find/dialog.hh:98 ../../xffm/find/dialog.hh:150
+#: ../../xffm/find/dialog.hh:611
+msgid "Find"
+msgstr "찾기(F)"
+
+#: ../../xffm/find/dialog.hh:183
+#, fuzzy
+msgid "Upper limit"
+msgstr "최댓값:"
+
+#. option -s +KByte "size_greater", "size_greater_spin"
+#: ../../xffm/find/dialog.hh:188
+msgid "At Least"
+msgstr "최소한"
+
+#: ../../xffm/find/dialog.hh:188 ../../xffm/find/dialog.hh:193
+msgid "kBytes"
+msgstr "kB"
+
+#. option -s -KByte "size_smaller", "size_smaller_spin"
+#: ../../xffm/find/dialog.hh:193
+msgid "At Most"
+msgstr "최대한"
+
+#: ../../xffm/find/dialog.hh:204
+msgid "Group"
+msgstr "그룹"
+
+#. option -o octal "octal_p" "permissions_entry"
+#: ../../xffm/find/dialog.hh:208
+msgid "Octal Permissions"
+msgstr "8진수 권한"
+
+#. option -p suid | exe
+#: ../../xffm/find/dialog.hh:213
+msgid "SUID"
+msgstr "SUID"
+
+#: ../../xffm/find/dialog.hh:213 ../../xffm/fm/local/popup.hh:843
+#, fuzzy
+msgid "Executable"
+msgstr "실행 파일:"
+
+#. option -m months "last_months", "last_months_spin"
+#: ../../xffm/find/dialog.hh:237
+msgid "Months"
+msgstr "개월"
+
+#: ../../xffm/find/dialog.hh:248
+msgid "File type : "
+msgstr "종류 : "
+
+#. gtk_widget_show (GTK_WIDGET(right_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(center_options_vbox));
+#. gtk_widget_show (GTK_WIDGET(left_options_vbox));
+#: ../../xffm/find/dialog.hh:262 ../../xffm/find/dialog.hh:602
+#: ../../xffm/fm/page/page.hh:70 ../../xffm/common/gtk.hh:70
+msgid "Close"
+msgstr "닫기"
+
+#. gtk_box_pack_start (vbox7a, GTK_WIDGET(advancedBox), TRUE, FALSE, 5);
+#. gtk_widget_show(GTK_WIDGET(advancedBox));
+#. //////////////  grep options.... /////////////////////////
+#: ../../xffm/find/dialog.hh:384
+msgid "Contains"
+msgstr "포함함"
+
+#: ../../xffm/find/dialog.hh:404
+msgid "Contains the text"
+msgstr "텍스트 포함(T)"
+
+#: ../../xffm/find/dialog.hh:437
+msgid "Case Sensitive"
+msgstr "대소문자 구별"
+
+#: ../../xffm/find/dialog.hh:449
+msgid "Extended regexp"
+msgstr "정규표현식 확장"
+
+#: ../../xffm/find/dialog.hh:460
+msgid "Include binary files"
+msgstr "바이너리 파일 포함"
+
+#: ../../xffm/find/dialog.hh:496
+msgid "Match"
+msgstr "맞음"
+
+#: ../../xffm/find/dialog.hh:508
+#, fuzzy
+msgid "Anywhere"
+msgstr "어디든지"
+
+#: ../../xffm/find/dialog.hh:523
+msgid "Whole words only"
+msgstr "단어 단위로(W)"
+
+#: ../../xffm/find/dialog.hh:538
+msgid "lines"
+msgstr "줄"
+
+#: ../../xffm/find/dialog.hh:594
+msgid "Clear"
+msgstr "지우기(C)"
+
+#: ../../xffm/find/dialog.hh:636
+msgid "Edit"
+msgstr "편집(E)"
+
+#: ../../xffm/find/dialog.hh:751 ../../xffm/find/dialog.hh:766
+#: ../../xffm/common/util.hh:1150 ../../xffm/common/util.hh:1152
+#: ../../xffm/common/util.hh:1158 ../../xffm/common/util.hh:1160
+#: ../../xffm/common/preview.hh:479
+msgid "unknown"
+msgstr "알 수 없음"
+
+#: ../../xffm/find/dialog.hh:780
+msgid "Modified"
+msgstr "수정함"
+
+#: ../../xffm/find/dialog.hh:784
+msgid "Created"
+msgstr "만듦"
+
+#: ../../xffm/find/dialog.hh:788
+msgid "Accessed"
+msgstr "접근 시간"
+
+#: ../../xffm/find/dialog.hh:1106
+msgid ""
+"Basic rules:\n"
+"\n"
+"*  Will match any character zero or more times.\n"
+"?  Will match any character exactly one time\n"
+"[] Match any character within the [] \n"
+"^  Match at beginning of string\n"
+"$  Match at end of string \n"
+msgstr ""
+
+#: ../../xffm/find/dialog.hh:1115
+msgid ""
+"Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"In  basic regular expressions the metacharacters ?, +, {, |, (, and ) \n"
+"  lose their special meaning.\n"
+"\n"
+"The  period . matches  any  single  character.\n"
+"The caret ^ matches at the start of line.\n"
+"The dollar $ matches at the end of line.\n"
+"\n"
+"Characters within [ ] matches any single character in the list.\n"
+"Characters within [^ ] matches any single character *not* in the list.\n"
+"Characters inside [ - ] matches a range of characters (ie [0-9] or [a-z]).\n"
+"\n"
+"A regular expression may be followed by one of several repetition "
+"operators:\n"
+"?      The preceding item is optional and matched\n"
+"       at most once.\n"
+"*      The preceding item will be matched zero\n"
+"       or more times.\n"
+"+      The preceding item will be matched one or\n"
+"       more times.\n"
+"{n}    The preceding item is matched exactly n times.\n"
+"{n,}   The preceding item is matched n or more times.\n"
+"{n,m}  The preceding item is matched at least n times,\n"
+"       but not more than m times.\n"
+"\n"
+"To match any reserved character, precede it with \\. \n"
+"\n"
+"Two regular expressions may be joined by the logical or operator |.\n"
+"Two regular expressions may be concatenated.\n"
+"\n"
+"More information is available by typing \"man grep\"\n"
+msgstr ""
+
+#: ../../xffm/response/entryfileresponse.hh:20
+msgid "Open"
+msgstr "열기(O)"
+
+#: ../../xffm/response/entryresponse.hh:29
+#: ../../xffm/response/entryfolderresponse.hh:28
+msgid "Choose directory"
+msgstr "디렉터리 선택"
+
+#. this button is redundant since hands are on keyboard for password
+#: ../../xffm/response/entryresponse.hh:309
+#: ../../xffm/response/passwdresponse.hh:189
+#: ../../xffm/response/passwdresponse.hh:559
+msgid "Ok"
+msgstr "확인"
+
+#: ../../xffm/response/commandprogressresponse.hh:32
+msgid "Items:"
+msgstr "항목(E):"
+
+#: ../../xffm/response/passwdresponse.hh:21
+msgid "Enter password"
+msgstr "암호를 입력하십시오"
+
+#. gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+#: ../../xffm/response/passwdresponse.hh:125
+#, fuzzy
+msgid "User Input"
+msgstr "마우스 입력"
+
+#: ../../xffm/response/passwdresponse.hh:142
+#, fuzzy
+msgid "Response Requested"
+msgstr "응답 출력"
+
+#: ../../xffm/response/passwdresponse.hh:264
+msgid "Preparing"
+msgstr "준비하는 중"
+
+#: ../../xffm/response/passwdresponse.hh:352
+msgid "sudo"
+msgstr "sudo"
+
+#: ../../xffm/response/passwdresponse.hh:354
+msgid "Command:"
+msgstr "명령:"
+
+#: ../../xffm/response/passwdresponse.hh:357
+msgid "Permission denied"
+msgstr "권한이 없습니다"
+
+#: ../../xffm/response/passwdresponse.hh:358
+msgid "Try to approach a problem from different angles."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:359
+msgid "Do you want to retry?"
+msgstr "다시 시도하시겠습니까?"
+
+#: ../../xffm/response/passwdresponse.hh:360
+msgid "Alternate:"
+msgstr "대체:"
+
+#: ../../xffm/response/passwdresponse.hh:365
+msgid "No"
+msgstr "아니요"
+
+#: ../../xffm/response/passwdresponse.hh:401
+msgid "Install"
+msgstr "설치"
+
+#: ../../xffm/response/passwdresponse.hh:402
+#, c-format
+msgid "%s does not exist."
+msgstr "%s이(가) 없습니다."
+
+#: ../../xffm/response/passwdresponse.hh:467
+#, fuzzy
+msgid "Blowfish"
+msgstr "Sawfish"
+
+#: ../../xffm/response/passwdresponse.hh:468
+msgid "Encryption Key Approval"
+msgstr "암호 키 승인"
+
+#: ../../xffm/response/passwdresponse.hh:502
+msgid "-o     print output to standard out. Implies -r."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:506
+msgid "-c     DO NOT compress files before encryption."
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:510
+msgid "-r     DO NOT remove input files after processing"
+msgstr ""
+
+#: ../../xffm/response/passwdresponse.hh:517
+#, fuzzy
+msgid "Encryption key: "
+msgstr "암호화 열쇠:"
+
+#: ../../xffm/response/passwdresponse.hh:529
+msgid "Confirm:"
+msgstr "확인(C):"
+
+#: ../../xffm/response/passwdresponse.hh:542
+msgid "Sorry, passwords do not match"
+msgstr "암호가 일치하지 않습니다"
+
+#: ../../xffm/response/passwdresponse.hh:550
+msgid "Minimum length:"
+msgstr "최소 길이"
+
+#: ../../xffm/response/timeoutresponse.hh:56
+msgid "Dismiss"
+msgstr "해제(D)"
+
+#: ../../xffm/response/commandresponse.hh:23
+msgid "Running"
+msgstr "실행 중"
+
+#. auto text = g_strdup_printf("%s (pid: %d)",
+#. _("Waiting for operation to finish..."),
+#. Tubo<Type>::getChild (pid));
+#: ../../xffm/response/commandresponse.hh:28
+#, fuzzy
+msgid "Waiting for operation to finish..."
+msgstr "dvips가 끝나기를 기다리는 중..."
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Documents"
+msgstr "문서(D)"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Downloads"
+msgstr "다운로드"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Music"
+msgstr "음악"
+
+#: ../../xffm/fm/local/icons.hh:257
+msgid "Pictures"
+msgstr "그림"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Templates"
+msgstr "템플릿 "
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Videos"
+msgstr "비디오"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Desktop"
+msgstr "데스크톱(K)"
+
+#: ../../xffm/fm/local/icons.hh:258
+msgid "Bookmarks"
+msgstr "북마크(B)"
+
+#: ../../xffm/fm/local/icons.hh:259 ../../xffm/fm/local/rm.hh:181
+msgid "Trash"
+msgstr "휴지통"
+
+#: ../../xffm/fm/local/popup.hh:60
+msgid "New"
+msgstr "새 파일(N)"
+
+#. deprecated {N_("Open in New Tab"), NULL, NULL, NULL},
+#. deprecated {N_("Open in New Window"), NULL, NULL, NULL},
+#. common buttons /(also an iconsize +/- button)
+#: ../../xffm/fm/local/popup.hh:64 ../../xffm/fm/local/popup.hh:104
+#: ../../xffm/common/gtk.hh:74
+msgid "Copy"
+msgstr "복사(C)"
+
+#: ../../xffm/fm/local/popup.hh:65 ../../xffm/fm/local/popup.hh:105
+#: ../../xffm/common/gtk.hh:73
+msgid "Cut"
+msgstr "잘라내기(U)"
+
+#: ../../xffm/fm/local/popup.hh:66 ../../xffm/fm/local/popup.hh:106
+#: ../../xffm/common/gtk.hh:66
+msgid "Paste"
+msgstr "붙여넣기(P)"
+
+#. **************
+#: ../../xffm/fm/local/popup.hh:67 ../../xffm/fm/local/popup.hh:107
+#: ../../xffm/fm/local/rm.hh:174 ../../xffm/common/gtk.hh:75
+msgid "Delete"
+msgstr "삭제(D) "
+
+#. {N_("About"), NULL, (void *) menu},
+#.
+#. only for listview: {N_("Sort by size"), NULL, (void *) menu},
+#. only for listview: {N_("Sort by date"), NULL, (void *) menu},
+#: ../../xffm/fm/local/popup.hh:73
+msgid "Select All"
+msgstr "모두 선택"
+
+#: ../../xffm/fm/local/popup.hh:74 ../../xffm/fm/local/popup.hh:559
+#, fuzzy
+msgid "Match regular expression"
+msgstr "정규식(R)"
+
+#: ../../xffm/fm/local/popup.hh:75 ../../xffm/fm/root/view.hh:58
+#: ../../xffm/fm/fstab/popup.hh:21
+msgid "View as list"
+msgstr "목록으로 보기"
+
+#: ../../xffm/fm/local/popup.hh:77
+msgid "Show hidden files"
+msgstr "숨김 파일 보여주기"
+
+#: ../../xffm/fm/local/popup.hh:79
+msgid "Show Backup Files"
+msgstr "백업 파일 보기"
+
+#: ../../xffm/fm/local/popup.hh:81
+#, fuzzy
+msgid "Sort data in descending order"
+msgstr "열어본 순으로 정렬"
+
+#: ../../xffm/fm/local/popup.hh:93 ../../xffm/fm/local/popup.hh:119
+#: ../../xffm/fm/local/popup.hh:1006 ../../xffm/fm/local/popup.hh:1013
+#: ../../xffm/fm/local/popup.hh:1022 ../../xffm/fm/local/popup.hh:1029
+#: ../../xffm/common/gtk.hh:72
+msgid "Open with"
+msgstr "다른 프로그램으로 열기"
+
+#: ../../xffm/fm/local/popup.hh:94 ../../xffm/fm/local/popup.hh:846
+#, fuzzy
+msgid "Run Executable..."
+msgstr "프로그램을 실행"
+
+#: ../../xffm/fm/local/popup.hh:95
+msgid "Extract files from the archive"
+msgstr "압축 파일에서 파일을 풀어냅니다"
+
+#. g_hash_table_insert(iconname_hash, "bcrypt", (void *)"emblem-keyhole");
+#: ../../xffm/fm/local/popup.hh:96 ../../xffm/fm/root/view.hh:73
+#: ../../xffm/fm/fstab/popup.hh:20 ../../xffm/fm/dialog/notebook.hh:52
+#: ../../xffm/common/gtk.hh:78
+msgid "Open in New Tab"
+msgstr "새 탭에서 열기(O)  "
+
+#. File chooser
+#: ../../xffm/fm/local/popup.hh:97 ../../xffm/fm/local/popup.hh:706
+msgid "Create a compressed archive with the selected objects"
+msgstr "선택한 오브젝트로 압축 파일을 만듭니다"
+
+#: ../../xffm/fm/local/popup.hh:98 ../../xffm/fm/fstab/popup.hh:37
+msgid "Mount the volume associated with this folder"
+msgstr "이 폴더에 연결된 볼륨을 마운트합니다"
+
+#: ../../xffm/fm/local/popup.hh:99 ../../xffm/fm/fstab/popup.hh:38
+msgid "Unmount the volume associated with this folder"
+msgstr "이 폴더에 연결된 볼륨을 마운트 해제합니다"
+
+#: ../../xffm/fm/local/popup.hh:100 ../../xffm/common/gtk.hh:67
+msgid "Add bookmark"
+msgstr "책갈피 추가"
+
+#: ../../xffm/fm/local/popup.hh:101 ../../xffm/fm/root/view.hh:74
+#: ../../xffm/common/gtk.hh:68
+msgid "Remove bookmark"
+msgstr "책갈피 제거"
+
+#: ../../xffm/fm/local/popup.hh:108 ../../xffm/fm/local/popup.hh:961
+msgid "Rename"
+msgstr "이름 바꾸기"
+
+#: ../../xffm/fm/local/popup.hh:109 ../../xffm/fm/local/popup.hh:947
+msgid "Duplicate"
+msgstr "복제(D)"
+
+#: ../../xffm/fm/local/popup.hh:110 ../../xffm/fm/local/popup.hh:933
+msgid "Link"
+msgstr "링크"
+
+#: ../../xffm/fm/local/popup.hh:111
+msgid "Properties"
+msgstr "속성"
+
+#: ../../xffm/fm/local/popup.hh:414
+msgid "Files:"
+msgstr "파일(F):"
+
+#: ../../xffm/fm/local/popup.hh:417 ../../xffm/fm/local/rm.hh:61
+msgid "Multiple selections"
+msgstr "다중 선택"
+
+#: ../../xffm/fm/local/popup.hh:557
+msgid "Select items"
+msgstr "아이템 선택(S)"
+
+#: ../../xffm/fm/local/popup.hh:575
+msgid "Regular Expression syntax is incorrect"
+msgstr "정규 표현식 문법이 올바르지 않습니다"
+
+#: ../../xffm/fm/local/popup.hh:592
+msgid "No selection"
+msgstr "선택 영역 없음"
+
+#: ../../xffm/fm/local/popup.hh:592
+msgid "No matches."
+msgstr "일치하는 결과 없음."
+
+#. entryResponse->setCheckButton(_("Run in Terminal"));
+#. entryResponse->setCheckButton(Mime<Type>::runInTerminal(path));
+#: ../../xffm/fm/local/popup.hh:721 ../../xffm/fm/page/pathbar.hh:313
+msgid "Specify Output Directory..."
+msgstr "출력 디렉터리 지정..."
+
+#: ../../xffm/fm/local/popup.hh:799
+#, fuzzy
+msgid "Create new..."
+msgstr "만들기..."
+
+#: ../../xffm/fm/local/popup.hh:806 ../../xffm/fm/local/popup.hh:886
+#, fuzzy
+msgid "New Name:"
+msgstr "새 이름"
+
+#: ../../xffm/fm/local/popup.hh:815
+msgid "No name"
+msgstr "이름 없음"
+
+#: ../../xffm/fm/local/popup.hh:828
+#, c-format
+msgid "Another file with the same name already exists in “%s”."
+msgstr "같은 이름의 또 다른 파일이 \"%s\" 안에 이미 있습니다."
+
+#: ../../xffm/fm/local/popup.hh:850 ../../xffm/fm/local/popup.hh:1010
+#: ../../xffm/fm/local/popup.hh:1026 ../../xffm/common/util.hh:1248
+msgid "Run in Terminal"
+msgstr "터미널에서 실행"
+
+#: ../../xffm/fm/local/popup.hh:853
+msgid "Arguments for the Command"
+msgstr "명령 인자"
+
+#: ../../xffm/fm/local/popup.hh:1047 ../../xffm/fm/local/view.hh:141
+msgid "Invalid entry"
+msgstr "잘못된 항목"
+
+#: ../../xffm/fm/local/properties.hh:235
+msgid "Properties and Attributes"
+msgstr "속성"
+
+#: ../../xffm/fm/local/properties.hh:264
+#, fuzzy
+msgid "File Mode:"
+msgstr "보기 모드(V):"
+
+#: ../../xffm/fm/local/properties.hh:290
+msgid "File:"
+msgstr "파일:"
+
+#. Add file info stuff
+#. set info stuff data according to combo box
+#. add signal handler to changed signal for combo box
+#. Add process buttons
+#.
+#: ../../xffm/fm/local/properties.hh:302
+msgid "Apply changes"
+msgstr "바뀐 점 적용"
+
+#: ../../xffm/fm/local/properties.hh:462
+msgid "Successfully moved to trash."
+msgstr "휴지통으로 이동했습니다."
+
+#: ../../xffm/fm/local/properties.hh:463
+msgid "Source:"
+msgstr "소스:"
+
+#: ../../xffm/fm/local/rm.hh:59
+#, c-format
+msgid "Delete %s"
+msgstr "%s 삭제(D)"
+
+#: ../../xffm/fm/local/rm.hh:61
+msgid "Warning: "
+msgstr "경고: "
+
+#. gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
+#. title
+#: ../../xffm/fm/local/rm.hh:90
+msgid "Remove"
+msgstr "제거(R)"
+
+#: ../../xffm/fm/local/rm.hh:140
+#, fuzzy
+msgid "Apply to all"
+msgstr "모두 적용하기(Y)"
+
+#. **************
+#. This is now available to BSD with rm -P option
+#: ../../xffm/fm/local/rm.hh:163 ../../xffm/common/gtk.hh:76
+msgid "Shred"
+msgstr ""
+
+#. We do not count "../"
+#: ../../xffm/fm/local/view.hh:48 ../../xffm/fm/base/monitor.hh:28
+#, c-format
+msgid "Files: %s"
+msgstr "파일: %s"
+
+#: ../../xffm/fm/root/model.hh:78
+#, fuzzy
+msgid "Root Directory"
+msgstr "/(root) 디렉토리"
+
+#: ../../xffm/fm/root/model.hh:94
+msgid "This is the root of the filesystem"
+msgstr "파일 시스템의 루트입니다"
+
+#: ../../xffm/fm/root/model.hh:105
+msgid "Home Directory"
+msgstr "홈 디렉터리"
+
+#: ../../xffm/fm/root/model.hh:132
+#, fuzzy
+msgid "Trash bin"
+msgstr "휴지통에 버리기"
+
+#: ../../xffm/fm/root/model.hh:162 ../../xffm/fm/fstab/popup.hh:29
+msgid "Disk Image Mounter"
+msgstr "디스크 이미지 마운트"
+
+#: ../../xffm/fm/root/model.hh:169 ../../xffm/fm/root/model.hh:185
+msgid "Mount local disks and devices"
+msgstr "로컬 디스크와 장치를 마운트합니다"
+
+#: ../../xffm/fm/root/model.hh:170 ../../xffm/fm/fstab/popup.hh:25
+#: ../../xffm/fm/fstab/view.hh:429
+msgid "eCryptfs Volume"
+msgstr "eCryptfs 볼륨"
+
+#: ../../xffm/fm/root/model.hh:171 ../../xffm/fm/fstab/popup.hh:24
+msgid "SSHFS Remote Synchronization Folder"
+msgstr "SSHFS 원격 동기화 폴더"
+
+#: ../../xffm/fm/root/model.hh:172 ../../xffm/fm/fstab/popup.hh:23
+#: ../../xffm/fm/fstab/view.hh:377
+msgid "NFS Network Volume"
+msgstr "NFS 네트워크 볼륨"
+
+#: ../../xffm/fm/root/model.hh:173 ../../xffm/fm/fstab/popup.hh:26
+#: ../../xffm/fm/fstab/view.hh:455
+msgid "CIFS Volume"
+msgstr "CIFS 볼륨"
+
+#: ../../xffm/fm/root/model.hh:195
+#, fuzzy
+msgid "Software Updater"
+msgstr "소프트웨어 업데이트"
+
+#: ../../xffm/fm/root/model.hh:218 ../../xffm/fm/root/model.hh:230
+msgid "Add or remove software installed on the system"
+msgstr "시스템에 설치하는 소프트웨어를 추가하거나 제거합니다"
+
+#: ../../xffm/fm/root/model.hh:271
+msgid "Go to bookmarked location"
+msgstr "책갈피 이치로 이동"
+
+#. {N_("Add bookmark"), (void *)BasePopUp<Type>::noop, NULL, NULL},
+#: ../../xffm/fm/root/view.hh:61
+msgid "Empty trash"
+msgstr "휴지통 비우기"
+
+#. File chooser
+#: ../../xffm/fm/fstab/popup.hh:121
+msgid "Mount Device"
+msgstr "장치 마운트"
+
+#: ../../xffm/fm/fstab/popup.hh:133
+msgid "Mount point:"
+msgstr "마운트 지점:"
+
+#: ../../xffm/fm/fstab/view.hh:301
+msgid "Mounted on:"
+msgstr "마운트 위치:"
+
+#: ../../xffm/fm/fstab/view.hh:302
+msgid "Mount on"
+msgstr "다음에 마운트(M)"
+
+#: ../../xffm/fm/fstab/view.hh:310 ../../xffm/fm/fstab/view.hh:312
+msgid "Not mounted"
+msgstr "마운트 안됨"
+
+#: ../../xffm/fm/fstab/view.hh:403
+#, fuzzy
+msgid "SFTP (via SSH)"
+msgstr "보안 FTP (SSH)"
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, c-format
+msgid "Unmounting %s"
+msgstr "%s 마운트 해제하는 중"
+
+#: ../../xffm/fm/fstab/view.hh:667
+#, c-format
+msgid "Mounting %s"
+msgstr "%s 마운팅 중"
+
+#: ../../xffm/fm/dialog/menupopover.hh:128
+msgid "Home"
+msgstr "집세"
+
+#: ../../xffm/fm/dialog/menupopover.hh:129 ../../xffm/common/gtk.hh:64
+msgid "Open terminal"
+msgstr "터미널 열기"
+
+#: ../../xffm/fm/dialog/menupopover.hh:130
+msgid "Open a New Window"
+msgstr "새 창 열기"
+
+#. {N_("Execute Shell Command"), (void *)MenuPopoverSignals<Type>::shell, (void *) menuButton_},
+#: ../../xffm/fm/dialog/menupopover.hh:132 ../../xffm/common/gtk.hh:69
+msgid "Search"
+msgstr "검색(S)"
+
+#: ../../xffm/fm/dialog/menupopover.hh:133 ../../xffm/common/gtk.hh:71
+msgid "Exit"
+msgstr "나가기(x)"
+
+#: ../../xffm/fm/dialog/dialog.hh:116
+msgid "Removed"
+msgstr "제거함"
+
+#: ../../xffm/fm/dialog/dialog.hh:132
+msgid "Detected device(s):"
+msgstr "발견된 장치:"
+
+#. Create the widgets
+#: ../../xffm/fm/page/vbuttonbox.hh:37 ../../xffm/common/gtk.hh:332
+msgid "Help"
+msgstr "도움말(H)"
+
+#. File chooser
+#: ../../xffm/fm/page/pathbar.hh:306 ../../xffm/fm/page/pathbar.hh:308
+msgid "Go to"
+msgstr "이동(G)"
+
+#: ../../xffm/fm/page/pathbar.hh:331
+msgid "Not a directory"
+msgstr "디렉터리가 아닙니다"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Renice Process"
+msgstr "프로세스 Renice 재설정 "
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Suspend"
+msgstr "절전"
+
+#: ../../xffm/fm/page/runbutton.hh:135
+msgid "Continue"
+msgstr "계속"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Interrupt"
+msgstr "방해"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "Hangup"
+msgstr "끊어짐"
+
+#: ../../xffm/fm/page/runbutton.hh:136
+msgid "User 1 (USR1)"
+msgstr "사용자 1 (USR1)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "User 2 (USR2)"
+msgstr "사용자 2 (USR2)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "Terminate Task"
+msgstr "작업 종료(T)"
+
+#: ../../xffm/fm/page/runbutton.hh:137
+msgid "Abort"
+msgstr "중단"
+
+#: ../../xffm/fm/page/runbutton.hh:138
+msgid "Kill"
+msgstr "죽임"
+
+#: ../../xffm/fm/page/runbutton.hh:139
+#, fuzzy
+msgid "Segmentation fault"
+msgstr "세그먼테이션 위반"
+
+#: ../../xffm/fm/page/runbutton.hh:217
+msgid "PID"
+msgstr "PID"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:37
+#, fuzzy
+msgid "Embedded Terminal"
+msgstr "내장된 파일"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:38
+msgid "All items in the iconview."
+msgstr "아이콘보기에서의 모든 항목"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:39
+#, fuzzy
+msgid "Scripting"
+msgstr "Boo 스크립트"
+
+#: ../../xffm/fm/page/hbuttonbox.hh:40
+#, fuzzy
+msgid "Clear Log"
+msgstr "로그파일 비우기"
+
+#. Status textview
+#: ../../xffm/fm/page/hbuttonbox.hh:42
+msgid "Terminal font"
+msgstr "터미널 글꼴"
+
+#: ../../xffm/fm/treeview.hh:17
+msgid "Name"
+msgstr "이름"
+
+#: ../../xffm/fm/treeview.hh:20
+msgid "Size"
+msgstr "크기"
+
+#: ../../xffm/fm/treeview.hh:21
+msgid "Date"
+msgstr "날짜"
+
+#: ../../xffm/fm/treeview.hh:22
+msgid "Mimetype"
+msgstr "MIME 형식"
+
+#: ../../xffm/fm/treeview.hh:24
+msgid "TYPE"
+msgstr "형식"
+
+#: ../../xffm/fm/base/signals.hh:642
+msgid "Directory does not exist."
+msgstr "디렉터리가 존재하지 않습니다."
+
+#: ../../xffm/fm/base/signals.hh:644 ../../xffm/fm/base/signals.hh:646
+msgid "Trash is empty"
+msgstr "휴지통이 비어있습니다"
+
+#: ../../xffm/common/settings.hh:27
+#, fuzzy
+msgid "New File:"
+msgstr "새 파일"
+
+#: ../../xffm/common/gio.hh:235
+#, fuzzy
+msgid "Could not copy item:"
+msgstr "그림을 복사할 수 없습니다:"
+
+#: ../../xffm/common/gio.hh:237
+#, fuzzy
+msgid "Could not move item:"
+msgstr "항목을 지울 수 없습니다"
+
+#: ../../xffm/common/gio.hh:239
+msgid "Create symbolic link"
+msgstr "심벌릭 링크 생성"
+
+#: ../../xffm/common/gio.hh:276
+#, fuzzy, c-format
+msgid ""
+"Could not delete:\n"
+"%s"
+msgstr "\"%s\"을(를) 삭제할 수 없습니다."
+
+#: ../../xffm/common/gio.hh:278
+#, c-format
+msgid "Could not move %s to trash"
+msgstr "%s 파일을 휴지통으로 옮길 수 없습니다"
+
+#: ../../xffm/common/clipboard.hh:23 ../../xffm/common/dnd.hh:40
+msgid "Copying files locally"
+msgstr "파일을 로컬에서 복사하는 중"
+
+#: ../../xffm/common/clipboard.hh:30 ../../xffm/common/dnd.hh:34
+msgid "Moving files"
+msgstr "파일 이동 중"
+
+#: ../../xffm/common/dnd.hh:46
+#, fuzzy
+msgid "Create Link"
+msgstr "링크 만들기"
+
+#: ../../xffm/common/util.hh:1200
+#, c-format
+msgid ""
+"Scriptfile \"%s\" is not executable. Please set the executable-attribute on "
+"that file."
+msgstr ""
+
+#: ../../xffm/common/util.hh:1202 ../../xffm/common/util.hh:1237
+#, c-format
+msgid "Open with %s"
+msgstr "%s 프로그램으로 열기"
+
+#: ../../xffm/common/util.hh:1202
+msgid "Text Editor"
+msgstr "텍스트 편집기"
+
+#: ../../xffm/common/util.hh:1239 ../../xffm/common/gtk.hh:65
+msgid "Execute Shell Command"
+msgstr "셸 명령 실행"
+
+#: ../../xffm/common/util.hh:1243
+msgid ""
+"Console: quickly run single commands -- write a command here and press enter."
+msgstr ""
+
+#: ../../xffm/common/gtk.hh:123
+msgid "New Tab"
+msgstr "새로운 탭 "
+
+#: ../../xffm/common/gtk.hh:335
+msgid "OK"
+msgstr "성공"
+
+#: ../../xffm/common/run.hh:344
+msgid "error"
+msgstr "오류"
+
+#: ../../xffm/common/run.hh:348
+msgid "warning"
+msgstr "경고"
+
+#: ../../xffm/common/mime.hh:101 ../../xffm/common/mime.hh:143
+msgid "No Read Permission"
+msgstr "읽기 허가권이 없습니다."
+
+#: ../../xffm/common/preview.hh:593
+msgid "Empty file"
+msgstr "빈 파일"
+
+#: ../../xffm/common/preview.hh:648
+#, fuzzy, c-format
+msgid "Cannot read from %s"
+msgstr "\"%s\"에서 읽을 수 없습니다"
+

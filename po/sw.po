@@ -1,0 +1,67 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:44:24 CDT 2013 ---
+#
+# Arthur Buliva <arthur@kamusi.org>, 2012.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: http://bugs.xffm.org\n"
+"product=alacartekeywords=I18N+L10Ncomponent=general\n"
+"POT-Creation-Date: 2012-02-13 13:52+0000\n"
+"PO-Revision-Date: 2012-02-15 19:15+0100\n"
+"Last-Translator: Arthur Buliva <arthur@kamusi.org>\n"
+"Language-Team: Swahili <sw@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+msgid "Name"
+msgstr "Jina"
+
+msgid "Show"
+msgstr "Onyesha"
+
+msgid "Item"
+msgstr "Kipengee"
+
+msgid "Main Menu"
+msgstr "Menyu kuu"
+
+msgid "Change which applications are shown on the main menu"
+msgstr "Badilisha programu-tumizi zinazoonyeshwa kwemye menyu kuu"
+
+msgid "Revert to Original"
+msgstr "Rejesha iwe kama asili"
+
+msgid "Restore the default menu layout"
+msgstr "Rudisha mpangilio hadi chaguo-msingi"
+
+msgid "Menus:"
+msgstr "Menyu:"
+
+msgid "Items:"
+msgstr "Vipengee:"
+
+msgid "New Menu"
+msgstr "Menyu Mpya"
+
+msgid "New Item"
+msgstr "Kipengee kipya"
+
+msgid "New Separator"
+msgstr "Kitenganishi kipya"
+
+msgid "Move Up"
+msgstr "Hamisha juu"
+
+msgid "Move Down"
+msgstr "Hamisha chini"
+
+msgid "Revert Changes?"
+msgstr "Rejesha mabadiliko?"
+
+

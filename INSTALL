@@ -14,17 +14,19 @@ Enjoy!
 
 For new translation construction:
 1. Put full po files in build/po
-2. Do make --makefile=Makefile.autotools check 
+2. In build/po, do make --makefile=Makefile.autotools check 
     (this verifies POTFILE.in from xffm/po is correct,
      if not correct, fix it.)
-3. Do make --makefile=Makefile.autotools distclean
+3. In build/po, do make --makefile=Makefile.autotools distclean
      (clean start)
-4. Do make --makefile=Makefile.autotools update-po
+4. In build/po, do make --makefile=Makefile.autotools update-po
      (updates the po files with new translations)
-5. Do make --makefile=Makefile.autotools 
+5. In build/po, do make --makefile=Makefile.autotools 
      (creates new gmo files)
-6. Do perl clean.pl [all po files] and move .new -> .po
+6. In build/po, do perl clean.pl [all po files] and move .new -> .po
      (removes comments and unnecessary stuff from po files)
+     (shortcut: perl cleanall.pl)
+     (rm *.bak)
 7. copy po and gmo files to xffm/po
      (this saves to git all previous work)
 
