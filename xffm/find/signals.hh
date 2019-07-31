@@ -40,7 +40,7 @@ static GHashTable *controllerHash = NULL;
 static GSList *lastFind = NULL;
 
 namespace xf {
-
+GList *findResultsWidgets = NULL;
 GtkWindow *findDialog;
 
 template <class Type> class TreeView;
@@ -52,6 +52,11 @@ template <class Type> class BaseSignals;
 
 template <class Type> class DnDBox{
 
+    static void
+    onResponse (GtkWidget * widget, gpointer data) {
+	findResultsWidgets = g_list_remove(findResultsWidgets, widget);
+    }
+
 public:
     static void
     openDnDBox(GtkWindow *parent, const gchar *title, GSList *list){
@@ -59,6 +64,11 @@ public:
         
         // Create liststore for DnD
         auto dialog = GTK_WINDOW(Gtk<Type>::quickDialog(parent, _("Results"), NULL, title));
+	findResultsWidgets = g_list_prepend(findResultsWidgets, dialog);
+	g_signal_connect(G_OBJECT(dialog), "response", 
+		G_CALLBACK(onResponse),NULL);
+
+
 	//gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
 	//gtk_window_set_transient_for (GTK_WINDOW (dialog), parent);
         
@@ -219,6 +229,10 @@ public:
 	TRACE("fixme: signals::onCloseButton\n");
         GtkWidget *dialog = GTK_WIDGET(data);
         gtk_widget_hide(dialog);
+	for (auto l=findResultsWidgets; l && l->data; l=l->next){
+	    if (!GTK_IS_WIDGET(l->data))continue;
+	    gtk_widget_hide(GTK_WIDGET(l->data));
+	}
         while (gtk_events_pending()) gtk_main_iteration();
         gtk_main_quit();
         exit(1);
@@ -262,7 +276,10 @@ public:
 
     static gboolean
     onCloseEvent (GtkWidget * widget, GdkEventKey * event, gpointer data) {
-        while (gtk_events_pending()) gtk_main_iteration();
+        gtk_widget_hide(widget);
+        gtk_widget_destroy(widget);
+
+	while (gtk_events_pending()) gtk_main_iteration();
         gtk_main_quit();
         exit(1);
         return TRUE;

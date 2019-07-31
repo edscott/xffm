@@ -389,6 +389,13 @@ public:
       return dialog;
     }
 
+    static void
+    closeQuickDialog(GtkWidget *widget, GdkEventKey * event, void *data){
+	gtk_widget_hide(widget);
+	DBG("closeQuickDialog\n");
+	gtk_widget_destroy(widget);
+    }
+
     static GtkWidget *
     quickDialog (GtkWindow *parent, const gchar *message, const gchar *icon, const gchar *title)
     {
@@ -413,10 +420,15 @@ public:
          g_signal_connect_swapped(dialog, "response", G_CALLBACK (gtk_widget_show),
 			       parent);
      }
-     g_signal_connect_swapped (dialog,
+     /*g_signal_connect_swapped (dialog,
 			       "response",
 			       G_CALLBACK (gtk_widget_destroy),
+			       dialog);*/
+     g_signal_connect_swapped (dialog,
+			       "response",
+			       G_CALLBACK (closeQuickDialog),
 			       dialog);
+
 
      // Add the label, and show everything we have added
      auto vbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
