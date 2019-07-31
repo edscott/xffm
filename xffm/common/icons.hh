@@ -98,7 +98,7 @@ public:
 	    TRACE("icons.hh:: absolute_path_icon(): %s does not exist.\n", icon_name);
 	    return NULL;
 	}
-	auto pixbuf = pixbuf_new_from_file(icon_name, size, size); // width,height.
+	//auto pixbuf = pixbuf_new_from_file(icon_name, size, size); // width,height.
 	
 	return pixbuf_new_from_file(icon_name, size, size); // width,height.
     }
@@ -145,6 +145,7 @@ public:
 	auto path = (gchar *)arg[0];
 	auto width = GPOINTER_TO_INT(arg[1]);
 	auto height = GPOINTER_TO_INT(arg[2]);
+	TRACE("pixbuf_new_from_file_f: %s (%d,%d)\n", path, width, height);
 	GError *error = NULL;
 	GdkPixbuf *pixbuf = NULL;
 	if (width < 0) {
@@ -155,6 +156,7 @@ public:
         if (error){
             TRACE("%s\n", error->message);
             g_error_free(error);
+	    pixbuf = NULL;
         }
 
 	// hmmm... from the scale_simple line below, it seems that the above two

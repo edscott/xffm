@@ -42,6 +42,7 @@ private:
         gchar *emblem = getEmblem(path, basename,  d_type, st_p);
         TRACE("emblem: %s --> %s\n",  basename, emblem);
         gchar *iconname = g_strconcat(name, emblem, NULL);
+        TRACE("iconname: --> %s\n",  iconname);
         g_free(name);
         g_free(emblem);
         return iconname;

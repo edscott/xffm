@@ -41,7 +41,7 @@ public:
     // pixbuf hashtable.
     static GdkPixbuf *
     get_pixbuf(const gchar *icon_name, gint size){
-	TRACE("get_pixbuf(%s)\n", icon_name);
+	//if (strstr(icon_name, "png")) TRACE("get_pixbuf(%s)\n", icon_name);
 	if (!icon_name){
 	    return NULL;
 	    //ERROR("pixbuf_c::get_pixbuf() icon_name is NULL.\n");
@@ -55,7 +55,10 @@ public:
 	// images, in hash
 	
 	GdkPixbuf *pixbuf = pixbuf_hash_c::find_in_pixbuf_hash(icon_name, pixels);
-	if (pixbuf) return pixbuf;
+	if (pixbuf) {
+	    //if (strstr(icon_name, "png")) DBG("pixbuf %s loaded from hash.\n", icon_name);
+	    return pixbuf;
+	}
 	// Not found, huh?
 	TRACE("Create pixbuf and put in hashtable: \"%s\"\n", icon_name);
 	pixbuf = pixbuf_icons_c::absolute_path_icon(icon_name, pixels);

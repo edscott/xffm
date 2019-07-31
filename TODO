@@ -1,6 +1,6 @@
 For 0.91
-1. bug. empty trash bin not showing in xffm:root popup for trash item.
-2. bug. no cut/copy emblem on image previews. see local/monitor.hh:223
+2. bug. after image or directory is removed from clipboard, highlight icon is
+set to normal pixbuf... see local/monitor.hh:223
  
  > printout optional and required libraries found in configure step.
 

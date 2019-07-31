@@ -197,6 +197,26 @@ public:
         TRACE("***localmonitor stat_func(): iconname=%s\n", iconName);
 	GdkPixbuf *pixbuf = Pixbuf<Type>::get_pixbuf(iconName,  -48);
 	GdkPixbuf *treepixbuf = Pixbuf<Type>::get_pixbuf(iconName,  -24);
+
+	
+
+
+
+	// decorate image preview with cut emblem
+	if (Gtk<Type>::isImage(xd_p->mimetype)){
+	    const gchar *clipEmblem=NULL;
+	    clipEmblem= ClipBoard<Type>::clipBoardEmblem(xd_p->path);
+
+	    if (clipEmblem){
+		void *arg2[] = {NULL, (void *)pixbuf, NULL, NULL, (void *)(clipEmblem+1) };
+		Util<Type>::context_function(Icons<Type>::insert_decoration_f, arg2);
+
+		void *arg3[] = {NULL, (void *)treepixbuf, NULL, NULL, (void *)(clipEmblem+1) };
+		Util<Type>::context_function(Icons<Type>::insert_decoration_f, arg3);
+	    } else {
+	    }
+	}
+
 	auto highlight_pixbuf = gdk_pixbuf_copy(pixbuf);
         //Highlight emblem macros are defined in types.h
 	//
@@ -213,28 +233,15 @@ public:
 	    if (strncmp(xd_p->mimetype, "application", strlen("application"))==0){
 		emblem = HIGHLIGHT_APP;
 	    }
+	} else {
+		emblem = HIGHLIGHT_TEXT;
 	}
-
-
-        // Now decorate the pixbuf with emblem (types.h).
-        void *arg[] = {NULL, (void *)highlight_pixbuf, NULL, NULL, (void *)emblem };
-        // Done by main gtk thread:
-        Util<Type>::context_function(Icons<Type>::insert_decoration_f, arg);
-#if 0
-	// decorate image preview with cut emblem
-	const gchar *clipEmblem=NULL;
-	if (Gtk<Type>::isImage(xd_p->mimetype)){
-	    if (ClipBoard<Type>::isInClipBoard(xd_p->path)){
-		if(ClipBoard<Type>::isClipBoardCut()) clipEmblem="NE/edit-cut/2/220";
-		else clipEmblem="NE/edit-copy/2/220";
-		void *arg2[] = {NULL, (void *)pixbuf, NULL, NULL, (void *)clipEmblem };
-		Util<Type>::context_function(Icons<Type>::insert_decoration_f, arg2);
-
-		void *arg3[] = {NULL, (void *)treepixbuf, NULL, NULL, (void *)clipEmblem };
-		Util<Type>::context_function(Icons<Type>::insert_decoration_f, arg3);
-	    }
+	if (strlen(emblem)){
+	    // Now decorate the pixbuf with emblem (types.h).
+	    void *arg[] = {NULL, (void *)highlight_pixbuf, NULL, NULL, (void *)emblem };
+	    // Done by main gtk thread:
+	    Util<Type>::context_function(Icons<Type>::insert_decoration_f, arg);
 	}
-#endif        
 
         auto date = LocalModel<Type>::dateString((xd_p->st)?xd_p->st->st_mtime:0);
         auto size = LocalModel<Type>::sizeString((xd_p->st)?xd_p->st->st_size:0);
@@ -315,9 +322,14 @@ private:
 #endif
                 break;
             case G_FILE_MONITOR_EVENT_CHANGED:
-                DBG("monitor_f(): Received  CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
-                p->restat_item(first);
+                TRACE("monitor_f(): Received  CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
                 // reload icon
+		Hash<Type>::rm_from_pixbuf_hash(f, 24);
+		Hash<Type>::rm_from_pixbuf_hash(f, 48);
+		// Thumbnails are not thumbnailed.
+		//Hash<Type>::zap_thumbnail_file(f, 24);
+		//Hash<Type>::zap_thumbnail_file(f, 48);
+                p->restat_item(first);
                 //FIXME: check if this is now done:
                 //       if image, then reload the pixbuf
                 break;

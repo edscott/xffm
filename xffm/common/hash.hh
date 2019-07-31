@@ -159,20 +159,20 @@ public:
 
     static void
     rm_from_pixbuf_hash (const gchar *icon_name, gint size) {
-	TRACE("rfm_rm_from_pixbuf_hash()\n");
+	//if (strstr(icon_name, "png")) DBG("rfm_rm_from_pixbuf_hash(): %s, %d\n", icon_name, size);
 	if (!icon_name) return ;
 	gchar *hash_key = get_hash_key (icon_name, size);
 
-	TRACE( "rm_from_pixbuf_hash: %s\n", hash_key);
+	//if (strstr(icon_name, "png")) DBG( "rm_from_pixbuf_hash: %s, %d, %s\n", icon_name, size, hash_key);
 	if (!pixbuf_hash) fprintf(stderr, "pixbuf_hash!\n");
 
 	void *d = g_hash_table_lookup(pixbuf_hash, hash_key);
 	
 	if (d) {
-	    TRACE("removing key %s from hashtable\n", hash_key);
+	    //if (strstr(icon_name, "png")) DBG("removing key %s from hashtable\n", hash_key);
 	    g_hash_table_remove(pixbuf_hash, hash_key);
 	} else {
-	    TRACE("key %s not in hashtable\n", hash_key);
+	    //if (strstr(icon_name, "png")) DBG("key %s not in hashtable\n", hash_key);
 	}
 	g_free(hash_key);
 	TRACE("rfm_rm_from_pixbuf_hash() done\n");
@@ -217,6 +217,7 @@ public:
 		errno=0;
 	    }
 	}
+	//if (strstr(icon_name, "png")) DBG("loaded pixbuf key: %s\n", hash_key);
 	g_free(hash_key);
 	return pixbuf_p->pixbuf;
     }
