@@ -247,6 +247,7 @@ public:
 	    }
 	    else emblem = HIGHLIGHT_EMBLEM;
 	}
+	// Images as well...
 	if (strlen(emblem)){
 	    // Now decorate the pixbuf with emblem (types.h).
 	    void *arg[] = {NULL, (void *)highlight_pixbuf, NULL, NULL, (void *)emblem };
