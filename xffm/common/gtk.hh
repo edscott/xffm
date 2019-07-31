@@ -392,7 +392,7 @@ public:
     static void
     closeQuickDialog(GtkWidget *widget, GdkEventKey * event, void *data){
 	gtk_widget_hide(widget);
-	DBG("closeQuickDialog\n");
+	TRACE("closeQuickDialog\n");
 	gtk_widget_destroy(widget);
     }
 
