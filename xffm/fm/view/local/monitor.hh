@@ -217,7 +217,14 @@ public:
 	    }
 	}
 
-	auto highlight_pixbuf = gdk_pixbuf_copy(pixbuf);
+	GdkPixbuf *highlight_pixbuf;
+	if (strcmp(xd_p->mimetype, "inode/directory")){
+	    //FIXME: this is not working as intended...
+	    //       highlight_pixbuf is also incorrect for images...
+	    //       but works ok for other file types...
+	    highlight_pixbuf = Pixbuf<Type>::get_pixbuf(iconName,  -48);
+	}
+	else highlight_pixbuf = gdk_pixbuf_copy(pixbuf);
         //Highlight emblem macros are defined in types.h
 	//
 	// Decorate highlight pixbuf
