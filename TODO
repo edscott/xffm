@@ -1,4 +1,5 @@
 For 0.91
+ > bug: sort by size/date not translated... try again.
  > bug: annoying change of lpterm size on changing directory (goes to automatic default
  > bug: extension text tag does not appear when item is added from local/monitor (in treeview, and iconview in  both pixbuf and highlight pixbuf)
    from maximum size)

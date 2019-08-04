@@ -103,9 +103,6 @@ public:
 	    {N_("Delete"), (void *)LocalRm<Type>::rm, NULL, NULL},
             //{N_("About"), NULL, (void *) menu},
             //
-            //only for listview: {N_("Sort by size"), NULL, (void *) menu},
-            //only for listview: {N_("Sort by date"), NULL, (void *) menu},
-            
             {N_("Select All"), (void *)selectAll, NULL, NULL},
             {N_("Match regular expression"), (void *)selectMatch, NULL, NULL},
             {NULL,NULL,NULL, NULL}};
