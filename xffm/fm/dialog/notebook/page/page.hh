@@ -37,7 +37,7 @@ class Page : public PageBase<double>
 
     gboolean terminalMode_;
     gboolean iconviewIsDefault_;
-
+    GtkBox *hViewBox_;
 public:
 
     View<Type> *view(void){ return view_;}
@@ -50,6 +50,7 @@ public:
     GtkBox *pageLabelSpinnerBox(void){ return pageLabelSpinnerBox_;}
     GtkBox *pageLabelIconBox(void){ return pageLabelIconBox_;}
     GtkButton *pageLabelButton(void){ return pageLabelButton_;}
+    GtkBox *hViewBox(void){return hViewBox_;}
 
     Page(dialog_c *parent, const gchar *workdir){
 	parent_ = parent;
@@ -76,11 +77,11 @@ public:
 
 	//gtk_widget_show_all(GTK_WIDGET(pageLabelBox_));
 
-        GtkBox *hViewBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
+        hViewBox_ = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
 
-	gtk_box_pack_start (hViewBox, GTK_WIDGET(this->vpane()), TRUE, TRUE, 0);
-	//gtk_box_pack_start (hViewBox, GTK_WIDGET(this->vButtonBox()), FALSE, FALSE, 0);
-	gtk_box_pack_start (pageChild_, GTK_WIDGET(hViewBox), TRUE, TRUE, 0);
+	gtk_box_pack_start (hViewBox_, GTK_WIDGET(this->vpane()), TRUE, TRUE, 0);
+	//gtk_box_pack_start (hViewBox_, GTK_WIDGET(this->vButtonBox()), FALSE, FALSE, 0);
+	gtk_box_pack_start (pageChild_, GTK_WIDGET(hViewBox_), TRUE, TRUE, 0);
 	gtk_box_pack_start (pageChild_, GTK_WIDGET(this->hButtonBox()), FALSE, FALSE, 0);
         g_signal_connect(G_OBJECT(this->toggleToIconview()), "clicked", 
                 BUTTON_CALLBACK(pagesignals_c::toggleToIconview), (void *)this);
@@ -277,7 +278,7 @@ public:
         this->showFmBox();
         terminalMode_ = FALSE;
    }
-
+    
     void showIconview(gint state){
 	if (!gtk_widget_is_visible(GTK_WIDGET(this->pageChild_))){
 		TRACE("page2.hh:: showIconview() call with invisible parent\n");
@@ -292,15 +293,24 @@ public:
             while (gtk_events_pending())gtk_main_iteration();
             if (state == 0) setVpanePosition(0);
             else {
-                gint position = settings_c::getSettingInteger("window", "height");
-                if (position < 0) position = 200;
-                else position /= 2;
-                setVpanePosition(position);
+		// Get vpane position...
+		auto currentPosition = gtk_paned_get_position (this->vpane());
+		TRACE("current vpane position = %d\n", currentPosition);
+		GtkAllocation allocation;
+		gtk_widget_get_allocation(GTK_WIDGET(this->hViewBox()),&allocation);
+		TRACE("current hViewBox height = %d\n", allocation.height);
+		if (allocation.height - currentPosition < 5){
+		    gint position = settings_c::getSettingInteger("window", "height");
+		    if (position < 0) position = 200;
+		    else position /= 2;
+		    setVpanePosition(position);
+		}
             }
             terminalMode_ = TRUE;
         } 
 
     }
+public:
     gint
     keyboardEvent( GdkEventKey * event) {
 
