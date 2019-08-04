@@ -233,7 +233,7 @@ public:
         //Highlight emblem macros are defined in types.h
 	//
 	// Decorate highlight pixbuf
-	// (duplicate code in monitor.hh)
+	// (duplicate code in monitor.hh/model.hh)
 	const gchar *emblem="";
 	if (xd_p->mimetype){
 	    if (strncmp(xd_p->mimetype, "inode/regular", strlen("inode/regular"))==0){

@@ -371,8 +371,9 @@ private:
 
         TRACE("getEmblem: %s --> %s\n", path, emblem);
         gchar *extend;
-        if (d_type != DT_REG) extend = g_strdup("");
-        else extend = extension(basename);
+	extend = extension(basename);
+        /*if (d_type != DT_REG) extend = g_strdup("");
+        else extend = extension(basename);*/
         TRACE("extend: %s --> %s\n", path, extend);
         auto color = getColor(basename);
         auto fullEmblem = g_strconcat(extend, color, emblem, NULL);
