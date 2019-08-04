@@ -50,7 +50,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-02 12:27-0600\n"
+"POT-Creation-Date: 2019-08-04 16:54-0500\n"
 "PO-Revision-Date: 2003-08-10 16:00+0800\n"
 "Last-Translator: Hasbullah Bin Pit <sebol@ikhlas.com>\n"
 "Language-Team: Malay <translation-team-ms@lists.sourceforge.net>\n"
@@ -58,6 +58,12 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: ../../xffm/mime/mimemagic.hh:68 ../../xffm/mime/mimemagic.hh:110
+#: ../../xffm/common/mimemagic.hh:68 ../../xffm/common/mimemagic.hh:110
+#, fuzzy
+msgid "No Read Permission"
+msgstr "Tambahkan Keizinan"
 
 #: ../../xffm/completion/base.hh:28
 msgid "Command"
@@ -73,7 +79,7 @@ msgid "Command history"
 msgstr "Sejarah arahan SQL"
 
 #. option -u uid "uid" "uid_combo"
-#: ../../xffm/completion/base.hh:37 ../../xffm/find/dialog.hh:199
+#: ../../xffm/completion/base.hh:37 ../../xffm/find/dialog.hh:192
 msgid "User"
 msgstr "Pengguna"
 
@@ -90,16 +96,16 @@ msgstr "Hos"
 msgid "Found no match"
 msgstr "Tidak sama"
 
-#: ../../xffm/completion/base.hh:133 ../../xffm/completion/base.hh:134
+#: ../../xffm/completion/base.hh:141 ../../xffm/completion/base.hh:142
 msgid "Matches"
 msgstr "Sama"
 
-#: ../../xffm/completion/base.hh:134
+#: ../../xffm/completion/base.hh:142
 #, fuzzy
 msgid "Too many files open"
 msgstr "Terlalu banyak fail dibuka"
 
-#: ../../xffm/completion/base.hh:325 ../../xffm/find/fgr.hh:124
+#: ../../xffm/completion/base.hh:339 ../../xffm/find/fgr.hh:124
 msgid "Options:"
 msgstr "Opsyen:"
 
@@ -120,7 +126,8 @@ msgstr "fail"
 msgid "Options >>"
 msgstr "Opsyen >>"
 
-#: ../../xffm/find/fgr.hh:124 ../../xffm/find/dialog.hh:308
+#: ../../xffm/find/fgr.hh:124 ../../xffm/find/signals.hh:100
+#: ../../xffm/find/dialog.hh:301
 msgid "Path"
 msgstr "Laluan"
 
@@ -130,7 +137,7 @@ msgstr ""
 "Lokasikan dokumen-dokumen dan folder-folder pada komputer ini berdasarkan "
 "nama atau kandungan"
 
-#: ../../xffm/find/fgr.hh:126 ../../xffm/find/dialog.hh:341
+#: ../../xffm/find/fgr.hh:126 ../../xffm/find/dialog.hh:334
 msgid "Filter:"
 msgstr "Penapis:"
 
@@ -163,7 +170,7 @@ msgid "Filter Details"
 msgstr "Perincian Pengguna"
 
 #. / option -a "xdev"
-#: ../../xffm/find/fgr.hh:138 ../../xffm/find/dialog.hh:180
+#: ../../xffm/find/fgr.hh:138 ../../xffm/find/dialog.hh:173
 msgid "Stay on single filesystem"
 msgstr "Tetap pada sistemfail tunggal"
 
@@ -176,7 +183,7 @@ msgid "The unique Process ID that identifies this process."
 msgstr ""
 
 #. / option -D "recursiveH"
-#: ../../xffm/find/fgr.hh:142 ../../xffm/find/dialog.hh:177
+#: ../../xffm/find/fgr.hh:142 ../../xffm/find/dialog.hh:170
 #, fuzzy
 msgid "Find hidden files and directories"
 msgstr "Abaikan fail dan direktori"
@@ -191,7 +198,7 @@ msgid ""
 msgstr ""
 
 #. / option -r "recursive"
-#: ../../xffm/find/fgr.hh:146 ../../xffm/find/dialog.hh:174
+#: ../../xffm/find/fgr.hh:146 ../../xffm/find/dialog.hh:167
 msgid "Recursive"
 msgstr "Rekursif"
 
@@ -225,7 +232,7 @@ msgstr "Keizinan bagi fail, dalam notasi oktal."
 msgid "Type"
 msgstr "Jenis"
 
-#: ../../xffm/find/fgr.hh:157 ../../xffm/find/signals.hh:17
+#: ../../xffm/find/fgr.hh:157 ../../xffm/find/signals.hh:14
 msgid "Any"
 msgstr "Sebarang"
 
@@ -234,18 +241,18 @@ msgstr "Sebarang"
 msgid "Default type"
 msgstr "Jenis font default"
 
-#: ../../xffm/find/fgr.hh:158 ../../xffm/common/preview.hh:497
+#: ../../xffm/find/fgr.hh:158 ../../xffm/common/preview.hh:478
 #, fuzzy
 msgid "Regular file"
 msgstr "fail biasa"
 
-#: ../../xffm/find/fgr.hh:159 ../../xffm/find/signals.hh:11
-#: ../../xffm/fm/local/popup.hh:803 ../../xffm/common/preview.hh:488
+#: ../../xffm/find/fgr.hh:159 ../../xffm/find/signals.hh:8
+#: ../../xffm/fm/view/local/popup.hh:1062 ../../xffm/common/preview.hh:469
 msgid "Directory"
 msgstr "Direktori"
 
-#: ../../xffm/find/fgr.hh:160 ../../xffm/find/signals.hh:12
-#: ../../xffm/common/preview.hh:494
+#: ../../xffm/find/fgr.hh:160 ../../xffm/find/signals.hh:9
+#: ../../xffm/common/preview.hh:475
 msgid "Symbolic Link"
 msgstr "Pautan Simbolik"
 
@@ -254,32 +261,32 @@ msgstr "Pautan Simbolik"
 msgid "UNIX Socket"
 msgstr "Soket"
 
-#: ../../xffm/find/fgr.hh:162 ../../xffm/find/signals.hh:14
-#: ../../xffm/common/preview.hh:482
+#: ../../xffm/find/fgr.hh:162 ../../xffm/find/signals.hh:11
+#: ../../xffm/common/preview.hh:463
 msgid "Block device"
 msgstr "Peranti blok"
 
-#: ../../xffm/find/fgr.hh:163 ../../xffm/find/signals.hh:15
-#: ../../xffm/common/preview.hh:485
+#: ../../xffm/find/fgr.hh:163 ../../xffm/find/signals.hh:12
+#: ../../xffm/common/preview.hh:466
 msgid "Character device"
 msgstr "Peranti aksara"
 
-#: ../../xffm/find/fgr.hh:164 ../../xffm/find/signals.hh:16
-#: ../../xffm/common/preview.hh:491
+#: ../../xffm/find/fgr.hh:164 ../../xffm/find/signals.hh:13
+#: ../../xffm/common/preview.hh:472
 msgid "FIFO"
 msgstr "FIFO"
 
-#. radio_p freed on destroy event for dialog_.
+#. radio_p freed on destroy event for findDialog.
 #. option -k minutes "last_minutes", "last_minutes_spin"
 #: ../../xffm/find/fgr.hh:166 ../../xffm/find/fgr.hh:168
-#: ../../xffm/find/dialog.hh:221
+#: ../../xffm/find/dialog.hh:214
 msgid "Minutes"
 msgstr "Minit"
 
 #: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
 #: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
-#: ../../xffm/find/dialog.hh:270 ../../xffm/find/dialog.hh:370
-#: ../../xffm/fm/treeview.hh:18
+#: ../../xffm/find/dialog.hh:263 ../../xffm/find/dialog.hh:363
+#: ../../xffm/fm/view/treeview.hh:18
 msgid "Details"
 msgstr "Perincian"
 
@@ -298,13 +305,13 @@ msgstr "Lepas (P)"
 
 #. option -h hours "last_hours", "last_hours_spin"
 #: ../../xffm/find/fgr.hh:169 ../../xffm/find/fgr.hh:171
-#: ../../xffm/find/dialog.hh:226
+#: ../../xffm/find/dialog.hh:219
 msgid "Hours"
 msgstr "Jam"
 
 #. option -d days "last_days", "last_days_spin"
 #: ../../xffm/find/fgr.hh:172 ../../xffm/find/fgr.hh:174
-#: ../../xffm/find/dialog.hh:231
+#: ../../xffm/find/dialog.hh:224
 msgid "Days"
 msgstr "Hari"
 
@@ -361,7 +368,7 @@ msgid "STRING"
 msgstr "STRING"
 
 #: ../../xffm/find/fgr.hh:202 ../../xffm/find/fgr.hh:204
-#: ../../xffm/fm/local/popup.hh:563
+#: ../../xffm/fm/view/local/popup.hh:759
 msgid "Regular expression"
 msgstr "Ungkapan regular (regepx)"
 
@@ -377,11 +384,11 @@ msgstr "Abaikan huruf kecil/besar"
 msgid "Text Files"
 msgstr "Fail-fail Teks"
 
-#: ../../xffm/find/fgr.hh:210 ../../xffm/find/dialog.hh:552
+#: ../../xffm/find/fgr.hh:210 ../../xffm/find/dialog.hh:545
 msgid "No match"
 msgstr "Tiada padanan"
 
-#: ../../xffm/find/fgr.hh:212 ../../xffm/find/dialog.hh:470
+#: ../../xffm/find/fgr.hh:212 ../../xffm/find/dialog.hh:463
 msgid "Line Count"
 msgstr "Kiraan Baris"
 
@@ -398,191 +405,189 @@ msgstr "Garis"
 msgid "Usage : %s [OPTIONS]\n"
 msgstr "Pengunaan : %s [OPSYEN]\n"
 
-#: ../../xffm/find/signals.hh:10
+#: ../../xffm/find/signals.hh:7
 msgid "Regular"
 msgstr "Biasa"
 
-#: ../../xffm/find/signals.hh:13 ../../xffm/common/preview.hh:500
+#: ../../xffm/find/signals.hh:10 ../../xffm/common/preview.hh:481
 msgid "Socket"
 msgstr "Soket"
 
-#: ../../xffm/find/signals.hh:209
-#, fuzzy
-msgid "Select folder to search in"
-msgstr "Pilih folder untuk menyimpan semua lampiran"
+#. if (g_slist_length(list) == 0) return NULL;
+#. Create liststore for DnD
+#. / option "upper_limit_spin" (only in gtk findDialog)
+#: ../../xffm/find/signals.hh:66 ../../xffm/find/signals.hh:454
+#: ../../xffm/find/dialog.hh:176
+msgid "Results"
+msgstr "Keputusan"
 
 #. button no
-#: ../../xffm/find/signals.hh:265 ../../xffm/find/dialog.hh:584
-#: ../../xffm/response/entryfileresponse.hh:18
-#: ../../xffm/response/entryresponse.hh:305
-#: ../../xffm/response/passwdresponse.hh:558
-#: ../../xffm/fm/local/properties.hh:304 ../../xffm/fm/local/rm.hh:155
+#: ../../xffm/find/signals.hh:368 ../../xffm/find/dialog.hh:577
+#: ../../xffm/response/chooserresponse.hh:21
+#: ../../xffm/response/entryresponse.hh:420
+#: ../../xffm/fm/view/local/properties.hh:314
+#: ../../xffm/fm/view/local/rm.hh:157 ../../xffm/common/gtk.hh:409
 msgid "Cancel"
 msgstr "Batal"
 
-#: ../../xffm/find/signals.hh:293 ../../xffm/find/signals.hh:722
+#: ../../xffm/find/signals.hh:396 ../../xffm/find/signals.hh:830
 #, fuzzy
 msgid "No editor for current action."
 msgstr "Laksanakan transaksi semasa"
 
-#. / option "upper_limit_spin" (only in gtk dialog_)
-#: ../../xffm/find/signals.hh:351 ../../xffm/find/dialog.hh:183
-msgid "Results"
-msgstr "Keputusan"
-
-#: ../../xffm/find/signals.hh:351
+#: ../../xffm/find/signals.hh:454
 msgid "Upper limit:"
 msgstr "Had atas:"
 
-#: ../../xffm/find/signals.hh:353
+#: ../../xffm/find/signals.hh:456
 msgid "Counting files..."
 msgstr "Menghitung fail..."
 
-#: ../../xffm/find/signals.hh:368
+#: ../../xffm/find/signals.hh:471
 #, fuzzy, c-format
 msgid "Found %d match"
 msgid_plural "Found %d matches"
 msgstr[0] "Tiada padanan"
 msgstr[1] "Tiada padanan"
 
-#: ../../xffm/find/signals.hh:370
+#: ../../xffm/find/signals.hh:473
 #, c-format
 msgid "%s Finished : %s"
 msgstr "%s Tamat : %s"
 
-#: ../../xffm/find/signals.hh:488 ../../xffm/find/signals.hh:490
+#: ../../xffm/find/signals.hh:596 ../../xffm/find/signals.hh:598
 msgid "Searching..."
 msgstr "Sedang mencari..."
 
-#. g_object_set_data(G_OBJECT(dialog_), "window", dialog_);
-#: ../../xffm/find/dialog.hh:98 ../../xffm/find/dialog.hh:150
-#: ../../xffm/find/dialog.hh:611
+#. g_object_set_data(G_OBJECT(findDialog), "window", findDialog);
+#: ../../xffm/find/dialog.hh:91 ../../xffm/find/dialog.hh:143
+#: ../../xffm/find/dialog.hh:604
 msgid "Find"
 msgstr "Cari"
 
-#: ../../xffm/find/dialog.hh:183
+#: ../../xffm/find/dialog.hh:176
 msgid "Upper limit"
 msgstr "Had atas"
 
 #. option -s +KByte "size_greater", "size_greater_spin"
-#: ../../xffm/find/dialog.hh:188
+#: ../../xffm/find/dialog.hh:181
 msgid "At Least"
 msgstr "Paling Kurang"
 
-#: ../../xffm/find/dialog.hh:188 ../../xffm/find/dialog.hh:193
+#: ../../xffm/find/dialog.hh:181 ../../xffm/find/dialog.hh:186
 msgid "kBytes"
 msgstr "kByte"
 
 #. option -s -KByte "size_smaller", "size_smaller_spin"
-#: ../../xffm/find/dialog.hh:193
+#: ../../xffm/find/dialog.hh:186
 msgid "At Most"
 msgstr "Paling Tinggi"
 
-#: ../../xffm/find/dialog.hh:204
+#: ../../xffm/find/dialog.hh:197
 msgid "Group"
 msgstr "Kumpulan"
 
 #. option -o octal "octal_p" "permissions_entry"
-#: ../../xffm/find/dialog.hh:208
+#: ../../xffm/find/dialog.hh:201
 msgid "Octal Permissions"
 msgstr "Keizinan Oktal"
 
 #. option -p suid | exe
-#: ../../xffm/find/dialog.hh:213
+#: ../../xffm/find/dialog.hh:206
 msgid "SUID"
 msgstr "SUID"
 
-#: ../../xffm/find/dialog.hh:213 ../../xffm/fm/local/popup.hh:843
+#: ../../xffm/find/dialog.hh:206 ../../xffm/fm/view/local/popup.hh:1102
 #, fuzzy
 msgid "Executable"
 msgstr "Boleh laksana:"
 
 #. option -m months "last_months", "last_months_spin"
-#: ../../xffm/find/dialog.hh:237
+#: ../../xffm/find/dialog.hh:230
 msgid "Months"
 msgstr "Bulan"
 
-#: ../../xffm/find/dialog.hh:248
+#: ../../xffm/find/dialog.hh:241
 msgid "File type : "
 msgstr "Jenis fail : "
 
 #. gtk_widget_show (GTK_WIDGET(right_options_vbox));
 #. gtk_widget_show (GTK_WIDGET(center_options_vbox));
 #. gtk_widget_show (GTK_WIDGET(left_options_vbox));
-#: ../../xffm/find/dialog.hh:262 ../../xffm/find/dialog.hh:602
-#: ../../xffm/fm/page/page.hh:70 ../../xffm/common/gtk.hh:70
+#: ../../xffm/find/dialog.hh:255 ../../xffm/find/dialog.hh:595
+#: ../../xffm/fm/dialog/notebook/page/page.hh:70 ../../xffm/common/gtk.hh:79
 msgid "Close"
 msgstr "Tutup"
 
 #. gtk_box_pack_start (vbox7a, GTK_WIDGET(advancedBox), TRUE, FALSE, 5);
 #. gtk_widget_show(GTK_WIDGET(advancedBox));
 #. //////////////  grep options.... /////////////////////////
-#: ../../xffm/find/dialog.hh:384
+#: ../../xffm/find/dialog.hh:377
 msgid "Contains"
 msgstr "Mengandungi"
 
-#: ../../xffm/find/dialog.hh:404
+#: ../../xffm/find/dialog.hh:397
 msgid "Contains the text"
 msgstr "Mengandungi teks"
 
-#: ../../xffm/find/dialog.hh:437
+#: ../../xffm/find/dialog.hh:430
 msgid "Case Sensitive"
 msgstr "Case Sensitif"
 
-#: ../../xffm/find/dialog.hh:449
+#: ../../xffm/find/dialog.hh:442
 msgid "Extended regexp"
 msgstr "Sambungan regexp"
 
-#: ../../xffm/find/dialog.hh:460
+#: ../../xffm/find/dialog.hh:453
 msgid "Include binary files"
 msgstr "Masukkan fail binari"
 
-#: ../../xffm/find/dialog.hh:496
+#: ../../xffm/find/dialog.hh:489
 msgid "Match"
 msgstr "Padan"
 
-#: ../../xffm/find/dialog.hh:508
+#: ../../xffm/find/dialog.hh:501
 #, fuzzy
 msgid "Anywhere"
 msgstr "Tiada di mana-mana"
 
-#: ../../xffm/find/dialog.hh:523
+#: ../../xffm/find/dialog.hh:516
 msgid "Whole words only"
 msgstr "Seluruh perkataan sahaja"
 
-#: ../../xffm/find/dialog.hh:538
+#: ../../xffm/find/dialog.hh:531
 msgid "lines"
 msgstr "baris"
 
-#: ../../xffm/find/dialog.hh:594
+#: ../../xffm/find/dialog.hh:587
 msgid "Clear"
 msgstr "Kosongkan"
 
-#: ../../xffm/find/dialog.hh:636
+#: ../../xffm/find/dialog.hh:629
 msgid "Edit"
 msgstr "Edit"
 
-#: ../../xffm/find/dialog.hh:751 ../../xffm/find/dialog.hh:766
-#: ../../xffm/common/util.hh:1150 ../../xffm/common/util.hh:1152
-#: ../../xffm/common/util.hh:1158 ../../xffm/common/util.hh:1160
-#: ../../xffm/common/preview.hh:479
+#: ../../xffm/find/dialog.hh:743 ../../xffm/find/dialog.hh:758
+#: ../../xffm/common/util.hh:1354 ../../xffm/common/util.hh:1356
+#: ../../xffm/common/util.hh:1362 ../../xffm/common/util.hh:1364
+#: ../../xffm/common/preview.hh:460
 msgid "unknown"
 msgstr "entah"
 
-#: ../../xffm/find/dialog.hh:780
+#: ../../xffm/find/dialog.hh:772
 msgid "Modified"
 msgstr "Diubahsuai"
 
-#: ../../xffm/find/dialog.hh:784
+#: ../../xffm/find/dialog.hh:776
 msgid "Created"
 msgstr "Dicipta"
 
-#: ../../xffm/find/dialog.hh:788
+#: ../../xffm/find/dialog.hh:780
 #, fuzzy
 msgid "Accessed"
 msgstr "DiAkses:"
 
-#: ../../xffm/find/dialog.hh:1106
+#: ../../xffm/find/dialog.hh:1098
 msgid ""
 "Basic rules:\n"
 "\n"
@@ -593,7 +598,7 @@ msgid ""
 "$  Match at end of string \n"
 msgstr ""
 
-#: ../../xffm/find/dialog.hh:1115
+#: ../../xffm/find/dialog.hh:1107
 msgid ""
 "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ ( ) : \n"
 "In  basic regular expressions the metacharacters ?, +, {, |, (, and ) \n"
@@ -628,377 +633,519 @@ msgid ""
 "More information is available by typing \"man grep\"\n"
 msgstr ""
 
-#: ../../xffm/response/entryfileresponse.hh:20
+#: ../../xffm/response/chooserresponse.hh:23
 msgid "Open"
 msgstr "Buka"
 
-#: ../../xffm/response/entryresponse.hh:29
-#: ../../xffm/response/entryfolderresponse.hh:28
+#: ../../xffm/response/chooserresponse.hh:56
 #, fuzzy
 msgid "Choose directory"
 msgstr "Pilih direktori"
 
+#: ../../xffm/response/chooserresponse.hh:60
+#, fuzzy
+msgid "Choose file"
+msgstr "Pilih fail"
+
+#: ../../xffm/response/customresponse.hh:55
+#, fuzzy
+msgid "Execute command"
+msgstr "Laksanakan Arahan"
+
+#. XXX folder or file entry should be determined on .ini file (probably just inherit from comboresponse for multiple files options (selected files)...
+#: ../../xffm/response/customresponse.hh:103
+msgid "Source File"
+msgstr "Fail Sumber"
+
 #. this button is redundant since hands are on keyboard for password
-#: ../../xffm/response/entryresponse.hh:309
-#: ../../xffm/response/passwdresponse.hh:189
-#: ../../xffm/response/passwdresponse.hh:559
+#: ../../xffm/response/entryresponse.hh:424
+#: ../../xffm/response/passwdresponse.hh:242
 msgid "Ok"
 msgstr "Ok"
 
-#: ../../xffm/response/commandprogressresponse.hh:32
+#: ../../xffm/response/commandprogressresponse.hh:31
 msgid "Items:"
 msgstr "Item:"
 
-#: ../../xffm/response/passwdresponse.hh:21
+#: ../../xffm/response/passwdresponse.hh:19
+#: ../../xffm/response/passwdresponse.hh:25 ../../xffm/common/run.hh:464
 msgid "Enter password"
 msgstr "Masukkan Katalaluan"
 
 #. gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
-#: ../../xffm/response/passwdresponse.hh:125
+#: ../../xffm/response/passwdresponse.hh:179
 #, fuzzy
 msgid "User Input"
 msgstr "Maklumat Pengguna"
 
-#: ../../xffm/response/passwdresponse.hh:142
+#: ../../xffm/response/passwdresponse.hh:195
 #, fuzzy
 msgid "Response Requested"
 msgstr "Permintaan menyimpan semula gagal"
 
-#: ../../xffm/response/passwdresponse.hh:264
-msgid "Preparing"
-msgstr "Menyediakan"
-
-#: ../../xffm/response/passwdresponse.hh:352
-msgid "sudo"
-msgstr ""
-
-#: ../../xffm/response/passwdresponse.hh:354
-msgid "Command:"
-msgstr "Arahan"
-
-#: ../../xffm/response/passwdresponse.hh:357
-msgid "Permission denied"
-msgstr "Keizinan dinafikan"
-
-#: ../../xffm/response/passwdresponse.hh:358
-msgid "Try to approach a problem from different angles."
-msgstr ""
-
-#: ../../xffm/response/passwdresponse.hh:359
-msgid "Do you want to retry?"
-msgstr "Adakah anda hendak ulangcuba?"
-
-#: ../../xffm/response/passwdresponse.hh:360
-msgid "Alternate:"
-msgstr "Alternatif:"
-
-#: ../../xffm/response/passwdresponse.hh:365
-msgid "No"
-msgstr "Tidak"
-
-#: ../../xffm/response/passwdresponse.hh:401
-msgid "Install"
-msgstr "Pasang"
-
-#: ../../xffm/response/passwdresponse.hh:402
-#, fuzzy, c-format
-msgid "%s does not exist."
-msgstr "%s tidak wujud"
-
-#: ../../xffm/response/passwdresponse.hh:467
-#, fuzzy
-msgid "Blowfish"
-msgstr "Sawfish"
-
-#: ../../xffm/response/passwdresponse.hh:468
-msgid "Encryption Key Approval"
-msgstr "Kelulusan Kekunci Penyulitan"
-
-#: ../../xffm/response/passwdresponse.hh:502
-msgid "-o     print output to standard out. Implies -r."
-msgstr ""
-
-#: ../../xffm/response/passwdresponse.hh:506
-msgid "-c     DO NOT compress files before encryption."
-msgstr ""
-
-#: ../../xffm/response/passwdresponse.hh:510
-msgid "-r     DO NOT remove input files after processing"
-msgstr ""
-
-#: ../../xffm/response/passwdresponse.hh:517
-#, fuzzy
-msgid "Encryption key: "
-msgstr "Kunci Enkripsi:"
-
-#: ../../xffm/response/passwdresponse.hh:529
-msgid "Confirm:"
-msgstr "Kepastian:"
-
-#: ../../xffm/response/passwdresponse.hh:542
-msgid "Sorry, passwords do not match"
-msgstr "Maaf, katalaluan tidak sepadan."
-
-#: ../../xffm/response/passwdresponse.hh:550
-#, fuzzy
-msgid "Minimum length:"
-msgstr "Nilai minima:"
-
-#: ../../xffm/response/timeoutresponse.hh:56
+#: ../../xffm/response/timeoutresponse.hh:57
 msgid "Dismiss"
 msgstr ""
 
-#: ../../xffm/response/commandresponse.hh:23
+#: ../../xffm/response/commandresponse.hh:19
 msgid "Running"
 msgstr "Terlaksana"
 
 #. auto text = g_strdup_printf("%s (pid: %d)",
 #. _("Waiting for operation to finish..."),
 #. Tubo<Type>::getChild (pid));
-#: ../../xffm/response/commandresponse.hh:28
+#: ../../xffm/response/commandresponse.hh:24
 #, fuzzy
 msgid "Waiting for operation to finish..."
 msgstr "Menunggu  authorization dari %s..."
 
-#: ../../xffm/fm/local/icons.hh:257
-msgid "Documents"
-msgstr "Dokumen"
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:11
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:214
+msgid "Remove Button Contents"
+msgstr "Keluarkan Kandungan Butang"
 
-#: ../../xffm/fm/local/icons.hh:257
-msgid "Downloads"
-msgstr "Muaturun"
-
-#: ../../xffm/fm/local/icons.hh:257
-msgid "Music"
-msgstr "Muzik"
-
-#: ../../xffm/fm/local/icons.hh:257
-msgid "Pictures"
-msgstr "Gambar"
-
-#: ../../xffm/fm/local/icons.hh:258
-msgid "Templates"
-msgstr "Acuan"
-
-#: ../../xffm/fm/local/icons.hh:258
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:67
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:209
 #, fuzzy
-msgid "Videos"
-msgstr "Video"
+msgid "Add custom content"
+msgstr "Tambah ke menu konteks"
 
-#: ../../xffm/fm/local/icons.hh:258
-msgid "Desktop"
-msgstr "Desktop"
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:68
+#, fuzzy
+msgid "Select file to load"
+msgstr "Pilih fail untuk dimuatkan"
 
-#: ../../xffm/fm/local/icons.hh:258
-msgid "Bookmarks"
-msgstr "Tandabuku"
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:125
+#, fuzzy, c-format
+msgid "Cannot load file %s. Reason: %s"
+msgstr "Tak dapat memuatkan folder \"%s\": %s\n"
 
-#: ../../xffm/fm/local/icons.hh:259 ../../xffm/fm/local/rm.hh:181
-msgid "Trash"
-msgstr "Buangan"
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:154
+#, fuzzy
+msgid "You need to restart the application"
+msgstr "Tidak dapat mula aplikasi %s."
 
-#: ../../xffm/fm/local/popup.hh:60
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:187
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:191
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:195
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:198
+#: ../../xffm/fm/view/pkg/model.hh:29 ../../xffm/fm/view/pkg/popup.hh:35
+#, fuzzy
+msgid "Software Updater"
+msgstr "Tarikh mula"
+
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:236
+#: ../../xffm/fm/view/pkg/model.hh:108 ../../xffm/fm/view/pkg/model.hh:299
+#: ../../xffm/fm/view/pkg/model.hh:306 ../../xffm/fm/view/pkg/popup.hh:151
+#: ../../xffm/common/gtk.hh:77
+msgid "Search"
+msgstr "Cari"
+
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:240 ../../xffm/common/gtk.hh:67
+#, fuzzy
+msgid "Open terminal"
+msgstr "Buka Terminal"
+
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:244
+#, fuzzy
+msgid "Open a New Window"
+msgstr "Buka dalam Tetingkap Baru"
+
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:250
+msgid "Differences"
+msgstr "Perbezaan"
+
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:256
+#: ../../xffm/fm/view/root/model.hh:110
+msgid "Home Directory"
+msgstr "Direktori Home"
+
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:261
+#: ../../xffm/fm/view/root/model.hh:168 ../../xffm/fm/view/fstab/popup.hh:29
+#, fuzzy
+msgid "Disk Image Mounter"
+msgstr "Pelekap Cakera"
+
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:266
+#: ../../xffm/fm/view/root/model.hh:137
+#, fuzzy
+msgid "Trash bin"
+msgstr "Fail Tong Sampah"
+
+#: ../../xffm/fm/dialog/notebook/notebook.hh:56
+#, fuzzy
+msgid "Long press time"
+msgstr "Hujung panjang"
+
+#: ../../xffm/fm/dialog/notebook/notebook.hh:75 ../../xffm/common/gtk.hh:139
+msgid "New Tab"
+msgstr "Tab Baru"
+
+#: ../../xffm/fm/dialog/notebook/menupopover.hh:178
+#, fuzzy
+msgid "Open menu"
+msgstr "Buka Imej"
+
+#: ../../xffm/fm/dialog/notebook/menupopover.hh:230
+#, fuzzy
+msgid "View as list"
+msgstr "Lihat sebagai Senarai"
+
+#: ../../xffm/fm/dialog/notebook/menupopover.hh:231
+msgid "Show hidden files"
+msgstr "Papar fail tersembunyi"
+
+#: ../../xffm/fm/dialog/notebook/menupopover.hh:232
+#, fuzzy
+msgid "Show Backup Files"
+msgstr "Fail backup"
+
+#: ../../xffm/fm/dialog/notebook/menupopover.hh:233
+msgid "Sort data in descending order"
+msgstr "Isih data dalam tertib menurun"
+
+#: ../../xffm/fm/dialog/notebook/menupopover.hh:235
+#, fuzzy
+msgid "Sort by date"
+msgstr "Tarikh ringkas:"
+
+#: ../../xffm/fm/dialog/notebook/menupopover.hh:236
+#, fuzzy
+msgid "Sort by size"
+msgstr "Mengikut saiz"
+
+#: ../../xffm/fm/dialog/notebook/menupopover.hh:237 ../../xffm/common/gtk.hh:81
+msgid "Exit"
+msgstr "Keluar"
+
+#: ../../xffm/fm/dialog/notebook/menupopover.hh:270
+#, fuzzy
+msgid "Main menu"
+msgstr "Menu Utama"
+
+#. File chooser
+#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:375
+#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:377
+#, fuzzy
+msgid "Go to"
+msgstr "Pergi ke %s"
+
+#. entryResponse->setCheckButton(_("Run in Terminal"));
+#. entryResponse->setCheckButton(Run<Type>::runInTerminal(path));
+#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:382
+#: ../../xffm/fm/view/local/popup.hh:887 ../../xffm/fm/view/local/popup.hh:981
+msgid "Specify Output Directory..."
+msgstr "Nyatakan Direktori Keluaran..."
+
+#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:409
+msgid "Not a directory"
+msgstr "Bukanlah satu direktori"
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid "Renice Process"
+msgstr "Baguskan Semula Proses"
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid "Suspend"
+msgstr "Gantung..."
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid "Continue"
+msgstr "Teruskan"
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid "Interrupt"
+msgstr "Sampuk"
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid "Hangup"
+msgstr "Letak"
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid "User 1 (USR1)"
+msgstr ""
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:137
+msgid "User 2 (USR2)"
+msgstr ""
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:137
+#, fuzzy
+msgid "Terminate Task"
+msgstr "Matikan %s"
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:137
+msgid "Abort"
+msgstr "Batal"
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:138
+msgid "Kill"
+msgstr "Bunuh"
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:139
+#, fuzzy
+msgid "Segmentation fault"
+msgstr "Tetapkan sebagai default"
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:216
+msgid "PID"
+msgstr "PID"
+
+#: ../../xffm/fm/dialog/notebook/page/page.hh:58
+msgid "loading..."
+msgstr "memuatkan..."
+
+#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
+#, fuzzy
+msgid "Embedded Terminal"
+msgstr "Buka Terminal"
+
+#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
+#, fuzzy
+msgid "All items in the iconview."
+msgstr "Pilih semua item pada tetingkap ini"
+
+#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
+msgid "Scripting"
+msgstr "Penskriptan"
+
+#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
+msgid "Clear Log"
+msgstr "Kosongkan log"
+
+#. Status textview
+#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
+#, fuzzy
+msgid "Terminal font"
+msgstr "Font terminal"
+
+#: ../../xffm/fm/dialog/clipboard.hh:23 ../../xffm/common/dnd.hh:41
+#, fuzzy
+msgid "Copying files locally"
+msgstr "Penyalinan fail-fail"
+
+#: ../../xffm/fm/dialog/clipboard.hh:30 ../../xffm/common/gio.hh:83
+#: ../../xffm/common/dnd.hh:35
+#, fuzzy
+msgid "Moving files"
+msgstr "Pindah Fail-fail"
+
+#: ../../xffm/fm/dialog/dialog.hh:122
+msgid "Removed"
+msgstr "Dihapuskan"
+
+#: ../../xffm/fm/dialog/dialog.hh:143
+#, fuzzy
+msgid "Detected device(s):"
+msgstr "Kesan peranti"
+
+#: ../../xffm/fm/view/local/model.hh:122
+#, fuzzy, c-format
+msgid "Reading \"%s\""
+msgstr "Menghantar \"%s\""
+
+#: ../../xffm/fm/view/local/model.hh:575 ../../xffm/fm/view/base/monitor.hh:33
+#, fuzzy, c-format
+msgid "Files: %s"
+msgstr "Fail: %s"
+
+#: ../../xffm/fm/view/local/model.hh:578
+#, c-format
+msgid "Loaded %d of %d articles"
+msgstr "Memuatkan %d bagi artikel %d"
+
+#: ../../xffm/fm/view/local/popup.hh:85 ../../xffm/fm/view/local/popup.hh:142
+#: ../../xffm/fm/view/local/popup.hh:1287
+#: ../../xffm/fm/view/local/popup.hh:1294
+#: ../../xffm/fm/view/local/popup.hh:1305
+#: ../../xffm/fm/view/local/popup.hh:1312 ../../xffm/common/gtk.hh:83
+msgid "Open with"
+msgstr "Buka dengan"
+
+#: ../../xffm/fm/view/local/popup.hh:94
 msgid "New"
 msgstr "Baru"
+
+#: ../../xffm/fm/view/local/popup.hh:95 ../../xffm/fm/view/local/popup.hh:145
+#: ../../xffm/fm/view/root/popup.hh:136 ../../xffm/fm/view/fstab/popup.hh:20
+#: ../../xffm/common/gtk.hh:94
+msgid "Open in New Tab"
+msgstr "Buka Dalam Tab Baru (O)"
 
 #. deprecated {N_("Open in New Tab"), NULL, NULL, NULL},
 #. deprecated {N_("Open in New Window"), NULL, NULL, NULL},
 #. common buttons /(also an iconsize +/- button)
-#: ../../xffm/fm/local/popup.hh:64 ../../xffm/fm/local/popup.hh:104
-#: ../../xffm/common/gtk.hh:74
+#: ../../xffm/fm/view/local/popup.hh:99 ../../xffm/fm/view/local/popup.hh:155
+#: ../../xffm/common/gtk.hh:87
 msgid "Copy"
 msgstr "Salin"
 
-#: ../../xffm/fm/local/popup.hh:65 ../../xffm/fm/local/popup.hh:105
-#: ../../xffm/common/gtk.hh:73
+#: ../../xffm/fm/view/local/popup.hh:100 ../../xffm/fm/view/local/popup.hh:156
+#: ../../xffm/common/gtk.hh:85
 msgid "Cut"
 msgstr "Potong"
 
-#: ../../xffm/fm/local/popup.hh:66 ../../xffm/fm/local/popup.hh:106
-#: ../../xffm/common/gtk.hh:66
-msgid "Paste"
-msgstr "Tepek"
+#: ../../xffm/fm/view/local/popup.hh:101 ../../xffm/fm/view/local/popup.hh:159
+#: ../../xffm/fm/view/local/popup.hh:232 ../../xffm/fm/view/local/popup.hh:234
+#, fuzzy
+msgid "Paste into"
+msgstr "Tepek berikutnya"
+
+#: ../../xffm/fm/view/local/popup.hh:102 ../../xffm/fm/view/local/popup.hh:158
+msgid "There is nothing on the clipboard to paste."
+msgstr "Tiada apa-apa pada papanklip untuk ditepek."
 
 #. **************
-#: ../../xffm/fm/local/popup.hh:67 ../../xffm/fm/local/popup.hh:107
-#: ../../xffm/fm/local/rm.hh:174 ../../xffm/common/gtk.hh:75
+#: ../../xffm/fm/view/local/popup.hh:103 ../../xffm/fm/view/local/popup.hh:160
+#: ../../xffm/fm/view/local/rm.hh:176 ../../xffm/common/gtk.hh:89
 msgid "Delete"
 msgstr "Padam (D)"
 
 #. {N_("About"), NULL, (void *) menu},
 #.
-#. only for listview: {N_("Sort by size"), NULL, (void *) menu},
-#. only for listview: {N_("Sort by date"), NULL, (void *) menu},
-#: ../../xffm/fm/local/popup.hh:73
+#: ../../xffm/fm/view/local/popup.hh:106
 msgid "Select All"
 msgstr "Pilih Semua"
 
-#: ../../xffm/fm/local/popup.hh:74 ../../xffm/fm/local/popup.hh:559
+#: ../../xffm/fm/view/local/popup.hh:107 ../../xffm/fm/view/local/popup.hh:755
 #, fuzzy
 msgid "Match regular expression"
 msgstr "sepadan dengan ungkapan biasa"
 
-#: ../../xffm/fm/local/popup.hh:75 ../../xffm/fm/root/view.hh:58
-#: ../../xffm/fm/fstab/popup.hh:21
-#, fuzzy
-msgid "View as list"
-msgstr "Lihat sebagai Senarai"
-
-#: ../../xffm/fm/local/popup.hh:77
-msgid "Show hidden files"
-msgstr "Papar fail tersembunyi"
-
-#: ../../xffm/fm/local/popup.hh:79
-#, fuzzy
-msgid "Show Backup Files"
-msgstr "Fail backup"
-
-#: ../../xffm/fm/local/popup.hh:81
-msgid "Sort data in descending order"
-msgstr "Isih data dalam tertib menurun"
-
-#: ../../xffm/fm/local/popup.hh:93 ../../xffm/fm/local/popup.hh:119
-#: ../../xffm/fm/local/popup.hh:1006 ../../xffm/fm/local/popup.hh:1013
-#: ../../xffm/fm/local/popup.hh:1022 ../../xffm/fm/local/popup.hh:1029
-#: ../../xffm/common/gtk.hh:72
-msgid "Open with"
-msgstr "Buka dengan"
-
-#: ../../xffm/fm/local/popup.hh:94 ../../xffm/fm/local/popup.hh:846
+#: ../../xffm/fm/view/local/popup.hh:143 ../../xffm/fm/view/local/popup.hh:1105
 msgid "Run Executable..."
 msgstr "Laksanakan Bolehlaksana..."
 
-#: ../../xffm/fm/local/popup.hh:95
+#. File chooser
+#: ../../xffm/fm/view/local/popup.hh:144 ../../xffm/fm/view/local/popup.hh:875
 msgid "Extract files from the archive"
 msgstr "Ekstrak fail dari arkib"
 
-#. g_hash_table_insert(iconname_hash, "bcrypt", (void *)"emblem-keyhole");
-#: ../../xffm/fm/local/popup.hh:96 ../../xffm/fm/root/view.hh:73
-#: ../../xffm/fm/fstab/popup.hh:20 ../../xffm/fm/dialog/notebook.hh:52
-#: ../../xffm/common/gtk.hh:78
-msgid "Open in New Tab"
-msgstr "Buka Dalam Tab Baru (O)"
-
 #. File chooser
-#: ../../xffm/fm/local/popup.hh:97 ../../xffm/fm/local/popup.hh:706
+#: ../../xffm/fm/view/local/popup.hh:146 ../../xffm/fm/view/local/popup.hh:966
 #, fuzzy
 msgid "Create a compressed archive with the selected objects"
 msgstr "Mulakan perbualan dengan orang hubungan yang dipilih."
 
-#: ../../xffm/fm/local/popup.hh:98 ../../xffm/fm/fstab/popup.hh:37
+#: ../../xffm/fm/view/local/popup.hh:148 ../../xffm/fm/view/fstab/popup.hh:37
 #, fuzzy
 msgid "Mount the volume associated with this folder"
 msgstr "Pilih kolum kelihatan  pada folder ini"
 
-#: ../../xffm/fm/local/popup.hh:99 ../../xffm/fm/fstab/popup.hh:38
+#: ../../xffm/fm/view/local/popup.hh:149 ../../xffm/fm/view/fstab/popup.hh:38
 #, fuzzy
 msgid "Unmount the volume associated with this folder"
 msgstr "Pilih kolum kelihatan  pada folder ini"
 
-#: ../../xffm/fm/local/popup.hh:100 ../../xffm/common/gtk.hh:67
+#: ../../xffm/fm/view/local/popup.hh:151 ../../xffm/common/gtk.hh:73
 msgid "Add bookmark"
 msgstr "Tambah"
 
-#: ../../xffm/fm/local/popup.hh:101 ../../xffm/fm/root/view.hh:74
-#: ../../xffm/common/gtk.hh:68
+#: ../../xffm/fm/view/local/popup.hh:152 ../../xffm/fm/view/root/popup.hh:137
+#: ../../xffm/common/gtk.hh:75
 msgid "Remove bookmark"
 msgstr "Buang tandabuku"
 
-#: ../../xffm/fm/local/popup.hh:108 ../../xffm/fm/local/popup.hh:961
+#: ../../xffm/fm/view/local/popup.hh:157 ../../xffm/common/gtk.hh:71
+msgid "Paste"
+msgstr "Tepek"
+
+#: ../../xffm/fm/view/local/popup.hh:161 ../../xffm/fm/view/local/popup.hh:1231
 msgid "Rename"
 msgstr "Tukarnama"
 
-#: ../../xffm/fm/local/popup.hh:109 ../../xffm/fm/local/popup.hh:947
+#: ../../xffm/fm/view/local/popup.hh:162 ../../xffm/fm/view/local/popup.hh:1217
 msgid "Duplicate"
 msgstr "Gandakan"
 
-#: ../../xffm/fm/local/popup.hh:110 ../../xffm/fm/local/popup.hh:933
+#: ../../xffm/fm/view/local/popup.hh:163 ../../xffm/fm/view/local/popup.hh:1203
 msgid "Link"
 msgstr "Pautan"
 
-#: ../../xffm/fm/local/popup.hh:111
+#: ../../xffm/fm/view/local/popup.hh:164
 msgid "Properties"
 msgstr "Ciri-ciri"
 
-#: ../../xffm/fm/local/popup.hh:414
+#: ../../xffm/fm/view/local/popup.hh:562
 msgid "Files:"
 msgstr "Fail:"
 
-#: ../../xffm/fm/local/popup.hh:417 ../../xffm/fm/local/rm.hh:61
+#: ../../xffm/fm/view/local/popup.hh:565 ../../xffm/fm/view/local/rm.hh:61
 #, fuzzy
 msgid "Multiple selections"
 msgstr "Urusan berbilang"
 
-#: ../../xffm/fm/local/popup.hh:557
+#: ../../xffm/fm/view/local/popup.hh:753
 #, fuzzy
 msgid "Select items"
 msgstr "Pilih paparan"
 
-#: ../../xffm/fm/local/popup.hh:575
+#: ../../xffm/fm/view/local/popup.hh:771
 #, fuzzy
 msgid "Regular Expression syntax is incorrect"
 msgstr "Penyunting Ungkapan Nalar (regexp)"
 
-#: ../../xffm/fm/local/popup.hh:592
+#: ../../xffm/fm/view/local/popup.hh:801
 msgid "No selection"
 msgstr "Tiada pemilihan"
 
-#: ../../xffm/fm/local/popup.hh:592
+#: ../../xffm/fm/view/local/popup.hh:801
 #, fuzzy
 msgid "No matches."
 msgstr "Tiada padanan"
 
-#. entryResponse->setCheckButton(_("Run in Terminal"));
-#. entryResponse->setCheckButton(Mime<Type>::runInTerminal(path));
-#: ../../xffm/fm/local/popup.hh:721 ../../xffm/fm/page/pathbar.hh:313
-msgid "Specify Output Directory..."
-msgstr "Nyatakan Direktori Keluaran..."
-
-#: ../../xffm/fm/local/popup.hh:799
+#: ../../xffm/fm/view/local/popup.hh:1058
 #, fuzzy
 msgid "Create new..."
 msgstr "Cipta Baru..."
 
-#: ../../xffm/fm/local/popup.hh:806 ../../xffm/fm/local/popup.hh:886
+#: ../../xffm/fm/view/local/popup.hh:1065
+#: ../../xffm/fm/view/local/popup.hh:1146
 #, fuzzy
 msgid "New Name:"
 msgstr "Nama Baru"
 
-#: ../../xffm/fm/local/popup.hh:815
+#: ../../xffm/fm/view/local/popup.hh:1074
 msgid "No name"
 msgstr "Tiada nama"
 
-#: ../../xffm/fm/local/popup.hh:828
+#: ../../xffm/fm/view/local/popup.hh:1087
 #, fuzzy, c-format
 msgid "Another file with the same name already exists in “%s”."
 msgstr "Folder dengan nama yang sama telah wujud"
 
-#: ../../xffm/fm/local/popup.hh:850 ../../xffm/fm/local/popup.hh:1010
-#: ../../xffm/fm/local/popup.hh:1026 ../../xffm/common/util.hh:1248
+#: ../../xffm/fm/view/local/popup.hh:1109
+#: ../../xffm/fm/view/local/popup.hh:1291
+#: ../../xffm/fm/view/local/popup.hh:1309 ../../xffm/common/util.hh:1452
 msgid "Run in Terminal"
 msgstr "Jalankan dalam Terminal"
 
-#: ../../xffm/fm/local/popup.hh:853
+#: ../../xffm/fm/view/local/popup.hh:1112
 #, fuzzy
 msgid "Arguments for the Command"
 msgstr "Hujah untuk arahan"
 
-#: ../../xffm/fm/local/popup.hh:1047 ../../xffm/fm/local/view.hh:141
+#: ../../xffm/fm/view/local/popup.hh:1258
+#, fuzzy
+msgid "You have selected multiple files or folders"
+msgstr "Anda telah mengkhususkan folder"
+
+#: ../../xffm/fm/view/local/popup.hh:1332 ../../xffm/fm/view/local/view.hh:156
 #, fuzzy
 msgid "Invalid entry"
 msgstr "Direktori tak sah"
 
-#: ../../xffm/fm/local/properties.hh:235
+#: ../../xffm/fm/view/local/properties.hh:245
 #, fuzzy
 msgid "Properties and Attributes"
 msgstr "Atribut Pilot"
 
-#: ../../xffm/fm/local/properties.hh:264
+#: ../../xffm/fm/view/local/properties.hh:274
 #, fuzzy
 msgid "File Mode:"
 msgstr "Mod Fail"
 
-#: ../../xffm/fm/local/properties.hh:290
+#: ../../xffm/fm/view/local/properties.hh:300
 msgid "File:"
 msgstr "Fail:"
 
@@ -1007,405 +1154,325 @@ msgstr "Fail:"
 #. add signal handler to changed signal for combo box
 #. Add process buttons
 #.
-#: ../../xffm/fm/local/properties.hh:302
+#: ../../xffm/fm/view/local/properties.hh:312
 msgid "Apply changes"
 msgstr "Terap perubahan"
 
-#: ../../xffm/fm/local/properties.hh:462
+#: ../../xffm/fm/view/local/properties.hh:477
 #, fuzzy
 msgid "Successfully moved to trash."
 msgstr "Berjaya membuang %s"
 
-#: ../../xffm/fm/local/properties.hh:463
+#: ../../xffm/fm/view/local/properties.hh:478
 msgid "Source:"
 msgstr "Sumber:"
 
-#: ../../xffm/fm/local/rm.hh:59
+#: ../../xffm/fm/view/local/rm.hh:59
 #, c-format
 msgid "Delete %s"
 msgstr "Padam %s"
 
-#: ../../xffm/fm/local/rm.hh:61
+#: ../../xffm/fm/view/local/rm.hh:61
 msgid "Warning: "
 msgstr "Amaran: "
 
 #. gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
 #. title
-#: ../../xffm/fm/local/rm.hh:90
+#: ../../xffm/fm/view/local/rm.hh:92
 msgid "Remove"
 msgstr "Keluarkan"
 
-#: ../../xffm/fm/local/rm.hh:140
+#: ../../xffm/fm/view/local/rm.hh:142
 #, fuzzy
 msgid "Apply to all"
 msgstr "Jawab kepada semua:"
 
 #. **************
 #. This is now available to BSD with rm -P option
-#: ../../xffm/fm/local/rm.hh:163 ../../xffm/common/gtk.hh:76
+#: ../../xffm/fm/view/local/rm.hh:165 ../../xffm/common/gtk.hh:91
 #, fuzzy
 msgid "Shred"
 msgstr "Pencarik"
 
-#. We do not count "../"
-#: ../../xffm/fm/local/view.hh:48 ../../xffm/fm/base/monitor.hh:28
-#, fuzzy, c-format
-msgid "Files: %s"
-msgstr "Fail: %s"
+#: ../../xffm/fm/view/local/rm.hh:183
+msgid "Trash"
+msgstr "Buangan"
 
-#: ../../xffm/fm/root/model.hh:78
+#: ../../xffm/fm/view/local/view.hh:177
+#, fuzzy, c-format
+msgid "The volume '%s' is not mounted."
+msgstr "Gaya '%s' tidak ditemui"
+
+#: ../../xffm/fm/view/root/model.hh:82
 #, fuzzy
 msgid "Root Directory"
 msgstr "Direktori Jauh:"
 
-#: ../../xffm/fm/root/model.hh:94
+#: ../../xffm/fm/view/root/model.hh:98
 msgid "This is the root of the filesystem"
 msgstr "Ini ialah root bagi sistem fail"
 
-#: ../../xffm/fm/root/model.hh:105
-msgid "Home Directory"
-msgstr "Direktori Home"
-
-#: ../../xffm/fm/root/model.hh:132
-#, fuzzy
-msgid "Trash bin"
-msgstr "Fail Tong Sampah"
-
-#: ../../xffm/fm/root/model.hh:162 ../../xffm/fm/fstab/popup.hh:29
-#, fuzzy
-msgid "Disk Image Mounter"
-msgstr "Pelekap Cakera"
-
-#: ../../xffm/fm/root/model.hh:169 ../../xffm/fm/root/model.hh:185
+#: ../../xffm/fm/view/root/model.hh:176 ../../xffm/fm/view/root/model.hh:191
 msgid "Mount local disks and devices"
 msgstr "Melekap cakera dan peranti lokal"
 
-#: ../../xffm/fm/root/model.hh:170 ../../xffm/fm/fstab/popup.hh:25
-#: ../../xffm/fm/fstab/view.hh:429
+#: ../../xffm/fm/view/root/model.hh:177 ../../xffm/fm/view/fstab/popup.hh:23
+#: ../../xffm/fm/view/fstab/view.hh:1084
 msgid "eCryptfs Volume"
 msgstr "Volum eCryptfs"
 
-#: ../../xffm/fm/root/model.hh:171 ../../xffm/fm/fstab/popup.hh:24
+#: ../../xffm/fm/view/root/model.hh:178 ../../xffm/fm/view/fstab/popup.hh:22
 #, fuzzy
 msgid "SSHFS Remote Synchronization Folder"
 msgstr "Mod Penyegerakan"
 
-#: ../../xffm/fm/root/model.hh:172 ../../xffm/fm/fstab/popup.hh:23
-#: ../../xffm/fm/fstab/view.hh:377
+#: ../../xffm/fm/view/root/model.hh:179 ../../xffm/fm/view/fstab/popup.hh:21
+#: ../../xffm/fm/view/fstab/view.hh:1032
 msgid "NFS Network Volume"
 msgstr "Volum Rangkaian NFS"
 
-#: ../../xffm/fm/root/model.hh:173 ../../xffm/fm/fstab/popup.hh:26
-#: ../../xffm/fm/fstab/view.hh:455
+#: ../../xffm/fm/view/root/model.hh:180 ../../xffm/fm/view/fstab/popup.hh:24
+#: ../../xffm/fm/view/fstab/view.hh:1110
 msgid "CIFS Volume"
 msgstr "Volum CIFS"
 
-#: ../../xffm/fm/root/model.hh:195
-#, fuzzy
-msgid "Software Updater"
-msgstr "Tarikh mula"
-
-#: ../../xffm/fm/root/model.hh:218 ../../xffm/fm/root/model.hh:230
-msgid "Add or remove software installed on the system"
-msgstr "Menambah atau memadam perisian yang dipasang pada sistem"
-
-#: ../../xffm/fm/root/model.hh:271
+#: ../../xffm/fm/view/root/model.hh:229
 #, fuzzy
 msgid "Go to bookmarked location"
 msgstr "Pergi ke lokasi rumah"
 
-#. {N_("Add bookmark"), (void *)BasePopUp<Type>::noop, NULL, NULL},
-#: ../../xffm/fm/root/view.hh:61
+#: ../../xffm/fm/view/root/popup.hh:138
 #, fuzzy
 msgid "Empty trash"
 msgstr "Kosongkan Sampah"
 
 #. File chooser
-#: ../../xffm/fm/fstab/popup.hh:121
+#: ../../xffm/fm/view/fstab/popup.hh:129
 msgid "Mount Device"
 msgstr "Peranti Lekap"
 
-#: ../../xffm/fm/fstab/popup.hh:133
+#: ../../xffm/fm/view/fstab/popup.hh:141 ../../xffm/fm/view/fstab/view.hh:923
 msgid "Mount point:"
 msgstr "Titik lekap:"
 
-#: ../../xffm/fm/fstab/view.hh:301
-msgid "Mounted on:"
-msgstr "Dilekapkan pada:"
-
-#: ../../xffm/fm/fstab/view.hh:302
+#: ../../xffm/fm/view/fstab/view.hh:590
 #, fuzzy
-msgid "Mount on"
-msgstr "Dilekapkan pada"
+msgid "Mount point: "
+msgstr "Titik lekap:"
 
-#: ../../xffm/fm/fstab/view.hh:310 ../../xffm/fm/fstab/view.hh:312
+#: ../../xffm/fm/view/fstab/view.hh:591
+#, fuzzy
+msgid "Mount device: "
+msgstr "Peranti Lekap"
+
+#. Since /dev is not concrete, the following test returns false...
+#.
+#. if (!g_file_test(name, G_FILE_TEST_IS_DIR)) return;
+#: ../../xffm/fm/view/fstab/view.hh:659 ../../xffm/fm/view/fstab/view.hh:675
+msgid "Disks"
+msgstr "Disk"
+
+#: ../../xffm/fm/view/fstab/view.hh:921
+#, fuzzy
+msgid "No Label"
+msgstr "Label"
+
+#: ../../xffm/fm/view/fstab/view.hh:922
+#, fuzzy
+msgid "There is no file system available (unformatted)"
+msgstr "Tiada kalendar untuk mencipta tugas"
+
+#: ../../xffm/fm/view/fstab/view.hh:923
 #, fuzzy
 msgid "Not mounted"
 msgstr "Tidak dijumpai"
 
-#: ../../xffm/fm/fstab/view.hh:403
+#: ../../xffm/fm/view/fstab/view.hh:1058
 msgid "SFTP (via SSH)"
 msgstr ""
 
-#: ../../xffm/fm/fstab/view.hh:667
+#: ../../xffm/fm/view/fstab/view.hh:1413
 #, fuzzy, c-format
 msgid "Unmounting %s"
 msgstr "Mengimport %s"
 
-#: ../../xffm/fm/fstab/view.hh:667
+#: ../../xffm/fm/view/fstab/view.hh:1413
 #, fuzzy, c-format
 msgid "Mounting %s"
 msgstr "Lekap %s"
 
-#: ../../xffm/fm/dialog/menupopover.hh:128
-msgid "Home"
-msgstr "Rumah"
+#: ../../xffm/fm/view/pkg/model.hh:41 ../../xffm/fm/view/pkg/model.hh:52
+msgid "Add or remove software installed on the system"
+msgstr "Menambah atau memadam perisian yang dipasang pada sistem"
 
-#: ../../xffm/fm/dialog/menupopover.hh:129 ../../xffm/common/gtk.hh:64
+#: ../../xffm/fm/view/pkg/model.hh:111
+msgid "String"
+msgstr "Rentetan"
+
+#: ../../xffm/fm/view/pkg/model.hh:116
 #, fuzzy
-msgid "Open terminal"
-msgstr "Buka Terminal"
+msgid "Waiting for search results"
+msgstr "Menerima hasil carian LDAP..."
 
-#: ../../xffm/fm/dialog/menupopover.hh:130
+#: ../../xffm/fm/view/pkg/model.hh:174
+msgid "No results"
+msgstr "Tiada keputusan"
+
+#: ../../xffm/fm/view/pkg/model.hh:373
 #, fuzzy
-msgid "Open a New Window"
-msgstr "Buka dalam Tetingkap Baru"
+msgid "Currently busy\n"
+msgstr "Nilai Semasa"
 
-#. {N_("Execute Shell Command"), (void *)MenuPopoverSignals<Type>::shell, (void *) menuButton_},
-#: ../../xffm/fm/dialog/menupopover.hh:132 ../../xffm/common/gtk.hh:69
-msgid "Search"
-msgstr "Cari"
-
-#: ../../xffm/fm/dialog/menupopover.hh:133 ../../xffm/common/gtk.hh:71
-msgid "Exit"
-msgstr "Keluar"
-
-#: ../../xffm/fm/dialog/dialog.hh:116
-msgid "Removed"
-msgstr "Dihapuskan"
-
-#: ../../xffm/fm/dialog/dialog.hh:132
+#: ../../xffm/fm/view/pkg/popup.hh:44
 #, fuzzy
-msgid "Detected device(s):"
-msgstr "Kesan peranti"
+msgid "Update Database"
+msgstr "Buka PangkalanData"
 
-#. Create the widgets
-#: ../../xffm/fm/page/vbuttonbox.hh:37 ../../xffm/common/gtk.hh:332
-msgid "Help"
-msgstr "Bantuan"
+#: ../../xffm/fm/view/pkg/popup.hh:45
+msgid "Fetch"
+msgstr "Kutip"
 
-#. File chooser
-#: ../../xffm/fm/page/pathbar.hh:306 ../../xffm/fm/page/pathbar.hh:308
+#: ../../xffm/fm/view/pkg/popup.hh:46
 #, fuzzy
-msgid "Go to"
-msgstr "Pergi ke %s"
+msgid "Install --dry-run"
+msgstr "Pemasangan dilengahkan"
 
-#: ../../xffm/fm/page/pathbar.hh:331
-msgid "Not a directory"
-msgstr "Bukanlah satu direktori"
+#: ../../xffm/fm/view/pkg/popup.hh:47
+msgid "Install"
+msgstr "Pasang"
 
-#: ../../xffm/fm/page/runbutton.hh:135
-msgid "Renice Process"
-msgstr "Baguskan Semula Proses"
-
-#: ../../xffm/fm/page/runbutton.hh:135
-msgid "Suspend"
-msgstr "Gantung..."
-
-#: ../../xffm/fm/page/runbutton.hh:135
-msgid "Continue"
-msgstr "Teruskan"
-
-#: ../../xffm/fm/page/runbutton.hh:136
-msgid "Interrupt"
-msgstr "Sampuk"
-
-#: ../../xffm/fm/page/runbutton.hh:136
-msgid "Hangup"
-msgstr "Letak"
-
-#: ../../xffm/fm/page/runbutton.hh:136
-msgid "User 1 (USR1)"
-msgstr ""
-
-#: ../../xffm/fm/page/runbutton.hh:137
-msgid "User 2 (USR2)"
-msgstr ""
-
-#: ../../xffm/fm/page/runbutton.hh:137
+#: ../../xffm/fm/view/pkg/popup.hh:48
 #, fuzzy
-msgid "Terminate Task"
-msgstr "Matikan %s"
+msgid "Uninstall --dry-run"
+msgstr "Nyahpasang"
 
-#: ../../xffm/fm/page/runbutton.hh:137
-msgid "Abort"
-msgstr "Batal"
+#: ../../xffm/fm/view/pkg/popup.hh:49
+msgid "Uninstall"
+msgstr "Nyahpasang"
 
-#: ../../xffm/fm/page/runbutton.hh:138
-msgid "Kill"
-msgstr "Bunuh"
+#: ../../xffm/fm/view/pkg/popup.hh:50
+msgid "Information"
+msgstr "Maklumat"
 
-#: ../../xffm/fm/page/runbutton.hh:139
+#: ../../xffm/fm/view/pkg/popup.hh:140
+msgid "Version"
+msgstr "Versi"
+
+#: ../../xffm/fm/view/pkg/popup.hh:149
+msgid "Go up"
+msgstr "Naik ke atas"
+
+#: ../../xffm/fm/view/pkg/popup.hh:152
 #, fuzzy
-msgid "Segmentation fault"
-msgstr "Tetapkan sebagai default"
+msgid "Search packages"
+msgstr "Cari mengundur"
 
-#: ../../xffm/fm/page/runbutton.hh:217
-msgid "PID"
-msgstr "PID"
+#: ../../xffm/fm/view/pkg/popup.hh:184 ../../xffm/fm/view/view.hh:93
+#, fuzzy, c-format
+msgid "Loading %s...%s"
+msgstr "Memuatkan %s..."
 
-#: ../../xffm/fm/page/hbuttonbox.hh:37
+#: ../../xffm/fm/view/pkg/popup.hh:184 ../../xffm/fm/view/view.hh:93
 #, fuzzy
-msgid "Embedded Terminal"
-msgstr "Buka Terminal"
+msgid "Please Wait..."
+msgstr "Sila tunggu..."
 
-#: ../../xffm/fm/page/hbuttonbox.hh:38
-#, fuzzy
-msgid "All items in the iconview."
-msgstr "Pilih semua item pada tetingkap ini"
-
-#: ../../xffm/fm/page/hbuttonbox.hh:39
-msgid "Scripting"
-msgstr "Penskriptan"
-
-#: ../../xffm/fm/page/hbuttonbox.hh:40
-msgid "Clear Log"
-msgstr "Kosongkan log"
-
-#. Status textview
-#: ../../xffm/fm/page/hbuttonbox.hh:42
-#, fuzzy
-msgid "Terminal font"
-msgstr "Font terminal"
-
-#: ../../xffm/fm/treeview.hh:17
+#: ../../xffm/fm/view/treeview.hh:17
 msgid "Name"
 msgstr "Nama"
 
-#: ../../xffm/fm/treeview.hh:20
+#: ../../xffm/fm/view/treeview.hh:19
 msgid "Size"
 msgstr "Saiz"
 
-#: ../../xffm/fm/treeview.hh:21
+#: ../../xffm/fm/view/treeview.hh:20
 msgid "Date"
 msgstr "Tarikh"
 
-#: ../../xffm/fm/treeview.hh:22
+#: ../../xffm/fm/view/treeview.hh:22
 msgid "Mimetype"
 msgstr "Jenis mime"
 
-#: ../../xffm/fm/treeview.hh:24
-msgid "TYPE"
-msgstr "JENIS"
-
-#: ../../xffm/fm/base/signals.hh:642
-msgid "Directory does not exist."
-msgstr "Direktori tidak wujud."
-
-#: ../../xffm/fm/base/signals.hh:644 ../../xffm/fm/base/signals.hh:646
+#: ../../xffm/fm/view/base/signals.hh:838
 #, fuzzy
 msgid "Trash is empty"
 msgstr "Kata Laluan Kosong"
 
-#: ../../xffm/common/settings.hh:27
+#: ../../xffm/fm/view/base/signals.hh:840
+msgid "Directory does not exist."
+msgstr "Direktori tidak wujud."
+
+#: ../../xffm/common/settings.hh:30
 #, fuzzy
 msgid "New File:"
 msgstr "Fail Baru"
 
-#: ../../xffm/common/gio.hh:235
-#, fuzzy
-msgid "Could not copy item:"
-msgstr "Tak dapat menyalin imej:"
-
-#: ../../xffm/common/gio.hh:237
-#, fuzzy
-msgid "Could not move item:"
-msgstr "Tak dapat memindah item:"
-
-#: ../../xffm/common/gio.hh:239
-#, fuzzy
-msgid "Create symbolic link"
-msgstr "pautan simbolik"
-
-#: ../../xffm/common/gio.hh:276
-#, fuzzy, c-format
-msgid ""
-"Could not delete:\n"
-"%s"
-msgstr "Tak dapat memadam \"%s\"."
-
-#: ../../xffm/common/gio.hh:278
-#, fuzzy, c-format
-msgid "Could not move %s to trash"
-msgstr "Tak dapat memindah dokumen \"%s\" ke sampah."
-
-#: ../../xffm/common/clipboard.hh:23 ../../xffm/common/dnd.hh:40
-#, fuzzy
-msgid "Copying files locally"
+#: ../../xffm/common/gio.hh:81
+msgid "Copying files"
 msgstr "Penyalinan fail-fail"
 
-#: ../../xffm/common/clipboard.hh:30 ../../xffm/common/dnd.hh:34
+#: ../../xffm/common/gio.hh:85
 #, fuzzy
-msgid "Moving files"
-msgstr "Pindah Fail-fail"
+msgid "linking"
+msgstr "Berpaut"
 
-#: ../../xffm/common/dnd.hh:46
+#: ../../xffm/common/gio.hh:87
+msgid "rename"
+msgstr "tukarnama"
+
+#: ../../xffm/common/gio.hh:426
+#, c-format
+msgid "(%d of %d)"
+msgstr "(%d of %d)"
+
+#: ../../xffm/common/dnd.hh:47
 #, fuzzy
 msgid "Create Link"
 msgstr "Cipta yg baru"
 
-#: ../../xffm/common/util.hh:1200
+#: ../../xffm/common/util.hh:1404
 #, c-format
 msgid ""
 "Scriptfile \"%s\" is not executable. Please set the executable-attribute on "
 "that file."
 msgstr ""
 
-#: ../../xffm/common/util.hh:1202 ../../xffm/common/util.hh:1237
+#: ../../xffm/common/util.hh:1406 ../../xffm/common/util.hh:1441
 #, c-format
 msgid "Open with %s"
 msgstr "Buka dengan %s"
 
-#: ../../xffm/common/util.hh:1202
+#: ../../xffm/common/util.hh:1406
 msgid "Text Editor"
 msgstr "Editor Teks"
 
-#: ../../xffm/common/util.hh:1239 ../../xffm/common/gtk.hh:65
+#: ../../xffm/common/util.hh:1443 ../../xffm/common/gtk.hh:69
 msgid "Execute Shell Command"
 msgstr "Laksanakan Arahan Cengkerang"
 
-#: ../../xffm/common/util.hh:1243
+#: ../../xffm/common/util.hh:1447
 msgid ""
 "Console: quickly run single commands -- write a command here and press enter."
 msgstr ""
 
-#: ../../xffm/common/gtk.hh:123
-msgid "New Tab"
-msgstr "Tab Baru"
+#: ../../xffm/common/gtk.hh:352 ../../xffm/common/gtk.hh:360
+msgid "Help"
+msgstr "Bantuan"
 
-#: ../../xffm/common/gtk.hh:335
-msgid "OK"
-msgstr "OK"
-
-#: ../../xffm/common/run.hh:344
+#: ../../xffm/common/run.hh:338
 msgid "error"
 msgstr "ralat"
 
-#: ../../xffm/common/run.hh:348
+#: ../../xffm/common/run.hh:342
 msgid "warning"
 msgstr "amaran"
 
-#: ../../xffm/common/mime.hh:101 ../../xffm/common/mime.hh:143
-#, fuzzy
-msgid "No Read Permission"
-msgstr "Tambahkan Keizinan"
-
-#: ../../xffm/common/preview.hh:593
+#: ../../xffm/common/preview.hh:581
 #, fuzzy
 msgid "Empty file"
 msgstr "fail kosong"
 
-#: ../../xffm/common/preview.hh:648
+#: ../../xffm/common/preview.hh:636
 #, fuzzy, c-format
 msgid "Cannot read from %s"
 msgstr "Tak dalat membaca CD: %s"

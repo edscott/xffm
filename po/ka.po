@@ -45,7 +45,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-02 12:27-0600\n"
+"POT-Creation-Date: 2019-08-04 16:54-0500\n"
 "PO-Revision-Date: 2007-08-28 03:52+0200\n"
 "Last-Translator: Vladimer Sichinava ვლადიმერ სიჭინავა <vsichi@gnome.org>\n"
 "Language-Team: Georgian <http://mail.gnome.org/mailman/listinfo/gnome-ge-"
@@ -56,6 +56,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=1; plural=0\n"
+
+#: ../../xffm/mime/mimemagic.hh:68 ../../xffm/mime/mimemagic.hh:110
+#: ../../xffm/common/mimemagic.hh:68 ../../xffm/common/mimemagic.hh:110
+#, fuzzy
+msgid "No Read Permission"
+msgstr "დასტის უფლებები:"
 
 #: ../../xffm/completion/base.hh:28
 msgid "Command"
@@ -71,7 +77,7 @@ msgid "Command history"
 msgstr "ბრძანების შეყვანა"
 
 #. option -u uid "uid" "uid_combo"
-#: ../../xffm/completion/base.hh:37 ../../xffm/find/dialog.hh:199
+#: ../../xffm/completion/base.hh:37 ../../xffm/find/dialog.hh:192
 msgid "User"
 msgstr "მონაწილე"
 
@@ -88,17 +94,17 @@ msgstr "მასპინძელი"
 msgid "Found no match"
 msgstr "ინფორმაცია ხმის შესახებ"
 
-#: ../../xffm/completion/base.hh:133 ../../xffm/completion/base.hh:134
+#: ../../xffm/completion/base.hh:141 ../../xffm/completion/base.hh:142
 #, fuzzy
 msgid "Matches"
 msgstr "ბებკები"
 
-#: ../../xffm/completion/base.hh:134
+#: ../../xffm/completion/base.hh:142
 #, fuzzy
 msgid "Too many files open"
 msgstr "მეტისმეტი გახსნილი ფაილი"
 
-#: ../../xffm/completion/base.hh:325 ../../xffm/find/fgr.hh:124
+#: ../../xffm/completion/base.hh:339 ../../xffm/find/fgr.hh:124
 #, fuzzy
 msgid "Options:"
 msgstr "ოფციები"
@@ -121,7 +127,8 @@ msgstr "ფაილი"
 msgid "Options >>"
 msgstr "ოფციები"
 
-#: ../../xffm/find/fgr.hh:124 ../../xffm/find/dialog.hh:308
+#: ../../xffm/find/fgr.hh:124 ../../xffm/find/signals.hh:100
+#: ../../xffm/find/dialog.hh:301
 msgid "Path"
 msgstr "გეზი"
 
@@ -129,7 +136,7 @@ msgstr "გეზი"
 msgid "Locate documents and folders on this computer by name or content"
 msgstr "ფაილების და დასტების სახელის ან შინაარსი მიხედვით მოძებნა"
 
-#: ../../xffm/find/fgr.hh:126 ../../xffm/find/dialog.hh:341
+#: ../../xffm/find/fgr.hh:126 ../../xffm/find/dialog.hh:334
 msgid "Filter:"
 msgstr "ფილტრი:"
 
@@ -161,7 +168,7 @@ msgid "Filter Details"
 msgstr "ცნობების ფილტრი"
 
 #. / option -a "xdev"
-#: ../../xffm/find/fgr.hh:138 ../../xffm/find/dialog.hh:180
+#: ../../xffm/find/fgr.hh:138 ../../xffm/find/dialog.hh:173
 #, fuzzy
 msgid "Stay on single filesystem"
 msgstr "მხოლოდ კითხვადი ფაილური სისტემა"
@@ -176,7 +183,7 @@ msgid "The unique Process ID that identifies this process."
 msgstr "პროცესის სახელიდან პროცესის იდენტიფიკატორის წაშლა."
 
 #. / option -D "recursiveH"
-#: ../../xffm/find/fgr.hh:142 ../../xffm/find/dialog.hh:177
+#: ../../xffm/find/fgr.hh:142 ../../xffm/find/dialog.hh:170
 msgid "Find hidden files and directories"
 msgstr "დამალული ფაილების და დირექტორიების ძიება"
 
@@ -190,7 +197,7 @@ msgid ""
 msgstr ""
 
 #. / option -r "recursive"
-#: ../../xffm/find/fgr.hh:146 ../../xffm/find/dialog.hh:174
+#: ../../xffm/find/fgr.hh:146 ../../xffm/find/dialog.hh:167
 #, fuzzy
 msgid "Recursive"
 msgstr "კურსივი"
@@ -228,7 +235,7 @@ msgstr "ფაილის უფლებები, რვაობით ს�
 msgid "Type"
 msgstr "ტიპი"
 
-#: ../../xffm/find/fgr.hh:157 ../../xffm/find/signals.hh:17
+#: ../../xffm/find/fgr.hh:157 ../../xffm/find/signals.hh:14
 msgid "Any"
 msgstr "ნებისმიერი"
 
@@ -237,18 +244,18 @@ msgstr "ნებისმიერი"
 msgid "Default type"
 msgstr "სტანდარტული შტიფტის ტიპი"
 
-#: ../../xffm/find/fgr.hh:158 ../../xffm/common/preview.hh:497
+#: ../../xffm/find/fgr.hh:158 ../../xffm/common/preview.hh:478
 #, fuzzy
 msgid "Regular file"
 msgstr "ჩვეულებრივი"
 
-#: ../../xffm/find/fgr.hh:159 ../../xffm/find/signals.hh:11
-#: ../../xffm/fm/local/popup.hh:803 ../../xffm/common/preview.hh:488
+#: ../../xffm/find/fgr.hh:159 ../../xffm/find/signals.hh:8
+#: ../../xffm/fm/view/local/popup.hh:1062 ../../xffm/common/preview.hh:469
 msgid "Directory"
 msgstr "დასტა"
 
-#: ../../xffm/find/fgr.hh:160 ../../xffm/find/signals.hh:12
-#: ../../xffm/common/preview.hh:494
+#: ../../xffm/find/fgr.hh:160 ../../xffm/find/signals.hh:9
+#: ../../xffm/common/preview.hh:475
 msgid "Symbolic Link"
 msgstr "სიმბოლური ბმა"
 
@@ -257,34 +264,34 @@ msgstr "სიმბოლური ბმა"
 msgid "UNIX Socket"
 msgstr "UNIX სქემა"
 
-#: ../../xffm/find/fgr.hh:162 ../../xffm/find/signals.hh:14
-#: ../../xffm/common/preview.hh:482
+#: ../../xffm/find/fgr.hh:162 ../../xffm/find/signals.hh:11
+#: ../../xffm/common/preview.hh:463
 #, fuzzy
 msgid "Block device"
 msgstr "Bluetooth -ის მოწყობილობა"
 
-#: ../../xffm/find/fgr.hh:163 ../../xffm/find/signals.hh:15
-#: ../../xffm/common/preview.hh:485
+#: ../../xffm/find/fgr.hh:163 ../../xffm/find/signals.hh:12
+#: ../../xffm/common/preview.hh:466
 #, fuzzy
 msgid "Character device"
 msgstr "ასოთა კოდიფიკა:"
 
-#: ../../xffm/find/fgr.hh:164 ../../xffm/find/signals.hh:16
-#: ../../xffm/common/preview.hh:491
+#: ../../xffm/find/fgr.hh:164 ../../xffm/find/signals.hh:13
+#: ../../xffm/common/preview.hh:472
 msgid "FIFO"
 msgstr ""
 
-#. radio_p freed on destroy event for dialog_.
+#. radio_p freed on destroy event for findDialog.
 #. option -k minutes "last_minutes", "last_minutes_spin"
 #: ../../xffm/find/fgr.hh:166 ../../xffm/find/fgr.hh:168
-#: ../../xffm/find/dialog.hh:221
+#: ../../xffm/find/dialog.hh:214
 msgid "Minutes"
 msgstr "წუთი"
 
 #: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
 #: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
-#: ../../xffm/find/dialog.hh:270 ../../xffm/find/dialog.hh:370
-#: ../../xffm/fm/treeview.hh:18
+#: ../../xffm/find/dialog.hh:263 ../../xffm/find/dialog.hh:363
+#: ../../xffm/fm/view/treeview.hh:18
 msgid "Details"
 msgstr "დეტალები"
 
@@ -303,13 +310,13 @@ msgstr "წინა"
 
 #. option -h hours "last_hours", "last_hours_spin"
 #: ../../xffm/find/fgr.hh:169 ../../xffm/find/fgr.hh:171
-#: ../../xffm/find/dialog.hh:226
+#: ../../xffm/find/dialog.hh:219
 msgid "Hours"
 msgstr "საათი"
 
 #. option -d days "last_days", "last_days_spin"
 #: ../../xffm/find/fgr.hh:172 ../../xffm/find/fgr.hh:174
-#: ../../xffm/find/dialog.hh:231
+#: ../../xffm/find/dialog.hh:224
 msgid "Days"
 msgstr "დღე"
 
@@ -371,7 +378,7 @@ msgid "STRING"
 msgstr "სტრინგი"
 
 #: ../../xffm/find/fgr.hh:202 ../../xffm/find/fgr.hh:204
-#: ../../xffm/fm/local/popup.hh:563
+#: ../../xffm/fm/view/local/popup.hh:759
 msgid "Regular expression"
 msgstr "მარტივი გამოსახულება"
 
@@ -388,11 +395,11 @@ msgstr "რეგისტრის იგნორირება"
 msgid "Text Files"
 msgstr "ტექსტური ფაილები"
 
-#: ../../xffm/find/fgr.hh:210 ../../xffm/find/dialog.hh:552
+#: ../../xffm/find/fgr.hh:210 ../../xffm/find/dialog.hh:545
 msgid "No match"
 msgstr "არავითარი დამთხვევა"
 
-#: ../../xffm/find/fgr.hh:212 ../../xffm/find/dialog.hh:470
+#: ../../xffm/find/fgr.hh:212 ../../xffm/find/dialog.hh:463
 #, fuzzy
 msgid "Line Count"
 msgstr "სტრიქონით ზემოთ"
@@ -410,115 +417,114 @@ msgstr "ხაზები"
 msgid "Usage : %s [OPTIONS]\n"
 msgstr "გამოყენება: %sRAW [OPEN | CLOSE]"
 
-#: ../../xffm/find/signals.hh:10
+#: ../../xffm/find/signals.hh:7
 msgid "Regular"
 msgstr "ჩვეულებრივი"
 
-#: ../../xffm/find/signals.hh:13 ../../xffm/common/preview.hh:500
+#: ../../xffm/find/signals.hh:10 ../../xffm/common/preview.hh:481
 msgid "Socket"
 msgstr "სოკეტი"
 
-#: ../../xffm/find/signals.hh:209
-msgid "Select folder to search in"
-msgstr "ძებნის ჩასატარებლად დასტის ამორჩევა"
-
-#. button no
-#: ../../xffm/find/signals.hh:265 ../../xffm/find/dialog.hh:584
-#: ../../xffm/response/entryfileresponse.hh:18
-#: ../../xffm/response/entryresponse.hh:305
-#: ../../xffm/response/passwdresponse.hh:558
-#: ../../xffm/fm/local/properties.hh:304 ../../xffm/fm/local/rm.hh:155
-msgid "Cancel"
-msgstr "შეწყვეტა"
-
-#: ../../xffm/find/signals.hh:293 ../../xffm/find/signals.hh:722
-#, fuzzy
-msgid "No editor for current action."
-msgstr "მიმდინარე მოქმედების შეჩერება"
-
-#. / option "upper_limit_spin" (only in gtk dialog_)
-#: ../../xffm/find/signals.hh:351 ../../xffm/find/dialog.hh:183
+#. if (g_slist_length(list) == 0) return NULL;
+#. Create liststore for DnD
+#. / option "upper_limit_spin" (only in gtk findDialog)
+#: ../../xffm/find/signals.hh:66 ../../xffm/find/signals.hh:454
+#: ../../xffm/find/dialog.hh:176
 #, fuzzy
 msgid "Results"
 msgstr "შედეგები:"
 
-#: ../../xffm/find/signals.hh:351
+#. button no
+#: ../../xffm/find/signals.hh:368 ../../xffm/find/dialog.hh:577
+#: ../../xffm/response/chooserresponse.hh:21
+#: ../../xffm/response/entryresponse.hh:420
+#: ../../xffm/fm/view/local/properties.hh:314
+#: ../../xffm/fm/view/local/rm.hh:157 ../../xffm/common/gtk.hh:409
+msgid "Cancel"
+msgstr "შეწყვეტა"
+
+#: ../../xffm/find/signals.hh:396 ../../xffm/find/signals.hh:830
+#, fuzzy
+msgid "No editor for current action."
+msgstr "მიმდინარე მოქმედების შეჩერება"
+
+#: ../../xffm/find/signals.hh:454
 #, fuzzy
 msgid "Upper limit:"
 msgstr "მომხმარებელთა შეზღუდვა:"
 
-#: ../../xffm/find/signals.hh:353
+#: ../../xffm/find/signals.hh:456
 #, fuzzy
 msgid "Counting files..."
 msgstr "ფაილთა გახსნა..."
 
-#: ../../xffm/find/signals.hh:368
+#: ../../xffm/find/signals.hh:471
 #, fuzzy, c-format
 msgid "Found %d match"
 msgid_plural "Found %d matches"
 msgstr[0] "არავითარი დამთხვევა"
 
-#: ../../xffm/find/signals.hh:370
+#: ../../xffm/find/signals.hh:473
 #, fuzzy, c-format
 msgid "%s Finished : %s"
 msgstr "დასრულებულია"
 
-#: ../../xffm/find/signals.hh:488 ../../xffm/find/signals.hh:490
+#: ../../xffm/find/signals.hh:596 ../../xffm/find/signals.hh:598
 msgid "Searching..."
 msgstr "ვეძებ..."
 
-#. g_object_set_data(G_OBJECT(dialog_), "window", dialog_);
-#: ../../xffm/find/dialog.hh:98 ../../xffm/find/dialog.hh:150
-#: ../../xffm/find/dialog.hh:611
+#. g_object_set_data(G_OBJECT(findDialog), "window", findDialog);
+#: ../../xffm/find/dialog.hh:91 ../../xffm/find/dialog.hh:143
+#: ../../xffm/find/dialog.hh:604
 msgid "Find"
 msgstr "ძიება"
 
-#: ../../xffm/find/dialog.hh:183
+#: ../../xffm/find/dialog.hh:176
 #, fuzzy
 msgid "Upper limit"
 msgstr "მომხმარებელთა შეზღუდვა:"
 
 #. option -s +KByte "size_greater", "size_greater_spin"
-#: ../../xffm/find/dialog.hh:188
+#: ../../xffm/find/dialog.hh:181
 msgid "At Least"
 msgstr ""
 
-#: ../../xffm/find/dialog.hh:188 ../../xffm/find/dialog.hh:193
+#: ../../xffm/find/dialog.hh:181 ../../xffm/find/dialog.hh:186
 #, fuzzy
 msgid "kBytes"
 msgstr "ბაიტი"
 
 #. option -s -KByte "size_smaller", "size_smaller_spin"
-#: ../../xffm/find/dialog.hh:193
+#: ../../xffm/find/dialog.hh:186
 msgid "At Most"
 msgstr ""
 
-#: ../../xffm/find/dialog.hh:204
+#: ../../xffm/find/dialog.hh:197
 msgid "Group"
 msgstr "ჯგუფი"
 
 #. option -o octal "octal_p" "permissions_entry"
-#: ../../xffm/find/dialog.hh:208
+#: ../../xffm/find/dialog.hh:201
 msgid "Octal Permissions"
 msgstr "რვაობითი უფლებები"
 
 #. option -p suid | exe
-#: ../../xffm/find/dialog.hh:213
+#: ../../xffm/find/dialog.hh:206
 msgid "SUID"
 msgstr ""
 
-#: ../../xffm/find/dialog.hh:213 ../../xffm/fm/local/popup.hh:843
+#: ../../xffm/find/dialog.hh:206 ../../xffm/fm/view/local/popup.hh:1102
 #, fuzzy
 msgid "Executable"
 msgstr "გაშვება"
 
 #. option -m months "last_months", "last_months_spin"
-#: ../../xffm/find/dialog.hh:237
+#: ../../xffm/find/dialog.hh:230
 #, fuzzy
 msgid "Months"
 msgstr "თვე"
 
-#: ../../xffm/find/dialog.hh:248
+#: ../../xffm/find/dialog.hh:241
 #, fuzzy
 msgid "File type : "
 msgstr "ფაილის ტიპი:"
@@ -526,84 +532,84 @@ msgstr "ფაილის ტიპი:"
 #. gtk_widget_show (GTK_WIDGET(right_options_vbox));
 #. gtk_widget_show (GTK_WIDGET(center_options_vbox));
 #. gtk_widget_show (GTK_WIDGET(left_options_vbox));
-#: ../../xffm/find/dialog.hh:262 ../../xffm/find/dialog.hh:602
-#: ../../xffm/fm/page/page.hh:70 ../../xffm/common/gtk.hh:70
+#: ../../xffm/find/dialog.hh:255 ../../xffm/find/dialog.hh:595
+#: ../../xffm/fm/dialog/notebook/page/page.hh:70 ../../xffm/common/gtk.hh:79
 msgid "Close"
 msgstr "დახურვა"
 
 #. gtk_box_pack_start (vbox7a, GTK_WIDGET(advancedBox), TRUE, FALSE, 5);
 #. gtk_widget_show(GTK_WIDGET(advancedBox));
 #. //////////////  grep options.... /////////////////////////
-#: ../../xffm/find/dialog.hh:384
+#: ../../xffm/find/dialog.hh:377
 #, fuzzy
 msgid "Contains"
 msgstr "შეიცავს"
 
-#: ../../xffm/find/dialog.hh:404
+#: ../../xffm/find/dialog.hh:397
 msgid "Contains the text"
 msgstr "შეიცავს ტექსტს"
 
-#: ../../xffm/find/dialog.hh:437
+#: ../../xffm/find/dialog.hh:430
 msgid "Case Sensitive"
 msgstr "რეგისტრის გათვალისწინება"
 
-#: ../../xffm/find/dialog.hh:449
+#: ../../xffm/find/dialog.hh:442
 #, fuzzy
 msgid "Extended regexp"
 msgstr "დიდი ხნით ვარ გასოლი"
 
-#: ../../xffm/find/dialog.hh:460
+#: ../../xffm/find/dialog.hh:453
 #, fuzzy
 msgid "Include binary files"
 msgstr "ფაილების ჩამატება:"
 
-#: ../../xffm/find/dialog.hh:496
+#: ../../xffm/find/dialog.hh:489
 #, fuzzy
 msgid "Match"
 msgstr "დაჭერა"
 
-#: ../../xffm/find/dialog.hh:508
+#: ../../xffm/find/dialog.hh:501
 #, fuzzy
 msgid "Anywhere"
 msgstr "არსად"
 
-#: ../../xffm/find/dialog.hh:523
+#: ../../xffm/find/dialog.hh:516
 msgid "Whole words only"
 msgstr "მხოლოდ სრული სიტყვები"
 
-#: ../../xffm/find/dialog.hh:538
+#: ../../xffm/find/dialog.hh:531
 msgid "lines"
 msgstr "ხაზი"
 
-#: ../../xffm/find/dialog.hh:594
+#: ../../xffm/find/dialog.hh:587
 msgid "Clear"
 msgstr "გასუფთავება"
 
-#: ../../xffm/find/dialog.hh:636
+#: ../../xffm/find/dialog.hh:629
 msgid "Edit"
 msgstr "რედაქტირება"
 
-#: ../../xffm/find/dialog.hh:751 ../../xffm/find/dialog.hh:766
-#: ../../xffm/common/util.hh:1150 ../../xffm/common/util.hh:1152
-#: ../../xffm/common/util.hh:1158 ../../xffm/common/util.hh:1160
-#: ../../xffm/common/preview.hh:479
+#: ../../xffm/find/dialog.hh:743 ../../xffm/find/dialog.hh:758
+#: ../../xffm/common/util.hh:1354 ../../xffm/common/util.hh:1356
+#: ../../xffm/common/util.hh:1362 ../../xffm/common/util.hh:1364
+#: ../../xffm/common/preview.hh:460
 msgid "unknown"
 msgstr "უცნობია"
 
-#: ../../xffm/find/dialog.hh:780
+#: ../../xffm/find/dialog.hh:772
 msgid "Modified"
 msgstr ""
 
-#: ../../xffm/find/dialog.hh:784
+#: ../../xffm/find/dialog.hh:776
 msgid "Created"
 msgstr "შექმნილია"
 
-#: ../../xffm/find/dialog.hh:788
+#: ../../xffm/find/dialog.hh:780
 #, fuzzy
 msgid "Accessed"
 msgstr "ბოლო ცვლილება:"
 
-#: ../../xffm/find/dialog.hh:1106
+#: ../../xffm/find/dialog.hh:1098
 msgid ""
 "Basic rules:\n"
 "\n"
@@ -614,7 +620,7 @@ msgid ""
 "$  Match at end of string \n"
 msgstr ""
 
-#: ../../xffm/find/dialog.hh:1115
+#: ../../xffm/find/dialog.hh:1107
 msgid ""
 "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ ( ) : \n"
 "In  basic regular expressions the metacharacters ?, +, {, |, (, and ) \n"
@@ -649,387 +655,532 @@ msgid ""
 "More information is available by typing \"man grep\"\n"
 msgstr ""
 
-#: ../../xffm/response/entryfileresponse.hh:20
+#: ../../xffm/response/chooserresponse.hh:23
 msgid "Open"
 msgstr "გახსნა"
 
-#: ../../xffm/response/entryresponse.hh:29
-#: ../../xffm/response/entryfolderresponse.hh:28
+#: ../../xffm/response/chooserresponse.hh:56
 #, fuzzy
 msgid "Choose directory"
 msgstr "თავფურცელი:"
 
+#: ../../xffm/response/chooserresponse.hh:60
+#, fuzzy
+msgid "Choose file"
+msgstr "ფაილის არჩევა"
+
+#: ../../xffm/response/customresponse.hh:55
+#, fuzzy
+msgid "Execute command"
+msgstr "დაკავშირების ბრძანება"
+
+#. XXX folder or file entry should be determined on .ini file (probably just inherit from comboresponse for multiple files options (selected files)...
+#: ../../xffm/response/customresponse.hh:103
+#, fuzzy
+msgid "Source File"
+msgstr "წყაროს ფაილი:"
+
 #. this button is redundant since hands are on keyboard for password
-#: ../../xffm/response/entryresponse.hh:309
-#: ../../xffm/response/passwdresponse.hh:189
-#: ../../xffm/response/passwdresponse.hh:559
+#: ../../xffm/response/entryresponse.hh:424
+#: ../../xffm/response/passwdresponse.hh:242
 msgid "Ok"
 msgstr "დიახ"
 
-#: ../../xffm/response/commandprogressresponse.hh:32
+#: ../../xffm/response/commandprogressresponse.hh:31
 msgid "Items:"
 msgstr "ელემენტები:"
 
-#: ../../xffm/response/passwdresponse.hh:21
+#: ../../xffm/response/passwdresponse.hh:19
+#: ../../xffm/response/passwdresponse.hh:25 ../../xffm/common/run.hh:464
 msgid "Enter password"
 msgstr "შეიყვანეთ პაროლი"
 
 #. gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
-#: ../../xffm/response/passwdresponse.hh:125
+#: ../../xffm/response/passwdresponse.hh:179
 #, fuzzy
 msgid "User Input"
 msgstr "ინფორმაცია მომხმარებლის შესახებ"
 
-#: ../../xffm/response/passwdresponse.hh:142
+#: ../../xffm/response/passwdresponse.hh:195
 #, fuzzy
 msgid "Response Requested"
 msgstr "კავშირის გაწყვეტაა მოთხოვნილი"
 
-#: ../../xffm/response/passwdresponse.hh:264
-msgid "Preparing"
-msgstr "მომზადება"
-
-#: ../../xffm/response/passwdresponse.hh:352
-msgid "sudo"
-msgstr ""
-
-#: ../../xffm/response/passwdresponse.hh:354
-msgid "Command:"
-msgstr "ბრძანება:"
-
-#: ../../xffm/response/passwdresponse.hh:357
-msgid "Permission denied"
-msgstr "დაშვება აკრძალულია"
-
-#: ../../xffm/response/passwdresponse.hh:358
-msgid "Try to approach a problem from different angles."
-msgstr ""
-
-#: ../../xffm/response/passwdresponse.hh:359
-#, fuzzy
-msgid "Do you want to retry?"
-msgstr "გნებავთ დაკავშირება?"
-
-#: ../../xffm/response/passwdresponse.hh:360
-#, fuzzy
-msgid "Alternate:"
-msgstr "ალტერნატული"
-
-#: ../../xffm/response/passwdresponse.hh:365
-msgid "No"
-msgstr "არა"
-
-#: ../../xffm/response/passwdresponse.hh:401
-msgid "Install"
-msgstr "დაყენება"
-
-#: ../../xffm/response/passwdresponse.hh:402
-#, c-format
-msgid "%s does not exist."
-msgstr "%s არ არსებობს."
-
-#: ../../xffm/response/passwdresponse.hh:467
-#, fuzzy
-msgid "Blowfish"
-msgstr "Sawfish"
-
-#: ../../xffm/response/passwdresponse.hh:468
-#, fuzzy
-msgid "Encryption Key Approval"
-msgstr "შიფრვა"
-
-#: ../../xffm/response/passwdresponse.hh:502
-msgid "-o     print output to standard out. Implies -r."
-msgstr ""
-
-#: ../../xffm/response/passwdresponse.hh:506
-msgid "-c     DO NOT compress files before encryption."
-msgstr ""
-
-#: ../../xffm/response/passwdresponse.hh:510
-msgid "-r     DO NOT remove input files after processing"
-msgstr ""
-
-#: ../../xffm/response/passwdresponse.hh:517
-#, fuzzy
-msgid "Encryption key: "
-msgstr "შიფრვა"
-
-#: ../../xffm/response/passwdresponse.hh:529
-#, fuzzy
-msgid "Confirm:"
-msgstr "დადასტურება"
-
-#: ../../xffm/response/passwdresponse.hh:542
-#, fuzzy
-msgid "Sorry, passwords do not match"
-msgstr "პაროლები არ თანხვდება"
-
-#: ../../xffm/response/passwdresponse.hh:550
-#, fuzzy
-msgid "Minimum length:"
-msgstr "მინიმალური მნიშვნელობა:"
-
-#: ../../xffm/response/timeoutresponse.hh:56
+#: ../../xffm/response/timeoutresponse.hh:57
 msgid "Dismiss"
 msgstr ""
 
-#: ../../xffm/response/commandresponse.hh:23
+#: ../../xffm/response/commandresponse.hh:19
 msgid "Running"
 msgstr "გაშვებულია"
 
 #. auto text = g_strdup_printf("%s (pid: %d)",
 #. _("Waiting for operation to finish..."),
 #. Tubo<Type>::getChild (pid));
-#: ../../xffm/response/commandresponse.hh:28
+#: ../../xffm/response/commandresponse.hh:24
 #, fuzzy
 msgid "Waiting for operation to finish..."
 msgstr "ველოდებით თხუპნიას დასრულებას"
 
-#: ../../xffm/fm/local/icons.hh:257
-msgid "Documents"
-msgstr "დოკუმენტები"
-
-#: ../../xffm/fm/local/icons.hh:257
-msgid "Downloads"
-msgstr "ჩამოტვირთვები"
-
-#: ../../xffm/fm/local/icons.hh:257
-msgid "Music"
-msgstr "მუსიკა"
-
-#: ../../xffm/fm/local/icons.hh:257
-msgid "Pictures"
-msgstr "ნახატები"
-
-#: ../../xffm/fm/local/icons.hh:258
-msgid "Templates"
-msgstr "ნიმუშები"
-
-#: ../../xffm/fm/local/icons.hh:258
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:11
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:214
 #, fuzzy
-msgid "Videos"
-msgstr "ვიდეო"
+msgid "Remove Button Contents"
+msgstr "მეგობრის წაშლა"
 
-#: ../../xffm/fm/local/icons.hh:258
-msgid "Desktop"
-msgstr "სამუშაო მაგიდა"
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:67
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:209
+#, fuzzy
+msgid "Add custom content"
+msgstr "კონტრასტის გასწორება"
 
-#: ../../xffm/fm/local/icons.hh:258
-msgid "Bookmarks"
-msgstr "ნიშნულები"
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:68
+#, fuzzy
+msgid "Select file to load"
+msgstr "გასახსენლი ფაილების შერჩევა"
 
-#: ../../xffm/fm/local/icons.hh:259 ../../xffm/fm/local/rm.hh:181
-msgid "Trash"
-msgstr "სანაგვე ყუთი"
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:125
+#, fuzzy, c-format
+msgid "Cannot load file %s. Reason: %s"
+msgstr "ვერ ხერხდება ფაილის ჩატვირთვა \"%s\": %s"
 
-#: ../../xffm/fm/local/popup.hh:60
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:154
+#, fuzzy
+msgid "You need to restart the application"
+msgstr "პროგრამის დახურვა"
+
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:187
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:191
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:195
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:198
+#: ../../xffm/fm/view/pkg/model.hh:29 ../../xffm/fm/view/pkg/popup.hh:35
+#, fuzzy
+msgid "Software Updater"
+msgstr "პროგრამა"
+
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:236
+#: ../../xffm/fm/view/pkg/model.hh:108 ../../xffm/fm/view/pkg/model.hh:299
+#: ../../xffm/fm/view/pkg/model.hh:306 ../../xffm/fm/view/pkg/popup.hh:151
+#: ../../xffm/common/gtk.hh:77
+msgid "Search"
+msgstr "ძებნა"
+
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:240 ../../xffm/common/gtk.hh:67
+#, fuzzy
+msgid "Open terminal"
+msgstr "ტერმინალის გაშვება"
+
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:244
+#, fuzzy
+msgid "Open a New Window"
+msgstr "ახალ ფანჯარაში გახსნა"
+
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:250
+#, fuzzy
+msgid "Differences"
+msgstr "განსხვავების ნახვა"
+
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:256
+#: ../../xffm/fm/view/root/model.hh:110
+#, fuzzy
+msgid "Home Directory"
+msgstr "თავფურცელი:"
+
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:261
+#: ../../xffm/fm/view/root/model.hh:168 ../../xffm/fm/view/fstab/popup.hh:29
+#, fuzzy
+msgid "Disk Image Mounter"
+msgstr "დისკის მონტაჟი"
+
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:266
+#: ../../xffm/fm/view/root/model.hh:137
+#, fuzzy
+msgid "Trash bin"
+msgstr "ურნა"
+
+#: ../../xffm/fm/dialog/notebook/notebook.hh:56
+#, fuzzy
+msgid "Long press time"
+msgstr "სისტემის დროის შეცვლა"
+
+#: ../../xffm/fm/dialog/notebook/notebook.hh:75 ../../xffm/common/gtk.hh:139
+msgid "New Tab"
+msgstr "ახალი ჩანართი"
+
+#: ../../xffm/fm/dialog/notebook/menupopover.hh:178
+#, fuzzy
+msgid "Open menu"
+msgstr "გახსენი სურათი"
+
+#: ../../xffm/fm/dialog/notebook/menupopover.hh:230
+#, fuzzy
+msgid "View as list"
+msgstr "აჩვენე როგორც სია"
+
+#: ../../xffm/fm/dialog/notebook/menupopover.hh:231
+#, fuzzy
+msgid "Show hidden files"
+msgstr "დამალული ფაილების ჩვენება"
+
+#: ../../xffm/fm/dialog/notebook/menupopover.hh:232
+#, fuzzy
+msgid "Show Backup Files"
+msgstr "დამალული და სარეზერვო ფაილების ჩვენება"
+
+#: ../../xffm/fm/dialog/notebook/menupopover.hh:233
+#, fuzzy
+msgid "Sort data in descending order"
+msgstr "დაღმავალი სორტირება"
+
+#: ../../xffm/fm/dialog/notebook/menupopover.hh:235
+#, fuzzy
+msgid "Sort by date"
+msgstr "დაწყების თარიღი:"
+
+#: ../../xffm/fm/dialog/notebook/menupopover.hh:236
+#, fuzzy
+msgid "Sort by size"
+msgstr "წყაროს ზომა"
+
+#: ../../xffm/fm/dialog/notebook/menupopover.hh:237 ../../xffm/common/gtk.hh:81
+#, fuzzy
+msgid "Exit"
+msgstr "გასვლა"
+
+#: ../../xffm/fm/dialog/notebook/menupopover.hh:270
+msgid "Main menu"
+msgstr "მთავარი მენიუ"
+
+#. File chooser
+#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:375
+#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:377
+msgid "Go to"
+msgstr "მიდი"
+
+#. entryResponse->setCheckButton(_("Run in Terminal"));
+#. entryResponse->setCheckButton(Run<Type>::runInTerminal(path));
+#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:382
+#: ../../xffm/fm/view/local/popup.hh:887 ../../xffm/fm/view/local/popup.hh:981
+#, fuzzy
+msgid "Specify Output Directory..."
+msgstr "დასტის ამორჩევა"
+
+#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:409
+msgid "Not a directory"
+msgstr "დასტა არაა"
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:135
+#, fuzzy
+msgid "Renice Process"
+msgstr "პროცესის გაგრძელება"
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid "Suspend"
+msgstr "შეჩერება"
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid "Continue"
+msgstr "გაგრძელება"
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid "Interrupt"
+msgstr "შეწყვეტა"
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:136
+#, fuzzy
+msgid "Hangup"
+msgstr "გათიშვა"
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid "User 1 (USR1)"
+msgstr ""
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:137
+msgid "User 2 (USR2)"
+msgstr ""
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:137
+#, fuzzy
+msgid "Terminate Task"
+msgstr "შეწყვეტა"
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:137
+msgid "Abort"
+msgstr "შეწყვეტა"
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:138
+msgid "Kill"
+msgstr "მოკვლა"
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:139
+#, fuzzy
+msgid "Segmentation fault"
+msgstr "რეგისტრაცია ვერ მოხერხდა"
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:216
+msgid "PID"
+msgstr "PID"
+
+#: ../../xffm/fm/dialog/notebook/page/page.hh:58
+msgid "loading..."
+msgstr "იტვირთება..."
+
+#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
+#, fuzzy
+msgid "Embedded Terminal"
+msgstr "გახსენი ტერმინალი"
+
+#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
+#, fuzzy
+msgid "All items in the iconview."
+msgstr "მოცემულ ფანჯარაში ყველა ელემენტის ამორჩევა"
+
+#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
+#, fuzzy
+msgid "Scripting"
+msgstr "დამწერლობა"
+
+#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
+#, fuzzy
+msgid "Clear Log"
+msgstr "ჟურნალის ფაილის გაწმენდა"
+
+#. Status textview
+#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
+#, fuzzy
+msgid "Terminal font"
+msgstr "ტერმინალი"
+
+#: ../../xffm/fm/dialog/clipboard.hh:23 ../../xffm/common/dnd.hh:41
+#, fuzzy
+msgid "Copying files locally"
+msgstr "ფაილების ასლი"
+
+#: ../../xffm/fm/dialog/clipboard.hh:30 ../../xffm/common/gio.hh:83
+#: ../../xffm/common/dnd.hh:35
+#, fuzzy
+msgid "Moving files"
+msgstr "ფაილების ასლი"
+
+#: ../../xffm/fm/dialog/dialog.hh:122
+#, fuzzy
+msgid "Removed"
+msgstr "წაშლა"
+
+#: ../../xffm/fm/dialog/dialog.hh:143
+#, fuzzy
+msgid "Detected device(s):"
+msgstr "მოწყობილობათა ამოცნობა"
+
+#: ../../xffm/fm/view/local/model.hh:122
+#, fuzzy, c-format
+msgid "Reading \"%s\""
+msgstr "სიახლეების კითხვა"
+
+#: ../../xffm/fm/view/local/model.hh:575 ../../xffm/fm/view/base/monitor.hh:33
+#, fuzzy, c-format
+msgid "Files: %s"
+msgstr "ფაილი %s"
+
+#: ../../xffm/fm/view/local/model.hh:578
+#, fuzzy, c-format
+msgid "Loaded %d of %d articles"
+msgstr "ჩატვირთული ფაილები:"
+
+#: ../../xffm/fm/view/local/popup.hh:85 ../../xffm/fm/view/local/popup.hh:142
+#: ../../xffm/fm/view/local/popup.hh:1287
+#: ../../xffm/fm/view/local/popup.hh:1294
+#: ../../xffm/fm/view/local/popup.hh:1305
+#: ../../xffm/fm/view/local/popup.hh:1312 ../../xffm/common/gtk.hh:83
+#, fuzzy
+msgid "Open with"
+msgstr "გახსნა პროგრამით..."
+
+#: ../../xffm/fm/view/local/popup.hh:94
 msgid "New"
 msgstr "ახალი"
+
+#: ../../xffm/fm/view/local/popup.hh:95 ../../xffm/fm/view/local/popup.hh:145
+#: ../../xffm/fm/view/root/popup.hh:136 ../../xffm/fm/view/fstab/popup.hh:20
+#: ../../xffm/common/gtk.hh:94
+msgid "Open in New Tab"
+msgstr "ახალ დაფაში გახსნა"
 
 #. deprecated {N_("Open in New Tab"), NULL, NULL, NULL},
 #. deprecated {N_("Open in New Window"), NULL, NULL, NULL},
 #. common buttons /(also an iconsize +/- button)
-#: ../../xffm/fm/local/popup.hh:64 ../../xffm/fm/local/popup.hh:104
-#: ../../xffm/common/gtk.hh:74
+#: ../../xffm/fm/view/local/popup.hh:99 ../../xffm/fm/view/local/popup.hh:155
+#: ../../xffm/common/gtk.hh:87
 msgid "Copy"
 msgstr "დააკოპირე"
 
-#: ../../xffm/fm/local/popup.hh:65 ../../xffm/fm/local/popup.hh:105
-#: ../../xffm/common/gtk.hh:73
+#: ../../xffm/fm/view/local/popup.hh:100 ../../xffm/fm/view/local/popup.hh:156
+#: ../../xffm/common/gtk.hh:85
 msgid "Cut"
 msgstr "ამოჭრა"
 
-#: ../../xffm/fm/local/popup.hh:66 ../../xffm/fm/local/popup.hh:106
-#: ../../xffm/common/gtk.hh:66
-msgid "Paste"
-msgstr "ჩასმა"
+#: ../../xffm/fm/view/local/popup.hh:101 ../../xffm/fm/view/local/popup.hh:159
+#: ../../xffm/fm/view/local/popup.hh:232 ../../xffm/fm/view/local/popup.hh:234
+#, fuzzy
+msgid "Paste into"
+msgstr "დასტაში ჩასმა"
+
+#: ../../xffm/fm/view/local/popup.hh:102 ../../xffm/fm/view/local/popup.hh:158
+msgid "There is nothing on the clipboard to paste."
+msgstr "ბუფერში არაფერი ინახება ისეთი რისი ჩასმაც შეიძლება."
 
 #. **************
-#: ../../xffm/fm/local/popup.hh:67 ../../xffm/fm/local/popup.hh:107
-#: ../../xffm/fm/local/rm.hh:174 ../../xffm/common/gtk.hh:75
+#: ../../xffm/fm/view/local/popup.hh:103 ../../xffm/fm/view/local/popup.hh:160
+#: ../../xffm/fm/view/local/rm.hh:176 ../../xffm/common/gtk.hh:89
 msgid "Delete"
 msgstr "წაშლა"
 
 #. {N_("About"), NULL, (void *) menu},
 #.
-#. only for listview: {N_("Sort by size"), NULL, (void *) menu},
-#. only for listview: {N_("Sort by date"), NULL, (void *) menu},
-#: ../../xffm/fm/local/popup.hh:73
+#: ../../xffm/fm/view/local/popup.hh:106
 msgid "Select All"
 msgstr "ყველას მონიშვნა"
 
-#: ../../xffm/fm/local/popup.hh:74 ../../xffm/fm/local/popup.hh:559
+#: ../../xffm/fm/view/local/popup.hh:107 ../../xffm/fm/view/local/popup.hh:755
 #, fuzzy
 msgid "Match regular expression"
 msgstr "ძიება რეგულარული გამოსახულებით"
 
-#: ../../xffm/fm/local/popup.hh:75 ../../xffm/fm/root/view.hh:58
-#: ../../xffm/fm/fstab/popup.hh:21
-#, fuzzy
-msgid "View as list"
-msgstr "აჩვენე როგორც სია"
-
-#: ../../xffm/fm/local/popup.hh:77
-#, fuzzy
-msgid "Show hidden files"
-msgstr "დამალული ფაილების ჩვენება"
-
-#: ../../xffm/fm/local/popup.hh:79
-#, fuzzy
-msgid "Show Backup Files"
-msgstr "დამალული და სარეზერვო ფაილების ჩვენება"
-
-#: ../../xffm/fm/local/popup.hh:81
-#, fuzzy
-msgid "Sort data in descending order"
-msgstr "დაღმავალი სორტირება"
-
-#: ../../xffm/fm/local/popup.hh:93 ../../xffm/fm/local/popup.hh:119
-#: ../../xffm/fm/local/popup.hh:1006 ../../xffm/fm/local/popup.hh:1013
-#: ../../xffm/fm/local/popup.hh:1022 ../../xffm/fm/local/popup.hh:1029
-#: ../../xffm/common/gtk.hh:72
-#, fuzzy
-msgid "Open with"
-msgstr "გახსნა პროგრამით..."
-
-#: ../../xffm/fm/local/popup.hh:94 ../../xffm/fm/local/popup.hh:846
+#: ../../xffm/fm/view/local/popup.hh:143 ../../xffm/fm/view/local/popup.hh:1105
 #, fuzzy
 msgid "Run Executable..."
 msgstr "ფაილთან ერთად..."
 
-#: ../../xffm/fm/local/popup.hh:95
+#. File chooser
+#: ../../xffm/fm/view/local/popup.hh:144 ../../xffm/fm/view/local/popup.hh:875
 msgid "Extract files from the archive"
 msgstr "ფაილების არქივიდან ამოარქივება"
 
-#. g_hash_table_insert(iconname_hash, "bcrypt", (void *)"emblem-keyhole");
-#: ../../xffm/fm/local/popup.hh:96 ../../xffm/fm/root/view.hh:73
-#: ../../xffm/fm/fstab/popup.hh:20 ../../xffm/fm/dialog/notebook.hh:52
-#: ../../xffm/common/gtk.hh:78
-msgid "Open in New Tab"
-msgstr "ახალ დაფაში გახსნა"
-
 #. File chooser
-#: ../../xffm/fm/local/popup.hh:97 ../../xffm/fm/local/popup.hh:706
+#: ../../xffm/fm/view/local/popup.hh:146 ../../xffm/fm/view/local/popup.hh:966
 #, fuzzy
 msgid "Create a compressed archive with the selected objects"
 msgstr "მონიშნული ობიექტებით ახალი არქივის შექმნა"
 
-#: ../../xffm/fm/local/popup.hh:98 ../../xffm/fm/fstab/popup.hh:37
+#: ../../xffm/fm/view/local/popup.hh:148 ../../xffm/fm/view/fstab/popup.hh:37
 msgid "Mount the volume associated with this folder"
 msgstr "გახსნილ დასტასთან დაკავშირებული ტომის მიერთება"
 
-#: ../../xffm/fm/local/popup.hh:99 ../../xffm/fm/fstab/popup.hh:38
+#: ../../xffm/fm/view/local/popup.hh:149 ../../xffm/fm/view/fstab/popup.hh:38
 msgid "Unmount the volume associated with this folder"
 msgstr "მოცემულ დასტასთან დაკავშირებული ტომის მოხსნა"
 
-#: ../../xffm/fm/local/popup.hh:100 ../../xffm/common/gtk.hh:67
+#: ../../xffm/fm/view/local/popup.hh:151 ../../xffm/common/gtk.hh:73
 msgid "Add bookmark"
 msgstr "სანიშნის დამატება"
 
-#: ../../xffm/fm/local/popup.hh:101 ../../xffm/fm/root/view.hh:74
-#: ../../xffm/common/gtk.hh:68
+#: ../../xffm/fm/view/local/popup.hh:152 ../../xffm/fm/view/root/popup.hh:137
+#: ../../xffm/common/gtk.hh:75
 #, fuzzy
 msgid "Remove bookmark"
 msgstr "სანიშნის წაშლა"
 
-#: ../../xffm/fm/local/popup.hh:108 ../../xffm/fm/local/popup.hh:961
+#: ../../xffm/fm/view/local/popup.hh:157 ../../xffm/common/gtk.hh:71
+msgid "Paste"
+msgstr "ჩასმა"
+
+#: ../../xffm/fm/view/local/popup.hh:161 ../../xffm/fm/view/local/popup.hh:1231
 msgid "Rename"
 msgstr "გადარქმევა"
 
-#: ../../xffm/fm/local/popup.hh:109 ../../xffm/fm/local/popup.hh:947
+#: ../../xffm/fm/view/local/popup.hh:162 ../../xffm/fm/view/local/popup.hh:1217
 msgid "Duplicate"
 msgstr "დუბლირება"
 
-#: ../../xffm/fm/local/popup.hh:110 ../../xffm/fm/local/popup.hh:933
+#: ../../xffm/fm/view/local/popup.hh:163 ../../xffm/fm/view/local/popup.hh:1203
 msgid "Link"
 msgstr "ბმა"
 
-#: ../../xffm/fm/local/popup.hh:111
+#: ../../xffm/fm/view/local/popup.hh:164
 msgid "Properties"
 msgstr "პარამეტრები"
 
-#: ../../xffm/fm/local/popup.hh:414
+#: ../../xffm/fm/view/local/popup.hh:562
 msgid "Files:"
 msgstr "ფაილები:"
 
-#: ../../xffm/fm/local/popup.hh:417 ../../xffm/fm/local/rm.hh:61
+#: ../../xffm/fm/view/local/popup.hh:565 ../../xffm/fm/view/local/rm.hh:61
 #, fuzzy
 msgid "Multiple selections"
 msgstr "ტიპის არჩევა"
 
-#: ../../xffm/fm/local/popup.hh:557
+#: ../../xffm/fm/view/local/popup.hh:753
 #, fuzzy
 msgid "Select items"
 msgstr "მონიშნული ელემენტი:"
 
-#: ../../xffm/fm/local/popup.hh:575
+#: ../../xffm/fm/view/local/popup.hh:771
 #, fuzzy
 msgid "Regular Expression syntax is incorrect"
 msgstr "რეგულარული გამოსახულება"
 
-#: ../../xffm/fm/local/popup.hh:592
+#: ../../xffm/fm/view/local/popup.hh:801
 #, fuzzy
 msgid "No selection"
 msgstr "მონიშნულის კოპირება"
 
-#: ../../xffm/fm/local/popup.hh:592
+#: ../../xffm/fm/view/local/popup.hh:801
 #, fuzzy
 msgid "No matches."
 msgstr "არავითარი დამთხვევა"
 
-#. entryResponse->setCheckButton(_("Run in Terminal"));
-#. entryResponse->setCheckButton(Mime<Type>::runInTerminal(path));
-#: ../../xffm/fm/local/popup.hh:721 ../../xffm/fm/page/pathbar.hh:313
-#, fuzzy
-msgid "Specify Output Directory..."
-msgstr "დასტის ამორჩევა"
-
-#: ../../xffm/fm/local/popup.hh:799
+#: ../../xffm/fm/view/local/popup.hh:1058
 #, fuzzy
 msgid "Create new..."
 msgstr "ახლის შექმნა"
 
-#: ../../xffm/fm/local/popup.hh:806 ../../xffm/fm/local/popup.hh:886
+#: ../../xffm/fm/view/local/popup.hh:1065
+#: ../../xffm/fm/view/local/popup.hh:1146
 #, fuzzy
 msgid "New Name:"
 msgstr "ახალი სახელი"
 
-#: ../../xffm/fm/local/popup.hh:815
+#: ../../xffm/fm/view/local/popup.hh:1074
 msgid "No name"
 msgstr "უსახელო"
 
-#: ../../xffm/fm/local/popup.hh:828
+#: ../../xffm/fm/view/local/popup.hh:1087
 #, fuzzy, c-format
 msgid "Another file with the same name already exists in “%s”."
 msgstr "იდენტიფიკაცია იგივე სახელით მოიძებნა"
 
-#: ../../xffm/fm/local/popup.hh:850 ../../xffm/fm/local/popup.hh:1010
-#: ../../xffm/fm/local/popup.hh:1026 ../../xffm/common/util.hh:1248
+#: ../../xffm/fm/view/local/popup.hh:1109
+#: ../../xffm/fm/view/local/popup.hh:1291
+#: ../../xffm/fm/view/local/popup.hh:1309 ../../xffm/common/util.hh:1452
 msgid "Run in Terminal"
 msgstr "ტერმინალში გაშვება"
 
-#: ../../xffm/fm/local/popup.hh:853
+#: ../../xffm/fm/view/local/popup.hh:1112
 #, fuzzy
 msgid "Arguments for the Command"
 msgstr "არავითარი პასუხი %s ბრანებაზე."
 
-#: ../../xffm/fm/local/popup.hh:1047 ../../xffm/fm/local/view.hh:141
+#: ../../xffm/fm/view/local/popup.hh:1258
+#, fuzzy
+msgid "You have selected multiple files or folders"
+msgstr "მონიშნული ელემენტების სანაგვე ყუთში გადატანა"
+
+#: ../../xffm/fm/view/local/popup.hh:1332 ../../xffm/fm/view/local/view.hh:156
 #, fuzzy
 msgid "Invalid entry"
 msgstr "არასწორი სტილი"
 
-#: ../../xffm/fm/local/properties.hh:235
+#: ../../xffm/fm/view/local/properties.hh:245
 #, fuzzy
 msgid "Properties and Attributes"
 msgstr "რეგისტრისადმი მგძნობიარე ჭდეები და ატრიბუტები"
 
-#: ../../xffm/fm/local/properties.hh:264
+#: ../../xffm/fm/view/local/properties.hh:274
 #, fuzzy
 msgid "File Mode:"
 msgstr "ხედის რეჟიმი"
 
-#: ../../xffm/fm/local/properties.hh:290
+#: ../../xffm/fm/view/local/properties.hh:300
 msgid "File:"
 msgstr "ფაილი:"
 
@@ -1038,416 +1189,334 @@ msgstr "ფაილი:"
 #. add signal handler to changed signal for combo box
 #. Add process buttons
 #.
-#: ../../xffm/fm/local/properties.hh:302
+#: ../../xffm/fm/view/local/properties.hh:312
 msgid "Apply changes"
 msgstr "ცვლილებების გამოყენება"
 
-#: ../../xffm/fm/local/properties.hh:462
+#: ../../xffm/fm/view/local/properties.hh:477
 #, fuzzy
 msgid "Successfully moved to trash."
 msgstr "წარმატებული შეწყვილება %s-თან"
 
-#: ../../xffm/fm/local/properties.hh:463
+#: ../../xffm/fm/view/local/properties.hh:478
 msgid "Source:"
 msgstr "წყარო:"
 
-#: ../../xffm/fm/local/rm.hh:59
+#: ../../xffm/fm/view/local/rm.hh:59
 #, c-format
 msgid "Delete %s"
 msgstr "წაშლა %s"
 
-#: ../../xffm/fm/local/rm.hh:61
+#: ../../xffm/fm/view/local/rm.hh:61
 msgid "Warning: "
 msgstr "გაფრთხილება: "
 
 #. gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
 #. title
-#: ../../xffm/fm/local/rm.hh:90
+#: ../../xffm/fm/view/local/rm.hh:92
 msgid "Remove"
 msgstr "წაშლა"
 
-#: ../../xffm/fm/local/rm.hh:140
+#: ../../xffm/fm/view/local/rm.hh:142
 #, fuzzy
 msgid "Apply to all"
 msgstr "ფაილის გააქტიურება:"
 
 #. **************
 #. This is now available to BSD with rm -P option
-#: ../../xffm/fm/local/rm.hh:163 ../../xffm/common/gtk.hh:76
+#: ../../xffm/fm/view/local/rm.hh:165 ../../xffm/common/gtk.hh:91
 msgid "Shred"
 msgstr ""
 
-#. We do not count "../"
-#: ../../xffm/fm/local/view.hh:48 ../../xffm/fm/base/monitor.hh:28
-#, fuzzy, c-format
-msgid "Files: %s"
-msgstr "ფაილი %s"
+#: ../../xffm/fm/view/local/rm.hh:183
+msgid "Trash"
+msgstr "სანაგვე ყუთი"
 
-#: ../../xffm/fm/root/model.hh:78
+#: ../../xffm/fm/view/local/view.hh:177
+#, fuzzy, c-format
+msgid "The volume '%s' is not mounted."
+msgstr "'%s' ფაილი არ არსებობს."
+
+#: ../../xffm/fm/view/root/model.hh:82
 #, fuzzy
 msgid "Root Directory"
 msgstr "დასტა"
 
-#: ../../xffm/fm/root/model.hh:94
+#: ../../xffm/fm/view/root/model.hh:98
 msgid "This is the root of the filesystem"
 msgstr "ფაილური სისტემუს ძირეული საქაღალდე"
 
-#: ../../xffm/fm/root/model.hh:105
-#, fuzzy
-msgid "Home Directory"
-msgstr "თავფურცელი:"
-
-#: ../../xffm/fm/root/model.hh:132
-#, fuzzy
-msgid "Trash bin"
-msgstr "ურნა"
-
-#: ../../xffm/fm/root/model.hh:162 ../../xffm/fm/fstab/popup.hh:29
-#, fuzzy
-msgid "Disk Image Mounter"
-msgstr "დისკის მონტაჟი"
-
-#: ../../xffm/fm/root/model.hh:169 ../../xffm/fm/root/model.hh:185
+#: ../../xffm/fm/view/root/model.hh:176 ../../xffm/fm/view/root/model.hh:191
 msgid "Mount local disks and devices"
 msgstr "ლოკალური დისკების მონტაჟი"
 
-#: ../../xffm/fm/root/model.hh:170 ../../xffm/fm/fstab/popup.hh:25
-#: ../../xffm/fm/fstab/view.hh:429
+#: ../../xffm/fm/view/root/model.hh:177 ../../xffm/fm/view/fstab/popup.hh:23
+#: ../../xffm/fm/view/fstab/view.hh:1084
 #, fuzzy
 msgid "eCryptfs Volume"
 msgstr "მეხსიერების ნაწილი"
 
-#: ../../xffm/fm/root/model.hh:171 ../../xffm/fm/fstab/popup.hh:24
+#: ../../xffm/fm/view/root/model.hh:178 ../../xffm/fm/view/fstab/popup.hh:22
 #, fuzzy
 msgid "SSHFS Remote Synchronization Folder"
 msgstr "საქაღალდეთა სინქრონიზება"
 
-#: ../../xffm/fm/root/model.hh:172 ../../xffm/fm/fstab/popup.hh:23
-#: ../../xffm/fm/fstab/view.hh:377
+#: ../../xffm/fm/view/root/model.hh:179 ../../xffm/fm/view/fstab/popup.hh:21
+#: ../../xffm/fm/view/fstab/view.hh:1032
 msgid "NFS Network Volume"
 msgstr "NFS ქსელის ნაწილი"
 
-#: ../../xffm/fm/root/model.hh:173 ../../xffm/fm/fstab/popup.hh:26
-#: ../../xffm/fm/fstab/view.hh:455
+#: ../../xffm/fm/view/root/model.hh:180 ../../xffm/fm/view/fstab/popup.hh:24
+#: ../../xffm/fm/view/fstab/view.hh:1110
 msgid "CIFS Volume"
 msgstr "CIFS ნაწილი"
 
-#: ../../xffm/fm/root/model.hh:195
-#, fuzzy
-msgid "Software Updater"
-msgstr "პროგრამა"
-
-#: ../../xffm/fm/root/model.hh:218 ../../xffm/fm/root/model.hh:230
-msgid "Add or remove software installed on the system"
-msgstr ""
-
-#: ../../xffm/fm/root/model.hh:271
+#: ../../xffm/fm/view/root/model.hh:229
 #, fuzzy
 msgid "Go to bookmarked location"
 msgstr "საწყისი კატალოგისკენ გადასვლა"
 
-#. {N_("Add bookmark"), (void *)BasePopUp<Type>::noop, NULL, NULL},
-#: ../../xffm/fm/root/view.hh:61
+#: ../../xffm/fm/view/root/popup.hh:138
 msgid "Empty trash"
 msgstr "სანაგვე ყუთის დაცარიელება"
 
 #. File chooser
-#: ../../xffm/fm/fstab/popup.hh:121
+#: ../../xffm/fm/view/fstab/popup.hh:129
 #, fuzzy
 msgid "Mount Device"
 msgstr "მობილური მოწყობილობა"
 
-#: ../../xffm/fm/fstab/popup.hh:133
+#: ../../xffm/fm/view/fstab/popup.hh:141 ../../xffm/fm/view/fstab/view.hh:923
 #, fuzzy
 msgid "Mount point:"
 msgstr "შრიფტი პუნქტებში"
 
-#: ../../xffm/fm/fstab/view.hh:301
+#: ../../xffm/fm/view/fstab/view.hh:590
 #, fuzzy
-msgid "Mounted on:"
-msgstr "მონტირებული DVD"
+msgid "Mount point: "
+msgstr "შრიფტი პუნქტებში"
 
-#: ../../xffm/fm/fstab/view.hh:302
+#: ../../xffm/fm/view/fstab/view.hh:591
 #, fuzzy
-msgid "Mount on"
-msgstr "ტომის მიერთება"
+msgid "Mount device: "
+msgstr "შემავალი მოწყობილობა:"
 
-#: ../../xffm/fm/fstab/view.hh:310 ../../xffm/fm/fstab/view.hh:312
+#. Since /dev is not concrete, the following test returns false...
+#.
+#. if (!g_file_test(name, G_FILE_TEST_IS_DIR)) return;
+#: ../../xffm/fm/view/fstab/view.hh:659 ../../xffm/fm/view/fstab/view.hh:675
+#, fuzzy
+msgid "Disks"
+msgstr "დისკი"
+
+#: ../../xffm/fm/view/fstab/view.hh:921
+#, fuzzy
+msgid "No Label"
+msgstr "სათაური"
+
+#: ../../xffm/fm/view/fstab/view.hh:922
+#, fuzzy
+msgid "There is no file system available (unformatted)"
+msgstr "'%s'-სთვის დახმარება არ არის ხელმისაწვდომი."
+
+#: ../../xffm/fm/view/fstab/view.hh:923
 #, fuzzy
 msgid "Not mounted"
 msgstr "(არავითარი მონტაჟი)"
 
-#: ../../xffm/fm/fstab/view.hh:403
+#: ../../xffm/fm/view/fstab/view.hh:1058
 msgid "SFTP (via SSH)"
 msgstr ""
 
-#: ../../xffm/fm/fstab/view.hh:667
+#: ../../xffm/fm/view/fstab/view.hh:1413
 #, fuzzy, c-format
 msgid "Unmounting %s"
 msgstr "დემონტაჟი %s"
 
-#: ../../xffm/fm/fstab/view.hh:667
+#: ../../xffm/fm/view/fstab/view.hh:1413
 #, fuzzy, c-format
 msgid "Mounting %s"
 msgstr "ვამონტაჟებ %s"
 
-#: ../../xffm/fm/dialog/menupopover.hh:128
-msgid "Home"
-msgstr "ბინა"
-
-#: ../../xffm/fm/dialog/menupopover.hh:129 ../../xffm/common/gtk.hh:64
-#, fuzzy
-msgid "Open terminal"
-msgstr "ტერმინალის გაშვება"
-
-#: ../../xffm/fm/dialog/menupopover.hh:130
-#, fuzzy
-msgid "Open a New Window"
-msgstr "ახალ ფანჯარაში გახსნა"
-
-#. {N_("Execute Shell Command"), (void *)MenuPopoverSignals<Type>::shell, (void *) menuButton_},
-#: ../../xffm/fm/dialog/menupopover.hh:132 ../../xffm/common/gtk.hh:69
-msgid "Search"
-msgstr "ძებნა"
-
-#: ../../xffm/fm/dialog/menupopover.hh:133 ../../xffm/common/gtk.hh:71
-#, fuzzy
-msgid "Exit"
-msgstr "გასვლა"
-
-#: ../../xffm/fm/dialog/dialog.hh:116
-#, fuzzy
-msgid "Removed"
-msgstr "წაშლა"
-
-#: ../../xffm/fm/dialog/dialog.hh:132
-#, fuzzy
-msgid "Detected device(s):"
-msgstr "მოწყობილობათა ამოცნობა"
-
-#. Create the widgets
-#: ../../xffm/fm/page/vbuttonbox.hh:37 ../../xffm/common/gtk.hh:332
-msgid "Help"
-msgstr "დახმარება"
-
-#. File chooser
-#: ../../xffm/fm/page/pathbar.hh:306 ../../xffm/fm/page/pathbar.hh:308
-msgid "Go to"
-msgstr "მიდი"
-
-#: ../../xffm/fm/page/pathbar.hh:331
-msgid "Not a directory"
-msgstr "დასტა არაა"
-
-#: ../../xffm/fm/page/runbutton.hh:135
-#, fuzzy
-msgid "Renice Process"
-msgstr "პროცესის გაგრძელება"
-
-#: ../../xffm/fm/page/runbutton.hh:135
-msgid "Suspend"
-msgstr "შეჩერება"
-
-#: ../../xffm/fm/page/runbutton.hh:135
-msgid "Continue"
-msgstr "გაგრძელება"
-
-#: ../../xffm/fm/page/runbutton.hh:136
-msgid "Interrupt"
-msgstr "შეწყვეტა"
-
-#: ../../xffm/fm/page/runbutton.hh:136
-#, fuzzy
-msgid "Hangup"
-msgstr "გათიშვა"
-
-#: ../../xffm/fm/page/runbutton.hh:136
-msgid "User 1 (USR1)"
+#: ../../xffm/fm/view/pkg/model.hh:41 ../../xffm/fm/view/pkg/model.hh:52
+msgid "Add or remove software installed on the system"
 msgstr ""
 
-#: ../../xffm/fm/page/runbutton.hh:137
-msgid "User 2 (USR2)"
-msgstr ""
+#: ../../xffm/fm/view/pkg/model.hh:111
+msgid "String"
+msgstr "ტექსტ სტრიქონი"
 
-#: ../../xffm/fm/page/runbutton.hh:137
+#: ../../xffm/fm/view/pkg/model.hh:116
 #, fuzzy
-msgid "Terminate Task"
-msgstr "შეწყვეტა"
+msgid "Waiting for search results"
+msgstr "პასუხისთვის მოლოდინი"
 
-#: ../../xffm/fm/page/runbutton.hh:137
-msgid "Abort"
-msgstr "შეწყვეტა"
-
-#: ../../xffm/fm/page/runbutton.hh:138
-msgid "Kill"
-msgstr "მოკვლა"
-
-#: ../../xffm/fm/page/runbutton.hh:139
+#: ../../xffm/fm/view/pkg/model.hh:174
 #, fuzzy
-msgid "Segmentation fault"
-msgstr "რეგისტრაცია ვერ მოხერხდა"
+msgid "No results"
+msgstr "ტესტის შედეგები"
 
-#: ../../xffm/fm/page/runbutton.hh:217
-msgid "PID"
-msgstr "PID"
-
-#: ../../xffm/fm/page/hbuttonbox.hh:37
+#: ../../xffm/fm/view/pkg/model.hh:373
 #, fuzzy
-msgid "Embedded Terminal"
-msgstr "გახსენი ტერმინალი"
+msgid "Currently busy\n"
+msgstr "მიმდინარებ სტატუსი"
 
-#: ../../xffm/fm/page/hbuttonbox.hh:38
+#: ../../xffm/fm/view/pkg/popup.hh:44
 #, fuzzy
-msgid "All items in the iconview."
-msgstr "მოცემულ ფანჯარაში ყველა ელემენტის ამორჩევა"
+msgid "Update Database"
+msgstr "აშშ პატენტების მონაცემთა ბაზა"
 
-#: ../../xffm/fm/page/hbuttonbox.hh:39
+#: ../../xffm/fm/view/pkg/popup.hh:45
 #, fuzzy
-msgid "Scripting"
-msgstr "დამწერლობა"
+msgid "Fetch"
+msgstr "Sketch"
 
-#: ../../xffm/fm/page/hbuttonbox.hh:40
+#: ../../xffm/fm/view/pkg/popup.hh:46
 #, fuzzy
-msgid "Clear Log"
-msgstr "ჟურნალის ფაილის გაწმენდა"
+msgid "Install --dry-run"
+msgstr "დაყენებული"
 
-#. Status textview
-#: ../../xffm/fm/page/hbuttonbox.hh:42
+#: ../../xffm/fm/view/pkg/popup.hh:47
+msgid "Install"
+msgstr "დაყენება"
+
+#: ../../xffm/fm/view/pkg/popup.hh:48
 #, fuzzy
-msgid "Terminal font"
-msgstr "ტერმინალი"
+msgid "Uninstall --dry-run"
+msgstr "ამოშლა"
 
-#: ../../xffm/fm/treeview.hh:17
+#: ../../xffm/fm/view/pkg/popup.hh:49
+msgid "Uninstall"
+msgstr "ამოშლა"
+
+#: ../../xffm/fm/view/pkg/popup.hh:50
+msgid "Information"
+msgstr "ინფორმაცია"
+
+#: ../../xffm/fm/view/pkg/popup.hh:140
+msgid "Version"
+msgstr "ვერსია"
+
+#: ../../xffm/fm/view/pkg/popup.hh:149
+#, fuzzy
+msgid "Go up"
+msgstr "ზემოთ"
+
+#: ../../xffm/fm/view/pkg/popup.hh:152
+#, fuzzy
+msgid "Search packages"
+msgstr "უკუძიება."
+
+#: ../../xffm/fm/view/pkg/popup.hh:184 ../../xffm/fm/view/view.hh:93
+#, fuzzy, c-format
+msgid "Loading %s...%s"
+msgstr "იტვირთება...."
+
+#: ../../xffm/fm/view/pkg/popup.hh:184 ../../xffm/fm/view/view.hh:93
+#, fuzzy
+msgid "Please Wait..."
+msgstr "მოითმინეთ გეთაყვა"
+
+#: ../../xffm/fm/view/treeview.hh:17
 msgid "Name"
 msgstr "სახელი"
 
-#: ../../xffm/fm/treeview.hh:20
+#: ../../xffm/fm/view/treeview.hh:19
 msgid "Size"
 msgstr "ზომა"
 
-#: ../../xffm/fm/treeview.hh:21
+#: ../../xffm/fm/view/treeview.hh:20
 msgid "Date"
 msgstr "თარიღი"
 
-#: ../../xffm/fm/treeview.hh:22
+#: ../../xffm/fm/view/treeview.hh:22
 #, fuzzy
 msgid "Mimetype"
 msgstr "Mime ტიპებიო"
 
-#: ../../xffm/fm/treeview.hh:24
-msgid "TYPE"
-msgstr "ტიპი"
-
-#: ../../xffm/fm/base/signals.hh:642
-#, fuzzy
-msgid "Directory does not exist."
-msgstr "%s: დირექტორია %s არ არსებობს."
-
-#: ../../xffm/fm/base/signals.hh:644 ../../xffm/fm/base/signals.hh:646
+#: ../../xffm/fm/view/base/signals.hh:838
 #, fuzzy
 msgid "Trash is empty"
 msgstr "პაროლი ცარიელია"
 
-#: ../../xffm/common/settings.hh:27
+#: ../../xffm/fm/view/base/signals.hh:840
+#, fuzzy
+msgid "Directory does not exist."
+msgstr "%s: დირექტორია %s არ არსებობს."
+
+#: ../../xffm/common/settings.hh:30
 #, fuzzy
 msgid "New File:"
 msgstr "ახალი ფაილი"
 
-#: ../../xffm/common/gio.hh:235
-#, fuzzy
-msgid "Could not copy item:"
-msgstr "შეუძლებელია ელემენტის წაშლა"
-
-#: ../../xffm/common/gio.hh:237
-#, fuzzy
-msgid "Could not move item:"
-msgstr "შეუძლებელია ელემენტის წაშლა"
-
-#: ../../xffm/common/gio.hh:239
-#, fuzzy
-msgid "Create symbolic link"
-msgstr "არაა სიმბოლური ბმა"
-
-#: ../../xffm/common/gio.hh:276
-#, fuzzy, c-format
-msgid ""
-"Could not delete:\n"
-"%s"
-msgstr "\"%s\" ვერ წაიშალა."
-
-#: ../../xffm/common/gio.hh:278
-#, fuzzy, c-format
-msgid "Could not move %s to trash"
-msgstr "\"%s\"-ს  ურნაში გადატანა შეუძლებელია."
-
-#: ../../xffm/common/clipboard.hh:23 ../../xffm/common/dnd.hh:40
-#, fuzzy
-msgid "Copying files locally"
+#: ../../xffm/common/gio.hh:81
+msgid "Copying files"
 msgstr "ფაილების ასლი"
 
-#: ../../xffm/common/clipboard.hh:30 ../../xffm/common/dnd.hh:34
+#: ../../xffm/common/gio.hh:85
 #, fuzzy
-msgid "Moving files"
-msgstr "ფაილების ასლი"
+msgid "linking"
+msgstr "ბმული"
 
-#: ../../xffm/common/dnd.hh:46
+#: ../../xffm/common/gio.hh:87
+#, fuzzy
+msgid "rename"
+msgstr "გადარქმევა"
+
+#: ../../xffm/common/gio.hh:426
+#, c-format
+msgid "(%d of %d)"
+msgstr "(%d-დან %d)"
+
+#: ../../xffm/common/dnd.hh:47
 #, fuzzy
 msgid "Create Link"
 msgstr "აწმის შექმნა"
 
-#: ../../xffm/common/util.hh:1200
+#: ../../xffm/common/util.hh:1404
 #, c-format
 msgid ""
 "Scriptfile \"%s\" is not executable. Please set the executable-attribute on "
 "that file."
 msgstr ""
 
-#: ../../xffm/common/util.hh:1202 ../../xffm/common/util.hh:1237
+#: ../../xffm/common/util.hh:1406 ../../xffm/common/util.hh:1441
 #, c-format
 msgid "Open with %s"
 msgstr "%s-ის მეშვეობით გახსნა"
 
-#: ../../xffm/common/util.hh:1202
+#: ../../xffm/common/util.hh:1406
 msgid "Text Editor"
 msgstr "ტექსტური რედაქტორი"
 
-#: ../../xffm/common/util.hh:1239 ../../xffm/common/gtk.hh:65
+#: ../../xffm/common/util.hh:1443 ../../xffm/common/gtk.hh:69
 #, fuzzy
 msgid "Execute Shell Command"
 msgstr "გარსისს ბრძანების მოდული"
 
-#: ../../xffm/common/util.hh:1243
+#: ../../xffm/common/util.hh:1447
 msgid ""
 "Console: quickly run single commands -- write a command here and press enter."
 msgstr ""
 
-#: ../../xffm/common/gtk.hh:123
-msgid "New Tab"
-msgstr "ახალი ჩანართი"
+#: ../../xffm/common/gtk.hh:352 ../../xffm/common/gtk.hh:360
+msgid "Help"
+msgstr "დახმარება"
 
-#: ../../xffm/common/gtk.hh:335
-msgid "OK"
-msgstr "დიახ"
-
-#: ../../xffm/common/run.hh:344
+#: ../../xffm/common/run.hh:338
 msgid "error"
 msgstr "შეცდომა"
 
-#: ../../xffm/common/run.hh:348
+#: ../../xffm/common/run.hh:342
 msgid "warning"
 msgstr "გაფრთხილება"
 
-#: ../../xffm/common/mime.hh:101 ../../xffm/common/mime.hh:143
-#, fuzzy
-msgid "No Read Permission"
-msgstr "დასტის უფლებები:"
-
-#: ../../xffm/common/preview.hh:593
+#: ../../xffm/common/preview.hh:581
 #, fuzzy
 msgid "Empty file"
 msgstr "ცარიელი ფაილი"
 
-#: ../../xffm/common/preview.hh:648
+#: ../../xffm/common/preview.hh:636
 #, fuzzy, c-format
 msgid "Cannot read from %s"
 msgstr "ვერ ვკითხულობ CD:·%s"

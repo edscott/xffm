@@ -153,7 +153,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-02 12:27-0600\n"
+"POT-Creation-Date: 2019-08-04 16:54-0500\n"
 "PO-Revision-Date: 2013-03-07 21:29+0100\n"
 "Last-Translator: Joan Duran <jodufi@gmail.com>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
@@ -162,6 +162,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../../xffm/mime/mimemagic.hh:68 ../../xffm/mime/mimemagic.hh:110
+#: ../../xffm/common/mimemagic.hh:68 ../../xffm/common/mimemagic.hh:110
+msgid "No Read Permission"
+msgstr "Sense permís de lectura"
 
 #: ../../xffm/completion/base.hh:28
 msgid "Command"
@@ -176,7 +181,7 @@ msgid "Command history"
 msgstr "Historial d'ordes"
 
 #. option -u uid "uid" "uid_combo"
-#: ../../xffm/completion/base.hh:37 ../../xffm/find/dialog.hh:199
+#: ../../xffm/completion/base.hh:37 ../../xffm/find/dialog.hh:192
 msgid "User"
 msgstr "Usuari"
 
@@ -192,15 +197,15 @@ msgstr "Ordinador central"
 msgid "Found no match"
 msgstr "No s'ha trobat cap coincidència"
 
-#: ../../xffm/completion/base.hh:133 ../../xffm/completion/base.hh:134
+#: ../../xffm/completion/base.hh:141 ../../xffm/completion/base.hh:142
 msgid "Matches"
 msgstr "Concorda"
 
-#: ../../xffm/completion/base.hh:134
+#: ../../xffm/completion/base.hh:142
 msgid "Too many files open"
 msgstr "Hi ha massa fitxers oberts"
 
-#: ../../xffm/completion/base.hh:325 ../../xffm/find/fgr.hh:124
+#: ../../xffm/completion/base.hh:339 ../../xffm/find/fgr.hh:124
 msgid "Options:"
 msgstr "Opcions:"
 
@@ -220,7 +225,8 @@ msgstr "fitxer"
 msgid "Options >>"
 msgstr "Opcions >>"
 
-#: ../../xffm/find/fgr.hh:124 ../../xffm/find/dialog.hh:308
+#: ../../xffm/find/fgr.hh:124 ../../xffm/find/signals.hh:100
+#: ../../xffm/find/dialog.hh:301
 msgid "Path"
 msgstr "Camí"
 
@@ -229,7 +235,7 @@ msgid "Locate documents and folders on this computer by name or content"
 msgstr ""
 "Localitzeu documents i carpetes pel seu nom o contingut en este ordinador"
 
-#: ../../xffm/find/fgr.hh:126 ../../xffm/find/dialog.hh:341
+#: ../../xffm/find/fgr.hh:126 ../../xffm/find/dialog.hh:334
 msgid "Filter:"
 msgstr "Filtre:"
 
@@ -260,7 +266,7 @@ msgid "Filter Details"
 msgstr "Detalls de filtre"
 
 #. / option -a "xdev"
-#: ../../xffm/find/fgr.hh:138 ../../xffm/find/dialog.hh:180
+#: ../../xffm/find/fgr.hh:138 ../../xffm/find/dialog.hh:173
 #, fuzzy
 msgid "Stay on single filesystem"
 msgstr "Escaneja el sistema de fitxers"
@@ -274,7 +280,7 @@ msgid "The unique Process ID that identifies this process."
 msgstr "L'ID únic del procés que identifica este procés."
 
 #. / option -D "recursiveH"
-#: ../../xffm/find/fgr.hh:142 ../../xffm/find/dialog.hh:177
+#: ../../xffm/find/fgr.hh:142 ../../xffm/find/dialog.hh:170
 msgid "Find hidden files and directories"
 msgstr "Cerca fitxers i directoris ocults"
 
@@ -288,7 +294,7 @@ msgid ""
 msgstr ""
 
 #. / option -r "recursive"
-#: ../../xffm/find/fgr.hh:146 ../../xffm/find/dialog.hh:174
+#: ../../xffm/find/fgr.hh:146 ../../xffm/find/dialog.hh:167
 msgid "Recursive"
 msgstr "Recursiu"
 
@@ -321,7 +327,7 @@ msgstr "Els permisos del fitxer en notació octal."
 msgid "Type"
 msgstr "Tipus"
 
-#: ../../xffm/find/fgr.hh:157 ../../xffm/find/signals.hh:17
+#: ../../xffm/find/fgr.hh:157 ../../xffm/find/signals.hh:14
 msgid "Any"
 msgstr "Cap"
 
@@ -330,18 +336,18 @@ msgstr "Cap"
 msgid "Default type"
 msgstr "Hora per omissió"
 
-#: ../../xffm/find/fgr.hh:158 ../../xffm/common/preview.hh:497
+#: ../../xffm/find/fgr.hh:158 ../../xffm/common/preview.hh:478
 #, fuzzy
 msgid "Regular file"
 msgstr "Etapa normal"
 
-#: ../../xffm/find/fgr.hh:159 ../../xffm/find/signals.hh:11
-#: ../../xffm/fm/local/popup.hh:803 ../../xffm/common/preview.hh:488
+#: ../../xffm/find/fgr.hh:159 ../../xffm/find/signals.hh:8
+#: ../../xffm/fm/view/local/popup.hh:1062 ../../xffm/common/preview.hh:469
 msgid "Directory"
 msgstr "Directori"
 
-#: ../../xffm/find/fgr.hh:160 ../../xffm/find/signals.hh:12
-#: ../../xffm/common/preview.hh:494
+#: ../../xffm/find/fgr.hh:160 ../../xffm/find/signals.hh:9
+#: ../../xffm/common/preview.hh:475
 msgid "Symbolic Link"
 msgstr "Enllaç simbòlic"
 
@@ -349,34 +355,34 @@ msgstr "Enllaç simbòlic"
 msgid "UNIX Socket"
 msgstr "Sòcol UNIX"
 
-#: ../../xffm/find/fgr.hh:162 ../../xffm/find/signals.hh:14
-#: ../../xffm/common/preview.hh:482
+#: ../../xffm/find/fgr.hh:162 ../../xffm/find/signals.hh:11
+#: ../../xffm/common/preview.hh:463
 #, fuzzy
 msgid "Block device"
 msgstr "dispositiu de bloqueig"
 
-#: ../../xffm/find/fgr.hh:163 ../../xffm/find/signals.hh:15
-#: ../../xffm/common/preview.hh:485
+#: ../../xffm/find/fgr.hh:163 ../../xffm/find/signals.hh:12
+#: ../../xffm/common/preview.hh:466
 #, fuzzy
 msgid "Character device"
 msgstr "dispositiu de caràcters"
 
-#: ../../xffm/find/fgr.hh:164 ../../xffm/find/signals.hh:16
-#: ../../xffm/common/preview.hh:491
+#: ../../xffm/find/fgr.hh:164 ../../xffm/find/signals.hh:13
+#: ../../xffm/common/preview.hh:472
 msgid "FIFO"
 msgstr "FIFO"
 
-#. radio_p freed on destroy event for dialog_.
+#. radio_p freed on destroy event for findDialog.
 #. option -k minutes "last_minutes", "last_minutes_spin"
 #: ../../xffm/find/fgr.hh:166 ../../xffm/find/fgr.hh:168
-#: ../../xffm/find/dialog.hh:221
+#: ../../xffm/find/dialog.hh:214
 msgid "Minutes"
 msgstr "Minuts"
 
 #: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
 #: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
-#: ../../xffm/find/dialog.hh:270 ../../xffm/find/dialog.hh:370
-#: ../../xffm/fm/treeview.hh:18
+#: ../../xffm/find/dialog.hh:263 ../../xffm/find/dialog.hh:363
+#: ../../xffm/fm/view/treeview.hh:18
 msgid "Details"
 msgstr "Detalls"
 
@@ -396,13 +402,13 @@ msgstr "Anterior"
 
 #. option -h hours "last_hours", "last_hours_spin"
 #: ../../xffm/find/fgr.hh:169 ../../xffm/find/fgr.hh:171
-#: ../../xffm/find/dialog.hh:226
+#: ../../xffm/find/dialog.hh:219
 msgid "Hours"
 msgstr "Hores"
 
 #. option -d days "last_days", "last_days_spin"
 #: ../../xffm/find/fgr.hh:172 ../../xffm/find/fgr.hh:174
-#: ../../xffm/find/dialog.hh:231
+#: ../../xffm/find/dialog.hh:224
 msgid "Days"
 msgstr "Dies"
 
@@ -462,7 +468,7 @@ msgid "STRING"
 msgstr "CADENA"
 
 #: ../../xffm/find/fgr.hh:202 ../../xffm/find/fgr.hh:204
-#: ../../xffm/fm/local/popup.hh:563
+#: ../../xffm/fm/view/local/popup.hh:759
 msgid "Regular expression"
 msgstr "Expressió regular"
 
@@ -478,11 +484,11 @@ msgstr "Ignora diferències de majúscules i minúscules"
 msgid "Text Files"
 msgstr "Fitxers de text"
 
-#: ../../xffm/find/fgr.hh:210 ../../xffm/find/dialog.hh:552
+#: ../../xffm/find/fgr.hh:210 ../../xffm/find/dialog.hh:545
 msgid "No match"
 msgstr "No hi ha cap coincidència"
 
-#: ../../xffm/find/fgr.hh:212 ../../xffm/find/dialog.hh:470
+#: ../../xffm/find/fgr.hh:212 ../../xffm/find/dialog.hh:463
 msgid "Line Count"
 msgstr "Comptador de línies"
 
@@ -499,109 +505,108 @@ msgstr "Línies"
 msgid "Usage : %s [OPTIONS]\n"
 msgstr "Forma d'ús: %s [OPCIÓ...] %s\n"
 
-#: ../../xffm/find/signals.hh:10
+#: ../../xffm/find/signals.hh:7
 msgid "Regular"
 msgstr "Regular"
 
-#: ../../xffm/find/signals.hh:13 ../../xffm/common/preview.hh:500
+#: ../../xffm/find/signals.hh:10 ../../xffm/common/preview.hh:481
 msgid "Socket"
 msgstr "Sòcol"
 
-#: ../../xffm/find/signals.hh:209
-msgid "Select folder to search in"
-msgstr "Seleccioneu la carpeta on cercar"
-
-#. button no
-#: ../../xffm/find/signals.hh:265 ../../xffm/find/dialog.hh:584
-#: ../../xffm/response/entryfileresponse.hh:18
-#: ../../xffm/response/entryresponse.hh:305
-#: ../../xffm/response/passwdresponse.hh:558
-#: ../../xffm/fm/local/properties.hh:304 ../../xffm/fm/local/rm.hh:155
-msgid "Cancel"
-msgstr "Cancel·la"
-
-#: ../../xffm/find/signals.hh:293 ../../xffm/find/signals.hh:722
-msgid "No editor for current action."
-msgstr "Sense editor per a l'acció actual."
-
-#. / option "upper_limit_spin" (only in gtk dialog_)
-#: ../../xffm/find/signals.hh:351 ../../xffm/find/dialog.hh:183
+#. if (g_slist_length(list) == 0) return NULL;
+#. Create liststore for DnD
+#. / option "upper_limit_spin" (only in gtk findDialog)
+#: ../../xffm/find/signals.hh:66 ../../xffm/find/signals.hh:454
+#: ../../xffm/find/dialog.hh:176
 msgid "Results"
 msgstr "Resultats"
 
-#: ../../xffm/find/signals.hh:351
+#. button no
+#: ../../xffm/find/signals.hh:368 ../../xffm/find/dialog.hh:577
+#: ../../xffm/response/chooserresponse.hh:21
+#: ../../xffm/response/entryresponse.hh:420
+#: ../../xffm/fm/view/local/properties.hh:314
+#: ../../xffm/fm/view/local/rm.hh:157 ../../xffm/common/gtk.hh:409
+msgid "Cancel"
+msgstr "Cancel·la"
+
+#: ../../xffm/find/signals.hh:396 ../../xffm/find/signals.hh:830
+msgid "No editor for current action."
+msgstr "Sense editor per a l'acció actual."
+
+#: ../../xffm/find/signals.hh:454
 msgid "Upper limit:"
 msgstr "Límit superior:"
 
-#: ../../xffm/find/signals.hh:353
+#: ../../xffm/find/signals.hh:456
 msgid "Counting files..."
 msgstr "S'estan comptant els fitxers..."
 
-#: ../../xffm/find/signals.hh:368
+#: ../../xffm/find/signals.hh:471
 #, fuzzy, c-format
 msgid "Found %d match"
 msgid_plural "Found %d matches"
 msgstr[0] "S'ha trobat un error"
 msgstr[1] "S'hi ha trobat %d errors"
 
-#: ../../xffm/find/signals.hh:370
+#: ../../xffm/find/signals.hh:473
 #, fuzzy, c-format
 msgid "%s Finished : %s"
 msgstr "Finalitzat: %s, %s"
 
-#: ../../xffm/find/signals.hh:488 ../../xffm/find/signals.hh:490
+#: ../../xffm/find/signals.hh:596 ../../xffm/find/signals.hh:598
 msgid "Searching..."
 msgstr "S'està cercant..."
 
-#. g_object_set_data(G_OBJECT(dialog_), "window", dialog_);
-#: ../../xffm/find/dialog.hh:98 ../../xffm/find/dialog.hh:150
-#: ../../xffm/find/dialog.hh:611
+#. g_object_set_data(G_OBJECT(findDialog), "window", findDialog);
+#: ../../xffm/find/dialog.hh:91 ../../xffm/find/dialog.hh:143
+#: ../../xffm/find/dialog.hh:604
 msgid "Find"
 msgstr "Cerca"
 
-#: ../../xffm/find/dialog.hh:183
+#: ../../xffm/find/dialog.hh:176
 msgid "Upper limit"
 msgstr "Límit superior"
 
 #. option -s +KByte "size_greater", "size_greater_spin"
-#: ../../xffm/find/dialog.hh:188
+#: ../../xffm/find/dialog.hh:181
 msgid "At Least"
 msgstr "Almenys"
 
-#: ../../xffm/find/dialog.hh:188 ../../xffm/find/dialog.hh:193
+#: ../../xffm/find/dialog.hh:181 ../../xffm/find/dialog.hh:186
 #, fuzzy
 msgid "kBytes"
 msgstr "Octets"
 
 #. option -s -KByte "size_smaller", "size_smaller_spin"
-#: ../../xffm/find/dialog.hh:193
+#: ../../xffm/find/dialog.hh:186
 msgid "At Most"
 msgstr "Com a màxim"
 
-#: ../../xffm/find/dialog.hh:204
+#: ../../xffm/find/dialog.hh:197
 msgid "Group"
 msgstr "Grup"
 
 #. option -o octal "octal_p" "permissions_entry"
-#: ../../xffm/find/dialog.hh:208
+#: ../../xffm/find/dialog.hh:201
 msgid "Octal Permissions"
 msgstr "Permisos en octal"
 
 #. option -p suid | exe
-#: ../../xffm/find/dialog.hh:213
+#: ../../xffm/find/dialog.hh:206
 msgid "SUID"
 msgstr "SUID"
 
-#: ../../xffm/find/dialog.hh:213 ../../xffm/fm/local/popup.hh:843
+#: ../../xffm/find/dialog.hh:206 ../../xffm/fm/view/local/popup.hh:1102
 msgid "Executable"
 msgstr "Executable"
 
 #. option -m months "last_months", "last_months_spin"
-#: ../../xffm/find/dialog.hh:237
+#: ../../xffm/find/dialog.hh:230
 msgid "Months"
 msgstr "Mesos"
 
-#: ../../xffm/find/dialog.hh:248
+#: ../../xffm/find/dialog.hh:241
 #, fuzzy
 msgid "File type : "
 msgstr "Tipus de fitxer:"
@@ -609,80 +614,80 @@ msgstr "Tipus de fitxer:"
 #. gtk_widget_show (GTK_WIDGET(right_options_vbox));
 #. gtk_widget_show (GTK_WIDGET(center_options_vbox));
 #. gtk_widget_show (GTK_WIDGET(left_options_vbox));
-#: ../../xffm/find/dialog.hh:262 ../../xffm/find/dialog.hh:602
-#: ../../xffm/fm/page/page.hh:70 ../../xffm/common/gtk.hh:70
+#: ../../xffm/find/dialog.hh:255 ../../xffm/find/dialog.hh:595
+#: ../../xffm/fm/dialog/notebook/page/page.hh:70 ../../xffm/common/gtk.hh:79
 msgid "Close"
 msgstr "Tanca"
 
 #. gtk_box_pack_start (vbox7a, GTK_WIDGET(advancedBox), TRUE, FALSE, 5);
 #. gtk_widget_show(GTK_WIDGET(advancedBox));
 #. //////////////  grep options.... /////////////////////////
-#: ../../xffm/find/dialog.hh:384
+#: ../../xffm/find/dialog.hh:377
 msgid "Contains"
 msgstr "Conté"
 
-#: ../../xffm/find/dialog.hh:404
+#: ../../xffm/find/dialog.hh:397
 msgid "Contains the text"
 msgstr "Conté el text"
 
-#: ../../xffm/find/dialog.hh:437
+#: ../../xffm/find/dialog.hh:430
 msgid "Case Sensitive"
 msgstr "Coincidència de majúscules i minúscules"
 
-#: ../../xffm/find/dialog.hh:449
+#: ../../xffm/find/dialog.hh:442
 #, fuzzy
 msgid "Extended regexp"
 msgstr "Eliminació ampliada"
 
-#: ../../xffm/find/dialog.hh:460
+#: ../../xffm/find/dialog.hh:453
 msgid "Include binary files"
 msgstr "Inclou els fitxers binaris"
 
-#: ../../xffm/find/dialog.hh:496
+#: ../../xffm/find/dialog.hh:489
 msgid "Match"
 msgstr "Coincidència"
 
-#: ../../xffm/find/dialog.hh:508
+#: ../../xffm/find/dialog.hh:501
 msgid "Anywhere"
 msgstr "On siga"
 
-#: ../../xffm/find/dialog.hh:523
+#: ../../xffm/find/dialog.hh:516
 msgid "Whole words only"
 msgstr "Només paraules senceres"
 
-#: ../../xffm/find/dialog.hh:538
+#: ../../xffm/find/dialog.hh:531
 msgid "lines"
 msgstr "línies"
 
-#: ../../xffm/find/dialog.hh:594
+#: ../../xffm/find/dialog.hh:587
 msgid "Clear"
 msgstr "Buida"
 
-#: ../../xffm/find/dialog.hh:636
+#: ../../xffm/find/dialog.hh:629
 msgid "Edit"
 msgstr "Edita"
 
-#: ../../xffm/find/dialog.hh:751 ../../xffm/find/dialog.hh:766
-#: ../../xffm/common/util.hh:1150 ../../xffm/common/util.hh:1152
-#: ../../xffm/common/util.hh:1158 ../../xffm/common/util.hh:1160
-#: ../../xffm/common/preview.hh:479
+#: ../../xffm/find/dialog.hh:743 ../../xffm/find/dialog.hh:758
+#: ../../xffm/common/util.hh:1354 ../../xffm/common/util.hh:1356
+#: ../../xffm/common/util.hh:1362 ../../xffm/common/util.hh:1364
+#: ../../xffm/common/preview.hh:460
 msgid "unknown"
 msgstr "desconegut"
 
-#: ../../xffm/find/dialog.hh:780
+#: ../../xffm/find/dialog.hh:772
 msgid "Modified"
 msgstr "Modificat"
 
-#: ../../xffm/find/dialog.hh:784
+#: ../../xffm/find/dialog.hh:776
 msgid "Created"
 msgstr "Creat"
 
-#: ../../xffm/find/dialog.hh:788
+#: ../../xffm/find/dialog.hh:780
 #, fuzzy
 msgid "Accessed"
 msgstr "Accedit:"
 
-#: ../../xffm/find/dialog.hh:1106
+#: ../../xffm/find/dialog.hh:1098
 msgid ""
 "Basic rules:\n"
 "\n"
@@ -693,7 +698,7 @@ msgid ""
 "$  Match at end of string \n"
 msgstr ""
 
-#: ../../xffm/find/dialog.hh:1115
+#: ../../xffm/find/dialog.hh:1107
 msgid ""
 "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ ( ) : \n"
 "In  basic regular expressions the metacharacters ?, +, {, |, (, and ) \n"
@@ -728,359 +733,487 @@ msgid ""
 "More information is available by typing \"man grep\"\n"
 msgstr ""
 
-#: ../../xffm/response/entryfileresponse.hh:20
+#: ../../xffm/response/chooserresponse.hh:23
 msgid "Open"
 msgstr "Obri"
 
-#: ../../xffm/response/entryresponse.hh:29
-#: ../../xffm/response/entryfolderresponse.hh:28
+#: ../../xffm/response/chooserresponse.hh:56
 msgid "Choose directory"
 msgstr "Trieu un directori"
 
+#: ../../xffm/response/chooserresponse.hh:60
+msgid "Choose file"
+msgstr "Trieu un fitxer"
+
+#: ../../xffm/response/customresponse.hh:55
+msgid "Execute command"
+msgstr "Executa l'orde"
+
+#. XXX folder or file entry should be determined on .ini file (probably just inherit from comboresponse for multiple files options (selected files)...
+#: ../../xffm/response/customresponse.hh:103
+msgid "Source File"
+msgstr "Font del fitxer"
+
 #. this button is redundant since hands are on keyboard for password
-#: ../../xffm/response/entryresponse.hh:309
-#: ../../xffm/response/passwdresponse.hh:189
-#: ../../xffm/response/passwdresponse.hh:559
+#: ../../xffm/response/entryresponse.hh:424
+#: ../../xffm/response/passwdresponse.hh:242
 msgid "Ok"
 msgstr "D'acord"
 
-#: ../../xffm/response/commandprogressresponse.hh:32
+#: ../../xffm/response/commandprogressresponse.hh:31
 msgid "Items:"
 msgstr "Elements:"
 
-#: ../../xffm/response/passwdresponse.hh:21
+#: ../../xffm/response/passwdresponse.hh:19
+#: ../../xffm/response/passwdresponse.hh:25 ../../xffm/common/run.hh:464
 msgid "Enter password"
 msgstr "Introduïu la contrasenya"
 
 #. gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
-#: ../../xffm/response/passwdresponse.hh:125
+#: ../../xffm/response/passwdresponse.hh:179
 #, fuzzy
 msgid "User Input"
 msgstr "Entrada de ratolí"
 
-#: ../../xffm/response/passwdresponse.hh:142
+#: ../../xffm/response/passwdresponse.hh:195
 msgid "Response Requested"
 msgstr "Es demana una resposta"
 
-#: ../../xffm/response/passwdresponse.hh:264
-msgid "Preparing"
-msgstr "S'està preparant"
-
-#: ../../xffm/response/passwdresponse.hh:352
-msgid "sudo"
-msgstr "sudo"
-
-#: ../../xffm/response/passwdresponse.hh:354
-msgid "Command:"
-msgstr "Orde:"
-
-#: ../../xffm/response/passwdresponse.hh:357
-msgid "Permission denied"
-msgstr "S'ha denegat el permís"
-
-#: ../../xffm/response/passwdresponse.hh:358
-msgid "Try to approach a problem from different angles."
-msgstr "Proveu d'aproximar-vos al problema des de diferents angles."
-
-#: ../../xffm/response/passwdresponse.hh:359
-msgid "Do you want to retry?"
-msgstr "Voleu reintentar-ho?"
-
-#: ../../xffm/response/passwdresponse.hh:360
-msgid "Alternate:"
-msgstr "Alternatiu:"
-
-#: ../../xffm/response/passwdresponse.hh:365
-msgid "No"
-msgstr "No"
-
-#: ../../xffm/response/passwdresponse.hh:401
-msgid "Install"
-msgstr "Instal·la"
-
-#: ../../xffm/response/passwdresponse.hh:402
-#, c-format
-msgid "%s does not exist."
-msgstr "%s no existeix."
-
-#: ../../xffm/response/passwdresponse.hh:467
-msgid "Blowfish"
-msgstr "Blowfish"
-
-#: ../../xffm/response/passwdresponse.hh:468
-msgid "Encryption Key Approval"
-msgstr "Aprovació de la clau d'encriptatge"
-
-#: ../../xffm/response/passwdresponse.hh:502
-msgid "-o     print output to standard out. Implies -r."
-msgstr ""
-
-#: ../../xffm/response/passwdresponse.hh:506
-msgid "-c     DO NOT compress files before encryption."
-msgstr ""
-
-#: ../../xffm/response/passwdresponse.hh:510
-msgid "-r     DO NOT remove input files after processing"
-msgstr ""
-
-#: ../../xffm/response/passwdresponse.hh:517
-#, fuzzy
-msgid "Encryption key: "
-msgstr "Clau d'encriptatge:"
-
-#: ../../xffm/response/passwdresponse.hh:529
-msgid "Confirm:"
-msgstr "Confirmeu:"
-
-#: ../../xffm/response/passwdresponse.hh:542
-msgid "Sorry, passwords do not match"
-msgstr "Les contrasenyes no coincideixen"
-
-#: ../../xffm/response/passwdresponse.hh:550
-msgid "Minimum length:"
-msgstr "Longitud mínima:"
-
-#: ../../xffm/response/timeoutresponse.hh:56
+#: ../../xffm/response/timeoutresponse.hh:57
 msgid "Dismiss"
 msgstr "Descarta"
 
-#: ../../xffm/response/commandresponse.hh:23
+#: ../../xffm/response/commandresponse.hh:19
 msgid "Running"
 msgstr "En funcionament"
 
 #. auto text = g_strdup_printf("%s (pid: %d)",
 #. _("Waiting for operation to finish..."),
 #. Tubo<Type>::getChild (pid));
-#: ../../xffm/response/commandresponse.hh:28
+#: ../../xffm/response/commandresponse.hh:24
 msgid "Waiting for operation to finish..."
 msgstr "S'està esperant que l'execució s'acabi..."
 
-#: ../../xffm/fm/local/icons.hh:257
-msgid "Documents"
-msgstr "Documents"
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:11
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:214
+#, fuzzy
+msgid "Remove Button Contents"
+msgstr "Elimina el botó"
 
-#: ../../xffm/fm/local/icons.hh:257
-msgid "Downloads"
-msgstr "Baixades"
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:67
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:209
+#, fuzzy
+msgid "Add custom content"
+msgstr "Afig contingut personalitzat al botó"
 
-#: ../../xffm/fm/local/icons.hh:257
-msgid "Music"
-msgstr "Música"
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:68
+#, fuzzy
+msgid "Select file to load"
+msgstr "Seleccioneu un fitxer a carregar"
 
-#: ../../xffm/fm/local/icons.hh:257
-msgid "Pictures"
-msgstr "Imatges"
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:125
+#, fuzzy, c-format
+msgid "Cannot load file %s. Reason: %s"
+msgstr "No es pot expandir el fitxer %s: %s"
 
-#: ../../xffm/fm/local/icons.hh:258
-msgid "Templates"
-msgstr "Plantilles"
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:154
+msgid "You need to restart the application"
+msgstr "Cal que reinicieu l'aplicació"
 
-#: ../../xffm/fm/local/icons.hh:258
-msgid "Videos"
-msgstr "Vídeos"
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:187
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:191
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:195
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:198
+#: ../../xffm/fm/view/pkg/model.hh:29 ../../xffm/fm/view/pkg/popup.hh:35
+msgid "Software Updater"
+msgstr "Actualitzador de programari"
 
-#: ../../xffm/fm/local/icons.hh:258
-msgid "Desktop"
-msgstr "Escriptori"
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:236
+#: ../../xffm/fm/view/pkg/model.hh:108 ../../xffm/fm/view/pkg/model.hh:299
+#: ../../xffm/fm/view/pkg/model.hh:306 ../../xffm/fm/view/pkg/popup.hh:151
+#: ../../xffm/common/gtk.hh:77
+msgid "Search"
+msgstr "Cerca"
 
-#: ../../xffm/fm/local/icons.hh:258
-msgid "Bookmarks"
-msgstr "Adreces d'interés"
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:240 ../../xffm/common/gtk.hh:67
+#, fuzzy
+msgid "Open terminal"
+msgstr "Obri un terminal"
 
-#: ../../xffm/fm/local/icons.hh:259 ../../xffm/fm/local/rm.hh:181
-msgid "Trash"
-msgstr "Llença-la a la paperera"
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:244
+msgid "Open a New Window"
+msgstr "Obri una finestra nova"
 
-#: ../../xffm/fm/local/popup.hh:60
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:250
+#, fuzzy
+msgid "Differences"
+msgstr "Diferència"
+
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:256
+#: ../../xffm/fm/view/root/model.hh:110
+msgid "Home Directory"
+msgstr "Directori inicial"
+
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:261
+#: ../../xffm/fm/view/root/model.hh:168 ../../xffm/fm/view/fstab/popup.hh:29
+msgid "Disk Image Mounter"
+msgstr "Muntador d'imatges de disc"
+
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:266
+#: ../../xffm/fm/view/root/model.hh:137
+msgid "Trash bin"
+msgstr "Paperera"
+
+#: ../../xffm/fm/dialog/notebook/notebook.hh:56
+msgid "Long press time"
+msgstr "Temps de pressió llarg"
+
+#: ../../xffm/fm/dialog/notebook/notebook.hh:75 ../../xffm/common/gtk.hh:139
+msgid "New Tab"
+msgstr "Pestanya nova"
+
+#: ../../xffm/fm/dialog/notebook/menupopover.hh:178
+#, fuzzy
+msgid "Open menu"
+msgstr "Obri menú"
+
+#: ../../xffm/fm/dialog/notebook/menupopover.hh:230
+msgid "View as list"
+msgstr "Visualitza com a llista"
+
+#: ../../xffm/fm/dialog/notebook/menupopover.hh:231
+msgid "Show hidden files"
+msgstr "Mostra els fitxers ocults"
+
+#: ../../xffm/fm/dialog/notebook/menupopover.hh:232
+#, fuzzy
+msgid "Show Backup Files"
+msgstr "La còpia de seguretat ha fallat"
+
+#: ../../xffm/fm/dialog/notebook/menupopover.hh:233
+msgid "Sort data in descending order"
+msgstr "Ordena les dades en orde descendent"
+
+#: ../../xffm/fm/dialog/notebook/menupopover.hh:235
+msgid "Sort by date"
+msgstr "Ordena per data"
+
+#: ../../xffm/fm/dialog/notebook/menupopover.hh:236
+msgid "Sort by size"
+msgstr "Ordena per mida"
+
+#: ../../xffm/fm/dialog/notebook/menupopover.hh:237 ../../xffm/common/gtk.hh:81
+msgid "Exit"
+msgstr "Surt"
+
+#: ../../xffm/fm/dialog/notebook/menupopover.hh:270
+msgid "Main menu"
+msgstr "Menú principal"
+
+#. File chooser
+#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:375
+#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:377
+msgid "Go to"
+msgstr "Vés a"
+
+#. entryResponse->setCheckButton(_("Run in Terminal"));
+#. entryResponse->setCheckButton(Run<Type>::runInTerminal(path));
+#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:382
+#: ../../xffm/fm/view/local/popup.hh:887 ../../xffm/fm/view/local/popup.hh:981
+msgid "Specify Output Directory..."
+msgstr "Especifica el directori d'eixida..."
+
+#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:409
+msgid "Not a directory"
+msgstr "No és un directori"
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid "Renice Process"
+msgstr "Canvi de prioritat de procés"
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid "Suspend"
+msgstr "Atura temporalment"
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid "Continue"
+msgstr "Continua"
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid "Interrupt"
+msgstr "Interromp"
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid "Hangup"
+msgstr "Termina"
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid "User 1 (USR1)"
+msgstr "Usuari 1 (USR1)"
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:137
+msgid "User 2 (USR2)"
+msgstr "Usuari 2 (USR2)"
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:137
+msgid "Terminate Task"
+msgstr "Finalitza tasca"
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:137
+msgid "Abort"
+msgstr "Interromp"
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:138
+msgid "Kill"
+msgstr "Mata"
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:139
+#, fuzzy
+msgid "Segmentation fault"
+msgstr "Violació de segment"
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:216
+msgid "PID"
+msgstr "PID"
+
+#: ../../xffm/fm/dialog/notebook/page/page.hh:58
+msgid "loading..."
+msgstr "s'està carregant..."
+
+#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
+msgid "Embedded Terminal"
+msgstr "Terminal incrustat"
+
+#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
+msgid "All items in the iconview."
+msgstr "Tots els elements de la vista d'icones."
+
+#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
+msgid "Scripting"
+msgstr "Fitxers de seqüència"
+
+#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
+msgid "Clear Log"
+msgstr "Neteja el registre"
+
+#. Status textview
+#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
+msgid "Terminal font"
+msgstr "Tipus de lletra de terminal"
+
+#: ../../xffm/fm/dialog/clipboard.hh:23 ../../xffm/common/dnd.hh:41
+msgid "Copying files locally"
+msgstr "S'estan copiant fitxers en local"
+
+#: ../../xffm/fm/dialog/clipboard.hh:30 ../../xffm/common/gio.hh:83
+#: ../../xffm/common/dnd.hh:35
+msgid "Moving files"
+msgstr "Quan es mouen fitxer"
+
+#: ../../xffm/fm/dialog/dialog.hh:122
+msgid "Removed"
+msgstr "Suprimit"
+
+#: ../../xffm/fm/dialog/dialog.hh:143
+#, fuzzy
+msgid "Detected device(s):"
+msgstr "Dispositius detectats"
+
+#: ../../xffm/fm/view/local/model.hh:122
+#, c-format
+msgid "Reading \"%s\""
+msgstr "S'està llegint «%s»"
+
+#: ../../xffm/fm/view/local/model.hh:575 ../../xffm/fm/view/base/monitor.hh:33
+#, c-format
+msgid "Files: %s"
+msgstr "Fitxers:%s"
+
+#: ../../xffm/fm/view/local/model.hh:578
+#, fuzzy, c-format
+msgid "Loaded %d of %d articles"
+msgstr "%d d'%d fitxer "
+
+#: ../../xffm/fm/view/local/popup.hh:85 ../../xffm/fm/view/local/popup.hh:142
+#: ../../xffm/fm/view/local/popup.hh:1287
+#: ../../xffm/fm/view/local/popup.hh:1294
+#: ../../xffm/fm/view/local/popup.hh:1305
+#: ../../xffm/fm/view/local/popup.hh:1312 ../../xffm/common/gtk.hh:83
+msgid "Open with"
+msgstr "Obri amb"
+
+#: ../../xffm/fm/view/local/popup.hh:94
 msgid "New"
 msgstr "Nou"
+
+#: ../../xffm/fm/view/local/popup.hh:95 ../../xffm/fm/view/local/popup.hh:145
+#: ../../xffm/fm/view/root/popup.hh:136 ../../xffm/fm/view/fstab/popup.hh:20
+#: ../../xffm/common/gtk.hh:94
+msgid "Open in New Tab"
+msgstr "Obre en una nova pestanya"
 
 #. deprecated {N_("Open in New Tab"), NULL, NULL, NULL},
 #. deprecated {N_("Open in New Window"), NULL, NULL, NULL},
 #. common buttons /(also an iconsize +/- button)
-#: ../../xffm/fm/local/popup.hh:64 ../../xffm/fm/local/popup.hh:104
-#: ../../xffm/common/gtk.hh:74
+#: ../../xffm/fm/view/local/popup.hh:99 ../../xffm/fm/view/local/popup.hh:155
+#: ../../xffm/common/gtk.hh:87
 msgid "Copy"
 msgstr "Copia"
 
-#: ../../xffm/fm/local/popup.hh:65 ../../xffm/fm/local/popup.hh:105
-#: ../../xffm/common/gtk.hh:73
+#: ../../xffm/fm/view/local/popup.hh:100 ../../xffm/fm/view/local/popup.hh:156
+#: ../../xffm/common/gtk.hh:85
 msgid "Cut"
 msgstr "Retalla"
 
-#: ../../xffm/fm/local/popup.hh:66 ../../xffm/fm/local/popup.hh:106
-#: ../../xffm/common/gtk.hh:66
-msgid "Paste"
-msgstr "Apega"
+#: ../../xffm/fm/view/local/popup.hh:101 ../../xffm/fm/view/local/popup.hh:159
+#: ../../xffm/fm/view/local/popup.hh:232 ../../xffm/fm/view/local/popup.hh:234
+#, fuzzy
+msgid "Paste into"
+msgstr "Apega a"
+
+#: ../../xffm/fm/view/local/popup.hh:102 ../../xffm/fm/view/local/popup.hh:158
+msgid "There is nothing on the clipboard to paste."
+msgstr "No hi ha res al porta-retalls per enganxar."
 
 #. **************
-#: ../../xffm/fm/local/popup.hh:67 ../../xffm/fm/local/popup.hh:107
-#: ../../xffm/fm/local/rm.hh:174 ../../xffm/common/gtk.hh:75
+#: ../../xffm/fm/view/local/popup.hh:103 ../../xffm/fm/view/local/popup.hh:160
+#: ../../xffm/fm/view/local/rm.hh:176 ../../xffm/common/gtk.hh:89
 msgid "Delete"
 msgstr "Suprimeix"
 
 #. {N_("About"), NULL, (void *) menu},
 #.
-#. only for listview: {N_("Sort by size"), NULL, (void *) menu},
-#. only for listview: {N_("Sort by date"), NULL, (void *) menu},
-#: ../../xffm/fm/local/popup.hh:73
+#: ../../xffm/fm/view/local/popup.hh:106
 msgid "Select All"
 msgstr "Selecciona-ho tot"
 
-#: ../../xffm/fm/local/popup.hh:74 ../../xffm/fm/local/popup.hh:559
+#: ../../xffm/fm/view/local/popup.hh:107 ../../xffm/fm/view/local/popup.hh:755
 #, fuzzy
 msgid "Match regular expression"
 msgstr "Només coincideix una expressió regular"
 
-#: ../../xffm/fm/local/popup.hh:75 ../../xffm/fm/root/view.hh:58
-#: ../../xffm/fm/fstab/popup.hh:21
-msgid "View as list"
-msgstr "Visualitza com a llista"
-
-#: ../../xffm/fm/local/popup.hh:77
-msgid "Show hidden files"
-msgstr "Mostra els fitxers ocults"
-
-#: ../../xffm/fm/local/popup.hh:79
-#, fuzzy
-msgid "Show Backup Files"
-msgstr "La còpia de seguretat ha fallat"
-
-#: ../../xffm/fm/local/popup.hh:81
-msgid "Sort data in descending order"
-msgstr "Ordena les dades en orde descendent"
-
-#: ../../xffm/fm/local/popup.hh:93 ../../xffm/fm/local/popup.hh:119
-#: ../../xffm/fm/local/popup.hh:1006 ../../xffm/fm/local/popup.hh:1013
-#: ../../xffm/fm/local/popup.hh:1022 ../../xffm/fm/local/popup.hh:1029
-#: ../../xffm/common/gtk.hh:72
-msgid "Open with"
-msgstr "Obri amb"
-
-#: ../../xffm/fm/local/popup.hh:94 ../../xffm/fm/local/popup.hh:846
+#: ../../xffm/fm/view/local/popup.hh:143 ../../xffm/fm/view/local/popup.hh:1105
 #, fuzzy
 msgid "Run Executable..."
 msgstr "Carrega un executable..."
 
-#: ../../xffm/fm/local/popup.hh:95
+#. File chooser
+#: ../../xffm/fm/view/local/popup.hh:144 ../../xffm/fm/view/local/popup.hh:875
 msgid "Extract files from the archive"
 msgstr "Extrau fitxers de l'arxiu"
 
-#. g_hash_table_insert(iconname_hash, "bcrypt", (void *)"emblem-keyhole");
-#: ../../xffm/fm/local/popup.hh:96 ../../xffm/fm/root/view.hh:73
-#: ../../xffm/fm/fstab/popup.hh:20 ../../xffm/fm/dialog/notebook.hh:52
-#: ../../xffm/common/gtk.hh:78
-msgid "Open in New Tab"
-msgstr "Obre en una nova pestanya"
-
 #. File chooser
-#: ../../xffm/fm/local/popup.hh:97 ../../xffm/fm/local/popup.hh:706
+#: ../../xffm/fm/view/local/popup.hh:146 ../../xffm/fm/view/local/popup.hh:966
 msgid "Create a compressed archive with the selected objects"
 msgstr "Crea un arxiu comprimit amb els objectes seleccionats"
 
-#: ../../xffm/fm/local/popup.hh:98 ../../xffm/fm/fstab/popup.hh:37
+#: ../../xffm/fm/view/local/popup.hh:148 ../../xffm/fm/view/fstab/popup.hh:37
 msgid "Mount the volume associated with this folder"
 msgstr "Munta el volum associat a esta carpeta"
 
-#: ../../xffm/fm/local/popup.hh:99 ../../xffm/fm/fstab/popup.hh:38
+#: ../../xffm/fm/view/local/popup.hh:149 ../../xffm/fm/view/fstab/popup.hh:38
 msgid "Unmount the volume associated with this folder"
 msgstr "Desmunta el volum associat a esta carpeta"
 
-#: ../../xffm/fm/local/popup.hh:100 ../../xffm/common/gtk.hh:67
+#: ../../xffm/fm/view/local/popup.hh:151 ../../xffm/common/gtk.hh:73
 msgid "Add bookmark"
 msgstr "Afig una adreça d'interés"
 
-#: ../../xffm/fm/local/popup.hh:101 ../../xffm/fm/root/view.hh:74
-#: ../../xffm/common/gtk.hh:68
+#: ../../xffm/fm/view/local/popup.hh:152 ../../xffm/fm/view/root/popup.hh:137
+#: ../../xffm/common/gtk.hh:75
 msgid "Remove bookmark"
 msgstr "Suprimeix l'adreça d'interés"
 
-#: ../../xffm/fm/local/popup.hh:108 ../../xffm/fm/local/popup.hh:961
+#: ../../xffm/fm/view/local/popup.hh:157 ../../xffm/common/gtk.hh:71
+msgid "Paste"
+msgstr "Apega"
+
+#: ../../xffm/fm/view/local/popup.hh:161 ../../xffm/fm/view/local/popup.hh:1231
 msgid "Rename"
 msgstr "Canvia el nom"
 
-#: ../../xffm/fm/local/popup.hh:109 ../../xffm/fm/local/popup.hh:947
+#: ../../xffm/fm/view/local/popup.hh:162 ../../xffm/fm/view/local/popup.hh:1217
 msgid "Duplicate"
 msgstr "Duplica"
 
-#: ../../xffm/fm/local/popup.hh:110 ../../xffm/fm/local/popup.hh:933
+#: ../../xffm/fm/view/local/popup.hh:163 ../../xffm/fm/view/local/popup.hh:1203
 msgid "Link"
 msgstr "Enllaç"
 
-#: ../../xffm/fm/local/popup.hh:111
+#: ../../xffm/fm/view/local/popup.hh:164
 msgid "Properties"
 msgstr "Propietats"
 
-#: ../../xffm/fm/local/popup.hh:414
+#: ../../xffm/fm/view/local/popup.hh:562
 msgid "Files:"
 msgstr "Fitxers:"
 
-#: ../../xffm/fm/local/popup.hh:417 ../../xffm/fm/local/rm.hh:61
+#: ../../xffm/fm/view/local/popup.hh:565 ../../xffm/fm/view/local/rm.hh:61
 msgid "Multiple selections"
 msgstr "Seleccions múltiples"
 
-#: ../../xffm/fm/local/popup.hh:557
+#: ../../xffm/fm/view/local/popup.hh:753
 msgid "Select items"
 msgstr "Selecciona"
 
-#: ../../xffm/fm/local/popup.hh:575
+#: ../../xffm/fm/view/local/popup.hh:771
 msgid "Regular Expression syntax is incorrect"
 msgstr "La sintaxi de l'expressió regular no és correcta"
 
-#: ../../xffm/fm/local/popup.hh:592
+#: ../../xffm/fm/view/local/popup.hh:801
 msgid "No selection"
 msgstr "Cap selecció"
 
-#: ../../xffm/fm/local/popup.hh:592
+#: ../../xffm/fm/view/local/popup.hh:801
 msgid "No matches."
 msgstr "No s'ha trobat cap coincidència."
 
-#. entryResponse->setCheckButton(_("Run in Terminal"));
-#. entryResponse->setCheckButton(Mime<Type>::runInTerminal(path));
-#: ../../xffm/fm/local/popup.hh:721 ../../xffm/fm/page/pathbar.hh:313
-msgid "Specify Output Directory..."
-msgstr "Especifica el directori d'eixida..."
-
-#: ../../xffm/fm/local/popup.hh:799
+#: ../../xffm/fm/view/local/popup.hh:1058
 msgid "Create new..."
 msgstr "Crea nou..."
 
-#: ../../xffm/fm/local/popup.hh:806 ../../xffm/fm/local/popup.hh:886
+#: ../../xffm/fm/view/local/popup.hh:1065
+#: ../../xffm/fm/view/local/popup.hh:1146
 msgid "New Name:"
 msgstr "Nom nou:"
 
-#: ../../xffm/fm/local/popup.hh:815
+#: ../../xffm/fm/view/local/popup.hh:1074
 msgid "No name"
 msgstr "Sense nom"
 
-#: ../../xffm/fm/local/popup.hh:828
+#: ../../xffm/fm/view/local/popup.hh:1087
 #, c-format
 msgid "Another file with the same name already exists in “%s”."
 msgstr "Ja existeix un altre fitxer amb el mateix nom a «%s»."
 
-#: ../../xffm/fm/local/popup.hh:850 ../../xffm/fm/local/popup.hh:1010
-#: ../../xffm/fm/local/popup.hh:1026 ../../xffm/common/util.hh:1248
+#: ../../xffm/fm/view/local/popup.hh:1109
+#: ../../xffm/fm/view/local/popup.hh:1291
+#: ../../xffm/fm/view/local/popup.hh:1309 ../../xffm/common/util.hh:1452
 msgid "Run in Terminal"
 msgstr "Executa en un terminal"
 
-#: ../../xffm/fm/local/popup.hh:853
+#: ../../xffm/fm/view/local/popup.hh:1112
 msgid "Arguments for the Command"
 msgstr "Arguments de l'orde"
 
-#: ../../xffm/fm/local/popup.hh:1047 ../../xffm/fm/local/view.hh:141
+#: ../../xffm/fm/view/local/popup.hh:1258
+msgid "You have selected multiple files or folders"
+msgstr "Heu seleccionat diversos fitxers o carpetes"
+
+#: ../../xffm/fm/view/local/popup.hh:1332 ../../xffm/fm/view/local/view.hh:156
 msgid "Invalid entry"
 msgstr "Entrada no vàlida"
 
-#: ../../xffm/fm/local/properties.hh:235
+#: ../../xffm/fm/view/local/properties.hh:245
 msgid "Properties and Attributes"
 msgstr "Propietats i atributs"
 
-#: ../../xffm/fm/local/properties.hh:264
+#: ../../xffm/fm/view/local/properties.hh:274
 #, fuzzy
 msgid "File Mode:"
 msgstr "Mode de vista:"
 
-#: ../../xffm/fm/local/properties.hh:290
+#: ../../xffm/fm/view/local/properties.hh:300
 msgid "File:"
 msgstr "Fitxer:"
 
@@ -1089,334 +1222,270 @@ msgstr "Fitxer:"
 #. add signal handler to changed signal for combo box
 #. Add process buttons
 #.
-#: ../../xffm/fm/local/properties.hh:302
+#: ../../xffm/fm/view/local/properties.hh:312
 msgid "Apply changes"
 msgstr "Aplica els canvis"
 
-#: ../../xffm/fm/local/properties.hh:462
+#: ../../xffm/fm/view/local/properties.hh:477
 msgid "Successfully moved to trash."
 msgstr "S'ha mogut a la paperera correctament."
 
-#: ../../xffm/fm/local/properties.hh:463
+#: ../../xffm/fm/view/local/properties.hh:478
 msgid "Source:"
 msgstr "Font:"
 
-#: ../../xffm/fm/local/rm.hh:59
+#: ../../xffm/fm/view/local/rm.hh:59
 #, c-format
 msgid "Delete %s"
 msgstr "Suprimeix %s"
 
-#: ../../xffm/fm/local/rm.hh:61
+#: ../../xffm/fm/view/local/rm.hh:61
 msgid "Warning: "
 msgstr "Avís: "
 
 #. gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
 #. title
-#: ../../xffm/fm/local/rm.hh:90
+#: ../../xffm/fm/view/local/rm.hh:92
 msgid "Remove"
 msgstr "Suprimeix"
 
-#: ../../xffm/fm/local/rm.hh:140
+#: ../../xffm/fm/view/local/rm.hh:142
 msgid "Apply to all"
 msgstr "Aplica a tot"
 
 #. **************
 #. This is now available to BSD with rm -P option
-#: ../../xffm/fm/local/rm.hh:163 ../../xffm/common/gtk.hh:76
+#: ../../xffm/fm/view/local/rm.hh:165 ../../xffm/common/gtk.hh:91
 msgid "Shred"
 msgstr "Tritura"
 
-#. We do not count "../"
-#: ../../xffm/fm/local/view.hh:48 ../../xffm/fm/base/monitor.hh:28
-#, c-format
-msgid "Files: %s"
-msgstr "Fitxers:%s"
+#: ../../xffm/fm/view/local/rm.hh:183
+msgid "Trash"
+msgstr "Llença-la a la paperera"
 
-#: ../../xffm/fm/root/model.hh:78
+#: ../../xffm/fm/view/local/view.hh:177
+#, fuzzy, c-format
+msgid "The volume '%s' is not mounted."
+msgstr "El volum d'emmagatzematge %s no està muntat"
+
+#: ../../xffm/fm/view/root/model.hh:82
 msgid "Root Directory"
 msgstr "Directori arrel"
 
-#: ../../xffm/fm/root/model.hh:94
+#: ../../xffm/fm/view/root/model.hh:98
 msgid "This is the root of the filesystem"
 msgstr "Esta és l'arrel del sistema de fitxers"
 
-#: ../../xffm/fm/root/model.hh:105
-msgid "Home Directory"
-msgstr "Directori inicial"
-
-#: ../../xffm/fm/root/model.hh:132
-msgid "Trash bin"
-msgstr "Paperera"
-
-#: ../../xffm/fm/root/model.hh:162 ../../xffm/fm/fstab/popup.hh:29
-msgid "Disk Image Mounter"
-msgstr "Muntador d'imatges de disc"
-
-#: ../../xffm/fm/root/model.hh:169 ../../xffm/fm/root/model.hh:185
+#: ../../xffm/fm/view/root/model.hh:176 ../../xffm/fm/view/root/model.hh:191
 msgid "Mount local disks and devices"
 msgstr "Munta discs i dispositius locals"
 
-#: ../../xffm/fm/root/model.hh:170 ../../xffm/fm/fstab/popup.hh:25
-#: ../../xffm/fm/fstab/view.hh:429
+#: ../../xffm/fm/view/root/model.hh:177 ../../xffm/fm/view/fstab/popup.hh:23
+#: ../../xffm/fm/view/fstab/view.hh:1084
 msgid "eCryptfs Volume"
 msgstr "Volum d'eCryptfs"
 
-#: ../../xffm/fm/root/model.hh:171 ../../xffm/fm/fstab/popup.hh:24
+#: ../../xffm/fm/view/root/model.hh:178 ../../xffm/fm/view/fstab/popup.hh:22
 msgid "SSHFS Remote Synchronization Folder"
 msgstr "Carpeta de la sincronització remota SSHFS"
 
-#: ../../xffm/fm/root/model.hh:172 ../../xffm/fm/fstab/popup.hh:23
-#: ../../xffm/fm/fstab/view.hh:377
+#: ../../xffm/fm/view/root/model.hh:179 ../../xffm/fm/view/fstab/popup.hh:21
+#: ../../xffm/fm/view/fstab/view.hh:1032
 msgid "NFS Network Volume"
 msgstr "Volum de xarxa NFS"
 
-#: ../../xffm/fm/root/model.hh:173 ../../xffm/fm/fstab/popup.hh:26
-#: ../../xffm/fm/fstab/view.hh:455
+#: ../../xffm/fm/view/root/model.hh:180 ../../xffm/fm/view/fstab/popup.hh:24
+#: ../../xffm/fm/view/fstab/view.hh:1110
 msgid "CIFS Volume"
 msgstr "Volum de CIFS"
 
-#: ../../xffm/fm/root/model.hh:195
-msgid "Software Updater"
-msgstr "Actualitzador de programari"
-
-#: ../../xffm/fm/root/model.hh:218 ../../xffm/fm/root/model.hh:230
-msgid "Add or remove software installed on the system"
-msgstr "Afig o suprimeix programari instal·lat en el sistema"
-
-#: ../../xffm/fm/root/model.hh:271
+#: ../../xffm/fm/view/root/model.hh:229
 #, fuzzy
 msgid "Go to bookmarked location"
 msgstr "Vés a la ubicació del marcador següent."
 
-#. {N_("Add bookmark"), (void *)BasePopUp<Type>::noop, NULL, NULL},
-#: ../../xffm/fm/root/view.hh:61
+#: ../../xffm/fm/view/root/popup.hh:138
 msgid "Empty trash"
 msgstr "Paperera buidada"
 
 #. File chooser
-#: ../../xffm/fm/fstab/popup.hh:121
+#: ../../xffm/fm/view/fstab/popup.hh:129
 msgid "Mount Device"
 msgstr "Munta el dispositiu"
 
-#: ../../xffm/fm/fstab/popup.hh:133
+#: ../../xffm/fm/view/fstab/popup.hh:141 ../../xffm/fm/view/fstab/view.hh:923
 msgid "Mount point:"
 msgstr "Punt de muntatge:"
 
-#: ../../xffm/fm/fstab/view.hh:301
-msgid "Mounted on:"
-msgstr "Muntat a:"
+#: ../../xffm/fm/view/fstab/view.hh:590
+#, fuzzy
+msgid "Mount point: "
+msgstr "Punt de muntatge:"
 
-#: ../../xffm/fm/fstab/view.hh:302
-msgid "Mount on"
-msgstr "Munta a"
+#: ../../xffm/fm/view/fstab/view.hh:591
+#, fuzzy
+msgid "Mount device: "
+msgstr "Munta el dispositiu"
 
-#: ../../xffm/fm/fstab/view.hh:310 ../../xffm/fm/fstab/view.hh:312
+#. Since /dev is not concrete, the following test returns false...
+#.
+#. if (!g_file_test(name, G_FILE_TEST_IS_DIR)) return;
+#: ../../xffm/fm/view/fstab/view.hh:659 ../../xffm/fm/view/fstab/view.hh:675
+msgid "Disks"
+msgstr "Discs"
+
+#: ../../xffm/fm/view/fstab/view.hh:921
+msgid "No Label"
+msgstr "Cap etiqueta"
+
+#: ../../xffm/fm/view/fstab/view.hh:922
+msgid "There is no file system available (unformatted)"
+msgstr "No hi ha cap sistema de fitxers disponible (no formatada)"
+
+#: ../../xffm/fm/view/fstab/view.hh:923
 msgid "Not mounted"
 msgstr "No muntada"
 
-#: ../../xffm/fm/fstab/view.hh:403
+#: ../../xffm/fm/view/fstab/view.hh:1058
 #, fuzzy
 msgid "SFTP (via SSH)"
 msgstr "FTP segur (SSH)"
 
-#: ../../xffm/fm/fstab/view.hh:667
+#: ../../xffm/fm/view/fstab/view.hh:1413
 #, c-format
 msgid "Unmounting %s"
 msgstr "S'està desmuntant %s"
 
-#: ../../xffm/fm/fstab/view.hh:667
+#: ../../xffm/fm/view/fstab/view.hh:1413
 #, c-format
 msgid "Mounting %s"
 msgstr "S'està muntant %s"
 
-#: ../../xffm/fm/dialog/menupopover.hh:128
-msgid "Home"
-msgstr "Llar"
+#: ../../xffm/fm/view/pkg/model.hh:41 ../../xffm/fm/view/pkg/model.hh:52
+msgid "Add or remove software installed on the system"
+msgstr "Afig o suprimeix programari instal·lat en el sistema"
 
-#: ../../xffm/fm/dialog/menupopover.hh:129 ../../xffm/common/gtk.hh:64
+#: ../../xffm/fm/view/pkg/model.hh:111
+msgid "String"
+msgstr "Cadena"
+
+#: ../../xffm/fm/view/pkg/model.hh:116
+msgid "Waiting for search results"
+msgstr "S'estan esperant els resultats de la cerca"
+
+#: ../../xffm/fm/view/pkg/model.hh:174
+msgid "No results"
+msgstr "No hi ha cap resultat"
+
+#: ../../xffm/fm/view/pkg/model.hh:373
 #, fuzzy
-msgid "Open terminal"
-msgstr "Obri un terminal"
+msgid "Currently busy\n"
+msgstr "Consulta actual"
 
-#: ../../xffm/fm/dialog/menupopover.hh:130
-msgid "Open a New Window"
-msgstr "Obri una finestra nova"
+#: ../../xffm/fm/view/pkg/popup.hh:44
+msgid "Update Database"
+msgstr "Actualitza la base de dades"
 
-#. {N_("Execute Shell Command"), (void *)MenuPopoverSignals<Type>::shell, (void *) menuButton_},
-#: ../../xffm/fm/dialog/menupopover.hh:132 ../../xffm/common/gtk.hh:69
-msgid "Search"
-msgstr "Cerca"
+#: ../../xffm/fm/view/pkg/popup.hh:45
+msgid "Fetch"
+msgstr "Recull"
 
-#: ../../xffm/fm/dialog/menupopover.hh:133 ../../xffm/common/gtk.hh:71
-msgid "Exit"
-msgstr "Surt"
-
-#: ../../xffm/fm/dialog/dialog.hh:116
-msgid "Removed"
-msgstr "Suprimit"
-
-#: ../../xffm/fm/dialog/dialog.hh:132
+#: ../../xffm/fm/view/pkg/popup.hh:46
 #, fuzzy
-msgid "Detected device(s):"
-msgstr "Dispositius detectats"
+msgid "Install --dry-run"
+msgstr "Instal·la el mòdul"
 
-#. Create the widgets
-#: ../../xffm/fm/page/vbuttonbox.hh:37 ../../xffm/common/gtk.hh:332
-msgid "Help"
-msgstr "Ajuda"
+#: ../../xffm/fm/view/pkg/popup.hh:47
+msgid "Install"
+msgstr "Instal·la"
 
-#. File chooser
-#: ../../xffm/fm/page/pathbar.hh:306 ../../xffm/fm/page/pathbar.hh:308
-msgid "Go to"
-msgstr "Vés a"
-
-#: ../../xffm/fm/page/pathbar.hh:331
-msgid "Not a directory"
-msgstr "No és un directori"
-
-#: ../../xffm/fm/page/runbutton.hh:135
-msgid "Renice Process"
-msgstr "Canvi de prioritat de procés"
-
-#: ../../xffm/fm/page/runbutton.hh:135
-msgid "Suspend"
-msgstr "Atura temporalment"
-
-#: ../../xffm/fm/page/runbutton.hh:135
-msgid "Continue"
-msgstr "Continua"
-
-#: ../../xffm/fm/page/runbutton.hh:136
-msgid "Interrupt"
-msgstr "Interromp"
-
-#: ../../xffm/fm/page/runbutton.hh:136
-msgid "Hangup"
-msgstr "Termina"
-
-#: ../../xffm/fm/page/runbutton.hh:136
-msgid "User 1 (USR1)"
-msgstr "Usuari 1 (USR1)"
-
-#: ../../xffm/fm/page/runbutton.hh:137
-msgid "User 2 (USR2)"
-msgstr "Usuari 2 (USR2)"
-
-#: ../../xffm/fm/page/runbutton.hh:137
-msgid "Terminate Task"
-msgstr "Finalitza tasca"
-
-#: ../../xffm/fm/page/runbutton.hh:137
-msgid "Abort"
-msgstr "Interromp"
-
-#: ../../xffm/fm/page/runbutton.hh:138
-msgid "Kill"
-msgstr "Mata"
-
-#: ../../xffm/fm/page/runbutton.hh:139
+#: ../../xffm/fm/view/pkg/popup.hh:48
 #, fuzzy
-msgid "Segmentation fault"
-msgstr "Violació de segment"
+msgid "Uninstall --dry-run"
+msgstr "S'està desinstal·lant"
 
-#: ../../xffm/fm/page/runbutton.hh:217
-msgid "PID"
-msgstr "PID"
+#: ../../xffm/fm/view/pkg/popup.hh:49
+msgid "Uninstall"
+msgstr "Desinstal·la"
 
-#: ../../xffm/fm/page/hbuttonbox.hh:37
-msgid "Embedded Terminal"
-msgstr "Terminal incrustat"
+#: ../../xffm/fm/view/pkg/popup.hh:50
+msgid "Information"
+msgstr "Informació"
 
-#: ../../xffm/fm/page/hbuttonbox.hh:38
-msgid "All items in the iconview."
-msgstr "Tots els elements de la vista d'icones."
+#: ../../xffm/fm/view/pkg/popup.hh:140
+msgid "Version"
+msgstr "Versió"
 
-#: ../../xffm/fm/page/hbuttonbox.hh:39
-msgid "Scripting"
-msgstr "Fitxers de seqüència"
+#: ../../xffm/fm/view/pkg/popup.hh:149
+msgid "Go up"
+msgstr "Puja"
 
-#: ../../xffm/fm/page/hbuttonbox.hh:40
-msgid "Clear Log"
-msgstr "Neteja el registre"
+#: ../../xffm/fm/view/pkg/popup.hh:152
+msgid "Search packages"
+msgstr "Cerca paquets"
 
-#. Status textview
-#: ../../xffm/fm/page/hbuttonbox.hh:42
-msgid "Terminal font"
-msgstr "Tipus de lletra de terminal"
+#: ../../xffm/fm/view/pkg/popup.hh:184 ../../xffm/fm/view/view.hh:93
+#, c-format
+msgid "Loading %s...%s"
+msgstr "S'està carregant %s...%s"
 
-#: ../../xffm/fm/treeview.hh:17
+#: ../../xffm/fm/view/pkg/popup.hh:184 ../../xffm/fm/view/view.hh:93
+msgid "Please Wait..."
+msgstr "Espereu un moment..."
+
+#: ../../xffm/fm/view/treeview.hh:17
 msgid "Name"
 msgstr "Nom"
 
-#: ../../xffm/fm/treeview.hh:20
+#: ../../xffm/fm/view/treeview.hh:19
 msgid "Size"
 msgstr "Mida"
 
-#: ../../xffm/fm/treeview.hh:21
+#: ../../xffm/fm/view/treeview.hh:20
 msgid "Date"
 msgstr "Data"
 
-#: ../../xffm/fm/treeview.hh:22
+#: ../../xffm/fm/view/treeview.hh:22
 msgid "Mimetype"
 msgstr "Tipus MIME"
 
-#: ../../xffm/fm/treeview.hh:24
-msgid "TYPE"
-msgstr "TIPUS"
-
-#: ../../xffm/fm/base/signals.hh:642
-msgid "Directory does not exist."
-msgstr "El directori no existeix."
-
-#: ../../xffm/fm/base/signals.hh:644 ../../xffm/fm/base/signals.hh:646
+#: ../../xffm/fm/view/base/signals.hh:838
 #, fuzzy
 msgid "Trash is empty"
 msgstr "el camí és buit"
 
-#: ../../xffm/common/settings.hh:27
+#: ../../xffm/fm/view/base/signals.hh:840
+msgid "Directory does not exist."
+msgstr "El directori no existeix."
+
+#: ../../xffm/common/settings.hh:30
 #, fuzzy
 msgid "New File:"
 msgstr "Fitxer nou"
 
-#: ../../xffm/common/gio.hh:235
-msgid "Could not copy item:"
-msgstr "No s'ha pogut copiar l'element:"
+#: ../../xffm/common/gio.hh:81
+msgid "Copying files"
+msgstr "S'estan copiant els fitxers"
 
-#: ../../xffm/common/gio.hh:237
-msgid "Could not move item:"
-msgstr "No s'ha pogut moure l'element:"
+#: ../../xffm/common/gio.hh:85
+msgid "linking"
+msgstr "s'està enllaçant"
 
-#: ../../xffm/common/gio.hh:239
-#, fuzzy
-msgid "Create symbolic link"
-msgstr "Reemplaça els enllaços simbòlics"
+#: ../../xffm/common/gio.hh:87
+msgid "rename"
+msgstr "rename"
 
-#: ../../xffm/common/gio.hh:276
-#, fuzzy, c-format
-msgid ""
-"Could not delete:\n"
-"%s"
-msgstr "No s'ha pogut suprimir «%s»."
-
-#: ../../xffm/common/gio.hh:278
+#: ../../xffm/common/gio.hh:426
 #, c-format
-msgid "Could not move %s to trash"
-msgstr "No s'ha pogut moure el fitxer %s a la paperera"
+msgid "(%d of %d)"
+msgstr "(%d de %d)"
 
-#: ../../xffm/common/clipboard.hh:23 ../../xffm/common/dnd.hh:40
-msgid "Copying files locally"
-msgstr "S'estan copiant fitxers en local"
-
-#: ../../xffm/common/clipboard.hh:30 ../../xffm/common/dnd.hh:34
-msgid "Moving files"
-msgstr "Quan es mouen fitxer"
-
-#: ../../xffm/common/dnd.hh:46
+#: ../../xffm/common/dnd.hh:47
 #, fuzzy
 msgid "Create Link"
 msgstr "Crea dins:"
 
-#: ../../xffm/common/util.hh:1200
+#: ../../xffm/common/util.hh:1404
 #, c-format
 msgid ""
 "Scriptfile \"%s\" is not executable. Please set the executable-attribute on "
@@ -1425,51 +1494,43 @@ msgstr ""
 "El fitxer script «%s» no és executable. Per favor, arrangeu l'atribut-"
 "executable en este fitxer."
 
-#: ../../xffm/common/util.hh:1202 ../../xffm/common/util.hh:1237
+#: ../../xffm/common/util.hh:1406 ../../xffm/common/util.hh:1441
 #, c-format
 msgid "Open with %s"
 msgstr "Obri amb %s"
 
-#: ../../xffm/common/util.hh:1202
+#: ../../xffm/common/util.hh:1406
 msgid "Text Editor"
 msgstr "Editor de text"
 
-#: ../../xffm/common/util.hh:1239 ../../xffm/common/gtk.hh:65
+#: ../../xffm/common/util.hh:1443 ../../xffm/common/gtk.hh:69
 msgid "Execute Shell Command"
 msgstr "Execució d'orde shell"
 
-#: ../../xffm/common/util.hh:1243
+#: ../../xffm/common/util.hh:1447
 msgid ""
 "Console: quickly run single commands -- write a command here and press enter."
 msgstr ""
 "Consola: execució ràpida d'ordes individuals -- Escriviu ací una orde i "
 "premeu «entrada»."
 
-#: ../../xffm/common/gtk.hh:123
-msgid "New Tab"
-msgstr "Pestanya nova"
+#: ../../xffm/common/gtk.hh:352 ../../xffm/common/gtk.hh:360
+msgid "Help"
+msgstr "Ajuda"
 
-#: ../../xffm/common/gtk.hh:335
-msgid "OK"
-msgstr "D'acord"
-
-#: ../../xffm/common/run.hh:344
+#: ../../xffm/common/run.hh:338
 msgid "error"
 msgstr "error"
 
-#: ../../xffm/common/run.hh:348
+#: ../../xffm/common/run.hh:342
 msgid "warning"
 msgstr "avís"
 
-#: ../../xffm/common/mime.hh:101 ../../xffm/common/mime.hh:143
-msgid "No Read Permission"
-msgstr "Sense permís de lectura"
-
-#: ../../xffm/common/preview.hh:593
+#: ../../xffm/common/preview.hh:581
 msgid "Empty file"
 msgstr "Fitxer buit"
 
-#: ../../xffm/common/preview.hh:648
+#: ../../xffm/common/preview.hh:636
 #, c-format
 msgid "Cannot read from %s"
 msgstr "No es pot llegir des de %s"

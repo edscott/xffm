@@ -34,7 +34,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-02 12:27-0600\n"
+"POT-Creation-Date: 2019-08-04 16:54-0500\n"
 "PO-Revision-Date: 2010-03-21 10:57+0200\n"
 "Last-Translator: ntsetsbold <ntsetsbold@gmail.com>\n"
 "Language-Team: Mongolian <openmn-translation@lists.sourceforge.net>\n"
@@ -45,6 +45,12 @@ msgstr ""
 "http://bugzilla.gnome.org/enterbug.cgi?product=alacartecomponent=general\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.0.3\n"
+
+#: ../../xffm/mime/mimemagic.hh:68 ../../xffm/mime/mimemagic.hh:110
+#: ../../xffm/common/mimemagic.hh:68 ../../xffm/common/mimemagic.hh:110
+#, fuzzy
+msgid "No Read Permission"
+msgstr "Хандах эрхүүд"
 
 #: ../../xffm/completion/base.hh:28
 msgid "Command"
@@ -60,7 +66,7 @@ msgid "Command history"
 msgstr "Тушаалын бичлэг"
 
 #. option -u uid "uid" "uid_combo"
-#: ../../xffm/completion/base.hh:37 ../../xffm/find/dialog.hh:199
+#: ../../xffm/completion/base.hh:37 ../../xffm/find/dialog.hh:192
 msgid "User"
 msgstr "Хэрэглэгч"
 
@@ -76,17 +82,17 @@ msgstr "Хост"
 msgid "Found no match"
 msgstr ""
 
-#: ../../xffm/completion/base.hh:133 ../../xffm/completion/base.hh:134
+#: ../../xffm/completion/base.hh:141 ../../xffm/completion/base.hh:142
 #, fuzzy
 msgid "Matches"
 msgstr "Кэшүүд"
 
-#: ../../xffm/completion/base.hh:134
+#: ../../xffm/completion/base.hh:142
 #, fuzzy
 msgid "Too many files open"
 msgstr "Хэт олон нээлттэй файл"
 
-#: ../../xffm/completion/base.hh:325 ../../xffm/find/fgr.hh:124
+#: ../../xffm/completion/base.hh:339 ../../xffm/find/fgr.hh:124
 #, fuzzy
 msgid "Options:"
 msgstr "Сонголт"
@@ -111,7 +117,8 @@ msgstr "Профил"
 msgid "Options >>"
 msgstr "Сонголт 1"
 
-#: ../../xffm/find/fgr.hh:124 ../../xffm/find/dialog.hh:308
+#: ../../xffm/find/fgr.hh:124 ../../xffm/find/signals.hh:100
+#: ../../xffm/find/dialog.hh:301
 msgid "Path"
 msgstr "Зам"
 
@@ -119,7 +126,7 @@ msgstr "Зам"
 msgid "Locate documents and folders on this computer by name or content"
 msgstr ""
 
-#: ../../xffm/find/fgr.hh:126 ../../xffm/find/dialog.hh:341
+#: ../../xffm/find/fgr.hh:126 ../../xffm/find/dialog.hh:334
 #, fuzzy
 msgid "Filter:"
 msgstr "Шүүлтүүрүүд"
@@ -154,7 +161,7 @@ msgid "Filter Details"
 msgstr "Цаасны деталиуд"
 
 #. / option -a "xdev"
-#: ../../xffm/find/fgr.hh:138 ../../xffm/find/dialog.hh:180
+#: ../../xffm/find/fgr.hh:138 ../../xffm/find/dialog.hh:173
 #, fuzzy
 msgid "Stay on single filesystem"
 msgstr "Бичихээс хамгаалагдсан файлын систем"
@@ -168,7 +175,7 @@ msgid "The unique Process ID that identifies this process."
 msgstr ""
 
 #. / option -D "recursiveH"
-#: ../../xffm/find/fgr.hh:142 ../../xffm/find/dialog.hh:177
+#: ../../xffm/find/fgr.hh:142 ../../xffm/find/dialog.hh:170
 msgid "Find hidden files and directories"
 msgstr ""
 
@@ -183,7 +190,7 @@ msgid ""
 msgstr ""
 
 #. / option -r "recursive"
-#: ../../xffm/find/fgr.hh:146 ../../xffm/find/dialog.hh:174
+#: ../../xffm/find/fgr.hh:146 ../../xffm/find/dialog.hh:167
 #, fuzzy
 msgid "Recursive"
 msgstr "Рекурсээр"
@@ -220,7 +227,7 @@ msgstr "Наймтын тэмдэглээн дэх файлын хандах э�
 msgid "Type"
 msgstr "Төрөл"
 
-#: ../../xffm/find/fgr.hh:157 ../../xffm/find/signals.hh:17
+#: ../../xffm/find/fgr.hh:157 ../../xffm/find/signals.hh:14
 #, fuzzy
 msgid "Any"
 msgstr "Ба"
@@ -230,18 +237,18 @@ msgstr "Ба"
 msgid "Default type"
 msgstr "Стандарт фонтийн төрөл"
 
-#: ../../xffm/find/fgr.hh:158 ../../xffm/common/preview.hh:497
+#: ../../xffm/find/fgr.hh:158 ../../xffm/common/preview.hh:478
 #, fuzzy
 msgid "Regular file"
 msgstr "Хэвийн"
 
-#: ../../xffm/find/fgr.hh:159 ../../xffm/find/signals.hh:11
-#: ../../xffm/fm/local/popup.hh:803 ../../xffm/common/preview.hh:488
+#: ../../xffm/find/fgr.hh:159 ../../xffm/find/signals.hh:8
+#: ../../xffm/fm/view/local/popup.hh:1062 ../../xffm/common/preview.hh:469
 msgid "Directory"
 msgstr "Лавлах"
 
-#: ../../xffm/find/fgr.hh:160 ../../xffm/find/signals.hh:12
-#: ../../xffm/common/preview.hh:494
+#: ../../xffm/find/fgr.hh:160 ../../xffm/find/signals.hh:9
+#: ../../xffm/common/preview.hh:475
 #, fuzzy
 msgid "Symbolic Link"
 msgstr "Тэмдэгт Холбоос"
@@ -251,32 +258,32 @@ msgstr "Тэмдэгт Холбоос"
 msgid "UNIX Socket"
 msgstr "Соккет"
 
-#: ../../xffm/find/fgr.hh:162 ../../xffm/find/signals.hh:14
-#: ../../xffm/common/preview.hh:482
+#: ../../xffm/find/fgr.hh:162 ../../xffm/find/signals.hh:11
+#: ../../xffm/common/preview.hh:463
 msgid "Block device"
 msgstr "Бүлэг төхөөрөмж"
 
-#: ../../xffm/find/fgr.hh:163 ../../xffm/find/signals.hh:15
-#: ../../xffm/common/preview.hh:485
+#: ../../xffm/find/fgr.hh:163 ../../xffm/find/signals.hh:12
+#: ../../xffm/common/preview.hh:466
 msgid "Character device"
 msgstr "Тэмдэгт төхөөрөмж"
 
-#: ../../xffm/find/fgr.hh:164 ../../xffm/find/signals.hh:16
-#: ../../xffm/common/preview.hh:491
+#: ../../xffm/find/fgr.hh:164 ../../xffm/find/signals.hh:13
+#: ../../xffm/common/preview.hh:472
 msgid "FIFO"
 msgstr ""
 
-#. radio_p freed on destroy event for dialog_.
+#. radio_p freed on destroy event for findDialog.
 #. option -k minutes "last_minutes", "last_minutes_spin"
 #: ../../xffm/find/fgr.hh:166 ../../xffm/find/fgr.hh:168
-#: ../../xffm/find/dialog.hh:221
+#: ../../xffm/find/dialog.hh:214
 msgid "Minutes"
 msgstr "Минут"
 
 #: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
 #: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
-#: ../../xffm/find/dialog.hh:270 ../../xffm/find/dialog.hh:370
-#: ../../xffm/fm/treeview.hh:18
+#: ../../xffm/find/dialog.hh:263 ../../xffm/find/dialog.hh:363
+#: ../../xffm/fm/view/treeview.hh:18
 msgid "Details"
 msgstr "Дэлгэрэнгүй"
 
@@ -295,13 +302,13 @@ msgstr "Өмнөх"
 
 #. option -h hours "last_hours", "last_hours_spin"
 #: ../../xffm/find/fgr.hh:169 ../../xffm/find/fgr.hh:171
-#: ../../xffm/find/dialog.hh:226
+#: ../../xffm/find/dialog.hh:219
 msgid "Hours"
 msgstr "Цаг"
 
 #. option -d days "last_days", "last_days_spin"
 #: ../../xffm/find/fgr.hh:172 ../../xffm/find/fgr.hh:174
-#: ../../xffm/find/dialog.hh:231
+#: ../../xffm/find/dialog.hh:224
 msgid "Days"
 msgstr "Өдөр"
 
@@ -364,7 +371,7 @@ msgid "STRING"
 msgstr "БИЧВЭР"
 
 #: ../../xffm/find/fgr.hh:202 ../../xffm/find/fgr.hh:204
-#: ../../xffm/fm/local/popup.hh:563
+#: ../../xffm/fm/view/local/popup.hh:759
 #, fuzzy
 msgid "Regular expression"
 msgstr "Ердийн Илэрхийлэл"
@@ -383,12 +390,12 @@ msgstr "Том-/Жижиг бичлэг үл хэрэгсэх"
 msgid "Text Files"
 msgstr "Бүх текст файлууд"
 
-#: ../../xffm/find/fgr.hh:210 ../../xffm/find/dialog.hh:552
+#: ../../xffm/find/fgr.hh:210 ../../xffm/find/dialog.hh:545
 #, fuzzy
 msgid "No match"
 msgstr "Ямарч тохиолдол олдсонгүй"
 
-#: ../../xffm/find/fgr.hh:212 ../../xffm/find/dialog.hh:470
+#: ../../xffm/find/fgr.hh:212 ../../xffm/find/dialog.hh:463
 #, fuzzy
 msgid "Line Count"
 msgstr "Мөрийн тайлбар"
@@ -406,117 +413,115 @@ msgstr "Зураасууд"
 msgid "Usage : %s [OPTIONS]\n"
 msgstr "Хэрэглээ: %s\n"
 
-#: ../../xffm/find/signals.hh:10
+#: ../../xffm/find/signals.hh:7
 msgid "Regular"
 msgstr "Хэвийн"
 
-#: ../../xffm/find/signals.hh:13 ../../xffm/common/preview.hh:500
+#: ../../xffm/find/signals.hh:10 ../../xffm/common/preview.hh:481
 msgid "Socket"
 msgstr "Соккет"
 
-#: ../../xffm/find/signals.hh:209
-#, fuzzy
-msgid "Select folder to search in"
-msgstr "Нээх файлыг сонгох"
+#. if (g_slist_length(list) == 0) return NULL;
+#. Create liststore for DnD
+#. / option "upper_limit_spin" (only in gtk findDialog)
+#: ../../xffm/find/signals.hh:66 ../../xffm/find/signals.hh:454
+#: ../../xffm/find/dialog.hh:176
+msgid "Results"
+msgstr "Үр дүн"
 
 #. button no
-#: ../../xffm/find/signals.hh:265 ../../xffm/find/dialog.hh:584
-#: ../../xffm/response/entryfileresponse.hh:18
-#: ../../xffm/response/entryresponse.hh:305
-#: ../../xffm/response/passwdresponse.hh:558
-#: ../../xffm/fm/local/properties.hh:304 ../../xffm/fm/local/rm.hh:155
+#: ../../xffm/find/signals.hh:368 ../../xffm/find/dialog.hh:577
+#: ../../xffm/response/chooserresponse.hh:21
+#: ../../xffm/response/entryresponse.hh:420
+#: ../../xffm/fm/view/local/properties.hh:314
+#: ../../xffm/fm/view/local/rm.hh:157 ../../xffm/common/gtk.hh:409
 msgid "Cancel"
 msgstr "Цуцла"
 
-#: ../../xffm/find/signals.hh:293 ../../xffm/find/signals.hh:722
+#: ../../xffm/find/signals.hh:396 ../../xffm/find/signals.hh:830
 #, fuzzy
 msgid "No editor for current action."
 msgstr "Идэвхтэй ажиллагааг Зогсоох"
 
-#. / option "upper_limit_spin" (only in gtk dialog_)
-#: ../../xffm/find/signals.hh:351 ../../xffm/find/dialog.hh:183
-msgid "Results"
-msgstr "Үр дүн"
-
-#: ../../xffm/find/signals.hh:351
+#: ../../xffm/find/signals.hh:454
 #, fuzzy
 msgid "Upper limit:"
 msgstr "Дээдхийн нийлбэр"
 
-#: ../../xffm/find/signals.hh:353
+#: ../../xffm/find/signals.hh:456
 #, fuzzy
 msgid "Counting files..."
 msgstr "Файлыг хуулж байна"
 
-#: ../../xffm/find/signals.hh:368
+#: ../../xffm/find/signals.hh:471
 #, c-format
 msgid "Found %d match"
 msgid_plural "Found %d matches"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../xffm/find/signals.hh:370
+#: ../../xffm/find/signals.hh:473
 #, fuzzy, c-format
 msgid "%s Finished : %s"
 msgstr "Дуусав"
 
-#: ../../xffm/find/signals.hh:488 ../../xffm/find/signals.hh:490
+#: ../../xffm/find/signals.hh:596 ../../xffm/find/signals.hh:598
 msgid "Searching..."
 msgstr "Хайж байна..."
 
-#. g_object_set_data(G_OBJECT(dialog_), "window", dialog_);
-#: ../../xffm/find/dialog.hh:98 ../../xffm/find/dialog.hh:150
-#: ../../xffm/find/dialog.hh:611
+#. g_object_set_data(G_OBJECT(findDialog), "window", findDialog);
+#: ../../xffm/find/dialog.hh:91 ../../xffm/find/dialog.hh:143
+#: ../../xffm/find/dialog.hh:604
 msgid "Find"
 msgstr "Ол"
 
-#: ../../xffm/find/dialog.hh:183
+#: ../../xffm/find/dialog.hh:176
 #, fuzzy
 msgid "Upper limit"
 msgstr "Дээдхийн нийлбэр"
 
 #. option -s +KByte "size_greater", "size_greater_spin"
-#: ../../xffm/find/dialog.hh:188
+#: ../../xffm/find/dialog.hh:181
 msgid "At Least"
 msgstr ""
 
-#: ../../xffm/find/dialog.hh:188 ../../xffm/find/dialog.hh:193
+#: ../../xffm/find/dialog.hh:181 ../../xffm/find/dialog.hh:186
 #, fuzzy
 msgid "kBytes"
 msgstr "Байт"
 
 #. option -s -KByte "size_smaller", "size_smaller_spin"
-#: ../../xffm/find/dialog.hh:193
+#: ../../xffm/find/dialog.hh:186
 #, fuzzy
 msgid "At Most"
 msgstr "Модулийн Тухай"
 
-#: ../../xffm/find/dialog.hh:204
+#: ../../xffm/find/dialog.hh:197
 msgid "Group"
 msgstr "Бүлэглэ"
 
 #. option -o octal "octal_p" "permissions_entry"
-#: ../../xffm/find/dialog.hh:208
+#: ../../xffm/find/dialog.hh:201
 msgid "Octal Permissions"
 msgstr "Октал (наймт) эрх"
 
 #. option -p suid | exe
-#: ../../xffm/find/dialog.hh:213
+#: ../../xffm/find/dialog.hh:206
 msgid "SUID"
 msgstr ""
 
-#: ../../xffm/find/dialog.hh:213 ../../xffm/fm/local/popup.hh:843
+#: ../../xffm/find/dialog.hh:206 ../../xffm/fm/view/local/popup.hh:1102
 #, fuzzy
 msgid "Executable"
 msgstr "Гүйцэтгэх"
 
 #. option -m months "last_months", "last_months_spin"
-#: ../../xffm/find/dialog.hh:237
+#: ../../xffm/find/dialog.hh:230
 #, fuzzy
 msgid "Months"
 msgstr "Сар"
 
-#: ../../xffm/find/dialog.hh:248
+#: ../../xffm/find/dialog.hh:241
 #, fuzzy
 msgid "File type : "
 msgstr "Файлын төрөл:"
@@ -524,85 +529,85 @@ msgstr "Файлын төрөл:"
 #. gtk_widget_show (GTK_WIDGET(right_options_vbox));
 #. gtk_widget_show (GTK_WIDGET(center_options_vbox));
 #. gtk_widget_show (GTK_WIDGET(left_options_vbox));
-#: ../../xffm/find/dialog.hh:262 ../../xffm/find/dialog.hh:602
-#: ../../xffm/fm/page/page.hh:70 ../../xffm/common/gtk.hh:70
+#: ../../xffm/find/dialog.hh:255 ../../xffm/find/dialog.hh:595
+#: ../../xffm/fm/dialog/notebook/page/page.hh:70 ../../xffm/common/gtk.hh:79
 msgid "Close"
 msgstr "Хаа"
 
 #. gtk_box_pack_start (vbox7a, GTK_WIDGET(advancedBox), TRUE, FALSE, 5);
 #. gtk_widget_show(GTK_WIDGET(advancedBox));
 #. //////////////  grep options.... /////////////////////////
-#: ../../xffm/find/dialog.hh:384
+#: ../../xffm/find/dialog.hh:377
 #, fuzzy
 msgid "Contains"
 msgstr "агуулсан"
 
-#: ../../xffm/find/dialog.hh:404
+#: ../../xffm/find/dialog.hh:397
 msgid "Contains the text"
 msgstr "Агуулсан текст"
 
-#: ../../xffm/find/dialog.hh:437
+#: ../../xffm/find/dialog.hh:430
 msgid "Case Sensitive"
 msgstr "Үсгийн хэмжээг ялгана"
 
-#: ../../xffm/find/dialog.hh:449
+#: ../../xffm/find/dialog.hh:442
 #, fuzzy
 msgid "Extended regexp"
 msgstr "Сонордуулгын энгийн илэрхийлэл"
 
-#: ../../xffm/find/dialog.hh:460
+#: ../../xffm/find/dialog.hh:453
 #, fuzzy
 msgid "Include binary files"
 msgstr "Файл хавсаргах:"
 
-#: ../../xffm/find/dialog.hh:496
+#: ../../xffm/find/dialog.hh:489
 #, fuzzy
 msgid "Match"
 msgstr "Түгжээ"
 
-#: ../../xffm/find/dialog.hh:508
+#: ../../xffm/find/dialog.hh:501
 msgid "Anywhere"
 msgstr ""
 
-#: ../../xffm/find/dialog.hh:523
+#: ../../xffm/find/dialog.hh:516
 #, fuzzy
 msgid "Whole words only"
 msgstr "Зөвхөн бүтэн үгсийг харгалзана"
 
-#: ../../xffm/find/dialog.hh:538
+#: ../../xffm/find/dialog.hh:531
 msgid "lines"
 msgstr "Мөрүүд"
 
-#: ../../xffm/find/dialog.hh:594
+#: ../../xffm/find/dialog.hh:587
 msgid "Clear"
 msgstr "Цэвэрлэ"
 
-#: ../../xffm/find/dialog.hh:636
+#: ../../xffm/find/dialog.hh:629
 msgid "Edit"
 msgstr "Засварла"
 
-#: ../../xffm/find/dialog.hh:751 ../../xffm/find/dialog.hh:766
-#: ../../xffm/common/util.hh:1150 ../../xffm/common/util.hh:1152
-#: ../../xffm/common/util.hh:1158 ../../xffm/common/util.hh:1160
-#: ../../xffm/common/preview.hh:479
+#: ../../xffm/find/dialog.hh:743 ../../xffm/find/dialog.hh:758
+#: ../../xffm/common/util.hh:1354 ../../xffm/common/util.hh:1356
+#: ../../xffm/common/util.hh:1362 ../../xffm/common/util.hh:1364
+#: ../../xffm/common/preview.hh:460
 msgid "unknown"
 msgstr "тодорхойгүй"
 
-#: ../../xffm/find/dialog.hh:780
+#: ../../xffm/find/dialog.hh:772
 msgid "Modified"
 msgstr "Өөрчлөгдсөн"
 
-#: ../../xffm/find/dialog.hh:784
+#: ../../xffm/find/dialog.hh:776
 #, fuzzy
 msgid "Created"
 msgstr "Бүтээсэн:"
 
-#: ../../xffm/find/dialog.hh:788
+#: ../../xffm/find/dialog.hh:780
 #, fuzzy
 msgid "Accessed"
 msgstr "Хандсан:"
 
-#: ../../xffm/find/dialog.hh:1106
+#: ../../xffm/find/dialog.hh:1098
 msgid ""
 "Basic rules:\n"
 "\n"
@@ -613,7 +618,7 @@ msgid ""
 "$  Match at end of string \n"
 msgstr ""
 
-#: ../../xffm/find/dialog.hh:1115
+#: ../../xffm/find/dialog.hh:1107
 msgid ""
 "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ ( ) : \n"
 "In  basic regular expressions the metacharacters ?, +, {, |, (, and ) \n"
@@ -648,386 +653,533 @@ msgid ""
 "More information is available by typing \"man grep\"\n"
 msgstr ""
 
-#: ../../xffm/response/entryfileresponse.hh:20
+#: ../../xffm/response/chooserresponse.hh:23
 msgid "Open"
 msgstr "Нээх"
 
-#: ../../xffm/response/entryresponse.hh:29
-#: ../../xffm/response/entryfolderresponse.hh:28
+#: ../../xffm/response/chooserresponse.hh:56
 #, fuzzy
 msgid "Choose directory"
 msgstr "Хавтсаа сонго"
 
+#: ../../xffm/response/chooserresponse.hh:60
+#, fuzzy
+msgid "Choose file"
+msgstr "Файл сонгох..."
+
+#: ../../xffm/response/customresponse.hh:55
+#, fuzzy
+msgid "Execute command"
+msgstr "Тушаалыг биелүүлж байна"
+
+#. XXX folder or file entry should be determined on .ini file (probably just inherit from comboresponse for multiple files options (selected files)...
+#: ../../xffm/response/customresponse.hh:103
+#, fuzzy
+msgid "Source File"
+msgstr "Сурвалжийн нэр"
+
 #. this button is redundant since hands are on keyboard for password
-#: ../../xffm/response/entryresponse.hh:309
-#: ../../xffm/response/passwdresponse.hh:189
-#: ../../xffm/response/passwdresponse.hh:559
+#: ../../xffm/response/entryresponse.hh:424
+#: ../../xffm/response/passwdresponse.hh:242
 msgid "Ok"
 msgstr "За"
 
-#: ../../xffm/response/commandprogressresponse.hh:32
+#: ../../xffm/response/commandprogressresponse.hh:31
 msgid "Items:"
 msgstr "Элементүүд:"
 
-#: ../../xffm/response/passwdresponse.hh:21
+#: ../../xffm/response/passwdresponse.hh:19
+#: ../../xffm/response/passwdresponse.hh:25 ../../xffm/common/run.hh:464
 msgid "Enter password"
 msgstr "Нууц үгээ оруулах"
 
 #. gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
-#: ../../xffm/response/passwdresponse.hh:125
+#: ../../xffm/response/passwdresponse.hh:179
 #, fuzzy
 msgid "User Input"
 msgstr "Хэрэглэгчийн интерфэйс"
 
-#: ../../xffm/response/passwdresponse.hh:142
+#: ../../xffm/response/passwdresponse.hh:195
 msgid "Response Requested"
 msgstr ""
 
-#: ../../xffm/response/passwdresponse.hh:264
-#, fuzzy
-msgid "Preparing"
-msgstr "Хуудсуудыг бэлтгэж байна..."
-
-#: ../../xffm/response/passwdresponse.hh:352
-msgid "sudo"
-msgstr ""
-
-#: ../../xffm/response/passwdresponse.hh:354
-msgid "Command:"
-msgstr "Тушаал:"
-
-#: ../../xffm/response/passwdresponse.hh:357
-msgid "Permission denied"
-msgstr "Зөвшөөрөгдөөгүй"
-
-#: ../../xffm/response/passwdresponse.hh:358
-msgid "Try to approach a problem from different angles."
-msgstr ""
-
-#: ../../xffm/response/passwdresponse.hh:359
-#, fuzzy
-msgid "Do you want to retry?"
-msgstr "Холбох уу?"
-
-#: ../../xffm/response/passwdresponse.hh:360
-#, fuzzy
-msgid "Alternate:"
-msgstr "Сонголтууд"
-
-#: ../../xffm/response/passwdresponse.hh:365
-msgid "No"
-msgstr "Үгүй"
-
-#: ../../xffm/response/passwdresponse.hh:401
-msgid "Install"
-msgstr "Суулгах"
-
-#: ../../xffm/response/passwdresponse.hh:402
-#, fuzzy, c-format
-msgid "%s does not exist."
-msgstr "Файл үл оршино."
-
-#: ../../xffm/response/passwdresponse.hh:467
-#, fuzzy
-msgid "Blowfish"
-msgstr "Элстэй"
-
-#: ../../xffm/response/passwdresponse.hh:468
-msgid "Encryption Key Approval"
-msgstr ""
-
-#: ../../xffm/response/passwdresponse.hh:502
-msgid "-o     print output to standard out. Implies -r."
-msgstr ""
-
-#: ../../xffm/response/passwdresponse.hh:506
-msgid "-c     DO NOT compress files before encryption."
-msgstr ""
-
-#: ../../xffm/response/passwdresponse.hh:510
-msgid "-r     DO NOT remove input files after processing"
-msgstr ""
-
-#: ../../xffm/response/passwdresponse.hh:517
-msgid "Encryption key: "
-msgstr ""
-
-#: ../../xffm/response/passwdresponse.hh:529
-#, fuzzy
-msgid "Confirm:"
-msgstr "Тохиргоо хийх"
-
-#: ../../xffm/response/passwdresponse.hh:542
-msgid "Sorry, passwords do not match"
-msgstr "Уучилаарай нууц үг тохирсонгүй"
-
-#: ../../xffm/response/passwdresponse.hh:550
-#, fuzzy
-msgid "Minimum length:"
-msgstr "Х/Б хэмжээ:"
-
-#: ../../xffm/response/timeoutresponse.hh:56
+#: ../../xffm/response/timeoutresponse.hh:57
 msgid "Dismiss"
 msgstr ""
 
-#: ../../xffm/response/commandresponse.hh:23
+#: ../../xffm/response/commandresponse.hh:19
 msgid "Running"
 msgstr "Ажиллуулж байна"
 
 #. auto text = g_strdup_printf("%s (pid: %d)",
 #. _("Waiting for operation to finish..."),
 #. Tubo<Type>::getChild (pid));
-#: ../../xffm/response/commandresponse.hh:28
+#: ../../xffm/response/commandresponse.hh:24
 #, fuzzy
 msgid "Waiting for operation to finish..."
 msgstr "Бүүр дуусгах эсвэл эхлүүлэхийг хүлээж байна"
 
-#: ../../xffm/fm/local/icons.hh:257
-msgid "Documents"
-msgstr "Бичиг баримтууд"
-
-#: ../../xffm/fm/local/icons.hh:257
-msgid "Downloads"
-msgstr "Татацууд"
-
-#: ../../xffm/fm/local/icons.hh:257
-msgid "Music"
-msgstr "Хөгжим"
-
-#: ../../xffm/fm/local/icons.hh:257
-msgid "Pictures"
-msgstr "Зураг"
-
-#: ../../xffm/fm/local/icons.hh:258
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:11
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:214
 #, fuzzy
-msgid "Templates"
-msgstr "Цоолтуур"
+msgid "Remove Button Contents"
+msgstr "Аравуудыг устга "
 
-#: ../../xffm/fm/local/icons.hh:258
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:67
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:209
 #, fuzzy
-msgid "Videos"
-msgstr "Видео"
+msgid "Add custom content"
+msgstr "Хам цэс рүү нэмэх"
 
-#: ../../xffm/fm/local/icons.hh:258
-msgid "Desktop"
-msgstr "Ажлын талбар"
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:68
+#, fuzzy
+msgid "Select file to load"
+msgstr "Нээх файлыг сонгох"
 
-#: ../../xffm/fm/local/icons.hh:258
-msgid "Bookmarks"
-msgstr "Тэмдэглэгээ"
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:125
+#, fuzzy, c-format
+msgid "Cannot load file %s. Reason: %s"
+msgstr ""
+"Файл ачаалагдсангүй.\n"
+"Алдаа : \"%s\""
 
-#: ../../xffm/fm/local/icons.hh:259 ../../xffm/fm/local/rm.hh:181
-msgid "Trash"
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:154
+#, fuzzy
+msgid "You need to restart the application"
+msgstr "Энэ программын хэрэглээ"
+
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:187
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:191
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:195
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:198
+#: ../../xffm/fm/view/pkg/model.hh:29 ../../xffm/fm/view/pkg/popup.hh:35
+#, fuzzy
+msgid "Software Updater"
+msgstr "Програм хангамж"
+
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:236
+#: ../../xffm/fm/view/pkg/model.hh:108 ../../xffm/fm/view/pkg/model.hh:299
+#: ../../xffm/fm/view/pkg/model.hh:306 ../../xffm/fm/view/pkg/popup.hh:151
+#: ../../xffm/common/gtk.hh:77
+msgid "Search"
+msgstr "Хайх"
+
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:240 ../../xffm/common/gtk.hh:67
+#, fuzzy
+msgid "Open terminal"
+msgstr "Терминал нээх"
+
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:244
+#, fuzzy
+msgid "Open a New Window"
+msgstr "Шинэ цонхонд нээх"
+
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:250
+#, fuzzy
+msgid "Differences"
+msgstr "Тохиргоонууд"
+
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:256
+#: ../../xffm/fm/view/root/model.hh:110
+#, fuzzy
+msgid "Home Directory"
+msgstr "Гэр лавлах:"
+
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:261
+#: ../../xffm/fm/view/root/model.hh:168 ../../xffm/fm/view/fstab/popup.hh:29
+#, fuzzy
+msgid "Disk Image Mounter"
+msgstr "Диск үүсгэгч"
+
+#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:266
+#: ../../xffm/fm/view/root/model.hh:137
+#, fuzzy
+msgid "Trash bin"
 msgstr "Хогийн сав"
 
-#: ../../xffm/fm/local/popup.hh:60
+#: ../../xffm/fm/dialog/notebook/notebook.hh:56
+#, fuzzy
+msgid "Long press time"
+msgstr "Дууны шинжүүд"
+
+#: ../../xffm/fm/dialog/notebook/notebook.hh:75 ../../xffm/common/gtk.hh:139
+msgid "New Tab"
+msgstr "Шинэ самбар"
+
+#: ../../xffm/fm/dialog/notebook/menupopover.hh:178
+#, fuzzy
+msgid "Open menu"
+msgstr "Зургийг нээх"
+
+#: ../../xffm/fm/dialog/notebook/menupopover.hh:230
+#, fuzzy
+msgid "View as list"
+msgstr "Жагсаалт хэлбэрээр харах"
+
+#: ../../xffm/fm/dialog/notebook/menupopover.hh:231
+#, fuzzy
+msgid "Show hidden files"
+msgstr "Далдалсан файлуудыг харуулах"
+
+#: ../../xffm/fm/dialog/notebook/menupopover.hh:232
+#, fuzzy
+msgid "Show Backup Files"
+msgstr "Нөөц файл"
+
+#: ../../xffm/fm/dialog/notebook/menupopover.hh:233
+#, fuzzy
+msgid "Sort data in descending order"
+msgstr "буурхаар эрэмбэлэх"
+
+#: ../../xffm/fm/dialog/notebook/menupopover.hh:235
+#, fuzzy
+msgid "Sort by date"
+msgstr "Огноог харуулах"
+
+#: ../../xffm/fm/dialog/notebook/menupopover.hh:236
+#, fuzzy
+msgid "Sort by size"
+msgstr "Сурвалжийн нэр"
+
+#: ../../xffm/fm/dialog/notebook/menupopover.hh:237 ../../xffm/common/gtk.hh:81
+msgid "Exit"
+msgstr "Гарах"
+
+#: ../../xffm/fm/dialog/notebook/menupopover.hh:270
+#, fuzzy
+msgid "Main menu"
+msgstr "Үндсэн цэс"
+
+#. File chooser
+#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:375
+#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:377
+#, fuzzy
+msgid "Go to"
+msgstr "Хуудсанд очих"
+
+#. entryResponse->setCheckButton(_("Run in Terminal"));
+#. entryResponse->setCheckButton(Run<Type>::runInTerminal(path));
+#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:382
+#: ../../xffm/fm/view/local/popup.hh:887 ../../xffm/fm/view/local/popup.hh:981
+#, fuzzy
+msgid "Specify Output Directory..."
+msgstr "Моунт хийх хавтасыг сонгох"
+
+#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:409
+msgid "Not a directory"
+msgstr "Лавлах биш"
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:135
+#, fuzzy
+msgid "Renice Process"
+msgstr "Процесс нууцлах"
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid "Suspend"
+msgstr "Унтуулах"
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid "Continue"
+msgstr "Үргэлжлүүлэх"
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid "Interrupt"
+msgstr "Тасалдал"
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid "Hangup"
+msgstr "Тавих"
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid "User 1 (USR1)"
+msgstr ""
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:137
+msgid "User 2 (USR2)"
+msgstr ""
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:137
+#, fuzzy
+msgid "Terminate Task"
+msgstr "Төгсгөх"
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:137
+msgid "Abort"
+msgstr "Болих"
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:138
+msgid "Kill"
+msgstr "Ал"
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:139
+#, fuzzy
+msgid "Segmentation fault"
+msgstr "Сегментийн гажуудал"
+
+#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:216
+msgid "PID"
+msgstr "PID"
+
+#: ../../xffm/fm/dialog/notebook/page/page.hh:58
+msgid "loading..."
+msgstr "ачаалж байна..."
+
+#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
+#, fuzzy
+msgid "Embedded Terminal"
+msgstr "Терминал нээх"
+
+#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
+#, fuzzy
+msgid "All items in the iconview."
+msgstr "Энэ цонхон даь бүх объектуудыг сонгох"
+
+#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
+#, fuzzy
+msgid "Scripting"
+msgstr "Скрипт"
+
+#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
+#, fuzzy
+msgid "Clear Log"
+msgstr "Буцаалтыг арилга"
+
+#. Status textview
+#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
+#, fuzzy
+msgid "Terminal font"
+msgstr "Терминал"
+
+#: ../../xffm/fm/dialog/clipboard.hh:23 ../../xffm/common/dnd.hh:41
+#, fuzzy
+msgid "Copying files locally"
+msgstr "Файлыг хуулж байна"
+
+#: ../../xffm/fm/dialog/clipboard.hh:30 ../../xffm/common/gio.hh:83
+#: ../../xffm/common/dnd.hh:35
+msgid "Moving files"
+msgstr "Файлуудыг зөөж байна"
+
+#: ../../xffm/fm/dialog/dialog.hh:122
+#, fuzzy
+msgid "Removed"
+msgstr "Устга"
+
+#: ../../xffm/fm/dialog/dialog.hh:143
+#, fuzzy
+msgid "Detected device(s):"
+msgstr "Төхөөрөмжийг олох"
+
+#: ../../xffm/fm/view/local/model.hh:122
+#, fuzzy, c-format
+msgid "Reading \"%s\""
+msgstr "\"%s\"-г ачааллаж байна"
+
+#: ../../xffm/fm/view/local/model.hh:575 ../../xffm/fm/view/base/monitor.hh:33
+#, fuzzy, c-format
+msgid "Files: %s"
+msgstr "Файл: %s"
+
+#: ../../xffm/fm/view/local/model.hh:578
+#, fuzzy, c-format
+msgid "Loaded %d of %d articles"
+msgstr "%d файл ачаалагдав"
+
+#: ../../xffm/fm/view/local/popup.hh:85 ../../xffm/fm/view/local/popup.hh:142
+#: ../../xffm/fm/view/local/popup.hh:1287
+#: ../../xffm/fm/view/local/popup.hh:1294
+#: ../../xffm/fm/view/local/popup.hh:1305
+#: ../../xffm/fm/view/local/popup.hh:1312 ../../xffm/common/gtk.hh:83
+#, fuzzy
+msgid "Open with"
+msgstr "Одоо нээ"
+
+#: ../../xffm/fm/view/local/popup.hh:94
 msgid "New"
 msgstr "Шинэ"
+
+#: ../../xffm/fm/view/local/popup.hh:95 ../../xffm/fm/view/local/popup.hh:145
+#: ../../xffm/fm/view/root/popup.hh:136 ../../xffm/fm/view/fstab/popup.hh:20
+#: ../../xffm/common/gtk.hh:94
+msgid "Open in New Tab"
+msgstr "Шэнэ табд нээх"
 
 #. deprecated {N_("Open in New Tab"), NULL, NULL, NULL},
 #. deprecated {N_("Open in New Window"), NULL, NULL, NULL},
 #. common buttons /(also an iconsize +/- button)
-#: ../../xffm/fm/local/popup.hh:64 ../../xffm/fm/local/popup.hh:104
-#: ../../xffm/common/gtk.hh:74
+#: ../../xffm/fm/view/local/popup.hh:99 ../../xffm/fm/view/local/popup.hh:155
+#: ../../xffm/common/gtk.hh:87
 msgid "Copy"
 msgstr "Хуул"
 
-#: ../../xffm/fm/local/popup.hh:65 ../../xffm/fm/local/popup.hh:105
-#: ../../xffm/common/gtk.hh:73
+#: ../../xffm/fm/view/local/popup.hh:100 ../../xffm/fm/view/local/popup.hh:156
+#: ../../xffm/common/gtk.hh:85
 msgid "Cut"
 msgstr "Хачла"
 
-#: ../../xffm/fm/local/popup.hh:66 ../../xffm/fm/local/popup.hh:106
-#: ../../xffm/common/gtk.hh:66
-msgid "Paste"
-msgstr ""
+#: ../../xffm/fm/view/local/popup.hh:101 ../../xffm/fm/view/local/popup.hh:159
+#: ../../xffm/fm/view/local/popup.hh:232 ../../xffm/fm/view/local/popup.hh:234
+#, fuzzy
+msgid "Paste into"
+msgstr "Текст буулгах"
+
+#: ../../xffm/fm/view/local/popup.hh:102 ../../xffm/fm/view/local/popup.hh:158
+msgid "There is nothing on the clipboard to paste."
+msgstr "Клипбордоос (clipboard) буулгах юу ч алга."
 
 #. **************
-#: ../../xffm/fm/local/popup.hh:67 ../../xffm/fm/local/popup.hh:107
-#: ../../xffm/fm/local/rm.hh:174 ../../xffm/common/gtk.hh:75
+#: ../../xffm/fm/view/local/popup.hh:103 ../../xffm/fm/view/local/popup.hh:160
+#: ../../xffm/fm/view/local/rm.hh:176 ../../xffm/common/gtk.hh:89
 msgid "Delete"
 msgstr "Устга"
 
 #. {N_("About"), NULL, (void *) menu},
 #.
-#. only for listview: {N_("Sort by size"), NULL, (void *) menu},
-#. only for listview: {N_("Sort by date"), NULL, (void *) menu},
-#: ../../xffm/fm/local/popup.hh:73
+#: ../../xffm/fm/view/local/popup.hh:106
 msgid "Select All"
 msgstr "Бүгдийг сонгох"
 
-#: ../../xffm/fm/local/popup.hh:74 ../../xffm/fm/local/popup.hh:559
+#: ../../xffm/fm/view/local/popup.hh:107 ../../xffm/fm/view/local/popup.hh:755
 #, fuzzy
 msgid "Match regular expression"
 msgstr "Файлын нэр энгийн илэрхийллээс давжээ"
 
-#: ../../xffm/fm/local/popup.hh:75 ../../xffm/fm/root/view.hh:58
-#: ../../xffm/fm/fstab/popup.hh:21
-#, fuzzy
-msgid "View as list"
-msgstr "Жагсаалт хэлбэрээр харах"
-
-#: ../../xffm/fm/local/popup.hh:77
-#, fuzzy
-msgid "Show hidden files"
-msgstr "Далдалсан файлуудыг харуулах"
-
-#: ../../xffm/fm/local/popup.hh:79
-#, fuzzy
-msgid "Show Backup Files"
-msgstr "Нөөц файл"
-
-#: ../../xffm/fm/local/popup.hh:81
-#, fuzzy
-msgid "Sort data in descending order"
-msgstr "буурхаар эрэмбэлэх"
-
-#: ../../xffm/fm/local/popup.hh:93 ../../xffm/fm/local/popup.hh:119
-#: ../../xffm/fm/local/popup.hh:1006 ../../xffm/fm/local/popup.hh:1013
-#: ../../xffm/fm/local/popup.hh:1022 ../../xffm/fm/local/popup.hh:1029
-#: ../../xffm/common/gtk.hh:72
-#, fuzzy
-msgid "Open with"
-msgstr "Одоо нээ"
-
-#: ../../xffm/fm/local/popup.hh:94 ../../xffm/fm/local/popup.hh:846
+#: ../../xffm/fm/view/local/popup.hh:143 ../../xffm/fm/view/local/popup.hh:1105
 msgid "Run Executable..."
 msgstr "Гүйцэтгэгчийг ажиллуул..."
 
-#: ../../xffm/fm/local/popup.hh:95
+#. File chooser
+#: ../../xffm/fm/view/local/popup.hh:144 ../../xffm/fm/view/local/popup.hh:875
 msgid "Extract files from the archive"
 msgstr "Архиваас Файлууд Задлах"
 
-#. g_hash_table_insert(iconname_hash, "bcrypt", (void *)"emblem-keyhole");
-#: ../../xffm/fm/local/popup.hh:96 ../../xffm/fm/root/view.hh:73
-#: ../../xffm/fm/fstab/popup.hh:20 ../../xffm/fm/dialog/notebook.hh:52
-#: ../../xffm/common/gtk.hh:78
-msgid "Open in New Tab"
-msgstr "Шэнэ табд нээх"
-
 #. File chooser
-#: ../../xffm/fm/local/popup.hh:97 ../../xffm/fm/local/popup.hh:706
+#: ../../xffm/fm/view/local/popup.hh:146 ../../xffm/fm/view/local/popup.hh:966
 #, fuzzy
 msgid "Create a compressed archive with the selected objects"
 msgstr "Бичиг объект үүсгэх ба засах"
 
-#: ../../xffm/fm/local/popup.hh:98 ../../xffm/fm/fstab/popup.hh:37
+#: ../../xffm/fm/view/local/popup.hh:148 ../../xffm/fm/view/fstab/popup.hh:37
 #, fuzzy
 msgid "Mount the volume associated with this folder"
 msgstr "Энэ лавлах дотор харуулах багануудыг сонго"
 
-#: ../../xffm/fm/local/popup.hh:99 ../../xffm/fm/fstab/popup.hh:38
+#: ../../xffm/fm/view/local/popup.hh:149 ../../xffm/fm/view/fstab/popup.hh:38
 #, fuzzy
 msgid "Unmount the volume associated with this folder"
 msgstr "Энэ лавлах дотор харуулах багануудыг сонго"
 
-#: ../../xffm/fm/local/popup.hh:100 ../../xffm/common/gtk.hh:67
+#: ../../xffm/fm/view/local/popup.hh:151 ../../xffm/common/gtk.hh:73
 #, fuzzy
 msgid "Add bookmark"
 msgstr "Тэмдэглэгээ нэмэх"
 
-#: ../../xffm/fm/local/popup.hh:101 ../../xffm/fm/root/view.hh:74
-#: ../../xffm/common/gtk.hh:68
+#: ../../xffm/fm/view/local/popup.hh:152 ../../xffm/fm/view/root/popup.hh:137
+#: ../../xffm/common/gtk.hh:75
 msgid "Remove bookmark"
 msgstr "Хавчуурагыг устгах"
 
-#: ../../xffm/fm/local/popup.hh:108 ../../xffm/fm/local/popup.hh:961
+#: ../../xffm/fm/view/local/popup.hh:157 ../../xffm/common/gtk.hh:71
+msgid "Paste"
+msgstr ""
+
+#: ../../xffm/fm/view/local/popup.hh:161 ../../xffm/fm/view/local/popup.hh:1231
 msgid "Rename"
 msgstr "Ахин нэрлэ"
 
-#: ../../xffm/fm/local/popup.hh:109 ../../xffm/fm/local/popup.hh:947
+#: ../../xffm/fm/view/local/popup.hh:162 ../../xffm/fm/view/local/popup.hh:1217
 msgid "Duplicate"
 msgstr "Хувьла"
 
-#: ../../xffm/fm/local/popup.hh:110 ../../xffm/fm/local/popup.hh:933
+#: ../../xffm/fm/view/local/popup.hh:163 ../../xffm/fm/view/local/popup.hh:1203
 msgid "Link"
 msgstr "Холбоос"
 
-#: ../../xffm/fm/local/popup.hh:111
+#: ../../xffm/fm/view/local/popup.hh:164
 msgid "Properties"
 msgstr "Шинжүүд"
 
-#: ../../xffm/fm/local/popup.hh:414
+#: ../../xffm/fm/view/local/popup.hh:562
 msgid "Files:"
 msgstr "Файлууд"
 
-#: ../../xffm/fm/local/popup.hh:417 ../../xffm/fm/local/rm.hh:61
+#: ../../xffm/fm/view/local/popup.hh:565 ../../xffm/fm/view/local/rm.hh:61
 #, fuzzy
 msgid "Multiple selections"
 msgstr "Олон хэлбэрийн"
 
-#: ../../xffm/fm/local/popup.hh:557
+#: ../../xffm/fm/view/local/popup.hh:753
 #, fuzzy
 msgid "Select items"
 msgstr "Файлыг сонго"
 
-#: ../../xffm/fm/local/popup.hh:575
+#: ../../xffm/fm/view/local/popup.hh:771
 #, fuzzy
 msgid "Regular Expression syntax is incorrect"
 msgstr "Ердийн Илэрхийлэл"
 
-#: ../../xffm/fm/local/popup.hh:592
+#: ../../xffm/fm/view/local/popup.hh:801
 #, fuzzy
 msgid "No selection"
 msgstr "Хуулах"
 
-#: ../../xffm/fm/local/popup.hh:592
+#: ../../xffm/fm/view/local/popup.hh:801
 #, fuzzy
 msgid "No matches."
 msgstr "Ямарч тохиолдол олдсонгүй"
 
-#. entryResponse->setCheckButton(_("Run in Terminal"));
-#. entryResponse->setCheckButton(Mime<Type>::runInTerminal(path));
-#: ../../xffm/fm/local/popup.hh:721 ../../xffm/fm/page/pathbar.hh:313
-#, fuzzy
-msgid "Specify Output Directory..."
-msgstr "Моунт хийх хавтасыг сонгох"
-
-#: ../../xffm/fm/local/popup.hh:799
+#: ../../xffm/fm/view/local/popup.hh:1058
 #, fuzzy
 msgid "Create new..."
 msgstr "Архив Үүсгэх..."
 
-#: ../../xffm/fm/local/popup.hh:806 ../../xffm/fm/local/popup.hh:886
+#: ../../xffm/fm/view/local/popup.hh:1065
+#: ../../xffm/fm/view/local/popup.hh:1146
 #, fuzzy
 msgid "New Name:"
 msgstr "Шинэ тоглоом"
 
-#: ../../xffm/fm/local/popup.hh:815
+#: ../../xffm/fm/view/local/popup.hh:1074
 msgid "No name"
 msgstr "Нэр өгөөгүй байна"
 
-#: ../../xffm/fm/local/popup.hh:828
+#: ../../xffm/fm/view/local/popup.hh:1087
 #, fuzzy, c-format
 msgid "Another file with the same name already exists in “%s”."
 msgstr "Адил URL хаягтай харилцагч хаягны дэвтэрт байна."
 
-#: ../../xffm/fm/local/popup.hh:850 ../../xffm/fm/local/popup.hh:1010
-#: ../../xffm/fm/local/popup.hh:1026 ../../xffm/common/util.hh:1248
+#: ../../xffm/fm/view/local/popup.hh:1109
+#: ../../xffm/fm/view/local/popup.hh:1291
+#: ../../xffm/fm/view/local/popup.hh:1309 ../../xffm/common/util.hh:1452
 msgid "Run in Terminal"
 msgstr "Терминал дотор ажиллуулах"
 
-#: ../../xffm/fm/local/popup.hh:853
+#: ../../xffm/fm/view/local/popup.hh:1112
 #, fuzzy
 msgid "Arguments for the Command"
 msgstr "Тушаал шинээр биелүүлэх"
 
-#: ../../xffm/fm/local/popup.hh:1047 ../../xffm/fm/local/view.hh:141
+#: ../../xffm/fm/view/local/popup.hh:1258
+#, fuzzy
+msgid "You have selected multiple files or folders"
+msgstr "Та энд олон хавтас оруулж болно."
+
+#: ../../xffm/fm/view/local/popup.hh:1332 ../../xffm/fm/view/local/view.hh:156
 #, fuzzy
 msgid "Invalid entry"
 msgstr "Буруу баримт бичиг"
 
-#: ../../xffm/fm/local/properties.hh:235
+#: ../../xffm/fm/view/local/properties.hh:245
 #, fuzzy
 msgid "Properties and Attributes"
 msgstr "Шинжийг устгах"
 
-#: ../../xffm/fm/local/properties.hh:264
+#: ../../xffm/fm/view/local/properties.hh:274
 #, fuzzy
 msgid "File Mode:"
 msgstr "Файлын эзэн:"
 
-#: ../../xffm/fm/local/properties.hh:290
+#: ../../xffm/fm/view/local/properties.hh:300
 msgid "File:"
 msgstr "Файл:"
 
@@ -1036,418 +1188,335 @@ msgstr "Файл:"
 #. add signal handler to changed signal for combo box
 #. Add process buttons
 #.
-#: ../../xffm/fm/local/properties.hh:302
+#: ../../xffm/fm/view/local/properties.hh:312
 #, fuzzy
 msgid "Apply changes"
 msgstr "Загварыг хэрэглэх"
 
-#: ../../xffm/fm/local/properties.hh:462
+#: ../../xffm/fm/view/local/properties.hh:477
 msgid "Successfully moved to trash."
 msgstr ""
 
-#: ../../xffm/fm/local/properties.hh:463
+#: ../../xffm/fm/view/local/properties.hh:478
 msgid "Source:"
 msgstr "Эх үүсвэр:"
 
-#: ../../xffm/fm/local/rm.hh:59
+#: ../../xffm/fm/view/local/rm.hh:59
 #, fuzzy, c-format
 msgid "Delete %s"
 msgstr "Устга"
 
-#: ../../xffm/fm/local/rm.hh:61
+#: ../../xffm/fm/view/local/rm.hh:61
 msgid "Warning: "
 msgstr "Сэрэмжлүүлэг: "
 
 #. gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
 #. title
-#: ../../xffm/fm/local/rm.hh:90
+#: ../../xffm/fm/view/local/rm.hh:92
 msgid "Remove"
 msgstr "Устга"
 
-#: ../../xffm/fm/local/rm.hh:140
+#: ../../xffm/fm/view/local/rm.hh:142
 #, fuzzy
 msgid "Apply to all"
 msgstr "Батлах:"
 
 #. **************
 #. This is now available to BSD with rm -P option
-#: ../../xffm/fm/local/rm.hh:163 ../../xffm/common/gtk.hh:76
+#: ../../xffm/fm/view/local/rm.hh:165 ../../xffm/common/gtk.hh:91
 msgid "Shred"
 msgstr ""
 
-#. We do not count "../"
-#: ../../xffm/fm/local/view.hh:48 ../../xffm/fm/base/monitor.hh:28
-#, fuzzy, c-format
-msgid "Files: %s"
-msgstr "Файл: %s"
+#: ../../xffm/fm/view/local/rm.hh:183
+msgid "Trash"
+msgstr "Хогийн сав"
 
-#: ../../xffm/fm/root/model.hh:78
+#: ../../xffm/fm/view/local/view.hh:177
+#, fuzzy, c-format
+msgid "The volume '%s' is not mounted."
+msgstr "»%s« текст олдсонгүй."
+
+#: ../../xffm/fm/view/root/model.hh:82
 #, fuzzy
 msgid "Root Directory"
 msgstr "Лавлах"
 
-#: ../../xffm/fm/root/model.hh:94
+#: ../../xffm/fm/view/root/model.hh:98
 #, fuzzy
 msgid "This is the root of the filesystem"
 msgstr "Файлын бүлэг."
 
-#: ../../xffm/fm/root/model.hh:105
-#, fuzzy
-msgid "Home Directory"
-msgstr "Гэр лавлах:"
-
-#: ../../xffm/fm/root/model.hh:132
-#, fuzzy
-msgid "Trash bin"
-msgstr "Хогийн сав"
-
-#: ../../xffm/fm/root/model.hh:162 ../../xffm/fm/fstab/popup.hh:29
-#, fuzzy
-msgid "Disk Image Mounter"
-msgstr "Диск үүсгэгч"
-
-#: ../../xffm/fm/root/model.hh:169 ../../xffm/fm/root/model.hh:185
+#: ../../xffm/fm/view/root/model.hh:176 ../../xffm/fm/view/root/model.hh:191
 msgid "Mount local disks and devices"
 msgstr "Өөрийн дискүүд болон төхөөрөмүүдийн үүсгэх"
 
-#: ../../xffm/fm/root/model.hh:170 ../../xffm/fm/fstab/popup.hh:25
-#: ../../xffm/fm/fstab/view.hh:429
+#: ../../xffm/fm/view/root/model.hh:177 ../../xffm/fm/view/fstab/popup.hh:23
+#: ../../xffm/fm/view/fstab/view.hh:1084
 #, fuzzy
 msgid "eCryptfs Volume"
 msgstr "Санах ойн өгөгдөл хадгалагч"
 
-#: ../../xffm/fm/root/model.hh:171 ../../xffm/fm/fstab/popup.hh:24
+#: ../../xffm/fm/view/root/model.hh:178 ../../xffm/fm/view/fstab/popup.hh:22
 msgid "SSHFS Remote Synchronization Folder"
 msgstr ""
 
-#: ../../xffm/fm/root/model.hh:172 ../../xffm/fm/fstab/popup.hh:23
-#: ../../xffm/fm/fstab/view.hh:377
+#: ../../xffm/fm/view/root/model.hh:179 ../../xffm/fm/view/fstab/popup.hh:21
+#: ../../xffm/fm/view/fstab/view.hh:1032
 msgid "NFS Network Volume"
 msgstr "NFS сүлжээ өгөгдөл хадгалагч"
 
-#: ../../xffm/fm/root/model.hh:173 ../../xffm/fm/fstab/popup.hh:26
-#: ../../xffm/fm/fstab/view.hh:455
+#: ../../xffm/fm/view/root/model.hh:180 ../../xffm/fm/view/fstab/popup.hh:24
+#: ../../xffm/fm/view/fstab/view.hh:1110
 #, fuzzy
 msgid "CIFS Volume"
 msgstr "XIAFS өгөгдөл хадгалагч"
 
-#: ../../xffm/fm/root/model.hh:195
-#, fuzzy
-msgid "Software Updater"
-msgstr "Програм хангамж"
-
-#: ../../xffm/fm/root/model.hh:218 ../../xffm/fm/root/model.hh:230
-#, fuzzy
-msgid "Add or remove software installed on the system"
-msgstr "Системд суусан байгаа бүлэг багцыг үзүүл"
-
-#: ../../xffm/fm/root/model.hh:271
+#: ../../xffm/fm/view/root/model.hh:229
 #, fuzzy
 msgid "Go to bookmarked location"
 msgstr "Гэр байрлал руу оч"
 
-#. {N_("Add bookmark"), (void *)BasePopUp<Type>::noop, NULL, NULL},
-#: ../../xffm/fm/root/view.hh:61
+#: ../../xffm/fm/view/root/popup.hh:138
 #, fuzzy
 msgid "Empty trash"
 msgstr "Хогны сав хоослох"
 
 #. File chooser
-#: ../../xffm/fm/fstab/popup.hh:121
+#: ../../xffm/fm/view/fstab/popup.hh:129
 #, fuzzy
 msgid "Mount Device"
 msgstr "Оролтын төхөөрөмж:"
 
-#: ../../xffm/fm/fstab/popup.hh:133
+#: ../../xffm/fm/view/fstab/popup.hh:141 ../../xffm/fm/view/fstab/view.hh:923
 #, fuzzy
 msgid "Mount point:"
 msgstr "Фонтын нэгж"
 
-#: ../../xffm/fm/fstab/view.hh:301
+#: ../../xffm/fm/view/fstab/view.hh:590
 #, fuzzy
-msgid "Mounted on:"
-msgstr "Үүсгэгчийн заагч:"
+msgid "Mount point: "
+msgstr "Фонтын нэгж"
 
-#: ../../xffm/fm/fstab/view.hh:302
+#: ../../xffm/fm/view/fstab/view.hh:591
 #, fuzzy
-msgid "Mount on"
-msgstr "Үүсгэгчийн заагч:"
+msgid "Mount device: "
+msgstr "Харагдсан төхөөрөмж: "
 
-#: ../../xffm/fm/fstab/view.hh:310 ../../xffm/fm/fstab/view.hh:312
+#. Since /dev is not concrete, the following test returns false...
+#.
+#. if (!g_file_test(name, G_FILE_TEST_IS_DIR)) return;
+#: ../../xffm/fm/view/fstab/view.hh:659 ../../xffm/fm/view/fstab/view.hh:675
+#, fuzzy
+msgid "Disks"
+msgstr "Дискний хэмжээ:"
+
+#: ../../xffm/fm/view/fstab/view.hh:921
+#, fuzzy
+msgid "No Label"
+msgstr "Тэмдэг"
+
+#: ../../xffm/fm/view/fstab/view.hh:922
+msgid "There is no file system available (unformatted)"
+msgstr ""
+
+#: ../../xffm/fm/view/fstab/view.hh:923
 #, fuzzy
 msgid "Not mounted"
 msgstr " үүсгэгдээгүй"
 
-#: ../../xffm/fm/fstab/view.hh:403
+#: ../../xffm/fm/view/fstab/view.hh:1058
 msgid "SFTP (via SSH)"
 msgstr ""
 
-#: ../../xffm/fm/fstab/view.hh:667
+#: ../../xffm/fm/view/fstab/view.hh:1413
 #, fuzzy, c-format
 msgid "Unmounting %s"
 msgstr " %s-ийг хувиргаж байна"
 
-#: ../../xffm/fm/fstab/view.hh:667
+#: ../../xffm/fm/view/fstab/view.hh:1413
 #, fuzzy, c-format
 msgid "Mounting %s"
 msgstr " %s-ийг хувиргаж байна"
 
-#: ../../xffm/fm/dialog/menupopover.hh:128
-msgid "Home"
-msgstr "Home"
-
-#: ../../xffm/fm/dialog/menupopover.hh:129 ../../xffm/common/gtk.hh:64
+#: ../../xffm/fm/view/pkg/model.hh:41 ../../xffm/fm/view/pkg/model.hh:52
 #, fuzzy
-msgid "Open terminal"
-msgstr "Терминал нээх"
+msgid "Add or remove software installed on the system"
+msgstr "Системд суусан байгаа бүлэг багцыг үзүүл"
 
-#: ../../xffm/fm/dialog/menupopover.hh:130
+#: ../../xffm/fm/view/pkg/model.hh:111
+msgid "String"
+msgstr "Тэмдэгт мөр"
+
+#: ../../xffm/fm/view/pkg/model.hh:116
 #, fuzzy
-msgid "Open a New Window"
-msgstr "Шинэ цонхонд нээх"
+msgid "Waiting for search results"
+msgstr "LDAP серверээс үр дүнг хүлээн авч байна..."
 
-#. {N_("Execute Shell Command"), (void *)MenuPopoverSignals<Type>::shell, (void *) menuButton_},
-#: ../../xffm/fm/dialog/menupopover.hh:132 ../../xffm/common/gtk.hh:69
-msgid "Search"
-msgstr "Хайх"
-
-#: ../../xffm/fm/dialog/menupopover.hh:133 ../../xffm/common/gtk.hh:71
-msgid "Exit"
-msgstr "Гарах"
-
-#: ../../xffm/fm/dialog/dialog.hh:116
+#: ../../xffm/fm/view/pkg/model.hh:174
 #, fuzzy
-msgid "Removed"
-msgstr "Устга"
+msgid "No results"
+msgstr "Үр дүн"
 
-#: ../../xffm/fm/dialog/dialog.hh:132
+#: ../../xffm/fm/view/pkg/model.hh:373
 #, fuzzy
-msgid "Detected device(s):"
-msgstr "Төхөөрөмжийг олох"
+msgid "Currently busy\n"
+msgstr "Мөнгөн тэмдэгтийн тэмдгүүд"
 
-#. Create the widgets
-#: ../../xffm/fm/page/vbuttonbox.hh:37 ../../xffm/common/gtk.hh:332
-msgid "Help"
-msgstr "Тусламж"
-
-#. File chooser
-#: ../../xffm/fm/page/pathbar.hh:306 ../../xffm/fm/page/pathbar.hh:308
+#: ../../xffm/fm/view/pkg/popup.hh:44
 #, fuzzy
-msgid "Go to"
-msgstr "Хуудсанд очих"
+msgid "Update Database"
+msgstr "Өгөгдлийн бааз"
 
-#: ../../xffm/fm/page/pathbar.hh:331
-msgid "Not a directory"
-msgstr "Лавлах биш"
-
-#: ../../xffm/fm/page/runbutton.hh:135
+#: ../../xffm/fm/view/pkg/popup.hh:45
 #, fuzzy
-msgid "Renice Process"
-msgstr "Процесс нууцлах"
+msgid "Fetch"
+msgstr "Сунгах"
 
-#: ../../xffm/fm/page/runbutton.hh:135
-msgid "Suspend"
-msgstr "Унтуулах"
+#: ../../xffm/fm/view/pkg/popup.hh:46
+#, fuzzy
+msgid "Install --dry-run"
+msgstr "Суулгасан өдөр:"
 
-#: ../../xffm/fm/page/runbutton.hh:135
-msgid "Continue"
-msgstr "Үргэлжлүүлэх"
+#: ../../xffm/fm/view/pkg/popup.hh:47
+msgid "Install"
+msgstr "Суулгах"
 
-#: ../../xffm/fm/page/runbutton.hh:136
-msgid "Interrupt"
-msgstr "Тасалдал"
-
-#: ../../xffm/fm/page/runbutton.hh:136
-msgid "Hangup"
-msgstr "Тавих"
-
-#: ../../xffm/fm/page/runbutton.hh:136
-msgid "User 1 (USR1)"
+#: ../../xffm/fm/view/pkg/popup.hh:48
+msgid "Uninstall --dry-run"
 msgstr ""
 
-#: ../../xffm/fm/page/runbutton.hh:137
-msgid "User 2 (USR2)"
-msgstr ""
-
-#: ../../xffm/fm/page/runbutton.hh:137
+#: ../../xffm/fm/view/pkg/popup.hh:49
 #, fuzzy
-msgid "Terminate Task"
-msgstr "Төгсгөх"
+msgid "Uninstall"
+msgstr "Суулгах"
 
-#: ../../xffm/fm/page/runbutton.hh:137
-msgid "Abort"
-msgstr "Болих"
+#: ../../xffm/fm/view/pkg/popup.hh:50
+msgid "Information"
+msgstr "Мэдээлэл"
 
-#: ../../xffm/fm/page/runbutton.hh:138
-msgid "Kill"
-msgstr "Ал"
+#: ../../xffm/fm/view/pkg/popup.hh:140
+msgid "Version"
+msgstr "Хувилбар"
 
-#: ../../xffm/fm/page/runbutton.hh:139
+#: ../../xffm/fm/view/pkg/popup.hh:149
+msgid "Go up"
+msgstr "Дээш очих"
+
+#: ../../xffm/fm/view/pkg/popup.hh:152
 #, fuzzy
-msgid "Segmentation fault"
-msgstr "Сегментийн гажуудал"
+msgid "Search packages"
+msgstr "Гэдрэг хайх"
 
-#: ../../xffm/fm/page/runbutton.hh:217
-msgid "PID"
-msgstr "PID"
+#: ../../xffm/fm/view/pkg/popup.hh:184 ../../xffm/fm/view/view.hh:93
+#, fuzzy, c-format
+msgid "Loading %s...%s"
+msgstr "\"%s\" ачааллаж байна"
 
-#: ../../xffm/fm/page/hbuttonbox.hh:37
-#, fuzzy
-msgid "Embedded Terminal"
-msgstr "Терминал нээх"
+#: ../../xffm/fm/view/pkg/popup.hh:184 ../../xffm/fm/view/view.hh:93
+msgid "Please Wait..."
+msgstr "Түр хүлээнэ үү..."
 
-#: ../../xffm/fm/page/hbuttonbox.hh:38
-#, fuzzy
-msgid "All items in the iconview."
-msgstr "Энэ цонхон даь бүх объектуудыг сонгох"
-
-#: ../../xffm/fm/page/hbuttonbox.hh:39
-#, fuzzy
-msgid "Scripting"
-msgstr "Скрипт"
-
-#: ../../xffm/fm/page/hbuttonbox.hh:40
-#, fuzzy
-msgid "Clear Log"
-msgstr "Буцаалтыг арилга"
-
-#. Status textview
-#: ../../xffm/fm/page/hbuttonbox.hh:42
-#, fuzzy
-msgid "Terminal font"
-msgstr "Терминал"
-
-#: ../../xffm/fm/treeview.hh:17
+#: ../../xffm/fm/view/treeview.hh:17
 msgid "Name"
 msgstr "Нэр"
 
-#: ../../xffm/fm/treeview.hh:20
+#: ../../xffm/fm/view/treeview.hh:19
 msgid "Size"
 msgstr "Хэмжээ"
 
-#: ../../xffm/fm/treeview.hh:21
+#: ../../xffm/fm/view/treeview.hh:20
 msgid "Date"
 msgstr "Огноо"
 
-#: ../../xffm/fm/treeview.hh:22
+#: ../../xffm/fm/view/treeview.hh:22
 #, fuzzy
 msgid "Mimetype"
 msgstr "Тоглоомын төрөл"
 
-#: ../../xffm/fm/treeview.hh:24
-msgid "TYPE"
-msgstr "ТӨРӨЛ"
-
-#: ../../xffm/fm/base/signals.hh:642
-#, fuzzy
-msgid "Directory does not exist."
-msgstr "%s: Лавлах %s алга."
-
-#: ../../xffm/fm/base/signals.hh:644 ../../xffm/fm/base/signals.hh:646
+#: ../../xffm/fm/view/base/signals.hh:838
 #, fuzzy
 msgid "Trash is empty"
 msgstr "Файл хоосон"
 
-#: ../../xffm/common/settings.hh:27
+#: ../../xffm/fm/view/base/signals.hh:840
+#, fuzzy
+msgid "Directory does not exist."
+msgstr "%s: Лавлах %s алга."
+
+#: ../../xffm/common/settings.hh:30
 #, fuzzy
 msgid "New File:"
 msgstr "Шинэ файл"
 
-#: ../../xffm/common/gio.hh:235
-#, fuzzy
-msgid "Could not copy item:"
-msgstr "Файлыг онгойлгох чадсангүй: %s"
-
-#: ../../xffm/common/gio.hh:237
-#, fuzzy
-msgid "Could not move item:"
-msgstr "Файлыг онгойлгох чадсангүй: %s"
-
-#: ../../xffm/common/gio.hh:239
-#, fuzzy
-msgid "Create symbolic link"
-msgstr "Тэмдэгт Холбоос"
-
-#: ../../xffm/common/gio.hh:276
-#, fuzzy, c-format
-msgid ""
-"Could not delete:\n"
-"%s"
-msgstr "\"%s\"-г устгаж чадсангүй."
-
-#: ../../xffm/common/gio.hh:278
-#, fuzzy, c-format
-msgid "Could not move %s to trash"
-msgstr "\"%s\" баримтыг хогийн сав руу хийж чадсангүй."
-
-#: ../../xffm/common/clipboard.hh:23 ../../xffm/common/dnd.hh:40
-#, fuzzy
-msgid "Copying files locally"
+#: ../../xffm/common/gio.hh:81
+msgid "Copying files"
 msgstr "Файлыг хуулж байна"
 
-#: ../../xffm/common/clipboard.hh:30 ../../xffm/common/dnd.hh:34
-msgid "Moving files"
-msgstr "Файлуудыг зөөж байна"
+#: ../../xffm/common/gio.hh:85
+#, fuzzy
+msgid "linking"
+msgstr "Холбоос үүсгэх"
 
-#: ../../xffm/common/dnd.hh:46
+#: ../../xffm/common/gio.hh:87
+#, fuzzy
+msgid "rename"
+msgstr "Ахин нэрлэ"
+
+#: ../../xffm/common/gio.hh:426
+#, c-format
+msgid "(%d of %d)"
+msgstr "(%d -ийн %d)"
+
+#: ../../xffm/common/dnd.hh:47
 msgid "Create Link"
 msgstr "Холбоос үүсгэ"
 
-#: ../../xffm/common/util.hh:1200
+#: ../../xffm/common/util.hh:1404
 #, c-format
 msgid ""
 "Scriptfile \"%s\" is not executable. Please set the executable-attribute on "
 "that file."
 msgstr ""
 
-#: ../../xffm/common/util.hh:1202 ../../xffm/common/util.hh:1237
+#: ../../xffm/common/util.hh:1406 ../../xffm/common/util.hh:1441
 #, c-format
 msgid "Open with %s"
 msgstr "%s -тэй нээх "
 
-#: ../../xffm/common/util.hh:1202
+#: ../../xffm/common/util.hh:1406
 msgid "Text Editor"
 msgstr "Текст боловсруулагч"
 
-#: ../../xffm/common/util.hh:1239 ../../xffm/common/gtk.hh:65
+#: ../../xffm/common/util.hh:1443 ../../xffm/common/gtk.hh:69
 #, fuzzy
 msgid "Execute Shell Command"
 msgstr "Shell-тушаал"
 
-#: ../../xffm/common/util.hh:1243
+#: ../../xffm/common/util.hh:1447
 msgid ""
 "Console: quickly run single commands -- write a command here and press enter."
 msgstr ""
 
-#: ../../xffm/common/gtk.hh:123
-msgid "New Tab"
-msgstr "Шинэ самбар"
+#: ../../xffm/common/gtk.hh:352 ../../xffm/common/gtk.hh:360
+msgid "Help"
+msgstr "Тусламж"
 
-#: ../../xffm/common/gtk.hh:335
-msgid "OK"
-msgstr "За"
-
-#: ../../xffm/common/run.hh:344
+#: ../../xffm/common/run.hh:338
 #, fuzzy
 msgid "error"
 msgstr "Террор"
 
-#: ../../xffm/common/run.hh:348
+#: ../../xffm/common/run.hh:342
 #, fuzzy
 msgid "warning"
 msgstr "Анхааруулга"
 
-#: ../../xffm/common/mime.hh:101 ../../xffm/common/mime.hh:143
-#, fuzzy
-msgid "No Read Permission"
-msgstr "Хандах эрхүүд"
-
-#: ../../xffm/common/preview.hh:593
+#: ../../xffm/common/preview.hh:581
 #, fuzzy
 msgid "Empty file"
 msgstr "Хоосон файл"
 
-#: ../../xffm/common/preview.hh:648
+#: ../../xffm/common/preview.hh:636
 #, fuzzy, c-format
 msgid "Cannot read from %s"
 msgstr "CD уншиж чадахгүй байна:%s"
