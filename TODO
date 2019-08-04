@@ -1,4 +1,6 @@
 For 0.91
+
+> Test local setting and work of locale in FreeBSD
  
  > Check working with either or none of libmagic and perl mimetype
  
