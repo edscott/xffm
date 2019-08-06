@@ -6,21 +6,12 @@
 #include "mimeapplication.hh"
 
 // We can use either libmagic or perl mimetype, depending on configuration
+// Prefer perl mimetype...
 
 
 namespace xf {
     
-// Brainstorm
 // For starters, we need mime_type() and mime_file(), 
-// then type_from_sfx and alias_type and apps and command
-
-// We have now simplified, removing custom made mime determination
-// with now mature shared-mime-info package.
-// This follows the same principle used in replacing custom made
-// iconview with now mature gtk iconview.
-// Things get simpler and maintainance not so complicated (methinks).
-// 
-// Remake: simplify with now mature shared-mime-info package
 
 
 template <class Type>
@@ -44,7 +35,7 @@ public:
 #ifdef MIMETYPE_PROGRAM
 	return MimeType<Type>::mimeMagic(file);
 #else
-# if LIBMAGIC
+# if HAVE_LIBMAGIC
 	return MimeMagic<Type>::mimeMagic(file);
 # else
         return NULL;
@@ -62,6 +53,10 @@ public:
 #ifdef MIMETYPE_PROGRAM
 	return MimeType<Type>::mimeType(file);
 #else
+# if HAVE_LIBMAGIC
+	return MimeMagic<Type>::mimeMagic(file);
+# else
+
 	errno=0;
         struct stat st;
         if (stat(file, &st) < 0) {
@@ -73,25 +68,24 @@ public:
         gchar *r = mimeType(file, &st);
         return r;
         
+# endif
 #endif
    } 
 
-// FIXME: use language code -l code, --language=code 
     static gchar *
     mimeFile (const gchar *file){
 #ifdef MIMETYPE_PROGRAM
+// XXX: Could use language code -l code, --language=code 
 	return MimeType<Type>::mimeFile(file);
 #else
+# if HAVE_LIBMAGIC
+	return MimeMagic<Type>::mimeFile(file);
+# else
         return NULL;
+# endif
 #endif
    } 
    
-
-
-private:
-
-public:
-
 public: 
     static gchar *
     basicMimeType(unsigned char d_type){

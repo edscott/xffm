@@ -6,7 +6,7 @@ find_file(FREEDESKTOP_GLOBS  NAMES globs
     /usr/local/share/mime 
     )
 if(NOT FREEDESKTOP_GLOBS)
-    set(FREEDESKTOP_GLOBS "FREEDESKTOP_GLOBS_NOTFOUND")
+    set(FREEDESKTOP_GLOBS "FREEDESKTOP_GLOBS")
     message( WARNING "File freedesktop.org.xml globs was not found.")
     message( WARNING "Mimetype functionality may be limited." )
 else()
@@ -21,7 +21,7 @@ find_file(FREEDESKTOP_ALIAS  NAMES aliases
     /usr/local/share/mime 
     )
 if(NOT FREEDESKTOP_ALIAS)
-    set(FREEDESKTOP_ALIAS "FREEDESKTOP_ALIAS_NOTFOUND")
+    set(FREEDESKTOP_ALIAS "FREEDESKTOP_ALIAS")
     message( WARNING "File freedesktop.org.xml aliases was not found.")
     message( WARNING "Mimetype functionality may be limited." )
 else()
@@ -36,7 +36,7 @@ find_file(FREEDESKTOP_ICONS  NAMES generic-icons
     /usr/local/share/mime 
     )
 if(NOT FREEDESKTOP_ICONS)
-    set(FREEDESKTOP_ICONS  "FREEDESKTOP_ICONS_NOTFOUND")
+    set(FREEDESKTOP_ICONS  "FREEDESKTOP_ICONS")
     message( WARNING "File freedesktop.org.xml generic-icons was not found.")
     message( WARNING "Mimetype functionality may be limited." )
 else()

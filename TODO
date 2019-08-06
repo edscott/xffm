@@ -1,10 +1,8 @@
 For 0.91
 
 > Test local setting and work of locale in FreeBSD
- 
- > Check working with either or none of libmagic and perl mimetype
- 
- > printout optional and required libraries found in configure step.
+  
+ > printout optional and required libraries found in configure step: show whether libmagic or perl mimetype will be used.
 
 Bugs:
   * bug: do a "git branch whatever" in script mode. Script will expect input

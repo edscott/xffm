@@ -260,7 +260,7 @@ public:
 
         auto date = LocalModel<Type>::dateString((xd_p->st)?xd_p->st->st_mtime:0);
         auto size = LocalModel<Type>::sizeString((xd_p->st)?xd_p->st->st_size:0);
-DBG("local/monitor gtk_list_store_set(%s)\n", iconName);
+        TRACE("local/monitor gtk_list_store_set(%s)\n", iconName);
 	gtk_list_store_set (store, iter, 
                 SIZE, size, 
                 DATE, date,

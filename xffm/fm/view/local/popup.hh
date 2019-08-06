@@ -632,7 +632,7 @@ private:
     defaultMimeTypeApp(const gchar *mimetype){
 	gchar *defaultApp = Settings<Type>::getSettingString("MimeTypeApplications", mimetype);
 	if (!defaultApp) {
-	    const gchar **apps = Mime<Type>::locate_apps(mimetype);
+	    const gchar **apps = MimeApplication<Type>::locate_apps(mimetype);
 	    if (apps && *apps) defaultApp = g_strdup(*apps);
 	}
 
@@ -1260,7 +1260,7 @@ public:
             if (*p=='\n') *p = ' ';
         }
 
-	const gchar **apps = Mime<Type>::locate_apps(mimetype);
+	const gchar **apps = MimeApplication<Type>::locate_apps(mimetype);
 
 	gchar *fileInfo;
         if (multiple) fileInfo = g_strdup("FIXME fileinfo");

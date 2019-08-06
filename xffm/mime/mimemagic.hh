@@ -69,7 +69,9 @@ public:
 	    return g_strdup(h_type);
 	}
 	
-	gint flags = MAGIC_MIME_TYPE | MAGIC_SYMLINK | MAGIC_PRESERVE_ATIME;
+	gint flags = MAGIC_MIME_TYPE | MAGIC_SYMLINK;
+	//preserve atime changes file attributes and loops monitor function
+        //gint flags = MAGIC_MIME_TYPE | MAGIC_SYMLINK | MAGIC_PRESERVE_ATIME;
 	gchar *mimemagic = lib_magic (file, flags);
 	TRACE("mime_magic(%s)...%s\n", file, mimemagic);
 	/*gchar *old_type = mimemagic; 
@@ -78,17 +80,17 @@ public:
 	return mimemagic;
     }
 
-/* 
+ 
     static gchar *
-    mime_file (const gchar *file) {
-	TRACE("mime_file(%s)...\n", file);
+    mimeFile(const gchar *file) {
+	TRACE("mimeFile(%s)...\n", file);
 	gint flags =  MAGIC_PRESERVE_ATIME;
 	gchar *f = lib_magic (file, flags);
-	TRACE("mime_file(%s)...%s\n", file, f);
+	TRACE("mimeFile(%s)...%s\n", file, f);
 	if (!f) {
 	    return NULL;
 	}
-	if (rfm_g_file_test(file, G_FILE_TEST_IS_SYMLINK)){
+	if (g_file_test(file, G_FILE_TEST_IS_SYMLINK)){
 	    flags |= MAGIC_SYMLINK;
 	    gchar *ff = f;
 	    f = lib_magic (file, flags);
@@ -100,7 +102,7 @@ public:
 	}
 	return f;
     }
-*/
+
     static gchar *
     encoding (const gchar *file) {
 	TRACE("mime_encoding(%s)...\n", file);
