@@ -347,7 +347,7 @@
 # llc <lilicheng@163.net>, 2003.
 # 陈醒(Chen Xing) <cxcxcxcx@gmail.com>, 2010.
 # chainet <chainet@gmail.com>, 2009.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

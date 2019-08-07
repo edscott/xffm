@@ -6,7 +6,7 @@
 # Kibavuidi Nsiangani <lundombe01@zaya-dio.com>, 2006-2010.
 # Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
 # Kikongo Translation Team <lundombe01@zaya-dio.com>, 2010.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

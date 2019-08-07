@@ -99,7 +99,7 @@
 # Aleksandar Yordanov <punkin.drublik@gmail.com>, 2007.
 # Copyright (C) 2009, 2010, 2011, 2012 Krasimir Chonov <mk2616@abv.bg>.
 # Yasen Pramatarov <yasen@lindeas.com>, 2004-2012.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

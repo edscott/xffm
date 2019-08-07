@@ -36,7 +36,7 @@
 # Bal Krishna Bal <bal@mpp.org.np>, 2005.
 # Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
 # Pawan Chitrakar <pawan@nplinux.org>, 2003-2006.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

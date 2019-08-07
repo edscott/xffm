@@ -102,7 +102,7 @@
 # Attila Hammer <hammera@pickup.hu>, 2012.
 # Biro Szabolcs <szbiro@index.hu>, 1999.
 # Szilveszter Farkas <szilveszter.farkas@gmail.com>, 2007.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

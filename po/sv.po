@@ -84,7 +84,7 @@
 # Erik Piehl <erik.piehl@gmail.com>, 2008.
 # Fredrik Hallenberg <hallon@lysator.liu.se>, 1999.
 # Richard Hult <rhult@codefactory.se>, 1999-2007.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

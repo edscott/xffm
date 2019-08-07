@@ -9,7 +9,7 @@
 # Prof. Dr. Eduard Werner <e.werner@rz.uni-leipzig.de>, 2003-2004.
 # Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
 # <srtxg@chanae.alphanet.ch>, 2001-2011.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"
@@ -18,13 +18,12 @@ msgstr ""
 "PO-Revision-Date: 2008-11-07 00:26+0100\n"
 "Last-Translator: Eduard Werner <edi.werner@gmx.de>\n"
 "Language-Team: enUS <kde-i18n-doc@lists.kde.org>\n"
-"Language: \n"
+"Language: upper Sorbian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KAider 0.1\n"
-"Plural-Forms: nplurals=4; plural=n%s00==1 ? 0 : n%s00==2 ? 1 : n%s00==3 || n"
-"%s00==4 ? 2 : 3;\n"
+
 
 #: ../../xffm/mime/mimemagic.hh:68 ../../xffm/mime/mimemagic.hh:110
 #: ../../xffm/common/mimemagic.hh:68 ../../xffm/common/mimemagic.hh:110

@@ -148,7 +148,7 @@
 # Erik Kjær Pedersen <erik@binghamton.edu>, 1998-2007.
 # Richard Hult <rhult@codefactory.se>, 1999-2007.
 # Danish translation of @PACKAGE <>.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

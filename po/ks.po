@@ -4,7 +4,7 @@
 #   --- vie may  3 10:40:04 CDT 2013 ---
 #
 # Rakesh Pandit <rakesh.pandit@gmail.com>, 2007.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

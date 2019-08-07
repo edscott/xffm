@@ -398,7 +398,7 @@
 # Sarah Bransdor <Sarah@spooky-online.de>, 2002-2004.
 # Carsten Pfeiffer <pfeiffer@kde.org>, 1998-2001.
 # Carsten Guenther <carsten.guenther@scalix.com>, 2005.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

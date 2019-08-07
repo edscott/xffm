@@ -84,7 +84,7 @@
 # Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
 # Kim Ribeiro <ribekim@gmail.com>, 2009.
 # Antono VASILJEV <antono.vasiljev@gmail.com>, 2007.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

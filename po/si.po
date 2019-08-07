@@ -18,7 +18,7 @@
 # Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
 # K.P.Gayan Tharaka, <kpgtharaka@gmail.com>, 2009.
 # qeqe <danishka@gmail.com>, 2009.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

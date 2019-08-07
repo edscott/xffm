@@ -13,7 +13,7 @@
 # Mashrab Kuvatov <kmashrab@uni-bremen.de>, 2002-2009.
 # translation of uz@cyrillic.po to Uzbek <>.
 # Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

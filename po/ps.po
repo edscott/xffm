@@ -7,7 +7,7 @@
 # Zabeeh Khan <zabeehkhan@gmail.com>, 2008.
 # Author@Betawiki: Ahmed-Najib-Biabani-Ibrahimkhel <>.
 # Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

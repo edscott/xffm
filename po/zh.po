@@ -45,7 +45,7 @@
 # Fan Qijiang <fqj1994@linux.com>, 2010.
 # Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
 # Mai Hao Hui <mhh@126.com>, 2001-2004.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

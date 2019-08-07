@@ -13,7 +13,7 @@
 # Zaw Myo Htet <hackforpeace01@gmail.com>, 2011.
 # Yemonkyaw <yemonkyaw007@gmail.com>, 2011.
 # KYAW MYAT THU <MYANMARNE0@GMAIL.COM>, 2011.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

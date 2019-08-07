@@ -10,7 +10,7 @@
 # Thierry Randrianiriana <thierry@isvtec.com>, 2006-2010.
 # Fanomezana Rajaonarisoa <rajfanhar@yahoo.fr>, 2006.
 # Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

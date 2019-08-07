@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the Rodent package.
 #   --- vie may  3 10:41:31 CDT 2013 ---
 #
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

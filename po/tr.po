@@ -228,7 +228,7 @@
 # Deniz Koçak <lenduha@gmail.com>, 2005.
 # erkan kadak <erkan@hardhours.com>, 2010.
 # Ozan Eren BİLGEN <oebilgen@uekae.tubitak.gov.tr>, 2005.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

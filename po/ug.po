@@ -21,7 +21,7 @@
 # Abduxukur Abdurixit <abduxukur.abdurixit@t-systems.ch>, 2005.
 # Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
 # Temkin <temkin119@gmail.com>, 2011.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

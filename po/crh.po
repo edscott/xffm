@@ -6,7 +6,7 @@
 #  Reşat SABIQ <tilde.birlik@gmail.com>, 2009.
 # Reşat SABIQ <tilde.birlik@gmail.com>, 2008-2013.
 # Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"
@@ -26,7 +26,7 @@ msgstr ""
 
 #: ../../xffm/mime/mimemagic.hh:68 ../../xffm/mime/mimemagic.hh:110
 #: ../../xffm/common/mimemagic.hh:68 ../../xffm/common/mimemagic.hh:110
-#, fuzzy
+# fuzzy
 msgid "No Read Permission"
 msgstr "Cilbent Ruhsetleri:"
 

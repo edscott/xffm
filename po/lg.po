@@ -4,7 +4,7 @@
 #   --- vie may  3 10:41:58 CDT 2013 ---
 #
 # Kizito Birabwa <kbirabwa@yahoo.co.uk>, 2010-2011.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

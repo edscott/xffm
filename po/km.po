@@ -34,7 +34,7 @@
 # Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
 # Author@Betawiki: គីមស៊្រុន <>.
 # vannak eng <evannak@khmeros.info>, 2006.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

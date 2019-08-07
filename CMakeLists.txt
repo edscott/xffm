@@ -6,13 +6,22 @@ set(PREFIX_BIN /usr/local/bin)
 # Version info
 set(xffm_VERSION_MAJOR 0)
 set(xffm_VERSION_MINOR 91)
-#set(CMAKE_CXX_FLAGS "-ggdb")
 
 # work in alpha phase...
-#add_definitions(-DENABLE_CUSTOM_RESPONSE)
-#add_definitions(-DENABLE_PKG_MODULE)
-#add_definitions(-DENABLE_DIFF_MODULE)
-#add_definitions(-DENABLE_FSTAB_MODULE)
+set(CMAKE_CXX_FLAGS "-ggdb")
+add_definitions(-DENABLE_CUSTOM_RESPONSE)
+add_definitions(-DENABLE_PKG_MODULE)
+add_definitions(-DENABLE_DIFF_MODULE)
+add_definitions(-DENABLE_FSTAB_MODULE)
+
+# Setting up Intl
+find_package (Intl REQUIRED)
+find_package(Gettext REQUIRED)
+include_directories(${INTL_INCLUDE_DIRS})
+link_directories(${INTL_LIBRARY_DIRS})
+
+
+
 
 set(CMAKE_EXE_LINKER_FLAGS "-L/usr/lib -L/usr/local/lib")
 set(ENV{PKG_CONFIG_PATH}  "/usr/local/lib/pkgconfig")
@@ -54,32 +63,42 @@ include(cmake/libraries.cmake)
 #execute_process(COMMAND ls -l /home)
 
 
-execute_process(COMMAND ln -f -s ../autotools/configure.ac configure.ac)
-execute_process(COMMAND ln -f -s ../autotools/Makefile.am Makefile.am)
-execute_process(COMMAND rm -rf po)
-execute_process(COMMAND cp -R ../po po)
-execute_process(COMMAND rm -rf m4)
-execute_process(COMMAND ln -f -s ../autotools/m4 m4)
-execute_process(COMMAND cp -f ../COPYING ./)
-execute_process(COMMAND touch README)
-execute_process(COMMAND touch NEWS)
-execute_process(COMMAND touch AUTHORS)
-execute_process(COMMAND touch ChangeLog)
+FIND_PROGRAM(GETTEXT_MSGFMT_EXECUTABLE msgfmt)
 
-message(STATUS "execute_process aclocal...")
-execute_process(COMMAND aclocal -I m4)
-message(STATUS "execute_process autoheader...")
-execute_process(COMMAND autoheader)
-message(STATUS "execute_process autoconf...")
-execute_process(COMMAND autoconf)
-message(STATUS "execute_process automake...")
-execute_process(COMMAND automake --add-missing --copy)
-execute_process(COMMAND ./configure --prefix=/usr/local)
-execute_process(COMMAND mv -v po/Makefile po/Makefile.autotools)
-#execute_process(COMMAND po/build)
-#execute_process(COMMAND make update-po)
-execute_process(COMMAND rm Makefile)
+if(NOT GETTEXT_MSGFMT_EXECUTABLE)
+    MESSAGE("------
+    NOTE: msgfmt not found. Translations will *not* be installed
+------")
+else(NOT GETTEXT_MSGFMT_EXECUTABLE)
 
+  SET(catalogname xffm+)
+
+  FILE(GLOB PO_FILES po/*.po)
+  SET(GMO_FILES)
+  MESSAGE("creating gmo files")
+  foreach(_poFile ${PO_FILES})
+    GET_FILENAME_COMPONENT(_poFileName ${_poFile} NAME)
+#    MESSAGE("${_poFile} --> ${_poFileName}")
+    STRING(REGEX REPLACE "^${catalogname}_?" "" _langCode ${_poFileName} )
+    STRING(REGEX REPLACE "\\.po$" "" _langCode ${_langCode} )
+
+    if( _langCode )
+      GET_FILENAME_COMPONENT(_lang ${_poFile} NAME_WE)
+      SET(_gmoFile ${CMAKE_CURRENT_BINARY_DIR}/${_lang}.gmo)
+#      MESSAGE("file: ${_gmoFile}")
+
+      ADD_CUSTOM_COMMAND(OUTPUT ${_gmoFile}
+        COMMAND ${GETTEXT_MSGFMT_EXECUTABLE} --check -o ${_gmoFile} ${_poFile}
+        DEPENDS ${_poFile})
+      INSTALL(FILES ${_gmoFile} DESTINATION ${LOCALE_INSTALL_DIR}/${_langCode}/LC_MESSAGES/ RENAME ${catalogname}.mo)
+      LIST(APPEND GMO_FILES ${_gmoFile})
+    endif( _langCode )
+
+  endforeach(_poFile ${PO_FILES})
+
+  ADD_CUSTOM_TARGET(translations ALL DEPENDS ${GMO_FILES})
+
+endif(NOT GETTEXT_MSGFMT_EXECUTABLE)
 
 
 # configure header file
@@ -87,7 +106,7 @@ configure_file(
     "${PROJECT_SOURCE_DIR}/config.h.cmake"
     "${PROJECT_BINARY_DIR}/config.h"
     )
-add_subdirectory(po)
+#add_subdirectory(po)
 
 add_subdirectory(xffm)
 #add_subdirectory(structure)

@@ -48,7 +48,7 @@
 # Thomas Niederreiter <tn@xcdroast.org>, 2002-2003.
 # Piret Vacht <piraaja@airpost.net>, 2004-2005.
 # Ain Vagula <avagula@gmail.com>, 2000-2006.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

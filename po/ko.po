@@ -124,7 +124,7 @@
 # Homin Lee (Suapapa) <ff4500@gmail.com>, 2009.
 # BANG, Jaesung <jaesung@liberotown.com>, 2010.
 # Lee Seok <ddoman@kde.or.kr>, 2004.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"
@@ -137,6 +137,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../../xffm/mime/mimemagic.hh:68 ../../xffm/mime/mimemagic.hh:110
 #: ../../xffm/common/mimemagic.hh:68 ../../xffm/common/mimemagic.hh:110

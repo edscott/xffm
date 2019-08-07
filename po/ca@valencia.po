@@ -148,7 +148,7 @@
 # Carles Ferrando Garcia <carles.ferrando@gmail.com>, 2009.
 # Àlex Corretgé i Bergua <alex@domini.net>, 2002.
 # Orestes Mas <orestes@tsc.upc.edu>, 2004-2013.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

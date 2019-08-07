@@ -6,7 +6,7 @@
 # G Karunakar <karunakar@freedomink.org>, 2002-2012.
 # Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
 # Ravishankar Shrivastava <raviratlami@yahoo.com>, 2003-2009.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

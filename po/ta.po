@@ -65,7 +65,7 @@
 # Thuraiappah Vaseeharan <t_vasee@yahoo.com>, 2000-2004.
 # ElangoSundaram <esundara@yahoo.com>, 2002.
 # Dinesh Nadarajah, 2004 <dinesh_list@sbcglobal.net>.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

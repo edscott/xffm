@@ -499,7 +499,7 @@
 # FIRST AUTHOR F�ix SPORTELLI <luimeme@fsportelli.org>, 2003.
 # Etienne <etienne@cyteen.net>, 2009.
 # Gianni Moschini <bobyjoe0@yahoo.fr>, 2006.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

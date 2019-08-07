@@ -43,7 +43,7 @@
 # Farkhod  Akhmedov <farkhod9@hotmail.com>, 2004.
 # Salomov Akmal <youth_opportunities@tajik.net>, 2003-2004.
 # Marina Kolucheva <youth_opportunities@tajik.net>, 2002-2005.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

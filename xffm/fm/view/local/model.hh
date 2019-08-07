@@ -1,9 +1,11 @@
 #ifndef XF_LOCALMODEL__HH
 # define XF_LOCALMODEL__HH
 #include "common/util.hh"
-#ifndef HAVE_STRUCT_DIRENT_D_TYPE
-#warning "HAVE_STRUCT_DIRENT_D_TYPE not defined"
-#endif
+
+// Linux has d_type, and FreeBSD12 now also has it
+//#ifndef HAVE_STRUCT_DIRENT_D_TYPE
+//#warning "HAVE_STRUCT_DIRENT_D_TYPE not defined"
+//#endif
 
 typedef struct xd_t{
     gchar *d_name;

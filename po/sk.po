@@ -130,7 +130,7 @@
 # Martin Lacko <lacko@host.sk>, 2001-2003.
 # Ivan Noris <vix@vazka.sk>, 2004-2005.
 # Stanislav Visnovský <visnovsky@nenya.ms.mff.cuni.cz>, 2002.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"
@@ -142,8 +142,8 @@ msgstr ""
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2  n<=4) ? 1 : 2);\n"
 
 #: ../../xffm/mime/mimemagic.hh:68 ../../xffm/mime/mimemagic.hh:110
 #: ../../xffm/common/mimemagic.hh:68 ../../xffm/common/mimemagic.hh:110

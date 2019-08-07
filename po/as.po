@@ -10,7 +10,7 @@
 # SUNARAM PATIR <lkpatir@yahoo.co.in>, 2004.
 # AMITAKHYA PHUKAN <amitakhya.phukan@gmail.com>, 2006.
 # Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

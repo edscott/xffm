@@ -29,7 +29,7 @@
 # Badral <badral@openmn.org>, 2006-2008.
 # Batbileg <sbatbileg@yahoo.com>.
 # Sanlig Badral KH.ERNAR <ernar_k@yahoo.com>, 2003.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

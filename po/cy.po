@@ -30,7 +30,7 @@
 # Gareth Bowker <tgb@tgb.org.uk>, 2005.
 # Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
 # KD at KGyfieithu <kyfieithu@dotmon.com>, 2003-2004.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

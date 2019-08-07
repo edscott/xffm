@@ -6,7 +6,7 @@
 # Mühemmet Amut <m_amout@yahoo.com>, 2004.
 # Gurban Mühemmet Tewekgeli <gmtavakkoli@yahoo.com>, 2004.
 # Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

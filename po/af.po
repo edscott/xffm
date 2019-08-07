@@ -29,7 +29,7 @@
 # J Franz <juanita.franz@vr-web.de>, 2005.
 # Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
 # Petrus Potgieter <petrus@potgieter.org>, 2009-2011.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

@@ -44,7 +44,7 @@
 # Sadia Afroz <sadia@ankur.org.bd>, 2010.
 # Indranil Das Gupta <indradg@bengalinux.org>, 2003-2004.
 # Muhammad Mahmudur Rahman Khana <mrk_ju@yahoo.com>.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

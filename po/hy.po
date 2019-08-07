@@ -28,7 +28,7 @@
 # Nune <nune@instigatedesign.com>, 2010.
 # Davit Nikoghosyan <nikdavnik@mail.ru>, 2013.
 # Narine <training@instigate.am>, 2010.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

@@ -309,7 +309,7 @@
 # João Emanuel <joaoemanuel1981@gmail.com>, 2003-2006.
 # Henrique Pinto <henrique.pinto@kdemail.net>, 2003-2005.
 # E. A. Tacão <tacao@conectiva.com.br>, 2000-2001.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

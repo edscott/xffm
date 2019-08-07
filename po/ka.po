@@ -40,7 +40,7 @@
 # Besik Meshveliani ბესიკ მეშველიანი <besik28@hotmail.com>.
 # Vladimer Sichinava ვლადიმერ სიჭინავა <vsichi@gnome.org>, 2006-2008.
 # Copyright (C) 2006 Gnome Georgian Translators gnome@inet.ge <>.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

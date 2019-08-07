@@ -17,7 +17,7 @@
 # Maintainer: Душан Живојнов <calvin@verat.net>.
 # Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
 # Reviewed on 2004-02-12 by: Данило Шеган <dsegan@gmx.net>.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

@@ -101,7 +101,7 @@
 # Diego Iastrubni <elcuco@kde.org>, 2003-2013.
 # Copyright (C) 2001-2002 Meni Livne <livne@kde.org>.
 # Ely Levy <nakeee@gmail.com>, 2007.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

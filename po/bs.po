@@ -78,7 +78,7 @@
 # Safir Secerovic <safir@open.net.ba>, 2003.
 # Vladimir Vuksan <vuksan@veus.hr>, 1998-2000.
 # Vladimir Grubor <vlado@mobih.ba>, 2004.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

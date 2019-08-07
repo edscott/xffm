@@ -4,7 +4,6 @@
  */
 
 #define XFFM_CC
-#define ALPHA
 
 #ifdef ALPHA
 # warning "Alpha modules enabled..."
@@ -21,7 +20,7 @@
 
 #endif
 
-#include "autotools.h"
+//#include "autotools.h"
 #include "config.h"
 #include "types.h"
 #include "intl.h"

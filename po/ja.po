@@ -193,7 +193,7 @@
 # Copyright (C) 2005-2011 Dan Williams <dcbw@redhat.com>.
 # Takayoshi OKANO <kano@na.rim.or.jp>, 2011.
 # Copyright (C) 2007-2010 daniel g. siegel <dgsiegel@gnome.org>.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

@@ -85,7 +85,7 @@
 # Mohammad Javad Badiee <m.j.badiee@gmail.com>, 2010.
 # Mostafa Reshadi <Mostafa@Reshadi.com>, 2006.
 # nasim <daniarzadeh@itland.ir>, 2006.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

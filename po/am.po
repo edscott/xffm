@@ -5,7 +5,7 @@
 #
 # Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
 # Ge'ez Frontier Foundation <locales@geez.org>, 2002.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

@@ -8,7 +8,7 @@
 # Nik Kalach <nik.kalach@inbox.ru>, 2013.
 # Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
 # g.sora <g.sora@tiscali.it>, 2010-2013.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

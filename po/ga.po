@@ -27,7 +27,7 @@
 # Sean V. Kelley <s_oceallaigh@yahoo.com>, 1999.
 # Seán O'Ceallaigh <s_oceallaigh@yahoo.com>, 1999.
 # Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"
@@ -40,8 +40,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=5; plural=n==1 ? 0 : n==2 ? 1 : (n>2  n<7) ? 2 :(n>6  "
-"n<11) ? 3 : 4;\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n==2 ? 1 : 2;\n"
+
 
 #: ../../xffm/mime/mimemagic.hh:68 ../../xffm/mime/mimemagic.hh:110
 #: ../../xffm/common/mimemagic.hh:68 ../../xffm/common/mimemagic.hh:110

@@ -1,3 +1,12 @@
+message(STATUS "Checking for mntent.h...")
+find_path(MNTENT_H  NAMES mntent.h )
+if(NOT MNTENT_H)
+    set(MNTENT_H "MNTENT_H_NOTFOUND")
+    message( STATUS "mntent.h is not found" )
+else()
+    set(MNTENT_H "HAVE_MNTENT_H 1")
+    message( STATUS  "mntent.h was found." )
+endif()
 
 message(STATUS "Checking for readline/history.h...")
 find_path(READLINE_HISTORY_H  NAMES readline/history.h )

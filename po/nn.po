@@ -45,7 +45,7 @@
 # Torstein Winterseth kvikende@yahoo.no, 2009. <>.
 # Copyright (C) Roy-Magne Mo <rmo@sunnmore.net>, 2001.
 # Monica Gausen <monica@gausen.net>, 2001.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

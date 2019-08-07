@@ -22,7 +22,7 @@
 # Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
 # Subhransu Behera <arya_subhransu@yahoo.co.in>, 2004-2007.
 # P Pattnaik <srujanik@sancharnet.in>, 2004.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

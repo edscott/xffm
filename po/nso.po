@@ -7,7 +7,7 @@
 # Zuza Software Foundation <info@translate.org.za>, 2004-2007.
 # Dwayne Bailey <dwayne@translate.org.za>, 2009.
 # Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

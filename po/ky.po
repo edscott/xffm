@@ -9,7 +9,7 @@
 # Ilyas Bakirov <just_ilyas@yahoo.com>, 2005.
 # chingiz <chingis091@lavabit.com>, 2012.
 # Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

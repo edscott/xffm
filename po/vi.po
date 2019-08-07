@@ -55,7 +55,7 @@
 # Lâm Vĩnh Niên <nienvl@yahoo.ca>, 2004.
 #  Phạm Thành Long <lngt@ngonngu.net>, 2007.
 # Ly Trong Van <ltvan_vn@yahoo.fr>, 2003.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

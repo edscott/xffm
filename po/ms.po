@@ -45,7 +45,7 @@
 # Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
 # Hasbullah bin Pit <sebol@ikhlas.com>, 2002-2003.
 # Hasbullah Bin Pit <sebol@ikhlas.com>, 2001-2004.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

@@ -83,7 +83,7 @@
 # Klaus Ade Johnstad <klaus.johnstad@holmlia.gs.oslo.no>, 2003-2007.
 # Erik Kjær Pedersen <erik@binghamton.edu>, 1998-2007.
 #       Håvard Lygre <hklygre@online.no>.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

@@ -57,7 +57,7 @@
 # Copyright (C) Wouter Bolsterlee <wbolster@gnome.org>.
 # <srtxg@chanae.alphanet.ch>, 2001-2011.
 # Dean Sas <dean@deansas.org>, 2005.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

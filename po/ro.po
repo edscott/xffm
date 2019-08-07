@@ -154,7 +154,7 @@
 # crenguta bacaoanu <crengutamirela@gmail.com>, 2010.
 # Cosmin Clapon <cosminx2003@yahoo.com>, 2010.
 # Dan Damian <dand@gnome.ro>, 1999-2007.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"
@@ -167,8 +167,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%s00 > 0  n%s00 "
-"<20)) ? 1 : 2;\n"
+ "Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2;\n"
 "X-Generator: Lokalize 1.0\n"
 
 #: ../../xffm/mime/mimemagic.hh:68 ../../xffm/mime/mimemagic.hh:110

@@ -1,13 +1,10 @@
 For 0.91
 
 > Test local setting and work of locale in FreeBSD
-  
+> if selected item is updated by monitor, reselect (bug: selection lost) now only if item is removed and readded, as with saving with gvim, since treepath is no longer valid. Current fix probably does nothing (CHECK THIS) in local/monitor.hh restat function
+
  > printout optional and required libraries found in configure step: show whether libmagic or perl mimetype will be used.
 
-Bugs:
-  * bug: do a "git branch whatever" in script mode. Script will expect input
-         and cannot be terminated by menu signals...
-	 update: on a script command that loops, the kill pid is incorrect.
 
 Cleanups:  
   * 20+ files with FIXMEs

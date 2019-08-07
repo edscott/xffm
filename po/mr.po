@@ -35,7 +35,7 @@
 # Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
 # <srtxg@chanae.alphanet.ch>, 2001-2011.
 # Second Author: Pradeep Deshpande <npdeshpande@vsnl.net>, 2004.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

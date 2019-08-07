@@ -122,7 +122,7 @@
 # Ligia Moreira <ligia.moreira@netvisao.pt>, 2008.
 # Filipe Maia <fmaia@gmx.net>, 2001-2002.
 # Álvaro Lopes <alvieboy@alvie.com>, 2001-2002.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

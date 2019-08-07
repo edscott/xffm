@@ -126,7 +126,7 @@
 # Mvillarino <mvillarino@dubmail.net>, 2005-2008.
 # Anxo Forxán <aforjanb36@smail1.ocenf.org>, 2000.
 # Javier Garaloces <javier@garaloces.com>, 2003.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

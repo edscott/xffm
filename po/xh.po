@@ -12,7 +12,7 @@
 # Antoinette Dekeni <antoinette@transalate.org.za>, 2001-2002.
 # Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
 # Thelma Lungcuzo <thelma@translate.org.za>, 2002-2003.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

@@ -4,7 +4,7 @@
 #   --- vie may  3 10:40:59 CDT 2013 ---
 #
 # Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

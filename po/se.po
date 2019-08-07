@@ -10,7 +10,7 @@
 # Nils Johan Utsi <njutsi@frisurf.no>, 2003.
 # Svein Lund <sveilund@online.no>, 2002.
 # Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

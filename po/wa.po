@@ -13,7 +13,7 @@
 # Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
 # Lorint Hendschel <LorintHendschel@skynet.be>, 1998-2002.
 # <srtxg@chanae.alphanet.ch>, 2001-2011.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

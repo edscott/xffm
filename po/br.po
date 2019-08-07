@@ -25,7 +25,7 @@
 # Denis <denisarnuad@yahoo.fr>, 2008-2010.
 # Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
 # Jañ-Mai Drapier <jdrapier@club-internet.fr>, 1998-1999.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

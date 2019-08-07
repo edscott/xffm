@@ -49,7 +49,7 @@
 # Richard Allen <ra@ra.is>, 1998-2007.
 # Arni Ingimundarson <arning@karlshof.de>, 2002.
 # Þórarinn R. Einarsson <thori@mindspring.com>, 2001.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

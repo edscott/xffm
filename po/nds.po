@@ -30,7 +30,7 @@
 # Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
 # Volker Jockheck <volkae@gmx.net>, 2004.
 # NILS-CHRISTOPH FIEDLER <LINUX@MEDIENKOMPANIE.DE>, 2009.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

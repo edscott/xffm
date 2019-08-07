@@ -6,7 +6,7 @@
 # Ainur Shakirov <ainur.shakirov.tt@gmail.com>, 2011.
 # Beznen Soft <tatarish.l10n@gmail.com>, 2005.
 # Albert Fazlí <tatarish.l10n@gmail.com>, 2005.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

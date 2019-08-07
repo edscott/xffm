@@ -5,7 +5,7 @@
 #
 # Nuno Donato <nunodonato@gmail.com>, 2004.
 # Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

@@ -126,7 +126,7 @@
 # Krishnababu Krothapalli <kkrothap@redhat.com>, 2011-2013.
 # భరత్ కుమార్ <bharatfsf@gmail.com>, 2007.
 # Naveen kandimala(Swecha) <naveen@swecha.net>, 2012.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

@@ -250,7 +250,7 @@
 # Copyright (C) 2005 Petrecca Michele <petrecca@interfree.it OR michelinux@alice.it>.
 # Paolo Bacchilega <paolo.bacch@tin.it>, 2001-2010.
 # Marcello Raffa <mrooth@tiscalinet.it>, 2001.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

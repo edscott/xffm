@@ -17,7 +17,7 @@
 # Aksaule Mamayeva <ak78@sci.kz>, 2005.
 # Izbasarov M.I. <mambet@sci.kz>, 2005-2006.
 # Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

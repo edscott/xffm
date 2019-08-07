@@ -131,7 +131,7 @@
 # Joonas Sarajärvi <muep@iki.fi>, 2010.
 # Ilari Oras <happo1472583@gmail.com>.
 # Niklas Laxström <niklas.laxstrom+kdetrans@gmail.com>, 2005-2012.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

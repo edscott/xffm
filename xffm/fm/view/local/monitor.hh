@@ -163,7 +163,10 @@ public:
 				GtkTreeIter *iter,
 				gpointer data){
         gchar *path;
-	auto inPath = (gchar *)data;
+	auto arg = (void **)data;
+	auto inPath = (const gchar *)arg[0];
+        auto view = (View<Type> *)arg[1];
+
 	gtk_tree_model_get (model, iter, PATH, &path, -1);  
 
 	TRACE("stat_func: %s <--> %s\n", path, inPath);
@@ -173,6 +176,13 @@ public:
 	}
         g_free(path);
 	TRACE("stat_func: gotcha %s\n", inPath);
+        gboolean isSelected=FALSE;
+        if (isTreeView){
+	    auto selection = gtk_tree_view_get_selection (view->treeView());
+            gtk_tree_selection_path_is_selected(selection, tpath);
+        } else {
+            isSelected = gtk_icon_view_path_is_selected(view->iconView(), tpath);
+        }
 
 	GtkListStore *store = GTK_LIST_STORE(model);
 
@@ -274,6 +284,14 @@ public:
         LocalModel<Type>::free_xd_p(xd_p);
         g_free(date);
         g_free(size);
+        if (isSelected){
+            if (isTreeView){
+	        auto selection = gtk_tree_view_get_selection (view->treeView());
+                gtk_tree_selection_select_path(selection, tpath);
+            } else {
+                gtk_icon_view_select_path(view->iconView(), tpath);
+            }
+        }
 	return TRUE;
     }
 
@@ -289,7 +307,8 @@ public:
 	    g_free(path);
 	    return FALSE;
 	}
-        gtk_tree_model_foreach (GTK_TREE_MODEL(this->store_), stat_func, (gpointer) path); 
+        void *arg[] = {(void *)(path), (void *)this->baseView_};
+        gtk_tree_model_foreach (GTK_TREE_MODEL(this->store_), stat_func, (gpointer) arg); 
         g_free(path);
         return TRUE;
     }

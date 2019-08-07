@@ -19,7 +19,7 @@
 # Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
 # Besnik Bleta <besnik@programeshqip.org>, 2004-2008.
 # Besnik Bleta	 <besnikbleta@hotmail.com>, 2003.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

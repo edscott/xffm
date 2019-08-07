@@ -70,7 +70,7 @@
 # Asier Zabaleta <aza@openbravo.com>, 2008.
 # Iñigo Salvador Azurmendi <xalba@euskalnet.net>, 1999-2012.
 # Asel Luzarraga <asel@euskalnet.net>, 2003-2004.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"

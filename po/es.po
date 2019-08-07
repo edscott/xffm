@@ -373,7 +373,7 @@
 # First author: Quique <quique@sindominio.net>, 2003.
 # Matias Costa <mcc3@alu.um.es>, 2005.
 # Pablo Saratxga <srtxg@chanae.alphanet.ch>, 1999.
-#, fuzzy
+# fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Rodent Delta\n"
