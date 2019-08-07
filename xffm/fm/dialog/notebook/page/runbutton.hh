@@ -412,34 +412,36 @@ public:
 	    pid = shell_child_pid(pid);
 	}
 	    
-	TRACE("signal to pid: %ld (inShell()=%d sudo=%d)\n", pid, inShell(), sudoize);
-	if (sudoize) {
+	TRACE("signal to pid: %ld (inShell()=%d sudo=%d) \"%s\"\n", pid, inShell(), sudoize, command());
 	    //        1.undetached child will remain as zombie
 	    //        2.sudo will remain in wait state and button will not disappear
 	    // hack: if signal is kill, kill sudo in the same command
 	    //       eliminate zombie...
-	    gchar *sudo = g_find_program_in_path("sudo");
-	    if (!sudo){
-		g_warning("sudo not found in path\n");
-		return;
-	    }
-	    gchar *command;
-	    if (signal_id == SIGKILL) {
-		command =  g_strdup_printf("%s -A kill -%d %ld %d", sudo, signal_id, pid, grandchild());
-	    } else {
-		command =  g_strdup_printf("%s -A kill -%d %ld", sudo, signal_id, pid);
-	    }
-	    Run<Type>::shell_command(textview_, command, FALSE);
-	    // Again, when we signal process, there is no need to save command
-	    // in the csh history file.
-	    g_free(command);
-	    g_free(sudo);
-	} else {
-	    TRACE("normal ps_signal to %d...\n", (int)pid);
-	    print_c::print_icon(textview_, "emblem-important", "blue", g_strdup_printf("kill -%d %ld\n",
-		    signal_id, pid));
-	    kill((pid_t)pid, signal_id);
-	}
+        gchar *sudo = g_find_program_in_path("sudo");
+        if (sudoize && !sudo){
+            g_warning("sudo not found in path\n");
+            return;
+        }
+        gchar *kill;
+        if (sudoize) {
+            kill = g_strdup_printf("%s -A kill", sudo);
+        } else {
+            kill = g_find_program_in_path("kill");
+        }
+
+        gchar *command;
+        if (signal_id == SIGKILL) {
+            command =  g_strdup_printf("%s -%d -%ld -%d", kill, signal_id, pid, grandchild());
+        } else {
+            command =  g_strdup_printf("%s -%d -%ld", kill, signal_id, pid);
+        }
+        WARN("signalling with %s\n", command);
+        Run<Type>::shell_command(textview_, command, FALSE);
+        // Again, when we signal process, there is no need to save command
+        // in the csh history file.
+        g_free(command);
+        g_free(sudo);
+        g_free(kill);
     }
 
 

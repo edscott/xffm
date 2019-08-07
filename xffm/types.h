@@ -132,8 +132,12 @@ template <class Type> class Notebook;
 # define DBG(...)  {fprintf(stderr, "DBG> "); fprintf(stderr, __VA_ARGS__);}
 # undef ERROR
 # define ERROR(...)  {fprintf(stderr, "*** Error> "); fprintf(stderr, __VA_ARGS__);}
+#ifdef ALPHA
 # undef WARN
-# define WARN(...)  {fprintf(stderr, "warning> "); fprintf(stderr, __VA_ARGS__);}
+# define WARN(...)  {fprintf(stderr, "WARN> "); fprintf(stderr, __VA_ARGS__);}
+#else
+# define WARN(...)   { (void)0; }
+#endif
 
 typedef struct menuItem_t {
     const gchar *label;

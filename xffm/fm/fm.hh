@@ -191,19 +191,19 @@ private:
 	if (userSetTerminal && !strlen(userSetTerminal)) 
 	    userSetTerminal = NULL;
 	if (userSetTerminal){
-	    DBG("User set terminal = %s\n", userSetTerminal);
+	    WARN("User set terminal = %s\n", userSetTerminal);
 	    return setTerminalCmd(userSetTerminal);
 	} 
 	auto terminal = g_find_program_in_path("uxterm");
 	if (terminal){
 	    setenv("TERMINAL", "uxterm -rv -vb", 1);
-	    DBG("Using terminal = %s\n", getenv("TERMINAL"));
+	    WARN("Using terminal = %s\n", getenv("TERMINAL"));
 	    return setTerminalCmd(terminal);
 	}
 	terminal = g_find_program_in_path("xterm");
 	if (terminal){
 	    setenv("TERMINAL", "xterm -rv -vb", 1);
-	    DBG("Using terminal = %s\n", getenv("TERMINAL"));
+	    WARN("Using terminal = %s\n", getenv("TERMINAL"));
 	    return setTerminalCmd(terminal);
 	}
 	ERROR("No terminal command found. Please define environment variable \"TERMINAL\"\n");
