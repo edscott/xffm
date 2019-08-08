@@ -141,11 +141,42 @@ public:
     
     void scriptRun(void){
 	    gchar *command = print_c::get_current_text(this->input());
+            gchar *response=NULL;
             if (!command || !strlen(command)){
                 g_free(command);
                 command = g_strdup("ls --color -Flah");
+                response = g_strdup("/dev/null");
+            } else {
+                //Dialog for script target
+                auto entryResponse = new(EntryResponse<Type>)(GTK_WINDOW(mainWindow), _("Confirm Replace"), "video-x-generic");
+                auto markup = 
+                    g_strdup_printf("<span color=\"blue\" size=\"larger\"><b>script: %s</b></span>", _("Destination File"));  
+                
+                entryResponse->setResponseLabel(markup);
+                g_free(markup);  
+                entryResponse->setEntryDefault("/dev/null");
+                response = entryResponse->runResponse();
+                delete entryResponse;
+                TRACE("response=%s\n", response); 
+                if (!response){
+                    g_free(command);
+                    return;
+                }
+                if (strcmp(response,"/dev/null") && g_file_test(response, G_FILE_TEST_EXISTS)){
+                    auto warning = g_strdup_printf(_("The output file %s already exists, do you want to overwrite it?"), response);
+                    auto confirmResponse = new(EntryResponse<Type>)(GTK_WINDOW(mainWindow), _("Confirm Replace"), "dialog-warning");
+                    confirmResponse->setResponseLabel(warning);
+                    auto confirm = confirmResponse->runResponse();
+                    delete confirmResponse;
+                    if (!confirm) {
+                        g_free(command);
+                        g_free(response);
+                        return;
+                    }
+                }
             }
-            gchar *g = g_strdup_printf("script -f -c \"%s\" /dev/null", command);
+
+            gchar *g = g_strdup_printf("script -f -c \"%s\" %s", command, response);
             g_free(command);
             command = g;
             this->csh_clean_start();
@@ -153,6 +184,7 @@ public:
 	    this->csh_save_history(command);
 	    print_c::clear_text(this->input());
 	    g_free(command);
+	    g_free(response);
     }
 
     void 

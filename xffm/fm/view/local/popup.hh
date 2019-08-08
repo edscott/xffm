@@ -963,7 +963,7 @@ public:
     tarball(GtkMenuItem *menuItem, gpointer data)
     {
         // File chooser
-        auto entryResponse = new(EntryFolderResponse<Type>)(GTK_WINDOW(mainWindow), _("Create a compressed archive with the selected objects"), NULL);
+        auto entryResponse = new(EntryFolderResponse<Type>)(GTK_WINDOW(mainWindow), _("Create a compressed archive with the selected objects"), "package-x-generic");
 
         
 	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");

@@ -114,17 +114,18 @@ public:
         
         gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
 
-        endTime = timeout;
+        this->endTime_ = timeout;
         if (timeout){
-            auto arg = (void **)calloc(3, sizeof(void *));
+            auto arg = (void **)calloc(4, sizeof(void *));
             gtk_widget_show(GTK_WIDGET(this->timeoutProgress_));
             arg[0] = GINT_TO_POINTER(timeout);
             arg[1] = (void *)this->timeoutProgress_;
             arg[2] =(void *)this->response_;
+            arg[3] =(void *)this;
             g_timeout_add(500, EntryResponse<Type>::updateProgress, (void *)arg);
         } 
 	gint response  = gtk_dialog_run(GTK_DIALOG(this->response_));
-        endTime = 0;
+        this->endTime_ = 0;
 
         gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
 	//if (checkboxText) g_free(g_object_get_data(G_OBJECT(checkButton), "app"));

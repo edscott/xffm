@@ -3,7 +3,6 @@
 namespace xf
 {
 
-static time_t endTime = 0;
 
 template <class Type>
 class EntryResponse {
@@ -15,6 +14,7 @@ class EntryResponse {
     using page_c = Page<Type>;
 
 
+    time_t timeout_;
     GtkLabel *responseLabel_;
     GtkLabel *entryLabel_;
     GtkLabel *checkboxLabel_;
@@ -23,6 +23,7 @@ class EntryResponse {
     GtkEntryCompletion *bashCompletion_;
 
 protected:
+    time_t endTime_;
     GtkButton *yes_;
     GtkButton *no_;
     GtkDialog *response_;
@@ -57,15 +58,20 @@ protected:
     }
 
 public:
+    time_t endTime(void){return endTime_;}
+
     GtkBox *vbox2(void) {return vbox2_;}
     ~EntryResponse (void){
-        gtk_widget_hide(GTK_WIDGET(response_));
-	while (gtk_events_pending())gtk_main_iteration();	
-        gtk_widget_destroy(GTK_WIDGET(response_));
+        if (timeout_ == 0) {
+            gtk_widget_hide(GTK_WIDGET(response_));
+	    while (gtk_events_pending())gtk_main_iteration();	
+            gtk_widget_destroy(GTK_WIDGET(response_));
+        }
     }
 
     EntryResponse (GtkWindow *parent, const gchar *windowTitle, const gchar *icon){
         bashCompletionStore_ = NULL;
+        timeout_ = 0;
 	response_ = GTK_DIALOG(gtk_dialog_new ());
 	gtk_window_set_type_hint(GTK_WINDOW(response_), GDK_WINDOW_TYPE_HINT_DIALOG);
 	gtk_window_set_modal (GTK_WINDOW (response_), TRUE);
@@ -250,14 +256,18 @@ public:
     static gboolean
     updateProgress(void * data){
         auto arg = (void **)data;
-        if (!endTime) {
-            g_free(arg);
-            return G_SOURCE_REMOVE;
-        }
         auto timeout = GPOINTER_TO_INT(arg[0]);
         auto progress = GTK_PROGRESS_BAR(arg[1]);
         auto dialog = GTK_DIALOG(arg[2]);
-        if (gtk_window_is_active(GTK_WINDOW(dialog))){
+        auto object =(EntryResponse <Type> *)arg[3];
+         if (!object->endTime()) {
+            gtk_widget_hide(GTK_WIDGET(dialog));
+	    while (gtk_events_pending())gtk_main_iteration();	
+            gtk_widget_destroy(GTK_WIDGET(dialog));
+            g_free(arg);
+            return G_SOURCE_REMOVE;
+        }
+       if (gtk_window_is_active(GTK_WINDOW(dialog))){
             return G_SOURCE_CONTINUE;
         }
         auto fraction = gtk_progress_bar_get_fraction(progress);
@@ -267,6 +277,9 @@ public:
         } else {
             //zap
             gtk_dialog_response(dialog, GTK_RESPONSE_CANCEL);
+            gtk_widget_hide(GTK_WIDGET(dialog));
+	    while (gtk_events_pending())gtk_main_iteration();	
+            gtk_widget_destroy(GTK_WIDGET(dialog));
             g_free(arg);
             return G_SOURCE_REMOVE;
         }
@@ -280,18 +293,20 @@ public:
 	gtk_widget_show (GTK_WIDGET(response_));
         gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
             
-        endTime = timeout;
-        if (timeout){
-            auto arg = (void **)calloc(3, sizeof(void *));
+        timeout_ = timeout;
+        endTime_ = timeout;
+        if (endTime_){
+            auto arg = (void **)calloc(4, sizeof(void *));
             gtk_widget_show(GTK_WIDGET(timeoutProgress_));
             arg[0] = GINT_TO_POINTER(timeout);
             arg[1] = (void *)timeoutProgress_;
             arg[2] =(void *)response_;
+            arg[3] =(void *)this;
             g_timeout_add(500, updateProgress, (void *)arg);
         } 
 
 	gint response  = gtk_dialog_run(GTK_DIALOG(response_));
-        endTime = 0;
+        endTime_ = 0;
 
         gtk_widget_hide(GTK_WIDGET(response_));
         gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
