@@ -351,12 +351,6 @@ private:
         const char *path = ".";
         initial = time (NULL);
 
-#ifdef ENABLE_NLS
-        setlocale (LC_MESSAGES, "");
-        setlocale (LC_ALL, "");
-        bindtextdomain (PACKAGE, PACKAGE_LOCALE_DIR);
-        textdomain (PACKAGE);
-#endif
         /* initializations  */
         signal (SIGHUP, halt);
         signal (SIGSEGV, finish);

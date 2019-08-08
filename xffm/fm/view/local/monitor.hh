@@ -176,14 +176,6 @@ public:
 	}
         g_free(path);
 	TRACE("stat_func: gotcha %s\n", inPath);
-        gboolean isSelected=FALSE;
-        if (isTreeView){
-	    auto selection = gtk_tree_view_get_selection (view->treeView());
-            gtk_tree_selection_path_is_selected(selection, tpath);
-        } else {
-            isSelected = gtk_icon_view_path_is_selected(view->iconView(), tpath);
-        }
-
 	GtkListStore *store = GTK_LIST_STORE(model);
 
 	auto directory = g_path_get_dirname(inPath);
@@ -284,14 +276,6 @@ public:
         LocalModel<Type>::free_xd_p(xd_p);
         g_free(date);
         g_free(size);
-        if (isSelected){
-            if (isTreeView){
-	        auto selection = gtk_tree_view_get_selection (view->treeView());
-                gtk_tree_selection_select_path(selection, tpath);
-            } else {
-                gtk_icon_view_select_path(view->iconView(), tpath);
-            }
-        }
 	return TRUE;
     }
 
@@ -334,16 +318,19 @@ private:
 	}
         if (!BaseSignals<Type>::validBaseView(p->view())) return;
 
+        
+        gboolean verbose = FALSE;
         switch (event){
             case G_FILE_MONITOR_EVENT_DELETED:
             case G_FILE_MONITOR_EVENT_MOVED_OUT:
-                TRACE("Received DELETED  (%d): \"%s\", \"%s\"\n", event, f, s);
+                if (verbose) DBG("Received DELETED  (%d): \"%s\", \"%s\"\n", event, f, s);
+                
                 p->remove_item(first);
                 p->updateFileCountLabel();
                 break;
             case G_FILE_MONITOR_EVENT_CREATED:
             case G_FILE_MONITOR_EVENT_MOVED_IN:
-                TRACE("Received  CREATED (%d): \"%s\", \"%s\"\n", event, f, s);
+                if (verbose) DBG("Received  CREATED (%d): \"%s\", \"%s\"\n", event, f, s);
                 //p->restat_item(first);
 #if 10
                 /*if (isInModel(p->treeModel(), f)){
@@ -356,7 +343,7 @@ private:
 #endif
                 break;
             case G_FILE_MONITOR_EVENT_CHANGED:
-                TRACE("monitor_f(): Received  CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
+                if (verbose) DBG("monitor_f(): Received  CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
                 // reload icon
 		Hash<Type>::rm_from_pixbuf_hash(f, 24);
 		Hash<Type>::rm_from_pixbuf_hash(f, 48);
@@ -364,32 +351,30 @@ private:
 		//Hash<Type>::zap_thumbnail_file(f, 24);
 		//Hash<Type>::zap_thumbnail_file(f, 48);
                 p->restat_item(first);
-                //FIXME: check if this is now done:
-                //       if image, then reload the pixbuf
                 break;
             case G_FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED:
-                TRACE("***Received  ATTRIBUTE_CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
+                if (verbose) DBG("Received  ATTRIBUTE_CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
                 p->restat_item(first);
                 break;
             case G_FILE_MONITOR_EVENT_PRE_UNMOUNT:
-                TRACE("Received  PRE_UNMOUNT (%d): \"%s\", \"%s\"\n", event, f, s);
+                if (verbose) DBG("Received  PRE_UNMOUNT (%d): \"%s\", \"%s\"\n", event, f, s);
                 break;
             case G_FILE_MONITOR_EVENT_UNMOUNTED:
-                TRACE("Received  UNMOUNTED (%d): \"%s\", \"%s\"\n", event, f, s);
+                if (verbose) DBG("Received  UNMOUNTED (%d): \"%s\", \"%s\"\n", event, f, s);
                 break;
             case G_FILE_MONITOR_EVENT_MOVED:
             case G_FILE_MONITOR_EVENT_RENAMED:
-                TRACE("Received  MOVED (%d): \"%s\", \"%s\"\n", event, f, s);
-                p->remove_item(first);
+                if (verbose) DBG("Received  MOVED (%d): \"%s\", \"%s\"\n", event, f, s);
+                p->add2reSelect(f); // Only adds to selection list if item is selected.
+                p->remove_item(first); 
                 if (isInModel(p->treeModel(), s))
                 {
                     p->restat_item(second);
                 } else p->add_new_item(second);
                 break;
             case G_FILE_MONITOR_EVENT_CHANGES_DONE_HINT:
-               TRACE("***Received  CHANGES_DONE_HINT (%d): \"%s\", \"%s\"\n", event, f, s);
-                //p->restat_item(first);
-                // if image, then reload the pixbuf
+                if (verbose) DBG("Received  CHANGES_DONE_HINT (%d): \"%s\", \"%s\"\n", event, f, s);
+                p->reSelect(f); // Will only select if in selection list (from move).
                 break;       
         }
         g_free(f);

@@ -3,13 +3,11 @@
 # This file is distributed under the same license as the Rodent package.
 #   --- vie may  3 10:45:03 CDT 2013 ---
 #
-# Copyright (C) 2004 Alexander Reinholdt <dustpuppy@mail.berlios.de>.
 # Miguel Angel Quesada <kesadalive@gmail.com>, 2009.
 # Ramón Rey Vicente <ramon.rey@hispalinux.es>, 2003-2004.
 # Jorge González <jorgegonz@svn.gnome.org>, 2004-2012.
 # Albert Abril <albert.abril@gmail.com>, 2006.
 # Juan Percy Rojas Cruz <juanperojas@gmail.com>, 2008-2009.
-# Copyright (C) 2003 Dario Abatianni <eisfuchs@tigress.com>.
 # Adolfo González Blázquez <code@infinicode.org>, 2007.
 # Miguel Rodríguez Núñez <bokerones.fritos@gmail.com>, 2012-2013.
 # Jean Pierre Mazuelos Saavedra <apuyaya@gmail.com>, 2010.
@@ -17,16 +15,13 @@
 # José Antonio Salgueiro <joseantsa@eresmas.net>, 2001.
 # Bryan Alberto Baron Chinchilla <bachinchi@gmail.com>, 2010.
 # Santiago FernÃ¡ndez Sancho <santi@kde-es.org>, 2007-2008.
-# Copyright (C) 2009 Daniel Campos <dcamposf@gmail.com>.
 # Carlos Mayo <carlos.mayo@hispalinux.es>, 2003.
 # Ulrik Sverdrup <ulrik.sverdrup@gmail.com>, 2009.
-# Copyright (C) 2005 Joris Guisson <joris.guisson@gmail.com>.
 # Carlos Mayo HernÃ¡ndez <carlos.mayo@hispalinux.es>, 2003-2005.
 # Nacho Hermoso de Mendoza <gnacho@gmail.com>, 2008.
 # Eneko Lacunza <enlar@iname.com>, 2001-2003.
 # Rafael Munoz Rodriguez <rafaluco@netscape.net>, 2003-2004.
 # Mario Izquierdo <mariodebian@gmail.com>, 2005.
-# Copyright (C) Renchi Raju <renchi@pooh.tam.uiuc.edu>.
 # Traducido por Jose Antonio Salgueiro <developer@telefonica.net.  Agradecimientos: zert, softcatala>.
 # Miguel Angel Ruiz Manzano <mruiz@openminds.cl>, 2009.
 # Juanjo Marin <juanj.marin@juntadeandalucia.es>, 2007.
@@ -53,7 +48,6 @@
 # Sylvia Sánchez <LailahFSF@gmail.com>, 2010-2011.
 # David Paul Peña <eodos0@gmail.com>, 2009-2010.
 # Raúl Miró <cotin@geocities.com>, 2001.
-# Copyright (C) 2004 Jernej Kos <kostko@jweb-network.net>.
 # Mario Young <mayeco@kdemail.net>, 2008.
 # Lucas Garcia <tanke@escomposlinux.org>, 2003.
 # Ernesto Manríquez Mendoza <alejandronova@gmail.com>, 2011.
@@ -66,16 +60,13 @@
 # Javier Gomez sierras <jgomsi@apolo.umh.es>, 2000.
 # Javier Moreno <javier.moreno@alufis35.uv.es>, 2000.
 # Leandro Machacón <leandroman@gemail.com>, 2010.
-# Copyright (C) 2008 Alejandro Valdes Jimenez <avaldes@gnome.org>.
 # Danilo Vasquez Simonetti <danilo.vasquez@gmail.com>, 2008.
 # Jose Antonio Salgueiro Aquino <developer@telefonica.net>, 2003.
 # Carlos Higuera <higuera.carlos@gmail.com>, 2006.
 # Ignacio Bezanilla Diaz <coder@telefonica.net>, 2004.
-# Ãlvaro PeÃ±a <alvaropg@mac.com>, 2001.
 # Alberto Garcia <info@trebol-a.com>, 2007-2008.
 # Miguel de Icaza,computo,622-4680 <miguel@metropolis.nuclecu.unam.mx>, 1998.
 # Miguel A. Arevalo <marevalo@marevalo.net>, 2002.
-# Copyright (C) 2009 Ulrik Sverdrup <ulrik.sverdrup@gmail.com>.
 # Tomas Moreno <tomas@info.ne.udo.edu.ve>, 2001.
 # Mario Carrion <mario@carrion.mx>, 2010.
 # Q&A, Germán Poo-Caamaño <gpoo@ubiobio.cl>, 2003.
@@ -97,10 +88,8 @@
 # Miguel Menéndez <mimecar@innerzaurus.com>, 2007.
 # Rafael Rodríguez <apt-drink@gulic.org>, 2005.
 # Rafael Belmonte <eaglescreen@gmail.com>, 2013.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2002-2012.
 # Hector Wilvert Ivan Valdez Reza <ranmaru.hibikiya@gmail.com>, 2013.
 # Santiago Fernandez Sancho <santi@kde-es.org>, 2004-2008.
-# Copyright (C) 2003, 2004 Unai Garro <ugarro@users.sourceforge.net>.
 # Milagros Alessandra Infante Montero <maim92@gmail.com>, 2012.
 # Leticia Martin <leticia.martin@gmail.com>, 2009.
 # Saúl Ortega <sortega4444@gmail.com>, 2010-2011.
@@ -108,7 +97,6 @@
 # eodos <eodos0@gmail.com>, 2010.
 # Unai Garro <ugarro@users.sourceforge.net>, 2003.
 # Miguel Rodríguez Pérez <miguelrp@gmail.com>, 2002.
-# Copyright (C) 2005 Antonio Ognio <gnrfan@gnrfan.org>, 2005.
 # Sun G11n <gnome_int_l10n@ireland.sun.com>, 2002-2003.
 # Carlos Albornoz <carlos@debianchile.cl>, 2009.
 # QA: Carlos Perelló Marín <carlos@gnome-db.org>.
@@ -144,7 +132,6 @@
 # Enrique Rodriguez <krm@futurnet.es>, 2003.
 # Alejandro Sáchez Acosta <asanchez@gnu.org>, 2002.
 # Kramer Garay <kramergaray@hotmail.com>, 2010.
-# Copyright (C) 2003 Eric Bischoff <e.bischoff@noos.fr>.
 # sito <soler.sito@gmail.com>, 2008.
 # Adrián Martínez <sfxgt3@gmail.com>, 2009-2010.
 # Miguel de Icaza <miguel@metropolis.nuclecu.unam.mx>, 1998.
@@ -184,7 +171,6 @@
 # Gonzalo L. Campos Medina <gcamposm@gmail.com>.
 # Miguel Angel Quesada Fernandez <kesadalive@gmail.com>, 2008-2011.
 # Chris Leonard <cjl@laptop.org>, 2012.
-# Copyright (C) 2003 Quique <quique@sindominio.net>.
 # Eduardo Sanchez <kde@sombragris.org>, 2003-2010.
 # Lucas Di Pentima <lucas@lunix.com.ar>, 2001-2002.
 # Ismael Rubio Rojas <ismael_rubio_rojas@hotmail.com>, 2003.
@@ -195,7 +181,6 @@
 # Antonio Crevillen <antonio.crevillen@hispalinux.es>, 2003.
 # Miguel Revilla RodrÃ­guez <yo@miguelrevilla.com>, 2002-2004.
 # Ignacio Poggi <ignaciop.3@gmail.com>, 2008-2012.
-# Copyright (C) 2007 daniel g. siegel <dgsiegel@gnome.org>.
 # By Nicols Lichtmaier <nick@technisys.com.ar>.
 # Mauricio Araya P. <mauricio@eazel.com>, 2001.
 # Francisco Javier Fernandez <serrador@arrakis.es>, 2003.
@@ -215,7 +200,6 @@
 # Ferro01 <ferro01@wanadoo.es>, 2011.
 # Alejandro Araiza Alvarado <mebrelith@gmail.com>, 2005-2006.
 # Daniel Garcia <dani@danigm.net>, 2010.
-# Copyright (C) 2004 Waldo Bastian <bastian@kde.org>.
 # Danilo Vasquez <danilo.vasquez@gmail.com>, 2007-2008.
 # Jaime Robles <jaime@kde.org>, 2003-2009.
 # Rafael Osuna <rosuna@wol.es>, 2003-2004.
@@ -241,11 +225,9 @@
 # Paulino Padial <devnull.tst@gmail.com>, 2007.
 # Manue Tortosa <manutortosa@chakra-project.org>, 2011.
 # Gladys Guerrero <gguerrer@redhat.com>, 2010.
-# Copyright (C) 2003 Robby Stephenson <robby@periapsis.org>.
 # miguel <bokerones.fritos@gmail.com>, 2012.
 # Boris Wesslowski <Boris@Wesslowski.com>, 1999-2001.
 # Alonso Lara <keko@khor-ha.net>, 1998-2005.
-# Copyright (C) 2004-2005 Johan Svedberg <johan@svedberg.com>.
 # Pablo Gonzalo del Campo <pablodc@bigfoot.com>, 2000-2004.
 # Itxaka Serrano <itxakaserrano@gmail.com>, 2010.
 # Adrián Chaves Fernández (Gallaecio) <adriyetichaves@gmail.com>, 2010-2013.
@@ -280,7 +262,6 @@
 # Alejandro Pinheiro <apinheiro@igalia.com>, 2009.
 # Enrique Matias Sanchez <cronopios@gmail.com>, 2004-2011.
 # edscott@users.sourceforge.net, 2001-2, 2001-4, 2001-5, 2001-7, 2002-1, 2002-3 <>.
-# Copyright (C) 2003 Martin Grimme <martin@pycage.de>.
 # Quique <quique@sindominio.net>, 2003-2011.
 # Manuel Tortosa <manutortosa@chakra-project.org>, 2009-2012.
 # Daniel Baeyens <danibens@terra.es>, 2002-2007.
@@ -306,13 +287,11 @@
 # Javier Conde Rueda <f3285740@est.fib.upc.es>, 2003.
 # Franco Mariluis <fmariluis@gmail.com>, 2008-2009.
 # Xavier de Blas <xaviblas@gmail.com>, 2005-2010.
-# Copyright (C) 2004  Rodney Dawes <dobey@novell.com>.
 # Ismael Olea <ismael@olea.org>, 2000-2003.
 # Guillermo Largaespada <heresul@gmail.com>, 2008-2010.
 # Sergio Rubio <sergio.rubio@hispalinux.es>, 2004.
 # Kira J. Fernandez <kirajfdez@gmail.com>, 2009-2013.
 # Fco. Javier Fernandez <serrador@arrakis.es>, 2003.
-# Copyright (C) 2004 Percy Leonhardt <percy@eris23.de>.
 # Santi <santi@kde-es.org>, 2008-2010.
 # Marlon Cisternas Milla <marlitoo@gmail.com>, 2008.
 # Ricardo Varas Santana <ricardoivaras@gmail.com>, 2009-2013.
@@ -320,26 +299,10 @@
 # Baltasar Perez Diaz <baltasar.perez@hispalinux.es>, 2002.
 # Xan López <xan@dimensis.com>, 2002.
 # Tambet Ingo <tambet@novell.com>, 2009.
-# Iñaky Pérez González <inaky@peloncho.fis.ucm.es>, 1996.
-# Rodrigo Moya <rmoya@chez.com>, 1999.
-# Salvador Gimeno <salgiza@jazzfree.com>, 2001.
-# Enrique Matias Sanchez (aka Quique) <cronopios@gmail.com>, 2003-2012.
-# Eduardo Retamales <eretamales@gnome.cl>, 2007-2008.
-# Copyright (C) 2003 Jeroen S. Wijnhout <Jeroen.Wijnhout@kdemail.net>.
-# Copyright (C) 2003 Petter E. Stokke <gibreel@project23.no>.
-# Spanish message file for YaST2 (@memory@). <>.
-# Pablo Saratxaga <pablo@walon.org>, 1998-2007.
-# Gustavo D. Vranjes <gvranjes@abaconet.com.ar>, 2002.
-# Aitor Morant <fromhell091@gmail.com>, 2013.
-# Joaquín Ignacio Aramendía <samsagax@gmail.com>, 2011.
-# Sebi Kul <sebikul@gmail.com>, 2011.
-# Pedro Villavicencio Garrido <pvillavi@gnome.org>, 2005.
-# José María Pongilioni <ponghy@ono.com>, 2001.
 # Edgardo García Hoeffler <edybsd@yahoo.com.ar>, 2002.
 # Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
 # Pablo del Campo <pablodc@bigfoot.com>, 2003.
 # Ricardo Mones Lastra <mones@users.sourceforge.net>, 2002.
-# Copyright (C) Wouter Bolsterlee <wbolster@gnome.org>.
 # Ariel Rios <jarios@usa.net>, 1999.
 # Alex Araiza <mebrelith@gmail.com>, 2005.
 # Ulises Genis <ulises.genis@gmail.com>, 2008-2009.
@@ -359,20 +322,6 @@
 # Daniel Campos <dcamposf@gmail.com>, 2009.
 # Ezequiel Pérez <eazel7@yahoo.com.ar>, 2003.
 # Oscar Cebellán Ramos <cebaman@bigfoot.com>, 2001.
-# Yelitza Louze <ylouze@redhat.com>, 2003.
-# Mvillarino <mvillarino@dubmail.net>, 2005-2008.
-# Stephen Denham <stephen.denham@gmail.com>, 2007.
-# Miguel Navarrete Hernandez <recados.akka@gmail.com>, 2013.
-# Juanje Ojeda Croissier <jojeda@emergya.es>, 2008-2010.
-# Santiago Fernández Sancho <santi@kde-es.org>, 2007-2010.
-# Jesús Espino García <jespino@imap.cc>, 2004.
-# Alberto Serrano <apserrano@bbvnet.com>, 2001.
-# Israel Garcia <israelgarcia86@gmail.com>, 2007-2008.
-# Omar Campagne <ocampagne@gmail.com>, 2009.
-# Francisco Javier Dorado Martínez <javier@tiflolinux.org>, 2007-2011.
-# First author: Quique <quique@sindominio.net>, 2003.
-# Matias Costa <mcc3@alu.um.es>, 2005.
-# Pablo Saratxga <srtxg@chanae.alphanet.ch>, 1999.
 # fuzzy
 msgid ""
 msgstr ""

@@ -126,7 +126,7 @@ template <class Type> class Notebook;
 
 # undef TRACE
 # define TRACE(...)   { (void)0; }
-//# define TRACE(...)  fprintf(stderr, "TRACE> "); fprintf(stderr, __VA_ARGS__);
+//# define TRACE(...)  {fprintf(stderr, "TRACE> "); fprintf(stderr, __VA_ARGS__);}
 # undef DBG
 //# define DBG(...)   { (void)0; }
 # define DBG(...)  {fprintf(stderr, "DBG> "); fprintf(stderr, __VA_ARGS__);}

@@ -37,19 +37,6 @@ public:
 	ClipBoard<double>::stopClipBoard();  
     }
     Fm(int argc, char *argv[]){
-#ifdef ENABLE_NLS
-	/* this binds rfm domain: */
-	bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
-
-	bindtextdomain ("xffm+", PACKAGE_LOCALE_DIR);
-# ifdef HAVE_BIND_TEXTDOMAIN_CODESET
-	bind_textdomain_codeset ("xffm+", "UTF-8");
-# endif
-# ifdef HAVE_BIND_TEXTDOMAIN_CODESET
-	TRACE ("binding %s, at %s\n", GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
-	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-# endif
-#endif
 	/* ignore hangups? */
 	(void)signal (SIGHUP, SIG_IGN);
 #ifdef CORE

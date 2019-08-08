@@ -7,6 +7,7 @@ template <class Type>
 class BaseMonitor {
     gboolean active_;
     GHashTable *itemsHash_;
+    GList *reSelectList_;
 public:
     void setMonitorStore(GtkListStore *store){store_ = store;}
 protected:
@@ -35,6 +36,88 @@ protected:
         g_free(text);
         g_free(fileCount);
     }
+    void add2reSelect(const gchar *path){
+        if (!isSelected(path)) return;
+        reSelectList_ =  g_list_prepend(reSelectList_, g_strdup(path));
+    }
+    gchar *isReselect(const gchar *path){
+        for (auto l=reSelectList_; l && l->data; l=l->next){
+            if (strcmp(path, (const gchar *)l->data)==0) return (gchar *)l->data;
+        }
+        return NULL;
+    }
+    void removeReselect(const gchar *path){
+        auto item=isReselect(path);
+        if (item){
+            reSelectList_ =  g_list_remove(reSelectList_, item);
+            g_free(item);
+        }
+    }
+    gboolean isSelected(const gchar *path){
+        gboolean selected=FALSE;
+        GList *selectionList=NULL;
+        auto treeModel = GTK_TREE_MODEL(store_);
+        if (isTreeView) {
+            auto selection = gtk_tree_view_get_selection (view()->treeView());
+            selectionList = gtk_tree_selection_get_selected_rows (selection, &treeModel);
+        } else {
+            selectionList = gtk_icon_view_get_selected_items (view()->iconView());
+        }
+        for (auto l=selectionList; l && l->data; l=l->next){
+            GtkTreeIter iter;
+            if (gtk_tree_model_get_iter(treeModel, &iter, (GtkTreePath *)l->data))
+            {
+                gchar *itemPath=NULL;
+                gtk_tree_model_get (treeModel, &iter, PATH, &itemPath, -1);
+                if (strcmp(path, itemPath)==0){
+                    selected = TRUE;
+                    g_free(itemPath);
+                    break;
+                }
+                g_free(itemPath);               
+            }
+        }
+        g_list_free_full(selectionList, (GDestroyNotify)gtk_tree_path_free);
+        return selected;
+    }
+    static gboolean reselect_func (GtkTreeModel *model,
+				GtkTreePath *tpath,
+				GtkTreeIter *iter,
+				gpointer data){
+        gchar *path;
+	auto arg = (void **)data;
+	auto inPath = (const gchar *)arg[0];
+        auto view = (View<Type> *)arg[1];
+
+	gtk_tree_model_get (model, iter, PATH, &path, -1);  
+
+	TRACE("reselect_func: %s <--> %s\n", path, inPath);
+	if (strcmp(path, inPath)){
+            g_free(path);
+	    return FALSE;
+	}
+        g_free(path);
+	TRACE("*** reselect_func: gotcha %s\n", inPath);
+        if (isTreeView){
+            auto selection = gtk_tree_view_get_selection (view->treeView());
+            gtk_tree_selection_select_path(selection, tpath);
+        } else {
+            gtk_icon_view_select_path(view->iconView(), tpath);
+        }
+
+        return TRUE;
+    }
+    void reSelect(const gchar *path){
+        if (!isReselect(path)) return;
+        TRACE("*** reselect %s\n", path);
+        removeReselect(path);
+        void *arg[]={(void *)(path), (void *)baseView_};
+        gtk_tree_model_foreach (GTK_TREE_MODEL(store_), reselect_func, (gpointer) arg); 
+        
+        //auto treeModel = view->treeModel();
+        //gtk_tree_model_foreach (GTK_TREE_MODEL(treeModel), stat_func, (gpointer) arg); 
+
+    }
 
 public:    
     GHashTable *itemsHash(void){return itemsHash_;}
@@ -44,6 +127,7 @@ public:
     void setActive(gboolean state){active_ = state;}
     
     BaseMonitor(GtkTreeModel *treeModel, View<Type> *view){
+        reSelectList_ = NULL;
         itemsHash_ = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_free);
           //      TRACE("BaseMonitor thread itemshash=%p\n", itemsHash_);
         baseView_ = view;
