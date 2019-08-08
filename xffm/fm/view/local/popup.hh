@@ -1284,7 +1284,7 @@ public:
 	if (!wd) wd = g_get_home_dir();
         gchar *response = NULL;
         if (appCount <= 1) {
-            auto entryResponse = new(EntryResponse<Type>)(GTK_WINDOW(mainWindow), _("Open with"), NULL);
+            auto entryResponse = new(EntryResponse<Type>)(GTK_WINDOW(mainWindow), _("Open with"), "document-open");
             entryResponse->setResponseLabel(responseLabel);
             g_free(responseLabel);
 
@@ -1302,7 +1302,7 @@ public:
             response = entryResponse->runResponse();
             delete entryResponse;
         } else {
-            auto comboResponse = new(ComboResponse<Type>)(GTK_WINDOW(mainWindow), _("Open with"), NULL);
+            auto comboResponse = new(ComboResponse<Type>)(GTK_WINDOW(mainWindow), _("Open with"), "document-open");
             comboResponse->setResponseLabel(responseLabel);
             g_free(responseLabel);
 

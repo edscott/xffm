@@ -4,6 +4,7 @@
  */
 
 #define XFFM_CC
+#include "config.h"
 
 #ifdef ALPHA
 
@@ -34,7 +35,6 @@
 # define FORK 1
 #endif
 
-#include "config.h"
 #include "types.h"
 
 #ifdef ENABLE_NLS

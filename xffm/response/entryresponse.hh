@@ -86,7 +86,7 @@ public:
 
 
 	if (icon){
-	    GdkPixbuf *p = Icons<Type>::get_theme_pixbuf(icon, -48);
+	    GdkPixbuf *p = Icons<Type>::get_theme_pixbuf(icon, 48);
 	    if (p){
 		auto image = GTK_IMAGE(gtk_image_new_from_pixbuf(p));
 		gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(image), FALSE, FALSE, 0);
