@@ -186,6 +186,7 @@ public:
 
     void
     startMonitor(GtkTreeModel *treeModel, const gchar *path, void *monitor_f){
+        WARN("Known bug: g_monitor function does not work at / (base/moitor.hh)\n");
         // add all initial items to hash
         if (itemsHash_) gtk_tree_model_foreach (treeModel, add2hash, (void *)itemsHash_);
         store_ = GTK_LIST_STORE(treeModel);
@@ -195,6 +196,7 @@ public:
         GError *error=NULL;
         if (monitor_) g_object_unref(monitor_);
         monitor_ = g_file_monitor (gfile_, G_FILE_MONITOR_WATCH_MOVES, cancellable_,&error);
+        TRACE("monitor_=%p g_file=%p\n", monitor_, gfile_);
         if (error){
             ERROR("fm/base/monitor::g_file_monitor_directory(%s) failed: %s\n",
                     path, error->message);
@@ -211,14 +213,14 @@ public:
     stop_monitor(void){
 	active_ = FALSE;
         if (!monitor_) {
-            TRACE("no monitor to stop\n");
+            DBG("no monitor to stop\n");
             return;
         }
         TRACE("*** stop monitor %p\n", monitor_);
         localMonitorList = g_list_remove(localMonitorList, (void *)monitor_);      
         if (gfile_) {
 	    gchar *p = g_file_get_path(gfile_);
-	    TRACE("*** stop_monitor at: %s\n", p);
+	    DBG("*** stop_monitor at: %s\n", p);
 	    g_free(p);
         }
 	g_file_monitor_cancel(monitor_);

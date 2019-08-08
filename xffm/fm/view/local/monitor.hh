@@ -85,6 +85,7 @@ public:
 #ifndef USE_LOCAL_MONITOR
 	DBG("*** Local monitor at %s s disabled.\n", path);
 #else 
+        TRACE("monitor started for %s\n", path);
         this->startMonitor(view->treeModel(), path, (void *)monitor_f);
         view->setMonitorObject(this);
 	TRACE("*** Local monitor %p starting  %s.\n", this->monitor(), path);
@@ -319,7 +320,7 @@ private:
         if (!BaseSignals<Type>::validBaseView(p->view())) return;
 
         
-        gboolean verbose = FALSE;
+        gboolean verbose = TRUE;
         switch (event){
             case G_FILE_MONITOR_EVENT_DELETED:
             case G_FILE_MONITOR_EVENT_MOVED_OUT:
