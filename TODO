@@ -1,4 +1,5 @@
 For 0.91
+> bug, properties does not show full listview information.
 
 > Test local setting and work of locale in FreeBSD
 > if selected item is updated by monitor, reselect (bug: selection lost) now only if item is removed and readded, as with saving with gvim, since treepath is no longer valid. Current fix probably does nothing (CHECK THIS) in local/monitor.hh restat function

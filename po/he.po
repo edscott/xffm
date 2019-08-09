@@ -1,1544 +1,1391 @@
-# Translations for Rodent package.
-# Copyright (C) 2004-2012 FSF.
-# This file is distributed under the same license as the Rodent package.
-#   --- vie may  3 10:42:21 CDT 2013 ---
+# Xffm+ translation file: vie ago  9 14:42:42 CDT 2019
+# Merged fron existing open source files
+# http://xffm.org
 #
-# Eyal Mamo <emamo91@gmail.com>, 2005.
-# Oldie <yonatanhak@yahoo.com>, 2005.
-# Copyright (C) 2002 Meni Livne <livne@kde.org>.
-# Moti Yehoshua <m@cyberia..org.il>, 2007.
-# Copyright (C) 2003, Diego Iastrubni <elcuco@kdemail.net>.
-# Amir Tal <tal@whatsup.org.il>, 2003.
-# Copyright (C) 2002 Haim Ravia <hrav@kde.org>.
-# Amir S. <amir_in@netvision.net.il>, 2008-2009.
-# Yuval Aviel <yuval@alum.cs.huji.ac.il>, 2005-2006.
-# Copyright (C) 1999-2002 Meni Livne <livne@kde.org>.
-# Tzafrir Cohen <tzafrir@technion.ac.il>, 2000.
-# liel <lielft@gmail.com>, 2009.
-# Yaron Shahrabani <sh.yaron@gmail.com>, 2009-2013.
-# Copyright (C) 2000-2002 Meni Livne <livne@kde.org>.
-# אלעד <el.il@doom.co.il>, 2011.
-# Copyright (C) 1999 Erez Nir <erez-n@actcom.co.il>.
-# דיאגו יסטרובני <elcuco@kde.org>, 2005-2013.
-# Uri Sharaf <usharaf@yahoo.com>, 2003.
-# Yaron <sh.yaron@gmail.com>, 2008-2009.
-# Gai Shaked <costello@linux-kinneret.org>, 2005.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2002-2012.
-# Sagiv Barhoom <sagivba@012.net.il>, 2003.
-# markkr <mark125@gmail.com>, 2009.
-# Barak Itkin <lightningismyname@gmail.com>, 2010.
-# Yair Hershkovitz <yairhr@yahoo.com>, 2004-2008.
-# Liel Fridman <lielft@gmail.com>, 2011.
-# Leon Mintz <leon.mintz@gmail.com>, 2005.
-# Dror Levin <spatz@012.net.il>, 2003.
-# Copyright (C) 2003 Amir Tal <tal@whatsup.org.il>.
-# Jonatan Perry <Jonatan443@walla.co.il>, 2004.
-# Copyright (C) 2002 Yoav Bagno <yoavb@zavit.net.il>.
-# Hebrew message file for YaST2 (@memory@). <>.
-# Copyright (C) 2002 Barak Bloch <barak@php.net>.
-# tahmar1900 <tahmar1900@gmail.com>, 2005-2011.
-# Assaf Gillat <gillata@gmail.com>, 2005-2007.
-# Shoshannah Forbes <xslf@xslf.com>, 2004.
-# Itai Seggev <is+translation@cs.hmc.edu>, 2003-2005.
-# Copyright (C) 2003 Diego Iastrubni <elcuco@kdemail.net>.
-# Guy Rutenberg <guyrutenberg@gmail.com>, 2006.
-# Nadav Kavalerchik <nadavkav@netvision.net.il>, 2007-2009.
-# Zohar Snir <zoharsnir@gmail.com>, 2006.
-# Ofer <oc666@netvision.net.il>, 2009.
-# Chen Levy <contrib@chenlevy.com>, 2005-2006.
-# Zviki Karov <karov@013.net>, 2004-2006.
-# Netanel_H <netanel@gmx.com>, 2009.
-# Tahmar1900 <tahmar1900@gmail.com>, 2010-2011.
-# Raitksin Alexandr <alexrait@hotmail.com>, 2004.
-# Igal <koala@linux.net>, 2004-2005.
-# Copyright (C) 2009 Netanel_h <netanel@gmx.com>.
-# Mark Krapivner <mark125@gmail.com>, 2008.
-# Copyright (C) 2003 Yuval Kohavi <yyyme@walla.co.il>.
-# dovix <dovix2003@yahoo.com>, 2003.
-# Mad Dr. <eplaut@netvision.net.il>, 2004.
-# Shuki Vaknin <radioschizo@yahoo.com>, 2005.
-# Copyright (C) 2005 Meni Livne <livne@kde.org>.
-# Copyright (C) 2000-2002 Netanel_h <netanel@gmx.com>.
-# Amit T. <amitprobable@gmail.com>, 2009.
-# Boris Shtrasman <borissh1983@gmail.com>, 2008.
-# Eyal Ben-Simon <eyalben@surfree.net.il>, 2002.
-# assaf gillat <gillata@gmail.com>, 2007.
-# Dotan Kamber <kamberd@yahoo.com>, 2004.
-# Garry Lachman <DrGarry@GMail.com>, 2004-2006.
-# david <vertigo.rus@gmail.com>, 2008.
-# Shlomi Israely <sijproject@gmail.com>, 2011.
-# Ran Rutenberg <ran.rutenberg@gmail.com>, 2007.
-# Yuval Tanny <tanai@int.gov.il>, 2004-2005.
-# Aharon Don <aronrefael@gmail.com>, 2013.
-# Gil Osher <dolfin@rpg.org.il>, 2002-2005.
-# Copyright (C) 1998 Erez Nir <erez-n@actcom.co.il>.
-# David Shalmiev <vertigo.rus@gmail.com>, 2008.
-# Copyright (C) 2001-2003 Meni Livne <livne@kde.org>.
-# Copyright (C) 1999-2003 Meni Livne <livne@kde.org>.
-# Gil 'Dolfin' Osher <dolfin@rpg.org.il>, 2002-2005.
-# yair hershkovitz <yairhr@yahoo.com>, 2004.
-# Israel Berger <israelb@gmail.com>, 2005.
-# Ariel Tankus <arielt@post.tau.ac.il>, 2002.
-# galion <galion.lum@gmail.com>, 2005.
-# Roie Kerstein <sf_kersteinroie@bezeqint.net>, 2004.
-# Netanel_h <netanel@gmx.com>, 2009.
-# Copyright (C) 2003 dovix <dovix2003@yahoo.com>.
-# Copyright (C) 2003 Lev Polvoi <lev@israsrv.net.il>.
-# Copyright (C) 2000-2003 Meni Livne <livne@kde.org>.
-# David Lodge <dave@cirt.net>, 2004-2009.
-# Eli Zaretskii <eliz@is.elta.co.il>, 2001-2002.
-# amir <amir_in@netvision.net.il>, 2010.
-# Shlomi Loubaton <shlomil@hotmail.com>, 2003.
-# Meni Livne <livne@kde.org>, 2007-2009.
-#  Eitan Isaacson <eitan@ascender.com>, 2007.
-# Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
-# the_other_me <the_other_me@excite.com>, 2003.
-# Copyright (C) 2003 Shlomi Loubaton <shlomil@hotmail.com>.
-# Avi Sand <avisand@gmail.com>, 2009-2012.
-# FIRST AUTHOR Yair Hershkovitz <yairhr@gmail.com>, 2007.
-# Copyright (C) 2003 Meni Livne <livne@kde.org>.
-# Meir Kriheli <meirkr@mksoft.co.il>, 2002-2003.
-# Diego Iastrubni <elcuco@kde.org>, 2003-2013.
-# Copyright (C) 2001-2002 Meni Livne <livne@kde.org>.
-# Ely Levy <nakeee@gmail.com>, 2007.
-# fuzzy
-msgid ""
-msgstr ""
-"Project-Id-Version: Rodent Delta\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-04 16:54-0500\n"
-"PO-Revision-Date: 2002-06-17 13:03+0300\n"
-"Last-Translator: Eli Zaretskii <eliz@gnu.org>\n"
-"Language-Team: Hebrew <eliz@gnu.org>\n"
-"Language: he\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+#
+msgid   ""
+msgstr  "Project-Id-Version: xffm+\n"
+        "Report-Msgid-Bugs-To: \n"
+        "POT-Creation-Date: 2019-08-09 12:32-0500\n"
+        "PO-Revision-Date: 2002-06-17 13:03+0300\n"
+        "Last-Translator: Eli Zaretskii <eliz@gnu.org>\n"
+        "Language-Team: Hebrew <eliz@gnu.org>\n"
+        "Language: he\n"
+        "MIME-Version: 1.0\n"
+        "Content-Type: text/plain; charset=UTF-8\n"
+        "Content-Transfer-Encoding: 8bit\n"
 
-#: ../../xffm/mime/mimemagic.hh:68 ../../xffm/mime/mimemagic.hh:110
-#: ../../xffm/common/mimemagic.hh:68 ../../xffm/common/mimemagic.hh:110
-msgid "No Read Permission"
-msgstr "אין הרשאת קריאה"
+#: ../xffm/mime/mimemagic.hh:68 ../xffm/mime/mimemagic.hh:112
+msgid   "No Read Permission"
+msgstr  "אין הרשאת קריאה"
 
-#: ../../xffm/completion/base.hh:28
-msgid "Command"
-msgstr "פקודה"
+#: ../xffm/find/dialog.hh:91 ../xffm/find/dialog.hh:143
+#: ../xffm/find/dialog.hh:604
+msgid   "Find"
+msgstr  "חיפוש"
 
-#: ../../xffm/completion/base.hh:31
-msgid "File"
-msgstr "קובץ"
+#: ../xffm/find/dialog.hh:167 ../xffm/find/fgr.hh:146
+msgid   "Recursive"
+msgstr  "נסיגה"
 
-#: ../../xffm/completion/base.hh:34
+#: ../xffm/find/dialog.hh:170 ../xffm/find/fgr.hh:142
 #, fuzzy
-msgid "Command history"
-msgstr "הרץ היסטורית פקודות"
+msgid   "Find hidden files and directories"
+msgstr  "קבצים וספריות"
 
-#. option -u uid "uid" "uid_combo"
-#: ../../xffm/completion/base.hh:37 ../../xffm/find/dialog.hh:192
-msgid "User"
-msgstr "משתמש"
+#: ../xffm/find/dialog.hh:173 ../xffm/find/fgr.hh:138
+msgid   "Stay on single filesystem"
+msgstr  "להשאר במערכת קבצים (filesystem) אחת"
 
-#: ../../xffm/completion/base.hh:40
-msgid "Variable"
-msgstr "משתנה"
+#: ../xffm/find/dialog.hh:176 ../xffm/find/signals.hh:66
+#: ../xffm/find/signals.hh:454
+msgid   "Results"
+msgstr  "תוצאות"
 
-#: ../../xffm/completion/base.hh:43
-msgid "Host"
-msgstr "מארח"
+#: ../xffm/find/dialog.hh:176
+msgid   "Upper limit"
+msgstr  "גבול עליון"
 
-#: ../../xffm/completion/base.hh:55
+#: ../xffm/find/dialog.hh:181
+msgid   "At Least"
+msgstr  "לכל הפחות"
+
+#: ../xffm/find/dialog.hh:181 ../xffm/find/dialog.hh:186
+msgid   "kBytes"
+msgstr  "ק\"ב"
+
+#: ../xffm/find/dialog.hh:186
+msgid   "At Most"
+msgstr  "לכל היותר"
+
+#: ../xffm/find/dialog.hh:192 ../xffm/completion/base.hh:37
+msgid   "User"
+msgstr  "משתמש"
+
+#: ../xffm/find/dialog.hh:197
+msgid   "Group"
+msgstr  "קבוצה"
+
+#: ../xffm/find/dialog.hh:201
+msgid   "Octal Permissions"
+msgstr  "הרשאות אוקטליות"
+
+#: ../xffm/find/dialog.hh:206
+msgid   "SUID"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:206 ../xffm/fm/view/local/popup.hh:1102
 #, fuzzy
-msgid "Found no match"
-msgstr "Words to match"
+msgid   "Executable"
+msgstr  "ניתן להרצה:"
 
-#: ../../xffm/completion/base.hh:141 ../../xffm/completion/base.hh:142
-msgid "Matches"
-msgstr "תואם"
+#: ../xffm/find/dialog.hh:214 ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168
+msgid   "Minutes"
+msgstr  "דקות"
 
-#: ../../xffm/completion/base.hh:142
-msgid "Too many files open"
-msgstr "יותר מדי קבצים פתוחים"
+#: ../xffm/find/dialog.hh:219 ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171
+msgid   "Hours"
+msgstr  "שעות"
 
-#: ../../xffm/completion/base.hh:339 ../../xffm/find/fgr.hh:124
-msgid "Options:"
-msgstr "אפשרויות::"
+#: ../xffm/find/dialog.hh:224 ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174
+msgid   "Days"
+msgstr  "ימים"
 
-#: ../../xffm/completion/bash.hh:133
-msgid "Completion mode:"
-msgstr "מצב השלמה:"
+#: ../xffm/find/dialog.hh:230
+msgid   "Months"
+msgstr  "חודשים"
 
-#: ../../xffm/completion/bash.hh:134
-msgid "command"
-msgstr "פקודה"
+#: ../xffm/find/dialog.hh:241
+msgid   "File type : "
+msgstr  "סוג קובץ: "
 
-#: ../../xffm/completion/bash.hh:135
-msgid "file"
-msgstr "קובץ"
+#: ../xffm/find/dialog.hh:255 ../xffm/find/dialog.hh:595
+#: ../xffm/common/gtk.hh:79 ../xffm/fm/dialog/notebook/page/page.hh:71
+msgid   "Close"
+msgstr  "סגור"
 
-#: ../../xffm/completion/bash.hh:145 ../../xffm/completion/bash.hh:149
-msgid "Options >>"
-msgstr "אפשרויות >>"
+#: ../xffm/find/dialog.hh:263 ../xffm/find/dialog.hh:363
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/fm/view/treeview.hh:18
+msgid   "Details"
+msgstr  "פרטים"
 
-#: ../../xffm/find/fgr.hh:124 ../../xffm/find/signals.hh:100
-#: ../../xffm/find/dialog.hh:301
-msgid "Path"
-msgstr "נתיב"
+#: ../xffm/find/dialog.hh:301 ../xffm/find/fgr.hh:124
+#: ../xffm/find/signals.hh:100
+msgid   "Path"
+msgstr  "נתיב"
 
-#: ../../xffm/find/fgr.hh:125
-msgid "Locate documents and folders on this computer by name or content"
-msgstr "אתר מסמכים ותיקיות במחשב זה על פי שם או תוכן"
+#: ../xffm/find/dialog.hh:334 ../xffm/find/fgr.hh:126
+msgid   "Filter:"
+msgstr  "מסנן:"
 
-#: ../../xffm/find/fgr.hh:126 ../../xffm/find/dialog.hh:334
-msgid "Filter:"
-msgstr "מסנן:"
+#: ../xffm/find/dialog.hh:377
+msgid   "Contains"
+msgstr  "מכיל"
 
-#: ../../xffm/find/fgr.hh:126
-msgid "Search for files"
-msgstr "חיפוש אחר קבצים"
+#: ../xffm/find/dialog.hh:397
+msgid   "Contains the text"
+msgstr  "המכילים את הטקסט"
 
-#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
-#: ../../xffm/find/fgr.hh:128
-msgid "Contents:"
-msgstr "תכנים:"
+#: ../xffm/find/dialog.hh:430
+msgid   "Case Sensitive"
+msgstr  "תלוי רשיות"
 
-#: ../../xffm/find/fgr.hh:128
+#: ../xffm/find/dialog.hh:442
+msgid   "Extended regexp"
+msgstr  "regexp ממושך"
+
+#: ../xffm/find/dialog.hh:453
+msgid   "Include binary files"
+msgstr  "כלול קבצים בינריים"
+
+#: ../xffm/find/dialog.hh:463 ../xffm/find/fgr.hh:212
 #, fuzzy
-msgid "File's contents filtered as plain text."
-msgstr "האם לשמור את הקובץ כקובץ טקסט פשוט?"
+msgid   "Line Count"
+msgstr  "כמות קבצים"
 
-#: ../../xffm/find/fgr.hh:131
-msgid "Verbose output debugging mode."
-msgstr "מצג ניפוי שגיאות."
+#: ../xffm/find/dialog.hh:489
+msgid   "Match"
+msgstr  "התאמה"
 
-#: ../../xffm/find/fgr.hh:133
-msgid "Show version information"
-msgstr "Show version information"
-
-#: ../../xffm/find/fgr.hh:135
-msgid "Filter Details"
-msgstr "פרטי מסנן"
-
-#. / option -a "xdev"
-#: ../../xffm/find/fgr.hh:138 ../../xffm/find/dialog.hh:173
-msgid "Stay on single filesystem"
-msgstr "להשאר במערכת קבצים (filesystem) אחת"
-
-#: ../../xffm/find/fgr.hh:140
-msgid "Print..."
-msgstr "הדפס..."
-
-#: ../../xffm/find/fgr.hh:140
-msgid "The unique Process ID that identifies this process."
-msgstr "מספר תהליך ייחודי המזהה תהליך זה."
-
-#. / option -D "recursiveH"
-#: ../../xffm/find/fgr.hh:142 ../../xffm/find/dialog.hh:170
+#: ../xffm/find/dialog.hh:501
 #, fuzzy
-msgid "Find hidden files and directories"
-msgstr "קבצים וספריות"
+msgid   "Anywhere"
+msgstr  "בכל מקום"
 
-#: ../../xffm/find/fgr.hh:143
-msgid "Filter"
-msgstr "מסנן"
+#: ../xffm/find/dialog.hh:516
+msgid   "Whole words only"
+msgstr  "מילים שלמות בלבד"
 
-#: ../../xffm/find/fgr.hh:144
-msgid ""
-"To display files which pass the filter (stars and regexps will be processed)"
-msgstr "להצגת קבצים שעברו את הסינון"
+#: ../xffm/find/dialog.hh:531
+msgid   "lines"
+msgstr  "שורות"
 
-#. / option -r "recursive"
-#: ../../xffm/find/fgr.hh:146 ../../xffm/find/dialog.hh:167
-msgid "Recursive"
-msgstr "נסיגה"
+#: ../xffm/find/dialog.hh:545 ../xffm/find/fgr.hh:210
+msgid   "No match"
+msgstr  "המיאתמ תזורחמ האצמנ אל"
 
-#: ../../xffm/find/fgr.hh:147 ../../xffm/find/fgr.hh:148
-#: ../../xffm/find/fgr.hh:149 ../../xffm/find/fgr.hh:150
-msgid "KByte"
-msgstr "קילו בייט"
+#: ../xffm/find/dialog.hh:577 ../xffm/find/signals.hh:368
+#: ../xffm/common/gtk.hh:409 ../xffm/fm/view/local/rm.hh:157
+#: ../xffm/fm/view/local/properties.hh:314
+#: ../xffm/response/entryresponse.hh:435 ../xffm/response/chooserresponse.hh:21
+msgid   "Cancel"
+msgstr  "ביטול"
 
-#: ../../xffm/find/fgr.hh:148
-msgid "is greater than or equal to"
-msgstr "גדול או שווה"
+#: ../xffm/find/dialog.hh:587
+msgid   "Clear"
+msgstr  "נקה"
 
-#: ../../xffm/find/fgr.hh:150
-msgid "is less than or equal to"
-msgstr "קטן או שווה"
+#: ../xffm/find/dialog.hh:629
+msgid   "Edit"
+msgstr  "‏עריכה"
 
-#: ../../xffm/find/fgr.hh:152
-msgid "Set UID"
-msgstr "קביעת זהות משתמש (UID)"
+#: ../xffm/find/dialog.hh:743 ../xffm/find/dialog.hh:758
+#: ../xffm/common/preview.hh:460 ../xffm/common/util.hh:1354
+#: ../xffm/common/util.hh:1356 ../xffm/common/util.hh:1362
+#: ../xffm/common/util.hh:1364
+msgid   "unknown"
+msgstr  "לא ידוע"
 
-#: ../../xffm/find/fgr.hh:152
-msgid "Executable Text Files"
-msgstr "קובצי טקסט הניתנים להפעלה"
+#: ../xffm/find/dialog.hh:772
+msgid   "Modified"
+msgstr  "שונה"
 
-#: ../../xffm/find/fgr.hh:154
-msgid "The permissions of the file, in octal notation."
-msgstr "ההרשאות של הקובץ, בסימון אוקטאלי."
+#: ../xffm/find/dialog.hh:776
+msgid   "Created"
+msgstr  "תאריך היצירה"
 
-#: ../../xffm/find/fgr.hh:155
-msgid "Type"
-msgstr "סוג"
+#: ../xffm/find/dialog.hh:780
+msgid   "Accessed"
+msgstr  "מועד גישה"
 
-#: ../../xffm/find/fgr.hh:157 ../../xffm/find/signals.hh:14
-msgid "Any"
-msgstr "כל סוג"
+#: ../xffm/find/dialog.hh:1098
+msgid   "Basic rules:\n"
+        "\n"
+        "*  Will match any character zero or more times.\n"
+        "?  Will match any character exactly one time\n"
+        "[] Match any character within the [] \n"
+        "^  Match at beginning of string\n"
+        "$  Match at end of string \n"
+msgstr  "כללים בסיסים:\n"
+        "\n"
+        "*  יחליף אות או צורה אפס פעמים או יותר.\n"
+        "?  יחליף אות או צורה בדיוק פעם אחד.\n"
 
-#: ../../xffm/find/fgr.hh:157
+#: ../xffm/find/dialog.hh:1107
 #, fuzzy
-msgid "Default type"
-msgstr "פריט בררת המחדל"
+msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
+        "( ) : \n"
+        "In  basic regular expressions the metacharacters ?, +, {, |, (, "
+        "and ) \n"
+        "  lose their special meaning.\n"
+        "\n"
+        "The  period . matches  any  single  character.\n"
+        "The caret ^ matches at the start of line.\n"
+        "The dollar $ matches at the end of line.\n"
+        "\n"
+        "Characters within [ ] matches any single character in the list.\n"
+        "Characters within [^ ] matches any single character *not* in the "
+        "list.\n"
+        "Characters inside [ - ] matches a range of characters (ie [0-9] or "
+        "[a-z]).\n"
+        "\n"
+        "A regular expression may be followed by one of several repetition "
+        "operators:\n"
+        "?      The preceding item is optional and matched\n"
+        "       at most once.\n"
+        "*      The preceding item will be matched zero\n"
+        "       or more times.\n"
+        "+      The preceding item will be matched one or\n"
+        "       more times.\n"
+        "{n}    The preceding item is matched exactly n times.\n"
+        "{n,}   The preceding item is matched n or more times.\n"
+        "{n,m}  The preceding item is matched at least n times,\n"
+        "       but not more than m times.\n"
+        "\n"
+        "To match any reserved character, precede it with \\. \n"
+        "\n"
+        "Two regular expressions may be joined by the logical or operator |.\n"
+        "Two regular expressions may be concatenated.\n"
+        "\n"
+        "More information is available by typing \"man grep\"\n"
+msgstr  "אותיות וסמלים שמורים לregexp רחב, הם\n"
+        ". ^ $ [ ] ? * + { } | \\ ( ) : \n"
+        "בביטויים רגילים הסמלים \n"
+        "?, +, {, |, (, ו- ) מאבדים את ערכם המיוחד\n"
+        "\n"
+        "הנקודה  .   מתאים לאות או סמל אחת.\n"
+        "הכובע  ^  מתאים בתחילת שורה.\n"
+        "הדולר  $  מתאים בסוף שורה.\n"
+        "\n"
+        "אותיות וסמלים בתוך [ ] מתאימים לאיזשהו אות או סמל\n"
+        "אחת ברשימה.\n"
+        "אותיות וסמלים בתוך [ ^] מתאימים לאיזשהו אות או סמל\n"
+        "אחת שאיננה ברשימה.\n"
+        "אותיות וסמלים בתוך [ - ] מתאימים למגוון של אותיות או סמלים\n"
+        "כגון [0-9] או [a-z] וכו'.\n"
+        "\n"
+        "אחרי ביטוי רגיל אפשר לשים\n"
+        "אחד מפעולות החוזרות הבאות:\n"
+        "?      הפריט הקודם הוא לא חיוני\n"
+        "       ויתואם הכי הרבה פעם אחת.\n"
+        "*      הפריט הקודם יתואם אפס\n"
+        "       או יותר פעמים.\n"
+        "+      הפריט הקודם יתואם פעם אחת\n"
+        "       או יותר.\n"
+        "י {n}    הפריט הקודם יתואם בדיוק n פעמים.\n"
+        "י {n,}   הפריט הקודם יתואם n פעמים או יותר.\n"
+        "י {n,m}  הפריט הקודם יתואם לפחות n פעמים,\n"
+        "       אך לא יותר מ-m פעמים.\n"
+        "\n"
+        "לתאם כל אות או סמל שמור תקדים אותו עם \\. \n"
+        "\n"
+        "ניתן לחבר שתי ביטויים רגילים על ידי ההגיוני אן מפעיל |.\n"
+        "ניתן לבצע על שתי ביטויים רגילים קונקטנציה concatendation)\n"
+        ")\n"
+        "ניתן לקבל יותר מידע על ידי הקשת man grep\"\n"
+        "\"       בשורת הפקודה.\n"
 
-#: ../../xffm/find/fgr.hh:158 ../../xffm/common/preview.hh:478
+#: ../xffm/find/fgr.hh:124 ../xffm/completion/base.hh:339
+msgid   "Options:"
+msgstr  "אפשרויות::"
+
+#: ../xffm/find/fgr.hh:125
+msgid   "Locate documents and folders on this computer by name or content"
+msgstr  "אתר מסמכים ותיקיות במחשב זה על פי שם או תוכן"
+
+#: ../xffm/find/fgr.hh:126
+msgid   "Search for files"
+msgstr  "חיפוש אחר קבצים"
+
+#: ../xffm/find/fgr.hh:128
+msgid   "Contents:"
+msgstr  "תכנים:"
+
+#: ../xffm/find/fgr.hh:128
 #, fuzzy
-msgid "Regular file"
-msgstr "ץבוק"
+msgid   "File's contents filtered as plain text."
+msgstr  "האם לשמור את הקובץ כקובץ טקסט פשוט?"
 
-#: ../../xffm/find/fgr.hh:159 ../../xffm/find/signals.hh:8
-#: ../../xffm/fm/view/local/popup.hh:1062 ../../xffm/common/preview.hh:469
-msgid "Directory"
-msgstr "ספרייה"
+#: ../xffm/find/fgr.hh:131
+msgid   "Verbose output debugging mode."
+msgstr  "מצג ניפוי שגיאות."
 
-#: ../../xffm/find/fgr.hh:160 ../../xffm/find/signals.hh:9
-#: ../../xffm/common/preview.hh:475
-msgid "Symbolic Link"
-msgstr "קישור סמלי"
+#: ../xffm/find/fgr.hh:133
+msgid   "Show version information"
+msgstr  "Show version information"
 
-#: ../../xffm/find/fgr.hh:161
+#: ../xffm/find/fgr.hh:135
+msgid   "Filter Details"
+msgstr  "פרטי מסנן"
+
+#: ../xffm/find/fgr.hh:140
+msgid   "Print..."
+msgstr  "הדפס..."
+
+#: ../xffm/find/fgr.hh:140
+msgid   "The unique Process ID that identifies this process."
+msgstr  "מספר תהליך ייחודי המזהה תהליך זה."
+
+#: ../xffm/find/fgr.hh:143
+msgid   "Filter"
+msgstr  "מסנן"
+
+#: ../xffm/find/fgr.hh:144
+msgid   "To display files which pass the filter (stars and regexps will be "
+        "processed)"
+msgstr  "להצגת קבצים שעברו את הסינון"
+
+#: ../xffm/find/fgr.hh:147 ../xffm/find/fgr.hh:148 ../xffm/find/fgr.hh:149
+#: ../xffm/find/fgr.hh:150
+msgid   "KByte"
+msgstr  "קילו בייט"
+
+#: ../xffm/find/fgr.hh:148
+msgid   "is greater than or equal to"
+msgstr  "גדול או שווה"
+
+#: ../xffm/find/fgr.hh:150
+msgid   "is less than or equal to"
+msgstr  "קטן או שווה"
+
+#: ../xffm/find/fgr.hh:152
+msgid   "Set UID"
+msgstr  "קביעת זהות משתמש (UID)"
+
+#: ../xffm/find/fgr.hh:152
+msgid   "Executable Text Files"
+msgstr  "קובצי טקסט הניתנים להפעלה"
+
+#: ../xffm/find/fgr.hh:154
+msgid   "The permissions of the file, in octal notation."
+msgstr  "ההרשאות של הקובץ, בסימון אוקטאלי."
+
+#: ../xffm/find/fgr.hh:155
+msgid   "Type"
+msgstr  "סוג"
+
+#: ../xffm/find/fgr.hh:157 ../xffm/find/signals.hh:14
+msgid   "Any"
+msgstr  "כל סוג"
+
+#: ../xffm/find/fgr.hh:157
 #, fuzzy
-msgid "UNIX Socket"
-msgstr "ערכת UNIX"
+msgid   "Default type"
+msgstr  "פריט בררת המחדל"
 
-#: ../../xffm/find/fgr.hh:162 ../../xffm/find/signals.hh:11
-#: ../../xffm/common/preview.hh:463
-msgid "Block device"
-msgstr "התקן בלוק"
-
-#: ../../xffm/find/fgr.hh:163 ../../xffm/find/signals.hh:12
-#: ../../xffm/common/preview.hh:466
-msgid "Character device"
-msgstr "התקן תו"
-
-#: ../../xffm/find/fgr.hh:164 ../../xffm/find/signals.hh:13
-#: ../../xffm/common/preview.hh:472
-msgid "FIFO"
-msgstr "FIFO"
-
-#. radio_p freed on destroy event for findDialog.
-#. option -k minutes "last_minutes", "last_minutes_spin"
-#: ../../xffm/find/fgr.hh:166 ../../xffm/find/fgr.hh:168
-#: ../../xffm/find/dialog.hh:214
-msgid "Minutes"
-msgstr "דקות"
-
-#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
-#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
-#: ../../xffm/find/dialog.hh:263 ../../xffm/find/dialog.hh:363
-#: ../../xffm/fm/view/treeview.hh:18
-msgid "Details"
-msgstr "פרטים"
-
-#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
-#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
-#: ../../xffm/find/fgr.hh:179 ../../xffm/find/fgr.hh:180
-#: ../../xffm/find/fgr.hh:183 ../../xffm/find/fgr.hh:184
-#: ../../xffm/find/fgr.hh:187 ../../xffm/find/fgr.hh:188
+#: ../xffm/find/fgr.hh:158 ../xffm/common/preview.hh:478
 #, fuzzy
-msgid "TIME"
-msgstr "TIMEOUT"
+msgid   "Regular file"
+msgstr  "ץבוק"
 
-#: ../../xffm/find/fgr.hh:168 ../../xffm/find/fgr.hh:171
-#: ../../xffm/find/fgr.hh:174 ../../xffm/find/fgr.hh:177
-msgid "Previous"
-msgstr "הקודם"
+#: ../xffm/find/fgr.hh:159 ../xffm/find/signals.hh:8
+#: ../xffm/common/preview.hh:469 ../xffm/fm/view/local/popup.hh:1062
+msgid   "Directory"
+msgstr  "ספרייה"
 
-#. option -h hours "last_hours", "last_hours_spin"
-#: ../../xffm/find/fgr.hh:169 ../../xffm/find/fgr.hh:171
-#: ../../xffm/find/dialog.hh:219
-msgid "Hours"
-msgstr "שעות"
+#: ../xffm/find/fgr.hh:160 ../xffm/find/signals.hh:9
+#: ../xffm/common/preview.hh:475
+msgid   "Symbolic Link"
+msgstr  "קישור סמלי"
 
-#. option -d days "last_days", "last_days_spin"
-#: ../../xffm/find/fgr.hh:172 ../../xffm/find/fgr.hh:174
-#: ../../xffm/find/dialog.hh:224
-msgid "Days"
-msgstr "ימים"
-
-#: ../../xffm/find/fgr.hh:175
-msgid "Month"
-msgstr "חודש"
-
-#: ../../xffm/find/fgr.hh:177
-msgid "Month(s)"
-msgstr "חודשים"
-
-#: ../../xffm/find/fgr.hh:180
-msgid "Modification Time :"
-msgstr "זמן עדכון:"
-
-#: ../../xffm/find/fgr.hh:184
-msgid "Access Time :"
-msgstr "זמן גישה:"
-
-#: ../../xffm/find/fgr.hh:188
-msgid "Creation Time :"
-msgstr "זמן יצירה:"
-
-#: ../../xffm/find/fgr.hh:191 ../../xffm/find/fgr.hh:192
-msgid "uid"
-msgstr "מספר משתמש"
-
-#: ../../xffm/find/fgr.hh:192
-msgid "User:"
-msgstr "משתמש:"
-
-#: ../../xffm/find/fgr.hh:194 ../../xffm/find/fgr.hh:195
+#: ../xffm/find/fgr.hh:161
 #, fuzzy
-msgid "gid"
-msgstr "id"
+msgid   "UNIX Socket"
+msgstr  "ערכת UNIX"
 
-#: ../../xffm/find/fgr.hh:195
-msgid "Group:"
-msgstr "קבוצה:"
+#: ../xffm/find/fgr.hh:162 ../xffm/find/signals.hh:11
+#: ../xffm/common/preview.hh:463
+msgid   "Block device"
+msgstr  "התקן בלוק"
 
-#: ../../xffm/find/fgr.hh:198
-msgid ""
-"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
-"character that  normally  follows  a file  name"
-msgstr ""
+#: ../xffm/find/fgr.hh:163 ../xffm/find/signals.hh:12
+#: ../xffm/common/preview.hh:466
+msgid   "Character device"
+msgstr  "התקן תו"
 
-#: ../../xffm/find/fgr.hh:200
-msgid "Content View"
-msgstr "תצוגה נוכחית"
+#: ../xffm/find/fgr.hh:164 ../xffm/find/signals.hh:13
+#: ../xffm/common/preview.hh:472
+msgid   "FIFO"
+msgstr  "FIFO"
 
-#: ../../xffm/find/fgr.hh:201 ../../xffm/find/fgr.hh:202
-#: ../../xffm/find/fgr.hh:203 ../../xffm/find/fgr.hh:204
-msgid "STRING"
-msgstr "STRING"
-
-#: ../../xffm/find/fgr.hh:202 ../../xffm/find/fgr.hh:204
-#: ../../xffm/fm/view/local/popup.hh:759
-msgid "Regular expression"
-msgstr "ביטוי רגולרי"
-
-#: ../../xffm/find/fgr.hh:204
-msgid "Extended"
-msgstr "מורחב"
-
-#: ../../xffm/find/fgr.hh:206
-msgid "Ignore case"
-msgstr "התעלמות מרישיות"
-
-#: ../../xffm/find/fgr.hh:208
-msgid "Text Files"
-msgstr "קובצי טקסט"
-
-#: ../../xffm/find/fgr.hh:210 ../../xffm/find/dialog.hh:545
-msgid "No match"
-msgstr "המיאתמ תזורחמ האצמנ אל"
-
-#: ../../xffm/find/fgr.hh:212 ../../xffm/find/dialog.hh:463
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/find/fgr.hh:179 ../xffm/find/fgr.hh:180
+#: ../xffm/find/fgr.hh:183 ../xffm/find/fgr.hh:184 ../xffm/find/fgr.hh:187
+#: ../xffm/find/fgr.hh:188
 #, fuzzy
-msgid "Line Count"
-msgstr "כמות קבצים"
+msgid   "TIME"
+msgstr  "TIMEOUT"
 
-#: ../../xffm/find/fgr.hh:214
-msgid "Words"
-msgstr "מילים"
+#: ../xffm/find/fgr.hh:168 ../xffm/find/fgr.hh:171 ../xffm/find/fgr.hh:174
+#: ../xffm/find/fgr.hh:177
+msgid   "Previous"
+msgstr  "הקודם"
 
-#: ../../xffm/find/fgr.hh:216
-msgid "Lines"
-msgstr "שורות"
+#: ../xffm/find/fgr.hh:175
+msgid   "Month"
+msgstr  "חודש"
 
-#: ../../xffm/find/fgr.hh:368
+#: ../xffm/find/fgr.hh:177
+msgid   "Month(s)"
+msgstr  "חודשים"
+
+#: ../xffm/find/fgr.hh:180
+msgid   "Modification Time :"
+msgstr  "זמן עדכון:"
+
+#: ../xffm/find/fgr.hh:184
+msgid   "Access Time :"
+msgstr  "זמן גישה:"
+
+#: ../xffm/find/fgr.hh:188
+msgid   "Creation Time :"
+msgstr  "זמן יצירה:"
+
+#: ../xffm/find/fgr.hh:191 ../xffm/find/fgr.hh:192
+msgid   "uid"
+msgstr  "מספר משתמש"
+
+#: ../xffm/find/fgr.hh:192
+msgid   "User:"
+msgstr  "משתמש:"
+
+#: ../xffm/find/fgr.hh:194 ../xffm/find/fgr.hh:195
+#, fuzzy
+msgid   "gid"
+msgstr  "id"
+
+#: ../xffm/find/fgr.hh:195
+msgid   "Group:"
+msgstr  "קבוצה:"
+
+#: ../xffm/find/fgr.hh:198
+msgid   "Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+        "character that  normally  follows  a file  name"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:200
+msgid   "Content View"
+msgstr  "תצוגה נוכחית"
+
+#: ../xffm/find/fgr.hh:201 ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:203
+#: ../xffm/find/fgr.hh:204
+msgid   "STRING"
+msgstr  "STRING"
+
+#: ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:204
+#: ../xffm/fm/view/local/popup.hh:759
+msgid   "Regular expression"
+msgstr  "ביטוי רגולרי"
+
+#: ../xffm/find/fgr.hh:204
+msgid   "Extended"
+msgstr  "מורחב"
+
+#: ../xffm/find/fgr.hh:206
+msgid   "Ignore case"
+msgstr  "התעלמות מרישיות"
+
+#: ../xffm/find/fgr.hh:208
+msgid   "Text Files"
+msgstr  "קובצי טקסט"
+
+#: ../xffm/find/fgr.hh:214
+msgid   "Words"
+msgstr  "מילים"
+
+#: ../xffm/find/fgr.hh:216
+msgid   "Lines"
+msgstr  "שורות"
+
+#: ../xffm/find/fgr.hh:362
 #, c-format
-msgid "Usage : %s [OPTIONS]\n"
-msgstr "שימוש : %s [OPTIONS]\n"
+msgid   "Usage : %s [OPTIONS]\n"
+msgstr  "שימוש : %s [OPTIONS]\n"
 
-#: ../../xffm/find/signals.hh:7
-msgid "Regular"
-msgstr "רגיל"
+#: ../xffm/find/signals.hh:7
+msgid   "Regular"
+msgstr  "רגיל"
 
-#: ../../xffm/find/signals.hh:10 ../../xffm/common/preview.hh:481
-msgid "Socket"
-msgstr "שקע"
+#: ../xffm/find/signals.hh:10 ../xffm/common/preview.hh:481
+msgid   "Socket"
+msgstr  "שקע"
 
-#. if (g_slist_length(list) == 0) return NULL;
-#. Create liststore for DnD
-#. / option "upper_limit_spin" (only in gtk findDialog)
-#: ../../xffm/find/signals.hh:66 ../../xffm/find/signals.hh:454
-#: ../../xffm/find/dialog.hh:176
-msgid "Results"
-msgstr "תוצאות"
-
-#. button no
-#: ../../xffm/find/signals.hh:368 ../../xffm/find/dialog.hh:577
-#: ../../xffm/response/chooserresponse.hh:21
-#: ../../xffm/response/entryresponse.hh:420
-#: ../../xffm/fm/view/local/properties.hh:314
-#: ../../xffm/fm/view/local/rm.hh:157 ../../xffm/common/gtk.hh:409
-msgid "Cancel"
-msgstr "ביטול"
-
-#: ../../xffm/find/signals.hh:396 ../../xffm/find/signals.hh:830
+#: ../xffm/find/signals.hh:396 ../xffm/find/signals.hh:830
 #, fuzzy
-msgid "No editor for current action."
-msgstr "אין פעולות נוכחיות."
+msgid   "No editor for current action."
+msgstr  "אין פעולות נוכחיות."
 
-#: ../../xffm/find/signals.hh:454
-msgid "Upper limit:"
-msgstr "הגבלה עליונה:"
+#: ../xffm/find/signals.hh:454
+msgid   "Upper limit:"
+msgstr  "הגבלה עליונה:"
 
-#: ../../xffm/find/signals.hh:456
-msgid "Counting files..."
-msgstr "סופר קבצים..."
+#: ../xffm/find/signals.hh:456
+msgid   "Counting files..."
+msgstr  "סופר קבצים..."
 
-#: ../../xffm/find/signals.hh:471
+#: ../xffm/find/signals.hh:471
 #, fuzzy, c-format
-msgid "Found %d match"
-msgid_plural "Found %d matches"
-msgstr[0] "%d התאמה"
-msgstr[1] "%d התאמות"
+msgid   "Found %d match"
+msgid_plural    "Found %d matches"
+msgstr[0]       "%d התאמה"
+msgstr[1]       "%d התאמות"
 
-#: ../../xffm/find/signals.hh:473
+#: ../xffm/find/signals.hh:473
 #, c-format
-msgid "%s Finished : %s"
-msgstr "%s סיים : %s"
+msgid   "%s Finished : %s"
+msgstr  "%s סיים : %s"
 
-#: ../../xffm/find/signals.hh:596 ../../xffm/find/signals.hh:598
-msgid "Searching..."
-msgstr "מחפש..."
+#: ../xffm/find/signals.hh:596 ../xffm/find/signals.hh:598
+msgid   "Searching..."
+msgstr  "מחפש..."
 
-#. g_object_set_data(G_OBJECT(findDialog), "window", findDialog);
-#: ../../xffm/find/dialog.hh:91 ../../xffm/find/dialog.hh:143
-#: ../../xffm/find/dialog.hh:604
-msgid "Find"
-msgstr "חיפוש"
+#: ../xffm/common/preview.hh:581
+msgid   "Empty file"
+msgstr  "קובץ ריק"
 
-#: ../../xffm/find/dialog.hh:176
-msgid "Upper limit"
-msgstr "גבול עליון"
-
-#. option -s +KByte "size_greater", "size_greater_spin"
-#: ../../xffm/find/dialog.hh:181
-msgid "At Least"
-msgstr "לכל הפחות"
-
-#: ../../xffm/find/dialog.hh:181 ../../xffm/find/dialog.hh:186
-msgid "kBytes"
-msgstr "ק\"ב"
-
-#. option -s -KByte "size_smaller", "size_smaller_spin"
-#: ../../xffm/find/dialog.hh:186
-msgid "At Most"
-msgstr "לכל היותר"
-
-#: ../../xffm/find/dialog.hh:197
-msgid "Group"
-msgstr "קבוצה"
-
-#. option -o octal "octal_p" "permissions_entry"
-#: ../../xffm/find/dialog.hh:201
-msgid "Octal Permissions"
-msgstr "הרשאות אוקטליות"
-
-#. option -p suid | exe
-#: ../../xffm/find/dialog.hh:206
-msgid "SUID"
-msgstr ""
-
-#: ../../xffm/find/dialog.hh:206 ../../xffm/fm/view/local/popup.hh:1102
-#, fuzzy
-msgid "Executable"
-msgstr "ניתן להרצה:"
-
-#. option -m months "last_months", "last_months_spin"
-#: ../../xffm/find/dialog.hh:230
-msgid "Months"
-msgstr "חודשים"
-
-#: ../../xffm/find/dialog.hh:241
-msgid "File type : "
-msgstr "סוג קובץ: "
-
-#. gtk_widget_show (GTK_WIDGET(right_options_vbox));
-#. gtk_widget_show (GTK_WIDGET(center_options_vbox));
-#. gtk_widget_show (GTK_WIDGET(left_options_vbox));
-#: ../../xffm/find/dialog.hh:255 ../../xffm/find/dialog.hh:595
-#: ../../xffm/fm/dialog/notebook/page/page.hh:70 ../../xffm/common/gtk.hh:79
-msgid "Close"
-msgstr "סגור"
-
-#. gtk_box_pack_start (vbox7a, GTK_WIDGET(advancedBox), TRUE, FALSE, 5);
-#. gtk_widget_show(GTK_WIDGET(advancedBox));
-#. //////////////  grep options.... /////////////////////////
-#: ../../xffm/find/dialog.hh:377
-msgid "Contains"
-msgstr "מכיל"
-
-#: ../../xffm/find/dialog.hh:397
-msgid "Contains the text"
-msgstr "המכילים את הטקסט"
-
-#: ../../xffm/find/dialog.hh:430
-msgid "Case Sensitive"
-msgstr "תלוי רשיות"
-
-#: ../../xffm/find/dialog.hh:442
-msgid "Extended regexp"
-msgstr "regexp ממושך"
-
-#: ../../xffm/find/dialog.hh:453
-msgid "Include binary files"
-msgstr "כלול קבצים בינריים"
-
-#: ../../xffm/find/dialog.hh:489
-msgid "Match"
-msgstr "התאמה"
-
-#: ../../xffm/find/dialog.hh:501
-#, fuzzy
-msgid "Anywhere"
-msgstr "בכל מקום"
-
-#: ../../xffm/find/dialog.hh:516
-msgid "Whole words only"
-msgstr "מילים שלמות בלבד"
-
-#: ../../xffm/find/dialog.hh:531
-msgid "lines"
-msgstr "שורות"
-
-#: ../../xffm/find/dialog.hh:587
-msgid "Clear"
-msgstr "נקה"
-
-#: ../../xffm/find/dialog.hh:629
-msgid "Edit"
-msgstr "‏עריכה"
-
-#: ../../xffm/find/dialog.hh:743 ../../xffm/find/dialog.hh:758
-#: ../../xffm/common/util.hh:1354 ../../xffm/common/util.hh:1356
-#: ../../xffm/common/util.hh:1362 ../../xffm/common/util.hh:1364
-#: ../../xffm/common/preview.hh:460
-msgid "unknown"
-msgstr "לא ידוע"
-
-#: ../../xffm/find/dialog.hh:772
-msgid "Modified"
-msgstr "שונה"
-
-#: ../../xffm/find/dialog.hh:776
-msgid "Created"
-msgstr "תאריך היצירה"
-
-#: ../../xffm/find/dialog.hh:780
-msgid "Accessed"
-msgstr "מועד גישה"
-
-#: ../../xffm/find/dialog.hh:1098
-msgid ""
-"Basic rules:\n"
-"\n"
-"*  Will match any character zero or more times.\n"
-"?  Will match any character exactly one time\n"
-"[] Match any character within the [] \n"
-"^  Match at beginning of string\n"
-"$  Match at end of string \n"
-msgstr ""
-"כללים בסיסים:\n"
-"\n"
-"*  יחליף אות או צורה אפס פעמים או יותר.\n"
-"?  יחליף אות או צורה בדיוק פעם אחד.\n"
-
-#: ../../xffm/find/dialog.hh:1107
-#, fuzzy
-msgid ""
-"Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ ( ) : \n"
-"In  basic regular expressions the metacharacters ?, +, {, |, (, and ) \n"
-"  lose their special meaning.\n"
-"\n"
-"The  period . matches  any  single  character.\n"
-"The caret ^ matches at the start of line.\n"
-"The dollar $ matches at the end of line.\n"
-"\n"
-"Characters within [ ] matches any single character in the list.\n"
-"Characters within [^ ] matches any single character *not* in the list.\n"
-"Characters inside [ - ] matches a range of characters (ie [0-9] or [a-z]).\n"
-"\n"
-"A regular expression may be followed by one of several repetition "
-"operators:\n"
-"?      The preceding item is optional and matched\n"
-"       at most once.\n"
-"*      The preceding item will be matched zero\n"
-"       or more times.\n"
-"+      The preceding item will be matched one or\n"
-"       more times.\n"
-"{n}    The preceding item is matched exactly n times.\n"
-"{n,}   The preceding item is matched n or more times.\n"
-"{n,m}  The preceding item is matched at least n times,\n"
-"       but not more than m times.\n"
-"\n"
-"To match any reserved character, precede it with \\. \n"
-"\n"
-"Two regular expressions may be joined by the logical or operator |.\n"
-"Two regular expressions may be concatenated.\n"
-"\n"
-"More information is available by typing \"man grep\"\n"
-msgstr ""
-"אותיות וסמלים שמורים לregexp רחב, הם\n"
-". ^ $ [ ] ? * + { } | \\ ( ) : \n"
-"בביטויים רגילים הסמלים \n"
-"?, +, {, |, (, ו- ) מאבדים את ערכם המיוחד\n"
-"\n"
-"הנקודה  .   מתאים לאות או סמל אחת.\n"
-"הכובע  ^  מתאים בתחילת שורה.\n"
-"הדולר  $  מתאים בסוף שורה.\n"
-"\n"
-"אותיות וסמלים בתוך [ ] מתאימים לאיזשהו אות או סמל\n"
-"אחת ברשימה.\n"
-"אותיות וסמלים בתוך [ ^] מתאימים לאיזשהו אות או סמל\n"
-"אחת שאיננה ברשימה.\n"
-"אותיות וסמלים בתוך [ - ] מתאימים למגוון של אותיות או סמלים\n"
-"כגון [0-9] או [a-z] וכו'.\n"
-"\n"
-"אחרי ביטוי רגיל אפשר לשים\n"
-"אחד מפעולות החוזרות הבאות:\n"
-"?      הפריט הקודם הוא לא חיוני\n"
-"       ויתואם הכי הרבה פעם אחת.\n"
-"*      הפריט הקודם יתואם אפס\n"
-"       או יותר פעמים.\n"
-"+      הפריט הקודם יתואם פעם אחת\n"
-"       או יותר.\n"
-"י {n}    הפריט הקודם יתואם בדיוק n פעמים.\n"
-"י {n,}   הפריט הקודם יתואם n פעמים או יותר.\n"
-"י {n,m}  הפריט הקודם יתואם לפחות n פעמים,\n"
-"       אך לא יותר מ-m פעמים.\n"
-"\n"
-"לתאם כל אות או סמל שמור תקדים אותו עם \\. \n"
-"\n"
-"ניתן לחבר שתי ביטויים רגילים על ידי ההגיוני אן מפעיל |.\n"
-"ניתן לבצע על שתי ביטויים רגילים קונקטנציה concatendation)\n"
-")\n"
-"ניתן לקבל יותר מידע על ידי הקשת man grep\"\n"
-"\"       בשורת הפקודה.\n"
-
-#: ../../xffm/response/chooserresponse.hh:23
-msgid "Open"
-msgstr "פתיחה"
-
-#: ../../xffm/response/chooserresponse.hh:56
-msgid "Choose directory"
-msgstr "בחר ספרייה"
-
-#: ../../xffm/response/chooserresponse.hh:60
-msgid "Choose file"
-msgstr "בחר קובץ"
-
-#: ../../xffm/response/customresponse.hh:55
-#, fuzzy
-msgid "Execute command"
-msgstr "הפעל פקודה"
-
-#. XXX folder or file entry should be determined on .ini file (probably just inherit from comboresponse for multiple files options (selected files)...
-#: ../../xffm/response/customresponse.hh:103
-msgid "Source File"
-msgstr "קובץ המקור"
-
-#. this button is redundant since hands are on keyboard for password
-#: ../../xffm/response/entryresponse.hh:424
-#: ../../xffm/response/passwdresponse.hh:242
-msgid "Ok"
-msgstr "אישור"
-
-#: ../../xffm/response/commandprogressresponse.hh:31
-msgid "Items:"
-msgstr "פריטים:"
-
-#: ../../xffm/response/passwdresponse.hh:19
-#: ../../xffm/response/passwdresponse.hh:25 ../../xffm/common/run.hh:464
-msgid "Enter password"
-msgstr "הזנת ססמה"
-
-#. gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
-#: ../../xffm/response/passwdresponse.hh:179
-#, fuzzy
-msgid "User Input"
-msgstr "קלט עכבר"
-
-#: ../../xffm/response/passwdresponse.hh:195
-#, fuzzy
-msgid "Response Requested"
-msgstr "תגובה יוצאת"
-
-#: ../../xffm/response/timeoutresponse.hh:57
-msgid "Dismiss"
-msgstr "שחרר"
-
-#: ../../xffm/response/commandresponse.hh:19
-msgid "Running"
-msgstr "פועל"
-
-#. auto text = g_strdup_printf("%s (pid: %d)",
-#. _("Waiting for operation to finish..."),
-#. Tubo<Type>::getChild (pid));
-#: ../../xffm/response/commandresponse.hh:24
-#, fuzzy
-msgid "Waiting for operation to finish..."
-msgstr "       מחכה ש Tuxpaint יסיים..."
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:11
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:214
-#, fuzzy
-msgid "Remove Button Contents"
-msgstr "הסר כפתור"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:67
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:209
-#, fuzzy
-msgid "Add custom content"
-msgstr "הוספת תוכן מותאם אישית ללחצן"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:68
-#, fuzzy
-msgid "Select file to load"
-msgstr "בחר קובץ להוספה…"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:125
+#: ../xffm/common/preview.hh:636
 #, fuzzy, c-format
-msgid "Cannot load file %s. Reason: %s"
-msgstr "לא ניתן לטעון את התיקייה \"%s\": %s\n"
+msgid   "Cannot read from %s"
+msgstr  "לא ניתן לקרוא מ־\"%s\""
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:154
+#: ../xffm/common/gtk.hh:67 ../xffm/fm/dialog/notebook/vbuttonbox.hh:240
 #, fuzzy
-msgid "You need to restart the application"
-msgstr "עליך לאתחל את היישום."
+msgid   "Open terminal"
+msgstr  "פתיחת מסוף"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:187
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:191
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:195
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:198
-#: ../../xffm/fm/view/pkg/model.hh:29 ../../xffm/fm/view/pkg/popup.hh:35
+#: ../xffm/common/gtk.hh:69 ../xffm/common/util.hh:1443
+msgid   "Execute Shell Command"
+msgstr  "הרץ פקודת מעטפת"
+
+#: ../xffm/common/gtk.hh:71 ../xffm/fm/view/local/popup.hh:157
+msgid   "Paste"
+msgstr  "הדבק"
+
+#: ../xffm/common/gtk.hh:73 ../xffm/fm/view/local/popup.hh:151
+msgid   "Add bookmark"
+msgstr  "הוסף סימנייה"
+
+#: ../xffm/common/gtk.hh:75 ../xffm/fm/view/local/popup.hh:152
+#: ../xffm/fm/view/root/popup.hh:137
+msgid   "Remove bookmark"
+msgstr  "הסר סימניה"
+
+#: ../xffm/common/gtk.hh:77 ../xffm/fm/view/pkg/model.hh:108
+#: ../xffm/fm/view/pkg/model.hh:299 ../xffm/fm/view/pkg/model.hh:306
+#: ../xffm/fm/view/pkg/popup.hh:151
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:236
+msgid   "Search"
+msgstr  "חיפוש"
+
+#: ../xffm/common/gtk.hh:81 ../xffm/fm/dialog/notebook/menupopover.hh:237
+msgid   "Exit"
+msgstr  "יציאה"
+
+#: ../xffm/common/gtk.hh:83 ../xffm/fm/view/local/popup.hh:85
+#: ../xffm/fm/view/local/popup.hh:142 ../xffm/fm/view/local/popup.hh:1287
+#: ../xffm/fm/view/local/popup.hh:1294 ../xffm/fm/view/local/popup.hh:1305
+#: ../xffm/fm/view/local/popup.hh:1312
+msgid   "Open with"
+msgstr  "פתח בעזרת"
+
+#: ../xffm/common/gtk.hh:85 ../xffm/fm/view/local/popup.hh:100
+#: ../xffm/fm/view/local/popup.hh:156
+msgid   "Cut"
+msgstr  "גזור"
+
+#: ../xffm/common/gtk.hh:87 ../xffm/fm/view/local/popup.hh:99
+#: ../xffm/fm/view/local/popup.hh:155
+msgid   "Copy"
+msgstr  "העתק"
+
+#: ../xffm/common/gtk.hh:89 ../xffm/fm/view/local/rm.hh:176
+#: ../xffm/fm/view/local/popup.hh:103 ../xffm/fm/view/local/popup.hh:160
+msgid   "Delete"
+msgstr  "מחק"
+
+#: ../xffm/common/gtk.hh:91 ../xffm/fm/view/local/rm.hh:165
 #, fuzzy
-msgid "Software Updater"
-msgstr "עדכון תכנה"
+msgid   "Shred"
+msgstr  "מגרסה"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:236
-#: ../../xffm/fm/view/pkg/model.hh:108 ../../xffm/fm/view/pkg/model.hh:299
-#: ../../xffm/fm/view/pkg/model.hh:306 ../../xffm/fm/view/pkg/popup.hh:151
-#: ../../xffm/common/gtk.hh:77
-msgid "Search"
-msgstr "חיפוש"
+#: ../xffm/common/gtk.hh:94 ../xffm/fm/view/local/popup.hh:95
+#: ../xffm/fm/view/local/popup.hh:145 ../xffm/fm/view/root/popup.hh:136
+#: ../xffm/fm/view/fstab/popup.hh:20
+msgid   "Open in New Tab"
+msgstr  "פתיחה בלשונית חדשה"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:240 ../../xffm/common/gtk.hh:67
+#: ../xffm/common/gtk.hh:139 ../xffm/fm/dialog/notebook/notebook.hh:75
+msgid   "New Tab"
+msgstr  "לשונית חדשה"
+
+#: ../xffm/common/gtk.hh:352 ../xffm/common/gtk.hh:360
+msgid   "Help"
+msgstr  "עזרה"
+
+#: ../xffm/common/settings.hh:30
 #, fuzzy
-msgid "Open terminal"
-msgstr "פתיחת מסוף"
+msgid   "New File:"
+msgstr  "קובץ חדש"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:244
-msgid "Open a New Window"
-msgstr "פתיחת חלון חדש"
+#: ../xffm/common/gio.hh:81
+msgid   "Copying files"
+msgstr  "מתבצעת העתקת הקבצים"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:250
-msgid "Differences"
-msgstr "הבדלים"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:256
-#: ../../xffm/fm/view/root/model.hh:110
-msgid "Home Directory"
-msgstr "תיקיית בית"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:261
-#: ../../xffm/fm/view/root/model.hh:168 ../../xffm/fm/view/fstab/popup.hh:29
-msgid "Disk Image Mounter"
-msgstr "מעגן דמויות כונן"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:266
-#: ../../xffm/fm/view/root/model.hh:137
+#: ../xffm/common/gio.hh:83 ../xffm/common/dnd.hh:35
+#: ../xffm/fm/dialog/clipboard.hh:30
 #, fuzzy
-msgid "Trash bin"
-msgstr "העבר קובץ לאשפה"
+msgid   "Moving files"
+msgstr  "קבצים מועברים"
 
-#: ../../xffm/fm/dialog/notebook/notebook.hh:56
-msgid "Long press time"
-msgstr "זמן לחיצה ארוכה"
-
-#: ../../xffm/fm/dialog/notebook/notebook.hh:75 ../../xffm/common/gtk.hh:139
-msgid "New Tab"
-msgstr "לשונית חדשה"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:178
+#: ../xffm/common/gio.hh:85
 #, fuzzy
-msgid "Open menu"
-msgstr "פתיחת תפריט"
+msgid   "linking"
+msgstr  "מקשר"
 
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:230
-#, fuzzy
-msgid "View as list"
-msgstr "הצג כרשימה"
+#: ../xffm/common/gio.hh:87
+msgid   "rename"
+msgstr  "שנה שם"
 
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:231
-msgid "Show hidden files"
-msgstr "הצג קבצים מוסתרים"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:232
-#, fuzzy
-msgid "Show Backup Files"
-msgstr "קובץ גיבוי"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:233
-#, fuzzy
-msgid "Sort data in descending order"
-msgstr "ממויין לפי סדר פתיחה"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:235
-#, fuzzy
-msgid "Sort by date"
-msgstr "מיין לפי מצב"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:236
-#, fuzzy
-msgid "Sort by size"
-msgstr "מיין לפי מצב"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:237 ../../xffm/common/gtk.hh:81
-msgid "Exit"
-msgstr "יציאה"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:270
-msgid "Main menu"
-msgstr "תפריט ראשי"
-
-#. File chooser
-#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:375
-#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:377
-msgid "Go to"
-msgstr "לך אל"
-
-#. entryResponse->setCheckButton(_("Run in Terminal"));
-#. entryResponse->setCheckButton(Run<Type>::runInTerminal(path));
-#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:382
-#: ../../xffm/fm/view/local/popup.hh:887 ../../xffm/fm/view/local/popup.hh:981
-msgid "Specify Output Directory..."
-msgstr "ציון ספריית פלט..."
-
-#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:409
-msgid "Not a directory"
-msgstr "לא ספרייה"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:135
-msgid "Renice Process"
-msgstr "שנה עדיפות לתהליך"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:135
-msgid "Suspend"
-msgstr "השהה"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:135
-msgid "Continue"
-msgstr "המשך"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid "Interrupt"
-msgstr "פסק"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid "Hangup"
-msgstr "ניתוק"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid "User 1 (USR1)"
-msgstr "משתמש 1 (USR1)"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:137
-msgid "User 2 (USR2)"
-msgstr "משתמש 2 (USR2)"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:137
-#, fuzzy
-msgid "Terminate Task"
-msgstr "חסל %s"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:137
-msgid "Abort"
-msgstr "ביטול"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:138
-msgid "Kill"
-msgstr "Kill"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:139
-#, fuzzy
-msgid "Segmentation fault"
-msgstr "Segmentation violation"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:216
-msgid "PID"
-msgstr "PID"
-
-#: ../../xffm/fm/dialog/notebook/page/page.hh:58
-msgid "loading..."
-msgstr "בטעינה..."
-
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
-msgid "Embedded Terminal"
-msgstr "מסוף מוטמע"
-
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
-#, fuzzy
-msgid "All items in the iconview."
-msgstr "הצג את כל הפריטים על המפרשים."
-
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
-msgid "Scripting"
-msgstr "תסרוט"
-
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
-msgid "Clear Log"
-msgstr "נקה רישום"
-
-#. Status textview
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
-msgid "Terminal font"
-msgstr "Terminal font"
-
-#: ../../xffm/fm/dialog/clipboard.hh:23 ../../xffm/common/dnd.hh:41
-msgid "Copying files locally"
-msgstr "מעתיק קבצים מקומית"
-
-#: ../../xffm/fm/dialog/clipboard.hh:30 ../../xffm/common/gio.hh:83
-#: ../../xffm/common/dnd.hh:35
-#, fuzzy
-msgid "Moving files"
-msgstr "קבצים מועברים"
-
-#: ../../xffm/fm/dialog/dialog.hh:122
-msgid "Removed"
-msgstr "הוסר"
-
-#: ../../xffm/fm/dialog/dialog.hh:143
-#, fuzzy
-msgid "Detected device(s):"
-msgstr "גילוי התקנים"
-
-#: ../../xffm/fm/view/local/model.hh:122
+#: ../xffm/common/gio.hh:426
 #, c-format
-msgid "Reading \"%s\""
-msgstr "„%s“ נקרא"
+msgid   "(%d of %d)"
+msgstr  "‏(%d מתוך %d)"
 
-#: ../../xffm/fm/view/local/model.hh:575 ../../xffm/fm/view/base/monitor.hh:33
+#: ../xffm/common/util.hh:1404
+#, c-format
+msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
+        "attribute on that file."
+msgstr  ""
+
+#: ../xffm/common/util.hh:1406 ../xffm/common/util.hh:1441
+#, c-format
+msgid   "Open with %s"
+msgstr  "פתח באמצעות %s"
+
+#: ../xffm/common/util.hh:1406
+msgid   "Text Editor"
+msgstr  "עורך טקסט"
+
+#: ../xffm/common/util.hh:1447
+msgid   "Console: quickly run single commands -- write a command here and "
+        "press enter."
+msgstr  ""
+
+#: ../xffm/common/util.hh:1452 ../xffm/fm/view/local/popup.hh:1109
+#: ../xffm/fm/view/local/popup.hh:1291 ../xffm/fm/view/local/popup.hh:1309
+msgid   "Run in Terminal"
+msgstr  "הרץ במסוף"
+
+#: ../xffm/common/dnd.hh:41 ../xffm/fm/dialog/clipboard.hh:23
+msgid   "Copying files locally"
+msgstr  "מעתיק קבצים מקומית"
+
+#: ../xffm/common/dnd.hh:47
+#, fuzzy
+msgid   "Create Link"
+msgstr  "ביטול יצירת קישורים"
+
+#: ../xffm/common/run.hh:338
+msgid   "error"
+msgstr  "שגיאה"
+
+#: ../xffm/common/run.hh:342
+#, fuzzy
+msgid   "warning"
+msgstr  "warning:"
+
+#: ../xffm/common/run.hh:464 ../xffm/response/passwdresponse.hh:19
+#: ../xffm/response/passwdresponse.hh:25
+msgid   "Enter password"
+msgstr  "הזנת ססמה"
+
+#: ../xffm/fm/view/pkg/model.hh:29 ../xffm/fm/view/pkg/popup.hh:35
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:187
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:191
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:195
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:198
+#, fuzzy
+msgid   "Software Updater"
+msgstr  "עדכון תכנה"
+
+#: ../xffm/fm/view/pkg/model.hh:41 ../xffm/fm/view/pkg/model.hh:52
+msgid   "Add or remove software installed on the system"
+msgstr  "הוספה או הסרה של יישומי המערכת"
+
+#: ../xffm/fm/view/pkg/model.hh:111
+msgid   "String"
+msgstr  "מחרוזת"
+
+#: ../xffm/fm/view/pkg/model.hh:116
+msgid   "Waiting for search results"
+msgstr  "בהמתנה לתוצאות החיפוש"
+
+#: ../xffm/fm/view/pkg/model.hh:174
+msgid   "No results"
+msgstr  "אין תוצאות"
+
+#: ../xffm/fm/view/pkg/model.hh:373
+#, fuzzy
+msgid   "Currently busy\n"
+msgstr  "האלבום הנוכחי"
+
+#: ../xffm/fm/view/pkg/popup.hh:44
+msgid   "Update Database"
+msgstr  "עדכן את בסיס־נתונים"
+
+#: ../xffm/fm/view/pkg/popup.hh:45
+#, fuzzy
+msgid   "Fetch"
+msgstr  "ציור"
+
+#: ../xffm/fm/view/pkg/popup.hh:46
+#, fuzzy
+msgid   "Install --dry-run"
+msgstr  "ספריית התקנה:"
+
+#: ../xffm/fm/view/pkg/popup.hh:47
+msgid   "Install"
+msgstr  "התקן"
+
+#: ../xffm/fm/view/pkg/popup.hh:48
+#, fuzzy
+msgid   "Uninstall --dry-run"
+msgstr  "מסיר התקנה"
+
+#: ../xffm/fm/view/pkg/popup.hh:49
+msgid   "Uninstall"
+msgstr  "הסר"
+
+#: ../xffm/fm/view/pkg/popup.hh:50
+msgid   "Information"
+msgstr  "מידע"
+
+#: ../xffm/fm/view/pkg/popup.hh:140
+msgid   "Version"
+msgstr  "גרסה"
+
+#: ../xffm/fm/view/pkg/popup.hh:149
+msgid   "Go up"
+msgstr  "לך למעלה"
+
+#: ../xffm/fm/view/pkg/popup.hh:152
+#, fuzzy
+msgid   "Search packages"
+msgstr  "מתבצע חיפוש אחר חבילות"
+
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
 #, fuzzy, c-format
-msgid "Files: %s"
-msgstr "קבצים: %s "
+msgid   "Loading %s...%s"
+msgstr  "‏%s בטעינה..."
 
-#: ../../xffm/fm/view/local/model.hh:578
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
+#, fuzzy
+msgid   "Please Wait..."
+msgstr  "נא להמתין..."
+
+#: ../xffm/fm/view/local/model.hh:124
+#, c-format
+msgid   "Reading \"%s\""
+msgstr  "„%s“ נקרא"
+
+#: ../xffm/fm/view/local/model.hh:577 ../xffm/fm/view/base/monitor.hh:34
 #, fuzzy, c-format
-msgid "Loaded %d of %d articles"
-msgstr "גודל החלקיקים:"
+msgid   "Files: %s"
+msgstr  "קבצים: %s "
 
-#: ../../xffm/fm/view/local/popup.hh:85 ../../xffm/fm/view/local/popup.hh:142
-#: ../../xffm/fm/view/local/popup.hh:1287
-#: ../../xffm/fm/view/local/popup.hh:1294
-#: ../../xffm/fm/view/local/popup.hh:1305
-#: ../../xffm/fm/view/local/popup.hh:1312 ../../xffm/common/gtk.hh:83
-msgid "Open with"
-msgstr "פתח בעזרת"
-
-#: ../../xffm/fm/view/local/popup.hh:94
-msgid "New"
-msgstr "חדש"
-
-#: ../../xffm/fm/view/local/popup.hh:95 ../../xffm/fm/view/local/popup.hh:145
-#: ../../xffm/fm/view/root/popup.hh:136 ../../xffm/fm/view/fstab/popup.hh:20
-#: ../../xffm/common/gtk.hh:94
-msgid "Open in New Tab"
-msgstr "פתיחה בלשונית חדשה"
-
-#. deprecated {N_("Open in New Tab"), NULL, NULL, NULL},
-#. deprecated {N_("Open in New Window"), NULL, NULL, NULL},
-#. common buttons /(also an iconsize +/- button)
-#: ../../xffm/fm/view/local/popup.hh:99 ../../xffm/fm/view/local/popup.hh:155
-#: ../../xffm/common/gtk.hh:87
-msgid "Copy"
-msgstr "העתק"
-
-#: ../../xffm/fm/view/local/popup.hh:100 ../../xffm/fm/view/local/popup.hh:156
-#: ../../xffm/common/gtk.hh:85
-msgid "Cut"
-msgstr "גזור"
-
-#: ../../xffm/fm/view/local/popup.hh:101 ../../xffm/fm/view/local/popup.hh:159
-#: ../../xffm/fm/view/local/popup.hh:232 ../../xffm/fm/view/local/popup.hh:234
-msgid "Paste into"
-msgstr "הדבקה לתוך"
-
-#: ../../xffm/fm/view/local/popup.hh:102 ../../xffm/fm/view/local/popup.hh:158
-msgid "There is nothing on the clipboard to paste."
-msgstr "אין שום דבר בלוח הגזירים להדבקה."
-
-#. **************
-#: ../../xffm/fm/view/local/popup.hh:103 ../../xffm/fm/view/local/popup.hh:160
-#: ../../xffm/fm/view/local/rm.hh:176 ../../xffm/common/gtk.hh:89
-msgid "Delete"
-msgstr "מחק"
-
-#. {N_("About"), NULL, (void *) menu},
-#.
-#: ../../xffm/fm/view/local/popup.hh:106
-msgid "Select All"
-msgstr "בחירת הכול"
-
-#: ../../xffm/fm/view/local/popup.hh:107 ../../xffm/fm/view/local/popup.hh:755
-#, fuzzy
-msgid "Match regular expression"
-msgstr "התאמה כביטוי רגולרי"
-
-#: ../../xffm/fm/view/local/popup.hh:143 ../../xffm/fm/view/local/popup.hh:1105
-#, fuzzy
-msgid "Run Executable..."
-msgstr "ניתן להרצה:"
-
-#. File chooser
-#: ../../xffm/fm/view/local/popup.hh:144 ../../xffm/fm/view/local/popup.hh:875
-msgid "Extract files from the archive"
-msgstr "חילוץ קבצים מהארכיון"
-
-#. File chooser
-#: ../../xffm/fm/view/local/popup.hh:146 ../../xffm/fm/view/local/popup.hh:966
-msgid "Create a compressed archive with the selected objects"
-msgstr "יצירת ארכיון דחוס עם הפריטים הנבחרים"
-
-#: ../../xffm/fm/view/local/popup.hh:148 ../../xffm/fm/view/fstab/popup.hh:37
-msgid "Mount the volume associated with this folder"
-msgstr "חיבור הכרך המשויך לתיקייה זאת"
-
-#: ../../xffm/fm/view/local/popup.hh:149 ../../xffm/fm/view/fstab/popup.hh:38
-msgid "Unmount the volume associated with this folder"
-msgstr "ניתוק הכרך המשויך לתיקייה זאת"
-
-#: ../../xffm/fm/view/local/popup.hh:151 ../../xffm/common/gtk.hh:73
-msgid "Add bookmark"
-msgstr "הוסף סימנייה"
-
-#: ../../xffm/fm/view/local/popup.hh:152 ../../xffm/fm/view/root/popup.hh:137
-#: ../../xffm/common/gtk.hh:75
-msgid "Remove bookmark"
-msgstr "הסר סימניה"
-
-#: ../../xffm/fm/view/local/popup.hh:157 ../../xffm/common/gtk.hh:71
-msgid "Paste"
-msgstr "הדבק"
-
-#: ../../xffm/fm/view/local/popup.hh:161 ../../xffm/fm/view/local/popup.hh:1231
-msgid "Rename"
-msgstr "החלף שם"
-
-#: ../../xffm/fm/view/local/popup.hh:162 ../../xffm/fm/view/local/popup.hh:1217
-msgid "Duplicate"
-msgstr "שכפל"
-
-#: ../../xffm/fm/view/local/popup.hh:163 ../../xffm/fm/view/local/popup.hh:1203
-msgid "Link"
-msgstr "קישור"
-
-#: ../../xffm/fm/view/local/popup.hh:164
-msgid "Properties"
-msgstr "מאפיינים"
-
-#: ../../xffm/fm/view/local/popup.hh:562
-msgid "Files:"
-msgstr "קבצים:"
-
-#: ../../xffm/fm/view/local/popup.hh:565 ../../xffm/fm/view/local/rm.hh:61
-#, fuzzy
-msgid "Multiple selections"
-msgstr "גזירת בחירה"
-
-#: ../../xffm/fm/view/local/popup.hh:753
-#, fuzzy
-msgid "Select items"
-msgstr "בחירת הפריט"
-
-#: ../../xffm/fm/view/local/popup.hh:771
-msgid "Regular Expression syntax is incorrect"
-msgstr "התחביר של הביטוי הרגולי לא תקין"
-
-#: ../../xffm/fm/view/local/popup.hh:801
-msgid "No selection"
-msgstr "אין בחירה"
-
-#: ../../xffm/fm/view/local/popup.hh:801
-msgid "No matches."
-msgstr "אין תוצאות."
-
-#: ../../xffm/fm/view/local/popup.hh:1058
-#, fuzzy
-msgid "Create new..."
-msgstr "יצירת חדש..."
-
-#: ../../xffm/fm/view/local/popup.hh:1065
-#: ../../xffm/fm/view/local/popup.hh:1146
-msgid "New Name:"
-msgstr "שם חדש:"
-
-#: ../../xffm/fm/view/local/popup.hh:1074
-msgid "No name"
-msgstr "ללא שם"
-
-#: ../../xffm/fm/view/local/popup.hh:1087
-#, c-format
-msgid "Another file with the same name already exists in “%s”."
-msgstr "קובץ אחר בעל אותו השם כבר קיים ב־„%s“."
-
-#: ../../xffm/fm/view/local/popup.hh:1109
-#: ../../xffm/fm/view/local/popup.hh:1291
-#: ../../xffm/fm/view/local/popup.hh:1309 ../../xffm/common/util.hh:1452
-msgid "Run in Terminal"
-msgstr "הרץ במסוף"
-
-#: ../../xffm/fm/view/local/popup.hh:1112
-msgid "Arguments for the Command"
-msgstr "Arguments for the Command"
-
-#: ../../xffm/fm/view/local/popup.hh:1258
-msgid "You have selected multiple files or folders"
-msgstr "בחרת קבצים או תיקיות מרובים"
-
-#: ../../xffm/fm/view/local/popup.hh:1332 ../../xffm/fm/view/local/view.hh:156
-#, fuzzy
-msgid "Invalid entry"
-msgstr "שאילתה שגויה"
-
-#: ../../xffm/fm/view/local/properties.hh:245
-msgid "Properties and Attributes"
-msgstr "מאפיינים ותכונות"
-
-#: ../../xffm/fm/view/local/properties.hh:274
-msgid "File Mode:"
-msgstr "מצב קובץ:"
-
-#: ../../xffm/fm/view/local/properties.hh:300
-msgid "File:"
-msgstr "קובץ:"
-
-#. Add file info stuff
-#. set info stuff data according to combo box
-#. add signal handler to changed signal for combo box
-#. Add process buttons
-#.
-#: ../../xffm/fm/view/local/properties.hh:312
-msgid "Apply changes"
-msgstr "החל שינויים"
-
-#: ../../xffm/fm/view/local/properties.hh:477
-msgid "Successfully moved to trash."
-msgstr "ההעברה לאשפה התבצעה בהצלחה."
-
-#: ../../xffm/fm/view/local/properties.hh:478
-msgid "Source:"
-msgstr "מקור:"
-
-#: ../../xffm/fm/view/local/rm.hh:59
-#, c-format
-msgid "Delete %s"
-msgstr "מחק %s"
-
-#: ../../xffm/fm/view/local/rm.hh:61
-msgid "Warning: "
-msgstr "אזהרה: "
-
-#. gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
-#. title
-#: ../../xffm/fm/view/local/rm.hh:92
-msgid "Remove"
-msgstr "הסר"
-
-#: ../../xffm/fm/view/local/rm.hh:142
-#, fuzzy
-msgid "Apply to all"
-msgstr "החל על כולם"
-
-#. **************
-#. This is now available to BSD with rm -P option
-#: ../../xffm/fm/view/local/rm.hh:165 ../../xffm/common/gtk.hh:91
-#, fuzzy
-msgid "Shred"
-msgstr "מגרסה"
-
-#: ../../xffm/fm/view/local/rm.hh:183
-msgid "Trash"
-msgstr "אשפה"
-
-#: ../../xffm/fm/view/local/view.hh:177
+#: ../xffm/fm/view/local/model.hh:580
 #, fuzzy, c-format
-msgid "The volume '%s' is not mounted."
-msgstr "הסגנון \"%s\" לא נמצא"
+msgid   "Loaded %d of %d articles"
+msgstr  "גודל החלקיקים:"
 
-#: ../../xffm/fm/view/root/model.hh:82
-#, fuzzy
-msgid "Root Directory"
-msgstr "ספרייה ראשית..."
-
-#: ../../xffm/fm/view/root/model.hh:98
-msgid "This is the root of the filesystem"
-msgstr "זהו השורש של מערכת הקבצים שלך"
-
-#: ../../xffm/fm/view/root/model.hh:176 ../../xffm/fm/view/root/model.hh:191
-msgid "Mount local disks and devices"
-msgstr "מעגן דיסקים מקומיים והתקנים"
-
-#: ../../xffm/fm/view/root/model.hh:177 ../../xffm/fm/view/fstab/popup.hh:23
-#: ../../xffm/fm/view/fstab/view.hh:1084
-msgid "eCryptfs Volume"
-msgstr "כרך eCryptfs"
-
-#: ../../xffm/fm/view/root/model.hh:178 ../../xffm/fm/view/fstab/popup.hh:22
-msgid "SSHFS Remote Synchronization Folder"
-msgstr "SSHFS Remote Synchronization Folder"
-
-#: ../../xffm/fm/view/root/model.hh:179 ../../xffm/fm/view/fstab/popup.hh:21
-#: ../../xffm/fm/view/fstab/view.hh:1032
-msgid "NFS Network Volume"
-msgstr "כרך NFS רשת"
-
-#: ../../xffm/fm/view/root/model.hh:180 ../../xffm/fm/view/fstab/popup.hh:24
-#: ../../xffm/fm/view/fstab/view.hh:1110
-msgid "CIFS Volume"
-msgstr "כרך CIFS"
-
-#: ../../xffm/fm/view/root/model.hh:229
-#, fuzzy
-msgid "Go to bookmarked location"
-msgstr "מעבר למיקום הבא בסימניות."
-
-#: ../../xffm/fm/view/root/popup.hh:138
-msgid "Empty trash"
-msgstr "ריקון האשפה"
-
-#. File chooser
-#: ../../xffm/fm/view/fstab/popup.hh:129
-msgid "Mount Device"
-msgstr "חבר התקן"
-
-#: ../../xffm/fm/view/fstab/popup.hh:141 ../../xffm/fm/view/fstab/view.hh:923
-msgid "Mount point:"
-msgstr "נקודת עגינה:"
-
-#: ../../xffm/fm/view/fstab/view.hh:590
-#, fuzzy
-msgid "Mount point: "
-msgstr "נקודת עגינה:"
-
-#: ../../xffm/fm/view/fstab/view.hh:591
-#, fuzzy
-msgid "Mount device: "
-msgstr "חבר התקן"
-
-#. Since /dev is not concrete, the following test returns false...
-#.
-#. if (!g_file_test(name, G_FILE_TEST_IS_DIR)) return;
-#: ../../xffm/fm/view/fstab/view.hh:659 ../../xffm/fm/view/fstab/view.hh:675
-msgid "Disks"
-msgstr "כוננים"
-
-#: ../../xffm/fm/view/fstab/view.hh:921
-msgid "No Label"
-msgstr "ללא תוית"
-
-#: ../../xffm/fm/view/fstab/view.hh:922
-msgid "There is no file system available (unformatted)"
-msgstr "אין מערכת קבצים זמינה (לא מפורמטת)"
-
-#: ../../xffm/fm/view/fstab/view.hh:923
-msgid "Not mounted"
-msgstr "לא מעוגן"
-
-#: ../../xffm/fm/view/fstab/view.hh:1058
-msgid "SFTP (via SSH)"
-msgstr ""
-
-#: ../../xffm/fm/view/fstab/view.hh:1413
+#: ../xffm/fm/view/local/rm.hh:59
 #, c-format
-msgid "Unmounting %s"
-msgstr "ניתוק העיגון של %s"
+msgid   "Delete %s"
+msgstr  "מחק %s"
 
-#: ../../xffm/fm/view/fstab/view.hh:1413
+#: ../xffm/fm/view/local/rm.hh:61
+msgid   "Warning: "
+msgstr  "אזהרה: "
+
+#: ../xffm/fm/view/local/rm.hh:61 ../xffm/fm/view/local/popup.hh:565
+#, fuzzy
+msgid   "Multiple selections"
+msgstr  "גזירת בחירה"
+
+#: ../xffm/fm/view/local/rm.hh:92
+msgid   "Remove"
+msgstr  "הסר"
+
+#: ../xffm/fm/view/local/rm.hh:142
+#, fuzzy
+msgid   "Apply to all"
+msgstr  "החל על כולם"
+
+#: ../xffm/fm/view/local/rm.hh:183
+msgid   "Trash"
+msgstr  "אשפה"
+
+#: ../xffm/fm/view/local/popup.hh:94
+msgid   "New"
+msgstr  "חדש"
+
+#: ../xffm/fm/view/local/popup.hh:101 ../xffm/fm/view/local/popup.hh:159
+#: ../xffm/fm/view/local/popup.hh:232 ../xffm/fm/view/local/popup.hh:234
+msgid   "Paste into"
+msgstr  "הדבקה לתוך"
+
+#: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:158
+msgid   "There is nothing on the clipboard to paste."
+msgstr  "אין שום דבר בלוח הגזירים להדבקה."
+
+#: ../xffm/fm/view/local/popup.hh:106
+msgid   "Select All"
+msgstr  "בחירת הכול"
+
+#: ../xffm/fm/view/local/popup.hh:107 ../xffm/fm/view/local/popup.hh:755
+#, fuzzy
+msgid   "Match regular expression"
+msgstr  "התאמה כביטוי רגולרי"
+
+#: ../xffm/fm/view/local/popup.hh:143 ../xffm/fm/view/local/popup.hh:1105
+#, fuzzy
+msgid   "Run Executable..."
+msgstr  "ניתן להרצה:"
+
+#: ../xffm/fm/view/local/popup.hh:144 ../xffm/fm/view/local/popup.hh:875
+msgid   "Extract files from the archive"
+msgstr  "חילוץ קבצים מהארכיון"
+
+#: ../xffm/fm/view/local/popup.hh:146 ../xffm/fm/view/local/popup.hh:966
+msgid   "Create a compressed archive with the selected objects"
+msgstr  "יצירת ארכיון דחוס עם הפריטים הנבחרים"
+
+#: ../xffm/fm/view/local/popup.hh:148 ../xffm/fm/view/fstab/popup.hh:37
+msgid   "Mount the volume associated with this folder"
+msgstr  "חיבור הכרך המשויך לתיקייה זאת"
+
+#: ../xffm/fm/view/local/popup.hh:149 ../xffm/fm/view/fstab/popup.hh:38
+msgid   "Unmount the volume associated with this folder"
+msgstr  "ניתוק הכרך המשויך לתיקייה זאת"
+
+#: ../xffm/fm/view/local/popup.hh:161 ../xffm/fm/view/local/popup.hh:1231
+msgid   "Rename"
+msgstr  "החלף שם"
+
+#: ../xffm/fm/view/local/popup.hh:162 ../xffm/fm/view/local/popup.hh:1217
+msgid   "Duplicate"
+msgstr  "שכפל"
+
+#: ../xffm/fm/view/local/popup.hh:163 ../xffm/fm/view/local/popup.hh:1203
+msgid   "Link"
+msgstr  "קישור"
+
+#: ../xffm/fm/view/local/popup.hh:164
+msgid   "Properties"
+msgstr  "מאפיינים"
+
+#: ../xffm/fm/view/local/popup.hh:562
+msgid   "Files:"
+msgstr  "קבצים:"
+
+#: ../xffm/fm/view/local/popup.hh:753
+#, fuzzy
+msgid   "Select items"
+msgstr  "בחירת הפריט"
+
+#: ../xffm/fm/view/local/popup.hh:771
+msgid   "Regular Expression syntax is incorrect"
+msgstr  "התחביר של הביטוי הרגולי לא תקין"
+
+#: ../xffm/fm/view/local/popup.hh:801
+msgid   "No selection"
+msgstr  "אין בחירה"
+
+#: ../xffm/fm/view/local/popup.hh:801
+msgid   "No matches."
+msgstr  "אין תוצאות."
+
+#: ../xffm/fm/view/local/popup.hh:887 ../xffm/fm/view/local/popup.hh:981
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:382
+msgid   "Specify Output Directory..."
+msgstr  "ציון ספריית פלט..."
+
+#: ../xffm/fm/view/local/popup.hh:1058
+#, fuzzy
+msgid   "Create new..."
+msgstr  "יצירת חדש..."
+
+#: ../xffm/fm/view/local/popup.hh:1065 ../xffm/fm/view/local/popup.hh:1146
+msgid   "New Name:"
+msgstr  "שם חדש:"
+
+#: ../xffm/fm/view/local/popup.hh:1074
+msgid   "No name"
+msgstr  "ללא שם"
+
+#: ../xffm/fm/view/local/popup.hh:1087
+#, c-format
+msgid   "Another file with the same name already exists in “%s”."
+msgstr  "קובץ אחר בעל אותו השם כבר קיים ב־„%s“."
+
+#: ../xffm/fm/view/local/popup.hh:1112
+msgid   "Arguments for the Command"
+msgstr  "Arguments for the Command"
+
+#: ../xffm/fm/view/local/popup.hh:1258
+msgid   "You have selected multiple files or folders"
+msgstr  "בחרת קבצים או תיקיות מרובים"
+
+#: ../xffm/fm/view/local/popup.hh:1332 ../xffm/fm/view/local/view.hh:156
+#, fuzzy
+msgid   "Invalid entry"
+msgstr  "שאילתה שגויה"
+
+#: ../xffm/fm/view/local/view.hh:177
 #, fuzzy, c-format
-msgid "Mounting %s"
-msgstr "מעגן"
+msgid   "The volume '%s' is not mounted."
+msgstr  "הסגנון \"%s\" לא נמצא"
 
-#: ../../xffm/fm/view/pkg/model.hh:41 ../../xffm/fm/view/pkg/model.hh:52
-msgid "Add or remove software installed on the system"
-msgstr "הוספה או הסרה של יישומי המערכת"
+#: ../xffm/fm/view/local/properties.hh:245
+msgid   "Properties and Attributes"
+msgstr  "מאפיינים ותכונות"
 
-#: ../../xffm/fm/view/pkg/model.hh:111
-msgid "String"
-msgstr "מחרוזת"
+#: ../xffm/fm/view/local/properties.hh:274
+msgid   "File Mode:"
+msgstr  "מצב קובץ:"
 
-#: ../../xffm/fm/view/pkg/model.hh:116
-msgid "Waiting for search results"
-msgstr "בהמתנה לתוצאות החיפוש"
+#: ../xffm/fm/view/local/properties.hh:300
+msgid   "File:"
+msgstr  "קובץ:"
 
-#: ../../xffm/fm/view/pkg/model.hh:174
-msgid "No results"
-msgstr "אין תוצאות"
+#: ../xffm/fm/view/local/properties.hh:312
+msgid   "Apply changes"
+msgstr  "החל שינויים"
 
-#: ../../xffm/fm/view/pkg/model.hh:373
+#: ../xffm/fm/view/local/properties.hh:477
+msgid   "Successfully moved to trash."
+msgstr  "ההעברה לאשפה התבצעה בהצלחה."
+
+#: ../xffm/fm/view/local/properties.hh:478
+msgid   "Source:"
+msgstr  "מקור:"
+
+#: ../xffm/fm/view/root/model.hh:82
 #, fuzzy
-msgid "Currently busy\n"
-msgstr "האלבום הנוכחי"
+msgid   "Root Directory"
+msgstr  "ספרייה ראשית..."
 
-#: ../../xffm/fm/view/pkg/popup.hh:44
-msgid "Update Database"
-msgstr "עדכן את בסיס־נתונים"
+#: ../xffm/fm/view/root/model.hh:98
+msgid   "This is the root of the filesystem"
+msgstr  "זהו השורש של מערכת הקבצים שלך"
 
-#: ../../xffm/fm/view/pkg/popup.hh:45
+#: ../xffm/fm/view/root/model.hh:110
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:256
+msgid   "Home Directory"
+msgstr  "תיקיית בית"
+
+#: ../xffm/fm/view/root/model.hh:137
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:266
 #, fuzzy
-msgid "Fetch"
-msgstr "ציור"
+msgid   "Trash bin"
+msgstr  "העבר קובץ לאשפה"
 
-#: ../../xffm/fm/view/pkg/popup.hh:46
+#: ../xffm/fm/view/root/model.hh:168 ../xffm/fm/view/fstab/popup.hh:29
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:261
+msgid   "Disk Image Mounter"
+msgstr  "מעגן דמויות כונן"
+
+#: ../xffm/fm/view/root/model.hh:176 ../xffm/fm/view/root/model.hh:191
+msgid   "Mount local disks and devices"
+msgstr  "מעגן דיסקים מקומיים והתקנים"
+
+#: ../xffm/fm/view/root/model.hh:177 ../xffm/fm/view/fstab/popup.hh:23
+#: ../xffm/fm/view/fstab/view.hh:1084
+msgid   "eCryptfs Volume"
+msgstr  "כרך eCryptfs"
+
+#: ../xffm/fm/view/root/model.hh:178 ../xffm/fm/view/fstab/popup.hh:22
+msgid   "SSHFS Remote Synchronization Folder"
+msgstr  "SSHFS Remote Synchronization Folder"
+
+#: ../xffm/fm/view/root/model.hh:179 ../xffm/fm/view/fstab/popup.hh:21
+#: ../xffm/fm/view/fstab/view.hh:1032
+msgid   "NFS Network Volume"
+msgstr  "כרך NFS רשת"
+
+#: ../xffm/fm/view/root/model.hh:180 ../xffm/fm/view/fstab/popup.hh:24
+#: ../xffm/fm/view/fstab/view.hh:1110
+msgid   "CIFS Volume"
+msgstr  "כרך CIFS"
+
+#: ../xffm/fm/view/root/model.hh:229
 #, fuzzy
-msgid "Install --dry-run"
-msgstr "ספריית התקנה:"
+msgid   "Go to bookmarked location"
+msgstr  "מעבר למיקום הבא בסימניות."
 
-#: ../../xffm/fm/view/pkg/popup.hh:47
-msgid "Install"
-msgstr "התקן"
+#: ../xffm/fm/view/root/popup.hh:138
+msgid   "Empty trash"
+msgstr  "ריקון האשפה"
 
-#: ../../xffm/fm/view/pkg/popup.hh:48
+#: ../xffm/fm/view/fstab/popup.hh:129
+msgid   "Mount Device"
+msgstr  "חבר התקן"
+
+#: ../xffm/fm/view/fstab/popup.hh:141 ../xffm/fm/view/fstab/view.hh:923
+msgid   "Mount point:"
+msgstr  "נקודת עגינה:"
+
+#: ../xffm/fm/view/fstab/view.hh:590
 #, fuzzy
-msgid "Uninstall --dry-run"
-msgstr "מסיר התקנה"
+msgid   "Mount point: "
+msgstr  "נקודת עגינה:"
 
-#: ../../xffm/fm/view/pkg/popup.hh:49
-msgid "Uninstall"
-msgstr "הסר"
-
-#: ../../xffm/fm/view/pkg/popup.hh:50
-msgid "Information"
-msgstr "מידע"
-
-#: ../../xffm/fm/view/pkg/popup.hh:140
-msgid "Version"
-msgstr "גרסה"
-
-#: ../../xffm/fm/view/pkg/popup.hh:149
-msgid "Go up"
-msgstr "לך למעלה"
-
-#: ../../xffm/fm/view/pkg/popup.hh:152
+#: ../xffm/fm/view/fstab/view.hh:591
 #, fuzzy
-msgid "Search packages"
-msgstr "מתבצע חיפוש אחר חבילות"
+msgid   "Mount device: "
+msgstr  "חבר התקן"
 
-#: ../../xffm/fm/view/pkg/popup.hh:184 ../../xffm/fm/view/view.hh:93
+#: ../xffm/fm/view/fstab/view.hh:659 ../xffm/fm/view/fstab/view.hh:675
+msgid   "Disks"
+msgstr  "כוננים"
+
+#: ../xffm/fm/view/fstab/view.hh:921
+msgid   "No Label"
+msgstr  "ללא תוית"
+
+#: ../xffm/fm/view/fstab/view.hh:922
+msgid   "There is no file system available (unformatted)"
+msgstr  "אין מערכת קבצים זמינה (לא מפורמטת)"
+
+#: ../xffm/fm/view/fstab/view.hh:923
+msgid   "Not mounted"
+msgstr  "לא מעוגן"
+
+#: ../xffm/fm/view/fstab/view.hh:1058
+msgid   "SFTP (via SSH)"
+msgstr  ""
+
+#: ../xffm/fm/view/fstab/view.hh:1413
+#, c-format
+msgid   "Unmounting %s"
+msgstr  "ניתוק העיגון של %s"
+
+#: ../xffm/fm/view/fstab/view.hh:1413
 #, fuzzy, c-format
-msgid "Loading %s...%s"
-msgstr "‏%s בטעינה..."
+msgid   "Mounting %s"
+msgstr  "מעגן"
 
-#: ../../xffm/fm/view/pkg/popup.hh:184 ../../xffm/fm/view/view.hh:93
+#: ../xffm/fm/view/base/signals.hh:838
 #, fuzzy
-msgid "Please Wait..."
-msgstr "נא להמתין..."
+msgid   "Trash is empty"
+msgstr  "סוללת מחשב הלוח ריקה"
 
-#: ../../xffm/fm/view/treeview.hh:17
-msgid "Name"
-msgstr "שם"
+#: ../xffm/fm/view/base/signals.hh:840
+msgid   "Directory does not exist."
+msgstr  "הספרייה לא קיימת."
 
-#: ../../xffm/fm/view/treeview.hh:19
-msgid "Size"
-msgstr "גודל"
+#: ../xffm/fm/view/treeview.hh:17
+msgid   "Name"
+msgstr  "שם"
 
-#: ../../xffm/fm/view/treeview.hh:20
-msgid "Date"
-msgstr "תאריך"
+#: ../xffm/fm/view/treeview.hh:19
+msgid   "Size"
+msgstr  "גודל"
 
-#: ../../xffm/fm/view/treeview.hh:22
-msgid "Mimetype"
-msgstr "סוג קובץ"
+#: ../xffm/fm/view/treeview.hh:20
+msgid   "Date"
+msgstr  "תאריך"
 
-#: ../../xffm/fm/view/base/signals.hh:838
+#: ../xffm/fm/view/treeview.hh:22
+msgid   "Mimetype"
+msgstr  "סוג קובץ"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
+msgid   "Embedded Terminal"
+msgstr  "מסוף מוטמע"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
 #, fuzzy
-msgid "Trash is empty"
-msgstr "סוללת מחשב הלוח ריקה"
+msgid   "All items in the iconview."
+msgstr  "הצג את כל הפריטים על המפרשים."
 
-#: ../../xffm/fm/view/base/signals.hh:840
-msgid "Directory does not exist."
-msgstr "הספרייה לא קיימת."
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
+msgid   "Scripting"
+msgstr  "תסרוט"
 
-#: ../../xffm/common/settings.hh:30
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
+msgid   "Clear Log"
+msgstr  "נקה רישום"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
+msgid   "Terminal font"
+msgstr  "Terminal font"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid   "Renice Process"
+msgstr  "שנה עדיפות לתהליך"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid   "Suspend"
+msgstr  "השהה"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid   "Continue"
+msgstr  "המשך"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid   "Interrupt"
+msgstr  "פסק"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid   "Hangup"
+msgstr  "ניתוק"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid   "User 1 (USR1)"
+msgstr  "משתמש 1 (USR1)"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+msgid   "User 2 (USR2)"
+msgstr  "משתמש 2 (USR2)"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
 #, fuzzy
-msgid "New File:"
-msgstr "קובץ חדש"
+msgid   "Terminate Task"
+msgstr  "חסל %s"
 
-#: ../../xffm/common/gio.hh:81
-msgid "Copying files"
-msgstr "מתבצעת העתקת הקבצים"
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+msgid   "Abort"
+msgstr  "ביטול"
 
-#: ../../xffm/common/gio.hh:85
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:138
+msgid   "Kill"
+msgstr  "Kill"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
 #, fuzzy
-msgid "linking"
-msgstr "מקשר"
+msgid   "Segmentation fault"
+msgstr  "Segmentation violation"
 
-#: ../../xffm/common/gio.hh:87
-msgid "rename"
-msgstr "שנה שם"
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:216
+msgid   "PID"
+msgstr  "PID"
 
-#: ../../xffm/common/gio.hh:426
-#, c-format
-msgid "(%d of %d)"
-msgstr "‏(%d מתוך %d)"
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:375
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:377
+msgid   "Go to"
+msgstr  "לך אל"
 
-#: ../../xffm/common/dnd.hh:47
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:409
+msgid   "Not a directory"
+msgstr  "לא ספרייה"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:59
+msgid   "loading..."
+msgstr  "בטעינה..."
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:151
+#: ../xffm/fm/dialog/notebook/page/page.hh:167
 #, fuzzy
-msgid "Create Link"
-msgstr "ביטול יצירת קישורים"
+msgid   "Confirm Replace"
+msgstr  "אשר שינוי השם"
 
-#: ../../xffm/common/util.hh:1404
-#, c-format
-msgid ""
-"Scriptfile \"%s\" is not executable. Please set the executable-attribute on "
-"that file."
-msgstr ""
-
-#: ../../xffm/common/util.hh:1406 ../../xffm/common/util.hh:1441
-#, c-format
-msgid "Open with %s"
-msgstr "פתח באמצעות %s"
-
-#: ../../xffm/common/util.hh:1406
-msgid "Text Editor"
-msgstr "עורך טקסט"
-
-#: ../../xffm/common/util.hh:1443 ../../xffm/common/gtk.hh:69
-msgid "Execute Shell Command"
-msgstr "הרץ פקודת מעטפת"
-
-#: ../../xffm/common/util.hh:1447
-msgid ""
-"Console: quickly run single commands -- write a command here and press enter."
-msgstr ""
-
-#: ../../xffm/common/gtk.hh:352 ../../xffm/common/gtk.hh:360
-msgid "Help"
-msgstr "עזרה"
-
-#: ../../xffm/common/run.hh:338
-msgid "error"
-msgstr "שגיאה"
-
-#: ../../xffm/common/run.hh:342
+#: ../xffm/fm/dialog/notebook/page/page.hh:153
 #, fuzzy
-msgid "warning"
-msgstr "warning:"
+msgid   "Destination File"
+msgstr  "תיקיית יעד"
 
-#: ../../xffm/common/preview.hh:581
-msgid "Empty file"
-msgstr "קובץ ריק"
-
-#: ../../xffm/common/preview.hh:636
+#: ../xffm/fm/dialog/notebook/page/page.hh:166
 #, fuzzy, c-format
-msgid "Cannot read from %s"
-msgstr "לא ניתן לקרוא מ־\"%s\""
+msgid   "The output file %s already exists, do you want to overwrite it?"
+msgstr  "הקובץ %s כבר קיים, האם ברצונך לשכתב אותו?"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:11
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:214
+#, fuzzy
+msgid   "Remove Button Contents"
+msgstr  "הסר כפתור"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:67
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:209
+#, fuzzy
+msgid   "Add custom content"
+msgstr  "הוספת תוכן מותאם אישית ללחצן"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:68
+#, fuzzy
+msgid   "Select file to load"
+msgstr  "בחר קובץ להוספה…"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:125
+#, fuzzy, c-format
+msgid   "Cannot load file %s. Reason: %s"
+msgstr  "לא ניתן לטעון את התיקייה \"%s\": %s\n"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:154
+#, fuzzy
+msgid   "You need to restart the application"
+msgstr  "עליך לאתחל את היישום."
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:244
+msgid   "Open a New Window"
+msgstr  "פתיחת חלון חדש"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:250
+msgid   "Differences"
+msgstr  "הבדלים"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:178
+#, fuzzy
+msgid   "Open menu"
+msgstr  "פתיחת תפריט"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:230
+#, fuzzy
+msgid   "View as list"
+msgstr  "הצג כרשימה"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:231
+msgid   "Show hidden files"
+msgstr  "הצג קבצים מוסתרים"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:232
+#, fuzzy
+msgid   "Show Backup Files"
+msgstr  "קובץ גיבוי"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:233
+#, fuzzy
+msgid   "Sort data in descending order"
+msgstr  "ממויין לפי סדר פתיחה"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:235
+#, fuzzy
+msgid   "Sort by date"
+msgstr  "מיין לפי מצב"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:236
+#, fuzzy
+msgid   "Sort by size"
+msgstr  "מיין לפי מצב"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:270
+msgid   "Main menu"
+msgstr  "תפריט ראשי"
+
+#: ../xffm/fm/dialog/notebook/notebook.hh:56
+msgid   "Long press time"
+msgstr  "זמן לחיצה ארוכה"
+
+#: ../xffm/fm/dialog/dialog.hh:122
+msgid   "Removed"
+msgstr  "הוסר"
+
+#: ../xffm/fm/dialog/dialog.hh:143
+#, fuzzy
+msgid   "Detected device(s):"
+msgstr  "גילוי התקנים"
+
+#: ../xffm/response/commandresponse.hh:19
+msgid   "Running"
+msgstr  "פועל"
+
+#: ../xffm/response/commandresponse.hh:24
+#, fuzzy
+msgid   "Waiting for operation to finish..."
+msgstr  "       מחכה ש Tuxpaint יסיים..."
+
+#: ../xffm/response/passwdresponse.hh:179
+#, fuzzy
+msgid   "User Input"
+msgstr  "קלט עכבר"
+
+#: ../xffm/response/passwdresponse.hh:195
+#, fuzzy
+msgid   "Response Requested"
+msgstr  "תגובה יוצאת"
+
+#: ../xffm/response/passwdresponse.hh:242 ../xffm/response/entryresponse.hh:439
+msgid   "Ok"
+msgstr  "אישור"
+
+#: ../xffm/response/customresponse.hh:55
+#, fuzzy
+msgid   "Execute command"
+msgstr  "הפעל פקודה"
+
+#: ../xffm/response/customresponse.hh:103
+msgid   "Source File"
+msgstr  "קובץ המקור"
+
+#: ../xffm/response/timeoutresponse.hh:57
+msgid   "Dismiss"
+msgstr  "שחרר"
+
+#: ../xffm/response/commandprogressresponse.hh:31
+msgid   "Items:"
+msgstr  "פריטים:"
+
+#: ../xffm/response/chooserresponse.hh:23
+msgid   "Open"
+msgstr  "פתיחה"
+
+#: ../xffm/response/chooserresponse.hh:56
+msgid   "Choose directory"
+msgstr  "בחר ספרייה"
+
+#: ../xffm/response/chooserresponse.hh:60
+msgid   "Choose file"
+msgstr  "בחר קובץ"
+
+#: ../xffm/completion/bash.hh:133
+msgid   "Completion mode:"
+msgstr  "מצב השלמה:"
+
+#: ../xffm/completion/bash.hh:134
+msgid   "command"
+msgstr  "פקודה"
+
+#: ../xffm/completion/bash.hh:135
+msgid   "file"
+msgstr  "קובץ"
+
+#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
+msgid   "Options >>"
+msgstr  "אפשרויות >>"
+
+#: ../xffm/completion/base.hh:28
+msgid   "Command"
+msgstr  "פקודה"
+
+#: ../xffm/completion/base.hh:31
+msgid   "File"
+msgstr  "קובץ"
+
+#: ../xffm/completion/base.hh:34
+#, fuzzy
+msgid   "Command history"
+msgstr  "הרץ היסטורית פקודות"
+
+#: ../xffm/completion/base.hh:40
+msgid   "Variable"
+msgstr  "משתנה"
+
+#: ../xffm/completion/base.hh:43
+msgid   "Host"
+msgstr  "מארח"
+
+#: ../xffm/completion/base.hh:55
+#, fuzzy
+msgid   "Found no match"
+msgstr  "Words to match"
+
+#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
+msgid   "Matches"
+msgstr  "תואם"
+
+#: ../xffm/completion/base.hh:142
+msgid   "Too many files open"
+msgstr  "יותר מדי קבצים פתוחים"
 

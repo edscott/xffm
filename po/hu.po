@@ -1,1497 +1,1341 @@
-# Translations for Rodent package.
-# Copyright (C) 2004-2012 FSF.
-# This file is distributed under the same license as the Rodent package.
-#   --- vie may  3 10:43:33 CDT 2013 ---
+# Xffm+ translation file: vie ago  9 14:43:00 CDT 2019
+# Merged fron existing open source files
+# http://xffm.org
 #
-# Copyright (C) 2009--2011 Ulrik Sverdrup <ulrik.sverdrup@gmail.com>.
-# Török Gábor <gabo@linuxportal.hu>, 2004.
-# Tóth Csanád <toth.csanad@kde.hu>, 2009-2010.
-# Laszlo Papp <djszapi@archlinux.us>, 2010.
-# Tamas Krutki <negusnyul@gmail.com>, 2011.
-# Emese Kovács <emese@instantweb.hu>, 2000-2002.
-# Kósa Lajos <kosal@novonet.hu>, 2003.
-# Gabor Suveg <gabor@suveg.hu>, 2001.
-# Csimbi <csimbi@gmail.com>, 2008.
-# Balazs Nemeth <bnemeth@kfki-isys.hu>, 2000.
-# Csanád Tóth <toth.csanad@kde.hu>, 2009-2010.
-# Kornél Pércsy <kornel.percsy@gmail.com>, 2013.
-# Horn Gábor <Horn.Gabor@aktiv.co.hu>, 2002.
-# Author@Betawiki: Dani <>.
-# Nyitrai István <sianis@gmail.com>, 2008.
-# Balázs Úr <urbalazs@gmail.com>, 2012-2013.
-# Lektor: Andras Timar <timar@gnome.hu>, 2000.
-# Andras Kovacs <andras@csevego.net>, 2007.
-# Balázs Scheidler <bazsi@balabit.hu>.
-# Zoltan Kukk <kukkzoli@freemail.hu>, 2004.
-# Korondi Márk <korondi.mark@freemail.hu>, 2004.
-# Andras TIMAR <timar@gnome.hu>, 2000.
-# Sári Gábor saga@mail.externet.hu, 1999. <>.
-# Karai Csaba <cskarai@freemail.hu>, 2006-2008.
-# Károly Barcza <kbarcza@blackpanther.hu>, 2004.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2002-2012.
-# Arpad Biro <biro_arpad@yahoo.com>, 2003-2007.
-# Gergely Nagy <greg@gnome.hu>, 2000-2001.
-# Sári Gábor <saga@uhulinux.hu>, 1999-2003.
-# Vámosi Tamás <Vamosi.Tamas@suselinux.hu>, 2003.
-# John Zero <johnzero@telnet.hu>, 1997-1998.
-# Tamas SZERB <toma@rulez.org>, 2003-2004.
-# Kum Gábor <kumgabor@kumgabor.hu>, 2010.
-# Gabor Sari <saga@gnome.hu>, 2003.
-# Szabolcs Varga <shirokuma@shirokuma.hu>, 2005.
-# Reuss András <tinstall@freemail.c3.hu>, 1999.
-# Mate Ory <orymate@gmail.com>, 2006-2008.
-# Péter Mátó <atya@andrews.hu>, 2003.
-# Gabor Kelemen <kelemeng@gnome.hu>, 2004-2012.
-# SZERVÁC Attila <sas@321>, 2003-2006.
-# Tamas Szanto <taszanto@gmail.com>, 1999-2009.
-# Csaba Zakarias <csaba.zakarias@gmail.com>, 2009-2010.
-# Andras Timar <timar@fsf.hu>, 2000-2004.
-# Szabolcs BAN <shooby@gnome.hu>, 1999-2000.
-# Peter Doma <zelin@pointernet.hu>, 2002.
-# MARTON, JOZSEF <jmarton@linux.gyakg.u-szeged.hu>, 2000.
-# György Balló <ballogy@freestart.hu>, 2010.
-# Tamnas Szanto <tszanto@interware.hu>, 2009.
-# Kiss Tamas <kisst@postabank.hu>, 1998.
-# Németh Tamás <ntomasz@vipmail.hu>, 2009.
-# Vanyi Robert <robi@mora.u-szeged.hu>, 2000.
-# Kiszel Kristóf <ulysses@kubuntu.org>, 2010-2012.
-# Szilveszter Farkas (Phanatic) <Szilveszter.Farkas@gmail.com>, 2006.
-# Egmont Koblinger <egmont@uhulinux.hu>, 2003.
-# Barcza Károly <kbarcza@blackpanther.hu>, 2004-2009.
-# Sven Herzberg <herzi@abi02.de>, 2003-2009.
-# Gabor Burján <buga@buvoshetes.hu>, 2006.
-# Gábor István <stive@mezobereny.hu>, 2002.
-# Robert Vanyi <robi@mora.u-szeged.hu>, 2000-2001.
-# Szüts Attila <szuts25@dpg.hu>, 1999.
-# Marcell Lengyel <miketkf@yahoo.com>, 1998-2000.
-# Kalman Kemenczy <kkemenczy@novell.com>, 2009.
-# Peter Breuer <comp@suselinux.hu>, 2003.
-# Balazs Nagy <julian7@kva.hu>, 1998.
-# Merényi Miklós <mermik@medgyaszay-veszprem.sulinet.hu>, 1999.
-# Balint Laza <laza@szentkoronaradio.com>, 2008.
-# Emese Kovacs <emese@gnome.hu>, 2000-2003.
-# Székely Krisztián <szekelyk@edasz.hu>, 1998.
-# Zoltán Levárdy <pogacsa@programmer.net>, 1999.
-# Szabolcs Ban <shooby@gnome.hu>, 1999-2002.
-# Gábor Sári <sari.gabor@gmail.com>, 2003.
-# Gab <h9gab@freemail.hu>, 2000.
-# Gabor Halaszvari <g.halaszvari@portmax.hu>, 2006.
-# Sebi <jaques@freemail.hu>, 2000.
-# Gábor Kelemen <kelemeng@gnome.hu>, 2004-2006.
-# Gergely Szarka <gszarka@invitel.hu>, 2009.
-# Pozsár Balázs <pozsy@uhulinux.hu>, 2004.
-# Somogyi Peter <jerry@gnu>, 2003.
-# Adam Pongracz <pongadam@gmail.com>, 2008.
-# András Tímár <timar@gnome.hu>, 2001.
-# Zoltan Kota <kota@gnome.hu>, 2004-2010.
-# Marcel Hilzinger <hili@suselinux.hu>, 2002-2003.
-# Miklos Szel <mukka@freemail.hu>, 2000.
-# György Szabó <zsiraf@mylinux.hu>, 2003.
-# Gergely Nyagy <greg@gnome.hu>.
-# Reviczky Ádám János <reviczky@freemail.hu>, 2004.
-# Lajos Kósa <kosal@novonet.hu>, 2003.
-# László Dvornik <dvornik@gnome.hu>, 2006.
-# Zakariás, Csaba <csaba.zakarias@gmail.com>, 2008.
-# Peter Abraham <abraham@mail.lauder.hu>, 2000.
-# Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
-# Charles Barcza <kbarcza@blackpanther.hu>, 2006.
-# Kristóf Kiszel <ulysses@kubuntu.org>, 2010-2013.
-# Thomas Niederreiter <tn@xcdroast.org>, 2002-2003.
-# Laszlo Dvornik <dvornik@gnome.hu>, 2004-2006.
-# Csaba Major <major@terrasoft.hu>, 1998.
-# Attila Hammer <hammera@pickup.hu>, 2012.
-# Biro Szabolcs <szbiro@index.hu>, 1999.
-# Szilveszter Farkas <szilveszter.farkas@gmail.com>, 2007.
-# fuzzy
-msgid ""
-msgstr ""
-"Project-Id-Version: Rodent Delta\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-04 16:54-0500\n"
-"PO-Revision-Date: 2012-01-22 02:58+0100\n"
-"Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
-"Language-Team: Hungarian <translation-team-hu@lists.sourceforge.net>\n"
-"Language: hu\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 1.0\n"
-
-#: ../../xffm/mime/mimemagic.hh:68 ../../xffm/mime/mimemagic.hh:110
-#: ../../xffm/common/mimemagic.hh:68 ../../xffm/common/mimemagic.hh:110
-msgid "No Read Permission"
-msgstr "Nincs olvasási jogosultság"
-
-#: ../../xffm/completion/base.hh:28
-msgid "Command"
-msgstr "Parancs"
-
-#: ../../xffm/completion/base.hh:31
-msgid "File"
-msgstr "Fájl"
-
-#: ../../xffm/completion/base.hh:34
-msgid "Command history"
-msgstr "Parancselőzmények"
-
-#. option -u uid "uid" "uid_combo"
-#: ../../xffm/completion/base.hh:37 ../../xffm/find/dialog.hh:192
-msgid "User"
-msgstr "Felhasználó"
-
-#: ../../xffm/completion/base.hh:40
-msgid "Variable"
-msgstr "Változó"
-
-#: ../../xffm/completion/base.hh:43
-msgid "Host"
-msgstr "Gazda"
-
-#: ../../xffm/completion/base.hh:55
-msgid "Found no match"
-msgstr "Nincs találat"
-
-#: ../../xffm/completion/base.hh:141 ../../xffm/completion/base.hh:142
-msgid "Matches"
-msgstr "Találatok"
-
-#: ../../xffm/completion/base.hh:142
-msgid "Too many files open"
-msgstr "Túl sok nyitott fájl"
-
-#: ../../xffm/completion/base.hh:339 ../../xffm/find/fgr.hh:124
-msgid "Options:"
-msgstr "Beállítások:"
-
-#: ../../xffm/completion/bash.hh:133
-msgid "Completion mode:"
-msgstr "Címkiegészítési mód:"
-
-#: ../../xffm/completion/bash.hh:134
-msgid "command"
-msgstr "parancs"
-
-#: ../../xffm/completion/bash.hh:135
-msgid "file"
-msgstr "fájl"
-
-#: ../../xffm/completion/bash.hh:145 ../../xffm/completion/bash.hh:149
-msgid "Options >>"
-msgstr "Beállítások >>"
-
-#: ../../xffm/find/fgr.hh:124 ../../xffm/find/signals.hh:100
-#: ../../xffm/find/dialog.hh:301
-msgid "Path"
-msgstr "Útvonal"
-
-#: ../../xffm/find/fgr.hh:125
-msgid "Locate documents and folders on this computer by name or content"
-msgstr ""
-"Dokumentumok és mappák keresése a számítógépen név vagy tartalom szerint"
-
-#: ../../xffm/find/fgr.hh:126 ../../xffm/find/dialog.hh:334
-msgid "Filter:"
-msgstr "Szűrő:"
-
-#: ../../xffm/find/fgr.hh:126
-msgid "Search for files"
-msgstr "Fájlok keresése"
-
-#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
-#: ../../xffm/find/fgr.hh:128
-msgid "Contents:"
-msgstr "Tartalom:"
-
-#: ../../xffm/find/fgr.hh:128
-msgid "File's contents filtered as plain text."
-msgstr "Fájl tartalma egyszerű szövegként szűrve."
-
-#: ../../xffm/find/fgr.hh:131
-msgid "Verbose output debugging mode."
-msgstr "Részletes kimenetű nyomkövetési mód."
-
-#: ../../xffm/find/fgr.hh:133
-msgid "Show version information"
-msgstr "Verzióinformációk megjelenítése"
-
-#: ../../xffm/find/fgr.hh:135
-msgid "Filter Details"
-msgstr "A szűrő jellemzői"
-
-#. / option -a "xdev"
-#: ../../xffm/find/fgr.hh:138 ../../xffm/find/dialog.hh:173
-msgid "Stay on single filesystem"
-msgstr "Maradjon egyszerű fájlrendszeren"
-
-#: ../../xffm/find/fgr.hh:140
-msgid "Print..."
-msgstr "Nyomtatás..."
-
-#: ../../xffm/find/fgr.hh:140
-msgid "The unique Process ID that identifies this process."
-msgstr "Az egyedi folyamatazonosító, amely meghatározza ezt a folyamatot"
-
-#. / option -D "recursiveH"
-#: ../../xffm/find/fgr.hh:142 ../../xffm/find/dialog.hh:170
-msgid "Find hidden files and directories"
-msgstr "A keresések a rejtett fájlokra és könyvtárakra is terjedjenek ki"
-
-#: ../../xffm/find/fgr.hh:143
-msgid "Filter"
-msgstr "Szűrő"
-
-#: ../../xffm/find/fgr.hh:144
-msgid ""
-"To display files which pass the filter (stars and regexps will be processed)"
-msgstr "Szűrőnek megfelelő fájlok kijelzése (csillagok és regexpek jöhetnek)"
-
-#. / option -r "recursive"
-#: ../../xffm/find/fgr.hh:146 ../../xffm/find/dialog.hh:167
-msgid "Recursive"
-msgstr "Rekurzív"
-
-#: ../../xffm/find/fgr.hh:147 ../../xffm/find/fgr.hh:148
-#: ../../xffm/find/fgr.hh:149 ../../xffm/find/fgr.hh:150
-msgid "KByte"
-msgstr "KiB"
-
-#: ../../xffm/find/fgr.hh:148
-msgid "is greater than or equal to"
-msgstr "nagyobb vagy egyenlő"
-
-#: ../../xffm/find/fgr.hh:150
-msgid "is less than or equal to"
-msgstr "kisebb vagy egyenlő"
-
-#: ../../xffm/find/fgr.hh:152
-msgid "Set UID"
-msgstr "Set UID"
-
-#: ../../xffm/find/fgr.hh:152
-msgid "Executable Text Files"
-msgstr "Végrehajtható szöveges fájlok"
-
-#: ../../xffm/find/fgr.hh:154
-msgid "The permissions of the file, in octal notation."
-msgstr "A fájl jogosultságai nyolcas számrendszerben."
-
-#: ../../xffm/find/fgr.hh:155
-msgid "Type"
-msgstr "Típ."
-
-#: ../../xffm/find/fgr.hh:157 ../../xffm/find/signals.hh:14
-msgid "Any"
-msgstr "Bármi"
-
-#: ../../xffm/find/fgr.hh:157
-msgid "Default type"
-msgstr "Alapértelmezett típus"
-
-#: ../../xffm/find/fgr.hh:158 ../../xffm/common/preview.hh:478
-msgid "Regular file"
-msgstr "Szabályos fájl"
-
-#: ../../xffm/find/fgr.hh:159 ../../xffm/find/signals.hh:8
-#: ../../xffm/fm/view/local/popup.hh:1062 ../../xffm/common/preview.hh:469
-msgid "Directory"
-msgstr "Könyvtár"
-
-#: ../../xffm/find/fgr.hh:160 ../../xffm/find/signals.hh:9
-#: ../../xffm/common/preview.hh:475
-msgid "Symbolic Link"
-msgstr "Szimbolikus link"
-
-#: ../../xffm/find/fgr.hh:161
-msgid "UNIX Socket"
-msgstr "UNIX foglalat"
-
-#: ../../xffm/find/fgr.hh:162 ../../xffm/find/signals.hh:11
-#: ../../xffm/common/preview.hh:463
-msgid "Block device"
-msgstr "Blokkos eszköz"
-
-#: ../../xffm/find/fgr.hh:163 ../../xffm/find/signals.hh:12
-#: ../../xffm/common/preview.hh:466
-msgid "Character device"
-msgstr "Karakteres eszköz"
-
-#: ../../xffm/find/fgr.hh:164 ../../xffm/find/signals.hh:13
-#: ../../xffm/common/preview.hh:472
-msgid "FIFO"
-msgstr "FIFO"
-
-#. radio_p freed on destroy event for findDialog.
-#. option -k minutes "last_minutes", "last_minutes_spin"
-#: ../../xffm/find/fgr.hh:166 ../../xffm/find/fgr.hh:168
-#: ../../xffm/find/dialog.hh:214
-msgid "Minutes"
-msgstr "Perc"
-
-#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
-#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
-#: ../../xffm/find/dialog.hh:263 ../../xffm/find/dialog.hh:363
-#: ../../xffm/fm/view/treeview.hh:18
-msgid "Details"
-msgstr "Részletek"
-
-#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
-#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
-#: ../../xffm/find/fgr.hh:179 ../../xffm/find/fgr.hh:180
-#: ../../xffm/find/fgr.hh:183 ../../xffm/find/fgr.hh:184
-#: ../../xffm/find/fgr.hh:187 ../../xffm/find/fgr.hh:188
-msgid "TIME"
-msgstr "IDŐ"
-
-#: ../../xffm/find/fgr.hh:168 ../../xffm/find/fgr.hh:171
-#: ../../xffm/find/fgr.hh:174 ../../xffm/find/fgr.hh:177
-msgid "Previous"
-msgstr "Előző"
-
-#. option -h hours "last_hours", "last_hours_spin"
-#: ../../xffm/find/fgr.hh:169 ../../xffm/find/fgr.hh:171
-#: ../../xffm/find/dialog.hh:219
-msgid "Hours"
-msgstr "Óra"
-
-#. option -d days "last_days", "last_days_spin"
-#: ../../xffm/find/fgr.hh:172 ../../xffm/find/fgr.hh:174
-#: ../../xffm/find/dialog.hh:224
-msgid "Days"
-msgstr "nappal"
-
-#: ../../xffm/find/fgr.hh:175
-msgid "Month"
-msgstr "Hónap"
-
-#: ../../xffm/find/fgr.hh:177
-msgid "Month(s)"
-msgstr "Hónap"
-
-#: ../../xffm/find/fgr.hh:180
-msgid "Modification Time :"
-msgstr "Módosítás ideje:"
-
-#: ../../xffm/find/fgr.hh:184
-msgid "Access Time :"
-msgstr "Utolsó hozzáférés ideje:"
-
-#: ../../xffm/find/fgr.hh:188
-msgid "Creation Time :"
-msgstr "Létrehozás ideje:"
-
-#: ../../xffm/find/fgr.hh:191 ../../xffm/find/fgr.hh:192
-msgid "uid"
-msgstr "UID"
-
-#: ../../xffm/find/fgr.hh:192
-msgid "User:"
-msgstr "Felhasználó:"
-
-#: ../../xffm/find/fgr.hh:194 ../../xffm/find/fgr.hh:195
-msgid "gid"
-msgstr "GID"
-
-#: ../../xffm/find/fgr.hh:195
-msgid "Group:"
-msgstr "Csoport:"
-
-#: ../../xffm/find/fgr.hh:198
-msgid ""
-"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
-"character that  normally  follows  a file  name"
-msgstr ""
-
-#: ../../xffm/find/fgr.hh:200
-msgid "Content View"
-msgstr "Tartalomnézet"
-
-#: ../../xffm/find/fgr.hh:201 ../../xffm/find/fgr.hh:202
-#: ../../xffm/find/fgr.hh:203 ../../xffm/find/fgr.hh:204
-msgid "STRING"
-msgstr "KARAKTERLÁNC"
-
-#: ../../xffm/find/fgr.hh:202 ../../xffm/find/fgr.hh:204
-#: ../../xffm/fm/view/local/popup.hh:759
-msgid "Regular expression"
-msgstr "Reguláris kifejezés"
-
-#: ../../xffm/find/fgr.hh:204
-msgid "Extended"
-msgstr "Kiterjesztett"
-
-#: ../../xffm/find/fgr.hh:206
-msgid "Ignore case"
-msgstr "Kis- és nagybetű nem számít"
-
-#: ../../xffm/find/fgr.hh:208
-msgid "Text Files"
-msgstr "Szövegfájlok"
-
-#: ../../xffm/find/fgr.hh:210 ../../xffm/find/dialog.hh:545
-msgid "No match"
-msgstr "Nincs találat"
-
-#: ../../xffm/find/fgr.hh:212 ../../xffm/find/dialog.hh:463
-msgid "Line Count"
-msgstr "Sorok száma"
-
-#: ../../xffm/find/fgr.hh:214
-msgid "Words"
-msgstr "Szó"
-
-#: ../../xffm/find/fgr.hh:216
-msgid "Lines"
-msgstr "Sor"
-
-#: ../../xffm/find/fgr.hh:368
-#, c-format
-msgid "Usage : %s [OPTIONS]\n"
-msgstr "Használat: %s [OPCIÓK]\n"
-
-#: ../../xffm/find/signals.hh:7
-msgid "Regular"
-msgstr "Megszokott"
-
-#: ../../xffm/find/signals.hh:10 ../../xffm/common/preview.hh:481
-msgid "Socket"
-msgstr "Illesztőpont"
-
-#. if (g_slist_length(list) == 0) return NULL;
-#. Create liststore for DnD
-#. / option "upper_limit_spin" (only in gtk findDialog)
-#: ../../xffm/find/signals.hh:66 ../../xffm/find/signals.hh:454
-#: ../../xffm/find/dialog.hh:176
-msgid "Results"
-msgstr "Találatok"
-
-#. button no
-#: ../../xffm/find/signals.hh:368 ../../xffm/find/dialog.hh:577
-#: ../../xffm/response/chooserresponse.hh:21
-#: ../../xffm/response/entryresponse.hh:420
-#: ../../xffm/fm/view/local/properties.hh:314
-#: ../../xffm/fm/view/local/rm.hh:157 ../../xffm/common/gtk.hh:409
-msgid "Cancel"
-msgstr "Mégse"
-
-#: ../../xffm/find/signals.hh:396 ../../xffm/find/signals.hh:830
-msgid "No editor for current action."
-msgstr "Nincs szerkesztő az aktuális művelethez."
-
-#: ../../xffm/find/signals.hh:454
-msgid "Upper limit:"
-msgstr "Felső korlát:"
-
-#: ../../xffm/find/signals.hh:456
-msgid "Counting files..."
-msgstr "A fájlok számolása folyik..."
-
-#: ../../xffm/find/signals.hh:471
-#, c-format
-msgid "Found %d match"
-msgid_plural "Found %d matches"
-msgstr[0] "%d egyezés található"
-msgstr[1] "%d egyezés található"
-
-#: ../../xffm/find/signals.hh:473
-#, c-format
-msgid "%s Finished : %s"
-msgstr "%s Befejezve : %s"
-
-#: ../../xffm/find/signals.hh:596 ../../xffm/find/signals.hh:598
-msgid "Searching..."
-msgstr "Keresés…"
-
-#. g_object_set_data(G_OBJECT(findDialog), "window", findDialog);
-#: ../../xffm/find/dialog.hh:91 ../../xffm/find/dialog.hh:143
-#: ../../xffm/find/dialog.hh:604
-msgid "Find"
-msgstr "Keresés"
-
-#: ../../xffm/find/dialog.hh:176
-msgid "Upper limit"
-msgstr "Felső korlát"
-
-#. option -s +KByte "size_greater", "size_greater_spin"
-#: ../../xffm/find/dialog.hh:181
-msgid "At Least"
-msgstr "legalább"
-
-#: ../../xffm/find/dialog.hh:181 ../../xffm/find/dialog.hh:186
-msgid "kBytes"
-msgstr "KB"
-
-#. option -s -KByte "size_smaller", "size_smaller_spin"
-#: ../../xffm/find/dialog.hh:186
-msgid "At Most"
-msgstr "legfeljebb"
-
-#: ../../xffm/find/dialog.hh:197
-msgid "Group"
-msgstr "Csoport"
-
-#. option -o octal "octal_p" "permissions_entry"
-#: ../../xffm/find/dialog.hh:201
-msgid "Octal Permissions"
-msgstr "Jogosultságok (nyolcas számrendszerben)"
-
-#. option -p suid | exe
-#: ../../xffm/find/dialog.hh:206
-msgid "SUID"
-msgstr "SUID"
-
-#: ../../xffm/find/dialog.hh:206 ../../xffm/fm/view/local/popup.hh:1102
-msgid "Executable"
-msgstr "Végrehajtható"
-
-#. option -m months "last_months", "last_months_spin"
-#: ../../xffm/find/dialog.hh:230
-msgid "Months"
-msgstr "Hónap"
-
-#: ../../xffm/find/dialog.hh:241
-msgid "File type : "
-msgstr "Fájltípus: "
-
-#. gtk_widget_show (GTK_WIDGET(right_options_vbox));
-#. gtk_widget_show (GTK_WIDGET(center_options_vbox));
-#. gtk_widget_show (GTK_WIDGET(left_options_vbox));
-#: ../../xffm/find/dialog.hh:255 ../../xffm/find/dialog.hh:595
-#: ../../xffm/fm/dialog/notebook/page/page.hh:70 ../../xffm/common/gtk.hh:79
-msgid "Close"
-msgstr "Bezárás"
-
-#. gtk_box_pack_start (vbox7a, GTK_WIDGET(advancedBox), TRUE, FALSE, 5);
-#. gtk_widget_show(GTK_WIDGET(advancedBox));
-#. //////////////  grep options.... /////////////////////////
-#: ../../xffm/find/dialog.hh:377
-msgid "Contains"
-msgstr "Tartalmazza"
-
-#: ../../xffm/find/dialog.hh:397
-msgid "Contains the text"
-msgstr "Tartalmazza ezt a szöveget"
-
-#: ../../xffm/find/dialog.hh:430
-msgid "Case Sensitive"
-msgstr "Kis- és nagybetű"
-
-#: ../../xffm/find/dialog.hh:442
-msgid "Extended regexp"
-msgstr "Kiterjesztett regexp"
-
-#: ../../xffm/find/dialog.hh:453
-msgid "Include binary files"
-msgstr "Bináris fájlokban is"
-
-#: ../../xffm/find/dialog.hh:489
-msgid "Match"
-msgstr "Találat"
-
-#: ../../xffm/find/dialog.hh:501
-msgid "Anywhere"
-msgstr "Bárhol"
-
-#: ../../xffm/find/dialog.hh:516
-msgid "Whole words only"
-msgstr "Csak egész szavakat"
-
-#: ../../xffm/find/dialog.hh:531
-msgid "lines"
-msgstr "soronként"
-
-#: ../../xffm/find/dialog.hh:587
-msgid "Clear"
-msgstr "Törlés"
-
-#: ../../xffm/find/dialog.hh:629
-msgid "Edit"
-msgstr "Szerkesztés"
-
-#: ../../xffm/find/dialog.hh:743 ../../xffm/find/dialog.hh:758
-#: ../../xffm/common/util.hh:1354 ../../xffm/common/util.hh:1356
-#: ../../xffm/common/util.hh:1362 ../../xffm/common/util.hh:1364
-#: ../../xffm/common/preview.hh:460
-msgid "unknown"
-msgstr "ismeretlen"
-
-#: ../../xffm/find/dialog.hh:772
-msgid "Modified"
-msgstr "Módosítva"
-
-#: ../../xffm/find/dialog.hh:776
-msgid "Created"
-msgstr "Létrehozva"
-
-#: ../../xffm/find/dialog.hh:780
-msgid "Accessed"
-msgstr "Hozzáférve"
-
-#: ../../xffm/find/dialog.hh:1098
-msgid ""
-"Basic rules:\n"
-"\n"
-"*  Will match any character zero or more times.\n"
-"?  Will match any character exactly one time\n"
-"[] Match any character within the [] \n"
-"^  Match at beginning of string\n"
-"$  Match at end of string \n"
-msgstr ""
-"Alapvető szabályok:\n"
-"\n"
-"A * bármennyi karaktert helyettesíthet.\n"
-"A ? pontosan egy karaktert helyettesít.\n"
-
-#: ../../xffm/find/dialog.hh:1107
+#
+msgid   ""
+msgstr  "Project-Id-Version: xffm+\n"
+        "Report-Msgid-Bugs-To: \n"
+        "POT-Creation-Date: 2019-08-09 12:32-0500\n"
+        "PO-Revision-Date: 2012-01-22 02:58+0100\n"
+        "Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
+        "Language-Team: Hungarian <translation-team-hu@lists.sourceforge."
+        "net>\n"
+        "Language: hu\n"
+        "MIME-Version: 1.0\n"
+        "Content-Type: text/plain; charset=UTF-8\n"
+        "Content-Transfer-Encoding: 8bit\n"
+        "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+        "X-Generator: Lokalize 1.0\n"
+
+#: ../xffm/mime/mimemagic.hh:68 ../xffm/mime/mimemagic.hh:112
+msgid   "No Read Permission"
+msgstr  "Nincs olvasási jogosultság"
+
+#: ../xffm/find/dialog.hh:91 ../xffm/find/dialog.hh:143
+#: ../xffm/find/dialog.hh:604
+msgid   "Find"
+msgstr  "Keresés"
+
+#: ../xffm/find/dialog.hh:167 ../xffm/find/fgr.hh:146
+msgid   "Recursive"
+msgstr  "Rekurzív"
+
+#: ../xffm/find/dialog.hh:170 ../xffm/find/fgr.hh:142
+msgid   "Find hidden files and directories"
+msgstr  "A keresések a rejtett fájlokra és könyvtárakra is terjedjenek ki"
+
+#: ../xffm/find/dialog.hh:173 ../xffm/find/fgr.hh:138
+msgid   "Stay on single filesystem"
+msgstr  "Maradjon egyszerű fájlrendszeren"
+
+#: ../xffm/find/dialog.hh:176 ../xffm/find/signals.hh:66
+#: ../xffm/find/signals.hh:454
+msgid   "Results"
+msgstr  "Találatok"
+
+#: ../xffm/find/dialog.hh:176
+msgid   "Upper limit"
+msgstr  "Felső korlát"
+
+#: ../xffm/find/dialog.hh:181
+msgid   "At Least"
+msgstr  "legalább"
+
+#: ../xffm/find/dialog.hh:181 ../xffm/find/dialog.hh:186
+msgid   "kBytes"
+msgstr  "KB"
+
+#: ../xffm/find/dialog.hh:186
+msgid   "At Most"
+msgstr  "legfeljebb"
+
+#: ../xffm/find/dialog.hh:192 ../xffm/completion/base.hh:37
+msgid   "User"
+msgstr  "Felhasználó"
+
+#: ../xffm/find/dialog.hh:197
+msgid   "Group"
+msgstr  "Csoport"
+
+#: ../xffm/find/dialog.hh:201
+msgid   "Octal Permissions"
+msgstr  "Jogosultságok (nyolcas számrendszerben)"
+
+#: ../xffm/find/dialog.hh:206
+msgid   "SUID"
+msgstr  "SUID"
+
+#: ../xffm/find/dialog.hh:206 ../xffm/fm/view/local/popup.hh:1102
+msgid   "Executable"
+msgstr  "Végrehajtható"
+
+#: ../xffm/find/dialog.hh:214 ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168
+msgid   "Minutes"
+msgstr  "Perc"
+
+#: ../xffm/find/dialog.hh:219 ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171
+msgid   "Hours"
+msgstr  "Óra"
+
+#: ../xffm/find/dialog.hh:224 ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174
+msgid   "Days"
+msgstr  "nappal"
+
+#: ../xffm/find/dialog.hh:230
+msgid   "Months"
+msgstr  "Hónap"
+
+#: ../xffm/find/dialog.hh:241
+msgid   "File type : "
+msgstr  "Fájltípus: "
+
+#: ../xffm/find/dialog.hh:255 ../xffm/find/dialog.hh:595
+#: ../xffm/common/gtk.hh:79 ../xffm/fm/dialog/notebook/page/page.hh:71
+msgid   "Close"
+msgstr  "Bezárás"
+
+#: ../xffm/find/dialog.hh:263 ../xffm/find/dialog.hh:363
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/fm/view/treeview.hh:18
+msgid   "Details"
+msgstr  "Részletek"
+
+#: ../xffm/find/dialog.hh:301 ../xffm/find/fgr.hh:124
+#: ../xffm/find/signals.hh:100
+msgid   "Path"
+msgstr  "Útvonal"
+
+#: ../xffm/find/dialog.hh:334 ../xffm/find/fgr.hh:126
+msgid   "Filter:"
+msgstr  "Szűrő:"
+
+#: ../xffm/find/dialog.hh:377
+msgid   "Contains"
+msgstr  "Tartalmazza"
+
+#: ../xffm/find/dialog.hh:397
+msgid   "Contains the text"
+msgstr  "Tartalmazza ezt a szöveget"
+
+#: ../xffm/find/dialog.hh:430
+msgid   "Case Sensitive"
+msgstr  "Kis- és nagybetű"
+
+#: ../xffm/find/dialog.hh:442
+msgid   "Extended regexp"
+msgstr  "Kiterjesztett regexp"
+
+#: ../xffm/find/dialog.hh:453
+msgid   "Include binary files"
+msgstr  "Bináris fájlokban is"
+
+#: ../xffm/find/dialog.hh:463 ../xffm/find/fgr.hh:212
+msgid   "Line Count"
+msgstr  "Sorok száma"
+
+#: ../xffm/find/dialog.hh:489
+msgid   "Match"
+msgstr  "Találat"
+
+#: ../xffm/find/dialog.hh:501
+msgid   "Anywhere"
+msgstr  "Bárhol"
+
+#: ../xffm/find/dialog.hh:516
+msgid   "Whole words only"
+msgstr  "Csak egész szavakat"
+
+#: ../xffm/find/dialog.hh:531
+msgid   "lines"
+msgstr  "soronként"
+
+#: ../xffm/find/dialog.hh:545 ../xffm/find/fgr.hh:210
+msgid   "No match"
+msgstr  "Nincs találat"
+
+#: ../xffm/find/dialog.hh:577 ../xffm/find/signals.hh:368
+#: ../xffm/common/gtk.hh:409 ../xffm/fm/view/local/rm.hh:157
+#: ../xffm/fm/view/local/properties.hh:314
+#: ../xffm/response/entryresponse.hh:435 ../xffm/response/chooserresponse.hh:21
+msgid   "Cancel"
+msgstr  "Mégse"
+
+#: ../xffm/find/dialog.hh:587
+msgid   "Clear"
+msgstr  "Törlés"
+
+#: ../xffm/find/dialog.hh:629
+msgid   "Edit"
+msgstr  "Szerkesztés"
+
+#: ../xffm/find/dialog.hh:743 ../xffm/find/dialog.hh:758
+#: ../xffm/common/preview.hh:460 ../xffm/common/util.hh:1354
+#: ../xffm/common/util.hh:1356 ../xffm/common/util.hh:1362
+#: ../xffm/common/util.hh:1364
+msgid   "unknown"
+msgstr  "ismeretlen"
+
+#: ../xffm/find/dialog.hh:772
+msgid   "Modified"
+msgstr  "Módosítva"
+
+#: ../xffm/find/dialog.hh:776
+msgid   "Created"
+msgstr  "Létrehozva"
+
+#: ../xffm/find/dialog.hh:780
+msgid   "Accessed"
+msgstr  "Hozzáférve"
+
+#: ../xffm/find/dialog.hh:1098
+msgid   "Basic rules:\n"
+        "\n"
+        "*  Will match any character zero or more times.\n"
+        "?  Will match any character exactly one time\n"
+        "[] Match any character within the [] \n"
+        "^  Match at beginning of string\n"
+        "$  Match at end of string \n"
+msgstr  "Alapvető szabályok:\n"
+        "\n"
+        "A * bármennyi karaktert helyettesíthet.\n"
+        "A ? pontosan egy karaktert helyettesít.\n"
+
+#: ../xffm/find/dialog.hh:1107
 #, fuzzy
-msgid ""
-"Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ ( ) : \n"
-"In  basic regular expressions the metacharacters ?, +, {, |, (, and ) \n"
-"  lose their special meaning.\n"
-"\n"
-"The  period . matches  any  single  character.\n"
-"The caret ^ matches at the start of line.\n"
-"The dollar $ matches at the end of line.\n"
-"\n"
-"Characters within [ ] matches any single character in the list.\n"
-"Characters within [^ ] matches any single character *not* in the list.\n"
-"Characters inside [ - ] matches a range of characters (ie [0-9] or [a-z]).\n"
-"\n"
-"A regular expression may be followed by one of several repetition "
-"operators:\n"
-"?      The preceding item is optional and matched\n"
-"       at most once.\n"
-"*      The preceding item will be matched zero\n"
-"       or more times.\n"
-"+      The preceding item will be matched one or\n"
-"       more times.\n"
-"{n}    The preceding item is matched exactly n times.\n"
-"{n,}   The preceding item is matched n or more times.\n"
-"{n,m}  The preceding item is matched at least n times,\n"
-"       but not more than m times.\n"
-"\n"
-"To match any reserved character, precede it with \\. \n"
-"\n"
-"Two regular expressions may be joined by the logical or operator |.\n"
-"Two regular expressions may be concatenated.\n"
-"\n"
-"More information is available by typing \"man grep\"\n"
-msgstr ""
-"A bővített regexp által lefoglalt karakterek:\n"
-". ^ $ [ ] ? * + { } | \\ ( ) : \n"
-"Az alapvető reguláris kifejezésekben a ?, +, {, |, (, és )metakarakterek "
-"elveszítik különleges jelentésüket.\n"
-"\n"
-". = egyetlen tetszőleges karakter\n"
-"^ = a sor eleje\n"
-"$ = a sor vége\n"
-"\n"
-"[ ] = egyetlen karakter ebből a listából\n"
-"[^ ] = egyelen karakter, amely nincs ebben a listában\n"
-"[ - ] = egyetlen karakter az adott intervallumból\n"
-"\n"
-"Ezeket követheti egy ismétlődési operátor:\n"
-"? = az előző elem opcionális, legfeljebb egyszer szerepel\n"
-"* = az előző elem nulla, egy vagy több alkalommal fordul elő\n"
-"+ = az előző elem egy vagy több alkalommal fordul elő\n"
-"{n} = az előző elem pontosan n-szer szerepel\n"
-"{n,} = az előző elem n-szer vagy többször szerepel\n"
-"{n,m} = az előző elem legalább n-szer, legfejlebb m-szer szerepel\n"
-"\n"
-"Speciális karakterekkel történő egyezés kereséséhez azok elé tegyünk egy \\-"
-"t.\n"
-"\n"
-"Több reguláris kifejezés logikai VAGY kapcsolatba köthető a | jellel.\n"
-"További információk a parancssorban kiadott \"man grep\" paranccsal érhetők "
-"el.\n"
+msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
+        "( ) : \n"
+        "In  basic regular expressions the metacharacters ?, +, {, |, (, "
+        "and ) \n"
+        "  lose their special meaning.\n"
+        "\n"
+        "The  period . matches  any  single  character.\n"
+        "The caret ^ matches at the start of line.\n"
+        "The dollar $ matches at the end of line.\n"
+        "\n"
+        "Characters within [ ] matches any single character in the list.\n"
+        "Characters within [^ ] matches any single character *not* in the "
+        "list.\n"
+        "Characters inside [ - ] matches a range of characters (ie [0-9] or "
+        "[a-z]).\n"
+        "\n"
+        "A regular expression may be followed by one of several repetition "
+        "operators:\n"
+        "?      The preceding item is optional and matched\n"
+        "       at most once.\n"
+        "*      The preceding item will be matched zero\n"
+        "       or more times.\n"
+        "+      The preceding item will be matched one or\n"
+        "       more times.\n"
+        "{n}    The preceding item is matched exactly n times.\n"
+        "{n,}   The preceding item is matched n or more times.\n"
+        "{n,m}  The preceding item is matched at least n times,\n"
+        "       but not more than m times.\n"
+        "\n"
+        "To match any reserved character, precede it with \\. \n"
+        "\n"
+        "Two regular expressions may be joined by the logical or operator |.\n"
+        "Two regular expressions may be concatenated.\n"
+        "\n"
+        "More information is available by typing \"man grep\"\n"
+msgstr  "A bővített regexp által lefoglalt karakterek:\n"
+        ". ^ $ [ ] ? * + { } | \\ ( ) : \n"
+        "Az alapvető reguláris kifejezésekben a ?, +, {, |, (, "
+        "és )metakarakterek elveszítik különleges jelentésüket.\n"
+        "\n"
+        ". = egyetlen tetszőleges karakter\n"
+        "^ = a sor eleje\n"
+        "$ = a sor vége\n"
+        "\n"
+        "[ ] = egyetlen karakter ebből a listából\n"
+        "[^ ] = egyelen karakter, amely nincs ebben a listában\n"
+        "[ - ] = egyetlen karakter az adott intervallumból\n"
+        "\n"
+        "Ezeket követheti egy ismétlődési operátor:\n"
+        "? = az előző elem opcionális, legfeljebb egyszer szerepel\n"
+        "* = az előző elem nulla, egy vagy több alkalommal fordul elő\n"
+        "+ = az előző elem egy vagy több alkalommal fordul elő\n"
+        "{n} = az előző elem pontosan n-szer szerepel\n"
+        "{n,} = az előző elem n-szer vagy többször szerepel\n"
+        "{n,m} = az előző elem legalább n-szer, legfejlebb m-szer szerepel\n"
+        "\n"
+        "Speciális karakterekkel történő egyezés kereséséhez azok elé tegyünk "
+        "egy \\-t.\n"
+        "\n"
+        "Több reguláris kifejezés logikai VAGY kapcsolatba köthető a | "
+        "jellel.\n"
+        "További információk a parancssorban kiadott \"man grep\" paranccsal "
+        "érhetők el.\n"
 
-#: ../../xffm/response/chooserresponse.hh:23
-msgid "Open"
-msgstr "Megnyitás"
+#: ../xffm/find/fgr.hh:124 ../xffm/completion/base.hh:339
+msgid   "Options:"
+msgstr  "Beállítások:"
 
-#: ../../xffm/response/chooserresponse.hh:56
-msgid "Choose directory"
-msgstr "Válasszon könyvtárat"
+#: ../xffm/find/fgr.hh:125
+msgid   "Locate documents and folders on this computer by name or content"
+msgstr  "Dokumentumok és mappák keresése a számítógépen név vagy tartalom "
+        "szerint"
 
-#: ../../xffm/response/chooserresponse.hh:60
-msgid "Choose file"
-msgstr "Válasszon fájlt"
+#: ../xffm/find/fgr.hh:126
+msgid   "Search for files"
+msgstr  "Fájlok keresése"
 
-#: ../../xffm/response/customresponse.hh:55
-msgid "Execute command"
-msgstr "Parancs végrehajtása"
+#: ../xffm/find/fgr.hh:128
+msgid   "Contents:"
+msgstr  "Tartalom:"
 
-#. XXX folder or file entry should be determined on .ini file (probably just inherit from comboresponse for multiple files options (selected files)...
-#: ../../xffm/response/customresponse.hh:103
-msgid "Source File"
-msgstr "Forrásfájl"
+#: ../xffm/find/fgr.hh:128
+msgid   "File's contents filtered as plain text."
+msgstr  "Fájl tartalma egyszerű szövegként szűrve."
 
-#. this button is redundant since hands are on keyboard for password
-#: ../../xffm/response/entryresponse.hh:424
-#: ../../xffm/response/passwdresponse.hh:242
-msgid "Ok"
-msgstr "OK"
+#: ../xffm/find/fgr.hh:131
+msgid   "Verbose output debugging mode."
+msgstr  "Részletes kimenetű nyomkövetési mód."
 
-#: ../../xffm/response/commandprogressresponse.hh:31
-msgid "Items:"
-msgstr "Elemek:"
+#: ../xffm/find/fgr.hh:133
+msgid   "Show version information"
+msgstr  "Verzióinformációk megjelenítése"
 
-#: ../../xffm/response/passwdresponse.hh:19
-#: ../../xffm/response/passwdresponse.hh:25 ../../xffm/common/run.hh:464
-msgid "Enter password"
-msgstr "Adja meg a jelszót"
+#: ../xffm/find/fgr.hh:135
+msgid   "Filter Details"
+msgstr  "A szűrő jellemzői"
 
-#. gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
-#: ../../xffm/response/passwdresponse.hh:179
+#: ../xffm/find/fgr.hh:140
+msgid   "Print..."
+msgstr  "Nyomtatás..."
+
+#: ../xffm/find/fgr.hh:140
+msgid   "The unique Process ID that identifies this process."
+msgstr  "Az egyedi folyamatazonosító, amely meghatározza ezt a folyamatot"
+
+#: ../xffm/find/fgr.hh:143
+msgid   "Filter"
+msgstr  "Szűrő"
+
+#: ../xffm/find/fgr.hh:144
+msgid   "To display files which pass the filter (stars and regexps will be "
+        "processed)"
+msgstr  "Szűrőnek megfelelő fájlok kijelzése (csillagok és regexpek jöhetnek)"
+
+#: ../xffm/find/fgr.hh:147 ../xffm/find/fgr.hh:148 ../xffm/find/fgr.hh:149
+#: ../xffm/find/fgr.hh:150
+msgid   "KByte"
+msgstr  "KiB"
+
+#: ../xffm/find/fgr.hh:148
+msgid   "is greater than or equal to"
+msgstr  "nagyobb vagy egyenlő"
+
+#: ../xffm/find/fgr.hh:150
+msgid   "is less than or equal to"
+msgstr  "kisebb vagy egyenlő"
+
+#: ../xffm/find/fgr.hh:152
+msgid   "Set UID"
+msgstr  "Set UID"
+
+#: ../xffm/find/fgr.hh:152
+msgid   "Executable Text Files"
+msgstr  "Végrehajtható szöveges fájlok"
+
+#: ../xffm/find/fgr.hh:154
+msgid   "The permissions of the file, in octal notation."
+msgstr  "A fájl jogosultságai nyolcas számrendszerben."
+
+#: ../xffm/find/fgr.hh:155
+msgid   "Type"
+msgstr  "Típ."
+
+#: ../xffm/find/fgr.hh:157 ../xffm/find/signals.hh:14
+msgid   "Any"
+msgstr  "Bármi"
+
+#: ../xffm/find/fgr.hh:157
+msgid   "Default type"
+msgstr  "Alapértelmezett típus"
+
+#: ../xffm/find/fgr.hh:158 ../xffm/common/preview.hh:478
+msgid   "Regular file"
+msgstr  "Szabályos fájl"
+
+#: ../xffm/find/fgr.hh:159 ../xffm/find/signals.hh:8
+#: ../xffm/common/preview.hh:469 ../xffm/fm/view/local/popup.hh:1062
+msgid   "Directory"
+msgstr  "Könyvtár"
+
+#: ../xffm/find/fgr.hh:160 ../xffm/find/signals.hh:9
+#: ../xffm/common/preview.hh:475
+msgid   "Symbolic Link"
+msgstr  "Szimbolikus link"
+
+#: ../xffm/find/fgr.hh:161
+msgid   "UNIX Socket"
+msgstr  "UNIX foglalat"
+
+#: ../xffm/find/fgr.hh:162 ../xffm/find/signals.hh:11
+#: ../xffm/common/preview.hh:463
+msgid   "Block device"
+msgstr  "Blokkos eszköz"
+
+#: ../xffm/find/fgr.hh:163 ../xffm/find/signals.hh:12
+#: ../xffm/common/preview.hh:466
+msgid   "Character device"
+msgstr  "Karakteres eszköz"
+
+#: ../xffm/find/fgr.hh:164 ../xffm/find/signals.hh:13
+#: ../xffm/common/preview.hh:472
+msgid   "FIFO"
+msgstr  "FIFO"
+
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/find/fgr.hh:179 ../xffm/find/fgr.hh:180
+#: ../xffm/find/fgr.hh:183 ../xffm/find/fgr.hh:184 ../xffm/find/fgr.hh:187
+#: ../xffm/find/fgr.hh:188
+msgid   "TIME"
+msgstr  "IDŐ"
+
+#: ../xffm/find/fgr.hh:168 ../xffm/find/fgr.hh:171 ../xffm/find/fgr.hh:174
+#: ../xffm/find/fgr.hh:177
+msgid   "Previous"
+msgstr  "Előző"
+
+#: ../xffm/find/fgr.hh:175
+msgid   "Month"
+msgstr  "Hónap"
+
+#: ../xffm/find/fgr.hh:177
+msgid   "Month(s)"
+msgstr  "Hónap"
+
+#: ../xffm/find/fgr.hh:180
+msgid   "Modification Time :"
+msgstr  "Módosítás ideje:"
+
+#: ../xffm/find/fgr.hh:184
+msgid   "Access Time :"
+msgstr  "Utolsó hozzáférés ideje:"
+
+#: ../xffm/find/fgr.hh:188
+msgid   "Creation Time :"
+msgstr  "Létrehozás ideje:"
+
+#: ../xffm/find/fgr.hh:191 ../xffm/find/fgr.hh:192
+msgid   "uid"
+msgstr  "UID"
+
+#: ../xffm/find/fgr.hh:192
+msgid   "User:"
+msgstr  "Felhasználó:"
+
+#: ../xffm/find/fgr.hh:194 ../xffm/find/fgr.hh:195
+msgid   "gid"
+msgstr  "GID"
+
+#: ../xffm/find/fgr.hh:195
+msgid   "Group:"
+msgstr  "Csoport:"
+
+#: ../xffm/find/fgr.hh:198
+msgid   "Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+        "character that  normally  follows  a file  name"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:200
+msgid   "Content View"
+msgstr  "Tartalomnézet"
+
+#: ../xffm/find/fgr.hh:201 ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:203
+#: ../xffm/find/fgr.hh:204
+msgid   "STRING"
+msgstr  "KARAKTERLÁNC"
+
+#: ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:204
+#: ../xffm/fm/view/local/popup.hh:759
+msgid   "Regular expression"
+msgstr  "Reguláris kifejezés"
+
+#: ../xffm/find/fgr.hh:204
+msgid   "Extended"
+msgstr  "Kiterjesztett"
+
+#: ../xffm/find/fgr.hh:206
+msgid   "Ignore case"
+msgstr  "Kis- és nagybetű nem számít"
+
+#: ../xffm/find/fgr.hh:208
+msgid   "Text Files"
+msgstr  "Szövegfájlok"
+
+#: ../xffm/find/fgr.hh:214
+msgid   "Words"
+msgstr  "Szó"
+
+#: ../xffm/find/fgr.hh:216
+msgid   "Lines"
+msgstr  "Sor"
+
+#: ../xffm/find/fgr.hh:362
+#, c-format
+msgid   "Usage : %s [OPTIONS]\n"
+msgstr  "Használat: %s [OPCIÓK]\n"
+
+#: ../xffm/find/signals.hh:7
+msgid   "Regular"
+msgstr  "Megszokott"
+
+#: ../xffm/find/signals.hh:10 ../xffm/common/preview.hh:481
+msgid   "Socket"
+msgstr  "Illesztőpont"
+
+#: ../xffm/find/signals.hh:396 ../xffm/find/signals.hh:830
+msgid   "No editor for current action."
+msgstr  "Nincs szerkesztő az aktuális művelethez."
+
+#: ../xffm/find/signals.hh:454
+msgid   "Upper limit:"
+msgstr  "Felső korlát:"
+
+#: ../xffm/find/signals.hh:456
+msgid   "Counting files..."
+msgstr  "A fájlok számolása folyik..."
+
+#: ../xffm/find/signals.hh:471
+#, c-format
+msgid   "Found %d match"
+msgid_plural    "Found %d matches"
+msgstr[0]       "%d egyezés található"
+msgstr[1]       "%d egyezés található"
+
+#: ../xffm/find/signals.hh:473
+#, c-format
+msgid   "%s Finished : %s"
+msgstr  "%s Befejezve : %s"
+
+#: ../xffm/find/signals.hh:596 ../xffm/find/signals.hh:598
+msgid   "Searching..."
+msgstr  "Keresés…"
+
+#: ../xffm/common/preview.hh:581
+msgid   "Empty file"
+msgstr  "Üres fájl"
+
+#: ../xffm/common/preview.hh:636
+#, c-format
+msgid   "Cannot read from %s"
+msgstr  "Nem sikerült olvasni: %s"
+
+#: ../xffm/common/gtk.hh:67 ../xffm/fm/dialog/notebook/vbuttonbox.hh:240
+msgid   "Open terminal"
+msgstr  "Terminál megnyitása"
+
+#: ../xffm/common/gtk.hh:69 ../xffm/common/util.hh:1443
+msgid   "Execute Shell Command"
+msgstr  "Parancs végrehajtása (parancsértelmezőben)"
+
+#: ../xffm/common/gtk.hh:71 ../xffm/fm/view/local/popup.hh:157
+msgid   "Paste"
+msgstr  "Beillesztés"
+
+#: ../xffm/common/gtk.hh:73 ../xffm/fm/view/local/popup.hh:151
+msgid   "Add bookmark"
+msgstr  "Könyvjelző hozzáadása"
+
+#: ../xffm/common/gtk.hh:75 ../xffm/fm/view/local/popup.hh:152
+#: ../xffm/fm/view/root/popup.hh:137
+msgid   "Remove bookmark"
+msgstr  "Könyvjelző törlése"
+
+#: ../xffm/common/gtk.hh:77 ../xffm/fm/view/pkg/model.hh:108
+#: ../xffm/fm/view/pkg/model.hh:299 ../xffm/fm/view/pkg/model.hh:306
+#: ../xffm/fm/view/pkg/popup.hh:151
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:236
+msgid   "Search"
+msgstr  "Keresés"
+
+#: ../xffm/common/gtk.hh:81 ../xffm/fm/dialog/notebook/menupopover.hh:237
+msgid   "Exit"
+msgstr  "Kilépés"
+
+#: ../xffm/common/gtk.hh:83 ../xffm/fm/view/local/popup.hh:85
+#: ../xffm/fm/view/local/popup.hh:142 ../xffm/fm/view/local/popup.hh:1287
+#: ../xffm/fm/view/local/popup.hh:1294 ../xffm/fm/view/local/popup.hh:1305
+#: ../xffm/fm/view/local/popup.hh:1312
+msgid   "Open with"
+msgstr  "Megnyitás ezzel"
+
+#: ../xffm/common/gtk.hh:85 ../xffm/fm/view/local/popup.hh:100
+#: ../xffm/fm/view/local/popup.hh:156
+msgid   "Cut"
+msgstr  "Kivágás"
+
+#: ../xffm/common/gtk.hh:87 ../xffm/fm/view/local/popup.hh:99
+#: ../xffm/fm/view/local/popup.hh:155
+msgid   "Copy"
+msgstr  "Másolás"
+
+#: ../xffm/common/gtk.hh:89 ../xffm/fm/view/local/rm.hh:176
+#: ../xffm/fm/view/local/popup.hh:103 ../xffm/fm/view/local/popup.hh:160
+msgid   "Delete"
+msgstr  "Törlés"
+
+#: ../xffm/common/gtk.hh:91 ../xffm/fm/view/local/rm.hh:165
+msgid   "Shred"
+msgstr  "Megsemmisítés"
+
+#: ../xffm/common/gtk.hh:94 ../xffm/fm/view/local/popup.hh:95
+#: ../xffm/fm/view/local/popup.hh:145 ../xffm/fm/view/root/popup.hh:136
+#: ../xffm/fm/view/fstab/popup.hh:20
+msgid   "Open in New Tab"
+msgstr  "Megnyitás új lapon"
+
+#: ../xffm/common/gtk.hh:139 ../xffm/fm/dialog/notebook/notebook.hh:75
+msgid   "New Tab"
+msgstr  "Új lap"
+
+#: ../xffm/common/gtk.hh:352 ../xffm/common/gtk.hh:360
+msgid   "Help"
+msgstr  "Súgó"
+
+#: ../xffm/common/settings.hh:30
+msgid   "New File:"
+msgstr  "Új fájl:"
+
+#: ../xffm/common/gio.hh:81
+msgid   "Copying files"
+msgstr  "Fájlok másolása"
+
+#: ../xffm/common/gio.hh:83 ../xffm/common/dnd.hh:35
+#: ../xffm/fm/dialog/clipboard.hh:30
+msgid   "Moving files"
+msgstr  "Fájlok áthelyezése"
+
+#: ../xffm/common/gio.hh:85
+msgid   "linking"
+msgstr  "összekapcsolás"
+
+#: ../xffm/common/gio.hh:87
+msgid   "rename"
+msgstr  "rename"
+
+#: ../xffm/common/gio.hh:426
+#, c-format
+msgid   "(%d of %d)"
+msgstr  "(%d / %d)"
+
+#: ../xffm/common/util.hh:1404
+#, c-format
+msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
+        "attribute on that file."
+msgstr  "A(z) \"%s\" szkriptfájl nem hajtható végre. Kérem állítása be a "
+        "végrehajtható-attribútumot azon a fájlon."
+
+#: ../xffm/common/util.hh:1406 ../xffm/common/util.hh:1441
+#, c-format
+msgid   "Open with %s"
+msgstr  "Megnyitás ezzel: %s"
+
+#: ../xffm/common/util.hh:1406
+msgid   "Text Editor"
+msgstr  "Szövegszerkesztő"
+
+#: ../xffm/common/util.hh:1447
+msgid   "Console: quickly run single commands -- write a command here and "
+        "press enter."
+msgstr  "Konzol: gyorsan futtassa az egyes parancsokat -- írjon ide egy "
+        "parancsot és nyomjon entert."
+
+#: ../xffm/common/util.hh:1452 ../xffm/fm/view/local/popup.hh:1109
+#: ../xffm/fm/view/local/popup.hh:1291 ../xffm/fm/view/local/popup.hh:1309
+msgid   "Run in Terminal"
+msgstr  "Futtatás terminálban"
+
+#: ../xffm/common/dnd.hh:41 ../xffm/fm/dialog/clipboard.hh:23
+msgid   "Copying files locally"
+msgstr  "Fájlok másolása helyileg"
+
+#: ../xffm/common/dnd.hh:47
 #, fuzzy
-msgid "User Input"
-msgstr "Egérbemenet"
+msgid   "Create Link"
+msgstr  "Létrehozás ebben:"
 
-#: ../../xffm/response/passwdresponse.hh:195
-msgid "Response Requested"
-msgstr "Választ vár"
+#: ../xffm/common/run.hh:338
+msgid   "error"
+msgstr  "hiba"
 
-#: ../../xffm/response/timeoutresponse.hh:57
-msgid "Dismiss"
-msgstr "Rendben"
+#: ../xffm/common/run.hh:342
+msgid   "warning"
+msgstr  "figyelmeztetés"
 
-#: ../../xffm/response/commandresponse.hh:19
-msgid "Running"
-msgstr "Fut"
+#: ../xffm/common/run.hh:464 ../xffm/response/passwdresponse.hh:19
+#: ../xffm/response/passwdresponse.hh:25
+msgid   "Enter password"
+msgstr  "Adja meg a jelszót"
 
-#. auto text = g_strdup_printf("%s (pid: %d)",
-#. _("Waiting for operation to finish..."),
-#. Tubo<Type>::getChild (pid));
-#: ../../xffm/response/commandresponse.hh:24
-msgid "Waiting for operation to finish..."
-msgstr "Várakozás a művelet befejezésére…"
+#: ../xffm/fm/view/pkg/model.hh:29 ../xffm/fm/view/pkg/popup.hh:35
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:187
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:191
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:195
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:198
+msgid   "Software Updater"
+msgstr  "Szoftverfrissítő"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:11
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:214
-msgid "Remove Button Contents"
-msgstr "Gomb tartalmának eltávolítása"
+#: ../xffm/fm/view/pkg/model.hh:41 ../xffm/fm/view/pkg/model.hh:52
+msgid   "Add or remove software installed on the system"
+msgstr  "Szoftverek rendszerre telepítése vagy eltávolítása"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:67
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:209
+#: ../xffm/fm/view/pkg/model.hh:111
+msgid   "String"
+msgstr  "Karakterlánc"
+
+#: ../xffm/fm/view/pkg/model.hh:116
+msgid   "Waiting for search results"
+msgstr  "Várakozás a keresés eredményeire"
+
+#: ../xffm/fm/view/pkg/model.hh:174
+msgid   "No results"
+msgstr  "Nincs találat"
+
+#: ../xffm/fm/view/pkg/model.hh:373
 #, fuzzy
-msgid "Add custom content"
-msgstr "Egyéni gombtartalom hozzáadása"
+msgid   "Currently busy\n"
+msgstr  "Jelenlegi album"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:68
+#: ../xffm/fm/view/pkg/popup.hh:44
+msgid   "Update Database"
+msgstr  "Az adatbázis frissítése"
+
+#: ../xffm/fm/view/pkg/popup.hh:45
+msgid   "Fetch"
+msgstr  "Letöltés"
+
+#: ../xffm/fm/view/pkg/popup.hh:46
 #, fuzzy
-msgid "Select file to load"
-msgstr "Válassza ki a betöltendő képet"
+msgid   "Install --dry-run"
+msgstr  "Telepítési hiba"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:125
-#, c-format
-msgid "Cannot load file %s. Reason: %s"
-msgstr "%s fájlt nem lehet betölteni. Ok: %s"
+#: ../xffm/fm/view/pkg/popup.hh:47
+msgid   "Install"
+msgstr  "Telepítés"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:154
-msgid "You need to restart the application"
-msgstr "Az alkalmazás újraindítása szükséges"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:187
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:191
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:195
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:198
-#: ../../xffm/fm/view/pkg/model.hh:29 ../../xffm/fm/view/pkg/popup.hh:35
-msgid "Software Updater"
-msgstr "Szoftverfrissítő"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:236
-#: ../../xffm/fm/view/pkg/model.hh:108 ../../xffm/fm/view/pkg/model.hh:299
-#: ../../xffm/fm/view/pkg/model.hh:306 ../../xffm/fm/view/pkg/popup.hh:151
-#: ../../xffm/common/gtk.hh:77
-msgid "Search"
-msgstr "Keresés"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:240 ../../xffm/common/gtk.hh:67
-msgid "Open terminal"
-msgstr "Terminál megnyitása"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:244
-msgid "Open a New Window"
-msgstr "Új ablak megnyitása"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:250
-msgid "Differences"
-msgstr "Különbségek"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:256
-#: ../../xffm/fm/view/root/model.hh:110
-msgid "Home Directory"
-msgstr "Saját mappa"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:261
-#: ../../xffm/fm/view/root/model.hh:168 ../../xffm/fm/view/fstab/popup.hh:29
-msgid "Disk Image Mounter"
-msgstr "Lemezképcsatoló"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:266
-#: ../../xffm/fm/view/root/model.hh:137
-msgid "Trash bin"
-msgstr "Szemetes"
-
-#: ../../xffm/fm/dialog/notebook/notebook.hh:56
-msgid "Long press time"
-msgstr "Hosszú lenyomás ideje"
-
-#: ../../xffm/fm/dialog/notebook/notebook.hh:75 ../../xffm/common/gtk.hh:139
-msgid "New Tab"
-msgstr "Új lap"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:178
-msgid "Open menu"
-msgstr "Menü megnyitása"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:230
-msgid "View as list"
-msgstr "Listanézet"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:231
-msgid "Show hidden files"
-msgstr "Rejtett fájlok megjelenítése"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:232
-msgid "Show Backup Files"
-msgstr "Másolatfájlok megjelenítése"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:233
-msgid "Sort data in descending order"
-msgstr "Az adatok rendezése csökkenő sorrendben"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:235
-msgid "Sort by date"
-msgstr "Rendezés dátum szerint"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:236
-msgid "Sort by size"
-msgstr "Rendezés méret szerint"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:237 ../../xffm/common/gtk.hh:81
-msgid "Exit"
-msgstr "Kilépés"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:270
-msgid "Main menu"
-msgstr "Főmenü"
-
-#. File chooser
-#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:375
-#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:377
-msgid "Go to"
-msgstr "Ugrás"
-
-#. entryResponse->setCheckButton(_("Run in Terminal"));
-#. entryResponse->setCheckButton(Run<Type>::runInTerminal(path));
-#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:382
-#: ../../xffm/fm/view/local/popup.hh:887 ../../xffm/fm/view/local/popup.hh:981
-msgid "Specify Output Directory..."
-msgstr "A kimeneti mappa megadása…"
-
-#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:409
-msgid "Not a directory"
-msgstr "Nem könyvtár"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:135
-msgid "Renice Process"
-msgstr "Prioritásmódosítás"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:135
-msgid "Suspend"
-msgstr "Felfüggesztés"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:135
-msgid "Continue"
-msgstr "Folytatás"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid "Interrupt"
-msgstr "Megszakítás"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid "Hangup"
-msgstr "Felfüggesztés"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid "User 1 (USR1)"
-msgstr "1. felhasználói (USR1)"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:137
-msgid "User 2 (USR2)"
-msgstr "2. felhasználói (USR2)"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:137
-msgid "Terminate Task"
-msgstr "Feladat befejezése"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:137
-msgid "Abort"
-msgstr "Megszakítás"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:138
-msgid "Kill"
-msgstr "Kilövés"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:139
-msgid "Segmentation fault"
-msgstr "Szegmentálási hiba"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:216
-msgid "PID"
-msgstr "PID"
-
-#: ../../xffm/fm/dialog/notebook/page/page.hh:58
-msgid "loading..."
-msgstr "betöltés..."
-
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
-msgid "Embedded Terminal"
-msgstr "Beágyazott terminál"
-
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
-msgid "All items in the iconview."
-msgstr "A fenti ikonnézet összes eleme."
-
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
-msgid "Scripting"
-msgstr "Parancsfájlok"
-
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
-msgid "Clear Log"
-msgstr "A naplóbejegyzések törlése"
-
-#. Status textview
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
-msgid "Terminal font"
-msgstr "Terminál betűkészlete"
-
-#: ../../xffm/fm/dialog/clipboard.hh:23 ../../xffm/common/dnd.hh:41
-msgid "Copying files locally"
-msgstr "Fájlok másolása helyileg"
-
-#: ../../xffm/fm/dialog/clipboard.hh:30 ../../xffm/common/gio.hh:83
-#: ../../xffm/common/dnd.hh:35
-msgid "Moving files"
-msgstr "Fájlok áthelyezése"
-
-#: ../../xffm/fm/dialog/dialog.hh:122
-msgid "Removed"
-msgstr "Eltávolítva"
-
-#: ../../xffm/fm/dialog/dialog.hh:143
-msgid "Detected device(s):"
-msgstr "Felismert eszköz(ök):"
-
-#: ../../xffm/fm/view/local/model.hh:122
-#, c-format
-msgid "Reading \"%s\""
-msgstr "„%s” olvasása"
-
-#: ../../xffm/fm/view/local/model.hh:575 ../../xffm/fm/view/base/monitor.hh:33
-#, c-format
-msgid "Files: %s"
-msgstr "Fájlok: %s"
-
-#: ../../xffm/fm/view/local/model.hh:578
-#, c-format
-msgid "Loaded %d of %d articles"
-msgstr "%d / %d cikk betöltve"
-
-#: ../../xffm/fm/view/local/popup.hh:85 ../../xffm/fm/view/local/popup.hh:142
-#: ../../xffm/fm/view/local/popup.hh:1287
-#: ../../xffm/fm/view/local/popup.hh:1294
-#: ../../xffm/fm/view/local/popup.hh:1305
-#: ../../xffm/fm/view/local/popup.hh:1312 ../../xffm/common/gtk.hh:83
-msgid "Open with"
-msgstr "Megnyitás ezzel"
-
-#: ../../xffm/fm/view/local/popup.hh:94
-msgid "New"
-msgstr "Új"
-
-#: ../../xffm/fm/view/local/popup.hh:95 ../../xffm/fm/view/local/popup.hh:145
-#: ../../xffm/fm/view/root/popup.hh:136 ../../xffm/fm/view/fstab/popup.hh:20
-#: ../../xffm/common/gtk.hh:94
-msgid "Open in New Tab"
-msgstr "Megnyitás új lapon"
-
-#. deprecated {N_("Open in New Tab"), NULL, NULL, NULL},
-#. deprecated {N_("Open in New Window"), NULL, NULL, NULL},
-#. common buttons /(also an iconsize +/- button)
-#: ../../xffm/fm/view/local/popup.hh:99 ../../xffm/fm/view/local/popup.hh:155
-#: ../../xffm/common/gtk.hh:87
-msgid "Copy"
-msgstr "Másolás"
-
-#: ../../xffm/fm/view/local/popup.hh:100 ../../xffm/fm/view/local/popup.hh:156
-#: ../../xffm/common/gtk.hh:85
-msgid "Cut"
-msgstr "Kivágás"
-
-#: ../../xffm/fm/view/local/popup.hh:101 ../../xffm/fm/view/local/popup.hh:159
-#: ../../xffm/fm/view/local/popup.hh:232 ../../xffm/fm/view/local/popup.hh:234
+#: ../xffm/fm/view/pkg/popup.hh:48
 #, fuzzy
-msgid "Paste into"
-msgstr "Helyben beillesztés"
+msgid   "Uninstall --dry-run"
+msgstr  "Eltávolítás"
 
-#: ../../xffm/fm/view/local/popup.hh:102 ../../xffm/fm/view/local/popup.hh:158
+#: ../xffm/fm/view/pkg/popup.hh:49
+msgid   "Uninstall"
+msgstr  "Eltávolítás"
+
+#: ../xffm/fm/view/pkg/popup.hh:50
+msgid   "Information"
+msgstr  "Információk"
+
+#: ../xffm/fm/view/pkg/popup.hh:140
+msgid   "Version"
+msgstr  "Verzió"
+
+#: ../xffm/fm/view/pkg/popup.hh:149
+msgid   "Go up"
+msgstr  "Fel"
+
+#: ../xffm/fm/view/pkg/popup.hh:152
+msgid   "Search packages"
+msgstr  "Csomagok keresése"
+
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
+#, c-format
+msgid   "Loading %s...%s"
+msgstr  "Betöltés: %s...%s"
+
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
+msgid   "Please Wait..."
+msgstr  "Kis türelmet…"
+
+#: ../xffm/fm/view/local/model.hh:124
+#, c-format
+msgid   "Reading \"%s\""
+msgstr  "„%s” olvasása"
+
+#: ../xffm/fm/view/local/model.hh:577 ../xffm/fm/view/base/monitor.hh:34
+#, c-format
+msgid   "Files: %s"
+msgstr  "Fájlok: %s"
+
+#: ../xffm/fm/view/local/model.hh:580
+#, c-format
+msgid   "Loaded %d of %d articles"
+msgstr  "%d / %d cikk betöltve"
+
+#: ../xffm/fm/view/local/rm.hh:59
+#, c-format
+msgid   "Delete %s"
+msgstr  "%s törlése"
+
+#: ../xffm/fm/view/local/rm.hh:61
+msgid   "Warning: "
+msgstr  "Figyelmeztetés: "
+
+#: ../xffm/fm/view/local/rm.hh:61 ../xffm/fm/view/local/popup.hh:565
+msgid   "Multiple selections"
+msgstr  "Többszörös kijelölések"
+
+#: ../xffm/fm/view/local/rm.hh:92
+msgid   "Remove"
+msgstr  "Eltávolítás"
+
+#: ../xffm/fm/view/local/rm.hh:142
+msgid   "Apply to all"
+msgstr  "Alkalmazás az összesre"
+
+#: ../xffm/fm/view/local/rm.hh:183
+msgid   "Trash"
+msgstr  "Kuka"
+
+#: ../xffm/fm/view/local/popup.hh:94
+msgid   "New"
+msgstr  "Új"
+
+#: ../xffm/fm/view/local/popup.hh:101 ../xffm/fm/view/local/popup.hh:159
+#: ../xffm/fm/view/local/popup.hh:232 ../xffm/fm/view/local/popup.hh:234
 #, fuzzy
-msgid "There is nothing on the clipboard to paste."
-msgstr "Nincs beilleszthető adat a vágólapon."
+msgid   "Paste into"
+msgstr  "Helyben beillesztés"
 
-#. **************
-#: ../../xffm/fm/view/local/popup.hh:103 ../../xffm/fm/view/local/popup.hh:160
-#: ../../xffm/fm/view/local/rm.hh:176 ../../xffm/common/gtk.hh:89
-msgid "Delete"
-msgstr "Törlés"
-
-#. {N_("About"), NULL, (void *) menu},
-#.
-#: ../../xffm/fm/view/local/popup.hh:106
-msgid "Select All"
-msgstr "Mindent kijelöl"
-
-#: ../../xffm/fm/view/local/popup.hh:107 ../../xffm/fm/view/local/popup.hh:755
-msgid "Match regular expression"
-msgstr "Reguláris kifejezés illeszkedése"
-
-#: ../../xffm/fm/view/local/popup.hh:143 ../../xffm/fm/view/local/popup.hh:1105
-msgid "Run Executable..."
-msgstr "Végrehajtható futtatása…"
-
-#. File chooser
-#: ../../xffm/fm/view/local/popup.hh:144 ../../xffm/fm/view/local/popup.hh:875
-msgid "Extract files from the archive"
-msgstr "Fájlok kibontása az archívumból"
-
-#. File chooser
-#: ../../xffm/fm/view/local/popup.hh:146 ../../xffm/fm/view/local/popup.hh:966
-msgid "Create a compressed archive with the selected objects"
-msgstr "Tömörített archívum létrehozása a kijelölt objektumokkal"
-
-#: ../../xffm/fm/view/local/popup.hh:148 ../../xffm/fm/view/fstab/popup.hh:37
-msgid "Mount the volume associated with this folder"
-msgstr "A mappához társított kötet csatolása"
-
-#: ../../xffm/fm/view/local/popup.hh:149 ../../xffm/fm/view/fstab/popup.hh:38
-msgid "Unmount the volume associated with this folder"
-msgstr "A mappához társított kötet leválasztása"
-
-#: ../../xffm/fm/view/local/popup.hh:151 ../../xffm/common/gtk.hh:73
-msgid "Add bookmark"
-msgstr "Könyvjelző hozzáadása"
-
-#: ../../xffm/fm/view/local/popup.hh:152 ../../xffm/fm/view/root/popup.hh:137
-#: ../../xffm/common/gtk.hh:75
-msgid "Remove bookmark"
-msgstr "Könyvjelző törlése"
-
-#: ../../xffm/fm/view/local/popup.hh:157 ../../xffm/common/gtk.hh:71
-msgid "Paste"
-msgstr "Beillesztés"
-
-#: ../../xffm/fm/view/local/popup.hh:161 ../../xffm/fm/view/local/popup.hh:1231
-msgid "Rename"
-msgstr "Átnevezés"
-
-#: ../../xffm/fm/view/local/popup.hh:162 ../../xffm/fm/view/local/popup.hh:1217
-msgid "Duplicate"
-msgstr "Másolat"
-
-#: ../../xffm/fm/view/local/popup.hh:163 ../../xffm/fm/view/local/popup.hh:1203
-msgid "Link"
-msgstr "Hivatkozás"
-
-#: ../../xffm/fm/view/local/popup.hh:164
-msgid "Properties"
-msgstr "Tulajdonságok"
-
-#: ../../xffm/fm/view/local/popup.hh:562
-msgid "Files:"
-msgstr "Fájlok:"
-
-#: ../../xffm/fm/view/local/popup.hh:565 ../../xffm/fm/view/local/rm.hh:61
-msgid "Multiple selections"
-msgstr "Többszörös kijelölések"
-
-#: ../../xffm/fm/view/local/popup.hh:753
-msgid "Select items"
-msgstr "Elemek kijelölése"
-
-#: ../../xffm/fm/view/local/popup.hh:771
-msgid "Regular Expression syntax is incorrect"
-msgstr "A reguláris kifejezés szintaxisa helytelen"
-
-#: ../../xffm/fm/view/local/popup.hh:801
-msgid "No selection"
-msgstr "Nincs kijelölés"
-
-#: ../../xffm/fm/view/local/popup.hh:801
-msgid "No matches."
-msgstr "Nincs találat."
-
-#: ../../xffm/fm/view/local/popup.hh:1058
-msgid "Create new..."
-msgstr "Új létrehozása…"
-
-#: ../../xffm/fm/view/local/popup.hh:1065
-#: ../../xffm/fm/view/local/popup.hh:1146
-msgid "New Name:"
-msgstr "Új név:"
-
-#: ../../xffm/fm/view/local/popup.hh:1074
-msgid "No name"
-msgstr "Névtelen"
-
-#: ../../xffm/fm/view/local/popup.hh:1087
-#, c-format
-msgid "Another file with the same name already exists in “%s”."
-msgstr "Már létezik ilyen nevű másik fájl „%s” alatt."
-
-#: ../../xffm/fm/view/local/popup.hh:1109
-#: ../../xffm/fm/view/local/popup.hh:1291
-#: ../../xffm/fm/view/local/popup.hh:1309 ../../xffm/common/util.hh:1452
-msgid "Run in Terminal"
-msgstr "Futtatás terminálban"
-
-#: ../../xffm/fm/view/local/popup.hh:1112
-msgid "Arguments for the Command"
-msgstr "Parancs paraméterei"
-
-#: ../../xffm/fm/view/local/popup.hh:1258
-msgid "You have selected multiple files or folders"
-msgstr "Több fájlt vagy mappát jelölt ki"
-
-#: ../../xffm/fm/view/local/popup.hh:1332 ../../xffm/fm/view/local/view.hh:156
-msgid "Invalid entry"
-msgstr "Érvénytelen bejegyzés"
-
-#: ../../xffm/fm/view/local/properties.hh:245
-msgid "Properties and Attributes"
-msgstr "Tulajdonságok és attribútumok"
-
-#: ../../xffm/fm/view/local/properties.hh:274
-msgid "File Mode:"
-msgstr "Fájl mód:"
-
-#: ../../xffm/fm/view/local/properties.hh:300
-msgid "File:"
-msgstr "Fájl:"
-
-#. Add file info stuff
-#. set info stuff data according to combo box
-#. add signal handler to changed signal for combo box
-#. Add process buttons
-#.
-#: ../../xffm/fm/view/local/properties.hh:312
-msgid "Apply changes"
-msgstr "Változtatások alkalmazása"
-
-#: ../../xffm/fm/view/local/properties.hh:477
-msgid "Successfully moved to trash."
-msgstr "Sikeresen áthelyezve a Kukába."
-
-#: ../../xffm/fm/view/local/properties.hh:478
-msgid "Source:"
-msgstr "Forrás:"
-
-#: ../../xffm/fm/view/local/rm.hh:59
-#, c-format
-msgid "Delete %s"
-msgstr "%s törlése"
-
-#: ../../xffm/fm/view/local/rm.hh:61
-msgid "Warning: "
-msgstr "Figyelmeztetés: "
-
-#. gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
-#. title
-#: ../../xffm/fm/view/local/rm.hh:92
-msgid "Remove"
-msgstr "Eltávolítás"
-
-#: ../../xffm/fm/view/local/rm.hh:142
-msgid "Apply to all"
-msgstr "Alkalmazás az összesre"
-
-#. **************
-#. This is now available to BSD with rm -P option
-#: ../../xffm/fm/view/local/rm.hh:165 ../../xffm/common/gtk.hh:91
-msgid "Shred"
-msgstr "Megsemmisítés"
-
-#: ../../xffm/fm/view/local/rm.hh:183
-msgid "Trash"
-msgstr "Kuka"
-
-#: ../../xffm/fm/view/local/view.hh:177
-#, c-format
-msgid "The volume '%s' is not mounted."
-msgstr "A(z) „%s” kötet nincs csatolva."
-
-#: ../../xffm/fm/view/root/model.hh:82
-msgid "Root Directory"
-msgstr "Gyökérkönyvtár"
-
-#: ../../xffm/fm/view/root/model.hh:98
-msgid "This is the root of the filesystem"
-msgstr "Ez a fájlrendszer gyökere"
-
-#: ../../xffm/fm/view/root/model.hh:176 ../../xffm/fm/view/root/model.hh:191
-msgid "Mount local disks and devices"
-msgstr "Helyi lemezek vagy eszközök csatolása"
-
-#: ../../xffm/fm/view/root/model.hh:177 ../../xffm/fm/view/fstab/popup.hh:23
-#: ../../xffm/fm/view/fstab/view.hh:1084
-msgid "eCryptfs Volume"
-msgstr "eCryptfs kötet"
-
-#: ../../xffm/fm/view/root/model.hh:178 ../../xffm/fm/view/fstab/popup.hh:22
-msgid "SSHFS Remote Synchronization Folder"
-msgstr "SSHFS távoli szinkronizálási mappa"
-
-#: ../../xffm/fm/view/root/model.hh:179 ../../xffm/fm/view/fstab/popup.hh:21
-#: ../../xffm/fm/view/fstab/view.hh:1032
-msgid "NFS Network Volume"
-msgstr "NFS hálózat kötet"
-
-#: ../../xffm/fm/view/root/model.hh:180 ../../xffm/fm/view/fstab/popup.hh:24
-#: ../../xffm/fm/view/fstab/view.hh:1110
-msgid "CIFS Volume"
-msgstr "CIFS kötet"
-
-#: ../../xffm/fm/view/root/model.hh:229
-msgid "Go to bookmarked location"
-msgstr "Ugrás a könyvjelzőbeli helyre"
-
-#: ../../xffm/fm/view/root/popup.hh:138
-msgid "Empty trash"
-msgstr "Kuka ürítése"
-
-#. File chooser
-#: ../../xffm/fm/view/fstab/popup.hh:129
-msgid "Mount Device"
-msgstr "Az eszköz csatlakoztatása"
-
-#: ../../xffm/fm/view/fstab/popup.hh:141 ../../xffm/fm/view/fstab/view.hh:923
-msgid "Mount point:"
-msgstr "Csatolási pont:"
-
-#: ../../xffm/fm/view/fstab/view.hh:590
+#: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:158
 #, fuzzy
-msgid "Mount point: "
-msgstr "Csatolási pont:"
+msgid   "There is nothing on the clipboard to paste."
+msgstr  "Nincs beilleszthető adat a vágólapon."
 
-#: ../../xffm/fm/view/fstab/view.hh:591
+#: ../xffm/fm/view/local/popup.hh:106
+msgid   "Select All"
+msgstr  "Mindent kijelöl"
+
+#: ../xffm/fm/view/local/popup.hh:107 ../xffm/fm/view/local/popup.hh:755
+msgid   "Match regular expression"
+msgstr  "Reguláris kifejezés illeszkedése"
+
+#: ../xffm/fm/view/local/popup.hh:143 ../xffm/fm/view/local/popup.hh:1105
+msgid   "Run Executable..."
+msgstr  "Végrehajtható futtatása…"
+
+#: ../xffm/fm/view/local/popup.hh:144 ../xffm/fm/view/local/popup.hh:875
+msgid   "Extract files from the archive"
+msgstr  "Fájlok kibontása az archívumból"
+
+#: ../xffm/fm/view/local/popup.hh:146 ../xffm/fm/view/local/popup.hh:966
+msgid   "Create a compressed archive with the selected objects"
+msgstr  "Tömörített archívum létrehozása a kijelölt objektumokkal"
+
+#: ../xffm/fm/view/local/popup.hh:148 ../xffm/fm/view/fstab/popup.hh:37
+msgid   "Mount the volume associated with this folder"
+msgstr  "A mappához társított kötet csatolása"
+
+#: ../xffm/fm/view/local/popup.hh:149 ../xffm/fm/view/fstab/popup.hh:38
+msgid   "Unmount the volume associated with this folder"
+msgstr  "A mappához társított kötet leválasztása"
+
+#: ../xffm/fm/view/local/popup.hh:161 ../xffm/fm/view/local/popup.hh:1231
+msgid   "Rename"
+msgstr  "Átnevezés"
+
+#: ../xffm/fm/view/local/popup.hh:162 ../xffm/fm/view/local/popup.hh:1217
+msgid   "Duplicate"
+msgstr  "Másolat"
+
+#: ../xffm/fm/view/local/popup.hh:163 ../xffm/fm/view/local/popup.hh:1203
+msgid   "Link"
+msgstr  "Hivatkozás"
+
+#: ../xffm/fm/view/local/popup.hh:164
+msgid   "Properties"
+msgstr  "Tulajdonságok"
+
+#: ../xffm/fm/view/local/popup.hh:562
+msgid   "Files:"
+msgstr  "Fájlok:"
+
+#: ../xffm/fm/view/local/popup.hh:753
+msgid   "Select items"
+msgstr  "Elemek kijelölése"
+
+#: ../xffm/fm/view/local/popup.hh:771
+msgid   "Regular Expression syntax is incorrect"
+msgstr  "A reguláris kifejezés szintaxisa helytelen"
+
+#: ../xffm/fm/view/local/popup.hh:801
+msgid   "No selection"
+msgstr  "Nincs kijelölés"
+
+#: ../xffm/fm/view/local/popup.hh:801
+msgid   "No matches."
+msgstr  "Nincs találat."
+
+#: ../xffm/fm/view/local/popup.hh:887 ../xffm/fm/view/local/popup.hh:981
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:382
+msgid   "Specify Output Directory..."
+msgstr  "A kimeneti mappa megadása…"
+
+#: ../xffm/fm/view/local/popup.hh:1058
+msgid   "Create new..."
+msgstr  "Új létrehozása…"
+
+#: ../xffm/fm/view/local/popup.hh:1065 ../xffm/fm/view/local/popup.hh:1146
+msgid   "New Name:"
+msgstr  "Új név:"
+
+#: ../xffm/fm/view/local/popup.hh:1074
+msgid   "No name"
+msgstr  "Névtelen"
+
+#: ../xffm/fm/view/local/popup.hh:1087
+#, c-format
+msgid   "Another file with the same name already exists in “%s”."
+msgstr  "Már létezik ilyen nevű másik fájl „%s” alatt."
+
+#: ../xffm/fm/view/local/popup.hh:1112
+msgid   "Arguments for the Command"
+msgstr  "Parancs paraméterei"
+
+#: ../xffm/fm/view/local/popup.hh:1258
+msgid   "You have selected multiple files or folders"
+msgstr  "Több fájlt vagy mappát jelölt ki"
+
+#: ../xffm/fm/view/local/popup.hh:1332 ../xffm/fm/view/local/view.hh:156
+msgid   "Invalid entry"
+msgstr  "Érvénytelen bejegyzés"
+
+#: ../xffm/fm/view/local/view.hh:177
+#, c-format
+msgid   "The volume '%s' is not mounted."
+msgstr  "A(z) „%s” kötet nincs csatolva."
+
+#: ../xffm/fm/view/local/properties.hh:245
+msgid   "Properties and Attributes"
+msgstr  "Tulajdonságok és attribútumok"
+
+#: ../xffm/fm/view/local/properties.hh:274
+msgid   "File Mode:"
+msgstr  "Fájl mód:"
+
+#: ../xffm/fm/view/local/properties.hh:300
+msgid   "File:"
+msgstr  "Fájl:"
+
+#: ../xffm/fm/view/local/properties.hh:312
+msgid   "Apply changes"
+msgstr  "Változtatások alkalmazása"
+
+#: ../xffm/fm/view/local/properties.hh:477
+msgid   "Successfully moved to trash."
+msgstr  "Sikeresen áthelyezve a Kukába."
+
+#: ../xffm/fm/view/local/properties.hh:478
+msgid   "Source:"
+msgstr  "Forrás:"
+
+#: ../xffm/fm/view/root/model.hh:82
+msgid   "Root Directory"
+msgstr  "Gyökérkönyvtár"
+
+#: ../xffm/fm/view/root/model.hh:98
+msgid   "This is the root of the filesystem"
+msgstr  "Ez a fájlrendszer gyökere"
+
+#: ../xffm/fm/view/root/model.hh:110
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:256
+msgid   "Home Directory"
+msgstr  "Saját mappa"
+
+#: ../xffm/fm/view/root/model.hh:137
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:266
+msgid   "Trash bin"
+msgstr  "Szemetes"
+
+#: ../xffm/fm/view/root/model.hh:168 ../xffm/fm/view/fstab/popup.hh:29
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:261
+msgid   "Disk Image Mounter"
+msgstr  "Lemezképcsatoló"
+
+#: ../xffm/fm/view/root/model.hh:176 ../xffm/fm/view/root/model.hh:191
+msgid   "Mount local disks and devices"
+msgstr  "Helyi lemezek vagy eszközök csatolása"
+
+#: ../xffm/fm/view/root/model.hh:177 ../xffm/fm/view/fstab/popup.hh:23
+#: ../xffm/fm/view/fstab/view.hh:1084
+msgid   "eCryptfs Volume"
+msgstr  "eCryptfs kötet"
+
+#: ../xffm/fm/view/root/model.hh:178 ../xffm/fm/view/fstab/popup.hh:22
+msgid   "SSHFS Remote Synchronization Folder"
+msgstr  "SSHFS távoli szinkronizálási mappa"
+
+#: ../xffm/fm/view/root/model.hh:179 ../xffm/fm/view/fstab/popup.hh:21
+#: ../xffm/fm/view/fstab/view.hh:1032
+msgid   "NFS Network Volume"
+msgstr  "NFS hálózat kötet"
+
+#: ../xffm/fm/view/root/model.hh:180 ../xffm/fm/view/fstab/popup.hh:24
+#: ../xffm/fm/view/fstab/view.hh:1110
+msgid   "CIFS Volume"
+msgstr  "CIFS kötet"
+
+#: ../xffm/fm/view/root/model.hh:229
+msgid   "Go to bookmarked location"
+msgstr  "Ugrás a könyvjelzőbeli helyre"
+
+#: ../xffm/fm/view/root/popup.hh:138
+msgid   "Empty trash"
+msgstr  "Kuka ürítése"
+
+#: ../xffm/fm/view/fstab/popup.hh:129
+msgid   "Mount Device"
+msgstr  "Az eszköz csatlakoztatása"
+
+#: ../xffm/fm/view/fstab/popup.hh:141 ../xffm/fm/view/fstab/view.hh:923
+msgid   "Mount point:"
+msgstr  "Csatolási pont:"
+
+#: ../xffm/fm/view/fstab/view.hh:590
 #, fuzzy
-msgid "Mount device: "
-msgstr "Az eszköz csatlakoztatása"
+msgid   "Mount point: "
+msgstr  "Csatolási pont:"
 
-#. Since /dev is not concrete, the following test returns false...
-#.
-#. if (!g_file_test(name, G_FILE_TEST_IS_DIR)) return;
-#: ../../xffm/fm/view/fstab/view.hh:659 ../../xffm/fm/view/fstab/view.hh:675
-msgid "Disks"
-msgstr "Lemezek"
-
-#: ../../xffm/fm/view/fstab/view.hh:921
-msgid "No Label"
-msgstr "Nincs címke"
-
-#: ../../xffm/fm/view/fstab/view.hh:922
-msgid "There is no file system available (unformatted)"
-msgstr "Nem áll rendelkezésre fájlrendszer (formázatlan)"
-
-#: ../../xffm/fm/view/fstab/view.hh:923
-msgid "Not mounted"
-msgstr "Nincs csatolva"
-
-#: ../../xffm/fm/view/fstab/view.hh:1058
+#: ../xffm/fm/view/fstab/view.hh:591
 #, fuzzy
-msgid "SFTP (via SSH)"
-msgstr "Biztonságos FTP (SSH)"
+msgid   "Mount device: "
+msgstr  "Az eszköz csatlakoztatása"
 
-#: ../../xffm/fm/view/fstab/view.hh:1413
-#, c-format
-msgid "Unmounting %s"
-msgstr "%s leválasztása"
+#: ../xffm/fm/view/fstab/view.hh:659 ../xffm/fm/view/fstab/view.hh:675
+msgid   "Disks"
+msgstr  "Lemezek"
 
-#: ../../xffm/fm/view/fstab/view.hh:1413
-#, c-format
-msgid "Mounting %s"
-msgstr "%s csatolása"
+#: ../xffm/fm/view/fstab/view.hh:921
+msgid   "No Label"
+msgstr  "Nincs címke"
 
-#: ../../xffm/fm/view/pkg/model.hh:41 ../../xffm/fm/view/pkg/model.hh:52
-msgid "Add or remove software installed on the system"
-msgstr "Szoftverek rendszerre telepítése vagy eltávolítása"
+#: ../xffm/fm/view/fstab/view.hh:922
+msgid   "There is no file system available (unformatted)"
+msgstr  "Nem áll rendelkezésre fájlrendszer (formázatlan)"
 
-#: ../../xffm/fm/view/pkg/model.hh:111
-msgid "String"
-msgstr "Karakterlánc"
+#: ../xffm/fm/view/fstab/view.hh:923
+msgid   "Not mounted"
+msgstr  "Nincs csatolva"
 
-#: ../../xffm/fm/view/pkg/model.hh:116
-msgid "Waiting for search results"
-msgstr "Várakozás a keresés eredményeire"
-
-#: ../../xffm/fm/view/pkg/model.hh:174
-msgid "No results"
-msgstr "Nincs találat"
-
-#: ../../xffm/fm/view/pkg/model.hh:373
+#: ../xffm/fm/view/fstab/view.hh:1058
 #, fuzzy
-msgid "Currently busy\n"
-msgstr "Jelenlegi album"
+msgid   "SFTP (via SSH)"
+msgstr  "Biztonságos FTP (SSH)"
 
-#: ../../xffm/fm/view/pkg/popup.hh:44
-msgid "Update Database"
-msgstr "Az adatbázis frissítése"
+#: ../xffm/fm/view/fstab/view.hh:1413
+#, c-format
+msgid   "Unmounting %s"
+msgstr  "%s leválasztása"
 
-#: ../../xffm/fm/view/pkg/popup.hh:45
-msgid "Fetch"
-msgstr "Letöltés"
+#: ../xffm/fm/view/fstab/view.hh:1413
+#, c-format
+msgid   "Mounting %s"
+msgstr  "%s csatolása"
 
-#: ../../xffm/fm/view/pkg/popup.hh:46
+#: ../xffm/fm/view/base/signals.hh:838
+msgid   "Trash is empty"
+msgstr  "A kuka üres"
+
+#: ../xffm/fm/view/base/signals.hh:840
+msgid   "Directory does not exist."
+msgstr  "A könyvtár nem létezik."
+
+#: ../xffm/fm/view/treeview.hh:17
+msgid   "Name"
+msgstr  "Név"
+
+#: ../xffm/fm/view/treeview.hh:19
+msgid   "Size"
+msgstr  "Méret"
+
+#: ../xffm/fm/view/treeview.hh:20
+msgid   "Date"
+msgstr  "Dátum"
+
+#: ../xffm/fm/view/treeview.hh:22
+msgid   "Mimetype"
+msgstr  "MIME-típus"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
+msgid   "Embedded Terminal"
+msgstr  "Beágyazott terminál"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
+msgid   "All items in the iconview."
+msgstr  "A fenti ikonnézet összes eleme."
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
+msgid   "Scripting"
+msgstr  "Parancsfájlok"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
+msgid   "Clear Log"
+msgstr  "A naplóbejegyzések törlése"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
+msgid   "Terminal font"
+msgstr  "Terminál betűkészlete"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid   "Renice Process"
+msgstr  "Prioritásmódosítás"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid   "Suspend"
+msgstr  "Felfüggesztés"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid   "Continue"
+msgstr  "Folytatás"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid   "Interrupt"
+msgstr  "Megszakítás"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid   "Hangup"
+msgstr  "Felfüggesztés"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid   "User 1 (USR1)"
+msgstr  "1. felhasználói (USR1)"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+msgid   "User 2 (USR2)"
+msgstr  "2. felhasználói (USR2)"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+msgid   "Terminate Task"
+msgstr  "Feladat befejezése"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+msgid   "Abort"
+msgstr  "Megszakítás"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:138
+msgid   "Kill"
+msgstr  "Kilövés"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
+msgid   "Segmentation fault"
+msgstr  "Szegmentálási hiba"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:216
+msgid   "PID"
+msgstr  "PID"
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:375
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:377
+msgid   "Go to"
+msgstr  "Ugrás"
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:409
+msgid   "Not a directory"
+msgstr  "Nem könyvtár"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:59
+msgid   "loading..."
+msgstr  "betöltés..."
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:151
+#: ../xffm/fm/dialog/notebook/page/page.hh:167
+msgid   "Confirm Replace"
+msgstr  "A csere megerősítése"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:153
+msgid   "Destination File"
+msgstr  "Célfájl"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:166
+#, fuzzy, c-format
+msgid   "The output file %s already exists, do you want to overwrite it?"
+msgstr  "Már létezik %s nevű fájl, felül szeretné írni?"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:11
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:214
+msgid   "Remove Button Contents"
+msgstr  "Gomb tartalmának eltávolítása"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:67
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:209
 #, fuzzy
-msgid "Install --dry-run"
-msgstr "Telepítési hiba"
+msgid   "Add custom content"
+msgstr  "Egyéni gombtartalom hozzáadása"
 
-#: ../../xffm/fm/view/pkg/popup.hh:47
-msgid "Install"
-msgstr "Telepítés"
-
-#: ../../xffm/fm/view/pkg/popup.hh:48
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:68
 #, fuzzy
-msgid "Uninstall --dry-run"
-msgstr "Eltávolítás"
+msgid   "Select file to load"
+msgstr  "Válassza ki a betöltendő képet"
 
-#: ../../xffm/fm/view/pkg/popup.hh:49
-msgid "Uninstall"
-msgstr "Eltávolítás"
-
-#: ../../xffm/fm/view/pkg/popup.hh:50
-msgid "Information"
-msgstr "Információk"
-
-#: ../../xffm/fm/view/pkg/popup.hh:140
-msgid "Version"
-msgstr "Verzió"
-
-#: ../../xffm/fm/view/pkg/popup.hh:149
-msgid "Go up"
-msgstr "Fel"
-
-#: ../../xffm/fm/view/pkg/popup.hh:152
-msgid "Search packages"
-msgstr "Csomagok keresése"
-
-#: ../../xffm/fm/view/pkg/popup.hh:184 ../../xffm/fm/view/view.hh:93
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:125
 #, c-format
-msgid "Loading %s...%s"
-msgstr "Betöltés: %s...%s"
+msgid   "Cannot load file %s. Reason: %s"
+msgstr  "%s fájlt nem lehet betölteni. Ok: %s"
 
-#: ../../xffm/fm/view/pkg/popup.hh:184 ../../xffm/fm/view/view.hh:93
-msgid "Please Wait..."
-msgstr "Kis türelmet…"
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:154
+msgid   "You need to restart the application"
+msgstr  "Az alkalmazás újraindítása szükséges"
 
-#: ../../xffm/fm/view/treeview.hh:17
-msgid "Name"
-msgstr "Név"
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:244
+msgid   "Open a New Window"
+msgstr  "Új ablak megnyitása"
 
-#: ../../xffm/fm/view/treeview.hh:19
-msgid "Size"
-msgstr "Méret"
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:250
+msgid   "Differences"
+msgstr  "Különbségek"
 
-#: ../../xffm/fm/view/treeview.hh:20
-msgid "Date"
-msgstr "Dátum"
+#: ../xffm/fm/dialog/notebook/menupopover.hh:178
+msgid   "Open menu"
+msgstr  "Menü megnyitása"
 
-#: ../../xffm/fm/view/treeview.hh:22
-msgid "Mimetype"
-msgstr "MIME-típus"
+#: ../xffm/fm/dialog/notebook/menupopover.hh:230
+msgid   "View as list"
+msgstr  "Listanézet"
 
-#: ../../xffm/fm/view/base/signals.hh:838
-msgid "Trash is empty"
-msgstr "A kuka üres"
+#: ../xffm/fm/dialog/notebook/menupopover.hh:231
+msgid   "Show hidden files"
+msgstr  "Rejtett fájlok megjelenítése"
 
-#: ../../xffm/fm/view/base/signals.hh:840
-msgid "Directory does not exist."
-msgstr "A könyvtár nem létezik."
+#: ../xffm/fm/dialog/notebook/menupopover.hh:232
+msgid   "Show Backup Files"
+msgstr  "Másolatfájlok megjelenítése"
 
-#: ../../xffm/common/settings.hh:30
-msgid "New File:"
-msgstr "Új fájl:"
+#: ../xffm/fm/dialog/notebook/menupopover.hh:233
+msgid   "Sort data in descending order"
+msgstr  "Az adatok rendezése csökkenő sorrendben"
 
-#: ../../xffm/common/gio.hh:81
-msgid "Copying files"
-msgstr "Fájlok másolása"
+#: ../xffm/fm/dialog/notebook/menupopover.hh:235
+msgid   "Sort by date"
+msgstr  "Rendezés dátum szerint"
 
-#: ../../xffm/common/gio.hh:85
-msgid "linking"
-msgstr "összekapcsolás"
+#: ../xffm/fm/dialog/notebook/menupopover.hh:236
+msgid   "Sort by size"
+msgstr  "Rendezés méret szerint"
 
-#: ../../xffm/common/gio.hh:87
-msgid "rename"
-msgstr "rename"
+#: ../xffm/fm/dialog/notebook/menupopover.hh:270
+msgid   "Main menu"
+msgstr  "Főmenü"
 
-#: ../../xffm/common/gio.hh:426
-#, c-format
-msgid "(%d of %d)"
-msgstr "(%d / %d)"
+#: ../xffm/fm/dialog/notebook/notebook.hh:56
+msgid   "Long press time"
+msgstr  "Hosszú lenyomás ideje"
 
-#: ../../xffm/common/dnd.hh:47
+#: ../xffm/fm/dialog/dialog.hh:122
+msgid   "Removed"
+msgstr  "Eltávolítva"
+
+#: ../xffm/fm/dialog/dialog.hh:143
+msgid   "Detected device(s):"
+msgstr  "Felismert eszköz(ök):"
+
+#: ../xffm/response/commandresponse.hh:19
+msgid   "Running"
+msgstr  "Fut"
+
+#: ../xffm/response/commandresponse.hh:24
+msgid   "Waiting for operation to finish..."
+msgstr  "Várakozás a művelet befejezésére…"
+
+#: ../xffm/response/passwdresponse.hh:179
 #, fuzzy
-msgid "Create Link"
-msgstr "Létrehozás ebben:"
+msgid   "User Input"
+msgstr  "Egérbemenet"
 
-#: ../../xffm/common/util.hh:1404
-#, c-format
-msgid ""
-"Scriptfile \"%s\" is not executable. Please set the executable-attribute on "
-"that file."
-msgstr ""
-"A(z) \"%s\" szkriptfájl nem hajtható végre. Kérem állítása be a "
-"végrehajtható-attribútumot azon a fájlon."
+#: ../xffm/response/passwdresponse.hh:195
+msgid   "Response Requested"
+msgstr  "Választ vár"
 
-#: ../../xffm/common/util.hh:1406 ../../xffm/common/util.hh:1441
-#, c-format
-msgid "Open with %s"
-msgstr "Megnyitás ezzel: %s"
+#: ../xffm/response/passwdresponse.hh:242 ../xffm/response/entryresponse.hh:439
+msgid   "Ok"
+msgstr  "OK"
 
-#: ../../xffm/common/util.hh:1406
-msgid "Text Editor"
-msgstr "Szövegszerkesztő"
+#: ../xffm/response/customresponse.hh:55
+msgid   "Execute command"
+msgstr  "Parancs végrehajtása"
 
-#: ../../xffm/common/util.hh:1443 ../../xffm/common/gtk.hh:69
-msgid "Execute Shell Command"
-msgstr "Parancs végrehajtása (parancsértelmezőben)"
+#: ../xffm/response/customresponse.hh:103
+msgid   "Source File"
+msgstr  "Forrásfájl"
 
-#: ../../xffm/common/util.hh:1447
-msgid ""
-"Console: quickly run single commands -- write a command here and press enter."
-msgstr ""
-"Konzol: gyorsan futtassa az egyes parancsokat -- írjon ide egy parancsot és "
-"nyomjon entert."
+#: ../xffm/response/timeoutresponse.hh:57
+msgid   "Dismiss"
+msgstr  "Rendben"
 
-#: ../../xffm/common/gtk.hh:352 ../../xffm/common/gtk.hh:360
-msgid "Help"
-msgstr "Súgó"
+#: ../xffm/response/commandprogressresponse.hh:31
+msgid   "Items:"
+msgstr  "Elemek:"
 
-#: ../../xffm/common/run.hh:338
-msgid "error"
-msgstr "hiba"
+#: ../xffm/response/chooserresponse.hh:23
+msgid   "Open"
+msgstr  "Megnyitás"
 
-#: ../../xffm/common/run.hh:342
-msgid "warning"
-msgstr "figyelmeztetés"
+#: ../xffm/response/chooserresponse.hh:56
+msgid   "Choose directory"
+msgstr  "Válasszon könyvtárat"
 
-#: ../../xffm/common/preview.hh:581
-msgid "Empty file"
-msgstr "Üres fájl"
+#: ../xffm/response/chooserresponse.hh:60
+msgid   "Choose file"
+msgstr  "Válasszon fájlt"
 
-#: ../../xffm/common/preview.hh:636
-#, c-format
-msgid "Cannot read from %s"
-msgstr "Nem sikerült olvasni: %s"
+#: ../xffm/completion/bash.hh:133
+msgid   "Completion mode:"
+msgstr  "Címkiegészítési mód:"
+
+#: ../xffm/completion/bash.hh:134
+msgid   "command"
+msgstr  "parancs"
+
+#: ../xffm/completion/bash.hh:135
+msgid   "file"
+msgstr  "fájl"
+
+#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
+msgid   "Options >>"
+msgstr  "Beállítások >>"
+
+#: ../xffm/completion/base.hh:28
+msgid   "Command"
+msgstr  "Parancs"
+
+#: ../xffm/completion/base.hh:31
+msgid   "File"
+msgstr  "Fájl"
+
+#: ../xffm/completion/base.hh:34
+msgid   "Command history"
+msgstr  "Parancselőzmények"
+
+#: ../xffm/completion/base.hh:40
+msgid   "Variable"
+msgstr  "Változó"
+
+#: ../xffm/completion/base.hh:43
+msgid   "Host"
+msgstr  "Gazda"
+
+#: ../xffm/completion/base.hh:55
+msgid   "Found no match"
+msgstr  "Nincs találat"
+
+#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
+msgid   "Matches"
+msgstr  "Találatok"
+
+#: ../xffm/completion/base.hh:142
+msgid   "Too many files open"
+msgstr  "Túl sok nyitott fájl"
 

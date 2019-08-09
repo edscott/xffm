@@ -13,21 +13,17 @@ Enjoy!
 
 
 For new translation construction:
-1. Put full po files in build/po
-2. In build/po, do make --makefile=Makefile.autotools check 
-    (this verifies POTFILE.in from xffm/po is correct,
-     if not correct, fix it.)
-3. In build/po, do make --makefile=Makefile.autotools distclean
-     (clean start)
-4. In build/po, do make --makefile=Makefile.autotools update-po
-     (updates the po files with new translations)
-5. In build/po, do make --makefile=Makefile.autotools 
-     (creates new gmo files)
-6. In build/po, do perl clean.pl [all po files] and move .new -> .po
-     (removes comments and unnecessary stuff from po files)
-     (shortcut: perl cleanall.pl)
-     (rm *.bak)
-7. copy po and gmo files to xffm/po
-     (this saves to git all previous work)
+1. Create new po/POTFILES.in file
+   For this, routine &generatePotfiles in po/scripts/update-po.pl
+2. Create a new po template (po/xffm+.pot) 
+   For this, routine &generatePot in po/scripts/update-po.pl
+3. Create updated po files from external po files
+   For this, routine &fullMerge in po/scripts/update-po.pl
+   NOTE: set $fullPoDir to path to external po files 
+   (not in po/)
+3b.Alternative is to update existing po files in po/ directory.
+   For this, routines &mergePoFiles in po/scripts/update-po.pl
+   New translations in template will be empty in resulting po 
+   files.
 
 

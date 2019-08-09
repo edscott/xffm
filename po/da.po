@@ -1,1509 +1,1308 @@
-# Translations for Rodent package.
-# Copyright (C) 2004-2012 FSF.
-# This file is distributed under the same license as the Rodent package.
-#   --- vie may  3 10:40:44 CDT 2013 ---
+# Xffm+ translation file: vie ago  9 14:40:54 CDT 2019
+# Merged fron existing open source files
+# http://xffm.org
 #
-# David Nielsen <dnielsen@breakmygentoo.net>, 2002-2007.
-# Bjørn Steensrud <bjornst@skogkatt.homelinux.org>, 2002-2013.
-# Asbjørn Kabel <a.kabel@Mail1.stofanet.dk>, 2004.
-# Kim Iskov <kimiskov@gmail.com>, 2010.
-# Erik Kjær Pedersen, erik@binghamton.edu 2001. <>.
-# Joe Hansen (joedalton2@yahoo.dk), 2009, 2012. <>.
-# Thomas Tanghus <tanghus@earthling.net>, 1998.
-# Joe Hansen (joedalton2@yahoo.dk), 2011. <>.
-# Anders Ellenshøj Andersen <andersa@ellenshoej.dk>, 2006.
-# Lars Sarauw Hansen <lars_sarauw_hansen@hotmail.com>, 2003.
-# Claus Christensen <claus_chr@webspeed.dk>, 2012-2013.
-# Anders Wegge Jakobsen <wegge@wegge.dk>, 1998.
-# Anders Lund <anders@alweb.dk>, 2008-2009.
-# Copyright (C) 2008-09 daniel g. siegel <dgsiegel@gmail.com>.
-# Alex Thomsen Leth <alexl@stofanet.dk>, 2004.
-# Kasper Nielsen <kasper0406@gmail.com>, 2009.
-# Joe Hansen (joedalton2@yahoo.dk), 2009, 2011. <>.
-# Joe Hansen (joedalton2@yahoo.dk), 2009. <>.
-# Joe Hansen (joedalton2@yahoo.dk), 2009, 2010. <>.
-# Daniel K. Sørensen <daniel@dallerweb.dk>, 2005.
-# Keld Simonsen, <keld@dkuug.dk>, 2000.
-# Olav Dahlum <odahlum@gmail.com>, 2009-2010.
-# Christian Rose <menthos@menthos.com>, 2000-2006.
-# Adam Ejby Eliasen <adamejbyeliasen@gmail.com>, 2010.
-# Copyright (C) 2011 Richard Hult <richard@imendo.com>.
-# Thorbjoern Ravn Andersen <ravn@mip.sdu.dk>, 1999.
-# Morten Anton Bach Sjøgren <m_abs@mabs.dk>, 2010.
-# Claus Sørensen <cs@chbs.dk>, 2004.
-# Michael Rasmussen <mir@datanom.net>, 2003.
-# Mads Bondo Dydensborg <mads@dydensborg.dk>, 2008-2009.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2002-2012.
-# Lasse Bang Mikkelsen <lbm@lbm.dk>, 2005-2007.
-# Byrial Jensen <byrial@image.dk>, 2001.
-# Aputsiaq Niels Janussen <aj@isit.gl>, 2011.
-# Birger Langkjer <birger.langkjer@image.dk>, 1999-2000.
-# Daniel SÃ¸rensen <daniel@dumazz.dk>, 2005.
-# Kenneth Christiansen <kenneth@ripen.dk>, 1998-2004.
-# Anton Rasmussen <anton_rasmussen@yahoo.dk>, 2009-2010.
-# Kristian Kjærgaard <kkjaergaard@gmail.com>, 2008.
-# Frederik Dannemare <frederik@dannemare.dk>, 2002-2003.
-# Joe Hansen (joedalton2@yahoo.dk), 2011, 2012. <>.
-# joehansen <joedalton2@yahoo.dk>, 2010-2012.
-# Morten Welinder <terra@gnome.dk>, 2000-2007.
-# Rune Laursen <runerl@skjoldhoej.dk>, 2004.
-# Joe Hansen (joedalton2@yahoo.dk), 2013. <>.
-# Erik Kjær Pedersen i <erik@binghamton.edu>, 2000-2004.
-# Anton Michael Havelund Rasmussen <anton_rasmussen@yahoo.dk>, 2009.
-# Kenneth Nielsen <k.nielsen81@gmail.com>, 2006-2013.
-# ChrisBuchholz <christoffer.buchholz@gmail.com>, 2009.
-# Proofread by Christian Sonne <freakcers@geeksbynature.dk>, 2004.
-# Copyright (C) 2004-07  Rodney Dawes <dobey@users.sourceforge.net>.
-# Review 2003-03-26 Ole Laursen <olau@hardworking.dk>.
-# Byrial Ole Jensen <byrial@vip.cybercity.dk>, 2012.
-# Copyright (C) 2002 Richard Hult <richard@imendo.com>.
-# Morten Bo Johansen <mbj@spamcop.net>, 2007.
-# Copyright (C) 2012 Richard Hult <richard@imendo.com>.
-# Marie Lund <marielund@post.cybercity.dk>, 2004-2005.
-# Review by Ole Laursen <olau@hardworking.dk>, 2003.
-# Michael Hastrup Bendsen <michael.bendsen@tele2adsl.dk>, 2007.
-# Kristian Poul Herkild <kristian@herkild.dk>, 2006-2007.
-# Torben Helligsø <torben-dansk@thel.dk>, 2010.
-# Jonas Koch Bentzen <post@jonaskochbentzen.dk>.
-# Bjørn Henriksen <bjornkadri@bjornen.dk>, 2004.
-# Lars Christian Jensen <lars@jink.dk>, 2009.
-# Mogens Jaeger <mogensjaeger@gmail.com>, 2004-2007.
-# Anders Jenbo <anders@jenbo.dk>, 2011.
-# Joe Hansen (joedalton2@yahoo.dk), 2012. <>.
-# Jacob Ilsø Christensen <jacobilsoe@gmail.com>, 2009.
-# Anna Jonna Armannsdottir <annajonna@gmail.com>, 2001-2009.
-# Joe Hansen (joedalton2@yahoo.dk), 2011, 2012, 2013. <>.
-# Niels Rasmussen <nielsrasmus@gmail.com>, 2008.
-# Jan Normann Nielsen <normann@diku.dk>, 1999.
-# Per Kongstad <p_kongstad@op.pl>, 2009.
-# Bo Thorsen <gobo@imada.sdu.dk>, 1999.
-# Keld Simonsen <keld@keldix.com>, 2000-2012.
-# kim Iskov <kimiskov@gmail.dk>, 2010.
-# Joe Hansen (joedalton2@yahoo.dk), 2009, 2010, 2012. <>.
-# Nicklas M. Hansen <nmh@picnick.dk>, 2010.
-# Claus Agerskov <cs@chbs.dk>, 2003-2005.
-# Lars Clausen <lrclause@cs.uiuc.edu>, 1999.
-# Kjartan Maraas <kmaraas@gnome.org>, 1998-2013.
-# Peter N Andreasen <peter.n.andreasen@gmail.com>, 2007.
-# Copyright (C) 2004 Thomas Wood <thos@gnome.org>.
-# Søren Juul <zpon.dk@gmail.com>, 2008-2010.
-# Joakim Seeberg Ravnskjær <joakimsr@stofanet.dk>, 2003.
-# Keld Jørn Simonsen <keld@dkuug.dk>, 2000-2003.
-# Peter H.S. <peters@skydebanen.net>, 2006.
-# Kenneth Christiansen - kenneth@ripen.dk <>.
-# Henrik Hansen <hh@mailserver.dk>, 1999.
-# Joe Hansen (joedalton2@yahoo.dk), 2010, 2013. <>.
-# Anders Bruun Olsen <anders@bruun-olsen.net>, 2001-2004.
-# Anders K. Madsen <madsen@lillesvin.net>, 2007.
-# Martin <martin.schlander@gmail.com>, 2009.
-# Kris Hansen <mumien@yahoo.dk>, 2004-2008.
-# Jan Madsen <jan.madsen.pt@gmail.com>, 2008-2010.
-# Kris Thomsen <lakristho@gmail.com>, 2008-2013.
-# Kim Schulz <kim@gnome.dk>, 1999-2003.
-# Steffen Hansen <stefh@nostromo>, 1998.
-# Joe Hansen (joedalton2@yahoo.dk), 2010, 2011, 2012. <>.
-# Ole Laursen <olau@hardworking.dk>, 2001-2007.
-# Joe Hansen (joedalton2@yahoo.dk), 2010, 2011. <>.
-# Kenneth Geisshirt <kenneth@geisshirt.dk>, 2003.
-# Ib Larsen <i.la@tele2adsl.dk>, 2006.
-# Mads Peter Rommedahl <Lhademmor@gmail.com>, 2008.
-# Peter Bach <bach.peter@gmail.com>, 2006-2009.
-# Ask Hjorth Larsen <asklarsen@gmail.com>, 2007-2013.
-# Mads Bille Lundby <lundbymads@gmail.com>, 2009.
-# Göran Weinholt <weinholt@linux.nu>, 2001.
-# Nicky Thomassen <nicky441@gmail.com>, 2011.
-# Daniel Sørensen <daniel@dumazz.dk>, 2005.
-# Erik Kjær Pedersen, erik@binghamton.edu 2000. <>.
-# Margith Lauritsen <mail@margith.dk>, 2003.
-# Korrektulæsning Torben Grøn Helligsø <torben-dansk@thel.dk>, 2009-2010.
-# Lars K. Schunk <lars@schunk.dk>, 2001-2002.
-# Joe Hansen (joedalton2@yahoo.dk), 2010. <>.
-# Joe Hansen <joedalton2@yahoo.dk>, 2007-2013.
-# Copyright (C) 2005 Dan Winship <danw@ximian.com>.
-# Claus Hindsgaul <claus_h@image.dk>, 2000-2002.
-# Morten Brix Pedersen <morten@wtf.dk>, 2004-2005.
-# Erik K. Pedersen <erik@binghamton.edu>, 2005-2008.
-# Gitte Wange <gitte@babytux.dk>, 2001-2002.
-# Mads Lundby <lundbymads@gmail.com>, 2009.
-# Søren Boll Overgaard <boll@debian.org>, 2003.
-# Birger Langkjer birger.langkjer@image.dk 1999. <>.
-# Joe Hansen (joedalton2@yahoo.dk), 2010, 2012. <>.
-# Joe Hansen (joedalton2@yahoo.dk), 2009, 2010, 2011, 2012, 2013. <>.
-# Joe Hansen (joedalton2@yahoo.dk), 2009, 2010, 2011, 2012. <>.
-# Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
-# Charlie Tyrrestrup <chalze06@gmail.com>, 2009.
-# Thomas Niederreiter <tn@xcdroast.org>, 2002-2003.
-# flemming christensen <fc@stromata.dk>, 2011-2013.
-# Rasmus Ory Nielsen <ron@ron.dk>, 2004.
-# Keld simonsen <keld@dkuug.dk>, 2002.
-# Rune Rønde Møller <runermoeller@gmail.com>, 2008.
-# M.P. Rommedahl <lhademmor@gmail.com>, 2007-2008.
-# Rune Rønde Laursen <runerl@skjoldhoej.dk>, 2004-2006.
-# Joe Hansen (joedalton2@yahoo.dk), 2009, 2010, 2011. <>.
-# H. Merethe Eriksen <djinni@mail1.stofanet.dk>, 2001.
-# David Zeuthen <davidz@redhat.com>, 2005-2007.
-# Martin Willemoes Hansen <mwh@sysrq.dk>, 2004-2006.
-# Martin Schlander <suse@linuxin.dk>, 2006-2013.
-# Gunner Poulsen <gp@lyngbjerggaardskolen.dk>, 2001-2004.
-# Erik Kjær Pedersen <erik@binghamton.edu>, 1998-2007.
-# Richard Hult <rhult@codefactory.se>, 1999-2007.
-# Danish translation of @PACKAGE <>.
-# fuzzy
-msgid ""
-msgstr ""
-"Project-Id-Version: Rodent Delta\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-04 16:54-0500\n"
-"PO-Revision-Date: 2011-12-15 00:57+0100\n"
-"Last-Translator: Ask Hjorth Larsen <asklarsen@gmail.com>\n"
-"Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
-"Language: da\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
-"X-Generator: KBabel 1.11.4\n"
+#
+msgid   ""
+msgstr  "Project-Id-Version: xffm+\n"
+        "Report-Msgid-Bugs-To: \n"
+        "POT-Creation-Date: 2019-08-09 12:32-0500\n"
+        "PO-Revision-Date: 2011-12-15 00:57+0100\n"
+        "Last-Translator: Ask Hjorth Larsen <asklarsen@gmail.com>\n"
+        "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
+        "Language: da\n"
+        "MIME-Version: 1.0\n"
+        "Content-Type: text/plain; charset=UTF-8\n"
+        "Content-Transfer-Encoding: 8bit\n"
+        "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+        "X-Generator: KBabel 1.11.4\n"
 
-#: ../../xffm/mime/mimemagic.hh:68 ../../xffm/mime/mimemagic.hh:110
-#: ../../xffm/common/mimemagic.hh:68 ../../xffm/common/mimemagic.hh:110
-msgid "No Read Permission"
-msgstr "Ingen læsetilladelse"
+#: ../xffm/mime/mimemagic.hh:68 ../xffm/mime/mimemagic.hh:112
+msgid   "No Read Permission"
+msgstr  "Ingen læsetilladelse"
 
-#: ../../xffm/completion/base.hh:28
-msgid "Command"
-msgstr "Kommando"
+#: ../xffm/find/dialog.hh:91 ../xffm/find/dialog.hh:143
+#: ../xffm/find/dialog.hh:604
+msgid   "Find"
+msgstr  "Find"
 
-#: ../../xffm/completion/base.hh:31
-msgid "File"
-msgstr "Fil"
+#: ../xffm/find/dialog.hh:167 ../xffm/find/fgr.hh:146
+msgid   "Recursive"
+msgstr  "Rekursiv"
 
-#: ../../xffm/completion/base.hh:34
-msgid "Command history"
-msgstr "Kommandohistorik"
+#: ../xffm/find/dialog.hh:170 ../xffm/find/fgr.hh:142
+msgid   "Find hidden files and directories"
+msgstr  "Find skjulte filer og mapper"
 
-#. option -u uid "uid" "uid_combo"
-#: ../../xffm/completion/base.hh:37 ../../xffm/find/dialog.hh:192
-msgid "User"
-msgstr "Bruger"
-
-#: ../../xffm/completion/base.hh:40
-msgid "Variable"
-msgstr "Variabel"
-
-#: ../../xffm/completion/base.hh:43
-msgid "Host"
-msgstr "Vært"
-
-#: ../../xffm/completion/base.hh:55
-msgid "Found no match"
-msgstr "Ingen fund"
-
-#: ../../xffm/completion/base.hh:141 ../../xffm/completion/base.hh:142
-msgid "Matches"
-msgstr "Resultater"
-
-#: ../../xffm/completion/base.hh:142
-msgid "Too many files open"
-msgstr "For mange åbne filer"
-
-#: ../../xffm/completion/base.hh:339 ../../xffm/find/fgr.hh:124
-msgid "Options:"
-msgstr "Indstillinger:"
-
-#: ../../xffm/completion/bash.hh:133
-msgid "Completion mode:"
-msgstr "Kompletteringstilstand:"
-
-#: ../../xffm/completion/bash.hh:134
-msgid "command"
-msgstr "kommando"
-
-#: ../../xffm/completion/bash.hh:135
-msgid "file"
-msgstr "fil"
-
-#: ../../xffm/completion/bash.hh:145 ../../xffm/completion/bash.hh:149
-msgid "Options >>"
-msgstr "Indstillinger >>"
-
-#: ../../xffm/find/fgr.hh:124 ../../xffm/find/signals.hh:100
-#: ../../xffm/find/dialog.hh:301
-msgid "Path"
-msgstr "Sti"
-
-#: ../../xffm/find/fgr.hh:125
-msgid "Locate documents and folders on this computer by name or content"
-msgstr "Find dokumenter og mapper på denne computer ved navn eller indhold"
-
-#: ../../xffm/find/fgr.hh:126 ../../xffm/find/dialog.hh:334
-msgid "Filter:"
-msgstr "Filter:"
-
-#: ../../xffm/find/fgr.hh:126
-msgid "Search for files"
-msgstr "Søg efter filer"
-
-#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
-#: ../../xffm/find/fgr.hh:128
-msgid "Contents:"
-msgstr "Indhold:"
-
-#: ../../xffm/find/fgr.hh:128
-msgid "File's contents filtered as plain text."
-msgstr "Filens indhold filtreret som ren tekst."
-
-#: ../../xffm/find/fgr.hh:131
-msgid "Verbose output debugging mode."
-msgstr "Fejlretningstilstand med uddybende output."
-
-#: ../../xffm/find/fgr.hh:133
-msgid "Show version information"
-msgstr "Vis versionsinformation"
-
-#: ../../xffm/find/fgr.hh:135
-msgid "Filter Details"
-msgstr "Filterdetaljer"
-
-#. / option -a "xdev"
-#: ../../xffm/find/fgr.hh:138 ../../xffm/find/dialog.hh:173
+#: ../xffm/find/dialog.hh:173 ../xffm/find/fgr.hh:138
 #, fuzzy
-msgid "Stay on single filesystem"
-msgstr "Skan filsystem"
-
-#: ../../xffm/find/fgr.hh:140
-msgid "Print..."
-msgstr "Udskriv..."
-
-#: ../../xffm/find/fgr.hh:140
-msgid "The unique Process ID that identifies this process."
-msgstr "Det unikke proces-ID som identificerer denne proces."
-
-#. / option -D "recursiveH"
-#: ../../xffm/find/fgr.hh:142 ../../xffm/find/dialog.hh:170
-msgid "Find hidden files and directories"
-msgstr "Find skjulte filer og mapper"
-
-#: ../../xffm/find/fgr.hh:143
-msgid "Filter"
-msgstr "Filter"
-
-#: ../../xffm/find/fgr.hh:144
-msgid ""
-"To display files which pass the filter (stars and regexps will be processed)"
-msgstr ""
-
-#. / option -r "recursive"
-#: ../../xffm/find/fgr.hh:146 ../../xffm/find/dialog.hh:167
-msgid "Recursive"
-msgstr "Rekursiv"
-
-#: ../../xffm/find/fgr.hh:147 ../../xffm/find/fgr.hh:148
-#: ../../xffm/find/fgr.hh:149 ../../xffm/find/fgr.hh:150
-msgid "KByte"
-msgstr "KByte"
-
-#: ../../xffm/find/fgr.hh:148
-msgid "is greater than or equal to"
-msgstr "er større end eller lig med"
-
-#: ../../xffm/find/fgr.hh:150
-msgid "is less than or equal to"
-msgstr "er mindre end eller lig med"
-
-#: ../../xffm/find/fgr.hh:152
-msgid "Set UID"
-msgstr "Sæt UID"
-
-#: ../../xffm/find/fgr.hh:152
-msgid "Executable Text Files"
-msgstr "Eksekverbare tekstfiler"
-
-#: ../../xffm/find/fgr.hh:154
-msgid "The permissions of the file, in octal notation."
-msgstr "Rettighederne for den filen i oktal notation."
-
-#: ../../xffm/find/fgr.hh:155
-msgid "Type"
-msgstr "Type"
-
-#: ../../xffm/find/fgr.hh:157 ../../xffm/find/signals.hh:14
-msgid "Any"
-msgstr "Enhver"
-
-#: ../../xffm/find/fgr.hh:157
-msgid "Default type"
-msgstr "Standardtype"
-
-#: ../../xffm/find/fgr.hh:158 ../../xffm/common/preview.hh:478
-msgid "Regular file"
-msgstr "Regulær fil"
-
-#: ../../xffm/find/fgr.hh:159 ../../xffm/find/signals.hh:8
-#: ../../xffm/fm/view/local/popup.hh:1062 ../../xffm/common/preview.hh:469
-msgid "Directory"
-msgstr "Mappe"
-
-#: ../../xffm/find/fgr.hh:160 ../../xffm/find/signals.hh:9
-#: ../../xffm/common/preview.hh:475
-msgid "Symbolic Link"
-msgstr "Symbolsk link"
-
-#: ../../xffm/find/fgr.hh:161
-msgid "UNIX Socket"
-msgstr "UNIX-sokkel"
-
-#: ../../xffm/find/fgr.hh:162 ../../xffm/find/signals.hh:11
-#: ../../xffm/common/preview.hh:463
-msgid "Block device"
-msgstr "Blokenhed"
-
-#: ../../xffm/find/fgr.hh:163 ../../xffm/find/signals.hh:12
-#: ../../xffm/common/preview.hh:466
-msgid "Character device"
-msgstr "Tegnenhed"
-
-#: ../../xffm/find/fgr.hh:164 ../../xffm/find/signals.hh:13
-#: ../../xffm/common/preview.hh:472
-msgid "FIFO"
-msgstr "FIFO"
-
-#. radio_p freed on destroy event for findDialog.
-#. option -k minutes "last_minutes", "last_minutes_spin"
-#: ../../xffm/find/fgr.hh:166 ../../xffm/find/fgr.hh:168
-#: ../../xffm/find/dialog.hh:214
-msgid "Minutes"
-msgstr "Minutter"
-
-#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
-#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
-#: ../../xffm/find/dialog.hh:263 ../../xffm/find/dialog.hh:363
-#: ../../xffm/fm/view/treeview.hh:18
-msgid "Details"
-msgstr "Detaljer"
-
-#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
-#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
-#: ../../xffm/find/fgr.hh:179 ../../xffm/find/fgr.hh:180
-#: ../../xffm/find/fgr.hh:183 ../../xffm/find/fgr.hh:184
-#: ../../xffm/find/fgr.hh:187 ../../xffm/find/fgr.hh:188
-msgid "TIME"
-msgstr "TID"
-
-#: ../../xffm/find/fgr.hh:168 ../../xffm/find/fgr.hh:171
-#: ../../xffm/find/fgr.hh:174 ../../xffm/find/fgr.hh:177
-msgid "Previous"
-msgstr "Forrige"
-
-#. option -h hours "last_hours", "last_hours_spin"
-#: ../../xffm/find/fgr.hh:169 ../../xffm/find/fgr.hh:171
-#: ../../xffm/find/dialog.hh:219
-msgid "Hours"
-msgstr "Timer"
-
-#. option -d days "last_days", "last_days_spin"
-#: ../../xffm/find/fgr.hh:172 ../../xffm/find/fgr.hh:174
-#: ../../xffm/find/dialog.hh:224
-msgid "Days"
-msgstr "Dage"
-
-#: ../../xffm/find/fgr.hh:175
-msgid "Month"
-msgstr "Måned"
-
-#: ../../xffm/find/fgr.hh:177
-msgid "Month(s)"
-msgstr "Måneder"
-
-#: ../../xffm/find/fgr.hh:180
-msgid "Modification Time :"
-msgstr "Modificeret den :"
-
-#: ../../xffm/find/fgr.hh:184
-msgid "Access Time :"
-msgstr "Læst den :"
-
-#: ../../xffm/find/fgr.hh:188
-msgid "Creation Time :"
-msgstr "Oprettet den :"
-
-#: ../../xffm/find/fgr.hh:191 ../../xffm/find/fgr.hh:192
-msgid "uid"
-msgstr "uid"
-
-#: ../../xffm/find/fgr.hh:192
-msgid "User:"
-msgstr "Bruger:"
-
-#: ../../xffm/find/fgr.hh:194 ../../xffm/find/fgr.hh:195
-msgid "gid"
-msgstr "gid"
-
-#: ../../xffm/find/fgr.hh:195
-msgid "Group:"
-msgstr "Gruppe:"
-
-#: ../../xffm/find/fgr.hh:198
-msgid ""
-"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
-"character that  normally  follows  a file  name"
-msgstr ""
-
-#: ../../xffm/find/fgr.hh:200
-msgid "Content View"
-msgstr "Indholdsvisning"
-
-#: ../../xffm/find/fgr.hh:201 ../../xffm/find/fgr.hh:202
-#: ../../xffm/find/fgr.hh:203 ../../xffm/find/fgr.hh:204
-msgid "STRING"
-msgstr "STRENG"
-
-#: ../../xffm/find/fgr.hh:202 ../../xffm/find/fgr.hh:204
-#: ../../xffm/fm/view/local/popup.hh:759
-msgid "Regular expression"
-msgstr "Regulært udtryk"
-
-#: ../../xffm/find/fgr.hh:204
-msgid "Extended"
-msgstr "Udvidet"
-
-#: ../../xffm/find/fgr.hh:206
-msgid "Ignore case"
-msgstr "Ignorér store/små bogstaver"
-
-#: ../../xffm/find/fgr.hh:208
-msgid "Text Files"
-msgstr "Tekstfiler"
-
-#: ../../xffm/find/fgr.hh:210 ../../xffm/find/dialog.hh:545
-msgid "No match"
-msgstr "Ingen træffer"
-
-#: ../../xffm/find/fgr.hh:212 ../../xffm/find/dialog.hh:463
-msgid "Line Count"
-msgstr "Linjetal"
-
-#: ../../xffm/find/fgr.hh:214
-msgid "Words"
-msgstr "Ord"
-
-#: ../../xffm/find/fgr.hh:216
-msgid "Lines"
-msgstr "Linjer"
-
-#: ../../xffm/find/fgr.hh:368
-#, c-format
-msgid "Usage : %s [OPTIONS]\n"
-msgstr "Brug : %s [FLAG]\n"
-
-#: ../../xffm/find/signals.hh:7
-msgid "Regular"
-msgstr "Regulær"
-
-#: ../../xffm/find/signals.hh:10 ../../xffm/common/preview.hh:481
-msgid "Socket"
-msgstr "Sokkel"
-
-#. if (g_slist_length(list) == 0) return NULL;
-#. Create liststore for DnD
-#. / option "upper_limit_spin" (only in gtk findDialog)
-#: ../../xffm/find/signals.hh:66 ../../xffm/find/signals.hh:454
-#: ../../xffm/find/dialog.hh:176
-msgid "Results"
-msgstr "Resultater"
-
-#. button no
-#: ../../xffm/find/signals.hh:368 ../../xffm/find/dialog.hh:577
-#: ../../xffm/response/chooserresponse.hh:21
-#: ../../xffm/response/entryresponse.hh:420
-#: ../../xffm/fm/view/local/properties.hh:314
-#: ../../xffm/fm/view/local/rm.hh:157 ../../xffm/common/gtk.hh:409
-msgid "Cancel"
-msgstr "Afbryd"
-
-#: ../../xffm/find/signals.hh:396 ../../xffm/find/signals.hh:830
-msgid "No editor for current action."
-msgstr "Ingen editor til aktuel handling."
-
-#: ../../xffm/find/signals.hh:454
-msgid "Upper limit:"
-msgstr "Øvre grænse:"
-
-#: ../../xffm/find/signals.hh:456
-msgid "Counting files..."
-msgstr "Tæller filer..."
-
-#: ../../xffm/find/signals.hh:471
-#, c-format
-msgid "Found %d match"
-msgid_plural "Found %d matches"
-msgstr[0] "Fandt %d træffer"
-msgstr[1] "Fandt %d træffere"
-
-#: ../../xffm/find/signals.hh:473
-#, c-format
-msgid "%s Finished : %s"
-msgstr "%s fuldført : %s"
-
-#: ../../xffm/find/signals.hh:596 ../../xffm/find/signals.hh:598
-msgid "Searching..."
-msgstr "Søger..."
-
-#. g_object_set_data(G_OBJECT(findDialog), "window", findDialog);
-#: ../../xffm/find/dialog.hh:91 ../../xffm/find/dialog.hh:143
-#: ../../xffm/find/dialog.hh:604
-msgid "Find"
-msgstr "Find"
-
-#: ../../xffm/find/dialog.hh:176
-msgid "Upper limit"
-msgstr "Øvre grænse"
-
-#. option -s +KByte "size_greater", "size_greater_spin"
-#: ../../xffm/find/dialog.hh:181
-msgid "At Least"
-msgstr "Mindst"
-
-#: ../../xffm/find/dialog.hh:181 ../../xffm/find/dialog.hh:186
-msgid "kBytes"
-msgstr "kByte"
-
-#. option -s -KByte "size_smaller", "size_smaller_spin"
-#: ../../xffm/find/dialog.hh:186
-msgid "At Most"
-msgstr "Højest"
-
-#: ../../xffm/find/dialog.hh:197
-msgid "Group"
-msgstr "Gruppe"
-
-#. option -o octal "octal_p" "permissions_entry"
-#: ../../xffm/find/dialog.hh:201
-msgid "Octal Permissions"
-msgstr "Oktale rettigheder"
-
-#. option -p suid | exe
-#: ../../xffm/find/dialog.hh:206
-msgid "SUID"
-msgstr "SUID"
-
-#: ../../xffm/find/dialog.hh:206 ../../xffm/fm/view/local/popup.hh:1102
-msgid "Executable"
-msgstr "Kørbar"
-
-#. option -m months "last_months", "last_months_spin"
-#: ../../xffm/find/dialog.hh:230
-msgid "Months"
-msgstr "Måneder"
-
-#: ../../xffm/find/dialog.hh:241
+msgid   "Stay on single filesystem"
+msgstr  "Skan filsystem"
+
+#: ../xffm/find/dialog.hh:176 ../xffm/find/signals.hh:66
+#: ../xffm/find/signals.hh:454
+msgid   "Results"
+msgstr  "Resultater"
+
+#: ../xffm/find/dialog.hh:176
+msgid   "Upper limit"
+msgstr  "Øvre grænse"
+
+#: ../xffm/find/dialog.hh:181
+msgid   "At Least"
+msgstr  "Mindst"
+
+#: ../xffm/find/dialog.hh:181 ../xffm/find/dialog.hh:186
+msgid   "kBytes"
+msgstr  "kByte"
+
+#: ../xffm/find/dialog.hh:186
+msgid   "At Most"
+msgstr  "Højest"
+
+#: ../xffm/find/dialog.hh:192 ../xffm/completion/base.hh:37
+msgid   "User"
+msgstr  "Bruger"
+
+#: ../xffm/find/dialog.hh:197
+msgid   "Group"
+msgstr  "Gruppe"
+
+#: ../xffm/find/dialog.hh:201
+msgid   "Octal Permissions"
+msgstr  "Oktale rettigheder"
+
+#: ../xffm/find/dialog.hh:206
+msgid   "SUID"
+msgstr  "SUID"
+
+#: ../xffm/find/dialog.hh:206 ../xffm/fm/view/local/popup.hh:1102
+msgid   "Executable"
+msgstr  "Kørbar"
+
+#: ../xffm/find/dialog.hh:214 ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168
+msgid   "Minutes"
+msgstr  "Minutter"
+
+#: ../xffm/find/dialog.hh:219 ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171
+msgid   "Hours"
+msgstr  "Timer"
+
+#: ../xffm/find/dialog.hh:224 ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174
+msgid   "Days"
+msgstr  "Dage"
+
+#: ../xffm/find/dialog.hh:230
+msgid   "Months"
+msgstr  "Måneder"
+
+#: ../xffm/find/dialog.hh:241
 #, fuzzy
-msgid "File type : "
-msgstr "Filtype:"
+msgid   "File type : "
+msgstr  "Filtype:"
 
-#. gtk_widget_show (GTK_WIDGET(right_options_vbox));
-#. gtk_widget_show (GTK_WIDGET(center_options_vbox));
-#. gtk_widget_show (GTK_WIDGET(left_options_vbox));
-#: ../../xffm/find/dialog.hh:255 ../../xffm/find/dialog.hh:595
-#: ../../xffm/fm/dialog/notebook/page/page.hh:70 ../../xffm/common/gtk.hh:79
-msgid "Close"
-msgstr "Luk"
+#: ../xffm/find/dialog.hh:255 ../xffm/find/dialog.hh:595
+#: ../xffm/common/gtk.hh:79 ../xffm/fm/dialog/notebook/page/page.hh:71
+msgid   "Close"
+msgstr  "Luk"
 
-#. gtk_box_pack_start (vbox7a, GTK_WIDGET(advancedBox), TRUE, FALSE, 5);
-#. gtk_widget_show(GTK_WIDGET(advancedBox));
-#. //////////////  grep options.... /////////////////////////
-#: ../../xffm/find/dialog.hh:377
-msgid "Contains"
-msgstr "Indeholder"
+#: ../xffm/find/dialog.hh:263 ../xffm/find/dialog.hh:363
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/fm/view/treeview.hh:18
+msgid   "Details"
+msgstr  "Detaljer"
 
-#: ../../xffm/find/dialog.hh:397
-msgid "Contains the text"
-msgstr "Indeholder teksten"
+#: ../xffm/find/dialog.hh:301 ../xffm/find/fgr.hh:124
+#: ../xffm/find/signals.hh:100
+msgid   "Path"
+msgstr  "Sti"
 
-#: ../../xffm/find/dialog.hh:430
-msgid "Case Sensitive"
-msgstr "Versalfølsom"
+#: ../xffm/find/dialog.hh:334 ../xffm/find/fgr.hh:126
+msgid   "Filter:"
+msgstr  "Filter:"
 
-#: ../../xffm/find/dialog.hh:442
+#: ../xffm/find/dialog.hh:377
+msgid   "Contains"
+msgstr  "Indeholder"
+
+#: ../xffm/find/dialog.hh:397
+msgid   "Contains the text"
+msgstr  "Indeholder teksten"
+
+#: ../xffm/find/dialog.hh:430
+msgid   "Case Sensitive"
+msgstr  "Versalfølsom"
+
+#: ../xffm/find/dialog.hh:442
 #, fuzzy
-msgid "Extended regexp"
-msgstr "Udvidet strip"
+msgid   "Extended regexp"
+msgstr  "Udvidet strip"
 
-#: ../../xffm/find/dialog.hh:453
-msgid "Include binary files"
-msgstr "Medtag binære filer"
+#: ../xffm/find/dialog.hh:453
+msgid   "Include binary files"
+msgstr  "Medtag binære filer"
 
-#: ../../xffm/find/dialog.hh:489
-msgid "Match"
-msgstr "Match"
+#: ../xffm/find/dialog.hh:463 ../xffm/find/fgr.hh:212
+msgid   "Line Count"
+msgstr  "Linjetal"
 
-#: ../../xffm/find/dialog.hh:501
-msgid "Anywhere"
-msgstr "Hvor som helst"
+#: ../xffm/find/dialog.hh:489
+msgid   "Match"
+msgstr  "Match"
 
-#: ../../xffm/find/dialog.hh:516
-msgid "Whole words only"
-msgstr "Kun hele ord"
+#: ../xffm/find/dialog.hh:501
+msgid   "Anywhere"
+msgstr  "Hvor som helst"
 
-#: ../../xffm/find/dialog.hh:531
-msgid "lines"
-msgstr "linjer"
+#: ../xffm/find/dialog.hh:516
+msgid   "Whole words only"
+msgstr  "Kun hele ord"
 
-#: ../../xffm/find/dialog.hh:587
-msgid "Clear"
-msgstr "Ryd"
+#: ../xffm/find/dialog.hh:531
+msgid   "lines"
+msgstr  "linjer"
 
-#: ../../xffm/find/dialog.hh:629
-msgid "Edit"
-msgstr "Redigér"
+#: ../xffm/find/dialog.hh:545 ../xffm/find/fgr.hh:210
+msgid   "No match"
+msgstr  "Ingen træffer"
 
-#: ../../xffm/find/dialog.hh:743 ../../xffm/find/dialog.hh:758
-#: ../../xffm/common/util.hh:1354 ../../xffm/common/util.hh:1356
-#: ../../xffm/common/util.hh:1362 ../../xffm/common/util.hh:1364
-#: ../../xffm/common/preview.hh:460
-msgid "unknown"
-msgstr "ukendt"
+#: ../xffm/find/dialog.hh:577 ../xffm/find/signals.hh:368
+#: ../xffm/common/gtk.hh:409 ../xffm/fm/view/local/rm.hh:157
+#: ../xffm/fm/view/local/properties.hh:314
+#: ../xffm/response/entryresponse.hh:435 ../xffm/response/chooserresponse.hh:21
+msgid   "Cancel"
+msgstr  "Afbryd"
 
-#: ../../xffm/find/dialog.hh:772
-msgid "Modified"
-msgstr "Ændret"
+#: ../xffm/find/dialog.hh:587
+msgid   "Clear"
+msgstr  "Ryd"
 
-#: ../../xffm/find/dialog.hh:776
-msgid "Created"
-msgstr "Oprettet"
+#: ../xffm/find/dialog.hh:629
+msgid   "Edit"
+msgstr  "Redigér"
 
-#: ../../xffm/find/dialog.hh:780
-msgid "Accessed"
-msgstr "Tilgået"
+#: ../xffm/find/dialog.hh:743 ../xffm/find/dialog.hh:758
+#: ../xffm/common/preview.hh:460 ../xffm/common/util.hh:1354
+#: ../xffm/common/util.hh:1356 ../xffm/common/util.hh:1362
+#: ../xffm/common/util.hh:1364
+msgid   "unknown"
+msgstr  "ukendt"
 
-#: ../../xffm/find/dialog.hh:1098
-msgid ""
-"Basic rules:\n"
-"\n"
-"*  Will match any character zero or more times.\n"
-"?  Will match any character exactly one time\n"
-"[] Match any character within the [] \n"
-"^  Match at beginning of string\n"
-"$  Match at end of string \n"
-msgstr ""
+#: ../xffm/find/dialog.hh:772
+msgid   "Modified"
+msgstr  "Ændret"
 
-#: ../../xffm/find/dialog.hh:1107
-msgid ""
-"Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ ( ) : \n"
-"In  basic regular expressions the metacharacters ?, +, {, |, (, and ) \n"
-"  lose their special meaning.\n"
-"\n"
-"The  period . matches  any  single  character.\n"
-"The caret ^ matches at the start of line.\n"
-"The dollar $ matches at the end of line.\n"
-"\n"
-"Characters within [ ] matches any single character in the list.\n"
-"Characters within [^ ] matches any single character *not* in the list.\n"
-"Characters inside [ - ] matches a range of characters (ie [0-9] or [a-z]).\n"
-"\n"
-"A regular expression may be followed by one of several repetition "
-"operators:\n"
-"?      The preceding item is optional and matched\n"
-"       at most once.\n"
-"*      The preceding item will be matched zero\n"
-"       or more times.\n"
-"+      The preceding item will be matched one or\n"
-"       more times.\n"
-"{n}    The preceding item is matched exactly n times.\n"
-"{n,}   The preceding item is matched n or more times.\n"
-"{n,m}  The preceding item is matched at least n times,\n"
-"       but not more than m times.\n"
-"\n"
-"To match any reserved character, precede it with \\. \n"
-"\n"
-"Two regular expressions may be joined by the logical or operator |.\n"
-"Two regular expressions may be concatenated.\n"
-"\n"
-"More information is available by typing \"man grep\"\n"
-msgstr ""
+#: ../xffm/find/dialog.hh:776
+msgid   "Created"
+msgstr  "Oprettet"
 
-#: ../../xffm/response/chooserresponse.hh:23
-msgid "Open"
-msgstr "Åbn"
+#: ../xffm/find/dialog.hh:780
+msgid   "Accessed"
+msgstr  "Tilgået"
 
-#: ../../xffm/response/chooserresponse.hh:56
-msgid "Choose directory"
-msgstr "Vælg mappe"
+#: ../xffm/find/dialog.hh:1098
+msgid   "Basic rules:\n"
+        "\n"
+        "*  Will match any character zero or more times.\n"
+        "?  Will match any character exactly one time\n"
+        "[] Match any character within the [] \n"
+        "^  Match at beginning of string\n"
+        "$  Match at end of string \n"
+msgstr  ""
 
-#: ../../xffm/response/chooserresponse.hh:60
-msgid "Choose file"
-msgstr "Vælg fil"
+#: ../xffm/find/dialog.hh:1107
+msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
+        "( ) : \n"
+        "In  basic regular expressions the metacharacters ?, +, {, |, (, "
+        "and ) \n"
+        "  lose their special meaning.\n"
+        "\n"
+        "The  period . matches  any  single  character.\n"
+        "The caret ^ matches at the start of line.\n"
+        "The dollar $ matches at the end of line.\n"
+        "\n"
+        "Characters within [ ] matches any single character in the list.\n"
+        "Characters within [^ ] matches any single character *not* in the "
+        "list.\n"
+        "Characters inside [ - ] matches a range of characters (ie [0-9] or "
+        "[a-z]).\n"
+        "\n"
+        "A regular expression may be followed by one of several repetition "
+        "operators:\n"
+        "?      The preceding item is optional and matched\n"
+        "       at most once.\n"
+        "*      The preceding item will be matched zero\n"
+        "       or more times.\n"
+        "+      The preceding item will be matched one or\n"
+        "       more times.\n"
+        "{n}    The preceding item is matched exactly n times.\n"
+        "{n,}   The preceding item is matched n or more times.\n"
+        "{n,m}  The preceding item is matched at least n times,\n"
+        "       but not more than m times.\n"
+        "\n"
+        "To match any reserved character, precede it with \\. \n"
+        "\n"
+        "Two regular expressions may be joined by the logical or operator |.\n"
+        "Two regular expressions may be concatenated.\n"
+        "\n"
+        "More information is available by typing \"man grep\"\n"
+msgstr  ""
 
-#: ../../xffm/response/customresponse.hh:55
-msgid "Execute command"
-msgstr "Kør kommando"
+#: ../xffm/find/fgr.hh:124 ../xffm/completion/base.hh:339
+msgid   "Options:"
+msgstr  "Indstillinger:"
 
-#. XXX folder or file entry should be determined on .ini file (probably just inherit from comboresponse for multiple files options (selected files)...
-#: ../../xffm/response/customresponse.hh:103
-msgid "Source File"
-msgstr "Kildefil"
+#: ../xffm/find/fgr.hh:125
+msgid   "Locate documents and folders on this computer by name or content"
+msgstr  "Find dokumenter og mapper på denne computer ved navn eller indhold"
 
-#. this button is redundant since hands are on keyboard for password
-#: ../../xffm/response/entryresponse.hh:424
-#: ../../xffm/response/passwdresponse.hh:242
-msgid "Ok"
-msgstr "O.k."
+#: ../xffm/find/fgr.hh:126
+msgid   "Search for files"
+msgstr  "Søg efter filer"
 
-#: ../../xffm/response/commandprogressresponse.hh:31
-msgid "Items:"
-msgstr "Punkter:"
+#: ../xffm/find/fgr.hh:128
+msgid   "Contents:"
+msgstr  "Indhold:"
 
-#: ../../xffm/response/passwdresponse.hh:19
-#: ../../xffm/response/passwdresponse.hh:25 ../../xffm/common/run.hh:464
-msgid "Enter password"
-msgstr "Indtast adgangskode"
+#: ../xffm/find/fgr.hh:128
+msgid   "File's contents filtered as plain text."
+msgstr  "Filens indhold filtreret som ren tekst."
 
-#. gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
-#: ../../xffm/response/passwdresponse.hh:179
-msgid "User Input"
-msgstr "Brugerindtastning"
+#: ../xffm/find/fgr.hh:131
+msgid   "Verbose output debugging mode."
+msgstr  "Fejlretningstilstand med uddybende output."
 
-#: ../../xffm/response/passwdresponse.hh:195
-msgid "Response Requested"
-msgstr "Anmodet om respons"
+#: ../xffm/find/fgr.hh:133
+msgid   "Show version information"
+msgstr  "Vis versionsinformation"
 
-#: ../../xffm/response/timeoutresponse.hh:57
-msgid "Dismiss"
-msgstr "Forkast"
+#: ../xffm/find/fgr.hh:135
+msgid   "Filter Details"
+msgstr  "Filterdetaljer"
 
-#: ../../xffm/response/commandresponse.hh:19
-msgid "Running"
-msgstr "Kører"
+#: ../xffm/find/fgr.hh:140
+msgid   "Print..."
+msgstr  "Udskriv..."
 
-#. auto text = g_strdup_printf("%s (pid: %d)",
-#. _("Waiting for operation to finish..."),
-#. Tubo<Type>::getChild (pid));
-#: ../../xffm/response/commandresponse.hh:24
-msgid "Waiting for operation to finish..."
-msgstr "Venter på at handling færdiggøres..."
+#: ../xffm/find/fgr.hh:140
+msgid   "The unique Process ID that identifies this process."
+msgstr  "Det unikke proces-ID som identificerer denne proces."
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:11
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:214
-msgid "Remove Button Contents"
-msgstr "Fjern knapindhold"
+#: ../xffm/find/fgr.hh:143
+msgid   "Filter"
+msgstr  "Filter"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:67
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:209
+#: ../xffm/find/fgr.hh:144
+msgid   "To display files which pass the filter (stars and regexps will be "
+        "processed)"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:147 ../xffm/find/fgr.hh:148 ../xffm/find/fgr.hh:149
+#: ../xffm/find/fgr.hh:150
+msgid   "KByte"
+msgstr  "KByte"
+
+#: ../xffm/find/fgr.hh:148
+msgid   "is greater than or equal to"
+msgstr  "er større end eller lig med"
+
+#: ../xffm/find/fgr.hh:150
+msgid   "is less than or equal to"
+msgstr  "er mindre end eller lig med"
+
+#: ../xffm/find/fgr.hh:152
+msgid   "Set UID"
+msgstr  "Sæt UID"
+
+#: ../xffm/find/fgr.hh:152
+msgid   "Executable Text Files"
+msgstr  "Eksekverbare tekstfiler"
+
+#: ../xffm/find/fgr.hh:154
+msgid   "The permissions of the file, in octal notation."
+msgstr  "Rettighederne for den filen i oktal notation."
+
+#: ../xffm/find/fgr.hh:155
+msgid   "Type"
+msgstr  "Type"
+
+#: ../xffm/find/fgr.hh:157 ../xffm/find/signals.hh:14
+msgid   "Any"
+msgstr  "Enhver"
+
+#: ../xffm/find/fgr.hh:157
+msgid   "Default type"
+msgstr  "Standardtype"
+
+#: ../xffm/find/fgr.hh:158 ../xffm/common/preview.hh:478
+msgid   "Regular file"
+msgstr  "Regulær fil"
+
+#: ../xffm/find/fgr.hh:159 ../xffm/find/signals.hh:8
+#: ../xffm/common/preview.hh:469 ../xffm/fm/view/local/popup.hh:1062
+msgid   "Directory"
+msgstr  "Mappe"
+
+#: ../xffm/find/fgr.hh:160 ../xffm/find/signals.hh:9
+#: ../xffm/common/preview.hh:475
+msgid   "Symbolic Link"
+msgstr  "Symbolsk link"
+
+#: ../xffm/find/fgr.hh:161
+msgid   "UNIX Socket"
+msgstr  "UNIX-sokkel"
+
+#: ../xffm/find/fgr.hh:162 ../xffm/find/signals.hh:11
+#: ../xffm/common/preview.hh:463
+msgid   "Block device"
+msgstr  "Blokenhed"
+
+#: ../xffm/find/fgr.hh:163 ../xffm/find/signals.hh:12
+#: ../xffm/common/preview.hh:466
+msgid   "Character device"
+msgstr  "Tegnenhed"
+
+#: ../xffm/find/fgr.hh:164 ../xffm/find/signals.hh:13
+#: ../xffm/common/preview.hh:472
+msgid   "FIFO"
+msgstr  "FIFO"
+
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/find/fgr.hh:179 ../xffm/find/fgr.hh:180
+#: ../xffm/find/fgr.hh:183 ../xffm/find/fgr.hh:184 ../xffm/find/fgr.hh:187
+#: ../xffm/find/fgr.hh:188
+msgid   "TIME"
+msgstr  "TID"
+
+#: ../xffm/find/fgr.hh:168 ../xffm/find/fgr.hh:171 ../xffm/find/fgr.hh:174
+#: ../xffm/find/fgr.hh:177
+msgid   "Previous"
+msgstr  "Forrige"
+
+#: ../xffm/find/fgr.hh:175
+msgid   "Month"
+msgstr  "Måned"
+
+#: ../xffm/find/fgr.hh:177
+msgid   "Month(s)"
+msgstr  "Måneder"
+
+#: ../xffm/find/fgr.hh:180
+msgid   "Modification Time :"
+msgstr  "Modificeret den :"
+
+#: ../xffm/find/fgr.hh:184
+msgid   "Access Time :"
+msgstr  "Læst den :"
+
+#: ../xffm/find/fgr.hh:188
+msgid   "Creation Time :"
+msgstr  "Oprettet den :"
+
+#: ../xffm/find/fgr.hh:191 ../xffm/find/fgr.hh:192
+msgid   "uid"
+msgstr  "uid"
+
+#: ../xffm/find/fgr.hh:192
+msgid   "User:"
+msgstr  "Bruger:"
+
+#: ../xffm/find/fgr.hh:194 ../xffm/find/fgr.hh:195
+msgid   "gid"
+msgstr  "gid"
+
+#: ../xffm/find/fgr.hh:195
+msgid   "Group:"
+msgstr  "Gruppe:"
+
+#: ../xffm/find/fgr.hh:198
+msgid   "Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+        "character that  normally  follows  a file  name"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:200
+msgid   "Content View"
+msgstr  "Indholdsvisning"
+
+#: ../xffm/find/fgr.hh:201 ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:203
+#: ../xffm/find/fgr.hh:204
+msgid   "STRING"
+msgstr  "STRENG"
+
+#: ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:204
+#: ../xffm/fm/view/local/popup.hh:759
+msgid   "Regular expression"
+msgstr  "Regulært udtryk"
+
+#: ../xffm/find/fgr.hh:204
+msgid   "Extended"
+msgstr  "Udvidet"
+
+#: ../xffm/find/fgr.hh:206
+msgid   "Ignore case"
+msgstr  "Ignorér store/små bogstaver"
+
+#: ../xffm/find/fgr.hh:208
+msgid   "Text Files"
+msgstr  "Tekstfiler"
+
+#: ../xffm/find/fgr.hh:214
+msgid   "Words"
+msgstr  "Ord"
+
+#: ../xffm/find/fgr.hh:216
+msgid   "Lines"
+msgstr  "Linjer"
+
+#: ../xffm/find/fgr.hh:362
+#, c-format
+msgid   "Usage : %s [OPTIONS]\n"
+msgstr  "Brug : %s [FLAG]\n"
+
+#: ../xffm/find/signals.hh:7
+msgid   "Regular"
+msgstr  "Regulær"
+
+#: ../xffm/find/signals.hh:10 ../xffm/common/preview.hh:481
+msgid   "Socket"
+msgstr  "Sokkel"
+
+#: ../xffm/find/signals.hh:396 ../xffm/find/signals.hh:830
+msgid   "No editor for current action."
+msgstr  "Ingen editor til aktuel handling."
+
+#: ../xffm/find/signals.hh:454
+msgid   "Upper limit:"
+msgstr  "Øvre grænse:"
+
+#: ../xffm/find/signals.hh:456
+msgid   "Counting files..."
+msgstr  "Tæller filer..."
+
+#: ../xffm/find/signals.hh:471
+#, c-format
+msgid   "Found %d match"
+msgid_plural    "Found %d matches"
+msgstr[0]       "Fandt %d træffer"
+msgstr[1]       "Fandt %d træffere"
+
+#: ../xffm/find/signals.hh:473
+#, c-format
+msgid   "%s Finished : %s"
+msgstr  "%s fuldført : %s"
+
+#: ../xffm/find/signals.hh:596 ../xffm/find/signals.hh:598
+msgid   "Searching..."
+msgstr  "Søger..."
+
+#: ../xffm/common/preview.hh:581
+msgid   "Empty file"
+msgstr  "Tom fil"
+
+#: ../xffm/common/preview.hh:636
+#, c-format
+msgid   "Cannot read from %s"
+msgstr  "Kan ikke læse fra %s"
+
+#: ../xffm/common/gtk.hh:67 ../xffm/fm/dialog/notebook/vbuttonbox.hh:240
+msgid   "Open terminal"
+msgstr  "Åbn terminal"
+
+#: ../xffm/common/gtk.hh:69 ../xffm/common/util.hh:1443
+msgid   "Execute Shell Command"
+msgstr  "Kør skal-kommando"
+
+#: ../xffm/common/gtk.hh:71 ../xffm/fm/view/local/popup.hh:157
+msgid   "Paste"
+msgstr  "Indsæt"
+
+#: ../xffm/common/gtk.hh:73 ../xffm/fm/view/local/popup.hh:151
+msgid   "Add bookmark"
+msgstr  "Tilføj bogmærke"
+
+#: ../xffm/common/gtk.hh:75 ../xffm/fm/view/local/popup.hh:152
+#: ../xffm/fm/view/root/popup.hh:137
+msgid   "Remove bookmark"
+msgstr  "Fjern bogmærke"
+
+#: ../xffm/common/gtk.hh:77 ../xffm/fm/view/pkg/model.hh:108
+#: ../xffm/fm/view/pkg/model.hh:299 ../xffm/fm/view/pkg/model.hh:306
+#: ../xffm/fm/view/pkg/popup.hh:151
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:236
+msgid   "Search"
+msgstr  "Søg"
+
+#: ../xffm/common/gtk.hh:81 ../xffm/fm/dialog/notebook/menupopover.hh:237
+msgid   "Exit"
+msgstr  "Afslut"
+
+#: ../xffm/common/gtk.hh:83 ../xffm/fm/view/local/popup.hh:85
+#: ../xffm/fm/view/local/popup.hh:142 ../xffm/fm/view/local/popup.hh:1287
+#: ../xffm/fm/view/local/popup.hh:1294 ../xffm/fm/view/local/popup.hh:1305
+#: ../xffm/fm/view/local/popup.hh:1312
+msgid   "Open with"
+msgstr  "Åbn med"
+
+#: ../xffm/common/gtk.hh:85 ../xffm/fm/view/local/popup.hh:100
+#: ../xffm/fm/view/local/popup.hh:156
+msgid   "Cut"
+msgstr  "Klip"
+
+#: ../xffm/common/gtk.hh:87 ../xffm/fm/view/local/popup.hh:99
+#: ../xffm/fm/view/local/popup.hh:155
+msgid   "Copy"
+msgstr  "Kopier"
+
+#: ../xffm/common/gtk.hh:89 ../xffm/fm/view/local/rm.hh:176
+#: ../xffm/fm/view/local/popup.hh:103 ../xffm/fm/view/local/popup.hh:160
+msgid   "Delete"
+msgstr  "Slet"
+
+#: ../xffm/common/gtk.hh:91 ../xffm/fm/view/local/rm.hh:165
+msgid   "Shred"
+msgstr  "Makuler"
+
+#: ../xffm/common/gtk.hh:94 ../xffm/fm/view/local/popup.hh:95
+#: ../xffm/fm/view/local/popup.hh:145 ../xffm/fm/view/root/popup.hh:136
+#: ../xffm/fm/view/fstab/popup.hh:20
+msgid   "Open in New Tab"
+msgstr  "Åben i nyt faneblad"
+
+#: ../xffm/common/gtk.hh:139 ../xffm/fm/dialog/notebook/notebook.hh:75
+msgid   "New Tab"
+msgstr  "Nyt faneblad"
+
+#: ../xffm/common/gtk.hh:352 ../xffm/common/gtk.hh:360
+msgid   "Help"
+msgstr  "Hjælp"
+
+#: ../xffm/common/settings.hh:30
+msgid   "New File:"
+msgstr  "Ny fil:"
+
+#: ../xffm/common/gio.hh:81
+msgid   "Copying files"
+msgstr  "Kopierer filer"
+
+#: ../xffm/common/gio.hh:83 ../xffm/common/dnd.hh:35
+#: ../xffm/fm/dialog/clipboard.hh:30
+msgid   "Moving files"
+msgstr  "Flytter filer"
+
+#: ../xffm/common/gio.hh:85
+msgid   "linking"
+msgstr  "linker"
+
+#: ../xffm/common/gio.hh:87
+msgid   "rename"
+msgstr  "omdøb"
+
+#: ../xffm/common/gio.hh:426
+#, c-format
+msgid   "(%d of %d)"
+msgstr  "(%d af %d)"
+
+#: ../xffm/common/util.hh:1404
+#, c-format
+msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
+        "attribute on that file."
+msgstr  "Scriptfilen \"%s\" er ikke kørbar. Sæt venligst kan køres-"
+        "attributten på den fil."
+
+#: ../xffm/common/util.hh:1406 ../xffm/common/util.hh:1441
+#, c-format
+msgid   "Open with %s"
+msgstr  "Åbn med %s"
+
+#: ../xffm/common/util.hh:1406
+msgid   "Text Editor"
+msgstr  "Tekstredigering"
+
+#: ../xffm/common/util.hh:1447
+msgid   "Console: quickly run single commands -- write a command here and "
+        "press enter."
+msgstr  "Konsol: Kør enkeltkommandoer hurtigt -- skriv en kommando her og "
+        "tryk Enter."
+
+#: ../xffm/common/util.hh:1452 ../xffm/fm/view/local/popup.hh:1109
+#: ../xffm/fm/view/local/popup.hh:1291 ../xffm/fm/view/local/popup.hh:1309
+msgid   "Run in Terminal"
+msgstr  "Kør i terminal"
+
+#: ../xffm/common/dnd.hh:41 ../xffm/fm/dialog/clipboard.hh:23
+msgid   "Copying files locally"
+msgstr  "Kopierer filer lokalt"
+
+#: ../xffm/common/dnd.hh:47
+msgid   "Create Link"
+msgstr  "Opret henvisning"
+
+#: ../xffm/common/run.hh:338
+msgid   "error"
+msgstr  "fejl"
+
+#: ../xffm/common/run.hh:342
+msgid   "warning"
+msgstr  "advarsel"
+
+#: ../xffm/common/run.hh:464 ../xffm/response/passwdresponse.hh:19
+#: ../xffm/response/passwdresponse.hh:25
+msgid   "Enter password"
+msgstr  "Indtast adgangskode"
+
+#: ../xffm/fm/view/pkg/model.hh:29 ../xffm/fm/view/pkg/popup.hh:35
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:187
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:191
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:195
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:198
+msgid   "Software Updater"
+msgstr  "Softwareopdatering"
+
+#: ../xffm/fm/view/pkg/model.hh:41 ../xffm/fm/view/pkg/model.hh:52
+msgid   "Add or remove software installed on the system"
+msgstr  "Tilføj eller fjern software installeret på systemet"
+
+#: ../xffm/fm/view/pkg/model.hh:111
+msgid   "String"
+msgstr  "Streng"
+
+#: ../xffm/fm/view/pkg/model.hh:116
+msgid   "Waiting for search results"
+msgstr  "Venter på søgeresultater"
+
+#: ../xffm/fm/view/pkg/model.hh:174
+msgid   "No results"
+msgstr  "Ingen resultater"
+
+#: ../xffm/fm/view/pkg/model.hh:373
 #, fuzzy
-msgid "Add custom content"
-msgstr "Tilføj brugertilpasset knapindhold"
+msgid   "Currently busy\n"
+msgstr  "Aktuelt album"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:68
-msgid "Select file to load"
-msgstr "Vælg fil til indlæsning"
+#: ../xffm/fm/view/pkg/popup.hh:44
+msgid   "Update Database"
+msgstr  "Opdatér database"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:125
-#, c-format
-msgid "Cannot load file %s. Reason: %s"
-msgstr "Kan ikke indlæse filen %s. Årsag: %s"
+#: ../xffm/fm/view/pkg/popup.hh:45
+msgid   "Fetch"
+msgstr  "Hent"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:154
-msgid "You need to restart the application"
-msgstr "Du skal genstarte programmet"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:187
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:191
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:195
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:198
-#: ../../xffm/fm/view/pkg/model.hh:29 ../../xffm/fm/view/pkg/popup.hh:35
-msgid "Software Updater"
-msgstr "Softwareopdatering"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:236
-#: ../../xffm/fm/view/pkg/model.hh:108 ../../xffm/fm/view/pkg/model.hh:299
-#: ../../xffm/fm/view/pkg/model.hh:306 ../../xffm/fm/view/pkg/popup.hh:151
-#: ../../xffm/common/gtk.hh:77
-msgid "Search"
-msgstr "Søg"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:240 ../../xffm/common/gtk.hh:67
-msgid "Open terminal"
-msgstr "Åbn terminal"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:244
-msgid "Open a New Window"
-msgstr "Åbn et nyt vindue"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:250
+#: ../xffm/fm/view/pkg/popup.hh:46
 #, fuzzy
-msgid "Differences"
-msgstr "Forskel"
+msgid   "Install --dry-run"
+msgstr  "Installationsfejl"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:256
-#: ../../xffm/fm/view/root/model.hh:110
-msgid "Home Directory"
-msgstr "Hjemmekatalog"
+#: ../xffm/fm/view/pkg/popup.hh:47
+msgid   "Install"
+msgstr  "Installér"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:261
-#: ../../xffm/fm/view/root/model.hh:168 ../../xffm/fm/view/fstab/popup.hh:29
-msgid "Disk Image Mounter"
-msgstr "Diskenhedsmonteringsprogram"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:266
-#: ../../xffm/fm/view/root/model.hh:137
-msgid "Trash bin"
-msgstr "Affald"
-
-#: ../../xffm/fm/dialog/notebook/notebook.hh:56
-msgid "Long press time"
-msgstr "Langt tryk-tid"
-
-#: ../../xffm/fm/dialog/notebook/notebook.hh:75 ../../xffm/common/gtk.hh:139
-msgid "New Tab"
-msgstr "Nyt faneblad"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:178
-msgid "Open menu"
-msgstr "Åbn menu"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:230
-msgid "View as list"
-msgstr "Vis som liste"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:231
-msgid "Show hidden files"
-msgstr "Vis skjulte filer"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:232
-msgid "Show Backup Files"
-msgstr "Vis sikkerhedskopifiler"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:233
-msgid "Sort data in descending order"
-msgstr "Sortér data i aftagende rækkefølge"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:235
-msgid "Sort by date"
-msgstr "Sortér efter dato"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:236
-msgid "Sort by size"
-msgstr "Sortér efter størrelse"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:237 ../../xffm/common/gtk.hh:81
-msgid "Exit"
-msgstr "Afslut"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:270
-msgid "Main menu"
-msgstr "Hovedmenu."
-
-#. File chooser
-#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:375
-#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:377
-msgid "Go to"
-msgstr "Gå til"
-
-#. entryResponse->setCheckButton(_("Run in Terminal"));
-#. entryResponse->setCheckButton(Run<Type>::runInTerminal(path));
-#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:382
-#: ../../xffm/fm/view/local/popup.hh:887 ../../xffm/fm/view/local/popup.hh:981
-msgid "Specify Output Directory..."
-msgstr "Angiv output-mappe..."
-
-#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:409
-msgid "Not a directory"
-msgstr "Ikke en mappe"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:135
-msgid "Renice Process"
-msgstr "Gen-nice proces"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:135
-msgid "Suspend"
-msgstr "Hvile"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:135
-msgid "Continue"
-msgstr "Fortsæt"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid "Interrupt"
-msgstr "Afbrydningssignal"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid "Hangup"
-msgstr "Hangup"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid "User 1 (USR1)"
-msgstr "Bruger 1 (USR1)"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:137
-msgid "User 2 (USR2)"
-msgstr "Bruger 2 (USR2)"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:137
-msgid "Terminate Task"
-msgstr "Afslut opgave"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:137
-msgid "Abort"
-msgstr "Afbryd"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:138
-msgid "Kill"
-msgstr "Dræb"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:139
-msgid "Segmentation fault"
-msgstr "Lagersegmentfejl"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:216
-msgid "PID"
-msgstr "PID"
-
-#: ../../xffm/fm/dialog/notebook/page/page.hh:58
-msgid "loading..."
-msgstr "indlæser..."
-
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
-msgid "Embedded Terminal"
-msgstr "Indlejret terminalvindue"
-
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
-msgid "All items in the iconview."
-msgstr "Alle punkter i ikonvisningen."
-
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
-msgid "Scripting"
-msgstr "Scripting"
-
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
-msgid "Clear Log"
-msgstr "Ryd log"
-
-#. Status textview
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
-msgid "Terminal font"
-msgstr "Terminalskrifttype"
-
-#: ../../xffm/fm/dialog/clipboard.hh:23 ../../xffm/common/dnd.hh:41
-msgid "Copying files locally"
-msgstr "Kopierer filer lokalt"
-
-#: ../../xffm/fm/dialog/clipboard.hh:30 ../../xffm/common/gio.hh:83
-#: ../../xffm/common/dnd.hh:35
-msgid "Moving files"
-msgstr "Flytter filer"
-
-#: ../../xffm/fm/dialog/dialog.hh:122
-msgid "Removed"
-msgstr "Fjernet"
-
-#: ../../xffm/fm/dialog/dialog.hh:143
-msgid "Detected device(s):"
-msgstr "Fundne enheder:"
-
-#: ../../xffm/fm/view/local/model.hh:122
-#, c-format
-msgid "Reading \"%s\""
-msgstr "Læser \"%s\""
-
-#: ../../xffm/fm/view/local/model.hh:575 ../../xffm/fm/view/base/monitor.hh:33
-#, c-format
-msgid "Files: %s"
-msgstr "Filer: %s"
-
-#: ../../xffm/fm/view/local/model.hh:578
-#, c-format
-msgid "Loaded %d of %d articles"
-msgstr "Hentede %d af %d artikler"
-
-#: ../../xffm/fm/view/local/popup.hh:85 ../../xffm/fm/view/local/popup.hh:142
-#: ../../xffm/fm/view/local/popup.hh:1287
-#: ../../xffm/fm/view/local/popup.hh:1294
-#: ../../xffm/fm/view/local/popup.hh:1305
-#: ../../xffm/fm/view/local/popup.hh:1312 ../../xffm/common/gtk.hh:83
-msgid "Open with"
-msgstr "Åbn med"
-
-#: ../../xffm/fm/view/local/popup.hh:94
-msgid "New"
-msgstr "Ny"
-
-#: ../../xffm/fm/view/local/popup.hh:95 ../../xffm/fm/view/local/popup.hh:145
-#: ../../xffm/fm/view/root/popup.hh:136 ../../xffm/fm/view/fstab/popup.hh:20
-#: ../../xffm/common/gtk.hh:94
-msgid "Open in New Tab"
-msgstr "Åben i nyt faneblad"
-
-#. deprecated {N_("Open in New Tab"), NULL, NULL, NULL},
-#. deprecated {N_("Open in New Window"), NULL, NULL, NULL},
-#. common buttons /(also an iconsize +/- button)
-#: ../../xffm/fm/view/local/popup.hh:99 ../../xffm/fm/view/local/popup.hh:155
-#: ../../xffm/common/gtk.hh:87
-msgid "Copy"
-msgstr "Kopier"
-
-#: ../../xffm/fm/view/local/popup.hh:100 ../../xffm/fm/view/local/popup.hh:156
-#: ../../xffm/common/gtk.hh:85
-msgid "Cut"
-msgstr "Klip"
-
-#: ../../xffm/fm/view/local/popup.hh:101 ../../xffm/fm/view/local/popup.hh:159
-#: ../../xffm/fm/view/local/popup.hh:232 ../../xffm/fm/view/local/popup.hh:234
-msgid "Paste into"
-msgstr "Tilføj til"
-
-#: ../../xffm/fm/view/local/popup.hh:102 ../../xffm/fm/view/local/popup.hh:158
+#: ../xffm/fm/view/pkg/popup.hh:48
 #, fuzzy
-msgid "There is nothing on the clipboard to paste."
-msgstr "Der er intet i udklipsholderen at indsætte."
+msgid   "Uninstall --dry-run"
+msgstr  "Afinstallerer"
 
-#. **************
-#: ../../xffm/fm/view/local/popup.hh:103 ../../xffm/fm/view/local/popup.hh:160
-#: ../../xffm/fm/view/local/rm.hh:176 ../../xffm/common/gtk.hh:89
-msgid "Delete"
-msgstr "Slet"
+#: ../xffm/fm/view/pkg/popup.hh:49
+msgid   "Uninstall"
+msgstr  "Afinstallér"
 
-#. {N_("About"), NULL, (void *) menu},
-#.
-#: ../../xffm/fm/view/local/popup.hh:106
-msgid "Select All"
-msgstr "Markér alle"
+#: ../xffm/fm/view/pkg/popup.hh:50
+msgid   "Information"
+msgstr  "Information"
 
-#: ../../xffm/fm/view/local/popup.hh:107 ../../xffm/fm/view/local/popup.hh:755
+#: ../xffm/fm/view/pkg/popup.hh:140
+msgid   "Version"
+msgstr  "Version"
+
+#: ../xffm/fm/view/pkg/popup.hh:149
+msgid   "Go up"
+msgstr  "Gå op"
+
+#: ../xffm/fm/view/pkg/popup.hh:152
+msgid   "Search packages"
+msgstr  "Gennemsøg pakker"
+
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
+#, c-format
+msgid   "Loading %s...%s"
+msgstr  "Indlæser %s...%s"
+
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
+msgid   "Please Wait..."
+msgstr  "Vent venligst..."
+
+#: ../xffm/fm/view/local/model.hh:124
+#, c-format
+msgid   "Reading \"%s\""
+msgstr  "Læser \"%s\""
+
+#: ../xffm/fm/view/local/model.hh:577 ../xffm/fm/view/base/monitor.hh:34
+#, c-format
+msgid   "Files: %s"
+msgstr  "Filer: %s"
+
+#: ../xffm/fm/view/local/model.hh:580
+#, c-format
+msgid   "Loaded %d of %d articles"
+msgstr  "Hentede %d af %d artikler"
+
+#: ../xffm/fm/view/local/rm.hh:59
+#, c-format
+msgid   "Delete %s"
+msgstr  "Slet %s"
+
+#: ../xffm/fm/view/local/rm.hh:61
+msgid   "Warning: "
+msgstr  "Advarsel: "
+
+#: ../xffm/fm/view/local/rm.hh:61 ../xffm/fm/view/local/popup.hh:565
+msgid   "Multiple selections"
+msgstr  "Flere markeringer"
+
+#: ../xffm/fm/view/local/rm.hh:92
+msgid   "Remove"
+msgstr  "Fjern"
+
+#: ../xffm/fm/view/local/rm.hh:142
+msgid   "Apply to all"
+msgstr  "Anvend på alle"
+
+#: ../xffm/fm/view/local/rm.hh:183
+msgid   "Trash"
+msgstr  "Papirkurv"
+
+#: ../xffm/fm/view/local/popup.hh:94
+msgid   "New"
+msgstr  "Ny"
+
+#: ../xffm/fm/view/local/popup.hh:101 ../xffm/fm/view/local/popup.hh:159
+#: ../xffm/fm/view/local/popup.hh:232 ../xffm/fm/view/local/popup.hh:234
+msgid   "Paste into"
+msgstr  "Tilføj til"
+
+#: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:158
 #, fuzzy
-msgid "Match regular expression"
-msgstr "Match som regulært udtryk"
+msgid   "There is nothing on the clipboard to paste."
+msgstr  "Der er intet i udklipsholderen at indsætte."
 
-#: ../../xffm/fm/view/local/popup.hh:143 ../../xffm/fm/view/local/popup.hh:1105
-msgid "Run Executable..."
-msgstr "Kør eksekverbar fil..."
+#: ../xffm/fm/view/local/popup.hh:106
+msgid   "Select All"
+msgstr  "Markér alle"
 
-#. File chooser
-#: ../../xffm/fm/view/local/popup.hh:144 ../../xffm/fm/view/local/popup.hh:875
-msgid "Extract files from the archive"
-msgstr "Udpak filer fra arkivet"
-
-#. File chooser
-#: ../../xffm/fm/view/local/popup.hh:146 ../../xffm/fm/view/local/popup.hh:966
-msgid "Create a compressed archive with the selected objects"
-msgstr "Opret et komprimeret arkiv med de markerede objekter"
-
-#: ../../xffm/fm/view/local/popup.hh:148 ../../xffm/fm/view/fstab/popup.hh:37
-msgid "Mount the volume associated with this folder"
-msgstr "Montér diskenheden, der er tilknyttet denne mappe"
-
-#: ../../xffm/fm/view/local/popup.hh:149 ../../xffm/fm/view/fstab/popup.hh:38
-msgid "Unmount the volume associated with this folder"
-msgstr "Afmontér diskenheden, der er tilknyttet denne mappe"
-
-#: ../../xffm/fm/view/local/popup.hh:151 ../../xffm/common/gtk.hh:73
-msgid "Add bookmark"
-msgstr "Tilføj bogmærke"
-
-#: ../../xffm/fm/view/local/popup.hh:152 ../../xffm/fm/view/root/popup.hh:137
-#: ../../xffm/common/gtk.hh:75
-msgid "Remove bookmark"
-msgstr "Fjern bogmærke"
-
-#: ../../xffm/fm/view/local/popup.hh:157 ../../xffm/common/gtk.hh:71
-msgid "Paste"
-msgstr "Indsæt"
-
-#: ../../xffm/fm/view/local/popup.hh:161 ../../xffm/fm/view/local/popup.hh:1231
-msgid "Rename"
-msgstr "Omdøb"
-
-#: ../../xffm/fm/view/local/popup.hh:162 ../../xffm/fm/view/local/popup.hh:1217
-msgid "Duplicate"
-msgstr "Dupliker"
-
-#: ../../xffm/fm/view/local/popup.hh:163 ../../xffm/fm/view/local/popup.hh:1203
-msgid "Link"
-msgstr "Henvisning"
-
-#: ../../xffm/fm/view/local/popup.hh:164
-msgid "Properties"
-msgstr "Egenskaber"
-
-#: ../../xffm/fm/view/local/popup.hh:562
-msgid "Files:"
-msgstr "Filer:"
-
-#: ../../xffm/fm/view/local/popup.hh:565 ../../xffm/fm/view/local/rm.hh:61
-msgid "Multiple selections"
-msgstr "Flere markeringer"
-
-#: ../../xffm/fm/view/local/popup.hh:753
-msgid "Select items"
-msgstr "Markér elementer"
-
-#: ../../xffm/fm/view/local/popup.hh:771
-msgid "Regular Expression syntax is incorrect"
-msgstr "Syntaks i regulært udtryk er ikke korrekt "
-
-#: ../../xffm/fm/view/local/popup.hh:801
-msgid "No selection"
-msgstr "Ingen markering"
-
-#: ../../xffm/fm/view/local/popup.hh:801
-msgid "No matches."
-msgstr "Ingen resultater."
-
-#: ../../xffm/fm/view/local/popup.hh:1058
-msgid "Create new..."
-msgstr "Opret ny..."
-
-#: ../../xffm/fm/view/local/popup.hh:1065
-#: ../../xffm/fm/view/local/popup.hh:1146
-msgid "New Name:"
-msgstr "Nyt navn:"
-
-#: ../../xffm/fm/view/local/popup.hh:1074
-msgid "No name"
-msgstr "Intet navn"
-
-#: ../../xffm/fm/view/local/popup.hh:1087
-#, c-format
-msgid "Another file with the same name already exists in “%s”."
-msgstr "En anden fil med det samme navn findes allerede i “%s”."
-
-#: ../../xffm/fm/view/local/popup.hh:1109
-#: ../../xffm/fm/view/local/popup.hh:1291
-#: ../../xffm/fm/view/local/popup.hh:1309 ../../xffm/common/util.hh:1452
-msgid "Run in Terminal"
-msgstr "Kør i terminal"
-
-#: ../../xffm/fm/view/local/popup.hh:1112
-msgid "Arguments for the Command"
-msgstr "Argumenter til kommandoen"
-
-#: ../../xffm/fm/view/local/popup.hh:1258
-msgid "You have selected multiple files or folders"
-msgstr "Du har valgt adskillige filer eller mapper"
-
-#: ../../xffm/fm/view/local/popup.hh:1332 ../../xffm/fm/view/local/view.hh:156
-msgid "Invalid entry"
-msgstr "Ugyldig post"
-
-#: ../../xffm/fm/view/local/properties.hh:245
-msgid "Properties and Attributes"
-msgstr "Egenskaber og attributter"
-
-#: ../../xffm/fm/view/local/properties.hh:274
-msgid "File Mode:"
-msgstr "Filtilstand:"
-
-#: ../../xffm/fm/view/local/properties.hh:300
-msgid "File:"
-msgstr "Dokument:"
-
-#. Add file info stuff
-#. set info stuff data according to combo box
-#. add signal handler to changed signal for combo box
-#. Add process buttons
-#.
-#: ../../xffm/fm/view/local/properties.hh:312
-msgid "Apply changes"
-msgstr "Anvend ændringer"
-
-#: ../../xffm/fm/view/local/properties.hh:477
-msgid "Successfully moved to trash."
-msgstr "Flytning til affald gennemført."
-
-#: ../../xffm/fm/view/local/properties.hh:478
-msgid "Source:"
-msgstr "Kilde:"
-
-#: ../../xffm/fm/view/local/rm.hh:59
-#, c-format
-msgid "Delete %s"
-msgstr "Slet %s"
-
-#: ../../xffm/fm/view/local/rm.hh:61
-msgid "Warning: "
-msgstr "Advarsel: "
-
-#. gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
-#. title
-#: ../../xffm/fm/view/local/rm.hh:92
-msgid "Remove"
-msgstr "Fjern"
-
-#: ../../xffm/fm/view/local/rm.hh:142
-msgid "Apply to all"
-msgstr "Anvend på alle"
-
-#. **************
-#. This is now available to BSD with rm -P option
-#: ../../xffm/fm/view/local/rm.hh:165 ../../xffm/common/gtk.hh:91
-msgid "Shred"
-msgstr "Makuler"
-
-#: ../../xffm/fm/view/local/rm.hh:183
-msgid "Trash"
-msgstr "Papirkurv"
-
-#: ../../xffm/fm/view/local/view.hh:177
-#, c-format
-msgid "The volume '%s' is not mounted."
-msgstr "Enheden '%s' er ikke monteret."
-
-#: ../../xffm/fm/view/root/model.hh:82
-msgid "Root Directory"
-msgstr "Rodmappe"
-
-#: ../../xffm/fm/view/root/model.hh:98
-msgid "This is the root of the filesystem"
-msgstr "Dette er roden af filsystemet"
-
-#: ../../xffm/fm/view/root/model.hh:176 ../../xffm/fm/view/root/model.hh:191
-msgid "Mount local disks and devices"
-msgstr "Montér lokale diske og enheder"
-
-#: ../../xffm/fm/view/root/model.hh:177 ../../xffm/fm/view/fstab/popup.hh:23
-#: ../../xffm/fm/view/fstab/view.hh:1084
-msgid "eCryptfs Volume"
-msgstr "eCryptfs-drev"
-
-#: ../../xffm/fm/view/root/model.hh:178 ../../xffm/fm/view/fstab/popup.hh:22
-msgid "SSHFS Remote Synchronization Folder"
-msgstr "SSHFS' fjernsynkroniseringsmappe"
-
-#: ../../xffm/fm/view/root/model.hh:179 ../../xffm/fm/view/fstab/popup.hh:21
-#: ../../xffm/fm/view/fstab/view.hh:1032
-msgid "NFS Network Volume"
-msgstr "NFS-netværksdrev"
-
-#: ../../xffm/fm/view/root/model.hh:180 ../../xffm/fm/view/fstab/popup.hh:24
-#: ../../xffm/fm/view/fstab/view.hh:1110
-msgid "CIFS Volume"
-msgstr "CIFS-drev"
-
-#: ../../xffm/fm/view/root/model.hh:229
-msgid "Go to bookmarked location"
-msgstr "Gå til bogmærket placering"
-
-#: ../../xffm/fm/view/root/popup.hh:138
-msgid "Empty trash"
-msgstr "Tøm papirkurv"
-
-#. File chooser
-#: ../../xffm/fm/view/fstab/popup.hh:129
-msgid "Mount Device"
-msgstr "Montér enhed"
-
-#: ../../xffm/fm/view/fstab/popup.hh:141 ../../xffm/fm/view/fstab/view.hh:923
-msgid "Mount point:"
-msgstr "Monteringspunkt:"
-
-#: ../../xffm/fm/view/fstab/view.hh:590
+#: ../xffm/fm/view/local/popup.hh:107 ../xffm/fm/view/local/popup.hh:755
 #, fuzzy
-msgid "Mount point: "
-msgstr "Monteringspunkt:"
+msgid   "Match regular expression"
+msgstr  "Match som regulært udtryk"
 
-#: ../../xffm/fm/view/fstab/view.hh:591
+#: ../xffm/fm/view/local/popup.hh:143 ../xffm/fm/view/local/popup.hh:1105
+msgid   "Run Executable..."
+msgstr  "Kør eksekverbar fil..."
+
+#: ../xffm/fm/view/local/popup.hh:144 ../xffm/fm/view/local/popup.hh:875
+msgid   "Extract files from the archive"
+msgstr  "Udpak filer fra arkivet"
+
+#: ../xffm/fm/view/local/popup.hh:146 ../xffm/fm/view/local/popup.hh:966
+msgid   "Create a compressed archive with the selected objects"
+msgstr  "Opret et komprimeret arkiv med de markerede objekter"
+
+#: ../xffm/fm/view/local/popup.hh:148 ../xffm/fm/view/fstab/popup.hh:37
+msgid   "Mount the volume associated with this folder"
+msgstr  "Montér diskenheden, der er tilknyttet denne mappe"
+
+#: ../xffm/fm/view/local/popup.hh:149 ../xffm/fm/view/fstab/popup.hh:38
+msgid   "Unmount the volume associated with this folder"
+msgstr  "Afmontér diskenheden, der er tilknyttet denne mappe"
+
+#: ../xffm/fm/view/local/popup.hh:161 ../xffm/fm/view/local/popup.hh:1231
+msgid   "Rename"
+msgstr  "Omdøb"
+
+#: ../xffm/fm/view/local/popup.hh:162 ../xffm/fm/view/local/popup.hh:1217
+msgid   "Duplicate"
+msgstr  "Dupliker"
+
+#: ../xffm/fm/view/local/popup.hh:163 ../xffm/fm/view/local/popup.hh:1203
+msgid   "Link"
+msgstr  "Henvisning"
+
+#: ../xffm/fm/view/local/popup.hh:164
+msgid   "Properties"
+msgstr  "Egenskaber"
+
+#: ../xffm/fm/view/local/popup.hh:562
+msgid   "Files:"
+msgstr  "Filer:"
+
+#: ../xffm/fm/view/local/popup.hh:753
+msgid   "Select items"
+msgstr  "Markér elementer"
+
+#: ../xffm/fm/view/local/popup.hh:771
+msgid   "Regular Expression syntax is incorrect"
+msgstr  "Syntaks i regulært udtryk er ikke korrekt "
+
+#: ../xffm/fm/view/local/popup.hh:801
+msgid   "No selection"
+msgstr  "Ingen markering"
+
+#: ../xffm/fm/view/local/popup.hh:801
+msgid   "No matches."
+msgstr  "Ingen resultater."
+
+#: ../xffm/fm/view/local/popup.hh:887 ../xffm/fm/view/local/popup.hh:981
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:382
+msgid   "Specify Output Directory..."
+msgstr  "Angiv output-mappe..."
+
+#: ../xffm/fm/view/local/popup.hh:1058
+msgid   "Create new..."
+msgstr  "Opret ny..."
+
+#: ../xffm/fm/view/local/popup.hh:1065 ../xffm/fm/view/local/popup.hh:1146
+msgid   "New Name:"
+msgstr  "Nyt navn:"
+
+#: ../xffm/fm/view/local/popup.hh:1074
+msgid   "No name"
+msgstr  "Intet navn"
+
+#: ../xffm/fm/view/local/popup.hh:1087
+#, c-format
+msgid   "Another file with the same name already exists in “%s”."
+msgstr  "En anden fil med det samme navn findes allerede i “%s”."
+
+#: ../xffm/fm/view/local/popup.hh:1112
+msgid   "Arguments for the Command"
+msgstr  "Argumenter til kommandoen"
+
+#: ../xffm/fm/view/local/popup.hh:1258
+msgid   "You have selected multiple files or folders"
+msgstr  "Du har valgt adskillige filer eller mapper"
+
+#: ../xffm/fm/view/local/popup.hh:1332 ../xffm/fm/view/local/view.hh:156
+msgid   "Invalid entry"
+msgstr  "Ugyldig post"
+
+#: ../xffm/fm/view/local/view.hh:177
+#, c-format
+msgid   "The volume '%s' is not mounted."
+msgstr  "Enheden '%s' er ikke monteret."
+
+#: ../xffm/fm/view/local/properties.hh:245
+msgid   "Properties and Attributes"
+msgstr  "Egenskaber og attributter"
+
+#: ../xffm/fm/view/local/properties.hh:274
+msgid   "File Mode:"
+msgstr  "Filtilstand:"
+
+#: ../xffm/fm/view/local/properties.hh:300
+msgid   "File:"
+msgstr  "Dokument:"
+
+#: ../xffm/fm/view/local/properties.hh:312
+msgid   "Apply changes"
+msgstr  "Anvend ændringer"
+
+#: ../xffm/fm/view/local/properties.hh:477
+msgid   "Successfully moved to trash."
+msgstr  "Flytning til affald gennemført."
+
+#: ../xffm/fm/view/local/properties.hh:478
+msgid   "Source:"
+msgstr  "Kilde:"
+
+#: ../xffm/fm/view/root/model.hh:82
+msgid   "Root Directory"
+msgstr  "Rodmappe"
+
+#: ../xffm/fm/view/root/model.hh:98
+msgid   "This is the root of the filesystem"
+msgstr  "Dette er roden af filsystemet"
+
+#: ../xffm/fm/view/root/model.hh:110
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:256
+msgid   "Home Directory"
+msgstr  "Hjemmekatalog"
+
+#: ../xffm/fm/view/root/model.hh:137
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:266
+msgid   "Trash bin"
+msgstr  "Affald"
+
+#: ../xffm/fm/view/root/model.hh:168 ../xffm/fm/view/fstab/popup.hh:29
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:261
+msgid   "Disk Image Mounter"
+msgstr  "Diskenhedsmonteringsprogram"
+
+#: ../xffm/fm/view/root/model.hh:176 ../xffm/fm/view/root/model.hh:191
+msgid   "Mount local disks and devices"
+msgstr  "Montér lokale diske og enheder"
+
+#: ../xffm/fm/view/root/model.hh:177 ../xffm/fm/view/fstab/popup.hh:23
+#: ../xffm/fm/view/fstab/view.hh:1084
+msgid   "eCryptfs Volume"
+msgstr  "eCryptfs-drev"
+
+#: ../xffm/fm/view/root/model.hh:178 ../xffm/fm/view/fstab/popup.hh:22
+msgid   "SSHFS Remote Synchronization Folder"
+msgstr  "SSHFS' fjernsynkroniseringsmappe"
+
+#: ../xffm/fm/view/root/model.hh:179 ../xffm/fm/view/fstab/popup.hh:21
+#: ../xffm/fm/view/fstab/view.hh:1032
+msgid   "NFS Network Volume"
+msgstr  "NFS-netværksdrev"
+
+#: ../xffm/fm/view/root/model.hh:180 ../xffm/fm/view/fstab/popup.hh:24
+#: ../xffm/fm/view/fstab/view.hh:1110
+msgid   "CIFS Volume"
+msgstr  "CIFS-drev"
+
+#: ../xffm/fm/view/root/model.hh:229
+msgid   "Go to bookmarked location"
+msgstr  "Gå til bogmærket placering"
+
+#: ../xffm/fm/view/root/popup.hh:138
+msgid   "Empty trash"
+msgstr  "Tøm papirkurv"
+
+#: ../xffm/fm/view/fstab/popup.hh:129
+msgid   "Mount Device"
+msgstr  "Montér enhed"
+
+#: ../xffm/fm/view/fstab/popup.hh:141 ../xffm/fm/view/fstab/view.hh:923
+msgid   "Mount point:"
+msgstr  "Monteringspunkt:"
+
+#: ../xffm/fm/view/fstab/view.hh:590
 #, fuzzy
-msgid "Mount device: "
-msgstr "Montér enhed"
+msgid   "Mount point: "
+msgstr  "Monteringspunkt:"
 
-#. Since /dev is not concrete, the following test returns false...
-#.
-#. if (!g_file_test(name, G_FILE_TEST_IS_DIR)) return;
-#: ../../xffm/fm/view/fstab/view.hh:659 ../../xffm/fm/view/fstab/view.hh:675
-msgid "Disks"
-msgstr "Diske"
-
-#: ../../xffm/fm/view/fstab/view.hh:921
-msgid "No Label"
-msgstr "Ingen etiket"
-
-#: ../../xffm/fm/view/fstab/view.hh:922
-msgid "There is no file system available (unformatted)"
-msgstr "Der er intet tilgængeligt filsystem (uformateret)"
-
-#: ../../xffm/fm/view/fstab/view.hh:923
-msgid "Not mounted"
-msgstr "Ikke monteret"
-
-#: ../../xffm/fm/view/fstab/view.hh:1058
-msgid "SFTP (via SSH)"
-msgstr "SFTP (via SSH)"
-
-#: ../../xffm/fm/view/fstab/view.hh:1413
-#, c-format
-msgid "Unmounting %s"
-msgstr "Afmonterer %s"
-
-#: ../../xffm/fm/view/fstab/view.hh:1413
-#, c-format
-msgid "Mounting %s"
-msgstr "Monterer %s"
-
-#: ../../xffm/fm/view/pkg/model.hh:41 ../../xffm/fm/view/pkg/model.hh:52
-msgid "Add or remove software installed on the system"
-msgstr "Tilføj eller fjern software installeret på systemet"
-
-#: ../../xffm/fm/view/pkg/model.hh:111
-msgid "String"
-msgstr "Streng"
-
-#: ../../xffm/fm/view/pkg/model.hh:116
-msgid "Waiting for search results"
-msgstr "Venter på søgeresultater"
-
-#: ../../xffm/fm/view/pkg/model.hh:174
-msgid "No results"
-msgstr "Ingen resultater"
-
-#: ../../xffm/fm/view/pkg/model.hh:373
+#: ../xffm/fm/view/fstab/view.hh:591
 #, fuzzy
-msgid "Currently busy\n"
-msgstr "Aktuelt album"
+msgid   "Mount device: "
+msgstr  "Montér enhed"
 
-#: ../../xffm/fm/view/pkg/popup.hh:44
-msgid "Update Database"
-msgstr "Opdatér database"
+#: ../xffm/fm/view/fstab/view.hh:659 ../xffm/fm/view/fstab/view.hh:675
+msgid   "Disks"
+msgstr  "Diske"
 
-#: ../../xffm/fm/view/pkg/popup.hh:45
-msgid "Fetch"
-msgstr "Hent"
+#: ../xffm/fm/view/fstab/view.hh:921
+msgid   "No Label"
+msgstr  "Ingen etiket"
 
-#: ../../xffm/fm/view/pkg/popup.hh:46
+#: ../xffm/fm/view/fstab/view.hh:922
+msgid   "There is no file system available (unformatted)"
+msgstr  "Der er intet tilgængeligt filsystem (uformateret)"
+
+#: ../xffm/fm/view/fstab/view.hh:923
+msgid   "Not mounted"
+msgstr  "Ikke monteret"
+
+#: ../xffm/fm/view/fstab/view.hh:1058
+msgid   "SFTP (via SSH)"
+msgstr  "SFTP (via SSH)"
+
+#: ../xffm/fm/view/fstab/view.hh:1413
+#, c-format
+msgid   "Unmounting %s"
+msgstr  "Afmonterer %s"
+
+#: ../xffm/fm/view/fstab/view.hh:1413
+#, c-format
+msgid   "Mounting %s"
+msgstr  "Monterer %s"
+
+#: ../xffm/fm/view/base/signals.hh:838
+msgid   "Trash is empty"
+msgstr  "Papirkurv er tom"
+
+#: ../xffm/fm/view/base/signals.hh:840
+msgid   "Directory does not exist."
+msgstr  "Mappe eksisterer ikke."
+
+#: ../xffm/fm/view/treeview.hh:17
+msgid   "Name"
+msgstr  "Navn"
+
+#: ../xffm/fm/view/treeview.hh:19
+msgid   "Size"
+msgstr  "Størr"
+
+#: ../xffm/fm/view/treeview.hh:20
+msgid   "Date"
+msgstr  "Dato"
+
+#: ../xffm/fm/view/treeview.hh:22
+msgid   "Mimetype"
+msgstr  "MIME-type"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
+msgid   "Embedded Terminal"
+msgstr  "Indlejret terminalvindue"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
+msgid   "All items in the iconview."
+msgstr  "Alle punkter i ikonvisningen."
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
+msgid   "Scripting"
+msgstr  "Scripting"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
+msgid   "Clear Log"
+msgstr  "Ryd log"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
+msgid   "Terminal font"
+msgstr  "Terminalskrifttype"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid   "Renice Process"
+msgstr  "Gen-nice proces"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid   "Suspend"
+msgstr  "Hvile"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid   "Continue"
+msgstr  "Fortsæt"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid   "Interrupt"
+msgstr  "Afbrydningssignal"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid   "Hangup"
+msgstr  "Hangup"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid   "User 1 (USR1)"
+msgstr  "Bruger 1 (USR1)"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+msgid   "User 2 (USR2)"
+msgstr  "Bruger 2 (USR2)"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+msgid   "Terminate Task"
+msgstr  "Afslut opgave"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+msgid   "Abort"
+msgstr  "Afbryd"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:138
+msgid   "Kill"
+msgstr  "Dræb"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
+msgid   "Segmentation fault"
+msgstr  "Lagersegmentfejl"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:216
+msgid   "PID"
+msgstr  "PID"
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:375
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:377
+msgid   "Go to"
+msgstr  "Gå til"
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:409
+msgid   "Not a directory"
+msgstr  "Ikke en mappe"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:59
+msgid   "loading..."
+msgstr  "indlæser..."
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:151
+#: ../xffm/fm/dialog/notebook/page/page.hh:167
+msgid   "Confirm Replace"
+msgstr  "Bekræft erstatning"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:153
+msgid   "Destination File"
+msgstr  "Målfil"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:166
+#, fuzzy, c-format
+msgid   "The output file %s already exists, do you want to overwrite it?"
+msgstr  "Filen %s findes allerede. Ønsker du at overskrive den?"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:11
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:214
+msgid   "Remove Button Contents"
+msgstr  "Fjern knapindhold"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:67
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:209
 #, fuzzy
-msgid "Install --dry-run"
-msgstr "Installationsfejl"
+msgid   "Add custom content"
+msgstr  "Tilføj brugertilpasset knapindhold"
 
-#: ../../xffm/fm/view/pkg/popup.hh:47
-msgid "Install"
-msgstr "Installér"
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:68
+msgid   "Select file to load"
+msgstr  "Vælg fil til indlæsning"
 
-#: ../../xffm/fm/view/pkg/popup.hh:48
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:125
+#, c-format
+msgid   "Cannot load file %s. Reason: %s"
+msgstr  "Kan ikke indlæse filen %s. Årsag: %s"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:154
+msgid   "You need to restart the application"
+msgstr  "Du skal genstarte programmet"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:244
+msgid   "Open a New Window"
+msgstr  "Åbn et nyt vindue"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:250
 #, fuzzy
-msgid "Uninstall --dry-run"
-msgstr "Afinstallerer"
+msgid   "Differences"
+msgstr  "Forskel"
 
-#: ../../xffm/fm/view/pkg/popup.hh:49
-msgid "Uninstall"
-msgstr "Afinstallér"
+#: ../xffm/fm/dialog/notebook/menupopover.hh:178
+msgid   "Open menu"
+msgstr  "Åbn menu"
 
-#: ../../xffm/fm/view/pkg/popup.hh:50
-msgid "Information"
-msgstr "Information"
+#: ../xffm/fm/dialog/notebook/menupopover.hh:230
+msgid   "View as list"
+msgstr  "Vis som liste"
 
-#: ../../xffm/fm/view/pkg/popup.hh:140
-msgid "Version"
-msgstr "Version"
+#: ../xffm/fm/dialog/notebook/menupopover.hh:231
+msgid   "Show hidden files"
+msgstr  "Vis skjulte filer"
 
-#: ../../xffm/fm/view/pkg/popup.hh:149
-msgid "Go up"
-msgstr "Gå op"
+#: ../xffm/fm/dialog/notebook/menupopover.hh:232
+msgid   "Show Backup Files"
+msgstr  "Vis sikkerhedskopifiler"
 
-#: ../../xffm/fm/view/pkg/popup.hh:152
-msgid "Search packages"
-msgstr "Gennemsøg pakker"
+#: ../xffm/fm/dialog/notebook/menupopover.hh:233
+msgid   "Sort data in descending order"
+msgstr  "Sortér data i aftagende rækkefølge"
 
-#: ../../xffm/fm/view/pkg/popup.hh:184 ../../xffm/fm/view/view.hh:93
-#, c-format
-msgid "Loading %s...%s"
-msgstr "Indlæser %s...%s"
+#: ../xffm/fm/dialog/notebook/menupopover.hh:235
+msgid   "Sort by date"
+msgstr  "Sortér efter dato"
 
-#: ../../xffm/fm/view/pkg/popup.hh:184 ../../xffm/fm/view/view.hh:93
-msgid "Please Wait..."
-msgstr "Vent venligst..."
+#: ../xffm/fm/dialog/notebook/menupopover.hh:236
+msgid   "Sort by size"
+msgstr  "Sortér efter størrelse"
 
-#: ../../xffm/fm/view/treeview.hh:17
-msgid "Name"
-msgstr "Navn"
+#: ../xffm/fm/dialog/notebook/menupopover.hh:270
+msgid   "Main menu"
+msgstr  "Hovedmenu."
 
-#: ../../xffm/fm/view/treeview.hh:19
-msgid "Size"
-msgstr "Størr"
+#: ../xffm/fm/dialog/notebook/notebook.hh:56
+msgid   "Long press time"
+msgstr  "Langt tryk-tid"
 
-#: ../../xffm/fm/view/treeview.hh:20
-msgid "Date"
-msgstr "Dato"
+#: ../xffm/fm/dialog/dialog.hh:122
+msgid   "Removed"
+msgstr  "Fjernet"
 
-#: ../../xffm/fm/view/treeview.hh:22
-msgid "Mimetype"
-msgstr "MIME-type"
+#: ../xffm/fm/dialog/dialog.hh:143
+msgid   "Detected device(s):"
+msgstr  "Fundne enheder:"
 
-#: ../../xffm/fm/view/base/signals.hh:838
-msgid "Trash is empty"
-msgstr "Papirkurv er tom"
+#: ../xffm/response/commandresponse.hh:19
+msgid   "Running"
+msgstr  "Kører"
 
-#: ../../xffm/fm/view/base/signals.hh:840
-msgid "Directory does not exist."
-msgstr "Mappe eksisterer ikke."
+#: ../xffm/response/commandresponse.hh:24
+msgid   "Waiting for operation to finish..."
+msgstr  "Venter på at handling færdiggøres..."
 
-#: ../../xffm/common/settings.hh:30
-msgid "New File:"
-msgstr "Ny fil:"
+#: ../xffm/response/passwdresponse.hh:179
+msgid   "User Input"
+msgstr  "Brugerindtastning"
 
-#: ../../xffm/common/gio.hh:81
-msgid "Copying files"
-msgstr "Kopierer filer"
+#: ../xffm/response/passwdresponse.hh:195
+msgid   "Response Requested"
+msgstr  "Anmodet om respons"
 
-#: ../../xffm/common/gio.hh:85
-msgid "linking"
-msgstr "linker"
+#: ../xffm/response/passwdresponse.hh:242 ../xffm/response/entryresponse.hh:439
+msgid   "Ok"
+msgstr  "O.k."
 
-#: ../../xffm/common/gio.hh:87
-msgid "rename"
-msgstr "omdøb"
+#: ../xffm/response/customresponse.hh:55
+msgid   "Execute command"
+msgstr  "Kør kommando"
 
-#: ../../xffm/common/gio.hh:426
-#, c-format
-msgid "(%d of %d)"
-msgstr "(%d af %d)"
+#: ../xffm/response/customresponse.hh:103
+msgid   "Source File"
+msgstr  "Kildefil"
 
-#: ../../xffm/common/dnd.hh:47
-msgid "Create Link"
-msgstr "Opret henvisning"
+#: ../xffm/response/timeoutresponse.hh:57
+msgid   "Dismiss"
+msgstr  "Forkast"
 
-#: ../../xffm/common/util.hh:1404
-#, c-format
-msgid ""
-"Scriptfile \"%s\" is not executable. Please set the executable-attribute on "
-"that file."
-msgstr ""
-"Scriptfilen \"%s\" er ikke kørbar. Sæt venligst kan køres-attributten på den "
-"fil."
+#: ../xffm/response/commandprogressresponse.hh:31
+msgid   "Items:"
+msgstr  "Punkter:"
 
-#: ../../xffm/common/util.hh:1406 ../../xffm/common/util.hh:1441
-#, c-format
-msgid "Open with %s"
-msgstr "Åbn med %s"
+#: ../xffm/response/chooserresponse.hh:23
+msgid   "Open"
+msgstr  "Åbn"
 
-#: ../../xffm/common/util.hh:1406
-msgid "Text Editor"
-msgstr "Tekstredigering"
+#: ../xffm/response/chooserresponse.hh:56
+msgid   "Choose directory"
+msgstr  "Vælg mappe"
 
-#: ../../xffm/common/util.hh:1443 ../../xffm/common/gtk.hh:69
-msgid "Execute Shell Command"
-msgstr "Kør skal-kommando"
+#: ../xffm/response/chooserresponse.hh:60
+msgid   "Choose file"
+msgstr  "Vælg fil"
 
-#: ../../xffm/common/util.hh:1447
-msgid ""
-"Console: quickly run single commands -- write a command here and press enter."
-msgstr ""
-"Konsol: Kør enkeltkommandoer hurtigt -- skriv en kommando her og tryk Enter."
+#: ../xffm/completion/bash.hh:133
+msgid   "Completion mode:"
+msgstr  "Kompletteringstilstand:"
 
-#: ../../xffm/common/gtk.hh:352 ../../xffm/common/gtk.hh:360
-msgid "Help"
-msgstr "Hjælp"
+#: ../xffm/completion/bash.hh:134
+msgid   "command"
+msgstr  "kommando"
 
-#: ../../xffm/common/run.hh:338
-msgid "error"
-msgstr "fejl"
+#: ../xffm/completion/bash.hh:135
+msgid   "file"
+msgstr  "fil"
 
-#: ../../xffm/common/run.hh:342
-msgid "warning"
-msgstr "advarsel"
+#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
+msgid   "Options >>"
+msgstr  "Indstillinger >>"
 
-#: ../../xffm/common/preview.hh:581
-msgid "Empty file"
-msgstr "Tom fil"
+#: ../xffm/completion/base.hh:28
+msgid   "Command"
+msgstr  "Kommando"
 
-#: ../../xffm/common/preview.hh:636
-#, c-format
-msgid "Cannot read from %s"
-msgstr "Kan ikke læse fra %s"
+#: ../xffm/completion/base.hh:31
+msgid   "File"
+msgstr  "Fil"
+
+#: ../xffm/completion/base.hh:34
+msgid   "Command history"
+msgstr  "Kommandohistorik"
+
+#: ../xffm/completion/base.hh:40
+msgid   "Variable"
+msgstr  "Variabel"
+
+#: ../xffm/completion/base.hh:43
+msgid   "Host"
+msgstr  "Vært"
+
+#: ../xffm/completion/base.hh:55
+msgid   "Found no match"
+msgstr  "Ingen fund"
+
+#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
+msgid   "Matches"
+msgstr  "Resultater"
+
+#: ../xffm/completion/base.hh:142
+msgid   "Too many files open"
+msgstr  "For mange åbne filer"
 

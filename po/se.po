@@ -1,1495 +1,1435 @@
-# Translations for Rodent package.
-# Copyright (C) 2004-2012 FSF.
-# This file is distributed under the same license as the Rodent package.
-#   --- vie may  3 10:39:40 CDT 2013 ---
+# Xffm+ translation file: vie ago  9 14:46:03 CDT 2019
+# Merged fron existing open source files
+# http://xffm.org
 #
-# Børre Gaup <boerre@skolelinux.no>, 2002-2012.
-# Lasse Wigelius <lasse.wigelius@same.net>, 2002-2003.
-# Regnor Jernsletten <Regnor.Jernsletten@sami.uit.no>, 2002-2003.
-# Luobbal-Jovsset Esko <esko.aikio@same.net>, 2002-2003.
-# Nils Johan Utsi <njutsi@frisurf.no>, 2003.
-# Svein Lund <sveilund@online.no>, 2002.
-# Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
-# fuzzy
-msgid ""
-msgstr ""
-"Project-Id-Version: Rodent Delta\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-04 16:54-0500\n"
-"PO-Revision-Date: 2010-03-14 02:24+0100\n"
-"Last-Translator: Børre Gaup <boerre@skolelinux.no>\n"
-"Language-Team: Northern Sami <i18n-sme@lister.ping.uio.no>\n"
-"Language: se\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.0\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Environment: kde\n"
-"X-Accelerator-Marker: \n"
-"X-Text-Markup: kde4\n"
+#
+msgid   ""
+msgstr  "Project-Id-Version: xffm+\n"
+        "Report-Msgid-Bugs-To: \n"
+        "POT-Creation-Date: 2019-08-09 12:32-0500\n"
+        "PO-Revision-Date: 2010-03-14 02:24+0100\n"
+        "Last-Translator: Børre Gaup <boerre@skolelinux.no>\n"
+        "Language-Team: Northern Sami <i18n-sme@lister.ping.uio.no>\n"
+        "Language: se\n"
+        "MIME-Version: 1.0\n"
+        "Content-Type: text/plain; charset=UTF-8\n"
+        "Content-Transfer-Encoding: 8bit\n"
+        "X-Generator: Lokalize 1.0\n"
+        "Plural-Forms: nplurals=2; plural=n != 1;\n"
+        "X-Environment: kde\n"
+        "X-Accelerator-Marker: \n"
+        "X-Text-Markup: kde4\n"
 
-#: ../../xffm/mime/mimemagic.hh:68 ../../xffm/mime/mimemagic.hh:110
-#: ../../xffm/common/mimemagic.hh:68 ../../xffm/common/mimemagic.hh:110
+#: ../xffm/mime/mimemagic.hh:68 ../xffm/mime/mimemagic.hh:112
 #, fuzzy
-msgid "No Read Permission"
-msgstr "Vuoigatvuođat"
+msgid   "No Read Permission"
+msgstr  "Vuoigatvuođat"
 
-#: ../../xffm/completion/base.hh:28
-msgid "Command"
-msgstr "Gohččun"
+#: ../xffm/find/dialog.hh:91 ../xffm/find/dialog.hh:143
+#: ../xffm/find/dialog.hh:604
+msgid   "Find"
+msgstr  "Oza"
 
-#: ../../xffm/completion/base.hh:31
-msgid "File"
-msgstr "Fiila"
+#: ../xffm/find/dialog.hh:167 ../xffm/find/fgr.hh:146
+msgid   "Recursive"
+msgstr  "Rekursiva"
 
-#: ../../xffm/completion/base.hh:34
+#: ../xffm/find/dialog.hh:170 ../xffm/find/fgr.hh:142
+msgid   "Find hidden files and directories"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:173 ../xffm/find/fgr.hh:138
 #, fuzzy
-msgid "Command history"
-msgstr "Gohččunmeattáhus"
+msgid   "Stay on single filesystem"
+msgstr  "Dušše logahahtti fiilavuogadat"
 
-#. option -u uid "uid" "uid_combo"
-#: ../../xffm/completion/base.hh:37 ../../xffm/find/dialog.hh:192
-msgid "User"
-msgstr "Geavaheaddji"
-
-#: ../../xffm/completion/base.hh:40
-msgid "Variable"
-msgstr "Variábel"
-
-#: ../../xffm/completion/base.hh:43
-msgid "Host"
-msgstr "Guossoheaddji"
-
-#: ../../xffm/completion/base.hh:55
+#: ../xffm/find/dialog.hh:176 ../xffm/find/signals.hh:66
+#: ../xffm/find/signals.hh:454
 #, fuzzy
-msgid "Found no match"
-msgstr "Beassansánit eai leat ovttamađu"
+msgid   "Results"
+msgstr  "Bohtosat:"
 
-#: ../../xffm/completion/base.hh:141 ../../xffm/completion/base.hh:142
+#: ../xffm/find/dialog.hh:176
+msgid   "Upper limit"
+msgstr  "Badjerádji"
+
+#: ../xffm/find/dialog.hh:181
+msgid   "At Least"
+msgstr  "Unnimus"
+
+#: ../xffm/find/dialog.hh:181 ../xffm/find/dialog.hh:186
+msgid   "kBytes"
+msgstr  "KB"
+
+#: ../xffm/find/dialog.hh:186
+msgid   "At Most"
+msgstr  "Eanemus"
+
+#: ../xffm/find/dialog.hh:192 ../xffm/completion/base.hh:37
+msgid   "User"
+msgstr  "Geavaheaddji"
+
+#: ../xffm/find/dialog.hh:197
+msgid   "Group"
+msgstr  "Joavku"
+
+#: ../xffm/find/dialog.hh:201
 #, fuzzy
-msgid "Matches"
-msgstr "Gozihuvvon"
+msgid   "Octal Permissions"
+msgstr  "Vuoigatvuođat"
 
-#: ../../xffm/completion/base.hh:142
+#: ../xffm/find/dialog.hh:206
+msgid   "SUID"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:206 ../xffm/fm/view/local/popup.hh:1102
 #, fuzzy
-msgid "Too many files open"
-msgstr "Govvafiila maid rahpat"
+msgid   "Executable"
+msgstr  "Vuojehahtti fiila:"
 
-#: ../../xffm/completion/base.hh:339 ../../xffm/find/fgr.hh:124
+#: ../xffm/find/dialog.hh:214 ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168
+msgid   "Minutes"
+msgstr  "Minuhta"
+
+#: ../xffm/find/dialog.hh:219 ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171
+msgid   "Hours"
+msgstr  "Diimmu"
+
+#: ../xffm/find/dialog.hh:224 ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174
+msgid   "Days"
+msgstr  "Beaivvi"
+
+#: ../xffm/find/dialog.hh:230
+msgid   "Months"
+msgstr  "Mánu"
+
+#: ../xffm/find/dialog.hh:241
 #, fuzzy
-msgid "Options:"
-msgstr "Molssaeavttut"
+msgid   "File type : "
+msgstr  "Fiilašládja:"
 
-#: ../../xffm/completion/bash.hh:133
-msgid "Completion mode:"
-msgstr "Ollašuhttindoaibmanvuogi:"
+#: ../xffm/find/dialog.hh:255 ../xffm/find/dialog.hh:595
+#: ../xffm/common/gtk.hh:79 ../xffm/fm/dialog/notebook/page/page.hh:71
+msgid   "Close"
+msgstr  "Gidde"
 
-#: ../../xffm/completion/bash.hh:134
+#: ../xffm/find/dialog.hh:263 ../xffm/find/dialog.hh:363
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/fm/view/treeview.hh:18
+msgid   "Details"
+msgstr  "Bienat"
+
+#: ../xffm/find/dialog.hh:301 ../xffm/find/fgr.hh:124
+#: ../xffm/find/signals.hh:100
+msgid   "Path"
+msgstr  "Bálggis"
+
+#: ../xffm/find/dialog.hh:334 ../xffm/find/fgr.hh:126
+msgid   "Filter:"
+msgstr  "Silli:"
+
+#: ../xffm/find/dialog.hh:377
+msgid   "Contains"
+msgstr  "Sisttisdoallá"
+
+#: ../xffm/find/dialog.hh:397
 #, fuzzy
-msgid "command"
-msgstr "Gohččun"
+msgid   "Contains the text"
+msgstr  "Mas lea teaksta:"
 
-#: ../../xffm/completion/bash.hh:135
-msgid "file"
-msgstr "fiila"
+#: ../xffm/find/dialog.hh:430
+msgid   "Case Sensitive"
+msgstr  "Stuorra ja smávva bustávaid earuheapmi"
 
-#: ../../xffm/completion/bash.hh:145 ../../xffm/completion/bash.hh:149
-msgid "Options >>"
-msgstr "Molssaeavttut >>"
-
-#: ../../xffm/find/fgr.hh:124 ../../xffm/find/signals.hh:100
-#: ../../xffm/find/dialog.hh:301
-msgid "Path"
-msgstr "Bálggis"
-
-#: ../../xffm/find/fgr.hh:125
-msgid "Locate documents and folders on this computer by name or content"
-msgstr ""
-
-#: ../../xffm/find/fgr.hh:126 ../../xffm/find/dialog.hh:334
-msgid "Filter:"
-msgstr "Silli:"
-
-#: ../../xffm/find/fgr.hh:126
+#: ../xffm/find/dialog.hh:442
 #, fuzzy
-msgid "Search for files"
-msgstr "Oza:"
+msgid   "Extended regexp"
+msgstr  "Lassereaidočuolda"
 
-#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
-#: ../../xffm/find/fgr.hh:128
-msgid "Contents:"
-msgstr "Sisdoallu:"
+#: ../xffm/find/dialog.hh:453
+msgid   "Include binary files"
+msgstr  "Maiddái binearafiillaid"
 
-#: ../../xffm/find/fgr.hh:128
-msgid "File's contents filtered as plain text."
-msgstr ""
-
-#: ../../xffm/find/fgr.hh:131
-msgid "Verbose output debugging mode."
-msgstr ""
-
-#: ../../xffm/find/fgr.hh:133
-msgid "Show version information"
-msgstr "Čájet dieđuid veršuvnna birra"
-
-#: ../../xffm/find/fgr.hh:135
+#: ../xffm/find/dialog.hh:463 ../xffm/find/fgr.hh:212
 #, fuzzy
-msgid "Filter Details"
-msgstr "Sillenheivehusat"
+msgid   "Line Count"
+msgstr  "Linnjá olggos"
 
-#. / option -a "xdev"
-#: ../../xffm/find/fgr.hh:138 ../../xffm/find/dialog.hh:173
+#: ../xffm/find/dialog.hh:489
 #, fuzzy
-msgid "Stay on single filesystem"
-msgstr "Dušše logahahtti fiilavuogadat"
+msgid   "Match"
+msgstr  "Batch"
 
-#: ../../xffm/find/fgr.hh:140
-msgid "Print..."
-msgstr "Čálit …"
+#: ../xffm/find/dialog.hh:501
+msgid   "Anywhere"
+msgstr  ""
 
-#: ../../xffm/find/fgr.hh:140
-msgid "The unique Process ID that identifies this process."
-msgstr ""
+#: ../xffm/find/dialog.hh:516
+msgid   "Whole words only"
+msgstr  "Dušše olles sánit"
 
-#. / option -D "recursiveH"
-#: ../../xffm/find/fgr.hh:142 ../../xffm/find/dialog.hh:170
-msgid "Find hidden files and directories"
-msgstr ""
+#: ../xffm/find/dialog.hh:531
+msgid   "lines"
+msgstr  "linnjá"
 
-#: ../../xffm/find/fgr.hh:143
-msgid "Filter"
-msgstr "Silli"
-
-#: ../../xffm/find/fgr.hh:144
-msgid ""
-"To display files which pass the filter (stars and regexps will be processed)"
-msgstr ""
-
-#. / option -r "recursive"
-#: ../../xffm/find/fgr.hh:146 ../../xffm/find/dialog.hh:167
-msgid "Recursive"
-msgstr "Rekursiva"
-
-#: ../../xffm/find/fgr.hh:147 ../../xffm/find/fgr.hh:148
-#: ../../xffm/find/fgr.hh:149 ../../xffm/find/fgr.hh:150
+#: ../xffm/find/dialog.hh:545 ../xffm/find/fgr.hh:210
 #, fuzzy
-msgid "KByte"
-msgstr "Stávvala"
+msgid   "No match"
+msgstr  "(Ii deaivan)"
 
-#: ../../xffm/find/fgr.hh:148
+#: ../xffm/find/dialog.hh:577 ../xffm/find/signals.hh:368
+#: ../xffm/common/gtk.hh:409 ../xffm/fm/view/local/rm.hh:157
+#: ../xffm/fm/view/local/properties.hh:314
+#: ../xffm/response/entryresponse.hh:435 ../xffm/response/chooserresponse.hh:21
+msgid   "Cancel"
+msgstr  "Gaskkalduhtte"
+
+#: ../xffm/find/dialog.hh:587
+msgid   "Clear"
+msgstr  "Sálke"
+
+#: ../xffm/find/dialog.hh:629
+msgid   "Edit"
+msgstr  "Doaimmat"
+
+#: ../xffm/find/dialog.hh:743 ../xffm/find/dialog.hh:758
+#: ../xffm/common/preview.hh:460 ../xffm/common/util.hh:1354
+#: ../xffm/common/util.hh:1356 ../xffm/common/util.hh:1362
+#: ../xffm/common/util.hh:1364
+msgid   "unknown"
+msgstr  "amas"
+
+#: ../xffm/find/dialog.hh:772
+msgid   "Modified"
+msgstr  "Rievdaduvvon"
+
+#: ../xffm/find/dialog.hh:776
+msgid   "Created"
+msgstr  "Ráhkaduvvon"
+
+#: ../xffm/find/dialog.hh:780
 #, fuzzy
-msgid "is greater than or equal to"
-msgstr "stuorit dahje ovttamađu"
+msgid   "Accessed"
+msgstr  "Geavahuvvon:"
 
-#: ../../xffm/find/fgr.hh:150
+#: ../xffm/find/dialog.hh:1098
+msgid   "Basic rules:\n"
+        "\n"
+        "*  Will match any character zero or more times.\n"
+        "?  Will match any character exactly one time\n"
+        "[] Match any character within the [] \n"
+        "^  Match at beginning of string\n"
+        "$  Match at end of string \n"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:1107
+msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
+        "( ) : \n"
+        "In  basic regular expressions the metacharacters ?, +, {, |, (, "
+        "and ) \n"
+        "  lose their special meaning.\n"
+        "\n"
+        "The  period . matches  any  single  character.\n"
+        "The caret ^ matches at the start of line.\n"
+        "The dollar $ matches at the end of line.\n"
+        "\n"
+        "Characters within [ ] matches any single character in the list.\n"
+        "Characters within [^ ] matches any single character *not* in the "
+        "list.\n"
+        "Characters inside [ - ] matches a range of characters (ie [0-9] or "
+        "[a-z]).\n"
+        "\n"
+        "A regular expression may be followed by one of several repetition "
+        "operators:\n"
+        "?      The preceding item is optional and matched\n"
+        "       at most once.\n"
+        "*      The preceding item will be matched zero\n"
+        "       or more times.\n"
+        "+      The preceding item will be matched one or\n"
+        "       more times.\n"
+        "{n}    The preceding item is matched exactly n times.\n"
+        "{n,}   The preceding item is matched n or more times.\n"
+        "{n,m}  The preceding item is matched at least n times,\n"
+        "       but not more than m times.\n"
+        "\n"
+        "To match any reserved character, precede it with \\. \n"
+        "\n"
+        "Two regular expressions may be joined by the logical or operator |.\n"
+        "Two regular expressions may be concatenated.\n"
+        "\n"
+        "More information is available by typing \"man grep\"\n"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:124 ../xffm/completion/base.hh:339
 #, fuzzy
-msgid "is less than or equal to"
-msgstr "unnit dahje ovttamađu"
+msgid   "Options:"
+msgstr  "Molssaeavttut"
 
-#: ../../xffm/find/fgr.hh:152
-msgid "Set UID"
-msgstr "Bija UID"
+#: ../xffm/find/fgr.hh:125
+msgid   "Locate documents and folders on this computer by name or content"
+msgstr  ""
 
-#: ../../xffm/find/fgr.hh:152
+#: ../xffm/find/fgr.hh:126
 #, fuzzy
-msgid "Executable Text Files"
-msgstr "Vuojehahtti fiillat"
+msgid   "Search for files"
+msgstr  "Oza:"
 
-#: ../../xffm/find/fgr.hh:154
-msgid "The permissions of the file, in octal notation."
-msgstr ""
+#: ../xffm/find/fgr.hh:128
+msgid   "Contents:"
+msgstr  "Sisdoallu:"
 
-#: ../../xffm/find/fgr.hh:155
-msgid "Type"
-msgstr "Šládja"
+#: ../xffm/find/fgr.hh:128
+msgid   "File's contents filtered as plain text."
+msgstr  ""
 
-#: ../../xffm/find/fgr.hh:157 ../../xffm/find/signals.hh:14
-msgid "Any"
-msgstr "Vaikko makkár"
+#: ../xffm/find/fgr.hh:131
+msgid   "Verbose output debugging mode."
+msgstr  ""
 
-#: ../../xffm/find/fgr.hh:157
+#: ../xffm/find/fgr.hh:133
+msgid   "Show version information"
+msgstr  "Čájet dieđuid veršuvnna birra"
+
+#: ../xffm/find/fgr.hh:135
 #, fuzzy
-msgid "Default type"
-msgstr "Geavat Standardstiilla"
+msgid   "Filter Details"
+msgstr  "Sillenheivehusat"
 
-#: ../../xffm/find/fgr.hh:158 ../../xffm/common/preview.hh:478
+#: ../xffm/find/fgr.hh:140
+msgid   "Print..."
+msgstr  "Čálit …"
+
+#: ../xffm/find/fgr.hh:140
+msgid   "The unique Process ID that identifies this process."
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:143
+msgid   "Filter"
+msgstr  "Silli"
+
+#: ../xffm/find/fgr.hh:144
+msgid   "To display files which pass the filter (stars and regexps will be "
+        "processed)"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:147 ../xffm/find/fgr.hh:148 ../xffm/find/fgr.hh:149
+#: ../xffm/find/fgr.hh:150
 #, fuzzy
-msgid "Regular file"
-msgstr "Dábálaš"
+msgid   "KByte"
+msgstr  "Stávvala"
 
-#: ../../xffm/find/fgr.hh:159 ../../xffm/find/signals.hh:8
-#: ../../xffm/fm/view/local/popup.hh:1062 ../../xffm/common/preview.hh:469
-msgid "Directory"
-msgstr "Máhppa"
-
-#: ../../xffm/find/fgr.hh:160 ../../xffm/find/signals.hh:9
-#: ../../xffm/common/preview.hh:475
-msgid "Symbolic Link"
-msgstr "Symbolalaš liŋka"
-
-#: ../../xffm/find/fgr.hh:161
-msgid "UNIX Socket"
-msgstr ""
-
-#: ../../xffm/find/fgr.hh:162 ../../xffm/find/signals.hh:11
-#: ../../xffm/common/preview.hh:463
+#: ../xffm/find/fgr.hh:148
 #, fuzzy
-msgid "Block device"
-msgstr "Modemovttadat:"
+msgid   "is greater than or equal to"
+msgstr  "stuorit dahje ovttamađu"
 
-#: ../../xffm/find/fgr.hh:163 ../../xffm/find/signals.hh:12
-#: ../../xffm/common/preview.hh:466
+#: ../xffm/find/fgr.hh:150
 #, fuzzy
-msgid "Character device"
-msgstr "Čállinmearkakoda"
+msgid   "is less than or equal to"
+msgstr  "unnit dahje ovttamađu"
 
-#: ../../xffm/find/fgr.hh:164 ../../xffm/find/signals.hh:13
-#: ../../xffm/common/preview.hh:472
-msgid "FIFO"
-msgstr "FIFO"
+#: ../xffm/find/fgr.hh:152
+msgid   "Set UID"
+msgstr  "Bija UID"
 
-#. radio_p freed on destroy event for findDialog.
-#. option -k minutes "last_minutes", "last_minutes_spin"
-#: ../../xffm/find/fgr.hh:166 ../../xffm/find/fgr.hh:168
-#: ../../xffm/find/dialog.hh:214
-msgid "Minutes"
-msgstr "Minuhta"
-
-#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
-#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
-#: ../../xffm/find/dialog.hh:263 ../../xffm/find/dialog.hh:363
-#: ../../xffm/fm/view/treeview.hh:18
-msgid "Details"
-msgstr "Bienat"
-
-#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
-#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
-#: ../../xffm/find/fgr.hh:179 ../../xffm/find/fgr.hh:180
-#: ../../xffm/find/fgr.hh:183 ../../xffm/find/fgr.hh:184
-#: ../../xffm/find/fgr.hh:187 ../../xffm/find/fgr.hh:188
+#: ../xffm/find/fgr.hh:152
 #, fuzzy
-msgid "TIME"
-msgstr "ISTIME(x)"
+msgid   "Executable Text Files"
+msgstr  "Vuojehahtti fiillat"
 
-#: ../../xffm/find/fgr.hh:168 ../../xffm/find/fgr.hh:171
-#: ../../xffm/find/fgr.hh:174 ../../xffm/find/fgr.hh:177
-msgid "Previous"
-msgstr "Ovddit"
+#: ../xffm/find/fgr.hh:154
+msgid   "The permissions of the file, in octal notation."
+msgstr  ""
 
-#. option -h hours "last_hours", "last_hours_spin"
-#: ../../xffm/find/fgr.hh:169 ../../xffm/find/fgr.hh:171
-#: ../../xffm/find/dialog.hh:219
-msgid "Hours"
-msgstr "Diimmu"
+#: ../xffm/find/fgr.hh:155
+msgid   "Type"
+msgstr  "Šládja"
 
-#. option -d days "last_days", "last_days_spin"
-#: ../../xffm/find/fgr.hh:172 ../../xffm/find/fgr.hh:174
-#: ../../xffm/find/dialog.hh:224
-msgid "Days"
-msgstr "Beaivvi"
+#: ../xffm/find/fgr.hh:157 ../xffm/find/signals.hh:14
+msgid   "Any"
+msgstr  "Vaikko makkár"
 
-#: ../../xffm/find/fgr.hh:175
-msgid "Month"
-msgstr "Mánnu"
-
-#: ../../xffm/find/fgr.hh:177
+#: ../xffm/find/fgr.hh:157
 #, fuzzy
-msgid "Month(s)"
-msgstr "mánu"
+msgid   "Default type"
+msgstr  "Geavat Standardstiilla"
 
-#: ../../xffm/find/fgr.hh:180
+#: ../xffm/find/fgr.hh:158 ../xffm/common/preview.hh:478
 #, fuzzy
-msgid "Modification Time :"
-msgstr "Maŋemuš rievdaduvvon"
+msgid   "Regular file"
+msgstr  "Dábálaš"
 
-#: ../../xffm/find/fgr.hh:184
+#: ../xffm/find/fgr.hh:159 ../xffm/find/signals.hh:8
+#: ../xffm/common/preview.hh:469 ../xffm/fm/view/local/popup.hh:1062
+msgid   "Directory"
+msgstr  "Máhppa"
+
+#: ../xffm/find/fgr.hh:160 ../xffm/find/signals.hh:9
+#: ../xffm/common/preview.hh:475
+msgid   "Symbolic Link"
+msgstr  "Symbolalaš liŋka"
+
+#: ../xffm/find/fgr.hh:161
+msgid   "UNIX Socket"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:162 ../xffm/find/signals.hh:11
+#: ../xffm/common/preview.hh:463
 #, fuzzy
-msgid "Access Time :"
-msgstr "Geavahuvvon:"
+msgid   "Block device"
+msgstr  "Modemovttadat:"
 
-#: ../../xffm/find/fgr.hh:188
+#: ../xffm/find/fgr.hh:163 ../xffm/find/signals.hh:12
+#: ../xffm/common/preview.hh:466
 #, fuzzy
-msgid "Creation Time :"
-msgstr "Ráhkadanáigi"
+msgid   "Character device"
+msgstr  "Čállinmearkakoda"
 
-#: ../../xffm/find/fgr.hh:191 ../../xffm/find/fgr.hh:192
+#: ../xffm/find/fgr.hh:164 ../xffm/find/signals.hh:13
+#: ../xffm/common/preview.hh:472
+msgid   "FIFO"
+msgstr  "FIFO"
+
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/find/fgr.hh:179 ../xffm/find/fgr.hh:180
+#: ../xffm/find/fgr.hh:183 ../xffm/find/fgr.hh:184 ../xffm/find/fgr.hh:187
+#: ../xffm/find/fgr.hh:188
 #, fuzzy
-msgid "uid"
-msgstr "Buhid"
+msgid   "TIME"
+msgstr  "ISTIME(x)"
 
-#: ../../xffm/find/fgr.hh:192
-msgid "User:"
-msgstr "Geavaheaddji:"
+#: ../xffm/find/fgr.hh:168 ../xffm/find/fgr.hh:171 ../xffm/find/fgr.hh:174
+#: ../xffm/find/fgr.hh:177
+msgid   "Previous"
+msgstr  "Ovddit"
 
-#: ../../xffm/find/fgr.hh:194 ../../xffm/find/fgr.hh:195
+#: ../xffm/find/fgr.hh:175
+msgid   "Month"
+msgstr  "Mánnu"
+
+#: ../xffm/find/fgr.hh:177
 #, fuzzy
-msgid "gid"
-msgstr "Qid"
+msgid   "Month(s)"
+msgstr  "mánu"
 
-#: ../../xffm/find/fgr.hh:195
-msgid "Group:"
-msgstr "Joavku:"
-
-#: ../../xffm/find/fgr.hh:198
-msgid ""
-"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
-"character that  normally  follows  a file  name"
-msgstr ""
-
-#: ../../xffm/find/fgr.hh:200
+#: ../xffm/find/fgr.hh:180
 #, fuzzy
-msgid "Content View"
-msgstr "Sisdoallu, namahus"
+msgid   "Modification Time :"
+msgstr  "Maŋemuš rievdaduvvon"
 
-#: ../../xffm/find/fgr.hh:201 ../../xffm/find/fgr.hh:202
-#: ../../xffm/find/fgr.hh:203 ../../xffm/find/fgr.hh:204
-msgid "STRING"
-msgstr ""
-
-#: ../../xffm/find/fgr.hh:202 ../../xffm/find/fgr.hh:204
-#: ../../xffm/fm/view/local/popup.hh:759
-msgid "Regular expression"
-msgstr "Virolaš cealkka"
-
-#: ../../xffm/find/fgr.hh:204
+#: ../xffm/find/fgr.hh:184
 #, fuzzy
-msgid "Extended"
-msgstr "viiddiduvvon"
+msgid   "Access Time :"
+msgstr  "Geavahuvvon:"
 
-#: ../../xffm/find/fgr.hh:206
+#: ../xffm/find/fgr.hh:188
 #, fuzzy
-msgid "Ignore case"
-msgstr "Badjelgeahča rievdadusaid"
+msgid   "Creation Time :"
+msgstr  "Ráhkadanáigi"
 
-#: ../../xffm/find/fgr.hh:208
-msgid "Text Files"
-msgstr "Teakstafiilat"
-
-#: ../../xffm/find/fgr.hh:210 ../../xffm/find/dialog.hh:545
+#: ../xffm/find/fgr.hh:191 ../xffm/find/fgr.hh:192
 #, fuzzy
-msgid "No match"
-msgstr "(Ii deaivan)"
+msgid   "uid"
+msgstr  "Buhid"
 
-#: ../../xffm/find/fgr.hh:212 ../../xffm/find/dialog.hh:463
+#: ../xffm/find/fgr.hh:192
+msgid   "User:"
+msgstr  "Geavaheaddji:"
+
+#: ../xffm/find/fgr.hh:194 ../xffm/find/fgr.hh:195
 #, fuzzy
-msgid "Line Count"
-msgstr "Linnjá olggos"
+msgid   "gid"
+msgstr  "Qid"
 
-#: ../../xffm/find/fgr.hh:214
-msgid "Words"
-msgstr "Sáni"
+#: ../xffm/find/fgr.hh:195
+msgid   "Group:"
+msgstr  "Joavku:"
 
-#: ../../xffm/find/fgr.hh:216
-msgid "Lines"
-msgstr "Linnjá"
+#: ../xffm/find/fgr.hh:198
+msgid   "Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+        "character that  normally  follows  a file  name"
+msgstr  ""
 
-#: ../../xffm/find/fgr.hh:368
+#: ../xffm/find/fgr.hh:200
+#, fuzzy
+msgid   "Content View"
+msgstr  "Sisdoallu, namahus"
+
+#: ../xffm/find/fgr.hh:201 ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:203
+#: ../xffm/find/fgr.hh:204
+msgid   "STRING"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:204
+#: ../xffm/fm/view/local/popup.hh:759
+msgid   "Regular expression"
+msgstr  "Virolaš cealkka"
+
+#: ../xffm/find/fgr.hh:204
+#, fuzzy
+msgid   "Extended"
+msgstr  "viiddiduvvon"
+
+#: ../xffm/find/fgr.hh:206
+#, fuzzy
+msgid   "Ignore case"
+msgstr  "Badjelgeahča rievdadusaid"
+
+#: ../xffm/find/fgr.hh:208
+msgid   "Text Files"
+msgstr  "Teakstafiilat"
+
+#: ../xffm/find/fgr.hh:214
+msgid   "Words"
+msgstr  "Sáni"
+
+#: ../xffm/find/fgr.hh:216
+msgid   "Lines"
+msgstr  "Linnjá"
+
+#: ../xffm/find/fgr.hh:362
 #, fuzzy, c-format
-msgid "Usage : %s [OPTIONS]\n"
-msgstr "Geavaheapmi: %s %s\n"
+msgid   "Usage : %s [OPTIONS]\n"
+msgstr  "Geavaheapmi: %s %s\n"
 
-#: ../../xffm/find/signals.hh:7
-msgid "Regular"
-msgstr "Dábálaš"
+#: ../xffm/find/signals.hh:7
+msgid   "Regular"
+msgstr  "Dábálaš"
 
-#: ../../xffm/find/signals.hh:10 ../../xffm/common/preview.hh:481
-msgid "Socket"
-msgstr ""
+#: ../xffm/find/signals.hh:10 ../xffm/common/preview.hh:481
+msgid   "Socket"
+msgstr  ""
 
-#. if (g_slist_length(list) == 0) return NULL;
-#. Create liststore for DnD
-#. / option "upper_limit_spin" (only in gtk findDialog)
-#: ../../xffm/find/signals.hh:66 ../../xffm/find/signals.hh:454
-#: ../../xffm/find/dialog.hh:176
+#: ../xffm/find/signals.hh:396 ../xffm/find/signals.hh:830
 #, fuzzy
-msgid "Results"
-msgstr "Bohtosat:"
+msgid   "No editor for current action."
+msgstr  "Lohkat dálá báikái"
 
-#. button no
-#: ../../xffm/find/signals.hh:368 ../../xffm/find/dialog.hh:577
-#: ../../xffm/response/chooserresponse.hh:21
-#: ../../xffm/response/entryresponse.hh:420
-#: ../../xffm/fm/view/local/properties.hh:314
-#: ../../xffm/fm/view/local/rm.hh:157 ../../xffm/common/gtk.hh:409
-msgid "Cancel"
-msgstr "Gaskkalduhtte"
+#: ../xffm/find/signals.hh:454
+msgid   "Upper limit:"
+msgstr  "Bajit rádji:"
 
-#: ../../xffm/find/signals.hh:396 ../../xffm/find/signals.hh:830
+#: ../xffm/find/signals.hh:456
 #, fuzzy
-msgid "No editor for current action."
-msgstr "Lohkat dálá báikái"
+msgid   "Counting files..."
+msgstr  "Rehkenastimin máhpaid: %s"
 
-#: ../../xffm/find/signals.hh:454
-msgid "Upper limit:"
-msgstr "Bajit rádji:"
-
-#: ../../xffm/find/signals.hh:456
-#, fuzzy
-msgid "Counting files..."
-msgstr "Rehkenastimin máhpaid: %s"
-
-#: ../../xffm/find/signals.hh:471
+#: ../xffm/find/signals.hh:471
 #, c-format
-msgid "Found %d match"
-msgid_plural "Found %d matches"
-msgstr[0] ""
-msgstr[1] ""
+msgid   "Found %d match"
+msgid_plural    "Found %d matches"
+msgstr[0]       ""
+msgstr[1]       ""
 
-#: ../../xffm/find/signals.hh:473
+#: ../xffm/find/signals.hh:473
 #, fuzzy, c-format
-msgid "%s Finished : %s"
-msgstr "Geargan"
+msgid   "%s Finished : %s"
+msgstr  "Geargan"
 
-#: ../../xffm/find/signals.hh:596 ../../xffm/find/signals.hh:598
-msgid "Searching..."
-msgstr "Ohcamin …"
+#: ../xffm/find/signals.hh:596 ../xffm/find/signals.hh:598
+msgid   "Searching..."
+msgstr  "Ohcamin …"
 
-#. g_object_set_data(G_OBJECT(findDialog), "window", findDialog);
-#: ../../xffm/find/dialog.hh:91 ../../xffm/find/dialog.hh:143
-#: ../../xffm/find/dialog.hh:604
-msgid "Find"
-msgstr "Oza"
-
-#: ../../xffm/find/dialog.hh:176
-msgid "Upper limit"
-msgstr "Badjerádji"
-
-#. option -s +KByte "size_greater", "size_greater_spin"
-#: ../../xffm/find/dialog.hh:181
-msgid "At Least"
-msgstr "Unnimus"
-
-#: ../../xffm/find/dialog.hh:181 ../../xffm/find/dialog.hh:186
-msgid "kBytes"
-msgstr "KB"
-
-#. option -s -KByte "size_smaller", "size_smaller_spin"
-#: ../../xffm/find/dialog.hh:186
-msgid "At Most"
-msgstr "Eanemus"
-
-#: ../../xffm/find/dialog.hh:197
-msgid "Group"
-msgstr "Joavku"
-
-#. option -o octal "octal_p" "permissions_entry"
-#: ../../xffm/find/dialog.hh:201
+#: ../xffm/common/preview.hh:581
 #, fuzzy
-msgid "Octal Permissions"
-msgstr "Vuoigatvuođat"
+msgid   "Empty file"
+msgstr  "Guorus fiilanamma."
 
-#. option -p suid | exe
-#: ../../xffm/find/dialog.hh:206
-msgid "SUID"
-msgstr ""
-
-#: ../../xffm/find/dialog.hh:206 ../../xffm/fm/view/local/popup.hh:1102
-#, fuzzy
-msgid "Executable"
-msgstr "Vuojehahtti fiila:"
-
-#. option -m months "last_months", "last_months_spin"
-#: ../../xffm/find/dialog.hh:230
-msgid "Months"
-msgstr "Mánu"
-
-#: ../../xffm/find/dialog.hh:241
-#, fuzzy
-msgid "File type : "
-msgstr "Fiilašládja:"
-
-#. gtk_widget_show (GTK_WIDGET(right_options_vbox));
-#. gtk_widget_show (GTK_WIDGET(center_options_vbox));
-#. gtk_widget_show (GTK_WIDGET(left_options_vbox));
-#: ../../xffm/find/dialog.hh:255 ../../xffm/find/dialog.hh:595
-#: ../../xffm/fm/dialog/notebook/page/page.hh:70 ../../xffm/common/gtk.hh:79
-msgid "Close"
-msgstr "Gidde"
-
-#. gtk_box_pack_start (vbox7a, GTK_WIDGET(advancedBox), TRUE, FALSE, 5);
-#. gtk_widget_show(GTK_WIDGET(advancedBox));
-#. //////////////  grep options.... /////////////////////////
-#: ../../xffm/find/dialog.hh:377
-msgid "Contains"
-msgstr "Sisttisdoallá"
-
-#: ../../xffm/find/dialog.hh:397
-#, fuzzy
-msgid "Contains the text"
-msgstr "Mas lea teaksta:"
-
-#: ../../xffm/find/dialog.hh:430
-msgid "Case Sensitive"
-msgstr "Stuorra ja smávva bustávaid earuheapmi"
-
-#: ../../xffm/find/dialog.hh:442
-#, fuzzy
-msgid "Extended regexp"
-msgstr "Lassereaidočuolda"
-
-#: ../../xffm/find/dialog.hh:453
-msgid "Include binary files"
-msgstr "Maiddái binearafiillaid"
-
-#: ../../xffm/find/dialog.hh:489
-#, fuzzy
-msgid "Match"
-msgstr "Batch"
-
-#: ../../xffm/find/dialog.hh:501
-msgid "Anywhere"
-msgstr ""
-
-#: ../../xffm/find/dialog.hh:516
-msgid "Whole words only"
-msgstr "Dušše olles sánit"
-
-#: ../../xffm/find/dialog.hh:531
-msgid "lines"
-msgstr "linnjá"
-
-#: ../../xffm/find/dialog.hh:587
-msgid "Clear"
-msgstr "Sálke"
-
-#: ../../xffm/find/dialog.hh:629
-msgid "Edit"
-msgstr "Doaimmat"
-
-#: ../../xffm/find/dialog.hh:743 ../../xffm/find/dialog.hh:758
-#: ../../xffm/common/util.hh:1354 ../../xffm/common/util.hh:1356
-#: ../../xffm/common/util.hh:1362 ../../xffm/common/util.hh:1364
-#: ../../xffm/common/preview.hh:460
-msgid "unknown"
-msgstr "amas"
-
-#: ../../xffm/find/dialog.hh:772
-msgid "Modified"
-msgstr "Rievdaduvvon"
-
-#: ../../xffm/find/dialog.hh:776
-msgid "Created"
-msgstr "Ráhkaduvvon"
-
-#: ../../xffm/find/dialog.hh:780
-#, fuzzy
-msgid "Accessed"
-msgstr "Geavahuvvon:"
-
-#: ../../xffm/find/dialog.hh:1098
-msgid ""
-"Basic rules:\n"
-"\n"
-"*  Will match any character zero or more times.\n"
-"?  Will match any character exactly one time\n"
-"[] Match any character within the [] \n"
-"^  Match at beginning of string\n"
-"$  Match at end of string \n"
-msgstr ""
-
-#: ../../xffm/find/dialog.hh:1107
-msgid ""
-"Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ ( ) : \n"
-"In  basic regular expressions the metacharacters ?, +, {, |, (, and ) \n"
-"  lose their special meaning.\n"
-"\n"
-"The  period . matches  any  single  character.\n"
-"The caret ^ matches at the start of line.\n"
-"The dollar $ matches at the end of line.\n"
-"\n"
-"Characters within [ ] matches any single character in the list.\n"
-"Characters within [^ ] matches any single character *not* in the list.\n"
-"Characters inside [ - ] matches a range of characters (ie [0-9] or [a-z]).\n"
-"\n"
-"A regular expression may be followed by one of several repetition "
-"operators:\n"
-"?      The preceding item is optional and matched\n"
-"       at most once.\n"
-"*      The preceding item will be matched zero\n"
-"       or more times.\n"
-"+      The preceding item will be matched one or\n"
-"       more times.\n"
-"{n}    The preceding item is matched exactly n times.\n"
-"{n,}   The preceding item is matched n or more times.\n"
-"{n,m}  The preceding item is matched at least n times,\n"
-"       but not more than m times.\n"
-"\n"
-"To match any reserved character, precede it with \\. \n"
-"\n"
-"Two regular expressions may be joined by the logical or operator |.\n"
-"Two regular expressions may be concatenated.\n"
-"\n"
-"More information is available by typing \"man grep\"\n"
-msgstr ""
-
-#: ../../xffm/response/chooserresponse.hh:23
-msgid "Open"
-msgstr "Raba"
-
-#: ../../xffm/response/chooserresponse.hh:56
-#, fuzzy
-msgid "Choose directory"
-msgstr "Vuođđamáhppa:"
-
-#: ../../xffm/response/chooserresponse.hh:60
-#, fuzzy
-msgid "Choose file"
-msgstr "Vállje silli"
-
-#: ../../xffm/response/customresponse.hh:55
-#, fuzzy
-msgid "Execute command"
-msgstr "Vuoje skálžogohččuma"
-
-#. XXX folder or file entry should be determined on .ini file (probably just inherit from comboresponse for multiple files options (selected files)...
-#: ../../xffm/response/customresponse.hh:103
-msgid "Source File"
-msgstr "Gáldofiila"
-
-#. this button is redundant since hands are on keyboard for password
-#: ../../xffm/response/entryresponse.hh:424
-#: ../../xffm/response/passwdresponse.hh:242
-msgid "Ok"
-msgstr "Ok"
-
-#: ../../xffm/response/commandprogressresponse.hh:31
-#, fuzzy
-msgid "Items:"
-msgstr "Sortere merkošiid"
-
-#: ../../xffm/response/passwdresponse.hh:19
-#: ../../xffm/response/passwdresponse.hh:25 ../../xffm/common/run.hh:464
-#, fuzzy
-msgid "Enter password"
-msgstr "Atte beassansáni"
-
-#. gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
-#: ../../xffm/response/passwdresponse.hh:179
-#, fuzzy
-msgid "User Input"
-msgstr "Geavaheaddjedieđut"
-
-#: ../../xffm/response/passwdresponse.hh:195
-msgid "Response Requested"
-msgstr "Vástádus gáibiduvvo"
-
-#: ../../xffm/response/timeoutresponse.hh:57
-msgid "Dismiss"
-msgstr ""
-
-#: ../../xffm/response/commandresponse.hh:19
-msgid "Running"
-msgstr "Jođus"
-
-#. auto text = g_strdup_printf("%s (pid: %d)",
-#. _("Waiting for operation to finish..."),
-#. Tubo<Type>::getChild (pid));
-#: ../../xffm/response/commandresponse.hh:24
-#, fuzzy
-msgid "Waiting for operation to finish..."
-msgstr "Vuordá autentiserema"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:11
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:214
-#, fuzzy
-msgid "Remove Button Contents"
-msgstr "Váldde eret oktavuođa"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:67
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:209
-#, fuzzy
-msgid "Add custom content"
-msgstr "Lasit sisdoalu"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:68
-#, fuzzy
-msgid "Select file to load"
-msgstr "Fiilla maid viežžat"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:125
+#: ../xffm/common/preview.hh:636
 #, fuzzy, c-format
-msgid "Cannot load file %s. Reason: %s"
-msgstr "Ii sáhte viežžat bibliotehka %s: %s"
+msgid   "Cannot read from %s"
+msgstr  "Ii sáhttán lohkat resurssas"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:154
+#: ../xffm/common/gtk.hh:67 ../xffm/fm/dialog/notebook/vbuttonbox.hh:240
 #, fuzzy
-msgid "You need to restart the application"
-msgstr "Prográmmaálggaheaddji"
+msgid   "Open terminal"
+msgstr  "Raba terminála dáppe"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:187
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:191
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:195
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:198
-#: ../../xffm/fm/view/pkg/model.hh:29 ../../xffm/fm/view/pkg/popup.hh:35
+#: ../xffm/common/gtk.hh:69 ../xffm/common/util.hh:1443
+msgid   "Execute Shell Command"
+msgstr  "Vuoje skálžogohččuma"
+
+#: ../xffm/common/gtk.hh:71 ../xffm/fm/view/local/popup.hh:157
+msgid   "Paste"
+msgstr  "Liibme"
+
+#: ../xffm/common/gtk.hh:73 ../xffm/fm/view/local/popup.hh:151
 #, fuzzy
-msgid "Software Updater"
-msgstr "Prográmmagálvu"
+msgid   "Add bookmark"
+msgstr  "Lasit girjemearkka"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:236
-#: ../../xffm/fm/view/pkg/model.hh:108 ../../xffm/fm/view/pkg/model.hh:299
-#: ../../xffm/fm/view/pkg/model.hh:306 ../../xffm/fm/view/pkg/popup.hh:151
-#: ../../xffm/common/gtk.hh:77
-msgid "Search"
-msgstr "Oza"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:240 ../../xffm/common/gtk.hh:67
+#: ../xffm/common/gtk.hh:75 ../xffm/fm/view/local/popup.hh:152
+#: ../xffm/fm/view/root/popup.hh:137
 #, fuzzy
-msgid "Open terminal"
-msgstr "Raba terminála dáppe"
+msgid   "Remove bookmark"
+msgstr  "Rievdat girjemearkka nama"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:244
+#: ../xffm/common/gtk.hh:77 ../xffm/fm/view/pkg/model.hh:108
+#: ../xffm/fm/view/pkg/model.hh:299 ../xffm/fm/view/pkg/model.hh:306
+#: ../xffm/fm/view/pkg/popup.hh:151
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:236
+msgid   "Search"
+msgstr  "Oza"
+
+#: ../xffm/common/gtk.hh:81 ../xffm/fm/dialog/notebook/menupopover.hh:237
+msgid   "Exit"
+msgstr  "Heaittit"
+
+#: ../xffm/common/gtk.hh:83 ../xffm/fm/view/local/popup.hh:85
+#: ../xffm/fm/view/local/popup.hh:142 ../xffm/fm/view/local/popup.hh:1287
+#: ../xffm/fm/view/local/popup.hh:1294 ../xffm/fm/view/local/popup.hh:1305
+#: ../xffm/fm/view/local/popup.hh:1312
+msgid   "Open with"
+msgstr  "Raba geavahettiin"
+
+#: ../xffm/common/gtk.hh:85 ../xffm/fm/view/local/popup.hh:100
+#: ../xffm/fm/view/local/popup.hh:156
+msgid   "Cut"
+msgstr  "Čuohpa"
+
+#: ../xffm/common/gtk.hh:87 ../xffm/fm/view/local/popup.hh:99
+#: ../xffm/fm/view/local/popup.hh:155
+msgid   "Copy"
+msgstr  "Máŋge"
+
+#: ../xffm/common/gtk.hh:89 ../xffm/fm/view/local/rm.hh:176
+#: ../xffm/fm/view/local/popup.hh:103 ../xffm/fm/view/local/popup.hh:160
+msgid   "Delete"
+msgstr  "Sihko"
+
+#: ../xffm/common/gtk.hh:91 ../xffm/fm/view/local/rm.hh:165
+msgid   "Shred"
+msgstr  ""
+
+#: ../xffm/common/gtk.hh:94 ../xffm/fm/view/local/popup.hh:95
+#: ../xffm/fm/view/local/popup.hh:145 ../xffm/fm/view/root/popup.hh:136
+#: ../xffm/fm/view/fstab/popup.hh:20
+msgid   "Open in New Tab"
+msgstr  "Raba ođđa gilkoris"
+
+#: ../xffm/common/gtk.hh:139 ../xffm/fm/dialog/notebook/notebook.hh:75
+msgid   "New Tab"
+msgstr  "Ođđa gilkor"
+
+#: ../xffm/common/gtk.hh:352 ../xffm/common/gtk.hh:360
+msgid   "Help"
+msgstr  "Veahkki"
+
+#: ../xffm/common/settings.hh:30
 #, fuzzy
-msgid "Open a New Window"
-msgstr "Raba ođđa láses"
+msgid   "New File:"
+msgstr  "Čájet fiilla"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:250
+#: ../xffm/common/gio.hh:81
 #, fuzzy
-msgid "Differences"
-msgstr "Geahča earuid"
+msgid   "Copying files"
+msgstr  "Máŋgemin"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:256
-#: ../../xffm/fm/view/root/model.hh:110
+#: ../xffm/common/gio.hh:83 ../xffm/common/dnd.hh:35
+#: ../xffm/fm/dialog/clipboard.hh:30
 #, fuzzy
-msgid "Home Directory"
-msgstr "Open Directory"
+msgid   "Moving files"
+msgstr  "Sirdimin fiillaid ruskalihttái"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:261
-#: ../../xffm/fm/view/root/model.hh:168 ../../xffm/fm/view/fstab/popup.hh:29
+#: ../xffm/common/gio.hh:85
 #, fuzzy
-msgid "Disk Image Mounter"
-msgstr "Čájet govaid mat leat siiddus"
+msgid   "linking"
+msgstr  "Livki vuordinsieván"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:266
-#: ../../xffm/fm/view/root/model.hh:137
+#: ../xffm/common/gio.hh:87
 #, fuzzy
-msgid "Trash bin"
-msgstr "Bija fiilla ruskalihttái"
+msgid   "rename"
+msgstr  "namma"
 
-#: ../../xffm/fm/dialog/notebook/notebook.hh:56
-#, fuzzy
-msgid "Long press time"
-msgstr "Ale čájet govaid"
-
-#: ../../xffm/fm/dialog/notebook/notebook.hh:75 ../../xffm/common/gtk.hh:139
-msgid "New Tab"
-msgstr "Ođđa gilkor"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:178
-#, fuzzy
-msgid "Open menu"
-msgstr "Raba dokumeantta"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:230
-#, fuzzy
-msgid "View as list"
-msgstr "Maŋemus galleduvvon:"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:231
-msgid "Show hidden files"
-msgstr "Čájet čiegus fiillaid"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:232
-#, fuzzy
-msgid "Show Backup Files"
-msgstr "Čájet jođánissilli"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:233
-msgid "Sort data in descending order"
-msgstr ""
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:235
-#, fuzzy
-msgid "Sort by date"
-msgstr "Oanehaš dáhton:"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:236
-#, fuzzy
-msgid "Sort by size"
-msgstr "Sorterejuvvon dán bokte"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:237 ../../xffm/common/gtk.hh:81
-msgid "Exit"
-msgstr "Heaittit"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:270
-#, fuzzy
-msgid "Main menu"
-msgstr "Čiega fálu"
-
-#. File chooser
-#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:375
-#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:377
-#, fuzzy
-msgid "Go to"
-msgstr "Mana linnjái"
-
-#. entryResponse->setCheckButton(_("Run in Terminal"));
-#. entryResponse->setCheckButton(Run<Type>::runInTerminal(path));
-#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:382
-#: ../../xffm/fm/view/local/popup.hh:887 ../../xffm/fm/view/local/popup.hh:981
-msgid "Specify Output Directory..."
-msgstr "Vállje olggosmáhpa …"
-
-#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:409
-msgid "Not a directory"
-msgstr "Ii leat máhppa"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:135
-#, fuzzy
-msgid "Renice Process"
-msgstr "Iežat proseassat"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:135
-#, fuzzy
-msgid "Suspend"
-msgstr "Bisset (STOP)"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:135
-msgid "Continue"
-msgstr "Joatkke"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid "Interrupt"
-msgstr "Gaskkaldumit"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:136
-#, fuzzy
-msgid "Hangup"
-msgstr "Hangup (HUP)"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid "User 1 (USR1)"
-msgstr "Geavaheaddji 1 (USR1)"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:137
-msgid "User 2 (USR2)"
-msgstr "Geavaheaddji 2 (USR2)"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:137
-#, fuzzy
-msgid "Terminate Task"
-msgstr "Heaittit (TERM)"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:137
-msgid "Abort"
-msgstr "Gaskkalduhte"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:138
-msgid "Kill"
-msgstr "Gotte"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:139
-#, fuzzy
-msgid "Segmentation fault"
-msgstr "Presentašuvdnakvalitehta"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:216
-msgid "PID"
-msgstr "PID"
-
-#: ../../xffm/fm/dialog/notebook/page/page.hh:58
-#, fuzzy
-msgid "loading..."
-msgstr "Viežžamin …"
-
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
-#, fuzzy
-msgid "Embedded Terminal"
-msgstr "Vuojuhahtti čállinprográmma"
-
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
-msgid "All items in the iconview."
-msgstr ""
-
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
-#, fuzzy
-msgid "Scripting"
-msgstr "Diŋgon"
-
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
-#, fuzzy
-msgid "Clear Log"
-msgstr "Sálke listtu"
-
-#. Status textview
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
-#, fuzzy
-msgid "Terminal font"
-msgstr "Terminal"
-
-#: ../../xffm/fm/dialog/clipboard.hh:23 ../../xffm/common/dnd.hh:41
-#, fuzzy
-msgid "Copying files locally"
-msgstr "Sirdimin fiillaid ruskalihttái"
-
-#: ../../xffm/fm/dialog/clipboard.hh:30 ../../xffm/common/gio.hh:83
-#: ../../xffm/common/dnd.hh:35
-#, fuzzy
-msgid "Moving files"
-msgstr "Sirdimin fiillaid ruskalihttái"
-
-#: ../../xffm/fm/dialog/dialog.hh:122
-#, fuzzy
-msgid "Removed"
-msgstr "Váldde eret"
-
-#: ../../xffm/fm/dialog/dialog.hh:143
-#, fuzzy
-msgid "Detected device(s):"
-msgstr "Vállje bálvalusa:"
-
-#: ../../xffm/fm/view/local/model.hh:122
+#: ../xffm/common/gio.hh:426
 #, fuzzy, c-format
-msgid "Reading \"%s\""
-msgstr "Lohkan"
+msgid   "(%d of %d)"
+msgstr  "%s % %s:s "
 
-#: ../../xffm/fm/view/local/model.hh:575 ../../xffm/fm/view/base/monitor.hh:33
-#, fuzzy, c-format
-msgid "Files: %s"
-msgstr "Fiillat:"
-
-#: ../../xffm/fm/view/local/model.hh:578
+#: ../xffm/common/util.hh:1404
 #, c-format
-msgid "Loaded %d of %d articles"
-msgstr ""
+msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
+        "attribute on that file."
+msgstr  ""
 
-#: ../../xffm/fm/view/local/popup.hh:85 ../../xffm/fm/view/local/popup.hh:142
-#: ../../xffm/fm/view/local/popup.hh:1287
-#: ../../xffm/fm/view/local/popup.hh:1294
-#: ../../xffm/fm/view/local/popup.hh:1305
-#: ../../xffm/fm/view/local/popup.hh:1312 ../../xffm/common/gtk.hh:83
-msgid "Open with"
-msgstr "Raba geavahettiin"
-
-#: ../../xffm/fm/view/local/popup.hh:94
-msgid "New"
-msgstr "Ođđa"
-
-#: ../../xffm/fm/view/local/popup.hh:95 ../../xffm/fm/view/local/popup.hh:145
-#: ../../xffm/fm/view/root/popup.hh:136 ../../xffm/fm/view/fstab/popup.hh:20
-#: ../../xffm/common/gtk.hh:94
-msgid "Open in New Tab"
-msgstr "Raba ođđa gilkoris"
-
-#. deprecated {N_("Open in New Tab"), NULL, NULL, NULL},
-#. deprecated {N_("Open in New Window"), NULL, NULL, NULL},
-#. common buttons /(also an iconsize +/- button)
-#: ../../xffm/fm/view/local/popup.hh:99 ../../xffm/fm/view/local/popup.hh:155
-#: ../../xffm/common/gtk.hh:87
-msgid "Copy"
-msgstr "Máŋge"
-
-#: ../../xffm/fm/view/local/popup.hh:100 ../../xffm/fm/view/local/popup.hh:156
-#: ../../xffm/common/gtk.hh:85
-msgid "Cut"
-msgstr "Čuohpa"
-
-#: ../../xffm/fm/view/local/popup.hh:101 ../../xffm/fm/view/local/popup.hh:159
-#: ../../xffm/fm/view/local/popup.hh:232 ../../xffm/fm/view/local/popup.hh:234
-#, fuzzy
-msgid "Paste into"
-msgstr "Liibme sisa fiilla"
-
-#: ../../xffm/fm/view/local/popup.hh:102 ../../xffm/fm/view/local/popup.hh:158
-#, fuzzy
-msgid "There is nothing on the clipboard to paste."
-msgstr "Eai leat dáhtat čuohpusgirjjis."
-
-#. **************
-#: ../../xffm/fm/view/local/popup.hh:103 ../../xffm/fm/view/local/popup.hh:160
-#: ../../xffm/fm/view/local/rm.hh:176 ../../xffm/common/gtk.hh:89
-msgid "Delete"
-msgstr "Sihko"
-
-#. {N_("About"), NULL, (void *) menu},
-#.
-#: ../../xffm/fm/view/local/popup.hh:106
-msgid "Select All"
-msgstr "Vállje visot"
-
-#: ../../xffm/fm/view/local/popup.hh:107 ../../xffm/fm/view/local/popup.hh:755
-#, fuzzy
-msgid "Match regular expression"
-msgstr "Heive virolaš cealkágii"
-
-#: ../../xffm/fm/view/local/popup.hh:143 ../../xffm/fm/view/local/popup.hh:1105
-#, fuzzy
-msgid "Run Executable..."
-msgstr "Vuojehahtti fiila:"
-
-#. File chooser
-#: ../../xffm/fm/view/local/popup.hh:144 ../../xffm/fm/view/local/popup.hh:875
-msgid "Extract files from the archive"
-msgstr ""
-
-#. File chooser
-#: ../../xffm/fm/view/local/popup.hh:146 ../../xffm/fm/view/local/popup.hh:966
-#, fuzzy
-msgid "Create a compressed archive with the selected objects"
-msgstr "Ráhkat ođđa profiilla vuođđuduvvon válljejuvvon profiillas"
-
-#: ../../xffm/fm/view/local/popup.hh:148 ../../xffm/fm/view/fstab/popup.hh:37
-msgid "Mount the volume associated with this folder"
-msgstr ""
-
-#: ../../xffm/fm/view/local/popup.hh:149 ../../xffm/fm/view/fstab/popup.hh:38
-msgid "Unmount the volume associated with this folder"
-msgstr ""
-
-#: ../../xffm/fm/view/local/popup.hh:151 ../../xffm/common/gtk.hh:73
-#, fuzzy
-msgid "Add bookmark"
-msgstr "Lasit girjemearkka"
-
-#: ../../xffm/fm/view/local/popup.hh:152 ../../xffm/fm/view/root/popup.hh:137
-#: ../../xffm/common/gtk.hh:75
-#, fuzzy
-msgid "Remove bookmark"
-msgstr "Rievdat girjemearkka nama"
-
-#: ../../xffm/fm/view/local/popup.hh:157 ../../xffm/common/gtk.hh:71
-msgid "Paste"
-msgstr "Liibme"
-
-#: ../../xffm/fm/view/local/popup.hh:161 ../../xffm/fm/view/local/popup.hh:1231
-msgid "Rename"
-msgstr ""
-
-#: ../../xffm/fm/view/local/popup.hh:162 ../../xffm/fm/view/local/popup.hh:1217
-#, fuzzy
-msgid "Duplicate"
-msgstr "Ráhkat máŋgosa gilkoris"
-
-#: ../../xffm/fm/view/local/popup.hh:163 ../../xffm/fm/view/local/popup.hh:1203
-msgid "Link"
-msgstr "Liŋka"
-
-#: ../../xffm/fm/view/local/popup.hh:164
-msgid "Properties"
-msgstr "Iešvuođat"
-
-#: ../../xffm/fm/view/local/popup.hh:562
-msgid "Files:"
-msgstr "Fiillat:"
-
-#: ../../xffm/fm/view/local/popup.hh:565 ../../xffm/fm/view/local/rm.hh:61
-#, fuzzy
-msgid "Multiple selections"
-msgstr "Geardun"
-
-#: ../../xffm/fm/view/local/popup.hh:753
-#, fuzzy
-msgid "Select items"
-msgstr "Sihko merkoša"
-
-#: ../../xffm/fm/view/local/popup.hh:771
-#, fuzzy
-msgid "Regular Expression syntax is incorrect"
-msgstr "Virolaš cealkka"
-
-#: ../../xffm/fm/view/local/popup.hh:801
-#, fuzzy
-msgid "No selection"
-msgstr "Viidodaga válljen:"
-
-#: ../../xffm/fm/view/local/popup.hh:801
-#, fuzzy
-msgid "No matches."
-msgstr "(Ii deaivan)"
-
-#: ../../xffm/fm/view/local/popup.hh:1058
-#, fuzzy
-msgid "Create new..."
-msgstr "Ráhkat ođđa"
-
-#: ../../xffm/fm/view/local/popup.hh:1065
-#: ../../xffm/fm/view/local/popup.hh:1146
-#, fuzzy
-msgid "New Name:"
-msgstr "Ođđa kamera"
-
-#: ../../xffm/fm/view/local/popup.hh:1074
-#, fuzzy
-msgid "No name"
-msgstr "ii makkárge namma"
-
-#: ../../xffm/fm/view/local/popup.hh:1087
-#, fuzzy, c-format
-msgid "Another file with the same name already exists in “%s”."
-msgstr "Stiila dán namas gávdno juo."
-
-#: ../../xffm/fm/view/local/popup.hh:1109
-#: ../../xffm/fm/view/local/popup.hh:1291
-#: ../../xffm/fm/view/local/popup.hh:1309 ../../xffm/common/util.hh:1452
-#, fuzzy
-msgid "Run in Terminal"
-msgstr "Vuoje terminálas"
-
-#: ../../xffm/fm/view/local/popup.hh:1112
-#, fuzzy
-msgid "Arguments for the Command"
-msgstr "Argumeanttat gohččuma várás."
-
-#: ../../xffm/fm/view/local/popup.hh:1258
-#, fuzzy
-msgid "You have selected multiple files or folders"
-msgstr "máŋge válljejuvvon fiilla dahje máhpa"
-
-#: ../../xffm/fm/view/local/popup.hh:1332 ../../xffm/fm/view/local/view.hh:156
-#, fuzzy
-msgid "Invalid entry"
-msgstr "Gustohis čoavdda."
-
-#: ../../xffm/fm/view/local/properties.hh:245
-#, fuzzy
-msgid "Properties and Attributes"
-msgstr "Ovtta merkoša iešvuođat"
-
-#: ../../xffm/fm/view/local/properties.hh:274
-#, fuzzy
-msgid "File Mode:"
-msgstr "KFileModule"
-
-#: ../../xffm/fm/view/local/properties.hh:300
-msgid "File:"
-msgstr "Fiila:"
-
-#. Add file info stuff
-#. set info stuff data according to combo box
-#. add signal handler to changed signal for combo box
-#. Add process buttons
-#.
-#: ../../xffm/fm/view/local/properties.hh:312
-msgid "Apply changes"
-msgstr "Bija rievdadusaid atnui"
-
-#: ../../xffm/fm/view/local/properties.hh:477
-#, fuzzy
-msgid "Successfully moved to trash."
-msgstr "Lihkostuvai oktavuođaváldin dása: %s"
-
-#: ../../xffm/fm/view/local/properties.hh:478
-msgid "Source:"
-msgstr "Gáldu:"
-
-#: ../../xffm/fm/view/local/rm.hh:59
+#: ../xffm/common/util.hh:1406 ../xffm/common/util.hh:1441
 #, c-format
-msgid "Delete %s"
-msgstr "Sihko %s"
+msgid   "Open with %s"
+msgstr  "Raba geavahettiin «%s»"
 
-#: ../../xffm/fm/view/local/rm.hh:61
+#: ../xffm/common/util.hh:1406
 #, fuzzy
-msgid "Warning: "
-msgstr "Váruhus:"
+msgid   "Text Editor"
+msgstr  "Fállodoaimmaheaddji"
 
-#. gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
-#. title
-#: ../../xffm/fm/view/local/rm.hh:92
-msgid "Remove"
-msgstr "Váldde eret"
+#: ../xffm/common/util.hh:1447
+msgid   "Console: quickly run single commands -- write a command here and "
+        "press enter."
+msgstr  ""
 
-#: ../../xffm/fm/view/local/rm.hh:142
+#: ../xffm/common/util.hh:1452 ../xffm/fm/view/local/popup.hh:1109
+#: ../xffm/fm/view/local/popup.hh:1291 ../xffm/fm/view/local/popup.hh:1309
 #, fuzzy
-msgid "Apply to all"
-msgstr "Geavat buohkaide"
+msgid   "Run in Terminal"
+msgstr  "Vuoje terminálas"
 
-#. **************
-#. This is now available to BSD with rm -P option
-#: ../../xffm/fm/view/local/rm.hh:165 ../../xffm/common/gtk.hh:91
-msgid "Shred"
-msgstr ""
+#: ../xffm/common/dnd.hh:41 ../xffm/fm/dialog/clipboard.hh:23
+#, fuzzy
+msgid   "Copying files locally"
+msgstr  "Sirdimin fiillaid ruskalihttái"
 
-#: ../../xffm/fm/view/local/rm.hh:183
-msgid "Trash"
-msgstr "Ruskalihtti"
+#: ../xffm/common/dnd.hh:47
+#, fuzzy
+msgid   "Create Link"
+msgstr  "Ráhkat symbolalaš liŋkka"
 
-#: ../../xffm/fm/view/local/view.hh:177
+#: ../xffm/common/run.hh:338
+#, fuzzy
+msgid   "error"
+msgstr  "Meattáhus"
+
+#: ../xffm/common/run.hh:342
+#, fuzzy
+msgid   "warning"
+msgstr  "Várrehus"
+
+#: ../xffm/common/run.hh:464 ../xffm/response/passwdresponse.hh:19
+#: ../xffm/response/passwdresponse.hh:25
+#, fuzzy
+msgid   "Enter password"
+msgstr  "Atte beassansáni"
+
+#: ../xffm/fm/view/pkg/model.hh:29 ../xffm/fm/view/pkg/popup.hh:35
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:187
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:191
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:195
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:198
+#, fuzzy
+msgid   "Software Updater"
+msgstr  "Prográmmagálvu"
+
+#: ../xffm/fm/view/pkg/model.hh:41 ../xffm/fm/view/pkg/model.hh:52
+msgid   "Add or remove software installed on the system"
+msgstr  ""
+
+#: ../xffm/fm/view/pkg/model.hh:111
+msgid   "String"
+msgstr  "Teaksta"
+
+#: ../xffm/fm/view/pkg/model.hh:116
+#, fuzzy
+msgid   "Waiting for search results"
+msgstr  "Maŋimuš ohcanboađus"
+
+#: ../xffm/fm/view/pkg/model.hh:174
+#, fuzzy
+msgid   "No results"
+msgstr  "Badjerádji bohtosat"
+
+#: ../xffm/fm/view/pkg/model.hh:373
+#, fuzzy
+msgid   "Currently busy\n"
+msgstr  "Dálá čuojahanlistu"
+
+#: ../xffm/fm/view/pkg/popup.hh:44
+msgid   "Update Database"
+msgstr  "Ođasmahte diehtovuođu"
+
+#: ../xffm/fm/view/pkg/popup.hh:45
+#, fuzzy
+msgid   "Fetch"
+msgstr  "Viečča gáldu"
+
+#: ../xffm/fm/view/pkg/popup.hh:46
+#, fuzzy
+msgid   "Install --dry-run"
+msgstr  "Sajáiduhttojuvvon"
+
+#: ../xffm/fm/view/pkg/popup.hh:47
+msgid   "Install"
+msgstr  "Sajáiduhte"
+
+#: ../xffm/fm/view/pkg/popup.hh:48
+#, fuzzy
+msgid   "Uninstall --dry-run"
+msgstr  "Váldimin eret"
+
+#: ../xffm/fm/view/pkg/popup.hh:49
+msgid   "Uninstall"
+msgstr  "Váldde eret"
+
+#: ../xffm/fm/view/pkg/popup.hh:50
+msgid   "Information"
+msgstr  "Diehtu"
+
+#: ../xffm/fm/view/pkg/popup.hh:140
+msgid   "Version"
+msgstr  "Veršuvdna"
+
+#: ../xffm/fm/view/pkg/popup.hh:149
+msgid   "Go up"
+msgstr  "Mana bajás"
+
+#: ../xffm/fm/view/pkg/popup.hh:152
+#, fuzzy
+msgid   "Search packages"
+msgstr  "Oza maŋos guvlui."
+
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
 #, fuzzy, c-format
-msgid "The volume '%s' is not mounted."
-msgstr "Stiila «%s» ii gávdnon"
+msgid   "Loading %s...%s"
+msgstr  "Viežžamin …"
 
-#: ../../xffm/fm/view/root/model.hh:82
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
 #, fuzzy
-msgid "Root Directory"
-msgstr "Máhppa"
+msgid   "Please Wait..."
+msgstr  "Vuorddes veaháš"
 
-#: ../../xffm/fm/view/root/model.hh:98
-msgid "This is the root of the filesystem"
-msgstr "Dát lea du fiilavuogádaga ruohtas"
-
-#: ../../xffm/fm/view/root/model.hh:176 ../../xffm/fm/view/root/model.hh:191
-msgid "Mount local disks and devices"
-msgstr ""
-
-#: ../../xffm/fm/view/root/model.hh:177 ../../xffm/fm/view/fstab/popup.hh:23
-#: ../../xffm/fm/view/fstab/view.hh:1084
-#, fuzzy
-msgid "eCryptfs Volume"
-msgstr "Unnit jietna"
-
-#: ../../xffm/fm/view/root/model.hh:178 ../../xffm/fm/view/fstab/popup.hh:22
-msgid "SSHFS Remote Synchronization Folder"
-msgstr ""
-
-#: ../../xffm/fm/view/root/model.hh:179 ../../xffm/fm/view/fstab/popup.hh:21
-#: ../../xffm/fm/view/fstab/view.hh:1032
-#, fuzzy
-msgid "NFS Network Volume"
-msgstr "Vurkenbáiki"
-
-#: ../../xffm/fm/view/root/model.hh:180 ../../xffm/fm/view/fstab/popup.hh:24
-#: ../../xffm/fm/view/fstab/view.hh:1110
-#, fuzzy
-msgid "CIFS Volume"
-msgstr "Jietnadássi"
-
-#: ../../xffm/fm/view/root/model.hh:229
-#, fuzzy
-msgid "Go to bookmarked location"
-msgstr "Bija girjemearkka dán čujuhussii"
-
-#: ../../xffm/fm/view/root/popup.hh:138
-#, fuzzy
-msgid "Empty trash"
-msgstr "Gurre ruskalihti"
-
-#. File chooser
-#: ../../xffm/fm/view/fstab/popup.hh:129
-#, fuzzy
-msgid "Mount Device"
-msgstr "Stivrenovttadat"
-
-#: ../../xffm/fm/view/fstab/popup.hh:141 ../../xffm/fm/view/fstab/view.hh:923
-msgid "Mount point:"
-msgstr "Čatnanbáiki:"
-
-#: ../../xffm/fm/view/fstab/view.hh:590
-#, fuzzy
-msgid "Mount point: "
-msgstr "Čatnanbáiki:"
-
-#: ../../xffm/fm/view/fstab/view.hh:591
-#, fuzzy
-msgid "Mount device: "
-msgstr "Modemovttadat:"
-
-#. Since /dev is not concrete, the following test returns false...
-#.
-#. if (!g_file_test(name, G_FILE_TEST_IS_DIR)) return;
-#: ../../xffm/fm/view/fstab/view.hh:659 ../../xffm/fm/view/fstab/view.hh:675
-#, fuzzy
-msgid "Disks"
-msgstr "RAM-skearru"
-
-#: ../../xffm/fm/view/fstab/view.hh:921
-#, fuzzy
-msgid "No Label"
-msgstr "Nammagilkor"
-
-#: ../../xffm/fm/view/fstab/view.hh:922
-#, fuzzy
-msgid "There is no file system available (unformatted)"
-msgstr "Ii leat veahkki olamuttus «%s» várás."
-
-#: ../../xffm/fm/view/fstab/view.hh:923
-#, fuzzy
-msgid "Not mounted"
-msgstr "Ii gávdnon"
-
-#: ../../xffm/fm/view/fstab/view.hh:1058
-msgid "SFTP (via SSH)"
-msgstr ""
-
-#: ../../xffm/fm/view/fstab/view.hh:1413
+#: ../xffm/fm/view/local/model.hh:124
 #, fuzzy, c-format
-msgid "Unmounting %s"
-msgstr "Galgamin"
+msgid   "Reading \"%s\""
+msgstr  "Lohkan"
 
-#: ../../xffm/fm/view/fstab/view.hh:1413
+#: ../xffm/fm/view/local/model.hh:577 ../xffm/fm/view/base/monitor.hh:34
 #, fuzzy, c-format
-msgid "Mounting %s"
-msgstr "Čatnamin"
+msgid   "Files: %s"
+msgstr  "Fiillat:"
 
-#: ../../xffm/fm/view/pkg/model.hh:41 ../../xffm/fm/view/pkg/model.hh:52
-msgid "Add or remove software installed on the system"
-msgstr ""
-
-#: ../../xffm/fm/view/pkg/model.hh:111
-msgid "String"
-msgstr "Teaksta"
-
-#: ../../xffm/fm/view/pkg/model.hh:116
-#, fuzzy
-msgid "Waiting for search results"
-msgstr "Maŋimuš ohcanboađus"
-
-#: ../../xffm/fm/view/pkg/model.hh:174
-#, fuzzy
-msgid "No results"
-msgstr "Badjerádji bohtosat"
-
-#: ../../xffm/fm/view/pkg/model.hh:373
-#, fuzzy
-msgid "Currently busy\n"
-msgstr "Dálá čuojahanlistu"
-
-#: ../../xffm/fm/view/pkg/popup.hh:44
-msgid "Update Database"
-msgstr "Ođasmahte diehtovuođu"
-
-#: ../../xffm/fm/view/pkg/popup.hh:45
-#, fuzzy
-msgid "Fetch"
-msgstr "Viečča gáldu"
-
-#: ../../xffm/fm/view/pkg/popup.hh:46
-#, fuzzy
-msgid "Install --dry-run"
-msgstr "Sajáiduhttojuvvon"
-
-#: ../../xffm/fm/view/pkg/popup.hh:47
-msgid "Install"
-msgstr "Sajáiduhte"
-
-#: ../../xffm/fm/view/pkg/popup.hh:48
-#, fuzzy
-msgid "Uninstall --dry-run"
-msgstr "Váldimin eret"
-
-#: ../../xffm/fm/view/pkg/popup.hh:49
-msgid "Uninstall"
-msgstr "Váldde eret"
-
-#: ../../xffm/fm/view/pkg/popup.hh:50
-msgid "Information"
-msgstr "Diehtu"
-
-#: ../../xffm/fm/view/pkg/popup.hh:140
-msgid "Version"
-msgstr "Veršuvdna"
-
-#: ../../xffm/fm/view/pkg/popup.hh:149
-msgid "Go up"
-msgstr "Mana bajás"
-
-#: ../../xffm/fm/view/pkg/popup.hh:152
-#, fuzzy
-msgid "Search packages"
-msgstr "Oza maŋos guvlui."
-
-#: ../../xffm/fm/view/pkg/popup.hh:184 ../../xffm/fm/view/view.hh:93
-#, fuzzy, c-format
-msgid "Loading %s...%s"
-msgstr "Viežžamin …"
-
-#: ../../xffm/fm/view/pkg/popup.hh:184 ../../xffm/fm/view/view.hh:93
-#, fuzzy
-msgid "Please Wait..."
-msgstr "Vuorddes veaháš"
-
-#: ../../xffm/fm/view/treeview.hh:17
-msgid "Name"
-msgstr "Namma"
-
-#: ../../xffm/fm/view/treeview.hh:19
-msgid "Size"
-msgstr "Sturrodat"
-
-#: ../../xffm/fm/view/treeview.hh:20
-msgid "Date"
-msgstr "Dáhton"
-
-#: ../../xffm/fm/view/treeview.hh:22
-msgid "Mimetype"
-msgstr "Mime-šládja"
-
-#: ../../xffm/fm/view/base/signals.hh:838
-#, fuzzy
-msgid "Trash is empty"
-msgstr "Beassansátni lea guorus"
-
-#: ../../xffm/fm/view/base/signals.hh:840
-msgid "Directory does not exist."
-msgstr "Máhppa ii gávdno."
-
-#: ../../xffm/common/settings.hh:30
-#, fuzzy
-msgid "New File:"
-msgstr "Čájet fiilla"
-
-#: ../../xffm/common/gio.hh:81
-#, fuzzy
-msgid "Copying files"
-msgstr "Máŋgemin"
-
-#: ../../xffm/common/gio.hh:85
-#, fuzzy
-msgid "linking"
-msgstr "Livki vuordinsieván"
-
-#: ../../xffm/common/gio.hh:87
-#, fuzzy
-msgid "rename"
-msgstr "namma"
-
-#: ../../xffm/common/gio.hh:426
-#, fuzzy, c-format
-msgid "(%d of %d)"
-msgstr "%s % %s:s "
-
-#: ../../xffm/common/dnd.hh:47
-#, fuzzy
-msgid "Create Link"
-msgstr "Ráhkat symbolalaš liŋkka"
-
-#: ../../xffm/common/util.hh:1404
+#: ../xffm/fm/view/local/model.hh:580
 #, c-format
-msgid ""
-"Scriptfile \"%s\" is not executable. Please set the executable-attribute on "
-"that file."
-msgstr ""
+msgid   "Loaded %d of %d articles"
+msgstr  ""
 
-#: ../../xffm/common/util.hh:1406 ../../xffm/common/util.hh:1441
+#: ../xffm/fm/view/local/rm.hh:59
 #, c-format
-msgid "Open with %s"
-msgstr "Raba geavahettiin «%s»"
+msgid   "Delete %s"
+msgstr  "Sihko %s"
 
-#: ../../xffm/common/util.hh:1406
+#: ../xffm/fm/view/local/rm.hh:61
 #, fuzzy
-msgid "Text Editor"
-msgstr "Fállodoaimmaheaddji"
+msgid   "Warning: "
+msgstr  "Váruhus:"
 
-#: ../../xffm/common/util.hh:1443 ../../xffm/common/gtk.hh:69
-msgid "Execute Shell Command"
-msgstr "Vuoje skálžogohččuma"
-
-#: ../../xffm/common/util.hh:1447
-msgid ""
-"Console: quickly run single commands -- write a command here and press enter."
-msgstr ""
-
-#: ../../xffm/common/gtk.hh:352 ../../xffm/common/gtk.hh:360
-msgid "Help"
-msgstr "Veahkki"
-
-#: ../../xffm/common/run.hh:338
+#: ../xffm/fm/view/local/rm.hh:61 ../xffm/fm/view/local/popup.hh:565
 #, fuzzy
-msgid "error"
-msgstr "Meattáhus"
+msgid   "Multiple selections"
+msgstr  "Geardun"
 
-#: ../../xffm/common/run.hh:342
+#: ../xffm/fm/view/local/rm.hh:92
+msgid   "Remove"
+msgstr  "Váldde eret"
+
+#: ../xffm/fm/view/local/rm.hh:142
 #, fuzzy
-msgid "warning"
-msgstr "Várrehus"
+msgid   "Apply to all"
+msgstr  "Geavat buohkaide"
 
-#: ../../xffm/common/preview.hh:581
+#: ../xffm/fm/view/local/rm.hh:183
+msgid   "Trash"
+msgstr  "Ruskalihtti"
+
+#: ../xffm/fm/view/local/popup.hh:94
+msgid   "New"
+msgstr  "Ođđa"
+
+#: ../xffm/fm/view/local/popup.hh:101 ../xffm/fm/view/local/popup.hh:159
+#: ../xffm/fm/view/local/popup.hh:232 ../xffm/fm/view/local/popup.hh:234
 #, fuzzy
-msgid "Empty file"
-msgstr "Guorus fiilanamma."
+msgid   "Paste into"
+msgstr  "Liibme sisa fiilla"
 
-#: ../../xffm/common/preview.hh:636
+#: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:158
+#, fuzzy
+msgid   "There is nothing on the clipboard to paste."
+msgstr  "Eai leat dáhtat čuohpusgirjjis."
+
+#: ../xffm/fm/view/local/popup.hh:106
+msgid   "Select All"
+msgstr  "Vállje visot"
+
+#: ../xffm/fm/view/local/popup.hh:107 ../xffm/fm/view/local/popup.hh:755
+#, fuzzy
+msgid   "Match regular expression"
+msgstr  "Heive virolaš cealkágii"
+
+#: ../xffm/fm/view/local/popup.hh:143 ../xffm/fm/view/local/popup.hh:1105
+#, fuzzy
+msgid   "Run Executable..."
+msgstr  "Vuojehahtti fiila:"
+
+#: ../xffm/fm/view/local/popup.hh:144 ../xffm/fm/view/local/popup.hh:875
+msgid   "Extract files from the archive"
+msgstr  ""
+
+#: ../xffm/fm/view/local/popup.hh:146 ../xffm/fm/view/local/popup.hh:966
+#, fuzzy
+msgid   "Create a compressed archive with the selected objects"
+msgstr  "Ráhkat ođđa profiilla vuođđuduvvon válljejuvvon profiillas"
+
+#: ../xffm/fm/view/local/popup.hh:148 ../xffm/fm/view/fstab/popup.hh:37
+msgid   "Mount the volume associated with this folder"
+msgstr  ""
+
+#: ../xffm/fm/view/local/popup.hh:149 ../xffm/fm/view/fstab/popup.hh:38
+msgid   "Unmount the volume associated with this folder"
+msgstr  ""
+
+#: ../xffm/fm/view/local/popup.hh:161 ../xffm/fm/view/local/popup.hh:1231
+msgid   "Rename"
+msgstr  ""
+
+#: ../xffm/fm/view/local/popup.hh:162 ../xffm/fm/view/local/popup.hh:1217
+#, fuzzy
+msgid   "Duplicate"
+msgstr  "Ráhkat máŋgosa gilkoris"
+
+#: ../xffm/fm/view/local/popup.hh:163 ../xffm/fm/view/local/popup.hh:1203
+msgid   "Link"
+msgstr  "Liŋka"
+
+#: ../xffm/fm/view/local/popup.hh:164
+msgid   "Properties"
+msgstr  "Iešvuođat"
+
+#: ../xffm/fm/view/local/popup.hh:562
+msgid   "Files:"
+msgstr  "Fiillat:"
+
+#: ../xffm/fm/view/local/popup.hh:753
+#, fuzzy
+msgid   "Select items"
+msgstr  "Sihko merkoša"
+
+#: ../xffm/fm/view/local/popup.hh:771
+#, fuzzy
+msgid   "Regular Expression syntax is incorrect"
+msgstr  "Virolaš cealkka"
+
+#: ../xffm/fm/view/local/popup.hh:801
+#, fuzzy
+msgid   "No selection"
+msgstr  "Viidodaga válljen:"
+
+#: ../xffm/fm/view/local/popup.hh:801
+#, fuzzy
+msgid   "No matches."
+msgstr  "(Ii deaivan)"
+
+#: ../xffm/fm/view/local/popup.hh:887 ../xffm/fm/view/local/popup.hh:981
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:382
+msgid   "Specify Output Directory..."
+msgstr  "Vállje olggosmáhpa …"
+
+#: ../xffm/fm/view/local/popup.hh:1058
+#, fuzzy
+msgid   "Create new..."
+msgstr  "Ráhkat ođđa"
+
+#: ../xffm/fm/view/local/popup.hh:1065 ../xffm/fm/view/local/popup.hh:1146
+#, fuzzy
+msgid   "New Name:"
+msgstr  "Ođđa kamera"
+
+#: ../xffm/fm/view/local/popup.hh:1074
+#, fuzzy
+msgid   "No name"
+msgstr  "ii makkárge namma"
+
+#: ../xffm/fm/view/local/popup.hh:1087
 #, fuzzy, c-format
-msgid "Cannot read from %s"
-msgstr "Ii sáhttán lohkat resurssas"
+msgid   "Another file with the same name already exists in “%s”."
+msgstr  "Stiila dán namas gávdno juo."
+
+#: ../xffm/fm/view/local/popup.hh:1112
+#, fuzzy
+msgid   "Arguments for the Command"
+msgstr  "Argumeanttat gohččuma várás."
+
+#: ../xffm/fm/view/local/popup.hh:1258
+#, fuzzy
+msgid   "You have selected multiple files or folders"
+msgstr  "máŋge válljejuvvon fiilla dahje máhpa"
+
+#: ../xffm/fm/view/local/popup.hh:1332 ../xffm/fm/view/local/view.hh:156
+#, fuzzy
+msgid   "Invalid entry"
+msgstr  "Gustohis čoavdda."
+
+#: ../xffm/fm/view/local/view.hh:177
+#, fuzzy, c-format
+msgid   "The volume '%s' is not mounted."
+msgstr  "Stiila «%s» ii gávdnon"
+
+#: ../xffm/fm/view/local/properties.hh:245
+#, fuzzy
+msgid   "Properties and Attributes"
+msgstr  "Ovtta merkoša iešvuođat"
+
+#: ../xffm/fm/view/local/properties.hh:274
+#, fuzzy
+msgid   "File Mode:"
+msgstr  "KFileModule"
+
+#: ../xffm/fm/view/local/properties.hh:300
+msgid   "File:"
+msgstr  "Fiila:"
+
+#: ../xffm/fm/view/local/properties.hh:312
+msgid   "Apply changes"
+msgstr  "Bija rievdadusaid atnui"
+
+#: ../xffm/fm/view/local/properties.hh:477
+#, fuzzy
+msgid   "Successfully moved to trash."
+msgstr  "Lihkostuvai oktavuođaváldin dása: %s"
+
+#: ../xffm/fm/view/local/properties.hh:478
+msgid   "Source:"
+msgstr  "Gáldu:"
+
+#: ../xffm/fm/view/root/model.hh:82
+#, fuzzy
+msgid   "Root Directory"
+msgstr  "Máhppa"
+
+#: ../xffm/fm/view/root/model.hh:98
+msgid   "This is the root of the filesystem"
+msgstr  "Dát lea du fiilavuogádaga ruohtas"
+
+#: ../xffm/fm/view/root/model.hh:110
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:256
+#, fuzzy
+msgid   "Home Directory"
+msgstr  "Open Directory"
+
+#: ../xffm/fm/view/root/model.hh:137
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:266
+#, fuzzy
+msgid   "Trash bin"
+msgstr  "Bija fiilla ruskalihttái"
+
+#: ../xffm/fm/view/root/model.hh:168 ../xffm/fm/view/fstab/popup.hh:29
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:261
+#, fuzzy
+msgid   "Disk Image Mounter"
+msgstr  "Čájet govaid mat leat siiddus"
+
+#: ../xffm/fm/view/root/model.hh:176 ../xffm/fm/view/root/model.hh:191
+msgid   "Mount local disks and devices"
+msgstr  ""
+
+#: ../xffm/fm/view/root/model.hh:177 ../xffm/fm/view/fstab/popup.hh:23
+#: ../xffm/fm/view/fstab/view.hh:1084
+#, fuzzy
+msgid   "eCryptfs Volume"
+msgstr  "Unnit jietna"
+
+#: ../xffm/fm/view/root/model.hh:178 ../xffm/fm/view/fstab/popup.hh:22
+msgid   "SSHFS Remote Synchronization Folder"
+msgstr  ""
+
+#: ../xffm/fm/view/root/model.hh:179 ../xffm/fm/view/fstab/popup.hh:21
+#: ../xffm/fm/view/fstab/view.hh:1032
+#, fuzzy
+msgid   "NFS Network Volume"
+msgstr  "Vurkenbáiki"
+
+#: ../xffm/fm/view/root/model.hh:180 ../xffm/fm/view/fstab/popup.hh:24
+#: ../xffm/fm/view/fstab/view.hh:1110
+#, fuzzy
+msgid   "CIFS Volume"
+msgstr  "Jietnadássi"
+
+#: ../xffm/fm/view/root/model.hh:229
+#, fuzzy
+msgid   "Go to bookmarked location"
+msgstr  "Bija girjemearkka dán čujuhussii"
+
+#: ../xffm/fm/view/root/popup.hh:138
+#, fuzzy
+msgid   "Empty trash"
+msgstr  "Gurre ruskalihti"
+
+#: ../xffm/fm/view/fstab/popup.hh:129
+#, fuzzy
+msgid   "Mount Device"
+msgstr  "Stivrenovttadat"
+
+#: ../xffm/fm/view/fstab/popup.hh:141 ../xffm/fm/view/fstab/view.hh:923
+msgid   "Mount point:"
+msgstr  "Čatnanbáiki:"
+
+#: ../xffm/fm/view/fstab/view.hh:590
+#, fuzzy
+msgid   "Mount point: "
+msgstr  "Čatnanbáiki:"
+
+#: ../xffm/fm/view/fstab/view.hh:591
+#, fuzzy
+msgid   "Mount device: "
+msgstr  "Modemovttadat:"
+
+#: ../xffm/fm/view/fstab/view.hh:659 ../xffm/fm/view/fstab/view.hh:675
+#, fuzzy
+msgid   "Disks"
+msgstr  "RAM-skearru"
+
+#: ../xffm/fm/view/fstab/view.hh:921
+#, fuzzy
+msgid   "No Label"
+msgstr  "Nammagilkor"
+
+#: ../xffm/fm/view/fstab/view.hh:922
+#, fuzzy
+msgid   "There is no file system available (unformatted)"
+msgstr  "Ii leat veahkki olamuttus «%s» várás."
+
+#: ../xffm/fm/view/fstab/view.hh:923
+#, fuzzy
+msgid   "Not mounted"
+msgstr  "Ii gávdnon"
+
+#: ../xffm/fm/view/fstab/view.hh:1058
+msgid   "SFTP (via SSH)"
+msgstr  ""
+
+#: ../xffm/fm/view/fstab/view.hh:1413
+#, fuzzy, c-format
+msgid   "Unmounting %s"
+msgstr  "Galgamin"
+
+#: ../xffm/fm/view/fstab/view.hh:1413
+#, fuzzy, c-format
+msgid   "Mounting %s"
+msgstr  "Čatnamin"
+
+#: ../xffm/fm/view/base/signals.hh:838
+#, fuzzy
+msgid   "Trash is empty"
+msgstr  "Beassansátni lea guorus"
+
+#: ../xffm/fm/view/base/signals.hh:840
+msgid   "Directory does not exist."
+msgstr  "Máhppa ii gávdno."
+
+#: ../xffm/fm/view/treeview.hh:17
+msgid   "Name"
+msgstr  "Namma"
+
+#: ../xffm/fm/view/treeview.hh:19
+msgid   "Size"
+msgstr  "Sturrodat"
+
+#: ../xffm/fm/view/treeview.hh:20
+msgid   "Date"
+msgstr  "Dáhton"
+
+#: ../xffm/fm/view/treeview.hh:22
+msgid   "Mimetype"
+msgstr  "Mime-šládja"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
+#, fuzzy
+msgid   "Embedded Terminal"
+msgstr  "Vuojuhahtti čállinprográmma"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
+msgid   "All items in the iconview."
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
+#, fuzzy
+msgid   "Scripting"
+msgstr  "Diŋgon"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
+#, fuzzy
+msgid   "Clear Log"
+msgstr  "Sálke listtu"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
+#, fuzzy
+msgid   "Terminal font"
+msgstr  "Terminal"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+#, fuzzy
+msgid   "Renice Process"
+msgstr  "Iežat proseassat"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+#, fuzzy
+msgid   "Suspend"
+msgstr  "Bisset (STOP)"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid   "Continue"
+msgstr  "Joatkke"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid   "Interrupt"
+msgstr  "Gaskkaldumit"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+#, fuzzy
+msgid   "Hangup"
+msgstr  "Hangup (HUP)"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid   "User 1 (USR1)"
+msgstr  "Geavaheaddji 1 (USR1)"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+msgid   "User 2 (USR2)"
+msgstr  "Geavaheaddji 2 (USR2)"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+#, fuzzy
+msgid   "Terminate Task"
+msgstr  "Heaittit (TERM)"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+msgid   "Abort"
+msgstr  "Gaskkalduhte"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:138
+msgid   "Kill"
+msgstr  "Gotte"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
+#, fuzzy
+msgid   "Segmentation fault"
+msgstr  "Presentašuvdnakvalitehta"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:216
+msgid   "PID"
+msgstr  "PID"
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:375
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:377
+#, fuzzy
+msgid   "Go to"
+msgstr  "Mana linnjái"
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:409
+msgid   "Not a directory"
+msgstr  "Ii leat máhppa"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:59
+#, fuzzy
+msgid   "loading..."
+msgstr  "Viežžamin …"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:151
+#: ../xffm/fm/dialog/notebook/page/page.hh:167
+#, fuzzy
+msgid   "Confirm Replace"
+msgstr  "Nanne sihkoma"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:153
+#, fuzzy
+msgid   "Destination File"
+msgstr  "Ulbmil"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:166
+#, fuzzy, c-format
+msgid   "The output file %s already exists, do you want to overwrite it?"
+msgstr  "Fiila %s gávdno juo. Háliidatgo duođaid dan buhttet?"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:11
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:214
+#, fuzzy
+msgid   "Remove Button Contents"
+msgstr  "Váldde eret oktavuođa"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:67
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:209
+#, fuzzy
+msgid   "Add custom content"
+msgstr  "Lasit sisdoalu"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:68
+#, fuzzy
+msgid   "Select file to load"
+msgstr  "Fiilla maid viežžat"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:125
+#, fuzzy, c-format
+msgid   "Cannot load file %s. Reason: %s"
+msgstr  "Ii sáhte viežžat bibliotehka %s: %s"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:154
+#, fuzzy
+msgid   "You need to restart the application"
+msgstr  "Prográmmaálggaheaddji"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:244
+#, fuzzy
+msgid   "Open a New Window"
+msgstr  "Raba ođđa láses"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:250
+#, fuzzy
+msgid   "Differences"
+msgstr  "Geahča earuid"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:178
+#, fuzzy
+msgid   "Open menu"
+msgstr  "Raba dokumeantta"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:230
+#, fuzzy
+msgid   "View as list"
+msgstr  "Maŋemus galleduvvon:"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:231
+msgid   "Show hidden files"
+msgstr  "Čájet čiegus fiillaid"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:232
+#, fuzzy
+msgid   "Show Backup Files"
+msgstr  "Čájet jođánissilli"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:233
+msgid   "Sort data in descending order"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:235
+#, fuzzy
+msgid   "Sort by date"
+msgstr  "Oanehaš dáhton:"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:236
+#, fuzzy
+msgid   "Sort by size"
+msgstr  "Sorterejuvvon dán bokte"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:270
+#, fuzzy
+msgid   "Main menu"
+msgstr  "Čiega fálu"
+
+#: ../xffm/fm/dialog/notebook/notebook.hh:56
+#, fuzzy
+msgid   "Long press time"
+msgstr  "Ale čájet govaid"
+
+#: ../xffm/fm/dialog/dialog.hh:122
+#, fuzzy
+msgid   "Removed"
+msgstr  "Váldde eret"
+
+#: ../xffm/fm/dialog/dialog.hh:143
+#, fuzzy
+msgid   "Detected device(s):"
+msgstr  "Vállje bálvalusa:"
+
+#: ../xffm/response/commandresponse.hh:19
+msgid   "Running"
+msgstr  "Jođus"
+
+#: ../xffm/response/commandresponse.hh:24
+#, fuzzy
+msgid   "Waiting for operation to finish..."
+msgstr  "Vuordá autentiserema"
+
+#: ../xffm/response/passwdresponse.hh:179
+#, fuzzy
+msgid   "User Input"
+msgstr  "Geavaheaddjedieđut"
+
+#: ../xffm/response/passwdresponse.hh:195
+msgid   "Response Requested"
+msgstr  "Vástádus gáibiduvvo"
+
+#: ../xffm/response/passwdresponse.hh:242 ../xffm/response/entryresponse.hh:439
+msgid   "Ok"
+msgstr  "Ok"
+
+#: ../xffm/response/customresponse.hh:55
+#, fuzzy
+msgid   "Execute command"
+msgstr  "Vuoje skálžogohččuma"
+
+#: ../xffm/response/customresponse.hh:103
+msgid   "Source File"
+msgstr  "Gáldofiila"
+
+#: ../xffm/response/timeoutresponse.hh:57
+msgid   "Dismiss"
+msgstr  ""
+
+#: ../xffm/response/commandprogressresponse.hh:31
+#, fuzzy
+msgid   "Items:"
+msgstr  "Sortere merkošiid"
+
+#: ../xffm/response/chooserresponse.hh:23
+msgid   "Open"
+msgstr  "Raba"
+
+#: ../xffm/response/chooserresponse.hh:56
+#, fuzzy
+msgid   "Choose directory"
+msgstr  "Vuođđamáhppa:"
+
+#: ../xffm/response/chooserresponse.hh:60
+#, fuzzy
+msgid   "Choose file"
+msgstr  "Vállje silli"
+
+#: ../xffm/completion/bash.hh:133
+msgid   "Completion mode:"
+msgstr  "Ollašuhttindoaibmanvuogi:"
+
+#: ../xffm/completion/bash.hh:134
+#, fuzzy
+msgid   "command"
+msgstr  "Gohččun"
+
+#: ../xffm/completion/bash.hh:135
+msgid   "file"
+msgstr  "fiila"
+
+#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
+msgid   "Options >>"
+msgstr  "Molssaeavttut >>"
+
+#: ../xffm/completion/base.hh:28
+msgid   "Command"
+msgstr  "Gohččun"
+
+#: ../xffm/completion/base.hh:31
+msgid   "File"
+msgstr  "Fiila"
+
+#: ../xffm/completion/base.hh:34
+#, fuzzy
+msgid   "Command history"
+msgstr  "Gohččunmeattáhus"
+
+#: ../xffm/completion/base.hh:40
+msgid   "Variable"
+msgstr  "Variábel"
+
+#: ../xffm/completion/base.hh:43
+msgid   "Host"
+msgstr  "Guossoheaddji"
+
+#: ../xffm/completion/base.hh:55
+#, fuzzy
+msgid   "Found no match"
+msgstr  "Beassansánit eai leat ovttamađu"
+
+#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
+#, fuzzy
+msgid   "Matches"
+msgstr  "Gozihuvvon"
+
+#: ../xffm/completion/base.hh:142
+#, fuzzy
+msgid   "Too many files open"
+msgstr  "Govvafiila maid rahpat"
 

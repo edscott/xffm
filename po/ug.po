@@ -1,1451 +1,1379 @@
-# Translations for Rodent package.
-# Copyright (C) 2004-2012 FSF.
-# This file is distributed under the same license as the Rodent package.
-#   --- vie may  3 10:39:31 CDT 2013 ---
+# Xffm+ translation file: vie ago  9 14:47:31 CDT 2019
+# Merged fron existing open source files
+# http://xffm.org
 #
-# Gheyret T.Kenji <gheyret@yahoo.com>, 2005-2010.
-# Oghlan Temkin <temkin119@gmail.com>, 2011.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2002-2012.
-#  Abduxukur Abdurixit <abduxukur.abdurixit@t-systems.ch>, 2005.
-# Muhemmed Erdem <misran.erdem@gmail.com>, 2011.
-# Sahran <sahran.ug@gmail.com>, 2008-2012.
-# GheyretT.Kenji <gheyret@yahoo.com>, 2010.
-# Gheyret <gheyret@gmail.com>, 2011.
-# Ömerjan Tursunqasim <omarjan14@qq.com>, 2008.
-# Bakhtiyar <bakhtiyar108@gmail.com>, 2010-2011.
-# Gheyret Kenji <gheyret@yahoo.com>, 2010-2011.
-# Zeper <zeper@msn.com>, 2010.
-# dolkun731 <dolkun731@gmail.com>.
-# Uqkun <wumaierjiang/xj/ccb@ccb.cn>, 2005.
-# OmarjanTk <omarjan14@qq.com>, 2010.
-# Abduxukur Abdurixit <abduxukur.abdurixit@t-systems.ch>, 2005.
-# Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
-# Temkin <temkin119@gmail.com>, 2011.
-# fuzzy
-msgid ""
-msgstr ""
-"Project-Id-Version: Rodent Delta\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-04 16:54-0500\n"
-"PO-Revision-Date: 2013-03-07 21:01+0900\n"
-"Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
-"Language-Team: GNOME Uighur Translation Project <gnome-uighur@yahoogroups."
-"com>\n"
-"Language: Uighur\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+#
+msgid   ""
+msgstr  "Project-Id-Version: xffm+\n"
+        "Report-Msgid-Bugs-To: \n"
+        "POT-Creation-Date: 2019-08-09 12:32-0500\n"
+        "PO-Revision-Date: 2013-03-07 21:01+0900\n"
+        "Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
+        "Language-Team: GNOME Uighur Translation Project <gnome-"
+        "uighur@yahoogroups.com>\n"
+        "Language: ug\n"
+        "MIME-Version: 1.0\n"
+        "Content-Type: text/plain; charset=UTF-8\n"
+        "Content-Transfer-Encoding: 8bit\n"
+        "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../../xffm/mime/mimemagic.hh:68 ../../xffm/mime/mimemagic.hh:110
-#: ../../xffm/common/mimemagic.hh:68 ../../xffm/common/mimemagic.hh:110
+#: ../xffm/mime/mimemagic.hh:68 ../xffm/mime/mimemagic.hh:112
 #, fuzzy
-msgid "No Read Permission"
-msgstr "يېڭى ئىمتىيازلار"
+msgid   "No Read Permission"
+msgstr  "يېڭى ئىمتىيازلار"
 
-#: ../../xffm/completion/base.hh:28
-msgid "Command"
-msgstr "بۇيرۇق"
+#: ../xffm/find/dialog.hh:91 ../xffm/find/dialog.hh:143
+#: ../xffm/find/dialog.hh:604
+msgid   "Find"
+msgstr  "ئىزدە(F)"
 
-#: ../../xffm/completion/base.hh:31
-msgid "File"
-msgstr "ھۆججەت(F)"
+#: ../xffm/find/dialog.hh:167 ../xffm/find/fgr.hh:146
+msgid   "Recursive"
+msgstr  "چوڭقۇرلاش"
 
-#: ../../xffm/completion/base.hh:34
+#: ../xffm/find/dialog.hh:170 ../xffm/find/fgr.hh:142
 #, fuzzy
-msgid "Command history"
-msgstr "تاپشۇرۇش تارىخى"
+msgid   "Find hidden files and directories"
+msgstr  "ھۆججەت ۋە مۇندەرىجە ياماقلىرى"
 
-#. option -u uid "uid" "uid_combo"
-#: ../../xffm/completion/base.hh:37 ../../xffm/find/dialog.hh:192
-msgid "User"
-msgstr "ئىشلەتكۈچى"
-
-#: ../../xffm/completion/base.hh:40
-msgid "Variable"
-msgstr "ئۆزگىرىشچان"
-
-#: ../../xffm/completion/base.hh:43
-msgid "Host"
-msgstr "ماشىنا"
-
-#: ../../xffm/completion/base.hh:55
+#: ../xffm/find/dialog.hh:173 ../xffm/find/fgr.hh:138
 #, fuzzy
-msgid "Found no match"
-msgstr "ماس كەلگەن سۆزلەر"
+msgid   "Stay on single filesystem"
+msgstr  "ھۆججەت سىستېما تەكشۈر"
 
-#: ../../xffm/completion/base.hh:141 ../../xffm/completion/base.hh:142
-msgid "Matches"
-msgstr "تېپىلغانلىرى"
+#: ../xffm/find/dialog.hh:176 ../xffm/find/signals.hh:66
+#: ../xffm/find/signals.hh:454
+msgid   "Results"
+msgstr  "نەتىجە"
 
-#: ../../xffm/completion/base.hh:142
-msgid "Too many files open"
-msgstr "ئېچىلغان ھۆججەت بەك كوپ"
+#: ../xffm/find/dialog.hh:176
+msgid   "Upper limit"
+msgstr  "يۇقىرى چېكى"
 
-#: ../../xffm/completion/base.hh:339 ../../xffm/find/fgr.hh:124
-msgid "Options:"
-msgstr "تاللانمىلار:"
+#: ../xffm/find/dialog.hh:181
+msgid   "At Least"
+msgstr  "ئاز دېگەندە"
 
-#: ../../xffm/completion/bash.hh:133
+#: ../xffm/find/dialog.hh:181 ../xffm/find/dialog.hh:186
+msgid   "kBytes"
+msgstr  "كىلوبايت"
+
+#: ../xffm/find/dialog.hh:186
+msgid   "At Most"
+msgstr  "كوپ بولغاندا"
+
+#: ../xffm/find/dialog.hh:192 ../xffm/completion/base.hh:37
+msgid   "User"
+msgstr  "ئىشلەتكۈچى"
+
+#: ../xffm/find/dialog.hh:197
+msgid   "Group"
+msgstr  "گۇرۇپپا"
+
+#: ../xffm/find/dialog.hh:201
+msgid   "Octal Permissions"
+msgstr  "سەككىزلىك سىستېمىدىكى ھوقۇقى"
+
+#: ../xffm/find/dialog.hh:206
+msgid   "SUID"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:206 ../xffm/fm/view/local/popup.hh:1102
 #, fuzzy
-msgid "Completion mode:"
-msgstr "تاماملاش كودى"
+msgid   "Executable"
+msgstr  "ئىجرا قىلغىلى بولىدۇ:"
 
-#: ../../xffm/completion/bash.hh:134
-msgid "command"
-msgstr "بۇيرۇق"
+#: ../xffm/find/dialog.hh:214 ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168
+msgid   "Minutes"
+msgstr  "مىنۇت"
 
-#: ../../xffm/completion/bash.hh:135
-msgid "file"
-msgstr "ھۆججەت"
+#: ../xffm/find/dialog.hh:219 ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171
+msgid   "Hours"
+msgstr  "سائەت"
 
-#: ../../xffm/completion/bash.hh:145 ../../xffm/completion/bash.hh:149
-msgid "Options >>"
-msgstr "تاللانما(O)‹‹"
+#: ../xffm/find/dialog.hh:224 ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174
+msgid   "Days"
+msgstr  "كۈن"
 
-#: ../../xffm/find/fgr.hh:124 ../../xffm/find/signals.hh:100
-#: ../../xffm/find/dialog.hh:301
-msgid "Path"
-msgstr "يول"
+#: ../xffm/find/dialog.hh:230
+msgid   "Months"
+msgstr  "ئاي"
 
-#: ../../xffm/find/fgr.hh:125
-msgid "Locate documents and folders on this computer by name or content"
-msgstr ""
-"بۇ كومپيۇتېردىكى پۈتۈك ۋە قىسقۇچلارنى ئاتى ياكى مەزمۇنى بويىچە ئورۇن بېكىتىدۇ"
-
-#: ../../xffm/find/fgr.hh:126 ../../xffm/find/dialog.hh:334
-msgid "Filter:"
-msgstr "سۈزگۈچ:"
-
-#: ../../xffm/find/fgr.hh:126
-msgid "Search for files"
-msgstr "ھۆججەت ئىزدە"
-
-#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
-#: ../../xffm/find/fgr.hh:128
-msgid "Contents:"
-msgstr "مەزمۇنلىرى:"
-
-#: ../../xffm/find/fgr.hh:128
+#: ../xffm/find/dialog.hh:241
 #, fuzzy
-msgid "File's contents filtered as plain text."
-msgstr "ھۆججەتنى ساپ تېكىست ھالىتىدە ساقلامدۇ؟"
+msgid   "File type : "
+msgstr  "ھۆججەت تىپى(T):"
 
-#: ../../xffm/find/fgr.hh:131
-msgid "Verbose output debugging mode."
-msgstr "تەپسىلىي سازلاش ھالىتى."
+#: ../xffm/find/dialog.hh:255 ../xffm/find/dialog.hh:595
+#: ../xffm/common/gtk.hh:79 ../xffm/fm/dialog/notebook/page/page.hh:71
+msgid   "Close"
+msgstr  "ياپ"
 
-#: ../../xffm/find/fgr.hh:133
-msgid "Show version information"
-msgstr "نەشر ئۇچۇرىنى كۆرسىتىش"
+#: ../xffm/find/dialog.hh:263 ../xffm/find/dialog.hh:363
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/fm/view/treeview.hh:18
+msgid   "Details"
+msgstr  "تەپسىلاتلار"
 
-#: ../../xffm/find/fgr.hh:135
+#: ../xffm/find/dialog.hh:301 ../xffm/find/fgr.hh:124
+#: ../xffm/find/signals.hh:100
+msgid   "Path"
+msgstr  "يول"
+
+#: ../xffm/find/dialog.hh:334 ../xffm/find/fgr.hh:126
+msgid   "Filter:"
+msgstr  "سۈزگۈچ:"
+
+#: ../xffm/find/dialog.hh:377
+msgid   "Contains"
+msgstr  "ئۆز ئىچىگە ئالغان"
+
+#: ../xffm/find/dialog.hh:397
+msgid   "Contains the text"
+msgstr  "ئۆز ئىچىگە ئالغان تېكىست(T)"
+
+#: ../xffm/find/dialog.hh:430
+msgid   "Case Sensitive"
+msgstr  "چوڭ-كىچىك يېزىلىشى پەرقلەندۈر"
+
+#: ../xffm/find/dialog.hh:442
 #, fuzzy
-msgid "Filter Details"
-msgstr "ئىشلەتكۈچى تەپسىلاتى"
+msgid   "Extended regexp"
+msgstr  "كېڭەيتىلگەن"
 
-#. / option -a "xdev"
-#: ../../xffm/find/fgr.hh:138 ../../xffm/find/dialog.hh:173
+#: ../xffm/find/dialog.hh:453
+msgid   "Include binary files"
+msgstr  "ئىككىلىك ھۆججەتلەرنىمۇ(B)"
+
+#: ../xffm/find/dialog.hh:463 ../xffm/find/fgr.hh:212
+msgid   "Line Count"
+msgstr  "قۇر سانى"
+
+#: ../xffm/find/dialog.hh:489
+msgid   "Match"
+msgstr  "مۇۋاپىق"
+
+#: ../xffm/find/dialog.hh:501
 #, fuzzy
-msgid "Stay on single filesystem"
-msgstr "ھۆججەت سىستېما تەكشۈر"
+msgid   "Anywhere"
+msgstr  "ھەممە يەر"
 
-#: ../../xffm/find/fgr.hh:140
-msgid "Print..."
-msgstr "باس(P)…"
+#: ../xffm/find/dialog.hh:516
+msgid   "Whole words only"
+msgstr  "سۆزنىلا(W)"
 
-#: ../../xffm/find/fgr.hh:140
+#: ../xffm/find/dialog.hh:531
+msgid   "lines"
+msgstr  "سىزىقلار"
+
+#: ../xffm/find/dialog.hh:545 ../xffm/find/fgr.hh:210
+msgid   "No match"
+msgstr  "ماس كېلىدىغىنى يوق"
+
+#: ../xffm/find/dialog.hh:577 ../xffm/find/signals.hh:368
+#: ../xffm/common/gtk.hh:409 ../xffm/fm/view/local/rm.hh:157
+#: ../xffm/fm/view/local/properties.hh:314
+#: ../xffm/response/entryresponse.hh:435 ../xffm/response/chooserresponse.hh:21
+msgid   "Cancel"
+msgstr  "ۋاز كەچ(N)"
+
+#: ../xffm/find/dialog.hh:587
+msgid   "Clear"
+msgstr  "تازىلا(C)"
+
+#: ../xffm/find/dialog.hh:629
+msgid   "Edit"
+msgstr  "تەھرىر(E)"
+
+#: ../xffm/find/dialog.hh:743 ../xffm/find/dialog.hh:758
+#: ../xffm/common/preview.hh:460 ../xffm/common/util.hh:1354
+#: ../xffm/common/util.hh:1356 ../xffm/common/util.hh:1362
+#: ../xffm/common/util.hh:1364
+msgid   "unknown"
+msgstr  "نامەلۇم"
+
+#: ../xffm/find/dialog.hh:772
+msgid   "Modified"
+msgstr  "ئۆزگەرتىلگەن ۋاقتى"
+
+#: ../xffm/find/dialog.hh:776
+msgid   "Created"
+msgstr  "قۇرغان ۋاقتى"
+
+#: ../xffm/find/dialog.hh:780
 #, fuzzy
-msgid "The unique Process ID that identifies this process."
-msgstr "بۇ ئىجرانىڭ ئىگىسى."
+msgid   "Accessed"
+msgstr  "زىيارەت:"
 
-#. / option -D "recursiveH"
-#: ../../xffm/find/fgr.hh:142 ../../xffm/find/dialog.hh:170
+#: ../xffm/find/dialog.hh:1098
+msgid   "Basic rules:\n"
+        "\n"
+        "*  Will match any character zero or more times.\n"
+        "?  Will match any character exactly one time\n"
+        "[] Match any character within the [] \n"
+        "^  Match at beginning of string\n"
+        "$  Match at end of string \n"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:1107
+msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
+        "( ) : \n"
+        "In  basic regular expressions the metacharacters ?, +, {, |, (, "
+        "and ) \n"
+        "  lose their special meaning.\n"
+        "\n"
+        "The  period . matches  any  single  character.\n"
+        "The caret ^ matches at the start of line.\n"
+        "The dollar $ matches at the end of line.\n"
+        "\n"
+        "Characters within [ ] matches any single character in the list.\n"
+        "Characters within [^ ] matches any single character *not* in the "
+        "list.\n"
+        "Characters inside [ - ] matches a range of characters (ie [0-9] or "
+        "[a-z]).\n"
+        "\n"
+        "A regular expression may be followed by one of several repetition "
+        "operators:\n"
+        "?      The preceding item is optional and matched\n"
+        "       at most once.\n"
+        "*      The preceding item will be matched zero\n"
+        "       or more times.\n"
+        "+      The preceding item will be matched one or\n"
+        "       more times.\n"
+        "{n}    The preceding item is matched exactly n times.\n"
+        "{n,}   The preceding item is matched n or more times.\n"
+        "{n,m}  The preceding item is matched at least n times,\n"
+        "       but not more than m times.\n"
+        "\n"
+        "To match any reserved character, precede it with \\. \n"
+        "\n"
+        "Two regular expressions may be joined by the logical or operator |.\n"
+        "Two regular expressions may be concatenated.\n"
+        "\n"
+        "More information is available by typing \"man grep\"\n"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:124 ../xffm/completion/base.hh:339
+msgid   "Options:"
+msgstr  "تاللانمىلار:"
+
+#: ../xffm/find/fgr.hh:125
+msgid   "Locate documents and folders on this computer by name or content"
+msgstr  "بۇ كومپيۇتېردىكى پۈتۈك ۋە قىسقۇچلارنى ئاتى ياكى مەزمۇنى بويىچە ئورۇن "
+        "بېكىتىدۇ"
+
+#: ../xffm/find/fgr.hh:126
+msgid   "Search for files"
+msgstr  "ھۆججەت ئىزدە"
+
+#: ../xffm/find/fgr.hh:128
+msgid   "Contents:"
+msgstr  "مەزمۇنلىرى:"
+
+#: ../xffm/find/fgr.hh:128
 #, fuzzy
-msgid "Find hidden files and directories"
-msgstr "ھۆججەت ۋە مۇندەرىجە ياماقلىرى"
+msgid   "File's contents filtered as plain text."
+msgstr  "ھۆججەتنى ساپ تېكىست ھالىتىدە ساقلامدۇ؟"
 
-#: ../../xffm/find/fgr.hh:143
-msgid "Filter"
-msgstr "سۈزگۈچ"
+#: ../xffm/find/fgr.hh:131
+msgid   "Verbose output debugging mode."
+msgstr  "تەپسىلىي سازلاش ھالىتى."
 
-#: ../../xffm/find/fgr.hh:144
-msgid ""
-"To display files which pass the filter (stars and regexps will be processed)"
-msgstr ""
+#: ../xffm/find/fgr.hh:133
+msgid   "Show version information"
+msgstr  "نەشر ئۇچۇرىنى كۆرسىتىش"
 
-#. / option -r "recursive"
-#: ../../xffm/find/fgr.hh:146 ../../xffm/find/dialog.hh:167
-msgid "Recursive"
-msgstr "چوڭقۇرلاش"
-
-#: ../../xffm/find/fgr.hh:147 ../../xffm/find/fgr.hh:148
-#: ../../xffm/find/fgr.hh:149 ../../xffm/find/fgr.hh:150
-msgid "KByte"
-msgstr "كىلوبايت"
-
-#: ../../xffm/find/fgr.hh:148
+#: ../xffm/find/fgr.hh:135
 #, fuzzy
-msgid "is greater than or equal to"
-msgstr "چوڭ ياكى تەڭ"
+msgid   "Filter Details"
+msgstr  "ئىشلەتكۈچى تەپسىلاتى"
 
-#: ../../xffm/find/fgr.hh:150
+#: ../xffm/find/fgr.hh:140
+msgid   "Print..."
+msgstr  "باس(P)…"
+
+#: ../xffm/find/fgr.hh:140
 #, fuzzy
-msgid "is less than or equal to"
-msgstr "كىچىك ياكى تەڭ"
+msgid   "The unique Process ID that identifies this process."
+msgstr  "بۇ ئىجرانىڭ ئىگىسى."
 
-#: ../../xffm/find/fgr.hh:152
-msgid "Set UID"
-msgstr "UID تەڭشەك"
+#: ../xffm/find/fgr.hh:143
+msgid   "Filter"
+msgstr  "سۈزگۈچ"
 
-#: ../../xffm/find/fgr.hh:152
-msgid "Executable Text Files"
-msgstr "ئىجرا قىلغىلى بولىدىغان تېكىست ھۆججەتلىرى"
+#: ../xffm/find/fgr.hh:144
+msgid   "To display files which pass the filter (stars and regexps will be "
+        "processed)"
+msgstr  ""
 
-#: ../../xffm/find/fgr.hh:154
-msgid "The permissions of the file, in octal notation."
-msgstr "ھۆججەتنىڭ سەككىزلىك سىستېمىدىكى ھوقۇقى."
+#: ../xffm/find/fgr.hh:147 ../xffm/find/fgr.hh:148 ../xffm/find/fgr.hh:149
+#: ../xffm/find/fgr.hh:150
+msgid   "KByte"
+msgstr  "كىلوبايت"
 
-#: ../../xffm/find/fgr.hh:155
-msgid "Type"
-msgstr "تىپى"
-
-#: ../../xffm/find/fgr.hh:157 ../../xffm/find/signals.hh:14
-msgid "Any"
-msgstr "خالىغان"
-
-#: ../../xffm/find/fgr.hh:157
+#: ../xffm/find/fgr.hh:148
 #, fuzzy
-msgid "Default type"
-msgstr "كۆڭۈلدىكى ۋاقىت"
+msgid   "is greater than or equal to"
+msgstr  "چوڭ ياكى تەڭ"
 
-#: ../../xffm/find/fgr.hh:158 ../../xffm/common/preview.hh:478
+#: ../xffm/find/fgr.hh:150
 #, fuzzy
-msgid "Regular file"
-msgstr "مۇنتىزىم سېتكا"
+msgid   "is less than or equal to"
+msgstr  "كىچىك ياكى تەڭ"
 
-#: ../../xffm/find/fgr.hh:159 ../../xffm/find/signals.hh:8
-#: ../../xffm/fm/view/local/popup.hh:1062 ../../xffm/common/preview.hh:469
-msgid "Directory"
-msgstr "مۇندەرىجە"
+#: ../xffm/find/fgr.hh:152
+msgid   "Set UID"
+msgstr  "UID تەڭشەك"
 
-#: ../../xffm/find/fgr.hh:160 ../../xffm/find/signals.hh:9
-#: ../../xffm/common/preview.hh:475
-msgid "Symbolic Link"
-msgstr "بەلگە ئۇلىنىشى"
+#: ../xffm/find/fgr.hh:152
+msgid   "Executable Text Files"
+msgstr  "ئىجرا قىلغىلى بولىدىغان تېكىست ھۆججەتلىرى"
 
-#: ../../xffm/find/fgr.hh:161
+#: ../xffm/find/fgr.hh:154
+msgid   "The permissions of the file, in octal notation."
+msgstr  "ھۆججەتنىڭ سەككىزلىك سىستېمىدىكى ھوقۇقى."
+
+#: ../xffm/find/fgr.hh:155
+msgid   "Type"
+msgstr  "تىپى"
+
+#: ../xffm/find/fgr.hh:157 ../xffm/find/signals.hh:14
+msgid   "Any"
+msgstr  "خالىغان"
+
+#: ../xffm/find/fgr.hh:157
 #, fuzzy
-msgid "UNIX Socket"
-msgstr "ئوقۇر(S)"
+msgid   "Default type"
+msgstr  "كۆڭۈلدىكى ۋاقىت"
 
-#: ../../xffm/find/fgr.hh:162 ../../xffm/find/signals.hh:11
-#: ../../xffm/common/preview.hh:463
+#: ../xffm/find/fgr.hh:158 ../xffm/common/preview.hh:478
 #, fuzzy
-msgid "Block device"
-msgstr "ئۈسكىنىگە قايتىش"
+msgid   "Regular file"
+msgstr  "مۇنتىزىم سېتكا"
 
-#: ../../xffm/find/fgr.hh:163 ../../xffm/find/signals.hh:12
-#: ../../xffm/common/preview.hh:466
+#: ../xffm/find/fgr.hh:159 ../xffm/find/signals.hh:8
+#: ../xffm/common/preview.hh:469 ../xffm/fm/view/local/popup.hh:1062
+msgid   "Directory"
+msgstr  "مۇندەرىجە"
+
+#: ../xffm/find/fgr.hh:160 ../xffm/find/signals.hh:9
+#: ../xffm/common/preview.hh:475
+msgid   "Symbolic Link"
+msgstr  "بەلگە ئۇلىنىشى"
+
+#: ../xffm/find/fgr.hh:161
 #, fuzzy
-msgid "Character device"
-msgstr "ھەرپ كودى"
+msgid   "UNIX Socket"
+msgstr  "ئوقۇر(S)"
 
-#: ../../xffm/find/fgr.hh:164 ../../xffm/find/signals.hh:13
-#: ../../xffm/common/preview.hh:472
-msgid "FIFO"
-msgstr "FIFO"
-
-#. radio_p freed on destroy event for findDialog.
-#. option -k minutes "last_minutes", "last_minutes_spin"
-#: ../../xffm/find/fgr.hh:166 ../../xffm/find/fgr.hh:168
-#: ../../xffm/find/dialog.hh:214
-msgid "Minutes"
-msgstr "مىنۇت"
-
-#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
-#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
-#: ../../xffm/find/dialog.hh:263 ../../xffm/find/dialog.hh:363
-#: ../../xffm/fm/view/treeview.hh:18
-msgid "Details"
-msgstr "تەپسىلاتلار"
-
-#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
-#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
-#: ../../xffm/find/fgr.hh:179 ../../xffm/find/fgr.hh:180
-#: ../../xffm/find/fgr.hh:183 ../../xffm/find/fgr.hh:184
-#: ../../xffm/find/fgr.hh:187 ../../xffm/find/fgr.hh:188
+#: ../xffm/find/fgr.hh:162 ../xffm/find/signals.hh:11
+#: ../xffm/common/preview.hh:463
 #, fuzzy
-msgid "TIME"
-msgstr "مۆھلەتتىن ھالقىش ۋاقتى"
+msgid   "Block device"
+msgstr  "ئۈسكىنىگە قايتىش"
 
-#: ../../xffm/find/fgr.hh:168 ../../xffm/find/fgr.hh:171
-#: ../../xffm/find/fgr.hh:174 ../../xffm/find/fgr.hh:177
-msgid "Previous"
-msgstr "ئالدىنقى"
-
-#. option -h hours "last_hours", "last_hours_spin"
-#: ../../xffm/find/fgr.hh:169 ../../xffm/find/fgr.hh:171
-#: ../../xffm/find/dialog.hh:219
-msgid "Hours"
-msgstr "سائەت"
-
-#. option -d days "last_days", "last_days_spin"
-#: ../../xffm/find/fgr.hh:172 ../../xffm/find/fgr.hh:174
-#: ../../xffm/find/dialog.hh:224
-msgid "Days"
-msgstr "كۈن"
-
-#: ../../xffm/find/fgr.hh:175
-msgid "Month"
-msgstr "ئاي"
-
-#: ../../xffm/find/fgr.hh:177
+#: ../xffm/find/fgr.hh:163 ../xffm/find/signals.hh:12
+#: ../xffm/common/preview.hh:466
 #, fuzzy
-msgid "Month(s)"
-msgstr "ئاي"
+msgid   "Character device"
+msgstr  "ھەرپ كودى"
 
-#: ../../xffm/find/fgr.hh:180
+#: ../xffm/find/fgr.hh:164 ../xffm/find/signals.hh:13
+#: ../xffm/common/preview.hh:472
+msgid   "FIFO"
+msgstr  "FIFO"
+
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/find/fgr.hh:179 ../xffm/find/fgr.hh:180
+#: ../xffm/find/fgr.hh:183 ../xffm/find/fgr.hh:184 ../xffm/find/fgr.hh:187
+#: ../xffm/find/fgr.hh:188
 #, fuzzy
-msgid "Modification Time :"
-msgstr "ئۆزگەرتكەن چېسلا بويىچە(D)"
+msgid   "TIME"
+msgstr  "مۆھلەتتىن ھالقىش ۋاقتى"
 
-#: ../../xffm/find/fgr.hh:184
+#: ../xffm/find/fgr.hh:168 ../xffm/find/fgr.hh:171 ../xffm/find/fgr.hh:174
+#: ../xffm/find/fgr.hh:177
+msgid   "Previous"
+msgstr  "ئالدىنقى"
+
+#: ../xffm/find/fgr.hh:175
+msgid   "Month"
+msgstr  "ئاي"
+
+#: ../xffm/find/fgr.hh:177
 #, fuzzy
-msgid "Access Time :"
-msgstr "زىيارەت ۋاقتى"
+msgid   "Month(s)"
+msgstr  "ئاي"
 
-#: ../../xffm/find/fgr.hh:188
+#: ../xffm/find/fgr.hh:180
 #, fuzzy
-msgid "Creation Time :"
-msgstr "قۇرۇلغان ۋاقتى"
+msgid   "Modification Time :"
+msgstr  "ئۆزگەرتكەن چېسلا بويىچە(D)"
 
-#: ../../xffm/find/fgr.hh:191 ../../xffm/find/fgr.hh:192
-msgid "uid"
-msgstr "uid"
-
-#: ../../xffm/find/fgr.hh:192
-msgid "User:"
-msgstr "ئىشلەتكۈچى:"
-
-#: ../../xffm/find/fgr.hh:194 ../../xffm/find/fgr.hh:195
+#: ../xffm/find/fgr.hh:184
 #, fuzzy
-msgid "gid"
-msgstr "ghi"
+msgid   "Access Time :"
+msgstr  "زىيارەت ۋاقتى"
 
-#: ../../xffm/find/fgr.hh:195
-msgid "Group:"
-msgstr "گۇرۇپپا(G):"
+#: ../xffm/find/fgr.hh:188
+#, fuzzy
+msgid   "Creation Time :"
+msgstr  "قۇرۇلغان ۋاقتى"
 
-#: ../../xffm/find/fgr.hh:198
-msgid ""
-"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
-"character that  normally  follows  a file  name"
-msgstr ""
+#: ../xffm/find/fgr.hh:191 ../xffm/find/fgr.hh:192
+msgid   "uid"
+msgstr  "uid"
 
-#: ../../xffm/find/fgr.hh:200
-msgid "Content View"
-msgstr "مەزمۇن كۆرۈنۈشى"
+#: ../xffm/find/fgr.hh:192
+msgid   "User:"
+msgstr  "ئىشلەتكۈچى:"
 
-#: ../../xffm/find/fgr.hh:201 ../../xffm/find/fgr.hh:202
-#: ../../xffm/find/fgr.hh:203 ../../xffm/find/fgr.hh:204
-msgid "STRING"
-msgstr "STRING"
+#: ../xffm/find/fgr.hh:194 ../xffm/find/fgr.hh:195
+#, fuzzy
+msgid   "gid"
+msgstr  "ghi"
 
-#: ../../xffm/find/fgr.hh:202 ../../xffm/find/fgr.hh:204
-#: ../../xffm/fm/view/local/popup.hh:759
-msgid "Regular expression"
-msgstr "مۇنتىزىم ئىپادە"
+#: ../xffm/find/fgr.hh:195
+msgid   "Group:"
+msgstr  "گۇرۇپپا(G):"
 
-#: ../../xffm/find/fgr.hh:204
-msgid "Extended"
-msgstr "كېڭەيتىلگەن"
+#: ../xffm/find/fgr.hh:198
+msgid   "Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+        "character that  normally  follows  a file  name"
+msgstr  ""
 
-#: ../../xffm/find/fgr.hh:206
-msgid "Ignore case"
-msgstr "چوڭ كىچىك يېزىلىشىغا پەرۋا قىلما(I)"
+#: ../xffm/find/fgr.hh:200
+msgid   "Content View"
+msgstr  "مەزمۇن كۆرۈنۈشى"
 
-#: ../../xffm/find/fgr.hh:208
-msgid "Text Files"
-msgstr "تېكىست ھۆججەتلەر"
+#: ../xffm/find/fgr.hh:201 ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:203
+#: ../xffm/find/fgr.hh:204
+msgid   "STRING"
+msgstr  "STRING"
 
-#: ../../xffm/find/fgr.hh:210 ../../xffm/find/dialog.hh:545
-msgid "No match"
-msgstr "ماس كېلىدىغىنى يوق"
+#: ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:204
+#: ../xffm/fm/view/local/popup.hh:759
+msgid   "Regular expression"
+msgstr  "مۇنتىزىم ئىپادە"
 
-#: ../../xffm/find/fgr.hh:212 ../../xffm/find/dialog.hh:463
-msgid "Line Count"
-msgstr "قۇر سانى"
+#: ../xffm/find/fgr.hh:204
+msgid   "Extended"
+msgstr  "كېڭەيتىلگەن"
 
-#: ../../xffm/find/fgr.hh:214
-msgid "Words"
-msgstr "سۆزلەر"
+#: ../xffm/find/fgr.hh:206
+msgid   "Ignore case"
+msgstr  "چوڭ كىچىك يېزىلىشىغا پەرۋا قىلما(I)"
 
-#: ../../xffm/find/fgr.hh:216
-msgid "Lines"
-msgstr "سىزىقلار"
+#: ../xffm/find/fgr.hh:208
+msgid   "Text Files"
+msgstr  "تېكىست ھۆججەتلەر"
 
-#: ../../xffm/find/fgr.hh:368
+#: ../xffm/find/fgr.hh:214
+msgid   "Words"
+msgstr  "سۆزلەر"
+
+#: ../xffm/find/fgr.hh:216
+msgid   "Lines"
+msgstr  "سىزىقلار"
+
+#: ../xffm/find/fgr.hh:362
 #, fuzzy, c-format
-msgid "Usage : %s [OPTIONS]\n"
-msgstr "قوللانما: orca [تاللاش...]"
+msgid   "Usage : %s [OPTIONS]\n"
+msgstr  "قوللانما: orca [تاللاش...]"
 
-#: ../../xffm/find/signals.hh:7
-msgid "Regular"
-msgstr "ئۆلچەملىك"
+#: ../xffm/find/signals.hh:7
+msgid   "Regular"
+msgstr  "ئۆلچەملىك"
 
-#: ../../xffm/find/signals.hh:10 ../../xffm/common/preview.hh:481
+#: ../xffm/find/signals.hh:10 ../xffm/common/preview.hh:481
 #, fuzzy
-msgid "Socket"
-msgstr "ئوقۇر(S)"
+msgid   "Socket"
+msgstr  "ئوقۇر(S)"
 
-#. if (g_slist_length(list) == 0) return NULL;
-#. Create liststore for DnD
-#. / option "upper_limit_spin" (only in gtk findDialog)
-#: ../../xffm/find/signals.hh:66 ../../xffm/find/signals.hh:454
-#: ../../xffm/find/dialog.hh:176
-msgid "Results"
-msgstr "نەتىجە"
-
-#. button no
-#: ../../xffm/find/signals.hh:368 ../../xffm/find/dialog.hh:577
-#: ../../xffm/response/chooserresponse.hh:21
-#: ../../xffm/response/entryresponse.hh:420
-#: ../../xffm/fm/view/local/properties.hh:314
-#: ../../xffm/fm/view/local/rm.hh:157 ../../xffm/common/gtk.hh:409
-msgid "Cancel"
-msgstr "ۋاز كەچ(N)"
-
-#: ../../xffm/find/signals.hh:396 ../../xffm/find/signals.hh:830
+#: ../xffm/find/signals.hh:396 ../xffm/find/signals.hh:830
 #, fuzzy
-msgid "No editor for current action."
-msgstr "ھازىرقى ئورۇننى تاپالمىدى."
+msgid   "No editor for current action."
+msgstr  "ھازىرقى ئورۇننى تاپالمىدى."
 
-#: ../../xffm/find/signals.hh:454
-msgid "Upper limit:"
-msgstr "يۇقىرى چەك:"
+#: ../xffm/find/signals.hh:454
+msgid   "Upper limit:"
+msgstr  "يۇقىرى چەك:"
 
-#: ../../xffm/find/signals.hh:456
+#: ../xffm/find/signals.hh:456
 #, fuzzy
-msgid "Counting files..."
-msgstr "ھۆججەتنى يېپىۋاتىدۇ…"
+msgid   "Counting files..."
+msgstr  "ھۆججەتنى يېپىۋاتىدۇ…"
 
-#: ../../xffm/find/signals.hh:471
+#: ../xffm/find/signals.hh:471
 #, fuzzy, c-format
-msgid "Found %d match"
-msgid_plural "Found %d matches"
-msgstr[0] "ماس كەلگىنى %d"
+msgid   "Found %d match"
+msgid_plural    "Found %d matches"
+msgstr[0]       "ماس كەلگىنى %d"
 
-#: ../../xffm/find/signals.hh:473
+#: ../xffm/find/signals.hh:473
 #, fuzzy, c-format
-msgid "%s Finished : %s"
-msgstr "%s [تاماملاندى]"
+msgid   "%s Finished : %s"
+msgstr  "%s [تاماملاندى]"
 
-#: ../../xffm/find/signals.hh:596 ../../xffm/find/signals.hh:598
-msgid "Searching..."
-msgstr "ئىزدەۋاتىدۇ…"
+#: ../xffm/find/signals.hh:596 ../xffm/find/signals.hh:598
+msgid   "Searching..."
+msgstr  "ئىزدەۋاتىدۇ…"
 
-#. g_object_set_data(G_OBJECT(findDialog), "window", findDialog);
-#: ../../xffm/find/dialog.hh:91 ../../xffm/find/dialog.hh:143
-#: ../../xffm/find/dialog.hh:604
-msgid "Find"
-msgstr "ئىزدە(F)"
-
-#: ../../xffm/find/dialog.hh:176
-msgid "Upper limit"
-msgstr "يۇقىرى چېكى"
-
-#. option -s +KByte "size_greater", "size_greater_spin"
-#: ../../xffm/find/dialog.hh:181
-msgid "At Least"
-msgstr "ئاز دېگەندە"
-
-#: ../../xffm/find/dialog.hh:181 ../../xffm/find/dialog.hh:186
-msgid "kBytes"
-msgstr "كىلوبايت"
-
-#. option -s -KByte "size_smaller", "size_smaller_spin"
-#: ../../xffm/find/dialog.hh:186
-msgid "At Most"
-msgstr "كوپ بولغاندا"
-
-#: ../../xffm/find/dialog.hh:197
-msgid "Group"
-msgstr "گۇرۇپپا"
-
-#. option -o octal "octal_p" "permissions_entry"
-#: ../../xffm/find/dialog.hh:201
-msgid "Octal Permissions"
-msgstr "سەككىزلىك سىستېمىدىكى ھوقۇقى"
-
-#. option -p suid | exe
-#: ../../xffm/find/dialog.hh:206
-msgid "SUID"
-msgstr ""
-
-#: ../../xffm/find/dialog.hh:206 ../../xffm/fm/view/local/popup.hh:1102
+#: ../xffm/common/preview.hh:581
 #, fuzzy
-msgid "Executable"
-msgstr "ئىجرا قىلغىلى بولىدۇ:"
+msgid   "Empty file"
+msgstr  "غەملەك ھۆججىتى قۇرۇق"
 
-#. option -m months "last_months", "last_months_spin"
-#: ../../xffm/find/dialog.hh:230
-msgid "Months"
-msgstr "ئاي"
-
-#: ../../xffm/find/dialog.hh:241
-#, fuzzy
-msgid "File type : "
-msgstr "ھۆججەت تىپى(T):"
-
-#. gtk_widget_show (GTK_WIDGET(right_options_vbox));
-#. gtk_widget_show (GTK_WIDGET(center_options_vbox));
-#. gtk_widget_show (GTK_WIDGET(left_options_vbox));
-#: ../../xffm/find/dialog.hh:255 ../../xffm/find/dialog.hh:595
-#: ../../xffm/fm/dialog/notebook/page/page.hh:70 ../../xffm/common/gtk.hh:79
-msgid "Close"
-msgstr "ياپ"
-
-#. gtk_box_pack_start (vbox7a, GTK_WIDGET(advancedBox), TRUE, FALSE, 5);
-#. gtk_widget_show(GTK_WIDGET(advancedBox));
-#. //////////////  grep options.... /////////////////////////
-#: ../../xffm/find/dialog.hh:377
-msgid "Contains"
-msgstr "ئۆز ئىچىگە ئالغان"
-
-#: ../../xffm/find/dialog.hh:397
-msgid "Contains the text"
-msgstr "ئۆز ئىچىگە ئالغان تېكىست(T)"
-
-#: ../../xffm/find/dialog.hh:430
-msgid "Case Sensitive"
-msgstr "چوڭ-كىچىك يېزىلىشى پەرقلەندۈر"
-
-#: ../../xffm/find/dialog.hh:442
-#, fuzzy
-msgid "Extended regexp"
-msgstr "كېڭەيتىلگەن"
-
-#: ../../xffm/find/dialog.hh:453
-msgid "Include binary files"
-msgstr "ئىككىلىك ھۆججەتلەرنىمۇ(B)"
-
-#: ../../xffm/find/dialog.hh:489
-msgid "Match"
-msgstr "مۇۋاپىق"
-
-#: ../../xffm/find/dialog.hh:501
-#, fuzzy
-msgid "Anywhere"
-msgstr "ھەممە يەر"
-
-#: ../../xffm/find/dialog.hh:516
-msgid "Whole words only"
-msgstr "سۆزنىلا(W)"
-
-#: ../../xffm/find/dialog.hh:531
-msgid "lines"
-msgstr "سىزىقلار"
-
-#: ../../xffm/find/dialog.hh:587
-msgid "Clear"
-msgstr "تازىلا(C)"
-
-#: ../../xffm/find/dialog.hh:629
-msgid "Edit"
-msgstr "تەھرىر(E)"
-
-#: ../../xffm/find/dialog.hh:743 ../../xffm/find/dialog.hh:758
-#: ../../xffm/common/util.hh:1354 ../../xffm/common/util.hh:1356
-#: ../../xffm/common/util.hh:1362 ../../xffm/common/util.hh:1364
-#: ../../xffm/common/preview.hh:460
-msgid "unknown"
-msgstr "نامەلۇم"
-
-#: ../../xffm/find/dialog.hh:772
-msgid "Modified"
-msgstr "ئۆزگەرتىلگەن ۋاقتى"
-
-#: ../../xffm/find/dialog.hh:776
-msgid "Created"
-msgstr "قۇرغان ۋاقتى"
-
-#: ../../xffm/find/dialog.hh:780
-#, fuzzy
-msgid "Accessed"
-msgstr "زىيارەت:"
-
-#: ../../xffm/find/dialog.hh:1098
-msgid ""
-"Basic rules:\n"
-"\n"
-"*  Will match any character zero or more times.\n"
-"?  Will match any character exactly one time\n"
-"[] Match any character within the [] \n"
-"^  Match at beginning of string\n"
-"$  Match at end of string \n"
-msgstr ""
-
-#: ../../xffm/find/dialog.hh:1107
-msgid ""
-"Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ ( ) : \n"
-"In  basic regular expressions the metacharacters ?, +, {, |, (, and ) \n"
-"  lose their special meaning.\n"
-"\n"
-"The  period . matches  any  single  character.\n"
-"The caret ^ matches at the start of line.\n"
-"The dollar $ matches at the end of line.\n"
-"\n"
-"Characters within [ ] matches any single character in the list.\n"
-"Characters within [^ ] matches any single character *not* in the list.\n"
-"Characters inside [ - ] matches a range of characters (ie [0-9] or [a-z]).\n"
-"\n"
-"A regular expression may be followed by one of several repetition "
-"operators:\n"
-"?      The preceding item is optional and matched\n"
-"       at most once.\n"
-"*      The preceding item will be matched zero\n"
-"       or more times.\n"
-"+      The preceding item will be matched one or\n"
-"       more times.\n"
-"{n}    The preceding item is matched exactly n times.\n"
-"{n,}   The preceding item is matched n or more times.\n"
-"{n,m}  The preceding item is matched at least n times,\n"
-"       but not more than m times.\n"
-"\n"
-"To match any reserved character, precede it with \\. \n"
-"\n"
-"Two regular expressions may be joined by the logical or operator |.\n"
-"Two regular expressions may be concatenated.\n"
-"\n"
-"More information is available by typing \"man grep\"\n"
-msgstr ""
-
-#: ../../xffm/response/chooserresponse.hh:23
-msgid "Open"
-msgstr "ئاچ(O)"
-
-#: ../../xffm/response/chooserresponse.hh:56
-msgid "Choose directory"
-msgstr "مۇندەرىجە تاللا"
-
-#: ../../xffm/response/chooserresponse.hh:60
-msgid "Choose file"
-msgstr "ھۆججەت تاللا"
-
-#: ../../xffm/response/customresponse.hh:55
-msgid "Execute command"
-msgstr "بۇيرۇقنى ئىجرا قىل"
-
-#. XXX folder or file entry should be determined on .ini file (probably just inherit from comboresponse for multiple files options (selected files)...
-#: ../../xffm/response/customresponse.hh:103
-msgid "Source File"
-msgstr "مەنبە ھۆججەت"
-
-#. this button is redundant since hands are on keyboard for password
-#: ../../xffm/response/entryresponse.hh:424
-#: ../../xffm/response/passwdresponse.hh:242
-msgid "Ok"
-msgstr "تامام"
-
-#: ../../xffm/response/commandprogressresponse.hh:31
-msgid "Items:"
-msgstr "تۈرلەر(E):"
-
-#: ../../xffm/response/passwdresponse.hh:19
-#: ../../xffm/response/passwdresponse.hh:25 ../../xffm/common/run.hh:464
-msgid "Enter password"
-msgstr "ئىم كىرگۈزۈڭ"
-
-#. gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
-#: ../../xffm/response/passwdresponse.hh:179
-#, fuzzy
-msgid "User Input"
-msgstr "چاشقىنەكتە كىرگۈز"
-
-#: ../../xffm/response/passwdresponse.hh:195
-#, fuzzy
-msgid "Response Requested"
-msgstr "ئىنكاس چىقىش"
-
-#: ../../xffm/response/timeoutresponse.hh:57
-msgid "Dismiss"
-msgstr "ئۆتكۈزۈۋەت(D)"
-
-#: ../../xffm/response/commandresponse.hh:19
-msgid "Running"
-msgstr "ئىجرادا"
-
-#. auto text = g_strdup_printf("%s (pid: %d)",
-#. _("Waiting for operation to finish..."),
-#. Tubo<Type>::getChild (pid));
-#: ../../xffm/response/commandresponse.hh:24
-#, fuzzy
-msgid "Waiting for operation to finish..."
-msgstr "مۇلازىمەتنىڭ ئىجرا بولۇشىنى كۈتۈۋاتىدۇ"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:11
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:214
-#, fuzzy
-msgid "Remove Button Contents"
-msgstr "بۆلەكنى چىقىرىۋەت(R)"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:67
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:209
-#, fuzzy
-msgid "Add custom content"
-msgstr "مەزمۇنغا ئىختىيارىي توپچا قوش"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:68
-#, fuzzy
-msgid "Select file to load"
-msgstr "قوشىدىغان ھۆججەتنى تاللاڭ(S)…"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:125
+#: ../xffm/common/preview.hh:636
 #, fuzzy, c-format
-msgid "Cannot load file %s. Reason: %s"
-msgstr "ھۆججەت %s نى ئاچقىلى بولمىدى: %s"
+msgid   "Cannot read from %s"
+msgstr  "\"%s\" دىن ئوقۇيالمىدى"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:154
+#: ../xffm/common/gtk.hh:67 ../xffm/fm/dialog/notebook/vbuttonbox.hh:240
 #, fuzzy
-msgid "You need to restart the application"
-msgstr "بۇ پروگراممىنى قايتا قوزغىتىشىڭىز كېرەك."
+msgid   "Open terminal"
+msgstr  "تېرمىنالنى ئاچىدۇ"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:187
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:191
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:195
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:198
-#: ../../xffm/fm/view/pkg/model.hh:29 ../../xffm/fm/view/pkg/popup.hh:35
+#: ../xffm/common/gtk.hh:69 ../xffm/common/util.hh:1443
 #, fuzzy
-msgid "Software Updater"
-msgstr "يۇمشاق دېتال يېڭىلاش"
+msgid   "Execute Shell Command"
+msgstr  "shell بۇيرۇقنى ئىجرا قىلىدۇ"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:236
-#: ../../xffm/fm/view/pkg/model.hh:108 ../../xffm/fm/view/pkg/model.hh:299
-#: ../../xffm/fm/view/pkg/model.hh:306 ../../xffm/fm/view/pkg/popup.hh:151
-#: ../../xffm/common/gtk.hh:77
-msgid "Search"
-msgstr "ئىزدە(S)"
+#: ../xffm/common/gtk.hh:71 ../xffm/fm/view/local/popup.hh:157
+msgid   "Paste"
+msgstr  "چاپلا(P)"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:240 ../../xffm/common/gtk.hh:67
+#: ../xffm/common/gtk.hh:73 ../xffm/fm/view/local/popup.hh:151
+msgid   "Add bookmark"
+msgstr  "خەتكۈش قوش"
+
+#: ../xffm/common/gtk.hh:75 ../xffm/fm/view/local/popup.hh:152
+#: ../xffm/fm/view/root/popup.hh:137
+msgid   "Remove bookmark"
+msgstr  "خەتكۈشنى چىقىۋەت"
+
+#: ../xffm/common/gtk.hh:77 ../xffm/fm/view/pkg/model.hh:108
+#: ../xffm/fm/view/pkg/model.hh:299 ../xffm/fm/view/pkg/model.hh:306
+#: ../xffm/fm/view/pkg/popup.hh:151
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:236
+msgid   "Search"
+msgstr  "ئىزدە(S)"
+
+#: ../xffm/common/gtk.hh:81 ../xffm/fm/dialog/notebook/menupopover.hh:237
+msgid   "Exit"
+msgstr  "چېكىن"
+
+#: ../xffm/common/gtk.hh:83 ../xffm/fm/view/local/popup.hh:85
+#: ../xffm/fm/view/local/popup.hh:142 ../xffm/fm/view/local/popup.hh:1287
+#: ../xffm/fm/view/local/popup.hh:1294 ../xffm/fm/view/local/popup.hh:1305
+#: ../xffm/fm/view/local/popup.hh:1312
+msgid   "Open with"
+msgstr  "ئاچىدىغان پروگرامما"
+
+#: ../xffm/common/gtk.hh:85 ../xffm/fm/view/local/popup.hh:100
+#: ../xffm/fm/view/local/popup.hh:156
+msgid   "Cut"
+msgstr  "كەس(U)"
+
+#: ../xffm/common/gtk.hh:87 ../xffm/fm/view/local/popup.hh:99
+#: ../xffm/fm/view/local/popup.hh:155
+msgid   "Copy"
+msgstr  "كۆچۈر(C)"
+
+#: ../xffm/common/gtk.hh:89 ../xffm/fm/view/local/rm.hh:176
+#: ../xffm/fm/view/local/popup.hh:103 ../xffm/fm/view/local/popup.hh:160
+msgid   "Delete"
+msgstr  "ئۆچۈر"
+
+#: ../xffm/common/gtk.hh:91 ../xffm/fm/view/local/rm.hh:165
+msgid   "Shred"
+msgstr  ""
+
+#: ../xffm/common/gtk.hh:94 ../xffm/fm/view/local/popup.hh:95
+#: ../xffm/fm/view/local/popup.hh:145 ../xffm/fm/view/root/popup.hh:136
+#: ../xffm/fm/view/fstab/popup.hh:20
+msgid   "Open in New Tab"
+msgstr  "يېڭى بەتكۈچتە ئاچ(T)"
+
+#: ../xffm/common/gtk.hh:139 ../xffm/fm/dialog/notebook/notebook.hh:75
+msgid   "New Tab"
+msgstr  "يېڭى بەتكۈچ(T)"
+
+#: ../xffm/common/gtk.hh:352 ../xffm/common/gtk.hh:360
+msgid   "Help"
+msgstr  "ياردەم(H)"
+
+#: ../xffm/common/settings.hh:30
 #, fuzzy
-msgid "Open terminal"
-msgstr "تېرمىنالنى ئاچىدۇ"
+msgid   "New File:"
+msgstr  "يېڭى ھۆججەت"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:244
-msgid "Open a New Window"
-msgstr "يېڭى كۆزنەك ئېچىش"
+#: ../xffm/common/gio.hh:81
+msgid   "Copying files"
+msgstr  "ھۆججەتلەرنى كۆچۈرۈۋاتىدۇ"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:250
+#: ../xffm/common/gio.hh:83 ../xffm/common/dnd.hh:35
+#: ../xffm/fm/dialog/clipboard.hh:30
+msgid   "Moving files"
+msgstr  "ھۆججەت يۆتكەۋاتىدۇ"
+
+#: ../xffm/common/gio.hh:85
 #, fuzzy
-msgid "Differences"
-msgstr "پەرق"
+msgid   "linking"
+msgstr  "ئۆچۈرۈۋاتىدۇ"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:256
-#: ../../xffm/fm/view/root/model.hh:110
-msgid "Home Directory"
-msgstr "ماكان مۇندەرىجە"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:261
-#: ../../xffm/fm/view/root/model.hh:168 ../../xffm/fm/view/fstab/popup.hh:29
-msgid "Disk Image Mounter"
-msgstr "دىسكا تەسۋىرىنى ئېگەرلىگۈچ"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:266
-#: ../../xffm/fm/view/root/model.hh:137
+#: ../xffm/common/gio.hh:87
 #, fuzzy
-msgid "Trash bin"
-msgstr "ھۆججەتنى ئەخلەتخانىغا يۆتكە"
+msgid   "rename"
+msgstr  "ئات ئۆزگەرت"
 
-#: ../../xffm/fm/dialog/notebook/notebook.hh:56
-msgid "Long press time"
-msgstr "ئۇزۇن بېسىش ۋاقتى:"
-
-#: ../../xffm/fm/dialog/notebook/notebook.hh:75 ../../xffm/common/gtk.hh:139
-msgid "New Tab"
-msgstr "يېڭى بەتكۈچ(T)"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:178
-#, fuzzy
-msgid "Open menu"
-msgstr "سۈرەت ئاچ"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:230
-#, fuzzy
-msgid "View as list"
-msgstr "تىزىمدەك كۆرسەت"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:231
-msgid "Show hidden files"
-msgstr "يوشۇرۇن ھۆججەتلەرنى كۆرسەت"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:232
-#, fuzzy
-msgid "Show Backup Files"
-msgstr "زاپاسلاش مەغلۇپ بولدى"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:233
-#, fuzzy
-msgid "Sort data in descending order"
-msgstr "ئېچىلىش تەرتىپى بويىچە تەرتىپلە"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:235
-#, fuzzy
-msgid "Sort by date"
-msgstr "ئاتى بويىچە تەرتىپلە(N)"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:236
-msgid "Sort by size"
-msgstr "ئۇزۇنلۇقىنى تەرتىپلەش"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:237 ../../xffm/common/gtk.hh:81
-msgid "Exit"
-msgstr "چېكىن"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:270
-msgid "Main menu"
-msgstr "ئاساسىي تىزىملىك"
-
-#. File chooser
-#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:375
-#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:377
-msgid "Go to"
-msgstr "يۆتكەل(G)"
-
-#. entryResponse->setCheckButton(_("Run in Terminal"));
-#. entryResponse->setCheckButton(Run<Type>::runInTerminal(path));
-#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:382
-#: ../../xffm/fm/view/local/popup.hh:887 ../../xffm/fm/view/local/popup.hh:981
-msgid "Specify Output Directory..."
-msgstr "چىقىرىش مۇندەرىجىسى بەلگىلە…"
-
-#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:409
-msgid "Not a directory"
-msgstr "مۇندەرىجە ئەمەس"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:135
-#, fuzzy
-msgid "Renice Process"
-msgstr "ئىجرانىڭ مەرتىۋىسىنى ئۆزگەرت"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:135
-msgid "Suspend"
-msgstr "ئېسىپ قويۇلدى"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:135
-msgid "Continue"
-msgstr "داۋاملاشتۇر"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid "Interrupt"
-msgstr "ئۈزۈلۈش"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid "Hangup"
-msgstr "ئېسىپ قوي"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid "User 1 (USR1)"
-msgstr "ئىشلەتكۈچى1 (USR1)"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:137
-msgid "User 2 (USR2)"
-msgstr "ئىشلەتكۈچى 2 (USR2)"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:137
-#, fuzzy
-msgid "Terminate Task"
-msgstr "توختات %s"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:137
-msgid "Abort"
-msgstr "توختات"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:138
-msgid "Kill"
-msgstr "ئاخىرلاشتۇر"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:139
-#, fuzzy
-msgid "Segmentation fault"
-msgstr "جەريان بۆلىكى توقۇنۇشى"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:216
-msgid "PID"
-msgstr "PID"
-
-#: ../../xffm/fm/dialog/notebook/page/page.hh:58
-msgid "loading..."
-msgstr "يۈكلەۋاتىدۇ…"
-
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
-#, fuzzy
-msgid "Embedded Terminal"
-msgstr "تېرمىنالنى ئاچ(E)"
-
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
-#, fuzzy
-msgid "All items in the iconview."
-msgstr "بۇ كۆزنەكتىكى ھەممە تۈرنى تاللايدۇ"
-
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
-msgid "Scripting"
-msgstr "قوليازما"
-
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
-#, fuzzy
-msgid "Clear Log"
-msgstr "خاتالىق خاتىرىسىنى تازىلا"
-
-#. Status textview
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
-msgid "Terminal font"
-msgstr "تېرمىنال خەت نۇسخىسى"
-
-#: ../../xffm/fm/dialog/clipboard.hh:23 ../../xffm/common/dnd.hh:41
-msgid "Copying files locally"
-msgstr "ھۆججەتنى يەرلىكتە كۆچۈرۈۋاتىدۇ"
-
-#: ../../xffm/fm/dialog/clipboard.hh:30 ../../xffm/common/gio.hh:83
-#: ../../xffm/common/dnd.hh:35
-msgid "Moving files"
-msgstr "ھۆججەت يۆتكەۋاتىدۇ"
-
-#: ../../xffm/fm/dialog/dialog.hh:122
-msgid "Removed"
-msgstr "چىقىرىۋېتىلدى"
-
-#: ../../xffm/fm/dialog/dialog.hh:143
-#, fuzzy
-msgid "Detected device(s):"
-msgstr "ئۈسكۈنىلەرنى تاپ(D)"
-
-#: ../../xffm/fm/view/local/model.hh:122
+#: ../xffm/common/gio.hh:426
 #, c-format
-msgid "Reading \"%s\""
-msgstr "ئوقۇۋاتقىنى «%s»"
+msgid   "(%d of %d)"
+msgstr  "(%d / %d)"
 
-#: ../../xffm/fm/view/local/model.hh:575 ../../xffm/fm/view/base/monitor.hh:33
-#, fuzzy, c-format
-msgid "Files: %s"
-msgstr "ھۆججەت:%s"
-
-#: ../../xffm/fm/view/local/model.hh:578
-#, fuzzy, c-format
-msgid "Loaded %d of %d articles"
-msgstr "%s يۈكلىنىۋاتىدۇ: %d / %d يۈكلەندى"
-
-#: ../../xffm/fm/view/local/popup.hh:85 ../../xffm/fm/view/local/popup.hh:142
-#: ../../xffm/fm/view/local/popup.hh:1287
-#: ../../xffm/fm/view/local/popup.hh:1294
-#: ../../xffm/fm/view/local/popup.hh:1305
-#: ../../xffm/fm/view/local/popup.hh:1312 ../../xffm/common/gtk.hh:83
-msgid "Open with"
-msgstr "ئاچىدىغان پروگرامما"
-
-#: ../../xffm/fm/view/local/popup.hh:94
-msgid "New"
-msgstr "يېڭىدىن قۇر(N)"
-
-#: ../../xffm/fm/view/local/popup.hh:95 ../../xffm/fm/view/local/popup.hh:145
-#: ../../xffm/fm/view/root/popup.hh:136 ../../xffm/fm/view/fstab/popup.hh:20
-#: ../../xffm/common/gtk.hh:94
-msgid "Open in New Tab"
-msgstr "يېڭى بەتكۈچتە ئاچ(T)"
-
-#. deprecated {N_("Open in New Tab"), NULL, NULL, NULL},
-#. deprecated {N_("Open in New Window"), NULL, NULL, NULL},
-#. common buttons /(also an iconsize +/- button)
-#: ../../xffm/fm/view/local/popup.hh:99 ../../xffm/fm/view/local/popup.hh:155
-#: ../../xffm/common/gtk.hh:87
-msgid "Copy"
-msgstr "كۆچۈر(C)"
-
-#: ../../xffm/fm/view/local/popup.hh:100 ../../xffm/fm/view/local/popup.hh:156
-#: ../../xffm/common/gtk.hh:85
-msgid "Cut"
-msgstr "كەس(U)"
-
-#: ../../xffm/fm/view/local/popup.hh:101 ../../xffm/fm/view/local/popup.hh:159
-#: ../../xffm/fm/view/local/popup.hh:232 ../../xffm/fm/view/local/popup.hh:234
-#, fuzzy
-msgid "Paste into"
-msgstr "Pastebin"
-
-#: ../../xffm/fm/view/local/popup.hh:102 ../../xffm/fm/view/local/popup.hh:158
-msgid "There is nothing on the clipboard to paste."
-msgstr "چاپلاش تاختىسىدا چاپلىغۇدەك ھېچنېمە يوق."
-
-#. **************
-#: ../../xffm/fm/view/local/popup.hh:103 ../../xffm/fm/view/local/popup.hh:160
-#: ../../xffm/fm/view/local/rm.hh:176 ../../xffm/common/gtk.hh:89
-msgid "Delete"
-msgstr "ئۆچۈر"
-
-#. {N_("About"), NULL, (void *) menu},
-#.
-#: ../../xffm/fm/view/local/popup.hh:106
-msgid "Select All"
-msgstr "ھەممىنى تاللا"
-
-#: ../../xffm/fm/view/local/popup.hh:107 ../../xffm/fm/view/local/popup.hh:755
-msgid "Match regular expression"
-msgstr "مۇنتىزىم ئىپادە بويىچە ماسلاشتۇر"
-
-#: ../../xffm/fm/view/local/popup.hh:143 ../../xffm/fm/view/local/popup.hh:1105
-#, fuzzy
-msgid "Run Executable..."
-msgstr "ئىجرا بولىدىغان پروگراممىنى ئوقۇ(E)…"
-
-#. File chooser
-#: ../../xffm/fm/view/local/popup.hh:144 ../../xffm/fm/view/local/popup.hh:875
-msgid "Extract files from the archive"
-msgstr "ئارخىپتىن ھۆججەت يەش"
-
-#. File chooser
-#: ../../xffm/fm/view/local/popup.hh:146 ../../xffm/fm/view/local/popup.hh:966
-msgid "Create a compressed archive with the selected objects"
-msgstr "تاللانغان جىسىملاردىن پرېسلانغان ئارخىپ قۇر"
-
-#: ../../xffm/fm/view/local/popup.hh:148 ../../xffm/fm/view/fstab/popup.hh:37
-msgid "Mount the volume associated with this folder"
-msgstr "بۇ قىسقۇچ بىلەن باغلانغان دىسكىنى ئېگەرلەيدۇ"
-
-#: ../../xffm/fm/view/local/popup.hh:149 ../../xffm/fm/view/fstab/popup.hh:38
-msgid "Unmount the volume associated with this folder"
-msgstr "بۇ قىسقۇچ بىلەن باغلانغان دىسكىنى ئېگەرسىزلەيدۇ"
-
-#: ../../xffm/fm/view/local/popup.hh:151 ../../xffm/common/gtk.hh:73
-msgid "Add bookmark"
-msgstr "خەتكۈش قوش"
-
-#: ../../xffm/fm/view/local/popup.hh:152 ../../xffm/fm/view/root/popup.hh:137
-#: ../../xffm/common/gtk.hh:75
-msgid "Remove bookmark"
-msgstr "خەتكۈشنى چىقىۋەت"
-
-#: ../../xffm/fm/view/local/popup.hh:157 ../../xffm/common/gtk.hh:71
-msgid "Paste"
-msgstr "چاپلا(P)"
-
-#: ../../xffm/fm/view/local/popup.hh:161 ../../xffm/fm/view/local/popup.hh:1231
-msgid "Rename"
-msgstr "ئات ئۆزگەرت"
-
-#: ../../xffm/fm/view/local/popup.hh:162 ../../xffm/fm/view/local/popup.hh:1217
-msgid "Duplicate"
-msgstr "كۆچۈر(D)"
-
-#: ../../xffm/fm/view/local/popup.hh:163 ../../xffm/fm/view/local/popup.hh:1203
-msgid "Link"
-msgstr "ئۇلانما(L)"
-
-#: ../../xffm/fm/view/local/popup.hh:164
-msgid "Properties"
-msgstr "خاسلىق"
-
-#: ../../xffm/fm/view/local/popup.hh:562
-msgid "Files:"
-msgstr "ھۆججەتلەر(F):"
-
-#: ../../xffm/fm/view/local/popup.hh:565 ../../xffm/fm/view/local/rm.hh:61
-#, fuzzy
-msgid "Multiple selections"
-msgstr "كۆپەيتىش"
-
-#: ../../xffm/fm/view/local/popup.hh:753
-#, fuzzy
-msgid "Select items"
-msgstr "تاللانغان تۈرلەر(S)"
-
-#: ../../xffm/fm/view/local/popup.hh:771
-msgid "Regular Expression syntax is incorrect"
-msgstr "مۇنتىزىم ئىپادە گرامماتىكىسى توغرا ئەمەس"
-
-#: ../../xffm/fm/view/local/popup.hh:801
-msgid "No selection"
-msgstr "تاللانمىدى"
-
-#: ../../xffm/fm/view/local/popup.hh:801
-#, fuzzy
-msgid "No matches."
-msgstr "ماس كەلگىنى يوق"
-
-#: ../../xffm/fm/view/local/popup.hh:1058
-#, fuzzy
-msgid "Create new..."
-msgstr "يېڭىدىن قۇرۇش..."
-
-#: ../../xffm/fm/view/local/popup.hh:1065
-#: ../../xffm/fm/view/local/popup.hh:1146
-msgid "New Name:"
-msgstr "يېڭى ئات:"
-
-#: ../../xffm/fm/view/local/popup.hh:1074
-msgid "No name"
-msgstr "ئاتسىز"
-
-#: ../../xffm/fm/view/local/popup.hh:1087
+#: ../xffm/common/util.hh:1404
 #, c-format
-msgid "Another file with the same name already exists in “%s”."
-msgstr "ئاتى ئوخشاش بولغان باشقا ھۆججەت «%s» دا بار."
+msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
+        "attribute on that file."
+msgstr  ""
 
-#: ../../xffm/fm/view/local/popup.hh:1109
-#: ../../xffm/fm/view/local/popup.hh:1291
-#: ../../xffm/fm/view/local/popup.hh:1309 ../../xffm/common/util.hh:1452
-msgid "Run in Terminal"
-msgstr "تېرمىنالدا ئىجرا قىل"
-
-#: ../../xffm/fm/view/local/popup.hh:1112
-#, fuzzy
-msgid "Arguments for the Command"
-msgstr "بۇيرۇقنىڭ پارامېتىرلىرى"
-
-#: ../../xffm/fm/view/local/popup.hh:1258
-msgid "You have selected multiple files or folders"
-msgstr "سىز بىرقانچە ھۆججەت ۋە قىسقۇچ تاللىدىڭىز"
-
-#: ../../xffm/fm/view/local/popup.hh:1332 ../../xffm/fm/view/local/view.hh:156
-msgid "Invalid entry"
-msgstr "ئىناۋەتسىز كىرگۈ"
-
-#: ../../xffm/fm/view/local/properties.hh:245
-msgid "Properties and Attributes"
-msgstr "خاسلىقلار ۋە مايىللىقلار"
-
-#: ../../xffm/fm/view/local/properties.hh:274
-#, fuzzy
-msgid "File Mode:"
-msgstr "كۆرۈش ھالىتى(V):"
-
-#: ../../xffm/fm/view/local/properties.hh:300
-msgid "File:"
-msgstr "ھۆججەت:"
-
-#. Add file info stuff
-#. set info stuff data according to combo box
-#. add signal handler to changed signal for combo box
-#. Add process buttons
-#.
-#: ../../xffm/fm/view/local/properties.hh:312
-msgid "Apply changes"
-msgstr "ئۆزگەرتىش قوللان"
-
-#: ../../xffm/fm/view/local/properties.hh:477
-msgid "Successfully moved to trash."
-msgstr "ئەخلەتخانىغا مۇۋەپپەقىيەتلىك يۆتكەلدى."
-
-#: ../../xffm/fm/view/local/properties.hh:478
-msgid "Source:"
-msgstr "مەنبە:"
-
-#: ../../xffm/fm/view/local/rm.hh:59
+#: ../xffm/common/util.hh:1406 ../xffm/common/util.hh:1441
 #, c-format
-msgid "Delete %s"
-msgstr "%s نى ئۆچۈر(D)"
+msgid   "Open with %s"
+msgstr  "%s دا ئاچ"
 
-#: ../../xffm/fm/view/local/rm.hh:61
-msgid "Warning: "
-msgstr "ئاگاھلاندۇرۇش: "
+#: ../xffm/common/util.hh:1406
+msgid   "Text Editor"
+msgstr  "تېكىست تەھرىرلىگۈچ"
 
-#. gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
-#. title
-#: ../../xffm/fm/view/local/rm.hh:92
-msgid "Remove"
-msgstr "چىقىرىۋەت(R)"
+#: ../xffm/common/util.hh:1447
+msgid   "Console: quickly run single commands -- write a command here and "
+        "press enter."
+msgstr  ""
 
-#: ../../xffm/fm/view/local/rm.hh:142
+#: ../xffm/common/util.hh:1452 ../xffm/fm/view/local/popup.hh:1109
+#: ../xffm/fm/view/local/popup.hh:1291 ../xffm/fm/view/local/popup.hh:1309
+msgid   "Run in Terminal"
+msgstr  "تېرمىنالدا ئىجرا قىل"
+
+#: ../xffm/common/dnd.hh:41 ../xffm/fm/dialog/clipboard.hh:23
+msgid   "Copying files locally"
+msgstr  "ھۆججەتنى يەرلىكتە كۆچۈرۈۋاتىدۇ"
+
+#: ../xffm/common/dnd.hh:47
 #, fuzzy
-msgid "Apply to all"
-msgstr "ھەممىگە قوللان(Y)"
+msgid   "Create Link"
+msgstr  "ئۇلانما قۇرۇشتىن يېنىۋال(U)"
 
-#. **************
-#. This is now available to BSD with rm -P option
-#: ../../xffm/fm/view/local/rm.hh:165 ../../xffm/common/gtk.hh:91
-msgid "Shred"
-msgstr ""
+#: ../xffm/common/run.hh:338
+msgid   "error"
+msgstr  "خاتالىق"
 
-#: ../../xffm/fm/view/local/rm.hh:183
-msgid "Trash"
-msgstr "ئەخلەتخانا"
+#: ../xffm/common/run.hh:342
+msgid   "warning"
+msgstr  "ئاگاھلاندۇرۇش"
 
-#: ../../xffm/fm/view/local/view.hh:177
+#: ../xffm/common/run.hh:464 ../xffm/response/passwdresponse.hh:19
+#: ../xffm/response/passwdresponse.hh:25
+msgid   "Enter password"
+msgstr  "ئىم كىرگۈزۈڭ"
+
+#: ../xffm/fm/view/pkg/model.hh:29 ../xffm/fm/view/pkg/popup.hh:35
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:187
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:191
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:195
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:198
+#, fuzzy
+msgid   "Software Updater"
+msgstr  "يۇمشاق دېتال يېڭىلاش"
+
+#: ../xffm/fm/view/pkg/model.hh:41 ../xffm/fm/view/pkg/model.hh:52
+msgid   "Add or remove software installed on the system"
+msgstr  "سىستېمىڭىزغا ئورنىتىلغان يۇمشاق دېتاللارنى قوشىدۇ ياكى ئۆچۈرىدۇ"
+
+#: ../xffm/fm/view/pkg/model.hh:111
+msgid   "String"
+msgstr  "تېكىست"
+
+#: ../xffm/fm/view/pkg/model.hh:116
+msgid   "Waiting for search results"
+msgstr  "ئىزدەش نەتىجىسىنى ساقلاۋاتىدۇ"
+
+#: ../xffm/fm/view/pkg/model.hh:174
+msgid   "No results"
+msgstr  "نەتىجە يوق"
+
+#: ../xffm/fm/view/pkg/model.hh:373
+#, fuzzy
+msgid   "Currently busy\n"
+msgstr  "نۆۋەتتىكى: %s"
+
+#: ../xffm/fm/view/pkg/popup.hh:44
+#, fuzzy
+msgid   "Update Database"
+msgstr  "ساندان قۇر"
+
+#: ../xffm/fm/view/pkg/popup.hh:45
+msgid   "Fetch"
+msgstr  "تۇت"
+
+#: ../xffm/fm/view/pkg/popup.hh:46
+#, fuzzy
+msgid   "Install --dry-run"
+msgstr  "بۆلەك ئورنات(I)"
+
+#: ../xffm/fm/view/pkg/popup.hh:47
+msgid   "Install"
+msgstr  "ئورنات"
+
+#: ../xffm/fm/view/pkg/popup.hh:48
+#, fuzzy
+msgid   "Uninstall --dry-run"
+msgstr  "ئۆچۈرۈۋاتىدۇ"
+
+#: ../xffm/fm/view/pkg/popup.hh:49
+msgid   "Uninstall"
+msgstr  "چىقىرىۋەت"
+
+#: ../xffm/fm/view/pkg/popup.hh:50
+msgid   "Information"
+msgstr  "ئۇچۇر"
+
+#: ../xffm/fm/view/pkg/popup.hh:140
+msgid   "Version"
+msgstr  "نەشرى"
+
+#: ../xffm/fm/view/pkg/popup.hh:149
+msgid   "Go up"
+msgstr  ""
+
+#: ../xffm/fm/view/pkg/popup.hh:152
+#, fuzzy
+msgid   "Search packages"
+msgstr  "بوغچىلارنى  ئىزدەۋاتىدۇ"
+
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
+#, c-format
+msgid   "Loading %s...%s"
+msgstr  "يۈكلەۋاتىدۇ%s...%s"
+
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
+#, fuzzy
+msgid   "Please Wait..."
+msgstr  "ساقلاپ تۇرۇڭ…"
+
+#: ../xffm/fm/view/local/model.hh:124
+#, c-format
+msgid   "Reading \"%s\""
+msgstr  "ئوقۇۋاتقىنى «%s»"
+
+#: ../xffm/fm/view/local/model.hh:577 ../xffm/fm/view/base/monitor.hh:34
 #, fuzzy, c-format
-msgid "The volume '%s' is not mounted."
-msgstr "كىملىك قىممىتى '%s' بىردىنبىر ئەمەس."
+msgid   "Files: %s"
+msgstr  "ھۆججەت:%s"
 
-#: ../../xffm/fm/view/root/model.hh:82
-#, fuzzy
-msgid "Root Directory"
-msgstr "ئورام(Spool) مۇندەرىجىسى(D):"
-
-#: ../../xffm/fm/view/root/model.hh:98
-msgid "This is the root of the filesystem"
-msgstr "بۇ ھۆججەت سىستېمىسىنىڭ غولى"
-
-#: ../../xffm/fm/view/root/model.hh:176 ../../xffm/fm/view/root/model.hh:191
-msgid "Mount local disks and devices"
-msgstr "يەرلىك دىسكا ۋە ئۈسكۈنىلەرنى ئېگەرلەيدۇ"
-
-#: ../../xffm/fm/view/root/model.hh:177 ../../xffm/fm/view/fstab/popup.hh:23
-#: ../../xffm/fm/view/fstab/view.hh:1084
-msgid "eCryptfs Volume"
-msgstr "eCryptfs دىسكىسى"
-
-#: ../../xffm/fm/view/root/model.hh:178 ../../xffm/fm/view/fstab/popup.hh:22
-msgid "SSHFS Remote Synchronization Folder"
-msgstr "SSHFS دە ئىشلىتىلىدىغان يىراقتىكى قەدەمداشلاش قىسقۇچى"
-
-#: ../../xffm/fm/view/root/model.hh:179 ../../xffm/fm/view/fstab/popup.hh:21
-#: ../../xffm/fm/view/fstab/view.hh:1032
-msgid "NFS Network Volume"
-msgstr "NFS تور دىسكىسى"
-
-#: ../../xffm/fm/view/root/model.hh:180 ../../xffm/fm/view/fstab/popup.hh:24
-#: ../../xffm/fm/view/fstab/view.hh:1110
-msgid "CIFS Volume"
-msgstr "CIFS دىسكىسى"
-
-#: ../../xffm/fm/view/root/model.hh:229
-#, fuzzy
-msgid "Go to bookmarked location"
-msgstr "كېيىنكى خەتكۈش ئورنىغا يۆتكەل."
-
-#: ../../xffm/fm/view/root/popup.hh:138
-msgid "Empty trash"
-msgstr "ئەخلەتخانا بوشات"
-
-#. File chooser
-#: ../../xffm/fm/view/fstab/popup.hh:129
-#, fuzzy
-msgid "Mount Device"
-msgstr "ئۈن ئۈسكۈنىسى"
-
-#: ../../xffm/fm/view/fstab/popup.hh:141 ../../xffm/fm/view/fstab/view.hh:923
-msgid "Mount point:"
-msgstr "ئېگەرلەش نۇقتىسى:"
-
-#: ../../xffm/fm/view/fstab/view.hh:590
-#, fuzzy
-msgid "Mount point: "
-msgstr "ئېگەرلەش نۇقتىسى:"
-
-#: ../../xffm/fm/view/fstab/view.hh:591
-#, fuzzy
-msgid "Mount device: "
-msgstr "ئۈسكۈنىنى ئېگەرلەيدۇ"
-
-#. Since /dev is not concrete, the following test returns false...
-#.
-#. if (!g_file_test(name, G_FILE_TEST_IS_DIR)) return;
-#: ../../xffm/fm/view/fstab/view.hh:659 ../../xffm/fm/view/fstab/view.hh:675
-msgid "Disks"
-msgstr "دىسكىلار"
-
-#: ../../xffm/fm/view/fstab/view.hh:921
-msgid "No Label"
-msgstr "بەلگە يوق"
-
-#: ../../xffm/fm/view/fstab/view.hh:922
-#, fuzzy
-msgid "There is no file system available (unformatted)"
-msgstr "ماس كېلىدىغان تۈر يوق.\n"
-
-#: ../../xffm/fm/view/fstab/view.hh:923
-#, fuzzy
-msgid "Not mounted"
-msgstr "ئېگەرلەنمىگەن"
-
-#: ../../xffm/fm/view/fstab/view.hh:1058
-#, fuzzy
-msgid "SFTP (via SSH)"
-msgstr "بىخەتەر FTP (SSH)"
-
-#: ../../xffm/fm/view/fstab/view.hh:1413
+#: ../xffm/fm/view/local/model.hh:580
 #, fuzzy, c-format
-msgid "Unmounting %s"
-msgstr "ئېگەرسىزلەۋاتىدۇ"
+msgid   "Loaded %d of %d articles"
+msgstr  "%s يۈكلىنىۋاتىدۇ: %d / %d يۈكلەندى"
 
-#: ../../xffm/fm/view/fstab/view.hh:1413
+#: ../xffm/fm/view/local/rm.hh:59
+#, c-format
+msgid   "Delete %s"
+msgstr  "%s نى ئۆچۈر(D)"
+
+#: ../xffm/fm/view/local/rm.hh:61
+msgid   "Warning: "
+msgstr  "ئاگاھلاندۇرۇش: "
+
+#: ../xffm/fm/view/local/rm.hh:61 ../xffm/fm/view/local/popup.hh:565
+#, fuzzy
+msgid   "Multiple selections"
+msgstr  "كۆپەيتىش"
+
+#: ../xffm/fm/view/local/rm.hh:92
+msgid   "Remove"
+msgstr  "چىقىرىۋەت(R)"
+
+#: ../xffm/fm/view/local/rm.hh:142
+#, fuzzy
+msgid   "Apply to all"
+msgstr  "ھەممىگە قوللان(Y)"
+
+#: ../xffm/fm/view/local/rm.hh:183
+msgid   "Trash"
+msgstr  "ئەخلەتخانا"
+
+#: ../xffm/fm/view/local/popup.hh:94
+msgid   "New"
+msgstr  "يېڭىدىن قۇر(N)"
+
+#: ../xffm/fm/view/local/popup.hh:101 ../xffm/fm/view/local/popup.hh:159
+#: ../xffm/fm/view/local/popup.hh:232 ../xffm/fm/view/local/popup.hh:234
+#, fuzzy
+msgid   "Paste into"
+msgstr  "Pastebin"
+
+#: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:158
+msgid   "There is nothing on the clipboard to paste."
+msgstr  "چاپلاش تاختىسىدا چاپلىغۇدەك ھېچنېمە يوق."
+
+#: ../xffm/fm/view/local/popup.hh:106
+msgid   "Select All"
+msgstr  "ھەممىنى تاللا"
+
+#: ../xffm/fm/view/local/popup.hh:107 ../xffm/fm/view/local/popup.hh:755
+msgid   "Match regular expression"
+msgstr  "مۇنتىزىم ئىپادە بويىچە ماسلاشتۇر"
+
+#: ../xffm/fm/view/local/popup.hh:143 ../xffm/fm/view/local/popup.hh:1105
+#, fuzzy
+msgid   "Run Executable..."
+msgstr  "ئىجرا بولىدىغان پروگراممىنى ئوقۇ(E)…"
+
+#: ../xffm/fm/view/local/popup.hh:144 ../xffm/fm/view/local/popup.hh:875
+msgid   "Extract files from the archive"
+msgstr  "ئارخىپتىن ھۆججەت يەش"
+
+#: ../xffm/fm/view/local/popup.hh:146 ../xffm/fm/view/local/popup.hh:966
+msgid   "Create a compressed archive with the selected objects"
+msgstr  "تاللانغان جىسىملاردىن پرېسلانغان ئارخىپ قۇر"
+
+#: ../xffm/fm/view/local/popup.hh:148 ../xffm/fm/view/fstab/popup.hh:37
+msgid   "Mount the volume associated with this folder"
+msgstr  "بۇ قىسقۇچ بىلەن باغلانغان دىسكىنى ئېگەرلەيدۇ"
+
+#: ../xffm/fm/view/local/popup.hh:149 ../xffm/fm/view/fstab/popup.hh:38
+msgid   "Unmount the volume associated with this folder"
+msgstr  "بۇ قىسقۇچ بىلەن باغلانغان دىسكىنى ئېگەرسىزلەيدۇ"
+
+#: ../xffm/fm/view/local/popup.hh:161 ../xffm/fm/view/local/popup.hh:1231
+msgid   "Rename"
+msgstr  "ئات ئۆزگەرت"
+
+#: ../xffm/fm/view/local/popup.hh:162 ../xffm/fm/view/local/popup.hh:1217
+msgid   "Duplicate"
+msgstr  "كۆچۈر(D)"
+
+#: ../xffm/fm/view/local/popup.hh:163 ../xffm/fm/view/local/popup.hh:1203
+msgid   "Link"
+msgstr  "ئۇلانما(L)"
+
+#: ../xffm/fm/view/local/popup.hh:164
+msgid   "Properties"
+msgstr  "خاسلىق"
+
+#: ../xffm/fm/view/local/popup.hh:562
+msgid   "Files:"
+msgstr  "ھۆججەتلەر(F):"
+
+#: ../xffm/fm/view/local/popup.hh:753
+#, fuzzy
+msgid   "Select items"
+msgstr  "تاللانغان تۈرلەر(S)"
+
+#: ../xffm/fm/view/local/popup.hh:771
+msgid   "Regular Expression syntax is incorrect"
+msgstr  "مۇنتىزىم ئىپادە گرامماتىكىسى توغرا ئەمەس"
+
+#: ../xffm/fm/view/local/popup.hh:801
+msgid   "No selection"
+msgstr  "تاللانمىدى"
+
+#: ../xffm/fm/view/local/popup.hh:801
+#, fuzzy
+msgid   "No matches."
+msgstr  "ماس كەلگىنى يوق"
+
+#: ../xffm/fm/view/local/popup.hh:887 ../xffm/fm/view/local/popup.hh:981
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:382
+msgid   "Specify Output Directory..."
+msgstr  "چىقىرىش مۇندەرىجىسى بەلگىلە…"
+
+#: ../xffm/fm/view/local/popup.hh:1058
+#, fuzzy
+msgid   "Create new..."
+msgstr  "يېڭىدىن قۇرۇش..."
+
+#: ../xffm/fm/view/local/popup.hh:1065 ../xffm/fm/view/local/popup.hh:1146
+msgid   "New Name:"
+msgstr  "يېڭى ئات:"
+
+#: ../xffm/fm/view/local/popup.hh:1074
+msgid   "No name"
+msgstr  "ئاتسىز"
+
+#: ../xffm/fm/view/local/popup.hh:1087
+#, c-format
+msgid   "Another file with the same name already exists in “%s”."
+msgstr  "ئاتى ئوخشاش بولغان باشقا ھۆججەت «%s» دا بار."
+
+#: ../xffm/fm/view/local/popup.hh:1112
+#, fuzzy
+msgid   "Arguments for the Command"
+msgstr  "بۇيرۇقنىڭ پارامېتىرلىرى"
+
+#: ../xffm/fm/view/local/popup.hh:1258
+msgid   "You have selected multiple files or folders"
+msgstr  "سىز بىرقانچە ھۆججەت ۋە قىسقۇچ تاللىدىڭىز"
+
+#: ../xffm/fm/view/local/popup.hh:1332 ../xffm/fm/view/local/view.hh:156
+msgid   "Invalid entry"
+msgstr  "ئىناۋەتسىز كىرگۈ"
+
+#: ../xffm/fm/view/local/view.hh:177
 #, fuzzy, c-format
-msgid "Mounting %s"
-msgstr "ئېگەرلەۋاتىدۇ"
+msgid   "The volume '%s' is not mounted."
+msgstr  "كىملىك قىممىتى '%s' بىردىنبىر ئەمەس."
 
-#: ../../xffm/fm/view/pkg/model.hh:41 ../../xffm/fm/view/pkg/model.hh:52
-msgid "Add or remove software installed on the system"
-msgstr "سىستېمىڭىزغا ئورنىتىلغان يۇمشاق دېتاللارنى قوشىدۇ ياكى ئۆچۈرىدۇ"
+#: ../xffm/fm/view/local/properties.hh:245
+msgid   "Properties and Attributes"
+msgstr  "خاسلىقلار ۋە مايىللىقلار"
 
-#: ../../xffm/fm/view/pkg/model.hh:111
-msgid "String"
-msgstr "تېكىست"
-
-#: ../../xffm/fm/view/pkg/model.hh:116
-msgid "Waiting for search results"
-msgstr "ئىزدەش نەتىجىسىنى ساقلاۋاتىدۇ"
-
-#: ../../xffm/fm/view/pkg/model.hh:174
-msgid "No results"
-msgstr "نەتىجە يوق"
-
-#: ../../xffm/fm/view/pkg/model.hh:373
+#: ../xffm/fm/view/local/properties.hh:274
 #, fuzzy
-msgid "Currently busy\n"
-msgstr "نۆۋەتتىكى: %s"
+msgid   "File Mode:"
+msgstr  "كۆرۈش ھالىتى(V):"
 
-#: ../../xffm/fm/view/pkg/popup.hh:44
+#: ../xffm/fm/view/local/properties.hh:300
+msgid   "File:"
+msgstr  "ھۆججەت:"
+
+#: ../xffm/fm/view/local/properties.hh:312
+msgid   "Apply changes"
+msgstr  "ئۆزگەرتىش قوللان"
+
+#: ../xffm/fm/view/local/properties.hh:477
+msgid   "Successfully moved to trash."
+msgstr  "ئەخلەتخانىغا مۇۋەپپەقىيەتلىك يۆتكەلدى."
+
+#: ../xffm/fm/view/local/properties.hh:478
+msgid   "Source:"
+msgstr  "مەنبە:"
+
+#: ../xffm/fm/view/root/model.hh:82
 #, fuzzy
-msgid "Update Database"
-msgstr "ساندان قۇر"
+msgid   "Root Directory"
+msgstr  "ئورام(Spool) مۇندەرىجىسى(D):"
 
-#: ../../xffm/fm/view/pkg/popup.hh:45
-msgid "Fetch"
-msgstr "تۇت"
+#: ../xffm/fm/view/root/model.hh:98
+msgid   "This is the root of the filesystem"
+msgstr  "بۇ ھۆججەت سىستېمىسىنىڭ غولى"
 
-#: ../../xffm/fm/view/pkg/popup.hh:46
+#: ../xffm/fm/view/root/model.hh:110
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:256
+msgid   "Home Directory"
+msgstr  "ماكان مۇندەرىجە"
+
+#: ../xffm/fm/view/root/model.hh:137
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:266
 #, fuzzy
-msgid "Install --dry-run"
-msgstr "بۆلەك ئورنات(I)"
+msgid   "Trash bin"
+msgstr  "ھۆججەتنى ئەخلەتخانىغا يۆتكە"
 
-#: ../../xffm/fm/view/pkg/popup.hh:47
-msgid "Install"
-msgstr "ئورنات"
+#: ../xffm/fm/view/root/model.hh:168 ../xffm/fm/view/fstab/popup.hh:29
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:261
+msgid   "Disk Image Mounter"
+msgstr  "دىسكا تەسۋىرىنى ئېگەرلىگۈچ"
 
-#: ../../xffm/fm/view/pkg/popup.hh:48
+#: ../xffm/fm/view/root/model.hh:176 ../xffm/fm/view/root/model.hh:191
+msgid   "Mount local disks and devices"
+msgstr  "يەرلىك دىسكا ۋە ئۈسكۈنىلەرنى ئېگەرلەيدۇ"
+
+#: ../xffm/fm/view/root/model.hh:177 ../xffm/fm/view/fstab/popup.hh:23
+#: ../xffm/fm/view/fstab/view.hh:1084
+msgid   "eCryptfs Volume"
+msgstr  "eCryptfs دىسكىسى"
+
+#: ../xffm/fm/view/root/model.hh:178 ../xffm/fm/view/fstab/popup.hh:22
+msgid   "SSHFS Remote Synchronization Folder"
+msgstr  "SSHFS دە ئىشلىتىلىدىغان يىراقتىكى قەدەمداشلاش قىسقۇچى"
+
+#: ../xffm/fm/view/root/model.hh:179 ../xffm/fm/view/fstab/popup.hh:21
+#: ../xffm/fm/view/fstab/view.hh:1032
+msgid   "NFS Network Volume"
+msgstr  "NFS تور دىسكىسى"
+
+#: ../xffm/fm/view/root/model.hh:180 ../xffm/fm/view/fstab/popup.hh:24
+#: ../xffm/fm/view/fstab/view.hh:1110
+msgid   "CIFS Volume"
+msgstr  "CIFS دىسكىسى"
+
+#: ../xffm/fm/view/root/model.hh:229
 #, fuzzy
-msgid "Uninstall --dry-run"
-msgstr "ئۆچۈرۈۋاتىدۇ"
+msgid   "Go to bookmarked location"
+msgstr  "كېيىنكى خەتكۈش ئورنىغا يۆتكەل."
 
-#: ../../xffm/fm/view/pkg/popup.hh:49
-msgid "Uninstall"
-msgstr "چىقىرىۋەت"
+#: ../xffm/fm/view/root/popup.hh:138
+msgid   "Empty trash"
+msgstr  "ئەخلەتخانا بوشات"
 
-#: ../../xffm/fm/view/pkg/popup.hh:50
-msgid "Information"
-msgstr "ئۇچۇر"
-
-#: ../../xffm/fm/view/pkg/popup.hh:140
-msgid "Version"
-msgstr "نەشرى"
-
-#: ../../xffm/fm/view/pkg/popup.hh:149
-msgid "Go up"
-msgstr ""
-
-#: ../../xffm/fm/view/pkg/popup.hh:152
+#: ../xffm/fm/view/fstab/popup.hh:129
 #, fuzzy
-msgid "Search packages"
-msgstr "بوغچىلارنى  ئىزدەۋاتىدۇ"
+msgid   "Mount Device"
+msgstr  "ئۈن ئۈسكۈنىسى"
 
-#: ../../xffm/fm/view/pkg/popup.hh:184 ../../xffm/fm/view/view.hh:93
-#, c-format
-msgid "Loading %s...%s"
-msgstr "يۈكلەۋاتىدۇ%s...%s"
+#: ../xffm/fm/view/fstab/popup.hh:141 ../xffm/fm/view/fstab/view.hh:923
+msgid   "Mount point:"
+msgstr  "ئېگەرلەش نۇقتىسى:"
 
-#: ../../xffm/fm/view/pkg/popup.hh:184 ../../xffm/fm/view/view.hh:93
+#: ../xffm/fm/view/fstab/view.hh:590
 #, fuzzy
-msgid "Please Wait..."
-msgstr "ساقلاپ تۇرۇڭ…"
+msgid   "Mount point: "
+msgstr  "ئېگەرلەش نۇقتىسى:"
 
-#: ../../xffm/fm/view/treeview.hh:17
-msgid "Name"
-msgstr "ئاتى"
-
-#: ../../xffm/fm/view/treeview.hh:19
-msgid "Size"
-msgstr "چوڭلۇقى"
-
-#: ../../xffm/fm/view/treeview.hh:20
-msgid "Date"
-msgstr "چېسلا"
-
-#: ../../xffm/fm/view/treeview.hh:22
-msgid "Mimetype"
-msgstr "Mime تىپى"
-
-#: ../../xffm/fm/view/base/signals.hh:838
+#: ../xffm/fm/view/fstab/view.hh:591
 #, fuzzy
-msgid "Trash is empty"
-msgstr "سەزگۈر تاختا قۇرۇق"
+msgid   "Mount device: "
+msgstr  "ئۈسكۈنىنى ئېگەرلەيدۇ"
 
-#: ../../xffm/fm/view/base/signals.hh:840
+#: ../xffm/fm/view/fstab/view.hh:659 ../xffm/fm/view/fstab/view.hh:675
+msgid   "Disks"
+msgstr  "دىسكىلار"
+
+#: ../xffm/fm/view/fstab/view.hh:921
+msgid   "No Label"
+msgstr  "بەلگە يوق"
+
+#: ../xffm/fm/view/fstab/view.hh:922
 #, fuzzy
-msgid "Directory does not exist."
-msgstr "مۇندەرىجە مەۋجۇت ئەمەس"
+msgid   "There is no file system available (unformatted)"
+msgstr  "ماس كېلىدىغان تۈر يوق.\n"
 
-#: ../../xffm/common/settings.hh:30
+#: ../xffm/fm/view/fstab/view.hh:923
 #, fuzzy
-msgid "New File:"
-msgstr "يېڭى ھۆججەت"
+msgid   "Not mounted"
+msgstr  "ئېگەرلەنمىگەن"
 
-#: ../../xffm/common/gio.hh:81
-msgid "Copying files"
-msgstr "ھۆججەتلەرنى كۆچۈرۈۋاتىدۇ"
-
-#: ../../xffm/common/gio.hh:85
+#: ../xffm/fm/view/fstab/view.hh:1058
 #, fuzzy
-msgid "linking"
-msgstr "ئۆچۈرۈۋاتىدۇ"
+msgid   "SFTP (via SSH)"
+msgstr  "بىخەتەر FTP (SSH)"
 
-#: ../../xffm/common/gio.hh:87
-#, fuzzy
-msgid "rename"
-msgstr "ئات ئۆزگەرت"
-
-#: ../../xffm/common/gio.hh:426
-#, c-format
-msgid "(%d of %d)"
-msgstr "(%d / %d)"
-
-#: ../../xffm/common/dnd.hh:47
-#, fuzzy
-msgid "Create Link"
-msgstr "ئۇلانما قۇرۇشتىن يېنىۋال(U)"
-
-#: ../../xffm/common/util.hh:1404
-#, c-format
-msgid ""
-"Scriptfile \"%s\" is not executable. Please set the executable-attribute on "
-"that file."
-msgstr ""
-
-#: ../../xffm/common/util.hh:1406 ../../xffm/common/util.hh:1441
-#, c-format
-msgid "Open with %s"
-msgstr "%s دا ئاچ"
-
-#: ../../xffm/common/util.hh:1406
-msgid "Text Editor"
-msgstr "تېكىست تەھرىرلىگۈچ"
-
-#: ../../xffm/common/util.hh:1443 ../../xffm/common/gtk.hh:69
-#, fuzzy
-msgid "Execute Shell Command"
-msgstr "shell بۇيرۇقنى ئىجرا قىلىدۇ"
-
-#: ../../xffm/common/util.hh:1447
-msgid ""
-"Console: quickly run single commands -- write a command here and press enter."
-msgstr ""
-
-#: ../../xffm/common/gtk.hh:352 ../../xffm/common/gtk.hh:360
-msgid "Help"
-msgstr "ياردەم(H)"
-
-#: ../../xffm/common/run.hh:338
-msgid "error"
-msgstr "خاتالىق"
-
-#: ../../xffm/common/run.hh:342
-msgid "warning"
-msgstr "ئاگاھلاندۇرۇش"
-
-#: ../../xffm/common/preview.hh:581
-#, fuzzy
-msgid "Empty file"
-msgstr "غەملەك ھۆججىتى قۇرۇق"
-
-#: ../../xffm/common/preview.hh:636
+#: ../xffm/fm/view/fstab/view.hh:1413
 #, fuzzy, c-format
-msgid "Cannot read from %s"
-msgstr "\"%s\" دىن ئوقۇيالمىدى"
+msgid   "Unmounting %s"
+msgstr  "ئېگەرسىزلەۋاتىدۇ"
+
+#: ../xffm/fm/view/fstab/view.hh:1413
+#, fuzzy, c-format
+msgid   "Mounting %s"
+msgstr  "ئېگەرلەۋاتىدۇ"
+
+#: ../xffm/fm/view/base/signals.hh:838
+#, fuzzy
+msgid   "Trash is empty"
+msgstr  "سەزگۈر تاختا قۇرۇق"
+
+#: ../xffm/fm/view/base/signals.hh:840
+#, fuzzy
+msgid   "Directory does not exist."
+msgstr  "مۇندەرىجە مەۋجۇت ئەمەس"
+
+#: ../xffm/fm/view/treeview.hh:17
+msgid   "Name"
+msgstr  "ئاتى"
+
+#: ../xffm/fm/view/treeview.hh:19
+msgid   "Size"
+msgstr  "چوڭلۇقى"
+
+#: ../xffm/fm/view/treeview.hh:20
+msgid   "Date"
+msgstr  "چېسلا"
+
+#: ../xffm/fm/view/treeview.hh:22
+msgid   "Mimetype"
+msgstr  "Mime تىپى"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
+#, fuzzy
+msgid   "Embedded Terminal"
+msgstr  "تېرمىنالنى ئاچ(E)"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
+#, fuzzy
+msgid   "All items in the iconview."
+msgstr  "بۇ كۆزنەكتىكى ھەممە تۈرنى تاللايدۇ"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
+msgid   "Scripting"
+msgstr  "قوليازما"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
+#, fuzzy
+msgid   "Clear Log"
+msgstr  "خاتالىق خاتىرىسىنى تازىلا"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
+msgid   "Terminal font"
+msgstr  "تېرمىنال خەت نۇسخىسى"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+#, fuzzy
+msgid   "Renice Process"
+msgstr  "ئىجرانىڭ مەرتىۋىسىنى ئۆزگەرت"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid   "Suspend"
+msgstr  "ئېسىپ قويۇلدى"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid   "Continue"
+msgstr  "داۋاملاشتۇر"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid   "Interrupt"
+msgstr  "ئۈزۈلۈش"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid   "Hangup"
+msgstr  "ئېسىپ قوي"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid   "User 1 (USR1)"
+msgstr  "ئىشلەتكۈچى1 (USR1)"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+msgid   "User 2 (USR2)"
+msgstr  "ئىشلەتكۈچى 2 (USR2)"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+#, fuzzy
+msgid   "Terminate Task"
+msgstr  "توختات %s"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+msgid   "Abort"
+msgstr  "توختات"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:138
+msgid   "Kill"
+msgstr  "ئاخىرلاشتۇر"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
+#, fuzzy
+msgid   "Segmentation fault"
+msgstr  "جەريان بۆلىكى توقۇنۇشى"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:216
+msgid   "PID"
+msgstr  "PID"
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:375
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:377
+msgid   "Go to"
+msgstr  "يۆتكەل(G)"
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:409
+msgid   "Not a directory"
+msgstr  "مۇندەرىجە ئەمەس"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:59
+msgid   "loading..."
+msgstr  "يۈكلەۋاتىدۇ…"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:151
+#: ../xffm/fm/dialog/notebook/page/page.hh:167
+#, fuzzy
+msgid   "Confirm Replace"
+msgstr  "چىقىرىۋېتىشنى جەزملە"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:153
+msgid   "Destination File"
+msgstr  "نىشان ھۆججەت"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:166
+#, fuzzy, c-format
+msgid   "The output file %s already exists, do you want to overwrite it?"
+msgstr  "ھۆججەت «%s» مەۋجۇت. قاپلامسىز؟"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:11
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:214
+#, fuzzy
+msgid   "Remove Button Contents"
+msgstr  "بۆلەكنى چىقىرىۋەت(R)"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:67
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:209
+#, fuzzy
+msgid   "Add custom content"
+msgstr  "مەزمۇنغا ئىختىيارىي توپچا قوش"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:68
+#, fuzzy
+msgid   "Select file to load"
+msgstr  "قوشىدىغان ھۆججەتنى تاللاڭ(S)…"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:125
+#, fuzzy, c-format
+msgid   "Cannot load file %s. Reason: %s"
+msgstr  "ھۆججەت %s نى ئاچقىلى بولمىدى: %s"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:154
+#, fuzzy
+msgid   "You need to restart the application"
+msgstr  "بۇ پروگراممىنى قايتا قوزغىتىشىڭىز كېرەك."
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:244
+msgid   "Open a New Window"
+msgstr  "يېڭى كۆزنەك ئېچىش"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:250
+#, fuzzy
+msgid   "Differences"
+msgstr  "پەرق"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:178
+#, fuzzy
+msgid   "Open menu"
+msgstr  "سۈرەت ئاچ"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:230
+#, fuzzy
+msgid   "View as list"
+msgstr  "تىزىمدەك كۆرسەت"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:231
+msgid   "Show hidden files"
+msgstr  "يوشۇرۇن ھۆججەتلەرنى كۆرسەت"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:232
+#, fuzzy
+msgid   "Show Backup Files"
+msgstr  "زاپاسلاش مەغلۇپ بولدى"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:233
+#, fuzzy
+msgid   "Sort data in descending order"
+msgstr  "ئېچىلىش تەرتىپى بويىچە تەرتىپلە"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:235
+#, fuzzy
+msgid   "Sort by date"
+msgstr  "ئاتى بويىچە تەرتىپلە(N)"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:236
+msgid   "Sort by size"
+msgstr  "ئۇزۇنلۇقىنى تەرتىپلەش"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:270
+msgid   "Main menu"
+msgstr  "ئاساسىي تىزىملىك"
+
+#: ../xffm/fm/dialog/notebook/notebook.hh:56
+msgid   "Long press time"
+msgstr  "ئۇزۇن بېسىش ۋاقتى:"
+
+#: ../xffm/fm/dialog/dialog.hh:122
+msgid   "Removed"
+msgstr  "چىقىرىۋېتىلدى"
+
+#: ../xffm/fm/dialog/dialog.hh:143
+#, fuzzy
+msgid   "Detected device(s):"
+msgstr  "ئۈسكۈنىلەرنى تاپ(D)"
+
+#: ../xffm/response/commandresponse.hh:19
+msgid   "Running"
+msgstr  "ئىجرادا"
+
+#: ../xffm/response/commandresponse.hh:24
+#, fuzzy
+msgid   "Waiting for operation to finish..."
+msgstr  "مۇلازىمەتنىڭ ئىجرا بولۇشىنى كۈتۈۋاتىدۇ"
+
+#: ../xffm/response/passwdresponse.hh:179
+#, fuzzy
+msgid   "User Input"
+msgstr  "چاشقىنەكتە كىرگۈز"
+
+#: ../xffm/response/passwdresponse.hh:195
+#, fuzzy
+msgid   "Response Requested"
+msgstr  "ئىنكاس چىقىش"
+
+#: ../xffm/response/passwdresponse.hh:242 ../xffm/response/entryresponse.hh:439
+msgid   "Ok"
+msgstr  "تامام"
+
+#: ../xffm/response/customresponse.hh:55
+msgid   "Execute command"
+msgstr  "بۇيرۇقنى ئىجرا قىل"
+
+#: ../xffm/response/customresponse.hh:103
+msgid   "Source File"
+msgstr  "مەنبە ھۆججەت"
+
+#: ../xffm/response/timeoutresponse.hh:57
+msgid   "Dismiss"
+msgstr  "ئۆتكۈزۈۋەت(D)"
+
+#: ../xffm/response/commandprogressresponse.hh:31
+msgid   "Items:"
+msgstr  "تۈرلەر(E):"
+
+#: ../xffm/response/chooserresponse.hh:23
+msgid   "Open"
+msgstr  "ئاچ(O)"
+
+#: ../xffm/response/chooserresponse.hh:56
+msgid   "Choose directory"
+msgstr  "مۇندەرىجە تاللا"
+
+#: ../xffm/response/chooserresponse.hh:60
+msgid   "Choose file"
+msgstr  "ھۆججەت تاللا"
+
+#: ../xffm/completion/bash.hh:133
+#, fuzzy
+msgid   "Completion mode:"
+msgstr  "تاماملاش كودى"
+
+#: ../xffm/completion/bash.hh:134
+msgid   "command"
+msgstr  "بۇيرۇق"
+
+#: ../xffm/completion/bash.hh:135
+msgid   "file"
+msgstr  "ھۆججەت"
+
+#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
+msgid   "Options >>"
+msgstr  "تاللانما(O)‹‹"
+
+#: ../xffm/completion/base.hh:28
+msgid   "Command"
+msgstr  "بۇيرۇق"
+
+#: ../xffm/completion/base.hh:31
+msgid   "File"
+msgstr  "ھۆججەت(F)"
+
+#: ../xffm/completion/base.hh:34
+#, fuzzy
+msgid   "Command history"
+msgstr  "تاپشۇرۇش تارىخى"
+
+#: ../xffm/completion/base.hh:40
+msgid   "Variable"
+msgstr  "ئۆزگىرىشچان"
+
+#: ../xffm/completion/base.hh:43
+msgid   "Host"
+msgstr  "ماشىنا"
+
+#: ../xffm/completion/base.hh:55
+#, fuzzy
+msgid   "Found no match"
+msgstr  "ماس كەلگەن سۆزلەر"
+
+#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
+msgid   "Matches"
+msgstr  "تېپىلغانلىرى"
+
+#: ../xffm/completion/base.hh:142
+msgid   "Too many files open"
+msgstr  "ئېچىلغان ھۆججەت بەك كوپ"
 

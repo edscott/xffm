@@ -1,1455 +1,1377 @@
-# Translations for Rodent package.
-# Copyright (C) 2004-2012 FSF.
-# This file is distributed under the same license as the Rodent package.
-#   --- vie may  3 10:45:15 CDT 2013 ---
+# Xffm+ translation file: vie ago  9 14:42:26 CDT 2019
+# Merged fron existing open source files
+# http://xffm.org
 #
-# Copyright (C) 2004 Alastair McKinstry <mckinstry@computer.org>.
-# Alastair McKinstry, <mckinstry@computer.org>, 2000.
-# Seán Ó Ceallaigh <s_oceallaigh@yahoo.com>, 1999-2000.
-# ALastair McKinstry <mckinstry@computer.org>, 2000.
-# Pól Ó Dubhthaigh <dubhthach@zion.nuigalway.ie>, 2003.
-# Copyright (C)  2004 Alastair McKinstry <mckinstry@computer.org>.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2002-2012.
-# Kevin Patrick Scannell <kscanne@gmail.com>, 2004-2008.
-# Seán de Búrca <leftmostcat@gmail.com>, 2007-2012.
-# Alastair McKinstry <mckinstry@computer.org>, 1998-2004.
-# Seamus O Ciardhuain <seoc@cnds.ucd.ie>, 2003.
-# Michael Everson <everson@evertype.com>, 2004.
-# Copyright (C) 2003 Alastair McKinstry <mckinstry@computer.org>.
-# Kevin Scannell <kscanne@gmail.com>, 2004-2013.
-#  Pól Ó Dubhthaigh <dubhthach@zion.nuigalway.ie>, 2003.
-# Alan Horkan <horkan@maths.tcd.ie>, 2005.
-# David O'Callaghan <david.ocallaghan@cs.tcd.ie>, 2003.
-# Paul Duffy <dubhthach@frink.nuigalway.ie>, 2003.
-# Seán ó Ceallaigh <s_oceallaigh@yahoo.com>, 2000.
-#  Alastair McKinstry <mckinstry@computer.org>, 2004.
-# Séamus Ó Ciardhuáin <seoc@cnds.ucd.ie>, 2002.
-# Sean V. Kelley <s_oceallaigh@yahoo.com>, 1999.
-# Seán O'Ceallaigh <s_oceallaigh@yahoo.com>, 1999.
-# Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
-# fuzzy
-msgid ""
-msgstr ""
-"Project-Id-Version: Rodent Delta\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-04 16:54-0500\n"
-"PO-Revision-Date: 2008-06-01 12:24-0500\n"
-"Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
-"Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
-"Language: ga\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n==2 ? 1 : 2;\n"
+#
+msgid   ""
+msgstr  "Project-Id-Version: xffm+\n"
+        "Report-Msgid-Bugs-To: \n"
+        "POT-Creation-Date: 2019-08-09 12:32-0500\n"
+        "PO-Revision-Date: 2008-06-01 12:24-0500\n"
+        "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
+        "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
+        "Language: ga\n"
+        "MIME-Version: 1.0\n"
+        "Content-Type: text/plain; charset=UTF-8\n"
+        "Content-Transfer-Encoding: 8bit\n"
+        "Plural-Forms: nplurals=5; plural=n==1 ? 0 : n==2 ? 1 : (n>2  n<7) ? "
+        "2 :(n>6  n<11) ? 3 : 4;\n"
 
-
-#: ../../xffm/mime/mimemagic.hh:68 ../../xffm/mime/mimemagic.hh:110
-#: ../../xffm/common/mimemagic.hh:68 ../../xffm/common/mimemagic.hh:110
+#: ../xffm/mime/mimemagic.hh:68 ../xffm/mime/mimemagic.hh:112
 #, fuzzy
-msgid "No Read Permission"
-msgstr "Cuir Ceadanna Leis"
+msgid   "No Read Permission"
+msgstr  "Cuir Ceadanna Leis"
 
-#: ../../xffm/completion/base.hh:28
-msgid "Command"
-msgstr "Ordú"
+#: ../xffm/find/dialog.hh:91 ../xffm/find/dialog.hh:143
+#: ../xffm/find/dialog.hh:604
+msgid   "Find"
+msgstr  "Aimsigh"
 
-#: ../../xffm/completion/base.hh:31
-msgid "File"
-msgstr "Comhad"
+#: ../xffm/find/dialog.hh:167 ../xffm/find/fgr.hh:146
+msgid   "Recursive"
+msgstr  "Athchúrsach"
 
-#: ../../xffm/completion/base.hh:34
+#: ../xffm/find/dialog.hh:170 ../xffm/find/fgr.hh:142
 #, fuzzy
-msgid "Command history"
-msgstr "Stair na nOrduithe"
+msgid   "Find hidden files and directories"
+msgstr  "Taispeáin comhaid agus comhadlanna folaithe"
 
-#. option -u uid "uid" "uid_combo"
-#: ../../xffm/completion/base.hh:37 ../../xffm/find/dialog.hh:192
-msgid "User"
-msgstr "Úsáideoir"
-
-#: ../../xffm/completion/base.hh:40
-msgid "Variable"
-msgstr "Athróg"
-
-#: ../../xffm/completion/base.hh:43
-msgid "Host"
-msgstr "Óst"
-
-#: ../../xffm/completion/base.hh:55
-msgid "Found no match"
-msgstr "Níor aimsíodh aon rud comhoiriúnach"
-
-#: ../../xffm/completion/base.hh:141 ../../xffm/completion/base.hh:142
-msgid "Matches"
-msgstr "Cipíní"
-
-#: ../../xffm/completion/base.hh:142
+#: ../xffm/find/dialog.hh:173 ../xffm/find/fgr.hh:138
 #, fuzzy
-msgid "Too many files open"
-msgstr "An iomarca comhad"
+msgid   "Stay on single filesystem"
+msgstr  "Scan córas comhad"
 
-#: ../../xffm/completion/base.hh:339 ../../xffm/find/fgr.hh:124
-msgid "Options:"
-msgstr "Roghanna:"
+#: ../xffm/find/dialog.hh:176 ../xffm/find/signals.hh:66
+#: ../xffm/find/signals.hh:454
+msgid   "Results"
+msgstr  "Torthaí"
 
-#: ../../xffm/completion/bash.hh:133
+#: ../xffm/find/dialog.hh:176
+msgid   "Upper limit"
+msgstr  "Uasteorainn"
+
+#: ../xffm/find/dialog.hh:181
+msgid   "At Least"
+msgstr  "Ar a Laghad"
+
+#: ../xffm/find/dialog.hh:181 ../xffm/find/dialog.hh:186
+msgid   "kBytes"
+msgstr  "kBeart"
+
+#: ../xffm/find/dialog.hh:186
+msgid   "At Most"
+msgstr  "Ar a Mhéid"
+
+#: ../xffm/find/dialog.hh:192 ../xffm/completion/base.hh:37
+msgid   "User"
+msgstr  "Úsáideoir"
+
+#: ../xffm/find/dialog.hh:197
+msgid   "Group"
+msgstr  "Grúpa"
+
+#: ../xffm/find/dialog.hh:201
+msgid   "Octal Permissions"
+msgstr  "Ceadanna Ochtnártha"
+
+#: ../xffm/find/dialog.hh:206
+msgid   "SUID"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:206 ../xffm/fm/view/local/popup.hh:1102
+msgid   "Executable"
+msgstr  "Comhad Inrite"
+
+#: ../xffm/find/dialog.hh:214 ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168
+msgid   "Minutes"
+msgstr  "Nóiméid"
+
+#: ../xffm/find/dialog.hh:219 ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171
+msgid   "Hours"
+msgstr  "Uaireanta"
+
+#: ../xffm/find/dialog.hh:224 ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174
+msgid   "Days"
+msgstr  "Laethanta"
+
+#: ../xffm/find/dialog.hh:230
+msgid   "Months"
+msgstr  "Míonna"
+
+#: ../xffm/find/dialog.hh:241
 #, fuzzy
-msgid "Completion mode:"
-msgstr "Cód comhlánaithe"
+msgid   "File type : "
+msgstr  "Cineál comhaid:"
 
-#: ../../xffm/completion/bash.hh:134
-msgid "command"
-msgstr "ordú"
+#: ../xffm/find/dialog.hh:255 ../xffm/find/dialog.hh:595
+#: ../xffm/common/gtk.hh:79 ../xffm/fm/dialog/notebook/page/page.hh:71
+msgid   "Close"
+msgstr  "Dún"
 
-#: ../../xffm/completion/bash.hh:135
-msgid "file"
-msgstr "comhad"
+#: ../xffm/find/dialog.hh:263 ../xffm/find/dialog.hh:363
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/fm/view/treeview.hh:18
+msgid   "Details"
+msgstr  "Mionsonraí"
 
-#: ../../xffm/completion/bash.hh:145 ../../xffm/completion/bash.hh:149
-msgid "Options >>"
-msgstr "Roghanna >>"
+#: ../xffm/find/dialog.hh:301 ../xffm/find/fgr.hh:124
+#: ../xffm/find/signals.hh:100
+msgid   "Path"
+msgstr  "Conair"
 
-#: ../../xffm/find/fgr.hh:124 ../../xffm/find/signals.hh:100
-#: ../../xffm/find/dialog.hh:301
-msgid "Path"
-msgstr "Conair"
+#: ../xffm/find/dialog.hh:334 ../xffm/find/fgr.hh:126
+msgid   "Filter:"
+msgstr  "Scagaire:"
 
-#: ../../xffm/find/fgr.hh:125
-msgid "Locate documents and folders on this computer by name or content"
-msgstr "Aimsigh cáipéisí agus fillteáin ar an ríomhaire seo trí ainm nó ábhar"
+#: ../xffm/find/dialog.hh:377
+msgid   "Contains"
+msgstr  "Ina bhfuil"
 
-#: ../../xffm/find/fgr.hh:126 ../../xffm/find/dialog.hh:334
-msgid "Filter:"
-msgstr "Scagaire:"
-
-#: ../../xffm/find/fgr.hh:126
+#: ../xffm/find/dialog.hh:397
 #, fuzzy
-msgid "Search for files"
-msgstr "Cuardaigh ar Chomhaid"
+msgid   "Contains the text"
+msgstr  "1 mhír ann"
 
-#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
-#: ../../xffm/find/fgr.hh:128
-msgid "Contents:"
-msgstr "Ábhair:"
+#: ../xffm/find/dialog.hh:430
+msgid   "Case Sensitive"
+msgstr  "Cásíogair"
 
-#: ../../xffm/find/fgr.hh:128
+#: ../xffm/find/dialog.hh:442
 #, fuzzy
-msgid "File's contents filtered as plain text."
-msgstr "Sábháil an nóta mar ghnáth-théacs"
+msgid   "Extended regexp"
+msgstr  "Seoladh Fhada"
 
-#: ../../xffm/find/fgr.hh:131
-msgid "Verbose output debugging mode."
-msgstr "Mód foclach dífhabhtaithe."
+#: ../xffm/find/dialog.hh:453
+msgid   "Include binary files"
+msgstr  "Cuir comhaid dhénártha san áireamh"
 
-#: ../../xffm/find/fgr.hh:133
-msgid "Show version information"
-msgstr "Taispeáin eolas faoin leagan"
+#: ../xffm/find/dialog.hh:463 ../xffm/find/fgr.hh:212
+msgid   "Line Count"
+msgstr  "Líon na Línte"
 
-#: ../../xffm/find/fgr.hh:135
-msgid "Filter Details"
-msgstr "Mionsonraí an Scagaire"
+#: ../xffm/find/dialog.hh:489
+msgid   "Match"
+msgstr  "Comhoiriúnaigh"
 
-#. / option -a "xdev"
-#: ../../xffm/find/fgr.hh:138 ../../xffm/find/dialog.hh:173
+#: ../xffm/find/dialog.hh:501
+msgid   "Anywhere"
+msgstr  "Áit Ar Bith"
+
+#: ../xffm/find/dialog.hh:516
+msgid   "Whole words only"
+msgstr  "Focail iomláin amháin"
+
+#: ../xffm/find/dialog.hh:531
+msgid   "lines"
+msgstr  "Lini"
+
+#: ../xffm/find/dialog.hh:545 ../xffm/find/fgr.hh:210
+msgid   "No match"
+msgstr  "Níl a leithéid ann"
+
+#: ../xffm/find/dialog.hh:577 ../xffm/find/signals.hh:368
+#: ../xffm/common/gtk.hh:409 ../xffm/fm/view/local/rm.hh:157
+#: ../xffm/fm/view/local/properties.hh:314
+#: ../xffm/response/entryresponse.hh:435 ../xffm/response/chooserresponse.hh:21
+msgid   "Cancel"
+msgstr  "Ceallaigh"
+
+#: ../xffm/find/dialog.hh:587
+msgid   "Clear"
+msgstr  "Glan"
+
+#: ../xffm/find/dialog.hh:629
+msgid   "Edit"
+msgstr  "Eagar"
+
+#: ../xffm/find/dialog.hh:743 ../xffm/find/dialog.hh:758
+#: ../xffm/common/preview.hh:460 ../xffm/common/util.hh:1354
+#: ../xffm/common/util.hh:1356 ../xffm/common/util.hh:1362
+#: ../xffm/common/util.hh:1364
+msgid   "unknown"
+msgstr  "gan aithnid"
+
+#: ../xffm/find/dialog.hh:772
+msgid   "Modified"
+msgstr  "Athraithe"
+
+#: ../xffm/find/dialog.hh:776
+msgid   "Created"
+msgstr  "Cruthaithe"
+
+#: ../xffm/find/dialog.hh:780
+msgid   "Accessed"
+msgstr  "Rochtain"
+
+#: ../xffm/find/dialog.hh:1098
+msgid   "Basic rules:\n"
+        "\n"
+        "*  Will match any character zero or more times.\n"
+        "?  Will match any character exactly one time\n"
+        "[] Match any character within the [] \n"
+        "^  Match at beginning of string\n"
+        "$  Match at end of string \n"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:1107
+msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
+        "( ) : \n"
+        "In  basic regular expressions the metacharacters ?, +, {, |, (, "
+        "and ) \n"
+        "  lose their special meaning.\n"
+        "\n"
+        "The  period . matches  any  single  character.\n"
+        "The caret ^ matches at the start of line.\n"
+        "The dollar $ matches at the end of line.\n"
+        "\n"
+        "Characters within [ ] matches any single character in the list.\n"
+        "Characters within [^ ] matches any single character *not* in the "
+        "list.\n"
+        "Characters inside [ - ] matches a range of characters (ie [0-9] or "
+        "[a-z]).\n"
+        "\n"
+        "A regular expression may be followed by one of several repetition "
+        "operators:\n"
+        "?      The preceding item is optional and matched\n"
+        "       at most once.\n"
+        "*      The preceding item will be matched zero\n"
+        "       or more times.\n"
+        "+      The preceding item will be matched one or\n"
+        "       more times.\n"
+        "{n}    The preceding item is matched exactly n times.\n"
+        "{n,}   The preceding item is matched n or more times.\n"
+        "{n,m}  The preceding item is matched at least n times,\n"
+        "       but not more than m times.\n"
+        "\n"
+        "To match any reserved character, precede it with \\. \n"
+        "\n"
+        "Two regular expressions may be joined by the logical or operator |.\n"
+        "Two regular expressions may be concatenated.\n"
+        "\n"
+        "More information is available by typing \"man grep\"\n"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:124 ../xffm/completion/base.hh:339
+msgid   "Options:"
+msgstr  "Roghanna:"
+
+#: ../xffm/find/fgr.hh:125
+msgid   "Locate documents and folders on this computer by name or content"
+msgstr  "Aimsigh cáipéisí agus fillteáin ar an ríomhaire seo trí ainm nó ábhar"
+
+#: ../xffm/find/fgr.hh:126
 #, fuzzy
-msgid "Stay on single filesystem"
-msgstr "Scan córas comhad"
+msgid   "Search for files"
+msgstr  "Cuardaigh ar Chomhaid"
 
-#: ../../xffm/find/fgr.hh:140
-msgid "Print..."
-msgstr "Priontáil..."
+#: ../xffm/find/fgr.hh:128
+msgid   "Contents:"
+msgstr  "Ábhair:"
 
-#: ../../xffm/find/fgr.hh:140
-msgid "The unique Process ID that identifies this process."
-msgstr "An tAitheantas Uathúil a bhaineann leis an bpróiseas seo."
-
-#. / option -D "recursiveH"
-#: ../../xffm/find/fgr.hh:142 ../../xffm/find/dialog.hh:170
+#: ../xffm/find/fgr.hh:128
 #, fuzzy
-msgid "Find hidden files and directories"
-msgstr "Taispeáin comhaid agus comhadlanna folaithe"
+msgid   "File's contents filtered as plain text."
+msgstr  "Sábháil an nóta mar ghnáth-théacs"
 
-#: ../../xffm/find/fgr.hh:143
-msgid "Filter"
-msgstr "Scagaire"
+#: ../xffm/find/fgr.hh:131
+msgid   "Verbose output debugging mode."
+msgstr  "Mód foclach dífhabhtaithe."
 
-#: ../../xffm/find/fgr.hh:144
-msgid ""
-"To display files which pass the filter (stars and regexps will be processed)"
-msgstr ""
+#: ../xffm/find/fgr.hh:133
+msgid   "Show version information"
+msgstr  "Taispeáin eolas faoin leagan"
 
-#. / option -r "recursive"
-#: ../../xffm/find/fgr.hh:146 ../../xffm/find/dialog.hh:167
-msgid "Recursive"
-msgstr "Athchúrsach"
+#: ../xffm/find/fgr.hh:135
+msgid   "Filter Details"
+msgstr  "Mionsonraí an Scagaire"
 
-#: ../../xffm/find/fgr.hh:147 ../../xffm/find/fgr.hh:148
-#: ../../xffm/find/fgr.hh:149 ../../xffm/find/fgr.hh:150
-msgid "KByte"
-msgstr "kB"
+#: ../xffm/find/fgr.hh:140
+msgid   "Print..."
+msgstr  "Priontáil..."
 
-#: ../../xffm/find/fgr.hh:148
+#: ../xffm/find/fgr.hh:140
+msgid   "The unique Process ID that identifies this process."
+msgstr  "An tAitheantas Uathúil a bhaineann leis an bpróiseas seo."
+
+#: ../xffm/find/fgr.hh:143
+msgid   "Filter"
+msgstr  "Scagaire"
+
+#: ../xffm/find/fgr.hh:144
+msgid   "To display files which pass the filter (stars and regexps will be "
+        "processed)"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:147 ../xffm/find/fgr.hh:148 ../xffm/find/fgr.hh:149
+#: ../xffm/find/fgr.hh:150
+msgid   "KByte"
+msgstr  "kB"
+
+#: ../xffm/find/fgr.hh:148
 #, fuzzy
-msgid "is greater than or equal to"
-msgstr "Rátáil níos mó nó cothrom le %s."
+msgid   "is greater than or equal to"
+msgstr  "Rátáil níos mó nó cothrom le %s."
 
-#: ../../xffm/find/fgr.hh:150
+#: ../xffm/find/fgr.hh:150
 #, fuzzy
-msgid "is less than or equal to"
-msgstr "Rátáil níos lú nó cothrom le %s."
+msgid   "is less than or equal to"
+msgstr  "Rátáil níos lú nó cothrom le %s."
 
-#: ../../xffm/find/fgr.hh:152
-msgid "Set UID"
-msgstr "Socraigh Aitheantas an Úsáideora"
+#: ../xffm/find/fgr.hh:152
+msgid   "Set UID"
+msgstr  "Socraigh Aitheantas an Úsáideora"
 
-#: ../../xffm/find/fgr.hh:152
-msgid "Executable Text Files"
-msgstr "Comhaid Téacs Inrite"
+#: ../xffm/find/fgr.hh:152
+msgid   "Executable Text Files"
+msgstr  "Comhaid Téacs Inrite"
 
-#: ../../xffm/find/fgr.hh:154
-msgid "The permissions of the file, in octal notation."
-msgstr ""
+#: ../xffm/find/fgr.hh:154
+msgid   "The permissions of the file, in octal notation."
+msgstr  ""
 
-#: ../../xffm/find/fgr.hh:155
-msgid "Type"
-msgstr "Cineál"
+#: ../xffm/find/fgr.hh:155
+msgid   "Type"
+msgstr  "Cineál"
 
-#: ../../xffm/find/fgr.hh:157 ../../xffm/find/signals.hh:14
-msgid "Any"
-msgstr "Ar Bith"
+#: ../xffm/find/fgr.hh:157 ../xffm/find/signals.hh:14
+msgid   "Any"
+msgstr  "Ar Bith"
 
-#: ../../xffm/find/fgr.hh:157
+#: ../xffm/find/fgr.hh:157
 #, fuzzy
-msgid "Default type"
-msgstr "Am réamhshocraithe"
+msgid   "Default type"
+msgstr  "Am réamhshocraithe"
 
-#: ../../xffm/find/fgr.hh:158 ../../xffm/common/preview.hh:478
-msgid "Regular file"
-msgstr "Comhad gnáth"
+#: ../xffm/find/fgr.hh:158 ../xffm/common/preview.hh:478
+msgid   "Regular file"
+msgstr  "Comhad gnáth"
 
-#: ../../xffm/find/fgr.hh:159 ../../xffm/find/signals.hh:8
-#: ../../xffm/fm/view/local/popup.hh:1062 ../../xffm/common/preview.hh:469
-msgid "Directory"
-msgstr "Comhadlann"
+#: ../xffm/find/fgr.hh:159 ../xffm/find/signals.hh:8
+#: ../xffm/common/preview.hh:469 ../xffm/fm/view/local/popup.hh:1062
+msgid   "Directory"
+msgstr  "Comhadlann"
 
-#: ../../xffm/find/fgr.hh:160 ../../xffm/find/signals.hh:9
-#: ../../xffm/common/preview.hh:475
-msgid "Symbolic Link"
-msgstr "Nasc Siombalach"
+#: ../xffm/find/fgr.hh:160 ../xffm/find/signals.hh:9
+#: ../xffm/common/preview.hh:475
+msgid   "Symbolic Link"
+msgstr  "Nasc Siombalach"
 
-#: ../../xffm/find/fgr.hh:161
+#: ../xffm/find/fgr.hh:161
 #, fuzzy
-msgid "UNIX Socket"
-msgstr "Scéim UNIX"
+msgid   "UNIX Socket"
+msgstr  "Scéim UNIX"
 
-#: ../../xffm/find/fgr.hh:162 ../../xffm/find/signals.hh:11
-#: ../../xffm/common/preview.hh:463
+#: ../xffm/find/fgr.hh:162 ../xffm/find/signals.hh:11
+#: ../xffm/common/preview.hh:463
 #, fuzzy
-msgid "Block device"
-msgstr "Gléas Bloc"
+msgid   "Block device"
+msgstr  "Gléas Bloc"
 
-#: ../../xffm/find/fgr.hh:163 ../../xffm/find/signals.hh:12
-#: ../../xffm/common/preview.hh:466
-msgid "Character device"
-msgstr "Gaireas Caractar"
+#: ../xffm/find/fgr.hh:163 ../xffm/find/signals.hh:12
+#: ../xffm/common/preview.hh:466
+msgid   "Character device"
+msgstr  "Gaireas Caractar"
 
-#: ../../xffm/find/fgr.hh:164 ../../xffm/find/signals.hh:13
-#: ../../xffm/common/preview.hh:472
-msgid "FIFO"
-msgstr "FIFO"
+#: ../xffm/find/fgr.hh:164 ../xffm/find/signals.hh:13
+#: ../xffm/common/preview.hh:472
+msgid   "FIFO"
+msgstr  "FIFO"
 
-#. radio_p freed on destroy event for findDialog.
-#. option -k minutes "last_minutes", "last_minutes_spin"
-#: ../../xffm/find/fgr.hh:166 ../../xffm/find/fgr.hh:168
-#: ../../xffm/find/dialog.hh:214
-msgid "Minutes"
-msgstr "Nóiméid"
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/find/fgr.hh:179 ../xffm/find/fgr.hh:180
+#: ../xffm/find/fgr.hh:183 ../xffm/find/fgr.hh:184 ../xffm/find/fgr.hh:187
+#: ../xffm/find/fgr.hh:188
+msgid   "TIME"
+msgstr  "AM  "
 
-#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
-#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
-#: ../../xffm/find/dialog.hh:263 ../../xffm/find/dialog.hh:363
-#: ../../xffm/fm/view/treeview.hh:18
-msgid "Details"
-msgstr "Mionsonraí"
+#: ../xffm/find/fgr.hh:168 ../xffm/find/fgr.hh:171 ../xffm/find/fgr.hh:174
+#: ../xffm/find/fgr.hh:177
+msgid   "Previous"
+msgstr  "Riomh"
 
-#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
-#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
-#: ../../xffm/find/fgr.hh:179 ../../xffm/find/fgr.hh:180
-#: ../../xffm/find/fgr.hh:183 ../../xffm/find/fgr.hh:184
-#: ../../xffm/find/fgr.hh:187 ../../xffm/find/fgr.hh:188
-msgid "TIME"
-msgstr "AM  "
+#: ../xffm/find/fgr.hh:175
+msgid   "Month"
+msgstr  "Mí"
 
-#: ../../xffm/find/fgr.hh:168 ../../xffm/find/fgr.hh:171
-#: ../../xffm/find/fgr.hh:174 ../../xffm/find/fgr.hh:177
-msgid "Previous"
-msgstr "Riomh"
+#: ../xffm/find/fgr.hh:177
+msgid   "Month(s)"
+msgstr  "Mí"
 
-#. option -h hours "last_hours", "last_hours_spin"
-#: ../../xffm/find/fgr.hh:169 ../../xffm/find/fgr.hh:171
-#: ../../xffm/find/dialog.hh:219
-msgid "Hours"
-msgstr "Uaireanta"
-
-#. option -d days "last_days", "last_days_spin"
-#: ../../xffm/find/fgr.hh:172 ../../xffm/find/fgr.hh:174
-#: ../../xffm/find/dialog.hh:224
-msgid "Days"
-msgstr "Laethanta"
-
-#: ../../xffm/find/fgr.hh:175
-msgid "Month"
-msgstr "Mí"
-
-#: ../../xffm/find/fgr.hh:177
-msgid "Month(s)"
-msgstr "Mí"
-
-#: ../../xffm/find/fgr.hh:180
+#: ../xffm/find/fgr.hh:180
 #, fuzzy
-msgid "Modification Time :"
-msgstr "Am mionathraithe:"
+msgid   "Modification Time :"
+msgstr  "Am mionathraithe:"
 
-#: ../../xffm/find/fgr.hh:184
+#: ../xffm/find/fgr.hh:184
 #, fuzzy
-msgid "Access Time :"
-msgstr "Taispeáin Am Rochtana"
+msgid   "Access Time :"
+msgstr  "Taispeáin Am Rochtana"
 
-#: ../../xffm/find/fgr.hh:188
+#: ../xffm/find/fgr.hh:188
 #, fuzzy
-msgid "Creation Time :"
-msgstr "Am Cruthaithe"
+msgid   "Creation Time :"
+msgstr  "Am Cruthaithe"
 
-#: ../../xffm/find/fgr.hh:191 ../../xffm/find/fgr.hh:192
-msgid "uid"
-msgstr "uid"
+#: ../xffm/find/fgr.hh:191 ../xffm/find/fgr.hh:192
+msgid   "uid"
+msgstr  "uid"
 
-#: ../../xffm/find/fgr.hh:192
-msgid "User:"
-msgstr "Úsáidtheoir:"
+#: ../xffm/find/fgr.hh:192
+msgid   "User:"
+msgstr  "Úsáidtheoir:"
 
-#: ../../xffm/find/fgr.hh:194 ../../xffm/find/fgr.hh:195
-msgid "gid"
-msgstr "gid"
+#: ../xffm/find/fgr.hh:194 ../xffm/find/fgr.hh:195
+msgid   "gid"
+msgstr  "gid"
 
-#: ../../xffm/find/fgr.hh:195
-msgid "Group:"
-msgstr "Grupa:"
+#: ../xffm/find/fgr.hh:195
+msgid   "Group:"
+msgstr  "Grupa:"
 
-#: ../../xffm/find/fgr.hh:198
-msgid ""
-"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
-"character that  normally  follows  a file  name"
-msgstr ""
+#: ../xffm/find/fgr.hh:198
+msgid   "Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+        "character that  normally  follows  a file  name"
+msgstr  ""
 
-#: ../../xffm/find/fgr.hh:200
-msgid "Content View"
-msgstr "Amharc Ábhair"
+#: ../xffm/find/fgr.hh:200
+msgid   "Content View"
+msgstr  "Amharc Ábhair"
 
-#: ../../xffm/find/fgr.hh:201 ../../xffm/find/fgr.hh:202
-#: ../../xffm/find/fgr.hh:203 ../../xffm/find/fgr.hh:204
-msgid "STRING"
-msgstr "TEAGHRÁN"
+#: ../xffm/find/fgr.hh:201 ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:203
+#: ../xffm/find/fgr.hh:204
+msgid   "STRING"
+msgstr  "TEAGHRÁN"
 
-#: ../../xffm/find/fgr.hh:202 ../../xffm/find/fgr.hh:204
-#: ../../xffm/fm/view/local/popup.hh:759
-msgid "Regular expression"
-msgstr "Slonn ionadaíochta"
+#: ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:204
+#: ../xffm/fm/view/local/popup.hh:759
+msgid   "Regular expression"
+msgstr  "Slonn ionadaíochta"
 
-#: ../../xffm/find/fgr.hh:204
-msgid "Extended"
-msgstr "Breisithe"
+#: ../xffm/find/fgr.hh:204
+msgid   "Extended"
+msgstr  "Breisithe"
 
-#: ../../xffm/find/fgr.hh:206
+#: ../xffm/find/fgr.hh:206
 #, fuzzy
-msgid "Ignore case"
-msgstr "Déan neamhaird d'íomhánna"
+msgid   "Ignore case"
+msgstr  "Déan neamhaird d'íomhánna"
 
-#: ../../xffm/find/fgr.hh:208
-msgid "Text Files"
-msgstr "Téacschomhaid"
+#: ../xffm/find/fgr.hh:208
+msgid   "Text Files"
+msgstr  "Téacschomhaid"
 
-#: ../../xffm/find/fgr.hh:210 ../../xffm/find/dialog.hh:545
-msgid "No match"
-msgstr "Níl a leithéid ann"
+#: ../xffm/find/fgr.hh:214
+msgid   "Words"
+msgstr  "Focail"
 
-#: ../../xffm/find/fgr.hh:212 ../../xffm/find/dialog.hh:463
-msgid "Line Count"
-msgstr "Líon na Línte"
+#: ../xffm/find/fgr.hh:216
+msgid   "Lines"
+msgstr  "Línte"
 
-#: ../../xffm/find/fgr.hh:214
-msgid "Words"
-msgstr "Focail"
-
-#: ../../xffm/find/fgr.hh:216
-msgid "Lines"
-msgstr "Línte"
-
-#: ../../xffm/find/fgr.hh:368
+#: ../xffm/find/fgr.hh:362
 #, fuzzy, c-format
-msgid "Usage : %s [OPTIONS]\n"
-msgstr "Úsáid: %s [ROGHA]\n"
+msgid   "Usage : %s [OPTIONS]\n"
+msgstr  "Úsáid: %s [ROGHA]\n"
 
-#: ../../xffm/find/signals.hh:7
-msgid "Regular"
-msgstr "Gnáth"
+#: ../xffm/find/signals.hh:7
+msgid   "Regular"
+msgstr  "Gnáth"
 
-#: ../../xffm/find/signals.hh:10 ../../xffm/common/preview.hh:481
-msgid "Socket"
-msgstr "Soicéad"
+#: ../xffm/find/signals.hh:10 ../xffm/common/preview.hh:481
+msgid   "Socket"
+msgstr  "Soicéad"
 
-#. if (g_slist_length(list) == 0) return NULL;
-#. Create liststore for DnD
-#. / option "upper_limit_spin" (only in gtk findDialog)
-#: ../../xffm/find/signals.hh:66 ../../xffm/find/signals.hh:454
-#: ../../xffm/find/dialog.hh:176
-msgid "Results"
-msgstr "Torthaí"
-
-#. button no
-#: ../../xffm/find/signals.hh:368 ../../xffm/find/dialog.hh:577
-#: ../../xffm/response/chooserresponse.hh:21
-#: ../../xffm/response/entryresponse.hh:420
-#: ../../xffm/fm/view/local/properties.hh:314
-#: ../../xffm/fm/view/local/rm.hh:157 ../../xffm/common/gtk.hh:409
-msgid "Cancel"
-msgstr "Ceallaigh"
-
-#: ../../xffm/find/signals.hh:396 ../../xffm/find/signals.hh:830
+#: ../xffm/find/signals.hh:396 ../xffm/find/signals.hh:830
 #, fuzzy
-msgid "No editor for current action."
-msgstr "Gan cheartú earráidí"
+msgid   "No editor for current action."
+msgstr  "Gan cheartú earráidí"
 
-#: ../../xffm/find/signals.hh:454
-msgid "Upper limit:"
-msgstr "Uasteorainn:"
+#: ../xffm/find/signals.hh:454
+msgid   "Upper limit:"
+msgstr  "Uasteorainn:"
 
-#: ../../xffm/find/signals.hh:456
-msgid "Counting files..."
-msgstr "Comhaid á n-áireamh..."
+#: ../xffm/find/signals.hh:456
+msgid   "Counting files..."
+msgstr  "Comhaid á n-áireamh..."
 
-#: ../../xffm/find/signals.hh:471
+#: ../xffm/find/signals.hh:471
 #, fuzzy, c-format
-msgid "Found %d match"
-msgid_plural "Found %d matches"
-msgstr[0] "Aimsíodh 1 rud comhoiriúnach"
-msgstr[1] "Aimsíodh %d rud comhoiriúnach"
-msgstr[2] "Aimsíodh %d rud comhoiriúnach"
-msgstr[3] "Aimsíodh %d rud comhoiriúnach"
-msgstr[4] "Aimsíodh %d rud comhoiriúnach"
+msgid   "Found %d match"
+msgid_plural    "Found %d matches"
+msgstr[0]       "Aimsíodh 1 rud comhoiriúnach"
+msgstr[1]       "Aimsíodh %d rud comhoiriúnach"
+msgstr[2]       "Aimsíodh %d rud comhoiriúnach"
+msgstr[3]       "Aimsíodh %d rud comhoiriúnach"
+msgstr[4]       "Aimsíodh %d rud comhoiriúnach"
 
-#: ../../xffm/find/signals.hh:473
+#: ../xffm/find/signals.hh:473
 #, fuzzy, c-format
-msgid "%s Finished : %s"
-msgstr "%s [Críochnaithe]"
+msgid   "%s Finished : %s"
+msgstr  "%s [Críochnaithe]"
 
-#: ../../xffm/find/signals.hh:596 ../../xffm/find/signals.hh:598
-msgid "Searching..."
-msgstr "Ag Cuardach..."
+#: ../xffm/find/signals.hh:596 ../xffm/find/signals.hh:598
+msgid   "Searching..."
+msgstr  "Ag Cuardach..."
 
-#. g_object_set_data(G_OBJECT(findDialog), "window", findDialog);
-#: ../../xffm/find/dialog.hh:91 ../../xffm/find/dialog.hh:143
-#: ../../xffm/find/dialog.hh:604
-msgid "Find"
-msgstr "Aimsigh"
-
-#: ../../xffm/find/dialog.hh:176
-msgid "Upper limit"
-msgstr "Uasteorainn"
-
-#. option -s +KByte "size_greater", "size_greater_spin"
-#: ../../xffm/find/dialog.hh:181
-msgid "At Least"
-msgstr "Ar a Laghad"
-
-#: ../../xffm/find/dialog.hh:181 ../../xffm/find/dialog.hh:186
-msgid "kBytes"
-msgstr "kBeart"
-
-#. option -s -KByte "size_smaller", "size_smaller_spin"
-#: ../../xffm/find/dialog.hh:186
-msgid "At Most"
-msgstr "Ar a Mhéid"
-
-#: ../../xffm/find/dialog.hh:197
-msgid "Group"
-msgstr "Grúpa"
-
-#. option -o octal "octal_p" "permissions_entry"
-#: ../../xffm/find/dialog.hh:201
-msgid "Octal Permissions"
-msgstr "Ceadanna Ochtnártha"
-
-#. option -p suid | exe
-#: ../../xffm/find/dialog.hh:206
-msgid "SUID"
-msgstr ""
-
-#: ../../xffm/find/dialog.hh:206 ../../xffm/fm/view/local/popup.hh:1102
-msgid "Executable"
-msgstr "Comhad Inrite"
-
-#. option -m months "last_months", "last_months_spin"
-#: ../../xffm/find/dialog.hh:230
-msgid "Months"
-msgstr "Míonna"
-
-#: ../../xffm/find/dialog.hh:241
+#: ../xffm/common/preview.hh:581
 #, fuzzy
-msgid "File type : "
-msgstr "Cineál comhaid:"
+msgid   "Empty file"
+msgstr  "Comhad Folamh"
 
-#. gtk_widget_show (GTK_WIDGET(right_options_vbox));
-#. gtk_widget_show (GTK_WIDGET(center_options_vbox));
-#. gtk_widget_show (GTK_WIDGET(left_options_vbox));
-#: ../../xffm/find/dialog.hh:255 ../../xffm/find/dialog.hh:595
-#: ../../xffm/fm/dialog/notebook/page/page.hh:70 ../../xffm/common/gtk.hh:79
-msgid "Close"
-msgstr "Dún"
-
-#. gtk_box_pack_start (vbox7a, GTK_WIDGET(advancedBox), TRUE, FALSE, 5);
-#. gtk_widget_show(GTK_WIDGET(advancedBox));
-#. //////////////  grep options.... /////////////////////////
-#: ../../xffm/find/dialog.hh:377
-msgid "Contains"
-msgstr "Ina bhfuil"
-
-#: ../../xffm/find/dialog.hh:397
-#, fuzzy
-msgid "Contains the text"
-msgstr "1 mhír ann"
-
-#: ../../xffm/find/dialog.hh:430
-msgid "Case Sensitive"
-msgstr "Cásíogair"
-
-#: ../../xffm/find/dialog.hh:442
-#, fuzzy
-msgid "Extended regexp"
-msgstr "Seoladh Fhada"
-
-#: ../../xffm/find/dialog.hh:453
-msgid "Include binary files"
-msgstr "Cuir comhaid dhénártha san áireamh"
-
-#: ../../xffm/find/dialog.hh:489
-msgid "Match"
-msgstr "Comhoiriúnaigh"
-
-#: ../../xffm/find/dialog.hh:501
-msgid "Anywhere"
-msgstr "Áit Ar Bith"
-
-#: ../../xffm/find/dialog.hh:516
-msgid "Whole words only"
-msgstr "Focail iomláin amháin"
-
-#: ../../xffm/find/dialog.hh:531
-msgid "lines"
-msgstr "Lini"
-
-#: ../../xffm/find/dialog.hh:587
-msgid "Clear"
-msgstr "Glan"
-
-#: ../../xffm/find/dialog.hh:629
-msgid "Edit"
-msgstr "Eagar"
-
-#: ../../xffm/find/dialog.hh:743 ../../xffm/find/dialog.hh:758
-#: ../../xffm/common/util.hh:1354 ../../xffm/common/util.hh:1356
-#: ../../xffm/common/util.hh:1362 ../../xffm/common/util.hh:1364
-#: ../../xffm/common/preview.hh:460
-msgid "unknown"
-msgstr "gan aithnid"
-
-#: ../../xffm/find/dialog.hh:772
-msgid "Modified"
-msgstr "Athraithe"
-
-#: ../../xffm/find/dialog.hh:776
-msgid "Created"
-msgstr "Cruthaithe"
-
-#: ../../xffm/find/dialog.hh:780
-msgid "Accessed"
-msgstr "Rochtain"
-
-#: ../../xffm/find/dialog.hh:1098
-msgid ""
-"Basic rules:\n"
-"\n"
-"*  Will match any character zero or more times.\n"
-"?  Will match any character exactly one time\n"
-"[] Match any character within the [] \n"
-"^  Match at beginning of string\n"
-"$  Match at end of string \n"
-msgstr ""
-
-#: ../../xffm/find/dialog.hh:1107
-msgid ""
-"Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ ( ) : \n"
-"In  basic regular expressions the metacharacters ?, +, {, |, (, and ) \n"
-"  lose their special meaning.\n"
-"\n"
-"The  period . matches  any  single  character.\n"
-"The caret ^ matches at the start of line.\n"
-"The dollar $ matches at the end of line.\n"
-"\n"
-"Characters within [ ] matches any single character in the list.\n"
-"Characters within [^ ] matches any single character *not* in the list.\n"
-"Characters inside [ - ] matches a range of characters (ie [0-9] or [a-z]).\n"
-"\n"
-"A regular expression may be followed by one of several repetition "
-"operators:\n"
-"?      The preceding item is optional and matched\n"
-"       at most once.\n"
-"*      The preceding item will be matched zero\n"
-"       or more times.\n"
-"+      The preceding item will be matched one or\n"
-"       more times.\n"
-"{n}    The preceding item is matched exactly n times.\n"
-"{n,}   The preceding item is matched n or more times.\n"
-"{n,m}  The preceding item is matched at least n times,\n"
-"       but not more than m times.\n"
-"\n"
-"To match any reserved character, precede it with \\. \n"
-"\n"
-"Two regular expressions may be joined by the logical or operator |.\n"
-"Two regular expressions may be concatenated.\n"
-"\n"
-"More information is available by typing \"man grep\"\n"
-msgstr ""
-
-#: ../../xffm/response/chooserresponse.hh:23
-msgid "Open"
-msgstr "Oscail"
-
-#: ../../xffm/response/chooserresponse.hh:56
-#, fuzzy
-msgid "Choose directory"
-msgstr "Roghnaigh Comhadlann"
-
-#: ../../xffm/response/chooserresponse.hh:60
-msgid "Choose file"
-msgstr "Roghnaigh comhad"
-
-#: ../../xffm/response/customresponse.hh:55
-msgid "Execute command"
-msgstr "Rith ordú"
-
-#. XXX folder or file entry should be determined on .ini file (probably just inherit from comboresponse for multiple files options (selected files)...
-#: ../../xffm/response/customresponse.hh:103
-msgid "Source File"
-msgstr "Comhad Foinseach"
-
-#. this button is redundant since hands are on keyboard for password
-#: ../../xffm/response/entryresponse.hh:424
-#: ../../xffm/response/passwdresponse.hh:242
-msgid "Ok"
-msgstr "Ceart go leor"
-
-#: ../../xffm/response/commandprogressresponse.hh:31
-msgid "Items:"
-msgstr "Míreanna:"
-
-#: ../../xffm/response/passwdresponse.hh:19
-#: ../../xffm/response/passwdresponse.hh:25 ../../xffm/common/run.hh:464
-msgid "Enter password"
-msgstr "Iontráil focal faire"
-
-#. gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
-#: ../../xffm/response/passwdresponse.hh:179
-#, fuzzy
-msgid "User Input"
-msgstr "Eolas Úsáideoir"
-
-#: ../../xffm/response/passwdresponse.hh:195
-msgid "Response Requested"
-msgstr "Iarradh Freagra"
-
-#: ../../xffm/response/timeoutresponse.hh:57
-msgid "Dismiss"
-msgstr "Ruaig"
-
-#: ../../xffm/response/commandresponse.hh:19
-msgid "Running"
-msgstr "Ag Rith"
-
-#. auto text = g_strdup_printf("%s (pid: %d)",
-#. _("Waiting for operation to finish..."),
-#. Tubo<Type>::getChild (pid));
-#: ../../xffm/response/commandresponse.hh:24
-#, fuzzy
-msgid "Waiting for operation to finish..."
-msgstr "Ag feitheamh le dvips..."
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:11
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:214
-#, fuzzy
-msgid "Remove Button Contents"
-msgstr "Bain Cnaipe"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:67
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:209
-#, fuzzy
-msgid "Add custom content"
-msgstr "Cuir clár ábhair leis"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:68
-#, fuzzy
-msgid "Select file to load"
-msgstr "Roghnaigh comhad le seinm"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:125
-#, fuzzy, c-format
-msgid "Cannot load file %s. Reason: %s"
-msgstr "Ní féidir comhad %s a fhairsingiú: %s"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:154
-#, fuzzy
-msgid "You need to restart the application"
-msgstr "Ríomhchlár a thosaíonn feidhmchláir"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:187
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:191
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:195
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:198
-#: ../../xffm/fm/view/pkg/model.hh:29 ../../xffm/fm/view/pkg/popup.hh:35
-#, fuzzy
-msgid "Software Updater"
-msgstr "Nuashonrú Bogearraí"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:236
-#: ../../xffm/fm/view/pkg/model.hh:108 ../../xffm/fm/view/pkg/model.hh:299
-#: ../../xffm/fm/view/pkg/model.hh:306 ../../xffm/fm/view/pkg/popup.hh:151
-#: ../../xffm/common/gtk.hh:77
-msgid "Search"
-msgstr "Cuardaigh"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:240 ../../xffm/common/gtk.hh:67
-#, fuzzy
-msgid "Open terminal"
-msgstr "Oscail Teirminéal"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:244
-#, fuzzy
-msgid "Open a New Window"
-msgstr "Oscail i bhFuinneog Nua"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:250
-#, fuzzy
-msgid "Differences"
-msgstr "Difríocht"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:256
-#: ../../xffm/fm/view/root/model.hh:110
-msgid "Home Directory"
-msgstr "Comhadlann bhaile"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:261
-#: ../../xffm/fm/view/root/model.hh:168 ../../xffm/fm/view/fstab/popup.hh:29
-#, fuzzy
-msgid "Disk Image Mounter"
-msgstr "Tiontaire Íomhá DNG"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:266
-#: ../../xffm/fm/view/root/model.hh:137
-#, fuzzy
-msgid "Trash bin"
-msgstr "Cuir Comhad Sa Bhruscar"
-
-#: ../../xffm/fm/dialog/notebook/notebook.hh:56
-#, fuzzy
-msgid "Long press time"
-msgstr "Aitheantóir an phróisis logála"
-
-#: ../../xffm/fm/dialog/notebook/notebook.hh:75 ../../xffm/common/gtk.hh:139
-msgid "New Tab"
-msgstr "Cluaisín Nua"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:178
-#, fuzzy
-msgid "Open menu"
-msgstr "Oscail Roghchlár"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:230
-#, fuzzy
-msgid "View as list"
-msgstr "Feach mar Scrúdú"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:231
-msgid "Show hidden files"
-msgstr "Taispeáin comhaid fholaithe"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:232
-#, fuzzy
-msgid "Show Backup Files"
-msgstr "Comhad Chúltaca"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:233
-#, fuzzy
-msgid "Sort data in descending order"
-msgstr "Sórtáil in ord íslitheach"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:235
-#, fuzzy
-msgid "Sort by date"
-msgstr "Dáta gearr"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:236
-msgid "Sort by size"
-msgstr "Sórtáil de réir méide"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:237 ../../xffm/common/gtk.hh:81
-msgid "Exit"
-msgstr "Ealu"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:270
-msgid "Main menu"
-msgstr "Príomhroghchlár"
-
-#. File chooser
-#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:375
-#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:377
-msgid "Go to"
-msgstr "Téigh go"
-
-#. entryResponse->setCheckButton(_("Run in Terminal"));
-#. entryResponse->setCheckButton(Run<Type>::runInTerminal(path));
-#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:382
-#: ../../xffm/fm/view/local/popup.hh:887 ../../xffm/fm/view/local/popup.hh:981
-msgid "Specify Output Directory..."
-msgstr "Socraigh Comhadlann Aschurtha..."
-
-#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:409
-msgid "Not a directory"
-msgstr "Níl aon filltéan ann"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:135
-msgid "Renice Process"
-msgstr "Athraigh Tosaíocht an Phróisis"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:135
-msgid "Suspend"
-msgstr "Cuir ar fionraí"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:135
-msgid "Continue"
-msgstr "Lean ar Aghaidh"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid "Interrupt"
-msgstr "Idirbhris"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid "Hangup"
-msgstr "Croch"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid "User 1 (USR1)"
-msgstr "Úsáideoir 1 (USR1)"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:137
-msgid "User 2 (USR2)"
-msgstr "Úsáideoir 2 (USR2)"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:137
-#, fuzzy
-msgid "Terminate Task"
-msgstr "Scoir %s"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:137
-msgid "Abort"
-msgstr "Tobscor"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:138
-msgid "Kill"
-msgstr "Marú"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:139
-#, fuzzy
-msgid "Segmentation fault"
-msgstr "Sárú deighilte"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:216
-msgid "PID"
-msgstr "PID"
-
-#: ../../xffm/fm/dialog/notebook/page/page.hh:58
-msgid "loading..."
-msgstr "ag lódáil..."
-
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
-#, fuzzy
-msgid "Embedded Terminal"
-msgstr "Tacaíocht do Theirminéal Leabaithe"
-
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
-msgid "All items in the iconview."
-msgstr "Gach mír san amharc deilbhín."
-
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
-msgid "Scripting"
-msgstr "Scriptiú"
-
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
-msgid "Clear Log"
-msgstr "Bánaigh Logchomhad"
-
-#. Status textview
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
-msgid "Terminal font"
-msgstr "Cló teirminéil"
-
-#: ../../xffm/fm/dialog/clipboard.hh:23 ../../xffm/common/dnd.hh:41
-#, fuzzy
-msgid "Copying files locally"
-msgstr "Comhaid á chóipeáil"
-
-#: ../../xffm/fm/dialog/clipboard.hh:30 ../../xffm/common/gio.hh:83
-#: ../../xffm/common/dnd.hh:35
-msgid "Moving files"
-msgstr "Comhaid á mbogadh"
-
-#: ../../xffm/fm/dialog/dialog.hh:122
-msgid "Removed"
-msgstr "Bainte"
-
-#: ../../xffm/fm/dialog/dialog.hh:143
-#, fuzzy
-msgid "Detected device(s):"
-msgstr "Gléasanna braite:"
-
-#: ../../xffm/fm/view/local/model.hh:122
-#, fuzzy, c-format
-msgid "Reading \"%s\""
-msgstr "%s á léamh"
-
-#: ../../xffm/fm/view/local/model.hh:575 ../../xffm/fm/view/base/monitor.hh:33
+#: ../xffm/common/preview.hh:636
 #, c-format
-msgid "Files: %s"
-msgstr "Comhaid: %s"
+msgid   "Cannot read from %s"
+msgstr  "Ní féidir léamh ó %s"
 
-#: ../../xffm/fm/view/local/model.hh:578
+#: ../xffm/common/gtk.hh:67 ../xffm/fm/dialog/notebook/vbuttonbox.hh:240
+#, fuzzy
+msgid   "Open terminal"
+msgstr  "Oscail Teirminéal"
+
+#: ../xffm/common/gtk.hh:69 ../xffm/common/util.hh:1443
+msgid   "Execute Shell Command"
+msgstr  "Rith Ordú Blaoisce"
+
+#: ../xffm/common/gtk.hh:71 ../xffm/fm/view/local/popup.hh:157
+msgid   "Paste"
+msgstr  "Greamaigh"
+
+#: ../xffm/common/gtk.hh:73 ../xffm/fm/view/local/popup.hh:151
+msgid   "Add bookmark"
+msgstr  "Cuir leabharmharc leis"
+
+#: ../xffm/common/gtk.hh:75 ../xffm/fm/view/local/popup.hh:152
+#: ../xffm/fm/view/root/popup.hh:137
+msgid   "Remove bookmark"
+msgstr  "Bain leabharmharc"
+
+#: ../xffm/common/gtk.hh:77 ../xffm/fm/view/pkg/model.hh:108
+#: ../xffm/fm/view/pkg/model.hh:299 ../xffm/fm/view/pkg/model.hh:306
+#: ../xffm/fm/view/pkg/popup.hh:151
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:236
+msgid   "Search"
+msgstr  "Cuardaigh"
+
+#: ../xffm/common/gtk.hh:81 ../xffm/fm/dialog/notebook/menupopover.hh:237
+msgid   "Exit"
+msgstr  "Ealu"
+
+#: ../xffm/common/gtk.hh:83 ../xffm/fm/view/local/popup.hh:85
+#: ../xffm/fm/view/local/popup.hh:142 ../xffm/fm/view/local/popup.hh:1287
+#: ../xffm/fm/view/local/popup.hh:1294 ../xffm/fm/view/local/popup.hh:1305
+#: ../xffm/fm/view/local/popup.hh:1312
+msgid   "Open with"
+msgstr  "Oscail le"
+
+#: ../xffm/common/gtk.hh:85 ../xffm/fm/view/local/popup.hh:100
+#: ../xffm/fm/view/local/popup.hh:156
+msgid   "Cut"
+msgstr  "Gearr"
+
+#: ../xffm/common/gtk.hh:87 ../xffm/fm/view/local/popup.hh:99
+#: ../xffm/fm/view/local/popup.hh:155
+msgid   "Copy"
+msgstr  "Cóip"
+
+#: ../xffm/common/gtk.hh:89 ../xffm/fm/view/local/rm.hh:176
+#: ../xffm/fm/view/local/popup.hh:103 ../xffm/fm/view/local/popup.hh:160
+msgid   "Delete"
+msgstr  "Dealaigh"
+
+#: ../xffm/common/gtk.hh:91 ../xffm/fm/view/local/rm.hh:165
+#, fuzzy
+msgid   "Shred"
+msgstr  "Léirscriostóir"
+
+#: ../xffm/common/gtk.hh:94 ../xffm/fm/view/local/popup.hh:95
+#: ../xffm/fm/view/local/popup.hh:145 ../xffm/fm/view/root/popup.hh:136
+#: ../xffm/fm/view/fstab/popup.hh:20
+msgid   "Open in New Tab"
+msgstr  "Oscail san Cluaisín Nua"
+
+#: ../xffm/common/gtk.hh:139 ../xffm/fm/dialog/notebook/notebook.hh:75
+msgid   "New Tab"
+msgstr  "Cluaisín Nua"
+
+#: ../xffm/common/gtk.hh:352 ../xffm/common/gtk.hh:360
+msgid   "Help"
+msgstr  "Cabhair"
+
+#: ../xffm/common/settings.hh:30
+#, fuzzy
+msgid   "New File:"
+msgstr  "Comhad Nua"
+
+#: ../xffm/common/gio.hh:81
+msgid   "Copying files"
+msgstr  "Comhaid á chóipeáil"
+
+#: ../xffm/common/gio.hh:83 ../xffm/common/dnd.hh:35
+#: ../xffm/fm/dialog/clipboard.hh:30
+msgid   "Moving files"
+msgstr  "Comhaid á mbogadh"
+
+#: ../xffm/common/gio.hh:85
+msgid   "linking"
+msgstr  "á nascadh"
+
+#: ../xffm/common/gio.hh:87
+#, fuzzy
+msgid   "rename"
+msgstr  "Athainmigh"
+
+#: ../xffm/common/gio.hh:426
+#, c-format
+msgid   "(%d of %d)"
+msgstr  "(%d as %d)"
+
+#: ../xffm/common/util.hh:1404
+#, c-format
+msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
+        "attribute on that file."
+msgstr  ""
+
+#: ../xffm/common/util.hh:1406 ../xffm/common/util.hh:1441
+#, c-format
+msgid   "Open with %s"
+msgstr  "Oscail le %s"
+
+#: ../xffm/common/util.hh:1406
+msgid   "Text Editor"
+msgstr  "Eagarthóir Téacs"
+
+#: ../xffm/common/util.hh:1447
+msgid   "Console: quickly run single commands -- write a command here and "
+        "press enter."
+msgstr  ""
+
+#: ../xffm/common/util.hh:1452 ../xffm/fm/view/local/popup.hh:1109
+#: ../xffm/fm/view/local/popup.hh:1291 ../xffm/fm/view/local/popup.hh:1309
+msgid   "Run in Terminal"
+msgstr  "Rith i dTeirminéal"
+
+#: ../xffm/common/dnd.hh:41 ../xffm/fm/dialog/clipboard.hh:23
+#, fuzzy
+msgid   "Copying files locally"
+msgstr  "Comhaid á chóipeáil"
+
+#: ../xffm/common/dnd.hh:47
+msgid   "Create Link"
+msgstr  "Cruthaigh Nasc"
+
+#: ../xffm/common/run.hh:338
+msgid   "error"
+msgstr  "error"
+
+#: ../xffm/common/run.hh:342
+msgid   "warning"
+msgstr  "rabhadh"
+
+#: ../xffm/common/run.hh:464 ../xffm/response/passwdresponse.hh:19
+#: ../xffm/response/passwdresponse.hh:25
+msgid   "Enter password"
+msgstr  "Iontráil focal faire"
+
+#: ../xffm/fm/view/pkg/model.hh:29 ../xffm/fm/view/pkg/popup.hh:35
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:187
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:191
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:195
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:198
+#, fuzzy
+msgid   "Software Updater"
+msgstr  "Nuashonrú Bogearraí"
+
+#: ../xffm/fm/view/pkg/model.hh:41 ../xffm/fm/view/pkg/model.hh:52
+#, fuzzy
+msgid   "Add or remove software installed on the system"
+msgstr  "Níl Samba suiteáilte ar do chóras."
+
+#: ../xffm/fm/view/pkg/model.hh:111
+msgid   "String"
+msgstr  "Teaghrán"
+
+#: ../xffm/fm/view/pkg/model.hh:116
+#, fuzzy
+msgid   "Waiting for search results"
+msgstr  "Ag fanacht le toradh an bhirt..."
+
+#: ../xffm/fm/view/pkg/model.hh:174
+#, fuzzy
+msgid   "No results"
+msgstr  "Gan torthaí."
+
+#: ../xffm/fm/view/pkg/model.hh:373
+#, fuzzy
+msgid   "Currently busy\n"
+msgstr  "Scuab Reatha"
+
+#: ../xffm/fm/view/pkg/popup.hh:44
+msgid   "Update Database"
+msgstr  "Nuashonraigh an Bunachar Sonraí"
+
+#: ../xffm/fm/view/pkg/popup.hh:45
+msgid   "Fetch"
+msgstr  "Gabh"
+
+#: ../xffm/fm/view/pkg/popup.hh:46
+#, fuzzy
+msgid   "Install --dry-run"
+msgstr  "Suiteáil Cló"
+
+#: ../xffm/fm/view/pkg/popup.hh:47
+msgid   "Install"
+msgstr  "Suiteáil"
+
+#: ../xffm/fm/view/pkg/popup.hh:48
+#, fuzzy
+msgid   "Uninstall --dry-run"
+msgstr  "Díshuiteáil Stíl"
+
+#: ../xffm/fm/view/pkg/popup.hh:49
+msgid   "Uninstall"
+msgstr  "Díshuiteáil"
+
+#: ../xffm/fm/view/pkg/popup.hh:50
+msgid   "Information"
+msgstr  "Eolas"
+
+#: ../xffm/fm/view/pkg/popup.hh:140
+msgid   "Version"
+msgstr  "Leagan"
+
+#: ../xffm/fm/view/pkg/popup.hh:149
+msgid   "Go up"
+msgstr  "Dul suas"
+
+#: ../xffm/fm/view/pkg/popup.hh:152
+msgid   "Search packages"
+msgstr  "Cuardaigh pacáistí"
+
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
+#, c-format
+msgid   "Loading %s...%s"
+msgstr  "%s á luchtú...%s"
+
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
+msgid   "Please Wait..."
+msgstr  "Fan go fóill, le do thoil..."
+
+#: ../xffm/fm/view/local/model.hh:124
 #, fuzzy, c-format
-msgid "Loaded %d of %d articles"
-msgstr "%d as aon chomhad "
+msgid   "Reading \"%s\""
+msgstr  "%s á léamh"
 
-#: ../../xffm/fm/view/local/popup.hh:85 ../../xffm/fm/view/local/popup.hh:142
-#: ../../xffm/fm/view/local/popup.hh:1287
-#: ../../xffm/fm/view/local/popup.hh:1294
-#: ../../xffm/fm/view/local/popup.hh:1305
-#: ../../xffm/fm/view/local/popup.hh:1312 ../../xffm/common/gtk.hh:83
-msgid "Open with"
-msgstr "Oscail le"
+#: ../xffm/fm/view/local/model.hh:577 ../xffm/fm/view/base/monitor.hh:34
+#, c-format
+msgid   "Files: %s"
+msgstr  "Comhaid: %s"
 
-#: ../../xffm/fm/view/local/popup.hh:94
-msgid "New"
-msgstr "Nua"
-
-#: ../../xffm/fm/view/local/popup.hh:95 ../../xffm/fm/view/local/popup.hh:145
-#: ../../xffm/fm/view/root/popup.hh:136 ../../xffm/fm/view/fstab/popup.hh:20
-#: ../../xffm/common/gtk.hh:94
-msgid "Open in New Tab"
-msgstr "Oscail san Cluaisín Nua"
-
-#. deprecated {N_("Open in New Tab"), NULL, NULL, NULL},
-#. deprecated {N_("Open in New Window"), NULL, NULL, NULL},
-#. common buttons /(also an iconsize +/- button)
-#: ../../xffm/fm/view/local/popup.hh:99 ../../xffm/fm/view/local/popup.hh:155
-#: ../../xffm/common/gtk.hh:87
-msgid "Copy"
-msgstr "Cóip"
-
-#: ../../xffm/fm/view/local/popup.hh:100 ../../xffm/fm/view/local/popup.hh:156
-#: ../../xffm/common/gtk.hh:85
-msgid "Cut"
-msgstr "Gearr"
-
-#: ../../xffm/fm/view/local/popup.hh:101 ../../xffm/fm/view/local/popup.hh:159
-#: ../../xffm/fm/view/local/popup.hh:232 ../../xffm/fm/view/local/popup.hh:234
-#, fuzzy
-msgid "Paste into"
-msgstr "Pastebin"
-
-#: ../../xffm/fm/view/local/popup.hh:102 ../../xffm/fm/view/local/popup.hh:158
-#, fuzzy
-msgid "There is nothing on the clipboard to paste."
-msgstr "Níl aon sonraí sa ghearrthaisce."
-
-#. **************
-#: ../../xffm/fm/view/local/popup.hh:103 ../../xffm/fm/view/local/popup.hh:160
-#: ../../xffm/fm/view/local/rm.hh:176 ../../xffm/common/gtk.hh:89
-msgid "Delete"
-msgstr "Dealaigh"
-
-#. {N_("About"), NULL, (void *) menu},
-#.
-#: ../../xffm/fm/view/local/popup.hh:106
-msgid "Select All"
-msgstr "Roghnaigh gach rud"
-
-#: ../../xffm/fm/view/local/popup.hh:107 ../../xffm/fm/view/local/popup.hh:755
-msgid "Match regular expression"
-msgstr "Comhoiriúnaigh do shlonn ionadaíochta"
-
-#: ../../xffm/fm/view/local/popup.hh:143 ../../xffm/fm/view/local/popup.hh:1105
-#, fuzzy
-msgid "Run Executable..."
-msgstr "Comhad Inrite"
-
-#. File chooser
-#: ../../xffm/fm/view/local/popup.hh:144 ../../xffm/fm/view/local/popup.hh:875
-msgid "Extract files from the archive"
-msgstr "Bain comhaid amach as an gcartlann"
-
-#. File chooser
-#: ../../xffm/fm/view/local/popup.hh:146 ../../xffm/fm/view/local/popup.hh:966
-msgid "Create a compressed archive with the selected objects"
-msgstr "Cruthaigh cartlann chomhbhrúite leis na réada roghnaithe"
-
-#: ../../xffm/fm/view/local/popup.hh:148 ../../xffm/fm/view/fstab/popup.hh:37
-#, fuzzy
-msgid "Mount the volume associated with this folder"
-msgstr "Cuir an tiomántán a bhaineann leis an bhfillteán oscailte faoi ghlas"
-
-#: ../../xffm/fm/view/local/popup.hh:149 ../../xffm/fm/view/fstab/popup.hh:38
-#, fuzzy
-msgid "Unmount the volume associated with this folder"
-msgstr "Cuir an tiomántán a bhaineann leis an bhfillteán oscailte faoi ghlas"
-
-#: ../../xffm/fm/view/local/popup.hh:151 ../../xffm/common/gtk.hh:73
-msgid "Add bookmark"
-msgstr "Cuir leabharmharc leis"
-
-#: ../../xffm/fm/view/local/popup.hh:152 ../../xffm/fm/view/root/popup.hh:137
-#: ../../xffm/common/gtk.hh:75
-msgid "Remove bookmark"
-msgstr "Bain leabharmharc"
-
-#: ../../xffm/fm/view/local/popup.hh:157 ../../xffm/common/gtk.hh:71
-msgid "Paste"
-msgstr "Greamaigh"
-
-#: ../../xffm/fm/view/local/popup.hh:161 ../../xffm/fm/view/local/popup.hh:1231
-msgid "Rename"
-msgstr "Athainmigh"
-
-#: ../../xffm/fm/view/local/popup.hh:162 ../../xffm/fm/view/local/popup.hh:1217
-msgid "Duplicate"
-msgstr "Dealaigh"
-
-#: ../../xffm/fm/view/local/popup.hh:163 ../../xffm/fm/view/local/popup.hh:1203
-msgid "Link"
-msgstr "Nasc"
-
-#: ../../xffm/fm/view/local/popup.hh:164
-msgid "Properties"
-msgstr "Airíonna"
-
-#: ../../xffm/fm/view/local/popup.hh:562
-msgid "Files:"
-msgstr "Comhaid:"
-
-#: ../../xffm/fm/view/local/popup.hh:565 ../../xffm/fm/view/local/rm.hh:61
-msgid "Multiple selections"
-msgstr "Il-roghnúcháin"
-
-#: ../../xffm/fm/view/local/popup.hh:753
-#, fuzzy
-msgid "Select items"
-msgstr "Míreanna roghnaithe:"
-
-#: ../../xffm/fm/view/local/popup.hh:771
-msgid "Regular Expression syntax is incorrect"
-msgstr "Comhréir mhícheart ar Shlonn Ionadaíochta"
-
-#: ../../xffm/fm/view/local/popup.hh:801
-msgid "No selection"
-msgstr "Gan roghnúchán"
-
-#: ../../xffm/fm/view/local/popup.hh:801
-#, fuzzy
-msgid "No matches."
-msgstr "Níl a leithéid ann"
-
-#: ../../xffm/fm/view/local/popup.hh:1058
-msgid "Create new..."
-msgstr "Cruthaigh próifíl nua..."
-
-#: ../../xffm/fm/view/local/popup.hh:1065
-#: ../../xffm/fm/view/local/popup.hh:1146
-msgid "New Name:"
-msgstr "Ainm Nua:"
-
-#: ../../xffm/fm/view/local/popup.hh:1074
-msgid "No name"
-msgstr "Gan ainm"
-
-#: ../../xffm/fm/view/local/popup.hh:1087
+#: ../xffm/fm/view/local/model.hh:580
 #, fuzzy, c-format
-msgid "Another file with the same name already exists in “%s”."
-msgstr "Tá comhad ann leis an ainm céanna (%s) i bhfillteán %s."
+msgid   "Loaded %d of %d articles"
+msgstr  "%d as aon chomhad "
 
-#: ../../xffm/fm/view/local/popup.hh:1109
-#: ../../xffm/fm/view/local/popup.hh:1291
-#: ../../xffm/fm/view/local/popup.hh:1309 ../../xffm/common/util.hh:1452
-msgid "Run in Terminal"
-msgstr "Rith i dTeirminéal"
-
-#: ../../xffm/fm/view/local/popup.hh:1112
-#, fuzzy
-msgid "Arguments for the Command"
-msgstr "Argóintí don ordú"
-
-#: ../../xffm/fm/view/local/popup.hh:1258
-#, fuzzy
-msgid "You have selected multiple files or folders"
-msgstr "Ní mór duit comhad nó fillteán a roghnú."
-
-#: ../../xffm/fm/view/local/popup.hh:1332 ../../xffm/fm/view/local/view.hh:156
-#, fuzzy
-msgid "Invalid entry"
-msgstr "Iontráil Neamhbhailí"
-
-#: ../../xffm/fm/view/local/properties.hh:245
-#, fuzzy
-msgid "Properties and Attributes"
-msgstr "Aitreabúid Díorthaithe"
-
-#: ../../xffm/fm/view/local/properties.hh:274
-#, fuzzy
-msgid "File Mode:"
-msgstr "Mód Amhairc:"
-
-#: ../../xffm/fm/view/local/properties.hh:300
-msgid "File:"
-msgstr "Comhad:"
-
-#. Add file info stuff
-#. set info stuff data according to combo box
-#. add signal handler to changed signal for combo box
-#. Add process buttons
-#.
-#: ../../xffm/fm/view/local/properties.hh:312
-msgid "Apply changes"
-msgstr "Cuir na hathruithe i bhfeidhm"
-
-#: ../../xffm/fm/view/local/properties.hh:477
-msgid "Successfully moved to trash."
-msgstr "D'éirigh le cur sa Bhruscar."
-
-#: ../../xffm/fm/view/local/properties.hh:478
-msgid "Source:"
-msgstr "Foinse:"
-
-#: ../../xffm/fm/view/local/rm.hh:59
+#: ../xffm/fm/view/local/rm.hh:59
 #, c-format
-msgid "Delete %s"
-msgstr "Scrios %s"
+msgid   "Delete %s"
+msgstr  "Scrios %s"
 
-#: ../../xffm/fm/view/local/rm.hh:61
-msgid "Warning: "
-msgstr "Rabhadh: "
+#: ../xffm/fm/view/local/rm.hh:61
+msgid   "Warning: "
+msgstr  "Rabhadh: "
 
-#. gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
-#. title
-#: ../../xffm/fm/view/local/rm.hh:92
-msgid "Remove"
-msgstr "Bain"
+#: ../xffm/fm/view/local/rm.hh:61 ../xffm/fm/view/local/popup.hh:565
+msgid   "Multiple selections"
+msgstr  "Il-roghnúcháin"
 
-#: ../../xffm/fm/view/local/rm.hh:142
+#: ../xffm/fm/view/local/rm.hh:92
+msgid   "Remove"
+msgstr  "Bain"
+
+#: ../xffm/fm/view/local/rm.hh:142
 #, fuzzy
-msgid "Apply to all"
-msgstr "Cuir i bhfeidhm ar gach rud"
+msgid   "Apply to all"
+msgstr  "Cuir i bhfeidhm ar gach rud"
 
-#. **************
-#. This is now available to BSD with rm -P option
-#: ../../xffm/fm/view/local/rm.hh:165 ../../xffm/common/gtk.hh:91
+#: ../xffm/fm/view/local/rm.hh:183
+msgid   "Trash"
+msgstr  "Bruscar"
+
+#: ../xffm/fm/view/local/popup.hh:94
+msgid   "New"
+msgstr  "Nua"
+
+#: ../xffm/fm/view/local/popup.hh:101 ../xffm/fm/view/local/popup.hh:159
+#: ../xffm/fm/view/local/popup.hh:232 ../xffm/fm/view/local/popup.hh:234
 #, fuzzy
-msgid "Shred"
-msgstr "Léirscriostóir"
+msgid   "Paste into"
+msgstr  "Pastebin"
 
-#: ../../xffm/fm/view/local/rm.hh:183
-msgid "Trash"
-msgstr "Bruscar"
+#: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:158
+#, fuzzy
+msgid   "There is nothing on the clipboard to paste."
+msgstr  "Níl aon sonraí sa ghearrthaisce."
 
-#: ../../xffm/fm/view/local/view.hh:177
+#: ../xffm/fm/view/local/popup.hh:106
+msgid   "Select All"
+msgstr  "Roghnaigh gach rud"
+
+#: ../xffm/fm/view/local/popup.hh:107 ../xffm/fm/view/local/popup.hh:755
+msgid   "Match regular expression"
+msgstr  "Comhoiriúnaigh do shlonn ionadaíochta"
+
+#: ../xffm/fm/view/local/popup.hh:143 ../xffm/fm/view/local/popup.hh:1105
+#, fuzzy
+msgid   "Run Executable..."
+msgstr  "Comhad Inrite"
+
+#: ../xffm/fm/view/local/popup.hh:144 ../xffm/fm/view/local/popup.hh:875
+msgid   "Extract files from the archive"
+msgstr  "Bain comhaid amach as an gcartlann"
+
+#: ../xffm/fm/view/local/popup.hh:146 ../xffm/fm/view/local/popup.hh:966
+msgid   "Create a compressed archive with the selected objects"
+msgstr  "Cruthaigh cartlann chomhbhrúite leis na réada roghnaithe"
+
+#: ../xffm/fm/view/local/popup.hh:148 ../xffm/fm/view/fstab/popup.hh:37
+#, fuzzy
+msgid   "Mount the volume associated with this folder"
+msgstr  "Cuir an tiomántán a bhaineann leis an bhfillteán oscailte faoi ghlas"
+
+#: ../xffm/fm/view/local/popup.hh:149 ../xffm/fm/view/fstab/popup.hh:38
+#, fuzzy
+msgid   "Unmount the volume associated with this folder"
+msgstr  "Cuir an tiomántán a bhaineann leis an bhfillteán oscailte faoi ghlas"
+
+#: ../xffm/fm/view/local/popup.hh:161 ../xffm/fm/view/local/popup.hh:1231
+msgid   "Rename"
+msgstr  "Athainmigh"
+
+#: ../xffm/fm/view/local/popup.hh:162 ../xffm/fm/view/local/popup.hh:1217
+msgid   "Duplicate"
+msgstr  "Dealaigh"
+
+#: ../xffm/fm/view/local/popup.hh:163 ../xffm/fm/view/local/popup.hh:1203
+msgid   "Link"
+msgstr  "Nasc"
+
+#: ../xffm/fm/view/local/popup.hh:164
+msgid   "Properties"
+msgstr  "Airíonna"
+
+#: ../xffm/fm/view/local/popup.hh:562
+msgid   "Files:"
+msgstr  "Comhaid:"
+
+#: ../xffm/fm/view/local/popup.hh:753
+#, fuzzy
+msgid   "Select items"
+msgstr  "Míreanna roghnaithe:"
+
+#: ../xffm/fm/view/local/popup.hh:771
+msgid   "Regular Expression syntax is incorrect"
+msgstr  "Comhréir mhícheart ar Shlonn Ionadaíochta"
+
+#: ../xffm/fm/view/local/popup.hh:801
+msgid   "No selection"
+msgstr  "Gan roghnúchán"
+
+#: ../xffm/fm/view/local/popup.hh:801
+#, fuzzy
+msgid   "No matches."
+msgstr  "Níl a leithéid ann"
+
+#: ../xffm/fm/view/local/popup.hh:887 ../xffm/fm/view/local/popup.hh:981
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:382
+msgid   "Specify Output Directory..."
+msgstr  "Socraigh Comhadlann Aschurtha..."
+
+#: ../xffm/fm/view/local/popup.hh:1058
+msgid   "Create new..."
+msgstr  "Cruthaigh próifíl nua..."
+
+#: ../xffm/fm/view/local/popup.hh:1065 ../xffm/fm/view/local/popup.hh:1146
+msgid   "New Name:"
+msgstr  "Ainm Nua:"
+
+#: ../xffm/fm/view/local/popup.hh:1074
+msgid   "No name"
+msgstr  "Gan ainm"
+
+#: ../xffm/fm/view/local/popup.hh:1087
 #, fuzzy, c-format
-msgid "The volume '%s' is not mounted."
-msgstr "Ní bhfuarthas stíl '%s'"
+msgid   "Another file with the same name already exists in “%s”."
+msgstr  "Tá comhad ann leis an ainm céanna (%s) i bhfillteán %s."
 
-#: ../../xffm/fm/view/root/model.hh:82
-msgid "Root Directory"
-msgstr "Fréamhchomhadlann"
-
-#: ../../xffm/fm/view/root/model.hh:98
-msgid "This is the root of the filesystem"
-msgstr "Seo é fréamh an comhadchórais"
-
-#: ../../xffm/fm/view/root/model.hh:176 ../../xffm/fm/view/root/model.hh:191
+#: ../xffm/fm/view/local/popup.hh:1112
 #, fuzzy
-msgid "Mount local disks and devices"
-msgstr "Feistigh an córas comhad ar ghléas"
+msgid   "Arguments for the Command"
+msgstr  "Argóintí don ordú"
 
-#: ../../xffm/fm/view/root/model.hh:177 ../../xffm/fm/view/fstab/popup.hh:23
-#: ../../xffm/fm/view/fstab/view.hh:1084
+#: ../xffm/fm/view/local/popup.hh:1258
 #, fuzzy
-msgid "eCryptfs Volume"
-msgstr "Socraigh an Airde"
+msgid   "You have selected multiple files or folders"
+msgstr  "Ní mór duit comhad nó fillteán a roghnú."
 
-#: ../../xffm/fm/view/root/model.hh:178 ../../xffm/fm/view/fstab/popup.hh:22
+#: ../xffm/fm/view/local/popup.hh:1332 ../xffm/fm/view/local/view.hh:156
 #, fuzzy
-msgid "SSHFS Remote Synchronization Folder"
-msgstr "Mód Sioncrónaithe"
+msgid   "Invalid entry"
+msgstr  "Iontráil Neamhbhailí"
 
-#: ../../xffm/fm/view/root/model.hh:179 ../../xffm/fm/view/fstab/popup.hh:21
-#: ../../xffm/fm/view/fstab/view.hh:1032
-msgid "NFS Network Volume"
-msgstr "Imleabhar Lín NFS"
-
-#: ../../xffm/fm/view/root/model.hh:180 ../../xffm/fm/view/fstab/popup.hh:24
-#: ../../xffm/fm/view/fstab/view.hh:1110
-#, fuzzy
-msgid "CIFS Volume"
-msgstr "Imleabhar XIAFS"
-
-#: ../../xffm/fm/view/root/model.hh:229
-#, fuzzy
-msgid "Go to bookmarked location"
-msgstr "Cruthaigh leabharmharc don suíomh"
-
-#: ../../xffm/fm/view/root/popup.hh:138
-msgid "Empty trash"
-msgstr "Folmhaigh bruscar"
-
-#. File chooser
-#: ../../xffm/fm/view/fstab/popup.hh:129
-msgid "Mount Device"
-msgstr "Feistigh Gléas"
-
-#: ../../xffm/fm/view/fstab/popup.hh:141 ../../xffm/fm/view/fstab/view.hh:923
-msgid "Mount point:"
-msgstr "Pointe feistithe:"
-
-#: ../../xffm/fm/view/fstab/view.hh:590
-#, fuzzy
-msgid "Mount point: "
-msgstr "Pointe feistithe:"
-
-#: ../../xffm/fm/view/fstab/view.hh:591
-#, fuzzy
-msgid "Mount device: "
-msgstr "Feistigh Gléas"
-
-#. Since /dev is not concrete, the following test returns false...
-#.
-#. if (!g_file_test(name, G_FILE_TEST_IS_DIR)) return;
-#: ../../xffm/fm/view/fstab/view.hh:659 ../../xffm/fm/view/fstab/view.hh:675
-msgid "Disks"
-msgstr "Dioscaí"
-
-#: ../../xffm/fm/view/fstab/view.hh:921
-msgid "No Label"
-msgstr "Gan Lipéad"
-
-#: ../../xffm/fm/view/fstab/view.hh:922
-#, fuzzy
-msgid "There is no file system available (unformatted)"
-msgstr "Níl cabhair ar bith le fáil ar '%s'."
-
-#: ../../xffm/fm/view/fstab/view.hh:923
-#, fuzzy
-msgid "Not mounted"
-msgstr "Gan Feistiú"
-
-#: ../../xffm/fm/view/fstab/view.hh:1058
-msgid "SFTP (via SSH)"
-msgstr "SFTP (trí SSH)"
-
-#: ../../xffm/fm/view/fstab/view.hh:1413
+#: ../xffm/fm/view/local/view.hh:177
 #, fuzzy, c-format
-msgid "Unmounting %s"
-msgstr "Dífheistiú"
+msgid   "The volume '%s' is not mounted."
+msgstr  "Ní bhfuarthas stíl '%s'"
 
-#: ../../xffm/fm/view/fstab/view.hh:1413
+#: ../xffm/fm/view/local/properties.hh:245
+#, fuzzy
+msgid   "Properties and Attributes"
+msgstr  "Aitreabúid Díorthaithe"
+
+#: ../xffm/fm/view/local/properties.hh:274
+#, fuzzy
+msgid   "File Mode:"
+msgstr  "Mód Amhairc:"
+
+#: ../xffm/fm/view/local/properties.hh:300
+msgid   "File:"
+msgstr  "Comhad:"
+
+#: ../xffm/fm/view/local/properties.hh:312
+msgid   "Apply changes"
+msgstr  "Cuir na hathruithe i bhfeidhm"
+
+#: ../xffm/fm/view/local/properties.hh:477
+msgid   "Successfully moved to trash."
+msgstr  "D'éirigh le cur sa Bhruscar."
+
+#: ../xffm/fm/view/local/properties.hh:478
+msgid   "Source:"
+msgstr  "Foinse:"
+
+#: ../xffm/fm/view/root/model.hh:82
+msgid   "Root Directory"
+msgstr  "Fréamhchomhadlann"
+
+#: ../xffm/fm/view/root/model.hh:98
+msgid   "This is the root of the filesystem"
+msgstr  "Seo é fréamh an comhadchórais"
+
+#: ../xffm/fm/view/root/model.hh:110
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:256
+msgid   "Home Directory"
+msgstr  "Comhadlann bhaile"
+
+#: ../xffm/fm/view/root/model.hh:137
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:266
+#, fuzzy
+msgid   "Trash bin"
+msgstr  "Cuir Comhad Sa Bhruscar"
+
+#: ../xffm/fm/view/root/model.hh:168 ../xffm/fm/view/fstab/popup.hh:29
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:261
+#, fuzzy
+msgid   "Disk Image Mounter"
+msgstr  "Tiontaire Íomhá DNG"
+
+#: ../xffm/fm/view/root/model.hh:176 ../xffm/fm/view/root/model.hh:191
+#, fuzzy
+msgid   "Mount local disks and devices"
+msgstr  "Feistigh an córas comhad ar ghléas"
+
+#: ../xffm/fm/view/root/model.hh:177 ../xffm/fm/view/fstab/popup.hh:23
+#: ../xffm/fm/view/fstab/view.hh:1084
+#, fuzzy
+msgid   "eCryptfs Volume"
+msgstr  "Socraigh an Airde"
+
+#: ../xffm/fm/view/root/model.hh:178 ../xffm/fm/view/fstab/popup.hh:22
+#, fuzzy
+msgid   "SSHFS Remote Synchronization Folder"
+msgstr  "Mód Sioncrónaithe"
+
+#: ../xffm/fm/view/root/model.hh:179 ../xffm/fm/view/fstab/popup.hh:21
+#: ../xffm/fm/view/fstab/view.hh:1032
+msgid   "NFS Network Volume"
+msgstr  "Imleabhar Lín NFS"
+
+#: ../xffm/fm/view/root/model.hh:180 ../xffm/fm/view/fstab/popup.hh:24
+#: ../xffm/fm/view/fstab/view.hh:1110
+#, fuzzy
+msgid   "CIFS Volume"
+msgstr  "Imleabhar XIAFS"
+
+#: ../xffm/fm/view/root/model.hh:229
+#, fuzzy
+msgid   "Go to bookmarked location"
+msgstr  "Cruthaigh leabharmharc don suíomh"
+
+#: ../xffm/fm/view/root/popup.hh:138
+msgid   "Empty trash"
+msgstr  "Folmhaigh bruscar"
+
+#: ../xffm/fm/view/fstab/popup.hh:129
+msgid   "Mount Device"
+msgstr  "Feistigh Gléas"
+
+#: ../xffm/fm/view/fstab/popup.hh:141 ../xffm/fm/view/fstab/view.hh:923
+msgid   "Mount point:"
+msgstr  "Pointe feistithe:"
+
+#: ../xffm/fm/view/fstab/view.hh:590
+#, fuzzy
+msgid   "Mount point: "
+msgstr  "Pointe feistithe:"
+
+#: ../xffm/fm/view/fstab/view.hh:591
+#, fuzzy
+msgid   "Mount device: "
+msgstr  "Feistigh Gléas"
+
+#: ../xffm/fm/view/fstab/view.hh:659 ../xffm/fm/view/fstab/view.hh:675
+msgid   "Disks"
+msgstr  "Dioscaí"
+
+#: ../xffm/fm/view/fstab/view.hh:921
+msgid   "No Label"
+msgstr  "Gan Lipéad"
+
+#: ../xffm/fm/view/fstab/view.hh:922
+#, fuzzy
+msgid   "There is no file system available (unformatted)"
+msgstr  "Níl cabhair ar bith le fáil ar '%s'."
+
+#: ../xffm/fm/view/fstab/view.hh:923
+#, fuzzy
+msgid   "Not mounted"
+msgstr  "Gan Feistiú"
+
+#: ../xffm/fm/view/fstab/view.hh:1058
+msgid   "SFTP (via SSH)"
+msgstr  "SFTP (trí SSH)"
+
+#: ../xffm/fm/view/fstab/view.hh:1413
+#, fuzzy, c-format
+msgid   "Unmounting %s"
+msgstr  "Dífheistiú"
+
+#: ../xffm/fm/view/fstab/view.hh:1413
 #, c-format
-msgid "Mounting %s"
-msgstr "%s á fheistiú"
+msgid   "Mounting %s"
+msgstr  "%s á fheistiú"
 
-#: ../../xffm/fm/view/pkg/model.hh:41 ../../xffm/fm/view/pkg/model.hh:52
+#: ../xffm/fm/view/base/signals.hh:838
 #, fuzzy
-msgid "Add or remove software installed on the system"
-msgstr "Níl Samba suiteáilte ar do chóras."
+msgid   "Trash is empty"
+msgstr  "Tá an PSK folamh"
 
-#: ../../xffm/fm/view/pkg/model.hh:111
-msgid "String"
-msgstr "Teaghrán"
-
-#: ../../xffm/fm/view/pkg/model.hh:116
+#: ../xffm/fm/view/base/signals.hh:840
 #, fuzzy
-msgid "Waiting for search results"
-msgstr "Ag fanacht le toradh an bhirt..."
+msgid   "Directory does not exist."
+msgstr  "Níl an chomhadlann seo ann."
 
-#: ../../xffm/fm/view/pkg/model.hh:174
+#: ../xffm/fm/view/treeview.hh:17
+msgid   "Name"
+msgstr  "Ainm"
+
+#: ../xffm/fm/view/treeview.hh:19
+msgid   "Size"
+msgstr  "Méid"
+
+#: ../xffm/fm/view/treeview.hh:20
+msgid   "Date"
+msgstr  "Dáta"
+
+#: ../xffm/fm/view/treeview.hh:22
+msgid   "Mimetype"
+msgstr  "Cineál MIME"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
 #, fuzzy
-msgid "No results"
-msgstr "Gan torthaí."
+msgid   "Embedded Terminal"
+msgstr  "Tacaíocht do Theirminéal Leabaithe"
 
-#: ../../xffm/fm/view/pkg/model.hh:373
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
+msgid   "All items in the iconview."
+msgstr  "Gach mír san amharc deilbhín."
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
+msgid   "Scripting"
+msgstr  "Scriptiú"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
+msgid   "Clear Log"
+msgstr  "Bánaigh Logchomhad"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
+msgid   "Terminal font"
+msgstr  "Cló teirminéil"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid   "Renice Process"
+msgstr  "Athraigh Tosaíocht an Phróisis"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid   "Suspend"
+msgstr  "Cuir ar fionraí"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid   "Continue"
+msgstr  "Lean ar Aghaidh"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid   "Interrupt"
+msgstr  "Idirbhris"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid   "Hangup"
+msgstr  "Croch"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid   "User 1 (USR1)"
+msgstr  "Úsáideoir 1 (USR1)"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+msgid   "User 2 (USR2)"
+msgstr  "Úsáideoir 2 (USR2)"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
 #, fuzzy
-msgid "Currently busy\n"
-msgstr "Scuab Reatha"
+msgid   "Terminate Task"
+msgstr  "Scoir %s"
 
-#: ../../xffm/fm/view/pkg/popup.hh:44
-msgid "Update Database"
-msgstr "Nuashonraigh an Bunachar Sonraí"
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+msgid   "Abort"
+msgstr  "Tobscor"
 
-#: ../../xffm/fm/view/pkg/popup.hh:45
-msgid "Fetch"
-msgstr "Gabh"
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:138
+msgid   "Kill"
+msgstr  "Marú"
 
-#: ../../xffm/fm/view/pkg/popup.hh:46
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
 #, fuzzy
-msgid "Install --dry-run"
-msgstr "Suiteáil Cló"
+msgid   "Segmentation fault"
+msgstr  "Sárú deighilte"
 
-#: ../../xffm/fm/view/pkg/popup.hh:47
-msgid "Install"
-msgstr "Suiteáil"
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:216
+msgid   "PID"
+msgstr  "PID"
 
-#: ../../xffm/fm/view/pkg/popup.hh:48
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:375
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:377
+msgid   "Go to"
+msgstr  "Téigh go"
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:409
+msgid   "Not a directory"
+msgstr  "Níl aon filltéan ann"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:59
+msgid   "loading..."
+msgstr  "ag lódáil..."
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:151
+#: ../xffm/fm/dialog/notebook/page/page.hh:167
+msgid   "Confirm Replace"
+msgstr  "Deimhniú Ionadaithe"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:153
+msgid   "Destination File"
+msgstr  "Comhad Sprice"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:166
+#, fuzzy, c-format
+msgid   "The output file %s already exists, do you want to overwrite it?"
+msgstr  "Tá comhad %s ann cheana. An bhfuil tú cinnte gur mian leat scríobh "
+        "air?"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:11
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:214
 #, fuzzy
-msgid "Uninstall --dry-run"
-msgstr "Díshuiteáil Stíl"
+msgid   "Remove Button Contents"
+msgstr  "Bain Cnaipe"
 
-#: ../../xffm/fm/view/pkg/popup.hh:49
-msgid "Uninstall"
-msgstr "Díshuiteáil"
-
-#: ../../xffm/fm/view/pkg/popup.hh:50
-msgid "Information"
-msgstr "Eolas"
-
-#: ../../xffm/fm/view/pkg/popup.hh:140
-msgid "Version"
-msgstr "Leagan"
-
-#: ../../xffm/fm/view/pkg/popup.hh:149
-msgid "Go up"
-msgstr "Dul suas"
-
-#: ../../xffm/fm/view/pkg/popup.hh:152
-msgid "Search packages"
-msgstr "Cuardaigh pacáistí"
-
-#: ../../xffm/fm/view/pkg/popup.hh:184 ../../xffm/fm/view/view.hh:93
-#, c-format
-msgid "Loading %s...%s"
-msgstr "%s á luchtú...%s"
-
-#: ../../xffm/fm/view/pkg/popup.hh:184 ../../xffm/fm/view/view.hh:93
-msgid "Please Wait..."
-msgstr "Fan go fóill, le do thoil..."
-
-#: ../../xffm/fm/view/treeview.hh:17
-msgid "Name"
-msgstr "Ainm"
-
-#: ../../xffm/fm/view/treeview.hh:19
-msgid "Size"
-msgstr "Méid"
-
-#: ../../xffm/fm/view/treeview.hh:20
-msgid "Date"
-msgstr "Dáta"
-
-#: ../../xffm/fm/view/treeview.hh:22
-msgid "Mimetype"
-msgstr "Cineál MIME"
-
-#: ../../xffm/fm/view/base/signals.hh:838
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:67
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:209
 #, fuzzy
-msgid "Trash is empty"
-msgstr "Tá an PSK folamh"
+msgid   "Add custom content"
+msgstr  "Cuir clár ábhair leis"
 
-#: ../../xffm/fm/view/base/signals.hh:840
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:68
 #, fuzzy
-msgid "Directory does not exist."
-msgstr "Níl an chomhadlann seo ann."
+msgid   "Select file to load"
+msgstr  "Roghnaigh comhad le seinm"
 
-#: ../../xffm/common/settings.hh:30
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:125
+#, fuzzy, c-format
+msgid   "Cannot load file %s. Reason: %s"
+msgstr  "Ní féidir comhad %s a fhairsingiú: %s"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:154
 #, fuzzy
-msgid "New File:"
-msgstr "Comhad Nua"
+msgid   "You need to restart the application"
+msgstr  "Ríomhchlár a thosaíonn feidhmchláir"
 
-#: ../../xffm/common/gio.hh:81
-msgid "Copying files"
-msgstr "Comhaid á chóipeáil"
-
-#: ../../xffm/common/gio.hh:85
-msgid "linking"
-msgstr "á nascadh"
-
-#: ../../xffm/common/gio.hh:87
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:244
 #, fuzzy
-msgid "rename"
-msgstr "Athainmigh"
+msgid   "Open a New Window"
+msgstr  "Oscail i bhFuinneog Nua"
 
-#: ../../xffm/common/gio.hh:426
-#, c-format
-msgid "(%d of %d)"
-msgstr "(%d as %d)"
-
-#: ../../xffm/common/dnd.hh:47
-msgid "Create Link"
-msgstr "Cruthaigh Nasc"
-
-#: ../../xffm/common/util.hh:1404
-#, c-format
-msgid ""
-"Scriptfile \"%s\" is not executable. Please set the executable-attribute on "
-"that file."
-msgstr ""
-
-#: ../../xffm/common/util.hh:1406 ../../xffm/common/util.hh:1441
-#, c-format
-msgid "Open with %s"
-msgstr "Oscail le %s"
-
-#: ../../xffm/common/util.hh:1406
-msgid "Text Editor"
-msgstr "Eagarthóir Téacs"
-
-#: ../../xffm/common/util.hh:1443 ../../xffm/common/gtk.hh:69
-msgid "Execute Shell Command"
-msgstr "Rith Ordú Blaoisce"
-
-#: ../../xffm/common/util.hh:1447
-msgid ""
-"Console: quickly run single commands -- write a command here and press enter."
-msgstr ""
-
-#: ../../xffm/common/gtk.hh:352 ../../xffm/common/gtk.hh:360
-msgid "Help"
-msgstr "Cabhair"
-
-#: ../../xffm/common/run.hh:338
-msgid "error"
-msgstr "error"
-
-#: ../../xffm/common/run.hh:342
-msgid "warning"
-msgstr "rabhadh"
-
-#: ../../xffm/common/preview.hh:581
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:250
 #, fuzzy
-msgid "Empty file"
-msgstr "Comhad Folamh"
+msgid   "Differences"
+msgstr  "Difríocht"
 
-#: ../../xffm/common/preview.hh:636
-#, c-format
-msgid "Cannot read from %s"
-msgstr "Ní féidir léamh ó %s"
+#: ../xffm/fm/dialog/notebook/menupopover.hh:178
+#, fuzzy
+msgid   "Open menu"
+msgstr  "Oscail Roghchlár"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:230
+#, fuzzy
+msgid   "View as list"
+msgstr  "Feach mar Scrúdú"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:231
+msgid   "Show hidden files"
+msgstr  "Taispeáin comhaid fholaithe"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:232
+#, fuzzy
+msgid   "Show Backup Files"
+msgstr  "Comhad Chúltaca"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:233
+#, fuzzy
+msgid   "Sort data in descending order"
+msgstr  "Sórtáil in ord íslitheach"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:235
+#, fuzzy
+msgid   "Sort by date"
+msgstr  "Dáta gearr"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:236
+msgid   "Sort by size"
+msgstr  "Sórtáil de réir méide"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:270
+msgid   "Main menu"
+msgstr  "Príomhroghchlár"
+
+#: ../xffm/fm/dialog/notebook/notebook.hh:56
+#, fuzzy
+msgid   "Long press time"
+msgstr  "Aitheantóir an phróisis logála"
+
+#: ../xffm/fm/dialog/dialog.hh:122
+msgid   "Removed"
+msgstr  "Bainte"
+
+#: ../xffm/fm/dialog/dialog.hh:143
+#, fuzzy
+msgid   "Detected device(s):"
+msgstr  "Gléasanna braite:"
+
+#: ../xffm/response/commandresponse.hh:19
+msgid   "Running"
+msgstr  "Ag Rith"
+
+#: ../xffm/response/commandresponse.hh:24
+#, fuzzy
+msgid   "Waiting for operation to finish..."
+msgstr  "Ag feitheamh le dvips..."
+
+#: ../xffm/response/passwdresponse.hh:179
+#, fuzzy
+msgid   "User Input"
+msgstr  "Eolas Úsáideoir"
+
+#: ../xffm/response/passwdresponse.hh:195
+msgid   "Response Requested"
+msgstr  "Iarradh Freagra"
+
+#: ../xffm/response/passwdresponse.hh:242 ../xffm/response/entryresponse.hh:439
+msgid   "Ok"
+msgstr  "Ceart go leor"
+
+#: ../xffm/response/customresponse.hh:55
+msgid   "Execute command"
+msgstr  "Rith ordú"
+
+#: ../xffm/response/customresponse.hh:103
+msgid   "Source File"
+msgstr  "Comhad Foinseach"
+
+#: ../xffm/response/timeoutresponse.hh:57
+msgid   "Dismiss"
+msgstr  "Ruaig"
+
+#: ../xffm/response/commandprogressresponse.hh:31
+msgid   "Items:"
+msgstr  "Míreanna:"
+
+#: ../xffm/response/chooserresponse.hh:23
+msgid   "Open"
+msgstr  "Oscail"
+
+#: ../xffm/response/chooserresponse.hh:56
+#, fuzzy
+msgid   "Choose directory"
+msgstr  "Roghnaigh Comhadlann"
+
+#: ../xffm/response/chooserresponse.hh:60
+msgid   "Choose file"
+msgstr  "Roghnaigh comhad"
+
+#: ../xffm/completion/bash.hh:133
+#, fuzzy
+msgid   "Completion mode:"
+msgstr  "Cód comhlánaithe"
+
+#: ../xffm/completion/bash.hh:134
+msgid   "command"
+msgstr  "ordú"
+
+#: ../xffm/completion/bash.hh:135
+msgid   "file"
+msgstr  "comhad"
+
+#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
+msgid   "Options >>"
+msgstr  "Roghanna >>"
+
+#: ../xffm/completion/base.hh:28
+msgid   "Command"
+msgstr  "Ordú"
+
+#: ../xffm/completion/base.hh:31
+msgid   "File"
+msgstr  "Comhad"
+
+#: ../xffm/completion/base.hh:34
+#, fuzzy
+msgid   "Command history"
+msgstr  "Stair na nOrduithe"
+
+#: ../xffm/completion/base.hh:40
+msgid   "Variable"
+msgstr  "Athróg"
+
+#: ../xffm/completion/base.hh:43
+msgid   "Host"
+msgstr  "Óst"
+
+#: ../xffm/completion/base.hh:55
+msgid   "Found no match"
+msgstr  "Níor aimsíodh aon rud comhoiriúnach"
+
+#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
+msgid   "Matches"
+msgstr  "Cipíní"
+
+#: ../xffm/completion/base.hh:142
+#, fuzzy
+msgid   "Too many files open"
+msgstr  "An iomarca comhad"
 

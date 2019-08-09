@@ -1,1099 +1,1342 @@
-# Translations for Rodent package.
-# Copyright (C) 2004-2012 FSF.
-# This file is distributed under the same license as the Rodent package.
-#   --- vie may  3 10:39:20 CDT 2013 ---
+# Xffm+ translation file: vie ago  9 14:47:27 CDT 2019
+# Merged fron existing open source files
+# http://xffm.org
 #
-# Ernest Mashele <mashern@tuks.co.za>, 2011.
-# fuzzy
-msgid ""
-msgstr ""
-"Project-Id-Version: Rodent Delta\n"
-"Report-Msgid-Bugs-To: http://bugs.xffm.org\n"
-"ywords=I18N+L10Ncomponent=general\n"
-"POT-Creation-Date: 2011-09-19 18:10+0000\n"
-"PO-Revision-Date: 2011-09-20 05:55+0200\n"
-"Last-Translator: Ernest Mashele <mashern@tuks.co.za>\n"
-"Language-Team: ts\n"
-"Language: ts\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Virtaal 0.7.0\n"
-"X-Project-Style: gnome\n"
-
-msgid "Show “%s”"
-msgstr "Komba “%s”"
-
-msgid "Move on Toolbar"
-msgstr "Fambisa eka xivandla xa switirhi"
-
-msgid "Move the selected item on the toolbar"
-msgstr "Fambisa lexi hlawuriweke eka xivandla xa switirhi"
-
-msgid "Remove from Toolbar"
-msgstr "Susa eka xivandla xa switirhi"
-
-msgid "Remove the selected item from the toolbar"
-msgstr "Susa lexi hlawuriweke eka xivandla xa switirhi"
-
-msgid "Delete Toolbar"
-msgstr "Susa xivandla xa switirhi"
-
-msgid "Remove the selected toolbar"
-msgstr "Susa xivandla xa switirhi lexi hlawuriweke"
-
-msgid "Separator"
-msgstr "Xihambanisi"
-
-msgid "Activate fullscreen mode with double-click"
-msgstr "Yisa eka nkombiso wo tata hi kutlhava ka mbirhi"
-
-msgid "Fullscreen with double-click"
-msgstr "Nkombiso wo tata hi kutlhava ka mbirhi"
-
-msgid "Reload Image"
-msgstr "Panga xifaniso nakambe"
-
-msgid "Reload current image"
-msgstr "Panga nakambe xifaniso lexi"
-
-msgid "Date in statusbar"
-msgstr "Siku eka xiyenge xa le hansi xa furemi"
-
-msgid "Shows the image date in the window statusbar"
-msgstr "Xi komba siku ra xifaniso eka xiyenge xa le hansi xa furemi"
-
-msgid "Browse and rotate images"
-msgstr "Lavalava na ku hundzuluxa swifaniso"
-
-msgid "Image Viewer"
-msgstr "Xikomba Swifaniso"
-
-msgid "Aperture Value:"
-msgstr "Xilawula rivoningo:"
-
-msgid "Author:"
-msgstr "Mutsari:"
-
-msgid "Bytes:"
-msgstr "Tibayiti:"
-
-msgid "Camera Model:"
-msgstr "Rixaka ra Khamera:"
-
-msgid "Copyright:"
-msgstr "Timpfanelo ta mutsari:"
-
-msgid "Date/Time:"
-msgstr "Siku/Nkarhi:"
-
-msgid "Description:"
-msgstr "Nhlamuselo:"
-
-msgid "Details"
-msgstr "Vuxokoxoko"
-
-msgid "Exposure Time:"
-msgstr "Nkarhi wo hlangana ni rivoningo:"
-
-msgid "Flash:"
-msgstr "Ntsayito:"
-
-msgid "Focal Length:"
-msgstr "Mpfhuka wo vona:"
-
-msgid "General"
-msgstr "Angarhela"
-
-msgid "Height:"
-msgstr "Vulehi:"
-
-msgid "ISO Speed Rating:"
-msgstr "Mpimo wa rivilo ku ya hi ISO:"
-
-msgid "Image Properties"
-msgstr "Swihlawulekisi Swa Xifaniso"
-
-msgid "Keywords:"
-msgstr "Marito-nkulu:"
-
-msgid "Location:"
-msgstr "Ndhawu:"
-
-msgid "Metadata"
-msgstr "Switiviwa swa switiviwa"
-
-msgid "Metering Mode:"
-msgstr "Mapimelo:"
-
-msgid "Name:"
-msgstr "Vito:"
-
-msgid "Type:"
-msgstr "Muxaka:"
-
-msgid "Width:"
-msgstr "Vuanami:"
-
-msgid "Next"
-msgstr "Leswi landzelaka"
-
-msgid "Previous"
-msgstr "Leswi nga hundza"
-
-msgid "%f: original filename"
-msgstr "%f: vito ra fayili yo sungula kona"
-
-msgid "%n: counter"
-msgstr "%n: xihlayi"
-
-msgid "Choose a folder"
-msgstr "Hlawula folidara"
-
-msgid "Destination folder:"
-msgstr "Xiyenge lexi ku yisiwaka eka xona:"
-
-msgid "File Name Preview"
-msgstr "Vona Malangutelo Ya Vito Ra Fayili"
-
-msgid "File Path Specifications"
-msgstr "Swipimelo Swa Ndhawu/Ndlela Ya Fayili"
-
-msgid "Filename format:"
-msgstr "Malangutele ya vito va fayili:"
-
-msgid "Options"
-msgstr "Swo tihlawulela"
-
-msgid "Rename from:"
-msgstr "Ncinca vito kusuka eka:"
-
-msgid "Replace spaces with underscores"
-msgstr "Pfala pfuleko exikarhi ka marito hi "
-
-msgid "Save As"
-msgstr "Hlayisa tani hi"
-
-msgid "Start counter at:"
-msgstr "Sungula xihlayi eka:"
-
-msgid "To:"
-msgstr "Eka:"
-
-msgid "As background"
-msgstr "Tani hi muvala wa le hansi"
-
-msgid "As check pattern"
-msgstr "Tani hi mavala ya cheke/swibokisana"
-
-msgid "As custom color:"
-msgstr "Tani hi muhlovo wo tihlawulela:"
-
-msgid "Background"
-msgstr "Xitandzhaku"
-
-msgid "Background Color"
-msgstr "Muvala wa le Hansi"
-
-msgid "Color for Transparent Areas"
-msgstr "Muhlovo wa swiyenge leswi vonikelaka"
-
-msgid "Expand images to fit screen"
-msgstr "Kurisa swifaniso ku ringanela nkombiso"
-
-msgid "Image Enhancements"
-msgstr "Vuantswisi Bya Swifaniso"
-
-msgid "Image View"
-msgstr "Kombiso Wa Xifaniso"
-
-msgid "Image Zoom"
-msgstr "Ntshineto Wa Xifaniso"
-
-msgid "Plugins"
-msgstr "Switirhi swa engetelo"
-
-msgid "seconds"
-msgstr "tisekene"
-
-msgid "Switch image after:"
-msgstr "Ncinca xifaniso endzhaku ka:"
-
-msgid "Preferences"
-msgstr "Swo tihlawulela"
-
-msgid "Sequence"
-msgstr "Landzelelana"
-
-msgid "Slideshow"
-msgstr "Nkombiso wo ncinca-ncinca"
-
-msgid "Smooth images when zoomed-in"
-msgstr "Rhetisa swifaniso loko swi kurisiwile"
-
-msgid "Smooth images when zoomed-out"
-msgstr "Rhetisa swifaniso loko swi ntsananisiwile"
-
-msgid "Transparent Parts"
-msgstr "Swiyenge leswi vonikelaka"
-
-msgid "Automatic orientation"
-msgstr "Matshamelo hi woxe"
-
-msgid "Loop sequence"
-msgstr "Ku ncinca ka ku landzelelana"
-
-msgid ""
-"A value greater than 0 determines the seconds an image stays on screen until "
-"the next one is shown automatically. Zero disables the automatic browsing."
-msgstr ""
-"Nhlanyo leyi kulu ka 0 yi komba nkarhi lowu xifaniso xi nga ta tshama eka "
-"nkombiso ku nga si nghena xin'wanyana hi xoxe. Tandza ri sivela ku ncinca ka "
-"xifaniso hi xoxe."
-
-msgid "Active plugins"
-msgstr "Switirhisiwa swa engetelo leswi pfuriweke"
-
-msgid "Allow zoom greater than 100% initially"
-msgstr "Pfumelela nkuriso lowu hundzaka 100% emasunguleni"
-
-msgid "Close main window without asking to save changes."
-msgstr "Pfala furemi-nkulu u nga vutisani ku hlayisa leswi ncinciweke."
-
-msgid "Delay in seconds until showing the next image"
-msgstr "Yimanyana hi tisekene u nga si komba xifaniso lexi landzelaka"
-
-msgid ""
-"Determines how transparency should be indicated. Valid values are "
-"CHECKPATTERN, COLOR and NONE. If COLOR is chosen, then the trans-color key "
-"determines the color value used."
-msgstr ""
-"Kuma ndlela leyi ku vonikela ku nga ta kombisiwaka ha kona. Ku pfumeleriwa "
-"ntsena CHECKPATTERN, COLOR kumbe NONE. Loko COLOR yi hlawuriwile, xiphemu "
-"lexi yimelaka ku vonikela xi tirhisiwa ku kuma muhlovo."
-
-msgid "External program to use for editing images"
-msgstr "Xithirhi xa lehandle xo hlela swifaniso"
-
-msgid "Extrapolate Image"
-msgstr "Vhubha vukulu bya xifaniso"
-
-msgid ""
-"If activated and no image is loaded in the active window, the file chooser "
-"will display the user's pictures folder using the XDG special user "
-"directories. If deactivated or the pictures folder has not been set up, it "
-"will show the current working directory."
-msgstr ""
-"Loko xi pfuriwile kuri hava xifaniso lexi nga pangiwa eka furemu leri, "
-"xihlawula-tifayili xi ta khomba folidara ya swifaniso ya mutirhisi xi "
-"tirhisa tifolidara ta XDG. Loko xi pfariwile kumbe folidara ya swifaniso a "
-"se endliwa, xi ta folidara leyi kunga ku tirheliweni ka yona."
-
-msgid ""
-"If activated, Eye of GNOME won't ask for confirmation when moving images to "
-"the trash. It will still ask if any of the files cannot be moved to the "
-"trash and would be deleted instead."
-msgstr ""
-"Loko xi pfuriwile, Tihlo ra GNOME, xi nge kombeli mpfulelo wo yisa swifaniso "
-"etaleni. Xi ta vutisa loko tifayili tifanele ku yisiwa etaleni kumbe ku "
-"susiwa hi ku hetiseka ntsena."
-
-msgid ""
-"If activated, the detailed metadata list in the properties dialog will be "
-"moved to its own page in the dialog. This should make the dialog more usable "
-"on smaller screens, e.g. as used by netbooks. If disabled, the widget will "
-"be embedded on the \"Metadata\" page."
-msgstr ""
-"Loko xi pfuriwile, nongonoko wa switiviwa swa switiviwa hinkwaswo eka furemu "
-"ra swihlawulekisi ri ta yisiwa eka pheji ya rona. Leswi swi endla leswaku "
-"furemu ri tirhiseka eka mikombiso leyi ntsongo, xikombiso i ti-netbook. "
-"Loko xi timiwile, xiyenye lexi xi ta engeteriwa eka pheji ra \"Switiviwa swa "
-"switiviwa\"."
-
-msgid ""
-"If the transparency key has the value COLOR, then this key determines the "
-"color which is used for indicating transparency."
-msgstr ""
-"Loko xivandla xa vunikelo xi ri COLOR, xi tirhisiwa ku kuma muhlovo lowu nga "
-"ta tirhisa tani hi ku vonikela."
-
-msgid ""
-"If this is active, the color set by the background-color key will be used to "
-"fill the area behind the image. If it is not set, the current GTK+ theme "
-"will determine the fill color."
-msgstr ""
-"Loko lexi xi pfuriwile, muhlovo wale hansi wu ta tirhisa ku funengetaka "
-"xiyenge xa le ndzhaku xa xifaniso. Loko muhlovo wale hansi wu nga boxiwanga, "
-"ku ta tirhisiwa muhlovo wa GTK+ wa nkhaviso."
-
-msgid ""
-"If this is set to FALSE small images will not be stretched to fit into the "
-"screen initially."
-msgstr ""
-"Loko ku boxiwile FALSE swifaniso leswi ntsongo a swi nge tsanyusiwi ku "
-"ringanela eka nkombiso."
-
-msgid ""
-"Image gallery pane position. Set to 0 for bottom; 1 for left; 2 for top; 3 "
-"for right."
-msgstr ""
-"Ndhawu ya xiyenge xa swifaniso. Tirhisa 0 ku yisa ehansi; 1 ku yisa "
-"eximatsini; 2 ku yisa ehenhla; 3 ku yisa exineneni."
-
-msgid "Interpolate Image"
-msgstr "Hlahluvela vululu bya xifaniso"
-
-msgid ""
-"List of active plugins. It doesn't contain the \"Location\" of the active "
-"plugins. See the .eog-plugin file for obtaining the \"Location\" of a given "
-"plugin."
-msgstr ""
-"Nxaxamelo wa switirhi swa engetelo. A yi na ti \"Ndhawu\" ta switirhi leswi "
-"pfuriweke. Vona fayili ya .eog-plugin ku tiva \"Ndhawu\" ya xitirhi xo karhi."
-
-msgid "Loop through the image sequence"
-msgstr "Fambisa endzeni ka nxaxameto wa swifaniso leswi landzelelanaka"
-
-msgid "Scroll wheel zoom"
-msgstr "Ntshineto hi vhilwa ra mawusi"
-
-msgid "Show/Hide the image gallery pane scroll buttons."
-msgstr "Komba/Tumbeta tibatheni to yisa ehansi/ehenhla ta xiyenge xa swifaniso."
-
-msgid "Show/Hide the image gallery pane."
-msgstr "Komba/Tumbeta xiyenge xa swifaniso."
-
-msgid "Show/Hide the window side pane."
-msgstr "Komba/Tumbeta xiyenge xa furemu xele tlhelo."
-
-msgid "Show/Hide the window statusbar."
-msgstr "Komba/Tumbeta xiyenge xa furemu xele hansi."
-
-msgid "Show/Hide the window toolbar."
-msgstr "Komba/Tumbeta xiyenge xa switirhi."
-
-msgid ""
-"The color that is used to fill the area behind the image. If the use-"
-"background-color key is not set, the color is determined by the active GTK+ "
-"theme instead."
-msgstr ""
-"Muhlovo lowu tirhisiwaka eka xiyenge xele ndzhaku xa xifaniso. Loko muhlovo "
-"wale hansi wu nga boxiwanga, muhlovo wu kumeka eka muhlovo wa GTK+ leyi nga "
-"ku tirhisiweni."
-
-msgid ""
-"The desktop file name (including the \".desktop\") of the application to use "
-"for editing images (when the \"Edit Image\" toolbar button is clicked). Set "
-"to the empty string to disable this feature."
-msgstr ""
-"Vito ra fayili ya desikithopi (ku katsa na \".desktop\") ya xitirhi xo hlela "
-"swifaniso (Loko kunupu ya \"Hlela Xifaniso\" ku suka eka xiyenge xa switirhi "
-"yi tlhaviwa). U nga faki ncumu loko u tsakela u tima."
-
-msgid ""
-"The multiplier to be applied when using the mouse scroll wheel for zooming. "
-"This value defines the zooming step used for each scroll event. For example, "
-"0.05 results in a 5% zoom increment for each scroll event and 1.00 result in "
-"a 100% zoom increment."
-msgstr ""
-"Nhlayo ya nkuriso yi ta tirhisiwa loko ku tirhisiwa mawusu ku tshineta. "
-"Nhlayo leyi komba ku hambana ka nkuriso leyi landzelelanaka. Xikombiso:0.05 "
-"yi endla nkuriso hi 5% eka fambiso wa vhilwa ra mawusu, 1.00 yi endla "
-"nkuriso hi 100%."
-
-msgid "Transparency color"
-msgstr "Muhlovo wo vonikela"
-
-msgid "Transparency indicator"
-msgstr "Xiyimela muhlovo wo vonikela"
-
-msgid "Trash images without asking"
-msgstr "Yisa swifaniso etaleni u nga vutisani"
-
-msgid "Use a custom background color"
-msgstr "Tirhisa muhlovo wa le hansi wo tihlawulela"
-
-msgid ""
-"Whether the file chooser should show the user's pictures folder if no images "
-"are loaded."
-msgstr ""
-"Loko kuri xihlawula-tifayili xi komba folidara ya swifaniso ya mutirhisi "
-"loko kuri hava swifaniso leswi nga pangiwa."
-
-msgid "Whether the image gallery pane should be resizable."
-msgstr "Loko kuri xiyenge xa swifaniso xa kuriseka."
-
-msgid ""
-"Whether the image should be extrapolated on zoom-in. This leads to blurry "
-"quality and is somewhat slower than non-extrapolated images."
-msgstr ""
-"Loko kuri vukulu bya xifaniso byi nga vhubhiwa endzaku ka ntshineto. Leswi "
-"swi endla xifaniso yi nga vonakali kahle, xi teka nkarhi ku tlula swifaniso "
-"swin'wana swo fana."
-
-msgid ""
-"Whether the image should be interpolated on zoom-out. This leads to better "
-"quality but is somewhat slower than non-interpolated images."
-msgstr ""
-"Loko kuri vukulu bya xifaniso byi hlahluveriwa loko xi tshinetiwa endzaku. "
-"Leswi swi antswisa xifani, kambe swi nga teka nkarhi ku tlula swifaniso "
-"swin'wana leswi hlahluveriweke vukulu."
-
-msgid ""
-"Whether the image should be rotated automatically based on EXIF orientation."
-msgstr "Loko kuri xifaniso xita jikisiwa ya hi matshamelo ya EXIF"
-
-msgid ""
-"Whether the metadata list in the properties dialog should have its own page."
-msgstr ""
-"Loko kuri nongonoko wa switiviwa swa switiviwa eka xiyenge xa swihlawulekisi "
-"swi na pheji ra swona."
-
-msgid "Whether the scroll wheel should be used for zooming."
-msgstr "Loko kuri vhilwa ra xikondlwana/mawusi rita tirhisiwa ku kurisa."
-
-msgid "Whether the sequence of images should be shown in an endless loop."
-msgstr ""
-"Loko kuri swifaniso leswi landzelelanaka swi ta kombiwa hi laha ku nga "
-"heriki."
-
-msgid "Zoom multiplier"
-msgstr "Nhlayo yo kurisa"
-
-msgid "Close without Saving"
-msgstr "Pfala u nga hlayisani"
-
-msgid "Question"
-msgstr "Xivutiso"
-
-msgid "If you don't save, your changes will be lost."
-msgstr "Loko u nga hlayisi, ku ncinca ku ta lahleka."
-
-msgid "Save changes to image \"%s\" before closing?"
-msgstr "Hlayisa ku ncinca eka xifaniso \"%s\" u nga se pfala?"
-
-msgid "There is %d image with unsaved changes. Save changes before closing?"
-msgid_plural ""
-"There are %d images with unsaved changes. Save changes before closing?"
-msgstr[0] ""
-"Kuna xifaniso(%d) lexi nga ncinca lexi nga hlayisiwanga. Hlayisa ku ncinca u "
-"nga se pfala? "
-msgstr[1] ""
-"Kuna swifaniso swa %d leswi nga ncinca leswi nga hlayisiwanga. Hlayisa ku ncinca "
-"u nga se pfala?"
-
-msgid "Select the images you want to save:"
-msgstr "Hlawula swifaniso leswi u tsakelaka ku hlayisa:"
-
-msgid "If you don't save, all your changes will be lost."
-msgstr "Loko u nga hlayisi, ku ncinca hinkwako ku ta lahleka."
-
-msgid "File format is unknown or unsupported"
-msgstr "Xixaka ra fayili a ri tiveki"
-
-msgid ""
-"Image Viewer could not determine a supported writable file format based on "
-"the filename."
-msgstr ""
-"Xikomba Xifaniso xi tsandzeke vhubha rixaka ra fayili leyi nga ku nga "
-"tsaleriwa eka yona ku suka eka vito ra fayili."
-
-msgid "Please try a different file extension like .png or .jpg."
-msgstr "Ringeta mahetelelo ya fayili yo hambana yo fana na .png kumbe .jpg."
-
-msgid "%s (*.%s)"
-msgstr "%s (*.%s)"
-
-msgid "All files"
-msgstr "Tifayi hinkwato"
-
-msgid "Supported image files"
-msgstr "Tifayi leti tivekaka"
-
-msgid "pixel"
-msgid_plural "pixels"
-msgstr[0] "pixel"
-msgstr[1] "pixels"
-
-msgid "Open Image"
-msgstr "Pfula xifaniso"
-
-msgid "Save Image"
-msgstr "Hlayisa xifaniso"
-
-msgid "Open Folder"
-msgstr "Pfula folidara"
-
-msgid "Transformation on unloaded image."
-msgstr "Kuncinciwa ka xifaniso lexi nga pfariwa."
-
-msgid "Transformation failed."
-msgstr "Tsandzekile kuncinciwa."
-
-msgid "EXIF not supported for this file format."
-msgstr "EXIF a yi tiveki eka rixaka ra fayili leyi."
-
-msgid "Image loading failed."
-msgstr "Tsandzeke ku panga xifaniso."
-
-msgid "No image loaded."
-msgstr "Ku hava xifaniso lexi pangiweke."
-
-msgid "You do not have the permissions necessary to save the file."
-msgstr "U hava mpfumelelo lowu ringaneleke ku hlayisa xifaniso lexi."
-
-msgid "Temporary file creation failed."
-msgstr "Tsandzeke ku endla fayili ya nkarhi-nyana."
-
-msgid "Couldn't create temporary file for saving: %s"
-msgstr "Tsandzeke ku endla fayili ya nkarhi-nyana yo hlasilela kon: %s"
-
-msgid "Couldn't allocate memory for loading JPEG file"
-msgstr ""
-"Tsandzeka ku veka etlhelo vundzeni lebyi lavekaka u panga fayili ya JPEG"
-
-msgid "Camera"
-msgstr "Khamera"
-
-msgid "Image Data"
-msgstr "Switiviwa swa xifaniso"
-
-msgid "Image Taking Conditions"
-msgstr "Swipimelo swo teka xifaniso"
-
-msgid "GPS Data"
-msgstr "Switiviwa swa GPS"
-
-msgid "Maker Note"
-msgstr "Tsalwa ra Muaki"
-
-msgid "Other"
-msgstr "Swin'wana"
-
-msgid "XMP Exif"
-msgstr "XMP Exif"
-
-msgid "XMP IPTC"
-msgstr "XMP IPTC"
-
-msgid "XMP Rights Management"
-msgstr "Ku lawula ka mpfumelelo eka XMP"
-
-msgid "XMP Other"
-msgstr "Swin'wana hi XMP"
-
-msgid "Tag"
-msgstr "Thege"
-
-msgid "Value"
-msgstr "Ntsengo"
-
-msgid "North"
-msgstr "N'walungu"
-
-msgid "East"
-msgstr "Vuxeni"
-
-msgid "West"
-msgstr "Vupeladyambu"
-
-msgid "South"
-msgstr "Dzonga"
-
-msgid "%a, %d %B %Y  %X"
-msgstr "%a, %d %B %Y  %X"
-
-msgid "%a, %d %B %Y"
-msgstr "%a, %d %B %Y"
-
-msgid "Cancel"
-msgstr "Tshika"
-
-msgid "Reload"
-msgstr "Panga nakambe"
-
-msgid "Save As…"
-msgstr "Hlayisa tani hi…"
-
-msgid "Could not load image '%s'."
-msgstr "Tsandzeka ku panga xifaniso '%s'."
-
-msgid "Could not save image '%s'."
-msgstr "Tsandzeka ku hlayisa xifaniso '%s'."
-
-msgid "No images found in '%s'."
-msgstr "Ku hava swifaniso eka '%s'."
-
-msgid "The given locations contain no images."
-msgstr "Ku hava swifaniso eka ndhawu leyi nga boxiwa."
-
-msgid "Image Settings"
-msgstr "Malulamiselo ya xifaniso"
-
-msgid "Image"
-msgstr "Xifaniso"
-
-msgid "The image whose printing properties will be set up"
-msgstr "Xifaniso lexi ndlela yo printa ya xona yi nga ta lulamisiwa"
-
-msgid "Page Setup"
-msgstr "Ndzulamiso wa pheji"
-
-msgid "The information for the page where the image will be printed"
-msgstr "Vuxokoxoko bya pheji leri xifaniso xi nga ta printiwa kona"
-
-msgid "Position"
-msgstr "Xiyimo"
-
-msgid "Left:"
-msgstr "Eximatsini:"
-
-msgid "Right:"
-msgstr "Xinene:"
-
-msgid "Top:"
-msgstr "Ehenhla:"
-
-msgid "Bottom:"
-msgstr "Ehansi:"
-
-msgid "Center:"
-msgstr "Xikarhi:"
-
-msgid "None"
-msgstr "Ku hava"
-
-msgid "Horizontal"
-msgstr "Vuandlalo"
-
-msgid "Vertical"
-msgstr "Ku ya ehenhla"
-
-msgid "Both"
-msgstr "Hivumbirhi"
-
-msgid "Size"
-msgstr "Vukulu"
-
-msgid "Scaling:"
-msgstr "Ku kurisa kumbe ku hunguta:"
-
-msgid "Unit:"
-msgstr "Mapimelo:"
-
-msgid "Millimeters"
-msgstr "Milimitara"
-
-msgid "Inches"
-msgstr "Tiinci"
-
-msgid "Preview"
-msgstr "Xivonela mahlweni"
-
-msgid "Unknown"
-msgstr "Tiviwiki"
-
-msgid "%.1f (lens)"
-msgstr "%.1f (lense)"
-
-msgid "%.1f (35mm film)"
-msgstr "%.1f (35mm ya filimi)"
-
-msgid "as is"
-msgstr "tani hi"
-
-msgid "%d / %d"
-msgstr "%d / %d"
-
-msgid "Taken on"
-msgstr "Tekiwe hi"
-
-msgid "At least two file names are equal."
-msgstr "Kuna mavito ma tifayili ma mbirhi lama ringanaka."
-
-msgid "Could not display help for Image Viewer"
-msgstr "Tsandzeka ku komba pfuno wa Xikomba Xifaniso"
-
-msgid " (invalid Unicode)"
-msgstr " (khodi ya Unicode yoka yi nga tiveki)"
-
-msgid "%i × %i pixel  %s    %i%%"
-msgid_plural "%i × %i pixels  %s    %i%%"
-msgstr[0] "%i × %i pixel  %s    %i%%"
-msgstr[1] "%i × %i pixels  %s    %i%%"
-
-msgid "Hide"
-msgstr "Tumbeta"
-
-msgid ""
-"The image \"%s\" has been modified by an external application.\n"
-"Would you like to reload it?"
-msgstr ""
-"Xifaniso \"%s\" xi ncinciwile hi xithirhi xele handle.\n"
-"U nga tsakela ku panga nakambe?"
-
-msgid "Use \"%s\" to open the selected image"
-msgstr "Tirhisa \"%s\" ku pfula xifaniso lexi hlawuriweke"
-
-msgid "Saving image \"%s\" (%u/%u)"
-msgstr "Eku hlayiseni ka xifaniso \"%s\" (%u/%u)"
-
-msgid "Opening image \"%s\""
-msgstr "Eku pfuleni ka xifaniso \"%s\""
-
-msgid ""
-"Error printing file:\n"
-"%s"
-msgstr ""
-"Xihoxo eku kandziyiseni ka:\n"
-"%s"
-
-msgid "Toolbar Editor"
-msgstr "Xilulamisa Yiyenge Xa Switirhi"
-
-msgid "Reset to Default"
-msgstr "Vuyisela emasunguleni"
-
-msgid "translator-credits"
-msgstr "Ntiviso wa Vahundzuluxi"
-
-msgid "The GNOME image viewer."
-msgstr "Xikomba xifaniso xa GNOME."
-
-msgid "Error launching System Settings: "
-msgstr "Xihoxo eku sunguleni ka ndzulamiso ya sisiteme: "
-
-msgid "Open Background Preferences"
-msgstr "Pfula Swo Tihlawulela Swa Muhlovo Wa Le Hansi"
-
-msgid ""
-"The image \"%s\" has been set as Desktop Background.\n"
-"Would you like to modify its appearance?"
-msgstr ""
-"Xifaniso \"%s\" xi tirhisiwe tani hi muhlovo wa le hansi.\n"
-"U nga tsakela ku ncinca makhombelo ya xona?"
-
-msgid "Saving image locally…"
-msgstr "E ku hlayiseni ka xifaniso kwala ka khompyuta…"
-
-msgid ""
-"Are you sure you want to move\n"
-"\"%s\" to the trash?"
-msgstr ""
-"Wa tiyisisa leswaku u lava ku yisa\n"
-"\"%s\" etaleni?"
-
-msgid ""
-"A trash for \"%s\" couldn't be found. Do you want to remove this image "
-"permanently?"
-msgstr ""
-"Tsandzeka ku kuma tala ra \"%s\". U nga tsakela ku susa xifaniso leyi hi ku "
-"hetiseka?"
-
-msgid ""
-"Are you sure you want to move\n"
-"the selected image to the trash?"
-msgid_plural ""
-"Are you sure you want to move\n"
-"the %d selected images to the trash?"
-msgstr[0] ""
-"Wa tiyisisa leswaku u tsakela ku yisa\n"
-"xifaniso lexi hlawuriweke etaleni?"
-msgstr[1] ""
-"Wa tiyisisa leswaku u tsakela ku siya\n"
-"swifaniso swa %d leswi hlawuriweke etaleni?"
-
-msgid ""
-"Some of the selected images can't be moved to the trash and will be removed "
-"permanently. Are you sure you want to proceed?"
-msgstr ""
-"Tsandzeka ku yisa swifaniso swin'wana leswi hlawuriweke etaleni, swi ta "
-"susiwa hi ku hetiseka. U nga tsakela ku ya emahlweni?"
-
-msgid "Move to Trash"
-msgstr "Yisa etaleni"
-
-msgid "Do not ask again during this session"
-msgstr "U nga vutisi kambe eka tirho lowu"
-
-msgid "Couldn't access trash."
-msgstr "Tsandzeka ku vona tala."
-
-msgid "Couldn't delete file"
-msgstr "Tsandzeka ku sula fayili"
-
-msgid "Error on deleting image %s"
-msgstr "Xihoxo eku suleni ka xifaniso %s"
-
-msgid "Edit"
-msgstr "Hlela"
-
-msgid "View"
-msgstr "Vona"
-
-msgid "Go"
-msgstr "Famba"
-
-msgid "Tools"
-msgstr "Switirho"
-
-msgid "Help"
-msgstr "Mpfuno"
-
-msgid "Open…"
-msgstr "Pfula…"
-
-msgid "Open a file"
-msgstr "Pfula fayili"
-
-msgid "Close"
-msgstr "Pfala"
-
-msgid "Close window"
-msgstr "Pfala furemu"
-
-msgid "Toolbar"
-msgstr "Xiyenge xa switirhi"
-
-msgid "Edit the application toolbar"
-msgstr "Hlela xiyenge ya switirhi"
-
-msgid "Preferences for Image Viewer"
-msgstr "Swo tihlawulela swa Xikomba Xifaniso"
-
-msgid "Contents"
-msgstr "Leswi nga ndzeni"
-
-msgid "Help on this application"
-msgstr "Pfuno eka xitirhi lexi"
-
-msgid "About"
-msgstr "Mayelana"
-
-msgid "About this application"
-msgstr "Mayelana na xitirhi lexi"
-
-msgid "Changes the visibility of the toolbar in the current window"
-msgstr "Ncinca ku vonakala ka xiyenge xa switirhi eka furemu leri"
-
-msgid "Statusbar"
-msgstr "Xiyenge xa le hansi xa furemu"
-
-msgid "Changes the visibility of the statusbar in the current window"
-msgstr "Ncinca ku vonakala ka xiyenge xa le hansi eka furemu leri"
-
-msgid "Image Gallery"
-msgstr "Xiyenge xa swifaniso"
-
-msgid "Changes the visibility of the image gallery pane in the current window"
-msgstr "Ncinca ku vonakala ka xiyenge xa swifaniso eka furemu leri"
-
-msgid "Side Pane"
-msgstr "Xiyenge xa le tlhelo"
-
-msgid "Changes the visibility of the side pane in the current window"
-msgstr "Ncinca ku vonakala ka xiyenge xa le tlhelo eka furemu leri"
-
-msgid "Save"
-msgstr "Hlayisa"
-
-msgid "Save changes in currently selected images"
-msgstr "Hlayisa ku ncinca eka swifaniso leswi nga hlawuriwa"
-
-msgid "Open with"
-msgstr "Pfula hi"
-
-msgid "Open the selected image with a different application"
-msgstr "Pfula xifaniso lexi nga hlawuriwa hi xitirhi xo hambana"
-
-msgid "Save the selected images with a different name"
-msgstr "Hlayisa xifaniso lexi nga hlawuriwa eka vito ro hambana"
-
-msgid "Show Containing Folder"
-msgstr "Pfula folidara leyi nga rhwala"
-
-msgid "Show the folder which contains this file in the file manager"
-msgstr "Pfula folidara leyi nga na fayili leyi pfuriweke hi xilawuri xa tifa"
-
-msgid "Print…"
-msgstr "Printa…"
-
-msgid "Print the selected image"
-msgstr "Printa xifaniso lexi hlawuriweke"
-
-msgid "Properties"
-msgstr "Swihlawulekisi"
-
-msgid "Show the properties and metadata of the selected image"
-msgstr "Komba swihlawulekisi na switiviwa swa switiviwa swa xifaniso lexi hlawuriweke"
-
-msgid "Undo"
-msgstr "Tlhelela endzhaku"
-
-msgid "Undo the last change in the image"
-msgstr "Tlherisa ku ncinca loku nga hundza"
-
-msgid "Flip Horizontal"
-msgstr "Hundzuluxa Hi Vuandlalo"
-
-msgid "Mirror the image horizontally"
-msgstr "Hundzuluxa hi vuandlalo tani hi xivoni"
-
-msgid "Flip Vertical"
-msgstr "Hundzuluxa ku ya ehenhla"
-
-msgid "Mirror the image vertically"
-msgstr "Hundzuluxa ku ya ehenhla tani hi xivoni"
-
-msgid "Rotate Clockwise"
-msgstr "Jikisa ku ya hi mafambelo ya Wachi"
-
-msgid "Rotate the image 90 degrees to the right"
-msgstr "Jikisa hi tidigiri ta 90 ku ya exineneni"
-
-msgid "Rotate Counterclockwise"
-msgstr "Jikisa ku ya ku hambana na wachi"
-
-msgid "Rotate the image 90 degrees to the left"
-msgstr "Jikisa hi tidigiri ta 90 ku ya eximatsini"
-
-msgid "Set as Desktop Background"
-msgstr "Lulamisa Xitandzhaku xa Desikithopo"
-
-msgid "Set the selected image as the desktop background"
-msgstr "Lulamisa xifaniso lexi hlawuriweke tani ni hi xitandzhaku xa desikithopo"
-
-msgid "Move the selected image to the trash folder"
-msgstr "Yisa xifaniso lexi hlawuriweke eka folidara ya le taleni"
-
-msgid "Copy"
-msgstr "Kopa"
-
-msgid "Copy the selected image to the clipboard"
-msgstr "Kopela xifaniso lexi hlawuriweke eka clipboard"
-
-msgid "Zoom In"
-msgstr "Tshineta"
-
-msgid "Enlarge the image"
-msgstr "Kurisa xifaniso"
-
-msgid "Zoom Out"
-msgstr "Tshineta Ndzhaku"
-
-msgid "Shrink the image"
-msgstr "Ntsananisa xifaniso"
-
-msgid "Normal Size"
-msgstr "Mpimo wa ntolovelo"
-
-msgid "Show the image at its normal size"
-msgstr "Komba xifaniso hi mpimo wa xona"
-
-msgid "Fullscreen"
-msgstr "Nkombiso wo tala"
-
-msgid "Show the current image in fullscreen mode"
-msgstr "Komba xifaniso lexi eka nkombiso wo tala"
-
-msgid "Pause Slideshow"
-msgstr "Yimisanyana nkombiso wo ncinca-ncinca"
-
-msgid "Pause or resume the slideshow"
-msgstr "Yimanyana kumbe yana mahlweni na nkombiso wo ncinca-ncinca"
-
-msgid "Best Fit"
-msgstr "Vonakisa hinkwaxo"
-
-msgid "Fit the image to the window"
-msgstr "Ringanisa xifaniso na furemu"
-
-msgid "Previous Image"
-msgstr "Xifaniso lexi nga Hundza"
-
-msgid "Go to the previous image of the gallery"
-msgstr "Yana eka xifaniso lexi nga hundza eka xiyenge xa swifaniso"
-
-msgid "Next Image"
-msgstr "Xifaniso lexi landzelaka"
-
-msgid "Go to the next image of the gallery"
-msgstr "Yana eka xifaniso lexi landzelaka eka xiyenge xa swifaniso"
-
-msgid "First Image"
-msgstr "Xifaniso xo Sungula"
-
-msgid "Go to the first image of the gallery"
-msgstr "Yana eka xifaniso xo sungula eka xiyenge xa swifaniso"
-
-msgid "Last Image"
-msgstr "Xifaniso ro Hetelela"
-
-msgid "Go to the last image of the gallery"
-msgstr "Yana eka xifaniso xo hetelela eka xiyenge xa swifaniso"
-
-msgid "Random Image"
-msgstr "Xifaniso xihi kumbe xihi"
-
-msgid "Go to a random image of the gallery"
-msgstr "Yana eka xifaniso xihi kumbe xihi eka xiyenge xa swifaniso"
-
-msgid "Start a slideshow view of the images"
-msgstr "Sungula kombiso wo ncinca-ncica wa swifaniso"
-
-msgid "Right"
-msgstr "Exineneni"
-
-msgid "Left"
-msgstr "Eximatsini"
-
-msgid "Show Folder"
-msgstr "Kombisa Folidara"
-
-msgid "In"
-msgstr "Ndzeni"
-
-msgid "Out"
-msgstr "Handle"
-
-msgid "Normal"
-msgstr "Tolovelekeke"
-
-msgid "Fit"
-msgstr "Ringanela"
-
-msgid "Gallery"
-msgstr "Xivandla xa swifaniso"
-
-msgid "Trash"
-msgstr "Tala"
-
-msgid "Edit the current image using %s"
-msgstr "Hlela xifaniso lexi hi %s"
-
-msgid "Edit Image"
-msgstr "Hlela xifaniso"
-
-msgid "GNOME Image Viewer"
-msgstr "Xikomba Xifaniso Xa GNOME"
-
-msgid "Open in fullscreen mode"
-msgstr "Pfula eka nkombiso wo tala"
-
-msgid "Disable image gallery"
-msgstr "Pfala xiyenge xa swifaniso"
-
-msgid "Open in slideshow mode"
-msgstr "Pfula hindlela ya nkombiso"
-
-msgid "Start a new instance instead of reusing an existing one"
-msgstr "Sungula xin'wana e handle ko xitirhi lexi nga kona"
-
-msgid "Show the application's version"
-msgstr "Komba ntsariso wa xitirhi"
-
-msgid "[FILE…]"
-msgstr "[FILE..]"
-
+#
+msgid   ""
+msgstr  "Project-Id-Version: xffm+\n"
+        "Report-Msgid-Bugs-To: \n"
+        "POT-Creation-Date: 2019-08-09 12:32-0500\n"
+        "PO-Revision-Date: 2011-09-20 05:55+0200\n"
+        "Last-Translator: Ernest Mashele <mashern@tuks.co.za>\n"
+        "Language-Team: ts\n"
+        "Language: ts\n"
+        "MIME-Version: 1.0\n"
+        "Content-Type: text/plain; charset=UTF-8\n"
+        "Content-Transfer-Encoding: 8bit\n"
+        "ywords=I18N+L10Ncomponent=general\n"
+        "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+        "X-Generator: Virtaal 0.7.0\n"
+        "X-Project-Style: gnome\n"
+
+#: ../xffm/mime/mimemagic.hh:68 ../xffm/mime/mimemagic.hh:112
+msgid   "No Read Permission"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:91 ../xffm/find/dialog.hh:143
+#: ../xffm/find/dialog.hh:604
+msgid   "Find"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:167 ../xffm/find/fgr.hh:146
+msgid   "Recursive"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:170 ../xffm/find/fgr.hh:142
+msgid   "Find hidden files and directories"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:173 ../xffm/find/fgr.hh:138
+msgid   "Stay on single filesystem"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:176 ../xffm/find/signals.hh:66
+#: ../xffm/find/signals.hh:454
+msgid   "Results"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:176
+msgid   "Upper limit"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:181
+msgid   "At Least"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:181 ../xffm/find/dialog.hh:186
+#, fuzzy
+msgid   "kBytes"
+msgstr  "Tibayiti:"
+
+#: ../xffm/find/dialog.hh:186
+msgid   "At Most"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:192 ../xffm/completion/base.hh:37
+msgid   "User"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:197
+msgid   "Group"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:201
+msgid   "Octal Permissions"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:206
+msgid   "SUID"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:206 ../xffm/fm/view/local/popup.hh:1102
+msgid   "Executable"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:214 ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168
+msgid   "Minutes"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:219 ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171
+msgid   "Hours"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:224 ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174
+msgid   "Days"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:230
+msgid   "Months"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:241
+msgid   "File type : "
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:255 ../xffm/find/dialog.hh:595
+#: ../xffm/common/gtk.hh:79 ../xffm/fm/dialog/notebook/page/page.hh:71
+msgid   "Close"
+msgstr  "Pfala"
+
+#: ../xffm/find/dialog.hh:263 ../xffm/find/dialog.hh:363
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/fm/view/treeview.hh:18
+msgid   "Details"
+msgstr  "Vuxokoxoko"
+
+#: ../xffm/find/dialog.hh:301 ../xffm/find/fgr.hh:124
+#: ../xffm/find/signals.hh:100
+msgid   "Path"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:334 ../xffm/find/fgr.hh:126
+msgid   "Filter:"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:377
+#, fuzzy
+msgid   "Contains"
+msgstr  "Leswi nga ndzeni"
+
+#: ../xffm/find/dialog.hh:397
+msgid   "Contains the text"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:430
+msgid   "Case Sensitive"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:442
+msgid   "Extended regexp"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:453
+msgid   "Include binary files"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:463 ../xffm/find/fgr.hh:212
+msgid   "Line Count"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:489
+msgid   "Match"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:501
+msgid   "Anywhere"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:516
+msgid   "Whole words only"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:531
+msgid   "lines"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:545 ../xffm/find/fgr.hh:210
+msgid   "No match"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:577 ../xffm/find/signals.hh:368
+#: ../xffm/common/gtk.hh:409 ../xffm/fm/view/local/rm.hh:157
+#: ../xffm/fm/view/local/properties.hh:314
+#: ../xffm/response/entryresponse.hh:435 ../xffm/response/chooserresponse.hh:21
+msgid   "Cancel"
+msgstr  "Tshika"
+
+#: ../xffm/find/dialog.hh:587
+msgid   "Clear"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:629
+msgid   "Edit"
+msgstr  "Hlela"
+
+#: ../xffm/find/dialog.hh:743 ../xffm/find/dialog.hh:758
+#: ../xffm/common/preview.hh:460 ../xffm/common/util.hh:1354
+#: ../xffm/common/util.hh:1356 ../xffm/common/util.hh:1362
+#: ../xffm/common/util.hh:1364
+#, fuzzy
+msgid   "unknown"
+msgstr  "Tiviwiki"
+
+#: ../xffm/find/dialog.hh:772
+msgid   "Modified"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:776
+msgid   "Created"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:780
+msgid   "Accessed"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:1098
+msgid   "Basic rules:\n"
+        "\n"
+        "*  Will match any character zero or more times.\n"
+        "?  Will match any character exactly one time\n"
+        "[] Match any character within the [] \n"
+        "^  Match at beginning of string\n"
+        "$  Match at end of string \n"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:1107
+msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
+        "( ) : \n"
+        "In  basic regular expressions the metacharacters ?, +, {, |, (, "
+        "and ) \n"
+        "  lose their special meaning.\n"
+        "\n"
+        "The  period . matches  any  single  character.\n"
+        "The caret ^ matches at the start of line.\n"
+        "The dollar $ matches at the end of line.\n"
+        "\n"
+        "Characters within [ ] matches any single character in the list.\n"
+        "Characters within [^ ] matches any single character *not* in the "
+        "list.\n"
+        "Characters inside [ - ] matches a range of characters (ie [0-9] or "
+        "[a-z]).\n"
+        "\n"
+        "A regular expression may be followed by one of several repetition "
+        "operators:\n"
+        "?      The preceding item is optional and matched\n"
+        "       at most once.\n"
+        "*      The preceding item will be matched zero\n"
+        "       or more times.\n"
+        "+      The preceding item will be matched one or\n"
+        "       more times.\n"
+        "{n}    The preceding item is matched exactly n times.\n"
+        "{n,}   The preceding item is matched n or more times.\n"
+        "{n,m}  The preceding item is matched at least n times,\n"
+        "       but not more than m times.\n"
+        "\n"
+        "To match any reserved character, precede it with \\. \n"
+        "\n"
+        "Two regular expressions may be joined by the logical or operator |.\n"
+        "Two regular expressions may be concatenated.\n"
+        "\n"
+        "More information is available by typing \"man grep\"\n"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:124 ../xffm/completion/base.hh:339
+#, fuzzy
+msgid   "Options:"
+msgstr  "Swo tihlawulela"
+
+#: ../xffm/find/fgr.hh:125
+msgid   "Locate documents and folders on this computer by name or content"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:126
+msgid   "Search for files"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:128
+#, fuzzy
+msgid   "Contents:"
+msgstr  "Leswi nga ndzeni"
+
+#: ../xffm/find/fgr.hh:128
+msgid   "File's contents filtered as plain text."
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:131
+msgid   "Verbose output debugging mode."
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:133
+msgid   "Show version information"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:135
+#, fuzzy
+msgid   "Filter Details"
+msgstr  "Vuxokoxoko"
+
+#: ../xffm/find/fgr.hh:140
+#, fuzzy
+msgid   "Print..."
+msgstr  "Printa…"
+
+#: ../xffm/find/fgr.hh:140
+msgid   "The unique Process ID that identifies this process."
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:143
+msgid   "Filter"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:144
+msgid   "To display files which pass the filter (stars and regexps will be "
+        "processed)"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:147 ../xffm/find/fgr.hh:148 ../xffm/find/fgr.hh:149
+#: ../xffm/find/fgr.hh:150
+#, fuzzy
+msgid   "KByte"
+msgstr  "Tibayiti:"
+
+#: ../xffm/find/fgr.hh:148
+msgid   "is greater than or equal to"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:150
+msgid   "is less than or equal to"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:152
+msgid   "Set UID"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:152
+msgid   "Executable Text Files"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:154
+msgid   "The permissions of the file, in octal notation."
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:155
+#, fuzzy
+msgid   "Type"
+msgstr  "Muxaka:"
+
+#: ../xffm/find/fgr.hh:157 ../xffm/find/signals.hh:14
+msgid   "Any"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:157
+msgid   "Default type"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:158 ../xffm/common/preview.hh:478
+#, fuzzy
+msgid   "Regular file"
+msgstr  "Pfula fayili"
+
+#: ../xffm/find/fgr.hh:159 ../xffm/find/signals.hh:8
+#: ../xffm/common/preview.hh:469 ../xffm/fm/view/local/popup.hh:1062
+msgid   "Directory"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:160 ../xffm/find/signals.hh:9
+#: ../xffm/common/preview.hh:475
+msgid   "Symbolic Link"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:161
+msgid   "UNIX Socket"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:162 ../xffm/find/signals.hh:11
+#: ../xffm/common/preview.hh:463
+msgid   "Block device"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:163 ../xffm/find/signals.hh:12
+#: ../xffm/common/preview.hh:466
+msgid   "Character device"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:164 ../xffm/find/signals.hh:13
+#: ../xffm/common/preview.hh:472
+msgid   "FIFO"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/find/fgr.hh:179 ../xffm/find/fgr.hh:180
+#: ../xffm/find/fgr.hh:183 ../xffm/find/fgr.hh:184 ../xffm/find/fgr.hh:187
+#: ../xffm/find/fgr.hh:188
+msgid   "TIME"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:168 ../xffm/find/fgr.hh:171 ../xffm/find/fgr.hh:174
+#: ../xffm/find/fgr.hh:177
+msgid   "Previous"
+msgstr  "Leswi nga hundza"
+
+#: ../xffm/find/fgr.hh:175
+msgid   "Month"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:177
+msgid   "Month(s)"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:180
+msgid   "Modification Time :"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:184
+msgid   "Access Time :"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:188
+msgid   "Creation Time :"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:191 ../xffm/find/fgr.hh:192
+msgid   "uid"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:192
+msgid   "User:"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:194 ../xffm/find/fgr.hh:195
+msgid   "gid"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:195
+msgid   "Group:"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:198
+msgid   "Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+        "character that  normally  follows  a file  name"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:200
+#, fuzzy
+msgid   "Content View"
+msgstr  "Leswi nga ndzeni"
+
+#: ../xffm/find/fgr.hh:201 ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:203
+#: ../xffm/find/fgr.hh:204
+msgid   "STRING"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:204
+#: ../xffm/fm/view/local/popup.hh:759
+msgid   "Regular expression"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:204
+msgid   "Extended"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:206
+msgid   "Ignore case"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:208
+msgid   "Text Files"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:214
+msgid   "Words"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:216
+msgid   "Lines"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:362
+#, c-format
+msgid   "Usage : %s [OPTIONS]\n"
+msgstr  ""
+
+#: ../xffm/find/signals.hh:7
+msgid   "Regular"
+msgstr  ""
+
+#: ../xffm/find/signals.hh:10 ../xffm/common/preview.hh:481
+msgid   "Socket"
+msgstr  ""
+
+#: ../xffm/find/signals.hh:396 ../xffm/find/signals.hh:830
+msgid   "No editor for current action."
+msgstr  ""
+
+#: ../xffm/find/signals.hh:454
+msgid   "Upper limit:"
+msgstr  ""
+
+#: ../xffm/find/signals.hh:456
+#, fuzzy
+msgid   "Counting files..."
+msgstr  "Xihoxo eku kandziyiseni ka:\n"
+        "%s"
+
+#: ../xffm/find/signals.hh:471
+#, c-format
+msgid   "Found %d match"
+msgid_plural    "Found %d matches"
+msgstr[0]       ""
+msgstr[1]       ""
+
+#: ../xffm/find/signals.hh:473
+#, c-format
+msgid   "%s Finished : %s"
+msgstr  ""
+
+#: ../xffm/find/signals.hh:596 ../xffm/find/signals.hh:598
+msgid   "Searching..."
+msgstr  ""
+
+#: ../xffm/common/preview.hh:581
+msgid   "Empty file"
+msgstr  ""
+
+#: ../xffm/common/preview.hh:636
+#, c-format
+msgid   "Cannot read from %s"
+msgstr  ""
+
+#: ../xffm/common/gtk.hh:67 ../xffm/fm/dialog/notebook/vbuttonbox.hh:240
+#, fuzzy
+msgid   "Open terminal"
+msgstr  "Pfula xifaniso"
+
+#: ../xffm/common/gtk.hh:69 ../xffm/common/util.hh:1443
+msgid   "Execute Shell Command"
+msgstr  ""
+
+#: ../xffm/common/gtk.hh:71 ../xffm/fm/view/local/popup.hh:157
+msgid   "Paste"
+msgstr  ""
+
+#: ../xffm/common/gtk.hh:73 ../xffm/fm/view/local/popup.hh:151
+msgid   "Add bookmark"
+msgstr  ""
+
+#: ../xffm/common/gtk.hh:75 ../xffm/fm/view/local/popup.hh:152
+#: ../xffm/fm/view/root/popup.hh:137
+#, fuzzy
+msgid   "Remove bookmark"
+msgstr  "Susa eka xivandla xa switirhi"
+
+#: ../xffm/common/gtk.hh:77 ../xffm/fm/view/pkg/model.hh:108
+#: ../xffm/fm/view/pkg/model.hh:299 ../xffm/fm/view/pkg/model.hh:306
+#: ../xffm/fm/view/pkg/popup.hh:151
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:236
+msgid   "Search"
+msgstr  ""
+
+#: ../xffm/common/gtk.hh:81 ../xffm/fm/dialog/notebook/menupopover.hh:237
+msgid   "Exit"
+msgstr  ""
+
+#: ../xffm/common/gtk.hh:83 ../xffm/fm/view/local/popup.hh:85
+#: ../xffm/fm/view/local/popup.hh:142 ../xffm/fm/view/local/popup.hh:1287
+#: ../xffm/fm/view/local/popup.hh:1294 ../xffm/fm/view/local/popup.hh:1305
+#: ../xffm/fm/view/local/popup.hh:1312
+msgid   "Open with"
+msgstr  "Pfula hi"
+
+#: ../xffm/common/gtk.hh:85 ../xffm/fm/view/local/popup.hh:100
+#: ../xffm/fm/view/local/popup.hh:156
+#, fuzzy
+msgid   "Cut"
+msgstr  "Handle"
+
+#: ../xffm/common/gtk.hh:87 ../xffm/fm/view/local/popup.hh:99
+#: ../xffm/fm/view/local/popup.hh:155
+msgid   "Copy"
+msgstr  "Kopa"
+
+#: ../xffm/common/gtk.hh:89 ../xffm/fm/view/local/rm.hh:176
+#: ../xffm/fm/view/local/popup.hh:103 ../xffm/fm/view/local/popup.hh:160
+#, fuzzy
+msgid   "Delete"
+msgstr  "Susa xivandla xa switirhi"
+
+#: ../xffm/common/gtk.hh:91 ../xffm/fm/view/local/rm.hh:165
+msgid   "Shred"
+msgstr  ""
+
+#: ../xffm/common/gtk.hh:94 ../xffm/fm/view/local/popup.hh:95
+#: ../xffm/fm/view/local/popup.hh:145 ../xffm/fm/view/root/popup.hh:136
+#: ../xffm/fm/view/fstab/popup.hh:20
+msgid   "Open in New Tab"
+msgstr  ""
+
+#: ../xffm/common/gtk.hh:139 ../xffm/fm/dialog/notebook/notebook.hh:75
+msgid   "New Tab"
+msgstr  ""
+
+#: ../xffm/common/gtk.hh:352 ../xffm/common/gtk.hh:360
+msgid   "Help"
+msgstr  "Mpfuno"
+
+#: ../xffm/common/settings.hh:30
+msgid   "New File:"
+msgstr  ""
+
+#: ../xffm/common/gio.hh:81
+#, fuzzy
+msgid   "Copying files"
+msgstr  "Xihoxo eku kandziyiseni ka:\n"
+        "%s"
+
+#: ../xffm/common/gio.hh:83 ../xffm/common/dnd.hh:35
+#: ../xffm/fm/dialog/clipboard.hh:30
+msgid   "Moving files"
+msgstr  ""
+
+#: ../xffm/common/gio.hh:85
+msgid   "linking"
+msgstr  ""
+
+#: ../xffm/common/gio.hh:87
+msgid   "rename"
+msgstr  ""
+
+#: ../xffm/common/gio.hh:426
+#, c-format
+msgid   "(%d of %d)"
+msgstr  ""
+
+#: ../xffm/common/util.hh:1404
+#, c-format
+msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
+        "attribute on that file."
+msgstr  ""
+
+#: ../xffm/common/util.hh:1406 ../xffm/common/util.hh:1441
+#, fuzzy, c-format
+msgid   "Open with %s"
+msgstr  "Pfula hi"
+
+#: ../xffm/common/util.hh:1406
+#, fuzzy
+msgid   "Text Editor"
+msgstr  "Xilulamisa Yiyenge Xa Switirhi"
+
+#: ../xffm/common/util.hh:1447
+msgid   "Console: quickly run single commands -- write a command here and "
+        "press enter."
+msgstr  ""
+
+#: ../xffm/common/util.hh:1452 ../xffm/fm/view/local/popup.hh:1109
+#: ../xffm/fm/view/local/popup.hh:1291 ../xffm/fm/view/local/popup.hh:1309
+msgid   "Run in Terminal"
+msgstr  ""
+
+#: ../xffm/common/dnd.hh:41 ../xffm/fm/dialog/clipboard.hh:23
+#, fuzzy
+msgid   "Copying files locally"
+msgstr  "E ku hlayiseni ka xifaniso kwala ka khompyuta…"
+
+#: ../xffm/common/dnd.hh:47
+msgid   "Create Link"
+msgstr  ""
+
+#: ../xffm/common/run.hh:338
+msgid   "error"
+msgstr  ""
+
+#: ../xffm/common/run.hh:342
+msgid   "warning"
+msgstr  ""
+
+#: ../xffm/common/run.hh:464 ../xffm/response/passwdresponse.hh:19
+#: ../xffm/response/passwdresponse.hh:25
+msgid   "Enter password"
+msgstr  ""
+
+#: ../xffm/fm/view/pkg/model.hh:29 ../xffm/fm/view/pkg/popup.hh:35
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:187
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:191
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:195
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:198
+msgid   "Software Updater"
+msgstr  ""
+
+#: ../xffm/fm/view/pkg/model.hh:41 ../xffm/fm/view/pkg/model.hh:52
+msgid   "Add or remove software installed on the system"
+msgstr  ""
+
+#: ../xffm/fm/view/pkg/model.hh:111
+msgid   "String"
+msgstr  ""
+
+#: ../xffm/fm/view/pkg/model.hh:116
+msgid   "Waiting for search results"
+msgstr  ""
+
+#: ../xffm/fm/view/pkg/model.hh:174
+msgid   "No results"
+msgstr  ""
+
+#: ../xffm/fm/view/pkg/model.hh:373
+msgid   "Currently busy\n"
+msgstr  ""
+
+#: ../xffm/fm/view/pkg/popup.hh:44
+msgid   "Update Database"
+msgstr  ""
+
+#: ../xffm/fm/view/pkg/popup.hh:45
+msgid   "Fetch"
+msgstr  ""
+
+#: ../xffm/fm/view/pkg/popup.hh:46
+msgid   "Install --dry-run"
+msgstr  ""
+
+#: ../xffm/fm/view/pkg/popup.hh:47
+msgid   "Install"
+msgstr  ""
+
+#: ../xffm/fm/view/pkg/popup.hh:48
+msgid   "Uninstall --dry-run"
+msgstr  ""
+
+#: ../xffm/fm/view/pkg/popup.hh:49
+msgid   "Uninstall"
+msgstr  ""
+
+#: ../xffm/fm/view/pkg/popup.hh:50
+#, fuzzy
+msgid   "Information"
+msgstr  "Tsandzekile kuncinciwa."
+
+#: ../xffm/fm/view/pkg/popup.hh:140
+msgid   "Version"
+msgstr  ""
+
+#: ../xffm/fm/view/pkg/popup.hh:149
+msgid   "Go up"
+msgstr  ""
+
+#: ../xffm/fm/view/pkg/popup.hh:152
+msgid   "Search packages"
+msgstr  ""
+
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
+#, c-format
+msgid   "Loading %s...%s"
+msgstr  ""
+
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
+msgid   "Please Wait..."
+msgstr  ""
+
+#: ../xffm/fm/view/local/model.hh:124
+#, fuzzy, c-format
+msgid   "Reading \"%s\""
+msgstr  "Eku pfuleni ka xifaniso \"%s\""
+
+#: ../xffm/fm/view/local/model.hh:577 ../xffm/fm/view/base/monitor.hh:34
+#, c-format
+msgid   "Files: %s"
+msgstr  ""
+
+#: ../xffm/fm/view/local/model.hh:580
+#, c-format
+msgid   "Loaded %d of %d articles"
+msgstr  ""
+
+#: ../xffm/fm/view/local/rm.hh:59
+#, fuzzy, c-format
+msgid   "Delete %s"
+msgstr  "Susa xivandla xa switirhi"
+
+#: ../xffm/fm/view/local/rm.hh:61
+msgid   "Warning: "
+msgstr  ""
+
+#: ../xffm/fm/view/local/rm.hh:61 ../xffm/fm/view/local/popup.hh:565
+msgid   "Multiple selections"
+msgstr  ""
+
+#: ../xffm/fm/view/local/rm.hh:92
+msgid   "Remove"
+msgstr  ""
+
+#: ../xffm/fm/view/local/rm.hh:142
+msgid   "Apply to all"
+msgstr  ""
+
+#: ../xffm/fm/view/local/rm.hh:183
+msgid   "Trash"
+msgstr  "Tala"
+
+#: ../xffm/fm/view/local/popup.hh:94
+msgid   "New"
+msgstr  ""
+
+#: ../xffm/fm/view/local/popup.hh:101 ../xffm/fm/view/local/popup.hh:159
+#: ../xffm/fm/view/local/popup.hh:232 ../xffm/fm/view/local/popup.hh:234
+msgid   "Paste into"
+msgstr  ""
+
+#: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:158
+msgid   "There is nothing on the clipboard to paste."
+msgstr  ""
+
+#: ../xffm/fm/view/local/popup.hh:106
+msgid   "Select All"
+msgstr  ""
+
+#: ../xffm/fm/view/local/popup.hh:107 ../xffm/fm/view/local/popup.hh:755
+msgid   "Match regular expression"
+msgstr  ""
+
+#: ../xffm/fm/view/local/popup.hh:143 ../xffm/fm/view/local/popup.hh:1105
+msgid   "Run Executable..."
+msgstr  ""
+
+#: ../xffm/fm/view/local/popup.hh:144 ../xffm/fm/view/local/popup.hh:875
+msgid   "Extract files from the archive"
+msgstr  ""
+
+#: ../xffm/fm/view/local/popup.hh:146 ../xffm/fm/view/local/popup.hh:966
+msgid   "Create a compressed archive with the selected objects"
+msgstr  ""
+
+#: ../xffm/fm/view/local/popup.hh:148 ../xffm/fm/view/fstab/popup.hh:37
+#, fuzzy
+msgid   "Mount the volume associated with this folder"
+msgstr  "Yisa xifaniso lexi hlawuriweke eka folidara ya le taleni"
+
+#: ../xffm/fm/view/local/popup.hh:149 ../xffm/fm/view/fstab/popup.hh:38
+msgid   "Unmount the volume associated with this folder"
+msgstr  ""
+
+#: ../xffm/fm/view/local/popup.hh:161 ../xffm/fm/view/local/popup.hh:1231
+#, fuzzy
+msgid   "Rename"
+msgstr  "Ncinca vito kusuka eka:"
+
+#: ../xffm/fm/view/local/popup.hh:162 ../xffm/fm/view/local/popup.hh:1217
+msgid   "Duplicate"
+msgstr  ""
+
+#: ../xffm/fm/view/local/popup.hh:163 ../xffm/fm/view/local/popup.hh:1203
+msgid   "Link"
+msgstr  ""
+
+#: ../xffm/fm/view/local/popup.hh:164
+msgid   "Properties"
+msgstr  "Swihlawulekisi"
+
+#: ../xffm/fm/view/local/popup.hh:562
+msgid   "Files:"
+msgstr  ""
+
+#: ../xffm/fm/view/local/popup.hh:753
+msgid   "Select items"
+msgstr  ""
+
+#: ../xffm/fm/view/local/popup.hh:771
+msgid   "Regular Expression syntax is incorrect"
+msgstr  ""
+
+#: ../xffm/fm/view/local/popup.hh:801
+#, fuzzy
+msgid   "No selection"
+msgstr  "Xiyimo"
+
+#: ../xffm/fm/view/local/popup.hh:801
+msgid   "No matches."
+msgstr  ""
+
+#: ../xffm/fm/view/local/popup.hh:887 ../xffm/fm/view/local/popup.hh:981
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:382
+msgid   "Specify Output Directory..."
+msgstr  ""
+
+#: ../xffm/fm/view/local/popup.hh:1058
+msgid   "Create new..."
+msgstr  ""
+
+#: ../xffm/fm/view/local/popup.hh:1065 ../xffm/fm/view/local/popup.hh:1146
+#, fuzzy
+msgid   "New Name:"
+msgstr  "Vito:"
+
+#: ../xffm/fm/view/local/popup.hh:1074
+msgid   "No name"
+msgstr  ""
+
+#: ../xffm/fm/view/local/popup.hh:1087
+#, c-format
+msgid   "Another file with the same name already exists in “%s”."
+msgstr  ""
+
+#: ../xffm/fm/view/local/popup.hh:1112
+msgid   "Arguments for the Command"
+msgstr  ""
+
+#: ../xffm/fm/view/local/popup.hh:1258
+#, fuzzy
+msgid   "You have selected multiple files or folders"
+msgstr  "Yisa xifaniso lexi hlawuriweke eka folidara ya le taleni"
+
+#: ../xffm/fm/view/local/popup.hh:1332 ../xffm/fm/view/local/view.hh:156
+msgid   "Invalid entry"
+msgstr  ""
+
+#: ../xffm/fm/view/local/view.hh:177
+#, c-format
+msgid   "The volume '%s' is not mounted."
+msgstr  ""
+
+#: ../xffm/fm/view/local/properties.hh:245
+msgid   "Properties and Attributes"
+msgstr  ""
+
+#: ../xffm/fm/view/local/properties.hh:274
+#, fuzzy
+msgid   "File Mode:"
+msgstr  "Rixaka ra Khamera:"
+
+#: ../xffm/fm/view/local/properties.hh:300
+msgid   "File:"
+msgstr  ""
+
+#: ../xffm/fm/view/local/properties.hh:312
+msgid   "Apply changes"
+msgstr  ""
+
+#: ../xffm/fm/view/local/properties.hh:477
+msgid   "Successfully moved to trash."
+msgstr  ""
+
+#: ../xffm/fm/view/local/properties.hh:478
+msgid   "Source:"
+msgstr  ""
+
+#: ../xffm/fm/view/root/model.hh:82
+msgid   "Root Directory"
+msgstr  ""
+
+#: ../xffm/fm/view/root/model.hh:98
+msgid   "This is the root of the filesystem"
+msgstr  ""
+
+#: ../xffm/fm/view/root/model.hh:110
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:256
+msgid   "Home Directory"
+msgstr  ""
+
+#: ../xffm/fm/view/root/model.hh:137
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:266
+#, fuzzy
+msgid   "Trash bin"
+msgstr  "Tala"
+
+#: ../xffm/fm/view/root/model.hh:168 ../xffm/fm/view/fstab/popup.hh:29
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:261
+msgid   "Disk Image Mounter"
+msgstr  ""
+
+#: ../xffm/fm/view/root/model.hh:176 ../xffm/fm/view/root/model.hh:191
+msgid   "Mount local disks and devices"
+msgstr  ""
+
+#: ../xffm/fm/view/root/model.hh:177 ../xffm/fm/view/fstab/popup.hh:23
+#: ../xffm/fm/view/fstab/view.hh:1084
+msgid   "eCryptfs Volume"
+msgstr  ""
+
+#: ../xffm/fm/view/root/model.hh:178 ../xffm/fm/view/fstab/popup.hh:22
+msgid   "SSHFS Remote Synchronization Folder"
+msgstr  ""
+
+#: ../xffm/fm/view/root/model.hh:179 ../xffm/fm/view/fstab/popup.hh:21
+#: ../xffm/fm/view/fstab/view.hh:1032
+msgid   "NFS Network Volume"
+msgstr  ""
+
+#: ../xffm/fm/view/root/model.hh:180 ../xffm/fm/view/fstab/popup.hh:24
+#: ../xffm/fm/view/fstab/view.hh:1110
+msgid   "CIFS Volume"
+msgstr  ""
+
+#: ../xffm/fm/view/root/model.hh:229
+msgid   "Go to bookmarked location"
+msgstr  ""
+
+#: ../xffm/fm/view/root/popup.hh:138
+msgid   "Empty trash"
+msgstr  ""
+
+#: ../xffm/fm/view/fstab/popup.hh:129
+msgid   "Mount Device"
+msgstr  ""
+
+#: ../xffm/fm/view/fstab/popup.hh:141 ../xffm/fm/view/fstab/view.hh:923
+msgid   "Mount point:"
+msgstr  ""
+
+#: ../xffm/fm/view/fstab/view.hh:590
+msgid   "Mount point: "
+msgstr  ""
+
+#: ../xffm/fm/view/fstab/view.hh:591
+msgid   "Mount device: "
+msgstr  ""
+
+#: ../xffm/fm/view/fstab/view.hh:659 ../xffm/fm/view/fstab/view.hh:675
+msgid   "Disks"
+msgstr  ""
+
+#: ../xffm/fm/view/fstab/view.hh:921
+msgid   "No Label"
+msgstr  ""
+
+#: ../xffm/fm/view/fstab/view.hh:922
+msgid   "There is no file system available (unformatted)"
+msgstr  ""
+
+#: ../xffm/fm/view/fstab/view.hh:923
+msgid   "Not mounted"
+msgstr  ""
+
+#: ../xffm/fm/view/fstab/view.hh:1058
+msgid   "SFTP (via SSH)"
+msgstr  ""
+
+#: ../xffm/fm/view/fstab/view.hh:1413
+#, c-format
+msgid   "Unmounting %s"
+msgstr  ""
+
+#: ../xffm/fm/view/fstab/view.hh:1413
+#, c-format
+msgid   "Mounting %s"
+msgstr  ""
+
+#: ../xffm/fm/view/base/signals.hh:838
+msgid   "Trash is empty"
+msgstr  ""
+
+#: ../xffm/fm/view/base/signals.hh:840
+msgid   "Directory does not exist."
+msgstr  ""
+
+#: ../xffm/fm/view/treeview.hh:17
+#, fuzzy
+msgid   "Name"
+msgstr  "Vito:"
+
+#: ../xffm/fm/view/treeview.hh:19
+msgid   "Size"
+msgstr  "Vukulu"
+
+#: ../xffm/fm/view/treeview.hh:20
+msgid   "Date"
+msgstr  ""
+
+#: ../xffm/fm/view/treeview.hh:22
+#, fuzzy
+msgid   "Mimetype"
+msgstr  "Milimitara"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
+msgid   "Embedded Terminal"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
+msgid   "All items in the iconview."
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
+#, fuzzy
+msgid   "Scripting"
+msgstr  "Nhlamuselo:"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
+msgid   "Clear Log"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
+msgid   "Terminal font"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid   "Renice Process"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid   "Suspend"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+#, fuzzy
+msgid   "Continue"
+msgstr  "Leswi nga ndzeni"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid   "Interrupt"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid   "Hangup"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid   "User 1 (USR1)"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+msgid   "User 2 (USR2)"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+msgid   "Terminate Task"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+msgid   "Abort"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:138
+msgid   "Kill"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
+#, fuzzy
+msgid   "Segmentation fault"
+msgstr  "Vuyisela emasunguleni"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:216
+msgid   "PID"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:375
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:377
+msgid   "Go to"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:409
+msgid   "Not a directory"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:59
+msgid   "loading..."
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:151
+#: ../xffm/fm/dialog/notebook/page/page.hh:167
+msgid   "Confirm Replace"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:153
+#, fuzzy
+msgid   "Destination File"
+msgstr  "Xiyenge lexi ku yisiwaka eka xona:"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:166
+#, c-format
+msgid   "The output file %s already exists, do you want to overwrite it?"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:11
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:214
+msgid   "Remove Button Contents"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:67
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:209
+#, fuzzy
+msgid   "Add custom content"
+msgstr  "Tani hi muhlovo wo tihlawulela:"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:68
+msgid   "Select file to load"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:125
+#, c-format
+msgid   "Cannot load file %s. Reason: %s"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:154
+#, fuzzy
+msgid   "You need to restart the application"
+msgstr  "Mayelana na xitirhi lexi"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:244
+msgid   "Open a New Window"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:250
+#, fuzzy
+msgid   "Differences"
+msgstr  "Swo tihlawulela"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:178
+#, fuzzy
+msgid   "Open menu"
+msgstr  "Pfula xifaniso"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:230
+msgid   "View as list"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:231
+msgid   "Show hidden files"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:232
+msgid   "Show Backup Files"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:233
+msgid   "Sort data in descending order"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:235
+msgid   "Sort by date"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:236
+msgid   "Sort by size"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:270
+msgid   "Main menu"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/notebook.hh:56
+msgid   "Long press time"
+msgstr  ""
+
+#: ../xffm/fm/dialog/dialog.hh:122
+msgid   "Removed"
+msgstr  ""
+
+#: ../xffm/fm/dialog/dialog.hh:143
+msgid   "Detected device(s):"
+msgstr  ""
+
+#: ../xffm/response/commandresponse.hh:19
+msgid   "Running"
+msgstr  ""
+
+#: ../xffm/response/commandresponse.hh:24
+msgid   "Waiting for operation to finish..."
+msgstr  ""
+
+#: ../xffm/response/passwdresponse.hh:179
+msgid   "User Input"
+msgstr  ""
+
+#: ../xffm/response/passwdresponse.hh:195
+msgid   "Response Requested"
+msgstr  ""
+
+#: ../xffm/response/passwdresponse.hh:242 ../xffm/response/entryresponse.hh:439
+msgid   "Ok"
+msgstr  ""
+
+#: ../xffm/response/customresponse.hh:55
+msgid   "Execute command"
+msgstr  ""
+
+#: ../xffm/response/customresponse.hh:103
+msgid   "Source File"
+msgstr  ""
+
+#: ../xffm/response/timeoutresponse.hh:57
+msgid   "Dismiss"
+msgstr  ""
+
+#: ../xffm/response/commandprogressresponse.hh:31
+msgid   "Items:"
+msgstr  ""
+
+#: ../xffm/response/chooserresponse.hh:23
+#, fuzzy
+msgid   "Open"
+msgstr  "Pfula…"
+
+#: ../xffm/response/chooserresponse.hh:56
+#, fuzzy
+msgid   "Choose directory"
+msgstr  "Hlawula folidara"
+
+#: ../xffm/response/chooserresponse.hh:60
+#, fuzzy
+msgid   "Choose file"
+msgstr  "Hlawula folidara"
+
+#: ../xffm/completion/bash.hh:133
+#, fuzzy
+msgid   "Completion mode:"
+msgstr  "Mapimelo:"
+
+#: ../xffm/completion/bash.hh:134
+msgid   "command"
+msgstr  ""
+
+#: ../xffm/completion/bash.hh:135
+#, fuzzy
+msgid   "file"
+msgstr  "Tifayi hinkwato"
+
+#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
+#, fuzzy
+msgid   "Options >>"
+msgstr  "Swo tihlawulela"
+
+#: ../xffm/completion/base.hh:28
+msgid   "Command"
+msgstr  ""
+
+#: ../xffm/completion/base.hh:31
+msgid   "File"
+msgstr  ""
+
+#: ../xffm/completion/base.hh:34
+msgid   "Command history"
+msgstr  ""
+
+#: ../xffm/completion/base.hh:40
+msgid   "Variable"
+msgstr  ""
+
+#: ../xffm/completion/base.hh:43
+msgid   "Host"
+msgstr  ""
+
+#: ../xffm/completion/base.hh:55
+msgid   "Found no match"
+msgstr  ""
+
+#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
+#, fuzzy
+msgid   "Matches"
+msgstr  "Tiinci"
+
+#: ../xffm/completion/base.hh:142
+msgid   "Too many files open"
+msgstr  ""
 

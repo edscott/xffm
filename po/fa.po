@@ -1,1514 +1,1377 @@
-# Translations for Rodent package.
-# Copyright (C) 2004-2012 FSF.
-# This file is distributed under the same license as the Rodent package.
-#   --- vie may  3 10:38:41 CDT 2013 ---
+# Xffm+ translation file: vie ago  9 14:42:04 CDT 2019
+# Merged fron existing open source files
+# http://xffm.org
 #
-# Elnaz Sarbar <elnaz@farsiweb.info>, 2005-2010.
-# Alireza Kheirkhahan <kheirkhahan@gmail.com>, 2005.
-# Masood Ahmadzadeh <masoud@bamdad.org>, 2005.
-# Ehsan Nouri <nouri@mobinssd.com>, 2008.
-# Mahdi Foladgar <foladgar@itland.ir>, 2006.
-# Roozbeh Pournader <roozbeh@farsiweb.info>, 2000-2008.
-# Behnam Esfahbod <behnam@farsiweb.info>, 2005.
-# Niousha Blandzadeh <bolandzadeh@cs.sharif.edu>, 2005.
-# Behnam Pournader <bp@farsiweb.info>, 2005.
-# Zahra Dadkhah <dadkhah@itland.ir>, 2006.
-# Armin Zoup <Zoup@users.sourceforge.net>, 2003.
-# MaryamSadat <razavi@itland.ir>, 2005.
-# Ali Badiee <dr_ervina@ymail.com>, 2010.
-# Sara Khalatbari <sara@bamdad.org>, 2005.
-# Meelad Zakaria <meelad@farsiweb.info>, 2004-2007.
-# Salman Mohammadi <mohamadi.salman@gmail.com>, 2012.
-# Arash Zeini <info@farsikde.org>, 2003-2006.
-# Nasim Daniarzadeh <daniarzadeh@itland.ir>, 2006-2007.
-# Farzaneh Sarafarz <farzaneh@farsiweb.info>, 2006.
-# Ali Akbar Najafian <ali_njfn@yahoo.com>, 2011.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2002-2012.
-# Tahereh Dadkhahfar <dadkhahfar@itland.ir>, 2004-2007.
-# Mahdi foladgar <foladgar@itland.ir>, 2006.
-# FarsiKDE Team <info@farsikde.org>, 2003.
-# Masoud Ahmadzadeh <masoud@bamdad.org>, 2005.
-# Sanaz shahrokni <sanaz.shahrokni@gmail.com>, 2006.
-# maryamSadat Razavi <razavi@itland.ir>, 2006.
-# Elnaz pazhouhi <pazhouhi@itland.ir>, 2006.
-# Tahereh Dadkhahfar@itland.ir>, 2006. <>.
-# Mostafa <info@mostafadaneshvar.com>, 2008.
-# Abbas Izad <abbasizad@hotmail.com>, 2003-2004.
-# Zahra Farahmandi <farahmandi@itland.ir>, 2006.
-# Maryamsadat Razavi <razavi@itland.ir>, 2006.
-# Sanaz Shahrokni <sanaz.shahrokni@gmail.com>, 2006.
-# وحید فضل الله زاده <vahid.fazl2000@gmail.com>, 2011-2012.
-# Nooshin Asiaie <asiaie@itland.ir>, 2006-2007.
-# Mostafa Dehghanzadeh <dehghanzade.mostafa1@gmail.com>, 2010.
-# zahra dadkhah <dadkhah@itland.ir>, 2006.
-# Amir Hedayaty <hedayaty@gmail.com>, 2004-2008.
-# Mahyar Moghimi <mahyar.moqimi@gmail.com>, 2010-2011.
-# Azin Azadi <aazadi@gmail.com>, 2005.
-# Nazanin Kazemi <kazemi@itland.ir>, 2005-2007.
-# mearaji <mehdi.mearaji@gmail.com>, 2012.
-# Mehran Mehr <mehran@cybermehr.com>, 2005.
-# Arash Bijanzadeh <a.bijanzadeh@linuxiran.org>, 2003.
-# Reza Mohammadi <remohammadi@cs.sharif.edu>, 2005.
-# Saied Taghavi <s.taghavi@gmail.com>, 2008-2011.
-# Danial Behzadi <dani.behzi@gmail.com>, 2012-2013.
-# ِِِYashar_Bizhanzadeh <yashar_bizhanzadeh@yahoo.com>, 2003.
-# vahid fazl <vahid.fazl2000@gmail.com>, 2011-2012.
-# Behdad Pournader <behdad.p@gmail.com>, 2005.
-# Shervin Afshar <shervin@farsiweb.info>, 2008.
-# Nazanin Kazemi@itland.ir>, 2006. <>.
-# Behdad Esfahbod <behdad@gnome.org>, 2005.
-# Farzaneh Sarafraz <farzaneh@farsiweb.info>, 2005-2007.
-# Mehdi Moshtaghi <mehdi.mm@gmail.com>, 2011.
-# Sima Tavangar <sima_tavangar@yahoo.com>, 2006.
-# Hedayat Vatankhah <hedayat@grad.com>, 2005-2008.
-# nazanin <kazemi@itland.ir>, 2006.
-# MaryamSadat Razavi <razavi@itland.ir>, 2006-2007.
-# Arash Mousavi <mousavi.arash@gmail.com>, 2008-2013.
-# مهدی فولادگر <foladgar@itland.ir>, 2007.
-# Nasim Daniarzadeh@itland.ir>, 2006. <>.
-# Emil Sedgh <emilsedgh@gmail.com>, 2008.
-# Elnaz Pazhouhi <pazhouhi@itland.ir>, 2006.
-# Mohammad Reza Mirdamadi <mohi@linuxshop.ir>, 2011-2013.
-# Farzad Ghanei <farzad@farsiweb.info>, 2005-2007.
-# Ali Sarchami <ali.sarchami@gmail.com>, 2012.
-# Mohamad Reza Mirdamadi <mohi@linuxshop.ir>, 2009-2013.
-# Ali Yousefi Sabzevar <aysabzevar@gmail.com>, 2010.
-# Mostafa Mostafa <lashar@fedoraproject.org>, 2010.
-# Mahyar Moqimi <mahyar.moqimi@gmail.com>, 2010.
-# Hessam M. Armandehi <hessam@cs.sharif.edu>, 2005.
-# Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
-# Behnam Ahmad Khan Beigi <b3hnam@gnu.org>, 2011.
-# <srtxg@chanae.alphanet.ch>, 2001-2011.
-# Hamed Malek <hamed@farsiweb.info>, 2005.
-# narcissus <3006nol@gmail.com>, 2010.
-# Armin Ranjbar <Zoup@users.sourceforge.net>, 2003.
-# Mohammad Javad Badiee <m.j.badiee@gmail.com>, 2010.
-# Mostafa Reshadi <Mostafa@Reshadi.com>, 2006.
-# nasim <daniarzadeh@itland.ir>, 2006.
-# fuzzy
-msgid ""
-msgstr ""
-"Project-Id-Version: Rodent Delta\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-04 16:54-0500\n"
-"PO-Revision-Date: 2011-04-22 23:51+0330\n"
-"Last-Translator: Arash Mousavi <mousavi.arash@gmail.com>\n"
-"Language-Team: Persian <translate@ifsug.org>\n"
-"Language: fa\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Persian\n"
-"X-Poedit-Country: IRAN, ISLAMIC REPUBLIC OF\n"
-"X-Poedit-SourceCharset: utf-8\n"
+#
+msgid   ""
+msgstr  "Project-Id-Version: xffm+\n"
+        "Report-Msgid-Bugs-To: \n"
+        "POT-Creation-Date: 2019-08-09 12:32-0500\n"
+        "PO-Revision-Date: 2011-04-22 23:51+0330\n"
+        "Last-Translator: Arash Mousavi <mousavi.arash@gmail.com>\n"
+        "Language-Team: Persian <translate@ifsug.org>\n"
+        "Language: fa\n"
+        "MIME-Version: 1.0\n"
+        "Content-Type: text/plain; charset=UTF-8\n"
+        "Content-Transfer-Encoding: 8bit\n"
+        "X-Poedit-Language: Persian\n"
+        "X-Poedit-Country: IRAN, ISLAMIC REPUBLIC OF\n"
+        "X-Poedit-SourceCharset: utf-8\n"
 
-#: ../../xffm/mime/mimemagic.hh:68 ../../xffm/mime/mimemagic.hh:110
-#: ../../xffm/common/mimemagic.hh:68 ../../xffm/common/mimemagic.hh:110
+#: ../xffm/mime/mimemagic.hh:68 ../xffm/mime/mimemagic.hh:112
 #, fuzzy
-msgid "No Read Permission"
-msgstr "افزودن مجوزها"
+msgid   "No Read Permission"
+msgstr  "افزودن مجوزها"
 
-#: ../../xffm/completion/base.hh:28
-msgid "Command"
-msgstr "فرمان"
+#: ../xffm/find/dialog.hh:91 ../xffm/find/dialog.hh:143
+#: ../xffm/find/dialog.hh:604
+msgid   "Find"
+msgstr  "جست‌وجو"
 
-#: ../../xffm/completion/base.hh:31
-msgid "File"
-msgstr "پرونده"
+#: ../xffm/find/dialog.hh:167 ../xffm/find/fgr.hh:146
+msgid   "Recursive"
+msgstr  "بازگشتی"
 
-#: ../../xffm/completion/base.hh:34
-msgid "Command history"
-msgstr "تاریخچه فرمان‌"
-
-#. option -u uid "uid" "uid_combo"
-#: ../../xffm/completion/base.hh:37 ../../xffm/find/dialog.hh:192
-msgid "User"
-msgstr "کاربر"
-
-#: ../../xffm/completion/base.hh:40
-msgid "Variable"
-msgstr "متغیر"
-
-#: ../../xffm/completion/base.hh:43
-msgid "Host"
-msgstr "میزبان"
-
-#: ../../xffm/completion/base.hh:55
+#: ../xffm/find/dialog.hh:170 ../xffm/find/fgr.hh:142
 #, fuzzy
-msgid "Found no match"
-msgstr "فهرست کلمات"
+msgid   "Find hidden files and directories"
+msgstr  "چشم‌پوشی از پرونده‌ها و پوشه‌های مخفی"
 
-#: ../../xffm/completion/base.hh:141 ../../xffm/completion/base.hh:142
-msgid "Matches"
-msgstr "مطابقت‌ها"
+#: ../xffm/find/dialog.hh:173 ../xffm/find/fgr.hh:138
+msgid   "Stay on single filesystem"
+msgstr  "باقی ماندن بر یک سیستم پرونده"
 
-#: ../../xffm/completion/base.hh:142
-msgid "Too many files open"
-msgstr "تعداد زیادی پرونده باز است"
+#: ../xffm/find/dialog.hh:176 ../xffm/find/signals.hh:66
+#: ../xffm/find/signals.hh:454
+msgid   "Results"
+msgstr  "نتایج"
 
-#: ../../xffm/completion/base.hh:339 ../../xffm/find/fgr.hh:124
+#: ../xffm/find/dialog.hh:176
 #, fuzzy
-msgid "Options:"
-msgstr "گزینه‌ها"
+msgid   "Upper limit"
+msgstr  "حد بالایی:"
 
-#: ../../xffm/completion/bash.hh:133
-msgid "Completion mode:"
-msgstr "حالت تکمیل:"
+#: ../xffm/find/dialog.hh:181
+msgid   "At Least"
+msgstr  "حداقل"
 
-#: ../../xffm/completion/bash.hh:134
-msgid "command"
-msgstr "فرمان"
+#: ../xffm/find/dialog.hh:181 ../xffm/find/dialog.hh:186
+msgid   "kBytes"
+msgstr  "کیلوبایت"
 
-#: ../../xffm/completion/bash.hh:135
-msgid "file"
-msgstr "پرونده"
+#: ../xffm/find/dialog.hh:186
+msgid   "At Most"
+msgstr  "حداکثر"
 
-#: ../../xffm/completion/bash.hh:145 ../../xffm/completion/bash.hh:149
-msgid "Options >>"
-msgstr "گزینه‌ها >>‌"
+#: ../xffm/find/dialog.hh:192 ../xffm/completion/base.hh:37
+msgid   "User"
+msgstr  "کاربر"
 
-#: ../../xffm/find/fgr.hh:124 ../../xffm/find/signals.hh:100
-#: ../../xffm/find/dialog.hh:301
-msgid "Path"
-msgstr "مسیر"
+#: ../xffm/find/dialog.hh:197
+msgid   "Group"
+msgstr  "گروه"
 
-#: ../../xffm/find/fgr.hh:125
-msgid "Locate documents and folders on this computer by name or content"
-msgstr "محل‌یابی سند‌ها و پوشه‌های روی این رایانه برحسب نام یا محتویات"
+#: ../xffm/find/dialog.hh:201
+msgid   "Octal Permissions"
+msgstr  "اجازه‌های هشت‌هشتی"
 
-#: ../../xffm/find/fgr.hh:126 ../../xffm/find/dialog.hh:334
-msgid "Filter:"
-msgstr "صافی:"
+#: ../xffm/find/dialog.hh:206
+msgid   "SUID"
+msgstr  ""
 
-#: ../../xffm/find/fgr.hh:126
-msgid "Search for files"
-msgstr "جستجوی پرونده‌ها"
+#: ../xffm/find/dialog.hh:206 ../xffm/fm/view/local/popup.hh:1102
+msgid   "Executable"
+msgstr  "اجرایی"
 
-#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
-#: ../../xffm/find/fgr.hh:128
-msgid "Contents:"
-msgstr "محتویات:"
+#: ../xffm/find/dialog.hh:214 ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168
+msgid   "Minutes"
+msgstr  "دقیقه"
 
-#: ../../xffm/find/fgr.hh:128
+#: ../xffm/find/dialog.hh:219 ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171
+msgid   "Hours"
+msgstr  "ساعت"
+
+#: ../xffm/find/dialog.hh:224 ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174
+msgid   "Days"
+msgstr  "روزها"
+
+#: ../xffm/find/dialog.hh:230
+msgid   "Months"
+msgstr  "ماه"
+
+#: ../xffm/find/dialog.hh:241
+msgid   "File type : "
+msgstr  "نوع پرونده : "
+
+#: ../xffm/find/dialog.hh:255 ../xffm/find/dialog.hh:595
+#: ../xffm/common/gtk.hh:79 ../xffm/fm/dialog/notebook/page/page.hh:71
+msgid   "Close"
+msgstr  "خروج"
+
+#: ../xffm/find/dialog.hh:263 ../xffm/find/dialog.hh:363
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/fm/view/treeview.hh:18
+msgid   "Details"
+msgstr  "جزئیات"
+
+#: ../xffm/find/dialog.hh:301 ../xffm/find/fgr.hh:124
+#: ../xffm/find/signals.hh:100
+msgid   "Path"
+msgstr  "مسیر"
+
+#: ../xffm/find/dialog.hh:334 ../xffm/find/fgr.hh:126
+msgid   "Filter:"
+msgstr  "صافی:"
+
+#: ../xffm/find/dialog.hh:377
+msgid   "Contains"
+msgstr  "دارد"
+
+#: ../xffm/find/dialog.hh:397
+msgid   "Contains the text"
+msgstr  "حاوی متن"
+
+#: ../xffm/find/dialog.hh:430
+msgid   "Case Sensitive"
+msgstr  "حساس به بزرگی و کوچکی حروف"
+
+#: ../xffm/find/dialog.hh:442
+msgid   "Extended regexp"
+msgstr  "regexp گسترش یافته"
+
+#: ../xffm/find/dialog.hh:453
+msgid   "Include binary files"
+msgstr  "شامل پرونده‌های دوگانی‌"
+
+#: ../xffm/find/dialog.hh:463 ../xffm/find/fgr.hh:212
+msgid   "Line Count"
+msgstr  "شمارش خط"
+
+#: ../xffm/find/dialog.hh:489
+msgid   "Match"
+msgstr  "تطبیق"
+
+#: ../xffm/find/dialog.hh:501
+msgid   "Anywhere"
+msgstr  "هر کجا"
+
+#: ../xffm/find/dialog.hh:516
+msgid   "Whole words only"
+msgstr  "فقط تمام کلمات‌"
+
+#: ../xffm/find/dialog.hh:531
+msgid   "lines"
+msgstr  "سطر شماره‌گذاری شود"
+
+#: ../xffm/find/dialog.hh:545 ../xffm/find/fgr.hh:210
+msgid   "No match"
+msgstr  "بدون تطبیق"
+
+#: ../xffm/find/dialog.hh:577 ../xffm/find/signals.hh:368
+#: ../xffm/common/gtk.hh:409 ../xffm/fm/view/local/rm.hh:157
+#: ../xffm/fm/view/local/properties.hh:314
+#: ../xffm/response/entryresponse.hh:435 ../xffm/response/chooserresponse.hh:21
+msgid   "Cancel"
+msgstr  "لغو"
+
+#: ../xffm/find/dialog.hh:587
+msgid   "Clear"
+msgstr  "پاک کردن"
+
+#: ../xffm/find/dialog.hh:629
+msgid   "Edit"
+msgstr  "ویرایش"
+
+#: ../xffm/find/dialog.hh:743 ../xffm/find/dialog.hh:758
+#: ../xffm/common/preview.hh:460 ../xffm/common/util.hh:1354
+#: ../xffm/common/util.hh:1356 ../xffm/common/util.hh:1362
+#: ../xffm/common/util.hh:1364
+msgid   "unknown"
+msgstr  "نامعلوم"
+
+#: ../xffm/find/dialog.hh:772
+msgid   "Modified"
+msgstr  "تغییر داده شد"
+
+#: ../xffm/find/dialog.hh:776
+msgid   "Created"
+msgstr  "ایجاد شد"
+
+#: ../xffm/find/dialog.hh:780
 #, fuzzy
-msgid "File's contents filtered as plain text."
-msgstr "پرونده به شکل متن خام ذخیره شود؟"
+msgid   "Accessed"
+msgstr  "زمان دسترسی:"
 
-#: ../../xffm/find/fgr.hh:131
+#: ../xffm/find/dialog.hh:1098
+msgid   "Basic rules:\n"
+        "\n"
+        "*  Will match any character zero or more times.\n"
+        "?  Will match any character exactly one time\n"
+        "[] Match any character within the [] \n"
+        "^  Match at beginning of string\n"
+        "$  Match at end of string \n"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:1107
+msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
+        "( ) : \n"
+        "In  basic regular expressions the metacharacters ?, +, {, |, (, "
+        "and ) \n"
+        "  lose their special meaning.\n"
+        "\n"
+        "The  period . matches  any  single  character.\n"
+        "The caret ^ matches at the start of line.\n"
+        "The dollar $ matches at the end of line.\n"
+        "\n"
+        "Characters within [ ] matches any single character in the list.\n"
+        "Characters within [^ ] matches any single character *not* in the "
+        "list.\n"
+        "Characters inside [ - ] matches a range of characters (ie [0-9] or "
+        "[a-z]).\n"
+        "\n"
+        "A regular expression may be followed by one of several repetition "
+        "operators:\n"
+        "?      The preceding item is optional and matched\n"
+        "       at most once.\n"
+        "*      The preceding item will be matched zero\n"
+        "       or more times.\n"
+        "+      The preceding item will be matched one or\n"
+        "       more times.\n"
+        "{n}    The preceding item is matched exactly n times.\n"
+        "{n,}   The preceding item is matched n or more times.\n"
+        "{n,m}  The preceding item is matched at least n times,\n"
+        "       but not more than m times.\n"
+        "\n"
+        "To match any reserved character, precede it with \\. \n"
+        "\n"
+        "Two regular expressions may be joined by the logical or operator |.\n"
+        "Two regular expressions may be concatenated.\n"
+        "\n"
+        "More information is available by typing \"man grep\"\n"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:124 ../xffm/completion/base.hh:339
 #, fuzzy
-msgid "Verbose output debugging mode."
-msgstr "اشکال‌زدایی طولانی"
+msgid   "Options:"
+msgstr  "گزینه‌ها"
 
-#: ../../xffm/find/fgr.hh:133
-msgid "Show version information"
-msgstr "نمایش اطلاعات نسخه"
+#: ../xffm/find/fgr.hh:125
+msgid   "Locate documents and folders on this computer by name or content"
+msgstr  "محل‌یابی سند‌ها و پوشه‌های روی این رایانه برحسب نام یا محتویات"
 
-#: ../../xffm/find/fgr.hh:135
-msgid "Filter Details"
-msgstr "جزئیات پالایه"
+#: ../xffm/find/fgr.hh:126
+msgid   "Search for files"
+msgstr  "جستجوی پرونده‌ها"
 
-#. / option -a "xdev"
-#: ../../xffm/find/fgr.hh:138 ../../xffm/find/dialog.hh:173
-msgid "Stay on single filesystem"
-msgstr "باقی ماندن بر یک سیستم پرونده"
+#: ../xffm/find/fgr.hh:128
+msgid   "Contents:"
+msgstr  "محتویات:"
 
-#: ../../xffm/find/fgr.hh:140
-msgid "Print..."
-msgstr "چاپ..."
-
-#: ../../xffm/find/fgr.hh:140
+#: ../xffm/find/fgr.hh:128
 #, fuzzy
-msgid "The unique Process ID that identifies this process."
-msgstr "شناسایی پروژه یکتا"
+msgid   "File's contents filtered as plain text."
+msgstr  "پرونده به شکل متن خام ذخیره شود؟"
 
-#. / option -D "recursiveH"
-#: ../../xffm/find/fgr.hh:142 ../../xffm/find/dialog.hh:170
+#: ../xffm/find/fgr.hh:131
 #, fuzzy
-msgid "Find hidden files and directories"
-msgstr "چشم‌پوشی از پرونده‌ها و پوشه‌های مخفی"
+msgid   "Verbose output debugging mode."
+msgstr  "اشکال‌زدایی طولانی"
 
-#: ../../xffm/find/fgr.hh:143
-msgid "Filter"
-msgstr "فیلتر"
+#: ../xffm/find/fgr.hh:133
+msgid   "Show version information"
+msgstr  "نمایش اطلاعات نسخه"
 
-#: ../../xffm/find/fgr.hh:144
-msgid ""
-"To display files which pass the filter (stars and regexps will be processed)"
-msgstr ""
-"برای پرونده‌هایی که از فیلتر رد می‌شوند (ستاره‌ها و regexps پردازش خواهند شد)"
+#: ../xffm/find/fgr.hh:135
+msgid   "Filter Details"
+msgstr  "جزئیات پالایه"
 
-#. / option -r "recursive"
-#: ../../xffm/find/fgr.hh:146 ../../xffm/find/dialog.hh:167
-msgid "Recursive"
-msgstr "بازگشتی"
+#: ../xffm/find/fgr.hh:140
+msgid   "Print..."
+msgstr  "چاپ..."
 
-#: ../../xffm/find/fgr.hh:147 ../../xffm/find/fgr.hh:148
-#: ../../xffm/find/fgr.hh:149 ../../xffm/find/fgr.hh:150
-msgid "KByte"
-msgstr "کیلوبایت"
-
-#: ../../xffm/find/fgr.hh:148
-msgid "is greater than or equal to"
-msgstr "بیشتر یا مساوی است با"
-
-#: ../../xffm/find/fgr.hh:150
-msgid "is less than or equal to"
-msgstr "کمتر یا مساوی است با"
-
-#: ../../xffm/find/fgr.hh:152
-msgid "Set UID"
-msgstr "تنظیم شناسه کاربر"
-
-#: ../../xffm/find/fgr.hh:152
-msgid "Executable Text Files"
-msgstr "پرونده‌های متنی قابل اجرا"
-
-#: ../../xffm/find/fgr.hh:154
-msgid "The permissions of the file, in octal notation."
-msgstr "اجازه‌های پرونده، در نشانه‌گذاری هشت‌هشتی."
-
-#: ../../xffm/find/fgr.hh:155
-msgid "Type"
-msgstr "نوع"
-
-#: ../../xffm/find/fgr.hh:157 ../../xffm/find/signals.hh:14
-msgid "Any"
-msgstr "هر چیز"
-
-#: ../../xffm/find/fgr.hh:157
+#: ../xffm/find/fgr.hh:140
 #, fuzzy
-msgid "Default type"
-msgstr "زمان پیش‌فرض‌"
+msgid   "The unique Process ID that identifies this process."
+msgstr  "شناسایی پروژه یکتا"
 
-#: ../../xffm/find/fgr.hh:158 ../../xffm/common/preview.hh:478
+#: ../xffm/find/fgr.hh:143
+msgid   "Filter"
+msgstr  "فیلتر"
+
+#: ../xffm/find/fgr.hh:144
+msgid   "To display files which pass the filter (stars and regexps will be "
+        "processed)"
+msgstr  "برای پرونده‌هایی که از فیلتر رد می‌شوند (ستاره‌ها و regexps پردازش "
+        "خواهند شد)"
+
+#: ../xffm/find/fgr.hh:147 ../xffm/find/fgr.hh:148 ../xffm/find/fgr.hh:149
+#: ../xffm/find/fgr.hh:150
+msgid   "KByte"
+msgstr  "کیلوبایت"
+
+#: ../xffm/find/fgr.hh:148
+msgid   "is greater than or equal to"
+msgstr  "بیشتر یا مساوی است با"
+
+#: ../xffm/find/fgr.hh:150
+msgid   "is less than or equal to"
+msgstr  "کمتر یا مساوی است با"
+
+#: ../xffm/find/fgr.hh:152
+msgid   "Set UID"
+msgstr  "تنظیم شناسه کاربر"
+
+#: ../xffm/find/fgr.hh:152
+msgid   "Executable Text Files"
+msgstr  "پرونده‌های متنی قابل اجرا"
+
+#: ../xffm/find/fgr.hh:154
+msgid   "The permissions of the file, in octal notation."
+msgstr  "اجازه‌های پرونده، در نشانه‌گذاری هشت‌هشتی."
+
+#: ../xffm/find/fgr.hh:155
+msgid   "Type"
+msgstr  "نوع"
+
+#: ../xffm/find/fgr.hh:157 ../xffm/find/signals.hh:14
+msgid   "Any"
+msgstr  "هر چیز"
+
+#: ../xffm/find/fgr.hh:157
 #, fuzzy
-msgid "Regular file"
-msgstr "با قاعده"
+msgid   "Default type"
+msgstr  "زمان پیش‌فرض‌"
 
-#: ../../xffm/find/fgr.hh:159 ../../xffm/find/signals.hh:8
-#: ../../xffm/fm/view/local/popup.hh:1062 ../../xffm/common/preview.hh:469
-msgid "Directory"
-msgstr "شاخه"
-
-#: ../../xffm/find/fgr.hh:160 ../../xffm/find/signals.hh:9
-#: ../../xffm/common/preview.hh:475
-msgid "Symbolic Link"
-msgstr "پیوند نمادی"
-
-#: ../../xffm/find/fgr.hh:161
+#: ../xffm/find/fgr.hh:158 ../xffm/common/preview.hh:478
 #, fuzzy
-msgid "UNIX Socket"
-msgstr "طرحواره یونیکس"
+msgid   "Regular file"
+msgstr  "با قاعده"
 
-#: ../../xffm/find/fgr.hh:162 ../../xffm/find/signals.hh:11
-#: ../../xffm/common/preview.hh:463
-msgid "Block device"
-msgstr "دستگاه بلوک"
+#: ../xffm/find/fgr.hh:159 ../xffm/find/signals.hh:8
+#: ../xffm/common/preview.hh:469 ../xffm/fm/view/local/popup.hh:1062
+msgid   "Directory"
+msgstr  "شاخه"
 
-#: ../../xffm/find/fgr.hh:163 ../../xffm/find/signals.hh:12
-#: ../../xffm/common/preview.hh:466
-msgid "Character device"
-msgstr "دستگاه نویسه"
+#: ../xffm/find/fgr.hh:160 ../xffm/find/signals.hh:9
+#: ../xffm/common/preview.hh:475
+msgid   "Symbolic Link"
+msgstr  "پیوند نمادی"
 
-#: ../../xffm/find/fgr.hh:164 ../../xffm/find/signals.hh:13
-#: ../../xffm/common/preview.hh:472
-msgid "FIFO"
-msgstr "FIFO"
-
-#. radio_p freed on destroy event for findDialog.
-#. option -k minutes "last_minutes", "last_minutes_spin"
-#: ../../xffm/find/fgr.hh:166 ../../xffm/find/fgr.hh:168
-#: ../../xffm/find/dialog.hh:214
-msgid "Minutes"
-msgstr "دقیقه"
-
-#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
-#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
-#: ../../xffm/find/dialog.hh:263 ../../xffm/find/dialog.hh:363
-#: ../../xffm/fm/view/treeview.hh:18
-msgid "Details"
-msgstr "جزئیات"
-
-#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
-#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
-#: ../../xffm/find/fgr.hh:179 ../../xffm/find/fgr.hh:180
-#: ../../xffm/find/fgr.hh:183 ../../xffm/find/fgr.hh:184
-#: ../../xffm/find/fgr.hh:187 ../../xffm/find/fgr.hh:188
+#: ../xffm/find/fgr.hh:161
 #, fuzzy
-msgid "TIME"
-msgstr "TIMEOUT"
+msgid   "UNIX Socket"
+msgstr  "طرحواره یونیکس"
 
-#: ../../xffm/find/fgr.hh:168 ../../xffm/find/fgr.hh:171
-#: ../../xffm/find/fgr.hh:174 ../../xffm/find/fgr.hh:177
-msgid "Previous"
-msgstr "قبلی"
+#: ../xffm/find/fgr.hh:162 ../xffm/find/signals.hh:11
+#: ../xffm/common/preview.hh:463
+msgid   "Block device"
+msgstr  "دستگاه بلوک"
 
-#. option -h hours "last_hours", "last_hours_spin"
-#: ../../xffm/find/fgr.hh:169 ../../xffm/find/fgr.hh:171
-#: ../../xffm/find/dialog.hh:219
-msgid "Hours"
-msgstr "ساعت"
+#: ../xffm/find/fgr.hh:163 ../xffm/find/signals.hh:12
+#: ../xffm/common/preview.hh:466
+msgid   "Character device"
+msgstr  "دستگاه نویسه"
 
-#. option -d days "last_days", "last_days_spin"
-#: ../../xffm/find/fgr.hh:172 ../../xffm/find/fgr.hh:174
-#: ../../xffm/find/dialog.hh:224
-msgid "Days"
-msgstr "روزها"
+#: ../xffm/find/fgr.hh:164 ../xffm/find/signals.hh:13
+#: ../xffm/common/preview.hh:472
+msgid   "FIFO"
+msgstr  "FIFO"
 
-#: ../../xffm/find/fgr.hh:175
-msgid "Month"
-msgstr "ماه"
-
-#: ../../xffm/find/fgr.hh:177
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/find/fgr.hh:179 ../xffm/find/fgr.hh:180
+#: ../xffm/find/fgr.hh:183 ../xffm/find/fgr.hh:184 ../xffm/find/fgr.hh:187
+#: ../xffm/find/fgr.hh:188
 #, fuzzy
-msgid "Month(s)"
-msgstr "ماه"
+msgid   "TIME"
+msgstr  "TIMEOUT"
 
-#: ../../xffm/find/fgr.hh:180
-msgid "Modification Time :"
-msgstr "زمان تغییر :"
+#: ../xffm/find/fgr.hh:168 ../xffm/find/fgr.hh:171 ../xffm/find/fgr.hh:174
+#: ../xffm/find/fgr.hh:177
+msgid   "Previous"
+msgstr  "قبلی"
 
-#: ../../xffm/find/fgr.hh:184
-msgid "Access Time :"
-msgstr "زمان دستیابی :"
+#: ../xffm/find/fgr.hh:175
+msgid   "Month"
+msgstr  "ماه"
 
-#: ../../xffm/find/fgr.hh:188
-msgid "Creation Time :"
-msgstr "زمان ایجاد :"
-
-#: ../../xffm/find/fgr.hh:191 ../../xffm/find/fgr.hh:192
-msgid "uid"
-msgstr "شناسه کاربر"
-
-#: ../../xffm/find/fgr.hh:192
-msgid "User:"
-msgstr "کاربر:"
-
-#: ../../xffm/find/fgr.hh:194 ../../xffm/find/fgr.hh:195
+#: ../xffm/find/fgr.hh:177
 #, fuzzy
-msgid "gid"
-msgstr "%Ii روز"
+msgid   "Month(s)"
+msgstr  "ماه"
 
-#: ../../xffm/find/fgr.hh:195
-msgid "Group:"
-msgstr "گروه:"
+#: ../xffm/find/fgr.hh:180
+msgid   "Modification Time :"
+msgstr  "زمان تغییر :"
 
-#: ../../xffm/find/fgr.hh:198
-msgid ""
-"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
-"character that  normally  follows  a file  name"
-msgstr ""
+#: ../xffm/find/fgr.hh:184
+msgid   "Access Time :"
+msgstr  "زمان دستیابی :"
 
-#: ../../xffm/find/fgr.hh:200
-msgid "Content View"
-msgstr "نمای محتویات"
+#: ../xffm/find/fgr.hh:188
+msgid   "Creation Time :"
+msgstr  "زمان ایجاد :"
 
-#: ../../xffm/find/fgr.hh:201 ../../xffm/find/fgr.hh:202
-#: ../../xffm/find/fgr.hh:203 ../../xffm/find/fgr.hh:204
-msgid "STRING"
-msgstr "STRING"
+#: ../xffm/find/fgr.hh:191 ../xffm/find/fgr.hh:192
+msgid   "uid"
+msgstr  "شناسه کاربر"
 
-#: ../../xffm/find/fgr.hh:202 ../../xffm/find/fgr.hh:204
-#: ../../xffm/fm/view/local/popup.hh:759
-msgid "Regular expression"
-msgstr "عبارت باقاعده"
+#: ../xffm/find/fgr.hh:192
+msgid   "User:"
+msgstr  "کاربر:"
 
-#: ../../xffm/find/fgr.hh:204
-msgid "Extended"
-msgstr "تعمیم‌یافته"
+#: ../xffm/find/fgr.hh:194 ../xffm/find/fgr.hh:195
+#, fuzzy
+msgid   "gid"
+msgstr  "%Ii روز"
 
-#: ../../xffm/find/fgr.hh:206
-msgid "Ignore case"
-msgstr "نادیده گرفتن بزرگی و کوچکی"
+#: ../xffm/find/fgr.hh:195
+msgid   "Group:"
+msgstr  "گروه:"
 
-#: ../../xffm/find/fgr.hh:208
-msgid "Text Files"
-msgstr "پرونده متنی"
+#: ../xffm/find/fgr.hh:198
+msgid   "Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+        "character that  normally  follows  a file  name"
+msgstr  ""
 
-#: ../../xffm/find/fgr.hh:210 ../../xffm/find/dialog.hh:545
-msgid "No match"
-msgstr "بدون تطبیق"
+#: ../xffm/find/fgr.hh:200
+msgid   "Content View"
+msgstr  "نمای محتویات"
 
-#: ../../xffm/find/fgr.hh:212 ../../xffm/find/dialog.hh:463
-msgid "Line Count"
-msgstr "شمارش خط"
+#: ../xffm/find/fgr.hh:201 ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:203
+#: ../xffm/find/fgr.hh:204
+msgid   "STRING"
+msgstr  "STRING"
 
-#: ../../xffm/find/fgr.hh:214
-msgid "Words"
-msgstr "کلمه"
+#: ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:204
+#: ../xffm/fm/view/local/popup.hh:759
+msgid   "Regular expression"
+msgstr  "عبارت باقاعده"
 
-#: ../../xffm/find/fgr.hh:216
-msgid "Lines"
-msgstr "سطر"
+#: ../xffm/find/fgr.hh:204
+msgid   "Extended"
+msgstr  "تعمیم‌یافته"
 
-#: ../../xffm/find/fgr.hh:368
+#: ../xffm/find/fgr.hh:206
+msgid   "Ignore case"
+msgstr  "نادیده گرفتن بزرگی و کوچکی"
+
+#: ../xffm/find/fgr.hh:208
+msgid   "Text Files"
+msgstr  "پرونده متنی"
+
+#: ../xffm/find/fgr.hh:214
+msgid   "Words"
+msgstr  "کلمه"
+
+#: ../xffm/find/fgr.hh:216
+msgid   "Lines"
+msgstr  "سطر"
+
+#: ../xffm/find/fgr.hh:362
 #, fuzzy, c-format
-msgid "Usage : %s [OPTIONS]\n"
-msgstr "کاربرد: %s %s\n"
+msgid   "Usage : %s [OPTIONS]\n"
+msgstr  "کاربرد: %s %s\n"
 
-#: ../../xffm/find/signals.hh:7
-msgid "Regular"
-msgstr "با قاعده"
+#: ../xffm/find/signals.hh:7
+msgid   "Regular"
+msgstr  "با قاعده"
 
-#: ../../xffm/find/signals.hh:10 ../../xffm/common/preview.hh:481
-msgid "Socket"
-msgstr "سوکت"
+#: ../xffm/find/signals.hh:10 ../xffm/common/preview.hh:481
+msgid   "Socket"
+msgstr  "سوکت"
 
-#. if (g_slist_length(list) == 0) return NULL;
-#. Create liststore for DnD
-#. / option "upper_limit_spin" (only in gtk findDialog)
-#: ../../xffm/find/signals.hh:66 ../../xffm/find/signals.hh:454
-#: ../../xffm/find/dialog.hh:176
-msgid "Results"
-msgstr "نتایج"
-
-#. button no
-#: ../../xffm/find/signals.hh:368 ../../xffm/find/dialog.hh:577
-#: ../../xffm/response/chooserresponse.hh:21
-#: ../../xffm/response/entryresponse.hh:420
-#: ../../xffm/fm/view/local/properties.hh:314
-#: ../../xffm/fm/view/local/rm.hh:157 ../../xffm/common/gtk.hh:409
-msgid "Cancel"
-msgstr "لغو"
-
-#: ../../xffm/find/signals.hh:396 ../../xffm/find/signals.hh:830
+#: ../xffm/find/signals.hh:396 ../xffm/find/signals.hh:830
 #, fuzzy
-msgid "No editor for current action."
-msgstr "هیچ فعالیتی وجود ندارد."
+msgid   "No editor for current action."
+msgstr  "هیچ فعالیتی وجود ندارد."
 
-#: ../../xffm/find/signals.hh:454
-msgid "Upper limit:"
-msgstr "حد بالایی:"
+#: ../xffm/find/signals.hh:454
+msgid   "Upper limit:"
+msgstr  "حد بالایی:"
 
-#: ../../xffm/find/signals.hh:456
-msgid "Counting files..."
-msgstr "در حال شمارش پرونده‌ها..."
+#: ../xffm/find/signals.hh:456
+msgid   "Counting files..."
+msgstr  "در حال شمارش پرونده‌ها..."
 
-#: ../../xffm/find/signals.hh:471
+#: ../xffm/find/signals.hh:471
 #, fuzzy, c-format
-msgid "Found %d match"
-msgid_plural "Found %d matches"
-msgstr[0] "%d تطبیق"
+msgid   "Found %d match"
+msgid_plural    "Found %d matches"
+msgstr[0]       "%d تطبیق"
 
-#: ../../xffm/find/signals.hh:473
+#: ../xffm/find/signals.hh:473
 #, fuzzy, c-format
-msgid "%s Finished : %s"
-msgstr "زمان پایان:"
+msgid   "%s Finished : %s"
+msgstr  "زمان پایان:"
 
-#: ../../xffm/find/signals.hh:596 ../../xffm/find/signals.hh:598
-msgid "Searching..."
-msgstr "در حال جست و جو"
+#: ../xffm/find/signals.hh:596 ../xffm/find/signals.hh:598
+msgid   "Searching..."
+msgstr  "در حال جست و جو"
 
-#. g_object_set_data(G_OBJECT(findDialog), "window", findDialog);
-#: ../../xffm/find/dialog.hh:91 ../../xffm/find/dialog.hh:143
-#: ../../xffm/find/dialog.hh:604
-msgid "Find"
-msgstr "جست‌وجو"
+#: ../xffm/common/preview.hh:581
+msgid   "Empty file"
+msgstr  "پرونده خالی"
 
-#: ../../xffm/find/dialog.hh:176
-#, fuzzy
-msgid "Upper limit"
-msgstr "حد بالایی:"
-
-#. option -s +KByte "size_greater", "size_greater_spin"
-#: ../../xffm/find/dialog.hh:181
-msgid "At Least"
-msgstr "حداقل"
-
-#: ../../xffm/find/dialog.hh:181 ../../xffm/find/dialog.hh:186
-msgid "kBytes"
-msgstr "کیلوبایت"
-
-#. option -s -KByte "size_smaller", "size_smaller_spin"
-#: ../../xffm/find/dialog.hh:186
-msgid "At Most"
-msgstr "حداکثر"
-
-#: ../../xffm/find/dialog.hh:197
-msgid "Group"
-msgstr "گروه"
-
-#. option -o octal "octal_p" "permissions_entry"
-#: ../../xffm/find/dialog.hh:201
-msgid "Octal Permissions"
-msgstr "اجازه‌های هشت‌هشتی"
-
-#. option -p suid | exe
-#: ../../xffm/find/dialog.hh:206
-msgid "SUID"
-msgstr ""
-
-#: ../../xffm/find/dialog.hh:206 ../../xffm/fm/view/local/popup.hh:1102
-msgid "Executable"
-msgstr "اجرایی"
-
-#. option -m months "last_months", "last_months_spin"
-#: ../../xffm/find/dialog.hh:230
-msgid "Months"
-msgstr "ماه"
-
-#: ../../xffm/find/dialog.hh:241
-msgid "File type : "
-msgstr "نوع پرونده : "
-
-#. gtk_widget_show (GTK_WIDGET(right_options_vbox));
-#. gtk_widget_show (GTK_WIDGET(center_options_vbox));
-#. gtk_widget_show (GTK_WIDGET(left_options_vbox));
-#: ../../xffm/find/dialog.hh:255 ../../xffm/find/dialog.hh:595
-#: ../../xffm/fm/dialog/notebook/page/page.hh:70 ../../xffm/common/gtk.hh:79
-msgid "Close"
-msgstr "خروج"
-
-#. gtk_box_pack_start (vbox7a, GTK_WIDGET(advancedBox), TRUE, FALSE, 5);
-#. gtk_widget_show(GTK_WIDGET(advancedBox));
-#. //////////////  grep options.... /////////////////////////
-#: ../../xffm/find/dialog.hh:377
-msgid "Contains"
-msgstr "دارد"
-
-#: ../../xffm/find/dialog.hh:397
-msgid "Contains the text"
-msgstr "حاوی متن"
-
-#: ../../xffm/find/dialog.hh:430
-msgid "Case Sensitive"
-msgstr "حساس به بزرگی و کوچکی حروف"
-
-#: ../../xffm/find/dialog.hh:442
-msgid "Extended regexp"
-msgstr "regexp گسترش یافته"
-
-#: ../../xffm/find/dialog.hh:453
-msgid "Include binary files"
-msgstr "شامل پرونده‌های دوگانی‌"
-
-#: ../../xffm/find/dialog.hh:489
-msgid "Match"
-msgstr "تطبیق"
-
-#: ../../xffm/find/dialog.hh:501
-msgid "Anywhere"
-msgstr "هر کجا"
-
-#: ../../xffm/find/dialog.hh:516
-msgid "Whole words only"
-msgstr "فقط تمام کلمات‌"
-
-#: ../../xffm/find/dialog.hh:531
-msgid "lines"
-msgstr "سطر شماره‌گذاری شود"
-
-#: ../../xffm/find/dialog.hh:587
-msgid "Clear"
-msgstr "پاک کردن"
-
-#: ../../xffm/find/dialog.hh:629
-msgid "Edit"
-msgstr "ویرایش"
-
-#: ../../xffm/find/dialog.hh:743 ../../xffm/find/dialog.hh:758
-#: ../../xffm/common/util.hh:1354 ../../xffm/common/util.hh:1356
-#: ../../xffm/common/util.hh:1362 ../../xffm/common/util.hh:1364
-#: ../../xffm/common/preview.hh:460
-msgid "unknown"
-msgstr "نامعلوم"
-
-#: ../../xffm/find/dialog.hh:772
-msgid "Modified"
-msgstr "تغییر داده شد"
-
-#: ../../xffm/find/dialog.hh:776
-msgid "Created"
-msgstr "ایجاد شد"
-
-#: ../../xffm/find/dialog.hh:780
-#, fuzzy
-msgid "Accessed"
-msgstr "زمان دسترسی:"
-
-#: ../../xffm/find/dialog.hh:1098
-msgid ""
-"Basic rules:\n"
-"\n"
-"*  Will match any character zero or more times.\n"
-"?  Will match any character exactly one time\n"
-"[] Match any character within the [] \n"
-"^  Match at beginning of string\n"
-"$  Match at end of string \n"
-msgstr ""
-
-#: ../../xffm/find/dialog.hh:1107
-msgid ""
-"Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ ( ) : \n"
-"In  basic regular expressions the metacharacters ?, +, {, |, (, and ) \n"
-"  lose their special meaning.\n"
-"\n"
-"The  period . matches  any  single  character.\n"
-"The caret ^ matches at the start of line.\n"
-"The dollar $ matches at the end of line.\n"
-"\n"
-"Characters within [ ] matches any single character in the list.\n"
-"Characters within [^ ] matches any single character *not* in the list.\n"
-"Characters inside [ - ] matches a range of characters (ie [0-9] or [a-z]).\n"
-"\n"
-"A regular expression may be followed by one of several repetition "
-"operators:\n"
-"?      The preceding item is optional and matched\n"
-"       at most once.\n"
-"*      The preceding item will be matched zero\n"
-"       or more times.\n"
-"+      The preceding item will be matched one or\n"
-"       more times.\n"
-"{n}    The preceding item is matched exactly n times.\n"
-"{n,}   The preceding item is matched n or more times.\n"
-"{n,m}  The preceding item is matched at least n times,\n"
-"       but not more than m times.\n"
-"\n"
-"To match any reserved character, precede it with \\. \n"
-"\n"
-"Two regular expressions may be joined by the logical or operator |.\n"
-"Two regular expressions may be concatenated.\n"
-"\n"
-"More information is available by typing \"man grep\"\n"
-msgstr ""
-
-#: ../../xffm/response/chooserresponse.hh:23
-msgid "Open"
-msgstr "باز کردن"
-
-#: ../../xffm/response/chooserresponse.hh:56
-#, fuzzy
-msgid "Choose directory"
-msgstr "فهرست راهنمای پایه:"
-
-#: ../../xffm/response/chooserresponse.hh:60
-#, fuzzy
-msgid "Choose file"
-msgstr "انتخاب یک پرونده"
-
-#: ../../xffm/response/customresponse.hh:55
-#, fuzzy
-msgid "Execute command"
-msgstr "اجرای فرمان"
-
-#. XXX folder or file entry should be determined on .ini file (probably just inherit from comboresponse for multiple files options (selected files)...
-#: ../../xffm/response/customresponse.hh:103
-msgid "Source File"
-msgstr "پرونده منبع"
-
-#. this button is redundant since hands are on keyboard for password
-#: ../../xffm/response/entryresponse.hh:424
-#: ../../xffm/response/passwdresponse.hh:242
-msgid "Ok"
-msgstr "تأئید"
-
-#: ../../xffm/response/commandprogressresponse.hh:31
-msgid "Items:"
-msgstr "موارد:"
-
-#: ../../xffm/response/passwdresponse.hh:19
-#: ../../xffm/response/passwdresponse.hh:25 ../../xffm/common/run.hh:464
-msgid "Enter password"
-msgstr "گذرواژه را وارد کنید"
-
-#. gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
-#: ../../xffm/response/passwdresponse.hh:179
-#, fuzzy
-msgid "User Input"
-msgstr "ورودی موشی"
-
-#: ../../xffm/response/passwdresponse.hh:195
-#, fuzzy
-msgid "Response Requested"
-msgstr "پاسخ خارج"
-
-#: ../../xffm/response/timeoutresponse.hh:57
-msgid "Dismiss"
-msgstr "رها کردن"
-
-#: ../../xffm/response/commandresponse.hh:19
-msgid "Running"
-msgstr "درحال اجرا"
-
-#. auto text = g_strdup_printf("%s (pid: %d)",
-#. _("Waiting for operation to finish..."),
-#. Tubo<Type>::getChild (pid));
-#: ../../xffm/response/commandresponse.hh:24
-#, fuzzy
-msgid "Waiting for operation to finish..."
-msgstr "برای پایان  توکس پنت  صبر کنید"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:11
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:214
-#, fuzzy
-msgid "Remove Button Contents"
-msgstr "حذف ده‌ها"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:67
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:209
-#, fuzzy
-msgid "Add custom content"
-msgstr "افزودن یک جدول محتوا"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:68
-#, fuzzy
-msgid "Select file to load"
-msgstr "یک پرونده را برای پخش انتخاب کنید"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:125
+#: ../xffm/common/preview.hh:636
 #, fuzzy, c-format
-msgid "Cannot load file %s. Reason: %s"
-msgstr "نمی‌توان پوشه‌ی «%s» را بار کرد: %s\n"
+msgid   "Cannot read from %s"
+msgstr  "نمی‌توان از «%s» خواند"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:154
+#: ../xffm/common/gtk.hh:67 ../xffm/fm/dialog/notebook/vbuttonbox.hh:240
 #, fuzzy
-msgid "You need to restart the application"
-msgstr "شما باید برنامه را مجددا راه‌اندازی کنید."
+msgid   "Open terminal"
+msgstr  "باز کردن یک پایانه"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:187
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:191
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:195
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:198
-#: ../../xffm/fm/view/pkg/model.hh:29 ../../xffm/fm/view/pkg/popup.hh:35
+#: ../xffm/common/gtk.hh:69 ../xffm/common/util.hh:1443
+msgid   "Execute Shell Command"
+msgstr  "اجرای فرمان پوسته"
+
+#: ../xffm/common/gtk.hh:71 ../xffm/fm/view/local/popup.hh:157
+msgid   "Paste"
+msgstr  "چسباندن"
+
+#: ../xffm/common/gtk.hh:73 ../xffm/fm/view/local/popup.hh:151
+msgid   "Add bookmark"
+msgstr  "افزودن چوب‌الف"
+
+#: ../xffm/common/gtk.hh:75 ../xffm/fm/view/local/popup.hh:152
+#: ../xffm/fm/view/root/popup.hh:137
+msgid   "Remove bookmark"
+msgstr  "حذف نشانک"
+
+#: ../xffm/common/gtk.hh:77 ../xffm/fm/view/pkg/model.hh:108
+#: ../xffm/fm/view/pkg/model.hh:299 ../xffm/fm/view/pkg/model.hh:306
+#: ../xffm/fm/view/pkg/popup.hh:151
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:236
+msgid   "Search"
+msgstr  "جستجو"
+
+#: ../xffm/common/gtk.hh:81 ../xffm/fm/dialog/notebook/menupopover.hh:237
+msgid   "Exit"
+msgstr  "خروج"
+
+#: ../xffm/common/gtk.hh:83 ../xffm/fm/view/local/popup.hh:85
+#: ../xffm/fm/view/local/popup.hh:142 ../xffm/fm/view/local/popup.hh:1287
+#: ../xffm/fm/view/local/popup.hh:1294 ../xffm/fm/view/local/popup.hh:1305
+#: ../xffm/fm/view/local/popup.hh:1312
+msgid   "Open with"
+msgstr  "باز کردن با"
+
+#: ../xffm/common/gtk.hh:85 ../xffm/fm/view/local/popup.hh:100
+#: ../xffm/fm/view/local/popup.hh:156
+msgid   "Cut"
+msgstr  "بریدن"
+
+#: ../xffm/common/gtk.hh:87 ../xffm/fm/view/local/popup.hh:99
+#: ../xffm/fm/view/local/popup.hh:155
+msgid   "Copy"
+msgstr  "رونوشت"
+
+#: ../xffm/common/gtk.hh:89 ../xffm/fm/view/local/rm.hh:176
+#: ../xffm/fm/view/local/popup.hh:103 ../xffm/fm/view/local/popup.hh:160
+msgid   "Delete"
+msgstr  "حذف"
+
+#: ../xffm/common/gtk.hh:91 ../xffm/fm/view/local/rm.hh:165
 #, fuzzy
-msgid "Software Updater"
-msgstr "بروزرسانی نرم‌افزار"
+msgid   "Shred"
+msgstr  "تکه تکه‌کننده"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:236
-#: ../../xffm/fm/view/pkg/model.hh:108 ../../xffm/fm/view/pkg/model.hh:299
-#: ../../xffm/fm/view/pkg/model.hh:306 ../../xffm/fm/view/pkg/popup.hh:151
-#: ../../xffm/common/gtk.hh:77
-msgid "Search"
-msgstr "جستجو"
+#: ../xffm/common/gtk.hh:94 ../xffm/fm/view/local/popup.hh:95
+#: ../xffm/fm/view/local/popup.hh:145 ../xffm/fm/view/root/popup.hh:136
+#: ../xffm/fm/view/fstab/popup.hh:20
+msgid   "Open in New Tab"
+msgstr  "بازکردن در زبانه‌ی جدید"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:240 ../../xffm/common/gtk.hh:67
+#: ../xffm/common/gtk.hh:139 ../xffm/fm/dialog/notebook/notebook.hh:75
+msgid   "New Tab"
+msgstr  "زبانه‌ی جدید"
+
+#: ../xffm/common/gtk.hh:352 ../xffm/common/gtk.hh:360
+msgid   "Help"
+msgstr  "راهنما"
+
+#: ../xffm/common/settings.hh:30
 #, fuzzy
-msgid "Open terminal"
-msgstr "باز کردن یک پایانه"
+msgid   "New File:"
+msgstr  "پرونده‌ی جدید"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:244
-msgid "Open a New Window"
-msgstr "باز کردن یک پنجره جدید"
+#: ../xffm/common/gio.hh:81
+msgid   "Copying files"
+msgstr  "در حال نسخه‌برداری از پرونده‌ها"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:250
-msgid "Differences"
-msgstr "تفاوت‌ها"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:256
-#: ../../xffm/fm/view/root/model.hh:110
-msgid "Home Directory"
-msgstr "فهرست راهنمای آغازه"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:261
-#: ../../xffm/fm/view/root/model.hh:168 ../../xffm/fm/view/fstab/popup.hh:29
+#: ../xffm/common/gio.hh:83 ../xffm/common/dnd.hh:35
+#: ../xffm/fm/dialog/clipboard.hh:30
 #, fuzzy
-msgid "Disk Image Mounter"
-msgstr "سوارکننده‌ی دیسک"
+msgid   "Moving files"
+msgstr  "در حال جابه‌جایی پرونده‌ها"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:266
-#: ../../xffm/fm/view/root/model.hh:137
+#: ../xffm/common/gio.hh:85
+msgid   "linking"
+msgstr  "پیوند"
+
+#: ../xffm/common/gio.hh:87
 #, fuzzy
-msgid "Trash bin"
-msgstr "زباله کردن پرونده"
+msgid   "rename"
+msgstr  "تغییر نام"
 
-#: ../../xffm/fm/dialog/notebook/notebook.hh:56
-msgid "Long press time"
-msgstr "زمان فشار طولانی"
-
-#: ../../xffm/fm/dialog/notebook/notebook.hh:75 ../../xffm/common/gtk.hh:139
-msgid "New Tab"
-msgstr "زبانه‌ی جدید"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:178
-#, fuzzy
-msgid "Open menu"
-msgstr "بازکردن تصویر"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:230
-#, fuzzy
-msgid "View as list"
-msgstr "نمایش به شکل فهرست"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:231
-msgid "Show hidden files"
-msgstr "نمایش پرونده‌های مخفی"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:232
-#, fuzzy
-msgid "Show Backup Files"
-msgstr "ایجاد پرونده‌های پشتیبان‌"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:233
-msgid "Sort data in descending order"
-msgstr "مرتب کردن داده به ترتیب نزولی"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:235
-#, fuzzy
-msgid "Sort by date"
-msgstr "مرتب‌سازی بر اساس نام"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:236
-#, fuzzy
-msgid "Sort by size"
-msgstr "مرتب‌سازی بر اساس نام"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:237 ../../xffm/common/gtk.hh:81
-msgid "Exit"
-msgstr "خروج"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:270
-msgid "Main menu"
-msgstr "منوی اصلی"
-
-#. File chooser
-#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:375
-#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:377
-msgid "Go to"
-msgstr "برو به"
-
-#. entryResponse->setCheckButton(_("Run in Terminal"));
-#. entryResponse->setCheckButton(Run<Type>::runInTerminal(path));
-#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:382
-#: ../../xffm/fm/view/local/popup.hh:887 ../../xffm/fm/view/local/popup.hh:981
-msgid "Specify Output Directory..."
-msgstr "مشخص کردن فهرست خروجی..."
-
-#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:409
-msgid "Not a directory"
-msgstr "شاخه نیست"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:135
-#, fuzzy
-msgid "Renice Process"
-msgstr "نایس مجدد فراروند"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:135
-msgid "Suspend"
-msgstr "تعلیق"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:135
-msgid "Continue"
-msgstr "ادامه"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid "Interrupt"
-msgstr "وقفه"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid "Hangup"
-msgstr "معوق گذاشتن"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:136
-#, fuzzy
-msgid "User 1 (USR1)"
-msgstr "کاربران (6)"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:137
-#, fuzzy
-msgid "User 2 (USR2)"
-msgstr "کاربران (6)"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:137
-#, fuzzy
-msgid "Terminate Task"
-msgstr "پایان دادن"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:137
-msgid "Abort"
-msgstr "قطع کردن"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:138
-msgid "Kill"
-msgstr "خاموش کردن"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:139
-#, fuzzy
-msgid "Segmentation fault"
-msgstr "تخلف قطعه قطعه کردن"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:216
-msgid "PID"
-msgstr "PID"
-
-#: ../../xffm/fm/dialog/notebook/page/page.hh:58
-msgid "loading..."
-msgstr "در حال بار کردن..."
-
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
-#, fuzzy
-msgid "Embedded Terminal"
-msgstr "ریزنقش نهفته"
-
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
-#, fuzzy
-msgid "All items in the iconview."
-msgstr "انتخاب همه‌ی موارد در این پنجره"
-
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
-msgid "Scripting"
-msgstr "دست‌نوشته"
-
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
-msgid "Clear Log"
-msgstr "پاک کردن ثبت"
-
-#. Status textview
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
-msgid "Terminal font"
-msgstr "قلم پایانه"
-
-#: ../../xffm/fm/dialog/clipboard.hh:23 ../../xffm/common/dnd.hh:41
-msgid "Copying files locally"
-msgstr "رونوشت پرونده‌ها به صورت محلی"
-
-#: ../../xffm/fm/dialog/clipboard.hh:30 ../../xffm/common/gio.hh:83
-#: ../../xffm/common/dnd.hh:35
-#, fuzzy
-msgid "Moving files"
-msgstr "در حال جابه‌جایی پرونده‌ها"
-
-#: ../../xffm/fm/dialog/dialog.hh:122
-msgid "Removed"
-msgstr "حذف شد"
-
-#: ../../xffm/fm/dialog/dialog.hh:143
-#, fuzzy
-msgid "Detected device(s):"
-msgstr "تشخیص دستگاه‌ها"
-
-#: ../../xffm/fm/view/local/model.hh:122
+#: ../xffm/common/gio.hh:426
 #, c-format
-msgid "Reading \"%s\""
-msgstr "درحال خواندن «%s»"
+msgid   "(%d of %d)"
+msgstr  "(%Id از %Id)"
 
-#: ../../xffm/fm/view/local/model.hh:575 ../../xffm/fm/view/base/monitor.hh:33
-#, fuzzy, c-format
-msgid "Files: %s"
-msgstr "پرونده: %s"
-
-#: ../../xffm/fm/view/local/model.hh:578
-#, fuzzy, c-format
-msgid "Loaded %d of %d articles"
-msgstr "%Id پرونده بارگذاری شد"
-
-#: ../../xffm/fm/view/local/popup.hh:85 ../../xffm/fm/view/local/popup.hh:142
-#: ../../xffm/fm/view/local/popup.hh:1287
-#: ../../xffm/fm/view/local/popup.hh:1294
-#: ../../xffm/fm/view/local/popup.hh:1305
-#: ../../xffm/fm/view/local/popup.hh:1312 ../../xffm/common/gtk.hh:83
-msgid "Open with"
-msgstr "باز کردن با"
-
-#: ../../xffm/fm/view/local/popup.hh:94
-msgid "New"
-msgstr "جدید"
-
-#: ../../xffm/fm/view/local/popup.hh:95 ../../xffm/fm/view/local/popup.hh:145
-#: ../../xffm/fm/view/root/popup.hh:136 ../../xffm/fm/view/fstab/popup.hh:20
-#: ../../xffm/common/gtk.hh:94
-msgid "Open in New Tab"
-msgstr "بازکردن در زبانه‌ی جدید"
-
-#. deprecated {N_("Open in New Tab"), NULL, NULL, NULL},
-#. deprecated {N_("Open in New Window"), NULL, NULL, NULL},
-#. common buttons /(also an iconsize +/- button)
-#: ../../xffm/fm/view/local/popup.hh:99 ../../xffm/fm/view/local/popup.hh:155
-#: ../../xffm/common/gtk.hh:87
-msgid "Copy"
-msgstr "رونوشت"
-
-#: ../../xffm/fm/view/local/popup.hh:100 ../../xffm/fm/view/local/popup.hh:156
-#: ../../xffm/common/gtk.hh:85
-msgid "Cut"
-msgstr "بریدن"
-
-#: ../../xffm/fm/view/local/popup.hh:101 ../../xffm/fm/view/local/popup.hh:159
-#: ../../xffm/fm/view/local/popup.hh:232 ../../xffm/fm/view/local/popup.hh:234
-#, fuzzy
-msgid "Paste into"
-msgstr "رنگین کمان پاستلی"
-
-#: ../../xffm/fm/view/local/popup.hh:102 ../../xffm/fm/view/local/popup.hh:158
-msgid "There is nothing on the clipboard to paste."
-msgstr "چیزی برای چسباندن در تخته‌گیره نیست."
-
-#. **************
-#: ../../xffm/fm/view/local/popup.hh:103 ../../xffm/fm/view/local/popup.hh:160
-#: ../../xffm/fm/view/local/rm.hh:176 ../../xffm/common/gtk.hh:89
-msgid "Delete"
-msgstr "حذف"
-
-#. {N_("About"), NULL, (void *) menu},
-#.
-#: ../../xffm/fm/view/local/popup.hh:106
-msgid "Select All"
-msgstr "انتخاب همه"
-
-#: ../../xffm/fm/view/local/popup.hh:107 ../../xffm/fm/view/local/popup.hh:755
-#, fuzzy
-msgid "Match regular expression"
-msgstr "همچون عبارت منظم تطبیق داده شود"
-
-#: ../../xffm/fm/view/local/popup.hh:143 ../../xffm/fm/view/local/popup.hh:1105
-#, fuzzy
-msgid "Run Executable..."
-msgstr "اجرایی"
-
-#. File chooser
-#: ../../xffm/fm/view/local/popup.hh:144 ../../xffm/fm/view/local/popup.hh:875
-msgid "Extract files from the archive"
-msgstr "استخراج پرونده‌ها از آرشیو"
-
-#. File chooser
-#: ../../xffm/fm/view/local/popup.hh:146 ../../xffm/fm/view/local/popup.hh:966
-msgid "Create a compressed archive with the selected objects"
-msgstr "ایجاد یک آرشیو با اشیاء انتخاب شده"
-
-#: ../../xffm/fm/view/local/popup.hh:148 ../../xffm/fm/view/fstab/popup.hh:37
-msgid "Mount the volume associated with this folder"
-msgstr "سوار کردن جلد وابسته با این پوشه"
-
-#: ../../xffm/fm/view/local/popup.hh:149 ../../xffm/fm/view/fstab/popup.hh:38
-msgid "Unmount the volume associated with this folder"
-msgstr "پیاده کردن جلد وابسته با این پوشه"
-
-#: ../../xffm/fm/view/local/popup.hh:151 ../../xffm/common/gtk.hh:73
-msgid "Add bookmark"
-msgstr "افزودن چوب‌الف"
-
-#: ../../xffm/fm/view/local/popup.hh:152 ../../xffm/fm/view/root/popup.hh:137
-#: ../../xffm/common/gtk.hh:75
-msgid "Remove bookmark"
-msgstr "حذف نشانک"
-
-#: ../../xffm/fm/view/local/popup.hh:157 ../../xffm/common/gtk.hh:71
-msgid "Paste"
-msgstr "چسباندن"
-
-#: ../../xffm/fm/view/local/popup.hh:161 ../../xffm/fm/view/local/popup.hh:1231
-msgid "Rename"
-msgstr "تغییر نام"
-
-#: ../../xffm/fm/view/local/popup.hh:162 ../../xffm/fm/view/local/popup.hh:1217
-msgid "Duplicate"
-msgstr "تکثیر"
-
-#: ../../xffm/fm/view/local/popup.hh:163 ../../xffm/fm/view/local/popup.hh:1203
-msgid "Link"
-msgstr "پیوند"
-
-#: ../../xffm/fm/view/local/popup.hh:164
-msgid "Properties"
-msgstr "ویژگی‌ها"
-
-#: ../../xffm/fm/view/local/popup.hh:562
-msgid "Files:"
-msgstr "پرونده‌ها:"
-
-#: ../../xffm/fm/view/local/popup.hh:565 ../../xffm/fm/view/local/rm.hh:61
-#, fuzzy
-msgid "Multiple selections"
-msgstr "تراکنشهای چندگانه"
-
-#: ../../xffm/fm/view/local/popup.hh:753
-#, fuzzy
-msgid "Select items"
-msgstr "چیدمان‌های انتخاب شده:"
-
-#: ../../xffm/fm/view/local/popup.hh:771
-#, fuzzy
-msgid "Regular Expression syntax is incorrect"
-msgstr "عبارت منظمی که در شرف جایگزینی است."
-
-#: ../../xffm/fm/view/local/popup.hh:801
-msgid "No selection"
-msgstr "بدون انتخاب"
-
-#: ../../xffm/fm/view/local/popup.hh:801
-#, fuzzy
-msgid "No matches."
-msgstr "پیدا نشد"
-
-#: ../../xffm/fm/view/local/popup.hh:1058
-#, fuzzy
-msgid "Create new..."
-msgstr "ایجاد جدید"
-
-#: ../../xffm/fm/view/local/popup.hh:1065
-#: ../../xffm/fm/view/local/popup.hh:1146
-#, fuzzy
-msgid "New Name:"
-msgstr "نام جدید"
-
-#: ../../xffm/fm/view/local/popup.hh:1074
-msgid "No name"
-msgstr "بدون نام"
-
-#: ../../xffm/fm/view/local/popup.hh:1087
+#: ../xffm/common/util.hh:1404
 #, c-format
-msgid "Another file with the same name already exists in “%s”."
-msgstr "پرونده‌ی دیگری با نام مشابه پیشاپیش در «%s» وجود دارد."
+msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
+        "attribute on that file."
+msgstr  ""
 
-#: ../../xffm/fm/view/local/popup.hh:1109
-#: ../../xffm/fm/view/local/popup.hh:1291
-#: ../../xffm/fm/view/local/popup.hh:1309 ../../xffm/common/util.hh:1452
-msgid "Run in Terminal"
-msgstr "اجرا در پایانه"
-
-#: ../../xffm/fm/view/local/popup.hh:1112
-#, fuzzy
-msgid "Arguments for the Command"
-msgstr "نشانوندها برای فرمان"
-
-#: ../../xffm/fm/view/local/popup.hh:1258
-#, fuzzy
-msgid "You have selected multiple files or folders"
-msgstr "تغییر نام پرونده و پوشه انتخاب شده"
-
-#: ../../xffm/fm/view/local/popup.hh:1332 ../../xffm/fm/view/local/view.hh:156
-#, fuzzy
-msgid "Invalid entry"
-msgstr "مدخل نامعتبر"
-
-#: ../../xffm/fm/view/local/properties.hh:245
-#, fuzzy
-msgid "Properties and Attributes"
-msgstr "خصیصه مشتق‌شده"
-
-#: ../../xffm/fm/view/local/properties.hh:274
-#, fuzzy
-msgid "File Mode:"
-msgstr "پرونده به نام:"
-
-#: ../../xffm/fm/view/local/properties.hh:300
-msgid "File:"
-msgstr "پرونده:"
-
-#. Add file info stuff
-#. set info stuff data according to combo box
-#. add signal handler to changed signal for combo box
-#. Add process buttons
-#.
-#: ../../xffm/fm/view/local/properties.hh:312
-msgid "Apply changes"
-msgstr "اعمال تغییرات"
-
-#: ../../xffm/fm/view/local/properties.hh:477
-msgid "Successfully moved to trash."
-msgstr "با موفقیت به زباله‌دانی منتقل شد."
-
-#: ../../xffm/fm/view/local/properties.hh:478
-msgid "Source:"
-msgstr "مبدأ"
-
-#: ../../xffm/fm/view/local/rm.hh:59
+#: ../xffm/common/util.hh:1406 ../xffm/common/util.hh:1441
 #, c-format
-msgid "Delete %s"
-msgstr "حذف %s"
+msgid   "Open with %s"
+msgstr  "باز کردن با %s"
 
-#: ../../xffm/fm/view/local/rm.hh:61
-msgid "Warning: "
-msgstr "اخطار: "
+#: ../xffm/common/util.hh:1406
+msgid   "Text Editor"
+msgstr  "ویرایشگر متن"
 
-#. gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
-#. title
-#: ../../xffm/fm/view/local/rm.hh:92
-msgid "Remove"
-msgstr "حذف"
+#: ../xffm/common/util.hh:1447
+msgid   "Console: quickly run single commands -- write a command here and "
+        "press enter."
+msgstr  ""
 
-#: ../../xffm/fm/view/local/rm.hh:142
+#: ../xffm/common/util.hh:1452 ../xffm/fm/view/local/popup.hh:1109
+#: ../xffm/fm/view/local/popup.hh:1291 ../xffm/fm/view/local/popup.hh:1309
+msgid   "Run in Terminal"
+msgstr  "اجرا در پایانه"
+
+#: ../xffm/common/dnd.hh:41 ../xffm/fm/dialog/clipboard.hh:23
+msgid   "Copying files locally"
+msgstr  "رونوشت پرونده‌ها به صورت محلی"
+
+#: ../xffm/common/dnd.hh:47
 #, fuzzy
-msgid "Apply to all"
-msgstr "پاسخ به همه‌"
+msgid   "Create Link"
+msgstr  "برگردان ساخت پیوند"
 
-#. **************
-#. This is now available to BSD with rm -P option
-#: ../../xffm/fm/view/local/rm.hh:165 ../../xffm/common/gtk.hh:91
+#: ../xffm/common/run.hh:338
+msgid   "error"
+msgstr  "خطا"
+
+#: ../xffm/common/run.hh:342
+msgid   "warning"
+msgstr  "اخطار"
+
+#: ../xffm/common/run.hh:464 ../xffm/response/passwdresponse.hh:19
+#: ../xffm/response/passwdresponse.hh:25
+msgid   "Enter password"
+msgstr  "گذرواژه را وارد کنید"
+
+#: ../xffm/fm/view/pkg/model.hh:29 ../xffm/fm/view/pkg/popup.hh:35
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:187
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:191
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:195
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:198
 #, fuzzy
-msgid "Shred"
-msgstr "تکه تکه‌کننده"
+msgid   "Software Updater"
+msgstr  "بروزرسانی نرم‌افزار"
 
-#: ../../xffm/fm/view/local/rm.hh:183
-msgid "Trash"
-msgstr "زباله‌دان"
+#: ../xffm/fm/view/pkg/model.hh:41 ../xffm/fm/view/pkg/model.hh:52
+msgid   "Add or remove software installed on the system"
+msgstr  "حذف یا افزودن نرم‌افزارهای نصب شده بر روی این سیستم"
 
-#: ../../xffm/fm/view/local/view.hh:177
+#: ../xffm/fm/view/pkg/model.hh:111
+msgid   "String"
+msgstr  "رشته"
+
+#: ../xffm/fm/view/pkg/model.hh:116
+#, fuzzy
+msgid   "Waiting for search results"
+msgstr  "درحال گرفتن نتایج جستجو..."
+
+#: ../xffm/fm/view/pkg/model.hh:174
+#, fuzzy
+msgid   "No results"
+msgstr  "بدون نتیجه."
+
+#: ../xffm/fm/view/pkg/model.hh:373
+#, fuzzy
+msgid   "Currently busy\n"
+msgstr  "وضعیت جاری"
+
+#: ../xffm/fm/view/pkg/popup.hh:44
+#, fuzzy
+msgid   "Update Database"
+msgstr  "باز کردن پایگاه داده"
+
+#: ../xffm/fm/view/pkg/popup.hh:45
+msgid   "Fetch"
+msgstr  "واکشی‌"
+
+#: ../xffm/fm/view/pkg/popup.hh:46
+#, fuzzy
+msgid   "Install --dry-run"
+msgstr  "نصب"
+
+#: ../xffm/fm/view/pkg/popup.hh:47
+msgid   "Install"
+msgstr  "نصب"
+
+#: ../xffm/fm/view/pkg/popup.hh:48
+#, fuzzy
+msgid   "Uninstall --dry-run"
+msgstr  "عزل"
+
+#: ../xffm/fm/view/pkg/popup.hh:49
+msgid   "Uninstall"
+msgstr  "نصب"
+
+#: ../xffm/fm/view/pkg/popup.hh:50
+msgid   "Information"
+msgstr  "اطلاعات"
+
+#: ../xffm/fm/view/pkg/popup.hh:140
+msgid   "Version"
+msgstr  "نسخه‌ی"
+
+#: ../xffm/fm/view/pkg/popup.hh:149
+#, fuzzy
+msgid   "Go up"
+msgstr  "بالا رفتن"
+
+#: ../xffm/fm/view/pkg/popup.hh:152
+#, fuzzy
+msgid   "Search packages"
+msgstr  "جستجو برای بسته‌ها"
+
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
 #, fuzzy, c-format
-msgid "The volume '%s' is not mounted."
-msgstr "سبک »%s« یافت نشد"
+msgid   "Loading %s...%s"
+msgstr  "در حال بار کردن %s"
 
-#: ../../xffm/fm/view/root/model.hh:82
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
 #, fuzzy
-msgid "Root Directory"
-msgstr "فهرست راهنمای کاربر ارشد..."
+msgid   "Please Wait..."
+msgstr  "لطفا صبر کنید..."
 
-#: ../../xffm/fm/view/root/model.hh:98
-msgid "This is the root of the filesystem"
-msgstr "این ریشه سیستم پرونده است"
-
-#: ../../xffm/fm/view/root/model.hh:176 ../../xffm/fm/view/root/model.hh:191
-msgid "Mount local disks and devices"
-msgstr "سوار کردن دیسک‌ها و دستگاه‌های محلی"
-
-#: ../../xffm/fm/view/root/model.hh:177 ../../xffm/fm/view/fstab/popup.hh:23
-#: ../../xffm/fm/view/fstab/view.hh:1084
-#, fuzzy
-msgid "eCryptfs Volume"
-msgstr "جلد %s"
-
-#: ../../xffm/fm/view/root/model.hh:178 ../../xffm/fm/view/fstab/popup.hh:22
-#, fuzzy
-msgid "SSHFS Remote Synchronization Folder"
-msgstr "همگام‌سازی پوشه"
-
-#: ../../xffm/fm/view/root/model.hh:179 ../../xffm/fm/view/fstab/popup.hh:21
-#: ../../xffm/fm/view/fstab/view.hh:1032
-#, fuzzy
-msgid "NFS Network Volume"
-msgstr "جلد جدید"
-
-#: ../../xffm/fm/view/root/model.hh:180 ../../xffm/fm/view/fstab/popup.hh:24
-#: ../../xffm/fm/view/fstab/view.hh:1110
-#, fuzzy
-msgid "CIFS Volume"
-msgstr "متوقف کردن جلد"
-
-#: ../../xffm/fm/view/root/model.hh:229
-#, fuzzy
-msgid "Go to bookmarked location"
-msgstr "رفتن به مکان آغازه"
-
-#: ../../xffm/fm/view/root/popup.hh:138
-#, fuzzy
-msgid "Empty trash"
-msgstr "Müll leeren"
-
-#. File chooser
-#: ../../xffm/fm/view/fstab/popup.hh:129
-msgid "Mount Device"
-msgstr "سوار کردن دستگاه"
-
-#: ../../xffm/fm/view/fstab/popup.hh:141 ../../xffm/fm/view/fstab/view.hh:923
-msgid "Mount point:"
-msgstr "نقطه سوار کردن:"
-
-#: ../../xffm/fm/view/fstab/view.hh:590
-#, fuzzy
-msgid "Mount point: "
-msgstr "نقطه سوار کردن:"
-
-#: ../../xffm/fm/view/fstab/view.hh:591
-#, fuzzy
-msgid "Mount device: "
-msgstr "سوار کردن دستگاه"
-
-#. Since /dev is not concrete, the following test returns false...
-#.
-#. if (!g_file_test(name, G_FILE_TEST_IS_DIR)) return;
-#: ../../xffm/fm/view/fstab/view.hh:659 ../../xffm/fm/view/fstab/view.hh:675
-msgid "Disks"
-msgstr "دیسک‌ها"
-
-#: ../../xffm/fm/view/fstab/view.hh:921
-msgid "No Label"
-msgstr "بدون برچسب"
-
-#: ../../xffm/fm/view/fstab/view.hh:922
-msgid "There is no file system available (unformatted)"
-msgstr "هیچ سیستم پرونده‌ای وجود ندارد (قالب‌بندی نشده)"
-
-#: ../../xffm/fm/view/fstab/view.hh:923
-msgid "Not mounted"
-msgstr "سوار نشده"
-
-#: ../../xffm/fm/view/fstab/view.hh:1058
-msgid "SFTP (via SSH)"
-msgstr ""
-
-#: ../../xffm/fm/view/fstab/view.hh:1413
+#: ../xffm/fm/view/local/model.hh:124
 #, c-format
-msgid "Unmounting %s"
-msgstr "درحال پیاده کردن %s"
+msgid   "Reading \"%s\""
+msgstr  "درحال خواندن «%s»"
 
-#: ../../xffm/fm/view/fstab/view.hh:1413
+#: ../xffm/fm/view/local/model.hh:577 ../xffm/fm/view/base/monitor.hh:34
 #, fuzzy, c-format
-msgid "Mounting %s"
-msgstr "سوار کردن"
+msgid   "Files: %s"
+msgstr  "پرونده: %s"
 
-#: ../../xffm/fm/view/pkg/model.hh:41 ../../xffm/fm/view/pkg/model.hh:52
-msgid "Add or remove software installed on the system"
-msgstr "حذف یا افزودن نرم‌افزارهای نصب شده بر روی این سیستم"
-
-#: ../../xffm/fm/view/pkg/model.hh:111
-msgid "String"
-msgstr "رشته"
-
-#: ../../xffm/fm/view/pkg/model.hh:116
-#, fuzzy
-msgid "Waiting for search results"
-msgstr "درحال گرفتن نتایج جستجو..."
-
-#: ../../xffm/fm/view/pkg/model.hh:174
-#, fuzzy
-msgid "No results"
-msgstr "بدون نتیجه."
-
-#: ../../xffm/fm/view/pkg/model.hh:373
-#, fuzzy
-msgid "Currently busy\n"
-msgstr "وضعیت جاری"
-
-#: ../../xffm/fm/view/pkg/popup.hh:44
-#, fuzzy
-msgid "Update Database"
-msgstr "باز کردن پایگاه داده"
-
-#: ../../xffm/fm/view/pkg/popup.hh:45
-msgid "Fetch"
-msgstr "واکشی‌"
-
-#: ../../xffm/fm/view/pkg/popup.hh:46
-#, fuzzy
-msgid "Install --dry-run"
-msgstr "نصب"
-
-#: ../../xffm/fm/view/pkg/popup.hh:47
-msgid "Install"
-msgstr "نصب"
-
-#: ../../xffm/fm/view/pkg/popup.hh:48
-#, fuzzy
-msgid "Uninstall --dry-run"
-msgstr "عزل"
-
-#: ../../xffm/fm/view/pkg/popup.hh:49
-msgid "Uninstall"
-msgstr "نصب"
-
-#: ../../xffm/fm/view/pkg/popup.hh:50
-msgid "Information"
-msgstr "اطلاعات"
-
-#: ../../xffm/fm/view/pkg/popup.hh:140
-msgid "Version"
-msgstr "نسخه‌ی"
-
-#: ../../xffm/fm/view/pkg/popup.hh:149
-#, fuzzy
-msgid "Go up"
-msgstr "بالا رفتن"
-
-#: ../../xffm/fm/view/pkg/popup.hh:152
-#, fuzzy
-msgid "Search packages"
-msgstr "جستجو برای بسته‌ها"
-
-#: ../../xffm/fm/view/pkg/popup.hh:184 ../../xffm/fm/view/view.hh:93
+#: ../xffm/fm/view/local/model.hh:580
 #, fuzzy, c-format
-msgid "Loading %s...%s"
-msgstr "در حال بار کردن %s"
+msgid   "Loaded %d of %d articles"
+msgstr  "%Id پرونده بارگذاری شد"
 
-#: ../../xffm/fm/view/pkg/popup.hh:184 ../../xffm/fm/view/view.hh:93
-#, fuzzy
-msgid "Please Wait..."
-msgstr "لطفا صبر کنید..."
-
-#: ../../xffm/fm/view/treeview.hh:17
-msgid "Name"
-msgstr "نام"
-
-#: ../../xffm/fm/view/treeview.hh:19
-msgid "Size"
-msgstr "اندازه"
-
-#: ../../xffm/fm/view/treeview.hh:20
-msgid "Date"
-msgstr "تاریخ"
-
-#: ../../xffm/fm/view/treeview.hh:22
-msgid "Mimetype"
-msgstr "نوع مایم"
-
-#: ../../xffm/fm/view/base/signals.hh:838
-#, fuzzy
-msgid "Trash is empty"
-msgstr "باتری تبلت خالی است"
-
-#: ../../xffm/fm/view/base/signals.hh:840
-msgid "Directory does not exist."
-msgstr "این شاخه وجود ندارد."
-
-#: ../../xffm/common/settings.hh:30
-#, fuzzy
-msgid "New File:"
-msgstr "پرونده‌ی جدید"
-
-#: ../../xffm/common/gio.hh:81
-msgid "Copying files"
-msgstr "در حال نسخه‌برداری از پرونده‌ها"
-
-#: ../../xffm/common/gio.hh:85
-msgid "linking"
-msgstr "پیوند"
-
-#: ../../xffm/common/gio.hh:87
-#, fuzzy
-msgid "rename"
-msgstr "تغییر نام"
-
-#: ../../xffm/common/gio.hh:426
+#: ../xffm/fm/view/local/rm.hh:59
 #, c-format
-msgid "(%d of %d)"
-msgstr "(%Id از %Id)"
+msgid   "Delete %s"
+msgstr  "حذف %s"
 
-#: ../../xffm/common/dnd.hh:47
+#: ../xffm/fm/view/local/rm.hh:61
+msgid   "Warning: "
+msgstr  "اخطار: "
+
+#: ../xffm/fm/view/local/rm.hh:61 ../xffm/fm/view/local/popup.hh:565
 #, fuzzy
-msgid "Create Link"
-msgstr "برگردان ساخت پیوند"
+msgid   "Multiple selections"
+msgstr  "تراکنشهای چندگانه"
 
-#: ../../xffm/common/util.hh:1404
+#: ../xffm/fm/view/local/rm.hh:92
+msgid   "Remove"
+msgstr  "حذف"
+
+#: ../xffm/fm/view/local/rm.hh:142
+#, fuzzy
+msgid   "Apply to all"
+msgstr  "پاسخ به همه‌"
+
+#: ../xffm/fm/view/local/rm.hh:183
+msgid   "Trash"
+msgstr  "زباله‌دان"
+
+#: ../xffm/fm/view/local/popup.hh:94
+msgid   "New"
+msgstr  "جدید"
+
+#: ../xffm/fm/view/local/popup.hh:101 ../xffm/fm/view/local/popup.hh:159
+#: ../xffm/fm/view/local/popup.hh:232 ../xffm/fm/view/local/popup.hh:234
+#, fuzzy
+msgid   "Paste into"
+msgstr  "رنگین کمان پاستلی"
+
+#: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:158
+msgid   "There is nothing on the clipboard to paste."
+msgstr  "چیزی برای چسباندن در تخته‌گیره نیست."
+
+#: ../xffm/fm/view/local/popup.hh:106
+msgid   "Select All"
+msgstr  "انتخاب همه"
+
+#: ../xffm/fm/view/local/popup.hh:107 ../xffm/fm/view/local/popup.hh:755
+#, fuzzy
+msgid   "Match regular expression"
+msgstr  "همچون عبارت منظم تطبیق داده شود"
+
+#: ../xffm/fm/view/local/popup.hh:143 ../xffm/fm/view/local/popup.hh:1105
+#, fuzzy
+msgid   "Run Executable..."
+msgstr  "اجرایی"
+
+#: ../xffm/fm/view/local/popup.hh:144 ../xffm/fm/view/local/popup.hh:875
+msgid   "Extract files from the archive"
+msgstr  "استخراج پرونده‌ها از آرشیو"
+
+#: ../xffm/fm/view/local/popup.hh:146 ../xffm/fm/view/local/popup.hh:966
+msgid   "Create a compressed archive with the selected objects"
+msgstr  "ایجاد یک آرشیو با اشیاء انتخاب شده"
+
+#: ../xffm/fm/view/local/popup.hh:148 ../xffm/fm/view/fstab/popup.hh:37
+msgid   "Mount the volume associated with this folder"
+msgstr  "سوار کردن جلد وابسته با این پوشه"
+
+#: ../xffm/fm/view/local/popup.hh:149 ../xffm/fm/view/fstab/popup.hh:38
+msgid   "Unmount the volume associated with this folder"
+msgstr  "پیاده کردن جلد وابسته با این پوشه"
+
+#: ../xffm/fm/view/local/popup.hh:161 ../xffm/fm/view/local/popup.hh:1231
+msgid   "Rename"
+msgstr  "تغییر نام"
+
+#: ../xffm/fm/view/local/popup.hh:162 ../xffm/fm/view/local/popup.hh:1217
+msgid   "Duplicate"
+msgstr  "تکثیر"
+
+#: ../xffm/fm/view/local/popup.hh:163 ../xffm/fm/view/local/popup.hh:1203
+msgid   "Link"
+msgstr  "پیوند"
+
+#: ../xffm/fm/view/local/popup.hh:164
+msgid   "Properties"
+msgstr  "ویژگی‌ها"
+
+#: ../xffm/fm/view/local/popup.hh:562
+msgid   "Files:"
+msgstr  "پرونده‌ها:"
+
+#: ../xffm/fm/view/local/popup.hh:753
+#, fuzzy
+msgid   "Select items"
+msgstr  "چیدمان‌های انتخاب شده:"
+
+#: ../xffm/fm/view/local/popup.hh:771
+#, fuzzy
+msgid   "Regular Expression syntax is incorrect"
+msgstr  "عبارت منظمی که در شرف جایگزینی است."
+
+#: ../xffm/fm/view/local/popup.hh:801
+msgid   "No selection"
+msgstr  "بدون انتخاب"
+
+#: ../xffm/fm/view/local/popup.hh:801
+#, fuzzy
+msgid   "No matches."
+msgstr  "پیدا نشد"
+
+#: ../xffm/fm/view/local/popup.hh:887 ../xffm/fm/view/local/popup.hh:981
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:382
+msgid   "Specify Output Directory..."
+msgstr  "مشخص کردن فهرست خروجی..."
+
+#: ../xffm/fm/view/local/popup.hh:1058
+#, fuzzy
+msgid   "Create new..."
+msgstr  "ایجاد جدید"
+
+#: ../xffm/fm/view/local/popup.hh:1065 ../xffm/fm/view/local/popup.hh:1146
+#, fuzzy
+msgid   "New Name:"
+msgstr  "نام جدید"
+
+#: ../xffm/fm/view/local/popup.hh:1074
+msgid   "No name"
+msgstr  "بدون نام"
+
+#: ../xffm/fm/view/local/popup.hh:1087
 #, c-format
-msgid ""
-"Scriptfile \"%s\" is not executable. Please set the executable-attribute on "
-"that file."
-msgstr ""
+msgid   "Another file with the same name already exists in “%s”."
+msgstr  "پرونده‌ی دیگری با نام مشابه پیشاپیش در «%s» وجود دارد."
 
-#: ../../xffm/common/util.hh:1406 ../../xffm/common/util.hh:1441
-#, c-format
-msgid "Open with %s"
-msgstr "باز کردن با %s"
+#: ../xffm/fm/view/local/popup.hh:1112
+#, fuzzy
+msgid   "Arguments for the Command"
+msgstr  "نشانوندها برای فرمان"
 
-#: ../../xffm/common/util.hh:1406
-msgid "Text Editor"
-msgstr "ویرایشگر متن"
+#: ../xffm/fm/view/local/popup.hh:1258
+#, fuzzy
+msgid   "You have selected multiple files or folders"
+msgstr  "تغییر نام پرونده و پوشه انتخاب شده"
 
-#: ../../xffm/common/util.hh:1443 ../../xffm/common/gtk.hh:69
-msgid "Execute Shell Command"
-msgstr "اجرای فرمان پوسته"
+#: ../xffm/fm/view/local/popup.hh:1332 ../xffm/fm/view/local/view.hh:156
+#, fuzzy
+msgid   "Invalid entry"
+msgstr  "مدخل نامعتبر"
 
-#: ../../xffm/common/util.hh:1447
-msgid ""
-"Console: quickly run single commands -- write a command here and press enter."
-msgstr ""
-
-#: ../../xffm/common/gtk.hh:352 ../../xffm/common/gtk.hh:360
-msgid "Help"
-msgstr "راهنما"
-
-#: ../../xffm/common/run.hh:338
-msgid "error"
-msgstr "خطا"
-
-#: ../../xffm/common/run.hh:342
-msgid "warning"
-msgstr "اخطار"
-
-#: ../../xffm/common/preview.hh:581
-msgid "Empty file"
-msgstr "پرونده خالی"
-
-#: ../../xffm/common/preview.hh:636
+#: ../xffm/fm/view/local/view.hh:177
 #, fuzzy, c-format
-msgid "Cannot read from %s"
-msgstr "نمی‌توان از «%s» خواند"
+msgid   "The volume '%s' is not mounted."
+msgstr  "سبک »%s« یافت نشد"
+
+#: ../xffm/fm/view/local/properties.hh:245
+#, fuzzy
+msgid   "Properties and Attributes"
+msgstr  "خصیصه مشتق‌شده"
+
+#: ../xffm/fm/view/local/properties.hh:274
+#, fuzzy
+msgid   "File Mode:"
+msgstr  "پرونده به نام:"
+
+#: ../xffm/fm/view/local/properties.hh:300
+msgid   "File:"
+msgstr  "پرونده:"
+
+#: ../xffm/fm/view/local/properties.hh:312
+msgid   "Apply changes"
+msgstr  "اعمال تغییرات"
+
+#: ../xffm/fm/view/local/properties.hh:477
+msgid   "Successfully moved to trash."
+msgstr  "با موفقیت به زباله‌دانی منتقل شد."
+
+#: ../xffm/fm/view/local/properties.hh:478
+msgid   "Source:"
+msgstr  "مبدأ"
+
+#: ../xffm/fm/view/root/model.hh:82
+#, fuzzy
+msgid   "Root Directory"
+msgstr  "فهرست راهنمای کاربر ارشد..."
+
+#: ../xffm/fm/view/root/model.hh:98
+msgid   "This is the root of the filesystem"
+msgstr  "این ریشه سیستم پرونده است"
+
+#: ../xffm/fm/view/root/model.hh:110
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:256
+msgid   "Home Directory"
+msgstr  "فهرست راهنمای آغازه"
+
+#: ../xffm/fm/view/root/model.hh:137
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:266
+#, fuzzy
+msgid   "Trash bin"
+msgstr  "زباله کردن پرونده"
+
+#: ../xffm/fm/view/root/model.hh:168 ../xffm/fm/view/fstab/popup.hh:29
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:261
+#, fuzzy
+msgid   "Disk Image Mounter"
+msgstr  "سوارکننده‌ی دیسک"
+
+#: ../xffm/fm/view/root/model.hh:176 ../xffm/fm/view/root/model.hh:191
+msgid   "Mount local disks and devices"
+msgstr  "سوار کردن دیسک‌ها و دستگاه‌های محلی"
+
+#: ../xffm/fm/view/root/model.hh:177 ../xffm/fm/view/fstab/popup.hh:23
+#: ../xffm/fm/view/fstab/view.hh:1084
+#, fuzzy
+msgid   "eCryptfs Volume"
+msgstr  "جلد %s"
+
+#: ../xffm/fm/view/root/model.hh:178 ../xffm/fm/view/fstab/popup.hh:22
+#, fuzzy
+msgid   "SSHFS Remote Synchronization Folder"
+msgstr  "همگام‌سازی پوشه"
+
+#: ../xffm/fm/view/root/model.hh:179 ../xffm/fm/view/fstab/popup.hh:21
+#: ../xffm/fm/view/fstab/view.hh:1032
+#, fuzzy
+msgid   "NFS Network Volume"
+msgstr  "جلد جدید"
+
+#: ../xffm/fm/view/root/model.hh:180 ../xffm/fm/view/fstab/popup.hh:24
+#: ../xffm/fm/view/fstab/view.hh:1110
+#, fuzzy
+msgid   "CIFS Volume"
+msgstr  "متوقف کردن جلد"
+
+#: ../xffm/fm/view/root/model.hh:229
+#, fuzzy
+msgid   "Go to bookmarked location"
+msgstr  "رفتن به مکان آغازه"
+
+#: ../xffm/fm/view/root/popup.hh:138
+#, fuzzy
+msgid   "Empty trash"
+msgstr  "Müll leeren"
+
+#: ../xffm/fm/view/fstab/popup.hh:129
+msgid   "Mount Device"
+msgstr  "سوار کردن دستگاه"
+
+#: ../xffm/fm/view/fstab/popup.hh:141 ../xffm/fm/view/fstab/view.hh:923
+msgid   "Mount point:"
+msgstr  "نقطه سوار کردن:"
+
+#: ../xffm/fm/view/fstab/view.hh:590
+#, fuzzy
+msgid   "Mount point: "
+msgstr  "نقطه سوار کردن:"
+
+#: ../xffm/fm/view/fstab/view.hh:591
+#, fuzzy
+msgid   "Mount device: "
+msgstr  "سوار کردن دستگاه"
+
+#: ../xffm/fm/view/fstab/view.hh:659 ../xffm/fm/view/fstab/view.hh:675
+msgid   "Disks"
+msgstr  "دیسک‌ها"
+
+#: ../xffm/fm/view/fstab/view.hh:921
+msgid   "No Label"
+msgstr  "بدون برچسب"
+
+#: ../xffm/fm/view/fstab/view.hh:922
+msgid   "There is no file system available (unformatted)"
+msgstr  "هیچ سیستم پرونده‌ای وجود ندارد (قالب‌بندی نشده)"
+
+#: ../xffm/fm/view/fstab/view.hh:923
+msgid   "Not mounted"
+msgstr  "سوار نشده"
+
+#: ../xffm/fm/view/fstab/view.hh:1058
+msgid   "SFTP (via SSH)"
+msgstr  ""
+
+#: ../xffm/fm/view/fstab/view.hh:1413
+#, c-format
+msgid   "Unmounting %s"
+msgstr  "درحال پیاده کردن %s"
+
+#: ../xffm/fm/view/fstab/view.hh:1413
+#, fuzzy, c-format
+msgid   "Mounting %s"
+msgstr  "سوار کردن"
+
+#: ../xffm/fm/view/base/signals.hh:838
+#, fuzzy
+msgid   "Trash is empty"
+msgstr  "باتری تبلت خالی است"
+
+#: ../xffm/fm/view/base/signals.hh:840
+msgid   "Directory does not exist."
+msgstr  "این شاخه وجود ندارد."
+
+#: ../xffm/fm/view/treeview.hh:17
+msgid   "Name"
+msgstr  "نام"
+
+#: ../xffm/fm/view/treeview.hh:19
+msgid   "Size"
+msgstr  "اندازه"
+
+#: ../xffm/fm/view/treeview.hh:20
+msgid   "Date"
+msgstr  "تاریخ"
+
+#: ../xffm/fm/view/treeview.hh:22
+msgid   "Mimetype"
+msgstr  "نوع مایم"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
+#, fuzzy
+msgid   "Embedded Terminal"
+msgstr  "ریزنقش نهفته"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
+#, fuzzy
+msgid   "All items in the iconview."
+msgstr  "انتخاب همه‌ی موارد در این پنجره"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
+msgid   "Scripting"
+msgstr  "دست‌نوشته"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
+msgid   "Clear Log"
+msgstr  "پاک کردن ثبت"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
+msgid   "Terminal font"
+msgstr  "قلم پایانه"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+#, fuzzy
+msgid   "Renice Process"
+msgstr  "نایس مجدد فراروند"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid   "Suspend"
+msgstr  "تعلیق"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid   "Continue"
+msgstr  "ادامه"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid   "Interrupt"
+msgstr  "وقفه"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid   "Hangup"
+msgstr  "معوق گذاشتن"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+#, fuzzy
+msgid   "User 1 (USR1)"
+msgstr  "کاربران (6)"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+#, fuzzy
+msgid   "User 2 (USR2)"
+msgstr  "کاربران (6)"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+#, fuzzy
+msgid   "Terminate Task"
+msgstr  "پایان دادن"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+msgid   "Abort"
+msgstr  "قطع کردن"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:138
+msgid   "Kill"
+msgstr  "خاموش کردن"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
+#, fuzzy
+msgid   "Segmentation fault"
+msgstr  "تخلف قطعه قطعه کردن"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:216
+msgid   "PID"
+msgstr  "PID"
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:375
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:377
+msgid   "Go to"
+msgstr  "برو به"
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:409
+msgid   "Not a directory"
+msgstr  "شاخه نیست"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:59
+msgid   "loading..."
+msgstr  "در حال بار کردن..."
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:151
+#: ../xffm/fm/dialog/notebook/page/page.hh:167
+msgid   "Confirm Replace"
+msgstr  "تأیید جایگزینی"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:153
+msgid   "Destination File"
+msgstr  "پرونده مقصد"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:166
+#, fuzzy, c-format
+msgid   "The output file %s already exists, do you want to overwrite it?"
+msgstr  "پرونده %s  از قبل وجود داشته است؛ می‌خواهید آن را جای‌نوشت کنید؟"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:11
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:214
+#, fuzzy
+msgid   "Remove Button Contents"
+msgstr  "حذف ده‌ها"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:67
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:209
+#, fuzzy
+msgid   "Add custom content"
+msgstr  "افزودن یک جدول محتوا"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:68
+#, fuzzy
+msgid   "Select file to load"
+msgstr  "یک پرونده را برای پخش انتخاب کنید"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:125
+#, fuzzy, c-format
+msgid   "Cannot load file %s. Reason: %s"
+msgstr  "نمی‌توان پوشه‌ی «%s» را بار کرد: %s\n"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:154
+#, fuzzy
+msgid   "You need to restart the application"
+msgstr  "شما باید برنامه را مجددا راه‌اندازی کنید."
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:244
+msgid   "Open a New Window"
+msgstr  "باز کردن یک پنجره جدید"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:250
+msgid   "Differences"
+msgstr  "تفاوت‌ها"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:178
+#, fuzzy
+msgid   "Open menu"
+msgstr  "بازکردن تصویر"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:230
+#, fuzzy
+msgid   "View as list"
+msgstr  "نمایش به شکل فهرست"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:231
+msgid   "Show hidden files"
+msgstr  "نمایش پرونده‌های مخفی"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:232
+#, fuzzy
+msgid   "Show Backup Files"
+msgstr  "ایجاد پرونده‌های پشتیبان‌"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:233
+msgid   "Sort data in descending order"
+msgstr  "مرتب کردن داده به ترتیب نزولی"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:235
+#, fuzzy
+msgid   "Sort by date"
+msgstr  "مرتب‌سازی بر اساس نام"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:236
+#, fuzzy
+msgid   "Sort by size"
+msgstr  "مرتب‌سازی بر اساس نام"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:270
+msgid   "Main menu"
+msgstr  "منوی اصلی"
+
+#: ../xffm/fm/dialog/notebook/notebook.hh:56
+msgid   "Long press time"
+msgstr  "زمان فشار طولانی"
+
+#: ../xffm/fm/dialog/dialog.hh:122
+msgid   "Removed"
+msgstr  "حذف شد"
+
+#: ../xffm/fm/dialog/dialog.hh:143
+#, fuzzy
+msgid   "Detected device(s):"
+msgstr  "تشخیص دستگاه‌ها"
+
+#: ../xffm/response/commandresponse.hh:19
+msgid   "Running"
+msgstr  "درحال اجرا"
+
+#: ../xffm/response/commandresponse.hh:24
+#, fuzzy
+msgid   "Waiting for operation to finish..."
+msgstr  "برای پایان  توکس پنت  صبر کنید"
+
+#: ../xffm/response/passwdresponse.hh:179
+#, fuzzy
+msgid   "User Input"
+msgstr  "ورودی موشی"
+
+#: ../xffm/response/passwdresponse.hh:195
+#, fuzzy
+msgid   "Response Requested"
+msgstr  "پاسخ خارج"
+
+#: ../xffm/response/passwdresponse.hh:242 ../xffm/response/entryresponse.hh:439
+msgid   "Ok"
+msgstr  "تأئید"
+
+#: ../xffm/response/customresponse.hh:55
+#, fuzzy
+msgid   "Execute command"
+msgstr  "اجرای فرمان"
+
+#: ../xffm/response/customresponse.hh:103
+msgid   "Source File"
+msgstr  "پرونده منبع"
+
+#: ../xffm/response/timeoutresponse.hh:57
+msgid   "Dismiss"
+msgstr  "رها کردن"
+
+#: ../xffm/response/commandprogressresponse.hh:31
+msgid   "Items:"
+msgstr  "موارد:"
+
+#: ../xffm/response/chooserresponse.hh:23
+msgid   "Open"
+msgstr  "باز کردن"
+
+#: ../xffm/response/chooserresponse.hh:56
+#, fuzzy
+msgid   "Choose directory"
+msgstr  "فهرست راهنمای پایه:"
+
+#: ../xffm/response/chooserresponse.hh:60
+#, fuzzy
+msgid   "Choose file"
+msgstr  "انتخاب یک پرونده"
+
+#: ../xffm/completion/bash.hh:133
+msgid   "Completion mode:"
+msgstr  "حالت تکمیل:"
+
+#: ../xffm/completion/bash.hh:134
+msgid   "command"
+msgstr  "فرمان"
+
+#: ../xffm/completion/bash.hh:135
+msgid   "file"
+msgstr  "پرونده"
+
+#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
+msgid   "Options >>"
+msgstr  "گزینه‌ها >>‌"
+
+#: ../xffm/completion/base.hh:28
+msgid   "Command"
+msgstr  "فرمان"
+
+#: ../xffm/completion/base.hh:31
+msgid   "File"
+msgstr  "پرونده"
+
+#: ../xffm/completion/base.hh:34
+msgid   "Command history"
+msgstr  "تاریخچه فرمان‌"
+
+#: ../xffm/completion/base.hh:40
+msgid   "Variable"
+msgstr  "متغیر"
+
+#: ../xffm/completion/base.hh:43
+msgid   "Host"
+msgstr  "میزبان"
+
+#: ../xffm/completion/base.hh:55
+#, fuzzy
+msgid   "Found no match"
+msgstr  "فهرست کلمات"
+
+#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
+msgid   "Matches"
+msgstr  "مطابقت‌ها"
+
+#: ../xffm/completion/base.hh:142
+msgid   "Too many files open"
+msgstr  "تعداد زیادی پرونده باز است"
 

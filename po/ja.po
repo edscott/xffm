@@ -1,1601 +1,1353 @@
-# Translations for Rodent package.
-# Copyright (C) 2004-2012 FSF.
-# This file is distributed under the same license as the Rodent package.
-#   --- vie may  3 10:40:14 CDT 2013 ---
+# Xffm+ translation file: vie ago  9 14:43:28 CDT 2019
+# Merged fron existing open source files
+# http://xffm.org
 #
-# GLSJPN_Yukari <yukarix.yamashita@intel.com>, 2009.
-# Kiyotaka NISHIBORI <ml.nishibori.kiyotaka@gmail.com>, 2008-2011.
-# Awashiro Ikuya <ikuya@fruitsbasket.info>, 2004-2006.
-# Shushi KUROSE <md81bird@hitaki.net>, 2012-2013.
-# Jason Katz-Brown <jason@katzbrown.com>, 2002.
-# Atsushi Kanemoto <atsushi-kanemoto@mail.goo.ne.jp>, 2005.
-#                              Daisuke Yamashita <yamad@mb.infoweb.ne.jp>, 1999.
-# Kenichiro Takahashi <kenta@goodjobjapan.org>, 2005.
-# Craig Jeffares <cjeffares@novell.com>, 2004.
-# Hiroyuki Sekihara <hiroyuki.sekihara@gmail.com>, 2010.
-# SATOH Satoru <ss@kde.gr.jp>, 2004.
-#  derived from the version by Yasuyuki Furukawa <yasu@on.cs.keio.ac.jp>, 1998.
-# Mitsuya Shibata <mty.shibata@gmail.com>, 2009-2012.
-# NISHIBORI Kiyotaka <ml.nishibori.kiyotaka@gmail.com>, 2008-2011.
-# IRIE Shinsuke <irie@inter7.jp>, 2007.
-# Kenshi Muto <kmuto@debian.org>, 2004-2005.
-# Chusslove Illich (Scripting) <caslav.ilic@gmx.net>, 2007.
-# Hideki Kimura <hangyo1973@gmail.com>, 2006.
-# AWASHIRO Ikuya <ikuya@good-day.co.jp>, 2004-2005.
-# Satoru SATOh <ss@gnome.gr.jp>, 2006.
-# Jiro MATSUZAWA <jmatsuzawa@src.gnome.org>, 2010-2011.
-# Takehsi AIHANA <takeshi.aihana@gmail.com>, 2003-2009.
-# Copyright (C) 2005-2011 Richard Hughes <richard @ hughsie.com>.
-# Satoru SATOH <ss@gnome.gr.jp>, 2004-2008.
-# Mamoru Tasaka <mtasaka@ioa.s.u-tokyo.ac.jp>, 2008.
-# Yuko Hirata <r38495@st.takushoku-u.ac.jp>, 2006.
-# Copyright (C) 2010 Takeshi AIHANA <takeshi.aihana@gmail.com>.
-# Noboru Sinohara <shinobo@leo.bekkoame.ne.jp>, 2002-2004.
-# numberR <a28@atsuya.com>, 2004.
-# Akira TAGOH <at@ff.iij4u.or.jp>, 2000-2002.
-# Yoshizumi ENDO <y-endo@ceres.dti.ne.jp>, 2009-2010.
-# Yukihior Nakai <nakai@gnome.gr.jp>, 2000-2002.
-# ITANI Eiichiro <emu@ceres.dti.ne.jp>, 1999.
-# SATO Satoru <ss@gnome.gr.jp>, 2001-2006.
-# Takuo KITAME <kitame@debian.org>, 1999-2001.
-# Naoya KOJIMA <naoya@fullmoon.dyndns.org>, 2005.
-# KURASAWA Nozomu <nabetaro@caldron.jp>, 2010.
-# Takeshi Aihana <aihana@gnome.gr.jp>, 2000-2011.
-# Ritsuko Sato <satoritsu@gmail.com>, 2012.
-# GOTO Masanori <gotom@debian.or.jp>, 2006.
-# IWAI, Masaharu <iwaim.sub@gmail.com>, 2010-2011.
-# Noriko Mizumoto <noriko@fedoraproject.org>, 2003-2012.
-# Zhao Ji <zhao-ji@awz.ne.jp>, 2003.
-# Takeshi AIHANA <takeshi.aihana@gmail.com>, 2000-2012.
-# Kin Taishin <taishin@imap.cc>, 2002.
-# Riue. SATOH <riue@gnome.gr.jp>, 1999.
-# Andou Kaori <parsley@happy.email.ne.jp>, 2004.
-# Mako N <mako@pasero.net>, 2012.
-# Masatake YAMATO <jet@gyve.org>, 2002.
-# KAMAGASAKO Masatoshi <emerald@gnome.gr.jp>, 2000-2003.
-# phanect <phanective@gmail.com>, 2010.
-# Toshiharu Kudoh <toshi.kd2@gmail.com>, 2012.
-# Taiki Komoda <kom@kde.gr.jp>, 2001-2010.
-# KUSANO Takayuki <AE5T-KSN@asahi-net.or.jp>, 2010-2012.
-# Noriyuki Suzuki <noriyuki@turbolinux.co.jp>, 2003-2004.
-# Yamahata Kenichiro <mogutan@din.or.jp>, 1999.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2002-2012.
-# Hideki Yamane (Debian-JP) <henrich@debian.or.jp>, 2008-2010.
-# Ikuya AWASHIRO <ikuya@oooug.jp>, 2004.
-# Hiroshi Tagawa <kuponuga@gmail.com>, 2010.
-# Takashi Kido <yositaka@yd5.so-net.ne.jp>, 2000.
-# Kentaro KAZUHAMA <kazken3@gmail.com>, 2010-2012.
-# Eiichiro ITANI <emu@ceres.dti.ne.jp>, 1998-1999.
-# 竹田 寛郁 <takepin@turbolinux.co.jp>, 2000.
-# Sun G11n <gnome_int_l10n@ireland.sun.com>, 2002-2003.
-# Copyright (C) 2004-2009 Shaun McCance <shaunm@gnome.org>.
-# Sinohara <shinobo@leo.bekkoame.ne.jp>, 2001.
-# Kaori Andou <parsley@happy.email.ne.jp>, 2004.
-# Hajime Taira <htaira@redhat.com>, 2010-2012.
-# Nobosu Sinohara <shinobo@leo.bekkoame.ne.jp>, 2002.
-# Yuusuke Tahara <tahara@gnome.gr.jp>, 1999-2000.
-# Kentaro Kazuhama <kazken3@gmail.com>, 2009.
-# Naoya Kojima <kjm708@nifty.com>, 2005.
-# Copyright (C) 2004-2010 Shaun McCance <shaunm@gnome.org>.
-# Hideki Yamane <henrich@debian.org>, 2010-2012.
-# ABE Masanori <maas_abb@ybb.ne.jp>, 2004.
-# Ikuya Awashiro <ikuya@fruitsbasket.info>, 2012.
-# UTUMI Hirosi <utuhiro78@yahoo.co.jp>, 2003-2007.
-# Fumihito YOSHIDA <hito@kugutsu.org>, 2010.
-# Atsushi Satoh <geodyne@mail.goo.ne.jp>, 2004.
-# Masato Hashimoto <cabezon.hashimoto@gmail.com>, 2010.
-# Nishio Futoshi <fut_nis@d3.dion.ne.jp>, 2007-2012.
-# KIMIZUKA Tomokazu <sgtom@pluto.dti.ne.jp>, 2005-2006.
-# Yukiko Bando <ybando@k6.dion.ne.jp>, 2005-2010.
-# Taku YASUI <tach@debian.or.jp>, 2001.
-# Takanori MATSUURA <t.matsuu@gmail.com>, 2011-2012.
-# James Hashida <khashida@redhat.com>, 2002.
-# Copyright (C) 2007 Kouhei Sutou <kou@cozmixng.org>.
-# Noritada Kobayashi <noritadak@gmail.com>, 2010.
-# Shimada Hirofumi <hirosoft@users.sourceforge.net>, 2004.
-# Nishibori Kiyotaka <ml.nishibori.kiyotaka@gmail.com>, 2009-2011.
-# Koike Kazuhiko <kazhik@mozilla.gr.jp>, 2005-2007.
-# oki <s-ooki@mic.jp>, 2004.
-# Hiroyuki Ikezoe <poincare@ikezoe.net>, 2009-2010.
-# Takao Fujiwara <takao.fujiwara@sun.com>, 2008.
-# Copyright (C) 2007-2012 daniel g. siegel <dgsiegel@gnome.org>.
-# Katsumi Saito <katsumi@jo1upk.ymt.prug.or.jp>, 2001-2002.
-# Norihiro UMEDA <norihiro@users.sourceforge.jp>, 2002-2003.
-# Toyohiro Asukai <toyohiro@ksmplus.com>, 2004-2008.
-# Kazutaka HARADA <kazutaka@dc4.so-net.ne.jp>, 2006.
-# Ewald Arnold <ewald@ewald-arnold.de>, 1999-2000.
-# Yasuaki Taniguchi <yasuakit@gmail.com>, 2010-2011.
-# Copyright (C) 2005 Laurent Belmonte <laurent.belmonte@aliacom.fr>.
-# Kurose Shushi <md81@bird.email.ne.jp>, 2004.
-# Daichi Kawahata <daichi@xfce.org>, 2005-2006.
-# Jumpei Ogawa (phanect) <phanective@gmail.com>, 2010.
-# Hideki Ikemoto <ikemo@wakaba.jp>, 2003-2004.
-# Masato KIMURA <kimura.masato@gmail.com>, 2005-2006.
-# Yasuyuki Furukawa <yasu@on.cs.keio.ac.jp>, 1999.
-# Yoshinari Takaoka <mumumu@mx.edit.ne.jp>, 2004.
-# Copyright (C) 2004 Mikael Hallendal <micke@imendio.com>.
-# Bailey Kong <bailey@tgpsolutions.com>, 2006.
-#                              Jun Nishii <jun@flatout.org>, 1999.
-# Shingo Akagaki <dora@kondara.org>, 1999-2000.
-# Yoichiro Takehora <takehora@kde.gr.jp>, 2004.
-# Masahito Yamaga <yamaga@ipc.chiba-u.ac.jp>, 2002.
-# Tadashi Jokagi <elf2000@users.sourceforge.net>, 2004-2005.
-# Kouhei Sutou <kou@cozmixng.org>, 2007.
-# CHIKAMA Masaki <masaki.chikama@gmail.com>, 2008.
-# 栗原 守 <storm@din.or.jp>, 1999.
-# Shintaro Matsuoka <shin@shoegazed.org>, 2004-2005.
-# Jumpei Ogawa <phanective@gmail.com>, 2010.
-# Masaharu 'Max' Goto <magotou@fubyshare.gr.jp>, 2004.
-# Yukihiro Nakai <nakai@gnome.gr.jp>, 1998-2004.
-# Takuo Kitame <kitame@debian.org>, 2001.
-# Shirasaki Yasuhiro <yasuhiro@gnome.gr.jp>, 2000.
-# Satoru Sato <ss@gnome.gr.jp>, 2001-2006.
-# GLSJPN_Etsuko <etsuko.murozono@ptiglobal.net>, 2009.
-# Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>, 1999-2013.
-# Yohsuke Ooi <meke@momonga-linux.org>, 2010.
-# Copyright (C) 2005-2012 Dan Williams <dcbw@redhat.com>.
-# Jiro Matsuzawa <jmatsuzawa@src.gnome.org>, 2010-2013.
-# Japanese message file for YaST2 (@memory@). <>.
-# Ryuichi Kakuda <ryuk@user.script.nu>, 2004.
-# Hideki Yamnane <henrich@debian.org>, 2011.
-# TAKEDA Hirofumi <takepin@turbolinux.co.jp>, 2001.
-# Shinya TAKEBAYASHI <makoto@kanon-net.jp>, 2004-2009.
-# Yukhiro Nakai <nakai@gnome.gr.jp>, 2004.
-# Takuro Ashie <ashie@homa.ne.jp>, 2001-2004.
-# Muneyuki Noguchi <nogu.dev@gmail.com>, 2009-2010.
-# Ken Okubo <se5k-ookb@asahi-net.or.jp>, 2009.
-# Copyright (C) 2007 Benjamin Otte <otte@gnome.org>.
-# Junichi Uekawa <dancer@debian.org>, 2002.
-# Novell Language <language@novell.com>, 2006-2009.
-# SHIRASAKI Yasuhiro <yasuhiro@gnome.gr.jp>, 1998-2004.
-# keblo <keblo1@gmail.com>, 2007-2008.
-# Copyright (C) 2004 Todd Kulesza <todd@dropline.net>.
-# 大河 雄一 <kuri@makino.cc.tohoku.ac.jp>, 1999-2001.
-# Copyright (C) 2007-2011 daniel g. siegel <dgsiegel@gnome.org>.
-# Christian Persch <chpe+epiphany@stud.uni-saarland.de>, 2003-2004.
-# MATSUU Takuto <matsuu@gmail.com>, 2007.
-# Masayuki SANO <sano@acs.i.kyoto-u.ac.jp>, 2002-2006.
-# Mike Fabian <mfabian@suse.de>, 2000-2001.
-# SUGITA Toshinori <sugita@d-pad.co.jp>, 2009.
-# Ken Shibata <kenshibat8@gmail.com>, 2012.
-# OKANO Takayoshi <kano@na.rim.or.jp>, 2005-2012.
-# Yoji TOYODA <bsyamato@sea.plala.or.jp>, 2012-2013.
-# asupara chan <asupara@star>, 2004.
-# Ryoichi INAGAKI <ryo1@bc.wakwak.com>, 2002-2006.
-# Seiji Hoshiba <hoshiyan@mint.ocn.ne.jp>, 2004.
-# Shinsaku Nakagawa <shinsaku@users.sourceforge.jp>, 2004.
-# Fumiaki Okushi <okushi@kde.gr.jp>, 2004-2013.
-# Tom Mishima <tom340@kde.gr.jp>, 2005.
-# Yasuhiro SHIRASAKI <yasuhiro@awa.tohoku.ac.jp>, 1998.
-# Kiyoto Hashida <khashida@redhat.com>, 2010.
-# Daniel E. Moctezuma <democtezuma@gmail.com>, 2010-2011.
-# SATOH, Satoru <ss@gnome.gr.jp>, 2004-2007.
-# Atsuo Igarashi <aigarashi@mvista.com>, 2004.
-# Shinichi Tsunoda <tsuno@ngy.1st.ne.jp>, 2004-2005.
-# Yasuhiko Kamata <belphegor@belbel.or.jp>, 2012.
-# Kyosuke Takayama <support@mc.neweb.ne.jp>, 2004.
-# hogie <satoshiy@juno.dti.ne.jp>, 2004.
-# Yasumichi Akahoshi <yasumichi@vinelinux.org>, 2009-2012.
-# Edscott Wilson Garcia <edscott@xfce.org>, 2002-2011.
-# Shushi Kurose <md81bird@hitaki.net>, 2009-2011.
-# Tadashi Ujino <code.air.edge@gmail.com>, 2010.
-# Copyright (C) Wouter Bolsterlee <wbolster@gnome.org>.
-# IIDA Yosiaki <iida@gnu.org>, 2002.
-# Akira Higuchi <a-higuti@math.sci.hokudai.ac.jp>, 1999.
-# Thomas Niederreiter <tn@xcdroast.org>, 2002-2003.
-# hu <hu_renraku@yahoo.co.jp>, 2005.
-# Mitsuo Hamada <mhamada@redhat.com>, 2000.
-# Anthony Mulcahy <anthony@kcn.ne.jp>, 1999-2000.
-# Takayuki KUASNO <AE5T-KSN@asahi-net.or.jp>, 2010.
-# Ryo Fujita <rfujita@redhat.com>, 2010-2012.
-# Tsuda Eisuke <eis-t@mue.biglobe.ne.jp>, 2004.
-# Mitsuru Oka <oka326@parkcity.ne.jp>, 1998-2004.
-# Copyright (C) 2005-2011 Dan Williams <dcbw@redhat.com>.
-# Takayoshi OKANO <kano@na.rim.or.jp>, 2011.
-# Copyright (C) 2007-2010 daniel g. siegel <dgsiegel@gnome.org>.
-# fuzzy
-msgid ""
-msgstr ""
-"Project-Id-Version: Rodent Delta\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-04 16:54-0500\n"
-"PO-Revision-Date: 2011-10-28 09:23+0900\n"
-"Last-Translator: Yasuaki Taniguchi <yasuakit@gmail.com>\n"
-"Language-Team: Japanese <translation-team-ja@lists.sourceforge.net>\n"
-"Language: ja\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+#
+msgid   ""
+msgstr  "Project-Id-Version: xffm+\n"
+        "Report-Msgid-Bugs-To: \n"
+        "POT-Creation-Date: 2019-08-09 12:32-0500\n"
+        "PO-Revision-Date: 2011-10-28 09:23+0900\n"
+        "Last-Translator: Yasuaki Taniguchi <yasuakit@gmail.com>\n"
+        "Language-Team: Japanese <translation-team-ja@lists.sourceforge.net>\n"
+        "Language: ja\n"
+        "MIME-Version: 1.0\n"
+        "Content-Type: text/plain; charset=UTF-8\n"
+        "Content-Transfer-Encoding: 8bit\n"
+        "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../../xffm/mime/mimemagic.hh:68 ../../xffm/mime/mimemagic.hh:110
-#: ../../xffm/common/mimemagic.hh:68 ../../xffm/common/mimemagic.hh:110
-msgid "No Read Permission"
-msgstr "読み取り権限がありません"
+#: ../xffm/mime/mimemagic.hh:68 ../xffm/mime/mimemagic.hh:112
+msgid   "No Read Permission"
+msgstr  "読み取り権限がありません"
 
-#: ../../xffm/completion/base.hh:28
-msgid "Command"
-msgstr "コマンド名"
+#: ../xffm/find/dialog.hh:91 ../xffm/find/dialog.hh:143
+#: ../xffm/find/dialog.hh:604
+msgid   "Find"
+msgstr  "検索(F)"
 
-#: ../../xffm/completion/base.hh:31
-msgid "File"
-msgstr "ファイル(F)"
+#: ../xffm/find/dialog.hh:167 ../xffm/find/fgr.hh:146
+msgid   "Recursive"
+msgstr  "繰り返し"
 
-#: ../../xffm/completion/base.hh:34
-msgid "Command history"
-msgstr "コマンド履歴(M)"
+#: ../xffm/find/dialog.hh:170 ../xffm/find/fgr.hh:142
+msgid   "Find hidden files and directories"
+msgstr  "隠しファイル/ディレクトリを検索する"
 
-#. option -u uid "uid" "uid_combo"
-#: ../../xffm/completion/base.hh:37 ../../xffm/find/dialog.hh:192
-msgid "User"
-msgstr "ユーザー"
+#: ../xffm/find/dialog.hh:173 ../xffm/find/fgr.hh:138
+msgid   "Stay on single filesystem"
+msgstr  "単一のファイルシステム上のみ"
 
-#: ../../xffm/completion/base.hh:40
-msgid "Variable"
-msgstr "変数"
+#: ../xffm/find/dialog.hh:176 ../xffm/find/signals.hh:66
+#: ../xffm/find/signals.hh:454
+msgid   "Results"
+msgstr  "結果表示用"
 
-#: ../../xffm/completion/base.hh:43
-msgid "Host"
-msgstr "ホスト"
+#: ../xffm/find/dialog.hh:176
+msgid   "Upper limit"
+msgstr  "上限"
 
-#: ../../xffm/completion/base.hh:55
-msgid "Found no match"
-msgstr "マッチするものは見つかりませんでした"
+#: ../xffm/find/dialog.hh:181
+msgid   "At Least"
+msgstr  "以上"
 
-#: ../../xffm/completion/base.hh:141 ../../xffm/completion/base.hh:142
-msgid "Matches"
-msgstr "検索結果"
-
-#: ../../xffm/completion/base.hh:142
-msgid "Too many files open"
-msgstr "ファイルを開き過ぎています"
-
-#: ../../xffm/completion/base.hh:339 ../../xffm/find/fgr.hh:124
-msgid "Options:"
-msgstr "オプション:"
-
-#: ../../xffm/completion/bash.hh:133
-msgid "Completion mode:"
-msgstr "補完モード(C):"
-
-#: ../../xffm/completion/bash.hh:134
-msgid "command"
-msgstr "コマンド"
-
-#: ../../xffm/completion/bash.hh:135
-msgid "file"
-msgstr "file"
-
-#: ../../xffm/completion/bash.hh:145 ../../xffm/completion/bash.hh:149
-msgid "Options >>"
-msgstr "オプション >>"
-
-#: ../../xffm/find/fgr.hh:124 ../../xffm/find/signals.hh:100
-#: ../../xffm/find/dialog.hh:301
-msgid "Path"
-msgstr "パス名"
-
-#: ../../xffm/find/fgr.hh:125
-msgid "Locate documents and folders on this computer by name or content"
-msgstr "このコンピューターから名前や内容でドキュメントとフォルダーを特定します"
-
-#: ../../xffm/find/fgr.hh:126 ../../xffm/find/dialog.hh:334
-msgid "Filter:"
-msgstr "フィルター(F):"
-
-#: ../../xffm/find/fgr.hh:126
-msgid "Search for files"
-msgstr "ファイルの検索"
-
-#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
-#: ../../xffm/find/fgr.hh:128
-msgid "Contents:"
-msgstr "内容:"
-
-#: ../../xffm/find/fgr.hh:128
+#: ../xffm/find/dialog.hh:181 ../xffm/find/dialog.hh:186
 #, fuzzy
-msgid "File's contents filtered as plain text."
-msgstr "ファイルをプレーンテキストで保存しますか?"
+msgid   "kBytes"
+msgstr  "バイト"
 
-#: ../../xffm/find/fgr.hh:131
-msgid "Verbose output debugging mode."
-msgstr "冗長出力デバッキングモード"
+#: ../xffm/find/dialog.hh:186
+msgid   "At Most"
+msgstr  "以下"
 
-#: ../../xffm/find/fgr.hh:133
-msgid "Show version information"
-msgstr "バージョン情報を表示する"
+#: ../xffm/find/dialog.hh:192 ../xffm/completion/base.hh:37
+msgid   "User"
+msgstr  "ユーザー"
 
-#: ../../xffm/find/fgr.hh:135
-msgid "Filter Details"
-msgstr "フィルタの詳細"
+#: ../xffm/find/dialog.hh:197
+msgid   "Group"
+msgstr  "グループ"
 
-#. / option -a "xdev"
-#: ../../xffm/find/fgr.hh:138 ../../xffm/find/dialog.hh:173
-msgid "Stay on single filesystem"
-msgstr "単一のファイルシステム上のみ"
+#: ../xffm/find/dialog.hh:201
+msgid   "Octal Permissions"
+msgstr  "8 進数表記のアクセス権"
 
-#: ../../xffm/find/fgr.hh:140
-msgid "Print..."
-msgstr "印刷(P)..."
+#: ../xffm/find/dialog.hh:206
+msgid   "SUID"
+msgstr  "SUID"
 
-#: ../../xffm/find/fgr.hh:140
-msgid "The unique Process ID that identifies this process."
-msgstr "このプロセスの一意の識別子"
+#: ../xffm/find/dialog.hh:206 ../xffm/fm/view/local/popup.hh:1102
+msgid   "Executable"
+msgstr  "実行可能(E)"
 
-#. / option -D "recursiveH"
-#: ../../xffm/find/fgr.hh:142 ../../xffm/find/dialog.hh:170
-msgid "Find hidden files and directories"
-msgstr "隠しファイル/ディレクトリを検索する"
+#: ../xffm/find/dialog.hh:214 ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168
+msgid   "Minutes"
+msgstr  "分"
 
-#: ../../xffm/find/fgr.hh:143
-msgid "Filter"
-msgstr "フィルター"
+#: ../xffm/find/dialog.hh:219 ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171
+msgid   "Hours"
+msgstr  "時間"
 
-#: ../../xffm/find/fgr.hh:144
-msgid ""
-"To display files which pass the filter (stars and regexps will be processed)"
-msgstr "振り分け (星と正規表現で処理) が済んだファイルを表示します"
+#: ../xffm/find/dialog.hh:224 ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174
+msgid   "Days"
+msgstr  "日"
 
-#. / option -r "recursive"
-#: ../../xffm/find/fgr.hh:146 ../../xffm/find/dialog.hh:167
-msgid "Recursive"
-msgstr "繰り返し"
+#: ../xffm/find/dialog.hh:230
+msgid   "Months"
+msgstr  "カ月"
 
-#: ../../xffm/find/fgr.hh:147 ../../xffm/find/fgr.hh:148
-#: ../../xffm/find/fgr.hh:149 ../../xffm/find/fgr.hh:150
-msgid "KByte"
-msgstr "キロバイト"
+#: ../xffm/find/dialog.hh:241
+msgid   "File type : "
+msgstr  "ファイルの種類 : "
 
-#: ../../xffm/find/fgr.hh:148
+#: ../xffm/find/dialog.hh:255 ../xffm/find/dialog.hh:595
+#: ../xffm/common/gtk.hh:79 ../xffm/fm/dialog/notebook/page/page.hh:71
+msgid   "Close"
+msgstr  "閉じる"
+
+#: ../xffm/find/dialog.hh:263 ../xffm/find/dialog.hh:363
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/fm/view/treeview.hh:18
+msgid   "Details"
+msgstr  "詳細"
+
+#: ../xffm/find/dialog.hh:301 ../xffm/find/fgr.hh:124
+#: ../xffm/find/signals.hh:100
+msgid   "Path"
+msgstr  "パス名"
+
+#: ../xffm/find/dialog.hh:334 ../xffm/find/fgr.hh:126
+msgid   "Filter:"
+msgstr  "フィルター(F):"
+
+#: ../xffm/find/dialog.hh:377
+msgid   "Contains"
+msgstr  "含む"
+
+#: ../xffm/find/dialog.hh:397
+msgid   "Contains the text"
+msgstr  "次の文字列を含む(T)"
+
+#: ../xffm/find/dialog.hh:430
+msgid   "Case Sensitive"
+msgstr  "大/小文字を区別する"
+
+#: ../xffm/find/dialog.hh:442
+msgid   "Extended regexp"
+msgstr  "regexp延長"
+
+#: ../xffm/find/dialog.hh:453
+msgid   "Include binary files"
+msgstr  "バイナリファイルを含める(B)"
+
+#: ../xffm/find/dialog.hh:463 ../xffm/find/fgr.hh:212
+msgid   "Line Count"
+msgstr  "行数"
+
+#: ../xffm/find/dialog.hh:489
+msgid   "Match"
+msgstr  "一致"
+
+#: ../xffm/find/dialog.hh:501
+msgid   "Anywhere"
+msgstr  "どこでも"
+
+#: ../xffm/find/dialog.hh:516
+msgid   "Whole words only"
+msgstr  "単語単位(W)"
+
+#: ../xffm/find/dialog.hh:531
+msgid   "lines"
+msgstr  "行"
+
+#: ../xffm/find/dialog.hh:545 ../xffm/find/fgr.hh:210
+msgid   "No match"
+msgstr  "一致しません"
+
+#: ../xffm/find/dialog.hh:577 ../xffm/find/signals.hh:368
+#: ../xffm/common/gtk.hh:409 ../xffm/fm/view/local/rm.hh:157
+#: ../xffm/fm/view/local/properties.hh:314
+#: ../xffm/response/entryresponse.hh:435 ../xffm/response/chooserresponse.hh:21
+msgid   "Cancel"
+msgstr  "キャンセル"
+
+#: ../xffm/find/dialog.hh:587
+msgid   "Clear"
+msgstr  "クリア(C)"
+
+#: ../xffm/find/dialog.hh:629
+msgid   "Edit"
+msgstr  "編集(E)"
+
+#: ../xffm/find/dialog.hh:743 ../xffm/find/dialog.hh:758
+#: ../xffm/common/preview.hh:460 ../xffm/common/util.hh:1354
+#: ../xffm/common/util.hh:1356 ../xffm/common/util.hh:1362
+#: ../xffm/common/util.hh:1364
+msgid   "unknown"
+msgstr  "不明"
+
+#: ../xffm/find/dialog.hh:772
+msgid   "Modified"
+msgstr  "変更済"
+
+#: ../xffm/find/dialog.hh:776
+msgid   "Created"
+msgstr  "作成日"
+
+#: ../xffm/find/dialog.hh:780
+msgid   "Accessed"
+msgstr  "アクセス時刻"
+
+#: ../xffm/find/dialog.hh:1098
+msgid   "Basic rules:\n"
+        "\n"
+        "*  Will match any character zero or more times.\n"
+        "?  Will match any character exactly one time\n"
+        "[] Match any character within the [] \n"
+        "^  Match at beginning of string\n"
+        "$  Match at end of string \n"
+msgstr  "* は何もなしもしくはどんな長さでも一致。\n"
+        "? はどんな長さでも一文字一致\n"
+
+#: ../xffm/find/dialog.hh:1107
 #, fuzzy
-msgid "is greater than or equal to"
-msgstr "greater than or equal to"
+msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
+        "( ) : \n"
+        "In  basic regular expressions the metacharacters ?, +, {, |, (, "
+        "and ) \n"
+        "  lose their special meaning.\n"
+        "\n"
+        "The  period . matches  any  single  character.\n"
+        "The caret ^ matches at the start of line.\n"
+        "The dollar $ matches at the end of line.\n"
+        "\n"
+        "Characters within [ ] matches any single character in the list.\n"
+        "Characters within [^ ] matches any single character *not* in the "
+        "list.\n"
+        "Characters inside [ - ] matches a range of characters (ie [0-9] or "
+        "[a-z]).\n"
+        "\n"
+        "A regular expression may be followed by one of several repetition "
+        "operators:\n"
+        "?      The preceding item is optional and matched\n"
+        "       at most once.\n"
+        "*      The preceding item will be matched zero\n"
+        "       or more times.\n"
+        "+      The preceding item will be matched one or\n"
+        "       more times.\n"
+        "{n}    The preceding item is matched exactly n times.\n"
+        "{n,}   The preceding item is matched n or more times.\n"
+        "{n,m}  The preceding item is matched at least n times,\n"
+        "       but not more than m times.\n"
+        "\n"
+        "To match any reserved character, precede it with \\. \n"
+        "\n"
+        "Two regular expressions may be joined by the logical or operator |.\n"
+        "Two regular expressions may be concatenated.\n"
+        "\n"
+        "More information is available by typing \"man grep\"\n"
+msgstr  "Reserved characters for extended regexp are\n"
+        ". ^ $ [ ] ? * + { } | \\ ( ) : \n"
+        "メタキャラクタの普通の表現\n"
+        "?, +, {, |, (, と ) それらの特別な意味を失う。\n"
+        "\n"
+        "ピリオド . は何か一つの文字の一致。\n"
+        "キャレット ^ ははじめのラインの一致。\n"
+        "ドル $ は終わりのラインの一致。\n"
+        "\n"
+        "[ ]の中のリストはどれか一文字の一致。\n"
+        "[^ ]の中のリストはどれか一文字*でない*一致。\n"
+        "[ - ]の中のリストはその範囲内の一致\n"
+        "       （すなわち[0-9]もしくは[a-z]）。\n"
+        "\n"
+        "普通の表現は一つのそれぞれの繰り返し\n"
+        "       はたらきをフォローしてよい:\n"
+        "?      この文字は任意の一文字の一致\n"
+        "*      この文字は何もなしもしくはどんな長さでも一致。\n"
+        "+      この文字は一文字もしくはどんな長さでも一致。\n"
+        "{n}    この文字は厳密にn回の一致。\n"
+        "{n,}   この文字はn回かそれ以上の一致。\n"
+        "{n,m}  この文字は最小のn回もしくはたったm回の一致。\n"
+        "\n"
+        "たくさんの文字予約はプレコードと \\. \n"
+        "\n"
+        "二つの表現を論理的につなげたい場合は|。\n"
+        "二つの表現を含む。\n"
+        "\n"
+        "これ以上の情報が欲しい場合ははコマンドプロンプトで\n"
+        "        \"man grep\" とタイプしてみてください。\n"
 
-#: ../../xffm/find/fgr.hh:150
+#: ../xffm/find/fgr.hh:124 ../xffm/completion/base.hh:339
+msgid   "Options:"
+msgstr  "オプション:"
+
+#: ../xffm/find/fgr.hh:125
+msgid   "Locate documents and folders on this computer by name or content"
+msgstr  "このコンピューターから名前や内容でドキュメントとフォルダーを特定しま"
+        "す"
+
+#: ../xffm/find/fgr.hh:126
+msgid   "Search for files"
+msgstr  "ファイルの検索"
+
+#: ../xffm/find/fgr.hh:128
+msgid   "Contents:"
+msgstr  "内容:"
+
+#: ../xffm/find/fgr.hh:128
 #, fuzzy
-msgid "is less than or equal to"
-msgstr "less than or equal to"
+msgid   "File's contents filtered as plain text."
+msgstr  "ファイルをプレーンテキストで保存しますか?"
 
-#: ../../xffm/find/fgr.hh:152
-msgid "Set UID"
-msgstr "Set UID"
+#: ../xffm/find/fgr.hh:131
+msgid   "Verbose output debugging mode."
+msgstr  "冗長出力デバッキングモード"
 
-#: ../../xffm/find/fgr.hh:152
-msgid "Executable Text Files"
-msgstr "実行可能なテキストファイル"
+#: ../xffm/find/fgr.hh:133
+msgid   "Show version information"
+msgstr  "バージョン情報を表示する"
 
-#: ../../xffm/find/fgr.hh:154
-msgid "The permissions of the file, in octal notation."
-msgstr "ファイルのアクセス権 (8 進数表記)"
+#: ../xffm/find/fgr.hh:135
+msgid   "Filter Details"
+msgstr  "フィルタの詳細"
 
-#: ../../xffm/find/fgr.hh:155
-msgid "Type"
-msgstr "タイプ"
+#: ../xffm/find/fgr.hh:140
+msgid   "Print..."
+msgstr  "印刷(P)..."
 
-#: ../../xffm/find/fgr.hh:157 ../../xffm/find/signals.hh:14
-msgid "Any"
-msgstr "全て"
+#: ../xffm/find/fgr.hh:140
+msgid   "The unique Process ID that identifies this process."
+msgstr  "このプロセスの一意の識別子"
 
-#: ../../xffm/find/fgr.hh:157
-msgid "Default type"
-msgstr "デフォルトの種類"
+#: ../xffm/find/fgr.hh:143
+msgid   "Filter"
+msgstr  "フィルター"
 
-#: ../../xffm/find/fgr.hh:158 ../../xffm/common/preview.hh:478
-msgid "Regular file"
-msgstr "普通のファイル"
+#: ../xffm/find/fgr.hh:144
+msgid   "To display files which pass the filter (stars and regexps will be "
+        "processed)"
+msgstr  "振り分け (星と正規表現で処理) が済んだファイルを表示します"
 
-#: ../../xffm/find/fgr.hh:159 ../../xffm/find/signals.hh:8
-#: ../../xffm/fm/view/local/popup.hh:1062 ../../xffm/common/preview.hh:469
-msgid "Directory"
-msgstr "フォルダー"
+#: ../xffm/find/fgr.hh:147 ../xffm/find/fgr.hh:148 ../xffm/find/fgr.hh:149
+#: ../xffm/find/fgr.hh:150
+msgid   "KByte"
+msgstr  "キロバイト"
 
-#: ../../xffm/find/fgr.hh:160 ../../xffm/find/signals.hh:9
-#: ../../xffm/common/preview.hh:475
-msgid "Symbolic Link"
-msgstr "シンボリックリンク"
-
-#: ../../xffm/find/fgr.hh:161
-msgid "UNIX Socket"
-msgstr "ソケット"
-
-#: ../../xffm/find/fgr.hh:162 ../../xffm/find/signals.hh:11
-#: ../../xffm/common/preview.hh:463
-msgid "Block device"
-msgstr "ブロックデバイス"
-
-#: ../../xffm/find/fgr.hh:163 ../../xffm/find/signals.hh:12
-#: ../../xffm/common/preview.hh:466
-msgid "Character device"
-msgstr "キャラクターデバイス"
-
-#: ../../xffm/find/fgr.hh:164 ../../xffm/find/signals.hh:13
-#: ../../xffm/common/preview.hh:472
-msgid "FIFO"
-msgstr "FIFO"
-
-#. radio_p freed on destroy event for findDialog.
-#. option -k minutes "last_minutes", "last_minutes_spin"
-#: ../../xffm/find/fgr.hh:166 ../../xffm/find/fgr.hh:168
-#: ../../xffm/find/dialog.hh:214
-msgid "Minutes"
-msgstr "分"
-
-#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
-#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
-#: ../../xffm/find/dialog.hh:263 ../../xffm/find/dialog.hh:363
-#: ../../xffm/fm/view/treeview.hh:18
-msgid "Details"
-msgstr "詳細"
-
-#: ../../xffm/find/fgr.hh:167 ../../xffm/find/fgr.hh:170
-#: ../../xffm/find/fgr.hh:173 ../../xffm/find/fgr.hh:176
-#: ../../xffm/find/fgr.hh:179 ../../xffm/find/fgr.hh:180
-#: ../../xffm/find/fgr.hh:183 ../../xffm/find/fgr.hh:184
-#: ../../xffm/find/fgr.hh:187 ../../xffm/find/fgr.hh:188
-msgid "TIME"
-msgstr "時間"
-
-#: ../../xffm/find/fgr.hh:168 ../../xffm/find/fgr.hh:171
-#: ../../xffm/find/fgr.hh:174 ../../xffm/find/fgr.hh:177
-msgid "Previous"
-msgstr "前"
-
-#. option -h hours "last_hours", "last_hours_spin"
-#: ../../xffm/find/fgr.hh:169 ../../xffm/find/fgr.hh:171
-#: ../../xffm/find/dialog.hh:219
-msgid "Hours"
-msgstr "時間"
-
-#. option -d days "last_days", "last_days_spin"
-#: ../../xffm/find/fgr.hh:172 ../../xffm/find/fgr.hh:174
-#: ../../xffm/find/dialog.hh:224
-msgid "Days"
-msgstr "日"
-
-#: ../../xffm/find/fgr.hh:175
-msgid "Month"
-msgstr "月"
-
-#: ../../xffm/find/fgr.hh:177
+#: ../xffm/find/fgr.hh:148
 #, fuzzy
-msgid "Month(s)"
-msgstr "月"
+msgid   "is greater than or equal to"
+msgstr  "greater than or equal to"
 
-#: ../../xffm/find/fgr.hh:180
-msgid "Modification Time :"
-msgstr "変更日時 :"
+#: ../xffm/find/fgr.hh:150
+#, fuzzy
+msgid   "is less than or equal to"
+msgstr  "less than or equal to"
 
-#: ../../xffm/find/fgr.hh:184
-msgid "Access Time :"
-msgstr "アクセス日時 :"
+#: ../xffm/find/fgr.hh:152
+msgid   "Set UID"
+msgstr  "Set UID"
 
-#: ../../xffm/find/fgr.hh:188
-msgid "Creation Time :"
-msgstr "作成日時 :"
+#: ../xffm/find/fgr.hh:152
+msgid   "Executable Text Files"
+msgstr  "実行可能なテキストファイル"
 
-#: ../../xffm/find/fgr.hh:191 ../../xffm/find/fgr.hh:192
-msgid "uid"
-msgstr "UID"
+#: ../xffm/find/fgr.hh:154
+msgid   "The permissions of the file, in octal notation."
+msgstr  "ファイルのアクセス権 (8 進数表記)"
 
-#: ../../xffm/find/fgr.hh:192
-msgid "User:"
-msgstr "ユーザー:"
+#: ../xffm/find/fgr.hh:155
+msgid   "Type"
+msgstr  "タイプ"
 
-#: ../../xffm/find/fgr.hh:194 ../../xffm/find/fgr.hh:195
-msgid "gid"
-msgstr "GID"
+#: ../xffm/find/fgr.hh:157 ../xffm/find/signals.hh:14
+msgid   "Any"
+msgstr  "全て"
 
-#: ../../xffm/find/fgr.hh:195
-msgid "Group:"
-msgstr "グループ:"
+#: ../xffm/find/fgr.hh:157
+msgid   "Default type"
+msgstr  "デフォルトの種類"
 
-#: ../../xffm/find/fgr.hh:198
-msgid ""
-"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
-"character that  normally  follows  a file  name"
-msgstr ""
+#: ../xffm/find/fgr.hh:158 ../xffm/common/preview.hh:478
+msgid   "Regular file"
+msgstr  "普通のファイル"
 
-#: ../../xffm/find/fgr.hh:200
-msgid "Content View"
-msgstr "内容表示"
+#: ../xffm/find/fgr.hh:159 ../xffm/find/signals.hh:8
+#: ../xffm/common/preview.hh:469 ../xffm/fm/view/local/popup.hh:1062
+msgid   "Directory"
+msgstr  "フォルダー"
 
-#: ../../xffm/find/fgr.hh:201 ../../xffm/find/fgr.hh:202
-#: ../../xffm/find/fgr.hh:203 ../../xffm/find/fgr.hh:204
-msgid "STRING"
-msgstr "STRING"
+#: ../xffm/find/fgr.hh:160 ../xffm/find/signals.hh:9
+#: ../xffm/common/preview.hh:475
+msgid   "Symbolic Link"
+msgstr  "シンボリックリンク"
 
-#: ../../xffm/find/fgr.hh:202 ../../xffm/find/fgr.hh:204
-#: ../../xffm/fm/view/local/popup.hh:759
-msgid "Regular expression"
-msgstr "正規表現"
+#: ../xffm/find/fgr.hh:161
+msgid   "UNIX Socket"
+msgstr  "ソケット"
 
-#: ../../xffm/find/fgr.hh:204
-msgid "Extended"
-msgstr "拡張"
+#: ../xffm/find/fgr.hh:162 ../xffm/find/signals.hh:11
+#: ../xffm/common/preview.hh:463
+msgid   "Block device"
+msgstr  "ブロックデバイス"
 
-#: ../../xffm/find/fgr.hh:206
-msgid "Ignore case"
-msgstr "大/小文字を区別する(I)"
+#: ../xffm/find/fgr.hh:163 ../xffm/find/signals.hh:12
+#: ../xffm/common/preview.hh:466
+msgid   "Character device"
+msgstr  "キャラクターデバイス"
 
-#: ../../xffm/find/fgr.hh:208
-msgid "Text Files"
-msgstr "通常のファイル"
+#: ../xffm/find/fgr.hh:164 ../xffm/find/signals.hh:13
+#: ../xffm/common/preview.hh:472
+msgid   "FIFO"
+msgstr  "FIFO"
 
-#: ../../xffm/find/fgr.hh:210 ../../xffm/find/dialog.hh:545
-msgid "No match"
-msgstr "一致しません"
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/find/fgr.hh:179 ../xffm/find/fgr.hh:180
+#: ../xffm/find/fgr.hh:183 ../xffm/find/fgr.hh:184 ../xffm/find/fgr.hh:187
+#: ../xffm/find/fgr.hh:188
+msgid   "TIME"
+msgstr  "時間"
 
-#: ../../xffm/find/fgr.hh:212 ../../xffm/find/dialog.hh:463
-msgid "Line Count"
-msgstr "行数"
+#: ../xffm/find/fgr.hh:168 ../xffm/find/fgr.hh:171 ../xffm/find/fgr.hh:174
+#: ../xffm/find/fgr.hh:177
+msgid   "Previous"
+msgstr  "前"
 
-#: ../../xffm/find/fgr.hh:214
-msgid "Words"
-msgstr "単語の数"
+#: ../xffm/find/fgr.hh:175
+msgid   "Month"
+msgstr  "月"
 
-#: ../../xffm/find/fgr.hh:216
-msgid "Lines"
-msgstr "行ごと"
+#: ../xffm/find/fgr.hh:177
+#, fuzzy
+msgid   "Month(s)"
+msgstr  "月"
 
-#: ../../xffm/find/fgr.hh:368
+#: ../xffm/find/fgr.hh:180
+msgid   "Modification Time :"
+msgstr  "変更日時 :"
+
+#: ../xffm/find/fgr.hh:184
+msgid   "Access Time :"
+msgstr  "アクセス日時 :"
+
+#: ../xffm/find/fgr.hh:188
+msgid   "Creation Time :"
+msgstr  "作成日時 :"
+
+#: ../xffm/find/fgr.hh:191 ../xffm/find/fgr.hh:192
+msgid   "uid"
+msgstr  "UID"
+
+#: ../xffm/find/fgr.hh:192
+msgid   "User:"
+msgstr  "ユーザー:"
+
+#: ../xffm/find/fgr.hh:194 ../xffm/find/fgr.hh:195
+msgid   "gid"
+msgstr  "GID"
+
+#: ../xffm/find/fgr.hh:195
+msgid   "Group:"
+msgstr  "グループ:"
+
+#: ../xffm/find/fgr.hh:198
+msgid   "Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+        "character that  normally  follows  a file  name"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:200
+msgid   "Content View"
+msgstr  "内容表示"
+
+#: ../xffm/find/fgr.hh:201 ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:203
+#: ../xffm/find/fgr.hh:204
+msgid   "STRING"
+msgstr  "STRING"
+
+#: ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:204
+#: ../xffm/fm/view/local/popup.hh:759
+msgid   "Regular expression"
+msgstr  "正規表現"
+
+#: ../xffm/find/fgr.hh:204
+msgid   "Extended"
+msgstr  "拡張"
+
+#: ../xffm/find/fgr.hh:206
+msgid   "Ignore case"
+msgstr  "大/小文字を区別する(I)"
+
+#: ../xffm/find/fgr.hh:208
+msgid   "Text Files"
+msgstr  "通常のファイル"
+
+#: ../xffm/find/fgr.hh:214
+msgid   "Words"
+msgstr  "単語の数"
+
+#: ../xffm/find/fgr.hh:216
+msgid   "Lines"
+msgstr  "行ごと"
+
+#: ../xffm/find/fgr.hh:362
 #, c-format
-msgid "Usage : %s [OPTIONS]\n"
-msgstr "使用法 : %s [OPTIONS]\n"
+msgid   "Usage : %s [OPTIONS]\n"
+msgstr  "使用法 : %s [OPTIONS]\n"
 
-#: ../../xffm/find/signals.hh:7
-msgid "Regular"
-msgstr "標準"
+#: ../xffm/find/signals.hh:7
+msgid   "Regular"
+msgstr  "標準"
 
-#: ../../xffm/find/signals.hh:10 ../../xffm/common/preview.hh:481
-msgid "Socket"
-msgstr "ソケット"
+#: ../xffm/find/signals.hh:10 ../xffm/common/preview.hh:481
+msgid   "Socket"
+msgstr  "ソケット"
 
-#. if (g_slist_length(list) == 0) return NULL;
-#. Create liststore for DnD
-#. / option "upper_limit_spin" (only in gtk findDialog)
-#: ../../xffm/find/signals.hh:66 ../../xffm/find/signals.hh:454
-#: ../../xffm/find/dialog.hh:176
-msgid "Results"
-msgstr "結果表示用"
-
-#. button no
-#: ../../xffm/find/signals.hh:368 ../../xffm/find/dialog.hh:577
-#: ../../xffm/response/chooserresponse.hh:21
-#: ../../xffm/response/entryresponse.hh:420
-#: ../../xffm/fm/view/local/properties.hh:314
-#: ../../xffm/fm/view/local/rm.hh:157 ../../xffm/common/gtk.hh:409
-msgid "Cancel"
-msgstr "キャンセル"
-
-#: ../../xffm/find/signals.hh:396 ../../xffm/find/signals.hh:830
+#: ../xffm/find/signals.hh:396 ../xffm/find/signals.hh:830
 #, fuzzy
-msgid "No editor for current action."
-msgstr "現在、アクションはありません。"
+msgid   "No editor for current action."
+msgstr  "現在、アクションはありません。"
 
-#: ../../xffm/find/signals.hh:454
-msgid "Upper limit:"
-msgstr "上限:"
+#: ../xffm/find/signals.hh:454
+msgid   "Upper limit:"
+msgstr  "上限:"
 
-#: ../../xffm/find/signals.hh:456
-msgid "Counting files..."
-msgstr "ファイルを数えています..."
+#: ../xffm/find/signals.hh:456
+msgid   "Counting files..."
+msgstr  "ファイルを数えています..."
 
-#: ../../xffm/find/signals.hh:471
+#: ../xffm/find/signals.hh:471
 #, c-format
-msgid "Found %d match"
-msgid_plural "Found %d matches"
-msgstr[0] "%d 件一致しました"
+msgid   "Found %d match"
+msgid_plural    "Found %d matches"
+msgstr[0]       "%d 件一致しました"
 
-#: ../../xffm/find/signals.hh:473
+#: ../xffm/find/signals.hh:473
 #, c-format
-msgid "%s Finished : %s"
-msgstr "%s が終了 : %s"
+msgid   "%s Finished : %s"
+msgstr  "%s が終了 : %s"
 
-#: ../../xffm/find/signals.hh:596 ../../xffm/find/signals.hh:598
-msgid "Searching..."
-msgstr "検索中..."
+#: ../xffm/find/signals.hh:596 ../xffm/find/signals.hh:598
+msgid   "Searching..."
+msgstr  "検索中..."
 
-#. g_object_set_data(G_OBJECT(findDialog), "window", findDialog);
-#: ../../xffm/find/dialog.hh:91 ../../xffm/find/dialog.hh:143
-#: ../../xffm/find/dialog.hh:604
-msgid "Find"
-msgstr "検索(F)"
+#: ../xffm/common/preview.hh:581
+msgid   "Empty file"
+msgstr  "空のファイル"
 
-#: ../../xffm/find/dialog.hh:176
-msgid "Upper limit"
-msgstr "上限"
+#: ../xffm/common/preview.hh:636
+#, c-format
+msgid   "Cannot read from %s"
+msgstr  "%s から読み取れません"
 
-#. option -s +KByte "size_greater", "size_greater_spin"
-#: ../../xffm/find/dialog.hh:181
-msgid "At Least"
-msgstr "以上"
+#: ../xffm/common/gtk.hh:67 ../xffm/fm/dialog/notebook/vbuttonbox.hh:240
+msgid   "Open terminal"
+msgstr  "端末を開く"
 
-#: ../../xffm/find/dialog.hh:181 ../../xffm/find/dialog.hh:186
+#: ../xffm/common/gtk.hh:69 ../xffm/common/util.hh:1443
+msgid   "Execute Shell Command"
+msgstr  "シェルコマンドを実行"
+
+#: ../xffm/common/gtk.hh:71 ../xffm/fm/view/local/popup.hh:157
+msgid   "Paste"
+msgstr  "貼り付け(P)"
+
+#: ../xffm/common/gtk.hh:73 ../xffm/fm/view/local/popup.hh:151
+msgid   "Add bookmark"
+msgstr  "ブックマークに追加します"
+
+#: ../xffm/common/gtk.hh:75 ../xffm/fm/view/local/popup.hh:152
+#: ../xffm/fm/view/root/popup.hh:137
+msgid   "Remove bookmark"
+msgstr  "ブックマークを削除します"
+
+#: ../xffm/common/gtk.hh:77 ../xffm/fm/view/pkg/model.hh:108
+#: ../xffm/fm/view/pkg/model.hh:299 ../xffm/fm/view/pkg/model.hh:306
+#: ../xffm/fm/view/pkg/popup.hh:151
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:236
+msgid   "Search"
+msgstr  "検索"
+
+#: ../xffm/common/gtk.hh:81 ../xffm/fm/dialog/notebook/menupopover.hh:237
+msgid   "Exit"
+msgstr  "終了(E)"
+
+#: ../xffm/common/gtk.hh:83 ../xffm/fm/view/local/popup.hh:85
+#: ../xffm/fm/view/local/popup.hh:142 ../xffm/fm/view/local/popup.hh:1287
+#: ../xffm/fm/view/local/popup.hh:1294 ../xffm/fm/view/local/popup.hh:1305
+#: ../xffm/fm/view/local/popup.hh:1312
+msgid   "Open with"
+msgstr  "別のアプリで開く"
+
+#: ../xffm/common/gtk.hh:85 ../xffm/fm/view/local/popup.hh:100
+#: ../xffm/fm/view/local/popup.hh:156
+msgid   "Cut"
+msgstr  "切り取り(T)"
+
+#: ../xffm/common/gtk.hh:87 ../xffm/fm/view/local/popup.hh:99
+#: ../xffm/fm/view/local/popup.hh:155
+msgid   "Copy"
+msgstr  "コピー(C)"
+
+#: ../xffm/common/gtk.hh:89 ../xffm/fm/view/local/rm.hh:176
+#: ../xffm/fm/view/local/popup.hh:103 ../xffm/fm/view/local/popup.hh:160
+msgid   "Delete"
+msgstr  "削除(D)"
+
+#: ../xffm/common/gtk.hh:91 ../xffm/fm/view/local/rm.hh:165
+msgid   "Shred"
+msgstr  ""
+
+#: ../xffm/common/gtk.hh:94 ../xffm/fm/view/local/popup.hh:95
+#: ../xffm/fm/view/local/popup.hh:145 ../xffm/fm/view/root/popup.hh:136
+#: ../xffm/fm/view/fstab/popup.hh:20
+msgid   "Open in New Tab"
+msgstr  "新しいタブで開く(O)"
+
+#: ../xffm/common/gtk.hh:139 ../xffm/fm/dialog/notebook/notebook.hh:75
+msgid   "New Tab"
+msgstr  "新規タブ"
+
+#: ../xffm/common/gtk.hh:352 ../xffm/common/gtk.hh:360
+msgid   "Help"
+msgstr  "ヘルプ(H)"
+
+#: ../xffm/common/settings.hh:30
+msgid   "New File:"
+msgstr  "新しいファイル"
+
+#: ../xffm/common/gio.hh:81
+msgid   "Copying files"
+msgstr  "ファイルのコピー"
+
+#: ../xffm/common/gio.hh:83 ../xffm/common/dnd.hh:35
+#: ../xffm/fm/dialog/clipboard.hh:30
+msgid   "Moving files"
+msgstr  "ファイルの移動中"
+
+#: ../xffm/common/gio.hh:85
 #, fuzzy
-msgid "kBytes"
-msgstr "バイト"
+msgid   "linking"
+msgstr  "消去中"
 
-#. option -s -KByte "size_smaller", "size_smaller_spin"
-#: ../../xffm/find/dialog.hh:186
-msgid "At Most"
-msgstr "以下"
+#: ../xffm/common/gio.hh:87
+msgid   "rename"
+msgstr  "rename"
 
-#: ../../xffm/find/dialog.hh:197
-msgid "Group"
-msgstr "グループ"
+#: ../xffm/common/gio.hh:426
+#, c-format
+msgid   "(%d of %d)"
+msgstr  "(%d / %d)"
 
-#. option -o octal "octal_p" "permissions_entry"
-#: ../../xffm/find/dialog.hh:201
-msgid "Octal Permissions"
-msgstr "8 進数表記のアクセス権"
+#: ../xffm/common/util.hh:1404
+#, c-format
+msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
+        "attribute on that file."
+msgstr  "スクリプトファイル %s は実行ファイルではありません。ファイルに実行可"
+        "能属性を設定してください。"
 
-#. option -p suid | exe
-#: ../../xffm/find/dialog.hh:206
-msgid "SUID"
-msgstr "SUID"
+#: ../xffm/common/util.hh:1406 ../xffm/common/util.hh:1441
+#, c-format
+msgid   "Open with %s"
+msgstr  "%s で開く"
 
-#: ../../xffm/find/dialog.hh:206 ../../xffm/fm/view/local/popup.hh:1102
-msgid "Executable"
-msgstr "実行可能(E)"
+#: ../xffm/common/util.hh:1406
+msgid   "Text Editor"
+msgstr  "テキスト・エディタ"
 
-#. option -m months "last_months", "last_months_spin"
-#: ../../xffm/find/dialog.hh:230
-msgid "Months"
-msgstr "カ月"
+#: ../xffm/common/util.hh:1447
+msgid   "Console: quickly run single commands -- write a command here and "
+        "press enter."
+msgstr  "コンソール: 単一のコマンドを実行します。ここにコマンドを入力して "
+        "Enter を押します。"
 
-#: ../../xffm/find/dialog.hh:241
-msgid "File type : "
-msgstr "ファイルの種類 : "
+#: ../xffm/common/util.hh:1452 ../xffm/fm/view/local/popup.hh:1109
+#: ../xffm/fm/view/local/popup.hh:1291 ../xffm/fm/view/local/popup.hh:1309
+msgid   "Run in Terminal"
+msgstr  "端末内で実行する"
 
-#. gtk_widget_show (GTK_WIDGET(right_options_vbox));
-#. gtk_widget_show (GTK_WIDGET(center_options_vbox));
-#. gtk_widget_show (GTK_WIDGET(left_options_vbox));
-#: ../../xffm/find/dialog.hh:255 ../../xffm/find/dialog.hh:595
-#: ../../xffm/fm/dialog/notebook/page/page.hh:70 ../../xffm/common/gtk.hh:79
-msgid "Close"
-msgstr "閉じる"
+#: ../xffm/common/dnd.hh:41 ../xffm/fm/dialog/clipboard.hh:23
+msgid   "Copying files locally"
+msgstr  "ファイルをローカルでコピー中"
 
-#. gtk_box_pack_start (vbox7a, GTK_WIDGET(advancedBox), TRUE, FALSE, 5);
-#. gtk_widget_show(GTK_WIDGET(advancedBox));
-#. //////////////  grep options.... /////////////////////////
-#: ../../xffm/find/dialog.hh:377
-msgid "Contains"
-msgstr "含む"
+#: ../xffm/common/dnd.hh:47
+msgid   "Create Link"
+msgstr  "リンク作成"
 
-#: ../../xffm/find/dialog.hh:397
-msgid "Contains the text"
-msgstr "次の文字列を含む(T)"
+#: ../xffm/common/run.hh:338
+msgid   "error"
+msgstr  "エラー"
 
-#: ../../xffm/find/dialog.hh:430
-msgid "Case Sensitive"
-msgstr "大/小文字を区別する"
-
-#: ../../xffm/find/dialog.hh:442
-msgid "Extended regexp"
-msgstr "regexp延長"
-
-#: ../../xffm/find/dialog.hh:453
-msgid "Include binary files"
-msgstr "バイナリファイルを含める(B)"
-
-#: ../../xffm/find/dialog.hh:489
-msgid "Match"
-msgstr "一致"
-
-#: ../../xffm/find/dialog.hh:501
-msgid "Anywhere"
-msgstr "どこでも"
-
-#: ../../xffm/find/dialog.hh:516
-msgid "Whole words only"
-msgstr "単語単位(W)"
-
-#: ../../xffm/find/dialog.hh:531
-msgid "lines"
-msgstr "行"
-
-#: ../../xffm/find/dialog.hh:587
-msgid "Clear"
-msgstr "クリア(C)"
-
-#: ../../xffm/find/dialog.hh:629
-msgid "Edit"
-msgstr "編集(E)"
-
-#: ../../xffm/find/dialog.hh:743 ../../xffm/find/dialog.hh:758
-#: ../../xffm/common/util.hh:1354 ../../xffm/common/util.hh:1356
-#: ../../xffm/common/util.hh:1362 ../../xffm/common/util.hh:1364
-#: ../../xffm/common/preview.hh:460
-msgid "unknown"
-msgstr "不明"
-
-#: ../../xffm/find/dialog.hh:772
-msgid "Modified"
-msgstr "変更済"
-
-#: ../../xffm/find/dialog.hh:776
-msgid "Created"
-msgstr "作成日"
-
-#: ../../xffm/find/dialog.hh:780
-msgid "Accessed"
-msgstr "アクセス時刻"
-
-#: ../../xffm/find/dialog.hh:1098
-msgid ""
-"Basic rules:\n"
-"\n"
-"*  Will match any character zero or more times.\n"
-"?  Will match any character exactly one time\n"
-"[] Match any character within the [] \n"
-"^  Match at beginning of string\n"
-"$  Match at end of string \n"
-msgstr ""
-"* は何もなしもしくはどんな長さでも一致。\n"
-"? はどんな長さでも一文字一致\n"
-
-#: ../../xffm/find/dialog.hh:1107
+#: ../xffm/common/run.hh:342
 #, fuzzy
-msgid ""
-"Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ ( ) : \n"
-"In  basic regular expressions the metacharacters ?, +, {, |, (, and ) \n"
-"  lose their special meaning.\n"
-"\n"
-"The  period . matches  any  single  character.\n"
-"The caret ^ matches at the start of line.\n"
-"The dollar $ matches at the end of line.\n"
-"\n"
-"Characters within [ ] matches any single character in the list.\n"
-"Characters within [^ ] matches any single character *not* in the list.\n"
-"Characters inside [ - ] matches a range of characters (ie [0-9] or [a-z]).\n"
-"\n"
-"A regular expression may be followed by one of several repetition "
-"operators:\n"
-"?      The preceding item is optional and matched\n"
-"       at most once.\n"
-"*      The preceding item will be matched zero\n"
-"       or more times.\n"
-"+      The preceding item will be matched one or\n"
-"       more times.\n"
-"{n}    The preceding item is matched exactly n times.\n"
-"{n,}   The preceding item is matched n or more times.\n"
-"{n,m}  The preceding item is matched at least n times,\n"
-"       but not more than m times.\n"
-"\n"
-"To match any reserved character, precede it with \\. \n"
-"\n"
-"Two regular expressions may be joined by the logical or operator |.\n"
-"Two regular expressions may be concatenated.\n"
-"\n"
-"More information is available by typing \"man grep\"\n"
-msgstr ""
-"Reserved characters for extended regexp are\n"
-". ^ $ [ ] ? * + { } | \\ ( ) : \n"
-"メタキャラクタの普通の表現\n"
-"?, +, {, |, (, と ) それらの特別な意味を失う。\n"
-"\n"
-"ピリオド . は何か一つの文字の一致。\n"
-"キャレット ^ ははじめのラインの一致。\n"
-"ドル $ は終わりのラインの一致。\n"
-"\n"
-"[ ]の中のリストはどれか一文字の一致。\n"
-"[^ ]の中のリストはどれか一文字*でない*一致。\n"
-"[ - ]の中のリストはその範囲内の一致\n"
-"       （すなわち[0-9]もしくは[a-z]）。\n"
-"\n"
-"普通の表現は一つのそれぞれの繰り返し\n"
-"       はたらきをフォローしてよい:\n"
-"?      この文字は任意の一文字の一致\n"
-"*      この文字は何もなしもしくはどんな長さでも一致。\n"
-"+      この文字は一文字もしくはどんな長さでも一致。\n"
-"{n}    この文字は厳密にn回の一致。\n"
-"{n,}   この文字はn回かそれ以上の一致。\n"
-"{n,m}  この文字は最小のn回もしくはたったm回の一致。\n"
-"\n"
-"たくさんの文字予約はプレコードと \\. \n"
-"\n"
-"二つの表現を論理的につなげたい場合は|。\n"
-"二つの表現を含む。\n"
-"\n"
-"これ以上の情報が欲しい場合ははコマンドプロンプトで\n"
-"        \"man grep\" とタイプしてみてください。\n"
+msgid   "warning"
+msgstr  "警告:"
 
-#: ../../xffm/response/chooserresponse.hh:23
-msgid "Open"
-msgstr "開く(O)"
+#: ../xffm/common/run.hh:464 ../xffm/response/passwdresponse.hh:19
+#: ../xffm/response/passwdresponse.hh:25
+msgid   "Enter password"
+msgstr  "パスワードの入力"
 
-#: ../../xffm/response/chooserresponse.hh:56
-msgid "Choose directory"
-msgstr "フォルダーの選択"
-
-#: ../../xffm/response/chooserresponse.hh:60
-msgid "Choose file"
-msgstr "ファイルの選択"
-
-#: ../../xffm/response/customresponse.hh:55
-msgid "Execute command"
-msgstr "コマンドを実行"
-
-#. XXX folder or file entry should be determined on .ini file (probably just inherit from comboresponse for multiple files options (selected files)...
-#: ../../xffm/response/customresponse.hh:103
-msgid "Source File"
-msgstr "ソース・ファイル"
-
-#. this button is redundant since hands are on keyboard for password
-#: ../../xffm/response/entryresponse.hh:424
-#: ../../xffm/response/passwdresponse.hh:242
-msgid "Ok"
-msgstr "OK"
-
-#: ../../xffm/response/commandprogressresponse.hh:31
-msgid "Items:"
-msgstr "アイテム(E):"
-
-#: ../../xffm/response/passwdresponse.hh:19
-#: ../../xffm/response/passwdresponse.hh:25 ../../xffm/common/run.hh:464
-msgid "Enter password"
-msgstr "パスワードの入力"
-
-#. gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
-#: ../../xffm/response/passwdresponse.hh:179
+#: ../xffm/fm/view/pkg/model.hh:29 ../xffm/fm/view/pkg/popup.hh:35
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:187
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:191
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:195
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:198
 #, fuzzy
-msgid "User Input"
-msgstr "マウス入力"
+msgid   "Software Updater"
+msgstr  "ソフトウェアのアップデート"
 
-#: ../../xffm/response/passwdresponse.hh:195
-msgid "Response Requested"
-msgstr "応答を要求"
+#: ../xffm/fm/view/pkg/model.hh:41 ../xffm/fm/view/pkg/model.hh:52
+msgid   "Add or remove software installed on the system"
+msgstr  "システムにインストールされたパッケージの追加と削除"
 
-#: ../../xffm/response/timeoutresponse.hh:57
-msgid "Dismiss"
-msgstr "停止(D)"
+#: ../xffm/fm/view/pkg/model.hh:111
+msgid   "String"
+msgstr  "文字列"
 
-#: ../../xffm/response/commandresponse.hh:19
-msgid "Running"
-msgstr "稼働中"
+#: ../xffm/fm/view/pkg/model.hh:116
+msgid   "Waiting for search results"
+msgstr  "検索結果待ちです"
 
-#. auto text = g_strdup_printf("%s (pid: %d)",
-#. _("Waiting for operation to finish..."),
-#. Tubo<Type>::getChild (pid));
-#: ../../xffm/response/commandresponse.hh:24
-msgid "Waiting for operation to finish..."
-msgstr "操作が完了するのを待っています..."
+#: ../xffm/fm/view/pkg/model.hh:174
+msgid   "No results"
+msgstr  "マッチするものはありません"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:11
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:214
-msgid "Remove Button Contents"
-msgstr "ボタンの削除"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:67
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:209
+#: ../xffm/fm/view/pkg/model.hh:373
 #, fuzzy
-msgid "Add custom content"
-msgstr "ボタンの中身を独自に追加する"
+msgid   "Currently busy\n"
+msgstr  "現在のアルバム"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:68
+#: ../xffm/fm/view/pkg/popup.hh:44
+msgid   "Update Database"
+msgstr  "データベースを更新"
+
+#: ../xffm/fm/view/pkg/popup.hh:45
+msgid   "Fetch"
+msgstr  "取得"
+
+#: ../xffm/fm/view/pkg/popup.hh:46
 #, fuzzy
-msgid "Select file to load"
-msgstr "追加するファイルの選択(S)…"
+msgid   "Install --dry-run"
+msgstr  "モジュールのインストール(I)"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:125
+#: ../xffm/fm/view/pkg/popup.hh:47
+msgid   "Install"
+msgstr  "インストール"
+
+#: ../xffm/fm/view/pkg/popup.hh:48
+#, fuzzy
+msgid   "Uninstall --dry-run"
+msgstr  "アンインストール"
+
+#: ../xffm/fm/view/pkg/popup.hh:49
+msgid   "Uninstall"
+msgstr  "アンインストール"
+
+#: ../xffm/fm/view/pkg/popup.hh:50
+msgid   "Information"
+msgstr  "情報"
+
+#: ../xffm/fm/view/pkg/popup.hh:140
+msgid   "Version"
+msgstr  "バージョン"
+
+#: ../xffm/fm/view/pkg/popup.hh:149
+msgid   "Go up"
+msgstr  "上へ移動します"
+
+#: ../xffm/fm/view/pkg/popup.hh:152
+msgid   "Search packages"
+msgstr  "パッケージ検索"
+
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
+#, c-format
+msgid   "Loading %s...%s"
+msgstr  "%sを読み込んでいます...%s"
+
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
+#, fuzzy
+msgid   "Please Wait..."
+msgstr  "お待ちください..."
+
+#: ../xffm/fm/view/local/model.hh:124
+#, c-format
+msgid   "Reading \"%s\""
+msgstr  "\"%s\" を読込中"
+
+#: ../xffm/fm/view/local/model.hh:577 ../xffm/fm/view/base/monitor.hh:34
+#, c-format
+msgid   "Files: %s"
+msgstr  "ファイル: %s"
+
+#: ../xffm/fm/view/local/model.hh:580
+#, c-format
+msgid   "Loaded %d of %d articles"
+msgstr  "%d / %d 記事の読み込み完了"
+
+#: ../xffm/fm/view/local/rm.hh:59
+#, c-format
+msgid   "Delete %s"
+msgstr  "%s の削除(D)"
+
+#: ../xffm/fm/view/local/rm.hh:61
+msgid   "Warning: "
+msgstr  "警告: "
+
+#: ../xffm/fm/view/local/rm.hh:61 ../xffm/fm/view/local/popup.hh:565
+msgid   "Multiple selections"
+msgstr  "複数選択"
+
+#: ../xffm/fm/view/local/rm.hh:92
+msgid   "Remove"
+msgstr  "削除(R)"
+
+#: ../xffm/fm/view/local/rm.hh:142
+#, fuzzy
+msgid   "Apply to all"
+msgstr  "すべてに適用(Y)"
+
+#: ../xffm/fm/view/local/rm.hh:183
+msgid   "Trash"
+msgstr  "ゴミ箱"
+
+#: ../xffm/fm/view/local/popup.hh:94
+msgid   "New"
+msgstr  "新規(N)"
+
+#: ../xffm/fm/view/local/popup.hh:101 ../xffm/fm/view/local/popup.hh:159
+#: ../xffm/fm/view/local/popup.hh:232 ../xffm/fm/view/local/popup.hh:234
+msgid   "Paste into"
+msgstr  "ここに貼り付け"
+
+#: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:158
+msgid   "There is nothing on the clipboard to paste."
+msgstr  "貼り付けるものがクリップボードにはありません。"
+
+#: ../xffm/fm/view/local/popup.hh:106
+msgid   "Select All"
+msgstr  "すべて選択"
+
+#: ../xffm/fm/view/local/popup.hh:107 ../xffm/fm/view/local/popup.hh:755
+#, fuzzy
+msgid   "Match regular expression"
+msgstr  "正規表現としてマッチ(R)"
+
+#: ../xffm/fm/view/local/popup.hh:143 ../xffm/fm/view/local/popup.hh:1105
+msgid   "Run Executable..."
+msgstr  "プログラムの実行..."
+
+#: ../xffm/fm/view/local/popup.hh:144 ../xffm/fm/view/local/popup.hh:875
+msgid   "Extract files from the archive"
+msgstr  "アーカイブからファイルを展開します"
+
+#: ../xffm/fm/view/local/popup.hh:146 ../xffm/fm/view/local/popup.hh:966
+msgid   "Create a compressed archive with the selected objects"
+msgstr  "選択したオブジェクトを含む圧縮されたアーカイブを生成します"
+
+#: ../xffm/fm/view/local/popup.hh:148 ../xffm/fm/view/fstab/popup.hh:37
+msgid   "Mount the volume associated with this folder"
+msgstr  "このフォルダーに関連づけられているボリュームをマウントします"
+
+#: ../xffm/fm/view/local/popup.hh:149 ../xffm/fm/view/fstab/popup.hh:38
+msgid   "Unmount the volume associated with this folder"
+msgstr  "このフォルダーに関連づけられているボリュームをアンマウントします"
+
+#: ../xffm/fm/view/local/popup.hh:161 ../xffm/fm/view/local/popup.hh:1231
+msgid   "Rename"
+msgstr  "名前の変更"
+
+#: ../xffm/fm/view/local/popup.hh:162 ../xffm/fm/view/local/popup.hh:1217
+msgid   "Duplicate"
+msgstr  "複製"
+
+#: ../xffm/fm/view/local/popup.hh:163 ../xffm/fm/view/local/popup.hh:1203
+msgid   "Link"
+msgstr  "リンク"
+
+#: ../xffm/fm/view/local/popup.hh:164
+msgid   "Properties"
+msgstr  "プロパティ"
+
+#: ../xffm/fm/view/local/popup.hh:562
+msgid   "Files:"
+msgstr  "ファイル(F):"
+
+#: ../xffm/fm/view/local/popup.hh:753
+#, fuzzy
+msgid   "Select items"
+msgstr  "選択したアイテム(S):"
+
+#: ../xffm/fm/view/local/popup.hh:771
+msgid   "Regular Expression syntax is incorrect"
+msgstr  "正規表現に構文エラーがあります"
+
+#: ../xffm/fm/view/local/popup.hh:801
+msgid   "No selection"
+msgstr  "選択なし"
+
+#: ../xffm/fm/view/local/popup.hh:801
+msgid   "No matches."
+msgstr  "一致しませんでした。"
+
+#: ../xffm/fm/view/local/popup.hh:887 ../xffm/fm/view/local/popup.hh:981
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:382
+msgid   "Specify Output Directory..."
+msgstr  "出力ディレクトリを指定..."
+
+#: ../xffm/fm/view/local/popup.hh:1058
+#, fuzzy
+msgid   "Create new..."
+msgstr  "作成する(R)..."
+
+#: ../xffm/fm/view/local/popup.hh:1065 ../xffm/fm/view/local/popup.hh:1146
+msgid   "New Name:"
+msgstr  "新しい名前:"
+
+#: ../xffm/fm/view/local/popup.hh:1074
+msgid   "No name"
+msgstr  "名前なし"
+
+#: ../xffm/fm/view/local/popup.hh:1087
+#, c-format
+msgid   "Another file with the same name already exists in “%s”."
+msgstr  "同じ名前の他のファイルが既に “%s” にあります。"
+
+#: ../xffm/fm/view/local/popup.hh:1112
+msgid   "Arguments for the Command"
+msgstr  "コマンドの引数"
+
+#: ../xffm/fm/view/local/popup.hh:1258
+msgid   "You have selected multiple files or folders"
+msgstr  "複数のファイルまたはフォルダーを選択しました"
+
+#: ../xffm/fm/view/local/popup.hh:1332 ../xffm/fm/view/local/view.hh:156
+msgid   "Invalid entry"
+msgstr  "無効なエントリー"
+
+#: ../xffm/fm/view/local/view.hh:177
+#, c-format
+msgid   "The volume '%s' is not mounted."
+msgstr  "ボリューム '%s' はマウントしていません。"
+
+#: ../xffm/fm/view/local/properties.hh:245
+msgid   "Properties and Attributes"
+msgstr  "プロパティと属性値"
+
+#: ../xffm/fm/view/local/properties.hh:274
+#, fuzzy
+msgid   "File Mode:"
+msgstr  "ファイルのモード"
+
+#: ../xffm/fm/view/local/properties.hh:300
+msgid   "File:"
+msgstr  "ファイル:"
+
+#: ../xffm/fm/view/local/properties.hh:312
+msgid   "Apply changes"
+msgstr  "変更を適用"
+
+#: ../xffm/fm/view/local/properties.hh:477
+msgid   "Successfully moved to trash."
+msgstr  "ごみ箱に移動しました。"
+
+#: ../xffm/fm/view/local/properties.hh:478
+msgid   "Source:"
+msgstr  "転送元:"
+
+#: ../xffm/fm/view/root/model.hh:82
+msgid   "Root Directory"
+msgstr  "ルートディレクトリ"
+
+#: ../xffm/fm/view/root/model.hh:98
+msgid   "This is the root of the filesystem"
+msgstr  "ファイルシステムのルートです"
+
+#: ../xffm/fm/view/root/model.hh:110
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:256
+msgid   "Home Directory"
+msgstr  "ホームディレクトリ"
+
+#: ../xffm/fm/view/root/model.hh:137
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:266
+msgid   "Trash bin"
+msgstr  "ごみ箱"
+
+#: ../xffm/fm/view/root/model.hh:168 ../xffm/fm/view/fstab/popup.hh:29
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:261
+msgid   "Disk Image Mounter"
+msgstr  "ディスクイメージマウンター"
+
+#: ../xffm/fm/view/root/model.hh:176 ../xffm/fm/view/root/model.hh:191
+msgid   "Mount local disks and devices"
+msgstr  "ローカルディスクとデバイスをマウントします"
+
+#: ../xffm/fm/view/root/model.hh:177 ../xffm/fm/view/fstab/popup.hh:23
+#: ../xffm/fm/view/fstab/view.hh:1084
+msgid   "eCryptfs Volume"
+msgstr  "eCryptfs ボリューム"
+
+#: ../xffm/fm/view/root/model.hh:178 ../xffm/fm/view/fstab/popup.hh:22
+msgid   "SSHFS Remote Synchronization Folder"
+msgstr  "SSHFS で使うリモートの同期フォルダー"
+
+#: ../xffm/fm/view/root/model.hh:179 ../xffm/fm/view/fstab/popup.hh:21
+#: ../xffm/fm/view/fstab/view.hh:1032
+msgid   "NFS Network Volume"
+msgstr  "NFS ネットワーク・ボリューム"
+
+#: ../xffm/fm/view/root/model.hh:180 ../xffm/fm/view/fstab/popup.hh:24
+#: ../xffm/fm/view/fstab/view.hh:1110
+msgid   "CIFS Volume"
+msgstr  "CIFS ボリューム"
+
+#: ../xffm/fm/view/root/model.hh:229
+msgid   "Go to bookmarked location"
+msgstr  "ブックマークした場所へ移動"
+
+#: ../xffm/fm/view/root/popup.hh:138
+msgid   "Empty trash"
+msgstr  "ゴミ箱を空に(E)"
+
+#: ../xffm/fm/view/fstab/popup.hh:129
+msgid   "Mount Device"
+msgstr  "デバイスをマウント"
+
+#: ../xffm/fm/view/fstab/popup.hh:141 ../xffm/fm/view/fstab/view.hh:923
+msgid   "Mount point:"
+msgstr  "マウントポイント:"
+
+#: ../xffm/fm/view/fstab/view.hh:590
+#, fuzzy
+msgid   "Mount point: "
+msgstr  "マウントポイント:"
+
+#: ../xffm/fm/view/fstab/view.hh:591
+#, fuzzy
+msgid   "Mount device: "
+msgstr  "デバイスをマウント"
+
+#: ../xffm/fm/view/fstab/view.hh:659 ../xffm/fm/view/fstab/view.hh:675
+msgid   "Disks"
+msgstr  "ディスク"
+
+#: ../xffm/fm/view/fstab/view.hh:921
+msgid   "No Label"
+msgstr  "ラベルなしのメッセージ"
+
+#: ../xffm/fm/view/fstab/view.hh:922
+msgid   "There is no file system available (unformatted)"
+msgstr  "利用可能なファイルシステムがありません (未フォーマット)"
+
+#: ../xffm/fm/view/fstab/view.hh:923
+msgid   "Not mounted"
+msgstr  "マウントされていません"
+
+#: ../xffm/fm/view/fstab/view.hh:1058
+msgid   "SFTP (via SSH)"
+msgstr  "SFTP (via SSH)"
+
+#: ../xffm/fm/view/fstab/view.hh:1413
+#, c-format
+msgid   "Unmounting %s"
+msgstr  "%s をアンマウント中"
+
+#: ../xffm/fm/view/fstab/view.hh:1413
+#, c-format
+msgid   "Mounting %s"
+msgstr  "%sをマウント中"
+
+#: ../xffm/fm/view/base/signals.hh:838
+#, fuzzy
+msgid   "Trash is empty"
+msgstr  "タブレットのバッテリーが空です"
+
+#: ../xffm/fm/view/base/signals.hh:840
+msgid   "Directory does not exist."
+msgstr  "フォルダがありません。"
+
+#: ../xffm/fm/view/treeview.hh:17
+msgid   "Name"
+msgstr  "名前"
+
+#: ../xffm/fm/view/treeview.hh:19
+msgid   "Size"
+msgstr  "サイズ"
+
+#: ../xffm/fm/view/treeview.hh:20
+msgid   "Date"
+msgstr  "日付"
+
+#: ../xffm/fm/view/treeview.hh:22
+msgid   "Mimetype"
+msgstr  "MIME タイプ"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
+msgid   "Embedded Terminal"
+msgstr  "組み込み端末"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
+msgid   "All items in the iconview."
+msgstr  "アイコンビューのすべてのアイテム"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
+msgid   "Scripting"
+msgstr  "スクリプティング"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
+msgid   "Clear Log"
+msgstr  "ログをクリア"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
+msgid   "Terminal font"
+msgstr  "端末のフォント"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid   "Renice Process"
+msgstr  "プロセスの優先度を変更"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid   "Suspend"
+msgstr  "サスペンド"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid   "Continue"
+msgstr  "続行"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid   "Interrupt"
+msgstr  "割り込み"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid   "Hangup"
+msgstr  "Hangup"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid   "User 1 (USR1)"
+msgstr  "ユーザ 1 (USR1)"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+msgid   "User 2 (USR2)"
+msgstr  "ユーザ 2 (USR2)"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+#, fuzzy
+msgid   "Terminate Task"
+msgstr  "%s を終了"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+msgid   "Abort"
+msgstr  "中止"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:138
+msgid   "Kill"
+msgstr  "強制終了(K)"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
+msgid   "Segmentation fault"
+msgstr  "Segmentation fault"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:216
+msgid   "PID"
+msgstr  "PID"
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:375
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:377
+msgid   "Go to"
+msgstr  "ジャンプ(G)"
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:409
+msgid   "Not a directory"
+msgstr  "フォルダではありません"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:59
+msgid   "loading..."
+msgstr  "読み込み中..."
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:151
+#: ../xffm/fm/dialog/notebook/page/page.hh:167
+msgid   "Confirm Replace"
+msgstr  "置換の確認"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:153
+msgid   "Destination File"
+msgstr  "比較先ファイル"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:166
 #, fuzzy, c-format
-msgid "Cannot load file %s. Reason: %s"
-msgstr "ファイル %s を開けません: %s"
+msgid   "The output file %s already exists, do you want to overwrite it?"
+msgstr  "ファイル %s は既に存在します。上書きしますか？"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:154
-msgid "You need to restart the application"
-msgstr "アプリケーションの再起動が必要です"
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:11
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:214
+msgid   "Remove Button Contents"
+msgstr  "ボタンの削除"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:187
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:191
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:195
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:198
-#: ../../xffm/fm/view/pkg/model.hh:29 ../../xffm/fm/view/pkg/popup.hh:35
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:67
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:209
 #, fuzzy
-msgid "Software Updater"
-msgstr "ソフトウェアのアップデート"
+msgid   "Add custom content"
+msgstr  "ボタンの中身を独自に追加する"
 
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:236
-#: ../../xffm/fm/view/pkg/model.hh:108 ../../xffm/fm/view/pkg/model.hh:299
-#: ../../xffm/fm/view/pkg/model.hh:306 ../../xffm/fm/view/pkg/popup.hh:151
-#: ../../xffm/common/gtk.hh:77
-msgid "Search"
-msgstr "検索"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:240 ../../xffm/common/gtk.hh:67
-msgid "Open terminal"
-msgstr "端末を開く"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:244
-msgid "Open a New Window"
-msgstr "新しいウィンドウを開きます"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:250
-msgid "Differences"
-msgstr "差分(D)"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:256
-#: ../../xffm/fm/view/root/model.hh:110
-msgid "Home Directory"
-msgstr "ホームディレクトリ"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:261
-#: ../../xffm/fm/view/root/model.hh:168 ../../xffm/fm/view/fstab/popup.hh:29
-msgid "Disk Image Mounter"
-msgstr "ディスクイメージマウンター"
-
-#: ../../xffm/fm/dialog/notebook/vbuttonbox.hh:266
-#: ../../xffm/fm/view/root/model.hh:137
-msgid "Trash bin"
-msgstr "ごみ箱"
-
-#: ../../xffm/fm/dialog/notebook/notebook.hh:56
-msgid "Long press time"
-msgstr "長く押下する時間"
-
-#: ../../xffm/fm/dialog/notebook/notebook.hh:75 ../../xffm/common/gtk.hh:139
-msgid "New Tab"
-msgstr "新規タブ"
-
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:178
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:68
 #, fuzzy
-msgid "Open menu"
-msgstr "メニューを開きます"
+msgid   "Select file to load"
+msgstr  "追加するファイルの選択(S)…"
 
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:230
-msgid "View as list"
-msgstr "リストで表示"
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:125
+#, fuzzy, c-format
+msgid   "Cannot load file %s. Reason: %s"
+msgstr  "ファイル %s を開けません: %s"
 
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:231
-msgid "Show hidden files"
-msgstr "隠しファイルを表示する"
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:154
+msgid   "You need to restart the application"
+msgstr  "アプリケーションの再起動が必要です"
 
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:232
-msgid "Show Backup Files"
-msgstr "バックアップファイルを表示"
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:244
+msgid   "Open a New Window"
+msgstr  "新しいウィンドウを開きます"
 
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:233
-msgid "Sort data in descending order"
-msgstr "データを降順にソート"
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:250
+msgid   "Differences"
+msgstr  "差分(D)"
 
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:235
+#: ../xffm/fm/dialog/notebook/menupopover.hh:178
 #, fuzzy
-msgid "Sort by date"
-msgstr "日付でソート"
+msgid   "Open menu"
+msgstr  "メニューを開きます"
 
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:236
-msgid "Sort by size"
-msgstr "サイズで並べ替え"
+#: ../xffm/fm/dialog/notebook/menupopover.hh:230
+msgid   "View as list"
+msgstr  "リストで表示"
 
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:237 ../../xffm/common/gtk.hh:81
-msgid "Exit"
-msgstr "終了(E)"
+#: ../xffm/fm/dialog/notebook/menupopover.hh:231
+msgid   "Show hidden files"
+msgstr  "隠しファイルを表示する"
 
-#: ../../xffm/fm/dialog/notebook/menupopover.hh:270
-msgid "Main menu"
-msgstr "メインメニュー"
+#: ../xffm/fm/dialog/notebook/menupopover.hh:232
+msgid   "Show Backup Files"
+msgstr  "バックアップファイルを表示"
 
-#. File chooser
-#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:375
-#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:377
-msgid "Go to"
-msgstr "ジャンプ(G)"
+#: ../xffm/fm/dialog/notebook/menupopover.hh:233
+msgid   "Sort data in descending order"
+msgstr  "データを降順にソート"
 
-#. entryResponse->setCheckButton(_("Run in Terminal"));
-#. entryResponse->setCheckButton(Run<Type>::runInTerminal(path));
-#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:382
-#: ../../xffm/fm/view/local/popup.hh:887 ../../xffm/fm/view/local/popup.hh:981
-msgid "Specify Output Directory..."
-msgstr "出力ディレクトリを指定..."
-
-#: ../../xffm/fm/dialog/notebook/page/pathbar.hh:409
-msgid "Not a directory"
-msgstr "フォルダではありません"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:135
-msgid "Renice Process"
-msgstr "プロセスの優先度を変更"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:135
-msgid "Suspend"
-msgstr "サスペンド"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:135
-msgid "Continue"
-msgstr "続行"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid "Interrupt"
-msgstr "割り込み"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid "Hangup"
-msgstr "Hangup"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid "User 1 (USR1)"
-msgstr "ユーザ 1 (USR1)"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:137
-msgid "User 2 (USR2)"
-msgstr "ユーザ 2 (USR2)"
-
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:137
+#: ../xffm/fm/dialog/notebook/menupopover.hh:235
 #, fuzzy
-msgid "Terminate Task"
-msgstr "%s を終了"
+msgid   "Sort by date"
+msgstr  "日付でソート"
 
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:137
-msgid "Abort"
-msgstr "中止"
+#: ../xffm/fm/dialog/notebook/menupopover.hh:236
+msgid   "Sort by size"
+msgstr  "サイズで並べ替え"
 
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:138
-msgid "Kill"
-msgstr "強制終了(K)"
+#: ../xffm/fm/dialog/notebook/menupopover.hh:270
+msgid   "Main menu"
+msgstr  "メインメニュー"
 
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:139
-msgid "Segmentation fault"
-msgstr "Segmentation fault"
+#: ../xffm/fm/dialog/notebook/notebook.hh:56
+msgid   "Long press time"
+msgstr  "長く押下する時間"
 
-#: ../../xffm/fm/dialog/notebook/page/runbutton.hh:216
-msgid "PID"
-msgstr "PID"
+#: ../xffm/fm/dialog/dialog.hh:122
+msgid   "Removed"
+msgstr  "削除済み"
 
-#: ../../xffm/fm/dialog/notebook/page/page.hh:58
-msgid "loading..."
-msgstr "読み込み中..."
+#: ../xffm/fm/dialog/dialog.hh:143
+msgid   "Detected device(s):"
+msgstr  "検出したデバイス:"
 
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
-msgid "Embedded Terminal"
-msgstr "組み込み端末"
+#: ../xffm/response/commandresponse.hh:19
+msgid   "Running"
+msgstr  "稼働中"
 
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
-msgid "All items in the iconview."
-msgstr "アイコンビューのすべてのアイテム"
+#: ../xffm/response/commandresponse.hh:24
+msgid   "Waiting for operation to finish..."
+msgstr  "操作が完了するのを待っています..."
 
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
-msgid "Scripting"
-msgstr "スクリプティング"
-
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
-msgid "Clear Log"
-msgstr "ログをクリア"
-
-#. Status textview
-#: ../../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
-msgid "Terminal font"
-msgstr "端末のフォント"
-
-#: ../../xffm/fm/dialog/clipboard.hh:23 ../../xffm/common/dnd.hh:41
-msgid "Copying files locally"
-msgstr "ファイルをローカルでコピー中"
-
-#: ../../xffm/fm/dialog/clipboard.hh:30 ../../xffm/common/gio.hh:83
-#: ../../xffm/common/dnd.hh:35
-msgid "Moving files"
-msgstr "ファイルの移動中"
-
-#: ../../xffm/fm/dialog/dialog.hh:122
-msgid "Removed"
-msgstr "削除済み"
-
-#: ../../xffm/fm/dialog/dialog.hh:143
-msgid "Detected device(s):"
-msgstr "検出したデバイス:"
-
-#: ../../xffm/fm/view/local/model.hh:122
-#, c-format
-msgid "Reading \"%s\""
-msgstr "\"%s\" を読込中"
-
-#: ../../xffm/fm/view/local/model.hh:575 ../../xffm/fm/view/base/monitor.hh:33
-#, c-format
-msgid "Files: %s"
-msgstr "ファイル: %s"
-
-#: ../../xffm/fm/view/local/model.hh:578
-#, c-format
-msgid "Loaded %d of %d articles"
-msgstr "%d / %d 記事の読み込み完了"
-
-#: ../../xffm/fm/view/local/popup.hh:85 ../../xffm/fm/view/local/popup.hh:142
-#: ../../xffm/fm/view/local/popup.hh:1287
-#: ../../xffm/fm/view/local/popup.hh:1294
-#: ../../xffm/fm/view/local/popup.hh:1305
-#: ../../xffm/fm/view/local/popup.hh:1312 ../../xffm/common/gtk.hh:83
-msgid "Open with"
-msgstr "別のアプリで開く"
-
-#: ../../xffm/fm/view/local/popup.hh:94
-msgid "New"
-msgstr "新規(N)"
-
-#: ../../xffm/fm/view/local/popup.hh:95 ../../xffm/fm/view/local/popup.hh:145
-#: ../../xffm/fm/view/root/popup.hh:136 ../../xffm/fm/view/fstab/popup.hh:20
-#: ../../xffm/common/gtk.hh:94
-msgid "Open in New Tab"
-msgstr "新しいタブで開く(O)"
-
-#. deprecated {N_("Open in New Tab"), NULL, NULL, NULL},
-#. deprecated {N_("Open in New Window"), NULL, NULL, NULL},
-#. common buttons /(also an iconsize +/- button)
-#: ../../xffm/fm/view/local/popup.hh:99 ../../xffm/fm/view/local/popup.hh:155
-#: ../../xffm/common/gtk.hh:87
-msgid "Copy"
-msgstr "コピー(C)"
-
-#: ../../xffm/fm/view/local/popup.hh:100 ../../xffm/fm/view/local/popup.hh:156
-#: ../../xffm/common/gtk.hh:85
-msgid "Cut"
-msgstr "切り取り(T)"
-
-#: ../../xffm/fm/view/local/popup.hh:101 ../../xffm/fm/view/local/popup.hh:159
-#: ../../xffm/fm/view/local/popup.hh:232 ../../xffm/fm/view/local/popup.hh:234
-msgid "Paste into"
-msgstr "ここに貼り付け"
-
-#: ../../xffm/fm/view/local/popup.hh:102 ../../xffm/fm/view/local/popup.hh:158
-msgid "There is nothing on the clipboard to paste."
-msgstr "貼り付けるものがクリップボードにはありません。"
-
-#. **************
-#: ../../xffm/fm/view/local/popup.hh:103 ../../xffm/fm/view/local/popup.hh:160
-#: ../../xffm/fm/view/local/rm.hh:176 ../../xffm/common/gtk.hh:89
-msgid "Delete"
-msgstr "削除(D)"
-
-#. {N_("About"), NULL, (void *) menu},
-#.
-#: ../../xffm/fm/view/local/popup.hh:106
-msgid "Select All"
-msgstr "すべて選択"
-
-#: ../../xffm/fm/view/local/popup.hh:107 ../../xffm/fm/view/local/popup.hh:755
+#: ../xffm/response/passwdresponse.hh:179
 #, fuzzy
-msgid "Match regular expression"
-msgstr "正規表現としてマッチ(R)"
-
-#: ../../xffm/fm/view/local/popup.hh:143 ../../xffm/fm/view/local/popup.hh:1105
-msgid "Run Executable..."
-msgstr "プログラムの実行..."
-
-#. File chooser
-#: ../../xffm/fm/view/local/popup.hh:144 ../../xffm/fm/view/local/popup.hh:875
-msgid "Extract files from the archive"
-msgstr "アーカイブからファイルを展開します"
-
-#. File chooser
-#: ../../xffm/fm/view/local/popup.hh:146 ../../xffm/fm/view/local/popup.hh:966
-msgid "Create a compressed archive with the selected objects"
-msgstr "選択したオブジェクトを含む圧縮されたアーカイブを生成します"
-
-#: ../../xffm/fm/view/local/popup.hh:148 ../../xffm/fm/view/fstab/popup.hh:37
-msgid "Mount the volume associated with this folder"
-msgstr "このフォルダーに関連づけられているボリュームをマウントします"
-
-#: ../../xffm/fm/view/local/popup.hh:149 ../../xffm/fm/view/fstab/popup.hh:38
-msgid "Unmount the volume associated with this folder"
-msgstr "このフォルダーに関連づけられているボリュームをアンマウントします"
-
-#: ../../xffm/fm/view/local/popup.hh:151 ../../xffm/common/gtk.hh:73
-msgid "Add bookmark"
-msgstr "ブックマークに追加します"
-
-#: ../../xffm/fm/view/local/popup.hh:152 ../../xffm/fm/view/root/popup.hh:137
-#: ../../xffm/common/gtk.hh:75
-msgid "Remove bookmark"
-msgstr "ブックマークを削除します"
-
-#: ../../xffm/fm/view/local/popup.hh:157 ../../xffm/common/gtk.hh:71
-msgid "Paste"
-msgstr "貼り付け(P)"
-
-#: ../../xffm/fm/view/local/popup.hh:161 ../../xffm/fm/view/local/popup.hh:1231
-msgid "Rename"
-msgstr "名前の変更"
-
-#: ../../xffm/fm/view/local/popup.hh:162 ../../xffm/fm/view/local/popup.hh:1217
-msgid "Duplicate"
-msgstr "複製"
-
-#: ../../xffm/fm/view/local/popup.hh:163 ../../xffm/fm/view/local/popup.hh:1203
-msgid "Link"
-msgstr "リンク"
-
-#: ../../xffm/fm/view/local/popup.hh:164
-msgid "Properties"
-msgstr "プロパティ"
-
-#: ../../xffm/fm/view/local/popup.hh:562
-msgid "Files:"
-msgstr "ファイル(F):"
-
-#: ../../xffm/fm/view/local/popup.hh:565 ../../xffm/fm/view/local/rm.hh:61
-msgid "Multiple selections"
-msgstr "複数選択"
-
-#: ../../xffm/fm/view/local/popup.hh:753
-#, fuzzy
-msgid "Select items"
-msgstr "選択したアイテム(S):"
-
-#: ../../xffm/fm/view/local/popup.hh:771
-msgid "Regular Expression syntax is incorrect"
-msgstr "正規表現に構文エラーがあります"
-
-#: ../../xffm/fm/view/local/popup.hh:801
-msgid "No selection"
-msgstr "選択なし"
-
-#: ../../xffm/fm/view/local/popup.hh:801
-msgid "No matches."
-msgstr "一致しませんでした。"
-
-#: ../../xffm/fm/view/local/popup.hh:1058
-#, fuzzy
-msgid "Create new..."
-msgstr "作成する(R)..."
-
-#: ../../xffm/fm/view/local/popup.hh:1065
-#: ../../xffm/fm/view/local/popup.hh:1146
-msgid "New Name:"
-msgstr "新しい名前:"
-
-#: ../../xffm/fm/view/local/popup.hh:1074
-msgid "No name"
-msgstr "名前なし"
-
-#: ../../xffm/fm/view/local/popup.hh:1087
-#, c-format
-msgid "Another file with the same name already exists in “%s”."
-msgstr "同じ名前の他のファイルが既に “%s” にあります。"
-
-#: ../../xffm/fm/view/local/popup.hh:1109
-#: ../../xffm/fm/view/local/popup.hh:1291
-#: ../../xffm/fm/view/local/popup.hh:1309 ../../xffm/common/util.hh:1452
-msgid "Run in Terminal"
-msgstr "端末内で実行する"
-
-#: ../../xffm/fm/view/local/popup.hh:1112
-msgid "Arguments for the Command"
-msgstr "コマンドの引数"
-
-#: ../../xffm/fm/view/local/popup.hh:1258
-msgid "You have selected multiple files or folders"
-msgstr "複数のファイルまたはフォルダーを選択しました"
-
-#: ../../xffm/fm/view/local/popup.hh:1332 ../../xffm/fm/view/local/view.hh:156
-msgid "Invalid entry"
-msgstr "無効なエントリー"
-
-#: ../../xffm/fm/view/local/properties.hh:245
-msgid "Properties and Attributes"
-msgstr "プロパティと属性値"
-
-#: ../../xffm/fm/view/local/properties.hh:274
-#, fuzzy
-msgid "File Mode:"
-msgstr "ファイルのモード"
-
-#: ../../xffm/fm/view/local/properties.hh:300
-msgid "File:"
-msgstr "ファイル:"
-
-#. Add file info stuff
-#. set info stuff data according to combo box
-#. add signal handler to changed signal for combo box
-#. Add process buttons
-#.
-#: ../../xffm/fm/view/local/properties.hh:312
-msgid "Apply changes"
-msgstr "変更を適用"
-
-#: ../../xffm/fm/view/local/properties.hh:477
-msgid "Successfully moved to trash."
-msgstr "ごみ箱に移動しました。"
-
-#: ../../xffm/fm/view/local/properties.hh:478
-msgid "Source:"
-msgstr "転送元:"
-
-#: ../../xffm/fm/view/local/rm.hh:59
-#, c-format
-msgid "Delete %s"
-msgstr "%s の削除(D)"
-
-#: ../../xffm/fm/view/local/rm.hh:61
-msgid "Warning: "
-msgstr "警告: "
-
-#. gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
-#. title
-#: ../../xffm/fm/view/local/rm.hh:92
-msgid "Remove"
-msgstr "削除(R)"
-
-#: ../../xffm/fm/view/local/rm.hh:142
-#, fuzzy
-msgid "Apply to all"
-msgstr "すべてに適用(Y)"
-
-#. **************
-#. This is now available to BSD with rm -P option
-#: ../../xffm/fm/view/local/rm.hh:165 ../../xffm/common/gtk.hh:91
-msgid "Shred"
-msgstr ""
-
-#: ../../xffm/fm/view/local/rm.hh:183
-msgid "Trash"
-msgstr "ゴミ箱"
-
-#: ../../xffm/fm/view/local/view.hh:177
-#, c-format
-msgid "The volume '%s' is not mounted."
-msgstr "ボリューム '%s' はマウントしていません。"
-
-#: ../../xffm/fm/view/root/model.hh:82
-msgid "Root Directory"
-msgstr "ルートディレクトリ"
-
-#: ../../xffm/fm/view/root/model.hh:98
-msgid "This is the root of the filesystem"
-msgstr "ファイルシステムのルートです"
-
-#: ../../xffm/fm/view/root/model.hh:176 ../../xffm/fm/view/root/model.hh:191
-msgid "Mount local disks and devices"
-msgstr "ローカルディスクとデバイスをマウントします"
-
-#: ../../xffm/fm/view/root/model.hh:177 ../../xffm/fm/view/fstab/popup.hh:23
-#: ../../xffm/fm/view/fstab/view.hh:1084
-msgid "eCryptfs Volume"
-msgstr "eCryptfs ボリューム"
-
-#: ../../xffm/fm/view/root/model.hh:178 ../../xffm/fm/view/fstab/popup.hh:22
-msgid "SSHFS Remote Synchronization Folder"
-msgstr "SSHFS で使うリモートの同期フォルダー"
-
-#: ../../xffm/fm/view/root/model.hh:179 ../../xffm/fm/view/fstab/popup.hh:21
-#: ../../xffm/fm/view/fstab/view.hh:1032
-msgid "NFS Network Volume"
-msgstr "NFS ネットワーク・ボリューム"
-
-#: ../../xffm/fm/view/root/model.hh:180 ../../xffm/fm/view/fstab/popup.hh:24
-#: ../../xffm/fm/view/fstab/view.hh:1110
-msgid "CIFS Volume"
-msgstr "CIFS ボリューム"
-
-#: ../../xffm/fm/view/root/model.hh:229
-msgid "Go to bookmarked location"
-msgstr "ブックマークした場所へ移動"
-
-#: ../../xffm/fm/view/root/popup.hh:138
-msgid "Empty trash"
-msgstr "ゴミ箱を空に(E)"
-
-#. File chooser
-#: ../../xffm/fm/view/fstab/popup.hh:129
-msgid "Mount Device"
-msgstr "デバイスをマウント"
-
-#: ../../xffm/fm/view/fstab/popup.hh:141 ../../xffm/fm/view/fstab/view.hh:923
-msgid "Mount point:"
-msgstr "マウントポイント:"
-
-#: ../../xffm/fm/view/fstab/view.hh:590
-#, fuzzy
-msgid "Mount point: "
-msgstr "マウントポイント:"
-
-#: ../../xffm/fm/view/fstab/view.hh:591
-#, fuzzy
-msgid "Mount device: "
-msgstr "デバイスをマウント"
-
-#. Since /dev is not concrete, the following test returns false...
-#.
-#. if (!g_file_test(name, G_FILE_TEST_IS_DIR)) return;
-#: ../../xffm/fm/view/fstab/view.hh:659 ../../xffm/fm/view/fstab/view.hh:675
-msgid "Disks"
-msgstr "ディスク"
-
-#: ../../xffm/fm/view/fstab/view.hh:921
-msgid "No Label"
-msgstr "ラベルなしのメッセージ"
-
-#: ../../xffm/fm/view/fstab/view.hh:922
-msgid "There is no file system available (unformatted)"
-msgstr "利用可能なファイルシステムがありません (未フォーマット)"
-
-#: ../../xffm/fm/view/fstab/view.hh:923
-msgid "Not mounted"
-msgstr "マウントされていません"
-
-#: ../../xffm/fm/view/fstab/view.hh:1058
-msgid "SFTP (via SSH)"
-msgstr "SFTP (via SSH)"
-
-#: ../../xffm/fm/view/fstab/view.hh:1413
-#, c-format
-msgid "Unmounting %s"
-msgstr "%s をアンマウント中"
-
-#: ../../xffm/fm/view/fstab/view.hh:1413
-#, c-format
-msgid "Mounting %s"
-msgstr "%sをマウント中"
-
-#: ../../xffm/fm/view/pkg/model.hh:41 ../../xffm/fm/view/pkg/model.hh:52
-msgid "Add or remove software installed on the system"
-msgstr "システムにインストールされたパッケージの追加と削除"
-
-#: ../../xffm/fm/view/pkg/model.hh:111
-msgid "String"
-msgstr "文字列"
-
-#: ../../xffm/fm/view/pkg/model.hh:116
-msgid "Waiting for search results"
-msgstr "検索結果待ちです"
-
-#: ../../xffm/fm/view/pkg/model.hh:174
-msgid "No results"
-msgstr "マッチするものはありません"
-
-#: ../../xffm/fm/view/pkg/model.hh:373
-#, fuzzy
-msgid "Currently busy\n"
-msgstr "現在のアルバム"
-
-#: ../../xffm/fm/view/pkg/popup.hh:44
-msgid "Update Database"
-msgstr "データベースを更新"
-
-#: ../../xffm/fm/view/pkg/popup.hh:45
-msgid "Fetch"
-msgstr "取得"
-
-#: ../../xffm/fm/view/pkg/popup.hh:46
-#, fuzzy
-msgid "Install --dry-run"
-msgstr "モジュールのインストール(I)"
-
-#: ../../xffm/fm/view/pkg/popup.hh:47
-msgid "Install"
-msgstr "インストール"
-
-#: ../../xffm/fm/view/pkg/popup.hh:48
-#, fuzzy
-msgid "Uninstall --dry-run"
-msgstr "アンインストール"
-
-#: ../../xffm/fm/view/pkg/popup.hh:49
-msgid "Uninstall"
-msgstr "アンインストール"
-
-#: ../../xffm/fm/view/pkg/popup.hh:50
-msgid "Information"
-msgstr "情報"
-
-#: ../../xffm/fm/view/pkg/popup.hh:140
-msgid "Version"
-msgstr "バージョン"
-
-#: ../../xffm/fm/view/pkg/popup.hh:149
-msgid "Go up"
-msgstr "上へ移動します"
-
-#: ../../xffm/fm/view/pkg/popup.hh:152
-msgid "Search packages"
-msgstr "パッケージ検索"
-
-#: ../../xffm/fm/view/pkg/popup.hh:184 ../../xffm/fm/view/view.hh:93
-#, c-format
-msgid "Loading %s...%s"
-msgstr "%sを読み込んでいます...%s"
-
-#: ../../xffm/fm/view/pkg/popup.hh:184 ../../xffm/fm/view/view.hh:93
-#, fuzzy
-msgid "Please Wait..."
-msgstr "お待ちください..."
-
-#: ../../xffm/fm/view/treeview.hh:17
-msgid "Name"
-msgstr "名前"
-
-#: ../../xffm/fm/view/treeview.hh:19
-msgid "Size"
-msgstr "サイズ"
-
-#: ../../xffm/fm/view/treeview.hh:20
-msgid "Date"
-msgstr "日付"
-
-#: ../../xffm/fm/view/treeview.hh:22
-msgid "Mimetype"
-msgstr "MIME タイプ"
-
-#: ../../xffm/fm/view/base/signals.hh:838
-#, fuzzy
-msgid "Trash is empty"
-msgstr "タブレットのバッテリーが空です"
-
-#: ../../xffm/fm/view/base/signals.hh:840
-msgid "Directory does not exist."
-msgstr "フォルダがありません。"
-
-#: ../../xffm/common/settings.hh:30
-msgid "New File:"
-msgstr "新しいファイル"
-
-#: ../../xffm/common/gio.hh:81
-msgid "Copying files"
-msgstr "ファイルのコピー"
-
-#: ../../xffm/common/gio.hh:85
-#, fuzzy
-msgid "linking"
-msgstr "消去中"
-
-#: ../../xffm/common/gio.hh:87
-msgid "rename"
-msgstr "rename"
-
-#: ../../xffm/common/gio.hh:426
-#, c-format
-msgid "(%d of %d)"
-msgstr "(%d / %d)"
-
-#: ../../xffm/common/dnd.hh:47
-msgid "Create Link"
-msgstr "リンク作成"
-
-#: ../../xffm/common/util.hh:1404
-#, c-format
-msgid ""
-"Scriptfile \"%s\" is not executable. Please set the executable-attribute on "
-"that file."
-msgstr ""
-"スクリプトファイル %s は実行ファイルではありません。ファイルに実行可能属性を"
-"設定してください。"
-
-#: ../../xffm/common/util.hh:1406 ../../xffm/common/util.hh:1441
-#, c-format
-msgid "Open with %s"
-msgstr "%s で開く"
-
-#: ../../xffm/common/util.hh:1406
-msgid "Text Editor"
-msgstr "テキスト・エディタ"
-
-#: ../../xffm/common/util.hh:1443 ../../xffm/common/gtk.hh:69
-msgid "Execute Shell Command"
-msgstr "シェルコマンドを実行"
-
-#: ../../xffm/common/util.hh:1447
-msgid ""
-"Console: quickly run single commands -- write a command here and press enter."
-msgstr ""
-"コンソール: 単一のコマンドを実行します。ここにコマンドを入力して Enter を押し"
-"ます。"
-
-#: ../../xffm/common/gtk.hh:352 ../../xffm/common/gtk.hh:360
-msgid "Help"
-msgstr "ヘルプ(H)"
-
-#: ../../xffm/common/run.hh:338
-msgid "error"
-msgstr "エラー"
-
-#: ../../xffm/common/run.hh:342
-#, fuzzy
-msgid "warning"
-msgstr "警告:"
-
-#: ../../xffm/common/preview.hh:581
-msgid "Empty file"
-msgstr "空のファイル"
-
-#: ../../xffm/common/preview.hh:636
-#, c-format
-msgid "Cannot read from %s"
-msgstr "%s から読み取れません"
+msgid   "User Input"
+msgstr  "マウス入力"
+
+#: ../xffm/response/passwdresponse.hh:195
+msgid   "Response Requested"
+msgstr  "応答を要求"
+
+#: ../xffm/response/passwdresponse.hh:242 ../xffm/response/entryresponse.hh:439
+msgid   "Ok"
+msgstr  "OK"
+
+#: ../xffm/response/customresponse.hh:55
+msgid   "Execute command"
+msgstr  "コマンドを実行"
+
+#: ../xffm/response/customresponse.hh:103
+msgid   "Source File"
+msgstr  "ソース・ファイル"
+
+#: ../xffm/response/timeoutresponse.hh:57
+msgid   "Dismiss"
+msgstr  "停止(D)"
+
+#: ../xffm/response/commandprogressresponse.hh:31
+msgid   "Items:"
+msgstr  "アイテム(E):"
+
+#: ../xffm/response/chooserresponse.hh:23
+msgid   "Open"
+msgstr  "開く(O)"
+
+#: ../xffm/response/chooserresponse.hh:56
+msgid   "Choose directory"
+msgstr  "フォルダーの選択"
+
+#: ../xffm/response/chooserresponse.hh:60
+msgid   "Choose file"
+msgstr  "ファイルの選択"
+
+#: ../xffm/completion/bash.hh:133
+msgid   "Completion mode:"
+msgstr  "補完モード(C):"
+
+#: ../xffm/completion/bash.hh:134
+msgid   "command"
+msgstr  "コマンド"
+
+#: ../xffm/completion/bash.hh:135
+msgid   "file"
+msgstr  "file"
+
+#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
+msgid   "Options >>"
+msgstr  "オプション >>"
+
+#: ../xffm/completion/base.hh:28
+msgid   "Command"
+msgstr  "コマンド名"
+
+#: ../xffm/completion/base.hh:31
+msgid   "File"
+msgstr  "ファイル(F)"
+
+#: ../xffm/completion/base.hh:34
+msgid   "Command history"
+msgstr  "コマンド履歴(M)"
+
+#: ../xffm/completion/base.hh:40
+msgid   "Variable"
+msgstr  "変数"
+
+#: ../xffm/completion/base.hh:43
+msgid   "Host"
+msgstr  "ホスト"
+
+#: ../xffm/completion/base.hh:55
+msgid   "Found no match"
+msgstr  "マッチするものは見つかりませんでした"
+
+#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
+msgid   "Matches"
+msgstr  "検索結果"
+
+#: ../xffm/completion/base.hh:142
+msgid   "Too many files open"
+msgstr  "ファイルを開き過ぎています"
 
