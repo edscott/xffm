@@ -15,6 +15,7 @@ msgstr  "Project-Id-Version: xffm+\n"
         "Content-Type: text/plain; charset=UTF-8\n"
         "Content-Transfer-Encoding: 8bit\n"
         "product=accerciserkeywords=I18N+L10Ncomponent=general\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../xffm/mime/mimemagic.hh:68 ../xffm/mime/mimemagic.hh:112
 msgid   "No Read Permission"
@@ -494,6 +495,7 @@ msgstr  "กำลังนับแฟ้ม..."
 msgid   "Found %d match"
 msgid_plural    "Found %d matches"
 msgstr[0]       "พบ %d แห่ง"
+msgstr[1]       "พบ %d แห่ง"
 
 #: ../xffm/find/signals.hh:473
 #, fuzzy, c-format

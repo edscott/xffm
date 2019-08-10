@@ -498,6 +498,7 @@ msgstr  "Mengimpor berkas..."
 msgid   "Found %d match"
 msgid_plural    "Found %d matches"
 msgstr[0]       "Ditemukan %d kecocokan"
+msgstr[1]       "Ditemukan %d kecocokan"
 
 #: ../xffm/find/signals.hh:473
 #, fuzzy, c-format

@@ -15,8 +15,8 @@ msgstr  "Project-Id-Version: xffm+\n"
         "Content-Type: text/plain; charset=UTF-8\n"
         "Content-Transfer-Encoding: 8bit\n"
         "X-Generator: KAider 0.1\n"
-        "Plural-Forms: nplurals=4; plural=n%s00==1 ? 0 : n%s00==2 ? 1 : n"
-        "%s00==3 || n%s00==4 ? 2 : 3;\n"
+        "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n"
+        "%100==3 || n%100==4 ? 2 : 3;\n"
 
 #: ../xffm/mime/mimemagic.hh:68 ../xffm/mime/mimemagic.hh:112
 #, fuzzy

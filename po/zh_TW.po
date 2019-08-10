@@ -515,7 +515,6 @@ msgstr  "計算檔案中..."
 msgid   "Found %d match"
 msgid_plural    "Found %d matches"
 msgstr[0]       "找到 %d 個匹配"
-msgstr[1]       "找到 %d 個匹配"
 
 #: ../xffm/find/signals.hh:473
 #, c-format
