@@ -1,4 +1,4 @@
-# Xffm+ translation file: vie ago  9 14:43:49 CDT 2019
+# Xffm+ translation file: dom ago 11 10:56:24 CDT 2019
 # Merged fron existing open source files
 # http://xffm.org
 #
@@ -6,7 +6,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: xffm+\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2019-08-09 12:32-0500\n"
+        "POT-Creation-Date: 2019-08-11 09:10-0500\n"
         "PO-Revision-Date: 2008-06-02 17:45+0530\n"
         "Last-Translator: Shankar Prasad <svenkate@redhat.com>\n"
         "Language-Team: debian-l10n-kannada@lists.debian.org\n"
@@ -23,250 +23,79 @@ msgstr  "Project-Id-Version: xffm+\n"
 msgid   "No Read Permission"
 msgstr  "ಇದನ್ನು ಓದಲು ಅನುಮತಿ ಇಲ್ಲ: %s"
 
-#: ../xffm/find/dialog.hh:91 ../xffm/find/dialog.hh:143
-#: ../xffm/find/dialog.hh:604
-msgid   "Find"
-msgstr  "ಪತ್ತೆ ಹಚ್ಚು"
+#: ../xffm/completion/base.hh:28
+msgid   "Command"
+msgstr  "ಆಜ್ಞೆ"
 
-#: ../xffm/find/dialog.hh:167 ../xffm/find/fgr.hh:146
+#: ../xffm/completion/base.hh:31
+msgid   "File"
+msgstr  "ಕಡತ(F)"
+
+#: ../xffm/completion/base.hh:34
 #, fuzzy
-msgid   "Recursive"
-msgstr  "ಪುನರಾವರ್ತಿಸು"
+msgid   "Command history"
+msgstr  "ನಕಲುಫಲಕದ ಚರಿತ್ರೆ"
 
-#: ../xffm/find/dialog.hh:170 ../xffm/find/fgr.hh:142
-#, fuzzy
-msgid   "Find hidden files and directories"
-msgstr  "ತೇಪೆಗಳ ಕಡತ ಹಾಗು ಕೋಶಗಳು."
-
-#: ../xffm/find/dialog.hh:173 ../xffm/find/fgr.hh:138
-#, fuzzy
-msgid   "Stay on single filesystem"
-msgstr  "ಕಡತವ್ಯವಸ್ಥೆಯನ್ನು ಶೋಧಿಸು"
-
-#: ../xffm/find/dialog.hh:176 ../xffm/find/signals.hh:66
-#: ../xffm/find/signals.hh:454
-msgid   "Results"
-msgstr  "ಫಲಿತಾಂಶಗಳು"
-
-#: ../xffm/find/dialog.hh:176
-#, fuzzy
-msgid   "Upper limit"
-msgstr  "ಮೇಲಿನ ಮಿತಿ"
-
-#: ../xffm/find/dialog.hh:181
-msgid   "At Least"
-msgstr  "ಕಡೆಪಕ್ಷ"
-
-#: ../xffm/find/dialog.hh:181 ../xffm/find/dialog.hh:186
-msgid   "kBytes"
-msgstr  "ಕಿಲೋಬೈಟುಗಳು"
-
-#: ../xffm/find/dialog.hh:186
-msgid   "At Most"
-msgstr  "ಇದಕ್ಕೆ ಸಮನಾದ"
-
-#: ../xffm/find/dialog.hh:192 ../xffm/completion/base.hh:37
+#: ../xffm/completion/base.hh:37 ../xffm/find/dialog.hh:192
 msgid   "User"
 msgstr  "ಬಳಕೆದಾರ"
 
-#: ../xffm/find/dialog.hh:197
-msgid   "Group"
-msgstr  "ಗುಂಪುಗೂಡಿಸು(G)"
+#: ../xffm/completion/base.hh:40
+msgid   "Variable"
+msgstr  "ಚರಮೌಲ್ಯ"
 
-#: ../xffm/find/dialog.hh:201
-msgid   "Octal Permissions"
-msgstr  "Octal ಅನುಮತಿಗಳು"
+#: ../xffm/completion/base.hh:43
+msgid   "Host"
+msgstr  "ಅತಿಥೇಯ"
 
-#: ../xffm/find/dialog.hh:206
-msgid   "SUID"
-msgstr  "SUID"
-
-#: ../xffm/find/dialog.hh:206 ../xffm/fm/view/local/popup.hh:1102
+#: ../xffm/completion/base.hh:55
 #, fuzzy
-msgid   "Executable"
-msgstr  "ಕಾರ್ಯಗತಗೊಳಿಸಬಲ್ಲ:"
+msgid   "Found no match"
+msgstr  "ಹೊಂದಿಸಲು ಪದ"
 
-#: ../xffm/find/dialog.hh:214 ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168
-msgid   "Minutes"
-msgstr  "ನಿಮಿಷಗಳು"
-
-#: ../xffm/find/dialog.hh:219 ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171
-msgid   "Hours"
-msgstr  "ಗಂಟೆಗಳು"
-
-#: ../xffm/find/dialog.hh:224 ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174
-msgid   "Days"
-msgstr  "ದಿನಗಳು"
-
-#: ../xffm/find/dialog.hh:230
-#, fuzzy
-msgid   "Months"
-msgstr  "ತಿಂಗಳು"
-
-#: ../xffm/find/dialog.hh:241
-#, fuzzy
-msgid   "File type : "
-msgstr  "ಕಡತದ ಬಗೆ (t):"
-
-#: ../xffm/find/dialog.hh:255 ../xffm/find/dialog.hh:595
-#: ../xffm/common/gtk.hh:79 ../xffm/fm/dialog/notebook/page/page.hh:71
-msgid   "Close"
-msgstr  "ಮುಚ್ಚು"
-
-#: ../xffm/find/dialog.hh:263 ../xffm/find/dialog.hh:363
-#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
-#: ../xffm/find/fgr.hh:176 ../xffm/fm/view/treeview.hh:18
-msgid   "Details"
-msgstr  "ವಿವರಗಳು"
-
-#: ../xffm/find/dialog.hh:301 ../xffm/find/fgr.hh:124
-#: ../xffm/find/signals.hh:100
-msgid   "Path"
-msgstr  "ಮಾರ್ಗ"
-
-#: ../xffm/find/dialog.hh:334 ../xffm/find/fgr.hh:126
-msgid   "Filter:"
-msgstr  "ಫಿಲ್ಟರ್:"
-
-#: ../xffm/find/dialog.hh:377
-msgid   "Contains"
-msgstr  "ಹೊಂದಿರುವ"
-
-#: ../xffm/find/dialog.hh:397
-msgid   "Contains the text"
-msgstr  "ಈ ಪಠ್ಯವನ್ನು ಹೊಂದಿದೆ(t)"
-
-#: ../xffm/find/dialog.hh:430
-msgid   "Case Sensitive"
-msgstr  "ಕೇಸ್ ಸಂವೇದಿ(a)"
-
-#: ../xffm/find/dialog.hh:442
-#, fuzzy
-msgid   "Extended regexp"
-msgstr  "ವಿಸ್ತರಿಸಲಾದ"
-
-#: ../xffm/find/dialog.hh:453
-msgid   "Include binary files"
-msgstr  "ಬೈನರಿ ಕಡತಗಳನ್ನೂ ಸೇರಿಸು(b)"
-
-#: ../xffm/find/dialog.hh:463 ../xffm/find/fgr.hh:212
-#, fuzzy
-msgid   "Line Count"
-msgstr  "ತಿರುಗಿಸುವಿಕೆಯ ಮರುಪ್ರಯತ್ನದ ಲೆಕ್ಕ"
-
-#: ../xffm/find/dialog.hh:489
-#, fuzzy
-msgid   "Match"
+#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
+msgid   "Matches"
 msgstr  "ತಾಳೆಯಾಗುವವು(M)"
 
-#: ../xffm/find/dialog.hh:501
-#, fuzzy
-msgid   "Anywhere"
-msgstr  "ಎಲ್ಲೆಡೆಯೂ"
+#: ../xffm/completion/base.hh:142
+msgid   "Too many files open"
+msgstr  "ಬಹಳಷ್ಟು ಕಡತಗಳು ತೆರೆದಿವೆ"
 
-#: ../xffm/find/dialog.hh:516
-msgid   "Whole words only"
-msgstr  "ಪೂರ್ಣಪದ ಮಾತ್ರ(W)"
-
-#: ../xffm/find/dialog.hh:531
-msgid   "lines"
-msgstr  "ಸಾಲುಗಳು"
-
-#: ../xffm/find/dialog.hh:545 ../xffm/find/fgr.hh:210
-msgid   "No match"
-msgstr  "ಯಾವುದೂ ತಾಳೆಯಾಗುತ್ತಿಲ್ಲ"
-
-#: ../xffm/find/dialog.hh:577 ../xffm/find/signals.hh:368
-#: ../xffm/common/gtk.hh:409 ../xffm/fm/view/local/rm.hh:157
-#: ../xffm/fm/view/local/properties.hh:314
-#: ../xffm/response/entryresponse.hh:435 ../xffm/response/chooserresponse.hh:21
-msgid   "Cancel"
-msgstr  "ರದ್ದು ಮಾಡು"
-
-#: ../xffm/find/dialog.hh:587
-msgid   "Clear"
-msgstr  "ಅಳಿಸು(C)"
-
-#: ../xffm/find/dialog.hh:629
-msgid   "Edit"
-msgstr  "ಸಂಪಾದಿಸು(E)"
-
-#: ../xffm/find/dialog.hh:743 ../xffm/find/dialog.hh:758
-#: ../xffm/common/preview.hh:460 ../xffm/common/util.hh:1354
-#: ../xffm/common/util.hh:1356 ../xffm/common/util.hh:1362
-#: ../xffm/common/util.hh:1364
-msgid   "unknown"
-msgstr  "ಗೊತ್ತಾಗದ"
-
-#: ../xffm/find/dialog.hh:772
-msgid   "Modified"
-msgstr  "ಮಾರ್ಪಡಿಸಲಾದ"
-
-#: ../xffm/find/dialog.hh:776
-msgid   "Created"
-msgstr  "ನಿರ್ಮಿಸಲಾಗಿದೆ"
-
-#: ../xffm/find/dialog.hh:780
-#, fuzzy
-msgid   "Accessed"
-msgstr  "ನಿಲುಕಿಸಿಕೊಂಡಿದ್ದು:"
-
-#: ../xffm/find/dialog.hh:1098
-msgid   "Basic rules:\n"
-        "\n"
-        "*  Will match any character zero or more times.\n"
-        "?  Will match any character exactly one time\n"
-        "[] Match any character within the [] \n"
-        "^  Match at beginning of string\n"
-        "$  Match at end of string \n"
-msgstr  ""
-
-#: ../xffm/find/dialog.hh:1107
-msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
-        "( ) : \n"
-        "In  basic regular expressions the metacharacters ?, +, {, |, (, "
-        "and ) \n"
-        "  lose their special meaning.\n"
-        "\n"
-        "The  period . matches  any  single  character.\n"
-        "The caret ^ matches at the start of line.\n"
-        "The dollar $ matches at the end of line.\n"
-        "\n"
-        "Characters within [ ] matches any single character in the list.\n"
-        "Characters within [^ ] matches any single character *not* in the "
-        "list.\n"
-        "Characters inside [ - ] matches a range of characters (ie [0-9] or "
-        "[a-z]).\n"
-        "\n"
-        "A regular expression may be followed by one of several repetition "
-        "operators:\n"
-        "?      The preceding item is optional and matched\n"
-        "       at most once.\n"
-        "*      The preceding item will be matched zero\n"
-        "       or more times.\n"
-        "+      The preceding item will be matched one or\n"
-        "       more times.\n"
-        "{n}    The preceding item is matched exactly n times.\n"
-        "{n,}   The preceding item is matched n or more times.\n"
-        "{n,m}  The preceding item is matched at least n times,\n"
-        "       but not more than m times.\n"
-        "\n"
-        "To match any reserved character, precede it with \\. \n"
-        "\n"
-        "Two regular expressions may be joined by the logical or operator |.\n"
-        "Two regular expressions may be concatenated.\n"
-        "\n"
-        "More information is available by typing \"man grep\"\n"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:124 ../xffm/completion/base.hh:339
+#: ../xffm/completion/base.hh:339 ../xffm/find/fgr.hh:124
 msgid   "Options:"
 msgstr  "ಆಯ್ಕೆಗಳು:"
+
+#: ../xffm/completion/bash.hh:133
+#, fuzzy
+msgid   "Completion mode:"
+msgstr  "ಪೂರ್ಣಗೊಳಿಕೆಯ ಸಂಜ್ಞೆ"
+
+#: ../xffm/completion/bash.hh:134
+msgid   "command"
+msgstr  "ಆಜ್ಞೆ"
+
+#: ../xffm/completion/bash.hh:135
+msgid   "file"
+msgstr  "ಕಡತ"
+
+#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
+#, fuzzy
+msgid   "Options >>"
+msgstr  "ಆಯ್ಕೆಗಳು"
+
+#: ../xffm/find/fgr.hh:124 ../xffm/find/signals.hh:100
+#: ../xffm/find/dialog.hh:301
+msgid   "Path"
+msgstr  "ಮಾರ್ಗ"
 
 #: ../xffm/find/fgr.hh:125
 msgid   "Locate documents and folders on this computer by name or content"
 msgstr  "ಈ ಗಣಕ ಯಂತ್ರದಲ್ಲಿ ಹೆಸರು ಅಥವ ವಿಷಯಗಳ ಆಧಾರದ ಮೇಲೆ ದಸ್ತಾವೇಜುಗಳನ್ನು ಮತ್ತು "
         "ಕಡತಕೋಶಗಳನ್ನು ಪತ್ತೆ ಮಾಡಿ"
+
+#: ../xffm/find/fgr.hh:126 ../xffm/find/dialog.hh:334
+msgid   "Filter:"
+msgstr  "ಫಿಲ್ಟರ್:"
 
 #: ../xffm/find/fgr.hh:126
 msgid   "Search for files"
@@ -294,6 +123,11 @@ msgstr  "ಆವೃತ್ತಿಯ ಮಾಹಿತಿಯನ್ನು ತೋರಿ
 msgid   "Filter Details"
 msgstr  "ಬಳಕೆದಾರ ವಿವರಗಳು"
 
+#: ../xffm/find/fgr.hh:138 ../xffm/find/dialog.hh:173
+#, fuzzy
+msgid   "Stay on single filesystem"
+msgstr  "ಕಡತವ್ಯವಸ್ಥೆಯನ್ನು ಶೋಧಿಸು"
+
 #: ../xffm/find/fgr.hh:140
 msgid   "Print..."
 msgstr  "ಮುದ್ರಿಸು(P)..."
@@ -301,6 +135,11 @@ msgstr  "ಮುದ್ರಿಸು(P)..."
 #: ../xffm/find/fgr.hh:140
 msgid   "The unique Process ID that identifies this process."
 msgstr  ""
+
+#: ../xffm/find/fgr.hh:142 ../xffm/find/dialog.hh:170
+#, fuzzy
+msgid   "Find hidden files and directories"
+msgstr  "ತೇಪೆಗಳ ಕಡತ ಹಾಗು ಕೋಶಗಳು."
 
 #: ../xffm/find/fgr.hh:143
 msgid   "Filter"
@@ -310,6 +149,11 @@ msgstr  "ಶೋಧಕ(Filter)"
 msgid   "To display files which pass the filter (stars and regexps will be "
         "processed)"
 msgstr  ""
+
+#: ../xffm/find/fgr.hh:146 ../xffm/find/dialog.hh:167
+#, fuzzy
+msgid   "Recursive"
+msgstr  "ಪುನರಾವರ್ತಿಸು"
 
 #: ../xffm/find/fgr.hh:147 ../xffm/find/fgr.hh:148 ../xffm/find/fgr.hh:149
 #: ../xffm/find/fgr.hh:150
@@ -358,7 +202,7 @@ msgid   "Regular file"
 msgstr  "ಸಾಮಾನ್ಯ ಚೌಕ"
 
 #: ../xffm/find/fgr.hh:159 ../xffm/find/signals.hh:8
-#: ../xffm/common/preview.hh:469 ../xffm/fm/view/local/popup.hh:1062
+#: ../xffm/fm/view/local/popup.hh:1062 ../xffm/common/preview.hh:469
 msgid   "Directory"
 msgstr  "ಕೋಶ"
 
@@ -389,6 +233,16 @@ msgstr  "ಲಿಪ್ಯಂಶ (ಕಾರೆಕ್ಟರ್) ಸಾಧನಗಳ�
 msgid   "FIFO"
 msgstr  ""
 
+#: ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168 ../xffm/find/dialog.hh:214
+msgid   "Minutes"
+msgstr  "ನಿಮಿಷಗಳು"
+
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/find/dialog.hh:263
+#: ../xffm/find/dialog.hh:363 ../xffm/fm/view/treeview.hh:18
+msgid   "Details"
+msgstr  "ವಿವರಗಳು"
+
 #: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
 #: ../xffm/find/fgr.hh:176 ../xffm/find/fgr.hh:179 ../xffm/find/fgr.hh:180
 #: ../xffm/find/fgr.hh:183 ../xffm/find/fgr.hh:184 ../xffm/find/fgr.hh:187
@@ -401,6 +255,14 @@ msgstr  "TIMEOUT"
 #: ../xffm/find/fgr.hh:177
 msgid   "Previous"
 msgstr  "ಹಿಂದಿನ"
+
+#: ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171 ../xffm/find/dialog.hh:219
+msgid   "Hours"
+msgstr  "ಗಂಟೆಗಳು"
+
+#: ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174 ../xffm/find/dialog.hh:224
+msgid   "Days"
+msgstr  "ದಿನಗಳು"
 
 #: ../xffm/find/fgr.hh:175
 msgid   "Month"
@@ -475,6 +337,15 @@ msgstr  "ಕೇಸ್ ಅನ್ನು ಕಡೆಗನಿಸು (I)"
 msgid   "Text Files"
 msgstr  "ಪಠ್ಯ ಕಡತಗಳು"
 
+#: ../xffm/find/fgr.hh:210 ../xffm/find/dialog.hh:545
+msgid   "No match"
+msgstr  "ಯಾವುದೂ ತಾಳೆಯಾಗುತ್ತಿಲ್ಲ"
+
+#: ../xffm/find/fgr.hh:212 ../xffm/find/dialog.hh:463
+#, fuzzy
+msgid   "Line Count"
+msgstr  "ತಿರುಗಿಸುವಿಕೆಯ ಮರುಪ್ರಯತ್ನದ ಲೆಕ್ಕ"
+
 #: ../xffm/find/fgr.hh:214
 msgid   "Words"
 msgstr  "ಪದಗಳು"
@@ -496,6 +367,18 @@ msgstr  "ಸಾಮಾನ್ಯ"
 #, fuzzy
 msgid   "Socket"
 msgstr  "ಸಂಪರ್ಕ ಕುಹರ (ಸಾಕೆಟ್)ಗಳು"
+
+#: ../xffm/find/signals.hh:66 ../xffm/find/signals.hh:454
+#: ../xffm/find/dialog.hh:176
+msgid   "Results"
+msgstr  "ಫಲಿತಾಂಶಗಳು"
+
+#: ../xffm/find/signals.hh:368 ../xffm/find/dialog.hh:577
+#: ../xffm/response/chooserresponse.hh:21 ../xffm/response/entryresponse.hh:435
+#: ../xffm/fm/view/local/properties.hh:314 ../xffm/fm/view/local/rm.hh:157
+#: ../xffm/common/gtk.hh:409
+msgid   "Cancel"
+msgstr  "ರದ್ದು ಮಾಡು"
 
 #: ../xffm/find/signals.hh:396 ../xffm/find/signals.hh:830
 #, fuzzy
@@ -527,249 +410,488 @@ msgstr  "%s ಪೂರ್ಣಗೊಂಡಿದೆ : %s"
 msgid   "Searching..."
 msgstr  "ಹುಡುಕಲಾಗುತ್ತಿದೆ..."
 
-#: ../xffm/common/preview.hh:581
-msgid   "Empty file"
-msgstr  "ಖಾಲಿ ಕಡತ"
+#: ../xffm/find/dialog.hh:91 ../xffm/find/dialog.hh:143
+#: ../xffm/find/dialog.hh:604
+msgid   "Find"
+msgstr  "ಪತ್ತೆ ಹಚ್ಚು"
 
-#: ../xffm/common/preview.hh:636
-#, fuzzy, c-format
-msgid   "Cannot read from %s"
-msgstr  "ಸೀಡಿಯನ್ನು ಓದಲಾಗಿಲ್ಲ: %s"
-
-#: ../xffm/common/gtk.hh:67 ../xffm/fm/dialog/notebook/vbuttonbox.hh:240
+#: ../xffm/find/dialog.hh:176
 #, fuzzy
-msgid   "Open terminal"
-msgstr  "ಆದೇಶತೆರೆಯನ್ನು ತೆರೆ"
+msgid   "Upper limit"
+msgstr  "ಮೇಲಿನ ಮಿತಿ"
 
-#: ../xffm/common/gtk.hh:69 ../xffm/common/util.hh:1443
-msgid   "Execute Shell Command"
-msgstr  "ಷೆಲ್ ಆದೇಶವನ್ನು ನಿರ್ವಹಿಸು"
+#: ../xffm/find/dialog.hh:181
+msgid   "At Least"
+msgstr  "ಕಡೆಪಕ್ಷ"
 
-#: ../xffm/common/gtk.hh:71 ../xffm/fm/view/local/popup.hh:157
-msgid   "Paste"
-msgstr  "ಅಂಟಿಸು(P)"
+#: ../xffm/find/dialog.hh:181 ../xffm/find/dialog.hh:186
+msgid   "kBytes"
+msgstr  "ಕಿಲೋಬೈಟುಗಳು"
 
-#: ../xffm/common/gtk.hh:73 ../xffm/fm/view/local/popup.hh:151
-msgid   "Add bookmark"
-msgstr  "ಬುಕ್ಮಾರ್ಕನ್ನು ಸೇರಿಸು(b)"
+#: ../xffm/find/dialog.hh:186
+msgid   "At Most"
+msgstr  "ಇದಕ್ಕೆ ಸಮನಾದ"
 
-#: ../xffm/common/gtk.hh:75 ../xffm/fm/view/local/popup.hh:152
-#: ../xffm/fm/view/root/popup.hh:137
-msgid   "Remove bookmark"
-msgstr  "ಪುಟಗುರುತನ್ನು ತೆಗೆದುಹಾಕು"
+#: ../xffm/find/dialog.hh:197
+msgid   "Group"
+msgstr  "ಗುಂಪುಗೂಡಿಸು(G)"
 
-#: ../xffm/common/gtk.hh:77 ../xffm/fm/view/pkg/model.hh:108
-#: ../xffm/fm/view/pkg/model.hh:299 ../xffm/fm/view/pkg/model.hh:306
-#: ../xffm/fm/view/pkg/popup.hh:151
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:236
-msgid   "Search"
-msgstr  "ಹುಡುಕು"
+#: ../xffm/find/dialog.hh:201
+msgid   "Octal Permissions"
+msgstr  "Octal ಅನುಮತಿಗಳು"
 
-#: ../xffm/common/gtk.hh:81 ../xffm/fm/dialog/notebook/menupopover.hh:237
-msgid   "Exit"
-msgstr  "ನಿರ್ಗಮಿಸು"
+#: ../xffm/find/dialog.hh:206
+msgid   "SUID"
+msgstr  "SUID"
 
-#: ../xffm/common/gtk.hh:83 ../xffm/fm/view/local/popup.hh:85
-#: ../xffm/fm/view/local/popup.hh:142 ../xffm/fm/view/local/popup.hh:1287
-#: ../xffm/fm/view/local/popup.hh:1294 ../xffm/fm/view/local/popup.hh:1305
-#: ../xffm/fm/view/local/popup.hh:1312
-msgid   "Open with"
-msgstr  "ಇದರೊಂದಿಗೆ ತೆಗೆ"
+#: ../xffm/find/dialog.hh:206 ../xffm/fm/view/local/popup.hh:1102
+#, fuzzy
+msgid   "Executable"
+msgstr  "ಕಾರ್ಯಗತಗೊಳಿಸಬಲ್ಲ:"
 
-#: ../xffm/common/gtk.hh:85 ../xffm/fm/view/local/popup.hh:100
-#: ../xffm/fm/view/local/popup.hh:156
-msgid   "Cut"
-msgstr  "ಕತ್ತರಿಸು(u)"
+#: ../xffm/find/dialog.hh:230
+#, fuzzy
+msgid   "Months"
+msgstr  "ತಿಂಗಳು"
 
-#: ../xffm/common/gtk.hh:87 ../xffm/fm/view/local/popup.hh:99
-#: ../xffm/fm/view/local/popup.hh:155
-msgid   "Copy"
-msgstr  "ನಕಲಿಸು(C)"
+#: ../xffm/find/dialog.hh:241
+#, fuzzy
+msgid   "File type : "
+msgstr  "ಕಡತದ ಬಗೆ (t):"
 
-#: ../xffm/common/gtk.hh:89 ../xffm/fm/view/local/rm.hh:176
-#: ../xffm/fm/view/local/popup.hh:103 ../xffm/fm/view/local/popup.hh:160
-msgid   "Delete"
-msgstr  "ಅಳಿಸಿಹಾಕು"
+#: ../xffm/find/dialog.hh:255 ../xffm/find/dialog.hh:595
+#: ../xffm/fm/dialog/notebook/page/page.hh:71 ../xffm/common/gtk.hh:79
+msgid   "Close"
+msgstr  "ಮುಚ್ಚು"
 
-#: ../xffm/common/gtk.hh:91 ../xffm/fm/view/local/rm.hh:165
-msgid   "Shred"
+#: ../xffm/find/dialog.hh:377
+msgid   "Contains"
+msgstr  "ಹೊಂದಿರುವ"
+
+#: ../xffm/find/dialog.hh:397
+msgid   "Contains the text"
+msgstr  "ಈ ಪಠ್ಯವನ್ನು ಹೊಂದಿದೆ(t)"
+
+#: ../xffm/find/dialog.hh:430
+msgid   "Case Sensitive"
+msgstr  "ಕೇಸ್ ಸಂವೇದಿ(a)"
+
+#: ../xffm/find/dialog.hh:442
+#, fuzzy
+msgid   "Extended regexp"
+msgstr  "ವಿಸ್ತರಿಸಲಾದ"
+
+#: ../xffm/find/dialog.hh:453
+msgid   "Include binary files"
+msgstr  "ಬೈನರಿ ಕಡತಗಳನ್ನೂ ಸೇರಿಸು(b)"
+
+#: ../xffm/find/dialog.hh:489
+#, fuzzy
+msgid   "Match"
+msgstr  "ತಾಳೆಯಾಗುವವು(M)"
+
+#: ../xffm/find/dialog.hh:501
+#, fuzzy
+msgid   "Anywhere"
+msgstr  "ಎಲ್ಲೆಡೆಯೂ"
+
+#: ../xffm/find/dialog.hh:516
+msgid   "Whole words only"
+msgstr  "ಪೂರ್ಣಪದ ಮಾತ್ರ(W)"
+
+#: ../xffm/find/dialog.hh:531
+msgid   "lines"
+msgstr  "ಸಾಲುಗಳು"
+
+#: ../xffm/find/dialog.hh:587
+msgid   "Clear"
+msgstr  "ಅಳಿಸು(C)"
+
+#: ../xffm/find/dialog.hh:629
+msgid   "Edit"
+msgstr  "ಸಂಪಾದಿಸು(E)"
+
+#: ../xffm/find/dialog.hh:743 ../xffm/find/dialog.hh:758
+#: ../xffm/common/util.hh:1354 ../xffm/common/util.hh:1356
+#: ../xffm/common/util.hh:1362 ../xffm/common/util.hh:1364
+#: ../xffm/common/preview.hh:460
+msgid   "unknown"
+msgstr  "ಗೊತ್ತಾಗದ"
+
+#: ../xffm/find/dialog.hh:772
+msgid   "Modified"
+msgstr  "ಮಾರ್ಪಡಿಸಲಾದ"
+
+#: ../xffm/find/dialog.hh:776
+msgid   "Created"
+msgstr  "ನಿರ್ಮಿಸಲಾಗಿದೆ"
+
+#: ../xffm/find/dialog.hh:780
+#, fuzzy
+msgid   "Accessed"
+msgstr  "ನಿಲುಕಿಸಿಕೊಂಡಿದ್ದು:"
+
+#: ../xffm/find/dialog.hh:1098
+msgid   "Basic rules:\n"
+        "\n"
+        "*  Will match any character zero or more times.\n"
+        "?  Will match any character exactly one time\n"
+        "[] Match any character within the [] \n"
+        "^  Match at beginning of string\n"
+        "$  Match at end of string \n"
 msgstr  ""
 
-#: ../xffm/common/gtk.hh:94 ../xffm/fm/view/local/popup.hh:95
-#: ../xffm/fm/view/local/popup.hh:145 ../xffm/fm/view/root/popup.hh:136
-#: ../xffm/fm/view/fstab/popup.hh:20
-msgid   "Open in New Tab"
-msgstr  "ಹೊಸ ಹಾಳೆಯಲ್ಲಿ ತೆರೆ  (T)"
-
-#: ../xffm/common/gtk.hh:139 ../xffm/fm/dialog/notebook/notebook.hh:75
-msgid   "New Tab"
-msgstr  "ಹೊಸ ಹಾಳೆ(T)"
-
-#: ../xffm/common/gtk.hh:352 ../xffm/common/gtk.hh:360
-msgid   "Help"
-msgstr  "ಸಹಾಯ(H)"
-
-#: ../xffm/common/settings.hh:30
-#, fuzzy
-msgid   "New File:"
-msgstr  "ಹೊಸ ಕಡತ"
-
-#: ../xffm/common/gio.hh:81
-msgid   "Copying files"
-msgstr  "ಕಡತಗಳನ್ನು ನಕಲಿಸಲಾಗುತ್ತಿದೆ"
-
-#: ../xffm/common/gio.hh:83 ../xffm/common/dnd.hh:35
-#: ../xffm/fm/dialog/clipboard.hh:30
-#, fuzzy
-msgid   "Moving files"
-msgstr  "ಕಡತಗಳನ್ನು ಸ್ಥಳಾಂತರಿಸಲಾಗುತ್ತಿದೆ"
-
-#: ../xffm/common/gio.hh:85
-#, fuzzy
-msgid   "linking"
-msgstr  "ಖಾಲಿ ಮಾಡಲಾಗುತ್ತಿದೆ"
-
-#: ../xffm/common/gio.hh:87
-msgid   "rename"
-msgstr  "rename"
-
-#: ../xffm/common/gio.hh:426
-#, c-format
-msgid   "(%d of %d)"
-msgstr  "(%d, %d ರಲ್ಲಿ)"
-
-#: ../xffm/common/util.hh:1404
-#, c-format
-msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
-        "attribute on that file."
+#: ../xffm/find/dialog.hh:1107
+msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
+        "( ) : \n"
+        "In  basic regular expressions the metacharacters ?, +, {, |, (, "
+        "and ) \n"
+        "  lose their special meaning.\n"
+        "\n"
+        "The  period . matches  any  single  character.\n"
+        "The caret ^ matches at the start of line.\n"
+        "The dollar $ matches at the end of line.\n"
+        "\n"
+        "Characters within [ ] matches any single character in the list.\n"
+        "Characters within [^ ] matches any single character *not* in the "
+        "list.\n"
+        "Characters inside [ - ] matches a range of characters (ie [0-9] or "
+        "[a-z]).\n"
+        "\n"
+        "A regular expression may be followed by one of several repetition "
+        "operators:\n"
+        "?      The preceding item is optional and matched\n"
+        "       at most once.\n"
+        "*      The preceding item will be matched zero\n"
+        "       or more times.\n"
+        "+      The preceding item will be matched one or\n"
+        "       more times.\n"
+        "{n}    The preceding item is matched exactly n times.\n"
+        "{n,}   The preceding item is matched n or more times.\n"
+        "{n,m}  The preceding item is matched at least n times,\n"
+        "       but not more than m times.\n"
+        "\n"
+        "To match any reserved character, precede it with \\. \n"
+        "\n"
+        "Two regular expressions may be joined by the logical or operator |.\n"
+        "Two regular expressions may be concatenated.\n"
+        "\n"
+        "More information is available by typing \"man grep\"\n"
 msgstr  ""
 
-#: ../xffm/common/util.hh:1406 ../xffm/common/util.hh:1441
-#, c-format
-msgid   "Open with %s"
-msgstr  "%s ನೊಂದಿಗೆ ತೆರೆ"
+#: ../xffm/response/chooserresponse.hh:23
+msgid   "Open"
+msgstr  "ತೆರೆ(O)"
 
-#: ../xffm/common/util.hh:1406
-msgid   "Text Editor"
-msgstr  "ಪಠ್ಯ ಸಂಪಾದಕ"
+#: ../xffm/response/chooserresponse.hh:56
+msgid   "Choose directory"
+msgstr  "ಕೋಶವನ್ನು ಆರಿಸು"
 
-#: ../xffm/common/util.hh:1447
-msgid   "Console: quickly run single commands -- write a command here and "
-        "press enter."
-msgstr  ""
+#: ../xffm/response/chooserresponse.hh:60
+msgid   "Choose file"
+msgstr  "ಕಡತವನ್ನು ಆರಿಸು"
 
-#: ../xffm/common/util.hh:1452 ../xffm/fm/view/local/popup.hh:1109
-#: ../xffm/fm/view/local/popup.hh:1291 ../xffm/fm/view/local/popup.hh:1309
-msgid   "Run in Terminal"
-msgstr  "ಟರ್ಮಿನಲ್‍ನಲ್ಲಿ ಚಲಾಯಿಸು"
-
-#: ../xffm/common/dnd.hh:41 ../xffm/fm/dialog/clipboard.hh:23
-msgid   "Copying files locally"
-msgstr  "ಕಡತಗಳನ್ನು ಸ್ಥಳೀಯವಾಗಿ ಪ್ರತಿ ಮಾಡಲಾಗುತ್ತಿದೆ"
-
-#: ../xffm/common/dnd.hh:47
+#: ../xffm/response/customresponse.hh:55
 #, fuzzy
-msgid   "Create Link"
-msgstr  "ಕೊಂಡಿ ರಚಿಸುವುದನ್ನು ರದ್ದುಗೊಳಿಸು (U)"
+msgid   "Execute command"
+msgstr  "ಆದೇಶಗ್ರಾಹಿ (ಶೆಲ್) ಆದೇಶಗಳನ್ನು ಚಾಲಯಿಸುತ್ತದೆ"
 
-#: ../xffm/common/run.hh:338
-msgid   "error"
-msgstr  "ದೋಷ"
+#: ../xffm/response/customresponse.hh:103
+msgid   "Source File"
+msgstr  "ಆಕರ ಕಡತ"
 
-#: ../xffm/common/run.hh:342
-#, fuzzy
-msgid   "warning"
-msgstr  "ಎಚ್ಚರಿಕೆ:"
+#: ../xffm/response/entryresponse.hh:439 ../xffm/response/passwdresponse.hh:242
+msgid   "Ok"
+msgstr  "ಸರಿ"
 
-#: ../xffm/common/run.hh:464 ../xffm/response/passwdresponse.hh:19
-#: ../xffm/response/passwdresponse.hh:25
+#: ../xffm/response/commandprogressresponse.hh:31
+msgid   "Items:"
+msgstr  "ವಸ್ತುಗಳು(e):"
+
+#: ../xffm/response/passwdresponse.hh:19 ../xffm/response/passwdresponse.hh:25
+#: ../xffm/common/run.hh:464
 msgid   "Enter password"
 msgstr  "ಗುಪ್ತಪದವನ್ನು ನಮೂದಿಸು"
 
-#: ../xffm/fm/view/pkg/model.hh:29 ../xffm/fm/view/pkg/popup.hh:35
+#: ../xffm/response/passwdresponse.hh:179
+#, fuzzy
+msgid   "User Input"
+msgstr  "ಮೌಸ್ ಪ್ರದಾನ(ಇನ್‍ಪುಟ್)"
+
+#: ../xffm/response/passwdresponse.hh:195
+#, fuzzy
+msgid   "Response Requested"
+msgstr  "ಪ್ರತಿಕ್ರಿಯೆ ಹೊರಗೆ"
+
+#: ../xffm/response/timeoutresponse.hh:57
+msgid   "Dismiss"
+msgstr  "ವಜಾಗೊಳಿಸು (D)"
+
+#: ../xffm/response/commandresponse.hh:19
+msgid   "Running"
+msgstr  "ಚಲಾಯಿಸಲಾಗುತ್ತಿದೆ"
+
+#: ../xffm/response/commandresponse.hh:24
+#, fuzzy
+msgid   "Waiting for operation to finish..."
+msgstr  "ದೃಢೀಕರಣಕ್ಕಾಗಿ ಕಾಯಲಾಗುತ್ತಿದೆ"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:11
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:214
+#, fuzzy
+msgid   "Remove Button Contents"
+msgstr  "ಕಡತಕೋಶದ ವಿಷಯಗಳನ್ನು ತೆಗೆದು ಹಾಕಿ"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:67
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:209
+#, fuzzy
+msgid   "Add custom content"
+msgstr  "ನನ್ನಿಚ್ಚೆಯ ಅಕ್ಷರ ಶೈಲಿಯನ್ನು ಉಪಯೋಗಿಸು (f)"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:68
+#, fuzzy
+msgid   "Select file to load"
+msgstr  "ಚಲಾಯಿಸಲು ಒಂದು ಕಡತವನ್ನು ಆರಿಸಿ"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:125
+#, fuzzy, c-format
+msgid   "Cannot load file %s. Reason: %s"
+msgstr  "ಕಡತವನ್ನು ಲೋಡ್ ಮಾಡಲಾಗಲಿಲ್ಲ: %s\n"
+        "\n"
+        "ವಿವರಗಳು: %s"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:154
+#, fuzzy
+msgid   "You need to restart the application"
+msgstr  "ನೀವು ಅನ್ವಯವನ್ನು ಮರಳಿ ಆರಂಭಿಸಬೇಕಾಗುತ್ತದೆ."
+
 #: ../xffm/fm/dialog/notebook/vbuttonbox.hh:187
 #: ../xffm/fm/dialog/notebook/vbuttonbox.hh:191
 #: ../xffm/fm/dialog/notebook/vbuttonbox.hh:195
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:198
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:198 ../xffm/fm/view/pkg/model.hh:29
+#: ../xffm/fm/view/pkg/popup.hh:35
 #, fuzzy
 msgid   "Software Updater"
 msgstr  "ತಂತ್ರಾಂಶ ಅಪ್‌ಡೇಟ್‌"
 
-#: ../xffm/fm/view/pkg/model.hh:41 ../xffm/fm/view/pkg/model.hh:52
-msgid   "Add or remove software installed on the system"
-msgstr  "ಗಣಕಕ್ಕೆ ತಂತ್ರಾಂಶವನ್ನು ಸೇರಿಸು ಅಥವ ಅನುಸ್ಥಾಪಿತಗೊಂಡಿರುವುದನ್ನು ತೆಗೆದು ಹಾಕು"
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:236
+#: ../xffm/fm/view/pkg/model.hh:108 ../xffm/fm/view/pkg/model.hh:299
+#: ../xffm/fm/view/pkg/model.hh:306 ../xffm/fm/view/pkg/popup.hh:151
+#: ../xffm/common/gtk.hh:77
+msgid   "Search"
+msgstr  "ಹುಡುಕು"
 
-#: ../xffm/fm/view/pkg/model.hh:111
-msgid   "String"
-msgstr  "ಸ್ಟ್ರಿಂಗ್"
-
-#: ../xffm/fm/view/pkg/model.hh:116
-msgid   "Waiting for search results"
-msgstr  "ಹುಡುಕು ಫಲಿತಾಂಶಗಳಿಗಾಗಿ ಕಾಯಲಾಗುತ್ತಿದೆ"
-
-#: ../xffm/fm/view/pkg/model.hh:174
-msgid   "No results"
-msgstr  "ಫಲಿತಾಂಶಗಳಿಲ್ಲ"
-
-#: ../xffm/fm/view/pkg/model.hh:373
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:240 ../xffm/common/gtk.hh:67
 #, fuzzy
-msgid   "Currently busy\n"
-msgstr  "ಚಲಾವಣೆ ನಾಣ್ಯದ ಚಿಹ್ನೆಗಳು"
+msgid   "Open terminal"
+msgstr  "ಆದೇಶತೆರೆಯನ್ನು ತೆರೆ"
 
-#: ../xffm/fm/view/pkg/popup.hh:44
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:244
+msgid   "Open a New Window"
+msgstr  "ಹೊಸ ಕಿಟಕಿಯನ್ನು ತೆರೆ"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:250
 #, fuzzy
-msgid   "Update Database"
-msgstr  "ಯು.ಎಸ್ (ಹಕ್ಕು ಪತ್ರ) ಪೇಟೆಂಟ್ ದತ್ತಸಂಚಯ"
+msgid   "Differences"
+msgstr  "ವ್ಯತ್ಯಾಸ"
 
-#: ../xffm/fm/view/pkg/popup.hh:45
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:256
+#: ../xffm/fm/view/root/model.hh:110
 #, fuzzy
-msgid   "Fetch"
-msgstr  "ಸ್ಕೆಚ್"
+msgid   "Home Directory"
+msgstr  "ನೆಲೆ ಕಡತಕೋಶ"
 
-#: ../xffm/fm/view/pkg/popup.hh:46
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:261
+#: ../xffm/fm/view/root/model.hh:168 ../xffm/fm/view/fstab/popup.hh:29
+msgid   "Disk Image Mounter"
+msgstr  "ಡಿಸ್ಕ್‍ ಚಿತ್ರಿಕೆಯನ್ನು ಏರಿಸುವ ಸಾಧನ"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:266
+#: ../xffm/fm/view/root/model.hh:137
 #, fuzzy
-msgid   "Install --dry-run"
-msgstr  "ಘಟಕವನ್ನು ಅನುಸ್ಥಾಪಿಸು(I)"
+msgid   "Trash bin"
+msgstr  "ಕಸಬುಟ್ಟಿಗೆ ಹಾಕಿದ್ದು"
 
-#: ../xffm/fm/view/pkg/popup.hh:47
-msgid   "Install"
-msgstr  "ಅನುಸ್ಥಾಪಿಸು(I)"
+#: ../xffm/fm/dialog/notebook/notebook.hh:56
+msgid   "Long press time"
+msgstr  "ಬಹಳ ಹೊತ್ತಿನವರೆಗೆ ಒತ್ತಿ ಹಿಡಿಯುವ ಸಮಯ"
 
-#: ../xffm/fm/view/pkg/popup.hh:48
+#: ../xffm/fm/dialog/notebook/notebook.hh:75 ../xffm/common/gtk.hh:139
+msgid   "New Tab"
+msgstr  "ಹೊಸ ಹಾಳೆ(T)"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:178
 #, fuzzy
-msgid   "Uninstall --dry-run"
-msgstr  "ಅನುಸ್ಥಾಪಿಸಲಾಗಿದ್ದನ್ನು ತೆಗೆದು ಹಾಕಲಾಗುತ್ತಿದೆ"
+msgid   "Open menu"
+msgstr  "ಮೆನುವನ್ನು ತೆರೆ(O)"
 
-#: ../xffm/fm/view/pkg/popup.hh:49
-msgid   "Uninstall"
-msgstr  "ಅನುಸ್ಥಾಪಿಸಿದ್ದನ್ನು ತೆಗೆದುಹಾಕು"
-
-#: ../xffm/fm/view/pkg/popup.hh:50
-msgid   "Information"
-msgstr  "ಮಾಹಿತಿ"
-
-#: ../xffm/fm/view/pkg/popup.hh:140
-msgid   "Version"
-msgstr  "ಆವೃತ್ತಿ"
-
-#: ../xffm/fm/view/pkg/popup.hh:149
+#: ../xffm/fm/dialog/notebook/menupopover.hh:230
 #, fuzzy
-msgid   "Go up"
-msgstr  "ಮೇಲಕ್ಕೆ ತೆರಳು"
+msgid   "View as list"
+msgstr  "ಹೊಸ ಕಾರ್ಯ ಪಟ್ಟಿ"
 
-#: ../xffm/fm/view/pkg/popup.hh:152
+#: ../xffm/fm/dialog/notebook/menupopover.hh:231
+msgid   "Show hidden files"
+msgstr  "ಅಡಗಿಸಲಾದ ಕಡತಗಳನ್ನು ತೋರಿಸು"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:232
 #, fuzzy
-msgid   "Search packages"
-msgstr  "ಪ್ಯಾಕೇಜುಗಳಿಗಾಗಿ ಹುಡುಕಲಾಗುತ್ತಿದೆ"
+msgid   "Show Backup Files"
+msgstr  "ಅಯ್ದ ಕಡತಗಳನ್ನು ತೋರಿಸು(S)"
 
-#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
+#: ../xffm/fm/dialog/notebook/menupopover.hh:233
+#, fuzzy
+msgid   "Sort data in descending order"
+msgstr  "ತೆರೆಯಲ್ಪಟ್ಟ ಅನುಕ್ರಮದಲ್ಲಿ ವಿಂಗಡಿಸಲಾಗಿದೆ"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:235
+#, fuzzy
+msgid   "Sort by date"
+msgstr  "ಹೆಸರಿನ ಆಧಾರದಲ್ಲಿ ವಿಂಗಡಿಸು(N)"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:236
+#, fuzzy
+msgid   "Sort by size"
+msgstr  "ಹೆಸರಿನ ಆಧಾರದಲ್ಲಿ ವಿಂಗಡಿಸು(N)"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:237 ../xffm/common/gtk.hh:81
+msgid   "Exit"
+msgstr  "ನಿರ್ಗಮಿಸು"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:270
+msgid   "Main menu"
+msgstr  "ಮುಖ್ಯ ಪರಿವಿಡಿ"
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:375
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:377
+#, fuzzy
+msgid   "Go to"
+msgstr  "%s ಗೆ ತೆರಳು"
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:382
+#: ../xffm/fm/view/local/popup.hh:887 ../xffm/fm/view/local/popup.hh:981
+msgid   "Specify Output Directory..."
+msgstr  "ಉತ್ಪನ್ನಗಳ (output) ಕಡತಕೋಶವನ್ನು ನಿರ್ದೇಶಿಸಿ..."
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:409
+msgid   "Not a directory"
+msgstr  "ಕೋಶವಾಗಿಲ್ಲ"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid   "Renice Process"
+msgstr  "ರಿನೈಸ್ ಪ್ರಕ್ರಿಯೆ"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid   "Suspend"
+msgstr  "ಅಮಾನತ್ತು"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid   "Continue"
+msgstr  "ಮುಂದುವರೆ (C)"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid   "Interrupt"
+msgstr  "ತಡೆ"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid   "Hangup"
+msgstr  "ನೇತಾಡು"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+#, fuzzy
+msgid   "User 1 (USR1)"
+msgstr  "ಬಳಕೆದಾರ ಮಾಹಿತಿ (WHOIS)"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+#, fuzzy
+msgid   "User 2 (USR2)"
+msgstr  "ಬಳಕೆದಾರ ಮಾಹಿತಿ (WHOIS)"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+#, fuzzy
+msgid   "Terminate Task"
+msgstr  "%s ಅನ್ನು  ಅಂತ್ಯಗೊಳಿಸು"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+msgid   "Abort"
+msgstr  "ಸ್ಥಗಿತಗೊಳಿಸು"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:138
+msgid   "Kill"
+msgstr  "ಕೊಲ್ಲು"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
+#, fuzzy
+msgid   "Segmentation fault"
+msgstr  "ಸೆಗ್ಮೆಂಟೇಶನ್ ಉಲ್ಲಂಘನೆ"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:216
+msgid   "PID"
+msgstr  "PID"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:59
+msgid   "loading..."
+msgstr  "ಲೋಡ್ ಆಗುತ್ತಿದೆ..."
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:151
+#: ../xffm/fm/dialog/notebook/page/page.hh:167
+#, fuzzy
+msgid   "Confirm Replace"
+msgstr  "ಅಳಿಸಿಹಾಕುವುದನ್ನು ಖಚಿತಪಡಿಸು"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:153
+#, fuzzy
+msgid   "Destination File"
+msgstr  "ನಿರ್ದೇಶಿತ ಕಡತದ ಹೆಸರು"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:166
 #, fuzzy, c-format
-msgid   "Loading %s...%s"
-msgstr  "ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ..."
+msgid   "The output file %s already exists, do you want to overwrite it?"
+msgstr  "ಕಡತ '%s' ಈಗಾಗಲೆ ಅಸ್ತಿತ್ವದಲ್ಲಿದೆ.\n"
+        "ನೀವದನ್ನು ತಿದ್ದಿ ಬರೆಯಲು ಇಚ್ಛಿಸುತ್ತೀರಾ?"
 
-#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
-msgid   "Please Wait..."
-msgstr  "ದಯವಿಟ್ಟು ಕಾಯಿರಿ..."
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
+#, fuzzy
+msgid   "Embedded Terminal"
+msgstr  "ಆದೇಶತೆರೆಯನ್ನು ತೆರೆ (e)"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
+#, fuzzy
+msgid   "All items in the iconview."
+msgstr  "ಈ ಕಿಟಕಿಯ ಎಲ್ಲಾ ಅಂಶಗಳನ್ನು ಆರಿಸು"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
+#, fuzzy
+msgid   "Scripting"
+msgstr  "ಸ್ಕ್ರಿಪ್ಟ್"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
+#, fuzzy
+msgid   "Clear Log"
+msgstr  "ಪಟ್ಟಿಯನ್ನು ಅಳಿಸು"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
+msgid   "Terminal font"
+msgstr  "ಟರ್ಮಿನಲ್ ಅಕ್ಷರಶೈಲಿ"
+
+#: ../xffm/fm/dialog/clipboard.hh:23 ../xffm/common/dnd.hh:41
+msgid   "Copying files locally"
+msgstr  "ಕಡತಗಳನ್ನು ಸ್ಥಳೀಯವಾಗಿ ಪ್ರತಿ ಮಾಡಲಾಗುತ್ತಿದೆ"
+
+#: ../xffm/fm/dialog/clipboard.hh:30 ../xffm/common/gio.hh:83
+#: ../xffm/common/dnd.hh:35
+#, fuzzy
+msgid   "Moving files"
+msgstr  "ಕಡತಗಳನ್ನು ಸ್ಥಳಾಂತರಿಸಲಾಗುತ್ತಿದೆ"
+
+#: ../xffm/fm/dialog/dialog.hh:122
+msgid   "Removed"
+msgstr  "ತೆಗೆದು ಹಾಕಲಾಗಿದೆ"
+
+#: ../xffm/fm/dialog/dialog.hh:143
+#, fuzzy
+msgid   "Detected device(s):"
+msgstr  "ಸಾಧನಗಳನ್ನು ಪತ್ತೆಹಚ್ಚು(D)"
 
 #: ../xffm/fm/view/local/model.hh:124
 #, c-format
@@ -786,36 +908,32 @@ msgstr  "ಕಡತ: %s"
 msgid   "Loaded %d of %d articles"
 msgstr  "ಲೋಡ್ ಮಾಡಲಾದ ಕಡತಗಳು(L):"
 
-#: ../xffm/fm/view/local/rm.hh:59
-#, c-format
-msgid   "Delete %s"
-msgstr  "%s ಅನ್ನು ಅಳಿಸಿಹಾಕು (D)"
-
-#: ../xffm/fm/view/local/rm.hh:61
-msgid   "Warning: "
-msgstr  "ಎಚ್ಚರಿಕೆ: "
-
-#: ../xffm/fm/view/local/rm.hh:61 ../xffm/fm/view/local/popup.hh:565
-#, fuzzy
-msgid   "Multiple selections"
-msgstr  "ಅನೇಕ ಸ್ಥಳಗಳನ್ನು ಸಜ್ಜುಗೊಳಿಸಲಾಗಿದೆ"
-
-#: ../xffm/fm/view/local/rm.hh:92
-msgid   "Remove"
-msgstr  "ತೆಗೆದು ಹಾಕು(R)"
-
-#: ../xffm/fm/view/local/rm.hh:142
-#, fuzzy
-msgid   "Apply to all"
-msgstr  "ಎಲ್ಲರಿಗೂ ಉತ್ತರಿಸು (R)"
-
-#: ../xffm/fm/view/local/rm.hh:183
-msgid   "Trash"
-msgstr  "ಕಸದ ಬುಟ್ಟಿ"
+#: ../xffm/fm/view/local/popup.hh:85 ../xffm/fm/view/local/popup.hh:142
+#: ../xffm/fm/view/local/popup.hh:1287 ../xffm/fm/view/local/popup.hh:1294
+#: ../xffm/fm/view/local/popup.hh:1305 ../xffm/fm/view/local/popup.hh:1312
+#: ../xffm/common/gtk.hh:83
+msgid   "Open with"
+msgstr  "ಇದರೊಂದಿಗೆ ತೆಗೆ"
 
 #: ../xffm/fm/view/local/popup.hh:94
 msgid   "New"
 msgstr  "ಹೊಸ(N)"
+
+#: ../xffm/fm/view/local/popup.hh:95 ../xffm/fm/view/local/popup.hh:145
+#: ../xffm/fm/view/root/popup.hh:136 ../xffm/fm/view/fstab/popup.hh:20
+#: ../xffm/common/gtk.hh:94
+msgid   "Open in New Tab"
+msgstr  "ಹೊಸ ಹಾಳೆಯಲ್ಲಿ ತೆರೆ  (T)"
+
+#: ../xffm/fm/view/local/popup.hh:99 ../xffm/fm/view/local/popup.hh:155
+#: ../xffm/common/gtk.hh:87
+msgid   "Copy"
+msgstr  "ನಕಲಿಸು(C)"
+
+#: ../xffm/fm/view/local/popup.hh:100 ../xffm/fm/view/local/popup.hh:156
+#: ../xffm/common/gtk.hh:85
+msgid   "Cut"
+msgstr  "ಕತ್ತರಿಸು(u)"
 
 #: ../xffm/fm/view/local/popup.hh:101 ../xffm/fm/view/local/popup.hh:159
 #: ../xffm/fm/view/local/popup.hh:232 ../xffm/fm/view/local/popup.hh:234
@@ -826,6 +944,11 @@ msgstr  "ಪಠ್ಯವನ್ನು ಅಂಟಿಸು(T)"
 #: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:158
 msgid   "There is nothing on the clipboard to paste."
 msgstr  "ಅಂಟಿಸಲು ಕ್ಲಿಪ್‌ಬೋರ್ಡಿನಲ್ಲಿ ಏನೂ ಇಲ್ಲ."
+
+#: ../xffm/fm/view/local/popup.hh:103 ../xffm/fm/view/local/popup.hh:160
+#: ../xffm/fm/view/local/rm.hh:176 ../xffm/common/gtk.hh:89
+msgid   "Delete"
+msgstr  "ಅಳಿಸಿಹಾಕು"
 
 #: ../xffm/fm/view/local/popup.hh:106
 msgid   "Select All"
@@ -857,6 +980,19 @@ msgstr  "ಈ ಕಡತಕೋಶಕ್ಕೆ ಸಂಬಂಧಿಸಿದ ಪರ�
 msgid   "Unmount the volume associated with this folder"
 msgstr  "ಈ ಕಡತಕೋಶಕ್ಕೆ ಸಂಬಂಧಿಸಿದ ಪರಿಮಾಣವನ್ನು ಅವರೋಹಿಸಿ"
 
+#: ../xffm/fm/view/local/popup.hh:151 ../xffm/common/gtk.hh:73
+msgid   "Add bookmark"
+msgstr  "ಬುಕ್ಮಾರ್ಕನ್ನು ಸೇರಿಸು(b)"
+
+#: ../xffm/fm/view/local/popup.hh:152 ../xffm/fm/view/root/popup.hh:137
+#: ../xffm/common/gtk.hh:75
+msgid   "Remove bookmark"
+msgstr  "ಪುಟಗುರುತನ್ನು ತೆಗೆದುಹಾಕು"
+
+#: ../xffm/fm/view/local/popup.hh:157 ../xffm/common/gtk.hh:71
+msgid   "Paste"
+msgstr  "ಅಂಟಿಸು(P)"
+
 #: ../xffm/fm/view/local/popup.hh:161 ../xffm/fm/view/local/popup.hh:1231
 msgid   "Rename"
 msgstr  "ಹೆಸರನ್ನು ಬದಲಾಯಿಸು (R)"
@@ -877,6 +1013,11 @@ msgstr  "ಗುಣಲಕ್ಷಣಗಳು"
 msgid   "Files:"
 msgstr  "ಕಡತಗಳು (F):"
 
+#: ../xffm/fm/view/local/popup.hh:565 ../xffm/fm/view/local/rm.hh:61
+#, fuzzy
+msgid   "Multiple selections"
+msgstr  "ಅನೇಕ ಸ್ಥಳಗಳನ್ನು ಸಜ್ಜುಗೊಳಿಸಲಾಗಿದೆ"
+
 #: ../xffm/fm/view/local/popup.hh:753
 #, fuzzy
 msgid   "Select items"
@@ -896,11 +1037,6 @@ msgstr  "ಯಾವುದೆ ಆಯ್ಕೆ ಇಲ್ಲ"
 msgid   "No matches."
 msgstr  "ಯಾವುವೂ ಹೊಂದಿಕೆಯಾಗುವುದಿಲ್ಲ"
 
-#: ../xffm/fm/view/local/popup.hh:887 ../xffm/fm/view/local/popup.hh:981
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:382
-msgid   "Specify Output Directory..."
-msgstr  "ಉತ್ಪನ್ನಗಳ (output) ಕಡತಕೋಶವನ್ನು ನಿರ್ದೇಶಿಸಿ..."
-
 #: ../xffm/fm/view/local/popup.hh:1058
 #, fuzzy
 msgid   "Create new..."
@@ -919,6 +1055,11 @@ msgstr  "ಹೆಸರಿಲ್ಲದ"
 msgid   "Another file with the same name already exists in “%s”."
 msgstr  "“%s” ನಲ್ಲಿ ಇದೇ ಹೆಸರಿನ ಬೇರೊಂದು ಕಡತವು ಅಸ್ತಿತ್ವದಲ್ಲಿದೆ."
 
+#: ../xffm/fm/view/local/popup.hh:1109 ../xffm/fm/view/local/popup.hh:1291
+#: ../xffm/fm/view/local/popup.hh:1309 ../xffm/common/util.hh:1452
+msgid   "Run in Terminal"
+msgstr  "ಟರ್ಮಿನಲ್‍ನಲ್ಲಿ ಚಲಾಯಿಸು"
+
 #: ../xffm/fm/view/local/popup.hh:1112
 #, fuzzy
 msgid   "Arguments for the Command"
@@ -932,11 +1073,6 @@ msgstr  "ನೀವು ಅನೇಕ ಕಡತಗಳನ್ನು ಅಥವ ಕಡ�
 #, fuzzy
 msgid   "Invalid entry"
 msgstr  "ಅಮಾನ್ಯವಾದ ಮನವಿ"
-
-#: ../xffm/fm/view/local/view.hh:177
-#, c-format
-msgid   "The volume '%s' is not mounted."
-msgstr  "ಪರಿಮಾಣ '%s' ಅನ್ನು ಆರೋಹಿಸಲಾಗಿಲ್ಲ."
 
 #: ../xffm/fm/view/local/properties.hh:245
 #, fuzzy
@@ -964,6 +1100,37 @@ msgstr  "ಯಶಸ್ವಿಯಾಗಿ ಕಸದಬುಟ್ಟಿಗೆ ಸ್
 msgid   "Source:"
 msgstr  "ಆಕರ:"
 
+#: ../xffm/fm/view/local/rm.hh:59
+#, c-format
+msgid   "Delete %s"
+msgstr  "%s ಅನ್ನು ಅಳಿಸಿಹಾಕು (D)"
+
+#: ../xffm/fm/view/local/rm.hh:61
+msgid   "Warning: "
+msgstr  "ಎಚ್ಚರಿಕೆ: "
+
+#: ../xffm/fm/view/local/rm.hh:92
+msgid   "Remove"
+msgstr  "ತೆಗೆದು ಹಾಕು(R)"
+
+#: ../xffm/fm/view/local/rm.hh:142
+#, fuzzy
+msgid   "Apply to all"
+msgstr  "ಎಲ್ಲರಿಗೂ ಉತ್ತರಿಸು (R)"
+
+#: ../xffm/fm/view/local/rm.hh:165 ../xffm/common/gtk.hh:91
+msgid   "Shred"
+msgstr  ""
+
+#: ../xffm/fm/view/local/rm.hh:183
+msgid   "Trash"
+msgstr  "ಕಸದ ಬುಟ್ಟಿ"
+
+#: ../xffm/fm/view/local/view.hh:177
+#, c-format
+msgid   "The volume '%s' is not mounted."
+msgstr  "ಪರಿಮಾಣ '%s' ಅನ್ನು ಆರೋಹಿಸಲಾಗಿಲ್ಲ."
+
 #: ../xffm/fm/view/root/model.hh:82
 #, fuzzy
 msgid   "Root Directory"
@@ -972,23 +1139,6 @@ msgstr  "ದೂರಸ್ಥ ಕೋಶ:"
 #: ../xffm/fm/view/root/model.hh:98
 msgid   "This is the root of the filesystem"
 msgstr  "ಇದು ಕಡತವ್ಯವಸ್ಥೇಯ ಆದ್ಯ ಕಡತಕೋಶ (ರೂಟ್)"
-
-#: ../xffm/fm/view/root/model.hh:110
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:256
-#, fuzzy
-msgid   "Home Directory"
-msgstr  "ನೆಲೆ ಕಡತಕೋಶ"
-
-#: ../xffm/fm/view/root/model.hh:137
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:266
-#, fuzzy
-msgid   "Trash bin"
-msgstr  "ಕಸಬುಟ್ಟಿಗೆ ಹಾಕಿದ್ದು"
-
-#: ../xffm/fm/view/root/model.hh:168 ../xffm/fm/view/fstab/popup.hh:29
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:261
-msgid   "Disk Image Mounter"
-msgstr  "ಡಿಸ್ಕ್‍ ಚಿತ್ರಿಕೆಯನ್ನು ಏರಿಸುವ ಸಾಧನ"
 
 #: ../xffm/fm/view/root/model.hh:176 ../xffm/fm/view/root/model.hh:191
 msgid   "Mount local disks and devices"
@@ -1074,14 +1224,81 @@ msgstr  "%s ಅನ್ನು ಅವರೋಹಿಸು(m)"
 msgid   "Mounting %s"
 msgstr  "%s ಅನ್ನು ಆರೋಹಿಸು(M)"
 
-#: ../xffm/fm/view/base/signals.hh:838
-#, fuzzy
-msgid   "Trash is empty"
-msgstr  "ಟ್ಯಾಬ್ಲೆಟ್ ಖಾಲಿ ಇದೆ"
+#: ../xffm/fm/view/pkg/model.hh:41 ../xffm/fm/view/pkg/model.hh:52
+msgid   "Add or remove software installed on the system"
+msgstr  "ಗಣಕಕ್ಕೆ ತಂತ್ರಾಂಶವನ್ನು ಸೇರಿಸು ಅಥವ ಅನುಸ್ಥಾಪಿತಗೊಂಡಿರುವುದನ್ನು ತೆಗೆದು ಹಾಕು"
 
-#: ../xffm/fm/view/base/signals.hh:840
-msgid   "Directory does not exist."
-msgstr  "ಕೋಶವು ಅಸ್ತಿತ್ವದಲ್ಲಿಲ್ಲ."
+#: ../xffm/fm/view/pkg/model.hh:111
+msgid   "String"
+msgstr  "ಸ್ಟ್ರಿಂಗ್"
+
+#: ../xffm/fm/view/pkg/model.hh:116
+msgid   "Waiting for search results"
+msgstr  "ಹುಡುಕು ಫಲಿತಾಂಶಗಳಿಗಾಗಿ ಕಾಯಲಾಗುತ್ತಿದೆ"
+
+#: ../xffm/fm/view/pkg/model.hh:174
+msgid   "No results"
+msgstr  "ಫಲಿತಾಂಶಗಳಿಲ್ಲ"
+
+#: ../xffm/fm/view/pkg/model.hh:373
+#, fuzzy
+msgid   "Currently busy\n"
+msgstr  "ಚಲಾವಣೆ ನಾಣ್ಯದ ಚಿಹ್ನೆಗಳು"
+
+#: ../xffm/fm/view/pkg/popup.hh:44
+#, fuzzy
+msgid   "Update Database"
+msgstr  "ಯು.ಎಸ್ (ಹಕ್ಕು ಪತ್ರ) ಪೇಟೆಂಟ್ ದತ್ತಸಂಚಯ"
+
+#: ../xffm/fm/view/pkg/popup.hh:45
+#, fuzzy
+msgid   "Fetch"
+msgstr  "ಸ್ಕೆಚ್"
+
+#: ../xffm/fm/view/pkg/popup.hh:46
+#, fuzzy
+msgid   "Install --dry-run"
+msgstr  "ಘಟಕವನ್ನು ಅನುಸ್ಥಾಪಿಸು(I)"
+
+#: ../xffm/fm/view/pkg/popup.hh:47
+msgid   "Install"
+msgstr  "ಅನುಸ್ಥಾಪಿಸು(I)"
+
+#: ../xffm/fm/view/pkg/popup.hh:48
+#, fuzzy
+msgid   "Uninstall --dry-run"
+msgstr  "ಅನುಸ್ಥಾಪಿಸಲಾಗಿದ್ದನ್ನು ತೆಗೆದು ಹಾಕಲಾಗುತ್ತಿದೆ"
+
+#: ../xffm/fm/view/pkg/popup.hh:49
+msgid   "Uninstall"
+msgstr  "ಅನುಸ್ಥಾಪಿಸಿದ್ದನ್ನು ತೆಗೆದುಹಾಕು"
+
+#: ../xffm/fm/view/pkg/popup.hh:50
+msgid   "Information"
+msgstr  "ಮಾಹಿತಿ"
+
+#: ../xffm/fm/view/pkg/popup.hh:140
+msgid   "Version"
+msgstr  "ಆವೃತ್ತಿ"
+
+#: ../xffm/fm/view/pkg/popup.hh:149
+#, fuzzy
+msgid   "Go up"
+msgstr  "ಮೇಲಕ್ಕೆ ತೆರಳು"
+
+#: ../xffm/fm/view/pkg/popup.hh:152
+#, fuzzy
+msgid   "Search packages"
+msgstr  "ಪ್ಯಾಕೇಜುಗಳಿಗಾಗಿ ಹುಡುಕಲಾಗುತ್ತಿದೆ"
+
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
+#, fuzzy, c-format
+msgid   "Loading %s...%s"
+msgstr  "ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ..."
+
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
+msgid   "Please Wait..."
+msgstr  "ದಯವಿಟ್ಟು ಕಾಯಿರಿ..."
 
 #: ../xffm/fm/view/treeview.hh:17
 msgid   "Name"
@@ -1100,303 +1317,86 @@ msgstr  "ದಿನಾಂಕ"
 msgid   "Mimetype"
 msgstr  "ಮೈಮ್‌ಬಗೆಗಳು:"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
+#: ../xffm/fm/view/base/signals.hh:838
 #, fuzzy
-msgid   "Embedded Terminal"
-msgstr  "ಆದೇಶತೆರೆಯನ್ನು ತೆರೆ (e)"
+msgid   "Trash is empty"
+msgstr  "ಟ್ಯಾಬ್ಲೆಟ್ ಖಾಲಿ ಇದೆ"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
+#: ../xffm/fm/view/base/signals.hh:840
+msgid   "Directory does not exist."
+msgstr  "ಕೋಶವು ಅಸ್ತಿತ್ವದಲ್ಲಿಲ್ಲ."
+
+#: ../xffm/common/settings.hh:30
 #, fuzzy
-msgid   "All items in the iconview."
-msgstr  "ಈ ಕಿಟಕಿಯ ಎಲ್ಲಾ ಅಂಶಗಳನ್ನು ಆರಿಸು"
+msgid   "New File:"
+msgstr  "ಹೊಸ ಕಡತ"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
+#: ../xffm/common/gio.hh:81
+msgid   "Copying files"
+msgstr  "ಕಡತಗಳನ್ನು ನಕಲಿಸಲಾಗುತ್ತಿದೆ"
+
+#: ../xffm/common/gio.hh:85
 #, fuzzy
-msgid   "Scripting"
-msgstr  "ಸ್ಕ್ರಿಪ್ಟ್"
+msgid   "linking"
+msgstr  "ಖಾಲಿ ಮಾಡಲಾಗುತ್ತಿದೆ"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
+#: ../xffm/common/gio.hh:87
+msgid   "rename"
+msgstr  "rename"
+
+#: ../xffm/common/gio.hh:426
+#, c-format
+msgid   "(%d of %d)"
+msgstr  "(%d, %d ರಲ್ಲಿ)"
+
+#: ../xffm/common/dnd.hh:47
 #, fuzzy
-msgid   "Clear Log"
-msgstr  "ಪಟ್ಟಿಯನ್ನು ಅಳಿಸು"
+msgid   "Create Link"
+msgstr  "ಕೊಂಡಿ ರಚಿಸುವುದನ್ನು ರದ್ದುಗೊಳಿಸು (U)"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
-msgid   "Terminal font"
-msgstr  "ಟರ್ಮಿನಲ್ ಅಕ್ಷರಶೈಲಿ"
+#: ../xffm/common/util.hh:1404
+#, c-format
+msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
+        "attribute on that file."
+msgstr  ""
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
-msgid   "Renice Process"
-msgstr  "ರಿನೈಸ್ ಪ್ರಕ್ರಿಯೆ"
+#: ../xffm/common/util.hh:1406 ../xffm/common/util.hh:1441
+#, c-format
+msgid   "Open with %s"
+msgstr  "%s ನೊಂದಿಗೆ ತೆರೆ"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
-msgid   "Suspend"
-msgstr  "ಅಮಾನತ್ತು"
+#: ../xffm/common/util.hh:1406
+msgid   "Text Editor"
+msgstr  "ಪಠ್ಯ ಸಂಪಾದಕ"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
-msgid   "Continue"
-msgstr  "ಮುಂದುವರೆ (C)"
+#: ../xffm/common/util.hh:1443 ../xffm/common/gtk.hh:69
+msgid   "Execute Shell Command"
+msgstr  "ಷೆಲ್ ಆದೇಶವನ್ನು ನಿರ್ವಹಿಸು"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid   "Interrupt"
-msgstr  "ತಡೆ"
+#: ../xffm/common/util.hh:1447
+msgid   "Console: quickly run single commands -- write a command here and "
+        "press enter."
+msgstr  ""
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid   "Hangup"
-msgstr  "ನೇತಾಡು"
+#: ../xffm/common/gtk.hh:352 ../xffm/common/gtk.hh:360
+msgid   "Help"
+msgstr  "ಸಹಾಯ(H)"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+#: ../xffm/common/run.hh:338
+msgid   "error"
+msgstr  "ದೋಷ"
+
+#: ../xffm/common/run.hh:342
 #, fuzzy
-msgid   "User 1 (USR1)"
-msgstr  "ಬಳಕೆದಾರ ಮಾಹಿತಿ (WHOIS)"
+msgid   "warning"
+msgstr  "ಎಚ್ಚರಿಕೆ:"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
-#, fuzzy
-msgid   "User 2 (USR2)"
-msgstr  "ಬಳಕೆದಾರ ಮಾಹಿತಿ (WHOIS)"
+#: ../xffm/common/preview.hh:581
+msgid   "Empty file"
+msgstr  "ಖಾಲಿ ಕಡತ"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
-#, fuzzy
-msgid   "Terminate Task"
-msgstr  "%s ಅನ್ನು  ಅಂತ್ಯಗೊಳಿಸು"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
-msgid   "Abort"
-msgstr  "ಸ್ಥಗಿತಗೊಳಿಸು"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:138
-msgid   "Kill"
-msgstr  "ಕೊಲ್ಲು"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
-#, fuzzy
-msgid   "Segmentation fault"
-msgstr  "ಸೆಗ್ಮೆಂಟೇಶನ್ ಉಲ್ಲಂಘನೆ"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:216
-msgid   "PID"
-msgstr  "PID"
-
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:375
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:377
-#, fuzzy
-msgid   "Go to"
-msgstr  "%s ಗೆ ತೆರಳು"
-
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:409
-msgid   "Not a directory"
-msgstr  "ಕೋಶವಾಗಿಲ್ಲ"
-
-#: ../xffm/fm/dialog/notebook/page/page.hh:59
-msgid   "loading..."
-msgstr  "ಲೋಡ್ ಆಗುತ್ತಿದೆ..."
-
-#: ../xffm/fm/dialog/notebook/page/page.hh:151
-#: ../xffm/fm/dialog/notebook/page/page.hh:167
-#, fuzzy
-msgid   "Confirm Replace"
-msgstr  "ಅಳಿಸಿಹಾಕುವುದನ್ನು ಖಚಿತಪಡಿಸು"
-
-#: ../xffm/fm/dialog/notebook/page/page.hh:153
-#, fuzzy
-msgid   "Destination File"
-msgstr  "ನಿರ್ದೇಶಿತ ಕಡತದ ಹೆಸರು"
-
-#: ../xffm/fm/dialog/notebook/page/page.hh:166
+#: ../xffm/common/preview.hh:636
 #, fuzzy, c-format
-msgid   "The output file %s already exists, do you want to overwrite it?"
-msgstr  "ಕಡತ '%s' ಈಗಾಗಲೆ ಅಸ್ತಿತ್ವದಲ್ಲಿದೆ.\n"
-        "ನೀವದನ್ನು ತಿದ್ದಿ ಬರೆಯಲು ಇಚ್ಛಿಸುತ್ತೀರಾ?"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:11
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:214
-#, fuzzy
-msgid   "Remove Button Contents"
-msgstr  "ಕಡತಕೋಶದ ವಿಷಯಗಳನ್ನು ತೆಗೆದು ಹಾಕಿ"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:67
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:209
-#, fuzzy
-msgid   "Add custom content"
-msgstr  "ನನ್ನಿಚ್ಚೆಯ ಅಕ್ಷರ ಶೈಲಿಯನ್ನು ಉಪಯೋಗಿಸು (f)"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:68
-#, fuzzy
-msgid   "Select file to load"
-msgstr  "ಚಲಾಯಿಸಲು ಒಂದು ಕಡತವನ್ನು ಆರಿಸಿ"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:125
-#, fuzzy, c-format
-msgid   "Cannot load file %s. Reason: %s"
-msgstr  "ಕಡತವನ್ನು ಲೋಡ್ ಮಾಡಲಾಗಲಿಲ್ಲ: %s\n"
-        "\n"
-        "ವಿವರಗಳು: %s"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:154
-#, fuzzy
-msgid   "You need to restart the application"
-msgstr  "ನೀವು ಅನ್ವಯವನ್ನು ಮರಳಿ ಆರಂಭಿಸಬೇಕಾಗುತ್ತದೆ."
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:244
-msgid   "Open a New Window"
-msgstr  "ಹೊಸ ಕಿಟಕಿಯನ್ನು ತೆರೆ"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:250
-#, fuzzy
-msgid   "Differences"
-msgstr  "ವ್ಯತ್ಯಾಸ"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:178
-#, fuzzy
-msgid   "Open menu"
-msgstr  "ಮೆನುವನ್ನು ತೆರೆ(O)"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:230
-#, fuzzy
-msgid   "View as list"
-msgstr  "ಹೊಸ ಕಾರ್ಯ ಪಟ್ಟಿ"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:231
-msgid   "Show hidden files"
-msgstr  "ಅಡಗಿಸಲಾದ ಕಡತಗಳನ್ನು ತೋರಿಸು"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:232
-#, fuzzy
-msgid   "Show Backup Files"
-msgstr  "ಅಯ್ದ ಕಡತಗಳನ್ನು ತೋರಿಸು(S)"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:233
-#, fuzzy
-msgid   "Sort data in descending order"
-msgstr  "ತೆರೆಯಲ್ಪಟ್ಟ ಅನುಕ್ರಮದಲ್ಲಿ ವಿಂಗಡಿಸಲಾಗಿದೆ"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:235
-#, fuzzy
-msgid   "Sort by date"
-msgstr  "ಹೆಸರಿನ ಆಧಾರದಲ್ಲಿ ವಿಂಗಡಿಸು(N)"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:236
-#, fuzzy
-msgid   "Sort by size"
-msgstr  "ಹೆಸರಿನ ಆಧಾರದಲ್ಲಿ ವಿಂಗಡಿಸು(N)"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:270
-msgid   "Main menu"
-msgstr  "ಮುಖ್ಯ ಪರಿವಿಡಿ"
-
-#: ../xffm/fm/dialog/notebook/notebook.hh:56
-msgid   "Long press time"
-msgstr  "ಬಹಳ ಹೊತ್ತಿನವರೆಗೆ ಒತ್ತಿ ಹಿಡಿಯುವ ಸಮಯ"
-
-#: ../xffm/fm/dialog/dialog.hh:122
-msgid   "Removed"
-msgstr  "ತೆಗೆದು ಹಾಕಲಾಗಿದೆ"
-
-#: ../xffm/fm/dialog/dialog.hh:143
-#, fuzzy
-msgid   "Detected device(s):"
-msgstr  "ಸಾಧನಗಳನ್ನು ಪತ್ತೆಹಚ್ಚು(D)"
-
-#: ../xffm/response/commandresponse.hh:19
-msgid   "Running"
-msgstr  "ಚಲಾಯಿಸಲಾಗುತ್ತಿದೆ"
-
-#: ../xffm/response/commandresponse.hh:24
-#, fuzzy
-msgid   "Waiting for operation to finish..."
-msgstr  "ದೃಢೀಕರಣಕ್ಕಾಗಿ ಕಾಯಲಾಗುತ್ತಿದೆ"
-
-#: ../xffm/response/passwdresponse.hh:179
-#, fuzzy
-msgid   "User Input"
-msgstr  "ಮೌಸ್ ಪ್ರದಾನ(ಇನ್‍ಪುಟ್)"
-
-#: ../xffm/response/passwdresponse.hh:195
-#, fuzzy
-msgid   "Response Requested"
-msgstr  "ಪ್ರತಿಕ್ರಿಯೆ ಹೊರಗೆ"
-
-#: ../xffm/response/passwdresponse.hh:242 ../xffm/response/entryresponse.hh:439
-msgid   "Ok"
-msgstr  "ಸರಿ"
-
-#: ../xffm/response/customresponse.hh:55
-#, fuzzy
-msgid   "Execute command"
-msgstr  "ಆದೇಶಗ್ರಾಹಿ (ಶೆಲ್) ಆದೇಶಗಳನ್ನು ಚಾಲಯಿಸುತ್ತದೆ"
-
-#: ../xffm/response/customresponse.hh:103
-msgid   "Source File"
-msgstr  "ಆಕರ ಕಡತ"
-
-#: ../xffm/response/timeoutresponse.hh:57
-msgid   "Dismiss"
-msgstr  "ವಜಾಗೊಳಿಸು (D)"
-
-#: ../xffm/response/commandprogressresponse.hh:31
-msgid   "Items:"
-msgstr  "ವಸ್ತುಗಳು(e):"
-
-#: ../xffm/response/chooserresponse.hh:23
-msgid   "Open"
-msgstr  "ತೆರೆ(O)"
-
-#: ../xffm/response/chooserresponse.hh:56
-msgid   "Choose directory"
-msgstr  "ಕೋಶವನ್ನು ಆರಿಸು"
-
-#: ../xffm/response/chooserresponse.hh:60
-msgid   "Choose file"
-msgstr  "ಕಡತವನ್ನು ಆರಿಸು"
-
-#: ../xffm/completion/bash.hh:133
-#, fuzzy
-msgid   "Completion mode:"
-msgstr  "ಪೂರ್ಣಗೊಳಿಕೆಯ ಸಂಜ್ಞೆ"
-
-#: ../xffm/completion/bash.hh:134
-msgid   "command"
-msgstr  "ಆಜ್ಞೆ"
-
-#: ../xffm/completion/bash.hh:135
-msgid   "file"
-msgstr  "ಕಡತ"
-
-#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
-#, fuzzy
-msgid   "Options >>"
-msgstr  "ಆಯ್ಕೆಗಳು"
-
-#: ../xffm/completion/base.hh:28
-msgid   "Command"
-msgstr  "ಆಜ್ಞೆ"
-
-#: ../xffm/completion/base.hh:31
-msgid   "File"
-msgstr  "ಕಡತ(F)"
-
-#: ../xffm/completion/base.hh:34
-#, fuzzy
-msgid   "Command history"
-msgstr  "ನಕಲುಫಲಕದ ಚರಿತ್ರೆ"
-
-#: ../xffm/completion/base.hh:40
-msgid   "Variable"
-msgstr  "ಚರಮೌಲ್ಯ"
-
-#: ../xffm/completion/base.hh:43
-msgid   "Host"
-msgstr  "ಅತಿಥೇಯ"
-
-#: ../xffm/completion/base.hh:55
-#, fuzzy
-msgid   "Found no match"
-msgstr  "ಹೊಂದಿಸಲು ಪದ"
-
-#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
-msgid   "Matches"
-msgstr  "ತಾಳೆಯಾಗುವವು(M)"
-
-#: ../xffm/completion/base.hh:142
-msgid   "Too many files open"
-msgstr  "ಬಹಳಷ್ಟು ಕಡತಗಳು ತೆರೆದಿವೆ"
+msgid   "Cannot read from %s"
+msgstr  "ಸೀಡಿಯನ್ನು ಓದಲಾಗಿಲ್ಲ: %s"
 

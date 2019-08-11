@@ -1,4 +1,4 @@
-# Xffm+ translation file: vie ago  9 14:46:02 CDT 2019
+# Xffm+ translation file: dom ago 11 10:58:14 CDT 2019
 # Merged fron existing open source files
 # http://xffm.org
 #
@@ -6,7 +6,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: xffm+\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2019-08-09 12:32-0500\n"
+        "POT-Creation-Date: 2019-08-11 09:10-0500\n"
         "PO-Revision-Date: 2005-03-31 20:55-0700\n"
         "Last-Translator: Steve Murphy <murf@e-tools.com>\n"
         "Language-Team: Kinyarwanda <translation-team-rw@lists.sourceforge."
@@ -22,251 +22,81 @@ msgstr  "Project-Id-Version: xffm+\n"
 msgid   "No Read Permission"
 msgstr  "Uruhushya"
 
-#: ../xffm/find/dialog.hh:91 ../xffm/find/dialog.hh:143
-#: ../xffm/find/dialog.hh:604
-msgid   "Find"
-msgstr  "Gushaka"
+#: ../xffm/completion/base.hh:28
+msgid   "Command"
+msgstr  "Icyo wifuza"
 
-#: ../xffm/find/dialog.hh:167 ../xffm/find/fgr.hh:146
+#: ../xffm/completion/base.hh:31
+msgid   "File"
+msgstr  "Idosiye"
+
+#: ../xffm/completion/base.hh:34
 #, fuzzy
-msgid   "Recursive"
-msgstr  "Urwego rw'umutekano"
+msgid   "Command history"
+msgstr  "Amabwiriza"
 
-#: ../xffm/find/dialog.hh:170 ../xffm/find/fgr.hh:142
-msgid   "Find hidden files and directories"
-msgstr  ""
-
-#: ../xffm/find/dialog.hh:173 ../xffm/find/fgr.hh:138
-msgid   "Stay on single filesystem"
-msgstr  ""
-
-#: ../xffm/find/dialog.hh:176 ../xffm/find/signals.hh:66
-#: ../xffm/find/signals.hh:454
-msgid   "Results"
-msgstr  "Ibisubizo"
-
-#: ../xffm/find/dialog.hh:176
-#, fuzzy
-msgid   "Upper limit"
-msgstr  "Nkuru"
-
-#: ../xffm/find/dialog.hh:181
-msgid   "At Least"
-msgstr  ""
-
-#: ../xffm/find/dialog.hh:181 ../xffm/find/dialog.hh:186
-#, fuzzy
-msgid   "kBytes"
-msgstr  "Bayite"
-
-#: ../xffm/find/dialog.hh:186
-msgid   "At Most"
-msgstr  ""
-
-#: ../xffm/find/dialog.hh:192 ../xffm/completion/base.hh:37
+#: ../xffm/completion/base.hh:37 ../xffm/find/dialog.hh:192
 msgid   "User"
 msgstr  "Ukoresha"
 
-#: ../xffm/find/dialog.hh:197
-msgid   "Group"
-msgstr  "Itsinda"
+#: ../xffm/completion/base.hh:40
+msgid   "Variable"
+msgstr  "Impinduragaciro"
 
-#: ../xffm/find/dialog.hh:201
+#: ../xffm/completion/base.hh:43
+msgid   "Host"
+msgstr  "Ubuturo"
+
+#: ../xffm/completion/base.hh:55
 #, fuzzy
-msgid   "Octal Permissions"
-msgstr  "Uruhushya"
+msgid   "Found no match"
+msgstr  "Amagambobanga ntahura"
 
-#: ../xffm/find/dialog.hh:206
-msgid   "SUID"
+#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
+msgid   "Matches"
 msgstr  ""
 
-#: ../xffm/find/dialog.hh:206 ../xffm/fm/view/local/popup.hh:1102
-#, fuzzy
-msgid   "Executable"
-msgstr  "Gukora"
-
-#: ../xffm/find/dialog.hh:214 ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168
-msgid   "Minutes"
-msgstr  "Iminota"
-
-#: ../xffm/find/dialog.hh:219 ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171
-msgid   "Hours"
-msgstr  "amasaha"
-
-#: ../xffm/find/dialog.hh:224 ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174
-msgid   "Days"
-msgstr  "Iminsi"
-
-#: ../xffm/find/dialog.hh:230
-#, fuzzy
-msgid   "Months"
-msgstr  "Ukwezi"
-
-#: ../xffm/find/dialog.hh:241
-#, fuzzy
-msgid   "File type : "
-msgstr  "Ubwoko bw'idosiye"
-
-#: ../xffm/find/dialog.hh:255 ../xffm/find/dialog.hh:595
-#: ../xffm/common/gtk.hh:79 ../xffm/fm/dialog/notebook/page/page.hh:71
-msgid   "Close"
-msgstr  "Gufunga"
-
-#: ../xffm/find/dialog.hh:263 ../xffm/find/dialog.hh:363
-#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
-#: ../xffm/find/fgr.hh:176 ../xffm/fm/view/treeview.hh:18
-msgid   "Details"
-msgstr  "Birambuye"
-
-#: ../xffm/find/dialog.hh:301 ../xffm/find/fgr.hh:124
-#: ../xffm/find/signals.hh:100
-msgid   "Path"
-msgstr  "Inzira"
-
-#: ../xffm/find/dialog.hh:334 ../xffm/find/fgr.hh:126
-#, fuzzy
-msgid   "Filter:"
-msgstr  "Muyunguruzi"
-
-#: ../xffm/find/dialog.hh:377
-#, fuzzy
-msgid   "Contains"
-msgstr  "ifite"
-
-#: ../xffm/find/dialog.hh:397
-#, fuzzy
-msgid   "Contains the text"
-msgstr  "Ubwoko bw'ibikubiyemo"
-
-#: ../xffm/find/dialog.hh:430
-#, fuzzy
-msgid   "Case Sensitive"
-msgstr  "Imyandikire y'inyuguti nkuru/nto"
-
-#: ../xffm/find/dialog.hh:442
-msgid   "Extended regexp"
+#: ../xffm/completion/base.hh:142
+msgid   "Too many files open"
 msgstr  ""
 
-#: ../xffm/find/dialog.hh:453
-msgid   "Include binary files"
-msgstr  ""
-
-#: ../xffm/find/dialog.hh:463 ../xffm/find/fgr.hh:212
-#, fuzzy
-msgid   "Line Count"
-msgstr  "Ibara"
-
-#: ../xffm/find/dialog.hh:489
-msgid   "Match"
-msgstr  ""
-
-#: ../xffm/find/dialog.hh:501
-msgid   "Anywhere"
-msgstr  ""
-
-#: ../xffm/find/dialog.hh:516
-msgid   "Whole words only"
-msgstr  ""
-
-#: ../xffm/find/dialog.hh:531
-msgid   "lines"
-msgstr  "Imirongo"
-
-#: ../xffm/find/dialog.hh:545 ../xffm/find/fgr.hh:210
-#, fuzzy
-msgid   "No match"
-msgstr  "Nta bihuje byabonetse"
-
-#: ../xffm/find/dialog.hh:577 ../xffm/find/signals.hh:368
-#: ../xffm/common/gtk.hh:409 ../xffm/fm/view/local/rm.hh:157
-#: ../xffm/fm/view/local/properties.hh:314
-#: ../xffm/response/entryresponse.hh:435 ../xffm/response/chooserresponse.hh:21
-msgid   "Cancel"
-msgstr  "Kureka"
-
-#: ../xffm/find/dialog.hh:587
-msgid   "Clear"
-msgstr  "Gusiba"
-
-#: ../xffm/find/dialog.hh:629
-msgid   "Edit"
-msgstr  "Kwandika"
-
-#: ../xffm/find/dialog.hh:743 ../xffm/find/dialog.hh:758
-#: ../xffm/common/preview.hh:460 ../xffm/common/util.hh:1354
-#: ../xffm/common/util.hh:1356 ../xffm/common/util.hh:1362
-#: ../xffm/common/util.hh:1364
-msgid   "unknown"
-msgstr  "ntibizwi"
-
-#: ../xffm/find/dialog.hh:772
-msgid   "Modified"
-msgstr  "Byahinduwe"
-
-#: ../xffm/find/dialog.hh:776
-msgid   "Created"
-msgstr  "Byaremwe"
-
-#: ../xffm/find/dialog.hh:780
-#, fuzzy
-msgid   "Accessed"
-msgstr  "Ntiwemerewe kwinjira"
-
-#: ../xffm/find/dialog.hh:1098
-msgid   "Basic rules:\n"
-        "\n"
-        "*  Will match any character zero or more times.\n"
-        "?  Will match any character exactly one time\n"
-        "[] Match any character within the [] \n"
-        "^  Match at beginning of string\n"
-        "$  Match at end of string \n"
-msgstr  ""
-
-#: ../xffm/find/dialog.hh:1107
-msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
-        "( ) : \n"
-        "In  basic regular expressions the metacharacters ?, +, {, |, (, "
-        "and ) \n"
-        "  lose their special meaning.\n"
-        "\n"
-        "The  period . matches  any  single  character.\n"
-        "The caret ^ matches at the start of line.\n"
-        "The dollar $ matches at the end of line.\n"
-        "\n"
-        "Characters within [ ] matches any single character in the list.\n"
-        "Characters within [^ ] matches any single character *not* in the "
-        "list.\n"
-        "Characters inside [ - ] matches a range of characters (ie [0-9] or "
-        "[a-z]).\n"
-        "\n"
-        "A regular expression may be followed by one of several repetition "
-        "operators:\n"
-        "?      The preceding item is optional and matched\n"
-        "       at most once.\n"
-        "*      The preceding item will be matched zero\n"
-        "       or more times.\n"
-        "+      The preceding item will be matched one or\n"
-        "       more times.\n"
-        "{n}    The preceding item is matched exactly n times.\n"
-        "{n,}   The preceding item is matched n or more times.\n"
-        "{n,m}  The preceding item is matched at least n times,\n"
-        "       but not more than m times.\n"
-        "\n"
-        "To match any reserved character, precede it with \\. \n"
-        "\n"
-        "Two regular expressions may be joined by the logical or operator |.\n"
-        "Two regular expressions may be concatenated.\n"
-        "\n"
-        "More information is available by typing \"man grep\"\n"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:124 ../xffm/completion/base.hh:339
+#: ../xffm/completion/base.hh:339 ../xffm/find/fgr.hh:124
 msgid   "Options:"
 msgstr  "Amahitamo:"
+
+#: ../xffm/completion/bash.hh:133
+#, fuzzy
+msgid   "Completion mode:"
+msgstr  "Byuzuye"
+
+#: ../xffm/completion/bash.hh:134
+#, fuzzy
+msgid   "command"
+msgstr  "Icyo wifuza"
+
+#: ../xffm/completion/bash.hh:135
+#, fuzzy
+msgid   "file"
+msgstr  "Ibijyana"
+
+#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
+#, fuzzy
+msgid   "Options >>"
+msgstr  "Amahitamo"
+
+#: ../xffm/find/fgr.hh:124 ../xffm/find/signals.hh:100
+#: ../xffm/find/dialog.hh:301
+msgid   "Path"
+msgstr  "Inzira"
 
 #: ../xffm/find/fgr.hh:125
 msgid   "Locate documents and folders on this computer by name or content"
 msgstr  ""
+
+#: ../xffm/find/fgr.hh:126 ../xffm/find/dialog.hh:334
+#, fuzzy
+msgid   "Filter:"
+msgstr  "Muyunguruzi"
 
 #: ../xffm/find/fgr.hh:126
 #, fuzzy
@@ -295,12 +125,20 @@ msgstr  "Amakuru ya seriveri"
 msgid   "Filter Details"
 msgstr  "imitunganyirize ya muyunguruzi"
 
+#: ../xffm/find/fgr.hh:138 ../xffm/find/dialog.hh:173
+msgid   "Stay on single filesystem"
+msgstr  ""
+
 #: ../xffm/find/fgr.hh:140
 msgid   "Print..."
 msgstr  "Gucapa..."
 
 #: ../xffm/find/fgr.hh:140
 msgid   "The unique Process ID that identifies this process."
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:142 ../xffm/find/dialog.hh:170
+msgid   "Find hidden files and directories"
 msgstr  ""
 
 #: ../xffm/find/fgr.hh:143
@@ -311,6 +149,11 @@ msgstr  "Muyunguruzi"
 msgid   "To display files which pass the filter (stars and regexps will be "
         "processed)"
 msgstr  ""
+
+#: ../xffm/find/fgr.hh:146 ../xffm/find/dialog.hh:167
+#, fuzzy
+msgid   "Recursive"
+msgstr  "Urwego rw'umutekano"
 
 #: ../xffm/find/fgr.hh:147 ../xffm/find/fgr.hh:148 ../xffm/find/fgr.hh:149
 #: ../xffm/find/fgr.hh:150
@@ -361,7 +204,7 @@ msgid   "Regular file"
 msgstr  "Ibisanzwe"
 
 #: ../xffm/find/fgr.hh:159 ../xffm/find/signals.hh:8
-#: ../xffm/common/preview.hh:469 ../xffm/fm/view/local/popup.hh:1062
+#: ../xffm/fm/view/local/popup.hh:1062 ../xffm/common/preview.hh:469
 msgid   "Directory"
 msgstr  "Ububiko"
 
@@ -392,6 +235,16 @@ msgstr  "Ishyiraho ry'inyuguti"
 msgid   "FIFO"
 msgstr  ""
 
+#: ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168 ../xffm/find/dialog.hh:214
+msgid   "Minutes"
+msgstr  "Iminota"
+
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/find/dialog.hh:263
+#: ../xffm/find/dialog.hh:363 ../xffm/fm/view/treeview.hh:18
+msgid   "Details"
+msgstr  "Birambuye"
+
 #: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
 #: ../xffm/find/fgr.hh:176 ../xffm/find/fgr.hh:179 ../xffm/find/fgr.hh:180
 #: ../xffm/find/fgr.hh:183 ../xffm/find/fgr.hh:184 ../xffm/find/fgr.hh:187
@@ -403,6 +256,14 @@ msgstr  ""
 #: ../xffm/find/fgr.hh:177
 msgid   "Previous"
 msgstr  "Ibanjirije"
+
+#: ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171 ../xffm/find/dialog.hh:219
+msgid   "Hours"
+msgstr  "amasaha"
+
+#: ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174 ../xffm/find/dialog.hh:224
+msgid   "Days"
+msgstr  "Iminsi"
 
 #: ../xffm/find/fgr.hh:175
 msgid   "Month"
@@ -480,6 +341,16 @@ msgstr  "Kureka"
 msgid   "Text Files"
 msgstr  "inyungururamagambo"
 
+#: ../xffm/find/fgr.hh:210 ../xffm/find/dialog.hh:545
+#, fuzzy
+msgid   "No match"
+msgstr  "Nta bihuje byabonetse"
+
+#: ../xffm/find/fgr.hh:212 ../xffm/find/dialog.hh:463
+#, fuzzy
+msgid   "Line Count"
+msgstr  "Ibara"
+
 #: ../xffm/find/fgr.hh:214
 msgid   "Words"
 msgstr  "Amagambo"
@@ -501,6 +372,18 @@ msgstr  "Ibisanzwe"
 #, fuzzy
 msgid   "Socket"
 msgstr  "Gifunze"
+
+#: ../xffm/find/signals.hh:66 ../xffm/find/signals.hh:454
+#: ../xffm/find/dialog.hh:176
+msgid   "Results"
+msgstr  "Ibisubizo"
+
+#: ../xffm/find/signals.hh:368 ../xffm/find/dialog.hh:577
+#: ../xffm/response/chooserresponse.hh:21 ../xffm/response/entryresponse.hh:435
+#: ../xffm/fm/view/local/properties.hh:314 ../xffm/fm/view/local/rm.hh:157
+#: ../xffm/common/gtk.hh:409
+msgid   "Cancel"
+msgstr  "Kureka"
 
 #: ../xffm/find/signals.hh:396 ../xffm/find/signals.hh:830
 msgid   "No editor for current action."
@@ -531,253 +414,485 @@ msgstr  "Byarangiye"
 msgid   "Searching..."
 msgstr  "Gushakisha..."
 
-#: ../xffm/common/preview.hh:581
-#, fuzzy
-msgid   "Empty file"
-msgstr  "kirimo ubusa"
-
-#: ../xffm/common/preview.hh:636
-#, c-format
-msgid   "Cannot read from %s"
-msgstr  ""
-
-#: ../xffm/common/gtk.hh:67 ../xffm/fm/dialog/notebook/vbuttonbox.hh:240
-#, fuzzy
-msgid   "Open terminal"
-msgstr  "Gufungura Dosiye"
-
-#: ../xffm/common/gtk.hh:69 ../xffm/common/util.hh:1443
-msgid   "Execute Shell Command"
-msgstr  ""
-
-#: ../xffm/common/gtk.hh:71 ../xffm/fm/view/local/popup.hh:157
-msgid   "Paste"
-msgstr  "Komeka"
-
-#: ../xffm/common/gtk.hh:73 ../xffm/fm/view/local/popup.hh:151
-#, fuzzy
-msgid   "Add bookmark"
-msgstr  "ongeraho icyatoranyijwe"
-
-#: ../xffm/common/gtk.hh:75 ../xffm/fm/view/local/popup.hh:152
-#: ../xffm/fm/view/root/popup.hh:137
-#, fuzzy
-msgid   "Remove bookmark"
-msgstr  "Guhindura Izina ry'Ikirango"
-
-#: ../xffm/common/gtk.hh:77 ../xffm/fm/view/pkg/model.hh:108
-#: ../xffm/fm/view/pkg/model.hh:299 ../xffm/fm/view/pkg/model.hh:306
-#: ../xffm/fm/view/pkg/popup.hh:151
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:236
-msgid   "Search"
+#: ../xffm/find/dialog.hh:91 ../xffm/find/dialog.hh:143
+#: ../xffm/find/dialog.hh:604
+msgid   "Find"
 msgstr  "Gushaka"
 
-#: ../xffm/common/gtk.hh:81 ../xffm/fm/dialog/notebook/menupopover.hh:237
-msgid   "Exit"
-msgstr  "Gusohoka"
+#: ../xffm/find/dialog.hh:176
+#, fuzzy
+msgid   "Upper limit"
+msgstr  "Nkuru"
 
-#: ../xffm/common/gtk.hh:83 ../xffm/fm/view/local/popup.hh:85
-#: ../xffm/fm/view/local/popup.hh:142 ../xffm/fm/view/local/popup.hh:1287
-#: ../xffm/fm/view/local/popup.hh:1294 ../xffm/fm/view/local/popup.hh:1305
-#: ../xffm/fm/view/local/popup.hh:1312
-msgid   "Open with"
-msgstr  "fungurana"
+#: ../xffm/find/dialog.hh:181
+msgid   "At Least"
+msgstr  ""
 
-#: ../xffm/common/gtk.hh:85 ../xffm/fm/view/local/popup.hh:100
-#: ../xffm/fm/view/local/popup.hh:156
-msgid   "Cut"
-msgstr  "Gukata"
+#: ../xffm/find/dialog.hh:181 ../xffm/find/dialog.hh:186
+#, fuzzy
+msgid   "kBytes"
+msgstr  "Bayite"
 
-#: ../xffm/common/gtk.hh:87 ../xffm/fm/view/local/popup.hh:99
-#: ../xffm/fm/view/local/popup.hh:155
-msgid   "Copy"
-msgstr  "Gukoporora"
+#: ../xffm/find/dialog.hh:186
+msgid   "At Most"
+msgstr  ""
 
-#: ../xffm/common/gtk.hh:89 ../xffm/fm/view/local/rm.hh:176
-#: ../xffm/fm/view/local/popup.hh:103 ../xffm/fm/view/local/popup.hh:160
-msgid   "Delete"
+#: ../xffm/find/dialog.hh:197
+msgid   "Group"
+msgstr  "Itsinda"
+
+#: ../xffm/find/dialog.hh:201
+#, fuzzy
+msgid   "Octal Permissions"
+msgstr  "Uruhushya"
+
+#: ../xffm/find/dialog.hh:206
+msgid   "SUID"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:206 ../xffm/fm/view/local/popup.hh:1102
+#, fuzzy
+msgid   "Executable"
+msgstr  "Gukora"
+
+#: ../xffm/find/dialog.hh:230
+#, fuzzy
+msgid   "Months"
+msgstr  "Ukwezi"
+
+#: ../xffm/find/dialog.hh:241
+#, fuzzy
+msgid   "File type : "
+msgstr  "Ubwoko bw'idosiye"
+
+#: ../xffm/find/dialog.hh:255 ../xffm/find/dialog.hh:595
+#: ../xffm/fm/dialog/notebook/page/page.hh:71 ../xffm/common/gtk.hh:79
+msgid   "Close"
+msgstr  "Gufunga"
+
+#: ../xffm/find/dialog.hh:377
+#, fuzzy
+msgid   "Contains"
+msgstr  "ifite"
+
+#: ../xffm/find/dialog.hh:397
+#, fuzzy
+msgid   "Contains the text"
+msgstr  "Ubwoko bw'ibikubiyemo"
+
+#: ../xffm/find/dialog.hh:430
+#, fuzzy
+msgid   "Case Sensitive"
+msgstr  "Imyandikire y'inyuguti nkuru/nto"
+
+#: ../xffm/find/dialog.hh:442
+msgid   "Extended regexp"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:453
+msgid   "Include binary files"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:489
+msgid   "Match"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:501
+msgid   "Anywhere"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:516
+msgid   "Whole words only"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:531
+msgid   "lines"
+msgstr  "Imirongo"
+
+#: ../xffm/find/dialog.hh:587
+msgid   "Clear"
 msgstr  "Gusiba"
 
-#: ../xffm/common/gtk.hh:91 ../xffm/fm/view/local/rm.hh:165
-msgid   "Shred"
+#: ../xffm/find/dialog.hh:629
+msgid   "Edit"
+msgstr  "Kwandika"
+
+#: ../xffm/find/dialog.hh:743 ../xffm/find/dialog.hh:758
+#: ../xffm/common/util.hh:1354 ../xffm/common/util.hh:1356
+#: ../xffm/common/util.hh:1362 ../xffm/common/util.hh:1364
+#: ../xffm/common/preview.hh:460
+msgid   "unknown"
+msgstr  "ntibizwi"
+
+#: ../xffm/find/dialog.hh:772
+msgid   "Modified"
+msgstr  "Byahinduwe"
+
+#: ../xffm/find/dialog.hh:776
+msgid   "Created"
+msgstr  "Byaremwe"
+
+#: ../xffm/find/dialog.hh:780
+#, fuzzy
+msgid   "Accessed"
+msgstr  "Ntiwemerewe kwinjira"
+
+#: ../xffm/find/dialog.hh:1098
+msgid   "Basic rules:\n"
+        "\n"
+        "*  Will match any character zero or more times.\n"
+        "?  Will match any character exactly one time\n"
+        "[] Match any character within the [] \n"
+        "^  Match at beginning of string\n"
+        "$  Match at end of string \n"
 msgstr  ""
 
-#: ../xffm/common/gtk.hh:94 ../xffm/fm/view/local/popup.hh:95
-#: ../xffm/fm/view/local/popup.hh:145 ../xffm/fm/view/root/popup.hh:136
-#: ../xffm/fm/view/fstab/popup.hh:20
-#, fuzzy
-msgid   "Open in New Tab"
-msgstr  "Fungura isimbuka nshya"
-
-#: ../xffm/common/gtk.hh:139 ../xffm/fm/dialog/notebook/notebook.hh:75
-msgid   "New Tab"
-msgstr  "Isimbuka nshya"
-
-#: ../xffm/common/gtk.hh:352 ../xffm/common/gtk.hh:360
-msgid   "Help"
-msgstr  "Ifashayobora"
-
-#: ../xffm/common/settings.hh:30
-#, fuzzy
-msgid   "New File:"
-msgstr  "Idosiye nshya"
-
-#: ../xffm/common/gio.hh:81
-#, fuzzy
-msgid   "Copying files"
-msgstr  "Kuvanaho amadosiye"
-
-#: ../xffm/common/gio.hh:83 ../xffm/common/dnd.hh:35
-#: ../xffm/fm/dialog/clipboard.hh:30
-#, fuzzy
-msgid   "Moving files"
-msgstr  "Kuvanaho amadosiye"
-
-#: ../xffm/common/gio.hh:85
-#, fuzzy
-msgid   "linking"
-msgstr  "Kinyoteera"
-
-#: ../xffm/common/gio.hh:87
-#, fuzzy
-msgid   "rename"
-msgstr  "Guhindura izina"
-
-#: ../xffm/common/gio.hh:426
-#, c-format
-msgid   "(%d of %d)"
+#: ../xffm/find/dialog.hh:1107
+msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
+        "( ) : \n"
+        "In  basic regular expressions the metacharacters ?, +, {, |, (, "
+        "and ) \n"
+        "  lose their special meaning.\n"
+        "\n"
+        "The  period . matches  any  single  character.\n"
+        "The caret ^ matches at the start of line.\n"
+        "The dollar $ matches at the end of line.\n"
+        "\n"
+        "Characters within [ ] matches any single character in the list.\n"
+        "Characters within [^ ] matches any single character *not* in the "
+        "list.\n"
+        "Characters inside [ - ] matches a range of characters (ie [0-9] or "
+        "[a-z]).\n"
+        "\n"
+        "A regular expression may be followed by one of several repetition "
+        "operators:\n"
+        "?      The preceding item is optional and matched\n"
+        "       at most once.\n"
+        "*      The preceding item will be matched zero\n"
+        "       or more times.\n"
+        "+      The preceding item will be matched one or\n"
+        "       more times.\n"
+        "{n}    The preceding item is matched exactly n times.\n"
+        "{n,}   The preceding item is matched n or more times.\n"
+        "{n,m}  The preceding item is matched at least n times,\n"
+        "       but not more than m times.\n"
+        "\n"
+        "To match any reserved character, precede it with \\. \n"
+        "\n"
+        "Two regular expressions may be joined by the logical or operator |.\n"
+        "Two regular expressions may be concatenated.\n"
+        "\n"
+        "More information is available by typing \"man grep\"\n"
 msgstr  ""
 
-#: ../xffm/common/util.hh:1404
-#, c-format
-msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
-        "attribute on that file."
-msgstr  ""
+#: ../xffm/response/chooserresponse.hh:23
+msgid   "Open"
+msgstr  "Gufungura"
 
-#: ../xffm/common/util.hh:1406 ../xffm/common/util.hh:1441
-#, fuzzy, c-format
-msgid   "Open with %s"
-msgstr  "fungurana"
-
-#: ../xffm/common/util.hh:1406
-msgid   "Text Editor"
-msgstr  "Umuhinduzi w'inyandiko"
-
-#: ../xffm/common/util.hh:1447
-msgid   "Console: quickly run single commands -- write a command here and "
-        "press enter."
-msgstr  ""
-
-#: ../xffm/common/util.hh:1452 ../xffm/fm/view/local/popup.hh:1109
-#: ../xffm/fm/view/local/popup.hh:1291 ../xffm/fm/view/local/popup.hh:1309
-msgid   "Run in Terminal"
-msgstr  ""
-
-#: ../xffm/common/dnd.hh:41 ../xffm/fm/dialog/clipboard.hh:23
-msgid   "Copying files locally"
-msgstr  ""
-
-#: ../xffm/common/dnd.hh:47
-msgid   "Create Link"
-msgstr  "kurema ibihuza"
-
-#: ../xffm/common/run.hh:338
+#: ../xffm/response/chooserresponse.hh:56
 #, fuzzy
-msgid   "error"
-msgstr  "Ikosa"
+msgid   "Choose directory"
+msgstr  "Guhitamo ububiko"
 
-#: ../xffm/common/run.hh:342
+#: ../xffm/response/chooserresponse.hh:60
 #, fuzzy
-msgid   "warning"
-msgstr  "Iburira"
+msgid   "Choose file"
+msgstr  "Hitamo idosiye"
 
-#: ../xffm/common/run.hh:464 ../xffm/response/passwdresponse.hh:19
-#: ../xffm/response/passwdresponse.hh:25
+#: ../xffm/response/customresponse.hh:55
+#, fuzzy
+msgid   "Execute command"
+msgstr  "Gukora"
+
+#: ../xffm/response/customresponse.hh:103
+#, fuzzy
+msgid   "Source File"
+msgstr  "Idosiye y'imvano:"
+
+#: ../xffm/response/entryresponse.hh:439 ../xffm/response/passwdresponse.hh:242
+msgid   "Ok"
+msgstr  "Oke"
+
+#: ../xffm/response/commandprogressresponse.hh:31
+#, fuzzy
+msgid   "Items:"
+msgstr  "Ikintu"
+
+#: ../xffm/response/passwdresponse.hh:19 ../xffm/response/passwdresponse.hh:25
+#: ../xffm/common/run.hh:464
 msgid   "Enter password"
 msgstr  "kwinjiza ijambobanga"
 
-#: ../xffm/fm/view/pkg/model.hh:29 ../xffm/fm/view/pkg/popup.hh:35
+#: ../xffm/response/passwdresponse.hh:179
+#, fuzzy
+msgid   "User Input"
+msgstr  "koresha Indango"
+
+#: ../xffm/response/passwdresponse.hh:195
+msgid   "Response Requested"
+msgstr  ""
+
+#: ../xffm/response/timeoutresponse.hh:57
+msgid   "Dismiss"
+msgstr  ""
+
+#: ../xffm/response/commandresponse.hh:19
+msgid   "Running"
+msgstr  ""
+
+#: ../xffm/response/commandresponse.hh:24
+msgid   "Waiting for operation to finish..."
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:11
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:214
+#, fuzzy
+msgid   "Remove Button Contents"
+msgstr  "Ishakiro"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:67
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:209
+msgid   "Add custom content"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:68
+#, fuzzy
+msgid   "Select file to load"
+msgstr  "Guhitamo idosiye"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:125
+#, c-format
+msgid   "Cannot load file %s. Reason: %s"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:154
+msgid   "You need to restart the application"
+msgstr  ""
+
 #: ../xffm/fm/dialog/notebook/vbuttonbox.hh:187
 #: ../xffm/fm/dialog/notebook/vbuttonbox.hh:191
 #: ../xffm/fm/dialog/notebook/vbuttonbox.hh:195
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:198
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:198 ../xffm/fm/view/pkg/model.hh:29
+#: ../xffm/fm/view/pkg/popup.hh:35
 #, fuzzy
 msgid   "Software Updater"
 msgstr  "Itariki y'itangira"
 
-#: ../xffm/fm/view/pkg/model.hh:41 ../xffm/fm/view/pkg/model.hh:52
-msgid   "Add or remove software installed on the system"
-msgstr  ""
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:236
+#: ../xffm/fm/view/pkg/model.hh:108 ../xffm/fm/view/pkg/model.hh:299
+#: ../xffm/fm/view/pkg/model.hh:306 ../xffm/fm/view/pkg/popup.hh:151
+#: ../xffm/common/gtk.hh:77
+msgid   "Search"
+msgstr  "Gushaka"
 
-#: ../xffm/fm/view/pkg/model.hh:111
-msgid   "String"
-msgstr  "Ikurikiranyanyuguti"
-
-#: ../xffm/fm/view/pkg/model.hh:116
-msgid   "Waiting for search results"
-msgstr  ""
-
-#: ../xffm/fm/view/pkg/model.hh:174
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:240 ../xffm/common/gtk.hh:67
 #, fuzzy
-msgid   "No results"
-msgstr  "ibisubizo"
+msgid   "Open terminal"
+msgstr  "Gufungura Dosiye"
 
-#: ../xffm/fm/view/pkg/model.hh:373
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:244
 #, fuzzy
-msgid   "Currently busy\n"
-msgstr  "Ibimenyetso by'Ifaranga"
+msgid   "Open a New Window"
+msgstr  "Gufungurira mu idirishya rishya"
 
-#: ../xffm/fm/view/pkg/popup.hh:44
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:250
 #, fuzzy
-msgid   "Update Database"
-msgstr  "Ububikoshingiro"
+msgid   "Differences"
+msgstr  "Ikinyuranyo/Itandukaniro"
 
-#: ../xffm/fm/view/pkg/popup.hh:45
-msgid   "Fetch"
-msgstr  ""
-
-#: ../xffm/fm/view/pkg/popup.hh:46
-msgid   "Install --dry-run"
-msgstr  ""
-
-#: ../xffm/fm/view/pkg/popup.hh:47
-msgid   "Install"
-msgstr  "Kwinjiza porogaramu"
-
-#: ../xffm/fm/view/pkg/popup.hh:48
-msgid   "Uninstall --dry-run"
-msgstr  ""
-
-#: ../xffm/fm/view/pkg/popup.hh:49
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:256
+#: ../xffm/fm/view/root/model.hh:110
 #, fuzzy
-msgid   "Uninstall"
-msgstr  "Kwinjiza porogaramu"
+msgid   "Home Directory"
+msgstr  "Ububiko"
 
-#: ../xffm/fm/view/pkg/popup.hh:50
-msgid   "Information"
-msgstr  "Ibisobanuro"
-
-#: ../xffm/fm/view/pkg/popup.hh:140
-msgid   "Version"
-msgstr  "Verisiyo"
-
-#: ../xffm/fm/view/pkg/popup.hh:149
-msgid   "Go up"
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:261
+#: ../xffm/fm/view/root/model.hh:168 ../xffm/fm/view/fstab/popup.hh:29
+msgid   "Disk Image Mounter"
 msgstr  ""
 
-#: ../xffm/fm/view/pkg/popup.hh:152
-msgid   "Search packages"
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:266
+#: ../xffm/fm/view/root/model.hh:137
+msgid   "Trash bin"
 msgstr  ""
 
-#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
-#, fuzzy, c-format
-msgid   "Loading %s...%s"
+#: ../xffm/fm/dialog/notebook/notebook.hh:56
+msgid   "Long press time"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/notebook.hh:75 ../xffm/common/gtk.hh:139
+msgid   "New Tab"
+msgstr  "Isimbuka nshya"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:178
+#, fuzzy
+msgid   "Open menu"
+msgstr  "Gufungura Dosiye"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:230
+msgid   "View as list"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:231
+#, fuzzy
+msgid   "Show hidden files"
+msgstr  "Kwerekana Amasesengurabyose"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:232
+#, fuzzy
+msgid   "Show Backup Files"
+msgstr  "inyibutsabubiko"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:233
+#, fuzzy
+msgid   "Sort data in descending order"
+msgstr  "Gushungura ubujyesi"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:235
+#, fuzzy
+msgid   "Sort by date"
+msgstr  "Itariki y'itangira"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:236
+#, fuzzy
+msgid   "Sort by size"
+msgstr  "Ingano y'imyandikire"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:237 ../xffm/common/gtk.hh:81
+msgid   "Exit"
+msgstr  "Gusohoka"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:270
+msgid   "Main menu"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:375
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:377
+msgid   "Go to"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:382
+#: ../xffm/fm/view/local/popup.hh:887 ../xffm/fm/view/local/popup.hh:981
+#, fuzzy
+msgid   "Specify Output Directory..."
+msgstr  "Gutoranya ububiko"
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:409
+#, fuzzy
+msgid   "Not a directory"
+msgstr  "Guhitamo ububiko"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid   "Renice Process"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+#, fuzzy
+msgid   "Suspend"
+msgstr  "kugereka"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid   "Continue"
+msgstr  "Gukomeza"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid   "Interrupt"
+msgstr  "Hagarikira aho"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+#, fuzzy
+msgid   "Hangup"
+msgstr  "Hanguru"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid   "User 1 (USR1)"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+msgid   "User 2 (USR2)"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+msgid   "Terminate Task"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+msgid   "Abort"
+msgstr  "Ntibyakunze"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:138
+msgid   "Kill"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
+#, fuzzy
+msgid   "Segmentation fault"
+msgstr  "Shyiraho nka Mburabuzi."
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:216
+#, fuzzy
+msgid   "PID"
+msgstr  "ID"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:59
+#, fuzzy
+msgid   "loading..."
 msgstr  "Itangira..."
 
-#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
+#: ../xffm/fm/dialog/notebook/page/page.hh:151
+#: ../xffm/fm/dialog/notebook/page/page.hh:167
 #, fuzzy
-msgid   "Please Wait..."
-msgstr  "Ba wihanganye"
+msgid   "Confirm Replace"
+msgstr  "Gushaka  Gusimbura"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:153
+#, fuzzy
+msgid   "Destination File"
+msgstr  "Ishyika"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:166
+#, c-format
+msgid   "The output file %s already exists, do you want to overwrite it?"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
+msgid   "Embedded Terminal"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
+msgid   "All items in the iconview."
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
+msgid   "Scripting"
+msgstr  "Iyandika"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
+#, fuzzy
+msgid   "Clear Log"
+msgstr  "Gusiba"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
+msgid   "Terminal font"
+msgstr  ""
+
+#: ../xffm/fm/dialog/clipboard.hh:23 ../xffm/common/dnd.hh:41
+msgid   "Copying files locally"
+msgstr  ""
+
+#: ../xffm/fm/dialog/clipboard.hh:30 ../xffm/common/gio.hh:83
+#: ../xffm/common/dnd.hh:35
+#, fuzzy
+msgid   "Moving files"
+msgstr  "Kuvanaho amadosiye"
+
+#: ../xffm/fm/dialog/dialog.hh:122
+msgid   "Removed"
+msgstr  "Cyavanyweho"
+
+#: ../xffm/fm/dialog/dialog.hh:143
+msgid   "Detected device(s):"
+msgstr  ""
 
 #: ../xffm/fm/view/local/model.hh:124
 #, fuzzy, c-format
@@ -794,36 +909,33 @@ msgstr  "Idosiye"
 msgid   "Loaded %d of %d articles"
 msgstr  ""
 
-#: ../xffm/fm/view/local/rm.hh:59
-#, fuzzy, c-format
-msgid   "Delete %s"
-msgstr  "Gusiba Imbariro"
-
-#: ../xffm/fm/view/local/rm.hh:61
-msgid   "Warning: "
-msgstr  "Iburira:"
-
-#: ../xffm/fm/view/local/rm.hh:61 ../xffm/fm/view/local/popup.hh:565
-#, fuzzy
-msgid   "Multiple selections"
-msgstr  "Ihitamo rya dosiye"
-
-#: ../xffm/fm/view/local/rm.hh:92
-msgid   "Remove"
-msgstr  "Gukuraho"
-
-#: ../xffm/fm/view/local/rm.hh:142
-#, fuzzy
-msgid   "Apply to all"
-msgstr  "Gusubiza Bose"
-
-#: ../xffm/fm/view/local/rm.hh:183
-msgid   "Trash"
-msgstr  ""
+#: ../xffm/fm/view/local/popup.hh:85 ../xffm/fm/view/local/popup.hh:142
+#: ../xffm/fm/view/local/popup.hh:1287 ../xffm/fm/view/local/popup.hh:1294
+#: ../xffm/fm/view/local/popup.hh:1305 ../xffm/fm/view/local/popup.hh:1312
+#: ../xffm/common/gtk.hh:83
+msgid   "Open with"
+msgstr  "fungurana"
 
 #: ../xffm/fm/view/local/popup.hh:94
 msgid   "New"
 msgstr  "Gishya"
+
+#: ../xffm/fm/view/local/popup.hh:95 ../xffm/fm/view/local/popup.hh:145
+#: ../xffm/fm/view/root/popup.hh:136 ../xffm/fm/view/fstab/popup.hh:20
+#: ../xffm/common/gtk.hh:94
+#, fuzzy
+msgid   "Open in New Tab"
+msgstr  "Fungura isimbuka nshya"
+
+#: ../xffm/fm/view/local/popup.hh:99 ../xffm/fm/view/local/popup.hh:155
+#: ../xffm/common/gtk.hh:87
+msgid   "Copy"
+msgstr  "Gukoporora"
+
+#: ../xffm/fm/view/local/popup.hh:100 ../xffm/fm/view/local/popup.hh:156
+#: ../xffm/common/gtk.hh:85
+msgid   "Cut"
+msgstr  "Gukata"
 
 #: ../xffm/fm/view/local/popup.hh:101 ../xffm/fm/view/local/popup.hh:159
 #: ../xffm/fm/view/local/popup.hh:232 ../xffm/fm/view/local/popup.hh:234
@@ -834,6 +946,11 @@ msgstr  "Komeka"
 #: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:158
 msgid   "There is nothing on the clipboard to paste."
 msgstr  ""
+
+#: ../xffm/fm/view/local/popup.hh:103 ../xffm/fm/view/local/popup.hh:160
+#: ../xffm/fm/view/local/rm.hh:176 ../xffm/common/gtk.hh:89
+msgid   "Delete"
+msgstr  "Gusiba"
 
 #: ../xffm/fm/view/local/popup.hh:106
 msgid   "Select All"
@@ -864,6 +981,21 @@ msgstr  ""
 msgid   "Unmount the volume associated with this folder"
 msgstr  ""
 
+#: ../xffm/fm/view/local/popup.hh:151 ../xffm/common/gtk.hh:73
+#, fuzzy
+msgid   "Add bookmark"
+msgstr  "ongeraho icyatoranyijwe"
+
+#: ../xffm/fm/view/local/popup.hh:152 ../xffm/fm/view/root/popup.hh:137
+#: ../xffm/common/gtk.hh:75
+#, fuzzy
+msgid   "Remove bookmark"
+msgstr  "Guhindura Izina ry'Ikirango"
+
+#: ../xffm/fm/view/local/popup.hh:157 ../xffm/common/gtk.hh:71
+msgid   "Paste"
+msgstr  "Komeka"
+
 #: ../xffm/fm/view/local/popup.hh:161 ../xffm/fm/view/local/popup.hh:1231
 msgid   "Rename"
 msgstr  "Guhindura izina"
@@ -885,6 +1017,11 @@ msgstr  "indangakintu"
 msgid   "Files:"
 msgstr  "Idosiye"
 
+#: ../xffm/fm/view/local/popup.hh:565 ../xffm/fm/view/local/rm.hh:61
+#, fuzzy
+msgid   "Multiple selections"
+msgstr  "Ihitamo rya dosiye"
+
 #: ../xffm/fm/view/local/popup.hh:753
 #, fuzzy
 msgid   "Select items"
@@ -903,12 +1040,6 @@ msgstr  "Ihitamo"
 #, fuzzy
 msgid   "No matches."
 msgstr  "Nta bihuje byabonetse"
-
-#: ../xffm/fm/view/local/popup.hh:887 ../xffm/fm/view/local/popup.hh:981
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:382
-#, fuzzy
-msgid   "Specify Output Directory..."
-msgstr  "Gutoranya ububiko"
 
 #: ../xffm/fm/view/local/popup.hh:1058
 #, fuzzy
@@ -930,6 +1061,11 @@ msgstr  "izina"
 msgid   "Another file with the same name already exists in “%s”."
 msgstr  ""
 
+#: ../xffm/fm/view/local/popup.hh:1109 ../xffm/fm/view/local/popup.hh:1291
+#: ../xffm/fm/view/local/popup.hh:1309 ../xffm/common/util.hh:1452
+msgid   "Run in Terminal"
+msgstr  ""
+
 #: ../xffm/fm/view/local/popup.hh:1112
 msgid   "Arguments for the Command"
 msgstr  ""
@@ -942,11 +1078,6 @@ msgstr  ""
 #, fuzzy
 msgid   "Invalid entry"
 msgstr  "Inkoresha siyo"
-
-#: ../xffm/fm/view/local/view.hh:177
-#, c-format
-msgid   "The volume '%s' is not mounted."
-msgstr  ""
 
 #: ../xffm/fm/view/local/properties.hh:245
 msgid   "Properties and Attributes"
@@ -974,6 +1105,37 @@ msgstr  ""
 msgid   "Source:"
 msgstr  "Inkomoko:"
 
+#: ../xffm/fm/view/local/rm.hh:59
+#, fuzzy, c-format
+msgid   "Delete %s"
+msgstr  "Gusiba Imbariro"
+
+#: ../xffm/fm/view/local/rm.hh:61
+msgid   "Warning: "
+msgstr  "Iburira:"
+
+#: ../xffm/fm/view/local/rm.hh:92
+msgid   "Remove"
+msgstr  "Gukuraho"
+
+#: ../xffm/fm/view/local/rm.hh:142
+#, fuzzy
+msgid   "Apply to all"
+msgstr  "Gusubiza Bose"
+
+#: ../xffm/fm/view/local/rm.hh:165 ../xffm/common/gtk.hh:91
+msgid   "Shred"
+msgstr  ""
+
+#: ../xffm/fm/view/local/rm.hh:183
+msgid   "Trash"
+msgstr  ""
+
+#: ../xffm/fm/view/local/view.hh:177
+#, c-format
+msgid   "The volume '%s' is not mounted."
+msgstr  ""
+
 #: ../xffm/fm/view/root/model.hh:82
 #, fuzzy
 msgid   "Root Directory"
@@ -981,22 +1143,6 @@ msgstr  "Ububiko"
 
 #: ../xffm/fm/view/root/model.hh:98
 msgid   "This is the root of the filesystem"
-msgstr  ""
-
-#: ../xffm/fm/view/root/model.hh:110
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:256
-#, fuzzy
-msgid   "Home Directory"
-msgstr  "Ububiko"
-
-#: ../xffm/fm/view/root/model.hh:137
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:266
-msgid   "Trash bin"
-msgstr  ""
-
-#: ../xffm/fm/view/root/model.hh:168 ../xffm/fm/view/fstab/popup.hh:29
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:261
-msgid   "Disk Image Mounter"
 msgstr  ""
 
 #: ../xffm/fm/view/root/model.hh:176 ../xffm/fm/view/root/model.hh:191
@@ -1081,14 +1227,79 @@ msgstr  ""
 msgid   "Mounting %s"
 msgstr  "Kwihuza ku %s\"..."
 
-#: ../xffm/fm/view/base/signals.hh:838
-msgid   "Trash is empty"
+#: ../xffm/fm/view/pkg/model.hh:41 ../xffm/fm/view/pkg/model.hh:52
+msgid   "Add or remove software installed on the system"
 msgstr  ""
 
-#: ../xffm/fm/view/base/signals.hh:840
+#: ../xffm/fm/view/pkg/model.hh:111
+msgid   "String"
+msgstr  "Ikurikiranyanyuguti"
+
+#: ../xffm/fm/view/pkg/model.hh:116
+msgid   "Waiting for search results"
+msgstr  ""
+
+#: ../xffm/fm/view/pkg/model.hh:174
 #, fuzzy
-msgid   "Directory does not exist."
-msgstr  "Izina y'ububiko:"
+msgid   "No results"
+msgstr  "ibisubizo"
+
+#: ../xffm/fm/view/pkg/model.hh:373
+#, fuzzy
+msgid   "Currently busy\n"
+msgstr  "Ibimenyetso by'Ifaranga"
+
+#: ../xffm/fm/view/pkg/popup.hh:44
+#, fuzzy
+msgid   "Update Database"
+msgstr  "Ububikoshingiro"
+
+#: ../xffm/fm/view/pkg/popup.hh:45
+msgid   "Fetch"
+msgstr  ""
+
+#: ../xffm/fm/view/pkg/popup.hh:46
+msgid   "Install --dry-run"
+msgstr  ""
+
+#: ../xffm/fm/view/pkg/popup.hh:47
+msgid   "Install"
+msgstr  "Kwinjiza porogaramu"
+
+#: ../xffm/fm/view/pkg/popup.hh:48
+msgid   "Uninstall --dry-run"
+msgstr  ""
+
+#: ../xffm/fm/view/pkg/popup.hh:49
+#, fuzzy
+msgid   "Uninstall"
+msgstr  "Kwinjiza porogaramu"
+
+#: ../xffm/fm/view/pkg/popup.hh:50
+msgid   "Information"
+msgstr  "Ibisobanuro"
+
+#: ../xffm/fm/view/pkg/popup.hh:140
+msgid   "Version"
+msgstr  "Verisiyo"
+
+#: ../xffm/fm/view/pkg/popup.hh:149
+msgid   "Go up"
+msgstr  ""
+
+#: ../xffm/fm/view/pkg/popup.hh:152
+msgid   "Search packages"
+msgstr  ""
+
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
+#, fuzzy, c-format
+msgid   "Loading %s...%s"
+msgstr  "Itangira..."
+
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
+#, fuzzy
+msgid   "Please Wait..."
+msgstr  "Ba wihanganye"
 
 #: ../xffm/fm/view/treeview.hh:17
 msgid   "Name"
@@ -1107,300 +1318,89 @@ msgstr  "Itariki"
 msgid   "Mimetype"
 msgstr  "Ubwoko bw'idosiye"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
-msgid   "Embedded Terminal"
+#: ../xffm/fm/view/base/signals.hh:838
+msgid   "Trash is empty"
 msgstr  ""
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
-msgid   "All items in the iconview."
-msgstr  ""
-
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
-msgid   "Scripting"
-msgstr  "Iyandika"
-
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
+#: ../xffm/fm/view/base/signals.hh:840
 #, fuzzy
-msgid   "Clear Log"
-msgstr  "Gusiba"
+msgid   "Directory does not exist."
+msgstr  "Izina y'ububiko:"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
-msgid   "Terminal font"
-msgstr  ""
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
-msgid   "Renice Process"
-msgstr  ""
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+#: ../xffm/common/settings.hh:30
 #, fuzzy
-msgid   "Suspend"
-msgstr  "kugereka"
+msgid   "New File:"
+msgstr  "Idosiye nshya"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
-msgid   "Continue"
-msgstr  "Gukomeza"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid   "Interrupt"
-msgstr  "Hagarikira aho"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+#: ../xffm/common/gio.hh:81
 #, fuzzy
-msgid   "Hangup"
-msgstr  "Hanguru"
+msgid   "Copying files"
+msgstr  "Kuvanaho amadosiye"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid   "User 1 (USR1)"
-msgstr  ""
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
-msgid   "User 2 (USR2)"
-msgstr  ""
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
-msgid   "Terminate Task"
-msgstr  ""
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
-msgid   "Abort"
-msgstr  "Ntibyakunze"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:138
-msgid   "Kill"
-msgstr  ""
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
+#: ../xffm/common/gio.hh:85
 #, fuzzy
-msgid   "Segmentation fault"
-msgstr  "Shyiraho nka Mburabuzi."
+msgid   "linking"
+msgstr  "Kinyoteera"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:216
+#: ../xffm/common/gio.hh:87
 #, fuzzy
-msgid   "PID"
-msgstr  "ID"
+msgid   "rename"
+msgstr  "Guhindura izina"
 
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:375
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:377
-msgid   "Go to"
-msgstr  ""
-
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:409
-#, fuzzy
-msgid   "Not a directory"
-msgstr  "Guhitamo ububiko"
-
-#: ../xffm/fm/dialog/notebook/page/page.hh:59
-#, fuzzy
-msgid   "loading..."
-msgstr  "Itangira..."
-
-#: ../xffm/fm/dialog/notebook/page/page.hh:151
-#: ../xffm/fm/dialog/notebook/page/page.hh:167
-#, fuzzy
-msgid   "Confirm Replace"
-msgstr  "Gushaka  Gusimbura"
-
-#: ../xffm/fm/dialog/notebook/page/page.hh:153
-#, fuzzy
-msgid   "Destination File"
-msgstr  "Ishyika"
-
-#: ../xffm/fm/dialog/notebook/page/page.hh:166
+#: ../xffm/common/gio.hh:426
 #, c-format
-msgid   "The output file %s already exists, do you want to overwrite it?"
+msgid   "(%d of %d)"
 msgstr  ""
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:11
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:214
-#, fuzzy
-msgid   "Remove Button Contents"
-msgstr  "Ishakiro"
+#: ../xffm/common/dnd.hh:47
+msgid   "Create Link"
+msgstr  "kurema ibihuza"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:67
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:209
-msgid   "Add custom content"
-msgstr  ""
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:68
-#, fuzzy
-msgid   "Select file to load"
-msgstr  "Guhitamo idosiye"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:125
+#: ../xffm/common/util.hh:1404
 #, c-format
-msgid   "Cannot load file %s. Reason: %s"
+msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
+        "attribute on that file."
 msgstr  ""
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:154
-msgid   "You need to restart the application"
+#: ../xffm/common/util.hh:1406 ../xffm/common/util.hh:1441
+#, fuzzy, c-format
+msgid   "Open with %s"
+msgstr  "fungurana"
+
+#: ../xffm/common/util.hh:1406
+msgid   "Text Editor"
+msgstr  "Umuhinduzi w'inyandiko"
+
+#: ../xffm/common/util.hh:1443 ../xffm/common/gtk.hh:69
+msgid   "Execute Shell Command"
 msgstr  ""
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:244
-#, fuzzy
-msgid   "Open a New Window"
-msgstr  "Gufungurira mu idirishya rishya"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:250
-#, fuzzy
-msgid   "Differences"
-msgstr  "Ikinyuranyo/Itandukaniro"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:178
-#, fuzzy
-msgid   "Open menu"
-msgstr  "Gufungura Dosiye"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:230
-msgid   "View as list"
+#: ../xffm/common/util.hh:1447
+msgid   "Console: quickly run single commands -- write a command here and "
+        "press enter."
 msgstr  ""
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:231
+#: ../xffm/common/gtk.hh:352 ../xffm/common/gtk.hh:360
+msgid   "Help"
+msgstr  "Ifashayobora"
+
+#: ../xffm/common/run.hh:338
 #, fuzzy
-msgid   "Show hidden files"
-msgstr  "Kwerekana Amasesengurabyose"
+msgid   "error"
+msgstr  "Ikosa"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:232
+#: ../xffm/common/run.hh:342
 #, fuzzy
-msgid   "Show Backup Files"
-msgstr  "inyibutsabubiko"
+msgid   "warning"
+msgstr  "Iburira"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:233
+#: ../xffm/common/preview.hh:581
 #, fuzzy
-msgid   "Sort data in descending order"
-msgstr  "Gushungura ubujyesi"
+msgid   "Empty file"
+msgstr  "kirimo ubusa"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:235
-#, fuzzy
-msgid   "Sort by date"
-msgstr  "Itariki y'itangira"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:236
-#, fuzzy
-msgid   "Sort by size"
-msgstr  "Ingano y'imyandikire"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:270
-msgid   "Main menu"
-msgstr  ""
-
-#: ../xffm/fm/dialog/notebook/notebook.hh:56
-msgid   "Long press time"
-msgstr  ""
-
-#: ../xffm/fm/dialog/dialog.hh:122
-msgid   "Removed"
-msgstr  "Cyavanyweho"
-
-#: ../xffm/fm/dialog/dialog.hh:143
-msgid   "Detected device(s):"
-msgstr  ""
-
-#: ../xffm/response/commandresponse.hh:19
-msgid   "Running"
-msgstr  ""
-
-#: ../xffm/response/commandresponse.hh:24
-msgid   "Waiting for operation to finish..."
-msgstr  ""
-
-#: ../xffm/response/passwdresponse.hh:179
-#, fuzzy
-msgid   "User Input"
-msgstr  "koresha Indango"
-
-#: ../xffm/response/passwdresponse.hh:195
-msgid   "Response Requested"
-msgstr  ""
-
-#: ../xffm/response/passwdresponse.hh:242 ../xffm/response/entryresponse.hh:439
-msgid   "Ok"
-msgstr  "Oke"
-
-#: ../xffm/response/customresponse.hh:55
-#, fuzzy
-msgid   "Execute command"
-msgstr  "Gukora"
-
-#: ../xffm/response/customresponse.hh:103
-#, fuzzy
-msgid   "Source File"
-msgstr  "Idosiye y'imvano:"
-
-#: ../xffm/response/timeoutresponse.hh:57
-msgid   "Dismiss"
-msgstr  ""
-
-#: ../xffm/response/commandprogressresponse.hh:31
-#, fuzzy
-msgid   "Items:"
-msgstr  "Ikintu"
-
-#: ../xffm/response/chooserresponse.hh:23
-msgid   "Open"
-msgstr  "Gufungura"
-
-#: ../xffm/response/chooserresponse.hh:56
-#, fuzzy
-msgid   "Choose directory"
-msgstr  "Guhitamo ububiko"
-
-#: ../xffm/response/chooserresponse.hh:60
-#, fuzzy
-msgid   "Choose file"
-msgstr  "Hitamo idosiye"
-
-#: ../xffm/completion/bash.hh:133
-#, fuzzy
-msgid   "Completion mode:"
-msgstr  "Byuzuye"
-
-#: ../xffm/completion/bash.hh:134
-#, fuzzy
-msgid   "command"
-msgstr  "Icyo wifuza"
-
-#: ../xffm/completion/bash.hh:135
-#, fuzzy
-msgid   "file"
-msgstr  "Ibijyana"
-
-#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
-#, fuzzy
-msgid   "Options >>"
-msgstr  "Amahitamo"
-
-#: ../xffm/completion/base.hh:28
-msgid   "Command"
-msgstr  "Icyo wifuza"
-
-#: ../xffm/completion/base.hh:31
-msgid   "File"
-msgstr  "Idosiye"
-
-#: ../xffm/completion/base.hh:34
-#, fuzzy
-msgid   "Command history"
-msgstr  "Amabwiriza"
-
-#: ../xffm/completion/base.hh:40
-msgid   "Variable"
-msgstr  "Impinduragaciro"
-
-#: ../xffm/completion/base.hh:43
-msgid   "Host"
-msgstr  "Ubuturo"
-
-#: ../xffm/completion/base.hh:55
-#, fuzzy
-msgid   "Found no match"
-msgstr  "Amagambobanga ntahura"
-
-#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
-msgid   "Matches"
-msgstr  ""
-
-#: ../xffm/completion/base.hh:142
-msgid   "Too many files open"
+#: ../xffm/common/preview.hh:636
+#, c-format
+msgid   "Cannot read from %s"
 msgstr  ""
 

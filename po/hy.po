@@ -1,4 +1,4 @@
-# Xffm+ translation file: vie ago  9 14:43:01 CDT 2019
+# Xffm+ translation file: dom ago 11 10:55:46 CDT 2019
 # Merged fron existing open source files
 # http://xffm.org
 #
@@ -6,7 +6,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: xffm+\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2019-08-09 12:32-0500\n"
+        "POT-Creation-Date: 2019-08-11 09:10-0500\n"
         "PO-Revision-Date: 2010-05-21 11:27+0400\n"
         "Last-Translator: Arman Vardanyan <armvardany@yandex.ru>\n"
         "Language-Team:  <norik@freenet.am>\n"
@@ -20,259 +20,80 @@ msgstr  "Project-Id-Version: xffm+\n"
 msgid   "No Read Permission"
 msgstr  "Թույլտվություններ"
 
-#: ../xffm/find/dialog.hh:91 ../xffm/find/dialog.hh:143
-#: ../xffm/find/dialog.hh:604
-msgid   "Find"
-msgstr  "Փնտրել"
+#: ../xffm/completion/base.hh:28
+msgid   "Command"
+msgstr  "Հրաման"
 
-#: ../xffm/find/dialog.hh:167 ../xffm/find/fgr.hh:146
+#: ../xffm/completion/base.hh:31
+msgid   "File"
+msgstr  "Ֆայլ"
+
+#: ../xffm/completion/base.hh:34
 #, fuzzy
-msgid   "Recursive"
-msgstr  "Ռեկուրսիվ "
+msgid   "Command history"
+msgstr  "Հրահանգի պատկերանիշ"
 
-#: ../xffm/find/dialog.hh:170 ../xffm/find/fgr.hh:142
-#, fuzzy
-msgid   "Find hidden files and directories"
-msgstr  "Կիրառում է կարկատանները ֆայլերի և պանակների վրա"
-
-#: ../xffm/find/dialog.hh:173 ../xffm/find/fgr.hh:138
-#, fuzzy
-msgid   "Stay on single filesystem"
-msgstr  "նիշքային համակարգը հասանելի է միայն կարդալու համար"
-
-#: ../xffm/find/dialog.hh:176 ../xffm/find/signals.hh:66
-#: ../xffm/find/signals.hh:454
-#, fuzzy
-msgid   "Results"
-msgstr  "Որոնման արդյունքներ"
-
-#: ../xffm/find/dialog.hh:176
-#, fuzzy
-msgid   "Upper limit"
-msgstr  "Վերին Արժեք․"
-
-#: ../xffm/find/dialog.hh:181
-msgid   "At Least"
-msgstr  ""
-
-#: ../xffm/find/dialog.hh:181 ../xffm/find/dialog.hh:186
-#, fuzzy
-msgid   "kBytes"
-msgstr  "? բայթեր"
-
-#: ../xffm/find/dialog.hh:186
-msgid   "At Most"
-msgstr  ""
-
-#: ../xffm/find/dialog.hh:192 ../xffm/completion/base.hh:37
+#: ../xffm/completion/base.hh:37 ../xffm/find/dialog.hh:192
 msgid   "User"
 msgstr  "Օգտագործող"
 
-#: ../xffm/find/dialog.hh:197
-msgid   "Group"
-msgstr  "Խումբ"
+#: ../xffm/completion/base.hh:40
+msgid   "Variable"
+msgstr  "Փոփոխական"
 
-#: ../xffm/find/dialog.hh:201
-msgid   "Octal Permissions"
-msgstr  "Ութանգամյան թույլտվություն"
+#: ../xffm/completion/base.hh:43
+msgid   "Host"
+msgstr  "Սպասարկիչ"
 
-#: ../xffm/find/dialog.hh:206
-msgid   "SUID"
-msgstr  ""
-
-#: ../xffm/find/dialog.hh:206 ../xffm/fm/view/local/popup.hh:1102
+#: ../xffm/completion/base.hh:55
 #, fuzzy
-msgid   "Executable"
-msgstr  "Աշխատեցնել"
+msgid   "Found no match"
+msgstr  "Չի համընկնում"
 
-#: ../xffm/find/dialog.hh:214 ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168
-#, fuzzy
-msgid   "Minutes"
-msgstr  "րոպեներ"
-
-#: ../xffm/find/dialog.hh:219 ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171
-#, fuzzy
-msgid   "Hours"
-msgstr  "%s ժամեր"
-
-#: ../xffm/find/dialog.hh:224 ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174
-#, fuzzy
-msgid   "Days"
-msgstr  "5 օր"
-
-#: ../xffm/find/dialog.hh:230
-#, fuzzy
-msgid   "Months"
-msgstr  "3 ամիս"
-
-#: ../xffm/find/dialog.hh:241
-#, fuzzy
-msgid   "File type : "
-msgstr  "Սարքտեսակ."
-
-#: ../xffm/find/dialog.hh:255 ../xffm/find/dialog.hh:595
-#: ../xffm/common/gtk.hh:79 ../xffm/fm/dialog/notebook/page/page.hh:71
-msgid   "Close"
-msgstr  "Փակել"
-
-#: ../xffm/find/dialog.hh:263 ../xffm/find/dialog.hh:363
-#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
-#: ../xffm/find/fgr.hh:176 ../xffm/fm/view/treeview.hh:18
-msgid   "Details"
-msgstr  "Մանրամասներ"
-
-#: ../xffm/find/dialog.hh:301 ../xffm/find/fgr.hh:124
-#: ../xffm/find/signals.hh:100
-msgid   "Path"
-msgstr  "Ճանապարհ"
-
-#: ../xffm/find/dialog.hh:334 ../xffm/find/fgr.hh:126
-#, fuzzy
-msgid   "Filter:"
-msgstr  "Ֆիլտր"
-
-#: ../xffm/find/dialog.hh:377
-#, fuzzy
-msgid   "Contains"
-msgstr  "Կոնտեյներներ"
-
-#: ../xffm/find/dialog.hh:397
-#, fuzzy
-msgid   "Contains the text"
-msgstr  "Չեղյալ է համարում ինքնաստուգումը"
-
-#: ../xffm/find/dialog.hh:430
-msgid   "Case Sensitive"
-msgstr  "Զգայուն ռեգիստրի նկատմամբ"
-
-#: ../xffm/find/dialog.hh:442
-#, fuzzy
-msgid   "Extended regexp"
-msgstr  "Ընդլայնված"
-
-#: ../xffm/find/dialog.hh:453
-#, fuzzy
-msgid   "Include binary files"
-msgstr  "Ներառել ֆայլեր"
-
-#: ../xffm/find/dialog.hh:463 ../xffm/find/fgr.hh:212
-#, fuzzy
-msgid   "Line Count"
-msgstr  "Գիծ"
-
-#: ../xffm/find/dialog.hh:489
-#, fuzzy
-msgid   "Match"
+#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
+msgid   "Matches"
 msgstr  "Համընկնումներ"
 
-#: ../xffm/find/dialog.hh:501
-msgid   "Anywhere"
-msgstr  ""
-
-#: ../xffm/find/dialog.hh:516
-msgid   "Whole words only"
-msgstr  "Միայն ամբողջ բառեր"
-
-#: ../xffm/find/dialog.hh:531
+#: ../xffm/completion/base.hh:142
 #, fuzzy
-msgid   "lines"
-msgstr  "տող"
+msgid   "Too many files open"
+msgstr  "Չափից ավելի ֆայլեր"
 
-#: ../xffm/find/dialog.hh:545 ../xffm/find/fgr.hh:210
-msgid   "No match"
-msgstr  "Համընկնում չկա"
-
-#: ../xffm/find/dialog.hh:577 ../xffm/find/signals.hh:368
-#: ../xffm/common/gtk.hh:409 ../xffm/fm/view/local/rm.hh:157
-#: ../xffm/fm/view/local/properties.hh:314
-#: ../xffm/response/entryresponse.hh:435 ../xffm/response/chooserresponse.hh:21
-msgid   "Cancel"
-msgstr  "Հրաժարվել"
-
-#: ../xffm/find/dialog.hh:587
-msgid   "Clear"
-msgstr  "Մաքրել"
-
-#: ../xffm/find/dialog.hh:629
-msgid   "Edit"
-msgstr  "Խմբագրել"
-
-#: ../xffm/find/dialog.hh:743 ../xffm/find/dialog.hh:758
-#: ../xffm/common/preview.hh:460 ../xffm/common/util.hh:1354
-#: ../xffm/common/util.hh:1356 ../xffm/common/util.hh:1362
-#: ../xffm/common/util.hh:1364
-msgid   "unknown"
-msgstr  "անհայտ"
-
-#: ../xffm/find/dialog.hh:772
-msgid   "Modified"
-msgstr  "Փոփոխված"
-
-#: ../xffm/find/dialog.hh:776
-#, fuzzy
-msgid   "Created"
-msgstr  "Ստեղծել"
-
-#: ../xffm/find/dialog.hh:780
-#, fuzzy
-msgid   "Accessed"
-msgstr  "Մատչելի"
-
-#: ../xffm/find/dialog.hh:1098
-msgid   "Basic rules:\n"
-        "\n"
-        "*  Will match any character zero or more times.\n"
-        "?  Will match any character exactly one time\n"
-        "[] Match any character within the [] \n"
-        "^  Match at beginning of string\n"
-        "$  Match at end of string \n"
-msgstr  ""
-
-#: ../xffm/find/dialog.hh:1107
-msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
-        "( ) : \n"
-        "In  basic regular expressions the metacharacters ?, +, {, |, (, "
-        "and ) \n"
-        "  lose their special meaning.\n"
-        "\n"
-        "The  period . matches  any  single  character.\n"
-        "The caret ^ matches at the start of line.\n"
-        "The dollar $ matches at the end of line.\n"
-        "\n"
-        "Characters within [ ] matches any single character in the list.\n"
-        "Characters within [^ ] matches any single character *not* in the "
-        "list.\n"
-        "Characters inside [ - ] matches a range of characters (ie [0-9] or "
-        "[a-z]).\n"
-        "\n"
-        "A regular expression may be followed by one of several repetition "
-        "operators:\n"
-        "?      The preceding item is optional and matched\n"
-        "       at most once.\n"
-        "*      The preceding item will be matched zero\n"
-        "       or more times.\n"
-        "+      The preceding item will be matched one or\n"
-        "       more times.\n"
-        "{n}    The preceding item is matched exactly n times.\n"
-        "{n,}   The preceding item is matched n or more times.\n"
-        "{n,m}  The preceding item is matched at least n times,\n"
-        "       but not more than m times.\n"
-        "\n"
-        "To match any reserved character, precede it with \\. \n"
-        "\n"
-        "Two regular expressions may be joined by the logical or operator |.\n"
-        "Two regular expressions may be concatenated.\n"
-        "\n"
-        "More information is available by typing \"man grep\"\n"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:124 ../xffm/completion/base.hh:339
+#: ../xffm/completion/base.hh:339 ../xffm/find/fgr.hh:124
 msgid   "Options:"
 msgstr  "Ընտրանքներ․"
+
+#: ../xffm/completion/bash.hh:133
+#, fuzzy
+msgid   "Completion mode:"
+msgstr  "Ավարտվեց"
+
+#: ../xffm/completion/bash.hh:134
+msgid   "command"
+msgstr  "հրաման"
+
+#: ../xffm/completion/bash.hh:135
+msgid   "file"
+msgstr  "ֆայլ"
+
+#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
+#, fuzzy
+msgid   "Options >>"
+msgstr  "Ընտրանքներ"
+
+#: ../xffm/find/fgr.hh:124 ../xffm/find/signals.hh:100
+#: ../xffm/find/dialog.hh:301
+msgid   "Path"
+msgstr  "Ճանապարհ"
 
 #: ../xffm/find/fgr.hh:125
 msgid   "Locate documents and folders on this computer by name or content"
 msgstr  "Դասավորել փաստաթղթերն ու պանակները ըստ անվան և պարունակության"
+
+#: ../xffm/find/fgr.hh:126 ../xffm/find/dialog.hh:334
+#, fuzzy
+msgid   "Filter:"
+msgstr  "Ֆիլտր"
 
 #: ../xffm/find/fgr.hh:126
 #, fuzzy
@@ -300,6 +121,11 @@ msgstr  "Տալ տեղեկություն վերսիայի մասին"
 msgid   "Filter Details"
 msgstr  "Fleur De Lis"
 
+#: ../xffm/find/fgr.hh:138 ../xffm/find/dialog.hh:173
+#, fuzzy
+msgid   "Stay on single filesystem"
+msgstr  "նիշքային համակարգը հասանելի է միայն կարդալու համար"
+
 #: ../xffm/find/fgr.hh:140
 msgid   "Print..."
 msgstr  "Տպել…"
@@ -307,6 +133,11 @@ msgstr  "Տպել…"
 #: ../xffm/find/fgr.hh:140
 msgid   "The unique Process ID that identifies this process."
 msgstr  ""
+
+#: ../xffm/find/fgr.hh:142 ../xffm/find/dialog.hh:170
+#, fuzzy
+msgid   "Find hidden files and directories"
+msgstr  "Կիրառում է կարկատանները ֆայլերի և պանակների վրա"
 
 #: ../xffm/find/fgr.hh:143
 msgid   "Filter"
@@ -316,6 +147,11 @@ msgstr  "Ֆիլտր"
 msgid   "To display files which pass the filter (stars and regexps will be "
         "processed)"
 msgstr  ""
+
+#: ../xffm/find/fgr.hh:146 ../xffm/find/dialog.hh:167
+#, fuzzy
+msgid   "Recursive"
+msgstr  "Ռեկուրսիվ "
 
 #: ../xffm/find/fgr.hh:147 ../xffm/find/fgr.hh:148 ../xffm/find/fgr.hh:149
 #: ../xffm/find/fgr.hh:150
@@ -364,7 +200,7 @@ msgid   "Regular file"
 msgstr  "Սովորական"
 
 #: ../xffm/find/fgr.hh:159 ../xffm/find/signals.hh:8
-#: ../xffm/common/preview.hh:469 ../xffm/fm/view/local/popup.hh:1062
+#: ../xffm/fm/view/local/popup.hh:1062 ../xffm/common/preview.hh:469
 msgid   "Directory"
 msgstr  "Պանակ"
 
@@ -395,6 +231,17 @@ msgstr  "Կոդավորում"
 msgid   "FIFO"
 msgstr  ""
 
+#: ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168 ../xffm/find/dialog.hh:214
+#, fuzzy
+msgid   "Minutes"
+msgstr  "րոպեներ"
+
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/find/dialog.hh:263
+#: ../xffm/find/dialog.hh:363 ../xffm/fm/view/treeview.hh:18
+msgid   "Details"
+msgstr  "Մանրամասներ"
+
 #: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
 #: ../xffm/find/fgr.hh:176 ../xffm/find/fgr.hh:179 ../xffm/find/fgr.hh:180
 #: ../xffm/find/fgr.hh:183 ../xffm/find/fgr.hh:184 ../xffm/find/fgr.hh:187
@@ -406,6 +253,16 @@ msgstr  ""
 #: ../xffm/find/fgr.hh:177
 msgid   "Previous"
 msgstr  "Նախորդ"
+
+#: ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171 ../xffm/find/dialog.hh:219
+#, fuzzy
+msgid   "Hours"
+msgstr  "%s ժամեր"
+
+#: ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174 ../xffm/find/dialog.hh:224
+#, fuzzy
+msgid   "Days"
+msgstr  "5 օր"
 
 #: ../xffm/find/fgr.hh:175
 #, fuzzy
@@ -483,6 +340,15 @@ msgstr  "Անտեսել"
 msgid   "Text Files"
 msgstr  "Բոլոր Տեքստային ֆայլերը"
 
+#: ../xffm/find/fgr.hh:210 ../xffm/find/dialog.hh:545
+msgid   "No match"
+msgstr  "Համընկնում չկա"
+
+#: ../xffm/find/fgr.hh:212 ../xffm/find/dialog.hh:463
+#, fuzzy
+msgid   "Line Count"
+msgstr  "Գիծ"
+
 #: ../xffm/find/fgr.hh:214
 msgid   "Words"
 msgstr  "Բառեր"
@@ -504,6 +370,19 @@ msgstr  "Սովորական"
 #, fuzzy
 msgid   "Socket"
 msgstr  "Արգելափակված"
+
+#: ../xffm/find/signals.hh:66 ../xffm/find/signals.hh:454
+#: ../xffm/find/dialog.hh:176
+#, fuzzy
+msgid   "Results"
+msgstr  "Որոնման արդյունքներ"
+
+#: ../xffm/find/signals.hh:368 ../xffm/find/dialog.hh:577
+#: ../xffm/response/chooserresponse.hh:21 ../xffm/response/entryresponse.hh:435
+#: ../xffm/fm/view/local/properties.hh:314 ../xffm/fm/view/local/rm.hh:157
+#: ../xffm/common/gtk.hh:409
+msgid   "Cancel"
+msgstr  "Հրաժարվել"
 
 #: ../xffm/find/signals.hh:396 ../xffm/find/signals.hh:830
 #, fuzzy
@@ -537,255 +416,496 @@ msgstr  "Պատրաստ է"
 msgid   "Searching..."
 msgstr  "Փնտրում"
 
-#: ../xffm/common/preview.hh:581
+#: ../xffm/find/dialog.hh:91 ../xffm/find/dialog.hh:143
+#: ../xffm/find/dialog.hh:604
+msgid   "Find"
+msgstr  "Փնտրել"
+
+#: ../xffm/find/dialog.hh:176
 #, fuzzy
-msgid   "Empty file"
-msgstr  "Դատարկ ֆայլ"
+msgid   "Upper limit"
+msgstr  "Վերին Արժեք․"
 
-#: ../xffm/common/preview.hh:636
-#, fuzzy, c-format
-msgid   "Cannot read from %s"
-msgstr  "Հնարավոր չէ կարդալ «%s» նիշքը"
-
-#: ../xffm/common/gtk.hh:67 ../xffm/fm/dialog/notebook/vbuttonbox.hh:240
-#, fuzzy
-msgid   "Open terminal"
-msgstr  "Բացել Տերմինալը"
-
-#: ../xffm/common/gtk.hh:69 ../xffm/common/util.hh:1443
-#, fuzzy
-msgid   "Execute Shell Command"
-msgstr  "Выполнить сценарий"
-
-#: ../xffm/common/gtk.hh:71 ../xffm/fm/view/local/popup.hh:157
-msgid   "Paste"
-msgstr  "Տեղադրել"
-
-#: ../xffm/common/gtk.hh:73 ../xffm/fm/view/local/popup.hh:151
-msgid   "Add bookmark"
-msgstr  "Ավելացնել էջանիշ"
-
-#: ../xffm/common/gtk.hh:75 ../xffm/fm/view/local/popup.hh:152
-#: ../xffm/fm/view/root/popup.hh:137
-msgid   "Remove bookmark"
-msgstr  "Հեռացնել էջանիշ"
-
-#: ../xffm/common/gtk.hh:77 ../xffm/fm/view/pkg/model.hh:108
-#: ../xffm/fm/view/pkg/model.hh:299 ../xffm/fm/view/pkg/model.hh:306
-#: ../xffm/fm/view/pkg/popup.hh:151
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:236
-msgid   "Search"
-msgstr  "Որոնում"
-
-#: ../xffm/common/gtk.hh:81 ../xffm/fm/dialog/notebook/menupopover.hh:237
-#, fuzzy
-msgid   "Exit"
-msgstr  "Ավարտվում է"
-
-#: ../xffm/common/gtk.hh:83 ../xffm/fm/view/local/popup.hh:85
-#: ../xffm/fm/view/local/popup.hh:142 ../xffm/fm/view/local/popup.hh:1287
-#: ../xffm/fm/view/local/popup.hh:1294 ../xffm/fm/view/local/popup.hh:1305
-#: ../xffm/fm/view/local/popup.hh:1312
-msgid   "Open with"
-msgstr  "Բացել ինչպես"
-
-#: ../xffm/common/gtk.hh:85 ../xffm/fm/view/local/popup.hh:100
-#: ../xffm/fm/view/local/popup.hh:156
-msgid   "Cut"
-msgstr  "Կտրել"
-
-#: ../xffm/common/gtk.hh:87 ../xffm/fm/view/local/popup.hh:99
-#: ../xffm/fm/view/local/popup.hh:155
-msgid   "Copy"
-msgstr  "Պատճենել"
-
-#: ../xffm/common/gtk.hh:89 ../xffm/fm/view/local/rm.hh:176
-#: ../xffm/fm/view/local/popup.hh:103 ../xffm/fm/view/local/popup.hh:160
-msgid   "Delete"
-msgstr  "Ջնջել"
-
-#: ../xffm/common/gtk.hh:91 ../xffm/fm/view/local/rm.hh:165
-msgid   "Shred"
+#: ../xffm/find/dialog.hh:181
+msgid   "At Least"
 msgstr  ""
 
-#: ../xffm/common/gtk.hh:94 ../xffm/fm/view/local/popup.hh:95
-#: ../xffm/fm/view/local/popup.hh:145 ../xffm/fm/view/root/popup.hh:136
-#: ../xffm/fm/view/fstab/popup.hh:20
-msgid   "Open in New Tab"
-msgstr  "Բացել նոր ենթապատուհանում"
-
-#: ../xffm/common/gtk.hh:139 ../xffm/fm/dialog/notebook/notebook.hh:75
-msgid   "New Tab"
-msgstr  "Նոր Ներդիր"
-
-#: ../xffm/common/gtk.hh:352 ../xffm/common/gtk.hh:360
-msgid   "Help"
-msgstr  "Օգնություն"
-
-#: ../xffm/common/settings.hh:30
+#: ../xffm/find/dialog.hh:181 ../xffm/find/dialog.hh:186
 #, fuzzy
-msgid   "New File:"
-msgstr  "Նոր ֆայլ"
+msgid   "kBytes"
+msgstr  "? բայթեր"
 
-#: ../xffm/common/gio.hh:81
-msgid   "Copying files"
-msgstr  "Ֆայլերի պատճենում"
-
-#: ../xffm/common/gio.hh:83 ../xffm/common/dnd.hh:35
-#: ../xffm/fm/dialog/clipboard.hh:30
-msgid   "Moving files"
-msgstr  "Ֆայլերի տեղափոխում"
-
-#: ../xffm/common/gio.hh:85
-#, fuzzy
-msgid   "linking"
-msgstr  "Հղում"
-
-#: ../xffm/common/gio.hh:87
-#, fuzzy
-msgid   "rename"
-msgstr  "Անվանափոխել"
-
-#: ../xffm/common/gio.hh:426
-#, fuzzy, c-format
-msgid   "(%d of %d)"
-msgstr  "PHY %d–ը %s–ից"
-
-#: ../xffm/common/util.hh:1404
-#, c-format
-msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
-        "attribute on that file."
+#: ../xffm/find/dialog.hh:186
+msgid   "At Most"
 msgstr  ""
 
-#: ../xffm/common/util.hh:1406 ../xffm/common/util.hh:1441
-#, c-format
-msgid   "Open with %s"
-msgstr  "Բացել %s–ով"
+#: ../xffm/find/dialog.hh:197
+msgid   "Group"
+msgstr  "Խումբ"
 
-#: ../xffm/common/util.hh:1406
-msgid   "Text Editor"
-msgstr  "Տեքստային խմբագիր"
+#: ../xffm/find/dialog.hh:201
+msgid   "Octal Permissions"
+msgstr  "Ութանգամյան թույլտվություն"
 
-#: ../xffm/common/util.hh:1447
-msgid   "Console: quickly run single commands -- write a command here and "
-        "press enter."
-msgstr  "Մի հրամանի կատարում: մուտքագրեք հրամանը և սեղմեք Enter."
+#: ../xffm/find/dialog.hh:206
+msgid   "SUID"
+msgstr  ""
 
-#: ../xffm/common/util.hh:1452 ../xffm/fm/view/local/popup.hh:1109
-#: ../xffm/fm/view/local/popup.hh:1291 ../xffm/fm/view/local/popup.hh:1309
-msgid   "Run in Terminal"
-msgstr  "Աշխատեցնել Տերմինալում"
-
-#: ../xffm/common/dnd.hh:41 ../xffm/fm/dialog/clipboard.hh:23
+#: ../xffm/find/dialog.hh:206 ../xffm/fm/view/local/popup.hh:1102
 #, fuzzy
-msgid   "Copying files locally"
-msgstr  "Ֆայլերի պատճենում"
+msgid   "Executable"
+msgstr  "Աշխատեցնել"
 
-#: ../xffm/common/dnd.hh:47
+#: ../xffm/find/dialog.hh:230
 #, fuzzy
-msgid   "Create Link"
+msgid   "Months"
+msgstr  "3 ամիս"
+
+#: ../xffm/find/dialog.hh:241
+#, fuzzy
+msgid   "File type : "
+msgstr  "Սարքտեսակ."
+
+#: ../xffm/find/dialog.hh:255 ../xffm/find/dialog.hh:595
+#: ../xffm/fm/dialog/notebook/page/page.hh:71 ../xffm/common/gtk.hh:79
+msgid   "Close"
+msgstr  "Փակել"
+
+#: ../xffm/find/dialog.hh:377
+#, fuzzy
+msgid   "Contains"
+msgstr  "Կոնտեյներներ"
+
+#: ../xffm/find/dialog.hh:397
+#, fuzzy
+msgid   "Contains the text"
+msgstr  "Չեղյալ է համարում ինքնաստուգումը"
+
+#: ../xffm/find/dialog.hh:430
+msgid   "Case Sensitive"
+msgstr  "Զգայուն ռեգիստրի նկատմամբ"
+
+#: ../xffm/find/dialog.hh:442
+#, fuzzy
+msgid   "Extended regexp"
+msgstr  "Ընդլայնված"
+
+#: ../xffm/find/dialog.hh:453
+#, fuzzy
+msgid   "Include binary files"
+msgstr  "Ներառել ֆայլեր"
+
+#: ../xffm/find/dialog.hh:489
+#, fuzzy
+msgid   "Match"
+msgstr  "Համընկնումներ"
+
+#: ../xffm/find/dialog.hh:501
+msgid   "Anywhere"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:516
+msgid   "Whole words only"
+msgstr  "Միայն ամբողջ բառեր"
+
+#: ../xffm/find/dialog.hh:531
+#, fuzzy
+msgid   "lines"
+msgstr  "տող"
+
+#: ../xffm/find/dialog.hh:587
+msgid   "Clear"
+msgstr  "Մաքրել"
+
+#: ../xffm/find/dialog.hh:629
+msgid   "Edit"
+msgstr  "Խմբագրել"
+
+#: ../xffm/find/dialog.hh:743 ../xffm/find/dialog.hh:758
+#: ../xffm/common/util.hh:1354 ../xffm/common/util.hh:1356
+#: ../xffm/common/util.hh:1362 ../xffm/common/util.hh:1364
+#: ../xffm/common/preview.hh:460
+msgid   "unknown"
+msgstr  "անհայտ"
+
+#: ../xffm/find/dialog.hh:772
+msgid   "Modified"
+msgstr  "Փոփոխված"
+
+#: ../xffm/find/dialog.hh:776
+#, fuzzy
+msgid   "Created"
 msgstr  "Ստեղծել"
 
-#: ../xffm/common/run.hh:338
+#: ../xffm/find/dialog.hh:780
 #, fuzzy
-msgid   "error"
-msgstr  "սխալ․"
+msgid   "Accessed"
+msgstr  "Մատչելի"
 
-#: ../xffm/common/run.hh:342
+#: ../xffm/find/dialog.hh:1098
+msgid   "Basic rules:\n"
+        "\n"
+        "*  Will match any character zero or more times.\n"
+        "?  Will match any character exactly one time\n"
+        "[] Match any character within the [] \n"
+        "^  Match at beginning of string\n"
+        "$  Match at end of string \n"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:1107
+msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
+        "( ) : \n"
+        "In  basic regular expressions the metacharacters ?, +, {, |, (, "
+        "and ) \n"
+        "  lose their special meaning.\n"
+        "\n"
+        "The  period . matches  any  single  character.\n"
+        "The caret ^ matches at the start of line.\n"
+        "The dollar $ matches at the end of line.\n"
+        "\n"
+        "Characters within [ ] matches any single character in the list.\n"
+        "Characters within [^ ] matches any single character *not* in the "
+        "list.\n"
+        "Characters inside [ - ] matches a range of characters (ie [0-9] or "
+        "[a-z]).\n"
+        "\n"
+        "A regular expression may be followed by one of several repetition "
+        "operators:\n"
+        "?      The preceding item is optional and matched\n"
+        "       at most once.\n"
+        "*      The preceding item will be matched zero\n"
+        "       or more times.\n"
+        "+      The preceding item will be matched one or\n"
+        "       more times.\n"
+        "{n}    The preceding item is matched exactly n times.\n"
+        "{n,}   The preceding item is matched n or more times.\n"
+        "{n,m}  The preceding item is matched at least n times,\n"
+        "       but not more than m times.\n"
+        "\n"
+        "To match any reserved character, precede it with \\. \n"
+        "\n"
+        "Two regular expressions may be joined by the logical or operator |.\n"
+        "Two regular expressions may be concatenated.\n"
+        "\n"
+        "More information is available by typing \"man grep\"\n"
+msgstr  ""
+
+#: ../xffm/response/chooserresponse.hh:23
+msgid   "Open"
+msgstr  "Բացել"
+
+#: ../xffm/response/chooserresponse.hh:56
+msgid   "Choose directory"
+msgstr  "Ընտրեք պանակ"
+
+#: ../xffm/response/chooserresponse.hh:60
+msgid   "Choose file"
+msgstr  "Ընտրեք ֆայլ"
+
+#: ../xffm/response/customresponse.hh:55
 #, fuzzy
-msgid   "warning"
-msgstr  "զգուշացում․"
+msgid   "Execute command"
+msgstr  "Выполнить сценарий"
 
-#: ../xffm/common/run.hh:464 ../xffm/response/passwdresponse.hh:19
-#: ../xffm/response/passwdresponse.hh:25
+#: ../xffm/response/customresponse.hh:103
+#, fuzzy
+msgid   "Source File"
+msgstr  "Սկզբնական ֆայլ"
+
+#: ../xffm/response/entryresponse.hh:439 ../xffm/response/passwdresponse.hh:242
+msgid   "Ok"
+msgstr  "Ok"
+
+#: ../xffm/response/commandprogressresponse.hh:31
+msgid   "Items:"
+msgstr  "Տարրեր"
+
+#: ../xffm/response/passwdresponse.hh:19 ../xffm/response/passwdresponse.hh:25
+#: ../xffm/common/run.hh:464
 msgid   "Enter password"
 msgstr  "Մուտքագրել ծածկագիրը"
 
-#: ../xffm/fm/view/pkg/model.hh:29 ../xffm/fm/view/pkg/popup.hh:35
+#: ../xffm/response/passwdresponse.hh:179
+#, fuzzy
+msgid   "User Input"
+msgstr  "Ծածկագրի մուտքագրում"
+
+#: ../xffm/response/passwdresponse.hh:195
+#, fuzzy
+msgid   "Response Requested"
+msgstr  "Պատասխանի իդենտիֆիկատոր"
+
+#: ../xffm/response/timeoutresponse.hh:57
+msgid   "Dismiss"
+msgstr  ""
+
+#: ../xffm/response/commandresponse.hh:19
+msgid   "Running"
+msgstr  "Գործարկվում է"
+
+#: ../xffm/response/commandresponse.hh:24
+#, fuzzy
+msgid   "Waiting for operation to finish..."
+msgstr  "Սպասում է սոկետի վիճակին․ %s"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:11
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:214
+#, fuzzy
+msgid   "Remove Button Contents"
+msgstr  "Հեռացնել բաղադրիչ մասը"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:67
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:209
+#, fuzzy
+msgid   "Add custom content"
+msgstr  "Կոճակին ավելացնել լրացուցիչ ինֆորմացիա"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:68
+#, fuzzy
+msgid   "Select file to load"
+msgstr  "Ընտրել ֆայլ` ավելացնելու համար․"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:125
+#, fuzzy, c-format
+msgid   "Cannot load file %s. Reason: %s"
+msgstr  "Ձախողում \"%s\" ֆայլը բեռնելու ժամանակ․ %s"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:154
+#, fuzzy
+msgid   "You need to restart the application"
+msgstr  "Դուք պետք է սահմանեք արագացուցչի ստեղնը"
+
 #: ../xffm/fm/dialog/notebook/vbuttonbox.hh:187
 #: ../xffm/fm/dialog/notebook/vbuttonbox.hh:191
 #: ../xffm/fm/dialog/notebook/vbuttonbox.hh:195
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:198
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:198 ../xffm/fm/view/pkg/model.hh:29
+#: ../xffm/fm/view/pkg/popup.hh:35
 #, fuzzy
 msgid   "Software Updater"
 msgstr  "Համակարգչային ծրագիր"
 
-#: ../xffm/fm/view/pkg/model.hh:41 ../xffm/fm/view/pkg/model.hh:52
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:236
+#: ../xffm/fm/view/pkg/model.hh:108 ../xffm/fm/view/pkg/model.hh:299
+#: ../xffm/fm/view/pkg/model.hh:306 ../xffm/fm/view/pkg/popup.hh:151
+#: ../xffm/common/gtk.hh:77
+msgid   "Search"
+msgstr  "Որոնում"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:240 ../xffm/common/gtk.hh:67
 #, fuzzy
-msgid   "Add or remove software installed on the system"
-msgstr  "Համոզվեք, որ համակարգում տեղադրված է 'gdb'։\n"
+msgid   "Open terminal"
+msgstr  "Բացել Տերմինալը"
 
-#: ../xffm/fm/view/pkg/model.hh:111
-msgid   "String"
-msgstr  "Տող"
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:244
+#, fuzzy
+msgid   "Open a New Window"
+msgstr  "Բացել նոր պատուհան"
 
-#: ../xffm/fm/view/pkg/model.hh:116
-msgid   "Waiting for search results"
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:250
+#, fuzzy
+msgid   "Differences"
+msgstr  "Նախընտրություններ"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:256
+#: ../xffm/fm/view/root/model.hh:110
+#, fuzzy
+msgid   "Home Directory"
+msgstr  "Պանակ"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:261
+#: ../xffm/fm/view/root/model.hh:168 ../xffm/fm/view/fstab/popup.hh:29
+#, fuzzy
+msgid   "Disk Image Mounter"
+msgstr  "Սկավարակի միացում"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:266
+#: ../xffm/fm/view/root/model.hh:137
+#, fuzzy
+msgid   "Trash bin"
+msgstr  "Աղբարկղ"
+
+#: ../xffm/fm/dialog/notebook/notebook.hh:56
+#, fuzzy
+msgid   "Long press time"
+msgstr  "Загрузка миниатюры..."
+
+#: ../xffm/fm/dialog/notebook/notebook.hh:75 ../xffm/common/gtk.hh:139
+msgid   "New Tab"
+msgstr  "Նոր Ներդիր"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:178
+#, fuzzy
+msgid   "Open menu"
+msgstr  "Բացել Նկարը"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:230
+#, fuzzy
+msgid   "View as list"
+msgstr  "Տեսաբերել որպես ցուցակ"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:231
+msgid   "Show hidden files"
+msgstr  "Ցույց է տալիս թաքնված նիշքերը"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:232
+#, fuzzy
+msgid   "Show Backup Files"
+msgstr  "Չցուցադրել պահուստային ֆայլերը"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:233
+#, fuzzy
+msgid   "Sort data in descending order"
+msgstr  "Սորտավորել ըստ բացման կարգի"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:235
+#, fuzzy
+msgid   "Sort by date"
+msgstr  "Ցույց տալ ամսաթիվը"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:236
+#, fuzzy
+msgid   "Sort by size"
+msgstr  "Բառի չափս"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:237 ../xffm/common/gtk.hh:81
+#, fuzzy
+msgid   "Exit"
+msgstr  "Ավարտվում է"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:270
+#, fuzzy
+msgid   "Main menu"
+msgstr  "Գլխավոր մենյու"
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:375
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:377
+msgid   "Go to"
+msgstr  "Գնալ դեպի"
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:382
+#: ../xffm/fm/view/local/popup.hh:887 ../xffm/fm/view/local/popup.hh:981
+msgid   "Specify Output Directory..."
+msgstr  "Ընտրեք արտապատկերման նիշքերը..."
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:409
+msgid   "Not a directory"
+msgstr  "Ոչ թղթապանակ"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+#, fuzzy
+msgid   "Renice Process"
+msgstr  "Ավարտել պրոցեսը"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid   "Suspend"
+msgstr  "Համաղում"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid   "Continue"
+msgstr  "Շարունակել"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid   "Interrupt"
+msgstr  "Դադարեցնել"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid   "Hangup"
 msgstr  ""
 
-#: ../xffm/fm/view/pkg/model.hh:174
-#, fuzzy
-msgid   "No results"
-msgstr  "Որոնման արդյունքներ"
-
-#: ../xffm/fm/view/pkg/model.hh:373
-#, fuzzy
-msgid   "Currently busy\n"
-msgstr  "Ընթացիկ բուֆեր"
-
-#: ../xffm/fm/view/pkg/popup.hh:44
-#, fuzzy
-msgid   "Update Database"
-msgstr  "Թարմացված %s"
-
-#: ../xffm/fm/view/pkg/popup.hh:45
-msgid   "Fetch"
-msgstr  "Ստանալ"
-
-#: ../xffm/fm/view/pkg/popup.hh:46
-#, fuzzy
-msgid   "Install --dry-run"
-msgstr  "Տեղադրել մոդուլ"
-
-#: ../xffm/fm/view/pkg/popup.hh:47
-msgid   "Install"
-msgstr  "Տեղադրել"
-
-#: ../xffm/fm/view/pkg/popup.hh:48
-#, fuzzy
-msgid   "Uninstall --dry-run"
-msgstr  "Ջնջել"
-
-#: ../xffm/fm/view/pkg/popup.hh:49
-msgid   "Uninstall"
-msgstr  "Ջնջել"
-
-#: ../xffm/fm/view/pkg/popup.hh:50
-msgid   "Information"
-msgstr  "Ինֆորմացիա"
-
-#: ../xffm/fm/view/pkg/popup.hh:140
-msgid   "Version"
-msgstr  "Տարբերակ"
-
-#: ../xffm/fm/view/pkg/popup.hh:149
-msgid   "Go up"
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid   "User 1 (USR1)"
 msgstr  ""
 
-#: ../xffm/fm/view/pkg/popup.hh:152
-#, fuzzy
-msgid   "Search packages"
-msgstr  "Ընտրել փաթեթ"
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+msgid   "User 2 (USR2)"
+msgstr  ""
 
-#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+#, fuzzy
+msgid   "Terminate Task"
+msgstr  "Terminator"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+msgid   "Abort"
+msgstr  "Ընդհատել"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:138
+msgid   "Kill"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
+#, fuzzy
+msgid   "Segmentation fault"
+msgstr  "Վերադարձնել լռելյայն վիճակին"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:216
+msgid   "PID"
+msgstr  "PID"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:59
+msgid   "loading..."
+msgstr  "բեռնում..."
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:151
+#: ../xffm/fm/dialog/notebook/page/page.hh:167
+#, fuzzy
+msgid   "Confirm Replace"
+msgstr  "Հաստատել մաքրումը"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:153
+#, fuzzy
+msgid   "Destination File"
+msgstr  "Նշանակման վայրի պանակ"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:166
 #, fuzzy, c-format
-msgid   "Loading %s...%s"
-msgstr  "Բեռնում․․․"
+msgid   "The output file %s already exists, do you want to overwrite it?"
+msgstr  "\"%s\" ֆայլն արդեն գոյություն ունի։ Ուզու՞մ եք վերագրել այն։"
 
-#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
 #, fuzzy
-msgid   "Please Wait..."
-msgstr  "Խնդրվում է կրկին փորձել"
+msgid   "Embedded Terminal"
+msgstr  "Բացել Տերմինալը"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
+#, fuzzy
+msgid   "All items in the iconview."
+msgstr  "Ընտրել այս պատուհանի բոլոր տարրերը"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
+#, fuzzy
+msgid   "Scripting"
+msgstr  "Սկրիպտ"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
+#, fuzzy
+msgid   "Clear Log"
+msgstr  "Մաքրել ցուցակը"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
+#, fuzzy
+msgid   "Terminal font"
+msgstr  "Տերմինալ"
+
+#: ../xffm/fm/dialog/clipboard.hh:23 ../xffm/common/dnd.hh:41
+#, fuzzy
+msgid   "Copying files locally"
+msgstr  "Ֆայլերի պատճենում"
+
+#: ../xffm/fm/dialog/clipboard.hh:30 ../xffm/common/gio.hh:83
+#: ../xffm/common/dnd.hh:35
+msgid   "Moving files"
+msgstr  "Ֆայլերի տեղափոխում"
+
+#: ../xffm/fm/dialog/dialog.hh:122
+#, fuzzy
+msgid   "Removed"
+msgstr  "Հեռացնել"
+
+#: ../xffm/fm/dialog/dialog.hh:143
+#, fuzzy
+msgid   "Detected device(s):"
+msgstr  "Ընտրել ֆայլերը:"
 
 #: ../xffm/fm/view/local/model.hh:124
 #, fuzzy, c-format
@@ -802,36 +922,32 @@ msgstr  "Ֆայլ՝ %s"
 msgid   "Loaded %d of %d articles"
 msgstr  ""
 
-#: ../xffm/fm/view/local/rm.hh:59
-#, c-format
-msgid   "Delete %s"
-msgstr  "Ջնջել %s -ը"
-
-#: ../xffm/fm/view/local/rm.hh:61
-msgid   "Warning: "
-msgstr  "զգուշացում"
-
-#: ../xffm/fm/view/local/rm.hh:61 ../xffm/fm/view/local/popup.hh:565
-#, fuzzy
-msgid   "Multiple selections"
-msgstr  "Կտրել ընտրվածը"
-
-#: ../xffm/fm/view/local/rm.hh:92
-msgid   "Remove"
-msgstr  "Հեռացնել"
-
-#: ../xffm/fm/view/local/rm.hh:142
-#, fuzzy
-msgid   "Apply to all"
-msgstr  "Պատասխանել Փոստին"
-
-#: ../xffm/fm/view/local/rm.hh:183
-msgid   "Trash"
-msgstr  "Աղբարկղ"
+#: ../xffm/fm/view/local/popup.hh:85 ../xffm/fm/view/local/popup.hh:142
+#: ../xffm/fm/view/local/popup.hh:1287 ../xffm/fm/view/local/popup.hh:1294
+#: ../xffm/fm/view/local/popup.hh:1305 ../xffm/fm/view/local/popup.hh:1312
+#: ../xffm/common/gtk.hh:83
+msgid   "Open with"
+msgstr  "Բացել ինչպես"
 
 #: ../xffm/fm/view/local/popup.hh:94
 msgid   "New"
 msgstr  "Նոր"
+
+#: ../xffm/fm/view/local/popup.hh:95 ../xffm/fm/view/local/popup.hh:145
+#: ../xffm/fm/view/root/popup.hh:136 ../xffm/fm/view/fstab/popup.hh:20
+#: ../xffm/common/gtk.hh:94
+msgid   "Open in New Tab"
+msgstr  "Բացել նոր ենթապատուհանում"
+
+#: ../xffm/fm/view/local/popup.hh:99 ../xffm/fm/view/local/popup.hh:155
+#: ../xffm/common/gtk.hh:87
+msgid   "Copy"
+msgstr  "Պատճենել"
+
+#: ../xffm/fm/view/local/popup.hh:100 ../xffm/fm/view/local/popup.hh:156
+#: ../xffm/common/gtk.hh:85
+msgid   "Cut"
+msgstr  "Կտրել"
 
 #: ../xffm/fm/view/local/popup.hh:101 ../xffm/fm/view/local/popup.hh:159
 #: ../xffm/fm/view/local/popup.hh:232 ../xffm/fm/view/local/popup.hh:234
@@ -842,6 +958,11 @@ msgstr  "Տեղադրել խմբագրիչի մեջ"
 #: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:158
 msgid   "There is nothing on the clipboard to paste."
 msgstr  "Տվյալների փոխանակման բուֆերում զետեղելու ոչինչ չկա"
+
+#: ../xffm/fm/view/local/popup.hh:103 ../xffm/fm/view/local/popup.hh:160
+#: ../xffm/fm/view/local/rm.hh:176 ../xffm/common/gtk.hh:89
+msgid   "Delete"
+msgstr  "Ջնջել"
 
 #: ../xffm/fm/view/local/popup.hh:106
 msgid   "Select All"
@@ -876,6 +997,19 @@ msgstr  "Ընտրել այս պանակի մեջ տեսանելի շարքերը
 msgid   "Unmount the volume associated with this folder"
 msgstr  "Մաքրել ընթացիկ ֆայլի հետ կապված մոդուլը"
 
+#: ../xffm/fm/view/local/popup.hh:151 ../xffm/common/gtk.hh:73
+msgid   "Add bookmark"
+msgstr  "Ավելացնել էջանիշ"
+
+#: ../xffm/fm/view/local/popup.hh:152 ../xffm/fm/view/root/popup.hh:137
+#: ../xffm/common/gtk.hh:75
+msgid   "Remove bookmark"
+msgstr  "Հեռացնել էջանիշ"
+
+#: ../xffm/fm/view/local/popup.hh:157 ../xffm/common/gtk.hh:71
+msgid   "Paste"
+msgstr  "Տեղադրել"
+
 #: ../xffm/fm/view/local/popup.hh:161 ../xffm/fm/view/local/popup.hh:1231
 msgid   "Rename"
 msgstr  "Անվանափոխել"
@@ -895,6 +1029,11 @@ msgstr  "Հատկություններ"
 #: ../xffm/fm/view/local/popup.hh:562
 msgid   "Files:"
 msgstr  "Ֆայլեր:"
+
+#: ../xffm/fm/view/local/popup.hh:565 ../xffm/fm/view/local/rm.hh:61
+#, fuzzy
+msgid   "Multiple selections"
+msgstr  "Կտրել ընտրվածը"
 
 #: ../xffm/fm/view/local/popup.hh:753
 #, fuzzy
@@ -916,11 +1055,6 @@ msgstr  "Տառատեսակի Ընտրություն"
 msgid   "No matches."
 msgstr  "Համընկնում չկա"
 
-#: ../xffm/fm/view/local/popup.hh:887 ../xffm/fm/view/local/popup.hh:981
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:382
-msgid   "Specify Output Directory..."
-msgstr  "Ընտրեք արտապատկերման նիշքերը..."
-
 #: ../xffm/fm/view/local/popup.hh:1058
 #, fuzzy
 msgid   "Create new..."
@@ -939,6 +1073,11 @@ msgstr  "Անանուն"
 msgid   "Another file with the same name already exists in “%s”."
 msgstr  "Արդեն գոյություն ունի նույն անունով գործիք։"
 
+#: ../xffm/fm/view/local/popup.hh:1109 ../xffm/fm/view/local/popup.hh:1291
+#: ../xffm/fm/view/local/popup.hh:1309 ../xffm/common/util.hh:1452
+msgid   "Run in Terminal"
+msgstr  "Աշխատեցնել Տերմինալում"
+
 #: ../xffm/fm/view/local/popup.hh:1112
 #, fuzzy
 msgid   "Arguments for the Command"
@@ -952,11 +1091,6 @@ msgstr  "Ցուցադրել փոփոխությունները այս ֆայլի �
 #: ../xffm/fm/view/local/popup.hh:1332 ../xffm/fm/view/local/view.hh:156
 msgid   "Invalid entry"
 msgstr  "Անվավեր տարր"
-
-#: ../xffm/fm/view/local/view.hh:177
-#, fuzzy, c-format
-msgid   "The volume '%s' is not mounted."
-msgstr  "«%s» ձևը չի հայտնաբերվել"
 
 #: ../xffm/fm/view/local/properties.hh:245
 msgid   "Properties and Attributes"
@@ -983,6 +1117,37 @@ msgstr  ""
 msgid   "Source:"
 msgstr  "Աղբյուր․"
 
+#: ../xffm/fm/view/local/rm.hh:59
+#, c-format
+msgid   "Delete %s"
+msgstr  "Ջնջել %s -ը"
+
+#: ../xffm/fm/view/local/rm.hh:61
+msgid   "Warning: "
+msgstr  "զգուշացում"
+
+#: ../xffm/fm/view/local/rm.hh:92
+msgid   "Remove"
+msgstr  "Հեռացնել"
+
+#: ../xffm/fm/view/local/rm.hh:142
+#, fuzzy
+msgid   "Apply to all"
+msgstr  "Պատասխանել Փոստին"
+
+#: ../xffm/fm/view/local/rm.hh:165 ../xffm/common/gtk.hh:91
+msgid   "Shred"
+msgstr  ""
+
+#: ../xffm/fm/view/local/rm.hh:183
+msgid   "Trash"
+msgstr  "Աղբարկղ"
+
+#: ../xffm/fm/view/local/view.hh:177
+#, fuzzy, c-format
+msgid   "The volume '%s' is not mounted."
+msgstr  "«%s» ձևը չի հայտնաբերվել"
+
 #: ../xffm/fm/view/root/model.hh:82
 #, fuzzy
 msgid   "Root Directory"
@@ -992,24 +1157,6 @@ msgstr  "Պանակ"
 #, fuzzy
 msgid   "This is the root of the filesystem"
 msgstr  "Փոխել ֆայլերի համակարգի պիտակը"
-
-#: ../xffm/fm/view/root/model.hh:110
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:256
-#, fuzzy
-msgid   "Home Directory"
-msgstr  "Պանակ"
-
-#: ../xffm/fm/view/root/model.hh:137
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:266
-#, fuzzy
-msgid   "Trash bin"
-msgstr  "Աղբարկղ"
-
-#: ../xffm/fm/view/root/model.hh:168 ../xffm/fm/view/fstab/popup.hh:29
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:261
-#, fuzzy
-msgid   "Disk Image Mounter"
-msgstr  "Սկավարակի միացում"
 
 #: ../xffm/fm/view/root/model.hh:176 ../xffm/fm/view/root/model.hh:191
 msgid   "Mount local disks and devices"
@@ -1101,15 +1248,82 @@ msgstr  "Անջատել %s "
 msgid   "Mounting %s"
 msgstr  "Միացնել %s "
 
-#: ../xffm/fm/view/base/signals.hh:838
+#: ../xffm/fm/view/pkg/model.hh:41 ../xffm/fm/view/pkg/model.hh:52
 #, fuzzy
-msgid   "Trash is empty"
-msgstr  "Դատարկ ծածկագիր"
+msgid   "Add or remove software installed on the system"
+msgstr  "Համոզվեք, որ համակարգում տեղադրված է 'gdb'։\n"
 
-#: ../xffm/fm/view/base/signals.hh:840
+#: ../xffm/fm/view/pkg/model.hh:111
+msgid   "String"
+msgstr  "Տող"
+
+#: ../xffm/fm/view/pkg/model.hh:116
+msgid   "Waiting for search results"
+msgstr  ""
+
+#: ../xffm/fm/view/pkg/model.hh:174
 #, fuzzy
-msgid   "Directory does not exist."
-msgstr  "Նախագիծ գոյություն չունի"
+msgid   "No results"
+msgstr  "Որոնման արդյունքներ"
+
+#: ../xffm/fm/view/pkg/model.hh:373
+#, fuzzy
+msgid   "Currently busy\n"
+msgstr  "Ընթացիկ բուֆեր"
+
+#: ../xffm/fm/view/pkg/popup.hh:44
+#, fuzzy
+msgid   "Update Database"
+msgstr  "Թարմացված %s"
+
+#: ../xffm/fm/view/pkg/popup.hh:45
+msgid   "Fetch"
+msgstr  "Ստանալ"
+
+#: ../xffm/fm/view/pkg/popup.hh:46
+#, fuzzy
+msgid   "Install --dry-run"
+msgstr  "Տեղադրել մոդուլ"
+
+#: ../xffm/fm/view/pkg/popup.hh:47
+msgid   "Install"
+msgstr  "Տեղադրել"
+
+#: ../xffm/fm/view/pkg/popup.hh:48
+#, fuzzy
+msgid   "Uninstall --dry-run"
+msgstr  "Ջնջել"
+
+#: ../xffm/fm/view/pkg/popup.hh:49
+msgid   "Uninstall"
+msgstr  "Ջնջել"
+
+#: ../xffm/fm/view/pkg/popup.hh:50
+msgid   "Information"
+msgstr  "Ինֆորմացիա"
+
+#: ../xffm/fm/view/pkg/popup.hh:140
+msgid   "Version"
+msgstr  "Տարբերակ"
+
+#: ../xffm/fm/view/pkg/popup.hh:149
+msgid   "Go up"
+msgstr  ""
+
+#: ../xffm/fm/view/pkg/popup.hh:152
+#, fuzzy
+msgid   "Search packages"
+msgstr  "Ընտրել փաթեթ"
+
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
+#, fuzzy, c-format
+msgid   "Loading %s...%s"
+msgstr  "Բեռնում․․․"
+
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
+#, fuzzy
+msgid   "Please Wait..."
+msgstr  "Խնդրվում է կրկին փորձել"
 
 #: ../xffm/fm/view/treeview.hh:17
 msgid   "Name"
@@ -1128,305 +1342,91 @@ msgstr  "Ամսաթիվ"
 msgid   "Mimetype"
 msgstr  "MIME տեսակներ"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
+#: ../xffm/fm/view/base/signals.hh:838
 #, fuzzy
-msgid   "Embedded Terminal"
-msgstr  "Բացել Տերմինալը"
+msgid   "Trash is empty"
+msgstr  "Դատարկ ծածկագիր"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
+#: ../xffm/fm/view/base/signals.hh:840
 #, fuzzy
-msgid   "All items in the iconview."
-msgstr  "Ընտրել այս պատուհանի բոլոր տարրերը"
+msgid   "Directory does not exist."
+msgstr  "Նախագիծ գոյություն չունի"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
+#: ../xffm/common/settings.hh:30
 #, fuzzy
-msgid   "Scripting"
-msgstr  "Սկրիպտ"
+msgid   "New File:"
+msgstr  "Նոր ֆայլ"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
+#: ../xffm/common/gio.hh:81
+msgid   "Copying files"
+msgstr  "Ֆայլերի պատճենում"
+
+#: ../xffm/common/gio.hh:85
 #, fuzzy
-msgid   "Clear Log"
-msgstr  "Մաքրել ցուցակը"
+msgid   "linking"
+msgstr  "Հղում"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
+#: ../xffm/common/gio.hh:87
 #, fuzzy
-msgid   "Terminal font"
-msgstr  "Տերմինալ"
+msgid   "rename"
+msgstr  "Անվանափոխել"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
-#, fuzzy
-msgid   "Renice Process"
-msgstr  "Ավարտել պրոցեսը"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
-msgid   "Suspend"
-msgstr  "Համաղում"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
-msgid   "Continue"
-msgstr  "Շարունակել"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid   "Interrupt"
-msgstr  "Դադարեցնել"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid   "Hangup"
-msgstr  ""
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid   "User 1 (USR1)"
-msgstr  ""
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
-msgid   "User 2 (USR2)"
-msgstr  ""
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
-#, fuzzy
-msgid   "Terminate Task"
-msgstr  "Terminator"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
-msgid   "Abort"
-msgstr  "Ընդհատել"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:138
-msgid   "Kill"
-msgstr  ""
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
-#, fuzzy
-msgid   "Segmentation fault"
-msgstr  "Վերադարձնել լռելյայն վիճակին"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:216
-msgid   "PID"
-msgstr  "PID"
-
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:375
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:377
-msgid   "Go to"
-msgstr  "Գնալ դեպի"
-
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:409
-msgid   "Not a directory"
-msgstr  "Ոչ թղթապանակ"
-
-#: ../xffm/fm/dialog/notebook/page/page.hh:59
-msgid   "loading..."
-msgstr  "բեռնում..."
-
-#: ../xffm/fm/dialog/notebook/page/page.hh:151
-#: ../xffm/fm/dialog/notebook/page/page.hh:167
-#, fuzzy
-msgid   "Confirm Replace"
-msgstr  "Հաստատել մաքրումը"
-
-#: ../xffm/fm/dialog/notebook/page/page.hh:153
-#, fuzzy
-msgid   "Destination File"
-msgstr  "Նշանակման վայրի պանակ"
-
-#: ../xffm/fm/dialog/notebook/page/page.hh:166
+#: ../xffm/common/gio.hh:426
 #, fuzzy, c-format
-msgid   "The output file %s already exists, do you want to overwrite it?"
-msgstr  "\"%s\" ֆայլն արդեն գոյություն ունի։ Ուզու՞մ եք վերագրել այն։"
+msgid   "(%d of %d)"
+msgstr  "PHY %d–ը %s–ից"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:11
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:214
+#: ../xffm/common/dnd.hh:47
 #, fuzzy
-msgid   "Remove Button Contents"
-msgstr  "Հեռացնել բաղադրիչ մասը"
+msgid   "Create Link"
+msgstr  "Ստեղծել"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:67
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:209
+#: ../xffm/common/util.hh:1404
+#, c-format
+msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
+        "attribute on that file."
+msgstr  ""
+
+#: ../xffm/common/util.hh:1406 ../xffm/common/util.hh:1441
+#, c-format
+msgid   "Open with %s"
+msgstr  "Բացել %s–ով"
+
+#: ../xffm/common/util.hh:1406
+msgid   "Text Editor"
+msgstr  "Տեքստային խմբագիր"
+
+#: ../xffm/common/util.hh:1443 ../xffm/common/gtk.hh:69
 #, fuzzy
-msgid   "Add custom content"
-msgstr  "Կոճակին ավելացնել լրացուցիչ ինֆորմացիա"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:68
-#, fuzzy
-msgid   "Select file to load"
-msgstr  "Ընտրել ֆայլ` ավելացնելու համար․"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:125
-#, fuzzy, c-format
-msgid   "Cannot load file %s. Reason: %s"
-msgstr  "Ձախողում \"%s\" ֆայլը բեռնելու ժամանակ․ %s"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:154
-#, fuzzy
-msgid   "You need to restart the application"
-msgstr  "Դուք պետք է սահմանեք արագացուցչի ստեղնը"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:244
-#, fuzzy
-msgid   "Open a New Window"
-msgstr  "Բացել նոր պատուհան"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:250
-#, fuzzy
-msgid   "Differences"
-msgstr  "Նախընտրություններ"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:178
-#, fuzzy
-msgid   "Open menu"
-msgstr  "Բացել Նկարը"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:230
-#, fuzzy
-msgid   "View as list"
-msgstr  "Տեսաբերել որպես ցուցակ"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:231
-msgid   "Show hidden files"
-msgstr  "Ցույց է տալիս թաքնված նիշքերը"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:232
-#, fuzzy
-msgid   "Show Backup Files"
-msgstr  "Չցուցադրել պահուստային ֆայլերը"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:233
-#, fuzzy
-msgid   "Sort data in descending order"
-msgstr  "Սորտավորել ըստ բացման կարգի"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:235
-#, fuzzy
-msgid   "Sort by date"
-msgstr  "Ցույց տալ ամսաթիվը"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:236
-#, fuzzy
-msgid   "Sort by size"
-msgstr  "Բառի չափս"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:270
-#, fuzzy
-msgid   "Main menu"
-msgstr  "Գլխավոր մենյու"
-
-#: ../xffm/fm/dialog/notebook/notebook.hh:56
-#, fuzzy
-msgid   "Long press time"
-msgstr  "Загрузка миниатюры..."
-
-#: ../xffm/fm/dialog/dialog.hh:122
-#, fuzzy
-msgid   "Removed"
-msgstr  "Հեռացնել"
-
-#: ../xffm/fm/dialog/dialog.hh:143
-#, fuzzy
-msgid   "Detected device(s):"
-msgstr  "Ընտրել ֆայլերը:"
-
-#: ../xffm/response/commandresponse.hh:19
-msgid   "Running"
-msgstr  "Գործարկվում է"
-
-#: ../xffm/response/commandresponse.hh:24
-#, fuzzy
-msgid   "Waiting for operation to finish..."
-msgstr  "Սպասում է սոկետի վիճակին․ %s"
-
-#: ../xffm/response/passwdresponse.hh:179
-#, fuzzy
-msgid   "User Input"
-msgstr  "Ծածկագրի մուտքագրում"
-
-#: ../xffm/response/passwdresponse.hh:195
-#, fuzzy
-msgid   "Response Requested"
-msgstr  "Պատասխանի իդենտիֆիկատոր"
-
-#: ../xffm/response/passwdresponse.hh:242 ../xffm/response/entryresponse.hh:439
-msgid   "Ok"
-msgstr  "Ok"
-
-#: ../xffm/response/customresponse.hh:55
-#, fuzzy
-msgid   "Execute command"
+msgid   "Execute Shell Command"
 msgstr  "Выполнить сценарий"
 
-#: ../xffm/response/customresponse.hh:103
+#: ../xffm/common/util.hh:1447
+msgid   "Console: quickly run single commands -- write a command here and "
+        "press enter."
+msgstr  "Մի հրամանի կատարում: մուտքագրեք հրամանը և սեղմեք Enter."
+
+#: ../xffm/common/gtk.hh:352 ../xffm/common/gtk.hh:360
+msgid   "Help"
+msgstr  "Օգնություն"
+
+#: ../xffm/common/run.hh:338
 #, fuzzy
-msgid   "Source File"
-msgstr  "Սկզբնական ֆայլ"
+msgid   "error"
+msgstr  "սխալ․"
 
-#: ../xffm/response/timeoutresponse.hh:57
-msgid   "Dismiss"
-msgstr  ""
-
-#: ../xffm/response/commandprogressresponse.hh:31
-msgid   "Items:"
-msgstr  "Տարրեր"
-
-#: ../xffm/response/chooserresponse.hh:23
-msgid   "Open"
-msgstr  "Բացել"
-
-#: ../xffm/response/chooserresponse.hh:56
-msgid   "Choose directory"
-msgstr  "Ընտրեք պանակ"
-
-#: ../xffm/response/chooserresponse.hh:60
-msgid   "Choose file"
-msgstr  "Ընտրեք ֆայլ"
-
-#: ../xffm/completion/bash.hh:133
+#: ../xffm/common/run.hh:342
 #, fuzzy
-msgid   "Completion mode:"
-msgstr  "Ավարտվեց"
+msgid   "warning"
+msgstr  "զգուշացում․"
 
-#: ../xffm/completion/bash.hh:134
-msgid   "command"
-msgstr  "հրաման"
-
-#: ../xffm/completion/bash.hh:135
-msgid   "file"
-msgstr  "ֆայլ"
-
-#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
+#: ../xffm/common/preview.hh:581
 #, fuzzy
-msgid   "Options >>"
-msgstr  "Ընտրանքներ"
+msgid   "Empty file"
+msgstr  "Դատարկ ֆայլ"
 
-#: ../xffm/completion/base.hh:28
-msgid   "Command"
-msgstr  "Հրաման"
-
-#: ../xffm/completion/base.hh:31
-msgid   "File"
-msgstr  "Ֆայլ"
-
-#: ../xffm/completion/base.hh:34
-#, fuzzy
-msgid   "Command history"
-msgstr  "Հրահանգի պատկերանիշ"
-
-#: ../xffm/completion/base.hh:40
-msgid   "Variable"
-msgstr  "Փոփոխական"
-
-#: ../xffm/completion/base.hh:43
-msgid   "Host"
-msgstr  "Սպասարկիչ"
-
-#: ../xffm/completion/base.hh:55
-#, fuzzy
-msgid   "Found no match"
-msgstr  "Չի համընկնում"
-
-#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
-msgid   "Matches"
-msgstr  "Համընկնումներ"
-
-#: ../xffm/completion/base.hh:142
-#, fuzzy
-msgid   "Too many files open"
-msgstr  "Չափից ավելի ֆայլեր"
+#: ../xffm/common/preview.hh:636
+#, fuzzy, c-format
+msgid   "Cannot read from %s"
+msgstr  "Հնարավոր չէ կարդալ «%s» նիշքը"
 

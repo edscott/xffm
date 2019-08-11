@@ -1,4 +1,6 @@
 #!/usr/bin/perl
+# execute in po directory.
+# options: potfiles, template, fullMerge, merge
 use strict;
 use warnings;
 use File::Compare;
@@ -11,14 +13,16 @@ my $intltool_update = "/usr/bin/intltool-update";
 my $msgmerge = "/usr/bin/msgmerge";
 
 # 1. Generate POTFILES.in
-# &generatePotfiles;
+if ($ARGV[0] eq "potfiles") {&potfiles}
 # 2. Generate xffm+ pot template file.
-# &generatePot;
+if ($ARGV[0] eq "template") { &template}
 # 3.1 Merge po template with full po files
-&fullMerge;
+if ($ARGV[0] eq "fullmerge") {&fullmerge}
 # 3.2 Merge po template with existing po files (empty new translations)
-# &mergePoFiles;
-sub fullMerge{
+if ($ARGV[0] eq "merge") { &merge}
+exit(1);
+
+sub fullmerge{
     $_ = `ls *.po`;
     my $po;
     my @linguas = split;
@@ -31,8 +35,9 @@ sub fullMerge{
         print `$msgmerge $fullPoDir/$po $catalog.pot -o -  --lang=$lang -i -q| grep -v "#~" | grep -v "# " | grep -v "#\\." > $po.new`;
         print "Cleaning $po...\n";
         open INPUT, "$po.new" or die "cannot open $po.new for read";
-        my $title = "# Xffm+ translation file: ".`date`."# 
-            Merged fron existing open source files\n# http://xffm.org\n";
+        my $title = "# Xffm+ translation file: ".`date`.
+	    "# Merged fron existing open source files\n".
+	    "# http://xffm.org\n";
         my $contents = $title;
         while (<INPUT>){$contents .= $_}
         close INPUT;
@@ -45,25 +50,27 @@ sub fullMerge{
         print `rm $po.new`;
     }
 end:
+    exit(1);
 }
-exit(1);
 
-sub mergePoFiles {
+sub merge {
     my $mergepot = "$intltool_update --gettext-package xffm+ --dist";
     print `$mergepot es`;
     exit(1);
 }
 
 
-sub generatePot {
+sub template {
     my $genpot = "$intltool_update --gettext-package xffm+ --pot";
     print `$genpot`;
     print `cat xffm+.pot`; exit(1);
+    exit(1);
 }
 
-sub generatePotfiles {
+sub potfiles {
     chdir "..";
     $_ = `find $srcdir -name "*.hh" > po/POTFILES.in`;
     print `cat po/POTFILES.in`; exit(1);
     chdir "po";
+    exit(1);
 }

@@ -1,4 +1,4 @@
-# Xffm+ translation file: vie ago  9 14:44:20 CDT 2019
+# Xffm+ translation file: dom ago 11 10:56:49 CDT 2019
 # Merged fron existing open source files
 # http://xffm.org
 #
@@ -6,7 +6,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: xffm+\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2019-08-09 12:32-0500\n"
+        "POT-Creation-Date: 2019-08-11 09:10-0500\n"
         "PO-Revision-Date: 2013-04-21 23:38+0530\n"
         "Last-Translator: Balasankar C <c.balasankar@gmail.com>\n"
         "Language-Team: Swatantra Malayalam Computing\n"
@@ -24,247 +24,78 @@ msgstr  "Project-Id-Version: xffm+\n"
 msgid   "No Read Permission"
 msgstr  "സൈറ്റിനുള്ള ആനുകൂല്യങ്ങള്‍"
 
-#: ../xffm/find/dialog.hh:91 ../xffm/find/dialog.hh:143
-#: ../xffm/find/dialog.hh:604
-msgid   "Find"
-msgstr  "കണ്ടെത്തുക"
+#: ../xffm/completion/base.hh:28
+msgid   "Command"
+msgstr  "ആജ്ഞ"
 
-#: ../xffm/find/dialog.hh:167 ../xffm/find/fgr.hh:146
+#: ../xffm/completion/base.hh:31
+msgid   "File"
+msgstr  "ഫയല്‍"
+
+#: ../xffm/completion/base.hh:34
 #, fuzzy
-msgid   "Recursive"
-msgstr  "ആവ‌ര്ത്തിച്ചുവരുന്ന"
+msgid   "Command history"
+msgstr  "ഓര്‍മ്മച്ചെപ്പ് ചരിത്രം"
 
-#: ../xffm/find/dialog.hh:170 ../xffm/find/fgr.hh:142
-#, fuzzy
-msgid   "Find hidden files and directories"
-msgstr  "ഫയല്‍, തട്ട് എന്നിവ"
-
-#: ../xffm/find/dialog.hh:173 ../xffm/find/fgr.hh:138
-#, fuzzy
-msgid   "Stay on single filesystem"
-msgstr  "ഫയല്‍ സിസ്റ്റം പരിശോധിയ്ക്കക"
-
-#: ../xffm/find/dialog.hh:176 ../xffm/find/signals.hh:66
-#: ../xffm/find/signals.hh:454
-msgid   "Results"
-msgstr  "ഫലങ്ങള്‍"
-
-#: ../xffm/find/dialog.hh:176
-#, fuzzy
-msgid   "Upper limit"
-msgstr  "കൂടിയ‌ പരിധി:"
-
-#: ../xffm/find/dialog.hh:181
-msgid   "At Least"
-msgstr  "കുറഞ്ഞതു്"
-
-#: ../xffm/find/dialog.hh:181 ../xffm/find/dialog.hh:186
-msgid   "kBytes"
-msgstr  "kBytes"
-
-#: ../xffm/find/dialog.hh:186
-msgid   "At Most"
-msgstr  "കൂടിയതു്"
-
-#: ../xffm/find/dialog.hh:192 ../xffm/completion/base.hh:37
+#: ../xffm/completion/base.hh:37 ../xffm/find/dialog.hh:192
 msgid   "User"
 msgstr  "ഉപയോക്താവ്"
 
-#: ../xffm/find/dialog.hh:197
-msgid   "Group"
-msgstr  "കൂട്ടം"
+#: ../xffm/completion/base.hh:40
+msgid   "Variable"
+msgstr  "ചരം"
 
-#: ../xffm/find/dialog.hh:201
-msgid   "Octal Permissions"
-msgstr  "ഒക്ടല്‍ അനുവാദങ്ങള്‍"
+#: ../xffm/completion/base.hh:43
+msgid   "Host"
+msgstr  "ഹോസ്റ്റ്"
 
-#: ../xffm/find/dialog.hh:206
-msgid   "SUID"
-msgstr  ""
-
-#: ../xffm/find/dialog.hh:206 ../xffm/fm/view/local/popup.hh:1102
+#: ../xffm/completion/base.hh:55
 #, fuzzy
-msgid   "Executable"
-msgstr  "പ്രവര്‍ത്തിക്കുന്നവ:"
+msgid   "Found no match"
+msgstr  "ചേര്‍ച്ച നോക്കുന്നതിനായുളള വാക്കുകള്‍"
 
-#: ../xffm/find/dialog.hh:214 ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168
-msgid   "Minutes"
-msgstr  "മിനിറ്റുകള്‍"
+#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
+msgid   "Matches"
+msgstr  "പൊരുത്തപ്പെട്ടു"
 
-#: ../xffm/find/dialog.hh:219 ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171
-msgid   "Hours"
-msgstr  "മണിക്കൂറുകള്‍"
+#: ../xffm/completion/base.hh:142
+msgid   "Too many files open"
+msgstr  "ഒരുപാടു് ഫയലുകള്‍ തുറന്നിട്ടിരിയ്ക്കുന്നു"
 
-#: ../xffm/find/dialog.hh:224 ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174
-msgid   "Days"
-msgstr  "ദിവസങ്ങള്‍"
-
-#: ../xffm/find/dialog.hh:230
-msgid   "Months"
-msgstr  "മാസങ്ങള്‍"
-
-#: ../xffm/find/dialog.hh:241
-#, fuzzy
-msgid   "File type : "
-msgstr  "ഏത് തരം ഫയല്‍: "
-
-#: ../xffm/find/dialog.hh:255 ../xffm/find/dialog.hh:595
-#: ../xffm/common/gtk.hh:79 ../xffm/fm/dialog/notebook/page/page.hh:71
-msgid   "Close"
-msgstr  "അടയ്‍ക്കുക"
-
-#: ../xffm/find/dialog.hh:263 ../xffm/find/dialog.hh:363
-#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
-#: ../xffm/find/fgr.hh:176 ../xffm/fm/view/treeview.hh:18
-msgid   "Details"
-msgstr  "വിശദാംശങ്ങള്‍"
-
-#: ../xffm/find/dialog.hh:301 ../xffm/find/fgr.hh:124
-#: ../xffm/find/signals.hh:100
-msgid   "Path"
-msgstr  "പാഥ്"
-
-#: ../xffm/find/dialog.hh:334 ../xffm/find/fgr.hh:126
-msgid   "Filter:"
-msgstr  "അരിപ്പ:"
-
-#: ../xffm/find/dialog.hh:377
-msgid   "Contains"
-msgstr  "അടങ്ങുന്നത്"
-
-#: ../xffm/find/dialog.hh:397
-msgid   "Contains the text"
-msgstr  "പദാവലി അടങ്ങുന്നു"
-
-#: ../xffm/find/dialog.hh:430
-msgid   "Case Sensitive"
-msgstr  "കേസ് സെന്‍സിറ്റീവ്"
-
-#: ../xffm/find/dialog.hh:442
-#, fuzzy
-msgid   "Extended regexp"
-msgstr  "എക്സ്റ്റെന്‍ഡട്"
-
-#: ../xffm/find/dialog.hh:453
-msgid   "Include binary files"
-msgstr  "ബൈനറി ഫയലുകള്‍ ഉള്‍പ്പെടുത്തുക"
-
-#: ../xffm/find/dialog.hh:463 ../xffm/find/fgr.hh:212
-#, fuzzy
-msgid   "Line Count"
-msgstr  "à´®àµà´³àµà´³àµà´à´³àµà´àµ à´à´£àµà´£à´"
-
-#: ../xffm/find/dialog.hh:489
-msgid   "Match"
-msgstr  "ചേ‌ര്ച്ച"
-
-#: ../xffm/find/dialog.hh:501
-#, fuzzy
-msgid   "Anywhere"
-msgstr  "ഒരിടത്തുമില്ല"
-
-#: ../xffm/find/dialog.hh:516
-msgid   "Whole words only"
-msgstr  "മുഴുവന്‍ വാക്കുകള്‍ മാത്രം"
-
-#: ../xffm/find/dialog.hh:531
-msgid   "lines"
-msgstr  "വരികള്‍"
-
-#: ../xffm/find/dialog.hh:545 ../xffm/find/fgr.hh:210
-msgid   "No match"
-msgstr  "ചേരുന്നതില്ല"
-
-#: ../xffm/find/dialog.hh:577 ../xffm/find/signals.hh:368
-#: ../xffm/common/gtk.hh:409 ../xffm/fm/view/local/rm.hh:157
-#: ../xffm/fm/view/local/properties.hh:314
-#: ../xffm/response/entryresponse.hh:435 ../xffm/response/chooserresponse.hh:21
-msgid   "Cancel"
-msgstr  "റദ്ദാക്കുക"
-
-#: ../xffm/find/dialog.hh:587
-msgid   "Clear"
-msgstr  "വ്യ‌‌ക്തമാക്കുക"
-
-#: ../xffm/find/dialog.hh:629
-msgid   "Edit"
-msgstr  "ചിട്ടപ്പെടുത്തുക"
-
-#: ../xffm/find/dialog.hh:743 ../xffm/find/dialog.hh:758
-#: ../xffm/common/preview.hh:460 ../xffm/common/util.hh:1354
-#: ../xffm/common/util.hh:1356 ../xffm/common/util.hh:1362
-#: ../xffm/common/util.hh:1364
-msgid   "unknown"
-msgstr  "അറിയാത്ത"
-
-#: ../xffm/find/dialog.hh:772
-msgid   "Modified"
-msgstr  "പരിഷ്കരിച്ചു"
-
-#: ../xffm/find/dialog.hh:776
-msgid   "Created"
-msgstr  "നിര്‍മ്മിച്ചു"
-
-#: ../xffm/find/dialog.hh:780
-#, fuzzy
-msgid   "Accessed"
-msgstr  "സന്ദര്‍ശിച്ചതു്:"
-
-#: ../xffm/find/dialog.hh:1098
-msgid   "Basic rules:\n"
-        "\n"
-        "*  Will match any character zero or more times.\n"
-        "?  Will match any character exactly one time\n"
-        "[] Match any character within the [] \n"
-        "^  Match at beginning of string\n"
-        "$  Match at end of string \n"
-msgstr  ""
-
-#: ../xffm/find/dialog.hh:1107
-msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
-        "( ) : \n"
-        "In  basic regular expressions the metacharacters ?, +, {, |, (, "
-        "and ) \n"
-        "  lose their special meaning.\n"
-        "\n"
-        "The  period . matches  any  single  character.\n"
-        "The caret ^ matches at the start of line.\n"
-        "The dollar $ matches at the end of line.\n"
-        "\n"
-        "Characters within [ ] matches any single character in the list.\n"
-        "Characters within [^ ] matches any single character *not* in the "
-        "list.\n"
-        "Characters inside [ - ] matches a range of characters (ie [0-9] or "
-        "[a-z]).\n"
-        "\n"
-        "A regular expression may be followed by one of several repetition "
-        "operators:\n"
-        "?      The preceding item is optional and matched\n"
-        "       at most once.\n"
-        "*      The preceding item will be matched zero\n"
-        "       or more times.\n"
-        "+      The preceding item will be matched one or\n"
-        "       more times.\n"
-        "{n}    The preceding item is matched exactly n times.\n"
-        "{n,}   The preceding item is matched n or more times.\n"
-        "{n,m}  The preceding item is matched at least n times,\n"
-        "       but not more than m times.\n"
-        "\n"
-        "To match any reserved character, precede it with \\. \n"
-        "\n"
-        "Two regular expressions may be joined by the logical or operator |.\n"
-        "Two regular expressions may be concatenated.\n"
-        "\n"
-        "More information is available by typing \"man grep\"\n"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:124 ../xffm/completion/base.hh:339
+#: ../xffm/completion/base.hh:339 ../xffm/find/fgr.hh:124
 msgid   "Options:"
 msgstr  "ഐച്ഛികങ്ങള്‍:"
+
+#: ../xffm/completion/bash.hh:133
+#, fuzzy
+msgid   "Completion mode:"
+msgstr  "പൂര്‍ത്തിയാക്കിയ കോഡ്"
+
+#: ../xffm/completion/bash.hh:134
+msgid   "command"
+msgstr  "കമാന്‍ഡ്"
+
+#: ../xffm/completion/bash.hh:135
+msgid   "file"
+msgstr  "ഫയല്‍ "
+
+#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
+#, fuzzy
+msgid   "Options >>"
+msgstr  "ഐച്ഛികങ്ങള്‍"
+
+#: ../xffm/find/fgr.hh:124 ../xffm/find/signals.hh:100
+#: ../xffm/find/dialog.hh:301
+msgid   "Path"
+msgstr  "പാഥ്"
 
 #: ../xffm/find/fgr.hh:125
 msgid   "Locate documents and folders on this computer by name or content"
 msgstr  "പേര് അല്ലെങ്കില്‍ ഉള്ളടക്കം ഉപയോഗിച്ച് ഫയലുകളും അറകളും കണ്ടുപിടിക്കുക"
+
+#: ../xffm/find/fgr.hh:126 ../xffm/find/dialog.hh:334
+msgid   "Filter:"
+msgstr  "അരിപ്പ:"
 
 #: ../xffm/find/fgr.hh:126
 msgid   "Search for files"
@@ -293,6 +124,11 @@ msgstr  "ലക്കത്തെക്കുറിച്ചുള്ള വി�
 msgid   "Filter Details"
 msgstr  "യൂസര്‍ വിവരങ്ങള്‍"
 
+#: ../xffm/find/fgr.hh:138 ../xffm/find/dialog.hh:173
+#, fuzzy
+msgid   "Stay on single filesystem"
+msgstr  "ഫയല്‍ സിസ്റ്റം പരിശോധിയ്ക്കക"
+
 #: ../xffm/find/fgr.hh:140
 msgid   "Print..."
 msgstr  "അച്ചടിക്കുക"
@@ -300,6 +136,11 @@ msgstr  "അച്ചടിക്കുക"
 #: ../xffm/find/fgr.hh:140
 msgid   "The unique Process ID that identifies this process."
 msgstr  "ഈ പ്രക്രിയയെ തിരിച്ചറിയുന്ന വേറൊന്നും ഉപയോഗിയ്ക്കാത്ത പ്രൊസസ്സ് ഐഡി."
+
+#: ../xffm/find/fgr.hh:142 ../xffm/find/dialog.hh:170
+#, fuzzy
+msgid   "Find hidden files and directories"
+msgstr  "ഫയല്‍, തട്ട് എന്നിവ"
 
 #: ../xffm/find/fgr.hh:143
 msgid   "Filter"
@@ -309,6 +150,11 @@ msgstr  "അരിപ്പ"
 msgid   "To display files which pass the filter (stars and regexps will be "
         "processed)"
 msgstr  ""
+
+#: ../xffm/find/fgr.hh:146 ../xffm/find/dialog.hh:167
+#, fuzzy
+msgid   "Recursive"
+msgstr  "ആവ‌ര്ത്തിച്ചുവരുന്ന"
 
 #: ../xffm/find/fgr.hh:147 ../xffm/find/fgr.hh:148 ../xffm/find/fgr.hh:149
 #: ../xffm/find/fgr.hh:150
@@ -357,7 +203,7 @@ msgid   "Regular file"
 msgstr  "സാധാരണ വലയം (ഗ്രിഡ്)"
 
 #: ../xffm/find/fgr.hh:159 ../xffm/find/signals.hh:8
-#: ../xffm/common/preview.hh:469 ../xffm/fm/view/local/popup.hh:1062
+#: ../xffm/fm/view/local/popup.hh:1062 ../xffm/common/preview.hh:469
 msgid   "Directory"
 msgstr  "നാമസൂചീഗൃഹം(ഡയറക്റ്ററി)"
 
@@ -388,6 +234,16 @@ msgstr  "ക്യാരക്ടര്‍ കോഡ്"
 msgid   "FIFO"
 msgstr  "FIFO"
 
+#: ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168 ../xffm/find/dialog.hh:214
+msgid   "Minutes"
+msgstr  "മിനിറ്റുകള്‍"
+
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/find/dialog.hh:263
+#: ../xffm/find/dialog.hh:363 ../xffm/fm/view/treeview.hh:18
+msgid   "Details"
+msgstr  "വിശദാംശങ്ങള്‍"
+
 #: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
 #: ../xffm/find/fgr.hh:176 ../xffm/find/fgr.hh:179 ../xffm/find/fgr.hh:180
 #: ../xffm/find/fgr.hh:183 ../xffm/find/fgr.hh:184 ../xffm/find/fgr.hh:187
@@ -400,6 +256,14 @@ msgstr  "TIMEOUT"
 #: ../xffm/find/fgr.hh:177
 msgid   "Previous"
 msgstr  "പിന്നോട്ട്"
+
+#: ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171 ../xffm/find/dialog.hh:219
+msgid   "Hours"
+msgstr  "മണിക്കൂറുകള്‍"
+
+#: ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174 ../xffm/find/dialog.hh:224
+msgid   "Days"
+msgstr  "ദിവസങ്ങള്‍"
 
 #: ../xffm/find/fgr.hh:175
 msgid   "Month"
@@ -474,6 +338,15 @@ msgstr  "വലിയക്ഷരചെറിയക്ഷര വ്യത്യ�
 msgid   "Text Files"
 msgstr  "ടെക്സ്റ്റ് ഫയലുകള്‍"
 
+#: ../xffm/find/fgr.hh:210 ../xffm/find/dialog.hh:545
+msgid   "No match"
+msgstr  "ചേരുന്നതില്ല"
+
+#: ../xffm/find/fgr.hh:212 ../xffm/find/dialog.hh:463
+#, fuzzy
+msgid   "Line Count"
+msgstr  "à´®àµà´³àµà´³àµà´à´³àµà´àµ à´à´£àµà´£à´"
+
 #: ../xffm/find/fgr.hh:214
 msgid   "Words"
 msgstr  "വാക്കുകള്‍"
@@ -495,6 +368,18 @@ msgstr  "സാധാരണ"
 #, fuzzy
 msgid   "Socket"
 msgstr  "സോക്കറ്റുകള്‍"
+
+#: ../xffm/find/signals.hh:66 ../xffm/find/signals.hh:454
+#: ../xffm/find/dialog.hh:176
+msgid   "Results"
+msgstr  "ഫലങ്ങള്‍"
+
+#: ../xffm/find/signals.hh:368 ../xffm/find/dialog.hh:577
+#: ../xffm/response/chooserresponse.hh:21 ../xffm/response/entryresponse.hh:435
+#: ../xffm/fm/view/local/properties.hh:314 ../xffm/fm/view/local/rm.hh:157
+#: ../xffm/common/gtk.hh:409
+msgid   "Cancel"
+msgstr  "റദ്ദാക്കുക"
 
 #: ../xffm/find/signals.hh:396 ../xffm/find/signals.hh:830
 #, fuzzy
@@ -526,252 +411,480 @@ msgstr  "%s, വരി: %s"
 msgid   "Searching..."
 msgstr  "തിരയുന്നു..."
 
-#: ../xffm/common/preview.hh:581
-#, fuzzy
-msgid   "Empty file"
-msgstr  "പുതിയ ഒഴിഞ്ഞ ഫയല്‍"
+#: ../xffm/find/dialog.hh:91 ../xffm/find/dialog.hh:143
+#: ../xffm/find/dialog.hh:604
+msgid   "Find"
+msgstr  "കണ്ടെത്തുക"
 
-#: ../xffm/common/preview.hh:636
-#, fuzzy, c-format
-msgid   "Cannot read from %s"
-msgstr  "സി.ഡി വായിക്കുവാന്‍ സാധ്യമല്ല: %s"
-
-#: ../xffm/common/gtk.hh:67 ../xffm/fm/dialog/notebook/vbuttonbox.hh:240
+#: ../xffm/find/dialog.hh:176
 #, fuzzy
-msgid   "Open terminal"
-msgstr  "ഒരു ടെര്‍മിനല്‍ തുറക്കുക"
+msgid   "Upper limit"
+msgstr  "കൂടിയ‌ പരിധി:"
 
-#: ../xffm/common/gtk.hh:69 ../xffm/common/util.hh:1443
+#: ../xffm/find/dialog.hh:181
+msgid   "At Least"
+msgstr  "കുറഞ്ഞതു്"
+
+#: ../xffm/find/dialog.hh:181 ../xffm/find/dialog.hh:186
+msgid   "kBytes"
+msgstr  "kBytes"
+
+#: ../xffm/find/dialog.hh:186
+msgid   "At Most"
+msgstr  "കൂടിയതു്"
+
+#: ../xffm/find/dialog.hh:197
+msgid   "Group"
+msgstr  "കൂട്ടം"
+
+#: ../xffm/find/dialog.hh:201
+msgid   "Octal Permissions"
+msgstr  "ഒക്ടല്‍ അനുവാദങ്ങള്‍"
+
+#: ../xffm/find/dialog.hh:206
+msgid   "SUID"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:206 ../xffm/fm/view/local/popup.hh:1102
 #, fuzzy
-msgid   "Execute Shell Command"
+msgid   "Executable"
+msgstr  "പ്രവര്‍ത്തിക്കുന്നവ:"
+
+#: ../xffm/find/dialog.hh:230
+msgid   "Months"
+msgstr  "മാസങ്ങള്‍"
+
+#: ../xffm/find/dialog.hh:241
+#, fuzzy
+msgid   "File type : "
+msgstr  "ഏത് തരം ഫയല്‍: "
+
+#: ../xffm/find/dialog.hh:255 ../xffm/find/dialog.hh:595
+#: ../xffm/fm/dialog/notebook/page/page.hh:71 ../xffm/common/gtk.hh:79
+msgid   "Close"
+msgstr  "അടയ്‍ക്കുക"
+
+#: ../xffm/find/dialog.hh:377
+msgid   "Contains"
+msgstr  "അടങ്ങുന്നത്"
+
+#: ../xffm/find/dialog.hh:397
+msgid   "Contains the text"
+msgstr  "പദാവലി അടങ്ങുന്നു"
+
+#: ../xffm/find/dialog.hh:430
+msgid   "Case Sensitive"
+msgstr  "കേസ് സെന്‍സിറ്റീവ്"
+
+#: ../xffm/find/dialog.hh:442
+#, fuzzy
+msgid   "Extended regexp"
+msgstr  "എക്സ്റ്റെന്‍ഡട്"
+
+#: ../xffm/find/dialog.hh:453
+msgid   "Include binary files"
+msgstr  "ബൈനറി ഫയലുകള്‍ ഉള്‍പ്പെടുത്തുക"
+
+#: ../xffm/find/dialog.hh:489
+msgid   "Match"
+msgstr  "ചേ‌ര്ച്ച"
+
+#: ../xffm/find/dialog.hh:501
+#, fuzzy
+msgid   "Anywhere"
+msgstr  "ഒരിടത്തുമില്ല"
+
+#: ../xffm/find/dialog.hh:516
+msgid   "Whole words only"
+msgstr  "മുഴുവന്‍ വാക്കുകള്‍ മാത്രം"
+
+#: ../xffm/find/dialog.hh:531
+msgid   "lines"
+msgstr  "വരികള്‍"
+
+#: ../xffm/find/dialog.hh:587
+msgid   "Clear"
+msgstr  "വ്യ‌‌ക്തമാക്കുക"
+
+#: ../xffm/find/dialog.hh:629
+msgid   "Edit"
+msgstr  "ചിട്ടപ്പെടുത്തുക"
+
+#: ../xffm/find/dialog.hh:743 ../xffm/find/dialog.hh:758
+#: ../xffm/common/util.hh:1354 ../xffm/common/util.hh:1356
+#: ../xffm/common/util.hh:1362 ../xffm/common/util.hh:1364
+#: ../xffm/common/preview.hh:460
+msgid   "unknown"
+msgstr  "അറിയാത്ത"
+
+#: ../xffm/find/dialog.hh:772
+msgid   "Modified"
+msgstr  "പരിഷ്കരിച്ചു"
+
+#: ../xffm/find/dialog.hh:776
+msgid   "Created"
+msgstr  "നിര്‍മ്മിച്ചു"
+
+#: ../xffm/find/dialog.hh:780
+#, fuzzy
+msgid   "Accessed"
+msgstr  "സന്ദര്‍ശിച്ചതു്:"
+
+#: ../xffm/find/dialog.hh:1098
+msgid   "Basic rules:\n"
+        "\n"
+        "*  Will match any character zero or more times.\n"
+        "?  Will match any character exactly one time\n"
+        "[] Match any character within the [] \n"
+        "^  Match at beginning of string\n"
+        "$  Match at end of string \n"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:1107
+msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
+        "( ) : \n"
+        "In  basic regular expressions the metacharacters ?, +, {, |, (, "
+        "and ) \n"
+        "  lose their special meaning.\n"
+        "\n"
+        "The  period . matches  any  single  character.\n"
+        "The caret ^ matches at the start of line.\n"
+        "The dollar $ matches at the end of line.\n"
+        "\n"
+        "Characters within [ ] matches any single character in the list.\n"
+        "Characters within [^ ] matches any single character *not* in the "
+        "list.\n"
+        "Characters inside [ - ] matches a range of characters (ie [0-9] or "
+        "[a-z]).\n"
+        "\n"
+        "A regular expression may be followed by one of several repetition "
+        "operators:\n"
+        "?      The preceding item is optional and matched\n"
+        "       at most once.\n"
+        "*      The preceding item will be matched zero\n"
+        "       or more times.\n"
+        "+      The preceding item will be matched one or\n"
+        "       more times.\n"
+        "{n}    The preceding item is matched exactly n times.\n"
+        "{n,}   The preceding item is matched n or more times.\n"
+        "{n,m}  The preceding item is matched at least n times,\n"
+        "       but not more than m times.\n"
+        "\n"
+        "To match any reserved character, precede it with \\. \n"
+        "\n"
+        "Two regular expressions may be joined by the logical or operator |.\n"
+        "Two regular expressions may be concatenated.\n"
+        "\n"
+        "More information is available by typing \"man grep\"\n"
+msgstr  ""
+
+#: ../xffm/response/chooserresponse.hh:23
+msgid   "Open"
+msgstr  "തുറക്കുക"
+
+#: ../xffm/response/chooserresponse.hh:56
+msgid   "Choose directory"
+msgstr  "തട്ട് നിര്‍ണ്ണയിക്കുക"
+
+#: ../xffm/response/chooserresponse.hh:60
+msgid   "Choose file"
+msgstr  "ഫയല്‍ നിര്‍‌ണ്ണയിക്കുക"
+
+#: ../xffm/response/customresponse.hh:55
+#, fuzzy
+msgid   "Execute command"
 msgstr  "ഷെല്‍ ആജ്ഞകള്‍ നടപ്പിലാക്കുക"
 
-#: ../xffm/common/gtk.hh:71 ../xffm/fm/view/local/popup.hh:157
-msgid   "Paste"
-msgstr  "ഒട്ടിപ്പ്"
+#: ../xffm/response/customresponse.hh:103
+msgid   "Source File"
+msgstr  "സോഴ്സ് ഫയല്‍"
 
-#: ../xffm/common/gtk.hh:73 ../xffm/fm/view/local/popup.hh:151
-msgid   "Add bookmark"
-msgstr  "ഓര്‍മ്മകുറിപ്പായി സൂക്ഷിക്കുക"
+#: ../xffm/response/entryresponse.hh:439 ../xffm/response/passwdresponse.hh:242
+msgid   "Ok"
+msgstr  "ശരി"
 
-#: ../xffm/common/gtk.hh:75 ../xffm/fm/view/local/popup.hh:152
-#: ../xffm/fm/view/root/popup.hh:137
-msgid   "Remove bookmark"
-msgstr  "അടയാളം മായ്‍ക്കുക"
+#: ../xffm/response/commandprogressresponse.hh:31
+msgid   "Items:"
+msgstr  "ഇനങ്ങള്‍:"
 
-#: ../xffm/common/gtk.hh:77 ../xffm/fm/view/pkg/model.hh:108
-#: ../xffm/fm/view/pkg/model.hh:299 ../xffm/fm/view/pkg/model.hh:306
-#: ../xffm/fm/view/pkg/popup.hh:151
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:236
-msgid   "Search"
-msgstr  "അന്വേഷണം"
-
-#: ../xffm/common/gtk.hh:81 ../xffm/fm/dialog/notebook/menupopover.hh:237
-msgid   "Exit"
-msgstr  "പുറത്ത് കടക്കുക"
-
-#: ../xffm/common/gtk.hh:83 ../xffm/fm/view/local/popup.hh:85
-#: ../xffm/fm/view/local/popup.hh:142 ../xffm/fm/view/local/popup.hh:1287
-#: ../xffm/fm/view/local/popup.hh:1294 ../xffm/fm/view/local/popup.hh:1305
-#: ../xffm/fm/view/local/popup.hh:1312
-msgid   "Open with"
-msgstr  "കൊണ്ട് തുറക്കുക"
-
-#: ../xffm/common/gtk.hh:85 ../xffm/fm/view/local/popup.hh:100
-#: ../xffm/fm/view/local/popup.hh:156
-msgid   "Cut"
-msgstr  "മുറിപ്പ്"
-
-#: ../xffm/common/gtk.hh:87 ../xffm/fm/view/local/popup.hh:99
-#: ../xffm/fm/view/local/popup.hh:155
-msgid   "Copy"
-msgstr  "പക‍ര്പ്പ്"
-
-#: ../xffm/common/gtk.hh:89 ../xffm/fm/view/local/rm.hh:176
-#: ../xffm/fm/view/local/popup.hh:103 ../xffm/fm/view/local/popup.hh:160
-msgid   "Delete"
-msgstr  "മായ്‌‌യ്ക്കുക"
-
-#: ../xffm/common/gtk.hh:91 ../xffm/fm/view/local/rm.hh:165
-#, fuzzy
-msgid   "Shred"
-msgstr  "ഷ്രെഡ്ഡര്‍"
-
-#: ../xffm/common/gtk.hh:94 ../xffm/fm/view/local/popup.hh:95
-#: ../xffm/fm/view/local/popup.hh:145 ../xffm/fm/view/root/popup.hh:136
-#: ../xffm/fm/view/fstab/popup.hh:20
-msgid   "Open in New Tab"
-msgstr  "പുതിയ ജാലകത്തില് തുറക്കുക"
-
-#: ../xffm/common/gtk.hh:139 ../xffm/fm/dialog/notebook/notebook.hh:75
-msgid   "New Tab"
-msgstr  "പുതിയ ടാബ് (T)"
-
-#: ../xffm/common/gtk.hh:352 ../xffm/common/gtk.hh:360
-msgid   "Help"
-msgstr  "സഹായം"
-
-#: ../xffm/common/settings.hh:30
-#, fuzzy
-msgid   "New File:"
-msgstr  "പുതിയ ഫയല്‍"
-
-#: ../xffm/common/gio.hh:81
-msgid   "Copying files"
-msgstr  "ഫയലുകള്‍ പകര്‍ത്തുന്നു"
-
-#: ../xffm/common/gio.hh:83 ../xffm/common/dnd.hh:35
-#: ../xffm/fm/dialog/clipboard.hh:30
-#, fuzzy
-msgid   "Moving files"
-msgstr  "ഫയലുകള്‍ നീക്കുന്നു"
-
-#: ../xffm/common/gio.hh:85
-#, fuzzy
-msgid   "linking"
-msgstr  "ശൂന്യമാക്കുന്നു"
-
-#: ../xffm/common/gio.hh:87
-#, fuzzy
-msgid   "rename"
-msgstr  "പുനര്‍നാമകരണം"
-
-#: ../xffm/common/gio.hh:426
-#, fuzzy, c-format
-msgid   "(%d of %d)"
-msgstr  "(%s$d-ന്റെ %s$d)"
-
-#: ../xffm/common/util.hh:1404
-#, c-format
-msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
-        "attribute on that file."
-msgstr  ""
-
-#: ../xffm/common/util.hh:1406 ../xffm/common/util.hh:1441
-#, c-format
-msgid   "Open with %s"
-msgstr  "%s തുറക്കുന്നതിനായി"
-
-#: ../xffm/common/util.hh:1406
-msgid   "Text Editor"
-msgstr  "എഴുത്തിടം"
-
-#: ../xffm/common/util.hh:1447
-msgid   "Console: quickly run single commands -- write a command here and "
-        "press enter."
-msgstr  ""
-
-#: ../xffm/common/util.hh:1452 ../xffm/fm/view/local/popup.hh:1109
-#: ../xffm/fm/view/local/popup.hh:1291 ../xffm/fm/view/local/popup.hh:1309
-msgid   "Run in Terminal"
-msgstr  "അഗ്രിമത്തില്‍ ഓടിക്കുക"
-
-#: ../xffm/common/dnd.hh:41 ../xffm/fm/dialog/clipboard.hh:23
-msgid   "Copying files locally"
-msgstr  "ഫയലുകള്‍ ലോക്കലായി പകര്‍ത്തുന്നു"
-
-#: ../xffm/common/dnd.hh:47
-#, fuzzy
-msgid   "Create Link"
-msgstr  "കണ്ണി നിര്‍മ്മിച്ചത് വേണ്ടെന്ന് വയ്ക്കുക"
-
-#: ../xffm/common/run.hh:338
-msgid   "error"
-msgstr  "പിശക്"
-
-#: ../xffm/common/run.hh:342
-#, fuzzy
-msgid   "warning"
-msgstr  "മുന്നറിയിപ്പ്:"
-
-#: ../xffm/common/run.hh:464 ../xffm/response/passwdresponse.hh:19
-#: ../xffm/response/passwdresponse.hh:25
+#: ../xffm/response/passwdresponse.hh:19 ../xffm/response/passwdresponse.hh:25
+#: ../xffm/common/run.hh:464
 msgid   "Enter password"
 msgstr  "രഹസ്യവാക്ക് നല്‍കുക"
 
-#: ../xffm/fm/view/pkg/model.hh:29 ../xffm/fm/view/pkg/popup.hh:35
+#: ../xffm/response/passwdresponse.hh:179
+#, fuzzy
+msgid   "User Input"
+msgstr  "മൌസ് ഇന്‍പുട്ട്"
+
+#: ../xffm/response/passwdresponse.hh:195
+#, fuzzy
+msgid   "Response Requested"
+msgstr  "മറുപടി ആവശ്യപ്പെട്ടിരിക്കുന്നു "
+
+#: ../xffm/response/timeoutresponse.hh:57
+msgid   "Dismiss"
+msgstr  "വേണ്ടെന്നു് വയ്ക്കുക"
+
+#: ../xffm/response/commandresponse.hh:19
+msgid   "Running"
+msgstr  "പ്രവര്‍ത്തിക്കുന്നു"
+
+#: ../xffm/response/commandresponse.hh:24
+#, fuzzy
+msgid   "Waiting for operation to finish..."
+msgstr  "ടക്സ് പെയിന്റ് ആവശ്യമാണ്"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:11
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:214
+#, fuzzy
+msgid   "Remove Button Contents"
+msgstr  "ഫോള്‍ഡറിലുള്ളവ നീക്കം ചെയ്യുക"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:67
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:209
+#, fuzzy
+msgid   "Add custom content"
+msgstr  "ഇഷ്ടമുള്ള അക്ഷരസഞ്ചയം ഉപയോഗിക്കുക"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:68
+#, fuzzy
+msgid   "Select file to load"
+msgstr  "കൂട്ടിച്ചേര്‍ക്കാനുള്ള ഫയലുകള്‍ തെരഞ്ഞെടുക്കുക:"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:125
+#, fuzzy, c-format
+msgid   "Cannot load file %s. Reason: %s"
+msgstr  "%s ശേഖരം സൂക്ഷിക്കാനായില്ല: %s"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:154
+#, fuzzy
+msgid   "You need to restart the application"
+msgstr  "പ്രയോഗം വീണ്ടും ആരംഭിക്കേണ്ടതുണ്ടു്."
+
 #: ../xffm/fm/dialog/notebook/vbuttonbox.hh:187
 #: ../xffm/fm/dialog/notebook/vbuttonbox.hh:191
 #: ../xffm/fm/dialog/notebook/vbuttonbox.hh:195
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:198
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:198 ../xffm/fm/view/pkg/model.hh:29
+#: ../xffm/fm/view/pkg/popup.hh:35
 #, fuzzy
 msgid   "Software Updater"
 msgstr  "സോഫ്റ്റ്‌വെയര്‍ പരിഷ്കാരം"
 
-#: ../xffm/fm/view/pkg/model.hh:41 ../xffm/fm/view/pkg/model.hh:52
-msgid   "Add or remove software installed on the system"
-msgstr  "സിസ്റ്റത്തില്‍ ഇന്‍സ്റ്റോള്‍ ചെയ്തിരിക്കുന്ന സോഫ്റ്റ്‌വെയര്‍ ചേര്‍ക്കുക അല്ലെങ്കില്‍ നീക്കം ചെയ്യുക"
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:236
+#: ../xffm/fm/view/pkg/model.hh:108 ../xffm/fm/view/pkg/model.hh:299
+#: ../xffm/fm/view/pkg/model.hh:306 ../xffm/fm/view/pkg/popup.hh:151
+#: ../xffm/common/gtk.hh:77
+msgid   "Search"
+msgstr  "അന്വേഷണം"
 
-#: ../xffm/fm/view/pkg/model.hh:111
-msgid   "String"
-msgstr  "വാക്യം"
-
-#: ../xffm/fm/view/pkg/model.hh:116
-msgid   "Waiting for search results"
-msgstr  "തെരച്ചിലിനുള്ള ഫലങ്ങള്‍ക്കായി കാത്തിരിക്കുക"
-
-#: ../xffm/fm/view/pkg/model.hh:174
-msgid   "No results"
-msgstr  "ഫലങ്ങള്‍ ലഭ്യമല്ല"
-
-#: ../xffm/fm/view/pkg/model.hh:373
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:240 ../xffm/common/gtk.hh:67
 #, fuzzy
-msgid   "Currently busy\n"
-msgstr  "ഇപ്പോഴത്തെ അവസ്ഥ:\n"
+msgid   "Open terminal"
+msgstr  "ഒരു ടെര്‍മിനല്‍ തുറക്കുക"
 
-#: ../xffm/fm/view/pkg/popup.hh:44
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:244
+msgid   "Open a New Window"
+msgstr  "പുതിയ ജാലകം തുറക്കുക"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:250
 #, fuzzy
-msgid   "Update Database"
-msgstr  "യു.എസ് പേറ്റന്റ് ഡേറ്റാബെയിസ് "
+msgid   "Differences"
+msgstr  "സൂചനകള്‍"
 
-#: ../xffm/fm/view/pkg/popup.hh:45
-msgid   "Fetch"
-msgstr  "കൊണ്ടുവരുക"
-
-#: ../xffm/fm/view/pkg/popup.hh:46
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:256
+#: ../xffm/fm/view/root/model.hh:110
 #, fuzzy
-msgid   "Install --dry-run"
-msgstr  "ഘടകം പ്രതിഷ്ഠിക്കുക"
+msgid   "Home Directory"
+msgstr  "ഹോം ഡയറക്ടറി"
 
-#: ../xffm/fm/view/pkg/popup.hh:47
-msgid   "Install"
-msgstr  "സ്ഥാപിക്കുക"
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:261
+#: ../xffm/fm/view/root/model.hh:168 ../xffm/fm/view/fstab/popup.hh:29
+msgid   "Disk Image Mounter"
+msgstr  "ഡിസ്ക് ഇമേജ് മൌണ്ടര്‍"
 
-#: ../xffm/fm/view/pkg/popup.hh:48
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:266
+#: ../xffm/fm/view/root/model.hh:137
 #, fuzzy
-msgid   "Uninstall --dry-run"
-msgstr  "അണ്‍ഇന്‍സ്റ്റോള്‍ ചെയ്യുന്നു"
+msgid   "Trash bin"
+msgstr  "ഫയല്‍ ചവറ്റുകുട്ടയിലിടുക"
 
-#: ../xffm/fm/view/pkg/popup.hh:49
-msgid   "Uninstall"
-msgstr  "നീക്കം ചെയ്യുക"
+#: ../xffm/fm/dialog/notebook/notebook.hh:56
+msgid   "Long press time"
+msgstr  "അമറ്‍ത്തുന്നതിനുളള അധിക സമയം"
 
-#: ../xffm/fm/view/pkg/popup.hh:50
-msgid   "Information"
-msgstr  "അറിയിപ്പുകള്‍"
+#: ../xffm/fm/dialog/notebook/notebook.hh:75 ../xffm/common/gtk.hh:139
+msgid   "New Tab"
+msgstr  "പുതിയ ടാബ് (T)"
 
-#: ../xffm/fm/view/pkg/popup.hh:140
-msgid   "Version"
-msgstr  "ലക്കം"
-
-#: ../xffm/fm/view/pkg/popup.hh:149
+#: ../xffm/fm/dialog/notebook/menupopover.hh:178
 #, fuzzy
-msgid   "Go up"
-msgstr  "മുകളിലേക്ക് പോവുക"
+msgid   "Open menu"
+msgstr  "മെനു തുറക്കുക"
 
-#: ../xffm/fm/view/pkg/popup.hh:152
+#: ../xffm/fm/dialog/notebook/menupopover.hh:230
 #, fuzzy
-msgid   "Search packages"
-msgstr  "പാക്കേജുകള്‍ക്കായി തെരയുന്നു"
+msgid   "View as list"
+msgstr  "പട്ടികയായിട്ട് കാണിക്കുക(L)"
 
-#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
+#: ../xffm/fm/dialog/notebook/menupopover.hh:231
+msgid   "Show hidden files"
+msgstr  "അദൃശ്യമായ ഫയലുകള്‍ കാണിക്കുക"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:232
+#, fuzzy
+msgid   "Show Backup Files"
+msgstr  "ഫയലുകള്‍ കാണിക്കുക"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:233
+#, fuzzy
+msgid   "Sort data in descending order"
+msgstr  "തുറക്കുന്ന ക്രമത്തില്‍ ചിട്ടപ്പെടുത്തിയത്"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:235
+#, fuzzy
+msgid   "Sort by date"
+msgstr  "തീയതിയുടെ ലഘുരൂപം:"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:236
+#, fuzzy
+msgid   "Sort by size"
+msgstr  "വിന്യാസരീതി"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:237 ../xffm/common/gtk.hh:81
+msgid   "Exit"
+msgstr  "പുറത്ത് കടക്കുക"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:270
+msgid   "Main menu"
+msgstr  "പ്രധാന മെനു"
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:375
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:377
+msgid   "Go to"
+msgstr  "പോകുക"
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:382
+#: ../xffm/fm/view/local/popup.hh:887 ../xffm/fm/view/local/popup.hh:981
+msgid   "Specify Output Directory..."
+msgstr  "ഔട്ട്പുട്ടിനുള്ള തട്ട് പ്രസ്ഥാപിയ്ക്കുക..."
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:409
+msgid   "Not a directory"
+msgstr  "ഒരു ഡയറക്ടറി അല്ല"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid   "Renice Process"
+msgstr  "പ്രക്രിയ റീനൈസ് ചെയ്യുക"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid   "Suspend"
+msgstr  "സസ്പെന്‍ഡ്"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid   "Continue"
+msgstr  "തുടരുക"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid   "Interrupt"
+msgstr  "തടസ്സം"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid   "Hangup"
+msgstr  "അവസാനിപ്പിക്കുക"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid   "User 1 (USR1)"
+msgstr  "ഉപയോക്താവു് 1 (USR1)"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+msgid   "User 2 (USR2)"
+msgstr  "ഉപയോക്താവു് 2 (USR2)"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+#, fuzzy
+msgid   "Terminate Task"
+msgstr  "നിര്‍ത്തലാക്കുക %s "
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+msgid   "Abort"
+msgstr  "ഉപേക്ഷിക്കുക"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:138
+msgid   "Kill"
+msgstr  "അവസാനിപ്പിക്കുക"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
+#, fuzzy
+msgid   "Segmentation fault"
+msgstr  "സെഗ്മന്‍റേഷനില്‍ തെറ്റ്"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:216
+msgid   "PID"
+msgstr  "PID"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:59
+msgid   "loading..."
+msgstr  "കാത്തിരിക്കൂ..."
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:151
+#: ../xffm/fm/dialog/notebook/page/page.hh:167
+#, fuzzy
+msgid   "Confirm Replace"
+msgstr  "expunge ഉറപ്പ് വരുത്തുക"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:153
+#, fuzzy
+msgid   "Destination File"
+msgstr  "ലക്ഷ്യം:"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:166
 #, fuzzy, c-format
-msgid   "Loading %s...%s"
-msgstr  "%s നിറയ്‌ക്കുന്നു...‌"
+msgid   "The output file %s already exists, do you want to overwrite it?"
+msgstr  "%s ഫയല്‍ നിലവിലുണ്ട്. അത് മാച്ചെഴുതണോ?"
 
-#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
-msgid   "Please Wait..."
-msgstr  "ദയവായി കാത്തിരിക്കുക..."
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
+#, fuzzy
+msgid   "Embedded Terminal"
+msgstr  "ടെര്‍മിനല്‍ തുറക്കുക"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
+#, fuzzy
+msgid   "All items in the iconview."
+msgstr  "ഈ ജാലകത്തിലെ‌ ഇനങ്ങള്‍ എല്ലാം തെരഞ്ഞടുക്കുക"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
+#, fuzzy
+msgid   "Scripting"
+msgstr  "ആജ്ഞാലേഖനം"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
+#, fuzzy
+msgid   "Clear Log"
+msgstr  "പട്ടിക വെടിപ്പാക്കുക"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
+msgid   "Terminal font"
+msgstr  "ടെര്‍മിനലിന്‍റെ ലിപി"
+
+#: ../xffm/fm/dialog/clipboard.hh:23 ../xffm/common/dnd.hh:41
+msgid   "Copying files locally"
+msgstr  "ഫയലുകള്‍ ലോക്കലായി പകര്‍ത്തുന്നു"
+
+#: ../xffm/fm/dialog/clipboard.hh:30 ../xffm/common/gio.hh:83
+#: ../xffm/common/dnd.hh:35
+#, fuzzy
+msgid   "Moving files"
+msgstr  "ഫയലുകള്‍ നീക്കുന്നു"
+
+#: ../xffm/fm/dialog/dialog.hh:122
+msgid   "Removed"
+msgstr  "നീക്കം ചെയ്തിരിക്കുന്നു"
+
+#: ../xffm/fm/dialog/dialog.hh:143
+#, fuzzy
+msgid   "Detected device(s):"
+msgstr  "ഉപകരണങ്ങള്‍ ലഭ്യമാക്കുക (D)"
 
 #: ../xffm/fm/view/local/model.hh:124
 #, c-format
@@ -788,36 +901,32 @@ msgstr  "ഫയല്‍: %s"
 msgid   "Loaded %d of %d articles"
 msgstr  "ചേര്‍ത്ത ഫയലുകള്‍:"
 
-#: ../xffm/fm/view/local/rm.hh:59
-#, c-format
-msgid   "Delete %s"
-msgstr  "%s മായിച്ചു കളയുക (D)"
-
-#: ../xffm/fm/view/local/rm.hh:61
-msgid   "Warning: "
-msgstr  "മുന്നറിയിപ്പ്:"
-
-#: ../xffm/fm/view/local/rm.hh:61 ../xffm/fm/view/local/popup.hh:565
-#, fuzzy
-msgid   "Multiple selections"
-msgstr  "ഫയല്‍ തിരഞ്ഞെടുക്കല്‍"
-
-#: ../xffm/fm/view/local/rm.hh:92
-msgid   "Remove"
-msgstr  "നീക്കം ചെയ്യുക"
-
-#: ../xffm/fm/view/local/rm.hh:142
-#, fuzzy
-msgid   "Apply to all"
-msgstr  "പ്രയോഗത്തില്‍വരുത്തുക:"
-
-#: ../xffm/fm/view/local/rm.hh:183
-msgid   "Trash"
-msgstr  "ചവറ്റുകുട്ട‌"
+#: ../xffm/fm/view/local/popup.hh:85 ../xffm/fm/view/local/popup.hh:142
+#: ../xffm/fm/view/local/popup.hh:1287 ../xffm/fm/view/local/popup.hh:1294
+#: ../xffm/fm/view/local/popup.hh:1305 ../xffm/fm/view/local/popup.hh:1312
+#: ../xffm/common/gtk.hh:83
+msgid   "Open with"
+msgstr  "കൊണ്ട് തുറക്കുക"
 
 #: ../xffm/fm/view/local/popup.hh:94
 msgid   "New"
 msgstr  "പുതിയ"
+
+#: ../xffm/fm/view/local/popup.hh:95 ../xffm/fm/view/local/popup.hh:145
+#: ../xffm/fm/view/root/popup.hh:136 ../xffm/fm/view/fstab/popup.hh:20
+#: ../xffm/common/gtk.hh:94
+msgid   "Open in New Tab"
+msgstr  "പുതിയ ജാലകത്തില് തുറക്കുക"
+
+#: ../xffm/fm/view/local/popup.hh:99 ../xffm/fm/view/local/popup.hh:155
+#: ../xffm/common/gtk.hh:87
+msgid   "Copy"
+msgstr  "പക‍ര്പ്പ്"
+
+#: ../xffm/fm/view/local/popup.hh:100 ../xffm/fm/view/local/popup.hh:156
+#: ../xffm/common/gtk.hh:85
+msgid   "Cut"
+msgstr  "മുറിപ്പ്"
 
 #: ../xffm/fm/view/local/popup.hh:101 ../xffm/fm/view/local/popup.hh:159
 #: ../xffm/fm/view/local/popup.hh:232 ../xffm/fm/view/local/popup.hh:234
@@ -828,6 +937,11 @@ msgstr  "%s ലേക്ക് ഒട്ടിക്കുന്നു"
 #: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:158
 msgid   "There is nothing on the clipboard to paste."
 msgstr  "ഒട്ടിക്കാന്‍ ഒട്ടുപലകയില്‍ ഒന്നുമില്ല"
+
+#: ../xffm/fm/view/local/popup.hh:103 ../xffm/fm/view/local/popup.hh:160
+#: ../xffm/fm/view/local/rm.hh:176 ../xffm/common/gtk.hh:89
+msgid   "Delete"
+msgstr  "മായ്‌‌യ്ക്കുക"
 
 #: ../xffm/fm/view/local/popup.hh:106
 msgid   "Select All"
@@ -858,6 +972,19 @@ msgstr  "ഈ അറയുമായി ബന്ധമുളള വോള്യ�
 msgid   "Unmount the volume associated with this folder"
 msgstr  "ഈ അറയുമായി ബന്ധമുളള വോള്യം അണ്‍മൌണ്ടു് ചെയ്യുക"
 
+#: ../xffm/fm/view/local/popup.hh:151 ../xffm/common/gtk.hh:73
+msgid   "Add bookmark"
+msgstr  "ഓര്‍മ്മകുറിപ്പായി സൂക്ഷിക്കുക"
+
+#: ../xffm/fm/view/local/popup.hh:152 ../xffm/fm/view/root/popup.hh:137
+#: ../xffm/common/gtk.hh:75
+msgid   "Remove bookmark"
+msgstr  "അടയാളം മായ്‍ക്കുക"
+
+#: ../xffm/fm/view/local/popup.hh:157 ../xffm/common/gtk.hh:71
+msgid   "Paste"
+msgstr  "ഒട്ടിപ്പ്"
+
 #: ../xffm/fm/view/local/popup.hh:161 ../xffm/fm/view/local/popup.hh:1231
 msgid   "Rename"
 msgstr  "പുനര്‍നാമകരണം"
@@ -877,6 +1004,11 @@ msgstr  "ഗുണധര്മ്മങ്ങള്‍"
 #: ../xffm/fm/view/local/popup.hh:562
 msgid   "Files:"
 msgstr  "ഫയലുകള്‍:"
+
+#: ../xffm/fm/view/local/popup.hh:565 ../xffm/fm/view/local/rm.hh:61
+#, fuzzy
+msgid   "Multiple selections"
+msgstr  "ഫയല്‍ തിരഞ്ഞെടുക്കല്‍"
 
 #: ../xffm/fm/view/local/popup.hh:753
 #, fuzzy
@@ -898,11 +1030,6 @@ msgstr  "തിരഞ്ഞെടുത്തത് പകര്‍ത്തു�
 msgid   "No matches."
 msgstr  "സാമ്യമുള്ളവ ഇല്ല"
 
-#: ../xffm/fm/view/local/popup.hh:887 ../xffm/fm/view/local/popup.hh:981
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:382
-msgid   "Specify Output Directory..."
-msgstr  "ഔട്ട്പുട്ടിനുള്ള തട്ട് പ്രസ്ഥാപിയ്ക്കുക..."
-
 #: ../xffm/fm/view/local/popup.hh:1058
 #, fuzzy
 msgid   "Create new..."
@@ -922,6 +1049,11 @@ msgstr  "പേരില്ല"
 msgid   "Another file with the same name already exists in “%s”."
 msgstr  "\"%s\" -ല്‍ ഇതേ പേരില്‍ മറ്റൊരു ഫയല്‍ നിലവിലുണ്ടു്."
 
+#: ../xffm/fm/view/local/popup.hh:1109 ../xffm/fm/view/local/popup.hh:1291
+#: ../xffm/fm/view/local/popup.hh:1309 ../xffm/common/util.hh:1452
+msgid   "Run in Terminal"
+msgstr  "അഗ്രിമത്തില്‍ ഓടിക്കുക"
+
 #: ../xffm/fm/view/local/popup.hh:1112
 #, fuzzy
 msgid   "Arguments for the Command"
@@ -934,11 +1066,6 @@ msgstr  "നിങ്ങള്‍ നിരവധി ഫയലുകള്‍ �
 #: ../xffm/fm/view/local/popup.hh:1332 ../xffm/fm/view/local/view.hh:156
 msgid   "Invalid entry"
 msgstr  "ചേര്‍ത്തത് അസാധു"
-
-#: ../xffm/fm/view/local/view.hh:177
-#, c-format
-msgid   "The volume '%s' is not mounted."
-msgstr  "വോള്യം '%s' മൌണ്ട് ചെയ്തിട്ടില്ല."
 
 #: ../xffm/fm/view/local/properties.hh:245
 msgid   "Properties and Attributes"
@@ -965,6 +1092,38 @@ msgstr  "വിജയകരമായി ചവറ്റുകുട്ടയി�
 msgid   "Source:"
 msgstr  "സോഴ്സ്:"
 
+#: ../xffm/fm/view/local/rm.hh:59
+#, c-format
+msgid   "Delete %s"
+msgstr  "%s മായിച്ചു കളയുക (D)"
+
+#: ../xffm/fm/view/local/rm.hh:61
+msgid   "Warning: "
+msgstr  "മുന്നറിയിപ്പ്:"
+
+#: ../xffm/fm/view/local/rm.hh:92
+msgid   "Remove"
+msgstr  "നീക്കം ചെയ്യുക"
+
+#: ../xffm/fm/view/local/rm.hh:142
+#, fuzzy
+msgid   "Apply to all"
+msgstr  "പ്രയോഗത്തില്‍വരുത്തുക:"
+
+#: ../xffm/fm/view/local/rm.hh:165 ../xffm/common/gtk.hh:91
+#, fuzzy
+msgid   "Shred"
+msgstr  "ഷ്രെഡ്ഡര്‍"
+
+#: ../xffm/fm/view/local/rm.hh:183
+msgid   "Trash"
+msgstr  "ചവറ്റുകുട്ട‌"
+
+#: ../xffm/fm/view/local/view.hh:177
+#, c-format
+msgid   "The volume '%s' is not mounted."
+msgstr  "വോള്യം '%s' മൌണ്ട് ചെയ്തിട്ടില്ല."
+
 #: ../xffm/fm/view/root/model.hh:82
 #, fuzzy
 msgid   "Root Directory"
@@ -973,23 +1132,6 @@ msgstr  "സ്പൂള്‍ ഡയറക്ടറി:"
 #: ../xffm/fm/view/root/model.hh:98
 msgid   "This is the root of the filesystem"
 msgstr  "ഫയല്‍സിസ്റ്റത്തിന്റെ മൂലം ഇവിടെയാണു്"
-
-#: ../xffm/fm/view/root/model.hh:110
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:256
-#, fuzzy
-msgid   "Home Directory"
-msgstr  "ഹോം ഡയറക്ടറി"
-
-#: ../xffm/fm/view/root/model.hh:137
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:266
-#, fuzzy
-msgid   "Trash bin"
-msgstr  "ഫയല്‍ ചവറ്റുകുട്ടയിലിടുക"
-
-#: ../xffm/fm/view/root/model.hh:168 ../xffm/fm/view/fstab/popup.hh:29
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:261
-msgid   "Disk Image Mounter"
-msgstr  "ഡിസ്ക് ഇമേജ് മൌണ്ടര്‍"
 
 #: ../xffm/fm/view/root/model.hh:176 ../xffm/fm/view/root/model.hh:191
 msgid   "Mount local disks and devices"
@@ -1074,15 +1216,80 @@ msgstr  "%s അണ്‍മൌണ്ട് ചെയ്യുന്നു"
 msgid   "Mounting %s"
 msgstr  "മൌണ്ടു് ചെയ്യുന്നു"
 
-#: ../xffm/fm/view/base/signals.hh:838
-#, fuzzy
-msgid   "Trash is empty"
-msgstr  "ഈ ഫയല്‍ ശൂന്യമാണ്"
+#: ../xffm/fm/view/pkg/model.hh:41 ../xffm/fm/view/pkg/model.hh:52
+msgid   "Add or remove software installed on the system"
+msgstr  "സിസ്റ്റത്തില്‍ ഇന്‍സ്റ്റോള്‍ ചെയ്തിരിക്കുന്ന സോഫ്റ്റ്‌വെയര്‍ ചേര്‍ക്കുക അല്ലെങ്കില്‍ നീക്കം ചെയ്യുക"
 
-#: ../xffm/fm/view/base/signals.hh:840
+#: ../xffm/fm/view/pkg/model.hh:111
+msgid   "String"
+msgstr  "വാക്യം"
+
+#: ../xffm/fm/view/pkg/model.hh:116
+msgid   "Waiting for search results"
+msgstr  "തെരച്ചിലിനുള്ള ഫലങ്ങള്‍ക്കായി കാത്തിരിക്കുക"
+
+#: ../xffm/fm/view/pkg/model.hh:174
+msgid   "No results"
+msgstr  "ഫലങ്ങള്‍ ലഭ്യമല്ല"
+
+#: ../xffm/fm/view/pkg/model.hh:373
 #, fuzzy
-msgid   "Directory does not exist."
-msgstr  "ഡയറക്ടറി നിലവിലില്ല"
+msgid   "Currently busy\n"
+msgstr  "ഇപ്പോഴത്തെ അവസ്ഥ:\n"
+
+#: ../xffm/fm/view/pkg/popup.hh:44
+#, fuzzy
+msgid   "Update Database"
+msgstr  "യു.എസ് പേറ്റന്റ് ഡേറ്റാബെയിസ് "
+
+#: ../xffm/fm/view/pkg/popup.hh:45
+msgid   "Fetch"
+msgstr  "കൊണ്ടുവരുക"
+
+#: ../xffm/fm/view/pkg/popup.hh:46
+#, fuzzy
+msgid   "Install --dry-run"
+msgstr  "ഘടകം പ്രതിഷ്ഠിക്കുക"
+
+#: ../xffm/fm/view/pkg/popup.hh:47
+msgid   "Install"
+msgstr  "സ്ഥാപിക്കുക"
+
+#: ../xffm/fm/view/pkg/popup.hh:48
+#, fuzzy
+msgid   "Uninstall --dry-run"
+msgstr  "അണ്‍ഇന്‍സ്റ്റോള്‍ ചെയ്യുന്നു"
+
+#: ../xffm/fm/view/pkg/popup.hh:49
+msgid   "Uninstall"
+msgstr  "നീക്കം ചെയ്യുക"
+
+#: ../xffm/fm/view/pkg/popup.hh:50
+msgid   "Information"
+msgstr  "അറിയിപ്പുകള്‍"
+
+#: ../xffm/fm/view/pkg/popup.hh:140
+msgid   "Version"
+msgstr  "ലക്കം"
+
+#: ../xffm/fm/view/pkg/popup.hh:149
+#, fuzzy
+msgid   "Go up"
+msgstr  "മുകളിലേക്ക് പോവുക"
+
+#: ../xffm/fm/view/pkg/popup.hh:152
+#, fuzzy
+msgid   "Search packages"
+msgstr  "പാക്കേജുകള്‍ക്കായി തെരയുന്നു"
+
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
+#, fuzzy, c-format
+msgid   "Loading %s...%s"
+msgstr  "%s നിറയ്‌ക്കുന്നു...‌"
+
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
+msgid   "Please Wait..."
+msgstr  "ദയവായി കാത്തിരിക്കുക..."
 
 #: ../xffm/fm/view/treeview.hh:17
 msgid   "Name"
@@ -1101,297 +1308,90 @@ msgstr  "തിയ്യ‌‌തി"
 msgid   "Mimetype"
 msgstr  "മൈം തരങ്ങള്‍"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
+#: ../xffm/fm/view/base/signals.hh:838
 #, fuzzy
-msgid   "Embedded Terminal"
-msgstr  "ടെര്‍മിനല്‍ തുറക്കുക"
+msgid   "Trash is empty"
+msgstr  "ഈ ഫയല്‍ ശൂന്യമാണ്"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
+#: ../xffm/fm/view/base/signals.hh:840
 #, fuzzy
-msgid   "All items in the iconview."
-msgstr  "ഈ ജാലകത്തിലെ‌ ഇനങ്ങള്‍ എല്ലാം തെരഞ്ഞടുക്കുക"
+msgid   "Directory does not exist."
+msgstr  "ഡയറക്ടറി നിലവിലില്ല"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
+#: ../xffm/common/settings.hh:30
 #, fuzzy
-msgid   "Scripting"
-msgstr  "ആജ്ഞാലേഖനം"
+msgid   "New File:"
+msgstr  "പുതിയ ഫയല്‍"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
+#: ../xffm/common/gio.hh:81
+msgid   "Copying files"
+msgstr  "ഫയലുകള്‍ പകര്‍ത്തുന്നു"
+
+#: ../xffm/common/gio.hh:85
 #, fuzzy
-msgid   "Clear Log"
-msgstr  "പട്ടിക വെടിപ്പാക്കുക"
+msgid   "linking"
+msgstr  "ശൂന്യമാക്കുന്നു"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
-msgid   "Terminal font"
-msgstr  "ടെര്‍മിനലിന്‍റെ ലിപി"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
-msgid   "Renice Process"
-msgstr  "പ്രക്രിയ റീനൈസ് ചെയ്യുക"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
-msgid   "Suspend"
-msgstr  "സസ്പെന്‍ഡ്"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
-msgid   "Continue"
-msgstr  "തുടരുക"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid   "Interrupt"
-msgstr  "തടസ്സം"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid   "Hangup"
-msgstr  "അവസാനിപ്പിക്കുക"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid   "User 1 (USR1)"
-msgstr  "ഉപയോക്താവു് 1 (USR1)"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
-msgid   "User 2 (USR2)"
-msgstr  "ഉപയോക്താവു് 2 (USR2)"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+#: ../xffm/common/gio.hh:87
 #, fuzzy
-msgid   "Terminate Task"
-msgstr  "നിര്‍ത്തലാക്കുക %s "
+msgid   "rename"
+msgstr  "പുനര്‍നാമകരണം"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
-msgid   "Abort"
-msgstr  "ഉപേക്ഷിക്കുക"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:138
-msgid   "Kill"
-msgstr  "അവസാനിപ്പിക്കുക"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
-#, fuzzy
-msgid   "Segmentation fault"
-msgstr  "സെഗ്മന്‍റേഷനില്‍ തെറ്റ്"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:216
-msgid   "PID"
-msgstr  "PID"
-
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:375
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:377
-msgid   "Go to"
-msgstr  "പോകുക"
-
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:409
-msgid   "Not a directory"
-msgstr  "ഒരു ഡയറക്ടറി അല്ല"
-
-#: ../xffm/fm/dialog/notebook/page/page.hh:59
-msgid   "loading..."
-msgstr  "കാത്തിരിക്കൂ..."
-
-#: ../xffm/fm/dialog/notebook/page/page.hh:151
-#: ../xffm/fm/dialog/notebook/page/page.hh:167
-#, fuzzy
-msgid   "Confirm Replace"
-msgstr  "expunge ഉറപ്പ് വരുത്തുക"
-
-#: ../xffm/fm/dialog/notebook/page/page.hh:153
-#, fuzzy
-msgid   "Destination File"
-msgstr  "ലക്ഷ്യം:"
-
-#: ../xffm/fm/dialog/notebook/page/page.hh:166
+#: ../xffm/common/gio.hh:426
 #, fuzzy, c-format
-msgid   "The output file %s already exists, do you want to overwrite it?"
-msgstr  "%s ഫയല്‍ നിലവിലുണ്ട്. അത് മാച്ചെഴുതണോ?"
+msgid   "(%d of %d)"
+msgstr  "(%s$d-ന്റെ %s$d)"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:11
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:214
+#: ../xffm/common/dnd.hh:47
 #, fuzzy
-msgid   "Remove Button Contents"
-msgstr  "ഫോള്‍ഡറിലുള്ളവ നീക്കം ചെയ്യുക"
+msgid   "Create Link"
+msgstr  "കണ്ണി നിര്‍മ്മിച്ചത് വേണ്ടെന്ന് വയ്ക്കുക"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:67
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:209
+#: ../xffm/common/util.hh:1404
+#, c-format
+msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
+        "attribute on that file."
+msgstr  ""
+
+#: ../xffm/common/util.hh:1406 ../xffm/common/util.hh:1441
+#, c-format
+msgid   "Open with %s"
+msgstr  "%s തുറക്കുന്നതിനായി"
+
+#: ../xffm/common/util.hh:1406
+msgid   "Text Editor"
+msgstr  "എഴുത്തിടം"
+
+#: ../xffm/common/util.hh:1443 ../xffm/common/gtk.hh:69
 #, fuzzy
-msgid   "Add custom content"
-msgstr  "ഇഷ്ടമുള്ള അക്ഷരസഞ്ചയം ഉപയോഗിക്കുക"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:68
-#, fuzzy
-msgid   "Select file to load"
-msgstr  "കൂട്ടിച്ചേര്‍ക്കാനുള്ള ഫയലുകള്‍ തെരഞ്ഞെടുക്കുക:"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:125
-#, fuzzy, c-format
-msgid   "Cannot load file %s. Reason: %s"
-msgstr  "%s ശേഖരം സൂക്ഷിക്കാനായില്ല: %s"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:154
-#, fuzzy
-msgid   "You need to restart the application"
-msgstr  "പ്രയോഗം വീണ്ടും ആരംഭിക്കേണ്ടതുണ്ടു്."
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:244
-msgid   "Open a New Window"
-msgstr  "പുതിയ ജാലകം തുറക്കുക"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:250
-#, fuzzy
-msgid   "Differences"
-msgstr  "സൂചനകള്‍"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:178
-#, fuzzy
-msgid   "Open menu"
-msgstr  "മെനു തുറക്കുക"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:230
-#, fuzzy
-msgid   "View as list"
-msgstr  "പട്ടികയായിട്ട് കാണിക്കുക(L)"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:231
-msgid   "Show hidden files"
-msgstr  "അദൃശ്യമായ ഫയലുകള്‍ കാണിക്കുക"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:232
-#, fuzzy
-msgid   "Show Backup Files"
-msgstr  "ഫയലുകള്‍ കാണിക്കുക"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:233
-#, fuzzy
-msgid   "Sort data in descending order"
-msgstr  "തുറക്കുന്ന ക്രമത്തില്‍ ചിട്ടപ്പെടുത്തിയത്"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:235
-#, fuzzy
-msgid   "Sort by date"
-msgstr  "തീയതിയുടെ ലഘുരൂപം:"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:236
-#, fuzzy
-msgid   "Sort by size"
-msgstr  "വിന്യാസരീതി"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:270
-msgid   "Main menu"
-msgstr  "പ്രധാന മെനു"
-
-#: ../xffm/fm/dialog/notebook/notebook.hh:56
-msgid   "Long press time"
-msgstr  "അമറ്‍ത്തുന്നതിനുളള അധിക സമയം"
-
-#: ../xffm/fm/dialog/dialog.hh:122
-msgid   "Removed"
-msgstr  "നീക്കം ചെയ്തിരിക്കുന്നു"
-
-#: ../xffm/fm/dialog/dialog.hh:143
-#, fuzzy
-msgid   "Detected device(s):"
-msgstr  "ഉപകരണങ്ങള്‍ ലഭ്യമാക്കുക (D)"
-
-#: ../xffm/response/commandresponse.hh:19
-msgid   "Running"
-msgstr  "പ്രവര്‍ത്തിക്കുന്നു"
-
-#: ../xffm/response/commandresponse.hh:24
-#, fuzzy
-msgid   "Waiting for operation to finish..."
-msgstr  "ടക്സ് പെയിന്റ് ആവശ്യമാണ്"
-
-#: ../xffm/response/passwdresponse.hh:179
-#, fuzzy
-msgid   "User Input"
-msgstr  "മൌസ് ഇന്‍പുട്ട്"
-
-#: ../xffm/response/passwdresponse.hh:195
-#, fuzzy
-msgid   "Response Requested"
-msgstr  "മറുപടി ആവശ്യപ്പെട്ടിരിക്കുന്നു "
-
-#: ../xffm/response/passwdresponse.hh:242 ../xffm/response/entryresponse.hh:439
-msgid   "Ok"
-msgstr  "ശരി"
-
-#: ../xffm/response/customresponse.hh:55
-#, fuzzy
-msgid   "Execute command"
+msgid   "Execute Shell Command"
 msgstr  "ഷെല്‍ ആജ്ഞകള്‍ നടപ്പിലാക്കുക"
 
-#: ../xffm/response/customresponse.hh:103
-msgid   "Source File"
-msgstr  "സോഴ്സ് ഫയല്‍"
+#: ../xffm/common/util.hh:1447
+msgid   "Console: quickly run single commands -- write a command here and "
+        "press enter."
+msgstr  ""
 
-#: ../xffm/response/timeoutresponse.hh:57
-msgid   "Dismiss"
-msgstr  "വേണ്ടെന്നു് വയ്ക്കുക"
+#: ../xffm/common/gtk.hh:352 ../xffm/common/gtk.hh:360
+msgid   "Help"
+msgstr  "സഹായം"
 
-#: ../xffm/response/commandprogressresponse.hh:31
-msgid   "Items:"
-msgstr  "ഇനങ്ങള്‍:"
+#: ../xffm/common/run.hh:338
+msgid   "error"
+msgstr  "പിശക്"
 
-#: ../xffm/response/chooserresponse.hh:23
-msgid   "Open"
-msgstr  "തുറക്കുക"
-
-#: ../xffm/response/chooserresponse.hh:56
-msgid   "Choose directory"
-msgstr  "തട്ട് നിര്‍ണ്ണയിക്കുക"
-
-#: ../xffm/response/chooserresponse.hh:60
-msgid   "Choose file"
-msgstr  "ഫയല്‍ നിര്‍‌ണ്ണയിക്കുക"
-
-#: ../xffm/completion/bash.hh:133
+#: ../xffm/common/run.hh:342
 #, fuzzy
-msgid   "Completion mode:"
-msgstr  "പൂര്‍ത്തിയാക്കിയ കോഡ്"
+msgid   "warning"
+msgstr  "മുന്നറിയിപ്പ്:"
 
-#: ../xffm/completion/bash.hh:134
-msgid   "command"
-msgstr  "കമാന്‍ഡ്"
-
-#: ../xffm/completion/bash.hh:135
-msgid   "file"
-msgstr  "ഫയല്‍ "
-
-#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
+#: ../xffm/common/preview.hh:581
 #, fuzzy
-msgid   "Options >>"
-msgstr  "ഐച്ഛികങ്ങള്‍"
+msgid   "Empty file"
+msgstr  "പുതിയ ഒഴിഞ്ഞ ഫയല്‍"
 
-#: ../xffm/completion/base.hh:28
-msgid   "Command"
-msgstr  "ആജ്ഞ"
-
-#: ../xffm/completion/base.hh:31
-msgid   "File"
-msgstr  "ഫയല്‍"
-
-#: ../xffm/completion/base.hh:34
-#, fuzzy
-msgid   "Command history"
-msgstr  "ഓര്‍മ്മച്ചെപ്പ് ചരിത്രം"
-
-#: ../xffm/completion/base.hh:40
-msgid   "Variable"
-msgstr  "ചരം"
-
-#: ../xffm/completion/base.hh:43
-msgid   "Host"
-msgstr  "ഹോസ്റ്റ്"
-
-#: ../xffm/completion/base.hh:55
-#, fuzzy
-msgid   "Found no match"
-msgstr  "ചേര്‍ച്ച നോക്കുന്നതിനായുളള വാക്കുകള്‍"
-
-#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
-msgid   "Matches"
-msgstr  "പൊരുത്തപ്പെട്ടു"
-
-#: ../xffm/completion/base.hh:142
-msgid   "Too many files open"
-msgstr  "ഒരുപാടു് ഫയലുകള്‍ തുറന്നിട്ടിരിയ്ക്കുന്നു"
+#: ../xffm/common/preview.hh:636
+#, fuzzy, c-format
+msgid   "Cannot read from %s"
+msgstr  "സി.ഡി വായിക്കുവാന്‍ സാധ്യമല്ല: %s"
 

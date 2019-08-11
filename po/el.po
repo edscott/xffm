@@ -1,4 +1,4 @@
-# Xffm+ translation file: vie ago  9 14:41:20 CDT 2019
+# Xffm+ translation file: dom ago 11 10:54:16 CDT 2019
 # Merged fron existing open source files
 # http://xffm.org
 #
@@ -6,254 +6,89 @@
 msgid   ""
 msgstr  "Project-Id-Version: xffm+\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2019-08-09 12:32-0500\n"
+        "POT-Creation-Date: 2019-08-11 09:10-0500\n"
         "PO-Revision-Date: 2009-04-29 22:18+0200\n"
         "Last-Translator: Simos Xenitellis <simos.lists@googlemail.com>\n"
         "Language-Team: Greek <team@lists.gnome.gr>\n"
         "Language: el\n"
         "MIME-Version: 1.0\n"
         "Content-Type: text/plain; charset=UTF-8\n"
-	"Plural-Forms: nplurals=2; plural=(n != 1);\n"
         "Content-Transfer-Encoding: 8bit\n"
+        "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../xffm/mime/mimemagic.hh:68 ../xffm/mime/mimemagic.hh:112
 msgid   "No Read Permission"
 msgstr  "Χωρίς δικαιώματα ανάγνωσης"
 
-#: ../xffm/find/dialog.hh:91 ../xffm/find/dialog.hh:143
-#: ../xffm/find/dialog.hh:604
-msgid   "Find"
-msgstr  "Εύρεση"
+#: ../xffm/completion/base.hh:28
+msgid   "Command"
+msgstr  "Εντολή"
 
-#: ../xffm/find/dialog.hh:167 ../xffm/find/fgr.hh:146
-msgid   "Recursive"
-msgstr  "Αναδρομικό"
+#: ../xffm/completion/base.hh:31
+msgid   "File"
+msgstr  "Αρχείο"
 
-#: ../xffm/find/dialog.hh:170 ../xffm/find/fgr.hh:142
-msgid   "Find hidden files and directories"
-msgstr  "Αναζήτηση κρυφών αρχείων και καταλόγων"
+#: ../xffm/completion/base.hh:34
+msgid   "Command history"
+msgstr  "Ιστορικό εντολών"
 
-#: ../xffm/find/dialog.hh:173 ../xffm/find/fgr.hh:138
-#, fuzzy
-msgid   "Stay on single filesystem"
-msgstr  "Σάρωση συστήματος αρχείων"
-
-#: ../xffm/find/dialog.hh:176 ../xffm/find/signals.hh:66
-#: ../xffm/find/signals.hh:454
-msgid   "Results"
-msgstr  "Αποτελέσματα"
-
-#: ../xffm/find/dialog.hh:176
-msgid   "Upper limit"
-msgstr  "Άνω όριο"
-
-#: ../xffm/find/dialog.hh:181
-msgid   "At Least"
-msgstr  "Τουλάχιστον"
-
-#: ../xffm/find/dialog.hh:181 ../xffm/find/dialog.hh:186
-msgid   "kBytes"
-msgstr  "kBytes"
-
-#: ../xffm/find/dialog.hh:186
-msgid   "At Most"
-msgstr  "Το πολύ"
-
-#: ../xffm/find/dialog.hh:192 ../xffm/completion/base.hh:37
+#: ../xffm/completion/base.hh:37 ../xffm/find/dialog.hh:192
 msgid   "User"
 msgstr  "Χρήστης"
 
-#: ../xffm/find/dialog.hh:197
-msgid   "Group"
-msgstr  "Ομάδα"
+#: ../xffm/completion/base.hh:40
+msgid   "Variable"
+msgstr  "Μεταβλητή"
 
-#: ../xffm/find/dialog.hh:201
-msgid   "Octal Permissions"
-msgstr  "Οκταδικά δικαιώματα"
+#: ../xffm/completion/base.hh:43
+msgid   "Host"
+msgstr  "Διακομιστής"
 
-#: ../xffm/find/dialog.hh:206
-msgid   "SUID"
-msgstr  "SUID"
+#: ../xffm/completion/base.hh:55
+msgid   "Found no match"
+msgstr  "Δεν βρέθηκε ταίριασμα"
 
-#: ../xffm/find/dialog.hh:206 ../xffm/fm/view/local/popup.hh:1102
-msgid   "Executable"
-msgstr  "Εκτελέσιμο"
+#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
+msgid   "Matches"
+msgstr  "Ταιριάσματα"
 
-#: ../xffm/find/dialog.hh:214 ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168
-msgid   "Minutes"
-msgstr  "Λεπτά"
+#: ../xffm/completion/base.hh:142
+msgid   "Too many files open"
+msgstr  "Πάρα πολλά ανοιχτά αρχεία"
 
-#: ../xffm/find/dialog.hh:219 ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171
-msgid   "Hours"
-msgstr  "Ώρες"
-
-#: ../xffm/find/dialog.hh:224 ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174
-msgid   "Days"
-msgstr  "Ημέρες"
-
-#: ../xffm/find/dialog.hh:230
-msgid   "Months"
-msgstr  "Μήνες"
-
-#: ../xffm/find/dialog.hh:241
-msgid   "File type : "
-msgstr  "Τύπος αρχείου :"
-
-#: ../xffm/find/dialog.hh:255 ../xffm/find/dialog.hh:595
-#: ../xffm/common/gtk.hh:79 ../xffm/fm/dialog/notebook/page/page.hh:71
-msgid   "Close"
-msgstr  "Κλείσιμο"
-
-#: ../xffm/find/dialog.hh:263 ../xffm/find/dialog.hh:363
-#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
-#: ../xffm/find/fgr.hh:176 ../xffm/fm/view/treeview.hh:18
-msgid   "Details"
-msgstr  "Λεπτομέρειες"
-
-#: ../xffm/find/dialog.hh:301 ../xffm/find/fgr.hh:124
-#: ../xffm/find/signals.hh:100
-msgid   "Path"
-msgstr  "Διαδρομή"
-
-#: ../xffm/find/dialog.hh:334 ../xffm/find/fgr.hh:126
-msgid   "Filter:"
-msgstr  "Φίλτρο:"
-
-#: ../xffm/find/dialog.hh:377
-msgid   "Contains"
-msgstr  "Περιέχει"
-
-#: ../xffm/find/dialog.hh:397
-msgid   "Contains the text"
-msgstr  "Περιέχει το κείμενο"
-
-#: ../xffm/find/dialog.hh:430
-msgid   "Case Sensitive"
-msgstr  "Διάκριση πεζών/κεφαλαίων"
-
-#: ../xffm/find/dialog.hh:442
-#, fuzzy
-msgid   "Extended regexp"
-msgstr  "Εκτεταμένη αφαίρεση"
-
-#: ../xffm/find/dialog.hh:453
-msgid   "Include binary files"
-msgstr  "Να περιλαμβάνονται δυαδικά αρχεία"
-
-#: ../xffm/find/dialog.hh:463 ../xffm/find/fgr.hh:212
-msgid   "Line Count"
-msgstr  "Πλήθος γραμμών"
-
-#: ../xffm/find/dialog.hh:489
-msgid   "Match"
-msgstr  "Αναζήτηση"
-
-#: ../xffm/find/dialog.hh:501
-msgid   "Anywhere"
-msgstr  "Οπουδήποτε"
-
-#: ../xffm/find/dialog.hh:516
-msgid   "Whole words only"
-msgstr  "Μόνο ολόκληρες λέξεις"
-
-#: ../xffm/find/dialog.hh:531
-msgid   "lines"
-msgstr  "γραμμές"
-
-#: ../xffm/find/dialog.hh:545 ../xffm/find/fgr.hh:210
-msgid   "No match"
-msgstr  "Δεν υπάρχει ταίριασμα"
-
-#: ../xffm/find/dialog.hh:577 ../xffm/find/signals.hh:368
-#: ../xffm/common/gtk.hh:409 ../xffm/fm/view/local/rm.hh:157
-#: ../xffm/fm/view/local/properties.hh:314
-#: ../xffm/response/entryresponse.hh:435 ../xffm/response/chooserresponse.hh:21
-msgid   "Cancel"
-msgstr  "Ακύρωση"
-
-#: ../xffm/find/dialog.hh:587
-msgid   "Clear"
-msgstr  "Εκκαθάριση"
-
-#: ../xffm/find/dialog.hh:629
-msgid   "Edit"
-msgstr  "Επεξεργασία"
-
-#: ../xffm/find/dialog.hh:743 ../xffm/find/dialog.hh:758
-#: ../xffm/common/preview.hh:460 ../xffm/common/util.hh:1354
-#: ../xffm/common/util.hh:1356 ../xffm/common/util.hh:1362
-#: ../xffm/common/util.hh:1364
-msgid   "unknown"
-msgstr  "άγνωστο"
-
-#: ../xffm/find/dialog.hh:772
-msgid   "Modified"
-msgstr  "Τροποποιήθηκε"
-
-#: ../xffm/find/dialog.hh:776
-msgid   "Created"
-msgstr  "Δημιουργήθηκε"
-
-#: ../xffm/find/dialog.hh:780
-msgid   "Accessed"
-msgstr  "Προσπελάστηκε"
-
-#: ../xffm/find/dialog.hh:1098
-msgid   "Basic rules:\n"
-        "\n"
-        "*  Will match any character zero or more times.\n"
-        "?  Will match any character exactly one time\n"
-        "[] Match any character within the [] \n"
-        "^  Match at beginning of string\n"
-        "$  Match at end of string \n"
-msgstr  ""
-
-#: ../xffm/find/dialog.hh:1107
-msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
-        "( ) : \n"
-        "In  basic regular expressions the metacharacters ?, +, {, |, (, "
-        "and ) \n"
-        "  lose their special meaning.\n"
-        "\n"
-        "The  period . matches  any  single  character.\n"
-        "The caret ^ matches at the start of line.\n"
-        "The dollar $ matches at the end of line.\n"
-        "\n"
-        "Characters within [ ] matches any single character in the list.\n"
-        "Characters within [^ ] matches any single character *not* in the "
-        "list.\n"
-        "Characters inside [ - ] matches a range of characters (ie [0-9] or "
-        "[a-z]).\n"
-        "\n"
-        "A regular expression may be followed by one of several repetition "
-        "operators:\n"
-        "?      The preceding item is optional and matched\n"
-        "       at most once.\n"
-        "*      The preceding item will be matched zero\n"
-        "       or more times.\n"
-        "+      The preceding item will be matched one or\n"
-        "       more times.\n"
-        "{n}    The preceding item is matched exactly n times.\n"
-        "{n,}   The preceding item is matched n or more times.\n"
-        "{n,m}  The preceding item is matched at least n times,\n"
-        "       but not more than m times.\n"
-        "\n"
-        "To match any reserved character, precede it with \\. \n"
-        "\n"
-        "Two regular expressions may be joined by the logical or operator |.\n"
-        "Two regular expressions may be concatenated.\n"
-        "\n"
-        "More information is available by typing \"man grep\"\n"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:124 ../xffm/completion/base.hh:339
+#: ../xffm/completion/base.hh:339 ../xffm/find/fgr.hh:124
 msgid   "Options:"
 msgstr  "Επιλογές:"
+
+#: ../xffm/completion/bash.hh:133
+msgid   "Completion mode:"
+msgstr  "Λειτουργία συμπλήρωσης:"
+
+#: ../xffm/completion/bash.hh:134
+msgid   "command"
+msgstr  "εντολή"
+
+#: ../xffm/completion/bash.hh:135
+msgid   "file"
+msgstr  "αρχείο"
+
+#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
+msgid   "Options >>"
+msgstr  "Επιλογές >>"
+
+#: ../xffm/find/fgr.hh:124 ../xffm/find/signals.hh:100
+#: ../xffm/find/dialog.hh:301
+msgid   "Path"
+msgstr  "Διαδρομή"
 
 #: ../xffm/find/fgr.hh:125
 msgid   "Locate documents and folders on this computer by name or content"
 msgstr  "Εντοπισμός εγγράφων και φακέλων σε αυτό τον υπολογιστή κατά όνομα ή "
         "περιεχόμενο"
+
+#: ../xffm/find/fgr.hh:126 ../xffm/find/dialog.hh:334
+msgid   "Filter:"
+msgstr  "Φίλτρο:"
 
 #: ../xffm/find/fgr.hh:126
 msgid   "Search for files"
@@ -279,6 +114,11 @@ msgstr  "Εμφάνιση πληροφοριών έκδοσης"
 msgid   "Filter Details"
 msgstr  "Λεπτομέρειες φίλτρου"
 
+#: ../xffm/find/fgr.hh:138 ../xffm/find/dialog.hh:173
+#, fuzzy
+msgid   "Stay on single filesystem"
+msgstr  "Σάρωση συστήματος αρχείων"
+
 #: ../xffm/find/fgr.hh:140
 msgid   "Print..."
 msgstr  "Εκτύπωση..."
@@ -286,6 +126,10 @@ msgstr  "Εκτύπωση..."
 #: ../xffm/find/fgr.hh:140
 msgid   "The unique Process ID that identifies this process."
 msgstr  "Το μοναδικό ID διεργασίας που ξεχωρίζει αυτή τη διεργασία."
+
+#: ../xffm/find/fgr.hh:142 ../xffm/find/dialog.hh:170
+msgid   "Find hidden files and directories"
+msgstr  "Αναζήτηση κρυφών αρχείων και καταλόγων"
 
 #: ../xffm/find/fgr.hh:143
 msgid   "Filter"
@@ -295,6 +139,10 @@ msgstr  "Φίλτρο"
 msgid   "To display files which pass the filter (stars and regexps will be "
         "processed)"
 msgstr  ""
+
+#: ../xffm/find/fgr.hh:146 ../xffm/find/dialog.hh:167
+msgid   "Recursive"
+msgstr  "Αναδρομικό"
 
 #: ../xffm/find/fgr.hh:147 ../xffm/find/fgr.hh:148 ../xffm/find/fgr.hh:149
 #: ../xffm/find/fgr.hh:150
@@ -338,7 +186,7 @@ msgid   "Regular file"
 msgstr  "Κανονικό αρχείο"
 
 #: ../xffm/find/fgr.hh:159 ../xffm/find/signals.hh:8
-#: ../xffm/common/preview.hh:469 ../xffm/fm/view/local/popup.hh:1062
+#: ../xffm/fm/view/local/popup.hh:1062 ../xffm/common/preview.hh:469
 msgid   "Directory"
 msgstr  "Κατάλογος"
 
@@ -366,6 +214,16 @@ msgstr  "Συσκευή χαρακτήρα"
 msgid   "FIFO"
 msgstr  "FIFO"
 
+#: ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168 ../xffm/find/dialog.hh:214
+msgid   "Minutes"
+msgstr  "Λεπτά"
+
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/find/dialog.hh:263
+#: ../xffm/find/dialog.hh:363 ../xffm/fm/view/treeview.hh:18
+msgid   "Details"
+msgstr  "Λεπτομέρειες"
+
 #: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
 #: ../xffm/find/fgr.hh:176 ../xffm/find/fgr.hh:179 ../xffm/find/fgr.hh:180
 #: ../xffm/find/fgr.hh:183 ../xffm/find/fgr.hh:184 ../xffm/find/fgr.hh:187
@@ -378,6 +236,14 @@ msgstr  "ΟΡΙΟ ΧΡΟΝΟΥ"
 #: ../xffm/find/fgr.hh:177
 msgid   "Previous"
 msgstr  "Προηγ."
+
+#: ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171 ../xffm/find/dialog.hh:219
+msgid   "Hours"
+msgstr  "Ώρες"
+
+#: ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174 ../xffm/find/dialog.hh:224
+msgid   "Days"
+msgstr  "Ημέρες"
 
 #: ../xffm/find/fgr.hh:175
 msgid   "Month"
@@ -446,6 +312,14 @@ msgstr  "Αγνόηση χαρακτήρα"
 msgid   "Text Files"
 msgstr  "Αρχεία κειμένου"
 
+#: ../xffm/find/fgr.hh:210 ../xffm/find/dialog.hh:545
+msgid   "No match"
+msgstr  "Δεν υπάρχει ταίριασμα"
+
+#: ../xffm/find/fgr.hh:212 ../xffm/find/dialog.hh:463
+msgid   "Line Count"
+msgstr  "Πλήθος γραμμών"
+
 #: ../xffm/find/fgr.hh:214
 msgid   "Words"
 msgstr  "Λέξεις"
@@ -466,6 +340,18 @@ msgstr  "Τακτικές"
 #: ../xffm/find/signals.hh:10 ../xffm/common/preview.hh:481
 msgid   "Socket"
 msgstr  "Υποδοχή"
+
+#: ../xffm/find/signals.hh:66 ../xffm/find/signals.hh:454
+#: ../xffm/find/dialog.hh:176
+msgid   "Results"
+msgstr  "Αποτελέσματα"
+
+#: ../xffm/find/signals.hh:368 ../xffm/find/dialog.hh:577
+#: ../xffm/response/chooserresponse.hh:21 ../xffm/response/entryresponse.hh:435
+#: ../xffm/fm/view/local/properties.hh:314 ../xffm/fm/view/local/rm.hh:157
+#: ../xffm/common/gtk.hh:409
+msgid   "Cancel"
+msgstr  "Ακύρωση"
 
 #: ../xffm/find/signals.hh:396 ../xffm/find/signals.hh:830
 msgid   "No editor for current action."
@@ -495,240 +381,450 @@ msgstr  "%s Τελείωσε : %s"
 msgid   "Searching..."
 msgstr  "Αναζήτηση..."
 
-#: ../xffm/common/preview.hh:581
-msgid   "Empty file"
-msgstr  "Άδειο αρχείο"
+#: ../xffm/find/dialog.hh:91 ../xffm/find/dialog.hh:143
+#: ../xffm/find/dialog.hh:604
+msgid   "Find"
+msgstr  "Εύρεση"
 
-#: ../xffm/common/preview.hh:636
-#, c-format
-msgid   "Cannot read from %s"
-msgstr  "Αδυναμία ανάγνωσης από %s"
+#: ../xffm/find/dialog.hh:176
+msgid   "Upper limit"
+msgstr  "Άνω όριο"
 
-#: ../xffm/common/gtk.hh:67 ../xffm/fm/dialog/notebook/vbuttonbox.hh:240
-msgid   "Open terminal"
-msgstr  "Άνοιγμα τερματικού"
+#: ../xffm/find/dialog.hh:181
+msgid   "At Least"
+msgstr  "Τουλάχιστον"
 
-#: ../xffm/common/gtk.hh:69 ../xffm/common/util.hh:1443
-msgid   "Execute Shell Command"
-msgstr  "Εκτέλεση εντολής κελύφους"
+#: ../xffm/find/dialog.hh:181 ../xffm/find/dialog.hh:186
+msgid   "kBytes"
+msgstr  "kBytes"
 
-#: ../xffm/common/gtk.hh:71 ../xffm/fm/view/local/popup.hh:157
-msgid   "Paste"
-msgstr  "Επικόλληση"
+#: ../xffm/find/dialog.hh:186
+msgid   "At Most"
+msgstr  "Το πολύ"
 
-#: ../xffm/common/gtk.hh:73 ../xffm/fm/view/local/popup.hh:151
-msgid   "Add bookmark"
-msgstr  "Προσθήκη σελιδοδείκτη"
+#: ../xffm/find/dialog.hh:197
+msgid   "Group"
+msgstr  "Ομάδα"
 
-#: ../xffm/common/gtk.hh:75 ../xffm/fm/view/local/popup.hh:152
-#: ../xffm/fm/view/root/popup.hh:137
-msgid   "Remove bookmark"
-msgstr  "Αφαίρεση σελιδοδείκτη"
+#: ../xffm/find/dialog.hh:201
+msgid   "Octal Permissions"
+msgstr  "Οκταδικά δικαιώματα"
 
-#: ../xffm/common/gtk.hh:77 ../xffm/fm/view/pkg/model.hh:108
-#: ../xffm/fm/view/pkg/model.hh:299 ../xffm/fm/view/pkg/model.hh:306
-#: ../xffm/fm/view/pkg/popup.hh:151
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:236
-msgid   "Search"
+#: ../xffm/find/dialog.hh:206
+msgid   "SUID"
+msgstr  "SUID"
+
+#: ../xffm/find/dialog.hh:206 ../xffm/fm/view/local/popup.hh:1102
+msgid   "Executable"
+msgstr  "Εκτελέσιμο"
+
+#: ../xffm/find/dialog.hh:230
+msgid   "Months"
+msgstr  "Μήνες"
+
+#: ../xffm/find/dialog.hh:241
+msgid   "File type : "
+msgstr  "Τύπος αρχείου :"
+
+#: ../xffm/find/dialog.hh:255 ../xffm/find/dialog.hh:595
+#: ../xffm/fm/dialog/notebook/page/page.hh:71 ../xffm/common/gtk.hh:79
+msgid   "Close"
+msgstr  "Κλείσιμο"
+
+#: ../xffm/find/dialog.hh:377
+msgid   "Contains"
+msgstr  "Περιέχει"
+
+#: ../xffm/find/dialog.hh:397
+msgid   "Contains the text"
+msgstr  "Περιέχει το κείμενο"
+
+#: ../xffm/find/dialog.hh:430
+msgid   "Case Sensitive"
+msgstr  "Διάκριση πεζών/κεφαλαίων"
+
+#: ../xffm/find/dialog.hh:442
+#, fuzzy
+msgid   "Extended regexp"
+msgstr  "Εκτεταμένη αφαίρεση"
+
+#: ../xffm/find/dialog.hh:453
+msgid   "Include binary files"
+msgstr  "Να περιλαμβάνονται δυαδικά αρχεία"
+
+#: ../xffm/find/dialog.hh:489
+msgid   "Match"
 msgstr  "Αναζήτηση"
 
-#: ../xffm/common/gtk.hh:81 ../xffm/fm/dialog/notebook/menupopover.hh:237
-msgid   "Exit"
-msgstr  "Έξοδος"
+#: ../xffm/find/dialog.hh:501
+msgid   "Anywhere"
+msgstr  "Οπουδήποτε"
 
-#: ../xffm/common/gtk.hh:83 ../xffm/fm/view/local/popup.hh:85
-#: ../xffm/fm/view/local/popup.hh:142 ../xffm/fm/view/local/popup.hh:1287
-#: ../xffm/fm/view/local/popup.hh:1294 ../xffm/fm/view/local/popup.hh:1305
-#: ../xffm/fm/view/local/popup.hh:1312
-msgid   "Open with"
-msgstr  "Άνοιγμα με"
+#: ../xffm/find/dialog.hh:516
+msgid   "Whole words only"
+msgstr  "Μόνο ολόκληρες λέξεις"
 
-#: ../xffm/common/gtk.hh:85 ../xffm/fm/view/local/popup.hh:100
-#: ../xffm/fm/view/local/popup.hh:156
-msgid   "Cut"
-msgstr  "Αποκοπή"
+#: ../xffm/find/dialog.hh:531
+msgid   "lines"
+msgstr  "γραμμές"
 
-#: ../xffm/common/gtk.hh:87 ../xffm/fm/view/local/popup.hh:99
-#: ../xffm/fm/view/local/popup.hh:155
-msgid   "Copy"
-msgstr  "Αντιγραφή"
+#: ../xffm/find/dialog.hh:587
+msgid   "Clear"
+msgstr  "Εκκαθάριση"
 
-#: ../xffm/common/gtk.hh:89 ../xffm/fm/view/local/rm.hh:176
-#: ../xffm/fm/view/local/popup.hh:103 ../xffm/fm/view/local/popup.hh:160
-msgid   "Delete"
-msgstr  "Διαγραφή"
+#: ../xffm/find/dialog.hh:629
+msgid   "Edit"
+msgstr  "Επεξεργασία"
 
-#: ../xffm/common/gtk.hh:91 ../xffm/fm/view/local/rm.hh:165
-msgid   "Shred"
-msgstr  "Καταστροφή"
+#: ../xffm/find/dialog.hh:743 ../xffm/find/dialog.hh:758
+#: ../xffm/common/util.hh:1354 ../xffm/common/util.hh:1356
+#: ../xffm/common/util.hh:1362 ../xffm/common/util.hh:1364
+#: ../xffm/common/preview.hh:460
+msgid   "unknown"
+msgstr  "άγνωστο"
 
-#: ../xffm/common/gtk.hh:94 ../xffm/fm/view/local/popup.hh:95
-#: ../xffm/fm/view/local/popup.hh:145 ../xffm/fm/view/root/popup.hh:136
-#: ../xffm/fm/view/fstab/popup.hh:20
-msgid   "Open in New Tab"
-msgstr  "Άνοιγμα σε νέα καρτέλα"
+#: ../xffm/find/dialog.hh:772
+msgid   "Modified"
+msgstr  "Τροποποιήθηκε"
 
-#: ../xffm/common/gtk.hh:139 ../xffm/fm/dialog/notebook/notebook.hh:75
-msgid   "New Tab"
-msgstr  "Νέα καρτέλα"
+#: ../xffm/find/dialog.hh:776
+msgid   "Created"
+msgstr  "Δημιουργήθηκε"
 
-#: ../xffm/common/gtk.hh:352 ../xffm/common/gtk.hh:360
-msgid   "Help"
-msgstr  "Βοήθεια"
+#: ../xffm/find/dialog.hh:780
+msgid   "Accessed"
+msgstr  "Προσπελάστηκε"
 
-#: ../xffm/common/settings.hh:30
-msgid   "New File:"
-msgstr  "Νέο αρχείο:"
+#: ../xffm/find/dialog.hh:1098
+msgid   "Basic rules:\n"
+        "\n"
+        "*  Will match any character zero or more times.\n"
+        "?  Will match any character exactly one time\n"
+        "[] Match any character within the [] \n"
+        "^  Match at beginning of string\n"
+        "$  Match at end of string \n"
+msgstr  ""
 
-#: ../xffm/common/gio.hh:81
-msgid   "Copying files"
-msgstr  "Γίνεται αντιγραφή αρχείων"
+#: ../xffm/find/dialog.hh:1107
+msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
+        "( ) : \n"
+        "In  basic regular expressions the metacharacters ?, +, {, |, (, "
+        "and ) \n"
+        "  lose their special meaning.\n"
+        "\n"
+        "The  period . matches  any  single  character.\n"
+        "The caret ^ matches at the start of line.\n"
+        "The dollar $ matches at the end of line.\n"
+        "\n"
+        "Characters within [ ] matches any single character in the list.\n"
+        "Characters within [^ ] matches any single character *not* in the "
+        "list.\n"
+        "Characters inside [ - ] matches a range of characters (ie [0-9] or "
+        "[a-z]).\n"
+        "\n"
+        "A regular expression may be followed by one of several repetition "
+        "operators:\n"
+        "?      The preceding item is optional and matched\n"
+        "       at most once.\n"
+        "*      The preceding item will be matched zero\n"
+        "       or more times.\n"
+        "+      The preceding item will be matched one or\n"
+        "       more times.\n"
+        "{n}    The preceding item is matched exactly n times.\n"
+        "{n,}   The preceding item is matched n or more times.\n"
+        "{n,m}  The preceding item is matched at least n times,\n"
+        "       but not more than m times.\n"
+        "\n"
+        "To match any reserved character, precede it with \\. \n"
+        "\n"
+        "Two regular expressions may be joined by the logical or operator |.\n"
+        "Two regular expressions may be concatenated.\n"
+        "\n"
+        "More information is available by typing \"man grep\"\n"
+msgstr  ""
 
-#: ../xffm/common/gio.hh:83 ../xffm/common/dnd.hh:35
-#: ../xffm/fm/dialog/clipboard.hh:30
-msgid   "Moving files"
-msgstr  "Γίνεται μετακίνηση αρχείων"
+#: ../xffm/response/chooserresponse.hh:23
+msgid   "Open"
+msgstr  "Άνοιγμα"
 
-#: ../xffm/common/gio.hh:85
-msgid   "linking"
-msgstr  "σύνδεση"
+#: ../xffm/response/chooserresponse.hh:56
+msgid   "Choose directory"
+msgstr  "Επιλογή καταλόγου"
 
-#: ../xffm/common/gio.hh:87
-msgid   "rename"
-msgstr  "rename"
+#: ../xffm/response/chooserresponse.hh:60
+msgid   "Choose file"
+msgstr  "Επιλογή αρχείου"
 
-#: ../xffm/common/gio.hh:426
-#, c-format
-msgid   "(%d of %d)"
-msgstr  "(%d από %d)"
+#: ../xffm/response/customresponse.hh:55
+msgid   "Execute command"
+msgstr  "Εκτέλεση εντολής"
 
-#: ../xffm/common/util.hh:1404
-#, c-format
-msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
-        "attribute on that file."
-msgstr  "Το αρχείο σεναρίου \"%s\" δεν είναι εκτελέσιμο. Παρακαλώ ορίστε το "
-        "χαρακτηριστικό εκτελέσιμου στο αρχείο αυτό."
+#: ../xffm/response/customresponse.hh:103
+msgid   "Source File"
+msgstr  "Πηγαίο αρχείο"
 
-#: ../xffm/common/util.hh:1406 ../xffm/common/util.hh:1441
-#, c-format
-msgid   "Open with %s"
-msgstr  "Άνοιγμα με %s"
+#: ../xffm/response/entryresponse.hh:439 ../xffm/response/passwdresponse.hh:242
+msgid   "Ok"
+msgstr  "Εντάξει"
 
-#: ../xffm/common/util.hh:1406
-msgid   "Text Editor"
-msgstr  "Επεξεργαστής κειμένου"
+#: ../xffm/response/commandprogressresponse.hh:31
+msgid   "Items:"
+msgstr  "Αντικείμενα:"
 
-#: ../xffm/common/util.hh:1447
-msgid   "Console: quickly run single commands -- write a command here and "
-        "press enter."
-msgstr  "Κονσόλα: γρήγορη εκτέλεση μεμονωμένων εντολών -- γράψτε μια εντολή "
-        "εδώ και πιέστε το enter."
-
-#: ../xffm/common/util.hh:1452 ../xffm/fm/view/local/popup.hh:1109
-#: ../xffm/fm/view/local/popup.hh:1291 ../xffm/fm/view/local/popup.hh:1309
-msgid   "Run in Terminal"
-msgstr  "Εκτέλεση σε τερματικό"
-
-#: ../xffm/common/dnd.hh:41 ../xffm/fm/dialog/clipboard.hh:23
-msgid   "Copying files locally"
-msgstr  "Αντιγραφή αρχείων τοπικά"
-
-#: ../xffm/common/dnd.hh:47
-msgid   "Create Link"
-msgstr  "Δημιουργία σύνδεσης"
-
-#: ../xffm/common/run.hh:338
-msgid   "error"
-msgstr  "σφάλμα"
-
-#: ../xffm/common/run.hh:342
-msgid   "warning"
-msgstr  "ειδοποίηση"
-
-#: ../xffm/common/run.hh:464 ../xffm/response/passwdresponse.hh:19
-#: ../xffm/response/passwdresponse.hh:25
+#: ../xffm/response/passwdresponse.hh:19 ../xffm/response/passwdresponse.hh:25
+#: ../xffm/common/run.hh:464
 msgid   "Enter password"
 msgstr  "Εισάγετε κωδικό"
 
-#: ../xffm/fm/view/pkg/model.hh:29 ../xffm/fm/view/pkg/popup.hh:35
+#: ../xffm/response/passwdresponse.hh:179
+#, fuzzy
+msgid   "User Input"
+msgstr  "Είσοδος ποντικιού"
+
+#: ../xffm/response/passwdresponse.hh:195
+msgid   "Response Requested"
+msgstr  "Αιτήθηκε απάντηση"
+
+#: ../xffm/response/timeoutresponse.hh:57
+msgid   "Dismiss"
+msgstr  "Ακύρωση"
+
+#: ../xffm/response/commandresponse.hh:19
+msgid   "Running"
+msgstr  "Εκτελείται"
+
+#: ../xffm/response/commandresponse.hh:24
+msgid   "Waiting for operation to finish..."
+msgstr  "Αναμονή ολοκλήρωσης της ενέργειας..."
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:11
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:214
+#, fuzzy
+msgid   "Remove Button Contents"
+msgstr  "Περιεχόμενο κουμπιού"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:67
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:209
+msgid   "Add custom content"
+msgstr  "Προσθήκη προσαρμοσμένου περιεχομένου"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:68
+msgid   "Select file to load"
+msgstr  "Επιλογή αρχείου για φόρτωση"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:125
+#, c-format
+msgid   "Cannot load file %s. Reason: %s"
+msgstr  "Αδυναμία φόρτωσης του αρχείου %s. Αίτια: %s"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:154
+msgid   "You need to restart the application"
+msgstr  "Απαιτείται επανεκκίνηση της εφαρμογής"
+
 #: ../xffm/fm/dialog/notebook/vbuttonbox.hh:187
 #: ../xffm/fm/dialog/notebook/vbuttonbox.hh:191
 #: ../xffm/fm/dialog/notebook/vbuttonbox.hh:195
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:198
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:198 ../xffm/fm/view/pkg/model.hh:29
+#: ../xffm/fm/view/pkg/popup.hh:35
 msgid   "Software Updater"
 msgstr  "Ενημερώσεις Λογισμικού"
 
-#: ../xffm/fm/view/pkg/model.hh:41 ../xffm/fm/view/pkg/model.hh:52
-msgid   "Add or remove software installed on the system"
-msgstr  "Προσθαφαίρεση λογισμικού στο σύστημα"
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:236
+#: ../xffm/fm/view/pkg/model.hh:108 ../xffm/fm/view/pkg/model.hh:299
+#: ../xffm/fm/view/pkg/model.hh:306 ../xffm/fm/view/pkg/popup.hh:151
+#: ../xffm/common/gtk.hh:77
+msgid   "Search"
+msgstr  "Αναζήτηση"
 
-#: ../xffm/fm/view/pkg/model.hh:111
-msgid   "String"
-msgstr  "Συμβολοσειρά"
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:240 ../xffm/common/gtk.hh:67
+msgid   "Open terminal"
+msgstr  "Άνοιγμα τερματικού"
 
-#: ../xffm/fm/view/pkg/model.hh:116
-msgid   "Waiting for search results"
-msgstr  "Αναμονή για τα αποτελέσματα της αναζήτησης"
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:244
+msgid   "Open a New Window"
+msgstr  "Άνοιγμα ενός νέου παραθύρου"
 
-#: ../xffm/fm/view/pkg/model.hh:174
-msgid   "No results"
-msgstr  "Δεν υπάρχουν αποτελέσματα"
-
-#: ../xffm/fm/view/pkg/model.hh:373
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:250
 #, fuzzy
-msgid   "Currently busy\n"
-msgstr  "Τρέχων δίσκος"
+msgid   "Differences"
+msgstr  "Διαφορά"
 
-#: ../xffm/fm/view/pkg/popup.hh:44
-msgid   "Update Database"
-msgstr  "Ενημέρωση βάσης δεδομένων"
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:256
+#: ../xffm/fm/view/root/model.hh:110
+msgid   "Home Directory"
+msgstr  "Προσωπικός φάκελος"
 
-#: ../xffm/fm/view/pkg/popup.hh:45
-msgid   "Fetch"
-msgstr  "Ανάκτηση"
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:261
+#: ../xffm/fm/view/root/model.hh:168 ../xffm/fm/view/fstab/popup.hh:29
+msgid   "Disk Image Mounter"
+msgstr  "Προσαρτητής εικόνας δίσκων"
 
-#: ../xffm/fm/view/pkg/popup.hh:46
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:266
+#: ../xffm/fm/view/root/model.hh:137
+msgid   "Trash bin"
+msgstr  "Κάδος απορριμμάτων"
+
+#: ../xffm/fm/dialog/notebook/notebook.hh:56
+msgid   "Long press time"
+msgstr  "Διάρκεια μακρού πατήματος"
+
+#: ../xffm/fm/dialog/notebook/notebook.hh:75 ../xffm/common/gtk.hh:139
+msgid   "New Tab"
+msgstr  "Νέα καρτέλα"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:178
+msgid   "Open menu"
+msgstr  "Άνοιγμα μενού"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:230
+msgid   "View as list"
+msgstr  "Προβολή ως λίστα"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:231
+msgid   "Show hidden files"
+msgstr  "Εμφάνιση κρυφών αρχείων"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:232
+msgid   "Show Backup Files"
+msgstr  "Εμφάνιση αντιγράφων ασφαλείας."
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:233
+msgid   "Sort data in descending order"
+msgstr  "Ταξινόμηση δεδομένων κατά φθίνουσα σειρά"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:235
+msgid   "Sort by date"
+msgstr  "Ταξινόμηση ανά ημέρα"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:236
+msgid   "Sort by size"
+msgstr  "Ταξινόμηση μεγέθους"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:237 ../xffm/common/gtk.hh:81
+msgid   "Exit"
+msgstr  "Έξοδος"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:270
+msgid   "Main menu"
+msgstr  "Κύριο Μενού"
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:375
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:377
+msgid   "Go to"
+msgstr  "Μετάβαση σε"
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:382
+#: ../xffm/fm/view/local/popup.hh:887 ../xffm/fm/view/local/popup.hh:981
+msgid   "Specify Output Directory..."
+msgstr  "Καθορίστε κατάλογο εξόδου..."
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:409
+msgid   "Not a directory"
+msgstr  "Δεν είναι κατάλογος"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid   "Renice Process"
+msgstr  "Renice διεργασίας"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid   "Suspend"
+msgstr  "Αναστολή"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid   "Continue"
+msgstr  "Συνέχεια"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid   "Interrupt"
+msgstr  "Διακοπή"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid   "Hangup"
+msgstr  "Τερματισμός"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid   "User 1 (USR1)"
+msgstr  "Χρήστης 1 (USR1)"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+msgid   "User 2 (USR2)"
+msgstr  "Χρήστης 2 (USR2)"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+msgid   "Terminate Task"
+msgstr  "Τερματισμός διεργασίας"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+msgid   "Abort"
+msgstr  "Εγκατάλειψη"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:138
+msgid   "Kill"
+msgstr  "Βίαιος Τερματισμός"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
 #, fuzzy
-msgid   "Install --dry-run"
-msgstr  "Σφάλμα εγκατάστασης"
+msgid   "Segmentation fault"
+msgstr  "Παραβίαση τμηματοποίησης"
 
-#: ../xffm/fm/view/pkg/popup.hh:47
-msgid   "Install"
-msgstr  "Εγκατάσταση"
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:216
+msgid   "PID"
+msgstr  "PID"
 
-#: ../xffm/fm/view/pkg/popup.hh:48
-#, fuzzy
-msgid   "Uninstall --dry-run"
-msgstr  "Απεγκατάσταση"
+#: ../xffm/fm/dialog/notebook/page/page.hh:59
+msgid   "loading..."
+msgstr  "φόρτωση..."
 
-#: ../xffm/fm/view/pkg/popup.hh:49
-msgid   "Uninstall"
-msgstr  "Απεγκατάσταση"
+#: ../xffm/fm/dialog/notebook/page/page.hh:151
+#: ../xffm/fm/dialog/notebook/page/page.hh:167
+msgid   "Confirm Replace"
+msgstr  "Επιβεβαίωση αντικατάστασης"
 
-#: ../xffm/fm/view/pkg/popup.hh:50
-msgid   "Information"
-msgstr  "Πληροφορίες"
+#: ../xffm/fm/dialog/notebook/page/page.hh:153
+msgid   "Destination File"
+msgstr  "Αρχείο προορισμού"
 
-#: ../xffm/fm/view/pkg/popup.hh:140
-msgid   "Version"
-msgstr  "Έκδοση"
+#: ../xffm/fm/dialog/notebook/page/page.hh:166
+#, fuzzy, c-format
+msgid   "The output file %s already exists, do you want to overwrite it?"
+msgstr  "Το αρχείο %s υπάρχει ήδη: επιθυμείτε την αντικατάστασή του;"
 
-#: ../xffm/fm/view/pkg/popup.hh:149
-msgid   "Go up"
-msgstr  "Μετάβαση επάνω"
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
+msgid   "Embedded Terminal"
+msgstr  "Ενσωματωμένο τερματικό"
 
-#: ../xffm/fm/view/pkg/popup.hh:152
-msgid   "Search packages"
-msgstr  "Αναζήτηση πακέτων"
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
+msgid   "All items in the iconview."
+msgstr  "Όλα τα αντικείμενα της προβολής εικονιδίων."
 
-#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
-#, c-format
-msgid   "Loading %s...%s"
-msgstr  "Φόρτωση %s...%s"
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
+msgid   "Scripting"
+msgstr  "Δέσμη ενεργειών"
 
-#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
-msgid   "Please Wait..."
-msgstr  "Παρακαλώ περιμένετε..."
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
+msgid   "Clear Log"
+msgstr  "Καθαρισμός καταγραφής"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
+msgid   "Terminal font"
+msgstr  "Γραμματοσειρά τερματικού"
+
+#: ../xffm/fm/dialog/clipboard.hh:23 ../xffm/common/dnd.hh:41
+msgid   "Copying files locally"
+msgstr  "Αντιγραφή αρχείων τοπικά"
+
+#: ../xffm/fm/dialog/clipboard.hh:30 ../xffm/common/gio.hh:83
+#: ../xffm/common/dnd.hh:35
+msgid   "Moving files"
+msgstr  "Γίνεται μετακίνηση αρχείων"
+
+#: ../xffm/fm/dialog/dialog.hh:122
+msgid   "Removed"
+msgstr  "Αφαιρέθηκε"
+
+#: ../xffm/fm/dialog/dialog.hh:143
+msgid   "Detected device(s):"
+msgstr  "Συσκευές που εντοπίστηκαν:"
 
 #: ../xffm/fm/view/local/model.hh:124
 #, c-format
@@ -745,34 +841,32 @@ msgstr  "Αρχεία: %s"
 msgid   "Loaded %d of %d articles"
 msgstr  "Μεταφορτώθηκαν %d από %d άρθρα"
 
-#: ../xffm/fm/view/local/rm.hh:59
-#, c-format
-msgid   "Delete %s"
-msgstr  "Διαγραφή %s"
-
-#: ../xffm/fm/view/local/rm.hh:61
-msgid   "Warning: "
-msgstr  "Προειδοποίηση:"
-
-#: ../xffm/fm/view/local/rm.hh:61 ../xffm/fm/view/local/popup.hh:565
-msgid   "Multiple selections"
-msgstr  "Πολλαπλές επιλογές"
-
-#: ../xffm/fm/view/local/rm.hh:92
-msgid   "Remove"
-msgstr  "Αφαίρεση"
-
-#: ../xffm/fm/view/local/rm.hh:142
-msgid   "Apply to all"
-msgstr  "Εφαρμογή σε όλα"
-
-#: ../xffm/fm/view/local/rm.hh:183
-msgid   "Trash"
-msgstr  "Απορρίμματα"
+#: ../xffm/fm/view/local/popup.hh:85 ../xffm/fm/view/local/popup.hh:142
+#: ../xffm/fm/view/local/popup.hh:1287 ../xffm/fm/view/local/popup.hh:1294
+#: ../xffm/fm/view/local/popup.hh:1305 ../xffm/fm/view/local/popup.hh:1312
+#: ../xffm/common/gtk.hh:83
+msgid   "Open with"
+msgstr  "Άνοιγμα με"
 
 #: ../xffm/fm/view/local/popup.hh:94
 msgid   "New"
 msgstr  "Νέο"
+
+#: ../xffm/fm/view/local/popup.hh:95 ../xffm/fm/view/local/popup.hh:145
+#: ../xffm/fm/view/root/popup.hh:136 ../xffm/fm/view/fstab/popup.hh:20
+#: ../xffm/common/gtk.hh:94
+msgid   "Open in New Tab"
+msgstr  "Άνοιγμα σε νέα καρτέλα"
+
+#: ../xffm/fm/view/local/popup.hh:99 ../xffm/fm/view/local/popup.hh:155
+#: ../xffm/common/gtk.hh:87
+msgid   "Copy"
+msgstr  "Αντιγραφή"
+
+#: ../xffm/fm/view/local/popup.hh:100 ../xffm/fm/view/local/popup.hh:156
+#: ../xffm/common/gtk.hh:85
+msgid   "Cut"
+msgstr  "Αποκοπή"
 
 #: ../xffm/fm/view/local/popup.hh:101 ../xffm/fm/view/local/popup.hh:159
 #: ../xffm/fm/view/local/popup.hh:232 ../xffm/fm/view/local/popup.hh:234
@@ -783,6 +877,11 @@ msgstr  "Επικόλληση σε"
 #, fuzzy
 msgid   "There is nothing on the clipboard to paste."
 msgstr  "Δεν υπάρχει τίποτα στο πρόχειρο για επικόλληση."
+
+#: ../xffm/fm/view/local/popup.hh:103 ../xffm/fm/view/local/popup.hh:160
+#: ../xffm/fm/view/local/rm.hh:176 ../xffm/common/gtk.hh:89
+msgid   "Delete"
+msgstr  "Διαγραφή"
 
 #: ../xffm/fm/view/local/popup.hh:106
 msgid   "Select All"
@@ -812,6 +911,19 @@ msgstr  "Προσάρτηση του τόμου που σχετίζεται με
 msgid   "Unmount the volume associated with this folder"
 msgstr  "Αποπροσάρτηση του τόμου που σχετίζεται με αυτόν τον φάκελο"
 
+#: ../xffm/fm/view/local/popup.hh:151 ../xffm/common/gtk.hh:73
+msgid   "Add bookmark"
+msgstr  "Προσθήκη σελιδοδείκτη"
+
+#: ../xffm/fm/view/local/popup.hh:152 ../xffm/fm/view/root/popup.hh:137
+#: ../xffm/common/gtk.hh:75
+msgid   "Remove bookmark"
+msgstr  "Αφαίρεση σελιδοδείκτη"
+
+#: ../xffm/fm/view/local/popup.hh:157 ../xffm/common/gtk.hh:71
+msgid   "Paste"
+msgstr  "Επικόλληση"
+
 #: ../xffm/fm/view/local/popup.hh:161 ../xffm/fm/view/local/popup.hh:1231
 msgid   "Rename"
 msgstr  "Μετονομασία"
@@ -832,6 +944,10 @@ msgstr  "Ιδιότητες"
 msgid   "Files:"
 msgstr  "Αρχεία:"
 
+#: ../xffm/fm/view/local/popup.hh:565 ../xffm/fm/view/local/rm.hh:61
+msgid   "Multiple selections"
+msgstr  "Πολλαπλές επιλογές"
+
 #: ../xffm/fm/view/local/popup.hh:753
 msgid   "Select items"
 msgstr  "Επιλογή αντικειμένων"
@@ -847,11 +963,6 @@ msgstr  "Καμία επιλογή"
 #: ../xffm/fm/view/local/popup.hh:801
 msgid   "No matches."
 msgstr  "Δεν βρέθηκαν αποτελέσματα."
-
-#: ../xffm/fm/view/local/popup.hh:887 ../xffm/fm/view/local/popup.hh:981
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:382
-msgid   "Specify Output Directory..."
-msgstr  "Καθορίστε κατάλογο εξόδου..."
 
 #: ../xffm/fm/view/local/popup.hh:1058
 msgid   "Create new..."
@@ -870,6 +981,11 @@ msgstr  "Χωρίς όνομα"
 msgid   "Another file with the same name already exists in “%s”."
 msgstr  "Υπάρχει ήδη ένα αρχείο με το ίδιο όνομα στο “%s”."
 
+#: ../xffm/fm/view/local/popup.hh:1109 ../xffm/fm/view/local/popup.hh:1291
+#: ../xffm/fm/view/local/popup.hh:1309 ../xffm/common/util.hh:1452
+msgid   "Run in Terminal"
+msgstr  "Εκτέλεση σε τερματικό"
+
 #: ../xffm/fm/view/local/popup.hh:1112
 msgid   "Arguments for the Command"
 msgstr  "Παράμετροι για την εντολή"
@@ -881,11 +997,6 @@ msgstr  "Επιλέχτηκαν πολλαπλά αρχεία ή φάκελοι"
 #: ../xffm/fm/view/local/popup.hh:1332 ../xffm/fm/view/local/view.hh:156
 msgid   "Invalid entry"
 msgstr  "Άκυρη καταχώριση"
-
-#: ../xffm/fm/view/local/view.hh:177
-#, c-format
-msgid   "The volume '%s' is not mounted."
-msgstr  "Ο τόμος '%s' δεν έχει προσαρτηθεί."
 
 #: ../xffm/fm/view/local/properties.hh:245
 msgid   "Properties and Attributes"
@@ -911,6 +1022,36 @@ msgstr  "Επιτυχής μετακίνηση στον κάδο απορριμ�
 msgid   "Source:"
 msgstr  "Πηγή:"
 
+#: ../xffm/fm/view/local/rm.hh:59
+#, c-format
+msgid   "Delete %s"
+msgstr  "Διαγραφή %s"
+
+#: ../xffm/fm/view/local/rm.hh:61
+msgid   "Warning: "
+msgstr  "Προειδοποίηση:"
+
+#: ../xffm/fm/view/local/rm.hh:92
+msgid   "Remove"
+msgstr  "Αφαίρεση"
+
+#: ../xffm/fm/view/local/rm.hh:142
+msgid   "Apply to all"
+msgstr  "Εφαρμογή σε όλα"
+
+#: ../xffm/fm/view/local/rm.hh:165 ../xffm/common/gtk.hh:91
+msgid   "Shred"
+msgstr  "Καταστροφή"
+
+#: ../xffm/fm/view/local/rm.hh:183
+msgid   "Trash"
+msgstr  "Απορρίμματα"
+
+#: ../xffm/fm/view/local/view.hh:177
+#, c-format
+msgid   "The volume '%s' is not mounted."
+msgstr  "Ο τόμος '%s' δεν έχει προσαρτηθεί."
+
 #: ../xffm/fm/view/root/model.hh:82
 msgid   "Root Directory"
 msgstr  "Κατάλογος root"
@@ -918,21 +1059,6 @@ msgstr  "Κατάλογος root"
 #: ../xffm/fm/view/root/model.hh:98
 msgid   "This is the root of the filesystem"
 msgstr  "Αυτή είναι η ρίζα του συστήματος αρχείων"
-
-#: ../xffm/fm/view/root/model.hh:110
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:256
-msgid   "Home Directory"
-msgstr  "Προσωπικός φάκελος"
-
-#: ../xffm/fm/view/root/model.hh:137
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:266
-msgid   "Trash bin"
-msgstr  "Κάδος απορριμμάτων"
-
-#: ../xffm/fm/view/root/model.hh:168 ../xffm/fm/view/fstab/popup.hh:29
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:261
-msgid   "Disk Image Mounter"
-msgstr  "Προσαρτητής εικόνας δίσκων"
 
 #: ../xffm/fm/view/root/model.hh:176 ../xffm/fm/view/root/model.hh:191
 msgid   "Mount local disks and devices"
@@ -1013,14 +1139,77 @@ msgstr  "Αποπροσάρτηση %s"
 msgid   "Mounting %s"
 msgstr  "Προσάρτηση %s"
 
-#: ../xffm/fm/view/base/signals.hh:838
-#, fuzzy
-msgid   "Trash is empty"
-msgstr  "Η πινακίδα αφής είναι εκφορτισμένη"
+#: ../xffm/fm/view/pkg/model.hh:41 ../xffm/fm/view/pkg/model.hh:52
+msgid   "Add or remove software installed on the system"
+msgstr  "Προσθαφαίρεση λογισμικού στο σύστημα"
 
-#: ../xffm/fm/view/base/signals.hh:840
-msgid   "Directory does not exist."
-msgstr  "Ο κατάλογος δεν υπάρχει."
+#: ../xffm/fm/view/pkg/model.hh:111
+msgid   "String"
+msgstr  "Συμβολοσειρά"
+
+#: ../xffm/fm/view/pkg/model.hh:116
+msgid   "Waiting for search results"
+msgstr  "Αναμονή για τα αποτελέσματα της αναζήτησης"
+
+#: ../xffm/fm/view/pkg/model.hh:174
+msgid   "No results"
+msgstr  "Δεν υπάρχουν αποτελέσματα"
+
+#: ../xffm/fm/view/pkg/model.hh:373
+#, fuzzy
+msgid   "Currently busy\n"
+msgstr  "Τρέχων δίσκος"
+
+#: ../xffm/fm/view/pkg/popup.hh:44
+msgid   "Update Database"
+msgstr  "Ενημέρωση βάσης δεδομένων"
+
+#: ../xffm/fm/view/pkg/popup.hh:45
+msgid   "Fetch"
+msgstr  "Ανάκτηση"
+
+#: ../xffm/fm/view/pkg/popup.hh:46
+#, fuzzy
+msgid   "Install --dry-run"
+msgstr  "Σφάλμα εγκατάστασης"
+
+#: ../xffm/fm/view/pkg/popup.hh:47
+msgid   "Install"
+msgstr  "Εγκατάσταση"
+
+#: ../xffm/fm/view/pkg/popup.hh:48
+#, fuzzy
+msgid   "Uninstall --dry-run"
+msgstr  "Απεγκατάσταση"
+
+#: ../xffm/fm/view/pkg/popup.hh:49
+msgid   "Uninstall"
+msgstr  "Απεγκατάσταση"
+
+#: ../xffm/fm/view/pkg/popup.hh:50
+msgid   "Information"
+msgstr  "Πληροφορίες"
+
+#: ../xffm/fm/view/pkg/popup.hh:140
+msgid   "Version"
+msgstr  "Έκδοση"
+
+#: ../xffm/fm/view/pkg/popup.hh:149
+msgid   "Go up"
+msgstr  "Μετάβαση επάνω"
+
+#: ../xffm/fm/view/pkg/popup.hh:152
+msgid   "Search packages"
+msgstr  "Αναζήτηση πακέτων"
+
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
+#, c-format
+msgid   "Loading %s...%s"
+msgstr  "Φόρτωση %s...%s"
+
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
+msgid   "Please Wait..."
+msgstr  "Παρακαλώ περιμένετε..."
 
 #: ../xffm/fm/view/treeview.hh:17
 msgid   "Name"
@@ -1038,273 +1227,84 @@ msgstr  "Ημερομηνία"
 msgid   "Mimetype"
 msgstr  "Τύπος mime"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
-msgid   "Embedded Terminal"
-msgstr  "Ενσωματωμένο τερματικό"
-
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
-msgid   "All items in the iconview."
-msgstr  "Όλα τα αντικείμενα της προβολής εικονιδίων."
-
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
-msgid   "Scripting"
-msgstr  "Δέσμη ενεργειών"
-
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
-msgid   "Clear Log"
-msgstr  "Καθαρισμός καταγραφής"
-
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
-msgid   "Terminal font"
-msgstr  "Γραμματοσειρά τερματικού"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
-msgid   "Renice Process"
-msgstr  "Renice διεργασίας"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
-msgid   "Suspend"
-msgstr  "Αναστολή"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
-msgid   "Continue"
-msgstr  "Συνέχεια"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid   "Interrupt"
-msgstr  "Διακοπή"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid   "Hangup"
-msgstr  "Τερματισμός"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid   "User 1 (USR1)"
-msgstr  "Χρήστης 1 (USR1)"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
-msgid   "User 2 (USR2)"
-msgstr  "Χρήστης 2 (USR2)"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
-msgid   "Terminate Task"
-msgstr  "Τερματισμός διεργασίας"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
-msgid   "Abort"
-msgstr  "Εγκατάλειψη"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:138
-msgid   "Kill"
-msgstr  "Βίαιος Τερματισμός"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
+#: ../xffm/fm/view/base/signals.hh:838
 #, fuzzy
-msgid   "Segmentation fault"
-msgstr  "Παραβίαση τμηματοποίησης"
+msgid   "Trash is empty"
+msgstr  "Η πινακίδα αφής είναι εκφορτισμένη"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:216
-msgid   "PID"
-msgstr  "PID"
+#: ../xffm/fm/view/base/signals.hh:840
+msgid   "Directory does not exist."
+msgstr  "Ο κατάλογος δεν υπάρχει."
 
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:375
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:377
-msgid   "Go to"
-msgstr  "Μετάβαση σε"
+#: ../xffm/common/settings.hh:30
+msgid   "New File:"
+msgstr  "Νέο αρχείο:"
 
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:409
-msgid   "Not a directory"
-msgstr  "Δεν είναι κατάλογος"
+#: ../xffm/common/gio.hh:81
+msgid   "Copying files"
+msgstr  "Γίνεται αντιγραφή αρχείων"
 
-#: ../xffm/fm/dialog/notebook/page/page.hh:59
-msgid   "loading..."
-msgstr  "φόρτωση..."
+#: ../xffm/common/gio.hh:85
+msgid   "linking"
+msgstr  "σύνδεση"
 
-#: ../xffm/fm/dialog/notebook/page/page.hh:151
-#: ../xffm/fm/dialog/notebook/page/page.hh:167
-msgid   "Confirm Replace"
-msgstr  "Επιβεβαίωση αντικατάστασης"
+#: ../xffm/common/gio.hh:87
+msgid   "rename"
+msgstr  "rename"
 
-#: ../xffm/fm/dialog/notebook/page/page.hh:153
-msgid   "Destination File"
-msgstr  "Αρχείο προορισμού"
-
-#: ../xffm/fm/dialog/notebook/page/page.hh:166
-#, fuzzy, c-format
-msgid   "The output file %s already exists, do you want to overwrite it?"
-msgstr  "Το αρχείο %s υπάρχει ήδη: επιθυμείτε την αντικατάστασή του;"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:11
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:214
-#, fuzzy
-msgid   "Remove Button Contents"
-msgstr  "Περιεχόμενο κουμπιού"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:67
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:209
-msgid   "Add custom content"
-msgstr  "Προσθήκη προσαρμοσμένου περιεχομένου"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:68
-msgid   "Select file to load"
-msgstr  "Επιλογή αρχείου για φόρτωση"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:125
+#: ../xffm/common/gio.hh:426
 #, c-format
-msgid   "Cannot load file %s. Reason: %s"
-msgstr  "Αδυναμία φόρτωσης του αρχείου %s. Αίτια: %s"
+msgid   "(%d of %d)"
+msgstr  "(%d από %d)"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:154
-msgid   "You need to restart the application"
-msgstr  "Απαιτείται επανεκκίνηση της εφαρμογής"
+#: ../xffm/common/dnd.hh:47
+msgid   "Create Link"
+msgstr  "Δημιουργία σύνδεσης"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:244
-msgid   "Open a New Window"
-msgstr  "Άνοιγμα ενός νέου παραθύρου"
+#: ../xffm/common/util.hh:1404
+#, c-format
+msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
+        "attribute on that file."
+msgstr  "Το αρχείο σεναρίου \"%s\" δεν είναι εκτελέσιμο. Παρακαλώ ορίστε το "
+        "χαρακτηριστικό εκτελέσιμου στο αρχείο αυτό."
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:250
-#, fuzzy
-msgid   "Differences"
-msgstr  "Διαφορά"
+#: ../xffm/common/util.hh:1406 ../xffm/common/util.hh:1441
+#, c-format
+msgid   "Open with %s"
+msgstr  "Άνοιγμα με %s"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:178
-msgid   "Open menu"
-msgstr  "Άνοιγμα μενού"
+#: ../xffm/common/util.hh:1406
+msgid   "Text Editor"
+msgstr  "Επεξεργαστής κειμένου"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:230
-msgid   "View as list"
-msgstr  "Προβολή ως λίστα"
+#: ../xffm/common/util.hh:1443 ../xffm/common/gtk.hh:69
+msgid   "Execute Shell Command"
+msgstr  "Εκτέλεση εντολής κελύφους"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:231
-msgid   "Show hidden files"
-msgstr  "Εμφάνιση κρυφών αρχείων"
+#: ../xffm/common/util.hh:1447
+msgid   "Console: quickly run single commands -- write a command here and "
+        "press enter."
+msgstr  "Κονσόλα: γρήγορη εκτέλεση μεμονωμένων εντολών -- γράψτε μια εντολή "
+        "εδώ και πιέστε το enter."
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:232
-msgid   "Show Backup Files"
-msgstr  "Εμφάνιση αντιγράφων ασφαλείας."
+#: ../xffm/common/gtk.hh:352 ../xffm/common/gtk.hh:360
+msgid   "Help"
+msgstr  "Βοήθεια"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:233
-msgid   "Sort data in descending order"
-msgstr  "Ταξινόμηση δεδομένων κατά φθίνουσα σειρά"
+#: ../xffm/common/run.hh:338
+msgid   "error"
+msgstr  "σφάλμα"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:235
-msgid   "Sort by date"
-msgstr  "Ταξινόμηση ανά ημέρα"
+#: ../xffm/common/run.hh:342
+msgid   "warning"
+msgstr  "ειδοποίηση"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:236
-msgid   "Sort by size"
-msgstr  "Ταξινόμηση μεγέθους"
+#: ../xffm/common/preview.hh:581
+msgid   "Empty file"
+msgstr  "Άδειο αρχείο"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:270
-msgid   "Main menu"
-msgstr  "Κύριο Μενού"
-
-#: ../xffm/fm/dialog/notebook/notebook.hh:56
-msgid   "Long press time"
-msgstr  "Διάρκεια μακρού πατήματος"
-
-#: ../xffm/fm/dialog/dialog.hh:122
-msgid   "Removed"
-msgstr  "Αφαιρέθηκε"
-
-#: ../xffm/fm/dialog/dialog.hh:143
-msgid   "Detected device(s):"
-msgstr  "Συσκευές που εντοπίστηκαν:"
-
-#: ../xffm/response/commandresponse.hh:19
-msgid   "Running"
-msgstr  "Εκτελείται"
-
-#: ../xffm/response/commandresponse.hh:24
-msgid   "Waiting for operation to finish..."
-msgstr  "Αναμονή ολοκλήρωσης της ενέργειας..."
-
-#: ../xffm/response/passwdresponse.hh:179
-#, fuzzy
-msgid   "User Input"
-msgstr  "Είσοδος ποντικιού"
-
-#: ../xffm/response/passwdresponse.hh:195
-msgid   "Response Requested"
-msgstr  "Αιτήθηκε απάντηση"
-
-#: ../xffm/response/passwdresponse.hh:242 ../xffm/response/entryresponse.hh:439
-msgid   "Ok"
-msgstr  "Εντάξει"
-
-#: ../xffm/response/customresponse.hh:55
-msgid   "Execute command"
-msgstr  "Εκτέλεση εντολής"
-
-#: ../xffm/response/customresponse.hh:103
-msgid   "Source File"
-msgstr  "Πηγαίο αρχείο"
-
-#: ../xffm/response/timeoutresponse.hh:57
-msgid   "Dismiss"
-msgstr  "Ακύρωση"
-
-#: ../xffm/response/commandprogressresponse.hh:31
-msgid   "Items:"
-msgstr  "Αντικείμενα:"
-
-#: ../xffm/response/chooserresponse.hh:23
-msgid   "Open"
-msgstr  "Άνοιγμα"
-
-#: ../xffm/response/chooserresponse.hh:56
-msgid   "Choose directory"
-msgstr  "Επιλογή καταλόγου"
-
-#: ../xffm/response/chooserresponse.hh:60
-msgid   "Choose file"
-msgstr  "Επιλογή αρχείου"
-
-#: ../xffm/completion/bash.hh:133
-msgid   "Completion mode:"
-msgstr  "Λειτουργία συμπλήρωσης:"
-
-#: ../xffm/completion/bash.hh:134
-msgid   "command"
-msgstr  "εντολή"
-
-#: ../xffm/completion/bash.hh:135
-msgid   "file"
-msgstr  "αρχείο"
-
-#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
-msgid   "Options >>"
-msgstr  "Επιλογές >>"
-
-#: ../xffm/completion/base.hh:28
-msgid   "Command"
-msgstr  "Εντολή"
-
-#: ../xffm/completion/base.hh:31
-msgid   "File"
-msgstr  "Αρχείο"
-
-#: ../xffm/completion/base.hh:34
-msgid   "Command history"
-msgstr  "Ιστορικό εντολών"
-
-#: ../xffm/completion/base.hh:40
-msgid   "Variable"
-msgstr  "Μεταβλητή"
-
-#: ../xffm/completion/base.hh:43
-msgid   "Host"
-msgstr  "Διακομιστής"
-
-#: ../xffm/completion/base.hh:55
-msgid   "Found no match"
-msgstr  "Δεν βρέθηκε ταίριασμα"
-
-#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
-msgid   "Matches"
-msgstr  "Ταιριάσματα"
-
-#: ../xffm/completion/base.hh:142
-msgid   "Too many files open"
-msgstr  "Πάρα πολλά ανοιχτά αρχεία"
+#: ../xffm/common/preview.hh:636
+#, c-format
+msgid   "Cannot read from %s"
+msgstr  "Αδυναμία ανάγνωσης από %s"
 

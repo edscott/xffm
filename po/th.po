@@ -1,4 +1,4 @@
-# Xffm+ translation file: vie ago  9 14:47:19 CDT 2019
+# Xffm+ translation file: dom ago 11 10:59:15 CDT 2019
 # Merged fron existing open source files
 # http://xffm.org
 #
@@ -6,7 +6,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: xffm+\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2019-08-09 12:32-0500\n"
+        "POT-Creation-Date: 2019-08-11 09:10-0500\n"
         "PO-Revision-Date: 2011-08-13 17:07+0700\n"
         "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
         "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
@@ -15,251 +15,81 @@ msgstr  "Project-Id-Version: xffm+\n"
         "Content-Type: text/plain; charset=UTF-8\n"
         "Content-Transfer-Encoding: 8bit\n"
         "product=accerciserkeywords=I18N+L10Ncomponent=general\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+        "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../xffm/mime/mimemagic.hh:68 ../xffm/mime/mimemagic.hh:112
 msgid   "No Read Permission"
 msgstr  "ไม่มีสิทธิ์ในการอ่าน"
 
-#: ../xffm/find/dialog.hh:91 ../xffm/find/dialog.hh:143
-#: ../xffm/find/dialog.hh:604
-msgid   "Find"
-msgstr  "หา"
+#: ../xffm/completion/base.hh:28
+msgid   "Command"
+msgstr  "คำสั่ง"
 
-#: ../xffm/find/dialog.hh:167 ../xffm/find/fgr.hh:146
-msgid   "Recursive"
-msgstr  "แบบลงลึก"
+#: ../xffm/completion/base.hh:31
+msgid   "File"
+msgstr  "แฟ้ม"
 
-#: ../xffm/find/dialog.hh:170 ../xffm/find/fgr.hh:142
+#: ../xffm/completion/base.hh:34
 #, fuzzy
-msgid   "Find hidden files and directories"
-msgstr  "แพตช์แฟ้มและไดเรกทอรี"
+msgid   "Command history"
+msgstr  "ประวัติการเรียกใช้คำสั่ง"
 
-#: ../xffm/find/dialog.hh:173 ../xffm/find/fgr.hh:138
-#, fuzzy
-msgid   "Stay on single filesystem"
-msgstr  "ตรวจข้อมูลระบบแฟ้ม"
-
-#: ../xffm/find/dialog.hh:176 ../xffm/find/signals.hh:66
-#: ../xffm/find/signals.hh:454
-msgid   "Results"
-msgstr  "ผลลัพธ์"
-
-#: ../xffm/find/dialog.hh:176
-#, fuzzy
-msgid   "Upper limit"
-msgstr  "ขีดจำกัดบน:"
-
-#: ../xffm/find/dialog.hh:181
-msgid   "At Least"
-msgstr  "อย่างน้อย"
-
-#: ../xffm/find/dialog.hh:181 ../xffm/find/dialog.hh:186
-msgid   "kBytes"
-msgstr  "กิโลไบต์"
-
-#: ../xffm/find/dialog.hh:186
-msgid   "At Most"
-msgstr  "อย่างมาก"
-
-#: ../xffm/find/dialog.hh:192 ../xffm/completion/base.hh:37
+#: ../xffm/completion/base.hh:37 ../xffm/find/dialog.hh:192
 msgid   "User"
 msgstr  "ผู้ใช้"
 
-#: ../xffm/find/dialog.hh:197
-msgid   "Group"
-msgstr  "กลุ่ม"
+#: ../xffm/completion/base.hh:40
+msgid   "Variable"
+msgstr  "ตัวแปร"
 
-#: ../xffm/find/dialog.hh:201
-msgid   "Octal Permissions"
-msgstr  "สิทธิ์ในรูปเลขฐานแปด"
+#: ../xffm/completion/base.hh:43
+msgid   "Host"
+msgstr  "โฮสต์"
 
-#: ../xffm/find/dialog.hh:206
-msgid   "SUID"
-msgstr  ""
+#: ../xffm/completion/base.hh:55
+msgid   "Found no match"
+msgstr  "ไม่พบที่เข้าเงื่อนไข"
 
-#: ../xffm/find/dialog.hh:206 ../xffm/fm/view/local/popup.hh:1102
-#, fuzzy
-msgid   "Executable"
-msgstr  "โปรแกรมที่เรียก:"
+#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
+msgid   "Matches"
+msgstr  "ตรงกัน"
 
-#: ../xffm/find/dialog.hh:214 ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168
-msgid   "Minutes"
-msgstr  "นาที"
+#: ../xffm/completion/base.hh:142
+msgid   "Too many files open"
+msgstr  "เปิดแฟ้มมากเกินไป"
 
-#: ../xffm/find/dialog.hh:219 ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171
-msgid   "Hours"
-msgstr  "ชั่วโมง"
-
-#: ../xffm/find/dialog.hh:224 ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174
-msgid   "Days"
-msgstr  "วัน"
-
-#: ../xffm/find/dialog.hh:230
-msgid   "Months"
-msgstr  "เดือน"
-
-#: ../xffm/find/dialog.hh:241
-#, fuzzy
-msgid   "File type : "
-msgstr  "ชนิดแฟ้ม:"
-
-#: ../xffm/find/dialog.hh:255 ../xffm/find/dialog.hh:595
-#: ../xffm/common/gtk.hh:79 ../xffm/fm/dialog/notebook/page/page.hh:71
-msgid   "Close"
-msgstr  "ปิด"
-
-#: ../xffm/find/dialog.hh:263 ../xffm/find/dialog.hh:363
-#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
-#: ../xffm/find/fgr.hh:176 ../xffm/fm/view/treeview.hh:18
-msgid   "Details"
-msgstr  "รายละเอียด"
-
-#: ../xffm/find/dialog.hh:301 ../xffm/find/fgr.hh:124
-#: ../xffm/find/signals.hh:100
-msgid   "Path"
-msgstr  "พาธ"
-
-#: ../xffm/find/dialog.hh:334 ../xffm/find/fgr.hh:126
-msgid   "Filter:"
-msgstr  "ตัวกรอง:"
-
-#: ../xffm/find/dialog.hh:377
-msgid   "Contains"
-msgstr  "มีคำว่า"
-
-#: ../xffm/find/dialog.hh:397
-msgid   "Contains the text"
-msgstr  "มีข้อความ"
-
-#: ../xffm/find/dialog.hh:430
-msgid   "Case Sensitive"
-msgstr  "ตัวพิมพ์ใหญ่-เล็กตรงกัน"
-
-#: ../xffm/find/dialog.hh:442
-#, fuzzy
-msgid   "Extended regexp"
-msgstr  "ลบอักขระว่างแบบเพิ่มเติม"
-
-#: ../xffm/find/dialog.hh:453
-msgid   "Include binary files"
-msgstr  "รวมแฟ้มภาษาเครื่องด้วย"
-
-#: ../xffm/find/dialog.hh:463 ../xffm/find/fgr.hh:212
-msgid   "Line Count"
-msgstr  "จำนวนบรรทัด"
-
-#: ../xffm/find/dialog.hh:489
-msgid   "Match"
-msgstr  "ตรงกับรายการ"
-
-#: ../xffm/find/dialog.hh:501
-#, fuzzy
-msgid   "Anywhere"
-msgstr  "ทุกที่"
-
-#: ../xffm/find/dialog.hh:516
-msgid   "Whole words only"
-msgstr  "ตรงกันทุกตัวอักษร"
-
-#: ../xffm/find/dialog.hh:531
-msgid   "lines"
-msgstr  "บรรทัด"
-
-#: ../xffm/find/dialog.hh:545 ../xffm/find/fgr.hh:210
-msgid   "No match"
-msgstr  "ไม่มีรายการที่ตรง"
-
-#: ../xffm/find/dialog.hh:577 ../xffm/find/signals.hh:368
-#: ../xffm/common/gtk.hh:409 ../xffm/fm/view/local/rm.hh:157
-#: ../xffm/fm/view/local/properties.hh:314
-#: ../xffm/response/entryresponse.hh:435 ../xffm/response/chooserresponse.hh:21
-msgid   "Cancel"
-msgstr  "ยกเลิก"
-
-#: ../xffm/find/dialog.hh:587
-msgid   "Clear"
-msgstr  "ล้าง"
-
-#: ../xffm/find/dialog.hh:629
-msgid   "Edit"
-msgstr  "แก้ไข"
-
-#: ../xffm/find/dialog.hh:743 ../xffm/find/dialog.hh:758
-#: ../xffm/common/preview.hh:460 ../xffm/common/util.hh:1354
-#: ../xffm/common/util.hh:1356 ../xffm/common/util.hh:1362
-#: ../xffm/common/util.hh:1364
-msgid   "unknown"
-msgstr  "ไม่ทราบ"
-
-#: ../xffm/find/dialog.hh:772
-msgid   "Modified"
-msgstr  "มีการเปลี่ยนแปลง"
-
-#: ../xffm/find/dialog.hh:776
-msgid   "Created"
-msgstr  "สร้าง"
-
-#: ../xffm/find/dialog.hh:780
-#, fuzzy
-msgid   "Accessed"
-msgstr  "เข้าถึงเมื่อ:"
-
-#: ../xffm/find/dialog.hh:1098
-msgid   "Basic rules:\n"
-        "\n"
-        "*  Will match any character zero or more times.\n"
-        "?  Will match any character exactly one time\n"
-        "[] Match any character within the [] \n"
-        "^  Match at beginning of string\n"
-        "$  Match at end of string \n"
-msgstr  ""
-
-#: ../xffm/find/dialog.hh:1107
-msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
-        "( ) : \n"
-        "In  basic regular expressions the metacharacters ?, +, {, |, (, "
-        "and ) \n"
-        "  lose their special meaning.\n"
-        "\n"
-        "The  period . matches  any  single  character.\n"
-        "The caret ^ matches at the start of line.\n"
-        "The dollar $ matches at the end of line.\n"
-        "\n"
-        "Characters within [ ] matches any single character in the list.\n"
-        "Characters within [^ ] matches any single character *not* in the "
-        "list.\n"
-        "Characters inside [ - ] matches a range of characters (ie [0-9] or "
-        "[a-z]).\n"
-        "\n"
-        "A regular expression may be followed by one of several repetition "
-        "operators:\n"
-        "?      The preceding item is optional and matched\n"
-        "       at most once.\n"
-        "*      The preceding item will be matched zero\n"
-        "       or more times.\n"
-        "+      The preceding item will be matched one or\n"
-        "       more times.\n"
-        "{n}    The preceding item is matched exactly n times.\n"
-        "{n,}   The preceding item is matched n or more times.\n"
-        "{n,m}  The preceding item is matched at least n times,\n"
-        "       but not more than m times.\n"
-        "\n"
-        "To match any reserved character, precede it with \\. \n"
-        "\n"
-        "Two regular expressions may be joined by the logical or operator |.\n"
-        "Two regular expressions may be concatenated.\n"
-        "\n"
-        "More information is available by typing \"man grep\"\n"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:124 ../xffm/completion/base.hh:339
+#: ../xffm/completion/base.hh:339 ../xffm/find/fgr.hh:124
 msgid   "Options:"
 msgstr  "ตัวเลือก:"
+
+#: ../xffm/completion/bash.hh:133
+msgid   "Completion mode:"
+msgstr  "โหมดการทำให้สมบูรณ์:"
+
+#: ../xffm/completion/bash.hh:134
+msgid   "command"
+msgstr  "คำสั่ง"
+
+#: ../xffm/completion/bash.hh:135
+msgid   "file"
+msgstr  "แฟ้ม"
+
+#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
+msgid   "Options >>"
+msgstr  "ตัวเลือกต่าง ๆ >>"
+
+#: ../xffm/find/fgr.hh:124 ../xffm/find/signals.hh:100
+#: ../xffm/find/dialog.hh:301
+msgid   "Path"
+msgstr  "พาธ"
 
 #: ../xffm/find/fgr.hh:125
 msgid   "Locate documents and folders on this computer by name or content"
 msgstr  "ค้นหาเอกสารและโฟลเดอร์ในคอมพิวเตอร์เครื่องนี้ด้วยชื่อหรือเนื้อหา"
+
+#: ../xffm/find/fgr.hh:126 ../xffm/find/dialog.hh:334
+msgid   "Filter:"
+msgstr  "ตัวกรอง:"
 
 #: ../xffm/find/fgr.hh:126
 msgid   "Search for files"
@@ -286,6 +116,11 @@ msgstr  "แสดงข้อมูลรุ่น"
 msgid   "Filter Details"
 msgstr  "รายละเอียดตัวกรอง"
 
+#: ../xffm/find/fgr.hh:138 ../xffm/find/dialog.hh:173
+#, fuzzy
+msgid   "Stay on single filesystem"
+msgstr  "ตรวจข้อมูลระบบแฟ้ม"
+
 #: ../xffm/find/fgr.hh:140
 msgid   "Print..."
 msgstr  "พิมพ์..."
@@ -293,6 +128,11 @@ msgstr  "พิมพ์..."
 #: ../xffm/find/fgr.hh:140
 msgid   "The unique Process ID that identifies this process."
 msgstr  "หมายเลขโพรเซส (Process ID) ที่ไม่ซ้ำใครที่จะระบุถึงตัวโพรเซสนี้"
+
+#: ../xffm/find/fgr.hh:142 ../xffm/find/dialog.hh:170
+#, fuzzy
+msgid   "Find hidden files and directories"
+msgstr  "แพตช์แฟ้มและไดเรกทอรี"
 
 #: ../xffm/find/fgr.hh:143
 msgid   "Filter"
@@ -302,6 +142,10 @@ msgstr  "ตัวกรอง"
 msgid   "To display files which pass the filter (stars and regexps will be "
         "processed)"
 msgstr  ""
+
+#: ../xffm/find/fgr.hh:146 ../xffm/find/dialog.hh:167
+msgid   "Recursive"
+msgstr  "แบบลงลึก"
 
 #: ../xffm/find/fgr.hh:147 ../xffm/find/fgr.hh:148 ../xffm/find/fgr.hh:149
 #: ../xffm/find/fgr.hh:150
@@ -345,7 +189,7 @@ msgid   "Regular file"
 msgstr  "แฟ้มธรรมดา"
 
 #: ../xffm/find/fgr.hh:159 ../xffm/find/signals.hh:8
-#: ../xffm/common/preview.hh:469 ../xffm/fm/view/local/popup.hh:1062
+#: ../xffm/fm/view/local/popup.hh:1062 ../xffm/common/preview.hh:469
 msgid   "Directory"
 msgstr  "ไดเรกทอรี"
 
@@ -373,6 +217,16 @@ msgstr  "อุปกรณ์แบบอักขระ"
 msgid   "FIFO"
 msgstr  "FIFO"
 
+#: ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168 ../xffm/find/dialog.hh:214
+msgid   "Minutes"
+msgstr  "นาที"
+
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/find/dialog.hh:263
+#: ../xffm/find/dialog.hh:363 ../xffm/fm/view/treeview.hh:18
+msgid   "Details"
+msgstr  "รายละเอียด"
+
 #: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
 #: ../xffm/find/fgr.hh:176 ../xffm/find/fgr.hh:179 ../xffm/find/fgr.hh:180
 #: ../xffm/find/fgr.hh:183 ../xffm/find/fgr.hh:184 ../xffm/find/fgr.hh:187
@@ -385,6 +239,14 @@ msgstr  "TIMEOUT"
 #: ../xffm/find/fgr.hh:177
 msgid   "Previous"
 msgstr  "ก่อนหน้า"
+
+#: ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171 ../xffm/find/dialog.hh:219
+msgid   "Hours"
+msgstr  "ชั่วโมง"
+
+#: ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174 ../xffm/find/dialog.hh:224
+msgid   "Days"
+msgstr  "วัน"
 
 #: ../xffm/find/fgr.hh:175
 msgid   "Month"
@@ -456,6 +318,14 @@ msgstr  "ไม่สนใจตัวพิมพ์ใหญ่-เล็ก"
 msgid   "Text Files"
 msgstr  "แฟ้มข้อความ"
 
+#: ../xffm/find/fgr.hh:210 ../xffm/find/dialog.hh:545
+msgid   "No match"
+msgstr  "ไม่มีรายการที่ตรง"
+
+#: ../xffm/find/fgr.hh:212 ../xffm/find/dialog.hh:463
+msgid   "Line Count"
+msgstr  "จำนวนบรรทัด"
+
 #: ../xffm/find/fgr.hh:214
 msgid   "Words"
 msgstr  "คำ"
@@ -476,6 +346,18 @@ msgstr  "ตามตำรับ"
 #: ../xffm/find/signals.hh:10 ../xffm/common/preview.hh:481
 msgid   "Socket"
 msgstr  "ซ็อกเก็ต"
+
+#: ../xffm/find/signals.hh:66 ../xffm/find/signals.hh:454
+#: ../xffm/find/dialog.hh:176
+msgid   "Results"
+msgstr  "ผลลัพธ์"
+
+#: ../xffm/find/signals.hh:368 ../xffm/find/dialog.hh:577
+#: ../xffm/response/chooserresponse.hh:21 ../xffm/response/entryresponse.hh:435
+#: ../xffm/fm/view/local/properties.hh:314 ../xffm/fm/view/local/rm.hh:157
+#: ../xffm/common/gtk.hh:409
+msgid   "Cancel"
+msgstr  "ยกเลิก"
 
 #: ../xffm/find/signals.hh:396 ../xffm/find/signals.hh:830
 #, fuzzy
@@ -506,243 +388,471 @@ msgstr  "%s [เสร็จสิ้น]"
 msgid   "Searching..."
 msgstr  "กำลังค้นหา..."
 
-#: ../xffm/common/preview.hh:581
-msgid   "Empty file"
-msgstr  "แฟ้มว่างเปล่า"
+#: ../xffm/find/dialog.hh:91 ../xffm/find/dialog.hh:143
+#: ../xffm/find/dialog.hh:604
+msgid   "Find"
+msgstr  "หา"
 
-#: ../xffm/common/preview.hh:636
-#, c-format
-msgid   "Cannot read from %s"
-msgstr  "ไม่สามารถอ่านจาก %s ได้"
-
-#: ../xffm/common/gtk.hh:67 ../xffm/fm/dialog/notebook/vbuttonbox.hh:240
-msgid   "Open terminal"
-msgstr  "เปิดเทอร์มินัล"
-
-#: ../xffm/common/gtk.hh:69 ../xffm/common/util.hh:1443
-msgid   "Execute Shell Command"
-msgstr  "ประมวลผลคำสั่งเชลล์..."
-
-#: ../xffm/common/gtk.hh:71 ../xffm/fm/view/local/popup.hh:157
-msgid   "Paste"
-msgstr  "แปะ"
-
-#: ../xffm/common/gtk.hh:73 ../xffm/fm/view/local/popup.hh:151
-msgid   "Add bookmark"
-msgstr  "เพิ่มที่คั่นหน้า"
-
-#: ../xffm/common/gtk.hh:75 ../xffm/fm/view/local/popup.hh:152
-#: ../xffm/fm/view/root/popup.hh:137
-msgid   "Remove bookmark"
-msgstr  "ลบที่คั่นหน้า"
-
-#: ../xffm/common/gtk.hh:77 ../xffm/fm/view/pkg/model.hh:108
-#: ../xffm/fm/view/pkg/model.hh:299 ../xffm/fm/view/pkg/model.hh:306
-#: ../xffm/fm/view/pkg/popup.hh:151
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:236
-msgid   "Search"
-msgstr  "ค้นหา"
-
-#: ../xffm/common/gtk.hh:81 ../xffm/fm/dialog/notebook/menupopover.hh:237
-msgid   "Exit"
-msgstr  "ออก"
-
-#: ../xffm/common/gtk.hh:83 ../xffm/fm/view/local/popup.hh:85
-#: ../xffm/fm/view/local/popup.hh:142 ../xffm/fm/view/local/popup.hh:1287
-#: ../xffm/fm/view/local/popup.hh:1294 ../xffm/fm/view/local/popup.hh:1305
-#: ../xffm/fm/view/local/popup.hh:1312
-msgid   "Open with"
-msgstr  "เปิดด้วย"
-
-#: ../xffm/common/gtk.hh:85 ../xffm/fm/view/local/popup.hh:100
-#: ../xffm/fm/view/local/popup.hh:156
-msgid   "Cut"
-msgstr  "ตัด"
-
-#: ../xffm/common/gtk.hh:87 ../xffm/fm/view/local/popup.hh:99
-#: ../xffm/fm/view/local/popup.hh:155
-msgid   "Copy"
-msgstr  "คัดลอก"
-
-#: ../xffm/common/gtk.hh:89 ../xffm/fm/view/local/rm.hh:176
-#: ../xffm/fm/view/local/popup.hh:103 ../xffm/fm/view/local/popup.hh:160
-msgid   "Delete"
-msgstr  "ลบ"
-
-#: ../xffm/common/gtk.hh:91 ../xffm/fm/view/local/rm.hh:165
-msgid   "Shred"
-msgstr  "ลบแบบทำลายข้อมูล"
-
-#: ../xffm/common/gtk.hh:94 ../xffm/fm/view/local/popup.hh:95
-#: ../xffm/fm/view/local/popup.hh:145 ../xffm/fm/view/root/popup.hh:136
-#: ../xffm/fm/view/fstab/popup.hh:20
-msgid   "Open in New Tab"
-msgstr  "เปิดในแท็บใหม่"
-
-#: ../xffm/common/gtk.hh:139 ../xffm/fm/dialog/notebook/notebook.hh:75
-msgid   "New Tab"
-msgstr  "แท็บใหม่"
-
-#: ../xffm/common/gtk.hh:352 ../xffm/common/gtk.hh:360
-msgid   "Help"
-msgstr  "วิธีใช้"
-
-#: ../xffm/common/settings.hh:30
-msgid   "New File:"
-msgstr  "แฟ้มใหม่:"
-
-#: ../xffm/common/gio.hh:81
-msgid   "Copying files"
-msgstr  "กำลังคัดลอกแฟ้ม"
-
-#: ../xffm/common/gio.hh:83 ../xffm/common/dnd.hh:35
-#: ../xffm/fm/dialog/clipboard.hh:30
-msgid   "Moving files"
-msgstr  "กำลังย้ายแฟ้ม"
-
-#: ../xffm/common/gio.hh:85
+#: ../xffm/find/dialog.hh:176
 #, fuzzy
-msgid   "linking"
-msgstr  "กำลังใช้ความคิด"
+msgid   "Upper limit"
+msgstr  "ขีดจำกัดบน:"
 
-#: ../xffm/common/gio.hh:87
-msgid   "rename"
-msgstr  "เปลี่ยนชื่อ"
+#: ../xffm/find/dialog.hh:181
+msgid   "At Least"
+msgstr  "อย่างน้อย"
 
-#: ../xffm/common/gio.hh:426
-#, c-format
-msgid   "(%d of %d)"
-msgstr  "(%d จาก %d)"
+#: ../xffm/find/dialog.hh:181 ../xffm/find/dialog.hh:186
+msgid   "kBytes"
+msgstr  "กิโลไบต์"
 
-#: ../xffm/common/util.hh:1404
-#, c-format
-msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
-        "attribute on that file."
+#: ../xffm/find/dialog.hh:186
+msgid   "At Most"
+msgstr  "อย่างมาก"
+
+#: ../xffm/find/dialog.hh:197
+msgid   "Group"
+msgstr  "กลุ่ม"
+
+#: ../xffm/find/dialog.hh:201
+msgid   "Octal Permissions"
+msgstr  "สิทธิ์ในรูปเลขฐานแปด"
+
+#: ../xffm/find/dialog.hh:206
+msgid   "SUID"
 msgstr  ""
 
-#: ../xffm/common/util.hh:1406 ../xffm/common/util.hh:1441
-#, c-format
-msgid   "Open with %s"
-msgstr  "เปิดด้วย %s"
+#: ../xffm/find/dialog.hh:206 ../xffm/fm/view/local/popup.hh:1102
+#, fuzzy
+msgid   "Executable"
+msgstr  "โปรแกรมที่เรียก:"
 
-#: ../xffm/common/util.hh:1406
-msgid   "Text Editor"
-msgstr  "เครื่องมือแก้ไขข้อความ"
+#: ../xffm/find/dialog.hh:230
+msgid   "Months"
+msgstr  "เดือน"
 
-#: ../xffm/common/util.hh:1447
-msgid   "Console: quickly run single commands -- write a command here and "
-        "press enter."
+#: ../xffm/find/dialog.hh:241
+#, fuzzy
+msgid   "File type : "
+msgstr  "ชนิดแฟ้ม:"
+
+#: ../xffm/find/dialog.hh:255 ../xffm/find/dialog.hh:595
+#: ../xffm/fm/dialog/notebook/page/page.hh:71 ../xffm/common/gtk.hh:79
+msgid   "Close"
+msgstr  "ปิด"
+
+#: ../xffm/find/dialog.hh:377
+msgid   "Contains"
+msgstr  "มีคำว่า"
+
+#: ../xffm/find/dialog.hh:397
+msgid   "Contains the text"
+msgstr  "มีข้อความ"
+
+#: ../xffm/find/dialog.hh:430
+msgid   "Case Sensitive"
+msgstr  "ตัวพิมพ์ใหญ่-เล็กตรงกัน"
+
+#: ../xffm/find/dialog.hh:442
+#, fuzzy
+msgid   "Extended regexp"
+msgstr  "ลบอักขระว่างแบบเพิ่มเติม"
+
+#: ../xffm/find/dialog.hh:453
+msgid   "Include binary files"
+msgstr  "รวมแฟ้มภาษาเครื่องด้วย"
+
+#: ../xffm/find/dialog.hh:489
+msgid   "Match"
+msgstr  "ตรงกับรายการ"
+
+#: ../xffm/find/dialog.hh:501
+#, fuzzy
+msgid   "Anywhere"
+msgstr  "ทุกที่"
+
+#: ../xffm/find/dialog.hh:516
+msgid   "Whole words only"
+msgstr  "ตรงกันทุกตัวอักษร"
+
+#: ../xffm/find/dialog.hh:531
+msgid   "lines"
+msgstr  "บรรทัด"
+
+#: ../xffm/find/dialog.hh:587
+msgid   "Clear"
+msgstr  "ล้าง"
+
+#: ../xffm/find/dialog.hh:629
+msgid   "Edit"
+msgstr  "แก้ไข"
+
+#: ../xffm/find/dialog.hh:743 ../xffm/find/dialog.hh:758
+#: ../xffm/common/util.hh:1354 ../xffm/common/util.hh:1356
+#: ../xffm/common/util.hh:1362 ../xffm/common/util.hh:1364
+#: ../xffm/common/preview.hh:460
+msgid   "unknown"
+msgstr  "ไม่ทราบ"
+
+#: ../xffm/find/dialog.hh:772
+msgid   "Modified"
+msgstr  "มีการเปลี่ยนแปลง"
+
+#: ../xffm/find/dialog.hh:776
+msgid   "Created"
+msgstr  "สร้าง"
+
+#: ../xffm/find/dialog.hh:780
+#, fuzzy
+msgid   "Accessed"
+msgstr  "เข้าถึงเมื่อ:"
+
+#: ../xffm/find/dialog.hh:1098
+msgid   "Basic rules:\n"
+        "\n"
+        "*  Will match any character zero or more times.\n"
+        "?  Will match any character exactly one time\n"
+        "[] Match any character within the [] \n"
+        "^  Match at beginning of string\n"
+        "$  Match at end of string \n"
 msgstr  ""
 
-#: ../xffm/common/util.hh:1452 ../xffm/fm/view/local/popup.hh:1109
-#: ../xffm/fm/view/local/popup.hh:1291 ../xffm/fm/view/local/popup.hh:1309
-msgid   "Run in Terminal"
-msgstr  "เรียกในเทอร์มินัล"
+#: ../xffm/find/dialog.hh:1107
+msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
+        "( ) : \n"
+        "In  basic regular expressions the metacharacters ?, +, {, |, (, "
+        "and ) \n"
+        "  lose their special meaning.\n"
+        "\n"
+        "The  period . matches  any  single  character.\n"
+        "The caret ^ matches at the start of line.\n"
+        "The dollar $ matches at the end of line.\n"
+        "\n"
+        "Characters within [ ] matches any single character in the list.\n"
+        "Characters within [^ ] matches any single character *not* in the "
+        "list.\n"
+        "Characters inside [ - ] matches a range of characters (ie [0-9] or "
+        "[a-z]).\n"
+        "\n"
+        "A regular expression may be followed by one of several repetition "
+        "operators:\n"
+        "?      The preceding item is optional and matched\n"
+        "       at most once.\n"
+        "*      The preceding item will be matched zero\n"
+        "       or more times.\n"
+        "+      The preceding item will be matched one or\n"
+        "       more times.\n"
+        "{n}    The preceding item is matched exactly n times.\n"
+        "{n,}   The preceding item is matched n or more times.\n"
+        "{n,m}  The preceding item is matched at least n times,\n"
+        "       but not more than m times.\n"
+        "\n"
+        "To match any reserved character, precede it with \\. \n"
+        "\n"
+        "Two regular expressions may be joined by the logical or operator |.\n"
+        "Two regular expressions may be concatenated.\n"
+        "\n"
+        "More information is available by typing \"man grep\"\n"
+msgstr  ""
 
-#: ../xffm/common/dnd.hh:41 ../xffm/fm/dialog/clipboard.hh:23
-msgid   "Copying files locally"
-msgstr  "กำลังคัดลอกแฟ้มภายในเครื่อง"
+#: ../xffm/response/chooserresponse.hh:23
+msgid   "Open"
+msgstr  "เปิด"
 
-#: ../xffm/common/dnd.hh:47
-#, fuzzy
-msgid   "Create Link"
-msgstr  "เรียกคืนการสร้างจุดเชื่อมโยง"
+#: ../xffm/response/chooserresponse.hh:56
+msgid   "Choose directory"
+msgstr  "เลือกไดเรกทอรี"
 
-#: ../xffm/common/run.hh:338
-msgid   "error"
-msgstr  "ข้อผิดพลาด"
+#: ../xffm/response/chooserresponse.hh:60
+msgid   "Choose file"
+msgstr  "เลือกแฟ้ม"
 
-#: ../xffm/common/run.hh:342
-#, fuzzy
-msgid   "warning"
-msgstr  "คำเตือน:"
+#: ../xffm/response/customresponse.hh:55
+msgid   "Execute command"
+msgstr  "เรียกทำงานคำสั่ง"
 
-#: ../xffm/common/run.hh:464 ../xffm/response/passwdresponse.hh:19
-#: ../xffm/response/passwdresponse.hh:25
+#: ../xffm/response/customresponse.hh:103
+msgid   "Source File"
+msgstr  "แฟ้มต้นฉบับ"
+
+#: ../xffm/response/entryresponse.hh:439 ../xffm/response/passwdresponse.hh:242
+msgid   "Ok"
+msgstr  "ตกลง"
+
+#: ../xffm/response/commandprogressresponse.hh:31
+msgid   "Items:"
+msgstr  "รายการ:"
+
+#: ../xffm/response/passwdresponse.hh:19 ../xffm/response/passwdresponse.hh:25
+#: ../xffm/common/run.hh:464
 msgid   "Enter password"
 msgstr  "ป้อนรหัสผ่าน"
 
-#: ../xffm/fm/view/pkg/model.hh:29 ../xffm/fm/view/pkg/popup.hh:35
+#: ../xffm/response/passwdresponse.hh:179
+#, fuzzy
+msgid   "User Input"
+msgstr  "เมาส์"
+
+#: ../xffm/response/passwdresponse.hh:195
+#, fuzzy
+msgid   "Response Requested"
+msgstr  "ต้องการการตอบกลับ"
+
+#: ../xffm/response/timeoutresponse.hh:57
+msgid   "Dismiss"
+msgstr  "ละทิ้ง"
+
+#: ../xffm/response/commandresponse.hh:19
+msgid   "Running"
+msgstr  "กำลังทำงาน"
+
+#: ../xffm/response/commandresponse.hh:24
+msgid   "Waiting for operation to finish..."
+msgstr  "กำลังรอปฏิบัติการเสร็จสิ้น..."
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:11
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:214
+#, fuzzy
+msgid   "Remove Button Contents"
+msgstr  "เอาปุ่มออก"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:67
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:209
+#, fuzzy
+msgid   "Add custom content"
+msgstr  "เพิ่มเนื้อหาปุ่มที่กำหนดเอง"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:68
+#, fuzzy
+msgid   "Select file to load"
+msgstr  "เลือกแฟ้มที่จะเพิ่ม…"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:125
+#, fuzzy, c-format
+msgid   "Cannot load file %s. Reason: %s"
+msgstr  "ไม่สามารถขยายแฟ้ม %s ได้ : %s"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:154
+#, fuzzy
+msgid   "You need to restart the application"
+msgstr  "คุณต้องเริ่มต้นโปรแกรมนี้ใหม่"
+
 #: ../xffm/fm/dialog/notebook/vbuttonbox.hh:187
 #: ../xffm/fm/dialog/notebook/vbuttonbox.hh:191
 #: ../xffm/fm/dialog/notebook/vbuttonbox.hh:195
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:198
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:198 ../xffm/fm/view/pkg/model.hh:29
+#: ../xffm/fm/view/pkg/popup.hh:35
 #, fuzzy
 msgid   "Software Updater"
 msgstr  "ปรับรุ่นซอฟต์แวร์"
 
-#: ../xffm/fm/view/pkg/model.hh:41 ../xffm/fm/view/pkg/model.hh:52
-msgid   "Add or remove software installed on the system"
-msgstr  "เพิ่มหรือลบซอฟต์แวร์ที่ติดตั้งในระบบ"
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:236
+#: ../xffm/fm/view/pkg/model.hh:108 ../xffm/fm/view/pkg/model.hh:299
+#: ../xffm/fm/view/pkg/model.hh:306 ../xffm/fm/view/pkg/popup.hh:151
+#: ../xffm/common/gtk.hh:77
+msgid   "Search"
+msgstr  "ค้นหา"
 
-#: ../xffm/fm/view/pkg/model.hh:111
-msgid   "String"
-msgstr  "สายอักขระ"
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:240 ../xffm/common/gtk.hh:67
+msgid   "Open terminal"
+msgstr  "เปิดเทอร์มินัล"
 
-#: ../xffm/fm/view/pkg/model.hh:116
-msgid   "Waiting for search results"
-msgstr  "กำลังรอผลการค้นหา"
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:244
+msgid   "Open a New Window"
+msgstr  "เปิดหน้าต่างใหม่"
 
-#: ../xffm/fm/view/pkg/model.hh:174
-msgid   "No results"
-msgstr  "ไม่พบรายการที่ต้องการ"
-
-#: ../xffm/fm/view/pkg/model.hh:373
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:250
 #, fuzzy
-msgid   "Currently busy\n"
-msgstr  "อัลบั้มปัจจุบัน"
+msgid   "Differences"
+msgstr  "แสดงความแตกต่าง"
 
-#: ../xffm/fm/view/pkg/popup.hh:44
-msgid   "Update Database"
-msgstr  "ปรับปรุงฐานข้อมูล"
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:256
+#: ../xffm/fm/view/root/model.hh:110
+msgid   "Home Directory"
+msgstr  "ไดเร็กทอรีส่วนตัว"
 
-#: ../xffm/fm/view/pkg/popup.hh:45
-msgid   "Fetch"
-msgstr  "Fetch"
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:261
+#: ../xffm/fm/view/root/model.hh:168 ../xffm/fm/view/fstab/popup.hh:29
+msgid   "Disk Image Mounter"
+msgstr  "โปรแกรมเมานท์อิมเมจของดิสก์"
 
-#: ../xffm/fm/view/pkg/popup.hh:46
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:266
+#: ../xffm/fm/view/root/model.hh:137
 #, fuzzy
-msgid   "Install --dry-run"
-msgstr  "ติดตั้งมอดูล"
+msgid   "Trash bin"
+msgstr  "แฟ้มขยะ"
 
-#: ../xffm/fm/view/pkg/popup.hh:47
-msgid   "Install"
-msgstr  "ติดตั้ง"
+#: ../xffm/fm/dialog/notebook/notebook.hh:56
+msgid   "Long press time"
+msgstr  "ช่วงเวลากดแช่"
 
-#: ../xffm/fm/view/pkg/popup.hh:48
+#: ../xffm/fm/dialog/notebook/notebook.hh:75 ../xffm/common/gtk.hh:139
+msgid   "New Tab"
+msgstr  "แท็บใหม่"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:178
 #, fuzzy
-msgid   "Uninstall --dry-run"
-msgstr  "กำลังถอนการติดตั้ง"
+msgid   "Open menu"
+msgstr  "เปิดเมนู"
 
-#: ../xffm/fm/view/pkg/popup.hh:49
-msgid   "Uninstall"
-msgstr  "ถอดถอน"
-
-#: ../xffm/fm/view/pkg/popup.hh:50
-msgid   "Information"
-msgstr  "ข้อมูล"
-
-#: ../xffm/fm/view/pkg/popup.hh:140
-msgid   "Version"
-msgstr  "รุ่น"
-
-#: ../xffm/fm/view/pkg/popup.hh:149
-msgid   "Go up"
-msgstr  "ขึ้นหนึ่งระดับ"
-
-#: ../xffm/fm/view/pkg/popup.hh:152
+#: ../xffm/fm/dialog/notebook/menupopover.hh:230
 #, fuzzy
-msgid   "Search packages"
-msgstr  "กำลังค้นหาแพกเกจ"
+msgid   "View as list"
+msgstr  "แสดงเป็นรายการ"
 
-#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
-#, c-format
-msgid   "Loading %s...%s"
-msgstr  "ทำการโหลด %s...%s"
+#: ../xffm/fm/dialog/notebook/menupopover.hh:231
+msgid   "Show hidden files"
+msgstr  "แสดงไฟล์ซ่อน"
 
-#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
-msgid   "Please Wait..."
-msgstr  "กรุณารอสักครู่..."
+#: ../xffm/fm/dialog/notebook/menupopover.hh:232
+msgid   "Show Backup Files"
+msgstr  "แสดงแฟ้มสำรอง"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:233
+#, fuzzy
+msgid   "Sort data in descending order"
+msgstr  "เรียงตามลำดับการเปิด"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:235
+#, fuzzy
+msgid   "Sort by date"
+msgstr  "เรียงลำดับตามวันที่"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:236
+msgid   "Sort by size"
+msgstr  "เรียงตามขนาด"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:237 ../xffm/common/gtk.hh:81
+msgid   "Exit"
+msgstr  "ออก"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:270
+msgid   "Main menu"
+msgstr  "เมนูหลัก"
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:375
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:377
+msgid   "Go to"
+msgstr  "ไปยัง"
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:382
+#: ../xffm/fm/view/local/popup.hh:887 ../xffm/fm/view/local/popup.hh:981
+msgid   "Specify Output Directory..."
+msgstr  "ระบุไดเรกทอรีสำหรับผลส่งออก..."
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:409
+msgid   "Not a directory"
+msgstr  "ไม่ใช่โฟลเดอร์"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid   "Renice Process"
+msgstr  "โพรเซสที่ทำงานเบื้องหลัง"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid   "Suspend"
+msgstr  "พักเครื่อง"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+msgid   "Continue"
+msgstr  "ทำต่อ"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid   "Interrupt"
+msgstr  "การขัดจังหวะ"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid   "Hangup"
+msgstr  "ตัดการเชื่อมต่อ"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+msgid   "User 1 (USR1)"
+msgstr  "ผู้ใช้ 1 (USR1)"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+msgid   "User 2 (USR2)"
+msgstr  "ผู้ใช้ 2 (USR2)"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+#, fuzzy
+msgid   "Terminate Task"
+msgstr  "ยุติการทำงานของ %s"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+msgid   "Abort"
+msgstr  "เลิกทำ"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:138
+msgid   "Kill"
+msgstr  "ฆ่า"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
+#, fuzzy
+msgid   "Segmentation fault"
+msgstr  "การละเมิดพื้นที่หน่วยความจำ"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:216
+msgid   "PID"
+msgstr  "PID"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:59
+msgid   "loading..."
+msgstr  "กำลังโหลด..."
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:151
+#: ../xffm/fm/dialog/notebook/page/page.hh:167
+#, fuzzy
+msgid   "Confirm Replace"
+msgstr  "ยืนยันการลบ"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:153
+#, fuzzy
+msgid   "Destination File"
+msgstr  "โฟลเดอร์ปลายทาง"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:166
+#, fuzzy, c-format
+msgid   "The output file %s already exists, do you want to overwrite it?"
+msgstr  "มีแฟ้ม %s อยู่แล้ว คุณต้องการที่จะเขียนทับมันหรือไม่ ?"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
+#, fuzzy
+msgid   "Embedded Terminal"
+msgstr  "สนับสนุนการฝังตัวเทอร์มินอล"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
+#, fuzzy
+msgid   "All items in the iconview."
+msgstr  "เลือกรายการทุกรายการในหน้าต่างนี้"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
+msgid   "Scripting"
+msgstr  "สคริปต์"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
+#, fuzzy
+msgid   "Clear Log"
+msgstr  "ล้างปูมบันทึกข้อผิดพลาด"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
+msgid   "Terminal font"
+msgstr  "แบบอักษรเทอร์มินัล"
+
+#: ../xffm/fm/dialog/clipboard.hh:23 ../xffm/common/dnd.hh:41
+msgid   "Copying files locally"
+msgstr  "กำลังคัดลอกแฟ้มภายในเครื่อง"
+
+#: ../xffm/fm/dialog/clipboard.hh:30 ../xffm/common/gio.hh:83
+#: ../xffm/common/dnd.hh:35
+msgid   "Moving files"
+msgstr  "กำลังย้ายแฟ้ม"
+
+#: ../xffm/fm/dialog/dialog.hh:122
+msgid   "Removed"
+msgstr  "ถอดถอนแล้ว"
+
+#: ../xffm/fm/dialog/dialog.hh:143
+msgid   "Detected device(s):"
+msgstr  "อุปกรณ์ที่ตรวจพบ:"
 
 #: ../xffm/fm/view/local/model.hh:124
 #, c-format
@@ -759,36 +869,32 @@ msgstr  "แฟ้ม: %s"
 msgid   "Loaded %d of %d articles"
 msgstr  "อ่านทั้งหมด %d แฟ้ม"
 
-#: ../xffm/fm/view/local/rm.hh:59
-#, c-format
-msgid   "Delete %s"
-msgstr  "ลบ %s"
-
-#: ../xffm/fm/view/local/rm.hh:61
-msgid   "Warning: "
-msgstr  "คำเตือน: "
-
-#: ../xffm/fm/view/local/rm.hh:61 ../xffm/fm/view/local/popup.hh:565
-#, fuzzy
-msgid   "Multiple selections"
-msgstr  "ชุดตำแหน่งเพลงหลายเพลง"
-
-#: ../xffm/fm/view/local/rm.hh:92
-msgid   "Remove"
-msgstr  "เอาออก"
-
-#: ../xffm/fm/view/local/rm.hh:142
-#, fuzzy
-msgid   "Apply to all"
-msgstr  "ปรับใช้กับทั้งหมด"
-
-#: ../xffm/fm/view/local/rm.hh:183
-msgid   "Trash"
-msgstr  "ทิ้งลงถังขยะ"
+#: ../xffm/fm/view/local/popup.hh:85 ../xffm/fm/view/local/popup.hh:142
+#: ../xffm/fm/view/local/popup.hh:1287 ../xffm/fm/view/local/popup.hh:1294
+#: ../xffm/fm/view/local/popup.hh:1305 ../xffm/fm/view/local/popup.hh:1312
+#: ../xffm/common/gtk.hh:83
+msgid   "Open with"
+msgstr  "เปิดด้วย"
 
 #: ../xffm/fm/view/local/popup.hh:94
 msgid   "New"
 msgstr  "ใหม่"
+
+#: ../xffm/fm/view/local/popup.hh:95 ../xffm/fm/view/local/popup.hh:145
+#: ../xffm/fm/view/root/popup.hh:136 ../xffm/fm/view/fstab/popup.hh:20
+#: ../xffm/common/gtk.hh:94
+msgid   "Open in New Tab"
+msgstr  "เปิดในแท็บใหม่"
+
+#: ../xffm/fm/view/local/popup.hh:99 ../xffm/fm/view/local/popup.hh:155
+#: ../xffm/common/gtk.hh:87
+msgid   "Copy"
+msgstr  "คัดลอก"
+
+#: ../xffm/fm/view/local/popup.hh:100 ../xffm/fm/view/local/popup.hh:156
+#: ../xffm/common/gtk.hh:85
+msgid   "Cut"
+msgstr  "ตัด"
 
 #: ../xffm/fm/view/local/popup.hh:101 ../xffm/fm/view/local/popup.hh:159
 #: ../xffm/fm/view/local/popup.hh:232 ../xffm/fm/view/local/popup.hh:234
@@ -799,6 +905,11 @@ msgstr  "แปะลงใน"
 #: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:158
 msgid   "There is nothing on the clipboard to paste."
 msgstr  "ไม่มีอะไรในคลิปบอร์ดจะแปะ"
+
+#: ../xffm/fm/view/local/popup.hh:103 ../xffm/fm/view/local/popup.hh:160
+#: ../xffm/fm/view/local/rm.hh:176 ../xffm/common/gtk.hh:89
+msgid   "Delete"
+msgstr  "ลบ"
 
 #: ../xffm/fm/view/local/popup.hh:106
 msgid   "Select All"
@@ -830,6 +941,19 @@ msgstr  "เมานท์โวลุมที่เชื่อมโยง�
 msgid   "Unmount the volume associated with this folder"
 msgstr  "เลิกเมานท์โวลุมที่เชื่อมโยงกับโฟลเดอร์นี้"
 
+#: ../xffm/fm/view/local/popup.hh:151 ../xffm/common/gtk.hh:73
+msgid   "Add bookmark"
+msgstr  "เพิ่มที่คั่นหน้า"
+
+#: ../xffm/fm/view/local/popup.hh:152 ../xffm/fm/view/root/popup.hh:137
+#: ../xffm/common/gtk.hh:75
+msgid   "Remove bookmark"
+msgstr  "ลบที่คั่นหน้า"
+
+#: ../xffm/fm/view/local/popup.hh:157 ../xffm/common/gtk.hh:71
+msgid   "Paste"
+msgstr  "แปะ"
+
 #: ../xffm/fm/view/local/popup.hh:161 ../xffm/fm/view/local/popup.hh:1231
 msgid   "Rename"
 msgstr  "เปลี่ยนชื่อ"
@@ -850,6 +974,11 @@ msgstr  "คุณสมบัติ"
 msgid   "Files:"
 msgstr  "แฟ้ม:"
 
+#: ../xffm/fm/view/local/popup.hh:565 ../xffm/fm/view/local/rm.hh:61
+#, fuzzy
+msgid   "Multiple selections"
+msgstr  "ชุดตำแหน่งเพลงหลายเพลง"
+
 #: ../xffm/fm/view/local/popup.hh:753
 #, fuzzy
 msgid   "Select items"
@@ -866,11 +995,6 @@ msgstr  "ไม่มีการเลือก"
 #: ../xffm/fm/view/local/popup.hh:801
 msgid   "No matches."
 msgstr  "ไม่มีรายการที่ตรงกัน"
-
-#: ../xffm/fm/view/local/popup.hh:887 ../xffm/fm/view/local/popup.hh:981
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:382
-msgid   "Specify Output Directory..."
-msgstr  "ระบุไดเรกทอรีสำหรับผลส่งออก..."
 
 #: ../xffm/fm/view/local/popup.hh:1058
 #, fuzzy
@@ -890,6 +1014,11 @@ msgstr  "ไม่มีชื่อ"
 msgid   "Another file with the same name already exists in “%s”."
 msgstr  "มีอีกแฟ้มหนึ่งที่มีชื่อเดียวกันอยู่แล้วใน “%s”"
 
+#: ../xffm/fm/view/local/popup.hh:1109 ../xffm/fm/view/local/popup.hh:1291
+#: ../xffm/fm/view/local/popup.hh:1309 ../xffm/common/util.hh:1452
+msgid   "Run in Terminal"
+msgstr  "เรียกในเทอร์มินัล"
+
 #: ../xffm/fm/view/local/popup.hh:1112
 msgid   "Arguments for the Command"
 msgstr  "อาร์กิวเมนต์สำหรับคำสั่ง"
@@ -901,11 +1030,6 @@ msgstr  "คุณได้เลือกแฟ้มหรือโฟลเ�
 #: ../xffm/fm/view/local/popup.hh:1332 ../xffm/fm/view/local/view.hh:156
 msgid   "Invalid entry"
 msgstr  "การกรอกข้อมูลไม่ถูกต้อง"
-
-#: ../xffm/fm/view/local/view.hh:177
-#, fuzzy, c-format
-msgid   "The volume '%s' is not mounted."
-msgstr  "ไม่พบรูปแบบ %s"
 
 #: ../xffm/fm/view/local/properties.hh:245
 msgid   "Properties and Attributes"
@@ -932,6 +1056,37 @@ msgstr  "ทำการทิ้งลงถังขยะเสร็จส�
 msgid   "Source:"
 msgstr  "ต้นทาง:"
 
+#: ../xffm/fm/view/local/rm.hh:59
+#, c-format
+msgid   "Delete %s"
+msgstr  "ลบ %s"
+
+#: ../xffm/fm/view/local/rm.hh:61
+msgid   "Warning: "
+msgstr  "คำเตือน: "
+
+#: ../xffm/fm/view/local/rm.hh:92
+msgid   "Remove"
+msgstr  "เอาออก"
+
+#: ../xffm/fm/view/local/rm.hh:142
+#, fuzzy
+msgid   "Apply to all"
+msgstr  "ปรับใช้กับทั้งหมด"
+
+#: ../xffm/fm/view/local/rm.hh:165 ../xffm/common/gtk.hh:91
+msgid   "Shred"
+msgstr  "ลบแบบทำลายข้อมูล"
+
+#: ../xffm/fm/view/local/rm.hh:183
+msgid   "Trash"
+msgstr  "ทิ้งลงถังขยะ"
+
+#: ../xffm/fm/view/local/view.hh:177
+#, fuzzy, c-format
+msgid   "The volume '%s' is not mounted."
+msgstr  "ไม่พบรูปแบบ %s"
+
 #: ../xffm/fm/view/root/model.hh:82
 msgid   "Root Directory"
 msgstr  "ไดเร็กทอรีราก"
@@ -939,22 +1094,6 @@ msgstr  "ไดเร็กทอรีราก"
 #: ../xffm/fm/view/root/model.hh:98
 msgid   "This is the root of the filesystem"
 msgstr  "นี่เป็นรากของระบบแฟ้ม"
-
-#: ../xffm/fm/view/root/model.hh:110
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:256
-msgid   "Home Directory"
-msgstr  "ไดเร็กทอรีส่วนตัว"
-
-#: ../xffm/fm/view/root/model.hh:137
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:266
-#, fuzzy
-msgid   "Trash bin"
-msgstr  "แฟ้มขยะ"
-
-#: ../xffm/fm/view/root/model.hh:168 ../xffm/fm/view/fstab/popup.hh:29
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:261
-msgid   "Disk Image Mounter"
-msgstr  "โปรแกรมเมานท์อิมเมจของดิสก์"
 
 #: ../xffm/fm/view/root/model.hh:176 ../xffm/fm/view/root/model.hh:191
 msgid   "Mount local disks and devices"
@@ -1036,14 +1175,78 @@ msgstr  "กำลังเลิกเมานท์ %s"
 msgid   "Mounting %s"
 msgstr  "กำลังเมานท์ %s"
 
-#: ../xffm/fm/view/base/signals.hh:838
-#, fuzzy
-msgid   "Trash is empty"
-msgstr  "แท็บเล็ตไม่มีประจุเหลืออยู่"
+#: ../xffm/fm/view/pkg/model.hh:41 ../xffm/fm/view/pkg/model.hh:52
+msgid   "Add or remove software installed on the system"
+msgstr  "เพิ่มหรือลบซอฟต์แวร์ที่ติดตั้งในระบบ"
 
-#: ../xffm/fm/view/base/signals.hh:840
-msgid   "Directory does not exist."
-msgstr  "ไม่มีไดเรกทอรีนี้อยู่"
+#: ../xffm/fm/view/pkg/model.hh:111
+msgid   "String"
+msgstr  "สายอักขระ"
+
+#: ../xffm/fm/view/pkg/model.hh:116
+msgid   "Waiting for search results"
+msgstr  "กำลังรอผลการค้นหา"
+
+#: ../xffm/fm/view/pkg/model.hh:174
+msgid   "No results"
+msgstr  "ไม่พบรายการที่ต้องการ"
+
+#: ../xffm/fm/view/pkg/model.hh:373
+#, fuzzy
+msgid   "Currently busy\n"
+msgstr  "อัลบั้มปัจจุบัน"
+
+#: ../xffm/fm/view/pkg/popup.hh:44
+msgid   "Update Database"
+msgstr  "ปรับปรุงฐานข้อมูล"
+
+#: ../xffm/fm/view/pkg/popup.hh:45
+msgid   "Fetch"
+msgstr  "Fetch"
+
+#: ../xffm/fm/view/pkg/popup.hh:46
+#, fuzzy
+msgid   "Install --dry-run"
+msgstr  "ติดตั้งมอดูล"
+
+#: ../xffm/fm/view/pkg/popup.hh:47
+msgid   "Install"
+msgstr  "ติดตั้ง"
+
+#: ../xffm/fm/view/pkg/popup.hh:48
+#, fuzzy
+msgid   "Uninstall --dry-run"
+msgstr  "กำลังถอนการติดตั้ง"
+
+#: ../xffm/fm/view/pkg/popup.hh:49
+msgid   "Uninstall"
+msgstr  "ถอดถอน"
+
+#: ../xffm/fm/view/pkg/popup.hh:50
+msgid   "Information"
+msgstr  "ข้อมูล"
+
+#: ../xffm/fm/view/pkg/popup.hh:140
+msgid   "Version"
+msgstr  "รุ่น"
+
+#: ../xffm/fm/view/pkg/popup.hh:149
+msgid   "Go up"
+msgstr  "ขึ้นหนึ่งระดับ"
+
+#: ../xffm/fm/view/pkg/popup.hh:152
+#, fuzzy
+msgid   "Search packages"
+msgstr  "กำลังค้นหาแพกเกจ"
+
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
+#, c-format
+msgid   "Loading %s...%s"
+msgstr  "ทำการโหลด %s...%s"
+
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
+msgid   "Please Wait..."
+msgstr  "กรุณารอสักครู่..."
 
 #: ../xffm/fm/view/treeview.hh:17
 msgid   "Name"
@@ -1061,288 +1264,85 @@ msgstr  "วันที่"
 msgid   "Mimetype"
 msgstr  "ประเภท Mime ของแฟ้ม"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
+#: ../xffm/fm/view/base/signals.hh:838
 #, fuzzy
-msgid   "Embedded Terminal"
-msgstr  "สนับสนุนการฝังตัวเทอร์มินอล"
+msgid   "Trash is empty"
+msgstr  "แท็บเล็ตไม่มีประจุเหลืออยู่"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
+#: ../xffm/fm/view/base/signals.hh:840
+msgid   "Directory does not exist."
+msgstr  "ไม่มีไดเรกทอรีนี้อยู่"
+
+#: ../xffm/common/settings.hh:30
+msgid   "New File:"
+msgstr  "แฟ้มใหม่:"
+
+#: ../xffm/common/gio.hh:81
+msgid   "Copying files"
+msgstr  "กำลังคัดลอกแฟ้ม"
+
+#: ../xffm/common/gio.hh:85
 #, fuzzy
-msgid   "All items in the iconview."
-msgstr  "เลือกรายการทุกรายการในหน้าต่างนี้"
+msgid   "linking"
+msgstr  "กำลังใช้ความคิด"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
-msgid   "Scripting"
-msgstr  "สคริปต์"
+#: ../xffm/common/gio.hh:87
+msgid   "rename"
+msgstr  "เปลี่ยนชื่อ"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
+#: ../xffm/common/gio.hh:426
+#, c-format
+msgid   "(%d of %d)"
+msgstr  "(%d จาก %d)"
+
+#: ../xffm/common/dnd.hh:47
 #, fuzzy
-msgid   "Clear Log"
-msgstr  "ล้างปูมบันทึกข้อผิดพลาด"
+msgid   "Create Link"
+msgstr  "เรียกคืนการสร้างจุดเชื่อมโยง"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
-msgid   "Terminal font"
-msgstr  "แบบอักษรเทอร์มินัล"
+#: ../xffm/common/util.hh:1404
+#, c-format
+msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
+        "attribute on that file."
+msgstr  ""
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
-msgid   "Renice Process"
-msgstr  "โพรเซสที่ทำงานเบื้องหลัง"
+#: ../xffm/common/util.hh:1406 ../xffm/common/util.hh:1441
+#, c-format
+msgid   "Open with %s"
+msgstr  "เปิดด้วย %s"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
-msgid   "Suspend"
-msgstr  "พักเครื่อง"
+#: ../xffm/common/util.hh:1406
+msgid   "Text Editor"
+msgstr  "เครื่องมือแก้ไขข้อความ"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
-msgid   "Continue"
-msgstr  "ทำต่อ"
+#: ../xffm/common/util.hh:1443 ../xffm/common/gtk.hh:69
+msgid   "Execute Shell Command"
+msgstr  "ประมวลผลคำสั่งเชลล์..."
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid   "Interrupt"
-msgstr  "การขัดจังหวะ"
+#: ../xffm/common/util.hh:1447
+msgid   "Console: quickly run single commands -- write a command here and "
+        "press enter."
+msgstr  ""
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid   "Hangup"
-msgstr  "ตัดการเชื่อมต่อ"
+#: ../xffm/common/gtk.hh:352 ../xffm/common/gtk.hh:360
+msgid   "Help"
+msgstr  "วิธีใช้"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
-msgid   "User 1 (USR1)"
-msgstr  "ผู้ใช้ 1 (USR1)"
+#: ../xffm/common/run.hh:338
+msgid   "error"
+msgstr  "ข้อผิดพลาด"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
-msgid   "User 2 (USR2)"
-msgstr  "ผู้ใช้ 2 (USR2)"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+#: ../xffm/common/run.hh:342
 #, fuzzy
-msgid   "Terminate Task"
-msgstr  "ยุติการทำงานของ %s"
+msgid   "warning"
+msgstr  "คำเตือน:"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
-msgid   "Abort"
-msgstr  "เลิกทำ"
+#: ../xffm/common/preview.hh:581
+msgid   "Empty file"
+msgstr  "แฟ้มว่างเปล่า"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:138
-msgid   "Kill"
-msgstr  "ฆ่า"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
-#, fuzzy
-msgid   "Segmentation fault"
-msgstr  "การละเมิดพื้นที่หน่วยความจำ"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:216
-msgid   "PID"
-msgstr  "PID"
-
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:375
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:377
-msgid   "Go to"
-msgstr  "ไปยัง"
-
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:409
-msgid   "Not a directory"
-msgstr  "ไม่ใช่โฟลเดอร์"
-
-#: ../xffm/fm/dialog/notebook/page/page.hh:59
-msgid   "loading..."
-msgstr  "กำลังโหลด..."
-
-#: ../xffm/fm/dialog/notebook/page/page.hh:151
-#: ../xffm/fm/dialog/notebook/page/page.hh:167
-#, fuzzy
-msgid   "Confirm Replace"
-msgstr  "ยืนยันการลบ"
-
-#: ../xffm/fm/dialog/notebook/page/page.hh:153
-#, fuzzy
-msgid   "Destination File"
-msgstr  "โฟลเดอร์ปลายทาง"
-
-#: ../xffm/fm/dialog/notebook/page/page.hh:166
-#, fuzzy, c-format
-msgid   "The output file %s already exists, do you want to overwrite it?"
-msgstr  "มีแฟ้ม %s อยู่แล้ว คุณต้องการที่จะเขียนทับมันหรือไม่ ?"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:11
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:214
-#, fuzzy
-msgid   "Remove Button Contents"
-msgstr  "เอาปุ่มออก"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:67
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:209
-#, fuzzy
-msgid   "Add custom content"
-msgstr  "เพิ่มเนื้อหาปุ่มที่กำหนดเอง"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:68
-#, fuzzy
-msgid   "Select file to load"
-msgstr  "เลือกแฟ้มที่จะเพิ่ม…"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:125
-#, fuzzy, c-format
-msgid   "Cannot load file %s. Reason: %s"
-msgstr  "ไม่สามารถขยายแฟ้ม %s ได้ : %s"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:154
-#, fuzzy
-msgid   "You need to restart the application"
-msgstr  "คุณต้องเริ่มต้นโปรแกรมนี้ใหม่"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:244
-msgid   "Open a New Window"
-msgstr  "เปิดหน้าต่างใหม่"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:250
-#, fuzzy
-msgid   "Differences"
-msgstr  "แสดงความแตกต่าง"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:178
-#, fuzzy
-msgid   "Open menu"
-msgstr  "เปิดเมนู"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:230
-#, fuzzy
-msgid   "View as list"
-msgstr  "แสดงเป็นรายการ"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:231
-msgid   "Show hidden files"
-msgstr  "แสดงไฟล์ซ่อน"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:232
-msgid   "Show Backup Files"
-msgstr  "แสดงแฟ้มสำรอง"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:233
-#, fuzzy
-msgid   "Sort data in descending order"
-msgstr  "เรียงตามลำดับการเปิด"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:235
-#, fuzzy
-msgid   "Sort by date"
-msgstr  "เรียงลำดับตามวันที่"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:236
-msgid   "Sort by size"
-msgstr  "เรียงตามขนาด"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:270
-msgid   "Main menu"
-msgstr  "เมนูหลัก"
-
-#: ../xffm/fm/dialog/notebook/notebook.hh:56
-msgid   "Long press time"
-msgstr  "ช่วงเวลากดแช่"
-
-#: ../xffm/fm/dialog/dialog.hh:122
-msgid   "Removed"
-msgstr  "ถอดถอนแล้ว"
-
-#: ../xffm/fm/dialog/dialog.hh:143
-msgid   "Detected device(s):"
-msgstr  "อุปกรณ์ที่ตรวจพบ:"
-
-#: ../xffm/response/commandresponse.hh:19
-msgid   "Running"
-msgstr  "กำลังทำงาน"
-
-#: ../xffm/response/commandresponse.hh:24
-msgid   "Waiting for operation to finish..."
-msgstr  "กำลังรอปฏิบัติการเสร็จสิ้น..."
-
-#: ../xffm/response/passwdresponse.hh:179
-#, fuzzy
-msgid   "User Input"
-msgstr  "เมาส์"
-
-#: ../xffm/response/passwdresponse.hh:195
-#, fuzzy
-msgid   "Response Requested"
-msgstr  "ต้องการการตอบกลับ"
-
-#: ../xffm/response/passwdresponse.hh:242 ../xffm/response/entryresponse.hh:439
-msgid   "Ok"
-msgstr  "ตกลง"
-
-#: ../xffm/response/customresponse.hh:55
-msgid   "Execute command"
-msgstr  "เรียกทำงานคำสั่ง"
-
-#: ../xffm/response/customresponse.hh:103
-msgid   "Source File"
-msgstr  "แฟ้มต้นฉบับ"
-
-#: ../xffm/response/timeoutresponse.hh:57
-msgid   "Dismiss"
-msgstr  "ละทิ้ง"
-
-#: ../xffm/response/commandprogressresponse.hh:31
-msgid   "Items:"
-msgstr  "รายการ:"
-
-#: ../xffm/response/chooserresponse.hh:23
-msgid   "Open"
-msgstr  "เปิด"
-
-#: ../xffm/response/chooserresponse.hh:56
-msgid   "Choose directory"
-msgstr  "เลือกไดเรกทอรี"
-
-#: ../xffm/response/chooserresponse.hh:60
-msgid   "Choose file"
-msgstr  "เลือกแฟ้ม"
-
-#: ../xffm/completion/bash.hh:133
-msgid   "Completion mode:"
-msgstr  "โหมดการทำให้สมบูรณ์:"
-
-#: ../xffm/completion/bash.hh:134
-msgid   "command"
-msgstr  "คำสั่ง"
-
-#: ../xffm/completion/bash.hh:135
-msgid   "file"
-msgstr  "แฟ้ม"
-
-#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
-msgid   "Options >>"
-msgstr  "ตัวเลือกต่าง ๆ >>"
-
-#: ../xffm/completion/base.hh:28
-msgid   "Command"
-msgstr  "คำสั่ง"
-
-#: ../xffm/completion/base.hh:31
-msgid   "File"
-msgstr  "แฟ้ม"
-
-#: ../xffm/completion/base.hh:34
-#, fuzzy
-msgid   "Command history"
-msgstr  "ประวัติการเรียกใช้คำสั่ง"
-
-#: ../xffm/completion/base.hh:40
-msgid   "Variable"
-msgstr  "ตัวแปร"
-
-#: ../xffm/completion/base.hh:43
-msgid   "Host"
-msgstr  "โฮสต์"
-
-#: ../xffm/completion/base.hh:55
-msgid   "Found no match"
-msgstr  "ไม่พบที่เข้าเงื่อนไข"
-
-#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
-msgid   "Matches"
-msgstr  "ตรงกัน"
-
-#: ../xffm/completion/base.hh:142
-msgid   "Too many files open"
-msgstr  "เปิดแฟ้มมากเกินไป"
+#: ../xffm/common/preview.hh:636
+#, c-format
+msgid   "Cannot read from %s"
+msgstr  "ไม่สามารถอ่านจาก %s ได้"
 
