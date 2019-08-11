@@ -1,4 +1,4 @@
-# Xffm+ translation file: dom ago 11 10:58:45 CDT 2019
+# Xffm+ translation file: dom ago 11 11:27:16 CDT 2019
 # Merged fron existing open source files
 # http://xffm.org
 #
@@ -15,8 +15,8 @@ msgstr  "Project-Id-Version: xffm+\n"
         "Content-Type: text/plain; charset=UTF-8\n"
         "Content-Transfer-Encoding: 8bit\n"
         "iserkeywords=I18N+L10Ncomponent=general\n"
-        "Plural-Forms: nplurals=4; plural=n==1? 3 : n%s0==1  n%s00!=11 ? 0 : n"
-        "%s0>=2  n%s0<=4  (n%s00<10 || n%s00>=20) ? 1 : 2;\n"
+        "Plural-Forms: nplurals=4; plural=n==1? 3 : n%10==1 && n%100!=11 ? "
+        "0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
         "X-Project-Style: gnome\n"
 
 #: ../xffm/mime/mimemagic.hh:68 ../xffm/mime/mimemagic.hh:112

@@ -1,4 +1,4 @@
-# Xffm+ translation file: dom ago 11 10:52:51 CDT 2019
+# Xffm+ translation file: dom ago 11 11:21:19 CDT 2019
 # Merged fron existing open source files
 # http://xffm.org
 #
@@ -377,10 +377,12 @@ msgstr  "جاري إغلاق ملف..."
 #, c-format
 msgid   "Found %d match"
 msgid_plural    "Found %d matches"
-msgstr[0]       "وجدتُ تطابقاً واحداً"
-msgstr[1]       "وجدتُ تطابقين"
-msgstr[2]       "وجدتُ %d تطابقات"
-msgstr[3]       "وجدتُ %d تطابقاً"
+msgstr[0]       "لم يعثر على تطابق"
+msgstr[1]       "عثر على تطابق واحد"
+msgstr[2]       "عثر على تطابقان"
+msgstr[3]       "عثر على %d تطابقات"
+msgstr[4]       "عثر على %d تطابقاً"
+msgstr[5]       "عثر على %d تطابق"
 
 #: ../xffm/find/signals.hh:473
 #, fuzzy, c-format

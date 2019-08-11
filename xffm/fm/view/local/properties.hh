@@ -463,7 +463,13 @@ private:
         stat(path, &st);
 	gchar *m1 = Util<Type>::statInfo(&st);
 	gchar *m2 = Util<Type>::fileInfo(path);
-	gchar *m = g_strconcat(m1, "\n\n", m2, "\n",NULL);
+        auto size = LocalModel<Type>::sizeString(st.st_size);
+        auto date = LocalModel<Type>::dateString(st.st_mtime);
+	gchar *m = g_strconcat(m1, "\n",
+		_("Size"), ": ", size, "\n", 
+		_("Date"), ": ", date, "\n", 
+		"\n", m2, "\n",
+		NULL);
 	g_free(m1);
 	g_free(m2);
 	gchar *dir = g_path_get_dirname(path);

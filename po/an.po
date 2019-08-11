@@ -1,4 +1,4 @@
-# Xffm+ translation file: dom ago 11 10:52:47 CDT 2019
+# Xffm+ translation file: dom ago 11 11:21:16 CDT 2019
 # Merged fron existing open source files
 # http://xffm.org
 #
