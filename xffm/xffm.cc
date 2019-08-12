@@ -6,12 +6,11 @@
 #define XFFM_CC
 #include "config.h"
 
+// Run in background, detached.
+# define FORK 1
 #ifdef ALPHA
 
 # warning "Alpha modules enabled..."
-// Easier debugging:
-# undef FORK 
-# warning "Fork not active..."
 // Templates in test mode:
 # undef ENABLE_CUSTOM_RESPONSE 
 # define ENABLE_CUSTOM_RESPONSE 1
@@ -21,6 +20,9 @@
 # define ENABLE_DIFF_MODULE 1
 # undef ENABLE_FSTAB_MODULE 
 # define ENABLE_FSTAB_MODULE 1
+// Easier debugging:
+//# undef FORK 
+//# warning "Fork not active..."
 // Core dumps for debugging:
 # define FORCE_CORE
 # warning "Core dump enabled..."
@@ -31,8 +33,6 @@
 #else
 // No templates in test mode.
 // No default core dumps (system setting may override).
-// Run in background, detached.
-# define FORK 1
 #endif
 
 #include "types.h"
