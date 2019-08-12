@@ -190,7 +190,7 @@ public:
 	auto pkg = 
 	    gtk_c::newButton("emblem-archlinux", _("Software Updater"));
 # else
-#  if HAVE_EMERGE
+#  ifdef HAVE_EMERGE
 	auto pkg = 
 	    gtk_c::newButton("emblem-gentoo", _("Software Updater"));
 #  else
