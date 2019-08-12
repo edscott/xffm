@@ -63,9 +63,10 @@ public:
     GtkBox *vbox2(void) {return vbox2_;}
     ~EntryResponse (void){
         if (timeout_ == 0) {
+            /*DBG("hide response_\n");
             gtk_widget_hide(GTK_WIDGET(response_));
 	    while (gtk_events_pending())gtk_main_iteration();	
-            gtk_widget_destroy(GTK_WIDGET(response_));
+            gtk_widget_destroy(GTK_WIDGET(response_));*/
         }
     }
 
@@ -162,6 +163,7 @@ public:
     static gboolean
     progressReset(GtkWidget *w, GdkEventKey *event, void *data){
         auto progress = (GtkProgressBar *)data;
+        if (!progress || !GTK_IS_PROGRESS_BAR(progress)) return FALSE;
         gtk_progress_bar_set_fraction(progress, 0.0);
         if(event->keyval == GDK_KEY_Tab) { 
             gtk_editable_set_position(GTK_EDITABLE(w), -1);
@@ -260,6 +262,16 @@ public:
         auto progress = GTK_PROGRESS_BAR(arg[1]);
         auto dialog = GTK_DIALOG(arg[2]);
         auto object =(EntryResponse <Type> *)arg[3];
+        if (!dialog || !GTK_IS_WINDOW(dialog)){
+            g_free(arg);
+            return G_SOURCE_REMOVE;
+        }
+        if (!progress || !GTK_IS_PROGRESS_BAR(progress)){
+            g_free(arg);
+            return G_SOURCE_REMOVE;
+        }
+
+
          if (!object->endTime()) {
             gtk_widget_hide(GTK_WIDGET(dialog));
 	    while (gtk_events_pending())gtk_main_iteration();	
@@ -295,7 +307,7 @@ public:
             
         timeout_ = timeout;
         endTime_ = timeout;
-        if (endTime_){
+        if (endTime_ && timeoutProgress_ && GTK_IS_PROGRESS_BAR(timeoutProgress_)){
             auto arg = (void **)calloc(4, sizeof(void *));
             gtk_widget_show(GTK_WIDGET(timeoutProgress_));
             arg[0] = GINT_TO_POINTER(timeout);
@@ -316,7 +328,6 @@ public:
 	if(response == GTK_RESPONSE_YES) {
             responseTxt = getResponse();
 	}
-	gtk_widget_hide (GTK_WIDGET(response_));
 	if(responseTxt != NULL){
 	    g_strstrip (responseTxt);
 	}
@@ -343,7 +354,6 @@ public:
 	if(response == GTK_RESPONSE_YES) {
             responseTxt = getResponse();
 	}
-	gtk_widget_hide (GTK_WIDGET(response_));
 	if(responseTxt != NULL){
 	    g_strstrip (responseTxt);
 	}

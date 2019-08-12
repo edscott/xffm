@@ -26,7 +26,7 @@ public:
 	return  MimeMagic<Type>::encoding(file);
 #else
 	// If not libmagic, assume the encoding is already utf-8. (whatever...)
-	return  g_strdup("UTF-8");
+	return  NULL;
 #endif
     }
 
@@ -35,10 +35,10 @@ public:
 #ifdef MIMETYPE_PROGRAM
 	return MimeType<Type>::mimeMagic(file);
 #else
-# if HAVE_LIBMAGIC
+# ifdef HAVE_LIBMAGIC
 	return MimeMagic<Type>::mimeMagic(file);
 # else
-        return NULL;
+        return mimeType(file);
 # endif
 #endif
     }
@@ -53,7 +53,7 @@ public:
 #ifdef MIMETYPE_PROGRAM
 	return MimeType<Type>::mimeType(file);
 #else
-# if HAVE_LIBMAGIC
+# ifdef HAVE_LIBMAGIC
 	return MimeMagic<Type>::mimeMagic(file);
 # else
 
@@ -78,7 +78,7 @@ public:
 // XXX: Could use language code -l code, --language=code 
 	return MimeType<Type>::mimeFile(file);
 #else
-# if HAVE_LIBMAGIC
+# ifdef HAVE_LIBMAGIC
 	return MimeMagic<Type>::mimeFile(file);
 # else
         return NULL;

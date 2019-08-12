@@ -198,34 +198,52 @@ private:
     }
 
     static void setEditor(const gchar *terminalCmd){
-	gchar *e = NULL;
-	if (getenv("EDITOR")) e = g_find_program_in_path(getenv("EDITOR"));
+	const gchar *e = getenv("EDITOR");
+        if (e && strlen(e)==0) e = NULL;
+        gchar *f = NULL;
 	if (e) {
+            // remove options
+            f = g_strdup(e);
+	    if (strrchr(f, ' ')) *(strrchr(f, ' ')) = 0;
+        }
+
+        if (f && g_file_test(f, G_FILE_TEST_EXISTS)){
 	    gchar *g = g_path_get_basename(e);
-	    g_free(e);
-	    if (strrchr(g, ' ')) *(strrchr(g, ' ')) = 0;
-	    if (strcmp(g, "nano")==0) g = g_strdup_printf("%s nano", terminalCmd); 
-	    if (strcmp(g, "vi")==0) g = g_strdup_printf("%s vi", terminalCmd); 
-	    if (strcmp(g, "vim")==0) g = g_strdup_printf("%s vim", terminalCmd); 
-	    //if (strcmp(g, "emacs")==0) g = g_strdup_printf("%s emacs", terminalCmd); 
-	    if (strcmp(g, "gvim")==0) g = g_strdup("gvim -f "); 
-	    e=g;
-	} else {
-	    e = g_find_program_in_path("gvim");
-	    if (e) {
-		g_free(e);
-		e = g_strdup("gvim -f");
+	    if (strcmp(g, "nano")==0 || strcmp(g, "vi")==0 
+                || strcmp(g, "vim")==0 || strcmp(g, "emacs")==0){                  
+                g_free(f);
+                f = g_strdup_printf("%s %s", terminalCmd, e); 
+            }
+
+        } else {
+            g_free(f);
+	    f = g_find_program_in_path("gvim");
+	    if (f) {
+		g_free(f);
+		f = g_strdup("gvim -f");
 	    } else {
-		e = g_find_program_in_path("nano");
-		if(!e){
-		    // nano is mandatory
-		    std::cerr<<"*** Warning: No suitable EDITOR found (tried gvim, nano)\n";
+		f = g_find_program_in_path("vi");
+                if (f){
+		    g_free(f);
+		    f = g_strdup_printf("%s vi", terminalCmd);
+	        } else {
+		    f = g_find_program_in_path("nano");
+		    if(!f){
+		        // nano is mandatory
+		        std::cerr<<
+                            "*** Warning: No suitable EDITOR found"
+                           <<" (tried gvim, vi, nano)\n";
+                    }
+		    g_free(f);
+		    f = g_strdup_printf("%s nano", terminalCmd);
 		} 
-		g_free(e);
-		e = g_strdup_printf("%s nano", terminalCmd);
 	    }
-	}
-	setenv("EDITOR", e, 1);
+
+        }
+        if (f) {
+            DBG("editor is %s\n", f);
+            setenv("EDITOR", f, 1);
+        }
     }
 
     static void setPasswordPrompt(void){

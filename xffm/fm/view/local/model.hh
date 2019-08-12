@@ -288,11 +288,11 @@ public:
         auto retval = stat(xd_p->path, xd_p->st);
         if (retval < 0) {
             // File disappeared or broken link.
-            DBG("getStat() stat(%s): %s\n", xd_p->path, strerror(errno));
+            WARN("getStat() stat(%s): %s\n", xd_p->path, strerror(errno));
             if (xd_p->d_type == DT_LNK){
                 retval = lstat(xd_p->path, xd_p->st);
                 if (retval < 0) {
-                    DBG("getStat() lstat(%s): %s\n", xd_p->path, strerror(errno));
+                    WARN("getStat() lstat(%s): %s\n", xd_p->path, strerror(errno));
                 }
             }
         } 

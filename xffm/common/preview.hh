@@ -120,7 +120,7 @@ public:
 		return pixbuf;
 	    }
 	    ERROR("previewAtSize: text preview of some sort should be available here\n");
-	    return Pixbuf<Type>::get_pixbuf("text-x-generic", size);
+	    return Pixbuf<Type>::get_pixbuf("text-x-generic", -size);
 	}
 	    
 	// pdf previews...
@@ -132,21 +132,21 @@ public:
 	    // decode delegate is ghostscript
 	    pixbuf = gsPreview (filePath);// refs
 	    if (pixbuf) return pixbuf;
-	    else Pixbuf<Type>::get_pixbuf("image-x-generic-template", size);
+	    else Pixbuf<Type>::get_pixbuf("image-x-generic-template", -size);
 	}
 	// image previews...
 	if (strstr (mimetype, "image")) {   
 	    pixbuf = Icons<Type>::pixbuf_new_from_file(filePath, size, -1);
 	    if (pixbuf) return pixbuf; 
-	    else return Pixbuf<Type>::get_pixbuf("image-x-generic", size);
+	    else return Pixbuf<Type>::get_pixbuf("image-x-generic", -size);
 
 	}
 	if (strstr (mimetype, "video")) 
-		return Pixbuf<Type>::get_pixbuf("video-x-generic", size);
+		return Pixbuf<Type>::get_pixbuf("video-x-generic", -size);
 	if (strstr (mimetype, "audio")) 
-		return Pixbuf<Type>::get_pixbuf("audio-x-generic", size);
+		return Pixbuf<Type>::get_pixbuf("audio-x-generic", -size);
 
-	return Pixbuf<Type>::get_pixbuf("preferences-system", size);
+	return Pixbuf<Type>::get_pixbuf("preferences-system", -size);
 	//return Pixbuf<Type>::get_pixbuf("image-missing", PREVIEW_IMAGE_SIZE);
     }
 

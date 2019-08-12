@@ -320,7 +320,7 @@ private:
         if (!BaseSignals<Type>::validBaseView(p->view())) return;
 
         
-        gboolean verbose = TRUE;
+        gboolean verbose = FALSE;
         switch (event){
             case G_FILE_MONITOR_EVENT_DELETED:
             case G_FILE_MONITOR_EVENT_MOVED_OUT:

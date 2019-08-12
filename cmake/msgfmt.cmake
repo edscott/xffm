@@ -1,6 +1,6 @@
 # Setting up Intl
-find_package (Intl )
-find_package(Gettext)
+find_package (Intl REQUIRED)
+find_package(Gettext REQUIRED)
 include_directories(${INTL_INCLUDE_DIRS})
 link_directories(${INTL_LIBRARY_DIRS})
 #message("INTL_INCLUDE_DIRS -> ${INTL_INCLUDE_DIRS}")

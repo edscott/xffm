@@ -186,7 +186,9 @@ public:
 
     void
     startMonitor(GtkTreeModel *treeModel, const gchar *path, void *monitor_f){
-        WARN("Known bug: g_monitor function does not work at / (base/moitor.hh)\n");
+        if (path && strcmp(path, "/")==0){
+            WARN("Known bug: g_monitor function does not work at / (base/monitor.hh)\n");
+        }
         // add all initial items to hash
         if (itemsHash_) gtk_tree_model_foreach (treeModel, add2hash, (void *)itemsHash_);
         store_ = GTK_LIST_STORE(treeModel);
@@ -220,7 +222,7 @@ public:
         localMonitorList = g_list_remove(localMonitorList, (void *)monitor_);      
         if (gfile_) {
 	    gchar *p = g_file_get_path(gfile_);
-	    DBG("*** stop_monitor at: %s\n", p);
+	    TRACE("*** stop_monitor at: %s\n", p);
 	    g_free(p);
         }
 	g_file_monitor_cancel(monitor_);

@@ -11,8 +11,20 @@ set(xffm_VERSION_MINOR 91)
 set(CMAKE_CXX_FLAGS "-ggdb")
 set(ALPHA "#define ALPHA")
 
-
-
+#ac_uname_s=`uname -s`
+#echo "system: $ac_uname_s"
+#os=`uname -a | grep FreeBSD`
+#if test x"$os" != x ; then
+#    AC_MSG_RESULT([****   System is FreeBSD ****])
+#    AC_DEFINE_UNQUOTED([FREEBSD_FOUND], [1], [Define if system is FreeBSD ])
+#fi
+execute_process(COMMAND uname -s OUTPUT_VARIABLE UNAME)
+if(UNAME MATCHES FreeBSD)
+    message(STATUS "System is FreeBSD: uname -a = ${UNAME}")
+    set(FREEBSD "FREEBSD_FOUND")
+else()
+    set(FREEBSD "FREEBSD_NOT_FOUND")
+endif()
 
 
 set(CMAKE_EXE_LINKER_FLAGS "-L/usr/lib -L/usr/local/lib")
@@ -31,7 +43,6 @@ include(GNUInstallDirs)
 include(cmake/headers.cmake)
 include(cmake/freeDesktop.cmake)
 include(cmake/programs.cmake)
-include(cmake/libraries.cmake)
 include(cmake/msgfmt.cmake)
 
 

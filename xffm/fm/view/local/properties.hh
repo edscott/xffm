@@ -87,13 +87,9 @@ public:
             gtk_tree_model_get_iter(treeModel, &iter, tpath);
             gtk_tree_model_get(treeModel, &iter, 
 		    PATH, &(entry->path), 
-		    MIMETYPE, &(entry->mimetype), 
 		    -1);
 	    entry->basename = g_path_get_basename(entry->path);
-	    if (!entry->mimetype) {
-		entry->mimetype = 
-		    g_strdup(Mime<Type>::mimeType(entry->path));
-	    }
+	    entry->mimetype = Mime<Type>::mimeMagic(entry->path);
 	    errno=0;
 	    if (lstat(entry->path, &(entry->st)) < 0){
 		DBG("properties.hh::Properties():  %s (%s)\n",
@@ -325,6 +321,13 @@ private:
 	//
 	//auto pixbuf = Pixbuf<Type>::get_pixbuf("accessories-calculator", -256);
 	entry = (entry_t *)properties_p->entryList->data;
+        
+        gchar *m2 = Util<Type>::fileInfo(entry->path);
+        if (strstr(m2, "text")) {
+            g_free(entry->mimetype);
+            entry->mimetype = g_strdup("text/plain");
+        }
+
 	setUpImage(properties_p->imageBox, entry);
 	setUpMode(properties_p->modeBox, entry);
 
@@ -415,12 +418,11 @@ private:
 
 	gtk_label_set_markup(modeLabel, modeMarkup);
 	g_free(modeMarkup);
-	if (setFileInfo(entry->path, GTK_LABEL(list->next->next->data))) 
-	    gtk_widget_show(GTK_WIDGET(list->next->next->data));
-	else
-	    gtk_widget_hide(GTK_WIDGET(list->next->next->data));
+	setFileInfo(entry, GTK_LABEL(list->next->next->data));
+	gtk_widget_show(GTK_WIDGET(list->next->next->data));
 
 	g_list_free(list);
+        return;
 
     }
 
@@ -454,29 +456,36 @@ private:
 	
     }
 
-    static gboolean 
-    setFileInfo(const gchar *path, GtkLabel *label){
-	gboolean retval = TRUE;
+    static void 
+    setFileInfo(entry_t *entry, GtkLabel *label){
 	auto h = g_get_home_dir();
-	//gchar *m = g_strdup("xxx fileinfo");
         struct stat st;
-        stat(path, &st);
+        stat(entry->path, &st);
 	gchar *m1 = Util<Type>::statInfo(&st);
-	gchar *m2 = Util<Type>::fileInfo(path);
+	gchar *m2 = Util<Type>::fileInfo(entry->path);
         auto size = LocalModel<Type>::sizeString(st.st_size);
         auto date = LocalModel<Type>::dateString(st.st_mtime);
+        auto encoding = Mime<Type>::encoding(entry->path);
+        auto encodingString = encoding?g_strconcat(_("Encoding"),": ", encoding, "\n", NULL):g_strdup("");
+        auto mimetypeString = encoding?g_strconcat(_("Mimetype"),": ", entry->mimetype, "\n", NULL):g_strdup("");
+	g_free(encoding);
+
 	gchar *m = g_strconcat(m1, "\n",
 		_("Size"), ": ", size, "\n", 
 		_("Date"), ": ", date, "\n", 
+                encodingString,
+                mimetypeString,
 		"\n", m2, "\n",
 		NULL);
+	g_free(mimetypeString);
+	g_free(encodingString);
 	g_free(m1);
 	g_free(m2);
-	gchar *dir = g_path_get_dirname(path);
-	if (strncmp(path, h, strlen(h))==0){
+	gchar *dir = g_path_get_dirname(entry->path);
+	if (strncmp(entry->path, h, strlen(h))==0){
 	    if (strcmp(dir+strlen(h), "/.local/share/Trash/files")==0){
-		auto trashDate = trashInfo(path, "DeletionDate");
-		auto trashSource = trashInfo(path, "Path");
+		auto trashDate = trashInfo(entry->path, "DeletionDate");
+		auto trashSource = trashInfo(entry->path, "Path");
                 if (trashDate && trashSource){
 		if (strchr(trashDate, 'T'))*strchr(trashDate, 'T')=' ';
                     auto mt = g_strdup_printf("<span size=\"large\" color=\"red\">%s\n<span color=\"blue\">%s</span>\n%s\n<span color=\"blue\">%s</span></span>", 
@@ -494,13 +503,12 @@ private:
 
 	} else TRACE("not in %s\n", h);
 
-	if (!m) retval = FALSE;
 	gtk_label_set_markup(label, m);
 	gtk_widget_show(GTK_WIDGET(label));
 
 	g_free(m);
 	g_free(dir);
-	return retval;
+	return ;
     }
 
     static void

@@ -8,6 +8,9 @@
 #define xffm_VERSION_MINOR @xffm_VERSION_MINOR@
 #define VERSION "@xffm_VERSION_MAJOR@.@xffm_VERSION_MINOR@"
 
+#define @FREEBSD@
+#define @GVIM_PROGRAM@
+
 #define @MNTENT_H@
 #define @SIGNAL_H@
 #define @MAGIC_H@

@@ -1,15 +1,4 @@
 For 0.91
-* BUG: system partially freezes, happened while doing "perl scripts/update.pl fullmerge"
-       - can no longer move vpanes
-       - new tabs opened do not open.
-       - reload tab will clear out view (seems like path is corrupt)
-       * killing xffm started yesterday fixes everything:
-         could possibly be a memory mixup due to returning from
-	 hibernation... core dump from segv signal yields:
-	 /home/GIT/xffm+/xffm/common/settings.hh:25
-	 
-
-> Test local setting and work of locale in FreeBSD
 
  > printout optional and required libraries found in configure step: show whether libmagic or perl mimetype will be used.
 
