@@ -334,11 +334,14 @@ public:
         auto iconName = Popup<Type>::getWidgetData(localItemPopUp,  "iconName");
         auto statLine = Popup<Type>::getWidgetData(localItemPopUp,  "statLine");
 
-	auto specificMimeType = Mime<Type>::mimeType(path);
+	gchar *specificMimeType = NULL;
 	gchar *plainMimeType = NULL;
-	if (mimetype && specificMimeType && strcmp(mimetype, specificMimeType)){
-	    plainMimeType = g_strdup_printf("(%s)",mimetype);
-	    // we could update icon here to specific mimetype icon...
+        
+	if (g_list_length(view->selectionList())==1){
+	    specificMimeType = Mime<Type>::mimeType(path);
+	    if (mimetype && specificMimeType && strcmp(mimetype, specificMimeType)){
+	        plainMimeType = g_strdup_printf("(%s)",mimetype);
+            }
 	}
 	
         gchar *markup = g_strdup_printf("<span color=\"red\"><b><i>%s</i></b></span><span color=\"#aa0000\">: %s %s</span>\n<span color=\"blue\">%s</span>\n<span color=\"green\">%s</span>", 
@@ -594,8 +597,7 @@ private:
         }
         // Set title element
         gchar *statLine;
-        if (g_list_length(view->selectionList()) > 1) statLine = g_strdup("");
-        else {
+        {
             struct stat st;
 	    if (stat(path, &st)<0){
 		statLine = g_strdup_printf("stat(%s): %s", path, strerror(errno));
