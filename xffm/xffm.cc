@@ -79,7 +79,7 @@ GList *customDialogs = NULL;
 
 int
 main (int argc, char *argv[]) {
-#ifdef FORK
+#ifndef FORK
     DBG("FORK disabled: SSH_ASKPASS will not work.");
 #endif
     if (chdir(g_get_home_dir()) < 0){

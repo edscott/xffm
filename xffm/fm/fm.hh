@@ -42,7 +42,7 @@ public:
 #ifdef CORE
 	struct rlimit rlim;
 	if (!strstr(argv[0], "getpass")) {
-	    fprintf(stderr, "Enabling core dumps...\n");
+	    DBG("Enabling core dumps, SSH_ASKPASS will not work...\n");
 	}
 	rlim.rlim_cur = RLIM_INFINITY;
 	rlim.rlim_max = RLIM_INFINITY;
