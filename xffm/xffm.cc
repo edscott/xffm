@@ -79,6 +79,9 @@ GList *customDialogs = NULL;
 
 int
 main (int argc, char *argv[]) {
+#ifdef FORK
+    DBG("FORK disabled: SSH_ASKPASS will not work.");
+#endif
     if (chdir(g_get_home_dir()) < 0){
         ERROR("xffm.cc::Cannot chdir to %s (%s)\n", g_get_home_dir(), strerror(errno));
         exit(1);
