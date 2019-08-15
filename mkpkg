@@ -1,7 +1,8 @@
 #!/usr/bin/perl
 if (not $ARGV[0]) {print "target directory not specified\n"; exit(1)}
 $tgt = $ARGV[0];
-print `mkdir tgt`;
+if (not -d $tgt){print "$tgt is not a directory"; exit(1)}
+#print `mkdir tgt`;
 @dirs = ("cmake", "po", "xffm", "structure");
 @files = ("COPYING", "INSTALL", "README", "CMakeLists.txt", "config.h.cmake");
 foreach $dir (@dirs) { print `rsync -av $dir/ $tgt/$dir/`}
