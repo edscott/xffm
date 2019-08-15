@@ -1,12 +1,10 @@
 For 0.91
 
-bug: click item, open with combo dialog selected gvim, press ok. bug:gvim does not open file...
-
- > printout optional and required libraries found in configure step: show whether libmagic or perl mimetype will be used.
+click item, open with combo dialog selected gvim, press ok. bug:gvim does not open file... sometimes, FreeBSD. May not be related to xffm
 
 
 Cleanups:  
-  * 20+ files with FIXMEs
+  * FIXMEs here and there
 
 Wishlist:
   * history internal lpterm command. Enable use of | grep to filter output...

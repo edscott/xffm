@@ -1,4 +1,4 @@
-Xffm+ is a gtk3 application. Not entirely compatible with gtk2 linked apps (and maybe even other X apps, YMMV). In particular, drag and drop operations may not work correctly, since gtk3 protocols have been altered. This is most noticeable if you use gvim and are use to open files by drag and drop. The first file may open correctly, but subsequent files will not. This is not an xffm+ bug, but rather a gtk3 detail. The fix for gvim is to compile with gtk3. This is the current default (december 2018) for ArchLinux and for Gentoo will require compilation with the gtk3 USE flag set (see /etc/portage/make.conf).
+Xffm+ is a gtk3 application. Not compatible with gtk2 linked apps (and maybe even other X apps, YMMV). In particular, drag and drop operations may not work correctly, since gtk3 protocols have been altered. This is most noticeable if you use gvim and are use to open files by drag and drop. The first file may open correctly, but subsequent files will not. This is *not* an xffm+ bug, but rather a gtk3 detail. The fix for gvim is to compile with gtk3. This is the current default (december 2018) for ArchLinux and FreeBSD. Gentoo may require compilation with the gtk3 USE flag (see /etc/portage/make.conf).
 
 
 1. History of xffm
@@ -15,23 +15,9 @@ What's behind the design of xffm
  dependencies provide a much better experience.
 
 reduce bloatware to a minimum
-- uses already installed code (cp, ln, ...)
-What i use it for
-principal functions
- find|grep to find stuff in other people's code, and in my code (which can be very extensive)
- create and unpack tarballs
- run commands in background
- navigate filesystem
 
-Xffm+ functions
- mount/umount
-  - items in fstab
-  - block devices from /dev
-  - ecryptfs
-  - remote nfs 
-  - remote sshfs
- find/install/update packages (gentoo, archlinux, ... freebsd, debian, redhat, suse)
- basic filemanagement
+Xffm+ functions 
+ filemanagement
   - navigate filesystem 
   - filesystem bookmarks 
   - cp/mv/ln/rm/touch/mkdir
@@ -39,7 +25,15 @@ Xffm+ functions
   - open files with third party applications
   - view/modify file properties
 
-Deprecated stuff (by experience I do not use these any more)
+ mount/umount(currently in alpha development)
+  - items in fstab
+  - block devices from /dev
+  - ecryptfs
+  - remote nfs 
+  - remote sshfs
+ find/install/update packages gentoo, archlinux, freebsd(currently in alpha development)
+
+Deprecated stuff not carried over from xffm and rodent
   - system processed iconview
   - application launcher iconview 
   - SMB network navigator

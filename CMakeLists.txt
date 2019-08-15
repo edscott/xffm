@@ -8,16 +8,9 @@ set(xffm_VERSION_MAJOR 0)
 set(xffm_VERSION_MINOR 91)
 
 # work in alpha phase...
-set(CMAKE_CXX_FLAGS "-ggdb")
-set(ALPHA "#define ALPHA")
+#set(CMAKE_CXX_FLAGS "-ggdb")
+#set(ALPHA "#define ALPHA")
 
-#ac_uname_s=`uname -s`
-#echo "system: $ac_uname_s"
-#os=`uname -a | grep FreeBSD`
-#if test x"$os" != x ; then
-#    AC_MSG_RESULT([****   System is FreeBSD ****])
-#    AC_DEFINE_UNQUOTED([FREEBSD_FOUND], [1], [Define if system is FreeBSD ])
-#fi
 execute_process(COMMAND uname -s OUTPUT_VARIABLE UNAME)
 if(UNAME MATCHES FreeBSD)
     message(STATUS "System is FreeBSD: uname -a = ${UNAME}")
@@ -34,12 +27,10 @@ list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 
 find_package(PkgConfig REQUIRED)
 find_package(GLIB 2.56.2 REQUIRED)
-find_package(GTK3 3.22.1 REQUIRED)
-#find_package(GTK3 3.24.1 REQUIRED)
+find_package(GTK3 3.24.1 REQUIRED)
 find_package(X11 REQUIRED)
 
 include(GNUInstallDirs)
-#include(cmake/autotools.cmake)
 include(cmake/headers.cmake)
 include(cmake/freeDesktop.cmake)
 include(cmake/programs.cmake)
@@ -52,7 +43,6 @@ configure_file(
     "${PROJECT_SOURCE_DIR}/config.h.cmake"
     "${PROJECT_BINARY_DIR}/config.h"
     )
-#add_subdirectory(po)
 
 add_subdirectory(xffm)
 #add_subdirectory(structure)
