@@ -1203,7 +1203,10 @@ public:
     {	
 	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
         auto newName = getNewPath(path, "emblem-symbolic-link", _("Link"));
-        if (!newName) return;
+        if (!newName) {
+		DBG("symlink() path is null\n");
+		return;
+	}
          g_strstrip(newName);
         if (strlen(newName)){
             TRACE("*** symlink %s to %s\n", path, newName);
@@ -1217,7 +1220,10 @@ public:
     {	
 	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
         auto newName = getNewPath(path, "edit-copy", _("Duplicate"));
-        if (!newName) return;
+        if (!newName) {
+		DBG("duplicate() path is null\n");
+		return;
+	}
         g_strstrip(newName);
         if (strlen(newName)){
             TRACE("*** duplicate %s to %s\n", path, newName);
@@ -1231,7 +1237,10 @@ public:
     {	
 	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
         auto newName = getNewPath(path, "view-refresh-symbolic", _("Rename"));
-        if (!newName) return;
+        if (!newName)  {
+		DBG("rename() path is null\n");
+		return;
+	}
         g_strstrip(newName);
         if (strlen(newName)){
             TRACE("*** rename %s to %s\n", path, newName);

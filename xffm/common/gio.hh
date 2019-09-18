@@ -203,9 +203,11 @@ private:
        if (pid){
            gint status;
            waitpid(pid, &status, 0);
+	   DBG("fore(): wait complete\n");
            return;
        }
         execvp(arg[0], (gchar * const *)arg);
+	   DBG("fore(): execvp failed.\n");
         _exit(123);
     }
 
@@ -217,6 +219,7 @@ private:
 	if (g_file_test(srcTarget, G_FILE_TEST_EXISTS)){
 	    auto backup = g_strconcat(srcTarget, "~", NULL);
 	    const gchar *arg[] = { "mv", "-f", srcTarget, backup, NULL };
+            //const gchar *arg[] = { "mv", "-v", "-f", srcTarget, backup, NULL };
 	    TRACE("backup: %s -> %s\n", srcTarget, backup); 
 	    fore(arg);
 	    g_free(backup);
@@ -241,6 +244,7 @@ private:
         }
         TRACE("rename: %s -> %s\n", path, target); 
         const gchar *arg[] = { "mv", "-f", path, target, NULL };
+        //const gchar *arg[] = { "mv", "-v", "-f", path, target, NULL };
         fore(arg);
     }   
 
@@ -249,6 +253,7 @@ private:
         backup(path, target);
         TRACE("moveFore: %s -> %s\n", path, target); 
         const gchar *arg[] = { "mv", "-f", path, target, NULL };
+        //const gchar *arg[] = { "mv", "-v", "-f", path, target, NULL };
         fore(arg);
     }   
     
@@ -257,14 +262,16 @@ private:
         backup(path, target);
         TRACE("copyFore: %s -> %s\n", path, target); 
         const gchar *arg[] = { "cp", "-R", "-f", path, target, NULL };
+        //const gchar *arg[] = { "cp", "-v", "-R", "-f", path, target, NULL };
         fore(arg);
      }   
 
     static void
     linkFore(const gchar *path, const gchar *target){
         backup(path, target);
-        TRACE("linkFore: %s -> %s\n", path, target); 
-        const gchar *arg[] = { "ln", "-s", "-f", path, target, NULL };
+        DBG("linkFore: %s -> %s\n", path, target); 
+        //const gchar *arg[] = { "ln", "-s", "-f", path, target, NULL };
+        const gchar *arg[] = { "ln", "-v", "-s", "-f", path, target, NULL };
         fore(arg);
     }
 
@@ -358,7 +365,7 @@ private:
     
     
     static gboolean doItFore(const gchar *path, const gchar *target, gint mode){
-	TRACE("doIt...%s --> %s  (%d)\n", path, target, mode);
+	DBG("doItFore...%s --> %s  (%d)\n", path, target, mode);
         if (mode != MODE_COPY && mode != MODE_LINK && mode != MODE_MOVE && mode != MODE_RENAME) 
 	    return FALSE;
         gboolean retval=TRUE;
@@ -382,6 +389,7 @@ private:
     }
 
     static gboolean doIt(GtkDialog *rmDialog, const gchar *path, gint mode){
+	DBG("doIt...rm %s   (%d)\n", path,  mode);
         if (mode != MODE_RM && mode != MODE_TRASH && mode != MODE_SHRED) 
 	    return FALSE;
         GFile *file = g_file_new_for_path(path);
@@ -445,7 +453,7 @@ private:
     static gboolean
     multiDoItFore(GList *fileList, const gchar *target, gint mode, GtkProgressBar *progressBar)
     {
-	TRACE("multiDoIt...\n");
+	DBG("multiDoItFore, mode %d...\n", mode);
         if (mode != MODE_COPY && mode != MODE_LINK && mode != MODE_MOVE && mode != MODE_RENAME) 
 	    return FALSE;
 	gint items = g_list_length(fileList);
@@ -473,6 +481,7 @@ private:
     static gboolean
     multiDoIt(GtkDialog *rmDialog, GList *fileList, gint mode)
     {
+	DBG("multiDoIt, mode %d...\n", mode);
         if (mode != MODE_RM && mode != MODE_TRASH && mode != MODE_SHRED)
 	    return FALSE;
 	gint items = g_list_length(fileList);
