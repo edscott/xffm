@@ -19,21 +19,19 @@
 gint asyncReference = 0;
 namespace xf {
 
-template <class Type> class ProgressDialog;
-template <class Type> class TimeoutResponse;
-template <class Type> class BaseProgressResponse;
+template <class Type> class Progress;
 template <class Type> 
 class Gio {
-    static void *progress(void *data){
+    /*static void *progress(void *data){
 	auto arg = (void **)data;
 	auto message = (const gchar *)arg[0];
 	auto icon = (const gchar *)arg[1];
 	auto title = (const gchar *)arg[2];
 	auto text = (const gchar *)arg[3];
 	// open follow dialog for long commands...
-	auto dialog = ProgressDialog<Type>::dialogPulse(message, icon, title, text);
+	auto dialog = Progress<Type>::dialogPulse(message, icon, title, text);
 	return (void *)dialog;
-    }
+    }*/
 
 public:
     // rm/shred/trash (by popup)
@@ -50,6 +48,17 @@ public:
         return retval;
     }
 private:
+    static void *
+    createProgressObject(void *data){
+        void **arg = (void **)data;
+        auto message = (const gchar *)arg[0];
+        auto icon = (const gchar *)arg[1];
+        auto title = (const gchar *)arg[2];
+        auto text =(const gchar *)arg[3];
+        auto progress = new(Progress<Type>)(message, icon, title, text);
+        return (void *) progress;
+    }
+
     //rename/link/duplicate (by popup)
     // fireup chain of 2 threads.
     // thread 1 will fire up thread 2 and wait
@@ -61,8 +70,9 @@ private:
 	auto list = (GList *)arg[0];
 	auto target = (const gchar *)arg[1];
 	auto mode = GPOINTER_TO_INT(arg[2]);
-	auto progressBar = GTK_PROGRESS_BAR(arg[3]);
-        retval = multiDoItFore(list,target,mode,progressBar);
+	auto progressObject = (Progress<Type> *)arg[3];
+
+        retval = multiDoItFore(list,target,mode,progressObject);
         TRACE("thread2 done\n");
         return GINT_TO_POINTER(retval);
     }
@@ -89,12 +99,16 @@ private:
 		title = "Fxime";
 	}
 
+        const gchar *contextArg[]={ 
+            (const gchar *)list->data, 
+	    "system-run", 
+            title, 
+            ""
+        };
+	auto progressObject = 
+	    (Progress<Type> *)(Util<Type>::context_function(createProgressObject, (void *)contextArg));
+	arg[3] = (void *)progressObject;
 
-	const gchar *contextArg[]={ (const gchar *)list->data, 
-	    "system-run", title, ""};
-	auto progressDialog = 
-	    GTK_WINDOW(Util<Type>::context_function(progress, (void *)contextArg));
-	arg[3] = g_object_get_data(G_OBJECT(progressDialog), "progress");
 	if (pthread_create(&thread, NULL, thread2,data) != 0){
 	    ERROR("thread1(): Unable to create thread2\n");
 	} 
@@ -105,7 +119,7 @@ private:
 	}
 	asyncReference--;
 
-	g_object_set_data(G_OBJECT(progressDialog), "stop", GINT_TO_POINTER(TRUE));
+        progressObject->stop(); // This will destroy object.
         for (auto l=list; l && l->data; l= l->next) g_free(l->data);
 	g_list_free(list);
 	g_free(target);
@@ -128,6 +142,7 @@ public:
 	arg[0] = (void *)list;
 	arg[1] = (void *)g_strdup(target);
 	arg[2] = GINT_TO_POINTER(mode);
+	arg[3] = NULL;
         TRACE("thread1 create\n");
 	if (pthread_create(&thread, NULL, thread1, (void *)arg) != 0){
 	    ERROR("execute(): Unable to create thread1\n");
@@ -203,11 +218,11 @@ private:
        if (pid){
            gint status;
            waitpid(pid, &status, 0);
-	   DBG("fore(): wait complete\n");
+	   TRACE("fore(): wait complete\n");
            return;
        }
         execvp(arg[0], (gchar * const *)arg);
-	   DBG("fore(): execvp failed.\n");
+	   TRACE("fore(): execvp failed.\n");
         _exit(123);
     }
 
@@ -269,7 +284,7 @@ private:
     static void
     linkFore(const gchar *path, const gchar *target){
         backup(path, target);
-        DBG("linkFore: %s -> %s\n", path, target); 
+        TRACE("linkFore: %s -> %s\n", path, target); 
         //const gchar *arg[] = { "ln", "-s", "-f", path, target, NULL };
         const gchar *arg[] = { "ln", "-v", "-s", "-f", path, target, NULL };
         fore(arg);
@@ -365,7 +380,7 @@ private:
     
     
     static gboolean doItFore(const gchar *path, const gchar *target, gint mode){
-	DBG("doItFore...%s --> %s  (%d)\n", path, target, mode);
+	TRACE("doItFore...%s --> %s  (%d)\n", path, target, mode);
         if (mode != MODE_COPY && mode != MODE_LINK && mode != MODE_MOVE && mode != MODE_RENAME) 
 	    return FALSE;
         gboolean retval=TRUE;
@@ -389,7 +404,7 @@ private:
     }
 
     static gboolean doIt(GtkDialog *rmDialog, const gchar *path, gint mode){
-	DBG("doIt...rm %s   (%d)\n", path,  mode);
+	TRACE("doIt...rm %s   (%d)\n", path,  mode);
         if (mode != MODE_RM && mode != MODE_TRASH && mode != MODE_SHRED) 
 	    return FALSE;
         GFile *file = g_file_new_for_path(path);
@@ -428,12 +443,12 @@ private:
     static void *
     setProgressText(void *data){
 	auto arg = (void **)data;
-	auto progressBar = (GtkProgressBar *) arg[0];
+	auto progress = (Progress<Type> *) arg[0];
 	auto item = GPOINTER_TO_INT(arg[1]);
 	auto list = (GList *)arg[2];
 	auto text = g_strdup_printf(_("(%d of %d)"), item, g_list_length(list));
 	    
-	gtk_progress_bar_set_text (progressBar, text);
+	gtk_progress_bar_set_text (progress->progressBar(), text);
 	g_free(text);
 	return NULL;
     }
@@ -441,7 +456,8 @@ private:
     static void *
     setProgressMessage(void *data){
 	auto arg = (void **)data;
-	auto label = GTK_LABEL(arg[0]);
+	auto progress = (Progress<Type> *) arg[0];
+	auto label = progress->label();
 	auto markup = (const gchar *)arg[1];
 	//TRACE("label(%p) %s\n", label, markup);
 	gtk_label_set_markup(label, markup);
@@ -451,9 +467,9 @@ private:
     }
 	
     static gboolean
-    multiDoItFore(GList *fileList, const gchar *target, gint mode, GtkProgressBar *progressBar)
+    multiDoItFore(GList *fileList, const gchar *target, gint mode, Progress<Type> *progress)
     {
-	DBG("multiDoItFore, mode %d...\n", mode);
+	TRACE("multiDoItFore, mode %d...\n", mode);
         if (mode != MODE_COPY && mode != MODE_LINK && mode != MODE_MOVE && mode != MODE_RENAME) 
 	    return FALSE;
 	gint items = g_list_length(fileList);
@@ -462,18 +478,18 @@ private:
 	gint count = 1;
         gboolean retval;
         for (auto l = fileList; l && l->data; l=l->next) {
-	    // update progress dialog with filecount
-	    void *arg[]={(void *)progressBar, GINT_TO_POINTER(count), (void *)fileList};
+	    // update progressBar dialog with filecount
+	    void *arg[]={(void *)progress, GINT_TO_POINTER(count), (void *)fileList};
 	    Util<Type>::context_function(setProgressText, (void *)arg);
 	    auto path = (const gchar *)l->data;
 	    // update progress dialog with path
-	    void *arg2[]={g_object_get_data(G_OBJECT(progressBar), "label"), (void *)path};
+	    void *arg2[]={(void *)progress, (void *)path};
 	    Util<Type>::context_function(setProgressMessage, (void *)arg2);
             doItFore(path, target, mode);
 	    //sleep(1);
 	    count++;
 	}
-	// destroy progress dialog.
+	// Progress dialog will be destroyed at thread1().
 	return retval;
     }
 
@@ -481,7 +497,7 @@ private:
     static gboolean
     multiDoIt(GtkDialog *rmDialog, GList *fileList, gint mode)
     {
-	DBG("multiDoIt, mode %d...\n", mode);
+	TRACE("multiDoIt, mode %d...\n", mode);
         if (mode != MODE_RM && mode != MODE_TRASH && mode != MODE_SHRED)
 	    return FALSE;
 	gint items = g_list_length(fileList);

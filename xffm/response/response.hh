@@ -6,4 +6,5 @@
 #include "customresponse.hh"
 #include "commandresponse.hh"
 #include "timeoutresponse.hh"
+#include "progress.hh"
 

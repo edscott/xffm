@@ -1,24 +1,29 @@
+#if 0
 #ifndef XF_COMMANDPROGRESSRESPONSE_HH
 #define XF_COMMANDPROGRESSRESPONSE_HH
 namespace xf {
 template <class Type>
 
-class CommandProgressResponse {
+class CommandProgressResponse: 
+    public BaseProgressResponse<Type>(const gchar *message, const gchar *icon) 
+{
     using pixbuf_c = Pixbuf<double>;
     using gtk_c = Gtk<double>;
     using util_c = Util<double>;
 
 public:
     static GtkWindow *
-    dialog(const gchar *message, const gchar *icon, 
+    CommandProgressResponse(const gchar *message, const gchar *icon, 
 	    const gchar *command,
 	    GList *fileList,
-	    const gchar *target)
+	    const gchar *target):
+        BaseProgressResponse(message, icon);
+
     {
 	gint items = g_list_length(fileList);
 	if (!items) return NULL;
 
-	auto dialog = BaseProgressResponse<Type>::dialog(message, icon);
+	auto dialog = this->dialog;
 	auto progress = GTK_PROGRESS_BAR(g_object_get_data(G_OBJECT(dialog), "progress"));
 
         gtk_window_set_title(dialog, command);
@@ -52,23 +57,6 @@ public:
                     Run<Type>::run_operate_stderr, 
                     NULL);
             g_strfreev(argv);
-          /*      
-	    auto src = (const gchar *)l->data;
-	    gchar *text2 = g_strdup_printf("%s \"%s\" \"%s\"",  command, src, target);
-	    FILE *pipe = popen (text2, "r");
-	    if(pipe == NULL) {
-		ERROR("Cannot pipe from \'%s\'\n", text2);
-		g_free(text2);
-		return NULL;
-	    }
-	    g_free(text2);
-	    gchar line[256];
-	    memset(line, 0, 256);
-	    while (fgets (line, 255, pipe) && !feof(pipe)) {
-                if (line[0] != '\n') TRACE("CommandProgressResponse:: %s", line);
-	    }
-	    pclose (pipe);
-            */
 	    count++;
 	}
 	gtk_widget_destroy(GTK_WIDGET(dialog));
@@ -78,5 +66,6 @@ public:
 };
 }
 
+#endif
 #endif
 
