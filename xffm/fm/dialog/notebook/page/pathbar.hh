@@ -400,7 +400,6 @@ private:
         auto response = entryResponse->runResponse();
         TRACE("response=%s\n", response);
 	
-        delete entryResponse;
         if (!response) return FALSE;
         if (strlen(response) > 1 && response[strlen(response)-1] == G_DIR_SEPARATOR){
             response[strlen(response)-1] = 0;

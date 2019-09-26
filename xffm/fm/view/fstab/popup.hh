@@ -157,7 +157,6 @@ class FstabPopUp {
         g_free(mountTarget);
         
         auto response = entryResponse->runResponse();
-        delete entryResponse;
 	TRACE("response=%s\n", response);
 	if (response){
 	    g_strstrip(response);

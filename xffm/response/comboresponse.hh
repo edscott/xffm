@@ -95,11 +95,6 @@ public:
         gtk_widget_show(GTK_WIDGET(this->checkButton()));
     }
 
-
-    gchar *getResponse(void){
-        return g_strdup (gtk_combo_box_text_get_active_text (combo_));
-    }
-    
     gchar *
     runResponse(void){
         return runResponse(10);
@@ -107,37 +102,13 @@ public:
 
     gchar * 
     runResponse(gint timeout){
-        /* show response_ and return */
-	gtk_window_set_position(GTK_WINDOW(this->response_), GTK_WIN_POS_CENTER_ON_PARENT);
-	gtk_widget_show (GTK_WIDGET(this->response_));
-        Response<Type>::placeDialog(GTK_WINDOW(this->response_));
-        
-        gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
-
-        this->endTime_ = timeout;
-        if (timeout){
-            auto arg = (void **)calloc(4, sizeof(void *));
-            gtk_widget_show(GTK_WIDGET(this->timeoutProgress_));
-            arg[0] = GINT_TO_POINTER(timeout);
-            arg[1] = (void *)this->timeoutProgress_;
-            arg[2] =(void *)this->response_;
-            arg[3] =(void *)this;
-            g_timeout_add(500, EntryResponse<Type>::updateProgress, (void *)arg);
-        } 
-	gint response  = gtk_dialog_run(GTK_DIALOG(this->response_));
-        this->endTime_ = 0;
-
-        gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
-	//if (checkboxText) g_free(g_object_get_data(G_OBJECT(checkButton), "app"));
+        gint response = this->runResponseSetup(timeout);
         gchar *responseTxt = NULL;
 	if(response == GTK_RESPONSE_YES) {
-            responseTxt = getResponse();
+            responseTxt = g_strdup (gtk_combo_box_text_get_active_text (combo_));
+	    if(responseTxt != NULL) g_strstrip (responseTxt);
 	}
-	gtk_widget_hide (GTK_WIDGET(this->response_));
-	if(responseTxt != NULL){
-	    g_strstrip (responseTxt);
-	}
-        if (this->bashCompletionStore_) gtk_list_store_clear(this->bashCompletionStore_);
+        this->timeout(-1);
         
 	return responseTxt;
     }

@@ -23,7 +23,6 @@ class EntryResponse {
     GtkEntryCompletion *bashCompletion_;
 
 protected:
-    time_t endTime_;
     GtkButton *yes_;
     GtkButton *no_;
     GtkDialog *response_;
@@ -58,17 +57,18 @@ protected:
     }
 
 public:
-    time_t endTime(void){return endTime_;}
-
+    time_t timeout(void){return timeout_;}
+    void timeout(time_t value){timeout_ = value;}
+    GtkDialog *dialog(void){return response_;}
+    GtkProgressBar *progress(void){return timeoutProgress_;}
     GtkBox *vbox2(void) {return vbox2_;}
+    
     ~EntryResponse (void){
-        if (timeout_ == 0) {
-            /*DBG("hide response_\n");
-            gtk_widget_hide(GTK_WIDGET(response_));
-	    while (gtk_events_pending())gtk_main_iteration();	
-            gtk_widget_destroy(GTK_WIDGET(response_));*/
-        }
+        if (bashCompletionStore_) gtk_list_store_clear(bashCompletionStore_);
+        gtk_widget_destroy(GTK_WIDGET(response_));
     }
+
+
 
     EntryResponse (GtkWindow *parent, const gchar *windowTitle, const gchar *icon){
         bashCompletionStore_ = NULL;
@@ -191,8 +191,6 @@ public:
         return entry_;
     }
 
-    GtkDialog *dialog(void) {return response_;}
-
     void setEntryDefault(const gchar *value){
         if (!value) return;
         gtk_entry_set_text(entry_, value);
@@ -257,82 +255,68 @@ public:
    
     static gboolean
     updateProgress(void * data){
+        auto object = (EntryResponse <Type> *)data;
         auto arg = (void **)data;
-        auto timeout = GPOINTER_TO_INT(arg[0]);
-        auto progress = GTK_PROGRESS_BAR(arg[1]);
-        auto dialog = GTK_DIALOG(arg[2]);
-        auto object =(EntryResponse <Type> *)arg[3];
-        if (!dialog || !GTK_IS_WINDOW(dialog)){
-            g_free(arg);
-            return G_SOURCE_REMOVE;
-        }
-        if (!progress || !GTK_IS_PROGRESS_BAR(progress)){
-            g_free(arg);
-            return G_SOURCE_REMOVE;
-        }
+        auto timeout = object->timeout();
+        auto progress = object->progress();
+        auto dialog  = object->dialog();
 
-
-         if (!object->endTime()) {
-            gtk_widget_hide(GTK_WIDGET(dialog));
-	    while (gtk_events_pending())gtk_main_iteration();	
-            gtk_widget_destroy(GTK_WIDGET(dialog));
-            g_free(arg);
+        // Shortcircuit to delete.
+        if (timeout < 0) {
+            delete(object);
             return G_SOURCE_REMOVE;
         }
-       if (gtk_window_is_active(GTK_WINDOW(dialog))){
+            
+        // While window is active, pause progress bar.
+        if (gtk_window_is_active(GTK_WINDOW(dialog))){
             return G_SOURCE_CONTINUE;
         }
-        auto fraction = gtk_progress_bar_get_fraction(progress);
-        if (fraction < 1.0) {
-            fraction += (1.0 / timeout /2.0);
-            gtk_progress_bar_set_fraction(progress, fraction);
-        } else {
-            //zap
-            gtk_dialog_response(dialog, GTK_RESPONSE_CANCEL);
-            gtk_widget_hide(GTK_WIDGET(dialog));
-	    while (gtk_events_pending())gtk_main_iteration();	
-            gtk_widget_destroy(GTK_WIDGET(dialog));
-            g_free(arg);
-            return G_SOURCE_REMOVE;
+        if (timeout > 1.0) {
+            // Add fraction to progress bar.
+            auto fraction = gtk_progress_bar_get_fraction(progress);
+            if (fraction < 1.0) {
+                fraction += (1.0 / timeout /2.0);
+                gtk_progress_bar_set_fraction(progress, fraction);
+            } 
+            // Complete fraction, delete object.
+            if (fraction >= 1.0) {
+                gtk_dialog_response(dialog, GTK_RESPONSE_CANCEL);
+                return G_SOURCE_CONTINUE; 
+            }
         }
         return G_SOURCE_CONTINUE;
     }
 
-    gchar * 
-    runResponse(gint timeout){
+    gint 
+    runResponseSetup(gint timeout){
+        timeout_ = timeout;
         /* show response_ and return */
 	gtk_window_set_position(GTK_WINDOW(response_), GTK_WIN_POS_CENTER_ON_PARENT);
 	gtk_widget_show (GTK_WIDGET(response_));
         gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
             
-        timeout_ = timeout;
-        endTime_ = timeout;
-        if (endTime_ && timeoutProgress_ && GTK_IS_PROGRESS_BAR(timeoutProgress_)){
-            auto arg = (void **)calloc(4, sizeof(void *));
-            gtk_widget_show(GTK_WIDGET(timeoutProgress_));
-            arg[0] = GINT_TO_POINTER(timeout);
-            arg[1] = (void *)timeoutProgress_;
-            arg[2] =(void *)response_;
-            arg[3] =(void *)this;
-            g_timeout_add(500, updateProgress, (void *)arg);
-        } 
+        if (timeout) gtk_widget_show(GTK_WIDGET(timeoutProgress_));
+        g_timeout_add(500, EntryResponse<Type>::updateProgress, (void *)this);
+        
 
 	gint response  = gtk_dialog_run(GTK_DIALOG(response_));
-        endTime_ = 0;
 
         gtk_widget_hide(GTK_WIDGET(response_));
         gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
-	while (gtk_events_pending())gtk_main_iteration();	
-	//if (checkboxText) g_free(g_object_get_data(G_OBJECT(checkButton), "app"));
+	while (gtk_events_pending())gtk_main_iteration();
+        return response;
+    }
+    
+    gchar * 
+    runResponse(gint timeout){
+        gint response = this->runResponseSetup(timeout);
+
         gchar *responseTxt = NULL;
 	if(response == GTK_RESPONSE_YES) {
             responseTxt = getResponse();
+	    if(responseTxt != NULL) g_strstrip (responseTxt);
 	}
-	if(responseTxt != NULL){
-	    g_strstrip (responseTxt);
-	}
-        if (bashCompletionStore_) gtk_list_store_clear(bashCompletionStore_);
-        
+        timeout_ = -1;
 	return responseTxt;
     }
     
@@ -341,6 +325,7 @@ public:
         return runResponse(10);
     }
 
+#if 0
     gchar * 
     runResponseInsensitive(void){
         /* show response_ and return */
@@ -361,6 +346,7 @@ public:
         
 	return responseTxt;
     }
+#endif
 
 private:
 

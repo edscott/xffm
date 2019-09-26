@@ -156,7 +156,6 @@ public:
                 g_free(markup);  
                 entryResponse->setEntryDefault("/dev/null");
                 response = entryResponse->runResponse();
-                delete entryResponse;
                 TRACE("response=%s\n", response); 
                 if (!response){
                     g_free(command);

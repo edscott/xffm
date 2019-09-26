@@ -60,7 +60,6 @@ class VButtonBox {
 	    DBG("response=%s\n", response);
 	}
 	g_free(response);
-        delete comboResponse;
     }
 
     static void addCustomButton(GtkButton *button, void *data){
@@ -106,7 +105,6 @@ class VButtonBox {
 	
 
         auto response = entryResponse->runResponse(0);
-        delete entryResponse;
 
 	gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
 

@@ -760,7 +760,6 @@ private:
         g_free(markup);
         entryResponse->setEntryLabel(_("Regular expression"));
         auto response = entryResponse->runResponse();
-        delete entryResponse;
 	TRACE("response=%s\n", response);
         if (!response) return;
         g_strstrip(response);
@@ -900,7 +899,6 @@ public:
         g_free(dirname);
         
         auto response = entryResponse->runResponse();
-        delete entryResponse;
 	TRACE("response=%s\n", response);
 	if (response){
 	    g_strstrip(response);
@@ -994,7 +992,6 @@ public:
         g_free(dirname);
         
         auto response = entryResponse->runResponse();
-        delete entryResponse;
 	TRACE("response=%s\n", response);
 	if (response){
 	    g_strstrip(response);
@@ -1070,7 +1067,6 @@ public:
         auto response = entryResponse->runResponse();
         gboolean isDirectory = 
             gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(entryResponse->checkButton()));
-        delete entryResponse;
 
 	if (!response || !strlen(response)){
             Gtk<Type>::quick_help(NULL, _("No name")); 
@@ -1117,7 +1113,6 @@ public:
         
         entryResponse->setCheckButtonEntryCallback((void *)toggleTerminalRun, (void *)path); 
         auto response = entryResponse->runResponse();
-        delete entryResponse;
 
 
 	if (!response) return;
@@ -1156,7 +1151,7 @@ public:
         entryResponse->setEntryBashFileCompletion(wd);
         entryResponse->setInLineCompletion(1);
         auto response = entryResponse->runResponse();
-        delete entryResponse;
+        // entryResponse is deleted automatically.
 	if (response){
             gchar *newName;
             if (g_path_is_absolute(response)){
@@ -1311,7 +1306,6 @@ public:
             entryResponse->setCheckButtonEntryCallback((void *)toggleTerminal); 
             entryResponse->setEntryCallback((void *)entryKeyRelease); 
             response = entryResponse->runResponse();
-            delete entryResponse;
         } else {
             auto comboResponse = new(ComboResponse<Type>)(GTK_WINDOW(mainWindow), _("Open with"), "document-open");
             comboResponse->setResponseLabel(responseLabel);
@@ -1330,7 +1324,6 @@ public:
             comboResponse->setComboCallback((void *)comboChanged); 
         
             response = comboResponse->runResponse();
-            delete comboResponse;
         }
 
 	g_free(defaultApp);
