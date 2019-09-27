@@ -1411,26 +1411,8 @@ public:
 
 	auto message = g_strdup_printf((mounted)?
 		    _("Unmounting %s"):_("Mounting %s"), path);
-/*
- * no good...
-        const gchar *sudo = "";
-	if (useSudo) sudo = "sudo -A";
-        gchar *command = g_strdup(sudo);
-        gchar *g = g_strconcat(command, " ", (mounted)?umount:mount, " ", path, 
-                " ", mountPoint?mountPoint:"" , NULL);
-        g_free(command);
-        command=g;
-        if (mountPoint){
-            g= g_strconcat(command, " && ", sudo, " touch ", mountPoint, NULL);
-        } else {
-            g= g_strconcat(command, " && ", sudo, " touch ", path, NULL);
-        }
-        g_free(command);
-        command=g;
-        CommandResponse<Type>::dialog(message, "system-run", command);
-        g_free(command);
- */       
-        CommandResponse<Type>::dialog(message, "system-run", arg);
+ 
+        new (CommandResponse<Type>)(command,"system-run", arg);
         g_free(message);
 
 

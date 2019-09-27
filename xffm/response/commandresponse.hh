@@ -3,28 +3,35 @@
 namespace xf {
     
 template <class Type>
-class BaseProgressResponse {
-    using pixbuf_c = Pixbuf<double>;
-    using gtk_c = Gtk<double>;
-    using util_c = Util<double>;
+class BaseCommandResponse {
+    GtkWindow *dialog_;
+    GtkLabel *label_;
+    GtkProgressBar *progressBar_;
+    pid_t controller_;
+    
 public:
-    static GtkWindow *
-    dialog(const gchar *message, const gchar *icon){
-         // Create the widgets
-         auto dialog = GTK_WINDOW(gtk_window_new (GTK_WINDOW_TOPLEVEL));
-         //gtk_window_set_transient_for (dialog,GTK_WINDOW(mainWindow));
-         gtk_window_set_type_hint (dialog,GDK_WINDOW_TYPE_HINT_DIALOG);
-         auto vbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
-         gtk_container_add (GTK_CONTAINER (dialog), GTK_WIDGET(vbox));
-         auto label = GTK_LABEL(gtk_label_new (""));
-	 g_object_set_data(G_OBJECT(dialog), "label", label);
-	 auto markup = 
-	    g_strdup_printf("   <span color=\"blue\" size=\"larger\"><b>%s</b></span>   ", message);           
-         gtk_label_set_markup(label, markup);
-         g_free(markup);
+    GtkWindow *dialog(void){return dialog_;}
+    GtkLabel *label(void){return label_;}
+    GtkProgressBar *progressBar(void){return progressBar_;}
+    pid_t controller(void){return controller_;}
+    void setController(pid_t value){ controller_ = value;}
+    
+    BaseCommandResponse(const gchar *message, const gchar *icon){
+        // Create the widgets
+        dialog_ = GTK_WINDOW(gtk_window_new (GTK_WINDOW_TOPLEVEL));
+        //gtk_window_set_transient_for (dialog_,GTK_WINDOW(mainWindow));
+        gtk_window_set_type_hint (dialog_,GDK_WINDOW_TYPE_HINT_DIALOG);
+        auto vbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
+        gtk_container_add (GTK_CONTAINER (dialog_), GTK_WIDGET(vbox));
+        label_ = GTK_LABEL(gtk_label_new (""));
+
+        auto markup = 
+            g_strdup_printf("   <span color=\"blue\" size=\"larger\"><b>%s</b></span>   ", message);           
+        gtk_label_set_markup(label_, markup);
+        g_free(markup);
          
          // Add the label, and show everything we have added
-         if (icon){
+        if (icon){
             auto pixbuf = Pixbuf<Type>::get_pixbuf(icon, -96);
             if (pixbuf) {
                 auto image = gtk_image_new_from_pixbuf(pixbuf);
@@ -33,128 +40,69 @@ public:
                     gtk_widget_show (image);
                 }
             }
-         }
-         gtk_box_pack_start(vbox, GTK_WIDGET(label), FALSE, FALSE,0);
-         auto progress = GTK_PROGRESS_BAR(gtk_progress_bar_new());
-	 g_object_set_data(G_OBJECT(dialog), "progress", progress);
-	 g_object_set_data(G_OBJECT(progress), "label", label);
+        }
+        gtk_box_pack_start(vbox, GTK_WIDGET(label_), FALSE, FALSE,0);
+        progressBar_ = GTK_PROGRESS_BAR(gtk_progress_bar_new());
+        gtk_box_pack_start(vbox, GTK_WIDGET(progressBar_), FALSE, FALSE,0);
+        setTitle(NULL);
+        setProgressBarText(NULL);
+        gtk_widget_realize (GTK_WIDGET(dialog_));
+         
+        gtk_widget_show_all (GTK_WIDGET(dialog_));
+        Response<Type>::placeDialog(dialog_);
 
-         gtk_box_pack_start(vbox, GTK_WIDGET(progress), FALSE, FALSE,0);
-
-
-	 gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER_ON_PARENT);
-         return dialog;
-    }
-};
-template <class Type>
-class ProgressDialog {
-
-public:
-    static GtkWindow *
-    dialog(const gchar *message, const gchar *icon, 
-	    const gchar *title, const gchar *text)
-    {
-	auto dialog = BaseProgressResponse<Type>::dialog(message, icon);
-	auto progress = GTK_PROGRESS_BAR(g_object_get_data(G_OBJECT(dialog), "progress"));
-	g_object_set_data(G_OBJECT(dialog),"progress", progress);
-	g_object_set_data(G_OBJECT(progress),"dialog", dialog);
-
-        gtk_window_set_title(dialog, title?title:_("Running"));
-        /*auto text = g_strdup_printf("%s (pid: %d)", 
-                 _("Waiting for operation to finish..."),
-                 Tubo<Type>::getChild (pid));*/
-
-	gtk_progress_bar_set_text (progress, text?text:_("Waiting for operation to finish..."));
-	gtk_progress_bar_set_show_text (progress, TRUE);
-        gtk_progress_bar_pulse(progress);
-	gtk_widget_realize (GTK_WIDGET(dialog));
-	 
-	gtk_widget_show_all (GTK_WIDGET(dialog));
-        Response<Type>::placeDialog(dialog);
-	return dialog;
-    }
-    static GtkWindow *
-    dialogPulse(const gchar *message, const gchar *icon, 
-	    const gchar *title, const gchar *text){
-	GtkWindow *dialogP = dialog(message, icon,title,text);
-        auto arg2 = (void **)calloc(2, sizeof (void *));
-        arg2[0]=g_object_get_data(G_OBJECT(dialogP),"progress");
-        arg2[1]=(void *)dialogP;
-        g_timeout_add(250, simplePulse_f, (void *)arg2);
-	return dialogP;
     }
 
-    static gboolean simplePulse_f(void *data) {
-        auto arg = (void **)data;
-        auto progress = GTK_PROGRESS_BAR(arg[0]);
-	auto dialog = GTK_WIDGET(arg[1]);
-	if (!GTK_IS_PROGRESS_BAR(progress)){
-	    return FALSE;
-	}
-	if (g_object_get_data(G_OBJECT(dialog), "stop")){
-	    gtk_widget_hide(GTK_WIDGET(dialog));
-	    gtk_widget_destroy(GTK_WIDGET(dialog));
-	    return FALSE;
-	}
-        gtk_progress_bar_pulse(progress);
-        return TRUE;
-    }  
+    void setTitle(const gchar *title){
+        gtk_window_set_title(dialog_, title?title:_("Running"));
+    }
+
+    void setProgressBarText(const gchar *text){
+        gtk_progress_bar_set_text (progressBar_, text?text:_("Waiting for operation to finish..."));
+        gtk_progress_bar_set_show_text (progressBar_, TRUE);
+        gtk_progress_bar_pulse(progressBar_);
+    }
+
+
 };
 
 template <class Type>
-class CommandResponse {
-    using pixbuf_c = Pixbuf<double>;
-    using gtk_c = Gtk<double>;
-    using util_c = Util<double>;
+class CommandResponse: public BaseCommandResponse<Type> {
+    pid_t controllerPid_; 
 public:
-    
-    static GtkWindow *
-    dialog(const gchar *message, const gchar *icon, const gchar *command)
-    {
-        if (!command) {
-	    return NULL ;
-	}
-	auto dialog = ProgressDialog<Type>::dialog(message, icon, NULL, NULL);
-	pid_t controller = Run<Type>::thread_run(Fm<Type>::getCurrentTextview(),command, FALSE);
-        
-        auto arg2 = (void **)calloc(3, sizeof (void *));
-        arg2[0]=g_object_get_data(G_OBJECT(dialog),"progress");
-        arg2[1]=(void *)dialog;
-        arg2[2]=GINT_TO_POINTER(Tubo<Type>::getChild(controller));
-        g_timeout_add(250, pulse_f, (void *)arg2);
-	return dialog;
-	
-    }
-    
-    static GtkWindow *
-    dialog(const gchar *message, const gchar *icon, const gchar **arg)
-    {
-        if (!arg || arg[0] == NULL) {
-	    return NULL ;
-	}
-	auto dialog = ProgressDialog<Type>::dialog(message, icon, NULL, NULL);
-	pid_t controller = Run<Type>::thread_run(
-		NULL, //(void *)dialog, // data to fork_finished_function
-		arg,
-		Run<Type>::run_operate_stdout,
-		Run<Type>::run_operate_stderr,
-		NULL); //commandDone);
-        auto arg2 = (void **)calloc(3, sizeof (void *));
-        arg2[0]=g_object_get_data(G_OBJECT(dialog),"progress");
-        arg2[1]=(void *)dialog;
-        arg2[2]=GINT_TO_POINTER(Tubo<Type>::getChild(controller));
-        g_timeout_add(250, pulse_f, (void *)arg2);
-	return dialog;
-	
-    }
 
-   /* static void commandDone(void *data){
-       auto dialog = GTK_WIDGET(data);
-       gtk_widget_hide(dialog);
-       gtk_widget_destroy(dialog);
-       return;
-    }*/
-       
+    ~CommandResponse(void)
+    {
+        gtk_widget_hide(GTK_WIDGET(this->dialog()));
+        gtk_widget_destroy(GTK_WIDGET(this->dialog()));
+    }
+    CommandResponse(const gchar *message, const gchar *icon, const gchar **arg):
+        BaseCommandResponse<Type>(message, icon)
+    {
+        controllerPid_ = Run<Type>::thread_run(
+                NULL, // data to fork finished function
+                arg,
+                Run<Type>::run_operate_stdout,
+                Run<Type>::run_operate_stderr,
+                NULL // comand done function
+                );
+        addPulse();
+	return ;	   
+    }
+/*
+    CommandResponse(const gchar *message, const gchar *icon, const gchar *command):
+        BaseCommandResponse<Type>(message, icon)
+    {
+        controllerPid_ = Run<Type>::thread_run(Fm<Type>::getCurrentTextview(),command, FALSE);
+        addPulse();
+	return ;	
+    }
+*/   
+private:
+    void addPulse(void){
+        this->setController(controllerPid_);        
+        g_timeout_add(250, pulse_f, (void *)this);
+    }
 
     static gboolean
     isPidAlive(pid_t pid){
@@ -183,19 +131,17 @@ public:
   
 
     static gboolean pulse_f(void *data) {
-        auto arg = (void **)data;
-        auto progress = GTK_PROGRESS_BAR(arg[0]);
-	if (!GTK_IS_PROGRESS_BAR(progress)){
+        auto object = (CommandResponse<Type> *)data;
+        auto progressBar = GTK_PROGRESS_BAR(object->progressBar());
+	if (!GTK_IS_PROGRESS_BAR(progressBar)){
 	    return FALSE;
 	}
-        gint pid = GPOINTER_TO_INT(arg[2]);
-	if (!isPidAlive(pid)){
-	    auto dialog = GTK_WIDGET(arg[1]);
-	    gtk_widget_hide(GTK_WIDGET(dialog));
-	    gtk_widget_destroy(GTK_WIDGET(dialog));
+        gint pid = Tubo<Type>::getChild(object->controller());
+	if (!CommandResponse<Type>::isPidAlive(pid)){
+            delete(object);
 	    return FALSE;
 	}
-        gtk_progress_bar_pulse(progress);
+        gtk_progress_bar_pulse(progressBar);
         return TRUE;
     }    
 

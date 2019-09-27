@@ -933,7 +933,7 @@ public:
 			"",
 			NULL
 		    };
-		    CommandResponse<Type>::dialog(command,"system-run", arg);
+		    new (CommandResponse<Type>)(command,"system-run", arg);
 		    g_free(format);
 		    g_free(command);
 		    chdir(g_get_home_dir());
@@ -944,14 +944,6 @@ public:
 		    Gtk<Type>::quickHelp(GTK_WINDOW(mainWindow), "dialog-error", m);
 		    g_free(m);
 		}
-		//execute
-		//restore workdir (homedir)
-/*
-		gchar *basename = g_path_get_basename(path);
-		gchar *fmt = g_strdup_printf("tar -cjf \"%s/%s.tar.bz2\"", response, basename);
-		gchar *command = Run<Type>::mkCommandLine(fmt, basename);
-		    */
-		//FIXME chdir basename and run command in shell
 	    }
 	    g_free(response);
 	}
@@ -1021,12 +1013,11 @@ public:
                     (const gchar *)basename,
                     NULL
                 };
-                CommandResponse<Type>::dialog(command,"system-run", arg);
+                new (CommandResponse<Type>)(command,"system-run", arg);
 		g_free(basename);
 		g_free(fmt);
 		g_free(command);
                 g_free(target);
-		//FIXME chdir basename and run command in shell
 	    }
 	    g_free(response);
 	}
