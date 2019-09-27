@@ -1129,8 +1129,8 @@ public:
         g_free(dirname);
         
         auto response = entryResponse->runResponse();
-        response = ckDir(response);
         if (response){
+            response = ckDir(response);
  	    g_strstrip(response);
 	    Settings<Type>::setSettingString(iniGroup, "Default", response);
         }
