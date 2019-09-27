@@ -15,6 +15,7 @@ class EntryResponse {
 
 
     time_t timeout_;
+    time_t lastTimeout_;
     GtkLabel *responseLabel_;
     GtkLabel *entryLabel_;
     GtkLabel *checkboxLabel_;
@@ -43,6 +44,7 @@ protected:
     }
         
     void connectBashFileCompletion(const gchar *wd, GtkEntry *entry){
+        TRACE("connectBashFileCompletion(%s, %p)\n", wd, entry);
         g_object_set_data(G_OBJECT(entry), "workDir", (void *)wd);
 	gtk_entry_set_completion (entry, bashCompletion_);
 	g_signal_connect (G_OBJECT(entry),
@@ -62,6 +64,17 @@ public:
     GtkDialog *dialog(void){return response_;}
     GtkProgressBar *progress(void){return timeoutProgress_;}
     GtkBox *vbox2(void) {return vbox2_;}
+    
+    void unsetTimeout(void){
+        lastTimeout_ = timeout_;
+        gtk_progress_bar_set_fraction(timeoutProgress_, 0.0);
+        timeout_ = 0;
+    }
+
+    void resetTimeout(void){
+        timeout_ = lastTimeout_;
+    }
+    
     
     ~EntryResponse (void){
         if (bashCompletionStore_) gtk_list_store_clear(bashCompletionStore_);
@@ -203,6 +216,7 @@ public:
     }
 			      
     void setEntryBashFileCompletion(const gchar *wd){
+        TRACE("setEntryBashFileCompletion(%s)\n", wd);
         connectBashFileCompletion(wd, entry_);
     }
 
@@ -361,6 +375,7 @@ private:
     static gint
     on_completion (GtkWidget * widget, GdkEventKey * event, gpointer data, gboolean fileCompletion) 
     {
+        TRACE("on_completion()\n");
 	auto store = (GtkListStore *)data;
 	// get entry text
 	auto entry = GTK_ENTRY(widget);

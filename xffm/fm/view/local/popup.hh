@@ -872,79 +872,48 @@ public:
     static void
     untar(GtkMenuItem *menuItem, gpointer data)
     {
-        // File chooser
-        auto entryResponse = new(EntryFolderResponse<Type>)(GTK_WINDOW(mainWindow), _("Extract files from the archive"), NULL);
-
-        
 	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
-	auto displayPath = util_c::valid_utf_pathstring(path);
-	auto markup = 
-	    g_strdup_printf("<span color=\"blue\" size=\"larger\"><b>%s</b></span>", displayPath);  
-	g_free(displayPath);
-	
-        entryResponse->setResponseLabel(markup);
-        g_free(markup);
-
-        entryResponse->setEntryLabel(_("Specify Output Directory..."));
-        // get last used arguments...
-        gchar *dirname = NULL;
-	if (Settings<Type>::keyFileHasGroupKey("Tarballs", "Default")){
-	    dirname = Settings<Type>::getSettingString("Tarballs", "Default");
-	} 
-	if (!dirname || !g_file_test(dirname, G_FILE_TEST_IS_DIR) ) {
-	    g_free(dirname);
-	    dirname = g_path_get_dirname(path);
-	}
-        entryResponse->setEntryDefault(dirname);
-        g_free(dirname);
-        
-        auto response = entryResponse->runResponse();
+        auto response = getOutputDir(path, _("Extract files from the archive"), "Tarballs");
 	TRACE("response=%s\n", response);
 	if (response){
-	    g_strstrip(response);
-	    Settings<Type>::setSettingString("Tarballs", "Default", response);
-	    if (!g_file_test(response, G_FILE_TEST_IS_DIR)){
-		// FIXME dialog 
-	    } else {
-		//get currentdir (homedir)
-		//change workdir
-		errno=0;
-		if (g_file_test(response, G_FILE_TEST_IS_DIR) && chdir(response)==0){
-		    TRACE("chdir to %s\n", response);   
-		    gchar * mimetype = Mime<Type>::mimeType(path);
-		    gchar *format; 
-		    if (strstr(mimetype, "bzip")) format=g_strdup("-xjf");
-		    else if (strstr(mimetype, "xz")) format=g_strdup("-xJf");
-		    else format=g_strdup("-xzf");
-		    g_free(mimetype);
-		    gchar *command = g_strdup_printf("tar %s \"%s\"", format, path);
-		    // execute command...
-		    // get view
-		    auto view =  (View<Type> *)g_object_get_data(G_OBJECT(data), "view");
-		    auto page = view->page();
-		    pid_t pid = page->command(command, response);
+            //get currentdir (homedir)
+            //change workdir
+            errno=0;
+            if (chdir(response)==0){
+                TRACE("chdir to %s\n", response);   
+                gchar * mimetype = Mime<Type>::mimeType(path);
+                gchar *format; 
+                if (strstr(mimetype, "bzip")) format=g_strdup("-xjf");
+                else if (strstr(mimetype, "xz")) format=g_strdup("-xJf");
+                else format=g_strdup("-xzf");
+                g_free(mimetype);
+                gchar *command = g_strdup_printf("tar %s \"%s\"", format, path);
+                // execute command...
+                // get view
+                auto view =  (View<Type> *)g_object_get_data(G_OBJECT(data), "view");
+                auto page = view->page();
+                pid_t pid = page->command(command, response);
 
-		    // open follow dialog for long commands...
-		    TRACE("command= %s\n", command);
-		    const gchar *arg[] = {
-			"tar",
-			format,
-			(const gchar *)path,
-			"",
-			NULL
-		    };
-		    new (CommandResponse<Type>)(command,"system-run", arg);
-		    g_free(format);
-		    g_free(command);
-		    chdir(g_get_home_dir());
+                // open follow dialog for long commands...
+                TRACE("command= %s\n", command);
+                const gchar *arg[] = {
+                    "tar",
+                    format,
+                    (const gchar *)path,
+                    "",
+                    NULL
+                };
+                new (CommandResponse<Type>)(command,"system-run", arg);
+                g_free(format);
+                g_free(command);
+                chdir(g_get_home_dir());
 
-		} else {
-		    auto m=g_strdup_printf("\n%s: %s\n", response, strerror(errno?errno:ENOENT));
-		    errno=0;
-		    Gtk<Type>::quickHelp(GTK_WINDOW(mainWindow), "dialog-error", m);
-		    g_free(m);
-		}
-	    }
+            } else {
+                auto m=g_strdup_printf("\n%s: %s\n", response, strerror(errno?errno:ENOENT));
+                errno=0;
+                Gtk<Type>::quickHelp(GTK_WINDOW(mainWindow), "dialog-error", m);
+                g_free(m);
+            }
 	    g_free(response);
 	}
 
@@ -954,71 +923,36 @@ public:
     static void
     tarball(GtkMenuItem *menuItem, gpointer data)
     {
-        // File chooser
-        auto entryResponse = new(EntryFolderResponse<Type>)(GTK_WINDOW(mainWindow), _("Create a compressed archive with the selected objects"), "package-x-generic");
-
-        
 	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
-	auto displayPath = util_c::valid_utf_pathstring(path);
-	auto markup = 
-	    g_strdup_printf("<span color=\"blue\" size=\"larger\"><b>%s</b></span>", displayPath);  
-	g_free(displayPath);
-	
-        entryResponse->setResponseLabel(markup);
-        g_free(markup);
-
-        //entryResponse->setCheckButton(_("Run in Terminal"));
-        //entryResponse->setCheckButton(Run<Type>::runInTerminal(path));
-
-        entryResponse->setEntryLabel(_("Specify Output Directory..."));
-        // get last used arguments...
-        gchar *dirname = NULL;
-	if (Settings<Type>::keyFileHasGroupKey("Tarballs", "Default")){
-	    dirname = Settings<Type>::getSettingString("Tarballs", "Default");
-	} 
-	if (!dirname || !g_file_test(dirname, G_FILE_TEST_IS_DIR) ) {
-	    g_free(dirname);
-	    dirname = g_path_get_dirname(path);
-	}
-        entryResponse->setEntryDefault(dirname);
-        g_free(dirname);
-        
-        auto response = entryResponse->runResponse();
+        auto response = getOutputDir(path, _("Create a compressed archive with the selected objects"), "Tarballs", "package-x-generic");
+ 
 	TRACE("response=%s\n", response);
 	if (response){
-	    g_strstrip(response);
-	    Settings<Type>::setSettingString("Tarballs", "Default", response);
-	    if (!g_file_test(response, G_FILE_TEST_IS_DIR)){
-		// FIXME dialog 
-	    } else {
+            gchar *basename = g_path_get_basename(path);
+            gchar *fmt = g_strdup_printf("tar -cjf \"%s/%s.tar.bz2\"", response, basename);
+            gchar *command = Run<Type>::mkCommandLine(fmt, basename);
                 
+            // execute command...
+            // get view
+            auto view =  (View<Type> *)g_object_get_data(G_OBJECT(data), "view");
+            auto page = view->page();
+            pid_t pid = page->command(command);
 
-		gchar *basename = g_path_get_basename(path);
-		gchar *fmt = g_strdup_printf("tar -cjf \"%s/%s.tar.bz2\"", response, basename);
-		gchar *command = Run<Type>::mkCommandLine(fmt, basename);
-		    
-                // execute command...
-                // get view
-                auto view =  (View<Type> *)g_object_get_data(G_OBJECT(data), "view");
-                auto page = view->page();
-                pid_t pid = page->command(command);
-
-                // open follow dialog for long commands...
-		TRACE("command= %s\n", command);
-                auto target = g_strdup_printf("%s/%s.tar.bz2", response, basename);
-                const gchar *arg[] = {
-                    "tar",
-                    "-cjf",
-                    (const gchar *)target,
-                    (const gchar *)basename,
-                    NULL
-                };
-                new (CommandResponse<Type>)(command,"system-run", arg);
-		g_free(basename);
-		g_free(fmt);
-		g_free(command);
-                g_free(target);
-	    }
+            // open follow dialog for long commands...
+            TRACE("command= %s\n", command);
+            auto target = g_strdup_printf("%s/%s.tar.bz2", response, basename);
+            const gchar *arg[] = {
+                "tar",
+                "-cjf",
+                (const gchar *)target,
+                (const gchar *)basename,
+                NULL
+            };
+            new (CommandResponse<Type>)(command,"system-run", arg);
+            g_free(basename);
+            g_free(fmt);
+            g_free(command);
+            g_free(target);
 	    g_free(response);
 	}
 
@@ -1126,12 +1060,12 @@ public:
     }
 
     static gchar *
-    getNewPath(const gchar *path, const gchar *icon, const gchar *text){
+    getPath(const gchar *path, const gchar *icon, const gchar *text, const gchar *label){
         auto entryResponse = new(EntryResponse<Type>)(GTK_WINDOW(mainWindow), text, icon);
         auto basename = g_path_get_basename(path);
         entryResponse->setEntryDefault(basename);
         g_free(basename);
-        entryResponse->setEntryLabel(_("New Name:"));
+        entryResponse->setEntryLabel(label);
 
 	auto view =  (View<Type> *)g_object_get_data(G_OBJECT(localItemPopUp), "view");
 	// get page
@@ -1142,6 +1076,14 @@ public:
         entryResponse->setEntryBashFileCompletion(wd);
         entryResponse->setInLineCompletion(1);
         auto response = entryResponse->runResponse();
+        return response;
+   }
+
+    static gchar *
+    getNewPath(const gchar *path, const gchar *icon, const gchar *text, 
+            const gchar *label=_("New Name:"))
+    {
+        auto response = getPath(path, icon, text, label);
         // entryResponse is deleted automatically.
 	if (response){
             gchar *newName;
@@ -1157,6 +1099,80 @@ public:
         }
         return NULL;
    }
+
+    static gchar *
+    getOutputDir (const gchar *path, const gchar *text, const gchar *iniGroup, const gchar *icon=NULL)
+    {
+        // File chooser
+        auto entryResponse = new(EntryFolderResponse<Type>)(GTK_WINDOW(mainWindow), text, icon);        
+	auto displayPath = util_c::valid_utf_pathstring(path);
+	auto markup = 
+	    g_strdup_printf("<span color=\"blue\" size=\"larger\"><b>%s</b></span>", displayPath);  
+	g_free(displayPath);
+	
+        entryResponse->setResponseLabel(markup);
+        g_free(markup);
+
+        entryResponse->setEntryLabel(_("Specify Output Directory..."));
+        // get last used arguments...
+        gchar *dirname = NULL;
+	if (Settings<Type>::keyFileHasGroupKey(iniGroup, "Default")){
+	    dirname = Settings<Type>::getSettingString(iniGroup, "Default");
+	} 
+	if (!dirname || !g_file_test(dirname, G_FILE_TEST_IS_DIR) ) {
+	    g_free(dirname);
+	    dirname = g_path_get_dirname(path);
+	}
+        entryResponse->setEntryDefault(dirname);
+        entryResponse->setEntryBashFileCompletion(dirname);
+        entryResponse->setInLineCompletion(1);
+        g_free(dirname);
+        
+        auto response = entryResponse->runResponse();
+        response = ckDir(response);
+        if (response){
+ 	    g_strstrip(response);
+	    Settings<Type>::setSettingString(iniGroup, "Default", response);
+        }
+       return response;
+    
+    
+    }
+
+    static gchar *
+    ckDir(gchar *response){
+        DBG("ckDir(%s)\n", response);
+	if (g_file_test(response, G_FILE_TEST_IS_DIR)) return response;
+        if (g_file_test(response, G_FILE_TEST_EXISTS)){
+            Gtk<Type>::quickHelp(mainWindow, _("Not a directory"), 
+                    "dialog-error", _("error"));
+            g_free(response);
+            return NULL;
+        } 
+        // Create directory?
+        auto entryResponse = new(EntryResponse<Type>)(GTK_WINDOW(mainWindow), strerror(ENOTDIR), NULL);
+        auto markup = 
+            g_strdup_printf("<span color=\"blue\" size=\"larger\"><b>%s</b></span>", _("Create new..."));  
+        entryResponse->setResponseLabel(markup);
+        g_free(markup);
+        entryResponse->setEntryLabel(_("New Name:"));
+        entryResponse->setEntryDefault(response);
+        g_free(response);
+        entryResponse->setEntryBashFileCompletion(g_get_home_dir());
+        entryResponse->setInLineCompletion(1);
+        response = entryResponse->runResponse();
+        if (response && strlen(response)){
+            if (mkdir(response, 0750) < 0){
+                auto m=g_strdup_printf("\n%s: %s\n", response, strerror(errno));
+                errno=0;
+                Gtk<Type>::quickHelp(GTK_WINDOW(mainWindow), "dialog-error", m);
+                g_free(m);
+                g_free(response);
+                return NULL;
+            }                     
+        }
+        return response;      
+    } 
 
 
     static void 

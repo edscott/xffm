@@ -8,9 +8,6 @@ namespace xf
 template <class Type> class Fm;
 template <class Type>
 class ChooserResponse {
-    using pixbuf_c = Pixbuf<double>;
-    using gtk_c = Gtk<double>;
-    using util_c = Util<double>;
 
     static void
     chooser(GtkEntry *entry, const gchar *text, GtkFileChooserAction action) {
@@ -38,7 +35,8 @@ class ChooserResponse {
             gtk_entry_set_text (entry, filename);
             TRACE("Got %s\n", filename);
             g_free (filename);
-        }
+        } else TRACE("response was not GTK_RESPONSE_ACCEPT\n");
+
         gtk_widget_hide (GTK_WIDGET(dialog));
         gtk_widget_destroy (GTK_WIDGET(dialog));
 
@@ -53,11 +51,17 @@ public:
 
     static void
     folderChooser(GtkButton *button, void *data) {
-         chooser(GTK_ENTRY(data), _("Choose directory"), GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER);
+        auto entryResponse = (EntryResponse<Type> *)data;
+        entryResponse->unsetTimeout();
+        chooser(GTK_ENTRY(entryResponse->entry()), _("Choose directory"), GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER);
+        entryResponse->resetTimeout();
     }
     static void
     fileChooser(GtkButton *button, void *data) {
-         chooser(GTK_ENTRY(data), _("Choose file"), GTK_FILE_CHOOSER_ACTION_OPEN);
+        auto entryResponse = (EntryResponse<Type> *)data;
+        entryResponse->unsetTimeout();
+        chooser(GTK_ENTRY(entryResponse->entry()), _("Choose file"), GTK_FILE_CHOOSER_ACTION_OPEN);
+        entryResponse->resetTimeout();
     }
 };
 
@@ -68,6 +72,7 @@ protected:
     GtkButton *chooserButton_;
 public:
     GtkButton *chooserButton(void) {return chooserButton_;}
+
     EntryChooser(GtkWindow *parent, const gchar *windowTitle, const gchar *icon, gboolean fileSelector=FALSE):
         EntryResponse<Type>(parent, windowTitle, icon)
     {
@@ -86,7 +91,7 @@ public:
     {
         g_signal_connect (G_OBJECT(this->chooserButton_), 
                         "clicked", BUTTON_CALLBACK (ChooserResponse<Type>::fileChooser), 
-                        (gpointer) this->entry());
+                        (gpointer) this);
     }
 };
 
@@ -98,7 +103,7 @@ public:
     {
         g_signal_connect (G_OBJECT(this->chooserButton_), 
                         "clicked", BUTTON_CALLBACK (ChooserResponse<Type>::folderChooser), 
-                        (gpointer) this->entry());
+                        (gpointer) this);
     }
 };
 
@@ -138,7 +143,7 @@ public:
     {
         g_signal_connect (G_OBJECT(this->chooserButton_), 
                         "clicked", BUTTON_CALLBACK (ChooserResponse<Type>::folderChooser), 
-                        (gpointer) this->entry());
+                        (gpointer) this);
     }
 };
 }
