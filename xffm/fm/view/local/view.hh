@@ -154,7 +154,7 @@ public:
 		    gboolean valid = Mime<Type>::isValidCommand(response);
 		    if (!valid){
 			gchar *message = g_strdup_printf("\n<span color=\"#990000\"><b>%s</b></span>:\n <b>%s</b>\n", _("Invalid entry"), response); 
-			Gtk<Type>::quick_help (GTK_WINDOW(mainWindow), message);
+			Dialogs<Type>::quickHelp (GTK_WINDOW(mainWindow), message);
 			g_free(message);
 			return FALSE;
 		    }		 
@@ -175,7 +175,7 @@ public:
 	    }
 	} else if ((st.st_mode & S_IFMT) == S_IFBLK) {
             auto msg = g_strdup_printf(_("The volume '%s' is not mounted."), path);
-            Gtk<Type>::quickHelp(mainWindow, msg, "dialog-error");
+            Dialogs<Type>::quickHelp(mainWindow, msg, "dialog-error");
             g_free(msg);
         } else {
 	    ERROR("local/view.hh::%s NOT a regular file\n", path);

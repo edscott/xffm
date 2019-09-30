@@ -90,7 +90,7 @@ private:
 	gtk_widget_realize (GTK_WIDGET(dialog));
 	 
 	gtk_widget_show_all (GTK_WIDGET(dialog));
-        Response<Type>::placeDialog(dialog);
+        Dialogs<Type>::placeDialog(dialog);
         g_timeout_add(250, simplePulse_f, (void *)this);
 
 

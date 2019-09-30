@@ -3,16 +3,11 @@
 # include <config.h>
 #include <stdlib.h>
 
-
-#include "icons.hh"
-
 namespace xf
 {
 
 template <class Type>
 class Pixbuf {
-    typedef Hash<Type> pixbuf_hash_c;
-    typedef Icons<Type> pixbuf_icons_c;
 public:
     static gint
     get_pixel_size(gint size){
@@ -54,30 +49,30 @@ public:
 	auto pixels = get_pixel_size(size);
 	// images, in hash
 	
-	GdkPixbuf *pixbuf = pixbuf_hash_c::find_in_pixbuf_hash(icon_name, pixels);
+	GdkPixbuf *pixbuf = PixbufHash<Type>::find_in_pixbuf_hash(icon_name, pixels);
 	if (pixbuf) {
 	    //if (strstr(icon_name, "png")) DBG("pixbuf %s loaded from hash.\n", icon_name);
 	    return pixbuf;
 	}
 	// Not found, huh?
 	TRACE("Create pixbuf and put in hashtable: \"%s\"\n", icon_name);
-	pixbuf = pixbuf_icons_c::absolute_path_icon(icon_name, pixels);
+	pixbuf = Icons<Type>::absolute_path_icon(icon_name, pixels);
 
 	if (!pixbuf){
 	    // check for composite icon definition or plain icon.
-	    if (pixbuf_icons_c::is_composite_icon_name(icon_name)) pixbuf = pixbuf_icons_c::composite_icon(icon_name, pixels);
-	    else pixbuf = pixbuf_icons_c::get_theme_pixbuf(icon_name, pixels);
+	    if (Icons<Type>::is_composite_icon_name(icon_name)) pixbuf = Icons<Type>::composite_icon(icon_name, pixels);
+	    else pixbuf = Icons<Type>::get_theme_pixbuf(icon_name, pixels);
 	}
        
 	if (pixbuf){
 	    // put in iconhash...
-	    pixbuf_hash_c::put_in_pixbuf_hash(icon_name, pixels, pixbuf);
+	    PixbufHash<Type>::put_in_pixbuf_hash(icon_name, pixels, pixbuf);
 	    return pixbuf;
 	} 
-	pixbuf = pixbuf_hash_c::find_in_pixbuf_hash("image-missing", pixels);
+	pixbuf = PixbufHash<Type>::find_in_pixbuf_hash("image-missing", pixels);
 	if (pixbuf) return pixbuf;
-	pixbuf = pixbuf_icons_c::get_theme_pixbuf("image-missing", pixels);
-	if (pixbuf) pixbuf_hash_c::put_in_pixbuf_hash(icon_name, pixels, pixbuf);
+	pixbuf = Icons<Type>::get_theme_pixbuf("image-missing", pixels);
+	if (pixbuf) PixbufHash<Type>::put_in_pixbuf_hash(icon_name, pixels, pixbuf);
 	if (!g_path_is_absolute(icon_name)){
             DBG("xf::Pixbuf::get_pixbuf(): image-missing. Please install icon \"%s\"\n", icon_name);
         }
@@ -87,7 +82,7 @@ public:
     static GdkPixbuf *
     find_pixbuf(const gchar *icon_name, gint size){
 	GdkPixbuf *pixels = get_pixel_size(size);
-	return pixbuf_hash_c::find_in_pixbuf_hash(icon_name, pixels);
+	return PixbufHash<Type>::find_in_pixbuf_hash(icon_name, pixels);
     }
 
 

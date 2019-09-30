@@ -4,8 +4,6 @@
 #include <stdlib.h>
 #include <errno.h>
 
-#include "cairo.hh"
-#include "hash.hh"
 
 #ifndef PREFIX
 # warning "PREFIX not defined: defaulting to /usr/local"
@@ -18,19 +16,16 @@ static pthread_mutex_t pixbuf_mutex;
     
 namespace xf
 {
+template <class Type>class Util;
     
 
 template <class Type>
 class Icons {
-    typedef Util<Type> util_c;
 
-    typedef Cairo<Type> pixbuf_cairo_c;
-    typedef Hash<Type> pixbuf_hash_c;
 public:
     static void
     init(void){
 	TRACE("Calling Icons initializer...\n");
-	//pixbuf_hash_c::init();
 	pixbuf_mutex = PTHREAD_MUTEX_INITIALIZER;
 	icon_theme = gtk_icon_theme_get_default ();
 	if (!icon_theme){
@@ -190,7 +185,7 @@ public:
 	    gtk_thread_wants_lock = TRUE;
 	} else {
 	    // hold your horses...
-	    while (gtk_thread_wants_lock) util_c::threadwait();
+	    while (gtk_thread_wants_lock) Util<Type>::threadwait();
 	}
 	pthread_mutex_lock(&pixbuf_mutex);
 
@@ -244,7 +239,7 @@ public:
 	if (label || color || emblems) {
 	    void *arg[] = {NULL, (void *)pixbuf, (void *)label, (void *)color, (void *)emblems };
 	    // Done by main gtk thread:
-	    util_c::context_function(insert_decoration_f, arg);
+	    Util<Type>::context_function(insert_decoration_f, arg);
 	}
 	
 
@@ -260,12 +255,12 @@ public:
 	auto color = (const gchar *)arg[3];
 	auto emblems = (const gchar *)arg[4];
 
-	cairo_t   *pixbuf_context = pixbuf_cairo_c::pixbuf_cairo_create(base_pixbuf);
+	cairo_t   *pixbuf_context = Cairo<Type>::pixbuf_cairo_create(base_pixbuf);
 	
 	gdk_cairo_set_source_pixbuf(pixbuf_context, base_pixbuf,0,0);
 	cairo_paint_with_alpha(pixbuf_context, 1.0);
 	if (color){
-	    pixbuf_cairo_c::add_color_pixbuf(pixbuf_context, base_pixbuf, color);
+	    Cairo<Type>::add_color_pixbuf(pixbuf_context, base_pixbuf, color);
 	}
 
 	if (emblems){
@@ -286,10 +281,10 @@ public:
 		gchar *emblem = p[1];
 		gchar *scale = p[2];
 		gchar *alpha = p[3];
-		GdkPixbuf *tag = pixbuf_hash_c::find_in_pixbuf_hash (emblem, 48);
+		GdkPixbuf *tag = PixbufHash<Type>::find_in_pixbuf_hash (emblem, 48);
 		if (!tag) tag = get_theme_pixbuf(emblem, 48);
 		if (tag) {
-		    pixbuf_cairo_c::insert_pixbuf_tag (pixbuf_context, tag, base_pixbuf, position, scale, alpha);
+		    Cairo<Type>::insert_pixbuf_tag (pixbuf_context, tag, base_pixbuf, position, scale, alpha);
 		} else {
 		    TRACE("insert_decoration_f(): Cannot get pixbuf for %s\n", emblem);
 		}
@@ -297,10 +292,10 @@ public:
 	    g_strfreev(tokens);
 	}
 	if (label){
-	    pixbuf_cairo_c::add_label_pixbuf(pixbuf_context, base_pixbuf, label);
+	    Cairo<Type>::add_label_pixbuf(pixbuf_context, base_pixbuf, label);
 	}
 
-	pixbuf_cairo_c::pixbuf_cairo_destroy(pixbuf_context, base_pixbuf);
+	Cairo<Type>::pixbuf_cairo_destroy(pixbuf_context, base_pixbuf);
 	return NULL;
     }
 

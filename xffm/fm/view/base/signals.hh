@@ -839,7 +839,7 @@ public:
 	    } else {
 		m = g_strdup_printf("%s: %s\n",_("Directory does not exist."), path); 
 	    }
-	    Gtk<Type>::quickHelp(mainWindow, m, "dialog-error");
+	    Dialogs<Type>::quickHelp(mainWindow, m, "dialog-error");
 	    ERROR("fm/base/signals.hh::getViewType: %s\n",m);
 	    g_free(m);
 	}

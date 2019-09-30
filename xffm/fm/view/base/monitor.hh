@@ -163,7 +163,7 @@ private:
         gchar *path;
 	gtk_tree_model_get (model, iter, PATH, &path, -1);  
 	// use hashkey
-	gchar *key = Hash<Type>::get_hash_key(path, 10);
+	gchar *key = PixbufHash<Type>::get_hash_key(path, 10);
         g_hash_table_replace(hash, key, g_strdup(path));
         TRACE("add2hash: %s -> %s\n", key, path);
 	g_free(path);
@@ -174,7 +174,7 @@ public:
     
     gboolean pathInTreeHash(const gchar *path, GHashTable *hash){
         gboolean retval = FALSE;
-	gchar *key = Hash<Type>::get_hash_key(path, 10);
+	gchar *key = PixbufHash<Type>::get_hash_key(path, 10);
         TRACE("looking for %s (%s) in hash: %p\n", path, key, hash);
 	if(hash && g_hash_table_lookup(hash,key)) {
             TRACE("found %s (%s) in hash: %p\n", path, key, hash);
@@ -239,7 +239,7 @@ protected:
         // find the iter and remove iteam
         TRACE("remove item...\n");
 	// use hashkey
-	gchar *key = Hash<Type>::get_hash_key(path, 10);
+	gchar *key = PixbufHash<Type>::get_hash_key(path, 10);
         if (itemsHash_) g_hash_table_remove(itemsHash_, key); 
         gtk_tree_model_foreach (GTK_TREE_MODEL(store_), rm_func, (gpointer) path); 
         return TRUE;

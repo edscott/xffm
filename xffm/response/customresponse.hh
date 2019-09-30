@@ -363,7 +363,7 @@ private:
 	gtk_window_set_modal (GTK_WINDOW (this->response_), FALSE);
 	gtk_window_set_position(GTK_WINDOW(this->response_), GTK_WIN_POS_CENTER_ON_PARENT);
 	gtk_widget_show (GTK_WIDGET(this->response_));
-        Response<Type>::placeDialog(GTK_WINDOW(this->response_));
+        Dialogs<Type>::placeDialog(GTK_WINDOW(this->response_));
         //gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
         //gtk_main();
 	return;

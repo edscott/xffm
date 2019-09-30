@@ -152,7 +152,7 @@ private:
         // Mounted but not in mounts hash:
  	gtk_tree_model_get (treeModel, iter, PATH, &path, -1);
         if (FstabView<Type>::isMounted(path)) {
-            gchar *key = Hash<Type>::get_hash_key(path, 10);
+            gchar *key = PixbufHash<Type>::get_hash_key(path, 10);
             if (!g_hash_table_lookup((GHashTable *)data, key)){
                 // update the icon
                 TRACE("*** Send change signal for %s (now mounted, monitor %p)\n", 
@@ -176,7 +176,7 @@ private:
         // Mounted but not in mounts hash:
  	gtk_tree_model_get (treeModel, iter, PATH, &path, -1);
         if (!FstabView<Type>::isMounted(path)) {
-            gchar *key = Hash<Type>::get_hash_key(path, 10);
+            gchar *key = PixbufHash<Type>::get_hash_key(path, 10);
             if (g_hash_table_lookup((GHashTable *)data, key)){
                 // update the icon
                 void *arg[] = { 
@@ -213,7 +213,7 @@ private:
             if (g_path_is_absolute(items[0]) || g_path_is_absolute(items[1])){
                 for (gint i=0; i<2; i++){
                     // use hashkey
-                    gchar *key = Hash<Type>::get_hash_key(items[i], 10);
+                    gchar *key = PixbufHash<Type>::get_hash_key(items[i], 10);
                     g_hash_table_replace(hash, key, g_strdup(items[i]));
                 }
             }
@@ -415,7 +415,7 @@ private:
     gboolean 
     redoIcon(const gchar *path){
         TRACE("redoIcon %s ...\n", path);
-        /*gchar *key = Hash<Type>::get_hash_key(path, 10);
+        /*gchar *key = PixbufHash<Type>::get_hash_key(path, 10);
         if (!g_hash_table_lookup(this->itemsHash(), key)) {
             g_free(key);
             TRACE("*** %s not in itemsHash\n", path);

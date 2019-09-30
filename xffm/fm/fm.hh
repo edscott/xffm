@@ -77,7 +77,7 @@ public:
 	// This interferes with stepwise debugging with gdb.
 	// Get password for ssh or sudo
 	if (strstr(argv[0], "xfgetpass")){
-	    xf::Response<double>::sendPassword(argv);
+	    xf::PasswordResponse<double>::sendPassword(argv);
 	    exit(1);
 	} else {
 #ifdef FORK

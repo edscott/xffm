@@ -1,6 +1,7 @@
 
 
 #include "passwdresponse.hh"
+#include "entryresponse.hh"
 #include "chooserresponse.hh"
 #include "comboresponse.hh"
 #include "customresponse.hh"

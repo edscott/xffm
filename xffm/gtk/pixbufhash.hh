@@ -10,7 +10,6 @@
 #define USER_CACHE_DIR      g_get_user_cache_dir(),"xffm+"
 #define XFTHUMBNAIL_DIR 	USER_CACHE_DIR,"thumbnails"
 
-//#include "pixbuf_hash_c.hpp"
 using namespace std;
 
 //static void free_pixbuf_t(void *);
@@ -31,7 +30,7 @@ static GHashTable *pixbuf_hash;
 namespace xf
 {
 template <class Type>
-class Hash {
+class PixbufHash {
 //private:
 	
 public:

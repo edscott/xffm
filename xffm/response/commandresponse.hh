@@ -49,7 +49,7 @@ public:
         gtk_widget_realize (GTK_WIDGET(dialog_));
          
         gtk_widget_show_all (GTK_WIDGET(dialog_));
-        Response<Type>::placeDialog(dialog_);
+        Dialogs<Type>::placeDialog(dialog_);
 
     }
 

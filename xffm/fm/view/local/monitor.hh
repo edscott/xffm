@@ -150,7 +150,7 @@ public:
             // this just appends:
             //LocalView<Type>::add_local_item(store_, xd_p);
             // use hashkey
-            gchar *key = Hash<Type>::get_hash_key(xd_p->path, 10);
+            gchar *key = PixbufHash<Type>::get_hash_key(xd_p->path, 10);
 	    TRACE("add_new_item ...(%s --> %s) shows:hidden=%d\n", key, xd_p->path, showHidden);
             g_hash_table_replace(this->itemsHash(), key, g_strdup(xd_p->path));
             LocalView<Type>::free_xd_p(xd_p);
@@ -346,11 +346,11 @@ private:
             case G_FILE_MONITOR_EVENT_CHANGED:
                 if (verbose) DBG("monitor_f(): Received  CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
                 // reload icon
-		Hash<Type>::rm_from_pixbuf_hash(f, 24);
-		Hash<Type>::rm_from_pixbuf_hash(f, 48);
+		PixbufHash<Type>::rm_from_pixbuf_hash(f, 24);
+		PixbufHash<Type>::rm_from_pixbuf_hash(f, 48);
 		// Thumbnails are not thumbnailed.
-		//Hash<Type>::zap_thumbnail_file(f, 24);
-		//Hash<Type>::zap_thumbnail_file(f, 48);
+		//PixbufHash<Type>::zap_thumbnail_file(f, 24);
+		//PixbufHash<Type>::zap_thumbnail_file(f, 48);
                 p->restat_item(first);
                 break;
             case G_FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED:

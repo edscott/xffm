@@ -771,7 +771,7 @@ private:
                 gchar *markup = g_strdup_printf("<span size=\"larger\" color=\"blue\">%s\n<span color=\"red\">%s</span></span>\n%s\n",
                         _("Regular Expression syntax is incorrect"), error->message,
                         FindDialog<Type>::grep_text_help);
-                Gtk<Type>::quickHelp(GTK_WINDOW(mainWindow), markup, "dialog-error");
+                Dialogs<Type>::quickHelp(GTK_WINDOW(mainWindow), markup, "dialog-error");
                 g_free(markup);
                 g_error_free(error);
                 return;
@@ -800,7 +800,7 @@ private:
             view->setSelectionList(selection_list);
             if (!selection_list) {
                 gchar *markup = g_strdup_printf("<span size=\"larger\" color=\"blue\">%s\n<span color=\"red\">%s</span></span>\n", _("No selection"),_("No matches."));
-                Gtk<Type>::quickHelp(GTK_WINDOW(mainWindow),markup, "dialog-error"); 
+                Dialogs<Type>::quickHelp(GTK_WINDOW(mainWindow),markup, "dialog-error"); 
                 g_free(markup);
             }
 
@@ -911,7 +911,7 @@ public:
             } else {
                 auto m=g_strdup_printf("\n%s: %s\n", response, strerror(errno?errno:ENOENT));
                 errno=0;
-                Gtk<Type>::quickHelp(GTK_WINDOW(mainWindow), "dialog-error", m);
+                Dialogs<Type>::quickHelp(GTK_WINDOW(mainWindow), "dialog-error", m);
                 g_free(m);
             }
 	    g_free(response);
@@ -994,7 +994,7 @@ public:
             gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(entryResponse->checkButton()));
 
 	if (!response || !strlen(response)){
-            Gtk<Type>::quick_help(NULL, _("No name")); 
+            Dialogs<Type>::quickHelp(NULL, _("No name")); 
             return;
         }
         // XXX: Will character code set of response match that of path?
@@ -1008,7 +1008,7 @@ public:
             }
         } else {
             auto message = g_strdup_printf(_("Another file with the same name already exists in “%s”."), path);
-            Gtk<Type>::quick_help(NULL, message); 
+            Dialogs<Type>::quickHelp(NULL, message); 
             g_free(message);
             return;
         }
@@ -1144,7 +1144,7 @@ public:
         DBG("ckDir(%s)\n", response);
 	if (g_file_test(response, G_FILE_TEST_IS_DIR)) return response;
         if (g_file_test(response, G_FILE_TEST_EXISTS)){
-            Gtk<Type>::quickHelp(mainWindow, _("Not a directory"), 
+            Dialogs<Type>::quickHelp(mainWindow, _("Not a directory"), 
                     "dialog-error", _("error"));
             g_free(response);
             return NULL;
@@ -1165,7 +1165,7 @@ public:
             if (mkdir(response, 0750) < 0){
                 auto m=g_strdup_printf("\n%s: %s\n", response, strerror(errno));
                 errno=0;
-                Gtk<Type>::quickHelp(GTK_WINDOW(mainWindow), "dialog-error", m);
+                Dialogs<Type>::quickHelp(GTK_WINDOW(mainWindow), "dialog-error", m);
                 g_free(m);
                 g_free(response);
                 return NULL;
@@ -1341,7 +1341,7 @@ public:
 	gboolean valid = Run<Type>::isValidCommand(response);
 	if (!valid){
 	    gchar *message = g_strdup_printf("\n<span color=\"#990000\"><b>%s</b></span>:\n <b>%s</b>\n", _("Invalid entry"), response); 
-	    Gtk<Type>::quick_help (GTK_WINDOW(mainWindow), message);
+	    Dialogs<Type>::quickHelp (GTK_WINDOW(mainWindow), message);
 	    g_free(message);
 	    return;
 	}

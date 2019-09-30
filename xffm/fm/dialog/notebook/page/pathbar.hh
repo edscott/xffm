@@ -406,7 +406,7 @@ private:
         }
 	if (!g_file_test(response, G_FILE_TEST_IS_DIR)){
 	    gchar *message = g_strdup_printf("\n  %s:  \n  %s  \n", response, _("Not a directory"));
-	    Gtk<Type>::quickHelp(GTK_WINDOW(mainWindow), message, "dialog-error");
+	    Dialogs<Type>::quickHelp(GTK_WINDOW(mainWindow), message, "dialog-error");
 	    g_free(message);
 	} else {
 	    auto view = (View<Type> *)

@@ -182,7 +182,7 @@ public:
 	errno=0;
         DIR *directory = opendir(path);
         if (!directory) {
-	    Gtk<Type>::quickHelp(GTK_WINDOW(mainWindow), strerror(errno), "dialog-error");
+	    Dialogs<Type>::quickHelp(GTK_WINDOW(mainWindow), strerror(errno), "dialog-error");
             DBG("xfdir_local_c::read_items(): opendir %s: %s\n", path, strerror(errno));
 	    errno=0;
             return NULL;
@@ -748,7 +748,7 @@ private:
             if (type == S_IFDIR) {
                 highlight_pixbuf = Preview<Type>::loadFromThumbnails(up?HIGHLIGHT_UP:"document-open", xd_p->st, 48, 48);
                 if (!highlight_pixbuf) {
-                    auto thumbnail = Hash<Type>::get_thumbnail_path (up?HIGHLIGHT_UP:"document-open", GTK_ICON_SIZE_DIALOG);
+                    auto thumbnail = PixbufHash<Type>::get_thumbnail_path (up?HIGHLIGHT_UP:"document-open", GTK_ICON_SIZE_DIALOG);
                     highlight_pixbuf = Pixbuf<Type>::get_pixbuf(up?HIGHLIGHT_UP:"document-open", GTK_ICON_SIZE_DIALOG);
                     Pixbuf<Type>::pixbuf_save(highlight_pixbuf, thumbnail);
                 }
@@ -761,7 +761,7 @@ private:
         if (!treeViewPixbuf) 
 	    treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name, -24);
         if (!normal_pixbuf) {
-	    auto thumbnail = Hash<Type>::get_thumbnail_path (icon_name, GTK_ICON_SIZE_DIALOG);
+	    auto thumbnail = PixbufHash<Type>::get_thumbnail_path (icon_name, GTK_ICON_SIZE_DIALOG);
 	    normal_pixbuf = Pixbuf<Type>::get_pixbuf(icon_name, GTK_ICON_SIZE_DIALOG);
 	    Pixbuf<Type>::pixbuf_save(normal_pixbuf, thumbnail);
 	}

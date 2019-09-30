@@ -1,6 +1,5 @@
 #ifndef XFGTK_HH
 #define XFGTK_HH
-#include "pixbuf.hh"
 
 
 static GHashTable *iconname_hash=NULL;
@@ -10,8 +9,9 @@ namespace xf
 
 template <class Type>
 class Gtk{
-    typedef Pixbuf<double> pixbuf_c;
+    
 public:
+    
     
     static gboolean
     isImage(const gchar *mimetype){
@@ -100,8 +100,8 @@ public:
 	gtk_button_set_relief (button, GTK_RELIEF_NONE);
 
 	//auto image = gtk_image_new_from_icon_name (icon_name, GTK_ICON_SIZE_SMALL_TOOLBAR);
-//	auto pixbuf = pixbuf_c::get_pixbuf(icon_name, GTK_ICON_SIZE_SMALL_TOOLBAR);
-	auto pixbuf = pixbuf_c::get_pixbuf(icon_name, GTK_ICON_SIZE_SMALL_TOOLBAR);
+//	auto pixbuf = Pixbuf<Type>::get_pixbuf(icon_name, GTK_ICON_SIZE_SMALL_TOOLBAR);
+	auto pixbuf = Pixbuf<Type>::get_pixbuf(icon_name, GTK_ICON_SIZE_SMALL_TOOLBAR);
         auto image = gtk_image_new_from_pixbuf(pixbuf);
 	if (image) {
 	    gtk_container_add (GTK_CONTAINER (button), image);
@@ -153,7 +153,7 @@ public:
 	}
         g_list_free(list);
 	if(icon_id) {
-	    auto pb = pixbuf_c::get_pixbuf (icon_id, size);
+	    auto pb = Pixbuf<Type>::get_pixbuf (icon_id, size);
 	    auto image = gtk_image_new_from_pixbuf (pb);
             gtk_container_add(container, image);
 	    gtk_widget_show(image);
@@ -175,7 +175,7 @@ public:
 	    gtk_container_remove(GTK_CONTAINER(box), icon);
 	}
 	if(icon_id) {
-	    auto pb = pixbuf_c::get_pixbuf (icon_id, size);
+	    auto pb = Pixbuf<Type>::get_pixbuf (icon_id, size);
 	    auto image = gtk_image_new_from_pixbuf (pb);
 	    gtk_box_pack_start(GTK_BOX(box), image, FALSE, FALSE,0);
 	    g_object_set_data(G_OBJECT(bin), "icon", image);
@@ -237,7 +237,7 @@ public:
 	box = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0));
         g_object_set_data(G_OBJECT(menuItem), "box", box);
 
-	GdkPixbuf *pb = (icon_id)? pixbuf_c::get_pixbuf (icon_id, size): NULL;    
+	GdkPixbuf *pb = (icon_id)? Pixbuf<Type>::get_pixbuf (icon_id, size): NULL;    
 	if (pb){
 	    image = GTK_IMAGE(gtk_image_new_from_pixbuf (pb));
 	    gtk_widget_show (GTK_WIDGET(image));
@@ -256,7 +256,7 @@ public:
     static GtkWidget * 
     menu_item_new(const gchar *icon_id, const gchar *text, gint size)
     {
-	GdkPixbuf *pb = (icon_id)? pixbuf_c::get_pixbuf (icon_id, size): NULL;    
+	GdkPixbuf *pb = (icon_id)? Pixbuf<Type>::get_pixbuf (icon_id, size): NULL;    
 	auto w = gtk_menu_item_new_with_label ("");
 	auto box = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0));
         g_object_set_data(G_OBJECT(w), "box", box);
@@ -340,118 +340,6 @@ public:
 	return button;
 
     }
-
-    static void
-    quick_help (GtkWindow *parent, const gchar *message){
-        auto dialog = _quickHelp(parent, message, NULL, NULL );
-        gtk_widget_show_all (GTK_WIDGET(dialog));
-    }
-
-    static GtkWidget *
-    quickHelp (GtkWindow *parent, const gchar *message, const gchar *icon){
-        auto dialog = _quickHelp(parent, message, icon, _("Help"));
-        gtk_widget_show_all (GTK_WIDGET(dialog));
-        return dialog;
-    }
-
-    static GtkWidget *
-    quickHelp (GtkWindow *parent, const gchar *message, const gchar *icon, const gchar *title)
-    {
-        auto dialog = _quickHelp(parent, message, icon, _("Help"));
-        gtk_widget_show_all (GTK_WIDGET(dialog));
-        return dialog;
-    }
-
-    static GtkWidget *
-    _quickHelp (GtkWindow *parent, const gchar *message, const gchar *icon, const gchar *title)
-    {
-
-     static GtkWidget *dialog = NULL;
-     static gchar *last_message = NULL;
-     // Already mapped? Destroy.
-     if (dialog && GTK_IS_WIDGET(dialog)){
-         gtk_widget_hide(dialog);
-         gtk_widget_destroy(dialog);
-
-         // Last mapped is the same? Do not remap.
-         if (last_message && strcmp(last_message, message) == 0){
-             g_free(last_message);
-             last_message = NULL;
-             dialog = NULL;
-             return NULL;
-         }
-     }
-     // Map dialog.parent, 
-     g_free(last_message);
-     last_message = g_strdup(message);
-     dialog = quickDialog(parent, message, icon, title);
-
-      return dialog;
-    }
-
-    static void
-    closeQuickDialog(GtkWidget *widget, GdkEventKey * event, void *data){
-	gtk_widget_hide(widget);
-	TRACE("closeQuickDialog\n");
-	gtk_widget_destroy(widget);
-    }
-
-    static GtkWidget *
-    quickDialog (GtkWindow *parent, const gchar *message, const gchar *icon, const gchar *title)
-    {
-     GtkWidget *dialog = NULL;
-     GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT;
-
-     // Create the widgets
-     dialog = gtk_dialog_new_with_buttons (title,
-					   parent,
-					   flags,
-					   _("Cancel"),
-					   GTK_RESPONSE_NONE,
-					   NULL);
-     auto content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
-     auto label = GTK_LABEL(gtk_label_new (""));
-     gtk_label_set_markup(label, message);
-     
-
-     // Ensure that the dialog box is destroyed when the user responds
-
-     if (parent){
-         g_signal_connect_swapped(dialog, "response", G_CALLBACK (gtk_widget_show),
-			       parent);
-     }
-     /*g_signal_connect_swapped (dialog,
-			       "response",
-			       G_CALLBACK (gtk_widget_destroy),
-			       dialog);*/
-     g_signal_connect_swapped (dialog,
-			       "response",
-			       G_CALLBACK (closeQuickDialog),
-			       dialog);
-
-
-     // Add the label, and show everything we have added
-     auto vbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
-     g_object_set_data(G_OBJECT(dialog), "vbox", vbox);
-     
-     gtk_container_add (GTK_CONTAINER (content_area), GTK_WIDGET(vbox));
-     if (icon){
-	auto pixbuf = Pixbuf<Type>::get_pixbuf(icon, -48);
-        if (pixbuf) {
-            auto image = gtk_image_new_from_pixbuf(pixbuf);
-	    if (image) {
-	        gtk_box_pack_start(vbox, image, FALSE, FALSE,0);
-	        gtk_widget_show (image);
-            }
-	}
-     }
-     auto hbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
-     gtk_box_pack_start(vbox, GTK_WIDGET(hbox), FALSE, FALSE,0);
-     gtk_box_pack_start(hbox, GTK_WIDGET(label), FALSE, FALSE,0);
-
-     return dialog;
-    }
-
     static GtkToggleButton *
     toggle_button (const char *icon_id, const char *text) {
 	auto button = GTK_TOGGLE_BUTTON(gtk_toggle_button_new ());

@@ -114,7 +114,7 @@ public:
 	if (textType){
 	    pixbuf = textPreview (filePath); 
 	    if (pixbuf) {
-		Hash<Type>::put_in_pixbuf_hash(filePath, size, pixbuf);
+		PixbufHash<Type>::put_in_pixbuf_hash(filePath, size, pixbuf);
 		// FIXME: save in thumbnails
 		
 		return pixbuf;
@@ -182,7 +182,7 @@ gsPreview (const gchar *path) {
     gchar *src, *tgt;
     gchar *arg[13];
     gint i = 0;
-    auto thumbnail = Hash<Type>::get_thumbnail_path (path, PREVIEW_IMAGE_SIZE);
+    auto thumbnail = PixbufHash<Type>::get_thumbnail_path (path, PREVIEW_IMAGE_SIZE);
 
     //pdf and ps ghostscript conversion
     src = g_strdup (path);
@@ -509,7 +509,7 @@ gs_wait_f(void *data){
 	// Check if in pixbuf hash. If so, return with the hashed pixbuf.
 	// Note that if the thumbnail is out of date, the thumbnail should
 	// be marked invalid. This will happen if filePath is absolute.
-	auto pixbuf = Hash<Type>::find_in_pixbuf_hash(filePath, PREVIEW_IMAGE_SIZE);
+	auto pixbuf = PixbufHash<Type>::find_in_pixbuf_hash(filePath, PREVIEW_IMAGE_SIZE);
 	
 	if(pixbuf) {
 	    TRACE( "previewAtSize(): pixbuf %s located in hash table.\n",
@@ -528,7 +528,7 @@ public:
     loadFromThumbnails(const gchar *filePath, struct stat *st_p, 
 	    gint width, gint height){
 	// Look into thumbnail cache directory...
-	auto thumbnailPath = Hash<Type>::get_thumbnail_path (filePath, height);
+	auto thumbnailPath = PixbufHash<Type>::get_thumbnail_path (filePath, height);
 	if (g_file_test(thumbnailPath,G_FILE_TEST_EXISTS)){
 	    errno=0;
 	    struct stat st;
@@ -692,7 +692,7 @@ private:
 	auto arg = (void **)data;
 	auto text = (gchar *)arg[0];
 	auto filePath = (gchar *)arg[1];
-	auto thumbnail = Hash<Type>::get_thumbnail_path (filePath, PREVIEW_IMAGE_SIZE);
+	auto thumbnail = PixbufHash<Type>::get_thumbnail_path (filePath, PREVIEW_IMAGE_SIZE);
 	
 	page_layout_t page_layout;
 

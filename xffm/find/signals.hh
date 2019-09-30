@@ -63,7 +63,7 @@ public:
         //if (g_slist_length(list) == 0) return NULL;
         
         // Create liststore for DnD
-        auto dialog = GTK_WINDOW(Gtk<Type>::quickDialog(parent, _("Results"), NULL, title));
+        auto dialog = GTK_WINDOW(Dialogs<Type>::quickDialog(parent, _("Results"), NULL, title));
 	findResultsWidgets = g_list_prepend(findResultsWidgets, dialog);
 	g_signal_connect(G_OBJECT(dialog), "response", 
 		G_CALLBACK(onResponse),NULL);
@@ -189,12 +189,12 @@ public:
 
     static void
     command_up (GtkWidget * button, gpointer data) {
-        quick_command(button, data, TRUE);
+        doCommand(button, data, TRUE);
     }
 
     static void
     command_down (GtkWidget * button, gpointer data) {
-        quick_command(button, data, FALSE);
+        doCommand(button, data, FALSE);
     }
 
     static void
@@ -202,7 +202,7 @@ public:
 	GtkWindow *dialog_=GTK_WINDOW(g_object_get_data(G_OBJECT(button), "dialog_"));
 	const gchar *message = (const gchar *)data;
 	TRACE("fixme: signals::on_buttonHelp\n");
-	gtk_c::quick_help(dialog_, message);
+	Dialogs<Type>::quickHelp(dialog_, message);
     }
 
 
@@ -317,10 +317,10 @@ public:
 private:
     
     static void
-    quick_command (GtkWidget * button, gpointer data, gboolean scrollUp) {
+    doCommand (GtkWidget * button, gpointer data, gboolean scrollUp) {
+	TRACE("fixme: signals::doCommand\n");
 	GtkWindow *dialog_=GTK_WINDOW(g_object_get_data(G_OBJECT(button), "dialog_"));
 	GtkTextView *diagnostics = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(dialog_), "diagnostics"));
-	TRACE("fixme: signals::quick_command\n");
         print_c::clear_text(diagnostics);
         //run_c::thread_run(diagnostics, (const gchar *)data);
         run_c::thread_run(diagnostics, (const gchar *)data, scrollUp);
