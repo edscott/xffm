@@ -262,7 +262,7 @@ private:
                     message = g_strdup_printf("undefined error in file: %s\n", file);
                     break;
             }
-            Gtk<Type>::quickHelp(mainWindow, message, "dialog-error");
+            Dialogs<Type>::quickHelp(mainWindow, message, "dialog-error");
             g_free(message);
             return;
         }

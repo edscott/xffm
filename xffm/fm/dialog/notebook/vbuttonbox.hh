@@ -121,7 +121,7 @@ class VButtonBox {
         g_key_file_load_from_file(keyFile, response,(GKeyFileFlags) (0), &error);
         if (error){
             auto g = g_strdup_printf(_("Cannot load file %s. Reason: %s"), response, error->message);
-            Gtk<Type>::quickHelp(mainWindow, g, "dialog-error");
+            Dialogs<Type>::quickHelp(mainWindow, g, "dialog-error");
             g_free(response);
             g_free(g);
             g_key_file_free(keyFile);
@@ -129,7 +129,7 @@ class VButtonBox {
         }
         if (!g_key_file_has_key(keyFile, "custombutton", "exec", &error) && error){
             auto g = g_strdup_printf("%s: %s", response, error->message);
-            Gtk<Type>::quickHelp(mainWindow, g, "dialog-error");
+            Dialogs<Type>::quickHelp(mainWindow, g, "dialog-error");
             g_free(response);
             g_free(g);
             g_key_file_free(keyFile);
@@ -149,7 +149,7 @@ class VButtonBox {
         }
 
         g_free(response);
-        Gtk<Type>::quickHelp(mainWindow, _("You need to restart the application"), "dialog-warning");
+        Dialogs<Type>::quickHelp(mainWindow, _("You need to restart the application"), "dialog-warning");
     }
 #endif
 public:

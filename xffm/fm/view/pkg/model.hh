@@ -109,8 +109,9 @@ public:
         entryResponse->setResponseLabel(markup);
         g_free(markup);
         entryResponse->setEntryLabel(_("String"));
-        auto response = entryResponse->runResponseInsensitive();
-        delete entryResponse;
+//        auto response = entryResponse->runResponseInsensitive();
+        auto response = entryResponse->runResponse(0);
+        if (mainWindow && GTK_IS_WIDGET(mainWindow)) gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
 	auto dialog_p = (Dialog<Type> *)g_object_get_data(G_OBJECT(mainWindow), "xffm");
 	auto page = dialog_p->currentPageObject();
 	page->updateStatusLabel(_("Waiting for search results"));
@@ -171,7 +172,7 @@ public:
                 return TRUE;
             }
             g_hash_table_destroy(installedHash);
-            Gtk<Type>::quickHelp(mainWindow, _("No results"), "dialog-warning");
+            Dialogs<Type>::quickHelp(mainWindow, _("No results"), "dialog-warning");
         } 
 	page->updateStatusLabel(NULL);
 	if (mainWindow && GTK_IS_WIDGET(mainWindow)) gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);

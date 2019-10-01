@@ -166,7 +166,7 @@ class FstabPopUp {
 		// FIXME: use sudo if configured and fails
 		if (g_mkdir_with_parents(response, 0770) <0){
 		    gchar *m = g_strdup_printf("\nmkdir %s: %s\n", response, strerror(errno));
-		    Gtk<Type>::quickHelp (GTK_WINDOW(mainWindow), m, "dialog-error");
+		    Dialogs<Type>::quickHelp (GTK_WINDOW(mainWindow), m, "dialog-error");
 		    g_free(response);
 		    return;
 		}

@@ -1370,7 +1370,7 @@ public:
                 auto text = g_strdup_printf("%s is not installed in the path.", "sudo");
                 auto markup = g_strdup_printf("\n\n<span size =\"larger\" color=\"red\"%s</span>\n\n",
                        text); 
-                Gtk<Type>::quickHelp(GTK_WINDOW(mainWindow), markup, "face-sick-symbolic");
+                Dialogs<Type>::quickHelp(GTK_WINDOW(mainWindow), markup, "face-sick-symbolic");
                 ERROR("fstab/view.hh::%s\n", text);
                 g_free(text);
                 g_free(markup);
@@ -1409,11 +1409,11 @@ public:
 	arg[i++] = mountPoint;
 	arg[i++] = NULL;
 
-	auto message = g_strdup_printf((mounted)?
+	auto command = g_strdup_printf((mounted)?
 		    _("Unmounting %s"):_("Mounting %s"), path);
  
         new (CommandResponse<Type>)(command,"system-run", arg);
-        g_free(message);
+        g_free(command);
 
 
         return TRUE;
