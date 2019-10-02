@@ -59,6 +59,18 @@ public:
         auto dndData = (const char *)gtk_selection_data_get_data (selection_data);
 
         gchar **files = g_strsplit(dndData, "\n", -1);
+        auto more = (files[1] != NULL && strstr(files[1], "file://"))?
+                g_strdup_printf("[+ %s]", _("more")):
+                g_strdup("");
+        TRACE("%s %s %s ---> %s\n", message, files[0], more, target? target: view->path());
+
+	    
+        Print<Type>::print(view->page()->output(), "green", 
+                    g_strdup_printf("%s %s %s ---> %s\n", 
+                    message, files[0], more, target? target: view->path())
+                );
+
+        g_free(more);
         auto result = Gio<Type>::executeURL(files, target? target: view->path(), mode);
         if (files) g_strfreev(files);
         return result;
