@@ -858,9 +858,18 @@ public:
 
     /////////////////////   gsignals  /////////////////////////
 /////////////////////////////////  DnD   ///////////////////////////
+    static gint
+    dragOffset(GtkWidget *widget){
+        auto pathbar = GTK_WIDGET(g_object_get_data(G_OBJECT(widget), "pathbar"));
+        GtkAllocation allocation;
+        gtk_widget_get_allocation(pathbar, &allocation);
+        TRACE("pathbar height = %d\n", allocation.height);
+        return allocation.height;
+    }
+    
     static gboolean
     DragMotion (GtkWidget * widget, 
-            GdkDragContext * dc, gint drag_x, gint drag_y, 
+            GdkDragContext * dc, gint dragX, gint dragY, 
             guint t, gpointer data) {
 	static gboolean highlighted = FALSE;
 	auto view = (View<Type> *)data;
@@ -868,7 +877,6 @@ public:
         gtk_widget_hide(GTK_WIDGET(xf::popupImage));
 
         GtkTreePath *tpath;
-
                                         
         gint actions = gdk_drag_context_get_actions(dc);
 	TRACE("motion_notify_event, dragmode= %d\n", actions);
@@ -878,27 +886,30 @@ public:
             gdk_drag_status (dc, GDK_ACTION_MOVE, t);
 	} else if(actions == GDK_ACTION_COPY){
             gdk_drag_status (dc, GDK_ACTION_COPY, t);
-	    dragIcon = "edit-copy/SE/list-add/4.0/220";
+	    dragIcon = "text-x-generic/SE/list-add/4.0/220";
 	} else if(actions == GDK_ACTION_LINK){
             gdk_drag_status (dc, GDK_ACTION_LINK, t);
-	    dragIcon = "edit-copy/SE/emblem-symbolic-link/4.0/220";
+	    dragIcon = "text-x-generic/SE/emblem-symbolic-link/4.0/220";
 	}else{
             gdk_drag_status (dc, GDK_ACTION_MOVE, t);
 	}
-#ifdef FREEBSD_FOUND
+
 	GdkPixbuf *pixbuf = Pixbuf<Type>::get_pixbuf(dragIcon, -24);
-	gtk_drag_set_icon_pixbuf (context, pixbuf,1,1);
-#endif
+	gtk_drag_set_icon_pixbuf (context, pixbuf,1,24);
             
-       // Treeview or iconview?
-        gboolean folderDND = isTreeView?
-	    gtk_tree_view_get_path_at_pos (view->treeView(),
-                               drag_x, (drag_y-24 >0)?drag_y-24:0, 
-			       &tpath, NULL, NULL, NULL):
-	    gtk_icon_view_get_dest_item_at_pos (view->iconView(),
-                                        drag_x, drag_y,
-                                        &tpath,
-                                        NULL);
+        gboolean folderDND = FALSE;
+        auto viewDragY = dragY - dragOffset(widget);
+        if (viewDragY >= 0) {
+            // Treeview or iconview?
+            folderDND = isTreeView?
+                gtk_tree_view_get_path_at_pos (view->treeView(),
+                                   dragX, viewDragY, 
+                                   &tpath, NULL, NULL, NULL):
+                gtk_icon_view_get_dest_item_at_pos (view->iconView(),
+                                            dragX,viewDragY,
+                                            &tpath,
+                                            NULL);
+        }
 	if (!folderDND) {
 	    if (highlighted) {
 		highlighted=FALSE;
@@ -996,12 +1007,56 @@ public:
             gtk_drag_set_icon_pixbuf (context, pixbuf,1,1);
         }*/
     }
-//receiver:
 
+//receiver:
+private:
+    static gchar *
+    getDnDTarget(View<Type> *view, gint dragX, gint viewDragY){
+	GtkTreeIter iter;
+        gchar *target = NULL;
+        GtkTreePath *tpath=NULL;
+        if (isTreeView) {
+            if (gtk_tree_view_get_path_at_pos (view->treeView(),
+                               dragX, viewDragY, 
+                               &tpath, NULL, NULL, NULL)){
+                gtk_tree_model_get_iter (view->treeModel(), &iter, tpath);
+                gtk_tree_model_get (view->treeModel(), &iter, PATH, &target, -1);
+                if (g_file_test(target, G_FILE_TEST_IS_DIR)){
+                    gtk_tree_view_set_drag_dest_row (view->treeView(),
+                             tpath,GTK_TREE_VIEW_DROP_INTO_OR_AFTER);
+                } else {
+                    g_free(target);
+                    target = g_strdup(view->path());
+                }
+            } else {
+                target = g_strdup(view->path());
+            }
+        } else {
+            if (gtk_icon_view_get_item_at_pos (view->iconView(),
+                                       dragX, viewDragY, &tpath, NULL))
+            {
+                gtk_tree_model_get_iter (view->treeModel(), &iter, tpath);
+                gtk_tree_model_get (view->treeModel(), &iter, PATH, &target, -1);	
+                TRACE("target1=%s\n", target);
+                if (!g_file_test(target, G_FILE_TEST_IS_DIR)){
+                    g_free(target);
+                    target=NULL;
+                }
+                TRACE("target2=%s\n", target);
+            } else {
+                TRACE("target3=%s\n", target);
+                tpath=NULL;
+            }
+        }    
+        if (tpath) gtk_tree_path_free(tpath);
+        return target;
+    }
+
+public:
     static void
     DragDataReceive (GtkWidget * widget,
                       GdkDragContext * context,
-                      gint x, gint y, 
+                      gint dragX, gint dragY, 
                       GtkSelectionData * selection_data, 
                       guint info, 
                       guint time, 
@@ -1028,45 +1083,23 @@ public:
             return;
         }
 
-        gchar *target = NULL;
-        GtkTreePath *tpath=NULL;
         GtkTreeIter iter;
-        if (isTreeView) {
-            // hacked for xy coordinates differ from treeview coordinates...
-	    if (gtk_tree_view_get_path_at_pos (view->treeView(),
-                               x, (y-24 >0)?y-24:0, 
-			       &tpath, NULL, NULL, NULL)){
-		gtk_tree_model_get_iter (view->treeModel(), &iter, tpath);
-		gtk_tree_model_get (view->treeModel(), &iter, PATH, &target, -1);
-		if (g_file_test(target, G_FILE_TEST_IS_DIR)){
-		    gtk_tree_view_set_drag_dest_row (view->treeView(),
-			     tpath,GTK_TREE_VIEW_DROP_INTO_OR_AFTER);
-		} else {
-		    g_free(target);
-		    target = g_strdup(view->path());
-		}
-	    } else {
-		target = g_strdup(view->path());
-	    }
+        auto viewDragY = dragY - dragOffset(widget);
+        gchar *target = NULL;
+        
+        
+        getDnDTarget(view, dragX, viewDragY);
+
+        if (viewDragY < 0) {
+            DBG("drop into pathbar...\n");
         } else {
-            if (gtk_icon_view_get_item_at_pos (view->iconView(),
-                                       x, y, &tpath, NULL))
-            {
-                gtk_tree_model_get_iter (view->treeModel(), &iter, tpath);
-                gtk_tree_model_get (view->treeModel(), &iter, PATH, &target, -1);	
-                TRACE("target1=%s\n", target);
-                if (!g_file_test(target, G_FILE_TEST_IS_DIR)){
-                    g_free(target);
-                    target=NULL;
-                }
-                TRACE("target2=%s\n", target);
-            } else {
-                TRACE("target3=%s\n", target);
-                tpath=NULL;
-            }
+            target=getDnDTarget(view, dragX, viewDragY);
+        }
+        if (!target){
+            DBG("no DnD target found...\n");
         }
         
-        if (tpath) gtk_tree_path_free(tpath);
+        
         auto dndData = (const char *)gtk_selection_data_get_data (selection_data);
 	TRACE("dndData = \"\n%s\"\n", dndData);
         

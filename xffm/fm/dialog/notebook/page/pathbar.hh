@@ -41,7 +41,7 @@ public:
 	g_object_set_data(G_OBJECT(pb_button), "path", g_strdup("xffm:root"));
     
 	g_signal_connect (G_OBJECT(pb_button) , "button-press-event", EVENT_CALLBACK (pathbar_go), (void *)this);
-	g_signal_connect (G_OBJECT(pb_button) , "enter-notify-event", EVENT_CALLBACK (pathbar_green), (void *)this);
+	g_signal_connect (G_OBJECT(pb_button) , "enter-notify-event", EVENT_CALLBACK (pathbar_white), (void *)this);
 	g_signal_connect (G_OBJECT(pb_button) , "leave-notify-event", EVENT_CALLBACK (pathbar_blue), (void *)this);
 	TRACE("showing pathbar pb_button\n" );
         
@@ -313,8 +313,9 @@ private:
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
     static gboolean
-    pathbar_green (GtkWidget *eventBox,
+    pathbar_white (GtkWidget *eventBox,
                GdkEvent  *event,
                gpointer   data) {
 	Pathbar *pathbar_p = (Pathbar *)data;
@@ -494,8 +495,10 @@ private:
 	    TRACE( "+++***** setting pbpath --> %s\n", pb_path);
 	    g_object_set_data(G_OBJECT(pb_button), "path", g_strdup(pb_path));
 	    g_signal_connect (G_OBJECT(pb_button) , "button-press-event", EVENT_CALLBACK (pathbar_go), (void *)pathbar_p);
-	    g_signal_connect (G_OBJECT(pb_button) , "enter-notify-event", EVENT_CALLBACK (pathbar_green), (void *)pathbar_p);
+	    g_signal_connect (G_OBJECT(pb_button) , "enter-notify-event", EVENT_CALLBACK (pathbar_white), (void *)pathbar_p);
 	    g_signal_connect (G_OBJECT(pb_button) , "leave-notify-event", EVENT_CALLBACK (pathbar_blue), (void *)pathbar_p);
+
+
 	    gtk_widget_show(GTK_WIDGET(pb_button));
 	}
 	g_free(pb_path);

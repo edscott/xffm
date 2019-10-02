@@ -74,6 +74,7 @@ public:
 	set_spinner(FALSE);
 
 	gtk_box_pack_start (pageChild_, this->pathbar(), FALSE, FALSE, 0);
+        g_object_set_data(G_OBJECT(pageChild_), "pathbar", this->pathbar());
 
 	//gtk_widget_show_all(GTK_WIDGET(pageLabelBox_));
 
