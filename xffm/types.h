@@ -26,6 +26,20 @@
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 
+#ifdef ENABLE_NLS
+# include <libintl.h>
+# define _(String) dgettext(GETTEXT_PACKAGE,String)
+# define N_(String)  String
+
+#else
+# warning "Translations not enabled: Gettext not found during configure."
+# define _(String) String
+# define N_(String) String
+# define ngettext(Format1,Format2,N) Format1
+# define textdomain(String) 
+# define bindtextdomain(Domain,Directory)
+#endif
+
 #ifndef DT_BLK
 enum {
     DT_BLK=1,

@@ -1,7 +1,7 @@
 #ifndef XFPIXBUF_HH
 #define XFPIXBUF_HH
-# include <config.h>
-#include <stdlib.h>
+#include "pixbufhash.hh"
+#include "icons.hh"
 
 namespace xf
 {

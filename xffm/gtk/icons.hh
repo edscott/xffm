@@ -4,6 +4,9 @@
 #include <stdlib.h>
 #include <errno.h>
 
+#include "../common/util.hh"
+#include "cairo.hh"
+
 
 #ifndef PREFIX
 # warning "PREFIX not defined: defaulting to /usr/local"

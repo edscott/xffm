@@ -1,6 +1,7 @@
 #ifndef XFGTK_HH
 #define XFGTK_HH
 
+#include "pixbuf.hh"
 
 static GHashTable *iconname_hash=NULL;
 
