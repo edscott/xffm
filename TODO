@@ -1,3 +1,10 @@
+For 0.92
+  Add correct translations to customini.hh
+  Use ~/.config/gtk3/bookmarks for bookmarks along with ini file
+    -- Allow removal and adding of gtk3 bookmarks
+    -- emblem broken bookmark icons (to allow easy cleanup)
+  Remove the unmount option in the filechooser (only mountpoints...)  
+
 For 0.91
 
 click item, open with combo dialog selected gvim, press ok. bug:gvim does not open file... sometimes, FreeBSD. May not be related to xffm
