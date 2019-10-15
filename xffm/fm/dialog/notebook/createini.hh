@@ -1,30 +1,12 @@
 
 #ifndef CREATEINI_H
 #define CREATEINI_H
-#include <glib.h>
-#include <gtk/gtk.h>
-#include <gdk/gdkx.h>
 #include <vector>
-
-#include "../xffm/types.h"
-#include "../xffm/gtk/gtk.hh"
-
-# undef TRACE
-# define TRACE(...)   { (void)0; }
-//# define TRACE(...)  fprintf(stderr, "TRACE> "); fprintf(stderr, __VA_ARGS__);
-# undef DBG
-//# define DBG(...)   { (void)0; }
-# define DBG(...)  {fprintf(stderr, "DBG> "); fprintf(stderr, __VA_ARGS__);}
-# undef ERROR
-# define ERROR(...)  {fprintf(stderr, "*** ERROR> "); fprintf(stderr, __VA_ARGS__);}
-# undef WARN
-# define WARN(...)  {fprintf(stderr, "warning> "); fprintf(stderr, __VA_ARGS__);}
-#include "../xffm/gtk/gtk.hh"
 
 namespace xf {
 template <class Type> 
 class iniCreator {
-    GtkWindow *mainWindow_;
+    GtkWindow *creatorWindow_;
     gint dialogMinW_, dialogNatW_, dialogMinH_, dialogNatH_;
     GtkRequisition minimumSize_;
     GtkRequisition naturalSize_;
@@ -47,10 +29,10 @@ class iniCreator {
 
 public:
     ~iniCreator(void){
-        gtk_widget_hide(GTK_WIDGET(mainWindow_));
+        gtk_widget_hide(GTK_WIDGET(creatorWindow_));
         while (gtk_events_pending()) gtk_main_iteration();
         gtk_main_quit();
-        _exit(123);
+        //_exit(123);
     }
 
     iniCreator(gint max=10):options_(0), filename_(NULL)
@@ -59,16 +41,16 @@ public:
         
         optionBox_.reserve(max);
 
-        mainWindow_ = GTK_WINDOW(gtk_window_new(GTK_WINDOW_TOPLEVEL));
-        g_signal_connect (G_OBJECT (mainWindow_), "delete-event", G_CALLBACK (deleteEvent), this);
-        gtk_widget_get_preferred_width (GTK_WIDGET(mainWindow_), &dialogMinW_, &dialogNatW_);
-        gtk_widget_get_preferred_height (GTK_WIDGET(mainWindow_), &dialogMinH_, &dialogNatH_);
-        gtk_window_set_type_hint(mainWindow_, GDK_WINDOW_TYPE_HINT_DIALOG);
-        //setWindowMaxSize(mainWindow_);
-        gtk_window_set_position (mainWindow_, GTK_WIN_POS_MOUSE);
+        creatorWindow_ = GTK_WINDOW(gtk_window_new(GTK_WINDOW_TOPLEVEL));
+        g_signal_connect (G_OBJECT (creatorWindow_), "delete-event", G_CALLBACK (deleteEvent), this);
+        gtk_widget_get_preferred_width (GTK_WIDGET(creatorWindow_), &dialogMinW_, &dialogNatW_);
+        gtk_widget_get_preferred_height (GTK_WIDGET(creatorWindow_), &dialogMinH_, &dialogNatH_);
+        gtk_window_set_type_hint(creatorWindow_, GDK_WINDOW_TYPE_HINT_DIALOG);
+        //setWindowMaxSize(creatorWindow_);
+        gtk_window_set_position (creatorWindow_, GTK_WIN_POS_MOUSE);
 
         auto vbox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_VERTICAL, 1));
-        gtk_container_add (GTK_CONTAINER(mainWindow_), GTK_WIDGET(vbox));
+        gtk_container_add (GTK_CONTAINER(creatorWindow_), GTK_WIDGET(vbox));
         auto headerbox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 1));
         auto topbox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_VERTICAL, 1));
         auto footerbox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 1));
@@ -107,25 +89,19 @@ public:
         g_signal_connect (G_OBJECT (save), "clicked", G_CALLBACK (saveIniFile), this);
 
         setDefaultSize();
-        gtk_window_present (mainWindow_);
+        gtk_window_present (creatorWindow_);
         
         while (gtk_events_pending()) gtk_main_iteration();
-        gtk_widget_show_all(GTK_WIDGET(mainWindow_));
+        gtk_widget_show_all(GTK_WIDGET(creatorWindow_));
 
         for (gint i=0; i<maxOptions_; i++){
             optionBox_[i] = addOptionBox(bottombox_, i);
         }
 
-        //run();
         return ;
 
     }
-    GtkWindow *window(void) {return mainWindow_;}
-
-    void run(void){
-        //gtk_widget_show_all(GTK_WIDGET(mainWindow_));
-        gtk_main();
-    }
+    GtkWindow *window(void) {return creatorWindow_;}
 
 private:
 
@@ -217,12 +193,12 @@ private:
 	geometry.max_height = h_return -25;
         maximumSize_.width = geometry.max_width;
         maximumSize_.height = geometry.max_height;
-	gtk_window_set_geometry_hints (GTK_WINDOW(mainWindow_), 
-                GTK_WIDGET(mainWindow_), &geometry, GDK_HINT_MAX_SIZE);
+	gtk_window_set_geometry_hints (GTK_WINDOW(creatorWindow_), 
+                GTK_WIDGET(creatorWindow_), &geometry, GDK_HINT_MAX_SIZE);
     }
 
     void setDefaultSize(void){
-        gtk_widget_get_preferred_size (GTK_WIDGET(mainWindow_),
+        gtk_widget_get_preferred_size (GTK_WIDGET(creatorWindow_),
                                &minimumSize_,
                                &naturalSize_);
         setWindowMaxSize();
@@ -230,7 +206,7 @@ private:
                 minimumSize_.width, minimumSize_.height,
                 naturalSize_.width, naturalSize_.height,
                 maximumSize_.width, maximumSize_.height);
-        gtk_window_set_default_size(mainWindow_, 300, 400);
+        gtk_window_set_default_size(creatorWindow_, 300, 400);
     }
 
     static void exitApp (GtkButton *widget,
@@ -266,9 +242,9 @@ private:
 
         g_free(wd);
 
-        gtk_widget_set_sensitive(GTK_WIDGET(mainWindow_), FALSE);
+        gtk_widget_set_sensitive(GTK_WIDGET(creatorWindow_), FALSE);
         gint response = gtk_dialog_run(dialog);
-        gtk_widget_set_sensitive(GTK_WIDGET(mainWindow_), TRUE);
+        gtk_widget_set_sensitive(GTK_WIDGET(creatorWindow_), TRUE);
 
         if(response == GTK_RESPONSE_ACCEPT) {
             gchar *path = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
@@ -388,7 +364,7 @@ private:
     
     void saver(void){
         auto dialog = gtk_file_chooser_dialog_new (_("Save File"),
-                                              this->mainWindow_,
+                                              this->creatorWindow_,
                                               GTK_FILE_CHOOSER_ACTION_SAVE,
                                               _("Cancel"),
                                               GTK_RESPONSE_CANCEL,
@@ -479,7 +455,7 @@ public:
 
 };
 } // end namespace xf
-
+#if 0
 int main(int argc, gchar **argv){
 	
     gtk_init (&argc, &argv);
@@ -493,8 +469,6 @@ int main(int argc, gchar **argv){
 
     
     auto creator = new (xf::iniCreator<double>)(max);
-    creator->run();
-    //gtk_widget_show_all(GTK_WIDGET(creator->window()));
     gtk_main();
 
     return 0;
@@ -502,3 +476,4 @@ int main(int argc, gchar **argv){
 }
 #endif
 
+#endif

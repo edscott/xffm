@@ -1,5 +1,10 @@
 #ifndef XF_VBUTTONBOX
 #define XF_VBUTTONBOX
+
+#ifdef ENABLE_CUSTOM_RESPONSE
+#include "createini.hh"
+#endif
+
 namespace xf {
     
 
@@ -60,6 +65,10 @@ class VButtonBox {
 	    DBG("response=%s\n", response);
 	}
 	g_free(response);
+    }
+    static void newCustomButton(GtkButton *button, void *data){
+        auto creator = new (xf::iniCreator<Type>)(20);
+        gtk_main();
     }
 
     static void addCustomButton(GtkButton *button, void *data){
@@ -203,6 +212,11 @@ public:
 
 
 #ifdef ENABLE_CUSTOM_RESPONSE
+        auto newCustom = 
+	    gtk_c::newButton("document-new", _("FIXME New custom content"));
+	g_signal_connect(G_OBJECT(newCustom), "clicked", G_CALLBACK(newCustomButton), NULL);
+	gtk_box_pack_end (vButtonBox_, GTK_WIDGET(newCustom), FALSE, FALSE, 0); 
+        
         auto addCustom = 
 	    gtk_c::newButton("list-add", _("Add custom content"));
 	g_signal_connect(G_OBJECT(addCustom), "clicked", G_CALLBACK(addCustomButton), NULL);
