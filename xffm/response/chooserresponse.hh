@@ -26,9 +26,9 @@ class ChooserResponse {
         gtk_file_chooser_set_current_folder ((GtkFileChooser *) dialog, wd);
 
 
-        gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
+        //gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
         gint response = gtk_dialog_run(dialog);
-        gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
+        //gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
 
         if(response == GTK_RESPONSE_ACCEPT) {
             gchar *filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
@@ -44,20 +44,26 @@ class ChooserResponse {
 
 public:
   
-/*    static void
-    folderChooser(GtkEntry *entry, const gchar *text) {
-         chooser(entry, text, GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER);
-    }*/
-
     static void
     folderChooser(GtkButton *button, void *data) {
+        auto entry = GTK_ENTRY(data);
+        chooser(entry, _("Choose directory"), GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER);
+    }
+    static void
+    fileChooser(GtkButton *button, void *data) {
+        auto entry = GTK_ENTRY(data);
+        chooser(entry, _("Choose file"), GTK_FILE_CHOOSER_ACTION_OPEN);
+    }
+    
+    static void
+    localfolderChooser(GtkButton *button, void *data) {
         auto entryResponse = (EntryResponse<Type> *)data;
         entryResponse->unsetTimeout();
         chooser(GTK_ENTRY(entryResponse->entry()), _("Choose directory"), GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER);
         entryResponse->resetTimeout();
     }
     static void
-    fileChooser(GtkButton *button, void *data) {
+    localfileChooser(GtkButton *button, void *data) {
         auto entryResponse = (EntryResponse<Type> *)data;
         entryResponse->unsetTimeout();
         chooser(GTK_ENTRY(entryResponse->entry()), _("Choose file"), GTK_FILE_CHOOSER_ACTION_OPEN);
@@ -90,7 +96,7 @@ public:
         EntryChooser<Type>(parent, windowTitle, icon, TRUE)
     {
         g_signal_connect (G_OBJECT(this->chooserButton_), 
-                        "clicked", BUTTON_CALLBACK (ChooserResponse<Type>::fileChooser), 
+                        "clicked", BUTTON_CALLBACK (ChooserResponse<Type>::localfileChooser), 
                         (gpointer) this);
     }
 };
@@ -102,7 +108,7 @@ public:
         EntryChooser<Type>(parent, windowTitle, icon)
     {
         g_signal_connect (G_OBJECT(this->chooserButton_), 
-                        "clicked", BUTTON_CALLBACK (ChooserResponse<Type>::folderChooser), 
+                        "clicked", BUTTON_CALLBACK (ChooserResponse<Type>::localfolderChooser), 
                         (gpointer) this);
     }
 };
@@ -130,7 +136,7 @@ public:
         ComboChooser<Type>(parent, windowTitle, icon, TRUE)
     {
         g_signal_connect (G_OBJECT(this->chooserButton_), 
-                        "clicked", BUTTON_CALLBACK (ChooserResponse<Type>::fileChooser), 
+                        "clicked", BUTTON_CALLBACK (ChooserResponse<Type>::localfileChooser), 
                         (gpointer) this->comboEntry());
     }
 };
@@ -142,7 +148,7 @@ public:
         ComboChooser<Type>(parent, windowTitle, icon, FALSE)
     {
         g_signal_connect (G_OBJECT(this->chooserButton_), 
-                        "clicked", BUTTON_CALLBACK (ChooserResponse<Type>::folderChooser), 
+                        "clicked", BUTTON_CALLBACK (ChooserResponse<Type>::localfolderChooser), 
                         (gpointer) this);
     }
 };

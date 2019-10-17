@@ -67,6 +67,7 @@ public:
     
     void unsetTimeout(void){
         lastTimeout_ = timeout_;
+        DBG("timeoutProgress_ = %p\n", timeoutProgress_);
         gtk_progress_bar_set_fraction(timeoutProgress_, 0.0);
         timeout_ = 0;
     }
