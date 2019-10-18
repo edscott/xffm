@@ -4,6 +4,8 @@ For 0.92
     -- Allow removal and adding of gtk3 bookmarks
     -- emblem broken bookmark icons (to allow easy cleanup)
   Remove the unmount option in the filechooser (only mountpoints...)  
+  bug: do a rename and use source as target. source disappears and backup appears.
+
 
 For 0.91
 
