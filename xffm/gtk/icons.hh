@@ -284,8 +284,9 @@ public:
 		gchar *emblem = p[1];
 		gchar *scale = p[2];
 		gchar *alpha = p[3];
-		GdkPixbuf *tag = PixbufHash<Type>::find_in_pixbuf_hash (emblem, 48);
-		if (!tag) tag = get_theme_pixbuf(emblem, 48);
+                auto size = gdk_pixbuf_get_width(base_pixbuf);
+		GdkPixbuf *tag = PixbufHash<Type>::find_in_pixbuf_hash (emblem, size);
+		if (!tag) tag = get_theme_pixbuf(emblem, size);
 		if (tag) {
 		    Cairo<Type>::insert_pixbuf_tag (pixbuf_context, tag, base_pixbuf, position, scale, alpha);
 		} else {

@@ -1,5 +1,6 @@
 #ifndef XF_ROOTMODEL__HH
 # define XF_ROOTMODEL__HH
+#include "bookmarks.hh"
 namespace xf
 {
 
@@ -7,7 +8,7 @@ template <class Type> class Emerge;
 template <class Type> class Pacman;
 template <class Type> class Pkg;
 template <class Type>
-class RootModel  {
+class RootModel {
 
     using pixbuf_c = Pixbuf<double>;
     using util_c = Util<double>;
@@ -17,6 +18,7 @@ public:
     static gboolean
     loadModel (GtkTreeModel *treeModel)
     {
+        Bookmarks<Type>::initBookmarks();
 	TRACE("mk_tree_model:: model = %p\n", treeModel);
         while (gtk_events_pending()) gtk_main_iteration();
  	GtkTreeIter iter;
@@ -194,23 +196,25 @@ public:
 	g_free(highlight_name);
     }
 
-
     static void
     addLocalBookmarks(GtkTreeModel *treeModel){
  	GtkTreeIter iter;
-        gchar **bookMarks = getBookmarks();
-        if (!bookMarks) return;
-        gchar **p;
-        for (p=bookMarks; p && *p; p++){
+        auto list = Bookmarks<Type>::bookmarksList();
+        for (auto l=list; l && l->data; l=l->next){
             // Bookmarks in settings.ini
             // local bookmarks:
-            TRACE("adding bookmark %p -> %s\n", p, *p);
-             if (g_path_is_absolute(*p)) {
-                if (!g_file_test(*p, G_FILE_TEST_EXISTS)) continue;
-                auto basename = g_path_get_basename(*p);
+            auto p = (bookmarkItem_t *)l->data;
+            if (!p->path) continue;
+            TRACE("adding bookmark %p -> %s\n", p, p->path);
+             if (g_path_is_absolute(p->path)) {
+                const gchar *icon_name = "emblem-documents/SE/bookmark-new/2.0/220";
+                if (!g_file_test(p->path, G_FILE_TEST_EXISTS)) {
+                    DBG("Bookmark %s does not exist\n", p->path);
+                    icon_name = "emblem-documents/SE/edit-delete/2.0/220";
+                }
+                auto basename = g_path_get_basename(p->path);
                 auto utf_name = util_c::utf_string(basename);
              
-                const gchar *icon_name = "emblem-documents/SE/bookmark-new/2.0/220";
 	        auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_EMBLEM, NULL);
 
                 auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
@@ -220,7 +224,7 @@ public:
                 gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
                 gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
                         DISPLAY_NAME, utf_name,
-                        PATH, *p,
+                        PATH, p->path,
                         ICON_NAME, icon_name,
                         TREEVIEW_PIXBUF, treeViewPixbuf, 
                         DISPLAY_PIXBUF, normal_pixbuf,
@@ -233,106 +237,23 @@ public:
 	        g_free(highlight_name);
              }
         }
-        g_strfreev(bookMarks);
 
     }
-
-    static gchar **
-    getBookmarks(void){
-        gsize size;
-        gchar **keys = Settings<Type>::getKeys("Bookmarks", &size);
-        if (!keys) return NULL;
-        auto bookMarks = (gchar **)calloc(size+1, sizeof(gchar *));
-        if (!bookMarks){
-            ERROR("fm/view/root/model.hh::calloc: %s\n", strerror(errno));
-            exit(1);
-        }
-        gchar **p;
-        gint i=0;
-        for (p=keys; p && *p; p++){
-            bookMarks[i++] = Settings<Type>::getSettingString("Bookmarks", *p);
-        }
-        g_strfreev(keys);
-        return bookMarks;
+    static gboolean
+    isBookmarked(const gchar *path){
+       return Bookmarks<Type>::isBookmarked(path);
     }
 
     static gboolean
-    addBookmark(const gchar *path)
-    {
-        gchar *item = findBookmarkKey(path);
-	if (item){
-            TRACE("%s is already bookmarked (%s)\n", path, item);
-            g_free(item);
-            return FALSE;
-        }
-        
-        gint i=0;
-	do {
-	    item = g_strdup_printf("item-%0d", i++);
-	    if (Settings<Type>::keyFileHasGroupKey("Bookmarks", item)) {
-                g_free(item);
-                continue;
-            }
-            break;
-        } while (TRUE);
-	Settings<Type>::setSettingString("Bookmarks", item, path);
-	g_free(item);
-        return TRUE;
+    addBookmark(const gchar *path){
+        return Bookmarks<Type>::addBookmark(path);
     }
 
     static gboolean
     removeBookmark(const gchar *path)
     {
-	gchar *item = findBookmarkKey(path);
-	if (!item) return FALSE;
-        Settings<Type>::removeKey("Bookmarks", item);
-        g_free(item);
-        return TRUE;
+        return Bookmarks<Type>::removeBookmark(path);
     }
-
-    static gboolean
-    isBookmarked(const gchar *path){
-        gchar *key = findBookmarkKey(path);
-        if (!key) return FALSE;
-        g_free(key);
-        return TRUE;
-    }
-
-private:
-    static gchar *
-    findBookmarkKey(const gchar *path){
-        auto keys = Settings<Type>::getKeys("Bookmarks");
-        if (!keys) return NULL;
-        gchar **p;
-        for (p=keys; p && *p; p++){
-            gchar *g = Settings<Type>::getSettingString("Bookmarks", *p);
-            if (strcmp(g, path) ==0){
-                gchar *key = g_strdup(*p);
-                g_free(g);
-                g_strfreev(keys);
-                return key;
-            }
-            g_free(g);
-        }
-        g_strfreev(keys);
-        return NULL;
-    }
-
-/*	gint i=0;
-	gchar *item;
-	do {
-	    item = g_strdup_printf("item-%0d", i++);
-	    if (Settings<Type>::keyFileHasGroupKey("Bookmarks", item)){
-		gchar *g = Settings<Type>::getSettingString("Bookmarks", item);
-		if (strcmp(g, path) ==0){
-		    g_free(g);
-		    return item;
-		}
-	    } else break;
-	} while(TRUE);
-        return NULL;
-    }
-*/
 
 };
 }

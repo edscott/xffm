@@ -48,6 +48,7 @@
 #include <memory>
 
 #define URIFILE "file://"
+#define USER_DIR 		g_get_home_dir()
 
 static const gchar *xffmProgram;
 static const gchar *xffindProgram;

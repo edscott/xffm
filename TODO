@@ -1,8 +1,8 @@
 For 0.92
   Add correct translations to customini.hh
-  Use ~/.config/gtk3/bookmarks for bookmarks along with ini file
-    -- Allow removal and adding of gtk3 bookmarks
-    -- emblem broken bookmark icons (to allow easy cleanup)
+  done: Use ~/.config/gtk3/bookmarks for bookmarks along with ini file
+  done:  -- Allow removal and adding of gtk3 bookmarks
+  done:  -- emblem broken bookmark icons (to allow easy cleanup)
   Remove the unmount option in the filechooser (only mountpoints...)  
   bug: do a rename and use source as target. source disappears and backup appears.
 

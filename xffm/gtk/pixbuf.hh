@@ -36,11 +36,9 @@ public:
     // pixbuf hashtable.
     static GdkPixbuf *
     get_pixbuf(const gchar *icon_name, gint size){
-	//if (strstr(icon_name, "png")) TRACE("get_pixbuf(%s)\n", icon_name);
 	if (!icon_name){
 	    return NULL;
 	    //ERROR("pixbuf_c::get_pixbuf() icon_name is NULL.\n");
-	    //return get_pixbuf("image-missing", size);
 	}
 	// if item is not found in hash, it will be created and inserted into hash 
 	// (whenever possible)
