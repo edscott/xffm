@@ -1,6 +1,7 @@
 #ifndef XF_LOCALICONS__HH
 # define XF_LOCALICONS__HH
 
+#define DEFAULT_ICON "text-x-generic"
 namespace xf
 {
 template <class Type> class FstabView;
@@ -38,7 +39,7 @@ private:
 	}
 
 	if (g_path_is_absolute(name)) return name; // image previews (no emblem)
-	TRACE("basic iconname: %s --> %s\n", basename, name);
+	TRACE("getIconname(%s,%s) --> %s\n", basename, mimetype, name);
         gchar *emblem = getEmblem(path, basename,  d_type, st_p);
         TRACE("emblem: %s --> %s\n",  basename, emblem);
         gchar *iconname = g_strconcat(name, emblem, NULL);
@@ -106,7 +107,7 @@ private:
         // UNIX domain socket:
 	if (strcmp(mimetype, "inode/socket")==0) return  g_strdup("network-wired-symbolic");
         if (strcmp(mimetype, "inode/regular")==0) {
-            return g_strdup("text-x-generic#a9f7eb");
+            return g_strdup(DEFAULT_ICON);
         }
 
         auto iconname = specificIconName(path, mimetype);
@@ -115,13 +116,13 @@ private:
             if (!Icons<Type>::iconThemeHasIcon(iconname)) {
                 DBG("LocalIcons::specificIconName %s not available\n", iconname);
                 g_free(iconname);
-                iconname=g_strdup("text-x-generic");
+                iconname=g_strdup(DEFAULT_ICON);
             }
         }
         if (iconname) return iconname;
         
         TRACE("getBasicIconname(): %s mime=%s \n", path, mimetype);
- 	return g_strdup("dialog-question");
+ 	return g_strdup(DEFAULT_ICON);
      }
 
     static gchar *
@@ -129,6 +130,7 @@ private:
         if (Gtk<Type>::isImage(mimetype)) {
             return g_strdup(path);
         }
+        TRACE("specificIconName(%s, %s)\n", path, mimetype);
         static const gchar *type1[] = {"image", "text", "audio", "font", "video", NULL};
         for (auto p=type1; p && *p; p++){
             if (strncmp(mimetype, *p, (size_t)strlen("*p"))==0){
@@ -195,7 +197,10 @@ private:
                 return g_strdup("x-office-presentation");
             }
 
+            if (strstr(type, "x-trash")) return g_strdup(DEFAULT_ICON);
             return g_strdup("application-x-executable");
+
+
         }
         return  NULL;            
     }
@@ -231,7 +236,7 @@ private:
             return g_strdup("#887fd3");
         }
         if (backupType(d_name)){
-            return g_strdup("#cc7777");
+            return g_strdup("#999999");
         }
         return g_strdup("");
     }

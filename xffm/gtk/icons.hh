@@ -215,7 +215,7 @@ public:
 	if (!strchr(icon_name, '*') && !strchr(icon_name, '#') && !strchr(icon_name, '/')){
 	    return NULL;
 	}
-
+        TRACE("composite_icon(%s, %d)\n", icon_name,size); 
 	auto name = g_strdup(icon_name);
 	auto label = strchr(name, '*');
 	auto color = strchr(name, '#');
