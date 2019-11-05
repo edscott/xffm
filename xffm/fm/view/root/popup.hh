@@ -1,6 +1,10 @@
 #ifndef XF_ROOTPOPUP_HH
 # define XF_ROOTPOPUP_HH
 #include "model.hh"
+
+#ifndef FREEBSD_FOUND
+# include "../fuse/ecryptfs.hh"
+#endif
 namespace xf
 {
 
@@ -118,10 +122,22 @@ private:
 
     static GtkMenu *createPopUp(void){
          menuItem_t item[]={
-            //{N_("Add bookmark"), (void *)BasePopUp<Type>::noop, NULL, NULL},
-            {NULL,NULL,NULL, NULL}};
+            {"Add bookmark", (void *)menuAddBookmark, NULL, NULL},
+            {"Ecryptfs (EFS)", (void *)menuAddEFS, NULL, NULL},
+            {NULL,NULL,NULL, NULL}
+         };
+        const gchar *key[]={
+            "Add bookmark",
+            "Ecryptfs (EFS)",
+            NULL
+        };
+        const gchar *keyIcon[]={
+            "list-add",
+            "list-add",
+            NULL
+        };
 
-        auto popup = new(Popup<Type>)(item);
+        auto popup = new(Popup<Type>)(item, key, keyIcon, TRUE);
         rootPopUp = popup->menu();
 
         auto text = g_strdup_printf("Xffm+-%s", VERSION);
@@ -158,6 +174,68 @@ private:
         g_free(text);
         
         return rootItemPopUp;
+    }
+
+    static void
+    menuAddEFS(GtkMenuItem *menuItem, gpointer data)
+    {
+        DBG("menuAddEFS\n");
+        auto efs = new(EFS<Type>)(NULL);
+	gint response  = gtk_dialog_run(efs->dialog());
+        DBG("efs response=%d\n", response);
+        //menuMarker(menuItem, data, 1);
+    }
+    static void
+    menuAddBookmark(GtkMenuItem *menuItem, gpointer data)
+    {
+        menuMarker(menuItem, data, 0);
+    }
+
+    static void
+    menuMarker(GtkMenuItem *menuItem, gpointer data, gint which)
+    {
+        // File chooser
+        const gchar *text = _("Add bookmark");
+        const gchar *defDir = NULL;
+        switch (which) {
+            case 1: // FUSE Ecrypt filesystem
+                text = _("Ecrypt Volume");
+                defDir = _("private");
+                break;
+            default:
+                break;
+        }
+        auto icon = "list-add";
+        auto entryResponse = new(EntryFolderResponse<Type>)(GTK_WINDOW(mainWindow), text, icon);        
+
+        entryResponse->setEntryLabel(_("Specify Output Directory..."));
+        
+
+        gchar *dirname = g_build_filename(g_get_home_dir(), defDir, NULL);
+        entryResponse->setEntryDefault(dirname);
+        entryResponse->setEntryBashFileCompletion(g_get_home_dir());
+        entryResponse->setInLineCompletion(1);
+        g_free(dirname);
+        
+        auto response = entryResponse->runResponse();
+        if (response){
+            response = LocalPopUp<Type>::ckDir(response);
+            if (!response) return;
+ 	    g_strstrip(response);
+            if (!strlen(response))return;
+            switch (which) {
+                case 1:
+                    break;
+                default:
+                    RootModel<Type>::addBookmark(response);
+                    break;
+            }
+            g_free(response);
+            auto view =  (View<Type> *)g_object_get_data(G_OBJECT(data), "view");
+            view->reloadModel();
+       }
+       return;
+        
     }
 
     static void

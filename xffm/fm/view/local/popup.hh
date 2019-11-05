@@ -419,6 +419,7 @@ private:
 
     static void
     openWithDialog(void){
+        TRACE("openWithDialog(void)\n");
 	auto v2 = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(localItemPopUp), "Open with"));
         gtk_widget_show(GTK_WIDGET(v2));
 	gtk_widget_set_sensitive(GTK_WIDGET(v2), TRUE);
@@ -1141,7 +1142,7 @@ public:
 
     static gchar *
     ckDir(gchar *response){
-        DBG("ckDir(%s)\n", response);
+        TRACE("ckDir(%s)\n", response);
 	if (g_file_test(response, G_FILE_TEST_IS_DIR)) return response;
         if (g_file_test(response, G_FILE_TEST_EXISTS)){
             Dialogs<Type>::quickHelp(mainWindow, _("Not a directory"), 
@@ -1255,33 +1256,64 @@ public:
     openWith(GtkMenuItem *menuItem, gpointer data)
     {	
 	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
-	gchar *mimetype = Mime<Type>::mimeType(path);
-	// auto mimetype = (const gchar *)g_object_get_data(G_OBJECT(data), "mimetype");
-        gboolean multiple = FALSE;
-        gchar *mpath = g_strdup(path);
-        for (char *p = mpath; p && *p; p++){
-            if (*p=='\'') {
-                multiple = TRUE;
-                *p = '\n';
-            }
+        TRACE("openWith menuItem: %s\n", path);
+
+        // get current view
+	auto view = (View<Type> *)g_object_get_data(G_OBJECT(data), "view");
+        // get selection
+        //  single or multiple item selected?
+        GList *selectionList;
+        if (isTreeView){
+            auto treeModel = view->treeModel();
+            auto selection = gtk_tree_view_get_selection (view->treeView());
+            selectionList = gtk_tree_selection_get_selected_rows (selection, &treeModel);
+        } else {
+            selectionList = gtk_icon_view_get_selected_items (view->iconView());
         }
+        view->setSelectionList(selectionList);
+        gboolean multiple = (g_list_length(selectionList) > 1);
+
+        gchar *mpath = NULL;
+        gchar *mimetype = NULL;
+	gchar *defaultApp = NULL;
+	if (multiple) {
+            for(auto tmp = selectionList; tmp && tmp->data; tmp = tmp->next) {
+                GtkTreePath *tpath = (GtkTreePath *)tmp->data;
+                gchar *path;
+                GtkTreeIter iter;
+                gtk_tree_model_get_iter (view->treeModel(), &iter, tpath);
+                gtk_tree_model_get (view->treeModel(), &iter, PATH, &path, -1);
+                TRACE("multiple path: %s\n", path);
+                if (!mpath){
+                    mpath = g_strdup("");
+	            defaultApp = defaultExtApp(path);
+                    mimetype = Mime<Type>::mimeType(path);
+                }
+                auto g = g_strconcat(mpath, " ", path, NULL);
+                g_free(mpath);
+                mpath = g;
+                g_free(path);
+            }
+            TRACE("composite path: %s\n", mpath);
+        } else {
+            mimetype = Mime<Type>::mimeType(path);
+            mpath = g_strdup(path);
+	    defaultApp = defaultExtApp(path);
+        }
+	// auto mimetype = (const gchar *)g_object_get_data(G_OBJECT(data), "mimetype");
         TRACE("*** openwith.....\n");
 	gchar *responseLabel = g_strdup_printf("<b><span size=\"larger\" color=\"blue\">%s</span></b>\n<span color=\"#880000\">(%s)</span>", 
-		mpath, 
+		multiple?"":mpath, 
 		multiple?_("You have selected multiple files or folders"):mimetype);
-        for (char *p = mpath; p && *p; p++){
-            if (*p=='\n') *p = ' ';
-        }
-
 	const gchar **apps = MimeApplication<Type>::locate_apps(mimetype);
 
-	gchar *fileInfo;
-        if (multiple) fileInfo = g_strdup("FIXME fileinfo");
-        else fileInfo = util_c::fileInfo(path);	
-	gchar *defaultApp = multiple?g_strdup(""):defaultExtApp(path);
+	gchar *textApp = NULL;
+        if (!multiple) {
+            auto fileInfo = util_c::fileInfo(path);	
+	    textApp = defaultTextApp(fileInfo);
+	    g_free(fileInfo);
+        }
 
-	gchar *textApp = multiple?g_strdup(""):defaultTextApp(fileInfo);
-	g_free(fileInfo);
         auto appCount = 0;
         if (apps && apps[0]) {
             appCount++;
@@ -1289,8 +1321,8 @@ public:
         }
         if (defaultApp) appCount++;
         if (textApp) appCount++;
+        TRACE("appcount=%d\n",appCount);
         
-	auto view =  (View<Type> *)g_object_get_data(G_OBJECT(localItemPopUp), "view");
 	// get page
 	auto page = view->page();
 	const gchar *wd = page->workDir();
@@ -1363,23 +1395,21 @@ public:
             } else {
                 command = Run<Type>::mkCommandLine(response, mpath);
             }
-        } else { // hack
+        } else { 
    	    if (Run<Type>::runInTerminal(response)){
                 command = Run<Type>::mkTerminalLine(response, "");
             } else {
                 command = Run<Type>::mkCommandLine(response, "");
             }
-            gchar **f = g_strsplit(path, "\'", -1);
-            for (gchar **p=f; p&& *p; p++){
-                gchar *g = g_strconcat(command, " ", *p, NULL);
-                g_free(command);
-                command = g;
-            }
+            auto g = g_strconcat(command, " ", mpath, NULL);
+            g_free(command);
+            command = g;
         }
         TRACE("command line= %s\n", command);
 	page->command(command);
 	g_free(command);
 	g_free(mimetype);
+	g_free(mpath);
 
     }
 

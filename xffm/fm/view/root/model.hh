@@ -174,12 +174,6 @@ public:
         auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
 	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
 	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG); 
-	auto tooltipText = g_strdup_printf("%s\n%s\n%s\n%s\n%s",
-		_("Mount local disks and devices"),
-		_("eCryptfs Volume"),
-		_("SSHFS Remote Synchronization Folder"),
-		_("NFS Network Volume"),
-		_("CIFS Volume"));
 
 	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
 	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
@@ -254,6 +248,33 @@ public:
     {
         return Bookmarks<Type>::removeBookmark(path);
     }
+
+ /*   static void
+    addEFS(GtkTreeModel *treeModel){	
+ 	GtkTreeIter iter;
+	auto name = "xffm:efs";
+	auto utf_name = util_c::utf_string(_("Ecryptfs (EFS)"));
+	auto icon_name = "emblem-readonly/SE/list-add/2.0/225";
+	auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_EMBLEM, NULL);
+
+        auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
+	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
+	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG); 
+
+	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
+	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
+		DISPLAY_NAME, utf_name,
+                PATH, name,
+		ICON_NAME, icon_name,
+                TREEVIEW_PIXBUF, treeViewPixbuf, 
+		DISPLAY_PIXBUF, normal_pixbuf,
+		NORMAL_PIXBUF, normal_pixbuf,
+		HIGHLIGHT_PIXBUF, highlight_pixbuf,
+		TOOLTIP_TEXT,_("Encrypted filesystem"),
+		-1);
+	g_free(utf_name);
+	g_free(highlight_name);
+    }*/
 
 };
 }
