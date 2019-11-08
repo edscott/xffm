@@ -243,6 +243,11 @@ class Fuse  {
     GtkWidget *allowEmptyPassphrase_;
     const gchar *urlTemplate_;
     GtkBox *mountPointBox_; // FUSE_MOUNT_POINT_BOX
+    GtkButton *trueButton_;
+    GtkButton *falseButton_;
+    GtkButton *mountButton_;
+    gint response_;
+    
 public:
     GtkToggleButton * monitor(void){return monitor_;}
     GtkWidget * allowEmptyPassphrase(void){return allowEmptyPassphrase_;}
@@ -413,39 +418,13 @@ public:
         gtk_notebook_set_tab_reorderable (notebook, GTK_WIDGET(vbox), TRUE);
         return NULL;
     }
+
 #if 0
     //this is next, partly called by Fuse constructor 
     //and partly called by EFS constructor
     void *
     confirmHost (gpointer data){
-        void **arg = data;
-        fuse_data_t *(*dialog_f)(const gchar *url) = arg[0];
-        const gchar *module_name = arg[2];
-        g_free(arg);
-        widgets_t * widgets_p = rfm_get_widget("widgets_p");
-        GCond *signal = fuse_hold_monitor();
-        fuse_data_t *fuse_data_p = (*dialog_f) (url_);
-        if(!fuse_data_p || !fuse_data_p->dialog){
-            return GINT_TO_POINTER(FALSE);
-        }
         gint response = GTK_RESPONSE_CANCEL;
-        GtkNotebook *notebook = 
-            g_object_get_data(G_OBJECT(fuse_data_p->dialog), "notebook");
-        gtk_notebook_set_current_page(notebook, 0);
-
-        GtkWidget *button;
-
-        button = g_object_get_data(G_OBJECT(fuse_data_p->dialog), "action_TRUE_button");
-        g_signal_connect (G_OBJECT (button), "clicked", G_CALLBACK (button_ok), &response);
-        button = g_object_get_data(G_OBJECT(fuse_data_p->dialog), "action_FALSE_button");
-        g_signal_connect (G_OBJECT (button), "clicked", G_CALLBACK (button_cancel), &response);
-        button = g_object_get_data(G_OBJECT(fuse_data_p->dialog), "action_MOUNT_button");
-        g_signal_connect (G_OBJECT (button), "clicked", G_CALLBACK (button_mount), &response);
-
-        g_signal_connect (G_OBJECT (fuse_data_p->dialog), "delete-event", G_CALLBACK (response_delete), &response);
-    retry:;
-        
-        gtk_widget_show_all (fuse_data_p->dialog);
         gtk_main();
         gtk_widget_hide (fuse_data_p->dialog);
 
@@ -473,6 +452,7 @@ public:
         g_cond_signal(signal);
         return GINT_TO_POINTER(retval);
     }
+#endif
 
 private:
 
@@ -554,21 +534,25 @@ private:
 
 
 
-        auto button = Gtk<Type>::dialog_button ("window-close", _("Cancel"));
-        gtk_box_pack_start (GTK_BOX (action_area), GTK_WIDGET(button), FALSE, FALSE, 0);
-        g_object_set_data (G_OBJECT (dialog), "action_FALSE_button", button);
+        auto falseButton_ = Gtk<Type>::dialog_button ("window-close", _("Cancel"));
+        gtk_box_pack_start (GTK_BOX (action_area), GTK_WIDGET(falseButton_), FALSE, FALSE, 0);
 
 
-        button = Gtk<Type>::dialog_button ("media-floppy", _("Save"));
-        g_object_set_data (G_OBJECT (dialog), "action_TRUE_button", button);
-        gtk_box_pack_start (GTK_BOX (action_area), GTK_WIDGET(button), FALSE, FALSE, 0);
+        trueButton_ = Gtk<Type>::dialog_button ("media-floppy", _("Save"));
+        gtk_box_pack_start (GTK_BOX (action_area), GTK_WIDGET(trueButton_), FALSE, FALSE, 0);
 
-        button = Gtk<Type>::dialog_button ("greenball", _("Mount"));
-        g_object_set_data (G_OBJECT (dialog), "action_MOUNT_button", button);
-        gtk_box_pack_start (GTK_BOX (action_area), GTK_WIDGET(button), FALSE, FALSE, 0);
+        mountButton_ = Gtk<Type>::dialog_button ("greenball", _("Mount"));
+        gtk_box_pack_start (GTK_BOX (action_area), GTK_WIDGET(mountButton_), FALSE, FALSE, 0);
 
+
+        g_signal_connect (G_OBJECT (trueButton_), "clicked", G_CALLBACK (button_ok), &response_);
+        g_signal_connect (G_OBJECT (falseButton_), "clicked", G_CALLBACK (button_cancel), &response_);
+        g_signal_connect (G_OBJECT (mountButton_), "clicked", G_CALLBACK (button_mount), &response_);
+
+        g_signal_connect (G_OBJECT (this->dialog()), "delete-event", G_CALLBACK (response_delete), &response_);
         gtk_window_set_resizable (GTK_WINDOW(dialog), TRUE);
 
+        response_ = GTK_RESPONSE_CANCEL;
 
         return GTK_DIALOG(dialog);
 
@@ -1011,21 +995,21 @@ private: // gtk callbacks
 
     static void
     button_ok (GtkButton * button, gpointer data) {
-        gint *response = data;
+        auto *response = (gint *)data;
         *response = GTK_RESPONSE_APPLY;
         gtk_main_quit();
     }
 
     static void
     button_mount (GtkEntry * entry, gpointer data) {
-        gint *response = data;
+        auto *response = (gint *)data;
         *response = GTK_RESPONSE_YES;
         gtk_main_quit();
     }
 
     static void
     button_cancel (GtkButton * button, gpointer data) {
-        gint *response = data;
+        auto *response = (gint *)data;
         *response = GTK_RESPONSE_CANCEL;
         gtk_main_quit();
     }
@@ -1033,7 +1017,7 @@ private: // gtk callbacks
 
     static gboolean 
     response_delete(GtkWidget *dialog, GdkEvent *event, gpointer data){
-        gint *response = data;
+        auto *response = (gint *)data;
         *response = GTK_RESPONSE_CANCEL;
         gtk_main_quit();
         return TRUE;
