@@ -1,237 +1,25 @@
 
 #ifndef ECRYPTFS_HH
 #define ECRYPTFS_HH
-#define FUSE_KEY_FILE		g_get_user_config_dir(),"xffm+","fuse.ini"
 
-#define EFS_AUTHORIZATION _("Encryption Options")
-#define EFS_TIP _("Encrypt Files")
-#define ECRYPTFS_SIG _("Mount ecrypt signature")
-#define ECRYPTFS_FNEK_SIG _("Filename ecrypt signature")
-#define EFS_INFO1 _("Ecrypt Filesystem (EFS)")
-#define EFS_INFO2 _("New EFS Link")
-#define EFS_REMOTE_PATH _("Encrypted directory")
-#define EPS_ENABLE_FILENAME_CRYPTO _("Encrypt filenames")
-#define EPS_REQUIRES_SIGNATURE _("Requires ecryptfs signature")
-#define EPS_PASSTHROUGH _("Plaintext passthrough")
-
-#define FUSE_BROADBAND  _("local filesystem")
-#define FUSE_COMPUTER _("Computer Name:")
-#define FUSE_REMOTE_PATH  _("Remote Path")
-#define FUSE_MOUNT_POINT  _("Mount point:")
-#define FUSE_URL  _("URL")
-#define FUSE_MONITOR  _("Enable file monitoring")
-#define FUSE_CAUTION  _("Caution")
-#define FUSE_LOGIN  _("Username:")
-#define FUSE_SECURE_SHELL_KEY  _("Secure Shell Key")
-#define FUSE_ALLOW_EMPTY_PASSPHRASE  _("Allow empty private key passphrase")
-#define FUSE_PASSPHRASE  _("Enter your Secure Shell passphrase:")
-
-
-#define FLAG_KEY(x)  g_strdup_printf("FLAG_%d", x)
+#include "ecryptfs.i"
 
 namespace xf{
-//#define GroupOptions group_options_t
-typedef struct group_options_t {
-    gint sensitive;
-    const gchar *flag;
-    const gchar *id;
-    const gchar *text;
-    const gchar *entry;
-    const gchar *tip;
-}group_options_t;
-
-static gchar **mount_option_keys = NULL;
-static  group_options_t mount_options[]={
-//linux options:
-    {
-	.sensitive = 1, .flag = "-r", .id = NULL, 
-        .text = N_(" Mount file system readonly."), 
-	.entry = NULL, .tip = NULL
-    },
-    {
-	.sensitive = 1, .flag = "-v", .id = NULL, 
-        .text = N_("Be verbose."), 
-	.entry = NULL, .tip = NULL
-    },
-    {
-	.sensitive = 1, .flag = "-V", .id = NULL, 
-        .text = N_("Print version."), 
-	.entry = NULL, .tip = NULL
-    },
-    {
-	.sensitive = 2, .flag = "-w", .id = NULL, 
-        .text = N_("Mount file system read-write."), 
-	.entry = NULL, .tip = NULL
-    },
-//#ifdef THIS_IS_LINUX
-    {
-	.sensitive = 1, .flag = "-f", .id = NULL, 
-        .text = N_("Fake mount."),  
-	.entry = NULL, 
-        .tip = N_("Don't actually call the mount system call.")
-    },
-    {
-	.sensitive = 1, .flag = "-n", .id = NULL, 
-        .text = N_("Do  not  update  /etc/mtab."), 
-	.entry = NULL,
-	.tip = 
-N_("By default, an entry is created in/etc/mtab for every mounted file system.\n Use this option to skip making an entry.")
-    },
-    {
-	.sensitive = 1, .flag = "-s", .id = NULL, 
-	.text = N_("Tolerate sloppy options."),
-	.entry = NULL,
-        .tip = N_("Tolerate sloppy mount options rather than fail.") 
-    },
-//#endif
-    {
-	.sensitive = 1, .flag = "-h", .id = NULL, 
-        .text = N_("Print help message."), 
-	.entry = NULL, .tip = NULL
-    },
-    
-    {.sensitive = 1, NULL, NULL, NULL, NULL, NULL}
-};
-
-static gchar **efs_option_keys = NULL;
-static  group_options_t efs_options[]={
-    {
-	.sensitive = 1, .flag = "-o", .id = "ecryptfs_sig=", 
-        .text = NULL, 
-	.entry = N_("(fekek_sig)"),
-        .tip = N_("Specify  the  signature  of the mount wide authentication token. The authentication token must be in the  kernel  keyring  before the  mount  is performed. ecryptfs-manager or the eCryptfs mount helper can be used to construct the authentication token and add it to the keyring prior to mounting.") 
-    },
-    
-    {
-	.sensitive = 1, .flag = "-o", .id = "ecryptfs_fnek_sig=", 
-        .text = NULL, 
-	.entry = N_("(fnek_sig)"),
-        .tip = N_("Specify  the  signature  of  the mount wide authentication token used for filename crypto. The authentication must be in the kernel keyring before mounting.")
-    },
-    
-    {
-	.sensitive = 2, .flag = "-o", .id = "ecryptfs_cipher=", 
-	.text = "aes | blowfish | des3_ede | cast6 | cast5",
-	.entry = "aes",
-        .tip = N_("Specify the symmetric cipher to be used on a per file basis. ")
-    },
-    
-    {
-	.sensitive = 2, .flag = "-o", .id = "ecryptfs_key_bytes=", 
-        .text = NULL, 
-	.entry = "16",
-        .tip = N_("Specify  the keysize to be used with the selected cipher. If the cipher only has one keysize the keysize  does  not  need  to  be specified.\n\n\taes: blocksize = 16; min keysize = 16; max keysize = 32\n\tblowfish: blocksize = 16; min keysize = 16; max keysize = 56\n\tdes3_ede: blocksize = 8; min keysize = 24; max keysize = 24\n\tcast6: blocksize = 16; min keysize = 16; max keysize = 32\n\tcast5: blocksize = 8; min keysize = 5; max keysize = 16\n\t")
-    },
-    
-    {
-	.sensitive = 0, .flag = "-o", .id = "ecryptfs_passthrough=", 
-        .text = NULL, 
-	.entry = "no",
-        .tip = N_("Allows for non-eCryptfs files to be read and written from within an eCryptfs mount. This option is turned off by default.")
-    },
-    
-    {
-	.sensitive = -1, .flag = "-o", .id = "no_sig_cache", 
-        .text = NULL, 
-	.entry = NULL,
-        .tip = N_("Do not check the mount key signature against the values  in  the user's  ~/.ecryptfs/sig-cache.txt  file. This is useful for such things as non-interactive  setup  scripts,  so  that  the  mount helper  does  not stop and prompt the user in the event that the key sig is not in the cache.")
-    },
-    
-    {
-	.sensitive = 1, .flag = "-o", .id = "ecryptfs_encrypted_view", 
-        .text = NULL, 
-	.entry = NULL,
-        .tip = N_("This option provides a unified  encrypted  file  format  of  the eCryptfs  files in the lower mount point.  Currently, it is only useful if the lower mount point contains files with the metadata stored in the extended attribute.  Upon a file read in the upper mount point, the encrypted version of the file will be presented with  the  metadata  in  the  file  header instead of the xattr.  Files cannot be opened for writing when this option is enabled.")
-    },
-    
-    {
-	.sensitive = 1, .flag = "-o", .id = "ecryptfs_xattr", 
-        .text = NULL, 
-	.entry = NULL,
-        .tip = N_("Store the metadata in the extended attribute of the lower  files rather than the header region of the lower files.")
-    },
-    
-    {
-	.sensitive = 1, .flag = "-o", .id = "verbose", 
-        .text = NULL, 
-	.entry = NULL,
-        .tip = N_("Log  ecryptfs  information  to  /var/log/messages.   Do  not run eCryptfs in verbose-mode unless you are doing so  for  the  sole purpose  of development, since secret values will be written out to the system log in that case.")
-    },
-        
-    {
-	.sensitive = 0, .flag = "-o", .id = "ecryptfs_enable_filename_crypto=", 
-        .text = NULL, 
-	.entry = "no",
-        .tip = N_("Specify whether filename encryption should be enabled.  If  not, the  mount  helper  will  not  prompt  the user for the filename encryption key signature.")
-    },
-    
-    {
-	.sensitive = -1, .flag = "-o", .id = "verbosity=", 
-        .text = NULL, 
-	.entry = "1",
-        .tip = N_("If verbosity=1, the mount helper will ask you for missing values (default).  Otherwise, if verbosity=0, it will not ask for missing values and will fail if required values are omitted.  ")
-    },
-    
-    {
-	.sensitive = 1, .flag = "-o", .id = "passphrase_passwd=", 
-        .text = NULL, 
-	.entry = N_("(passphrase)"),
-        .tip = N_("The actual password is passphrase. Since the password is visible to utilities (like ps under Unix) this form should only be  used where security is not important.")
-    },
-    
-    {
-	.sensitive = 1, .flag = "-o", .id = "passphrase_passwd_file=", 
-        .text = NULL, 
-	.entry = N_("(filename)"),
-        .tip = N_("The    password   should   be   specified   in   a   file   with passwd=(passphrase). It is highly reccomended that the  file  be stored on a secure medium such as a personal usb key.")
-    },
-    
-    {
-	.sensitive = 1, .flag = "-o", .id = "passphrase_passwd_fd=", 
-        .text = NULL, 
-	.entry = N_("(file descriptor)"),
-        .tip = N_("The password is specified through the specified file descriptor.")
-    },
-    
-    {
-	.sensitive = 1, .flag = "-o", .id = "passphrase_salt=", 
-        .text = NULL, 
-	.entry = N_("(hex value)"),
-        .tip = N_("The salt should be specified as a 16 digit hex value.  ")
-    },
-    
-    {
-	.sensitive = 1, .flag = "-o", .id = "openssl_keyfile=", 
-        .text = NULL, 
-	.entry = N_("(filename)"),
-        .tip = N_("The   password   should   be   specified   in   a   file    with openssl_passwd=(openssl-password). It is highly reccomended that the file be stored on a secure medium such  as  a  personal  usb key.")
-    },
-    
-    
-    
-    {
-	.sensitive = 1, .flag = "-o", .id = "openssl_passwd_file=", 
-        .text = NULL, 
-	.entry = N_("(filename)"),
-        .tip = N_("The   password   should   be   specified   in   a   file    with openssl_passwd=(openssl-password). It is highly reccomended that the file be stored on a secure medium such  as  a  personal  usb key.")
-    },
-    {
-	.sensitive = 1, .flag = "-o", .id = "openssl_passwd_fd=", 
-        .text = NULL, 
-	.entry = N_("(file descriptor)"),
-        .tip = N_("The password is specified through the specified file descriptor.")
-    },
-    {
-	.sensitive = 1, .flag = "-o", .id = "openssl_passwd=", 
-        .text = NULL, 
-	.entry = N_("(password)"),
-        .tip = N_("The  password  can  be  specified on the command line. Since the password is visible in the process list,  it  is  highly  recommended to use this option only for testing purposes.")
-    },
-    
-    {.sensitive = 1, NULL, NULL, NULL, NULL, NULL}
-};
 
 
+typedef struct fuse_login_t{
+    guint64 flag;
+    gchar *flag_key;
+    gchar *computer;
+    gchar *remote_path;
+    gchar *login;
+    gchar *empty_passphrase;
+    gchar *secure_shell_key;
+    gchar *url;
+    gchar *mount_point;
+    gchar *monitor;
+    gchar *broadband;
+}fuse_login_t;
 
 template <class Type>
 class Fuse  {
@@ -255,6 +43,7 @@ public:
     void setUrlTemplate(const gchar *value){ urlTemplate_ = value;}
     const gchar *urlTemplate(void){ return urlTemplate_;}
     GtkBox *vbox(void){return vbox_;}
+    gint response(void){return response_;}
     
     Fuse(const gchar *url, const gchar *info1, const gchar *info2):
         monitor_(NULL),
@@ -268,8 +57,10 @@ public:
     }
 
     ~Fuse(void){
+        DBG("Fuse destructor...\n");
         gtk_widget_destroy(GTK_WIDGET(dialog_));        
     }
+
 
     GtkBox *
     addEntry(const gchar *item_string, const gchar *item_id, gboolean state=TRUE){
@@ -456,6 +247,7 @@ public:
 
 private:
 
+
     GtkDialog *
     initDialog(const gchar *info1, const gchar *info2){
         auto dialog = gtk_dialog_new ();
@@ -545,11 +337,11 @@ private:
         gtk_box_pack_start (GTK_BOX (action_area), GTK_WIDGET(mountButton_), FALSE, FALSE, 0);
 
 
-        g_signal_connect (G_OBJECT (trueButton_), "clicked", G_CALLBACK (button_ok), &response_);
-        g_signal_connect (G_OBJECT (falseButton_), "clicked", G_CALLBACK (button_cancel), &response_);
-        g_signal_connect (G_OBJECT (mountButton_), "clicked", G_CALLBACK (button_mount), &response_);
+        g_signal_connect (G_OBJECT (trueButton_), "clicked", G_CALLBACK (button_ok), this);
+        g_signal_connect (G_OBJECT (falseButton_), "clicked", G_CALLBACK (button_cancel), this);
+        g_signal_connect (G_OBJECT (mountButton_), "clicked", G_CALLBACK (button_mount), this);
 
-        g_signal_connect (G_OBJECT (this->dialog()), "delete-event", G_CALLBACK (response_delete), &response_);
+        g_signal_connect (G_OBJECT (dialog), "delete-event", G_CALLBACK (response_delete), this);
         gtk_window_set_resizable (GTK_WINDOW(dialog), TRUE);
 
         response_ = GTK_RESPONSE_CANCEL;
@@ -887,9 +679,17 @@ private:
         for (; options_p && options_p->flag; options_p++){
 
           auto hbox = Gtk<Type>::hboxNew(0, FALSE);
+          if (!options_p->id){
+              DBG("optionsBox(): options id cannot be null.\n");
+              continue;
+          }
+          if (g_object_get_data(G_OBJECT(dialog), options_p->id)) {
+              DBG("optionsBox(): Duplicate entry: %s\n", options_p->id);
+              continue;
+          }
+          g_object_set_data(G_OBJECT(dialog),options_p->id, hbox);
+
           gtk_widget_show(GTK_WIDGET(hbox));
-          GtkWidget *check;
-          GtkWidget *entry=NULL;
           gchar *check_text;
           if (options_p->entry){
               check_text = 
@@ -900,24 +700,32 @@ private:
                         (options_p->id)?options_p->id:"");
           }
 
-            check = 
-                gtk_check_button_new_with_label(check_text);
-            /*if (options_p->tip){
-                rfm_add_custom_tooltip(check, NULL, options_p->tip);
-            } else if (options_p->text && options_p->entry){
-                rfm_add_custom_tooltip(check, NULL, options_p->text);
-            }*/
-            g_free(check_text);
-            gtk_widget_show(check);
-            gtk_box_pack_start (GTK_BOX (hbox), check, FALSE, FALSE, 0);
+          auto check = gtk_check_button_new_with_label(check_text);
+          g_object_set_data(G_OBJECT(hbox),"check", check);
+
+          /*if (options_p->tip){
+              rfm_add_custom_tooltip(check, NULL, options_p->tip);
+          } else if (options_p->text && options_p->entry){
+              rfm_add_custom_tooltip(check, NULL, options_p->text);
+          }*/
+          g_free(check_text);
+          gtk_widget_show(check);
+          gtk_box_pack_start (GTK_BOX (hbox), check, FALSE, FALSE, 0);
 
           GtkWidget *label=NULL;
           if (options_p->entry)  {
-            entry = gtk_entry_new();
-            gtk_widget_show(entry);
-            gtk_box_pack_start (GTK_BOX (hbox), entry, FALSE, FALSE, 0);
+            auto entry = GTK_ENTRY(gtk_entry_new());
+            g_object_set_data(G_OBJECT(hbox),"entry", entry);
+            gtk_entry_set_text(entry, options_p->entry);
+            gtk_widget_show(GTK_WIDGET(entry));
+            gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(entry), FALSE, FALSE, 0);
+            if (options_p->text) {
+                auto label = gtk_label_new(options_p->text);
+                gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+                gtk_widget_show(label);
+            }
           }
-          else if (options_p->text) {
+          /*else if (options_p->text) {
               // not for entries...
             gchar *g = g_strdup_printf(" <i>(%s)</i>", _(options_p->text));
             label=gtk_label_new("");
@@ -925,28 +733,12 @@ private:
             g_free(g);
             gtk_widget_show(label);
             gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-          }
+          }*/
 
-            gtk_widget_set_sensitive(GTK_WIDGET(hbox), (options_p->sensitive > 0));
-            gchar *id_a[]={(gchar *)options_p->flag, (gchar *)options_p->id, NULL};
-            gchar *id = getOptionId(id_a);
-            if (g_object_get_data(G_OBJECT(dialog), id)) {
-                DBG("Duplicate option: %s\n", id);
-            }
-           g_object_set_data(G_OBJECT(dialog), id, check);
-           if (entry){
-                gchar *idd_a[]={(gchar *)options_p->flag, (gchar *)options_p->id, (gchar *)"Entry", NULL};
-                gchar *idd = getOptionId(idd_a);
-                TRACE( "++ setting entry idd to %s\n", idd);
-                if (g_object_get_data(G_OBJECT(dialog), idd)) {
-                    DBG("Duplicate entry: %s\n", idd);
-                }
-                g_object_set_data(G_OBJECT(dialog), idd, entry);
-                g_free(idd);
-           }
+          gtk_widget_set_sensitive(GTK_WIDGET(hbox), (options_p->sensitive > 0));
         
-           if (key_file) {
-               if (entry) {
+          /*if (key_file) {
+            if (entry) {
                     gchar *value = g_key_file_get_value(key_file, group, id, NULL);
                     if (value) {
                         DBG("1 value=%s\n", value);
@@ -958,17 +750,16 @@ private:
                         gtk_entry_set_text(GTK_ENTRY(entry), options_p->entry);
                     }
                 } 
-           } else if (entry) {
+          } else if (entry) {
                         DBG("3 value=%s\n", options_p->entry);
                 gtk_entry_set_text(GTK_ENTRY(entry), options_p->entry);
-           }
-           if (flag & (ui << i)){
+          }*/
+          if (flag & (ui << i)){
                gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(check), TRUE);
-           }
-           g_signal_connect (check, "toggled", G_CALLBACK (option_toggle), 
+          }
+          g_signal_connect (check, "toggled", G_CALLBACK (option_toggle), 
                    GINT_TO_POINTER(i));
-           g_free(id);
-           i++;
+          i++;
 
           gtk_box_pack_start (vbox, GTK_WIDGET(hbox), FALSE, FALSE, 0);      
         }
@@ -995,31 +786,29 @@ private: // gtk callbacks
 
     static void
     button_ok (GtkButton * button, gpointer data) {
-        auto *response = (gint *)data;
-        *response = GTK_RESPONSE_APPLY;
-        gtk_main_quit();
+        auto fuse = (Fuse<Type> *)data;
+        gtk_dialog_response(fuse->dialog(), GTK_RESPONSE_APPLY);
+        gtk_widget_hide(GTK_WIDGET(fuse->dialog()));
     }
 
     static void
     button_mount (GtkEntry * entry, gpointer data) {
-        auto *response = (gint *)data;
-        *response = GTK_RESPONSE_YES;
-        gtk_main_quit();
+        auto fuse = (Fuse<Type> *)data;
+        gtk_dialog_response(fuse->dialog(), GTK_RESPONSE_YES);
+        gtk_widget_hide(GTK_WIDGET(fuse->dialog()));
     }
 
     static void
     button_cancel (GtkButton * button, gpointer data) {
-        auto *response = (gint *)data;
-        *response = GTK_RESPONSE_CANCEL;
-        gtk_main_quit();
+        auto fuse = (Fuse<Type> *)data;
+        gtk_dialog_response(fuse->dialog(), GTK_RESPONSE_CANCEL);
+        gtk_widget_hide(GTK_WIDGET(fuse->dialog()));
     }
 
 
     static gboolean 
     response_delete(GtkWidget *dialog, GdkEvent *event, gpointer data){
-        auto *response = (gint *)data;
-        *response = GTK_RESPONSE_CANCEL;
-        gtk_main_quit();
+        button_cancel(NULL, data);
         return TRUE;
     }
 
@@ -1085,8 +874,25 @@ private: // gtk callbacks
 
 };
 
+
 template <class Type>
 class EFS: public Fuse<Type>{
+/*    gchar *remotePath_;
+    gchar *mountPoint_;
+    gchar *ecryptfsSig_;
+    gchar *ecryptfsFnekSig_;
+    gboolean epsEnableFilenameCrypto_;
+    gboolean epsPassthrough_;
+
+    void getEfsOptions(void){
+        remotePath_ = getOption("FUSE_REMOTE_PATH");
+        mountPoint_ = getOption("FUSE_MOUNT_POINT");
+        ecryptfsSig_ = getOption("ECRYPTFS_SIG");
+        ecryptfsFnekSig_ = getOption("ECRYPTFS_FNEK_SIG");
+        efsEnableFilenameCrypto_ = getCheck("EFS_ENABLE_FILENAME_CRYPTO");
+        efsPassthrough_ = getCheck("EfS_PASSTHROUGH");
+
+    }*/
 
 public:
     EFS(const gchar *url):
@@ -1108,18 +914,37 @@ public:
 
         DBG("EFS constructor checkboxes\n");
 
-        this->addCheck(EPS_ENABLE_FILENAME_CRYPTO, "EPS_ENABLE_FILENAME_CRYPTO", TRUE, EPS_REQUIRES_SIGNATURE);
-        this->addCheck(EPS_PASSTHROUGH, "EPS_PASSTHROUGH", FALSE );
+        this->addCheck(EPS_ENABLE_FILENAME_CRYPTO, "EfS_ENABLE_FILENAME_CRYPTO", TRUE, EPS_REQUIRES_SIGNATURE);
+        this->addCheck(EPS_PASSTHROUGH, "EFS_PASSTHROUGH", FALSE );
 
 
         this->addOptionPage(mount_options, "Mount", 6 );
         this->addOptionPage(efs_options, "EcryptFS", 12);
 
         
-        gtk_widget_show_all(GTK_WIDGET(GTK_WIDGET(this->dialog())));
+        gtk_widget_show_all(GTK_WIDGET(this->dialog()));
+    }
+    ~EFS(void){
+        DBG("efs destructor\n");
     }
 
-
+    void getOptions(void){
+        group_options_t *options_p = efs_options;
+        for (auto p=options_p; p && p->flag; p++){
+            auto box = GTK_BOX(g_object_get_data(G_OBJECT(this->dialog()), p->id));
+            if (!box) {
+                DBG("getOptions(): cannot find item \"%s\"\n", p->id);
+                continue;
+            }
+            auto check = GTK_TOGGLE_BUTTON(g_object_get_data(G_OBJECT(box), "check")); 
+            auto entry = GTK_ENTRY(g_object_get_data(G_OBJECT(box), "entry")); 
+            if (check || entry) {
+                if (check) {DBG("Check(%s): %d\n", p->id, gtk_toggle_button_get_active(check));}
+                if (entry) {DBG("%sEntry(%s): \"%s\"\n",check?"->":"", p->id, gtk_entry_get_text(entry));}    
+            }
+            else DBG("no check nor entry for %s\n", p->id);
+        }    
+    }
 };
 
 } // namespace xf
