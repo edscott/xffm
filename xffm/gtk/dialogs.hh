@@ -22,7 +22,6 @@ public:
         guint mask;
         XQueryPointer(display, w, &root, &child, &mouseX, &mouseY, &childX, &childY, &mask);
         guint windowW,windowH;
-        //gtk_window_get_size(dialog, &windowW, &windowH);
         getWindowDimensions(w, &windowW, &windowH);
         getRootDimensions(&rootW, &rootH);
         TRACE("*** rootW,H= (%d,%d) window=(%d,%d) mouse=(%d,%d)\n", 
@@ -35,19 +34,6 @@ public:
         gtk_window_move(dialog, mouseX, mouseY);
     }
 
-
- /*   static void
-    quick_help (GtkWindow *parent, const gchar *message){
-        auto dialog = quickHelp_(parent, message, NULL, NULL );
-        gtk_widget_show_all (GTK_WIDGET(dialog));
-    }
-
-    static GtkWidget *
-    quickHelp (GtkWindow *parent, const gchar *message, const gchar *icon){
-        auto dialog = quickHelp_(parent, message, icon, _("Help"));
-        gtk_widget_show_all (GTK_WIDGET(dialog));
-        return dialog;
-    }*/
 
     static GtkWidget *
     quickHelp (GtkWindow *parent, 
@@ -69,16 +55,9 @@ public:
     {
      GtkWidget *dialog = NULL;
      GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT;
-        DBG("quickDialog\n");
 
      // Create the widgets
      dialog = gtk_dialog_new ();
-     /*dialog = gtk_dialog_new_with_buttons (title,
-					   parent,
-					   flags,
-					   _("Cancel"),
-					   GTK_RESPONSE_NONE,
-					   NULL);*/
      if (parent) {
         gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
         gtk_window_set_transient_for (GTK_WINDOW (dialog), 
@@ -111,7 +90,6 @@ public:
      
      gtk_box_pack_start(GTK_BOX(content_area), GTK_WIDGET(vbox), TRUE, TRUE,0);
      
-     //gtk_container_add (GTK_CONTAINER (content_area), GTK_WIDGET(vbox));
      if (icon){
 	auto pixbuf = Pixbuf<Type>::get_pixbuf(icon, -48);
         if (pixbuf) {
@@ -127,7 +105,6 @@ public:
      gtk_box_pack_start(hbox, GTK_WIDGET(label), FALSE, FALSE,0);
 
      auto vbox2 = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
-     //gtk_box_pack_end(GTK_BOX(content_area), GTK_WIDGET(vbox2), FALSE, FALSE,0);
    
      gtk_box_pack_end(vbox, GTK_WIDGET(vbox2), FALSE, FALSE,0);
      auto button = Gtk<Type>::dialog_button("process-stop", _("Cancel"));

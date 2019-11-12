@@ -246,6 +246,19 @@ public:
 #endif
 
 private:
+    static GtkTextView *
+    mkTextView (const gchar *text){
+        auto labelview = GTK_TEXT_VIEW(gtk_text_view_new());
+        gtk_text_view_set_editable (labelview, FALSE);
+        gtk_text_view_set_cursor_visible (labelview, FALSE);
+        gtk_text_view_set_wrap_mode (labelview, GTK_WRAP_WORD);
+        
+        auto buffer = gtk_text_view_get_buffer (labelview);
+        GtkTextIter iter;
+        gtk_text_buffer_get_start_iter (buffer, &iter);
+        gtk_text_buffer_insert (buffer,&iter, text, -1);
+        return labelview;
+    }
 
 
     GtkDialog *
@@ -263,33 +276,18 @@ private:
 
         auto hbox = Gtk<Type>::hboxNew (FALSE, 2);
         gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area(GTK_DIALOG (dialog))), GTK_WIDGET(hbox), FALSE, FALSE, 0);
-        //gtk_widget_show(GTK_WIDGET(hbox));
 
         auto pixbuf = Pixbuf<Type>::get_pixbuf("dialog-question", -24);
         auto image = gtk_image_new_from_pixbuf(pixbuf);
         g_object_unref(pixbuf);
-        //gtk_widget_show(image);
         gtk_box_pack_start (GTK_BOX (hbox), image, FALSE, FALSE, 0);
 
         auto text = g_strconcat(_("Options:"), " ", 
                 info1, "\n\n", 
-                info2, NULL);
-
-
-        
-        auto labelview = gtk_text_view_new();
-        gtk_text_view_set_editable (GTK_TEXT_VIEW(labelview), FALSE);
-        gtk_text_view_set_cursor_visible (GTK_TEXT_VIEW(labelview), FALSE);
-        gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW(labelview), GTK_WRAP_WORD);
-        
-        GtkTextBuffer *buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW(labelview));
-        GtkTextIter iter;
-        gtk_text_buffer_get_start_iter (buffer, &iter);
-        gtk_text_buffer_insert (buffer,&iter, text, -1);
-
+                info2, NULL);        
+        auto labelview = mkTextView(text);
         g_free(text);
-        //gtk_widget_show(labelview);
-        gtk_box_pack_start (hbox, labelview, TRUE, TRUE, 0);
+        gtk_box_pack_start (hbox, GTK_WIDGET(labelview), TRUE, TRUE, 0);
 
 
         auto tbox = Gtk<Type>::vboxNew(TRUE, 0);
@@ -677,7 +675,6 @@ private:
 
         gint i=0;
         for (; options_p && options_p->flag; options_p++){
-
           auto vbox2 = Gtk<Type>::vboxNew(0, FALSE);
           auto hbox = Gtk<Type>::hboxNew(0, FALSE);
           auto hbox2 = Gtk<Type>::hboxNew(0, FALSE);
@@ -691,57 +688,33 @@ private:
           }
           g_object_set_data(G_OBJECT(dialog),options_p->id, hbox);
 
-          //gtk_widget_show(GTK_WIDGET(hbox));
-          gchar *check_text;
-          if (options_p->entry){
-              check_text = 
-                g_strdup_printf("%s %s",  options_p->flag,
-                        options_p->id);
-          } else {
-              check_text = g_strdup_printf("%s %s",  options_p->flag,
-                        (options_p->id)?options_p->id:"");
-          }
 
-          auto check = gtk_check_button_new_with_label(check_text);
+          auto checkMarkup = g_strdup_printf("<span color=\"%s\">%s</span>", 
+                  (options_p->entry)?"red":"blue",
+                  options_p->id);
+
+          auto label = gtk_label_new("");
+          gtk_label_set_markup(GTK_LABEL(label), checkMarkup);
+          g_free(checkMarkup);
+
+          auto check = gtk_check_button_new_with_label(options_p->flag);
           g_object_set_data(G_OBJECT(hbox),"check", check);
 
-          /*if (options_p->tip){
-              rfm_add_custom_tooltip(check, NULL, options_p->tip);
-          } else if (options_p->text && options_p->entry){
-              rfm_add_custom_tooltip(check, NULL, options_p->text);
-          }*/
-          g_free(check_text);
-          //gtk_widget_show(check);
           gtk_box_pack_start (GTK_BOX (vbox2), GTK_WIDGET(hbox), FALSE, FALSE, 0);
           gtk_box_pack_start (GTK_BOX (vbox2), GTK_WIDGET(hbox2), TRUE, TRUE, 0);
           gtk_box_pack_start (GTK_BOX (hbox), check, FALSE, FALSE, 0);
+          gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 
-          GtkWidget *label=NULL;
           if (options_p->entry)  {
             auto entry = GTK_ENTRY(gtk_entry_new());
             g_object_set_data(G_OBJECT(hbox),"entry", entry);
             gtk_entry_set_text(entry, options_p->entry);
-            //gtk_widget_show(GTK_WIDGET(entry));
             gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(entry), FALSE, FALSE, 0);
-            if (options_p->text) {
-                auto label = gtk_label_new("");
-                const gchar *t = (options_p->tip)?options_p->tip:options_p->text;
-                auto markup = g_strdup_printf("<span color=\"blue\">(%s)</span>",t); 
-                gtk_label_set_markup(GTK_LABEL(label), markup);
-                g_free(markup);
-                gtk_box_pack_start (GTK_BOX (hbox2), label, FALSE, FALSE, 0);
-                //gtk_widget_show(label);
-            }
           }
-          /*else if (options_p->text) {
-              // not for entries...
-            gchar *g = g_strdup_printf(" <i>(%s)</i>", _(options_p->text));
-            label=gtk_label_new("");
-            gtk_label_set_markup(GTK_LABEL(label), g);
-            g_free(g);
-            //gtk_widget_show(label);
-            gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-          }*/
+          if (options_p->text || options_p->tip) {
+                auto labelview = mkTextView((options_p->tip)?options_p->tip:options_p->text);
+                gtk_box_pack_start (GTK_BOX (hbox2), GTK_WIDGET(labelview), TRUE, TRUE, 0);
+          }
 
           gtk_widget_set_sensitive(GTK_WIDGET(hbox), (options_p->sensitive > 0));
         
@@ -772,7 +745,7 @@ private:
           gtk_box_pack_start (vbox, GTK_WIDGET(vbox2), FALSE, FALSE, 0);      
         }
         //gtk_widget_show(GTK_WIDGET(vbox));
-        //gtk_widget_set_size_request(sw, -1, -1);
+        gtk_widget_set_size_request(sw, 400, -1);
         return sw;
     }
 

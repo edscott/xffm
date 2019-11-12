@@ -61,16 +61,11 @@ public:
     static void
     openDnDBox(GtkWindow *parent, const gchar *title, GSList *list){
         //if (g_slist_length(list) == 0) return NULL;
-        DBG("openDnDBox\n");
         // Create liststore for DnD
         auto dialog = GTK_WINDOW(Dialogs<Type>::quickDialog(parent, _("Results"), NULL, title));
 	findResultsWidgets = g_list_prepend(findResultsWidgets, dialog);
 	g_signal_connect(G_OBJECT(dialog), "response", 
 		G_CALLBACK(onResponse),NULL);
-
-
-	//gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
-	//gtk_window_set_transient_for (GTK_WINDOW (dialog), parent);
         
         auto vbox = GTK_BOX(g_object_get_data(G_OBJECT(dialog), "vbox"));
 	auto scrolledWindow = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new (NULL, NULL));
@@ -79,7 +74,6 @@ public:
 
         gtk_box_pack_start (vbox, GTK_WIDGET(scrolledWindow), TRUE, TRUE, 0);
         
-        //auto model = gtk_tree_store_new(2, GDK_TYPE_PIXBUF, G_TYPE_STRING);
         auto model = gtk_list_store_new(2, GDK_TYPE_PIXBUF, G_TYPE_STRING);
         GtkTreeIter iter;
 
@@ -109,37 +103,16 @@ public:
     
         g_object_set_data(G_OBJECT(dialog), "treeView", treeView);
         g_object_set_data(G_OBJECT(dialog), "model", model);
-        //setUpSignals(G_OBJECT(dialog));
         
         auto dnd = new (DnD<double>)(GTK_WIDGET(dialog), treeView, 1, 0);
         g_object_set_data(G_OBJECT(dialog), "dnd", dnd);
-
-
-  /*      auto popup = new(Popup<Type>)(
-		LocalPopUp<Type>::localMenuItems(),
-		LocalPopUp<Type>::localMenuItemsKeys(),
-		LocalPopUp<Type>::localMenuItemsIcons()
-		);
-	dnd->setMenu(popup->menu());
-	g_object_set_data(G_OBJECT(dialog), "popup", popup);*/
-
-	
         gtk_widget_show_all (GTK_WIDGET(dialog));
-   //     gtk_widget_hide(GTK_WIDGET(parent));
-        
-        
     }
 private:
     static void
     setUpSignals(GObject *dialog){
         auto treeView = GTK_TREE_VIEW(g_object_get_data(dialog, "treeView"));
         auto model = GTK_TREE_MODEL(g_object_get_data(dialog, "model"));
-
-         /*g_signal_connect (treeView, "row-activated", 
-            G_CALLBACK (TreeView<Type>::rowActivated), 
-            (void *)view);
-         */
-
     }
 };
 
