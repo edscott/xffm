@@ -134,6 +134,8 @@ public:
         g_free(default_value);
         return hbox;
     }
+    
+#if 0
     GtkBox *
     addCheck(const gchar *item_string, const gchar *item_id, 
             gboolean state=TRUE,
@@ -189,6 +191,7 @@ public:
         gtk_box_pack_start (vbox, GTK_WIDGET(hbox), FALSE, FALSE, 0);
         return hbox;
     }
+#endif
 
     void *
     addOptionPage(group_options_t *options_p, const gchar *label, gint flag_id) {
@@ -311,8 +314,8 @@ private:
 
         //gtk_widget_show(GTK_WIDGET(vbox_));
         
-        GtkWidget *tab_label = gtk_label_new(_("Login"));
-        GtkWidget *menu_label = gtk_label_new(_("Login"));
+        GtkWidget *tab_label = gtk_label_new(_("Mount"));
+        GtkWidget *menu_label = gtk_label_new(_("Mount"));
 
         gtk_notebook_insert_page_menu (GTK_NOTEBOOK(notebook), GTK_WIDGET(vbox_), tab_label, menu_label, 0);
         gtk_notebook_set_tab_reorderable (GTK_NOTEBOOK(notebook), GTK_WIDGET(vbox_), TRUE);
@@ -636,6 +639,8 @@ private:
         gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw), GTK_SHADOW_ETCHED_IN);
         gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), 
                 GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+        gtk_container_add(GTK_CONTAINER(sw), GTK_WIDGET(vbox));
+#if 0
         guint64 flag = 0;
         if (key_file && group && strlen(group)) {
             // Get the flag set in the file...
@@ -668,13 +673,12 @@ private:
                 }
             }
         }
-
+#endif
             
-        gtk_container_add(GTK_CONTAINER(sw), GTK_WIDGET(vbox));
 
 
         gint i=0;
-        for (; options_p && options_p->flag; options_p++){
+        for (; options_p && options_p->id; options_p++){
           auto vbox2 = Gtk<Type>::vboxNew(0, FALSE);
           auto hbox = Gtk<Type>::hboxNew(0, FALSE);
           auto hbox2 = Gtk<Type>::hboxNew(0, FALSE);
@@ -698,6 +702,9 @@ private:
           g_free(checkMarkup);
 
           auto check = gtk_check_button_new_with_label(options_p->flag);
+          gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(check), 
+                  options_p->sensitive > 1 || options_p->sensitive < 0);
+
           g_object_set_data(G_OBJECT(hbox),"check", check);
 
           gtk_box_pack_start (GTK_BOX (vbox2), GTK_WIDGET(hbox), FALSE, FALSE, 0);
@@ -712,8 +719,13 @@ private:
             gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(entry), FALSE, FALSE, 0);
           }
           if (options_p->text || options_p->tip) {
-                auto labelview = mkTextView((options_p->tip)?options_p->tip:options_p->text);
+                auto text = g_strconcat(
+                        (options_p->tip)?options_p->tip:options_p->text, " ",
+                        (options_p->tip)?options_p->text:NULL,
+                        NULL);
+                auto labelview = mkTextView(text);
                 gtk_box_pack_start (GTK_BOX (hbox2), GTK_WIDGET(labelview), TRUE, TRUE, 0);
+                g_free(text);
           }
 
           gtk_widget_set_sensitive(GTK_WIDGET(hbox), (options_p->sensitive > 0));
@@ -735,16 +747,15 @@ private:
                         DBG("3 value=%s\n", options_p->entry);
                 gtk_entry_set_text(GTK_ENTRY(entry), options_p->entry);
           }*/
-          if (flag & (ui << i)){
+          /*if (flag & (ui << i)){
                gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(check), TRUE);
-          }
+          }*/
           g_signal_connect (check, "toggled", G_CALLBACK (option_toggle), 
                    GINT_TO_POINTER(i));
           i++;
 
           gtk_box_pack_start (vbox, GTK_WIDGET(vbox2), FALSE, FALSE, 0);      
         }
-        //gtk_widget_show(GTK_WIDGET(vbox));
         gtk_widget_set_size_request(sw, 400, -1);
         return sw;
     }
@@ -884,7 +895,6 @@ public:
         this->addEntry(EFS_REMOTE_PATH, "FUSE_REMOTE_PATH");
         this->addEntry(FUSE_MOUNT_POINT, "FUSE_MOUNT_POINT", FALSE);
         this->addEntry(ECRYPTFS_SIG, "ECRYPTFS_SIG", FALSE);
-        this->addEntry(ECRYPTFS_FNEK_SIG, "ECRYPTFS_FNEK_SIG", FALSE);
         this->addEntry(FUSE_URL, "FUSE_URL");
         auto entry = GTK_ENTRY(g_object_get_data(G_OBJECT(this->dialog()), "FUSE_URL"));
         auto u =g_strconcat(this->urlTemplate(), "://", NULL);
@@ -895,12 +905,12 @@ public:
 
         DBG("EFS constructor checkboxes\n");
 
-        this->addCheck(EPS_ENABLE_FILENAME_CRYPTO, "EfS_ENABLE_FILENAME_CRYPTO", TRUE, EPS_REQUIRES_SIGNATURE);
-        this->addCheck(EPS_PASSTHROUGH, "EFS_PASSTHROUGH", FALSE );
+        //this->addCheck(EPS_ENABLE_FILENAME_CRYPTO, "EfS_ENABLE_FILENAME_CRYPTO", TRUE, EPS_REQUIRES_SIGNATURE);
+        //this->addCheck(EPS_PASSTHROUGH, "EFS_PASSTHROUGH", FALSE );
 
 
-        this->addOptionPage(mount_options, "Mount", 6 );
-        this->addOptionPage(efs_options, "EcryptFS", 12);
+        this->addOptionPage(mount_options, _("Options"), 6 );
+        this->addOptionPage(efs_options, _("Advanced"), 12);
 
         
         gtk_widget_show_all(GTK_WIDGET(this->dialog()));
