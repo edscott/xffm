@@ -61,7 +61,7 @@ public:
     static void
     openDnDBox(GtkWindow *parent, const gchar *title, GSList *list){
         //if (g_slist_length(list) == 0) return NULL;
-        
+        DBG("openDnDBox\n");
         // Create liststore for DnD
         auto dialog = GTK_WINDOW(Dialogs<Type>::quickDialog(parent, _("Results"), NULL, title));
 	findResultsWidgets = g_list_prepend(findResultsWidgets, dialog);

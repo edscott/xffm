@@ -166,8 +166,8 @@ public:
             g_free(c);
         } 
         gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-        gtk_widget_show(label);
-        gtk_widget_show(GTK_WIDGET(hbox));
+        //gtk_widget_show(label);
+        //gtk_widget_show(GTK_WIDGET(hbox));
         auto key_file = (GKeyFile *)g_object_get_data(G_OBJECT(this->dialog()), 
                 "key_file");
         auto url = (const gchar *)g_object_get_data(G_OBJECT(this->dialog()), 
@@ -199,7 +199,7 @@ public:
 
         GtkWidget *vbox = optionsBox(this->dialog(), 
                 options_p, key_file, url, flag_id);
-        gtk_widget_show(GTK_WIDGET(vbox));
+        //gtk_widget_show(GTK_WIDGET(vbox));
         GtkWidget *tab_label = gtk_label_new(label);
         GtkWidget *menu_label = gtk_label_new(label);
         auto notebook = (GtkNotebook *) g_object_get_data(G_OBJECT(this->dialog()), 
@@ -263,12 +263,12 @@ private:
 
         auto hbox = Gtk<Type>::hboxNew (FALSE, 2);
         gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area(GTK_DIALOG (dialog))), GTK_WIDGET(hbox), FALSE, FALSE, 0);
-        gtk_widget_show(GTK_WIDGET(hbox));
+        //gtk_widget_show(GTK_WIDGET(hbox));
 
         auto pixbuf = Pixbuf<Type>::get_pixbuf("dialog-question", -24);
         auto image = gtk_image_new_from_pixbuf(pixbuf);
         g_object_unref(pixbuf);
-        gtk_widget_show(image);
+        //gtk_widget_show(image);
         gtk_box_pack_start (GTK_BOX (hbox), image, FALSE, FALSE, 0);
 
         auto text = g_strconcat(_("Options:"), " ", 
@@ -288,12 +288,12 @@ private:
         gtk_text_buffer_insert (buffer,&iter, text, -1);
 
         g_free(text);
-        gtk_widget_show(labelview);
+        //gtk_widget_show(labelview);
         gtk_box_pack_start (hbox, labelview, TRUE, TRUE, 0);
 
 
-        auto tbox = Gtk<Type>::vboxNew(FALSE, 0);
-        gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG(dialog))), GTK_WIDGET(tbox), FALSE, FALSE, 0);
+        auto tbox = Gtk<Type>::vboxNew(TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG(dialog))), GTK_WIDGET(tbox), TRUE, TRUE, 0);
         GtkWidget *notebook = gtk_notebook_new ();
         g_object_set_data(G_OBJECT(dialog), "notebook", notebook);
         gtk_notebook_popup_enable (GTK_NOTEBOOK(notebook));
@@ -309,9 +309,9 @@ private:
 
 
         gtk_box_pack_start (tbox, notebook, TRUE, TRUE, 0);
-        vbox_ = Gtk<Type>::vboxNew (FALSE, 0);
+        vbox_ = Gtk<Type>::vboxNew (TRUE, 0);
 
-        gtk_widget_show(GTK_WIDGET(vbox_));
+        //gtk_widget_show(GTK_WIDGET(vbox_));
         
         GtkWidget *tab_label = gtk_label_new(_("Login"));
         GtkWidget *menu_label = gtk_label_new(_("Login"));
@@ -322,7 +322,7 @@ private:
         auto action_area = Gtk<Type>::hboxNew(FALSE, 1);
         gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area(GTK_DIALOG(dialog))), 
                 GTK_WIDGET(action_area), FALSE, FALSE, 0);
-        gtk_widget_show(GTK_WIDGET(action_area));
+        //gtk_widget_show(GTK_WIDGET(action_area));
 
 
 
@@ -380,9 +380,9 @@ private:
         g_object_set_data(G_OBJECT(fuse->dialog()), id, entry);
         gtk_box_pack_start (hbox, label, FALSE, FALSE, 0);
         gtk_box_pack_start (hbox, entry, TRUE, TRUE, 0);
-        gtk_widget_show(GTK_WIDGET(hbox));
-        gtk_widget_show(label);
-        gtk_widget_show(entry);
+        //gtk_widget_show(GTK_WIDGET(hbox));
+        //gtk_widget_show(label);
+        //gtk_widget_show(entry);
         if (callback) {
             g_signal_connect (G_OBJECT (entry), "key-release-event", G_CALLBACK (callback), fuse);
         }
@@ -601,7 +601,7 @@ private:
         GtkWidget *check;
         check = gtk_check_button_new_with_label (text);
         g_object_set_data(G_OBJECT(fuse->dialog()), id, check);
-        gtk_widget_show(check);
+        //gtk_widget_show(check);
         if (callback){
             g_signal_connect (check, "toggled", G_CALLBACK (callback), fuse);
         }
@@ -678,7 +678,9 @@ private:
         gint i=0;
         for (; options_p && options_p->flag; options_p++){
 
+          auto vbox2 = Gtk<Type>::vboxNew(0, FALSE);
           auto hbox = Gtk<Type>::hboxNew(0, FALSE);
+          auto hbox2 = Gtk<Type>::hboxNew(0, FALSE);
           if (!options_p->id){
               DBG("optionsBox(): options id cannot be null.\n");
               continue;
@@ -689,7 +691,7 @@ private:
           }
           g_object_set_data(G_OBJECT(dialog),options_p->id, hbox);
 
-          gtk_widget_show(GTK_WIDGET(hbox));
+          //gtk_widget_show(GTK_WIDGET(hbox));
           gchar *check_text;
           if (options_p->entry){
               check_text = 
@@ -709,7 +711,9 @@ private:
               rfm_add_custom_tooltip(check, NULL, options_p->text);
           }*/
           g_free(check_text);
-          gtk_widget_show(check);
+          //gtk_widget_show(check);
+          gtk_box_pack_start (GTK_BOX (vbox2), GTK_WIDGET(hbox), FALSE, FALSE, 0);
+          gtk_box_pack_start (GTK_BOX (vbox2), GTK_WIDGET(hbox2), TRUE, TRUE, 0);
           gtk_box_pack_start (GTK_BOX (hbox), check, FALSE, FALSE, 0);
 
           GtkWidget *label=NULL;
@@ -717,12 +721,16 @@ private:
             auto entry = GTK_ENTRY(gtk_entry_new());
             g_object_set_data(G_OBJECT(hbox),"entry", entry);
             gtk_entry_set_text(entry, options_p->entry);
-            gtk_widget_show(GTK_WIDGET(entry));
+            //gtk_widget_show(GTK_WIDGET(entry));
             gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(entry), FALSE, FALSE, 0);
             if (options_p->text) {
-                auto label = gtk_label_new(options_p->text);
-                gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-                gtk_widget_show(label);
+                auto label = gtk_label_new("");
+                const gchar *t = (options_p->tip)?options_p->tip:options_p->text;
+                auto markup = g_strdup_printf("<span color=\"blue\">(%s)</span>",t); 
+                gtk_label_set_markup(GTK_LABEL(label), markup);
+                g_free(markup);
+                gtk_box_pack_start (GTK_BOX (hbox2), label, FALSE, FALSE, 0);
+                //gtk_widget_show(label);
             }
           }
           /*else if (options_p->text) {
@@ -731,7 +739,7 @@ private:
             label=gtk_label_new("");
             gtk_label_set_markup(GTK_LABEL(label), g);
             g_free(g);
-            gtk_widget_show(label);
+            //gtk_widget_show(label);
             gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
           }*/
 
@@ -761,10 +769,10 @@ private:
                    GINT_TO_POINTER(i));
           i++;
 
-          gtk_box_pack_start (vbox, GTK_WIDGET(hbox), FALSE, FALSE, 0);      
+          gtk_box_pack_start (vbox, GTK_WIDGET(vbox2), FALSE, FALSE, 0);      
         }
-        gtk_widget_show(GTK_WIDGET(vbox));
-        gtk_widget_set_size_request(sw, -1, 300);
+        //gtk_widget_show(GTK_WIDGET(vbox));
+        //gtk_widget_set_size_request(sw, -1, -1);
         return sw;
     }
 

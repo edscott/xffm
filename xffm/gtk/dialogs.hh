@@ -3,6 +3,7 @@
 
 namespace xf
 {
+template <class Type> class Gtk;
 
 template <class Type>
 class Dialogs{
@@ -59,6 +60,7 @@ public:
         return dialog;
     }
 
+
     static GtkWidget *
     quickDialog (GtkWindow *parent, 
             const gchar *message, 
@@ -67,14 +69,25 @@ public:
     {
      GtkWidget *dialog = NULL;
      GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT;
+        DBG("quickDialog\n");
 
      // Create the widgets
-     dialog = gtk_dialog_new_with_buttons (title,
+     dialog = gtk_dialog_new ();
+     /*dialog = gtk_dialog_new_with_buttons (title,
 					   parent,
 					   flags,
 					   _("Cancel"),
 					   GTK_RESPONSE_NONE,
-					   NULL);
+					   NULL);*/
+     if (parent) {
+        gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+        gtk_window_set_transient_for (GTK_WINDOW (dialog), 
+                GTK_WINDOW (parent));
+     } else {
+        gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+     }
+     gtk_window_set_type_hint(GTK_WINDOW(dialog), GDK_WINDOW_TYPE_HINT_DIALOG);
+     
      auto content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
      auto label = GTK_LABEL(gtk_label_new (""));
      gtk_label_set_markup(label, message);
@@ -96,7 +109,9 @@ public:
      auto vbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
      g_object_set_data(G_OBJECT(dialog), "vbox", vbox);
      
-     gtk_container_add (GTK_CONTAINER (content_area), GTK_WIDGET(vbox));
+     gtk_box_pack_start(GTK_BOX(content_area), GTK_WIDGET(vbox), TRUE, TRUE,0);
+     
+     //gtk_container_add (GTK_CONTAINER (content_area), GTK_WIDGET(vbox));
      if (icon){
 	auto pixbuf = Pixbuf<Type>::get_pixbuf(icon, -48);
         if (pixbuf) {
@@ -110,6 +125,17 @@ public:
      auto hbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
      gtk_box_pack_start(vbox, GTK_WIDGET(hbox), FALSE, FALSE,0);
      gtk_box_pack_start(hbox, GTK_WIDGET(label), FALSE, FALSE,0);
+
+     auto vbox2 = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+     //gtk_box_pack_end(GTK_BOX(content_area), GTK_WIDGET(vbox2), FALSE, FALSE,0);
+   
+     gtk_box_pack_end(vbox, GTK_WIDGET(vbox2), FALSE, FALSE,0);
+     auto button = Gtk<Type>::dialog_button("process-stop", _("Cancel"));
+     gtk_box_pack_end(vbox2, GTK_WIDGET(button), FALSE, FALSE,0);
+     g_signal_connect (button, "clicked",
+		G_CALLBACK (onQuickCancel),
+		dialog);
+
         
 
      return dialog;
@@ -117,6 +143,12 @@ public:
 
 
 private:
+
+    static void
+    onQuickCancel (GtkWidget * button, gpointer data) {
+        auto dialog = GTK_DIALOG(data);
+        gtk_dialog_response(dialog, GTK_RESPONSE_CANCEL );
+    }
     
     static void
     closeQuickDialog(GtkWidget *widget, GdkEventKey * event, void *data){
