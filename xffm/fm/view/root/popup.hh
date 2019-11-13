@@ -181,7 +181,7 @@ private:
     {
         DBG("menuAddEFS\n");
         auto efs = new(EFS<Type>)(NULL);
-	gint response  = gtk_dialog_run(efs->dialog());
+        gint response  = gtk_dialog_run(efs->dialog());
         DBG("menuAddEFS(): efs response=%d (%d,%d,%d)\n", 
                 response,GTK_RESPONSE_YES,GTK_RESPONSE_APPLY,GTK_RESPONSE_CANCEL);
         switch (response){
@@ -189,15 +189,13 @@ private:
                 efs->getOptions();
                 break;
             case GTK_RESPONSE_APPLY: // Save
-                efs->getOptions();
+                efs->save();
                 break;
             default:
             case GTK_RESPONSE_CANCEL:
                 break;
         }
-        //gtk_widget_destroy(GTK_WIDGET(efs->dialog()));
         delete(efs);
-        //menuMarker(menuItem, data, 1);
     }
     static void
     menuAddBookmark(GtkMenuItem *menuItem, gpointer data)

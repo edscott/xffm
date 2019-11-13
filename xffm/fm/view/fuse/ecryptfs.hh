@@ -31,8 +31,9 @@ class Fuse  {
     GtkWidget *allowEmptyPassphrase_;
     const gchar *urlTemplate_;
     GtkBox *mountPointBox_; // FUSE_MOUNT_POINT_BOX
-    GtkButton *trueButton_;
-    GtkButton *falseButton_;
+    GtkButton *loadButton_;
+    GtkButton *saveButton_;
+    GtkButton *cancelButton_;
     GtkButton *mountButton_;
     gint response_;
     
@@ -44,6 +45,8 @@ public:
     const gchar *urlTemplate(void){ return urlTemplate_;}
     GtkBox *vbox(void){return vbox_;}
     gint response(void){return response_;}
+    GtkButton *saveButton(void){return saveButton_;}
+    GtkButton *mountButton(void){return mountButton_;}
     
     Fuse(const gchar *url, const gchar *info1, const gchar *info2):
         monitor_(NULL),
@@ -62,15 +65,10 @@ public:
     }
 
 
-    GtkBox *
+    GtkEntry *
     addEntry(const gchar *item_string, const gchar *item_id, gboolean state=TRUE){
-        
-        const gchar *separator=" ";
-        if (item_string && !strchr(item_string, ':')){
-            separator = ": ";
-        }
 
-        auto hbox = makeEntryBox(this, item_string, item_id, separator, TRUE, (gpointer)on_key_press);
+        auto hbox = makeEntryBox(this, item_string, item_id, state, TRUE);
         gtk_widget_set_sensitive(GTK_WIDGET(hbox), state);
         if (strcmp(item_id, "FUSE_MOUNT_POINT")==0){
             mountPointBox_ = hbox;
@@ -132,7 +130,7 @@ public:
         setEntry(entry, keyfile_, url_, item_id, default_value);
         gtk_box_pack_start (GTK_BOX (vbox_), GTK_WIDGET(hbox), FALSE, FALSE, 0);
         g_free(default_value);
-        return hbox;
+        return entry;
     }
     
 #if 0
@@ -327,19 +325,23 @@ private:
 
 
 
-        auto falseButton_ = Gtk<Type>::dialog_button ("window-close", _("Cancel"));
-        gtk_box_pack_start (GTK_BOX (action_area), GTK_WIDGET(falseButton_), FALSE, FALSE, 0);
+        cancelButton_ = Gtk<Type>::dialog_button ("window-close", _("Cancel"));
+        gtk_box_pack_start (GTK_BOX (action_area), GTK_WIDGET(cancelButton_), FALSE, FALSE, 0);
 
 
-        trueButton_ = Gtk<Type>::dialog_button ("media-floppy", _("Save"));
-        gtk_box_pack_start (GTK_BOX (action_area), GTK_WIDGET(trueButton_), FALSE, FALSE, 0);
+        saveButton_ = Gtk<Type>::dialog_button ("media-floppy", _("Save"));
+        gtk_box_pack_start (GTK_BOX (action_area), GTK_WIDGET(saveButton_), FALSE, FALSE, 0);
+
+        loadButton_ = Gtk<Type>::dialog_button ("document-open", _("Load"));
+        gtk_box_pack_start (GTK_BOX (action_area), GTK_WIDGET(loadButton_), FALSE, FALSE, 0);
 
         mountButton_ = Gtk<Type>::dialog_button ("greenball", _("Mount"));
         gtk_box_pack_start (GTK_BOX (action_area), GTK_WIDGET(mountButton_), FALSE, FALSE, 0);
 
 
-        g_signal_connect (G_OBJECT (trueButton_), "clicked", G_CALLBACK (button_ok), this);
-        g_signal_connect (G_OBJECT (falseButton_), "clicked", G_CALLBACK (button_cancel), this);
+        g_signal_connect (G_OBJECT (loadButton_), "clicked", G_CALLBACK (button_load), this);
+        g_signal_connect (G_OBJECT (saveButton_), "clicked", G_CALLBACK (button_save), this);
+        g_signal_connect (G_OBJECT (cancelButton_), "clicked", G_CALLBACK (button_cancel), this);
         g_signal_connect (G_OBJECT (mountButton_), "clicked", G_CALLBACK (button_mount), this);
 
         g_signal_connect (G_OBJECT (dialog), "delete-event", G_CALLBACK (response_delete), this);
@@ -367,13 +369,17 @@ private:
 
     static GtkBox *
     makeEntryBox(Fuse<Type> *fuse, 
-            const gchar *text, 
+            const gchar *item_string, 
             const gchar *id, 
-            const gchar *colon, 
-            gboolean visibility, 
-            gpointer callback){
+            gboolean withSelector,
+            gboolean visibility)
+    {
+        const gchar *separator=" ";
+        if (item_string && !strchr(item_string, ':')){
+            separator = ": ";
+        }
         auto hbox = Gtk<Type>::hboxNew(FALSE, 0);
-        auto full_text = g_strconcat(text, colon, NULL);
+        auto full_text = g_strconcat(item_string, separator, NULL);
         auto label = gtk_label_new(full_text);
         g_free(full_text);
         auto entry = gtk_entry_new();
@@ -381,16 +387,18 @@ private:
         g_object_set_data(G_OBJECT(fuse->dialog()), id, entry);
         gtk_box_pack_start (hbox, label, FALSE, FALSE, 0);
         gtk_box_pack_start (hbox, entry, TRUE, TRUE, 0);
-        //gtk_widget_show(GTK_WIDGET(hbox));
-        //gtk_widget_show(label);
-        //gtk_widget_show(entry);
-        if (callback) {
-            g_signal_connect (G_OBJECT (entry), "key-release-event", G_CALLBACK (callback), fuse);
+
+        if (withSelector){
+            auto button = Gtk<Type>::dialog_button ("document-open", NULL);
+            g_signal_connect (G_OBJECT (button), "clicked", 
+                    G_CALLBACK (ChooserResponse<Type>::folderChooser), entry);
+            gtk_box_pack_start (hbox, GTK_WIDGET(button), FALSE, FALSE, 0);
         }
+            
+
         return hbox;
     }
 
- 
     static void
     setEntry(GtkEntry *entry, 
             GKeyFile *key_file, 
@@ -777,7 +785,14 @@ private:
 private: // gtk callbacks
 
     static void
-    button_ok (GtkButton * button, gpointer data) {
+    button_load (GtkButton * button, gpointer data) {
+        auto fuse = (Fuse<Type> *)data;
+        gtk_dialog_response(fuse->dialog(), GTK_RESPONSE_APPLY);
+        gtk_widget_hide(GTK_WIDGET(fuse->dialog()));
+    }
+
+    static void
+    button_save (GtkButton * button, gpointer data) {
         auto fuse = (Fuse<Type> *)data;
         gtk_dialog_response(fuse->dialog(), GTK_RESPONSE_APPLY);
         gtk_widget_hide(GTK_WIDGET(fuse->dialog()));
@@ -885,38 +900,99 @@ class EFS: public Fuse<Type>{
         efsPassthrough_ = getCheck("EfS_PASSTHROUGH");
 
     }*/
-
+    GtkEntry *remoteEntry_;
+    GtkEntry *mountPointEntry_;
+    GtkEntry *urlEntry_;
 public:
+    GtkEntry *mountPointEntry(void){return mountPointEntry_;}
+    GtkEntry *remoteEntry(void){return remoteEntry_;}
+    GtkEntry *urlEntry(void){return urlEntry_;}
+
     EFS(const gchar *url):
         Fuse<Type>(url, EFS_INFO1, EFS_INFO2)
     {
         this->setUrlTemplate("efs");
         DBG("EFS constructor entries\n");
-        this->addEntry(EFS_REMOTE_PATH, "FUSE_REMOTE_PATH");
-        this->addEntry(FUSE_MOUNT_POINT, "FUSE_MOUNT_POINT", FALSE);
+        remoteEntry_ = this->addEntry(EFS_REMOTE_PATH, "FUSE_REMOTE_PATH");
+        mountPointEntry_ = this->addEntry(FUSE_MOUNT_POINT, "FUSE_MOUNT_POINT");
         this->addEntry(ECRYPTFS_SIG, "ECRYPTFS_SIG", FALSE);
-        this->addEntry(FUSE_URL, "FUSE_URL");
-        auto entry = GTK_ENTRY(g_object_get_data(G_OBJECT(this->dialog()), "FUSE_URL"));
-        auto u =g_strconcat(this->urlTemplate(), "://", NULL);
-                        DBG("1.1 value=%s\n", u);
-        gtk_entry_set_text(entry, u);
-        g_free(u);
-        gtk_widget_set_sensitive(GTK_WIDGET(entry), FALSE);
+        urlEntry_ = this->addEntry(FUSE_URL, "FUSE_URL", FALSE);
+
+        auto entryBuffer = gtk_entry_get_buffer (remoteEntry_);
+        g_signal_connect(G_OBJECT(entryBuffer), "inserted-text", G_CALLBACK(updateUrl), this);
+        g_signal_connect(G_OBJECT(entryBuffer), "inserted-text", G_CALLBACK(activateButtons), this);
+        entryBuffer = gtk_entry_get_buffer (mountPointEntry_);
+        g_signal_connect(G_OBJECT(entryBuffer), "inserted-text", G_CALLBACK(activateButtons), this);
+
+        gtk_widget_set_sensitive(GTK_WIDGET(this->saveButton()), FALSE);
+        gtk_widget_set_sensitive(GTK_WIDGET(this->mountButton()), FALSE);
 
         DBG("EFS constructor checkboxes\n");
 
-        //this->addCheck(EPS_ENABLE_FILENAME_CRYPTO, "EfS_ENABLE_FILENAME_CRYPTO", TRUE, EPS_REQUIRES_SIGNATURE);
-        //this->addCheck(EPS_PASSTHROUGH, "EFS_PASSTHROUGH", FALSE );
-
-
         this->addOptionPage(mount_options, _("Options"), 6 );
         this->addOptionPage(efs_options, _("Advanced"), 12);
-
         
         gtk_widget_show_all(GTK_WIDGET(this->dialog()));
     }
     ~EFS(void){
         DBG("efs destructor\n");
+    }
+    
+    static void
+    activateButtons (GtkEntryBuffer *buffer,
+               guint           position,
+               gchar          *chars,
+               guint           n_chars,
+               gpointer        data){
+        auto efs = (EFS<Type> *)data;
+        const gchar *path1 = gtk_entry_get_text(efs->remoteEntry());
+        const gchar *path2 = gtk_entry_get_text(efs->mountPointEntry());
+        auto condition = (g_file_test(path1, G_FILE_TEST_IS_DIR) && g_file_test(path2, G_FILE_TEST_IS_DIR));
+        gtk_widget_set_sensitive(GTK_WIDGET(efs->saveButton()), condition);
+        gtk_widget_set_sensitive(GTK_WIDGET(efs->mountButton()), condition);
+    }
+    
+    static void
+    updateUrl (GtkEntryBuffer *buffer,
+               guint           position,
+               gchar          *chars,
+               guint           n_chars,
+               gpointer        data){
+        auto efs = (EFS<Type> *)data;
+        const gchar *path = gtk_entry_get_text(efs->remoteEntry());
+        auto u =g_strconcat(efs->urlTemplate(), "://", path, NULL);
+        gtk_entry_set_text(efs->urlEntry(), u);
+        g_free(u);
+        gtk_entry_set_text(efs->mountPointEntry(), path);
+    }
+
+    static gboolean 
+    checkPath(GtkWindow *parent, const gchar *path){
+        if (!path) return FALSE;
+        auto retval = TRUE;
+        if (!strlen(path)) retval = FALSE;
+        if (!g_file_test(path, G_FILE_TEST_EXISTS)) retval = FALSE;
+        if (!g_file_test(path, G_FILE_TEST_IS_DIR)) retval = FALSE;
+        if (!retval){
+            auto message = g_strdup_printf("%s: \"%s\"\n", strerror(ENOENT), path);
+            DBG("%s", message);
+            //Dialogs<Type>::quickHelp(parent, message, "dialog-warning", _("Error"));
+            g_free(message);
+        }
+        return retval;
+    }
+
+    gboolean save(void){
+        auto dialog = G_OBJECT(this->dialog());
+        auto entryPath = GTK_ENTRY(g_object_get_data(dialog, "FUSE_REMOTE_PATH"));
+        auto entryMountPoint = GTK_ENTRY(g_object_get_data(dialog, "FUSE_MOUNT_POINT"));
+        auto path = gtk_entry_get_text(entryPath);
+        auto mountPoint = gtk_entry_get_text(entryMountPoint);
+        if (!this->checkPath(GTK_WINDOW(dialog), path)) return FALSE;
+        if (!this->checkPath(GTK_WINDOW(dialog), mountPoint)) return FALSE;
+        getOptions();
+        return TRUE;
+
     }
 
     void getOptions(void){
@@ -929,11 +1005,11 @@ public:
             }
             auto check = GTK_TOGGLE_BUTTON(g_object_get_data(G_OBJECT(box), "check")); 
             auto entry = GTK_ENTRY(g_object_get_data(G_OBJECT(box), "entry")); 
-            if (check || entry) {
-                if (check) {DBG("Check(%s): %d\n", p->id, gtk_toggle_button_get_active(check));}
-                if (entry) {DBG("%sEntry(%s): \"%s\"\n",check?"->":"", p->id, gtk_entry_get_text(entry));}    
+            if (gtk_toggle_button_get_active(check)) {
+                DBG("Option --> %s%s\n", p->id, 
+                        (entry)?gtk_entry_get_text(entry):"");
             }
-            else DBG("no check nor entry for %s\n", p->id);
+            else TRACE("no check:  %s\n", p->id);
         }    
     }
 };
