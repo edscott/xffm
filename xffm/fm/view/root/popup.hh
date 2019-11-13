@@ -186,7 +186,7 @@ private:
                 response,GTK_RESPONSE_YES,GTK_RESPONSE_APPLY,GTK_RESPONSE_CANCEL);
         switch (response){
             case GTK_RESPONSE_YES: // mount
-                efs->getOptions();
+                efs->mountUrl();
                 break;
             case GTK_RESPONSE_APPLY: // Save
                 efs->save();

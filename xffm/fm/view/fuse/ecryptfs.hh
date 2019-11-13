@@ -966,36 +966,16 @@ public:
         gtk_entry_set_text(efs->mountPointEntry(), path);
     }
 
-    static gboolean 
-    checkPath(GtkWindow *parent, const gchar *path){
-        if (!path) return FALSE;
-        auto retval = TRUE;
-        if (!strlen(path)) retval = FALSE;
-        if (!g_file_test(path, G_FILE_TEST_EXISTS)) retval = FALSE;
-        if (!g_file_test(path, G_FILE_TEST_IS_DIR)) retval = FALSE;
-        if (!retval){
-            auto message = g_strdup_printf("%s: \"%s\"\n", strerror(ENOENT), path);
-            DBG("%s", message);
-            //Dialogs<Type>::quickHelp(parent, message, "dialog-warning", _("Error"));
-            g_free(message);
-        }
-        return retval;
-    }
-
     gboolean save(void){
-        auto dialog = G_OBJECT(this->dialog());
-        auto entryPath = GTK_ENTRY(g_object_get_data(dialog, "FUSE_REMOTE_PATH"));
-        auto entryMountPoint = GTK_ENTRY(g_object_get_data(dialog, "FUSE_MOUNT_POINT"));
-        auto path = gtk_entry_get_text(entryPath);
-        auto mountPoint = gtk_entry_get_text(entryMountPoint);
-        if (!this->checkPath(GTK_WINDOW(dialog), path)) return FALSE;
-        if (!this->checkPath(GTK_WINDOW(dialog), mountPoint)) return FALSE;
         getOptions();
         return TRUE;
 
     }
 
     void getOptions(void){
+        auto path = gtk_entry_get_text(this->remoteEntry());
+        auto mountPoint = gtk_entry_get_text(this->mountPointEntry());
+        DBG("efsmount: %s -> %s\n", path, mountPoint);
         group_options_t *options_p = efs_options;
         for (auto p=options_p; p && p->flag; p++){
             auto box = GTK_BOX(g_object_get_data(G_OBJECT(this->dialog()), p->id));
@@ -1012,6 +992,220 @@ public:
             else TRACE("no check:  %s\n", p->id);
         }    
     }
+
+    void mountUrl(void){
+        auto path = gtk_entry_get_text(this->remoteEntry());
+        auto mountPoint = gtk_entry_get_text(this->mountPointEntry());
+        DBG("mountUrl: %s -> %s\n", path, mountPoint);
+        const gchar *argv[MAX_COMMAND_ARGS];
+        memset(argv, 0, MAX_COMMAND_ARGS*sizeof(gchar *));
+
+        gint i=0;
+        if (geteuid() != 0) {
+            argv[i++] = "sudo";
+            argv[i++] = "-A";
+        }
+        
+        argv[i++] = "mount";
+        // Mount options
+        for (auto p=mount_options; p->id && i+1 < MAX_COMMAND_ARGS; p++) {
+            auto box = GTK_BOX(g_object_get_data(G_OBJECT(this->dialog()), p->id));
+            if (!box) {
+                DBG("getOptions(): cannot find item \"%s\"\n", p->id);
+                continue;
+            }
+            auto check = GTK_TOGGLE_BUTTON(g_object_get_data(G_OBJECT(box), "check")); 
+            if (gtk_toggle_button_get_active(check)) {
+                DBG("Option %s --> %s\n", p->id, p->flag); 
+                argv[i++] = p->flag;
+            }	
+        }
+
+        argv[i++] = "-t";
+        argv[i++] = "ecryptfs";
+        gchar *passphraseFile = NULL;
+        gboolean insecurePassphraseFile = FALSE;
+        gchar *optionsOn = NULL;
+        for (auto p=efs_options; p->id && i+1 < MAX_COMMAND_ARGS; p++) {
+            auto box = GTK_BOX(g_object_get_data(G_OBJECT(this->dialog()), p->id));
+            if (!box) {
+                DBG("getOptions(): cannot find item \"%s\"\n", p->id);
+                continue;
+            }
+            auto check = GTK_TOGGLE_BUTTON(g_object_get_data(G_OBJECT(box), "check")); 
+            auto entry = GTK_ENTRY(g_object_get_data(G_OBJECT(box), "entry")); 
+            if (gtk_toggle_button_get_active(check)) {
+                if (!optionsOn) {
+                    optionsOn = g_strdup("-o");
+                } else {
+                    auto g = g_strconcat(optionsOn,",",NULL);
+                    g_free(optionsOn);
+                    optionsOn = g;
+                }
+                auto g = g_strconcat(optionsOn, p->id, 
+                        (entry)?gtk_entry_get_text(entry):"", NULL);
+                g_free(optionsOn);
+                optionsOn = g;
+                if (strcmp(p->id,"passphrase_passwd_file=")==0) insecurePassphraseFile = TRUE;
+                DBG("Option %s --> %s\n", p->id, optionsOn);
+            }
+            else TRACE("no check:  %s\n", p->id);
+        } 
+        // Get passphrase option
+        if (!insecurePassphraseFile) {
+            passphraseFile = get_passfile(path);
+            if (!passphraseFile) {
+                DBG("No passphrase file...\n");
+                g_free(optionsOn);
+                return;
+            }
+            auto g = g_strconcat(optionsOn, ",passphrase_passwd_file=", passphraseFile, NULL);
+            g_free(optionsOn);
+            optionsOn = g;
+        }
+        argv[i++] = optionsOn;
+
+        fprintf(stderr, "COMMAND: ");
+        for (auto a = argv; a && *a; a++){ fprintf(stderr, "%s ", *a); }
+        fprintf(stderr, "\n");
+
+
+        // run command
+        // cleanup
+        memset(optionsOn, 0, strlen(optionsOn));
+        g_free(optionsOn);
+        cleanup_passfile(passphraseFile);
+        
+   }
+
+   
+
+
+    static void 
+    cleanup_passfile(gchar *passfile){
+        if (!passfile) return;
+        struct stat st;
+        sleep(2);
+        gint fd = open(passfile, O_RDWR);
+        if (fd < 0){
+            DBG("Cannot open password file %s to wipeout\n", passfile);
+        } else {
+            gint i;
+            // wipeout
+            for (i=0; i<2048; i++){
+                const gchar *null="";
+                if (write(fd, null, 1) < 0){
+                    break;
+                }
+            }
+            close(fd);
+            if (unlink(passfile)<0) {
+                    DBG("Cannot unlink password file %s\n", passfile);
+            }
+        }
+        memset(passfile, 0, strlen(passfile));
+        g_free(passfile);
+        return;
+    }
+
+    static gchar *
+    get_passfile(const gchar *passphrase_text){
+        gchar *ptext = g_strdup_printf(_("Enter Passphrase for %s"), passphrase_text);
+        gchar *passphrase = PasswordResponse<Type>::getPassword (ptext);
+        g_free(ptext);
+
+        gint fd = -1;
+        gchar *passfile = NULL;
+        if (passphrase && strlen(passphrase)){
+            time_t seconds;
+            time (&seconds);
+            gint tried=0;
+    retry:
+            srand ((unsigned)seconds);
+            gint divide = RAND_MAX / 10000;
+            
+            if((seconds = rand () / divide) > 100000L){
+                seconds = 50001;
+            }
+            passfile = g_strdup_printf("%s/.efs-%ld", g_get_home_dir(), (long)seconds);
+            // if the file exists, retry with a different seudo-random number...
+            if (g_file_test(passfile, G_FILE_TEST_EXISTS)){
+                if (seconds > 0) seconds--;
+                else seconds++;
+                if (tried++ < 300) {
+                    g_free(passfile);
+                    goto retry;
+                } else {
+                    g_error("This is a what some people call \"a bean that weighs a pound\"\n");
+                }
+            }
+            TRACE("passfile=%s on try %d\n", passfile, try);
+
+            fd = open (passfile, O_CREAT|O_TRUNC|O_RDWR, 0600);
+    //	fd = open (passfile, O_CREAT|O_TRUNC|O_RDWR|O_SYNC|O_DIRECT, 0600);
+            if (fd >= 0) {
+                if (write(fd, (void *)"passwd=", strlen("passwd=")) < 0){
+                    DBG("write %s: %s\n", passfile, strerror(errno));
+                }
+                if (write(fd, (void *)passphrase, strlen(passphrase)) < 0){
+                    DBG("write %s: %s\n", passfile, strerror(errno));
+                }
+                memset(passphrase, 0, strlen(passphrase));
+                close(fd);
+            } else {
+                DBG("cannot open %s: %s\n", passfile, strerror(errno));
+            }
+
+        }
+        return passfile;
+    }
+
+#if 0
+static
+void
+run_fork_finished_function (void *user_data) {
+    widgets_t *widgets_p = user_data;
+    cleanup_passfile(widgets_p->data);
+}
+
+
+
+    static void 
+    stdout_f (void *user_data, void *stream, int childFD){
+        auto line = (gchar *)stream;
+        TRACE ("FORK stdout: %s\n", line);
+
+        if(line[0] == '\n') return;
+
+        if (strstr(line, "Select key type to use for newly created files:")){
+              rfm_threaded_diagnostics (widgets_p,  "xffm/greyball", g_strdup(line));
+              if (childFD > 0){
+                const gchar *r = "2\n";
+                if (write(childFD, r, strlen(r)) < strlen(r)){
+                    DBG("ecryptfs: short write (%s)\n", strerror(errno));
+                }
+              }
+        } else {
+              establish_ecryptfs_option(widgets_p, (gchar *)view_p->user_data, 
+                      line, "ecryptfs_sig=", "ECRYPTFS_SIG");
+              establish_ecryptfs_option(widgets_p, (gchar *)view_p->user_data, 
+                      line, "ecryptfs_fnek_sig=", "ECRYPTFS_FNEK_SIG");
+        }
+        return;
+    }
+    
+   rfm_thread_run_argv_full (
+	  widgets_p, 
+	  argv, 
+	  FALSE, 
+	  NULL, //&stdin_fd,  //NULL,
+	  stdout_f,
+	  NULL,
+	  run_fork_finished_function // This function will cleanup 
+	  );
+#endif
+
+
 };
 
 } // namespace xf

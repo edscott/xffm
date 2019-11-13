@@ -10,6 +10,15 @@ class PasswordResponse {
     using util_c = Util<double>;
     
 public:
+    static gchar *getPassword(const gchar *string){
+        auto p = getResponse (string, NULL, TRUE);
+        if (p && !strlen(p)){
+            g_free(p);
+            p=NULL;
+        }
+        return p;
+    }
+
     static void sendPassword(gchar **argv){
         gchar *p;
 
