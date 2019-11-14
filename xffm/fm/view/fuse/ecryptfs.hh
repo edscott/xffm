@@ -6,6 +6,7 @@
 
 namespace xf{
 
+static pthread_mutex_t efsMountMutex=PTHREAD_MUTEX_INITIALIZER;
 
 typedef struct fuse_login_t{
     guint64 flag;
@@ -52,7 +53,7 @@ public:
         monitor_(NULL),
         allowEmptyPassphrase_(NULL)
     {
-        DBG("Fuse constructor(%s, %s, %s)\n", url, info1, info2);
+        TRACE("Fuse constructor(%s, %s, %s)\n", url, info1, info2);
         
         url_ = url;
         keyfile_ = loadKeyfile(url);
@@ -60,7 +61,7 @@ public:
     }
 
     ~Fuse(void){
-        DBG("Fuse destructor...\n");
+        TRACE("Fuse destructor...\n");
         gtk_widget_destroy(GTK_WIDGET(dialog_));        
     }
 
@@ -410,8 +411,8 @@ private:
             pre_set = g_key_file_get_value(key_file, group, key, NULL);
         }
 
-                        DBG("1.2 value=%s\n", (pre_set)?pre_set:default_value);
-                        DBG("1.2 pre_set=\"%s\" \"%s\"\n", pre_set, default_value);
+                        TRACE("1.2 value=%s\n", (pre_set)?pre_set:default_value);
+                        TRACE("1.2 pre_set=\"%s\" \"%s\"\n", pre_set, default_value);
         gtk_entry_set_text(GTK_ENTRY(entry),(pre_set)?pre_set:default_value); 
         g_free(pre_set); 
     }
@@ -505,7 +506,7 @@ private:
         }
         entry = (GtkEntry *)g_object_get_data(G_OBJECT(fuse->dialog()), "FUSE_URL");
 
-                        DBG("1.4 value=%s\n", url);
+                        TRACE("1.4 value=%s\n", url);
         gtk_entry_set_text(GTK_ENTRY(entry), url);
         g_free(host);
         g_free(rpath);
@@ -725,6 +726,7 @@ private:
             g_object_set_data(G_OBJECT(hbox),"entry", entry);
             gtk_entry_set_text(entry, options_p->entry);
             gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(entry), FALSE, FALSE, 0);
+            gtk_widget_set_sensitive(GTK_WIDGET(entry), (options_p->sensitive > 0));
           }
           if (options_p->text || options_p->tip) {
                 auto text = g_strconcat(
@@ -736,7 +738,7 @@ private:
                 g_free(text);
           }
 
-          gtk_widget_set_sensitive(GTK_WIDGET(hbox), (options_p->sensitive > 0));
+          gtk_widget_set_sensitive(GTK_WIDGET(check), (options_p->sensitive > 0 && options_p->sensitive != 3));
         
           /*if (key_file) {
             if (entry) {
@@ -825,7 +827,7 @@ private: // gtk callbacks
         const gchar *c =  gtk_entry_get_text (GTK_ENTRY(in_entry));
         if (c && g_path_is_absolute(c)) return FALSE;
         gchar *a = g_strconcat("/", c, NULL);
-                        DBG("1.3 value=%s\n", a);
+                        TRACE("1.3 value=%s\n", a);
         gtk_entry_set_text(GTK_ENTRY(in_entry), a);
 
         g_free(a);
@@ -884,22 +886,6 @@ private: // gtk callbacks
 
 template <class Type>
 class EFS: public Fuse<Type>{
-/*    gchar *remotePath_;
-    gchar *mountPoint_;
-    gchar *ecryptfsSig_;
-    gchar *ecryptfsFnekSig_;
-    gboolean epsEnableFilenameCrypto_;
-    gboolean epsPassthrough_;
-
-    void getEfsOptions(void){
-        remotePath_ = getOption("FUSE_REMOTE_PATH");
-        mountPoint_ = getOption("FUSE_MOUNT_POINT");
-        ecryptfsSig_ = getOption("ECRYPTFS_SIG");
-        ecryptfsFnekSig_ = getOption("ECRYPTFS_FNEK_SIG");
-        efsEnableFilenameCrypto_ = getCheck("EFS_ENABLE_FILENAME_CRYPTO");
-        efsPassthrough_ = getCheck("EfS_PASSTHROUGH");
-
-    }*/
     GtkEntry *remoteEntry_;
     GtkEntry *mountPointEntry_;
     GtkEntry *urlEntry_;
@@ -915,7 +901,7 @@ public:
         DBG("EFS constructor entries\n");
         remoteEntry_ = this->addEntry(EFS_REMOTE_PATH, "FUSE_REMOTE_PATH");
         mountPointEntry_ = this->addEntry(FUSE_MOUNT_POINT, "FUSE_MOUNT_POINT");
-        this->addEntry(ECRYPTFS_SIG, "ECRYPTFS_SIG", FALSE);
+        //this->addEntry(ECRYPTFS_SIG, "ECRYPTFS_SIG", FALSE);
         urlEntry_ = this->addEntry(FUSE_URL, "FUSE_URL", FALSE);
 
         auto entryBuffer = gtk_entry_get_buffer (remoteEntry_);
@@ -998,7 +984,7 @@ public:
         auto mountPoint = gtk_entry_get_text(this->mountPointEntry());
         DBG("mountUrl: %s -> %s\n", path, mountPoint);
         const gchar *argv[MAX_COMMAND_ARGS];
-        memset(argv, 0, MAX_COMMAND_ARGS*sizeof(gchar *));
+        memset((void *)argv, 0, MAX_COMMAND_ARGS*sizeof(const gchar *));
 
         gint i=0;
         if (geteuid() != 0) {
@@ -1023,6 +1009,7 @@ public:
 
         argv[i++] = "-t";
         argv[i++] = "ecryptfs";
+        
         gchar *passphraseFile = NULL;
         gboolean insecurePassphraseFile = FALSE;
         gchar *optionsOn = NULL;
@@ -1036,7 +1023,7 @@ public:
             auto entry = GTK_ENTRY(g_object_get_data(G_OBJECT(box), "entry")); 
             if (gtk_toggle_button_get_active(check)) {
                 if (!optionsOn) {
-                    optionsOn = g_strdup("-o");
+                    optionsOn = g_strdup("");
                 } else {
                     auto g = g_strconcat(optionsOn,",",NULL);
                     g_free(optionsOn);
@@ -1063,29 +1050,48 @@ public:
             g_free(optionsOn);
             optionsOn = g;
         }
-        argv[i++] = optionsOn;
+        if (optionsOn){
+            argv[i++] = "-o";
+            argv[i++] = optionsOn;
+        }
+        argv[i++] = path;
+        argv[i++] = mountPoint;
 
         fprintf(stderr, "COMMAND: ");
         for (auto a = argv; a && *a; a++){ fprintf(stderr, "%s ", *a); }
         fprintf(stderr, "\n");
 
 
+        auto textview = Fm<Type>::getCurrentTextview();
+        Print<Type>::show_text(textview);
         // run command
+        pthread_mutex_lock(&efsMountMutex);
+        Run<Type>::thread_runReap((gpointer) textview, 
+            argv,
+            Run<Type>::run_operate_stdout,
+            Run<Type>::run_operate_stderr,
+            cleanupGo);
         // cleanup
         memset(optionsOn, 0, strlen(optionsOn));
         g_free(optionsOn);
-        cleanup_passfile(passphraseFile);
-        
+        pthread_t cleanupThread; 
+        pthread_create (&cleanupThread, NULL, cleanup_passfile, (void *) passphraseFile);
+        pthread_detach(cleanupThread);      
    }
 
    
-
-
     static void 
-    cleanup_passfile(gchar *passfile){
-        if (!passfile) return;
+    cleanupGo(void * data){
+        pthread_mutex_unlock(&efsMountMutex);
+    }
+
+    static void *
+    cleanup_passfile(void * data){
+        auto passfile = (gchar *)data;
+        if (!passfile) return NULL;
         struct stat st;
-        sleep(2);
+        pthread_mutex_lock(&efsMountMutex);
+
         gint fd = open(passfile, O_RDWR);
         if (fd < 0){
             DBG("Cannot open password file %s to wipeout\n", passfile);
@@ -1105,7 +1111,8 @@ public:
         }
         memset(passfile, 0, strlen(passfile));
         g_free(passfile);
-        return;
+        pthread_mutex_unlock(&efsMountMutex);
+        return NULL;
     }
 
     static gchar *
@@ -1136,7 +1143,7 @@ public:
                     g_free(passfile);
                     goto retry;
                 } else {
-                    g_error("This is a what some people call \"a bean that weighs a pound\"\n");
+                    g_error("This is a what some people call \"a chickpea that weighs a pound\"\n");
                 }
             }
             TRACE("passfile=%s on try %d\n", passfile, try);
@@ -1159,52 +1166,6 @@ public:
         }
         return passfile;
     }
-
-#if 0
-static
-void
-run_fork_finished_function (void *user_data) {
-    widgets_t *widgets_p = user_data;
-    cleanup_passfile(widgets_p->data);
-}
-
-
-
-    static void 
-    stdout_f (void *user_data, void *stream, int childFD){
-        auto line = (gchar *)stream;
-        TRACE ("FORK stdout: %s\n", line);
-
-        if(line[0] == '\n') return;
-
-        if (strstr(line, "Select key type to use for newly created files:")){
-              rfm_threaded_diagnostics (widgets_p,  "xffm/greyball", g_strdup(line));
-              if (childFD > 0){
-                const gchar *r = "2\n";
-                if (write(childFD, r, strlen(r)) < strlen(r)){
-                    DBG("ecryptfs: short write (%s)\n", strerror(errno));
-                }
-              }
-        } else {
-              establish_ecryptfs_option(widgets_p, (gchar *)view_p->user_data, 
-                      line, "ecryptfs_sig=", "ECRYPTFS_SIG");
-              establish_ecryptfs_option(widgets_p, (gchar *)view_p->user_data, 
-                      line, "ecryptfs_fnek_sig=", "ECRYPTFS_FNEK_SIG");
-        }
-        return;
-    }
-    
-   rfm_thread_run_argv_full (
-	  widgets_p, 
-	  argv, 
-	  FALSE, 
-	  NULL, //&stdin_fd,  //NULL,
-	  stdout_f,
-	  NULL,
-	  run_fork_finished_function // This function will cleanup 
-	  );
-#endif
-
 
 };
 
