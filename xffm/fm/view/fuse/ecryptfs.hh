@@ -953,48 +953,35 @@ public:
     }
 
     gboolean save(void){
-        getOptions();
-        return TRUE;
-
-    }
-
-    void getOptions(void){
         auto path = gtk_entry_get_text(this->remoteEntry());
         auto mountPoint = gtk_entry_get_text(this->mountPointEntry());
-        DBG("efsmount: %s -> %s\n", path, mountPoint);
-        group_options_t *options_p = efs_options;
-        for (auto p=options_p; p && p->flag; p++){
-            auto box = GTK_BOX(g_object_get_data(G_OBJECT(this->dialog()), p->id));
-            if (!box) {
-                DBG("getOptions(): cannot find item \"%s\"\n", p->id);
-                continue;
-            }
-            auto check = GTK_TOGGLE_BUTTON(g_object_get_data(G_OBJECT(box), "check")); 
-            auto entry = GTK_ENTRY(g_object_get_data(G_OBJECT(box), "entry")); 
-            if (gtk_toggle_button_get_active(check)) {
-                DBG("Option --> %s%s\n", p->id, 
-                        (entry)?gtk_entry_get_text(entry):"");
-            }
-            else TRACE("no check:  %s\n", p->id);
-        }    
-    }
+        auto mountOptions = getMountOptions();
+        auto efsOptions = getEFSOptions();
+        TRACE("[%s]\n", path);
+        TRACE(" mountPoint=\"%s\"\n", mountPoint);
+        TRACE(" mountOptions=\"%s\"\n", mountOptions);
+        TRACE(" efsOptions=\"%s\"\n", efsOptions);
 
-    void mountUrl(void){
-        auto path = gtk_entry_get_text(this->remoteEntry());
-        auto mountPoint = gtk_entry_get_text(this->mountPointEntry());
-        DBG("mountUrl: %s -> %s\n", path, mountPoint);
-        const gchar *argv[MAX_COMMAND_ARGS];
-        memset((void *)argv, 0, MAX_COMMAND_ARGS*sizeof(const gchar *));
+        gchar *file = g_build_filename(EFS_KEY_FILE, NULL);
+        GKeyFile *key_file = g_key_file_new ();
+        g_key_file_load_from_file (key_file, file, (GKeyFileFlags)(G_KEY_FILE_KEEP_COMMENTS|G_KEY_FILE_KEEP_TRANSLATIONS), NULL);
 
-        gint i=0;
-        if (geteuid() != 0) {
-            argv[i++] = "sudo";
-            argv[i++] = "-A";
-        }
+        if (mountPoint) g_key_file_set_value (key_file, path, "mountPoint", mountPoint);
+        if (mountOptions) g_key_file_set_value (key_file, path, "mountOptions", mountOptions);
+        if (efsOptions) g_key_file_set_value (key_file, path, "efsOptions", efsOptions);
+        auto retval = g_key_file_save_to_file (key_file,file,NULL);
+        g_free(file);
+
+        g_key_file_free(key_file);
+        return retval;
         
-        argv[i++] = "mount";
+    }
+
+    gchar *getMountOptions(void){
         // Mount options
-        for (auto p=mount_options; p->id && i+1 < MAX_COMMAND_ARGS; p++) {
+        gchar *retval = NULL;
+        gint i=0;
+        for (auto p=mount_options; p->id && i+1 < MAX_COMMAND_ARGS; p++,i++) {
             auto box = GTK_BOX(g_object_get_data(G_OBJECT(this->dialog()), p->id));
             if (!box) {
                 DBG("getOptions(): cannot find item \"%s\"\n", p->id);
@@ -1002,18 +989,21 @@ public:
             }
             auto check = GTK_TOGGLE_BUTTON(g_object_get_data(G_OBJECT(box), "check")); 
             if (gtk_toggle_button_get_active(check)) {
-                DBG("Option %s --> %s\n", p->id, p->flag); 
-                argv[i++] = p->flag;
+                TRACE("Option %s --> %s\n", p->id, p->flag); 
+                auto g = g_strconcat((retval)?retval:"",(retval)?",":"", p->flag, NULL);
+                g_free(retval);
+                retval=g;
             }	
         }
+        return retval;
+    }
 
-        argv[i++] = "-t";
-        argv[i++] = "ecryptfs";
-        
-        gchar *passphraseFile = NULL;
-        gboolean insecurePassphraseFile = FALSE;
+
+    gchar *getEFSOptions(void){
+        // EFS options
         gchar *optionsOn = NULL;
-        for (auto p=efs_options; p->id && i+1 < MAX_COMMAND_ARGS; p++) {
+        gint i=0;
+        for (auto p=efs_options; p->id && i+1 < MAX_COMMAND_ARGS; p++, i++) {
             auto box = GTK_BOX(g_object_get_data(G_OBJECT(this->dialog()), p->id));
             if (!box) {
                 DBG("getOptions(): cannot find item \"%s\"\n", p->id);
@@ -1033,11 +1023,47 @@ public:
                         (entry)?gtk_entry_get_text(entry):"", NULL);
                 g_free(optionsOn);
                 optionsOn = g;
-                if (strcmp(p->id,"passphrase_passwd_file=")==0) insecurePassphraseFile = TRUE;
-                DBG("Option %s --> %s\n", p->id, optionsOn);
+                TRACE("Option %s --> %s\n", p->id, optionsOn);
             }
             else TRACE("no check:  %s\n", p->id);
         } 
+        return optionsOn;
+    }
+    void mountUrl(void){
+        auto path = gtk_entry_get_text(this->remoteEntry());
+        auto mountPoint = gtk_entry_get_text(this->mountPointEntry());
+        DBG("mountUrl: %s -> %s\n", path, mountPoint);
+        const gchar *argv[MAX_COMMAND_ARGS];
+        memset((void *)argv, 0, MAX_COMMAND_ARGS*sizeof(const gchar *));
+
+        gint i=0;
+        if (geteuid() != 0) {
+            argv[i++] = "sudo";
+            argv[i++] = "-A";
+        }
+        
+        argv[i++] = "mount";
+        // Mount options
+        auto mountOptions = getMountOptions();
+        if (mountOptions) {
+            auto optionsM = g_strsplit(mountOptions, ",", -1);
+            for (auto o=optionsM; o && *o; o++){
+                argv[i++] = *o;
+            }
+            g_free(mountOptions);
+        }
+
+        argv[i++] = "-t";
+        argv[i++] = "ecryptfs";
+        
+        auto optionsOn = getEFSOptions();
+        
+        gchar *passphraseFile = NULL;
+        gboolean insecurePassphraseFile = FALSE;
+        if (optionsOn && strstr(optionsOn, "passphrase_passwd_file=")){
+            insecurePassphraseFile = TRUE;
+        }
+
         // Get passphrase option
         if (!insecurePassphraseFile) {
             passphraseFile = get_passfile(path);
