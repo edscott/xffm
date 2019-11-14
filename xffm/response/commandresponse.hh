@@ -79,7 +79,8 @@ public:
     CommandResponse(const gchar *message, const gchar *icon, const gchar **arg):
         BaseCommandResponse<Type>(message, icon)
     {
-        controllerPid_ = Run<Type>::thread_run(
+        controllerPid_ = Run<Type>::thread_runReap(
+        //controllerPid_ = Run<Type>::thread_run(
                 NULL, // data to fork finished function
                 arg,
                 Run<Type>::run_operate_stdout,

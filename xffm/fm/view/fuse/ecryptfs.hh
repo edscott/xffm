@@ -1063,7 +1063,7 @@ public:
 
 
         auto textview = Fm<Type>::getCurrentTextview();
-        Print<Type>::show_text(textview);
+        Print<Type>::showTextSmall(textview);
         // run command
         pthread_mutex_lock(&efsMountMutex);
         Run<Type>::thread_runReap((gpointer) textview, 

@@ -131,10 +131,11 @@ public:
     mountTarget (const gchar *label) {return NULL;}    
     static gboolean
     isInFstab (const gchar *path) {return FALSE;}
-    static gboolean
+    /*static gboolean
     mountPath (View<Type> *view, const gchar *path, const gchar *mountPoint)
-     	{return FALSE;}
-	static gchar *
+     	{return FALSE;}*/
+	
+    static gchar *
     e2Label(const gchar *partitionPath){return NULL;}
 	static gchar *
     id2Partition(const gchar *id){return NULL;}
