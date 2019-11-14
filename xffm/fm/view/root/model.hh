@@ -29,6 +29,7 @@ public:
 	addHomeItem(treeModel);
 #ifdef ENABLE_FSTAB_MODULE
 	addFstabItem(treeModel);
+        addEfsItem(treeModel);
 #endif
  #ifdef ENABLE_PKG_MODULE
 	PkgModel<Type>::addPkgItem(treeModel);
@@ -48,6 +49,33 @@ public:
 	return "system-file-manager";
     }
 
+
+    static void
+    addEfsItem(GtkTreeModel *treeModel){
+ 	GtkTreeIter iter;
+	// Home
+	auto name = "fixme";
+	auto utf_name = util_c::utf_string(_("fixme"));
+	auto icon_name = "drive-harddisk/SE/emblem-readonly/2.0/225";
+	auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_EMBLEM, NULL);
+        auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
+	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
+	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
+
+	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
+	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
+		DISPLAY_NAME, utf_name,
+                PATH, name,
+		ICON_NAME, icon_name,
+                TREEVIEW_PIXBUF, treeViewPixbuf, 
+		DISPLAY_PIXBUF, normal_pixbuf,
+		NORMAL_PIXBUF, normal_pixbuf,
+		HIGHLIGHT_PIXBUF, highlight_pixbuf,
+		TOOLTIP_TEXT,g_get_home_dir(),
+		-1);
+	g_free(utf_name);
+	g_free(highlight_name);
+    }
     
     static void
     addXffmItem(GtkTreeModel *treeModel){

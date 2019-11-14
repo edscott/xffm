@@ -180,6 +180,7 @@ private:
     menuAddEFS(GtkMenuItem *menuItem, gpointer data)
     {
         DBG("menuAddEFS\n");
+//        auto efs = new(EFS<Type>)("/home/edscott/private");
         auto efs = new(EFS<Type>)(NULL);
         gint response  = gtk_dialog_run(efs->dialog());
         DBG("menuAddEFS(): efs response=%d (%d,%d,%d)\n", 
