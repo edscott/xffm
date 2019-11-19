@@ -1,6 +1,9 @@
 #ifndef XF_ROOTMODEL__HH
 # define XF_ROOTMODEL__HH
 #include "bookmarks.hh"
+#ifndef FREEBSD_FOUND
+# include "../fuse/ecryptfs.hh"
+#endif
 namespace xf
 {
 
@@ -53,28 +56,40 @@ public:
     static void
     addEfsItem(GtkTreeModel *treeModel){
  	GtkTreeIter iter;
-	// Home
-	auto name = "fixme";
-	auto utf_name = util_c::utf_string(_("fixme"));
-	auto icon_name = "drive-harddisk/SE/emblem-readonly/2.0/225";
-	auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_EMBLEM, NULL);
-        auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
-	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
-	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
+	auto items = EFS<Type>::getSavedItems();
+        for (auto p=items; p && *p; p++){
+            auto path = g_strconcat("efs:/", *p, NULL);
+            auto basename = g_path_get_basename(*p);
+	    auto utf_name = Util<Type>::utf_string(basename);
+            g_free(basename);
+            const gchar *ball = NULL;
+            if (!g_file_test(*p, G_FILE_TEST_IS_DIR))ball = "/NE/dialog-error/3.0/220";
+            auto emblem = g_strconcat("/SE/emblem-readonly/3.0/220", ball, NULL);
+	    auto icon_name = g_strconcat("drive-harddisk/SE/emblem-readonly/2.0/225", emblem, NULL);
+            g_free(emblem);
 
-	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
-	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
-		DISPLAY_NAME, utf_name,
-                PATH, name,
-		ICON_NAME, icon_name,
-                TREEVIEW_PIXBUF, treeViewPixbuf, 
-		DISPLAY_PIXBUF, normal_pixbuf,
-		NORMAL_PIXBUF, normal_pixbuf,
-		HIGHLIGHT_PIXBUF, highlight_pixbuf,
-		TOOLTIP_TEXT,g_get_home_dir(),
-		-1);
-	g_free(utf_name);
-	g_free(highlight_name);
+            auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_EMBLEM, NULL);
+            auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
+            auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
+            auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
+
+            gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
+            gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
+                    DISPLAY_NAME, utf_name,
+                    PATH, path,
+                    ICON_NAME, icon_name,
+                    TREEVIEW_PIXBUF, treeViewPixbuf, 
+                    DISPLAY_PIXBUF, normal_pixbuf,
+                    NORMAL_PIXBUF, normal_pixbuf,
+                    HIGHLIGHT_PIXBUF, highlight_pixbuf,
+                    TOOLTIP_TEXT,g_get_home_dir(),
+                    -1);
+            g_free(path);
+            g_free(utf_name);
+            g_free(icon_name);
+            g_free(highlight_name);
+        }
+        g_strfreev(items);
     }
     
     static void

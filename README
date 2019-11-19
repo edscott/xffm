@@ -33,7 +33,7 @@ Xffm+ functions
   - remote sshfs
  find/install/update packages gentoo, archlinux, freebsd(currently in alpha development)
 
-Deprecated stuff not carried over from xffm and rodent
+Deprecated stuff not to be carried over from xffm and rodent
   - system processed iconview
   - application launcher iconview 
   - SMB network navigator

@@ -73,6 +73,7 @@ public:
     
     gboolean loadModel(const gchar *path){
 	// This sets viewType
+        DBG("loadModel(%s)\n", path);
 	return loadModel(path, this);
     }
     gboolean loadModel(const gchar *path, View<Type> *view){
@@ -136,6 +137,14 @@ public:
                 FstabView<Type>::loadModel(view);
 	        view->page()->updateStatusLabel(NULL);
                 break;
+            case (EFS_TYPE):
+                if (FstabView<Type>::isMounted(path + strlen("efs:/"))){
+                    this->loadModel(path + strlen("efs:/"));
+
+                } else {
+                    EFS<Type>::doDialog(path + strlen("efs:/"));
+                }
+                break;
 #endif
 #ifdef ENABLE_PKG_MODULE
             case (PKG_TYPE):
@@ -193,7 +202,8 @@ public:
 		return LocalView<Type>::item_activated(this, treeModel, tpath, path);
 	    }
 	} else if (strcmp(path,"xffm:root")){
-	    DBG("fm/view.hh: loadModel: %s does not exist\n", path);
+            if (RootPopUp<Type>::isEFS(path))
+	        DBG("fm/view.hh: loadModel: %s does not exist\n", path);
             
 	}
 	return this->loadModel(path);

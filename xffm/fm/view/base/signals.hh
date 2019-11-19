@@ -572,14 +572,17 @@ public:
             case (FSTAB_TYPE):
 		    menu =  FstabPopUp<Type>::popUpItem();
                 break;
+            case (EFS_TYPE):
+                break;
 #endif
 #ifdef ENABLE_PKG_MODULE
             case (PKG_TYPE):
 		    menu =  PkgPopUp<Type>::popUpItem(); 
                 break;
 #endif
+
             default:
-                ERROR("fm/base/signals.hh::ViewType %d not defined.\n", viewType);
+                ERROR("fm/base/signals.hh::getItemsMenu() ViewType %d not defined.\n", viewType);
 		menu = RootPopUp<Type>::popUp(); 
                 break;
         }
@@ -603,6 +606,10 @@ public:
             case (FSTAB_TYPE):
                     FstabPopUp<Type>::resetMenuItems();
                 break;
+            case EFS_TYPE:
+                //EFS<Type>::doDialog();
+                
+                break;
 #endif
 #ifdef ENABLE_PKG_MODULE
             case (PKG_TYPE):
@@ -610,7 +617,7 @@ public:
                 break;
 #endif
             default:
-                ERROR("fm/base/signals.hh::ViewType %d not defined.\n", viewType);
+                ERROR("fm/base/signals.hh::configureItemsMenu() ViewType %d not defined.\n", viewType);
                 break;
         }
         return;
@@ -640,7 +647,7 @@ public:
 #endif
             default:
 		menu = RootPopUp<Type>::popUp(); 
-                ERROR("fm/base/signals.hh::ViewType %d not defined.\n", viewType);
+                ERROR("fm/base/signals.hh::getViewMenu() ViewType %d not defined.\n", viewType);
                 break;
         }
 	g_object_set_data(G_OBJECT(menu),"view", view);
@@ -667,7 +674,7 @@ public:
                 break;
 #endif
             default:
-                ERROR("fm/base/signals.hh::ViewType %d not defined.\n", viewType);
+                ERROR("fm/base/signals.hh::configureViewMenu() ViewType %d not defined.\n", viewType);
                 break;
         }
         return ;
@@ -848,9 +855,9 @@ public:
         if (strcmp(path, "xffm:fstab")==0) return (FSTAB_TYPE);
         if (strcmp(path, "xffm:nfs")==0) return (NFS_TYPE);
         if (strcmp(path, "xffm:sshfs")==0) return (SSHFS_TYPE);
-        if (strcmp(path, "xffm:ecryptfs")==0) return (ECRYPTFS_TYPE);
         if (strcmp(path, "xffm:cifs")==0) return (CIFS_TYPE);
         if (strncmp(path, "xffm:pkg", strlen("xffm:pkg"))==0) return (PKG_TYPE);
+        if (RootPopUp<Type>::isEFS(path)) return (EFS_TYPE);
 	
         ERROR("fm/base/signals.hh::getViewType() %s not defined.\n", path);
         return (-1);

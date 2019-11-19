@@ -7,6 +7,8 @@
 namespace xf{
 
 static pthread_mutex_t efsMountMutex=PTHREAD_MUTEX_INITIALIZER;
+template <class Type>class EFS;
+template <class Type>class Fstab;
 
 template <class Type>
 class Fuse  {
@@ -38,6 +40,17 @@ public:
     ~Fuse(void){
         TRACE("Fuse destructor...\n");
         gtk_widget_destroy(GTK_WIDGET(dialog_));        
+    }
+
+    static gchar **
+    getSavedItems(void){
+        gchar *file = g_build_filename(EFS_KEY_FILE, NULL);
+        GKeyFile *key_file = g_key_file_new ();
+        g_key_file_load_from_file (key_file, file, (GKeyFileFlags)(G_KEY_FILE_KEEP_COMMENTS|G_KEY_FILE_KEEP_TRANSLATIONS), NULL);
+        g_free(file);
+        auto retval = g_key_file_get_groups (key_file, NULL);
+        g_key_file_free(key_file);
+        return retval;
     }
 
     GtkEntry *
@@ -383,6 +396,40 @@ public:
         DBG("efs destructor\n");
     }
     
+    static gboolean
+    removeItem(const gchar *group){
+        GKeyFile *key_file = g_key_file_new ();
+        gchar *file = g_build_filename(EFS_KEY_FILE, NULL);
+        auto retval = FALSE;
+        if (g_key_file_load_from_file (key_file, file, (GKeyFileFlags)(G_KEY_FILE_KEEP_COMMENTS|G_KEY_FILE_KEEP_TRANSLATIONS), NULL)){
+            retval = g_key_file_remove_group (key_file, group, NULL);
+            if (retval) g_key_file_save_to_file(key_file, file, NULL);
+        }
+       g_key_file_free(key_file);
+       g_free(file);
+       return retval;
+    }
+
+    static void
+    doDialog(const gchar *path){
+        auto efs = new(EFS<Type>)(path);
+        gint response  = gtk_dialog_run(efs->dialog());
+        DBG("menuAddEFS(): efs response=%d (%d,%d,%d)\n", 
+                response,GTK_RESPONSE_YES,GTK_RESPONSE_APPLY,GTK_RESPONSE_CANCEL);
+        switch (response){
+            case GTK_RESPONSE_YES: // mount
+                efs->mountUrl();
+                break;
+            case GTK_RESPONSE_APPLY: // Save
+                efs->save();
+                break;
+            default:
+            case GTK_RESPONSE_CANCEL:
+                break;
+        }
+        delete(efs);
+    }
+    
     void setOptions(const gchar *url){
         DBG("efs setOptions %s\n", url);
         GKeyFile *key_file = g_key_file_new ();
@@ -630,20 +677,15 @@ public:
         argv[i++] = path;
         argv[i++] = mountPoint;
 
-        fprintf(stderr, "COMMAND: ");
-        for (auto a = argv; a && *a; a++){ fprintf(stderr, "%s ", *a); }
-        fprintf(stderr, "\n");
-
-
         auto textview = Fm<Type>::getCurrentTextview();
         Print<Type>::showTextSmall(textview);
-        // run command
+	auto command = g_strdup_printf(_("Mounting %s"), path);
+ 
         pthread_mutex_lock(&efsMountMutex);
-        Run<Type>::thread_runReap((gpointer) textview, 
-            argv,
-            Run<Type>::run_operate_stdout,
-            Run<Type>::run_operate_stderr,
-            cleanupGo);
+        new (CommandResponse<Type>)(command,"system-run", argv, cleanupGo);
+
+        g_free(command);
+
         // cleanup
         memset(optionsOn, 0, strlen(optionsOn));
         g_free(optionsOn);

@@ -16,6 +16,9 @@ template <class Type>
 class RootPopUp  {
     public:
 
+    static gboolean
+    isEFS(const gchar *path){return (strncmp(path, "efs:/", strlen("efs:/"))==0);}
+
     static GtkMenu *popUpItem(void){
         if (!rootItemPopUp) rootItemPopUp = createItemPopUp();   
         return rootItemPopUp;
@@ -32,6 +35,7 @@ class RootPopUp  {
         auto path =Popup<Type>::getWidgetData(rootItemPopUp, "path");
         TRACE("reset root menu items, path=%s\n", path);
 	gboolean isBookMark = RootView<Type>::isBookmarked(path);
+        if (isEFS(path)) isBookMark = TRUE;
 	auto menuitem = GTK_WIDGET(g_object_get_data(G_OBJECT(rootItemPopUp), "Remove bookmark"));
 	gtk_widget_set_sensitive(menuitem, isBookMark);
         if (isBookMark) gtk_widget_show(menuitem);
@@ -41,7 +45,22 @@ class RootPopUp  {
         if (strstr(path, trashFiles)) gtk_widget_show(menuitem);
         else gtk_widget_hide(menuitem);
         gtk_widget_set_sensitive(menuitem, g_file_test(trashFiles, G_FILE_TEST_IS_DIR));
-       g_free(trashFiles); 
+        g_free(trashFiles); 
+        if (isEFS(path)){
+            path += strlen("efs:/");
+            GtkWidget *show, *hide;
+            if (FstabView<Type>::isMounted(path)){
+                show = GTK_WIDGET(g_object_get_data(G_OBJECT(rootItemPopUp), "Unmount the volume associated with this folder"));
+                hide = GTK_WIDGET(g_object_get_data(G_OBJECT(rootItemPopUp), "Mount the volume associated with this folder"));
+            } else {
+                hide = GTK_WIDGET(g_object_get_data(G_OBJECT(rootItemPopUp), "Unmount the volume associated with this folder"));
+                show = GTK_WIDGET(g_object_get_data(G_OBJECT(rootItemPopUp), "Mount the volume associated with this folder"));
+            }
+            gtk_widget_show(show);
+            gtk_widget_hide(hide);
+            gtk_widget_set_sensitive(show, TRUE);
+       }
+
 
     }
 
@@ -151,18 +170,28 @@ private:
         {
 	    {N_("Open in New Tab"), (void *)LocalPopUp<Type>::newTab, rootItemPopUp, NULL},
             {N_("Remove bookmark"), (void *)removeBookmarkItem, NULL, NULL},
+            {N_("Mount the volume associated with this folder"), (void *)LocalPopUp<Type>::mount, NULL, NULL},
+            {N_("Unmount the volume associated with this folder"), (void *)LocalPopUp<Type>::mount, NULL, NULL},
             {N_("Empty trash"), (void *)emptyTrash, NULL, NULL},
 	     {NULL,NULL,NULL,NULL}
         };
         const gchar *key[]={
             "Open in New Tab",
             "Remove bookmark",
+#ifdef ENABLE_FSTAB_MODULE
+            "Mount the volume associated with this folder",
+            "Unmount the volume associated with this folder",
+#endif
             "Empty trash",
             NULL
         };
         const gchar *keyIcon[]={
             "tab-new-symbolic",
             "edit-clear-all",
+#ifdef ENABLE_FSTAB_MODULE
+            "greenball",
+            "redball",
+#endif
             "user-trash-full",
             NULL
         };
@@ -180,23 +209,7 @@ private:
     menuAddEFS(GtkMenuItem *menuItem, gpointer data)
     {
         DBG("menuAddEFS\n");
-//        auto efs = new(EFS<Type>)("/home/edscott/private");
-        auto efs = new(EFS<Type>)(NULL);
-        gint response  = gtk_dialog_run(efs->dialog());
-        DBG("menuAddEFS(): efs response=%d (%d,%d,%d)\n", 
-                response,GTK_RESPONSE_YES,GTK_RESPONSE_APPLY,GTK_RESPONSE_CANCEL);
-        switch (response){
-            case GTK_RESPONSE_YES: // mount
-                efs->mountUrl();
-                break;
-            case GTK_RESPONSE_APPLY: // Save
-                efs->save();
-                break;
-            default:
-            case GTK_RESPONSE_CANCEL:
-                break;
-        }
-        delete(efs);
+        EFS<Type>::doDialog(NULL);
     }
     static void
     menuAddBookmark(GtkMenuItem *menuItem, gpointer data)
@@ -256,7 +269,11 @@ private:
     {
         TRACE("Remove bookmark\n");
 	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
-        if (!RootView<Type>::removeBookmark(path)) return;
+        if (isEFS(path)){
+            if (!EFS<Type>::removeItem(path+strlen("efs:/"))) return;
+        } else {
+            if (!RootView<Type>::removeBookmark(path)) return;
+        }
 	auto view =  (View<Type> *)g_object_get_data(G_OBJECT(data), "view");
 	view->reloadModel();
     }

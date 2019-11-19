@@ -81,7 +81,7 @@ enum
     FSTAB_TYPE,
     NFS_TYPE,
     SSHFS_TYPE,
-    ECRYPTFS_TYPE,
+    EFS_TYPE,
     CIFS_TYPE,
     PKG_TYPE
 };

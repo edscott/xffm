@@ -76,16 +76,15 @@ public:
         gtk_widget_hide(GTK_WIDGET(this->dialog()));
         gtk_widget_destroy(GTK_WIDGET(this->dialog()));
     }
-    CommandResponse(const gchar *message, const gchar *icon, const gchar **arg):
+    CommandResponse(const gchar *message, const gchar *icon, const gchar **arg, void (*afterFunction)(void *)=NULL, void *data=NULL):
         BaseCommandResponse<Type>(message, icon)
     {
         controllerPid_ = Run<Type>::thread_runReap(
-        //controllerPid_ = Run<Type>::thread_run(
-                NULL, // data to fork finished function
+                data, // data to fork finished function
                 arg,
                 Run<Type>::run_operate_stdout,
                 Run<Type>::run_operate_stderr,
-                NULL // comand done function
+                afterFunction // comand done function
                 );
         addPulse();
 	return ;	   

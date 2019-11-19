@@ -8,6 +8,13 @@
 
 // Run in background, detached.
 # define FORK 1
+
+// Version 0.93, enable fstab and ecryptfs (Linux)
+#ifdef FREEBSD_NOT_FOUND
+# undef ENABLE_FSTAB_MODULE 
+# define ENABLE_FSTAB_MODULE 1
+#endif
+
 #ifdef ALPHA
 
 # warning "Alpha modules enabled..."
@@ -18,8 +25,6 @@
 # define ENABLE_PKG_MODULE 1
 # undef ENABLE_DIFF_MODULE 
 # define ENABLE_DIFF_MODULE 1
-# undef ENABLE_FSTAB_MODULE 
-# define ENABLE_FSTAB_MODULE 1
 // Easier debugging:
 //# undef FORK 
 //# warning "Fork not active..."
