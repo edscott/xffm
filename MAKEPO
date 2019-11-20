@@ -2,12 +2,15 @@
 For new translation construction:
 1. Create new po/POTFILES.in file
    For this, routine &generatePotfiles in po/scripts/update-po.pl
+   "perl scripts/update-po.pl potfiles"
 2. Create a new po template (po/xffm+.pot) 
    For this, routine &generatePot in po/scripts/update-po.pl
+   "perl scripts/update-po.pl template"
 3. Create updated po files from external po files
    For this, routine &fullMerge in po/scripts/update-po.pl
-   NOTE: set $fullPoDir to path to external po files 
-   (not in po/)
+   NOTE: set $fullPoDir in scripts/update-po.pl to path to external po files 
+   (external path cannot be named [whatever]/po/)
+   "perl scripts/update-po.pl fullmerge"
 3b.Alternative is to update existing po files in po/ directory.
    For this, routines &mergePoFiles in po/scripts/update-po.pl
    New translations in template will be empty in resulting po 

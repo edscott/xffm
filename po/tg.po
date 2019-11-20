@@ -1,12 +1,12 @@
-# Xffm+ translation file: lun ago 12 14:17:16 CDT 2019
-# Merged fron existing open source files
+# Xffm+ translation file: mié nov 20 12:45:21 CST 2019
+# Merged from existing open source files
 # http://xffm.org
 #
 #
 msgid   ""
 msgstr  "Project-Id-Version: xffm+\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2019-08-11 09:10-0500\n"
+        "POT-Creation-Date: 2019-11-20 12:34-0600\n"
         "PO-Revision-Date: 2013-01-19 13:00+0500\n"
         "Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
         "Language-Team: \n"
@@ -22,393 +22,29 @@ msgstr  "Project-Id-Version: xffm+\n"
 msgid   "No Read Permission"
 msgstr  "Афзудани ҳуқуқи дастрасӣ"
 
-#: ../xffm/completion/base.hh:28
-msgid   "Command"
-msgstr  "Фармон"
-
-#: ../xffm/completion/base.hh:31
-msgid   "File"
-msgstr  "Файл"
-
-#: ../xffm/completion/base.hh:34
-#, fuzzy
-msgid   "Command history"
-msgstr  "Андозаи таърихии силули мухобиротӣ:"
-
-#: ../xffm/completion/base.hh:37 ../xffm/find/dialog.hh:192
-msgid   "User"
-msgstr  "Корбар"
-
-#: ../xffm/completion/base.hh:40
-msgid   "Variable"
-msgstr  "Тағйирёбанда"
-
-#: ../xffm/completion/base.hh:43
-msgid   "Host"
-msgstr  "Мизбон"
-
-#: ../xffm/completion/base.hh:55
-#, fuzzy
-msgid   "Found no match"
-msgstr  "Иттилооти садо"
-
-#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
-msgid   "Matches"
-msgstr  "Мутобиқаткунанда"
-
-#: ../xffm/completion/base.hh:142
-#, fuzzy
-msgid   "Too many files open"
-msgstr  "Боз кардани файли нишонаҳо"
-
-#: ../xffm/completion/base.hh:339 ../xffm/find/fgr.hh:124
-msgid   "Options:"
-msgstr  "Имконот:"
-
-#: ../xffm/completion/bash.hh:133
-msgid   "Completion mode:"
-msgstr  "Тартиботи автоилова шудааст"
-
-#: ../xffm/completion/bash.hh:134
-msgid   "command"
-msgstr  "фармон"
-
-#: ../xffm/completion/bash.hh:135
-msgid   "file"
-msgstr  "файл"
-
-#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
-#, fuzzy
-msgid   "Options >>"
-msgstr  "Имконот"
-
-#: ../xffm/find/fgr.hh:124 ../xffm/find/signals.hh:100
-#: ../xffm/find/dialog.hh:301
-msgid   "Path"
-msgstr  "Масир"
-
-#: ../xffm/find/fgr.hh:125
-msgid   "Locate documents and folders on this computer by name or content"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:126 ../xffm/find/dialog.hh:334
-msgid   "Filter:"
-msgstr  "Филтр:"
-
-#: ../xffm/find/fgr.hh:126
-#, fuzzy
-msgid   "Search for files"
-msgstr  "Ҷустуҷӯи мақолот"
-
-#: ../xffm/find/fgr.hh:128
-msgid   "Contents:"
-msgstr  "Мундариҷа:"
-
-#: ../xffm/find/fgr.hh:128
-msgid   "File's contents filtered as plain text."
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:131
-msgid   "Verbose output debugging mode."
-msgstr  "Выключить расширенный вывод"
-
-#: ../xffm/find/fgr.hh:133
-msgid   "Show version information"
-msgstr  "Намоиши иттилооти версия"
-
-#: ../xffm/find/fgr.hh:135
-#, fuzzy
-msgid   "Filter Details"
-msgstr  "Гузоришҳои Полоягар"
-
-#: ../xffm/find/fgr.hh:138 ../xffm/find/dialog.hh:173
-#, fuzzy
-msgid   "Stay on single filesystem"
-msgstr  "Танҳо системаи файлиро хонед"
-
-#: ../xffm/find/fgr.hh:140
-msgid   "Print..."
-msgstr  "Чоп кардан..."
-
-#: ../xffm/find/fgr.hh:140
-msgid   "The unique Process ID that identifies this process."
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:142 ../xffm/find/dialog.hh:170
-#, fuzzy
-msgid   "Find hidden files and directories"
-msgstr  "Проводник"
-
-#: ../xffm/find/fgr.hh:143
-msgid   "Filter"
-msgstr  "Филтр"
-
-#: ../xffm/find/fgr.hh:144
-msgid   "To display files which pass the filter (stars and regexps will be "
-        "processed)"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:146 ../xffm/find/dialog.hh:167
-msgid   "Recursive"
-msgstr  "Надастнавис"
-
-#: ../xffm/find/fgr.hh:147 ../xffm/find/fgr.hh:148 ../xffm/find/fgr.hh:149
-#: ../xffm/find/fgr.hh:150
-msgid   "KByte"
-msgstr  "КиБ"
-
-#: ../xffm/find/fgr.hh:148
-msgid   "is greater than or equal to"
-msgstr  "калон ё баробар"
-
-#: ../xffm/find/fgr.hh:150
-msgid   "is less than or equal to"
-msgstr  "хурд ё баробар"
-
-#: ../xffm/find/fgr.hh:152
-msgid   "Set UID"
-msgstr  "Барпосозии UID"
-
-#: ../xffm/find/fgr.hh:152
-#, fuzzy
-msgid   "Executable Text Files"
-msgstr  "Файлҳои иҷропазир"
-
-#: ../xffm/find/fgr.hh:154
-#, fuzzy
-msgid   "The permissions of the file, in octal notation."
-msgstr  "Ҳуқуқҳои ин каталогҳоро тафтиш кунед."
-
-#: ../xffm/find/fgr.hh:155
-msgid   "Type"
-msgstr  "Навъ"
-
-#: ../xffm/find/fgr.hh:157 ../xffm/find/signals.hh:14
-msgid   "Any"
-msgstr  "Ҳар"
-
-#: ../xffm/find/fgr.hh:157
-#, fuzzy
-msgid   "Default type"
-msgstr  "Сарлавҳаи пешфарз"
-
-#: ../xffm/find/fgr.hh:158 ../xffm/common/preview.hh:478
-#, fuzzy
-msgid   "Regular file"
-msgstr  "Равномерный шаг сетки"
-
-#: ../xffm/find/fgr.hh:159 ../xffm/find/signals.hh:8
-#: ../xffm/fm/view/local/popup.hh:1062 ../xffm/common/preview.hh:469
-msgid   "Directory"
-msgstr  "Директория"
-
-#: ../xffm/find/fgr.hh:160 ../xffm/find/signals.hh:9
-#: ../xffm/common/preview.hh:475
-msgid   "Symbolic Link"
-msgstr  "Пайванди рамзӣ"
-
-#: ../xffm/find/fgr.hh:161
-#, fuzzy
-msgid   "UNIX Socket"
-msgstr  "Нақшаи UNIX"
-
-#: ../xffm/find/fgr.hh:162 ../xffm/find/signals.hh:11
-#: ../xffm/common/preview.hh:463
-#, fuzzy
-msgid   "Block device"
-msgstr  "Дастгоҳҳои блок"
-
-#: ../xffm/find/fgr.hh:163 ../xffm/find/signals.hh:12
-#: ../xffm/common/preview.hh:466
-#, fuzzy
-msgid   "Character device"
-msgstr  "character special"
-
-#: ../xffm/find/fgr.hh:164 ../xffm/find/signals.hh:13
-#: ../xffm/common/preview.hh:472
-msgid   "FIFO"
-msgstr  "FIFO"
-
-#: ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168 ../xffm/find/dialog.hh:214
-msgid   "Minutes"
-msgstr  "Дақиқаҳо"
-
-#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
-#: ../xffm/find/fgr.hh:176 ../xffm/find/dialog.hh:263
-#: ../xffm/find/dialog.hh:363 ../xffm/fm/view/treeview.hh:18
-msgid   "Details"
-msgstr  "Тафсилот"
-
-#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
-#: ../xffm/find/fgr.hh:176 ../xffm/find/fgr.hh:179 ../xffm/find/fgr.hh:180
-#: ../xffm/find/fgr.hh:183 ../xffm/find/fgr.hh:184 ../xffm/find/fgr.hh:187
-#: ../xffm/find/fgr.hh:188
-#, fuzzy
-msgid   "TIME"
-msgstr  "Дар TIME"
-
-#: ../xffm/find/fgr.hh:168 ../xffm/find/fgr.hh:171 ../xffm/find/fgr.hh:174
-#: ../xffm/find/fgr.hh:177
-msgid   "Previous"
-msgstr  "Қаблӣ"
-
-#: ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171 ../xffm/find/dialog.hh:219
-msgid   "Hours"
-msgstr  "Соат"
-
-#: ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174 ../xffm/find/dialog.hh:224
-msgid   "Days"
-msgstr  "Рӯзҳо"
-
-#: ../xffm/find/fgr.hh:175
-msgid   "Month"
-msgstr  "Моҳ"
-
-#: ../xffm/find/fgr.hh:177
-msgid   "Month(s)"
-msgstr  "Моҳ"
-
-#: ../xffm/find/fgr.hh:180
-#, fuzzy
-msgid   "Modification Time :"
-msgstr  "Тағир додан:"
-
-#: ../xffm/find/fgr.hh:184
-#, fuzzy
-msgid   "Access Time :"
-msgstr  "Пинҳон кардани вақти дастёбӣ"
-
-#: ../xffm/find/fgr.hh:188
-#, fuzzy
-msgid   "Creation Time :"
-msgstr  "Муҳаёкунӣ:"
-
-#: ../xffm/find/fgr.hh:191 ../xffm/find/fgr.hh:192
-msgid   "uid"
-msgstr  "uid"
-
-#: ../xffm/find/fgr.hh:192
-msgid   "User:"
-msgstr  "Истифодакунанда:"
-
-#: ../xffm/find/fgr.hh:194 ../xffm/find/fgr.hh:195
-#, fuzzy
-msgid   "gid"
-msgstr  "%id"
-
-#: ../xffm/find/fgr.hh:195
-msgid   "Group:"
-msgstr  "Гурӯҳ:"
-
-#: ../xffm/find/fgr.hh:198
-msgid   "Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
-        "character that  normally  follows  a file  name"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:200
-#, fuzzy
-msgid   "Content View"
-msgstr  "Андеша аз тарафи собиқаҳо"
-
-#: ../xffm/find/fgr.hh:201 ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:203
-#: ../xffm/find/fgr.hh:204
-msgid   "STRING"
-msgstr  "САТР"
-
-#: ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:204
-#: ../xffm/fm/view/local/popup.hh:759
-msgid   "Regular expression"
-msgstr  "Ифодаи доимӣ"
-
-#: ../xffm/find/fgr.hh:204
-msgid   "Extended"
-msgstr  "Расширенный"
-
-#: ../xffm/find/fgr.hh:206
-#, fuzzy
-msgid   "Ignore case"
-msgstr  "Радкунии тасвирҳо"
-
-#: ../xffm/find/fgr.hh:208
-msgid   "Text Files"
-msgstr  "Файлҳои матнӣ"
-
-#: ../xffm/find/fgr.hh:210 ../xffm/find/dialog.hh:545
-#, fuzzy
-msgid   "No match"
-msgstr  "Ягон мутобиқат ёфт нашуд"
-
-#: ../xffm/find/fgr.hh:212 ../xffm/find/dialog.hh:463
-#, fuzzy
-msgid   "Line Count"
-msgstr  "Миқдори файлҳо"
-
-#: ../xffm/find/fgr.hh:214
-msgid   "Words"
-msgstr  "Калимаҳо"
-
-#: ../xffm/find/fgr.hh:216
-msgid   "Lines"
-msgstr  "Хатҳо"
-
-#: ../xffm/find/fgr.hh:362
-#, fuzzy, c-format
-msgid   "Usage : %s [OPTIONS]\n"
-msgstr  "Истифодабарӣ: %s %s\n"
-
-#: ../xffm/find/signals.hh:7
-msgid   "Regular"
-msgstr  "Оддӣ"
-
-#: ../xffm/find/signals.hh:10 ../xffm/common/preview.hh:481
-msgid   "Socket"
-msgstr  "Бастагоҳ"
-
-#: ../xffm/find/signals.hh:66 ../xffm/find/signals.hh:454
-#: ../xffm/find/dialog.hh:176
-msgid   "Results"
-msgstr  "Натиҷаҳо"
-
-#: ../xffm/find/signals.hh:368 ../xffm/find/dialog.hh:577
-#: ../xffm/response/chooserresponse.hh:21 ../xffm/response/entryresponse.hh:435
-#: ../xffm/fm/view/local/properties.hh:314 ../xffm/fm/view/local/rm.hh:157
-#: ../xffm/common/gtk.hh:409
-msgid   "Cancel"
-msgstr  "Бекор кардан"
-
-#: ../xffm/find/signals.hh:396 ../xffm/find/signals.hh:830
-#, fuzzy
-msgid   "No editor for current action."
-msgstr  "Пайваст кардани амалиёти ҳозира"
-
-#: ../xffm/find/signals.hh:454
-msgid   "Upper limit:"
-msgstr  "Ҳудуди болоӣ:"
-
-#: ../xffm/find/signals.hh:456
-msgid   "Counting files..."
-msgstr  "Ҳисоб кардани файлҳо..."
-
-#: ../xffm/find/signals.hh:471
-#, fuzzy, c-format
-msgid   "Found %d match"
-msgid_plural    "Found %d matches"
-msgstr[0]       "%d мутобиқ"
-msgstr[1]       "%d мутобиқатҳо"
-
-#: ../xffm/find/signals.hh:473
-#, fuzzy, c-format
-msgid   "%s Finished : %s"
-msgstr  "%s [ба анҷом расид]"
-
-#: ../xffm/find/signals.hh:596 ../xffm/find/signals.hh:598
-msgid   "Searching..."
-msgstr  "Идет поиск..."
-
 #: ../xffm/find/dialog.hh:91 ../xffm/find/dialog.hh:143
 #: ../xffm/find/dialog.hh:604
 msgid   "Find"
 msgstr  "Ёфтан"
+
+#: ../xffm/find/dialog.hh:167 ../xffm/find/fgr.hh:146
+msgid   "Recursive"
+msgstr  "Надастнавис"
+
+#: ../xffm/find/dialog.hh:170 ../xffm/find/fgr.hh:142
+#, fuzzy
+msgid   "Find hidden files and directories"
+msgstr  "Проводник"
+
+#: ../xffm/find/dialog.hh:173 ../xffm/find/fgr.hh:138
+#, fuzzy
+msgid   "Stay on single filesystem"
+msgstr  "Танҳо системаи файлиро хонед"
+
+#: ../xffm/find/dialog.hh:176 ../xffm/find/signals.hh:65
+#: ../xffm/find/signals.hh:427
+msgid   "Results"
+msgstr  "Натиҷаҳо"
 
 #: ../xffm/find/dialog.hh:176
 msgid   "Upper limit"
@@ -426,6 +62,10 @@ msgstr  "Байтҳо"
 msgid   "At Most"
 msgstr  "На Зиёда"
 
+#: ../xffm/find/dialog.hh:192 ../xffm/completion/base.hh:37
+msgid   "User"
+msgstr  "Корбар"
+
 #: ../xffm/find/dialog.hh:197
 msgid   "Group"
 msgstr  "Гурӯҳ"
@@ -439,10 +79,22 @@ msgstr  " Рухсатҳо "
 msgid   "SUID"
 msgstr  ""
 
-#: ../xffm/find/dialog.hh:206 ../xffm/fm/view/local/popup.hh:1102
+#: ../xffm/find/dialog.hh:206 ../xffm/fm/view/local/popup.hh:1026
 #, fuzzy
 msgid   "Executable"
 msgstr  "Иҷропазир:"
+
+#: ../xffm/find/dialog.hh:214 ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168
+msgid   "Minutes"
+msgstr  "Дақиқаҳо"
+
+#: ../xffm/find/dialog.hh:219 ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171
+msgid   "Hours"
+msgstr  "Соат"
+
+#: ../xffm/find/dialog.hh:224 ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174
+msgid   "Days"
+msgstr  "Рӯзҳо"
 
 #: ../xffm/find/dialog.hh:230
 msgid   "Months"
@@ -453,10 +105,25 @@ msgstr  "Моҳҳо"
 msgid   "File type : "
 msgstr  "Намуди файл:"
 
-#: ../xffm/find/dialog.hh:255 ../xffm/find/dialog.hh:595
-#: ../xffm/fm/dialog/notebook/page/page.hh:71 ../xffm/common/gtk.hh:79
+#: ../xffm/find/dialog.hh:255 ../xffm/find/dialog.hh:595 ../xffm/gtk/gtk.hh:80
+#: ../xffm/fm/dialog/notebook/page/page.hh:71
 msgid   "Close"
 msgstr  "Пӯшидан"
+
+#: ../xffm/find/dialog.hh:263 ../xffm/find/dialog.hh:363
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/fm/view/treeview.hh:18
+msgid   "Details"
+msgstr  "Тафсилот"
+
+#: ../xffm/find/dialog.hh:301 ../xffm/find/fgr.hh:124
+#: ../xffm/find/signals.hh:94
+msgid   "Path"
+msgstr  "Масир"
+
+#: ../xffm/find/dialog.hh:334 ../xffm/find/fgr.hh:126
+msgid   "Filter:"
+msgstr  "Филтр:"
 
 #: ../xffm/find/dialog.hh:377
 msgid   "Contains"
@@ -480,6 +147,11 @@ msgstr  "Расширенный"
 msgid   "Include binary files"
 msgstr  "Бо ҳамроҳи файлҳои ҳисоби дуӣ"
 
+#: ../xffm/find/dialog.hh:463 ../xffm/find/fgr.hh:212
+#, fuzzy
+msgid   "Line Count"
+msgstr  "Миқдори файлҳо"
+
 #: ../xffm/find/dialog.hh:489
 #, fuzzy
 msgid   "Match"
@@ -498,6 +170,20 @@ msgstr  "Танҳо калимаҳои пур"
 msgid   "lines"
 msgstr  "хатҳо"
 
+#: ../xffm/find/dialog.hh:545 ../xffm/find/fgr.hh:210
+#, fuzzy
+msgid   "No match"
+msgstr  "Ягон мутобиқат ёфт нашуд"
+
+#: ../xffm/find/dialog.hh:577 ../xffm/find/signals.hh:341
+#: ../xffm/gtk/dialogs.hh:110 ../xffm/fm/view/local/rm.hh:157
+#: ../xffm/fm/view/local/properties.hh:310 ../xffm/fm/view/fuse/ecryptfs.hh:175
+#: ../xffm/fm/dialog/notebook/createini.hh:232
+#: ../xffm/fm/dialog/notebook/createini.hh:369
+#: ../xffm/response/entryresponse.hh:453 ../xffm/response/chooserresponse.hh:18
+msgid   "Cancel"
+msgstr  "Бекор кардан"
+
 #: ../xffm/find/dialog.hh:587
 msgid   "Clear"
 msgstr  "Пок кардани интихоб"
@@ -507,9 +193,9 @@ msgid   "Edit"
 msgstr  "Таҳрир кардан"
 
 #: ../xffm/find/dialog.hh:743 ../xffm/find/dialog.hh:758
-#: ../xffm/common/util.hh:1354 ../xffm/common/util.hh:1356
-#: ../xffm/common/util.hh:1362 ../xffm/common/util.hh:1364
-#: ../xffm/common/preview.hh:460
+#: ../xffm/common/preview.hh:460 ../xffm/common/util.hh:1354
+#: ../xffm/common/util.hh:1356 ../xffm/common/util.hh:1362
+#: ../xffm/common/util.hh:1364
 msgid   "unknown"
 msgstr  "номаълум"
 
@@ -573,206 +259,941 @@ msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
         "More information is available by typing \"man grep\"\n"
 msgstr  ""
 
-#: ../xffm/response/chooserresponse.hh:23
-msgid   "Open"
-msgstr  "Кушодан"
+#: ../xffm/find/fgr.hh:124 ../xffm/fm/view/fuse/ecryptfs.hh:133
+#: ../xffm/completion/base.hh:339
+msgid   "Options:"
+msgstr  "Имконот:"
 
-#: ../xffm/response/chooserresponse.hh:56
+#: ../xffm/find/fgr.hh:125
+msgid   "Locate documents and folders on this computer by name or content"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:126
 #, fuzzy
-msgid   "Choose directory"
-msgstr  "Феҳристи хонагӣ"
+msgid   "Search for files"
+msgstr  "Ҷустуҷӯи мақолот"
 
-#: ../xffm/response/chooserresponse.hh:60
+#: ../xffm/find/fgr.hh:128
+msgid   "Contents:"
+msgstr  "Мундариҷа:"
+
+#: ../xffm/find/fgr.hh:128
+msgid   "File's contents filtered as plain text."
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:131
+msgid   "Verbose output debugging mode."
+msgstr  "Выключить расширенный вывод"
+
+#: ../xffm/find/fgr.hh:133
+msgid   "Show version information"
+msgstr  "Намоиши иттилооти версия"
+
+#: ../xffm/find/fgr.hh:135
 #, fuzzy
-msgid   "Choose file"
-msgstr  "Интихоб кардани файл"
+msgid   "Filter Details"
+msgstr  "Гузоришҳои Полоягар"
 
-#: ../xffm/response/customresponse.hh:55
+#: ../xffm/find/fgr.hh:140
+msgid   "Print..."
+msgstr  "Чоп кардан..."
+
+#: ../xffm/find/fgr.hh:140
+msgid   "The unique Process ID that identifies this process."
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:143
+msgid   "Filter"
+msgstr  "Филтр"
+
+#: ../xffm/find/fgr.hh:144
+msgid   "To display files which pass the filter (stars and regexps will be "
+        "processed)"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:147 ../xffm/find/fgr.hh:148 ../xffm/find/fgr.hh:149
+#: ../xffm/find/fgr.hh:150
+msgid   "KByte"
+msgstr  "КиБ"
+
+#: ../xffm/find/fgr.hh:148
+msgid   "is greater than or equal to"
+msgstr  "калон ё баробар"
+
+#: ../xffm/find/fgr.hh:150
+msgid   "is less than or equal to"
+msgstr  "хурд ё баробар"
+
+#: ../xffm/find/fgr.hh:152
+msgid   "Set UID"
+msgstr  "Барпосозии UID"
+
+#: ../xffm/find/fgr.hh:152
 #, fuzzy
-msgid   "Execute command"
-msgstr  "Иҷрои дастур"
+msgid   "Executable Text Files"
+msgstr  "Файлҳои иҷропазир"
 
-#: ../xffm/response/customresponse.hh:103
-msgid   "Source File"
-msgstr  "Файли аслӣ"
-
-#: ../xffm/response/entryresponse.hh:439 ../xffm/response/passwdresponse.hh:242
-msgid   "Ok"
-msgstr  "Хуб"
-
-#: ../xffm/response/commandprogressresponse.hh:31
+#: ../xffm/find/fgr.hh:154
 #, fuzzy
-msgid   "Items:"
-msgstr  "Объектҳо"
+msgid   "The permissions of the file, in octal notation."
+msgstr  "Ҳуқуқҳои ин каталогҳоро тафтиш кунед."
 
-#: ../xffm/response/passwdresponse.hh:19 ../xffm/response/passwdresponse.hh:25
-#: ../xffm/common/run.hh:464
+#: ../xffm/find/fgr.hh:155
+msgid   "Type"
+msgstr  "Навъ"
+
+#: ../xffm/find/fgr.hh:157 ../xffm/find/signals.hh:14
+msgid   "Any"
+msgstr  "Ҳар"
+
+#: ../xffm/find/fgr.hh:157
+#, fuzzy
+msgid   "Default type"
+msgstr  "Сарлавҳаи пешфарз"
+
+#: ../xffm/find/fgr.hh:158 ../xffm/common/preview.hh:478
+#, fuzzy
+msgid   "Regular file"
+msgstr  "Равномерный шаг сетки"
+
+#: ../xffm/find/fgr.hh:159 ../xffm/find/signals.hh:8
+#: ../xffm/common/preview.hh:469 ../xffm/fm/view/local/popup.hh:987
+msgid   "Directory"
+msgstr  "Директория"
+
+#: ../xffm/find/fgr.hh:160 ../xffm/find/signals.hh:9
+#: ../xffm/common/preview.hh:475
+msgid   "Symbolic Link"
+msgstr  "Пайванди рамзӣ"
+
+#: ../xffm/find/fgr.hh:161
+#, fuzzy
+msgid   "UNIX Socket"
+msgstr  "Нақшаи UNIX"
+
+#: ../xffm/find/fgr.hh:162 ../xffm/find/signals.hh:11
+#: ../xffm/common/preview.hh:463
+#, fuzzy
+msgid   "Block device"
+msgstr  "Дастгоҳҳои блок"
+
+#: ../xffm/find/fgr.hh:163 ../xffm/find/signals.hh:12
+#: ../xffm/common/preview.hh:466
+#, fuzzy
+msgid   "Character device"
+msgstr  "character special"
+
+#: ../xffm/find/fgr.hh:164 ../xffm/find/signals.hh:13
+#: ../xffm/common/preview.hh:472
+msgid   "FIFO"
+msgstr  "FIFO"
+
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/find/fgr.hh:179 ../xffm/find/fgr.hh:180
+#: ../xffm/find/fgr.hh:183 ../xffm/find/fgr.hh:184 ../xffm/find/fgr.hh:187
+#: ../xffm/find/fgr.hh:188
+#, fuzzy
+msgid   "TIME"
+msgstr  "Дар TIME"
+
+#: ../xffm/find/fgr.hh:168 ../xffm/find/fgr.hh:171 ../xffm/find/fgr.hh:174
+#: ../xffm/find/fgr.hh:177
+msgid   "Previous"
+msgstr  "Қаблӣ"
+
+#: ../xffm/find/fgr.hh:175
+msgid   "Month"
+msgstr  "Моҳ"
+
+#: ../xffm/find/fgr.hh:177
+msgid   "Month(s)"
+msgstr  "Моҳ"
+
+#: ../xffm/find/fgr.hh:180
+#, fuzzy
+msgid   "Modification Time :"
+msgstr  "Тағир додан:"
+
+#: ../xffm/find/fgr.hh:184
+#, fuzzy
+msgid   "Access Time :"
+msgstr  "Пинҳон кардани вақти дастёбӣ"
+
+#: ../xffm/find/fgr.hh:188
+#, fuzzy
+msgid   "Creation Time :"
+msgstr  "Муҳаёкунӣ:"
+
+#: ../xffm/find/fgr.hh:191 ../xffm/find/fgr.hh:192
+msgid   "uid"
+msgstr  "uid"
+
+#: ../xffm/find/fgr.hh:192
+msgid   "User:"
+msgstr  "Истифодакунанда:"
+
+#: ../xffm/find/fgr.hh:194 ../xffm/find/fgr.hh:195
+#, fuzzy
+msgid   "gid"
+msgstr  "%id"
+
+#: ../xffm/find/fgr.hh:195
+msgid   "Group:"
+msgstr  "Гурӯҳ:"
+
+#: ../xffm/find/fgr.hh:198
+msgid   "Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+        "character that  normally  follows  a file  name"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:200
+#, fuzzy
+msgid   "Content View"
+msgstr  "Андеша аз тарафи собиқаҳо"
+
+#: ../xffm/find/fgr.hh:201 ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:203
+#: ../xffm/find/fgr.hh:204
+msgid   "STRING"
+msgstr  "САТР"
+
+#: ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:204
+#: ../xffm/fm/view/local/popup.hh:750
+msgid   "Regular expression"
+msgstr  "Ифодаи доимӣ"
+
+#: ../xffm/find/fgr.hh:204
+msgid   "Extended"
+msgstr  "Расширенный"
+
+#: ../xffm/find/fgr.hh:206
+#, fuzzy
+msgid   "Ignore case"
+msgstr  "Радкунии тасвирҳо"
+
+#: ../xffm/find/fgr.hh:208
+msgid   "Text Files"
+msgstr  "Файлҳои матнӣ"
+
+#: ../xffm/find/fgr.hh:214
+msgid   "Words"
+msgstr  "Калимаҳо"
+
+#: ../xffm/find/fgr.hh:216
+msgid   "Lines"
+msgstr  "Хатҳо"
+
+#: ../xffm/find/fgr.hh:362
+#, fuzzy, c-format
+msgid   "Usage : %s [OPTIONS]\n"
+msgstr  "Истифодабарӣ: %s %s\n"
+
+#: ../xffm/find/signals.hh:7
+msgid   "Regular"
+msgstr  "Оддӣ"
+
+#: ../xffm/find/signals.hh:10 ../xffm/common/preview.hh:481
+msgid   "Socket"
+msgstr  "Бастагоҳ"
+
+#: ../xffm/find/signals.hh:369 ../xffm/find/signals.hh:803
+#, fuzzy
+msgid   "No editor for current action."
+msgstr  "Пайваст кардани амалиёти ҳозира"
+
+#: ../xffm/find/signals.hh:427
+msgid   "Upper limit:"
+msgstr  "Ҳудуди болоӣ:"
+
+#: ../xffm/find/signals.hh:429
+msgid   "Counting files..."
+msgstr  "Ҳисоб кардани файлҳо..."
+
+#: ../xffm/find/signals.hh:444
+#, fuzzy, c-format
+msgid   "Found %d match"
+msgid_plural    "Found %d matches"
+msgstr[0]       "%d мутобиқ"
+msgstr[1]       "%d мутобиқатҳо"
+
+#: ../xffm/find/signals.hh:446
+#, fuzzy, c-format
+msgid   "%s Finished : %s"
+msgstr  "%s [ба анҷом расид]"
+
+#: ../xffm/find/signals.hh:569 ../xffm/find/signals.hh:571
+msgid   "Searching..."
+msgstr  "Идет поиск..."
+
+#: ../xffm/common/preview.hh:581
+#, fuzzy
+msgid   "Empty file"
+msgstr  "Номи файл ишора нашудааст."
+
+#: ../xffm/common/preview.hh:636
+#, fuzzy, c-format
+msgid   "Cannot read from %s"
+msgstr  "Аз %s хонда натавонист."
+
+#: ../xffm/common/settings.hh:30
+#, fuzzy
+msgid   "New File:"
+msgstr  "Файли нав"
+
+#: ../xffm/common/gio.hh:91
+#, fuzzy
+msgid   "Copying files"
+msgstr  "Копирование %s"
+
+#: ../xffm/common/gio.hh:93 ../xffm/common/dnd.hh:35
+#: ../xffm/fm/dialog/clipboard.hh:30
+#, fuzzy
+msgid   "Moving files"
+msgstr  "Перемещение %s"
+
+#: ../xffm/common/gio.hh:95
+#, fuzzy
+msgid   "linking"
+msgstr  "пайванд"
+
+#: ../xffm/common/gio.hh:97
+#, fuzzy
+msgid   "rename"
+msgstr  "Иваз кардани ном"
+
+#: ../xffm/common/gio.hh:449
+#, fuzzy, c-format
+msgid   "(%d of %d)"
+msgstr  "%d аз %d"
+
+#: ../xffm/common/util.hh:1404
+#, c-format
+msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
+        "attribute on that file."
+msgstr  ""
+
+#: ../xffm/common/util.hh:1406 ../xffm/common/util.hh:1441
+#, c-format
+msgid   "Open with %s"
+msgstr  "Кушодан бо %s"
+
+#: ../xffm/common/util.hh:1406
+msgid   "Text Editor"
+msgstr  "Таҳриргари матн"
+
+#: ../xffm/common/util.hh:1443 ../xffm/gtk/gtk.hh:70
+msgid   "Execute Shell Command"
+msgstr  "Иҷроиши Фармони Муқова"
+
+#: ../xffm/common/util.hh:1447
+msgid   "Console: quickly run single commands -- write a command here and "
+        "press enter."
+msgstr  ""
+
+#: ../xffm/common/util.hh:1452 ../xffm/fm/view/local/popup.hh:1033
+#: ../xffm/fm/view/local/popup.hh:1336 ../xffm/fm/view/local/popup.hh:1353
+#, fuzzy
+msgid   "Run in Terminal"
+msgstr  "Дар терминал иҷро кунед"
+
+#: ../xffm/common/dnd.hh:41 ../xffm/fm/dialog/clipboard.hh:23
+#, fuzzy
+msgid   "Copying files locally"
+msgstr  "Нусха бардошатани: %s-> %s"
+
+#: ../xffm/common/dnd.hh:47
+#, fuzzy
+msgid   "Create Link"
+msgstr  "Сохтани нусхаи алоқашуда"
+
+#: ../xffm/common/dnd.hh:63
+msgid   "more"
+msgstr  "бисёр"
+
+#: ../xffm/common/run.hh:338 ../xffm/fm/view/local/popup.hh:1149
+msgid   "error"
+msgstr  "хатогӣ"
+
+#: ../xffm/common/run.hh:342
+msgid   "warning"
+msgstr  "warning"
+
+#: ../xffm/common/run.hh:464 ../xffm/response/passwdresponse.hh:28
+#: ../xffm/response/passwdresponse.hh:34
 msgid   "Enter password"
 msgstr  "Паролро ворид кунед"
 
-#: ../xffm/response/passwdresponse.hh:179
-#, fuzzy
-msgid   "User Input"
-msgstr  "Ахбороти Корванд"
-
-#: ../xffm/response/passwdresponse.hh:195
-#, fuzzy
-msgid   "Response Requested"
-msgstr  "Агар таклиф дорад"
-
-#: ../xffm/response/timeoutresponse.hh:57
-msgid   "Dismiss"
-msgstr  ""
-
-#: ../xffm/response/commandresponse.hh:19
-msgid   "Running"
-msgstr  "Иҷро шуда истодааст"
-
-#: ../xffm/response/commandresponse.hh:24
-#, fuzzy
-msgid   "Waiting for operation to finish..."
-msgstr  "Мунтазам ба пайвастшавии компютер дорам..."
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:11
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:214
-#, fuzzy
-msgid   "Remove Button Contents"
-msgstr  "Нест кардани қисм"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:67
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:209
-#, fuzzy
-msgid   "Add custom content"
-msgstr  "Иловаи ҷадвали мундариҷа"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:68
-#, fuzzy
-msgid   "Select file to load"
-msgstr  "Интихоби Файлҳо барои Иловакунӣ"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:125
-#, fuzzy, c-format
-msgid   "Cannot load file %s. Reason: %s"
-msgstr  "Боркунии файл нашуда истодааст."
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:154
-#, fuzzy
-msgid   "You need to restart the application"
-msgstr  "Средство для запуска приложений"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:187
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:191
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:195
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:198 ../xffm/fm/view/pkg/model.hh:29
-#: ../xffm/fm/view/pkg/popup.hh:35
-#, fuzzy
-msgid   "Software Updater"
-msgstr  "Нармафзор"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:236
-#: ../xffm/fm/view/pkg/model.hh:108 ../xffm/fm/view/pkg/model.hh:299
-#: ../xffm/fm/view/pkg/model.hh:306 ../xffm/fm/view/pkg/popup.hh:151
-#: ../xffm/common/gtk.hh:77
-msgid   "Search"
-msgstr  "Ҷустуҷӯ"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:240 ../xffm/common/gtk.hh:67
+#: ../xffm/gtk/gtk.hh:68 ../xffm/fm/dialog/notebook/vbuttonbox.hh:252
 #, fuzzy
 msgid   "Open terminal"
 msgstr  "Кушодани терминал"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:244
-#, fuzzy
-msgid   "Open a New Window"
-msgstr  "Кушодан дар тирезаи нав"
+#: ../xffm/gtk/gtk.hh:72 ../xffm/fm/view/local/popup.hh:157
+msgid   "Paste"
+msgstr  "Гузоштан"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:250
+#: ../xffm/gtk/gtk.hh:74 ../xffm/fm/view/local/popup.hh:151
+#: ../xffm/fm/view/root/popup.hh:224
 #, fuzzy
-msgid   "Differences"
-msgstr  "Фарқият"
+msgid   "Add bookmark"
+msgstr  "Илова кардани хатбарак."
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:256
-#: ../xffm/fm/view/root/model.hh:110
+#: ../xffm/gtk/gtk.hh:76 ../xffm/fm/view/local/popup.hh:152
+#: ../xffm/fm/view/root/popup.hh:170
+msgid   "Remove bookmark"
+msgstr  "Тоза кардани хатбарак"
+
+#: ../xffm/gtk/gtk.hh:78 ../xffm/fm/view/pkg/model.hh:108
+#: ../xffm/fm/view/pkg/model.hh:300 ../xffm/fm/view/pkg/model.hh:307
+#: ../xffm/fm/view/pkg/popup.hh:151
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:248
+msgid   "Search"
+msgstr  "Ҷустуҷӯ"
+
+#: ../xffm/gtk/gtk.hh:82 ../xffm/fm/dialog/notebook/createini.hh:83
+#: ../xffm/fm/dialog/notebook/menupopover.hh:237
+msgid   "Exit"
+msgstr  "Баромадан"
+
+#: ../xffm/gtk/gtk.hh:84 ../xffm/fm/view/local/popup.hh:85
+#: ../xffm/fm/view/local/popup.hh:142 ../xffm/fm/view/local/popup.hh:1332
+#: ../xffm/fm/view/local/popup.hh:1339 ../xffm/fm/view/local/popup.hh:1349
+#: ../xffm/fm/view/local/popup.hh:1356
+msgid   "Open with"
+msgstr  "Кушодан ба воситаи"
+
+#: ../xffm/gtk/gtk.hh:86 ../xffm/fm/view/local/popup.hh:100
+#: ../xffm/fm/view/local/popup.hh:156
+msgid   "Cut"
+msgstr  "Буридан"
+
+#: ../xffm/gtk/gtk.hh:88 ../xffm/fm/view/local/popup.hh:99
+#: ../xffm/fm/view/local/popup.hh:155
+msgid   "Copy"
+msgstr  "Нусхабардорӣ"
+
+#: ../xffm/gtk/gtk.hh:90 ../xffm/fm/view/local/rm.hh:176
+#: ../xffm/fm/view/local/popup.hh:103 ../xffm/fm/view/local/popup.hh:160
+msgid   "Delete"
+msgstr  "Нест кардан"
+
+#: ../xffm/gtk/gtk.hh:92 ../xffm/fm/view/local/rm.hh:165
+#, fuzzy
+msgid   "Shred"
+msgstr  "Нобудсоз"
+
+#: ../xffm/gtk/gtk.hh:95 ../xffm/fm/view/local/popup.hh:95
+#: ../xffm/fm/view/local/popup.hh:145 ../xffm/fm/view/root/popup.hh:169
+#: ../xffm/fm/view/fstab/popup.hh:20
+msgid   "Open in New Tab"
+msgstr  "Кушодан дар ҷадвалбандии нав"
+
+#: ../xffm/gtk/gtk.hh:140 ../xffm/fm/dialog/notebook/notebook.hh:75
+msgid   "New Tab"
+msgstr  "Варақаи нав"
+
+#: ../xffm/gtk/dialogs.hh:42
+msgid   "Help"
+msgstr  "Кӯмак"
+
+#: ../xffm/fm/view/pkg/model.hh:29 ../xffm/fm/view/pkg/popup.hh:35
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:194
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:198
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:202
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:205
+#, fuzzy
+msgid   "Software Updater"
+msgstr  "Нармафзор"
+
+#: ../xffm/fm/view/pkg/model.hh:41 ../xffm/fm/view/pkg/model.hh:52
+#, fuzzy
+msgid   "Add or remove software installed on the system"
+msgstr  "Хидматрасони NFS дар системаи шумо кор гузошта нашудааст"
+
+#: ../xffm/fm/view/pkg/model.hh:111
+msgid   "String"
+msgstr  "Сатр"
+
+#: ../xffm/fm/view/pkg/model.hh:117
+#, fuzzy
+msgid   "Waiting for search results"
+msgstr  "интизории ҷавоб"
+
+#: ../xffm/fm/view/pkg/model.hh:175
+#, fuzzy
+msgid   "No results"
+msgstr  "Ягон натиҷа нест."
+
+#: ../xffm/fm/view/pkg/model.hh:374
+#, fuzzy
+msgid   "Currently busy\n"
+msgstr  "Аломати асъор"
+
+#: ../xffm/fm/view/pkg/popup.hh:44
+#, fuzzy
+msgid   "Update Database"
+msgstr  "База патентов США"
+
+#: ../xffm/fm/view/pkg/popup.hh:45
+msgid   "Fetch"
+msgstr  "Қабул намудан"
+
+#: ../xffm/fm/view/pkg/popup.hh:46
+#, fuzzy
+msgid   "Install --dry-run"
+msgstr  "Сабт шудааст"
+
+#: ../xffm/fm/view/pkg/popup.hh:47
+msgid   "Install"
+msgstr  "Насб кардан"
+
+#: ../xffm/fm/view/pkg/popup.hh:48
+#, fuzzy
+msgid   "Uninstall --dry-run"
+msgstr  "Удаление из системы"
+
+#: ../xffm/fm/view/pkg/popup.hh:49
+msgid   "Uninstall"
+msgstr  "Тоза кунед"
+
+#: ../xffm/fm/view/pkg/popup.hh:50
+msgid   "Information"
+msgstr  "Маълумот"
+
+#: ../xffm/fm/view/pkg/popup.hh:140
+msgid   "Version"
+msgstr  "Версия"
+
+#: ../xffm/fm/view/pkg/popup.hh:149
+msgid   "Go up"
+msgstr  ""
+
+#: ../xffm/fm/view/pkg/popup.hh:152
+#, fuzzy
+msgid   "Search packages"
+msgstr  "Ҷустуҷӯи бозгашт"
+
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:95
+#, fuzzy, c-format
+msgid   "Loading %s...%s"
+msgstr  "Боркунии %s"
+
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:95
+#, fuzzy
+msgid   "Please Wait..."
+msgstr  "Лутфан, интизор шавед..."
+
+#: ../xffm/fm/view/local/model.hh:124
+#, c-format
+msgid   "Reading \"%s\""
+msgstr  "Хондани \"%s\""
+
+#: ../xffm/fm/view/local/model.hh:577 ../xffm/fm/view/base/monitor.hh:34
+#, fuzzy, c-format
+msgid   "Files: %s"
+msgstr  "Файл: %s"
+
+#: ../xffm/fm/view/local/model.hh:580
+#, fuzzy, c-format
+msgid   "Loaded %d of %d articles"
+msgstr  " %d аз %d файл "
+
+#: ../xffm/fm/view/local/rm.hh:59
+#, c-format
+msgid   "Delete %s"
+msgstr  "Нобуд кардан %s"
+
+#: ../xffm/fm/view/local/rm.hh:61
+#, fuzzy
+msgid   "Warning: "
+msgstr  "ОГОҲӢ: %s"
+
+#: ../xffm/fm/view/local/rm.hh:61 ../xffm/fm/view/local/popup.hh:557
+#, fuzzy
+msgid   "Multiple selections"
+msgstr  "Бисьёри кор"
+
+#: ../xffm/fm/view/local/rm.hh:92
+msgid   "Remove"
+msgstr  "Тоза кардан"
+
+#: ../xffm/fm/view/local/rm.hh:142
+#, fuzzy
+msgid   "Apply to all"
+msgstr  "Ҷавоб ба ҳама:"
+
+#: ../xffm/fm/view/local/rm.hh:183
+msgid   "Trash"
+msgstr  "Сабад"
+
+#: ../xffm/fm/view/local/popup.hh:94
+msgid   "New"
+msgstr  "Нав"
+
+#: ../xffm/fm/view/local/popup.hh:101 ../xffm/fm/view/local/popup.hh:159
+#: ../xffm/fm/view/local/popup.hh:232 ../xffm/fm/view/local/popup.hh:234
+#, fuzzy
+msgid   "Paste into"
+msgstr  "Часпондан"
+
+#: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:158
+#, fuzzy
+msgid   "There is nothing on the clipboard to paste."
+msgstr  "Дар силули мухобиротӣ элемент барои часбонидан нест."
+
+#: ../xffm/fm/view/local/popup.hh:106
+msgid   "Select All"
+msgstr  "Интихоб кардани ҳама"
+
+#: ../xffm/fm/view/local/popup.hh:107 ../xffm/fm/view/local/popup.hh:746
+#, fuzzy
+msgid   "Match regular expression"
+msgstr  "Мувофиқаткунӣ ба Ифодаи Доимӣ"
+
+#: ../xffm/fm/view/local/popup.hh:143 ../xffm/fm/view/local/popup.hh:1029
+#, fuzzy
+msgid   "Run Executable..."
+msgstr  "Иҷропазир:"
+
+#: ../xffm/fm/view/local/popup.hh:144 ../xffm/fm/view/local/popup.hh:877
+#, fuzzy
+msgid   "Extract files from the archive"
+msgstr  "Берункунии файлҳо аз %s"
+
+#: ../xffm/fm/view/local/popup.hh:146 ../xffm/fm/view/local/popup.hh:928
+#, fuzzy
+msgid   "Create a compressed archive with the selected objects"
+msgstr  "Эҷоди нишона ё инки шоха барои файлҳои  интихобшуда"
+
+#: ../xffm/fm/view/local/popup.hh:148 ../xffm/fm/view/root/popup.hh:172
+#: ../xffm/fm/view/fstab/popup.hh:37
+#, fuzzy
+msgid   "Mount the volume associated with this folder"
+msgstr  "Хидматрасони IRC, ки бо ин шабака монанд аст"
+
+#: ../xffm/fm/view/local/popup.hh:149 ../xffm/fm/view/root/popup.hh:173
+#: ../xffm/fm/view/fstab/popup.hh:38
+#, fuzzy
+msgid   "Unmount the volume associated with this folder"
+msgstr  "Хидматрасони IRC, ки бо ин шабака монанд аст"
+
+#: ../xffm/fm/view/local/popup.hh:161 ../xffm/fm/view/local/popup.hh:1242
+msgid   "Rename"
+msgstr  "Иваз кардани ном"
+
+#: ../xffm/fm/view/local/popup.hh:162 ../xffm/fm/view/local/popup.hh:1225
+msgid   "Duplicate"
+msgstr  "Такроран иҷро кардан"
+
+#: ../xffm/fm/view/local/popup.hh:163 ../xffm/fm/view/local/popup.hh:1208
+msgid   "Link"
+msgstr  "Пайванд"
+
+#: ../xffm/fm/view/local/popup.hh:164
+msgid   "Properties"
+msgstr  "Хусусиятҳо"
+
+#: ../xffm/fm/view/local/popup.hh:554
+msgid   "Files:"
+msgstr  "Файлҳо:"
+
+#: ../xffm/fm/view/local/popup.hh:744
+#, fuzzy
+msgid   "Select items"
+msgstr  "Интихоби ҷузъ"
+
+#: ../xffm/fm/view/local/popup.hh:761
+#, fuzzy
+msgid   "Regular Expression syntax is incorrect"
+msgstr  "Тафтиши баёни ботартиб"
+
+#: ../xffm/fm/view/local/popup.hh:791
+msgid   "No selection"
+msgstr  "Мавзӯъро интихоб накардан"
+
+#: ../xffm/fm/view/local/popup.hh:791
+#, fuzzy
+msgid   "No matches."
+msgstr  "Ягон мутобиқат ёфт нашуд"
+
+#: ../xffm/fm/view/local/popup.hh:983 ../xffm/fm/view/local/popup.hh:1156
+#, fuzzy
+msgid   "Create new..."
+msgstr  "Эҷод намудан..."
+
+#: ../xffm/fm/view/local/popup.hh:990 ../xffm/fm/view/local/popup.hh:1085
+#: ../xffm/fm/view/local/popup.hh:1159
+#, fuzzy
+msgid   "New Name:"
+msgstr  "Номи Нав"
+
+#: ../xffm/fm/view/local/popup.hh:998
+msgid   "No name"
+msgstr  "Бе ном"
+
+#: ../xffm/fm/view/local/popup.hh:1011
+#, fuzzy, c-format
+msgid   "Another file with the same name already exists in “%s”."
+msgstr  "Амалиёт бо сигнатураи ҳамин гуна аллакай дар %sмавҷуд аст.\n"
+
+#: ../xffm/fm/view/local/popup.hh:1036
+#, fuzzy
+msgid   "Arguments for the Command"
+msgstr  "Нишонвандҳои фармон"
+
+#: ../xffm/fm/view/local/popup.hh:1117 ../xffm/fm/view/root/popup.hh:237
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:383
+msgid   "Specify Output Directory..."
+msgstr  "Ҷузвдони натиҷаҳоро муайян кунед..."
+
+#: ../xffm/fm/view/local/popup.hh:1148
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:409
+msgid   "Not a directory"
+msgstr  "Не папка"
+
+#: ../xffm/fm/view/local/popup.hh:1307
+#, fuzzy
+msgid   "You have selected multiple files or folders"
+msgstr  "Шумо папкаро ишора намудед."
+
+#: ../xffm/fm/view/local/popup.hh:1375 ../xffm/fm/view/local/view.hh:156
+#, fuzzy
+msgid   "Invalid entry"
+msgstr  "Неверный шрифт"
+
+#: ../xffm/fm/view/local/view.hh:177
+#, fuzzy, c-format
+msgid   "The volume '%s' is not mounted."
+msgstr  "Навъи '%s' ёфт нашуд"
+
+#: ../xffm/fm/view/local/properties.hh:241
+#, fuzzy
+msgid   "Properties and Attributes"
+msgstr  "Мушаххасоти стандартӣ"
+
+#: ../xffm/fm/view/local/properties.hh:270
+#, fuzzy
+msgid   "File Mode:"
+msgstr  "KFileModule"
+
+#: ../xffm/fm/view/local/properties.hh:296
+msgid   "File:"
+msgstr  "Файл:"
+
+#: ../xffm/fm/view/local/properties.hh:308
+msgid   "Apply changes"
+msgstr  "Тағиротро истифода баред"
+
+#: ../xffm/fm/view/local/properties.hh:469
+msgid   "Encoding"
+msgstr  "Рамзгузорӣ"
+
+#: ../xffm/fm/view/local/properties.hh:470 ../xffm/fm/view/treeview.hh:22
+msgid   "Mimetype"
+msgstr  "Навъҳои MIME"
+
+#: ../xffm/fm/view/local/properties.hh:474 ../xffm/fm/view/treeview.hh:19
+msgid   "Size"
+msgstr  "Андоза"
+
+#: ../xffm/fm/view/local/properties.hh:475 ../xffm/fm/view/treeview.hh:20
+msgid   "Date"
+msgstr  "Сана"
+
+#: ../xffm/fm/view/local/properties.hh:492
+msgid   "Successfully moved to trash."
+msgstr  "Успешно удалено в корзину."
+
+#: ../xffm/fm/view/local/properties.hh:493
+msgid   "Source:"
+msgstr  "Манбаъ:"
+
+#: ../xffm/fm/view/root/model.hh:124
+#, fuzzy
+msgid   "Root Directory"
+msgstr  "Феҳристи решавӣ:"
+
+#: ../xffm/fm/view/root/model.hh:140
+msgid   "This is the root of the filesystem"
+msgstr  "Ин системаи файлҳои root мебошад"
+
+#: ../xffm/fm/view/root/model.hh:152
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:268
 msgid   "Home Directory"
 msgstr  "Феҳристи Хонагӣ"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:261
-#: ../xffm/fm/view/root/model.hh:168 ../xffm/fm/view/fstab/popup.hh:29
-#, fuzzy
-msgid   "Disk Image Mounter"
-msgstr  "Намоиши тасвирҳои саҳифа"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:266
-#: ../xffm/fm/view/root/model.hh:137
+#: ../xffm/fm/view/root/model.hh:179
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:278
 #, fuzzy
 msgid   "Trash bin"
 msgstr  "Сабад"
 
-#: ../xffm/fm/dialog/notebook/notebook.hh:56
+#: ../xffm/fm/view/root/model.hh:210 ../xffm/fm/view/fstab/popup.hh:29
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:273
 #, fuzzy
-msgid   "Long press time"
-msgstr  "Паҳлӯи дароз"
+msgid   "Disk Image Mounter"
+msgstr  "Намоиши тасвирҳои саҳифа"
 
-#: ../xffm/fm/dialog/notebook/notebook.hh:75 ../xffm/common/gtk.hh:139
-msgid   "New Tab"
-msgstr  "Варақаи нав"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:178
+#: ../xffm/fm/view/root/model.hh:227
 #, fuzzy
-msgid   "Open menu"
-msgstr  "Кушодани ҳуҷҷат"
+msgid   "Mount local disks and devices"
+msgstr  "Намоиши дастгоҳҳои иловагӣ"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:230
+#: ../xffm/fm/view/root/model.hh:267
 #, fuzzy
-msgid   "View as list"
-msgstr  "Намоиши Рӯйхати Баргашта"
+msgid   "Go to bookmarked location"
+msgstr  "Хатчӯбкунии ин Маҳал"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:231
-msgid   "Show hidden files"
-msgstr  "Намоиш додани файлҳои ноаён"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:232
+#: ../xffm/fm/view/root/popup.hh:175
 #, fuzzy
-msgid   "Show Backup Files"
-msgstr  "Намоиши тамоми файлҳо"
+msgid   "Empty trash"
+msgstr  "Холӣ кардани сабад"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:233
+#: ../xffm/fm/view/root/popup.hh:228
 #, fuzzy
-msgid   "Sort data in descending order"
-msgstr  "Аз рӯи камшавӣ ба тартиб овардан"
+msgid   "Ecrypt Volume"
+msgstr  "Рамзкунонии Файл"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:235
+#: ../xffm/fm/view/root/popup.hh:229
 #, fuzzy
-msgid   "Sort by date"
-msgstr  "Таърихи кӯтоҳ:"
+msgid   "private"
+msgstr  "Шахсӣ"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:236
+#: ../xffm/fm/view/fuse/ecryptfs.hh:162 ../xffm/fm/view/fuse/ecryptfs.hh:163
+#: ../xffm/fm/view/fuse/ecryptfs.hh:185
+msgid   "Mount"
+msgstr  "Васл кардан"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:179
+#: ../xffm/fm/dialog/notebook/createini.hh:87
+#: ../xffm/fm/dialog/notebook/createini.hh:371
+msgid   "Save"
+msgstr  "Захира кардан"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:182
+msgid   "Load"
+msgstr  "Боркунӣ"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:398
+#: ../xffm/fm/dialog/notebook/createini.hh:67
+msgid   "Options"
+msgstr  "Имконот"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:399
+msgid   "Advanced"
+msgstr  "Иловагӣ"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:692 ../xffm/fm/view/fstab/view.hh:1414
+#, fuzzy, c-format
+msgid   "Mounting %s"
+msgstr  "Перемещение %s"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:745
+#, fuzzy, c-format
+msgid   "Enter Passphrase for %s"
+msgstr  "Гузарвожаро барои %s ворид намоед"
+
+#: ../xffm/fm/view/fstab/popup.hh:21 ../xffm/fm/view/fstab/view.hh:1033
 #, fuzzy
-msgid   "Sort by size"
-msgstr  "Паҳлӯи кӯтоҳ"
+msgid   "NFS Network Volume"
+msgstr  "Иловаи Феҳристи Шабакавӣ"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:237 ../xffm/common/gtk.hh:81
-msgid   "Exit"
-msgstr  "Баромадан"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:270
+#: ../xffm/fm/view/fstab/popup.hh:22
 #, fuzzy
-msgid   "Main menu"
-msgstr  "Штати Мэн"
+msgid   "SSHFS Remote Synchronization Folder"
+msgstr  "Тартиботи синхронизация."
 
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:375
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:377
-msgid   "Go to"
-msgstr  "Гузаштан ба"
+#: ../xffm/fm/view/fstab/popup.hh:23 ../xffm/fm/view/fstab/view.hh:1085
+#, fuzzy
+msgid   "eCryptfs Volume"
+msgstr  "Баландии садои %s"
 
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:382
-#: ../xffm/fm/view/local/popup.hh:887 ../xffm/fm/view/local/popup.hh:981
-msgid   "Specify Output Directory..."
-msgstr  "Ҷузвдони натиҷаҳоро муайян кунед..."
+#: ../xffm/fm/view/fstab/popup.hh:24 ../xffm/fm/view/fstab/view.hh:1111
+#, fuzzy
+msgid   "CIFS Volume"
+msgstr  "Баландии садо"
 
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:409
-msgid   "Not a directory"
-msgstr  "Не папка"
+#: ../xffm/fm/view/fstab/popup.hh:129
+msgid   "Mount Device"
+msgstr  "Дстгоҳи Насбкунӣ"
+
+#: ../xffm/fm/view/fstab/popup.hh:141 ../xffm/fm/view/fstab/view.hh:924
+msgid   "Mount point:"
+msgstr  "Нуқтаи монтажкунӣ:"
+
+#: ../xffm/fm/view/fstab/view.hh:591
+#, fuzzy
+msgid   "Mount point: "
+msgstr  "Нуқтаи монтажкунӣ:"
+
+#: ../xffm/fm/view/fstab/view.hh:592
+#, fuzzy
+msgid   "Mount device: "
+msgstr  "Дстгоҳи Насбкунӣ"
+
+#: ../xffm/fm/view/fstab/view.hh:660 ../xffm/fm/view/fstab/view.hh:676
+#, fuzzy
+msgid   "Disks"
+msgstr  "Диск"
+
+#: ../xffm/fm/view/fstab/view.hh:922
+#, fuzzy
+msgid   "No Label"
+msgstr  "Барчасп"
+
+#: ../xffm/fm/view/fstab/view.hh:923
+#, fuzzy
+msgid   "There is no file system available (unformatted)"
+msgstr  "Ёрӣ барои '%s' дастрас нест."
+
+#: ../xffm/fm/view/fstab/view.hh:924
+#, fuzzy
+msgid   "Not mounted"
+msgstr  "Васл нашуд"
+
+#: ../xffm/fm/view/fstab/view.hh:1059
+msgid   "SFTP (via SSH)"
+msgstr  ""
+
+#: ../xffm/fm/view/fstab/view.hh:1414
+#, fuzzy, c-format
+msgid   "Unmounting %s"
+msgstr  "Импорти %s"
+
+#: ../xffm/fm/view/base/signals.hh:845
+#, fuzzy
+msgid   "Trash is empty"
+msgstr  "Замина холӣ аст"
+
+#: ../xffm/fm/view/base/signals.hh:847
+msgid   "Directory does not exist."
+msgstr  "Каталог вуҷуд надорад!"
+
+#: ../xffm/fm/view/treeview.hh:17
+msgid   "Name"
+msgstr  "Ном"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
+#, fuzzy
+msgid   "Embedded Terminal"
+msgstr  "Терминали Gnome"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
+msgid   "All items in the iconview."
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
+#, fuzzy
+msgid   "Scripting"
+msgstr  "Скрипт"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
+msgid   "Clear Log"
+msgstr  "Тоза кардани маҷалла"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
+#, fuzzy
+msgid   "Terminal font"
+msgstr  "Терминал"
 
 #: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
 msgid   "Renice Process"
@@ -824,18 +1245,23 @@ msgstr  "Насб кардан ба пешфарз"
 msgid   "PID"
 msgstr  "Рамзи PID"
 
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:376
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:378
+msgid   "Go to"
+msgstr  "Гузаштан ба"
+
 #: ../xffm/fm/dialog/notebook/page/page.hh:59
 #, fuzzy
 msgid   "loading..."
 msgstr  "Боркунӣ рафта истодааст..."
 
-#: ../xffm/fm/dialog/notebook/page/page.hh:151
+#: ../xffm/fm/dialog/notebook/page/page.hh:152
 #: ../xffm/fm/dialog/notebook/page/page.hh:167
 #, fuzzy
 msgid   "Confirm Replace"
 msgstr  "Тадқиқи ҳузф кардан"
 
-#: ../xffm/fm/dialog/notebook/page/page.hh:153
+#: ../xffm/fm/dialog/notebook/page/page.hh:154
 msgid   "Destination File"
 msgstr  "Файли муайянкунӣ"
 
@@ -844,39 +1270,182 @@ msgstr  "Файли муайянкунӣ"
 msgid   "The output file %s already exists, do you want to overwrite it?"
 msgstr  "Файли %s мавҷуд аст. Шумо мехоҳед ин файлро бознависӣ кунед?"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
+#: ../xffm/fm/dialog/notebook/createini.hh:67
 #, fuzzy
-msgid   "Embedded Terminal"
-msgstr  "Терминали Gnome"
+msgid   "maximum"
+msgstr  "Ҳадди акcаp"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
-msgid   "All items in the iconview."
-msgstr  ""
+#: ../xffm/fm/dialog/notebook/createini.hh:75
+msgid   "Add option"
+msgstr  "Иловаи интихоб"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
+#: ../xffm/fm/dialog/notebook/createini.hh:79
 #, fuzzy
-msgid   "Scripting"
-msgstr  "Скрипт"
+msgid   "Remove option"
+msgstr  "Нест кардани алоқа"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
-msgid   "Clear Log"
-msgstr  "Тоза кардани маҷалла"
-
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
+#: ../xffm/fm/dialog/notebook/createini.hh:158
 #, fuzzy
-msgid   "Terminal font"
-msgstr  "Терминал"
+msgid   "icon ID"
+msgstr  "нишона"
 
-#: ../xffm/fm/dialog/clipboard.hh:23 ../xffm/common/dnd.hh:41
+#: ../xffm/fm/dialog/notebook/createini.hh:159
 #, fuzzy
-msgid   "Copying files locally"
-msgstr  "Нусха бардошатани: %s-> %s"
+msgid   "tooltip"
+msgstr  "Подсказка"
 
-#: ../xffm/fm/dialog/clipboard.hh:30 ../xffm/common/gio.hh:83
-#: ../xffm/common/dnd.hh:35
+#: ../xffm/fm/dialog/notebook/createini.hh:160
 #, fuzzy
-msgid   "Moving files"
-msgstr  "Перемещение %s"
+msgid   "Select work directory"
+msgstr  "Интихоби феҳрист"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:163
+#, fuzzy
+msgid   "Select executable"
+msgstr  "Интихоб кардани ҷадвалҳо:"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:166
+msgid   "Run in terminal"
+msgstr  "Дар терминал иҷро кунед"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:234
+#: ../xffm/response/chooserresponse.hh:20
+msgid   "Open"
+msgstr  "Кушодан"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:268
+#: ../xffm/response/chooserresponse.hh:55
+#: ../xffm/response/chooserresponse.hh:69
+#, fuzzy
+msgid   "Choose file"
+msgstr  "Интихоб кардани файл"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:277
+#: ../xffm/response/chooserresponse.hh:50
+#: ../xffm/response/chooserresponse.hh:62
+#, fuzzy
+msgid   "Choose directory"
+msgstr  "Феҳристи хонагӣ"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:366
+msgid   "Save File"
+msgstr  "Нигоҳ доштани файл"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:380
+#, fuzzy
+msgid   "customButton.ini"
+msgstr  "Тугмаи зеркунӣ"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:420
+msgid   "Option"
+msgstr  "Параметр"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:424
+msgid   "text"
+msgstr  "матн"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:431 ../xffm/completion/bash.hh:135
+msgid   "file"
+msgstr  "файл"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:436
+#, fuzzy
+msgid   "folder"
+msgstr  "1 ҷузвдон"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:441
+msgid   "on"
+msgstr  "фаъол"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:446
+msgid   "off"
+msgstr  "ғайрифаъол"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:16
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:226
+#, fuzzy
+msgid   "Remove Button Contents"
+msgstr  "Нест кардани қисм"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:75
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:221
+#, fuzzy
+msgid   "Add custom content"
+msgstr  "Иловаи ҷадвали мундариҷа"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:76
+#, fuzzy
+msgid   "Select file to load"
+msgstr  "Интихоби Файлҳо барои Иловакунӣ"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:132
+#, fuzzy, c-format
+msgid   "Cannot load file %s. Reason: %s"
+msgstr  "Боркунии файл нашуда истодааст."
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:161
+#, fuzzy
+msgid   "You need to restart the application"
+msgstr  "Средство для запуска приложений"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:216
+#, fuzzy
+msgid   "FIXME New custom content"
+msgstr  "Истифода аз дигар ҳуруфот"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:256
+#, fuzzy
+msgid   "Open a New Window"
+msgstr  "Кушодан дар тирезаи нав"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:262
+#, fuzzy
+msgid   "Differences"
+msgstr  "Фарқият"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:178
+#, fuzzy
+msgid   "Open menu"
+msgstr  "Кушодани ҳуҷҷат"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:230
+#, fuzzy
+msgid   "View as list"
+msgstr  "Намоиши Рӯйхати Баргашта"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:231
+msgid   "Show hidden files"
+msgstr  "Намоиш додани файлҳои ноаён"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:232
+#, fuzzy
+msgid   "Show Backup Files"
+msgstr  "Намоиши тамоми файлҳо"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:233
+#, fuzzy
+msgid   "Sort data in descending order"
+msgstr  "Аз рӯи камшавӣ ба тартиб овардан"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:235
+#, fuzzy
+msgid   "Sort by date"
+msgstr  "Таърихи кӯтоҳ:"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:236
+#, fuzzy
+msgid   "Sort by size"
+msgstr  "Паҳлӯи кӯтоҳ"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:270
+#, fuzzy
+msgid   "Main menu"
+msgstr  "Штати Мэн"
+
+#: ../xffm/fm/dialog/notebook/notebook.hh:56
+#, fuzzy
+msgid   "Long press time"
+msgstr  "Паҳлӯи дароз"
 
 #: ../xffm/fm/dialog/dialog.hh:122
 msgid   "Removed"
@@ -887,530 +1456,87 @@ msgstr  "Хузф карда шуд"
 msgid   "Detected device(s):"
 msgstr  "Интихоб кардани дастгоҳ"
 
-#: ../xffm/fm/view/local/model.hh:124
-#, c-format
-msgid   "Reading \"%s\""
-msgstr  "Хондани \"%s\""
+#: ../xffm/response/progress.hh:82 ../xffm/response/commandresponse.hh:57
+msgid   "Running"
+msgstr  "Иҷро шуда истодааст"
 
-#: ../xffm/fm/view/local/model.hh:577 ../xffm/fm/view/base/monitor.hh:34
-#, fuzzy, c-format
-msgid   "Files: %s"
-msgstr  "Файл: %s"
-
-#: ../xffm/fm/view/local/model.hh:580
-#, fuzzy, c-format
-msgid   "Loaded %d of %d articles"
-msgstr  " %d аз %d файл "
-
-#: ../xffm/fm/view/local/popup.hh:85 ../xffm/fm/view/local/popup.hh:142
-#: ../xffm/fm/view/local/popup.hh:1287 ../xffm/fm/view/local/popup.hh:1294
-#: ../xffm/fm/view/local/popup.hh:1305 ../xffm/fm/view/local/popup.hh:1312
-#: ../xffm/common/gtk.hh:83
-msgid   "Open with"
-msgstr  "Кушодан ба воситаи"
-
-#: ../xffm/fm/view/local/popup.hh:94
-msgid   "New"
-msgstr  "Нав"
-
-#: ../xffm/fm/view/local/popup.hh:95 ../xffm/fm/view/local/popup.hh:145
-#: ../xffm/fm/view/root/popup.hh:136 ../xffm/fm/view/fstab/popup.hh:20
-#: ../xffm/common/gtk.hh:94
-msgid   "Open in New Tab"
-msgstr  "Кушодан дар ҷадвалбандии нав"
-
-#: ../xffm/fm/view/local/popup.hh:99 ../xffm/fm/view/local/popup.hh:155
-#: ../xffm/common/gtk.hh:87
-msgid   "Copy"
-msgstr  "Нусхабардорӣ"
-
-#: ../xffm/fm/view/local/popup.hh:100 ../xffm/fm/view/local/popup.hh:156
-#: ../xffm/common/gtk.hh:85
-msgid   "Cut"
-msgstr  "Буридан"
-
-#: ../xffm/fm/view/local/popup.hh:101 ../xffm/fm/view/local/popup.hh:159
-#: ../xffm/fm/view/local/popup.hh:232 ../xffm/fm/view/local/popup.hh:234
+#: ../xffm/response/progress.hh:87 ../xffm/response/commandresponse.hh:61
 #, fuzzy
-msgid   "Paste into"
-msgstr  "Часпондан"
+msgid   "Waiting for operation to finish..."
+msgstr  "Мунтазам ба пайвастшавии компютер дорам..."
 
-#: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:158
+#: ../xffm/response/passwdresponse.hh:131
 #, fuzzy
-msgid   "There is nothing on the clipboard to paste."
-msgstr  "Дар силули мухобиротӣ элемент барои часбонидан нест."
+msgid   "User Input"
+msgstr  "Ахбороти Корванд"
 
-#: ../xffm/fm/view/local/popup.hh:103 ../xffm/fm/view/local/popup.hh:160
-#: ../xffm/fm/view/local/rm.hh:176 ../xffm/common/gtk.hh:89
-msgid   "Delete"
-msgstr  "Нест кардан"
-
-#: ../xffm/fm/view/local/popup.hh:106
-msgid   "Select All"
-msgstr  "Интихоб кардани ҳама"
-
-#: ../xffm/fm/view/local/popup.hh:107 ../xffm/fm/view/local/popup.hh:755
+#: ../xffm/response/passwdresponse.hh:147
 #, fuzzy
-msgid   "Match regular expression"
-msgstr  "Мувофиқаткунӣ ба Ифодаи Доимӣ"
+msgid   "Response Requested"
+msgstr  "Агар таклиф дорад"
 
-#: ../xffm/fm/view/local/popup.hh:143 ../xffm/fm/view/local/popup.hh:1105
+#: ../xffm/response/passwdresponse.hh:194 ../xffm/response/entryresponse.hh:457
+msgid   "Ok"
+msgstr  "Хуб"
+
+#: ../xffm/response/customresponse.hh:55
 #, fuzzy
-msgid   "Run Executable..."
-msgstr  "Иҷропазир:"
+msgid   "Execute command"
+msgstr  "Иҷрои дастур"
 
-#: ../xffm/fm/view/local/popup.hh:144 ../xffm/fm/view/local/popup.hh:875
-#, fuzzy
-msgid   "Extract files from the archive"
-msgstr  "Берункунии файлҳо аз %s"
+#: ../xffm/response/customresponse.hh:103
+msgid   "Source File"
+msgstr  "Файли аслӣ"
 
-#: ../xffm/fm/view/local/popup.hh:146 ../xffm/fm/view/local/popup.hh:966
-#, fuzzy
-msgid   "Create a compressed archive with the selected objects"
-msgstr  "Эҷоди нишона ё инки шоха барои файлҳои  интихобшуда"
-
-#: ../xffm/fm/view/local/popup.hh:148 ../xffm/fm/view/fstab/popup.hh:37
-#, fuzzy
-msgid   "Mount the volume associated with this folder"
-msgstr  "Хидматрасони IRC, ки бо ин шабака монанд аст"
-
-#: ../xffm/fm/view/local/popup.hh:149 ../xffm/fm/view/fstab/popup.hh:38
-#, fuzzy
-msgid   "Unmount the volume associated with this folder"
-msgstr  "Хидматрасони IRC, ки бо ин шабака монанд аст"
-
-#: ../xffm/fm/view/local/popup.hh:151 ../xffm/common/gtk.hh:73
-#, fuzzy
-msgid   "Add bookmark"
-msgstr  "Илова кардани хатбарак."
-
-#: ../xffm/fm/view/local/popup.hh:152 ../xffm/fm/view/root/popup.hh:137
-#: ../xffm/common/gtk.hh:75
-msgid   "Remove bookmark"
-msgstr  "Тоза кардани хатбарак"
-
-#: ../xffm/fm/view/local/popup.hh:157 ../xffm/common/gtk.hh:71
-msgid   "Paste"
-msgstr  "Гузоштан"
-
-#: ../xffm/fm/view/local/popup.hh:161 ../xffm/fm/view/local/popup.hh:1231
-msgid   "Rename"
-msgstr  "Иваз кардани ном"
-
-#: ../xffm/fm/view/local/popup.hh:162 ../xffm/fm/view/local/popup.hh:1217
-msgid   "Duplicate"
-msgstr  "Такроран иҷро кардан"
-
-#: ../xffm/fm/view/local/popup.hh:163 ../xffm/fm/view/local/popup.hh:1203
-msgid   "Link"
-msgstr  "Пайванд"
-
-#: ../xffm/fm/view/local/popup.hh:164
-msgid   "Properties"
-msgstr  "Хусусиятҳо"
-
-#: ../xffm/fm/view/local/popup.hh:562
-msgid   "Files:"
-msgstr  "Файлҳо:"
-
-#: ../xffm/fm/view/local/popup.hh:565 ../xffm/fm/view/local/rm.hh:61
-#, fuzzy
-msgid   "Multiple selections"
-msgstr  "Бисьёри кор"
-
-#: ../xffm/fm/view/local/popup.hh:753
-#, fuzzy
-msgid   "Select items"
-msgstr  "Интихоби ҷузъ"
-
-#: ../xffm/fm/view/local/popup.hh:771
-#, fuzzy
-msgid   "Regular Expression syntax is incorrect"
-msgstr  "Тафтиши баёни ботартиб"
-
-#: ../xffm/fm/view/local/popup.hh:801
-msgid   "No selection"
-msgstr  "Мавзӯъро интихоб накардан"
-
-#: ../xffm/fm/view/local/popup.hh:801
-#, fuzzy
-msgid   "No matches."
-msgstr  "Ягон мутобиқат ёфт нашуд"
-
-#: ../xffm/fm/view/local/popup.hh:1058
-#, fuzzy
-msgid   "Create new..."
-msgstr  "Эҷод намудан..."
-
-#: ../xffm/fm/view/local/popup.hh:1065 ../xffm/fm/view/local/popup.hh:1146
-#, fuzzy
-msgid   "New Name:"
-msgstr  "Номи Нав"
-
-#: ../xffm/fm/view/local/popup.hh:1074
-msgid   "No name"
-msgstr  "Бе ном"
-
-#: ../xffm/fm/view/local/popup.hh:1087
-#, fuzzy, c-format
-msgid   "Another file with the same name already exists in “%s”."
-msgstr  "Амалиёт бо сигнатураи ҳамин гуна аллакай дар %sмавҷуд аст.\n"
-
-#: ../xffm/fm/view/local/popup.hh:1109 ../xffm/fm/view/local/popup.hh:1291
-#: ../xffm/fm/view/local/popup.hh:1309 ../xffm/common/util.hh:1452
-#, fuzzy
-msgid   "Run in Terminal"
-msgstr  "Дар терминал иҷро кунед"
-
-#: ../xffm/fm/view/local/popup.hh:1112
-#, fuzzy
-msgid   "Arguments for the Command"
-msgstr  "Нишонвандҳои фармон"
-
-#: ../xffm/fm/view/local/popup.hh:1258
-#, fuzzy
-msgid   "You have selected multiple files or folders"
-msgstr  "Шумо папкаро ишора намудед."
-
-#: ../xffm/fm/view/local/popup.hh:1332 ../xffm/fm/view/local/view.hh:156
-#, fuzzy
-msgid   "Invalid entry"
-msgstr  "Неверный шрифт"
-
-#: ../xffm/fm/view/local/properties.hh:245
-#, fuzzy
-msgid   "Properties and Attributes"
-msgstr  "Мушаххасоти стандартӣ"
-
-#: ../xffm/fm/view/local/properties.hh:274
-#, fuzzy
-msgid   "File Mode:"
-msgstr  "KFileModule"
-
-#: ../xffm/fm/view/local/properties.hh:300
-msgid   "File:"
-msgstr  "Файл:"
-
-#: ../xffm/fm/view/local/properties.hh:312
-msgid   "Apply changes"
-msgstr  "Тағиротро истифода баред"
-
-#: ../xffm/fm/view/local/properties.hh:477
-msgid   "Successfully moved to trash."
-msgstr  "Успешно удалено в корзину."
-
-#: ../xffm/fm/view/local/properties.hh:478
-msgid   "Source:"
-msgstr  "Манбаъ:"
-
-#: ../xffm/fm/view/local/rm.hh:59
-#, c-format
-msgid   "Delete %s"
-msgstr  "Нобуд кардан %s"
-
-#: ../xffm/fm/view/local/rm.hh:61
-#, fuzzy
-msgid   "Warning: "
-msgstr  "ОГОҲӢ: %s"
-
-#: ../xffm/fm/view/local/rm.hh:92
-msgid   "Remove"
-msgstr  "Тоза кардан"
-
-#: ../xffm/fm/view/local/rm.hh:142
-#, fuzzy
-msgid   "Apply to all"
-msgstr  "Ҷавоб ба ҳама:"
-
-#: ../xffm/fm/view/local/rm.hh:165 ../xffm/common/gtk.hh:91
-#, fuzzy
-msgid   "Shred"
-msgstr  "Нобудсоз"
-
-#: ../xffm/fm/view/local/rm.hh:183
-msgid   "Trash"
-msgstr  "Сабад"
-
-#: ../xffm/fm/view/local/view.hh:177
-#, fuzzy, c-format
-msgid   "The volume '%s' is not mounted."
-msgstr  "Навъи '%s' ёфт нашуд"
-
-#: ../xffm/fm/view/root/model.hh:82
-#, fuzzy
-msgid   "Root Directory"
-msgstr  "Феҳристи решавӣ:"
-
-#: ../xffm/fm/view/root/model.hh:98
-msgid   "This is the root of the filesystem"
-msgstr  "Ин системаи файлҳои root мебошад"
-
-#: ../xffm/fm/view/root/model.hh:176 ../xffm/fm/view/root/model.hh:191
-#, fuzzy
-msgid   "Mount local disks and devices"
-msgstr  "Намоиши дастгоҳҳои иловагӣ"
-
-#: ../xffm/fm/view/root/model.hh:177 ../xffm/fm/view/fstab/popup.hh:23
-#: ../xffm/fm/view/fstab/view.hh:1084
-#, fuzzy
-msgid   "eCryptfs Volume"
-msgstr  "Баландии садои %s"
-
-#: ../xffm/fm/view/root/model.hh:178 ../xffm/fm/view/fstab/popup.hh:22
-#, fuzzy
-msgid   "SSHFS Remote Synchronization Folder"
-msgstr  "Тартиботи синхронизация."
-
-#: ../xffm/fm/view/root/model.hh:179 ../xffm/fm/view/fstab/popup.hh:21
-#: ../xffm/fm/view/fstab/view.hh:1032
-#, fuzzy
-msgid   "NFS Network Volume"
-msgstr  "Иловаи Феҳристи Шабакавӣ"
-
-#: ../xffm/fm/view/root/model.hh:180 ../xffm/fm/view/fstab/popup.hh:24
-#: ../xffm/fm/view/fstab/view.hh:1110
-#, fuzzy
-msgid   "CIFS Volume"
-msgstr  "Баландии садо"
-
-#: ../xffm/fm/view/root/model.hh:229
-#, fuzzy
-msgid   "Go to bookmarked location"
-msgstr  "Хатчӯбкунии ин Маҳал"
-
-#: ../xffm/fm/view/root/popup.hh:138
-#, fuzzy
-msgid   "Empty trash"
-msgstr  "Холӣ кардани сабад"
-
-#: ../xffm/fm/view/fstab/popup.hh:129
-msgid   "Mount Device"
-msgstr  "Дстгоҳи Насбкунӣ"
-
-#: ../xffm/fm/view/fstab/popup.hh:141 ../xffm/fm/view/fstab/view.hh:923
-msgid   "Mount point:"
-msgstr  "Нуқтаи монтажкунӣ:"
-
-#: ../xffm/fm/view/fstab/view.hh:590
-#, fuzzy
-msgid   "Mount point: "
-msgstr  "Нуқтаи монтажкунӣ:"
-
-#: ../xffm/fm/view/fstab/view.hh:591
-#, fuzzy
-msgid   "Mount device: "
-msgstr  "Дстгоҳи Насбкунӣ"
-
-#: ../xffm/fm/view/fstab/view.hh:659 ../xffm/fm/view/fstab/view.hh:675
-#, fuzzy
-msgid   "Disks"
-msgstr  "Диск"
-
-#: ../xffm/fm/view/fstab/view.hh:921
-#, fuzzy
-msgid   "No Label"
-msgstr  "Барчасп"
-
-#: ../xffm/fm/view/fstab/view.hh:922
-#, fuzzy
-msgid   "There is no file system available (unformatted)"
-msgstr  "Ёрӣ барои '%s' дастрас нест."
-
-#: ../xffm/fm/view/fstab/view.hh:923
-#, fuzzy
-msgid   "Not mounted"
-msgstr  "Васл нашуд"
-
-#: ../xffm/fm/view/fstab/view.hh:1058
-msgid   "SFTP (via SSH)"
+#: ../xffm/response/timeoutresponse.hh:57
+msgid   "Dismiss"
 msgstr  ""
 
-#: ../xffm/fm/view/fstab/view.hh:1413
-#, fuzzy, c-format
-msgid   "Unmounting %s"
-msgstr  "Импорти %s"
+#: ../xffm/completion/bash.hh:133
+msgid   "Completion mode:"
+msgstr  "Тартиботи автоилова шудааст"
 
-#: ../xffm/fm/view/fstab/view.hh:1413
-#, fuzzy, c-format
-msgid   "Mounting %s"
-msgstr  "Перемещение %s"
+#: ../xffm/completion/bash.hh:134
+msgid   "command"
+msgstr  "фармон"
 
-#: ../xffm/fm/view/pkg/model.hh:41 ../xffm/fm/view/pkg/model.hh:52
+#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
 #, fuzzy
-msgid   "Add or remove software installed on the system"
-msgstr  "Хидматрасони NFS дар системаи шумо кор гузошта нашудааст"
+msgid   "Options >>"
+msgstr  "Имконот"
 
-#: ../xffm/fm/view/pkg/model.hh:111
-msgid   "String"
-msgstr  "Сатр"
+#: ../xffm/completion/base.hh:28
+msgid   "Command"
+msgstr  "Фармон"
 
-#: ../xffm/fm/view/pkg/model.hh:116
+#: ../xffm/completion/base.hh:31
+msgid   "File"
+msgstr  "Файл"
+
+#: ../xffm/completion/base.hh:34
 #, fuzzy
-msgid   "Waiting for search results"
-msgstr  "интизории ҷавоб"
+msgid   "Command history"
+msgstr  "Андозаи таърихии силули мухобиротӣ:"
 
-#: ../xffm/fm/view/pkg/model.hh:174
+#: ../xffm/completion/base.hh:40
+msgid   "Variable"
+msgstr  "Тағйирёбанда"
+
+#: ../xffm/completion/base.hh:43
+msgid   "Host"
+msgstr  "Мизбон"
+
+#: ../xffm/completion/base.hh:55
 #, fuzzy
-msgid   "No results"
-msgstr  "Ягон натиҷа нест."
+msgid   "Found no match"
+msgstr  "Иттилооти садо"
 
-#: ../xffm/fm/view/pkg/model.hh:373
+#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
+msgid   "Matches"
+msgstr  "Мутобиқаткунанда"
+
+#: ../xffm/completion/base.hh:142
 #, fuzzy
-msgid   "Currently busy\n"
-msgstr  "Аломати асъор"
-
-#: ../xffm/fm/view/pkg/popup.hh:44
-#, fuzzy
-msgid   "Update Database"
-msgstr  "База патентов США"
-
-#: ../xffm/fm/view/pkg/popup.hh:45
-msgid   "Fetch"
-msgstr  "Қабул намудан"
-
-#: ../xffm/fm/view/pkg/popup.hh:46
-#, fuzzy
-msgid   "Install --dry-run"
-msgstr  "Сабт шудааст"
-
-#: ../xffm/fm/view/pkg/popup.hh:47
-msgid   "Install"
-msgstr  "Насб кардан"
-
-#: ../xffm/fm/view/pkg/popup.hh:48
-#, fuzzy
-msgid   "Uninstall --dry-run"
-msgstr  "Удаление из системы"
-
-#: ../xffm/fm/view/pkg/popup.hh:49
-msgid   "Uninstall"
-msgstr  "Тоза кунед"
-
-#: ../xffm/fm/view/pkg/popup.hh:50
-msgid   "Information"
-msgstr  "Маълумот"
-
-#: ../xffm/fm/view/pkg/popup.hh:140
-msgid   "Version"
-msgstr  "Версия"
-
-#: ../xffm/fm/view/pkg/popup.hh:149
-msgid   "Go up"
-msgstr  ""
-
-#: ../xffm/fm/view/pkg/popup.hh:152
-#, fuzzy
-msgid   "Search packages"
-msgstr  "Ҷустуҷӯи бозгашт"
-
-#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
-#, fuzzy, c-format
-msgid   "Loading %s...%s"
-msgstr  "Боркунии %s"
-
-#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
-#, fuzzy
-msgid   "Please Wait..."
-msgstr  "Лутфан, интизор шавед..."
-
-#: ../xffm/fm/view/treeview.hh:17
-msgid   "Name"
-msgstr  "Ном"
-
-#: ../xffm/fm/view/treeview.hh:19
-msgid   "Size"
-msgstr  "Андоза"
-
-#: ../xffm/fm/view/treeview.hh:20
-msgid   "Date"
-msgstr  "Сана"
-
-#: ../xffm/fm/view/treeview.hh:22
-msgid   "Mimetype"
-msgstr  "Навъҳои MIME"
-
-#: ../xffm/fm/view/base/signals.hh:838
-#, fuzzy
-msgid   "Trash is empty"
-msgstr  "Замина холӣ аст"
-
-#: ../xffm/fm/view/base/signals.hh:840
-msgid   "Directory does not exist."
-msgstr  "Каталог вуҷуд надорад!"
-
-#: ../xffm/common/settings.hh:30
-#, fuzzy
-msgid   "New File:"
-msgstr  "Файли нав"
-
-#: ../xffm/common/gio.hh:81
-#, fuzzy
-msgid   "Copying files"
-msgstr  "Копирование %s"
-
-#: ../xffm/common/gio.hh:85
-#, fuzzy
-msgid   "linking"
-msgstr  "пайванд"
-
-#: ../xffm/common/gio.hh:87
-#, fuzzy
-msgid   "rename"
-msgstr  "Иваз кардани ном"
-
-#: ../xffm/common/gio.hh:426
-#, fuzzy, c-format
-msgid   "(%d of %d)"
-msgstr  "%d аз %d"
-
-#: ../xffm/common/dnd.hh:47
-#, fuzzy
-msgid   "Create Link"
-msgstr  "Сохтани нусхаи алоқашуда"
-
-#: ../xffm/common/util.hh:1404
-#, c-format
-msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
-        "attribute on that file."
-msgstr  ""
-
-#: ../xffm/common/util.hh:1406 ../xffm/common/util.hh:1441
-#, c-format
-msgid   "Open with %s"
-msgstr  "Кушодан бо %s"
-
-#: ../xffm/common/util.hh:1406
-msgid   "Text Editor"
-msgstr  "Таҳриргари матн"
-
-#: ../xffm/common/util.hh:1443 ../xffm/common/gtk.hh:69
-msgid   "Execute Shell Command"
-msgstr  "Иҷроиши Фармони Муқова"
-
-#: ../xffm/common/util.hh:1447
-msgid   "Console: quickly run single commands -- write a command here and "
-        "press enter."
-msgstr  ""
-
-#: ../xffm/common/gtk.hh:352 ../xffm/common/gtk.hh:360
-msgid   "Help"
-msgstr  "Кӯмак"
-
-#: ../xffm/common/run.hh:338
-msgid   "error"
-msgstr  "хатогӣ"
-
-#: ../xffm/common/run.hh:342
-msgid   "warning"
-msgstr  "warning"
-
-#: ../xffm/common/preview.hh:581
-#, fuzzy
-msgid   "Empty file"
-msgstr  "Номи файл ишора нашудааст."
-
-#: ../xffm/common/preview.hh:636
-#, fuzzy, c-format
-msgid   "Cannot read from %s"
-msgstr  "Аз %s хонда натавонист."
+msgid   "Too many files open"
+msgstr  "Боз кардани файли нишонаҳо"
 

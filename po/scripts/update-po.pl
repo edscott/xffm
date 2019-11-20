@@ -36,7 +36,7 @@ sub fullmerge{
         print "Cleaning $po...\n";
         open INPUT, "$po.new" or die "cannot open $po.new for read";
         my $title = "# Xffm+ translation file: ".`date`.
-	    "# Merged fron existing open source files\n".
+	    "# Merged from existing open source files\n".
 	    "# http://xffm.org\n";
         my $contents = $title;
         while (<INPUT>){$contents .= $_}

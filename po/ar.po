@@ -1,12 +1,12 @@
-# Xffm+ translation file: lun ago 12 14:09:36 CDT 2019
-# Merged fron existing open source files
+# Xffm+ translation file: mié nov 20 12:36:11 CST 2019
+# Merged from existing open source files
 # http://xffm.org
 #
 #
 msgid   ""
 msgstr  "Project-Id-Version: xffm+\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2019-08-11 09:10-0500\n"
+        "POT-Creation-Date: 2019-11-20 12:34-0600\n"
         "PO-Revision-Date: 2009-09-02 16:09+0300\n"
         "Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
         "Language-Team: Arabic <doc@arabeyes.org>\n"
@@ -23,380 +23,29 @@ msgstr  "Project-Id-Version: xffm+\n"
 msgid   "No Read Permission"
 msgstr  "أضف أذونات"
 
-#: ../xffm/completion/base.hh:28
-msgid   "Command"
-msgstr  "الأمر"
-
-#: ../xffm/completion/base.hh:31
-msgid   "File"
-msgstr  "ملف"
-
-#: ../xffm/completion/base.hh:34
-#, fuzzy
-msgid   "Command history"
-msgstr  "خطّ زمن أوامر التّشغيل"
-
-#: ../xffm/completion/base.hh:37 ../xffm/find/dialog.hh:192
-msgid   "User"
-msgstr  "مستخدم"
-
-#: ../xffm/completion/base.hh:40
-msgid   "Variable"
-msgstr  "المتغير"
-
-#: ../xffm/completion/base.hh:43
-msgid   "Host"
-msgstr  "مضيف"
-
-#: ../xffm/completion/base.hh:55
-msgid   "Found no match"
-msgstr  "لم يعثر على تطابق"
-
-#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
-msgid   "Matches"
-msgstr  "مطابقات"
-
-#: ../xffm/completion/base.hh:142
-#, fuzzy
-msgid   "Too many files open"
-msgstr  "مجلدات كثيرة جدا"
-
-#: ../xffm/completion/base.hh:339 ../xffm/find/fgr.hh:124
-msgid   "Options:"
-msgstr  "خيارات:"
-
-#: ../xffm/completion/bash.hh:133
-msgid   "Completion mode:"
-msgstr  "نمط الإكمال:"
-
-#: ../xffm/completion/bash.hh:134
-msgid   "command"
-msgstr  "أمر"
-
-#: ../xffm/completion/bash.hh:135
-msgid   "file"
-msgstr  "ملفّ"
-
-#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
-msgid   "Options >>"
-msgstr  "الخيارات >>"
-
-#: ../xffm/find/fgr.hh:124 ../xffm/find/signals.hh:100
-#: ../xffm/find/dialog.hh:301
-msgid   "Path"
-msgstr  "مسار"
-
-#: ../xffm/find/fgr.hh:125
-msgid   "Locate documents and folders on this computer by name or content"
-msgstr  "اعثر على المستندات والملفات على هذا الحاسوب بالاسم أو المحتوى"
-
-#: ../xffm/find/fgr.hh:126 ../xffm/find/dialog.hh:334
-msgid   "Filter:"
-msgstr  "مرشِّح:"
-
-#: ../xffm/find/fgr.hh:126
-msgid   "Search for files"
-msgstr  "البحث عن الملفات"
-
-#: ../xffm/find/fgr.hh:128
-msgid   "Contents:"
-msgstr  "المحتويات:"
-
-#: ../xffm/find/fgr.hh:128
-msgid   "File's contents filtered as plain text."
-msgstr  "محتويات الملف مرشحة كنص صرف."
-
-#: ../xffm/find/fgr.hh:131
-msgid   "Verbose output debugging mode."
-msgstr  "نمط التنقيح ذو الخرج النصي."
-
-#: ../xffm/find/fgr.hh:133
-msgid   "Show version information"
-msgstr  "أظهر معلومات الإصدار"
-
-#: ../xffm/find/fgr.hh:135
-msgid   "Filter Details"
-msgstr  "تفاصيل المرشحات"
-
-#: ../xffm/find/fgr.hh:138 ../xffm/find/dialog.hh:173
-#, fuzzy
-msgid   "Stay on single filesystem"
-msgstr  "افحص نظام الملفات"
-
-#: ../xffm/find/fgr.hh:140
-msgid   "Print..."
-msgstr  "اطبع..."
-
-#: ../xffm/find/fgr.hh:140
-msgid   "The unique Process ID that identifies this process."
-msgstr  "المعرف الفريد الذي يعرف هذه العملية."
-
-#: ../xffm/find/fgr.hh:142 ../xffm/find/dialog.hh:170
-#, fuzzy
-msgid   "Find hidden files and directories"
-msgstr  "يرقع الملفات والمجلدات."
-
-#: ../xffm/find/fgr.hh:143
-msgid   "Filter"
-msgstr  "مرشح"
-
-#: ../xffm/find/fgr.hh:144
-msgid   "To display files which pass the filter (stars and regexps will be "
-        "processed)"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:146 ../xffm/find/dialog.hh:167
-msgid   "Recursive"
-msgstr  "تكرار"
-
-#: ../xffm/find/fgr.hh:147 ../xffm/find/fgr.hh:148 ../xffm/find/fgr.hh:149
-#: ../xffm/find/fgr.hh:150
-msgid   "KByte"
-msgstr  "ك.بايت"
-
-#: ../xffm/find/fgr.hh:148
-msgid   "is greater than or equal to"
-msgstr  "أكبر من أو يساوي"
-
-#: ../xffm/find/fgr.hh:150
-msgid   "is less than or equal to"
-msgstr  "أقل أو يساوي"
-
-#: ../xffm/find/fgr.hh:152
-msgid   "Set UID"
-msgstr  "حدد UID"
-
-#: ../xffm/find/fgr.hh:152
-msgid   "Executable Text Files"
-msgstr  "ملفات نصية تنفيذية"
-
-#: ../xffm/find/fgr.hh:154
-msgid   "The permissions of the file, in octal notation."
-msgstr  "تصاريح الملف، بتمثيل ثُماني."
-
-#: ../xffm/find/fgr.hh:155
-msgid   "Type"
-msgstr  "نوع"
-
-#: ../xffm/find/fgr.hh:157 ../xffm/find/signals.hh:14
-msgid   "Any"
-msgstr  "الكل"
-
-#: ../xffm/find/fgr.hh:157
-msgid   "Default type"
-msgstr  "النوع الإفتراضي"
-
-#: ../xffm/find/fgr.hh:158 ../xffm/common/preview.hh:478
-msgid   "Regular file"
-msgstr  "ملف عادي"
-
-#: ../xffm/find/fgr.hh:159 ../xffm/find/signals.hh:8
-#: ../xffm/fm/view/local/popup.hh:1062 ../xffm/common/preview.hh:469
-msgid   "Directory"
-msgstr  "المجلد"
-
-#: ../xffm/find/fgr.hh:160 ../xffm/find/signals.hh:9
-#: ../xffm/common/preview.hh:475
-msgid   "Symbolic Link"
-msgstr  "وصلة رمزية"
-
-#: ../xffm/find/fgr.hh:161
-msgid   "UNIX Socket"
-msgstr  "مقبس يونكس"
-
-#: ../xffm/find/fgr.hh:162 ../xffm/find/signals.hh:11
-#: ../xffm/common/preview.hh:463
-msgid   "Block device"
-msgstr  "جهاز كتلات"
-
-#: ../xffm/find/fgr.hh:163 ../xffm/find/signals.hh:12
-#: ../xffm/common/preview.hh:466
-msgid   "Character device"
-msgstr  "جهاز أحرف"
-
-#: ../xffm/find/fgr.hh:164 ../xffm/find/signals.hh:13
-#: ../xffm/common/preview.hh:472
-msgid   "FIFO"
-msgstr  "FIFO"
-
-#: ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168 ../xffm/find/dialog.hh:214
-msgid   "Minutes"
-msgstr  "دقائق"
-
-#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
-#: ../xffm/find/fgr.hh:176 ../xffm/find/dialog.hh:263
-#: ../xffm/find/dialog.hh:363 ../xffm/fm/view/treeview.hh:18
-msgid   "Details"
-msgstr  "التفاصيل"
-
-#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
-#: ../xffm/find/fgr.hh:176 ../xffm/find/fgr.hh:179 ../xffm/find/fgr.hh:180
-#: ../xffm/find/fgr.hh:183 ../xffm/find/fgr.hh:184 ../xffm/find/fgr.hh:187
-#: ../xffm/find/fgr.hh:188
-#, fuzzy
-msgid   "TIME"
-msgstr  "TIMEOUT"
-
-#: ../xffm/find/fgr.hh:168 ../xffm/find/fgr.hh:171 ../xffm/find/fgr.hh:174
-#: ../xffm/find/fgr.hh:177
-msgid   "Previous"
-msgstr  "سابقا"
-
-#: ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171 ../xffm/find/dialog.hh:219
-msgid   "Hours"
-msgstr  "ساعات"
-
-#: ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174 ../xffm/find/dialog.hh:224
-msgid   "Days"
-msgstr  "أيام"
-
-#: ../xffm/find/fgr.hh:175
-msgid   "Month"
-msgstr  "شهر"
-
-#: ../xffm/find/fgr.hh:177
-#, fuzzy
-msgid   "Month(s)"
-msgstr  "شهر/أشهر"
-
-#: ../xffm/find/fgr.hh:180
-msgid   "Modification Time :"
-msgstr  "وقت التعديل :"
-
-#: ../xffm/find/fgr.hh:184
-msgid   "Access Time :"
-msgstr  "وقت التشغيل :"
-
-#: ../xffm/find/fgr.hh:188
-msgid   "Creation Time :"
-msgstr  "وقت التكوين :"
-
-#: ../xffm/find/fgr.hh:191 ../xffm/find/fgr.hh:192
-msgid   "uid"
-msgstr  "رقم المستخدم"
-
-#: ../xffm/find/fgr.hh:192
-msgid   "User:"
-msgstr  "المستخدم:"
-
-#: ../xffm/find/fgr.hh:194 ../xffm/find/fgr.hh:195
-msgid   "gid"
-msgstr  "رقم المجموعة"
-
-#: ../xffm/find/fgr.hh:195
-msgid   "Group:"
-msgstr  "مجموعة:"
-
-#: ../xffm/find/fgr.hh:198
-msgid   "Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
-        "character that  normally  follows  a file  name"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:200
-msgid   "Content View"
-msgstr  "عرض المحتوى"
-
-#: ../xffm/find/fgr.hh:201 ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:203
-#: ../xffm/find/fgr.hh:204
-msgid   "STRING"
-msgstr  "نص"
-
-#: ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:204
-#: ../xffm/fm/view/local/popup.hh:759
-msgid   "Regular expression"
-msgstr  "تعبير منتظم"
-
-#: ../xffm/find/fgr.hh:204
-msgid   "Extended"
-msgstr  "ممدّد"
-
-#: ../xffm/find/fgr.hh:206
-msgid   "Ignore case"
-msgstr  "تجاهل الحالة"
-
-#: ../xffm/find/fgr.hh:208
-msgid   "Text Files"
-msgstr  "ملفات نصية"
-
-#: ../xffm/find/fgr.hh:210 ../xffm/find/dialog.hh:545
-msgid   "No match"
-msgstr  "لا تطابق"
-
-#: ../xffm/find/fgr.hh:212 ../xffm/find/dialog.hh:463
-msgid   "Line Count"
-msgstr  "عدد الأسطر"
-
-#: ../xffm/find/fgr.hh:214
-msgid   "Words"
-msgstr  "كلمات"
-
-#: ../xffm/find/fgr.hh:216
-msgid   "Lines"
-msgstr  "أسطر"
-
-#: ../xffm/find/fgr.hh:362
-#, fuzzy, c-format
-msgid   "Usage : %s [OPTIONS]\n"
-msgstr  "الإستعمال: orca [OPTION...]"
-
-#: ../xffm/find/signals.hh:7
-msgid   "Regular"
-msgstr  "منتظم"
-
-#: ../xffm/find/signals.hh:10 ../xffm/common/preview.hh:481
-msgid   "Socket"
-msgstr  "مقبس"
-
-#: ../xffm/find/signals.hh:66 ../xffm/find/signals.hh:454
-#: ../xffm/find/dialog.hh:176
-msgid   "Results"
-msgstr  "النتائج"
-
-#: ../xffm/find/signals.hh:368 ../xffm/find/dialog.hh:577
-#: ../xffm/response/chooserresponse.hh:21 ../xffm/response/entryresponse.hh:435
-#: ../xffm/fm/view/local/properties.hh:314 ../xffm/fm/view/local/rm.hh:157
-#: ../xffm/common/gtk.hh:409
-msgid   "Cancel"
-msgstr  "ألغِ"
-
-#: ../xffm/find/signals.hh:396 ../xffm/find/signals.hh:830
-#, fuzzy
-msgid   "No editor for current action."
-msgstr  "لا إجراء حالي"
-
-#: ../xffm/find/signals.hh:454
-msgid   "Upper limit:"
-msgstr  "الحد الأعلى:"
-
-#: ../xffm/find/signals.hh:456
-#, fuzzy
-msgid   "Counting files..."
-msgstr  "جاري إغلاق ملف..."
-
-#: ../xffm/find/signals.hh:471
-#, c-format
-msgid   "Found %d match"
-msgid_plural    "Found %d matches"
-msgstr[0]       "لم يعثر على تطابق"
-msgstr[1]       "عثر على تطابق واحد"
-msgstr[2]       "عثر على تطابقان"
-msgstr[3]       "عثر على %d تطابقات"
-msgstr[4]       "عثر على %d تطابقاً"
-msgstr[5]       "عثر على %d تطابق"
-
-#: ../xffm/find/signals.hh:473
-#, fuzzy, c-format
-msgid   "%s Finished : %s"
-msgstr  "%s [انتهى]"
-
-#: ../xffm/find/signals.hh:596 ../xffm/find/signals.hh:598
-msgid   "Searching..."
-msgstr  "بحث..."
-
 #: ../xffm/find/dialog.hh:91 ../xffm/find/dialog.hh:143
 #: ../xffm/find/dialog.hh:604
 msgid   "Find"
 msgstr  "ابحث"
+
+#: ../xffm/find/dialog.hh:167 ../xffm/find/fgr.hh:146
+msgid   "Recursive"
+msgstr  "تكرار"
+
+#: ../xffm/find/dialog.hh:170 ../xffm/find/fgr.hh:142
+#, fuzzy
+msgid   "Find hidden files and directories"
+msgstr  "يرقع الملفات والمجلدات."
+
+#: ../xffm/find/dialog.hh:173 ../xffm/find/fgr.hh:138
+#, fuzzy
+msgid   "Stay on single filesystem"
+msgstr  "افحص نظام الملفات"
+
+#: ../xffm/find/dialog.hh:176 ../xffm/find/signals.hh:65
+#: ../xffm/find/signals.hh:427
+msgid   "Results"
+msgstr  "النتائج"
 
 #: ../xffm/find/dialog.hh:176
 msgid   "Upper limit"
@@ -414,6 +63,10 @@ msgstr  "ك. بايت"
 msgid   "At Most"
 msgstr  "على الأكثر"
 
+#: ../xffm/find/dialog.hh:192 ../xffm/completion/base.hh:37
+msgid   "User"
+msgstr  "مستخدم"
+
 #: ../xffm/find/dialog.hh:197
 msgid   "Group"
 msgstr  "المجموعة"
@@ -426,10 +79,22 @@ msgstr  "تصاريح ثُمانيّة"
 msgid   "SUID"
 msgstr  "SUID"
 
-#: ../xffm/find/dialog.hh:206 ../xffm/fm/view/local/popup.hh:1102
+#: ../xffm/find/dialog.hh:206 ../xffm/fm/view/local/popup.hh:1026
 #, fuzzy
 msgid   "Executable"
 msgstr  "تنفيذي:"
+
+#: ../xffm/find/dialog.hh:214 ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168
+msgid   "Minutes"
+msgstr  "دقائق"
+
+#: ../xffm/find/dialog.hh:219 ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171
+msgid   "Hours"
+msgstr  "ساعات"
+
+#: ../xffm/find/dialog.hh:224 ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174
+msgid   "Days"
+msgstr  "أيام"
 
 #: ../xffm/find/dialog.hh:230
 msgid   "Months"
@@ -439,10 +104,25 @@ msgstr  "شهور"
 msgid   "File type : "
 msgstr  "نوع الملف :"
 
-#: ../xffm/find/dialog.hh:255 ../xffm/find/dialog.hh:595
-#: ../xffm/fm/dialog/notebook/page/page.hh:71 ../xffm/common/gtk.hh:79
+#: ../xffm/find/dialog.hh:255 ../xffm/find/dialog.hh:595 ../xffm/gtk/gtk.hh:80
+#: ../xffm/fm/dialog/notebook/page/page.hh:71
 msgid   "Close"
 msgstr  "أغلق"
+
+#: ../xffm/find/dialog.hh:263 ../xffm/find/dialog.hh:363
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/fm/view/treeview.hh:18
+msgid   "Details"
+msgstr  "التفاصيل"
+
+#: ../xffm/find/dialog.hh:301 ../xffm/find/fgr.hh:124
+#: ../xffm/find/signals.hh:94
+msgid   "Path"
+msgstr  "مسار"
+
+#: ../xffm/find/dialog.hh:334 ../xffm/find/fgr.hh:126
+msgid   "Filter:"
+msgstr  "مرشِّح:"
 
 #: ../xffm/find/dialog.hh:377
 msgid   "Contains"
@@ -465,6 +145,10 @@ msgstr  "ممدّد"
 msgid   "Include binary files"
 msgstr  "ضمن الملفات الثنائية"
 
+#: ../xffm/find/dialog.hh:463 ../xffm/find/fgr.hh:212
+msgid   "Line Count"
+msgstr  "عدد الأسطر"
+
 #: ../xffm/find/dialog.hh:489
 msgid   "Match"
 msgstr  "مطابقة"
@@ -481,6 +165,19 @@ msgstr  "الكلمات الكاملة فقط"
 msgid   "lines"
 msgstr  "سطور"
 
+#: ../xffm/find/dialog.hh:545 ../xffm/find/fgr.hh:210
+msgid   "No match"
+msgstr  "لا تطابق"
+
+#: ../xffm/find/dialog.hh:577 ../xffm/find/signals.hh:341
+#: ../xffm/gtk/dialogs.hh:110 ../xffm/fm/view/local/rm.hh:157
+#: ../xffm/fm/view/local/properties.hh:310 ../xffm/fm/view/fuse/ecryptfs.hh:175
+#: ../xffm/fm/dialog/notebook/createini.hh:232
+#: ../xffm/fm/dialog/notebook/createini.hh:369
+#: ../xffm/response/entryresponse.hh:453 ../xffm/response/chooserresponse.hh:18
+msgid   "Cancel"
+msgstr  "ألغِ"
+
 #: ../xffm/find/dialog.hh:587
 msgid   "Clear"
 msgstr  "امسح"
@@ -490,9 +187,9 @@ msgid   "Edit"
 msgstr  "تحرير"
 
 #: ../xffm/find/dialog.hh:743 ../xffm/find/dialog.hh:758
-#: ../xffm/common/util.hh:1354 ../xffm/common/util.hh:1356
-#: ../xffm/common/util.hh:1362 ../xffm/common/util.hh:1364
-#: ../xffm/common/preview.hh:460
+#: ../xffm/common/preview.hh:460 ../xffm/common/util.hh:1354
+#: ../xffm/common/util.hh:1356 ../xffm/common/util.hh:1362
+#: ../xffm/common/util.hh:1364
 msgid   "unknown"
 msgstr  "مجهول"
 
@@ -556,194 +253,903 @@ msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
         "More information is available by typing \"man grep\"\n"
 msgstr  ""
 
-#: ../xffm/response/chooserresponse.hh:23
-msgid   "Open"
-msgstr  "افتح"
+#: ../xffm/find/fgr.hh:124 ../xffm/fm/view/fuse/ecryptfs.hh:133
+#: ../xffm/completion/base.hh:339
+msgid   "Options:"
+msgstr  "خيارات:"
 
-#: ../xffm/response/chooserresponse.hh:56
-msgid   "Choose directory"
-msgstr  "اختر مجلدا"
+#: ../xffm/find/fgr.hh:125
+msgid   "Locate documents and folders on this computer by name or content"
+msgstr  "اعثر على المستندات والملفات على هذا الحاسوب بالاسم أو المحتوى"
 
-#: ../xffm/response/chooserresponse.hh:60
-msgid   "Choose file"
-msgstr  "إختر ملفًا"
+#: ../xffm/find/fgr.hh:126
+msgid   "Search for files"
+msgstr  "البحث عن الملفات"
 
-#: ../xffm/response/customresponse.hh:55
-msgid   "Execute command"
-msgstr  "تنفيذ الأمر"
+#: ../xffm/find/fgr.hh:128
+msgid   "Contents:"
+msgstr  "المحتويات:"
 
-#: ../xffm/response/customresponse.hh:103
-msgid   "Source File"
-msgstr  "ملف المصدر"
+#: ../xffm/find/fgr.hh:128
+msgid   "File's contents filtered as plain text."
+msgstr  "محتويات الملف مرشحة كنص صرف."
 
-#: ../xffm/response/entryresponse.hh:439 ../xffm/response/passwdresponse.hh:242
-msgid   "Ok"
-msgstr  "موافق"
+#: ../xffm/find/fgr.hh:131
+msgid   "Verbose output debugging mode."
+msgstr  "نمط التنقيح ذو الخرج النصي."
 
-#: ../xffm/response/commandprogressresponse.hh:31
-msgid   "Items:"
-msgstr  "عناصر:"
+#: ../xffm/find/fgr.hh:133
+msgid   "Show version information"
+msgstr  "أظهر معلومات الإصدار"
 
-#: ../xffm/response/passwdresponse.hh:19 ../xffm/response/passwdresponse.hh:25
-#: ../xffm/common/run.hh:464
+#: ../xffm/find/fgr.hh:135
+msgid   "Filter Details"
+msgstr  "تفاصيل المرشحات"
+
+#: ../xffm/find/fgr.hh:140
+msgid   "Print..."
+msgstr  "اطبع..."
+
+#: ../xffm/find/fgr.hh:140
+msgid   "The unique Process ID that identifies this process."
+msgstr  "المعرف الفريد الذي يعرف هذه العملية."
+
+#: ../xffm/find/fgr.hh:143
+msgid   "Filter"
+msgstr  "مرشح"
+
+#: ../xffm/find/fgr.hh:144
+msgid   "To display files which pass the filter (stars and regexps will be "
+        "processed)"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:147 ../xffm/find/fgr.hh:148 ../xffm/find/fgr.hh:149
+#: ../xffm/find/fgr.hh:150
+msgid   "KByte"
+msgstr  "ك.بايت"
+
+#: ../xffm/find/fgr.hh:148
+msgid   "is greater than or equal to"
+msgstr  "أكبر من أو يساوي"
+
+#: ../xffm/find/fgr.hh:150
+msgid   "is less than or equal to"
+msgstr  "أقل أو يساوي"
+
+#: ../xffm/find/fgr.hh:152
+msgid   "Set UID"
+msgstr  "حدد UID"
+
+#: ../xffm/find/fgr.hh:152
+msgid   "Executable Text Files"
+msgstr  "ملفات نصية تنفيذية"
+
+#: ../xffm/find/fgr.hh:154
+msgid   "The permissions of the file, in octal notation."
+msgstr  "تصاريح الملف، بتمثيل ثُماني."
+
+#: ../xffm/find/fgr.hh:155
+msgid   "Type"
+msgstr  "نوع"
+
+#: ../xffm/find/fgr.hh:157 ../xffm/find/signals.hh:14
+msgid   "Any"
+msgstr  "الكل"
+
+#: ../xffm/find/fgr.hh:157
+msgid   "Default type"
+msgstr  "النوع الإفتراضي"
+
+#: ../xffm/find/fgr.hh:158 ../xffm/common/preview.hh:478
+msgid   "Regular file"
+msgstr  "ملف عادي"
+
+#: ../xffm/find/fgr.hh:159 ../xffm/find/signals.hh:8
+#: ../xffm/common/preview.hh:469 ../xffm/fm/view/local/popup.hh:987
+msgid   "Directory"
+msgstr  "المجلد"
+
+#: ../xffm/find/fgr.hh:160 ../xffm/find/signals.hh:9
+#: ../xffm/common/preview.hh:475
+msgid   "Symbolic Link"
+msgstr  "وصلة رمزية"
+
+#: ../xffm/find/fgr.hh:161
+msgid   "UNIX Socket"
+msgstr  "مقبس يونكس"
+
+#: ../xffm/find/fgr.hh:162 ../xffm/find/signals.hh:11
+#: ../xffm/common/preview.hh:463
+msgid   "Block device"
+msgstr  "جهاز كتلات"
+
+#: ../xffm/find/fgr.hh:163 ../xffm/find/signals.hh:12
+#: ../xffm/common/preview.hh:466
+msgid   "Character device"
+msgstr  "جهاز أحرف"
+
+#: ../xffm/find/fgr.hh:164 ../xffm/find/signals.hh:13
+#: ../xffm/common/preview.hh:472
+msgid   "FIFO"
+msgstr  "FIFO"
+
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/find/fgr.hh:179 ../xffm/find/fgr.hh:180
+#: ../xffm/find/fgr.hh:183 ../xffm/find/fgr.hh:184 ../xffm/find/fgr.hh:187
+#: ../xffm/find/fgr.hh:188
+#, fuzzy
+msgid   "TIME"
+msgstr  "TIMEOUT"
+
+#: ../xffm/find/fgr.hh:168 ../xffm/find/fgr.hh:171 ../xffm/find/fgr.hh:174
+#: ../xffm/find/fgr.hh:177
+msgid   "Previous"
+msgstr  "سابقا"
+
+#: ../xffm/find/fgr.hh:175
+msgid   "Month"
+msgstr  "شهر"
+
+#: ../xffm/find/fgr.hh:177
+#, fuzzy
+msgid   "Month(s)"
+msgstr  "شهر/أشهر"
+
+#: ../xffm/find/fgr.hh:180
+msgid   "Modification Time :"
+msgstr  "وقت التعديل :"
+
+#: ../xffm/find/fgr.hh:184
+msgid   "Access Time :"
+msgstr  "وقت التشغيل :"
+
+#: ../xffm/find/fgr.hh:188
+msgid   "Creation Time :"
+msgstr  "وقت التكوين :"
+
+#: ../xffm/find/fgr.hh:191 ../xffm/find/fgr.hh:192
+msgid   "uid"
+msgstr  "رقم المستخدم"
+
+#: ../xffm/find/fgr.hh:192
+msgid   "User:"
+msgstr  "المستخدم:"
+
+#: ../xffm/find/fgr.hh:194 ../xffm/find/fgr.hh:195
+msgid   "gid"
+msgstr  "رقم المجموعة"
+
+#: ../xffm/find/fgr.hh:195
+msgid   "Group:"
+msgstr  "مجموعة:"
+
+#: ../xffm/find/fgr.hh:198
+msgid   "Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+        "character that  normally  follows  a file  name"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:200
+msgid   "Content View"
+msgstr  "عرض المحتوى"
+
+#: ../xffm/find/fgr.hh:201 ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:203
+#: ../xffm/find/fgr.hh:204
+msgid   "STRING"
+msgstr  "نص"
+
+#: ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:204
+#: ../xffm/fm/view/local/popup.hh:750
+msgid   "Regular expression"
+msgstr  "تعبير منتظم"
+
+#: ../xffm/find/fgr.hh:204
+msgid   "Extended"
+msgstr  "ممدّد"
+
+#: ../xffm/find/fgr.hh:206
+msgid   "Ignore case"
+msgstr  "تجاهل الحالة"
+
+#: ../xffm/find/fgr.hh:208
+msgid   "Text Files"
+msgstr  "ملفات نصية"
+
+#: ../xffm/find/fgr.hh:214
+msgid   "Words"
+msgstr  "كلمات"
+
+#: ../xffm/find/fgr.hh:216
+msgid   "Lines"
+msgstr  "أسطر"
+
+#: ../xffm/find/fgr.hh:362
+#, fuzzy, c-format
+msgid   "Usage : %s [OPTIONS]\n"
+msgstr  "الإستعمال: orca [OPTION...]"
+
+#: ../xffm/find/signals.hh:7
+msgid   "Regular"
+msgstr  "منتظم"
+
+#: ../xffm/find/signals.hh:10 ../xffm/common/preview.hh:481
+msgid   "Socket"
+msgstr  "مقبس"
+
+#: ../xffm/find/signals.hh:369 ../xffm/find/signals.hh:803
+#, fuzzy
+msgid   "No editor for current action."
+msgstr  "لا إجراء حالي"
+
+#: ../xffm/find/signals.hh:427
+msgid   "Upper limit:"
+msgstr  "الحد الأعلى:"
+
+#: ../xffm/find/signals.hh:429
+#, fuzzy
+msgid   "Counting files..."
+msgstr  "جاري إغلاق ملف..."
+
+#: ../xffm/find/signals.hh:444
+#, c-format
+msgid   "Found %d match"
+msgid_plural    "Found %d matches"
+msgstr[0]       "لم يعثر على تطابق"
+msgstr[1]       "عثر على تطابق واحد"
+msgstr[2]       "عثر على تطابقان"
+msgstr[3]       "عثر على %d تطابقات"
+msgstr[4]       "عثر على %d تطابقاً"
+msgstr[5]       "عثر على %d تطابق"
+
+#: ../xffm/find/signals.hh:446
+#, fuzzy, c-format
+msgid   "%s Finished : %s"
+msgstr  "%s [انتهى]"
+
+#: ../xffm/find/signals.hh:569 ../xffm/find/signals.hh:571
+msgid   "Searching..."
+msgstr  "بحث..."
+
+#: ../xffm/common/preview.hh:581
+msgid   "Empty file"
+msgstr  "ملف فارغ"
+
+#: ../xffm/common/preview.hh:636
+#, c-format
+msgid   "Cannot read from %s"
+msgstr  "تعذّرت القراءة من %s"
+
+#: ../xffm/common/settings.hh:30
+#, fuzzy
+msgid   "New File:"
+msgstr  "ملف جديد"
+
+#: ../xffm/common/gio.hh:91
+msgid   "Copying files"
+msgstr  "يجري نسخ الملفات"
+
+#: ../xffm/common/gio.hh:93 ../xffm/common/dnd.hh:35
+#: ../xffm/fm/dialog/clipboard.hh:30
+#, fuzzy
+msgid   "Moving files"
+msgstr  "نقل الملفات"
+
+#: ../xffm/common/gio.hh:95
+#, fuzzy
+msgid   "linking"
+msgstr  "ومّاض"
+
+#: ../xffm/common/gio.hh:97
+msgid   "rename"
+msgstr  "اعادة تسمية "
+
+#: ../xffm/common/gio.hh:449
+#, c-format
+msgid   "(%d of %d)"
+msgstr  "(%d من %d)"
+
+#: ../xffm/common/util.hh:1404
+#, c-format
+msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
+        "attribute on that file."
+msgstr  ""
+
+#: ../xffm/common/util.hh:1406 ../xffm/common/util.hh:1441
+#, c-format
+msgid   "Open with %s"
+msgstr  "افتح بـ %s"
+
+#: ../xffm/common/util.hh:1406
+msgid   "Text Editor"
+msgstr  "محرّر النصوص"
+
+#: ../xffm/common/util.hh:1443 ../xffm/gtk/gtk.hh:70
+msgid   "Execute Shell Command"
+msgstr  "نفذ أمر الصدَفة"
+
+#: ../xffm/common/util.hh:1447
+msgid   "Console: quickly run single commands -- write a command here and "
+        "press enter."
+msgstr  "كونسول: تشغيل سريع لأمر واحد -- أكتب أمر هنا و اضغط مفتاح Enter"
+
+#: ../xffm/common/util.hh:1452 ../xffm/fm/view/local/popup.hh:1033
+#: ../xffm/fm/view/local/popup.hh:1336 ../xffm/fm/view/local/popup.hh:1353
+msgid   "Run in Terminal"
+msgstr  "تشغيل في الطرفية"
+
+#: ../xffm/common/dnd.hh:41 ../xffm/fm/dialog/clipboard.hh:23
+msgid   "Copying files locally"
+msgstr  "نسخ الملفات محليًا"
+
+#: ../xffm/common/dnd.hh:47
+#, fuzzy
+msgid   "Create Link"
+msgstr  "تراجع عن إنشاء الرابط"
+
+#: ../xffm/common/dnd.hh:63
+msgid   "more"
+msgstr  "أكثر"
+
+#: ../xffm/common/run.hh:338 ../xffm/fm/view/local/popup.hh:1149
+msgid   "error"
+msgstr  "خطأ"
+
+#: ../xffm/common/run.hh:342
+#, fuzzy
+msgid   "warning"
+msgstr  "تحذير:"
+
+#: ../xffm/common/run.hh:464 ../xffm/response/passwdresponse.hh:28
+#: ../xffm/response/passwdresponse.hh:34
 msgid   "Enter password"
 msgstr  "أدخل كلمة السر"
 
-#: ../xffm/response/passwdresponse.hh:179
+#: ../xffm/gtk/gtk.hh:68 ../xffm/fm/dialog/notebook/vbuttonbox.hh:252
+msgid   "Open terminal"
+msgstr  "افتح طرفية"
+
+#: ../xffm/gtk/gtk.hh:72 ../xffm/fm/view/local/popup.hh:157
+msgid   "Paste"
+msgstr  "الصق"
+
+#: ../xffm/gtk/gtk.hh:74 ../xffm/fm/view/local/popup.hh:151
+#: ../xffm/fm/view/root/popup.hh:224
+msgid   "Add bookmark"
+msgstr  "اضف علامة مرجعية"
+
+#: ../xffm/gtk/gtk.hh:76 ../xffm/fm/view/local/popup.hh:152
+#: ../xffm/fm/view/root/popup.hh:170
+msgid   "Remove bookmark"
+msgstr  "امسح علامة مرجعية"
+
+#: ../xffm/gtk/gtk.hh:78 ../xffm/fm/view/pkg/model.hh:108
+#: ../xffm/fm/view/pkg/model.hh:300 ../xffm/fm/view/pkg/model.hh:307
+#: ../xffm/fm/view/pkg/popup.hh:151
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:248
+msgid   "Search"
+msgstr  "ابحث"
+
+#: ../xffm/gtk/gtk.hh:82 ../xffm/fm/dialog/notebook/createini.hh:83
+#: ../xffm/fm/dialog/notebook/menupopover.hh:237
+msgid   "Exit"
+msgstr  "خروج"
+
+#: ../xffm/gtk/gtk.hh:84 ../xffm/fm/view/local/popup.hh:85
+#: ../xffm/fm/view/local/popup.hh:142 ../xffm/fm/view/local/popup.hh:1332
+#: ../xffm/fm/view/local/popup.hh:1339 ../xffm/fm/view/local/popup.hh:1349
+#: ../xffm/fm/view/local/popup.hh:1356
+msgid   "Open with"
+msgstr  "افتح باستخدام"
+
+#: ../xffm/gtk/gtk.hh:86 ../xffm/fm/view/local/popup.hh:100
+#: ../xffm/fm/view/local/popup.hh:156
+msgid   "Cut"
+msgstr  "قص"
+
+#: ../xffm/gtk/gtk.hh:88 ../xffm/fm/view/local/popup.hh:99
+#: ../xffm/fm/view/local/popup.hh:155
+msgid   "Copy"
+msgstr  "انسخ"
+
+#: ../xffm/gtk/gtk.hh:90 ../xffm/fm/view/local/rm.hh:176
+#: ../xffm/fm/view/local/popup.hh:103 ../xffm/fm/view/local/popup.hh:160
+msgid   "Delete"
+msgstr  "احذف"
+
+#: ../xffm/gtk/gtk.hh:92 ../xffm/fm/view/local/rm.hh:165
 #, fuzzy
-msgid   "User Input"
-msgstr  "دخل الفأرة"
+msgid   "Shred"
+msgstr  "الممزق"
 
-#: ../xffm/response/passwdresponse.hh:195
-msgid   "Response Requested"
-msgstr  "الرد مطلوب"
+#: ../xffm/gtk/gtk.hh:95 ../xffm/fm/view/local/popup.hh:95
+#: ../xffm/fm/view/local/popup.hh:145 ../xffm/fm/view/root/popup.hh:169
+#: ../xffm/fm/view/fstab/popup.hh:20
+msgid   "Open in New Tab"
+msgstr  "افتح في علامة تبويب جديدة"
 
-#: ../xffm/response/timeoutresponse.hh:57
-msgid   "Dismiss"
-msgstr  "ارفض"
+#: ../xffm/gtk/gtk.hh:140 ../xffm/fm/dialog/notebook/notebook.hh:75
+msgid   "New Tab"
+msgstr  "علامة تبويب جديدة"
 
-#: ../xffm/response/commandresponse.hh:19
-msgid   "Running"
-msgstr  "يشغّل"
+#: ../xffm/gtk/dialogs.hh:42
+msgid   "Help"
+msgstr  "مساعدة"
 
-#: ../xffm/response/commandresponse.hh:24
-#, fuzzy
-msgid   "Waiting for operation to finish..."
-msgstr  "ينتظر dvips لينتهي..."
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:11
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:214
-#, fuzzy
-msgid   "Remove Button Contents"
-msgstr  "احذف العشرات"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:67
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:209
-#, fuzzy
-msgid   "Add custom content"
-msgstr  "استخدم خط مخصّص"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:68
-#, fuzzy
-msgid   "Select file to load"
-msgstr  "انتقِ ملفا لإضافته:"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:125
-#, fuzzy, c-format
-msgid   "Cannot load file %s. Reason: %s"
-msgstr  "تعذر تمديد الملف %s : %s"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:154
-#, fuzzy
-msgid   "You need to restart the application"
-msgstr  "تحتاج إلى إعادة تشغيل التطبيق."
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:187
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:191
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:195
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:198 ../xffm/fm/view/pkg/model.hh:29
-#: ../xffm/fm/view/pkg/popup.hh:35
+#: ../xffm/fm/view/pkg/model.hh:29 ../xffm/fm/view/pkg/popup.hh:35
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:194
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:198
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:202
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:205
 #, fuzzy
 msgid   "Software Updater"
 msgstr  "تحديث البرمجيات"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:236
-#: ../xffm/fm/view/pkg/model.hh:108 ../xffm/fm/view/pkg/model.hh:299
-#: ../xffm/fm/view/pkg/model.hh:306 ../xffm/fm/view/pkg/popup.hh:151
-#: ../xffm/common/gtk.hh:77
-msgid   "Search"
-msgstr  "ابحث"
+#: ../xffm/fm/view/pkg/model.hh:41 ../xffm/fm/view/pkg/model.hh:52
+msgid   "Add or remove software installed on the system"
+msgstr  "أضف أو أزل البرمجيات المثبتة على النظام"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:240 ../xffm/common/gtk.hh:67
-msgid   "Open terminal"
-msgstr  "افتح طرفية"
+#: ../xffm/fm/view/pkg/model.hh:111
+msgid   "String"
+msgstr  "السلسلة"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:244
-msgid   "Open a New Window"
-msgstr  "افتح نافذة جديدة"
+#: ../xffm/fm/view/pkg/model.hh:117
+msgid   "Waiting for search results"
+msgstr  "في انتظار نتائج البحث"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:250
-msgid   "Differences"
-msgstr  "الإختلافات"
+#: ../xffm/fm/view/pkg/model.hh:175
+#, fuzzy
+msgid   "No results"
+msgstr  "لا نتائج."
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:256
-#: ../xffm/fm/view/root/model.hh:110
+#: ../xffm/fm/view/pkg/model.hh:374
+#, fuzzy
+msgid   "Currently busy\n"
+msgstr  "الحالي: %s"
+
+#: ../xffm/fm/view/pkg/popup.hh:44
+msgid   "Update Database"
+msgstr  "تحديث قاعدة البيانات"
+
+#: ../xffm/fm/view/pkg/popup.hh:45
+msgid   "Fetch"
+msgstr  "اجلب"
+
+#: ../xffm/fm/view/pkg/popup.hh:46
+#, fuzzy
+msgid   "Install --dry-run"
+msgstr  "تثبيت الوحدة"
+
+#: ../xffm/fm/view/pkg/popup.hh:47
+msgid   "Install"
+msgstr  "ثبِّت"
+
+#: ../xffm/fm/view/pkg/popup.hh:48
+#, fuzzy
+msgid   "Uninstall --dry-run"
+msgstr  "جاري إلغاء التثبيت"
+
+#: ../xffm/fm/view/pkg/popup.hh:49
+msgid   "Uninstall"
+msgstr  "أزِل"
+
+#: ../xffm/fm/view/pkg/popup.hh:50
+msgid   "Information"
+msgstr  "معلومات"
+
+#: ../xffm/fm/view/pkg/popup.hh:140
+msgid   "Version"
+msgstr  "الإصدارة"
+
+#: ../xffm/fm/view/pkg/popup.hh:149
+#, fuzzy
+msgid   "Go up"
+msgstr  "اذهب إلى الأعلى"
+
+#: ../xffm/fm/view/pkg/popup.hh:152
+#, fuzzy
+msgid   "Search packages"
+msgstr  "البحث عن الحزم"
+
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:95
+#, fuzzy, c-format
+msgid   "Loading %s...%s"
+msgstr  "تحميل ..."
+
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:95
+msgid   "Please Wait..."
+msgstr  "الرجاء الإنتظار..."
+
+#: ../xffm/fm/view/local/model.hh:124
+#, c-format
+msgid   "Reading \"%s\""
+msgstr  "يقرأ \"%s\""
+
+#: ../xffm/fm/view/local/model.hh:577 ../xffm/fm/view/base/monitor.hh:34
+#, fuzzy, c-format
+msgid   "Files: %s"
+msgstr  "الملف: %s"
+
+#: ../xffm/fm/view/local/model.hh:580
+#, fuzzy, c-format
+msgid   "Loaded %d of %d articles"
+msgstr  "الملفّات المحملة:"
+
+#: ../xffm/fm/view/local/rm.hh:59
+#, c-format
+msgid   "Delete %s"
+msgstr  "احذف %s"
+
+#: ../xffm/fm/view/local/rm.hh:61
+msgid   "Warning: "
+msgstr  "تحذير: "
+
+#: ../xffm/fm/view/local/rm.hh:61 ../xffm/fm/view/local/popup.hh:557
+msgid   "Multiple selections"
+msgstr  "انتقاءات متعددة"
+
+#: ../xffm/fm/view/local/rm.hh:92
+msgid   "Remove"
+msgstr  "أزل"
+
+#: ../xffm/fm/view/local/rm.hh:142
+msgid   "Apply to all"
+msgstr  "طبّق على الجميع"
+
+#: ../xffm/fm/view/local/rm.hh:183
+msgid   "Trash"
+msgstr  "قمامة"
+
+#: ../xffm/fm/view/local/popup.hh:94
+msgid   "New"
+msgstr  "جديد"
+
+#: ../xffm/fm/view/local/popup.hh:101 ../xffm/fm/view/local/popup.hh:159
+#: ../xffm/fm/view/local/popup.hh:232 ../xffm/fm/view/local/popup.hh:234
+#, fuzzy
+msgid   "Paste into"
+msgstr  "ألصق إلى"
+
+#: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:158
+msgid   "There is nothing on the clipboard to paste."
+msgstr  "لا شيء في الحافظة للصقه."
+
+#: ../xffm/fm/view/local/popup.hh:106
+msgid   "Select All"
+msgstr  "اختر الكل"
+
+#: ../xffm/fm/view/local/popup.hh:107 ../xffm/fm/view/local/popup.hh:746
+#, fuzzy
+msgid   "Match regular expression"
+msgstr  "طابق تعبيرا نمطيا"
+
+#: ../xffm/fm/view/local/popup.hh:143 ../xffm/fm/view/local/popup.hh:1029
+#, fuzzy
+msgid   "Run Executable..."
+msgstr  "تنفيذ..."
+
+#: ../xffm/fm/view/local/popup.hh:144 ../xffm/fm/view/local/popup.hh:877
+msgid   "Extract files from the archive"
+msgstr  "استخرج ملفات من الأرشيف"
+
+#: ../xffm/fm/view/local/popup.hh:146 ../xffm/fm/view/local/popup.hh:928
+msgid   "Create a compressed archive with the selected objects"
+msgstr  "أنشئ أرشيفا مضغوطا يحتوي العناصر المختارة"
+
+#: ../xffm/fm/view/local/popup.hh:148 ../xffm/fm/view/root/popup.hh:172
+#: ../xffm/fm/view/fstab/popup.hh:37
+msgid   "Mount the volume associated with this folder"
+msgstr  "صِل الجزء المرتبط بهذا المجلد"
+
+#: ../xffm/fm/view/local/popup.hh:149 ../xffm/fm/view/root/popup.hh:173
+#: ../xffm/fm/view/fstab/popup.hh:38
+msgid   "Unmount the volume associated with this folder"
+msgstr  "افصِل الجزء المرتبط بهذا المجلد"
+
+#: ../xffm/fm/view/local/popup.hh:161 ../xffm/fm/view/local/popup.hh:1242
+msgid   "Rename"
+msgstr  "أعد التسمية"
+
+#: ../xffm/fm/view/local/popup.hh:162 ../xffm/fm/view/local/popup.hh:1225
+msgid   "Duplicate"
+msgstr  "مضاعفة"
+
+#: ../xffm/fm/view/local/popup.hh:163 ../xffm/fm/view/local/popup.hh:1208
+msgid   "Link"
+msgstr  "وصلة"
+
+#: ../xffm/fm/view/local/popup.hh:164
+msgid   "Properties"
+msgstr  "خصائص"
+
+#: ../xffm/fm/view/local/popup.hh:554
+msgid   "Files:"
+msgstr  "ملفات:"
+
+#: ../xffm/fm/view/local/popup.hh:744
+#, fuzzy
+msgid   "Select items"
+msgstr  "العناصر المحددة:"
+
+#: ../xffm/fm/view/local/popup.hh:761
+#, fuzzy
+msgid   "Regular Expression syntax is incorrect"
+msgstr  "محرّر التعابير النظامية"
+
+#: ../xffm/fm/view/local/popup.hh:791
+msgid   "No selection"
+msgstr  "لا تحديد"
+
+#: ../xffm/fm/view/local/popup.hh:791
+#, fuzzy
+msgid   "No matches."
+msgstr  "لا نتائج"
+
+#: ../xffm/fm/view/local/popup.hh:983 ../xffm/fm/view/local/popup.hh:1156
+#, fuzzy
+msgid   "Create new..."
+msgstr  "أنشئ جديدًا..."
+
+#: ../xffm/fm/view/local/popup.hh:990 ../xffm/fm/view/local/popup.hh:1085
+#: ../xffm/fm/view/local/popup.hh:1159
+msgid   "New Name:"
+msgstr  "اسم جديد:"
+
+#: ../xffm/fm/view/local/popup.hh:998
+msgid   "No name"
+msgstr  "بلا اسم"
+
+#: ../xffm/fm/view/local/popup.hh:1011
+#, c-format
+msgid   "Another file with the same name already exists in “%s”."
+msgstr  "هناك ملف آخر بنفس الاسم موجود في ”%s“."
+
+#: ../xffm/fm/view/local/popup.hh:1036
+#, fuzzy
+msgid   "Arguments for the Command"
+msgstr  "معطيات الأمر"
+
+#: ../xffm/fm/view/local/popup.hh:1117 ../xffm/fm/view/root/popup.hh:237
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:383
+msgid   "Specify Output Directory..."
+msgstr  "حدّد مجلد الخرج..."
+
+#: ../xffm/fm/view/local/popup.hh:1148
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:409
+msgid   "Not a directory"
+msgstr  "ليس دليلا"
+
+#: ../xffm/fm/view/local/popup.hh:1307
+msgid   "You have selected multiple files or folders"
+msgstr  "لقد حددت أكثر من ملف أو مجلّد"
+
+#: ../xffm/fm/view/local/popup.hh:1375 ../xffm/fm/view/local/view.hh:156
+#, fuzzy
+msgid   "Invalid entry"
+msgstr  "استعلام غير صالح"
+
+#: ../xffm/fm/view/local/view.hh:177
+#, c-format
+msgid   "The volume '%s' is not mounted."
+msgstr  "الجزء '%s' ليس موصولا."
+
+#: ../xffm/fm/view/local/properties.hh:241
+#, fuzzy
+msgid   "Properties and Attributes"
+msgstr  "الصفات المعيارية"
+
+#: ../xffm/fm/view/local/properties.hh:270
+#, fuzzy
+msgid   "File Mode:"
+msgstr  "النمط البسيط"
+
+#: ../xffm/fm/view/local/properties.hh:296
+msgid   "File:"
+msgstr  "الملف:"
+
+#: ../xffm/fm/view/local/properties.hh:308
+msgid   "Apply changes"
+msgstr  "طبق التغييرات"
+
+#: ../xffm/fm/view/local/properties.hh:469
+msgid   "Encoding"
+msgstr  "تشفير"
+
+#: ../xffm/fm/view/local/properties.hh:470 ../xffm/fm/view/treeview.hh:22
+msgid   "Mimetype"
+msgstr  "نوع Mime"
+
+#: ../xffm/fm/view/local/properties.hh:474 ../xffm/fm/view/treeview.hh:19
+msgid   "Size"
+msgstr  "الحجم"
+
+#: ../xffm/fm/view/local/properties.hh:475 ../xffm/fm/view/treeview.hh:20
+msgid   "Date"
+msgstr  "التاريخ"
+
+#: ../xffm/fm/view/local/properties.hh:492
+msgid   "Successfully moved to trash."
+msgstr  "نقل إلى المهملات بنجاح."
+
+#: ../xffm/fm/view/local/properties.hh:493
+msgid   "Source:"
+msgstr  "المصدر:"
+
+#: ../xffm/fm/view/root/model.hh:124
+#, fuzzy
+msgid   "Root Directory"
+msgstr  "مجلد بعيد:"
+
+#: ../xffm/fm/view/root/model.hh:140
+msgid   "This is the root of the filesystem"
+msgstr  "هذا نظام ملفات الجذر"
+
+#: ../xffm/fm/view/root/model.hh:152
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:268
 msgid   "Home Directory"
 msgstr  "المجلد المنزلي"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:261
-#: ../xffm/fm/view/root/model.hh:168 ../xffm/fm/view/fstab/popup.hh:29
-#, fuzzy
-msgid   "Disk Image Mounter"
-msgstr  "مُوصّل الأقراص"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:266
-#: ../xffm/fm/view/root/model.hh:137
+#: ../xffm/fm/view/root/model.hh:179
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:278
 #, fuzzy
 msgid   "Trash bin"
 msgstr  "ارم الملف"
 
-#: ../xffm/fm/dialog/notebook/notebook.hh:56
-msgid   "Long press time"
-msgstr  "مدة الضغط المطوّل"
-
-#: ../xffm/fm/dialog/notebook/notebook.hh:75 ../xffm/common/gtk.hh:139
-msgid   "New Tab"
-msgstr  "علامة تبويب جديدة"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:178
+#: ../xffm/fm/view/root/model.hh:210 ../xffm/fm/view/fstab/popup.hh:29
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:273
 #, fuzzy
-msgid   "Open menu"
-msgstr  "افتح قائمة"
+msgid   "Disk Image Mounter"
+msgstr  "مُوصّل الأقراص"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:230
-msgid   "View as list"
-msgstr  "اعرض كقائمة"
+#: ../xffm/fm/view/root/model.hh:227
+msgid   "Mount local disks and devices"
+msgstr  "وصّل الأقراص و الأجهزة المحلية"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:231
-msgid   "Show hidden files"
-msgstr  "اظهر الملفات المخفية"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:232
-msgid   "Show Backup Files"
-msgstr  "أظهر ملفات النسخ الاحتياطي"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:233
+#: ../xffm/fm/view/root/model.hh:267
 #, fuzzy
-msgid   "Sort data in descending order"
-msgstr  "ترتيب حسب الفتح"
+msgid   "Go to bookmarked location"
+msgstr  "اذهب إلى علامة الموقع التالية"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:235
+#: ../xffm/fm/view/root/popup.hh:175
+msgid   "Empty trash"
+msgstr  "إفراغ المهملات"
+
+#: ../xffm/fm/view/root/popup.hh:228
 #, fuzzy
-msgid   "Sort by date"
-msgstr  "رتب حسب الاسم"
+msgid   "Ecrypt Volume"
+msgstr  "جزء EncFS"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:236
+#: ../xffm/fm/view/root/popup.hh:229
+msgid   "private"
+msgstr  "خاص"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:162 ../xffm/fm/view/fuse/ecryptfs.hh:163
+#: ../xffm/fm/view/fuse/ecryptfs.hh:185
+msgid   "Mount"
+msgstr  "ثبّت"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:179
+#: ../xffm/fm/dialog/notebook/createini.hh:87
+#: ../xffm/fm/dialog/notebook/createini.hh:371
+msgid   "Save"
+msgstr  "احفظ"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:182
+msgid   "Load"
+msgstr  "تحميل"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:398
+#: ../xffm/fm/dialog/notebook/createini.hh:67
+msgid   "Options"
+msgstr  "خيارات"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:399
+msgid   "Advanced"
+msgstr  "متقدم"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:692 ../xffm/fm/view/fstab/view.hh:1414
+#, c-format
+msgid   "Mounting %s"
+msgstr  "جارٍ ضمّ %s"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:745
+#, c-format
+msgid   "Enter Passphrase for %s"
+msgstr  "أدخل جملة السر لـ%s"
+
+#: ../xffm/fm/view/fstab/popup.hh:21 ../xffm/fm/view/fstab/view.hh:1033
+msgid   "NFS Network Volume"
+msgstr  "جزء NFS الشبكي"
+
+#: ../xffm/fm/view/fstab/popup.hh:22
+msgid   "SSHFS Remote Synchronization Folder"
+msgstr  "مجلد مزامنة SSHFS البعيد"
+
+#: ../xffm/fm/view/fstab/popup.hh:23 ../xffm/fm/view/fstab/view.hh:1085
 #, fuzzy
-msgid   "Sort by size"
-msgstr  "رتب حسب الاسم"
+msgid   "eCryptfs Volume"
+msgstr  "جزء الذاكرة"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:237 ../xffm/common/gtk.hh:81
-msgid   "Exit"
-msgstr  "خروج"
+#: ../xffm/fm/view/fstab/popup.hh:24 ../xffm/fm/view/fstab/view.hh:1111
+msgid   "CIFS Volume"
+msgstr  "جزء CIFS"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:270
-msgid   "Main menu"
-msgstr  "قائمة الاختيارات الرئيسية"
+#: ../xffm/fm/view/fstab/popup.hh:129
+msgid   "Mount Device"
+msgstr  "ضم الجهاز"
 
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:375
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:377
-msgid   "Go to"
-msgstr  "اذهب إلى"
+#: ../xffm/fm/view/fstab/popup.hh:141 ../xffm/fm/view/fstab/view.hh:924
+msgid   "Mount point:"
+msgstr  "نقطة الضم:"
 
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:382
-#: ../xffm/fm/view/local/popup.hh:887 ../xffm/fm/view/local/popup.hh:981
-msgid   "Specify Output Directory..."
-msgstr  "حدّد مجلد الخرج..."
+#: ../xffm/fm/view/fstab/view.hh:591
+#, fuzzy
+msgid   "Mount point: "
+msgstr  "نقطة الضم:"
 
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:409
-msgid   "Not a directory"
-msgstr  "ليس دليلا"
+#: ../xffm/fm/view/fstab/view.hh:592
+#, fuzzy
+msgid   "Mount device: "
+msgstr  "ضم الجهاز"
+
+#: ../xffm/fm/view/fstab/view.hh:660 ../xffm/fm/view/fstab/view.hh:676
+msgid   "Disks"
+msgstr  "الأقراص"
+
+#: ../xffm/fm/view/fstab/view.hh:922
+msgid   "No Label"
+msgstr  "دون لصيقة"
+
+#: ../xffm/fm/view/fstab/view.hh:923
+msgid   "There is no file system available (unformatted)"
+msgstr  "لا يوجد نظام ملفات (غير مهيّأ)"
+
+#: ../xffm/fm/view/fstab/view.hh:924
+msgid   "Not mounted"
+msgstr  "غير موصول"
+
+#: ../xffm/fm/view/fstab/view.hh:1059
+msgid   "SFTP (via SSH)"
+msgstr  ""
+
+#: ../xffm/fm/view/fstab/view.hh:1414
+#, c-format
+msgid   "Unmounting %s"
+msgstr  "يفصل %s"
+
+#: ../xffm/fm/view/base/signals.hh:845
+#, fuzzy
+msgid   "Trash is empty"
+msgstr  "المسار فارغ"
+
+#: ../xffm/fm/view/base/signals.hh:847
+msgid   "Directory does not exist."
+msgstr  "الدليل غير موجود."
+
+#: ../xffm/fm/view/treeview.hh:17
+msgid   "Name"
+msgstr  "الاسم"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
+msgid   "Embedded Terminal"
+msgstr  "اغرس طرفية"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
+#, fuzzy
+msgid   "All items in the iconview."
+msgstr  "اختر جميع العناصر في هذه النافذة"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
+#, fuzzy
+msgid   "Scripting"
+msgstr  "مخطوط"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
+#, fuzzy
+msgid   "Clear Log"
+msgstr  "أمحي سجل الوقائع"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
+msgid   "Terminal font"
+msgstr  "خط الشاشة الطرفيّة"
 
 #: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
 msgid   "Renice Process"
@@ -795,17 +1201,22 @@ msgstr  "انتهاك اﻻنقسام"
 msgid   "PID"
 msgstr  "PID"
 
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:376
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:378
+msgid   "Go to"
+msgstr  "اذهب إلى"
+
 #: ../xffm/fm/dialog/notebook/page/page.hh:59
 msgid   "loading..."
 msgstr  "يجري التحميل..."
 
-#: ../xffm/fm/dialog/notebook/page/page.hh:151
+#: ../xffm/fm/dialog/notebook/page/page.hh:152
 #: ../xffm/fm/dialog/notebook/page/page.hh:167
 #, fuzzy
 msgid   "Confirm Replace"
 msgstr  "تأكيد الحذف"
 
-#: ../xffm/fm/dialog/notebook/page/page.hh:153
+#: ../xffm/fm/dialog/notebook/page/page.hh:154
 msgid   "Destination File"
 msgstr  "ملف الهدف"
 
@@ -814,38 +1225,173 @@ msgstr  "ملف الهدف"
 msgid   "The output file %s already exists, do you want to overwrite it?"
 msgstr  "الملف %s موجود مسبقًا؛ أتريد الكتابة فوقه؟"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
-msgid   "Embedded Terminal"
-msgstr  "اغرس طرفية"
-
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
+#: ../xffm/fm/dialog/notebook/createini.hh:67
 #, fuzzy
-msgid   "All items in the iconview."
-msgstr  "اختر جميع العناصر في هذه النافذة"
+msgid   "maximum"
+msgstr  "الحد الأقصى"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
+#: ../xffm/fm/dialog/notebook/createini.hh:75
+msgid   "Add option"
+msgstr  "أضف خيار"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:79
 #, fuzzy
-msgid   "Scripting"
-msgstr  "مخطوط"
+msgid   "Remove option"
+msgstr  "لا تحذف شيئًا"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
+#: ../xffm/fm/dialog/notebook/createini.hh:158
 #, fuzzy
-msgid   "Clear Log"
-msgstr  "أمحي سجل الوقائع"
+msgid   "icon ID"
+msgstr  "أيقونة"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
-msgid   "Terminal font"
-msgstr  "خط الشاشة الطرفيّة"
-
-#: ../xffm/fm/dialog/clipboard.hh:23 ../xffm/common/dnd.hh:41
-msgid   "Copying files locally"
-msgstr  "نسخ الملفات محليًا"
-
-#: ../xffm/fm/dialog/clipboard.hh:30 ../xffm/common/gio.hh:83
-#: ../xffm/common/dnd.hh:35
+#: ../xffm/fm/dialog/notebook/createini.hh:159
 #, fuzzy
-msgid   "Moving files"
-msgstr  "نقل الملفات"
+msgid   "tooltip"
+msgstr  "تلميحة أداه"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:160
+#, fuzzy
+msgid   "Select work directory"
+msgstr  "انتقِ مجلدا واحدا"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:163
+#, fuzzy
+msgid   "Select executable"
+msgstr  "انتقِ الجداول:"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:166
+msgid   "Run in terminal"
+msgstr  "شغّل في طرفية"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:234
+#: ../xffm/response/chooserresponse.hh:20
+msgid   "Open"
+msgstr  "افتح"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:268
+#: ../xffm/response/chooserresponse.hh:55
+#: ../xffm/response/chooserresponse.hh:69
+msgid   "Choose file"
+msgstr  "إختر ملفًا"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:277
+#: ../xffm/response/chooserresponse.hh:50
+#: ../xffm/response/chooserresponse.hh:62
+msgid   "Choose directory"
+msgstr  "اختر مجلدا"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:366
+msgid   "Save File"
+msgstr  "احفظ الملف"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:380
+#, fuzzy
+msgid   "customButton.ini"
+msgstr  "زر مدفوع"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:420
+msgid   "Option"
+msgstr  "خيار"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:424
+msgid   "text"
+msgstr  "نص"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:431 ../xffm/completion/bash.hh:135
+msgid   "file"
+msgstr  "ملفّ"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:436
+msgid   "folder"
+msgstr  "مجلد"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:441
+msgid   "on"
+msgstr  "يوم"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:446
+msgid   "off"
+msgstr  "موقف"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:16
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:226
+#, fuzzy
+msgid   "Remove Button Contents"
+msgstr  "احذف العشرات"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:75
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:221
+#, fuzzy
+msgid   "Add custom content"
+msgstr  "استخدم خط مخصّص"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:76
+#, fuzzy
+msgid   "Select file to load"
+msgstr  "انتقِ ملفا لإضافته:"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:132
+#, fuzzy, c-format
+msgid   "Cannot load file %s. Reason: %s"
+msgstr  "تعذر تمديد الملف %s : %s"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:161
+#, fuzzy
+msgid   "You need to restart the application"
+msgstr  "تحتاج إلى إعادة تشغيل التطبيق."
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:216
+#, fuzzy
+msgid   "FIXME New custom content"
+msgstr  "فعّل خط خاص"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:256
+msgid   "Open a New Window"
+msgstr  "افتح نافذة جديدة"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:262
+msgid   "Differences"
+msgstr  "الإختلافات"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:178
+#, fuzzy
+msgid   "Open menu"
+msgstr  "افتح قائمة"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:230
+msgid   "View as list"
+msgstr  "اعرض كقائمة"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:231
+msgid   "Show hidden files"
+msgstr  "اظهر الملفات المخفية"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:232
+msgid   "Show Backup Files"
+msgstr  "أظهر ملفات النسخ الاحتياطي"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:233
+#, fuzzy
+msgid   "Sort data in descending order"
+msgstr  "ترتيب حسب الفتح"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:235
+#, fuzzy
+msgid   "Sort by date"
+msgstr  "رتب حسب الاسم"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:236
+#, fuzzy
+msgid   "Sort by size"
+msgstr  "رتب حسب الاسم"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:270
+msgid   "Main menu"
+msgstr  "قائمة الاختيارات الرئيسية"
+
+#: ../xffm/fm/dialog/notebook/notebook.hh:56
+msgid   "Long press time"
+msgstr  "مدة الضغط المطوّل"
 
 #: ../xffm/fm/dialog/dialog.hh:122
 msgid   "Removed"
@@ -855,504 +1401,83 @@ msgstr  "أزيلت"
 msgid   "Detected device(s):"
 msgstr  "الأجهزة المكتشفة :"
 
-#: ../xffm/fm/view/local/model.hh:124
-#, c-format
-msgid   "Reading \"%s\""
-msgstr  "يقرأ \"%s\""
+#: ../xffm/response/progress.hh:82 ../xffm/response/commandresponse.hh:57
+msgid   "Running"
+msgstr  "يشغّل"
 
-#: ../xffm/fm/view/local/model.hh:577 ../xffm/fm/view/base/monitor.hh:34
-#, fuzzy, c-format
-msgid   "Files: %s"
-msgstr  "الملف: %s"
-
-#: ../xffm/fm/view/local/model.hh:580
-#, fuzzy, c-format
-msgid   "Loaded %d of %d articles"
-msgstr  "الملفّات المحملة:"
-
-#: ../xffm/fm/view/local/popup.hh:85 ../xffm/fm/view/local/popup.hh:142
-#: ../xffm/fm/view/local/popup.hh:1287 ../xffm/fm/view/local/popup.hh:1294
-#: ../xffm/fm/view/local/popup.hh:1305 ../xffm/fm/view/local/popup.hh:1312
-#: ../xffm/common/gtk.hh:83
-msgid   "Open with"
-msgstr  "افتح باستخدام"
-
-#: ../xffm/fm/view/local/popup.hh:94
-msgid   "New"
-msgstr  "جديد"
-
-#: ../xffm/fm/view/local/popup.hh:95 ../xffm/fm/view/local/popup.hh:145
-#: ../xffm/fm/view/root/popup.hh:136 ../xffm/fm/view/fstab/popup.hh:20
-#: ../xffm/common/gtk.hh:94
-msgid   "Open in New Tab"
-msgstr  "افتح في علامة تبويب جديدة"
-
-#: ../xffm/fm/view/local/popup.hh:99 ../xffm/fm/view/local/popup.hh:155
-#: ../xffm/common/gtk.hh:87
-msgid   "Copy"
-msgstr  "انسخ"
-
-#: ../xffm/fm/view/local/popup.hh:100 ../xffm/fm/view/local/popup.hh:156
-#: ../xffm/common/gtk.hh:85
-msgid   "Cut"
-msgstr  "قص"
-
-#: ../xffm/fm/view/local/popup.hh:101 ../xffm/fm/view/local/popup.hh:159
-#: ../xffm/fm/view/local/popup.hh:232 ../xffm/fm/view/local/popup.hh:234
+#: ../xffm/response/progress.hh:87 ../xffm/response/commandresponse.hh:61
 #, fuzzy
-msgid   "Paste into"
-msgstr  "ألصق إلى"
+msgid   "Waiting for operation to finish..."
+msgstr  "ينتظر dvips لينتهي..."
 
-#: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:158
-msgid   "There is nothing on the clipboard to paste."
-msgstr  "لا شيء في الحافظة للصقه."
-
-#: ../xffm/fm/view/local/popup.hh:103 ../xffm/fm/view/local/popup.hh:160
-#: ../xffm/fm/view/local/rm.hh:176 ../xffm/common/gtk.hh:89
-msgid   "Delete"
-msgstr  "احذف"
-
-#: ../xffm/fm/view/local/popup.hh:106
-msgid   "Select All"
-msgstr  "اختر الكل"
-
-#: ../xffm/fm/view/local/popup.hh:107 ../xffm/fm/view/local/popup.hh:755
+#: ../xffm/response/passwdresponse.hh:131
 #, fuzzy
-msgid   "Match regular expression"
-msgstr  "طابق تعبيرا نمطيا"
+msgid   "User Input"
+msgstr  "دخل الفأرة"
 
-#: ../xffm/fm/view/local/popup.hh:143 ../xffm/fm/view/local/popup.hh:1105
+#: ../xffm/response/passwdresponse.hh:147
+msgid   "Response Requested"
+msgstr  "الرد مطلوب"
+
+#: ../xffm/response/passwdresponse.hh:194 ../xffm/response/entryresponse.hh:457
+msgid   "Ok"
+msgstr  "موافق"
+
+#: ../xffm/response/customresponse.hh:55
+msgid   "Execute command"
+msgstr  "تنفيذ الأمر"
+
+#: ../xffm/response/customresponse.hh:103
+msgid   "Source File"
+msgstr  "ملف المصدر"
+
+#: ../xffm/response/timeoutresponse.hh:57
+msgid   "Dismiss"
+msgstr  "ارفض"
+
+#: ../xffm/completion/bash.hh:133
+msgid   "Completion mode:"
+msgstr  "نمط الإكمال:"
+
+#: ../xffm/completion/bash.hh:134
+msgid   "command"
+msgstr  "أمر"
+
+#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
+msgid   "Options >>"
+msgstr  "الخيارات >>"
+
+#: ../xffm/completion/base.hh:28
+msgid   "Command"
+msgstr  "الأمر"
+
+#: ../xffm/completion/base.hh:31
+msgid   "File"
+msgstr  "ملف"
+
+#: ../xffm/completion/base.hh:34
 #, fuzzy
-msgid   "Run Executable..."
-msgstr  "تنفيذ..."
+msgid   "Command history"
+msgstr  "خطّ زمن أوامر التّشغيل"
 
-#: ../xffm/fm/view/local/popup.hh:144 ../xffm/fm/view/local/popup.hh:875
-msgid   "Extract files from the archive"
-msgstr  "استخرج ملفات من الأرشيف"
+#: ../xffm/completion/base.hh:40
+msgid   "Variable"
+msgstr  "المتغير"
 
-#: ../xffm/fm/view/local/popup.hh:146 ../xffm/fm/view/local/popup.hh:966
-msgid   "Create a compressed archive with the selected objects"
-msgstr  "أنشئ أرشيفا مضغوطا يحتوي العناصر المختارة"
+#: ../xffm/completion/base.hh:43
+msgid   "Host"
+msgstr  "مضيف"
 
-#: ../xffm/fm/view/local/popup.hh:148 ../xffm/fm/view/fstab/popup.hh:37
-msgid   "Mount the volume associated with this folder"
-msgstr  "صِل الجزء المرتبط بهذا المجلد"
+#: ../xffm/completion/base.hh:55
+msgid   "Found no match"
+msgstr  "لم يعثر على تطابق"
 
-#: ../xffm/fm/view/local/popup.hh:149 ../xffm/fm/view/fstab/popup.hh:38
-msgid   "Unmount the volume associated with this folder"
-msgstr  "افصِل الجزء المرتبط بهذا المجلد"
+#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
+msgid   "Matches"
+msgstr  "مطابقات"
 
-#: ../xffm/fm/view/local/popup.hh:151 ../xffm/common/gtk.hh:73
-msgid   "Add bookmark"
-msgstr  "اضف علامة مرجعية"
-
-#: ../xffm/fm/view/local/popup.hh:152 ../xffm/fm/view/root/popup.hh:137
-#: ../xffm/common/gtk.hh:75
-msgid   "Remove bookmark"
-msgstr  "امسح علامة مرجعية"
-
-#: ../xffm/fm/view/local/popup.hh:157 ../xffm/common/gtk.hh:71
-msgid   "Paste"
-msgstr  "الصق"
-
-#: ../xffm/fm/view/local/popup.hh:161 ../xffm/fm/view/local/popup.hh:1231
-msgid   "Rename"
-msgstr  "أعد التسمية"
-
-#: ../xffm/fm/view/local/popup.hh:162 ../xffm/fm/view/local/popup.hh:1217
-msgid   "Duplicate"
-msgstr  "مضاعفة"
-
-#: ../xffm/fm/view/local/popup.hh:163 ../xffm/fm/view/local/popup.hh:1203
-msgid   "Link"
-msgstr  "وصلة"
-
-#: ../xffm/fm/view/local/popup.hh:164
-msgid   "Properties"
-msgstr  "خصائص"
-
-#: ../xffm/fm/view/local/popup.hh:562
-msgid   "Files:"
-msgstr  "ملفات:"
-
-#: ../xffm/fm/view/local/popup.hh:565 ../xffm/fm/view/local/rm.hh:61
-msgid   "Multiple selections"
-msgstr  "انتقاءات متعددة"
-
-#: ../xffm/fm/view/local/popup.hh:753
+#: ../xffm/completion/base.hh:142
 #, fuzzy
-msgid   "Select items"
-msgstr  "العناصر المحددة:"
-
-#: ../xffm/fm/view/local/popup.hh:771
-#, fuzzy
-msgid   "Regular Expression syntax is incorrect"
-msgstr  "محرّر التعابير النظامية"
-
-#: ../xffm/fm/view/local/popup.hh:801
-msgid   "No selection"
-msgstr  "لا تحديد"
-
-#: ../xffm/fm/view/local/popup.hh:801
-#, fuzzy
-msgid   "No matches."
-msgstr  "لا نتائج"
-
-#: ../xffm/fm/view/local/popup.hh:1058
-#, fuzzy
-msgid   "Create new..."
-msgstr  "أنشئ جديدًا..."
-
-#: ../xffm/fm/view/local/popup.hh:1065 ../xffm/fm/view/local/popup.hh:1146
-msgid   "New Name:"
-msgstr  "اسم جديد:"
-
-#: ../xffm/fm/view/local/popup.hh:1074
-msgid   "No name"
-msgstr  "بلا اسم"
-
-#: ../xffm/fm/view/local/popup.hh:1087
-#, c-format
-msgid   "Another file with the same name already exists in “%s”."
-msgstr  "هناك ملف آخر بنفس الاسم موجود في ”%s“."
-
-#: ../xffm/fm/view/local/popup.hh:1109 ../xffm/fm/view/local/popup.hh:1291
-#: ../xffm/fm/view/local/popup.hh:1309 ../xffm/common/util.hh:1452
-msgid   "Run in Terminal"
-msgstr  "تشغيل في الطرفية"
-
-#: ../xffm/fm/view/local/popup.hh:1112
-#, fuzzy
-msgid   "Arguments for the Command"
-msgstr  "معطيات الأمر"
-
-#: ../xffm/fm/view/local/popup.hh:1258
-msgid   "You have selected multiple files or folders"
-msgstr  "لقد حددت أكثر من ملف أو مجلّد"
-
-#: ../xffm/fm/view/local/popup.hh:1332 ../xffm/fm/view/local/view.hh:156
-#, fuzzy
-msgid   "Invalid entry"
-msgstr  "استعلام غير صالح"
-
-#: ../xffm/fm/view/local/properties.hh:245
-#, fuzzy
-msgid   "Properties and Attributes"
-msgstr  "الصفات المعيارية"
-
-#: ../xffm/fm/view/local/properties.hh:274
-#, fuzzy
-msgid   "File Mode:"
-msgstr  "النمط البسيط"
-
-#: ../xffm/fm/view/local/properties.hh:300
-msgid   "File:"
-msgstr  "الملف:"
-
-#: ../xffm/fm/view/local/properties.hh:312
-msgid   "Apply changes"
-msgstr  "طبق التغييرات"
-
-#: ../xffm/fm/view/local/properties.hh:477
-msgid   "Successfully moved to trash."
-msgstr  "نقل إلى المهملات بنجاح."
-
-#: ../xffm/fm/view/local/properties.hh:478
-msgid   "Source:"
-msgstr  "المصدر:"
-
-#: ../xffm/fm/view/local/rm.hh:59
-#, c-format
-msgid   "Delete %s"
-msgstr  "احذف %s"
-
-#: ../xffm/fm/view/local/rm.hh:61
-msgid   "Warning: "
-msgstr  "تحذير: "
-
-#: ../xffm/fm/view/local/rm.hh:92
-msgid   "Remove"
-msgstr  "أزل"
-
-#: ../xffm/fm/view/local/rm.hh:142
-msgid   "Apply to all"
-msgstr  "طبّق على الجميع"
-
-#: ../xffm/fm/view/local/rm.hh:165 ../xffm/common/gtk.hh:91
-#, fuzzy
-msgid   "Shred"
-msgstr  "الممزق"
-
-#: ../xffm/fm/view/local/rm.hh:183
-msgid   "Trash"
-msgstr  "قمامة"
-
-#: ../xffm/fm/view/local/view.hh:177
-#, c-format
-msgid   "The volume '%s' is not mounted."
-msgstr  "الجزء '%s' ليس موصولا."
-
-#: ../xffm/fm/view/root/model.hh:82
-#, fuzzy
-msgid   "Root Directory"
-msgstr  "مجلد بعيد:"
-
-#: ../xffm/fm/view/root/model.hh:98
-msgid   "This is the root of the filesystem"
-msgstr  "هذا نظام ملفات الجذر"
-
-#: ../xffm/fm/view/root/model.hh:176 ../xffm/fm/view/root/model.hh:191
-msgid   "Mount local disks and devices"
-msgstr  "وصّل الأقراص و الأجهزة المحلية"
-
-#: ../xffm/fm/view/root/model.hh:177 ../xffm/fm/view/fstab/popup.hh:23
-#: ../xffm/fm/view/fstab/view.hh:1084
-#, fuzzy
-msgid   "eCryptfs Volume"
-msgstr  "جزء الذاكرة"
-
-#: ../xffm/fm/view/root/model.hh:178 ../xffm/fm/view/fstab/popup.hh:22
-msgid   "SSHFS Remote Synchronization Folder"
-msgstr  "مجلد مزامنة SSHFS البعيد"
-
-#: ../xffm/fm/view/root/model.hh:179 ../xffm/fm/view/fstab/popup.hh:21
-#: ../xffm/fm/view/fstab/view.hh:1032
-msgid   "NFS Network Volume"
-msgstr  "جزء NFS الشبكي"
-
-#: ../xffm/fm/view/root/model.hh:180 ../xffm/fm/view/fstab/popup.hh:24
-#: ../xffm/fm/view/fstab/view.hh:1110
-msgid   "CIFS Volume"
-msgstr  "جزء CIFS"
-
-#: ../xffm/fm/view/root/model.hh:229
-#, fuzzy
-msgid   "Go to bookmarked location"
-msgstr  "اذهب إلى علامة الموقع التالية"
-
-#: ../xffm/fm/view/root/popup.hh:138
-msgid   "Empty trash"
-msgstr  "إفراغ المهملات"
-
-#: ../xffm/fm/view/fstab/popup.hh:129
-msgid   "Mount Device"
-msgstr  "ضم الجهاز"
-
-#: ../xffm/fm/view/fstab/popup.hh:141 ../xffm/fm/view/fstab/view.hh:923
-msgid   "Mount point:"
-msgstr  "نقطة الضم:"
-
-#: ../xffm/fm/view/fstab/view.hh:590
-#, fuzzy
-msgid   "Mount point: "
-msgstr  "نقطة الضم:"
-
-#: ../xffm/fm/view/fstab/view.hh:591
-#, fuzzy
-msgid   "Mount device: "
-msgstr  "ضم الجهاز"
-
-#: ../xffm/fm/view/fstab/view.hh:659 ../xffm/fm/view/fstab/view.hh:675
-msgid   "Disks"
-msgstr  "الأقراص"
-
-#: ../xffm/fm/view/fstab/view.hh:921
-msgid   "No Label"
-msgstr  "دون لصيقة"
-
-#: ../xffm/fm/view/fstab/view.hh:922
-msgid   "There is no file system available (unformatted)"
-msgstr  "لا يوجد نظام ملفات (غير مهيّأ)"
-
-#: ../xffm/fm/view/fstab/view.hh:923
-msgid   "Not mounted"
-msgstr  "غير موصول"
-
-#: ../xffm/fm/view/fstab/view.hh:1058
-msgid   "SFTP (via SSH)"
-msgstr  ""
-
-#: ../xffm/fm/view/fstab/view.hh:1413
-#, c-format
-msgid   "Unmounting %s"
-msgstr  "يفصل %s"
-
-#: ../xffm/fm/view/fstab/view.hh:1413
-#, c-format
-msgid   "Mounting %s"
-msgstr  "جارٍ ضمّ %s"
-
-#: ../xffm/fm/view/pkg/model.hh:41 ../xffm/fm/view/pkg/model.hh:52
-msgid   "Add or remove software installed on the system"
-msgstr  "أضف أو أزل البرمجيات المثبتة على النظام"
-
-#: ../xffm/fm/view/pkg/model.hh:111
-msgid   "String"
-msgstr  "السلسلة"
-
-#: ../xffm/fm/view/pkg/model.hh:116
-msgid   "Waiting for search results"
-msgstr  "في انتظار نتائج البحث"
-
-#: ../xffm/fm/view/pkg/model.hh:174
-#, fuzzy
-msgid   "No results"
-msgstr  "لا نتائج."
-
-#: ../xffm/fm/view/pkg/model.hh:373
-#, fuzzy
-msgid   "Currently busy\n"
-msgstr  "الحالي: %s"
-
-#: ../xffm/fm/view/pkg/popup.hh:44
-msgid   "Update Database"
-msgstr  "تحديث قاعدة البيانات"
-
-#: ../xffm/fm/view/pkg/popup.hh:45
-msgid   "Fetch"
-msgstr  "اجلب"
-
-#: ../xffm/fm/view/pkg/popup.hh:46
-#, fuzzy
-msgid   "Install --dry-run"
-msgstr  "تثبيت الوحدة"
-
-#: ../xffm/fm/view/pkg/popup.hh:47
-msgid   "Install"
-msgstr  "ثبِّت"
-
-#: ../xffm/fm/view/pkg/popup.hh:48
-#, fuzzy
-msgid   "Uninstall --dry-run"
-msgstr  "جاري إلغاء التثبيت"
-
-#: ../xffm/fm/view/pkg/popup.hh:49
-msgid   "Uninstall"
-msgstr  "أزِل"
-
-#: ../xffm/fm/view/pkg/popup.hh:50
-msgid   "Information"
-msgstr  "معلومات"
-
-#: ../xffm/fm/view/pkg/popup.hh:140
-msgid   "Version"
-msgstr  "الإصدارة"
-
-#: ../xffm/fm/view/pkg/popup.hh:149
-#, fuzzy
-msgid   "Go up"
-msgstr  "اذهب إلى الأعلى"
-
-#: ../xffm/fm/view/pkg/popup.hh:152
-#, fuzzy
-msgid   "Search packages"
-msgstr  "البحث عن الحزم"
-
-#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
-#, fuzzy, c-format
-msgid   "Loading %s...%s"
-msgstr  "تحميل ..."
-
-#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
-msgid   "Please Wait..."
-msgstr  "الرجاء الإنتظار..."
-
-#: ../xffm/fm/view/treeview.hh:17
-msgid   "Name"
-msgstr  "الاسم"
-
-#: ../xffm/fm/view/treeview.hh:19
-msgid   "Size"
-msgstr  "الحجم"
-
-#: ../xffm/fm/view/treeview.hh:20
-msgid   "Date"
-msgstr  "التاريخ"
-
-#: ../xffm/fm/view/treeview.hh:22
-msgid   "Mimetype"
-msgstr  "نوع Mime"
-
-#: ../xffm/fm/view/base/signals.hh:838
-#, fuzzy
-msgid   "Trash is empty"
-msgstr  "المسار فارغ"
-
-#: ../xffm/fm/view/base/signals.hh:840
-msgid   "Directory does not exist."
-msgstr  "الدليل غير موجود."
-
-#: ../xffm/common/settings.hh:30
-#, fuzzy
-msgid   "New File:"
-msgstr  "ملف جديد"
-
-#: ../xffm/common/gio.hh:81
-msgid   "Copying files"
-msgstr  "يجري نسخ الملفات"
-
-#: ../xffm/common/gio.hh:85
-#, fuzzy
-msgid   "linking"
-msgstr  "ومّاض"
-
-#: ../xffm/common/gio.hh:87
-msgid   "rename"
-msgstr  "اعادة تسمية "
-
-#: ../xffm/common/gio.hh:426
-#, c-format
-msgid   "(%d of %d)"
-msgstr  "(%d من %d)"
-
-#: ../xffm/common/dnd.hh:47
-#, fuzzy
-msgid   "Create Link"
-msgstr  "تراجع عن إنشاء الرابط"
-
-#: ../xffm/common/util.hh:1404
-#, c-format
-msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
-        "attribute on that file."
-msgstr  ""
-
-#: ../xffm/common/util.hh:1406 ../xffm/common/util.hh:1441
-#, c-format
-msgid   "Open with %s"
-msgstr  "افتح بـ %s"
-
-#: ../xffm/common/util.hh:1406
-msgid   "Text Editor"
-msgstr  "محرّر النصوص"
-
-#: ../xffm/common/util.hh:1443 ../xffm/common/gtk.hh:69
-msgid   "Execute Shell Command"
-msgstr  "نفذ أمر الصدَفة"
-
-#: ../xffm/common/util.hh:1447
-msgid   "Console: quickly run single commands -- write a command here and "
-        "press enter."
-msgstr  "كونسول: تشغيل سريع لأمر واحد -- أكتب أمر هنا و اضغط مفتاح Enter"
-
-#: ../xffm/common/gtk.hh:352 ../xffm/common/gtk.hh:360
-msgid   "Help"
-msgstr  "مساعدة"
-
-#: ../xffm/common/run.hh:338
-msgid   "error"
-msgstr  "خطأ"
-
-#: ../xffm/common/run.hh:342
-#, fuzzy
-msgid   "warning"
-msgstr  "تحذير:"
-
-#: ../xffm/common/preview.hh:581
-msgid   "Empty file"
-msgstr  "ملف فارغ"
-
-#: ../xffm/common/preview.hh:636
-#, c-format
-msgid   "Cannot read from %s"
-msgstr  "تعذّرت القراءة من %s"
+msgid   "Too many files open"
+msgstr  "مجلدات كثيرة جدا"
 

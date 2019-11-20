@@ -1,12 +1,12 @@
-# Xffm+ translation file: lun ago 12 14:10:40 CDT 2019
-# Merged fron existing open source files
+# Xffm+ translation file: mié nov 20 12:37:26 CST 2019
+# Merged from existing open source files
 # http://xffm.org
 #
 #
 msgid   ""
 msgstr  "Project-Id-Version: xffm+\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2019-08-11 09:10-0500\n"
+        "POT-Creation-Date: 2019-11-20 12:34-0600\n"
         "PO-Revision-Date: 2012-10-21 22:20+0200\n"
         "Last-Translator: Petr Pisar <petr.pisar@atlas.cz>\n"
         "Language-Team: Czech <translation-team-cs@lists.sourceforge.net>\n"
@@ -21,373 +21,27 @@ msgstr  "Project-Id-Version: xffm+\n"
 msgid   "No Read Permission"
 msgstr  "Žádná oprávnění ke čtení"
 
-#: ../xffm/completion/base.hh:28
-msgid   "Command"
-msgstr  "Příkaz"
-
-#: ../xffm/completion/base.hh:31
-msgid   "File"
-msgstr  "Soubor"
-
-#: ../xffm/completion/base.hh:34
-#, fuzzy
-msgid   "Command history"
-msgstr  "Historie spouštění příkazů"
-
-#: ../xffm/completion/base.hh:37 ../xffm/find/dialog.hh:192
-msgid   "User"
-msgstr  "Uživatel"
-
-#: ../xffm/completion/base.hh:40
-msgid   "Variable"
-msgstr  "Proměnná"
-
-#: ../xffm/completion/base.hh:43
-msgid   "Host"
-msgstr  "Počítač"
-
-#: ../xffm/completion/base.hh:55
-msgid   "Found no match"
-msgstr  "Nenalezena shoda"
-
-#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
-msgid   "Matches"
-msgstr  "Shodná slova"
-
-#: ../xffm/completion/base.hh:142
-msgid   "Too many files open"
-msgstr  "Je otevřeno příliš mnoho souborů"
-
-#: ../xffm/completion/base.hh:339 ../xffm/find/fgr.hh:124
-msgid   "Options:"
-msgstr  "Možnosti:"
-
-#: ../xffm/completion/bash.hh:133
-msgid   "Completion mode:"
-msgstr  "Režim doplňování:"
-
-#: ../xffm/completion/bash.hh:134
-msgid   "command"
-msgstr  "příkaz"
-
-#: ../xffm/completion/bash.hh:135
-msgid   "file"
-msgstr  "soubor"
-
-#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
-msgid   "Options >>"
-msgstr  "Možnosti rozhraní >>"
-
-#: ../xffm/find/fgr.hh:124 ../xffm/find/signals.hh:100
-#: ../xffm/find/dialog.hh:301
-msgid   "Path"
-msgstr  "Cesta"
-
-#: ../xffm/find/fgr.hh:125
-msgid   "Locate documents and folders on this computer by name or content"
-msgstr  "Hledá dokumenty a složky v tomto počítači podle názvu či obsahu"
-
-#: ../xffm/find/fgr.hh:126 ../xffm/find/dialog.hh:334
-msgid   "Filter:"
-msgstr  "Filtr:"
-
-#: ../xffm/find/fgr.hh:126
-msgid   "Search for files"
-msgstr  "Hledat soubory"
-
-#: ../xffm/find/fgr.hh:128
-msgid   "Contents:"
-msgstr  "Obsah:"
-
-#: ../xffm/find/fgr.hh:128
-msgid   "File's contents filtered as plain text."
-msgstr  "Obsah souboru filtrovaný jako prostý text."
-
-#: ../xffm/find/fgr.hh:131
-msgid   "Verbose output debugging mode."
-msgstr  "\"Ukecaný\" režim ladicího výstupu"
-
-#: ../xffm/find/fgr.hh:133
-msgid   "Show version information"
-msgstr  "Zobrazit informace o verzi"
-
-#: ../xffm/find/fgr.hh:135
-msgid   "Filter Details"
-msgstr  "Podrobnosti filtru"
-
-#: ../xffm/find/fgr.hh:138 ../xffm/find/dialog.hh:173
-msgid   "Stay on single filesystem"
-msgstr  "Prohledat pouze jeden souborový systém"
-
-#: ../xffm/find/fgr.hh:140
-msgid   "Print..."
-msgstr  "Tisk…"
-
-#: ../xffm/find/fgr.hh:140
-#, fuzzy
-msgid   "The unique Process ID that identifies this process."
-msgstr  "Uživatel, který tento proces vlastní."
-
-#: ../xffm/find/fgr.hh:142 ../xffm/find/dialog.hh:170
-msgid   "Find hidden files and directories"
-msgstr  "Prohledat skryté soubory a adresáře"
-
-#: ../xffm/find/fgr.hh:143
-msgid   "Filter"
-msgstr  "Filtr"
-
-#: ../xffm/find/fgr.hh:144
-msgid   "To display files which pass the filter (stars and regexps will be "
-        "processed)"
-msgstr  "Zobrazit soubory, které odpovídají zadání filtru (hvězdička bude "
-        "zpracována)"
-
-#: ../xffm/find/fgr.hh:146 ../xffm/find/dialog.hh:167
-msgid   "Recursive"
-msgstr  "Rekurze"
-
-#: ../xffm/find/fgr.hh:147 ../xffm/find/fgr.hh:148 ../xffm/find/fgr.hh:149
-#: ../xffm/find/fgr.hh:150
-msgid   "KByte"
-msgstr  "KByte"
-
-#: ../xffm/find/fgr.hh:148
-msgid   "is greater than or equal to"
-msgstr  "je větší nebo rovno"
-
-#: ../xffm/find/fgr.hh:150
-msgid   "is less than or equal to"
-msgstr  "je menší nebo rovno"
-
-#: ../xffm/find/fgr.hh:152
-msgid   "Set UID"
-msgstr  "Nastavit UID"
-
-#: ../xffm/find/fgr.hh:152
-msgid   "Executable Text Files"
-msgstr  "Spustitelné textové soubory"
-
-#: ../xffm/find/fgr.hh:154
-msgid   "The permissions of the file, in octal notation."
-msgstr  "Oprávnění souboru v osmičkovém zápisu."
-
-#: ../xffm/find/fgr.hh:155
-msgid   "Type"
-msgstr  "Typ"
-
-#: ../xffm/find/fgr.hh:157 ../xffm/find/signals.hh:14
-msgid   "Any"
-msgstr  "Libovolný"
-
-#: ../xffm/find/fgr.hh:157
-msgid   "Default type"
-msgstr  "Výchozí typ"
-
-#: ../xffm/find/fgr.hh:158 ../xffm/common/preview.hh:478
-msgid   "Regular file"
-msgstr  "Obyčejný soubor"
-
-#: ../xffm/find/fgr.hh:159 ../xffm/find/signals.hh:8
-#: ../xffm/fm/view/local/popup.hh:1062 ../xffm/common/preview.hh:469
-msgid   "Directory"
-msgstr  "Adresář"
-
-#: ../xffm/find/fgr.hh:160 ../xffm/find/signals.hh:9
-#: ../xffm/common/preview.hh:475
-msgid   "Symbolic Link"
-msgstr  "Symbolický odkaz"
-
-#: ../xffm/find/fgr.hh:161
-msgid   "UNIX Socket"
-msgstr  "Unixový soket"
-
-#: ../xffm/find/fgr.hh:162 ../xffm/find/signals.hh:11
-#: ../xffm/common/preview.hh:463
-msgid   "Block device"
-msgstr  "Blokové zařízení"
-
-#: ../xffm/find/fgr.hh:163 ../xffm/find/signals.hh:12
-#: ../xffm/common/preview.hh:466
-msgid   "Character device"
-msgstr  "Znakové zařízení"
-
-#: ../xffm/find/fgr.hh:164 ../xffm/find/signals.hh:13
-#: ../xffm/common/preview.hh:472
-msgid   "FIFO"
-msgstr  "Fronta FIFO"
-
-#: ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168 ../xffm/find/dialog.hh:214
-msgid   "Minutes"
-msgstr  "Minuty"
-
-#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
-#: ../xffm/find/fgr.hh:176 ../xffm/find/dialog.hh:263
-#: ../xffm/find/dialog.hh:363 ../xffm/fm/view/treeview.hh:18
-msgid   "Details"
-msgstr  "Podrobnosti"
-
-#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
-#: ../xffm/find/fgr.hh:176 ../xffm/find/fgr.hh:179 ../xffm/find/fgr.hh:180
-#: ../xffm/find/fgr.hh:183 ../xffm/find/fgr.hh:184 ../xffm/find/fgr.hh:187
-#: ../xffm/find/fgr.hh:188
-msgid   "TIME"
-msgstr  "CAS"
-
-#: ../xffm/find/fgr.hh:168 ../xffm/find/fgr.hh:171 ../xffm/find/fgr.hh:174
-#: ../xffm/find/fgr.hh:177
-msgid   "Previous"
-msgstr  "Předchozí"
-
-#: ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171 ../xffm/find/dialog.hh:219
-msgid   "Hours"
-msgstr  "Hodiny"
-
-#: ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174 ../xffm/find/dialog.hh:224
-msgid   "Days"
-msgstr  "dnů"
-
-#: ../xffm/find/fgr.hh:175
-msgid   "Month"
-msgstr  "Měsíc"
-
-#: ../xffm/find/fgr.hh:177
-msgid   "Month(s)"
-msgstr  "Týdny"
-
-#: ../xffm/find/fgr.hh:180
-msgid   "Modification Time :"
-msgstr  "Čas změny :"
-
-#: ../xffm/find/fgr.hh:184
-msgid   "Access Time :"
-msgstr  "Čas přístupu :"
-
-#: ../xffm/find/fgr.hh:188
-msgid   "Creation Time :"
-msgstr  "Čas vytvoření :"
-
-#: ../xffm/find/fgr.hh:191 ../xffm/find/fgr.hh:192
-msgid   "uid"
-msgstr  "id uživatele (uid)"
-
-#: ../xffm/find/fgr.hh:192
-msgid   "User:"
-msgstr  "Uživatel:"
-
-#: ../xffm/find/fgr.hh:194 ../xffm/find/fgr.hh:195
-msgid   "gid"
-msgstr  "id skupiny (gid)"
-
-#: ../xffm/find/fgr.hh:195
-msgid   "Group:"
-msgstr  "Skupina:"
-
-#: ../xffm/find/fgr.hh:198
-msgid   "Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
-        "character that  normally  follows  a file  name"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:200
-msgid   "Content View"
-msgstr  "Zobrazení obsahu"
-
-#: ../xffm/find/fgr.hh:201 ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:203
-#: ../xffm/find/fgr.hh:204
-msgid   "STRING"
-msgstr  "ŘETĚZEC"
-
-#: ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:204
-#: ../xffm/fm/view/local/popup.hh:759
-msgid   "Regular expression"
-msgstr  "Regulární výraz"
-
-#: ../xffm/find/fgr.hh:204
-msgid   "Extended"
-msgstr  "Rozšířená"
-
-#: ../xffm/find/fgr.hh:206
-msgid   "Ignore case"
-msgstr  "Ignorovat velikost písmen"
-
-#: ../xffm/find/fgr.hh:208
-msgid   "Text Files"
-msgstr  "Textové soubory"
-
-#: ../xffm/find/fgr.hh:210 ../xffm/find/dialog.hh:545
-msgid   "No match"
-msgstr  "Žádná shoda"
-
-#: ../xffm/find/fgr.hh:212 ../xffm/find/dialog.hh:463
-msgid   "Line Count"
-msgstr  "Počet řádků"
-
-#: ../xffm/find/fgr.hh:214
-msgid   "Words"
-msgstr  "Slov"
-
-#: ../xffm/find/fgr.hh:216
-msgid   "Lines"
-msgstr  "Řádek"
-
-#: ../xffm/find/fgr.hh:362
-#, c-format
-msgid   "Usage : %s [OPTIONS]\n"
-msgstr  "Použití : %s [Volby]\n"
-
-#: ../xffm/find/signals.hh:7
-msgid   "Regular"
-msgstr  "regulární"
-
-#: ../xffm/find/signals.hh:10 ../xffm/common/preview.hh:481
-msgid   "Socket"
-msgstr  "Soket"
-
-#: ../xffm/find/signals.hh:66 ../xffm/find/signals.hh:454
-#: ../xffm/find/dialog.hh:176
-msgid   "Results"
-msgstr  "Výsledky"
-
-#: ../xffm/find/signals.hh:368 ../xffm/find/dialog.hh:577
-#: ../xffm/response/chooserresponse.hh:21 ../xffm/response/entryresponse.hh:435
-#: ../xffm/fm/view/local/properties.hh:314 ../xffm/fm/view/local/rm.hh:157
-#: ../xffm/common/gtk.hh:409
-msgid   "Cancel"
-msgstr  "Zrušit"
-
-#: ../xffm/find/signals.hh:396 ../xffm/find/signals.hh:830
-#, fuzzy
-msgid   "No editor for current action."
-msgstr  "Bez aktuálních kroků."
-
-#: ../xffm/find/signals.hh:454
-msgid   "Upper limit:"
-msgstr  "Horní mez:"
-
-#: ../xffm/find/signals.hh:456
-msgid   "Counting files..."
-msgstr  "Jsou počítány soubory ..."
-
-#: ../xffm/find/signals.hh:471
-#, c-format
-msgid   "Found %d match"
-msgid_plural    "Found %d matches"
-msgstr[0]       "Nalezen %d výskyt"
-msgstr[1]       "Nalezeny %d výskyty"
-msgstr[2]       "Nalezeno %d výskytů"
-
-#: ../xffm/find/signals.hh:473
-#, c-format
-msgid   "%s Finished : %s"
-msgstr  "%s dokončeno: %s"
-
-#: ../xffm/find/signals.hh:596 ../xffm/find/signals.hh:598
-msgid   "Searching..."
-msgstr  "Vyhledává se…"
-
 #: ../xffm/find/dialog.hh:91 ../xffm/find/dialog.hh:143
 #: ../xffm/find/dialog.hh:604
 msgid   "Find"
 msgstr  "Hledat"
+
+#: ../xffm/find/dialog.hh:167 ../xffm/find/fgr.hh:146
+msgid   "Recursive"
+msgstr  "Rekurze"
+
+#: ../xffm/find/dialog.hh:170 ../xffm/find/fgr.hh:142
+msgid   "Find hidden files and directories"
+msgstr  "Prohledat skryté soubory a adresáře"
+
+#: ../xffm/find/dialog.hh:173 ../xffm/find/fgr.hh:138
+msgid   "Stay on single filesystem"
+msgstr  "Prohledat pouze jeden souborový systém"
+
+#: ../xffm/find/dialog.hh:176 ../xffm/find/signals.hh:65
+#: ../xffm/find/signals.hh:427
+msgid   "Results"
+msgstr  "Výsledky"
 
 #: ../xffm/find/dialog.hh:176
 msgid   "Upper limit"
@@ -405,6 +59,10 @@ msgstr  "kBytes"
 msgid   "At Most"
 msgstr  "nejvíce"
 
+#: ../xffm/find/dialog.hh:192 ../xffm/completion/base.hh:37
+msgid   "User"
+msgstr  "Uživatel"
+
 #: ../xffm/find/dialog.hh:197
 msgid   "Group"
 msgstr  "Skupina"
@@ -417,9 +75,21 @@ msgstr  "Oprávnění osmičkově"
 msgid   "SUID"
 msgstr  "SUID"
 
-#: ../xffm/find/dialog.hh:206 ../xffm/fm/view/local/popup.hh:1102
+#: ../xffm/find/dialog.hh:206 ../xffm/fm/view/local/popup.hh:1026
 msgid   "Executable"
 msgstr  "Program"
+
+#: ../xffm/find/dialog.hh:214 ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168
+msgid   "Minutes"
+msgstr  "Minuty"
+
+#: ../xffm/find/dialog.hh:219 ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171
+msgid   "Hours"
+msgstr  "Hodiny"
+
+#: ../xffm/find/dialog.hh:224 ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174
+msgid   "Days"
+msgstr  "dnů"
 
 #: ../xffm/find/dialog.hh:230
 msgid   "Months"
@@ -429,10 +99,25 @@ msgstr  "Měsíců"
 msgid   "File type : "
 msgstr  "Typ souboru : "
 
-#: ../xffm/find/dialog.hh:255 ../xffm/find/dialog.hh:595
-#: ../xffm/fm/dialog/notebook/page/page.hh:71 ../xffm/common/gtk.hh:79
+#: ../xffm/find/dialog.hh:255 ../xffm/find/dialog.hh:595 ../xffm/gtk/gtk.hh:80
+#: ../xffm/fm/dialog/notebook/page/page.hh:71
 msgid   "Close"
 msgstr  "Zavřít"
+
+#: ../xffm/find/dialog.hh:263 ../xffm/find/dialog.hh:363
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/fm/view/treeview.hh:18
+msgid   "Details"
+msgstr  "Podrobnosti"
+
+#: ../xffm/find/dialog.hh:301 ../xffm/find/fgr.hh:124
+#: ../xffm/find/signals.hh:94
+msgid   "Path"
+msgstr  "Cesta"
+
+#: ../xffm/find/dialog.hh:334 ../xffm/find/fgr.hh:126
+msgid   "Filter:"
+msgstr  "Filtr:"
 
 #: ../xffm/find/dialog.hh:377
 msgid   "Contains"
@@ -454,6 +139,10 @@ msgstr  "Rozšířený regulární výraz"
 msgid   "Include binary files"
 msgstr  "Včetně binárních souborů"
 
+#: ../xffm/find/dialog.hh:463 ../xffm/find/fgr.hh:212
+msgid   "Line Count"
+msgstr  "Počet řádků"
+
 #: ../xffm/find/dialog.hh:489
 msgid   "Match"
 msgstr  "Shoda"
@@ -470,6 +159,19 @@ msgstr  "Pouze celá slova"
 msgid   "lines"
 msgstr  "řádků"
 
+#: ../xffm/find/dialog.hh:545 ../xffm/find/fgr.hh:210
+msgid   "No match"
+msgstr  "Žádná shoda"
+
+#: ../xffm/find/dialog.hh:577 ../xffm/find/signals.hh:341
+#: ../xffm/gtk/dialogs.hh:110 ../xffm/fm/view/local/rm.hh:157
+#: ../xffm/fm/view/local/properties.hh:310 ../xffm/fm/view/fuse/ecryptfs.hh:175
+#: ../xffm/fm/dialog/notebook/createini.hh:232
+#: ../xffm/fm/dialog/notebook/createini.hh:369
+#: ../xffm/response/entryresponse.hh:453 ../xffm/response/chooserresponse.hh:18
+msgid   "Cancel"
+msgstr  "Zrušit"
+
 #: ../xffm/find/dialog.hh:587
 msgid   "Clear"
 msgstr  "Vymazat"
@@ -479,9 +181,9 @@ msgid   "Edit"
 msgstr  "Upravit"
 
 #: ../xffm/find/dialog.hh:743 ../xffm/find/dialog.hh:758
-#: ../xffm/common/util.hh:1354 ../xffm/common/util.hh:1356
-#: ../xffm/common/util.hh:1362 ../xffm/common/util.hh:1364
-#: ../xffm/common/preview.hh:460
+#: ../xffm/common/preview.hh:460 ../xffm/common/util.hh:1354
+#: ../xffm/common/util.hh:1356 ../xffm/common/util.hh:1362
+#: ../xffm/common/util.hh:1364
 msgid   "unknown"
 msgstr  "neznámý"
 
@@ -587,182 +289,873 @@ msgstr  "Vyhrazené znaky pro regulární výrazy jsou\n"
         "Více informací je dostupné po zadání man grep\n"
         "       v příkazové rádce.\n"
 
-#: ../xffm/response/chooserresponse.hh:23
-msgid   "Open"
-msgstr  "Otevřít"
+#: ../xffm/find/fgr.hh:124 ../xffm/fm/view/fuse/ecryptfs.hh:133
+#: ../xffm/completion/base.hh:339
+msgid   "Options:"
+msgstr  "Možnosti:"
 
-#: ../xffm/response/chooserresponse.hh:56
-msgid   "Choose directory"
-msgstr  "Zvolte složku"
+#: ../xffm/find/fgr.hh:125
+msgid   "Locate documents and folders on this computer by name or content"
+msgstr  "Hledá dokumenty a složky v tomto počítači podle názvu či obsahu"
 
-#: ../xffm/response/chooserresponse.hh:60
-msgid   "Choose file"
-msgstr  "Zvolte soubor"
+#: ../xffm/find/fgr.hh:126
+msgid   "Search for files"
+msgstr  "Hledat soubory"
 
-#: ../xffm/response/customresponse.hh:55
-msgid   "Execute command"
-msgstr  "Spustit příkaz"
+#: ../xffm/find/fgr.hh:128
+msgid   "Contents:"
+msgstr  "Obsah:"
 
-#: ../xffm/response/customresponse.hh:103
-msgid   "Source File"
-msgstr  "Zdrojový soubor"
+#: ../xffm/find/fgr.hh:128
+msgid   "File's contents filtered as plain text."
+msgstr  "Obsah souboru filtrovaný jako prostý text."
 
-#: ../xffm/response/entryresponse.hh:439 ../xffm/response/passwdresponse.hh:242
-msgid   "Ok"
-msgstr  "Budiž"
+#: ../xffm/find/fgr.hh:131
+msgid   "Verbose output debugging mode."
+msgstr  "\"Ukecaný\" režim ladicího výstupu"
 
-#: ../xffm/response/commandprogressresponse.hh:31
-msgid   "Items:"
-msgstr  "Položky:"
+#: ../xffm/find/fgr.hh:133
+msgid   "Show version information"
+msgstr  "Zobrazit informace o verzi"
 
-#: ../xffm/response/passwdresponse.hh:19 ../xffm/response/passwdresponse.hh:25
-#: ../xffm/common/run.hh:464
+#: ../xffm/find/fgr.hh:135
+msgid   "Filter Details"
+msgstr  "Podrobnosti filtru"
+
+#: ../xffm/find/fgr.hh:140
+msgid   "Print..."
+msgstr  "Tisk…"
+
+#: ../xffm/find/fgr.hh:140
+#, fuzzy
+msgid   "The unique Process ID that identifies this process."
+msgstr  "Uživatel, který tento proces vlastní."
+
+#: ../xffm/find/fgr.hh:143
+msgid   "Filter"
+msgstr  "Filtr"
+
+#: ../xffm/find/fgr.hh:144
+msgid   "To display files which pass the filter (stars and regexps will be "
+        "processed)"
+msgstr  "Zobrazit soubory, které odpovídají zadání filtru (hvězdička bude "
+        "zpracována)"
+
+#: ../xffm/find/fgr.hh:147 ../xffm/find/fgr.hh:148 ../xffm/find/fgr.hh:149
+#: ../xffm/find/fgr.hh:150
+msgid   "KByte"
+msgstr  "KByte"
+
+#: ../xffm/find/fgr.hh:148
+msgid   "is greater than or equal to"
+msgstr  "je větší nebo rovno"
+
+#: ../xffm/find/fgr.hh:150
+msgid   "is less than or equal to"
+msgstr  "je menší nebo rovno"
+
+#: ../xffm/find/fgr.hh:152
+msgid   "Set UID"
+msgstr  "Nastavit UID"
+
+#: ../xffm/find/fgr.hh:152
+msgid   "Executable Text Files"
+msgstr  "Spustitelné textové soubory"
+
+#: ../xffm/find/fgr.hh:154
+msgid   "The permissions of the file, in octal notation."
+msgstr  "Oprávnění souboru v osmičkovém zápisu."
+
+#: ../xffm/find/fgr.hh:155
+msgid   "Type"
+msgstr  "Typ"
+
+#: ../xffm/find/fgr.hh:157 ../xffm/find/signals.hh:14
+msgid   "Any"
+msgstr  "Libovolný"
+
+#: ../xffm/find/fgr.hh:157
+msgid   "Default type"
+msgstr  "Výchozí typ"
+
+#: ../xffm/find/fgr.hh:158 ../xffm/common/preview.hh:478
+msgid   "Regular file"
+msgstr  "Obyčejný soubor"
+
+#: ../xffm/find/fgr.hh:159 ../xffm/find/signals.hh:8
+#: ../xffm/common/preview.hh:469 ../xffm/fm/view/local/popup.hh:987
+msgid   "Directory"
+msgstr  "Adresář"
+
+#: ../xffm/find/fgr.hh:160 ../xffm/find/signals.hh:9
+#: ../xffm/common/preview.hh:475
+msgid   "Symbolic Link"
+msgstr  "Symbolický odkaz"
+
+#: ../xffm/find/fgr.hh:161
+msgid   "UNIX Socket"
+msgstr  "Unixový soket"
+
+#: ../xffm/find/fgr.hh:162 ../xffm/find/signals.hh:11
+#: ../xffm/common/preview.hh:463
+msgid   "Block device"
+msgstr  "Blokové zařízení"
+
+#: ../xffm/find/fgr.hh:163 ../xffm/find/signals.hh:12
+#: ../xffm/common/preview.hh:466
+msgid   "Character device"
+msgstr  "Znakové zařízení"
+
+#: ../xffm/find/fgr.hh:164 ../xffm/find/signals.hh:13
+#: ../xffm/common/preview.hh:472
+msgid   "FIFO"
+msgstr  "Fronta FIFO"
+
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/find/fgr.hh:179 ../xffm/find/fgr.hh:180
+#: ../xffm/find/fgr.hh:183 ../xffm/find/fgr.hh:184 ../xffm/find/fgr.hh:187
+#: ../xffm/find/fgr.hh:188
+msgid   "TIME"
+msgstr  "CAS"
+
+#: ../xffm/find/fgr.hh:168 ../xffm/find/fgr.hh:171 ../xffm/find/fgr.hh:174
+#: ../xffm/find/fgr.hh:177
+msgid   "Previous"
+msgstr  "Předchozí"
+
+#: ../xffm/find/fgr.hh:175
+msgid   "Month"
+msgstr  "Měsíc"
+
+#: ../xffm/find/fgr.hh:177
+msgid   "Month(s)"
+msgstr  "Týdny"
+
+#: ../xffm/find/fgr.hh:180
+msgid   "Modification Time :"
+msgstr  "Čas změny :"
+
+#: ../xffm/find/fgr.hh:184
+msgid   "Access Time :"
+msgstr  "Čas přístupu :"
+
+#: ../xffm/find/fgr.hh:188
+msgid   "Creation Time :"
+msgstr  "Čas vytvoření :"
+
+#: ../xffm/find/fgr.hh:191 ../xffm/find/fgr.hh:192
+msgid   "uid"
+msgstr  "id uživatele (uid)"
+
+#: ../xffm/find/fgr.hh:192
+msgid   "User:"
+msgstr  "Uživatel:"
+
+#: ../xffm/find/fgr.hh:194 ../xffm/find/fgr.hh:195
+msgid   "gid"
+msgstr  "id skupiny (gid)"
+
+#: ../xffm/find/fgr.hh:195
+msgid   "Group:"
+msgstr  "Skupina:"
+
+#: ../xffm/find/fgr.hh:198
+msgid   "Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+        "character that  normally  follows  a file  name"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:200
+msgid   "Content View"
+msgstr  "Zobrazení obsahu"
+
+#: ../xffm/find/fgr.hh:201 ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:203
+#: ../xffm/find/fgr.hh:204
+msgid   "STRING"
+msgstr  "ŘETĚZEC"
+
+#: ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:204
+#: ../xffm/fm/view/local/popup.hh:750
+msgid   "Regular expression"
+msgstr  "Regulární výraz"
+
+#: ../xffm/find/fgr.hh:204
+msgid   "Extended"
+msgstr  "Rozšířená"
+
+#: ../xffm/find/fgr.hh:206
+msgid   "Ignore case"
+msgstr  "Ignorovat velikost písmen"
+
+#: ../xffm/find/fgr.hh:208
+msgid   "Text Files"
+msgstr  "Textové soubory"
+
+#: ../xffm/find/fgr.hh:214
+msgid   "Words"
+msgstr  "Slov"
+
+#: ../xffm/find/fgr.hh:216
+msgid   "Lines"
+msgstr  "Řádek"
+
+#: ../xffm/find/fgr.hh:362
+#, c-format
+msgid   "Usage : %s [OPTIONS]\n"
+msgstr  "Použití : %s [Volby]\n"
+
+#: ../xffm/find/signals.hh:7
+msgid   "Regular"
+msgstr  "regulární"
+
+#: ../xffm/find/signals.hh:10 ../xffm/common/preview.hh:481
+msgid   "Socket"
+msgstr  "Soket"
+
+#: ../xffm/find/signals.hh:369 ../xffm/find/signals.hh:803
+#, fuzzy
+msgid   "No editor for current action."
+msgstr  "Bez aktuálních kroků."
+
+#: ../xffm/find/signals.hh:427
+msgid   "Upper limit:"
+msgstr  "Horní mez:"
+
+#: ../xffm/find/signals.hh:429
+msgid   "Counting files..."
+msgstr  "Jsou počítány soubory ..."
+
+#: ../xffm/find/signals.hh:444
+#, c-format
+msgid   "Found %d match"
+msgid_plural    "Found %d matches"
+msgstr[0]       "Nalezen %d výskyt"
+msgstr[1]       "Nalezeny %d výskyty"
+msgstr[2]       "Nalezeno %d výskytů"
+
+#: ../xffm/find/signals.hh:446
+#, c-format
+msgid   "%s Finished : %s"
+msgstr  "%s dokončeno: %s"
+
+#: ../xffm/find/signals.hh:569 ../xffm/find/signals.hh:571
+msgid   "Searching..."
+msgstr  "Vyhledává se…"
+
+#: ../xffm/common/preview.hh:581
+msgid   "Empty file"
+msgstr  "Prázdný soubor"
+
+#: ../xffm/common/preview.hh:636
+#, c-format
+msgid   "Cannot read from %s"
+msgstr  "Nelze číst z %s"
+
+#: ../xffm/common/settings.hh:30
+msgid   "New File:"
+msgstr  "Nový soubor:"
+
+#: ../xffm/common/gio.hh:91
+msgid   "Copying files"
+msgstr  "Kopírují se soubory"
+
+#: ../xffm/common/gio.hh:93 ../xffm/common/dnd.hh:35
+#: ../xffm/fm/dialog/clipboard.hh:30
+msgid   "Moving files"
+msgstr  "Přesouvají se soubory"
+
+#: ../xffm/common/gio.hh:95
+msgid   "linking"
+msgstr  "linkuji"
+
+#: ../xffm/common/gio.hh:97
+msgid   "rename"
+msgstr  "rename"
+
+#: ../xffm/common/gio.hh:449
+#, c-format
+msgid   "(%d of %d)"
+msgstr  "(%d z %d)"
+
+#: ../xffm/common/util.hh:1404
+#, c-format
+msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
+        "attribute on that file."
+msgstr  ""
+
+#: ../xffm/common/util.hh:1406 ../xffm/common/util.hh:1441
+#, c-format
+msgid   "Open with %s"
+msgstr  "Otevřít pomocí %s"
+
+#: ../xffm/common/util.hh:1406
+msgid   "Text Editor"
+msgstr  "Textový editor"
+
+#: ../xffm/common/util.hh:1443 ../xffm/gtk/gtk.hh:70
+msgid   "Execute Shell Command"
+msgstr  "Spustit shellový příkaz"
+
+#: ../xffm/common/util.hh:1447
+msgid   "Console: quickly run single commands -- write a command here and "
+        "press enter."
+msgstr  "Konzole: pro rychlé spuštění jednoduchých příkazů -- zde napište "
+        "příkaz a potvrďte."
+
+#: ../xffm/common/util.hh:1452 ../xffm/fm/view/local/popup.hh:1033
+#: ../xffm/fm/view/local/popup.hh:1336 ../xffm/fm/view/local/popup.hh:1353
+msgid   "Run in Terminal"
+msgstr  "Spustit v terminálu"
+
+#: ../xffm/common/dnd.hh:41 ../xffm/fm/dialog/clipboard.hh:23
+msgid   "Copying files locally"
+msgstr  "Kopírují se soubory místně"
+
+#: ../xffm/common/dnd.hh:47
+msgid   "Create Link"
+msgstr  "Vytvořit spojení"
+
+#: ../xffm/common/dnd.hh:63
+msgid   "more"
+msgstr  "více"
+
+#: ../xffm/common/run.hh:338 ../xffm/fm/view/local/popup.hh:1149
+msgid   "error"
+msgstr  "chyba"
+
+#: ../xffm/common/run.hh:342
+msgid   "warning"
+msgstr  "varování"
+
+#: ../xffm/common/run.hh:464 ../xffm/response/passwdresponse.hh:28
+#: ../xffm/response/passwdresponse.hh:34
 msgid   "Enter password"
 msgstr  "Zadejte heslo"
 
-#: ../xffm/response/passwdresponse.hh:179
-msgid   "User Input"
-msgstr  "Uživatelský vstup"
-
-#: ../xffm/response/passwdresponse.hh:195
-msgid   "Response Requested"
-msgstr  "Odpověď vyžádána"
-
-#: ../xffm/response/timeoutresponse.hh:57
-msgid   "Dismiss"
-msgstr  "Zahodit"
-
-#: ../xffm/response/commandresponse.hh:19
-msgid   "Running"
-msgstr  "Běží"
-
-#: ../xffm/response/commandresponse.hh:24
-msgid   "Waiting for operation to finish..."
-msgstr  "Čekám na dokončení operace..."
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:11
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:214
-msgid   "Remove Button Contents"
-msgstr  "Odstranit obsah tlačítka"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:67
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:209
-#, fuzzy
-msgid   "Add custom content"
-msgstr  "Přidal vlastní obsah tlačítka"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:68
-msgid   "Select file to load"
-msgstr  "Výběr souboru k načtení"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:125
-#, c-format
-msgid   "Cannot load file %s. Reason: %s"
-msgstr  "Nelze číst ze souboru %s. Důvod: %s"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:154
-msgid   "You need to restart the application"
-msgstr  "Je třeba restartovat aplikaci"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:187
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:191
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:195
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:198 ../xffm/fm/view/pkg/model.hh:29
-#: ../xffm/fm/view/pkg/popup.hh:35
-msgid   "Software Updater"
-msgstr  "Aktualizace softwaru"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:236
-#: ../xffm/fm/view/pkg/model.hh:108 ../xffm/fm/view/pkg/model.hh:299
-#: ../xffm/fm/view/pkg/model.hh:306 ../xffm/fm/view/pkg/popup.hh:151
-#: ../xffm/common/gtk.hh:77
-msgid   "Search"
-msgstr  "Hledat"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:240 ../xffm/common/gtk.hh:67
+#: ../xffm/gtk/gtk.hh:68 ../xffm/fm/dialog/notebook/vbuttonbox.hh:252
 msgid   "Open terminal"
 msgstr  "Otevřít terminál"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:244
-msgid   "Open a New Window"
-msgstr  "Otevřít nové okno"
+#: ../xffm/gtk/gtk.hh:72 ../xffm/fm/view/local/popup.hh:157
+msgid   "Paste"
+msgstr  "Vložit"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:250
-msgid   "Differences"
-msgstr  "Rozdíly"
+#: ../xffm/gtk/gtk.hh:74 ../xffm/fm/view/local/popup.hh:151
+#: ../xffm/fm/view/root/popup.hh:224
+msgid   "Add bookmark"
+msgstr  "Přidat záložku"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:256
-#: ../xffm/fm/view/root/model.hh:110
-msgid   "Home Directory"
-msgstr  "Domovský adresář"
+#: ../xffm/gtk/gtk.hh:76 ../xffm/fm/view/local/popup.hh:152
+#: ../xffm/fm/view/root/popup.hh:170
+msgid   "Remove bookmark"
+msgstr  "Odstranit záložku"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:261
-#: ../xffm/fm/view/root/model.hh:168 ../xffm/fm/view/fstab/popup.hh:29
-msgid   "Disk Image Mounter"
-msgstr  "Připojování obrazů disků"
+#: ../xffm/gtk/gtk.hh:78 ../xffm/fm/view/pkg/model.hh:108
+#: ../xffm/fm/view/pkg/model.hh:300 ../xffm/fm/view/pkg/model.hh:307
+#: ../xffm/fm/view/pkg/popup.hh:151
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:248
+msgid   "Search"
+msgstr  "Hledat"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:266
-#: ../xffm/fm/view/root/model.hh:137
-msgid   "Trash bin"
-msgstr  "Odpadkový koš"
-
-#: ../xffm/fm/dialog/notebook/notebook.hh:56
-msgid   "Long press time"
-msgstr  "Čas dlouhého stisku"
-
-#: ../xffm/fm/dialog/notebook/notebook.hh:75 ../xffm/common/gtk.hh:139
-msgid   "New Tab"
-msgstr  "Nová karta"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:178
-msgid   "Open menu"
-msgstr  "Otevřít nabídku"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:230
-msgid   "View as list"
-msgstr  "Zobrazit jako seznam"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:231
-msgid   "Show hidden files"
-msgstr  "Zobrazovat skryté soubory"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:232
-msgid   "Show Backup Files"
-msgstr  "Zobrazovat záložní soubory"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:233
-msgid   "Sort data in descending order"
-msgstr  "Seřadit data sestupně"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:235
-msgid   "Sort by date"
-msgstr  "Řadit podle data"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:236
-msgid   "Sort by size"
-msgstr  "Seřadit podle velikosti"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:237 ../xffm/common/gtk.hh:81
+#: ../xffm/gtk/gtk.hh:82 ../xffm/fm/dialog/notebook/createini.hh:83
+#: ../xffm/fm/dialog/notebook/menupopover.hh:237
 msgid   "Exit"
 msgstr  "Konec"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:270
-msgid   "Main menu"
-msgstr  "Hlavní nabídka"
+#: ../xffm/gtk/gtk.hh:84 ../xffm/fm/view/local/popup.hh:85
+#: ../xffm/fm/view/local/popup.hh:142 ../xffm/fm/view/local/popup.hh:1332
+#: ../xffm/fm/view/local/popup.hh:1339 ../xffm/fm/view/local/popup.hh:1349
+#: ../xffm/fm/view/local/popup.hh:1356
+msgid   "Open with"
+msgstr  "Otevřít s"
 
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:375
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:377
-msgid   "Go to"
-msgstr  "Přejít na"
+#: ../xffm/gtk/gtk.hh:86 ../xffm/fm/view/local/popup.hh:100
+#: ../xffm/fm/view/local/popup.hh:156
+msgid   "Cut"
+msgstr  "Vyjmout"
 
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:382
-#: ../xffm/fm/view/local/popup.hh:887 ../xffm/fm/view/local/popup.hh:981
+#: ../xffm/gtk/gtk.hh:88 ../xffm/fm/view/local/popup.hh:99
+#: ../xffm/fm/view/local/popup.hh:155
+msgid   "Copy"
+msgstr  "Kopírovat"
+
+#: ../xffm/gtk/gtk.hh:90 ../xffm/fm/view/local/rm.hh:176
+#: ../xffm/fm/view/local/popup.hh:103 ../xffm/fm/view/local/popup.hh:160
+msgid   "Delete"
+msgstr  "Smazat"
+
+#: ../xffm/gtk/gtk.hh:92 ../xffm/fm/view/local/rm.hh:165
+msgid   "Shred"
+msgstr  "Zničit"
+
+#: ../xffm/gtk/gtk.hh:95 ../xffm/fm/view/local/popup.hh:95
+#: ../xffm/fm/view/local/popup.hh:145 ../xffm/fm/view/root/popup.hh:169
+#: ../xffm/fm/view/fstab/popup.hh:20
+msgid   "Open in New Tab"
+msgstr  "Otevřít v nové kartě"
+
+#: ../xffm/gtk/gtk.hh:140 ../xffm/fm/dialog/notebook/notebook.hh:75
+msgid   "New Tab"
+msgstr  "Nová karta"
+
+#: ../xffm/gtk/dialogs.hh:42
+msgid   "Help"
+msgstr  "Nápověda"
+
+#: ../xffm/fm/view/pkg/model.hh:29 ../xffm/fm/view/pkg/popup.hh:35
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:194
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:198
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:202
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:205
+msgid   "Software Updater"
+msgstr  "Aktualizace softwaru"
+
+#: ../xffm/fm/view/pkg/model.hh:41 ../xffm/fm/view/pkg/model.hh:52
+msgid   "Add or remove software installed on the system"
+msgstr  "Přidat nebo odebrat software instalovaný v systému"
+
+#: ../xffm/fm/view/pkg/model.hh:111
+msgid   "String"
+msgstr  "Řetězec"
+
+#: ../xffm/fm/view/pkg/model.hh:117
+msgid   "Waiting for search results"
+msgstr  "Čeká se na výsledky hledání"
+
+#: ../xffm/fm/view/pkg/model.hh:175
+msgid   "No results"
+msgstr  "Žádné výsledky"
+
+#: ../xffm/fm/view/pkg/model.hh:374
+#, fuzzy
+msgid   "Currently busy\n"
+msgstr  "Aktuální album"
+
+#: ../xffm/fm/view/pkg/popup.hh:44
+msgid   "Update Database"
+msgstr  "Aktualizovat databázi"
+
+#: ../xffm/fm/view/pkg/popup.hh:45
+msgid   "Fetch"
+msgstr  "Získat"
+
+#: ../xffm/fm/view/pkg/popup.hh:46
+#, fuzzy
+msgid   "Install --dry-run"
+msgstr  "Nainstalovat modul"
+
+#: ../xffm/fm/view/pkg/popup.hh:47
+msgid   "Install"
+msgstr  "Instalovat"
+
+#: ../xffm/fm/view/pkg/popup.hh:48
+#, fuzzy
+msgid   "Uninstall --dry-run"
+msgstr  "Odinstaluji"
+
+#: ../xffm/fm/view/pkg/popup.hh:49
+msgid   "Uninstall"
+msgstr  "Odinstalovat"
+
+#: ../xffm/fm/view/pkg/popup.hh:50
+msgid   "Information"
+msgstr  "Informace"
+
+#: ../xffm/fm/view/pkg/popup.hh:140
+msgid   "Version"
+msgstr  "Verze"
+
+#: ../xffm/fm/view/pkg/popup.hh:149
+msgid   "Go up"
+msgstr  "Jít výš"
+
+#: ../xffm/fm/view/pkg/popup.hh:152
+msgid   "Search packages"
+msgstr  "Hledat balíčky"
+
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:95
+#, c-format
+msgid   "Loading %s...%s"
+msgstr  "Nahrávám %s...%s"
+
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:95
+msgid   "Please Wait..."
+msgstr  "Čekejte prosím..."
+
+#: ../xffm/fm/view/local/model.hh:124
+#, c-format
+msgid   "Reading \"%s\""
+msgstr  "Čte se „%s“"
+
+#: ../xffm/fm/view/local/model.hh:577 ../xffm/fm/view/base/monitor.hh:34
+#, c-format
+msgid   "Files: %s"
+msgstr  "Souborů: %s"
+
+#: ../xffm/fm/view/local/model.hh:580
+#, c-format
+msgid   "Loaded %d of %d articles"
+msgstr  "Načteno %d z %d příspěvků"
+
+#: ../xffm/fm/view/local/rm.hh:59
+#, c-format
+msgid   "Delete %s"
+msgstr  "Odstranit %s"
+
+#: ../xffm/fm/view/local/rm.hh:61
+msgid   "Warning: "
+msgstr  "Pozor: "
+
+#: ../xffm/fm/view/local/rm.hh:61 ../xffm/fm/view/local/popup.hh:557
+msgid   "Multiple selections"
+msgstr  "Více výběrů"
+
+#: ../xffm/fm/view/local/rm.hh:92
+msgid   "Remove"
+msgstr  "Odstranit"
+
+#: ../xffm/fm/view/local/rm.hh:142
+msgid   "Apply to all"
+msgstr  "Použít na všechny"
+
+#: ../xffm/fm/view/local/rm.hh:183
+msgid   "Trash"
+msgstr  "Koš"
+
+#: ../xffm/fm/view/local/popup.hh:94
+msgid   "New"
+msgstr  "Nový"
+
+#: ../xffm/fm/view/local/popup.hh:101 ../xffm/fm/view/local/popup.hh:159
+#: ../xffm/fm/view/local/popup.hh:232 ../xffm/fm/view/local/popup.hh:234
+msgid   "Paste into"
+msgstr  "Vložit do"
+
+#: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:158
+#, fuzzy
+msgid   "There is nothing on the clipboard to paste."
+msgstr  "Ve schránce není žádný element pro vložení."
+
+#: ../xffm/fm/view/local/popup.hh:106
+msgid   "Select All"
+msgstr  "Vybrat vše"
+
+#: ../xffm/fm/view/local/popup.hh:107 ../xffm/fm/view/local/popup.hh:746
+#, fuzzy
+msgid   "Match regular expression"
+msgstr  "Srovnávat jako regulární výraz"
+
+#: ../xffm/fm/view/local/popup.hh:143 ../xffm/fm/view/local/popup.hh:1029
+msgid   "Run Executable..."
+msgstr  "Spustit program…"
+
+#: ../xffm/fm/view/local/popup.hh:144 ../xffm/fm/view/local/popup.hh:877
+msgid   "Extract files from the archive"
+msgstr  "Rozbalit soubory z archivu"
+
+#: ../xffm/fm/view/local/popup.hh:146 ../xffm/fm/view/local/popup.hh:928
+msgid   "Create a compressed archive with the selected objects"
+msgstr  "Vytvořit komprimovaný archiv s vybranými objekty"
+
+#: ../xffm/fm/view/local/popup.hh:148 ../xffm/fm/view/root/popup.hh:172
+#: ../xffm/fm/view/fstab/popup.hh:37
+msgid   "Mount the volume associated with this folder"
+msgstr  "Připojit svazek asociovaný s touto složkou"
+
+#: ../xffm/fm/view/local/popup.hh:149 ../xffm/fm/view/root/popup.hh:173
+#: ../xffm/fm/view/fstab/popup.hh:38
+msgid   "Unmount the volume associated with this folder"
+msgstr  "Odpojit svazek asociovaný s touto složkou"
+
+#: ../xffm/fm/view/local/popup.hh:161 ../xffm/fm/view/local/popup.hh:1242
+msgid   "Rename"
+msgstr  "Přejmenovat"
+
+#: ../xffm/fm/view/local/popup.hh:162 ../xffm/fm/view/local/popup.hh:1225
+msgid   "Duplicate"
+msgstr  "Duplikovat"
+
+#: ../xffm/fm/view/local/popup.hh:163 ../xffm/fm/view/local/popup.hh:1208
+msgid   "Link"
+msgstr  "Spojit"
+
+#: ../xffm/fm/view/local/popup.hh:164
+msgid   "Properties"
+msgstr  "Vlastnosti"
+
+#: ../xffm/fm/view/local/popup.hh:554
+msgid   "Files:"
+msgstr  "Soubory:"
+
+#: ../xffm/fm/view/local/popup.hh:744
+msgid   "Select items"
+msgstr  "Označit položky"
+
+#: ../xffm/fm/view/local/popup.hh:761
+msgid   "Regular Expression syntax is incorrect"
+msgstr  "Syntaxe regulárního výrazu je nesprávná"
+
+#: ../xffm/fm/view/local/popup.hh:791
+msgid   "No selection"
+msgstr  "Nic nevybráno"
+
+#: ../xffm/fm/view/local/popup.hh:791
+msgid   "No matches."
+msgstr  "Žádné shody."
+
+#: ../xffm/fm/view/local/popup.hh:983 ../xffm/fm/view/local/popup.hh:1156
+msgid   "Create new..."
+msgstr  "Přidat novou…"
+
+#: ../xffm/fm/view/local/popup.hh:990 ../xffm/fm/view/local/popup.hh:1085
+#: ../xffm/fm/view/local/popup.hh:1159
+msgid   "New Name:"
+msgstr  "Nové jméno:"
+
+#: ../xffm/fm/view/local/popup.hh:998
+msgid   "No name"
+msgstr  "Žádný název"
+
+#: ../xffm/fm/view/local/popup.hh:1011
+#, c-format
+msgid   "Another file with the same name already exists in “%s”."
+msgstr  "Jiný soubor se stejným názvem již existuje v „%s“."
+
+#: ../xffm/fm/view/local/popup.hh:1036
+msgid   "Arguments for the Command"
+msgstr  "Argumenty pro příkaz"
+
+#: ../xffm/fm/view/local/popup.hh:1117 ../xffm/fm/view/root/popup.hh:237
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:383
 msgid   "Specify Output Directory..."
 msgstr  "Zadejte výstupní složku..."
 
+#: ../xffm/fm/view/local/popup.hh:1148
 #: ../xffm/fm/dialog/notebook/page/pathbar.hh:409
 msgid   "Not a directory"
 msgstr  "Není adresář"
+
+#: ../xffm/fm/view/local/popup.hh:1307
+msgid   "You have selected multiple files or folders"
+msgstr  "Bylo vybráno více souborů nebo složek"
+
+#: ../xffm/fm/view/local/popup.hh:1375 ../xffm/fm/view/local/view.hh:156
+msgid   "Invalid entry"
+msgstr  "Neplatný vstup"
+
+#: ../xffm/fm/view/local/view.hh:177
+#, c-format
+msgid   "The volume '%s' is not mounted."
+msgstr  "Svazek '%s' není připojen."
+
+#: ../xffm/fm/view/local/properties.hh:241
+msgid   "Properties and Attributes"
+msgstr  "Vlastnosti a atributy"
+
+#: ../xffm/fm/view/local/properties.hh:270
+msgid   "File Mode:"
+msgstr  "Režim souboru:"
+
+#: ../xffm/fm/view/local/properties.hh:296
+msgid   "File:"
+msgstr  "Soubor:"
+
+#: ../xffm/fm/view/local/properties.hh:308
+msgid   "Apply changes"
+msgstr  "Provést změny"
+
+#: ../xffm/fm/view/local/properties.hh:469
+msgid   "Encoding"
+msgstr  "Kódování"
+
+#: ../xffm/fm/view/local/properties.hh:470 ../xffm/fm/view/treeview.hh:22
+msgid   "Mimetype"
+msgstr  "Typ souboru"
+
+#: ../xffm/fm/view/local/properties.hh:474 ../xffm/fm/view/treeview.hh:19
+msgid   "Size"
+msgstr  "Velikost"
+
+#: ../xffm/fm/view/local/properties.hh:475 ../xffm/fm/view/treeview.hh:20
+msgid   "Date"
+msgstr  "Datum"
+
+#: ../xffm/fm/view/local/properties.hh:492
+msgid   "Successfully moved to trash."
+msgstr  "Úspěšně přesunuto do koše."
+
+#: ../xffm/fm/view/local/properties.hh:493
+msgid   "Source:"
+msgstr  "Zdroj:"
+
+#: ../xffm/fm/view/root/model.hh:124
+msgid   "Root Directory"
+msgstr  "Kořenový adresář"
+
+#: ../xffm/fm/view/root/model.hh:140
+msgid   "This is the root of the filesystem"
+msgstr  "Toto je kořen souborového systému"
+
+#: ../xffm/fm/view/root/model.hh:152
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:268
+msgid   "Home Directory"
+msgstr  "Domovský adresář"
+
+#: ../xffm/fm/view/root/model.hh:179
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:278
+msgid   "Trash bin"
+msgstr  "Odpadkový koš"
+
+#: ../xffm/fm/view/root/model.hh:210 ../xffm/fm/view/fstab/popup.hh:29
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:273
+msgid   "Disk Image Mounter"
+msgstr  "Připojování obrazů disků"
+
+#: ../xffm/fm/view/root/model.hh:227
+msgid   "Mount local disks and devices"
+msgstr  "Připojování lokálních disků a zařízení"
+
+#: ../xffm/fm/view/root/model.hh:267
+msgid   "Go to bookmarked location"
+msgstr  "Přejít na uložené umístění"
+
+#: ../xffm/fm/view/root/popup.hh:175
+msgid   "Empty trash"
+msgstr  "Vysypat koš"
+
+#: ../xffm/fm/view/root/popup.hh:228
+#, fuzzy
+msgid   "Ecrypt Volume"
+msgstr  "Svazek eCryptfs"
+
+#: ../xffm/fm/view/root/popup.hh:229
+msgid   "private"
+msgstr  "soukromá"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:162 ../xffm/fm/view/fuse/ecryptfs.hh:163
+#: ../xffm/fm/view/fuse/ecryptfs.hh:185
+msgid   "Mount"
+msgstr  "Instalovat"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:179
+#: ../xffm/fm/dialog/notebook/createini.hh:87
+#: ../xffm/fm/dialog/notebook/createini.hh:371
+msgid   "Save"
+msgstr  "Uložit"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:182
+msgid   "Load"
+msgstr  "Načíst"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:398
+#: ../xffm/fm/dialog/notebook/createini.hh:67
+msgid   "Options"
+msgstr  "Možnosti"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:399
+msgid   "Advanced"
+msgstr  "Pokročilé"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:692 ../xffm/fm/view/fstab/view.hh:1414
+#, c-format
+msgid   "Mounting %s"
+msgstr  "Připojuje se %s"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:745
+#, c-format
+msgid   "Enter Passphrase for %s"
+msgstr  "Zadat heslo pro %s"
+
+#: ../xffm/fm/view/fstab/popup.hh:21 ../xffm/fm/view/fstab/view.hh:1033
+msgid   "NFS Network Volume"
+msgstr  "Síťový svazek NFS"
+
+#: ../xffm/fm/view/fstab/popup.hh:22
+msgid   "SSHFS Remote Synchronization Folder"
+msgstr  "Složka vzdálené synchronizace pomocí SSHFS"
+
+#: ../xffm/fm/view/fstab/popup.hh:23 ../xffm/fm/view/fstab/view.hh:1085
+msgid   "eCryptfs Volume"
+msgstr  "Svazek eCryptfs"
+
+#: ../xffm/fm/view/fstab/popup.hh:24 ../xffm/fm/view/fstab/view.hh:1111
+msgid   "CIFS Volume"
+msgstr  "Svazek CIFS"
+
+#: ../xffm/fm/view/fstab/popup.hh:129
+msgid   "Mount Device"
+msgstr  "Připojit zařízení"
+
+#: ../xffm/fm/view/fstab/popup.hh:141 ../xffm/fm/view/fstab/view.hh:924
+msgid   "Mount point:"
+msgstr  "Přípojný bod:"
+
+#: ../xffm/fm/view/fstab/view.hh:591
+#, fuzzy
+msgid   "Mount point: "
+msgstr  "Přípojný bod:"
+
+#: ../xffm/fm/view/fstab/view.hh:592
+#, fuzzy
+msgid   "Mount device: "
+msgstr  "Připojit zařízení"
+
+#: ../xffm/fm/view/fstab/view.hh:660 ../xffm/fm/view/fstab/view.hh:676
+msgid   "Disks"
+msgstr  "Disky"
+
+#: ../xffm/fm/view/fstab/view.hh:922
+msgid   "No Label"
+msgstr  "Bez štítku"
+
+#: ../xffm/fm/view/fstab/view.hh:923
+msgid   "There is no file system available (unformatted)"
+msgstr  "Není dostupný žádný souborový systém (nezformátováno)"
+
+#: ../xffm/fm/view/fstab/view.hh:924
+msgid   "Not mounted"
+msgstr  "Nepřipojen"
+
+#: ../xffm/fm/view/fstab/view.hh:1059
+msgid   "SFTP (via SSH)"
+msgstr  "SFTP (přes SSH)"
+
+#: ../xffm/fm/view/fstab/view.hh:1414
+#, c-format
+msgid   "Unmounting %s"
+msgstr  "Odpojuje se %s"
+
+#: ../xffm/fm/view/base/signals.hh:845
+msgid   "Trash is empty"
+msgstr  "Koš je prázdný"
+
+#: ../xffm/fm/view/base/signals.hh:847
+msgid   "Directory does not exist."
+msgstr  "Adresář neexistuje."
+
+#: ../xffm/fm/view/treeview.hh:17
+msgid   "Name"
+msgstr  "Jméno"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
+msgid   "Embedded Terminal"
+msgstr  "Vestavěný terminál"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
+#, fuzzy
+msgid   "All items in the iconview."
+msgstr  "Vybere všechny položky na plátně."
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
+msgid   "Scripting"
+msgstr  "Skriptování"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
+msgid   "Clear Log"
+msgstr  "Vyprázdnit záznam"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
+msgid   "Terminal font"
+msgstr  "Písmo terminálu"
 
 #: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
 msgid   "Renice Process"
@@ -812,16 +1205,21 @@ msgstr  "Neoprávněný přístup do paměti (SIGSEGV)"
 msgid   "PID"
 msgstr  "PID"
 
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:376
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:378
+msgid   "Go to"
+msgstr  "Přejít na"
+
 #: ../xffm/fm/dialog/notebook/page/page.hh:59
 msgid   "loading..."
 msgstr  "načítám..."
 
-#: ../xffm/fm/dialog/notebook/page/page.hh:151
+#: ../xffm/fm/dialog/notebook/page/page.hh:152
 #: ../xffm/fm/dialog/notebook/page/page.hh:167
 msgid   "Confirm Replace"
 msgstr  "Potvrdit nahrazení"
 
-#: ../xffm/fm/dialog/notebook/page/page.hh:153
+#: ../xffm/fm/dialog/notebook/page/page.hh:154
 msgid   "Destination File"
 msgstr  "Cílový soubor"
 
@@ -830,35 +1228,166 @@ msgstr  "Cílový soubor"
 msgid   "The output file %s already exists, do you want to overwrite it?"
 msgstr  "Soubor %s již existuje; přejete si jej přepsat?"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
-msgid   "Embedded Terminal"
-msgstr  "Vestavěný terminál"
-
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
+#: ../xffm/fm/dialog/notebook/createini.hh:67
 #, fuzzy
-msgid   "All items in the iconview."
-msgstr  "Vybere všechny položky na plátně."
+msgid   "maximum"
+msgstr  "Maximum"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
-msgid   "Scripting"
-msgstr  "Skriptování"
+#: ../xffm/fm/dialog/notebook/createini.hh:75
+msgid   "Add option"
+msgstr  "Přidat volbu"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
-msgid   "Clear Log"
-msgstr  "Vyprázdnit záznam"
+#: ../xffm/fm/dialog/notebook/createini.hh:79
+#, fuzzy
+msgid   "Remove option"
+msgstr  "Odstranit operaci"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
-msgid   "Terminal font"
-msgstr  "Písmo terminálu"
+#: ../xffm/fm/dialog/notebook/createini.hh:158
+#, fuzzy
+msgid   "icon ID"
+msgstr  "ikona"
 
-#: ../xffm/fm/dialog/clipboard.hh:23 ../xffm/common/dnd.hh:41
-msgid   "Copying files locally"
-msgstr  "Kopírují se soubory místně"
+#: ../xffm/fm/dialog/notebook/createini.hh:159
+#, fuzzy
+msgid   "tooltip"
+msgstr  "tip"
 
-#: ../xffm/fm/dialog/clipboard.hh:30 ../xffm/common/gio.hh:83
-#: ../xffm/common/dnd.hh:35
-msgid   "Moving files"
-msgstr  "Přesouvají se soubory"
+#: ../xffm/fm/dialog/notebook/createini.hh:160
+#, fuzzy
+msgid   "Select work directory"
+msgstr  "Vyberte jednu složku"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:163
+#, fuzzy
+msgid   "Select executable"
+msgstr  "Vybrat tabulky:"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:166
+msgid   "Run in terminal"
+msgstr  "Spustit v terminálu"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:234
+#: ../xffm/response/chooserresponse.hh:20
+msgid   "Open"
+msgstr  "Otevřít"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:268
+#: ../xffm/response/chooserresponse.hh:55
+#: ../xffm/response/chooserresponse.hh:69
+msgid   "Choose file"
+msgstr  "Zvolte soubor"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:277
+#: ../xffm/response/chooserresponse.hh:50
+#: ../xffm/response/chooserresponse.hh:62
+msgid   "Choose directory"
+msgstr  "Zvolte složku"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:366
+msgid   "Save File"
+msgstr  "Uložit soubor"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:380
+#, fuzzy
+msgid   "customButton.ini"
+msgstr  "Stisknout tlačítko"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:420
+msgid   "Option"
+msgstr  "Volba"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:424
+msgid   "text"
+msgstr  "text"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:431 ../xffm/completion/bash.hh:135
+msgid   "file"
+msgstr  "soubor"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:436
+msgid   "folder"
+msgstr  "složka"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:441
+msgid   "on"
+msgstr  "na"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:446
+msgid   "off"
+msgstr  "vypnuto"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:16
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:226
+msgid   "Remove Button Contents"
+msgstr  "Odstranit obsah tlačítka"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:75
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:221
+#, fuzzy
+msgid   "Add custom content"
+msgstr  "Přidal vlastní obsah tlačítka"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:76
+msgid   "Select file to load"
+msgstr  "Výběr souboru k načtení"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:132
+#, c-format
+msgid   "Cannot load file %s. Reason: %s"
+msgstr  "Nelze číst ze souboru %s. Důvod: %s"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:161
+msgid   "You need to restart the application"
+msgstr  "Je třeba restartovat aplikaci"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:216
+#, fuzzy
+msgid   "FIXME New custom content"
+msgstr  "Kontext provádění"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:256
+msgid   "Open a New Window"
+msgstr  "Otevřít nové okno"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:262
+msgid   "Differences"
+msgstr  "Rozdíly"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:178
+msgid   "Open menu"
+msgstr  "Otevřít nabídku"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:230
+msgid   "View as list"
+msgstr  "Zobrazit jako seznam"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:231
+msgid   "Show hidden files"
+msgstr  "Zobrazovat skryté soubory"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:232
+msgid   "Show Backup Files"
+msgstr  "Zobrazovat záložní soubory"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:233
+msgid   "Sort data in descending order"
+msgstr  "Seřadit data sestupně"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:235
+msgid   "Sort by date"
+msgstr  "Řadit podle data"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:236
+msgid   "Sort by size"
+msgstr  "Seřadit podle velikosti"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:270
+msgid   "Main menu"
+msgstr  "Hlavní nabídka"
+
+#: ../xffm/fm/dialog/notebook/notebook.hh:56
+msgid   "Long press time"
+msgstr  "Čas dlouhého stisku"
 
 #: ../xffm/fm/dialog/dialog.hh:122
 msgid   "Removed"
@@ -868,484 +1397,80 @@ msgstr  "Odstraněno"
 msgid   "Detected device(s):"
 msgstr  "Detekovaná zařízení:"
 
-#: ../xffm/fm/view/local/model.hh:124
-#, c-format
-msgid   "Reading \"%s\""
-msgstr  "Čte se „%s“"
+#: ../xffm/response/progress.hh:82 ../xffm/response/commandresponse.hh:57
+msgid   "Running"
+msgstr  "Běží"
 
-#: ../xffm/fm/view/local/model.hh:577 ../xffm/fm/view/base/monitor.hh:34
-#, c-format
-msgid   "Files: %s"
-msgstr  "Souborů: %s"
+#: ../xffm/response/progress.hh:87 ../xffm/response/commandresponse.hh:61
+msgid   "Waiting for operation to finish..."
+msgstr  "Čekám na dokončení operace..."
 
-#: ../xffm/fm/view/local/model.hh:580
-#, c-format
-msgid   "Loaded %d of %d articles"
-msgstr  "Načteno %d z %d příspěvků"
+#: ../xffm/response/passwdresponse.hh:131
+msgid   "User Input"
+msgstr  "Uživatelský vstup"
 
-#: ../xffm/fm/view/local/popup.hh:85 ../xffm/fm/view/local/popup.hh:142
-#: ../xffm/fm/view/local/popup.hh:1287 ../xffm/fm/view/local/popup.hh:1294
-#: ../xffm/fm/view/local/popup.hh:1305 ../xffm/fm/view/local/popup.hh:1312
-#: ../xffm/common/gtk.hh:83
-msgid   "Open with"
-msgstr  "Otevřít s"
+#: ../xffm/response/passwdresponse.hh:147
+msgid   "Response Requested"
+msgstr  "Odpověď vyžádána"
 
-#: ../xffm/fm/view/local/popup.hh:94
-msgid   "New"
-msgstr  "Nový"
+#: ../xffm/response/passwdresponse.hh:194 ../xffm/response/entryresponse.hh:457
+msgid   "Ok"
+msgstr  "Budiž"
 
-#: ../xffm/fm/view/local/popup.hh:95 ../xffm/fm/view/local/popup.hh:145
-#: ../xffm/fm/view/root/popup.hh:136 ../xffm/fm/view/fstab/popup.hh:20
-#: ../xffm/common/gtk.hh:94
-msgid   "Open in New Tab"
-msgstr  "Otevřít v nové kartě"
+#: ../xffm/response/customresponse.hh:55
+msgid   "Execute command"
+msgstr  "Spustit příkaz"
 
-#: ../xffm/fm/view/local/popup.hh:99 ../xffm/fm/view/local/popup.hh:155
-#: ../xffm/common/gtk.hh:87
-msgid   "Copy"
-msgstr  "Kopírovat"
+#: ../xffm/response/customresponse.hh:103
+msgid   "Source File"
+msgstr  "Zdrojový soubor"
 
-#: ../xffm/fm/view/local/popup.hh:100 ../xffm/fm/view/local/popup.hh:156
-#: ../xffm/common/gtk.hh:85
-msgid   "Cut"
-msgstr  "Vyjmout"
+#: ../xffm/response/timeoutresponse.hh:57
+msgid   "Dismiss"
+msgstr  "Zahodit"
 
-#: ../xffm/fm/view/local/popup.hh:101 ../xffm/fm/view/local/popup.hh:159
-#: ../xffm/fm/view/local/popup.hh:232 ../xffm/fm/view/local/popup.hh:234
-msgid   "Paste into"
-msgstr  "Vložit do"
+#: ../xffm/completion/bash.hh:133
+msgid   "Completion mode:"
+msgstr  "Režim doplňování:"
 
-#: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:158
+#: ../xffm/completion/bash.hh:134
+msgid   "command"
+msgstr  "příkaz"
+
+#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
+msgid   "Options >>"
+msgstr  "Možnosti rozhraní >>"
+
+#: ../xffm/completion/base.hh:28
+msgid   "Command"
+msgstr  "Příkaz"
+
+#: ../xffm/completion/base.hh:31
+msgid   "File"
+msgstr  "Soubor"
+
+#: ../xffm/completion/base.hh:34
 #, fuzzy
-msgid   "There is nothing on the clipboard to paste."
-msgstr  "Ve schránce není žádný element pro vložení."
-
-#: ../xffm/fm/view/local/popup.hh:103 ../xffm/fm/view/local/popup.hh:160
-#: ../xffm/fm/view/local/rm.hh:176 ../xffm/common/gtk.hh:89
-msgid   "Delete"
-msgstr  "Smazat"
-
-#: ../xffm/fm/view/local/popup.hh:106
-msgid   "Select All"
-msgstr  "Vybrat vše"
-
-#: ../xffm/fm/view/local/popup.hh:107 ../xffm/fm/view/local/popup.hh:755
-#, fuzzy
-msgid   "Match regular expression"
-msgstr  "Srovnávat jako regulární výraz"
-
-#: ../xffm/fm/view/local/popup.hh:143 ../xffm/fm/view/local/popup.hh:1105
-msgid   "Run Executable..."
-msgstr  "Spustit program…"
-
-#: ../xffm/fm/view/local/popup.hh:144 ../xffm/fm/view/local/popup.hh:875
-msgid   "Extract files from the archive"
-msgstr  "Rozbalit soubory z archivu"
-
-#: ../xffm/fm/view/local/popup.hh:146 ../xffm/fm/view/local/popup.hh:966
-msgid   "Create a compressed archive with the selected objects"
-msgstr  "Vytvořit komprimovaný archiv s vybranými objekty"
-
-#: ../xffm/fm/view/local/popup.hh:148 ../xffm/fm/view/fstab/popup.hh:37
-msgid   "Mount the volume associated with this folder"
-msgstr  "Připojit svazek asociovaný s touto složkou"
-
-#: ../xffm/fm/view/local/popup.hh:149 ../xffm/fm/view/fstab/popup.hh:38
-msgid   "Unmount the volume associated with this folder"
-msgstr  "Odpojit svazek asociovaný s touto složkou"
-
-#: ../xffm/fm/view/local/popup.hh:151 ../xffm/common/gtk.hh:73
-msgid   "Add bookmark"
-msgstr  "Přidat záložku"
-
-#: ../xffm/fm/view/local/popup.hh:152 ../xffm/fm/view/root/popup.hh:137
-#: ../xffm/common/gtk.hh:75
-msgid   "Remove bookmark"
-msgstr  "Odstranit záložku"
-
-#: ../xffm/fm/view/local/popup.hh:157 ../xffm/common/gtk.hh:71
-msgid   "Paste"
-msgstr  "Vložit"
-
-#: ../xffm/fm/view/local/popup.hh:161 ../xffm/fm/view/local/popup.hh:1231
-msgid   "Rename"
-msgstr  "Přejmenovat"
-
-#: ../xffm/fm/view/local/popup.hh:162 ../xffm/fm/view/local/popup.hh:1217
-msgid   "Duplicate"
-msgstr  "Duplikovat"
-
-#: ../xffm/fm/view/local/popup.hh:163 ../xffm/fm/view/local/popup.hh:1203
-msgid   "Link"
-msgstr  "Spojit"
-
-#: ../xffm/fm/view/local/popup.hh:164
-msgid   "Properties"
-msgstr  "Vlastnosti"
-
-#: ../xffm/fm/view/local/popup.hh:562
-msgid   "Files:"
-msgstr  "Soubory:"
-
-#: ../xffm/fm/view/local/popup.hh:565 ../xffm/fm/view/local/rm.hh:61
-msgid   "Multiple selections"
-msgstr  "Více výběrů"
-
-#: ../xffm/fm/view/local/popup.hh:753
-msgid   "Select items"
-msgstr  "Označit položky"
-
-#: ../xffm/fm/view/local/popup.hh:771
-msgid   "Regular Expression syntax is incorrect"
-msgstr  "Syntaxe regulárního výrazu je nesprávná"
-
-#: ../xffm/fm/view/local/popup.hh:801
-msgid   "No selection"
-msgstr  "Nic nevybráno"
-
-#: ../xffm/fm/view/local/popup.hh:801
-msgid   "No matches."
-msgstr  "Žádné shody."
-
-#: ../xffm/fm/view/local/popup.hh:1058
-msgid   "Create new..."
-msgstr  "Přidat novou…"
-
-#: ../xffm/fm/view/local/popup.hh:1065 ../xffm/fm/view/local/popup.hh:1146
-msgid   "New Name:"
-msgstr  "Nové jméno:"
-
-#: ../xffm/fm/view/local/popup.hh:1074
-msgid   "No name"
-msgstr  "Žádný název"
-
-#: ../xffm/fm/view/local/popup.hh:1087
-#, c-format
-msgid   "Another file with the same name already exists in “%s”."
-msgstr  "Jiný soubor se stejným názvem již existuje v „%s“."
-
-#: ../xffm/fm/view/local/popup.hh:1109 ../xffm/fm/view/local/popup.hh:1291
-#: ../xffm/fm/view/local/popup.hh:1309 ../xffm/common/util.hh:1452
-msgid   "Run in Terminal"
-msgstr  "Spustit v terminálu"
-
-#: ../xffm/fm/view/local/popup.hh:1112
-msgid   "Arguments for the Command"
-msgstr  "Argumenty pro příkaz"
-
-#: ../xffm/fm/view/local/popup.hh:1258
-msgid   "You have selected multiple files or folders"
-msgstr  "Bylo vybráno více souborů nebo složek"
-
-#: ../xffm/fm/view/local/popup.hh:1332 ../xffm/fm/view/local/view.hh:156
-msgid   "Invalid entry"
-msgstr  "Neplatný vstup"
-
-#: ../xffm/fm/view/local/properties.hh:245
-msgid   "Properties and Attributes"
-msgstr  "Vlastnosti a atributy"
-
-#: ../xffm/fm/view/local/properties.hh:274
-msgid   "File Mode:"
-msgstr  "Režim souboru:"
-
-#: ../xffm/fm/view/local/properties.hh:300
-msgid   "File:"
-msgstr  "Soubor:"
-
-#: ../xffm/fm/view/local/properties.hh:312
-msgid   "Apply changes"
-msgstr  "Provést změny"
-
-#: ../xffm/fm/view/local/properties.hh:477
-msgid   "Successfully moved to trash."
-msgstr  "Úspěšně přesunuto do koše."
-
-#: ../xffm/fm/view/local/properties.hh:478
-msgid   "Source:"
-msgstr  "Zdroj:"
-
-#: ../xffm/fm/view/local/rm.hh:59
-#, c-format
-msgid   "Delete %s"
-msgstr  "Odstranit %s"
-
-#: ../xffm/fm/view/local/rm.hh:61
-msgid   "Warning: "
-msgstr  "Pozor: "
-
-#: ../xffm/fm/view/local/rm.hh:92
-msgid   "Remove"
-msgstr  "Odstranit"
-
-#: ../xffm/fm/view/local/rm.hh:142
-msgid   "Apply to all"
-msgstr  "Použít na všechny"
-
-#: ../xffm/fm/view/local/rm.hh:165 ../xffm/common/gtk.hh:91
-msgid   "Shred"
-msgstr  "Zničit"
-
-#: ../xffm/fm/view/local/rm.hh:183
-msgid   "Trash"
-msgstr  "Koš"
-
-#: ../xffm/fm/view/local/view.hh:177
-#, c-format
-msgid   "The volume '%s' is not mounted."
-msgstr  "Svazek '%s' není připojen."
-
-#: ../xffm/fm/view/root/model.hh:82
-msgid   "Root Directory"
-msgstr  "Kořenový adresář"
-
-#: ../xffm/fm/view/root/model.hh:98
-msgid   "This is the root of the filesystem"
-msgstr  "Toto je kořen souborového systému"
-
-#: ../xffm/fm/view/root/model.hh:176 ../xffm/fm/view/root/model.hh:191
-msgid   "Mount local disks and devices"
-msgstr  "Připojování lokálních disků a zařízení"
-
-#: ../xffm/fm/view/root/model.hh:177 ../xffm/fm/view/fstab/popup.hh:23
-#: ../xffm/fm/view/fstab/view.hh:1084
-msgid   "eCryptfs Volume"
-msgstr  "Svazek eCryptfs"
-
-#: ../xffm/fm/view/root/model.hh:178 ../xffm/fm/view/fstab/popup.hh:22
-msgid   "SSHFS Remote Synchronization Folder"
-msgstr  "Složka vzdálené synchronizace pomocí SSHFS"
-
-#: ../xffm/fm/view/root/model.hh:179 ../xffm/fm/view/fstab/popup.hh:21
-#: ../xffm/fm/view/fstab/view.hh:1032
-msgid   "NFS Network Volume"
-msgstr  "Síťový svazek NFS"
-
-#: ../xffm/fm/view/root/model.hh:180 ../xffm/fm/view/fstab/popup.hh:24
-#: ../xffm/fm/view/fstab/view.hh:1110
-msgid   "CIFS Volume"
-msgstr  "Svazek CIFS"
-
-#: ../xffm/fm/view/root/model.hh:229
-msgid   "Go to bookmarked location"
-msgstr  "Přejít na uložené umístění"
-
-#: ../xffm/fm/view/root/popup.hh:138
-msgid   "Empty trash"
-msgstr  "Vysypat koš"
-
-#: ../xffm/fm/view/fstab/popup.hh:129
-msgid   "Mount Device"
-msgstr  "Připojit zařízení"
-
-#: ../xffm/fm/view/fstab/popup.hh:141 ../xffm/fm/view/fstab/view.hh:923
-msgid   "Mount point:"
-msgstr  "Přípojný bod:"
-
-#: ../xffm/fm/view/fstab/view.hh:590
-#, fuzzy
-msgid   "Mount point: "
-msgstr  "Přípojný bod:"
-
-#: ../xffm/fm/view/fstab/view.hh:591
-#, fuzzy
-msgid   "Mount device: "
-msgstr  "Připojit zařízení"
-
-#: ../xffm/fm/view/fstab/view.hh:659 ../xffm/fm/view/fstab/view.hh:675
-msgid   "Disks"
-msgstr  "Disky"
-
-#: ../xffm/fm/view/fstab/view.hh:921
-msgid   "No Label"
-msgstr  "Bez štítku"
-
-#: ../xffm/fm/view/fstab/view.hh:922
-msgid   "There is no file system available (unformatted)"
-msgstr  "Není dostupný žádný souborový systém (nezformátováno)"
-
-#: ../xffm/fm/view/fstab/view.hh:923
-msgid   "Not mounted"
-msgstr  "Nepřipojen"
-
-#: ../xffm/fm/view/fstab/view.hh:1058
-msgid   "SFTP (via SSH)"
-msgstr  "SFTP (přes SSH)"
-
-#: ../xffm/fm/view/fstab/view.hh:1413
-#, c-format
-msgid   "Unmounting %s"
-msgstr  "Odpojuje se %s"
-
-#: ../xffm/fm/view/fstab/view.hh:1413
-#, c-format
-msgid   "Mounting %s"
-msgstr  "Připojuje se %s"
-
-#: ../xffm/fm/view/pkg/model.hh:41 ../xffm/fm/view/pkg/model.hh:52
-msgid   "Add or remove software installed on the system"
-msgstr  "Přidat nebo odebrat software instalovaný v systému"
-
-#: ../xffm/fm/view/pkg/model.hh:111
-msgid   "String"
-msgstr  "Řetězec"
-
-#: ../xffm/fm/view/pkg/model.hh:116
-msgid   "Waiting for search results"
-msgstr  "Čeká se na výsledky hledání"
-
-#: ../xffm/fm/view/pkg/model.hh:174
-msgid   "No results"
-msgstr  "Žádné výsledky"
-
-#: ../xffm/fm/view/pkg/model.hh:373
-#, fuzzy
-msgid   "Currently busy\n"
-msgstr  "Aktuální album"
-
-#: ../xffm/fm/view/pkg/popup.hh:44
-msgid   "Update Database"
-msgstr  "Aktualizovat databázi"
-
-#: ../xffm/fm/view/pkg/popup.hh:45
-msgid   "Fetch"
-msgstr  "Získat"
-
-#: ../xffm/fm/view/pkg/popup.hh:46
-#, fuzzy
-msgid   "Install --dry-run"
-msgstr  "Nainstalovat modul"
-
-#: ../xffm/fm/view/pkg/popup.hh:47
-msgid   "Install"
-msgstr  "Instalovat"
-
-#: ../xffm/fm/view/pkg/popup.hh:48
-#, fuzzy
-msgid   "Uninstall --dry-run"
-msgstr  "Odinstaluji"
-
-#: ../xffm/fm/view/pkg/popup.hh:49
-msgid   "Uninstall"
-msgstr  "Odinstalovat"
-
-#: ../xffm/fm/view/pkg/popup.hh:50
-msgid   "Information"
-msgstr  "Informace"
-
-#: ../xffm/fm/view/pkg/popup.hh:140
-msgid   "Version"
-msgstr  "Verze"
-
-#: ../xffm/fm/view/pkg/popup.hh:149
-msgid   "Go up"
-msgstr  "Jít výš"
-
-#: ../xffm/fm/view/pkg/popup.hh:152
-msgid   "Search packages"
-msgstr  "Hledat balíčky"
-
-#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
-#, c-format
-msgid   "Loading %s...%s"
-msgstr  "Nahrávám %s...%s"
-
-#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
-msgid   "Please Wait..."
-msgstr  "Čekejte prosím..."
-
-#: ../xffm/fm/view/treeview.hh:17
-msgid   "Name"
-msgstr  "Jméno"
-
-#: ../xffm/fm/view/treeview.hh:19
-msgid   "Size"
-msgstr  "Velikost"
-
-#: ../xffm/fm/view/treeview.hh:20
-msgid   "Date"
-msgstr  "Datum"
-
-#: ../xffm/fm/view/treeview.hh:22
-msgid   "Mimetype"
-msgstr  "Typ souboru"
-
-#: ../xffm/fm/view/base/signals.hh:838
-msgid   "Trash is empty"
-msgstr  "Koš je prázdný"
-
-#: ../xffm/fm/view/base/signals.hh:840
-msgid   "Directory does not exist."
-msgstr  "Adresář neexistuje."
-
-#: ../xffm/common/settings.hh:30
-msgid   "New File:"
-msgstr  "Nový soubor:"
-
-#: ../xffm/common/gio.hh:81
-msgid   "Copying files"
-msgstr  "Kopírují se soubory"
-
-#: ../xffm/common/gio.hh:85
-msgid   "linking"
-msgstr  "linkuji"
-
-#: ../xffm/common/gio.hh:87
-msgid   "rename"
-msgstr  "rename"
-
-#: ../xffm/common/gio.hh:426
-#, c-format
-msgid   "(%d of %d)"
-msgstr  "(%d z %d)"
-
-#: ../xffm/common/dnd.hh:47
-msgid   "Create Link"
-msgstr  "Vytvořit spojení"
-
-#: ../xffm/common/util.hh:1404
-#, c-format
-msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
-        "attribute on that file."
-msgstr  ""
-
-#: ../xffm/common/util.hh:1406 ../xffm/common/util.hh:1441
-#, c-format
-msgid   "Open with %s"
-msgstr  "Otevřít pomocí %s"
-
-#: ../xffm/common/util.hh:1406
-msgid   "Text Editor"
-msgstr  "Textový editor"
-
-#: ../xffm/common/util.hh:1443 ../xffm/common/gtk.hh:69
-msgid   "Execute Shell Command"
-msgstr  "Spustit shellový příkaz"
-
-#: ../xffm/common/util.hh:1447
-msgid   "Console: quickly run single commands -- write a command here and "
-        "press enter."
-msgstr  "Konzole: pro rychlé spuštění jednoduchých příkazů -- zde napište "
-        "příkaz a potvrďte."
-
-#: ../xffm/common/gtk.hh:352 ../xffm/common/gtk.hh:360
-msgid   "Help"
-msgstr  "Nápověda"
-
-#: ../xffm/common/run.hh:338
-msgid   "error"
-msgstr  "chyba"
-
-#: ../xffm/common/run.hh:342
-msgid   "warning"
-msgstr  "varování"
-
-#: ../xffm/common/preview.hh:581
-msgid   "Empty file"
-msgstr  "Prázdný soubor"
-
-#: ../xffm/common/preview.hh:636
-#, c-format
-msgid   "Cannot read from %s"
-msgstr  "Nelze číst z %s"
+msgid   "Command history"
+msgstr  "Historie spouštění příkazů"
+
+#: ../xffm/completion/base.hh:40
+msgid   "Variable"
+msgstr  "Proměnná"
+
+#: ../xffm/completion/base.hh:43
+msgid   "Host"
+msgstr  "Počítač"
+
+#: ../xffm/completion/base.hh:55
+msgid   "Found no match"
+msgstr  "Nenalezena shoda"
+
+#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
+msgid   "Matches"
+msgstr  "Shodná slova"
+
+#: ../xffm/completion/base.hh:142
+msgid   "Too many files open"
+msgstr  "Je otevřeno příliš mnoho souborů"
 

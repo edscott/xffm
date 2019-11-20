@@ -1,12 +1,12 @@
-# Xffm+ translation file: lun ago 12 14:17:44 CDT 2019
-# Merged fron existing open source files
+# Xffm+ translation file: mié nov 20 12:45:54 CST 2019
+# Merged from existing open source files
 # http://xffm.org
 #
 #
 msgid   ""
 msgstr  "Project-Id-Version: xffm+\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2019-08-11 09:10-0500\n"
+        "POT-Creation-Date: 2019-11-20 12:34-0600\n"
         "PO-Revision-Date: 2012-10-21 10:08+0300\n"
         "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
         "Language-Team: Ukrainian <translation-team-uk@lists.sourceforge."
@@ -23,370 +23,27 @@ msgstr  "Project-Id-Version: xffm+\n"
 msgid   "No Read Permission"
 msgstr  "Немає прав для читання"
 
-#: ../xffm/completion/base.hh:28
-msgid   "Command"
-msgstr  "Команда"
-
-#: ../xffm/completion/base.hh:31
-msgid   "File"
-msgstr  "Файл"
-
-#: ../xffm/completion/base.hh:34
-msgid   "Command history"
-msgstr  "Журнал команд"
-
-#: ../xffm/completion/base.hh:37 ../xffm/find/dialog.hh:192
-msgid   "User"
-msgstr  "Користувач"
-
-#: ../xffm/completion/base.hh:40
-msgid   "Variable"
-msgstr  "Змінна"
-
-#: ../xffm/completion/base.hh:43
-msgid   "Host"
-msgstr  "Вузол"
-
-#: ../xffm/completion/base.hh:55
-msgid   "Found no match"
-msgstr  "Відповідників не знайдено"
-
-#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
-msgid   "Matches"
-msgstr  "Збіги"
-
-#: ../xffm/completion/base.hh:142
-msgid   "Too many files open"
-msgstr  "Відкрито надто багато файлів"
-
-#: ../xffm/completion/base.hh:339 ../xffm/find/fgr.hh:124
-msgid   "Options:"
-msgstr  "Параметри:"
-
-#: ../xffm/completion/bash.hh:133
-msgid   "Completion mode:"
-msgstr  "Режим автозавершення:"
-
-#: ../xffm/completion/bash.hh:134
-msgid   "command"
-msgstr  "команда"
-
-#: ../xffm/completion/bash.hh:135
-msgid   "file"
-msgstr  "файл"
-
-#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
-msgid   "Options >>"
-msgstr  "Параметри >>"
-
-#: ../xffm/find/fgr.hh:124 ../xffm/find/signals.hh:100
-#: ../xffm/find/dialog.hh:301
-msgid   "Path"
-msgstr  "Путь"
-
-#: ../xffm/find/fgr.hh:125
-msgid   "Locate documents and folders on this computer by name or content"
-msgstr  "Пошук за назвою чи змістом документів та тек на цьому комп'ютері"
-
-#: ../xffm/find/fgr.hh:126 ../xffm/find/dialog.hh:334
-msgid   "Filter:"
-msgstr  "Фільтр:"
-
-#: ../xffm/find/fgr.hh:126
-msgid   "Search for files"
-msgstr  "Пошук файлів"
-
-#: ../xffm/find/fgr.hh:128
-msgid   "Contents:"
-msgstr  "Вміст:"
-
-#: ../xffm/find/fgr.hh:128
-msgid   "File's contents filtered as plain text."
-msgstr  "Зміст файлу фільтрований як звичайний текст."
-
-#: ../xffm/find/fgr.hh:131
-msgid   "Verbose output debugging mode."
-msgstr  "Режим докладного виводу для зневаджування."
-
-#: ../xffm/find/fgr.hh:133
-msgid   "Show version information"
-msgstr  "Показати інформацію про версію"
-
-#: ../xffm/find/fgr.hh:135
-msgid   "Filter Details"
-msgstr  "Подробиці фільтра"
-
-#: ../xffm/find/fgr.hh:138 ../xffm/find/dialog.hh:173
-msgid   "Stay on single filesystem"
-msgstr  "Обмежити однією файловою системою"
-
-#: ../xffm/find/fgr.hh:140
-msgid   "Print..."
-msgstr  "Друк..."
-
-#: ../xffm/find/fgr.hh:140
-msgid   "The unique Process ID that identifies this process."
-msgstr  "Унікальний ідентифікатор цього процесу."
-
-#: ../xffm/find/fgr.hh:142 ../xffm/find/dialog.hh:170
-msgid   "Find hidden files and directories"
-msgstr  "Показувати приховані файли і теки"
-
-#: ../xffm/find/fgr.hh:143
-msgid   "Filter"
-msgstr  "Фільтр"
-
-#: ../xffm/find/fgr.hh:144
-msgid   "To display files which pass the filter (stars and regexps will be "
-        "processed)"
-msgstr  "Для відображення пропущених фільтром файлів (з обробкою символу \"*"
-        "\" та регулярних виразів)"
-
-#: ../xffm/find/fgr.hh:146 ../xffm/find/dialog.hh:167
-msgid   "Recursive"
-msgstr  "Рекурсивний"
-
-#: ../xffm/find/fgr.hh:147 ../xffm/find/fgr.hh:148 ../xffm/find/fgr.hh:149
-#: ../xffm/find/fgr.hh:150
-msgid   "KByte"
-msgstr  "кбайт"
-
-#: ../xffm/find/fgr.hh:148
-msgid   "is greater than or equal to"
-msgstr  "більше ніж або дорівнює"
-
-#: ../xffm/find/fgr.hh:150
-msgid   "is less than or equal to"
-msgstr  "менше ніж або дорівнює"
-
-#: ../xffm/find/fgr.hh:152
-msgid   "Set UID"
-msgstr  "Встановити UID"
-
-#: ../xffm/find/fgr.hh:152
-msgid   "Executable Text Files"
-msgstr  "Виконувані текстові файли"
-
-#: ../xffm/find/fgr.hh:154
-msgid   "The permissions of the file, in octal notation."
-msgstr  "Права доступу на файл у вісімковій формі."
-
-#: ../xffm/find/fgr.hh:155
-msgid   "Type"
-msgstr  "Тип"
-
-#: ../xffm/find/fgr.hh:157 ../xffm/find/signals.hh:14
-msgid   "Any"
-msgstr  "Будь-який"
-
-#: ../xffm/find/fgr.hh:157
-msgid   "Default type"
-msgstr  "Початковий тип"
-
-#: ../xffm/find/fgr.hh:158 ../xffm/common/preview.hh:478
-msgid   "Regular file"
-msgstr  "Звичайний файл"
-
-#: ../xffm/find/fgr.hh:159 ../xffm/find/signals.hh:8
-#: ../xffm/fm/view/local/popup.hh:1062 ../xffm/common/preview.hh:469
-msgid   "Directory"
-msgstr  "Каталог"
-
-#: ../xffm/find/fgr.hh:160 ../xffm/find/signals.hh:9
-#: ../xffm/common/preview.hh:475
-msgid   "Symbolic Link"
-msgstr  "Символічне посилання"
-
-#: ../xffm/find/fgr.hh:161
-msgid   "UNIX Socket"
-msgstr  "UNIX сокет"
-
-#: ../xffm/find/fgr.hh:162 ../xffm/find/signals.hh:11
-#: ../xffm/common/preview.hh:463
-msgid   "Block device"
-msgstr  "Блочний пристрій"
-
-#: ../xffm/find/fgr.hh:163 ../xffm/find/signals.hh:12
-#: ../xffm/common/preview.hh:466
-msgid   "Character device"
-msgstr  "Символьний пристрій"
-
-#: ../xffm/find/fgr.hh:164 ../xffm/find/signals.hh:13
-#: ../xffm/common/preview.hh:472
-msgid   "FIFO"
-msgstr  "буфер FIFO"
-
-#: ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168 ../xffm/find/dialog.hh:214
-msgid   "Minutes"
-msgstr  "Хвилини"
-
-#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
-#: ../xffm/find/fgr.hh:176 ../xffm/find/dialog.hh:263
-#: ../xffm/find/dialog.hh:363 ../xffm/fm/view/treeview.hh:18
-msgid   "Details"
-msgstr  "Подробиці"
-
-#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
-#: ../xffm/find/fgr.hh:176 ../xffm/find/fgr.hh:179 ../xffm/find/fgr.hh:180
-#: ../xffm/find/fgr.hh:183 ../xffm/find/fgr.hh:184 ../xffm/find/fgr.hh:187
-#: ../xffm/find/fgr.hh:188
-msgid   "TIME"
-msgstr  "Час"
-
-#: ../xffm/find/fgr.hh:168 ../xffm/find/fgr.hh:171 ../xffm/find/fgr.hh:174
-#: ../xffm/find/fgr.hh:177
-msgid   "Previous"
-msgstr  "Попереднє"
-
-#: ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171 ../xffm/find/dialog.hh:219
-msgid   "Hours"
-msgstr  "Години"
-
-#: ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174 ../xffm/find/dialog.hh:224
-msgid   "Days"
-msgstr  "Дні"
-
-#: ../xffm/find/fgr.hh:175
-msgid   "Month"
-msgstr  "Місяць"
-
-#: ../xffm/find/fgr.hh:177
-msgid   "Month(s)"
-msgstr  "Місяці"
-
-#: ../xffm/find/fgr.hh:180
-msgid   "Modification Time :"
-msgstr  "Час зміни:"
-
-#: ../xffm/find/fgr.hh:184
-msgid   "Access Time :"
-msgstr  "Час останнього доступу:"
-
-#: ../xffm/find/fgr.hh:188
-msgid   "Creation Time :"
-msgstr  "Час створення:"
-
-#: ../xffm/find/fgr.hh:191 ../xffm/find/fgr.hh:192
-msgid   "uid"
-msgstr  "власник"
-
-#: ../xffm/find/fgr.hh:192
-msgid   "User:"
-msgstr  "Користувач:"
-
-#: ../xffm/find/fgr.hh:194 ../xffm/find/fgr.hh:195
-msgid   "gid"
-msgstr  "група"
-
-#: ../xffm/find/fgr.hh:195
-msgid   "Group:"
-msgstr  "Група:"
-
-#: ../xffm/find/fgr.hh:198
-msgid   "Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
-        "character that  normally  follows  a file  name"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:200
-msgid   "Content View"
-msgstr  "Перегляд вмісту"
-
-#: ../xffm/find/fgr.hh:201 ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:203
-#: ../xffm/find/fgr.hh:204
-msgid   "STRING"
-msgstr  "РЯДОК"
-
-#: ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:204
-#: ../xffm/fm/view/local/popup.hh:759
-msgid   "Regular expression"
-msgstr  "Регулярний вираз"
-
-#: ../xffm/find/fgr.hh:204
-msgid   "Extended"
-msgstr  "Розширюється"
-
-#: ../xffm/find/fgr.hh:206
-msgid   "Ignore case"
-msgstr  "Ігнорувати регістр"
-
-#: ../xffm/find/fgr.hh:208
-msgid   "Text Files"
-msgstr  "Текстові файли"
-
-#: ../xffm/find/fgr.hh:210 ../xffm/find/dialog.hh:545
-msgid   "No match"
-msgstr  "Немає збігів"
-
-#: ../xffm/find/fgr.hh:212 ../xffm/find/dialog.hh:463
-msgid   "Line Count"
-msgstr  "Кількість рядків"
-
-#: ../xffm/find/fgr.hh:214
-msgid   "Words"
-msgstr  "Слів"
-
-#: ../xffm/find/fgr.hh:216
-msgid   "Lines"
-msgstr  "Рядки"
-
-#: ../xffm/find/fgr.hh:362
-#, c-format
-msgid   "Usage : %s [OPTIONS]\n"
-msgstr  "Вживання: %s [ОПЦІЇ]\n"
-
-#: ../xffm/find/signals.hh:7
-msgid   "Regular"
-msgstr  "Звичайна"
-
-#: ../xffm/find/signals.hh:10 ../xffm/common/preview.hh:481
-msgid   "Socket"
-msgstr  "сокет"
-
-#: ../xffm/find/signals.hh:66 ../xffm/find/signals.hh:454
-#: ../xffm/find/dialog.hh:176
-msgid   "Results"
-msgstr  "Результати"
-
-#: ../xffm/find/signals.hh:368 ../xffm/find/dialog.hh:577
-#: ../xffm/response/chooserresponse.hh:21 ../xffm/response/entryresponse.hh:435
-#: ../xffm/fm/view/local/properties.hh:314 ../xffm/fm/view/local/rm.hh:157
-#: ../xffm/common/gtk.hh:409
-msgid   "Cancel"
-msgstr  "Скасувати"
-
-#: ../xffm/find/signals.hh:396 ../xffm/find/signals.hh:830
-msgid   "No editor for current action."
-msgstr  "Не обрано редактора для поточної дії."
-
-#: ../xffm/find/signals.hh:454
-msgid   "Upper limit:"
-msgstr  "Верхня межа:"
-
-#: ../xffm/find/signals.hh:456
-msgid   "Counting files..."
-msgstr  "Підрахування файлів..."
-
-#: ../xffm/find/signals.hh:471
-#, c-format
-msgid   "Found %d match"
-msgid_plural    "Found %d matches"
-msgstr[0]       "Знайдено %d відповіжність"
-msgstr[1]       "Знайдено %d відповіжності"
-msgstr[2]       "Знайдено %d збігів"
-
-#: ../xffm/find/signals.hh:473
-#, c-format
-msgid   "%s Finished : %s"
-msgstr  "Завершено %s : %s"
-
-#: ../xffm/find/signals.hh:596 ../xffm/find/signals.hh:598
-msgid   "Searching..."
-msgstr  "Пошук…"
-
 #: ../xffm/find/dialog.hh:91 ../xffm/find/dialog.hh:143
 #: ../xffm/find/dialog.hh:604
 msgid   "Find"
 msgstr  "Знайти"
+
+#: ../xffm/find/dialog.hh:167 ../xffm/find/fgr.hh:146
+msgid   "Recursive"
+msgstr  "Рекурсивний"
+
+#: ../xffm/find/dialog.hh:170 ../xffm/find/fgr.hh:142
+msgid   "Find hidden files and directories"
+msgstr  "Показувати приховані файли і теки"
+
+#: ../xffm/find/dialog.hh:173 ../xffm/find/fgr.hh:138
+msgid   "Stay on single filesystem"
+msgstr  "Обмежити однією файловою системою"
+
+#: ../xffm/find/dialog.hh:176 ../xffm/find/signals.hh:65
+#: ../xffm/find/signals.hh:427
+msgid   "Results"
+msgstr  "Результати"
 
 #: ../xffm/find/dialog.hh:176
 msgid   "Upper limit"
@@ -404,6 +61,10 @@ msgstr  "кбайтів"
 msgid   "At Most"
 msgstr  "Щонайбільше"
 
+#: ../xffm/find/dialog.hh:192 ../xffm/completion/base.hh:37
+msgid   "User"
+msgstr  "Користувач"
+
 #: ../xffm/find/dialog.hh:197
 msgid   "Group"
 msgstr  "Група"
@@ -416,9 +77,21 @@ msgstr  "Вісімкові права"
 msgid   "SUID"
 msgstr  "SUID"
 
-#: ../xffm/find/dialog.hh:206 ../xffm/fm/view/local/popup.hh:1102
+#: ../xffm/find/dialog.hh:206 ../xffm/fm/view/local/popup.hh:1026
 msgid   "Executable"
 msgstr  "Виконуваний файл"
+
+#: ../xffm/find/dialog.hh:214 ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168
+msgid   "Minutes"
+msgstr  "Хвилини"
+
+#: ../xffm/find/dialog.hh:219 ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171
+msgid   "Hours"
+msgstr  "Години"
+
+#: ../xffm/find/dialog.hh:224 ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174
+msgid   "Days"
+msgstr  "Дні"
 
 #: ../xffm/find/dialog.hh:230
 msgid   "Months"
@@ -428,10 +101,25 @@ msgstr  "місяці"
 msgid   "File type : "
 msgstr  "Тип файлів: "
 
-#: ../xffm/find/dialog.hh:255 ../xffm/find/dialog.hh:595
-#: ../xffm/fm/dialog/notebook/page/page.hh:71 ../xffm/common/gtk.hh:79
+#: ../xffm/find/dialog.hh:255 ../xffm/find/dialog.hh:595 ../xffm/gtk/gtk.hh:80
+#: ../xffm/fm/dialog/notebook/page/page.hh:71
 msgid   "Close"
 msgstr  "Закрити"
+
+#: ../xffm/find/dialog.hh:263 ../xffm/find/dialog.hh:363
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/fm/view/treeview.hh:18
+msgid   "Details"
+msgstr  "Подробиці"
+
+#: ../xffm/find/dialog.hh:301 ../xffm/find/fgr.hh:124
+#: ../xffm/find/signals.hh:94
+msgid   "Path"
+msgstr  "Путь"
+
+#: ../xffm/find/dialog.hh:334 ../xffm/find/fgr.hh:126
+msgid   "Filter:"
+msgstr  "Фільтр:"
 
 #: ../xffm/find/dialog.hh:377
 msgid   "Contains"
@@ -453,6 +141,10 @@ msgstr  "Розширений регулярний вираз"
 msgid   "Include binary files"
 msgstr  "Включати двійкові файли"
 
+#: ../xffm/find/dialog.hh:463 ../xffm/find/fgr.hh:212
+msgid   "Line Count"
+msgstr  "Кількість рядків"
+
 #: ../xffm/find/dialog.hh:489
 msgid   "Match"
 msgstr  "Відповідність"
@@ -469,6 +161,19 @@ msgstr  "Тільки цілі слова"
 msgid   "lines"
 msgstr  "рядок"
 
+#: ../xffm/find/dialog.hh:545 ../xffm/find/fgr.hh:210
+msgid   "No match"
+msgstr  "Немає збігів"
+
+#: ../xffm/find/dialog.hh:577 ../xffm/find/signals.hh:341
+#: ../xffm/gtk/dialogs.hh:110 ../xffm/fm/view/local/rm.hh:157
+#: ../xffm/fm/view/local/properties.hh:310 ../xffm/fm/view/fuse/ecryptfs.hh:175
+#: ../xffm/fm/dialog/notebook/createini.hh:232
+#: ../xffm/fm/dialog/notebook/createini.hh:369
+#: ../xffm/response/entryresponse.hh:453 ../xffm/response/chooserresponse.hh:18
+msgid   "Cancel"
+msgstr  "Скасувати"
+
 #: ../xffm/find/dialog.hh:587
 msgid   "Clear"
 msgstr  "Очистити"
@@ -478,9 +183,9 @@ msgid   "Edit"
 msgstr  "Правка"
 
 #: ../xffm/find/dialog.hh:743 ../xffm/find/dialog.hh:758
-#: ../xffm/common/util.hh:1354 ../xffm/common/util.hh:1356
-#: ../xffm/common/util.hh:1362 ../xffm/common/util.hh:1364
-#: ../xffm/common/preview.hh:460
+#: ../xffm/common/preview.hh:460 ../xffm/common/util.hh:1354
+#: ../xffm/common/util.hh:1356 ../xffm/common/util.hh:1362
+#: ../xffm/common/util.hh:1364
 msgid   "unknown"
 msgstr  "Невідомо"
 
@@ -584,184 +289,871 @@ msgstr  "Зарезервовані символи для розширених �
         "Щоб отримати додаткову інформацію, наберіть \"man grep\"\n"
         "       у командному рядку.\n"
 
-#: ../xffm/response/chooserresponse.hh:23
-msgid   "Open"
-msgstr  "Відкрити"
+#: ../xffm/find/fgr.hh:124 ../xffm/fm/view/fuse/ecryptfs.hh:133
+#: ../xffm/completion/base.hh:339
+msgid   "Options:"
+msgstr  "Параметри:"
 
-#: ../xffm/response/chooserresponse.hh:56
-msgid   "Choose directory"
-msgstr  "Вибрати каталог"
+#: ../xffm/find/fgr.hh:125
+msgid   "Locate documents and folders on this computer by name or content"
+msgstr  "Пошук за назвою чи змістом документів та тек на цьому комп'ютері"
 
-#: ../xffm/response/chooserresponse.hh:60
-msgid   "Choose file"
-msgstr  "Вибрати файл"
+#: ../xffm/find/fgr.hh:126
+msgid   "Search for files"
+msgstr  "Пошук файлів"
 
-#: ../xffm/response/customresponse.hh:55
-msgid   "Execute command"
-msgstr  "Виконати команду"
+#: ../xffm/find/fgr.hh:128
+msgid   "Contents:"
+msgstr  "Вміст:"
 
-#: ../xffm/response/customresponse.hh:103
-msgid   "Source File"
-msgstr  "Файл джерела"
+#: ../xffm/find/fgr.hh:128
+msgid   "File's contents filtered as plain text."
+msgstr  "Зміст файлу фільтрований як звичайний текст."
 
-#: ../xffm/response/entryresponse.hh:439 ../xffm/response/passwdresponse.hh:242
-msgid   "Ok"
-msgstr  "Гаразд"
+#: ../xffm/find/fgr.hh:131
+msgid   "Verbose output debugging mode."
+msgstr  "Режим докладного виводу для зневаджування."
 
-#: ../xffm/response/commandprogressresponse.hh:31
-msgid   "Items:"
-msgstr  "Елементи:"
+#: ../xffm/find/fgr.hh:133
+msgid   "Show version information"
+msgstr  "Показати інформацію про версію"
 
-#: ../xffm/response/passwdresponse.hh:19 ../xffm/response/passwdresponse.hh:25
-#: ../xffm/common/run.hh:464
+#: ../xffm/find/fgr.hh:135
+msgid   "Filter Details"
+msgstr  "Подробиці фільтра"
+
+#: ../xffm/find/fgr.hh:140
+msgid   "Print..."
+msgstr  "Друк..."
+
+#: ../xffm/find/fgr.hh:140
+msgid   "The unique Process ID that identifies this process."
+msgstr  "Унікальний ідентифікатор цього процесу."
+
+#: ../xffm/find/fgr.hh:143
+msgid   "Filter"
+msgstr  "Фільтр"
+
+#: ../xffm/find/fgr.hh:144
+msgid   "To display files which pass the filter (stars and regexps will be "
+        "processed)"
+msgstr  "Для відображення пропущених фільтром файлів (з обробкою символу \"*"
+        "\" та регулярних виразів)"
+
+#: ../xffm/find/fgr.hh:147 ../xffm/find/fgr.hh:148 ../xffm/find/fgr.hh:149
+#: ../xffm/find/fgr.hh:150
+msgid   "KByte"
+msgstr  "кбайт"
+
+#: ../xffm/find/fgr.hh:148
+msgid   "is greater than or equal to"
+msgstr  "більше ніж або дорівнює"
+
+#: ../xffm/find/fgr.hh:150
+msgid   "is less than or equal to"
+msgstr  "менше ніж або дорівнює"
+
+#: ../xffm/find/fgr.hh:152
+msgid   "Set UID"
+msgstr  "Встановити UID"
+
+#: ../xffm/find/fgr.hh:152
+msgid   "Executable Text Files"
+msgstr  "Виконувані текстові файли"
+
+#: ../xffm/find/fgr.hh:154
+msgid   "The permissions of the file, in octal notation."
+msgstr  "Права доступу на файл у вісімковій формі."
+
+#: ../xffm/find/fgr.hh:155
+msgid   "Type"
+msgstr  "Тип"
+
+#: ../xffm/find/fgr.hh:157 ../xffm/find/signals.hh:14
+msgid   "Any"
+msgstr  "Будь-який"
+
+#: ../xffm/find/fgr.hh:157
+msgid   "Default type"
+msgstr  "Початковий тип"
+
+#: ../xffm/find/fgr.hh:158 ../xffm/common/preview.hh:478
+msgid   "Regular file"
+msgstr  "Звичайний файл"
+
+#: ../xffm/find/fgr.hh:159 ../xffm/find/signals.hh:8
+#: ../xffm/common/preview.hh:469 ../xffm/fm/view/local/popup.hh:987
+msgid   "Directory"
+msgstr  "Каталог"
+
+#: ../xffm/find/fgr.hh:160 ../xffm/find/signals.hh:9
+#: ../xffm/common/preview.hh:475
+msgid   "Symbolic Link"
+msgstr  "Символічне посилання"
+
+#: ../xffm/find/fgr.hh:161
+msgid   "UNIX Socket"
+msgstr  "UNIX сокет"
+
+#: ../xffm/find/fgr.hh:162 ../xffm/find/signals.hh:11
+#: ../xffm/common/preview.hh:463
+msgid   "Block device"
+msgstr  "Блочний пристрій"
+
+#: ../xffm/find/fgr.hh:163 ../xffm/find/signals.hh:12
+#: ../xffm/common/preview.hh:466
+msgid   "Character device"
+msgstr  "Символьний пристрій"
+
+#: ../xffm/find/fgr.hh:164 ../xffm/find/signals.hh:13
+#: ../xffm/common/preview.hh:472
+msgid   "FIFO"
+msgstr  "буфер FIFO"
+
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/find/fgr.hh:179 ../xffm/find/fgr.hh:180
+#: ../xffm/find/fgr.hh:183 ../xffm/find/fgr.hh:184 ../xffm/find/fgr.hh:187
+#: ../xffm/find/fgr.hh:188
+msgid   "TIME"
+msgstr  "Час"
+
+#: ../xffm/find/fgr.hh:168 ../xffm/find/fgr.hh:171 ../xffm/find/fgr.hh:174
+#: ../xffm/find/fgr.hh:177
+msgid   "Previous"
+msgstr  "Попереднє"
+
+#: ../xffm/find/fgr.hh:175
+msgid   "Month"
+msgstr  "Місяць"
+
+#: ../xffm/find/fgr.hh:177
+msgid   "Month(s)"
+msgstr  "Місяці"
+
+#: ../xffm/find/fgr.hh:180
+msgid   "Modification Time :"
+msgstr  "Час зміни:"
+
+#: ../xffm/find/fgr.hh:184
+msgid   "Access Time :"
+msgstr  "Час останнього доступу:"
+
+#: ../xffm/find/fgr.hh:188
+msgid   "Creation Time :"
+msgstr  "Час створення:"
+
+#: ../xffm/find/fgr.hh:191 ../xffm/find/fgr.hh:192
+msgid   "uid"
+msgstr  "власник"
+
+#: ../xffm/find/fgr.hh:192
+msgid   "User:"
+msgstr  "Користувач:"
+
+#: ../xffm/find/fgr.hh:194 ../xffm/find/fgr.hh:195
+msgid   "gid"
+msgstr  "група"
+
+#: ../xffm/find/fgr.hh:195
+msgid   "Group:"
+msgstr  "Група:"
+
+#: ../xffm/find/fgr.hh:198
+msgid   "Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+        "character that  normally  follows  a file  name"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:200
+msgid   "Content View"
+msgstr  "Перегляд вмісту"
+
+#: ../xffm/find/fgr.hh:201 ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:203
+#: ../xffm/find/fgr.hh:204
+msgid   "STRING"
+msgstr  "РЯДОК"
+
+#: ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:204
+#: ../xffm/fm/view/local/popup.hh:750
+msgid   "Regular expression"
+msgstr  "Регулярний вираз"
+
+#: ../xffm/find/fgr.hh:204
+msgid   "Extended"
+msgstr  "Розширюється"
+
+#: ../xffm/find/fgr.hh:206
+msgid   "Ignore case"
+msgstr  "Ігнорувати регістр"
+
+#: ../xffm/find/fgr.hh:208
+msgid   "Text Files"
+msgstr  "Текстові файли"
+
+#: ../xffm/find/fgr.hh:214
+msgid   "Words"
+msgstr  "Слів"
+
+#: ../xffm/find/fgr.hh:216
+msgid   "Lines"
+msgstr  "Рядки"
+
+#: ../xffm/find/fgr.hh:362
+#, c-format
+msgid   "Usage : %s [OPTIONS]\n"
+msgstr  "Вживання: %s [ОПЦІЇ]\n"
+
+#: ../xffm/find/signals.hh:7
+msgid   "Regular"
+msgstr  "Звичайна"
+
+#: ../xffm/find/signals.hh:10 ../xffm/common/preview.hh:481
+msgid   "Socket"
+msgstr  "сокет"
+
+#: ../xffm/find/signals.hh:369 ../xffm/find/signals.hh:803
+msgid   "No editor for current action."
+msgstr  "Не обрано редактора для поточної дії."
+
+#: ../xffm/find/signals.hh:427
+msgid   "Upper limit:"
+msgstr  "Верхня межа:"
+
+#: ../xffm/find/signals.hh:429
+msgid   "Counting files..."
+msgstr  "Підрахування файлів..."
+
+#: ../xffm/find/signals.hh:444
+#, c-format
+msgid   "Found %d match"
+msgid_plural    "Found %d matches"
+msgstr[0]       "Знайдено %d відповіжність"
+msgstr[1]       "Знайдено %d відповіжності"
+msgstr[2]       "Знайдено %d збігів"
+
+#: ../xffm/find/signals.hh:446
+#, c-format
+msgid   "%s Finished : %s"
+msgstr  "Завершено %s : %s"
+
+#: ../xffm/find/signals.hh:569 ../xffm/find/signals.hh:571
+msgid   "Searching..."
+msgstr  "Пошук…"
+
+#: ../xffm/common/preview.hh:581
+msgid   "Empty file"
+msgstr  "Порожній файл"
+
+#: ../xffm/common/preview.hh:636
+#, c-format
+msgid   "Cannot read from %s"
+msgstr  "Неможливо прочитати з %s"
+
+#: ../xffm/common/settings.hh:30
+msgid   "New File:"
+msgstr  "Новий файл:"
+
+#: ../xffm/common/gio.hh:91
+msgid   "Copying files"
+msgstr  "Копіювання файлів"
+
+#: ../xffm/common/gio.hh:93 ../xffm/common/dnd.hh:35
+#: ../xffm/fm/dialog/clipboard.hh:30
+msgid   "Moving files"
+msgstr  "Переміщення файлів"
+
+#: ../xffm/common/gio.hh:95
+msgid   "linking"
+msgstr  "компонування"
+
+#: ../xffm/common/gio.hh:97
+msgid   "rename"
+msgstr  "rename"
+
+#: ../xffm/common/gio.hh:449
+#, c-format
+msgid   "(%d of %d)"
+msgstr  "(%d з %d)"
+
+#: ../xffm/common/util.hh:1404
+#, c-format
+msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
+        "attribute on that file."
+msgstr  "Файл скрипту «%s» не є виконуваним. Будь ласка, встановіть атрибут "
+        "виконуваності для цього файла."
+
+#: ../xffm/common/util.hh:1406 ../xffm/common/util.hh:1441
+#, c-format
+msgid   "Open with %s"
+msgstr  "Відкрити за допомогою %s"
+
+#: ../xffm/common/util.hh:1406
+msgid   "Text Editor"
+msgstr  "Текстовий редактор"
+
+#: ../xffm/common/util.hh:1443 ../xffm/gtk/gtk.hh:70
+msgid   "Execute Shell Command"
+msgstr  "Виконати команду оболонки"
+
+#: ../xffm/common/util.hh:1447
+msgid   "Console: quickly run single commands -- write a command here and "
+        "press enter."
+msgstr  "Консоль: тут можна швидко виконати окремі команди — напишіть команду "
+        "і натисніть Enter."
+
+#: ../xffm/common/util.hh:1452 ../xffm/fm/view/local/popup.hh:1033
+#: ../xffm/fm/view/local/popup.hh:1336 ../xffm/fm/view/local/popup.hh:1353
+msgid   "Run in Terminal"
+msgstr  "Запустити в терміналі"
+
+#: ../xffm/common/dnd.hh:41 ../xffm/fm/dialog/clipboard.hh:23
+msgid   "Copying files locally"
+msgstr  "Копіювання файлів на локальну систему"
+
+#: ../xffm/common/dnd.hh:47
+msgid   "Create Link"
+msgstr  "Створити посилання"
+
+#: ../xffm/common/dnd.hh:63
+msgid   "more"
+msgstr  "більше"
+
+#: ../xffm/common/run.hh:338 ../xffm/fm/view/local/popup.hh:1149
+msgid   "error"
+msgstr  "помилка"
+
+#: ../xffm/common/run.hh:342
+msgid   "warning"
+msgstr  "попередження"
+
+#: ../xffm/common/run.hh:464 ../xffm/response/passwdresponse.hh:28
+#: ../xffm/response/passwdresponse.hh:34
 msgid   "Enter password"
 msgstr  "Введіть пароль"
 
-#: ../xffm/response/passwdresponse.hh:179
-#, fuzzy
-msgid   "User Input"
-msgstr  "Ввід мишею"
-
-#: ../xffm/response/passwdresponse.hh:195
-msgid   "Response Requested"
-msgstr  "Запит відповіді"
-
-#: ../xffm/response/timeoutresponse.hh:57
-msgid   "Dismiss"
-msgstr  "Скасувати"
-
-#: ../xffm/response/commandresponse.hh:19
-msgid   "Running"
-msgstr  "Працює"
-
-#: ../xffm/response/commandresponse.hh:24
-msgid   "Waiting for operation to finish..."
-msgstr  "Очікування на завершення дії..."
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:11
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:214
-msgid   "Remove Button Contents"
-msgstr  "Видалити вміст кнопки"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:67
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:209
-#, fuzzy
-msgid   "Add custom content"
-msgstr  "Додати додатково визначений зміст"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:68
-#, fuzzy
-msgid   "Select file to load"
-msgstr  "Виберіть файл для додавання:"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:125
-#, c-format
-msgid   "Cannot load file %s. Reason: %s"
-msgstr  "Не вдалося завантажити файл %s. Причина: %s"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:154
-msgid   "You need to restart the application"
-msgstr  "Вам слід перезапустити програму"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:187
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:191
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:195
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:198 ../xffm/fm/view/pkg/model.hh:29
-#: ../xffm/fm/view/pkg/popup.hh:35
-msgid   "Software Updater"
-msgstr  "Оновлення програм"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:236
-#: ../xffm/fm/view/pkg/model.hh:108 ../xffm/fm/view/pkg/model.hh:299
-#: ../xffm/fm/view/pkg/model.hh:306 ../xffm/fm/view/pkg/popup.hh:151
-#: ../xffm/common/gtk.hh:77
-msgid   "Search"
-msgstr  "Шукати"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:240 ../xffm/common/gtk.hh:67
+#: ../xffm/gtk/gtk.hh:68 ../xffm/fm/dialog/notebook/vbuttonbox.hh:252
 msgid   "Open terminal"
 msgstr  "Відкрити термінал"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:244
-msgid   "Open a New Window"
-msgstr  "Відкрити нове вікно"
+#: ../xffm/gtk/gtk.hh:72 ../xffm/fm/view/local/popup.hh:157
+msgid   "Paste"
+msgstr  "Вставити"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:250
-msgid   "Differences"
-msgstr  "Різниця"
+#: ../xffm/gtk/gtk.hh:74 ../xffm/fm/view/local/popup.hh:151
+#: ../xffm/fm/view/root/popup.hh:224
+msgid   "Add bookmark"
+msgstr  "Додати закладку"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:256
-#: ../xffm/fm/view/root/model.hh:110
-msgid   "Home Directory"
-msgstr  "Домашній каталог"
+#: ../xffm/gtk/gtk.hh:76 ../xffm/fm/view/local/popup.hh:152
+#: ../xffm/fm/view/root/popup.hh:170
+msgid   "Remove bookmark"
+msgstr  "Вилучити закладку"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:261
-#: ../xffm/fm/view/root/model.hh:168 ../xffm/fm/view/fstab/popup.hh:29
-msgid   "Disk Image Mounter"
-msgstr  "Монтування образів диска"
+#: ../xffm/gtk/gtk.hh:78 ../xffm/fm/view/pkg/model.hh:108
+#: ../xffm/fm/view/pkg/model.hh:300 ../xffm/fm/view/pkg/model.hh:307
+#: ../xffm/fm/view/pkg/popup.hh:151
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:248
+msgid   "Search"
+msgstr  "Шукати"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:266
-#: ../xffm/fm/view/root/model.hh:137
-msgid   "Trash bin"
-msgstr  "Смітник"
-
-#: ../xffm/fm/dialog/notebook/notebook.hh:56
-msgid   "Long press time"
-msgstr  "Час тривалого натискання"
-
-#: ../xffm/fm/dialog/notebook/notebook.hh:75 ../xffm/common/gtk.hh:139
-msgid   "New Tab"
-msgstr  "Створити вкладку"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:178
-msgid   "Open menu"
-msgstr  "Відкрити меню"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:230
-msgid   "View as list"
-msgstr  "Перегляд списком"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:231
-msgid   "Show hidden files"
-msgstr  "Показувати приховані файли"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:232
-msgid   "Show Backup Files"
-msgstr  "Показати резервні файли"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:233
-msgid   "Sort data in descending order"
-msgstr  "Сортувати дані у спадному порядку"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:235
-msgid   "Sort by date"
-msgstr  "Впорядкувати за датою"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:236
-msgid   "Sort by size"
-msgstr  "Впорядкувати за розміром"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:237 ../xffm/common/gtk.hh:81
+#: ../xffm/gtk/gtk.hh:82 ../xffm/fm/dialog/notebook/createini.hh:83
+#: ../xffm/fm/dialog/notebook/menupopover.hh:237
 msgid   "Exit"
 msgstr  "Вийти"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:270
-msgid   "Main menu"
-msgstr  "Головне меню"
+#: ../xffm/gtk/gtk.hh:84 ../xffm/fm/view/local/popup.hh:85
+#: ../xffm/fm/view/local/popup.hh:142 ../xffm/fm/view/local/popup.hh:1332
+#: ../xffm/fm/view/local/popup.hh:1339 ../xffm/fm/view/local/popup.hh:1349
+#: ../xffm/fm/view/local/popup.hh:1356
+msgid   "Open with"
+msgstr  "Відкрити у іншій програмі"
 
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:375
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:377
-msgid   "Go to"
-msgstr  "Перехід"
+#: ../xffm/gtk/gtk.hh:86 ../xffm/fm/view/local/popup.hh:100
+#: ../xffm/fm/view/local/popup.hh:156
+msgid   "Cut"
+msgstr  "Вирізати"
 
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:382
-#: ../xffm/fm/view/local/popup.hh:887 ../xffm/fm/view/local/popup.hh:981
+#: ../xffm/gtk/gtk.hh:88 ../xffm/fm/view/local/popup.hh:99
+#: ../xffm/fm/view/local/popup.hh:155
+msgid   "Copy"
+msgstr  "Скопіювати"
+
+#: ../xffm/gtk/gtk.hh:90 ../xffm/fm/view/local/rm.hh:176
+#: ../xffm/fm/view/local/popup.hh:103 ../xffm/fm/view/local/popup.hh:160
+msgid   "Delete"
+msgstr  "Видалити"
+
+#: ../xffm/gtk/gtk.hh:92 ../xffm/fm/view/local/rm.hh:165
+msgid   "Shred"
+msgstr  "Витерти"
+
+#: ../xffm/gtk/gtk.hh:95 ../xffm/fm/view/local/popup.hh:95
+#: ../xffm/fm/view/local/popup.hh:145 ../xffm/fm/view/root/popup.hh:169
+#: ../xffm/fm/view/fstab/popup.hh:20
+msgid   "Open in New Tab"
+msgstr  "Відкрити у новій вкладці"
+
+#: ../xffm/gtk/gtk.hh:140 ../xffm/fm/dialog/notebook/notebook.hh:75
+msgid   "New Tab"
+msgstr  "Створити вкладку"
+
+#: ../xffm/gtk/dialogs.hh:42
+msgid   "Help"
+msgstr  "Довідка"
+
+#: ../xffm/fm/view/pkg/model.hh:29 ../xffm/fm/view/pkg/popup.hh:35
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:194
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:198
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:202
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:205
+msgid   "Software Updater"
+msgstr  "Оновлення програм"
+
+#: ../xffm/fm/view/pkg/model.hh:41 ../xffm/fm/view/pkg/model.hh:52
+msgid   "Add or remove software installed on the system"
+msgstr  "Встановлення та вилучення програм у системі"
+
+#: ../xffm/fm/view/pkg/model.hh:111
+msgid   "String"
+msgstr  "Рядок"
+
+#: ../xffm/fm/view/pkg/model.hh:117
+msgid   "Waiting for search results"
+msgstr  "Очікування результатів пошуку"
+
+#: ../xffm/fm/view/pkg/model.hh:175
+msgid   "No results"
+msgstr  "Результатів немає."
+
+#: ../xffm/fm/view/pkg/model.hh:374
+#, fuzzy
+msgid   "Currently busy\n"
+msgstr  "Зараз"
+
+#: ../xffm/fm/view/pkg/popup.hh:44
+msgid   "Update Database"
+msgstr  "Оновити базу даних"
+
+#: ../xffm/fm/view/pkg/popup.hh:45
+msgid   "Fetch"
+msgstr  "Отримати"
+
+#: ../xffm/fm/view/pkg/popup.hh:46
+#, fuzzy
+msgid   "Install --dry-run"
+msgstr  "Помилка під час встановлення"
+
+#: ../xffm/fm/view/pkg/popup.hh:47
+msgid   "Install"
+msgstr  "Встановити"
+
+#: ../xffm/fm/view/pkg/popup.hh:48
+#, fuzzy
+msgid   "Uninstall --dry-run"
+msgstr  "Деінсталяція"
+
+#: ../xffm/fm/view/pkg/popup.hh:49
+msgid   "Uninstall"
+msgstr  "Видалити"
+
+#: ../xffm/fm/view/pkg/popup.hh:50
+msgid   "Information"
+msgstr  "Інформація"
+
+#: ../xffm/fm/view/pkg/popup.hh:140
+msgid   "Version"
+msgstr  "Версія"
+
+#: ../xffm/fm/view/pkg/popup.hh:149
+msgid   "Go up"
+msgstr  "Вверх"
+
+#: ../xffm/fm/view/pkg/popup.hh:152
+msgid   "Search packages"
+msgstr  "Шукати пакунки"
+
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:95
+#, c-format
+msgid   "Loading %s...%s"
+msgstr  "Завантаження %s...%s"
+
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:95
+msgid   "Please Wait..."
+msgstr  "Будь ласка, зачекайте..."
+
+#: ../xffm/fm/view/local/model.hh:124
+#, c-format
+msgid   "Reading \"%s\""
+msgstr  "Читання «%s»"
+
+#: ../xffm/fm/view/local/model.hh:577 ../xffm/fm/view/base/monitor.hh:34
+#, c-format
+msgid   "Files: %s"
+msgstr  "Файли:%s"
+
+#: ../xffm/fm/view/local/model.hh:580
+#, c-format
+msgid   "Loaded %d of %d articles"
+msgstr  "Завантажено %d з %d статей"
+
+#: ../xffm/fm/view/local/rm.hh:59
+#, c-format
+msgid   "Delete %s"
+msgstr  "Влучити %s"
+
+#: ../xffm/fm/view/local/rm.hh:61
+msgid   "Warning: "
+msgstr  "Попередження: "
+
+#: ../xffm/fm/view/local/rm.hh:61 ../xffm/fm/view/local/popup.hh:557
+msgid   "Multiple selections"
+msgstr  "Вибір з варіантів"
+
+#: ../xffm/fm/view/local/rm.hh:92
+msgid   "Remove"
+msgstr  "Видалити"
+
+#: ../xffm/fm/view/local/rm.hh:142
+msgid   "Apply to all"
+msgstr  "Застосувати до всіх"
+
+#: ../xffm/fm/view/local/rm.hh:183
+msgid   "Trash"
+msgstr  "Смітник"
+
+#: ../xffm/fm/view/local/popup.hh:94
+msgid   "New"
+msgstr  "Створити"
+
+#: ../xffm/fm/view/local/popup.hh:101 ../xffm/fm/view/local/popup.hh:159
+#: ../xffm/fm/view/local/popup.hh:232 ../xffm/fm/view/local/popup.hh:234
+msgid   "Paste into"
+msgstr  "Вставити у"
+
+#: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:158
+msgid   "There is nothing on the clipboard to paste."
+msgstr  "У буфері обміну немає нічого для вставляння."
+
+#: ../xffm/fm/view/local/popup.hh:106
+msgid   "Select All"
+msgstr  "Виділити все"
+
+#: ../xffm/fm/view/local/popup.hh:107 ../xffm/fm/view/local/popup.hh:746
+msgid   "Match regular expression"
+msgstr  "Збіг з формальним виразом"
+
+#: ../xffm/fm/view/local/popup.hh:143 ../xffm/fm/view/local/popup.hh:1029
+msgid   "Run Executable..."
+msgstr  "Запустити програму..."
+
+#: ../xffm/fm/view/local/popup.hh:144 ../xffm/fm/view/local/popup.hh:877
+msgid   "Extract files from the archive"
+msgstr  "Розпакувати файли з архіву"
+
+#: ../xffm/fm/view/local/popup.hh:146 ../xffm/fm/view/local/popup.hh:928
+msgid   "Create a compressed archive with the selected objects"
+msgstr  "Створити стиснутий архів з виділеними об'єктами"
+
+#: ../xffm/fm/view/local/popup.hh:148 ../xffm/fm/view/root/popup.hh:172
+#: ../xffm/fm/view/fstab/popup.hh:37
+msgid   "Mount the volume associated with this folder"
+msgstr  "Змонтувати том, пов'язаний з цією текою"
+
+#: ../xffm/fm/view/local/popup.hh:149 ../xffm/fm/view/root/popup.hh:173
+#: ../xffm/fm/view/fstab/popup.hh:38
+msgid   "Unmount the volume associated with this folder"
+msgstr  "Демонтувати том, пов'язаний з цією текою"
+
+#: ../xffm/fm/view/local/popup.hh:161 ../xffm/fm/view/local/popup.hh:1242
+msgid   "Rename"
+msgstr  "Перейменувати"
+
+#: ../xffm/fm/view/local/popup.hh:162 ../xffm/fm/view/local/popup.hh:1225
+msgid   "Duplicate"
+msgstr  "Дублювати"
+
+#: ../xffm/fm/view/local/popup.hh:163 ../xffm/fm/view/local/popup.hh:1208
+msgid   "Link"
+msgstr  "Посилання"
+
+#: ../xffm/fm/view/local/popup.hh:164
+msgid   "Properties"
+msgstr  "Властивості"
+
+#: ../xffm/fm/view/local/popup.hh:554
+msgid   "Files:"
+msgstr  "Файли:"
+
+#: ../xffm/fm/view/local/popup.hh:744
+msgid   "Select items"
+msgstr  "Вибрати елементи"
+
+#: ../xffm/fm/view/local/popup.hh:761
+msgid   "Regular Expression syntax is incorrect"
+msgstr  "Синтаксис формального виразу є помилковим"
+
+#: ../xffm/fm/view/local/popup.hh:791
+msgid   "No selection"
+msgstr  "Нічого не вибрано"
+
+#: ../xffm/fm/view/local/popup.hh:791
+msgid   "No matches."
+msgstr  "Збігів немає."
+
+#: ../xffm/fm/view/local/popup.hh:983 ../xffm/fm/view/local/popup.hh:1156
+msgid   "Create new..."
+msgstr  "Створити…"
+
+#: ../xffm/fm/view/local/popup.hh:990 ../xffm/fm/view/local/popup.hh:1085
+#: ../xffm/fm/view/local/popup.hh:1159
+msgid   "New Name:"
+msgstr  "Нова назва:"
+
+#: ../xffm/fm/view/local/popup.hh:998
+msgid   "No name"
+msgstr  "Без назви"
+
+#: ../xffm/fm/view/local/popup.hh:1011
+#, c-format
+msgid   "Another file with the same name already exists in “%s”."
+msgstr  "Інший файл з такою ж назвою вже існує в «%s»."
+
+#: ../xffm/fm/view/local/popup.hh:1036
+msgid   "Arguments for the Command"
+msgstr  "Аргументи для команди"
+
+#: ../xffm/fm/view/local/popup.hh:1117 ../xffm/fm/view/root/popup.hh:237
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:383
 msgid   "Specify Output Directory..."
 msgstr  "Вказати каталог виводу..."
 
+#: ../xffm/fm/view/local/popup.hh:1148
 #: ../xffm/fm/dialog/notebook/page/pathbar.hh:409
 msgid   "Not a directory"
 msgstr  "Не є каталогом"
+
+#: ../xffm/fm/view/local/popup.hh:1307
+msgid   "You have selected multiple files or folders"
+msgstr  "Ви виділили декілька файлів та каталогів"
+
+#: ../xffm/fm/view/local/popup.hh:1375 ../xffm/fm/view/local/view.hh:156
+msgid   "Invalid entry"
+msgstr  "Некоректний елемент"
+
+#: ../xffm/fm/view/local/view.hh:177
+#, fuzzy, c-format
+msgid   "The volume '%s' is not mounted."
+msgstr  "Розділ сховища даних %s не змонтовано"
+
+#: ../xffm/fm/view/local/properties.hh:241
+msgid   "Properties and Attributes"
+msgstr  "Параметри та атрибути"
+
+#: ../xffm/fm/view/local/properties.hh:270
+msgid   "File Mode:"
+msgstr  "Режим файлу:"
+
+#: ../xffm/fm/view/local/properties.hh:296
+msgid   "File:"
+msgstr  "Файл:"
+
+#: ../xffm/fm/view/local/properties.hh:308
+msgid   "Apply changes"
+msgstr  "Застосувати зміни"
+
+#: ../xffm/fm/view/local/properties.hh:469
+msgid   "Encoding"
+msgstr  "Кодування"
+
+#: ../xffm/fm/view/local/properties.hh:470 ../xffm/fm/view/treeview.hh:22
+msgid   "Mimetype"
+msgstr  "Тип MIME"
+
+#: ../xffm/fm/view/local/properties.hh:474 ../xffm/fm/view/treeview.hh:19
+msgid   "Size"
+msgstr  "Розм"
+
+#: ../xffm/fm/view/local/properties.hh:475 ../xffm/fm/view/treeview.hh:20
+msgid   "Date"
+msgstr  "Дата"
+
+#: ../xffm/fm/view/local/properties.hh:492
+msgid   "Successfully moved to trash."
+msgstr  "Успішно пересунуто до смітника."
+
+#: ../xffm/fm/view/local/properties.hh:493
+msgid   "Source:"
+msgstr  "Джерело:"
+
+#: ../xffm/fm/view/root/model.hh:124
+msgid   "Root Directory"
+msgstr  "Кореневий каталог"
+
+#: ../xffm/fm/view/root/model.hh:140
+msgid   "This is the root of the filesystem"
+msgstr  "Це коренева тека файлової системи"
+
+#: ../xffm/fm/view/root/model.hh:152
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:268
+msgid   "Home Directory"
+msgstr  "Домашній каталог"
+
+#: ../xffm/fm/view/root/model.hh:179
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:278
+msgid   "Trash bin"
+msgstr  "Смітник"
+
+#: ../xffm/fm/view/root/model.hh:210 ../xffm/fm/view/fstab/popup.hh:29
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:273
+msgid   "Disk Image Mounter"
+msgstr  "Монтування образів диска"
+
+#: ../xffm/fm/view/root/model.hh:227
+msgid   "Mount local disks and devices"
+msgstr  "Підключення локальних дисків і пристроїв"
+
+#: ../xffm/fm/view/root/model.hh:267
+msgid   "Go to bookmarked location"
+msgstr  "Перейти по закладці"
+
+#: ../xffm/fm/view/root/popup.hh:175
+msgid   "Empty trash"
+msgstr  "Порожній смітник"
+
+#: ../xffm/fm/view/root/popup.hh:228
+#, fuzzy
+msgid   "Ecrypt Volume"
+msgstr  "Том eCryptfs"
+
+#: ../xffm/fm/view/root/popup.hh:229
+msgid   "private"
+msgstr  "приватна"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:162 ../xffm/fm/view/fuse/ecryptfs.hh:163
+#: ../xffm/fm/view/fuse/ecryptfs.hh:185
+msgid   "Mount"
+msgstr  "Підключати"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:179
+#: ../xffm/fm/dialog/notebook/createini.hh:87
+#: ../xffm/fm/dialog/notebook/createini.hh:371
+msgid   "Save"
+msgstr  "Зберегти"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:182
+msgid   "Load"
+msgstr  "Завантажити"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:398
+#: ../xffm/fm/dialog/notebook/createini.hh:67
+msgid   "Options"
+msgstr  "Параметри"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:399
+msgid   "Advanced"
+msgstr  "Додатково"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:692 ../xffm/fm/view/fstab/view.hh:1414
+#, c-format
+msgid   "Mounting %s"
+msgstr  "Підключається %s"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:745
+#, c-format
+msgid   "Enter Passphrase for %s"
+msgstr  "Ввід пароля для %s"
+
+#: ../xffm/fm/view/fstab/popup.hh:21 ../xffm/fm/view/fstab/view.hh:1033
+msgid   "NFS Network Volume"
+msgstr  "Мережний том NFS"
+
+#: ../xffm/fm/view/fstab/popup.hh:22
+msgid   "SSHFS Remote Synchronization Folder"
+msgstr  "Віддалена тека синхронізації SSHFS"
+
+#: ../xffm/fm/view/fstab/popup.hh:23 ../xffm/fm/view/fstab/view.hh:1085
+msgid   "eCryptfs Volume"
+msgstr  "Том eCryptfs"
+
+#: ../xffm/fm/view/fstab/popup.hh:24 ../xffm/fm/view/fstab/view.hh:1111
+msgid   "CIFS Volume"
+msgstr  "Том CIFS"
+
+#: ../xffm/fm/view/fstab/popup.hh:129
+msgid   "Mount Device"
+msgstr  "Змонтувати пристрій"
+
+#: ../xffm/fm/view/fstab/popup.hh:141 ../xffm/fm/view/fstab/view.hh:924
+msgid   "Mount point:"
+msgstr  "Точка монтування:"
+
+#: ../xffm/fm/view/fstab/view.hh:591
+#, fuzzy
+msgid   "Mount point: "
+msgstr  "Точка монтування:"
+
+#: ../xffm/fm/view/fstab/view.hh:592
+#, fuzzy
+msgid   "Mount device: "
+msgstr  "Змонтувати пристрій"
+
+#: ../xffm/fm/view/fstab/view.hh:660 ../xffm/fm/view/fstab/view.hh:676
+msgid   "Disks"
+msgstr  "Диски"
+
+#: ../xffm/fm/view/fstab/view.hh:922
+msgid   "No Label"
+msgstr  "Немає позначки"
+
+#: ../xffm/fm/view/fstab/view.hh:923
+msgid   "There is no file system available (unformatted)"
+msgstr  "Немає файлової системи (неформатований розділ)"
+
+#: ../xffm/fm/view/fstab/view.hh:924
+msgid   "Not mounted"
+msgstr  "Не змонтований"
+
+#: ../xffm/fm/view/fstab/view.hh:1059
+msgid   "SFTP (via SSH)"
+msgstr  "SFTP (за допомогою SSH)"
+
+#: ../xffm/fm/view/fstab/view.hh:1414
+#, c-format
+msgid   "Unmounting %s"
+msgstr  "Демонтування %s"
+
+#: ../xffm/fm/view/base/signals.hh:845
+#, fuzzy
+msgid   "Trash is empty"
+msgstr  "PSK є порожнім"
+
+#: ../xffm/fm/view/base/signals.hh:847
+msgid   "Directory does not exist."
+msgstr  "Каталогу не існує."
+
+#: ../xffm/fm/view/treeview.hh:17
+msgid   "Name"
+msgstr  "Назва"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
+#, fuzzy
+msgid   "Embedded Terminal"
+msgstr  "Підтримка вбудованого термінала"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
+msgid   "All items in the iconview."
+msgstr  "Всі елементи в перегляді піктограмами."
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
+msgid   "Scripting"
+msgstr  "Написання скриптів"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
+msgid   "Clear Log"
+msgstr  "Спорожнити журнал"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
+msgid   "Terminal font"
+msgstr  "Термінальний шрифт"
 
 #: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
 msgid   "Renice Process"
@@ -811,16 +1203,21 @@ msgstr  "Помилка адресування"
 msgid   "PID"
 msgstr  "PID"
 
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:376
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:378
+msgid   "Go to"
+msgstr  "Перехід"
+
 #: ../xffm/fm/dialog/notebook/page/page.hh:59
 msgid   "loading..."
 msgstr  "завантажується…"
 
-#: ../xffm/fm/dialog/notebook/page/page.hh:151
+#: ../xffm/fm/dialog/notebook/page/page.hh:152
 #: ../xffm/fm/dialog/notebook/page/page.hh:167
 msgid   "Confirm Replace"
 msgstr  "Підтвердження заміни"
 
-#: ../xffm/fm/dialog/notebook/page/page.hh:153
+#: ../xffm/fm/dialog/notebook/page/page.hh:154
 msgid   "Destination File"
 msgstr  "Файл призначення"
 
@@ -829,35 +1226,167 @@ msgstr  "Файл призначення"
 msgid   "The output file %s already exists, do you want to overwrite it?"
 msgstr  "Файл результатів %s вже існує. Хочете його перезаписати?"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
+#: ../xffm/fm/dialog/notebook/createini.hh:67
 #, fuzzy
-msgid   "Embedded Terminal"
-msgstr  "Підтримка вбудованого термінала"
+msgid   "maximum"
+msgstr  "Максимум"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
-msgid   "All items in the iconview."
-msgstr  "Всі елементи в перегляді піктограмами."
+#: ../xffm/fm/dialog/notebook/createini.hh:75
+msgid   "Add option"
+msgstr  "Додати параметр"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
-msgid   "Scripting"
-msgstr  "Написання скриптів"
+#: ../xffm/fm/dialog/notebook/createini.hh:79
+#, fuzzy
+msgid   "Remove option"
+msgstr  "Вилучіть операцію"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
-msgid   "Clear Log"
-msgstr  "Спорожнити журнал"
+#: ../xffm/fm/dialog/notebook/createini.hh:158
+#, fuzzy
+msgid   "icon ID"
+msgstr  "значок"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
-msgid   "Terminal font"
-msgstr  "Термінальний шрифт"
+#: ../xffm/fm/dialog/notebook/createini.hh:159
+#, fuzzy
+msgid   "tooltip"
+msgstr  "підказка"
 
-#: ../xffm/fm/dialog/clipboard.hh:23 ../xffm/common/dnd.hh:41
-msgid   "Copying files locally"
-msgstr  "Копіювання файлів на локальну систему"
+#: ../xffm/fm/dialog/notebook/createini.hh:160
+#, fuzzy
+msgid   "Select work directory"
+msgstr  "Обрати каталог первинних текстів"
 
-#: ../xffm/fm/dialog/clipboard.hh:30 ../xffm/common/gio.hh:83
-#: ../xffm/common/dnd.hh:35
-msgid   "Moving files"
-msgstr  "Переміщення файлів"
+#: ../xffm/fm/dialog/notebook/createini.hh:163
+#, fuzzy
+msgid   "Select executable"
+msgstr  "Виберіть таблиці:"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:166
+msgid   "Run in terminal"
+msgstr  "Запустить у терміналі"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:234
+#: ../xffm/response/chooserresponse.hh:20
+msgid   "Open"
+msgstr  "Відкрити"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:268
+#: ../xffm/response/chooserresponse.hh:55
+#: ../xffm/response/chooserresponse.hh:69
+msgid   "Choose file"
+msgstr  "Вибрати файл"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:277
+#: ../xffm/response/chooserresponse.hh:50
+#: ../xffm/response/chooserresponse.hh:62
+msgid   "Choose directory"
+msgstr  "Вибрати каталог"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:366
+msgid   "Save File"
+msgstr  "Зберегти файл"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:380
+#, fuzzy
+msgid   "customButton.ini"
+msgstr  "Кнопка"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:420
+msgid   "Option"
+msgstr  "Параметр"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:424
+msgid   "text"
+msgstr  "текст"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:431 ../xffm/completion/bash.hh:135
+msgid   "file"
+msgstr  "файл"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:436
+msgid   "folder"
+msgstr  "конверт"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:441
+msgid   "on"
+msgstr  "на"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:446
+msgid   "off"
+msgstr  "вимкнено"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:16
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:226
+msgid   "Remove Button Contents"
+msgstr  "Видалити вміст кнопки"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:75
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:221
+#, fuzzy
+msgid   "Add custom content"
+msgstr  "Додати додатково визначений зміст"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:76
+#, fuzzy
+msgid   "Select file to load"
+msgstr  "Виберіть файл для додавання:"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:132
+#, c-format
+msgid   "Cannot load file %s. Reason: %s"
+msgstr  "Не вдалося завантажити файл %s. Причина: %s"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:161
+msgid   "You need to restart the application"
+msgstr  "Вам слід перезапустити програму"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:216
+#, fuzzy
+msgid   "FIXME New custom content"
+msgstr  "Використовувати інший шрифт"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:256
+msgid   "Open a New Window"
+msgstr  "Відкрити нове вікно"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:262
+msgid   "Differences"
+msgstr  "Різниця"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:178
+msgid   "Open menu"
+msgstr  "Відкрити меню"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:230
+msgid   "View as list"
+msgstr  "Перегляд списком"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:231
+msgid   "Show hidden files"
+msgstr  "Показувати приховані файли"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:232
+msgid   "Show Backup Files"
+msgstr  "Показати резервні файли"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:233
+msgid   "Sort data in descending order"
+msgstr  "Сортувати дані у спадному порядку"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:235
+msgid   "Sort by date"
+msgstr  "Впорядкувати за датою"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:236
+msgid   "Sort by size"
+msgstr  "Впорядкувати за розміром"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:270
+msgid   "Main menu"
+msgstr  "Головне меню"
+
+#: ../xffm/fm/dialog/notebook/notebook.hh:56
+msgid   "Long press time"
+msgstr  "Час тривалого натискання"
 
 #: ../xffm/fm/dialog/dialog.hh:122
 msgid   "Removed"
@@ -867,484 +1396,80 @@ msgstr  "Вилучено"
 msgid   "Detected device(s):"
 msgstr  "Виявлені пристрої:"
 
-#: ../xffm/fm/view/local/model.hh:124
-#, c-format
-msgid   "Reading \"%s\""
-msgstr  "Читання «%s»"
+#: ../xffm/response/progress.hh:82 ../xffm/response/commandresponse.hh:57
+msgid   "Running"
+msgstr  "Працює"
 
-#: ../xffm/fm/view/local/model.hh:577 ../xffm/fm/view/base/monitor.hh:34
-#, c-format
-msgid   "Files: %s"
-msgstr  "Файли:%s"
+#: ../xffm/response/progress.hh:87 ../xffm/response/commandresponse.hh:61
+msgid   "Waiting for operation to finish..."
+msgstr  "Очікування на завершення дії..."
 
-#: ../xffm/fm/view/local/model.hh:580
-#, c-format
-msgid   "Loaded %d of %d articles"
-msgstr  "Завантажено %d з %d статей"
-
-#: ../xffm/fm/view/local/popup.hh:85 ../xffm/fm/view/local/popup.hh:142
-#: ../xffm/fm/view/local/popup.hh:1287 ../xffm/fm/view/local/popup.hh:1294
-#: ../xffm/fm/view/local/popup.hh:1305 ../xffm/fm/view/local/popup.hh:1312
-#: ../xffm/common/gtk.hh:83
-msgid   "Open with"
-msgstr  "Відкрити у іншій програмі"
-
-#: ../xffm/fm/view/local/popup.hh:94
-msgid   "New"
-msgstr  "Створити"
-
-#: ../xffm/fm/view/local/popup.hh:95 ../xffm/fm/view/local/popup.hh:145
-#: ../xffm/fm/view/root/popup.hh:136 ../xffm/fm/view/fstab/popup.hh:20
-#: ../xffm/common/gtk.hh:94
-msgid   "Open in New Tab"
-msgstr  "Відкрити у новій вкладці"
-
-#: ../xffm/fm/view/local/popup.hh:99 ../xffm/fm/view/local/popup.hh:155
-#: ../xffm/common/gtk.hh:87
-msgid   "Copy"
-msgstr  "Скопіювати"
-
-#: ../xffm/fm/view/local/popup.hh:100 ../xffm/fm/view/local/popup.hh:156
-#: ../xffm/common/gtk.hh:85
-msgid   "Cut"
-msgstr  "Вирізати"
-
-#: ../xffm/fm/view/local/popup.hh:101 ../xffm/fm/view/local/popup.hh:159
-#: ../xffm/fm/view/local/popup.hh:232 ../xffm/fm/view/local/popup.hh:234
-msgid   "Paste into"
-msgstr  "Вставити у"
-
-#: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:158
-msgid   "There is nothing on the clipboard to paste."
-msgstr  "У буфері обміну немає нічого для вставляння."
-
-#: ../xffm/fm/view/local/popup.hh:103 ../xffm/fm/view/local/popup.hh:160
-#: ../xffm/fm/view/local/rm.hh:176 ../xffm/common/gtk.hh:89
-msgid   "Delete"
-msgstr  "Видалити"
-
-#: ../xffm/fm/view/local/popup.hh:106
-msgid   "Select All"
-msgstr  "Виділити все"
-
-#: ../xffm/fm/view/local/popup.hh:107 ../xffm/fm/view/local/popup.hh:755
-msgid   "Match regular expression"
-msgstr  "Збіг з формальним виразом"
-
-#: ../xffm/fm/view/local/popup.hh:143 ../xffm/fm/view/local/popup.hh:1105
-msgid   "Run Executable..."
-msgstr  "Запустити програму..."
-
-#: ../xffm/fm/view/local/popup.hh:144 ../xffm/fm/view/local/popup.hh:875
-msgid   "Extract files from the archive"
-msgstr  "Розпакувати файли з архіву"
-
-#: ../xffm/fm/view/local/popup.hh:146 ../xffm/fm/view/local/popup.hh:966
-msgid   "Create a compressed archive with the selected objects"
-msgstr  "Створити стиснутий архів з виділеними об'єктами"
-
-#: ../xffm/fm/view/local/popup.hh:148 ../xffm/fm/view/fstab/popup.hh:37
-msgid   "Mount the volume associated with this folder"
-msgstr  "Змонтувати том, пов'язаний з цією текою"
-
-#: ../xffm/fm/view/local/popup.hh:149 ../xffm/fm/view/fstab/popup.hh:38
-msgid   "Unmount the volume associated with this folder"
-msgstr  "Демонтувати том, пов'язаний з цією текою"
-
-#: ../xffm/fm/view/local/popup.hh:151 ../xffm/common/gtk.hh:73
-msgid   "Add bookmark"
-msgstr  "Додати закладку"
-
-#: ../xffm/fm/view/local/popup.hh:152 ../xffm/fm/view/root/popup.hh:137
-#: ../xffm/common/gtk.hh:75
-msgid   "Remove bookmark"
-msgstr  "Вилучити закладку"
-
-#: ../xffm/fm/view/local/popup.hh:157 ../xffm/common/gtk.hh:71
-msgid   "Paste"
-msgstr  "Вставити"
-
-#: ../xffm/fm/view/local/popup.hh:161 ../xffm/fm/view/local/popup.hh:1231
-msgid   "Rename"
-msgstr  "Перейменувати"
-
-#: ../xffm/fm/view/local/popup.hh:162 ../xffm/fm/view/local/popup.hh:1217
-msgid   "Duplicate"
-msgstr  "Дублювати"
-
-#: ../xffm/fm/view/local/popup.hh:163 ../xffm/fm/view/local/popup.hh:1203
-msgid   "Link"
-msgstr  "Посилання"
-
-#: ../xffm/fm/view/local/popup.hh:164
-msgid   "Properties"
-msgstr  "Властивості"
-
-#: ../xffm/fm/view/local/popup.hh:562
-msgid   "Files:"
-msgstr  "Файли:"
-
-#: ../xffm/fm/view/local/popup.hh:565 ../xffm/fm/view/local/rm.hh:61
-msgid   "Multiple selections"
-msgstr  "Вибір з варіантів"
-
-#: ../xffm/fm/view/local/popup.hh:753
-msgid   "Select items"
-msgstr  "Вибрати елементи"
-
-#: ../xffm/fm/view/local/popup.hh:771
-msgid   "Regular Expression syntax is incorrect"
-msgstr  "Синтаксис формального виразу є помилковим"
-
-#: ../xffm/fm/view/local/popup.hh:801
-msgid   "No selection"
-msgstr  "Нічого не вибрано"
-
-#: ../xffm/fm/view/local/popup.hh:801
-msgid   "No matches."
-msgstr  "Збігів немає."
-
-#: ../xffm/fm/view/local/popup.hh:1058
-msgid   "Create new..."
-msgstr  "Створити…"
-
-#: ../xffm/fm/view/local/popup.hh:1065 ../xffm/fm/view/local/popup.hh:1146
-msgid   "New Name:"
-msgstr  "Нова назва:"
-
-#: ../xffm/fm/view/local/popup.hh:1074
-msgid   "No name"
-msgstr  "Без назви"
-
-#: ../xffm/fm/view/local/popup.hh:1087
-#, c-format
-msgid   "Another file with the same name already exists in “%s”."
-msgstr  "Інший файл з такою ж назвою вже існує в «%s»."
-
-#: ../xffm/fm/view/local/popup.hh:1109 ../xffm/fm/view/local/popup.hh:1291
-#: ../xffm/fm/view/local/popup.hh:1309 ../xffm/common/util.hh:1452
-msgid   "Run in Terminal"
-msgstr  "Запустити в терміналі"
-
-#: ../xffm/fm/view/local/popup.hh:1112
-msgid   "Arguments for the Command"
-msgstr  "Аргументи для команди"
-
-#: ../xffm/fm/view/local/popup.hh:1258
-msgid   "You have selected multiple files or folders"
-msgstr  "Ви виділили декілька файлів та каталогів"
-
-#: ../xffm/fm/view/local/popup.hh:1332 ../xffm/fm/view/local/view.hh:156
-msgid   "Invalid entry"
-msgstr  "Некоректний елемент"
-
-#: ../xffm/fm/view/local/properties.hh:245
-msgid   "Properties and Attributes"
-msgstr  "Параметри та атрибути"
-
-#: ../xffm/fm/view/local/properties.hh:274
-msgid   "File Mode:"
-msgstr  "Режим файлу:"
-
-#: ../xffm/fm/view/local/properties.hh:300
-msgid   "File:"
-msgstr  "Файл:"
-
-#: ../xffm/fm/view/local/properties.hh:312
-msgid   "Apply changes"
-msgstr  "Застосувати зміни"
-
-#: ../xffm/fm/view/local/properties.hh:477
-msgid   "Successfully moved to trash."
-msgstr  "Успішно пересунуто до смітника."
-
-#: ../xffm/fm/view/local/properties.hh:478
-msgid   "Source:"
-msgstr  "Джерело:"
-
-#: ../xffm/fm/view/local/rm.hh:59
-#, c-format
-msgid   "Delete %s"
-msgstr  "Влучити %s"
-
-#: ../xffm/fm/view/local/rm.hh:61
-msgid   "Warning: "
-msgstr  "Попередження: "
-
-#: ../xffm/fm/view/local/rm.hh:92
-msgid   "Remove"
-msgstr  "Видалити"
-
-#: ../xffm/fm/view/local/rm.hh:142
-msgid   "Apply to all"
-msgstr  "Застосувати до всіх"
-
-#: ../xffm/fm/view/local/rm.hh:165 ../xffm/common/gtk.hh:91
-msgid   "Shred"
-msgstr  "Витерти"
-
-#: ../xffm/fm/view/local/rm.hh:183
-msgid   "Trash"
-msgstr  "Смітник"
-
-#: ../xffm/fm/view/local/view.hh:177
-#, fuzzy, c-format
-msgid   "The volume '%s' is not mounted."
-msgstr  "Розділ сховища даних %s не змонтовано"
-
-#: ../xffm/fm/view/root/model.hh:82
-msgid   "Root Directory"
-msgstr  "Кореневий каталог"
-
-#: ../xffm/fm/view/root/model.hh:98
-msgid   "This is the root of the filesystem"
-msgstr  "Це коренева тека файлової системи"
-
-#: ../xffm/fm/view/root/model.hh:176 ../xffm/fm/view/root/model.hh:191
-msgid   "Mount local disks and devices"
-msgstr  "Підключення локальних дисків і пристроїв"
-
-#: ../xffm/fm/view/root/model.hh:177 ../xffm/fm/view/fstab/popup.hh:23
-#: ../xffm/fm/view/fstab/view.hh:1084
-msgid   "eCryptfs Volume"
-msgstr  "Том eCryptfs"
-
-#: ../xffm/fm/view/root/model.hh:178 ../xffm/fm/view/fstab/popup.hh:22
-msgid   "SSHFS Remote Synchronization Folder"
-msgstr  "Віддалена тека синхронізації SSHFS"
-
-#: ../xffm/fm/view/root/model.hh:179 ../xffm/fm/view/fstab/popup.hh:21
-#: ../xffm/fm/view/fstab/view.hh:1032
-msgid   "NFS Network Volume"
-msgstr  "Мережний том NFS"
-
-#: ../xffm/fm/view/root/model.hh:180 ../xffm/fm/view/fstab/popup.hh:24
-#: ../xffm/fm/view/fstab/view.hh:1110
-msgid   "CIFS Volume"
-msgstr  "Том CIFS"
-
-#: ../xffm/fm/view/root/model.hh:229
-msgid   "Go to bookmarked location"
-msgstr  "Перейти по закладці"
-
-#: ../xffm/fm/view/root/popup.hh:138
-msgid   "Empty trash"
-msgstr  "Порожній смітник"
-
-#: ../xffm/fm/view/fstab/popup.hh:129
-msgid   "Mount Device"
-msgstr  "Змонтувати пристрій"
-
-#: ../xffm/fm/view/fstab/popup.hh:141 ../xffm/fm/view/fstab/view.hh:923
-msgid   "Mount point:"
-msgstr  "Точка монтування:"
-
-#: ../xffm/fm/view/fstab/view.hh:590
+#: ../xffm/response/passwdresponse.hh:131
 #, fuzzy
-msgid   "Mount point: "
-msgstr  "Точка монтування:"
+msgid   "User Input"
+msgstr  "Ввід мишею"
 
-#: ../xffm/fm/view/fstab/view.hh:591
-#, fuzzy
-msgid   "Mount device: "
-msgstr  "Змонтувати пристрій"
+#: ../xffm/response/passwdresponse.hh:147
+msgid   "Response Requested"
+msgstr  "Запит відповіді"
 
-#: ../xffm/fm/view/fstab/view.hh:659 ../xffm/fm/view/fstab/view.hh:675
-msgid   "Disks"
-msgstr  "Диски"
+#: ../xffm/response/passwdresponse.hh:194 ../xffm/response/entryresponse.hh:457
+msgid   "Ok"
+msgstr  "Гаразд"
 
-#: ../xffm/fm/view/fstab/view.hh:921
-msgid   "No Label"
-msgstr  "Немає позначки"
+#: ../xffm/response/customresponse.hh:55
+msgid   "Execute command"
+msgstr  "Виконати команду"
 
-#: ../xffm/fm/view/fstab/view.hh:922
-msgid   "There is no file system available (unformatted)"
-msgstr  "Немає файлової системи (неформатований розділ)"
+#: ../xffm/response/customresponse.hh:103
+msgid   "Source File"
+msgstr  "Файл джерела"
 
-#: ../xffm/fm/view/fstab/view.hh:923
-msgid   "Not mounted"
-msgstr  "Не змонтований"
+#: ../xffm/response/timeoutresponse.hh:57
+msgid   "Dismiss"
+msgstr  "Скасувати"
 
-#: ../xffm/fm/view/fstab/view.hh:1058
-msgid   "SFTP (via SSH)"
-msgstr  "SFTP (за допомогою SSH)"
+#: ../xffm/completion/bash.hh:133
+msgid   "Completion mode:"
+msgstr  "Режим автозавершення:"
 
-#: ../xffm/fm/view/fstab/view.hh:1413
-#, c-format
-msgid   "Unmounting %s"
-msgstr  "Демонтування %s"
+#: ../xffm/completion/bash.hh:134
+msgid   "command"
+msgstr  "команда"
 
-#: ../xffm/fm/view/fstab/view.hh:1413
-#, c-format
-msgid   "Mounting %s"
-msgstr  "Підключається %s"
+#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
+msgid   "Options >>"
+msgstr  "Параметри >>"
 
-#: ../xffm/fm/view/pkg/model.hh:41 ../xffm/fm/view/pkg/model.hh:52
-msgid   "Add or remove software installed on the system"
-msgstr  "Встановлення та вилучення програм у системі"
+#: ../xffm/completion/base.hh:28
+msgid   "Command"
+msgstr  "Команда"
 
-#: ../xffm/fm/view/pkg/model.hh:111
-msgid   "String"
-msgstr  "Рядок"
+#: ../xffm/completion/base.hh:31
+msgid   "File"
+msgstr  "Файл"
 
-#: ../xffm/fm/view/pkg/model.hh:116
-msgid   "Waiting for search results"
-msgstr  "Очікування результатів пошуку"
+#: ../xffm/completion/base.hh:34
+msgid   "Command history"
+msgstr  "Журнал команд"
 
-#: ../xffm/fm/view/pkg/model.hh:174
-msgid   "No results"
-msgstr  "Результатів немає."
+#: ../xffm/completion/base.hh:40
+msgid   "Variable"
+msgstr  "Змінна"
 
-#: ../xffm/fm/view/pkg/model.hh:373
-#, fuzzy
-msgid   "Currently busy\n"
-msgstr  "Зараз"
+#: ../xffm/completion/base.hh:43
+msgid   "Host"
+msgstr  "Вузол"
 
-#: ../xffm/fm/view/pkg/popup.hh:44
-msgid   "Update Database"
-msgstr  "Оновити базу даних"
+#: ../xffm/completion/base.hh:55
+msgid   "Found no match"
+msgstr  "Відповідників не знайдено"
 
-#: ../xffm/fm/view/pkg/popup.hh:45
-msgid   "Fetch"
-msgstr  "Отримати"
+#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
+msgid   "Matches"
+msgstr  "Збіги"
 
-#: ../xffm/fm/view/pkg/popup.hh:46
-#, fuzzy
-msgid   "Install --dry-run"
-msgstr  "Помилка під час встановлення"
-
-#: ../xffm/fm/view/pkg/popup.hh:47
-msgid   "Install"
-msgstr  "Встановити"
-
-#: ../xffm/fm/view/pkg/popup.hh:48
-#, fuzzy
-msgid   "Uninstall --dry-run"
-msgstr  "Деінсталяція"
-
-#: ../xffm/fm/view/pkg/popup.hh:49
-msgid   "Uninstall"
-msgstr  "Видалити"
-
-#: ../xffm/fm/view/pkg/popup.hh:50
-msgid   "Information"
-msgstr  "Інформація"
-
-#: ../xffm/fm/view/pkg/popup.hh:140
-msgid   "Version"
-msgstr  "Версія"
-
-#: ../xffm/fm/view/pkg/popup.hh:149
-msgid   "Go up"
-msgstr  "Вверх"
-
-#: ../xffm/fm/view/pkg/popup.hh:152
-msgid   "Search packages"
-msgstr  "Шукати пакунки"
-
-#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
-#, c-format
-msgid   "Loading %s...%s"
-msgstr  "Завантаження %s...%s"
-
-#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
-msgid   "Please Wait..."
-msgstr  "Будь ласка, зачекайте..."
-
-#: ../xffm/fm/view/treeview.hh:17
-msgid   "Name"
-msgstr  "Назва"
-
-#: ../xffm/fm/view/treeview.hh:19
-msgid   "Size"
-msgstr  "Розм"
-
-#: ../xffm/fm/view/treeview.hh:20
-msgid   "Date"
-msgstr  "Дата"
-
-#: ../xffm/fm/view/treeview.hh:22
-msgid   "Mimetype"
-msgstr  "Тип MIME"
-
-#: ../xffm/fm/view/base/signals.hh:838
-#, fuzzy
-msgid   "Trash is empty"
-msgstr  "PSK є порожнім"
-
-#: ../xffm/fm/view/base/signals.hh:840
-msgid   "Directory does not exist."
-msgstr  "Каталогу не існує."
-
-#: ../xffm/common/settings.hh:30
-msgid   "New File:"
-msgstr  "Новий файл:"
-
-#: ../xffm/common/gio.hh:81
-msgid   "Copying files"
-msgstr  "Копіювання файлів"
-
-#: ../xffm/common/gio.hh:85
-msgid   "linking"
-msgstr  "компонування"
-
-#: ../xffm/common/gio.hh:87
-msgid   "rename"
-msgstr  "rename"
-
-#: ../xffm/common/gio.hh:426
-#, c-format
-msgid   "(%d of %d)"
-msgstr  "(%d з %d)"
-
-#: ../xffm/common/dnd.hh:47
-msgid   "Create Link"
-msgstr  "Створити посилання"
-
-#: ../xffm/common/util.hh:1404
-#, c-format
-msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
-        "attribute on that file."
-msgstr  "Файл скрипту «%s» не є виконуваним. Будь ласка, встановіть атрибут "
-        "виконуваності для цього файла."
-
-#: ../xffm/common/util.hh:1406 ../xffm/common/util.hh:1441
-#, c-format
-msgid   "Open with %s"
-msgstr  "Відкрити за допомогою %s"
-
-#: ../xffm/common/util.hh:1406
-msgid   "Text Editor"
-msgstr  "Текстовий редактор"
-
-#: ../xffm/common/util.hh:1443 ../xffm/common/gtk.hh:69
-msgid   "Execute Shell Command"
-msgstr  "Виконати команду оболонки"
-
-#: ../xffm/common/util.hh:1447
-msgid   "Console: quickly run single commands -- write a command here and "
-        "press enter."
-msgstr  "Консоль: тут можна швидко виконати окремі команди — напишіть команду "
-        "і натисніть Enter."
-
-#: ../xffm/common/gtk.hh:352 ../xffm/common/gtk.hh:360
-msgid   "Help"
-msgstr  "Довідка"
-
-#: ../xffm/common/run.hh:338
-msgid   "error"
-msgstr  "помилка"
-
-#: ../xffm/common/run.hh:342
-msgid   "warning"
-msgstr  "попередження"
-
-#: ../xffm/common/preview.hh:581
-msgid   "Empty file"
-msgstr  "Порожній файл"
-
-#: ../xffm/common/preview.hh:636
-#, c-format
-msgid   "Cannot read from %s"
-msgstr  "Неможливо прочитати з %s"
+#: ../xffm/completion/base.hh:142
+msgid   "Too many files open"
+msgstr  "Відкрито надто багато файлів"
 

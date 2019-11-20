@@ -1,12 +1,12 @@
-# Xffm+ translation file: lun ago 12 14:17:13 CDT 2019
-# Merged fron existing open source files
+# Xffm+ translation file: mié nov 20 12:45:17 CST 2019
+# Merged from existing open source files
 # http://xffm.org
 #
 #
 msgid   ""
 msgstr  "Project-Id-Version: xffm+\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2019-08-11 09:10-0500\n"
+        "POT-Creation-Date: 2019-11-20 12:34-0600\n"
         "PO-Revision-Date: 2012-03-02 13:48+0530\n"
         "Last-Translator: Sasi Bhushan Boddepalli <sasi@swecha.net>\n"
         "Language-Team: Telugu <indlinux-telugu@lists.sourceforge.net>\n"
@@ -22,399 +22,30 @@ msgstr  "Project-Id-Version: xffm+\n"
 msgid   "No Read Permission"
 msgstr  "సైటు అనుమతులు"
 
-#: ../xffm/completion/base.hh:28
-msgid   "Command"
-msgstr  "ఆదేశము"
-
-#: ../xffm/completion/base.hh:31
-msgid   "File"
-msgstr  "ఫైల్ (F)"
-
-#: ../xffm/completion/base.hh:34
-#, fuzzy
-msgid   "Command history"
-msgstr  "కాల్ చరిత్ర"
-
-#: ../xffm/completion/base.hh:37 ../xffm/find/dialog.hh:192
-msgid   "User"
-msgstr  "వినియోగదారు"
-
-#: ../xffm/completion/base.hh:40
-msgid   "Variable"
-msgstr  "చరరాశి"
-
-#: ../xffm/completion/base.hh:43
-msgid   "Host"
-msgstr  "అతిథ్యం"
-
-#: ../xffm/completion/base.hh:55
-#, fuzzy
-msgid   "Found no match"
-msgstr  "పదములు జతచేయుటకు"
-
-#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
-msgid   "Matches"
-msgstr  "పోలికలు (M)"
-
-#: ../xffm/completion/base.hh:142
-msgid   "Too many files open"
-msgstr  "చాలా ఫైళ్లు ఓపెన్"
-
-#: ../xffm/completion/base.hh:339 ../xffm/find/fgr.hh:124
-msgid   "Options:"
-msgstr  "ఐచ్ఛికాలు:"
-
-#: ../xffm/completion/bash.hh:133
-#, fuzzy
-msgid   "Completion mode:"
-msgstr  "ముగింపు కోడ్"
-
-#: ../xffm/completion/bash.hh:134
-msgid   "command"
-msgstr  "ఆదేశం"
-
-#: ../xffm/completion/bash.hh:135
-msgid   "file"
-msgstr  "దస్త్రం"
-
-#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
-#, fuzzy
-msgid   "Options >>"
-msgstr  "ఇచ్ఛాపూర్వకాలు"
-
-#: ../xffm/find/fgr.hh:124 ../xffm/find/signals.hh:100
-#: ../xffm/find/dialog.hh:301
-msgid   "Path"
-msgstr  "త్రోవ"
-
-#: ../xffm/find/fgr.hh:125
-msgid   "Locate documents and folders on this computer by name or content"
-msgstr  "పేరు లేదా విషయము ద్వారా ఈ కంప్యూటర్‌నందలి పత్రములను మరియు సంచయాలను గుర్తించుము"
-
-#: ../xffm/find/fgr.hh:126 ../xffm/find/dialog.hh:334
-msgid   "Filter:"
-msgstr  "వడపోత:"
-
-#: ../xffm/find/fgr.hh:126
-msgid   "Search for files"
-msgstr  "దస్త్రాల కోసం వెతుకు..."
-
-#: ../xffm/find/fgr.hh:128
-msgid   "Contents:"
-msgstr  "విషయములు:"
-
-#: ../xffm/find/fgr.hh:128
-#, fuzzy
-msgid   "File's contents filtered as plain text."
-msgstr  "ఫైలును సాదా పాఠము వలె దాయాలా?"
-
-#: ../xffm/find/fgr.hh:131
-#, fuzzy
-msgid   "Verbose output debugging mode."
-msgstr  "డీబగ్గింగ్ సంహిత ను చేతనంచేయి"
-
-#: ../xffm/find/fgr.hh:133
-msgid   "Show version information"
-msgstr  "రూపాంతరపు సమాచారం చూపించు"
-
-#: ../xffm/find/fgr.hh:135
-#, fuzzy
-msgid   "Filter Details"
-msgstr  "వాడుకరి వివరాలు"
-
-#: ../xffm/find/fgr.hh:138 ../xffm/find/dialog.hh:173
-#, fuzzy
-msgid   "Stay on single filesystem"
-msgstr  "దస్త్ర వ్యవస్థను సంశోధించు"
-
-#: ../xffm/find/fgr.hh:140
-msgid   "Print..."
-msgstr  "ముద్రించు (P)..."
-
-#: ../xffm/find/fgr.hh:140
-msgid   "The unique Process ID that identifies this process."
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:142 ../xffm/find/dialog.hh:170
-#, fuzzy
-msgid   "Find hidden files and directories"
-msgstr  "పాచెస్ ఫైళ్ళు మరియు డైరెక్టరీల"
-
-#: ../xffm/find/fgr.hh:143
-msgid   "Filter"
-msgstr  "ఫిల్టర్"
-
-#: ../xffm/find/fgr.hh:144
-msgid   "To display files which pass the filter (stars and regexps will be "
-        "processed)"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:146 ../xffm/find/dialog.hh:167
-#, fuzzy
-msgid   "Recursive"
-msgstr  "పునరావృతి"
-
-#: ../xffm/find/fgr.hh:147 ../xffm/find/fgr.hh:148 ../xffm/find/fgr.hh:149
-#: ../xffm/find/fgr.hh:150
-#, fuzzy
-msgid   "KByte"
-msgstr  "బైట్లు"
-
-#: ../xffm/find/fgr.hh:148
-#, fuzzy
-msgid   "is greater than or equal to"
-msgstr  "ఎక్కువ లేదా సమానం"
-
-#: ../xffm/find/fgr.hh:150
-#, fuzzy
-msgid   "is less than or equal to"
-msgstr  "తక్కువ లేదా సమానం"
-
-#: ../xffm/find/fgr.hh:152
-#, fuzzy
-msgid   "Set UID"
-msgstr  "అమర్చిపెట్టు (S)"
-
-#: ../xffm/find/fgr.hh:152
-msgid   "Executable Text Files"
-msgstr  "ఎక్జిక్యూటబుల్ పాఠ్య దస్త్రాలు"
-
-#: ../xffm/find/fgr.hh:154
-msgid   "The permissions of the file, in octal notation."
-msgstr  "అష్టసంఖ్యామానములో దస్త్రము యొక్క అనుమతులు."
-
-#: ../xffm/find/fgr.hh:155
-msgid   "Type"
-msgstr  "రకం"
-
-#: ../xffm/find/fgr.hh:157 ../xffm/find/signals.hh:14
-msgid   "Any"
-msgstr  "ఏదేని"
-
-#: ../xffm/find/fgr.hh:157
-#, fuzzy
-msgid   "Default type"
-msgstr  "అప్రమేయ అంశము"
-
-#: ../xffm/find/fgr.hh:158 ../xffm/common/preview.hh:478
-#, fuzzy
-msgid   "Regular file"
-msgstr  "సాదారణ"
-
-#: ../xffm/find/fgr.hh:159 ../xffm/find/signals.hh:8
-#: ../xffm/fm/view/local/popup.hh:1062 ../xffm/common/preview.hh:469
-msgid   "Directory"
-msgstr  "వివరము"
-
-#: ../xffm/find/fgr.hh:160 ../xffm/find/signals.hh:9
-#: ../xffm/common/preview.hh:475
-msgid   "Symbolic Link"
-msgstr  "చిహ్నమైన లింకు"
-
-#: ../xffm/find/fgr.hh:161
-#, fuzzy
-msgid   "UNIX Socket"
-msgstr  "UNIX స్కీమ్"
-
-#: ../xffm/find/fgr.hh:162 ../xffm/find/signals.hh:11
-#: ../xffm/common/preview.hh:463
-#, fuzzy
-msgid   "Block device"
-msgstr  "%s అవరోధ పరికరం"
-
-#: ../xffm/find/fgr.hh:163 ../xffm/find/signals.hh:12
-#: ../xffm/common/preview.hh:466
-#, fuzzy
-msgid   "Character device"
-msgstr  "అక్షర సమితి (a)"
-
-#: ../xffm/find/fgr.hh:164 ../xffm/find/signals.hh:13
-#: ../xffm/common/preview.hh:472
-msgid   "FIFO"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168 ../xffm/find/dialog.hh:214
-msgid   "Minutes"
-msgstr  "నిముషములు"
-
-#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
-#: ../xffm/find/fgr.hh:176 ../xffm/find/dialog.hh:263
-#: ../xffm/find/dialog.hh:363 ../xffm/fm/view/treeview.hh:18
-msgid   "Details"
-msgstr  "వివరాలు"
-
-#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
-#: ../xffm/find/fgr.hh:176 ../xffm/find/fgr.hh:179 ../xffm/find/fgr.hh:180
-#: ../xffm/find/fgr.hh:183 ../xffm/find/fgr.hh:184 ../xffm/find/fgr.hh:187
-#: ../xffm/find/fgr.hh:188
-#, fuzzy
-msgid   "TIME"
-msgstr  "కాలగడువు పూర్తి"
-
-#: ../xffm/find/fgr.hh:168 ../xffm/find/fgr.hh:171 ../xffm/find/fgr.hh:174
-#: ../xffm/find/fgr.hh:177
-msgid   "Previous"
-msgstr  "మునుపటి(v)"
-
-#: ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171 ../xffm/find/dialog.hh:219
-msgid   "Hours"
-msgstr  "గంటలు"
-
-#: ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174 ../xffm/find/dialog.hh:224
-msgid   "Days"
-msgstr  "రోజులు"
-
-#: ../xffm/find/fgr.hh:175
-msgid   "Month"
-msgstr  "నెల"
-
-#: ../xffm/find/fgr.hh:177
-#, fuzzy
-msgid   "Month(s)"
-msgstr  "నెల(లు)"
-
-#: ../xffm/find/fgr.hh:180
-#, fuzzy
-msgid   "Modification Time :"
-msgstr  "సవకణ సమయం"
-
-#: ../xffm/find/fgr.hh:184
-#, fuzzy
-msgid   "Access Time :"
-msgstr  "యాక్సెస్ సమయం"
-
-#: ../xffm/find/fgr.hh:188
-#, fuzzy
-msgid   "Creation Time :"
-msgstr  "సృష్టింపు సమయం"
-
-#: ../xffm/find/fgr.hh:191 ../xffm/find/fgr.hh:192
-#, fuzzy
-msgid   "uid"
-msgstr  "నిర్మించుము "
-
-#: ../xffm/find/fgr.hh:192
-msgid   "User:"
-msgstr  "వినియోగదారుడు:"
-
-#: ../xffm/find/fgr.hh:194 ../xffm/find/fgr.hh:195
-#, fuzzy
-msgid   "gid"
-msgstr  "ghi"
-
-#: ../xffm/find/fgr.hh:195
-msgid   "Group:"
-msgstr  "గ్రూప్:"
-
-#: ../xffm/find/fgr.hh:198
-msgid   "Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
-        "character that  normally  follows  a file  name"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:200
-msgid   "Content View"
-msgstr  "విషయ దర్శనం"
-
-#: ../xffm/find/fgr.hh:201 ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:203
-#: ../xffm/find/fgr.hh:204
-msgid   "STRING"
-msgstr  "పదబంధం"
-
-#: ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:204
-#: ../xffm/fm/view/local/popup.hh:759
-msgid   "Regular expression"
-msgstr  "క్రమబద్ద వ్యక్తీకరణ"
-
-#: ../xffm/find/fgr.hh:204
-msgid   "Extended"
-msgstr  "పొడగింపబడింది"
-
-#: ../xffm/find/fgr.hh:206
-msgid   "Ignore case"
-msgstr  "బడిని వదిలివేయుము(I)"
-
-#: ../xffm/find/fgr.hh:208
-msgid   "Text Files"
-msgstr  "పాఠ్యపు దస్త్రాలు"
-
-#: ../xffm/find/fgr.hh:210 ../xffm/find/dialog.hh:545
-msgid   "No match"
-msgstr  "ఏదీ సరిపోలిలేదు"
-
-#: ../xffm/find/fgr.hh:212 ../xffm/find/dialog.hh:463
-#, fuzzy
-msgid   "Line Count"
-msgstr  "వరుస క్రింద"
-
-#: ../xffm/find/fgr.hh:214
-msgid   "Words"
-msgstr  "పదములు"
-
-#: ../xffm/find/fgr.hh:216
-msgid   "Lines"
-msgstr  "గీతలు"
-
-#: ../xffm/find/fgr.hh:362
-#, fuzzy, c-format
-msgid   "Usage : %s [OPTIONS]\n"
-msgstr  "వాడుక: %s [ఆట‍]"
-
-#: ../xffm/find/signals.hh:7
-msgid   "Regular"
-msgstr  "సాదారణ"
-
-#: ../xffm/find/signals.hh:10 ../xffm/common/preview.hh:481
-#, fuzzy
-msgid   "Socket"
-msgstr  "సాకెట్ "
-
-#: ../xffm/find/signals.hh:66 ../xffm/find/signals.hh:454
-#: ../xffm/find/dialog.hh:176
-msgid   "Results"
-msgstr  "ఫలితాలు"
-
-#: ../xffm/find/signals.hh:368 ../xffm/find/dialog.hh:577
-#: ../xffm/response/chooserresponse.hh:21 ../xffm/response/entryresponse.hh:435
-#: ../xffm/fm/view/local/properties.hh:314 ../xffm/fm/view/local/rm.hh:157
-#: ../xffm/common/gtk.hh:409
-msgid   "Cancel"
-msgstr  "రద్దుచేయి"
-
-#: ../xffm/find/signals.hh:396 ../xffm/find/signals.hh:830
-#, fuzzy
-msgid   "No editor for current action."
-msgstr  "ప్రస్తుతం ఏ చర్యలు లేవు."
-
-#: ../xffm/find/signals.hh:454
-#, fuzzy
-msgid   "Upper limit:"
-msgstr  "ఎగువ పరిమితి రోజు"
-
-#: ../xffm/find/signals.hh:456
-#, fuzzy
-msgid   "Counting files..."
-msgstr  "ఫైళ్ళను దిగుమతించుట..."
-
-#: ../xffm/find/signals.hh:471
-#, fuzzy, c-format
-msgid   "Found %d match"
-msgid_plural    "Found %d matches"
-msgstr[0]       "%d% పోలిక"
-msgstr[1]       "%d% పోలికలు"
-
-#: ../xffm/find/signals.hh:473
-#, c-format
-msgid   "%s Finished : %s"
-msgstr  "%s పూర్తైనది : %s"
-
-#: ../xffm/find/signals.hh:596 ../xffm/find/signals.hh:598
-msgid   "Searching..."
-msgstr  "వెతుకుతోంది..."
-
 #: ../xffm/find/dialog.hh:91 ../xffm/find/dialog.hh:143
 #: ../xffm/find/dialog.hh:604
 msgid   "Find"
 msgstr  "వెతుకు (F)"
+
+#: ../xffm/find/dialog.hh:167 ../xffm/find/fgr.hh:146
+#, fuzzy
+msgid   "Recursive"
+msgstr  "పునరావృతి"
+
+#: ../xffm/find/dialog.hh:170 ../xffm/find/fgr.hh:142
+#, fuzzy
+msgid   "Find hidden files and directories"
+msgstr  "పాచెస్ ఫైళ్ళు మరియు డైరెక్టరీల"
+
+#: ../xffm/find/dialog.hh:173 ../xffm/find/fgr.hh:138
+#, fuzzy
+msgid   "Stay on single filesystem"
+msgstr  "దస్త్ర వ్యవస్థను సంశోధించు"
+
+#: ../xffm/find/dialog.hh:176 ../xffm/find/signals.hh:65
+#: ../xffm/find/signals.hh:427
+msgid   "Results"
+msgstr  "ఫలితాలు"
 
 #: ../xffm/find/dialog.hh:176
 #, fuzzy
@@ -436,6 +67,10 @@ msgstr  "బైట్లు"
 msgid   "At Most"
 msgstr  "ఎక్కువ(o)"
 
+#: ../xffm/find/dialog.hh:192 ../xffm/completion/base.hh:37
+msgid   "User"
+msgstr  "వినియోగదారు"
+
 #: ../xffm/find/dialog.hh:197
 msgid   "Group"
 msgstr  "గ్రూప్"
@@ -448,10 +83,22 @@ msgstr  "అష్టపు అనుమతులు"
 msgid   "SUID"
 msgstr  "SUID"
 
-#: ../xffm/find/dialog.hh:206 ../xffm/fm/view/local/popup.hh:1102
+#: ../xffm/find/dialog.hh:206 ../xffm/fm/view/local/popup.hh:1026
 #, fuzzy
 msgid   "Executable"
 msgstr  "నిర్వర్తించదగిన:"
+
+#: ../xffm/find/dialog.hh:214 ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168
+msgid   "Minutes"
+msgstr  "నిముషములు"
+
+#: ../xffm/find/dialog.hh:219 ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171
+msgid   "Hours"
+msgstr  "గంటలు"
+
+#: ../xffm/find/dialog.hh:224 ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174
+msgid   "Days"
+msgstr  "రోజులు"
 
 #: ../xffm/find/dialog.hh:230
 #, fuzzy
@@ -463,10 +110,25 @@ msgstr  "నెల"
 msgid   "File type : "
 msgstr  "ఫైలు రకం(t):"
 
-#: ../xffm/find/dialog.hh:255 ../xffm/find/dialog.hh:595
-#: ../xffm/fm/dialog/notebook/page/page.hh:71 ../xffm/common/gtk.hh:79
+#: ../xffm/find/dialog.hh:255 ../xffm/find/dialog.hh:595 ../xffm/gtk/gtk.hh:80
+#: ../xffm/fm/dialog/notebook/page/page.hh:71
 msgid   "Close"
 msgstr  "మూసివేయి"
+
+#: ../xffm/find/dialog.hh:263 ../xffm/find/dialog.hh:363
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/fm/view/treeview.hh:18
+msgid   "Details"
+msgstr  "వివరాలు"
+
+#: ../xffm/find/dialog.hh:301 ../xffm/find/fgr.hh:124
+#: ../xffm/find/signals.hh:94
+msgid   "Path"
+msgstr  "త్రోవ"
+
+#: ../xffm/find/dialog.hh:334 ../xffm/find/fgr.hh:126
+msgid   "Filter:"
+msgstr  "వడపోత:"
 
 #: ../xffm/find/dialog.hh:377
 #, fuzzy
@@ -491,6 +153,11 @@ msgstr  "పొడగింపబడింది"
 msgid   "Include binary files"
 msgstr  "దస్త్రాలను ఉంచు (f):"
 
+#: ../xffm/find/dialog.hh:463 ../xffm/find/fgr.hh:212
+#, fuzzy
+msgid   "Line Count"
+msgstr  "వరుస క్రింద"
+
 #: ../xffm/find/dialog.hh:489
 msgid   "Match"
 msgstr  "సరిచూచు (M)"
@@ -507,6 +174,19 @@ msgstr  "(W) పూర్తి పదాలు మాత్రమే"
 msgid   "lines"
 msgstr  "వరుసలు"
 
+#: ../xffm/find/dialog.hh:545 ../xffm/find/fgr.hh:210
+msgid   "No match"
+msgstr  "ఏదీ సరిపోలిలేదు"
+
+#: ../xffm/find/dialog.hh:577 ../xffm/find/signals.hh:341
+#: ../xffm/gtk/dialogs.hh:110 ../xffm/fm/view/local/rm.hh:157
+#: ../xffm/fm/view/local/properties.hh:310 ../xffm/fm/view/fuse/ecryptfs.hh:175
+#: ../xffm/fm/dialog/notebook/createini.hh:232
+#: ../xffm/fm/dialog/notebook/createini.hh:369
+#: ../xffm/response/entryresponse.hh:453 ../xffm/response/chooserresponse.hh:18
+msgid   "Cancel"
+msgstr  "రద్దుచేయి"
+
 #: ../xffm/find/dialog.hh:587
 msgid   "Clear"
 msgstr  "శుబ్రం చేయు(C)"
@@ -516,9 +196,9 @@ msgid   "Edit"
 msgstr  "సరిచేయు (E)"
 
 #: ../xffm/find/dialog.hh:743 ../xffm/find/dialog.hh:758
-#: ../xffm/common/util.hh:1354 ../xffm/common/util.hh:1356
-#: ../xffm/common/util.hh:1362 ../xffm/common/util.hh:1364
-#: ../xffm/common/preview.hh:460
+#: ../xffm/common/preview.hh:460 ../xffm/common/util.hh:1354
+#: ../xffm/common/util.hh:1356 ../xffm/common/util.hh:1362
+#: ../xffm/common/util.hh:1364
 msgid   "unknown"
 msgstr  "తెలియని"
 
@@ -582,200 +262,925 @@ msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
         "More information is available by typing \"man grep\"\n"
 msgstr  ""
 
-#: ../xffm/response/chooserresponse.hh:23
-msgid   "Open"
-msgstr  "తెరువు (O)"
+#: ../xffm/find/fgr.hh:124 ../xffm/fm/view/fuse/ecryptfs.hh:133
+#: ../xffm/completion/base.hh:339
+msgid   "Options:"
+msgstr  "ఐచ్ఛికాలు:"
 
-#: ../xffm/response/chooserresponse.hh:56
-msgid   "Choose directory"
-msgstr  "డైరెక్టరీని ఎంచుకోండి"
+#: ../xffm/find/fgr.hh:125
+msgid   "Locate documents and folders on this computer by name or content"
+msgstr  "పేరు లేదా విషయము ద్వారా ఈ కంప్యూటర్‌నందలి పత్రములను మరియు సంచయాలను గుర్తించుము"
 
-#: ../xffm/response/chooserresponse.hh:60
-msgid   "Choose file"
-msgstr  "ఫైల్ను ఎంచుకోండి"
+#: ../xffm/find/fgr.hh:126
+msgid   "Search for files"
+msgstr  "దస్త్రాల కోసం వెతుకు..."
 
-#: ../xffm/response/customresponse.hh:55
+#: ../xffm/find/fgr.hh:128
+msgid   "Contents:"
+msgstr  "విషయములు:"
+
+#: ../xffm/find/fgr.hh:128
 #, fuzzy
-msgid   "Execute command"
+msgid   "File's contents filtered as plain text."
+msgstr  "ఫైలును సాదా పాఠము వలె దాయాలా?"
+
+#: ../xffm/find/fgr.hh:131
+#, fuzzy
+msgid   "Verbose output debugging mode."
+msgstr  "డీబగ్గింగ్ సంహిత ను చేతనంచేయి"
+
+#: ../xffm/find/fgr.hh:133
+msgid   "Show version information"
+msgstr  "రూపాంతరపు సమాచారం చూపించు"
+
+#: ../xffm/find/fgr.hh:135
+#, fuzzy
+msgid   "Filter Details"
+msgstr  "వాడుకరి వివరాలు"
+
+#: ../xffm/find/fgr.hh:140
+msgid   "Print..."
+msgstr  "ముద్రించు (P)..."
+
+#: ../xffm/find/fgr.hh:140
+msgid   "The unique Process ID that identifies this process."
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:143
+msgid   "Filter"
+msgstr  "ఫిల్టర్"
+
+#: ../xffm/find/fgr.hh:144
+msgid   "To display files which pass the filter (stars and regexps will be "
+        "processed)"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:147 ../xffm/find/fgr.hh:148 ../xffm/find/fgr.hh:149
+#: ../xffm/find/fgr.hh:150
+#, fuzzy
+msgid   "KByte"
+msgstr  "బైట్లు"
+
+#: ../xffm/find/fgr.hh:148
+#, fuzzy
+msgid   "is greater than or equal to"
+msgstr  "ఎక్కువ లేదా సమానం"
+
+#: ../xffm/find/fgr.hh:150
+#, fuzzy
+msgid   "is less than or equal to"
+msgstr  "తక్కువ లేదా సమానం"
+
+#: ../xffm/find/fgr.hh:152
+#, fuzzy
+msgid   "Set UID"
+msgstr  "అమర్చిపెట్టు (S)"
+
+#: ../xffm/find/fgr.hh:152
+msgid   "Executable Text Files"
+msgstr  "ఎక్జిక్యూటబుల్ పాఠ్య దస్త్రాలు"
+
+#: ../xffm/find/fgr.hh:154
+msgid   "The permissions of the file, in octal notation."
+msgstr  "అష్టసంఖ్యామానములో దస్త్రము యొక్క అనుమతులు."
+
+#: ../xffm/find/fgr.hh:155
+msgid   "Type"
+msgstr  "రకం"
+
+#: ../xffm/find/fgr.hh:157 ../xffm/find/signals.hh:14
+msgid   "Any"
+msgstr  "ఏదేని"
+
+#: ../xffm/find/fgr.hh:157
+#, fuzzy
+msgid   "Default type"
+msgstr  "అప్రమేయ అంశము"
+
+#: ../xffm/find/fgr.hh:158 ../xffm/common/preview.hh:478
+#, fuzzy
+msgid   "Regular file"
+msgstr  "సాదారణ"
+
+#: ../xffm/find/fgr.hh:159 ../xffm/find/signals.hh:8
+#: ../xffm/common/preview.hh:469 ../xffm/fm/view/local/popup.hh:987
+msgid   "Directory"
+msgstr  "వివరము"
+
+#: ../xffm/find/fgr.hh:160 ../xffm/find/signals.hh:9
+#: ../xffm/common/preview.hh:475
+msgid   "Symbolic Link"
+msgstr  "చిహ్నమైన లింకు"
+
+#: ../xffm/find/fgr.hh:161
+#, fuzzy
+msgid   "UNIX Socket"
+msgstr  "UNIX స్కీమ్"
+
+#: ../xffm/find/fgr.hh:162 ../xffm/find/signals.hh:11
+#: ../xffm/common/preview.hh:463
+#, fuzzy
+msgid   "Block device"
+msgstr  "%s అవరోధ పరికరం"
+
+#: ../xffm/find/fgr.hh:163 ../xffm/find/signals.hh:12
+#: ../xffm/common/preview.hh:466
+#, fuzzy
+msgid   "Character device"
+msgstr  "అక్షర సమితి (a)"
+
+#: ../xffm/find/fgr.hh:164 ../xffm/find/signals.hh:13
+#: ../xffm/common/preview.hh:472
+msgid   "FIFO"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/find/fgr.hh:179 ../xffm/find/fgr.hh:180
+#: ../xffm/find/fgr.hh:183 ../xffm/find/fgr.hh:184 ../xffm/find/fgr.hh:187
+#: ../xffm/find/fgr.hh:188
+#, fuzzy
+msgid   "TIME"
+msgstr  "కాలగడువు పూర్తి"
+
+#: ../xffm/find/fgr.hh:168 ../xffm/find/fgr.hh:171 ../xffm/find/fgr.hh:174
+#: ../xffm/find/fgr.hh:177
+msgid   "Previous"
+msgstr  "మునుపటి(v)"
+
+#: ../xffm/find/fgr.hh:175
+msgid   "Month"
+msgstr  "నెల"
+
+#: ../xffm/find/fgr.hh:177
+#, fuzzy
+msgid   "Month(s)"
+msgstr  "నెల(లు)"
+
+#: ../xffm/find/fgr.hh:180
+#, fuzzy
+msgid   "Modification Time :"
+msgstr  "సవకణ సమయం"
+
+#: ../xffm/find/fgr.hh:184
+#, fuzzy
+msgid   "Access Time :"
+msgstr  "యాక్సెస్ సమయం"
+
+#: ../xffm/find/fgr.hh:188
+#, fuzzy
+msgid   "Creation Time :"
+msgstr  "సృష్టింపు సమయం"
+
+#: ../xffm/find/fgr.hh:191 ../xffm/find/fgr.hh:192
+#, fuzzy
+msgid   "uid"
+msgstr  "నిర్మించుము "
+
+#: ../xffm/find/fgr.hh:192
+msgid   "User:"
+msgstr  "వినియోగదారుడు:"
+
+#: ../xffm/find/fgr.hh:194 ../xffm/find/fgr.hh:195
+#, fuzzy
+msgid   "gid"
+msgstr  "ghi"
+
+#: ../xffm/find/fgr.hh:195
+msgid   "Group:"
+msgstr  "గ్రూప్:"
+
+#: ../xffm/find/fgr.hh:198
+msgid   "Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+        "character that  normally  follows  a file  name"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:200
+msgid   "Content View"
+msgstr  "విషయ దర్శనం"
+
+#: ../xffm/find/fgr.hh:201 ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:203
+#: ../xffm/find/fgr.hh:204
+msgid   "STRING"
+msgstr  "పదబంధం"
+
+#: ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:204
+#: ../xffm/fm/view/local/popup.hh:750
+msgid   "Regular expression"
+msgstr  "క్రమబద్ద వ్యక్తీకరణ"
+
+#: ../xffm/find/fgr.hh:204
+msgid   "Extended"
+msgstr  "పొడగింపబడింది"
+
+#: ../xffm/find/fgr.hh:206
+msgid   "Ignore case"
+msgstr  "బడిని వదిలివేయుము(I)"
+
+#: ../xffm/find/fgr.hh:208
+msgid   "Text Files"
+msgstr  "పాఠ్యపు దస్త్రాలు"
+
+#: ../xffm/find/fgr.hh:214
+msgid   "Words"
+msgstr  "పదములు"
+
+#: ../xffm/find/fgr.hh:216
+msgid   "Lines"
+msgstr  "గీతలు"
+
+#: ../xffm/find/fgr.hh:362
+#, fuzzy, c-format
+msgid   "Usage : %s [OPTIONS]\n"
+msgstr  "వాడుక: %s [ఆట‍]"
+
+#: ../xffm/find/signals.hh:7
+msgid   "Regular"
+msgstr  "సాదారణ"
+
+#: ../xffm/find/signals.hh:10 ../xffm/common/preview.hh:481
+#, fuzzy
+msgid   "Socket"
+msgstr  "సాకెట్ "
+
+#: ../xffm/find/signals.hh:369 ../xffm/find/signals.hh:803
+#, fuzzy
+msgid   "No editor for current action."
+msgstr  "ప్రస్తుతం ఏ చర్యలు లేవు."
+
+#: ../xffm/find/signals.hh:427
+#, fuzzy
+msgid   "Upper limit:"
+msgstr  "ఎగువ పరిమితి రోజు"
+
+#: ../xffm/find/signals.hh:429
+#, fuzzy
+msgid   "Counting files..."
+msgstr  "ఫైళ్ళను దిగుమతించుట..."
+
+#: ../xffm/find/signals.hh:444
+#, fuzzy, c-format
+msgid   "Found %d match"
+msgid_plural    "Found %d matches"
+msgstr[0]       "%d% పోలిక"
+msgstr[1]       "%d% పోలికలు"
+
+#: ../xffm/find/signals.hh:446
+#, c-format
+msgid   "%s Finished : %s"
+msgstr  "%s పూర్తైనది : %s"
+
+#: ../xffm/find/signals.hh:569 ../xffm/find/signals.hh:571
+msgid   "Searching..."
+msgstr  "వెతుకుతోంది..."
+
+#: ../xffm/common/preview.hh:581
+msgid   "Empty file"
+msgstr  "ఖాళీ దస్త్రం"
+
+#: ../xffm/common/preview.hh:636
+#, fuzzy, c-format
+msgid   "Cannot read from %s"
+msgstr  "\"%s\" నుండి చదవలేకపోతుం ది"
+
+#: ../xffm/common/settings.hh:30
+#, fuzzy
+msgid   "New File:"
+msgstr  "కొత్త దస్త్రం"
+
+#: ../xffm/common/gio.hh:91
+msgid   "Copying files"
+msgstr  "దస్త్రములను నకలుతీయుచున్నది"
+
+#: ../xffm/common/gio.hh:93 ../xffm/common/dnd.hh:35
+#: ../xffm/fm/dialog/clipboard.hh:30
+#, fuzzy
+msgid   "Moving files"
+msgstr  "దస్త్రాలను తరలిస్తున్నది"
+
+#: ../xffm/common/gio.hh:95
+#, fuzzy
+msgid   "linking"
+msgstr  "ఖాళీచేయుచున్నది"
+
+#: ../xffm/common/gio.hh:97
+msgid   "rename"
+msgstr  "నామముమార్చు"
+
+#: ../xffm/common/gio.hh:449
+#, c-format
+msgid   "(%d of %d)"
+msgstr  "(%d వది %d కిగాను)"
+
+#: ../xffm/common/util.hh:1404
+#, c-format
+msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
+        "attribute on that file."
+msgstr  ""
+
+#: ../xffm/common/util.hh:1406 ../xffm/common/util.hh:1441
+#, c-format
+msgid   "Open with %s"
+msgstr  "%s‍తో తెరువు"
+
+#: ../xffm/common/util.hh:1406
+msgid   "Text Editor"
+msgstr  "పాఠ్యము సరికూర్పరి"
+
+#: ../xffm/common/util.hh:1443 ../xffm/gtk/gtk.hh:70
+#, fuzzy
+msgid   "Execute Shell Command"
 msgstr  "షెల్ ఆదేశాలను నిర్వర్తిస్తుంది"
 
-#: ../xffm/response/customresponse.hh:103
-msgid   "Source File"
-msgstr  "మూలపు దస్త్రము"
+#: ../xffm/common/util.hh:1447
+msgid   "Console: quickly run single commands -- write a command here and "
+        "press enter."
+msgstr  ""
 
-#: ../xffm/response/entryresponse.hh:439 ../xffm/response/passwdresponse.hh:242
-msgid   "Ok"
-msgstr  "సరే (O)"
+#: ../xffm/common/util.hh:1452 ../xffm/fm/view/local/popup.hh:1033
+#: ../xffm/fm/view/local/popup.hh:1336 ../xffm/fm/view/local/popup.hh:1353
+msgid   "Run in Terminal"
+msgstr  "టెర్మినల్ లో అమలు"
 
-#: ../xffm/response/commandprogressresponse.hh:31
-msgid   "Items:"
-msgstr  "అంశాలు:"
+#: ../xffm/common/dnd.hh:41 ../xffm/fm/dialog/clipboard.hh:23
+msgid   "Copying files locally"
+msgstr  "దస్త్రములను స్థానికంగా నకలుతీయుచున్నది"
 
-#: ../xffm/response/passwdresponse.hh:19 ../xffm/response/passwdresponse.hh:25
-#: ../xffm/common/run.hh:464
+#: ../xffm/common/dnd.hh:47
+#, fuzzy
+msgid   "Create Link"
+msgstr  "లంకె సృష్టిని రద్దుచేయి(U)"
+
+#: ../xffm/common/dnd.hh:63
+#, fuzzy
+msgid   "more"
+msgstr  "మరింత చదువండి"
+
+#: ../xffm/common/run.hh:338 ../xffm/fm/view/local/popup.hh:1149
+msgid   "error"
+msgstr  "దోషం"
+
+#: ../xffm/common/run.hh:342
+#, fuzzy
+msgid   "warning"
+msgstr  "హెచ్చరిక"
+
+#: ../xffm/common/run.hh:464 ../xffm/response/passwdresponse.hh:28
+#: ../xffm/response/passwdresponse.hh:34
 msgid   "Enter password"
 msgstr  "సంకేతపదాన్ని ప్రవేశపెట్టండి"
 
-#: ../xffm/response/passwdresponse.hh:179
-#, fuzzy
-msgid   "User Input"
-msgstr  "మౌస్ ఇన్‌పుట్"
-
-#: ../xffm/response/passwdresponse.hh:195
-#, fuzzy
-msgid   "Response Requested"
-msgstr  "రెస్పాన్స్ అవుట్"
-
-#: ../xffm/response/timeoutresponse.hh:57
-msgid   "Dismiss"
-msgstr  "తృణీకరించుము (D)"
-
-#: ../xffm/response/commandresponse.hh:19
-msgid   "Running"
-msgstr  "నడుస్తోంది"
-
-#: ../xffm/response/commandresponse.hh:24
-#, fuzzy
-msgid   "Waiting for operation to finish..."
-msgstr  "ప్లేబాక్ ప్రారంభించుటకు నిరీక్షిస్తోంది..."
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:11
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:214
-#, fuzzy
-msgid   "Remove Button Contents"
-msgstr  "ఫోల్డర్ సారములను తీసివేయుము"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:67
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:209
-#, fuzzy
-msgid   "Add custom content"
-msgstr  "సాంప్రదాయ బటన్ విషయాన్ని జతచేయి"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:68
-#, fuzzy
-msgid   "Select file to load"
-msgstr  "జోడించడానికిదస్త్రమును ఎంచు (S)"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:125
-#, fuzzy, c-format
-msgid   "Cannot load file %s. Reason: %s"
-msgstr  "ఫైలు '%s'ను చదువలేము: %s"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:154
-#, fuzzy
-msgid   "You need to restart the application"
-msgstr  "మీరు అనువర్తనమును పునఃప్రారంభించవలసివుంది."
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:187
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:191
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:195
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:198 ../xffm/fm/view/pkg/model.hh:29
-#: ../xffm/fm/view/pkg/popup.hh:35
-#, fuzzy
-msgid   "Software Updater"
-msgstr  "సాప్ట్‍వేర్ నవీకరణ"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:236
-#: ../xffm/fm/view/pkg/model.hh:108 ../xffm/fm/view/pkg/model.hh:299
-#: ../xffm/fm/view/pkg/model.hh:306 ../xffm/fm/view/pkg/popup.hh:151
-#: ../xffm/common/gtk.hh:77
-msgid   "Search"
-msgstr  "వెతుకు"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:240 ../xffm/common/gtk.hh:67
+#: ../xffm/gtk/gtk.hh:68 ../xffm/fm/dialog/notebook/vbuttonbox.hh:252
 #, fuzzy
 msgid   "Open terminal"
 msgstr  "ఒక టెర్మినల్‌ను తెరువు"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:244
-msgid   "Open a New Window"
-msgstr  "ఒక కొత్త విండో తెరువు"
+#: ../xffm/gtk/gtk.hh:72 ../xffm/fm/view/local/popup.hh:157
+msgid   "Paste"
+msgstr  "అతికించు (P)"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:250
-#, fuzzy
-msgid   "Differences"
-msgstr  "వ్యత్యాసం"
+#: ../xffm/gtk/gtk.hh:74 ../xffm/fm/view/local/popup.hh:151
+#: ../xffm/fm/view/root/popup.hh:224
+msgid   "Add bookmark"
+msgstr  "బుక్మార్క్ను జోడించు "
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:256
-#: ../xffm/fm/view/root/model.hh:110
-#, fuzzy
-msgid   "Home Directory"
-msgstr  "నివాస సంచయం"
+#: ../xffm/gtk/gtk.hh:76 ../xffm/fm/view/local/popup.hh:152
+#: ../xffm/fm/view/root/popup.hh:170
+msgid   "Remove bookmark"
+msgstr  "బుక్మార్క్ తొలగించు"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:261
-#: ../xffm/fm/view/root/model.hh:168 ../xffm/fm/view/fstab/popup.hh:29
-msgid   "Disk Image Mounter"
-msgstr  "డిస్కు ప్రతిరూపం మౌంట్‌చేయునది"
+#: ../xffm/gtk/gtk.hh:78 ../xffm/fm/view/pkg/model.hh:108
+#: ../xffm/fm/view/pkg/model.hh:300 ../xffm/fm/view/pkg/model.hh:307
+#: ../xffm/fm/view/pkg/popup.hh:151
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:248
+msgid   "Search"
+msgstr  "వెతుకు"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:266
-#: ../xffm/fm/view/root/model.hh:137
-#, fuzzy
-msgid   "Trash bin"
-msgstr  "చెత్తబుట్టలో వేసిన తేదీ"
-
-#: ../xffm/fm/dialog/notebook/notebook.hh:56
-msgid   "Long press time"
-msgstr  "ఎక్కవసేపు వత్తు కాలము"
-
-#: ../xffm/fm/dialog/notebook/notebook.hh:75 ../xffm/common/gtk.hh:139
-msgid   "New Tab"
-msgstr  "కొత్త నెట్టు (T)"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:178
-#, fuzzy
-msgid   "Open menu"
-msgstr  "మెనూ తెరువుము (O)"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:230
-msgid   "View as list"
-msgstr  "జాబితా వలె చూడు"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:231
-msgid   "Show hidden files"
-msgstr  "దాగిన దస్త్రములను చూపు"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:232
-#, fuzzy
-msgid   "Show Backup Files"
-msgstr  "దస్త్రాలను చూపించు (S)"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:233
-#, fuzzy
-msgid   "Sort data in descending order"
-msgstr  "తెరవబడ్డ  క్రమంలో క్రమబద్ధీకరించబడింది"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:235
-#, fuzzy
-msgid   "Sort by date"
-msgstr  "పేరుని బట్టి క్రమబద్దీకరించు (N)"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:236
-#, fuzzy
-msgid   "Sort by size"
-msgstr  "పేరుని బట్టి క్రమబద్దీకరించు (N)"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:237 ../xffm/common/gtk.hh:81
+#: ../xffm/gtk/gtk.hh:82 ../xffm/fm/dialog/notebook/createini.hh:83
+#: ../xffm/fm/dialog/notebook/menupopover.hh:237
 msgid   "Exit"
 msgstr  "నిష్క్రమణ"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:270
-msgid   "Main menu"
-msgstr  "ప్రధాన మెను"
+#: ../xffm/gtk/gtk.hh:84 ../xffm/fm/view/local/popup.hh:85
+#: ../xffm/fm/view/local/popup.hh:142 ../xffm/fm/view/local/popup.hh:1332
+#: ../xffm/fm/view/local/popup.hh:1339 ../xffm/fm/view/local/popup.hh:1349
+#: ../xffm/fm/view/local/popup.hh:1356
+msgid   "Open with"
+msgstr  "దీనితో తెరువుము"
 
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:375
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:377
-msgid   "Go to"
-msgstr  "వెళ్ళండి(G)"
+#: ../xffm/gtk/gtk.hh:86 ../xffm/fm/view/local/popup.hh:100
+#: ../xffm/fm/view/local/popup.hh:156
+msgid   "Cut"
+msgstr  "కోయుము(u)"
 
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:382
-#: ../xffm/fm/view/local/popup.hh:887 ../xffm/fm/view/local/popup.hh:981
+#: ../xffm/gtk/gtk.hh:88 ../xffm/fm/view/local/popup.hh:99
+#: ../xffm/fm/view/local/popup.hh:155
+msgid   "Copy"
+msgstr  "నకలు (C)"
+
+#: ../xffm/gtk/gtk.hh:90 ../xffm/fm/view/local/rm.hh:176
+#: ../xffm/fm/view/local/popup.hh:103 ../xffm/fm/view/local/popup.hh:160
+msgid   "Delete"
+msgstr  "తీసివేయు"
+
+#: ../xffm/gtk/gtk.hh:92 ../xffm/fm/view/local/rm.hh:165
+msgid   "Shred"
+msgstr  ""
+
+#: ../xffm/gtk/gtk.hh:95 ../xffm/fm/view/local/popup.hh:95
+#: ../xffm/fm/view/local/popup.hh:145 ../xffm/fm/view/root/popup.hh:169
+#: ../xffm/fm/view/fstab/popup.hh:20
+msgid   "Open in New Tab"
+msgstr  "కొత్త ట్యాబ్‌లో తెరువు (T)"
+
+#: ../xffm/gtk/gtk.hh:140 ../xffm/fm/dialog/notebook/notebook.hh:75
+msgid   "New Tab"
+msgstr  "కొత్త నెట్టు (T)"
+
+#: ../xffm/gtk/dialogs.hh:42
+msgid   "Help"
+msgstr  "సహాయం (H)"
+
+#: ../xffm/fm/view/pkg/model.hh:29 ../xffm/fm/view/pkg/popup.hh:35
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:194
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:198
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:202
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:205
+#, fuzzy
+msgid   "Software Updater"
+msgstr  "సాప్ట్‍వేర్ నవీకరణ"
+
+#: ../xffm/fm/view/pkg/model.hh:41 ../xffm/fm/view/pkg/model.hh:52
+msgid   "Add or remove software installed on the system"
+msgstr  "ఈ వ్యవస్థ నందు స్థాపించిన సాఫ్ట్‍వేర్‌ను జతచేయి లేదా తీసివేయి"
+
+#: ../xffm/fm/view/pkg/model.hh:111
+msgid   "String"
+msgstr  "పదబంధం"
+
+#: ../xffm/fm/view/pkg/model.hh:117
+msgid   "Waiting for search results"
+msgstr  "శోధన ఫలితముల కొరకు వేచివుంది"
+
+#: ../xffm/fm/view/pkg/model.hh:175
+msgid   "No results"
+msgstr  "ఏ ఫలితాలు లేవు"
+
+#: ../xffm/fm/view/pkg/model.hh:374
+#, fuzzy
+msgid   "Currently busy\n"
+msgstr  "ప్రస్థుత ఆల్బమ్"
+
+#: ../xffm/fm/view/pkg/popup.hh:44
+#, fuzzy
+msgid   "Update Database"
+msgstr  "డేటాబేసుని ఉత్పత్తిచేయి"
+
+#: ../xffm/fm/view/pkg/popup.hh:45
+msgid   "Fetch"
+msgstr  "పొందు"
+
+#: ../xffm/fm/view/pkg/popup.hh:46
+#, fuzzy
+msgid   "Install --dry-run"
+msgstr  "మాడ్యూల్ ను స్థాపించండి"
+
+#: ../xffm/fm/view/pkg/popup.hh:47
+msgid   "Install"
+msgstr  "సంస్థాపించు "
+
+#: ../xffm/fm/view/pkg/popup.hh:48
+#, fuzzy
+msgid   "Uninstall --dry-run"
+msgstr  "నిర్మూలించు"
+
+#: ../xffm/fm/view/pkg/popup.hh:49
+msgid   "Uninstall"
+msgstr  "నిర్మూలించు"
+
+#: ../xffm/fm/view/pkg/popup.hh:50
+msgid   "Information"
+msgstr  "సమాచారం"
+
+#: ../xffm/fm/view/pkg/popup.hh:140
+msgid   "Version"
+msgstr  "రూపాంతరం"
+
+#: ../xffm/fm/view/pkg/popup.hh:149
+#, fuzzy
+msgid   "Go up"
+msgstr  "పైకి వెళ్ళు"
+
+#: ../xffm/fm/view/pkg/popup.hh:152
+#, fuzzy
+msgid   "Search packages"
+msgstr  "ప్యాకేజీల కొరకు శోధిస్తోంది"
+
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:95
+#, fuzzy, c-format
+msgid   "Loading %s...%s"
+msgstr  "%s నింపుతోంది..."
+
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:95
+msgid   "Please Wait..."
+msgstr  "దయచేసి వేచిఉండు..."
+
+#: ../xffm/fm/view/local/model.hh:124
+#, c-format
+msgid   "Reading \"%s\""
+msgstr  "\"%s\" చదువుతోంది"
+
+#: ../xffm/fm/view/local/model.hh:577 ../xffm/fm/view/base/monitor.hh:34
+#, fuzzy, c-format
+msgid   "Files: %s"
+msgstr  "దస్త్రము%s"
+
+#: ../xffm/fm/view/local/model.hh:580
+#, fuzzy, c-format
+msgid   "Loaded %d of %d articles"
+msgstr  "దస్త్రములను నింపుము(L):"
+
+#: ../xffm/fm/view/local/rm.hh:59
+#, c-format
+msgid   "Delete %s"
+msgstr  "తొలగించు %s(D)"
+
+#: ../xffm/fm/view/local/rm.hh:61
+msgid   "Warning: "
+msgstr  "హెచ్చరిక: "
+
+#: ../xffm/fm/view/local/rm.hh:61 ../xffm/fm/view/local/popup.hh:557
+#, fuzzy
+msgid   "Multiple selections"
+msgstr  "బహుళ స్థానములు అమర్చబడినవి"
+
+#: ../xffm/fm/view/local/rm.hh:92
+msgid   "Remove"
+msgstr  "తీసివేయి (R)"
+
+#: ../xffm/fm/view/local/rm.hh:142
+#, fuzzy
+msgid   "Apply to all"
+msgstr  "అనుసంధించుట కు:"
+
+#: ../xffm/fm/view/local/rm.hh:183
+msgid   "Trash"
+msgstr  "చెత్తబుట్ట"
+
+#: ../xffm/fm/view/local/popup.hh:94
+msgid   "New"
+msgstr  "కొత్త (N)"
+
+#: ../xffm/fm/view/local/popup.hh:101 ../xffm/fm/view/local/popup.hh:159
+#: ../xffm/fm/view/local/popup.hh:232 ../xffm/fm/view/local/popup.hh:234
+msgid   "Paste into"
+msgstr  "దీనిలోకి అతికించుము (i)"
+
+#: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:158
+msgid   "There is nothing on the clipboard to paste."
+msgstr  "క్లిప్ బోర్డునందు అతికించుటకు ఏమీలేదు."
+
+#: ../xffm/fm/view/local/popup.hh:106
+msgid   "Select All"
+msgstr  "అన్నింటినీ ఎంచు"
+
+#: ../xffm/fm/view/local/popup.hh:107 ../xffm/fm/view/local/popup.hh:746
+#, fuzzy
+msgid   "Match regular expression"
+msgstr  "సాధారణ సమీకరణం వలె సరిపోల్చుము (r)"
+
+#: ../xffm/fm/view/local/popup.hh:143 ../xffm/fm/view/local/popup.hh:1029
+#, fuzzy
+msgid   "Run Executable..."
+msgstr  "నిర్వర్తించదగిన:"
+
+#: ../xffm/fm/view/local/popup.hh:144 ../xffm/fm/view/local/popup.hh:877
+msgid   "Extract files from the archive"
+msgstr  "సంగ్రహము నుండి దస్త్రాలను పొందుము"
+
+#: ../xffm/fm/view/local/popup.hh:146 ../xffm/fm/view/local/popup.hh:928
+msgid   "Create a compressed archive with the selected objects"
+msgstr  "ఎంచుకున్న అంశములతో ఒక కుదించిన సంగ్రహమును సృష్టించు"
+
+#: ../xffm/fm/view/local/popup.hh:148 ../xffm/fm/view/root/popup.hh:172
+#: ../xffm/fm/view/fstab/popup.hh:37
+msgid   "Mount the volume associated with this folder"
+msgstr  "ఈ సంచయంతో సంబంధమువున్న సంపుటమును మౌంటు చేయు"
+
+#: ../xffm/fm/view/local/popup.hh:149 ../xffm/fm/view/root/popup.hh:173
+#: ../xffm/fm/view/fstab/popup.hh:38
+msgid   "Unmount the volume associated with this folder"
+msgstr  "ఈ సంచయంతో సంబంధమువున్న సంపుటమును అన్‌మౌంట్ చేయు"
+
+#: ../xffm/fm/view/local/popup.hh:161 ../xffm/fm/view/local/popup.hh:1242
+msgid   "Rename"
+msgstr  "పునఃనామకరణ "
+
+#: ../xffm/fm/view/local/popup.hh:162 ../xffm/fm/view/local/popup.hh:1225
+msgid   "Duplicate"
+msgstr  "నకలించు (D)"
+
+#: ../xffm/fm/view/local/popup.hh:163 ../xffm/fm/view/local/popup.hh:1208
+msgid   "Link"
+msgstr  "లింకుచేయి (O)"
+
+#: ../xffm/fm/view/local/popup.hh:164
+msgid   "Properties"
+msgstr  "లక్షణాలు"
+
+#: ../xffm/fm/view/local/popup.hh:554
+msgid   "Files:"
+msgstr  "దస్త్రాలు (F):"
+
+#: ../xffm/fm/view/local/popup.hh:744
+#, fuzzy
+msgid   "Select items"
+msgstr  "ఎంపికచేసిన అంశములు (S):"
+
+#: ../xffm/fm/view/local/popup.hh:761
+#, fuzzy
+msgid   "Regular Expression syntax is incorrect"
+msgstr  "సాధారణ సమీకరణం ఖాళీగా వుంది!"
+
+#: ../xffm/fm/view/local/popup.hh:791
+msgid   "No selection"
+msgstr  "ఎంపిక లేదు"
+
+#: ../xffm/fm/view/local/popup.hh:791
+msgid   "No matches."
+msgstr  "ఏవీ సరిపోలలేదు."
+
+#: ../xffm/fm/view/local/popup.hh:983 ../xffm/fm/view/local/popup.hh:1156
+#, fuzzy
+msgid   "Create new..."
+msgstr  "కొత్త మీటను సృష్టించు..."
+
+#: ../xffm/fm/view/local/popup.hh:990 ../xffm/fm/view/local/popup.hh:1085
+#: ../xffm/fm/view/local/popup.hh:1159
+#, fuzzy
+msgid   "New Name:"
+msgstr  "కొత్త నామము"
+
+#: ../xffm/fm/view/local/popup.hh:998
+msgid   "No name"
+msgstr  "పేరు లేదు"
+
+#: ../xffm/fm/view/local/popup.hh:1011
+#, c-format
+msgid   "Another file with the same name already exists in “%s”."
+msgstr  "“%s” లో ఇదే పేరుతో ఇప్పటికే ఇంకొక దస్త్రము ఉంది."
+
+#: ../xffm/fm/view/local/popup.hh:1036
+#, fuzzy
+msgid   "Arguments for the Command"
+msgstr  "యూజర్ ఆదేశానికి చెల్లని ఆర్గ్యుమెంట్లు.\n"
+
+#: ../xffm/fm/view/local/popup.hh:1117 ../xffm/fm/view/root/popup.hh:237
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:383
 #, fuzzy
 msgid   "Specify Output Directory..."
 msgstr  "అవుట్‌పుట్ డైరెక్టరీని ఎంచుకోండి"
 
+#: ../xffm/fm/view/local/popup.hh:1148
 #: ../xffm/fm/dialog/notebook/page/pathbar.hh:409
 msgid   "Not a directory"
 msgstr  "ఒక వివరము కాదు"
+
+#: ../xffm/fm/view/local/popup.hh:1307
+msgid   "You have selected multiple files or folders"
+msgstr  "మీరు ఎక్కువ ఫైళ్ళను లేదా  సంచయాలను ఎన్నుకొన్నారు"
+
+#: ../xffm/fm/view/local/popup.hh:1375 ../xffm/fm/view/local/view.hh:156
+msgid   "Invalid entry"
+msgstr  "చెల్లుబాటులో లేని ఎంట్రీ"
+
+#: ../xffm/fm/view/local/view.hh:177
+#, c-format
+msgid   "The volume '%s' is not mounted."
+msgstr  "వాల్యూమ్ '%s' మౌంట్ అవలేదు."
+
+#: ../xffm/fm/view/local/properties.hh:241
+msgid   "Properties and Attributes"
+msgstr  "పాఠ్య విశేషణాలను అమర్చు"
+
+#: ../xffm/fm/view/local/properties.hh:270
+#, fuzzy
+msgid   "File Mode:"
+msgstr  "ఫైలు లోడరు"
+
+#: ../xffm/fm/view/local/properties.hh:296
+msgid   "File:"
+msgstr  "ఫైలు:"
+
+#: ../xffm/fm/view/local/properties.hh:308
+msgid   "Apply changes"
+msgstr  "మార్పులను వర్తించు"
+
+#: ../xffm/fm/view/local/properties.hh:469
+msgid   "Encoding"
+msgstr  "ఎన్కోడింగు"
+
+#: ../xffm/fm/view/local/properties.hh:470 ../xffm/fm/view/treeview.hh:22
+#, fuzzy
+msgid   "Mimetype"
+msgstr  "మైమ్ రకములు"
+
+#: ../xffm/fm/view/local/properties.hh:474 ../xffm/fm/view/treeview.hh:19
+msgid   "Size"
+msgstr  "పరిమాణం"
+
+#: ../xffm/fm/view/local/properties.hh:475 ../xffm/fm/view/treeview.hh:20
+msgid   "Date"
+msgstr  "తేద"
+
+#: ../xffm/fm/view/local/properties.hh:492
+#, fuzzy
+msgid   "Successfully moved to trash."
+msgstr  "%s విజయవంతంగా తొలగించబడింది\n"
+
+#: ../xffm/fm/view/local/properties.hh:493
+msgid   "Source:"
+msgstr  "మూలం"
+
+#: ../xffm/fm/view/root/model.hh:124
+#, fuzzy
+msgid   "Root Directory"
+msgstr  "రిమోట్ డైరెక్టరీ:"
+
+#: ../xffm/fm/view/root/model.hh:140
+msgid   "This is the root of the filesystem"
+msgstr  "ఇది ఫైల్‌సిస్టమ్ యొక్క root"
+
+#: ../xffm/fm/view/root/model.hh:152
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:268
+#, fuzzy
+msgid   "Home Directory"
+msgstr  "నివాస సంచయం"
+
+#: ../xffm/fm/view/root/model.hh:179
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:278
+#, fuzzy
+msgid   "Trash bin"
+msgstr  "చెత్తబుట్టలో వేసిన తేదీ"
+
+#: ../xffm/fm/view/root/model.hh:210 ../xffm/fm/view/fstab/popup.hh:29
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:273
+msgid   "Disk Image Mounter"
+msgstr  "డిస్కు ప్రతిరూపం మౌంట్‌చేయునది"
+
+#: ../xffm/fm/view/root/model.hh:227
+msgid   "Mount local disks and devices"
+msgstr  "స్థానిక ఖనులు మరియు పరికరాలను పోగుచేయుము"
+
+#: ../xffm/fm/view/root/model.hh:267
+#, fuzzy
+msgid   "Go to bookmarked location"
+msgstr  "తరువాతి ఇష్టాంశము స్థానమునకు వెళ్ళుము."
+
+#: ../xffm/fm/view/root/popup.hh:175
+msgid   "Empty trash"
+msgstr  "ఖాళీ చెత్తబుట్ట"
+
+#: ../xffm/fm/view/root/popup.hh:228
+#, fuzzy
+msgid   "Ecrypt Volume"
+msgstr  "వాల్యూమ్ మొదలెట్టుము (t)"
+
+#: ../xffm/fm/view/root/popup.hh:229
+#, fuzzy
+msgid   "private"
+msgstr  "స్వంత"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:162 ../xffm/fm/view/fuse/ecryptfs.hh:163
+#: ../xffm/fm/view/fuse/ecryptfs.hh:185
+msgid   "Mount"
+msgstr  "మౌంట్(M)"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:179
+#: ../xffm/fm/dialog/notebook/createini.hh:87
+#: ../xffm/fm/dialog/notebook/createini.hh:371
+msgid   "Save"
+msgstr  "దాచు"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:182
+msgid   "Load"
+msgstr  "లోడుచేయి"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:398
+#: ../xffm/fm/dialog/notebook/createini.hh:67
+msgid   "Options"
+msgstr  "ఇచ్ఛాపూర్వకాలు"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:399
+msgid   "Advanced"
+msgstr  "ఆధునాతన"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:692 ../xffm/fm/view/fstab/view.hh:1414
+#, fuzzy, c-format
+msgid   "Mounting %s"
+msgstr  "%sను పోగుచేయుము (M)"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:745
+#, c-format
+msgid   "Enter Passphrase for %s"
+msgstr  "%s కొరకు రహస్యపదాన్ని ప్రవేశపెట్టండి"
+
+#: ../xffm/fm/view/fstab/popup.hh:21 ../xffm/fm/view/fstab/view.hh:1033
+msgid   "NFS Network Volume"
+msgstr  "NFS అల్లిక ధ్వని"
+
+#: ../xffm/fm/view/fstab/popup.hh:22
+msgid   "SSHFS Remote Synchronization Folder"
+msgstr  "SSHFS దూరస్థ సింక్రొనైజేషన్ ఫోల్డర్"
+
+#: ../xffm/fm/view/fstab/popup.hh:23 ../xffm/fm/view/fstab/view.hh:1085
+#, fuzzy
+msgid   "eCryptfs Volume"
+msgstr  "జ్ఞాపకశక్తి ధ్వని"
+
+#: ../xffm/fm/view/fstab/popup.hh:24 ../xffm/fm/view/fstab/view.hh:1111
+msgid   "CIFS Volume"
+msgstr  "CIFS ధ్వని"
+
+#: ../xffm/fm/view/fstab/popup.hh:129
+#, fuzzy
+msgid   "Mount Device"
+msgstr  "నియంత్రణ పరికరము"
+
+#: ../xffm/fm/view/fstab/popup.hh:141 ../xffm/fm/view/fstab/view.hh:924
+msgid   "Mount point:"
+msgstr  "మరల్పు బిందువు:"
+
+#: ../xffm/fm/view/fstab/view.hh:591
+#, fuzzy
+msgid   "Mount point: "
+msgstr  "మరల్పు బిందువు:"
+
+#: ../xffm/fm/view/fstab/view.hh:592
+#, fuzzy
+msgid   "Mount device: "
+msgstr  "పర్యవేక్షించిన పరికరములు (M):"
+
+#: ../xffm/fm/view/fstab/view.hh:660 ../xffm/fm/view/fstab/view.hh:676
+msgid   "Disks"
+msgstr  "డిస్కులు "
+
+#: ../xffm/fm/view/fstab/view.hh:922
+msgid   "No Label"
+msgstr  "లేబుల్ లేదు"
+
+#: ../xffm/fm/view/fstab/view.hh:923
+msgid   "There is no file system available (unformatted)"
+msgstr  "అక్కడ ఎటువంటి ఫైల్ వ్యవస్థ అందుబాటులో లేదు (ఫార్మేట్ చేయనిది)"
+
+#: ../xffm/fm/view/fstab/view.hh:924
+msgid   "Not mounted"
+msgstr  "అధిరోహించబడలేదు"
+
+#: ../xffm/fm/view/fstab/view.hh:1059
+msgid   "SFTP (via SSH)"
+msgstr  ""
+
+#: ../xffm/fm/view/fstab/view.hh:1414
+#, c-format
+msgid   "Unmounting %s"
+msgstr  "%s అనధిరోహించబడుతున్నది"
+
+#: ../xffm/fm/view/base/signals.hh:845
+#, fuzzy
+msgid   "Trash is empty"
+msgstr  "టాబ్లెట్ ఖాళీగా ఉన్నది"
+
+#: ../xffm/fm/view/base/signals.hh:847
+msgid   "Directory does not exist."
+msgstr  "డైరెక్టరీ లేదు."
+
+#: ../xffm/fm/view/treeview.hh:17
+msgid   "Name"
+msgstr  "పేరు"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
+#, fuzzy
+msgid   "Embedded Terminal"
+msgstr  "టెర్మినల్‌ను తెరువు (e)"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
+#, fuzzy
+msgid   "All items in the iconview."
+msgstr  "ఈ కిటికీలోని అన్ని అంశములను ఎంచుకోండి"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
+#, fuzzy
+msgid   "Scripting"
+msgstr  "Boo స్క్రిప్టింగ్"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
+#, fuzzy
+msgid   "Clear Log"
+msgstr  "జాబితాను శుభ్రముచేయి"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
+msgid   "Terminal font"
+msgstr  "టెర్మినల్ ఫాంటు"
 
 #: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
 #, fuzzy
@@ -830,17 +1235,22 @@ msgstr  "అంశీకరణ ఉల్లంఘన"
 msgid   "PID"
 msgstr  "PID"
 
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:376
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:378
+msgid   "Go to"
+msgstr  "వెళ్ళండి(G)"
+
 #: ../xffm/fm/dialog/notebook/page/page.hh:59
 msgid   "loading..."
 msgstr  "లోడవుతున్నది..."
 
-#: ../xffm/fm/dialog/notebook/page/page.hh:151
+#: ../xffm/fm/dialog/notebook/page/page.hh:152
 #: ../xffm/fm/dialog/notebook/page/page.hh:167
 #, fuzzy
 msgid   "Confirm Replace"
 msgstr  "కొట్టివేతను నిర్ధరించుము"
 
-#: ../xffm/fm/dialog/notebook/page/page.hh:153
+#: ../xffm/fm/dialog/notebook/page/page.hh:154
 #, fuzzy
 msgid   "Destination File"
 msgstr  "గమ్య దస్త్రము‌నామము"
@@ -850,39 +1260,175 @@ msgstr  "గమ్య దస్త్రము‌నామము"
 msgid   "The output file %s already exists, do you want to overwrite it?"
 msgstr  "ఫైల్ \"% s\" ఇప్పటికే ఉంది. మీరు అది ఓవర్రైట్ చేయాలని మీరు అనుకుంటున్నారా?"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
+#: ../xffm/fm/dialog/notebook/createini.hh:67
 #, fuzzy
-msgid   "Embedded Terminal"
-msgstr  "టెర్మినల్‌ను తెరువు (e)"
+msgid   "maximum"
+msgstr  "గరిష్టం"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
+#: ../xffm/fm/dialog/notebook/createini.hh:75
 #, fuzzy
-msgid   "All items in the iconview."
-msgstr  "ఈ కిటికీలోని అన్ని అంశములను ఎంచుకోండి"
+msgid   "Add option"
+msgstr  "ఎమోటికాన్‌ను జతచేయుము"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
+#: ../xffm/fm/dialog/notebook/createini.hh:79
 #, fuzzy
-msgid   "Scripting"
-msgstr  "Boo స్క్రిప్టింగ్"
+msgid   "Remove option"
+msgstr  "ప్రాంతాన్ని తీసివేయి"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
+#: ../xffm/fm/dialog/notebook/createini.hh:158
 #, fuzzy
-msgid   "Clear Log"
-msgstr  "జాబితాను శుభ్రముచేయి"
+msgid   "icon ID"
+msgstr  "ప్రతిమ"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
-msgid   "Terminal font"
-msgstr  "టెర్మినల్ ఫాంటు"
-
-#: ../xffm/fm/dialog/clipboard.hh:23 ../xffm/common/dnd.hh:41
-msgid   "Copying files locally"
-msgstr  "దస్త్రములను స్థానికంగా నకలుతీయుచున్నది"
-
-#: ../xffm/fm/dialog/clipboard.hh:30 ../xffm/common/gio.hh:83
-#: ../xffm/common/dnd.hh:35
+#: ../xffm/fm/dialog/notebook/createini.hh:159
 #, fuzzy
-msgid   "Moving files"
-msgstr  "దస్త్రాలను తరలిస్తున్నది"
+msgid   "tooltip"
+msgstr  "సాధన చిట్కా"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:160
+#, fuzzy
+msgid   "Select work directory"
+msgstr  "ఒక డైరెక్టరీని ఎంచుకొను"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:163
+#, fuzzy
+msgid   "Select executable"
+msgstr  "తర్వాతి పొరను ఎంచుకొను (N)"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:166
+msgid   "Run in terminal"
+msgstr  "అగ్రములో నడుపు"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:234
+#: ../xffm/response/chooserresponse.hh:20
+msgid   "Open"
+msgstr  "తెరువు (O)"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:268
+#: ../xffm/response/chooserresponse.hh:55
+#: ../xffm/response/chooserresponse.hh:69
+msgid   "Choose file"
+msgstr  "ఫైల్ను ఎంచుకోండి"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:277
+#: ../xffm/response/chooserresponse.hh:50
+#: ../xffm/response/chooserresponse.hh:62
+msgid   "Choose directory"
+msgstr  "డైరెక్టరీని ఎంచుకోండి"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:366
+msgid   "Save File"
+msgstr  "దస్త్రమును దాయి"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:380
+msgid   "customButton.ini"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/createini.hh:420
+msgid   "Option"
+msgstr  "ఐచ్చికము"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:424
+msgid   "text"
+msgstr  "పాఠం"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:431 ../xffm/completion/bash.hh:135
+msgid   "file"
+msgstr  "దస్త్రం"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:436
+msgid   "folder"
+msgstr  "ఫోల్డర్"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:441
+msgid   "on"
+msgstr  "పైన"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:446
+msgid   "off"
+msgstr  "ఆఫ్‌చేయి"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:16
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:226
+#, fuzzy
+msgid   "Remove Button Contents"
+msgstr  "ఫోల్డర్ సారములను తీసివేయుము"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:75
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:221
+#, fuzzy
+msgid   "Add custom content"
+msgstr  "సాంప్రదాయ బటన్ విషయాన్ని జతచేయి"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:76
+#, fuzzy
+msgid   "Select file to load"
+msgstr  "జోడించడానికిదస్త్రమును ఎంచు (S)"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:132
+#, fuzzy, c-format
+msgid   "Cannot load file %s. Reason: %s"
+msgstr  "ఫైలు '%s'ను చదువలేము: %s"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:161
+#, fuzzy
+msgid   "You need to restart the application"
+msgstr  "మీరు అనువర్తనమును పునఃప్రారంభించవలసివుంది."
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:216
+#, fuzzy
+msgid   "FIXME New custom content"
+msgstr  "మలచిన చేతనము చేయుము"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:256
+msgid   "Open a New Window"
+msgstr  "ఒక కొత్త విండో తెరువు"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:262
+#, fuzzy
+msgid   "Differences"
+msgstr  "వ్యత్యాసం"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:178
+#, fuzzy
+msgid   "Open menu"
+msgstr  "మెనూ తెరువుము (O)"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:230
+msgid   "View as list"
+msgstr  "జాబితా వలె చూడు"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:231
+msgid   "Show hidden files"
+msgstr  "దాగిన దస్త్రములను చూపు"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:232
+#, fuzzy
+msgid   "Show Backup Files"
+msgstr  "దస్త్రాలను చూపించు (S)"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:233
+#, fuzzy
+msgid   "Sort data in descending order"
+msgstr  "తెరవబడ్డ  క్రమంలో క్రమబద్ధీకరించబడింది"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:235
+#, fuzzy
+msgid   "Sort by date"
+msgstr  "పేరుని బట్టి క్రమబద్దీకరించు (N)"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:236
+#, fuzzy
+msgid   "Sort by size"
+msgstr  "పేరుని బట్టి క్రమబద్దీకరించు (N)"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:270
+msgid   "Main menu"
+msgstr  "ప్రధాన మెను"
+
+#: ../xffm/fm/dialog/notebook/notebook.hh:56
+msgid   "Long press time"
+msgstr  "ఎక్కవసేపు వత్తు కాలము"
 
 #: ../xffm/fm/dialog/dialog.hh:122
 msgid   "Removed"
@@ -893,506 +1439,87 @@ msgstr  "తీసివేయబడింది"
 msgid   "Detected device(s):"
 msgstr  "పరికరాల ఆచూకి తీయుము (D)"
 
-#: ../xffm/fm/view/local/model.hh:124
-#, c-format
-msgid   "Reading \"%s\""
-msgstr  "\"%s\" చదువుతోంది"
+#: ../xffm/response/progress.hh:82 ../xffm/response/commandresponse.hh:57
+msgid   "Running"
+msgstr  "నడుస్తోంది"
 
-#: ../xffm/fm/view/local/model.hh:577 ../xffm/fm/view/base/monitor.hh:34
-#, fuzzy, c-format
-msgid   "Files: %s"
-msgstr  "దస్త్రము%s"
-
-#: ../xffm/fm/view/local/model.hh:580
-#, fuzzy, c-format
-msgid   "Loaded %d of %d articles"
-msgstr  "దస్త్రములను నింపుము(L):"
-
-#: ../xffm/fm/view/local/popup.hh:85 ../xffm/fm/view/local/popup.hh:142
-#: ../xffm/fm/view/local/popup.hh:1287 ../xffm/fm/view/local/popup.hh:1294
-#: ../xffm/fm/view/local/popup.hh:1305 ../xffm/fm/view/local/popup.hh:1312
-#: ../xffm/common/gtk.hh:83
-msgid   "Open with"
-msgstr  "దీనితో తెరువుము"
-
-#: ../xffm/fm/view/local/popup.hh:94
-msgid   "New"
-msgstr  "కొత్త (N)"
-
-#: ../xffm/fm/view/local/popup.hh:95 ../xffm/fm/view/local/popup.hh:145
-#: ../xffm/fm/view/root/popup.hh:136 ../xffm/fm/view/fstab/popup.hh:20
-#: ../xffm/common/gtk.hh:94
-msgid   "Open in New Tab"
-msgstr  "కొత్త ట్యాబ్‌లో తెరువు (T)"
-
-#: ../xffm/fm/view/local/popup.hh:99 ../xffm/fm/view/local/popup.hh:155
-#: ../xffm/common/gtk.hh:87
-msgid   "Copy"
-msgstr  "నకలు (C)"
-
-#: ../xffm/fm/view/local/popup.hh:100 ../xffm/fm/view/local/popup.hh:156
-#: ../xffm/common/gtk.hh:85
-msgid   "Cut"
-msgstr  "కోయుము(u)"
-
-#: ../xffm/fm/view/local/popup.hh:101 ../xffm/fm/view/local/popup.hh:159
-#: ../xffm/fm/view/local/popup.hh:232 ../xffm/fm/view/local/popup.hh:234
-msgid   "Paste into"
-msgstr  "దీనిలోకి అతికించుము (i)"
-
-#: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:158
-msgid   "There is nothing on the clipboard to paste."
-msgstr  "క్లిప్ బోర్డునందు అతికించుటకు ఏమీలేదు."
-
-#: ../xffm/fm/view/local/popup.hh:103 ../xffm/fm/view/local/popup.hh:160
-#: ../xffm/fm/view/local/rm.hh:176 ../xffm/common/gtk.hh:89
-msgid   "Delete"
-msgstr  "తీసివేయు"
-
-#: ../xffm/fm/view/local/popup.hh:106
-msgid   "Select All"
-msgstr  "అన్నింటినీ ఎంచు"
-
-#: ../xffm/fm/view/local/popup.hh:107 ../xffm/fm/view/local/popup.hh:755
+#: ../xffm/response/progress.hh:87 ../xffm/response/commandresponse.hh:61
 #, fuzzy
-msgid   "Match regular expression"
-msgstr  "సాధారణ సమీకరణం వలె సరిపోల్చుము (r)"
+msgid   "Waiting for operation to finish..."
+msgstr  "ప్లేబాక్ ప్రారంభించుటకు నిరీక్షిస్తోంది..."
 
-#: ../xffm/fm/view/local/popup.hh:143 ../xffm/fm/view/local/popup.hh:1105
+#: ../xffm/response/passwdresponse.hh:131
 #, fuzzy
-msgid   "Run Executable..."
-msgstr  "నిర్వర్తించదగిన:"
+msgid   "User Input"
+msgstr  "మౌస్ ఇన్‌పుట్"
 
-#: ../xffm/fm/view/local/popup.hh:144 ../xffm/fm/view/local/popup.hh:875
-msgid   "Extract files from the archive"
-msgstr  "సంగ్రహము నుండి దస్త్రాలను పొందుము"
-
-#: ../xffm/fm/view/local/popup.hh:146 ../xffm/fm/view/local/popup.hh:966
-msgid   "Create a compressed archive with the selected objects"
-msgstr  "ఎంచుకున్న అంశములతో ఒక కుదించిన సంగ్రహమును సృష్టించు"
-
-#: ../xffm/fm/view/local/popup.hh:148 ../xffm/fm/view/fstab/popup.hh:37
-msgid   "Mount the volume associated with this folder"
-msgstr  "ఈ సంచయంతో సంబంధమువున్న సంపుటమును మౌంటు చేయు"
-
-#: ../xffm/fm/view/local/popup.hh:149 ../xffm/fm/view/fstab/popup.hh:38
-msgid   "Unmount the volume associated with this folder"
-msgstr  "ఈ సంచయంతో సంబంధమువున్న సంపుటమును అన్‌మౌంట్ చేయు"
-
-#: ../xffm/fm/view/local/popup.hh:151 ../xffm/common/gtk.hh:73
-msgid   "Add bookmark"
-msgstr  "బుక్మార్క్ను జోడించు "
-
-#: ../xffm/fm/view/local/popup.hh:152 ../xffm/fm/view/root/popup.hh:137
-#: ../xffm/common/gtk.hh:75
-msgid   "Remove bookmark"
-msgstr  "బుక్మార్క్ తొలగించు"
-
-#: ../xffm/fm/view/local/popup.hh:157 ../xffm/common/gtk.hh:71
-msgid   "Paste"
-msgstr  "అతికించు (P)"
-
-#: ../xffm/fm/view/local/popup.hh:161 ../xffm/fm/view/local/popup.hh:1231
-msgid   "Rename"
-msgstr  "పునఃనామకరణ "
-
-#: ../xffm/fm/view/local/popup.hh:162 ../xffm/fm/view/local/popup.hh:1217
-msgid   "Duplicate"
-msgstr  "నకలించు (D)"
-
-#: ../xffm/fm/view/local/popup.hh:163 ../xffm/fm/view/local/popup.hh:1203
-msgid   "Link"
-msgstr  "లింకుచేయి (O)"
-
-#: ../xffm/fm/view/local/popup.hh:164
-msgid   "Properties"
-msgstr  "లక్షణాలు"
-
-#: ../xffm/fm/view/local/popup.hh:562
-msgid   "Files:"
-msgstr  "దస్త్రాలు (F):"
-
-#: ../xffm/fm/view/local/popup.hh:565 ../xffm/fm/view/local/rm.hh:61
+#: ../xffm/response/passwdresponse.hh:147
 #, fuzzy
-msgid   "Multiple selections"
-msgstr  "బహుళ స్థానములు అమర్చబడినవి"
+msgid   "Response Requested"
+msgstr  "రెస్పాన్స్ అవుట్"
 
-#: ../xffm/fm/view/local/popup.hh:753
+#: ../xffm/response/passwdresponse.hh:194 ../xffm/response/entryresponse.hh:457
+msgid   "Ok"
+msgstr  "సరే (O)"
+
+#: ../xffm/response/customresponse.hh:55
 #, fuzzy
-msgid   "Select items"
-msgstr  "ఎంపికచేసిన అంశములు (S):"
-
-#: ../xffm/fm/view/local/popup.hh:771
-#, fuzzy
-msgid   "Regular Expression syntax is incorrect"
-msgstr  "సాధారణ సమీకరణం ఖాళీగా వుంది!"
-
-#: ../xffm/fm/view/local/popup.hh:801
-msgid   "No selection"
-msgstr  "ఎంపిక లేదు"
-
-#: ../xffm/fm/view/local/popup.hh:801
-msgid   "No matches."
-msgstr  "ఏవీ సరిపోలలేదు."
-
-#: ../xffm/fm/view/local/popup.hh:1058
-#, fuzzy
-msgid   "Create new..."
-msgstr  "కొత్త మీటను సృష్టించు..."
-
-#: ../xffm/fm/view/local/popup.hh:1065 ../xffm/fm/view/local/popup.hh:1146
-#, fuzzy
-msgid   "New Name:"
-msgstr  "కొత్త నామము"
-
-#: ../xffm/fm/view/local/popup.hh:1074
-msgid   "No name"
-msgstr  "పేరు లేదు"
-
-#: ../xffm/fm/view/local/popup.hh:1087
-#, c-format
-msgid   "Another file with the same name already exists in “%s”."
-msgstr  "“%s” లో ఇదే పేరుతో ఇప్పటికే ఇంకొక దస్త్రము ఉంది."
-
-#: ../xffm/fm/view/local/popup.hh:1109 ../xffm/fm/view/local/popup.hh:1291
-#: ../xffm/fm/view/local/popup.hh:1309 ../xffm/common/util.hh:1452
-msgid   "Run in Terminal"
-msgstr  "టెర్మినల్ లో అమలు"
-
-#: ../xffm/fm/view/local/popup.hh:1112
-#, fuzzy
-msgid   "Arguments for the Command"
-msgstr  "యూజర్ ఆదేశానికి చెల్లని ఆర్గ్యుమెంట్లు.\n"
-
-#: ../xffm/fm/view/local/popup.hh:1258
-msgid   "You have selected multiple files or folders"
-msgstr  "మీరు ఎక్కువ ఫైళ్ళను లేదా  సంచయాలను ఎన్నుకొన్నారు"
-
-#: ../xffm/fm/view/local/popup.hh:1332 ../xffm/fm/view/local/view.hh:156
-msgid   "Invalid entry"
-msgstr  "చెల్లుబాటులో లేని ఎంట్రీ"
-
-#: ../xffm/fm/view/local/properties.hh:245
-msgid   "Properties and Attributes"
-msgstr  "పాఠ్య విశేషణాలను అమర్చు"
-
-#: ../xffm/fm/view/local/properties.hh:274
-#, fuzzy
-msgid   "File Mode:"
-msgstr  "ఫైలు లోడరు"
-
-#: ../xffm/fm/view/local/properties.hh:300
-msgid   "File:"
-msgstr  "ఫైలు:"
-
-#: ../xffm/fm/view/local/properties.hh:312
-msgid   "Apply changes"
-msgstr  "మార్పులను వర్తించు"
-
-#: ../xffm/fm/view/local/properties.hh:477
-#, fuzzy
-msgid   "Successfully moved to trash."
-msgstr  "%s విజయవంతంగా తొలగించబడింది\n"
-
-#: ../xffm/fm/view/local/properties.hh:478
-msgid   "Source:"
-msgstr  "మూలం"
-
-#: ../xffm/fm/view/local/rm.hh:59
-#, c-format
-msgid   "Delete %s"
-msgstr  "తొలగించు %s(D)"
-
-#: ../xffm/fm/view/local/rm.hh:61
-msgid   "Warning: "
-msgstr  "హెచ్చరిక: "
-
-#: ../xffm/fm/view/local/rm.hh:92
-msgid   "Remove"
-msgstr  "తీసివేయి (R)"
-
-#: ../xffm/fm/view/local/rm.hh:142
-#, fuzzy
-msgid   "Apply to all"
-msgstr  "అనుసంధించుట కు:"
-
-#: ../xffm/fm/view/local/rm.hh:165 ../xffm/common/gtk.hh:91
-msgid   "Shred"
-msgstr  ""
-
-#: ../xffm/fm/view/local/rm.hh:183
-msgid   "Trash"
-msgstr  "చెత్తబుట్ట"
-
-#: ../xffm/fm/view/local/view.hh:177
-#, c-format
-msgid   "The volume '%s' is not mounted."
-msgstr  "వాల్యూమ్ '%s' మౌంట్ అవలేదు."
-
-#: ../xffm/fm/view/root/model.hh:82
-#, fuzzy
-msgid   "Root Directory"
-msgstr  "రిమోట్ డైరెక్టరీ:"
-
-#: ../xffm/fm/view/root/model.hh:98
-msgid   "This is the root of the filesystem"
-msgstr  "ఇది ఫైల్‌సిస్టమ్ యొక్క root"
-
-#: ../xffm/fm/view/root/model.hh:176 ../xffm/fm/view/root/model.hh:191
-msgid   "Mount local disks and devices"
-msgstr  "స్థానిక ఖనులు మరియు పరికరాలను పోగుచేయుము"
-
-#: ../xffm/fm/view/root/model.hh:177 ../xffm/fm/view/fstab/popup.hh:23
-#: ../xffm/fm/view/fstab/view.hh:1084
-#, fuzzy
-msgid   "eCryptfs Volume"
-msgstr  "జ్ఞాపకశక్తి ధ్వని"
-
-#: ../xffm/fm/view/root/model.hh:178 ../xffm/fm/view/fstab/popup.hh:22
-msgid   "SSHFS Remote Synchronization Folder"
-msgstr  "SSHFS దూరస్థ సింక్రొనైజేషన్ ఫోల్డర్"
-
-#: ../xffm/fm/view/root/model.hh:179 ../xffm/fm/view/fstab/popup.hh:21
-#: ../xffm/fm/view/fstab/view.hh:1032
-msgid   "NFS Network Volume"
-msgstr  "NFS అల్లిక ధ్వని"
-
-#: ../xffm/fm/view/root/model.hh:180 ../xffm/fm/view/fstab/popup.hh:24
-#: ../xffm/fm/view/fstab/view.hh:1110
-msgid   "CIFS Volume"
-msgstr  "CIFS ధ్వని"
-
-#: ../xffm/fm/view/root/model.hh:229
-#, fuzzy
-msgid   "Go to bookmarked location"
-msgstr  "తరువాతి ఇష్టాంశము స్థానమునకు వెళ్ళుము."
-
-#: ../xffm/fm/view/root/popup.hh:138
-msgid   "Empty trash"
-msgstr  "ఖాళీ చెత్తబుట్ట"
-
-#: ../xffm/fm/view/fstab/popup.hh:129
-#, fuzzy
-msgid   "Mount Device"
-msgstr  "నియంత్రణ పరికరము"
-
-#: ../xffm/fm/view/fstab/popup.hh:141 ../xffm/fm/view/fstab/view.hh:923
-msgid   "Mount point:"
-msgstr  "మరల్పు బిందువు:"
-
-#: ../xffm/fm/view/fstab/view.hh:590
-#, fuzzy
-msgid   "Mount point: "
-msgstr  "మరల్పు బిందువు:"
-
-#: ../xffm/fm/view/fstab/view.hh:591
-#, fuzzy
-msgid   "Mount device: "
-msgstr  "పర్యవేక్షించిన పరికరములు (M):"
-
-#: ../xffm/fm/view/fstab/view.hh:659 ../xffm/fm/view/fstab/view.hh:675
-msgid   "Disks"
-msgstr  "డిస్కులు "
-
-#: ../xffm/fm/view/fstab/view.hh:921
-msgid   "No Label"
-msgstr  "లేబుల్ లేదు"
-
-#: ../xffm/fm/view/fstab/view.hh:922
-msgid   "There is no file system available (unformatted)"
-msgstr  "అక్కడ ఎటువంటి ఫైల్ వ్యవస్థ అందుబాటులో లేదు (ఫార్మేట్ చేయనిది)"
-
-#: ../xffm/fm/view/fstab/view.hh:923
-msgid   "Not mounted"
-msgstr  "అధిరోహించబడలేదు"
-
-#: ../xffm/fm/view/fstab/view.hh:1058
-msgid   "SFTP (via SSH)"
-msgstr  ""
-
-#: ../xffm/fm/view/fstab/view.hh:1413
-#, c-format
-msgid   "Unmounting %s"
-msgstr  "%s అనధిరోహించబడుతున్నది"
-
-#: ../xffm/fm/view/fstab/view.hh:1413
-#, fuzzy, c-format
-msgid   "Mounting %s"
-msgstr  "%sను పోగుచేయుము (M)"
-
-#: ../xffm/fm/view/pkg/model.hh:41 ../xffm/fm/view/pkg/model.hh:52
-msgid   "Add or remove software installed on the system"
-msgstr  "ఈ వ్యవస్థ నందు స్థాపించిన సాఫ్ట్‍వేర్‌ను జతచేయి లేదా తీసివేయి"
-
-#: ../xffm/fm/view/pkg/model.hh:111
-msgid   "String"
-msgstr  "పదబంధం"
-
-#: ../xffm/fm/view/pkg/model.hh:116
-msgid   "Waiting for search results"
-msgstr  "శోధన ఫలితముల కొరకు వేచివుంది"
-
-#: ../xffm/fm/view/pkg/model.hh:174
-msgid   "No results"
-msgstr  "ఏ ఫలితాలు లేవు"
-
-#: ../xffm/fm/view/pkg/model.hh:373
-#, fuzzy
-msgid   "Currently busy\n"
-msgstr  "ప్రస్థుత ఆల్బమ్"
-
-#: ../xffm/fm/view/pkg/popup.hh:44
-#, fuzzy
-msgid   "Update Database"
-msgstr  "డేటాబేసుని ఉత్పత్తిచేయి"
-
-#: ../xffm/fm/view/pkg/popup.hh:45
-msgid   "Fetch"
-msgstr  "పొందు"
-
-#: ../xffm/fm/view/pkg/popup.hh:46
-#, fuzzy
-msgid   "Install --dry-run"
-msgstr  "మాడ్యూల్ ను స్థాపించండి"
-
-#: ../xffm/fm/view/pkg/popup.hh:47
-msgid   "Install"
-msgstr  "సంస్థాపించు "
-
-#: ../xffm/fm/view/pkg/popup.hh:48
-#, fuzzy
-msgid   "Uninstall --dry-run"
-msgstr  "నిర్మూలించు"
-
-#: ../xffm/fm/view/pkg/popup.hh:49
-msgid   "Uninstall"
-msgstr  "నిర్మూలించు"
-
-#: ../xffm/fm/view/pkg/popup.hh:50
-msgid   "Information"
-msgstr  "సమాచారం"
-
-#: ../xffm/fm/view/pkg/popup.hh:140
-msgid   "Version"
-msgstr  "రూపాంతరం"
-
-#: ../xffm/fm/view/pkg/popup.hh:149
-#, fuzzy
-msgid   "Go up"
-msgstr  "పైకి వెళ్ళు"
-
-#: ../xffm/fm/view/pkg/popup.hh:152
-#, fuzzy
-msgid   "Search packages"
-msgstr  "ప్యాకేజీల కొరకు శోధిస్తోంది"
-
-#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
-#, fuzzy, c-format
-msgid   "Loading %s...%s"
-msgstr  "%s నింపుతోంది..."
-
-#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
-msgid   "Please Wait..."
-msgstr  "దయచేసి వేచిఉండు..."
-
-#: ../xffm/fm/view/treeview.hh:17
-msgid   "Name"
-msgstr  "పేరు"
-
-#: ../xffm/fm/view/treeview.hh:19
-msgid   "Size"
-msgstr  "పరిమాణం"
-
-#: ../xffm/fm/view/treeview.hh:20
-msgid   "Date"
-msgstr  "తేద"
-
-#: ../xffm/fm/view/treeview.hh:22
-#, fuzzy
-msgid   "Mimetype"
-msgstr  "మైమ్ రకములు"
-
-#: ../xffm/fm/view/base/signals.hh:838
-#, fuzzy
-msgid   "Trash is empty"
-msgstr  "టాబ్లెట్ ఖాళీగా ఉన్నది"
-
-#: ../xffm/fm/view/base/signals.hh:840
-msgid   "Directory does not exist."
-msgstr  "డైరెక్టరీ లేదు."
-
-#: ../xffm/common/settings.hh:30
-#, fuzzy
-msgid   "New File:"
-msgstr  "కొత్త దస్త్రం"
-
-#: ../xffm/common/gio.hh:81
-msgid   "Copying files"
-msgstr  "దస్త్రములను నకలుతీయుచున్నది"
-
-#: ../xffm/common/gio.hh:85
-#, fuzzy
-msgid   "linking"
-msgstr  "ఖాళీచేయుచున్నది"
-
-#: ../xffm/common/gio.hh:87
-msgid   "rename"
-msgstr  "నామముమార్చు"
-
-#: ../xffm/common/gio.hh:426
-#, c-format
-msgid   "(%d of %d)"
-msgstr  "(%d వది %d కిగాను)"
-
-#: ../xffm/common/dnd.hh:47
-#, fuzzy
-msgid   "Create Link"
-msgstr  "లంకె సృష్టిని రద్దుచేయి(U)"
-
-#: ../xffm/common/util.hh:1404
-#, c-format
-msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
-        "attribute on that file."
-msgstr  ""
-
-#: ../xffm/common/util.hh:1406 ../xffm/common/util.hh:1441
-#, c-format
-msgid   "Open with %s"
-msgstr  "%s‍తో తెరువు"
-
-#: ../xffm/common/util.hh:1406
-msgid   "Text Editor"
-msgstr  "పాఠ్యము సరికూర్పరి"
-
-#: ../xffm/common/util.hh:1443 ../xffm/common/gtk.hh:69
-#, fuzzy
-msgid   "Execute Shell Command"
+msgid   "Execute command"
 msgstr  "షెల్ ఆదేశాలను నిర్వర్తిస్తుంది"
 
-#: ../xffm/common/util.hh:1447
-msgid   "Console: quickly run single commands -- write a command here and "
-        "press enter."
-msgstr  ""
+#: ../xffm/response/customresponse.hh:103
+msgid   "Source File"
+msgstr  "మూలపు దస్త్రము"
 
-#: ../xffm/common/gtk.hh:352 ../xffm/common/gtk.hh:360
-msgid   "Help"
-msgstr  "సహాయం (H)"
+#: ../xffm/response/timeoutresponse.hh:57
+msgid   "Dismiss"
+msgstr  "తృణీకరించుము (D)"
 
-#: ../xffm/common/run.hh:338
-msgid   "error"
-msgstr  "దోషం"
-
-#: ../xffm/common/run.hh:342
+#: ../xffm/completion/bash.hh:133
 #, fuzzy
-msgid   "warning"
-msgstr  "హెచ్చరిక"
+msgid   "Completion mode:"
+msgstr  "ముగింపు కోడ్"
 
-#: ../xffm/common/preview.hh:581
-msgid   "Empty file"
-msgstr  "ఖాళీ దస్త్రం"
+#: ../xffm/completion/bash.hh:134
+msgid   "command"
+msgstr  "ఆదేశం"
 
-#: ../xffm/common/preview.hh:636
-#, fuzzy, c-format
-msgid   "Cannot read from %s"
-msgstr  "\"%s\" నుండి చదవలేకపోతుం ది"
+#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
+#, fuzzy
+msgid   "Options >>"
+msgstr  "ఇచ్ఛాపూర్వకాలు"
+
+#: ../xffm/completion/base.hh:28
+msgid   "Command"
+msgstr  "ఆదేశము"
+
+#: ../xffm/completion/base.hh:31
+msgid   "File"
+msgstr  "ఫైల్ (F)"
+
+#: ../xffm/completion/base.hh:34
+#, fuzzy
+msgid   "Command history"
+msgstr  "కాల్ చరిత్ర"
+
+#: ../xffm/completion/base.hh:40
+msgid   "Variable"
+msgstr  "చరరాశి"
+
+#: ../xffm/completion/base.hh:43
+msgid   "Host"
+msgstr  "అతిథ్యం"
+
+#: ../xffm/completion/base.hh:55
+#, fuzzy
+msgid   "Found no match"
+msgstr  "పదములు జతచేయుటకు"
+
+#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
+msgid   "Matches"
+msgstr  "పోలికలు (M)"
+
+#: ../xffm/completion/base.hh:142
+msgid   "Too many files open"
+msgstr  "చాలా ఫైళ్లు ఓపెన్"
 

@@ -1,12 +1,12 @@
-# Xffm+ translation file: lun ago 12 14:10:33 CDT 2019
-# Merged fron existing open source files
+# Xffm+ translation file: mié nov 20 12:37:18 CST 2019
+# Merged from existing open source files
 # http://xffm.org
 #
 #
 msgid   ""
 msgstr  "Project-Id-Version: xffm+\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2019-08-11 09:10-0500\n"
+        "POT-Creation-Date: 2019-11-20 12:34-0600\n"
         "PO-Revision-Date: 2008-11-15 18:44+0000\n"
         "Last-Translator: Mark Kwidzińsczi <Unknown>\n"
         "Language-Team: Kashubian <csb@li.org>\n"
@@ -22,410 +22,30 @@ msgstr  "Project-Id-Version: xffm+\n"
 msgid   "No Read Permission"
 msgstr  "Nowé przëstãpë"
 
-#: ../xffm/completion/base.hh:28
-msgid   "Command"
-msgstr  "Pòlét"
-
-#: ../xffm/completion/base.hh:31
-msgid   "File"
-msgstr  "Lopk"
-
-#: ../xffm/completion/base.hh:34
-#, fuzzy
-msgid   "Command history"
-msgstr  "Historëjô zrëszanëch programów"
-
-#: ../xffm/completion/base.hh:37 ../xffm/find/dialog.hh:192
-msgid   "User"
-msgstr  "Brëkòwnik"
-
-#: ../xffm/completion/base.hh:40
-#, fuzzy
-msgid   "Variable"
-msgstr  "Zmieniwne"
-
-#: ../xffm/completion/base.hh:43
-msgid   "Host"
-msgstr  "Kòmpùter"
-
-#: ../xffm/completion/base.hh:55
-#, fuzzy
-msgid   "Found no match"
-msgstr  "Wëdowiédzô ò nastôwach zwãkù"
-
-#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
-#, fuzzy
-msgid   "Matches"
-msgstr  "łatë"
-
-#: ../xffm/completion/base.hh:142
-#, fuzzy
-msgid   "Too many files open"
-msgstr  "je nalazłi 1 lopk"
-
-#: ../xffm/completion/base.hh:339 ../xffm/find/fgr.hh:124
-#, fuzzy
-msgid   "Options:"
-msgstr  "Òptacëjë"
-
-#: ../xffm/completion/bash.hh:133
-#, fuzzy
-msgid   "Completion mode:"
-msgstr  "Katalog kòlekcëji:"
-
-#: ../xffm/completion/bash.hh:134
-#, fuzzy
-msgid   "command"
-msgstr  "Pòlét"
-
-#: ../xffm/completion/bash.hh:135
-#, fuzzy
-msgid   "file"
-msgstr  "kfile"
-
-#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
-#, fuzzy
-msgid   "Options >>"
-msgstr  "Òptacëjë"
-
-#: ../xffm/find/fgr.hh:124 ../xffm/find/signals.hh:100
-#: ../xffm/find/dialog.hh:301
-msgid   "Path"
-msgstr  "Stegna"
-
-#: ../xffm/find/fgr.hh:125
-msgid   "Locate documents and folders on this computer by name or content"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:126 ../xffm/find/dialog.hh:334
-msgid   "Filter:"
-msgstr  "Filter:"
-
-#: ../xffm/find/fgr.hh:126
-#, fuzzy
-msgid   "Search for files"
-msgstr  "Szëkôj w %s za %s"
-
-#: ../xffm/find/fgr.hh:128
-#, fuzzy
-msgid   "Contents:"
-msgstr  "Zamkłosc"
-
-#: ../xffm/find/fgr.hh:128
-msgid   "File's contents filtered as plain text."
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:131
-#, fuzzy
-msgid   "Verbose output debugging mode."
-msgstr  "Włączë debùgùjący kòd"
-
-#: ../xffm/find/fgr.hh:133
-msgid   "Show version information"
-msgstr  "Pòkôżë wëdowiédzã ò wersëji"
-
-#: ../xffm/find/fgr.hh:135
-#, fuzzy
-msgid   "Filter Details"
-msgstr  "Detale kùszka"
-
-#: ../xffm/find/fgr.hh:138 ../xffm/find/dialog.hh:173
-#, fuzzy
-msgid   "Stay on single filesystem"
-msgstr  "Systema lopków blós do òdczëtu"
-
-#: ../xffm/find/fgr.hh:140
-msgid   "Print..."
-msgstr  "Drëkùjë..."
-
-#: ../xffm/find/fgr.hh:140
-msgid   "The unique Process ID that identifies this process."
-msgstr  "Ùnikalny numer ID jidentifikùjący proces."
-
-#: ../xffm/find/fgr.hh:142 ../xffm/find/dialog.hh:170
-#, fuzzy
-msgid   "Find hidden files and directories"
-msgstr  "Lopczi ë katalodżi"
-
-#: ../xffm/find/fgr.hh:143
-msgid   "Filter"
-msgstr  "Filter"
-
-#: ../xffm/find/fgr.hh:144
-msgid   "To display files which pass the filter (stars and regexps will be "
-        "processed)"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:146 ../xffm/find/dialog.hh:167
-msgid   "Recursive"
-msgstr  "Rekùrencyjno"
-
-#: ../xffm/find/fgr.hh:147 ../xffm/find/fgr.hh:148 ../xffm/find/fgr.hh:149
-#: ../xffm/find/fgr.hh:150
-msgid   "KByte"
-msgstr  "KBajtë"
-
-#: ../xffm/find/fgr.hh:148
-#, fuzzy
-msgid   "is greater than or equal to"
-msgstr  "Wikszé jakno abò równé"
-
-#: ../xffm/find/fgr.hh:150
-#, fuzzy
-msgid   "is less than or equal to"
-msgstr  "Mniészé jakno abò równé"
-
-#: ../xffm/find/fgr.hh:152
-#, fuzzy
-msgid   "Set UID"
-msgstr  "Systemòwé UID"
-
-#: ../xffm/find/fgr.hh:152
-#, fuzzy
-msgid   "Executable Text Files"
-msgstr  "Zrëszeniowé lopczi"
-
-#: ../xffm/find/fgr.hh:154
-msgid   "The permissions of the file, in octal notation."
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:155
-msgid   "Type"
-msgstr  "Ôrt"
-
-#: ../xffm/find/fgr.hh:157 ../xffm/find/signals.hh:14
-msgid   "Any"
-msgstr  "Wszëtczé"
-
-#: ../xffm/find/fgr.hh:157
-#, fuzzy
-msgid   "Default type"
-msgstr  "Domëslny element"
-
-#: ../xffm/find/fgr.hh:158 ../xffm/common/preview.hh:478
-#, fuzzy
-msgid   "Regular file"
-msgstr  "Regùlarnô mrzéżka"
-
-#: ../xffm/find/fgr.hh:159 ../xffm/find/signals.hh:8
-#: ../xffm/fm/view/local/popup.hh:1062 ../xffm/common/preview.hh:469
-msgid   "Directory"
-msgstr  "Katalog"
-
-#: ../xffm/find/fgr.hh:160 ../xffm/find/signals.hh:9
-#: ../xffm/common/preview.hh:475
-msgid   "Symbolic Link"
-msgstr  "Symbòliczné zlënkòwanié"
-
-#: ../xffm/find/fgr.hh:161
-#, fuzzy
-msgid   "UNIX Socket"
-msgstr  "Mòtiw Uniksa"
-
-#: ../xffm/find/fgr.hh:162 ../xffm/find/signals.hh:11
-#: ../xffm/common/preview.hh:463
-#, fuzzy
-msgid   "Block device"
-msgstr  "Blokòwé ùrządzenia"
-
-#: ../xffm/find/fgr.hh:163 ../xffm/find/signals.hh:12
-#: ../xffm/common/preview.hh:466
-#, fuzzy
-msgid   "Character device"
-msgstr  "Ùrządzenia céchów"
-
-#: ../xffm/find/fgr.hh:164 ../xffm/find/signals.hh:13
-#: ../xffm/common/preview.hh:472
-msgid   "FIFO"
-msgstr  "FIFO"
-
-#: ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168 ../xffm/find/dialog.hh:214
-msgid   "Minutes"
-msgstr  "Minutë"
-
-#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
-#: ../xffm/find/fgr.hh:176 ../xffm/find/dialog.hh:263
-#: ../xffm/find/dialog.hh:363 ../xffm/fm/view/treeview.hh:18
-msgid   "Details"
-msgstr  "Detale"
-
-#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
-#: ../xffm/find/fgr.hh:176 ../xffm/find/fgr.hh:179 ../xffm/find/fgr.hh:180
-#: ../xffm/find/fgr.hh:183 ../xffm/find/fgr.hh:184 ../xffm/find/fgr.hh:187
-#: ../xffm/find/fgr.hh:188
-msgid   "TIME"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:168 ../xffm/find/fgr.hh:171 ../xffm/find/fgr.hh:174
-#: ../xffm/find/fgr.hh:177
-msgid   "Previous"
-msgstr  "Pòprzédny"
-
-#: ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171 ../xffm/find/dialog.hh:219
-msgid   "Hours"
-msgstr  "Gòdz."
-
-#: ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174 ../xffm/find/dialog.hh:224
-msgid   "Days"
-msgstr  "Dn."
-
-#: ../xffm/find/fgr.hh:175
-#, fuzzy
-msgid   "Month"
-msgstr  "Mies."
-
-#: ../xffm/find/fgr.hh:177
-#, fuzzy
-msgid   "Month(s)"
-msgstr  "Mies."
-
-#: ../xffm/find/fgr.hh:180
-#, fuzzy
-msgid   "Modification Time :"
-msgstr  "B3/Zmòdifikòwóné B2"
-
-#: ../xffm/find/fgr.hh:184
-#, fuzzy
-msgid   "Access Time :"
-msgstr  "Pòmòce przëstãpù"
-
-#: ../xffm/find/fgr.hh:188
-#, fuzzy
-msgid   "Creation Time :"
-msgstr  "Sparłãczenié przerwóne"
-
-#: ../xffm/find/fgr.hh:191 ../xffm/find/fgr.hh:192
-#, fuzzy
-msgid   "uid"
-msgstr  "Uuid"
-
-#: ../xffm/find/fgr.hh:192
-msgid   "User:"
-msgstr  "Brëkòwnik:"
-
-#: ../xffm/find/fgr.hh:194 ../xffm/find/fgr.hh:195
-#, fuzzy
-msgid   "gid"
-msgstr  "gdb"
-
-#: ../xffm/find/fgr.hh:195
-msgid   "Group:"
-msgstr  "Karno:"
-
-#: ../xffm/find/fgr.hh:198
-msgid   "Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
-        "character that  normally  follows  a file  name"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:200
-#, fuzzy
-msgid   "Content View"
-msgstr  "Miara zamkłoscë"
-
-#: ../xffm/find/fgr.hh:201 ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:203
-#: ../xffm/find/fgr.hh:204
-msgid   "STRING"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:204
-#: ../xffm/fm/view/local/popup.hh:759
-msgid   "Regular expression"
-msgstr  "Regùlarny wësłów"
-
-#: ../xffm/find/fgr.hh:204
-#, fuzzy
-msgid   "Extended"
-msgstr  "rozszérzoné"
-
-#: ../xffm/find/fgr.hh:206
-#, fuzzy
-msgid   "Ignore case"
-msgstr  "Ignorëjë òbrôzczi"
-
-#: ../xffm/find/fgr.hh:208
-msgid   "Text Files"
-msgstr  "Tekstowé lopczi"
-
-#: ../xffm/find/fgr.hh:210 ../xffm/find/dialog.hh:545
-#, fuzzy
-msgid   "No match"
-msgstr  "<felënk dopasowań>"
-
-#: ../xffm/find/fgr.hh:212 ../xffm/find/dialog.hh:463
-#, fuzzy
-msgid   "Line Count"
-msgstr  "Ùstawi w réze"
-
-#: ../xffm/find/fgr.hh:214
-#, fuzzy
-msgid   "Words"
-msgstr  "AbiWord"
-
-#: ../xffm/find/fgr.hh:216
-msgid   "Lines"
-msgstr  "Linie"
-
-#: ../xffm/find/fgr.hh:362
-#, fuzzy, c-format
-msgid   "Usage : %s [OPTIONS]\n"
-msgstr  "Brëkòwanié: %s %s\n"
-
-#: ../xffm/find/signals.hh:7
-msgid   "Regular"
-msgstr  "Regùlarny"
-
-#: ../xffm/find/signals.hh:10 ../xffm/common/preview.hh:481
-#, fuzzy
-msgid   "Socket"
-msgstr  "Gniôzda"
-
-#: ../xffm/find/signals.hh:66 ../xffm/find/signals.hh:454
-#: ../xffm/find/dialog.hh:176
-#, fuzzy
-msgid   "Results"
-msgstr  "Skùtczi zapëtaniów"
-
-#: ../xffm/find/signals.hh:368 ../xffm/find/dialog.hh:577
-#: ../xffm/response/chooserresponse.hh:21 ../xffm/response/entryresponse.hh:435
-#: ../xffm/fm/view/local/properties.hh:314 ../xffm/fm/view/local/rm.hh:157
-#: ../xffm/common/gtk.hh:409
-msgid   "Cancel"
-msgstr  "Òprzestóń"
-
-#: ../xffm/find/signals.hh:396 ../xffm/find/signals.hh:830
-#, fuzzy
-msgid   "No editor for current action."
-msgstr  "Zablokùjë biéżną adresã"
-
-#: ../xffm/find/signals.hh:454
-msgid   "Upper limit:"
-msgstr  "Górnô grëńca:"
-
-#: ../xffm/find/signals.hh:456
-#, fuzzy
-msgid   "Counting files..."
-msgstr  "Skanowanié lopków..."
-
-#: ../xffm/find/signals.hh:471
-#, c-format
-msgid   "Found %d match"
-msgid_plural    "Found %d matches"
-msgstr[0]       ""
-msgstr[1]       ""
-
-#: ../xffm/find/signals.hh:473
-#, fuzzy, c-format
-msgid   "%s Finished : %s"
-msgstr  "Skùńczony robòtë"
-
-#: ../xffm/find/signals.hh:596 ../xffm/find/signals.hh:598
-msgid   "Searching..."
-msgstr  "Szëkba..."
-
 #: ../xffm/find/dialog.hh:91 ../xffm/find/dialog.hh:143
 #: ../xffm/find/dialog.hh:604
 msgid   "Find"
 msgstr  "Nalezë"
+
+#: ../xffm/find/dialog.hh:167 ../xffm/find/fgr.hh:146
+msgid   "Recursive"
+msgstr  "Rekùrencyjno"
+
+#: ../xffm/find/dialog.hh:170 ../xffm/find/fgr.hh:142
+#, fuzzy
+msgid   "Find hidden files and directories"
+msgstr  "Lopczi ë katalodżi"
+
+#: ../xffm/find/dialog.hh:173 ../xffm/find/fgr.hh:138
+#, fuzzy
+msgid   "Stay on single filesystem"
+msgstr  "Systema lopków blós do òdczëtu"
+
+#: ../xffm/find/dialog.hh:176 ../xffm/find/signals.hh:65
+#: ../xffm/find/signals.hh:427
+#, fuzzy
+msgid   "Results"
+msgstr  "Skùtczi zapëtaniów"
 
 #: ../xffm/find/dialog.hh:176
 #, fuzzy
@@ -444,6 +64,10 @@ msgstr  "kBajtów"
 msgid   "At Most"
 msgstr  "co nôwicy"
 
+#: ../xffm/find/dialog.hh:192 ../xffm/completion/base.hh:37
+msgid   "User"
+msgstr  "Brëkòwnik"
+
 #: ../xffm/find/dialog.hh:197
 msgid   "Group"
 msgstr  "Grëpa"
@@ -457,10 +81,22 @@ msgstr  "Prawa przistãpù"
 msgid   "SUID"
 msgstr  ""
 
-#: ../xffm/find/dialog.hh:206 ../xffm/fm/view/local/popup.hh:1102
+#: ../xffm/find/dialog.hh:206 ../xffm/fm/view/local/popup.hh:1026
 #, fuzzy
 msgid   "Executable"
 msgstr  "Wëkònëwólny lopk:"
+
+#: ../xffm/find/dialog.hh:214 ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168
+msgid   "Minutes"
+msgstr  "Minutë"
+
+#: ../xffm/find/dialog.hh:219 ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171
+msgid   "Hours"
+msgstr  "Gòdz."
+
+#: ../xffm/find/dialog.hh:224 ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174
+msgid   "Days"
+msgstr  "Dn."
 
 #: ../xffm/find/dialog.hh:230
 msgid   "Months"
@@ -471,10 +107,25 @@ msgstr  "Mies."
 msgid   "File type : "
 msgstr  "Ôrt lopka:"
 
-#: ../xffm/find/dialog.hh:255 ../xffm/find/dialog.hh:595
-#: ../xffm/fm/dialog/notebook/page/page.hh:71 ../xffm/common/gtk.hh:79
+#: ../xffm/find/dialog.hh:255 ../xffm/find/dialog.hh:595 ../xffm/gtk/gtk.hh:80
+#: ../xffm/fm/dialog/notebook/page/page.hh:71
 msgid   "Close"
 msgstr  "Zamkni"
+
+#: ../xffm/find/dialog.hh:263 ../xffm/find/dialog.hh:363
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/fm/view/treeview.hh:18
+msgid   "Details"
+msgstr  "Detale"
+
+#: ../xffm/find/dialog.hh:301 ../xffm/find/fgr.hh:124
+#: ../xffm/find/signals.hh:94
+msgid   "Path"
+msgstr  "Stegna"
+
+#: ../xffm/find/dialog.hh:334 ../xffm/find/fgr.hh:126
+msgid   "Filter:"
+msgstr  "Filter:"
 
 #: ../xffm/find/dialog.hh:377
 msgid   "Contains"
@@ -499,6 +150,11 @@ msgstr  "Rozszérzonô bòcznô listew"
 msgid   "Include binary files"
 msgstr  "Téż binarné lopczi"
 
+#: ../xffm/find/dialog.hh:463 ../xffm/find/fgr.hh:212
+#, fuzzy
+msgid   "Line Count"
+msgstr  "Ùstawi w réze"
+
 #: ../xffm/find/dialog.hh:489
 #, fuzzy
 msgid   "Match"
@@ -517,6 +173,20 @@ msgstr  "Całowné słowa"
 msgid   "lines"
 msgstr  "réżczi"
 
+#: ../xffm/find/dialog.hh:545 ../xffm/find/fgr.hh:210
+#, fuzzy
+msgid   "No match"
+msgstr  "<felënk dopasowań>"
+
+#: ../xffm/find/dialog.hh:577 ../xffm/find/signals.hh:341
+#: ../xffm/gtk/dialogs.hh:110 ../xffm/fm/view/local/rm.hh:157
+#: ../xffm/fm/view/local/properties.hh:310 ../xffm/fm/view/fuse/ecryptfs.hh:175
+#: ../xffm/fm/dialog/notebook/createini.hh:232
+#: ../xffm/fm/dialog/notebook/createini.hh:369
+#: ../xffm/response/entryresponse.hh:453 ../xffm/response/chooserresponse.hh:18
+msgid   "Cancel"
+msgstr  "Òprzestóń"
+
 #: ../xffm/find/dialog.hh:587
 msgid   "Clear"
 msgstr  "Wëczëszczë"
@@ -526,9 +196,9 @@ msgid   "Edit"
 msgstr  "Edicëjô"
 
 #: ../xffm/find/dialog.hh:743 ../xffm/find/dialog.hh:758
-#: ../xffm/common/util.hh:1354 ../xffm/common/util.hh:1356
-#: ../xffm/common/util.hh:1362 ../xffm/common/util.hh:1364
-#: ../xffm/common/preview.hh:460
+#: ../xffm/common/preview.hh:460 ../xffm/common/util.hh:1354
+#: ../xffm/common/util.hh:1356 ../xffm/common/util.hh:1362
+#: ../xffm/common/util.hh:1364
 msgid   "unknown"
 msgstr  "nieznóny"
 
@@ -593,208 +263,961 @@ msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
         "More information is available by typing \"man grep\"\n"
 msgstr  ""
 
-#: ../xffm/response/chooserresponse.hh:23
-msgid   "Open"
-msgstr  "Òtemkni"
-
-#: ../xffm/response/chooserresponse.hh:56
+#: ../xffm/find/fgr.hh:124 ../xffm/fm/view/fuse/ecryptfs.hh:133
+#: ../xffm/completion/base.hh:339
 #, fuzzy
-msgid   "Choose directory"
-msgstr  "Ùsôdzë katalog"
+msgid   "Options:"
+msgstr  "Òptacëjë"
 
-#: ../xffm/response/chooserresponse.hh:60
-#, fuzzy
-msgid   "Choose file"
-msgstr  "Sprôwdzë lopczi"
+#: ../xffm/find/fgr.hh:125
+msgid   "Locate documents and folders on this computer by name or content"
+msgstr  ""
 
-#: ../xffm/response/customresponse.hh:55
+#: ../xffm/find/fgr.hh:126
 #, fuzzy
-msgid   "Execute command"
+msgid   "Search for files"
+msgstr  "Szëkôj w %s za %s"
+
+#: ../xffm/find/fgr.hh:128
+#, fuzzy
+msgid   "Contents:"
+msgstr  "Zamkłosc"
+
+#: ../xffm/find/fgr.hh:128
+msgid   "File's contents filtered as plain text."
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:131
+#, fuzzy
+msgid   "Verbose output debugging mode."
+msgstr  "Włączë debùgùjący kòd"
+
+#: ../xffm/find/fgr.hh:133
+msgid   "Show version information"
+msgstr  "Pòkôżë wëdowiédzã ò wersëji"
+
+#: ../xffm/find/fgr.hh:135
+#, fuzzy
+msgid   "Filter Details"
+msgstr  "Detale kùszka"
+
+#: ../xffm/find/fgr.hh:140
+msgid   "Print..."
+msgstr  "Drëkùjë..."
+
+#: ../xffm/find/fgr.hh:140
+msgid   "The unique Process ID that identifies this process."
+msgstr  "Ùnikalny numer ID jidentifikùjący proces."
+
+#: ../xffm/find/fgr.hh:143
+msgid   "Filter"
+msgstr  "Filter"
+
+#: ../xffm/find/fgr.hh:144
+msgid   "To display files which pass the filter (stars and regexps will be "
+        "processed)"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:147 ../xffm/find/fgr.hh:148 ../xffm/find/fgr.hh:149
+#: ../xffm/find/fgr.hh:150
+msgid   "KByte"
+msgstr  "KBajtë"
+
+#: ../xffm/find/fgr.hh:148
+#, fuzzy
+msgid   "is greater than or equal to"
+msgstr  "Wikszé jakno abò równé"
+
+#: ../xffm/find/fgr.hh:150
+#, fuzzy
+msgid   "is less than or equal to"
+msgstr  "Mniészé jakno abò równé"
+
+#: ../xffm/find/fgr.hh:152
+#, fuzzy
+msgid   "Set UID"
+msgstr  "Systemòwé UID"
+
+#: ../xffm/find/fgr.hh:152
+#, fuzzy
+msgid   "Executable Text Files"
+msgstr  "Zrëszeniowé lopczi"
+
+#: ../xffm/find/fgr.hh:154
+msgid   "The permissions of the file, in octal notation."
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:155
+msgid   "Type"
+msgstr  "Ôrt"
+
+#: ../xffm/find/fgr.hh:157 ../xffm/find/signals.hh:14
+msgid   "Any"
+msgstr  "Wszëtczé"
+
+#: ../xffm/find/fgr.hh:157
+#, fuzzy
+msgid   "Default type"
+msgstr  "Domëslny element"
+
+#: ../xffm/find/fgr.hh:158 ../xffm/common/preview.hh:478
+#, fuzzy
+msgid   "Regular file"
+msgstr  "Regùlarnô mrzéżka"
+
+#: ../xffm/find/fgr.hh:159 ../xffm/find/signals.hh:8
+#: ../xffm/common/preview.hh:469 ../xffm/fm/view/local/popup.hh:987
+msgid   "Directory"
+msgstr  "Katalog"
+
+#: ../xffm/find/fgr.hh:160 ../xffm/find/signals.hh:9
+#: ../xffm/common/preview.hh:475
+msgid   "Symbolic Link"
+msgstr  "Symbòliczné zlënkòwanié"
+
+#: ../xffm/find/fgr.hh:161
+#, fuzzy
+msgid   "UNIX Socket"
+msgstr  "Mòtiw Uniksa"
+
+#: ../xffm/find/fgr.hh:162 ../xffm/find/signals.hh:11
+#: ../xffm/common/preview.hh:463
+#, fuzzy
+msgid   "Block device"
+msgstr  "Blokòwé ùrządzenia"
+
+#: ../xffm/find/fgr.hh:163 ../xffm/find/signals.hh:12
+#: ../xffm/common/preview.hh:466
+#, fuzzy
+msgid   "Character device"
+msgstr  "Ùrządzenia céchów"
+
+#: ../xffm/find/fgr.hh:164 ../xffm/find/signals.hh:13
+#: ../xffm/common/preview.hh:472
+msgid   "FIFO"
+msgstr  "FIFO"
+
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/find/fgr.hh:179 ../xffm/find/fgr.hh:180
+#: ../xffm/find/fgr.hh:183 ../xffm/find/fgr.hh:184 ../xffm/find/fgr.hh:187
+#: ../xffm/find/fgr.hh:188
+msgid   "TIME"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:168 ../xffm/find/fgr.hh:171 ../xffm/find/fgr.hh:174
+#: ../xffm/find/fgr.hh:177
+msgid   "Previous"
+msgstr  "Pòprzédny"
+
+#: ../xffm/find/fgr.hh:175
+#, fuzzy
+msgid   "Month"
+msgstr  "Mies."
+
+#: ../xffm/find/fgr.hh:177
+#, fuzzy
+msgid   "Month(s)"
+msgstr  "Mies."
+
+#: ../xffm/find/fgr.hh:180
+#, fuzzy
+msgid   "Modification Time :"
+msgstr  "B3/Zmòdifikòwóné B2"
+
+#: ../xffm/find/fgr.hh:184
+#, fuzzy
+msgid   "Access Time :"
+msgstr  "Pòmòce przëstãpù"
+
+#: ../xffm/find/fgr.hh:188
+#, fuzzy
+msgid   "Creation Time :"
+msgstr  "Sparłãczenié przerwóne"
+
+#: ../xffm/find/fgr.hh:191 ../xffm/find/fgr.hh:192
+#, fuzzy
+msgid   "uid"
+msgstr  "Uuid"
+
+#: ../xffm/find/fgr.hh:192
+msgid   "User:"
+msgstr  "Brëkòwnik:"
+
+#: ../xffm/find/fgr.hh:194 ../xffm/find/fgr.hh:195
+#, fuzzy
+msgid   "gid"
+msgstr  "gdb"
+
+#: ../xffm/find/fgr.hh:195
+msgid   "Group:"
+msgstr  "Karno:"
+
+#: ../xffm/find/fgr.hh:198
+msgid   "Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+        "character that  normally  follows  a file  name"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:200
+#, fuzzy
+msgid   "Content View"
+msgstr  "Miara zamkłoscë"
+
+#: ../xffm/find/fgr.hh:201 ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:203
+#: ../xffm/find/fgr.hh:204
+msgid   "STRING"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:204
+#: ../xffm/fm/view/local/popup.hh:750
+msgid   "Regular expression"
+msgstr  "Regùlarny wësłów"
+
+#: ../xffm/find/fgr.hh:204
+#, fuzzy
+msgid   "Extended"
+msgstr  "rozszérzoné"
+
+#: ../xffm/find/fgr.hh:206
+#, fuzzy
+msgid   "Ignore case"
+msgstr  "Ignorëjë òbrôzczi"
+
+#: ../xffm/find/fgr.hh:208
+msgid   "Text Files"
+msgstr  "Tekstowé lopczi"
+
+#: ../xffm/find/fgr.hh:214
+#, fuzzy
+msgid   "Words"
+msgstr  "AbiWord"
+
+#: ../xffm/find/fgr.hh:216
+msgid   "Lines"
+msgstr  "Linie"
+
+#: ../xffm/find/fgr.hh:362
+#, fuzzy, c-format
+msgid   "Usage : %s [OPTIONS]\n"
+msgstr  "Brëkòwanié: %s %s\n"
+
+#: ../xffm/find/signals.hh:7
+msgid   "Regular"
+msgstr  "Regùlarny"
+
+#: ../xffm/find/signals.hh:10 ../xffm/common/preview.hh:481
+#, fuzzy
+msgid   "Socket"
+msgstr  "Gniôzda"
+
+#: ../xffm/find/signals.hh:369 ../xffm/find/signals.hh:803
+#, fuzzy
+msgid   "No editor for current action."
+msgstr  "Zablokùjë biéżną adresã"
+
+#: ../xffm/find/signals.hh:427
+msgid   "Upper limit:"
+msgstr  "Górnô grëńca:"
+
+#: ../xffm/find/signals.hh:429
+#, fuzzy
+msgid   "Counting files..."
+msgstr  "Skanowanié lopków..."
+
+#: ../xffm/find/signals.hh:444
+#, c-format
+msgid   "Found %d match"
+msgid_plural    "Found %d matches"
+msgstr[0]       ""
+msgstr[1]       ""
+
+#: ../xffm/find/signals.hh:446
+#, fuzzy, c-format
+msgid   "%s Finished : %s"
+msgstr  "Skùńczony robòtë"
+
+#: ../xffm/find/signals.hh:569 ../xffm/find/signals.hh:571
+msgid   "Searching..."
+msgstr  "Szëkba..."
+
+#: ../xffm/common/preview.hh:581
+#, fuzzy
+msgid   "Empty file"
+msgstr  "Lopk wéńdzeniô"
+
+#: ../xffm/common/preview.hh:636
+#, fuzzy, c-format
+msgid   "Cannot read from %s"
+msgstr  "Ni mòże czëtac z dostónka"
+
+#: ../xffm/common/settings.hh:30
+#, fuzzy
+msgid   "New File:"
+msgstr  "Òbezdrzë lopk"
+
+#: ../xffm/common/gio.hh:91
+#, fuzzy
+msgid   "Copying files"
+msgstr  "Kòpérowanié"
+
+#: ../xffm/common/gio.hh:93 ../xffm/common/dnd.hh:35
+#: ../xffm/fm/dialog/clipboard.hh:30
+#, fuzzy
+msgid   "Moving files"
+msgstr  "Przenoszónié %s"
+
+#: ../xffm/common/gio.hh:95
+#, fuzzy
+msgid   "linking"
+msgstr  "lënk"
+
+#: ../xffm/common/gio.hh:97
+#, fuzzy
+msgid   "rename"
+msgstr  "Zmieni miono"
+
+#: ../xffm/common/gio.hh:449
+#, fuzzy, c-format
+msgid   "(%d of %d)"
+msgstr  "%s z %s"
+
+#: ../xffm/common/util.hh:1404
+#, c-format
+msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
+        "attribute on that file."
+msgstr  ""
+
+#: ../xffm/common/util.hh:1406 ../xffm/common/util.hh:1441
+#, c-format
+msgid   "Open with %s"
+msgstr  "Òtemkni w %s"
+
+#: ../xffm/common/util.hh:1406
+msgid   "Text Editor"
+msgstr  "Tekstowi editora"
+
+#: ../xffm/common/util.hh:1443 ../xffm/gtk/gtk.hh:70
+msgid   "Execute Shell Command"
 msgstr  "Wëkònôj pòlét pòwłoczi"
 
-#: ../xffm/response/customresponse.hh:103
-msgid   "Source File"
-msgstr  "Zdrojowi lopk"
+#: ../xffm/common/util.hh:1447
+msgid   "Console: quickly run single commands -- write a command here and "
+        "press enter."
+msgstr  ""
 
-#: ../xffm/response/entryresponse.hh:439 ../xffm/response/passwdresponse.hh:242
-msgid   "Ok"
-msgstr  "Ok"
-
-#: ../xffm/response/commandprogressresponse.hh:31
+#: ../xffm/common/util.hh:1452 ../xffm/fm/view/local/popup.hh:1033
+#: ../xffm/fm/view/local/popup.hh:1336 ../xffm/fm/view/local/popup.hh:1353
 #, fuzzy
-msgid   "Items:"
-msgstr  "Miono elementu:"
+msgid   "Run in Terminal"
+msgstr  "Zrëszë w terminalu"
 
-#: ../xffm/response/passwdresponse.hh:19 ../xffm/response/passwdresponse.hh:25
-#: ../xffm/common/run.hh:464
+#: ../xffm/common/dnd.hh:41 ../xffm/fm/dialog/clipboard.hh:23
+msgid   "Copying files locally"
+msgstr  ""
+
+#: ../xffm/common/dnd.hh:47
+#, fuzzy
+msgid   "Create Link"
+msgstr  "Casey Link"
+
+#: ../xffm/common/dnd.hh:63
+msgid   "more"
+msgstr  ""
+
+#: ../xffm/common/run.hh:338 ../xffm/fm/view/local/popup.hh:1149
+#, fuzzy
+msgid   "error"
+msgstr  "Fela"
+
+#: ../xffm/common/run.hh:342
+#, fuzzy
+msgid   "warning"
+msgstr  "Òstrzéga"
+
+#: ../xffm/common/run.hh:464 ../xffm/response/passwdresponse.hh:28
+#: ../xffm/response/passwdresponse.hh:34
 #, fuzzy
 msgid   "Enter password"
 msgstr  "Spamiãtôj parolã"
 
-#: ../xffm/response/passwdresponse.hh:179
-#, fuzzy
-msgid   "User Input"
-msgstr  "Przezérnik"
-
-#: ../xffm/response/passwdresponse.hh:195
-#, fuzzy
-msgid   "Response Requested"
-msgstr  "SysReq"
-
-#: ../xffm/response/timeoutresponse.hh:57
-msgid   "Dismiss"
-msgstr  ""
-
-#: ../xffm/response/commandresponse.hh:19
-msgid   "Running"
-msgstr  "Zrëszony"
-
-#: ../xffm/response/commandresponse.hh:24
-#, fuzzy
-msgid   "Waiting for operation to finish..."
-msgstr  "Żdanié na strzél procëmnika..."
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:11
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:214
-#, fuzzy
-msgid   "Remove Button Contents"
-msgstr  "Spisënk zamkłoscë"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:67
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:209
-#, fuzzy
-msgid   "Add custom content"
-msgstr  "Dodôj do kòlekcëji"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:68
-#, fuzzy
-msgid   "Select file to load"
-msgstr  "Òtemkni lopk"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:125
-#, fuzzy, c-format
-msgid   "Cannot load file %s. Reason: %s"
-msgstr  "Nié mòże zapisac lopka %s"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:154
-#, fuzzy
-msgid   "You need to restart the application"
-msgstr  "Zrëszocz programów"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:187
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:191
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:195
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:198 ../xffm/fm/view/pkg/model.hh:29
-#: ../xffm/fm/view/pkg/popup.hh:35
-#, fuzzy
-msgid   "Software Updater"
-msgstr  "Aktualizacëjô KConf"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:236
-#: ../xffm/fm/view/pkg/model.hh:108 ../xffm/fm/view/pkg/model.hh:299
-#: ../xffm/fm/view/pkg/model.hh:306 ../xffm/fm/view/pkg/popup.hh:151
-#: ../xffm/common/gtk.hh:77
-msgid   "Search"
-msgstr  "Szëkba"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:240 ../xffm/common/gtk.hh:67
+#: ../xffm/gtk/gtk.hh:68 ../xffm/fm/dialog/notebook/vbuttonbox.hh:252
 #, fuzzy
 msgid   "Open terminal"
 msgstr  "Òtemkni Terminal"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:244
-#, fuzzy
-msgid   "Open a New Window"
-msgstr  "Òtemkni w nowim òknie"
+#: ../xffm/gtk/gtk.hh:72 ../xffm/fm/view/local/popup.hh:157
+msgid   "Paste"
+msgstr  "Wlepi"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:250
+#: ../xffm/gtk/gtk.hh:74 ../xffm/fm/view/local/popup.hh:151
+#: ../xffm/fm/view/root/popup.hh:224
 #, fuzzy
-msgid   "Differences"
-msgstr  "Òbôczë nierównoscë"
+msgid   "Add bookmark"
+msgstr  "Dodôj załóżkã"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:256
-#: ../xffm/fm/view/root/model.hh:110
+#: ../xffm/gtk/gtk.hh:76 ../xffm/fm/view/local/popup.hh:152
+#: ../xffm/fm/view/root/popup.hh:170
+#, fuzzy
+msgid   "Remove bookmark"
+msgstr  "Rëmôj pòlét"
+
+#: ../xffm/gtk/gtk.hh:78 ../xffm/fm/view/pkg/model.hh:108
+#: ../xffm/fm/view/pkg/model.hh:300 ../xffm/fm/view/pkg/model.hh:307
+#: ../xffm/fm/view/pkg/popup.hh:151
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:248
+msgid   "Search"
+msgstr  "Szëkba"
+
+#: ../xffm/gtk/gtk.hh:82 ../xffm/fm/dialog/notebook/createini.hh:83
+#: ../xffm/fm/dialog/notebook/menupopover.hh:237
+msgid   "Exit"
+msgstr  ""
+
+#: ../xffm/gtk/gtk.hh:84 ../xffm/fm/view/local/popup.hh:85
+#: ../xffm/fm/view/local/popup.hh:142 ../xffm/fm/view/local/popup.hh:1332
+#: ../xffm/fm/view/local/popup.hh:1339 ../xffm/fm/view/local/popup.hh:1349
+#: ../xffm/fm/view/local/popup.hh:1356
+#, fuzzy
+msgid   "Open with"
+msgstr  "Òtemkni w"
+
+#: ../xffm/gtk/gtk.hh:86 ../xffm/fm/view/local/popup.hh:100
+#: ../xffm/fm/view/local/popup.hh:156
+msgid   "Cut"
+msgstr  "Wëtni"
+
+#: ../xffm/gtk/gtk.hh:88 ../xffm/fm/view/local/popup.hh:99
+#: ../xffm/fm/view/local/popup.hh:155
+msgid   "Copy"
+msgstr  "Kòpérëjë"
+
+#: ../xffm/gtk/gtk.hh:90 ../xffm/fm/view/local/rm.hh:176
+#: ../xffm/fm/view/local/popup.hh:103 ../xffm/fm/view/local/popup.hh:160
+msgid   "Delete"
+msgstr  "Rëmôj"
+
+#: ../xffm/gtk/gtk.hh:92 ../xffm/fm/view/local/rm.hh:165
+msgid   "Shred"
+msgstr  ""
+
+#: ../xffm/gtk/gtk.hh:95 ../xffm/fm/view/local/popup.hh:95
+#: ../xffm/fm/view/local/popup.hh:145 ../xffm/fm/view/root/popup.hh:169
+#: ../xffm/fm/view/fstab/popup.hh:20
+msgid   "Open in New Tab"
+msgstr  "Òtemkni w nowi kôrce"
+
+#: ../xffm/gtk/gtk.hh:140 ../xffm/fm/dialog/notebook/notebook.hh:75
+msgid   "New Tab"
+msgstr  "Nowô kôrta"
+
+#: ../xffm/gtk/dialogs.hh:42
+msgid   "Help"
+msgstr  "Pòmòc"
+
+#: ../xffm/fm/view/pkg/model.hh:29 ../xffm/fm/view/pkg/popup.hh:35
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:194
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:198
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:202
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:205
+#, fuzzy
+msgid   "Software Updater"
+msgstr  "Aktualizacëjô KConf"
+
+#: ../xffm/fm/view/pkg/model.hh:41 ../xffm/fm/view/pkg/model.hh:52
+msgid   "Add or remove software installed on the system"
+msgstr  ""
+
+#: ../xffm/fm/view/pkg/model.hh:111
+#, fuzzy
+msgid   "String"
+msgstr  "Ùwòlnienié"
+
+#: ../xffm/fm/view/pkg/model.hh:117
+#, fuzzy
+msgid   "Waiting for search results"
+msgstr  "Żdanié na kòmpùtr."
+
+#: ../xffm/fm/view/pkg/model.hh:175
+#, fuzzy
+msgid   "No results"
+msgstr  "Felënk"
+
+#: ../xffm/fm/view/pkg/model.hh:374
+#, fuzzy
+msgid   "Currently busy\n"
+msgstr  "Aktualny: %s"
+
+#: ../xffm/fm/view/pkg/popup.hh:44
+msgid   "Update Database"
+msgstr  "Zaktualni bazã pòdôwków"
+
+#: ../xffm/fm/view/pkg/popup.hh:45
+#, fuzzy
+msgid   "Fetch"
+msgstr  "Céchùnk"
+
+#: ../xffm/fm/view/pkg/popup.hh:46
+#, fuzzy
+msgid   "Install --dry-run"
+msgstr  "Instalacëjô"
+
+#: ../xffm/fm/view/pkg/popup.hh:47
+msgid   "Install"
+msgstr  "Instalëjë"
+
+#: ../xffm/fm/view/pkg/popup.hh:48
+#, fuzzy
+msgid   "Uninstall --dry-run"
+msgstr  "Òdinstalowanié"
+
+#: ../xffm/fm/view/pkg/popup.hh:49
+msgid   "Uninstall"
+msgstr  "Òdjinstalëjë"
+
+#: ../xffm/fm/view/pkg/popup.hh:50
+msgid   "Information"
+msgstr  "Wëdowiédzô"
+
+#: ../xffm/fm/view/pkg/popup.hh:140
+msgid   "Version"
+msgstr  "Wersëjô"
+
+#: ../xffm/fm/view/pkg/popup.hh:149
+msgid   "Go up"
+msgstr  ""
+
+#: ../xffm/fm/view/pkg/popup.hh:152
+#, fuzzy
+msgid   "Search packages"
+msgstr  "Szëkba nazôd."
+
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:95
+#, fuzzy, c-format
+msgid   "Loading %s...%s"
+msgstr  "Ladowanié..."
+
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:95
+#, fuzzy
+msgid   "Please Wait..."
+msgstr  "Zamkni skript..."
+
+#: ../xffm/fm/view/local/model.hh:124
+#, fuzzy, c-format
+msgid   "Reading \"%s\""
+msgstr  "Aktualizacëjô: %s"
+
+#: ../xffm/fm/view/local/model.hh:577 ../xffm/fm/view/base/monitor.hh:34
+#, fuzzy, c-format
+msgid   "Files: %s"
+msgstr  "Lopczi:"
+
+#: ../xffm/fm/view/local/model.hh:580
+#, c-format
+msgid   "Loaded %d of %d articles"
+msgstr  ""
+
+#: ../xffm/fm/view/local/rm.hh:59
+#, fuzzy, c-format
+msgid   "Delete %s"
+msgstr  "Rëmôj"
+
+#: ../xffm/fm/view/local/rm.hh:61
+#, fuzzy
+msgid   "Warning: "
+msgstr  "Bôczënk: %s"
+
+#: ../xffm/fm/view/local/rm.hh:61 ../xffm/fm/view/local/popup.hh:557
+#, fuzzy
+msgid   "Multiple selections"
+msgstr  "Wielenié"
+
+#: ../xffm/fm/view/local/rm.hh:92
+msgid   "Remove"
+msgstr  "Rëmôj"
+
+#: ../xffm/fm/view/local/rm.hh:142
+#, fuzzy
+msgid   "Apply to all"
+msgstr  "Ùżëjë efekt na listwie"
+
+#: ../xffm/fm/view/local/rm.hh:183
+msgid   "Trash"
+msgstr  "Kòsz"
+
+#: ../xffm/fm/view/local/popup.hh:94
+msgid   "New"
+msgstr  "Nowi"
+
+#: ../xffm/fm/view/local/popup.hh:101 ../xffm/fm/view/local/popup.hh:159
+#: ../xffm/fm/view/local/popup.hh:232 ../xffm/fm/view/local/popup.hh:234
+#, fuzzy
+msgid   "Paste into"
+msgstr  "Wlepi lopk"
+
+#: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:158
+#, fuzzy
+msgid   "There is nothing on the clipboard to paste."
+msgstr  "Pasëjë czile starnów ùczbòwnika."
+
+#: ../xffm/fm/view/local/popup.hh:106
+msgid   "Select All"
+msgstr  "Wëbiérzë wszëtkò"
+
+#: ../xffm/fm/view/local/popup.hh:107 ../xffm/fm/view/local/popup.hh:746
+#, fuzzy
+msgid   "Match regular expression"
+msgstr  "Słëchô do regùlarnégò wësłowa"
+
+#: ../xffm/fm/view/local/popup.hh:143 ../xffm/fm/view/local/popup.hh:1029
+#, fuzzy
+msgid   "Run Executable..."
+msgstr  "Wëkònëwólny lopk:"
+
+#: ../xffm/fm/view/local/popup.hh:144 ../xffm/fm/view/local/popup.hh:877
+#, fuzzy
+msgid   "Extract files from the archive"
+msgstr  "Zgrëwanié lopków z %s do %s."
+
+#: ../xffm/fm/view/local/popup.hh:146 ../xffm/fm/view/local/popup.hh:928
+#, fuzzy
+msgid   "Create a compressed archive with the selected objects"
+msgstr  "Ùsôdzë nowi profil òpiarti na wëbrónym"
+
+#: ../xffm/fm/view/local/popup.hh:148 ../xffm/fm/view/root/popup.hh:172
+#: ../xffm/fm/view/fstab/popup.hh:37
+#, fuzzy
+msgid   "Mount the volume associated with this folder"
+msgstr  "Nié mòże rëmnąc wszëtczich lopków sparłãczonych z %s"
+
+#: ../xffm/fm/view/local/popup.hh:149 ../xffm/fm/view/root/popup.hh:173
+#: ../xffm/fm/view/fstab/popup.hh:38
+msgid   "Unmount the volume associated with this folder"
+msgstr  ""
+
+#: ../xffm/fm/view/local/popup.hh:161 ../xffm/fm/view/local/popup.hh:1242
+msgid   "Rename"
+msgstr  "Zmieni miono"
+
+#: ../xffm/fm/view/local/popup.hh:162 ../xffm/fm/view/local/popup.hh:1225
+#, fuzzy
+msgid   "Duplicate"
+msgstr  "Duplikatë..."
+
+#: ../xffm/fm/view/local/popup.hh:163 ../xffm/fm/view/local/popup.hh:1208
+msgid   "Link"
+msgstr  "Lënk"
+
+#: ../xffm/fm/view/local/popup.hh:164
+msgid   "Properties"
+msgstr  "Swòjiznë"
+
+#: ../xffm/fm/view/local/popup.hh:554
+msgid   "Files:"
+msgstr  "Lopczi:"
+
+#: ../xffm/fm/view/local/popup.hh:744
+#, fuzzy
+msgid   "Select items"
+msgstr  "Wëbiérzë element"
+
+#: ../xffm/fm/view/local/popup.hh:761
+msgid   "Regular Expression syntax is incorrect"
+msgstr  "Lëchô syntaksa regùlarnegò wësłowia"
+
+#: ../xffm/fm/view/local/popup.hh:791
+#, fuzzy
+msgid   "No selection"
+msgstr  "Òbrëmienié szëkbë:"
+
+#: ../xffm/fm/view/local/popup.hh:791
+#, fuzzy
+msgid   "No matches."
+msgstr  "<felënk dopasowań>"
+
+#: ../xffm/fm/view/local/popup.hh:983 ../xffm/fm/view/local/popup.hh:1156
+#, fuzzy
+msgid   "Create new..."
+msgstr  "Ùsôdzë nowi"
+
+#: ../xffm/fm/view/local/popup.hh:990 ../xffm/fm/view/local/popup.hh:1085
+#: ../xffm/fm/view/local/popup.hh:1159
+#, fuzzy
+msgid   "New Name:"
+msgstr  "Nowi miono"
+
+#: ../xffm/fm/view/local/popup.hh:998
+msgid   "No name"
+msgstr  "Felëje miona"
+
+#: ../xffm/fm/view/local/popup.hh:1011
+#, fuzzy, c-format
+msgid   "Another file with the same name already exists in “%s”."
+msgstr  "Schema z tim mionã ju je."
+
+#: ../xffm/fm/view/local/popup.hh:1036
+#, fuzzy
+msgid   "Arguments for the Command"
+msgstr  "Argùmentë pòlétu"
+
+#: ../xffm/fm/view/local/popup.hh:1117 ../xffm/fm/view/root/popup.hh:237
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:383
+msgid   "Specify Output Directory..."
+msgstr  "Pòdôj katalog wińdzeniô..."
+
+#: ../xffm/fm/view/local/popup.hh:1148
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:409
+msgid   "Not a directory"
+msgstr  "To nie je katalog"
+
+#: ../xffm/fm/view/local/popup.hh:1307
+msgid   "You have selected multiple files or folders"
+msgstr  ""
+
+#: ../xffm/fm/view/local/popup.hh:1375 ../xffm/fm/view/local/view.hh:156
+#, fuzzy
+msgid   "Invalid entry"
+msgstr  "Zmiłkòwi fònt"
+
+#: ../xffm/fm/view/local/view.hh:177
+#, fuzzy, c-format
+msgid   "The volume '%s' is not mounted."
+msgstr  "Sztél %s nie òstôł nalazłi"
+
+#: ../xffm/fm/view/local/properties.hh:241
+#, fuzzy
+msgid   "Properties and Attributes"
+msgstr  "Swòjiznë %s"
+
+#: ../xffm/fm/view/local/properties.hh:270
+#, fuzzy
+msgid   "File Mode:"
+msgstr  "Trib wëzdrzatkù"
+
+#: ../xffm/fm/view/local/properties.hh:296
+msgid   "File:"
+msgstr  "Lopk:"
+
+#: ../xffm/fm/view/local/properties.hh:308
+msgid   "Apply changes"
+msgstr  "Ùżëjë zmianë"
+
+#: ../xffm/fm/view/local/properties.hh:469
+msgid   "Encoding"
+msgstr  "Kòdowanié"
+
+#: ../xffm/fm/view/local/properties.hh:470 ../xffm/fm/view/treeview.hh:22
+#, fuzzy
+msgid   "Mimetype"
+msgstr  "Ôrtë Mime"
+
+#: ../xffm/fm/view/local/properties.hh:474 ../xffm/fm/view/treeview.hh:19
+msgid   "Size"
+msgstr  "Miara"
+
+#: ../xffm/fm/view/local/properties.hh:475 ../xffm/fm/view/treeview.hh:20
+msgid   "Date"
+msgstr  "Datum"
+
+#: ../xffm/fm/view/local/properties.hh:492
+msgid   "Successfully moved to trash."
+msgstr  "Ùdało przeniosłé do kòsza"
+
+#: ../xffm/fm/view/local/properties.hh:493
+msgid   "Source:"
+msgstr  "Zdrój:"
+
+#: ../xffm/fm/view/root/model.hh:124
+#, fuzzy
+msgid   "Root Directory"
+msgstr  "Spòdlowi katalog HTML"
+
+#: ../xffm/fm/view/root/model.hh:140
+msgid   "This is the root of the filesystem"
+msgstr  "Je to kòrzéń systemë lopków (przédny katalog - root)"
+
+#: ../xffm/fm/view/root/model.hh:152
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:268
 #, fuzzy
 msgid   "Home Directory"
 msgstr  "Open Directory - Ôpen katalog starnów WWW"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:261
-#: ../xffm/fm/view/root/model.hh:168 ../xffm/fm/view/fstab/popup.hh:29
-#, fuzzy
-msgid   "Disk Image Mounter"
-msgstr  "Nôrzãdze do mòntowaniô disków"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:266
-#: ../xffm/fm/view/root/model.hh:137
+#: ../xffm/fm/view/root/model.hh:179
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:278
 #, fuzzy
 msgid   "Trash bin"
 msgstr  "Lopk kòsza"
 
-#: ../xffm/fm/dialog/notebook/notebook.hh:56
+#: ../xffm/fm/view/root/model.hh:210 ../xffm/fm/view/fstab/popup.hh:29
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:273
 #, fuzzy
-msgid   "Long press time"
-msgstr  "Ladëje pòdzérk..."
+msgid   "Disk Image Mounter"
+msgstr  "Nôrzãdze do mòntowaniô disków"
 
-#: ../xffm/fm/dialog/notebook/notebook.hh:75 ../xffm/common/gtk.hh:139
-msgid   "New Tab"
-msgstr  "Nowô kôrta"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:178
+#: ../xffm/fm/view/root/model.hh:227
 #, fuzzy
-msgid   "Open menu"
-msgstr  "Òtemkni wczasniészi"
+msgid   "Mount local disks and devices"
+msgstr  "Wëskrzëni awansowóné ùrzadzenia"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:230
+#: ../xffm/fm/view/root/model.hh:267
 #, fuzzy
-msgid   "View as list"
-msgstr  "Slédny raz przezéróny:"
+msgid   "Go to bookmarked location"
+msgstr  "Załóżkã dlô ti adresë"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:231
-msgid   "Show hidden files"
-msgstr  "Wëskrzëni zataconé lopczi"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:232
+#: ../xffm/fm/view/root/popup.hh:175
 #, fuzzy
-msgid   "Show Backup Files"
-msgstr  "Wëskrzëni wszëtczé lopczi"
+msgid   "Empty trash"
+msgstr  "Wëczëszczë kòsz"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:233
-msgid   "Sort data in descending order"
+#: ../xffm/fm/view/root/popup.hh:228
+#, fuzzy
+msgid   "Ecrypt Volume"
+msgstr  "Wëcëszë głosnosc"
+
+#: ../xffm/fm/view/root/popup.hh:229
+#, fuzzy
+msgid   "private"
+msgstr  "Priwatné robòtë"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:162 ../xffm/fm/view/fuse/ecryptfs.hh:163
+#: ../xffm/fm/view/fuse/ecryptfs.hh:185
+#, fuzzy
+msgid   "Mount"
+msgstr  "zamòntëjë"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:179
+#: ../xffm/fm/dialog/notebook/createini.hh:87
+#: ../xffm/fm/dialog/notebook/createini.hh:371
+msgid   "Save"
+msgstr  "Zapiszë"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:182
+msgid   "Load"
+msgstr  "Zladëjë"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:398
+#: ../xffm/fm/dialog/notebook/createini.hh:67
+msgid   "Options"
+msgstr  "Òptacëjë"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:399
+msgid   "Advanced"
+msgstr  "Awansowóné"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:692 ../xffm/fm/view/fstab/view.hh:1414
+#, fuzzy, c-format
+msgid   "Mounting %s"
+msgstr  "Mòntowanié"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:745
+#, fuzzy, c-format
+msgid   "Enter Passphrase for %s"
+msgstr  "Wpiszë tuwò kriterium szëkbë"
+
+#: ../xffm/fm/view/fstab/popup.hh:21 ../xffm/fm/view/fstab/view.hh:1033
+#, fuzzy
+msgid   "NFS Network Volume"
+msgstr  "Òbjim zôpisu"
+
+#: ../xffm/fm/view/fstab/popup.hh:22
+#, fuzzy
+msgid   "SSHFS Remote Synchronization Folder"
+msgstr  "Nôrzãdze do synchronizacëji katalogów"
+
+#: ../xffm/fm/view/fstab/popup.hh:23 ../xffm/fm/view/fstab/view.hh:1085
+#, fuzzy
+msgid   "eCryptfs Volume"
+msgstr  "Zminészë głosnosc"
+
+#: ../xffm/fm/view/fstab/popup.hh:24 ../xffm/fm/view/fstab/view.hh:1111
+#, fuzzy
+msgid   "CIFS Volume"
+msgstr  "Głosnosc"
+
+#: ../xffm/fm/view/fstab/popup.hh:129
+#, fuzzy
+msgid   "Mount Device"
+msgstr  "Zamòntëjë ùrządzenié"
+
+#: ../xffm/fm/view/fstab/popup.hh:141 ../xffm/fm/view/fstab/view.hh:924
+#, fuzzy
+msgid   "Mount point:"
+msgstr  "Pùnkt mòntowaniô"
+
+#: ../xffm/fm/view/fstab/view.hh:591
+#, fuzzy
+msgid   "Mount point: "
+msgstr  "Pùnkt mòntowaniô"
+
+#: ../xffm/fm/view/fstab/view.hh:592
+#, fuzzy
+msgid   "Mount device: "
+msgstr  "Zamòntëjë ùrządzenié"
+
+#: ../xffm/fm/view/fstab/view.hh:660 ../xffm/fm/view/fstab/view.hh:676
+#, fuzzy
+msgid   "Disks"
+msgstr  "Disk"
+
+#: ../xffm/fm/view/fstab/view.hh:922
+#, fuzzy
+msgid   "No Label"
+msgstr  "Eticzéta"
+
+#: ../xffm/fm/view/fstab/view.hh:923
+#, fuzzy
+msgid   "There is no file system available (unformatted)"
+msgstr  "Felënk pasownëch elementów.\n"
+
+#: ../xffm/fm/view/fstab/view.hh:924
+#, fuzzy
+msgid   "Not mounted"
+msgstr  "(nie zamòntowóné)"
+
+#: ../xffm/fm/view/fstab/view.hh:1059
+msgid   "SFTP (via SSH)"
 msgstr  ""
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:235
-#, fuzzy
-msgid   "Sort by date"
-msgstr  "Krótczi datum:"
+#: ../xffm/fm/view/fstab/view.hh:1414
+#, fuzzy, c-format
+msgid   "Unmounting %s"
+msgstr  "Òdmòntowanié"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:236
+#: ../xffm/fm/view/base/signals.hh:845
 #, fuzzy
-msgid   "Sort by size"
-msgstr  "Zortëjë wedle:"
+msgid   "Trash is empty"
+msgstr  "Pùstô parola"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:237 ../xffm/common/gtk.hh:81
-msgid   "Exit"
+#: ../xffm/fm/view/base/signals.hh:847
+#, fuzzy
+msgid   "Directory does not exist."
+msgstr  "Lopk nie òbstoji."
+
+#: ../xffm/fm/view/treeview.hh:17
+msgid   "Name"
+msgstr  "Miono"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
+#, fuzzy
+msgid   "Embedded Terminal"
+msgstr  "X Terminal"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
+msgid   "All items in the iconview."
 msgstr  ""
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:270
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
 #, fuzzy
-msgid   "Main menu"
-msgstr  "Zatacë menu"
+msgid   "Scripting"
+msgstr  "Skript:"
 
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:375
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:377
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
 #, fuzzy
-msgid   "Go to"
-msgstr  "Biéj do %s"
+msgid   "Clear Log"
+msgstr  "Wëczëszczë lëstã"
 
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:382
-#: ../xffm/fm/view/local/popup.hh:887 ../xffm/fm/view/local/popup.hh:981
-msgid   "Specify Output Directory..."
-msgstr  "Pòdôj katalog wińdzeniô..."
-
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:409
-msgid   "Not a directory"
-msgstr  "To nie je katalog"
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
+#, fuzzy
+msgid   "Terminal font"
+msgstr  "Terminal"
 
 #: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
 msgid   "Renice Process"
@@ -848,18 +1271,24 @@ msgstr  "Prezentacjowi kwalitet"
 msgid   "PID"
 msgstr  "PID"
 
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:376
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:378
+#, fuzzy
+msgid   "Go to"
+msgstr  "Biéj do %s"
+
 #: ../xffm/fm/dialog/notebook/page/page.hh:59
 #, fuzzy
 msgid   "loading..."
 msgstr  "Ladowanié..."
 
-#: ../xffm/fm/dialog/notebook/page/page.hh:151
+#: ../xffm/fm/dialog/notebook/page/page.hh:152
 #: ../xffm/fm/dialog/notebook/page/page.hh:167
 #, fuzzy
 msgid   "Confirm Replace"
 msgstr  "Pòcwierdzë zamkniãcé"
 
-#: ../xffm/fm/dialog/notebook/page/page.hh:153
+#: ../xffm/fm/dialog/notebook/page/page.hh:154
 #, fuzzy
 msgid   "Destination File"
 msgstr  "Przeznaczenié"
@@ -869,39 +1298,182 @@ msgstr  "Przeznaczenié"
 msgid   "The output file %s already exists, do you want to overwrite it?"
 msgstr  "%s òbstoji. Czë chcesz gò nôdpisac?"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
+#: ../xffm/fm/dialog/notebook/createini.hh:67
 #, fuzzy
-msgid   "Embedded Terminal"
-msgstr  "X Terminal"
+msgid   "maximum"
+msgstr  "Maksimum"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
-msgid   "All items in the iconview."
+#: ../xffm/fm/dialog/notebook/createini.hh:75
+#, fuzzy
+msgid   "Add option"
+msgstr  "Dodôj emòtikònã"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:79
+#, fuzzy
+msgid   "Remove option"
+msgstr  "Rëmôj subskripcëjã"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:158
+msgid   "icon ID"
 msgstr  ""
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
+#: ../xffm/fm/dialog/notebook/createini.hh:159
 #, fuzzy
-msgid   "Scripting"
-msgstr  "Skript:"
+msgid   "tooltip"
+msgstr  "Pòdpòwiesc"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
+#: ../xffm/fm/dialog/notebook/createini.hh:160
 #, fuzzy
-msgid   "Clear Log"
-msgstr  "Wëczëszczë lëstã"
+msgid   "Select work directory"
+msgstr  "Katalog"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
+#: ../xffm/fm/dialog/notebook/createini.hh:163
 #, fuzzy
-msgid   "Terminal font"
-msgstr  "Terminal"
+msgid   "Select executable"
+msgstr  "Wëbróny tekst"
 
-#: ../xffm/fm/dialog/clipboard.hh:23 ../xffm/common/dnd.hh:41
-msgid   "Copying files locally"
+#: ../xffm/fm/dialog/notebook/createini.hh:166
+msgid   "Run in terminal"
+msgstr  "Zrëszë w terminalu"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:234
+#: ../xffm/response/chooserresponse.hh:20
+msgid   "Open"
+msgstr  "Òtemkni"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:268
+#: ../xffm/response/chooserresponse.hh:55
+#: ../xffm/response/chooserresponse.hh:69
+#, fuzzy
+msgid   "Choose file"
+msgstr  "Sprôwdzë lopczi"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:277
+#: ../xffm/response/chooserresponse.hh:50
+#: ../xffm/response/chooserresponse.hh:62
+#, fuzzy
+msgid   "Choose directory"
+msgstr  "Ùsôdzë katalog"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:366
+#, fuzzy
+msgid   "Save File"
+msgstr  "Nalezë lopczi"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:380
+msgid   "customButton.ini"
 msgstr  ""
 
-#: ../xffm/fm/dialog/clipboard.hh:30 ../xffm/common/gio.hh:83
-#: ../xffm/common/dnd.hh:35
+#: ../xffm/fm/dialog/notebook/createini.hh:420
+msgid   "Option"
+msgstr  "Òptacëjô"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:424
 #, fuzzy
-msgid   "Moving files"
-msgstr  "Przenoszónié %s"
+msgid   "text"
+msgstr  "Kòntekst"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:431 ../xffm/completion/bash.hh:135
+#, fuzzy
+msgid   "file"
+msgstr  "kfile"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:436
+#, fuzzy
+msgid   "folder"
+msgstr  "1 katalog"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:441
+msgid   "on"
+msgstr  "włączoné"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:446
+msgid   "off"
+msgstr  "wëłączoné"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:16
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:226
+#, fuzzy
+msgid   "Remove Button Contents"
+msgstr  "Spisënk zamkłoscë"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:75
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:221
+#, fuzzy
+msgid   "Add custom content"
+msgstr  "Dodôj do kòlekcëji"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:76
+#, fuzzy
+msgid   "Select file to load"
+msgstr  "Òtemkni lopk"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:132
+#, fuzzy, c-format
+msgid   "Cannot load file %s. Reason: %s"
+msgstr  "Nié mòże zapisac lopka %s"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:161
+#, fuzzy
+msgid   "You need to restart the application"
+msgstr  "Zrëszocz programów"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:216
+msgid   "FIXME New custom content"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:256
+#, fuzzy
+msgid   "Open a New Window"
+msgstr  "Òtemkni w nowim òknie"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:262
+#, fuzzy
+msgid   "Differences"
+msgstr  "Òbôczë nierównoscë"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:178
+#, fuzzy
+msgid   "Open menu"
+msgstr  "Òtemkni wczasniészi"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:230
+#, fuzzy
+msgid   "View as list"
+msgstr  "Slédny raz przezéróny:"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:231
+msgid   "Show hidden files"
+msgstr  "Wëskrzëni zataconé lopczi"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:232
+#, fuzzy
+msgid   "Show Backup Files"
+msgstr  "Wëskrzëni wszëtczé lopczi"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:233
+msgid   "Sort data in descending order"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:235
+#, fuzzy
+msgid   "Sort by date"
+msgstr  "Krótczi datum:"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:236
+#, fuzzy
+msgid   "Sort by size"
+msgstr  "Zortëjë wedle:"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:270
+#, fuzzy
+msgid   "Main menu"
+msgstr  "Zatacë menu"
+
+#: ../xffm/fm/dialog/notebook/notebook.hh:56
+#, fuzzy
+msgid   "Long press time"
+msgstr  "Ladëje pòdzérk..."
 
 #: ../xffm/fm/dialog/dialog.hh:122
 #, fuzzy
@@ -913,536 +1485,91 @@ msgstr  "Rëmôj"
 msgid   "Detected device(s):"
 msgstr  "Wëbierzë ùsłëżnotã:"
 
-#: ../xffm/fm/view/local/model.hh:124
-#, fuzzy, c-format
-msgid   "Reading \"%s\""
-msgstr  "Aktualizacëjô: %s"
+#: ../xffm/response/progress.hh:82 ../xffm/response/commandresponse.hh:57
+msgid   "Running"
+msgstr  "Zrëszony"
 
-#: ../xffm/fm/view/local/model.hh:577 ../xffm/fm/view/base/monitor.hh:34
-#, fuzzy, c-format
-msgid   "Files: %s"
-msgstr  "Lopczi:"
-
-#: ../xffm/fm/view/local/model.hh:580
-#, c-format
-msgid   "Loaded %d of %d articles"
-msgstr  ""
-
-#: ../xffm/fm/view/local/popup.hh:85 ../xffm/fm/view/local/popup.hh:142
-#: ../xffm/fm/view/local/popup.hh:1287 ../xffm/fm/view/local/popup.hh:1294
-#: ../xffm/fm/view/local/popup.hh:1305 ../xffm/fm/view/local/popup.hh:1312
-#: ../xffm/common/gtk.hh:83
+#: ../xffm/response/progress.hh:87 ../xffm/response/commandresponse.hh:61
 #, fuzzy
-msgid   "Open with"
-msgstr  "Òtemkni w"
+msgid   "Waiting for operation to finish..."
+msgstr  "Żdanié na strzél procëmnika..."
 
-#: ../xffm/fm/view/local/popup.hh:94
-msgid   "New"
-msgstr  "Nowi"
-
-#: ../xffm/fm/view/local/popup.hh:95 ../xffm/fm/view/local/popup.hh:145
-#: ../xffm/fm/view/root/popup.hh:136 ../xffm/fm/view/fstab/popup.hh:20
-#: ../xffm/common/gtk.hh:94
-msgid   "Open in New Tab"
-msgstr  "Òtemkni w nowi kôrce"
-
-#: ../xffm/fm/view/local/popup.hh:99 ../xffm/fm/view/local/popup.hh:155
-#: ../xffm/common/gtk.hh:87
-msgid   "Copy"
-msgstr  "Kòpérëjë"
-
-#: ../xffm/fm/view/local/popup.hh:100 ../xffm/fm/view/local/popup.hh:156
-#: ../xffm/common/gtk.hh:85
-msgid   "Cut"
-msgstr  "Wëtni"
-
-#: ../xffm/fm/view/local/popup.hh:101 ../xffm/fm/view/local/popup.hh:159
-#: ../xffm/fm/view/local/popup.hh:232 ../xffm/fm/view/local/popup.hh:234
+#: ../xffm/response/passwdresponse.hh:131
 #, fuzzy
-msgid   "Paste into"
-msgstr  "Wlepi lopk"
+msgid   "User Input"
+msgstr  "Przezérnik"
 
-#: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:158
+#: ../xffm/response/passwdresponse.hh:147
 #, fuzzy
-msgid   "There is nothing on the clipboard to paste."
-msgstr  "Pasëjë czile starnów ùczbòwnika."
+msgid   "Response Requested"
+msgstr  "SysReq"
 
-#: ../xffm/fm/view/local/popup.hh:103 ../xffm/fm/view/local/popup.hh:160
-#: ../xffm/fm/view/local/rm.hh:176 ../xffm/common/gtk.hh:89
-msgid   "Delete"
-msgstr  "Rëmôj"
+#: ../xffm/response/passwdresponse.hh:194 ../xffm/response/entryresponse.hh:457
+msgid   "Ok"
+msgstr  "Ok"
 
-#: ../xffm/fm/view/local/popup.hh:106
-msgid   "Select All"
-msgstr  "Wëbiérzë wszëtkò"
-
-#: ../xffm/fm/view/local/popup.hh:107 ../xffm/fm/view/local/popup.hh:755
+#: ../xffm/response/customresponse.hh:55
 #, fuzzy
-msgid   "Match regular expression"
-msgstr  "Słëchô do regùlarnégò wësłowa"
-
-#: ../xffm/fm/view/local/popup.hh:143 ../xffm/fm/view/local/popup.hh:1105
-#, fuzzy
-msgid   "Run Executable..."
-msgstr  "Wëkònëwólny lopk:"
-
-#: ../xffm/fm/view/local/popup.hh:144 ../xffm/fm/view/local/popup.hh:875
-#, fuzzy
-msgid   "Extract files from the archive"
-msgstr  "Zgrëwanié lopków z %s do %s."
-
-#: ../xffm/fm/view/local/popup.hh:146 ../xffm/fm/view/local/popup.hh:966
-#, fuzzy
-msgid   "Create a compressed archive with the selected objects"
-msgstr  "Ùsôdzë nowi profil òpiarti na wëbrónym"
-
-#: ../xffm/fm/view/local/popup.hh:148 ../xffm/fm/view/fstab/popup.hh:37
-#, fuzzy
-msgid   "Mount the volume associated with this folder"
-msgstr  "Nié mòże rëmnąc wszëtczich lopków sparłãczonych z %s"
-
-#: ../xffm/fm/view/local/popup.hh:149 ../xffm/fm/view/fstab/popup.hh:38
-msgid   "Unmount the volume associated with this folder"
-msgstr  ""
-
-#: ../xffm/fm/view/local/popup.hh:151 ../xffm/common/gtk.hh:73
-#, fuzzy
-msgid   "Add bookmark"
-msgstr  "Dodôj załóżkã"
-
-#: ../xffm/fm/view/local/popup.hh:152 ../xffm/fm/view/root/popup.hh:137
-#: ../xffm/common/gtk.hh:75
-#, fuzzy
-msgid   "Remove bookmark"
-msgstr  "Rëmôj pòlét"
-
-#: ../xffm/fm/view/local/popup.hh:157 ../xffm/common/gtk.hh:71
-msgid   "Paste"
-msgstr  "Wlepi"
-
-#: ../xffm/fm/view/local/popup.hh:161 ../xffm/fm/view/local/popup.hh:1231
-msgid   "Rename"
-msgstr  "Zmieni miono"
-
-#: ../xffm/fm/view/local/popup.hh:162 ../xffm/fm/view/local/popup.hh:1217
-#, fuzzy
-msgid   "Duplicate"
-msgstr  "Duplikatë..."
-
-#: ../xffm/fm/view/local/popup.hh:163 ../xffm/fm/view/local/popup.hh:1203
-msgid   "Link"
-msgstr  "Lënk"
-
-#: ../xffm/fm/view/local/popup.hh:164
-msgid   "Properties"
-msgstr  "Swòjiznë"
-
-#: ../xffm/fm/view/local/popup.hh:562
-msgid   "Files:"
-msgstr  "Lopczi:"
-
-#: ../xffm/fm/view/local/popup.hh:565 ../xffm/fm/view/local/rm.hh:61
-#, fuzzy
-msgid   "Multiple selections"
-msgstr  "Wielenié"
-
-#: ../xffm/fm/view/local/popup.hh:753
-#, fuzzy
-msgid   "Select items"
-msgstr  "Wëbiérzë element"
-
-#: ../xffm/fm/view/local/popup.hh:771
-msgid   "Regular Expression syntax is incorrect"
-msgstr  "Lëchô syntaksa regùlarnegò wësłowia"
-
-#: ../xffm/fm/view/local/popup.hh:801
-#, fuzzy
-msgid   "No selection"
-msgstr  "Òbrëmienié szëkbë:"
-
-#: ../xffm/fm/view/local/popup.hh:801
-#, fuzzy
-msgid   "No matches."
-msgstr  "<felënk dopasowań>"
-
-#: ../xffm/fm/view/local/popup.hh:1058
-#, fuzzy
-msgid   "Create new..."
-msgstr  "Ùsôdzë nowi"
-
-#: ../xffm/fm/view/local/popup.hh:1065 ../xffm/fm/view/local/popup.hh:1146
-#, fuzzy
-msgid   "New Name:"
-msgstr  "Nowi miono"
-
-#: ../xffm/fm/view/local/popup.hh:1074
-msgid   "No name"
-msgstr  "Felëje miona"
-
-#: ../xffm/fm/view/local/popup.hh:1087
-#, fuzzy, c-format
-msgid   "Another file with the same name already exists in “%s”."
-msgstr  "Schema z tim mionã ju je."
-
-#: ../xffm/fm/view/local/popup.hh:1109 ../xffm/fm/view/local/popup.hh:1291
-#: ../xffm/fm/view/local/popup.hh:1309 ../xffm/common/util.hh:1452
-#, fuzzy
-msgid   "Run in Terminal"
-msgstr  "Zrëszë w terminalu"
-
-#: ../xffm/fm/view/local/popup.hh:1112
-#, fuzzy
-msgid   "Arguments for the Command"
-msgstr  "Argùmentë pòlétu"
-
-#: ../xffm/fm/view/local/popup.hh:1258
-msgid   "You have selected multiple files or folders"
-msgstr  ""
-
-#: ../xffm/fm/view/local/popup.hh:1332 ../xffm/fm/view/local/view.hh:156
-#, fuzzy
-msgid   "Invalid entry"
-msgstr  "Zmiłkòwi fònt"
-
-#: ../xffm/fm/view/local/properties.hh:245
-#, fuzzy
-msgid   "Properties and Attributes"
-msgstr  "Swòjiznë %s"
-
-#: ../xffm/fm/view/local/properties.hh:274
-#, fuzzy
-msgid   "File Mode:"
-msgstr  "Trib wëzdrzatkù"
-
-#: ../xffm/fm/view/local/properties.hh:300
-msgid   "File:"
-msgstr  "Lopk:"
-
-#: ../xffm/fm/view/local/properties.hh:312
-msgid   "Apply changes"
-msgstr  "Ùżëjë zmianë"
-
-#: ../xffm/fm/view/local/properties.hh:477
-msgid   "Successfully moved to trash."
-msgstr  "Ùdało przeniosłé do kòsza"
-
-#: ../xffm/fm/view/local/properties.hh:478
-msgid   "Source:"
-msgstr  "Zdrój:"
-
-#: ../xffm/fm/view/local/rm.hh:59
-#, fuzzy, c-format
-msgid   "Delete %s"
-msgstr  "Rëmôj"
-
-#: ../xffm/fm/view/local/rm.hh:61
-#, fuzzy
-msgid   "Warning: "
-msgstr  "Bôczënk: %s"
-
-#: ../xffm/fm/view/local/rm.hh:92
-msgid   "Remove"
-msgstr  "Rëmôj"
-
-#: ../xffm/fm/view/local/rm.hh:142
-#, fuzzy
-msgid   "Apply to all"
-msgstr  "Ùżëjë efekt na listwie"
-
-#: ../xffm/fm/view/local/rm.hh:165 ../xffm/common/gtk.hh:91
-msgid   "Shred"
-msgstr  ""
-
-#: ../xffm/fm/view/local/rm.hh:183
-msgid   "Trash"
-msgstr  "Kòsz"
-
-#: ../xffm/fm/view/local/view.hh:177
-#, fuzzy, c-format
-msgid   "The volume '%s' is not mounted."
-msgstr  "Sztél %s nie òstôł nalazłi"
-
-#: ../xffm/fm/view/root/model.hh:82
-#, fuzzy
-msgid   "Root Directory"
-msgstr  "Spòdlowi katalog HTML"
-
-#: ../xffm/fm/view/root/model.hh:98
-msgid   "This is the root of the filesystem"
-msgstr  "Je to kòrzéń systemë lopków (przédny katalog - root)"
-
-#: ../xffm/fm/view/root/model.hh:176 ../xffm/fm/view/root/model.hh:191
-#, fuzzy
-msgid   "Mount local disks and devices"
-msgstr  "Wëskrzëni awansowóné ùrzadzenia"
-
-#: ../xffm/fm/view/root/model.hh:177 ../xffm/fm/view/fstab/popup.hh:23
-#: ../xffm/fm/view/fstab/view.hh:1084
-#, fuzzy
-msgid   "eCryptfs Volume"
-msgstr  "Zminészë głosnosc"
-
-#: ../xffm/fm/view/root/model.hh:178 ../xffm/fm/view/fstab/popup.hh:22
-#, fuzzy
-msgid   "SSHFS Remote Synchronization Folder"
-msgstr  "Nôrzãdze do synchronizacëji katalogów"
-
-#: ../xffm/fm/view/root/model.hh:179 ../xffm/fm/view/fstab/popup.hh:21
-#: ../xffm/fm/view/fstab/view.hh:1032
-#, fuzzy
-msgid   "NFS Network Volume"
-msgstr  "Òbjim zôpisu"
-
-#: ../xffm/fm/view/root/model.hh:180 ../xffm/fm/view/fstab/popup.hh:24
-#: ../xffm/fm/view/fstab/view.hh:1110
-#, fuzzy
-msgid   "CIFS Volume"
-msgstr  "Głosnosc"
-
-#: ../xffm/fm/view/root/model.hh:229
-#, fuzzy
-msgid   "Go to bookmarked location"
-msgstr  "Załóżkã dlô ti adresë"
-
-#: ../xffm/fm/view/root/popup.hh:138
-#, fuzzy
-msgid   "Empty trash"
-msgstr  "Wëczëszczë kòsz"
-
-#: ../xffm/fm/view/fstab/popup.hh:129
-#, fuzzy
-msgid   "Mount Device"
-msgstr  "Zamòntëjë ùrządzenié"
-
-#: ../xffm/fm/view/fstab/popup.hh:141 ../xffm/fm/view/fstab/view.hh:923
-#, fuzzy
-msgid   "Mount point:"
-msgstr  "Pùnkt mòntowaniô"
-
-#: ../xffm/fm/view/fstab/view.hh:590
-#, fuzzy
-msgid   "Mount point: "
-msgstr  "Pùnkt mòntowaniô"
-
-#: ../xffm/fm/view/fstab/view.hh:591
-#, fuzzy
-msgid   "Mount device: "
-msgstr  "Zamòntëjë ùrządzenié"
-
-#: ../xffm/fm/view/fstab/view.hh:659 ../xffm/fm/view/fstab/view.hh:675
-#, fuzzy
-msgid   "Disks"
-msgstr  "Disk"
-
-#: ../xffm/fm/view/fstab/view.hh:921
-#, fuzzy
-msgid   "No Label"
-msgstr  "Eticzéta"
-
-#: ../xffm/fm/view/fstab/view.hh:922
-#, fuzzy
-msgid   "There is no file system available (unformatted)"
-msgstr  "Felënk pasownëch elementów.\n"
-
-#: ../xffm/fm/view/fstab/view.hh:923
-#, fuzzy
-msgid   "Not mounted"
-msgstr  "(nie zamòntowóné)"
-
-#: ../xffm/fm/view/fstab/view.hh:1058
-msgid   "SFTP (via SSH)"
-msgstr  ""
-
-#: ../xffm/fm/view/fstab/view.hh:1413
-#, fuzzy, c-format
-msgid   "Unmounting %s"
-msgstr  "Òdmòntowanié"
-
-#: ../xffm/fm/view/fstab/view.hh:1413
-#, fuzzy, c-format
-msgid   "Mounting %s"
-msgstr  "Mòntowanié"
-
-#: ../xffm/fm/view/pkg/model.hh:41 ../xffm/fm/view/pkg/model.hh:52
-msgid   "Add or remove software installed on the system"
-msgstr  ""
-
-#: ../xffm/fm/view/pkg/model.hh:111
-#, fuzzy
-msgid   "String"
-msgstr  "Ùwòlnienié"
-
-#: ../xffm/fm/view/pkg/model.hh:116
-#, fuzzy
-msgid   "Waiting for search results"
-msgstr  "Żdanié na kòmpùtr."
-
-#: ../xffm/fm/view/pkg/model.hh:174
-#, fuzzy
-msgid   "No results"
-msgstr  "Felënk"
-
-#: ../xffm/fm/view/pkg/model.hh:373
-#, fuzzy
-msgid   "Currently busy\n"
-msgstr  "Aktualny: %s"
-
-#: ../xffm/fm/view/pkg/popup.hh:44
-msgid   "Update Database"
-msgstr  "Zaktualni bazã pòdôwków"
-
-#: ../xffm/fm/view/pkg/popup.hh:45
-#, fuzzy
-msgid   "Fetch"
-msgstr  "Céchùnk"
-
-#: ../xffm/fm/view/pkg/popup.hh:46
-#, fuzzy
-msgid   "Install --dry-run"
-msgstr  "Instalacëjô"
-
-#: ../xffm/fm/view/pkg/popup.hh:47
-msgid   "Install"
-msgstr  "Instalëjë"
-
-#: ../xffm/fm/view/pkg/popup.hh:48
-#, fuzzy
-msgid   "Uninstall --dry-run"
-msgstr  "Òdinstalowanié"
-
-#: ../xffm/fm/view/pkg/popup.hh:49
-msgid   "Uninstall"
-msgstr  "Òdjinstalëjë"
-
-#: ../xffm/fm/view/pkg/popup.hh:50
-msgid   "Information"
-msgstr  "Wëdowiédzô"
-
-#: ../xffm/fm/view/pkg/popup.hh:140
-msgid   "Version"
-msgstr  "Wersëjô"
-
-#: ../xffm/fm/view/pkg/popup.hh:149
-msgid   "Go up"
-msgstr  ""
-
-#: ../xffm/fm/view/pkg/popup.hh:152
-#, fuzzy
-msgid   "Search packages"
-msgstr  "Szëkba nazôd."
-
-#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
-#, fuzzy, c-format
-msgid   "Loading %s...%s"
-msgstr  "Ladowanié..."
-
-#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
-#, fuzzy
-msgid   "Please Wait..."
-msgstr  "Zamkni skript..."
-
-#: ../xffm/fm/view/treeview.hh:17
-msgid   "Name"
-msgstr  "Miono"
-
-#: ../xffm/fm/view/treeview.hh:19
-msgid   "Size"
-msgstr  "Miara"
-
-#: ../xffm/fm/view/treeview.hh:20
-msgid   "Date"
-msgstr  "Datum"
-
-#: ../xffm/fm/view/treeview.hh:22
-#, fuzzy
-msgid   "Mimetype"
-msgstr  "Ôrtë Mime"
-
-#: ../xffm/fm/view/base/signals.hh:838
-#, fuzzy
-msgid   "Trash is empty"
-msgstr  "Pùstô parola"
-
-#: ../xffm/fm/view/base/signals.hh:840
-#, fuzzy
-msgid   "Directory does not exist."
-msgstr  "Lopk nie òbstoji."
-
-#: ../xffm/common/settings.hh:30
-#, fuzzy
-msgid   "New File:"
-msgstr  "Òbezdrzë lopk"
-
-#: ../xffm/common/gio.hh:81
-#, fuzzy
-msgid   "Copying files"
-msgstr  "Kòpérowanié"
-
-#: ../xffm/common/gio.hh:85
-#, fuzzy
-msgid   "linking"
-msgstr  "lënk"
-
-#: ../xffm/common/gio.hh:87
-#, fuzzy
-msgid   "rename"
-msgstr  "Zmieni miono"
-
-#: ../xffm/common/gio.hh:426
-#, fuzzy, c-format
-msgid   "(%d of %d)"
-msgstr  "%s z %s"
-
-#: ../xffm/common/dnd.hh:47
-#, fuzzy
-msgid   "Create Link"
-msgstr  "Casey Link"
-
-#: ../xffm/common/util.hh:1404
-#, c-format
-msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
-        "attribute on that file."
-msgstr  ""
-
-#: ../xffm/common/util.hh:1406 ../xffm/common/util.hh:1441
-#, c-format
-msgid   "Open with %s"
-msgstr  "Òtemkni w %s"
-
-#: ../xffm/common/util.hh:1406
-msgid   "Text Editor"
-msgstr  "Tekstowi editora"
-
-#: ../xffm/common/util.hh:1443 ../xffm/common/gtk.hh:69
-msgid   "Execute Shell Command"
+msgid   "Execute command"
 msgstr  "Wëkònôj pòlét pòwłoczi"
 
-#: ../xffm/common/util.hh:1447
-msgid   "Console: quickly run single commands -- write a command here and "
-        "press enter."
+#: ../xffm/response/customresponse.hh:103
+msgid   "Source File"
+msgstr  "Zdrojowi lopk"
+
+#: ../xffm/response/timeoutresponse.hh:57
+msgid   "Dismiss"
 msgstr  ""
 
-#: ../xffm/common/gtk.hh:352 ../xffm/common/gtk.hh:360
-msgid   "Help"
-msgstr  "Pòmòc"
-
-#: ../xffm/common/run.hh:338
+#: ../xffm/completion/bash.hh:133
 #, fuzzy
-msgid   "error"
-msgstr  "Fela"
+msgid   "Completion mode:"
+msgstr  "Katalog kòlekcëji:"
 
-#: ../xffm/common/run.hh:342
+#: ../xffm/completion/bash.hh:134
 #, fuzzy
-msgid   "warning"
-msgstr  "Òstrzéga"
+msgid   "command"
+msgstr  "Pòlét"
 
-#: ../xffm/common/preview.hh:581
+#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
 #, fuzzy
-msgid   "Empty file"
-msgstr  "Lopk wéńdzeniô"
+msgid   "Options >>"
+msgstr  "Òptacëjë"
 
-#: ../xffm/common/preview.hh:636
-#, fuzzy, c-format
-msgid   "Cannot read from %s"
-msgstr  "Ni mòże czëtac z dostónka"
+#: ../xffm/completion/base.hh:28
+msgid   "Command"
+msgstr  "Pòlét"
+
+#: ../xffm/completion/base.hh:31
+msgid   "File"
+msgstr  "Lopk"
+
+#: ../xffm/completion/base.hh:34
+#, fuzzy
+msgid   "Command history"
+msgstr  "Historëjô zrëszanëch programów"
+
+#: ../xffm/completion/base.hh:40
+#, fuzzy
+msgid   "Variable"
+msgstr  "Zmieniwne"
+
+#: ../xffm/completion/base.hh:43
+msgid   "Host"
+msgstr  "Kòmpùter"
+
+#: ../xffm/completion/base.hh:55
+#, fuzzy
+msgid   "Found no match"
+msgstr  "Wëdowiédzô ò nastôwach zwãkù"
+
+#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
+#, fuzzy
+msgid   "Matches"
+msgstr  "łatë"
+
+#: ../xffm/completion/base.hh:142
+#, fuzzy
+msgid   "Too many files open"
+msgstr  "je nalazłi 1 lopk"
 

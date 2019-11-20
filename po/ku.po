@@ -1,12 +1,12 @@
-# Xffm+ translation file: lun ago 12 14:13:58 CDT 2019
-# Merged fron existing open source files
+# Xffm+ translation file: mié nov 20 12:41:24 CST 2019
+# Merged from existing open source files
 # http://xffm.org
 #
 #
 msgid   ""
 msgstr  "Project-Id-Version: xffm+\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2019-08-11 09:10-0500\n"
+        "POT-Creation-Date: 2019-11-20 12:34-0600\n"
         "PO-Revision-Date: 2009-09-15 14:09+0200\n"
         "Last-Translator: Erdal <erdal.ronahi@gmail.com>\n"
         "Language-Team: Kurdish Team http://pckurd.net\n"
@@ -22,402 +22,31 @@ msgstr  "Project-Id-Version: xffm+\n"
 msgid   "No Read Permission"
 msgstr  "Destûrên Peldankan:"
 
-#: ../xffm/completion/base.hh:28
-msgid   "Command"
-msgstr  "Ferman"
-
-#: ../xffm/completion/base.hh:31
-msgid   "File"
-msgstr  "Pel"
-
-#: ../xffm/completion/base.hh:34
-#, fuzzy
-msgid   "Command history"
-msgstr  "Malikên têxistina fermanê"
-
-#: ../xffm/completion/base.hh:37 ../xffm/find/dialog.hh:192
-msgid   "User"
-msgstr  "User"
-
-#: ../xffm/completion/base.hh:40
-msgid   "Variable"
-msgstr  "Guherbar"
-
-#: ../xffm/completion/base.hh:43
-msgid   "Host"
-msgstr  "Mêvandar"
-
-#: ../xffm/completion/base.hh:55
-#, fuzzy
-msgid   "Found no match"
-msgstr  "Hev nagirin"
-
-#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
-msgid   "Matches"
-msgstr  "Hevgirtî"
-
-#: ../xffm/completion/base.hh:142
-#, fuzzy
-msgid   "Too many files open"
-msgstr  "Pelan ji bo şandinê hilbijêre"
-
-#: ../xffm/completion/base.hh:339 ../xffm/find/fgr.hh:124
-#, fuzzy
-msgid   "Options:"
-msgstr  "Vebijêrk:\t"
-
-#: ../xffm/completion/bash.hh:133
-#, fuzzy
-msgid   "Completion mode:"
-msgstr  "Koda qedandinê"
-
-#: ../xffm/completion/bash.hh:134
-#, fuzzy
-msgid   "command"
-msgstr  "Ferman"
-
-#: ../xffm/completion/bash.hh:135
-msgid   "file"
-msgstr  "pel"
-
-#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
-#, fuzzy
-msgid   "Options >>"
-msgstr  "Vebijêrk"
-
-#: ../xffm/find/fgr.hh:124 ../xffm/find/signals.hh:100
-#: ../xffm/find/dialog.hh:301
-msgid   "Path"
-msgstr  "Rêç"
-
-#: ../xffm/find/fgr.hh:125
-msgid   "Locate documents and folders on this computer by name or content"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:126 ../xffm/find/dialog.hh:334
-msgid   "Filter:"
-msgstr  "Fîltre:"
-
-#: ../xffm/find/fgr.hh:126
-#, fuzzy
-msgid   "Search for files"
-msgstr  "Li Dosiyan Bigere"
-
-#: ../xffm/find/fgr.hh:128
-msgid   "Contents:"
-msgstr  "Naverok:"
-
-#: ../xffm/find/fgr.hh:128
-msgid   "File's contents filtered as plain text."
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:131
-#, fuzzy
-msgid   "Verbose output debugging mode."
-msgstr  "Koda neqandina çewtiyan çalak bike"
-
-#: ../xffm/find/fgr.hh:133
-msgid   "Show version information"
-msgstr  "Agahiya guhertoyê nîşan bide"
-
-#: ../xffm/find/fgr.hh:135
-#, fuzzy
-msgid   "Filter Details"
-msgstr  "Vebijêrkên Mevsikê"
-
-#: ../xffm/find/fgr.hh:138 ../xffm/find/dialog.hh:173
-#, fuzzy
-msgid   "Stay on single filesystem"
-msgstr  "Li pergala pelan venihêre"
-
-#: ../xffm/find/fgr.hh:140
-msgid   "Print..."
-msgstr  "Çapkirin..."
-
-#: ../xffm/find/fgr.hh:140
-msgid   "The unique Process ID that identifies this process."
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:142 ../xffm/find/dialog.hh:170
-#, fuzzy
-msgid   "Find hidden files and directories"
-msgstr  "Pelan û peldankan dubare bixebitîne"
-
-#: ../xffm/find/fgr.hh:143
-msgid   "Filter"
-msgstr  "Parzûn"
-
-#: ../xffm/find/fgr.hh:144
-msgid   "To display files which pass the filter (stars and regexps will be "
-        "processed)"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:146 ../xffm/find/dialog.hh:167
-#, fuzzy
-msgid   "Recursive"
-msgstr  "Dubare Cot-beş Kirin"
-
-#: ../xffm/find/fgr.hh:147 ../xffm/find/fgr.hh:148 ../xffm/find/fgr.hh:149
-#: ../xffm/find/fgr.hh:150
-msgid   "KByte"
-msgstr  "Kbayt"
-
-#: ../xffm/find/fgr.hh:148
-#, fuzzy
-msgid   "is greater than or equal to"
-msgstr  "mezintir e ji"
-
-#: ../xffm/find/fgr.hh:150
-msgid   "is less than or equal to"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:152
-#, fuzzy
-msgid   "Set UID"
-msgstr  "IDa bikarhêner mîheng bike"
-
-#: ../xffm/find/fgr.hh:152
-#, fuzzy
-msgid   "Executable Text Files"
-msgstr  "Bila di ser pel de were nivisandin?"
-
-#: ../xffm/find/fgr.hh:154
-#, fuzzy
-msgid   "The permissions of the file, in octal notation."
-msgstr  "Mafê gihiştina pel."
-
-#: ../xffm/find/fgr.hh:155
-msgid   "Type"
-msgstr  "Cure"
-
-#: ../xffm/find/fgr.hh:157 ../xffm/find/signals.hh:14
-msgid   "Any"
-msgstr  "Hema yek"
-
-#: ../xffm/find/fgr.hh:157
-#, fuzzy
-msgid   "Default type"
-msgstr  "Hêmana jxweber heyî"
-
-#: ../xffm/find/fgr.hh:158 ../xffm/common/preview.hh:478
-#, fuzzy
-msgid   "Regular file"
-msgstr  "Asayî"
-
-#: ../xffm/find/fgr.hh:159 ../xffm/find/signals.hh:8
-#: ../xffm/fm/view/local/popup.hh:1062 ../xffm/common/preview.hh:469
-msgid   "Directory"
-msgstr  "Pelrêç"
-
-#: ../xffm/find/fgr.hh:160 ../xffm/find/signals.hh:9
-#: ../xffm/common/preview.hh:475
-msgid   "Symbolic Link"
-msgstr  "Girêdana Sembolîk"
-
-#: ../xffm/find/fgr.hh:161
-#, fuzzy
-msgid   "UNIX Socket"
-msgstr  "Şemaya UNIX'ê"
-
-#: ../xffm/find/fgr.hh:162 ../xffm/find/signals.hh:11
-#: ../xffm/common/preview.hh:463
-#, fuzzy
-msgid   "Block device"
-msgstr  "Vegere cîhazan"
-
-#: ../xffm/find/fgr.hh:163 ../xffm/find/signals.hh:12
-#: ../xffm/common/preview.hh:466
-#, fuzzy
-msgid   "Character device"
-msgstr  "Koma tîpan:"
-
-#: ../xffm/find/fgr.hh:164 ../xffm/find/signals.hh:13
-#: ../xffm/common/preview.hh:472
-msgid   "FIFO"
-msgstr  "FIFO"
-
-#: ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168 ../xffm/find/dialog.hh:214
-msgid   "Minutes"
-msgstr  "Xulek"
-
-#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
-#: ../xffm/find/fgr.hh:176 ../xffm/find/dialog.hh:263
-#: ../xffm/find/dialog.hh:363 ../xffm/fm/view/treeview.hh:18
-msgid   "Details"
-msgstr  "Hûragahî"
-
-#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
-#: ../xffm/find/fgr.hh:176 ../xffm/find/fgr.hh:179 ../xffm/find/fgr.hh:180
-#: ../xffm/find/fgr.hh:183 ../xffm/find/fgr.hh:184 ../xffm/find/fgr.hh:187
-#: ../xffm/find/fgr.hh:188
-msgid   "TIME"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:168 ../xffm/find/fgr.hh:171 ../xffm/find/fgr.hh:174
-#: ../xffm/find/fgr.hh:177
-msgid   "Previous"
-msgstr  "Paş"
-
-#: ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171 ../xffm/find/dialog.hh:219
-msgid   "Hours"
-msgstr  "saet"
-
-#: ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174 ../xffm/find/dialog.hh:224
-msgid   "Days"
-msgstr  "Roj"
-
-#: ../xffm/find/fgr.hh:175
-msgid   "Month"
-msgstr  "Meh"
-
-#: ../xffm/find/fgr.hh:177
-#, fuzzy
-msgid   "Month(s)"
-msgstr  "Meh"
-
-#: ../xffm/find/fgr.hh:180
-#, fuzzy
-msgid   "Modification Time :"
-msgstr  "bi dîroka guherandinê"
-
-#: ../xffm/find/fgr.hh:184
-#, fuzzy
-msgid   "Access Time :"
-msgstr  "Hatiye gihiştin:"
-
-#: ../xffm/find/fgr.hh:188
-#, fuzzy
-msgid   "Creation Time :"
-msgstr  "Îmaj tê afirandin"
-
-#: ../xffm/find/fgr.hh:191 ../xffm/find/fgr.hh:192
-#, fuzzy
-msgid   "uid"
-msgstr  "id"
-
-#: ../xffm/find/fgr.hh:192
-msgid   "User:"
-msgstr  "Bikarhêner:"
-
-#: ../xffm/find/fgr.hh:194 ../xffm/find/fgr.hh:195
-#, fuzzy
-msgid   "gid"
-msgstr  "id"
-
-#: ../xffm/find/fgr.hh:195
-msgid   "Group:"
-msgstr  "Kom:"
-
-#: ../xffm/find/fgr.hh:198
-msgid   "Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
-        "character that  normally  follows  a file  name"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:200
-msgid   "Content View"
-msgstr  "Dîtina Naverokê"
-
-#: ../xffm/find/fgr.hh:201 ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:203
-#: ../xffm/find/fgr.hh:204
-msgid   "STRING"
-msgstr  "HEVOK"
-
-#: ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:204
-#: ../xffm/fm/view/local/popup.hh:759
-msgid   "Regular expression"
-msgstr  "Derbirîna bi pergal"
-
-#: ../xffm/find/fgr.hh:204
-msgid   "Extended"
-msgstr  "Firehbûyî"
-
-#: ../xffm/find/fgr.hh:206
-#, fuzzy
-msgid   "Ignore case"
-msgstr  "Ignorieren"
-
-#: ../xffm/find/fgr.hh:208
-msgid   "Text Files"
-msgstr  "Pelên nivîsar"
-
-#: ../xffm/find/fgr.hh:210 ../xffm/find/dialog.hh:545
-msgid   "No match"
-msgstr  "Lihevhatin tune"
-
-#: ../xffm/find/fgr.hh:212 ../xffm/find/dialog.hh:463
-#, fuzzy
-msgid   "Line Count"
-msgstr  "Hejmara Pelan"
-
-#: ../xffm/find/fgr.hh:214
-msgid   "Words"
-msgstr  "Peyv"
-
-#: ../xffm/find/fgr.hh:216
-msgid   "Lines"
-msgstr  "Rêzik"
-
-#: ../xffm/find/fgr.hh:362
-#, fuzzy, c-format
-msgid   "Usage : %s [OPTIONS]\n"
-msgstr  "Bikaranîn: %s %s\n"
-
-#: ../xffm/find/signals.hh:7
-msgid   "Regular"
-msgstr  "Asayî"
-
-#: ../xffm/find/signals.hh:10 ../xffm/common/preview.hh:481
-#, fuzzy
-msgid   "Socket"
-msgstr  "Têketina soket"
-
-#: ../xffm/find/signals.hh:66 ../xffm/find/signals.hh:454
-#: ../xffm/find/dialog.hh:176
-#, fuzzy
-msgid   "Results"
-msgstr  "Encamê pêş"
-
-#: ../xffm/find/signals.hh:368 ../xffm/find/dialog.hh:577
-#: ../xffm/response/chooserresponse.hh:21 ../xffm/response/entryresponse.hh:435
-#: ../xffm/fm/view/local/properties.hh:314 ../xffm/fm/view/local/rm.hh:157
-#: ../xffm/common/gtk.hh:409
-msgid   "Cancel"
-msgstr  "Betalkirin"
-
-#: ../xffm/find/signals.hh:396 ../xffm/find/signals.hh:830
-#, fuzzy
-msgid   "No editor for current action."
-msgstr  "Mifteyî cihê heyî bibe"
-
-#: ../xffm/find/signals.hh:454
-msgid   "Upper limit:"
-msgstr  "Sînora Jor:"
-
-#: ../xffm/find/signals.hh:456
-#, fuzzy
-msgid   "Counting files..."
-msgstr  "Pel tê girtin..."
-
-#: ../xffm/find/signals.hh:471
-#, fuzzy, c-format
-msgid   "Found %d match"
-msgid_plural    "Found %d matches"
-msgstr[0]       "%s Dît"
-msgstr[1]       "%s Dît"
-
-#: ../xffm/find/signals.hh:473
-#, fuzzy, c-format
-msgid   "%s Finished : %s"
-msgstr  "Xebatên Qedandî "
-
-#: ../xffm/find/signals.hh:596 ../xffm/find/signals.hh:598
-msgid   "Searching..."
-msgstr  "Lê tê gerandin..."
-
 #: ../xffm/find/dialog.hh:91 ../xffm/find/dialog.hh:143
 #: ../xffm/find/dialog.hh:604
 msgid   "Find"
 msgstr  "Bibîne"
+
+#: ../xffm/find/dialog.hh:167 ../xffm/find/fgr.hh:146
+#, fuzzy
+msgid   "Recursive"
+msgstr  "Dubare Cot-beş Kirin"
+
+#: ../xffm/find/dialog.hh:170 ../xffm/find/fgr.hh:142
+#, fuzzy
+msgid   "Find hidden files and directories"
+msgstr  "Pelan û peldankan dubare bixebitîne"
+
+#: ../xffm/find/dialog.hh:173 ../xffm/find/fgr.hh:138
+#, fuzzy
+msgid   "Stay on single filesystem"
+msgstr  "Li pergala pelan venihêre"
+
+#: ../xffm/find/dialog.hh:176 ../xffm/find/signals.hh:65
+#: ../xffm/find/signals.hh:427
+#, fuzzy
+msgid   "Results"
+msgstr  "Encamê pêş"
 
 #: ../xffm/find/dialog.hh:176
 #, fuzzy
@@ -436,6 +65,10 @@ msgstr  "kBayt"
 msgid   "At Most"
 msgstr  "Bi Piranî"
 
+#: ../xffm/find/dialog.hh:192 ../xffm/completion/base.hh:37
+msgid   "User"
+msgstr  "User"
+
 #: ../xffm/find/dialog.hh:197
 msgid   "Group"
 msgstr  "Kom"
@@ -449,10 +82,22 @@ msgstr  "Destûr"
 msgid   "SUID"
 msgstr  ""
 
-#: ../xffm/find/dialog.hh:206 ../xffm/fm/view/local/popup.hh:1102
+#: ../xffm/find/dialog.hh:206 ../xffm/fm/view/local/popup.hh:1026
 #, fuzzy
 msgid   "Executable"
 msgstr  "Xebatî:"
+
+#: ../xffm/find/dialog.hh:214 ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168
+msgid   "Minutes"
+msgstr  "Xulek"
+
+#: ../xffm/find/dialog.hh:219 ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171
+msgid   "Hours"
+msgstr  "saet"
+
+#: ../xffm/find/dialog.hh:224 ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174
+msgid   "Days"
+msgstr  "Roj"
 
 #: ../xffm/find/dialog.hh:230
 msgid   "Months"
@@ -463,10 +108,25 @@ msgstr  "Meh"
 msgid   "File type : "
 msgstr  "Cureyê pelê"
 
-#: ../xffm/find/dialog.hh:255 ../xffm/find/dialog.hh:595
-#: ../xffm/fm/dialog/notebook/page/page.hh:71 ../xffm/common/gtk.hh:79
+#: ../xffm/find/dialog.hh:255 ../xffm/find/dialog.hh:595 ../xffm/gtk/gtk.hh:80
+#: ../xffm/fm/dialog/notebook/page/page.hh:71
 msgid   "Close"
 msgstr  "Girtin"
+
+#: ../xffm/find/dialog.hh:263 ../xffm/find/dialog.hh:363
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/fm/view/treeview.hh:18
+msgid   "Details"
+msgstr  "Hûragahî"
+
+#: ../xffm/find/dialog.hh:301 ../xffm/find/fgr.hh:124
+#: ../xffm/find/signals.hh:94
+msgid   "Path"
+msgstr  "Rêç"
+
+#: ../xffm/find/dialog.hh:334 ../xffm/find/fgr.hh:126
+msgid   "Filter:"
+msgstr  "Fîltre:"
 
 #: ../xffm/find/dialog.hh:377
 #, fuzzy
@@ -492,6 +152,11 @@ msgstr  "Firehbûyî"
 msgid   "Include binary files"
 msgstr  "Pelên ku wê lê werine zêdekirin:"
 
+#: ../xffm/find/dialog.hh:463 ../xffm/find/fgr.hh:212
+#, fuzzy
+msgid   "Line Count"
+msgstr  "Hejmara Pelan"
+
 #: ../xffm/find/dialog.hh:489
 #, fuzzy
 msgid   "Match"
@@ -509,6 +174,19 @@ msgstr  "Tenê hemû peyv"
 msgid   "lines"
 msgstr  "rêzik"
 
+#: ../xffm/find/dialog.hh:545 ../xffm/find/fgr.hh:210
+msgid   "No match"
+msgstr  "Lihevhatin tune"
+
+#: ../xffm/find/dialog.hh:577 ../xffm/find/signals.hh:341
+#: ../xffm/gtk/dialogs.hh:110 ../xffm/fm/view/local/rm.hh:157
+#: ../xffm/fm/view/local/properties.hh:310 ../xffm/fm/view/fuse/ecryptfs.hh:175
+#: ../xffm/fm/dialog/notebook/createini.hh:232
+#: ../xffm/fm/dialog/notebook/createini.hh:369
+#: ../xffm/response/entryresponse.hh:453 ../xffm/response/chooserresponse.hh:18
+msgid   "Cancel"
+msgstr  "Betalkirin"
+
 #: ../xffm/find/dialog.hh:587
 msgid   "Clear"
 msgstr  "Paqijke"
@@ -518,9 +196,9 @@ msgid   "Edit"
 msgstr  "Biguherîne"
 
 #: ../xffm/find/dialog.hh:743 ../xffm/find/dialog.hh:758
-#: ../xffm/common/util.hh:1354 ../xffm/common/util.hh:1356
-#: ../xffm/common/util.hh:1362 ../xffm/common/util.hh:1364
-#: ../xffm/common/preview.hh:460
+#: ../xffm/common/preview.hh:460 ../xffm/common/util.hh:1354
+#: ../xffm/common/util.hh:1356 ../xffm/common/util.hh:1362
+#: ../xffm/common/util.hh:1364
 msgid   "unknown"
 msgstr  "nenas"
 
@@ -585,205 +263,949 @@ msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
         "More information is available by typing \"man grep\"\n"
 msgstr  ""
 
-#: ../xffm/response/chooserresponse.hh:23
-msgid   "Open"
-msgstr  "Veke"
-
-#: ../xffm/response/chooserresponse.hh:56
+#: ../xffm/find/fgr.hh:124 ../xffm/fm/view/fuse/ecryptfs.hh:133
+#: ../xffm/completion/base.hh:339
 #, fuzzy
-msgid   "Choose directory"
-msgstr  "Pelrêça malê"
+msgid   "Options:"
+msgstr  "Vebijêrk:\t"
 
-#: ../xffm/response/chooserresponse.hh:60
+#: ../xffm/find/fgr.hh:125
+msgid   "Locate documents and folders on this computer by name or content"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:126
 #, fuzzy
-msgid   "Choose file"
-msgstr  "Pelekî hilbijêre"
+msgid   "Search for files"
+msgstr  "Li Dosiyan Bigere"
 
-#: ../xffm/response/customresponse.hh:55
+#: ../xffm/find/fgr.hh:128
+msgid   "Contents:"
+msgstr  "Naverok:"
+
+#: ../xffm/find/fgr.hh:128
+msgid   "File's contents filtered as plain text."
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:131
 #, fuzzy
-msgid   "Execute command"
-msgstr  "Fermanên Shelê yên xebatî"
+msgid   "Verbose output debugging mode."
+msgstr  "Koda neqandina çewtiyan çalak bike"
 
-#: ../xffm/response/customresponse.hh:103
-msgid   "Source File"
-msgstr  "Pelê Çavkanî"
+#: ../xffm/find/fgr.hh:133
+msgid   "Show version information"
+msgstr  "Agahiya guhertoyê nîşan bide"
 
-#: ../xffm/response/entryresponse.hh:439 ../xffm/response/passwdresponse.hh:242
-msgid   "Ok"
-msgstr  "Temam"
+#: ../xffm/find/fgr.hh:135
+#, fuzzy
+msgid   "Filter Details"
+msgstr  "Vebijêrkên Mevsikê"
 
-#: ../xffm/response/commandprogressresponse.hh:31
-msgid   "Items:"
-msgstr  "Hêman:"
+#: ../xffm/find/fgr.hh:140
+msgid   "Print..."
+msgstr  "Çapkirin..."
 
-#: ../xffm/response/passwdresponse.hh:19 ../xffm/response/passwdresponse.hh:25
-#: ../xffm/common/run.hh:464
+#: ../xffm/find/fgr.hh:140
+msgid   "The unique Process ID that identifies this process."
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:143
+msgid   "Filter"
+msgstr  "Parzûn"
+
+#: ../xffm/find/fgr.hh:144
+msgid   "To display files which pass the filter (stars and regexps will be "
+        "processed)"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:147 ../xffm/find/fgr.hh:148 ../xffm/find/fgr.hh:149
+#: ../xffm/find/fgr.hh:150
+msgid   "KByte"
+msgstr  "Kbayt"
+
+#: ../xffm/find/fgr.hh:148
+#, fuzzy
+msgid   "is greater than or equal to"
+msgstr  "mezintir e ji"
+
+#: ../xffm/find/fgr.hh:150
+msgid   "is less than or equal to"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:152
+#, fuzzy
+msgid   "Set UID"
+msgstr  "IDa bikarhêner mîheng bike"
+
+#: ../xffm/find/fgr.hh:152
+#, fuzzy
+msgid   "Executable Text Files"
+msgstr  "Bila di ser pel de were nivisandin?"
+
+#: ../xffm/find/fgr.hh:154
+#, fuzzy
+msgid   "The permissions of the file, in octal notation."
+msgstr  "Mafê gihiştina pel."
+
+#: ../xffm/find/fgr.hh:155
+msgid   "Type"
+msgstr  "Cure"
+
+#: ../xffm/find/fgr.hh:157 ../xffm/find/signals.hh:14
+msgid   "Any"
+msgstr  "Hema yek"
+
+#: ../xffm/find/fgr.hh:157
+#, fuzzy
+msgid   "Default type"
+msgstr  "Hêmana jxweber heyî"
+
+#: ../xffm/find/fgr.hh:158 ../xffm/common/preview.hh:478
+#, fuzzy
+msgid   "Regular file"
+msgstr  "Asayî"
+
+#: ../xffm/find/fgr.hh:159 ../xffm/find/signals.hh:8
+#: ../xffm/common/preview.hh:469 ../xffm/fm/view/local/popup.hh:987
+msgid   "Directory"
+msgstr  "Pelrêç"
+
+#: ../xffm/find/fgr.hh:160 ../xffm/find/signals.hh:9
+#: ../xffm/common/preview.hh:475
+msgid   "Symbolic Link"
+msgstr  "Girêdana Sembolîk"
+
+#: ../xffm/find/fgr.hh:161
+#, fuzzy
+msgid   "UNIX Socket"
+msgstr  "Şemaya UNIX'ê"
+
+#: ../xffm/find/fgr.hh:162 ../xffm/find/signals.hh:11
+#: ../xffm/common/preview.hh:463
+#, fuzzy
+msgid   "Block device"
+msgstr  "Vegere cîhazan"
+
+#: ../xffm/find/fgr.hh:163 ../xffm/find/signals.hh:12
+#: ../xffm/common/preview.hh:466
+#, fuzzy
+msgid   "Character device"
+msgstr  "Koma tîpan:"
+
+#: ../xffm/find/fgr.hh:164 ../xffm/find/signals.hh:13
+#: ../xffm/common/preview.hh:472
+msgid   "FIFO"
+msgstr  "FIFO"
+
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/find/fgr.hh:179 ../xffm/find/fgr.hh:180
+#: ../xffm/find/fgr.hh:183 ../xffm/find/fgr.hh:184 ../xffm/find/fgr.hh:187
+#: ../xffm/find/fgr.hh:188
+msgid   "TIME"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:168 ../xffm/find/fgr.hh:171 ../xffm/find/fgr.hh:174
+#: ../xffm/find/fgr.hh:177
+msgid   "Previous"
+msgstr  "Paş"
+
+#: ../xffm/find/fgr.hh:175
+msgid   "Month"
+msgstr  "Meh"
+
+#: ../xffm/find/fgr.hh:177
+#, fuzzy
+msgid   "Month(s)"
+msgstr  "Meh"
+
+#: ../xffm/find/fgr.hh:180
+#, fuzzy
+msgid   "Modification Time :"
+msgstr  "bi dîroka guherandinê"
+
+#: ../xffm/find/fgr.hh:184
+#, fuzzy
+msgid   "Access Time :"
+msgstr  "Hatiye gihiştin:"
+
+#: ../xffm/find/fgr.hh:188
+#, fuzzy
+msgid   "Creation Time :"
+msgstr  "Îmaj tê afirandin"
+
+#: ../xffm/find/fgr.hh:191 ../xffm/find/fgr.hh:192
+#, fuzzy
+msgid   "uid"
+msgstr  "id"
+
+#: ../xffm/find/fgr.hh:192
+msgid   "User:"
+msgstr  "Bikarhêner:"
+
+#: ../xffm/find/fgr.hh:194 ../xffm/find/fgr.hh:195
+#, fuzzy
+msgid   "gid"
+msgstr  "id"
+
+#: ../xffm/find/fgr.hh:195
+msgid   "Group:"
+msgstr  "Kom:"
+
+#: ../xffm/find/fgr.hh:198
+msgid   "Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+        "character that  normally  follows  a file  name"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:200
+msgid   "Content View"
+msgstr  "Dîtina Naverokê"
+
+#: ../xffm/find/fgr.hh:201 ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:203
+#: ../xffm/find/fgr.hh:204
+msgid   "STRING"
+msgstr  "HEVOK"
+
+#: ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:204
+#: ../xffm/fm/view/local/popup.hh:750
+msgid   "Regular expression"
+msgstr  "Derbirîna bi pergal"
+
+#: ../xffm/find/fgr.hh:204
+msgid   "Extended"
+msgstr  "Firehbûyî"
+
+#: ../xffm/find/fgr.hh:206
+#, fuzzy
+msgid   "Ignore case"
+msgstr  "Ignorieren"
+
+#: ../xffm/find/fgr.hh:208
+msgid   "Text Files"
+msgstr  "Pelên nivîsar"
+
+#: ../xffm/find/fgr.hh:214
+msgid   "Words"
+msgstr  "Peyv"
+
+#: ../xffm/find/fgr.hh:216
+msgid   "Lines"
+msgstr  "Rêzik"
+
+#: ../xffm/find/fgr.hh:362
+#, fuzzy, c-format
+msgid   "Usage : %s [OPTIONS]\n"
+msgstr  "Bikaranîn: %s %s\n"
+
+#: ../xffm/find/signals.hh:7
+msgid   "Regular"
+msgstr  "Asayî"
+
+#: ../xffm/find/signals.hh:10 ../xffm/common/preview.hh:481
+#, fuzzy
+msgid   "Socket"
+msgstr  "Têketina soket"
+
+#: ../xffm/find/signals.hh:369 ../xffm/find/signals.hh:803
+#, fuzzy
+msgid   "No editor for current action."
+msgstr  "Mifteyî cihê heyî bibe"
+
+#: ../xffm/find/signals.hh:427
+msgid   "Upper limit:"
+msgstr  "Sînora Jor:"
+
+#: ../xffm/find/signals.hh:429
+#, fuzzy
+msgid   "Counting files..."
+msgstr  "Pel tê girtin..."
+
+#: ../xffm/find/signals.hh:444
+#, fuzzy, c-format
+msgid   "Found %d match"
+msgid_plural    "Found %d matches"
+msgstr[0]       "%s Dît"
+msgstr[1]       "%s Dît"
+
+#: ../xffm/find/signals.hh:446
+#, fuzzy, c-format
+msgid   "%s Finished : %s"
+msgstr  "Xebatên Qedandî "
+
+#: ../xffm/find/signals.hh:569 ../xffm/find/signals.hh:571
+msgid   "Searching..."
+msgstr  "Lê tê gerandin..."
+
+#: ../xffm/common/preview.hh:581
+#, fuzzy
+msgid   "Empty file"
+msgstr  "Pelê Vala"
+
+#: ../xffm/common/preview.hh:636
+#, c-format
+msgid   "Cannot read from %s"
+msgstr  "Ji %s nayê xwedin"
+
+#: ../xffm/common/settings.hh:30
+#, fuzzy
+msgid   "New File:"
+msgstr  "Pelê Nû"
+
+#: ../xffm/common/gio.hh:91
+msgid   "Copying files"
+msgstr  "Pel tên jibergirtin"
+
+#: ../xffm/common/gio.hh:93 ../xffm/common/dnd.hh:35
+#: ../xffm/fm/dialog/clipboard.hh:30
+#, fuzzy
+msgid   "Moving files"
+msgstr  "Pel tê kişandin:"
+
+#: ../xffm/common/gio.hh:95
+#, fuzzy
+msgid   "linking"
+msgstr  "Tê girêdan"
+
+#: ../xffm/common/gio.hh:97
+#, fuzzy
+msgid   "rename"
+msgstr  "Nav Biguhere"
+
+#: ../xffm/common/gio.hh:449
+#, c-format
+msgid   "(%d of %d)"
+msgstr  "(%d ji %d)"
+
+#: ../xffm/common/util.hh:1404
+#, c-format
+msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
+        "attribute on that file."
+msgstr  ""
+
+#: ../xffm/common/util.hh:1406 ../xffm/common/util.hh:1441
+#, c-format
+msgid   "Open with %s"
+msgstr  "Bi %s veke"
+
+#: ../xffm/common/util.hh:1406
+msgid   "Text Editor"
+msgstr  "Sererastkerê Nivîsan"
+
+#: ../xffm/common/util.hh:1443 ../xffm/gtk/gtk.hh:70
+msgid   "Execute Shell Command"
+msgstr  "Fermana Qalikan Bixebitîne"
+
+#: ../xffm/common/util.hh:1447
+msgid   "Console: quickly run single commands -- write a command here and "
+        "press enter."
+msgstr  ""
+
+#: ../xffm/common/util.hh:1452 ../xffm/fm/view/local/popup.hh:1033
+#: ../xffm/fm/view/local/popup.hh:1336 ../xffm/fm/view/local/popup.hh:1353
+msgid   "Run in Terminal"
+msgstr  "Di Termînalê de Bixebitîne"
+
+#: ../xffm/common/dnd.hh:41 ../xffm/fm/dialog/clipboard.hh:23
+msgid   "Copying files locally"
+msgstr  "Jibergirtina pelan a heremî"
+
+#: ../xffm/common/dnd.hh:47
+#, fuzzy
+msgid   "Create Link"
+msgstr  "Casey Link"
+
+#: ../xffm/common/dnd.hh:63
+msgid   "more"
+msgstr  ""
+
+#: ../xffm/common/run.hh:338 ../xffm/fm/view/local/popup.hh:1149
+msgid   "error"
+msgstr  "çewtî"
+
+#: ../xffm/common/run.hh:342
+#, fuzzy
+msgid   "warning"
+msgstr  "1 hişyarî"
+
+#: ../xffm/common/run.hh:464 ../xffm/response/passwdresponse.hh:28
+#: ../xffm/response/passwdresponse.hh:34
 msgid   "Enter password"
 msgstr  "Şîfreyê binivîse"
 
-#: ../xffm/response/passwdresponse.hh:179
-#, fuzzy
-msgid   "User Input"
-msgstr  "Têketina mişkê"
-
-#: ../xffm/response/passwdresponse.hh:195
-#, fuzzy
-msgid   "Response Requested"
-msgstr  "Daxwaza Tomarbûnê"
-
-#: ../xffm/response/timeoutresponse.hh:57
-msgid   "Dismiss"
-msgstr  ""
-
-#: ../xffm/response/commandresponse.hh:19
-msgid   "Running"
-msgstr  "Dixebite"
-
-#: ../xffm/response/commandresponse.hh:24
-#, fuzzy
-msgid   "Waiting for operation to finish..."
-msgstr  "Li hêviya destpêkirinê ye an jî qediyaye."
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:11
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:214
-#, fuzzy
-msgid   "Remove Button Contents"
-msgstr  "Bişkojka %s Rake"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:67
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:209
-#, fuzzy
-msgid   "Add custom content"
-msgstr  "Wekî rengekî taybet:"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:68
-#, fuzzy
-msgid   "Select file to load"
-msgstr  "Ji bo şopandinê pelekî hilbijêre."
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:125
-#, fuzzy, c-format
-msgid   "Cannot load file %s. Reason: %s"
-msgstr  "%s jê nayê birin: %s"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:154
-#, fuzzy
-msgid   "You need to restart the application"
-msgstr  "Destpêker ji bo destpêkirina sepanan"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:187
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:191
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:195
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:198 ../xffm/fm/view/pkg/model.hh:29
-#: ../xffm/fm/view/pkg/popup.hh:35
-#, fuzzy
-msgid   "Software Updater"
-msgstr  "Nivîsbarî"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:236
-#: ../xffm/fm/view/pkg/model.hh:108 ../xffm/fm/view/pkg/model.hh:299
-#: ../xffm/fm/view/pkg/model.hh:306 ../xffm/fm/view/pkg/popup.hh:151
-#: ../xffm/common/gtk.hh:77
-msgid   "Search"
-msgstr  "Lê bigere"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:240 ../xffm/common/gtk.hh:67
+#: ../xffm/gtk/gtk.hh:68 ../xffm/fm/dialog/notebook/vbuttonbox.hh:252
 #, fuzzy
 msgid   "Open terminal"
 msgstr  "Termînalê veke"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:244
-#, fuzzy
-msgid   "Open a New Window"
-msgstr  "Di Paceya Nû de veke"
+#: ../xffm/gtk/gtk.hh:72 ../xffm/fm/view/local/popup.hh:157
+msgid   "Paste"
+msgstr  "Pêvekirin"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:250
-#, fuzzy
-msgid   "Differences"
-msgstr  "Vebijêrk"
+#: ../xffm/gtk/gtk.hh:74 ../xffm/fm/view/local/popup.hh:151
+#: ../xffm/fm/view/root/popup.hh:224
+msgid   "Add bookmark"
+msgstr  "Bijareyê zêde bike"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:256
-#: ../xffm/fm/view/root/model.hh:110
+#: ../xffm/gtk/gtk.hh:76 ../xffm/fm/view/local/popup.hh:152
+#: ../xffm/fm/view/root/popup.hh:170
+#, fuzzy
+msgid   "Remove bookmark"
+msgstr  "Bijareyê Rake"
+
+#: ../xffm/gtk/gtk.hh:78 ../xffm/fm/view/pkg/model.hh:108
+#: ../xffm/fm/view/pkg/model.hh:300 ../xffm/fm/view/pkg/model.hh:307
+#: ../xffm/fm/view/pkg/popup.hh:151
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:248
+msgid   "Search"
+msgstr  "Lê bigere"
+
+#: ../xffm/gtk/gtk.hh:82 ../xffm/fm/dialog/notebook/createini.hh:83
+#: ../xffm/fm/dialog/notebook/menupopover.hh:237
+msgid   "Exit"
+msgstr  "Derkeve"
+
+#: ../xffm/gtk/gtk.hh:84 ../xffm/fm/view/local/popup.hh:85
+#: ../xffm/fm/view/local/popup.hh:142 ../xffm/fm/view/local/popup.hh:1332
+#: ../xffm/fm/view/local/popup.hh:1339 ../xffm/fm/view/local/popup.hh:1349
+#: ../xffm/fm/view/local/popup.hh:1356
+msgid   "Open with"
+msgstr  "Veke bi"
+
+#: ../xffm/gtk/gtk.hh:86 ../xffm/fm/view/local/popup.hh:100
+#: ../xffm/fm/view/local/popup.hh:156
+msgid   "Cut"
+msgstr  "Jê bike"
+
+#: ../xffm/gtk/gtk.hh:88 ../xffm/fm/view/local/popup.hh:99
+#: ../xffm/fm/view/local/popup.hh:155
+msgid   "Copy"
+msgstr  "Jibergirtin"
+
+#: ../xffm/gtk/gtk.hh:90 ../xffm/fm/view/local/rm.hh:176
+#: ../xffm/fm/view/local/popup.hh:103 ../xffm/fm/view/local/popup.hh:160
+msgid   "Delete"
+msgstr  "Jê bibe"
+
+#: ../xffm/gtk/gtk.hh:92 ../xffm/fm/view/local/rm.hh:165
+#, fuzzy
+msgid   "Shred"
+msgstr  "Dosiyê parçe bike"
+
+#: ../xffm/gtk/gtk.hh:95 ../xffm/fm/view/local/popup.hh:95
+#: ../xffm/fm/view/local/popup.hh:145 ../xffm/fm/view/root/popup.hh:169
+#: ../xffm/fm/view/fstab/popup.hh:20
+msgid   "Open in New Tab"
+msgstr  "Hilpekîna Nû de Veke"
+
+#: ../xffm/gtk/gtk.hh:140 ../xffm/fm/dialog/notebook/notebook.hh:75
+msgid   "New Tab"
+msgstr  "Hifirîna Nû"
+
+#: ../xffm/gtk/dialogs.hh:42
+msgid   "Help"
+msgstr  "Alîkarî"
+
+#: ../xffm/fm/view/pkg/model.hh:29 ../xffm/fm/view/pkg/popup.hh:35
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:194
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:198
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:202
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:205
+#, fuzzy
+msgid   "Software Updater"
+msgstr  "Nivîsbarî"
+
+#: ../xffm/fm/view/pkg/model.hh:41 ../xffm/fm/view/pkg/model.hh:52
+msgid   "Add or remove software installed on the system"
+msgstr  ""
+
+#: ../xffm/fm/view/pkg/model.hh:111
+msgid   "String"
+msgstr  "Rêzik"
+
+#: ../xffm/fm/view/pkg/model.hh:117
+#, fuzzy
+msgid   "Waiting for search results"
+msgstr  "li berna bersîvê ye"
+
+#: ../xffm/fm/view/pkg/model.hh:175
+msgid   "No results"
+msgstr  "Encam tune"
+
+#: ../xffm/fm/view/pkg/model.hh:374
+#, fuzzy
+msgid   "Currently busy\n"
+msgstr  "Niha: %s"
+
+#: ../xffm/fm/view/pkg/popup.hh:44
+msgid   "Update Database"
+msgstr  "Bingeha Danê Rojane Bike"
+
+#: ../xffm/fm/view/pkg/popup.hh:45
+#, fuzzy
+msgid   "Fetch"
+msgstr  "Pêşnûma"
+
+#: ../xffm/fm/view/pkg/popup.hh:46
+#, fuzzy
+msgid   "Install --dry-run"
+msgstr  "Sazkirî"
+
+#: ../xffm/fm/view/pkg/popup.hh:47
+msgid   "Install"
+msgstr  "Sazkirin"
+
+#: ../xffm/fm/view/pkg/popup.hh:48
+#, fuzzy
+msgid   "Uninstall --dry-run"
+msgstr  "Tê rakirin"
+
+#: ../xffm/fm/view/pkg/popup.hh:49
+msgid   "Uninstall"
+msgstr  "Rake"
+
+#: ../xffm/fm/view/pkg/popup.hh:50
+msgid   "Information"
+msgstr  "Agahî"
+
+#: ../xffm/fm/view/pkg/popup.hh:140
+msgid   "Version"
+msgstr  "Guherto"
+
+#: ../xffm/fm/view/pkg/popup.hh:149
+#, fuzzy
+msgid   "Go up"
+msgstr  "here jor"
+
+#: ../xffm/fm/view/pkg/popup.hh:152
+#, fuzzy
+msgid   "Search packages"
+msgstr  "Ber bi paş ve lê bigere."
+
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:95
+#, fuzzy, c-format
+msgid   "Loading %s...%s"
+msgstr  "Tê barkirin..."
+
+#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:95
+#, fuzzy
+msgid   "Please Wait..."
+msgstr  "Ji kerema xwe li bendê bimîne…"
+
+#: ../xffm/fm/view/local/model.hh:124
+#, fuzzy, c-format
+msgid   "Reading \"%s\""
+msgstr  "Tevlîhev \"%s\""
+
+#: ../xffm/fm/view/local/model.hh:577 ../xffm/fm/view/base/monitor.hh:34
+#, fuzzy, c-format
+msgid   "Files: %s"
+msgstr  "Pel: %s"
+
+#: ../xffm/fm/view/local/model.hh:580
+#, fuzzy, c-format
+msgid   "Loaded %d of %d articles"
+msgstr  "Pelên barkirî:"
+
+#: ../xffm/fm/view/local/rm.hh:59
+#, fuzzy, c-format
+msgid   "Delete %s"
+msgstr  "Jê bibe"
+
+#: ../xffm/fm/view/local/rm.hh:61
+msgid   "Warning: "
+msgstr  "Hişyarî: "
+
+#: ../xffm/fm/view/local/rm.hh:61 ../xffm/fm/view/local/popup.hh:557
+#, fuzzy
+msgid   "Multiple selections"
+msgstr  "Ya hilbijartî jê bike"
+
+#: ../xffm/fm/view/local/rm.hh:92
+msgid   "Remove"
+msgstr  "Rake"
+
+#: ../xffm/fm/view/local/rm.hh:142
+#, fuzzy
+msgid   "Apply to all"
+msgstr  "Curetîp Bisepîne"
+
+#: ../xffm/fm/view/local/rm.hh:183
+msgid   "Trash"
+msgstr  "Avêtî"
+
+#: ../xffm/fm/view/local/popup.hh:94
+msgid   "New"
+msgstr  "Nû"
+
+#: ../xffm/fm/view/local/popup.hh:101 ../xffm/fm/view/local/popup.hh:159
+#: ../xffm/fm/view/local/popup.hh:232 ../xffm/fm/view/local/popup.hh:234
+#, fuzzy
+msgid   "Paste into"
+msgstr  "Pastebin"
+
+#: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:158
+#, fuzzy
+msgid   "There is nothing on the clipboard to paste."
+msgstr  "Sembola fermana ku wê were xebitandin."
+
+#: ../xffm/fm/view/local/popup.hh:106
+msgid   "Select All"
+msgstr  "Hemûyan Hilbijêre"
+
+#: ../xffm/fm/view/local/popup.hh:107 ../xffm/fm/view/local/popup.hh:746
+#, fuzzy
+msgid   "Match regular expression"
+msgstr  "Derbirîna bi pergal"
+
+#: ../xffm/fm/view/local/popup.hh:143 ../xffm/fm/view/local/popup.hh:1029
+#, fuzzy
+msgid   "Run Executable..."
+msgstr  "Xebatî:"
+
+#: ../xffm/fm/view/local/popup.hh:144 ../xffm/fm/view/local/popup.hh:877
+msgid   "Extract files from the archive"
+msgstr  "Ji arşîvê pelan veke"
+
+#: ../xffm/fm/view/local/popup.hh:146 ../xffm/fm/view/local/popup.hh:928
+#, fuzzy
+msgid   "Create a compressed archive with the selected objects"
+msgstr  "Bi bireserên hatine hilbijartin re arşîvekê pêk bîne"
+
+#: ../xffm/fm/view/local/popup.hh:148 ../xffm/fm/view/root/popup.hh:172
+#: ../xffm/fm/view/fstab/popup.hh:37
+#, fuzzy
+msgid   "Mount the volume associated with this folder"
+msgstr  "Pergala ku têkildarî peldanka ku niha vekirî ye girê bide"
+
+#: ../xffm/fm/view/local/popup.hh:149 ../xffm/fm/view/root/popup.hh:173
+#: ../xffm/fm/view/fstab/popup.hh:38
+#, fuzzy
+msgid   "Unmount the volume associated with this folder"
+msgstr  "Girêdana pergala ku têkildarî peldanka niha vekirî ye rake"
+
+#: ../xffm/fm/view/local/popup.hh:161 ../xffm/fm/view/local/popup.hh:1242
+msgid   "Rename"
+msgstr  "Nav Biguhere"
+
+#: ../xffm/fm/view/local/popup.hh:162 ../xffm/fm/view/local/popup.hh:1225
+#, fuzzy
+msgid   "Duplicate"
+msgstr  "Hilfirînê bike cot"
+
+#: ../xffm/fm/view/local/popup.hh:163 ../xffm/fm/view/local/popup.hh:1208
+msgid   "Link"
+msgstr  "Girêdan"
+
+#: ../xffm/fm/view/local/popup.hh:164
+msgid   "Properties"
+msgstr  "Taybetmendî"
+
+#: ../xffm/fm/view/local/popup.hh:554
+msgid   "Files:"
+msgstr  "Pel:"
+
+#: ../xffm/fm/view/local/popup.hh:744
+#, fuzzy
+msgid   "Select items"
+msgstr  "Hêmanê Hilbijêre"
+
+#: ../xffm/fm/view/local/popup.hh:761
+#, fuzzy
+msgid   "Regular Expression syntax is incorrect"
+msgstr  "Derbirîna bi pergal"
+
+#: ../xffm/fm/view/local/popup.hh:791
+#, fuzzy
+msgid   "No selection"
+msgstr  "Hilbijartina Qadê:"
+
+#: ../xffm/fm/view/local/popup.hh:791
+#, fuzzy
+msgid   "No matches."
+msgstr  "Lihevhatin tune"
+
+#: ../xffm/fm/view/local/popup.hh:983 ../xffm/fm/view/local/popup.hh:1156
+#, fuzzy
+msgid   "Create new..."
+msgstr  "Nû Biafirîne"
+
+#: ../xffm/fm/view/local/popup.hh:990 ../xffm/fm/view/local/popup.hh:1085
+#: ../xffm/fm/view/local/popup.hh:1159
+#, fuzzy
+msgid   "New Name:"
+msgstr  "Navê Nû"
+
+#: ../xffm/fm/view/local/popup.hh:998
+msgid   "No name"
+msgstr  "Bênav"
+
+#: ../xffm/fm/view/local/popup.hh:1011
+#, fuzzy, c-format
+msgid   "Another file with the same name already exists in “%s”."
+msgstr  "Şemaya bi vî navî jixwe heye"
+
+#: ../xffm/fm/view/local/popup.hh:1036
+#, fuzzy
+msgid   "Arguments for the Command"
+msgstr  "Sedem ji bo fermanê"
+
+#: ../xffm/fm/view/local/popup.hh:1117 ../xffm/fm/view/root/popup.hh:237
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:383
+msgid   "Specify Output Directory..."
+msgstr  "Peldanka Deranan Hilbijêre..."
+
+#: ../xffm/fm/view/local/popup.hh:1148
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:409
+msgid   "Not a directory"
+msgstr  "Ne peldank e"
+
+#: ../xffm/fm/view/local/popup.hh:1307
+#, fuzzy
+msgid   "You have selected multiple files or folders"
+msgstr  "Divê tu pel an jî peldankekê hilbijêrî."
+
+#: ../xffm/fm/view/local/popup.hh:1375 ../xffm/fm/view/local/view.hh:156
+#, fuzzy
+msgid   "Invalid entry"
+msgstr  "Curenivîsê Nederbasdar"
+
+#: ../xffm/fm/view/local/view.hh:177
+#, fuzzy, c-format
+msgid   "The volume '%s' is not mounted."
+msgstr  "Şêwaza %s nehate dîtin"
+
+#: ../xffm/fm/view/local/properties.hh:241
+#, fuzzy
+msgid   "Properties and Attributes"
+msgstr  "Çawaniyan Jê Bibe"
+
+#: ../xffm/fm/view/local/properties.hh:270
+#, fuzzy
+msgid   "File Mode:"
+msgstr  "Xwediya/ê dosiyê:"
+
+#: ../xffm/fm/view/local/properties.hh:296
+msgid   "File:"
+msgstr  "Dosya:"
+
+#: ../xffm/fm/view/local/properties.hh:308
+msgid   "Apply changes"
+msgstr  "Guhertinan bisepîne"
+
+#: ../xffm/fm/view/local/properties.hh:469
+msgid   "Encoding"
+msgstr  "Kodkirin"
+
+#: ../xffm/fm/view/local/properties.hh:470 ../xffm/fm/view/treeview.hh:22
+#, fuzzy
+msgid   "Mimetype"
+msgstr  "Cureyên Mime"
+
+#: ../xffm/fm/view/local/properties.hh:474 ../xffm/fm/view/treeview.hh:19
+msgid   "Size"
+msgstr  "Mezinahî"
+
+#: ../xffm/fm/view/local/properties.hh:475 ../xffm/fm/view/treeview.hh:20
+msgid   "Date"
+msgstr  "Dîrok"
+
+#: ../xffm/fm/view/local/properties.hh:492
+#, fuzzy
+msgid   "Successfully moved to trash."
+msgstr  "Rakirina %s biserket"
+
+#: ../xffm/fm/view/local/properties.hh:493
+msgid   "Source:"
+msgstr  "Çavkanî:"
+
+#: ../xffm/fm/view/root/model.hh:124
+#, fuzzy
+msgid   "Root Directory"
+msgstr  "Peldanka HTML yê Root"
+
+#: ../xffm/fm/view/root/model.hh:140
+msgid   "This is the root of the filesystem"
+msgstr  "Ev koka pergala pelan e"
+
+#: ../xffm/fm/view/root/model.hh:152
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:268
 #, fuzzy
 msgid   "Home Directory"
 msgstr  "Pelrêça malê"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:261
-#: ../xffm/fm/view/root/model.hh:168 ../xffm/fm/view/fstab/popup.hh:29
-#, fuzzy
-msgid   "Disk Image Mounter"
-msgstr  "Pêwendîkerê Dîskê"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:266
-#: ../xffm/fm/view/root/model.hh:137
+#: ../xffm/fm/view/root/model.hh:179
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:278
 #, fuzzy
 msgid   "Trash bin"
 msgstr  "Dema çû çopê"
 
-#: ../xffm/fm/dialog/notebook/notebook.hh:56
-msgid   "Long press time"
-msgstr  "Demê pêlêkirina dirêj"
-
-#: ../xffm/fm/dialog/notebook/notebook.hh:75 ../xffm/common/gtk.hh:139
-msgid   "New Tab"
-msgstr  "Hifirîna Nû"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:178
+#: ../xffm/fm/view/root/model.hh:210 ../xffm/fm/view/fstab/popup.hh:29
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:273
 #, fuzzy
-msgid   "Open menu"
-msgstr  "Wêneyê veke"
+msgid   "Disk Image Mounter"
+msgstr  "Pêwendîkerê Dîskê"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:230
+#: ../xffm/fm/view/root/model.hh:227
+msgid   "Mount local disks and devices"
+msgstr  "Amadekirina dîsket û amûrên herêmî"
+
+#: ../xffm/fm/view/root/model.hh:267
 #, fuzzy
-msgid   "View as list"
-msgstr  "Wekî lîste bibîne"
+msgid   "Go to bookmarked location"
+msgstr  "Biçe cihê mak"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:231
-msgid   "Show hidden files"
-msgstr  "Pelên veşartî nîşan bide"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:232
+#: ../xffm/fm/view/root/popup.hh:175
 #, fuzzy
-msgid   "Show Backup Files"
-msgstr  "Pelên nepen û cîgir nîşan bide"
+msgid   "Empty trash"
+msgstr  "Müll leeren"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:233
+#: ../xffm/fm/view/root/popup.hh:228
 #, fuzzy
-msgid   "Sort data in descending order"
-msgstr  "Perçe yan rêz bike"
+msgid   "Ecrypt Volume"
+msgstr  "Bêdeng Bike"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:235
+#: ../xffm/fm/view/root/popup.hh:229
 #, fuzzy
-msgid   "Sort by date"
-msgstr  "Li gor navan rêzke"
+msgid   "private"
+msgstr  "Çalak bike"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:236
+#: ../xffm/fm/view/fuse/ecryptfs.hh:162 ../xffm/fm/view/fuse/ecryptfs.hh:163
+#: ../xffm/fm/view/fuse/ecryptfs.hh:185
+msgid   "Mount"
+msgstr  "Girêde"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:179
+#: ../xffm/fm/dialog/notebook/createini.hh:87
+#: ../xffm/fm/dialog/notebook/createini.hh:371
+msgid   "Save"
+msgstr  "Tomarke"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:182
+msgid   "Load"
+msgstr  "Bar bike"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:398
+#: ../xffm/fm/dialog/notebook/createini.hh:67
+msgid   "Options"
+msgstr  "Vebijêrk"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:399
+msgid   "Advanced"
+msgstr  "Pêşketî"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:692 ../xffm/fm/view/fstab/view.hh:1414
+#, fuzzy, c-format
+msgid   "Mounting %s"
+msgstr  "Tê girêdan"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:745
+#, fuzzy, c-format
+msgid   "Enter Passphrase for %s"
+msgstr  "Şîfreyê Binivîse"
+
+#: ../xffm/fm/view/fstab/popup.hh:21 ../xffm/fm/view/fstab/view.hh:1033
 #, fuzzy
-msgid   "Sort by size"
-msgstr  "Li gor navan rêzke"
+msgid   "NFS Network Volume"
+msgstr  "Volûma nû"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:237 ../xffm/common/gtk.hh:81
-msgid   "Exit"
-msgstr  "Derkeve"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:270
+#: ../xffm/fm/view/fstab/popup.hh:22
 #, fuzzy
-msgid   "Main menu"
-msgstr  "Pêşeka Bingehîn"
+msgid   "SSHFS Remote Synchronization Folder"
+msgstr  "Senkronîzasyona peldankan"
 
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:375
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:377
-msgid   "Go to"
-msgstr  "Here"
+#: ../xffm/fm/view/fstab/popup.hh:23 ../xffm/fm/view/fstab/view.hh:1085
+#, fuzzy
+msgid   "eCryptfs Volume"
+msgstr  "Dengê Kêmtir Bike"
 
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:382
-#: ../xffm/fm/view/local/popup.hh:887 ../xffm/fm/view/local/popup.hh:981
-msgid   "Specify Output Directory..."
-msgstr  "Peldanka Deranan Hilbijêre..."
+#: ../xffm/fm/view/fstab/popup.hh:24 ../xffm/fm/view/fstab/view.hh:1111
+#, fuzzy
+msgid   "CIFS Volume"
+msgstr  "Tam Deng"
 
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:409
-msgid   "Not a directory"
-msgstr  "Ne peldank e"
+#: ../xffm/fm/view/fstab/popup.hh:129
+#, fuzzy
+msgid   "Mount Device"
+msgstr  "Cîhaza Kontrolê"
+
+#: ../xffm/fm/view/fstab/popup.hh:141 ../xffm/fm/view/fstab/view.hh:924
+msgid   "Mount point:"
+msgstr  "Xala girêdanê:"
+
+#: ../xffm/fm/view/fstab/view.hh:591
+#, fuzzy
+msgid   "Mount point: "
+msgstr  "Xala girêdanê:"
+
+#: ../xffm/fm/view/fstab/view.hh:592
+#, fuzzy
+msgid   "Mount device: "
+msgstr  "cîhaza tv yê"
+
+#: ../xffm/fm/view/fstab/view.hh:660 ../xffm/fm/view/fstab/view.hh:676
+msgid   "Disks"
+msgstr  "Dîsk"
+
+#: ../xffm/fm/view/fstab/view.hh:922
+#, fuzzy
+msgid   "No Label"
+msgstr  "Etîket"
+
+#: ../xffm/fm/view/fstab/view.hh:923
+#, fuzzy
+msgid   "There is no file system available (unformatted)"
+msgstr  "Ji bo '%s'ê alîkarî tune."
+
+#: ../xffm/fm/view/fstab/view.hh:924
+#, fuzzy
+msgid   "Not mounted"
+msgstr  "(nehatiye girêdan)"
+
+#: ../xffm/fm/view/fstab/view.hh:1059
+msgid   "SFTP (via SSH)"
+msgstr  ""
+
+#: ../xffm/fm/view/fstab/view.hh:1414
+#, fuzzy, c-format
+msgid   "Unmounting %s"
+msgstr  "Tê qutkirin"
+
+#: ../xffm/fm/view/base/signals.hh:845
+#, fuzzy
+msgid   "Trash is empty"
+msgstr  "Pel vala ye"
+
+#: ../xffm/fm/view/base/signals.hh:847
+#, fuzzy
+msgid   "Directory does not exist."
+msgstr  "Dosya tune"
+
+#: ../xffm/fm/view/treeview.hh:17
+msgid   "Name"
+msgstr  "Nav"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
+#, fuzzy
+msgid   "Embedded Terminal"
+msgstr  "Termînalê veke"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
+#, fuzzy
+msgid   "All items in the iconview."
+msgstr  "Hemû hêmanên di vê paceyê de hilbijêrî"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
+#, fuzzy
+msgid   "Scripting"
+msgstr  "Rêzik"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
+#, fuzzy
+msgid   "Clear Log"
+msgstr  "Lîsteyê Paqij Bike"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
+#, fuzzy
+msgid   "Terminal font"
+msgstr  "Curetîpa Termînalê:"
 
 #: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
 msgid   "Renice Process"
@@ -836,17 +1258,22 @@ msgstr  "Tomarkirin ne serkeftî ye."
 msgid   "PID"
 msgstr  "PID"
 
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:376
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:378
+msgid   "Go to"
+msgstr  "Here"
+
 #: ../xffm/fm/dialog/notebook/page/page.hh:59
 msgid   "loading..."
 msgstr  "tê barkirin..."
 
-#: ../xffm/fm/dialog/notebook/page/page.hh:151
+#: ../xffm/fm/dialog/notebook/page/page.hh:152
 #: ../xffm/fm/dialog/notebook/page/page.hh:167
 #, fuzzy
 msgid   "Confirm Replace"
 msgstr  "Girtinê Bipejirîne"
 
-#: ../xffm/fm/dialog/notebook/page/page.hh:153
+#: ../xffm/fm/dialog/notebook/page/page.hh:154
 #, fuzzy
 msgid   "Destination File"
 msgstr  "Peldanka Hedef"
@@ -857,40 +1284,182 @@ msgid   "The output file %s already exists, do you want to overwrite it?"
 msgstr  "Pela '%s' jixwe hatiye daxistin.\n"
         "Dixwazî ku li ser bidî nivîsandin?"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
+#: ../xffm/fm/dialog/notebook/createini.hh:67
 #, fuzzy
-msgid   "Embedded Terminal"
-msgstr  "Termînalê veke"
+msgid   "maximum"
+msgstr  "Pirtirîn"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
+#: ../xffm/fm/dialog/notebook/createini.hh:75
 #, fuzzy
-msgid   "All items in the iconview."
-msgstr  "Hemû hêmanên di vê paceyê de hilbijêrî"
+msgid   "Add option"
+msgstr  "Vegotin Lê Zêde Bike"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
+#: ../xffm/fm/dialog/notebook/createini.hh:79
 #, fuzzy
-msgid   "Scripting"
-msgstr  "Rêzik"
+msgid   "Remove option"
+msgstr  "Bişkojka %s Rake"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
+#: ../xffm/fm/dialog/notebook/createini.hh:158
 #, fuzzy
-msgid   "Clear Log"
-msgstr  "Lîsteyê Paqij Bike"
+msgid   "icon ID"
+msgstr  "îkon"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
+#: ../xffm/fm/dialog/notebook/createini.hh:159
 #, fuzzy
-msgid   "Terminal font"
-msgstr  "Curetîpa Termînalê:"
+msgid   "tooltip"
+msgstr  "li ber guh xistin"
 
-#: ../xffm/fm/dialog/clipboard.hh:23 ../xffm/common/dnd.hh:41
-msgid   "Copying files locally"
-msgstr  "Jibergirtina pelan a heremî"
-
-#: ../xffm/fm/dialog/clipboard.hh:30 ../xffm/common/gio.hh:83
-#: ../xffm/common/dnd.hh:35
+#: ../xffm/fm/dialog/notebook/createini.hh:160
 #, fuzzy
-msgid   "Moving files"
-msgstr  "Pel tê kişandin:"
+msgid   "Select work directory"
+msgstr  "Pelrêçekê Hilbijêre"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:163
+#, fuzzy
+msgid   "Select executable"
+msgstr  "Pelekî hilbijêre"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:166
+msgid   "Run in terminal"
+msgstr  "Di termînalekê de bixebitîne"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:234
+#: ../xffm/response/chooserresponse.hh:20
+msgid   "Open"
+msgstr  "Veke"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:268
+#: ../xffm/response/chooserresponse.hh:55
+#: ../xffm/response/chooserresponse.hh:69
+#, fuzzy
+msgid   "Choose file"
+msgstr  "Pelekî hilbijêre"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:277
+#: ../xffm/response/chooserresponse.hh:50
+#: ../xffm/response/chooserresponse.hh:62
+#, fuzzy
+msgid   "Choose directory"
+msgstr  "Pelrêça malê"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:366
+msgid   "Save File"
+msgstr  "Pelî Tomarke"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:380
+msgid   "customButton.ini"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/createini.hh:420
+msgid   "Option"
+msgstr  "Vebijêrk"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:424
+msgid   "text"
+msgstr  "nivîs"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:431 ../xffm/completion/bash.hh:135
+msgid   "file"
+msgstr  "pel"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:436
+#, fuzzy
+msgid   "folder"
+msgstr  "1 peldank"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:441
+#, fuzzy
+msgid   "on"
+msgstr  "dus"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:446
+#, fuzzy
+msgid   "off"
+msgstr  "ji"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:16
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:226
+#, fuzzy
+msgid   "Remove Button Contents"
+msgstr  "Bişkojka %s Rake"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:75
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:221
+#, fuzzy
+msgid   "Add custom content"
+msgstr  "Wekî rengekî taybet:"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:76
+#, fuzzy
+msgid   "Select file to load"
+msgstr  "Ji bo şopandinê pelekî hilbijêre."
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:132
+#, fuzzy, c-format
+msgid   "Cannot load file %s. Reason: %s"
+msgstr  "%s jê nayê birin: %s"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:161
+#, fuzzy
+msgid   "You need to restart the application"
+msgstr  "Destpêker ji bo destpêkirina sepanan"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:216
+msgid   "FIXME New custom content"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:256
+#, fuzzy
+msgid   "Open a New Window"
+msgstr  "Di Paceya Nû de veke"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:262
+#, fuzzy
+msgid   "Differences"
+msgstr  "Vebijêrk"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:178
+#, fuzzy
+msgid   "Open menu"
+msgstr  "Wêneyê veke"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:230
+#, fuzzy
+msgid   "View as list"
+msgstr  "Wekî lîste bibîne"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:231
+msgid   "Show hidden files"
+msgstr  "Pelên veşartî nîşan bide"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:232
+#, fuzzy
+msgid   "Show Backup Files"
+msgstr  "Pelên nepen û cîgir nîşan bide"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:233
+#, fuzzy
+msgid   "Sort data in descending order"
+msgstr  "Perçe yan rêz bike"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:235
+#, fuzzy
+msgid   "Sort by date"
+msgstr  "Li gor navan rêzke"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:236
+#, fuzzy
+msgid   "Sort by size"
+msgstr  "Li gor navan rêzke"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:270
+#, fuzzy
+msgid   "Main menu"
+msgstr  "Pêşeka Bingehîn"
+
+#: ../xffm/fm/dialog/notebook/notebook.hh:56
+msgid   "Long press time"
+msgstr  "Demê pêlêkirina dirêj"
 
 #: ../xffm/fm/dialog/dialog.hh:122
 #, fuzzy
@@ -902,530 +1471,89 @@ msgstr  "Rake"
 msgid   "Detected device(s):"
 msgstr  "Servîsê hilbijêre:"
 
-#: ../xffm/fm/view/local/model.hh:124
-#, fuzzy, c-format
-msgid   "Reading \"%s\""
-msgstr  "Tevlîhev \"%s\""
+#: ../xffm/response/progress.hh:82 ../xffm/response/commandresponse.hh:57
+msgid   "Running"
+msgstr  "Dixebite"
 
-#: ../xffm/fm/view/local/model.hh:577 ../xffm/fm/view/base/monitor.hh:34
-#, fuzzy, c-format
-msgid   "Files: %s"
-msgstr  "Pel: %s"
-
-#: ../xffm/fm/view/local/model.hh:580
-#, fuzzy, c-format
-msgid   "Loaded %d of %d articles"
-msgstr  "Pelên barkirî:"
-
-#: ../xffm/fm/view/local/popup.hh:85 ../xffm/fm/view/local/popup.hh:142
-#: ../xffm/fm/view/local/popup.hh:1287 ../xffm/fm/view/local/popup.hh:1294
-#: ../xffm/fm/view/local/popup.hh:1305 ../xffm/fm/view/local/popup.hh:1312
-#: ../xffm/common/gtk.hh:83
-msgid   "Open with"
-msgstr  "Veke bi"
-
-#: ../xffm/fm/view/local/popup.hh:94
-msgid   "New"
-msgstr  "Nû"
-
-#: ../xffm/fm/view/local/popup.hh:95 ../xffm/fm/view/local/popup.hh:145
-#: ../xffm/fm/view/root/popup.hh:136 ../xffm/fm/view/fstab/popup.hh:20
-#: ../xffm/common/gtk.hh:94
-msgid   "Open in New Tab"
-msgstr  "Hilpekîna Nû de Veke"
-
-#: ../xffm/fm/view/local/popup.hh:99 ../xffm/fm/view/local/popup.hh:155
-#: ../xffm/common/gtk.hh:87
-msgid   "Copy"
-msgstr  "Jibergirtin"
-
-#: ../xffm/fm/view/local/popup.hh:100 ../xffm/fm/view/local/popup.hh:156
-#: ../xffm/common/gtk.hh:85
-msgid   "Cut"
-msgstr  "Jê bike"
-
-#: ../xffm/fm/view/local/popup.hh:101 ../xffm/fm/view/local/popup.hh:159
-#: ../xffm/fm/view/local/popup.hh:232 ../xffm/fm/view/local/popup.hh:234
+#: ../xffm/response/progress.hh:87 ../xffm/response/commandresponse.hh:61
 #, fuzzy
-msgid   "Paste into"
-msgstr  "Pastebin"
+msgid   "Waiting for operation to finish..."
+msgstr  "Li hêviya destpêkirinê ye an jî qediyaye."
 
-#: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:158
+#: ../xffm/response/passwdresponse.hh:131
 #, fuzzy
-msgid   "There is nothing on the clipboard to paste."
-msgstr  "Sembola fermana ku wê were xebitandin."
+msgid   "User Input"
+msgstr  "Têketina mişkê"
 
-#: ../xffm/fm/view/local/popup.hh:103 ../xffm/fm/view/local/popup.hh:160
-#: ../xffm/fm/view/local/rm.hh:176 ../xffm/common/gtk.hh:89
-msgid   "Delete"
-msgstr  "Jê bibe"
-
-#: ../xffm/fm/view/local/popup.hh:106
-msgid   "Select All"
-msgstr  "Hemûyan Hilbijêre"
-
-#: ../xffm/fm/view/local/popup.hh:107 ../xffm/fm/view/local/popup.hh:755
+#: ../xffm/response/passwdresponse.hh:147
 #, fuzzy
-msgid   "Match regular expression"
-msgstr  "Derbirîna bi pergal"
+msgid   "Response Requested"
+msgstr  "Daxwaza Tomarbûnê"
 
-#: ../xffm/fm/view/local/popup.hh:143 ../xffm/fm/view/local/popup.hh:1105
+#: ../xffm/response/passwdresponse.hh:194 ../xffm/response/entryresponse.hh:457
+msgid   "Ok"
+msgstr  "Temam"
+
+#: ../xffm/response/customresponse.hh:55
 #, fuzzy
-msgid   "Run Executable..."
-msgstr  "Xebatî:"
+msgid   "Execute command"
+msgstr  "Fermanên Shelê yên xebatî"
 
-#: ../xffm/fm/view/local/popup.hh:144 ../xffm/fm/view/local/popup.hh:875
-msgid   "Extract files from the archive"
-msgstr  "Ji arşîvê pelan veke"
+#: ../xffm/response/customresponse.hh:103
+msgid   "Source File"
+msgstr  "Pelê Çavkanî"
 
-#: ../xffm/fm/view/local/popup.hh:146 ../xffm/fm/view/local/popup.hh:966
-#, fuzzy
-msgid   "Create a compressed archive with the selected objects"
-msgstr  "Bi bireserên hatine hilbijartin re arşîvekê pêk bîne"
-
-#: ../xffm/fm/view/local/popup.hh:148 ../xffm/fm/view/fstab/popup.hh:37
-#, fuzzy
-msgid   "Mount the volume associated with this folder"
-msgstr  "Pergala ku têkildarî peldanka ku niha vekirî ye girê bide"
-
-#: ../xffm/fm/view/local/popup.hh:149 ../xffm/fm/view/fstab/popup.hh:38
-#, fuzzy
-msgid   "Unmount the volume associated with this folder"
-msgstr  "Girêdana pergala ku têkildarî peldanka niha vekirî ye rake"
-
-#: ../xffm/fm/view/local/popup.hh:151 ../xffm/common/gtk.hh:73
-msgid   "Add bookmark"
-msgstr  "Bijareyê zêde bike"
-
-#: ../xffm/fm/view/local/popup.hh:152 ../xffm/fm/view/root/popup.hh:137
-#: ../xffm/common/gtk.hh:75
-#, fuzzy
-msgid   "Remove bookmark"
-msgstr  "Bijareyê Rake"
-
-#: ../xffm/fm/view/local/popup.hh:157 ../xffm/common/gtk.hh:71
-msgid   "Paste"
-msgstr  "Pêvekirin"
-
-#: ../xffm/fm/view/local/popup.hh:161 ../xffm/fm/view/local/popup.hh:1231
-msgid   "Rename"
-msgstr  "Nav Biguhere"
-
-#: ../xffm/fm/view/local/popup.hh:162 ../xffm/fm/view/local/popup.hh:1217
-#, fuzzy
-msgid   "Duplicate"
-msgstr  "Hilfirînê bike cot"
-
-#: ../xffm/fm/view/local/popup.hh:163 ../xffm/fm/view/local/popup.hh:1203
-msgid   "Link"
-msgstr  "Girêdan"
-
-#: ../xffm/fm/view/local/popup.hh:164
-msgid   "Properties"
-msgstr  "Taybetmendî"
-
-#: ../xffm/fm/view/local/popup.hh:562
-msgid   "Files:"
-msgstr  "Pel:"
-
-#: ../xffm/fm/view/local/popup.hh:565 ../xffm/fm/view/local/rm.hh:61
-#, fuzzy
-msgid   "Multiple selections"
-msgstr  "Ya hilbijartî jê bike"
-
-#: ../xffm/fm/view/local/popup.hh:753
-#, fuzzy
-msgid   "Select items"
-msgstr  "Hêmanê Hilbijêre"
-
-#: ../xffm/fm/view/local/popup.hh:771
-#, fuzzy
-msgid   "Regular Expression syntax is incorrect"
-msgstr  "Derbirîna bi pergal"
-
-#: ../xffm/fm/view/local/popup.hh:801
-#, fuzzy
-msgid   "No selection"
-msgstr  "Hilbijartina Qadê:"
-
-#: ../xffm/fm/view/local/popup.hh:801
-#, fuzzy
-msgid   "No matches."
-msgstr  "Lihevhatin tune"
-
-#: ../xffm/fm/view/local/popup.hh:1058
-#, fuzzy
-msgid   "Create new..."
-msgstr  "Nû Biafirîne"
-
-#: ../xffm/fm/view/local/popup.hh:1065 ../xffm/fm/view/local/popup.hh:1146
-#, fuzzy
-msgid   "New Name:"
-msgstr  "Navê Nû"
-
-#: ../xffm/fm/view/local/popup.hh:1074
-msgid   "No name"
-msgstr  "Bênav"
-
-#: ../xffm/fm/view/local/popup.hh:1087
-#, fuzzy, c-format
-msgid   "Another file with the same name already exists in “%s”."
-msgstr  "Şemaya bi vî navî jixwe heye"
-
-#: ../xffm/fm/view/local/popup.hh:1109 ../xffm/fm/view/local/popup.hh:1291
-#: ../xffm/fm/view/local/popup.hh:1309 ../xffm/common/util.hh:1452
-msgid   "Run in Terminal"
-msgstr  "Di Termînalê de Bixebitîne"
-
-#: ../xffm/fm/view/local/popup.hh:1112
-#, fuzzy
-msgid   "Arguments for the Command"
-msgstr  "Sedem ji bo fermanê"
-
-#: ../xffm/fm/view/local/popup.hh:1258
-#, fuzzy
-msgid   "You have selected multiple files or folders"
-msgstr  "Divê tu pel an jî peldankekê hilbijêrî."
-
-#: ../xffm/fm/view/local/popup.hh:1332 ../xffm/fm/view/local/view.hh:156
-#, fuzzy
-msgid   "Invalid entry"
-msgstr  "Curenivîsê Nederbasdar"
-
-#: ../xffm/fm/view/local/properties.hh:245
-#, fuzzy
-msgid   "Properties and Attributes"
-msgstr  "Çawaniyan Jê Bibe"
-
-#: ../xffm/fm/view/local/properties.hh:274
-#, fuzzy
-msgid   "File Mode:"
-msgstr  "Xwediya/ê dosiyê:"
-
-#: ../xffm/fm/view/local/properties.hh:300
-msgid   "File:"
-msgstr  "Dosya:"
-
-#: ../xffm/fm/view/local/properties.hh:312
-msgid   "Apply changes"
-msgstr  "Guhertinan bisepîne"
-
-#: ../xffm/fm/view/local/properties.hh:477
-#, fuzzy
-msgid   "Successfully moved to trash."
-msgstr  "Rakirina %s biserket"
-
-#: ../xffm/fm/view/local/properties.hh:478
-msgid   "Source:"
-msgstr  "Çavkanî:"
-
-#: ../xffm/fm/view/local/rm.hh:59
-#, fuzzy, c-format
-msgid   "Delete %s"
-msgstr  "Jê bibe"
-
-#: ../xffm/fm/view/local/rm.hh:61
-msgid   "Warning: "
-msgstr  "Hişyarî: "
-
-#: ../xffm/fm/view/local/rm.hh:92
-msgid   "Remove"
-msgstr  "Rake"
-
-#: ../xffm/fm/view/local/rm.hh:142
-#, fuzzy
-msgid   "Apply to all"
-msgstr  "Curetîp Bisepîne"
-
-#: ../xffm/fm/view/local/rm.hh:165 ../xffm/common/gtk.hh:91
-#, fuzzy
-msgid   "Shred"
-msgstr  "Dosiyê parçe bike"
-
-#: ../xffm/fm/view/local/rm.hh:183
-msgid   "Trash"
-msgstr  "Avêtî"
-
-#: ../xffm/fm/view/local/view.hh:177
-#, fuzzy, c-format
-msgid   "The volume '%s' is not mounted."
-msgstr  "Şêwaza %s nehate dîtin"
-
-#: ../xffm/fm/view/root/model.hh:82
-#, fuzzy
-msgid   "Root Directory"
-msgstr  "Peldanka HTML yê Root"
-
-#: ../xffm/fm/view/root/model.hh:98
-msgid   "This is the root of the filesystem"
-msgstr  "Ev koka pergala pelan e"
-
-#: ../xffm/fm/view/root/model.hh:176 ../xffm/fm/view/root/model.hh:191
-msgid   "Mount local disks and devices"
-msgstr  "Amadekirina dîsket û amûrên herêmî"
-
-#: ../xffm/fm/view/root/model.hh:177 ../xffm/fm/view/fstab/popup.hh:23
-#: ../xffm/fm/view/fstab/view.hh:1084
-#, fuzzy
-msgid   "eCryptfs Volume"
-msgstr  "Dengê Kêmtir Bike"
-
-#: ../xffm/fm/view/root/model.hh:178 ../xffm/fm/view/fstab/popup.hh:22
-#, fuzzy
-msgid   "SSHFS Remote Synchronization Folder"
-msgstr  "Senkronîzasyona peldankan"
-
-#: ../xffm/fm/view/root/model.hh:179 ../xffm/fm/view/fstab/popup.hh:21
-#: ../xffm/fm/view/fstab/view.hh:1032
-#, fuzzy
-msgid   "NFS Network Volume"
-msgstr  "Volûma nû"
-
-#: ../xffm/fm/view/root/model.hh:180 ../xffm/fm/view/fstab/popup.hh:24
-#: ../xffm/fm/view/fstab/view.hh:1110
-#, fuzzy
-msgid   "CIFS Volume"
-msgstr  "Tam Deng"
-
-#: ../xffm/fm/view/root/model.hh:229
-#, fuzzy
-msgid   "Go to bookmarked location"
-msgstr  "Biçe cihê mak"
-
-#: ../xffm/fm/view/root/popup.hh:138
-#, fuzzy
-msgid   "Empty trash"
-msgstr  "Müll leeren"
-
-#: ../xffm/fm/view/fstab/popup.hh:129
-#, fuzzy
-msgid   "Mount Device"
-msgstr  "Cîhaza Kontrolê"
-
-#: ../xffm/fm/view/fstab/popup.hh:141 ../xffm/fm/view/fstab/view.hh:923
-msgid   "Mount point:"
-msgstr  "Xala girêdanê:"
-
-#: ../xffm/fm/view/fstab/view.hh:590
-#, fuzzy
-msgid   "Mount point: "
-msgstr  "Xala girêdanê:"
-
-#: ../xffm/fm/view/fstab/view.hh:591
-#, fuzzy
-msgid   "Mount device: "
-msgstr  "cîhaza tv yê"
-
-#: ../xffm/fm/view/fstab/view.hh:659 ../xffm/fm/view/fstab/view.hh:675
-msgid   "Disks"
-msgstr  "Dîsk"
-
-#: ../xffm/fm/view/fstab/view.hh:921
-#, fuzzy
-msgid   "No Label"
-msgstr  "Etîket"
-
-#: ../xffm/fm/view/fstab/view.hh:922
-#, fuzzy
-msgid   "There is no file system available (unformatted)"
-msgstr  "Ji bo '%s'ê alîkarî tune."
-
-#: ../xffm/fm/view/fstab/view.hh:923
-#, fuzzy
-msgid   "Not mounted"
-msgstr  "(nehatiye girêdan)"
-
-#: ../xffm/fm/view/fstab/view.hh:1058
-msgid   "SFTP (via SSH)"
+#: ../xffm/response/timeoutresponse.hh:57
+msgid   "Dismiss"
 msgstr  ""
 
-#: ../xffm/fm/view/fstab/view.hh:1413
-#, fuzzy, c-format
-msgid   "Unmounting %s"
-msgstr  "Tê qutkirin"
-
-#: ../xffm/fm/view/fstab/view.hh:1413
-#, fuzzy, c-format
-msgid   "Mounting %s"
-msgstr  "Tê girêdan"
-
-#: ../xffm/fm/view/pkg/model.hh:41 ../xffm/fm/view/pkg/model.hh:52
-msgid   "Add or remove software installed on the system"
-msgstr  ""
-
-#: ../xffm/fm/view/pkg/model.hh:111
-msgid   "String"
-msgstr  "Rêzik"
-
-#: ../xffm/fm/view/pkg/model.hh:116
+#: ../xffm/completion/bash.hh:133
 #, fuzzy
-msgid   "Waiting for search results"
-msgstr  "li berna bersîvê ye"
+msgid   "Completion mode:"
+msgstr  "Koda qedandinê"
 
-#: ../xffm/fm/view/pkg/model.hh:174
-msgid   "No results"
-msgstr  "Encam tune"
-
-#: ../xffm/fm/view/pkg/model.hh:373
+#: ../xffm/completion/bash.hh:134
 #, fuzzy
-msgid   "Currently busy\n"
-msgstr  "Niha: %s"
+msgid   "command"
+msgstr  "Ferman"
 
-#: ../xffm/fm/view/pkg/popup.hh:44
-msgid   "Update Database"
-msgstr  "Bingeha Danê Rojane Bike"
-
-#: ../xffm/fm/view/pkg/popup.hh:45
+#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
 #, fuzzy
-msgid   "Fetch"
-msgstr  "Pêşnûma"
+msgid   "Options >>"
+msgstr  "Vebijêrk"
 
-#: ../xffm/fm/view/pkg/popup.hh:46
+#: ../xffm/completion/base.hh:28
+msgid   "Command"
+msgstr  "Ferman"
+
+#: ../xffm/completion/base.hh:31
+msgid   "File"
+msgstr  "Pel"
+
+#: ../xffm/completion/base.hh:34
 #, fuzzy
-msgid   "Install --dry-run"
-msgstr  "Sazkirî"
+msgid   "Command history"
+msgstr  "Malikên têxistina fermanê"
 
-#: ../xffm/fm/view/pkg/popup.hh:47
-msgid   "Install"
-msgstr  "Sazkirin"
+#: ../xffm/completion/base.hh:40
+msgid   "Variable"
+msgstr  "Guherbar"
 
-#: ../xffm/fm/view/pkg/popup.hh:48
+#: ../xffm/completion/base.hh:43
+msgid   "Host"
+msgstr  "Mêvandar"
+
+#: ../xffm/completion/base.hh:55
 #, fuzzy
-msgid   "Uninstall --dry-run"
-msgstr  "Tê rakirin"
+msgid   "Found no match"
+msgstr  "Hev nagirin"
 
-#: ../xffm/fm/view/pkg/popup.hh:49
-msgid   "Uninstall"
-msgstr  "Rake"
+#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
+msgid   "Matches"
+msgstr  "Hevgirtî"
 
-#: ../xffm/fm/view/pkg/popup.hh:50
-msgid   "Information"
-msgstr  "Agahî"
-
-#: ../xffm/fm/view/pkg/popup.hh:140
-msgid   "Version"
-msgstr  "Guherto"
-
-#: ../xffm/fm/view/pkg/popup.hh:149
+#: ../xffm/completion/base.hh:142
 #, fuzzy
-msgid   "Go up"
-msgstr  "here jor"
-
-#: ../xffm/fm/view/pkg/popup.hh:152
-#, fuzzy
-msgid   "Search packages"
-msgstr  "Ber bi paş ve lê bigere."
-
-#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
-#, fuzzy, c-format
-msgid   "Loading %s...%s"
-msgstr  "Tê barkirin..."
-
-#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:93
-#, fuzzy
-msgid   "Please Wait..."
-msgstr  "Ji kerema xwe li bendê bimîne…"
-
-#: ../xffm/fm/view/treeview.hh:17
-msgid   "Name"
-msgstr  "Nav"
-
-#: ../xffm/fm/view/treeview.hh:19
-msgid   "Size"
-msgstr  "Mezinahî"
-
-#: ../xffm/fm/view/treeview.hh:20
-msgid   "Date"
-msgstr  "Dîrok"
-
-#: ../xffm/fm/view/treeview.hh:22
-#, fuzzy
-msgid   "Mimetype"
-msgstr  "Cureyên Mime"
-
-#: ../xffm/fm/view/base/signals.hh:838
-#, fuzzy
-msgid   "Trash is empty"
-msgstr  "Pel vala ye"
-
-#: ../xffm/fm/view/base/signals.hh:840
-#, fuzzy
-msgid   "Directory does not exist."
-msgstr  "Dosya tune"
-
-#: ../xffm/common/settings.hh:30
-#, fuzzy
-msgid   "New File:"
-msgstr  "Pelê Nû"
-
-#: ../xffm/common/gio.hh:81
-msgid   "Copying files"
-msgstr  "Pel tên jibergirtin"
-
-#: ../xffm/common/gio.hh:85
-#, fuzzy
-msgid   "linking"
-msgstr  "Tê girêdan"
-
-#: ../xffm/common/gio.hh:87
-#, fuzzy
-msgid   "rename"
-msgstr  "Nav Biguhere"
-
-#: ../xffm/common/gio.hh:426
-#, c-format
-msgid   "(%d of %d)"
-msgstr  "(%d ji %d)"
-
-#: ../xffm/common/dnd.hh:47
-#, fuzzy
-msgid   "Create Link"
-msgstr  "Casey Link"
-
-#: ../xffm/common/util.hh:1404
-#, c-format
-msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
-        "attribute on that file."
-msgstr  ""
-
-#: ../xffm/common/util.hh:1406 ../xffm/common/util.hh:1441
-#, c-format
-msgid   "Open with %s"
-msgstr  "Bi %s veke"
-
-#: ../xffm/common/util.hh:1406
-msgid   "Text Editor"
-msgstr  "Sererastkerê Nivîsan"
-
-#: ../xffm/common/util.hh:1443 ../xffm/common/gtk.hh:69
-msgid   "Execute Shell Command"
-msgstr  "Fermana Qalikan Bixebitîne"
-
-#: ../xffm/common/util.hh:1447
-msgid   "Console: quickly run single commands -- write a command here and "
-        "press enter."
-msgstr  ""
-
-#: ../xffm/common/gtk.hh:352 ../xffm/common/gtk.hh:360
-msgid   "Help"
-msgstr  "Alîkarî"
-
-#: ../xffm/common/run.hh:338
-msgid   "error"
-msgstr  "çewtî"
-
-#: ../xffm/common/run.hh:342
-#, fuzzy
-msgid   "warning"
-msgstr  "1 hişyarî"
-
-#: ../xffm/common/preview.hh:581
-#, fuzzy
-msgid   "Empty file"
-msgstr  "Pelê Vala"
-
-#: ../xffm/common/preview.hh:636
-#, c-format
-msgid   "Cannot read from %s"
-msgstr  "Ji %s nayê xwedin"
+msgid   "Too many files open"
+msgstr  "Pelan ji bo şandinê hilbijêre"
 
