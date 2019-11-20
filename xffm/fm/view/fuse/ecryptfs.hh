@@ -5,7 +5,15 @@
 #include "ecryptfs.i"
 
 namespace xf{
+#ifndef ENABLE_EFS_MODULE 
+template <class Type>class EFS{
+public:
+    static void doDialog(const gchar *path){return;}
+    static gboolean isEFS(const gchar *path){return (strncmp(path, "efs:/", strlen("efs:/"))==0);}
+    static gboolean removeItem(const gchar *path){return FALSE;}
+};
 
+#else
 static pthread_mutex_t efsMountMutex=PTHREAD_MUTEX_INITIALIZER;
 template <class Type>class EFS;
 template <class Type>class Fstab;
@@ -41,6 +49,8 @@ public:
         TRACE("Fuse destructor...\n");
         gtk_widget_destroy(GTK_WIDGET(dialog_));        
     }
+
+    static gboolean isEFS(const gchar *path){return (strncmp(path, "efs:/", strlen("efs:/"))==0);}
 
     static gchar **
     getSavedItems(void){
@@ -783,6 +793,7 @@ public:
     }
 
 };
+#endif
 
 } // namespace xf
 #endif

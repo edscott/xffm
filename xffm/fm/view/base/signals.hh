@@ -857,7 +857,7 @@ public:
         if (strcmp(path, "xffm:sshfs")==0) return (SSHFS_TYPE);
         if (strcmp(path, "xffm:cifs")==0) return (CIFS_TYPE);
         if (strncmp(path, "xffm:pkg", strlen("xffm:pkg"))==0) return (PKG_TYPE);
-        if (RootPopUp<Type>::isEFS(path)) return (EFS_TYPE);
+        if (EFS<Type>::isEFS(path)) return (EFS_TYPE);
 	
         ERROR("fm/base/signals.hh::getViewType() %s not defined.\n", path);
         return (-1);

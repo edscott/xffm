@@ -2,22 +2,18 @@
 # define XF_ROOTPOPUP_HH
 #include "model.hh"
 
-#ifndef FREEBSD_FOUND
-# include "../fuse/ecryptfs.hh"
-#endif
 namespace xf
 {
 
 template <class Type> class Popup;
 template <class Type> class View;
+template <class Type> class FstabView;
 template <class Type> class LocalPopUp;
 template <class Type> class BasePopUp;
 template <class Type>
 class RootPopUp  {
     public:
 
-    static gboolean
-    isEFS(const gchar *path){return (strncmp(path, "efs:/", strlen("efs:/"))==0);}
 
     static GtkMenu *popUpItem(void){
         if (!rootItemPopUp) rootItemPopUp = createItemPopUp();   
@@ -35,7 +31,7 @@ class RootPopUp  {
         auto path =Popup<Type>::getWidgetData(rootItemPopUp, "path");
         TRACE("reset root menu items, path=%s\n", path);
 	gboolean isBookMark = RootView<Type>::isBookmarked(path);
-        if (isEFS(path)) isBookMark = TRUE;
+        if (EFS<Type>::isEFS(path)) isBookMark = TRUE;
 	auto menuitem = GTK_WIDGET(g_object_get_data(G_OBJECT(rootItemPopUp), "Remove bookmark"));
 	gtk_widget_set_sensitive(menuitem, isBookMark);
         if (isBookMark) gtk_widget_show(menuitem);
@@ -46,7 +42,8 @@ class RootPopUp  {
         else gtk_widget_hide(menuitem);
         gtk_widget_set_sensitive(menuitem, g_file_test(trashFiles, G_FILE_TEST_IS_DIR));
         g_free(trashFiles); 
-        if (isEFS(path)){
+#ifdef ENABLE_EFS_MODULE
+        if (EFS<Type>::isEFS(path)){
             path += strlen("efs:/");
             GtkWidget *show, *hide;
             if (FstabView<Type>::isMounted(path)){
@@ -60,6 +57,7 @@ class RootPopUp  {
             gtk_widget_hide(hide);
             gtk_widget_set_sensitive(show, TRUE);
        }
+#endif
 
 
     }
@@ -170,8 +168,10 @@ private:
         {
 	    {N_("Open in New Tab"), (void *)LocalPopUp<Type>::newTab, rootItemPopUp, NULL},
             {N_("Remove bookmark"), (void *)removeBookmarkItem, NULL, NULL},
+#ifdef ENABLE_FSTAB_MODULE
             {N_("Mount the volume associated with this folder"), (void *)LocalPopUp<Type>::mount, NULL, NULL},
             {N_("Unmount the volume associated with this folder"), (void *)LocalPopUp<Type>::mount, NULL, NULL},
+#endif
             {N_("Empty trash"), (void *)emptyTrash, NULL, NULL},
 	     {NULL,NULL,NULL,NULL}
         };
@@ -269,7 +269,7 @@ private:
     {
         TRACE("Remove bookmark\n");
 	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
-        if (isEFS(path)){
+        if (EFS<Type>::isEFS(path)){
             if (!EFS<Type>::removeItem(path+strlen("efs:/"))) return;
         } else {
             if (!RootView<Type>::removeBookmark(path)) return;

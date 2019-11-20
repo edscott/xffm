@@ -1,9 +1,6 @@
 #ifndef XF_ROOTMODEL__HH
 # define XF_ROOTMODEL__HH
 #include "bookmarks.hh"
-#ifndef FREEBSD_FOUND
-# include "../fuse/ecryptfs.hh"
-#endif
 namespace xf
 {
 

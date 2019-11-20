@@ -15,6 +15,7 @@ namespace xf{
     template <class Type> class RootModel;
     template <class Type> class PkgModel;
 }
+#include "fuse/ecryptfs.hh"
 #include "base/base.hh"
 
 #include "iconview.hh"
@@ -202,7 +203,7 @@ public:
 		return LocalView<Type>::item_activated(this, treeModel, tpath, path);
 	    }
 	} else if (strcmp(path,"xffm:root")){
-            if (RootPopUp<Type>::isEFS(path))
+            if (EFS<Type>::isEFS(path))
 	        DBG("fm/view.hh: loadModel: %s does not exist\n", path);
             
 	}
