@@ -103,12 +103,42 @@ public:
     
         g_object_set_data(G_OBJECT(dialog), "treeView", treeView);
         g_object_set_data(G_OBJECT(dialog), "model", model);
-        
+       
+        g_signal_connect (treeView, "row-activated", 
+            G_CALLBACK (activate), 
+            (void *)model);
+
         auto dnd = new (DnD<double>)(GTK_WIDGET(dialog), treeView, 1, 0);
         g_object_set_data(G_OBJECT(dialog), "dnd", dnd);
         gtk_widget_show_all (GTK_WIDGET(dialog));
     }
 private:
+    static void
+    activate (GtkTreeView     *treeView,
+               GtkTreePath       *tpath,
+               GtkTreeViewColumn *column,
+               gpointer           data)
+    {
+        // Get activated path.
+        auto treeModel = gtk_tree_view_get_model(treeView);
+
+	gchar *path;
+        GtkTreeIter iter;
+        if (!gtk_tree_model_get_iter (treeModel, &iter, (GtkTreePath *)tpath)){
+            DBG("tpath does not exist. Aborting activate signal.\n");
+            return;
+        }
+        GdkPixbuf *normal_pixbuf;
+
+        gtk_tree_model_get (treeModel, &iter, 1, &path, -1);
+	
+        TRACE("base-signals::activate: %s\n", path);
+	/*if (!view->loadModel(treeModel, tpath, path)){
+            TRACE("base-signals:activate():cannot load %s\n", path);
+        }*/
+        DBG("path is %s\n", path);
+	g_free(path);
+    }
     static void
     setUpSignals(GObject *dialog){
         auto treeView = GTK_TREE_VIEW(g_object_get_data(dialog, "treeView"));
