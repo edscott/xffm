@@ -302,33 +302,6 @@ public:
         return G_SOURCE_CONTINUE;
     }
 
-#if 0
-    gchar * 
-    runResponseInsensitive(void){
-        /* show response_ and return */
-	gtk_window_set_position(GTK_WINDOW(response_), GTK_WIN_POS_CENTER_ON_PARENT);
-	gtk_widget_show (GTK_WIDGET(response_));
-        gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
-	gint response  = gtk_dialog_run(GTK_DIALOG(response_));
-        gtk_widget_hide(GTK_WIDGET(response_));
-	while (gtk_events_pending())gtk_main_iteration();	
-        gchar *responseTxt = NULL;
-	if(response == GTK_RESPONSE_YES) {
-            responseTxt = getResponse();
-	}
-	if(responseTxt != NULL){
-	    g_strstrip (responseTxt);
-	}
-        if (bashCompletionStore_) gtk_list_store_clear(bashCompletionStore_);
-        
-	return responseTxt;
-    }
-    gchar * 
-    runResponseInsensitive(void){
-        DBG("FIXME: check this is right... runResponseInsensitive()\n");
-        return runResponse(0);
-    }
-#endif
 
     gint 
     runResponseSetup(gint timeout){

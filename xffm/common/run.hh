@@ -17,6 +17,10 @@ namespace xf
 {
 template <class Type> class Fm;
 template <class Type> class Dialog;
+template <class Type> class MimeApplication;
+template <class Type> class Mime;
+template <class Type> class EntryResponse;
+template <class Type> class ComboResponse;
 template <class Type>
 class Run {
 
@@ -638,7 +642,231 @@ public:
         return retval;
     }
 
+    static gchar *getRunWithCommand(GtkWindow *parent, GList *pathList, const gchar *wd){
+        if (!pathList || g_list_length(pathList)==0) return NULL;
+        gboolean multiple = (g_list_length(pathList) > 1);
+        auto path  = (const gchar *)pathList->data;
 
+        gchar *mimetype = Mime<Type>::mimeType(path);
+        gchar *defaultApp = defaultExtApp(path);
+        gchar *mpath = getMpath(pathList);
+        gchar *responseLabel = getResponseLabel(mpath, multiple?NULL:mimetype);
+        gchar *response = NULL;
+	gchar *textApp = NULL;
+	gchar *command = NULL;
+
+	const gchar **apps = MimeApplication<Type>::locate_apps(mimetype);
+
+        if (!multiple) {
+            auto fileInfo = Util<Type>::fileInfo(path);	
+	    textApp = defaultTextApp(fileInfo);
+	    g_free(fileInfo);
+        }
+
+        auto appCount = 0;
+        if (apps && apps[0]) {
+            appCount++;
+            if (apps[1]) appCount++;
+        }
+        if (defaultApp) appCount++;
+        if (textApp) appCount++;
+        TRACE("appcount=%d\n",appCount);
+
+        if (appCount <= 1) {
+            auto entryResponse = new(EntryResponse<Type>)(GTK_WINDOW(mainWindow), _("Open with"), "document-open");
+            entryResponse->setResponseLabel(responseLabel);
+
+            entryResponse->setCheckButton(_("Run in Terminal"));
+            if (!multiple) entryResponse->setCheckButton(defaultApp && Run<Type>::runInTerminal(defaultApp));
+
+            entryResponse->setEntryLabel(_("Open with"));
+            if (apps && apps[0]) entryResponse->setEntryDefault(apps[0]);
+            if (textApp) entryResponse->setEntryDefault(textApp);
+            if (defaultApp) entryResponse->setEntryDefault(defaultApp);
+            entryResponse->setEntryBashCompletion(wd);
+            
+            entryResponse->setCheckButtonEntryCallback((void *)toggleTerminal); 
+            entryResponse->setEntryCallback((void *)entryKeyRelease); 
+            response = entryResponse->runResponse();
+        } else {
+            auto comboResponse = new(ComboResponse<Type>)(GTK_WINDOW(mainWindow), _("Open with"), "document-open");
+            comboResponse->setResponseLabel(responseLabel);
+
+            comboResponse->setCheckButton(_("Run in Terminal"));
+            if (!multiple) comboResponse->setCheckButton(defaultApp && Run<Type>::runInTerminal(defaultApp));
+
+            comboResponse->setComboLabel(_("Open with"));
+            if (apps && apps[0]) comboResponse->setComboOptions(apps);
+            if (textApp) comboResponse->setComboDefault(textApp);
+            if (defaultApp) comboResponse->setComboDefault(defaultApp);
+            comboResponse->setComboBashCompletion(wd);
+
+            comboResponse->setCheckButtonComboCallback((void *)toggleTerminal); 
+            comboResponse->setComboCallback((void *)comboChanged); 
+        
+            response = comboResponse->runResponse();
+        }
+
+        if (not response) goto done;
+	if (strrchr(response,'\n')) *(strrchr(response,'\n')) = 0;
+        if (strlen(response)==0) goto done;
+
+	// Check whether application is valid.
+	if (!Run<Type>::isValidCommand(response)){
+	    gchar *message = g_strdup_printf("\n<span color=\"#990000\"><b>%s</b></span>:\n <b>%s</b>\n", _("Invalid entry"), response); 
+	    Dialogs<Type>::quickHelp (GTK_WINDOW(parent), message);
+	    g_free(message);
+            goto done;
+	}
+
+
+	// save value as default for mimetype extension
+        setMimetypeDefault(path, mimetype, response);
+
+        // get command line
+        if (!multiple) {
+	// Is the terminal flag set?
+	    if (runInTerminal(response)){
+                command = mkTerminalLine(response, mpath);
+            } else {
+                command = mkCommandLine(response, mpath);
+            }
+        } else { 
+   	    if (runInTerminal(response)){
+                command = mkTerminalLine(response, "");
+            } else {
+                command = mkCommandLine(response, "");
+            }
+            auto g = g_strconcat(command, " ", mpath, NULL);
+            g_free(command);
+            command = g;
+        }
+done:
+	g_free(mimetype);
+ 	g_free(defaultApp);
+	g_free(mpath);
+        g_free(responseLabel);
+        g_free(response);
+
+        return command;
+   }
+
+
+    static gchar *
+    defaultExtApp(const gchar *path){
+        auto ext = strrchr(path, '.');
+        if (!ext || strlen(ext)<2) return NULL;
+	gchar *defaultApp = Settings<Type>::getSettingString("MimeTypeApplications", ext+1);
+        TRACE("*** defaultExtApp (%s) --> %s --> %s\n", path, ext+1, defaultApp);
+	return defaultApp;
+    }
+
+    static gchar *
+    defaultTextApp(const gchar *fileInfo){
+	gchar *defaultApp = NULL;
+        gboolean textFiletype =(fileInfo && 
+                (strstr(fileInfo, "text")||strstr(fileInfo,"empty")));
+        if (textFiletype) {
+            gchar *editor = Util<Type>::get_text_editor();
+            defaultApp =g_strdup_printf("%s %%s", editor);
+            g_free(editor);
+        }
+	return defaultApp;
+    }
+
+    static gchar *
+    defaultMimeTypeApp(const gchar *mimetype){
+	gchar *defaultApp = Settings<Type>::getSettingString("MimeTypeApplications", mimetype);
+	if (!defaultApp) {
+	    const gchar **apps = MimeApplication<Type>::locate_apps(mimetype);
+	    if (apps && *apps) defaultApp = g_strdup(*apps);
+	}
+
+	if (!defaultApp)  {
+	    gboolean textMimetype = (mimetype && strncmp(mimetype, "text/", strlen("text/")) == 0);
+	    if (textMimetype) {
+		gchar *editor = Util<Type>::get_text_editor();
+		defaultApp =g_strdup_printf("%s %%s", editor);
+		g_free(editor);
+	    }
+	}
+	return defaultApp;
+    }
+private:
+
+    static void 
+    setMimetypeDefault(const gchar *path, const gchar *mimetype, const gchar *response){
+        
+        if (strchr(path, '.') && strlen(strchr(path, '.'))>1){
+            auto ext = strrchr(path,'.') + 1; 
+	    Settings<Type>::setSettingString("MimeTypeApplications", ext, response);
+            TRACE("*** saving %s --> response\n", ext, response);
+        } else {
+	    Settings<Type>::setSettingString("MimeTypeApplications", mimetype, response);
+            TRACE("*** saving %s --> response\n", mimetype, response);
+        }
+    }
+
+    static gchar *
+    getMpath(GList *pathList){
+        gboolean multiple = (g_list_length(pathList) > 1);
+        auto path =(const gchar *)pathList->data;
+        gchar *mpath = multiple?g_strdup(""):g_strdup(path);
+	if (multiple) {
+            for(auto l = pathList; l && l->data; l = l->next) {
+                auto path  = (const gchar *)l->data;
+                TRACE("multiple path: %s\n", path);
+                auto g = g_strconcat(mpath, " ", path, NULL);
+                g_free(mpath);
+                mpath = g;
+            }
+            TRACE("composite path: %s\n", mpath);
+        } 
+	return mpath;
+    }
+    static gchar *
+    getResponseLabel(const gchar *mpath, const gchar *mimetype){
+	return g_strdup_printf("<b><span size=\"larger\" color=\"blue\">%s</span></b>\n<span color=\"#880000\">(%s)</span>", 
+		!mimetype?"":mpath, 
+		!mimetype?_("You have selected multiple files or folders"):mimetype);
+    }
+    static void 
+    toggleTerminal (GtkToggleButton *togglebutton, gpointer data){
+	if (!data) return;
+	const gchar *app = gtk_entry_get_text(GTK_ENTRY(data));
+	// Hard coded exceptions:
+	if (Run<Type>::fixedInTerminal(app)) {
+	    gtk_toggle_button_set_active(togglebutton, TRUE);
+	    return;
+	}
+	
+	// if not valid command, do nothing 
+	if (!Run<Type>::isValidCommand(app)) return;
+	// Valid command, continue. Get basename 
+	gint value;
+	if (gtk_toggle_button_get_active(togglebutton)) value = 1; else value = 0;
+	gchar *a = Run<Type>::baseCommand(app);
+	Settings<Type>::setSettingInteger("Terminal", a, value);
+	g_free(a);
+    }
+   
+    static void
+    comboChanged (GtkComboBox *combo, gpointer data){
+        auto comboResponse = (ComboResponse<Type> *)data;
+	auto checkButton = GTK_TOGGLE_BUTTON(comboResponse->checkButton());
+        auto entry = comboResponse->comboEntry();
+	const gchar *text = gtk_entry_get_text(entry);
+	gtk_toggle_button_set_active(checkButton, Run<Type>::runInTerminal(text));
+    }
+
+    static void
+    entryKeyRelease (GtkWidget *widget, GdkEvent  *event, gpointer data){
+        auto entryResponse = (EntryResponse<Type> *)data;
+	auto checkButton = GTK_TOGGLE_BUTTON(entryResponse->checkButton());
+        auto entry = GTK_ENTRY(widget);
+	const gchar *text = gtk_entry_get_text(entry);
+	gtk_toggle_button_set_active(checkButton, Run<Type>::runInTerminal(text));
+    }
    
     
 };
