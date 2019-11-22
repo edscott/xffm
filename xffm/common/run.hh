@@ -172,7 +172,7 @@ public:
 #if 0       
         Print<Type>::print(textview, "Green", g_strdup_printf("%d:%s\n", grandchild, command));
 #else
-        Print<Type>::print_icon(textview, "greenball", "green", g_strdup_printf("%d:%s\n", grandchild, command));
+        if (textview) Print<Type>::print_icon(textview, "greenball", "green", g_strdup_printf("%d:%s\n", grandchild, command));
 #endif
         push_hash(grandchild, g_strdup(command));
         g_free(command);
@@ -222,7 +222,8 @@ public:
         }
         if(!g_shell_parse_argv (ncommand, &argc, &argv, &error)) {
             auto msg = g_strcompress (error->message);
-            Print<Type>::print_error(textview, g_strdup_printf("%s: %s\n", msg, ncommand));
+            if (textview) Print<Type>::print_error(textview, g_strdup_printf("%s: %s\n", msg, ncommand));
+            else DBG("%s: %s\n", msg, ncommand);
             g_free(ncommand);
             g_error_free (error);
             g_free (msg);
@@ -641,27 +642,78 @@ public:
         g_free (path);
         return retval;
     }
+    
+    static gchar *getRunCommand(GtkWindow *parent, const gchar *path){
+        TRACE("runWith: path = %s\n", path);
+	auto displayPath = Util<Type>::valid_utf_pathstring(path);
+	auto markup = 
+	    g_strdup_printf("<span color=\"blue\" size=\"larger\"><b>%s</b></span>\n<span color=\"red\">(%s)</span>", displayPath, 
+		_("Executable"));  
+	g_free(displayPath);
+	
+        auto entryResponse = new(EntryResponse<Type>)(GTK_WINDOW(parent), _("Run Executable..."), "system-run");
+        entryResponse->setResponseLabel(markup);
+        g_free(markup);
 
-    static gchar *getRunWithCommand(GtkWindow *parent, GList *pathList, const gchar *wd){
+        entryResponse->setCheckButton(_("Run in Terminal"));
+        entryResponse->setCheckButton(Run<Type>::runInTerminal(path));
+
+        entryResponse->setEntryLabel(_("Arguments for the Command"));
+        // get last used arguments...
+        entryResponse->setEntryDefault("");
+        
+        entryResponse->setCheckButtonEntryCallback((void *)toggleTerminalRun, (void *)path); 
+        auto response = entryResponse->runResponse();
+
+
+	if (!response) return NULL;
+	// Is the terminal flag set?
+	gchar *command ;
+	if (runInTerminal(path)){
+	    command = mkTerminalLine(path, response);
+	} else {
+	    command = mkCommandLine(path, response);
+	}
+        g_free(response);
+        return command;
+    }
+
+    static gchar *getOpenWithCommand(GtkWindow *parent, GList *pathList, const gchar *wd){
         if (!pathList || g_list_length(pathList)==0) return NULL;
         gboolean multiple = (g_list_length(pathList) > 1);
-        auto path  = (const gchar *)pathList->data;
+        const gchar *path ;
+        const gchar *pathExt ;
+        gchar *mimetype;
+	const gchar **apps;
+        gchar *defaultApp;
+	gchar *textApp = NULL;
 
-        gchar *mimetype = Mime<Type>::mimeType(path);
-        gchar *defaultApp = defaultExtApp(path);
+       
+        for (auto l= pathList; l && l->data; l=l->next){
+            path  = (const gchar *)l->data;
+            auto fileInfo = Util<Type>::fileInfo(path);	
+	    textApp = defaultTextApp(fileInfo);
+            if (textApp && strlen(textApp)) break;
+        }
+
+        for (auto l= pathList; l && l->data; l=l->next){
+            pathExt  = (const gchar *)l->data;
+            defaultApp = defaultExtApp(pathExt);
+            if (defaultApp && strlen(defaultApp)) break;
+        }
+
+        for (auto l= pathList; l && l->data; l=l->next){
+            path  = (const gchar *)l->data;
+            mimetype = Mime<Type>::mimeType(path);
+	    apps = MimeApplication<Type>::locate_apps(mimetype);
+            if (apps) break;
+        }
+        
+
         gchar *mpath = getMpath(pathList);
         gchar *responseLabel = getResponseLabel(mpath, multiple?NULL:mimetype);
         gchar *response = NULL;
-	gchar *textApp = NULL;
 	gchar *command = NULL;
-
-	const gchar **apps = MimeApplication<Type>::locate_apps(mimetype);
-
-        if (!multiple) {
-            auto fileInfo = Util<Type>::fileInfo(path);	
-	    textApp = defaultTextApp(fileInfo);
-	    g_free(fileInfo);
-        }
 
         auto appCount = 0;
         if (apps && apps[0]) {
@@ -673,7 +725,7 @@ public:
         TRACE("appcount=%d\n",appCount);
 
         if (appCount <= 1) {
-            auto entryResponse = new(EntryResponse<Type>)(GTK_WINDOW(mainWindow), _("Open with"), "document-open");
+            auto entryResponse = new(EntryResponse<Type>)(GTK_WINDOW(parent), _("Open with"), "document-open");
             entryResponse->setResponseLabel(responseLabel);
 
             entryResponse->setCheckButton(_("Run in Terminal"));
@@ -689,7 +741,7 @@ public:
             entryResponse->setEntryCallback((void *)entryKeyRelease); 
             response = entryResponse->runResponse();
         } else {
-            auto comboResponse = new(ComboResponse<Type>)(GTK_WINDOW(mainWindow), _("Open with"), "document-open");
+            auto comboResponse = new(ComboResponse<Type>)(GTK_WINDOW(parent), _("Open with"), "document-open");
             comboResponse->setResponseLabel(responseLabel);
 
             comboResponse->setCheckButton(_("Run in Terminal"));
@@ -830,6 +882,22 @@ private:
 		!mimetype?"":mpath, 
 		!mimetype?_("You have selected multiple files or folders"):mimetype);
     }
+    
+    static void 
+    toggleTerminalRun (GtkToggleButton *togglebutton, gpointer data){
+	if (!data) {
+	    ERROR("toggleTerminalRun: data not set to path\n");
+	    return;
+	}
+	auto path = (const gchar *)data;
+	TRACE("runPath = %s\n", path);
+	gint value;
+	if (gtk_toggle_button_get_active(togglebutton)) value = 1; else value = 0;
+	gchar *a = Run<Type>::baseCommand(path);
+	Settings<Type>::setSettingInteger("Terminal", a, value);
+	g_free(a);
+    }
+
     static void 
     toggleTerminal (GtkToggleButton *togglebutton, gpointer data){
 	if (!data) return;

@@ -94,7 +94,8 @@ public:
         TreeView<Type>::appendColumnText(treeView, _("Path"), 1);
        
         auto selection = gtk_tree_view_get_selection (treeView);
-        gtk_tree_selection_set_mode (selection,  GTK_SELECTION_MULTIPLE);
+        //gtk_tree_selection_set_mode (selection,  GTK_SELECTION_SINGLE);//
+        gtk_tree_selection_set_mode (selection,  GTK_SELECTION_MULTIPLE);//
         gtk_tree_view_set_rubber_banding (treeView, TRUE);        
         gtk_container_add (GTK_CONTAINER(scrolledWindow), GTK_WIDGET(treeView));
 
@@ -104,12 +105,13 @@ public:
         g_object_set_data(G_OBJECT(dialog), "treeView", treeView);
         g_object_set_data(G_OBJECT(dialog), "model", model);
        
-        g_signal_connect (treeView, "row-activated", 
-            G_CALLBACK (activate), 
-            (void *)model);
+
 
         auto dnd = new (DnD<double>)(GTK_WIDGET(dialog), treeView, 1, 0);
         g_object_set_data(G_OBJECT(dialog), "dnd", dnd);
+        g_signal_connect (treeView, "row-activated", 
+            G_CALLBACK (activate), 
+            (void *)dnd);
         gtk_widget_show_all (GTK_WIDGET(dialog));
     }
 private:
@@ -119,6 +121,8 @@ private:
                GtkTreeViewColumn *column,
                gpointer           data)
     {
+        auto object = (DnD<double> *)data;
+        object->cancelDragState();
         // Get activated path.
         auto treeModel = gtk_tree_view_get_model(treeView);
 
@@ -137,7 +141,26 @@ private:
             TRACE("base-signals:activate():cannot load %s\n", path);
         }*/
         DBG("path is %s\n", path);
+        gchar *wd = g_path_get_dirname(path);
+        GList *pathList = g_list_prepend(NULL, path);
+        gchar *command = Run<Type>::getOpenWithCommand(findDialog, pathList, wd);
+
+        GError *error = NULL;
+        gint argc;
+        gchar **argv= NULL; 
+        if(!g_shell_parse_argv (command, &argc, &argv, &error)) {
+            auto msg = g_strcompress (error->message);
+            DBG("%s: %s\n", msg, command);
+            g_error_free (error);
+            g_free (msg);
+        } else {
+            Run<Type>::thread_runReap(NULL, (const gchar**)argv, NULL, NULL, NULL);
+        }
+
+        g_strfreev(argv);
 	g_free(path);
+	g_free(wd);
+        g_list_free(pathList);
     }
     static void
     setUpSignals(GObject *dialog){

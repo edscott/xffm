@@ -309,7 +309,9 @@ public:
         /* show response_ and return */
 	gtk_window_set_position(GTK_WINDOW(response_), GTK_WIN_POS_CENTER_ON_PARENT);
 	gtk_widget_show (GTK_WIDGET(response_));
-        gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
+        if (mainWindow) gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
+        Dialogs<Type>::placeDialog(GTK_WINDOW(response_));
+        
             
         if (timeout) gtk_widget_show(GTK_WIDGET(timeoutProgress_));
         g_timeout_add(500, EntryResponse<Type>::updateProgress, (void *)this);
@@ -318,7 +320,7 @@ public:
 	gint response  = gtk_dialog_run(GTK_DIALOG(response_));
 
         gtk_widget_hide(GTK_WIDGET(response_));
-        gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
+        if (mainWindow) gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
 	while (gtk_events_pending())gtk_main_iteration();
         return response;
     }

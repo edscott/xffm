@@ -975,40 +975,13 @@ public:
         g_free(response);
     }
 
+
     static void
     runWith(GtkMenuItem *menuItem, gpointer data){
 	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
-        TRACE("runWith: path = %s\n", path);
-	auto displayPath = util_c::valid_utf_pathstring(path);
-	auto markup = 
-	    g_strdup_printf("<span color=\"blue\" size=\"larger\"><b>%s</b></span>\n<span color=\"red\">(%s)</span>", displayPath, 
-		_("Executable"));  
-	g_free(displayPath);
-	
-        auto entryResponse = new(EntryResponse<Type>)(GTK_WINDOW(mainWindow), _("Run Executable..."), "system-run");
-        entryResponse->setResponseLabel(markup);
-        g_free(markup);
+        gchar *command = Run<Type>::getRunCommand(mainWindow, path);
+        if (not command) return;
 
-        entryResponse->setCheckButton(_("Run in Terminal"));
-        entryResponse->setCheckButton(Run<Type>::runInTerminal(path));
-
-        entryResponse->setEntryLabel(_("Arguments for the Command"));
-        // get last used arguments...
-        entryResponse->setEntryDefault("");
-        
-        entryResponse->setCheckButtonEntryCallback((void *)toggleTerminalRun, (void *)path); 
-        auto response = entryResponse->runResponse();
-
-
-	if (!response) return;
-	// Is the terminal flag set?
-	gchar *command ;
-	if (Run<Type>::runInTerminal(path)){
-	    command = Run<Type>::mkTerminalLine(path, response);
-	} else {
-	    command = Run<Type>::mkCommandLine(path, response);
-	}
-        g_free(response);
 	// get view
 	auto view =  (View<Type> *)g_object_get_data(G_OBJECT(data), "view");
 	//auto baseModel =  (BaseModel<Type> *)g_object_get_data(G_OBJECT(data), "baseModel");
@@ -1246,7 +1219,7 @@ public:
 	auto page = view->page();
 	const gchar *wd = page->workDir();
 	if (!wd) wd = g_get_home_dir();
-        auto command = Run<Type>::getRunWithCommand(mainWindow, pathList, wd);
+        auto command = Run<Type>::getOpenWithCommand(mainWindow, pathList, wd);
 
         for(auto l = pathList; l && l->data; l = l->next) { g_free(l->data);}
         g_list_free(pathList);
@@ -1310,23 +1283,6 @@ public:
         gtk_entry_completion_complete (completion);
         return FALSE;
     }
-private:
-    
-    static void 
-    toggleTerminalRun (GtkToggleButton *togglebutton, gpointer data){
-	if (!data) {
-	    ERROR("toggleTerminalRun: data not set to path\n");
-	    return;
-	}
-	auto path = (const gchar *)data;
-	TRACE("runPath = %s\n", path);
-	gint value;
-	if (gtk_toggle_button_get_active(togglebutton)) value = 1; else value = 0;
-	gchar *a = Run<Type>::baseCommand(path);
-	Settings<Type>::setSettingInteger("Terminal", a, value);
-	g_free(a);
-    }
-
 private:
 
 

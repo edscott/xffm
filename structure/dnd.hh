@@ -17,6 +17,7 @@ class DnD {
     gint pathColumn_;
     GtkMenu *menu_;
     gboolean ignoreRelease_;
+    GdkDragContext *context_;
 
     void setUpSignals(void){
         // source widget
@@ -59,8 +60,8 @@ public:
     void setMenu(GtkMenu *menu){menu_ = menu;}
     GtkMenu *menu(void){return menu_;}
 
-
     DnD(GtkWidget *window, GtkTreeView *treeView, gint pathColumn, gint flag) {
+        context_ = NULL;
         dragOn_ = FALSE;
 	ignoreRelease_ = FALSE;
 	menu_ = NULL;
@@ -99,12 +100,17 @@ public:
     gint pathColumn(void){ return pathColumn_;}
     GtkWidget *window(void){ return window_;}
     gboolean ignoreRelease(void){return ignoreRelease_;}
+    void setContext(GdkDragContext *context){context_ = context;} 
 
 
     void cancelDragState(void){
         setButtonPress(-1,-1);
         setDragState(FALSE);
     }
+    void dragCancel(void){
+        if (context_) gtk_drag_cancel (context_);
+    }
+
 
 //#define NUM_TARGETS (sizeof(targetTable)/sizeof(GtkTargetEntry))
 
@@ -225,6 +231,10 @@ public:
                    gpointer   data)
     {
         auto object = (DnD<Type> *)data;
+	auto selection = gtk_tree_view_get_selection (object->treeView());
+        gtk_tree_selection_set_select_function
+                               (selection,
+                                selectOn, NULL, NULL);
 	
         if (event->button == 3){
 	    return FALSE;
@@ -242,7 +252,6 @@ public:
                     return FALSE;
                 }*/
 		GtkTreeIter iter;
-		auto selection = gtk_tree_view_get_selection (object->treeView());
 		gtk_tree_model_get_iter(object->treeModel(), &iter, tpath);
 		if (!gtk_tree_selection_iter_is_selected (selection, &iter)){
 		    // if not selected, 
@@ -285,6 +294,10 @@ public:
     {
         auto object = (DnD<Type> *)data;
         TRACE("buttonRelease\n");
+	auto selection = gtk_tree_view_get_selection (object->treeView());
+        gtk_tree_selection_set_select_function
+                               (selection,
+                                selectOn, NULL, NULL);
         if (object->ignoreRelease()){
             object->setIgnoreRelease(FALSE);
             return FALSE;
@@ -294,35 +307,28 @@ public:
 	    GtkTreePath *tpath;
 	    //Cancel DnD prequel.
             object->cancelDragState();
-
-	    /*if (isTreeView){
-		auto selection = 
-		    gtk_tree_view_get_selection (view->treeView());
-		gtk_tree_view_get_path_at_pos (view->treeView(), 
-				   event->x, event->y, &tpath, NULL,  NULL, NULL);
-		if (tpath) {
-		    // unselect everything
-		    gtk_tree_selection_unselect_all (selection);
-		    // reselect item to activate
-		    gtk_tree_selection_select_path (selection, tpath);
-		}
-	    } 
-	    if (tpath) {
-		TRACE("Here we do a call to activate item.\n");
-		for (auto popup=popUpArray; popup && *popup; popup++){
-		    g_object_set_data(G_OBJECT(*popup), "baseModel", (void *)view);
-		    g_object_set_data(G_OBJECT(*popup), "view", (void *)view);
-		}
-		BaseSignals<Type>::activate(tpath, data);
-		gtk_tree_path_free(tpath);
-	    }*/
 	    return TRUE;
         }
 
         object->cancelDragState();
         return FALSE;
     }
-
+    static gboolean
+    selectOn (GtkTreeSelection *selection,
+                             GtkTreeModel *model,
+                             GtkTreePath *path,
+                             gboolean path_currently_selected,
+                             gpointer data){
+        return TRUE;
+    }
+    static gboolean
+    selectOff (GtkTreeSelection *selection,
+                             GtkTreeModel *model,
+                             GtkTreePath *path,
+                             gboolean path_currently_selected,
+                             gpointer data){
+        return FALSE;
+    }
     static gboolean
     motionNotifyEvent (GtkWidget *widget,
                    GdkEvent  *ev,
@@ -332,6 +338,10 @@ public:
         auto event = (GdkEventButton  *)ev;
         auto object = (DnD<Type> *)data;
 
+	auto selection = gtk_tree_view_get_selection (object->treeView());
+        gtk_tree_selection_set_select_function
+                               (selection,
+                                selectOff, NULL, NULL);
         if (object->buttonPressed()){
             auto x = object->buttonPressX();
             auto y = object->buttonPressY();
@@ -406,6 +416,7 @@ public:
     static void
     dragBegin (GtkWidget * widget, GdkDragContext * context, gpointer data) {
         auto object = (DnD<Type> *)data;
+        object->setContext(context);
         TRACE("signal_drag_begin\n");
         auto treeModel = GTK_TREE_MODEL(object->treeStore());
         auto selection = gtk_tree_view_get_selection (object->treeView());

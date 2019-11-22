@@ -902,7 +902,7 @@ public:
 	}
 
 	GdkPixbuf *pixbuf = Pixbuf<Type>::get_pixbuf(dragIcon, -24);
-	gtk_drag_set_icon_pixbuf (context, pixbuf,1,24);
+	if (GDK_IS_DRAG_CONTEXT(context)) gtk_drag_set_icon_pixbuf (context, pixbuf,1,24);
             
         gboolean folderDND = FALSE;
         auto viewDragY = dragY - dragOffset(widget);

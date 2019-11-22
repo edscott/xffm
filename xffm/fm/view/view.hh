@@ -74,7 +74,7 @@ public:
     
     gboolean loadModel(const gchar *path){
 	// This sets viewType
-        DBG("loadModel(%s)\n", path);
+        TRACE("loadModel(%s)\n", path);
 	return loadModel(path, this);
     }
     gboolean loadModel(const gchar *path, View<Type> *view){
