@@ -1,0 +1,3 @@
+Version 0.93: Enabled fstab and ecryptfs functionality (Linux)
+Version 0.92: bug fixes, bookmarks now using gtk3 compatibility
+Version 0.91: initial release
