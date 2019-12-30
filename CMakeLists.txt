@@ -6,6 +6,8 @@ set(PREFIX_BIN /usr/local/bin)
 # Version info
 set(xffm_VERSION_MAJOR 0)
 set(xffm_VERSION_MINOR 94)
+set(THREAD_LIBRARIES "-lpthread -lrt")
+
 
 # work in alpha phase...
 #set(CMAKE_CXX_FLAGS "-ggdb")

@@ -13,9 +13,8 @@ include_directories(
 target_link_libraries(xffm 
     ${GTK3_LIBRARIES}
     ${X11_LIBRARIES}
-    -lpthread -lrt 
     ${LIBMAGIC_LIBRARIES}
-    ${FOO_LIBRARIES})
+    ${THREAD_LIBRARIES})
 
 install(TARGETS xffm RUNTIME DESTINATION bin)
 INSTALL(CODE "execute_process( \
