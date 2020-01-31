@@ -95,6 +95,13 @@ class FstabView: public FstabPopUp<Type> {
     using pixbuf_c = Pixbuf<double>;
     using util_c = Util<double>;
 public:
+    // mount from fstab data or directly
+    static gboolean
+    mountPath (View<Type> *view, const gchar *path, const gchar *mountPoint) 
+    {
+        DBG(" BSD pending... mount from fstab data or directly  \n");
+        return FALSE;
+    }
     static void
     loadModel (View<Type> *view)
     {
@@ -110,7 +117,7 @@ public:
         //gtk_icon_view_unset_model_drag_dest (iconView);
         gtk_icon_view_set_selection_mode (iconView,GTK_SELECTION_SINGLE); 
 
-		addAllItems(treeModel);
+        addAllItems(treeModel);
         return ;
     }
 
@@ -146,48 +153,118 @@ private:
 
     static void 
     addAllItems(GtkTreeModel *treeModel){
-		RootView<Type>::addXffmItem(treeModel);
-		addFsentItems(treeModel);
-        //addPartitionItems(treeModel);
-	}
+        DBG("addAllItems\n");
+	RootView<Type>::addXffmItem(treeModel);
+	addFsentItems(treeModel);
+        addPartitionItems(treeModel);
+    }
 
 	static void 
     addFsentItems (GtkTreeModel *treeModel) {
-		auto list = fsentList();
-		for (auto l=list; l && l->data; l=l->next){
-			DBG("BSD fstab item=%s\n", (const gchar *)l->data);
-		}
-		// clear list
-		clearFsentList(list);
+        DBG("addFsentItems\n");
+        auto list = fsentList();
+        for (auto l=list; l && l->data; l=l->next){
+            DBG("BSD fstab item=%s\n", (const gchar *)l->data);
+            addFsentItem(treeModel)
+        }
+        // clear list
+        clearFsentList(list);
         return;
     }
 
-	static void
-	clearFsentList(GSList *list){
-		for (auto l=list; l && l->data; l=l->next){
-			g_free(l->data);
-		}
-		g_slist_free(list);
-	}
+    static void
+    addFsentItem(GtkTreeModel *treeModel, const gchar *path){
+        if (!path){
+            ERROR("fstab/view.hh::addPartition: path cannot be null\n");
+            return;
+        }
+ 	GtkTreeIter iter;
+        gchar *basename = g_path_get_basename(path);
+        gchar *mntDir = getMntDir(path);
+        auto label = e2Label(basename);
 
-	static GSList *
-	fsentList (void) {
-		GSList *list=NULL;
-		pthread_mutex_lock(&fsmutex);
-		if(!setfsent ()) {
-			pthread_mutex_unlock(&fsmutex);
-			return NULL;
-		}
-		GSList *elements = NULL;
-		struct fstab *fs;
-		for(fs = getfsent (); fs != NULL; fs = getfsent ()) {
-			if (!g_path_is_absolute(fs->fs_file)) continue;
-			TRACE("elements_list: %s\n", fs->fs_file);
-			elements = g_slist_prepend(elements, g_strdup(fs->fs_file));
-		}
-		endfsent ();
-		return elements;
-	}
+
+        gboolean mounted = isMounted(path);
+        gchar *text;
+        auto fstype = fsType(path);        
+        gchar *fileInfo = util_c::fileInfo(path);
+ 	//text = g_strdup_printf("<span size=\"large\">%s (%s)</span>\n<span color=\"red\">%s</span>\n%s %s\n%s",
+ 	text = g_strdup_printf("** %s (%s):\n%s\n%s %s\n%s",
+			basename, 
+                        label?label:_("No Label"),
+                        fstype?fstype:_("There is no file system available (unformatted)"),
+                        _("Mount point:"), mounted?mntDir:_("Not mounted"),
+                        fileInfo);
+        g_free(mntDir);
+        g_free(fstype);
+        if (label){
+            gchar *g = g_strdup_printf("%s\n(%s)", basename, label);
+            g_free(label);
+            label = g;
+           g_free(basename);
+        } else {
+           label = basename;
+        }
+
+        auto utf_name = util_c::utf_string(label);
+        g_free(label);
+
+        auto icon_name = (mounted)?"drive-harddisk/NW/greenball/3.0/180":
+            "drive-harddisk/NW/grayball/3.0/180";
+        auto highlight_name = "drive-harddisk/NW/blueball/3.0/225";
+        auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
+        auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
+        auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
+        //auto uuid = partition2uuid(path);
+        auto id = partition2Id(path);
+        gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
+        gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
+                DISPLAY_NAME, utf_name, // path-basename or label
+                ICON_NAME, icon_name,
+                PATH, path, // absolute
+                TREEVIEW_PIXBUF, treeViewPixbuf, 
+                DISPLAY_PIXBUF, normal_pixbuf,
+                NORMAL_PIXBUF, normal_pixbuf,
+                HIGHLIGHT_PIXBUF, highlight_pixbuf,
+                TOOLTIP_TEXT,text,
+                DISK_ID, id,
+                -1);
+        g_free(utf_name);
+        // fstype is constant
+        g_free(id);
+        // icon_name is constant
+        // path is constant
+        // pixbufs belong to pixbuf hash
+        g_free(text);
+    }
+
+    static void
+    clearFsentList(GSList *list){
+        for (auto l=list; l && l->data; l=l->next){
+                g_free(l->data);
+        }
+        g_slist_free(list);
+    }
+
+    static GSList *
+    fsentList (void) {
+        // with ZFS, this returns NULL.
+        GSList *list=NULL;
+        pthread_mutex_lock(&fsmutex);
+        if(!setfsent ()) {
+            pthread_mutex_unlock(&fsmutex);
+            return NULL;
+        }
+        GSList *elements = NULL;
+        struct fstab *fs;
+        for(fs = getfsent (); fs != NULL; fs = getfsent ()) {
+            if (!g_path_is_absolute(fs->fs_file)) continue;
+            DBG("elements_list: %s\n", fs->fs_file);
+            elements = g_slist_prepend(elements, g_strdup(fs->fs_file));
+        }
+        endfsent ();
+        return elements;
+    }
 
 
 
@@ -681,15 +758,13 @@ public:
 
     static void 
     addAllItems(GtkTreeModel *treeModel){
-		RootView<Type>::addXffmItem(treeModel);
-		addDisksItem(treeModel);
-		//addNFSItem(treeModel);
-		//addEcryptFSItem(treeModel);
-		//addSSHItem(treeModel);
-		//addCIFSItem(treeModel);
+	RootView<Type>::addXffmItem(treeModel);
+	addDisksItem(treeModel);
+	//addNFSItem(treeModel);
+	//addEcryptFSItem(treeModel);
+	//addSSHItem(treeModel);
+	//addCIFSItem(treeModel);
         addPartitionItems(treeModel);
-
-
     }
 
     static gchar *

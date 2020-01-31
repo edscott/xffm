@@ -29,7 +29,9 @@ public:
 	addHomeItem(treeModel);
 #ifdef ENABLE_FSTAB_MODULE
 	addFstabItem(treeModel);
+#ifdef ENABLE_EFS_MODULE
         addEfsItem(treeModel);
+#endif
 #endif
  #ifdef ENABLE_PKG_MODULE
 	PkgModel<Type>::addPkgItem(treeModel);
