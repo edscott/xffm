@@ -1504,6 +1504,54 @@ private:
 	return g_strdup(line);
     }
 
+    static gchar *
+    partition2Id(const gchar *partition){ // disk partition only
+       if (!g_file_test("/dev/disk/by-id", G_FILE_TEST_IS_DIR)){
+           return g_strdup("partition2Id(): not -e /dev/disk/by-id ");
+       }
+        
+        gchar *base = g_path_get_basename(partition);
+
+        const gchar *command = "ls -l /dev/disk/by-id";
+	FILE *pipe = popen (command, "r");
+	if(pipe == NULL) {
+	    ERROR("fstab/view.hh::Cannot pipe from %s\n", command);
+	    return NULL;
+	}
+        gchar line[256];
+        memset(line, 0, 256);
+        gchar *id = NULL;
+	while (fgets (line, 255, pipe) && !feof(pipe)) {
+            if (!strstr(line, base)) {
+                TRACE("%s not in %s\n", base, line);
+                continue;
+            }
+            gchar **f = g_strsplit(line, "->", 2);
+            if (!strstr(f[1], base)){
+                TRACE("%s not in %s\n", base, f[1]); 
+                g_strfreev(f);
+                continue;
+            }
+            g_strstrip(f[0]);
+            if (!strrchr(f[0], ' ')){
+                ERROR("fstab/view.hh::partition2Id(): no space-chr in id\n");
+                continue;
+            }
+            id = g_path_get_basename(strrchr(f[0], ' ')+1);
+            g_strfreev(f);
+            break;
+	}
+        pclose (pipe);
+        TRACE("partition2Id() %s->%s\n", partition, id);
+	return id;
+    }
+public:
+    static gboolean
+    isSelectable(GtkTreeModel *treeModel, GtkTreeIter *iter){
+        DBG("fstab isSelectable()...\n");
+        return TRUE;
+    }
+
     static void
     addPartition(GtkTreeModel *treeModel, const gchar *path){
         if (!path){
@@ -1568,54 +1616,6 @@ private:
         // path is constant
         // pixbufs belong to pixbuf hash
         g_free(text);
-    }
-
-    static gchar *
-    partition2Id(const gchar *partition){ // disk partition only
-       if (!g_file_test("/dev/disk/by-id", G_FILE_TEST_IS_DIR)){
-           return g_strdup("partition2Id(): not -e /dev/disk/by-id ");
-       }
-        
-        gchar *base = g_path_get_basename(partition);
-
-        const gchar *command = "ls -l /dev/disk/by-id";
-	FILE *pipe = popen (command, "r");
-	if(pipe == NULL) {
-	    ERROR("fstab/view.hh::Cannot pipe from %s\n", command);
-	    return NULL;
-	}
-        gchar line[256];
-        memset(line, 0, 256);
-        gchar *id = NULL;
-	while (fgets (line, 255, pipe) && !feof(pipe)) {
-            if (!strstr(line, base)) {
-                TRACE("%s not in %s\n", base, line);
-                continue;
-            }
-            gchar **f = g_strsplit(line, "->", 2);
-            if (!strstr(f[1], base)){
-                TRACE("%s not in %s\n", base, f[1]); 
-                g_strfreev(f);
-                continue;
-            }
-            g_strstrip(f[0]);
-            if (!strrchr(f[0], ' ')){
-                ERROR("fstab/view.hh::partition2Id(): no space-chr in id\n");
-                continue;
-            }
-            id = g_path_get_basename(strrchr(f[0], ' ')+1);
-            g_strfreev(f);
-            break;
-	}
-        pclose (pipe);
-        TRACE("partition2Id() %s->%s\n", partition, id);
-	return id;
-    }
-public:
-    static gboolean
-    isSelectable(GtkTreeModel *treeModel, GtkTreeIter *iter){
-        DBG("fstab isSelectable()...\n");
-        return TRUE;
     }
     
 };
