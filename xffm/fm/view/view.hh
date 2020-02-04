@@ -254,8 +254,11 @@ public:
             case (ROOTVIEW_TYPE):
                 return RootView<Type>::isSelectable(this->treeModel(),&iter);        
                 break;
+            case (FSTAB_TYPE):
+                return FstabView<Type>::isSelectable(this->treeModel(),&iter);        
+                break;
             default:
-                TRACE("View::selectables(): No items are selectable for viewType: %d ()\n", this->viewType());
+                DBG("View::selectables(): No items are selectable for viewType: %d ()\n", this->viewType());
         }
         return FALSE;
     }

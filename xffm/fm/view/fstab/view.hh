@@ -44,7 +44,6 @@ msgid "NFS remote directory"
 
 
 #ifdef FREEBSD_FOUND
-// BSD FIXME conditionals...
 # include <fstab.h>
 # include <sys/ucred.h>
 
@@ -83,17 +82,18 @@ msgid "NFS remote directory"
 namespace xf {
 template <class Type> class FstabPopUp;
 
-#ifdef FREEBSD_FOUND
 
 static pthread_mutex_t fsmutex = G_STATIC_MUTEX_INIT;
 static pthread_mutex_t mntmutex = PTHREAD_MUTEX_INITIALIZER;
-static GMutex *infomutex=NULL;
+//static GMutex *infomutex=NULL;
 
 
 template <class Type>
 class FstabView: public FstabPopUp<Type> {
     using pixbuf_c = Pixbuf<double>;
     using util_c = Util<double>;
+
+#ifdef FREEBSD_FOUND
 public:
     // mount from fstab data or directly
     static gboolean
@@ -155,17 +155,53 @@ private:
     addAllItems(GtkTreeModel *treeModel){
         DBG("addAllItems\n");
 	RootView<Type>::addXffmItem(treeModel);
-	addFsentItems(treeModel);
+	//addFsentItems(treeModel);
         addPartitionItems(treeModel);
     }
 
-	static void 
+    static GSList *
+    partitions_list (void) {
+        GSList *list=NULL;
+        pthread_mutex_lock(&fsmutex);
+
+        TRACE( "count partitions...\n");
+        DIR *directory;
+        struct dirent *d;
+        directory = opendir ("/dev");
+        if(!directory){
+            DBG("cannot open /dev for read...\n");
+            return 0;
+        }
+        while((d = readdir (directory)) != NULL) {
+            if( strncmp (d->d_name, "da", strlen("da")) &&
+                strncmp (d->d_name, "ad", strlen("ad"))) continue;
+            if(!strchr (d->d_name, 's') && !strchr (d->d_name, 'p')) continue;
+            DBG("gotcha: %s\n", d->d_name);
+            gchar *device = g_strdup_printf("/dev/%s", d->d_name);
+            list = g_slist_prepend(list, device); 
+        }
+        closedir (directory);
+        
+        pthread_mutex_unlock(&fsmutex);
+
+        return list;
+    }
+
+    static void
+    addPartitionItems(GtkTreeModel *treeModel){
+        auto list = partitions_list();
+        for (auto l=list; l&&l->data; l=l->next){
+            addPartition(treeModel, (const gchar *)l->data);
+        }
+    }
+
+    static void 
     addFsentItems (GtkTreeModel *treeModel) {
         DBG("addFsentItems\n");
         auto list = fsentList();
         for (auto l=list; l && l->data; l=l->next){
             DBG("BSD fstab item=%s\n", (const gchar *)l->data);
-            addFsentItem(treeModel)
+            addFsentItem(treeModel, (const gchar *)l->data);
         }
         // clear list
         clearFsentList(list);
@@ -675,17 +711,11 @@ private:
 
 #endif
 
-};
 
-#else
-    // XXX work in progress... this is Linux Version. 
-
+#else // not FreeBSD
+    // Linux Version. 
 
 
-template <class Type>
-class FstabView: public FstabPopUp<Type> {
-    using pixbuf_c = Pixbuf<double>;
-    using util_c = Util<double>;
 public:
 
     static FstabMonitor<Type> *
@@ -765,66 +795,6 @@ public:
 	//addSSHItem(treeModel);
 	//addCIFSItem(treeModel);
         addPartitionItems(treeModel);
-    }
-
-    static gchar *
-    fsType(const gchar *partitionPath){
-        gchar *command = g_strdup_printf("lsblk -no FSTYPE %s", partitionPath);
-	FILE *pipe = popen (command, "r");
-	if(pipe == NULL) {
-	    ERROR("fstab/view.hh::Cannot pipe from %s\n", command);
-	    g_free(command);
-	    return NULL;
-	}
-	g_free(command);
-
-        gchar line[256];
-        memset(line, 0, 256);
-	while (fgets (line, 255, pipe) && !feof(pipe)) {
-	    if (strchr(line,'\n')) *strchr(line,'\n') = 0;
-	    if (strstr(line, "swap")) return NULL;
-	    if (strcmp(line, "")==0) return NULL;
-	    break;
-	}
-        pclose (pipe);
-	return g_strdup(line);
-    }
-
-    static gchar *
-    partition2Id(const gchar *partition){ // disk partition only
-        gchar *base = g_path_get_basename(partition);
-        const gchar *command = "ls -l /dev/disk/by-id";
-	FILE *pipe = popen (command, "r");
-	if(pipe == NULL) {
-	    ERROR("fstab/view.hh::Cannot pipe from %s\n", command);
-	    return NULL;
-	}
-        gchar line[256];
-        memset(line, 0, 256);
-        gchar *id = NULL;
-	while (fgets (line, 255, pipe) && !feof(pipe)) {
-            if (!strstr(line, base)) {
-                TRACE("%s not in %s\n", base, line);
-                continue;
-            }
-            gchar **f = g_strsplit(line, "->", 2);
-            if (!strstr(f[1], base)){
-                TRACE("%s not in %s\n", base, f[1]); 
-                g_strfreev(f);
-                continue;
-            }
-            g_strstrip(f[0]);
-            if (!strrchr(f[0], ' ')){
-                ERROR("fstab/view.hh::partition2Id(): no space-chr in id\n");
-                continue;
-            }
-            id = g_path_get_basename(strrchr(f[0], ' ')+1);
-            g_strfreev(f);
-            break;
-	}
-        pclose (pipe);
-        TRACE("partition2Id() %s->%s\n", partition, id);
-	return id;
     }
 
     static gchar *
@@ -973,72 +943,6 @@ public:
         pclose (pipe);
         g_free(partition);
 	return uuid;
-    }
-
-    static void
-    addPartition(GtkTreeModel *treeModel, const gchar *path){
-        if (!path){
-            ERROR("fstab/view.hh::addPartition: path cannot be null\n");
-            return;
-        }
- 	GtkTreeIter iter;
-        gchar *basename = g_path_get_basename(path);
-        gchar *mntDir = getMntDir(path);
-        auto label = e2Label(basename);
-
-
-        gboolean mounted = isMounted(path);
-        gchar *text;
-        auto fstype = fsType(path);        
-        gchar *fileInfo = util_c::fileInfo(path);
- 	//text = g_strdup_printf("<span size=\"large\">%s (%s)</span>\n<span color=\"red\">%s</span>\n%s %s\n%s",
- 	text = g_strdup_printf("** %s (%s):\n%s\n%s %s\n%s",
-			basename, 
-                        label?label:_("No Label"),
-                        fstype?fstype:_("There is no file system available (unformatted)"),
-                        _("Mount point:"), mounted?mntDir:_("Not mounted"),
-                        fileInfo);
-        g_free(mntDir);
-        g_free(fstype);
-        if (label){
-            gchar *g = g_strdup_printf("%s\n(%s)", basename, label);
-            g_free(label);
-            label = g;
-           g_free(basename);
-        } else {
-           label = basename;
-        }
-
-        auto utf_name = util_c::utf_string(label);
-        g_free(label);
-
-        auto icon_name = (mounted)?"drive-harddisk/NW/greenball/3.0/180":
-            "drive-harddisk/NW/grayball/3.0/180";
-        auto highlight_name = "drive-harddisk/NW/blueball/3.0/225";
-        auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
-        auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
-        auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
-        //auto uuid = partition2uuid(path);
-        auto id = partition2Id(path);
-        gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
-        gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
-                DISPLAY_NAME, utf_name, // path-basename or label
-                ICON_NAME, icon_name,
-                PATH, path, // absolute
-                TREEVIEW_PIXBUF, treeViewPixbuf, 
-                DISPLAY_PIXBUF, normal_pixbuf,
-                NORMAL_PIXBUF, normal_pixbuf,
-                HIGHLIGHT_PIXBUF, highlight_pixbuf,
-                TOOLTIP_TEXT,text,
-                DISK_ID, id,
-                -1);
-        g_free(utf_name);
-        // fstype is constant
-        g_free(id);
-        // icon_name is constant
-        // path is constant
-        // pixbufs belong to pixbuf hash
-        g_free(text);
     }
 
     static void // Linux
@@ -1411,7 +1315,7 @@ public:
         return result;
     }
 
-#else
+#else // not HAVE_MNTENT_H
     static guint
     getMntType (const gchar *path) {return 0;}
    static gchar *
@@ -1422,7 +1326,7 @@ public:
     mountTarget (const gchar *label) {return NULL;}    
     static gboolean
     isInFstab (const gchar *path) {return FALSE;}
-#endif
+#endif // HAVE_MNTENT_H
 
     static gboolean
     sudoMount(const gchar *mnt){
@@ -1570,9 +1474,151 @@ private:
 
         return 1;
     }
+#endif // Linux
 
+private:
+
+    static gchar *
+    fsType(const gchar *partitionPath){
+        auto lsblk = g_find_program_in_path("lsblk");
+        if (!lsblk) return NULL;
+        gchar *command = g_strdup_printf("%s -no FSTYPE %s", lsblk, partitionPath);
+        g_free(lsblk);
+	FILE *pipe = popen (command, "r");
+	if(pipe == NULL) {
+	    ERROR("fstab/view.hh::Cannot pipe from %s\n", command);
+	    g_free(command);
+	    return NULL;
+	}
+	g_free(command);
+
+        gchar line[256];
+        memset(line, 0, 256);
+	while (fgets (line, 255, pipe) && !feof(pipe)) {
+	    if (strchr(line,'\n')) *strchr(line,'\n') = 0;
+	    if (strstr(line, "swap")) return NULL;
+	    if (strcmp(line, "")==0) return NULL;
+	    break;
+	}
+        pclose (pipe);
+	return g_strdup(line);
+    }
+
+    static void
+    addPartition(GtkTreeModel *treeModel, const gchar *path){
+        if (!path){
+            ERROR("fstab/view.hh::addPartition: path cannot be null\n");
+            return;
+        }
+ 	GtkTreeIter iter;
+        gchar *basename = g_path_get_basename(path);
+        gchar *mntDir = getMntDir(path);
+        auto label = e2Label(basename);
+
+
+        gboolean mounted = isMounted(path);
+        gchar *text;
+        auto fstype = fsType(path);        
+        gchar *fileInfo = util_c::fileInfo(path);
+ 	//text = g_strdup_printf("<span size=\"large\">%s (%s)</span>\n<span color=\"red\">%s</span>\n%s %s\n%s",
+ 	text = g_strdup_printf("** %s (%s):\n%s\n%s %s\n%s",
+			basename, 
+                        label?label:_("No Label"),
+                        fstype?fstype:_("There is no file system available (unformatted)"),
+                        _("Mount point:"), mounted?mntDir:_("Not mounted"),
+                        fileInfo);
+        g_free(mntDir);
+        g_free(fstype);
+        if (label){
+            gchar *g = g_strdup_printf("%s\n(%s)", basename, label);
+            g_free(label);
+            label = g;
+           g_free(basename);
+        } else {
+           label = basename;
+        }
+
+        auto utf_name = util_c::utf_string(label);
+        g_free(label);
+
+        auto icon_name = (mounted)?"drive-harddisk/NW/greenball/3.0/180":
+            "drive-harddisk/NW/grayball/3.0/180";
+        auto highlight_name = "drive-harddisk/NW/blueball/3.0/225";
+        auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
+        auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
+        auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
+        //auto uuid = partition2uuid(path);
+        auto id = partition2Id(path);
+        gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
+        gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
+                DISPLAY_NAME, utf_name, // path-basename or label
+                ICON_NAME, icon_name,
+                PATH, path, // absolute
+                TREEVIEW_PIXBUF, treeViewPixbuf, 
+                DISPLAY_PIXBUF, normal_pixbuf,
+                NORMAL_PIXBUF, normal_pixbuf,
+                HIGHLIGHT_PIXBUF, highlight_pixbuf,
+                TOOLTIP_TEXT,text,
+                DISK_ID, id,
+                -1);
+        g_free(utf_name);
+        // fstype is constant
+        g_free(id);
+        // icon_name is constant
+        // path is constant
+        // pixbufs belong to pixbuf hash
+        g_free(text);
+    }
+
+    static gchar *
+    partition2Id(const gchar *partition){ // disk partition only
+       if (!g_file_test("/dev/disk/by-id", G_FILE_TEST_IS_DIR)){
+           return g_strdup("partition2Id(): not -e /dev/disk/by-id ");
+       }
+        
+        gchar *base = g_path_get_basename(partition);
+
+        const gchar *command = "ls -l /dev/disk/by-id";
+	FILE *pipe = popen (command, "r");
+	if(pipe == NULL) {
+	    ERROR("fstab/view.hh::Cannot pipe from %s\n", command);
+	    return NULL;
+	}
+        gchar line[256];
+        memset(line, 0, 256);
+        gchar *id = NULL;
+	while (fgets (line, 255, pipe) && !feof(pipe)) {
+            if (!strstr(line, base)) {
+                TRACE("%s not in %s\n", base, line);
+                continue;
+            }
+            gchar **f = g_strsplit(line, "->", 2);
+            if (!strstr(f[1], base)){
+                TRACE("%s not in %s\n", base, f[1]); 
+                g_strfreev(f);
+                continue;
+            }
+            g_strstrip(f[0]);
+            if (!strrchr(f[0], ' ')){
+                ERROR("fstab/view.hh::partition2Id(): no space-chr in id\n");
+                continue;
+            }
+            id = g_path_get_basename(strrchr(f[0], ' ')+1);
+            g_strfreev(f);
+            break;
+	}
+        pclose (pipe);
+        TRACE("partition2Id() %s->%s\n", partition, id);
+	return id;
+    }
+public:
+    static gboolean
+    isSelectable(GtkTreeModel *treeModel, GtkTreeIter *iter){
+        DBG("fstab isSelectable()...\n");
+        return TRUE;
+    }
+    
 };
-#endif
 }
 #endif
 #endif

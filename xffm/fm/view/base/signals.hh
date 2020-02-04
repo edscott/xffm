@@ -298,6 +298,7 @@ public:
 
     static void
     setPopupSelection(GdkEventButton  *event, gpointer data){
+        DBG("setPopupSelection\n");
 	auto view = (View<Type> *)data;
         if (SHIFT_MODE) {
 	    TRACE("SHIFT_MODE button 3\n");
