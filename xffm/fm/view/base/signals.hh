@@ -295,15 +295,49 @@ public:
     }
 
 
+    static GtkMenu *
+    setItemPath(View<Type> *view){
+        TRACE("Base::signals::button press event: button 3 should do popup, as well as longpress...\n");
+        gchar *itemPath = NULL;
+        GList *selectionList;
+	if (isTreeView) {
+	    auto selection = gtk_tree_view_get_selection (view->treeView());
+	    auto treeModel = view->treeModel();
+	    selectionList = gtk_tree_selection_get_selected_rows (selection, &treeModel);
+	} else {
+	    selectionList = gtk_icon_view_get_selected_items (view->iconView());
+	}
+        view->setSelectionList(selectionList);
+        if (selectionList && g_list_length(selectionList) == 1) {
+            GtkTreeIter iter;
+            gtk_tree_model_get_iter(view->treeModel(), &iter, 
+                    (GtkTreePath *)selectionList->data);
+            gtk_tree_model_get(view->treeModel(), &iter, PATH, &itemPath, -1);
+	}
+	//if (!path) path = g_strdup(view->path());
+        
+        TRACE("Base::signals::setItemPath: selected path is %s\n", itemPath);
 
-    static void
+        auto items = (g_list_length(selectionList) >0);
+        auto menu = configureMenu(view, items, itemPath?itemPath:view->path());
+	TRACE("menu is %p\n", menu);
+        g_object_set_data(G_OBJECT(menu),"view", (void *)view);
+	TRACE("g_object_set_data %p->%p\n", menu, view);
+        TRACE("**Base::signals::setItemPath: selected path is %s\n", itemPath);
+	Popup<Type>::setWidgetData(menu, "itemPath", itemPath?itemPath:view->path());
+
+	g_free(itemPath);
+        return menu; 
+    }
+
+    static GtkMenu *
     setPopupSelection(GdkEventButton  *event, gpointer data){
-        DBG("setPopupSelection\n");
+        TRACE("setPopupSelection\n");
 	auto view = (View<Type> *)data;
         if (SHIFT_MODE) {
 	    TRACE("SHIFT_MODE button 3\n");
 	    unselectAll(data);  
-	    return;
+	    return NULL;
 	}
         GtkTreePath *tpath = getTpath(data, event);
 	// If item is not selected, unselect all and select item.
@@ -326,17 +360,19 @@ public:
 		}
 		gtk_icon_view_select_path (view->iconView(), tpath);
 	    }
+
 	    
 	}
 	if (tpath) gtk_tree_path_free(tpath);
-	return;
+        return setItemPath(view);
     }
 
     static gboolean doPopupMenu(GdkEventButton  *event, gpointer data){
         gtk_widget_hide(GTK_WIDGET(xf::popupImage));
-	setPopupSelection(event, data);
+	auto menu = setPopupSelection(event, data);
+	if (menu) gtk_menu_popup_at_pointer (menu, (const GdkEvent *)event);
 
-        return viewPopUp(data, event);
+        return isTreeView;
     }
 
 
@@ -501,57 +537,22 @@ public:
         }
         view->selectables();
     }
-
-    static gboolean 
-    viewPopUp(gpointer data, GdkEventButton  *event){
-	auto view = (View<Type> *)data;
-        TRACE("Base::signals::button press event: button 3 should do popup, as well as longpress...\n");
-        gboolean retval = FALSE;
-        gchar *path = NULL;
-        GList *selectionList;
-	if (isTreeView) {
-	    auto selection = gtk_tree_view_get_selection (view->treeView());
-	    auto treeModel = view->treeModel();
-	    selectionList = gtk_tree_selection_get_selected_rows (selection, &treeModel);
-	    retval=TRUE;
-	} else {
-	    selectionList = gtk_icon_view_get_selected_items (view->iconView());
-	}
-        view->setSelectionList(selectionList);
-        if (selectionList && g_list_length(selectionList) == 1) {
-            GtkTreeIter iter;
-            gtk_tree_model_get_iter(view->treeModel(), &iter, 
-                    (GtkTreePath *)selectionList->data);
-            gtk_tree_model_get(view->treeModel(), &iter, PATH, &path, -1);
-            TRACE("Base::signals::selected path is %s\n", path);
-	}
-	if (!path) path = g_strdup(view->path());
-
-        auto items = (g_list_length(selectionList) >0);
-        auto menu = configureMenu(view, items);
-	TRACE("menu is %p\n", menu);
-        g_object_set_data(G_OBJECT(menu),"view", (void *)view);
-	TRACE("g_object_set_data %p->%p\n", menu, view);
-	Popup<Type>::setWidgetData(menu, "path", path);
-	g_free(path);
-
-	gtk_menu_popup_at_pointer (menu, (const GdkEvent *)event);
-        return retval;
-    }
     
 public:
     
     static GtkMenu *
-    configureMenu(View<Type> *view, gboolean items){
+    configureMenu(View<Type> *view, gboolean items, const gchar *itemPath){
 	TRACE("configureMenu\n" );
 	GtkMenu *menu;
 	if (items) {
 	    menu = getItemsMenu(view);
 	    Popup<Type>::setWidgetData(menu, "path", view->path());
+	    Popup<Type>::setWidgetData(menu, "itemPath", itemPath);
 	    configureItemsMenu(view->viewType());
 	} else {
 	    menu =  getViewMenu(view);
 	    Popup<Type>::setWidgetData(menu, "path", view->path());
+	    Popup<Type>::setWidgetData(menu, "itemPath", itemPath);
 	    configureViewMenu(view->viewType());
 	}
 

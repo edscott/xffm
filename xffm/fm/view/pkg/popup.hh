@@ -276,8 +276,8 @@ public:
     static void
     resetMenuItems(void) {
         auto view = (View<Type> *)g_object_get_data(G_OBJECT(pkgItemPopUp), "view");
-        auto path = (const gchar *)g_object_get_data(G_OBJECT(pkgItemPopUp), "path");
-        resetItemPopup(view, path);
+        auto itemPath = (const gchar *)g_object_get_data(G_OBJECT(pkgItemPopUp), "itemPath");
+        resetItemPopup(view, itemPath);
         auto displayName = (const gchar *)g_object_get_data(G_OBJECT(pkgItemPopUp), "displayName");
 
         //Hide all...
@@ -288,12 +288,12 @@ public:
         auto v = GTK_WIDGET(g_object_get_data(G_OBJECT(pkgItemPopUp), "title"));
 	gtk_widget_show(v);
      
-	if (strcmp(path, "xffm:root")==0) {
+	if (strcmp(itemPath, "xffm:root")==0) {
             auto w = GTK_WIDGET(g_object_get_data(G_OBJECT(pkgItemPopUp), "Go up"));
 	    gtk_widget_show(w);	
 	    return;	    
 	}	
-	if (strcmp(path, "xffm:pkg:search")==0) {
+	if (strcmp(itemPath, "xffm:pkg:search")==0) {
             auto w = GTK_WIDGET(g_object_get_data(G_OBJECT(pkgItemPopUp), "Search packages"));
 	    gtk_widget_show(w);		
 	    return;	    

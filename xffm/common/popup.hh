@@ -103,6 +103,7 @@ public:
 	if (!w) ERROR("base signals: getWidgetData() menu is null\n");
         auto data =(const gchar *)g_object_get_data(G_OBJECT(w), key);
 	if (!data) ERROR("base signals: getWidgetData() data %s is null\n", key);
+	TRACE("getWidgetData(%s) -> %s\n", key, data);
 	return data;
     }
     static const gchar *

@@ -107,7 +107,7 @@ class FstabPopUp {
 	TRACE("FstabPopup::mount %s\n", path);
 //        if (FstabView<Type>::isInFstab(path) || FstabView<Type>::isMounted(path)) {
         if (FstabView<Type>::isMounted(path)) {
-	    TRACE("mount: %s\n", path);
+	    TRACE("umount: %s\n", path);
             FstabView<Type>::mountPath(view, path, NULL);
             return;            
         }
@@ -227,8 +227,9 @@ public:
     static void
     resetMenuItems(void) {
         auto view = (View<Type> *)g_object_get_data(G_OBJECT(fstabItemPopUp), "view");
-        auto path = (const gchar *)g_object_get_data(G_OBJECT(fstabItemPopUp), "path");
-        resetItemPopup(view, path);
+        //auto itemPath = (const gchar *)g_object_get_data(G_OBJECT(fstabItemPopUp), "itemPath");
+        auto itemPath = (const gchar *)	Popup<Type>::getWidgetData(fstabItemPopUp, "itemPath");
+        resetItemPopup(view, itemPath);
 
         // Hide all...
         GList *children = gtk_container_get_children (GTK_CONTAINER(fstabItemPopUp));
@@ -240,11 +241,11 @@ public:
         gtk_widget_show(v2);
         // mount options
         GtkWidget *w;
-        if (FstabView<Type>::isMounted(path)){
+        if (FstabView<Type>::isMounted(itemPath)){
             w = GTK_WIDGET(g_object_get_data(G_OBJECT(fstabItemPopUp), "Unmount the volume associated with this folder"));
             gtk_widget_set_sensitive(w, TRUE);
             gtk_widget_show(w);
-        } else if (strcmp(path,"/dev/disk")) {
+        } else if (strcmp(itemPath,"/dev/disk")) {
             w = GTK_WIDGET(g_object_get_data(G_OBJECT(fstabItemPopUp), "Unmount the volume associated with this folder"));
             gtk_widget_set_sensitive(w, FALSE);
             w = GTK_WIDGET(g_object_get_data(G_OBJECT(fstabItemPopUp), "Mount the volume associated with this folder"));

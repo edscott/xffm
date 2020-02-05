@@ -133,7 +133,10 @@ public:
     static gchar *
     getMntDir (const gchar * mnt_fsname) {return NULL;}
     static gboolean
-    isMounted (const gchar *mnt_fsname){return FALSE;}  
+    isMounted (const gchar *mnt_fsname){
+        TRACE("\n");
+        return FALSE;
+    }  
     static gchar *
     mountTarget (const gchar *label) {return NULL;}    
     static gboolean
@@ -153,7 +156,7 @@ private:
 
     static void 
     addAllItems(GtkTreeModel *treeModel){
-        DBG("addAllItems\n");
+        TRACE("addAllItems\n");
 	RootView<Type>::addXffmItem(treeModel);
 	//addFsentItems(treeModel);
         addPartitionItems(treeModel);
@@ -176,7 +179,7 @@ private:
             if( strncmp (d->d_name, "da", strlen("da")) &&
                 strncmp (d->d_name, "ad", strlen("ad"))) continue;
             if(!strchr (d->d_name, 's') && !strchr (d->d_name, 'p')) continue;
-            DBG("gotcha: %s\n", d->d_name);
+            TRACE("gotcha: %s\n", d->d_name);
             gchar *device = g_strdup_printf("/dev/%s", d->d_name);
             list = g_slist_prepend(list, device); 
         }
@@ -1198,19 +1201,20 @@ public:
 	} else {
 	    mnt_point = g_strdup(mnt_fsname);
 	}
-        TRACE("*** is mounted: %s\n", mnt_point);
+        TRACE("test for mount status: %s\n", mnt_point);
         
         struct mntent *m;
         //const gchar *mnttab;
         FILE *tab_file;
 
         // try both /etc/mtab and /proc/mounts 
-        //const gchar *mfile[]={"/proc/mounts", "/etc/mtab", NULL};
-        const gchar *mfile[]={"/proc/mounts", NULL};
+        const gchar *mfile[]={"/proc/mounts", "/etc/mtab", NULL};
+        //const gchar *mfile[]={"/proc/mounts", NULL};
         const gchar **pfile;
         for (pfile=mfile; pfile && *pfile; pfile++){
-	    TRACE("isMounted: %s\n", *pfile);
+	    TRACE("From /proc/mounts and /etc/mtab: %s\n", *pfile);
             if((tab_file = fopen (*pfile, "r")) == NULL) {
+                DBG("%s: %s\n", strerror(ENOENT), pfile);
                 continue;
             }
             fclose(tab_file);
@@ -1228,7 +1232,8 @@ public:
                 if((mnt_point && strcmp (m->mnt_dir, mnt_point) == 0) || 
                    (mnt_point && strcmp (m->mnt_fsname, mnt_point) == 0)) {
                    //(mnt_fsname && strcmp (m->mnt_fsname, mnt_fsname) == 0)) {
-                    TRACE("..isMounted(): GOTCHA  mnt_dir=%s  mnt_fsname=%s mnt_point=%s\n", m->mnt_dir, m->mnt_fsname, mnt_point);
+                    TRACE("%s ..isMounted(): mnt_dir=%s  mnt_fsname=%s mnt_point=%s\n", 
+                            *pfile, m->mnt_dir, m->mnt_fsname, mnt_point);
                     endmntent (tab_file);
                     g_free(mnt_point);
                     return TRUE;
@@ -1548,7 +1553,7 @@ private:
 public:
     static gboolean
     isSelectable(GtkTreeModel *treeModel, GtkTreeIter *iter){
-        DBG("fstab isSelectable()...\n");
+        TRACE("fstab isSelectable()...\n");
         return TRUE;
     }
 

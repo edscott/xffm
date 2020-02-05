@@ -326,7 +326,7 @@ public:
             gtk_widget_hide(GTK_WIDGET(child->data));
         }
  
-        auto path =Popup<Type>::getWidgetData(localItemPopUp, "path");
+        auto itemPath =Popup<Type>::getWidgetData(localItemPopUp, "itemPath");
 
         auto display_name = Popup<Type>::getWidgetData(localItemPopUp,  "displayName");
         auto mimetype =Popup<Type>::getWidgetData(localItemPopUp,  "mimetype");
@@ -338,7 +338,7 @@ public:
 	gchar *plainMimeType = NULL;
         
 	if (g_list_length(view->selectionList())==1){
-	    specificMimeType = Mime<Type>::mimeType(path);
+	    specificMimeType = Mime<Type>::mimeType(itemPath);
 	    if (mimetype && specificMimeType && strcmp(mimetype, specificMimeType)){
 	        plainMimeType = g_strdup_printf("(%s)",mimetype);
             }
@@ -359,32 +359,32 @@ public:
 	
 	gint listLength = g_list_length(view->selectionList());
 	for (auto k=commonItems; k && *k; k++){
-	    Popup<Type>::configureMenuItem(localItemPopUp, *k, listLength > 0, path);
+	    Popup<Type>::configureMenuItem(localItemPopUp, *k, listLength > 0, itemPath);
 	}
-	Popup<Type>::configureMenuItem(localItemPopUp, "Paste", ClipBoard<Type>::clipBoardIsValid(), path);
+	Popup<Type>::configureMenuItem(localItemPopUp, "Paste", ClipBoard<Type>::clipBoardIsValid(), itemPath);
 	Popup<Type>::configureMenuItem(localItemPopUp, "There is nothing on the clipboard to paste.", !ClipBoard<Type>::clipBoardIsValid(), NULL);
-	Popup<Type>::configureMenuItem(localItemPopUp, "Paste into", FALSE, path);
+	Popup<Type>::configureMenuItem(localItemPopUp, "Paste into", FALSE, itemPath);
 
 	for (auto k=singleSelectItems; k && *k; k++){
-	    Popup<Type>::configureMenuItem(localItemPopUp, *k, listLength == 1, path);
+	    Popup<Type>::configureMenuItem(localItemPopUp, *k, listLength == 1, itemPath);
 	}
 	if (listLength==1){
-	    Popup<Type>::configureMenuItem(localItemPopUp, "Extract files from the archive", strstr(mimetype, "compressed-tar") != NULL, path);
+	    Popup<Type>::configureMenuItem(localItemPopUp, "Extract files from the archive", strstr(mimetype, "compressed-tar") != NULL, itemPath);
 
 	    Popup<Type>::configureMenuItem(localItemPopUp, "Paste into", 
 			strstr(mimetype, "inode/directory") != NULL &&
-			ClipBoard<Type>::clipBoardIsValid(), path);
-	    customPasteInto(localItemPopUp, path, -16);
+			ClipBoard<Type>::clipBoardIsValid(), itemPath);
+	    customPasteInto(localItemPopUp, itemPath, -16);
 	}
 
 	if (listLength == 1){
-	    runWithDialog(path); // ask for arguments for an executable path.
+	    runWithDialog(itemPath); // ask for arguments for an executable path.
 	    // open with mimetype application
-	    setUpMimeTypeApp(specificMimeType?specificMimeType:mimetype, path, fileInfo);
-	    if (g_file_test(path, G_FILE_TEST_IS_DIR)) {
-		showDirectoryItems(path);
+	    setUpMimeTypeApp(specificMimeType?specificMimeType:mimetype, itemPath, fileInfo);
+	    if (g_file_test(itemPath, G_FILE_TEST_IS_DIR)) {
+		showDirectoryItems(itemPath);
 	    }
-	    else openWithDialog(path, specificMimeType?specificMimeType:mimetype, fileInfo);
+	    else openWithDialog(itemPath, specificMimeType?specificMimeType:mimetype, fileInfo);
 	} else {
 	    openWithDialog();
 	}

@@ -28,25 +28,25 @@ class RootPopUp  {
     resetMenuItems(void) {
         auto view = (View<Type> *)g_object_get_data(G_OBJECT(rootItemPopUp), "view");
         setPath(view);
-        auto path =Popup<Type>::getWidgetData(rootItemPopUp, "path");
-        TRACE("reset root menu items, path=%s\n", path);
-	gboolean isBookMark = RootView<Type>::isBookmarked(path);
-        if (EFS<Type>::isEFS(path)) isBookMark = TRUE;
+        auto itemPath =Popup<Type>::getWidgetData(rootItemPopUp, "itemPath");
+        TRACE("reset root menu items, itemPath=%s\n", itemPath);
+	gboolean isBookMark = RootView<Type>::isBookmarked(itemPath);
+        if (EFS<Type>::isEFS(itemPath)) isBookMark = TRUE;
 	auto menuitem = GTK_WIDGET(g_object_get_data(G_OBJECT(rootItemPopUp), "Remove bookmark"));
 	gtk_widget_set_sensitive(menuitem, isBookMark);
         if (isBookMark) gtk_widget_show(menuitem);
         else gtk_widget_hide(menuitem);
 	menuitem = GTK_WIDGET(g_object_get_data(G_OBJECT(rootItemPopUp), "Empty trash"));
         auto trashFiles = g_build_filename(g_get_home_dir(), ".local/share/Trash", NULL);
-        if (strstr(path, trashFiles)) gtk_widget_show(menuitem);
+        if (strstr(itemPath, trashFiles)) gtk_widget_show(menuitem);
         else gtk_widget_hide(menuitem);
         gtk_widget_set_sensitive(menuitem, g_file_test(trashFiles, G_FILE_TEST_IS_DIR));
         g_free(trashFiles); 
 #ifdef ENABLE_EFS_MODULE
-        if (EFS<Type>::isEFS(path)){
-            path += strlen("efs:/");
+        if (EFS<Type>::isEFS(itemPath)){
+            itemPath += strlen("efs:/");
             GtkWidget *show, *hide;
-            if (FstabView<Type>::isMounted(path)){
+            if (FstabView<Type>::isMounted(itemPath)){
                 show = GTK_WIDGET(g_object_get_data(G_OBJECT(rootItemPopUp), "Unmount the volume associated with this folder"));
                 hide = GTK_WIDGET(g_object_get_data(G_OBJECT(rootItemPopUp), "Mount the volume associated with this folder"));
             } else {
@@ -84,7 +84,7 @@ private:
         if (listLength > 1) return;
 
         auto tpath = (GtkTreePath *)view->selectionList()->data;
-        gchar *path;
+        gchar *itemPath;
         gchar *iconName;
         gchar *mimetype;
         gchar *displayName;
@@ -96,10 +96,10 @@ private:
 		DISPLAY_NAME, &displayName,
                 MIMETYPE, &mimetype, 
 		ICON_NAME, &iconName,
-                PATH, &path, 
+                PATH, &itemPath, 
                 -1);
         if (!mimetype){
-            mimetype = Mime<Type>::mimeType(path); 
+            mimetype = Mime<Type>::mimeType(itemPath); 
             gtk_list_store_set(GTK_LIST_STORE(view->treeModel()), &iter, 
                 MIMETYPE, mimetype, -1);
         }
@@ -108,13 +108,13 @@ private:
         if (g_list_length(view->selectionList()) > 1) statLine = g_strdup("");
         else {
             struct stat st;
-	    if (stat(path, &st)<0){
-		statLine = g_strdup_printf("stat(%s): %s", path, strerror(errno));
+	    if (stat(itemPath, &st)<0){
+		statLine = g_strdup_printf("stat(%s): %s", itemPath, strerror(errno));
 		errno=0;
 	    } else statLine  = Util<Type>::statInfo(&st);
         }
 
-	gchar *fileInfo = Util<Type>::fileInfo(path);
+	gchar *fileInfo = Util<Type>::fileInfo(itemPath);
 
 	auto title = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(rootItemPopUp), "title"));
 	gchar *markup = g_strdup_printf("<span color=\"blue\" size=\"large\">%s</span>", displayName);
@@ -125,13 +125,13 @@ private:
 	    Popup<Type>::setWidgetData(rootItemPopUp, "fileInfo", fileInfo);
 	    Popup<Type>::setWidgetData(rootItemPopUp, "iconName", iconName);
 	    Popup<Type>::setWidgetData(rootItemPopUp, "displayName", displayName);
-	    Popup<Type>::setWidgetData(rootItemPopUp, "path", path);
+	    Popup<Type>::setWidgetData(rootItemPopUp, "itemPath", itemPath);
 	    Popup<Type>::setWidgetData(rootItemPopUp, "mimetype", mimetype);
 	    Popup<Type>::setWidgetData(rootItemPopUp, "statLine", statLine);
 	    g_free(fileInfo);
 	    g_free(iconName);
 	    g_free(displayName);
-	    g_free(path);
+	    g_free(itemPath);
 	    g_free(mimetype);
 	    g_free(statLine);
        return;
