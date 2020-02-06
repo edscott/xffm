@@ -83,7 +83,6 @@ namespace xf {
 template <class Type> class FstabPopUp;
 
 
-static pthread_mutex_t fsmutex = G_STATIC_MUTEX_INIT;
 static pthread_mutex_t mntmutex = PTHREAD_MUTEX_INITIALIZER;
 //static GMutex *infomutex=NULL;
 
@@ -165,7 +164,6 @@ private:
     static GSList *
     partitions_list (void) {
         GSList *list=NULL;
-        pthread_mutex_lock(&fsmutex);
 
         TRACE( "count partitions...\n");
         DIR *directory;
@@ -185,7 +183,6 @@ private:
         }
         closedir (directory);
         
-        pthread_mutex_unlock(&fsmutex);
 
         return list;
     }
@@ -289,9 +286,7 @@ private:
     fsentList (void) {
         // with ZFS, this returns NULL.
         GSList *list=NULL;
-        pthread_mutex_lock(&fsmutex);
         if(!setfsent ()) {
-            pthread_mutex_unlock(&fsmutex);
             return NULL;
         }
         GSList *elements = NULL;
@@ -380,9 +375,7 @@ private:
 	static GSList *
 	elements_list (void) {
 		GSList *list=NULL;
-		pthread_mutex_lock(&fsmutex);
 		if(!setfsent ()) {
-			pthread_mutex_unlock(&fsmutex);
 			return (0);
 		}
 		struct fstab *fs;
@@ -416,7 +409,6 @@ private:
 		}
 		g_slist_free(elements);
 
-		pthread_mutex_unlock(&fsmutex);
 		if (!infomutex) rfm_mutex_init(infomutex);
 		g_mutex_lock(infomutex);
 		struct statfs *mntbuf;
@@ -471,10 +463,8 @@ private:
 	static gchar *
 	getMntDir (gchar * mnt_fsname) {
 		struct fstab *fs;
-		pthread_mutex_lock(&fsmutex);
 
 		if(!setfsent ()) {
-			pthread_mutex_unlock(&fsmutex);
 			return (0);
 		}
 
@@ -498,17 +488,14 @@ private:
 		}
 
 		endfsent ();
-		pthread_mutex_unlock(&fsmutex);
 		return mnt_dir;
 	}
 
 	static  gchar *
 	getMntFsname (gchar * mnt_dir) {
 		struct fstab *fs;
-		pthread_mutex_lock(&fsmutex);
 
 		if(!setfsent ()) {
-			pthread_mutex_unlock(&fsmutex);
 			return (0);
 		}
 
@@ -532,7 +519,6 @@ private:
 			}
 		}
 		endfsent ();
-		pthread_mutex_unlock(&fsmutex);
 		return mnt_fsname;
 	}
 	static void
@@ -603,10 +589,8 @@ private:
 		int result = 0;
 		struct fstab *fs;
 		const gchar *path = (const gchar *)p;
-		pthread_mutex_lock(&fsmutex);
 
 		if(!setfsent ()) {
-			pthread_mutex_unlock(&fsmutex);
 			return (0);
 		}
 
@@ -638,7 +622,6 @@ private:
 			}
 		}
 		endfsent ();
-		pthread_mutex_unlock(&fsmutex);
 		return GINT_TO_POINTER (result);
 	}
 

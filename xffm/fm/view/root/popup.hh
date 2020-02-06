@@ -43,20 +43,27 @@ class RootPopUp  {
         gtk_widget_set_sensitive(menuitem, g_file_test(trashFiles, G_FILE_TEST_IS_DIR));
         g_free(trashFiles); 
 #ifdef ENABLE_EFS_MODULE
+        auto umountW = GTK_WIDGET(g_object_get_data(G_OBJECT(rootItemPopUp), "Unmount the volume associated with this folder"));
+        auto mountW = GTK_WIDGET(g_object_get_data(G_OBJECT(rootItemPopUp), "Mount the volume associated with this folder"));
+
         if (EFS<Type>::isEFS(itemPath)){
             itemPath += strlen("efs:/");
             GtkWidget *show, *hide;
             if (FstabView<Type>::isMounted(itemPath)){
-                show = GTK_WIDGET(g_object_get_data(G_OBJECT(rootItemPopUp), "Unmount the volume associated with this folder"));
-                hide = GTK_WIDGET(g_object_get_data(G_OBJECT(rootItemPopUp), "Mount the volume associated with this folder"));
+                show = umountW;
+                hide = mountW;
             } else {
-                hide = GTK_WIDGET(g_object_get_data(G_OBJECT(rootItemPopUp), "Unmount the volume associated with this folder"));
-                show = GTK_WIDGET(g_object_get_data(G_OBJECT(rootItemPopUp), "Mount the volume associated with this folder"));
+                hide = umountW;
+                show = mountW;
             }
             gtk_widget_show(show);
             gtk_widget_hide(hide);
             gtk_widget_set_sensitive(show, TRUE);
-       }
+        }
+        else {
+            gtk_widget_hide(umountW);
+            gtk_widget_hide(mountW);
+        }
 #endif
 
 
@@ -209,7 +216,7 @@ private:
     menuAddEFS(GtkMenuItem *menuItem, gpointer data)
     {
         DBG("menuAddEFS\n");
-        EFS<Type>::doDialog(NULL);
+        EFS<Type>::doDialog(NULL, data);
     }
     static void
     menuAddBookmark(GtkMenuItem *menuItem, gpointer data)
@@ -268,7 +275,7 @@ private:
     removeBookmarkItem(GtkMenuItem *menuItem, gpointer data)
     {
         TRACE("Remove bookmark\n");
-	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
+	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "itemPath");
         if (EFS<Type>::isEFS(path)){
             if (!EFS<Type>::removeItem(path+strlen("efs:/"))) return;
         } else {

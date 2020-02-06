@@ -179,8 +179,8 @@ private:
         saveButton_ = Gtk<Type>::dialog_button ("media-floppy", _("Save"));
         gtk_box_pack_start (GTK_BOX (action_area), GTK_WIDGET(saveButton_), FALSE, FALSE, 0);
 
-        loadButton_ = Gtk<Type>::dialog_button ("document-open", _("Load"));
-        gtk_box_pack_start (GTK_BOX (action_area), GTK_WIDGET(loadButton_), FALSE, FALSE, 0);
+        //loadButton_ = Gtk<Type>::dialog_button ("document-open", _("Load"));
+        //gtk_box_pack_start (GTK_BOX (action_area), GTK_WIDGET(loadButton_), FALSE, FALSE, 0);
 
         mountButton_ = Gtk<Type>::dialog_button ("greenball", _("Mount"));
         gtk_box_pack_start (GTK_BOX (action_area), GTK_WIDGET(mountButton_), FALSE, FALSE, 0);
@@ -421,13 +421,30 @@ public:
     }
 
     static void
-    doDialog(const gchar *path){
+    doDialog( const gchar *path, void *data){
+        auto view =  (View<Type> *)g_object_get_data(G_OBJECT(data), "view");
+        doDialog(path, view);
+    }
+
+    static void
+    doDialog( const gchar *path, View<Type> *view){
         auto efs = new(EFS<Type>)(path);
         gint response  = gtk_dialog_run(efs->dialog());
         DBG("menuAddEFS(): efs response=%d (%d,%d,%d)\n", 
                 response,GTK_RESPONSE_YES,GTK_RESPONSE_APPLY,GTK_RESPONSE_CANCEL);
+        gchar *efsmount=NULL;
         switch (response){
-            case GTK_RESPONSE_YES: // mount
+            case GTK_RESPONSE_YES: 
+             // mount
+                efsmount = g_find_program_in_path("mount.ecryptfs");
+                if (not efsmount){
+                    auto message = g_strdup_printf("%s: mount.ecryptfs\n", strerror(ENOENT));
+                    auto cancel = Dialogs<int>::quickDialog(mainWindow, message, "dialog-error", "mount");
+                    gtk_widget_show_all (GTK_WIDGET(cancel));
+                    gtk_dialog_run(GTK_DIALOG(cancel));
+                    break;
+                }
+                g_free(efsmount);
                 efs->mountUrl();
                 break;
             case GTK_RESPONSE_APPLY: // Save
@@ -437,6 +454,7 @@ public:
             case GTK_RESPONSE_CANCEL:
                 break;
         }
+        view->reloadModel();            
         delete(efs);
     }
     
@@ -634,6 +652,7 @@ public:
         return optionsOn;
     }
     void mountUrl(void){
+
         auto path = gtk_entry_get_text(this->remoteEntry());
         auto mountPoint = gtk_entry_get_text(this->mountPointEntry());
         DBG("mountUrl: %s -> %s\n", path, mountPoint);

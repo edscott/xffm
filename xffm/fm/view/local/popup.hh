@@ -764,11 +764,11 @@ public:
     mount(GtkMenuItem *menuItem, gpointer data)
     {
 	auto view =  (View<Type> *)g_object_get_data(G_OBJECT(data), "view");
-        auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
+        auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "itemPath");
         if (EFS<Type>::isEFS(path)){
             path += strlen("efs:/");
             if (!FstabView<Type>::isMounted(path)){ 
-                EFS<Type>::doDialog(path);
+                EFS<Type>::doDialog(path, data);
             } else {
                 if (!FstabView<Type>::mountPath(view, path, NULL)){
                     ERROR("localpopup.hh:: mount command failed\n");

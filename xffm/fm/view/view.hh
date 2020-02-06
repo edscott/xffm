@@ -143,7 +143,7 @@ public:
                     this->loadModel(path + strlen("efs:/"));
 
                 } else {
-                    EFS<Type>::doDialog(path + strlen("efs:/"));
+                    EFS<Type>::doDialog(path + strlen("efs:/"), view);
                 }
                 break;
 #endif
