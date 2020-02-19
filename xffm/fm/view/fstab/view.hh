@@ -1197,7 +1197,7 @@ public:
         for (pfile=mfile; pfile && *pfile; pfile++){
 	    TRACE("From /proc/mounts and /etc/mtab: %s\n", *pfile);
             if((tab_file = fopen (*pfile, "r")) == NULL) {
-                DBG("%s: %s\n", strerror(ENOENT), pfile);
+                DBG("%s: %s\n", strerror(ENOENT), *pfile);
                 continue;
             }
             fclose(tab_file);
