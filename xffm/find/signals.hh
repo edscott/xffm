@@ -145,19 +145,23 @@ private:
         GList *pathList = g_list_prepend(NULL, path);
         gchar *command = Run<Type>::getOpenWithCommand(findDialog, pathList, wd);
 
-        GError *error = NULL;
-        gint argc;
-        gchar **argv= NULL; 
-        if(!g_shell_parse_argv (command, &argc, &argv, &error)) {
-            auto msg = g_strcompress (error->message);
-            DBG("%s: %s\n", msg, command);
-            g_error_free (error);
-            g_free (msg);
-        } else {
-            Run<Type>::thread_runReap(NULL, (const gchar**)argv, NULL, NULL, NULL);
+        if (command) {  
+
+            GError *error = NULL;
+            gint argc;
+            gchar **argv= NULL; 
+            if(!g_shell_parse_argv (command, &argc, &argv, &error)) {
+                auto msg = g_strcompress (error->message);
+                DBG("%s: %s\n", msg, command);
+                g_error_free (error);
+                g_free (msg);
+            } else {
+                Run<Type>::thread_runReap(NULL, (const gchar**)argv, NULL, NULL, NULL);
+            }
+
+            g_strfreev(argv);
         }
 
-        g_strfreev(argv);
 	g_free(path);
 	g_free(wd);
         g_list_free(pathList);

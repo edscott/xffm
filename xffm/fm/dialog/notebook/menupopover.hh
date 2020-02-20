@@ -234,6 +234,8 @@ private:
 
             {N_("Sort by date"), (void *)toggleItem, (void *) "ByDate", "LocalView"},
             {N_("Sort by size"), (void *)toggleItem, (void *) "BySize", "LocalView"},
+            {N_("Background Color"), (void *)bgcolor, NULL, NULL},
+            {N_("Foreground Color"), (void *)fgcolor, NULL, NULL},
             {N_("Exit"), (void *)MenuPopoverSignals<Type>::finish, (void *) menuButton_},
             {NULL}};
 	const gchar *key[]={
@@ -282,6 +284,61 @@ private:
     {
     }*/
 private:
+    static gchar *
+    getColor(const gchar *which, GdkRGBA *rgba){
+        auto chooser = GTK_DIALOG(gtk_color_chooser_dialog_new(which, mainWindow));
+        auto response = gtk_dialog_run(chooser);
+        gtk_widget_hide(GTK_WIDGET(chooser));
+        gtk_color_chooser_get_rgba(GTK_COLOR_CHOOSER(chooser), rgba);
+        gchar *code = NULL;
+        if (response == GTK_RESPONSE_OK ) {
+            auto string=gdk_rgba_to_string(rgba);
+            if (strchr(string,(gint)'(') and strchr(string, (gint)')')){
+                auto string2 = strchr(string,'(') + 1;
+                *(strchr(string,')')) = 0;
+                auto stringv = g_strsplit(string2, ",", -1);
+                g_free(string);
+                code = g_strdup_printf("#%02x%02x%02x", 
+                        atoi(stringv[0]),
+                        atoi(stringv[1]),
+                        atoi(stringv[2]));
+                g_strfreev(stringv);
+                TRACE("response=%d rgba=%s)\n", response, code);
+            }
+        }
+        gtk_widget_destroy(GTK_WIDGET(chooser));
+        return code;
+    }
+    
+    static void 
+    applyColors(void){
+        auto notebook_p = Fm<Type>::getCurrentNotebook();
+	gint pages = gtk_notebook_get_n_pages (Fm<Type>::getCurrentNotebook()->notebook());
+ 	for (int i=0; i<pages; i++){
+            auto page = notebook_p->currentPageObject(i);
+            auto view = page->view();
+            view->applyColors();
+	}
+    }
+
+    static void
+    fgcolor(GtkMenuItem *menuItem, gpointer data)
+    {
+        GdkRGBA rgba;
+        auto code = getColor(_("Foreground Color"), &rgba);
+        Settings<Type>::setSettingString("window", "fgColor", code);
+        g_free(code);
+        applyColors();
+    }
+    static void 
+    bgcolor(GtkMenuItem *menuItem, gpointer data)
+    {
+        GdkRGBA rgba;
+        auto code = getColor(_("Background Color"), &rgba);
+        Settings<Type>::setSettingString("window", "bgColor", code);
+        g_free(code);
+        applyColors();
+    }
     static void
     toggleView(GtkCheckMenuItem *menuItem, gpointer data)
     {

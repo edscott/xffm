@@ -9,6 +9,10 @@ class IconView {
 public: 
     static GtkIconView *createIconview(View<Type> *view){
         auto iconView = GTK_ICON_VIEW(gtk_icon_view_new());
+
+
+
+
         g_object_set(G_OBJECT(iconView), "has-tooltip", TRUE, NULL);
         gtk_icon_view_set_item_width (iconView, 60);
         gtk_icon_view_set_activate_on_single_click(iconView, TRUE);
@@ -26,6 +30,7 @@ public:
     }
 
 private:
+
     static void
     setUpSignals(View<Type> *view, GObject * iconView){
         g_signal_connect (iconView, "item-activated", 

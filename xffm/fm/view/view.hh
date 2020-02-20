@@ -50,11 +50,22 @@ public:
     {
         this->iconView_ = IconView<Type>::createIconview(this);
         this->treeView_ = TreeView<Type>::createTreeview(this);
+        this->applyColors();
         monitorObject_ = NULL;
     }
 
     ~View(void){
         TRACE("View destructor.\n");
+    }
+
+    void
+    applyColors(void) {
+        auto fgColor = Settings<Type>::getSettingString("window", "fgColor");
+        auto bgColor = Settings<Type>::getSettingString("window", "bgColor");
+        Gtk<int>::setColor(GTK_WIDGET(this->iconView_), fgColor, bgColor);
+        Gtk<int>::setColor(GTK_WIDGET(this->treeView_), fgColor, bgColor);
+        g_free(fgColor);
+        g_free(bgColor);
     }
 
     BaseMonitor<Type> *monitorObject(void){
