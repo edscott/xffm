@@ -14,6 +14,12 @@
 # undef ENABLE_EFS_MODULE 
 # define ENABLE_EFS_MODULE 1
 #endif
+
+#ifdef FREEBSD_FOUND
+# undef ENABLE_EFS_MODULE 
+#endif
+
+
 # define ENABLE_FSTAB_MODULE 1
 
 #ifdef ALPHA

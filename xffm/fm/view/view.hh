@@ -149,6 +149,7 @@ public:
                 FstabView<Type>::loadModel(view);
 	        view->page()->updateStatusLabel(NULL);
                 break;
+#ifdef ENABLE_EFS_MODULE
             case (EFS_TYPE):
                 if (FstabView<Type>::isMounted(path + strlen("efs:/"))){
                     this->loadModel(path + strlen("efs:/"));
@@ -157,6 +158,7 @@ public:
                     EFS<Type>::doDialog(path + strlen("efs:/"), view);
                 }
                 break;
+#endif
 #endif
 #ifdef ENABLE_PKG_MODULE
             case (PKG_TYPE):

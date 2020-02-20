@@ -31,7 +31,9 @@ class RootPopUp  {
         auto itemPath =Popup<Type>::getWidgetData(rootItemPopUp, "itemPath");
         TRACE("reset root menu items, itemPath=%s\n", itemPath);
 	gboolean isBookMark = RootView<Type>::isBookmarked(itemPath);
+#ifdef ENABLE_EFS_MODULE
         if (EFS<Type>::isEFS(itemPath)) isBookMark = TRUE;
+#endif
 	auto menuitem = GTK_WIDGET(g_object_get_data(G_OBJECT(rootItemPopUp), "Remove bookmark"));
 	gtk_widget_set_sensitive(menuitem, isBookMark);
         if (isBookMark) gtk_widget_show(menuitem);
@@ -147,7 +149,9 @@ private:
     static GtkMenu *createPopUp(void){
          menuItem_t item[]={
             {"Add bookmark", (void *)menuAddBookmark, NULL, NULL},
+#ifdef ENABLE_EFS_MODULE
             {"Ecryptfs (EFS)", (void *)menuAddEFS, NULL, NULL},
+#endif
             {NULL,NULL,NULL, NULL}
          };
         const gchar *key[]={
@@ -212,12 +216,14 @@ private:
         return rootItemPopUp;
     }
 
+#ifdef ENABLE_EFS_MODULE
     static void
     menuAddEFS(GtkMenuItem *menuItem, gpointer data)
     {
         DBG("menuAddEFS\n");
         EFS<Type>::doDialog(NULL, data);
     }
+#endif
     static void
     menuAddBookmark(GtkMenuItem *menuItem, gpointer data)
     {

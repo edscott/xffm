@@ -511,7 +511,9 @@ private:
 
 #ifdef ENABLE_FSTAB_MODULE
         // mount options
+#ifdef ENABLE_EFS_MODULE
         if (EFS<Type>::isEFS(path)) path += strlen("efs:/");
+#endif
         GtkWidget *show, *hide;
         if (FstabView<Type>::isMounted(path)){
             show = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Unmount the volume associated with this folder"));
@@ -765,6 +767,7 @@ public:
     {
 	auto view =  (View<Type> *)g_object_get_data(G_OBJECT(data), "view");
         auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "itemPath");
+#ifdef ENABLE_EFS_MODULE
         if (EFS<Type>::isEFS(path)){
             path += strlen("efs:/");
             if (!FstabView<Type>::isMounted(path)){ 
@@ -776,6 +779,7 @@ public:
             }
             return;
         }
+#endif
         if (!FstabView<Type>::mountPath(view, path, NULL)){
             ERROR("localpopup.hh:: mount command failed\n");
         } 
@@ -818,7 +822,9 @@ public:
         auto dialog = (Dialog<Type> *)g_object_get_data(G_OBJECT(mainWindow), "dialog");
 	auto view =  (View<Type> *)g_object_get_data(G_OBJECT(menu), "view");
 	auto path = (const gchar *)g_object_get_data(G_OBJECT(data?data:menu), "path");
+#ifdef ENABLE_EFS_MODULE
         if (EFS<Type>::isEFS(path)) path += strlen("efs:/");
+#endif
 	TRACE("localview::newTab path= %s\n", path);
         dialog->addPage(path);
 
