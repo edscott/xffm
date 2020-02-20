@@ -142,11 +142,9 @@ public:
             longPressTime = -1;
         pthread_mutex_unlock(&longPressMutex);
         
-        if (longPressCount >= 10) {
+        if ( not dragOn_ and longPressCount >= 10) {
             TRACE("Long press detected...\n");
-	    
             buttonPressX = buttonPressY = -1;
-	    dragOn_ = FALSE;
             return doPopupMenu(event, data);
         }
         if (ignoreRelease){

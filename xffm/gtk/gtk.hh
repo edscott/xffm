@@ -16,20 +16,27 @@ public:
     static void 
     setColor(GtkWidget *widget, const gchar *color, const gchar *bgcolor){
         if (not color and not bgcolor) return;
+
         auto style_context = gtk_widget_get_style_context (widget);
-        gtk_style_context_add_class(style_context, GTK_STYLE_CLASS_VIEW );
+        //gtk_style_context_add_class(style_context, GTK_STYLE_CLASS_VIEW );
+        
+
         auto css_provider = gtk_css_provider_new();
         GError *error=NULL;
         gchar *data;
+        const gchar *what = "iconview";
         if (not color) {
-            data = g_strdup_printf("* {\n background-color: %s;\n}", bgcolor);
+            data = g_strdup_printf("%s {\n background-color: %s;\n}", what, bgcolor);
         }
         else if (not bgcolor) {
-            data = g_strdup_printf("* {\n color: %s;\n}", color);
+            data = g_strdup_printf("%s {\n color: %s;\n}", what,  color);
         } 
         else {
-            data = g_strdup_printf("* {\n background-color: %s; color: %s;\n}", bgcolor, color);
+            data = g_strdup_printf("%s {\n background-color: %s; color: %s;\n}", what,  bgcolor, color);
         }
+        auto g = g_strconcat(data, "\n iconview:selected {background-color: blue; color:yellow}", NULL);
+        g_free(data);
+        data = g;
 
         gtk_css_provider_load_from_data (css_provider, data, -1, &error);
         g_free(data);

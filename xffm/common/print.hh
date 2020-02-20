@@ -755,14 +755,21 @@ public:
     setColor(GtkWidget * widget) {
         auto style_context = gtk_widget_get_style_context (widget);
         gtk_style_context_add_class(style_context, GTK_STYLE_CLASS_VIEW );
+
+/*        auto list = gtk_style_context_list_classes(style_context);
+        for (auto l=list; l && l->data; l= l->next){
+            DBG("context class= %s\n", (gchar *)l->data);
+        }
+        g_list_free(list);*/
+
         auto css_provider = gtk_css_provider_new();
         GError *error=NULL;
         auto data = g_strdup_printf("\
-textview text {\
+text {\
    background-color: black;\
    color: white;\
   }\
-.view text selection {\
+selection {\
   background-color: blue;\
   color: yellow;\
 }\
