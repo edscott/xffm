@@ -105,7 +105,6 @@ public:
 	
 	auto xffm = new(xf::Dialog<double>)(path);
 	g_object_set_data(G_OBJECT(mainWindow), "xffm", xffm);
-	//xffm->setDialogTitle("Fm");
 	xffm->setDialogIcon("system-file-manager");
 	xf::ClipBoard<double>::startClipBoard();  
     }

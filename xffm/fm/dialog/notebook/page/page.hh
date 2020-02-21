@@ -253,7 +253,11 @@ public:
     }
     void setDialogTitle(void){
         gchar *gg = completion_c::get_terminal_name(this->workDir());
-        gchar *g = g_strconcat("xffm: ", gg, NULL);
+        auto user = g_get_user_name();
+        auto host = g_strdup(g_get_host_name());
+        if (strchr(host, '.')) *strchr(host, '.')=0;
+        gchar *g = g_strconcat(user,"@",host,":",gg, NULL);
+        g_free(host);
         g_free(gg); 
         auto dialog = (dialog_c *)parent_;
         dialog->setDialogTitle(g);
