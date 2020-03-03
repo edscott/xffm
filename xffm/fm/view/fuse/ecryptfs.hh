@@ -24,7 +24,7 @@ class Fuse  {
     GtkBox *vbox_;
     const gchar *urlTemplate_;
     GtkBox *mountPointBox_; // FUSE_MOUNT_POINT_BOX
-    GtkButton *loadButton_;
+    //GtkButton *loadButton_;
     GtkButton *saveButton_;
     GtkButton *cancelButton_;
     GtkButton *mountButton_;
@@ -186,7 +186,7 @@ private:
         gtk_box_pack_start (GTK_BOX (action_area), GTK_WIDGET(mountButton_), FALSE, FALSE, 0);
 
 
-        g_signal_connect (G_OBJECT (loadButton_), "clicked", G_CALLBACK (button_load), this);
+        //g_signal_connect (G_OBJECT (loadButton_), "clicked", G_CALLBACK (button_load), this);
         g_signal_connect (G_OBJECT (saveButton_), "clicked", G_CALLBACK (button_save), this);
         g_signal_connect (G_OBJECT (cancelButton_), "clicked", G_CALLBACK (button_cancel), this);
         g_signal_connect (G_OBJECT (mountButton_), "clicked", G_CALLBACK (button_mount), this);

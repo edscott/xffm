@@ -8,6 +8,10 @@
 
 // Run in background, detached.
 # define FORK 1
+#ifdef NOFORK
+# undef FORK
+# warning "FORK is disabled"
+#endif
 
 // Version 0.93, enable fstab and ecryptfs (Linux)
 #ifdef FREEBSD_NOT_FOUND
