@@ -63,9 +63,7 @@ public:
             g_free(basename);
             const gchar *ball = NULL;
             if (!g_file_test(*p, G_FILE_TEST_IS_DIR))ball = "/NE/dialog-error/3.0/220";
-            auto emblem = g_strconcat("/SE/emblem-readonly/3.0/220", ball, NULL);
-	    auto icon_name = g_strconcat("drive-harddisk/SE/emblem-readonly/2.0/225", emblem, NULL);
-            g_free(emblem);
+	    auto icon_name = g_strconcat("drive-harddisk/SE/emblem-readonly/2.0/225", ball, NULL);
 
             auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_EMBLEM, NULL);
             auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
