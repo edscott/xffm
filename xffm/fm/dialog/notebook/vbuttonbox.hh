@@ -174,7 +174,7 @@ public:
  //     background-color: #dcdad5;
     "\
     box * {\
-      background-color: #333333;\
+      background-color: #888888;\
       border-width: 0px;\
       border-radius: 0px;\
       border-color: transparent;\
