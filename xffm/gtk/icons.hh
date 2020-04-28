@@ -236,6 +236,12 @@ public:
 
 	TRACE("***getting pixbuf for %s at size %d (%s, %s, %s)\n", name, size, label, color, emblems);
 	auto pixbuf = get_theme_pixbuf(name, size);
+	if (!pixbuf){
+		ERROR("Icons::composite_icon() icon \"%s\" not found\n", name);
+		pixbuf = get_theme_pixbuf("image-missing", size);
+	}
+
+
 
 
 	// Now decorate the pixbuf with label, color and emblems, if any.

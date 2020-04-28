@@ -1000,20 +1000,31 @@ public:
 	return exec_option;
     }
 
-
+    static const gchar *
+    get_terminal(void){
+	for (auto p=get_terminals(); p && *p; p++){
+	    auto terminal = g_find_program_in_path(*p);
+	    if (terminal){
+		g_free(terminal);
+		return *p;
+	    }
+	}
+	return NULL;    
+    }
 
 
     static const gchar **
     get_terminals(void) {
 	static const gchar *terminals_v[] = {
+	    "uxterm", 
+	    "xterm", 
+	    "konsole", 
+	    "gnome-terminal", 
 	    "roxterm", 
 	    "sakura",
-	    "gnome-terminal", 
 	    "Eterm", 
-	    "konsole", 
 	    "Terminal", 
 	    "aterm", 
-	    "xterm", 
 	    "kterm", 
 	    "wterm", 
 	    "multi-aterm", 

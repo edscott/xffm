@@ -241,10 +241,10 @@ public:
             if (!p->path) continue;
             TRACE("adding bookmark %p -> %s\n", p, p->path);
              if (g_path_is_absolute(p->path)) {
-                const gchar *icon_name = "emblem-documents/SE/bookmark-new/2.0/220";
+                const gchar *icon_name = "emblem-documents-symbolic/SE/bookmark-new/2.0/220";
                 if (!g_file_test(p->path, G_FILE_TEST_EXISTS)) {
                     DBG("Bookmark %s does not exist\n", p->path);
-                    icon_name = "emblem-documents/SE/edit-delete/2.0/220";
+                    icon_name = "emblem-documents-symbolic/SE/edit-delete/2.0/220";
                 }
                 auto basename = g_path_get_basename(p->path);
                 auto utf_name = util_c::utf_string(basename);

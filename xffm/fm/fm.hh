@@ -180,16 +180,16 @@ private:
 	    WARN("User set terminal = %s\n", userSetTerminal);
 	    return setTerminalCmd(userSetTerminal);
 	} 
-	auto terminal = g_find_program_in_path("uxterm");
-	if (terminal){
-	    setenv("TERMINAL", "uxterm -rv -vb", 1);
-	    WARN("Using terminal = %s\n", getenv("TERMINAL"));
-	    return setTerminalCmd(terminal);
-	}
-	terminal = g_find_program_in_path("xterm");
-	if (terminal){
-	    setenv("TERMINAL", "xterm -rv -vb", 1);
-	    WARN("Using terminal = %s\n", getenv("TERMINAL"));
+	
+	auto terminal = Util<double>::get_terminal();
+	if (terminal)
+	{
+	    if (strcmp(terminal, "uxterm")==0 || strcmp(terminal, "xterm")==0){
+		auto t = g_strdup_printf("%s -rv -vb", terminal);
+		setenv("TERMINAL", t, 1);
+	        WARN("Using terminal = %s\n", getenv("TERMINAL"));
+	        return setTerminalCmd(t);
+	    }
 	    return setTerminalCmd(terminal);
 	}
 	ERROR("No terminal command found. Please define environment variable \"TERMINAL\"\n");
@@ -240,7 +240,7 @@ private:
 
         }
         if (f) {
-            DBG("editor is %s\n", f);
+            DBG("editor is %s (Override with environment variable EDITOR)\n", f);
             setenv("EDITOR", f, 1);
         }
     }
