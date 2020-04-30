@@ -184,12 +184,14 @@ private:
 	auto terminal = Util<double>::get_terminal();
 	if (terminal)
 	{
+	    static gchar *t;
 	    if (strcmp(terminal, "uxterm")==0 || strcmp(terminal, "xterm")==0){
-		auto t = g_strdup_printf("%s -rv -vb", terminal);
+		t = g_strdup_printf("%s -rv -vb", terminal);
 		setenv("TERMINAL", t, 1);
 	        WARN("Using terminal = %s\n", getenv("TERMINAL"));
 	        return setTerminalCmd(t);
 	    }
+	    setenv("TERMINAL", terminal, 1);
 	    return setTerminalCmd(terminal);
 	}
 	ERROR("No terminal command found. Please define environment variable \"TERMINAL\"\n");

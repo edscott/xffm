@@ -983,6 +983,7 @@ public:
 	}
 	if (t) {
 	    g_free(t);
+
 	    return term;
 	}
 	ERROR("TERMINAL_CMD=%s: %s\n", getenv ("TERMINAL_CMD"), strerror (ENOENT));
@@ -1002,6 +1003,15 @@ public:
 
     static const gchar *
     get_terminal(void){
+	auto t = getenv("TERMINAL");
+	if (t && strlen(t)){
+	    auto terminal = g_find_program_in_path(t);
+	    if (terminal){
+		g_free(terminal);
+		return t;
+	    }
+	}
+
 	for (auto p=get_terminals(); p && *p; p++){
 	    auto terminal = g_find_program_in_path(*p);
 	    if (terminal){
