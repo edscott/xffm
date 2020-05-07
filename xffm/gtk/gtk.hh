@@ -14,7 +14,7 @@ class Gtk{
 public:
     
     static void 
-    setColor(GtkWidget *widget, const gchar *color, const gchar *bgcolor){
+    setColor(const gchar *what, GtkWidget *widget, const gchar *color, const gchar *bgcolor){
         if (not color and not bgcolor) return;
 
         auto style_context = gtk_widget_get_style_context (widget);
@@ -24,7 +24,6 @@ public:
         auto css_provider = gtk_css_provider_new();
         GError *error=NULL;
         gchar *data;
-        const gchar *what = "iconview";
         if (not color) {
             data = g_strdup_printf("%s {\n background-color: %s;\n}", what, bgcolor);
         }
@@ -34,7 +33,7 @@ public:
         else {
             data = g_strdup_printf("%s {\n background-color: %s; color: %s;\n}", what,  bgcolor, color);
         }
-        auto g = g_strconcat(data, "\n iconview:selected {background-color: blue; color:yellow}", NULL);
+        auto g = g_strconcat(data, "\n ", what, ":selected {background-color: blue; color:yellow}", NULL);
         g_free(data);
         data = g;
 

@@ -62,8 +62,8 @@ public:
     applyColors(void) {
         auto fgColor = Settings<Type>::getSettingString("window", "fgColor");
         auto bgColor = Settings<Type>::getSettingString("window", "bgColor");
-        Gtk<int>::setColor(GTK_WIDGET(this->iconView_), fgColor, bgColor);
-        Gtk<int>::setColor(GTK_WIDGET(this->treeView_), fgColor, bgColor);
+        Gtk<int>::setColor("iconview", GTK_WIDGET(this->iconView_), fgColor, bgColor);
+        Gtk<int>::setColor("treeview", GTK_WIDGET(this->treeView_), fgColor, bgColor);
         g_free(fgColor);
         g_free(bgColor);
     }
