@@ -41,9 +41,12 @@ static gboolean ignoreClick=FALSE;
 static gboolean ignoreRelease=FALSE;
 static gboolean dragOn_=FALSE;
 static gboolean noMotion=TRUE;
+static gint motionX=-1;
+static gint motionY=-1;
 static gboolean rubberBand_=FALSE;
 static gint buttonPressX=-1;
 static gint buttonPressY=-1;
+
 
 static GtkTargetList *targets=NULL;
 static GdkDragContext *context=NULL;
@@ -73,8 +76,8 @@ public:
             ERROR("fm/base/signals.hh::motion_notify_event: data cannot be NULL\n");
             return FALSE;
         }
-	    
-	noMotion=FALSE;
+	   
+	if (abs(e->x - motionX) > 5 || abs(e->y - motionY > 5) )noMotion=FALSE;
 
         if (buttonPressX >= 0 && buttonPressY >= 0){
 	    TRACE("buttonPressX >= 0 && buttonPressY >= 0\n");
@@ -381,6 +384,9 @@ public:
                    gpointer   data)
     {
 	noMotion=TRUE;
+	motionX = event->x;
+	motionY = event->y;
+	
 	if (ignoreClick) return TRUE;
         ignoreClick = TRUE; // don't process another click until this one is done.
         auto view = (View<Type> *)data;
