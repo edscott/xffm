@@ -40,6 +40,7 @@ template <class Type> class FstabPopUp;
 static gboolean ignoreClick=FALSE;
 static gboolean ignoreRelease=FALSE;
 static gboolean dragOn_=FALSE;
+static gboolean noMotion=TRUE;
 static gboolean rubberBand_=FALSE;
 static gint buttonPressX=-1;
 static gint buttonPressY=-1;
@@ -72,6 +73,8 @@ public:
             ERROR("fm/base/signals.hh::motion_notify_event: data cannot be NULL\n");
             return FALSE;
         }
+	    
+	noMotion=FALSE;
 
         if (buttonPressX >= 0 && buttonPressY >= 0){
 	    TRACE("buttonPressX >= 0 && buttonPressY >= 0\n");
@@ -90,7 +93,6 @@ public:
                     return FALSE;
                 }
 	        // start DnD (multiple selection)
-		TRACE("dragOn_ = TRUE\n");
 		dragOn_ = TRUE;
 		// in control mode, reselect item at x,y
 		if(!isTreeView && controlMode) {
@@ -141,8 +143,7 @@ public:
             longPressCount = longPressTime;
             longPressTime = -1;
         pthread_mutex_unlock(&longPressMutex);
-        
-        if ( not dragOn_ and longPressCount >= 10) {
+        if ( noMotion and longPressCount >= 10) {
             TRACE("Long press detected...\n");
             buttonPressX = buttonPressY = -1;
             return doPopupMenu(event, data);
@@ -288,7 +289,7 @@ public:
             longPressTime++;
             pthread_mutex_unlock(&longPressMutex);
         }
-        if (!dragOn_) Util<Type>::context_function(showImage, (void *)popupImage);
+        if (noMotion) Util<Type>::context_function(showImage, (void *)popupImage);
         return NULL;
     }
 
@@ -379,7 +380,8 @@ public:
                    GdkEventButton  *event,
                    gpointer   data)
     {
-        if (ignoreClick) return TRUE;
+	noMotion=TRUE;
+	if (ignoreClick) return TRUE;
         ignoreClick = TRUE; // don't process another click until this one is done.
         auto view = (View<Type> *)data;
         buttonPressX = buttonPressY = -1;
@@ -403,9 +405,9 @@ public:
             if (tpath == NULL){ 
 		rubberBand_ = TRUE;
                 ignoreClick = FALSE;
+		dragOn_ = TRUE;
                 return FALSE;
             } else {
-		TRACE("button press %d mode %d\n", event->button, mode);
 		buttonPressX = event->x;
 		buttonPressY = event->y;
 		rubberBand_ = FALSE;
@@ -762,7 +764,7 @@ public:
 	    //static gint count=0;
             // No item at position?
             // Do we need to clear hash table?
-            //DBG("highlight clear_highlights %d\n", count++);
+            TRACE("highlight clear_highlights %d\n", count++);
             clear_highlights(data);
             return;
         }
