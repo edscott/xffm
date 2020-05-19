@@ -28,7 +28,7 @@ class Icons {
 public:
     static void
     init(void){
-	TRACE("Calling Icons initializer...\n");
+	TRACE("Calling Icons initializer...buildicons=%s\n", buildIcons);
 	pixbuf_mutex = PTHREAD_MUTEX_INITIALIZER;
 	icon_theme = gtk_icon_theme_get_default ();
 	if (!icon_theme){
@@ -39,7 +39,14 @@ public:
 
 	self = g_thread_self();
 	auto resource_path = g_build_filename(PREFIX, "share", "icons", "xffm+", NULL);
-	gtk_icon_theme_add_resource_path (icon_theme,resource_path);
+	if (g_file_test(resource_path, G_FILE_TEST_IS_DIR)) {
+	    gtk_icon_theme_add_resource_path (icon_theme,resource_path);
+	}
+	
+	if (buildIcons && g_file_test(buildIcons, G_FILE_TEST_IS_DIR)){
+	    TRACE("adding resource path:%s\n", buildIcons);
+	    gtk_icon_theme_add_resource_path (icon_theme,buildIcons);
+	} else buildIcons = NULL;
 
 	// This works, but icons should be fixed size. 
 	// Scalable vector graphics dont work, last time I checked...
@@ -56,6 +63,14 @@ public:
             auto path = g_build_filename(resource_path, *p, NULL);
 	    gtk_icon_theme_append_search_path (icon_theme, path);
 	    g_free(path);
+        }
+        if (buildIcons) for (auto p=subdirs; p && *p; p++){
+            auto path = g_build_filename(buildIcons, *p, NULL);
+	    gtk_icon_theme_append_search_path (icon_theme, path);
+	    TRACE("appending icon search path: %s (%d)\n", path, g_file_test(path,G_FILE_TEST_IS_DIR));
+
+	    g_free(path);
+	    
         }
 #if 0
 	// xffm+ svg icons are at:

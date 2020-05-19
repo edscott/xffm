@@ -66,6 +66,8 @@
 #define URIFILE "file://"
 #define USER_DIR 		g_get_home_dir()
 
+static const gchar *buildGetPass=NULL;
+static const gchar *buildIcons=NULL;
 static const gchar *xffmProgram;
 static const gchar *xffindProgram;
 static GtkWindow *mainWindow = NULL;
@@ -92,6 +94,26 @@ GList *customDialogs = NULL;
 
 int
 main (int argc, char *argv[]) {
+    TRACE("argv[0]= %s\n", argv[0]);
+    auto dir = g_path_get_dirname(argv[0]);
+    if (!g_path_is_absolute(dir)){
+	auto current = g_get_current_dir();
+	auto g = g_build_path(G_DIR_SEPARATOR_S, current, dir, NULL);
+	TRACE("current=%s g=%s\n", current, g);
+	g_free(current);
+	g_free(dir);
+	dir = g;
+    }
+    TRACE("dir= %s\n", dir);
+    buildGetPass = g_build_path(G_DIR_SEPARATOR_S,dir,"xfgetpass",NULL);
+    if (strstr(dir, "/build/xffm")){
+	*strstr(dir, "/build/xffm") = 0;
+	buildIcons = g_build_path(G_DIR_SEPARATOR_S,dir, "xffm", "icons", NULL);
+	TRACE("buildIcons=%s\n", buildIcons);
+    } 
+    g_free(dir);
+
+
 #ifndef FORK
     DBG("FORK disabled: SSH_ASKPASS will not work.");
 #endif

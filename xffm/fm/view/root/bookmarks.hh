@@ -107,7 +107,12 @@ private:
 		return NULL;
 	    }
 	}
-        return g_build_filename(configDir, BOOKMARKS_DIR, BOOKMARKS_FILE, NULL);
+	auto name = g_build_filename(configDir, BOOKMARKS_DIR, BOOKMARKS_FILE, NULL);
+	if (!g_file_test(name, G_FILE_TEST_EXISTS)){
+	    fclose(fopen(name, "w"));
+	}
+
+        return name;
     }
 
     static bookmarkItem_t *

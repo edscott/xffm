@@ -16,6 +16,9 @@ target_link_libraries(xffm
     ${LIBMAGIC_LIBRARIES}
     ${THREAD_LIBRARIES})
 
+execute_process(COMMAND ln -sf xffm xfgetpass WORKING_DIRECTORY xffm)
+
+
 install(TARGETS xffm RUNTIME DESTINATION bin)
 INSTALL(CODE "execute_process( \
     COMMAND ${CMAKE_COMMAND} -E create_symlink \

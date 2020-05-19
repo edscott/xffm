@@ -241,6 +241,7 @@ private:
 	    }
 
         }
+	DBG("Editor  not defined, assuming %s\n", terminalCmd);
         if (f) {
             DBG("editor is %s (Override with environment variable EDITOR)\n", f);
             setenv("EDITOR", f, 1);
@@ -250,7 +251,10 @@ private:
     static void setPasswordPrompt(void){
 	gchar *getpass = g_find_program_in_path("xfgetpass");
 	if (!getpass) {
-	    ERROR(" Xffm not correctly installed. Cannot find xfgetpass in path\n");
+	    TRACE("get pass at %s\n", buildGetPass);
+	    setenv("SUDO_ASKPASS", buildGetPass, 1);
+	    setenv("SSH_ASKPASS", buildGetPass, 1);
+	    //ERROR(" Xffm not correctly installed. Cannot find xfgetpass in path\n");
 	} else {
 	    TRACE("get pass at %s\n", getpass);
 	    setenv("SUDO_ASKPASS", getpass, 1);
