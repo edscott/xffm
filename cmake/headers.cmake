@@ -45,7 +45,7 @@ if(NOT MAGIC_H)
 else()
     set(MAGIC_H "HAVE_MAGIC_H 1")
     message( STATUS  "magic.h was found." )
-    include(cmake/libmagic.cmake)
+    set(LIBMAGIC_LIBRARIES "-lmagic")
     set(LIBMAGIC_FOUND "1")
 endif()
 
