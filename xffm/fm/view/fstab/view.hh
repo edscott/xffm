@@ -43,7 +43,7 @@ msgid "NFS remote directory"
 */
 
 
-#ifdef FREEBSD_FOUND
+#ifdef BSD_FOUND
 # include <fstab.h>
 # include <sys/ucred.h>
 
@@ -92,7 +92,7 @@ class FstabView: public FstabPopUp<Type> {
     using pixbuf_c = Pixbuf<double>;
     using util_c = Util<double>;
 
-#ifdef FREEBSD_FOUND
+#ifdef BSD_FOUND
 public:
     // mount from fstab data or directly
     static gboolean

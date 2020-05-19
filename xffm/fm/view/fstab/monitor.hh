@@ -19,7 +19,7 @@ class FstabMonitor: public BaseMonitor<Type> {
     //void *mountArg_[5]; // Needs to exist until destructor is called.
     // Please note, sending signal to monitor avoid race condition if
     // this thread tries to do more than this...
-#ifdef FREEBSD_FOUND
+#ifdef BSD_FOUND
 #else
 public:    
     FstabMonitor(GtkTreeModel *treeModel, View<Type> *view):

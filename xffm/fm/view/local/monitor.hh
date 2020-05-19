@@ -60,7 +60,7 @@ public:
     }
 
 #ifdef ENABLE_FSTAB_MODULE
-#ifdef FREEBSD_FOUND
+#ifdef BSD_FOUND
     void startMountThread(void){
     }
 #else

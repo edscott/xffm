@@ -292,7 +292,7 @@ private:
 
     static void
     GNUrm(const gchar *path){
-#ifdef FREEBSD_FOUND
+#ifdef BSD_FOUND
         const gchar *arg[] = {
             "rm",
             "-f",
@@ -321,7 +321,7 @@ private:
 
     static void
     GNUshred(const gchar *path){
-#ifdef FREEBSD_FOUND
+#ifdef BSD_FOUND
         const gchar *arg[] = {
             "rm",
             "-f",
