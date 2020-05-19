@@ -10,8 +10,9 @@ include(cmake/pthreads.cmake)
 
 
 # work in alpha phase...
-#set(CMAKE_CXX_FLAGS "-ggdb")
 #set(ALPHA "#define ALPHA")
+# debugging in lldb/gdb
+set(CMAKE_CXX_FLAGS "-g -O0")
 
 execute_process(COMMAND uname -s OUTPUT_VARIABLE UNAME)
 if(UNAME MATCHES FreeBSD)

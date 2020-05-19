@@ -77,7 +77,7 @@ public:
             return FALSE;
         }
 	   
-	if (abs(e->x - motionX) > 5 || abs(e->y - motionY > 5) )noMotion=FALSE;
+	if (abs(e->x - motionX) > 5 || abs(e->y - motionY) > 5 )noMotion=FALSE;
 
         if (buttonPressX >= 0 && buttonPressY >= 0){
 	    TRACE("buttonPressX >= 0 && buttonPressY >= 0\n");

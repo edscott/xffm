@@ -276,7 +276,7 @@ public:
         auto user = pw ? g_strdup(pw->pw_name) : g_strdup_printf("%d", st->st_uid);
         auto group = gr ? g_strdup(gr->gr_name) : g_strdup_printf("%d", st->st_gid);
 
-        auto info = g_strdup_printf("%s %ld %s %s", mode, links, user, group);
+        auto info = g_strdup_printf("%s %lu %s %s", mode, (unsigned long)links, user, group);
         g_free(user);
         g_free(group);
         g_free(mode);
