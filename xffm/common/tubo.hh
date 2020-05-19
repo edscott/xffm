@@ -517,10 +517,13 @@ private:
             waitpid (fork_p->PID, &status, 0);
         } 
         else {
+
             // leave child in waitable state...
-            // no such thing in BSD
+            // no such thing in openBSD (P_PID will not be defined)
+#ifdef P_PID
             siginfo_t infop;
             waitid (P_PID, fork_p->PID, &infop, WNOWAIT);
+#endif
         }
 
         // TRACE (" threadedWait_f waiting for semaphore 0 (stdin)...\n");
