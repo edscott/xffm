@@ -6,6 +6,7 @@ set(PREFIX_BIN /usr/local/bin)
 # Version info
 set(xffm_VERSION_MAJOR 0)
 set(xffm_VERSION_MINOR 94)
+include(cmake/pthreads.cmake)
 set(THREAD_LIBRARIES "-lpthread -lrt")
 
 
