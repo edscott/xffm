@@ -195,7 +195,7 @@ private:
         
     static GSList *
     readBookmarkFile(GSList * list){ 
-        DBG("now reading bookmark file\n"); 
+        TRACE("now reading bookmark file\n"); 
         list = clearBookmarksList(list);
         auto f = openBookmarkFile();
         if (!f) return NULL;

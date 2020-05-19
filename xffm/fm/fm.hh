@@ -194,7 +194,8 @@ private:
 	    setenv("TERMINAL", terminal, 1);
 	    return setTerminalCmd(terminal);
 	}
-	ERROR("No terminal command found. Please define environment variable \"TERMINAL\"\n");
+        //WARN("TERMINAL not defined, assuming %s (override with environment variable)\n", "xterm -e");
+	//ERROR("No terminal command found. Please define environment variable \"TERMINAL\"\n");
 	return "xterm -e";
     }
 
@@ -231,9 +232,7 @@ private:
 		    f = g_find_program_in_path("nano");
 		    if(!f){
 		        // nano is mandatory
-		        std::cerr<<
-                            "*** Warning: No suitable EDITOR found"
-                           <<" (tried gvim, vi, nano)\n";
+		        WARN("*** Warning: No suitable EDITOR found (tried gvim, vi, nano)\n");
                     }
 		    g_free(f);
 		    f = g_strdup_printf("%s nano", terminalCmd);
@@ -241,9 +240,8 @@ private:
 	    }
 
         }
-	DBG("Editor  not defined, assuming %s\n", terminalCmd);
-        if (f) {
-            DBG("editor is %s (Override with environment variable EDITOR)\n", f);
+	if (!e){
+	    DBG("EDITOR not defined, assuming %s (override with environment variable)\n", f);
             setenv("EDITOR", f, 1);
         }
     }
