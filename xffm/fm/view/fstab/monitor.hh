@@ -28,17 +28,17 @@ public:
         
     }
     ~FstabMonitor(void){
-        TRACE("Destructor:~local_monitor_c()\n");
-#ifdef USE_MOUNTTHREAD
+        DBG("Destructor:~local_monitor_c()\n");
+#ifdef xUSE_MOUNTTHREAD
         // stop mountThread
         this->mountArg_[1] = NULL;
         while (this->mountArg_[2]){
-            TRACE("***Waiting for mountThread to exit\n");
+            DBG("***Waiting for mountThread to exit\n");
             sleep(1);
         }
 #endif
         //g_hash_table_destroy(this->itemsHash());
-        TRACE("***Destructor:~local_monitor_c() complete\n");
+        DBG("***Destructor:~local_monitor_c() complete\n");
     }
 
     void
@@ -151,6 +151,7 @@ private:
         gboolean retval = FALSE;
         // Mounted but not in mounts hash:
  	gtk_tree_model_get (treeModel, iter, PATH, &path, -1);
+	TRACE("Fstab<>::checkIfMounted(%s)...\n", path);
         if (FstabView<Type>::isMounted(path)) {
             gchar *key = PixbufHash<Type>::get_hash_key(path, 10);
             if (!g_hash_table_lookup((GHashTable *)data, key)){

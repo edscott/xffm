@@ -37,6 +37,8 @@ public:
 	ClipBoard<double>::stopClipBoard();  
     }
     Fm(int argc, char *argv[]){
+	// Construct app hash
+	MimeApplication<Type>::constructAppHash();
 	/* ignore hangups? */
 	(void)signal (SIGHUP, SIG_IGN);
 #ifdef CORE

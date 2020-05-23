@@ -8,6 +8,7 @@
 
 static GKeyFile *keyFile = NULL;
 static gchar *settingsfile = NULL;
+static pthread_mutex_t settingsMutex=PTHREAD_MUTEX_INITIALIZER;
 gsize mTime;
 namespace xf {
 
@@ -18,6 +19,7 @@ public:
 
     static void
     readSettings(void){
+        pthread_mutex_lock(&settingsMutex);
         if (keyFile) g_key_file_free(keyFile);
         if (settingsfile) g_free(settingsfile); 
         keyFile = g_key_file_new();
@@ -40,6 +42,8 @@ public:
 	    errno=0;
 	    mTime=time(NULL);
         } else mTime = st.st_mtime;
+        pthread_mutex_unlock(&settingsMutex);
+	
     }
 private:
     static void

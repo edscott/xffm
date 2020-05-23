@@ -14,12 +14,12 @@
 #endif
 
 // Version 0.93, enable fstab and ecryptfs (Linux)
-#ifdef FREEBSD_NOT_FOUND
+#ifdef BSD_NOT_FOUND
 # undef ENABLE_EFS_MODULE 
 # define ENABLE_EFS_MODULE 1
 #endif
 
-#ifdef FREEBSD_FOUND
+#ifdef BSD_FOUND
 # undef ENABLE_EFS_MODULE 
 #endif
 

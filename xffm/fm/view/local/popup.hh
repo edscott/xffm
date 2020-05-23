@@ -515,6 +515,7 @@ private:
         if (EFS<Type>::isEFS(path)) path += strlen("efs:/");
 #endif
         GtkWidget *show, *hide;
+	TRACE("local/showDirectoryItems()...\n");
         if (FstabView<Type>::isMounted(path)){
             show = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Unmount the volume associated with this folder"));
             hide = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Mount the volume associated with this folder"));
@@ -762,6 +763,7 @@ private:
 
 public:
 #ifdef ENABLE_FSTAB_MODULE
+
     static void
     mount(GtkMenuItem *menuItem, gpointer data)
     {
@@ -770,12 +772,16 @@ public:
 #ifdef ENABLE_EFS_MODULE
         if (EFS<Type>::isEFS(path)){
             path += strlen("efs:/");
+	    TRACE("local/popup.hh::mount()..\n");
             if (!FstabView<Type>::isMounted(path)){ 
                 EFS<Type>::doDialog(path, data);
             } else {
                 if (!FstabView<Type>::mountPath(view, path, NULL)){
                     ERROR("localpopup.hh:: mount command failed\n");
-                } 
+                } else {
+		    // update icon emblem:
+		    g_timeout_add(1000, EFS<Type>::changeEfsItem, (void*)view);
+		}
             }
             return;
         }

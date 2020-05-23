@@ -189,11 +189,17 @@ public:
 	TRACE("%s --> %s --> %s\n", xd_p->path, xd_p->mimetype, xd_p->icon);
 	if (strcmp(xd_p->mimetype, "inode/unknown")==0){
 	    g_free(xd_p->mimetype);
-	    xd_p->mimetype = Mime<Type>::mimeType(xd_p->path);
+	    if (g_file_test(xd_p->path, G_FILE_TEST_IS_DIR)){
+		xd_p->mimetype = g_strdup("inode/directory");
+		xd_p->d_type = DT_DIR;
+	    } else {
+		xd_p->mimetype = Mime<Type>::mimeType(xd_p->path);
+	    }
 	    if (!xd_p->mimetype) xd_p->mimetype = g_strdup("inode/unknown");
 	    g_free(xd_p->icon);
 	    xd_p->icon = LocalIcons<Type>::getIconname(xd_p);   
 	}
+	TRACE("2. %s --> %s --> %s\n", xd_p->path, xd_p->mimetype, xd_p->icon);
         gchar *iconName = xd_p->icon;
 
 	
@@ -279,26 +285,50 @@ public:
         g_free(size);
 	return TRUE;
     }
-
     gboolean 
     restat_item(GFile *src){
+        gchar *path = g_file_get_path(src);
+	auto retval = restat_item(path);
+        g_free(path);
+	return retval;
+    }
+
+    gboolean 
+    restat_item(const gchar *path){
         // First we use a hash to check if item is in treemodel.
         // Then, if found, we go on to find the item in the treemodel and update.
         // If not found, we should add item.
-        gchar *path = g_file_get_path(src);
 	TRACE("restat_item %s \n", path);
         gboolean showHidden = (Settings<Type>::getSettingInteger("LocalView", "ShowHidden") > 0);
 	if (path[0] == '.' && !showHidden) {
-	    g_free(path);
 	    return FALSE;
 	}
+	// XXX Look for specific item within the treemodel.
+	//     When found, do the restat business.
         void *arg[] = {(void *)(path), (void *)this->baseView_};
         gtk_tree_model_foreach (GTK_TREE_MODEL(this->store_), stat_func, (gpointer) arg); 
-        g_free(path);
         return TRUE;
     }
 
 private:
+    static gboolean changeItem(void *data){
+	auto arg = (void **)data;
+        auto p = (LocalMonitor<Type> *)arg[0];
+	auto f = (gchar *)arg[1];
+	// If an direct path icon (image for example) clear hash first
+	// This will clear the thumbnail since item is no longer hashed.
+	if (g_path_is_absolute(f)){
+	    PixbufHash<Type>::rm_from_pixbuf_hash(f, 24);
+	    PixbufHash<Type>::rm_from_pixbuf_hash(f, 48);
+	}
+	// XXX: doesn't restat item do the above?
+	p->restat_item(f);
+	g_free(f);
+	g_free(arg);
+	return G_SOURCE_REMOVE;
+    }
+	
+	
     
     static void
     monitor_f (GFileMonitor      *mon,
@@ -344,15 +374,24 @@ private:
 #endif
                 break;
             case G_FILE_MONITOR_EVENT_CHANGED:
+	    {
                 if (verbose) DBG("monitor_f(): Received  CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
-                // reload icon
+         /*       // reload icon
 		PixbufHash<Type>::rm_from_pixbuf_hash(f, 24);
 		PixbufHash<Type>::rm_from_pixbuf_hash(f, 48);
 		// Thumbnails are not thumbnailed.
 		//PixbufHash<Type>::zap_thumbnail_file(f, 24);
 		//PixbufHash<Type>::zap_thumbnail_file(f, 48);
-                p->restat_item(first);
-                break;
+                p->restat_item(first);*/
+		auto arg = (void **)calloc(2, sizeof(void *));
+		if (!arg){
+		    ERROR("local/monitor.hh::monitor_f(): %s\n",strerror(errno));
+		} else {
+		    arg[0]=(void *)p;
+		    arg[1]=g_strdup(f);
+		    g_timeout_add(500, changeItem, arg);
+		}
+	    } break;
             case G_FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED:
                 if (verbose) DBG("Received  ATTRIBUTE_CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
                 p->restat_item(first);

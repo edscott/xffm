@@ -89,6 +89,7 @@ public:
 	return loadModel(path, this);
     }
     gboolean loadModel(const gchar *path, View<Type> *view){
+        TRACE("loadModel(%s, view)\n", path);
 	// This sets viewType
         if (isTreeView){
 	    // hide iconview, show treeview

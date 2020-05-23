@@ -51,6 +51,7 @@ class RootPopUp  {
         if (EFS<Type>::isEFS(itemPath)){
             itemPath += strlen("efs:/");
             GtkWidget *show, *hide;
+	    TRACE("Root<>::resetMenuItems()...\n");
             if (FstabView<Type>::isMounted(itemPath)){
                 show = umountW;
                 hide = mountW;
@@ -174,6 +175,7 @@ private:
         return rootPopUp;        
     }  
 
+
     static GtkMenu *createItemPopUp(void){
 	menuItem_t item[]=
         {
@@ -220,7 +222,7 @@ private:
     static void
     menuAddEFS(GtkMenuItem *menuItem, gpointer data)
     {
-        DBG("menuAddEFS\n");
+        TRACE("menuAddEFS\n");
         EFS<Type>::doDialog(NULL, data);
     }
 #endif

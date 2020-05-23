@@ -311,10 +311,28 @@ private:
             NULL
         };
 #endif
+	auto notebookP = Fm<Type>::getCurrentNotebook();
+	auto pageP = notebookP->currentPageObject();
+	// Build command line
+	gchar *command = g_strdup(arg[0]);
+	for (auto p=arg+1; p && *p; p++){
+	    gchar *g;
+	    if (strchr(*p, ' ')) {
+		g = g_strconcat(command, " \"",*p,"\"", NULL);
+	    } else {
+		g = g_strconcat(command, " ",*p, NULL);
+	    }
+	    g_free(command);
+	    command = g;
+	}
+	pageP->run_lp_command(pageP->output(), pageP->workDir(), command);
+	// replaced:
+	/*
         Run<Type>::thread_runReap(NULL, arg, 
                 Run<Type>::run_operate_stdout, 
                 Run<Type>::run_operate_stderr, 
                 NULL);
+	*/
 
     }
 
@@ -408,7 +426,11 @@ private:
         if (mode != MODE_RM && mode != MODE_TRASH && mode != MODE_SHRED) 
 	    return FALSE;
         GFile *file = g_file_new_for_path(path);
-        switch (mode) {
+	auto notebookP = Fm<Type>::getCurrentNotebook();
+	auto pageP = notebookP->currentPageObject();
+	Print<double>::show_text(pageP->output());
+	//pageP->run_lp_command(pageP->output(), pageP->workDir(), command);        
+	switch (mode) {
             case MODE_RM:
                if (g_file_test(path, G_FILE_TEST_IS_DIR)){
 		   GNUrm(path);
@@ -417,6 +439,8 @@ private:
                    arg[0] = GINT_TO_POINTER(mode);
                    arg[1] = (void *)g_strdup(path);
                    asyncReference++;
+		   Print<double>::print(pageP->output(), "green", 
+			   g_strdup_printf("g_file_delete_async(%s)\n", path));
                    g_file_delete_async (file, G_PRIORITY_LOW, 
                             NULL,   // GCancellable *cancellable,
                             asyncCallback,

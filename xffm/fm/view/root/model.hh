@@ -63,6 +63,11 @@ public:
             g_free(basename);
             const gchar *ball = NULL;
             if (!g_file_test(*p, G_FILE_TEST_IS_DIR))ball = "/NE/dialog-error/3.0/220";
+	    else {
+		TRACE("model.hh::addEfsItem()...\n"); 
+		if (FstabView<Type>::isMounted(*p))ball = "/NE/greenball/3.0/220";
+		else ball = "/NE/grayball/3.0/220";
+	    }
 	    auto icon_name = g_strconcat("drive-harddisk/SE/emblem-readonly/2.0/225", ball, NULL);
 
             auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_EMBLEM, NULL);

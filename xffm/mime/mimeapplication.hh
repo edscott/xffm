@@ -1,5 +1,6 @@
 #ifndef XF_MIMEAPPLICATION_HH
 #define XF_MIMEAPPLICATION_HH
+#include <pthread.h>
 
 
 namespace xf {
@@ -18,10 +19,11 @@ class MimeApplication {
 	g_strfreev(p);
     }
 public:
-    static void
-    mimeBuildHashes (void) {
+    static void constructAppHash (void) {
         applicationHash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, freeStrV);
+	loadAppHash();
     }
+    
     static const gchar **
     locate_apps (const gchar * mimetype) {
 
@@ -29,21 +31,26 @@ public:
         ///  now look in hash...
         if (!mimetype) return NULL;
         pthread_mutex_lock(&mimeAppHashMutex);
-	if (!applicationHash) mimeBuildHashes();
+	if (!applicationHash) {
+	    DBG("applicationHash does not exist.\n");
+	    pthread_mutex_unlock(&mimeAppHashMutex);
+	    return NULL;
+	}
 	TRACE("loading apps for mimetype: %s\n", mimetype);
         auto apps = (const gchar **)g_hash_table_lookup (applicationHash, mimetype);
         pthread_mutex_unlock(&mimeAppHashMutex);
         return apps;
     }
 
-private:
-    
+public:   
     static void
     add2ApplicationHash(const gchar *type, const gchar *command, gboolean prepend){
         // Always use basic mimetype: avoid hashing alias mimetypes...
-        const gchar *basic_type = MimeSuffix<Type>::getBasicType(type);
-        if (!basic_type) basic_type = type;
-        pthread_mutex_lock(&mimeAppHashMutex);
+	// Suffix hash is currently not enabled.
+        // const gchar *basic_type = MimeSuffix<Type>::getBasicType(type);
+        // if (!basic_type) basic_type = type;
+        auto basic_type = type;
+	pthread_mutex_lock(&mimeAppHashMutex);
 	auto apps = (gchar **)g_hash_table_lookup(applicationHash, basic_type);
 	if (apps) {
 	    int size = 1; // final 0
@@ -52,11 +59,13 @@ private:
 	    for (p=apps; p && *p; p++) {
                 if (strcmp(*p, command)==0) {
                     pthread_mutex_unlock(&mimeAppHashMutex);
+		    TRACE("command \"%s\" already in hash\n", command);
                     return;
                 }
             }
             // get vector size.
 	    for (p=apps; p && *p; p++) size++;
+	    TRACE("application vector size=%d\n", size);
 
 	    gchar **newApps = (gchar **)calloc(size+1, sizeof(gchar *));
 	    if (!newApps){
@@ -75,12 +84,35 @@ private:
 	    gchar **newApps = (gchar **)calloc(2, sizeof(gchar *));
 	    newApps[0] = g_strdup(command);
 	    g_hash_table_insert(applicationHash, g_strdup(basic_type), (void *)newApps);
-            TRACE("adding hash value %s -> %s\n", basic_type, command);
+            TRACE("adding NEW hash value %s -> %s\n", basic_type, command);
 	} 
         pthread_mutex_unlock(&mimeAppHashMutex);
         return;
 
     }
+    
+private:
+
+    static gboolean loadAppHash(void){
+	pthread_t thread;
+	void *retval;
+	int result;
+        result = pthread_create(&thread, NULL, loadAppHash_f, NULL);
+	if (result != 0) {
+	    DBG("MimeApplications::loadAppHash() pthread_create: %s\n", strerror(errno));
+	    return FALSE;
+	}
+        pthread_detach(thread);
+	return TRUE;
+    }
+
+    static void *loadAppHash_f(void *data){
+	g_thread_yield();
+	processApplicationDir("/usr/share/applications");
+	processApplicationDir("/usr/local/share/applications");
+	return NULL;
+    }
+public:
     static void
     processApplicationDir(const gchar *dir){
 	DIR *directory = opendir(dir);
@@ -92,7 +124,7 @@ private:
 	readApplicationDir(dir, directory);
 	closedir (directory);
     }
-
+private:
     static void 
     readApplicationDir(const gchar *dir, DIR *directory){
 	//  mutex protect...
@@ -145,6 +177,18 @@ private:
 	    gchar **p;
 	    for (p=types; p && *p; p++){
 		gchar *e = (exec)?exec:tryExec;
+		if (e && strchr(e,' ')){
+		    auto ee = g_strdup(e);
+		    *strchr(ee,' ') = 0;
+		    auto epath = g_find_program_in_path(ee);
+		    TRACE("%s (%s)--> %s\n", e, ee, epath);
+		    if (!epath){
+			TRACE("ignoring app: %s\n", e);
+			e=NULL;
+		    }
+		    g_free(ee);
+		    g_free(epath);
+		}
 		
 		if (*p && e){
 		    if (strstr(e, "%U")) *(strstr(e, "%U")+1) = 's';

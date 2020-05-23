@@ -241,6 +241,7 @@ public:
         gtk_widget_show(v2);
         // mount options
         GtkWidget *w;
+	TRACE("fstab/resetMenuItems()...\n");
         if (FstabView<Type>::isMounted(itemPath)){
             w = GTK_WIDGET(g_object_get_data(G_OBJECT(fstabItemPopUp), "Unmount the volume associated with this folder"));
             gtk_widget_set_sensitive(w, TRUE);

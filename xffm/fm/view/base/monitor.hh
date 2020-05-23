@@ -187,7 +187,7 @@ public:
     void
     startMonitor(GtkTreeModel *treeModel, const gchar *path, void *monitor_f){
         if (path && strcmp(path, "/")==0){
-            WARN("Known bug: g_monitor function does not work at / (base/monitor.hh)\n");
+            WARN("Known glib bug: g_monitor function does not fully at / (base/monitor.hh)\n");
         }
         // add all initial items to hash
         if (itemsHash_) gtk_tree_model_foreach (treeModel, add2hash, (void *)itemsHash_);

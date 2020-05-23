@@ -329,7 +329,7 @@ private:
 	    const unsigned char d_type, struct stat *st_p){
         // No emblem for go up
         if (strcmp(basename, "..")==0) return g_strdup("");
-    
+	TRACE("icons.hh::getEmblem()...\n"); 
         gchar *emblem = NULL;
 
         gboolean is_lnk = (d_type == DT_LNK);

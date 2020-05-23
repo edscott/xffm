@@ -219,7 +219,7 @@ private:
         gchar *mntDir = getMntDir(path);
         auto label = e2Label(basename);
 
-
+	DBG("fstab/addFsentItem()...\n");
         gboolean mounted = isMounted(path);
         gchar *text;
         auto fstype = fsType(path);        
@@ -1550,7 +1550,7 @@ public:
         gchar *basename = g_path_get_basename(path);
         gchar *mntDir = getMntDir(path);
         auto label = e2Label(basename);
-
+	TRACE("fstab/addPartition()...\n");
 
         gboolean mounted = isMounted(path);
         gchar *text;

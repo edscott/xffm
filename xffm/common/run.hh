@@ -44,15 +44,16 @@ class Run {
         }
 
         auto string = (gchar *)g_hash_table_lookup (stringHash, GINT_TO_POINTER(controller));
-        if (!string){
-            pthread_mutex_unlock(&string_hash_mutex);
-            WARN("controller %d not found in hashtable (process has completed)\n", controller);
-            return g_strdup("");
-        }
-        g_hash_table_steal(stringHash, GINT_TO_POINTER(controller));
-        pthread_mutex_unlock(&string_hash_mutex);
         gchar bold[]={27, '[', '1', 'm',0};
-        auto dbg_string = g_strconcat(bold, string, NULL);
+        if (!string){
+            //WARN("controller %d not found in hashtable (process has completed)\n", controller);
+	    string = g_strdup_printf("%d\n", controller);
+        } else {
+	    g_hash_table_steal(stringHash, GINT_TO_POINTER(controller));
+	}
+	auto dbg_string = g_strconcat(bold, string, NULL);
+        pthread_mutex_unlock(&string_hash_mutex);
+
         g_free(string);
         return dbg_string;
     }
@@ -774,6 +775,8 @@ public:
 
 	// save value as default for mimetype extension
         setMimetypeDefault(path, mimetype, response);
+	DBG("setting mimetype default to: %s\n", response);
+	MimeApplication<Type>::add2ApplicationHash(mimetype, response, TRUE);
 
         // get command line
         if (!multiple) {

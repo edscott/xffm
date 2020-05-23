@@ -445,7 +445,9 @@ public:
                     break;
                 }
                 g_free(efsmount);
-                efs->mountUrl();
+		// This here will ask for passphrase before mounting:
+                efs->mountUrl(view);
+		// 
                 break;
             case GTK_RESPONSE_APPLY: // Save
                 efs->save();
@@ -454,7 +456,6 @@ public:
             case GTK_RESPONSE_CANCEL:
                 break;
         }
-        view->reloadModel();            
         delete(efs);
     }
     
@@ -651,7 +652,7 @@ public:
         } 
         return optionsOn;
     }
-    void mountUrl(void){
+    void mountUrl(View<Type> *view){
 
         auto path = gtk_entry_get_text(this->remoteEntry());
         auto mountPoint = gtk_entry_get_text(this->mountPointEntry());
@@ -711,7 +712,7 @@ public:
 	auto command = g_strdup_printf(_("Mounting %s"), path);
  
         pthread_mutex_lock(&efsMountMutex);
-        new (CommandResponse<Type>)(command,"system-run", argv, cleanupGo);
+        new (CommandResponse<Type>)(command,"system-run", argv, cleanupGo, (void *)view);
 
         g_free(command);
 
@@ -723,10 +724,17 @@ public:
         pthread_detach(cleanupThread);      
    }
 
+    static gboolean changeEfsItem(void *data){
+	auto view = (View<Type> *)data;
+	view->reloadModel();	
+	return G_SOURCE_REMOVE;
+    }
    
     static void 
     cleanupGo(void * data){
         pthread_mutex_unlock(&efsMountMutex);
+	// update icon emblem:
+	g_timeout_add(1000, changeEfsItem, data);
     }
 
     static void *
