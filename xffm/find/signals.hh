@@ -140,7 +140,7 @@ private:
 	/*if (!view->loadModel(treeModel, tpath, path)){
             TRACE("base-signals:activate():cannot load %s\n", path);
         }*/
-        DBG("path is %s\n", path);
+        TRACE("path is %s\n", path);
         gchar *wd = g_path_get_dirname(path);
         GList *pathList = g_list_prepend(NULL, path);
         gchar *command = Run<Type>::getOpenWithCommand(findDialog, pathList, wd);
@@ -200,14 +200,14 @@ public:
 
     static void 
     sensitivize (GtkToggleButton *togglebutton, gpointer data){
-	DBG("sensitivize\n");
+	TRACE("sensitivize\n");
 	GtkWidget *widget = GTK_WIDGET(data);
 	gtk_widget_set_sensitive(widget, gtk_toggle_button_get_active(togglebutton));
     }
 
     static void 
     sensitivize_radio (GtkToggleButton *togglebutton, gpointer data){
-	DBG("sensitivize_radio\n");
+	TRACE("sensitivize_radio\n");
 	if (!data) return;
 	radio_t *radio_p = (radio_t *)data;
 	gtk_widget_set_sensitive(GTK_WIDGET(radio_p->box), FALSE);
@@ -405,7 +405,7 @@ private:
     }
     static void
     cancel_all(void * dialog){
-	DBG("cancel_all\n");
+	TRACE("cancel_all\n");
         void *diagnostics = g_object_get_data(G_OBJECT(dialog), "diagnostics");
         g_hash_table_foreach_remove (controllerHash, removeFunc, diagnostics);
         GtkWidget *cancel = GTK_WIDGET(g_object_get_data(G_OBJECT(dialog), "cancel_button"));
@@ -414,7 +414,7 @@ private:
 
     static gboolean
     Cleanup (void *data) {
-	DBG("Cleanup\n");
+	TRACE("Cleanup\n");
        fgrData_t *Data = (fgrData_t *)data;
        GtkWindow *dialog = Data->dialog;
        if (g_hash_table_size(controllerHash) == 0){
@@ -428,7 +428,7 @@ private:
             if (!editor || strlen(editor)==0){
                 GtkTextView *diagnostics = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(dialog), "diagnostics"));
                 print_c::print_icon(diagnostics, "dialog-warning", 
-                        g_strdup_printf("%s (EDITOR=\"\")\n", _("No editor for current action.")));
+                        g_strdup_printf("%s\n", _("No editor for current action.")));
                 return FALSE;
             }
 	    gtk_widget_set_sensitive(GTK_WIDGET(edit_button), TRUE);
@@ -566,7 +566,7 @@ private:
 
     static gboolean
     on_find_clicked_action (GtkWindow *dialog) {
-	DBG("on_find_clicked_action\n");
+	TRACE("on_find_clicked_action\n");
         GtkTextView *diagnostics = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(dialog), "diagnostics"));
         // Get the search path.
         GtkEntry *entry = GTK_ENTRY(g_object_get_data(G_OBJECT(dialog), "path_entry"));
@@ -862,7 +862,7 @@ private:
 
 	auto editor = Util<Type>::getEditor();
         if (!editor || strlen(editor)==0){
-            print_c::print_error(diagnostics, g_strdup_printf("%s (EDITOR=\"%s\")\n",
+            print_c::print_error(diagnostics, g_strdup_printf("%s\n",
                         _("No editor for current action."), editor));
             return;
         }

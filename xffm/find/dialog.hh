@@ -648,7 +648,7 @@ private:
 	    } 
 	    g_free(basename);
 	} else {
-	    TRACE("getenv(\"EDITOR\") = \"%s\"\n", editor);
+	    TRACE("getEditor() = \"%s\"\n", editor);
 	}
 
 
