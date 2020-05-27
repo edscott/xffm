@@ -31,10 +31,14 @@ protected:
 	if(pipe) {
 	    gchar line[256];
 	    memset (line, 0, 256);
-	    if(fgets (line, 255, pipe) == NULL)
-		ERROR ("fgets: %s\n", strerror (errno));
+	    if(fgets (line, 255, pipe) == NULL){
+		// Definitely not GNU grep. BSD version.
+		TRACE("pipe for \"grep --version\"\n"); 
+		TRACE ("fgets: %s\n", strerror (errno));
+	    } else {
+		if(strstr (line, "GNU")) gnuGrep_ = TRUE;
+	    }
 	    pclose (pipe);
-	    if(strstr (line, "GNU")) gnuGrep_ = TRUE;
 	}
 	g_free (grep);
 	return TRUE;
@@ -105,6 +109,11 @@ private:
 	gtk_container_add (GTK_CONTAINER (findDialog), GTK_WIDGET(mainVbox));
 
 	auto vpane = GTK_PANED(gtk_paned_new(GTK_ORIENTATION_VERTICAL));
+
+	// Cursor does not change over handle in OpenBSD,
+	// so now we default to wide handle.
+	gtk_paned_set_wide_handle (vpane,TRUE);
+	
 	g_object_set_data(G_OBJECT(findDialog), "vpane", (gpointer)vpane);
 	gtk_widget_show (GTK_WIDGET(vpane));
 	gtk_box_pack_start (mainVbox, GTK_WIDGET(vpane), TRUE, TRUE, 0);
