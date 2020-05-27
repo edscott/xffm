@@ -200,12 +200,14 @@ public:
 
     static void 
     sensitivize (GtkToggleButton *togglebutton, gpointer data){
+	DBG("sensitivize\n");
 	GtkWidget *widget = GTK_WIDGET(data);
 	gtk_widget_set_sensitive(widget, gtk_toggle_button_get_active(togglebutton));
     }
 
     static void 
     sensitivize_radio (GtkToggleButton *togglebutton, gpointer data){
+	DBG("sensitivize_radio\n");
 	if (!data) return;
 	radio_t *radio_p = (radio_t *)data;
 	gtk_widget_set_sensitive(GTK_WIDGET(radio_p->box), FALSE);
@@ -316,7 +318,8 @@ public:
     }
 
     static void grepOptions (GtkEntry *widget, gpointer data) {
-        gboolean active = FALSE;
+	TRACE("grepOptions\n");
+      	gboolean active = FALSE;
 	gchar *text = util_c::compact_line(gtk_entry_get_text(GTK_ENTRY(widget)));
         if (text && strlen(text)) active = TRUE;
         g_free(text);
@@ -402,6 +405,7 @@ private:
     }
     static void
     cancel_all(void * dialog){
+	DBG("cancel_all\n");
         void *diagnostics = g_object_get_data(G_OBJECT(dialog), "diagnostics");
         g_hash_table_foreach_remove (controllerHash, removeFunc, diagnostics);
         GtkWidget *cancel = GTK_WIDGET(g_object_get_data(G_OBJECT(dialog), "cancel_button"));
@@ -410,6 +414,7 @@ private:
 
     static gboolean
     Cleanup (void *data) {
+	DBG("Cleanup\n");
        fgrData_t *Data = (fgrData_t *)data;
        GtkWindow *dialog = Data->dialog;
        if (g_hash_table_size(controllerHash) == 0){
@@ -561,6 +566,7 @@ private:
 
     static gboolean
     on_find_clicked_action (GtkWindow *dialog) {
+	DBG("on_find_clicked_action\n");
         GtkTextView *diagnostics = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(dialog), "diagnostics"));
         // Get the search path.
         GtkEntry *entry = GTK_ENTRY(g_object_get_data(G_OBJECT(dialog), "path_entry"));

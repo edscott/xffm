@@ -620,7 +620,7 @@ private:
 	gtk_container_add (GTK_CONTAINER (hbuttonbox2), GTK_WIDGET(findButton));
 	gtk_container_add (GTK_CONTAINER (hbuttonbox2), GTK_WIDGET(clearButton));
 
-	auto editor = getenv("EDITOR");
+	auto editor = Util<Type>::getEditor();
 	if (editor && strlen(editor)){
 	    auto basename = g_strdup(editor);
 	    if (strchr(basename, ' ')) *strchr(basename, ' ') = 0;
