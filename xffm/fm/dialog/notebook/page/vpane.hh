@@ -19,8 +19,8 @@ public:
 public:
     Vpane(void){
 	vpane_ = GTK_PANED(gtk_paned_new(GTK_ORIENTATION_VERTICAL));
-	//gtk_paned_set_wide_handle (vpane_, TRUE);
-	gtk_paned_set_wide_handle (vpane_, FALSE);
+	gtk_paned_set_wide_handle (vpane_, TRUE);
+	//gtk_paned_set_wide_handle (vpane_, FALSE);
 	topScrolledWindow_ = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new (NULL, NULL));
 	treeScrolledWindow_ = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new (NULL, NULL));
 	
