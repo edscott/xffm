@@ -100,9 +100,10 @@ public:
 	    else path = g_strdup(argv[1]);
 	} else path = g_strdup("xffm:root");
 
-
-	setEditor(setTerminal());
-	setPasswordPrompt();
+	Util<Type>::getEditor();
+	Util<Type>::getTerminal();
+	Util<Type>::getTerminalCmd();
+	Util<Type>::getPasswordPrompt();
 
 	
 	auto xffm = new(xf::Dialog<double>)(path);
@@ -161,107 +162,8 @@ public:
 	return g_get_home_dir();
     }
 
+
 private:
-    
-    static const gchar *setTerminalCmd(const gchar *terminal){
-	auto userSetTerminalCmd = getenv("TERMINAL_EXEC");
-	if (userSetTerminalCmd && !strlen(userSetTerminalCmd)) 
-	    userSetTerminalCmd = NULL;
-	if (userSetTerminalCmd) return userSetTerminalCmd;
-	auto terminalCmd = g_strconcat(terminal, " -e", NULL);
-	DBG("TERMINAL_EXEC not defined, assuming %s\n", terminalCmd);
-	setenv("TERMINAL_EXEC", terminalCmd, 1);
-	return terminalCmd;
-    }
-
-    static const gchar *setTerminal(void){
-	auto userSetTerminal = getenv("TERMINAL");
-	if (userSetTerminal && !strlen(userSetTerminal)) 
-	    userSetTerminal = NULL;
-	if (userSetTerminal){
-	    WARN("User set terminal = %s\n", userSetTerminal);
-	    return setTerminalCmd(userSetTerminal);
-	} 
-	
-	auto terminal = Util<double>::get_terminal();
-	if (terminal)
-	{
-	    static gchar *t;
-	    if (strcmp(terminal, "uxterm")==0 || strcmp(terminal, "xterm")==0){
-		t = g_strdup_printf("%s -rv -vb", terminal);
-		setenv("TERMINAL", t, 1);
-	        WARN("Using terminal = %s\n", getenv("TERMINAL"));
-	        return setTerminalCmd(t);
-	    }
-	    setenv("TERMINAL", terminal, 1);
-	    return setTerminalCmd(terminal);
-	}
-        //WARN("TERMINAL not defined, assuming %s (override with environment variable)\n", "xterm -e");
-	//ERROR("No terminal command found. Please define environment variable \"TERMINAL\"\n");
-	return "xterm -e";
-    }
-
-    static void setEditor(const gchar *terminalCmd){
-	const gchar *e = getenv("EDITOR");
-        if (e && strlen(e)==0) e = NULL;
-        gchar *f = NULL;
-	if (e) {
-            // remove options
-            f = g_strdup(e);
-	    if (strrchr(f, ' ')) *(strrchr(f, ' ')) = 0;
-        }
-
-        if (f && g_file_test(f, G_FILE_TEST_EXISTS)){
-	    gchar *g = g_path_get_basename(e);
-	    if (strcmp(g, "nano")==0 || strcmp(g, "vi")==0 
-                || strcmp(g, "vim")==0 || strcmp(g, "emacs")==0){                  
-                g_free(f);
-                f = g_strdup_printf("%s %s", terminalCmd, e); 
-            }
-
-        } else {
-            g_free(f);
-	    f = g_find_program_in_path("gvim");
-	    if (f) {
-		g_free(f);
-		f = g_strdup("gvim -f");
-	    } else {
-		f = g_find_program_in_path("vi");
-                if (f){
-		    g_free(f);
-		    f = g_strdup_printf("%s vi", terminalCmd);
-	        } else {
-		    f = g_find_program_in_path("nano");
-		    if(!f){
-		        // nano is mandatory
-		        WARN("*** Warning: No suitable EDITOR found (tried gvim, vi, nano)\n");
-                    }
-		    g_free(f);
-		    f = g_strdup_printf("%s nano", terminalCmd);
-		} 
-	    }
-
-        }
-	if (!e){
-	    DBG("EDITOR not defined, assuming %s (override with environment variable)\n", f);
-            setenv("EDITOR", f, 1);
-        }
-    }
-
-    static void setPasswordPrompt(void){
-	gchar *getpass = g_find_program_in_path("xfgetpass");
-	if (!getpass) {
-	    TRACE("get pass at %s\n", buildGetPass);
-	    setenv("SUDO_ASKPASS", buildGetPass, 1);
-	    setenv("SSH_ASKPASS", buildGetPass, 1);
-	    //ERROR(" Xffm not correctly installed. Cannot find xfgetpass in path\n");
-	} else {
-	    TRACE("get pass at %s\n", getpass);
-	    setenv("SUDO_ASKPASS", getpass, 1);
-	    setenv("SSH_ASKPASS", getpass, 1);
-	}
-    }
-
 };
 }
 #endif

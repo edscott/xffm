@@ -419,7 +419,7 @@ private:
 
        GtkWidget *edit_button = GTK_WIDGET(g_object_get_data(G_OBJECT(dialog), "edit_button"));
        if (g_slist_length(lastFind)){
-            const gchar *editor = getenv("EDITOR");
+            const gchar *editor = Util<Type>::getEditor();
             if (!editor || strlen(editor)==0){
                 GtkTextView *diagnostics = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(dialog), "diagnostics"));
                 print_c::print_icon(diagnostics, "dialog-warning", 
@@ -854,7 +854,7 @@ private:
             return;
         }*/
 
-        const gchar *editor = getenv("EDITOR");
+	auto editor = Util<Type>::getEditor();
         if (!editor || strlen(editor)==0){
             print_c::print_error(diagnostics, g_strdup_printf("%s (EDITOR=\"%s\")\n",
                         _("No editor for current action."), editor));

@@ -684,34 +684,214 @@ public:
 	}
     }
 
-    static gchar * 
-    get_text_editor(void){
-	const gchar *value = getenv("EDITOR");
-	if(!value) return NULL;
-	
-	gchar *editor=g_path_get_basename(value);
-	g_strstrip(editor);
-#if 0
-	//if (strchr(editor, ' ')) *strchr(editor, ' ') = 0;
-	// if nano or vi, then use terminal emulator
-	if (editor && 
-		(strncmp(editor, "vi",strlen("vi"))==0 
-		 || 
-		 strncmp(editor, "nano",strlen("nano"))==0)){
-	    const gchar *term = what_term();
-	    if (term && strlen(term)) {
-		gchar *b=g_strdup_printf("%s %s %s",
-			term, term_exec_option(term), editor);
-		g_free(editor);
-		editor = b;
-	    }
+
+    static void getPasswordPrompt(void){
+	gchar *getpass = g_find_program_in_path("xfgetpass");
+	if (!getpass) {
+	    static const gchar *
+		buildGetPass = g_build_path(G_DIR_SEPARATOR_S,buildDir,"xfgetpass",NULL);
+	    setenv("SUDO_ASKPASS", buildGetPass, 1);
+	    setenv("SSH_ASKPASS", buildGetPass, 1);
+	    TRACE("get pass at %s\n", buildGetPass);
 	} else {
-	    g_free(editor);
-	    editor = g_strdup(value);
+	    TRACE("get pass at %s\n", getpass);
+	    setenv("SUDO_ASKPASS", getpass, 1);
+	    setenv("SSH_ASKPASS", getpass, 1);
 	}
-#endif
-	return (editor);
     }
+
+    static const gchar *getEditor(){
+        const gchar *editor = getenv("EDITOR");
+	if (!editor || strlen(editor)==0){
+	    setEditor();
+	}
+        editor = getenv("EDITOR");
+	if (!editor || strlen(editor)==0){
+	    ERROR("Missing EDITOR command.\n");
+	    return "gvim -f";
+	}
+	return editor;
+
+	
+    }
+
+    static const gchar *getTerminal(){
+        const gchar *term = getenv("TERMINAL");
+	if (!term || strlen(term)==0){
+	    setTerminal();
+	}
+        term = getenv("TERMINAL");
+	if (!term || strlen(term)==0){
+	    ERROR("Missing TERMINAL command.\n");
+	}
+	return term;
+    }
+
+    static const gchar *getTerminalCmd(){
+        const gchar *term = getenv("TERMINAL_CMD");
+	if (!term || strlen(term)==0){
+	    setTerminalCmd();
+	}
+        term = getenv("TERMINAL_CMD");
+	if (!term || strlen(term)==0){
+	    ERROR("Missing TERMINAL_CMD command.\n");
+	}
+	return term;
+    }
+
+private:
+    static void setEditor(void){
+	const gchar *e = getenv("EDITOR");
+        if (e && strlen(e)==0) e = NULL;
+        gchar *f = NULL;
+	auto terminalCmd = getTerminalCmd();
+	if (e) {
+            // remove options
+            f = g_strdup(e);
+	    if (strrchr(f, ' ')) *(strrchr(f, ' ')) = 0;
+        }
+
+        if (f && g_file_test(f, G_FILE_TEST_EXISTS)){
+	    gchar *g = g_path_get_basename(e);
+	    if (strcmp(g, "nano")==0 || strcmp(g, "vi")==0 
+                || strcmp(g, "vim")==0 || strcmp(g, "emacs")==0){                  
+                g_free(f);
+                f = g_strdup_printf("%s %s", terminalCmd, e); 
+            }
+
+        } else {
+            g_free(f);
+	    f = g_find_program_in_path("gvim");
+	    if (f) {
+		g_free(f);
+		f = g_strdup("gvim -f");
+	    } else {
+		f = g_find_program_in_path("vi");
+                if (f){
+		    g_free(f);
+		    f = g_strdup_printf("%s vi", terminalCmd);
+	        } else {
+		    f = g_find_program_in_path("nano");
+		    if(!f){
+		        // nano is mandatory
+		        WARN("*** Warning: No suitable EDITOR found (tried gvim, vi, nano)\n");
+                    }
+		    g_free(f);
+		    f = g_strdup_printf("%s nano", terminalCmd);
+		} 
+	    }
+
+        }
+	if (!e){
+	    DBG("EDITOR not defined, assuming %s (override with environment variable)\n", f);
+            setenv("EDITOR", f, 1);
+        }
+    }
+
+    static const gchar *setTerminal(void){
+	const gchar *terminal = getenv("TERMINAL");
+	if (terminal && strlen(terminal)) {
+	    DBG("User set terminal = %s\n", terminal);
+	    return setTerminalCmd(terminal);
+	} 
+	const gchar **p=getTerminals();
+	const gchar *foundTerm = NULL;
+	for (;p && *p; p++){
+	    auto t = g_find_program_in_path (*p);
+	    if (t) {
+		terminal=*p;
+		g_free(t);
+		break;  
+	    }  
+	}
+	
+	if (terminal)
+	{
+	    if (strcmp(terminal, "uxterm")==0 ||
+		    strcmp(terminal, "xterm")==0)
+	    {
+		static gchar *t = g_strdup_printf("%s -rv -vb", terminal);
+		setenv("TERMINAL", t, 1);
+	        TRACE("Using terminal = %s\n", getenv("TERMINAL"));
+	        return terminal;
+	    }
+	    setenv("TERMINAL", terminal, 1);
+	    return terminal;
+	}
+	DBG("No terminal command found. Please define environment variable \"TERMINAL\"\n");
+	return "xterm -vb";
+    }
+
+    static void
+    setTerminalCmd (void) {
+	const gchar *term=getTerminal();
+	const gchar *exec_option = "-e";
+	gchar *t = g_path_get_basename (term);
+	if(strcmp (t, "gnome-terminal") == 0 || strcmp (t, "Terminal") == 0)
+		exec_option = "-x";
+	g_free(t);
+	static const gchar *terminalCommand = g_strconcat(term, " ", exec_option, NULL);
+	setenv("TERMINAL_CMD", terminalCommand, 1);
+	return;
+    }
+     
+    static const gchar **
+    getTerminals(void) {
+	static const gchar *terminals_v[] = {
+	    "uxterm", 
+	    "xterm", 
+	    "konsole", 
+	    "gnome-terminal", 
+	    "roxterm", 
+	    "sakura",
+	    "Eterm", 
+	    "Terminal", 
+	    "aterm", 
+	    "kterm", 
+	    "wterm", 
+	    "multi-aterm", 
+	    "evilvte",
+	    "mlterm",
+	    "xvt",
+	    "rxvt",
+	    "urxvt",
+	    "mrxvt",
+	    "tilda",
+	    NULL
+	};
+	return terminals_v;
+    }
+
+    static const gchar **
+    getEditors(void) {
+	static const gchar *editors_v[] = {
+	    "gvim",  
+	    "gedit", 
+	    "kate", 
+	    "xemacs", 
+	    "nano",
+	    "vi",
+	    NULL
+	}; 
+	return editors_v;
+    }
+    
+    
+public:
+    
+    static const gchar *setTerminalCmd(const gchar *terminal){
+	auto userSetTerminalCmd = getenv("TERMINAL_EXEC");
+	if (userSetTerminalCmd && !strlen(userSetTerminalCmd)) 
+	    userSetTerminalCmd = NULL;
+	if (userSetTerminalCmd) return userSetTerminalCmd;
+	auto terminalCmd = g_strconcat(terminal, " -e", NULL);
+	DBG("TERMINAL_EXEC not defined, assuming %s\n", terminalCmd);
+	setenv("TERMINAL_EXEC", terminalCmd, 1);
+	return terminalCmd;
+    }
+
+
+
        
     // FIXME: valgrind does not like this function. It has something
     //        which is broken.
@@ -957,114 +1137,6 @@ public:
 	return estring;
     }
 
-
-    static const gchar *
-    what_term (void) {
-	const gchar *term=getenv ("TERMINAL_CMD");
-	gchar *t=NULL;
-	if(term && strlen (term)) {
-	    if (strchr(term, ' ')){
-		gchar **g = g_strsplit(term, " ", -1);
-		t = g_find_program_in_path (g[0]);
-		g_strfreev(g);
-	    } else {
-		t = g_find_program_in_path (term);
-	    }
-	}
-	if(!t) {
-		const gchar **p=get_terminals();
-		for (;p && *p; p++){
-		    t = g_find_program_in_path (*p);
-		    if (t) {
-			term=*p;
-			break;  
-		    }  
-		}
-	}
-	if (t) {
-	    g_free(t);
-
-	    return term;
-	}
-	ERROR("TERMINAL_CMD=%s: %s\n", getenv ("TERMINAL_CMD"), strerror (ENOENT));
-
-	return NULL;
-    }
-     
-    static const gchar * 
-    term_exec_option(const gchar *terminal) {
-	const gchar *exec_option = "-e";
-	gchar *t = g_path_get_basename (terminal);
-	if(strcmp (t, "gnome-terminal") == 0 || strcmp (t, "Terminal") == 0)
-		exec_option = "-x";
-	g_free(t);
-	return exec_option;
-    }
-
-    static const gchar *
-    get_terminal(void){
-	auto t = getenv("TERMINAL");
-	if (t && strlen(t)){
-	    auto terminal = g_find_program_in_path(t);
-	    if (terminal){
-		g_free(terminal);
-		return t;
-	    }
-	}
-
-	for (auto p=get_terminals(); p && *p; p++){
-	    auto terminal = g_find_program_in_path(*p);
-	    if (terminal){
-		g_free(terminal);
-		return *p;
-	    }
-	}
-	return NULL;    
-    }
-
-
-    static const gchar **
-    get_terminals(void) {
-	static const gchar *terminals_v[] = {
-	    "uxterm", 
-	    "xterm", 
-	    "konsole", 
-	    "gnome-terminal", 
-	    "roxterm", 
-	    "sakura",
-	    "Eterm", 
-	    "Terminal", 
-	    "aterm", 
-	    "kterm", 
-	    "wterm", 
-	    "multi-aterm", 
-	    "evilvte",
-	    "mlterm",
-	    "xvt",
-	    "rxvt",
-	    "urxvt",
-	    "mrxvt",
-	    "tilda",
-	    NULL
-	};
-	return terminals_v;
-    }
-
-    static const gchar **
-    get_editors(void) {
-	static const gchar *editors_v[] = {
-	    "gvim -f",  
-	    "mousepad", 
-	    "gedit", 
-	    "kate", 
-	    "xemacs", 
-	    "nano",
-	    "vi",
-	    NULL
-	}; 
-	return editors_v;
-    }
-    
     // TreeModel histories
     static GtkTreeModel *
     loadHistory (const gchar *history) {

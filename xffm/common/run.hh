@@ -578,9 +578,8 @@ public:
         if(!command) return NULL;
 	gchar *a = mkCommandLine(command, path);
 
-        const gchar *term = Util<Type>::what_term ();
-        const gchar *exec_flag = Util<Type>::term_exec_option(term);
-        command_line = g_strdup_printf ("%s %s %s", term, exec_flag, a);
+        auto term = Util<Type>::getTerminalCmd();
+        command_line = g_strdup_printf ("%s %s", term, a);
 	g_free(a);
         return command_line;
     }
@@ -822,9 +821,8 @@ done:
         gboolean textFiletype =(fileInfo && 
                 (strstr(fileInfo, "text")||strstr(fileInfo,"empty")));
         if (textFiletype) {
-            gchar *editor = Util<Type>::get_text_editor();
+            auto editor = Util<Type>::getEditor();
             defaultApp =g_strdup_printf("%s %%s", editor);
-            g_free(editor);
         }
 	return defaultApp;
     }
@@ -840,9 +838,8 @@ done:
 	if (!defaultApp)  {
 	    gboolean textMimetype = (mimetype && strncmp(mimetype, "text/", strlen("text/")) == 0);
 	    if (textMimetype) {
-		gchar *editor = Util<Type>::get_text_editor();
+		auto editor = Util<Type>::getEditor();
 		defaultApp =g_strdup_printf("%s %%s", editor);
-		g_free(editor);
 	    }
 	}
 	return defaultApp;
