@@ -658,7 +658,7 @@ sub getInherits {
 
 sub getMacroTags {
     my ($file) = @_;
-    trace "getMacroTags $file";
+    dbg2 "getMacroTags $file";
     open INPUT, "$file" or die "Unable to open $file";
     my $typeTag;
     my $found = 0;
@@ -670,9 +670,9 @@ sub getMacroTags {
         if (/^#/){next}
         if (not /NEW_TYPE_TAG/){next}
 	my $line = getFullLine; 
-	dbg "getMacroTags(): full line: $line";
+	dbg2 "getMacroTags(): full line: $line";
 	$typeTag = getTagName($line);
-	dbg "getMacroTags(): typetag=$typeTag";
+	dbg2 "getMacroTags(): typetag=$typeTag";
 	if ($typeTagFiles{$typeTag}) {
 	    warning("TypeTag \"$typeTag\"redefined at file $file:$referenceLineCount");
 	} else {
@@ -682,7 +682,7 @@ sub getMacroTags {
         if (/INHERITS_FROM/){
 	    my @d = getInherits($typeTag, $line);
 	    foreach $a (@d){
-		dbg "  inherits --> \"$a\" ($file:$referenceLineCount";
+		dbg2 "  inherits --> \"$a\" ($file:$referenceLineCount";
 		push(@{ $inherits{"$typeTag"} }, "$a");
 	    }
         }
@@ -691,6 +691,7 @@ sub getMacroTags {
 #            $fileTypeTags[$i++] = $typeTag;
 #if ($tag ne "") {push @typeTags, $typeTag}
     }
+    dbg2 "input $file closed\n";
     close INPUT;
     return;
 }
@@ -700,8 +701,9 @@ sub getMacroTags {
 
 sub getTypeTags {
 #   2.12 Macro tags
+    dbg2 "getMacroTags\n";
     foreach $f (@files){getMacroTags($f)}
-    foreach $f (@typeTags) {dbg "tag: $f"}
+    foreach $f (@typeTags) {dbg2 "tag: $f"}
     
 
 ####################   Structure tags 
@@ -709,6 +711,7 @@ sub getTypeTags {
 # Structures defined in namespace Dumux::Properties::TTAG are TypeTags.
 #
 #    &getStructTags($ARGV[0]); exit 1;
+    dbg2 "getStructTags\n";
     foreach $f (@files){&getStructTags($f)}
     foreach $f (@typeTags) {dbg2 "tag: $f"}
 #    exit 1;
@@ -1090,36 +1093,13 @@ sub getRawLine {
 # Returns logical line.
     my $nextLine;
     my $rawline = <INPUT>;
-    $referenceLineCount++;
 
 #remove initial whitespace
-    $rawline =~ s/^\s+//;
+    $rawline =~ s/^\s+//;   
+
+    $referenceLineCount++;
 
     trace("getRawLine, line: $referenceLineCount\n$rawline");
-
-# zap embedded C comments:
-    if ($rawline =~ m/\/\*.*\*\//){
-        trace "zap embedded comment: $_";
-        $rawline =~ s/\/\*.*\*\///g;
-        trace "zap result: $rawline";
-    }
-#   If we have a C comment initiator, continue until terminator.
-    my $startComment = 0;
-    if ($rawline =~ /\/\*.*/){
-	trace("startComment...");
-        $startComment = 1;
-        $rawline =~ s/\/\*.*//;
-	trace("new rawline: $rawline");
-        while ($startComment == 1){
-            $nextLine = &getRawLine;
-	    trace("next line: $nextLine");
-            if ($nextLine =~ m/.*\*\//){
-                $nextLine =~ s/.*\*\///;
-                $startComment = 0;
-                $rawLine .= $nextLine;
-            }
-        }
-    }
 
 # zap full line C++ comments:
     if ($rawline =~ m/^\/\/.*/){
@@ -1132,6 +1112,30 @@ sub getRawLine {
         my ($a, $b) = split /\/\//, $rawline, 2;
         trace "zapped trailing comment: $b";
         $rawline = "$a\n";
+    }
+
+# zap embedded C comments:
+    if ($rawline =~ m/\/\*.*\*\//){
+        trace "zap embedded comment: $_";
+        $rawline =~ s/\/\*.*\*\///g;
+        trace "zap result: $rawline";
+    }
+#   If we have a C comment initiator, continue until terminator.
+    my $startComment = 0;
+    if ($rawline =~ /\/\*.*/){
+	chop $rawline;
+	dbg2 ("startComment: \"$rawline\"");
+        $startComment = 1;
+	$newline = "";
+	while (not $rawline =~ m/\*\//){
+	    $newline .= $rawline;
+	    $referenceLineCount++;
+	    $rawline = <INPUT>;
+#$rawline =~ s/^\s+//;   
+	}
+	$newline .= $rawline;
+	dbg2 "full comment: $newline";
+	return &getRawLine;
     }
 
 # join escaped \n lines:
@@ -1157,7 +1161,7 @@ sub main {
     dbg2 "1 ok";
 # 2.
     getIncludeFileArray($start);
-    dbg2 "2 ok";
+    dbg2 "2 ok.";
 # 3. 
     getTypeTags;
     dbg2 "3 ok";
