@@ -54,7 +54,7 @@ class MimeSuffix {
                 if (strchr(x[1], '\n')) *(strchr(x[1], '\n')) = 0;
                 if (strncmp(x[1], "*.", strlen("*."))==0) offset = strlen("*.");
                 const gchar *key = x[1]+offset;
-		add2sfx_hash(key, x[0]);
+		g_hash_table_replace (mimeHashSfx, g_strdup(key), g_strdup(x[0]));
                 g_strfreev(x);
             }
             fclose(input);
@@ -107,6 +107,7 @@ class MimeSuffix {
 	}
 	
  */
+            
     }
 
 public:
@@ -150,19 +151,12 @@ public:
         return icon;
     }
 
-
-    static void
-    add2sfx_hash (const gchar *key, const gchar *value) {
-        pthread_mutex_lock(&mimeHashMutex);
-        g_hash_table_replace (mimeHashSfx, g_strdup(key), g_strdup(value));
-        pthread_mutex_unlock(&mimeHashMutex);
-    }
-
+public:
     static gchar *
     mimeType (const gchar * file) {
     //extensionMimeType (const gchar * file) {
         const gchar *type = NULL;
-        gchar *p;
+	gchar *p;
         if (!mimeHashSfx) {
 	    mimeBuildHashes();
 	    if (!mimeHashSfx) {
@@ -178,7 +172,6 @@ public:
         if (strchr (basename, '.')) p = strchr (basename, '.');
         else {
 	    // no file extension.
-            pthread_mutex_unlock(&mimeHashMutex);
             return NULL;
         }
         // Right to left:
@@ -192,9 +185,7 @@ public:
             sfx = g_utf8_strdown (p, -1);
             TRACE("mime-module, lOOking for \"%s\" with key=%s\n", sfx, key);
 
-            pthread_mutex_lock(&mimeHashMutex);
 	    type = lookupBySuffix(NULL, sfx);
-            pthread_mutex_unlock(&mimeHashMutex);
             if(type) {
                 TRACE("mime-module(2), FOUND %s: %s\n", sfx, type);
                 g_free (sfx);
@@ -210,9 +201,7 @@ public:
             gchar *sfx;
             /* try all lower case (hash table keys are set this way) */
             sfx = g_utf8_strdown (*q_p, -1);
-            pthread_mutex_lock(&mimeHashMutex);
 	    type = lookupBySuffix(NULL, sfx);
-            pthread_mutex_unlock(&mimeHashMutex);
             if(type) {
                 TRACE("mime-module(3), FOUND %s: %s\n", sfx, type);
                 g_free (sfx);

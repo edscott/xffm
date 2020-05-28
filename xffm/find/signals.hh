@@ -863,7 +863,7 @@ private:
 	auto editor = Util<Type>::getEditor();
         if (!editor || strlen(editor)==0){
             print_c::print_error(diagnostics, g_strdup_printf("%s\n",
-                        _("No editor for current action."), editor));
+                        _("No editor for current action.")));
             return;
         }
         TRACE("editor = %s\n", editor);

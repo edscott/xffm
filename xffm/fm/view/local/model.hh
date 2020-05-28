@@ -112,12 +112,6 @@ public:
     {
         TRACE("*** local/model.hh loadModel()\n");
 	auto treeModel = view->treeModel();
- 	/*GtkTreeIter iter;
-	if (gtk_tree_model_get_iter_first (treeModel, &iter)){
-	    while (gtk_list_store_remove (GTK_LIST_STORE(treeModel),&iter));
-	}
-        while (gtk_events_pending()) gtk_main_iteration();
-        TRACE("removed old stuff\n");*/
 
         int heartbeat = 0;
 
@@ -125,10 +119,11 @@ public:
 	view->page()->updateStatusLabel(reading);
 	g_free(reading);
 	while(gtk_events_pending())gtk_main_iteration();
-    
-        GList *directoryList = read_items (path, &heartbeat);
-	// start adding items... (threaded...)
+        GList *directoryList = NULL;
 
+        directoryList = read_items (path, &heartbeat);
+
+	// start adding items... (threaded...)
 	auto arg = (void **)calloc(3, sizeof(void *));
 	arg[0] = (void *)directoryList;
 	arg[1] = (void *)view;
@@ -201,7 +196,7 @@ public:
             (Settings<Type>::getSettingInteger("LocalView", "ByDate") > 0);
 
         auto needStat = bySize || byDate;
-        while ((d = readdir(directory))  != NULL){
+	while ((d = readdir(directory))  != NULL){
             TRACE( "%p  %s\n", d, d->d_name);
             if(strcmp (d->d_name, ".") == 0) continue;
             if (strcmp(path,"/")==0 && strcmp (d->d_name, "..") == 0) {
@@ -213,7 +208,7 @@ public:
             needStat = needStat || (d->d_type==DT_UNKNOWN);
 	    // On this pass, stat according to sort order or dt_type.
             xd_t *xd_p = get_xd_p(path, d, needStat);
-            directory_list = g_list_prepend(directory_list, xd_p);
+            if (xd_p) directory_list = g_list_prepend(directory_list, xd_p);
             if (heartbeat) {
                 (*heartbeat)++;
                 TRACE(stderr,"incrementing heartbeat records to %d\n", *heartbeat);
@@ -243,8 +238,15 @@ public:
     static xd_t *
     get_xd_p(const gchar *directory, struct dirent *d, gboolean withStat){
         // Allocate memory.
-        xd_t *xd_p = (xd_t *)calloc(1,sizeof(xd_t));
-        // Duplicate basename.
+        xd_t *xd_p = NULL;
+	TRACE("sizeof(xd_t) = %lu\n", sizeof(xd_t));
+	errno=0;
+        xd_p = (xd_t *)calloc(1,sizeof(xd_t));
+	if (!xd_p){
+	    DBG("get_xd_p(): %s\n", strerror(errno));
+	    errno=0;
+	}
+	// Duplicate basename.
         xd_p->d_name = g_strdup(d->d_name);
         // Duplicate absolute path.
         if (strcmp(d->d_name, "..")==0){
@@ -269,8 +271,7 @@ public:
 	xd_p->mimetype = getMimeType(xd_p);
         // the following call uses xd_p->mimetype
         xd_p->icon = g_strdup(LocalIcons<Type>::getIconname(xd_p));
-
-	TRACE("d_type: %s -> %d\n", xd_p->path, xd_p->d_type);
+	TRACE("d_type: %s (%s) -> %d icon: %s mime: %s\n", xd_p->d_name, xd_p->path, xd_p->d_type, xd_p->icon, xd_p->mimetype);
         errno=0;
         return xd_p;
     }
