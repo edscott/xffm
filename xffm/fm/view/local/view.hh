@@ -24,7 +24,7 @@ public:
     static LocalMonitor<Type> *
     loadModel (View<Type> *view, const gchar *path)
     {
-        TRACE("*** local/view-hh: loadModel()\n");
+        TRACE("*** local/view.hh: loadModel():\"%s\"\n", path);
 	view->enableDnD();	
         LocalMonitor<Type> *p = NULL;
         auto iconView = view->iconView();

@@ -12,6 +12,10 @@
 #define @GVIM_PROGRAM@
 
 #define @MNTENT_H@
+#define @SYS_PARAM_H@
+#define @SYS_MOUNT_H@
+#define @SYS_TYPES_H@
+#define @SYS_SYSCTL_H@
 #define @SIGNAL_H@
 #define @MAGIC_H@
 #define @READLINE_HISTORY_H@

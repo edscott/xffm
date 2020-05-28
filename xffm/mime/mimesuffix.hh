@@ -14,7 +14,6 @@
 #endif
 namespace xf {
 
-static pthread_mutex_t mimeHashMutex=PTHREAD_MUTEX_INITIALIZER;
 static GHashTable *mimeHashSfx=NULL;
     
 static GHashTable *mimeHashAlias=NULL;

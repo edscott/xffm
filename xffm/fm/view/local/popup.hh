@@ -515,16 +515,23 @@ private:
         if (EFS<Type>::isEFS(path)) path += strlen("efs:/");
 #endif
         GtkWidget *show, *hide;
-	TRACE("local/showDirectoryItems()...\n");
+	TRACE("local/showDirectoryItems()...isInFstab(%s)=%d\n",
+		path, FstabView<Type>::isInFstab(path));
+
         if (FstabView<Type>::isMounted(path)){
             show = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Unmount the volume associated with this folder"));
             hide = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Mount the volume associated with this folder"));
+	    gtk_widget_show(show);
+	    gtk_widget_hide(hide);
         } else {
+	    // only if in fstab...
+
             hide = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Unmount the volume associated with this folder"));
             show = GTK_WIDGET(g_object_get_data(G_OBJECT(localItemPopUp), "Mount the volume associated with this folder"));
+	    gtk_widget_hide(hide);
+	    if (FstabView<Type>::isInFstab(path)) gtk_widget_show(show);
+	    else gtk_widget_hide(show);
         }
-        gtk_widget_show(show);
-        gtk_widget_hide(hide);
         gtk_widget_set_sensitive(show, TRUE);
 #endif
     }
@@ -796,15 +803,17 @@ public:
     reloadIcons(View<Type> *view){
 	if (!BaseSignals<Type>::validBaseView(view)) return;
         auto page = view->page();
-        auto viewPath = page->workDir();            
+        auto viewPath = g_strdup(page->workDir());    
+	DBG("local/popup.hh::reloadIcons()\"%s\"\n",viewPath);	
         view->loadModel(viewPath);
+	g_free(viewPath);
     }
 
     static void
     addBookmark(GtkMenuItem *menuItem, gpointer data)
     {
-        TRACE("Add bookmark\n");
 	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
+        DBG("local/popup.hh::addBookmark():\"%s\"\n",path);
         if (!RootView<Type>::addBookmark(path)) return;
 	auto view =  (View<Type> *)g_object_get_data(G_OBJECT(data), "view");
         reloadIcons(view);
