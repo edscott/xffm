@@ -111,7 +111,7 @@ public:
     static void 
     addAllItems(GtkTreeModel *treeModel){
 	RootView<Type>::addXffmItem(treeModel);
-	addDisksItem(treeModel);
+	// deprecated: addDisksItem(treeModel);
 	//addNFSItem(treeModel);
 	//addEcryptFSItem(treeModel);
 	//addSSHItem(treeModel);
@@ -267,6 +267,7 @@ public:
 	return uuid;
     }
 
+/* deprecated
     static void // Linux
     addPartitionItems (GtkTreeModel *treeModel) {
 	FILE *partitions = fopen ("/proc/partitions", "r");
@@ -291,6 +292,7 @@ public:
         fclose (partitions);
         return;
     }
+    */
 /*
     static gboolean // Linux
     addPartitionItems(GtkTreeModel *treeModel){
