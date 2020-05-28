@@ -116,7 +116,9 @@ public:
 	//addEcryptFSItem(treeModel);
 	//addSSHItem(treeModel);
 	//addCIFSItem(treeModel);
-        addPartitionItems(treeModel);
+        // new way:
+	// addPartitionItems(treeModel);
+        deprecatedAddPartitionItems(treeModel);
     }
 
     static gchar *
@@ -267,9 +269,9 @@ public:
 	return uuid;
     }
 
-/* deprecated
+/* deprecated*/
     static void // Linux
-    addPartitionItems (GtkTreeModel *treeModel) {
+    deprecatedAddPartitionItems (GtkTreeModel *treeModel) {
 	FILE *partitions = fopen ("/proc/partitions", "r");
         if(!partitions) return;
 
@@ -292,42 +294,6 @@ public:
         fclose (partitions);
         return;
     }
-    */
-/*
-    static gboolean // Linux
-    addPartitionItems(GtkTreeModel *treeModel){
-	if (!g_file_test("/dev/disk/by-id", G_FILE_TEST_IS_DIR)) return FALSE;
-        const gchar *command = "ls -l /dev/disk/by-id";
-	FILE *pipe = popen (command, "r");
-	if(pipe == NULL) {
-	    ERROR("fstab/view.hh::Cannot pipe from %s\n", command);
-	    return FALSE;
-	}
-
-        gchar line[256];
-        memset(line, 0, 256);
-        gchar *id = NULL;
-	while (fgets (line, 255, pipe) && !feof(pipe)) {
-            if (strchr(line, '\n')) *strchr(line, '\n') = 0;
-            TRACE("addPartitionItems: %s\n", line);
-            if (strstr(line, "->")==NULL) continue;
-	    auto p = g_strsplit(line, "->", 2);
-
-	    && strstr(line, partition)) {
-                *strstr(line, "->") = 0;
-                g_strstrip(line);
-                if (strrchr(line, ' ')){
-                    uuid = g_strdup(strrchr(line, ' '));
-                    g_strstrip(uuid);
-                }
-                break;
-            }
-	}
-        pclose (pipe);
-        g_free(partition);
-	return uuid;
-    }
-*/
     
     static void
     addNFSItem(GtkTreeModel *treeModel){

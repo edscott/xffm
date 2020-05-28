@@ -53,7 +53,7 @@ class MimeSuffix {
                 if (strchr(x[1], '\n')) *(strchr(x[1], '\n')) = 0;
                 if (strncmp(x[1], "*.", strlen("*."))==0) offset = strlen("*.");
                 const gchar *key = x[1]+offset;
-		g_hash_table_replace (mimeHashSfx, g_strdup(key), g_strdup(x[0]));
+		add2sfx_hash(key,x[0]);
                 g_strfreev(x);
             }
             fclose(input);
@@ -110,6 +110,13 @@ class MimeSuffix {
     }
 
 public:
+
+    static void
+    add2sfx_hash(const gchar *key, const gchar *value){
+	// single line function access from outside.
+	if (!mimeHashSfx) mimeBuildHashes();
+	g_hash_table_replace (mimeHashSfx, g_strdup(key), g_strdup(value));
+    }
 
     static const gchar *
     mimeIcon (const gchar *file){

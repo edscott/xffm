@@ -8,6 +8,17 @@ else()
     message( STATUS  "mntent.h was found." )
 endif()
 
+message(STATUS "Checking for sys/ucred.h...")
+find_path(SYS_UCRED_H  NAMES sys/ucred.h )
+if(NOT SYS_UCRED_H)
+    set(SYS_UCRED_H "SYS_UCRED_H_NOTFOUND")
+    message( STATUS "sys/ucred.h is not found" )
+else()
+    set(SYS_UCRED_H "HAVE_SYS_UCRED_H 1")
+    message( STATUS  "sys/ucred.h was found." )
+endif()
+
+
 message(STATUS "Checking for sys/param.h...")
 find_path(SYS_PARAM_H  NAMES sys/param.h )
 if(NOT SYS_PARAM_H)

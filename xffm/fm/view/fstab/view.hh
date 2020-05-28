@@ -42,9 +42,9 @@ msgid "NFS remote directory"
 
 
 # include <fstab.h>
-# include <sys/ucred.h>
-
-
+# ifdef HAVE_SYS_UCRED_H
+#  include <sys/ucred.h>
+# endif
 # ifdef HAVE_SYS_PARAM_H
 #  include <sys/param.h>
 # endif
@@ -54,8 +54,10 @@ msgid "NFS remote directory"
 # ifdef HAVE_SYS_TYPES_H
 #  include <sys/types.h>
 # endif
-# ifdef HAVE_SYS_SYSCTL_H
-#  include <sys/sysctl.h>
+# ifdef BSD_FOUND
+#  ifdef HAVE_SYS_SYSCTL_H
+#   include <sys/sysctl.h>
+#  endif
 # endif
 # ifdef HAVE_MNTENT_H
 #  include <mntent.h>
@@ -215,7 +217,7 @@ public:
 
 public:
     // addPartition 2 b deprecated
-/*    static void
+    static void
     addPartition(GtkTreeModel *treeModel, const gchar *path){
         if (!path){
             ERROR("fstab/view.hh::addPartition: path cannot be null\n");
@@ -279,7 +281,7 @@ public:
         // pixbufs belong to pixbuf hash
         g_free(text);
     }
-*/
+
 #ifdef BSD_FOUND
 #include "view-BSD.hh"
 #else

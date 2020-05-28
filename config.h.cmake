@@ -12,6 +12,7 @@
 #define @GVIM_PROGRAM@
 
 #define @MNTENT_H@
+#define @SYS_UCRED_H@
 #define @SYS_PARAM_H@
 #define @SYS_MOUNT_H@
 #define @SYS_TYPES_H@
