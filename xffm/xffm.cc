@@ -5,7 +5,7 @@
 
 #define XFFM_CC
 #include "config.h"
-#define NOFORK 1
+//#define NOFORK 1
 // Run in background, detached.
 # define FORK 1
 #ifdef NOFORK

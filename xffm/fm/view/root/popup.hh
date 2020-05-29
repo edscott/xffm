@@ -2,6 +2,14 @@
 # define XF_ROOTPOPUP_HH
 #include "model.hh"
 
+#ifndef BSD_FOUND
+# ifdef ENABLE_EFS_MODULE
+#  define DO_MOUNT_ITEMS
+# endif
+#else
+# undef DO_MOUNT_ITEMS
+#endif
+
 namespace xf
 {
 
@@ -31,7 +39,7 @@ class RootPopUp  {
         auto itemPath =Popup<Type>::getWidgetData(rootItemPopUp, "itemPath");
         TRACE("reset root menu items, itemPath=%s\n", itemPath);
 	gboolean isBookMark = RootView<Type>::isBookmarked(itemPath);
-#ifdef ENABLE_EFS_MODULE
+#ifdef DO_MOUNT_ITEMS
         if (EFS<Type>::isEFS(itemPath)) isBookMark = TRUE;
 #endif
 	auto menuitem = GTK_WIDGET(g_object_get_data(G_OBJECT(rootItemPopUp), "Remove bookmark"));
@@ -44,7 +52,7 @@ class RootPopUp  {
         else gtk_widget_hide(menuitem);
         gtk_widget_set_sensitive(menuitem, g_file_test(trashFiles, G_FILE_TEST_IS_DIR));
         g_free(trashFiles); 
-#ifdef ENABLE_EFS_MODULE
+#ifdef DO_MOUNT_ITEMS
         auto umountW = GTK_WIDGET(g_object_get_data(G_OBJECT(rootItemPopUp), "Unmount the volume associated with this folder"));
         auto mountW = GTK_WIDGET(g_object_get_data(G_OBJECT(rootItemPopUp), "Mount the volume associated with this folder"));
 
@@ -150,7 +158,7 @@ private:
     static GtkMenu *createPopUp(void){
          menuItem_t item[]={
             {"Add bookmark", (void *)menuAddBookmark, NULL, NULL},
-#ifdef ENABLE_EFS_MODULE
+#ifdef DO_MOUNT_ITEMS
             {"Ecryptfs (EFS)", (void *)menuAddEFS, NULL, NULL},
 #endif
             {NULL,NULL,NULL, NULL}
@@ -181,7 +189,7 @@ private:
         {
 	    {N_("Open in New Tab"), (void *)LocalPopUp<Type>::newTab, rootItemPopUp, NULL},
             {N_("Remove bookmark"), (void *)removeBookmarkItem, NULL, NULL},
-#ifdef ENABLE_FSTAB_MODULE
+#ifdef DO_MOUNT_ITEMS
             {N_("Mount the volume associated with this folder"), (void *)LocalPopUp<Type>::mount, NULL, NULL},
             {N_("Unmount the volume associated with this folder"), (void *)LocalPopUp<Type>::mount, NULL, NULL},
 #endif
@@ -191,7 +199,7 @@ private:
         const gchar *key[]={
             "Open in New Tab",
             "Remove bookmark",
-#ifdef ENABLE_FSTAB_MODULE
+#ifdef DO_MOUNT_ITEMS
             "Mount the volume associated with this folder",
             "Unmount the volume associated with this folder",
 #endif
@@ -201,7 +209,7 @@ private:
         const gchar *keyIcon[]={
             "tab-new-symbolic",
             "edit-clear-all",
-#ifdef ENABLE_FSTAB_MODULE
+#ifdef DO_MOUNT_ITEMS
             "greenball",
             "redball",
 #endif

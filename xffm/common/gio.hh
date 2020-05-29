@@ -285,8 +285,11 @@ private:
     linkFore(const gchar *path, const gchar *target){
         backup(path, target);
         TRACE("linkFore: %s -> %s\n", path, target); 
-        //const gchar *arg[] = { "ln", "-s", "-f", path, target, NULL };
+#ifdef BSD_FOUND
+        const gchar *arg[] = { "ln", "-s", "-f", path, target, NULL };
+#else
         const gchar *arg[] = { "ln", "-v", "-s", "-f", path, target, NULL };
+#endif
         fore(arg);
     }
 
