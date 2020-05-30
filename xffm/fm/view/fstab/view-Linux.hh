@@ -118,7 +118,78 @@ public:
 	//addCIFSItem(treeModel);
         // new way:
 	// addPartitionItems(treeModel);
-        deprecatedAddPartitionItems(treeModel);
+        linuxAddPartitionItems(treeModel);
+	addFstabItems(treeModel);
+    }
+
+    static void
+    addFstabItems(GtkTreeModel *treeModel){
+ 	GtkTreeIter iter;
+	auto list = getFstabItems();
+	for (auto l=list; l && l->data; l= l->next){
+	    auto mnt_struct = (struct mntent *)l->data;
+	    DBG ("nmnt_fsname=%s, \nmnt_dir= %s, \nmnt_type=%s, \nmnt_opts=%s\n",
+			mnt_struct->mnt_fsname, 
+			mnt_struct->mnt_dir, 
+			mnt_struct->mnt_type, 
+			mnt_struct->mnt_opts);
+
+	    gboolean mounted = isMounted(mnt_struct->mnt_dir);
+	    gchar *text;
+	    text = g_strdup_printf("%s (%s):\n%s\n%s",
+			    mnt_struct->mnt_dir, 
+			    mnt_struct->mnt_type, 
+			    mnt_struct->mnt_fsname, 
+			    mnt_struct->mnt_opts);
+
+	    auto label = g_strdup_printf("%s", mnt_struct->mnt_dir);
+	    auto utf_name = util_c::utf_string(label);
+	    g_free(label);
+	    
+	    // folder-remote
+	    //
+
+	    const gchar *icon_name;
+	    const gchar *highlight_name;
+
+	    if (strncmp(mnt_struct->mnt_type,"nfs",strlen("nfs"))==0) {
+		icon_name = (mounted)?"folder-remote/NW/greenball/3.0/180":
+		"folder/NW/grayball/3.0/180";
+		highlight_name = "folder-remote/NW/blueball/3.0/225";
+	    } else {
+		icon_name = (mounted)?"folder/NW/greenball/3.0/180":
+		"folder/NW/grayball/3.0/180";
+		highlight_name = "folder/NW/blueball/3.0/225";
+	    }
+
+	    auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
+	    auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
+	    auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
+	    //auto uuid = partition2uuid(path);
+	    gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
+	    gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
+		    DISPLAY_NAME, utf_name, // path-basename or label
+		    ICON_NAME, icon_name,
+		    PATH, mnt_struct->mnt_dir, //path, // absolute
+		    TREEVIEW_PIXBUF, treeViewPixbuf, 
+		    DISPLAY_PIXBUF, normal_pixbuf,
+		    NORMAL_PIXBUF, normal_pixbuf,
+		    HIGHLIGHT_PIXBUF, highlight_pixbuf,
+		    TOOLTIP_TEXT,text,
+		    DISK_ID, mnt_struct->mnt_type,
+		    -1);
+	    g_free(utf_name);
+
+
+
+	    
+	    g_free(mnt_struct->mnt_fsname);
+	    g_free(mnt_struct->mnt_dir);
+	    g_free(mnt_struct->mnt_type);
+	    g_free(mnt_struct->mnt_opts);
+	    g_free(mnt_struct);
+	}
+	g_list_free(list);
     }
 
     static gchar *
@@ -269,9 +340,8 @@ public:
 	return uuid;
     }
 
-/* deprecated*/
     static void // Linux
-    deprecatedAddPartitionItems (GtkTreeModel *treeModel) {
+    linuxAddPartitionItems (GtkTreeModel *treeModel) {
 	FILE *partitions = fopen ("/proc/partitions", "r");
         if(!partitions) return;
 
@@ -553,12 +623,18 @@ public:
             if(!g_file_test (mnt_struct->mnt_dir, G_FILE_TEST_IS_DIR))
                 continue;
 
-            TRACE("mountTarget():%s --->  %s   or   %s\n", 
+            DBG("mountTarget():%s --->  %s   or   %s\n", 
                     label, mnt_struct->mnt_dir, mnt_struct->mnt_fsname);
 
+            if(strcmp (label, mnt_struct->mnt_dir)==0) {
+                DBG("mountTarget(): gotcha mnt_dir %s ---> %s\n", 
+                        label, mnt_struct->mnt_dir);
+		result = g_strdup(mnt_struct->mnt_dir);
+                break;
+            }
             if(strcmp (label, mnt_struct->mnt_fsname)==0) {
-                TRACE("mountTarget():%s ---> %d %s\n", 
-                        mnt_struct->mnt_fsname, result, mnt_struct->mnt_type);
+                DBG("mountTarget(): gotcha fsname %s ---> %s\n", 
+                        label, mnt_struct->mnt_fsname);
 		result = g_strdup(mnt_struct->mnt_dir);
                 break;
             }
@@ -785,5 +861,88 @@ private:
         TRACE("partition2Id() %s->%s\n", partition, id);
 	return id;
     }
+
+    static GList *
+    getFstabItems (void) {
+	GList *list = NULL;
+	const gchar *files[] = { "/etc/fstab", "/etc/mtab", NULL };
+	struct mntent *mnt_struct;
+	for(auto p = files; p && *p; p++) {
+	    DBG ("FSTAB:  parsing %s\n", *p);
+	    FILE *fstab_fd = setmntent (*p, "r");
+	    struct mntent mntbuf;
+	    gchar buf[2048]; 
+	    while ((mnt_struct = getmntent_r (fstab_fd, &mntbuf, buf, 2048)) 
+		    != NULL) 
+	    {
+		if(strcmp (*p, "/etc/mtab") == 0) {
+		    TRACE ("MTAB: setting MTAB type for %s\n", "foo");
+		} else {
+		}
+		gboolean ok = FALSE;
+		for (auto t=mntTypes(); t && *t; t++){
+		    if (strcmp(mnt_struct->mnt_type, *t)==0) {
+			TRACE("\"%s\" ? \"%s\"\n", mnt_struct->mnt_type, *t);
+			ok = TRUE; 
+			break;
+		    }
+		}
+		for (auto q=list; q && q->data; q=q->next){
+		    // Just list first item, the one in fstab has preference.
+		    auto v = (struct mntent *)q->data;
+		    if (strcmp(v->mnt_dir, mnt_struct->mnt_dir) == 0) ok = FALSE;
+		}
+		if (!ok) {
+		    TRACE("%s: not ok\n", mnt_struct->mnt_type);
+		    continue;
+		}
+
+		//xfdir_p->gl[i].pathv = g_strdup (mnt_struct->mnt_dir);
+		TRACE ("FSTAB: %s: mnt_fsname=%s, mnt_dir= %s, mnt_type=%s, mnt_opts=%s\n",
+			*p, mnt_struct->mnt_fsname, 
+			mnt_struct->mnt_dir, 
+			mnt_struct->mnt_type, 
+			mnt_struct->mnt_opts);
+
+		if(strstr (mnt_struct->mnt_opts, "user")) {
+		    //SET_USER_TYPE (xfdir_p->gl[i].en->type);
+		}
+		/* set type */
+		auto mnt = (struct mntent *)calloc(1,sizeof(struct mntent));
+		if (!mnt) {
+		    ERROR("getFstabItems():: calloc: %s\n", strerror(errno));
+		    return NULL;
+		}
+		mnt->mnt_fsname = g_strdup(mnt_struct->mnt_fsname);
+		mnt->mnt_dir = g_strdup(mnt_struct->mnt_dir); 
+		mnt->mnt_type = g_strdup(mnt_struct->mnt_type); 
+		mnt->mnt_opts = g_strdup(mnt_struct->mnt_opts);
+		TRACE("append %s\n", mnt_struct->mnt_dir);
+		
+		list = g_list_append(list, (void *) mnt);
+	    }
+	    (void)endmntent (fstab_fd);
+	}
+	return list;
+    }
+
+    static const gchar **mntTypes(void){
+	// Valid mount types...
+	static const gchar *types[]={
+	    "ext2",
+	    "ext3",
+	    "ext4",
+	    "nfs",
+	    "nfs3",
+	    "nfs4",
+	    "ntfs",
+	    "ntfs-3g",
+	    "fuse",
+	    "fuse3",
+	    NULL
+	};
+	return types;
+    }
+
 
 #endif

@@ -102,9 +102,10 @@ class FstabPopUp {
     {
         auto view = (View<Type> *)g_object_get_data(G_OBJECT(data), "view");
         auto baseModel = (BaseModel<Type> *)g_object_get_data(G_OBJECT(data), "baseModel");
-	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
+	//auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
+	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "itemPath");
 
-	TRACE("FstabPopup::mount %s\n", path);
+	DBG("FstabPopup::mount %s\n", path);
 //        if (FstabView<Type>::isInFstab(path) || FstabView<Type>::isMounted(path)) {
         if (FstabView<Type>::isMounted(path)) {
 	    TRACE("umount: %s\n", path);
@@ -117,11 +118,14 @@ class FstabPopUp {
 
         auto label = g_strdup_printf("LABEL=%s", shortLabel);
         g_free(shortLabel);
+	DBG("is in fstab \"%s\" or \"%s\"\n", label, path);
         if (FstabView<Type>::isInFstab(label)) {
+	    DBG("is in fstab OK \"%s\"\n", label);
 	    mountTarget = FstabView<Type>::mountTarget(label);
         }
         g_free(label);
         if (!mountTarget && FstabView<Type>::isInFstab(path)) {
+	    DBG("is in fstab OK \"%s\"\n", path);
 	    mountTarget = FstabView<Type>::mountTarget(path);
         }
 

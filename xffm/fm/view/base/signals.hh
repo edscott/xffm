@@ -300,6 +300,7 @@ public:
     static GtkMenu *
     setItemPath(View<Type> *view){
         TRACE("Base::signals::button press event: button 3 should do popup, as well as longpress...\n");
+        gchar *itemLabel = NULL;
         gchar *itemPath = NULL;
         GList *selectionList;
 	if (isTreeView) {
@@ -315,6 +316,7 @@ public:
             gtk_tree_model_get_iter(view->treeModel(), &iter, 
                     (GtkTreePath *)selectionList->data);
             gtk_tree_model_get(view->treeModel(), &iter, PATH, &itemPath, -1);
+            gtk_tree_model_get(view->treeModel(), &iter, DISPLAY_NAME, &itemLabel, -1);
 	}
 	//if (!path) path = g_strdup(view->path());
         
@@ -327,6 +329,7 @@ public:
 	TRACE("g_object_set_data %p->%p\n", menu, view);
         TRACE("**Base::signals::setItemPath: selected path is %s\n", itemPath);
 	Popup<Type>::setWidgetData(menu, "itemPath", itemPath?itemPath:view->path());
+	Popup<Type>::setWidgetData(menu, "itemLabel", itemLabel?itemLabel:view->path());
 
 	g_free(itemPath);
         return menu; 
