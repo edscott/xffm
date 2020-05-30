@@ -23,7 +23,7 @@ public:
         p->start_monitor(view, "/dev/disk/by-id");
         // already in start_monitor function:
         // view->setMonitorObject(p);
-        DBG("parallel fstab monitor %p for fstab\n", p); 
+        TRACE("parallel fstab monitor %p for fstab\n", p); 
 //        p->start_monitor(treeModel, "/dev/disk/by-partuuid");
         return p;
     }
@@ -128,7 +128,7 @@ public:
 	auto list = getFstabItems();
 	for (auto l=list; l && l->data; l= l->next){
 	    auto mnt_struct = (struct mntent *)l->data;
-	    DBG ("nmnt_fsname=%s, \nmnt_dir= %s, \nmnt_type=%s, \nmnt_opts=%s\n",
+	    TRACE ("nmnt_fsname=%s, \nmnt_dir= %s, \nmnt_type=%s, \nmnt_opts=%s\n",
 			mnt_struct->mnt_fsname, 
 			mnt_struct->mnt_dir, 
 			mnt_struct->mnt_type, 
@@ -623,17 +623,17 @@ public:
             if(!g_file_test (mnt_struct->mnt_dir, G_FILE_TEST_IS_DIR))
                 continue;
 
-            DBG("mountTarget():%s --->  %s   or   %s\n", 
+            TRACE("mountTarget():%s --->  %s   or   %s\n", 
                     label, mnt_struct->mnt_dir, mnt_struct->mnt_fsname);
 
             if(strcmp (label, mnt_struct->mnt_dir)==0) {
-                DBG("mountTarget(): gotcha mnt_dir %s ---> %s\n", 
+                TRACE("mountTarget(): gotcha mnt_dir %s ---> %s\n", 
                         label, mnt_struct->mnt_dir);
 		result = g_strdup(mnt_struct->mnt_dir);
                 break;
             }
             if(strcmp (label, mnt_struct->mnt_fsname)==0) {
-                DBG("mountTarget(): gotcha fsname %s ---> %s\n", 
+                TRACE("mountTarget(): gotcha fsname %s ---> %s\n", 
                         label, mnt_struct->mnt_fsname);
 		result = g_strdup(mnt_struct->mnt_dir);
                 break;
@@ -868,7 +868,7 @@ private:
 	const gchar *files[] = { "/etc/fstab", "/etc/mtab", NULL };
 	struct mntent *mnt_struct;
 	for(auto p = files; p && *p; p++) {
-	    DBG ("FSTAB:  parsing %s\n", *p);
+	    TRACE ("FSTAB:  parsing %s\n", *p);
 	    FILE *fstab_fd = setmntent (*p, "r");
 	    struct mntent mntbuf;
 	    gchar buf[2048]; 
