@@ -1,8 +1,6 @@
 For 0.92
   Add correct translations to customini.hh
   Remove the unmount option in the filechooser (only mountpoints...)  
-  bug: do a rename and use source as target. source disappears and backup appears.
-  bug: select all in directory with 3K files (distfiles), then select properties from popup. Program will hang while trying to open every file for propertiesShould only load properties for first file, and the others on demand from properties dialog..
 
 For 0.91
 

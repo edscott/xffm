@@ -214,7 +214,11 @@ public:
 private:
     static void 
     fore(const gchar **arg){
-       auto pid=fork();
+ 	auto notebookP = Fm<Type>::getCurrentNotebook();
+	auto pageP = notebookP->currentPageObject();
+	pageP->run_lp_command(pageP->output(), pageP->workDir(), 
+		Util<Type>::argv2command(arg));
+/*      auto pid=fork();
        if (pid){
            gint status;
            waitpid(pid, &status, 0);
@@ -223,7 +227,7 @@ private:
        }
         execvp(arg[0], (gchar * const *)arg);
 	   TRACE("fore(): execvp failed.\n");
-        _exit(123);
+        _exit(123);*/
     }
 
     static void
@@ -314,29 +318,7 @@ private:
             NULL
         };
 #endif
-	auto notebookP = Fm<Type>::getCurrentNotebook();
-	auto pageP = notebookP->currentPageObject();
-	// Build command line
-	gchar *command = g_strdup(arg[0]);
-	for (auto p=arg+1; p && *p; p++){
-	    gchar *g;
-	    if (strchr(*p, ' ')) {
-		g = g_strconcat(command, " \"",*p,"\"", NULL);
-	    } else {
-		g = g_strconcat(command, " ",*p, NULL);
-	    }
-	    g_free(command);
-	    command = g;
-	}
-	pageP->run_lp_command(pageP->output(), pageP->workDir(), command);
-	// replaced:
-	/*
-        Run<Type>::thread_runReap(NULL, arg, 
-                Run<Type>::run_operate_stdout, 
-                Run<Type>::run_operate_stderr, 
-                NULL);
-	*/
-
+        fore(arg);
     }
 
 
@@ -361,11 +343,8 @@ private:
             (const gchar *)path,
             NULL
         };
-#endif
-        Run<Type>::thread_runReap(NULL, arg, 
-                Run<Type>::run_operate_stdout, 
-                Run<Type>::run_operate_stderr, 
-                                NULL);
+#endif         
+	fore(arg);
     }
 
     static GList *
@@ -405,6 +384,40 @@ private:
         if (mode != MODE_COPY && mode != MODE_LINK && mode != MODE_MOVE && mode != MODE_RENAME) 
 	    return FALSE;
         gboolean retval=TRUE;
+	if (!path || !target) return FALSE; // should not happen.
+	    TRACE("%s .. %s \n", path, target);
+	
+	if (strcmp(path, target)==0){
+	    // check if they are the same 
+	    struct stat stSrc;
+	    struct stat stTgt;
+	    stat(path, &stSrc);
+	    stat(target, &stTgt);
+	    if (memcmp(&stSrc, &stTgt, sizeof(struct stat)) ==0){
+		auto message = g_strdup_printf("<span size=\"larger\" color=\"blue\">%s\n<span color=\"red\">%s:\n</span></span><span size=\"larger\"> %s</span>\n",
+			strerror(EFAULT), strerror(EEXIST), target);
+		Dialogs<Type>::quickHelp(mainWindow, message, "dialog-error");
+		g_free(message);
+		return FALSE;
+	    } 
+	}
+	if (g_file_test(target, G_FILE_TEST_EXISTS)){
+	    // Overwrite? Backup will be created.
+	    auto message = g_strdup_printf("<span size=\"larger\"><span color=\"blue\">%s:</span>\n%s\n<span color=\"red\">%s</span></span>\n", 
+		    strerror(EEXIST),target,
+		    _("Overwrite?")); 
+	    	
+	    auto yesNo = Dialogs<Type>::yesNo(message);
+	    g_free(message);
+	    auto response = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(yesNo), "response"));
+	    gtk_widget_destroy(GTK_WIDGET(yesNo));
+	    TRACE("response=%d\n", response);
+	    if(response != 1){
+		TRACE("No Overwrite\n");
+		return FALSE;
+	    }
+	    TRACE("Overwrite with backup...\n");
+	}
         switch (mode) {
             case MODE_COPY:
                copyFore(path,target);
@@ -456,6 +469,8 @@ private:
                     arg[0] = GINT_TO_POINTER(mode);
                     arg[1] = (void *)g_strdup(path);
                     asyncReference++;
+		    Print<double>::print(pageP->output(), "green", 
+			   g_strdup_printf("g_file_trash_async(%s)\n", path));
                     g_file_trash_async (file, G_PRIORITY_HIGH, 
                        NULL, asyncCallback, arg);
                }

@@ -757,7 +757,7 @@ private:
 	    }
             view->setSelectionList(selection_list);
             if (!selection_list) {
-                gchar *markup = g_strdup_printf("<span size=\"larger\" color=\"blue\">%s\n<span color=\"red\">%s</span></span>\n", _("No selection"),_("No matches."));
+                auto markup = g_strdup_printf("<span size=\"larger\" color=\"blue\">%s\n<span color=\"red\">%s</span></span>\n", _("No selection"),_("No matches."));
                 Dialogs<Type>::quickHelp(GTK_WINDOW(mainWindow),markup, "dialog-error"); 
                 g_free(markup);
             }

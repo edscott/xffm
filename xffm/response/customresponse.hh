@@ -279,7 +279,7 @@ private:
         auto file = gtk_entry_get_text(entry);
         auto command = g_strdup_printf("%s ", exec);
         if (terminal) {
-            auto g = g_strconcat(getenv("TERMINAL_EXEC"), " ", command, NULL);
+            auto g = g_strconcat(Util<Type>::getTerminal(), " ", command, NULL);
             g_free(command);
             command = g;
         }

@@ -83,7 +83,7 @@ public:
     terminal(GtkMenuItem *menuItem, gpointer data)
     {
         gchar *userTerminal = NULL;
-        const gchar *terminal = getenv("TERMINAL");
+        const gchar *terminal = Util<Type>::getTerminal();
         if (terminal) {
             userTerminal = g_strdup(terminal);
             if (strchr(userTerminal, ' ')) *(strchr(userTerminal, ' ')) = 0;

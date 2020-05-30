@@ -7,8 +7,27 @@ template <class Type> class Gtk;
 
 template <class Type>
 class Dialogs{
+private:
+    static void
+    responseYes (GtkWidget * button, gpointer data) {
+	g_object_set_data(G_OBJECT(data), "response", GINT_TO_POINTER(1));
+	gtk_widget_hide(GTK_WIDGET(data));
+	gtk_dialog_response(GTK_DIALOG(data), GTK_RESPONSE_YES);
+    }
 
 public:
+
+    static GtkWidget *yesNo(const gchar *message){
+	auto dialog = Dialogs<Type>::quickHelp(mainWindow, message, "dialog-question");
+	auto buttonBox = (GtkBox *)g_object_get_data(G_OBJECT(dialog), "buttonBox");
+	auto button = Gtk<Type>::dialog_button("greenball", _("Yes"));
+	g_signal_connect (button, "clicked", G_CALLBACK (responseYes), dialog);
+	gtk_box_pack_start(buttonBox, GTK_WIDGET(button), FALSE, FALSE,0);
+	
+	
+	gtk_dialog_run(GTK_DIALOG(dialog));
+	return dialog;
+    }
     
     static void
     placeDialog(GtkWindow *dialog){
@@ -107,8 +126,11 @@ public:
      auto vbox2 = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
    
      gtk_box_pack_end(vbox, GTK_WIDGET(vbox2), FALSE, FALSE,0);
-     auto button = Gtk<Type>::dialog_button("process-stop", _("Cancel"));
-     gtk_box_pack_end(vbox2, GTK_WIDGET(button), FALSE, FALSE,0);
+     auto hbox2 = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+     gtk_box_pack_end(vbox2, GTK_WIDGET(hbox2), FALSE, FALSE,0);
+     auto button = Gtk<Type>::dialog_button("redball", _("Cancel"));
+     gtk_box_pack_end(hbox2, GTK_WIDGET(button), FALSE, FALSE,0);
+     g_object_set_data(G_OBJECT(dialog), "buttonBox", (void *)hbox2); 
      g_signal_connect (button, "clicked",
 		G_CALLBACK (onQuickCancel),
 		dialog);

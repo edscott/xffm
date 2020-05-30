@@ -89,23 +89,22 @@ public:
 		    PATH, &(entry->path), 
 		    -1);
 	    entry->basename = g_path_get_basename(entry->path);
-	    entry->mimetype = Mime<Type>::mimeMagic(entry->path);
+	    // Do mime magic on single item, the rest on demand
+	    //entry->mimetype = Mime<Type>::mimeMagic(entry->path);
 	    errno=0;
 	    if (lstat(entry->path, &(entry->st)) < 0){
-		DBG("properties.hh::Properties():  %s (%s)\n",
-		    entry->path, strerror(errno));
-		errno=0;
-		g_free(entry->basename);
-		g_free(entry->mimetype);
-		g_free(entry->path);
-		g_free(entry);
-		//removePathList(entryList);
-		//throw(1);
-	    } else {
-		entryList = g_list_prepend(entryList, entry);
-	    }
+		    DBG("properties.hh::Properties():  %s (%s)\n",
+			entry->path, strerror(errno));
+		    errno=0;
+		    g_free(entry->basename);
+		    g_free(entry->mimetype);
+		    g_free(entry->path);
+		    g_free(entry);
+		    //removePathList(entryList);
+		    //throw(1);
+	    } else entryList = g_list_prepend(entryList, entry);
 	}
-	if (entryList) entryList = g_list_reverse(entryList);
+	//if (entryList) entryList = g_list_reverse(entryList);
 	//setup_properties_p(this);
 	Util<Type>::context_function(Properties<Type>::doDialog, this);
 
@@ -458,16 +457,19 @@ private:
 
     static void 
     setFileInfo(entry_t *entry, GtkLabel *label){
+	TRACE("setFileInfo... %s\n",entry->path);
 	auto h = g_get_home_dir();
         struct stat st;
         stat(entry->path, &st);
+	if (!entry->mimetype) entry->mimetype = Mime<Type>::mimeMagic(entry->path);
 	gchar *m1 = Util<Type>::statInfo(&st);
 	gchar *m2 = Util<Type>::fileInfo(entry->path);
         auto size = LocalModel<Type>::sizeString(st.st_size);
         auto date = LocalModel<Type>::dateString(st.st_mtime);
         auto encoding = Mime<Type>::encoding(entry->path);
+        auto mimetype = entry->mimetype;
         auto encodingString = encoding?g_strconcat(_("Encoding"),": ", encoding, "\n", NULL):g_strdup("");
-        auto mimetypeString = encoding?g_strconcat(_("Mimetype"),": ", entry->mimetype, "\n", NULL):g_strdup("");
+        auto mimetypeString = mimetype?g_strconcat(_("Mimetype"),": ", entry->mimetype, "\n", NULL):g_strdup("");
 	g_free(encoding);
 
 	gchar *m = g_strconcat(m1, "\n",
@@ -527,6 +529,9 @@ private:
 
     static void
     setUpImage(GtkBox *box, entry_t *entry){
+	TRACE("setUpImage... mimetype = %s\n", entry->mimetype);
+	if (!entry->mimetype) entry->mimetype = Mime<Type>::mimeMagic(entry->path);
+	
 	auto pixbuf = 
 	    Preview<Type>::previewDefault(entry->path, entry->mimetype, &(entry->st));
 	auto image = gtk_image_new_from_pixbuf(pixbuf);
@@ -541,6 +546,7 @@ private:
 
     static void
     changeCombo (GtkComboBox *combo, void *data){
+	TRACE("changeCombo...\n");
 	auto properties_p = (Properties<Type> *)data;
 	gint index = gtk_combo_box_get_active(combo);
 	GList *list = g_list_nth (properties_p->entryList,index);
