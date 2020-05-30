@@ -19,6 +19,20 @@ public:
 	pathbar_ = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
         setStyle();
 
+	auto eback = gtk_event_box_new();
+	g_object_set_data(G_OBJECT(eback), "name", g_strdup("RFM_GOTO"));
+	g_object_set_data(G_OBJECT(eback), "path", g_strdup("xffm:goto"));
+
+	auto backPixbuf = Pixbuf<Type>::get_pixbuf("go-previous", -24);
+        auto backimage = gtk_image_new_from_pixbuf(backPixbuf);
+	gtk_container_add (GTK_CONTAINER(eback), GTK_WIDGET(backimage));
+
+	gtk_box_pack_start (GTK_BOX (pathbar_), GTK_WIDGET(eback), FALSE, FALSE, 0);
+	gtk_widget_show_all(GTK_WIDGET(eback));
+	g_signal_connect (G_OBJECT(eback) , "button-press-event", EVENT_CALLBACK (go_back), (void *)this);
+	
+
+
 	auto eb = gtk_event_box_new();
 	g_object_set_data(G_OBJECT(eb), "name", g_strdup("RFM_GOTO"));
 	g_object_set_data(G_OBJECT(eb), "path", g_strdup("xffm:goto"));
@@ -364,7 +378,18 @@ private:
 	}
 
         return FALSE;
-
+    }
+    
+    static gboolean
+    go_back (GtkWidget *eventBox,
+               GdkEvent  *event,
+               gpointer   data) {
+	Pathbar *pathbar_p = (Pathbar *)data;
+	auto page = (Page<Type> *)pathbar_p;
+	auto view = (View<Type> *)
+		g_object_get_data(G_OBJECT(page->topScrolledWindow()), "view");
+	view->goBack();
+        return FALSE;
     }
 
     static gboolean

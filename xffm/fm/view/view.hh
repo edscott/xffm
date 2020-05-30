@@ -41,7 +41,17 @@ class View:
     using page_c = Page<Type>;
     
     BaseMonitor<Type> *monitorObject_; // public to switch treemodel...
-    
+    GList *history;
+    void pushHistory(const gchar *path){
+	if (history){
+	    if (strcmp((gchar *)history->data, path) == 0){
+		TRACE("%s already in history.\n", path);
+		return;
+	    }
+	} 
+	history = g_list_prepend(history, g_strdup(path));
+	TRACE("pushed %s\n", path);
+    } 
 public:
     /*gint items(void){ 
         return gtk_tree_model_iter_n_children(this->treeModel(), NULL);
@@ -52,12 +62,38 @@ public:
         this->treeView_ = TreeView<Type>::createTreeview(this);
         this->applyColors();
         monitorObject_ = NULL;
+	history = NULL;
     }
 
     ~View(void){
         TRACE("View destructor.\n");
+	for (auto l=history; l && l->data; l=l->next){
+	    g_free(l->data);
+	}
+	g_list_free(history);
     }
 
+    void goBack(void){
+	gchar *back;
+	if (history){
+	    auto current = (gchar *)history->data;
+	    TRACE("current=%s\n", current);
+	    history = g_list_remove(history, history->data);
+	    g_free(current);
+	    if (!history) back = g_strdup("xffm:root");
+	    else {
+		back = (gchar *)history->data;
+		TRACE("back=%s\n", back);
+		history = g_list_remove(history, history->data);
+	    }
+	} else {
+	    back = g_strdup("xffm:root");
+	    TRACE("history empty: back=%s\n", back);
+	}
+	loadModel(back);
+	g_free(back);
+    }
+    
     void
     applyColors(void) {
         auto fgColor = Settings<Type>::getSettingString("window", "fgColor");
@@ -90,6 +126,7 @@ public:
     }
     gboolean loadModel(const gchar *path, View<Type> *view){
         TRACE("loadModel(%s, view)\n", path);
+	pushHistory(path);
 	// This sets viewType
         if (isTreeView){
 	    // hide iconview, show treeview
@@ -185,6 +222,7 @@ public:
     {
 	// Here viewType must be specified before any
 	// static loadModel call (viz. PkgModel)
+	pushHistory(path);
         TRACE("generalized view: loadModel: %s\n", path);
 #ifdef ENABLE_PKG_MODULE
 	if (strncmp(path, "xffm:pkg", strlen("xffm:pkg"))==0){

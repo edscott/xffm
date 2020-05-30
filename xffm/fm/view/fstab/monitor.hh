@@ -28,17 +28,17 @@ public:
         
     }
     ~FstabMonitor(void){
-        DBG("Destructor:~local_monitor_c()\n");
+        TRACE("Destructor:~local_monitor_c()\n");
 #ifdef xUSE_MOUNTTHREAD
         // stop mountThread
         this->mountArg_[1] = NULL;
         while (this->mountArg_[2]){
-            DBG("***Waiting for mountThread to exit\n");
+            TRACE("***Waiting for mountThread to exit\n");
             sleep(1);
         }
 #endif
         //g_hash_table_destroy(this->itemsHash());
-        DBG("***Destructor:~local_monitor_c() complete\n");
+        TRACE("***Destructor:~local_monitor_c() complete\n");
     }
 
     void
