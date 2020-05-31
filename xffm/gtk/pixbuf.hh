@@ -53,8 +53,8 @@ public:
 	    return pixbuf;
 	}
 	// Not found, huh?
-	TRACE("Create pixbuf and put in hashtable: \"%s\"\n", icon_name);
-	pixbuf = Icons<Type>::absolute_path_icon(icon_name, pixels);
+	DBG("Create pixbuf and put in hashtable: \"%s\"\n", icon_name);
+	pixbuf = Icons<Type>::absolute_path_icon(icon_name, pixels, NULL);
 
 	if (!pixbuf){
 	    // check for composite icon definition or plain icon.

@@ -528,6 +528,7 @@ public:
     loadFromThumbnails(const gchar *filePath, struct stat *st_p, 
 	    gint width, gint height){
 	// Look into thumbnail cache directory...
+	DBG("preview.hh::loadFromThumbnails(%s)\n", filePath);
 	auto thumbnailPath = PixbufHash<Type>::get_thumbnail_path (filePath, height);
 	if (g_file_test(thumbnailPath,G_FILE_TEST_EXISTS)){
 	    errno=0;
@@ -539,9 +540,19 @@ public:
 		g_free(thumbnailPath);
 		return NULL;
 	    }
-
-	    if (st_p && (st.st_mtime < st_p->st_mtime)){
+	    struct stat st_local;
+	    if (!st_p){
+		st_p = &st_local;
+		if (stat(filePath, st_p)<0) {
+		    g_free(thumbnailPath);
+		    return NULL;
+		}
+	    }
+	    if (st.st_mtime < st_p->st_mtime){
+		DBG("preview.hh::loadFromThumbnails(%s): out of date. Regenerating.\n", filePath);
 		unlink(thumbnailPath);
+		g_free(thumbnailPath);
+		return NULL;
 	    } else {
 		GError *error=NULL;
 		TRACE("Now loading pixbuf from %s\n",  thumbnailPath);
@@ -561,6 +572,7 @@ public:
 			g_object_unref(pixbuf);
 			pixbuf = newPixbuf; 
 		    }
+		    DBG("preview.hh::loadFromThumbnails(%s): Success.\n", filePath);
 		    return pixbuf;
 		}
 	    }

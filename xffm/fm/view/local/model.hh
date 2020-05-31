@@ -744,27 +744,24 @@ private:
         GdkPixbuf *treeViewPixbuf = NULL;
         GdkPixbuf *normal_pixbuf = NULL;
         GdkPixbuf *highlight_pixbuf = NULL;
-        if (xd_p->st) {
+	
+	if (g_path_is_absolute(icon_name)){
+	    normal_pixbuf = Icons<Type>::absolute_path_icon(icon_name, 48, xd_p->st);
+            highlight_pixbuf = gdk_pixbuf_copy(normal_pixbuf);
+	}
+
+	else if (xd_p->st) {
             auto type = xd_p->st->st_mode & S_IFMT;
             if (type == S_IFDIR) {
-                highlight_pixbuf = Preview<Type>::loadFromThumbnails(up?HIGHLIGHT_UP:"document-open", xd_p->st, 48, 48);
-                if (!highlight_pixbuf) {
-                    auto thumbnail = PixbufHash<Type>::get_thumbnail_path (up?HIGHLIGHT_UP:"document-open", GTK_ICON_SIZE_DIALOG);
-                    highlight_pixbuf = Pixbuf<Type>::get_pixbuf(up?HIGHLIGHT_UP:"document-open", GTK_ICON_SIZE_DIALOG);
-                    Pixbuf<Type>::pixbuf_save(highlight_pixbuf, thumbnail);
-                }
+                highlight_pixbuf = Pixbuf<Type>::get_pixbuf(up?HIGHLIGHT_UP:"document-open", GTK_ICON_SIZE_DIALOG);
             }
 	}
 
-	if (g_path_is_absolute(icon_name))
-	    normal_pixbuf = Preview<Type>::loadFromThumbnails(icon_name, xd_p->st, 48, 48);
       
         if (!treeViewPixbuf) 
 	    treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name, -24);
         if (!normal_pixbuf) {
-	    auto thumbnail = PixbufHash<Type>::get_thumbnail_path (icon_name, GTK_ICON_SIZE_DIALOG);
 	    normal_pixbuf = Pixbuf<Type>::get_pixbuf(icon_name, GTK_ICON_SIZE_DIALOG);
-	    Pixbuf<Type>::pixbuf_save(normal_pixbuf, thumbnail);
 	}
         //Highlight emblem macros are defined in types.h
 	//

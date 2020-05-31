@@ -401,10 +401,17 @@ private:
 		return FALSE;
 	    } 
 	}
-	if (g_file_test(target, G_FILE_TEST_EXISTS)){
+	// Refine target on mv or cp.
+	gchar *fullTarget;
+	if (g_file_test(target, G_FILE_TEST_IS_DIR)){
+	    auto base = g_path_get_basename(path);
+	    fullTarget = g_strconcat(target, G_DIR_SEPARATOR_S, base, NULL);
+	    g_free(base);
+	} else fullTarget = g_strdup(target);
+	if (g_file_test(fullTarget, G_FILE_TEST_EXISTS)){
 	    // Overwrite? Backup will be created.
 	    auto message = g_strdup_printf("<span size=\"larger\"><span color=\"blue\">%s:</span>\n%s\n<span color=\"red\">%s</span></span>\n", 
-		    strerror(EEXIST),target,
+		    strerror(EEXIST),fullTarget,
 		    _("Overwrite?")); 
 	    	
 	    auto yesNo = Dialogs<Type>::yesNo(message);
@@ -418,6 +425,7 @@ private:
 	    }
 	    TRACE("Overwrite with backup...\n");
 	}
+	g_free(fullTarget);
         switch (mode) {
             case MODE_COPY:
                copyFore(path,target);

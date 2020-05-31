@@ -20,6 +20,7 @@ static pthread_mutex_t pixbuf_mutex;
 namespace xf
 {
 template <class Type>class Util;
+template <class Type>class Preview;
     
 
 template <class Type>
@@ -104,15 +105,18 @@ public:
     }
 	    
     static GdkPixbuf *
-    absolute_path_icon(const gchar *icon_name, gint size){
+    absolute_path_icon(const gchar *icon_name, gint size, struct stat *st_p){
 	if (!icon_theme) init();
 	if (!g_path_is_absolute (icon_name)) return NULL;
 	if (!g_file_test (icon_name, G_FILE_TEST_EXISTS)) {
 	    TRACE("icons.hh:: absolute_path_icon(): %s does not exist.\n", icon_name);
 	    return NULL;
 	}
-	//auto pixbuf = pixbuf_new_from_file(icon_name, size, size); // width,height.
-	
+        // here we should try and load from thumbnail...
+	auto pixbuf = Preview<Type>::loadFromThumbnails(icon_name, st_p, size, size);
+	DBG("Icons::absolute_path_icon(%s) loadFromThumbnails: %p\n", icon_name, pixbuf);
+	if (pixbuf) return pixbuf;
+	DBG("Icons::absolute_path_icon() regenerating %s\n", icon_name);
 	return pixbuf_new_from_file(icon_name, size, size); // width,height.
     }
 
