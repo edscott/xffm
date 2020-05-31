@@ -480,6 +480,7 @@ public:
 	// Make sure any sudo command has the "-A" option
 	auto command = sudo_fix(c);
 	TRACE("shell_command = %s\n", c);
+	Print<Type>::showTextSmall(textview);
 	pid_t pid = thread_run(textview, command?command:c, scrollUp);
 	g_free (command);
 	if (!pid) return 0;

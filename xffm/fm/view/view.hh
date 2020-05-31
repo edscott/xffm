@@ -43,13 +43,14 @@ class View:
     BaseMonitor<Type> *monitorObject_; // public to switch treemodel...
     GList *history;
     void pushHistory(const gchar *path){
-	if (history){
-	    if (strcmp((gchar *)history->data, path) == 0){
+	if (!this) return;
+	if (this->history){
+	    if (strcmp((gchar *)this->history->data, path) == 0){
 		TRACE("%s already in history.\n", path);
 		return;
 	    }
 	} 
-	history = g_list_prepend(history, g_strdup(path));
+	this->history = g_list_prepend(this->history, g_strdup(path));
 	TRACE("pushed %s\n", path);
     } 
 public:
@@ -75,16 +76,17 @@ public:
 
     void goBack(void){
 	gchar *back;
-	if (history){
-	    auto current = (gchar *)history->data;
+	if (!this) return;
+	if (this->history){
+	    auto current = (gchar *)this->history->data;
 	    TRACE("current=%s\n", current);
-	    history = g_list_remove(history, history->data);
+	    this->history = g_list_remove(this->history, this->history->data);
 	    g_free(current);
-	    if (!history) back = g_strdup("xffm:root");
+	    if (!this->history) back = g_strdup("xffm:root");
 	    else {
-		back = (gchar *)history->data;
+		back = (gchar *)this->history->data;
 		TRACE("back=%s\n", back);
-		history = g_list_remove(history, history->data);
+		this->history = g_list_remove(this->history, this->history->data);
 	    }
 	} else {
 	    back = g_strdup("xffm:root");

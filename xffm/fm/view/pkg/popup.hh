@@ -189,7 +189,7 @@ class PkgPopUp {
 	auto displayName =(const gchar *)g_object_get_data(G_OBJECT(pkgItemPopUp), "displayName");
 	auto text = getStringFull(PKG_TOOLTIPTEXT, PKG_REMOTE_TOOLTIPTEXT,  displayName, TRUE);
 	Print<Type>::clear_text(view->page()->output());
-	Print<Type>::show_text(view->page()->output());
+	Print<Type>::showText(view->page()->output());
 	Print<Type>::print(view->page()->output(), text);
         while(gtk_events_pending())gtk_main_iteration();
     	Print<Type>::scroll_to_top(view->page()->output());

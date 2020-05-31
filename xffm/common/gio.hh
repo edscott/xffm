@@ -444,7 +444,7 @@ private:
         GFile *file = g_file_new_for_path(path);
 	auto notebookP = Fm<Type>::getCurrentNotebook();
 	auto pageP = notebookP->currentPageObject();
-	Print<double>::show_text(pageP->output());
+	Print<double>::showTextSmall(pageP->output());
 	//pageP->run_lp_command(pageP->output(), pageP->workDir(), command);        
 	switch (mode) {
             case MODE_RM:

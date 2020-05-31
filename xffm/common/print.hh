@@ -92,8 +92,11 @@ public:
         context_function(clear_text_buffer_f, arg);
     }
 
-
     static void show_text(GtkTextView *textview){
+	showText(textview);
+    }
+
+    static void showText(GtkTextView *textview){
         if (!textview) return;
         auto vpane = GTK_PANED(g_object_get_data(G_OBJECT(textview), "vpane"));
 	void *arg[]={(void *)vpane, NULL, NULL, NULL};
@@ -383,8 +386,8 @@ private:
 	gtk_widget_get_allocation(GTK_WIDGET(vpane), &allocation);
 	gint vheight = allocation.height;
         gint height;
-        if (small) height = 9*vheight/10;
-        else height = 2*vheight/4;
+        if (small) height = 8*vheight/10;
+        else height = 2*vheight/3;
         TRACE("vheight = %d, position = %d\n", vheight, gtk_paned_get_position(vpane));
 	if (gtk_paned_get_position(vpane) > height) {
 	    TRACE("setting vpane position to %d\n", height);

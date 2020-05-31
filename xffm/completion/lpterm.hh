@@ -183,7 +183,7 @@ public:
 	gchar *gg=NULL;
 
 	if (argvp[1] == NULL){
-	    print_c::show_text(output);
+	    print_c::showTextSmall(output);
 	    //taken care of in taskbar object
 	    //print_c::print(output, "green", g_strdup_printf("cd %s\n", g_get_home_dir()));
 	    return g_strdup(g_get_home_dir());
@@ -205,7 +205,7 @@ public:
 	    }
 
 	} 
-	print_c::show_text(output);
+	print_c::showTextSmall(output);
 
 	// must allow relative paths too.
 	if (!g_path_is_absolute(gg)){
