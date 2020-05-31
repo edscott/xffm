@@ -166,6 +166,10 @@ public:
 	} else {
 	    pixbuf = gdk_pixbuf_new_from_file_at_size (path, width, height, &error);
 	}
+	if (strchr(path, '.')){
+	    auto label = strrchr(path,'.')+1;
+	    if (strlen(label)) Icons<Type>::insertPixbufLabel(pixbuf, label);
+	}
         if (error){
             TRACE("%s\n", error->message);
             g_error_free(error);
@@ -323,6 +327,34 @@ public:
 	Cairo<Type>::pixbuf_cairo_destroy(pixbuf_context, base_pixbuf);
 	return NULL;
     }
+
+    static void
+    insertPixbufLabel(GdkPixbuf *pixbuf, const gchar *label){
+	// Done by main gtk thread:
+	void *arg[] = {(void *)pixbuf, (void *)label};
+	Util<Type>::context_function(insert_label_decoration_f, arg);
+    }
+
+    static void *
+    insert_label_decoration_f (void *data){
+	if (!icon_theme) init();
+	auto arg = (void **)data;
+	auto base_pixbuf = (GdkPixbuf *)arg[0];
+	auto label = (const gchar *)arg[1];
+
+	cairo_t   *pixbuf_context = Cairo<Type>::pixbuf_cairo_create(base_pixbuf);
+	
+	gdk_cairo_set_source_pixbuf(pixbuf_context, base_pixbuf,0,0);
+	cairo_paint_with_alpha(pixbuf_context, 1.0);
+
+	if (label){
+	    Cairo<Type>::add_label_pixbuf(pixbuf_context, base_pixbuf, label);
+	}
+
+	Cairo<Type>::pixbuf_cairo_destroy(pixbuf_context, base_pixbuf);
+	return NULL;
+    }
+
 
 };
 }
