@@ -445,6 +445,7 @@ private:
         return retval;
     }
 
+
     static gboolean doIt(GtkDialog *rmDialog, const gchar *path, gint mode){
 	TRACE("doIt...rm %s   (%d)\n", path,  mode);
         if (mode != MODE_RM && mode != MODE_TRASH && mode != MODE_SHRED) 
@@ -542,7 +543,12 @@ private:
 	// Progress dialog will be destroyed at thread1().
 	return retval;
     }
-
+public:
+    static gboolean
+    clearDirectory(const gchar *dir){
+        return doIt(NULL, dir, MODE_RM);
+    }
+private:    
 
     static gboolean
     multiDoIt(GtkDialog *rmDialog, GList *fileList, gint mode)
@@ -562,7 +568,6 @@ private:
 	}
 	return retval;
     }
-private:    
     static void
     progressCallback(goffset currentBytes, goffset totalBytes, void *data){
         auto arg = (void **)data;

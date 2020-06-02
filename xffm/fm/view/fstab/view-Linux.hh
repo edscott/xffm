@@ -470,6 +470,30 @@ public:
     }
    
 
+#ifdef ENABLE_EFS_MODULE 
+    static gboolean
+    isEcryptfsMount(const gchar *path){
+	gboolean result = FALSE;
+        struct mntent *mnt_struct;
+        FILE *fstab_fd = setmntent ("/etc/mtab", "r");
+        struct mntent mntbuf;
+        gchar buf[2048]; 
+        while ((mnt_struct = 
+		    getmntent_r (fstab_fd, &mntbuf, buf, 2048)) != NULL) 
+	{
+            if (strcmp(path, mnt_struct->mnt_dir) && strcmp(path, mnt_struct->mnt_fsname)){
+		continue;
+	    }
+	    if (strstr(mnt_struct->mnt_type,"ecryptfs")){
+		result = TRUE;
+		break;
+	    }
+	}
+        (void)endmntent (fstab_fd);
+	return result;
+    }
+#endif
+
     static guint
     getMntType (const gchar *path) {
         struct mntent *mnt_struct;
@@ -692,6 +716,16 @@ public:
  
 	gboolean mounted = isMounted(path);
 
+#ifdef ENABLE_EFS_MODULE 
+	// Check for ecryptfs
+	if (mounted && isEcryptfsMount(path)){
+	    TRACE("Clearing out thumbnails...\n");
+	    auto cache_dir = g_build_filename (XFTHUMBNAIL_DIR, NULL);
+	    Gio<Type>::clearDirectory(cache_dir);
+	    g_free(cache_dir);
+	}
+
+#endif
 	const gchar *arg[10];
 	gint i=0;
 
