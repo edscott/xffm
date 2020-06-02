@@ -172,7 +172,7 @@ public:
 	gtk_window_set_title (mainWindow, title);
     }
     void setDialogIcon(const gchar *icon){
-	auto pixbuf = pixbuf_c::get_pixbuf(icon, SIZE_ICON);
+	auto pixbuf = pixbuf_c::getPixbuf(icon, SIZE_ICON);
 	gtk_window_set_icon (mainWindow, pixbuf);
 	g_object_unref(pixbuf);
     }

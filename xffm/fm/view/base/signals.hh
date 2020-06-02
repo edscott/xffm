@@ -912,7 +912,7 @@ public:
             gdk_drag_status (dc, GDK_ACTION_MOVE, t);
 	}
 
-	GdkPixbuf *pixbuf = Pixbuf<Type>::get_pixbuf(dragIcon, -24);
+	GdkPixbuf *pixbuf = Pixbuf<Type>::getPixbuf(dragIcon, -24);
 	if (GDK_IS_DRAG_CONTEXT(context)) gtk_drag_set_icon_pixbuf (context, pixbuf,1,24);
             
         gboolean folderDND = FALSE;
@@ -1014,7 +1014,7 @@ public:
         }
         view->setSelectionList(selectionList);
         /*if (g_list_length(selectionList) > 1) {
-            GdkPixbuf *pixbuf = Pixbuf<Type>::get_pixbuf("edit-copy", isTreeView?-16:-48);
+            GdkPixbuf *pixbuf = Pixbuf<Type>::getPixbuf("edit-copy", isTreeView?-16:-48);
             gtk_drag_set_icon_pixbuf (context, pixbuf,1,1);
         } else {
             auto tpath = (GtkTreePath *)selectionList->data;

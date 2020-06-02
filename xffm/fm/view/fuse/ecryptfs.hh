@@ -125,7 +125,7 @@ private:
         auto hbox = Gtk<Type>::hboxNew (FALSE, 2);
         gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area(GTK_DIALOG (dialog))), GTK_WIDGET(hbox), FALSE, FALSE, 0);
 
-        auto pixbuf = Pixbuf<Type>::get_pixbuf("dialog-question", -24);
+        auto pixbuf = Pixbuf<Type>::getPixbuf("dialog-question", -24);
         auto image = gtk_image_new_from_pixbuf(pixbuf);
         g_object_unref(pixbuf);
         gtk_box_pack_start (GTK_BOX (hbox), image, FALSE, FALSE, 0);

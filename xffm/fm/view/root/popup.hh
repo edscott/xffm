@@ -316,9 +316,9 @@ private:
         g_free(thisPath);	
 	auto icon_name = "user-trash";
 	auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_EMBLEM, NULL);
-	auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
-	auto normal_pixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -48);
-	auto highlight_pixbuf = Pixbuf<Type>::get_pixbuf(highlight_name,  -48);   
+	auto treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -24);
+	auto normal_pixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -48);
+	auto highlight_pixbuf = Pixbuf<Type>::getPixbuf(highlight_name,  -48);   
 	g_free(highlight_name);
 	
 	gtk_list_store_set (GTK_LIST_STORE(treeModel), iter, 

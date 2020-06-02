@@ -36,7 +36,7 @@ private:
          
          // Add the label, and show everything we have added
          if (icon){
-            auto pixbuf = Pixbuf<Type>::get_pixbuf(icon, -96);
+            auto pixbuf = Pixbuf<Type>::getPixbuf(icon, -96);
             if (pixbuf) {
                 auto image = gtk_image_new_from_pixbuf(pixbuf);
                 if (image) {

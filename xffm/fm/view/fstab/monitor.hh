@@ -449,7 +449,7 @@ private:
         auto iconName = (mounted)?"drive-harddisk/NW/greenball/3.0/180":
             "drive-harddisk/NW/grayball/3.0/180";
         TRACE("fstabmonitor stat_func(): iconname=%s\n", iconName);
-        GdkPixbuf *pixbuf = Pixbuf<Type>::get_pixbuf(iconName,  GTK_ICON_SIZE_DIALOG);
+        GdkPixbuf *pixbuf = Pixbuf<Type>::getPixbuf(iconName,  GTK_ICON_SIZE_DIALOG);
 	gtk_list_store_set (store, iter, 
                 ICON_NAME, iconName,
                 DISPLAY_PIXBUF, pixbuf,

@@ -92,7 +92,7 @@ private:
 	gchar *g=g_strdup_printf("Xffm+ %s", _("Remove"));
 	gtk_window_set_title (GTK_WINDOW(rmDialog), g);
 	// icon
-	auto pb = Pixbuf<Type>::get_pixbuf("edit-delete", SIZE_ICON);
+	auto pb = Pixbuf<Type>::getPixbuf("edit-delete", SIZE_ICON);
 	gtk_window_set_icon (GTK_WINDOW(rmDialog), pb);
 	gtk_window_set_modal (GTK_WINDOW(rmDialog), TRUE);
         gtk_window_set_transient_for(GTK_WINDOW(rmDialog), GTK_WINDOW(mainWindow));
@@ -102,12 +102,12 @@ private:
 	gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area(rmDialog)), GTK_WIDGET(vbox2));
 
 	if (multiple){
-	    pb = Pixbuf<Type>::get_pixbuf ("dialog-warning", -96);
+	    pb = Pixbuf<Type>::getPixbuf ("dialog-warning", -96);
 	    auto q = gtk_image_new_from_pixbuf (pb);
 	    gtk_widget_show (GTK_WIDGET(q));
 	    gtk_box_pack_start (vbox2, GTK_WIDGET(q), TRUE, TRUE, 5);
         } else {
-	    pb = Pixbuf<Type>::get_pixbuf ("edit-delete", -48);
+	    pb = Pixbuf<Type>::getPixbuf ("edit-delete", -48);
 	    auto q = gtk_image_new_from_pixbuf (pb);
 	    gtk_widget_show (GTK_WIDGET(q));
 	    gtk_box_pack_start (vbox2, GTK_WIDGET(q), TRUE, TRUE, 5);

@@ -136,8 +136,8 @@ public:
 	gtk_button_set_relief (button, GTK_RELIEF_NONE);
 
 	//auto image = gtk_image_new_from_icon_name (icon_name, GTK_ICON_SIZE_SMALL_TOOLBAR);
-//	auto pixbuf = Pixbuf<Type>::get_pixbuf(icon_name, GTK_ICON_SIZE_SMALL_TOOLBAR);
-	auto pixbuf = Pixbuf<Type>::get_pixbuf(icon_name, GTK_ICON_SIZE_SMALL_TOOLBAR);
+//	auto pixbuf = Pixbuf<Type>::getPixbuf(icon_name, GTK_ICON_SIZE_SMALL_TOOLBAR);
+	auto pixbuf = Pixbuf<Type>::getPixbuf(icon_name, GTK_ICON_SIZE_SMALL_TOOLBAR);
         auto image = gtk_image_new_from_pixbuf(pixbuf);
 	if (image) {
 	    gtk_container_add (GTK_CONTAINER (button), image);
@@ -189,7 +189,7 @@ public:
 	}
         g_list_free(list);
 	if(icon_id) {
-	    auto pb = Pixbuf<Type>::get_pixbuf (icon_id, size);
+	    auto pb = Pixbuf<Type>::getPixbuf (icon_id, size);
 	    auto image = gtk_image_new_from_pixbuf (pb);
             gtk_container_add(container, image);
 	    gtk_widget_show(image);
@@ -211,7 +211,7 @@ public:
 	    gtk_container_remove(GTK_CONTAINER(box), icon);
 	}
 	if(icon_id) {
-	    auto pb = Pixbuf<Type>::get_pixbuf (icon_id, size);
+	    auto pb = Pixbuf<Type>::getPixbuf (icon_id, size);
 	    auto image = gtk_image_new_from_pixbuf (pb);
 	    gtk_box_pack_start(GTK_BOX(box), image, FALSE, FALSE,0);
 	    g_object_set_data(G_OBJECT(bin), "icon", image);
@@ -273,7 +273,7 @@ public:
 	box = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0));
         g_object_set_data(G_OBJECT(menuItem), "box", box);
 
-	GdkPixbuf *pb = (icon_id)? Pixbuf<Type>::get_pixbuf (icon_id, size): NULL;    
+	GdkPixbuf *pb = (icon_id)? Pixbuf<Type>::getPixbuf (icon_id, size): NULL;    
 	if (pb){
 	    image = GTK_IMAGE(gtk_image_new_from_pixbuf (pb));
 	    gtk_widget_show (GTK_WIDGET(image));
@@ -292,7 +292,7 @@ public:
     static GtkWidget * 
     menu_item_new(const gchar *icon_id, const gchar *text, gint size)
     {
-	GdkPixbuf *pb = (icon_id)? Pixbuf<Type>::get_pixbuf (icon_id, size): NULL;    
+	GdkPixbuf *pb = (icon_id)? Pixbuf<Type>::getPixbuf (icon_id, size): NULL;    
 	auto w = gtk_menu_item_new_with_label ("");
 	auto box = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0));
         g_object_set_data(G_OBJECT(w), "box", box);

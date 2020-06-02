@@ -240,9 +240,9 @@ private:
         auto icon_name = (mounted)?"drive-harddisk/NW/greenball/3.0/180":
             "drive-harddisk/NW/grayball/3.0/180";
         auto highlight_name = "drive-harddisk/NW/blueball/3.0/225";
-        auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
-        auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
-        auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
+        auto treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -24);
+        auto normal_pixbuf = pixbuf_c::getPixbuf(icon_name,  -48);
+        auto highlight_pixbuf = pixbuf_c::getPixbuf(highlight_name,  -48);   
         //auto uuid = partition2uuid(path);
         auto id = partition2Id(path);
         gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);

@@ -11,8 +11,6 @@ class FindDialog
 {
     using util_c = Util<double>;
     using gtk_c = Gtk<double>;
-    using pixbuf_c = Pixbuf<double>;
-    using pixbuf_icons_c = Icons<double>;
     using tooltip_c = Tooltip<double>;
 //    typedef typename  void (*)(GtkToggleButton *,gpointer) toggleButtonCallback;
 protected:
@@ -95,7 +93,7 @@ private:
 	gtk_window_set_title (findDialog, _("Find"));
 	gtk_window_set_position (findDialog, GTK_WIN_POS_MOUSE);
 
-	GdkPixbuf *pixbuf = pixbuf_c::get_pixbuf("edit-find", SIZE_ICON);
+	GdkPixbuf *pixbuf = Pixbuf<Type>::getPixbuf("edit-find", SIZE_ICON);
 	gtk_window_set_icon (findDialog, pixbuf);
 	g_object_unref(pixbuf);
 	
@@ -627,10 +625,10 @@ private:
 	    auto editor_path = g_find_program_in_path(basename);
 	    if (editor_path){
 		auto iconpath=g_strdup(basename);
-                auto pix = pixbuf_icons_c::get_theme_pixbuf(iconpath, SMALL_ICON_SIZE);
+                auto pix = Pixbuf<Type>::getPixbuf(iconpath, SMALL_ICON_SIZE);
 		if (!pix) {
                     iconpath = g_strdup("document-open");
-		    pix = pixbuf_c::get_pixbuf (iconpath, SMALL_ICON_SIZE); //refs
+		    pix = Pixbuf<Type>::getPixbuf (iconpath, SMALL_ICON_SIZE); //refs
                 }
 		g_object_unref(pix);
 

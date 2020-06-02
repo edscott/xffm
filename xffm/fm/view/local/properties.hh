@@ -318,7 +318,7 @@ private:
 	//
 	// Create and add image for initial selected file in dialog
 	//
-	//auto pixbuf = Pixbuf<Type>::get_pixbuf("accessories-calculator", -256);
+	//auto pixbuf = Pixbuf<Type>::getPixbuf("accessories-calculator", -256);
 	entry = (entry_t *)properties_p->entryList->data;
         
         gchar *m2 = Util<Type>::fileInfo(entry->path);

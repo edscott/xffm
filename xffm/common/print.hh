@@ -45,7 +45,7 @@ public:
     static void print_icon(GtkTextView *textview, const gchar *iconname, gchar *string)
     {
         if (!textview) return;
-	auto pixbuf = pixbuf_c::get_pixbuf(iconname, -16);
+	auto pixbuf = pixbuf_c::getPixbuf(iconname, -16);
 	void *arg[]={(void *)pixbuf, (void *)textview, NULL, (void *)string};
 	context_function(print_i, arg);
 	g_free(string);
@@ -57,7 +57,7 @@ public:
 				gchar *string)
     {
         if (!textview) return;
-	auto pixbuf = pixbuf_c::get_pixbuf(iconname, -16);
+	auto pixbuf = pixbuf_c::getPixbuf(iconname, -16);
 	void *arg[]={(void *)pixbuf, (void *)textview, (void *)tag, (void *)string};
 	context_function(print_i, arg);
 	g_free(string);

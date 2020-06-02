@@ -204,10 +204,16 @@ public:
 
 	
         TRACE("***localmonitor stat_func(): iconname=%s\n", iconName);
-	GdkPixbuf *pixbuf = Pixbuf<Type>::get_pixbuf(iconName,  -48);
-	GdkPixbuf *treepixbuf = Pixbuf<Type>::get_pixbuf(iconName,  -24);
-
-	
+	GdkPixbuf *pixbuf;
+	GdkPixbuf *treepixbuf;
+	if (g_path_is_absolute(iconName)){
+	    pixbuf = Pixbuf<Type>::getImageAtSize(iconName, 48);
+//	    pixbuf = Pixbuf<Type>::getImageAtSize(iconName, 48, xd_p->st);
+	    treepixbuf = Pixbuf<Type>::getImageAtSize(iconName, 24);
+	} else {
+	    pixbuf = Pixbuf<Type>::getPixbuf(iconName,  -48);
+	    treepixbuf = Pixbuf<Type>::getPixbuf(iconName,  -24);
+	}
 
 
 
@@ -218,10 +224,10 @@ public:
 
 	    if (clipEmblem){
 		void *arg2[] = {NULL, (void *)pixbuf, NULL, NULL, (void *)(clipEmblem+1) };
-		Util<Type>::context_function(Icons<Type>::insert_decoration_f, arg2);
+		Util<Type>::context_function(Pixbuf<Type>::insert_decoration_f, arg2);
 
 		void *arg3[] = {NULL, (void *)treepixbuf, NULL, NULL, (void *)(clipEmblem+1) };
-		Util<Type>::context_function(Icons<Type>::insert_decoration_f, arg3);
+		Util<Type>::context_function(Pixbuf<Type>::insert_decoration_f, arg3);
 	    } else {
 	    }
 	}
@@ -231,7 +237,7 @@ public:
 	    //FIXME: this is not working as intended...
 	    //       highlight_pixbuf is also incorrect for images...
 	    //       but works ok for other file types...
-	    highlight_pixbuf = Pixbuf<Type>::get_pixbuf("document-open",  -48);
+	    highlight_pixbuf = Pixbuf<Type>::getPixbuf("document-open",  -48);
 	    TRACE("highlight pixbuf = %s -> document-open\n", xd_p->path);
 	}
 	else {
@@ -262,7 +268,7 @@ public:
 	    void *arg[] = {NULL, (void *)highlight_pixbuf, NULL, NULL, (void *)emblem };
 	    TRACE("pixbuf emblem = %s->%s\n", xd_p->path, emblem);
 	    // Done by main gtk thread:
-	    Util<Type>::context_function(Icons<Type>::insert_decoration_f, arg);
+	    Util<Type>::context_function(Pixbuf<Type>::insert_decoration_f, arg);
 	} else {
 	    TRACE("no emblem for %s\n", xd_p->path);
 	}

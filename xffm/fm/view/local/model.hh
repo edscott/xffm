@@ -87,7 +87,7 @@ public:
     static GdkPixbuf *
     getIcon(const gchar *path){
         auto iconName = getIconName(path);
-        auto pixbuf = Pixbuf<Type>::get_pixbuf(iconName, -24);
+        auto pixbuf = Pixbuf<Type>::getPixbuf(iconName, -24);
         g_free(iconName);
         return pixbuf;
     }
@@ -746,22 +746,23 @@ private:
         GdkPixbuf *highlight_pixbuf = NULL;
 	
 	if (g_path_is_absolute(icon_name)){
-	    normal_pixbuf = Icons<Type>::absolute_path_icon(icon_name, 48, xd_p->st);
-            highlight_pixbuf = gdk_pixbuf_copy(normal_pixbuf);
+	    normal_pixbuf = Pixbuf<Type>::getImageAtSize(icon_name, 48, xd_p->st);
+	    treeViewPixbuf = Pixbuf<Type>::getImageAtSize(icon_name, 24);
 	}
 
 	else if (xd_p->st) {
             auto type = xd_p->st->st_mode & S_IFMT;
             if (type == S_IFDIR) {
-                highlight_pixbuf = Pixbuf<Type>::get_pixbuf(up?HIGHLIGHT_UP:"document-open", GTK_ICON_SIZE_DIALOG);
+                highlight_pixbuf = Pixbuf<Type>::getPixbuf(up?HIGHLIGHT_UP:"document-open", -48);
             }
 	}
 
       
-        if (!treeViewPixbuf) 
-	    treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name, -24);
+        if (!treeViewPixbuf){ 
+	    treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name, -24);
+	}
         if (!normal_pixbuf) {
-	    normal_pixbuf = Pixbuf<Type>::get_pixbuf(icon_name, GTK_ICON_SIZE_DIALOG);
+	    normal_pixbuf = Pixbuf<Type>::getPixbuf(icon_name, -48);
 	}
         //Highlight emblem macros are defined in types.h
 	//
@@ -781,12 +782,15 @@ private:
                 if (strncmp(xd_p->mimetype, "application", strlen("application"))==0){
                     emblem = HIGHLIGHT_APP;
                 }
+                if (strstr(xd_p->mimetype, "image")==0){
+                    emblem = HIGHLIGHT_TEXT;
+                }
             }
 
             // Now decorate the pixbuf with emblem (types.h).
             void *arg[] = {NULL, (void *)highlight_pixbuf, NULL, NULL, (void *)emblem };
             // Done by main gtk thread:
-            Util<Type>::context_function(Icons<Type>::insert_decoration_f, arg);
+            Util<Type>::context_function(Pixbuf<Type>::insert_decoration_f, arg);
         }
 	
 	if (xd_p->st){TRACE("xd_p->st is populated: %s\n", utf_name);}

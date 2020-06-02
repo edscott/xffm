@@ -90,9 +90,9 @@ public:
 	auto icon_name = "drive-multidisk";
 	auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_EMBLEM, NULL);
 
-        auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
-	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
-	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);  
+        auto treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -24);
+	auto normal_pixbuf = pixbuf_c::getPixbuf(icon_name,  -48);
+	auto highlight_pixbuf = pixbuf_c::getPixbuf(highlight_name,  -48);  
 	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
 	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
 		DISPLAY_NAME, utf_name,
@@ -162,9 +162,9 @@ public:
 		highlight_name = "folder/NW/blueball/3.0/225";
 	    }
 
-	    auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
-	    auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
-	    auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
+	    auto treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -24);
+	    auto normal_pixbuf = pixbuf_c::getPixbuf(icon_name,  -48);
+	    auto highlight_pixbuf = pixbuf_c::getPixbuf(highlight_name,  -48);   
 	    //auto uuid = partition2uuid(path);
 	    gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
 	    gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
@@ -372,9 +372,9 @@ public:
 	auto utf_name = util_c::utf_string(_("NFS Network Volume"));
 	auto icon_name = "video-display/SE/emblem-nfs/2.0/225";
 	auto highlight_name = "video-display/SE/emblem-nfs/2.0/225/NE/document-open/2.0/225";
-        auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
-	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
-	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
+        auto treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -24);
+	auto normal_pixbuf = pixbuf_c::getPixbuf(icon_name,  -48);
+	auto highlight_pixbuf = pixbuf_c::getPixbuf(highlight_name,  -48);   
 	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
 	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
 		//DISK_LABEL, utf_name,
@@ -398,9 +398,9 @@ public:
 	auto utf_name = util_c::utf_string(_("SFTP (via SSH)"));
 	auto icon_name = "video-display/SE/emblem-ssh/2.0/225";
 	auto highlight_name = "video-display/SE/emblem-ssh/2.0/225/NE/document-open/2.0/225";
-        auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
-	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
-	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
+        auto treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -24);
+	auto normal_pixbuf = pixbuf_c::getPixbuf(icon_name,  -48);
+	auto highlight_pixbuf = pixbuf_c::getPixbuf(highlight_name,  -48);   
 	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
 	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
 		//DISK_LABEL, utf_name,
@@ -424,9 +424,9 @@ public:
 	auto utf_name = util_c::utf_string(_("eCryptfs Volume"));
 	auto icon_name = "video-display/SE/emblem-lock/2.0/225";
 	auto highlight_name = "video-display/SE/emblem-lock/2.0/225/NE/document-open/2.0/225";
-        auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
-	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
-	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
+        auto treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -24);
+	auto normal_pixbuf = pixbuf_c::getPixbuf(icon_name,  -48);
+	auto highlight_pixbuf = pixbuf_c::getPixbuf(highlight_name,  -48);   
 	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
 	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
 		//DISK_LABEL, utf_name,
@@ -450,9 +450,9 @@ public:
 	auto utf_name = util_c::utf_string(_("CIFS Volume"));
 	auto icon_name = "video-display/SE/emblem-smb/2.0/225";
 	auto highlight_name = "video-display/SE/emblem-smb/2.0/225/NE/document-open/2.0/225";
-        auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
-	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
-	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
+        auto treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -24);
+	auto normal_pixbuf = pixbuf_c::getPixbuf(icon_name,  -48);
+	auto highlight_pixbuf = pixbuf_c::getPixbuf(highlight_name,  -48);   
 	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
 	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
 		//DISK_LABEL, utf_name,

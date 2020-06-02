@@ -50,7 +50,7 @@ public:
         pageHash_ =g_hash_table_new_full(g_direct_hash, g_direct_equal, NULL, NULL);
         gtk_notebook_set_scrollable (notebook_, TRUE);
 
-        //auto pb = Pixbuf<Type>::get_pixbuf ("format-justify-fill", TINY_BUTTON);
+        //auto pb = Pixbuf<Type>::getPixbuf ("format-justify-fill", TINY_BUTTON);
 	//auto popupImage = gtk_image_new_from_pixbuf (pb);
         popupImage = gtk_label_new("");
         auto text = g_strdup_printf("<span color=\"red\">%s</span>",_("Long press time"));
@@ -407,7 +407,7 @@ private:
 void
 view_c::set_application_icon (void) {
     const gchar *iconname = xfdir_p->get_xfdir_iconname();
-    GdkPixbuf *icon_pixbuf = pixbuf_c::get_pixbuf (iconname, GTK_ICON_SIZE_DIALOG);
+    GdkPixbuf *icon_pixbuf = pixbuf_c::getPixbuf (iconname, GTK_ICON_SIZE_DIALOG);
     if(icon_pixbuf) {
 	GtkWindow *window = ((window_c *)get_window_v())->get_window();
         gtk_window_set_icon (window, icon_pixbuf);
@@ -422,7 +422,7 @@ view_c::set_application_icon (gint page_num) {
     if (!view_p->get_xfdir_p()) return;
     
     const gchar *iconname = view_p->get_xfdir_p()->get_xfdir_iconname();
-    GdkPixbuf *icon_pixbuf = pixbuf_c::get_pixbuf (iconname, GTK_ICON_SIZE_DIALOG);
+    GdkPixbuf *icon_pixbuf = pixbuf_c::getPixbuf (iconname, GTK_ICON_SIZE_DIALOG);
     if(icon_pixbuf) {
 	GtkWindow *window = ((window_c *)get_window_v())->get_window();
         gtk_window_set_icon (window, icon_pixbuf);

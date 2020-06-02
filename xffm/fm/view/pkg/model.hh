@@ -34,9 +34,9 @@ public:
 	auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_EMBLEM, NULL);
 
 
-        auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
-	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
-	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48); 
+        auto treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -24);
+	auto normal_pixbuf = pixbuf_c::getPixbuf(icon_name,  -48);
+	auto highlight_pixbuf = pixbuf_c::getPixbuf(highlight_name,  -48); 
 	auto tooltipText = g_strdup_printf("%s",
 		_("Add or remove software installed on the system"));
 
@@ -187,9 +187,9 @@ public:
 	    icon_name = "package-x-generic/NW/" "greenball" "/2.0/225";
 	    highlight_name = "package-x-generic/NW/" "greenball" "/2.0/225";
 	}
-	auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
-	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
-	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
+	auto treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -24);
+	auto normal_pixbuf = pixbuf_c::getPixbuf(icon_name,  -48);
+	auto highlight_pixbuf = pixbuf_c::getPixbuf(highlight_name,  -48);   
 	GtkTreeIter iter;
 	auto path = g_strconcat("xffm:pkg:", package, NULL);
 	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
@@ -218,9 +218,9 @@ public:
 
 	auto icon_name = "package-x-generic/NW/" "greenball" "/2.0/225";
 	auto highlight_name = "package-x-generic/NW/" "greenball" "/2.0/225";
-        auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
-	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
-	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
+        auto treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -24);
+	auto normal_pixbuf = pixbuf_c::getPixbuf(icon_name,  -48);
+	auto highlight_pixbuf = pixbuf_c::getPixbuf(highlight_name,  -48);   
         GtkTreeIter iter;
             TRACE("pacman: %s\n", "reloading pkg icons...");
         for (auto l=pkg_list; l && l->data; l=l->next){
@@ -264,9 +264,9 @@ public:
 	auto utf_name = util_c::utf_string(".");
 	auto icon_name = "go-up";
 	auto highlight_name = "go-up/NW/go-up-symbolic/2.0/225";
-        auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
-	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
-	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
+        auto treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -24);
+	auto normal_pixbuf = pixbuf_c::getPixbuf(icon_name,  -48);
+	auto highlight_pixbuf = pixbuf_c::getPixbuf(highlight_name,  -48);   
 	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
 	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
 		DISPLAY_NAME, utf_name,
@@ -291,9 +291,9 @@ public:
 	auto name = g_get_home_dir();
 	auto icon_name = "system-search";
 	auto highlight_name = "system-search/NE/" PKG_EMBLEM "/2.0/225";
-        auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
-	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
-	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
+        auto treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -24);
+	auto normal_pixbuf = pixbuf_c::getPixbuf(icon_name,  -48);
+	auto highlight_pixbuf = pixbuf_c::getPixbuf(highlight_name,  -48);   
 
 	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
 	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 

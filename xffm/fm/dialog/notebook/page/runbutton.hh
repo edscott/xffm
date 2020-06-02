@@ -182,7 +182,6 @@ public:
 	// Little icon assignment
 	// Shell commands come from lpterminal (with specific shell characters).
 	gchar *command = g_strdup(run_button_p->command());
-	using pixbuf_icons_c = Icons<Type>;
 	
 	/*if (run_button_p->inShell()) {
 	    TRACE("run_button_p->inShell\n");
@@ -199,7 +198,7 @@ public:
 		if (strcmp(icon_id, "xterm")==0){
 		    g_free(icon_id);
 		    icon_id = g_strdup("utilities-terminal");
-		} else if (!pixbuf_icons_c::iconThemeHasIcon(icon_id)){
+		} else if (!Pixbuf<Type>::iconThemeHasIcon(icon_id)){
 		    g_free(icon_id);
 		    icon_id = NULL;
 		}

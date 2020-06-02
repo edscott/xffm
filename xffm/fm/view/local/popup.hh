@@ -60,7 +60,6 @@ class LocalPopUp {
     
     using pixbuf_c = Pixbuf<Type>;
     using util_c = Util<Type>;
-    using pixbuf_icons_c = Icons<Type>;
     using page_c = Page<Type>;
 
 public:
@@ -643,8 +642,8 @@ private:
 	    g_free(displayCommand);
 
 	    auto icon = Run<Type>::baseIcon(defaultApp);
-	    //auto p = pixbuf_c::get_pixbuf(icon, -24); 
-	    auto iconOK = pixbuf_icons_c::iconThemeHasIcon(icon);
+	    //auto p = pixbuf_c::getPixbuf(icon, -24); 
+	    auto iconOK = Pixbuf<Type>::iconThemeHasIcon(icon);
 	    Gtk<Type>::menu_item_content(v, iconOK?icon:"system-run-symbolic", markup, -24);
 	    g_free(icon);
 	    g_free(markup);

@@ -10,7 +10,6 @@ template <class Type> class Pkg;
 template <class Type>
 class RootModel {
 
-    using pixbuf_c = Pixbuf<double>;
     using util_c = Util<double>;
 public:
 
@@ -71,9 +70,9 @@ public:
 	    auto icon_name = g_strconcat("drive-harddisk/SE/emblem-readonly/2.0/225", ball, NULL);
 
             auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_EMBLEM, NULL);
-            auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
-            auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
-            auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
+            auto treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -24);
+            auto normal_pixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -48);
+            auto highlight_pixbuf = Pixbuf<Type>::getPixbuf(highlight_name,  -48);   
 
             gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
             gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
@@ -103,9 +102,9 @@ public:
 	auto icon_name = GO_UP;
 	auto highlight_name = "go-up/NW/go-up-symbolic/2.0/225";
 
-        auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
-	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
-	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
+        auto treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -24);
+	auto normal_pixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -48);
+	auto highlight_pixbuf = Pixbuf<Type>::getPixbuf(highlight_name,  -48);   
 	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
 	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
 		DISPLAY_NAME, utf_name,
@@ -130,9 +129,9 @@ public:
 	auto icon_name = "system-file-manager";
 	auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_EMBLEM, NULL);
 
-        auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
-	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
-	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
+        auto treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -24);
+	auto normal_pixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -48);
+	auto highlight_pixbuf = Pixbuf<Type>::getPixbuf(highlight_name,  -48);   
 	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
 	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
 		DISPLAY_NAME, utf_name,
@@ -157,9 +156,9 @@ public:
 	auto utf_name = util_c::utf_string(_("Home Directory"));
 	auto icon_name = "go-home";
 	auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_EMBLEM, NULL);
-        auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
-	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
-	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
+        auto treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -24);
+	auto normal_pixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -48);
+	auto highlight_pixbuf = Pixbuf<Type>::getPixbuf(highlight_name,  -48);   
 
 	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
 	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
@@ -188,9 +187,9 @@ public:
 	    
 	auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_EMBLEM, NULL);
 
-        auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
-	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
-	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  -48);   
+        auto treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -24);
+	auto normal_pixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -48);
+	auto highlight_pixbuf = Pixbuf<Type>::getPixbuf(highlight_name,  -48);   
 
 	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
 	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
@@ -216,9 +215,9 @@ public:
 	auto icon_name = "media-eject/SE/drive-harddisk/2.0/225";
 	auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_EMBLEM, NULL);
 
-        auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
-	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
-	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG); 
+        auto treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -24);
+	auto normal_pixbuf = Pixbuf<Type>::getPixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
+	auto highlight_pixbuf = Pixbuf<Type>::getPixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG); 
 
 	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
 	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
@@ -256,9 +255,9 @@ public:
              
 	        auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_EMBLEM, NULL);
 
-                auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
-                GdkPixbuf *normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  -48);
-                GdkPixbuf *highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,-48);   
+                auto treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -24);
+                GdkPixbuf *normal_pixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -48);
+                GdkPixbuf *highlight_pixbuf = Pixbuf<Type>::getPixbuf(highlight_name,-48);   
                 
                 gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
                 gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
@@ -302,9 +301,9 @@ public:
 	auto icon_name = "emblem-readonly/SE/list-add/2.0/225";
 	auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_EMBLEM, NULL);
 
-        auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
-	auto normal_pixbuf = pixbuf_c::get_pixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
-	auto highlight_pixbuf = pixbuf_c::get_pixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG); 
+        auto treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -24);
+	auto normal_pixbuf = Pixbuf<Type>::getPixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
+	auto highlight_pixbuf = Pixbuf<Type>::getPixbuf(highlight_name,  GTK_ICON_SIZE_DIALOG); 
 
 	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
 	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 

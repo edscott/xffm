@@ -43,7 +43,7 @@ public:
          g_free(markup);
          
          // Add the label, and show everything we have added
-        auto pixbuf = Pixbuf<Type>::get_pixbuf(icon, iconSize);
+        auto pixbuf = Pixbuf<Type>::getPixbuf(icon, iconSize);
         if (pixbuf) {
             auto image = gtk_image_new_from_pixbuf(pixbuf);
             if (image) {

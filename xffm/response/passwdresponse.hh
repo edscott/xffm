@@ -160,8 +160,8 @@ private:
         gtk_box_set_homogeneous(vbox, FALSE);
         gtk_box_pack_start (bhbox, GTK_WIDGET(vbox), TRUE, TRUE, 0);
         // put image here
-        auto pixbuf = pixbuf_c::get_pixbuf("user-info-symbolic", BIG_ICON_SIZE);
-//        auto pixbuf = pixbuf_c::get_pixbuf("user-info-symbolic",SIZE_ICON);
+        auto pixbuf = pixbuf_c::getPixbuf("user-info-symbolic", BIG_ICON_SIZE);
+//        auto pixbuf = pixbuf_c::getPixbuf("user-info-symbolic",SIZE_ICON);
         auto image = GTK_IMAGE(gtk_image_new_from_pixbuf(pixbuf));
         //g_object_unref(pixbuf);
         gtk_box_pack_start (vbox, GTK_WIDGET(image), TRUE, TRUE, 0);

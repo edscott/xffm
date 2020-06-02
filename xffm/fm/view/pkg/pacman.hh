@@ -36,9 +36,9 @@ class Pacman {
 	auto name = g_get_home_dir();
 	auto icon_name = "folder/SE/" PKG_EMBLEM "/2.0/225";
 	auto highlight_name = "folder/NE/document-open/2.0/225";
-        auto treeViewPixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -24);
-	auto normal_pixbuf = Pixbuf<Type>::get_pixbuf(icon_name,  -48);
-	auto highlight_pixbuf = Pixbuf<Type>::get_pixbuf(highlight_name,  -48);   
+        auto treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -24);
+	auto normal_pixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -48);
+	auto highlight_pixbuf = Pixbuf<Type>::getPixbuf(highlight_name,  -48);   
 
 	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
 	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 

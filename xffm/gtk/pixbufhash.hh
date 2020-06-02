@@ -45,7 +45,25 @@ public:
     free_pixbuf_tt(void *data){
 	free_pixbuf_t(data);
     }
+private:
 
+    static void 
+    free_pixbuf_t(void *data){
+	pixbuf_t *pixbuf_p = (pixbuf_t *) data;
+	if (!pixbuf_p) return ;
+	TRACE( "destroying pixbuf_t for %s size %d\n", pixbuf_p->path, pixbuf_p->size);
+	if (pixbuf_p->pixbuf && !G_IS_OBJECT (pixbuf_p->pixbuf)) {
+	    cerr << "This should not happen: pixbuf_p->mime_id, not a pixbuf:"
+		<< pixbuf_p->mime_id << "\n";
+	} else {
+	    g_object_unref (pixbuf_p->pixbuf);
+	}
+	g_free(pixbuf_p->path);
+	g_free(pixbuf_p);
+	return;
+    }
+
+public:
     static gchar *
     get_thumbnail_path (const gchar * file, gint size) {
 	gchar *cache_dir;
@@ -119,7 +137,6 @@ public:
 	    ERROR("put_in_pixbuf_hash() %s is not a pixbuf\n", path);
 	    return;
 	}
-	TRACE("rfm_put_in_pixbuf_hash(%s, %d)\n", path, size);
 	pixbuf_t *pixbuf_p = (pixbuf_t *) calloc (1, sizeof (pixbuf_t));
 	if (!pixbuf_p) {
 	    g_error("calloc: %s\n", strerror(errno));
@@ -147,6 +164,7 @@ public:
 	} 
 	// Replace or insert item in pixbuf hash
 	gchar *hash_key = get_hash_key (pixbuf_p->path, pixbuf_p->size);
+	TRACE("put_in_pixbuf_hash(%s, %d): %s\n", path, size, hash_key);
        
 	g_hash_table_replace (pixbuf_hash, hash_key, pixbuf_p);
 	// hash_key is now hash property and should not be freed.
@@ -158,20 +176,16 @@ public:
 
     static void
     rm_from_pixbuf_hash (const gchar *icon_name, gint size) {
-	//if (strstr(icon_name, "png")) DBG("rfm_rm_from_pixbuf_hash(): %s, %d\n", icon_name, size);
-	if (!icon_name) return ;
+	if (!icon_name) return;
 	gchar *hash_key = get_hash_key (icon_name, size);
 
-	//if (strstr(icon_name, "png")) DBG( "rm_from_pixbuf_hash: %s, %d, %s\n", icon_name, size, hash_key);
-	if (!pixbuf_hash) fprintf(stderr, "pixbuf_hash!\n");
+	if (!pixbuf_hash) ERROR("rm_from_pixbuf_hash(): pixbuf_hash!\n");
 
 	void *d = g_hash_table_lookup(pixbuf_hash, hash_key);
 	
 	if (d) {
-	    //if (strstr(icon_name, "png")) DBG("removing key %s from hashtable\n", hash_key);
 	    g_hash_table_remove(pixbuf_hash, hash_key);
 	} else {
-	    //if (strstr(icon_name, "png")) DBG("key %s not in hashtable\n", hash_key);
 	}
 	g_free(hash_key);
 	TRACE("rfm_rm_from_pixbuf_hash() done\n");
@@ -186,14 +200,16 @@ public:
 	    createHash();
 	   // return NULL;
 	}
-	TRACE( "find in pixbuf hash(%p): %s(%d)\n",(void *)pixbuf_hash, icon_name, size);
 	gchar *hash_key = get_hash_key (icon_name, size);
+	TRACE( "lookup_icon(): find in pixbuf hash(%s): %s(%d)\n",hash_key, icon_name, size);
 
 	pixbuf_t *pixbuf_p = (pixbuf_t *)g_hash_table_lookup (pixbuf_hash, hash_key);
 	if(!pixbuf_p || !GDK_IS_PIXBUF(pixbuf_p->pixbuf)) {
+	    TRACE( "lookup_icon(): Not found\n");
 	    return NULL;
 	}
 	if (g_path_is_absolute (icon_name)) {
+	    TRACE("lookup_icon(%s, %d)\n", icon_name, size);
 	    // Check for out of date source image files
 	    struct stat st;
 	    errno = 0;
@@ -202,6 +218,7 @@ public:
 		    pixbuf_p->st_size != st.st_size||
 		    pixbuf_p->st_ino != st.st_ino)
 	    {
+		TRACE("thumbnail obsolete, should be replaced.\n");
 		// Obsolete item must be replaced in pixbuf hash
 		// and eliminated from thumnail cache.
 		zap_thumbnail_file(icon_name, size);
@@ -211,12 +228,11 @@ public:
 		return NULL;
 	    }
 	    } else {
-		DBG("hash.hh::lookup_icon(): stat %s (%s)\n",
+		TRACE("hash.hh::lookup_icon(): stat %s (%s)\n",
 		    icon_name, strerror(errno));
 		errno=0;
 	    }
 	}
-	//if (strstr(icon_name, "png")) DBG("loaded pixbuf key: %s\n", hash_key);
 	g_free(hash_key);
 	return pixbuf_p->pixbuf;
     }
@@ -254,21 +270,6 @@ public:
 	return hash_key;
     }
 
-    static void 
-    free_pixbuf_t(void *data){
-	pixbuf_t *pixbuf_p = (pixbuf_t *) data;
-	if (!pixbuf_p) return ;
-	TRACE( "destroying pixbuf_t for %s size %d\n", pixbuf_p->path, pixbuf_p->size);
-	if (pixbuf_p->pixbuf && !G_IS_OBJECT (pixbuf_p->pixbuf)) {
-	    cerr << "This should not happen: pixbuf_p->mime_id, not a pixbuf:"
-		<< pixbuf_p->mime_id << "\n";
-	} else {
-	    g_object_unref (pixbuf_p->pixbuf);
-	}
-	g_free(pixbuf_p->path);
-	g_free(pixbuf_p);
-	return;
-    }
 };
 }
 

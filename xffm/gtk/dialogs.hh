@@ -110,7 +110,7 @@ public:
      gtk_box_pack_start(GTK_BOX(content_area), GTK_WIDGET(vbox), TRUE, TRUE,0);
      
      if (icon){
-	auto pixbuf = Pixbuf<Type>::get_pixbuf(icon, -48);
+	auto pixbuf = Pixbuf<Type>::getPixbuf(icon, -48);
         if (pixbuf) {
             auto image = gtk_image_new_from_pixbuf(pixbuf);
 	    if (image) {

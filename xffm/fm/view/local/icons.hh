@@ -113,7 +113,7 @@ private:
         auto iconname = specificIconName(path, mimetype);
         TRACE("specificIconName %s: %s \n", path, mimetype);
         if (iconname && !g_path_is_absolute(iconname)){
-            if (!Icons<Type>::iconThemeHasIcon(iconname)) {
+            if (!Pixbuf<Type>::iconThemeHasIcon(iconname)) {
                 DBG("LocalIcons::specificIconName %s not available\n", iconname);
                 g_free(iconname);
                 iconname=g_strdup(DEFAULT_ICON);

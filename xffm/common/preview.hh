@@ -120,7 +120,7 @@ public:
 		return pixbuf;
 	    }
 	    ERROR("previewAtSize: text preview of some sort should be available here\n");
-	    return Pixbuf<Type>::get_pixbuf("text-x-generic", -size);
+	    return Pixbuf<Type>::getPixbuf("text-x-generic", -size);
 	}
 	    
 	// pdf previews...
@@ -132,22 +132,22 @@ public:
 	    // decode delegate is ghostscript
 	    pixbuf = gsPreview (filePath);// refs
 	    if (pixbuf) return pixbuf;
-	    else Pixbuf<Type>::get_pixbuf("image-x-generic-template", -size);
+	    else Pixbuf<Type>::getPixbuf("image-x-generic-template", -size);
 	}
 	// image previews...
 	if (strstr (mimetype, "image")) {   
-	    pixbuf = Icons<Type>::pixbuf_new_from_file(filePath, size, -1);
+	    pixbuf = Pixbuf<Type>::pixbuf_new_from_file(filePath, size, -1);
 	    if (pixbuf) return pixbuf; 
-	    else return Pixbuf<Type>::get_pixbuf("image-x-generic", -size);
+	    else return Pixbuf<Type>::getPixbuf("image-x-generic", -size);
 
 	}
 	if (strstr (mimetype, "video")) 
-		return Pixbuf<Type>::get_pixbuf("video-x-generic", -size);
+		return Pixbuf<Type>::getPixbuf("video-x-generic", -size);
 	if (strstr (mimetype, "audio")) 
-		return Pixbuf<Type>::get_pixbuf("audio-x-generic", -size);
+		return Pixbuf<Type>::getPixbuf("audio-x-generic", -size);
 
-	return Pixbuf<Type>::get_pixbuf("preferences-system", -size);
-	//return Pixbuf<Type>::get_pixbuf("image-missing", PREVIEW_IMAGE_SIZE);
+	return Pixbuf<Type>::getPixbuf("preferences-system", -size);
+	//return Pixbuf<Type>::getPixbuf("image-missing", PREVIEW_IMAGE_SIZE);
     }
 
 
@@ -799,14 +799,44 @@ private:
      
 	// pixbuf generated and reffed in routine:
 	TRACE("load_preview_pixbuf_from_disk %s\n", thumbnail);
-	auto pixbuf = Pixbuf<Type>::pixbuf_from_file (thumbnail, -1, -1);
+	//auto pixbuf = Pixbuf<Type>::pixbuf_from_file (thumbnail, -1, -1);
+	GError *error = NULL;
+	auto pixbuf = gdk_pixbuf_new_from_file (thumbnail, &error);
+	if(error) {
+	    ERROR ("text_preview_f() %s:%s\n", error->message, thumbnail);
+	    g_error_free (error);
+	    return NULL;
+	}
+
 	GdkPixbuf *original=pixbuf;
-	pixbuf = Pixbuf<Type>::fix_pixbuf_scale(original, PREVIEW_IMAGE_SIZE); // this unrefs old and refs new.
+	pixbuf = fixPixbufScale(original, PREVIEW_IMAGE_SIZE); // this unrefs old and refs new.
 	if (original != pixbuf) {
-	    Pixbuf<Type>::pixbuf_save(pixbuf, thumbnail);
+	    Pixbuf<Type>::pixbufSave(pixbuf, thumbnail);
 	}
 	return pixbuf;
     }
+private:
+    static
+    GdkPixbuf *
+    fixPixbufScale(GdkPixbuf *in_pixbuf, gint size){
+	if (!in_pixbuf || !GDK_IS_PIXBUF(in_pixbuf)) return NULL;
+	GdkPixbuf *out_pixbuf=NULL;
+	gint height = gdk_pixbuf_get_height (in_pixbuf);
+	gint width = gdk_pixbuf_get_width (in_pixbuf);
+
+	// this is to fix paper size previews for text files and pdfs
+	if((width < height && height != size) || 
+	    (width >= height && width != size)) 
+	{
+	    out_pixbuf = gdk_pixbuf_scale_simple (in_pixbuf, 5*size/7,size,
+		     GDK_INTERP_HYPER);
+	    g_object_ref(out_pixbuf);
+	    g_object_unref(in_pixbuf);
+	    return out_pixbuf;
+	} 
+	return in_pixbuf;
+    }
+
 
 };
 

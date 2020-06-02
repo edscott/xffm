@@ -10,7 +10,6 @@ class ComboResponse: public EntryResponse<Type> {
     using gtk_c = Gtk<Type>;
     using pixbuf_c = Pixbuf<Type>;
     using util_c = Util<Type>;
-    using pixbuf_icons_c = Icons<Type>;
     using page_c = Page<Type>;
 
 protected:

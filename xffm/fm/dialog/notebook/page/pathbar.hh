@@ -23,7 +23,7 @@ public:
 	g_object_set_data(G_OBJECT(eback), "name", g_strdup("RFM_GOTO"));
 	g_object_set_data(G_OBJECT(eback), "path", g_strdup("xffm:goto"));
 
-	auto backPixbuf = Pixbuf<Type>::get_pixbuf("go-previous", -24);
+	auto backPixbuf = Pixbuf<Type>::getPixbuf("go-previous", -24);
         auto backimage = gtk_image_new_from_pixbuf(backPixbuf);
 	gtk_container_add (GTK_CONTAINER(eback), GTK_WIDGET(backimage));
 
@@ -37,7 +37,7 @@ public:
 	g_object_set_data(G_OBJECT(eb), "name", g_strdup("RFM_GOTO"));
 	g_object_set_data(G_OBJECT(eb), "path", g_strdup("xffm:goto"));
 
-	auto pixbuf = Pixbuf<Type>::get_pixbuf("go-jump", -24);
+	auto pixbuf = Pixbuf<Type>::getPixbuf("go-jump", -24);
         auto image = gtk_image_new_from_pixbuf(pixbuf);
 	gtk_container_add (GTK_CONTAINER(eb), GTK_WIDGET(image));
 

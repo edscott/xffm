@@ -24,7 +24,6 @@ class PkgPopUp {
     using gtk_c = Gtk<double>;
     using pixbuf_c = Pixbuf<double>;
     using util_c = Util<double>;
-    using pixbuf_icons_c = Icons<double>;
     using page_c = Page<Type>;
     static GtkMenu *createPopUp(void){
          menuItem_t item[]={
