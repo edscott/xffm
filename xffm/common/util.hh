@@ -749,7 +749,7 @@ private:
 
     static const gchar *fixGvim(const gchar *e){
 	// Do not fork gvim, so that git commit works...
-	if (strcmp(e, "gvim")==0) return "gvim -f";
+	if (e && strcmp(e, "gvim")==0) return "gvim -f";
 	return e;
     }
 
@@ -761,13 +761,12 @@ private:
 	const gchar *e = getenv("EDITOR");
         if (e && strlen(e)==0) e = NULL;
 
-	else { // Predefined value.
+	else if (e) { // Predefined value.
 	    e = fixGvim(e);
 	    e = fixTerminalEditor(e);
 	    setenv("EDITOR", e, 1);
 	    done = TRUE;
 	    return;
-
 	}
 
 	// Environment variable EDITOR was not defined.
