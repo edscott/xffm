@@ -1,7 +1,6 @@
 For 0.95
 - threadify thumbnail previews
 - bug: image previews should have symlink emblem, if they are symlinks.
-- Encrypt thumbnails should be in encrypted directory
 - fstab partitions for BSD (if possible) and ZFS dealings
 - monitor fstab module in BSD (maybe)
 - root items popup shows mount item

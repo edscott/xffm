@@ -109,12 +109,21 @@ public:
 	if (pixels > 24) return getPixbufWithThumb(iconName, pixels, st_p);
 	auto pixbuf = getPixbuf("image-x-generic", -pixels);
 	TRACE("getImageAtSize %s\n", iconName);
-	if (strchr(iconName, '.')){
-	    auto label = strrchr(iconName,'.')+1;
+	insertImageDecoration(iconName, pixbuf);
+	return pixbuf;
+    }
+
+    static void
+    insertImageDecoration(const gchar *path, GdkPixbuf *pixbuf){
+	if (strchr(path, '.')){
+	    auto label = strrchr(path,'.')+1;
 	    TRACE("insertPixbufLabel %s\n", label);
 	    if (strlen(label)) Pixbuf<Type>::insertPixbufLabel(pixbuf, label);
 	}
-	return pixbuf;
+	if (g_file_test(path, G_FILE_TEST_IS_SYMLINK)){
+	    insertPixbufEmblems(pixbuf, "SW/emblem-symbolic-link/4.0/220");
+	}
+
     }
 
     // last reference to the returned pixbuf (if any) belongs to the
@@ -226,11 +235,9 @@ private:
 	    g_object_unref(pixbuf);
 	    pixbuf = newPixbuf; 
 	}
-	if (strchr(path, '.')){
-	    auto label = strrchr(path,'.')+1;
-	    if (strlen(label)) insertPixbufLabel(pixbuf, label);
-	}
-	// FIXME: insert symlink emblem if necessary.
+		
+	// insert symlink emblem if necessary.
+	insertImageDecoration(path, pixbuf);
 	return pixbuf;
 	
     }
@@ -377,81 +384,6 @@ public:
         return gtk_icon_theme_has_icon (icon_theme,icon_name);
     }
 
-    static void *
-    pixbuf_new_from_file_f(void *data){
-	if (!icon_theme) init();
-	auto arg = (void **)data;
-	auto path = (gchar *)arg[0];
-	auto width = GPOINTER_TO_INT(arg[1]);
-	auto height = GPOINTER_TO_INT(arg[2]);
-	TRACE("pixbuf_new_from_file_f: %s (%d,%d)\n", path, width, height);
-	GError *error = NULL;
-	GdkPixbuf *pixbuf = NULL;
-	if (width < 0) {
-	    pixbuf = gdk_pixbuf_new_from_file (path, &error);
-	} else {
-	    pixbuf = gdk_pixbuf_new_from_file_at_size (path, width, height, &error);
-	}
-	if (strchr(path, '.')){
-	    auto label = strrchr(path,'.')+1;
-	    if (strlen(label)) insertPixbufLabel(pixbuf, label);
-	}
-        if (error){
-            TRACE("%s\n", error->message);
-            g_error_free(error);
-	    pixbuf = NULL;
-        }
-
-	// hmmm... from the scale_simple line below, it seems that the above two
-	//         functions will do a g_object_ref on the returned pixbuf...
-
-	// Gdkpixbuf Bug workaround 
-	// (still necessary in GTK-3.8, not checked further down the road)
-	// xpm icons not resized. Need the extra scale_simple. 
-	if (pixbuf && width > 0 && strstr(path, ".xpm")) {
-	    auto pix = gdk_pixbuf_scale_simple (pixbuf, width, height, GDK_INTERP_HYPER);
-	    g_object_unref(pixbuf);
-	    pixbuf = pix;
-
-	}      
-	return pixbuf;
-    }
-
-    static GdkPixbuf *
-    pixbuf_new_from_file (const gchar *path, gint width, gint height){
-	if (!icon_theme) init();
-	if (!path) return NULL;
-	if (!g_file_test(path, G_FILE_TEST_EXISTS)) return NULL;
-	void *arg[3];
-	arg[0] = (void *)path;
-	arg[1] = GINT_TO_POINTER(width);
-	arg[2] = GINT_TO_POINTER(height);
-#if 1
-	// This gives priority to gtk thread...
-	static gboolean gtk_thread_wants_lock = FALSE;
-	if (self == g_thread_self()) {
-	    gtk_thread_wants_lock = TRUE;
-	} else {
-	    // hold your horses...
-	    while (gtk_thread_wants_lock) Util<Type>::threadwait();
-	}
-	pthread_mutex_lock(&pixbuf_mutex);
-
-	//  g_warning("pthread_mutex_trylock(&pixbuf_mutex) on gtk thread failed for %s\n",
-	
-	auto pixbuf = (GdkPixbuf *)pixbuf_new_from_file_f((void *)arg);
-	pthread_mutex_unlock(&pixbuf_mutex);
-	if (self == g_thread_self()) gtk_thread_wants_lock = FALSE;
-
-#else
-	// This sends everything to the gtk thread... (slow)
-	    pixbuf = (GdkPixbuf *)utility_p->context_function(pixbuf_new_from_file_f, (void *)arg);
-#endif
-
-	return pixbuf;
-    }
-
-
     static GdkPixbuf *
     composite_icon(const gchar *icon_name, gint pixels){
 	if (!icon_theme) init();
@@ -518,6 +450,7 @@ public:
 	}
 
 	if (emblems){
+	    TRACE("insert_decoration_f(): emblems= %s\n", emblems);
 	    auto tokens = g_strsplit(emblems, "/", -1);
 	    if (!tokens) return NULL;
 	    auto p = tokens;
@@ -560,6 +493,13 @@ public:
     }
 
     static void
+    insertPixbufEmblems(GdkPixbuf *pixbuf, const gchar *emblems){
+	// Done by main gtk thread:
+	void *arg[] = {(void *)pixbuf, (void *)emblems};
+	Util<Type>::context_function(insert_emblem_decoration_f, arg);
+    }
+
+    static void
     insertPixbufLabel(GdkPixbuf *pixbuf, const gchar *label){
 	// Done by main gtk thread:
 	void *arg[] = {(void *)pixbuf, (void *)label};
@@ -580,6 +520,59 @@ public:
 
 	if (label){
 	    Cairo<Type>::add_label_pixbuf(pixbuf_context, base_pixbuf, label);
+	}
+
+	Cairo<Type>::pixbuf_cairo_destroy(pixbuf_context, base_pixbuf);
+	return NULL;
+    }
+    static void *
+    insert_emblem_decoration_f (void *data){
+	if (!icon_theme) init();
+	auto arg = (void **)data;
+	auto base_pixbuf = (GdkPixbuf *)arg[0];
+	auto emblems = (const gchar *)arg[1];
+
+	cairo_t   *pixbuf_context = Cairo<Type>::pixbuf_cairo_create(base_pixbuf);
+	
+	gdk_cairo_set_source_pixbuf(pixbuf_context, base_pixbuf,0,0);
+	cairo_paint_with_alpha(pixbuf_context, 1.0);
+
+	if (emblems){
+	    TRACE("insert_emblem_decoration_f(): emblems= %s\n", emblems);
+	    auto tokens = g_strsplit(emblems, "/", -1);
+	    if (!tokens) return NULL;
+	    auto p = tokens;
+	    // format: [icon_name/position/scale/alpha]
+	    gint i;
+	    for (p=tokens; p && *p; p += 4){
+		for (i=1; i<4; i++) if (*(p+i) == NULL) {
+		    ERROR("*** composite_icon(): incorrect composite specification: %s\n %s\n",
+			    emblems,
+			    "*** (format: [[base_icon_name]/position/emblem_name/scale/alpha])");
+		    g_strfreev(tokens);
+		    return base_pixbuf;
+		}
+		gchar *position = p[0];
+		gchar *emblem = p[1];
+		gchar *scale = p[2];
+		gchar *alpha = p[3];
+                auto pixels = gdk_pixbuf_get_width(base_pixbuf);
+		//GdkPixbuf *tag = PixbufHash<Type>::find_in_pixbuf_hash (emblem, pixels);
+		// Here we always use 48 as base for emblem scaling...
+		GdkPixbuf *tag = PixbufHash<Type>::find_in_pixbuf_hash (emblem, 48);
+		if (!tag) {
+		    tag = getThemePixbuf(emblem, 48);
+		    putInHash(emblem, pixels, tag);
+		} else {
+		    TRACE("insert_emblem_decoration_f() found %s in icon hash.\n", emblem);
+		}
+		if (tag) {
+		    Cairo<Type>::insert_pixbuf_tag (pixbuf_context, tag, base_pixbuf, position, scale, alpha);
+		} else {
+		    TRACE("insert_emblem_decoration_f(): Cannot get pixbuf for %s\n", emblem);
+		}
+	    }
+	    g_strfreev(tokens);
 	}
 
 	Cairo<Type>::pixbuf_cairo_destroy(pixbuf_context, base_pixbuf);

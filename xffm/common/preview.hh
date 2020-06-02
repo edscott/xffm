@@ -136,7 +136,8 @@ public:
 	}
 	// image previews...
 	if (strstr (mimetype, "image")) {   
-	    pixbuf = Pixbuf<Type>::pixbuf_new_from_file(filePath, size, -1);
+	    //pixbuf = Pixbuf<Type>::pixbuf_new_from_file(filePath, size, -1);
+	    pixbuf = Pixbuf<Type>::getPixbufWithThumb(filePath, size);
 	    if (pixbuf) return pixbuf; 
 	    else return Pixbuf<Type>::getPixbuf("image-x-generic", -size);
 
@@ -528,7 +529,7 @@ public:
     loadFromThumbnails(const gchar *filePath, struct stat *st_p, 
 	    gint width, gint height){
 	// Look into thumbnail cache directory...
-	DBG("preview.hh::loadFromThumbnails(%s)\n", filePath);
+	TRACE("preview.hh::loadFromThumbnails(%s)\n", filePath);
 	auto thumbnailPath = PixbufHash<Type>::get_thumbnail_path (filePath, height);
 	if (g_file_test(thumbnailPath,G_FILE_TEST_EXISTS)){
 	    errno=0;

@@ -775,7 +775,7 @@ public:
 
 	// save value as default for mimetype extension
         setMimetypeDefault(path, mimetype, response);
-	DBG("setting mimetype default to: %s\n", response);
+	TRACE("setting mimetype default to: %s\n", response);
 	MimeApplication<Type>::add2ApplicationHash(mimetype, response, TRUE);
 
         // get command line

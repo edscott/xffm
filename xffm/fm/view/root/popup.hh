@@ -157,20 +157,23 @@ private:
 
     static GtkMenu *createPopUp(void){
          menuItem_t item[]={
-            {"Add bookmark", (void *)menuAddBookmark, NULL, NULL},
+            {N_("Add bookmark"), (void *)menuAddBookmark, NULL, NULL},
 #ifdef DO_MOUNT_ITEMS
-            {"Ecryptfs (EFS)", (void *)menuAddEFS, NULL, NULL},
+            {N_("Ecryptfs (EFS)"), (void *)menuAddEFS, NULL, NULL},
 #endif
+            {N_("Clear cache"), (void *)clearCache, NULL, NULL},
             {NULL,NULL,NULL, NULL}
          };
         const gchar *key[]={
             "Add bookmark",
             "Ecryptfs (EFS)",
+            "Clear cache",
             NULL
         };
         const gchar *keyIcon[]={
             "list-add",
             "list-add",
+            "list-remove",
             NULL
         };
 
@@ -224,6 +227,14 @@ private:
         g_free(text);
         
         return rootItemPopUp;
+    }
+    static void
+    clearCache(GtkMenuItem *menuItem, gpointer data)
+    {
+        TRACE("clearCache\n");
+	auto cache_dir = g_build_filename (XFTHUMBNAIL_DIR, NULL);
+	Gio<Type>::clearDirectory(cache_dir);
+	g_free(cache_dir);
     }
 
 #ifdef ENABLE_EFS_MODULE
