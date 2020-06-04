@@ -1,9 +1,11 @@
 #ifndef _GTK3_HH_
 #define _GTK3_HH_
-#include "gtk/cairo.hh"
-#include "gtk/pixbufhash.hh"
-#include "gtk/pixbuf.hh"
-#include "gtk/dialogs.hh"
-#include "gtk/gtk.hh"
+#include "../common/util.hh"
+#include "cairo.hh"
+#include "pixbufhash.hh"
+#include "preview.hh"
+#include "pixbuf.hh"
+#include "dialogs.hh"
+#include "gtk.hh"
 #endif
 

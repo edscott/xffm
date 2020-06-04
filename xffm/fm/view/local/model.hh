@@ -122,7 +122,6 @@ public:
         GList *directoryList = NULL;
 
         directoryList = read_items (path, &heartbeat);
-
 	// start adding items... (threaded...)
 	auto arg = (void **)calloc(3, sizeof(void *));
 	arg[0] = (void *)directoryList;
@@ -594,7 +593,10 @@ public:
 	auto directoryList = (GList *)arg[0];
 	auto view = (View<Type> *)arg[1];
 	auto path = (gchar *)arg[2];
+	time_t start = time(NULL);
+        DBG("local/threadInsert() ***Starting... \n");
 	insert_list_into_model(directoryList, view, path);
+        DBG("local/threadInsert() *** done... at %ld seconds \n", time(NULL)-start);
 	g_free(arg);
         GList *p = directoryList;
         for (;p && p->data; p=p->next){
@@ -604,12 +606,12 @@ public:
         g_list_free(directoryList);
         g_free(path);
         // replaceTreeModel will fix treeModel used by monitorObject.
-        TRACE("threadInsert-->replaceTreeModel() \n");
 	Util<Type>::context_function(replaceTreeModel, (void *)view);
 	// clear out backTreeModel
 	gtk_list_store_clear (GTK_LIST_STORE(view->backTreeModel()));
 
 	Util<Type>::context_function(finishLoad, (void *)view);
+
         
 	return NULL;
 
@@ -746,7 +748,9 @@ private:
         GdkPixbuf *highlight_pixbuf = NULL;
 	
 	if (g_path_is_absolute(icon_name)){
-	    auto pixels = Pixbuf<Type>::getImageSize();
+	    auto page_p = Fm<Type>::getCurrentPage();
+	    auto pixels = page_p->getImageSize();
+	    TRACE("add_local_item(%s): pixels = %d \n", icon_name, pixels);
 	    normal_pixbuf = Pixbuf<Type>::getImageAtSize(icon_name, pixels, xd_p->mimetype, xd_p->st);
 	    treeViewPixbuf = Pixbuf<Type>::getImageAtSize(icon_name, 24, xd_p->mimetype);
 	}

@@ -386,10 +386,7 @@ private:
 	auto page = (Page<Type> *)pathbar_p;
 	auto view = (View<Type> *)
 		g_object_get_data(G_OBJECT(page->topScrolledWindow()), "view");
-	Pixbuf<Type>::setImageSize(Pixbuf<Type>::getImageSize()/2);
-	auto message = g_strdup_printf(" %s: (%d)\n",_("Reset image size"), Pixbuf<Type>::getImageSize());
-	Print<Type>::showTextSmall(page->output());
-	Print<Type>::print_icon(page->output(), "image-x-generic/SE/list-add/1.5/220", message);
+	page->setImageSize(page->getImageSize()/2);
 	view->reloadModel();
         return FALSE;
     }
@@ -402,12 +399,8 @@ private:
 	auto page = (Page<Type> *)pathbar_p;
 	auto view = (View<Type> *)
 		g_object_get_data(G_OBJECT(page->topScrolledWindow()), "view");
-	if (Pixbuf<Type>::getImageSize()*2 < 800) {
-	    Pixbuf<Type>::setImageSize(Pixbuf<Type>::getImageSize()*2);
-	}
-	auto message = g_strdup_printf(" %s: (%d)\n",_("Reset image size"), Pixbuf<Type>::getImageSize());
-	Print<Type>::showTextSmall(page->output());
-	Print<Type>::print_icon(page->output(), "image-x-generic/SE/list-add/1.5/220", message);
+
+	page->setImageSize(page->getImageSize()*2);
 	view->reloadModel();
         return FALSE;
     }

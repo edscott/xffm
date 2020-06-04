@@ -1,6 +1,5 @@
 #ifndef LOCALPROPERTIES_HH
 #define LOCALPROPERTIES_HH
-#include "common/preview.hh"
 
 typedef struct {
     GtkWidget *top;

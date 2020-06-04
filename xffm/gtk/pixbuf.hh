@@ -5,8 +5,6 @@
 #include <stdlib.h>
 #include <errno.h>
 
-#include "../common/util.hh"
-#include "../common/preview.hh"
 #include "cairo.hh"
 
 #ifndef PREFIX
@@ -17,11 +15,12 @@
 namespace xf
 {
 template <class Type> class Preview;
+template <class Type> class Fm;
 
 static GThread *self;
 static GtkIconTheme *icon_theme=NULL;
 static pthread_mutex_t pixbuf_mutex;
-static gint imageSize = 48;
+//static gint imageSize = 48;
 template <class Type>
 class Pixbuf {
     static void
@@ -105,15 +104,20 @@ class Pixbuf {
     }
 
 public:
-
+/*
     static void
     setImageSize(gint pixels){ 
-	if (pixels < 48) imageSize = 48;
-	else imageSize = pixels;
+	if (pixels < 48) {
+	    imageSize = 48;
+	    return;
+	}
+	if (pixels > 800) return;
+	imageSize = pixels;
     }
 
     static gint
     getImageSize(void) {return imageSize;}
+*/
 
     static GdkPixbuf *getImageAtSize(const gchar *iconName, gint pixels,
 	    const gchar *mimetype, struct stat *st_p = NULL){
@@ -175,10 +179,15 @@ public:
 	if (thumbnailOK(iconName, height, st_p)){
 	    auto pixbuf = 
 		PixbufHash<Type>::find_in_pixbuf_hash(iconName, height);
-	    if (pixbuf) return pixbuf;
+	    if (pixbuf){
+		DBG("getPixbufWithThumb(): Loaded %s from hash.\n",iconName);
+		return pixbuf;
+	    }
 	    // Read thumbnail.
 	    pixbuf = readThumbnail(iconName, height);
 	    if (pixbuf){
+		DBG("getPixbufWithThumb(): Loaded %s from thumbnail at height %d.\n",
+			iconName, height);
 		putInHash(iconName, height, pixbuf);
 		return pixbuf;
 	    }
@@ -188,14 +197,32 @@ public:
 	if (!mimetype){
 	    DBG("getPixbufWithThumb(): mimetype is null\n");
 	} 
+
+
 	if (mimetype && 
 		(strstr(mimetype, "pdf") ||
 		 strstr(mimetype, "eps") ||
 		 strstr(mimetype, "postscript")) )
 	{
+	    // Variable size thumbnails:
+	    // Get current page first.
+	    //auto page_p = Fm<Type>::getCurrentPage();
+	    //auto pixels = page_p->getImageSize();
 	    pixbuf = 
-		Preview<Type>::previewDefault(iconName, mimetype, st_p, getImageSize());
+		Preview<Type>::previewDefault(iconName, mimetype, st_p, height);
+	    if (!pixbuf) {
+		auto icon = "text-x-generic";
+		auto label = "pdf";
+		if (strstr(mimetype, "eps")){
+		    icon = "image-x-generic";
+		    label = "eps";
+		} else if (strstr(mimetype, "postscript")) label = "ps";
+		pixbuf = buildPixbuf(icon, 48);
+		insertPixbufLabel(pixbuf, label);
+		return pixbuf;
+	    }
 	} else {
+	    // Single size thumbnails:
 	    pixbuf = buildImagePixbuf(iconName, height);
 	}
 
@@ -235,7 +262,7 @@ private:
 	g_free(thumbnailPath);
    }
 
-
+public:
     static GdkPixbuf *
     buildImagePixbuf(const gchar *path, gint height){
 	GError *error = NULL;
@@ -266,12 +293,12 @@ private:
 	
     }
 
-
+private:
     static GdkPixbuf *
     readThumbnail(const gchar *iconName, gint height){
 	GError *error=NULL;
 	auto thumbnailPath = PixbufHash<Type>::get_thumbnail_path (iconName, height);
-	TRACE("Now loading readThumbnail from %s\n",  thumbnailPath);
+	TRACE("readThumbnail(): Now trying to load thumbnail from %s\n",  thumbnailPath);
 	auto pixbuf = gdk_pixbuf_new_from_file (thumbnailPath, &error);
 	if (error){
 	    ERROR("readThumbnail(): %s (%s)\n", thumbnailPath, error->message);
@@ -279,8 +306,8 @@ private:
 	    g_free(thumbnailPath);
 	    return NULL;
 	} 
+	DBG("preview.hh::loadFromThumbnails(%s): %s... OK.\n", iconName, thumbnailPath);
 	g_free(thumbnailPath);
-	TRACE("preview.hh::loadFromThumbnails(%s): Success.\n", iconName);
 	return pixbuf;
     }
 

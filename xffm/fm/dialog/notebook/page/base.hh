@@ -18,6 +18,7 @@ class PageBase :
 {
 private:
     gchar *workDir_;
+    gint imageSize_;
 
 protected:
 
@@ -25,6 +26,7 @@ public:
 
     PageBase(void){
         workDir_ = g_strdup(g_get_home_dir());
+	imageSize_ = 48;
     }
 
     const gchar *workDir(void){
@@ -41,6 +43,25 @@ public:
         workDir_ = g_strdup(g);
         return TRUE;
     }
+
+    void
+    setImageSize(gint pixels){ 
+	if (pixels < 48) {
+	    this->imageSize_ = 48;
+	} else {
+	    if (pixels <= PREVIEW_IMAGE_SIZE){
+		this->imageSize_ = pixels;
+	    }
+	}
+	auto message = g_strdup_printf(" %s: (%d)\n",_("Reset image size"), this->imageSize_);
+	Print<Type>::showTextSmall(this->output());
+	Print<Type>::print_icon(this->output(), "image-x-generic/SE/list-add/1.5/220", message);
+	// Print<Type> will free message (runs in independent thread).
+    }
+    
+    gint
+    getImageSize(void) {return this->imageSize_;}
+
 
 };
 

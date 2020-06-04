@@ -207,7 +207,8 @@ public:
 	GdkPixbuf *pixbuf;
 	GdkPixbuf *treepixbuf;
 	if (g_path_is_absolute(iconName)){
-	    auto pixels = Pixbuf<Type>::getImageSize();
+	    auto page_p = Fm<Type>::getCurrentPage();
+	    auto pixels = page_p->getImageSize();
 	    pixbuf = Pixbuf<Type>::getImageAtSize(iconName, pixels, xd_p->mimetype, xd_p->st);
 	    treepixbuf = Pixbuf<Type>::getImageAtSize(iconName, 24, xd_p->mimetype);
 	} else {
