@@ -96,6 +96,13 @@ public:
 	TRACE("previewDefault(%s)...\n", filePath);
 
 	GdkPixbuf *previewPixbuf = NULL;
+
+	// Properties modules comes here for image previews too.
+	// We short circuit for images.
+	if (strstr(mimetype, "image")){
+	    return Pixbuf<Type>::getImageAtSize(filePath, PREVIEW_IMAGE_SIZE, mimetype, st_p);
+	}
+
 	// First we get the preview from hash, thumbnail or creation.
 	if (size != PREVIEW_IMAGE_SIZE){
 	    // This will put the preview into hash table if not there already:
@@ -675,7 +682,7 @@ private:
 	auto arg = (void **)data;
 	auto text = (gchar *)arg[0];
 	auto filePath = (gchar *)arg[1];
-	gint pixels = *((gint *)arg[2]);
+	gint pixels = GPOINTER_TO_INT(arg[2]);
 	auto previewPixbuf = PixbufHash<Type>::get_thumbnail_path (filePath, PREVIEW_IMAGE_SIZE);
 	//auto thumbnail = PixbufHash<Type>::get_thumbnail_path (filePath, pixels);
 	
