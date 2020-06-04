@@ -56,11 +56,14 @@ public:
 	auto message = g_strdup_printf(" %s: (%d)\n",_("Reset image size"), this->imageSize_);
 	Print<Type>::showTextSmall(this->output());
 	Print<Type>::print_icon(this->output(), "image-x-generic/SE/list-add/1.5/220", message);
+	Settings<Type>::setSettingInteger("ImageSize", this->workDir(), this->imageSize_);
 	// Print<Type> will free message (runs in independent thread).
     }
     
     gint
-    getImageSize(void) {return this->imageSize_;}
+    getImageSize(void) {
+	return this->imageSize_;
+    }
 
 
 };
