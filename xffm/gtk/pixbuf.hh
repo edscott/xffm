@@ -180,13 +180,13 @@ public:
 	    auto pixbuf = 
 		PixbufHash<Type>::find_in_pixbuf_hash(iconName, height);
 	    if (pixbuf){
-		DBG("getPixbufWithThumb(): Loaded %s from hash.\n",iconName);
+		TRACE("getPixbufWithThumb(): Loaded %s from hash.\n",iconName);
 		return pixbuf;
 	    }
 	    // Read thumbnail.
 	    pixbuf = readThumbnail(iconName, height);
 	    if (pixbuf){
-		DBG("getPixbufWithThumb(): Loaded %s from thumbnail at height %d.\n",
+		TRACE("getPixbufWithThumb(): Loaded %s from thumbnail at height %d.\n",
 			iconName, height);
 		putInHash(iconName, height, pixbuf);
 		return pixbuf;
@@ -306,7 +306,7 @@ private:
 	    g_free(thumbnailPath);
 	    return NULL;
 	} 
-	DBG("preview.hh::loadFromThumbnails(%s): %s... OK.\n", iconName, thumbnailPath);
+	TRACE("preview.hh::loadFromThumbnails(%s): %s... OK.\n", iconName, thumbnailPath);
 	g_free(thumbnailPath);
 	return pixbuf;
     }
