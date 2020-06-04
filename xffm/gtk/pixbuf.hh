@@ -6,6 +6,7 @@
 #include <errno.h>
 
 #include "../common/util.hh"
+#include "../common/preview.hh"
 #include "cairo.hh"
 
 #ifndef PREFIX
@@ -15,11 +16,12 @@
 
 namespace xf
 {
+template <class Type> class Preview;
 
 static GThread *self;
 static GtkIconTheme *icon_theme=NULL;
 static pthread_mutex_t pixbuf_mutex;
-
+static gint imageSize = 48;
 template <class Type>
 class Pixbuf {
     static void
@@ -104,9 +106,18 @@ class Pixbuf {
 
 public:
 
-    static GdkPixbuf *getImageAtSize(const gchar *iconName, gint pixels, 
-	    struct stat *st_p = NULL){
-	if (pixels > 24) return getPixbufWithThumb(iconName, pixels, st_p);
+    static void
+    setImageSize(gint pixels){ 
+	if (pixels < 48) imageSize = 48;
+	else imageSize = pixels;
+    }
+
+    static gint
+    getImageSize(void) {return imageSize;}
+
+    static GdkPixbuf *getImageAtSize(const gchar *iconName, gint pixels,
+	    const gchar *mimetype, struct stat *st_p = NULL){
+	if (pixels > 24) return getPixbufWithThumb(iconName, pixels, mimetype, st_p);
 	auto pixbuf = getPixbuf("image-x-generic", -pixels);
 	TRACE("getImageAtSize %s\n", iconName);
 	insertImageDecoration(iconName, pixbuf);
@@ -154,7 +165,7 @@ public:
 
     static GdkPixbuf *
     getPixbufWithThumb(const gchar *iconName, gint height, 
-	    struct stat *st_p=NULL)
+	    const gchar *mimetype, struct stat *st_p=NULL)
     {
 	if (!iconName) {
 	    TRACE("getPixbufWithThumb(NULL)\n");
@@ -173,7 +184,20 @@ public:
 	    }
 	} 
 	// Thumbnail not OK.
-	auto pixbuf = buildImagePixbuf(iconName, height);
+	GdkPixbuf *pixbuf = NULL;
+	if (!mimetype){
+	    DBG("getPixbufWithThumb(): mimetype is null\n");
+	} 
+	if (mimetype && 
+		(strstr(mimetype, "pdf") ||
+		 strstr(mimetype, "eps") ||
+		 strstr(mimetype, "postscript")) )
+	{
+	    pixbuf = 
+		Preview<Type>::previewDefault(iconName, mimetype, st_p, getImageSize());
+	} else {
+	    pixbuf = buildImagePixbuf(iconName, height);
+	}
 
 	if (!pixbuf) {
 	    ERROR("buildImagePixbuf(%s)\n", iconName);
@@ -469,7 +493,9 @@ public:
 		gchar *scale = p[2];
 		gchar *alpha = p[3];
                 auto pixels = gdk_pixbuf_get_width(base_pixbuf);
-		GdkPixbuf *tag = PixbufHash<Type>::find_in_pixbuf_hash (emblem, pixels);
+		// Here we always use 48 as base for emblem scaling...
+		GdkPixbuf *tag = PixbufHash<Type>::find_in_pixbuf_hash (emblem, 48);
+		//GdkPixbuf *tag = PixbufHash<Type>::find_in_pixbuf_hash (emblem, pixels);
 		if (!tag) {
 		    tag = getThemePixbuf(emblem, pixels);
 		    putInHash(emblem, pixels, tag);

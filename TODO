@@ -1,6 +1,9 @@
 For 0.95
-- threadify thumbnail previews
-- bug: image previews should have symlink emblem, if they are symlinks.
+- Threadify thumbnails for pdf, ps and eps
+- Make thumbnail size specific to diretory (maybe)
+- Add extension label to ps, eps and pdf previews
+BSD stuff
+- There is a waitpid in preview.hh (not openBSD)
 - fstab partitions for BSD (if possible) and ZFS dealings
 - monitor fstab module in BSD (maybe)
 - root items popup shows mount item

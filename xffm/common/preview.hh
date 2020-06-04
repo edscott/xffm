@@ -1,5 +1,7 @@
 #ifndef PREVIEW_HH
 #define PREVIEW_HH
+#include <sys/types.h>
+#include <sys/wait.h>
 
 #define PREVIEW_IMAGE_SIZE 400
 #define BUFSIZE (4096)
@@ -59,6 +61,9 @@ typedef struct paragraph_t {
 
 
 namespace xf {
+template <class Type> class Pixbuf;
+template <class Type> class LocalView;
+template <class Type> class Mime;
 
 template <class Type>
 class Preview {
@@ -74,10 +79,17 @@ public:
 	    const gchar *mimetype, struct stat *st_p,
 	    gint size)
     {
-	
-	if(!filePath || !st_p) {
-	    ERROR ("previewAtSize: !file_path || !st_p\n");
+	if(!filePath) {
+	    ERROR ("previewAtSize: !file_path\n");
 	    return NULL;
+	}
+	struct stat st;
+	if (!st_p){
+	    st_p = &st;
+	    if (stat(filePath, st_p) != 0){
+		DBG("previewAtSize():: stat(%s): %s\n", filePath, strerror(errno));
+		return NULL;
+	    }
 	}
 	// First of all, are we dealing with an empty file?
 	if(st_p->st_size == 0) {
@@ -85,13 +97,13 @@ public:
 	    filePath = "empty-file";
 	}
 
-	auto pixbuf = loadFromHash(filePath);
+	auto pixbuf = loadFromHash(filePath, size);
 	if (pixbuf) {
 	    TRACE("%s loaded from hash...\n", filePath);
 	    return pixbuf;
 	}
 
-	pixbuf = loadFromThumbnails(filePath, st_p);
+	pixbuf = loadFromThumbnails(filePath, st_p, size);
 	if (pixbuf) {
 	    TRACE("%s loaded from thumbnails...\n", filePath);
 	    return pixbuf;
@@ -112,7 +124,7 @@ public:
 		);
 
 	if (textType){
-	    pixbuf = textPreview (filePath); 
+	    pixbuf = textPreview (filePath, size); 
 	    if (pixbuf) {
 		PixbufHash<Type>::put_in_pixbuf_hash(filePath, size, pixbuf);
 		// FIXME: save in thumbnails
@@ -130,14 +142,14 @@ public:
 		    );
         if(useGhostScript) {  
 	    // decode delegate is ghostscript
-	    pixbuf = gsPreview (filePath);// refs
+	    pixbuf = gsPreview (filePath, size);// refs
 	    if (pixbuf) return pixbuf;
 	    else Pixbuf<Type>::getPixbuf("image-x-generic-template", -size);
 	}
 	// image previews...
 	if (strstr (mimetype, "image")) {   
 	    //pixbuf = Pixbuf<Type>::pixbuf_new_from_file(filePath, size, -1);
-	    pixbuf = Pixbuf<Type>::getPixbufWithThumb(filePath, size);
+	    pixbuf = Pixbuf<Type>::getPixbufWithThumb(filePath, size, mimetype);
 	    if (pixbuf) return pixbuf; 
 	    else return Pixbuf<Type>::getPixbuf("image-x-generic", -size);
 
@@ -154,7 +166,7 @@ public:
 
 private:
 static GdkPixbuf *
-gsPreview (const gchar *path) {
+gsPreview (const gchar *path, gint pixels) {
     gchar *ghostscript = g_find_program_in_path ("gs");
     static gboolean warned = FALSE;
     if(!ghostscript) {
@@ -183,7 +195,8 @@ gsPreview (const gchar *path) {
     gchar *src, *tgt;
     gchar *arg[13];
     gint i = 0;
-    auto thumbnail = PixbufHash<Type>::get_thumbnail_path (path, PREVIEW_IMAGE_SIZE);
+    //auto thumbnail = PixbufHash<Type>::get_thumbnail_path (path, PREVIEW_IMAGE_SIZE);
+    auto thumbnail = PixbufHash<Type>::get_thumbnail_path (path, pixels);
 
     //pdf and ps ghostscript conversion
     src = g_strdup (path);
@@ -245,9 +258,7 @@ gsPreview (const gchar *path) {
 	} else {
 	    TRACE("condition wait complete for file %s\n", thumbnail);
 	    // this function refs retval
-	    retval = loadFromThumbnails(path, NULL);
-	    //retval = Pixbuf<Type>::pixbuf_from_file (thumbnail, 3*PREVIEW_IMAGE_SIZE/4, PREVIEW_IMAGE_SIZE);
-	    //retval = load_preview_pixbuf_from_disk (thumbnail); // refs
+	    retval = loadFromThumbnails(path, NULL, pixels);
 	}
 	pthread_mutex_unlock(&waitMutex);
 	//g_mutex_unlock(wait_mutex);
@@ -506,11 +517,12 @@ gs_wait_f(void *data){
 
 
     static GdkPixbuf *
-    loadFromHash(const gchar *filePath){
+    loadFromHash(const gchar *filePath, gint pixels){
 	// Check if in pixbuf hash. If so, return with the hashed pixbuf.
 	// Note that if the thumbnail is out of date, the thumbnail should
 	// be marked invalid. This will happen if filePath is absolute.
-	auto pixbuf = PixbufHash<Type>::find_in_pixbuf_hash(filePath, PREVIEW_IMAGE_SIZE);
+	auto pixbuf = PixbufHash<Type>::find_in_pixbuf_hash(filePath, pixels);
+	//auto pixbuf = PixbufHash<Type>::find_in_pixbuf_hash(filePath, PREVIEW_IMAGE_SIZE);
 	
 	if(pixbuf) {
 	    TRACE( "previewAtSize(): pixbuf %s located in hash table.\n",
@@ -521,8 +533,9 @@ gs_wait_f(void *data){
     }
 
     static GdkPixbuf *
-    loadFromThumbnails(const gchar *filePath, struct stat *st_p){
-	return loadFromThumbnails(filePath, st_p, 3*PREVIEW_IMAGE_SIZE/4, PREVIEW_IMAGE_SIZE);
+    loadFromThumbnails(const gchar *filePath, struct stat *st_p, gint pixels){
+	//return loadFromThumbnails(filePath, st_p, 3*PREVIEW_IMAGE_SIZE/4, PREVIEW_IMAGE_SIZE);
+	return loadFromThumbnails(filePath, st_p, 3*pixels/4, pixels);
     }
 public:
     static GdkPixbuf *
@@ -584,7 +597,7 @@ public:
     }
 private:
     static GdkPixbuf *
-    textPreview (const gchar *path) {
+    textPreview (const gchar *path, gint pixels) {
 
 	// Read a cache page worth of text and convert to utf-8 
 
@@ -603,7 +616,8 @@ private:
 	}
 	void *arg[]={
 	    (void *)text,
-	    (void *)path
+	    (void *)path,
+	    GINT_TO_POINTER(pixels)
 	};
 	auto pixbuf = (GdkPixbuf *)Util<Type>::context_function(text_preview_f, (void *)arg);
 	g_free(text);
@@ -705,7 +719,9 @@ private:
 	auto arg = (void **)data;
 	auto text = (gchar *)arg[0];
 	auto filePath = (gchar *)arg[1];
-	auto thumbnail = PixbufHash<Type>::get_thumbnail_path (filePath, PREVIEW_IMAGE_SIZE);
+	gint pixels = *((gint *)arg[2]);
+	//auto thumbnail = PixbufHash<Type>::get_thumbnail_path (filePath, PREVIEW_IMAGE_SIZE);
+	auto thumbnail = PixbufHash<Type>::get_thumbnail_path (filePath, pixels);
 	
 	page_layout_t page_layout;
 

@@ -746,8 +746,9 @@ private:
         GdkPixbuf *highlight_pixbuf = NULL;
 	
 	if (g_path_is_absolute(icon_name)){
-	    normal_pixbuf = Pixbuf<Type>::getImageAtSize(icon_name, 48, xd_p->st);
-	    treeViewPixbuf = Pixbuf<Type>::getImageAtSize(icon_name, 24);
+	    auto pixels = Pixbuf<Type>::getImageSize();
+	    normal_pixbuf = Pixbuf<Type>::getImageAtSize(icon_name, pixels, xd_p->mimetype, xd_p->st);
+	    treeViewPixbuf = Pixbuf<Type>::getImageAtSize(icon_name, 24, xd_p->mimetype);
 	}
 
 	else if (xd_p->st) {

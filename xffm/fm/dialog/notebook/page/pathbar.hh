@@ -12,6 +12,21 @@ class Pathbar
     using print_c = Print<double>;
 
     gchar *path_;
+
+    GtkEventBox *eventButton(const gchar *icon, const gchar *name, 
+	    const gchar *path, void *callback) 
+    {
+	auto eventBox = gtk_event_box_new();
+	g_object_set_data(G_OBJECT(eventBox), "name", g_strdup(name));
+	g_object_set_data(G_OBJECT(eventBox), "path", g_strdup(path));
+
+	auto eventPixbuf = Pixbuf<Type>::getPixbuf(icon, -24);
+        auto eventImage = gtk_image_new_from_pixbuf(eventPixbuf);
+	gtk_container_add (GTK_CONTAINER(eventBox), GTK_WIDGET(eventImage));
+	gtk_widget_show_all(GTK_WIDGET(eventBox));
+	g_signal_connect (G_OBJECT(eventBox) , "button-press-event", EVENT_CALLBACK (callback), (void *)this);
+	return GTK_EVENT_BOX(eventBox);	
+    }
     
 public:
     Pathbar(void) {
@@ -19,32 +34,15 @@ public:
 	pathbar_ = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
         setStyle();
 
-	auto eback = gtk_event_box_new();
-	g_object_set_data(G_OBJECT(eback), "name", g_strdup("RFM_GOTO"));
-	g_object_set_data(G_OBJECT(eback), "path", g_strdup("xffm:goto"));
+	auto eventBox1 = eventButton("go-previous", "RFM_GOTO", "xffm:back", (void *)go_back);
+	auto eventBox2 = eventButton("go-jump", "RFM_GOTO", "xffm:goto", (void *)go_jump);
+	auto eventBox3 = eventButton("image-x-generic/SE/list-add/1.5/220", "RFM_GOTO", "xffm:image+", (void *)upImage);
+	auto eventBox4 = eventButton("image-x-generic/SE/list-remove/1.5/220", "RFM_GOTO", "xffm:image+", (void *)downImage);
+	gtk_box_pack_start (GTK_BOX (pathbar_), GTK_WIDGET(eventBox1), FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (pathbar_), GTK_WIDGET(eventBox2), FALSE, FALSE, 0);
+	gtk_box_pack_end (GTK_BOX (pathbar_), GTK_WIDGET(eventBox3), FALSE, FALSE, 0);
+	gtk_box_pack_end (GTK_BOX (pathbar_), GTK_WIDGET(eventBox4), FALSE, FALSE, 0);
 
-	auto backPixbuf = Pixbuf<Type>::getPixbuf("go-previous", -24);
-        auto backimage = gtk_image_new_from_pixbuf(backPixbuf);
-	gtk_container_add (GTK_CONTAINER(eback), GTK_WIDGET(backimage));
-
-	gtk_box_pack_start (GTK_BOX (pathbar_), GTK_WIDGET(eback), FALSE, FALSE, 0);
-	gtk_widget_show_all(GTK_WIDGET(eback));
-	g_signal_connect (G_OBJECT(eback) , "button-press-event", EVENT_CALLBACK (go_back), (void *)this);
-	
-
-
-	auto eb = gtk_event_box_new();
-	g_object_set_data(G_OBJECT(eb), "name", g_strdup("RFM_GOTO"));
-	g_object_set_data(G_OBJECT(eb), "path", g_strdup("xffm:goto"));
-
-	auto pixbuf = Pixbuf<Type>::getPixbuf("go-jump", -24);
-        auto image = gtk_image_new_from_pixbuf(pixbuf);
-	gtk_container_add (GTK_CONTAINER(eb), GTK_WIDGET(image));
-
-	gtk_box_pack_start (GTK_BOX (pathbar_), GTK_WIDGET(eb), FALSE, FALSE, 0);
-	gtk_widget_show_all(GTK_WIDGET(eb));
-	g_signal_connect (G_OBJECT(eb) , "button-press-event", EVENT_CALLBACK (go_jump), (void *)this);
-	
 
         // xffm:root button:
         auto pb_button = pathbarLabelButton(".");
@@ -377,6 +375,40 @@ private:
 	    }  	
 	}
 
+        return FALSE;
+    }
+   
+    static gboolean
+    downImage (GtkWidget *eventBox,
+               GdkEvent  *event,
+               gpointer   data) {
+	Pathbar *pathbar_p = (Pathbar *)data;
+	auto page = (Page<Type> *)pathbar_p;
+	auto view = (View<Type> *)
+		g_object_get_data(G_OBJECT(page->topScrolledWindow()), "view");
+	Pixbuf<Type>::setImageSize(Pixbuf<Type>::getImageSize()/2);
+	auto message = g_strdup_printf(" %s: (%d)\n",_("Reset image size"), Pixbuf<Type>::getImageSize());
+	Print<Type>::showTextSmall(page->output());
+	Print<Type>::print_icon(page->output(), "image-x-generic/SE/list-add/1.5/220", message);
+	view->reloadModel();
+        return FALSE;
+    }
+
+    static gboolean
+    upImage (GtkWidget *eventBox,
+               GdkEvent  *event,
+               gpointer   data) {
+	Pathbar *pathbar_p = (Pathbar *)data;
+	auto page = (Page<Type> *)pathbar_p;
+	auto view = (View<Type> *)
+		g_object_get_data(G_OBJECT(page->topScrolledWindow()), "view");
+	if (Pixbuf<Type>::getImageSize()*2 < 800) {
+	    Pixbuf<Type>::setImageSize(Pixbuf<Type>::getImageSize()*2);
+	}
+	auto message = g_strdup_printf(" %s: (%d)\n",_("Reset image size"), Pixbuf<Type>::getImageSize());
+	Print<Type>::showTextSmall(page->output());
+	Print<Type>::print_icon(page->output(), "image-x-generic/SE/list-add/1.5/220", message);
+	view->reloadModel();
         return FALSE;
     }
     
