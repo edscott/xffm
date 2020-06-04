@@ -746,7 +746,15 @@ private:
         GdkPixbuf *treeViewPixbuf = NULL;
         GdkPixbuf *normal_pixbuf = NULL;
         GdkPixbuf *highlight_pixbuf = NULL;
-	
+
+#ifndef SINGLE_PREVIEW_PASS
+	// On this pass, pdf, eps and postscript items will
+	// not be absolute. Monitor should update with
+	// thumbnail creation.
+	if (strstr(mimetype, "application/pdf")) icon_name = "x-office-document";
+	if (strstr(mimetype, "application/postscript")) icon_name = "x-office-document";
+	if (strstr(mimetype, "application/eps")) icon_name = "x-office-document";
+#endif
 	if (g_path_is_absolute(icon_name)){
 	    auto page_p = Fm<Type>::getCurrentPage();
 	    auto pixels = page_p->getImageSize();
