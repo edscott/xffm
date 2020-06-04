@@ -386,7 +386,8 @@ private:
 	auto page = (Page<Type> *)pathbar_p;
 	auto view = (View<Type> *)
 		g_object_get_data(G_OBJECT(page->topScrolledWindow()), "view");
-	page->setImageSize(page->getImageSize()/2);
+	auto pixels = Settings<Type>::getSettingInteger("ImageSize", page->workDir());
+	page->setImageSize(pixels/2);
 	view->reloadModel();
         return FALSE;
     }
@@ -400,7 +401,10 @@ private:
 	auto view = (View<Type> *)
 		g_object_get_data(G_OBJECT(page->topScrolledWindow()), "view");
 
-	page->setImageSize(page->getImageSize()*2);
+	auto pixels = Settings<Type>::getSettingInteger("ImageSize", page->workDir());
+	if (pixels > 0) pixels *=2;
+	else pixels = 48;
+	page->setImageSize(pixels);
 	view->reloadModel();
         return FALSE;
     }

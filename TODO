@@ -1,7 +1,4 @@
 For 0.95
-- Threadify thumbnails for pdf, ps and eps
-- Make thumbnail size specific to diretory (maybe)
-- Add extension label to ps, eps and pdf previews
 BSD stuff
 - There is a waitpid in preview.hh (not openBSD)
 - fstab partitions for BSD (if possible) and ZFS dealings

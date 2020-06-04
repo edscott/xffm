@@ -84,28 +84,6 @@ public:
         return date_string;
     }
 
-    static GdkPixbuf *
-    getIcon(const gchar *path){
-        auto iconName = getIconName(path);
-        auto pixbuf = Pixbuf<Type>::getPixbuf(iconName, -24);
-        g_free(iconName);
-        return pixbuf;
-    }
-    
-    static gchar *
-    getIconName(const gchar *path){
-        auto directory = g_path_get_dirname(path);
-        struct dirent d;
-        auto basename = g_path_get_basename(path);
-        strncpy(d.d_name, basename, 256);
-        d.d_type = DT_UNKNOWN;
-        auto xd_p = get_xd_p(directory, &d, TRUE);  
-        auto iconName = LocalIcons<Type>::getIconname(xd_p);
-        g_free(directory);
-        g_free(basename);
-        return iconName;
-    }
-
     // This mkTreeModel should be static...
     static gint
     loadModel (View<Type> *view, const gchar *path)
@@ -195,6 +173,7 @@ public:
             (Settings<Type>::getSettingInteger("LocalView", "ByDate") > 0);
 
         auto needStat = bySize || byDate;
+	gboolean doPreviews = (Settings<Type>::getSettingInteger("ImageSize", path) > 0);
 	while ((d = readdir(directory))  != NULL){
             TRACE( "%p  %s\n", d, d->d_name);
             if(strcmp (d->d_name, ".") == 0) continue;
@@ -206,7 +185,7 @@ public:
             needStat = needStat || (d->d_type==DT_LNK);
             needStat = needStat || (d->d_type==DT_UNKNOWN);
 	    // On this pass, stat according to sort order or dt_type.
-            xd_t *xd_p = get_xd_p(path, d, needStat);
+            xd_t *xd_p = get_xd_p(path, d, needStat, doPreviews);
             if (xd_p) directory_list = g_list_prepend(directory_list, xd_p);
             if (heartbeat) {
                 (*heartbeat)++;
@@ -235,7 +214,7 @@ public:
 
     // Convert a dirent entry into a xd_t structure.
     static xd_t *
-    get_xd_p(const gchar *directory, struct dirent *d, gboolean withStat){
+    get_xd_p(const gchar *directory, struct dirent *d, gboolean withStat, gboolean doPreviews=FALSE){
         // Allocate memory.
         xd_t *xd_p = NULL;
 	TRACE("sizeof(xd_t) = %lu\n", sizeof(xd_t));
@@ -269,7 +248,7 @@ public:
 	}
 	xd_p->mimetype = getMimeType(xd_p);
         // the following call uses xd_p->mimetype
-        xd_p->icon = g_strdup(LocalIcons<Type>::getIconname(xd_p));
+        xd_p->icon = g_strdup(LocalIcons<Type>::getIconname(xd_p, doPreviews));
 	TRACE("d_type: %s (%s) -> %d icon: %s mime: %s\n", xd_p->d_name, xd_p->path, xd_p->d_type, xd_p->icon, xd_p->mimetype);
         errno=0;
         return xd_p;
@@ -594,9 +573,9 @@ public:
 	auto view = (View<Type> *)arg[1];
 	auto path = (gchar *)arg[2];
 	time_t start = time(NULL);
-        DBG("local/threadInsert() ***Starting... \n");
+        TRACE("local/threadInsert() ***Starting... \n");
 	insert_list_into_model(directoryList, view, path);
-        DBG("local/threadInsert() *** done... at %ld seconds \n", time(NULL)-start);
+        TRACE("local/threadInsert() *** done... at %ld seconds \n", time(NULL)-start);
 	g_free(arg);
         GList *p = directoryList;
         for (;p && p->data; p=p->next){
@@ -747,14 +726,7 @@ private:
         GdkPixbuf *normal_pixbuf = NULL;
         GdkPixbuf *highlight_pixbuf = NULL;
 
-#ifndef SINGLE_PREVIEW_PASS
-	// On this pass, pdf, eps and postscript items will
-	// not be absolute. Monitor should update with
-	// thumbnail creation.
-	if (strstr(mimetype, "application/pdf")) icon_name = "x-office-document";
-	if (strstr(mimetype, "application/postscript")) icon_name = "x-office-document";
-	if (strstr(mimetype, "application/eps")) icon_name = "x-office-document";
-#endif
+
 	if (g_path_is_absolute(icon_name)){
 	    auto page_p = Fm<Type>::getCurrentPage();
 	    auto pixels = page_p->getImageSize();

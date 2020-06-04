@@ -50,10 +50,11 @@ public:
     }
     
     static gboolean
-    isImage(const gchar *mimetype){
-	if (strstr(mimetype, "application/pdf")) return TRUE;
-	if (strstr(mimetype, "application/postscript")) return TRUE;
-	if (strstr(mimetype, "application/eps")) return TRUE;
+    isImage(const gchar *mimetype, gboolean doPreviews=FALSE){
+	if (!doPreviews) return FALSE;
+	if (strstr(mimetype, "pdf")) return TRUE;
+	if (strstr(mimetype, "eps")) return TRUE;
+	if (strstr(mimetype, "postscript")) return TRUE;
 	static GSList *pix_mimetypes = NULL;
 	static gsize initialized = 0;
 	if (g_once_init_enter(&initialized)){

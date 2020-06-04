@@ -184,7 +184,7 @@ public:
 	auto basename = g_path_get_basename(inPath);
 	strncpy(d.d_name, basename, 256);
 	g_free(basename);
-	auto xd_p = LocalModel<Type>::get_xd_p(directory, &d, TRUE);
+	auto xd_p = LocalModel<Type>::get_xd_p(directory, &d, TRUE, TRUE);
 	g_free(directory);
 	TRACE("%s --> %s --> %s\n", xd_p->path, xd_p->mimetype, xd_p->icon);
 	if (strcmp(xd_p->mimetype, "inode/unknown")==0){

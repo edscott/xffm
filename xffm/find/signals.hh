@@ -46,6 +46,7 @@ GtkWindow *findDialog;
 template <class Type> class TreeView;
 template <class Type> class LocalView;
 template <class Type> class LocalModel;
+template <class Type> class LocalIcons;
 template <class Type> class LocalPopUp;
 template <class Type> class BaseSignals;
 
@@ -84,7 +85,7 @@ public:
             gtk_list_store_append (model, &iter);
             gtk_list_store_set (model, &iter, 1, path, -1);
 
-            auto pixbuf = LocalModel<Type>::getIcon(path);
+            auto pixbuf = LocalIcons<Type>::getIcon(path);
             gtk_list_store_set (model, &iter, 0, pixbuf, -1);
             g_object_unref(pixbuf);
             

@@ -13,26 +13,47 @@ class LocalIcons {
     
 public:
 
+    static GdkPixbuf *
+    getIcon(const gchar *path){
+        auto directory = g_path_get_dirname(path);
+        struct dirent d;
+        auto basename = g_path_get_basename(path);
+        strncpy(d.d_name, basename, 256);
+        d.d_type = DT_UNKNOWN;
+        auto xd_p = LocalModel<Type>::get_xd_p(directory, &d, TRUE);
+	auto name = getIconname(xd_p);
+        auto iconName = name?g_strdup(name):g_strdup("default");
+        g_free(directory);
+        g_free(basename);
+	// Free xd_p
+	LocalModel<Type>::free_xd_p(xd_p);
+
+        auto pixbuf = Pixbuf<Type>::getPixbuf(iconName, -24);
+        g_free(iconName);
+        return pixbuf;
+    }
+
     static gchar *
-    getIconname(xd_t *xd_p){
+    getIconname(xd_t *xd_p, gboolean doPreviews=FALSE){
 	TRACE("getIconname(xd_)..\n");
 	return 
 	    getIconname(xd_p->path, 
 		    xd_p->d_name,
 		    xd_p->mimetype, 
 		    xd_p->d_type, 
-		    xd_p->st);
+		    xd_p->st,
+		    doPreviews);
     }
 private:
     static gchar *
     getIconname(const gchar *path, const gchar *basename, 
 	    const gchar *mimetype, const unsigned char d_type,
-	    struct stat *st_p){
+	    struct stat *st_p, gboolean doPreviews=FALSE){
 	TRACE("getIconname(full)..\n");
         // Up directory:
         if (strcmp(basename, "..")==0) return  g_strdup("go-up");
 
-	auto name = getBasicIconname(path, mimetype);
+	auto name = getBasicIconname(path, mimetype, doPreviews);
 	if (!name){
 	    ERROR("fm/view/icons.hh/::getBasicIconname should not return NULL\n");
 	    return g_strdup("image-missing");
@@ -86,7 +107,7 @@ private:
     }
 
     static gchar *
-    getBasicIconname(const gchar *path, const gchar *mimetype){	
+    getBasicIconname(const gchar *path, const gchar *mimetype, gboolean doPreviews=FALSE){	
 	TRACE("getBasicIconname(path, mimetype) mimetype=%s\n", mimetype);
 	if (strcmp(path, g_get_home_dir())==0) return g_strdup("user-home");
 	if (!mimetype) {
@@ -110,7 +131,7 @@ private:
             return g_strdup(DEFAULT_ICON);
         }
 
-        auto iconname = specificIconName(path, mimetype);
+        auto iconname = specificIconName(path, mimetype, doPreviews);
         TRACE("specificIconName %s: %s \n", path, mimetype);
         if (iconname && !g_path_is_absolute(iconname)){
             if (!Pixbuf<Type>::iconThemeHasIcon(iconname)) {
@@ -126,8 +147,8 @@ private:
      }
 
     static gchar *
-    specificIconName(const gchar *path, const gchar *mimetype){
-        if (Gtk<Type>::isImage(mimetype)) {
+    specificIconName(const gchar *path, const gchar *mimetype, gboolean doPreviews=FALSE){
+        if (Gtk<Type>::isImage(mimetype, doPreviews)) {
             return g_strdup(path);
         }
         TRACE("specificIconName(%s, %s)\n", path, mimetype);

@@ -44,17 +44,21 @@ public:
 
     void
     setImageSize(gint pixels){ 
+	auto hasKey = Settings<Type>::keyFileHasGroupKey("ImageSize", this->workDir());
 	if (pixels < 48) {
-	    pixels = 48;
+	    if (hasKey) {
+		Settings<Type>::removeKey("ImageSize", this->workDir());
+	    }
 	} 
-	if (pixels > PREVIEW_IMAGE_SIZE){
+	else if (pixels > PREVIEW_IMAGE_SIZE){
 	    pixels = PREVIEW_IMAGE_SIZE;
 	}
-	auto message = g_strdup_printf(" %s: (%d)\n",_("Reset image size"), pixels);
-	Print<Type>::showTextSmall(this->output());
-	Print<Type>::print_icon(this->output(), "image-x-generic/SE/list-add/1.5/220", message);
-	Settings<Type>::setSettingInteger("ImageSize", this->workDir(), pixels);
-	// Print<Type> will free message (runs in independent thread).
+	if (pixels >= 48) {
+	    auto message = g_strdup_printf(" %s: (%d)\n",_("Reset image size"), pixels);
+	    Print<Type>::showTextSmall(this->output());
+	    Print<Type>::print_icon(this->output(), "image-x-generic/SE/list-add/1.5/220", message);
+	    Settings<Type>::setSettingInteger("ImageSize", this->workDir(), pixels);
+	}
     }
     
     gint
