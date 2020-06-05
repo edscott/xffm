@@ -43,7 +43,6 @@ class View:
     BaseMonitor<Type> *monitorObject_; // public to switch treemodel...
     GList *history;
     void pushHistory(const gchar *path){
-	if (!this) return;
 	if (this->history){
 	    if (strcmp((gchar *)this->history->data, path) == 0){
 		TRACE("%s already in history.\n", path);
@@ -76,7 +75,6 @@ public:
 
     void goBack(void){
 	gchar *back;
-	if (!this) return;
 	if (this->history){
 	    auto current = (gchar *)this->history->data;
 	    TRACE("current=%s\n", current);
