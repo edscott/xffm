@@ -42,14 +42,14 @@ class View:
     
     BaseMonitor<Type> *monitorObject_; // public to switch treemodel...
     GList *history;
-    void pushHistory(const gchar *path){
-	if (this->history){
-	    if (strcmp((gchar *)this->history->data, path) == 0){
+    static void pushHistory(View<Type> *view, const gchar *path){
+	if (view->history){
+	    if (strcmp((gchar *)view->history->data, path) == 0){
 		TRACE("%s already in history.\n", path);
 		return;
 	    }
 	} 
-	this->history = g_list_prepend(this->history, g_strdup(path));
+	view->history = g_list_prepend(view->history, g_strdup(path));
 	TRACE("pushed %s\n", path);
     } 
 public:
@@ -126,7 +126,7 @@ public:
     }
     gboolean loadModel(const gchar *path, View<Type> *view){
         TRACE("loadModel(%s, view)\n", path);
-	pushHistory(path);
+	pushHistory(view, path);
 	// This sets viewType
         if (isTreeView){
 	    // hide iconview, show treeview
@@ -222,7 +222,7 @@ public:
     {
 	// Here viewType must be specified before any
 	// static loadModel call (viz. PkgModel)
-	pushHistory(path);
+	pushHistory((View<Type> *)this, path);
         TRACE("generalized view: loadModel: %s\n", path);
 #ifdef ENABLE_PKG_MODULE
 	if (strncmp(path, "xffm:pkg", strlen("xffm:pkg"))==0){
