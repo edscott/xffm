@@ -17,17 +17,16 @@ include(cmake/pthreads.cmake)
 # set(CMAKE_CXX_FLAGS "-g -O0")
 
 execute_process(COMMAND uname -s OUTPUT_VARIABLE UNAME)
+    
+set(FREEBSD "BSD_NOT_FOUND")
 if(UNAME MATCHES FreeBSD)
     message(STATUS "System is FreeBSD: uname -a = ${UNAME}")
     set(FREEBSD "BSD_FOUND")
 else()
-    set(FREEBSD "BSD_NOT_FOUND")
-endif()
-if(UNAME MATCHES OpenBSD)
+ if(UNAME MATCHES OpenBSD)
     message(STATUS "System is OpenBSD: uname -a = ${UNAME}")
     set(FREEBSD "BSD_FOUND")
-else()
-    set(FREEBSD "BSD_NOT_FOUND")
+ endif()
 endif()
 
 
