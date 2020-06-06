@@ -375,6 +375,7 @@ public:
 	gtk_widget_show(GTK_WIDGET(box));
 	
     }
+    
 private:
     GtkNotebook *notebook_;
     GHashTable *pageHash_;

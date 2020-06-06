@@ -36,12 +36,12 @@ public:
 
 	auto eventBox1 = eventButton("go-previous", "RFM_GOTO", "xffm:back", (void *)go_back);
 	auto eventBox2 = eventButton("go-jump", "RFM_GOTO", "xffm:goto", (void *)go_jump);
-	auto eventBox3 = eventButton("image-x-generic/SE/list-add/1.5/220", "RFM_GOTO", "xffm:image+", (void *)upImage);
-	auto eventBox4 = eventButton("image-x-generic/SE/list-remove/1.5/220", "RFM_GOTO", "xffm:image+", (void *)downImage);
+	//auto eventBox3 = eventButton("image-x-generic/SE/list-add/1.5/220", "RFM_GOTO", "xffm:image+", (void *)upImage);
+	//auto eventBox4 = eventButton("image-x-generic/SE/list-remove/1.5/220", "RFM_GOTO", "xffm:image+", (void *)downImage);
 	gtk_box_pack_start (GTK_BOX (pathbar_), GTK_WIDGET(eventBox1), FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (pathbar_), GTK_WIDGET(eventBox2), FALSE, FALSE, 0);
-	gtk_box_pack_end (GTK_BOX (pathbar_), GTK_WIDGET(eventBox3), FALSE, FALSE, 0);
-	gtk_box_pack_end (GTK_BOX (pathbar_), GTK_WIDGET(eventBox4), FALSE, FALSE, 0);
+	//gtk_box_pack_end (GTK_BOX (pathbar_), GTK_WIDGET(eventBox3), FALSE, FALSE, 0);
+	//gtk_box_pack_end (GTK_BOX (pathbar_), GTK_WIDGET(eventBox4), FALSE, FALSE, 0);
 
 
         // xffm:root button:
@@ -378,38 +378,7 @@ private:
         return FALSE;
     }
    
-    static gboolean
-    downImage (GtkWidget *eventBox,
-               GdkEvent  *event,
-               gpointer   data) {
-	Pathbar *pathbar_p = (Pathbar *)data;
-	auto page = (Page<Type> *)pathbar_p;
-	auto view = (View<Type> *)
-		g_object_get_data(G_OBJECT(page->topScrolledWindow()), "view");
-	auto pixels = Settings<Type>::getSettingInteger("ImageSize", page->workDir());
-	page->setImageSize(pixels/2);
-	view->reloadModel();
-        return FALSE;
-    }
-
-    static gboolean
-    upImage (GtkWidget *eventBox,
-               GdkEvent  *event,
-               gpointer   data) {
-	Pathbar *pathbar_p = (Pathbar *)data;
-	auto page = (Page<Type> *)pathbar_p;
-	auto view = (View<Type> *)
-		g_object_get_data(G_OBJECT(page->topScrolledWindow()), "view");
-
-	auto pixels = Settings<Type>::getSettingInteger("ImageSize", page->workDir());
-	if (pixels > 0) pixels *=2;
-	else pixels = 48;
-	page->setImageSize(pixels);
-	view->reloadModel();
-        return FALSE;
-    }
-    
-    static gboolean
+     static gboolean
     go_back (GtkWidget *eventBox,
                GdkEvent  *event,
                gpointer   data) {

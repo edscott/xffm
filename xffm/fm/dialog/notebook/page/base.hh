@@ -51,10 +51,13 @@ public:
 	    }
 	} 
 	else if (pixels > PREVIEW_IMAGE_SIZE){
-	    pixels = PREVIEW_IMAGE_SIZE;
+	    auto message = g_strdup_printf(" %s: (%d) [%s]\n",_("Maximum image size for thumbnailing"),  PREVIEW_IMAGE_SIZE, this->workDir());
+	    Print<Type>::showTextSmall(this->output());
+	    Print<Type>::print_icon(this->output(), "image-x-generic/SE/list-add/1.5/220", message);
+	    return;
 	}
 	if (pixels >= 48) {
-	    auto message = g_strdup_printf(" %s: (%d)\n",_("Reset image size"), pixels);
+	    auto message = g_strdup_printf(" %s: (%d) [%s]\n",_("Reset image size"), pixels, this->workDir());
 	    Print<Type>::showTextSmall(this->output());
 	    Print<Type>::print_icon(this->output(), "image-x-generic/SE/list-add/1.5/220", message);
 	    Settings<Type>::setSettingInteger("ImageSize", this->workDir(), pixels);

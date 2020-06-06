@@ -259,16 +259,31 @@ public:
                 (void *)"xffm");
 
 #ifdef ENABLE_DIFF_MODULE
-        auto differences = gtk_c::newButton("differences", _("Differences"));
-	gtk_box_pack_start (vButtonBox_, GTK_WIDGET(differences), FALSE, FALSE, 0);
-	g_signal_connect(G_OBJECT(differences), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::open), 
+	auto diffApp = g_find_program_in_path("rodent-diff");
+	if (diffApp) {
+            auto differences = gtk_c::newButton("differences", _("Differences"));
+	    gtk_box_pack_start (vButtonBox_, GTK_WIDGET(differences), FALSE, FALSE, 0);
+	    g_signal_connect(G_OBJECT(differences), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::open), 
                 (void *)"rodent-diff");
+	}
 #endif
 
         auto home = gtk_c::newButton("go-home", _("Home Directory"));
 	gtk_box_pack_start (vButtonBox_, GTK_WIDGET(home), FALSE, FALSE, 0);
 	g_signal_connect(G_OBJECT(home), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::home), NULL);
 
+	// Increase image preview size button
+        auto imageUpButton = gtk_c::newButton("image-x-generic/SE/list-add/1.5/220", _("Reset image size"));
+	gtk_box_pack_start (vButtonBox_, GTK_WIDGET(imageUpButton), FALSE, FALSE, 0);
+	g_signal_connect(imageUpButton, "clicked", G_CALLBACK(upImage), NULL);
+	// Decrease image preview size button
+        auto imageDownButton = gtk_c::newButton("image-x-generic/SE/list-remove/1.5/220", _("Reset image size"));
+	gtk_box_pack_start (vButtonBox_, GTK_WIDGET(imageDownButton), FALSE, FALSE, 0);
+	g_signal_connect(imageDownButton, "clicked", G_CALLBACK(downImage), NULL);
+
+
+
+#if 0
 #ifdef ENABLE_FSTAB_MODULE
         auto fstab = gtk_c::newButton("media-eject", _("Disk Image Mounter"));
 	gtk_box_pack_start (vButtonBox_, GTK_WIDGET(fstab), FALSE, FALSE, 0);
@@ -278,6 +293,7 @@ public:
 	auto trash = gtk_c::newButton("user-trash", _("Trash bin"));
 	gtk_box_pack_start (vButtonBox_, GTK_WIDGET(trash), FALSE, FALSE, 0);
 	g_signal_connect(G_OBJECT(trash), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::trash), NULL);
+#endif
 
 	gtk_widget_show_all(GTK_WIDGET(vButtonBox_));
         
@@ -303,8 +319,36 @@ private:
 	auto file = gtk_entry_get_text(entry);
 	DBG("remove %s\n", file);
     }
-};
     
+    static gboolean
+    downImage (GtkWidget *eventBox,
+               GdkEvent  *event,
+               gpointer   data) {
+	auto page = Fm<Type>::getCurrentPage();
+	auto view = page->view();
+	auto pixels = Settings<Type>::getSettingInteger("ImageSize", page->workDir());
+	page->setImageSize(pixels/2);
+	view->reloadModel();
+        return FALSE;
+    }
+
+    static gboolean
+    upImage (GtkWidget *eventBox,
+               GdkEvent  *event,
+               gpointer   data) {
+	auto page = Fm<Type>::getCurrentPage();
+	auto view = page->view();
+
+	auto pixels = Settings<Type>::getSettingInteger("ImageSize", page->workDir());
+	if (pixels > 0) pixels *=2;
+	else pixels = 48;
+	page->setImageSize(pixels);
+	if (pixels <= PREVIEW_IMAGE_SIZE) view->reloadModel();
+        return FALSE;
+    }
+
+};
+   
 
 
 
