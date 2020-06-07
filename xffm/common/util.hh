@@ -802,13 +802,13 @@ private:
 	static gboolean done = FALSE;
 	if (done) return;
 	const gchar *terminal = getenv("TERMINAL");
-
 	if (terminal && strlen(terminal)) {
 	    DBG("User set terminal = %s\n", terminal);
 	    setTerminalCmd(terminal);
 	    done = TRUE;
 	    return;
 	} 
+	DBG("setTerminal()... TERMINAL not defined in environment.\n");
 	// TERMINAL not defined. Look for one.
 	const gchar **p=getTerminals();
 	const gchar *foundTerm = NULL;
@@ -818,16 +818,17 @@ private:
 	    auto t = g_find_program_in_path (s);
 	    g_free(s);
 	    if (t) {
+		DBG("Found terminal: %s\n", t);
 		terminal=*p;
 		g_free(t);
-		break;  
+		setenv("TERMINAL", *p, 1);
+		done = TRUE;
+		return;
 	    }  
 	}
 	if (!terminal){
-	    DBG("No terminal command found, defaulting to xterm. Please install or define TERMINAL environment variable.\n");
-	    terminal = "xterm -vb";
+	    DBG("No terminal command found. Please install or define TERMINAL environment variable.\n");
 	}
-	setTerminalCmd(terminal);
 	done = TRUE;
 	return ;
     }

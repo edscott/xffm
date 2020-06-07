@@ -1,5 +1,7 @@
 For 0.95
-bug: +/- image buttons disappear from pathbar on tab bar expansions. Need to move either to the left or the horizontal button box.
+bug: envar TERMINAL not set-->xterm selected even if not installed (should find a reasonable terminal, like konsole or gnome-terminal)
+bug: page->output() font is not fixed size but variable.
+
 BSD stuff
 - There is a waitpid in preview.hh (not openBSD)
 - fstab partitions for BSD (if possible) and ZFS dealings

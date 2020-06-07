@@ -82,27 +82,12 @@ public:
     static void
     terminal(GtkMenuItem *menuItem, gpointer data)
     {
-        gchar *userTerminal = NULL;
         const gchar *terminal = Util<Type>::getTerminal();
-        if (terminal) {
-            userTerminal = g_strdup(terminal);
-            if (strchr(userTerminal, ' ')) *(strchr(userTerminal, ' ')) = 0;
-            gchar *g = g_find_program_in_path(userTerminal);
-            if (!g) {
-                g_free(userTerminal);
-                userTerminal = NULL;
-            } else {
-                g_free(g);
-                g_free(userTerminal);
-                userTerminal = g_strdup(terminal);
-            }
-        }
-        if (userTerminal){
-            run(Fm<Type>::getCurrentNotebook(), userTerminal);
-            g_free(userTerminal);
-        } else {
-            run(Fm<Type>::getCurrentNotebook(), "xterm -vb");
-        }
+	if (!terminal || !strlen(terminal)){
+	    DBG("TERMINAL environment variable not defined.\n");
+	    return;
+	}
+        run(Fm<Type>::getCurrentNotebook(), terminal);
     }
    
    
