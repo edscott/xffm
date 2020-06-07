@@ -1,6 +1,4 @@
 For 0.95
-bug: envar TERMINAL not set-->xterm selected even if not installed (should find a reasonable terminal, like konsole or gnome-terminal)
-bug: page->output() font is not fixed size but variable.
 
 BSD stuff
 - There is a waitpid in preview.hh (not openBSD)

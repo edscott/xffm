@@ -267,7 +267,7 @@ private:
 
         gtk_widget_show_all(GTK_WIDGET(vbox7b));
         auto window = GTK_DIALOG(gtk_dialog_new());
-        gtk_window_set_title(GTK_WINDOW(findDialog), _("Details"));
+        gtk_window_set_title(GTK_WINDOW(findDialog), "xffm --find");
             
         auto contentArea = GTK_BOX(gtk_dialog_get_content_area (window));
 	gtk_box_pack_start (contentArea, GTK_WIDGET(vbox7b), FALSE, FALSE, 0);

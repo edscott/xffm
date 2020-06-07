@@ -807,6 +807,7 @@ selection {\
         GError *error=NULL;
         auto data = g_strdup_printf("* {\
 font-size: %dpx;\
+font-family: monospace\
 }", fontsize);
         gtk_css_provider_load_from_data (css_provider, data, -1, &error);
         g_free(data);
