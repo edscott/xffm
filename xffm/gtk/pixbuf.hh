@@ -554,6 +554,7 @@ public:
 
     static void
     insertPixbufLabel(GdkPixbuf *pixbuf, const gchar *label){
+	if (!pixbuf) return;
 	// Done by main gtk thread:
 	void *arg[] = {(void *)pixbuf, (void *)label};
 	Util<Type>::context_function(insert_label_decoration_f, arg);

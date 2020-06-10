@@ -172,6 +172,7 @@ public:
     static GdkPixbuf *
     pixbuf_cairo_destroy( cairo_t  *cr, GdkPixbuf *pixbuf)
     {
+       if (!pixbuf) return NULL;	
        gint             width,        /* Width of both pixbuf and surface */
 		    height,       /* Height of both pixbuf and surface */
 		    p_stride,     /* Pixbuf stride value */
@@ -260,6 +261,7 @@ public:
 
     static GdkPixbuf *
     create_pixbuf_mask(GdkPixbuf *in_pixbuf, guchar red, guchar green, guchar blue){
+	if (!in_pixbuf) return NULL;
 	g_object_ref(in_pixbuf);
 	
 	gint        width;        /* Width of both pixbufs */
