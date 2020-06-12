@@ -87,7 +87,8 @@ public:
 	}
 
 	gs = g_string_new (dirname);
-	sprintf (key, "%10u", g_string_hash (gs));
+    auto uintKey = g_string_hash (gs);
+	sprintf (key, "%10u", uintKey);
 	g_strstrip (key);
 	g_string_free (gs, TRUE);
 	g_free (dirname);

@@ -64,7 +64,7 @@
 #include <memory>
 
 #define URIFILE "file://"
-#define USER_DIR 		g_get_home_dir()
+#define USER_DIR                 g_get_home_dir()
 
 static gchar *buildDir=NULL;
 static const gchar *buildIcons=NULL;
@@ -89,18 +89,18 @@ main (int argc, char *argv[]) {
     TRACE("argv[0]= %s\n", argv[0]);
     buildDir = g_path_get_dirname(argv[0]);
     if (!g_path_is_absolute(buildDir)){
-	auto current = g_get_current_dir();
-	auto g = g_build_path(G_DIR_SEPARATOR_S, current, buildDir, NULL);
-	TRACE("current=%s g=%s\n", current, g);
-	g_free(current);
-	g_free(buildDir);
-	buildDir = g;
+        auto current = g_get_current_dir();
+        auto g = g_build_path(G_DIR_SEPARATOR_S, current, buildDir, NULL);
+        TRACE("current=%s g=%s\n", current, g);
+        g_free(current);
+        g_free(buildDir);
+        buildDir = g;
     }
     TRACE("dir= %s\n", buildDir);
     if (strstr(buildDir, "/build/xffm")){
-	*strstr(buildDir, "/build/xffm") = 0;
-	buildIcons = g_build_path(G_DIR_SEPARATOR_S,buildDir, "xffm", "icons", NULL);
-	TRACE("buildIcons=%s\n", buildIcons);
+        *strstr(buildDir, "/build/xffm") = 0;
+        buildIcons = g_build_path(G_DIR_SEPARATOR_S,buildDir, "xffm", "icons", NULL);
+        TRACE("buildIcons=%s\n", buildIcons);
     } 
 
 
@@ -114,13 +114,13 @@ main (int argc, char *argv[]) {
     xffindProgram = argv[0];
     xffmProgram = argv[0];
 #ifdef ENABLE_NLS
-	/* this binds domain: */
-	bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
+    /* this binds domain: */
+    bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
 
-	bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
+    bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
 # ifdef HAVE_BIND_TEXTDOMAIN_CODESET
-	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-	TRACE ("binding %s, at %s\n", GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
+    bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+    TRACE ("binding %s, at %s\n", GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
 # endif
 #endif
 
