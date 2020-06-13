@@ -21,7 +21,7 @@ public:
         strncpy(d.d_name, basename, 256);
         d.d_type = DT_UNKNOWN;
         auto xd_p = LocalModel<Type>::get_xd_p(directory, &d, TRUE);
-	auto name = getIconname(xd_p);
+	    auto name = getIconname(xd_p);
         auto iconName = name?g_strdup(name):g_strdup("default");
         g_free(directory);
         g_free(basename);

@@ -530,9 +530,20 @@ private:
     setUpImage(GtkBox *box, entry_t *entry){
 	TRACE("setUpImage... mimetype = %s\n", entry->mimetype);
 	if (!entry->mimetype) entry->mimetype = Mime<Type>::mimeMagic(entry->path);
-	
-	auto pixbuf = 
-	    Preview<Type>::previewDefault(entry->path, entry->mimetype, &(entry->st));
+    
+    GdkPixbuf *pixbuf = NULL;
+    auto isImage = Gtk<Type>::isImage(entry->mimetype, TRUE);
+    auto isGs =  (strstr(entry->mimetype, "pdf") 
+            || strstr(entry->mimetype, "postscript"));
+    if (isImage && !isGs) {
+	    pixbuf = 
+            Pixbuf<Type>::getImageAtSize(entry->path, PREVIEW_IMAGE_SIZE, 
+                    entry->mimetype, &(entry->st));
+    } else {
+	    pixbuf = 
+	        Preview<Type>::previewDefault(entry->path, entry->mimetype, 
+                    &(entry->st));
+    }
 	auto image = gtk_image_new_from_pixbuf(pixbuf);
 	GList *list = gtk_container_get_children (GTK_CONTAINER(box));
 	if (list && list->data){
