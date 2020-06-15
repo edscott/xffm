@@ -597,9 +597,10 @@ private:
     }
 
 public:  
-#ifdef UNZIP_PROGRAM
     static GdkPixbuf *
     zipPreview (const gchar *path, gint pixels) {
+        GdkPixbuf *pixbuf = NULL;
+#ifdef UNZIP_PROGRAM
         auto command = g_strdup_printf("%s -l \"%s\"", UNZIP_PROGRAM, path);
         gchar *text = Util<Type>::pipeCommandFull(command);
         g_free(command);
@@ -608,9 +609,9 @@ public:
 
         auto pixbuf = processTextPixbuf(text, path, pixels);
         g_free(text);
+#endif
         return pixbuf;        
     }
-#endif
     
 private:
     static gchar *
