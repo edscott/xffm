@@ -280,10 +280,11 @@ private:
         g_free(thumbnailPath);
    }
 
-#ifdef HAVE_ZIP_H
     static
     GdkPixbuf *
     zipThumbnail(const gchar *path){
+        GdkPixbuf *pixbuf = NULL;
+#ifdef HAVE_ZIP_H
         TRACE("creating zip preview for %s\n",path);
         gint errorp;
         auto zf = zip_open(path, ZIP_RDONLY, &errorp);
@@ -295,7 +296,6 @@ private:
             zip_close (zf);
             return NULL;
         }
-        GdkPixbuf *pixbuf = NULL;
         void *ptr = calloc(1,sb.size);
         if (!ptr) g_error("calloc: %s", strerror(errno));
         struct zip_file *f = zip_fopen (zf, "Thumbnails/thumbnail.png", 0);
@@ -327,9 +327,9 @@ private:
         g_free(fname);
 
         g_free(ptr);
+#endif
         return pixbuf;
     }
-#endif
     
     
 
@@ -372,7 +372,8 @@ public:
         GdkPixbuf *pixbuf = NULL;
         if (isZipThumbnailed(path)) {
             pixbuf = zipThumbnail(path);
-        } else {
+        }
+        if (!pixbuf) {
             pixbuf = gdk_pixbuf_new_from_file (path, &error);
             if (error){
                 DBG("pixbuf.hh::gdk_pixbuf_new_from_file(): %s\n", error->message);
