@@ -50,8 +50,8 @@ public:
 		Settings<Type>::removeKey("ImageSize", this->workDir());
 	    }
 	} 
-	else if (pixels > PREVIEW_IMAGE_SIZE){
-	    auto message = g_strdup_printf(" %s: (%d) [%s]\n",_("Maximum image size for thumbnailing"),  PREVIEW_IMAGE_SIZE, this->workDir());
+	else if (pixels > MAX_PIXBUF_SIZE){
+	    auto message = g_strdup_printf(" %s: (%d) [%s]\n",_("Maximum image size for thumbnailing"),  MAX_PIXBUF_SIZE, this->workDir());
 	    Print<Type>::showTextSmall(this->output());
 	    Print<Type>::print_icon(this->output(), "image-x-generic/SE/list-add/1.5/220", message);
 	    return;

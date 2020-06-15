@@ -10,6 +10,7 @@
 
 #define @FREEBSD@
 #define @GVIM_PROGRAM@
+#define @UNZIP_PROGRAM@
 
 #define @MNTENT_H@
 #define @SYS_UCRED_H@
@@ -19,6 +20,7 @@
 #define @SYS_SYSCTL_H@
 #define @SIGNAL_H@
 #define @MAGIC_H@
+#define @ZIP_H@
 #define @READLINE_HISTORY_H@
 #define @HAVE_GREP@
 #define @HAVE_EMERGE@

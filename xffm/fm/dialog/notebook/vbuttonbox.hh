@@ -343,7 +343,7 @@ private:
 	if (pixels > 0) pixels *=2;
 	else pixels = 48;
 	page->setImageSize(pixels);
-	if (pixels <= PREVIEW_IMAGE_SIZE) view->reloadModel();
+	if (pixels <= MAX_PIXBUF_SIZE) view->reloadModel();
         return FALSE;
     }
 

@@ -13,6 +13,7 @@ include_directories(
 target_link_libraries(xffm 
     ${GTK3_LIBRARIES}
     ${X11_LIBRARIES}
+    ${LIBZIP_LIBRARIES}
     ${LIBMAGIC_LIBRARIES}
     ${THREAD_LIBRARIES})
 

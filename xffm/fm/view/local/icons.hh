@@ -25,8 +25,8 @@ public:
         auto iconName = name?g_strdup(name):g_strdup("default");
         g_free(directory);
         g_free(basename);
-	// Free xd_p
-	LocalModel<Type>::free_xd_p(xd_p);
+        // Free xd_p
+        LocalModel<Type>::free_xd_p(xd_p);
 
         auto pixbuf = Pixbuf<Type>::getPixbuf(iconName, -24);
         g_free(iconName);
@@ -35,14 +35,14 @@ public:
 
     static gchar *
     getIconname(xd_t *xd_p, gboolean doPreviews=FALSE){
-	TRACE("getIconname(xd_)..\n");
-	return 
-	    getIconname(xd_p->path, 
-		    xd_p->d_name,
-		    xd_p->mimetype, 
-		    xd_p->d_type, 
-		    xd_p->st,
-		    doPreviews);
+        TRACE("getIconname(xd_)..\n");
+        return 
+            getIconname(xd_p->path, 
+                xd_p->d_name,
+                xd_p->mimetype, 
+                xd_p->d_type, 
+                xd_p->st,
+                doPreviews);
     }
 private:
     static gchar *
@@ -149,6 +149,10 @@ private:
     static gchar *
     specificIconName(const gchar *path, const gchar *mimetype, gboolean doPreviews=FALSE){
         if (Gtk<Type>::isImage(mimetype, doPreviews)) {
+            return g_strdup(path);
+        }
+        if (doPreviews && Pixbuf<Type>::isZipThumbnailed(path)){
+            TRACE("LocalIcons::File \"%s\" is in zip format\n", path);
             return g_strdup(path);
         }
         TRACE("specificIconName(%s, %s)\n", path, mimetype);

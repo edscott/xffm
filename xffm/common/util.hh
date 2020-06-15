@@ -4,6 +4,9 @@
 #include <gtk/gtk.h>
 #include <sys/stat.h>
 #include <errno.h>
+#ifdef HAVE_ZIP_H
+# include <zip.h>
+#endif
 
 
 #ifndef PARAMS

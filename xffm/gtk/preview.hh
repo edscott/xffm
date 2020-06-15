@@ -3,7 +3,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-#define PREVIEW_IMAGE_SIZE 384
+#define PREVIEW_IMAGE_SIZE  400
 #define BUFSIZE (4096)
 #define DEFAULT_FONT_FAMILY    "Sans"
 //#define DEFAULT_FONT_FAMILY   "Arial"
@@ -788,9 +788,6 @@ private:
 
         GdkPixbuf *original=pixbuf;
         pixbuf = fixPixbufScale(original, pixels); // this unrefs old and refs new.
-    /*    if (original != pixbuf) {
-            Pixbuf<Type>::pixbufSave(pixbuf, thumbnail);
-        }*/
         return pixbuf;
     }
 private:
@@ -801,7 +798,19 @@ private:
         GdkPixbuf *out_pixbuf=NULL;
         gint height = gdk_pixbuf_get_height (in_pixbuf);
         gint width = gdk_pixbuf_get_width (in_pixbuf);
-
+#if 10
+        double scale = size;
+        if (width > height) scale /= width;
+        else scale /= height;
+        if (fabs(1.0 - scale) > 0.01) 
+        {
+             out_pixbuf = gdk_pixbuf_scale_simple (in_pixbuf, scale * width, scale * height,
+                 GDK_INTERP_HYPER);
+            g_object_ref(out_pixbuf);
+            g_object_unref(in_pixbuf);
+            return out_pixbuf;
+       }
+#else
         // this is to fix paper size previews for text files and pdfs
         if((width < height && height != size) || 
             (width >= height && width != size)) 
@@ -812,6 +821,7 @@ private:
             g_object_unref(in_pixbuf);
             return out_pixbuf;
         } 
+#endif
         return in_pixbuf;
     }
 

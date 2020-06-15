@@ -11,11 +11,13 @@
 # warning "PREFIX not defined: defaulting to /usr/local"
 #define PREFIX "/usr/local"
 #endif
+#define MAX_PIXBUF_SIZE 400
 
 namespace xf
 {
 template <class Type> class Preview;
 template <class Type> class Fm;
+template <class Type> class Gtk;
 
 static GThread *self;
 static GtkIconTheme *icon_theme=NULL;
@@ -104,20 +106,28 @@ class Pixbuf {
     }
 
 public:
-/*
-    static void
-    setImageSize(gint pixels){ 
-    if (pixels < 48) {
-        imageSize = 48;
-        return;
-    }
-    if (pixels > 800) return;
-    imageSize = pixels;
-    }
 
-    static gint
-    getImageSize(void) {return imageSize;}
-*/
+    static GdkPixbuf *
+    getPreview(const gchar *iconName, const gchar *mimetype, struct stat *st_p = NULL)
+    {
+        GdkPixbuf *pixbuf = NULL;
+        auto isImage = Gtk<Type>::isImage(mimetype, TRUE);
+        //if (!isImage) isImage = isZipThumbnailed(iconName);
+        auto isGs =  (strstr(mimetype, "pdf") 
+                || strstr(mimetype, "postscript"));
+        if (isImage && !isGs) {
+            pixbuf = 
+                Pixbuf<Type>::getImageAtSize(iconName, PREVIEW_IMAGE_SIZE, 
+                        mimetype, st_p);
+        } else {
+            pixbuf = 
+                Preview<Type>::previewDefault(iconName, mimetype, st_p);
+        }
+        if (!pixbuf){
+            DBG("getPreview(): cannot get pixbuf for %s\n",iconName);
+        }
+        return pixbuf;
+    }
 
     static GdkPixbuf *
     getImageAtSize(const gchar *iconName, gint pixels,
@@ -178,6 +188,9 @@ public:
             return NULL;
         }
         if (height <= 24) return getPixbuf("image-x-generic", -height);
+
+
+
         if (thumbnailOK(iconName, height, st_p)){
             auto pixbuf = 
             PixbufHash<Type>::find_in_pixbuf_hash(iconName, height);
@@ -261,12 +274,94 @@ private:
         g_free(thumbnailPath);
    }
 
+#ifdef HAVE_ZIP_H
+    static
+    GdkPixbuf *
+    zipThumbnail(const gchar *path){
+        TRACE("creating zip preview for %s\n",path);
+        gint errorp;
+        auto zf = zip_open(path, ZIP_RDONLY, &errorp);
+        if (!zf) {
+            return NULL;
+        }
+        struct zip_stat sb;
+        if(zip_stat (zf, "Thumbnails/thumbnail.png", 0, &sb) != 0) {
+            zip_close (zf);
+            return NULL;
+        }
+        GdkPixbuf *pixbuf = NULL;
+        void *ptr = calloc(1,sb.size);
+        if (!ptr) g_error("calloc: %s", strerror(errno));
+        struct zip_file *f = zip_fopen (zf, "Thumbnails/thumbnail.png", 0);
+       
+        zip_fread (f, ptr, sb.size);
+        zip_fclose (f);
+        zip_close (zf);
+        gchar *base = g_path_get_basename(path);
+        gchar *fname = g_strdup_printf("%s/%d-%s.png",
+                g_get_tmp_dir(), getuid(), base);
+        g_free(base);
+        gint fd=creat(fname, S_IRUSR | S_IWUSR);
+        if (fd >= 0){
+            if (write(fd, ptr, sb.size) < 0){
+                DBG("could not write to %s\n", fname);
+            }
+            close(fd);
+        }
+        if (g_file_test(fname, G_FILE_TEST_EXISTS)){
+            GError *error = NULL;
+            pixbuf = gdk_pixbuf_new_from_file (fname, &error);
+            if (error){
+                DBG("pixbuf.hh::gdk_pixbuf_new_from_file(): %s\n", error->message);
+                pixbuf=NULL;
+                g_error_free(error);
+            }
+            unlink(fname);
+        }    
+        g_free(fname);
+
+        g_free(ptr);
+        return pixbuf;
+    }
+#endif
+    
+    
+
 public:
+    static gboolean
+    isZipThumbnailed(const gchar *path){
+#ifdef HAVE_ZIP_H
+        gint errorp;
+        auto zf = zip_open(path, ZIP_RDONLY, &errorp);
+        if (!zf) {
+            return FALSE;
+        }
+        auto f = zip_fopen(zf, "Thumbnails/thumbnail.png", 0);
+        gboolean retval;
+        if (f){
+            retval = TRUE;
+            zip_fclose(f);
+        } else retval = FALSE;
+        zip_close(zf);
+        return retval;
+#endif
+        return FALSE;
+    }
+
     static GdkPixbuf *
     buildImagePixbuf(const gchar *path, gint height){
         GError *error = NULL;
         GdkPixbuf *pixbuf = NULL;
-        pixbuf = gdk_pixbuf_new_from_file (path, &error);
+        if (isZipThumbnailed(path)) {
+            pixbuf = zipThumbnail(path);
+        } else {
+            pixbuf = gdk_pixbuf_new_from_file (path, &error);
+            if (error){
+                DBG("pixbuf.hh::gdk_pixbuf_new_from_file(): %s\n", error->message);
+                pixbuf=NULL;
+                g_error_free(error);
+            }
+        }
         auto pixbufWidth = gdk_pixbuf_get_width(pixbuf);
         auto pixbufHeight = gdk_pixbuf_get_height(pixbuf);
             
