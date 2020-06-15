@@ -558,6 +558,19 @@ private:
 
 
 private:
+
+    static GdkPixbuf *
+    processTextPixbuf(const gchar *text, const gchar *path, gint pixels){
+        if(!text) return NULL;
+        void *arg[]={
+            (void *)text,
+            (void *)path,
+            GINT_TO_POINTER(pixels)
+        };
+        auto pixbuf = (GdkPixbuf *)Util<Type>::context_function(text_preview_f, (void *)arg);
+        return pixbuf;
+    }
+
     static GdkPixbuf *
     textPreview (const gchar *path, gint pixels) {
 
@@ -570,22 +583,36 @@ private:
         } else {
             text = readFileHead(path);
         }
+
         if(!text) return NULL;
         if (!strchr(text, '\n')){
             gchar *t = g_strconcat(text,"\n",NULL);
             g_free(text);
             text = t;
         }
-        void *arg[]={
-            (void *)text,
-            (void *)path,
-            GINT_TO_POINTER(pixels)
-        };
-        auto pixbuf = (GdkPixbuf *)Util<Type>::context_function(text_preview_f, (void *)arg);
+
+        auto pixbuf = processTextPixbuf(text, path, pixels);
         g_free(text);
-        return pixbuf;
+        return pixbuf;        
     }
 
+public:  
+#ifdef UNZIP_PROGRAM
+    static GdkPixbuf *
+    zipPreview (const gchar *path, gint pixels) {
+        auto command = g_strdup_printf("%s -l \"%s\"", UNZIP_PROGRAM, path);
+        gchar *text = Util<Type>::pipeCommandFull(command);
+        g_free(command);
+        // limit output to one page...
+        if(!text) return NULL;
+
+        auto pixbuf = processTextPixbuf(text, path, pixels);
+        g_free(text);
+        return pixbuf;        
+    }
+#endif
+    
+private:
     static gchar *
     convertToUtf8(gchar *inputText, gchar *encoding){
         if(encoding && (!strstr (encoding, "utf-8") || !strstr (encoding, "UTF-8"))) {

@@ -181,7 +181,7 @@ private:
         rootPopUp = popup->menu();
 
         auto text = g_strdup_printf("Xffm+-%s", VERSION);
-        popup->changeTitle(text, NULL);
+        popup->changeTitle(text, XFFM_ICON);
         g_free(text);
         return rootPopUp;        
     }  
@@ -223,7 +223,7 @@ private:
         rootItemPopUp = popup->menu();
 
         auto text = g_strdup_printf("Xffm+-%s", VERSION);
-        popup->changeTitle(text, NULL);
+        popup->changeTitle(text, XFFM_ICON);
         g_free(text);
         
         return rootItemPopUp;

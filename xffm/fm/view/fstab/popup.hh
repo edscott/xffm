@@ -25,7 +25,7 @@ class FstabPopUp {
 
         auto popup = new(Popup<Type>)(item);
         fstabPopUp = popup->menu();
-        popup->changeTitle(_("Disk Image Mounter"), NULL);
+        popup->changeTitle(_("Disk Image Mounter"), FSTAB_ICON);
  
         return fstabPopUp;        
     }  

@@ -531,10 +531,18 @@ private:
         if (!entry->mimetype) entry->mimetype = Mime<Type>::mimeMagic(entry->path);
     
         GdkPixbuf *pixbuf;
-        if (Pixbuf<Type>::isZipThumbnailed(entry->path)) {
-            pixbuf = Pixbuf<Type>::buildImagePixbuf(entry->path, PREVIEW_IMAGE_SIZE);
-        } else {
+        if (Pixbuf<Type>::isZip(entry->path)){
+            pixbuf = Preview<Type>::zipPreview(entry->path, PREVIEW_IMAGE_SIZE);
+            if (pixbuf && Pixbuf<Type>::isZipThumbnailed(entry->path)) {
+                auto thumb = Pixbuf<Type>::buildImagePixbuf(entry->path, 192);
+                pixbuf = Cairo<Type>::insertPixbuf(pixbuf, thumb, "SE");
+            }
+        }
+        else {
             pixbuf = Pixbuf<Type>::getPreview(entry->path, entry->mimetype, &(entry->st));
+        }
+        if (!pixbuf){
+            auto iconName = LocalIcons<Type>::getIcon(entry->path, 192);
         }
     
         auto image = gtk_image_new_from_pixbuf(pixbuf);

@@ -71,63 +71,63 @@ public:
     {
         auto e = (GdkEventMotion *)ev;
         auto event = (GdkEventButton  *)ev;
-	auto view = (View<Type> *)data;
+        auto view = (View<Type> *)data;
         if (!data) {
             ERROR("fm/base/signals.hh::motion_notify_event: data cannot be NULL\n");
             return FALSE;
         }
-	   
-	if (abs(e->x - motionX) > 5 || abs(e->y - motionY) > 5 )noMotion=FALSE;
+           
+        if (abs(e->x - motionX) > 5 || abs(e->y - motionY) > 5 )noMotion=FALSE;
 
         if (buttonPressX >= 0 && buttonPressY >= 0){
-	    TRACE("buttonPressX >= 0 && buttonPressY >= 0\n");
-	    if (sqrt(pow(e->x - buttonPressX,2) + pow(e->y - buttonPressY, 2)) > 10){
-		GList *selectionList;
+            TRACE("buttonPressX >= 0 && buttonPressY >= 0\n");
+            if (sqrt(pow(e->x - buttonPressX,2) + pow(e->y - buttonPressY, 2)) > 10){
+                GList *selectionList;
                 view->selectables();
-		if (isTreeView) {
-		    auto selection = gtk_tree_view_get_selection (view->treeView());
-		    auto treeModel = view->treeModel();
-		    selectionList = gtk_tree_selection_get_selected_rows (selection, &treeModel);
-		} else {
-		    selectionList = gtk_icon_view_get_selected_items (view->iconView());
-		}
+                if (isTreeView) {
+                    auto selection = gtk_tree_view_get_selection (view->treeView());
+                    auto treeModel = view->treeModel();
+                    selectionList = gtk_tree_selection_get_selected_rows (selection, &treeModel);
+                } else {
+                    selectionList = gtk_icon_view_get_selected_items (view->iconView());
+                }
                 view->setSelectionList(selectionList);
                 if (selectionList==NULL) {
                     return FALSE;
                 }
-	        // start DnD (multiple selection)
-		dragOn_ = TRUE;
-		// in control mode, reselect item at x,y
-		if(!isTreeView && controlMode) {
-		    GtkTreePath * tpath;
-		    if (gtk_icon_view_get_item_at_pos (GTK_ICON_VIEW(widget),
+                // start DnD (multiple selection)
+                dragOn_ = TRUE;
+                // in control mode, reselect item at x,y
+                if(!isTreeView && controlMode) {
+                    GtkTreePath * tpath;
+                    if (gtk_icon_view_get_item_at_pos (GTK_ICON_VIEW(widget),
                                    buttonPressX, buttonPressY,
                                    &tpath, NULL)) {
-		    gtk_icon_view_select_path (view->iconView(), tpath);
-		    gtk_tree_path_free(tpath);
-		    }
+                    gtk_icon_view_select_path (view->iconView(), tpath);
+                    gtk_tree_path_free(tpath);
+                    }
 
-		}
+                }
 
                 if (!targets) targets= gtk_target_list_new (targetTable,TARGETS);
 
-		context =
-		    gtk_drag_begin_with_coordinates (view->source(),
-			     targets,
-			     (GdkDragAction)(((gint)GDK_ACTION_MOVE)|
+                context =
+                    gtk_drag_begin_with_coordinates (view->source(),
+                             targets,
+                             (GdkDragAction)(((gint)GDK_ACTION_MOVE)|
                    ((gint)GDK_ACTION_COPY)|
                    ((gint)GDK_ACTION_LINK)), //GdkDragAction actions,
-			     1, //gint button,
-			     (GdkEvent *)event, //GdkEvent *event,
-			     event->x, event->y);
+                             1, //gint button,
+                             (GdkEvent *)event, //GdkEvent *event,
+                             event->x, event->y);
                              
-		buttonPressX = buttonPressY = -1;
+                buttonPressX = buttonPressY = -1;
                 //g_object_ref(G_OBJECT(context)); 
-	    }
+            }
         }
 
-	// XXX: Why this limitation?
-	//      Because it really slows highlight down
+        // XXX: Why this limitation?
+        //      Because it really slows highlight down
         // if (view_p->get_dir_count() > 500) return FALSE;
         view->highlight(e->x, e->y);
 
@@ -141,7 +141,7 @@ public:
                    gpointer   data)
     {
         gint longPressCount;
-	auto view = (View<Type> *)data;
+        auto view = (View<Type> *)data;
         pthread_mutex_lock(&longPressMutex);
             longPressCount = longPressTime;
             longPressTime = -1;
@@ -158,41 +158,41 @@ public:
         //GdkEventButton *event_button = (GdkEventButton *)event;
         if (!dragOn_){
 
-	    if (rubberBand_) {
+            if (rubberBand_) {
                 view->selectables();
-		return FALSE;
-	    }
+                return FALSE;
+            }
 
-	    auto tpath = getTpath(view, event);
-	    if (!tpath){
-		TRACE("!getTpath(): button down cancelled.\n");
-		return TRUE;
-	    }
+            auto tpath = getTpath(view, event);
+            if (!tpath){
+                TRACE("!getTpath(): button down cancelled.\n");
+                return TRUE;
+            }
 
-	    //Cancel DnD prequel.
-	    buttonPressX = buttonPressY = -1;
-	    dragOn_ = FALSE;
-	    if (dragMode) { // copy/move/link mode
-		return TRUE;
-	    }
-	    // default mode:
-	    if (CONTROL_MODE) return TRUE;
-	    unselectAll(data);
-	    reSelect(data, tpath);
+            //Cancel DnD prequel.
+            buttonPressX = buttonPressY = -1;
+            dragOn_ = FALSE;
+            if (dragMode) { // copy/move/link mode
+                return TRUE;
+            }
+            // default mode:
+            if (CONTROL_MODE) return TRUE;
+            unselectAll(data);
+            reSelect(data, tpath);
 
-	    TRACE("Here we do a call to activate item.\n");
-	    for (auto popup=popUpArray; popup && *popup; popup++){
-		g_object_set_data(G_OBJECT(*popup), "baseModel", (void *)view);
-		g_object_set_data(G_OBJECT(*popup), "view", (void *)view);
-	    }
-	    activate(tpath, data);
-	    gtk_tree_path_free(tpath);
-	    return TRUE;
+            TRACE("Here we do a call to activate item.\n");
+            for (auto popup=popUpArray; popup && *popup; popup++){
+                g_object_set_data(G_OBJECT(*popup), "baseModel", (void *)view);
+                g_object_set_data(G_OBJECT(*popup), "view", (void *)view);
+            }
+            activate(tpath, data);
+            gtk_tree_path_free(tpath);
+            return TRUE;
         }
 
-	buttonPressX = buttonPressY = -1;
+        buttonPressX = buttonPressY = -1;
         dragOn_ = FALSE;
-	
+        
         dragMode = 0;
         view->selectables();
         return FALSE;
@@ -200,52 +200,52 @@ public:
 
     static GtkTreePath *
     getTpath(gpointer data, GdkEventButton  *event){
-	auto view = (View<Type> *)data;
+        auto view = (View<Type> *)data;
         GtkTreePath *tpath = NULL;
         if (isTreeView){
            if (!gtk_tree_view_get_path_at_pos (view->treeView(), 
-		       event->x, event->y, &tpath, NULL, NULL, NULL))
-	   {
+                       event->x, event->y, &tpath, NULL, NULL, NULL))
+           {
                tpath = NULL;
            }
         } else {
             if (!gtk_icon_view_get_item_at_pos (view->iconView(), 
-			event->x, event->y, &tpath,NULL)) 
-	    {
+                        event->x, event->y, &tpath,NULL)) 
+            {
                tpath = NULL;
             }
-	}
+        }
         return tpath;
     }
 
     static void 
     unselectAll(gpointer data){
-	auto view = (View<Type> *)data;
-	// unselect everything
-	if (isTreeView){
-	    auto selection = 
-	    gtk_tree_view_get_selection (view->treeView());
-	    gtk_tree_selection_unselect_all (selection);
-	} else {
-	    gtk_icon_view_unselect_all (view->iconView());
-	    
-	}
+        auto view = (View<Type> *)data;
+        // unselect everything
+        if (isTreeView){
+            auto selection = 
+            gtk_tree_view_get_selection (view->treeView());
+            gtk_tree_selection_unselect_all (selection);
+        } else {
+            gtk_icon_view_unselect_all (view->iconView());
+            
+        }
     }
 
     static void 
     reSelect(gpointer data, GtkTreePath *tpath){
-	auto view = (View<Type> *)data;
-	if (!tpath) return;
+        auto view = (View<Type> *)data;
+        if (!tpath) return;
         if (!view->isSelectable(tpath))return;
-	// reselect item to activate
-	;
-	if (isTreeView){
-	    auto selection = 
-		gtk_tree_view_get_selection (view->treeView());
-	    gtk_tree_selection_select_path (selection, tpath);
-	} else {
-	    gtk_icon_view_select_path (view->iconView(),tpath);
-	}
+        // reselect item to activate
+        ;
+        if (isTreeView){
+            auto selection = 
+                gtk_tree_view_get_selection (view->treeView());
+            gtk_tree_selection_select_path (selection, tpath);
+        } else {
+            gtk_icon_view_select_path (view->iconView(),tpath);
+        }
     }
 
     static void 
@@ -302,14 +302,15 @@ public:
         TRACE("Base::signals::button press event: button 3 should do popup, as well as longpress...\n");
         gchar *itemLabel = NULL;
         gchar *itemPath = NULL;
+        GdkPixbuf *pixbuf = NULL;
         GList *selectionList;
-	if (isTreeView) {
-	    auto selection = gtk_tree_view_get_selection (view->treeView());
-	    auto treeModel = view->treeModel();
-	    selectionList = gtk_tree_selection_get_selected_rows (selection, &treeModel);
-	} else {
-	    selectionList = gtk_icon_view_get_selected_items (view->iconView());
-	}
+        if (isTreeView) {
+            auto selection = gtk_tree_view_get_selection (view->treeView());
+            auto treeModel = view->treeModel();
+            selectionList = gtk_tree_selection_get_selected_rows (selection, &treeModel);
+        } else {
+            selectionList = gtk_icon_view_get_selected_items (view->iconView());
+        }
         view->setSelectionList(selectionList);
         if (selectionList && g_list_length(selectionList) == 1) {
             GtkTreeIter iter;
@@ -317,65 +318,72 @@ public:
                     (GtkTreePath *)selectionList->data);
             gtk_tree_model_get(view->treeModel(), &iter, PATH, &itemPath, -1);
             gtk_tree_model_get(view->treeModel(), &iter, DISPLAY_NAME, &itemLabel, -1);
-	}
-	//if (!path) path = g_strdup(view->path());
+            gtk_tree_model_get(view->treeModel(), &iter, DISPLAY_PIXBUF, &pixbuf, -1);
+        }
+        //if (!path) path = g_strdup(view->path());
         
         TRACE("Base::signals::setItemPath: selected path is %s\n", itemPath);
 
         auto items = (g_list_length(selectionList) >0);
-        auto menu = configureMenu(view, items, itemPath?itemPath:view->path());
-	TRACE("menu is %p\n", menu);
-        g_object_set_data(G_OBJECT(menu),"view", (void *)view);
-	TRACE("g_object_set_data %p->%p\n", menu, view);
-        TRACE("**Base::signals::setItemPath: selected path is %s\n", itemPath);
-	Popup<Type>::setWidgetData(menu, "itemPath", itemPath?itemPath:view->path());
-	Popup<Type>::setWidgetData(menu, "itemLabel", itemLabel?itemLabel:view->path());
+        
+        auto menu = getItemsMenu(view);
+        TRACE("object %p pixbuf=%p\n", menu, pixbuf);
+        g_object_set_data(G_OBJECT(menu),"pixbuf", pixbuf);
 
-	g_free(itemPath);
+        menu = configureMenu(view, items, itemPath?itemPath:view->path());
+        TRACE("menu is %p\n", menu);
+            
+        g_object_set_data(G_OBJECT(menu),"view", (void *)view);
+        TRACE("g_object_set_data %p->%p\n", menu, view);
+        TRACE("**Base::signals::setItemPath: selected path is %s\n", itemPath);
+        Popup<Type>::setWidgetData(menu, "itemPath", itemPath?itemPath:view->path());
+        Popup<Type>::setWidgetData(menu, "itemLabel", itemLabel?itemLabel:view->path());
+
+        g_free(itemPath);
         return menu; 
     }
 
     static GtkMenu *
     setPopupSelection(GdkEventButton  *event, gpointer data){
         TRACE("setPopupSelection\n");
-	auto view = (View<Type> *)data;
+        auto view = (View<Type> *)data;
         if (SHIFT_MODE) {
-	    TRACE("SHIFT_MODE button 3\n");
-	    unselectAll(data);  
-	    return NULL;
-	}
+            TRACE("SHIFT_MODE button 3\n");
+            unselectAll(data);  
+            return NULL;
+        }
         GtkTreePath *tpath = getTpath(data, event);
-	// If item is not selected, unselect all and select item.
-	// Skip unselect all in CONTROL_MODE
+        // If item is not selected, unselect all and select item.
+        // Skip unselect all in CONTROL_MODE
         if (tpath && view->isSelectable(tpath)){
-	    if (isTreeView){
-		auto selection = 
-		    gtk_tree_view_get_selection (view->treeView());
-		    GtkTreeIter iter;
-		    gtk_tree_model_get_iter(view->treeModel(), &iter, tpath);
-		    if (!gtk_tree_selection_iter_is_selected (selection, &iter)
-			    && !CONTROL_MODE){
-			gtk_tree_selection_unselect_all (selection);
-		    }
-		    gtk_tree_selection_select_path (selection, tpath);
-	    } else {
-		if (!gtk_icon_view_path_is_selected (view->iconView(), tpath)
-			&& !CONTROL_MODE ) {
-		   gtk_icon_view_unselect_all (view->iconView());
-		}
-		gtk_icon_view_select_path (view->iconView(), tpath);
-	    }
+            if (isTreeView){
+                auto selection = 
+                    gtk_tree_view_get_selection (view->treeView());
+                    GtkTreeIter iter;
+                    gtk_tree_model_get_iter(view->treeModel(), &iter, tpath);
+                    if (!gtk_tree_selection_iter_is_selected (selection, &iter)
+                            && !CONTROL_MODE){
+                        gtk_tree_selection_unselect_all (selection);
+                    }
+                    gtk_tree_selection_select_path (selection, tpath);
+            } else {
+                if (!gtk_icon_view_path_is_selected (view->iconView(), tpath)
+                        && !CONTROL_MODE ) {
+                   gtk_icon_view_unselect_all (view->iconView());
+                }
+                gtk_icon_view_select_path (view->iconView(), tpath);
+            }
 
-	    
-	}
-	if (tpath) gtk_tree_path_free(tpath);
+            
+        }
+        if (tpath) gtk_tree_path_free(tpath);
         return setItemPath(view);
     }
 
     static gboolean doPopupMenu(GdkEventButton  *event, gpointer data){
         gtk_widget_hide(GTK_WIDGET(xf::popupImage));
-	auto menu = setPopupSelection(event, data);
-	if (menu) gtk_menu_popup_at_pointer (menu, (const GdkEvent *)event);
+        auto menu = setPopupSelection(event, data);
+        if (menu) gtk_menu_popup_at_pointer (menu, (const GdkEvent *)event);
 
         return isTreeView;
     }
@@ -386,11 +394,11 @@ public:
                    GdkEventButton  *event,
                    gpointer   data)
     {
-	noMotion=TRUE;
-	motionX = event->x;
-	motionY = event->y;
-	
-	if (ignoreClick) return TRUE;
+        noMotion=TRUE;
+        motionX = event->x;
+        motionY = event->y;
+        
+        if (ignoreClick) return TRUE;
         ignoreClick = TRUE; // don't process another click until this one is done.
         auto view = (View<Type> *)data;
         buttonPressX = buttonPressY = -1;
@@ -401,32 +409,32 @@ public:
             pthread_mutex_lock(&longPressMutex);
             longPressTime = 0;
             pthread_mutex_unlock(&longPressMutex);
-	    
+            
             pthread_t longPressThread; 
             
-	    pthread_create (&longPressThread, NULL, longPressCheck_f, NULL);
-	    pthread_detach(longPressThread);
+            pthread_create (&longPressThread, NULL, longPressCheck_f, NULL);
+            pthread_detach(longPressThread);
             
-	    controlMode = FALSE;
+            controlMode = FALSE;
             gint mode = 0;
             tpath = getTpath(data, event);
-	    dragMode = 0; // default (move)
+            dragMode = 0; // default (move)
             if (tpath == NULL){ 
-		rubberBand_ = TRUE;
+                rubberBand_ = TRUE;
                 ignoreClick = FALSE;
-		dragOn_ = TRUE;
+                dragOn_ = TRUE;
                 return FALSE;
             } else {
-		buttonPressX = event->x;
-		buttonPressY = event->y;
-		rubberBand_ = FALSE;
+                buttonPressX = event->x;
+                buttonPressY = event->y;
+                rubberBand_ = FALSE;
 
                 if (CONTROL_MODE && SHIFT_MODE) dragMode = -3; // link mode
-	        else if (CONTROL_MODE) dragMode = -2; // copy
+                else if (CONTROL_MODE) dragMode = -2; // copy
                 else if (SHIFT_MODE)   dragMode = -1; // move
 
                 if (CONTROL_MODE){ 
-	            controlMode = TRUE;
+                    controlMode = TRUE;
                     controlSelect(view, tpath);
                     ignoreClick = FALSE;
                     return TRUE;
@@ -436,16 +444,16 @@ public:
                     viewShiftSelect(view, tpath);
                     ignoreClick = FALSE;
                     return TRUE;
-		}
+                }
 
-		if (isTreeView){
-		    auto selection = gtk_tree_view_get_selection (view->treeView());
-		} else {
-		    
-		}
-		unselectAll(data);
+                if (isTreeView){
+                    auto selection = gtk_tree_view_get_selection (view->treeView());
+                } else {
+                    
+                }
+                unselectAll(data);
                 reSelect(data, tpath);
-		gtk_tree_path_free(tpath);
+                gtk_tree_path_free(tpath);
             }
             ignoreClick = FALSE;
             return TRUE;
@@ -459,19 +467,19 @@ public:
         }
         auto result = doPopupMenu(event, data);
         ignoreClick = FALSE;
-	return result;
+        return result;
     }
     
     static void
     viewShiftSelect(View<Type> *view, GtkTreePath *tpath){
         // select all items in interval
-	GList * items;
+        GList * items;
         GtkTreeSelection *selection;
         if (isTreeView) {
             selection = gtk_tree_view_get_selection (view->treeView());
-	    gtk_tree_selection_select_path (selection, tpath);
-	    auto treeModel = view->treeModel();
-	    items = gtk_tree_selection_get_selected_rows (selection, &treeModel);
+            gtk_tree_selection_select_path (selection, tpath);
+            auto treeModel = view->treeModel();
+            items = gtk_tree_selection_get_selected_rows (selection, &treeModel);
         } else {
             gtk_icon_view_select_path (view->iconView(), tpath);
             items = gtk_icon_view_get_selected_items (view->iconView());
@@ -523,7 +531,7 @@ public:
         TRACE("loop %d -> %d\n", start, end);
         
         if (isTreeView){
-	    gtk_tree_selection_unselect_all (selection);
+            gtk_tree_selection_unselect_all (selection);
         } else {
             gtk_icon_view_unselect_all (view->iconView());
         }
@@ -551,61 +559,61 @@ public:
     
     static GtkMenu *
     configureMenu(View<Type> *view, gboolean items, const gchar *itemPath){
-	TRACE("configureMenu\n" );
-	GtkMenu *menu;
-	if (items) {
-	    menu = getItemsMenu(view);
-	    Popup<Type>::setWidgetData(menu, "path", view->path());
-	    Popup<Type>::setWidgetData(menu, "itemPath", itemPath);
-	    configureItemsMenu(view->viewType());
-	} else {
-	    menu =  getViewMenu(view);
-	    Popup<Type>::setWidgetData(menu, "path", view->path());
-	    Popup<Type>::setWidgetData(menu, "itemPath", itemPath);
-	    configureViewMenu(view->viewType());
-	}
+        TRACE("configureMenu\n" );
+        GtkMenu *menu;
+        if (items) {
+            menu = getItemsMenu(view);
+            Popup<Type>::setWidgetData(menu, "path", view->path());
+            Popup<Type>::setWidgetData(menu, "itemPath", itemPath);
+            configureItemsMenu(view->viewType());
+        } else {
+            menu =  getViewMenu(view);
+            Popup<Type>::setWidgetData(menu, "path", view->path());
+            Popup<Type>::setWidgetData(menu, "itemPath", itemPath);
+            configureViewMenu(view->viewType());
+        }
 
-	return menu;
+        return menu;
     }
     static GtkMenu *
     getItemsMenu(View<Type> *view){
-	gint viewType = view->viewType();
-	TRACE("getItemsMenu\n" );
-	GtkMenu *menu;
+        gint viewType = view->viewType();
+        TRACE("getItemsMenu\n" );
+        GtkMenu *menu;
         switch (viewType){
             case (ROOTVIEW_TYPE):
-		    menu = RootPopUp<Type>::popUpItem(); 
+                    menu = RootPopUp<Type>::popUpItem(); 
                 break;
             case (LOCALVIEW_TYPE):
-		    menu = LocalPopUp<Type>::popUpItem();
+                    menu = LocalPopUp<Type>::popUpItem();
                 break;
 #ifdef ENABLE_FSTAB_MODULE
             case (FSTAB_TYPE):
-		    menu =  FstabPopUp<Type>::popUpItem();
+                    menu =  FstabPopUp<Type>::popUpItem();
                 break;
             case (EFS_TYPE):
                 break;
 #endif
 #ifdef ENABLE_PKG_MODULE
             case (PKG_TYPE):
-		    menu =  PkgPopUp<Type>::popUpItem(); 
+                    menu =  PkgPopUp<Type>::popUpItem(); 
                 break;
 #endif
 
             default:
                 ERROR("fm/base/signals.hh::getItemsMenu() ViewType %d not defined.\n", viewType);
-		menu = RootPopUp<Type>::popUp(); 
+                menu = RootPopUp<Type>::popUp(); 
                 break;
         }
-	TRACE("menu = %p\n", menu);
-	g_object_set_data(G_OBJECT(menu),"view", view);
+        TRACE("menu = %p\n", menu);
+        g_object_set_data(G_OBJECT(menu),"view", view);
         return menu;
     }
 
     static void
     configureItemsMenu(gint viewType){
-	TRACE("configureItemsMenu\n" );
-	GtkMenu *menu;
+        TRACE("configureItemsMenu\n" );
+        GtkMenu *menu;
         switch (viewType){
             case (ROOTVIEW_TYPE):
                     RootPopUp<Type>::resetMenuItems();
@@ -636,37 +644,37 @@ public:
 
     static GtkMenu *
     getViewMenu(View<Type> *view){
-	gint viewType = view->viewType();
-	TRACE("getViewMenu\n" );
-	GtkMenu *menu;
+        gint viewType = view->viewType();
+        TRACE("getViewMenu\n" );
+        GtkMenu *menu;
         switch (viewType){
             case (ROOTVIEW_TYPE):
-		    menu = RootPopUp<Type>::popUp();
+                    menu = RootPopUp<Type>::popUp();
                 break;
             case (LOCALVIEW_TYPE):
-		    menu = LocalPopUp<Type>::popUp();
+                    menu = LocalPopUp<Type>::popUp();
                 break;
 #ifdef ENABLE_FSTAB_MODULE
             case (FSTAB_TYPE):
-		    menu = FstabPopUp<Type>::popUp();
+                    menu = FstabPopUp<Type>::popUp();
                 break;
 #endif
 #ifdef ENABLE_PKG_MODULE
             case (PKG_TYPE):
-		    menu = PkgPopUp<Type>::popUp();
+                    menu = PkgPopUp<Type>::popUp();
                 break;
 #endif
             default:
-		menu = RootPopUp<Type>::popUp(); 
+                menu = RootPopUp<Type>::popUp(); 
                 ERROR("fm/base/signals.hh::getViewMenu() ViewType %d not defined.\n", viewType);
                 break;
         }
-	g_object_set_data(G_OBJECT(menu),"view", view);
+        g_object_set_data(G_OBJECT(menu),"view", view);
         return menu;
     }
     static void
     configureViewMenu(gint viewType){
-	TRACE("configureViewMenu\n" );
+        TRACE("configureViewMenu\n" );
         switch (viewType){
             case (ROOTVIEW_TYPE):
                     RootPopUp<Type>::resetPopup();
@@ -722,7 +730,7 @@ public:
         // Get activated path.
         auto view = (View<Type> *)data;
 
-	gchar *path;
+        gchar *path;
         GtkTreeIter iter;
         auto treeModel = view->treeModel();
         if (!gtk_tree_model_get_iter (treeModel, &iter, (GtkTreePath *)tpath)){
@@ -732,19 +740,19 @@ public:
         GdkPixbuf *normal_pixbuf;
 
         gtk_tree_model_get (treeModel, &iter, PATH, &path, -1);
-	
+        
         TRACE("base-signals::activate: %s\n", path);
-	if (!view->loadModel(treeModel, tpath, path)){
+        if (!view->loadModel(treeModel, tpath, path)){
             TRACE("base-signals:activate():cannot load %s\n", path);
         }
-	g_free(path);
+        g_free(path);
     }
 
     // DnD highlight only:
     static void
     highlight(GtkTreePath *tpath, gpointer data){
         GtkTreeIter iter;
-	auto baseModel = (BaseModel<Type> *)data;
+        auto baseModel = (BaseModel<Type> *)data;
         if (!isTreeView && baseModel->items() > 260){ 
             gtk_icon_view_set_drag_dest_item(baseModel->iconView(), NULL, GTK_ICON_VIEW_DROP_INTO);
             if (tpath == NULL) {
@@ -765,12 +773,12 @@ public:
             return; 
         }     
         gchar *tree_path_string = NULL;
-	if (isTreeView) {
-	    gtk_tree_view_set_drag_dest_row (baseModel->treeView(),
+        if (isTreeView) {
+            gtk_tree_view_set_drag_dest_row (baseModel->treeView(),
                                  tpath,GTK_TREE_VIEW_DROP_INTO_OR_AFTER);
-	}
+        }
         if (tpath == NULL){
-	    //static gint count=0;
+            //static gint count=0;
             // No item at position?
             // Do we need to clear hash table?
             TRACE("highlight clear_highlights %d\n", count++);
@@ -781,9 +789,9 @@ public:
 
         // Already highlighted?
         tree_path_string = gtk_tree_path_to_string (tpath);
-	// no more use for tpath...
+        // no more use for tpath...
         gtk_tree_path_free (tpath);
-	if (g_hash_table_lookup(highlight_hash, tree_path_string)) {
+        if (g_hash_table_lookup(highlight_hash, tree_path_string)) {
             //TRACE("%s already in hash\n", tree_path_string);
             g_free (tree_path_string);
             return;
@@ -841,26 +849,26 @@ public:
    }
     
     static gboolean validBaseView(BaseModel<Type> *baseModel) {
-	return GPOINTER_TO_INT(g_hash_table_lookup(validBaseViewHash, (void *)baseModel));
+        return GPOINTER_TO_INT(g_hash_table_lookup(validBaseViewHash, (void *)baseModel));
     }
     
     static gint
     getViewType(const gchar *path){
-	TRACE("getViewType: %s\n", path);
+        TRACE("getViewType: %s\n", path);
         if (!path) return ROOTVIEW_TYPE;
         if (g_file_test(path, G_FILE_TEST_EXISTS)) return (LOCALVIEW_TYPE);
         if (strcmp(path, "/dev/disks")==0) return (LOCALVIEW_TYPE);
-	if (g_path_is_absolute(path)){
-	    gchar *m;
-	    if (strstr(path,"/.local/share/Trash")) {
-		m = g_strdup(_("Trash is empty"));
-	    } else {
-		m = g_strdup_printf("%s: %s\n",_("Directory does not exist."), path); 
-	    }
-	    Dialogs<Type>::quickHelp(mainWindow, m, "dialog-error");
-	    ERROR("fm/base/signals.hh::getViewType: %s\n",m);
-	    g_free(m);
-	}
+        if (g_path_is_absolute(path)){
+            gchar *m;
+            if (strstr(path,"/.local/share/Trash")) {
+                m = g_strdup(_("Trash is empty"));
+            } else {
+                m = g_strdup_printf("%s: %s\n",_("Directory does not exist."), path); 
+            }
+            Dialogs<Type>::quickHelp(mainWindow, m, "dialog-error");
+            ERROR("fm/base/signals.hh::getViewType: %s\n",m);
+            g_free(m);
+        }
         if (strcmp(path, "xffm:local")==0) return (LOCALVIEW_TYPE);
         if (strcmp(path, "xffm:root")==0) return (ROOTVIEW_TYPE);
         if (strcmp(path, "xffm:fstab")==0) return (FSTAB_TYPE);
@@ -869,7 +877,7 @@ public:
         if (strcmp(path, "xffm:cifs")==0) return (CIFS_TYPE);
         if (strncmp(path, "xffm:pkg", strlen("xffm:pkg"))==0) return (PKG_TYPE);
         if (EFS<Type>::isEFS(path)) return (EFS_TYPE);
-	
+        
         ERROR("fm/base/signals.hh::getViewType() %s not defined.\n", path);
         return (-1);
     }
@@ -889,31 +897,31 @@ public:
     DragMotion (GtkWidget * widget, 
             GdkDragContext * dc, gint dragX, gint dragY, 
             guint t, gpointer data) {
-	static gboolean highlighted = FALSE;
-	auto view = (View<Type> *)data;
+        static gboolean highlighted = FALSE;
+        auto view = (View<Type> *)data;
         TRACE("signal_drag_motion\n");
         gtk_widget_hide(GTK_WIDGET(xf::popupImage));
 
         GtkTreePath *tpath;
                                         
         gint actions = gdk_drag_context_get_actions(dc);
-	TRACE("motion_notify_event, dragmode= %d\n", actions);
-	const gchar *dragIcon = "text-x-generic/SE/edit-redo/4.0/220";
-	
+        TRACE("motion_notify_event, dragmode= %d\n", actions);
+        const gchar *dragIcon = "text-x-generic/SE/edit-redo/4.0/220";
+        
         if(actions == GDK_ACTION_MOVE){
             gdk_drag_status (dc, GDK_ACTION_MOVE, t);
-	} else if(actions == GDK_ACTION_COPY){
+        } else if(actions == GDK_ACTION_COPY){
             gdk_drag_status (dc, GDK_ACTION_COPY, t);
-	    dragIcon = "text-x-generic/SE/list-add/4.0/220";
-	} else if(actions == GDK_ACTION_LINK){
+            dragIcon = "text-x-generic/SE/list-add/4.0/220";
+        } else if(actions == GDK_ACTION_LINK){
             gdk_drag_status (dc, GDK_ACTION_LINK, t);
-	    dragIcon = "text-x-generic/SE/emblem-symbolic-link/4.0/220";
-	}else{
+            dragIcon = "text-x-generic/SE/emblem-symbolic-link/4.0/220";
+        }else{
             gdk_drag_status (dc, GDK_ACTION_MOVE, t);
-	}
+        }
 
-	GdkPixbuf *pixbuf = Pixbuf<Type>::getPixbuf(dragIcon, -24);
-	if (GDK_IS_DRAG_CONTEXT(context)) gtk_drag_set_icon_pixbuf (context, pixbuf,1,24);
+        GdkPixbuf *pixbuf = Pixbuf<Type>::getPixbuf(dragIcon, -24);
+        if (GDK_IS_DRAG_CONTEXT(context)) gtk_drag_set_icon_pixbuf (context, pixbuf,1,24);
             
         gboolean folderDND = FALSE;
         auto viewDragY = dragY - dragOffset(widget);
@@ -928,30 +936,30 @@ public:
                                             &tpath,
                                             NULL);
         }
-	if (!folderDND) {
-	    if (highlighted) {
-		highlighted=FALSE;
-		highlight(NULL, view);
-	    }
-	    return FALSE;
-	}
-	GtkTreeIter iter;
-	gtk_tree_model_get_iter (view->treeModel(), &iter, tpath);
-	gchar *g;
-	gtk_tree_model_get (view->treeModel(), &iter, PATH, &g, -1);
-	// drop into?
-	// must be a directory (XXX this is quite local stuff...)
-	if (g_file_test(g, G_FILE_TEST_IS_DIR)){
-	    TRACE("%s is directory\n", g);
-	    highlight(tpath, view);
-	    highlighted=TRUE;
-	} else if (highlighted) {
-	    highlighted=FALSE;
-	    highlight(NULL, view);
-	}
-	g_free(g);
-	// tree path reference is handled in highlight function...
-	    
+        if (!folderDND) {
+            if (highlighted) {
+                highlighted=FALSE;
+                highlight(NULL, view);
+            }
+            return FALSE;
+        }
+        GtkTreeIter iter;
+        gtk_tree_model_get_iter (view->treeModel(), &iter, tpath);
+        gchar *g;
+        gtk_tree_model_get (view->treeModel(), &iter, PATH, &g, -1);
+        // drop into?
+        // must be a directory (XXX this is quite local stuff...)
+        if (g_file_test(g, G_FILE_TEST_IS_DIR)){
+            TRACE("%s is directory\n", g);
+            highlight(tpath, view);
+            highlighted=TRUE;
+        } else if (highlighted) {
+            highlighted=FALSE;
+            highlight(NULL, view);
+        }
+        g_free(g);
+        // tree path reference is handled in highlight function...
+            
 
         return FALSE;
     }
@@ -968,7 +976,7 @@ public:
         
         //int drag_type;
 
-	auto view = (View<Type> *)data;
+        auto view = (View<Type> *)data;
         /* prepare data for the receiver */
         if (info != TARGET_URI_LIST) {
             ERROR("fm/base/signals.hh::signal_drag_data_send: invalid target");
@@ -1001,7 +1009,7 @@ public:
     static void
     DragBegin (GtkWidget * widget, GdkDragContext * context, gpointer data) {
         TRACE("signal_drag_begin\n");
-	auto view = (View<Type> *)data;
+        auto view = (View<Type> *)data;
         auto treeModel = view->treeModel();
         // Treeview or iconview?
         //  single or multiple item selected?
@@ -1030,7 +1038,7 @@ public:
 private:
     static gchar *
     getDnDTarget(View<Type> *view, gint dragX, gint viewDragY){
-	GtkTreeIter iter;
+        GtkTreeIter iter;
         gchar *target = NULL;
         GtkTreePath *tpath=NULL;
         if (isTreeView) {
@@ -1054,7 +1062,7 @@ private:
                                        dragX, viewDragY, &tpath, NULL))
             {
                 gtk_tree_model_get_iter (view->treeModel(), &iter, tpath);
-                gtk_tree_model_get (view->treeModel(), &iter, PATH, &target, -1);	
+                gtk_tree_model_get (view->treeModel(), &iter, PATH, &target, -1);        
                 TRACE("target1=%s\n", target);
                 if (!g_file_test(target, G_FILE_TEST_IS_DIR)){
                     g_free(target);
@@ -1080,7 +1088,7 @@ public:
                       guint time, 
                       gpointer data){
         TRACE( "DND>> signal_drag_data\n");
-	auto view = (View<Type> *)data;
+        auto view = (View<Type> *)data;
 
         // Treeview or iconview?
         GdkDragAction action = gdk_drag_context_get_selected_action(context);
@@ -1119,7 +1127,7 @@ public:
         
         
         auto dndData = (const char *)gtk_selection_data_get_data (selection_data);
-	TRACE("dndData = \"\n%s\"\n", dndData);
+        TRACE("dndData = \"\n%s\"\n", dndData);
         
         switch (view->viewType()) {
             case (LOCALVIEW_TYPE):
@@ -1147,7 +1155,7 @@ public:
     signal_drag_end (GtkWidget * widget, GdkDragContext * context, gpointer data) {
         TRACE("signal_drag_end\n");
         
-	auto view = (View<Type> *)data;
+        auto view = (View<Type> *)data;
 
         dragMode = 0;
       
@@ -1203,8 +1211,8 @@ public:
                    GdkEventButton  *event,
                    gpointer   data)
     {
-	//auto view = (View<Type> *)data;
-	TRACE("no action on button_click_f\n");
+        //auto view = (View<Type> *)data;
+        TRACE("no action on button_click_f\n");
         return FALSE;
     }
 

@@ -18,6 +18,7 @@ namespace xf
 template <class Type> class Preview;
 template <class Type> class Fm;
 template <class Type> class Gtk;
+template <class Type> class LocalIcons;
 
 static GThread *self;
 static GtkIconTheme *icon_theme=NULL;
@@ -27,82 +28,82 @@ template <class Type>
 class Pixbuf {
     static void
     init(void){
-    TRACE("Calling Pixbuf initializer...buildicons=%s\n", buildIcons);
-    pixbuf_mutex = PTHREAD_MUTEX_INITIALIZER;
-    icon_theme = gtk_icon_theme_get_default ();
-    if (!icon_theme){
-        TRACE("cannot get default icon theme!\n");
-        icon_theme = gtk_icon_theme_new();
-        //throw 1;
-    }
-
-    self = g_thread_self();
-    auto resource_path = g_build_filename(PREFIX, "share", "icons", "xffm+", NULL);
-    if (g_file_test(resource_path, G_FILE_TEST_IS_DIR)) {
-        gtk_icon_theme_add_resource_path (icon_theme,resource_path);
-    }
-    
-    if (buildIcons && g_file_test(buildIcons, G_FILE_TEST_IS_DIR)){
-        TRACE("adding resource path:%s\n", buildIcons);
-        gtk_icon_theme_add_resource_path (icon_theme,buildIcons);
-    } else buildIcons = NULL;
-
-    // This works, but icons should be fixed size. 
-    // Scalable vector graphics dont work, last time I checked...
-    // Icons should be in the "symbolic" internal gtk name format (hack...)
-    // This is mandatory for non icon-themed boxes (which is not the usual setup).
-        const gchar *subdirs[] = {
-            "scalable",
-            "96x96",
-            "48x48",
-            "24x24",
-            "16x16",
-            NULL
-        };
-        for (auto p=subdirs; p && *p; p++){
-            auto path = g_build_filename(resource_path, *p, NULL);
-        gtk_icon_theme_append_search_path (icon_theme, path);
-        g_free(path);
+        TRACE("Calling Pixbuf initializer...buildicons=%s\n", buildIcons);
+        pixbuf_mutex = PTHREAD_MUTEX_INITIALIZER;
+        icon_theme = gtk_icon_theme_get_default ();
+        if (!icon_theme){
+            TRACE("cannot get default icon theme!\n");
+            icon_theme = gtk_icon_theme_new();
+            //throw 1;
         }
-        if (buildIcons) for (auto p=subdirs; p && *p; p++){
-            auto path = g_build_filename(buildIcons, *p, NULL);
-        gtk_icon_theme_append_search_path (icon_theme, path);
-        TRACE("appending icon search path: %s (%d)\n", path, g_file_test(path,G_FILE_TEST_IS_DIR));
 
-        g_free(path);
+        self = g_thread_self();
+        auto resource_path = g_build_filename(PREFIX, "share", "icons", "xffm+", NULL);
+        if (g_file_test(resource_path, G_FILE_TEST_IS_DIR)) {
+            gtk_icon_theme_add_resource_path (icon_theme,resource_path);
+        }
         
-        }
+        if (buildIcons && g_file_test(buildIcons, G_FILE_TEST_IS_DIR)){
+            TRACE("adding resource path:%s\n", buildIcons);
+            gtk_icon_theme_add_resource_path (icon_theme,buildIcons);
+        } else buildIcons = NULL;
+
+        // This works, but icons should be fixed size. 
+        // Scalable vector graphics dont work, last time I checked...
+        // Icons should be in the "symbolic" internal gtk name format (hack...)
+        // This is mandatory for non icon-themed boxes (which is not the usual setup).
+            const gchar *subdirs[] = {
+                "scalable",
+                "96x96",
+                "48x48",
+                "24x24",
+                "16x16",
+                NULL
+            };
+            for (auto p=subdirs; p && *p; p++){
+                auto path = g_build_filename(resource_path, *p, NULL);
+            gtk_icon_theme_append_search_path (icon_theme, path);
+            g_free(path);
+            }
+            if (buildIcons) for (auto p=subdirs; p && *p; p++){
+                auto path = g_build_filename(buildIcons, *p, NULL);
+            gtk_icon_theme_append_search_path (icon_theme, path);
+            TRACE("appending icon search path: %s (%d)\n", path, g_file_test(path,G_FILE_TEST_IS_DIR));
+
+            g_free(path);
+            
+            }
 #if 0
-    // xffm+ svg icons are at:
-    path = g_build_filename(PREFIX, "share", "icons", "xffm+", "scalable", "stock", NULL);
-    gtk_icon_theme_prepend_search_path (icon_theme, path);
-    g_free(path);
-    path = g_build_filename(PREFIX, "share", "icons", "xffm+", "scalable", "emblems", NULL);
-    gtk_icon_theme_prepend_search_path (icon_theme, path);
-    g_free(path);
+        // xffm+ svg icons are at:
+        path = g_build_filename(PREFIX, "share", "icons", "xffm+", "scalable", "stock", NULL);
+        gtk_icon_theme_prepend_search_path (icon_theme, path);
+        g_free(path);
+        path = g_build_filename(PREFIX, "share", "icons", "xffm+", "scalable", "emblems", NULL);
+        gtk_icon_theme_prepend_search_path (icon_theme, path);
+        g_free(path);
 #endif
-    g_free(resource_path);
+        g_free(resource_path);
     }
 
     static gint
     get_pixel_size(gint size){
-    gint pixels = 24;
-    switch (size){
-        case GTK_ICON_SIZE_MENU:          // Size appropriate for menus (16px).
-        case GTK_ICON_SIZE_SMALL_TOOLBAR: // Size appropriate for small toolbars (16px).
-        case GTK_ICON_SIZE_BUTTON:        // Size appropriate for buttons (16px)
-        pixels = 16; break;
-        case GTK_ICON_SIZE_LARGE_TOOLBAR: // Size appropriate for large toolbars (24px)
-        pixels = 24; break;
-        case GTK_ICON_SIZE_DND:           // Size appropriate for drag and drop (32px)
-        pixels = 32; break;
-        case GTK_ICON_SIZE_DIALOG:        // Size appropriate for dialogs (48px)
-        pixels = 48; break;
-        default: 
-        if (size < 0) pixels = abs(size);
-        break;
-    }
-    return pixels;
+        gint pixels = 24;
+        switch (size){
+            case GTK_ICON_SIZE_MENU:          // Size appropriate for menus (16px).
+            case GTK_ICON_SIZE_SMALL_TOOLBAR: // Size appropriate for small toolbars (16px).
+            case GTK_ICON_SIZE_BUTTON:        // Size appropriate for buttons (16px)
+            pixels = 16; break;
+            case GTK_ICON_SIZE_LARGE_TOOLBAR: // Size appropriate for large toolbars (24px)
+            pixels = 24; break;
+            case GTK_ICON_SIZE_DND:           // Size appropriate for drag and drop (32px)
+            pixels = 32; break;
+            case GTK_ICON_SIZE_DIALOG:        // Size appropriate for dialogs (48px)
+            pixels = 48; break;
+            default: 
+            if (size < 0) pixels = abs(size);
+            break;
+        }
+        return pixels;
     }
 
 public:
@@ -122,6 +123,11 @@ public:
         } else {
             pixbuf = 
                 Preview<Type>::previewDefault(iconName, mimetype, st_p);
+        }
+        if (!pixbuf){
+            auto icon = LocalIcons<Type>::getBasicIconname(iconName, mimetype);
+            TRACE("getPreview(): !pixbuf for %s.. retry with %s\n", iconName, icon);
+            pixbuf = Pixbuf<Type>::getPixbuf(icon, -192);
         }
         if (!pixbuf){
             DBG("getPreview(): cannot get pixbuf for %s\n",iconName);
@@ -344,6 +350,18 @@ public:
         } else retval = FALSE;
         zip_close(zf);
         return retval;
+#endif
+        return FALSE;
+    }
+    static gboolean
+    isZip(const gchar *path){
+#ifdef HAVE_ZIP_H
+        gint errorp;
+        auto zf = zip_open(path, ZIP_RDONLY, &errorp);
+        if (!zf) {
+            return FALSE;
+        }
+        return TRUE;
 #endif
         return FALSE;
     }

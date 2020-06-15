@@ -267,7 +267,7 @@ public:
     }
 
     static void 
-    menu_item_content(GtkMenuItem *menuItem, const gchar *icon_id, const gchar *text, gint size){
+    menu_item_content(GtkMenuItem *menuItem, GdkPixbuf *pixbuf, const gchar *text){
         auto image = GTK_IMAGE(g_object_get_data(G_OBJECT(menuItem), "image"));
         auto label = GTK_LABEL(g_object_get_data(G_OBJECT(menuItem), "label"));
         auto box = (GtkBox *)g_object_get_data(G_OBJECT(menuItem), "box");
@@ -275,9 +275,8 @@ public:
         box = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0));
         g_object_set_data(G_OBJECT(menuItem), "box", box);
 
-        GdkPixbuf *pb = (icon_id)? Pixbuf<Type>::getPixbuf (icon_id, size): NULL;    
-        if (pb){
-            image = GTK_IMAGE(gtk_image_new_from_pixbuf (pb));
+        if (pixbuf){
+            image = GTK_IMAGE(gtk_image_new_from_pixbuf (pixbuf));
             gtk_widget_show (GTK_WIDGET(image));
             gtk_box_pack_start(box, GTK_WIDGET(image), FALSE,FALSE,0);
             g_object_set_data(G_OBJECT(menuItem), "image", image);
@@ -289,6 +288,13 @@ public:
         g_object_set_data(G_OBJECT(menuItem), "label", label);
         gtk_widget_show(GTK_WIDGET(box));
         gtk_container_add(GTK_CONTAINER(menuItem), GTK_WIDGET(box));
+        return;
+    }
+
+    static void 
+    menu_item_content(GtkMenuItem *menuItem, const gchar *icon_id, const gchar *text, gint size){
+        GdkPixbuf *pixbuf = (icon_id)? Pixbuf<Type>::getPixbuf (icon_id, size): NULL;    
+        menu_item_content(menuItem, pixbuf, text);
         return;
     }
     static GtkWidget * 

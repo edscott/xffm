@@ -31,7 +31,7 @@ class PkgPopUp {
             {NULL,NULL,NULL, FALSE}};
         auto popup = new(Popup<Type>)(item);
         pkgPopUp = popup->menu();
-        popup->changeTitle( _("Software Updater"), NULL);
+        popup->changeTitle( _("Software Updater"), PKG_ICON);
 
         return pkgPopUp;        
     }  
