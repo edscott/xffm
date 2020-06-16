@@ -25,13 +25,13 @@ class MimeSuffix {
     static const gchar *
     lookupBySuffix(const gchar *file, const gchar *sfx){
         gchar *key;
-	if (sfx) key = g_strdup(sfx);
-	else key = g_path_get_basename (file);
-	// duplicate suffix?
-	auto constantType = (const gchar *)g_hash_table_lookup (mimeHashSfx, key);
+        if (sfx) key = g_strdup(sfx);
+        else key = g_path_get_basename (file);
+        // duplicate suffix?
+        auto constantType = (const gchar *)g_hash_table_lookup (mimeHashSfx, key);
         g_free (key);
         if (constantType) return constantType;
-	return NULL;
+        return NULL;
     }
 
     static void
@@ -53,7 +53,7 @@ class MimeSuffix {
                 if (strchr(x[1], '\n')) *(strchr(x[1], '\n')) = 0;
                 if (strncmp(x[1], "*.", strlen("*."))==0) offset = strlen("*.");
                 const gchar *key = x[1]+offset;
-		add2sfx_hash(key,x[0]);
+                add2sfx_hash(key,x[0]);
                 g_strfreev(x);
             }
             fclose(input);
@@ -93,18 +93,18 @@ class MimeSuffix {
             fclose(input);
         } else ERROR("Cannot open %s\n", FREEDESKTOP_ALIAS);
 /*
-	// FIXME: break the following code into routines...
-	// mimetype registered applications...
-	// /usr/share/applications
-	// /usr/local/share/applications
-	const gchar *directories[] = {
-	    "/usr/share/applications",
-	    "/usr/local/share/applications"
-	};
-	for (int i=0; i<2; i++) {
-	    processApplicationDir(directories[i]);
-	}
-	
+        // FIXME: break the following code into routines...
+        // mimetype registered applications...
+        // /usr/share/applications
+        // /usr/local/share/applications
+        const gchar *directories[] = {
+            "/usr/share/applications",
+            "/usr/local/share/applications"
+        };
+        for (int i=0; i<2; i++) {
+            processApplicationDir(directories[i]);
+        }
+        
  */
             
     }
@@ -113,27 +113,27 @@ public:
 
     static void
     add2sfx_hash(const gchar *key, const gchar *value){
-	// single line function access from outside.
-	if (!mimeHashSfx) mimeBuildHashes();
-	g_hash_table_replace (mimeHashSfx, g_strdup(key), g_strdup(value));
+        // single line function access from outside.
+        if (!mimeHashSfx) mimeBuildHashes();
+        g_hash_table_replace (mimeHashSfx, g_strdup(key), g_strdup(value));
     }
 
     static const gchar *
     mimeIcon (const gchar *file){
         const gchar *retval = locate_icon(file);
         if (retval) {
-	    TRACE("locate_icon: %s --> %s\n", file, retval);
+            TRACE("locate_icon: %s --> %s\n", file, retval);
         }
-	return retval;
+        return retval;
    } 
 
     static gchar *
     getBasicType(const gchar *mimetype) {
-	gchar *retval;
+        gchar *retval;
         const gchar *alias = (const gchar *)g_hash_table_lookup (mimeHashAlias, mimetype);
         if (alias) retval = g_strdup(alias);
-	else retval = g_strdup(mimetype);
-	return retval;
+        else retval = g_strdup(mimetype);
+        return retval;
     }
 
     static const gchar *
@@ -145,7 +145,7 @@ public:
         }
         TRACE("mime-module, locate_icon looking in icon hash for \"%s\"\n", mimetype);
         
-	const gchar *basicType = getBasicType(mimetype);
+        const gchar *basicType = getBasicType(mimetype);
         icon = (const gchar *)g_hash_table_lookup (mimeHashIcon, mimetype);
 
         if (!icon){
@@ -162,22 +162,22 @@ public:
     mimeType (const gchar * file) {
     //extensionMimeType (const gchar * file) {
         const gchar *type = NULL;
-	gchar *p;
+        gchar *p;
         if (!mimeHashSfx) {
-	    mimeBuildHashes();
-	    if (!mimeHashSfx) {
-		ERROR("!mimeHashSfx\n");
-		return NULL;
-	    }
+            mimeBuildHashes();
+            if (!mimeHashSfx) {
+                ERROR("!mimeHashSfx\n");
+                return NULL;
+            }
         }
         TRACE("mime-module, extensionMimeType looking in sfx hash for \"%s\"\n", file);
 
-	
+        
         ///  look in sfx hash...
         gchar *basename = g_path_get_basename (file);
         if (strchr (basename, '.')) p = strchr (basename, '.');
         else {
-	    // no file extension.
+            // no file extension.
             return NULL;
         }
         // Right to left:
@@ -191,7 +191,7 @@ public:
             sfx = g_utf8_strdown (p, -1);
             TRACE("mime-module, lOOking for \"%s\" with key=%s\n", sfx, key);
 
-	    type = lookupBySuffix(NULL, sfx);
+            type = lookupBySuffix(NULL, sfx);
             if(type) {
                 TRACE("mime-module(2), FOUND %s: %s\n", sfx, type);
                 g_free (sfx);
@@ -207,7 +207,7 @@ public:
             gchar *sfx;
             /* try all lower case (hash table keys are set this way) */
             sfx = g_utf8_strdown (*q_p, -1);
-	    type = lookupBySuffix(NULL, sfx);
+            type = lookupBySuffix(NULL, sfx);
             if(type) {
                 TRACE("mime-module(3), FOUND %s: %s\n", sfx, type);
                 g_free (sfx);

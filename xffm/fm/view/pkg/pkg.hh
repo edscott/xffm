@@ -31,50 +31,50 @@ template <class Type>
 class Pkg {
     static void
     addCacheItem(GtkTreeModel *treeModel){
- 	GtkTreeIter iter;
-	// Home
-	auto name = g_get_home_dir();
-	auto icon_name = "folder/SE/" PKG_EMBLEM "/2.0/225";
-	auto highlight_name = "folder/NE/document-open/2.0/225";
+         GtkTreeIter iter;
+        // Home
+        auto name = g_get_home_dir();
+        auto icon_name = "folder/SE/" PKG_EMBLEM "/2.0/225";
+        auto highlight_name = "folder/NE/document-open/2.0/225";
         auto treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -24);
-	auto normal_pixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -48);
-	auto highlight_pixbuf = Pixbuf<Type>::getPixbuf(highlight_name,  -48);   
+        auto normal_pixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -48);
+        auto highlight_pixbuf = Pixbuf<Type>::getPixbuf(highlight_name,  -48);   
 
-	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
-	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
-		DISPLAY_NAME, "cache",
+        gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
+        gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
+                DISPLAY_NAME, "cache",
                 PATH, "/var/cache/pkg",
-		ICON_NAME, icon_name,
+                ICON_NAME, icon_name,
                 TREEVIEW_PIXBUF, treeViewPixbuf, 
-		DISPLAY_PIXBUF, normal_pixbuf,
-		NORMAL_PIXBUF, normal_pixbuf,
-		HIGHLIGHT_PIXBUF, highlight_pixbuf,
-		TOOLTIP_TEXT,"/var/cache/pkg",
-		-1);
+                DISPLAY_PIXBUF, normal_pixbuf,
+                NORMAL_PIXBUF, normal_pixbuf,
+                HIGHLIGHT_PIXBUF, highlight_pixbuf,
+                TOOLTIP_TEXT,"/var/cache/pkg",
+                -1);
     }
 
     static void
     addPortsItem(GtkTreeModel *treeModel){
- 	GtkTreeIter iter;
-	// Home
-	auto name = g_get_home_dir();
-	auto icon_name = "folder/SE/" PKG_EMBLEM "/2.0/225";
-	auto highlight_name = "folder/NE/document-open/2.0/225";
+         GtkTreeIter iter;
+        // Home
+        auto name = g_get_home_dir();
+        auto icon_name = "folder/SE/" PKG_EMBLEM "/2.0/225";
+        auto highlight_name = "folder/NE/document-open/2.0/225";
         auto treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -24);
-	auto normal_pixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -48);
-	auto highlight_pixbuf = Pixbuf<Type>::getPixbuf(highlight_name,  -48);   
+        auto normal_pixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -48);
+        auto highlight_pixbuf = Pixbuf<Type>::getPixbuf(highlight_name,  -48);   
 
-	gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
-	gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
-		DISPLAY_NAME, "ports",
+        gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
+        gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
+                DISPLAY_NAME, "ports",
                 PATH, "/usr/ports",
-		TOOLTIP_TEXT,"/usr/ports",
+                TOOLTIP_TEXT,"/usr/ports",
                 ICON_NAME, icon_name,
                 TREEVIEW_PIXBUF, treeViewPixbuf, 
-		DISPLAY_PIXBUF, normal_pixbuf,
-		NORMAL_PIXBUF, normal_pixbuf,
-		HIGHLIGHT_PIXBUF, highlight_pixbuf,
-		-1);
+                DISPLAY_PIXBUF, normal_pixbuf,
+                NORMAL_PIXBUF, normal_pixbuf,
+                HIGHLIGHT_PIXBUF, highlight_pixbuf,
+                -1);
     }
 
 public:
@@ -87,34 +87,34 @@ public:
 
     static GList *
     addSearchItems(GList *pkg_list, const gchar *line){  
-	if (!strchr(line,'\n')) return pkg_list;
-	auto path = g_strdup(line);
-	*(strchr(path,'\n'))=0;
-	g_strstrip(path);
-	pkg_list=g_list_prepend(pkg_list,path);
-	return pkg_list;
+        if (!strchr(line,'\n')) return pkg_list;
+        auto path = g_strdup(line);
+        *(strchr(path,'\n'))=0;
+        g_strstrip(path);
+        pkg_list=g_list_prepend(pkg_list,path);
+        return pkg_list;
     }
 
     static GList *
     addPackage(GList *pkg_list, const gchar *line)
     {
-	if (!strchr(line,'\n')) return pkg_list;
-	auto path = g_strdup(line);
-	*(strchr(path,'\n'))=0;
-	g_strstrip(path);
-	pkg_list=g_list_prepend(pkg_list,path);
-	return pkg_list;
+        if (!strchr(line,'\n')) return pkg_list;
+        auto path = g_strdup(line);
+        *(strchr(path,'\n'))=0;
+        g_strstrip(path);
+        pkg_list=g_list_prepend(pkg_list,path);
+        return pkg_list;
     }
 
     static gchar *
     getShortInfo(const gchar *line)
     {
-	TRACE("getShortInfo: %s\n", line);
-	if (!strchr(line,'\n')) return NULL;
-	auto path = g_strdup(line);
-	*(strchr(path,'\n'))=0;
-	g_strstrip(path);
-	return path;
+        TRACE("getShortInfo: %s\n", line);
+        if (!strchr(line,'\n')) return NULL;
+        auto path = g_strdup(line);
+        *(strchr(path,'\n'))=0;
+        g_strstrip(path);
+        return path;
     }
 
 };

@@ -16,14 +16,14 @@ public:
 
     static void
     dialog(GtkWindow *parent, const gchar *message, const gchar *icon){
-	dialogFull(parent, message, icon, -48, 3);
+        dialogFull(parent, message, icon, -48, 3);
     }
     static void
     dialogFull(GtkWindow *parent, const gchar *message, const gchar *icon, gint iconSize, gint delay){
-	// only one of these dialogs at a time...
-	if (timeoutDialog) return;
-	if (mainWindow && GTK_IS_WIDGET(mainWindow)) gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
-	
+        // only one of these dialogs at a time...
+        if (timeoutDialog) return;
+        if (mainWindow && GTK_IS_WIDGET(mainWindow)) gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
+        
         if (!icon) icon = "emblem-important";
         if (!message) message = "<span size=\"larger\" color=\"blue\">Custom message markup appears <span color=\"red\">here</span></span>";
          // Create the widgets
@@ -37,8 +37,8 @@ public:
          auto vbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
          gtk_container_add (GTK_CONTAINER (dialog), GTK_WIDGET(vbox));
          auto label = GTK_LABEL(gtk_label_new (""));
-	 auto markup = 
-	    g_strdup_printf("   <span color=\"blue\" size=\"larger\"><b>%s</b></span>   ", message);           
+         auto markup = 
+            g_strdup_printf("   <span color=\"blue\" size=\"larger\"><b>%s</b></span>   ", message);           
          gtk_label_set_markup(label, markup);
          g_free(markup);
          
@@ -54,32 +54,32 @@ public:
          gtk_box_pack_start(vbox, GTK_WIDGET(label), FALSE, FALSE,0);
          g_signal_connect (G_OBJECT (dialog), "delete-event", 
                  EVENT_CALLBACK (delete_event), NULL);
-	 auto button = Gtk<Type>::dialog_button("window-close", _("Dismiss"));
+         auto button = Gtk<Type>::dialog_button("window-close", _("Dismiss"));
          gtk_box_pack_start(vbox, GTK_WIDGET(button), FALSE, FALSE,0);
          g_signal_connect (G_OBJECT (button), "button-press-event", 
                  EVENT_CALLBACK (dismiss_event), dialog);
 
-	 gtk_window_set_type_hint(dialog, GDK_WINDOW_TYPE_HINT_DIALOG);
+         gtk_window_set_type_hint(dialog, GDK_WINDOW_TYPE_HINT_DIALOG);
          gtk_window_set_modal(dialog, TRUE);
          gtk_window_set_transient_for (dialog,GTK_WINDOW(mainWindow));
         
-	 gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER_ON_PARENT);
+         gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER_ON_PARENT);
          gtk_widget_show_all(GTK_WIDGET(dialog));
          time_t now = time(NULL);
-	 zap = FALSE;
-	 timeoutDialog = dialog;
+         zap = FALSE;
+         timeoutDialog = dialog;
          while (gtk_events_pending()) gtk_main_iteration();
          while (time(NULL) < now + delay && !zap) {
           //  while (gtk_events_pending()) gtk_main_iteration();
           //  usleep(100000);
          }
-	 
+         
 
 
          //void **arg = (void **)calloc(2, sizeof(void *));
          //g_timeout_add_seconds (4, zapit, (void *) dialog);
          zapit((void *)dialog);  
-	 timeoutDialog = NULL;
+         timeoutDialog = NULL;
 
          return;
     }
@@ -96,17 +96,17 @@ private:
     static gboolean dismiss_event (GtkWidget *widget,
                GdkEvent  *event,
                gpointer   data){
-	gtk_widget_hide(GTK_WIDGET(data));
-	zap = TRUE;
+        gtk_widget_hide(GTK_WIDGET(data));
+        zap = TRUE;
         //gtk_widget_destroy(GTK_WIDGET(dialog));
- 	return TRUE;
+         return TRUE;
     }       
     static gboolean delete_event (GtkWidget *widget,
                GdkEvent  *event,
                gpointer   data){
-	gtk_widget_hide(widget);
+        gtk_widget_hide(widget);
         //gtk_widget_destroy(GTK_WIDGET(dialog));
- 	return TRUE;
+         return TRUE;
     }
     
 };

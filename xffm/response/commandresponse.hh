@@ -87,7 +87,7 @@ public:
                 afterFunction // comand done function
                 );
         addPulse();
-	return ;	   
+        return ;           
     }
 /*
     CommandResponse(const gchar *message, const gchar *icon, const gchar *command):
@@ -95,7 +95,7 @@ public:
     {
         controllerPid_ = Run<Type>::thread_run(Fm<Type>::getCurrentTextview(),command, FALSE);
         addPulse();
-	return ;	
+        return ;        
     }
 */   
 private:
@@ -123,7 +123,7 @@ private:
             }
             pclose(pipe);
         }
-	TRACE("%s alive=%d\n", c, alive);
+        TRACE("%s alive=%d\n", c, alive);
         g_free(c);
         g_free(s);
         return (alive);
@@ -133,14 +133,14 @@ private:
     static gboolean pulse_f(void *data) {
         auto object = (CommandResponse<Type> *)data;
         auto progressBar = GTK_PROGRESS_BAR(object->progressBar());
-	if (!GTK_IS_PROGRESS_BAR(progressBar)){
-	    return FALSE;
-	}
+        if (!GTK_IS_PROGRESS_BAR(progressBar)){
+            return FALSE;
+        }
         gint pid = Tubo<Type>::getChild(object->controller());
-	if (!CommandResponse<Type>::isPidAlive(pid)){
+        if (!CommandResponse<Type>::isPidAlive(pid)){
             delete(object);
-	    return FALSE;
-	}
+            return FALSE;
+        }
         gtk_progress_bar_pulse(progressBar);
         return TRUE;
     }    

@@ -445,9 +445,9 @@ public:
                     break;
                 }
                 g_free(efsmount);
-		// This here will ask for passphrase before mounting:
+                // This here will ask for passphrase before mounting:
                 efs->mountUrl(view);
-		// 
+                // 
                 break;
             case GTK_RESPONSE_APPLY: // Save
                 efs->save();
@@ -616,7 +616,7 @@ public:
                 auto g = g_strconcat((retval)?retval:"",(retval)?",":"", p->flag, NULL);
                 g_free(retval);
                 retval=g;
-            }	
+            }        
         }
         return retval;
     }
@@ -709,7 +709,7 @@ public:
 
         auto textview = Fm<Type>::getCurrentTextview();
         Print<Type>::showTextSmall(textview);
-	auto command = g_strdup_printf(_("Mounting %s"), path);
+        auto command = g_strdup_printf(_("Mounting %s"), path);
  
         pthread_mutex_lock(&efsMountMutex);
         new (CommandResponse<Type>)(command,"system-run", argv, cleanupGo, (void *)view);
@@ -725,16 +725,16 @@ public:
    }
 
     static gboolean changeEfsItem(void *data){
-	auto view = (View<Type> *)data;
-	view->reloadModel();	
-	return G_SOURCE_REMOVE;
+        auto view = (View<Type> *)data;
+        view->reloadModel();        
+        return G_SOURCE_REMOVE;
     }
    
     static void 
     cleanupGo(void * data){
         pthread_mutex_unlock(&efsMountMutex);
-	// update icon emblem:
-	g_timeout_add(1000, changeEfsItem, data);
+        // update icon emblem:
+        g_timeout_add(1000, changeEfsItem, data);
     }
 
     static void *
@@ -801,7 +801,7 @@ public:
             TRACE("passfile=%s on try %d\n", passfile, try);
 
             fd = open (passfile, O_CREAT|O_TRUNC|O_RDWR, 0600);
-    //	fd = open (passfile, O_CREAT|O_TRUNC|O_RDWR|O_SYNC|O_DIRECT, 0600);
+    //        fd = open (passfile, O_CREAT|O_TRUNC|O_RDWR|O_SYNC|O_DIRECT, 0600);
             if (fd >= 0) {
                 if (write(fd, (void *)"passwd=", strlen("passwd=")) < 0){
                     DBG("write %s: %s\n", passfile, strerror(errno));

@@ -18,13 +18,13 @@ protected:
 public:
 
         ComboResponse (GtkWindow *parent, const gchar *windowTitle, const gchar *icon): EntryResponse<Type>(parent, windowTitle, icon) {
-	
+        
         combo_ = GTK_COMBO_BOX_TEXT(gtk_combo_box_text_new_with_entry());
         gtk_box_pack_start (GTK_BOX (this->hbox_), GTK_WIDGET(combo_), TRUE, TRUE, 0);
         g_object_set_data(G_OBJECT(combo_),"response", this->response_);
         auto entry = GTK_ENTRY(gtk_bin_get_child(GTK_BIN(combo_)));
-	g_signal_connect (G_OBJECT (entry), "key-press-event", G_CALLBACK (EntryResponse<Type>::progressReset), this->timeoutProgress_);
-	g_signal_connect (G_OBJECT (entry), "changed", G_CALLBACK (ComboResponse<Type>::progressReset), this->timeoutProgress_);
+        g_signal_connect (G_OBJECT (entry), "key-press-event", G_CALLBACK (EntryResponse<Type>::progressReset), this->timeoutProgress_);
+        g_signal_connect (G_OBJECT (entry), "changed", G_CALLBACK (ComboResponse<Type>::progressReset), this->timeoutProgress_);
 
         gtk_widget_set_can_focus (GTK_WIDGET(this->yes_), TRUE);
         gtk_widget_grab_focus(GTK_WIDGET(this->yes_));
@@ -82,7 +82,7 @@ public:
     void setCheckButtonComboCallback(void *clickAction){
         // Set the toggle action.
         g_signal_connect (G_OBJECT (this->checkButton()), "clicked", 
-		    BUTTON_CALLBACK(clickAction), 
+                    BUTTON_CALLBACK(clickAction), 
                     (void *)gtk_bin_get_child(GTK_BIN(combo_)));
         gtk_widget_show(GTK_WIDGET(this->checkButton()));
     }
@@ -90,7 +90,7 @@ public:
     void setComboCallback(void *changeAction){
         // Set the toggle action.
         g_signal_connect (G_OBJECT (combo_), "changed", 
-		    BUTTON_CALLBACK(changeAction), this);
+                    BUTTON_CALLBACK(changeAction), this);
         gtk_widget_show(GTK_WIDGET(this->checkButton()));
     }
 
@@ -103,13 +103,13 @@ public:
     runResponse(gint timeout){
         gint response = this->runResponseSetup(timeout);
         gchar *responseTxt = NULL;
-	if(response == GTK_RESPONSE_YES) {
+        if(response == GTK_RESPONSE_YES) {
             responseTxt = g_strdup (gtk_combo_box_text_get_active_text (combo_));
-	    if(responseTxt != NULL) g_strstrip (responseTxt);
-	}
+            if(responseTxt != NULL) g_strstrip (responseTxt);
+        }
         this->timeout(-1);
         
-	return responseTxt;
+        return responseTxt;
     }
  
 };

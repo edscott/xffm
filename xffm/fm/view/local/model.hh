@@ -101,7 +101,7 @@ public:
             view->page()->updateStatusLabel(text);
             while(gtk_events_pending())gtk_main_iteration();
             
-		    gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
+            gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
             return 0;
         }
         pthread_mutex_unlock(&previewMutex);

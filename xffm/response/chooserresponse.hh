@@ -22,7 +22,7 @@ class ChooserResponse {
                                                          NULL));
         gtk_file_chooser_set_action ((GtkFileChooser *) dialog, action);
 
-	auto wd = Fm<Type>::getCurrentDirectory(entry);
+        auto wd = Fm<Type>::getCurrentDirectory(entry);
         gtk_file_chooser_set_current_folder ((GtkFileChooser *) dialog, wd);
 
 
@@ -82,10 +82,10 @@ public:
     EntryChooser(GtkWindow *parent, const gchar *windowTitle, const gchar *icon, gboolean fileSelector=FALSE):
         EntryResponse<Type>(parent, windowTitle, icon)
     {
-	chooserButton_ = Gtk<Type>::dialog_button (fileSelector?"document-new-symbolic":"folder-symbolic", NULL);
-	gtk_box_pack_start (this->hbox_, GTK_WIDGET(chooserButton_), FALSE, FALSE, 0);
-	gtk_widget_show (GTK_WIDGET(this->entry()));
-	gtk_widget_show (GTK_WIDGET(chooserButton_));
+        chooserButton_ = Gtk<Type>::dialog_button (fileSelector?"document-new-symbolic":"folder-symbolic", NULL);
+        gtk_box_pack_start (this->hbox_, GTK_WIDGET(chooserButton_), FALSE, FALSE, 0);
+        gtk_widget_show (GTK_WIDGET(this->entry()));
+        gtk_widget_show (GTK_WIDGET(chooserButton_));
     }
 };
 
@@ -122,9 +122,9 @@ public:
     ComboChooser(GtkWindow *parent, const gchar *windowTitle, const gchar *icon, gboolean fileSelector=FALSE):
         ComboResponse<Type>(parent, windowTitle, icon)
     {
-	chooserButton_ = Gtk<Type>::dialog_button (fileSelector?"document-new-symbolic":"folder-symbolic", NULL);
-	gtk_box_pack_start (this->hbox_, GTK_WIDGET(chooserButton_), FALSE, FALSE, 0);
-	gtk_widget_show (GTK_WIDGET(chooserButton_));
+        chooserButton_ = Gtk<Type>::dialog_button (fileSelector?"document-new-symbolic":"folder-symbolic", NULL);
+        gtk_box_pack_start (this->hbox_, GTK_WIDGET(chooserButton_), FALSE, FALSE, 0);
+        gtk_widget_show (GTK_WIDGET(chooserButton_));
     }
 };
 
