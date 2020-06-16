@@ -17,13 +17,13 @@ public:
         gtk_icon_view_set_item_width (iconView, 60);
         gtk_icon_view_set_activate_on_single_click(iconView, TRUE);
 
- 	
-	g_object_set_data(G_OBJECT(view->treeModel()), "iconview", iconView); //do we really need this?
-	gtk_icon_view_set_model(iconView, view->treeModel());
+         
+        g_object_set_data(G_OBJECT(view->treeModel()), "iconview", iconView); //do we really need this?
+        gtk_icon_view_set_model(iconView, view->treeModel());
 
-	gtk_icon_view_set_text_column (iconView, DISPLAY_NAME);
-	gtk_icon_view_set_pixbuf_column (iconView,  DISPLAY_PIXBUF);
-	gtk_icon_view_set_selection_mode (iconView, GTK_SELECTION_SINGLE);
+        gtk_icon_view_set_text_column (iconView, DISPLAY_NAME);
+        gtk_icon_view_set_pixbuf_column (iconView,  DISPLAY_PIXBUF);
+        gtk_icon_view_set_selection_mode (iconView, GTK_SELECTION_SINGLE);
         setUpSignals(view, G_OBJECT(iconView));
        
         return iconView;

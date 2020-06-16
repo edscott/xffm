@@ -213,10 +213,10 @@ public:
             
         // The main fork
         pid_t PID = fork ();
-	if (PID < 0) {
-	    fprintf(stderr, "fork(): %s\n", strerror(errno));
-	    return PID;
-	}
+        if (PID < 0) {
+            fprintf(stderr, "fork(): %s\n", strerror(errno));
+            return PID;
+        }
         newfork->PID = PID;
         if(PID == 0) { /* the child */
             controller(newfork, 1, instance, parent);
@@ -429,10 +429,10 @@ private:
         if (fork_p->flags & TUBO_VALID_ANSI) {
             if (!validAnsiSequence(line)){
                 ERROR( "*** Tubo: Received !validAnsiSequence\n");
-		ERROR("Sending SIGTERM to child process (flags & TUBO_REAP_CHILD==TRUE)\n");
+                ERROR("Sending SIGTERM to child process (flags & TUBO_REAP_CHILD==TRUE)\n");
                 // send child TERM signal: SIGUSR1 gets 
                 // translated to SIGTERM for grandchild
-                kill (fork_p->grandchild, SIGTERM); 	    
+                kill (fork_p->grandchild, SIGTERM);             
                 // ignore data
                 return TRUE;
             }
@@ -639,7 +639,7 @@ private:
         }
             
         TRACE( "grandchildPID fork... \n");
-        grandchildPID = fork ();  	
+        grandchildPID = fork ();          
         if(grandchildPID == 0) {
                 TRACE("grandchild here... \n");
             if (forked) {

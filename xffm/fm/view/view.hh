@@ -43,14 +43,14 @@ class View:
     BaseMonitor<Type> *monitorObject_; // public to switch treemodel...
     GList *history;
     static void pushHistory(View<Type> *view, const gchar *path){
-	if (view->history){
-	    if (strcmp((gchar *)view->history->data, path) == 0){
-		TRACE("%s already in history.\n", path);
-		return;
-	    }
-	} 
-	view->history = g_list_prepend(view->history, g_strdup(path));
-	TRACE("pushed %s\n", path);
+        if (view->history){
+            if (strcmp((gchar *)view->history->data, path) == 0){
+                TRACE("%s already in history.\n", path);
+                return;
+            }
+        } 
+        view->history = g_list_prepend(view->history, g_strdup(path));
+        TRACE("pushed %s\n", path);
     } 
 public:
     /*gint items(void){ 
@@ -62,36 +62,36 @@ public:
         this->treeView_ = TreeView<Type>::createTreeview(this);
         this->applyColors();
         monitorObject_ = NULL;
-	history = NULL;
+        history = NULL;
     }
 
     ~View(void){
         TRACE("View destructor.\n");
-	for (auto l=history; l && l->data; l=l->next){
-	    g_free(l->data);
-	}
-	g_list_free(history);
+        for (auto l=history; l && l->data; l=l->next){
+            g_free(l->data);
+        }
+        g_list_free(history);
     }
 
     void goBack(void){
-	gchar *back;
-	if (this->history){
-	    auto current = (gchar *)this->history->data;
-	    TRACE("current=%s\n", current);
-	    this->history = g_list_remove(this->history, this->history->data);
-	    g_free(current);
-	    if (!this->history) back = g_strdup("xffm:root");
-	    else {
-		back = (gchar *)this->history->data;
-		TRACE("back=%s\n", back);
-		this->history = g_list_remove(this->history, this->history->data);
-	    }
-	} else {
-	    back = g_strdup("xffm:root");
-	    TRACE("history empty: back=%s\n", back);
-	}
-	loadModel(back);
-	g_free(back);
+        gchar *back;
+        if (this->history){
+            auto current = (gchar *)this->history->data;
+            TRACE("current=%s\n", current);
+            this->history = g_list_remove(this->history, this->history->data);
+            g_free(current);
+            if (!this->history) back = g_strdup("xffm:root");
+            else {
+                back = (gchar *)this->history->data;
+                TRACE("back=%s\n", back);
+                this->history = g_list_remove(this->history, this->history->data);
+            }
+        } else {
+            back = g_strdup("xffm:root");
+            TRACE("history empty: back=%s\n", back);
+        }
+        loadModel(back);
+        g_free(back);
     }
     
     void
@@ -114,41 +114,41 @@ public:
 
 
     void disableMonitor(void){
-	if (monitorObject_) monitorObject_->setActive(FALSE);
-	std::this_thread::yield();
+        if (monitorObject_) monitorObject_->setActive(FALSE);
+        std::this_thread::yield();
     }
 
     
     gboolean loadModel(const gchar *path){
-	// This sets viewType
+        // This sets viewType
         TRACE("loadModel(%s)\n", path);
-	return loadModel(path, this);
+        return loadModel(path, this);
     }
     gboolean loadModel(const gchar *path, View<Type> *view){
         TRACE("loadModel(%s, view)\n", path);
-	pushHistory(view, path);
-	// This sets viewType
+        pushHistory(view, path);
+        // This sets viewType
         if (isTreeView){
-	    // hide iconview, show treeview
-	    gtk_widget_hide(GTK_WIDGET(view->page()->topScrolledWindow()));
-	    gtk_widget_show(GTK_WIDGET(view->page()->treeScrolledWindow()));
-	} else {
-	    // hide treeview, show iconview
-	    gtk_widget_hide(GTK_WIDGET(view->page()->treeScrolledWindow()));
-	    gtk_widget_show(GTK_WIDGET(view->page()->topScrolledWindow()));
-	}
+            // hide iconview, show treeview
+            gtk_widget_hide(GTK_WIDGET(view->page()->topScrolledWindow()));
+            gtk_widget_show(GTK_WIDGET(view->page()->treeScrolledWindow()));
+        } else {
+            // hide treeview, show iconview
+            gtk_widget_hide(GTK_WIDGET(view->page()->treeScrolledWindow()));
+            gtk_widget_show(GTK_WIDGET(view->page()->topScrolledWindow()));
+        }
 
-	auto type = BaseSignals<Type>::getViewType(path);
-	if (type < 0) return FALSE;
+        auto type = BaseSignals<Type>::getViewType(path);
+        if (type < 0) return FALSE;
 
         auto wait = g_strdup_printf(_("Loading %s...%s"), path, _("Please Wait..."));
-	view->page()->updateStatusLabel(wait);
-	g_free(wait);
-	
-	while(gtk_events_pending())gtk_main_iteration();
+        view->page()->updateStatusLabel(wait);
+        g_free(wait);
+        
+        while(gtk_events_pending())gtk_main_iteration();
         view->setViewType(type);
         view->setPath(path);
-	view->disableMonitor();
+        view->disableMonitor();
         // stop current monitor
        /* if (view->monitorObject_) {
             delete (view->monitorObject_);
@@ -167,15 +167,15 @@ public:
                     view->monitorObject_ = NULL;
                 }
 
-		gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
-		while (gtk_events_pending()) gtk_main_iteration();
-		if (strcmp(path, "xffm:local")==0) {
-		    //view->monitor_ = 
+                gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
+                while (gtk_events_pending()) gtk_main_iteration();
+                if (strcmp(path, "xffm:local")==0) {
+                    //view->monitor_ = 
                         LocalView<Type>::loadModel(view, g_get_home_dir());
-		} else {
-		    //view->monitor_ = 
+                } else {
+                    //view->monitor_ = 
                         LocalView<Type>::loadModel(view, path);
-		}
+                }
                 break;
 #ifdef ENABLE_FSTAB_MODULE
             case (FSTAB_TYPE):
@@ -185,7 +185,7 @@ public:
                     view->monitorObject_ = NULL;
                 }                //view->monitor_ = 
                 FstabView<Type>::loadModel(view);
-	        view->page()->updateStatusLabel(NULL);
+                view->page()->updateStatusLabel(NULL);
                 break;
 #ifdef ENABLE_EFS_MODULE
             case (EFS_TYPE):
@@ -200,12 +200,12 @@ public:
 #endif
 #ifdef ENABLE_PKG_MODULE
             case (PKG_TYPE):
-		gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
-		while(gtk_events_pending())gtk_main_iteration();
+                gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
+                while(gtk_events_pending())gtk_main_iteration();
                 PkgView<Type>::loadModel(view);
-	        view->page()->updateStatusLabel(NULL);
-		gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
-		while(gtk_events_pending())gtk_main_iteration();
+                view->page()->updateStatusLabel(NULL);
+                gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
+                while(gtk_events_pending())gtk_main_iteration();
                 break;
 #endif
             default:
@@ -217,33 +217,33 @@ public:
     }
 
     gboolean loadModel(GtkTreeModel *treeModel, 
-	    const GtkTreePath *tpath, 
-	    const gchar *path)
+            const GtkTreePath *tpath, 
+            const gchar *path)
     {
-	// Here viewType must be specified before any
-	// static loadModel call (viz. PkgModel)
-	pushHistory((View<Type> *)this, path);
+        // Here viewType must be specified before any
+        // static loadModel call (viz. PkgModel)
+        pushHistory((View<Type> *)this, path);
         TRACE("generalized view: loadModel: %s\n", path);
 #ifdef ENABLE_PKG_MODULE
-	if (strncmp(path, "xffm:pkg", strlen("xffm:pkg"))==0){
-	    this->setViewType(PKG_TYPE);
-	    this->setPath(path);
+        if (strncmp(path, "xffm:pkg", strlen("xffm:pkg"))==0){
+            this->setViewType(PKG_TYPE);
+            this->setPath(path);
 
-	    if(strcmp(path, "xffm:pkg:search") == 0) {
-		return PkgModel<Type>::loadModel(treeModel, path);
-	    }
-	    if(strcmp(path, "xffm:pkg")==0) {
-		return PkgModel<Type>::loadModel(treeModel, "xffm:pkg");
-	    }
-	    TRACE("fm/view.hh: loadModel: %s item activate?\n", path);
-	    return this->loadModel(path);
-	}
+            if(strcmp(path, "xffm:pkg:search") == 0) {
+                return PkgModel<Type>::loadModel(treeModel, path);
+            }
+            if(strcmp(path, "xffm:pkg")==0) {
+                return PkgModel<Type>::loadModel(treeModel, "xffm:pkg");
+            }
+            TRACE("fm/view.hh: loadModel: %s item activate?\n", path);
+            return this->loadModel(path);
+        }
 #endif
         if (g_file_test(path, G_FILE_TEST_EXISTS)){
-	    TRACE("%s is  valid path\n", path);
-	    if (!g_file_test(path, G_FILE_TEST_IS_DIR)){
+            TRACE("%s is  valid path\n", path);
+            if (!g_file_test(path, G_FILE_TEST_IS_DIR)){
                 // Not a directory, but valid path: activate item.
-		TRACE("%s is not dir, will activate.\n", path);
+                TRACE("%s is not dir, will activate.\n", path);
 #ifdef ENABLE_FSTAB_MODULE
                 if (FstabView<Type>::isMounted(path)){
                     auto mntDir = FstabView<Type>::getMntDir(path);
@@ -252,14 +252,14 @@ public:
                     return retval;
                 }
 #endif
-		return LocalView<Type>::item_activated(this, treeModel, tpath, path);
-	    }
-	} else if (strcmp(path,"xffm:root")){
+                return LocalView<Type>::item_activated(this, treeModel, tpath, path);
+            }
+        } else if (strcmp(path,"xffm:root")){
             if (EFS<Type>::isEFS(path))
-	        DBG("fm/view.hh: loadModel: %s does not exist\n", path);
+                DBG("fm/view.hh: loadModel: %s does not exist\n", path);
             
-	}
-	return this->loadModel(path);
+        }
+        return this->loadModel(path);
     }
 
     void reloadModel(void){
@@ -274,7 +274,7 @@ public:
         auto lastPath =  g_object_get_data(G_OBJECT(this->iconView_), "path");
         g_free(lastPath); 
         g_object_set_data(G_OBJECT(this->iconView_), "path", g_strdup(this->path()));
-	BaseModel<Type>::setPath(path);
+        BaseModel<Type>::setPath(path);
     }*/
 
     void selectables(void){
@@ -286,7 +286,7 @@ public:
             default:
                 if (isTreeView){
                     auto selection = gtk_tree_view_get_selection (this->treeView());
-		    gtk_tree_selection_unselect_all (selection);
+                    gtk_tree_selection_unselect_all (selection);
                 }
                 TRACE("View::selectables(): No items are selectable for viewType: %d ()\n", this->viewType());
         }
@@ -294,12 +294,12 @@ public:
     }
  
     gboolean isSelectable(GtkTreePath *tpath){
-	GtkTreeIter iter;
+        GtkTreeIter iter;
         if (!gtk_tree_model_get_iter(this->treeModel(), &iter, tpath)) {
             DBG("isSelectable() cannot get iter\n");
             return FALSE;
         }
-	switch (this->viewType()){
+        switch (this->viewType()){
             case (LOCALVIEW_TYPE):
                 return LocalView<Type>::isSelectable(this->treeModel(),&iter);
                 break;
@@ -330,20 +330,20 @@ public:
   
     void 
     highlight(gdouble X, gdouble Y){
-	if (isTreeView) return;
-	GdkPixbuf *pixbuf;
+        if (isTreeView) return;
+        GdkPixbuf *pixbuf;
         GtkTreeIter iter;
-	TRACE("highlight X,Y=%lf,%lf\n", X,Y);
+        TRACE("highlight X,Y=%lf,%lf\n", X,Y);
         GtkTreePath *tpath = gtk_icon_view_get_path_at_pos (this->iconView_, X, Y); 
-	if (!tpath) {
-	    // clear highlight
+        if (!tpath) {
+            // clear highlight
             if (!isTreeView) gtk_icon_view_set_drag_dest_item(this->iconView(), NULL, GTK_ICON_VIEW_DROP_BELOW);
             if (this->items() <= 260){
                 BaseSignals<Type>::clear_highlights(this);
             }
-	    return;
-	}
-	// highlight item
+            return;
+        }
+        // highlight item
 //            gtk_icon_view_set_drag_dest_item(this->iconView(), tpath, GTK_ICON_VIEW_DROP_INTO);
         if (this->items() > 260){
             if (!isTreeView) gtk_icon_view_set_drag_dest_item(this->iconView(), tpath, GTK_ICON_VIEW_DROP_BELOW);

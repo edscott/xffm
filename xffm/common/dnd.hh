@@ -25,36 +25,36 @@ public:
             ERROR("!selection_data\n");
             return FALSE;
         }
-	const gchar *command;
-	const gchar *message;
+        const gchar *command;
+        const gchar *message;
         const gchar *icon;
         gint mode;
-	switch (action){
-	    case GDK_ACTION_DEFAULT: 
-	    case GDK_ACTION_MOVE:
-		message = _("Moving files");
-		command = "mv -b -f";
+        switch (action){
+            case GDK_ACTION_DEFAULT: 
+            case GDK_ACTION_MOVE:
+                message = _("Moving files");
+                command = "mv -b -f";
                 mode = MODE_MOVE;
                 icon = "edit-copy/NE/edit-cut/2.0/220";
-		break;
-	    case GDK_ACTION_COPY:
-		message = _("Copying files locally");
-		command = "cp -R -b -f";
+                break;
+            case GDK_ACTION_COPY:
+                message = _("Copying files locally");
+                command = "cp -R -b -f";
                 mode = MODE_COPY;
                 icon = "edit-copy";
-		break;
-	    case GDK_ACTION_LINK:
-		message = _("Create Link");
-		command = "ln -s -b -f";
+                break;
+            case GDK_ACTION_LINK:
+                message = _("Create Link");
+                command = "ln -s -b -f";
                 mode = MODE_LINK;
                 icon = "edit-copy/NE/emblem-symbolic-link/2.0/220";
-		break;
-	    case GDK_ACTION_PRIVATE:
-	    case GDK_ACTION_ASK:
-		ERROR("Not supported GDK_ACTION_PRIVATE || GDK_ACTION_ASK\n");
-		return FALSE;
+                break;
+            case GDK_ACTION_PRIVATE:
+            case GDK_ACTION_ASK:
+                ERROR("Not supported GDK_ACTION_PRIVATE || GDK_ACTION_ASK\n");
+                return FALSE;
 
-	}
+        }
 
         auto dndData = (const char *)gtk_selection_data_get_data (selection_data);
 
@@ -64,7 +64,7 @@ public:
                 g_strdup("");
         TRACE("%s %s %s ---> %s\n", message, files[0], more, target? target: view->path());
 
-	    
+            
         Print<Type>::print(view->page()->output(), "green", 
                     g_strdup_printf("%s %s %s ---> %s\n", 
                     message, files[0], more, target? target: view->path())

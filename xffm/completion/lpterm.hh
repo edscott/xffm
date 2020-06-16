@@ -15,16 +15,16 @@ template <class Type>
 class lptermSignals {
     static gboolean
     on_status_button_press ( GtkWidget *w , GdkEventButton * event, gpointer data) {
-	auto lpterm_p = (LpTerm<Type> *)data;
-	lpterm_p->lp_set_active(TRUE);
-	return TRUE;
+        auto lpterm_p = (LpTerm<Type> *)data;
+        lpterm_p->lp_set_active(TRUE);
+        return TRUE;
     }
 
     static gboolean
     status_keyboard_event (GtkWidget * window, GdkEventKey * event, gpointer data)
     {
-	TRACE("status_keyboard_event\n");
-	return FALSE;
+        TRACE("status_keyboard_event\n");
+        return FALSE;
     }
 
 };
@@ -59,15 +59,15 @@ public:
     void setIconviewIcon(GtkWidget *iconview_icon){iconview_icon_ = iconview_icon;}
 
     LpTerm(void){
-	active_ = FALSE;
-	// FIXME: these callback functions and connection should be connected 
-	// in pagechild
-	 /*
-	g_signal_connect (status, "key-press-event", 
-		KEY_EVENT_CALLBACK (status_keyboard_event), data);
-	g_signal_connect (status_button, "button-press-event", 
-		BUTTON_CALLBACK (on_status_button_press), (void *)this);
-		*/
+        active_ = FALSE;
+        // FIXME: these callback functions and connection should be connected 
+        // in pagechild
+         /*
+        g_signal_connect (status, "key-press-event", 
+                KEY_EVENT_CALLBACK (status_keyboard_event), data);
+        g_signal_connect (status_button, "button-press-event", 
+                BUTTON_CALLBACK (on_status_button_press), (void *)this);
+                */
     }
 
     gboolean
@@ -75,21 +75,21 @@ public:
 
     void
     lp_set_active(gboolean state){
-	active_ = state;
-/*	if (state){
-	    gtk_widget_hide(GTK_WIDGET(status_button));
-	    gtk_widget_show(GTK_WIDGET(status));
-	    gtk_widget_show(status_icon);
-	    gtk_widget_hide(iconview_icon);
-	    gtk_widget_grab_focus (GTK_WIDGET(status));
-	} else {
-	    gtk_widget_hide(GTK_WIDGET(status));
-	    gtk_widget_show(GTK_WIDGET(status_button));
-	    gtk_widget_show(iconview_icon);
-	    gtk_widget_hide(status_icon);
-	    gtk_widget_grab_focus (GTK_WIDGET(iconview));
-	}*/
-	return;
+        active_ = state;
+/*        if (state){
+            gtk_widget_hide(GTK_WIDGET(status_button));
+            gtk_widget_show(GTK_WIDGET(status));
+            gtk_widget_show(status_icon);
+            gtk_widget_hide(iconview_icon);
+            gtk_widget_grab_focus (GTK_WIDGET(status));
+        } else {
+            gtk_widget_hide(GTK_WIDGET(status));
+            gtk_widget_show(GTK_WIDGET(status_button));
+            gtk_widget_show(iconview_icon);
+            gtk_widget_hide(status_icon);
+            gtk_widget_grab_focus (GTK_WIDGET(iconview));
+        }*/
+        return;
     }
 
     pid_t 
@@ -114,20 +114,20 @@ public:
         } else ncommand = g_strdup(command);
         command = ncommand;
 
-	gchar *newWorkdir =NULL;
-	gchar ** commands = NULL;
-	if (strchr(command, ';')) commands = g_strsplit(command, ";", -1);
-	if (!commands) {
-	    commands = (gchar **) calloc(2, sizeof(gchar *));
-	    commands[0] = g_strdup(command); 
-	}
-	gchar **c;
-	for (c=commands; c && *c; c++){
-	    if (process_internal_command (output, workdir, *c)) {
-		TRACE("internal command=%s\n", command);
-		continue;
-	    }
-	    // automatic shell determination:
+        gchar *newWorkdir =NULL;
+        gchar ** commands = NULL;
+        if (strchr(command, ';')) commands = g_strsplit(command, ";", -1);
+        if (!commands) {
+            commands = (gchar **) calloc(2, sizeof(gchar *));
+            commands[0] = g_strdup(command); 
+        }
+        gchar **c;
+        for (c=commands; c && *c; c++){
+            if (process_internal_command (output, workdir, *c)) {
+                TRACE("internal command=%s\n", command);
+                continue;
+            }
+            // automatic shell determination:
             if (strcmp(workdir, "xffm:root")==0) {
                 if (chdir(g_get_home_dir()) < 0){
                     ERROR("Cannot chdir to %s\n", g_get_home_dir());
@@ -148,31 +148,31 @@ public:
             }
 
             child = run_c::shell_command(output, *c, scrollup);
-	    page_->newRunButton(*c, child);
-	    // forced shell to command:
-	    //run_c::shell_command(output, *c, FALSE);
-	    /*
-	    run_button_c *run_button_p = NULL;
-	    // XXX runbutton constructor will need textview and runbutton box
-	    run_button_p = new run_button_c(view_v, c, pid, run_in_shell(c));
-	    // run_button_p will run alone and call its own destructor.
+            page_->newRunButton(*c, child);
+            // forced shell to command:
+            //run_c::shell_command(output, *c, FALSE);
+            /*
+            run_button_c *run_button_p = NULL;
+            // XXX runbutton constructor will need textview and runbutton box
+            run_button_p = new run_button_c(view_v, c, pid, run_in_shell(c));
+            // run_button_p will run alone and call its own destructor.
 */
-	    // Here we save to csh history.
-	    // We save the original sudo command,
-	    //   not the one modified with "-A".
-	}
-	g_strfreev(commands);
+            // Here we save to csh history.
+            // We save the original sudo command,
+            //   not the one modified with "-A".
+        }
+        g_strfreev(commands);
         g_free(ncommand); 
-	return child;
+        return child;
     }
 
     void
     open_terminal(GtkTextView *output){
-	const gchar *terminal = util_c::what_term();
-	run_c::shell_command(output, terminal, FALSE);
-/*	run_button_c *run_button_p = NULL;
-	// XXX runbutton constructor will need textview and runbutton box
-	run_button_p = new run_button_c(view_v, c, pid, run_in_shell(c));*/
+        const gchar *terminal = util_c::what_term();
+        run_c::shell_command(output, terminal, FALSE);
+/*        run_button_c *run_button_p = NULL;
+        // XXX runbutton constructor will need textview and runbutton box
+        run_button_p = new run_button_c(view_v, c, pid, run_in_shell(c));*/
     // This is not configured to save to csh history.
     }
 
@@ -180,108 +180,108 @@ public:
     //        and whatever else is in the environment.
     gchar *
     internal_cd (GtkTextView *output, const gchar *workdir, gchar ** argvp) {   
-	gchar *gg=NULL;
+        gchar *gg=NULL;
 
-	if (argvp[1] == NULL){
-	    print_c::showTextSmall(output);
-	    //taken care of in taskbar object
-	    //print_c::print(output, "green", g_strdup_printf("cd %s\n", g_get_home_dir()));
-	    return g_strdup(g_get_home_dir());
-	}
+        if (argvp[1] == NULL){
+            print_c::showTextSmall(output);
+            //taken care of in taskbar object
+            //print_c::print(output, "green", g_strdup_printf("cd %s\n", g_get_home_dir()));
+            return g_strdup(g_get_home_dir());
+        }
 
-	if(argvp[1]) {
-	    if (*argvp[1] == '~'){
-		if (strcmp(argvp[1], "~")==0 || 
-			strncmp(argvp[1], "~/", strlen("~/"))==0){
-		    gg = g_strdup_printf("%s%s", g_get_home_dir (), argvp[1]+1);
-		} else {
-		    gchar *tilde_dir = util_c::get_tilde_dir(argvp[1]);
-		    if (tilde_dir) gg = g_strconcat(tilde_dir, strchr(argvp[1], '/')+1, NULL);
-		    else gg = g_strdup(argvp[1]);
-		    g_free(tilde_dir);	
-		}
-	    } else {
-		gg = g_strdup(argvp[1]);
-	    }
+        if(argvp[1]) {
+            if (*argvp[1] == '~'){
+                if (strcmp(argvp[1], "~")==0 || 
+                        strncmp(argvp[1], "~/", strlen("~/"))==0){
+                    gg = g_strdup_printf("%s%s", g_get_home_dir (), argvp[1]+1);
+                } else {
+                    gchar *tilde_dir = util_c::get_tilde_dir(argvp[1]);
+                    if (tilde_dir) gg = g_strconcat(tilde_dir, strchr(argvp[1], '/')+1, NULL);
+                    else gg = g_strdup(argvp[1]);
+                    g_free(tilde_dir);        
+                }
+            } else {
+                gg = g_strdup(argvp[1]);
+            }
 
-	} 
-	print_c::showTextSmall(output);
+        } 
+        print_c::showTextSmall(output);
 
-	// must allow relative paths too.
-	if (!g_path_is_absolute(gg)){
-	    if(!g_file_test (workdir, G_FILE_TEST_IS_DIR)) 
-	    {
-		print_c::print_error(output, g_strdup_printf("%s: %s\n", gg, strerror (ENOENT)));
-		g_free (gg);
-		return NULL;
-	    } 
-	    gchar *fullpath;
-	    if (strcmp(workdir, G_DIR_SEPARATOR_S)==0)
-		fullpath = g_strconcat(G_DIR_SEPARATOR_S, gg, NULL);
-	    else
-		fullpath = g_strconcat(workdir, G_DIR_SEPARATOR_S, gg, NULL);
-	    g_free(gg);
-	    gg = fullpath;
-	}
+        // must allow relative paths too.
+        if (!g_path_is_absolute(gg)){
+            if(!g_file_test (workdir, G_FILE_TEST_IS_DIR)) 
+            {
+                print_c::print_error(output, g_strdup_printf("%s: %s\n", gg, strerror (ENOENT)));
+                g_free (gg);
+                return NULL;
+            } 
+            gchar *fullpath;
+            if (strcmp(workdir, G_DIR_SEPARATOR_S)==0)
+                fullpath = g_strconcat(G_DIR_SEPARATOR_S, gg, NULL);
+            else
+                fullpath = g_strconcat(workdir, G_DIR_SEPARATOR_S, gg, NULL);
+            g_free(gg);
+            gg = fullpath;
+        }
 
-	gchar *rpath = realpath(gg, NULL);
-	if (!rpath){
-	    print_c::print_error(output, g_strdup_printf("%s: %s\n", gg, strerror (ENOENT)));
-	    g_free (gg);
-	    return NULL;
-	}
+        gchar *rpath = realpath(gg, NULL);
+        if (!rpath){
+            print_c::print_error(output, g_strdup_printf("%s: %s\n", gg, strerror (ENOENT)));
+            g_free (gg);
+            return NULL;
+        }
 
-	if (gg[strlen(gg)-1]==G_DIR_SEPARATOR || strstr(gg, "/..")){
-	    g_free(gg);
-	    gg=rpath;
-	} else {
-	    g_free (rpath);
-	}
+        if (gg[strlen(gg)-1]==G_DIR_SEPARATOR || strstr(gg, "/..")){
+            g_free(gg);
+            gg=rpath;
+        } else {
+            g_free (rpath);
+        }
 
-	//taken care of in taskbar object
+        //taken care of in taskbar object
         //print_c::print(output, "green", g_strdup_printf("cd %s\n", gg));
-	if (chdir(gg) < 0) {
-	    print_c::print_error(output, g_strdup_printf("%s\n", strerror(errno)));
-	    return NULL;
-	}
-	//print_c::clear_text();
+        if (chdir(gg) < 0) {
+            print_c::print_error(output, g_strdup_printf("%s\n", strerror(errno)));
+            return NULL;
+        }
+        //print_c::clear_text();
 
-	// FIXME: here we must signal a reload to the iconview...
-	//view_p->reload(gg);
+        // FIXME: here we must signal a reload to the iconview...
+        //view_p->reload(gg);
 
-	return gg;
+        return gg;
     }
 
     // FIXME: we need to add history as an internal command with csh history.
     gboolean
     process_internal_command (GtkTextView *output, const gchar *workdir, const gchar *command) {
-	gint argcp;
-	gchar **argvp;
-	GError *error = NULL;
-	if(!g_shell_parse_argv (command, &argcp, &argvp, &error)) {
-	    print_c::print_error(output, g_strdup_printf("%s\n", error->message));
-	    return FALSE;
-	} else if(strcmp (argvp[0], "cd")==0) {
-	    // shortcircuit chdir
-	    gchar *gg = internal_cd (output, workdir, argvp);
-	    g_strfreev (argvp);
-	    if (gg) {
-		TRACE("newWorkdir-gg = %s\n", gg);
-		TRACE("page_ = %p\n", (void *)page_);
-		if (page_) {
-		    page_->setPageWorkdir(gg);
+        gint argcp;
+        gchar **argvp;
+        GError *error = NULL;
+        if(!g_shell_parse_argv (command, &argcp, &argvp, &error)) {
+            print_c::print_error(output, g_strdup_printf("%s\n", error->message));
+            return FALSE;
+        } else if(strcmp (argvp[0], "cd")==0) {
+            // shortcircuit chdir
+            gchar *gg = internal_cd (output, workdir, argvp);
+            g_strfreev (argvp);
+            if (gg) {
+                TRACE("newWorkdir-gg = %s\n", gg);
+                TRACE("page_ = %p\n", (void *)page_);
+                if (page_) {
+                    page_->setPageWorkdir(gg);
                 auto view = (View<Type> *)
                     g_object_get_data(G_OBJECT(page_->topScrolledWindow()), "baseView");
                 view->loadModel(gg, page_->view());
-		    g_free(gg);
-		}
-		return TRUE;
-	    }
+                    g_free(gg);
+                }
+                return TRUE;
+            }
 
-	    return TRUE;
-	}
-	g_strfreev (argvp);
-	return  FALSE;
+            return TRUE;
+        }
+        g_strfreev (argvp);
+        return  FALSE;
     }
  
 };

@@ -48,7 +48,7 @@ public:
 
     static void
     msg_show_match(GtkTextView *output, gint match_type, const gchar *match){
-	if (!output) return;
+        if (!output) return;
         print_c::show_text(output);
         if (!match) {
             const gchar *option_type = get_match_type_text(match_type);
@@ -97,10 +97,10 @@ private:
 
     static GSList *
     baseFileCompletionList(const gchar *workdir, const char *in_token){
-	gchar *string = base_file_completion(NULL, workdir, in_token);
-	GSList *list = NULL;
-	if (string) list = g_slist_prepend(list, string);
-	return list;
+        gchar *string = base_file_completion(NULL, workdir, in_token);
+        GSList *list = NULL;
+        if (string) list = g_slist_prepend(list, string);
+        return list;
     }
 
     static gchar *
@@ -245,8 +245,8 @@ private:
             //*match_count_p = 0;
             //msg_show_match(MATCH_FILE, NULL);
         } 
-	
-	GSList *matches=NULL;
+        
+        GSList *matches=NULL;
 
         struct stat st;
         gint i;
@@ -254,7 +254,7 @@ private:
             TRACE("gl_pathv[%d] = %s\n", i, stack_glob_v.gl_pathv[i]);
             // stack_glob_v.gl_pathv is initialized in the glob() call.
             // coverity[uninit_use : FALSE]
-	    errno=0;
+            errno=0;
             if (stat (stack_glob_v.gl_pathv[i], &st)==0 && (S_IXOTH & st.st_mode)){
                 gchar *base;
                 if (straight_path) {
@@ -265,11 +265,11 @@ private:
                 matches = g_slist_append (matches, base);
                 TRACE("%d) %s\n", i, base);
             }
-	    if (errno){
-		DBG("base.hh::baseExecCompletionList(): stat %s (%s)\n",
-		    stack_glob_v.gl_pathv[i], strerror(errno));
-		errno=0;
-	    }
+            if (errno){
+                DBG("base.hh::baseExecCompletionList(): stat %s (%s)\n",
+                    stack_glob_v.gl_pathv[i], strerror(errno));
+                errno=0;
+            }
         }
         globfree(&stack_glob_v);
         g_free(token);
@@ -278,13 +278,13 @@ private:
 
     static gchar *
     base_exec_completion(GtkTextView *output, const gchar *workdir, const char *in_token){
-	GSList *matches = baseExecCompletionList(workdir, in_token);
+        GSList *matches = baseExecCompletionList(workdir, in_token);
         return  listMatches(output, matches, MATCH_COMMAND);
     }
 
     static gchar *
     listMatches (GtkTextView *output, GSList *matches, gint match_type){
-	if (!matches || !g_slist_length(matches)) return NULL;
+        if (!matches || !g_slist_length(matches)) return NULL;
         matches = g_slist_sort (matches, ya_strcmp);
         GSList *a;
         GSList *b;

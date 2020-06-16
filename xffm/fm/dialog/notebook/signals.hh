@@ -16,7 +16,7 @@ public:
                    guint        new_page,
                    gpointer     data)
     {
-	static gboolean startup = TRUE;
+        static gboolean startup = TRUE;
         TRACE("switch_page: new page=%d last page=%d\n", new_page, lastPage);
         auto notebook_p = (Notebook<Type> *)data;
         auto page_p = (Page<Type> *)notebook_p->currentPageObject(new_page);
@@ -24,7 +24,7 @@ public:
             if (!startup) ERROR("fm/dialog/notebook/signals.hh::page_p is null\n");
             return;
         }
-	startup = FALSE;
+        startup = FALSE;
         page_p->setDialogTitle();
         gtk_widget_set_sensitive(GTK_WIDGET(page_p->pageLabelButton()), TRUE);
         gtk_widget_show(GTK_WIDGET(page_p->pageLabelButton()));
@@ -159,9 +159,9 @@ public:
     static void
     on_new_page(GtkButton *button, void *data){
         auto notebook = (Notebook<Type> *)data;
-	auto page = notebook->currentPageObject();
-	auto view = page->view();
-	
+        auto page = notebook->currentPageObject();
+        auto view = page->view();
+        
         //const gchar *workdir = notebook->workdir();
         TRACE("on_new_page this: %p (%s)\n", data, workdir);
         //auto dialog = (Dialog<Type> *) data;

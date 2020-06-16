@@ -117,7 +117,7 @@ private:
 
     GtkButton *getButton(GtkBox *hbox, const gchar *iconId){
         auto button = GTK_BUTTON(gtk_button_new());
-	Gtk<Type>::set_bin_contents(GTK_BIN(button), iconId,
+        Gtk<Type>::set_bin_contents(GTK_BIN(button), iconId,
                 NULL, SIZE_BUTTON);
         return button;
     }
@@ -177,23 +177,23 @@ private:
     }
 
     void setWindowMaxSize(void){
-	gint x_return, y_return;
-	guint w_return, h_return, d_return, border_return;
-	Window root_return;
-	auto drawable = gdk_x11_get_default_root_xwindow ();
-	//Visual Xvisual = gdk_x11_visual_get_xvisual(gdk_visual_get_system());
-	auto display = gdk_x11_display_get_xdisplay(gdk_display_get_default());
-	XGetGeometry(display, drawable, &root_return,
-		&x_return, &y_return, 
-		&w_return, &h_return, 
-		&border_return, 
-		&d_return);
-	GdkGeometry geometry;
-	geometry.max_width = w_return - 25;
-	geometry.max_height = h_return -25;
+        gint x_return, y_return;
+        guint w_return, h_return, d_return, border_return;
+        Window root_return;
+        auto drawable = gdk_x11_get_default_root_xwindow ();
+        //Visual Xvisual = gdk_x11_visual_get_xvisual(gdk_visual_get_system());
+        auto display = gdk_x11_display_get_xdisplay(gdk_display_get_default());
+        XGetGeometry(display, drawable, &root_return,
+                &x_return, &y_return, 
+                &w_return, &h_return, 
+                &border_return, 
+                &d_return);
+        GdkGeometry geometry;
+        geometry.max_width = w_return - 25;
+        geometry.max_height = h_return -25;
         maximumSize_.width = geometry.max_width;
         maximumSize_.height = geometry.max_height;
-	gtk_window_set_geometry_hints (GTK_WINDOW(creatorWindow_), 
+        gtk_window_set_geometry_hints (GTK_WINDOW(creatorWindow_), 
                 GTK_WIDGET(creatorWindow_), &geometry, GDK_HINT_MAX_SIZE);
     }
 
@@ -236,7 +236,7 @@ private:
                                                          NULL));
         gtk_file_chooser_set_action ((GtkFileChooser *) dialog, action);
 
-	auto wd = g_get_current_dir();
+        auto wd = g_get_current_dir();
 
         gtk_file_chooser_set_current_folder ((GtkFileChooser *) dialog, wd);
 
@@ -457,7 +457,7 @@ public:
 } // end namespace xf
 #if 0
 int main(int argc, gchar **argv){
-	
+        
     gtk_init (&argc, &argv);
     gint max = 10;
     if (argv[1] != NULL){

@@ -1,7 +1,7 @@
 #ifndef CSHCOMPLETION_HH
 #define CSHCOMPLETION_HH
 #include "bash.hh"
-#define CSH_HISTORY 	g_get_user_cache_dir(),"lp_terminal_history"
+#define CSH_HISTORY g_get_user_cache_dir(),"lp_terminal_history"
 
 // We keep this non static so different pages of the notebook
 // will have different csh histories. 
@@ -234,12 +234,12 @@ protected:
     }
 
 private:
-        GList *csh_history_list_;
+    GList *csh_history_list_;
 
-	gchar *csh_cmd_save_;
-	gint csh_nth_;
-	gint csh_history_counter_;
-        gboolean csh_completing_;
+    gchar *csh_cmd_save_;
+    gint csh_nth_;
+    gint csh_history_counter_;
+    gboolean csh_completing_;
 
     const gchar *
     csh_find(GtkTextView *input, GtkTextView *output, const gchar *token, gint direction){

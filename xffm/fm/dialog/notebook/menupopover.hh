@@ -45,7 +45,7 @@ public:
     static void
     trash(GtkMenuItem *menuItem, gpointer data)
     {
-	auto name = g_strdup_printf("%s/.local/share/Trash/files", g_get_home_dir());
+        auto name = g_strdup_printf("%s/.local/share/Trash/files", g_get_home_dir());
         Fm<Type>::getCurrentPage()->setPageWorkdir(name);
         Fm<Type>::getCurrentView()->loadModel(name);
         g_free(name);
@@ -53,11 +53,11 @@ public:
 
     static void runWd(const gchar *workdir, const gchar *command){
         if (!workdir) workdir = Fm<Type>::getCurrentWorkdir();
-	gchar *c = g_strdup(command);
+        gchar *c = g_strdup(command);
         gchar *oldDir = g_get_current_dir ();
         chdir(workdir);
         pid_t child = run_c::thread_run(Fm<Type>::getCurrentTextview(), c, FALSE);
-	Fm<Type>::getCurrentPage()->newRunButton(c, child);
+        Fm<Type>::getCurrentPage()->newRunButton(c, child);
         g_free(c);
         chdir(oldDir);
         g_free(oldDir);
@@ -69,11 +69,11 @@ public:
         /*
         const gchar *path = notebook_p->workdir();
         if (!path || !g_file_test(path, G_FILE_TEST_IS_DIR)) path = g_get_home_dir();
-	gchar *c = g_strdup(command);
+        gchar *c = g_strdup(command);
         gchar *oldDir = g_get_current_dir ();
         chdir(path);
         pid_t child = run_c::thread_run(Fm<Type>::getCurrentTextview(), c, FALSE);
-	Fm<Type>::getCurrentPage()->newRunButton(c, child);
+        Fm<Type>::getCurrentPage()->newRunButton(c, child);
         g_free(c);
         chdir(oldDir);
         g_free(oldDir);
@@ -83,10 +83,10 @@ public:
     terminal(GtkMenuItem *menuItem, gpointer data)
     {
         const gchar *terminal = Util<Type>::getTerminal();
-	if (!terminal || !strlen(terminal)){
-	    DBG("TERMINAL environment variable not defined.\n");
-	    return;
-	}
+        if (!terminal || !strlen(terminal)){
+            DBG("TERMINAL environment variable not defined.\n");
+            return;
+        }
         run(Fm<Type>::getCurrentNotebook(), terminal);
     }
    
@@ -94,29 +94,29 @@ public:
     static void
     newWindow(GtkMenuItem *menuItem, gpointer data)
     {
-	auto program = g_find_program_in_path((const gchar *) data);
-	if (!program) {
-	    ERROR("menupopover.hh::Cannot find % in path\n", (const gchar *) data);
-	    return;
-	}
-	run(Fm<Type>::getCurrentNotebook(), program);
-	g_free(program);
+        auto program = g_find_program_in_path((const gchar *) data);
+        if (!program) {
+            ERROR("menupopover.hh::Cannot find % in path\n", (const gchar *) data);
+            return;
+        }
+        run(Fm<Type>::getCurrentNotebook(), program);
+        g_free(program);
     }
 
     static void
     plainRun(GtkMenuItem *menuItem, gpointer data){
-	run(Fm<Type>::getCurrentNotebook(), (const gchar *)data);
+        run(Fm<Type>::getCurrentNotebook(), (const gchar *)data);
     }
 
     static void
     open(GtkMenuItem *menuItem, gpointer data)
     {
         auto diff = (const gchar *) data;
-	auto program = g_find_program_in_path(diff);
-	if (!program) {
-	    ERROR("menupopover.hh::Cannot find %s in path\n", diff);
-	    return;
-	}
+        auto program = g_find_program_in_path(diff);
+        if (!program) {
+            ERROR("menupopover.hh::Cannot find %s in path\n", diff);
+            return;
+        }
         if (strcmp((const gchar *) data, "xffm")==0){
             const gchar *path = Fm<Type>::getCurrentNotebook()->workdir(); 
             auto g = g_strdup_printf("%s %s", program, path);
@@ -124,8 +124,8 @@ public:
             program = g;
         }
 
-	run(Fm<Type>::getCurrentNotebook(), program);
-	g_free(program);
+        run(Fm<Type>::getCurrentNotebook(), program);
+        g_free(program);
     }
 
     static void
@@ -135,7 +135,7 @@ public:
 
         const gchar *path = Fm<Type>::getCurrentNotebook()->workdir();
         if (!path || !g_file_test(path, G_FILE_TEST_IS_DIR)) path = g_get_home_dir();
-	gchar *find = g_strdup_printf("xffm --find \"%s\"", path);
+        gchar *find = g_strdup_printf("xffm --find \"%s\"", path);
         run(Fm<Type>::getCurrentNotebook(), find);
         g_free(find);
     }
@@ -168,7 +168,7 @@ public:
         auto menu = createMenu();
         gtk_menu_button_set_popup (menuButton_, GTK_WIDGET(menu));
         gtk_widget_set_can_focus (GTK_WIDGET(menuButton_), FALSE);
-	gtk_button_set_relief (GTK_BUTTON(menuButton_), GTK_RELIEF_NONE);
+        gtk_button_set_relief (GTK_BUTTON(menuButton_), GTK_RELIEF_NONE);
 #endif
  
         gtk_widget_show(GTK_WIDGET(menuButton_));
@@ -191,12 +191,12 @@ public:
         gtk_check_menu_item_set_active(menuItem, value);
         Settings<Type>::setSettingInteger(group, item, value);
         auto notebook_p = Fm<Type>::getCurrentNotebook();
-	gint pages = gtk_notebook_get_n_pages (Fm<Type>::getCurrentNotebook()->notebook());
-	for (int i=0; i<pages; i++){
+        gint pages = gtk_notebook_get_n_pages (Fm<Type>::getCurrentNotebook()->notebook());
+        for (int i=0; i<pages; i++){
             auto page = notebook_p->currentPageObject(i);
             auto view = page->view();
             view->reloadModel();
-	}
+        }
         return value;
     }
 
@@ -206,11 +206,11 @@ private:
     toggleItem(GtkCheckMenuItem *menuItem, gpointer data)
     {
         auto item = (const gchar *)data;
-	toggleGroupItem(menuItem, "LocalView", item);
+        toggleGroupItem(menuItem, "LocalView", item);
     }
 
     GtkMenu *createMenu(void){
-	Settings<Type>::readSettings();
+        Settings<Type>::readSettings();
         menuItem_t item[]={
             {N_("View as list"), (void *)toggleView, (void *)"TreeView", "window"},
             {N_("Show hidden files"), (void *)toggleItem, (void *) "ShowHidden", "LocalView"},
@@ -223,7 +223,7 @@ private:
             {N_("Foreground Color"), (void *)fgcolor, NULL, NULL},
             {N_("Exit"), (void *)MenuPopoverSignals<Type>::finish, (void *) menuButton_},
             {NULL}};
-	const gchar *key[]={
+        const gchar *key[]={
             "Home Directory",
             "Disk Image Mounter",
             "Software Updater",
@@ -240,7 +240,7 @@ private:
             "x-package-repository",
             "user-trash",
 
-	    "utilities-terminal",
+            "utilities-terminal",
             "window-new",
             "system-search",
             "application-exit",
@@ -252,13 +252,13 @@ private:
         auto menu = popup->menu();
 
 
-	auto title = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(menu), "title"));
-	gtk_widget_set_sensitive(GTK_WIDGET(title), FALSE);
-	gchar *markup = g_strdup_printf("<span color=\"blue\" size=\"large\">%s</span>", _("Main menu"));
-	Gtk<Type>::menu_item_content(title, NULL, markup, -24);
-	g_free(markup);
+        auto title = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(menu), "title"));
+        gtk_widget_set_sensitive(GTK_WIDGET(title), FALSE);
+        gchar *markup = g_strdup_printf("<span color=\"blue\" size=\"large\">%s</span>", _("Main menu"));
+        Gtk<Type>::menu_item_content(title, NULL, markup, -24);
+        g_free(markup);
         gtk_widget_show(GTK_WIDGET(title));
-	
+        
         g_signal_connect (G_OBJECT(menuButton_), "clicked", G_CALLBACK(updateMenu), g_object_get_data(G_OBJECT(menu), "View as list"));
 
         gtk_widget_show (GTK_WIDGET(menu));
@@ -298,12 +298,12 @@ private:
     static void 
     applyColors(void){
         auto notebook_p = Fm<Type>::getCurrentNotebook();
-	gint pages = gtk_notebook_get_n_pages (Fm<Type>::getCurrentNotebook()->notebook());
- 	for (int i=0; i<pages; i++){
+        gint pages = gtk_notebook_get_n_pages (Fm<Type>::getCurrentNotebook()->notebook());
+         for (int i=0; i<pages; i++){
             auto page = notebook_p->currentPageObject(i);
             auto view = page->view();
             view->applyColors();
-	}
+        }
     }
 
     static void
@@ -332,29 +332,29 @@ private:
         gtk_check_menu_item_set_active(menuItem, isTreeView);
         Settings<Type>::setSettingInteger("window", "TreeView", isTreeView);
         auto notebook_p = Fm<Type>::getCurrentNotebook();
-	gint pages = gtk_notebook_get_n_pages (notebook_p->notebook());
-	for (int i=0; i<pages; i++){
+        gint pages = gtk_notebook_get_n_pages (notebook_p->notebook());
+        for (int i=0; i<pages; i++){
             auto page = notebook_p->currentPageObject(i);
             auto view = page->view();
 #if 1
-	    if (isTreeView){
-		// hide iconview, show treeview
-		gtk_widget_hide(GTK_WIDGET(view->page()->topScrolledWindow()));
-		gtk_widget_show(GTK_WIDGET(view->page()->treeScrolledWindow()));
-	    } else {
-		// hide treeview, show iconview
-		gtk_widget_hide(GTK_WIDGET(view->page()->treeScrolledWindow()));
-		gtk_widget_show(GTK_WIDGET(view->page()->topScrolledWindow()));
-	    }
+            if (isTreeView){
+                // hide iconview, show treeview
+                gtk_widget_hide(GTK_WIDGET(view->page()->topScrolledWindow()));
+                gtk_widget_show(GTK_WIDGET(view->page()->treeScrolledWindow()));
+            } else {
+                // hide treeview, show iconview
+                gtk_widget_hide(GTK_WIDGET(view->page()->treeScrolledWindow()));
+                gtk_widget_show(GTK_WIDGET(view->page()->topScrolledWindow()));
+            }
 #else
-	    view->reloadModel();
+            view->reloadModel();
 #endif
-	}
+        }
     }
     static void
     updateMenu(GtkButton *button, void *data){
         auto state = Settings<Type>::getSettingInteger("window", "TreeView");
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(data), state);
+        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(data), state);
 
     }
 
