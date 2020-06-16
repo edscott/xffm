@@ -16,6 +16,11 @@ typedef struct xd_t{
     gchar *icon;
 }xd_t;
 static pthread_mutex_t readdir_mutex=PTHREAD_MUTEX_INITIALIZER;
+// XXX: This previewMutex could belong to view so that only busy tab
+//      will be locked... It would have to go into base view...
+//      But the same goes for readdir_mutex.
+static pthread_mutex_t previewMutex=PTHREAD_MUTEX_INITIALIZER;
+
 static gboolean inserted_;
 
 #define MAX_AUTO_STAT 500
@@ -83,33 +88,52 @@ public:
 
         return date_string;
     }
+    
 
     // This mkTreeModel should be static...
     static gint
     loadModel (View<Type> *view, const gchar *path)
     {
+        if (pthread_mutex_trylock(&previewMutex) != 0){
+            DBG("Image preview thread is locked.\n");
+            auto text = g_strdup_printf("%s (%s)", _("There are unfinished jobs: please wait until they are finished."), _("Previews"));
+            view->page()->showFmButtonBox();
+            view->page()->updateStatusLabel(text);
+            while(gtk_events_pending())gtk_main_iteration();
+            
+		    gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
+            return 0;
+        }
+        pthread_mutex_unlock(&previewMutex);
+        
         TRACE("*** local/model.hh loadModel()\n");
-	auto treeModel = view->treeModel();
+        auto treeModel = view->treeModel();
 
         int heartbeat = 0;
 
         auto reading = g_strdup_printf(_("Reading \"%s\""), path);
-	view->page()->updateStatusLabel(reading);
-	g_free(reading);
-	while(gtk_events_pending())gtk_main_iteration();
+        view->page()->updateStatusLabel(reading);
+        g_free(reading);
+        while(gtk_events_pending())gtk_main_iteration();
         GList *directoryList = NULL;
 
         directoryList = read_items (path, &heartbeat);
-	// start adding items... (threaded...)
-	auto arg = (void **)calloc(3, sizeof(void *));
-	arg[0] = (void *)directoryList;
-	arg[1] = (void *)view;
-	arg[2] = (void *)g_strdup(path);
-	pthread_t thread;
-	pthread_create(&thread, NULL, threadInsert, (void *)arg);
-	// detach
-	pthread_detach(thread);
-	return 0;
+
+        /*auto inserting = g_strdup_printf("%s (%d)",_("Inserting rows..."), g_list_length(directoryList));
+        view->page()->updateStatusLabel(reading);
+        g_free(inserting);*/
+        while(gtk_events_pending())gtk_main_iteration();
+
+        // start adding items... (threaded...)
+        auto arg = (void **)calloc(3, sizeof(void *));
+        arg[0] = (void *)directoryList;
+        arg[1] = (void *)view;
+        arg[2] = (void *)g_strdup(path);
+        pthread_t thread;
+        pthread_create(&thread, NULL, threadInsert, (void *)arg);
+        // detach
+        pthread_detach(thread);
+        return 0;
     }
 
 
@@ -127,7 +151,7 @@ public:
     static gboolean
     isSelectable(GtkTreeModel *treeModel, GtkTreeIter *iter){
         gchar *path;
-	gtk_tree_model_get (treeModel, iter, DISPLAY_NAME, &path, -1);
+        gtk_tree_model_get (treeModel, iter, DISPLAY_NAME, &path, -1);
         gboolean retval = TRUE;
         if (strcmp(path, "..")==0 )retval = FALSE;
         TRACE("is %s selectable? %d\n", path, retval);
@@ -137,7 +161,7 @@ public:
 
     static const gchar *
     get_xfdir_iconname(void){
-	return "system-file-manager";
+        return "system-file-manager";
     }
 
     //FIXME: must be done by non main thread (already mutex protected)
@@ -151,12 +175,12 @@ public:
             return NULL;
         }
         TRACE( "readfiles: %s\n", path);
-	errno=0;
+        errno=0;
         DIR *directory = opendir(path);
         if (!directory) {
-	    Dialogs<Type>::quickHelp(GTK_WINDOW(mainWindow), strerror(errno), "dialog-error");
+            Dialogs<Type>::quickHelp(GTK_WINDOW(mainWindow), strerror(errno), "dialog-error");
             DBG("xfdir_local_c::read_items(): opendir %s: %s\n", path, strerror(errno));
-	    errno=0;
+            errno=0;
             return NULL;
         }
     //  mutex protect...
@@ -166,15 +190,16 @@ public:
         struct dirent *d; // static pointer
         errno=0;
         TRACE( "shows hidden=%d\n", showHidden);
-	gint count = 0;
+        gint count = 0;
         gboolean bySize = 
             (Settings<Type>::getSettingInteger("LocalView", "BySize") > 0);
         gboolean byDate = 
             (Settings<Type>::getSettingInteger("LocalView", "ByDate") > 0);
 
         auto needStat = bySize || byDate;
-	gboolean doPreviews = (Settings<Type>::getSettingInteger("ImageSize", path) > 0);
-	while ((d = readdir(directory))  != NULL){
+        //gboolean doPreviews = (Settings<Type>::getSettingInteger("ImageSize", path) > 0);
+        gboolean doPreviews = FALSE;
+        while ((d = readdir(directory))  != NULL){
             TRACE( "%p  %s\n", d, d->d_name);
             if(strcmp (d->d_name, ".") == 0) continue;
             if (strcmp(path,"/")==0 && strcmp (d->d_name, "..") == 0) {
@@ -184,7 +209,7 @@ public:
             needStat = needStat || (d->d_type==DT_DIR);
             needStat = needStat || (d->d_type==DT_LNK);
             needStat = needStat || (d->d_type==DT_UNKNOWN);
-	    // On this pass, stat according to sort order or dt_type.
+            // On this pass, stat according to sort order or dt_type.
             xd_t *xd_p = get_xd_p(path, d, needStat, doPreviews);
             if (xd_p) directory_list = g_list_prepend(directory_list, xd_p);
             if (heartbeat) {
@@ -217,19 +242,19 @@ public:
     get_xd_p(const gchar *directory, struct dirent *d, gboolean withStat, gboolean doPreviews=FALSE){
         // Allocate memory.
         xd_t *xd_p = NULL;
-	TRACE("sizeof(xd_t) = %lu\n", sizeof(xd_t));
-	errno=0;
+        TRACE("sizeof(xd_t) = %lu\n", sizeof(xd_t));
+        errno=0;
         xd_p = (xd_t *)calloc(1,sizeof(xd_t));
-	if (!xd_p){
-	    DBG("get_xd_p(): %s\n", strerror(errno));
-	    errno=0;
-	}
-	// Duplicate basename.
+        if (!xd_p){
+            DBG("get_xd_p(): %s\n", strerror(errno));
+            errno=0;
+        }
+        // Duplicate basename.
         xd_p->d_name = g_strdup(d->d_name);
         // Duplicate absolute path.
         if (strcmp(d->d_name, "..")==0){
             // Up item.
-	    xd_p->path = g_path_get_dirname(directory);
+            xd_p->path = g_path_get_dirname(directory);
         } else if (strcmp(directory, G_DIR_SEPARATOR_S)==0){
             // Filesystem root.
             xd_p->path = g_strconcat(G_DIR_SEPARATOR_S, d->d_name, NULL);
@@ -240,16 +265,16 @@ public:
         // Assign d_type.
         xd_p->d_type = d->d_type;
 
-	TRACE("model::get_xd_p() path=%s d_type = %d withStat=%d\n",
-		xd_p->path,   xd_p->d_type, withStat);
+        TRACE("model::get_xd_p() path=%s d_type = %d withStat=%d\n",
+                xd_p->path,   xd_p->d_type, withStat);
         // Stat necessary items.
-	if (withStat){
+        if (withStat){
             getStat(xd_p);
-	}
-	xd_p->mimetype = getMimeType(xd_p);
+        }
+        xd_p->mimetype = getMimeType(xd_p);
         // the following call uses xd_p->mimetype
         xd_p->icon = g_strdup(LocalIcons<Type>::getIconname(xd_p, doPreviews));
-	TRACE("d_type: %s (%s) -> %d icon: %s mime: %s\n", xd_p->d_name, xd_p->path, xd_p->d_type, xd_p->icon, xd_p->mimetype);
+        TRACE("d_type: %s (%s) -> %d icon: %s mime: %s\n", xd_p->d_name, xd_p->path, xd_p->d_type, xd_p->icon, xd_p->mimetype);
         errno=0;
         return xd_p;
     }
@@ -276,31 +301,31 @@ public:
             }
         } 
         errno=0;        
-	return retval;
+        return retval;
             
     }
 
     static gchar *
     getMimeType(xd_t *xd_p){
-	auto mimetype = Mime<Type>::basicMimeType(xd_p->d_type);
-	TRACE("%s -> %s\n", xd_p->path, mimetype);
-	//if (xd_p->st==NULL && (xd_p->d_type == DT_LNK || xd_p->d_type == DT_DIR))
-	if (xd_p->d_type == DT_LNK || xd_p->d_type == DT_DIR)
-	{
+        auto mimetype = Mime<Type>::basicMimeType(xd_p->d_type);
+        TRACE("%s -> %s\n", xd_p->path, mimetype);
+        //if (xd_p->st==NULL && (xd_p->d_type == DT_LNK || xd_p->d_type == DT_DIR))
+        if (xd_p->d_type == DT_LNK || xd_p->d_type == DT_DIR)
+        {
             if (getStat(xd_p)==0){
-		g_free(mimetype);
-		mimetype = Mime<Type>::statMimeType(xd_p->st);
-	    }
-	}
+                g_free(mimetype);
+                mimetype = Mime<Type>::statMimeType(xd_p->st);
+            }
+        }
         // on asyncronous nfs connections, d_type may resolve to inode/unknown 
-	if (strcmp(mimetype,"inode/regular")==0 || strcmp(mimetype,"inode/unknown")==0){
-	    auto type = MimeSuffix<Type>::mimeType(xd_p->path);
-	    if (type) {
-		g_free(mimetype);
-		mimetype = type;
-	    }
-	}
-	return mimetype;
+        if (strcmp(mimetype,"inode/regular")==0 || strcmp(mimetype,"inode/unknown")==0){
+            auto type = MimeSuffix<Type>::mimeType(xd_p->path);
+            if (type) {
+                g_free(mimetype);
+                mimetype = type;
+            }
+        }
+        return mimetype;
     }
 
     static void
@@ -319,7 +344,7 @@ public:
         // compare by name, directories or symlinks to directories on top
         const xd_t *xd_a = (const xd_t *)a;
         const xd_t *xd_b = (const xd_t *)b;
-	TRACE("compare %s --- %s\n", xd_a->d_name, xd_b->d_name);
+        TRACE("compare %s --- %s\n", xd_a->d_name, xd_b->d_name);
         if (strcmp(xd_a->d_name, "..")==0) return -1;
         if (strcmp(xd_b->d_name, "..")==0) return 1;
 
@@ -345,7 +370,7 @@ public:
         // compare by name, directories or symlinks to directories on top
         const xd_t *xd_a = (const xd_t *)a;
         const xd_t *xd_b = (const xd_t *)b;
-	TRACE("compare %s --- %s\n", xd_a->d_name, xd_b->d_name);
+        TRACE("compare %s --- %s\n", xd_a->d_name, xd_b->d_name);
         if (strcmp(xd_a->d_name, "..")==0) return -1;
         if (strcmp(xd_b->d_name, "..")==0) return 1;
 
@@ -501,24 +526,24 @@ private:
             else return g_list_sort (list,compareByNameUp);
         }
     }
-	
+        
     static void *replaceTreeModel(void *data){
-	auto view = (View<Type> *)data; 
-	auto tmp = view->treeModel();
-	// set iconview/treeview treemodel
-	view->setTreeModel(view->backTreeModel());
-	view->setBackTreeModel(tmp);
-	gtk_tree_view_set_model(view->treeView(), view->treeModel());
-	gtk_icon_view_set_model(view->iconView(), view->treeModel());
+        auto view = (View<Type> *)data; 
+        auto tmp = view->treeModel();
+        // set iconview/treeview treemodel
+        view->setTreeModel(view->backTreeModel());
+        view->setBackTreeModel(tmp);
+        gtk_tree_view_set_model(view->treeView(), view->treeModel());
+        gtk_icon_view_set_model(view->iconView(), view->treeModel());
 
         auto p = new(LocalMonitor<Type>)(view->treeModel(), view);
         p->start_monitor(view, view->path());
-	// deprecated view->monitorObject()->setMonitorStore(GTK_LIST_STORE(view->treeModel()));
+        // deprecated view->monitorObject()->setMonitorStore(GTK_LIST_STORE(view->treeModel()));
         TRACE("replaceTreeModel() *** localMonitor object= %p\n", view->monitorObject());
         // XXX This timing is correct for mountThread :-)  
 
         //((LocalMonitor<Type> *)(view->monitorObject()))->startMountThread();
-	
+        
         return NULL;
 
     }
@@ -526,57 +551,132 @@ private:
 public:
 
     static void *statusMessage(void *data){
-	auto arg = (void **)data;
-	auto view = (View<Type> *)arg[0]; 
-	auto text = (const gchar *)arg[1]; 
+        auto arg = (void **)data;
+        auto view = (View<Type> *)arg[0]; 
+        auto text = (const gchar *)arg[1]; 
         view->page()->showFmButtonBox();
-	view->page()->updateStatusLabel(text);
-	while(gtk_events_pending())gtk_main_iteration();
-	return NULL;
+        view->page()->updateStatusLabel(text);
+        while(gtk_events_pending())gtk_main_iteration();
+        return NULL;
     }
 
     static void *finishLoad(void *data){
- 	auto view = (View<Type> *)data; 
-	if (isTreeView) {
+         auto view = (View<Type> *)data; 
+        if (isTreeView) {
             gtk_tree_view_columns_autosize(view->treeView());
         }
        
 
         
-	if (mainWindow && GTK_IS_WIDGET(mainWindow)) gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
-	while(gtk_events_pending())gtk_main_iteration();
-	return NULL;
+        if (mainWindow && GTK_IS_WIDGET(mainWindow)) gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
+        while(gtk_events_pending())gtk_main_iteration();
+        return NULL;
     }
     
 
     static void statusLoadCount(View<Type> *view, int count, int total){
-	gchar *text;
-	if (count == total){
-	    auto fileCount = g_strdup_printf("%0d", total);
-	    text = g_strdup_printf(_("Files: %s"), fileCount); 
-	    g_free(fileCount);
-	} else {
-	    text = g_strdup_printf(_("Loaded %d of %d articles"), count, total);
-	}
+        gchar *text;
+        if (count == total){
+            auto fileCount = g_strdup_printf("%0d", total);
+            text = g_strdup_printf(_("Files: %s"), fileCount); 
+            g_free(fileCount);
+        } else {
+            text = g_strdup_printf(_("Loaded %d of %d articles"), count, total);
+        }
 
-	void *arg[]={
-	    (void *)view,
-	    (void *)text
-	};
-	Util<Type>::context_function(statusMessage, (void *)arg);
-	g_free(text);
+        void *arg[]={
+            (void *)view,
+            (void *)text
+        };
+        Util<Type>::context_function(statusMessage, (void *)arg);
+        g_free(text);
+    }
+
+    static gboolean
+    updateIcon(GtkTreeModel *treeModel, GtkTreePath *tpath,
+            GtkTreeIter *iter, gpointer data){
+        auto pixels = GPOINTER_TO_INT(data);
+        // Get path.
+        gchar *path;
+        gchar *mimetype;
+        gtk_tree_model_get(treeModel, iter, PATH, &path,
+                MIMETYPE, &mimetype, -1);
+        // get icon name.
+        auto iconName = LocalIcons<Type>::getBasicIconname(path, mimetype, TRUE);
+        if (!g_path_is_absolute(iconName)){
+            g_free(path);
+            g_free(iconName);
+            g_free(mimetype);
+            return FALSE;
+        }
+        // 
+        // Create Pixbuf.
+        auto normal_pixbuf = Pixbuf<Type>::getImageAtSize(iconName, pixels, mimetype);
+
+        g_free(path);
+        g_free(iconName);
+        g_free(mimetype);
+
+        if (normal_pixbuf) {
+            //auto highlight_pixbuf = gdk_pixbuf_copy(normal_pixbuf);
+            // Update treestore. 
+            // This should be done in the graphic context thread.
+            void *arg[]={(void *)treeModel, (void *)iter, (void *)normal_pixbuf};
+            Util<Type>::context_function(updatePixbuf_f, (void *)arg);
+        }
+        
+        return FALSE;
+    }
+    static void *
+    updatePixbuf_f (void *data){
+        auto arg = (void **)data;
+        auto treeModel = (GtkTreeModel *) arg[0];
+        auto iter = (GtkTreeIter *) arg[1];
+        auto normal_pixbuf = (GdkPixbuf *) arg[2];
+        gtk_list_store_set (GTK_LIST_STORE(treeModel), iter, 
+                DISPLAY_PIXBUF, normal_pixbuf, 
+                NORMAL_PIXBUF, normal_pixbuf, 
+                HIGHLIGHT_PIXBUF, normal_pixbuf, //highlight_pixbuf, 
+       -1);
+        return NULL;
+    }
+
+    static void updateIcons(View<Type> *view, GList *directoryList, const gchar *path){
+        // if no previews, return.
+        gint pixels = Settings<Type>::getSettingInteger("ImageSize", path);
+        if (pixels <= 24) {
+            TRACE("No previews for %s\n", path);
+            return;
+        }
+        TRACE("Previews on for %s, size=%d\n", path, pixels);
+        // Status line with preview size information. 
+        // XXX
+
+        auto treeModel = view->treeModel();
+        gtk_tree_model_foreach(treeModel, updateIcon, GINT_TO_POINTER(pixels));
+        return;
     }
 
     static void *threadInsert(void *data){
-	auto arg = (void **)data;
-	auto directoryList = (GList *)arg[0];
-	auto view = (View<Type> *)arg[1];
-	auto path = (gchar *)arg[2];
-	time_t start = time(NULL);
+        pthread_mutex_lock(&previewMutex);
+        auto arg = (void **)data;
+        auto directoryList = (GList *)arg[0];
+        auto view = (View<Type> *)arg[1];
+        auto path = (gchar *)arg[2];
+        time_t start = time(NULL);
         TRACE("local/threadInsert() ***Starting... \n");
-	insert_list_into_model(directoryList, view, path);
+        insert_list_into_model(directoryList, view, path);
         TRACE("local/threadInsert() *** done... at %ld seconds \n", time(NULL)-start);
-	g_free(arg);
+        // replaceTreeModel will fix treeModel used by monitorObject.
+        Util<Type>::context_function(replaceTreeModel, (void *)view);
+        // clear out backTreeModel
+        gtk_list_store_clear (GTK_LIST_STORE(view->backTreeModel()));
+
+        Util<Type>::context_function(finishLoad, (void *)view);
+        
+        updateIcons(view, directoryList, path);
+        statusLoadCount(view, g_list_length(directoryList),g_list_length(directoryList));
+        g_free(arg);
         GList *p = directoryList;
         for (;p && p->data; p=p->next){
             xd_t *xd_p = (xd_t *)p->data;
@@ -584,41 +684,35 @@ public:
         }
         g_list_free(directoryList);
         g_free(path);
-        // replaceTreeModel will fix treeModel used by monitorObject.
-	Util<Type>::context_function(replaceTreeModel, (void *)view);
-	// clear out backTreeModel
-	gtk_list_store_clear (GTK_LIST_STORE(view->backTreeModel()));
-
-	Util<Type>::context_function(finishLoad, (void *)view);
-
-        
-	return NULL;
+        pthread_mutex_unlock(&previewMutex);
+       
+        return NULL;
 
     }
 
     static void
     insert_list_into_model(GList *data, View<Type> *view, const gchar *path){
-	//auto list_store = GTK_LIST_STORE(view->treeModel());
-	auto list_store = GTK_LIST_STORE(view->backTreeModel());
-	if(strcmp(path, "/")==0){
+        //auto list_store = GTK_LIST_STORE(view->treeModel());
+        auto list_store = GTK_LIST_STORE(view->backTreeModel());
+        if(strcmp(path, "/")==0){
             TRACE("adding root item to \"%s\"\n", path);
-	    RootView<Type>::addXffmItem(GTK_TREE_MODEL(list_store));
-	} else {
+            RootView<Type>::addXffmItem(GTK_TREE_MODEL(list_store));
+        } else {
             TRACE("not adding root item to \"%s\"\n", path);
         }
 
         GList *directory_list = (GList *)data;
         GList *l = directory_list;
         gint dir_count = g_list_length(directory_list);
-	int count = 0;
+        int count = 0;
         for (; l && l->data; l= l->next){
             xd_t *xd_p = (xd_t *)l->data;
             add_local_item(list_store, xd_p);
-	    if (++count % 50 == 0){
-		statusLoadCount(view, count, dir_count);
-	    }
+            if (++count % 50 == 0){
+                statusLoadCount(view, count, dir_count);
+            }
         }
-	statusLoadCount(view, dir_count, dir_count);
+        statusLoadCount(view, dir_count, dir_count);
     }
 
     static gboolean
@@ -700,7 +794,7 @@ private:
     add_local_item(GtkListStore *list_store, GtkTreeIter *iter, xd_t *xd_p){
         gchar *utf_name = Util<Type>::utf_string(xd_p->d_name);
         const gchar *icon_name = xd_p->icon;
-	TRACE("icon name for %s is %s\n", xd_p->d_name, icon_name);
+        TRACE("icon name for %s is %s\n", xd_p->d_name, icon_name);
         
         // chop file extension (will now appear on the icon). (XXX only for big icons)
         gboolean is_dir;
@@ -727,32 +821,32 @@ private:
         GdkPixbuf *highlight_pixbuf = NULL;
 
 
-	if (g_path_is_absolute(icon_name)){
-	    auto page_p = Fm<Type>::getCurrentPage();
-	    auto pixels = page_p->getImageSize();
-	    TRACE("add_local_item(%s): pixels = %d \n", icon_name, pixels);
-	    normal_pixbuf = Pixbuf<Type>::getImageAtSize(icon_name, pixels, xd_p->mimetype, xd_p->st);
-	    treeViewPixbuf = Pixbuf<Type>::getImageAtSize(icon_name, 24, xd_p->mimetype);
-	}
+        if (g_path_is_absolute(icon_name)){
+            auto page_p = Fm<Type>::getCurrentPage();
+            auto pixels = page_p->getImageSize();
+            TRACE("add_local_item(%s): pixels = %d \n", icon_name, pixels);
+            normal_pixbuf = Pixbuf<Type>::getImageAtSize(icon_name, pixels, xd_p->mimetype, xd_p->st);
+            treeViewPixbuf = Pixbuf<Type>::getImageAtSize(icon_name, 24, xd_p->mimetype);
+        }
 
-	else if (xd_p->st) {
+        else if (xd_p->st) {
             auto type = xd_p->st->st_mode & S_IFMT;
             if (type == S_IFDIR) {
                 highlight_pixbuf = Pixbuf<Type>::getPixbuf(up?HIGHLIGHT_UP:"document-open", -48);
             }
-	}
+        }
 
       
         if (!treeViewPixbuf){ 
-	    treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name, -24);
-	}
+            treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name, -24);
+        }
         if (!normal_pixbuf) {
-	    normal_pixbuf = Pixbuf<Type>::getPixbuf(icon_name, -48);
-	}
+            normal_pixbuf = Pixbuf<Type>::getPixbuf(icon_name, -48);
+        }
         //Highlight emblem macros are defined in types.h
-	//
-	// Decorate highlight pixbuf
-	// (duplicate code in monitor.hh/model.hh)
+        //
+        // Decorate highlight pixbuf
+        // (duplicate code in monitor.hh/model.hh)
         if (!highlight_pixbuf) {
             highlight_pixbuf = gdk_pixbuf_copy(normal_pixbuf);
         
@@ -777,25 +871,25 @@ private:
             // Done by main gtk thread:
             Util<Type>::context_function(Pixbuf<Type>::insert_decoration_f, arg);
         }
-	
-	if (xd_p->st){TRACE("xd_p->st is populated: %s\n", utf_name);}
+        
+        if (xd_p->st){TRACE("xd_p->st is populated: %s\n", utf_name);}
         gchar *statInfo = NULL;
-	// statInfo is too long for big directories, and only 
-	// required for treeview...
-	if (isTreeView) {
+        // statInfo is too long for big directories, and only 
+        // required for treeview...
+        if (isTreeView) {
             getStat(xd_p);
             TRACE("getstat for %s\n", xd_p->path);
             statInfo = Util<Type>::statInfo(xd_p->st);
         }
- 	guint flags=(xd_p->d_type & 0xff);
+         guint flags=(xd_p->d_type & 0xff);
         auto size = sizeString((xd_p->st)?xd_p->st->st_size:0);
         auto date = dateString((xd_p->st)?xd_p->st->st_mtime:0);
         gchar **p = NULL;
         if (!statInfo) statInfo = g_strdup("");
         if (up) flags |= 0x100;
-	TRACE("local/model gtk_list_store_set(%s)\n", icon_name);
+        TRACE("local/model gtk_list_store_set(%s)\n", icon_name);
         gtk_list_store_set (list_store, iter, 
-		FLAGS, flags,
+                FLAGS, flags,
                 DISPLAY_NAME, utf_name,
                 PATH, xd_p->path,
                 ICON_NAME, icon_name,

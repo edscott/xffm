@@ -85,6 +85,28 @@
 #define URIFILE "file://"
 #define USER_DIR                 g_get_home_dir()
 
+
+namespace xf {
+    template <class Type> class Fm;
+}
+
+
+# undef TRACE
+# define TRACE(...)   { (void)0; }
+//# define TRACE(...)  {fprintf(stderr, "TRACE> "); fprintf(stderr, __VA_ARGS__);}
+# undef DBG_
+//# define DBG(...)   { (void)0; }
+# define DBG_(...)  {fprintf(stderr, "DBG> "); fprintf(stderr, __VA_ARGS__);}
+
+# undef ERROR
+# define ERROR(...)  {auto errorText = g_strdup_printf(__VA_ARGS__);xf::Fm<Type>::printError(errorText); g_free(errorText);}
+# undef INFO
+# define INFO(...)  {auto errorText = g_strdup_printf(__VA_ARGS__);xf::Fm<Type>::printInfo(errorText); g_free(errorText);}
+
+# undef DBG
+# define DBG(...)  {auto errorText = g_strdup_printf(__VA_ARGS__);xf::Fm<Type>::printDbg(errorText); g_free(errorText);}
+
+
 static gchar *buildDir=NULL;
 static const gchar *buildIcons=NULL;
 static const gchar *xffmProgram;
@@ -124,10 +146,10 @@ main (int argc, char *argv[]) {
 
 
 #ifndef FORK
-    DBG("FORK disabled: SSH_ASKPASS will not work.");
+    WARN("FORK disabled: SSH_ASKPASS will not work.");
 #endif
     if (chdir(g_get_home_dir()) < 0){
-        ERROR("xffm.cc::Cannot chdir to %s (%s)\n", g_get_home_dir(), strerror(errno));
+        fprintf(stderr, "xffm.cc::Cannot chdir to %s (%s)\n", g_get_home_dir(), strerror(errno));
         exit(1);
     }
     xffindProgram = argv[0];

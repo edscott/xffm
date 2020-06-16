@@ -234,10 +234,12 @@ private:
         TRACE ("SHOW_TIPx: %s(%s)\n", arg[0], arg[3]);
         GdkPixbuf * retval=NULL;
         // this fork is ok from thread, I guess.
-        TRACE( "--> creating preview %s\n", preview);
+        TRACE( "gsPreview(): preview for %s\n", src);
         pid_t pid = fork ();
         if(!pid) {
         TRACE( "--> child is creating preview %s\n", preview);
+            auto fd = fopen ("/dev/null", "wb");
+            dup2(fileno(fd), fileno(stdout));
             execv (arg[0], arg);
             _exit (123);
         } else {

@@ -26,27 +26,27 @@ class BaseModel
     mkTreeModel (void)
     {
 
-	GtkTreeIter iter;
-	GtkListStore *list_store = gtk_list_store_new (NUM_COLS, 
-	    G_TYPE_UINT,      // flags FLAGS
-	    GDK_TYPE_PIXBUF, // icon in treeView display TREEVIEW_PIXBUF
-	    GDK_TYPE_PIXBUF, // icon in display DISPLAY_PIXBUF
-	    GDK_TYPE_PIXBUF, // normal icon reference NORMAL_PIXBUF
-	    GDK_TYPE_PIXBUF, // highlight icon reference HIGHLIGHT_PIXBUF
-	    GDK_TYPE_PIXBUF, // preview, tooltip image (cache) TOOLTIP_PIXBUF
-	    G_TYPE_STRING,   // name in display (UTF-8) DISPLAY_NAME
-	    G_TYPE_STRING,   // path from filesystem (verbatim) PATH
-	    G_TYPE_STRING,   // disk id (or other) DISK_ID
+        GtkTreeIter iter;
+        GtkListStore *list_store = gtk_list_store_new (NUM_COLS, 
+            G_TYPE_UINT,      // flags FLAGS
+            GDK_TYPE_PIXBUF, // icon in treeView display TREEVIEW_PIXBUF
+            GDK_TYPE_PIXBUF, // icon in display DISPLAY_PIXBUF
+            GDK_TYPE_PIXBUF, // normal icon reference NORMAL_PIXBUF
+            GDK_TYPE_PIXBUF, // highlight icon reference HIGHLIGHT_PIXBUF
+            GDK_TYPE_PIXBUF, // preview, tooltip image (cache) TOOLTIP_PIXBUF
+            G_TYPE_STRING,   // name in display (UTF-8) DISPLAY_NAME
+            G_TYPE_STRING,   // path from filesystem (verbatim) PATH
+            G_TYPE_STRING,   // disk id (or other) DISK_ID
             G_TYPE_STRING,     // size SIZE
             G_TYPE_STRING,     // date DATE
-	    G_TYPE_STRING,   // tooltip text (cache) TOOLTIP_TEXT
-	    G_TYPE_STRING,   // icon identifier (name or composite key) ICON_NAME
-	    G_TYPE_STRING,   // mimetype (further identification of files) MIMETYPE
-	    G_TYPE_STRING,   // Preview path PREVIEW_PATH
-	    G_TYPE_UINT,      // Preview time PREVIEW_TIME
-	    GDK_TYPE_PIXBUF  // Preview pixbuf PREVIEW_PIXBUF
+            G_TYPE_STRING,   // tooltip text (cache) TOOLTIP_TEXT
+            G_TYPE_STRING,   // icon identifier (name or composite key) ICON_NAME
+            G_TYPE_STRING,   // mimetype (further identification of files) MIMETYPE
+            G_TYPE_STRING,   // Preview path PREVIEW_PATH
+            G_TYPE_UINT,      // Preview time PREVIEW_TIME
+            GDK_TYPE_PIXBUF  // Preview pixbuf PREVIEW_PIXBUF
             ); // 
-	return GTK_TREE_MODEL (list_store);
+        return GTK_TREE_MODEL (list_store);
     }
 
 protected:
@@ -68,17 +68,17 @@ public:
     GtkIconView *iconView(void){return iconView_;}
     
     BaseModel(Page<Type> *page){
-	page_ = page; 
+        page_ = page; 
         path_ = NULL;
         selectionList_ = NULL;
-	treeModel_ = mkTreeModel();
-	backTreeModel_ = mkTreeModel();
+        treeModel_ = mkTreeModel();
+        backTreeModel_ = mkTreeModel();
         if (!highlight_hash) highlight_hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
         if (!validBaseViewHash) {
-	    validBaseViewHash = g_hash_table_new(g_direct_hash, g_direct_equal); 
-	}
-	g_hash_table_replace(validBaseViewHash,
-		(void *)this, GINT_TO_POINTER(1));
+            validBaseViewHash = g_hash_table_new(g_direct_hash, g_direct_equal); 
+        }
+        g_hash_table_replace(validBaseViewHash,
+                (void *)this, GINT_TO_POINTER(1));
         source_ = GTK_WIDGET(this->page()->pageChild());
         destination_ = GTK_WIDGET(this->page()->pageChild());
         // Enable dnd by default.
@@ -112,14 +112,14 @@ public:
              (void *)this);
 
         // "drag-motion" is not necessary with GTK_DEST_DEFAULT_MOTION
-	// while using default iconview dnd, but this is not
-	// our case. But seems to make no difference qith gtk+-3.24
+        // while using default iconview dnd, but this is not
+        // our case. But seems to make no difference qith gtk+-3.24
         // Nonetheless, Drop targets will not be highlighted if
         // this is not set.
         g_signal_connect (G_OBJECT (this->destination()), 
              "drag-motion", 
-	     G_CALLBACK (BaseSignals<Type>::DragMotion),
-	     (void *)this);
+             G_CALLBACK (BaseSignals<Type>::DragMotion),
+             (void *)this);
         
         // Not necessary with GTK_DEST_DEFAULT_DROP
         //
@@ -132,7 +132,7 @@ public:
     }
     ~BaseModel(void){
         TRACE("BaseModel destructor.\n");
-	g_hash_table_remove(validBaseViewHash, (void *)this);
+        g_hash_table_remove(validBaseViewHash, (void *)this);
         g_free(path_); 
         g_object_unref(treeModel_);
         g_object_unref(backTreeModel_);
@@ -152,14 +152,14 @@ public:
 /*
     guint
     setSelectable(gchar *name, guint flags){
-	if (strcmp(name, "..")==0) return SET_NOTSELECTABLE(flags);
-	return flags;
+        if (strcmp(name, "..")==0) return SET_NOTSELECTABLE(flags);
+        return flags;
     }
 
     guint
     isSelectable(GtkTreePath *tpath ) {
         GtkTreeIter iter;
-	guint flags;
+        guint flags;
         gtk_tree_model_get_iter (this->treeModel(), &iter, tpath);
         gtk_tree_model_get (this->treeModel(), &iter, 
                 FLAGS , &flags, -1);

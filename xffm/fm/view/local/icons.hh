@@ -135,7 +135,7 @@ public:
 
         auto iconname = specificIconName(path, mimetype, doPreviews);
         struct stat st;
-        if (stat(path, &st) == 0) {
+        if (!g_path_is_absolute(iconname) && stat(path, &st) == 0) {
             gchar *g = NULL; 
             if (st.st_mode & S_IXOTH) g = g_strconcat(iconname, "/SE/run/1.2/220", NULL);
             else { 

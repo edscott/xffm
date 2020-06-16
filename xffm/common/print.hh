@@ -24,9 +24,9 @@ public:
 
     static void print(GtkTextView *textview, const gchar *tag, gchar *string){
         if (!textview) return;
-	void *arg[]={(void *)textview, (void *)tag, (void *)string};
-	context_function(print_f, arg);
-	g_free(string);
+        void *arg[]={(void *)textview, (void *)tag, (void *)string};
+        context_function(print_f, arg);
+        g_free(string);
     }
    
     static void print(GtkTextView *textview, gchar *string){
@@ -36,99 +36,97 @@ public:
 
     static void print_debug(GtkTextView *textview, gchar *string){
         if (!textview) return;
-	void *arg[]={(void *)textview, (void *)"italic", (void *)string};
-	context_function(print_d, arg);
-	g_free(string);
+        void *arg[]={(void *)textview, (void *)"italic", (void *)string};
+        context_function(print_d, arg);
+        g_free(string);
 
     }
         
     static void print_icon(GtkTextView *textview, const gchar *iconname, gchar *string)
     {
         if (!textview) return;
-	auto pixbuf = pixbuf_c::getPixbuf(iconname, -16);
-	void *arg[]={(void *)pixbuf, (void *)textview, NULL, (void *)string};
-	context_function(print_i, arg);
-	g_free(string);
+        auto pixbuf = pixbuf_c::getPixbuf(iconname, -16);
+        void *arg[]={(void *)pixbuf, (void *)textview, NULL, (void *)string};
+        context_function(print_i, arg);
+        g_free(string);
     }
 
     static void print_icon(GtkTextView *textview, 
                                 const gchar *iconname, 
-				const gchar *tag, 
-				gchar *string)
+                                const gchar *tag, 
+                                gchar *string)
     {
         if (!textview) return;
-	auto pixbuf = pixbuf_c::getPixbuf(iconname, -16);
-	void *arg[]={(void *)pixbuf, (void *)textview, (void *)tag, (void *)string};
-	context_function(print_i, arg);
-	g_free(string);
+        auto pixbuf = pixbuf_c::getPixbuf(iconname, -16);
+        void *arg[]={(void *)pixbuf, (void *)textview, (void *)tag, (void *)string};
+        context_function(print_i, arg);
+        g_free(string);
     }
 
     static void print_status(GtkTextView *textview, gchar *string){
         if (!textview) return;
-	void *arg[]={(void *)textview, (void *)string};
-	context_function(print_s, arg);
-	g_free(string);
+        void *arg[]={(void *)textview, (void *)string};
+        context_function(print_s, arg);
+        g_free(string);
     }
 
     static void print_status_label(GtkLabel *label, gchar *string){
         if (!label || !string) return;
-	void *arg[]={(void *)label, (void *)string};
-	context_function(print_sl, arg);
-	g_free(string);
+        void *arg[]={(void *)label, (void *)string};
+        context_function(print_sl, arg);
+        g_free(string);
     }
 
     static void print_error(GtkTextView *textview, gchar *string){
         if (!textview) return;
-	void *arg[]={(void *)textview, (void *)"bold", (void *)string};
-	context_function(print_e, arg);
-	g_free(string);
-
+        print_icon(textview, "dialog-error", "bold", string);
+        void *arg[]={(void *)textview, (void *)"bold", (void *)string};
     }
 
 
     static void clear_text(GtkTextView *textview){
         if (!textview) return;
-	void *arg[]={(void *)textview, NULL};
+        void *arg[]={(void *)textview, NULL};
         context_function(clear_text_buffer_f, arg);
     }
 
     static void show_text(GtkTextView *textview){
-	showText(textview);
+        showText(textview);
     }
 
     static void showText(GtkTextView *textview){
         if (!textview) return;
         auto vpane = GTK_PANED(g_object_get_data(G_OBJECT(textview), "vpane"));
-	void *arg[]={(void *)vpane, NULL, NULL, NULL};
+        void *arg[]={(void *)vpane, NULL, NULL, NULL};
         context_function(show_text_buffer_f, arg);
     }
 
     static void showTextSmall(GtkTextView *textview){
         if (!textview) return;
         auto vpane = GTK_PANED(g_object_get_data(G_OBJECT(textview), "vpane"));
-	void *arg[]={(void *)vpane, NULL,GINT_TO_POINTER(1), NULL};
+        void *arg[]={(void *)vpane, NULL,GINT_TO_POINTER(1), NULL};
         context_function(show_text_buffer_f, arg);
     }
     static void show_textFull(GtkTextView *textview){
         if (!textview) return;
         auto vpane = GTK_PANED(g_object_get_data(G_OBJECT(textview), "vpane"));
-	void *arg[]={(void *)vpane, GINT_TO_POINTER(1),NULL, NULL};
+        void *arg[]={(void *)vpane, GINT_TO_POINTER(1),NULL, NULL};
         context_function(show_text_buffer_f, arg);
     }
  /*   static gboolean show_textFull(void *data){
-	show_textFull(GTK_TEXT_VIEW(data));
-	return FALSE;
+        show_textFull(GTK_TEXT_VIEW(data));
+        return FALSE;
     }
     static gboolean hide_text(void *data){
-	hide_text(GTK_TEXT_VIEW(data));
-	return FALSE;
+        hide_text(GTK_TEXT_VIEW(data));
+        return FALSE;
     } */
 
 
     static void hide_text(GtkTextView *textview){
         if (!textview) return;
         auto vpane = GTK_PANED(g_object_get_data(G_OBJECT(textview), "vpane"));
-	void *arg[]={(void *)vpane, NULL};
+        void *arg[]={(void *)vpane, NULL};
         context_function(hide_text_buffer_f, arg);
     }
 
@@ -136,34 +134,34 @@ public:
     static void *
     scroll_to_top(GtkTextView *textview){
         if (!textview) return NULL;
-	// make sure all text is written before attempting scroll
-	while (gtk_events_pending()) gtk_main_iteration();
-	GtkTextIter start, end;
-	auto buffer = gtk_text_view_get_buffer (textview);
-	gtk_text_buffer_get_bounds (buffer, &start, &end);
+        // make sure all text is written before attempting scroll
+        while (gtk_events_pending()) gtk_main_iteration();
+        GtkTextIter start, end;
+        auto buffer = gtk_text_view_get_buffer (textview);
+        gtk_text_buffer_get_bounds (buffer, &start, &end);
         gtk_text_view_scroll_to_iter (textview,
                               &start,
                               0.0,
                               FALSE,
                               0.0, 0.0);        
-	while (gtk_events_pending()) gtk_main_iteration();
-	return NULL;
+        while (gtk_events_pending()) gtk_main_iteration();
+        return NULL;
     }
 
     static void *
     scroll_to_bottom(GtkTextView *textview){
         if (!textview) return NULL;
-	// make sure all text is written before attempting scroll
-	while (gtk_events_pending()) gtk_main_iteration();
-	GtkTextIter start, end;
-	auto buffer = gtk_text_view_get_buffer (textview);
-	gtk_text_buffer_get_bounds (buffer, &start, &end);
-	auto mark = gtk_text_buffer_create_mark (buffer, "scrolldown", &end, FALSE);
-	gtk_text_view_scroll_to_mark (textview, mark, 0.2,    /*gdouble within_margin, */
-				      TRUE, 1.0, 1.0);
-	//gtk_text_view_scroll_mark_onscreen (textview, mark);
-	gtk_text_buffer_delete_mark(buffer, mark);
-	return NULL;
+        // make sure all text is written before attempting scroll
+        while (gtk_events_pending()) gtk_main_iteration();
+        GtkTextIter start, end;
+        auto buffer = gtk_text_view_get_buffer (textview);
+        gtk_text_buffer_get_bounds (buffer, &start, &end);
+        auto mark = gtk_text_buffer_create_mark (buffer, "scrolldown", &end, FALSE);
+        gtk_text_view_scroll_to_mark (textview, mark, 0.2,    /*gdouble within_margin, */
+                                      TRUE, 1.0, 1.0);
+        //gtk_text_view_scroll_mark_onscreen (textview, mark);
+        gtk_text_buffer_delete_mark(buffer, mark);
+        return NULL;
     }
 
 
@@ -185,28 +183,28 @@ private:
     }
 
     static void *context_function(void * (*function)(gpointer), void * function_data){
-	pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
-	pthread_cond_t signal = PTHREAD_COND_INITIALIZER; 
-	auto result=GINT_TO_POINTER(-1);
-	void *arg[] = {
-	    (void *)function,
-	    (void *)function_data,
-	    (void *)&mutex,
-	    (void *)&signal,
-	    (void *)&result
-	};
-	gboolean owner = g_main_context_is_owner(g_main_context_default());
-	if (owner){
-	    context_function_f(arg);
-	} else {
-	    g_main_context_invoke(NULL, CONTEXT_CALLBACK(context_function_f), arg);
-	    pthread_mutex_lock(&mutex);
-	    if (result == GINT_TO_POINTER(-1)) pthread_cond_wait(&signal, &mutex);
-	    pthread_mutex_unlock(&mutex);
-	}
-	pthread_mutex_destroy(&mutex);
-	pthread_cond_destroy(&signal);
-	return result;
+        pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+        pthread_cond_t signal = PTHREAD_COND_INITIALIZER; 
+        auto result=GINT_TO_POINTER(-1);
+        void *arg[] = {
+            (void *)function,
+            (void *)function_data,
+            (void *)&mutex,
+            (void *)&signal,
+            (void *)&result
+        };
+        gboolean owner = g_main_context_is_owner(g_main_context_default());
+        if (owner){
+            context_function_f(arg);
+        } else {
+            g_main_context_invoke(NULL, CONTEXT_CALLBACK(context_function_f), arg);
+            pthread_mutex_lock(&mutex);
+            if (result == GINT_TO_POINTER(-1)) pthread_cond_wait(&signal, &mutex);
+            pthread_mutex_unlock(&mutex);
+        }
+        pthread_mutex_destroy(&mutex);
+        pthread_cond_destroy(&signal);
+        return result;
     }
 
     static void * 
@@ -297,31 +295,31 @@ private:
 public:
     static gchar *
     get_current_text (GtkTextView *textview) {
-	// get current text
-	GtkTextIter start, end;
-	auto buffer = gtk_text_view_get_buffer (textview);
+        // get current text
+        GtkTextIter start, end;
+        auto buffer = gtk_text_view_get_buffer (textview);
 
-	gtk_text_buffer_get_bounds (buffer, &start, &end);
-	auto t = gtk_text_buffer_get_text (buffer, &start, &end, TRUE);
-	g_strchug(t);
-	return t;
+        gtk_text_buffer_get_bounds (buffer, &start, &end);
+        auto t = gtk_text_buffer_get_text (buffer, &start, &end, TRUE);
+        g_strchug(t);
+        return t;
     }
 
     static gchar *
     get_text_to_cursor (GtkTextView *textview) {
-	// get current text
-	GtkTextIter start, end;
-	auto buffer = gtk_text_view_get_buffer (textview);
-	gint cursor_position;
-	// cursor_position is a GtkTextBuffer internal property (read only)
-	g_object_get (G_OBJECT (buffer), "cursor-position", &cursor_position, NULL);
-	
-	gtk_text_buffer_get_iter_at_offset (buffer, &start, 0);
-	gtk_text_buffer_get_iter_at_offset (buffer, &end, cursor_position);
-	auto t = gtk_text_buffer_get_text (buffer, &start, &end, TRUE);
-	g_strchug(t);
-	TRACE ("lpterm_c::get_text_to_cursor: to cursor position=%d %s\n", cursor_position, t);
-	return t;
+        // get current text
+        GtkTextIter start, end;
+        auto buffer = gtk_text_view_get_buffer (textview);
+        gint cursor_position;
+        // cursor_position is a GtkTextBuffer internal property (read only)
+        g_object_get (G_OBJECT (buffer), "cursor-position", &cursor_position, NULL);
+        
+        gtk_text_buffer_get_iter_at_offset (buffer, &start, 0);
+        gtk_text_buffer_get_iter_at_offset (buffer, &end, cursor_position);
+        auto t = gtk_text_buffer_get_text (buffer, &start, &end, TRUE);
+        g_strchug(t);
+        TRACE ("lpterm_c::get_text_to_cursor: to cursor position=%d %s\n", cursor_position, t);
+        return t;
     }
 private:
 
@@ -345,15 +343,15 @@ private:
             ERROR("vpane is NULL\n");
             return NULL;
         }
-	gint max;
-	GtkWidget *window = gtk_widget_get_toplevel(GTK_WIDGET(vpane));
-	GtkAllocation allocation;
-	gtk_widget_get_allocation(window, &allocation);
-	gint height = allocation.height;
+        gint max;
+        GtkWidget *window = gtk_widget_get_toplevel(GTK_WIDGET(vpane));
+        GtkAllocation allocation;
+        gtk_widget_get_allocation(window, &allocation);
+        gint height = allocation.height;
 
-	TRACE("setting vpane position to %d\n", height);
+        TRACE("setting vpane position to %d\n", height);
         gtk_paned_set_position (vpane, height);
-	g_object_set_data(G_OBJECT(vpane), "oldCurrent", GINT_TO_POINTER(height));
+        g_object_set_data(G_OBJECT(vpane), "oldCurrent", GINT_TO_POINTER(height));
         return NULL;
     }
 
@@ -362,46 +360,46 @@ private:
         if (!data) return GINT_TO_POINTER(-1);
         auto arg=(void **)data;
         auto vpane = GTK_PANED(arg[0]);
-	auto fullview =arg[1]; 
+        auto fullview =arg[1]; 
         auto small = arg[2];
         if(!vpane) {
             ERROR("vpane is NULL\n");
             return NULL;
         }
         gint min, max;
-	g_object_get(G_OBJECT(vpane), "min-position", &min, NULL);
-	g_object_get(G_OBJECT(vpane), "max-position", &max, NULL);
-	if (fullview) {
-	    TRACE("show_text_buffer_f:setting vpane position to %d\n", min);
-	    gtk_paned_set_position (vpane, min);
-	    g_object_set_data(G_OBJECT(vpane), "oldCurrent", GINT_TO_POINTER(min));
+        g_object_get(G_OBJECT(vpane), "min-position", &min, NULL);
+        g_object_get(G_OBJECT(vpane), "max-position", &max, NULL);
+        if (fullview) {
+            TRACE("show_text_buffer_f:setting vpane position to %d\n", min);
+            gtk_paned_set_position (vpane, min);
+            g_object_set_data(G_OBJECT(vpane), "oldCurrent", GINT_TO_POINTER(min));
             while (gtk_events_pending()) gtk_main_iteration();
             TRACE("vpane position set to =%d\n", gtk_paned_get_position(vpane));
-	    return NULL;
-	}
-	//GtkWidget *window = gtk_widget_get_toplevel(GTK_WIDGET(vpane));
-	GtkAllocation allocation;
-	//gtk_widget_get_allocation(window, &allocation);
-	//gint height = allocation.height;
-	gtk_widget_get_allocation(GTK_WIDGET(vpane), &allocation);
-	gint vheight = allocation.height;
+            return NULL;
+        }
+        //GtkWidget *window = gtk_widget_get_toplevel(GTK_WIDGET(vpane));
+        GtkAllocation allocation;
+        //gtk_widget_get_allocation(window, &allocation);
+        //gint height = allocation.height;
+        gtk_widget_get_allocation(GTK_WIDGET(vpane), &allocation);
+        gint vheight = allocation.height;
         gint height;
         if (small) height = 8*vheight/10;
         else height = 2*vheight/3;
         TRACE("vheight = %d, position = %d\n", vheight, gtk_paned_get_position(vpane));
-	if (gtk_paned_get_position(vpane) > height) {
-	    TRACE("setting vpane position to %d\n", height);
-	    gtk_paned_set_position (vpane, height);
-	    g_object_set_data(G_OBJECT(vpane), "oldCurrent", GINT_TO_POINTER(height));
-	} else TRACE("not setting vpane position to %d\n", height);
+        if (gtk_paned_get_position(vpane) > height) {
+            TRACE("setting vpane position to %d\n", height);
+            gtk_paned_set_position (vpane, height);
+            g_object_set_data(G_OBJECT(vpane), "oldCurrent", GINT_TO_POINTER(height));
+        } else TRACE("not setting vpane position to %d\n", height);
         return NULL;
     }
 
 /*
      static const gchar *
     get_workdir(void){
-	view_c *view_p = (view_c *)view_v;
-	return view_p->get_path();
+        view_c *view_p = (view_c *)view_v;
+        return view_p->get_path();
     }
 */
 
@@ -641,8 +639,8 @@ private:
                             g_strfreev(ss);
                             goto endloop;
                         } else {
-			    TRACE("no ansiTag for \"%s\"\n", *t);
-			}
+                            TRACE("no ansiTag for \"%s\"\n", *t);
+                        }
                         continue;
                     } else {
                         TRACE("ansiTag=%s\n", ansiTag);
@@ -792,7 +790,7 @@ selection {\
     static void
     set_font_size (GtkWidget * widget, gint fontsize) {
         if (!GTK_IS_WIDGET(widget)) return;
-        auto oldfontsize = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(widget),	"fontsize"));
+        auto oldfontsize = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(widget),        "fontsize"));
 
         if (oldfontsize == fontsize) return;
         if (fontsize < 0 ) return;

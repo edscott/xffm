@@ -15,6 +15,7 @@
 
 namespace xf
 {
+template <class Type> class Print;
 template <class Type> class Preview;
 template <class Type> class Fm;
 template <class Type> class Gtk;
@@ -245,7 +246,7 @@ public:
         }
 
         if (!pixbuf) {
-            ERROR("buildImagePixbuf(%s)\n", iconName);
+            TRACE("buildImagePixbuf(%s)\n", iconName);
             return NULL;
         }
         // Put extension...
@@ -318,7 +319,8 @@ private:
             GError *error = NULL;
             pixbuf = gdk_pixbuf_new_from_file (fname, &error);
             if (error){
-                DBG("pixbuf.hh::gdk_pixbuf_new_from_file(): %s\n", error->message);
+                Fm<Type>::printError(error->message);
+                TRACE("pixbuf.hh::gdk_pixbuf_new_from_file(): %s\n", error->message);
                 pixbuf=NULL;
                 g_error_free(error);
             }
@@ -376,9 +378,10 @@ public:
         if (!pixbuf) {
             pixbuf = gdk_pixbuf_new_from_file (path, &error);
             if (error){
-                DBG("pixbuf.hh::gdk_pixbuf_new_from_file(): %s\n", error->message);
-                pixbuf=NULL;
+                Fm<Type>::printError(error->message);
+                TRACE("pixbuf.hh::gdk_pixbuf_new_from_file(): %s\n", error->message);
                 g_error_free(error);
+                return NULL;
             }
         }
         auto pixbufWidth = gdk_pixbuf_get_width(pixbuf);
@@ -414,7 +417,8 @@ private:
         TRACE("readThumbnail(): Now trying to load thumbnail from %s\n",  thumbnailPath);
         auto pixbuf = gdk_pixbuf_new_from_file (thumbnailPath, &error);
         if (error){
-            ERROR("readThumbnail(): %s (%s)\n", thumbnailPath, error->message);
+            Fm<Type>::printError(error->message);
+            TRACE("readThumbnail(): %s (%s)\n", thumbnailPath, error->message);
             g_error_free(error);
             g_free(thumbnailPath);
             return NULL;
