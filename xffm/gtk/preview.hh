@@ -607,7 +607,7 @@ public:
         // limit output to one page...
         if(!text) return NULL;
 
-        auto pixbuf = processTextPixbuf(text, path, pixels);
+        pixbuf = processTextPixbuf(text, path, pixels);
         g_free(text);
 #endif
         return pixbuf;        
