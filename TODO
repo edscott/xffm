@@ -1,5 +1,5 @@
 For 0.95
-settings bug: problem with settings file. Seems like it is zapped somehow and when 
+Probably fixed: settings bug: problem with settings file. Seems like it is zapped somehow and when 
 zapped and menu opened, listview is automatically selected. Background color is lost
 as well as all other saved settings...
 
