@@ -5,7 +5,7 @@
 
 #define XFFM_CC
 #include "config.h"
-//#define NOFORK 1
+#define NOFORK 1
 // Run in background, detached.
 # define FORK 1
 #ifdef NOFORK
@@ -36,9 +36,6 @@
 # define ENABLE_PKG_MODULE 1
 # undef ENABLE_DIFF_MODULE 
 # define ENABLE_DIFF_MODULE 1
-// Easier debugging:
-//# undef FORK 
-//# warning "Fork not active..."
 // Core dumps for debugging:
 # define FORCE_CORE
 # warning "Core dump enabled..."
@@ -94,17 +91,19 @@ namespace xf {
 # undef TRACE
 # define TRACE(...)   { (void)0; }
 //# define TRACE(...)  {fprintf(stderr, "TRACE> "); fprintf(stderr, __VA_ARGS__);}
-# undef DBG_
+# undef DBG
 //# define DBG(...)   { (void)0; }
-# define DBG_(...)  {fprintf(stderr, "DBG> "); fprintf(stderr, __VA_ARGS__);}
+# define DBG(...)  {fprintf(stderr, "DBG> "); fprintf(stderr, __VA_ARGS__);}
 
 # undef ERROR
-# define ERROR(...)  {auto errorText = g_strdup_printf(__VA_ARGS__);xf::Fm<Type>::printError(errorText); g_free(errorText);}
+//# define ERROR(...)  {fprintf(stderr, "ERROR> "); fprintf(stderr, __VA_ARGS__);}
+# define ERROR(...)  {auto errorText = g_strdup_printf(__VA_ARGS__);xf::Fm<Type>::printError(errorText); }
 # undef INFO
-# define INFO(...)  {auto errorText = g_strdup_printf(__VA_ARGS__);xf::Fm<Type>::printInfo(errorText); g_free(errorText);}
+//# define INFO(...)  {fprintf(stderr, "INFO> "); fprintf(stderr, __VA_ARGS__);}
+# define INFO(...)  {auto errorText = g_strdup_printf(__VA_ARGS__);xf::Fm<Type>::printInfo(errorText); }
 
-# undef DBG
-# define DBG(...)  {auto errorText = g_strdup_printf(__VA_ARGS__);xf::Fm<Type>::printDbg(errorText); g_free(errorText);}
+# undef DBG_
+# define DBG_(...)  {auto errorText = g_strdup_printf(__VA_ARGS__);xf::Fm<Type>::printDbg(errorText); }
 
 
 static gchar *buildDir=NULL;

@@ -210,7 +210,6 @@ private:
     }
 
     GtkMenu *createMenu(void){
-        Settings<Type>::readSettings();
         menuItem_t item[]={
             {N_("View as list"), (void *)toggleView, (void *)"TreeView", "window"},
             {N_("Show hidden files"), (void *)toggleItem, (void *) "ShowHidden", "LocalView"},

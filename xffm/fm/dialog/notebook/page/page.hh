@@ -265,15 +265,18 @@ public:
     }
     void setPageWorkdir(const gchar *dir){
         // Avoid multiple resets...
+        static gboolean first = TRUE;
+        gboolean reset = (g_file_test(dir, G_FILE_TEST_IS_DIR) &&
+            (this->workDir() && strcmp(dir, this->workDir())));
+        if (!reset && !first) return;
+        first = FALSE;
         //if (this->workDir() && strcmp(dir, this->workDir())==0) return;
         TRACE("setPageWorkdir: %s\n", dir);
         this->setWorkDir(dir);
         TRACE("update_pathbar: %s\n", dir);
         this->update_pathbar(dir);
-        if (g_file_test(dir, G_FILE_TEST_IS_DIR)){
-            print_c::print(this->output(), "green", g_strdup_printf("cd %s\n", dir));
-        }
-            gchar *g = get_tab_name(this->workDir());
+        INFO("cd %s\n", dir);
+        gchar *g = get_tab_name(this->workDir());
         setPageLabel(g);
         g_free(g);
         setDialogTitle();

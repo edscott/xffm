@@ -61,6 +61,7 @@ namespace xf
 template <class Type> class Settings;
 template <class Type>
 class Util {
+private:
     static gint
     compareDown (const void *a, const void *b) {
         auto aa = (const gchar *)a;

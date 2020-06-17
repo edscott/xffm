@@ -19,9 +19,9 @@ public:
     static gboolean
     loadModel (GtkTreeModel *treeModel)
     {
-        ERROR("XXX: %s\n", "this is a test");
-        INFO("XXX: %s\n", "this is a test");
-        DBG("XXX: %s\n", "this is a test");
+        TRACE("XXX: %s\n", "this is a test");
+        TRACE("XXX: %s\n", "this is a test");
+        TRACE("XXX: %s\n", "this is a test");
         Bookmarks<Type>::initBookmarks();
         TRACE("mk_tree_model:: model = %p\n", treeModel);
         while (gtk_events_pending()) gtk_main_iteration();

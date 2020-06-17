@@ -37,7 +37,6 @@ public:
     }
 
     void init(const gchar *path){
-        Settings<Type>::readSettings();
         isTreeView = (Settings<Type>::getSettingInteger("window", "TreeView") > 0);
         mainWindow = GTK_WINDOW(gtk_window_new (GTK_WINDOW_TOPLEVEL));
         g_object_set_data(G_OBJECT(mainWindow), "dialogObject", (void *)this);

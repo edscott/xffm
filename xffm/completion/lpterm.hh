@@ -184,7 +184,7 @@ public:
 
         if (argvp[1] == NULL){
             print_c::showTextSmall(output);
-            //taken care of in taskbar object
+            //Output is taken care of in page.hh:setPageWorkdir().
             //print_c::print(output, "green", g_strdup_printf("cd %s\n", g_get_home_dir()));
             return g_strdup(g_get_home_dir());
         }

@@ -119,25 +119,6 @@ public:
 
     }
 
-    static void
-    printError(const gchar *string){
-        auto page = getCurrentPage();
-        Print<Type>::print_icon(page->output(), "dialog-error", "bold", g_strdup(string));
-    }
-
-    static void
-    printInfo(const gchar *string){
-        auto page = getCurrentPage();
-        Print<Type>::print_icon(page->output(), "dialog-information", g_strdup(string));
-    }
-
-    static void
-    printDbg(const gchar *string){
-        auto page = getCurrentPage();
-        Print<Type>::print_icon(page->output(), "dialog-warning", g_strdup(string));
-    }
-
-
     static GtkTextView *getCurrentTextview(){
         return getCurrentPage()->output();
     }
@@ -181,6 +162,28 @@ public:
         return g_get_home_dir();
     }
 
+public:
+
+    static void // print_icon will free string.
+    printInfo(gchar *string){
+        auto page = getCurrentPage();
+        //if (icon) Print<Type>::print_icon(page->output(), "dialog-information", string);
+        Print<Type>::print(page->output(), string);
+     
+    }
+
+    static void // print_icon will free string.
+    printDbg(gchar *string){
+        auto page = getCurrentPage();
+        Print<Type>::print_icon(page->output(), "dialog-warning", string);
+    }
+
+    static void // print_icon will free string.
+    printError(gchar *string){
+        auto page = getCurrentPage();
+        Print<Type>::print_icon(page->output(), "dialog-error", "bold", string);
+    }
+    
 
 private:
 };

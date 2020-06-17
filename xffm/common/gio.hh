@@ -464,8 +464,8 @@ private:
                    arg[0] = GINT_TO_POINTER(mode);
                    arg[1] = (void *)g_strdup(path);
                    asyncReference++;
-                   Print<double>::print(pageP->output(), "green", 
-                           g_strdup_printf("g_file_delete_async(%s)\n", path));
+                   INFO("g_file_delete_async(%s)\n", path);
+                   //Print<double>::print(pageP->output(), "green", g_strdup_printf("g_file_delete_async(%s)\n", path));
                    g_file_delete_async (file, G_PRIORITY_LOW, 
                             NULL,   // GCancellable *cancellable,
                             asyncCallback,
