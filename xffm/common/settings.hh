@@ -5,7 +5,7 @@
 #include "tubo.hh"
 #include "print.hh"
 #define SETTINGS_FILE g_get_user_config_dir(),"xffm+","settings.ini"
-pthread_mutex_t settingsMutex = PTHREAD_MUTEX_INITIALIZER;
+//pthread_mutex_t settingsMutex = PTHREAD_MUTEX_INITIALIZER;
 namespace xf {
 
 template <class Type>
@@ -14,7 +14,7 @@ class Settings {
 public:
     static gint 
     getSettingInteger(const gchar *group, const gchar *item){
-        pthread_mutex_lock(&settingsMutex);
+        //pthread_mutex_lock(&settingsMutex);
         auto keyFile = getKeyFile();
         gint value = -1;
         GError *error = NULL;
@@ -32,13 +32,13 @@ public:
             }
         }
         g_key_file_free(keyFile);
-        pthread_mutex_unlock(&settingsMutex);
+        //pthread_mutex_unlock(&settingsMutex);
         return value;
     }
  
     static gchar * 
     getSettingString(const gchar *group, const gchar *item){
-        pthread_mutex_lock(&settingsMutex);
+        //pthread_mutex_lock(&settingsMutex);
         auto keyFile = getKeyFile();
         gchar *value = NULL;
         GError *error = NULL;
@@ -56,52 +56,52 @@ public:
             }
         }
         g_key_file_free(keyFile);
-        pthread_mutex_unlock(&settingsMutex);
+       // pthread_mutex_unlock(&settingsMutex);
         return value;
     }
        
     static void
     setSettingInteger(const gchar *group, const gchar *item, int value){
-        pthread_mutex_lock(&settingsMutex);
+        //pthread_mutex_lock(&settingsMutex);
         auto keyFile = getKeyFile();
         g_key_file_set_integer (keyFile, group, item, value);
         writeKeyFile(keyFile);
         g_key_file_free(keyFile);
-        pthread_mutex_unlock(&settingsMutex);
+        //pthread_mutex_unlock(&settingsMutex);
         return;
     }
     
     static void
     setSettingString(const gchar *group, const gchar *item, const gchar *value){
-        pthread_mutex_lock(&settingsMutex);
+        //pthread_mutex_lock(&settingsMutex);
         auto keyFile = getKeyFile();
         g_key_file_set_string (keyFile, group, item, value);
         writeKeyFile(keyFile);
         g_key_file_free(keyFile);
-        pthread_mutex_unlock(&settingsMutex);
+        //pthread_mutex_unlock(&settingsMutex);
         return;
     }
     
    
     static gboolean
     removeKey(const gchar *group, const gchar *key){
-        pthread_mutex_lock(&settingsMutex);
+        //pthread_mutex_lock(&settingsMutex);
         auto keyFile = getKeyFile();
         auto retval = g_key_file_remove_key (keyFile, group, key, NULL);
         if (retval) writeKeyFile(keyFile);
         g_key_file_free(keyFile);
-        pthread_mutex_unlock(&settingsMutex);
+        //pthread_mutex_unlock(&settingsMutex);
         return retval;
     }
 
     static gboolean
     keyFileHasGroupKey(const gchar *group, const gchar *key) {
-        pthread_mutex_lock(&settingsMutex);
+        //pthread_mutex_lock(&settingsMutex);
         auto keyFile = getKeyFile();
         if (g_key_file_has_group(keyFile, group) &&
             g_key_file_has_key (keyFile, group, key, NULL))
             return TRUE;
-        pthread_mutex_unlock(&settingsMutex);
+        //pthread_mutex_unlock(&settingsMutex);
         return FALSE;
     }
    
