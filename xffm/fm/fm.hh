@@ -91,7 +91,7 @@ public:
             }
             setsid(); // detach main process from tty
         }
-        if (argv[1] || strcmp(argv[1],"-f")==0) {
+        if (argv[1] && strcmp(argv[1],"-f")==0) {
             argv[1] = argv[2];
         }
 
