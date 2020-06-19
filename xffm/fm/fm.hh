@@ -81,14 +81,18 @@ public:
         if (strstr(argv[0], "xfgetpass")){
             xf::PasswordResponse<double>::sendPassword(argv);
             exit(1);
-        } else {
-#ifdef FORK
+        }
+
+        // Detach if "-f" argument not given.
+        if (!argv[1] || strcmp(argv[1],"-f")) {
             if(fork ()){
                 sleep(2);
                 _exit (123);
             }
             setsid(); // detach main process from tty
-#endif
+        }
+        if (argv[1] || strcmp(argv[1],"-f")==0) {
+            argv[1] = argv[2];
         }
 
         gchar *path = NULL;
@@ -97,9 +101,8 @@ public:
                 path = (gchar *)calloc(1,PATH_MAX);
                 realpath(argv[1], path);
             }
-            else path = g_strdup(argv[1]);
+            else path = g_strdup("xffm:root");
         } else path = g_strdup("xffm:root");
-
 
         
         auto xffm = new(xf::Dialog<double>)(path);
